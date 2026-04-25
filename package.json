@@ -1,0 +1,33 @@
+{
+  "name": "mangal",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "fetch:openbd": "tsx scripts/fetch-openbd.ts"
+  },
+  "dependencies": {
+    "next": "15.5.15",
+    "react": "19.0.0",
+    "react-dom": "19.0.0",
+    "wanakana": "5.3.1",
+    "yaml": "2.8.3",
+    "zod": "3.24.1"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "4.2.4",
+    "@types/node": "22.10.5",
+    "@types/react": "19.0.4",
+    "@types/react-dom": "19.0.2",
+    "tailwindcss": "4.2.4",
+    "tsx": "4.21.0",
+    "typescript": "5.7.3",
+    "vitest": "4.1.5"
+  }
+}
