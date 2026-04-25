@@ -1,8 +1,8 @@
-import Image from "next/image";
 import Link from "next/link";
 import { openBdCoverUrl } from "@/lib/amazon";
 import type { DemographicLabel, Genre, Manga, Publisher } from "@/lib/schema";
 import AffiliateLink from "./AffiliateLink";
+import CoverImage from "./CoverImage";
 
 type Props = {
   manga: Manga;
@@ -32,19 +32,11 @@ export default function MangaCard({ manga, publishers, genres, demographics }: P
     <article className="group rounded-lg border border-black/10 bg-white overflow-hidden flex flex-col hover:shadow-md transition-shadow">
       <Link href={`/manga/${manga.slug}`} className="block">
         <div className="relative aspect-[2/3] bg-black/5">
-          {cover ? (
-            <Image
-              src={cover}
-              alt={`${manga.title} 1巻 表紙`}
-              fill
-              sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 200px"
-              className="object-cover"
-            />
-          ) : (
-            <div className="absolute inset-0 grid place-items-center text-black/40 text-xs">
-              表紙なし
-            </div>
-          )}
+          <CoverImage
+            src={cover}
+            alt={`${manga.title} 1巻 表紙`}
+            sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 200px"
+          />
         </div>
       </Link>
       <div className="p-3 flex-1 flex flex-col gap-1.5">

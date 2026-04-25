@@ -1,7 +1,7 @@
-import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import AffiliateLink from "@/components/AffiliateLink";
+import CoverImage from "@/components/CoverImage";
 import { openBdCoverUrl } from "@/lib/amazon";
 import { loadAllManga } from "@/lib/loadData";
 
@@ -41,11 +41,7 @@ export default async function MangaDetailPage({
       </Link>
       <div className="mt-6 grid md:grid-cols-[260px_1fr] gap-8">
         <div className="relative aspect-[2/3] bg-black/5 rounded overflow-hidden">
-          {cover ? (
-            <Image src={cover} alt={`${manga.title} 1巻 表紙`} fill sizes="260px" className="object-cover" />
-          ) : (
-            <div className="absolute inset-0 grid place-items-center text-black/40 text-sm">表紙なし</div>
-          )}
+          <CoverImage src={cover} alt={`${manga.title} 1巻 表紙`} sizes="260px" size="detail" />
         </div>
         <div>
           <h1 className="text-2xl md:text-3xl font-bold">{manga.title}</h1>
