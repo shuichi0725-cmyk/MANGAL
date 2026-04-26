@@ -15,7 +15,7 @@ export default function VolumeRow({ manga }: Props) {
         {manga.volumes.map((v) => (
           <li
             key={v.number}
-            className="snap-start shrink-0 w-[14vw] min-w-[80px] max-w-[110px]"
+            className="snap-start shrink-0 w-[calc((100%-36px)/4)]"
           >
             <VolumeTile manga={manga} volume={v} />
           </li>
