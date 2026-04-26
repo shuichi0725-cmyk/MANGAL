@@ -1,17 +1,32 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useSearchParams } from "next/navigation";
+import { useEffect, useMemo, useState } from "react";
 import FilterPanel from "@/components/FilterPanel";
 import MangaGrid from "@/components/MangaGrid";
 import SearchBox from "@/components/SearchBox";
-import { applyFilters, emptyFilterState, uniqueAuthors, yearBounds } from "@/lib/filters";
+import {
+  applyFilters,
+  emptyFilterState,
+  filtersFromSearchParams,
+  uniqueAuthors,
+  yearBounds,
+} from "@/lib/filters";
 import type { DataBundle } from "@/lib/schema";
 
 type Props = { data: DataBundle };
 
 export default function HomeClient({ data }: Props) {
+  const searchParams = useSearchParams();
   const [state, setState] = useState(emptyFilterState());
   const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    const patch = filtersFromSearchParams(searchParams);
+    if (Object.keys(patch).length > 0) {
+      setState((prev) => ({ ...emptyFilterState(), ...prev, ...patch }));
+    }
+  }, [searchParams]);
 
   const bounds = useMemo(() => yearBounds(data.manga), [data.manga]);
   const authors = useMemo(() => uniqueAuthors(data.manga, true), [data.manga]);

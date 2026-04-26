@@ -121,3 +121,40 @@ export function yearBounds(items: Manga[]): [number, number] {
   }
   return [min, max];
 }
+
+type ParamsLike = { get(key: string): string | null };
+
+/**
+ * URL の検索パラメータ（?publisher=A&genre=action,drama 等）から
+ * フィルタ状態を復元する。指定の無い項目は触らない。
+ */
+export function filtersFromSearchParams(p: ParamsLike | null | undefined): Partial<FilterState> {
+  if (!p) return {};
+  const out: Partial<FilterState> = {};
+  const pickList = (key: string) => {
+    const v = p.get(key);
+    if (!v) return undefined;
+    return v.split(",").map((x) => x.trim()).filter(Boolean);
+  };
+  const yearMin = p.get("yearMin");
+  const yearMax = p.get("yearMax");
+  if (yearMin) out.yearMin = Number(yearMin);
+  if (yearMax) out.yearMax = Number(yearMax);
+  const q = p.get("q");
+  if (q) out.query = q;
+  const publishers = pickList("publisher");
+  if (publishers) out.publishers = publishers;
+  const magazines = pickList("magazine");
+  if (magazines) out.magazines = magazines;
+  const demographics = pickList("demographic");
+  if (demographics) out.demographics = demographics;
+  const authors = pickList("author");
+  if (authors) out.authors = authors;
+  const originalAuthors = pickList("originalAuthor");
+  if (originalAuthors) out.originalAuthors = originalAuthors;
+  const genres = pickList("genre");
+  if (genres) out.genres = genres;
+  const genreMode = p.get("genreMode");
+  if (genreMode === "and" || genreMode === "or") out.genreMode = genreMode;
+  return out;
+}

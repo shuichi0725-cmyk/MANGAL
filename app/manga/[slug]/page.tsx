@@ -27,9 +27,21 @@ export default async function MangaDetailPage({
   const publisher = data.publishers.find((p) => p.key === manga.publisher);
   const magazine = data.magazines.find((m) => m.key === manga.magazine);
   const demographic = data.demographics.find((d) => d.key === manga.demographic);
-  const genreNames = manga.genres.map(
-    (g) => data.genres.find((x) => x.key === g)?.name ?? g,
-  );
+
+  // 試行: ONE PIECE のみ詳細項目を「クリックでフィルタ済みトップへ」化
+  const interactive = manga.slug === "one-piece";
+
+  const FilterLink = ({ href, children }: { href: string; children: React.ReactNode }) =>
+    interactive ? (
+      <Link
+        href={href}
+        className="hover:text-[var(--color-accent)] underline decoration-dotted underline-offset-2"
+      >
+        {children}
+      </Link>
+    ) : (
+      <>{children}</>
+    );
 
   return (
     <div className="mx-auto max-w-4xl px-4 py-8">
@@ -46,27 +58,77 @@ export default async function MangaDetailPage({
 
           <dl className="mt-6 grid grid-cols-[6em_1fr] gap-y-1.5 text-sm">
             <dt className="text-black/50">出版年</dt>
-            <dd>{yearStatusLabel(manga)}</dd>
+            <dd>
+              <FilterLink
+                href={`/?yearMin=${manga.year_started}&yearMax=${manga.year_started}`}
+              >
+                {yearStatusLabel(manga)}
+              </FilterLink>
+            </dd>
             <dt className="text-black/50">著者</dt>
-            <dd>{manga.authors.map((a) => a.name).join(" / ")}</dd>
+            <dd>
+              {manga.authors.map((a, i) => (
+                <span key={a.name}>
+                  {i > 0 && " / "}
+                  <FilterLink href={`/?author=${encodeURIComponent(a.name)}`}>
+                    {a.name}
+                  </FilterLink>
+                </span>
+              ))}
+            </dd>
             {manga.original_authors.length > 0 && (
               <>
                 <dt className="text-black/50">原作</dt>
-                <dd>{manga.original_authors.map((a) => a.name).join(" / ")}</dd>
+                <dd>
+                  {manga.original_authors.map((a, i) => (
+                    <span key={a.name}>
+                      {i > 0 && " / "}
+                      <FilterLink
+                        href={`/?originalAuthor=${encodeURIComponent(a.name)}`}
+                      >
+                        {a.name}
+                      </FilterLink>
+                    </span>
+                  ))}
+                </dd>
               </>
             )}
             <dt className="text-black/50">出版社</dt>
-            <dd>{publisher?.name ?? manga.publisher}</dd>
+            <dd>
+              <FilterLink href={`/?publisher=${encodeURIComponent(manga.publisher)}`}>
+                {publisher?.name ?? manga.publisher}
+              </FilterLink>
+            </dd>
             {magazine && (
               <>
                 <dt className="text-black/50">連載誌</dt>
-                <dd>{magazine.name}</dd>
+                <dd>
+                  <FilterLink href={`/?magazine=${encodeURIComponent(magazine.key)}`}>
+                    {magazine.name}
+                  </FilterLink>
+                </dd>
               </>
             )}
             <dt className="text-black/50">分野</dt>
-            <dd>{demographic?.name ?? manga.demographic}</dd>
+            <dd>
+              <FilterLink href={`/?demographic=${encodeURIComponent(manga.demographic)}`}>
+                {demographic?.name ?? manga.demographic}
+              </FilterLink>
+            </dd>
             <dt className="text-black/50">ジャンル</dt>
-            <dd>{genreNames.join(" / ")}</dd>
+            <dd>
+              {manga.genres.map((g, i) => {
+                const name = data.genres.find((x) => x.key === g)?.name ?? g;
+                return (
+                  <span key={g}>
+                    {i > 0 && " / "}
+                    <FilterLink href={`/?genre=${encodeURIComponent(g)}`}>
+                      {name}
+                    </FilterLink>
+                  </span>
+                );
+              })}
+            </dd>
           </dl>
 
           {manga.synopsis && (
