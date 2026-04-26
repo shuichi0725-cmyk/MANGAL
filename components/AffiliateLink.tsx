@@ -1,16 +1,26 @@
-import { buildAmazonUrl } from "@/lib/amazon";
-import type { Manga } from "@/lib/schema";
+import { buildAmazonUrlForVolume } from "@/lib/amazon";
+import type { Manga, Volume } from "@/lib/schema";
 
 type Props = {
   manga: Manga;
+  /** 指定が無ければ volumes[0] を使う */
+  volume?: Volume;
   className?: string;
   children?: React.ReactNode;
+  ariaLabel?: string;
 };
 
-export default function AffiliateLink({ manga, className, children }: Props) {
+export default function AffiliateLink({
+  manga,
+  volume,
+  className,
+  children,
+  ariaLabel,
+}: Props) {
   const tag = process.env.NEXT_PUBLIC_AMAZON_ASSOCIATE_TAG ?? "";
   const locale = process.env.NEXT_PUBLIC_AMAZON_LOCALE ?? "jp";
-  const href = buildAmazonUrl(manga, { associateTag: tag, locale });
+  const target = volume ?? manga.volumes[0];
+  const href = buildAmazonUrlForVolume(target, manga, { associateTag: tag, locale });
 
   return (
     <a
@@ -18,6 +28,7 @@ export default function AffiliateLink({ manga, className, children }: Props) {
       target="_blank"
       rel="nofollow sponsored noopener"
       className={className}
+      aria-label={ariaLabel}
     >
       {children ?? "Amazonで購入"}
     </a>

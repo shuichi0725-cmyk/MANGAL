@@ -29,6 +29,7 @@ npm run dev
 | `npm run typecheck` | TS 型チェック |
 | `npm run test` | Vitest（フィルタ純関数） |
 | `npm run fetch:openbd -- 9784088725093 ...` | openBD から書誌取得し YAML 雛形生成 |
+| `npm run fetch:volumes -- --slug X --isbns A,B,...` | 既存 YAML の `volumes[]` を openBD で一括補完（表紙・発売日） |
 
 ## データ追加
 
@@ -36,7 +37,8 @@ npm run dev
 2. `slug` は小文字英数字とハイフンのみ。`title_kana` と `title_romaji` を埋める。
 3. `publisher` / `magazine` / `genres` / `demographic` のキーは
    `data/publishers.yml` / `data/magazines.yml` / `data/genres.yml` / `data/demographics.yml` のキーと一致させる。未定義キーはビルド時にエラー。
-4. `volume_1.isbn13` を入れると openBD のカバー画像が自動表示される。
+4. `volumes[]` に各巻の `number` / `isbn13` / `release_date` 等を入れる（最低1巻分）。`isbn13` を入れると openBD の表紙が自動表示される。
+5. 全巻データを揃える時は `npm run fetch:volumes -- --slug <slug> --isbns A,B,C,...` で openBD から `cover_url` と `release_date` を一括補完できる。
 
 ISBN がまとめてあるなら:
 

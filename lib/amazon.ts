@@ -1,4 +1,4 @@
-import type { Manga } from "./schema";
+import type { Manga, Volume } from "./schema";
 
 const DEFAULT_LOCALE = "jp";
 
@@ -17,12 +17,19 @@ export type AmazonLinkOptions = {
   locale?: string;
 };
 
-/** ASIN/ISBN13 が揃っていれば商品ページ、なければタイトル検索URLを返す。 */
-export function buildAmazonUrl(manga: Manga, opts: AmazonLinkOptions = {}): string {
+/**
+ * 任意の巻について Amazon の商品ページ／検索URLを返す。
+ * ASIN > ISBN13 > タイトル検索の優先順位。
+ */
+export function buildAmazonUrlForVolume(
+  volume: Volume | undefined,
+  manga: Manga,
+  opts: AmazonLinkOptions = {},
+): string {
   const tag = opts.associateTag ?? "";
   const host = domain(opts.locale);
-  const asin = manga.volume_1?.asin?.toString().trim();
-  const isbn = manga.volume_1?.isbn13?.toString().trim();
+  const asin = volume?.asin?.toString().trim();
+  const isbn = volume?.isbn13?.toString().trim();
 
   if (asin) {
     const url = new URL(`https://www.${host}/dp/${encodeURIComponent(asin)}`);
@@ -31,10 +38,18 @@ export function buildAmazonUrl(manga: Manga, opts: AmazonLinkOptions = {}): stri
   }
 
   const url = new URL(`https://www.${host}/s`);
-  url.searchParams.set("k", isbn || `${manga.title} ${manga.authors[0]?.name ?? ""}`);
+  const titleQuery = volume?.number && volume.number > 1
+    ? `${manga.title} ${volume.number}`
+    : manga.title;
+  url.searchParams.set("k", isbn || `${titleQuery} ${manga.authors[0]?.name ?? ""}`);
   url.searchParams.set("i", "stripbooks");
   if (tag) url.searchParams.set("tag", tag);
   return url.toString();
+}
+
+/** 1巻（volumes[0]）への Amazon URL。後方互換のための薄ラッパ。 */
+export function buildAmazonUrl(manga: Manga, opts: AmazonLinkOptions = {}): string {
+  return buildAmazonUrlForVolume(manga.volumes[0], manga, opts);
 }
 
 /**

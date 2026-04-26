@@ -2,7 +2,9 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import AffiliateLink from "@/components/AffiliateLink";
 import CoverImage from "@/components/CoverImage";
+import VolumeRow from "@/components/VolumeRow";
 import { openBdCoverUrl } from "@/lib/amazon";
+import { yearStatusLabel } from "@/lib/format";
 import { loadAllManga } from "@/lib/loadData";
 
 export function generateStaticParams() {
@@ -19,9 +21,8 @@ export default async function MangaDetailPage({
   const manga = data.manga.find((m) => m.slug === slug);
   if (!manga) notFound();
 
-  const cover =
-    manga.volume_1?.cover_url ||
-    openBdCoverUrl(manga.volume_1?.isbn13 ?? null);
+  const v1 = manga.volumes[0];
+  const cover = v1?.cover_url || openBdCoverUrl(v1?.isbn13 ?? null);
 
   const publisher = data.publishers.find((p) => p.key === manga.publisher);
   const magazine = data.magazines.find((m) => m.key === manga.magazine);
@@ -29,10 +30,6 @@ export default async function MangaDetailPage({
   const genreNames = manga.genres.map(
     (g) => data.genres.find((x) => x.key === g)?.name ?? g,
   );
-
-  const yearLabel = manga.year_ended
-    ? `${manga.year_started}–${manga.year_ended}`
-    : `${manga.year_started}–（連載中）`;
 
   return (
     <div className="mx-auto max-w-4xl px-4 py-8">
@@ -49,7 +46,7 @@ export default async function MangaDetailPage({
 
           <dl className="mt-6 grid grid-cols-[6em_1fr] gap-y-1.5 text-sm">
             <dt className="text-black/50">出版年</dt>
-            <dd>{yearLabel}</dd>
+            <dd>{yearStatusLabel(manga)}</dd>
             <dt className="text-black/50">著者</dt>
             <dd>{manga.authors.map((a) => a.name).join(" / ")}</dd>
             {manga.original_authors.length > 0 && (
@@ -87,6 +84,8 @@ export default async function MangaDetailPage({
               リンクは Amazon アソシエイト・プログラムによる紹介です。
             </p>
           </div>
+
+          <VolumeRow manga={manga} />
         </div>
       </div>
     </div>

@@ -23,7 +23,7 @@ const m = (over: Partial<Manga> = {}): Manga => ({
   demographic: over.demographic ?? "shounen",
   genres: over.genres ?? ["action", "adventure"],
   synopsis: over.synopsis ?? "",
-  volume_1: over.volume_1 ?? {},
+  volumes: over.volumes ?? [{ number: 1 }],
 });
 
 describe("matchText", () => {

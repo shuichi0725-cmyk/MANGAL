@@ -22,12 +22,18 @@ export const AuthorSchema = z.object({
 });
 export type Author = z.infer<typeof AuthorSchema>;
 
-export const Volume1Schema = z.object({
+export const VolumeSchema = z.object({
+  number: z.number().int().min(1),
   asin: z.string().nullable().optional(),
   isbn13: z.union([z.string(), z.number()]).nullable().optional(),
   cover_url: z.string().url().nullable().optional(),
+  release_date: z
+    .string()
+    .regex(/^\d{4}(-\d{2}(-\d{2})?)?$/)
+    .nullable()
+    .optional(),
 });
-export type Volume1 = z.infer<typeof Volume1Schema>;
+export type Volume = z.infer<typeof VolumeSchema>;
 
 export const MangaSchema = z.object({
   slug: z.string().regex(/^[a-z0-9-]+$/, "slug は小文字英数字とハイフンのみ"),
@@ -44,7 +50,7 @@ export const MangaSchema = z.object({
   demographic: Demographic,
   genres: z.array(z.string().min(1)).min(1),
   synopsis: z.string().default(""),
-  volume_1: Volume1Schema.default({}),
+  volumes: z.array(VolumeSchema).min(1),
 });
 export type Manga = z.infer<typeof MangaSchema>;
 
