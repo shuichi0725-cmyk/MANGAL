@@ -11,12 +11,9 @@ export default function VolumeRow({ manga }: Props) {
       <h2 className="text-sm font-semibold text-black/70 mb-3">
         全 {manga.volumes.length} 巻
       </h2>
-      <ul className="flex gap-3 overflow-x-auto -mx-4 px-4 pb-2 snap-x">
+      <ul className="grid grid-cols-4 gap-3">
         {manga.volumes.map((v) => (
-          <li
-            key={v.number}
-            className="snap-start shrink-0 w-[calc((100%-36px)/4)]"
-          >
+          <li key={v.number}>
             <VolumeTile manga={manga} volume={v} />
           </li>
         ))}
