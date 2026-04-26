@@ -28,8 +28,8 @@ export default async function MangaDetailPage({
   const magazine = data.magazines.find((m) => m.key === manga.magazine);
   const demographic = data.demographics.find((d) => d.key === manga.demographic);
 
-  // 試行: ONE PIECE のみ詳細項目を「クリックでフィルタ済みトップへ」化
-  const interactive = manga.slug === "one-piece";
+  // 各メタ項目をクリックすると、フィルタ済みトップページへ飛ぶ
+  const interactive = true;
 
   const FilterLink = ({ href, children }: { href: string; children: React.ReactNode }) =>
     interactive ? (
