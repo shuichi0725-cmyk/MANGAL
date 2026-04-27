@@ -30,6 +30,7 @@ npm run dev
 | `npm run test` | Vitest（フィルタ純関数） |
 | `npm run fetch:openbd -- 9784088725093 ...` | openBD から書誌取得し YAML 雛形生成 |
 | `npm run fetch:volumes -- --slug X --isbns A,B,...` | 既存 YAML の `volumes[]` を openBD で一括補完（表紙・発売日） |
+| `npm run fetch:mangaka` | Wikidata SPARQL から日本の漫画家一覧を `data/seed/mangaka.csv` に書き出し（成年向けクレジット作家のフラグ付き） |
 
 ## データ追加
 

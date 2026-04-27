@@ -12,6 +12,7 @@
     "test:watch": "vitest",
     "fetch:openbd": "tsx scripts/fetch-openbd.ts",
     "fetch:volumes": "tsx scripts/fetch-volumes.ts",
+    "fetch:mangaka": "tsx scripts/fetch-mangaka.ts",
     "deploy": "wrangler deploy"
   },
   "dependencies": {

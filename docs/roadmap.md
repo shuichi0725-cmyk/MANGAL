@@ -239,14 +239,14 @@ Wikidata のマンガ作品インスタンスより、**「漫画家リスト ×
 
 楽天アフィリエイトは成年向けに比較的寛容だが、**Amazon の基準で判断する**（Amazon の方が厳しい）。楽天 API のジャンル分類を流用すれば、成人向けの線引きはむしろ Amazon より明確に切れる。
 
-## 自動化スクリプト構想（実装する場合）
+## 自動化スクリプト構想（一部実装済み）
 
-| スクリプト | 役割 | 想定行数 | 工数 |
-|---|---|---|---|
-| `scripts/fetch-mangaka.ts` | Wikidata SPARQL → 漫画家リスト CSV | ~150 | 1日 |
-| `scripts/fetch-rakuten.ts` | 作家名から楽天検索 → 中間 JSON。**多層成人向けフィルタ実装** | ~250 | 1.5日 |
-| `scripts/group-into-series.ts` | 集約・重複排除・YAML 雛形生成 | ~200 | 1.5日 |
-| `scripts/review-queue-cli.ts` | グレー判定の手動採否ツール | ~100 | 半日 |
+| スクリプト | 役割 | 想定行数 | 工数 | 状態 |
+|---|---|---|---|---|
+| `scripts/fetch-mangaka.ts` | Wikidata SPARQL → 漫画家リスト CSV（hentai クレジット作家を `has_adult_credit=true` でフラグ） | ~140 | 1日 | **実装済み** |
+| `scripts/fetch-rakuten.ts` | 作家名から楽天検索 → 中間 JSON。**多層成人向けフィルタ実装** | ~250 | 1.5日 | 未着手 |
+| `scripts/group-into-series.ts` | 集約・重複排除・YAML 雛形生成 | ~200 | 1.5日 | 未着手 |
+| `scripts/review-queue-cli.ts` | グレー判定の手動採否ツール | ~100 | 半日 | 未着手 |
 
 合計 約700行・4〜5日 + 手作業ジャンル付け数日。
 
