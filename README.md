@@ -67,4 +67,8 @@ npm run fetch:openbd -- 9784088725093 9784091210562
 - [ ] Phase 5: PA-API 連携（Amazon 公式画像）
 - [ ] Phase 6: react-three-fiber を使った「銀河ビュー」（年代を奥行き、ジャンルを色相に）
 - [ ] Phase 7: Turso (SQLite) 移行 + 管理 API
+
+### 詳細ロードマップ
+
+データベース自動構築の見積もりと多言語化（英語・仏語・独語…）の方針は [docs/roadmap.md](./docs/roadmap.md) を参照。
 - [ ] ユーザ機能（お気に入り・読了マーク）
