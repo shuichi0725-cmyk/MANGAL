@@ -23,9 +23,22 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           </div>
         </header>
         <main className="flex-1">{children}</main>
-        <footer className="border-t border-black/10 mt-12 py-8 text-center text-xs text-black/50">
+        <footer className="border-t border-black/10 mt-12 py-8 text-center text-xs text-black/50 space-y-3">
+          <nav className="flex justify-center gap-4">
+            <Link href="/about" className="hover:text-black">
+              About
+            </Link>
+            <span aria-hidden="true">·</span>
+            <Link href="/privacy" className="hover:text-black">
+              プライバシー
+            </Link>
+            <span aria-hidden="true">·</span>
+            <Link href="/terms" className="hover:text-black">
+              利用規約
+            </Link>
+          </nav>
           <p>
-            購入リンクは Amazon アソシエイトを利用しています。
+            当サイトは Amazon アソシエイト・プログラムの参加者です。
           </p>
         </footer>
       </body>
