@@ -11,7 +11,8 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "fetch:openbd": "tsx scripts/fetch-openbd.ts",
-    "fetch:volumes": "tsx scripts/fetch-volumes.ts"
+    "fetch:volumes": "tsx scripts/fetch-volumes.ts",
+    "deploy": "wrangler deploy"
   },
   "dependencies": {
     "next": "15.5.15",
@@ -29,6 +30,7 @@
     "tailwindcss": "4.2.4",
     "tsx": "4.21.0",
     "typescript": "5.7.3",
-    "vitest": "4.1.5"
+    "vitest": "4.1.5",
+    "wrangler": "4.85.0"
   }
 }
