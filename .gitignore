@@ -38,3 +38,12 @@ next-env.d.ts
 # generated data
 /.cache
 /data/manga.generated.json
+
+# OpenNext
+.open-next
+
+# wrangler files
+.wrangler
+.dev.vars*
+!.dev.vars.example
+!.env.example
