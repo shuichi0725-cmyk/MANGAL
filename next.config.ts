@@ -1,7 +1,9 @@
 import type { NextConfig } from "next";
 
 const config: NextConfig = {
+  output: "export",
   images: {
+    unoptimized: true,
     remotePatterns: [
       { protocol: "https", hostname: "cover.openbd.jp" },
       { protocol: "https", hostname: "m.media-amazon.com" },
