@@ -21,6 +21,7 @@
  *   2. booksGenreId=001001（漫画ルート）でリクエスト
  *   3. レスポンスのうち ADULT_GENRE_PREFIXES に該当するアイテムは捨てる
  */
+import "./_env";
 import fs from "node:fs";
 import path from "node:path";
 

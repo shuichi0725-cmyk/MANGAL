@@ -18,6 +18,7 @@
  * 取得した書誌データには「Powered by 楽天ウェブサービス」のクレジットを
  * UI 側で表示する。
  */
+import "./_env";
 import fs from "node:fs";
 import path from "node:path";
 import YAML from "yaml";
