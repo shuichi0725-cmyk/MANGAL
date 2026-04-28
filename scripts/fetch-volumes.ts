@@ -2,12 +2,15 @@
  * 既存の data/manga/<slug>.yml に対し、ISBN リストから openBD で
  * 各巻の cover_url と release_date を一括取得して書き戻す。
  *
+ * 書き戻し先は `editions[<index>].volumes`（既定 0=主エディション）。
+ *
  * 使い方:
  *   npm run fetch:volumes -- --slug one-piece --isbns 9784088725093,9784088725161,...
  *
- *   --slug   対象作品の slug
- *   --isbns  カンマ区切りの ISBN13。並びがそのまま 第1巻 第2巻... に対応
- *   --start  既存の `volumes[]` を残しつつ第N巻から追加したい時の番号(任意)
+ *   --slug          対象作品の slug
+ *   --isbns         カンマ区切りの ISBN13。並びがそのまま 第1巻 第2巻... に対応
+ *   --start         既存巻を残しつつ第N巻から追加したい時の番号(任意)
+ *   --edition-index 何番目のエディションに書き戻すか（既定 0）
  */
 import fs from "node:fs";
 import path from "node:path";
@@ -26,10 +29,11 @@ type ParsedArgs = {
   slug: string;
   isbns: string[];
   start: number;
+  editionIndex: number;
 };
 
 function parseArgs(argv: string[]): ParsedArgs {
-  const out: ParsedArgs = { slug: "", isbns: [], start: 1 };
+  const out: ParsedArgs = { slug: "", isbns: [], start: 1, editionIndex: 0 };
   for (let i = 0; i < argv.length; i++) {
     const a = argv[i];
     const next = argv[i + 1];
@@ -44,6 +48,9 @@ function parseArgs(argv: string[]): ParsedArgs {
       i++;
     } else if (a === "--start" && next) {
       out.start = Number(next);
+      i++;
+    } else if (a === "--edition-index" && next) {
+      out.editionIndex = Number(next);
       i++;
     }
   }
@@ -102,7 +109,19 @@ async function main() {
     release_date: string | null;
   };
 
-  const existing = ((doc.get("volumes") as YAML.YAMLSeq | undefined)?.toJSON() ??
+  const editionsSeq = doc.get("editions") as YAML.YAMLSeq | undefined;
+  if (!editionsSeq || !YAML.isSeq(editionsSeq)) {
+    console.error(`editions[] が見つかりません: ${filePath}`);
+    process.exit(1);
+  }
+  const editionNode = editionsSeq.get(args.editionIndex, true) as YAML.YAMLMap | undefined;
+  if (!editionNode || !YAML.isMap(editionNode)) {
+    console.error(
+      `editions[${args.editionIndex}] が無効: ${filePath}`,
+    );
+    process.exit(1);
+  }
+  const existing = ((editionNode.get("volumes") as YAML.YAMLSeq | undefined)?.toJSON() ??
     []) as Vol[];
   const byNumber = new Map<number, Vol>(existing.map((v) => [v.number, v]));
 
@@ -134,9 +153,11 @@ async function main() {
   }
 
   const sorted = Array.from(byNumber.values()).sort((a, b) => a.number - b.number);
-  doc.set("volumes", sorted);
+  editionNode.set("volumes", sorted);
   fs.writeFileSync(filePath, doc.toString({ lineWidth: 0 }), "utf8");
-  console.log(`\n[wrote] ${filePath}  (${sorted.length} volumes)`);
+  console.log(
+    `\n[wrote] ${filePath}  editions[${args.editionIndex}].volumes = ${sorted.length}`,
+  );
 }
 
 main().catch((err) => {

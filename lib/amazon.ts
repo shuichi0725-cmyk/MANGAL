@@ -1,4 +1,4 @@
-import type { Manga, Volume } from "./schema";
+import { primaryVolume, type Manga, type Volume } from "./schema";
 
 const DEFAULT_LOCALE = "jp";
 
@@ -47,9 +47,9 @@ export function buildAmazonUrlForVolume(
   return url.toString();
 }
 
-/** 1巻（volumes[0]）への Amazon URL。後方互換のための薄ラッパ。 */
+/** 主エディション 1 巻への Amazon URL。 */
 export function buildAmazonUrl(manga: Manga, opts: AmazonLinkOptions = {}): string {
-  return buildAmazonUrlForVolume(manga.volumes[0], manga, opts);
+  return buildAmazonUrlForVolume(primaryVolume(manga), manga, opts);
 }
 
 /**

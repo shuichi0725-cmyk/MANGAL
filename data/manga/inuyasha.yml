@@ -13,9 +13,12 @@ magazine: weekly-shonen-sunday
 demographic: shounen
 genres: [ action, adventure, fantasy, romance, yokai, historical ]
 synopsis: 戦国時代に飛ばされた現代の少女・かごめと半妖・犬夜叉の妖怪退治譚。
-volumes:
-  - number: 1
-    asin: null
-    isbn13: null
-    cover_url: null
-    release_date: null
+editions:
+  - type: standard
+    label: 通常版
+    volumes:
+      - number: 1
+        asin: null
+        isbn13: null
+        cover_url: null
+        release_date: null

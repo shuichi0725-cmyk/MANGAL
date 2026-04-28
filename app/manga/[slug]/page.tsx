@@ -6,6 +6,7 @@ import VolumeRow from "@/components/VolumeRow";
 import { openBdCoverUrl } from "@/lib/amazon";
 import { yearStatusLabel } from "@/lib/format";
 import { loadAllManga } from "@/lib/loadData";
+import { primaryVolume } from "@/lib/schema";
 
 export function generateStaticParams() {
   return loadAllManga().manga.map((m) => ({ slug: m.slug }));
@@ -21,7 +22,7 @@ export default async function MangaDetailPage({
   const manga = data.manga.find((m) => m.slug === slug);
   if (!manga) notFound();
 
-  const v1 = manga.volumes[0];
+  const v1 = primaryVolume(manga);
   const cover = v1?.cover_url || openBdCoverUrl(v1?.isbn13 ?? null);
 
   const publisher = data.publishers.find((p) => p.key === manga.publisher);

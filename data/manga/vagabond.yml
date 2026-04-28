@@ -16,9 +16,12 @@ magazine: morning
 demographic: seinen
 genres: [ action, drama, samurai, historical ]
 synopsis: 宮本武蔵を題材に、求道者として剣の道を歩む若者を描く時代劇。
-volumes:
-  - number: 1
-    asin: null
-    isbn13: null
-    cover_url: null
-    release_date: null
+editions:
+  - type: standard
+    label: 通常版
+    volumes:
+      - number: 1
+        asin: null
+        isbn13: null
+        cover_url: null
+        release_date: null

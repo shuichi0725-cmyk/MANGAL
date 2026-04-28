@@ -17,7 +17,7 @@ const base: Manga = {
   demographic: "shounen",
   genres: ["action"],
   synopsis: "",
-  volumes: [{ number: 1 }],
+  editions: [{ type: "standard", label: "通常版", volumes: [{ number: 1 }] }],
 };
 
 describe("yearStatusLabel", () => {

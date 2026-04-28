@@ -12,9 +12,12 @@ publisher: shueisha
 demographic: shoujo
 genres: [ drama, romance, slice-of-life ]
 synopsis: 上京して同じアパートで暮らすことになった、対照的な2人の“ナナ”の人生模様。
-volumes:
-  - number: 1
-    asin: null
-    isbn13: null
-    cover_url: null
-    release_date: null
+editions:
+  - type: standard
+    label: 通常版
+    volumes:
+      - number: 1
+        asin: null
+        isbn13: null
+        cover_url: null
+        release_date: null

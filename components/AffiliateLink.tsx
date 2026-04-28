@@ -1,5 +1,5 @@
 import { buildAmazonUrlForVolume } from "@/lib/amazon";
-import type { Manga, Volume } from "@/lib/schema";
+import { primaryVolume, type Manga, type Volume } from "@/lib/schema";
 
 type Props = {
   manga: Manga;
@@ -19,7 +19,7 @@ export default function AffiliateLink({
 }: Props) {
   const tag = process.env.NEXT_PUBLIC_AMAZON_ASSOCIATE_TAG ?? "";
   const locale = process.env.NEXT_PUBLIC_AMAZON_LOCALE ?? "jp";
-  const target = volume ?? manga.volumes[0];
+  const target = volume ?? primaryVolume(manga);
   const href = buildAmazonUrlForVolume(target, manga, { associateTag: tag, locale });
 
   return (

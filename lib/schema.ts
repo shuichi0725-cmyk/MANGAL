@@ -35,6 +35,28 @@ export const VolumeSchema = z.object({
 });
 export type Volume = z.infer<typeof VolumeSchema>;
 
+export const EditionType = z.enum([
+  "standard",
+  "kanzenban",
+  "bunkobon",
+  "shinsoban",
+  "aizoban",
+  "wideban",
+  "renewal",
+  "other",
+]);
+export type EditionTypeT = z.infer<typeof EditionType>;
+
+export const EditionSchema = z.object({
+  type: EditionType,
+  label: z.string().min(1),
+  imprint: z.string().nullable().optional(),
+  year_started: z.number().int().nullable().optional(),
+  year_ended: z.number().int().nullable().optional(),
+  volumes: z.array(VolumeSchema).min(1),
+});
+export type Edition = z.infer<typeof EditionSchema>;
+
 export const MangaSchema = z.object({
   slug: z.string().regex(/^[a-z0-9-]+$/, "slug は小文字英数字とハイフンのみ"),
   title: z.string().min(1),
@@ -50,9 +72,21 @@ export const MangaSchema = z.object({
   demographic: Demographic,
   genres: z.array(z.string().min(1)).min(1),
   synopsis: z.string().default(""),
-  volumes: z.array(VolumeSchema).min(1),
+  editions: z.array(EditionSchema).min(1),
 });
 export type Manga = z.infer<typeof MangaSchema>;
+
+export function primaryEdition(manga: Manga): Edition {
+  return manga.editions[0];
+}
+
+export function primaryVolume(manga: Manga): Volume | undefined {
+  return manga.editions[0]?.volumes[0];
+}
+
+export function allVolumes(manga: Manga): Volume[] {
+  return manga.editions.flatMap((e) => e.volumes);
+}
 
 export const PublisherSchema = z.object({
   key: z.string(),

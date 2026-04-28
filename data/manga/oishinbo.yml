@@ -16,9 +16,12 @@ magazine: big-comic-spirits
 demographic: seinen
 genres: [ gourmet, drama, comedy ]
 synopsis: 究極のメニューを目指す新聞記者と料理人たちが食を通して人を描く。
-volumes:
-  - number: 1
-    asin: null
-    isbn13: null
-    cover_url: null
-    release_date: null
+editions:
+  - type: standard
+    label: 通常版
+    volumes:
+      - number: 1
+        asin: null
+        isbn13: null
+        cover_url: null
+        release_date: null

@@ -13,9 +13,12 @@ magazine: weekly-shonen-sunday
 demographic: shounen
 genres: [ mystery, action, drama ]
 synopsis: 体を小さくされた高校生探偵・工藤新一が、難事件に挑む推理譚。
-volumes:
-  - number: 1
-    asin: null
-    isbn13: null
-    cover_url: null
-    release_date: null
+editions:
+  - type: standard
+    label: 通常版
+    volumes:
+      - number: 1
+        asin: null
+        isbn13: null
+        cover_url: null
+        release_date: null

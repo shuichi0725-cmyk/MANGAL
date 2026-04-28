@@ -13,9 +13,12 @@ magazine: hana-to-yume
 demographic: shoujo
 genres: [ romance, drama, comedy, school, slice-of-life ]
 synopsis: 抱きしめると十二支の動物に変身してしまう一族と、心を通わせる少女の物語。
-volumes:
-  - number: 1
-    asin: null
-    isbn13: null
-    cover_url: null
-    release_date: null
+editions:
+  - type: standard
+    label: 通常版
+    volumes:
+      - number: 1
+        asin: null
+        isbn13: null
+        cover_url: null
+        release_date: null

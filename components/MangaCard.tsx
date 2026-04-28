@@ -1,7 +1,15 @@
 import Link from "next/link";
 import { openBdCoverUrl } from "@/lib/amazon";
 import { formatReleaseDate, yearStatusLabel } from "@/lib/format";
-import type { DemographicLabel, Genre, Manga, Publisher } from "@/lib/schema";
+import {
+  allVolumes,
+  primaryEdition,
+  primaryVolume,
+  type DemographicLabel,
+  type Genre,
+  type Manga,
+  type Publisher,
+} from "@/lib/schema";
 import AffiliateLink from "./AffiliateLink";
 import CoverImage from "./CoverImage";
 
@@ -13,8 +21,9 @@ type Props = {
 };
 
 export default function MangaCard({ manga, publishers, genres, demographics }: Props) {
-  const v1 = manga.volumes[0];
+  const v1 = primaryVolume(manga);
   const cover = v1?.cover_url || openBdCoverUrl(v1?.isbn13 ?? null);
+  const cardVolumes = primaryEdition(manga).volumes;
 
   const publisherName =
     publishers.find((p) => p.key === manga.publisher)?.name ?? manga.publisher;
@@ -24,7 +33,7 @@ export default function MangaCard({ manga, publishers, genres, demographics }: P
     (g) => genres.find((x) => x.key === g)?.name ?? g,
   );
 
-  const hasAnyDate = manga.volumes.some((v) => v.release_date);
+  const hasAnyDate = allVolumes(manga).some((v) => v.release_date);
 
   return (
     <article className="group rounded-lg border border-black/10 bg-white overflow-hidden flex flex-col hover:shadow-md transition-shadow">
@@ -52,7 +61,7 @@ export default function MangaCard({ manga, publishers, genres, demographics }: P
         </p>
         {hasAnyDate && (
           <ul className="text-[11px] text-black/55 max-h-24 overflow-y-auto pr-1 space-y-0.5">
-            {manga.volumes.map((v) => (
+            {cardVolumes.map((v) => (
               <li key={v.number} className="flex items-baseline justify-between gap-2">
                 <span className="shrink-0">第{v.number}巻</span>
                 <span className="text-black/45 truncate">

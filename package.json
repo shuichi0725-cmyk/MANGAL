@@ -13,6 +13,7 @@
     "fetch:openbd": "tsx scripts/fetch-openbd.ts",
     "fetch:volumes": "tsx scripts/fetch-volumes.ts",
     "fetch:mangaka": "tsx scripts/fetch-mangaka.ts",
+    "fetch:rakuten": "tsx scripts/fetch-rakuten.ts",
     "deploy": "wrangler deploy"
   },
   "dependencies": {

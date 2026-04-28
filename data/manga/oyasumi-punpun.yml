@@ -13,9 +13,12 @@ magazine: big-comic-spirits
 demographic: seinen
 genres: [ drama, slice-of-life ]
 synopsis: ひよこのような姿の少年プンプンの、思春期から大人になるまでの内面を描く問題作。
-volumes:
-  - number: 1
-    asin: null
-    isbn13: null
-    cover_url: null
-    release_date: null
+editions:
+  - type: standard
+    label: 通常版
+    volumes:
+      - number: 1
+        asin: null
+        isbn13: null
+        cover_url: null
+        release_date: null

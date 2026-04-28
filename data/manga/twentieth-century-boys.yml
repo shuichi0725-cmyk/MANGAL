@@ -13,9 +13,12 @@ magazine: big-comic-spirits
 demographic: seinen
 genres: [ mystery, drama, sci-fi ]
 synopsis: 子供の頃の遊びがそのまま現実になる—世界の終末に挑む“ともだち”との闘い。
-volumes:
-  - number: 1
-    asin: null
-    isbn13: null
-    cover_url: null
-    release_date: null
+editions:
+  - type: standard
+    label: 通常版
+    volumes:
+      - number: 1
+        asin: null
+        isbn13: null
+        cover_url: null
+        release_date: null

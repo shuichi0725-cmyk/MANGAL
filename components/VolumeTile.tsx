@@ -1,24 +1,26 @@
 import { openBdCoverUrl } from "@/lib/amazon";
 import { formatReleaseDate, volumeLabel } from "@/lib/format";
-import type { Manga, Volume } from "@/lib/schema";
+import type { Edition, Manga, Volume } from "@/lib/schema";
 import AffiliateLink from "./AffiliateLink";
 import CoverImage from "./CoverImage";
 
 type Props = {
   manga: Manga;
   volume: Volume;
+  edition?: Edition;
 };
 
-export default function VolumeTile({ manga, volume }: Props) {
+export default function VolumeTile({ manga, volume, edition }: Props) {
   const cover = volume.cover_url || openBdCoverUrl(volume.isbn13 ?? null);
   const date = formatReleaseDate(volume.release_date);
   const label = volumeLabel(volume);
+  const editionLabel = edition ? `${edition.label} ` : "";
 
   return (
     <AffiliateLink
       manga={manga}
       volume={volume}
-      ariaLabel={`${manga.title} ${label} を Amazon で見る`}
+      ariaLabel={`${manga.title} ${editionLabel}${label} を Amazon で見る`}
       className="block group"
     >
       <div className="relative aspect-[2/3] bg-black/5 rounded overflow-hidden">

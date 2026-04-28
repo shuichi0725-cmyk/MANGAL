@@ -4,20 +4,27 @@ import VolumeTile from "./VolumeTile";
 type Props = { manga: Manga };
 
 export default function VolumeRow({ manga }: Props) {
-  if (manga.volumes.length === 0) return null;
+  if (manga.editions.length === 0) return null;
 
   return (
-    <section className="mt-8">
-      <h2 className="text-sm font-semibold text-black/70 mb-3">
-        全 {manga.volumes.length} 巻
-      </h2>
-      <ul className="grid grid-cols-4 gap-3">
-        {manga.volumes.map((v) => (
-          <li key={v.number}>
-            <VolumeTile manga={manga} volume={v} />
-          </li>
-        ))}
-      </ul>
-    </section>
+    <div className="mt-8 space-y-8">
+      {manga.editions.map((ed) => (
+        <section key={`${ed.type}-${ed.label}`}>
+          <h2 className="text-sm font-semibold text-black/70 mb-3">
+            {ed.label}
+            <span className="ml-2 text-black/40 font-normal">
+              全 {ed.volumes.length} 巻
+            </span>
+          </h2>
+          <ul className="grid grid-cols-4 gap-3">
+            {ed.volumes.map((v) => (
+              <li key={`${ed.type}-${v.number}`}>
+                <VolumeTile manga={manga} volume={v} edition={ed} />
+              </li>
+            ))}
+          </ul>
+        </section>
+      ))}
+    </div>
   );
 }
