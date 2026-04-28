@@ -31,6 +31,9 @@ npm run dev
 | `npm run fetch:openbd -- 9784088725093 ...` | openBD から書誌取得し YAML 雛形生成 |
 | `npm run fetch:volumes -- --slug X --isbns A,B,...` | 既存 YAML の `volumes[]` を openBD で一括補完（表紙・発売日） |
 | `npm run fetch:mangaka` | Wikidata SPARQL から日本の漫画家一覧を `data/seed/mangaka.csv` に書き出し（成年向けクレジット作家のフラグ付き） |
+| `npm run fetch:rakuten -- --slug X --title T --author A` | 1作品分、楽天ブックスAPI からエディションごとに分類した YAML 草稿を出力 |
+| `npm run fetch:rakuten:bulk` | `data/seed/mangaka.csv` をループして `.cache/rakuten/<qid>.json` に作家単位で raw 結果を保存（resume 対応） |
+| `npm run group:series` | `.cache/rakuten/*.json` をシリーズ集約して `data/manga/_drafts/<slug>.yml` を生成（人手レビュー後に確定先へ移動） |
 
 ## データ追加
 

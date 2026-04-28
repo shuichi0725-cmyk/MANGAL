@@ -244,8 +244,9 @@ Wikidata のマンガ作品インスタンスより、**「漫画家リスト ×
 | スクリプト | 役割 | 想定行数 | 工数 | 状態 |
 |---|---|---|---|---|
 | `scripts/fetch-mangaka.ts` | Wikidata SPARQL → 漫画家リスト CSV（hentai クレジット作家を `has_adult_credit=true` でフラグ） | ~140 | 1日 | **実装済み** |
-| `scripts/fetch-rakuten.ts` | 作家名から楽天検索 → 中間 JSON。**多層成人向けフィルタ実装** | ~250 | 1.5日 | 未着手 |
-| `scripts/group-into-series.ts` | 集約・重複排除・YAML 雛形生成 | ~200 | 1.5日 | 未着手 |
+| `scripts/fetch-rakuten.ts` | 単発: タイトル+作家指定で楽天検索 → エディション分類済み YAML 草稿。成年向けジャンル除外 | ~440 | 1.5日 | **実装済み** |
+| `scripts/fetch-rakuten-bulk.ts` | 一括: mangaka.csv の全作家を楽天 API でクロールし `.cache/rakuten/<qid>.json` に保存。resume 対応・1.1s スリープ | ~270 | 1日 | **実装済み** |
+| `scripts/group-into-series.ts` | キャッシュ JSON をシリーズキー（seriesName / 正規化タイトル）で集約し `data/manga/_drafts/<slug>.yml` を吐く | ~340 | 1.5日 | **実装済み** |
 | `scripts/review-queue-cli.ts` | グレー判定の手動採否ツール | ~100 | 半日 | 未着手 |
 
 合計 約700行・4〜5日 + 手作業ジャンル付け数日。
