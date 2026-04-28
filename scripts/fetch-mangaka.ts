@@ -19,7 +19,14 @@ const ENDPOINT = "https://query.wikidata.org/sparql";
 const USER_AGENT =
   "MANGAL-DataFetch/0.1 (https://github.com/shuichi0725-cmyk/mangal; contact: TODO)";
 
-/** mangaka 本体の取得クエリ（生没年・別名込み） */
+/**
+ * mangaka 本体の取得クエリ（生没年・別名込み）
+ *
+ * 注: Wikidata の Q1114448 は "comics artist"（漫画家・BD作家・アメコミ作家を全部含む）
+ * なので、日本の漫画家に絞るために以下を AND する:
+ *   - 日本語 Wikipedia 記事がある (schema:isPartOf ja.wikipedia.org)
+ *   - 国籍が日本 (P27 = Q17)
+ */
 const QUERY_BASE = (limit?: number) => `
 SELECT
   ?mangaka
@@ -28,8 +35,11 @@ SELECT
   (SAMPLE(?death) AS ?deathYear)
   (GROUP_CONCAT(DISTINCT ?alt; separator="|") AS ?altNames)
 WHERE {
+  ?article schema:about ?mangaka ;
+           schema:isPartOf <https://ja.wikipedia.org/> .
   ?mangaka wdt:P31 wd:Q5 ;                # instance of: human
-           wdt:P106 wd:Q1114448 ;          # occupation: mangaka
+           wdt:P106 wd:Q1114448 ;          # occupation: comics artist
+           wdt:P27 wd:Q17 ;                # country of citizenship: Japan
            rdfs:label ?mangakaLabel .
   FILTER(LANG(?mangakaLabel) = "ja")
   OPTIONAL {
