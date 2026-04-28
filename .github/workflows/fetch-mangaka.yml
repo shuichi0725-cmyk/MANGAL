@@ -1,0 +1,54 @@
+name: Fetch mangaka list
+
+on:
+  workflow_dispatch:
+    inputs:
+      limit:
+        description: "件数制限（空欄なら全件、テスト時は 100 など）"
+        required: false
+        default: ""
+
+permissions:
+  contents: write
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run fetch:mangaka
+        run: |
+          if [ -n "${{ inputs.limit }}" ]; then
+            npm run fetch:mangaka -- --limit "${{ inputs.limit }}"
+          else
+            npm run fetch:mangaka
+          fi
+
+      - name: Show result summary
+        run: |
+          echo "=== mangaka.csv head ==="
+          head -5 data/seed/mangaka.csv
+          echo "=== line count ==="
+          wc -l data/seed/mangaka.csv
+
+      - name: Commit and push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/seed/mangaka.csv
+          if git diff --cached --quiet; then
+            echo "差分なし、コミット不要"
+          else
+            COUNT=$(($(wc -l < data/seed/mangaka.csv) - 1))
+            git commit -m "data(seed): refresh mangaka.csv ($COUNT entries)"
+            git push
+          fi
