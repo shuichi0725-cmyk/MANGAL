@@ -1,0 +1,98 @@
+name: Fetch Rakuten draft
+
+# 楽天ブックスAPI で 1 作品分のエディション分類済み YAML 草稿を生成する。
+# 例: うる星やつら（slug=urusei-yatsura, title=うる星やつら, author=高橋留美子）
+#
+# 必要な Repository Secret:
+#   RAKUTEN_APP_ID    — 楽天デベロッパーズで発行したアプリID（必須）
+#   RAKUTEN_REFERER   — 楽天デベロッパーズの「許可されたWebサイト」に
+#                        登録した URL のいずれか（任意。未設定なら http://localhost/）
+#
+# 結果は: (1) ジョブログ末尾に YAML 全文を出力 / (2) artifact として download 可能。
+# データ確定（`data/manga/<slug>.yml` に昇格）は人手で別 PR とする。
+
+on:
+  workflow_dispatch:
+    inputs:
+      slug:
+        description: "URL slug（半角英数字とハイフンのみ。例: urusei-yatsura）"
+        required: true
+      title:
+        description: "作品タイトル（楽天検索の title パラメータ）"
+        required: true
+      author:
+        description: "作家名（楽天検索の author パラメータ）"
+        required: true
+      max_pages:
+        description: "取得ページ数 1-10。1ページ=最大30件。"
+        required: false
+        default: "10"
+
+permissions:
+  contents: read
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    env:
+      # 入力は ${{ }} 直書きせず env 経由で受けて shell 側で適切に quote する
+      # （${{ }} 直書きはシェル注入の原因になる）
+      INPUT_SLUG: ${{ inputs.slug }}
+      INPUT_TITLE: ${{ inputs.title }}
+      INPUT_AUTHOR: ${{ inputs.author }}
+      INPUT_MAX_PAGES: ${{ inputs.max_pages }}
+      RAKUTEN_APP_ID: ${{ secrets.RAKUTEN_APP_ID }}
+      RAKUTEN_REFERER: ${{ secrets.RAKUTEN_REFERER }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validate inputs
+        run: |
+          if [ -z "$RAKUTEN_APP_ID" ]; then
+            echo "::error::Repository Secret RAKUTEN_APP_ID が未設定。"
+            echo "  Settings → Secrets and variables → Actions で追加してください。"
+            exit 1
+          fi
+          if ! printf '%s' "$INPUT_SLUG" | grep -Eq '^[a-z0-9-]+$'; then
+            echo "::error::slug は [a-z0-9-] のみ許可: '$INPUT_SLUG'"
+            exit 1
+          fi
+          if ! printf '%s' "$INPUT_MAX_PAGES" | grep -Eq '^[1-9]$|^10$'; then
+            echo "::error::max_pages は 1〜10 の整数: '$INPUT_MAX_PAGES'"
+            exit 1
+          fi
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run fetch:rakuten
+        run: |
+          mkdir -p data/manga/_drafts
+          npm run fetch:rakuten -- \
+            --slug "$INPUT_SLUG" \
+            --title "$INPUT_TITLE" \
+            --author "$INPUT_AUTHOR" \
+            --max-pages "$INPUT_MAX_PAGES" \
+            --out "data/manga/_drafts/$INPUT_SLUG.yml"
+
+      - name: Print draft to log
+        run: |
+          DRAFT="data/manga/_drafts/$INPUT_SLUG.yml"
+          echo "=================== $DRAFT ==================="
+          cat "$DRAFT"
+          echo "==============================================="
+          echo
+          echo "[summary] エディション数: $(grep -c '^  - type:' "$DRAFT" || true)"
+          echo "[summary] 巻数合計     : $(grep -c '^      - number:' "$DRAFT" || true)"
+
+      - name: Upload draft as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: rakuten-draft-${{ inputs.slug }}
+          path: data/manga/_drafts/${{ inputs.slug }}.yml
+          if-no-files-found: error
