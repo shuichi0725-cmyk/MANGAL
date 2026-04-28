@@ -23,10 +23,8 @@ const USER_AGENT =
  * mangaka 本体の取得クエリ（生没年・別名込み）
  *
  * occupation (P106) は 2 種類を許可する:
- *   - Q1114448 = comics artist（一般。一部の日本人漫画家もこちら）
- *   - Q21198342 = manga artist / 漫画家（こちらが本命。手塚治虫・鳥山明など）
- * Q21198342 は Q1114448 のサブクラスだが、Wikidata では片方しか付いていない
- * エンティティが多いので両方に OR でマッチさせる必要がある。
+ *   - Q191633   = mangaka / 漫画家（本命。手塚治虫・鳥山明など多数）
+ *   - Q1114448  = 別表記の comics artist 系（一部の日本人漫画家もこちら）
  *
  * 国別の絞り込みとして以下も AND する:
  *   - 日本語 Wikipedia 記事がある (schema:isPartOf ja.wikipedia.org)
@@ -40,11 +38,11 @@ SELECT
   (SAMPLE(?death) AS ?deathYear)
   (GROUP_CONCAT(DISTINCT ?alt; separator="|") AS ?altNames)
 WHERE {
-  VALUES ?occ { wd:Q1114448 wd:Q21198342 }
+  VALUES ?occ { wd:Q191633 wd:Q1114448 }
   ?article schema:about ?mangaka ;
            schema:isPartOf <https://ja.wikipedia.org/> .
   ?mangaka wdt:P31 wd:Q5 ;                # instance of: human
-           wdt:P106 ?occ ;                 # occupation: comics/manga artist
+           wdt:P106 ?occ ;                 # occupation: mangaka or comics artist
            wdt:P27 wd:Q17 ;                # country of citizenship: Japan
            rdfs:label ?mangakaLabel .
   FILTER(LANG(?mangakaLabel) = "ja")
@@ -67,7 +65,7 @@ ${limit ? `LIMIT ${limit}` : ""}`;
 /** hentai (Q172241) ジャンルの作品をクレジットされた mangaka を抽出 */
 const QUERY_ADULT = `
 SELECT DISTINCT ?mangaka WHERE {
-  VALUES ?occ { wd:Q1114448 wd:Q21198342 }
+  VALUES ?occ { wd:Q191633 wd:Q1114448 }
   ?mangaka wdt:P106 ?occ .
   ?work wdt:P50 ?mangaka ;
         wdt:P136 wd:Q172241 .
