@@ -70,8 +70,10 @@ type RakutenItem = {
   booksGenreId?: string;
 };
 
+// formatVersion=2 ではフラット配列、=1 だと { Item: ... } 入れ子。
+// このスクリプトは常に formatVersion=2 を要求しているのでフラットで受ける。
 type RakutenResponse = {
-  Items: { Item: RakutenItem }[];
+  Items: RakutenItem[];
   count: number;
   page: number;
   pageCount: number;
@@ -308,8 +310,8 @@ async function main() {
     console.log(`[fetch] page ${page}...`);
     const resp = await call(appId, accessKey, args.title, args.author, page);
     pageCount = resp.pageCount;
-    for (const wrapper of resp.Items) {
-      allItems.push(wrapper.Item);
+    for (const item of resp.Items) {
+      allItems.push(item);
     }
     if (page >= pageCount) break;
   }

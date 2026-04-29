@@ -59,8 +59,9 @@ type RakutenItem = {
   booksGenreId?: string;
 };
 
+// formatVersion=2: フラット配列。{ Item: ... } 入れ子は v=1 の形式。
 type RakutenResponse = {
-  Items: { Item: RakutenItem }[];
+  Items: RakutenItem[];
   count: number;
   page: number;
   pageCount: number;
@@ -279,12 +280,12 @@ async function fetchAuthor(
     pageCount = resp.pageCount;
     totalCount = resp.count;
     pagesFetched = page;
-    for (const w of resp.Items) {
-      if (isAdult(w.Item)) {
+    for (const item of resp.Items) {
+      if (isAdult(item)) {
         droppedAdult++;
         continue;
       }
-      items.push(w.Item);
+      items.push(item);
     }
     if (page >= pageCount) break;
   }
