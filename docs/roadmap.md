@@ -255,8 +255,15 @@ Wikidata のマンガ作品インスタンスより、**「漫画家リスト ×
 
 `.env.example` に以下を追加:
 ```
-RAKUTEN_APP_ID=
+RAKUTEN_APP_ID=        # UUID 形式
+RAKUTEN_ACCESS_KEY=    # 2026年2月の仕様変更で必須化
+RAKUTEN_REFERER=       # 許可ドメインの URL
 ```
+
+> 2026年2月10日に楽天 API は新仕様（`openapi.rakuten.co.jp` ドメイン /
+> `applicationId`+`accessKey` 二重認証 / Referer・Origin ヘッダ必須）に
+> 移行済み。旧 API は 2026年5月13日に停止する。新規発行のアプリは新仕様
+> のみで動作するため、scripts は新仕様向けに書かれている。
 
 ---
 

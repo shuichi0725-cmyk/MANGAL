@@ -24,7 +24,7 @@ import path from "node:path";
 import YAML from "yaml";
 
 const ENDPOINT =
-  "https://app.rakuten.co.jp/services/api/BooksBook/Search/20170404";
+  "https://openapi.rakuten.co.jp/services/api/BooksBook/Search/20170404";
 
 const HITS = 30; // 1 ページあたり最大値
 const REQUEST_INTERVAL_MS = 1100; // 1秒制限を満たすマージン
@@ -118,14 +118,28 @@ function parseArgs(argv: string[]): ParsedArgs {
 
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
+function refererAndOrigin(): { referer: string; origin: string } {
+  const referer = process.env.RAKUTEN_REFERER ?? "http://localhost/";
+  let origin = "http://localhost";
+  try {
+    const u = new URL(referer);
+    origin = `${u.protocol}//${u.host}`;
+  } catch {
+    // ignore: referer was not a valid URL; keep fallback origin
+  }
+  return { referer, origin };
+}
+
 async function callOnce(
   appId: string,
+  accessKey: string,
   title: string,
   author: string,
   page: number,
 ): Promise<RakutenResponse> {
   const url = new URL(ENDPOINT);
   url.searchParams.set("applicationId", appId);
+  url.searchParams.set("accessKey", accessKey); // 2026 新仕様: 二重認証で必須
   url.searchParams.set("format", "json");
   url.searchParams.set("formatVersion", "2");
   url.searchParams.set("title", title);
@@ -134,12 +148,17 @@ async function callOnce(
   url.searchParams.set("page", String(page));
   url.searchParams.set("booksGenreId", "001001"); // 漫画（コミック）配下のみ
 
+  const { referer, origin } = refererAndOrigin();
+
   const res = await fetch(url, {
     headers: {
-      // Referer は楽天デベロッパーズで「許可されたWebサイト」に登録した値と
-      // マッチしている必要がある（無いと 403: Host not in allowlist）。
-      // デフォルトは localhost。デプロイ先を登録した場合は環境変数で上書きする。
-      Referer: process.env.RAKUTEN_REFERER ?? "http://localhost/",
+      // Referer / Origin は楽天デベロッパーズの「許可されたWebサイト」に
+      // 登録したドメインと一致している必要がある（不一致だと 403:
+      // Host not in allowlist）。新仕様では Origin も必須化された。
+      // デフォルトは localhost。GH Actions などからは
+      // RAKUTEN_REFERER=https://github.com/ のように上書きする。
+      Referer: referer,
+      Origin: origin,
       "User-Agent": "MANGAL-DataFetch/0.1",
       Accept: "application/json",
     },
@@ -155,6 +174,7 @@ async function callOnce(
 
 async function call(
   appId: string,
+  accessKey: string,
   title: string,
   author: string,
   page: number,
@@ -162,7 +182,7 @@ async function call(
   let lastErr: unknown;
   for (let attempt = 1; attempt <= MAX_RETRIES; attempt++) {
     try {
-      return await callOnce(appId, title, author, page);
+      return await callOnce(appId, accessKey, title, author, page);
     } catch (err) {
       lastErr = err;
       const msg = err instanceof Error ? err.message : String(err);
@@ -268,8 +288,15 @@ async function main() {
   }
 
   const appId = process.env.RAKUTEN_APP_ID;
-  if (!appId) {
-    console.error("環境変数 RAKUTEN_APP_ID が未設定です。.env.local に設定してください。");
+  const accessKey = process.env.RAKUTEN_ACCESS_KEY;
+  if (!appId || !accessKey) {
+    console.error(
+      "環境変数 RAKUTEN_APP_ID と RAKUTEN_ACCESS_KEY の両方が必要です。\n" +
+        "  楽天デベロッパーズ → アプリ詳細 で UUID 形式の applicationId と\n" +
+        "  アクセスキーを取得し、.env.local（ローカル）または Repository\n" +
+        "  Secret（GitHub Actions）に設定してください。\n" +
+        "  2026年2月の API 仕様変更により旧 applicationId 単独認証は廃止。",
+    );
     process.exit(1);
   }
 
@@ -279,7 +306,7 @@ async function main() {
   for (let page = 1; page <= Math.min(args.maxPages, pageCount); page++) {
     if (page > 1) await sleep(REQUEST_INTERVAL_MS);
     console.log(`[fetch] page ${page}...`);
-    const resp = await call(appId, args.title, args.author, page);
+    const resp = await call(appId, accessKey, args.title, args.author, page);
     pageCount = resp.pageCount;
     for (const wrapper of resp.Items) {
       allItems.push(wrapper.Item);

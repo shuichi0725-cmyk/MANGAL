@@ -4,9 +4,13 @@ name: 📚 One manga draft (Rakuten)
 # 例: うる星やつら（slug=urusei-yatsura, title=うる星やつら, author=高橋留美子）
 #
 # 必要な Repository Secret:
-#   RAKUTEN_APP_ID    — 楽天デベロッパーズで発行したアプリID（必須）
-#   RAKUTEN_REFERER   — 楽天デベロッパーズの「許可されたWebサイト」に
-#                        登録した URL のいずれか（任意。未設定なら http://localhost/）
+#   RAKUTEN_APP_ID     — 楽天デベロッパーズで発行した applicationId（UUID形式・必須）
+#   RAKUTEN_ACCESS_KEY — 楽天デベロッパーズのアクセスキー（2026年2月の
+#                         API 仕様変更で必須化された二重認証用）
+#   RAKUTEN_REFERER    — 楽天デベロッパーズの「許可されたWebサイト」に
+#                         登録した URL のいずれか（GitHub Actions から呼ぶなら
+#                         "https://github.com/" を入れる。Origin ヘッダも
+#                         この URL のオリジン部から自動生成される）
 #
 # 結果は: (1) ジョブログ末尾に YAML 全文を出力 / (2) artifact として download 可能。
 # データ確定（`data/manga/<slug>.yml` に昇格）は人手で別 PR とする。
@@ -42,6 +46,7 @@ jobs:
       INPUT_AUTHOR: ${{ inputs.author }}
       INPUT_MAX_PAGES: ${{ inputs.max_pages }}
       RAKUTEN_APP_ID: ${{ secrets.RAKUTEN_APP_ID }}
+      RAKUTEN_ACCESS_KEY: ${{ secrets.RAKUTEN_ACCESS_KEY }}
       RAKUTEN_REFERER: ${{ secrets.RAKUTEN_REFERER }}
     steps:
       - uses: actions/checkout@v4
@@ -50,6 +55,13 @@ jobs:
         run: |
           if [ -z "$RAKUTEN_APP_ID" ]; then
             echo "::error::Repository Secret RAKUTEN_APP_ID が未設定。"
+            echo "  Settings → Secrets and variables → Actions で追加してください。"
+            exit 1
+          fi
+          if [ -z "$RAKUTEN_ACCESS_KEY" ]; then
+            echo "::error::Repository Secret RAKUTEN_ACCESS_KEY が未設定。"
+            echo "  2026年2月の楽天API仕様変更で必須化された二重認証キーです。"
+            echo "  楽天デベロッパーズのアプリ詳細から「アクセスキー」をコピーして"
             echo "  Settings → Secrets and variables → Actions で追加してください。"
             exit 1
           fi

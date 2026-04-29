@@ -26,7 +26,7 @@ import fs from "node:fs";
 import path from "node:path";
 
 const ENDPOINT =
-  "https://app.rakuten.co.jp/services/api/BooksBook/Search/20170404";
+  "https://openapi.rakuten.co.jp/services/api/BooksBook/Search/20170404";
 
 const HITS = 30; // 楽天 API の 1 ページ最大値
 const REQUEST_INTERVAL_MS = 1100;
@@ -184,13 +184,27 @@ function parseCsv(text: string): CsvRow[] {
   return out;
 }
 
+function refererAndOrigin(): { referer: string; origin: string } {
+  const referer = process.env.RAKUTEN_REFERER ?? "http://localhost/";
+  let origin = "http://localhost";
+  try {
+    const u = new URL(referer);
+    origin = `${u.protocol}//${u.host}`;
+  } catch {
+    // ignore
+  }
+  return { referer, origin };
+}
+
 async function callOnce(
   appId: string,
+  accessKey: string,
   author: string,
   page: number,
 ): Promise<RakutenResponse> {
   const url = new URL(ENDPOINT);
   url.searchParams.set("applicationId", appId);
+  url.searchParams.set("accessKey", accessKey); // 2026 新仕様で必須
   url.searchParams.set("format", "json");
   url.searchParams.set("formatVersion", "2");
   url.searchParams.set("author", author);
@@ -198,9 +212,12 @@ async function callOnce(
   url.searchParams.set("page", String(page));
   url.searchParams.set("booksGenreId", "001001");
 
+  const { referer, origin } = refererAndOrigin();
+
   const res = await fetch(url, {
     headers: {
-      Referer: process.env.RAKUTEN_REFERER ?? "http://localhost/",
+      Referer: referer,
+      Origin: origin, // 新仕様で必須化された
       "User-Agent": "MANGAL-DataFetch/0.1",
       Accept: "application/json",
     },
@@ -214,13 +231,14 @@ async function callOnce(
 
 async function call(
   appId: string,
+  accessKey: string,
   author: string,
   page: number,
 ): Promise<RakutenResponse> {
   let lastErr: unknown;
   for (let attempt = 1; attempt <= MAX_RETRIES; attempt++) {
     try {
-      return await callOnce(appId, author, page);
+      return await callOnce(appId, accessKey, author, page);
     } catch (err) {
       lastErr = err;
       const msg = err instanceof Error ? err.message : String(err);
@@ -245,6 +263,7 @@ function isAdult(item: RakutenItem): boolean {
 
 async function fetchAuthor(
   appId: string,
+  accessKey: string,
   row: CsvRow,
   maxPages: number,
 ): Promise<CachedAuthor> {
@@ -256,7 +275,7 @@ async function fetchAuthor(
 
   for (let page = 1; page <= Math.min(maxPages, pageCount); page++) {
     if (page > 1) await sleep(REQUEST_INTERVAL_MS);
-    const resp = await call(appId, row.name, page);
+    const resp = await call(appId, accessKey, row.name, page);
     pageCount = resp.pageCount;
     totalCount = resp.count;
     pagesFetched = page;
@@ -286,9 +305,13 @@ async function main() {
   const args = parseArgs(process.argv.slice(2));
 
   const appId = process.env.RAKUTEN_APP_ID;
-  if (!appId) {
+  const accessKey = process.env.RAKUTEN_ACCESS_KEY;
+  if (!appId || !accessKey) {
     console.error(
-      "環境変数 RAKUTEN_APP_ID が未設定です。.env.local に設定してください。",
+      "環境変数 RAKUTEN_APP_ID と RAKUTEN_ACCESS_KEY の両方が必要です。\n" +
+        "  楽天デベロッパーズ → アプリ詳細 で UUID 形式の applicationId と\n" +
+        "  アクセスキーを取得して .env.local に設定してください。\n" +
+        "  2026年2月の API 仕様変更により旧 applicationId 単独認証は廃止。",
     );
     process.exit(1);
   }
@@ -345,7 +368,7 @@ async function main() {
 
     process.stdout.write(`[${processed + skippedCache + 1}/${queue.length}] ${row.qid} ${row.name} ... `);
     try {
-      const cached = await fetchAuthor(appId, row, args.maxPages);
+      const cached = await fetchAuthor(appId, accessKey, row, args.maxPages);
       fs.writeFileSync(cachePath, JSON.stringify(cached, null, 2), "utf8");
       processed++;
       totalItems += cached.items.length;
