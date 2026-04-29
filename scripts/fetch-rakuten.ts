@@ -135,7 +135,6 @@ function refererAndOrigin(): { referer: string; origin: string } {
 async function callOnce(
   appId: string,
   accessKey: string,
-  title: string,
   author: string,
   page: number,
 ): Promise<RakutenResponse> {
@@ -144,7 +143,9 @@ async function callOnce(
   url.searchParams.set("accessKey", accessKey); // 2026 新仕様: 二重認証で必須
   url.searchParams.set("format", "json");
   url.searchParams.set("formatVersion", "2");
-  url.searchParams.set("title", title);
+  // title= は API 側のフィルタが新仕様で厳しく、エディション違い
+  // （〔新装版〕完全版 文庫版 ワイド版 等）が漏れるため、ここでは
+  // 送らず author のみで広く取り、後段の titleMatches() で絞る。
   url.searchParams.set("author", author);
   url.searchParams.set("hits", String(HITS));
   url.searchParams.set("page", String(page));
@@ -177,14 +178,13 @@ async function callOnce(
 async function call(
   appId: string,
   accessKey: string,
-  title: string,
   author: string,
   page: number,
 ): Promise<RakutenResponse> {
   let lastErr: unknown;
   for (let attempt = 1; attempt <= MAX_RETRIES; attempt++) {
     try {
-      return await callOnce(appId, accessKey, title, author, page);
+      return await callOnce(appId, accessKey, author, page);
     } catch (err) {
       lastErr = err;
       const msg = err instanceof Error ? err.message : String(err);
@@ -308,7 +308,7 @@ async function main() {
   for (let page = 1; page <= Math.min(args.maxPages, pageCount); page++) {
     if (page > 1) await sleep(REQUEST_INTERVAL_MS);
     console.log(`[fetch] page ${page}...`);
-    const resp = await call(appId, accessKey, args.title, args.author, page);
+    const resp = await call(appId, accessKey, args.author, page);
     pageCount = resp.pageCount;
     for (const item of resp.Items) {
       allItems.push(item);
