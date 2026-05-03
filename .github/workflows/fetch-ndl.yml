@@ -1,0 +1,99 @@
+name: 📖 NDL fetch (one mangaka)
+
+# 国立国会図書館サーチ SRU API から指定漫画家の作品を取得して
+# .cache/db.sqlite に投入する。NDL は認証不要・許可ドメイン不要なので
+# Repository Secret は必要としない。
+#
+# 結果の SQLite + .cache/ndl/*.xml は artifact として download 可能。
+# ジョブログには取得件数のサマリと、シリーズ別の巻数が表示される。
+
+on:
+  workflow_dispatch:
+    inputs:
+      qid:
+        description: "Wikidata QID（例: Q193300 = 高橋留美子）。--name と同時に使うと両方で照合"
+        required: false
+      name:
+        description: "漫画家名（例: 高橋留美子）。--qid だけで CSV ヒットすれば省略可"
+        required: false
+      max_pages:
+        description: "取得最大ページ数（1ページ=200件、1〜10）"
+        required: false
+        default: "5"
+      include_adult:
+        description: "has_adult_credit=true の作家でも取得する"
+        required: false
+        default: "false"
+        type: boolean
+
+permissions:
+  contents: read
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    env:
+      INPUT_QID: ${{ inputs.qid }}
+      INPUT_NAME: ${{ inputs.name }}
+      INPUT_MAX_PAGES: ${{ inputs.max_pages }}
+      INPUT_INCLUDE_ADULT: ${{ inputs.include_adult }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validate inputs
+        run: |
+          if [ -z "$INPUT_QID" ] && [ -z "$INPUT_NAME" ]; then
+            echo "::error::qid または name のどちらかは必須。"
+            exit 1
+          fi
+          if [ -n "$INPUT_QID" ] && ! printf '%s' "$INPUT_QID" | grep -Eq '^Q[0-9]+$'; then
+            echo "::error::qid は Q+数字 の形式: '$INPUT_QID'"
+            exit 1
+          fi
+          if ! printf '%s' "$INPUT_MAX_PAGES" | grep -Eq '^[1-9]$|^10$'; then
+            echo "::error::max_pages は 1〜10: '$INPUT_MAX_PAGES'"
+            exit 1
+          fi
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Initialize empty DB
+        run: npm run db:init
+
+      - name: Import mangaka CSV (small subset for context)
+        run: npm run db:import:mangaka
+
+      - name: Run fetch:ndl
+        run: |
+          ARGS=()
+          if [ -n "$INPUT_QID" ]; then
+            ARGS+=(--qid "$INPUT_QID")
+          fi
+          if [ -n "$INPUT_NAME" ]; then
+            ARGS+=(--name "$INPUT_NAME")
+          fi
+          ARGS+=(--max-pages "$INPUT_MAX_PAGES")
+          if [ "$INPUT_INCLUDE_ADULT" = "true" ]; then
+            ARGS+=(--include-adult)
+          fi
+          echo "[ci] running: npm run fetch:ndl -- ${ARGS[*]}"
+          npm run fetch:ndl -- "${ARGS[@]}"
+
+      - name: DB summary report
+        run: npm run db:report -- --series --adult --sources
+
+      - name: Upload SQLite + raw XML cache as artifact
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ndl-cache-${{ inputs.qid || inputs.name }}
+          path: |
+            .cache/db.sqlite
+            .cache/ndl/
+          if-no-files-found: warn
