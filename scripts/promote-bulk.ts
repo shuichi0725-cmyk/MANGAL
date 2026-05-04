@@ -34,6 +34,7 @@ import {
   slugFromTitle,
   type EditionType,
 } from "../lib/edition";
+import { readKanaFromTitle } from "../lib/kana";
 
 type Args = {
   outDir: string;
@@ -183,15 +184,46 @@ function buildEditionsForSeries(db: DB, seriesId: number) {
   return result.filter((e) => e.volumes.length > 0);
 }
 
-function deriveBaseSlug(series: SeriesRow): string {
-  // 1. title_kana 優先で wanakana 変換
-  // 2. 不可なら title そのまま (英数字混じりタイトルはこれで OK)
-  // 3. それも空なら series-<id> フォールバック
-  return (
-    slugFromTitle(series.title, { kana: series.title_kana }) ||
-    slugFromTitle(series.title) ||
-    `series-${series.id}`
-  );
+/**
+ * シリーズの base slug を決める（衝突 suffix 抜き）。優先順:
+ *   1. NDL 由来の title_kana (dcndl:titleTranscription) → toRomaji
+ *   2. kuromoji で漢字→カナ変換した結果 → toRomaji（kanji 残存なら無効）
+ *   3. title をそのまま処理した結果（Latin/かなのみ向け、3 文字未満は無効）
+ *   4. `series-<id>` フォールバック
+ *
+ * Step 1 と Step 2 は「kana ヒント明示」で slugFromTitle を呼び、内部の
+ * 「kana が空なら title 直接」フォールバックを発火させない。これで
+ * "半妖の夜叉姫" のようにかな部分だけ拾って "no" 等の断片 slug ができるのを
+ * 防ぐ。Step 3 は明示的に title-only にして、結果が短すぎれば series-N へ。
+ *
+ * 短さ閾値は 3 字。"ai"（藍）"go"（碁）のような単語タイトルも極稀にあるが、
+ * 量産 draft 段階では「短すぎる slug」は人手レビューで series-N から正名へ
+ * 上書きしてもらう方針が安全。
+ */
+const SLUG_MIN_LENGTH = 3;
+
+async function deriveBaseSlug(series: SeriesRow): Promise<string> {
+  // Step 1: NDL 由来 kana（kana が無ければスキップ）
+  if (series.title_kana && series.title_kana.trim()) {
+    const s = slugFromTitle(series.title, { kana: series.title_kana });
+    if (s) return s;
+  }
+
+  // Step 2: kuromoji 形態素解析。kanji が混じったまま残っていたら信頼性低 →
+  // 採用せずに次の段へ（たとえば「半妖」が辞書に無くて未変換のままのケース）
+  const morph = await readKanaFromTitle(series.title);
+  const morphHasKanji = /[㐀-鿿]/.test(morph);
+  if (morph && morph !== series.title && !morphHasKanji) {
+    const s = slugFromTitle(series.title, { kana: morph });
+    if (s) return s;
+  }
+
+  // Step 3: タイトル直接（Latin/かなのみが拾える）。短すぎる場合は不採用。
+  const direct = slugFromTitle(series.title);
+  if (direct && direct.length >= SLUG_MIN_LENGTH) return direct;
+
+  // Step 4: series-id フォールバック
+  return `series-${series.id}`;
 }
 
 function applyCollisionSuffix(base: string, taken: Set<string>): string {
@@ -222,7 +254,7 @@ function existingSlugs(): Set<string> {
   return s;
 }
 
-function main() {
+async function main() {
   const args = parseArgs(process.argv.slice(2));
   const db = openDb();
   const pubMap = loadPublisherMap();
@@ -298,7 +330,7 @@ function main() {
 
     // base slug は kana/title 由来。衝突回避の "-2" suffix は別途付ける
     // ことで title_romaji にゴミ ("inuyasha 2" など) が混入するのを防ぐ。
-    const baseSlug = deriveBaseSlug(row);
+    const baseSlug = await deriveBaseSlug(row);
     const slug = applyCollisionSuffix(baseSlug, taken);
     const outPath = path.join(args.outDir, `${slug}.yml`);
     if (!args.force && fs.existsSync(outPath)) {
@@ -391,4 +423,7 @@ function main() {
   db.close();
 }
 
-main();
+main().catch((err) => {
+  console.error("[fatal]", err);
+  process.exit(1);
+});
