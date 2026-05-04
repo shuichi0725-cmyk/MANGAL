@@ -292,6 +292,29 @@ export function normalizeCreatorName(s: string): string {
 }
 
 /**
+ * NDL の creator フィールドが LCC 形式で「姓, 名」格納されている可能性に
+ * 対するクエリ用変換。「高橋留美子」→「高橋, 留美子」。
+ *
+ * 入力の作家名から姓と名を分離する heuristic:
+ *   1. 入力に空白が含まれていれば最初の空白で分ける
+ *      （藤子・F・不二雄 / CLAMP メンバー名等で空白入りのケース）
+ *   2. それ以外は先頭 2 文字を姓として扱う（日本人名の経験則）
+ *   3. 全長が 3 未満ならそのまま返す（CLAMP / ONE 等の単名はサポート外）
+ *
+ * 完璧ではないので、当たらなくても fetch-ndl の variant fallback が他の
+ * variant で挽回する設計。確実性ではなく「試す価値のある別形」として使う。
+ */
+export function toLccCreatorForm(name: string): string {
+  const nfkc = name.normalize("NFKC");
+  const spaceMatch = nfkc.match(/^([^\s]+)\s+(.+)$/);
+  if (spaceMatch) return `${spaceMatch[1]}, ${spaceMatch[2]}`;
+  if (nfkc.length >= 3) {
+    return `${nfkc.slice(0, 2)}, ${nfkc.slice(2)}`;
+  }
+  return nfkc;
+}
+
+/**
  * NDL SRU の CQL クエリ用に文字列をエスケープする。
  * CQL 標準ではダブルクオート内のダブルクオートは バックスラッシュでエスケープ。
  * バックスラッシュ自体も二重化する。

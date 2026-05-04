@@ -40,6 +40,7 @@ import {
   normalizeCreatorName,
   normalizeIsbn13,
   normalizeReleaseDate,
+  toLccCreatorForm,
 } from "../lib/edition";
 import type { Statement as BSStatement } from "better-sqlite3";
 import { openDb, recordSource, tx, type DB } from "./_db";
@@ -657,73 +658,148 @@ async function main() {
   }
 
   fs.mkdirSync(RAW_DIR, { recursive: true });
+  const probesDir = path.join(RAW_DIR, "probes");
+  fs.mkdirSync(probesDir, { recursive: true });
 
   // C3 + C4: 作家名と alt_names を CQL でエスケープして OR 結合（厳密版）。
-  // ただし NDL の CQL 実装が想定と違うことがあるので、0 件返ってきた時に
-  // 段階的にクエリを緩める fallback を試みる。
-  // 試す順:
-  //   1. (creator="A" OR creator="B" ...) AND ndc="726"     — 厳密
-  //   2. (creator="A" OR ...) AND ndc=726                    — ndc 部分一致
-  //   3. (creator="A" OR ...)                                — ndc 制約 OFF
-  //   4. creator="<primary>" AND ndc="726"                   — alt_names OFF
-  //   5. creator="<primary>"                                 — 最も緩い
-  // 最初に total > 0 を返したクエリを正式採用してページング継続。
-  // どれも 0 なら本当に NDL にデータが無いと判断。
+  // ただし NDL の CQL 実装は環境により挙動が違うので、0 件返ってきた時に
+  // **異なる検索戦略**を順に試す（同じクエリの引用符違いではない）。
+  //
+  //   1. strict   : (creator="A" OR creator="B"...) AND ndc="726"
+  //                  — 別名含む厳密一致
+  //   2. any-token: creator any "primary" AND ndc="726"
+  //                  — CQL `any` 演算子。トークン分割マッチ
+  //   3. lcc-form : creator="姓, 名" AND ndc="726"
+  //                  — NDL/MARC の姓カンマ名形式
+  //   4. dc-prefix: dc.creator="primary" AND ndc="726"
+  //                  — DC 名前空間を明示
+  //   5. no-ndc   : creator="primary"
+  //                  — 漫画以外も入る最後の砦（採用時 warn）
+  //
+  // 各 variant の応答 XML は .cache/ndl/probes/ に残してデバッグ可能に。
+  // 1 個失敗（CQL 構文エラー等）しても次の variant を試す。host blocked
+  // のような構造的エラーは即 abort（同 host で他 variant 試しても無駄）。
   const altNames = csvRow?.alt_names ?? [];
   const allNames = [name, ...altNames];
 
-  const candidates: string[] = [
-    `${buildCreatorClause(allNames)} AND ndc="726"`,
-    `${buildCreatorClause(allNames)} AND ndc=726`,
-    `${buildCreatorClause(allNames)}`,
-    `creator="${escapeCql(name)}" AND ndc="726"`,
-    `creator="${escapeCql(name)}"`,
+  type VariantSpec = { name: string; sql: string; warn?: boolean };
+  const candidates: VariantSpec[] = [
+    {
+      name: "strict",
+      sql: `${buildCreatorClause(allNames)} AND ndc="726"`,
+    },
+    {
+      name: "any-token",
+      sql: `creator any "${escapeCql(name)}" AND ndc="726"`,
+    },
+    {
+      name: "lcc-form",
+      sql: `creator="${escapeCql(toLccCreatorForm(name))}" AND ndc="726"`,
+    },
+    {
+      name: "dc-prefix",
+      sql: `dc.creator="${escapeCql(name)}" AND ndc="726"`,
+    },
+    {
+      name: "no-ndc",
+      sql: `creator="${escapeCql(name)}"`,
+      warn: true,
+    },
   ];
 
-  let query = candidates[0];
-  let firstXml: string | null = null;
-  let firstTotal = 0;
+  const fileSafe = (s: string) => encodeURIComponent(s).replace(/%/g, "_");
+  const probeStem = fileSafe(qid ?? `name-${name}`);
+
+  let adoptedQuery = "";
+  let adoptedXml: string | null = null;
+  let adoptedTotal = 0;
+  let adoptedVariant: VariantSpec | null = null;
+
   for (let i = 0; i < candidates.length; i++) {
-    const c = candidates[i];
+    const v = candidates[i];
     if (i > 0) await sleep(REQUEST_INTERVAL_MS);
-    process.stdout.write(`[ndl] try variant ${i + 1}: ${c.slice(0, 120)} ... `);
-    const xml = await call(c, 1);
+    process.stdout.write(`[ndl] probe ${v.name}: ${v.sql.slice(0, 100)} ... `);
+    let xml: string;
+    try {
+      xml = await call(v.sql, 1);
+    } catch (err) {
+      const msg = err instanceof Error ? err.message : String(err);
+      console.log(`FAILED: ${msg.slice(0, 200)}`);
+      try {
+        fs.writeFileSync(
+          path.join(probesDir, `${probeStem}-${v.name}.error.txt`),
+          `query: ${v.sql}\n\n${msg}\n`,
+          "utf8",
+        );
+      } catch {
+        // ignore disk error during diagnostic write
+      }
+      // host blocked / 5xx は同じ host への他 variant でも復帰しないので即 abort
+      if (
+        /Host not in allowlist/i.test(msg) ||
+        /HTTP 5\d\d/.test(msg)
+      ) {
+        throw err;
+      }
+      // それ以外（CQL 4xx 等）は次 variant で挽回可能なので継続
+      continue;
+    }
+    fs.writeFileSync(
+      path.join(probesDir, `${probeStem}-${v.name}.xml`),
+      xml,
+      "utf8",
+    );
     const { total } = parseRecords(xml);
     console.log(`${total} records`);
     if (total > 0) {
-      query = c;
-      firstXml = xml;
-      firstTotal = total;
+      adoptedQuery = v.sql;
+      adoptedXml = xml;
+      adoptedTotal = total;
+      adoptedVariant = v;
       break;
     }
   }
-  if (firstTotal === 0) {
+
+  if (adoptedVariant === null || adoptedXml === null) {
     console.log(
-      `[ndl] 全 ${candidates.length} variants で 0 件。NDL にこの作家のデータが本当に無いか、CQL 仕様が更に変わった可能性。`,
+      `[ndl] 全 ${candidates.length} variants で 0 件。NDL にデータが無い、` +
+        `または NDL CQL 仕様が想定外。.cache/ndl/probes/ の応答 XML を確認。`,
     );
     db.close();
     return;
   }
-  console.log(`[ndl] 採用クエリ: ${query}`);
+  console.log(
+    `[ndl] adopted: variant '${adoptedVariant.name}' (${adoptedTotal} records reported)`,
+  );
+  console.log(`       SQL: ${adoptedQuery}`);
+  if (adoptedVariant.warn) {
+    console.warn(
+      `[ndl] ⚠ variant '${adoptedVariant.name}' は ndc=726 制約を外して` +
+        `当てたため、漫画以外（小説・画集・評論・ガイドブック等）が混入する` +
+        `可能性があります。Phase 4 (成人/ジャンル判定) でフィルタリング前提。`,
+    );
+  }
 
-  let total = firstTotal;
+  const query = adoptedQuery; // 以降の page ループで使い回す
+  let total = adoptedTotal;
   let fetched = 0;
   let inserted = 0;
 
   for (let page = 0; page < args.maxPages; page++) {
     const startRecord = page * PAGE_SIZE + 1;
     let xml: string;
-    if (page === 0 && firstXml !== null) {
+    if (page === 0) {
       // 1 ページ目は variant probe で既に取得済みのものを再利用（API 節約）
-      xml = firstXml;
+      xml = adoptedXml;
       process.stdout.write(`[ndl] page 1 start=1 (reuse from probe)... `);
     } else {
       await sleep(REQUEST_INTERVAL_MS);
       process.stdout.write(`[ndl] page ${page + 1} start=${startRecord}... `);
       xml = await call(query, startRecord);
     }
+    // R6: name に / 等が混じった場合の path 破壊を避けるため encode する
     fs.writeFileSync(
-      path.join(RAW_DIR, `${qid ?? `name-${name}`}-p${page + 1}.xml`),
+      path.join(RAW_DIR, `${probeStem}-p${page + 1}.xml`),
       xml,
       "utf8",
     );

@@ -9,6 +9,7 @@ import {
   normalizeIsbn13,
   normalizeReleaseDate,
   normalizeSeriesKey,
+  toLccCreatorForm,
 } from "./edition";
 
 describe("extractVolumeNumber", () => {
@@ -107,6 +108,22 @@ describe("buildSeriesKey (C2 fix)", () => {
     const k1 = buildSeriesKey("うる星やつら 1", { qid: "Q193300" });
     const k2 = buildSeriesKey("うる星やつら〔新装版〕(15)", { qid: "Q193300" });
     expect(k1).toBe(k2);
+  });
+});
+
+describe("toLccCreatorForm (NDL fallback variant)", () => {
+  it("splits typical 4-char Japanese names at the 2-char family boundary", () => {
+    expect(toLccCreatorForm("高橋留美子")).toBe("高橋, 留美子");
+    expect(toLccCreatorForm("尾田栄一郎")).toBe("尾田, 栄一郎");
+  });
+
+  it("uses an existing space as the family/given divider when present", () => {
+    expect(toLccCreatorForm("藤子 不二雄")).toBe("藤子, 不二雄");
+  });
+
+  it("returns the input unchanged when too short to split", () => {
+    expect(toLccCreatorForm("ON")).toBe("ON");
+    expect(toLccCreatorForm("X")).toBe("X");
   });
 });
 
