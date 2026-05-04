@@ -139,6 +139,53 @@ describe("baseTitle / normalizeSeriesKey", () => {
       expect(baseTitle(v)).toBe(expected);
     }
   });
+
+  // Run #3 で発覚した残課題（baseTitle 二次強化）
+  it("strips kana-only annotations in parens (e.g. yomigana)", () => {
+    expect(baseTitle("境界のRinne (りんね)")).toBe("境界のRinne");
+  });
+
+  it("strips '. 上 / . 下 / . 上巻 / . 下巻' half-volume markers", () => {
+    expect(baseTitle("劇場版犬夜叉時代を越える想い. 上巻")).toBe(
+      "劇場版犬夜叉時代を越える想い",
+    );
+    expect(baseTitle("うる星やつら令和版ラブセレクション. 上")).toBe(
+      "うる星やつら令和版ラブセレクション",
+    );
+    expect(baseTitle("うる星やつら令和版ラブセレクション. 下")).toBe(
+      "うる星やつら令和版ラブセレクション",
+    );
+  });
+
+  it("strips 第N集 / 第N部 / 第N話 like 第N巻", () => {
+    expect(baseTitle("めぞん一刻. 第10集")).toBe("めぞん一刻");
+    expect(baseTitle("めぞん一刻. 第1集")).toBe("めぞん一刻");
+  });
+
+  it("strips '. <Japanese subtitle>' when preceded by a CJK char", () => {
+    expect(baseTitle("しゃばけ漫画. 仁吉の巻")).toBe("しゃばけ漫画");
+  });
+
+  it("does NOT strip '. <subtitle>' when preceded by a Latin char", () => {
+    // Dr. House / J. K. ローリング 等を巻き込まない
+    expect(baseTitle("Dr. House")).toBe("Dr. House");
+  });
+
+  it("preserves a year suffix that looks like a volume number", () => {
+    // 末尾の '024' を巻 24 と誤認しないこと（COLORS 1978-2024 例）
+    expect(baseTitle("COLORS 1978-2024 : 高橋留美子原画集")).toBe(
+      "COLORS 1978-2024",
+    );
+  });
+
+  it("the union of new strip rules collapses NDL run #3 split-out cases", () => {
+    expect(baseTitle("境界のRINNE.")).toBe("境界のRINNE");
+    expect(baseTitle("境界のRinne (りんね)")).toBe("境界のRinne");
+    // normalizeSeriesKey で同一視される（大文字小文字 + 空白除去後）
+    expect(normalizeSeriesKey("境界のRINNE.")).toBe(
+      normalizeSeriesKey("境界のRinne (りんね)"),
+    );
+  });
 });
 
 describe("buildSeriesKey (C2 fix)", () => {
