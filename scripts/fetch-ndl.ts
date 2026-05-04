@@ -35,6 +35,7 @@ import {
   buildCreatorClause,
   buildSeriesKey,
   classifyEdition,
+  escapeCql,
   extractVolumeNumber,
   normalizeCreatorName,
   normalizeIsbn13,
@@ -657,27 +658,70 @@ async function main() {
 
   fs.mkdirSync(RAW_DIR, { recursive: true });
 
-  // C3 + C4 fix: 作家名と alt_names を CQL でエスケープして OR 結合。
-  // alt_names が多い作家 (CLAMP 等) は将来分割クエリが必要だが、
-  // とりあえずまとめて 1 クエリ。
+  // C3 + C4: 作家名と alt_names を CQL でエスケープして OR 結合（厳密版）。
+  // ただし NDL の CQL 実装が想定と違うことがあるので、0 件返ってきた時に
+  // 段階的にクエリを緩める fallback を試みる。
+  // 試す順:
+  //   1. (creator="A" OR creator="B" ...) AND ndc="726"     — 厳密
+  //   2. (creator="A" OR ...) AND ndc=726                    — ndc 部分一致
+  //   3. (creator="A" OR ...)                                — ndc 制約 OFF
+  //   4. creator="<primary>" AND ndc="726"                   — alt_names OFF
+  //   5. creator="<primary>"                                 — 最も緩い
+  // 最初に total > 0 を返したクエリを正式採用してページング継続。
+  // どれも 0 なら本当に NDL にデータが無いと判断。
   const altNames = csvRow?.alt_names ?? [];
   const allNames = [name, ...altNames];
-  const creatorClause = buildCreatorClause(allNames);
-  const query = `${creatorClause} AND ndc="726"`;
-  console.log(`[ndl] query: ${query}`);
 
-  let total = 0;
+  const candidates: string[] = [
+    `${buildCreatorClause(allNames)} AND ndc="726"`,
+    `${buildCreatorClause(allNames)} AND ndc=726`,
+    `${buildCreatorClause(allNames)}`,
+    `creator="${escapeCql(name)}" AND ndc="726"`,
+    `creator="${escapeCql(name)}"`,
+  ];
+
+  let query = candidates[0];
+  let firstXml: string | null = null;
+  let firstTotal = 0;
+  for (let i = 0; i < candidates.length; i++) {
+    const c = candidates[i];
+    if (i > 0) await sleep(REQUEST_INTERVAL_MS);
+    process.stdout.write(`[ndl] try variant ${i + 1}: ${c.slice(0, 120)} ... `);
+    const xml = await call(c, 1);
+    const { total } = parseRecords(xml);
+    console.log(`${total} records`);
+    if (total > 0) {
+      query = c;
+      firstXml = xml;
+      firstTotal = total;
+      break;
+    }
+  }
+  if (firstTotal === 0) {
+    console.log(
+      `[ndl] 全 ${candidates.length} variants で 0 件。NDL にこの作家のデータが本当に無いか、CQL 仕様が更に変わった可能性。`,
+    );
+    db.close();
+    return;
+  }
+  console.log(`[ndl] 採用クエリ: ${query}`);
+
+  let total = firstTotal;
   let fetched = 0;
   let inserted = 0;
-  let firstReq = true;
 
   for (let page = 0; page < args.maxPages; page++) {
     const startRecord = page * PAGE_SIZE + 1;
-    if (!firstReq) await sleep(REQUEST_INTERVAL_MS);
-    firstReq = false;
-
-    process.stdout.write(`[ndl] page ${page + 1} start=${startRecord}... `);
-    const xml = await call(query, startRecord);
+    let xml: string;
+    if (page === 0 && firstXml !== null) {
+      // 1 ページ目は variant probe で既に取得済みのものを再利用（API 節約）
+      xml = firstXml;
+      process.stdout.write(`[ndl] page 1 start=1 (reuse from probe)... `);
+    } else {
+      await sleep(REQUEST_INTERVAL_MS);
+      process.stdout.write(`[ndl] page ${page + 1} start=${startRecord}... `);
+      xml = await call(query, startRecord);
+    }
     fs.writeFileSync(
       path.join(RAW_DIR, `${qid ?? `name-${name}`}-p${page + 1}.xml`),
       xml,
