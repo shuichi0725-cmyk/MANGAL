@@ -1,0 +1,170 @@
+name: 🚀 Promote series to data/manga/
+
+# 1 シリーズを SQLite (NDL から取得) → data/manga/<slug>.yml に昇格して
+# Zod 検証を通したうえでブランチに自動 commit する。試金石用。
+#
+# 使い方: Actions タブ → 🚀 Promote series → Run workflow
+#   入力例 (うる星やつら):
+#     qid           Q219948
+#     slug          urusei-yatsura
+#     title_match   うる星やつら
+#     title_romaji  urusei yatsura
+#     publisher     shogakukan
+#     magazine      weekly-shonen-sunday
+#     demographic   shounen
+#     genres        comedy,romcom,sci-fi
+#     status        completed
+#     synopsis      "高校生の諸星あたると、地球侵略にやってきたラム..."
+
+on:
+  workflow_dispatch:
+    inputs:
+      qid:
+        description: "Wikidata QID（mangaka.csv に存在する事）"
+        required: true
+      slug:
+        description: "URL slug（例: urusei-yatsura）"
+        required: true
+      title_match:
+        description: "シリーズ照合用タイトル部分文字列（例: うる星やつら）"
+        required: true
+      title_romaji:
+        description: "ローマ字（例: urusei yatsura）"
+        required: true
+      publisher:
+        description: "publisher key (data/publishers.yml の key)"
+        required: true
+        default: "shogakukan"
+      magazine:
+        description: "magazine key (data/magazines.yml の key、空欄可)"
+        required: false
+      demographic:
+        description: "shounen / seinen / shoujo / josei / kodomo / other"
+        required: true
+        default: "shounen"
+      genres:
+        description: "ジャンル key カンマ区切り（例: comedy,romcom,sci-fi）"
+        required: true
+      status:
+        description: "ongoing / completed / hiatus"
+        required: true
+        default: "completed"
+      title_kana:
+        description: "ヨミガナ（省略時は SQLite の値 or TODO_kana）"
+        required: false
+      synopsis:
+        description: "あらすじ（任意）"
+        required: false
+        default: ""
+
+permissions:
+  contents: write   # promoted YAML をブランチに commit するため
+
+jobs:
+  promote:
+    runs-on: ubuntu-latest
+    env:
+      INPUT_QID: ${{ inputs.qid }}
+      INPUT_SLUG: ${{ inputs.slug }}
+      INPUT_TITLE_MATCH: ${{ inputs.title_match }}
+      INPUT_TITLE_ROMAJI: ${{ inputs.title_romaji }}
+      INPUT_PUBLISHER: ${{ inputs.publisher }}
+      INPUT_MAGAZINE: ${{ inputs.magazine }}
+      INPUT_DEMOGRAPHIC: ${{ inputs.demographic }}
+      INPUT_GENRES: ${{ inputs.genres }}
+      INPUT_STATUS: ${{ inputs.status }}
+      INPUT_TITLE_KANA: ${{ inputs.title_kana }}
+      INPUT_SYNOPSIS: ${{ inputs.synopsis }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Validate inputs
+        run: |
+          if ! printf '%s' "$INPUT_SLUG" | grep -Eq '^[a-z0-9-]+$'; then
+            echo "::error::slug は [a-z0-9-]+ のみ許可: '$INPUT_SLUG'"
+            exit 1
+          fi
+          if ! printf '%s' "$INPUT_QID" | grep -Eq '^Q[0-9]+$'; then
+            echo "::error::qid は Q+数字: '$INPUT_QID'"
+            exit 1
+          fi
+          case "$INPUT_DEMOGRAPHIC" in
+            shounen|seinen|shoujo|josei|kodomo|other) ;;
+            *) echo "::error::demographic は shounen/seinen/shoujo/josei/kodomo/other"; exit 1 ;;
+          esac
+          case "$INPUT_STATUS" in
+            ongoing|completed|hiatus) ;;
+            *) echo "::error::status は ongoing/completed/hiatus"; exit 1 ;;
+          esac
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: "npm"
+
+      - run: npm ci
+
+      - name: Initialize empty DB
+        run: npm run db:init
+
+      - name: Import publisher / magazine masters
+        run: npm run db:import:masters
+
+      - name: Import mangaka CSV
+        run: npm run db:import:mangaka
+
+      - name: Run fetch:ndl
+        run: npm run fetch:ndl -- --qid "$INPUT_QID" --max-pages 5
+
+      - name: Promote series to data/manga/${{ inputs.slug }}.yml
+        run: |
+          ARGS=(
+            --qid "$INPUT_QID"
+            --slug "$INPUT_SLUG"
+            --title-match "$INPUT_TITLE_MATCH"
+            --title-romaji "$INPUT_TITLE_ROMAJI"
+            --publisher "$INPUT_PUBLISHER"
+            --demographic "$INPUT_DEMOGRAPHIC"
+            --genres "$INPUT_GENRES"
+            --status "$INPUT_STATUS"
+            --force
+          )
+          if [ -n "$INPUT_MAGAZINE" ]; then
+            ARGS+=(--magazine "$INPUT_MAGAZINE")
+          fi
+          if [ -n "$INPUT_TITLE_KANA" ]; then
+            ARGS+=(--title-kana "$INPUT_TITLE_KANA")
+          fi
+          if [ -n "$INPUT_SYNOPSIS" ]; then
+            ARGS+=(--synopsis "$INPUT_SYNOPSIS")
+          fi
+          npm run promote:series -- "${ARGS[@]}"
+
+      - name: Verify build still passes with the new YAML
+        run: |
+          npm run typecheck
+          npm run build
+
+      - name: Commit + push the promoted YAML
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add "data/manga/${INPUT_SLUG}.yml"
+          if git diff --cached --quiet; then
+            echo "差分なし、コミット不要"
+          else
+            git commit -m "data: promote ${INPUT_SLUG} from NDL pipeline"
+            git push
+          fi
+
+      - name: Upload promoted YAML as artifact (back-up)
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: promoted-${{ inputs.slug }}
+          path: data/manga/${{ inputs.slug }}.yml
+          if-no-files-found: warn

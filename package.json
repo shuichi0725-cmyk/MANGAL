@@ -21,6 +21,7 @@
     "db:import:mangaka": "tsx scripts/import-mangaka-csv.ts",
     "db:import:masters": "tsx scripts/import-masters.ts",
     "fetch:ndl": "tsx scripts/fetch-ndl.ts",
+    "promote:series": "tsx scripts/promote-series.ts",
     "deploy": "wrangler deploy"
   },
   "dependencies": {
