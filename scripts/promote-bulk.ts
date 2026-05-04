@@ -118,6 +118,13 @@ type SeriesRow = {
   title_kana: string | null;
   year_started: number | null;
   year_ended: number | null;
+  // B-1: Wikipedia 連携で埋まる列。NULL ならまだ未取得 or 未ヒット。
+  publisher_key: string | null;
+  magazine_key: string | null;
+  demographic: string | null;
+  genres: string | null;     // CSV
+  synopsis: string | null;
+  status: string | null;
 };
 
 type EditionRow = {
@@ -265,7 +272,9 @@ async function main() {
   const seriesRows = db
     .prepare(
       `SELECT s.id, s.series_key, s.qid, s.title, s.title_kana,
-              s.year_started, s.year_ended
+              s.year_started, s.year_ended, s.status,
+              s.publisher_key, s.magazine_key, s.demographic,
+              s.genres, s.synopsis
        FROM series s
        ORDER BY s.id`,
     )
@@ -341,7 +350,10 @@ async function main() {
     const imprintCandidates = editions
       .map((e) => (e as { imprint?: string }).imprint ?? "")
       .filter(Boolean);
-    const publisherKey = resolvePublisherKey(imprintCandidates, pubMap);
+    // B-1: Wikipedia から publisher_key が取れていれば最優先で採用、無ければ
+    // imprint 文字列 → publishers.yml の name 逆引き、最後に "TODO_publisher"。
+    const publisherKey =
+      row.publisher_key ?? resolvePublisherKey(imprintCandidates, pubMap);
 
     // year_started / year_ended は standard 優先 → 無ければ最古
     const standardEdition =
@@ -363,6 +375,17 @@ async function main() {
     // collision suffix を含む slug を使うと "inuyasha 2" のように巻数表記に見えてしまう。
     const titleRomaji = baseSlug.replace(/-/g, " ");
 
+    // B-1: Wikipedia 由来データがあれば優先採用。無ければ placeholder。
+    const wikiGenres = row.genres
+      ? row.genres
+          .split(",")
+          .map((s) => s.trim())
+          .filter(Boolean)
+      : [];
+    const genres = wikiGenres.length > 0 ? wikiGenres : ["TODO_genre"];
+    const demographic = row.demographic ?? "shounen";
+    const synopsis = row.synopsis ?? "";
+
     const manga = {
       slug,
       title: row.title,
@@ -370,14 +393,16 @@ async function main() {
       title_romaji: titleRomaji || "TODO_romaji",
       year_started: yearStarted ?? 2000,
       year_ended: yearEnded ?? null,
-      status: yearEnded ? ("completed" as const) : ("ongoing" as const),
+      status:
+        (row.status as "ongoing" | "completed" | "hiatus" | null) ??
+        (yearEnded ? ("completed" as const) : ("ongoing" as const)),
       authors: [{ name: author.name, role: "writer_artist" as const }],
       original_authors: [],
       publisher: publisherKey,
-      magazine: null,
-      demographic: "shounen",
-      genres: ["TODO_genre"],
-      synopsis: "",
+      magazine: row.magazine_key ?? null,
+      demographic,
+      genres,
+      synopsis,
       editions,
     };
 

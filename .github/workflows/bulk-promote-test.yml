@@ -83,6 +83,14 @@ jobs:
       - name: DB top 30 series with edition breakdown
         run: npm run db:report -- --top 30
 
+      - name: Fetch Wikipedia metadata for each series (kana / magazine / genres / synopsis)
+        # 1.1s/req × series 数 ぶん。試金石 (作家 1-2 人 = 数十 series) なら
+        # 数分以内。--limit 200 で安全策（GH Actions 6h 制限超過防止）。
+        run: npm run fetch:wikipedia -- --limit 200
+
+      - name: DB top 30 (post-Wikipedia, with metadata filled)
+        run: npm run db:report -- --top 30
+
       - name: Run promote:bulk (drafts to data/manga/_drafts/)
         run: npm run promote:bulk
 
@@ -109,5 +117,6 @@ jobs:
           path: |
             .cache/db.sqlite
             .cache/ndl/
+            .cache/wikipedia/
             data/manga/_drafts/
           if-no-files-found: warn

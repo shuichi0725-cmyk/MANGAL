@@ -20,7 +20,7 @@ CREATE TABLE IF NOT EXISTS meta (
   value TEXT NOT NULL
 );
 INSERT OR IGNORE INTO meta (key, value) VALUES
-  ('schema_version', '2'),
+  ('schema_version', '3'),
   ('created_at', strftime('%Y-%m-%dT%H:%M:%SZ', 'now'));
 
 -- M3: publishers / magazines は data/*.yml が source-of-truth だが、
@@ -63,6 +63,15 @@ CREATE TABLE IF NOT EXISTS series (
   demographic   TEXT,                       -- shounen/seinen/...
   publisher_key TEXT REFERENCES publishers(key) ON DELETE SET NULL,
   magazine_key  TEXT REFERENCES magazines(key)  ON DELETE SET NULL,
+  -- B-1 (Wikipedia 連携) で追加: NDL から取れない metadata。
+  --   genres は `,` 区切りの genre key 列（例 "action,adventure,fantasy"）。
+  --   loadData は配列が要るので promote-bulk が split する。
+  --   synopsis は Wikipedia 記事冒頭抜粋。CC BY-SA なので UI で帰属表示必須。
+  genres        TEXT,
+  synopsis      TEXT,
+  -- B-1: Wikipedia 探索結果のキャッシュ（再 fetch をスキップする目印）。
+  --   wikipedia_url が NULL = 未探索、'' = 探索したが該当記事なし、URL = 該当あり。
+  wikipedia_url TEXT,
   adult_score   INTEGER NOT NULL DEFAULT 0, -- 0=全年齢, 高いほど成人寄り
   -- M2 timestamps
   created_at    TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%SZ', 'now')),
