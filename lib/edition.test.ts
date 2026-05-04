@@ -162,6 +162,18 @@ describe("baseTitle / normalizeSeriesKey", () => {
     expect(baseTitle("めぞん一刻. 第1集")).toBe("めぞん一刻");
   });
 
+  it("strips bare 'N巻' (without 第 prefix) — NDL run #4 case", () => {
+    // 「犬夜叉 5巻」「犬夜叉. 24巻」が独立シリーズ化していたケース
+    expect(baseTitle("犬夜叉 5巻")).toBe("犬夜叉");
+    expect(baseTitle("犬夜叉. 24巻")).toBe("犬夜叉");
+    expect(baseTitle("ONE PIECE 109巻")).toBe("ONE PIECE");
+  });
+
+  it("does not eat year-shaped numbers from 'N巻' rule", () => {
+    // 4 桁数字を巻番号にしない（誤って "1978" を "巻=1978" 扱いしない）
+    expect(baseTitle("COLORS 1978-2024")).toBe("COLORS 1978-2024");
+  });
+
   it("strips '. <Japanese subtitle>' when preceded by a CJK char", () => {
     expect(baseTitle("しゃばけ漫画. 仁吉の巻")).toBe("しゃばけ漫画");
   });

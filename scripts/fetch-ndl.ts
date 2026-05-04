@@ -262,6 +262,13 @@ function extractCreators(creatorNodes: unknown[]): string[] {
   return Array.from(new Set(out.filter(Boolean)));
 }
 
+// 診断: 最初の数レコードの BibResource フィールド名一覧を **プロセス全体で**
+// 一度だけログ出力する。parseRecords がページ毎に呼ばれてもここで通算カウント
+// するため重複ダンプを避ける。NDL_DEBUG_KEYS=0 で無効化。
+const DEBUG_KEY_LIMIT =
+  process.env.NDL_DEBUG_KEYS === "0" ? 0 : 3;
+let debugKeysDumped = 0;
+
 function parseRecords(xml: string): { total: number; recs: NdlRec[] } {
   const parser = new XMLParser({
     ignoreAttributes: false,
@@ -283,12 +290,6 @@ function parseRecords(xml: string): { total: number; recs: NdlRec[] } {
   // で edition_type がブレる結果 [edition-rebind] 警告が同じ ISBN について
   // 何度も出る。レスポンス内で先勝ち dedup する。
   const seenIsbn = new Set<string>();
-  // 診断: 最初の数レコードの BibResource フィールド名一覧をログ出力。
-  // どこに edition / 媒体 情報が入っているかを workflow ログから直接確認するため。
-  // NDL_DEBUG_KEYS=0 で抑止可能。問題が落ち着いたら 0 に固定して構わない。
-  const dumpKeyLimit =
-    process.env.NDL_DEBUG_KEYS === "0" ? 0 : 3;
-  let dumpedKeys = 0;
   for (const r of recordList) {
     const rd = (r as Record<string, unknown>)["recordData"] as
       | Record<string, unknown>
@@ -310,14 +311,14 @@ function parseRecords(xml: string): { total: number; recs: NdlRec[] } {
     for (const b of bibs) {
       if (manifestationProcessed) break;
 
-      // 診断ダンプ: 最初の N レコードの全フィールドキーを表示。
-      // edition / partInformation / 等がどこに格納されているか発見するため。
-      if (dumpedKeys < dumpKeyLimit) {
+      // 診断ダンプ（プロセス全体で先頭 3 件のみ・行頭から console.log で出す）
+      if (debugKeysDumped < DEBUG_KEY_LIMIT) {
         const keys = Object.keys(b).slice(0, 60);
+        // 既存の `process.stdout.write(...)` 行と混ざらないよう先頭に \n を付加
         console.log(
-          `[debug] BibResource[${dumpedKeys + 1}] keys: ${keys.join(", ")}`,
+          `\n[debug] BibResource[${debugKeysDumped + 1}] keys: ${keys.join(", ")}`,
         );
-        dumpedKeys++;
+        debugKeysDumped++;
       }
 
       const titleRaw =
