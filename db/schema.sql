@@ -119,9 +119,36 @@ CREATE TABLE IF NOT EXISTS sources (
   UNIQUE (source_name, ref_table, ref_id)
 );
 
+-- L3: 成人判定スコアの内訳。なぜ score=N になったかを追跡できるように。
+-- 単一の signal が増減した時に他の signal を巻き込まずに更新でき、
+-- レビューでも「どの signal が誤検出を起こしているか」が一目で分かる。
+CREATE TABLE IF NOT EXISTS adult_signals (
+  series_id INTEGER NOT NULL,
+  signal    TEXT NOT NULL,    -- "label_blacklist" / "publisher_blacklist" / "ndl_subject" / "title_keyword" / "isbn_prefix" / "wikidata_genre" など
+  weight    INTEGER NOT NULL, -- このシグナルが寄与したスコア
+  evidence  TEXT,             -- 何が当たったかの根拠（マッチした単語・該当 ISBN 接頭辞 等）
+  fetched_at TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%SZ', 'now')),
+  PRIMARY KEY (series_id, signal),
+  FOREIGN KEY (series_id) REFERENCES series(id) ON DELETE CASCADE
+);
+
+-- L4: ASIN は ISBN-13 と 1:N（ロケール別・楽天/Amazon 出品差異など）。
+-- volumes.asin の単一カラムだと運用で詰まるので、別表で複数登録を許す。
+-- volumes.asin はキャッシュとして「主に使う1件」を保持する位置付けに留める。
+CREATE TABLE IF NOT EXISTS asins (
+  isbn13     TEXT NOT NULL,
+  asin       TEXT NOT NULL,
+  locale     TEXT NOT NULL,   -- "jp" / "com" / "co.uk" / "de" など
+  source     TEXT NOT NULL,   -- "paapi" / "rakuten" / "manual" / "openbd" など
+  fetched_at TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%SZ', 'now')),
+  PRIMARY KEY (isbn13, asin, locale),
+  FOREIGN KEY (isbn13) REFERENCES volumes(isbn13) ON DELETE CASCADE
+);
+
 CREATE INDEX IF NOT EXISTS idx_volumes_edition         ON volumes(edition_id);
 CREATE INDEX IF NOT EXISTS idx_editions_series         ON editions(series_id);
 CREATE INDEX IF NOT EXISTS idx_series_authors_mangaka  ON series_authors(mangaka_id);
 CREATE INDEX IF NOT EXISTS idx_series_qid              ON series(qid);
 CREATE INDEX IF NOT EXISTS idx_sources_ref             ON sources(ref_table, ref_id);
 CREATE INDEX IF NOT EXISTS idx_mangaka_name            ON mangaka(name);
+CREATE INDEX IF NOT EXISTS idx_asins_isbn              ON asins(isbn13);

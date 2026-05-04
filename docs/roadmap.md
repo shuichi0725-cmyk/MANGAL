@@ -265,6 +265,26 @@ RAKUTEN_REFERER=       # 許可ドメインの URL
 > 移行済み。旧 API は 2026年5月13日に停止する。新規発行のアプリは新仕様
 > のみで動作するため、scripts は新仕様向けに書かれている。
 
+## 既知の保留事項（時期が来たら再検討）
+
+### L5: sources.raw_json の圧縮 / 外部化（Phase 6 投入前に判断）
+
+**現状**: `scripts/fetch-ndl.ts` は NDL の dcndl レスポンスを `.cache/ndl/<qid>-pN.xml`
+にも生で保存しているし、`recordSource(db, "ndl", "volumes", isbn, rawJson)`
+で `sources.raw_json` カラムにも JSON テキストとして全部入れている。
+
+**懸念**: 6751 mangaka × 平均 50 巻 × 約 2KB の raw XML ≒ **600MB 超**になる試算。
+SQLite の単一ファイルが GB 級になると WAL やバックアップが重くなる。
+
+**対応候補**（Phase 5 完走後にサイズ実測してから決める）:
+1. `sources.raw_json` を空にして、raw は `.cache/ndl/*.xml` のファイル参照だけにする
+2. `raw_json` を BLOB + zstd 圧縮（5-10× の圧縮率を期待）
+3. 古い `fetched_at` の sources を期限切れで間引く
+
+**判定の発火点**: Phase 6 (全件投入) を実行する前に
+`du -h .cache/db.sqlite` で実サイズを計測。500MB を超えていたら上記いずれかを
+着手する。
+
 ---
 
 ## 多言語化の方針（SEO + アフィリエイト収益の観点）

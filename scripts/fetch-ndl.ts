@@ -40,7 +40,10 @@ import {
   normalizeIsbn13,
   normalizeReleaseDate,
 } from "../lib/edition";
+import type { Statement as BSStatement } from "better-sqlite3";
 import { openDb, recordSource, tx, type DB } from "./_db";
+
+type Stmt = BSStatement<unknown[], unknown>;
 
 const ENDPOINT = "https://ndlsearch.ndl.go.jp/api/sru";
 const PAGE_SIZE = 200;
@@ -367,6 +370,102 @@ function parseRecords(xml: string): { total: number; recs: NdlRec[] } {
   return { total, recs: out };
 }
 
+/**
+ * L1: 大量レコードのループで毎回 db.prepare() するとパース回数が嵩む
+ * （better-sqlite3 内部キャッシュはあるが、明示で持ち回したほうが速いし
+ * 何のステートメントが使われているかも一覧しやすい）。一度だけ作って
+ * 使い回す。1 度だけ呼ばれる関数の中で持ってもいい程度の数だが、
+ * バッチ実行を見越して module-level に出す。
+ */
+type VolumeStmts = {
+  selectSeries: Stmt;
+  updateSeriesYear: Stmt;
+  updateSeriesYearWhenEmpty: Stmt;
+  updateSeriesKana: Stmt;
+  insertSeries: Stmt;
+  insertSeriesAuthor: Stmt;
+  selectEdition: Stmt;
+  updateEditionImprint: Stmt;
+  updateEditionYear: Stmt;
+  insertEdition: Stmt;
+  selectVolume: Stmt;
+  insertVolume: Stmt;
+  updateVolume: Stmt;
+};
+
+let cachedStmts: { db: DB; stmts: VolumeStmts } | null = null;
+
+function getStmts(db: DB): VolumeStmts {
+  if (cachedStmts && cachedStmts.db === db) return cachedStmts.stmts;
+  const stmts: VolumeStmts = {
+    selectSeries: db.prepare(
+      "SELECT id, year_started, year_ended FROM series WHERE series_key = ?",
+    ),
+    updateSeriesYear: db.prepare(
+      `UPDATE series
+       SET year_started = ?, year_ended = ?,
+           updated_at = strftime('%Y-%m-%dT%H:%M:%SZ','now')
+       WHERE id = ?`,
+    ),
+    updateSeriesYearWhenEmpty: db.prepare(
+      `UPDATE series
+       SET year_started = ?, year_ended = ?,
+           updated_at = strftime('%Y-%m-%dT%H:%M:%SZ','now')
+       WHERE id = ?`,
+    ),
+    updateSeriesKana: db.prepare(
+      `UPDATE series
+       SET title_kana = COALESCE(title_kana, ?),
+           updated_at = strftime('%Y-%m-%dT%H:%M:%SZ','now')
+       WHERE id = ?`,
+    ),
+    insertSeries: db.prepare(
+      `INSERT INTO series (series_key, title, title_kana, year_started, year_ended)
+       VALUES (?, ?, ?, ?, ?)`,
+    ),
+    insertSeriesAuthor: db.prepare(
+      `INSERT OR IGNORE INTO series_authors (series_id, mangaka_id, role)
+       VALUES (?, ?, ?)`,
+    ),
+    selectEdition: db.prepare(
+      "SELECT id, year_started, year_ended FROM editions WHERE series_id = ? AND type = ?",
+    ),
+    updateEditionImprint: db.prepare(
+      `UPDATE editions
+       SET imprint = COALESCE(imprint, ?),
+           updated_at = strftime('%Y-%m-%dT%H:%M:%SZ','now')
+       WHERE id = ?`,
+    ),
+    updateEditionYear: db.prepare(
+      `UPDATE editions
+       SET year_started = ?, year_ended = ?,
+           updated_at = strftime('%Y-%m-%dT%H:%M:%SZ','now')
+       WHERE id = ?`,
+    ),
+    insertEdition: db.prepare(
+      `INSERT INTO editions (series_id, type, label, imprint, year_started, year_ended)
+       VALUES (?, ?, ?, ?, ?, ?)`,
+    ),
+    selectVolume: db.prepare(
+      "SELECT edition_id FROM volumes WHERE isbn13 = ?",
+    ),
+    insertVolume: db.prepare(
+      `INSERT INTO volumes (edition_id, isbn13, number, is_extra, release_date)
+       VALUES (?, ?, ?, ?, ?)`,
+    ),
+    updateVolume: db.prepare(
+      `UPDATE volumes
+       SET number       = ?,
+           is_extra     = ?,
+           release_date = COALESCE(release_date, ?),
+           updated_at   = strftime('%Y-%m-%dT%H:%M:%SZ','now')
+       WHERE isbn13 = ?`,
+    ),
+  };
+  cachedStmts = { db, stmts };
+  return stmts;
+}
+
 /** SQLite に upsert する (mangaka_id は既知) */
 function upsertVolume(
   db: DB,
@@ -397,14 +496,12 @@ function upsertVolume(
   const issuedYear =
     rec.issued && /^\d{4}/.test(rec.issued) ? Number(rec.issued.slice(0, 4)) : null;
 
+  // L1: prepared statements を使い回す
+  const stmts = getStmts(db);
+
   // series upsert
   // H4: year_started 更新は「standard edition の年」を優先採用。
-  // 単純な MIN だと新装版/完全版だけしか取れない作家で、近年の再販年が
-  // year_started になる事故を防ぐ。standard 以外の年は editions 側の
-  // year_started に格納し、series 側は「standard の MIN」で更新する。
-  const existingSeries = db
-    .prepare("SELECT id, year_started, year_ended FROM series WHERE series_key = ?")
-    .get(seriesKey) as
+  const existingSeries = stmts.selectSeries.get(seriesKey) as
     | { id: number; year_started: number | null; year_ended: number | null }
     | undefined;
   let seriesId: number;
@@ -419,75 +516,44 @@ function upsertVolume(
         existingSeries.year_ended === null
           ? issuedYear
           : Math.max(existingSeries.year_ended, issuedYear);
-      db.prepare(
-        `UPDATE series
-         SET year_started = ?, year_ended = ?,
-             updated_at = strftime('%Y-%m-%dT%H:%M:%SZ','now')
-         WHERE id = ?`,
-      ).run(newStart, newEnd, seriesId);
+      stmts.updateSeriesYear.run(newStart, newEnd, seriesId);
     } else if (issuedYear && existingSeries.year_started === null) {
       // standard が一切来ていない暫定値として埋める（後で standard が来たら上書き）
-      db.prepare(
-        `UPDATE series SET year_started = ?, year_ended = ? WHERE id = ?`,
-      ).run(issuedYear, issuedYear, seriesId);
+      stmts.updateSeriesYearWhenEmpty.run(issuedYear, issuedYear, seriesId);
     }
-    // M6 fix: title_kana を取れたら埋める（既に入っていれば残す）
+    // M6: title_kana を取れたら埋める（既存値があれば残す）
     if (rec.titleKana) {
-      db.prepare(
-        `UPDATE series
-         SET title_kana = COALESCE(title_kana, ?),
-             updated_at = strftime('%Y-%m-%dT%H:%M:%SZ','now')
-         WHERE id = ?`,
-      ).run(rec.titleKana, seriesId);
+      stmts.updateSeriesKana.run(rec.titleKana, seriesId);
     }
   } else {
-    const info = db
-      .prepare(
-        `INSERT INTO series (series_key, title, title_kana, year_started, year_ended)
-         VALUES (?, ?, ?, ?, ?)`,
-      )
-      .run(
-        seriesKey,
-        seriesDisplay,
-        rec.titleKana,
-        issuedYear,
-        issuedYear,
-      );
+    const info = stmts.insertSeries.run(
+      seriesKey,
+      seriesDisplay,
+      rec.titleKana,
+      issuedYear,
+      issuedYear,
+    );
     seriesId = Number(info.lastInsertRowid);
   }
 
   // series_authors 紐付け
-  // H2: NDL の creator は「高橋, 留美子」形式があるので、入力名側と
-  // 比較したい場合は normalizeCreatorName で照合。ただし fetch-ndl は
-  // 既に「特定の作家を取りに行っている」ので素直に紐付けて良い。
-  // ここでは creators に target 名が含まれているかを soft-check する。
+  // H2: NDL の creator 表記揺れチェック（実害は出ないが将来の差分検知用に保留）。
   const targetNorm = normalizeCreatorName(authorRef.name);
   const matched = rec.creators.some(
     (c) => normalizeCreatorName(c) === targetNorm,
   );
-  // 一致しなくても紐付けは行う（NDL 側に表記揺れがあっても CQL でヒットした事実を尊重）
-  // ただし sources に matched フラグの代わりに source_name を分けることはしない（運用判断）。
-  void matched;
-  db.prepare(
-    `INSERT OR IGNORE INTO series_authors (series_id, mangaka_id, role)
-     VALUES (?, ?, ?)`,
-  ).run(seriesId, mangakaId, "writer_artist");
+  void matched; // 現状は warning に使わず、CQL ヒット事実を尊重して紐付け
+  stmts.insertSeriesAuthor.run(seriesId, mangakaId, "writer_artist");
 
   // edition upsert
-  const existingEdition = db
-    .prepare(
-      "SELECT id, year_started, year_ended FROM editions WHERE series_id = ? AND type = ?",
-    )
-    .get(seriesId, editionType) as
+  const existingEdition = stmts.selectEdition.get(seriesId, editionType) as
     | { id: number; year_started: number | null; year_ended: number | null }
     | undefined;
   let editionId: number;
   if (existingEdition) {
     editionId = existingEdition.id;
     if (rec.publisher) {
-      db.prepare(
-        `UPDATE editions SET imprint = COALESCE(imprint, ?) WHERE id = ?`,
-      ).run(rec.publisher, editionId);
+      stmts.updateEditionImprint.run(rec.publisher, editionId);
     }
     if (issuedYear) {
       const newStart =
@@ -498,55 +564,34 @@ function upsertVolume(
         existingEdition.year_ended === null
           ? issuedYear
           : Math.max(existingEdition.year_ended, issuedYear);
-      db.prepare(
-        `UPDATE editions SET year_started = ?, year_ended = ? WHERE id = ?`,
-      ).run(newStart, newEnd, editionId);
+      stmts.updateEditionYear.run(newStart, newEnd, editionId);
     }
   } else {
-    const info = db
-      .prepare(
-        `INSERT INTO editions (series_id, type, label, imprint, year_started, year_ended)
-         VALUES (?, ?, ?, ?, ?, ?)`,
-      )
-      .run(
-        seriesId,
-        editionType,
-        EDITION_LABELS[editionType],
-        rec.publisher,
-        issuedYear,
-        issuedYear,
-      );
+    const info = stmts.insertEdition.run(
+      seriesId,
+      editionType,
+      EDITION_LABELS[editionType],
+      rec.publisher,
+      issuedYear,
+      issuedYear,
+    );
     editionId = Number(info.lastInsertRowid);
   }
 
-  // volume upsert
-  // H6: 同じ ISBN を再 fetch して edition_id が変わるケースを silent rebind しない。
-  //   - 既存 row が無ければ挿入
-  //   - 既存 row があり edition_id が違えば warning を返して呼び側でログ
-  //   - 既存 row があり edition_id が同じなら release_date を埋め直す
-  //     (release_date は既存値を優先 = COALESCE(既存, 新))
+  // volume upsert (H6: silent rebind 禁止)
   const number = extractVolumeNumber(rec.title) ?? 0; // 0 は外伝・ガイドブック等
   const isExtra = number === 0 ? 1 : 0;
-  const existingVol = db
-    .prepare("SELECT edition_id FROM volumes WHERE isbn13 = ?")
-    .get(rec.isbn13) as { edition_id: number } | undefined;
+  const existingVol = stmts.selectVolume.get(rec.isbn13) as
+    | { edition_id: number }
+    | undefined;
 
   let rebound = false;
   if (!existingVol) {
-    db.prepare(
-      `INSERT INTO volumes (edition_id, isbn13, number, is_extra, release_date)
-       VALUES (?, ?, ?, ?, ?)`,
-    ).run(editionId, rec.isbn13, number, isExtra, rec.issued);
+    stmts.insertVolume.run(editionId, rec.isbn13, number, isExtra, rec.issued);
   } else if (existingVol.edition_id === editionId) {
-    db.prepare(
-      `UPDATE volumes
-       SET number       = ?,
-           is_extra     = ?,
-           release_date = COALESCE(release_date, ?)
-       WHERE isbn13 = ?`,
-    ).run(number, isExtra, rec.issued, rec.isbn13);
+    stmts.updateVolume.run(number, isExtra, rec.issued, rec.isbn13);
   } else {
-    rebound = true; // edition 移動は黙ってやらない・呼び側で警告ログ
+    rebound = true; // edition 移動は黙ってやらない
   }
 
   return { seriesId, editionId, isbn: rec.isbn13, rebound };

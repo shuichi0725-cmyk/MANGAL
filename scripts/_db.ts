@@ -23,7 +23,18 @@ export type DB = Database.Database;
 export function openDb(filePath: string = DB_PATH): DB {
   fs.mkdirSync(path.dirname(filePath), { recursive: true });
   const db = new Database(filePath);
+  // L2: 大規模投入を見越して PRAGMA を調整。
+  //  - WAL は同時参照に強いが書き込みは依然シリアライズ。
+  //  - synchronous=NORMAL は WAL モードでは FULL より速く、十分に安全
+  //    （クラッシュ時にコミット済みトランザクションは保持される）。
+  //  - cache_size は負値で KiB 指定（-65536 = 64MB）。
+  //  - temp_store=MEMORY で一時テーブル/インデックスを RAM に。
+  //  - mmap_size はファイル全体を mmap して I/O を減らす。
   db.pragma("journal_mode = WAL");
+  db.pragma("synchronous = NORMAL");
+  db.pragma("cache_size = -65536");
+  db.pragma("temp_store = MEMORY");
+  db.pragma("mmap_size = 268435456"); // 256MB
   db.pragma("foreign_keys = ON");
   applySchemaIfNeeded(db);
   return db;
