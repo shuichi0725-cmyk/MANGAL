@@ -32,11 +32,12 @@ import {
   type EditionType,
   EDITION_LABELS,
   baseTitle,
+  buildCreatorClause,
+  buildSeriesKey,
   classifyEdition,
   extractVolumeNumber,
   normalizeIsbn13,
   normalizeReleaseDate,
-  normalizeSeriesKey,
 } from "../lib/edition";
 import { openDb, recordSource, tx, type DB } from "./_db";
 
@@ -87,6 +88,7 @@ const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 type CsvRow = {
   qid: string;
   name: string;
+  alt_names: string[]; // pipe-separated → array
   has_adult_credit: string;
 };
 
@@ -101,9 +103,11 @@ function lookupCsv(qidOrName: { qid?: string; name?: string }): CsvRow | null {
     if (!line) continue;
     // 簡易パース（CSV のクオート対応は import-mangaka-csv 側に集約）
     const cols = line.split(",");
-    const row = {
+    const altRaw = cols[idx("alt_names")] ?? "";
+    const row: CsvRow = {
       qid: cols[idx("qid")] ?? "",
       name: cols[idx("name")] ?? "",
+      alt_names: altRaw.split("|").map((s) => s.trim()).filter(Boolean),
       has_adult_credit: cols[idx("has_adult_credit")] ?? "false",
     };
     if (qidOrName.qid && row.qid === qidOrName.qid) return row;
@@ -326,9 +330,14 @@ function parseRecords(xml: string): { total: number; recs: NdlRec[] } {
 function upsertVolume(
   db: DB,
   mangakaId: number,
+  authorRef: { qid: string | null; name: string },
   rec: NdlRec,
 ): { seriesId: number; editionId: number; isbn: string } {
-  const seriesKey = `norm:${normalizeSeriesKey(rec.title)}`;
+  // C2 fix: タイトル単独だと同名異作家衝突するので必ず作家識別子を含める。
+  const seriesKey = buildSeriesKey(rec.title, {
+    qid: authorRef.qid,
+    name: authorRef.name,
+  });
   const editionType: EditionType = classifyEdition(rec.title);
 
   // series upsert
@@ -465,7 +474,13 @@ async function main() {
 
   fs.mkdirSync(RAW_DIR, { recursive: true });
 
-  const query = `creator="${name}" AND ndc="726"`;
+  // C3 + C4 fix: 作家名と alt_names を CQL でエスケープして OR 結合。
+  // alt_names が多い作家 (CLAMP 等) は将来分割クエリが必要だが、
+  // とりあえずまとめて 1 クエリ。
+  const altNames = csvRow?.alt_names ?? [];
+  const allNames = [name, ...altNames];
+  const creatorClause = buildCreatorClause(allNames);
+  const query = `${creatorClause} AND ndc="726"`;
   console.log(`[ndl] query: ${query}`);
 
   let total = 0;
@@ -495,7 +510,7 @@ async function main() {
     tx(db, () => {
       for (const rec of recs) {
         try {
-          upsertVolume(db, mangakaId, rec);
+          upsertVolume(db, mangakaId, { qid, name }, rec);
           recordSource(db, "ndl", "volumes", rec.isbn13, rec.rawJson);
           inserted++;
         } catch (err) {

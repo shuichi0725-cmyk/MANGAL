@@ -64,20 +64,50 @@ export function classifyEdition(text: string): EditionType {
  *   "うる星やつら 1"           "うる星やつら（1）"
  *   "うる星やつら 第1巻"        "うる星やつら 完全版 1"
  *   "うる星やつら〔新装版〕（1）"
+ *
+ * 重要な落とし穴: タイトルに西暦 (例 "1980" "2024年初版") が含まれると
+ * `\d{1,3}` が末尾 3 桁を貪欲マッチして 980 / 024 を巻番号と誤認する。
+ * これを避けるため
+ *   - 巻番号の手前は非数字境界を要求 (`(?:^|\D)`)
+ *   - 4 桁以上の連続数字 (年・ISBN 部分文字列) が手前にあれば棄却
+ *   - 候補が 1 個でも見つかったら早期 return せず、全体に疑わしい大きな
+ *     数列がある場合に巻番号扱いを撤回する
+ *
  * 抽出できなければ null（読切・特装本・ガイドブック等）。
  */
 export function extractVolumeNumber(text: string): number | null {
-  const candidates = [text].filter(Boolean).map((s) => s.normalize("NFKC"));
-  for (const t of candidates) {
-    const m1 = t.match(/第\s*(\d{1,3})\s*巻/);
-    if (m1) return Number(m1[1]);
-    const m2 = t.match(/[（(](\d{1,3})[)）]/);
-    if (m2) return Number(m2[1]);
-    const m3 = t.match(/(\d{1,3})\s*$/);
-    if (m3) return Number(m3[1]);
-    const m4 = t.match(/\s(\d{1,3})\s/);
-    if (m4) return Number(m4[1]);
+  if (!text) return null;
+  const t = text.normalize("NFKC");
+
+  // 「第N巻」「全N巻」表記。第 が前にあれば年と誤認しない。
+  const m1 = t.match(/第\s*(\d{1,3})\s*巻/);
+  if (m1) return Number(m1[1]);
+
+  // (N) または （N） — 括弧で囲まれた 1〜3 桁。年が括弧で囲まれることは稀。
+  const m2 = t.match(/[（(](\d{1,3})[)）]/);
+  if (m2) return Number(m2[1]);
+
+  // 末尾の 1〜3 桁。直前に数字があれば年/ISBN と判断して棄却。
+  // 例: "うる星やつら 1980" → 末尾の "1980" は \d{1,3} で "980" にマッチするが、
+  // 直前の "1" が \d なので除外される。
+  const m3 = t.match(/(?:^|\D)(\d{1,3})\s*$/);
+  if (m3) {
+    // さらに保険: 候補位置の前後に "年" "月" 等の年表記語が含まれれば棄却
+    const idx = t.lastIndexOf(m3[1]);
+    const tail = t.slice(idx);
+    if (!/年|月|日|円/.test(tail)) {
+      return Number(m3[1]);
+    }
   }
+
+  // 中間の独立した 1〜3 桁 (空白で区切られる)
+  const m4 = t.match(/(?:^|\D)(\d{1,3})(?=\s|$)/);
+  if (m4) {
+    // 4桁以上の数字塊が title 全体に存在する場合は年混入を疑い棄却
+    if (/\d{4}/.test(t)) return null;
+    return Number(m4[1]);
+  }
+
   return null;
 }
 
@@ -110,9 +140,36 @@ export function baseTitle(text: string): string {
  *   - NFKC
  *   - 全空白除去・小文字化
  *   - エディション語と巻番号は baseTitle で剥がす
+ *
+ * 注: タイトル単独だと「ハンター」「クロス」「BLUE」など短いタイトルで
+ * 異なる作家のシリーズが衝突する。実際の DB キーとしては
+ * buildSeriesKey(title, authorRef) を使うこと。
  */
 export function normalizeSeriesKey(text: string): string {
   return baseTitle(text).normalize("NFKC").replace(/\s+/g, "").toLowerCase();
+}
+
+/**
+ * SQLite series.series_key に入れるべき完全キー。
+ * タイトルだけでは同名異作家の衝突が避けられないため、必ず作家識別子を含める。
+ *
+ *   buildSeriesKey("うる星やつら〔新装版〕(1)", "Q193300")
+ *   → "norm:うる星やつら|qid:Q193300"
+ *
+ *   buildSeriesKey("らんま 1/2", "高橋留美子")  // QID 無しの場合
+ *   → "norm:らんま1/2|name:高橋留美子"
+ */
+export function buildSeriesKey(
+  title: string,
+  authorRef: { qid?: string | null; name?: string | null },
+): string {
+  const titlePart = `norm:${normalizeSeriesKey(title)}`;
+  const authorPart = authorRef.qid
+    ? `qid:${authorRef.qid}`
+    : authorRef.name
+      ? `name:${authorRef.name.normalize("NFKC").replace(/\s+/g, "")}`
+      : "name:_unknown";
+  return `${titlePart}|${authorPart}`;
 }
 
 /**
@@ -152,15 +209,66 @@ export function normalizeReleaseDate(raw: string | undefined | null): string | n
 }
 
 /**
- * ISBN-10 / ハイフン入り / ISBN-13 を ISBN-13 ハイフン無しに揃える。
- * 不正・JP番号・GTIN等は null。
+ * ISBN-10 / ハイフン入り / ISBN-13 を ISBN-13 ハイフン無しに揃え、
+ * Mod-10 チェックディジットを検証する。不正値 / JP番号 / GTIN は null。
+ *
+ * チェック検証無しだと NDL の OCR 誤読・typo 由来の不正 ISBN
+ * （13桁数字だがチェックディジットが合わない）を DB に投入してしまい、
+ * 後段の openBD/Amazon 検索で 404 を引いた時点で気付く事になる。
+ * 入口でブロックするほうがクリーン。
  */
 export function normalizeIsbn13(raw: string | undefined | null): string | null {
   if (!raw) return null;
   const s = raw.normalize("NFKC").replace(/[^0-9X]/gi, "");
-  if (s.length === 13) return s;
-  if (s.length === 10) return isbn10to13(s);
+  if (s.length === 13) return isValidIsbn13(s) ? s : null;
+  if (s.length === 10) {
+    if (!isValidIsbn10(s)) return null;
+    return isbn10to13(s);
+  }
   return null;
+}
+
+/** ISBN-13 Mod-10 チェック (978/979 prefix) */
+function isValidIsbn13(s: string): boolean {
+  if (!/^\d{13}$/.test(s)) return false;
+  if (!/^97[89]/.test(s)) return false; // GTIN-13 で書籍以外を弾く
+  let sum = 0;
+  for (let i = 0; i < 12; i++) sum += Number(s[i]) * (i % 2 === 0 ? 1 : 3);
+  return (10 - (sum % 10)) % 10 === Number(s[12]);
+}
+
+/** ISBN-10 Mod-11 チェック (末尾は X = 10 のときあり) */
+function isValidIsbn10(s: string): boolean {
+  if (!/^\d{9}[0-9X]$/i.test(s)) return false;
+  let sum = 0;
+  for (let i = 0; i < 9; i++) sum += Number(s[i]) * (10 - i);
+  const last = s[9].toUpperCase();
+  const cd = last === "X" ? 10 : Number(last);
+  sum += cd;
+  return sum % 11 === 0;
+}
+
+/**
+ * NDL SRU の CQL クエリ用に文字列をエスケープする。
+ * CQL 標準ではダブルクオート内のダブルクオートは バックスラッシュでエスケープ。
+ * バックスラッシュ自体も二重化する。
+ */
+export function escapeCql(s: string): string {
+  return s.replace(/\\/g, "\\\\").replace(/"/g, '\\"');
+}
+
+/**
+ * 漫画家名 (alt_names 含む) のリストから NDL の CQL OR クエリを組み立てる。
+ *   buildCreatorClause(["高橋留美子", "高橋るみ子"])
+ *   → '(creator="高橋留美子" OR creator="高橋るみ子")'
+ *
+ * 4個以上ある作家 (CLAMP, 藤子・F・不二雄 系) は呼び側で分割クエリにする。
+ */
+export function buildCreatorClause(names: string[]): string {
+  const uniq = Array.from(new Set(names.map((n) => n.trim()).filter(Boolean)));
+  if (uniq.length === 0) return "";
+  if (uniq.length === 1) return `creator="${escapeCql(uniq[0])}"`;
+  return `(${uniq.map((n) => `creator="${escapeCql(n)}"`).join(" OR ")})`;
 }
 
 function isbn10to13(isbn10: string): string | null {

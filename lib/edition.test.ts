@@ -1,0 +1,166 @@
+import { describe, expect, it } from "vitest";
+import {
+  baseTitle,
+  buildCreatorClause,
+  buildSeriesKey,
+  classifyEdition,
+  escapeCql,
+  extractVolumeNumber,
+  normalizeIsbn13,
+  normalizeReleaseDate,
+  normalizeSeriesKey,
+} from "./edition";
+
+describe("extractVolumeNumber", () => {
+  it("extracts simple trailing number", () => {
+    expect(extractVolumeNumber("うる星やつら 1")).toBe(1);
+    expect(extractVolumeNumber("うる星やつら 34")).toBe(34);
+  });
+
+  it("extracts (N) and （N） parenthesized form", () => {
+    expect(extractVolumeNumber("うる星やつら（1）")).toBe(1);
+    expect(extractVolumeNumber("うる星やつら(15)")).toBe(15);
+  });
+
+  it("extracts 第N巻 form", () => {
+    expect(extractVolumeNumber("うる星やつら 第3巻")).toBe(3);
+    expect(extractVolumeNumber("うる星やつら第120巻")).toBe(120);
+  });
+
+  it("does not extract year as volume number (the C1 bug)", () => {
+    // 4-digit year at end should not produce phantom volumes 980 / 024
+    expect(extractVolumeNumber("うる星やつら 1980")).toBeNull();
+    expect(extractVolumeNumber("うる星やつら 2024")).toBeNull();
+    expect(extractVolumeNumber("うる星やつら 2024年初版")).toBeNull();
+    expect(extractVolumeNumber("うる星やつら 2024年")).toBeNull();
+  });
+
+  it("does not get confused by multi-number titles", () => {
+    expect(extractVolumeNumber("第1巻 うる星やつら 2024")).toBe(1);
+  });
+
+  it("returns null for unnumbered specials", () => {
+    expect(extractVolumeNumber("うる星やつら パーフェクトカラーエディション 上")).toBeNull();
+    expect(extractVolumeNumber("うる星やつら ガイドブック")).toBeNull();
+  });
+});
+
+describe("classifyEdition", () => {
+  it("classifies the standard editions", () => {
+    expect(classifyEdition("うる星やつら 1")).toBe("standard");
+    expect(classifyEdition("うる星やつら 完全版 1")).toBe("kanzenban");
+    expect(classifyEdition("うる星やつら 文庫版 第1巻")).toBe("bunkobon");
+    expect(classifyEdition("うる星やつら〔新装版〕（1）")).toBe("shinsoban");
+    expect(classifyEdition("うる星やつら 愛蔵版 1")).toBe("aizoban");
+    expect(classifyEdition("うる星やつら ワイド版 1")).toBe("wideban");
+  });
+});
+
+describe("baseTitle / normalizeSeriesKey", () => {
+  it("strips edition + volume markers across forms", () => {
+    expect(baseTitle("うる星やつら〔新装版〕（1）")).toBe("うる星やつら");
+    expect(baseTitle("うる星やつら 完全版 第3巻")).toBe("うる星やつら");
+    expect(baseTitle("うる星やつら 文庫版 1")).toBe("うる星やつら");
+  });
+
+  it("normalizes for series-key comparison (case + space)", () => {
+    expect(normalizeSeriesKey("うる星やつら（1）")).toBe(
+      normalizeSeriesKey("うる星やつら 文庫版 第3巻"),
+    );
+    expect(normalizeSeriesKey("ONE PIECE 1")).toBe("onepiece");
+  });
+});
+
+describe("buildSeriesKey (C2 fix)", () => {
+  it("includes author so same-title different-author do not collide", () => {
+    const a = buildSeriesKey("ハンター 1", { qid: "Q11111" });
+    const b = buildSeriesKey("ハンター 1", { qid: "Q22222" });
+    expect(a).not.toBe(b);
+  });
+
+  it("falls back to name when qid is unknown", () => {
+    const k = buildSeriesKey("めぞん一刻 第1巻", { name: "高橋留美子" });
+    expect(k).toBe("norm:めぞん一刻|name:高橋留美子");
+  });
+
+  it("collapses different editions of the same series to the same key", () => {
+    const k1 = buildSeriesKey("うる星やつら 1", { qid: "Q193300" });
+    const k2 = buildSeriesKey("うる星やつら〔新装版〕(15)", { qid: "Q193300" });
+    expect(k1).toBe(k2);
+  });
+});
+
+describe("escapeCql / buildCreatorClause (C3 fix)", () => {
+  it("escapes embedded quotes", () => {
+    expect(escapeCql('Q.B.B "Bunch"')).toBe('Q.B.B \\"Bunch\\"');
+    expect(escapeCql("foo\\bar")).toBe("foo\\\\bar");
+  });
+
+  it("builds OR clause from alt names", () => {
+    expect(buildCreatorClause(["高橋留美子", "高橋るみ子"])).toBe(
+      '(creator="高橋留美子" OR creator="高橋るみ子")',
+    );
+    expect(buildCreatorClause(["高橋留美子"])).toBe('creator="高橋留美子"');
+    expect(buildCreatorClause([])).toBe("");
+  });
+
+  it("dedupes and escapes inside the OR clause", () => {
+    expect(buildCreatorClause(["a", "a", 'b"c'])).toBe(
+      '(creator="a" OR creator="b\\"c")',
+    );
+  });
+});
+
+describe("normalizeIsbn13 (C5 fix: check digit)", () => {
+  it("accepts a valid ISBN-13", () => {
+    // 9784088725093 is real (One Piece vol 1) and has correct check digit
+    expect(normalizeIsbn13("978-4-08-872509-3")).toBe("9784088725093");
+    expect(normalizeIsbn13("9784088725093")).toBe("9784088725093");
+  });
+
+  it("rejects ISBN-13 with bad check digit", () => {
+    expect(normalizeIsbn13("9784088725090")).toBeNull(); // last digit wrong
+    expect(normalizeIsbn13("9784088725099")).toBeNull();
+  });
+
+  it("rejects non-book GTIN-13 (not 978/979 prefix)", () => {
+    expect(normalizeIsbn13("4901234567894")).toBeNull(); // JAN code
+  });
+
+  it("converts valid ISBN-10 to ISBN-13", () => {
+    // 4088725093 is the ISBN-10 form. The 10-digit check digit needs to be valid.
+    // ISBN-10 check digit for "408872509" :
+    //   sum = 4*10 + 0*9 + 8*8 + 8*7 + 7*6 + 2*5 + 5*4 + 0*3 + 9*2
+    //       = 40 + 0 + 64 + 56 + 42 + 10 + 20 + 0 + 18 = 250
+    //   mod 11 = 250 % 11 = 8 → check digit = 11 - 8 = 3, sum incl cd = 253 → not divisible by 11
+    // So 4088725093 is NOT a valid ISBN-10 (the One Piece vol 1 ISBN-10 is actually 4088725093,
+    // verified valid since 253 % 11 = 0 yes wait: 253/11=23 exact). Let's recompute:
+    //   sum incl 3*1 = 250 + 3 = 253. 253 / 11 = 23.0. So divisible. Valid.
+    expect(normalizeIsbn13("4088725093")).toBe("9784088725093");
+  });
+
+  it("returns null for malformed inputs", () => {
+    expect(normalizeIsbn13(null)).toBeNull();
+    expect(normalizeIsbn13("")).toBeNull();
+    expect(normalizeIsbn13("nonsense")).toBeNull();
+    expect(normalizeIsbn13("123")).toBeNull();
+  });
+});
+
+describe("normalizeReleaseDate", () => {
+  it("normalizes japanese date format", () => {
+    expect(normalizeReleaseDate("2007年11月17日")).toBe("2007-11-17");
+    expect(normalizeReleaseDate("1980年9月")).toBe("1980-09");
+  });
+
+  it("normalizes ISO and slash forms", () => {
+    expect(normalizeReleaseDate("2007-11-17")).toBe("2007-11-17");
+    expect(normalizeReleaseDate("2007/11/17")).toBe("2007-11-17");
+    expect(normalizeReleaseDate("20071117")).toBe("2007-11-17");
+  });
+
+  it("returns null for garbage", () => {
+    expect(normalizeReleaseDate(null)).toBeNull();
+    expect(normalizeReleaseDate("???")).toBeNull();
+  });
+});
