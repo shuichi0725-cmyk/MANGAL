@@ -22,6 +22,7 @@
     "db:import:masters": "tsx scripts/import-masters.ts",
     "fetch:ndl": "tsx scripts/fetch-ndl.ts",
     "promote:series": "tsx scripts/promote-series.ts",
+    "promote:bulk": "tsx scripts/promote-bulk.ts",
     "deploy": "wrangler deploy"
   },
   "dependencies": {

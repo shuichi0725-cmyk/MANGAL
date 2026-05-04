@@ -9,6 +9,7 @@ import {
   normalizeIsbn13,
   normalizeReleaseDate,
   normalizeSeriesKey,
+  slugFromTitle,
   toLccCreatorForm,
 } from "./edition";
 
@@ -307,5 +308,42 @@ describe("normalizeReleaseDate", () => {
   it("returns null for garbage", () => {
     expect(normalizeReleaseDate(null)).toBeNull();
     expect(normalizeReleaseDate("???")).toBeNull();
+  });
+});
+
+describe("slugFromTitle", () => {
+  it("uses kana hint to romanize kanji-only titles", () => {
+    expect(slugFromTitle("犬夜叉", { kana: "いぬやしゃ" })).toBe("inuyasha");
+    expect(slugFromTitle("めぞん一刻", { kana: "めぞんいっこく" })).toBe(
+      "mezon-ikkoku",
+    );
+  });
+
+  it("falls back to title-only conversion when kana absent (kana titles)", () => {
+    expect(slugFromTitle("うる星やつら", { kana: "うるせいやつら" })).toBe(
+      "uruseiyatsura",
+    );
+  });
+
+  it("returns empty string for kanji-only titles without kana", () => {
+    // 漢字のみは wanakana で変換されないので [a-z0-9] が空 → ""
+    expect(slugFromTitle("犬夜叉")).toBe("");
+  });
+
+  it("converts ASCII titles unchanged (lowercased)", () => {
+    expect(slugFromTitle("ONE PIECE")).toBe("one-piece");
+    expect(slugFromTitle("Attack on Titan")).toBe("attack-on-titan");
+  });
+
+  it("collapses runs of separators and trims edges", () => {
+    expect(slugFromTitle("Pの悲劇", { kana: "ぴーのひげき" })).toBe(
+      "pi-nohigeki",
+    );
+  });
+
+  it("truncates very long slugs to 60 chars", () => {
+    const longKana = "あ".repeat(80); // toRomaji → "a" × 80
+    const s = slugFromTitle("X", { kana: longKana });
+    expect(s.length).toBeLessThanOrEqual(60);
   });
 });

@@ -1,3 +1,5 @@
+import { toRomaji } from "wanakana";
+
 /**
  * 単行本の「エディション種別」分類とタイトル正規化。
  *
@@ -243,6 +245,34 @@ export function buildSeriesKey(
       ? `name:${authorRef.name.normalize("NFKC").replace(/\s+/g, "")}`
       : "name:_unknown";
   return `${titlePart}|${authorPart}`;
+}
+
+/**
+ * タイトルから URL slug を生成する（[a-z0-9-]+ のみ）。
+ *
+ * 漢字は wanakana では romaji 化できないため、優先順位:
+ *   1. kana ヒントが渡されたら toRomaji() でローマ字化
+ *   2. それも無ければ title をそのまま toRomaji（カナ部分だけ romaji 化される）
+ *   3. 結果の [a-z0-9] 文字種を取り出し、空白/記号を `-` に集約
+ *   4. 60 文字で truncate
+ *
+ * 漢字のみのタイトルで kana ヒントが無い場合は "" を返す。
+ * 呼び側でフォールバック (例: `series-<id>`) を決める。
+ */
+export function slugFromTitle(
+  title: string,
+  opts: { kana?: string | null } = {},
+): string {
+  const source = opts.kana && opts.kana.trim() ? opts.kana : title;
+  let s = toRomaji(source.normalize("NFKC")).toLowerCase();
+  // 半角化したダイアクリティカルマーク除去（macron 等）
+  s = s.normalize("NFD").replace(/[̀-ͯ]/g, "");
+  // [a-z0-9] 以外を - に
+  s = s.replace(/[^a-z0-9]+/g, "-");
+  // 端の - を除去
+  s = s.replace(/^-+|-+$/g, "");
+  if (!s) return "";
+  return s.slice(0, 60);
 }
 
 /**
