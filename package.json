@@ -19,6 +19,7 @@
     "db:init": "tsx scripts/db-init.ts",
     "db:report": "tsx scripts/db-report.ts",
     "db:import:mangaka": "tsx scripts/import-mangaka-csv.ts",
+    "db:import:masters": "tsx scripts/import-masters.ts",
     "fetch:ndl": "tsx scripts/fetch-ndl.ts",
     "deploy": "wrangler deploy"
   },

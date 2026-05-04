@@ -48,15 +48,39 @@ export const EDITION_ORDER: EditionType[] = [
 /**
  * タイトル文字列からエディション種別を推定。
  * 入力は title + subTitle + seriesName を空白連結したものを想定。
+ *
+ * M5 fix: 単純な if-cascade だと「完全版＋文庫版（完全版の文庫化）」のように
+ * 複数キーワードが当たる場合の優先順位がハードコードされて柔軟性に欠ける。
+ * スコア式に変更し、最も高スコアのものを返す。同点なら ORDER の順序が勝つ。
  */
 export function classifyEdition(text: string): EditionType {
   const t = text.normalize("NFKC");
-  if (/完全版/.test(t)) return "kanzenban";
-  if (/愛蔵版/.test(t)) return "aizoban";
-  if (/ワイド版/.test(t)) return "wideban";
-  if (/新装版|リニューアル|カバー新装/.test(t)) return "shinsoban";
-  if (/文庫/.test(t)) return "bunkobon";
-  return "standard";
+  const scores: Record<EditionType, number> = {
+    standard: 1, // ベースライン
+    kanzenban: 0,
+    bunkobon: 0,
+    shinsoban: 0,
+    aizoban: 0,
+    wideban: 0,
+    renewal: 0,
+    other: 0,
+  };
+  if (/完全版/.test(t)) scores.kanzenban += 3;
+  if (/愛蔵版/.test(t)) scores.aizoban += 3;
+  if (/ワイド版/.test(t)) scores.wideban += 3;
+  if (/新装版/.test(t)) scores.shinsoban += 3;
+  if (/カバー新装|カバーリニューアル/.test(t)) scores.renewal += 2;
+  if (/文庫/.test(t)) scores.bunkobon += 3;
+
+  let best: EditionType = "standard";
+  let bestScore = scores.standard;
+  for (const t2 of EDITION_ORDER) {
+    if (scores[t2] > bestScore) {
+      bestScore = scores[t2];
+      best = t2;
+    }
+  }
+  return best;
 }
 
 /**
@@ -116,21 +140,28 @@ export function extractVolumeNumber(text: string): number | null {
  *   "うる星やつら〔新装版〕（1）" → "うる星やつら"
  *   "うる星やつら 完全版 第3巻"   → "うる星やつら"
  * 異なるエディション間で同じシリーズに紐付けるためのキー材料。
+ *
+ * M4 fix: 以前の実装は `[【〔（(].*?[】〕）)]` で全括弧内を削除していたため、
+ * "(株)" のような括弧付きタイトル文字列まで巻き込んで壊した。今は
+ *   「括弧の中にエディション語が含まれているとき**だけ**」削除する。
  */
+const EDITION_TOKENS_INSIDE_BRACKETS =
+  /[【〔（(][^】〕）)]*(完全版|文庫版|文庫|新装版|愛蔵版|ワイド版|カバーリニューアル|リニューアル|限定版)[^】〕）)]*[】〕）)]/g;
+
 export function baseTitle(text: string): string {
   let t = text.normalize("NFKC");
-  // 巻番号の括弧表記
+  // 巻番号の括弧表記（純粋に数字だけのもの）
   t = t.replace(/[（(]\d{1,3}[)）]/g, "");
   // 「第N巻」
   t = t.replace(/第\s*\d{1,3}\s*巻/g, "");
-  // エディション語
+  // 括弧の中にエディション語があるパターンを優先して削除
+  t = t.replace(EDITION_TOKENS_INSIDE_BRACKETS, "");
+  // 裸（括弧外）に書かれたエディション語も削除
   t = t.replace(
     /(完全版|文庫版|新装版|愛蔵版|ワイド版|カバーリニューアル|リニューアル|限定版)/g,
     "",
   );
-  // 〔...〕や【...】内のエディション注釈をまとめて削除
-  t = t.replace(/[【〔（(].*?[】〕）)]/g, "");
-  // 末尾の独立した数字
+  // 末尾の独立した数字（西暦と紛れる場合は extractVolumeNumber 側で対応済み）
   t = t.replace(/\s*\d{1,3}\s*$/, "");
   return t.trim().replace(/\s+/g, " ");
 }

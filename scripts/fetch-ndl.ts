@@ -420,7 +420,10 @@ function upsertVolume(
           ? issuedYear
           : Math.max(existingSeries.year_ended, issuedYear);
       db.prepare(
-        `UPDATE series SET year_started = ?, year_ended = ? WHERE id = ?`,
+        `UPDATE series
+         SET year_started = ?, year_ended = ?,
+             updated_at = strftime('%Y-%m-%dT%H:%M:%SZ','now')
+         WHERE id = ?`,
       ).run(newStart, newEnd, seriesId);
     } else if (issuedYear && existingSeries.year_started === null) {
       // standard が一切来ていない暫定値として埋める（後で standard が来たら上書き）
@@ -431,7 +434,10 @@ function upsertVolume(
     // M6 fix: title_kana を取れたら埋める（既に入っていれば残す）
     if (rec.titleKana) {
       db.prepare(
-        `UPDATE series SET title_kana = COALESCE(title_kana, ?) WHERE id = ?`,
+        `UPDATE series
+         SET title_kana = COALESCE(title_kana, ?),
+             updated_at = strftime('%Y-%m-%dT%H:%M:%SZ','now')
+         WHERE id = ?`,
       ).run(rec.titleKana, seriesId);
     }
   } else {

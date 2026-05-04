@@ -45,7 +45,7 @@ describe("extractVolumeNumber", () => {
   });
 });
 
-describe("classifyEdition", () => {
+describe("classifyEdition (M5: scoring-based)", () => {
   it("classifies the standard editions", () => {
     expect(classifyEdition("うる星やつら 1")).toBe("standard");
     expect(classifyEdition("うる星やつら 完全版 1")).toBe("kanzenban");
@@ -53,6 +53,15 @@ describe("classifyEdition", () => {
     expect(classifyEdition("うる星やつら〔新装版〕（1）")).toBe("shinsoban");
     expect(classifyEdition("うる星やつら 愛蔵版 1")).toBe("aizoban");
     expect(classifyEdition("うる星やつら ワイド版 1")).toBe("wideban");
+  });
+
+  it("recognizes cover-renewal explicitly", () => {
+    expect(classifyEdition("うる星やつら カバー新装 1")).toBe("renewal");
+    expect(classifyEdition("ドラゴンボール カバーリニューアル 1")).toBe("renewal");
+  });
+
+  it("standard wins on ties (no edition tokens at all)", () => {
+    expect(classifyEdition("ふつうの単行本タイトル 1")).toBe("standard");
   });
 });
 
@@ -68,6 +77,17 @@ describe("baseTitle / normalizeSeriesKey", () => {
       normalizeSeriesKey("うる星やつら 文庫版 第3巻"),
     );
     expect(normalizeSeriesKey("ONE PIECE 1")).toBe("onepiece");
+  });
+
+  it("M4: keeps non-edition parentheses (no longer strips all brackets)", () => {
+    // 以前は (株) もエディション注釈と一緒に消されていた。
+    expect(baseTitle("(株)社長")).toBe("(株)社長");
+    expect(baseTitle("[Tシャツ] 物語")).toBe("[Tシャツ] 物語");
+  });
+
+  it("M4: still strips brackets that contain edition tokens", () => {
+    expect(baseTitle("BLEACH【完全版】 1")).toBe("BLEACH");
+    expect(baseTitle("デスノート〔文庫版〕 第3巻")).toBe("デスノート");
   });
 });
 

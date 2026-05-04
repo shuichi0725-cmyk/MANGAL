@@ -66,6 +66,9 @@ jobs:
       - name: Initialize empty DB
         run: npm run db:init
 
+      - name: Import publisher / magazine masters
+        run: npm run db:import:masters
+
       - name: Import mangaka CSV (small subset for context)
         run: npm run db:import:mangaka
 

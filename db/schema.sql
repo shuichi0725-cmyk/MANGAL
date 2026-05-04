@@ -13,6 +13,31 @@
 
 PRAGMA foreign_keys = ON;
 
+-- M1: スキーマバージョン管理。今後の破壊的変更時にマイグレーションが
+-- 必要かを判断する。値は string で柔軟に扱う（例 "1", "1.1", "2" など）。
+CREATE TABLE IF NOT EXISTS meta (
+  key   TEXT PRIMARY KEY,
+  value TEXT NOT NULL
+);
+INSERT OR IGNORE INTO meta (key, value) VALUES
+  ('schema_version', '2'),
+  ('created_at', strftime('%Y-%m-%dT%H:%M:%SZ', 'now'));
+
+-- M3: publishers / magazines は data/*.yml が source-of-truth だが、
+-- series.publisher_key が孤立しないかチェックできるよう SQLite にも
+-- ミラーする。読み込みは scripts/import-masters.ts。
+CREATE TABLE IF NOT EXISTS publishers (
+  key  TEXT PRIMARY KEY,
+  name TEXT NOT NULL
+);
+CREATE TABLE IF NOT EXISTS magazines (
+  key         TEXT PRIMARY KEY,
+  name        TEXT NOT NULL,
+  publisher   TEXT NOT NULL,
+  demographic TEXT NOT NULL,
+  FOREIGN KEY (publisher) REFERENCES publishers(key) ON DELETE RESTRICT
+);
+
 CREATE TABLE IF NOT EXISTS mangaka (
   id               INTEGER PRIMARY KEY AUTOINCREMENT,
   qid              TEXT NOT NULL UNIQUE,    -- Wikidata QID (例: Q193300)
@@ -20,12 +45,15 @@ CREATE TABLE IF NOT EXISTS mangaka (
   birth_year       INTEGER,
   death_year       INTEGER,
   alt_names        TEXT,                    -- pipe-separated
-  has_adult_credit INTEGER NOT NULL DEFAULT 0
+  has_adult_credit INTEGER NOT NULL DEFAULT 0,
+  -- M2: 行タイムスタンプ。「いつ NDL から取った」を後追いするため。
+  created_at       TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%SZ', 'now')),
+  updated_at       TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%SZ', 'now'))
 );
 
 CREATE TABLE IF NOT EXISTS series (
   id            INTEGER PRIMARY KEY AUTOINCREMENT,
-  series_key    TEXT NOT NULL UNIQUE,       -- "qid:Q12345" or "norm:<title>:<author>"
+  series_key    TEXT NOT NULL UNIQUE,       -- "norm:<base>|qid:Q…" or "norm:<base>|name:…"
   qid           TEXT UNIQUE,                -- Wikidata QID（あれば）
   title         TEXT NOT NULL,
   title_kana    TEXT,
@@ -33,9 +61,12 @@ CREATE TABLE IF NOT EXISTS series (
   year_ended    INTEGER,
   status        TEXT,                       -- ongoing/completed/hiatus
   demographic   TEXT,                       -- shounen/seinen/...
-  publisher_key TEXT,                       -- data/publishers.yml の key
-  magazine_key  TEXT,
-  adult_score   INTEGER NOT NULL DEFAULT 0  -- 0=全年齢, 高いほど成人寄り
+  publisher_key TEXT REFERENCES publishers(key) ON DELETE SET NULL,
+  magazine_key  TEXT REFERENCES magazines(key)  ON DELETE SET NULL,
+  adult_score   INTEGER NOT NULL DEFAULT 0, -- 0=全年齢, 高いほど成人寄り
+  -- M2 timestamps
+  created_at    TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%SZ', 'now')),
+  updated_at    TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%SZ', 'now'))
 );
 
 CREATE TABLE IF NOT EXISTS series_authors (
@@ -55,6 +86,9 @@ CREATE TABLE IF NOT EXISTS editions (
   imprint      TEXT,
   year_started INTEGER,
   year_ended   INTEGER,
+  -- M2 timestamps
+  created_at   TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%SZ', 'now')),
+  updated_at   TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%SZ', 'now')),
   UNIQUE (series_id, type),
   FOREIGN KEY (series_id) REFERENCES series(id) ON DELETE CASCADE
 );
@@ -69,6 +103,9 @@ CREATE TABLE IF NOT EXISTS volumes (
   cover_url     TEXT,
   price         INTEGER,                    -- 円
   asin          TEXT,
+  -- M2 timestamps
+  created_at    TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%SZ', 'now')),
+  updated_at    TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%SZ', 'now')),
   FOREIGN KEY (edition_id) REFERENCES editions(id) ON DELETE CASCADE
 );
 
