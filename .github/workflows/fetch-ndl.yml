@@ -91,6 +91,9 @@ jobs:
       - name: DB summary report
         run: npm run db:report -- --series --adult --sources
 
+      - name: DB top series edition breakdown (eds=N の内訳確認用)
+        run: npm run db:report -- --top 10
+
       - name: Upload SQLite + raw XML cache as artifact
         uses: actions/upload-artifact@v4
         if: always()

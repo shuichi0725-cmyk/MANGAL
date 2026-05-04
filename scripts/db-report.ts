@@ -7,6 +7,7 @@
  *   npm run db:report -- --series     # シリーズ一覧（先頭20）
  *   npm run db:report -- --mangaka    # 漫画家一覧（先頭20）
  *   npm run db:report -- --sources    # source 別の件数
+ *   npm run db:report -- --top 10     # 巻数トップ N シリーズの edition 内訳
  *   npm run db:report -- --query 'SELECT ...'  # 任意SQL（参照のみ推奨）
  */
 import "./_env";
@@ -18,6 +19,7 @@ type Args = {
   showSeries: boolean;
   showMangaka: boolean;
   showSources: boolean;
+  topN: number | null;
   query: string | null;
 };
 
@@ -27,6 +29,7 @@ function parseArgs(argv: string[]): Args {
     showSeries: false,
     showMangaka: false,
     showSources: false,
+    topN: null,
     query: null,
   };
   for (let i = 0; i < argv.length; i++) {
@@ -35,7 +38,10 @@ function parseArgs(argv: string[]): Args {
     else if (a === "--series") out.showSeries = true;
     else if (a === "--mangaka") out.showMangaka = true;
     else if (a === "--sources") out.showSources = true;
-    else if (a === "--query" && argv[i + 1]) {
+    else if (a === "--top" && argv[i + 1]) {
+      const n = Number(argv[++i]);
+      if (Number.isFinite(n) && n > 0) out.topN = n;
+    } else if (a === "--query" && argv[i + 1]) {
       out.query = argv[++i];
     }
   }
@@ -198,6 +204,71 @@ function main() {
       console.log(
         `  #${pad(m.id, 5)} ${pad(m.qid, 12)} ${pad(m.name, 22)} ${pad(m.birth_year, 5)}-${pad(m.death_year ?? "", 4)} series=${m.series_n}${m.has_adult_credit ? " [adult]" : ""}`,
       );
+    }
+  }
+
+  if (args.topN !== null) {
+    const N = args.topN;
+    console.log(`\n=== top ${N} series (by volume count) — edition breakdown ===`);
+    const top = db
+      .prepare(
+        `SELECT s.id, s.title,
+                COUNT(DISTINCT v.id) AS vols
+         FROM series s
+         LEFT JOIN editions e ON e.series_id = s.id
+         LEFT JOIN volumes  v ON v.edition_id = e.id
+         GROUP BY s.id
+         ORDER BY vols DESC, s.id
+         LIMIT ?`,
+      )
+      .all(N) as { id: number; title: string; vols: number }[];
+
+    const breakdownStmt = db.prepare(
+      `SELECT e.type, e.label, e.imprint, e.year_started, e.year_ended,
+              COUNT(v.id) AS vols,
+              MIN(v.number) AS min_no,
+              MAX(v.number) AS max_no
+       FROM editions e
+       LEFT JOIN volumes v ON v.edition_id = e.id
+       WHERE e.series_id = ?
+       GROUP BY e.id
+       ORDER BY e.year_started, e.type`,
+    );
+    const dupStmt = db.prepare(
+      `SELECT v.number, COUNT(*) AS dups
+       FROM editions e
+       JOIN volumes v ON v.edition_id = e.id
+       WHERE e.series_id = ?
+       GROUP BY v.number
+       HAVING COUNT(*) > 1
+       ORDER BY v.number
+       LIMIT 8`,
+    );
+
+    for (const s of top) {
+      console.log(`\n  #${s.id}  ${s.title}  (total vols=${s.vols})`);
+      const eds = breakdownStmt.all(s.id) as {
+        type: string;
+        label: string;
+        imprint: string | null;
+        year_started: number | null;
+        year_ended: number | null;
+        vols: number;
+        min_no: number | null;
+        max_no: number | null;
+      }[];
+      for (const e of eds) {
+        console.log(
+          `    ${pad(e.type, 12)} ${pad(e.label, 16)} ${pad(e.year_started, 5)}-${pad(e.year_ended ?? "", 4)} vols=${pad(String(e.vols), 4)} no=${e.min_no ?? "?"}..${e.max_no ?? "?"} ${e.imprint ?? ""}`,
+        );
+      }
+      const dups = dupStmt.all(s.id) as { number: number; dups: number }[];
+      if (dups.length > 0) {
+        const summary = dups
+          .map((d) => `vol${d.number}×${d.dups}`)
+          .join(", ");
+        console.log(`    [duplicate vol numbers across editions] ${summary}${dups.length === 8 ? " ..." : ""}`);
+      }
     }
   }
 

@@ -188,6 +188,9 @@ type NdlRec = {
   // dcndl:edition / dcndl:editionStatement 等。「新装版」「完全版」が
   // dcterms:title には入らずこちら側にだけ来る場合があるため抽出。
   edition: string | null;
+  // dcndl:volume — NDL が独立フィールドで巻番号を持っている。文字列なのに
+  // 数値化できれば extractVolumeNumber(title) より信頼できる。
+  volumeRaw: string | null;
   creators: string[];
   publisher: string | null;
   issued: string | null;      // YYYY-MM-DD or YYYY-MM or YYYY
@@ -399,6 +402,10 @@ function parseRecords(xml: string): { total: number; recs: NdlRec[] } {
         pickText(b["edition"]) ??
         pickText(b["dc:edition"]);
 
+      // dcndl:volume は巻番号の独立フィールド。"5" "11" "上" "下" "別巻"
+      // 等の文字列が入ることがあるので生のまま保持し、後段で number 化。
+      const volumeRaw = pickText(b["dcndl:volume"]);
+
       out.push({
         isbn13: isbn,
         title: titleRaw,
@@ -406,6 +413,7 @@ function parseRecords(xml: string): { total: number; recs: NdlRec[] } {
         partTitle,
         titleKana,
         edition,
+        volumeRaw,
         creators,
         publisher: publisherText,
         issued,
@@ -632,7 +640,15 @@ function upsertVolume(
   }
 
   // volume upsert (H6: silent rebind 禁止)
-  const number = extractVolumeNumber(rec.title) ?? 0; // 0 は外伝・ガイドブック等
+  // 巻番号は dcndl:volume フィールド最優先 → title からの推測 → 0 (外伝扱い)
+  // dcndl:volume は "5" "上" "下" "別巻" などの文字列なので数値だけ抽出。
+  const volFromField = rec.volumeRaw
+    ? Number((rec.volumeRaw.match(/\d{1,3}/) ?? [""])[0])
+    : NaN;
+  const number =
+    Number.isFinite(volFromField) && volFromField > 0
+      ? volFromField
+      : (extractVolumeNumber(rec.title) ?? 0);
   const isExtra = number === 0 ? 1 : 0;
   const existingVol = stmts.selectVolume.get(rec.isbn13) as
     | { edition_id: number }
