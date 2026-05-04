@@ -1,0 +1,113 @@
+name: 🧪 Bulk promote test (multi-mangaka)
+
+# 複数の漫画家 QID を 1 ジョブ内で順次 fetch:ndl → 同じ SQLite に積む →
+# promote:bulk で data/manga/_drafts/ に YAML を一括生成する評価用ワークフロー。
+#
+# - drafts は gitignore されているのでブランチには commit されない（artifact 経由）
+# - 何度でも回せる（毎回 db:init で空から作り直す）
+# - 既定値を Q219948 Q193300 にしてあるので「Run workflow」だけで試金石が走る
+
+on:
+  workflow_dispatch:
+    inputs:
+      qids:
+        description: "空白区切りの QID 列（例: Q219948 Q193300 = 高橋留美子 + 手塚治虫）"
+        required: true
+        default: "Q219948 Q193300"
+      max_pages:
+        description: "1 人あたりの NDL ページ数 (1-10、1ページ=最大200件)"
+        required: false
+        default: "5"
+      include_adult:
+        description: "has_adult_credit=true の作家も対象にする"
+        required: false
+        default: "false"
+        type: boolean
+
+permissions:
+  contents: read
+
+jobs:
+  bulk-test:
+    runs-on: ubuntu-latest
+    env:
+      INPUT_QIDS: ${{ inputs.qids }}
+      INPUT_MAX_PAGES: ${{ inputs.max_pages }}
+      INPUT_INCLUDE_ADULT: ${{ inputs.include_adult }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validate inputs
+        run: |
+          if ! printf '%s' "$INPUT_QIDS" | grep -Eq '^Q[0-9]+( +Q[0-9]+)*$'; then
+            echo "::error::qids は空白区切りの 'Q+数字' のみ。例: 'Q219948 Q193300'"
+            exit 1
+          fi
+          if ! printf '%s' "$INPUT_MAX_PAGES" | grep -Eq '^[1-9]$|^10$'; then
+            echo "::error::max_pages は 1〜10 の整数: '$INPUT_MAX_PAGES'"
+            exit 1
+          fi
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: "npm"
+
+      - run: npm ci
+
+      - name: Initialize empty DB
+        run: npm run db:init
+
+      - name: Import publisher / magazine masters
+        run: npm run db:import:masters
+
+      - name: Import mangaka CSV (full)
+        run: npm run db:import:mangaka
+
+      - name: Fetch NDL for each mangaka QID
+        run: |
+          INCLUDE_FLAG=()
+          if [ "$INPUT_INCLUDE_ADULT" = "true" ]; then
+            INCLUDE_FLAG+=(--include-adult)
+          fi
+          # $INPUT_QIDS は意図的にクオートしない（空白区切り展開）
+          for q in $INPUT_QIDS; do
+            echo "::group::fetch $q"
+            npm run fetch:ndl -- --qid "$q" --max-pages "$INPUT_MAX_PAGES" "${INCLUDE_FLAG[@]}"
+            echo "::endgroup::"
+          done
+
+      - name: DB summary report
+        run: npm run db:report -- --series --adult --sources
+
+      - name: DB top 30 series with edition breakdown
+        run: npm run db:report -- --top 30
+
+      - name: Run promote:bulk (drafts to data/manga/_drafts/)
+        run: npm run promote:bulk
+
+      - name: Count + list drafts produced
+        run: |
+          COUNT=$(ls -1 data/manga/_drafts/ 2>/dev/null | wc -l)
+          echo "drafts written: $COUNT"
+          echo
+          echo "=== first 50 drafts ==="
+          ls -1 data/manga/_drafts/ 2>/dev/null | head -50 || true
+          echo
+          echo "=== sample: first draft (full content) ==="
+          first=$(ls -1 data/manga/_drafts/*.yml 2>/dev/null | head -1)
+          if [ -n "$first" ]; then
+            echo "--- $first ---"
+            cat "$first"
+          fi
+
+      - name: Upload SQLite + drafts as artifact
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: bulk-test-run-${{ github.run_number }}
+          path: |
+            .cache/db.sqlite
+            .cache/ndl/
+            data/manga/_drafts/
+          if-no-files-found: warn
