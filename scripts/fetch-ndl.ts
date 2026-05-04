@@ -185,6 +185,9 @@ type NdlRec = {
   seriesTitle: string | null; // dcndl:seriesTitle（あればシリーズ束ねの主情報源）
   partTitle: string | null;   // dcndl:partTitle（巻ごとのサブタイトル）
   titleKana: string | null;   // dcndl:transcription（読みがな、M6 で使用）
+  // dcndl:edition / dcndl:editionStatement 等。「新装版」「完全版」が
+  // dcterms:title には入らずこちら側にだけ来る場合があるため抽出。
+  edition: string | null;
   creators: string[];
   publisher: string | null;
   issued: string | null;      // YYYY-MM-DD or YYYY-MM or YYYY
@@ -280,6 +283,12 @@ function parseRecords(xml: string): { total: number; recs: NdlRec[] } {
   // で edition_type がブレる結果 [edition-rebind] 警告が同じ ISBN について
   // 何度も出る。レスポンス内で先勝ち dedup する。
   const seenIsbn = new Set<string>();
+  // 診断: 最初の数レコードの BibResource フィールド名一覧をログ出力。
+  // どこに edition / 媒体 情報が入っているかを workflow ログから直接確認するため。
+  // NDL_DEBUG_KEYS=0 で抑止可能。問題が落ち着いたら 0 に固定して構わない。
+  const dumpKeyLimit =
+    process.env.NDL_DEBUG_KEYS === "0" ? 0 : 3;
+  let dumpedKeys = 0;
   for (const r of recordList) {
     const rd = (r as Record<string, unknown>)["recordData"] as
       | Record<string, unknown>
@@ -300,6 +309,16 @@ function parseRecords(xml: string): { total: number; recs: NdlRec[] } {
     let manifestationProcessed = false;
     for (const b of bibs) {
       if (manifestationProcessed) break;
+
+      // 診断ダンプ: 最初の N レコードの全フィールドキーを表示。
+      // edition / partInformation / 等がどこに格納されているか発見するため。
+      if (dumpedKeys < dumpKeyLimit) {
+        const keys = Object.keys(b).slice(0, 60);
+        console.log(
+          `[debug] BibResource[${dumpedKeys + 1}] keys: ${keys.join(", ")}`,
+        );
+        dumpedKeys++;
+      }
 
       const titleRaw =
         pickText(b["dcterms:title"] ?? b["dc:title"] ?? b["title"]) ?? "";
@@ -367,12 +386,25 @@ function parseRecords(xml: string): { total: number; recs: NdlRec[] } {
           b["dcndl:transcription"],
       );
 
+      // eds=1 fix: edition 文字列は dcterms:title に入らないことが多く、
+      // 別フィールドに格納されている。候補名を順に試す。NDL の dcndl は
+      // バージョンによってフィールド名が揺れるので 5 系統見る。
+      // 後段の classifyEdition がここを文字列マッチして 完全版 / 新装版 等
+      // を識別する。
+      const edition =
+        pickText(b["dcndl:edition"]) ??
+        pickText(b["dcndl:editionStatement"]) ??
+        pickText(b["dcterms:hasFormat"]) ??
+        pickText(b["edition"]) ??
+        pickText(b["dc:edition"]);
+
       out.push({
         isbn13: isbn,
         title: titleRaw,
         seriesTitle,
         partTitle,
         titleKana,
+        edition,
         creators,
         publisher: publisherText,
         issued,
@@ -491,9 +523,14 @@ function upsertVolume(
   // H1: seriesTitle が取れたら baseTitle より先にそちらを優先する。
   // dcndl:seriesTitle = "うる星やつら〔新装版〕" のように既にシリーズ束ね用に
   // 整理されているケースが多く、自前の baseTitle 文字列削りより信頼できる。
-  // ただし seriesTitle にもエディション語が含まれるので classifyEdition は
-  // (title + seriesTitle + partTitle) 合わせて判定する。
-  const editionSourceText = [rec.title, rec.seriesTitle, rec.partTitle]
+  // eds=1 fix: 最も重要な edition 情報源は dcndl:edition フィールド
+  // （「新装版」等が NDL の独立フィールドに格納されている）。これを最初に置く。
+  const editionSourceText = [
+    rec.edition,
+    rec.title,
+    rec.seriesTitle,
+    rec.partTitle,
+  ]
     .filter(Boolean)
     .join(" ");
   const editionType: EditionType = classifyEdition(editionSourceText);
