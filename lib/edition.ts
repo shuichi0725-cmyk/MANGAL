@@ -249,6 +249,18 @@ function isValidIsbn10(s: string): boolean {
 }
 
 /**
+ * 作家名比較用の正規化。NDL は MARC 系図書館目録規則由来で「姓, 名」
+ * 形式 ("高橋, 留美子") で creator を返すことが多いので、CSV 側の
+ * 「高橋留美子」と一致させるために区切り類をすべて落とす。
+ * 半角/全角の空白、カンマ、中黒、句読点を全部消す。
+ */
+export function normalizeCreatorName(s: string): string {
+  return s
+    .normalize("NFKC")
+    .replace(/[\s,，、・·.\-_]/g, "");
+}
+
+/**
  * NDL SRU の CQL クエリ用に文字列をエスケープする。
  * CQL 標準ではダブルクオート内のダブルクオートは バックスラッシュでエスケープ。
  * バックスラッシュ自体も二重化する。

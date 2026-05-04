@@ -36,6 +36,7 @@ import {
   buildSeriesKey,
   classifyEdition,
   extractVolumeNumber,
+  normalizeCreatorName,
   normalizeIsbn13,
   normalizeReleaseDate,
 } from "../lib/edition";
@@ -148,12 +149,24 @@ async function call(query: string, startRecord: number): Promise<string> {
     } catch (err) {
       lastErr = err;
       const msg = err instanceof Error ? err.message : String(err);
+      const is429 = /HTTP 429/.test(msg);
+      const isHostBlocked = /HTTP 403/.test(msg) && /allowlist/i.test(msg);
       const retriable =
-        /HTTP (429|5\d\d)/.test(msg) ||
+        is429 ||
+        /HTTP 5\d\d/.test(msg) ||
         /timeout|ETIMEDOUT|ECONNRESET|fetch failed/i.test(msg);
+      // H5: 403 "Host not in allowlist" は IP/Referer の構造的問題なので
+      // 即時 fail。延々リトライしても復帰しないし NDL 側に余計な負荷。
+      if (isHostBlocked) break;
       if (!retriable || attempt === MAX_RETRIES) break;
-      const delay = 2000 * 2 ** (attempt - 1);
-      console.warn(`  attempt ${attempt} failed: ${msg}; retrying in ${delay}ms`);
+      // H5: 429 はレート制限なので通常のバックオフより長くクールダウン。
+      // 30s, 60s, 120s, 240s と倍々で、4回失敗で諦める。
+      const delay = is429
+        ? 30000 * 2 ** (attempt - 1)
+        : 2000 * 2 ** (attempt - 1);
+      console.warn(
+        `  attempt ${attempt} failed: ${msg}; retrying in ${delay}ms${is429 ? " (429 cooldown)" : ""}`,
+      );
       await sleep(delay);
     }
   }
@@ -163,10 +176,13 @@ async function call(query: string, startRecord: number): Promise<string> {
 /** dcndl レスポンスから 1 レコード分を取り出した中間構造 */
 type NdlRec = {
   isbn13: string;
-  title: string;
+  title: string;            // 個別巻のタイトル（dcterms:title）
+  seriesTitle: string | null; // dcndl:seriesTitle（あればシリーズ束ねの主情報源）
+  partTitle: string | null;   // dcndl:partTitle（巻ごとのサブタイトル）
+  titleKana: string | null;   // dcndl:transcription（読みがな、M6 で使用）
   creators: string[];
   publisher: string | null;
-  issued: string | null; // YYYY-MM-DD or YYYY-MM or YYYY
+  issued: string | null;      // YYYY-MM-DD or YYYY-MM or YYYY
   ndc: string | null;
   rawJson: unknown;
 };
@@ -267,7 +283,14 @@ function parseRecords(xml: string): { total: number; recs: NdlRec[] } {
       | undefined;
     if (!bib) continue;
     const bibs = Array.isArray(bib) ? bib : [bib];
+    // H3: dcndl は record 内に Work レベルと Manifestation レベルの BibResource
+    // を両方入れることがある。Work には ISBN が無く、Manifestation にだけ
+    // ISBN がある。ISBN の有無で Manifestation を判定し、Manifestation だけ
+    // 採用する。両方 ISBN を持つ場合は最初の 1 件のみ（複製を避ける）。
+    let manifestationProcessed = false;
     for (const b of bibs) {
+      if (manifestationProcessed) break;
+
       const titleRaw =
         pickText(b["dcterms:title"] ?? b["dc:title"] ?? b["title"]) ?? "";
       if (!titleRaw) continue;
@@ -276,7 +299,7 @@ function parseRecords(xml: string): { total: number; recs: NdlRec[] } {
         (b["dcterms:identifier"] ?? b["dc:identifier"] ?? b["identifier"]) as unknown,
       );
       const isbn = extractIsbn13FromIdentifiers(idNodes);
-      if (!isbn) continue; // ISBN 無しは UI 用としては不要
+      if (!isbn) continue; // ISBN 無しは Work レベルか UI 用としては不要
 
       const creatorNodes = asArray(
         (b["dcterms:creator"] ?? b["dc:creator"] ?? b["creator"]) as unknown,
@@ -312,15 +335,33 @@ function parseRecords(xml: string): { total: number; recs: NdlRec[] } {
         }
       }
 
+      // H1: dcndl:seriesTitle / partTitle / titleTranscription を抽出。
+      // seriesTitle が取れる場合はそちらが「うる星やつら〔新装版〕」のような
+      // シリーズ束ねの主情報源になる。partTitle は巻のサブタイトル。
+      const seriesTitle = pickText(
+        b["dcndl:seriesTitle"] ?? b["seriesTitle"],
+      );
+      const partTitle = pickText(b["dcndl:partTitle"] ?? b["partTitle"]);
+      // M6: titleTranscription はヨミガナ（series.title_kana の素）。
+      const titleKana = pickText(
+        b["dcndl:titleTranscription"] ??
+          b["titleTranscription"] ??
+          b["dcndl:transcription"],
+      );
+
       out.push({
         isbn13: isbn,
         title: titleRaw,
+        seriesTitle,
+        partTitle,
+        titleKana,
         creators,
         publisher: publisherText,
         issued,
         ndc,
         rawJson: b,
       });
+      manifestationProcessed = true;
     }
   }
   return { total, recs: out };
@@ -332,45 +373,95 @@ function upsertVolume(
   mangakaId: number,
   authorRef: { qid: string | null; name: string },
   rec: NdlRec,
-): { seriesId: number; editionId: number; isbn: string } {
-  // C2 fix: タイトル単独だと同名異作家衝突するので必ず作家識別子を含める。
-  const seriesKey = buildSeriesKey(rec.title, {
+): { seriesId: number; editionId: number; isbn: string; rebound: boolean } {
+  // H1: seriesTitle が取れたら baseTitle より先にそちらを優先する。
+  // dcndl:seriesTitle = "うる星やつら〔新装版〕" のように既にシリーズ束ね用に
+  // 整理されているケースが多く、自前の baseTitle 文字列削りより信頼できる。
+  // ただし seriesTitle にもエディション語が含まれるので classifyEdition は
+  // (title + seriesTitle + partTitle) 合わせて判定する。
+  const editionSourceText = [rec.title, rec.seriesTitle, rec.partTitle]
+    .filter(Boolean)
+    .join(" ");
+  const editionType: EditionType = classifyEdition(editionSourceText);
+
+  // C2 + H1 fix: シリーズキーは「seriesTitle (or baseTitle(title))」+ 著者識別子
+  const titleForKey = rec.seriesTitle ?? rec.title;
+  const seriesKey = buildSeriesKey(titleForKey, {
     qid: authorRef.qid,
     name: authorRef.name,
   });
-  const editionType: EditionType = classifyEdition(rec.title);
+  const seriesDisplay = rec.seriesTitle
+    ? baseTitle(rec.seriesTitle)
+    : baseTitle(rec.title);
+
+  const issuedYear =
+    rec.issued && /^\d{4}/.test(rec.issued) ? Number(rec.issued.slice(0, 4)) : null;
 
   // series upsert
+  // H4: year_started 更新は「standard edition の年」を優先採用。
+  // 単純な MIN だと新装版/完全版だけしか取れない作家で、近年の再販年が
+  // year_started になる事故を防ぐ。standard 以外の年は editions 側の
+  // year_started に格納し、series 側は「standard の MIN」で更新する。
   const existingSeries = db
-    .prepare("SELECT id FROM series WHERE series_key = ?")
-    .get(seriesKey) as { id: number } | undefined;
+    .prepare("SELECT id, year_started, year_ended FROM series WHERE series_key = ?")
+    .get(seriesKey) as
+    | { id: number; year_started: number | null; year_ended: number | null }
+    | undefined;
   let seriesId: number;
   if (existingSeries) {
     seriesId = existingSeries.id;
-    // 開始年は早い方で更新
-    const issuedYear =
-      rec.issued && /^\d{4}/.test(rec.issued) ? Number(rec.issued.slice(0, 4)) : null;
-    if (issuedYear) {
+    if (issuedYear && editionType === "standard") {
+      const newStart =
+        existingSeries.year_started === null
+          ? issuedYear
+          : Math.min(existingSeries.year_started, issuedYear);
+      const newEnd =
+        existingSeries.year_ended === null
+          ? issuedYear
+          : Math.max(existingSeries.year_ended, issuedYear);
       db.prepare(
-        `UPDATE series
-         SET year_started = MIN(COALESCE(year_started, 9999), ?),
-             year_ended   = MAX(COALESCE(year_ended,   0),    ?)
-         WHERE id = ?`,
+        `UPDATE series SET year_started = ?, year_ended = ? WHERE id = ?`,
+      ).run(newStart, newEnd, seriesId);
+    } else if (issuedYear && existingSeries.year_started === null) {
+      // standard が一切来ていない暫定値として埋める（後で standard が来たら上書き）
+      db.prepare(
+        `UPDATE series SET year_started = ?, year_ended = ? WHERE id = ?`,
       ).run(issuedYear, issuedYear, seriesId);
     }
+    // M6 fix: title_kana を取れたら埋める（既に入っていれば残す）
+    if (rec.titleKana) {
+      db.prepare(
+        `UPDATE series SET title_kana = COALESCE(title_kana, ?) WHERE id = ?`,
+      ).run(rec.titleKana, seriesId);
+    }
   } else {
-    const issuedYear =
-      rec.issued && /^\d{4}/.test(rec.issued) ? Number(rec.issued.slice(0, 4)) : null;
     const info = db
       .prepare(
-        `INSERT INTO series (series_key, title, year_started, year_ended)
-         VALUES (?, ?, ?, ?)`,
+        `INSERT INTO series (series_key, title, title_kana, year_started, year_ended)
+         VALUES (?, ?, ?, ?, ?)`,
       )
-      .run(seriesKey, baseTitle(rec.title), issuedYear, issuedYear);
+      .run(
+        seriesKey,
+        seriesDisplay,
+        rec.titleKana,
+        issuedYear,
+        issuedYear,
+      );
     seriesId = Number(info.lastInsertRowid);
   }
 
-  // series_authors upsert
+  // series_authors 紐付け
+  // H2: NDL の creator は「高橋, 留美子」形式があるので、入力名側と
+  // 比較したい場合は normalizeCreatorName で照合。ただし fetch-ndl は
+  // 既に「特定の作家を取りに行っている」ので素直に紐付けて良い。
+  // ここでは creators に target 名が含まれているかを soft-check する。
+  const targetNorm = normalizeCreatorName(authorRef.name);
+  const matched = rec.creators.some(
+    (c) => normalizeCreatorName(c) === targetNorm,
+  );
+  // 一致しなくても紐付けは行う（NDL 側に表記揺れがあっても CQL でヒットした事実を尊重）
+  // ただし sources に matched フラグの代わりに source_name を分けることはしない（運用判断）。
+  void matched;
   db.prepare(
     `INSERT OR IGNORE INTO series_authors (series_id, mangaka_id, role)
      VALUES (?, ?, ?)`,
@@ -378,8 +469,12 @@ function upsertVolume(
 
   // edition upsert
   const existingEdition = db
-    .prepare("SELECT id FROM editions WHERE series_id = ? AND type = ?")
-    .get(seriesId, editionType) as { id: number } | undefined;
+    .prepare(
+      "SELECT id, year_started, year_ended FROM editions WHERE series_id = ? AND type = ?",
+    )
+    .get(seriesId, editionType) as
+    | { id: number; year_started: number | null; year_ended: number | null }
+    | undefined;
   let editionId: number;
   if (existingEdition) {
     editionId = existingEdition.id;
@@ -388,30 +483,67 @@ function upsertVolume(
         `UPDATE editions SET imprint = COALESCE(imprint, ?) WHERE id = ?`,
       ).run(rec.publisher, editionId);
     }
+    if (issuedYear) {
+      const newStart =
+        existingEdition.year_started === null
+          ? issuedYear
+          : Math.min(existingEdition.year_started, issuedYear);
+      const newEnd =
+        existingEdition.year_ended === null
+          ? issuedYear
+          : Math.max(existingEdition.year_ended, issuedYear);
+      db.prepare(
+        `UPDATE editions SET year_started = ?, year_ended = ? WHERE id = ?`,
+      ).run(newStart, newEnd, editionId);
+    }
   } else {
     const info = db
       .prepare(
-        `INSERT INTO editions (series_id, type, label, imprint)
-         VALUES (?, ?, ?, ?)`,
+        `INSERT INTO editions (series_id, type, label, imprint, year_started, year_ended)
+         VALUES (?, ?, ?, ?, ?, ?)`,
       )
-      .run(seriesId, editionType, EDITION_LABELS[editionType], rec.publisher);
+      .run(
+        seriesId,
+        editionType,
+        EDITION_LABELS[editionType],
+        rec.publisher,
+        issuedYear,
+        issuedYear,
+      );
     editionId = Number(info.lastInsertRowid);
   }
 
   // volume upsert
-  const number = extractVolumeNumber(rec.title) ?? 0; // 0 はガイドブック等の特殊ケース
+  // H6: 同じ ISBN を再 fetch して edition_id が変わるケースを silent rebind しない。
+  //   - 既存 row が無ければ挿入
+  //   - 既存 row があり edition_id が違えば warning を返して呼び側でログ
+  //   - 既存 row があり edition_id が同じなら release_date を埋め直す
+  //     (release_date は既存値を優先 = COALESCE(既存, 新))
+  const number = extractVolumeNumber(rec.title) ?? 0; // 0 は外伝・ガイドブック等
   const isExtra = number === 0 ? 1 : 0;
-  db.prepare(
-    `INSERT INTO volumes (edition_id, isbn13, number, is_extra, release_date)
-     VALUES (?, ?, ?, ?, ?)
-     ON CONFLICT(isbn13) DO UPDATE SET
-       edition_id   = excluded.edition_id,
-       number       = excluded.number,
-       is_extra     = excluded.is_extra,
-       release_date = COALESCE(volumes.release_date, excluded.release_date)`,
-  ).run(editionId, rec.isbn13, number, isExtra, rec.issued);
+  const existingVol = db
+    .prepare("SELECT edition_id FROM volumes WHERE isbn13 = ?")
+    .get(rec.isbn13) as { edition_id: number } | undefined;
 
-  return { seriesId, editionId, isbn: rec.isbn13 };
+  let rebound = false;
+  if (!existingVol) {
+    db.prepare(
+      `INSERT INTO volumes (edition_id, isbn13, number, is_extra, release_date)
+       VALUES (?, ?, ?, ?, ?)`,
+    ).run(editionId, rec.isbn13, number, isExtra, rec.issued);
+  } else if (existingVol.edition_id === editionId) {
+    db.prepare(
+      `UPDATE volumes
+       SET number       = ?,
+           is_extra     = ?,
+           release_date = COALESCE(release_date, ?)
+       WHERE isbn13 = ?`,
+    ).run(number, isExtra, rec.issued, rec.isbn13);
+  } else {
+    rebound = true; // edition 移動は黙ってやらない・呼び側で警告ログ
+  }
+
+  return { seriesId, editionId, isbn: rec.isbn13, rebound };
 }
 
 async function main() {
@@ -510,7 +642,14 @@ async function main() {
     tx(db, () => {
       for (const rec of recs) {
         try {
-          upsertVolume(db, mangakaId, { qid, name }, rec);
+          const r = upsertVolume(db, mangakaId, { qid, name }, rec);
+          if (r.rebound) {
+            // H6: edition 切り替わりは silent rebind しない。
+            // sources に new edition の存在を記録しつつ既存 row は据え置き。
+            console.warn(
+              `  [edition-rebind] ISBN=${rec.isbn13} は既存 edition と異なる分類になったため volumes は据え置き。要レビュー。`,
+            );
+          }
           recordSource(db, "ndl", "volumes", rec.isbn13, rec.rawJson);
           inserted++;
         } catch (err) {
