@@ -144,25 +144,49 @@ export function extractVolumeNumber(text: string): number | null {
  * M4 fix: 以前の実装は `[【〔（(].*?[】〕）)]` で全括弧内を削除していたため、
  * "(株)" のような括弧付きタイトル文字列まで巻き込んで壊した。今は
  *   「括弧の中にエディション語が含まれているとき**だけ**」削除する。
+ *
+ * NDL/MARC 由来の表記揺れ対策（実走で発覚した分）:
+ *   - 末尾 `.` (NDL/MARC が必ず付ける終止符) を剥がす
+ *     → "犬夜叉." と "犬夜叉" を同一シリーズに
+ *   - `: <subtitle>` (英語タイトル / シリーズ副題) を剥がす
+ *     → "境界のRINNE : Circle Of Reincarnation" → "境界のRINNE"
+ *   - `= <english title>` (併記された英語タイトル) を剥がす
+ *     → "うる星やつら ... = Urusei Yatsura ..." → "うる星やつら ..."
+ *   - `, no.` / `. vol.` / `. v.` / `. no.` の連番表記を剥がす
+ *     → "うる星やつら. no." → "うる星やつら"
+ *     → "1ポンドの福音. v. 2" → "1ポンドの福音"
  */
 const EDITION_TOKENS_INSIDE_BRACKETS =
   /[【〔（(][^】〕）)]*(完全版|文庫版|文庫|新装版|愛蔵版|ワイド版|カバーリニューアル|リニューアル|限定版)[^】〕）)]*[】〕）)]/g;
 
 export function baseTitle(text: string): string {
   let t = text.normalize("NFKC");
-  // 巻番号の括弧表記（純粋に数字だけのもの）
+
+  // 1) 「= 英語タイトル」併記を切る (= の前後にスペース必須)
+  t = t.replace(/\s+=\s+.*$/, "");
+
+  // 2) 「: サブタイトル」を切る (NDL の ISBD 慣用区切り)
+  t = t.replace(/\s+:\s+.*$/, "");
+
+  // 3) NDL/MARC の連番表記 (`, no.` `. vol.` `. v.` `. no.` 等)
+  //    数字が後ろに付く/付かない両方をカバー。
+  t = t.replace(/\s*[.,]\s*(no|vol|v)\.?\s*\d*\s*$/i, "");
+
+  // 4) 巻番号の括弧表記
   t = t.replace(/[（(]\d{1,3}[)）]/g, "");
-  // 「第N巻」
+  // 5) 「第N巻」
   t = t.replace(/第\s*\d{1,3}\s*巻/g, "");
-  // 括弧の中にエディション語があるパターンを優先して削除
+  // 6) 括弧の中にエディション語があるパターンを優先して削除
   t = t.replace(EDITION_TOKENS_INSIDE_BRACKETS, "");
-  // 裸（括弧外）に書かれたエディション語も削除
+  // 7) 裸（括弧外）に書かれたエディション語も削除
   t = t.replace(
     /(完全版|文庫版|新装版|愛蔵版|ワイド版|カバーリニューアル|リニューアル|限定版)/g,
     "",
   );
-  // 末尾の独立した数字（西暦と紛れる場合は extractVolumeNumber 側で対応済み）
+  // 8) 末尾の独立した数字（西暦と紛れる場合は extractVolumeNumber 側で対応済み）
   t = t.replace(/\s*\d{1,3}\s*$/, "");
+  // 9) 末尾の punctuation / 空白を全部剥がす（NDL の終止符 "." を含む）
+  t = t.replace(/[\s.,:;]+$/, "");
   return t.trim().replace(/\s+/g, " ");
 }
 

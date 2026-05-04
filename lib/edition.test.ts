@@ -90,6 +90,55 @@ describe("baseTitle / normalizeSeriesKey", () => {
     expect(baseTitle("BLEACH【完全版】 1")).toBe("BLEACH");
     expect(baseTitle("デスノート〔文庫版〕 第3巻")).toBe("デスノート");
   });
+
+  // 実走で発覚した NDL/MARC 表記揺れの取りこぼし対策
+  it("strips NDL/MARC trailing period", () => {
+    expect(baseTitle("犬夜叉.")).toBe("犬夜叉");
+    expect(baseTitle("MAO.")).toBe("MAO");
+    expect(baseTitle("うる星やつら.")).toBe("うる星やつら");
+  });
+
+  it("strips ': subtitle' (NDL ISBD subtitle separator)", () => {
+    expect(baseTitle("境界のRINNE : Circle Of Reincarnation")).toBe(
+      "境界のRINNE",
+    );
+    expect(baseTitle("Pの悲劇 : 高橋留美子傑作集")).toBe("Pの悲劇");
+    expect(baseTitle("うる星やつら : TVアニメ版")).toBe("うる星やつら");
+    expect(baseTitle("うる星やつら : ラム&幼なじみセレクション")).toBe(
+      "うる星やつら",
+    );
+  });
+
+  it("strips '= english title' parallel-title", () => {
+    expect(
+      baseTitle(
+        "うる星やつらパーフェクト★カラーエディション = Urusei Yatsura Perfect Color Edition",
+      ),
+    ).toBe("うる星やつらパーフェクト★カラーエディション");
+  });
+
+  it("strips trailing numbering markers (. v. / . vol. / . no. / , no.)", () => {
+    expect(baseTitle("1ポンドの福音. v.")).toBe("1ポンドの福音");
+    expect(baseTitle("1ポンドの福音. vol.")).toBe("1ポンドの福音");
+    expect(baseTitle("1ポンドの福音. v. 2")).toBe("1ポンドの福音");
+    expect(baseTitle("うる星やつら. no.")).toBe("うる星やつら");
+    expect(baseTitle("うる星やつら, no. 5")).toBe("うる星やつら");
+  });
+
+  it("merges all NDL variants of one title to a single base", () => {
+    const expected = "うる星やつら";
+    const variants = [
+      "うる星やつら",
+      "うる星やつら.",
+      "うる星やつら〔新装版〕（1）",
+      "うる星やつら : 復刻box",
+      "うる星やつら 完全版 第3巻",
+      "うる星やつら. no.",
+    ];
+    for (const v of variants) {
+      expect(baseTitle(v)).toBe(expected);
+    }
+  });
 });
 
 describe("buildSeriesKey (C2 fix)", () => {

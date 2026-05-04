@@ -275,6 +275,11 @@ function parseRecords(xml: string): { total: number; recs: NdlRec[] } {
   const recordList = asArray((records["record"] as unknown) as unknown);
 
   const out: NdlRec[] = [];
+  // Issue 1: NDL は同一 ISBN について複数の目録レコード (NDL/NACSIS/JLA 等)
+  // を返すことがある。タイトル文字列が微妙に違って、後段の classifyEdition
+  // で edition_type がブレる結果 [edition-rebind] 警告が同じ ISBN について
+  // 何度も出る。レスポンス内で先勝ち dedup する。
+  const seenIsbn = new Set<string>();
   for (const r of recordList) {
     const rd = (r as Record<string, unknown>)["recordData"] as
       | Record<string, unknown>
@@ -305,6 +310,14 @@ function parseRecords(xml: string): { total: number; recs: NdlRec[] } {
       );
       const isbn = extractIsbn13FromIdentifiers(idNodes);
       if (!isbn) continue; // ISBN 無しは Work レベルか UI 用としては不要
+      if (seenIsbn.has(isbn)) {
+        // 同一レスポンス内で重複した ISBN は最初の 1 件だけ採用。
+        // 同 record 内でなく別 record に同 ISBN が入る (典型: NDL 蔵書版と
+        // 全国書誌版で同じ書籍を別々に登録) ケースに対応。
+        manifestationProcessed = true;
+        break;
+      }
+      seenIsbn.add(isbn);
 
       const creatorNodes = asArray(
         (b["dcterms:creator"] ?? b["dc:creator"] ?? b["creator"]) as unknown,
@@ -781,9 +794,17 @@ async function main() {
   }
 
   const query = adoptedQuery; // 以降の page ループで使い回す
-  let total = adoptedTotal;
+  // Issue 2: total は probe 時点の値を保持する。page ループで「最終ページが
+  // 0 件」を返した瞬間に上書きされるのを防ぐ（NDL は超過 startRecord で
+  // numberOfRecords=0 を返すことがある）。
+  const totalReported = adoptedTotal;
   let fetched = 0;
   let inserted = 0;
+  let reboundCount = 0;
+  // Issue 1: クロスページの ISBN 重複も dedup する。parseRecords 側で
+  // 同一レスポンス内の重複は弾いているが、ページをまたいで同じ ISBN が
+  // 出ることもあるため belt-and-suspenders。
+  const seenIsbnAcrossPages = new Set<string>();
 
   for (let page = 0; page < args.maxPages; page++) {
     const startRecord = page * PAGE_SIZE + 1;
@@ -804,22 +825,31 @@ async function main() {
       "utf8",
     );
     const { total: tot, recs } = parseRecords(xml);
-    total = tot;
     fetched += recs.length;
     console.log(
-      `${recs.length} records (total reported: ${total})`,
+      `${recs.length} records (page reported total: ${tot}; running total: ${totalReported})`,
     );
 
     tx(db, () => {
       for (const rec of recs) {
+        if (seenIsbnAcrossPages.has(rec.isbn13)) continue;
+        seenIsbnAcrossPages.add(rec.isbn13);
         try {
           const r = upsertVolume(db, mangakaId, { qid, name }, rec);
           if (r.rebound) {
+            reboundCount++;
             // H6: edition 切り替わりは silent rebind しない。
             // sources に new edition の存在を記録しつつ既存 row は据え置き。
-            console.warn(
-              `  [edition-rebind] ISBN=${rec.isbn13} は既存 edition と異なる分類になったため volumes は据え置き。要レビュー。`,
-            );
+            // 連発するとログを汚すので最初の 5 件だけ詳細表示し、後はカウンタ。
+            if (reboundCount <= 5) {
+              console.warn(
+                `  [edition-rebind] ISBN=${rec.isbn13} 既存 edition と異なる分類。volumes 据え置き。`,
+              );
+            } else if (reboundCount === 6) {
+              console.warn(
+                `  [edition-rebind] (以後の rebind は省略・summary に総数を表示)`,
+              );
+            }
           }
           recordSource(db, "ndl", "volumes", rec.isbn13, rec.rawJson);
           inserted++;
@@ -833,14 +863,15 @@ async function main() {
       }
     });
 
-    if (fetched >= total || recs.length === 0) break;
+    if (fetched >= totalReported || recs.length === 0) break;
   }
 
   console.log("\n=== fetch:ndl summary ===");
-  console.log(`  作家      : ${name} (${qid ?? "no-qid"})`);
-  console.log(`  total reported: ${total}`);
-  console.log(`  fetched   : ${fetched}`);
-  console.log(`  upserted  : ${inserted} volumes`);
+  console.log(`  作家       : ${name} (${qid ?? "no-qid"})`);
+  console.log(`  total reported : ${totalReported}`);
+  console.log(`  fetched    : ${fetched}`);
+  console.log(`  upserted   : ${inserted} volumes`);
+  console.log(`  rebinds    : ${reboundCount} (edition 分類が後から変わった ISBN)`);
 
   const seriesRows = db
     .prepare(
