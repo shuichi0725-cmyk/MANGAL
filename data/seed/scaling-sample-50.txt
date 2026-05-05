@@ -1,0 +1,75 @@
+# 50-mangaka stride sample for adult-detection scaling tests.
+#
+# Generated 2026-05-05 by deterministic stride sampling (every 135th row of
+# data/seed/mangaka.csv starting at row 1, ending at row 6750). All 50 entries
+# have has_adult_credit=false in Wikidata, which is exactly the population we
+# want to evaluate: Fix C's wikipedia_adult_mangaka_list and
+# adult_publisher_imprint signals must catch adult-leaning authors that
+# Wikidata's hentai-genre credit alone misses.
+#
+# Notable canaries inside the sample:
+#   Q8979654  倉科遼      adult-imprint signal (千牙超 / 愛川リコ for 白夜書房 etc.)
+#   Q1610292  氏賀Y太     mangaka_list + imprint (guro / horror, often adult)
+#   Q351105   花輪和一    false-positive control (alt comix, NOT adult)
+#   Q1269354  幸村誠      mainstream control (Vinland Saga)
+#   Q11667875 馬場康夫    name-collision risk (filmmaker vs mangaka)
+#
+# To run via GitHub Actions:
+#   1. Open .github/workflows/bulk-promote-test.yml in the Actions UI
+#   2. Click "Run workflow"
+#   3. Paste the QIDs below (whitespace-joined) into the qids input:
+#        tr '\n' ' ' < data/seed/scaling-sample-50.txt | grep -v '^#'
+#   4. Set max_pages=2 (50 mangaka × 2 pages keeps total runtime under ~1h)
+#
+# Lines starting with # are comments; one QID per line otherwise.
+
+Q11256217
+Q19800772
+Q16263931
+Q11261320
+Q38276629
+Q17219294
+Q11269879
+Q28686529
+Q11275004
+Q11277050
+Q11279033
+Q11280522
+Q11607404
+Q11373650
+Q52319792
+Q11552493
+Q351105
+Q6862804
+Q11362552
+Q11537243
+Q841889
+Q1269354
+Q85884671
+Q62018805
+Q11537760
+Q11468044
+Q1610292
+Q11458291
+Q11461209
+Q2447034
+Q9201154
+Q11583507
+Q275108
+Q17210109
+Q110911354
+Q8979654
+Q11434722
+Q11632863
+Q11365905
+Q11381601
+Q11577423
+Q11622622
+Q34633787
+Q11667875
+Q3234503
+Q11591228
+Q11401937
+Q11547757
+Q11492496
+Q3538236
