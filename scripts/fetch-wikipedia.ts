@@ -129,51 +129,12 @@ async function fetchWikitext(title: string): Promise<string | null> {
 }
 
 /**
- * `{{Infobox 漫画 ...}}` テンプレートブロックを wikitext から抽出。
- * `{{` `}}` のネスト balance を追って終端を見つけ、内部の `| key = value`
- * 列を Map に変換する。複数の Infobox が並ぶ記事 (Infobox Animanga + 漫画)
- * は最初の漫画系 Infobox を採用。
+ * 1 つの infobox body から `| key = value` ペアを取り出す内部ヘルパ。
+ * ネストしたテンプレ ({{...}}) や [[wikilink]] の中の `|` は区切りと
+ * 誤認しないように、depth>0 の中の `|` は無視する。
  */
-function extractInfoboxFields(wikitext: string): Map<string, string> {
+function parseInfoboxBody(body: string): Map<string, string> {
   const fields = new Map<string, string>();
-  // 漫画関連の Infobox 名（Wikipedia ja で実在するもの）
-  const candidates = [
-    "Infobox 漫画",
-    "Infobox Animanga/Manga",
-    "Infobox 文学作品",
-  ];
-  let body: string | null = null;
-  for (const name of candidates) {
-    const startIdx = wikitext.indexOf(`{{${name}`);
-    if (startIdx < 0) continue;
-    // ネストしたブレースを balance match
-    let depth = 0;
-    let i = startIdx;
-    let endIdx = -1;
-    while (i < wikitext.length) {
-      if (wikitext[i] === "{" && wikitext[i + 1] === "{") {
-        depth++;
-        i += 2;
-      } else if (wikitext[i] === "}" && wikitext[i + 1] === "}") {
-        depth--;
-        i += 2;
-        if (depth === 0) {
-          endIdx = i;
-          break;
-        }
-      } else {
-        i++;
-      }
-    }
-    if (endIdx > startIdx) {
-      body = wikitext.slice(startIdx + 2 + name.length, endIdx - 2);
-      break;
-    }
-  }
-  if (!body) return fields;
-
-  // ネストしたテンプレ ({{...}}) や [[wikilink]] の中の `|` を区切りと
-  // 誤認しないように、1 文字ずつ走査して depth>0 の中の `|` は無視。
   let depth = 0;
   let buf = "";
   const segments: string[] = [];
@@ -200,13 +161,77 @@ function extractInfoboxFields(wikitext: string): Map<string, string> {
     buf += c;
   }
   if (buf) segments.push(buf);
-
   for (const seg of segments) {
     const eq = seg.indexOf("=");
     if (eq < 0) continue;
     const key = seg.slice(0, eq).trim();
     const value = seg.slice(eq + 1).trim();
     if (key) fields.set(key, value);
+  }
+  return fields;
+}
+
+/**
+ * `{{Infobox ...}}` テンプレートブロックを wikitext から **すべて** 抽出して
+ * fields を merge する。漫画記事は複数の Infobox を併用する事が多い:
+ *   - {{Infobox animanga/Header}}     - タイトル / ふりがな
+ *   - {{Infobox animanga/Print}}      - 漫画情報（掲載誌/ジャンル/出版社）
+ *   - {{Infobox animanga/Footer}}     - 締め
+ *   - {{Infobox 漫画}}                - 旧 schema
+ *   - {{Infobox Animanga/Manga}}      - 別表記
+ *   - {{Infobox 文学作品}}            - 例外
+ * 複数で同一 key が見つかった場合は **先勝ち**（Header → Print の順）。
+ */
+function extractInfoboxFields(wikitext: string): Map<string, string> {
+  const fields = new Map<string, string>();
+  const candidates = [
+    "Infobox animanga/Header",
+    "Infobox animanga/Print",
+    "Infobox animanga/Manga",
+    "Infobox Animanga/Manga",
+    "Infobox 漫画",
+    "Infobox 文学作品",
+  ];
+
+  for (const name of candidates) {
+    let searchFrom = 0;
+    while (searchFrom < wikitext.length) {
+      const startIdx = wikitext.indexOf(`{{${name}`, searchFrom);
+      if (startIdx < 0) break;
+      // テンプレ名の直後が `|` か `\n` か `}` であることを確認
+      // (例えば "Infobox 漫画" が "Infobox 漫画家" にマッチしないように)
+      const after = wikitext[startIdx + 2 + name.length];
+      if (after && !/[|\s}]/.test(after)) {
+        searchFrom = startIdx + 1;
+        continue;
+      }
+      // ネストブレースを balance match
+      let depth = 0;
+      let i = startIdx;
+      let endIdx = -1;
+      while (i < wikitext.length) {
+        if (wikitext[i] === "{" && wikitext[i + 1] === "{") {
+          depth++;
+          i += 2;
+        } else if (wikitext[i] === "}" && wikitext[i + 1] === "}") {
+          depth--;
+          i += 2;
+          if (depth === 0) {
+            endIdx = i;
+            break;
+          }
+        } else {
+          i++;
+        }
+      }
+      if (endIdx <= startIdx) break;
+      const body = wikitext.slice(startIdx + 2 + name.length, endIdx - 2);
+      const parsed = parseInfoboxBody(body);
+      for (const [k, v] of parsed) {
+        if (!fields.has(k) && v) fields.set(k, v); // 先勝ち
+      }
+      searchFrom = endIdx;
+    }
   }
   return fields;
 }
@@ -238,23 +263,27 @@ function pickYear(s: string): number | null {
 }
 
 /**
- * 記事冒頭の "犬夜叉（いぬやしゃ）" / "犬夜叉(イヌヤシャ)" のような
- * パターンから読み仮名を抽出。
+ * 記事冒頭の "犬夜叉（いぬやしゃ）" / "「犬夜叉」（いぬやしゃ）" /
+ * "『1ポンドの福音』（いちポンドのふくいん）" のような複数のカッコ表現に
+ * 対応した読み仮名抽出。タイトル直後に `』` `」` 等の閉じカギや空白が
+ * 入っても許容する。
  */
 function extractReadingFromExtract(
   extract: string,
   title: string,
 ): string | null {
   if (!extract) return null;
-  // 記事冒頭の最初の行で title 直後の括弧を取る
   const first = extract.split(/\n/)[0] ?? extract;
   const escTitle = title.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-  const re = new RegExp(`${escTitle}\\s*[（(]([^）)]+)[）)]`);
+  // タイトルの後ろに 』」』 等の閉じ記号や空白を許容してから、開きカッコを探す。
+  const re = new RegExp(
+    `${escTitle}[』」"'\\s]*[（(]([^）)]+)[）)]`,
+  );
   const m = first.match(re);
   if (!m) return null;
-  // 読み部分は「いぬやしゃ、〜」のように複数の語が混じることがある。
-  // 先頭の連続したかな/カナ部分だけ採用。
   const cap = m[1].trim();
+  // 読み部分は「いぬやしゃ、〜」のように複数語が混じることがあるので
+  // 先頭の連続したかな/カナ/長音だけ採用。
   const kanaOnly = cap.match(/^[぀-ゟ゠-ヿー]+/);
   return kanaOnly ? kanaOnly[0] : null;
 }
@@ -426,9 +455,19 @@ async function main() {
     const genresStr = stripWikitext(fields.get("ジャンル") ?? "");
     const genreKeys = mapGenres(genresStr, masters.genre);
     const synopsis = (summary.extract || "").slice(0, 800);
+    // 「発表期間」 = "1987年 - 2007年" 形式 (Infobox animanga/Print) を分解。
+    // それ以外は「開始号」「終了号」「開始日」「終了日」を個別に拾う。
+    const periodText = stripWikitext(
+      fields.get("発表期間") ?? fields.get("発表号") ?? "",
+    );
+    const periodYears = periodText
+      ? Array.from(periodText.matchAll(/(\d{4})/g)).map((m) => Number(m[1]))
+      : [];
     const yearStart =
+      periodYears[0] ??
       pickYear(stripWikitext(fields.get("開始号") ?? fields.get("開始日") ?? ""));
     const yearEnd =
+      (periodYears.length >= 2 ? periodYears[periodYears.length - 1] : null) ??
       pickYear(stripWikitext(fields.get("終了号") ?? fields.get("終了日") ?? ""));
 
     tx(db, () => {
