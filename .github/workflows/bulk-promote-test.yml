@@ -100,6 +100,11 @@ jobs:
       - name: Run promote:bulk (drafts to data/manga/_drafts/)
         run: npm run promote:bulk
 
+      - name: DB adult report (post-promote, scores + signals)
+        # promote:bulk が adult_score / adult_signals を埋めた後の結果を観察。
+        # ここで「どの series がどの signal で skip されたか」が workflow log に残る。
+        run: npm run db:report -- --adult
+
       - name: Count + list drafts produced
         run: |
           COUNT=$(ls -1 data/manga/_drafts/ 2>/dev/null | wc -l)
