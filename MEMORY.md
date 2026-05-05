@@ -14,7 +14,8 @@
 ## 主要ファイル
 
 - `db/schema.sql`: 現行 schema_version = 5 (Phase 5 prep で 4 → 5: amazon_metadata 追加)
-- `scripts/promote-bulk.ts`: NDL → series/editions 自動 promote。adult 検出ロジック (`computeAdultScore`) 含む
+- `scripts/promote-bulk.ts`: NDL → series/editions 自動 promote。adult 検出は `lib/adult-score.ts` 経由
+- `lib/adult-score.ts`: `computeAdultScore` の純関数実装 + 19 件の unit test (`lib/adult-score.test.ts`)
 - `scripts/fetch-adult-lists.ts`: JA Wikipedia から adult publishers / mangaka リスト取得 (Fix C)
 - `scripts/fetch-ndl.ts`, `scripts/fetch-wikidata.ts`: 既存の主要 fetcher
 - `lib/edition.ts`: `normalizeCreatorName`, `matchAdultPublisher` 等の utility
@@ -23,15 +24,15 @@
 
 ## 現在の adult 検出設計 (Fix C, 2026-05 完成)
 
-`computeAdultScore` は 3 signal (additive、threshold = 3) で判定:
+`lib/adult-score.ts` の `computeAdultScore` (純関数。 unit test は `lib/adult-score.test.ts` に 19 ケース) が 3 signal を additive 合算 (threshold = 3 で skip):
 
 | Signal | Source | Weight |
 |---|---|---|
-| `wikidata_hentai_credit` | mangaka.has_adult_credit (Wikidata P136=Q172241) | +3 |
+| `wikidata_hentai_credit` | mangaka.has_adult_credit (Wikidata P136=Q172241) | +2 |
 | `wikipedia_adult_mangaka_list` | adult_mangaka_known テーブル (Wikipedia「日本の成人向け漫画家の一覧」) | +2 |
 | `adult_publisher_imprint` | adult_publishers テーブルとの imprint マッチ (Wikipedia「成人向け漫画雑誌の一覧」+ manual seed) | +3 |
 
-**`adult_score >= 3` で promote-bulk が draft skip**。試金石 run #11 (qids=Q193300 Q1121064) で:
+Option B 設計: 作家シグナルのみ (2 or 4) では threshold に届かない/届くで線を引き、出版社シグナル (+3) は単独で確定とする。**`adult_score >= 3` で promote-bulk が draft skip**。試金石 run #11 (qids=Q193300 Q1121064) で:
 
 - 唯登詩樹 ジャンクション/Uma・uma (白夜書房) → score=5 → skip ✅
 - 唯登詩樹 集英社/講談社 一般作品 (Kirara, Yui shop, ボクのふたつの翼 等) → score=2 → drafted ✅

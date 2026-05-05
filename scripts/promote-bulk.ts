@@ -31,11 +31,10 @@ import { openDb, tx, type DB } from "./_db";
 import { MangaSchema } from "../lib/schema";
 import {
   EDITION_LABELS,
-  matchAdultPublisher,
-  normalizeCreatorName,
   slugFromTitle,
   type EditionType,
 } from "../lib/edition";
+import { computeAdultScore } from "../lib/adult-score";
 import { readKanaFromTitle } from "../lib/kana";
 
 type Args = {
@@ -126,75 +125,6 @@ function loadAdultMangakaSet(db: DB): Set<string> {
     .prepare("SELECT name FROM adult_mangaka_known")
     .all() as { name: string }[];
   return new Set(rows.map((r) => r.name));
-}
-
-/**
- * Fix C: 多層 adult signal で series の adult_score を計算。
- * 戻り値: { score, signals } — signals は (signal, weight, evidence) のリスト
- */
-function computeAdultScore(input: {
-  hasWikidataCredit: boolean;
-  authorName: string;
-  imprints: string[];
-  knownAdultMangaka: ReadonlySet<string>;
-  knownAdultPublishers: ReadonlySet<string>;
-}): {
-  score: number;
-  signals: Array<{ signal: string; weight: number; evidence: string }>;
-} {
-  let score = 0;
-  const signals: Array<{ signal: string; weight: number; evidence: string }> =
-    [];
-
-  // 重み設計（Option B: 作家シグナルだけでは skip しない）
-  //   wikidata_hentai_credit       : 2  ← 作家全体に hentai クレジットがあっても、
-  //                                       同じ作家が一般青年誌で描いた作品まで巻き込まないように
-  //                                       単独では threshold(3) に届かないようにする
-  //   wikipedia_adult_mangaka_list : 2  ← 同上
-  //   adult_publisher_imprint      : 3  ← 出版社/レーベルが成人系なら作品単位で確定
-  //
-  // 結果:
-  //   - 作家シグナルのみ           : score = 2 → drafted
-  //   - 出版社シグナルのみ         : score = 3 → skip
-  //   - 作家 + 出版社              : score = 5 → skip（強い確証）
-  //   - 作家両方ヒット (Wikidata + Wiki list) : score = 4 → skip
-  //
-  // 1. Wikidata の hentai-genre クレジット（mangaka.has_adult_credit=1）
-  if (input.hasWikidataCredit) {
-    score += 2;
-    signals.push({
-      signal: "wikidata_hentai_credit",
-      weight: 2,
-      evidence: input.authorName,
-    });
-  }
-
-  // 2. 既知の成人向け漫画家リスト（Wikipedia 由来）に名前一致
-  const norm = normalizeCreatorName(input.authorName);
-  if (norm && input.knownAdultMangaka.has(norm)) {
-    score += 2;
-    signals.push({
-      signal: "wikipedia_adult_mangaka_list",
-      weight: 2,
-      evidence: input.authorName,
-    });
-  }
-
-  // 3. imprint が既知の成人系出版社に部分一致
-  for (const imprint of input.imprints) {
-    const matched = matchAdultPublisher(imprint, input.knownAdultPublishers);
-    if (matched) {
-      score += 3;
-      signals.push({
-        signal: "adult_publisher_imprint",
-        weight: 3,
-        evidence: `${imprint} ⟵ ${matched}`,
-      });
-      break; // 同一シリーズ内で複数 imprint が当たっても 1 回だけ加算
-    }
-  }
-
-  return { score, signals };
 }
 
 type SeriesRow = {
