@@ -45,6 +45,28 @@ describe("extractVolumeNumber", () => {
     expect(extractVolumeNumber("うる星やつら パーフェクトカラーエディション 上")).toBeNull();
     expect(extractVolumeNumber("うる星やつら ガイドブック")).toBeNull();
   });
+
+  it("does not extract a digit glued to the title body as a volume number", () => {
+    // 「アバンチュール21」の "21" は作品名の一部であって巻番号ではない。
+    // 直前が文字 "ル" (空白なし) なので m3/m4 の \s 境界要求で棄却される。
+    expect(extractVolumeNumber("アバンチュール21")).toBeNull();
+    expect(extractVolumeNumber("ロボット8号")).toBeNull();
+    // 一方、空白で区切られていれば従来どおり巻番号として採用
+    expect(extractVolumeNumber("アバンチュール 21")).toBe(21);
+  });
+
+  it("extracts bare 'N巻' (without 第 prefix)", () => {
+    // m2b: タイトル中の "5巻" "24巻" を巻番号として採用 (実走 NDL 由来)
+    expect(extractVolumeNumber("犬夜叉 5巻")).toBe(5);
+    expect(extractVolumeNumber("犬夜叉. 24巻")).toBe(24);
+    expect(extractVolumeNumber("ONE PIECE 109巻")).toBe(109);
+  });
+
+  it("extracts middle digit from ISBD '. N (subtitle)' form", () => {
+    // "Kirara. 1 (夢じゃない)" のような形式 → m4 が中間 "1" を拾う
+    expect(extractVolumeNumber("Kirara. 1 (夢じゃない)")).toBe(1);
+    expect(extractVolumeNumber("Kirara. 6 (元気でね!!)")).toBe(6);
+  });
 });
 
 describe("classifyEdition (M5: scoring-based)", () => {
@@ -182,6 +204,17 @@ describe("baseTitle / normalizeSeriesKey", () => {
   it("does NOT strip '. <subtitle>' when preceded by a Latin char", () => {
     // Dr. House / J. K. ローリング 等を巻き込まない
     expect(baseTitle("Dr. House")).toBe("Dr. House");
+  });
+
+  it("strips ISBD '<title>. N (<subtitle>)' (Yui Toshiki / Kirara case)", () => {
+    // NDL の ISBD 慣用形式。タイトル直前が Latin (Rule 10 では取れない) でも、
+    // `. N (...)` という形なら明確に「巻番号 + 副題」と判定して剥がす。
+    expect(baseTitle("Kirara. 1 (夢じゃない)")).toBe("Kirara");
+    expect(baseTitle("Kirara. 2 (未来の想い出)")).toBe("Kirara");
+    expect(baseTitle("Kirara. 3 (この人だ~れ!?)")).toBe("Kirara");
+    expect(baseTitle("Kirara. 6 (元気でね!!)")).toBe("Kirara");
+    // 数字が無い `. (副題)` は対象外（タイトル本体の括弧扱い）
+    expect(baseTitle("Some Title (annotation)")).toBe("Some Title (annotation)");
   });
 
   it("preserves a year suffix that looks like a volume number", () => {
