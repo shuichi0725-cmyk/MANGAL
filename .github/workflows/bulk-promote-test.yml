@@ -64,6 +64,12 @@ jobs:
       - name: Import mangaka CSV (full)
         run: npm run db:import:mangaka
 
+      - name: Fetch adult publisher / mangaka lists from JA Wikipedia (Fix C)
+        # 成人向け漫画雑誌の一覧 + 日本の成人向け漫画家の一覧 を 2 リクエストで
+        # 取得して adult_publishers / adult_mangaka_known を seed する。
+        # promote:bulk が adult_score を計算する前提データ。
+        run: npm run fetch:adult-lists
+
       - name: Fetch NDL for each mangaka QID
         run: |
           INCLUDE_FLAG=()

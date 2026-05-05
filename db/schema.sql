@@ -20,7 +20,7 @@ CREATE TABLE IF NOT EXISTS meta (
   value TEXT NOT NULL
 );
 INSERT OR IGNORE INTO meta (key, value) VALUES
-  ('schema_version', '3'),
+  ('schema_version', '4'),
   ('created_at', strftime('%Y-%m-%dT%H:%M:%SZ', 'now'));
 
 -- M3: publishers / magazines は data/*.yml が source-of-truth だが、
@@ -133,12 +133,32 @@ CREATE TABLE IF NOT EXISTS sources (
 -- レビューでも「どの signal が誤検出を起こしているか」が一目で分かる。
 CREATE TABLE IF NOT EXISTS adult_signals (
   series_id INTEGER NOT NULL,
-  signal    TEXT NOT NULL,    -- "label_blacklist" / "publisher_blacklist" / "ndl_subject" / "title_keyword" / "isbn_prefix" / "wikidata_genre" など
+  signal    TEXT NOT NULL,    -- "wikidata_hentai_credit" / "wikipedia_adult_mangaka_list" / "adult_publisher_imprint" / "title_keyword" / "isbn_prefix" など
   weight    INTEGER NOT NULL, -- このシグナルが寄与したスコア
   evidence  TEXT,             -- 何が当たったかの根拠（マッチした単語・該当 ISBN 接頭辞 等）
   fetched_at TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%SZ', 'now')),
   PRIMARY KEY (series_id, signal),
   FOREIGN KEY (series_id) REFERENCES series(id) ON DELETE CASCADE
+);
+
+-- Fix C (2026-05): Wikipedia 由来の「既知の成人系出版社・レーベル」シード。
+-- imprint 文字列に substring match させて adult_score を加算する。
+-- scripts/fetch-adult-lists.ts が JA Wikipedia 「成人向け漫画雑誌の一覧」を
+-- パースして seed する。手動追加は source='manual' で書き込む運用。
+CREATE TABLE IF NOT EXISTS adult_publishers (
+  name        TEXT PRIMARY KEY,    -- 出版社/レーベル名 (NFKC 正規化済)
+  source      TEXT NOT NULL,        -- 'wikipedia_adult_magazines' or 'manual'
+  fetched_at  TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%SZ', 'now'))
+);
+
+-- Fix C: Wikipedia 由来の「既知の成人向け漫画家リスト」シード。
+-- mangaka.name (および alt_names) と NFKC 正規化後の文字列で照合。
+-- Wikidata の P136=Q172241 で取れない作家 (例: 唯登詩樹) を補完する。
+CREATE TABLE IF NOT EXISTS adult_mangaka_known (
+  name        TEXT PRIMARY KEY,    -- NFKC 正規化済 (空白・記号・カンマ除去)
+  display     TEXT NOT NULL,       -- 元表記 (UI 表示・デバッグ用)
+  source      TEXT NOT NULL,        -- 'wikipedia_adult_mangaka_list' or 'manual'
+  fetched_at  TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%SZ', 'now'))
 );
 
 -- L4: ASIN は ISBN-13 と 1:N（ロケール別・楽天/Amazon 出品差異など）。

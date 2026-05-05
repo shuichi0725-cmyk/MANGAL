@@ -422,6 +422,28 @@ export function buildCreatorClause(names: string[]): string {
   return `(${uniq.map((n) => `creator="${escapeCql(n)}"`).join(" OR ")})`;
 }
 
+/**
+ * imprint 文字列が「既知の成人系出版社」リストにマッチするかを判定する純関数。
+ *   - 完全一致（NFKC 正規化後）
+ *   - imprint がリスト内のいずれかの名前を **substring として含む** 場合もマッチ
+ *     (例: imprint "茜新社コミックス" / "白夜書房 メディアックス" 等の派生表記)
+ * 試金石レベルでは false-positive より false-negative を防ぐ方を優先する
+ * （Amazon ToS 違反より誤掲載の方がリスク高いため）。誤検出が出たら
+ * 個別 series で `adult_score` を override する運用。
+ */
+export function matchAdultPublisher(
+  imprint: string | null | undefined,
+  knownAdult: ReadonlySet<string>,
+): string | null {
+  if (!imprint) return null;
+  const norm = imprint.normalize("NFKC");
+  if (knownAdult.has(norm)) return norm;
+  for (const name of knownAdult) {
+    if (norm.includes(name)) return name;
+  }
+  return null;
+}
+
 function isbn10to13(isbn10: string): string | null {
   if (isbn10.length !== 10) return null;
   const body = "978" + isbn10.slice(0, 9);

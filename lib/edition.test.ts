@@ -6,6 +6,7 @@ import {
   classifyEdition,
   escapeCql,
   extractVolumeNumber,
+  matchAdultPublisher,
   normalizeIsbn13,
   normalizeReleaseDate,
   normalizeSeriesKey,
@@ -378,5 +379,32 @@ describe("slugFromTitle", () => {
     const longKana = "あ".repeat(80); // toRomaji → "a" × 80
     const s = slugFromTitle("X", { kana: longKana });
     expect(s.length).toBeLessThanOrEqual(60);
+  });
+});
+
+describe("matchAdultPublisher (Fix C: adult-publisher imprint detection)", () => {
+  const known = new Set(["白夜書房", "茜新社", "コアマガジン", "ティーアイネット"]);
+
+  it("matches exact imprint", () => {
+    expect(matchAdultPublisher("白夜書房", known)).toBe("白夜書房");
+    expect(matchAdultPublisher("茜新社", known)).toBe("茜新社");
+  });
+
+  it("matches imprint that contains a known adult name as substring", () => {
+    // NDL の imprint には "茜新社コミックス" / "白夜書房 メディアックス" のような
+    // 派生表記が出るので、含有マッチが必要。
+    expect(matchAdultPublisher("茜新社コミックス", known)).toBe("茜新社");
+    expect(matchAdultPublisher("白夜書房 メディアックス", known)).toBe("白夜書房");
+  });
+
+  it("does not match unrelated imprint", () => {
+    expect(matchAdultPublisher("集英社", known)).toBeNull();
+    expect(matchAdultPublisher("講談社 : 講談社コミッククリエイト", known)).toBeNull();
+  });
+
+  it("returns null for empty / nullish input", () => {
+    expect(matchAdultPublisher(null, known)).toBeNull();
+    expect(matchAdultPublisher(undefined, known)).toBeNull();
+    expect(matchAdultPublisher("", known)).toBeNull();
   });
 });

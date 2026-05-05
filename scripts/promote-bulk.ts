@@ -11,7 +11,7 @@
  *   npm run promote:bulk                      # 全件
  *   npm run promote:bulk -- --limit 100       # 100 件で打ち止め
  *   npm run promote:bulk -- --min-volumes 3   # 3 巻以上のシリーズのみ
- *   npm run promote:bulk -- --include-adult   # has_adult_credit を含める
+ *   npm run promote:bulk -- --include-adult   # adult_score >= 3 も draft 化
  *   npm run promote:bulk -- --dry-run         # 書かずにサマリだけ
  *   npm run promote:bulk -- --force           # 既存 draft を上書き
  *
@@ -27,10 +27,12 @@ import "./_env";
 import fs from "node:fs";
 import path from "node:path";
 import YAML from "yaml";
-import { openDb, type DB } from "./_db";
+import { openDb, tx, type DB } from "./_db";
 import { MangaSchema } from "../lib/schema";
 import {
   EDITION_LABELS,
+  matchAdultPublisher,
+  normalizeCreatorName,
   slugFromTitle,
   type EditionType,
 } from "../lib/edition";
@@ -108,6 +110,78 @@ function resolvePublisherKey(
     }
   }
   return "TODO_publisher";
+}
+
+/** Fix C: adult_publishers を SQLite から読んで Set を返す */
+function loadAdultPublisherSet(db: DB): Set<string> {
+  const rows = db
+    .prepare("SELECT name FROM adult_publishers")
+    .all() as { name: string }[];
+  return new Set(rows.map((r) => r.name));
+}
+
+/** Fix C: adult_mangaka_known を SQLite から読んで Set を返す (normalize 済み) */
+function loadAdultMangakaSet(db: DB): Set<string> {
+  const rows = db
+    .prepare("SELECT name FROM adult_mangaka_known")
+    .all() as { name: string }[];
+  return new Set(rows.map((r) => r.name));
+}
+
+/**
+ * Fix C: 多層 adult signal で series の adult_score を計算。
+ * 戻り値: { score, signals } — signals は (signal, weight, evidence) のリスト
+ */
+function computeAdultScore(input: {
+  hasWikidataCredit: boolean;
+  authorName: string;
+  imprints: string[];
+  knownAdultMangaka: ReadonlySet<string>;
+  knownAdultPublishers: ReadonlySet<string>;
+}): {
+  score: number;
+  signals: Array<{ signal: string; weight: number; evidence: string }>;
+} {
+  let score = 0;
+  const signals: Array<{ signal: string; weight: number; evidence: string }> =
+    [];
+
+  // 1. Wikidata の hentai-genre クレジット（mangaka.has_adult_credit=1）
+  if (input.hasWikidataCredit) {
+    score += 3;
+    signals.push({
+      signal: "wikidata_hentai_credit",
+      weight: 3,
+      evidence: input.authorName,
+    });
+  }
+
+  // 2. 既知の成人向け漫画家リスト（Wikipedia 由来）に名前一致
+  const norm = normalizeCreatorName(input.authorName);
+  if (norm && input.knownAdultMangaka.has(norm)) {
+    score += 3;
+    signals.push({
+      signal: "wikipedia_adult_mangaka_list",
+      weight: 3,
+      evidence: input.authorName,
+    });
+  }
+
+  // 3. imprint が既知の成人系出版社に部分一致
+  for (const imprint of input.imprints) {
+    const matched = matchAdultPublisher(imprint, input.knownAdultPublishers);
+    if (matched) {
+      score += 3;
+      signals.push({
+        signal: "adult_publisher_imprint",
+        weight: 3,
+        evidence: `${imprint} ⟵ ${matched}`,
+      });
+      break; // 同一シリーズ内で複数 imprint が当たっても 1 回だけ加算
+    }
+  }
+
+  return { score, signals };
 }
 
 type SeriesRow = {
@@ -299,6 +373,22 @@ async function main() {
 
   const taken = existingSlugs();
 
+  // Fix C: 既知の adult publishers / mangaka をメモリにキャッシュ。
+  // テーブルが空なら空 Set を返す（fetch:adult-lists 未実行でも壊れない）。
+  const knownAdultPublishers = loadAdultPublisherSet(db);
+  const knownAdultMangaka = loadAdultMangakaSet(db);
+  console.log(
+    `[adult] known publishers: ${knownAdultPublishers.size}, known mangaka: ${knownAdultMangaka.size}`,
+  );
+
+  const updateScore = db.prepare(
+    `UPDATE series SET adult_score = ? WHERE id = ?`,
+  );
+  const insertSignal = db.prepare(
+    `INSERT OR REPLACE INTO adult_signals (series_id, signal, weight, evidence)
+     VALUES (?, ?, ?, ?)`,
+  );
+
   const stats = {
     total: seriesRows.length,
     written: 0,
@@ -325,12 +415,37 @@ async function main() {
       stats.skippedNoAuthor++;
       continue;
     }
-    if (author.has_adult_credit && !args.includeAdult) {
+
+    // editions を先に取り出して imprint を集める (adult score にも、後段の YAML
+    // 構築にも使う)。
+    const editions = buildEditionsForSeries(db, row.id);
+    const imprintCandidatesPre = editions
+      .map((e) => (e as { imprint?: string }).imprint ?? "")
+      .filter(Boolean);
+
+    // Fix C: 多層 adult score を計算 → series.adult_score と adult_signals に書き込み
+    const { score: adultScore, signals: adultSignals } = computeAdultScore({
+      hasWikidataCredit: author.has_adult_credit === 1,
+      authorName: author.name,
+      imprints: imprintCandidatesPre,
+      knownAdultMangaka,
+      knownAdultPublishers,
+    });
+    if (adultScore > 0) {
+      tx(db, () => {
+        updateScore.run(adultScore, row.id);
+        for (const sig of adultSignals) {
+          insertSignal.run(row.id, sig.signal, sig.weight, sig.evidence);
+        }
+      });
+    }
+
+    if (adultScore >= 3 && !args.includeAdult) {
       stats.skippedAdult++;
       continue;
     }
 
-    const editions = buildEditionsForSeries(db, row.id);
+    // editions は adult-score 計算時に取得済み（imprintCandidatesPre と同じ）
     const totalVols = editions.reduce((sum, e) => sum + e.volumes.length, 0);
     if (totalVols < args.minVolumes) {
       stats.skippedFew++;
@@ -347,13 +462,10 @@ async function main() {
       continue;
     }
 
-    const imprintCandidates = editions
-      .map((e) => (e as { imprint?: string }).imprint ?? "")
-      .filter(Boolean);
     // B-1: Wikipedia から publisher_key が取れていれば最優先で採用、無ければ
     // imprint 文字列 → publishers.yml の name 逆引き、最後に "TODO_publisher"。
     const publisherKey =
-      row.publisher_key ?? resolvePublisherKey(imprintCandidates, pubMap);
+      row.publisher_key ?? resolvePublisherKey(imprintCandidatesPre, pubMap);
 
     // year_started / year_ended は standard 優先 → 無ければ最古
     const standardEdition =
@@ -435,7 +547,7 @@ async function main() {
   console.log("\n=== promote-bulk summary ===");
   console.log(`  total series        : ${stats.total}`);
   console.log(`  drafts written      : ${stats.written}`);
-  console.log(`  skipped (adult)     : ${stats.skippedAdult}`);
+  console.log(`  skipped (adult≥3)   : ${stats.skippedAdult}`);
   console.log(`  skipped (no author) : ${stats.skippedNoAuthor}`);
   console.log(
     `  skipped (vols < ${args.minVolumes})  : ${stats.skippedFew}`,
