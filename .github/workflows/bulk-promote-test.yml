@@ -102,11 +102,32 @@ jobs:
           echo "=== first 50 drafts ==="
           ls -1 data/manga/_drafts/ 2>/dev/null | head -50 || true
           echo
-          echo "=== sample: first draft (full content) ==="
+          echo "=== sample: first draft (full content, alphabetical) ==="
           first=$(ls -1 data/manga/_drafts/*.yml 2>/dev/null | head -1)
           if [ -n "$first" ]; then
             echo "--- $first ---"
             cat "$first"
+          fi
+          echo
+          echo "=== samples: up to 5 'high-quality' drafts ==="
+          # 「magazine が null でなく、genres が TODO_genre 以外」を高品質と
+          # みなしてピックアップ（Wikipedia 連携が機能した代表例）。
+          for f in data/manga/_drafts/*.yml; do
+            if grep -q '^magazine: null$' "$f"; then continue; fi
+            if grep -q '^  - TODO_genre$' "$f"; then continue; fi
+            HIGH_QUALITY="$HIGH_QUALITY $f"
+          done
+          if [ -z "$HIGH_QUALITY" ]; then
+            echo "(no high-quality drafts found)"
+          else
+            count=0
+            for f in $HIGH_QUALITY; do
+              count=$((count + 1))
+              [ $count -gt 5 ] && break
+              echo "--- $f ---"
+              cat "$f"
+              echo
+            done
           fi
 
       - name: Upload SQLite + drafts as artifact
