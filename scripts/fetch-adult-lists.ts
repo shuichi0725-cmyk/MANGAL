@@ -111,6 +111,68 @@ function stripWikitext(s: string): string {
  *   - 1〜30 文字、CJK / Latin 混在許容
  * 特定の雑誌名は今は採用しない（後段で imprint と照合するのは出版社名で十分）。
  */
+/**
+ * Wikipedia 抽出から漏れた確実な成人系出版社 (manual seed)。
+ * `成人向け漫画雑誌の一覧` の構造によっては section heading に出ず
+ * 箇条書きや別ページに散らばっている場合があるので、ここで補完。
+ *
+ * 追加基準: 「成人系コミック / R-18 雑誌をメインで継続的に出版している」
+ *   - 白夜書房      : 美少女系コミック・雑誌（メンズYOUNG, COMIC快楽天 旧版 等）
+ *   - 久保書店      : QHコミック / 美少女系
+ *   - フランス書院  : 主に R-18 ノベル + コミック
+ *   - オークラ出版  : 成人向けコミック中心
+ *   - 司書房        : ピアスコミックス（成人向け）
+ *
+ * 一般作品の方が圧倒的に多い出版社 (双葉社, 集英社系の青年誌, 講談社など) は
+ * ここに入れない。レーベル単位で adult が混ざっている場合は manual override
+ * (人手で `adult_publishers` を編集) で対応する想定。
+ */
+const MANUAL_ADULT_PUBLISHERS: ReadonlyArray<string> = [
+  "白夜書房",
+  "久保書店",
+  "フランス書院",
+  "オークラ出版",
+  "司書房",
+];
+
+/**
+ * Wikipedia の section heading regex で誤抽出される noise / 一般出版社の
+ * deny list。これらが `adult_publishers` に紛れ込むと一般作品まで adult
+ * 扱いされて false positive を量産するので明示除外する。
+ *
+ * 五十音見出し:   廃刊雑誌セクションが「あ行 / か行 / ...」でグルーピング
+ * 一般メイン社:   双葉社・辰巳出版・リイド社等は一般作品の方が多数派なので、
+ *                 imprint substring match で巻き込まないために除外する。
+ *                 個別の adult レーベルが必要なら今後 manual seed に追加。
+ */
+const PUBLISHER_DENY_LIST: ReadonlySet<string> = new Set([
+  // 五十音グルーピング見出し
+  "あ行", "か行", "さ行", "た行", "な行", "は行", "ま行", "や行", "ら行", "わ行",
+  "ア行", "カ行", "サ行", "タ行", "ナ行", "ハ行", "マ行", "ヤ行", "ラ行", "ワ行",
+  // page 構造由来のノイズ
+  "BookLive",
+  "注釈",
+  "発行中の雑誌の出版社別一覧",
+  "廃刊雑誌の出版社別一覧",
+  "出版社別一覧",
+  "アンソロジーコミック",
+  // 一般作品メインの出版社 (false positive 防止)
+  "双葉社",
+  "辰巳出版",
+  "リイド社",
+  "大都社",
+  "メディアックス",
+  "竹書房", // 一般 / アダルト両方 (一般の方が多数派)
+]);
+
+/**
+ * `成人向け漫画雑誌の一覧` の wikitext から「セクション見出し = 出版社名」を抽出する。
+ * `==<出版社名>==` 行（== H2 / === H3）を集める。誤抽出を抑えるため
+ *   - 「出典」「脚注」「関連項目」「外部リンク」等の汎用見出しは無視
+ *   - 1〜30 文字、CJK / Latin 混在許容
+ *   - PUBLISHER_DENY_LIST にあるものは除外
+ * 特定の雑誌名は今は採用しない（後段で imprint と照合するのは出版社名で十分）。
+ */
 function extractAdultPublishers(wikitext: string): string[] {
   const out = new Set<string>();
   const SKIP_HEADINGS = new Set([
@@ -137,8 +199,11 @@ function extractAdultPublishers(wikitext: string): string[] {
     if (!name) continue;
     if (name.length < 2 || name.length > 30) continue;
     if (SKIP_HEADINGS.has(name)) continue;
+    if (PUBLISHER_DENY_LIST.has(name)) continue;
     // 「現行誌」「廃刊」のような汎用キーワードを含むものはスキップ
     if (/^(現行|休|廃|現役|歴史|参考|外部|脚注|出典|関連)/.test(name)) continue;
+    // 「○行」(五十音グループ) 形式の保険的フィルタ
+    if (/^[あ-んア-ン]行$/.test(name)) continue;
     out.add(name);
   }
   return Array.from(out);
@@ -196,8 +261,14 @@ function persistPublishers(db: DB, names: string[]): number {
       ins.run(name, "wikipedia_adult_magazines");
       n++;
     }
+    // manual seed (Wikipedia 抽出から漏れた確実な成人系出版社) を追記
+    for (const name of MANUAL_ADULT_PUBLISHERS) {
+      ins.run(name, "manual_seed");
+      n++;
+    }
     recordSource(db, "wikipedia_adult_magazines", "adult_publishers", "all", {
       count: names.length,
+      manual_seed: MANUAL_ADULT_PUBLISHERS.length,
     });
   });
   return n;
@@ -264,12 +335,15 @@ async function main() {
   const nMan = persistMangaka(db, mangaka);
 
   console.log("\n=== fetch:adult-lists summary ===");
-  console.log(`  adult_publishers       : ${nPub} entries`);
+  console.log(
+    `  adult_publishers       : ${nPub} entries (${publishers.length} from wiki + ${MANUAL_ADULT_PUBLISHERS.length} manual seed)`,
+  );
   console.log(`  adult_mangaka_known    : ${nMan} entries`);
   console.log(`  raw cache dir          : ${RAW_DIR}`);
   if (publishers.length > 0) {
     console.log(`  publishers sample      : ${publishers.slice(0, 8).join(", ")}`);
   }
+  console.log(`  manual seed publishers : ${MANUAL_ADULT_PUBLISHERS.join(", ")}`);
   if (mangaka.length > 0) {
     console.log(
       `  mangaka sample         : ${mangaka.slice(0, 5).map((r) => r.display).join(", ")}`,
