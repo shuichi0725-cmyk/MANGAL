@@ -20,7 +20,7 @@ CREATE TABLE IF NOT EXISTS meta (
   value TEXT NOT NULL
 );
 INSERT OR IGNORE INTO meta (key, value) VALUES
-  ('schema_version', '4'),
+  ('schema_version', '5'),
   ('created_at', strftime('%Y-%m-%dT%H:%M:%SZ', 'now'));
 
 -- M3: publishers / magazines は data/*.yml が source-of-truth だが、
@@ -174,6 +174,21 @@ CREATE TABLE IF NOT EXISTS asins (
   FOREIGN KEY (isbn13) REFERENCES volumes(isbn13) ON DELETE CASCADE
 );
 
+-- Phase 5 prep (schema v5, 2026-05): Amazon PA-API SearchItems の per-ASIN メタデータ。
+-- volumes.asin / volumes.cover_url は既存で primary ASIN とカバー URL をキャッシュしているが、
+-- BrowseNode 階層 (= 成年コミック判定の決定打) と sales rank、PA-API の rate-limited refresh の
+-- freshness 追跡は新規。承認 (180日以内 3 売上) 後の Phase 5 でこのテーブルへ書き込み始める。
+-- 承認待ち期間中は空のままで良い。schema を先に確定させて Phase 5 着手時の migration を不要にする。
+CREATE TABLE IF NOT EXISTS amazon_metadata (
+  asin                 TEXT PRIMARY KEY,
+  isbn13               TEXT,                  -- volumes.isbn13 への弱参照（Amazon-only な ASIN もありうるので NOT NULL にしない）
+  browse_node_path     TEXT,                  -- "Books > コミック > 成年コミック" 等の `>` 区切り
+  is_adult_browse_node INTEGER NOT NULL DEFAULT 0,  -- BrowseNode 階層に成年コミック等の adult node を含むか
+  sales_rank           INTEGER,               -- WebsiteSalesRank。NULL = 未取得 or 取得不可
+  fetched_at           TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%SZ', 'now')),
+  FOREIGN KEY (isbn13) REFERENCES volumes(isbn13) ON DELETE SET NULL
+);
+
 CREATE INDEX IF NOT EXISTS idx_volumes_edition         ON volumes(edition_id);
 CREATE INDEX IF NOT EXISTS idx_editions_series         ON editions(series_id);
 CREATE INDEX IF NOT EXISTS idx_series_authors_mangaka  ON series_authors(mangaka_id);
@@ -181,3 +196,5 @@ CREATE INDEX IF NOT EXISTS idx_series_qid              ON series(qid);
 CREATE INDEX IF NOT EXISTS idx_sources_ref             ON sources(ref_table, ref_id);
 CREATE INDEX IF NOT EXISTS idx_mangaka_name            ON mangaka(name);
 CREATE INDEX IF NOT EXISTS idx_asins_isbn              ON asins(isbn13);
+CREATE INDEX IF NOT EXISTS idx_amazon_metadata_isbn    ON amazon_metadata(isbn13);
+CREATE INDEX IF NOT EXISTS idx_amazon_metadata_adult   ON amazon_metadata(is_adult_browse_node);

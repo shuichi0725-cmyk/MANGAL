@@ -13,7 +13,7 @@
 
 ## 主要ファイル
 
-- `db/schema.sql`: 現行 schema_version = 4 (Fix C で 3 → 4)
+- `db/schema.sql`: 現行 schema_version = 5 (Phase 5 prep で 4 → 5: amazon_metadata 追加)
 - `scripts/promote-bulk.ts`: NDL → series/editions 自動 promote。adult 検出ロジック (`computeAdultScore`) 含む
 - `scripts/fetch-adult-lists.ts`: JA Wikipedia から adult publishers / mangaka リスト取得 (Fix C)
 - `scripts/fetch-ndl.ts`, `scripts/fetch-wikidata.ts`: 既存の主要 fetcher
@@ -68,12 +68,22 @@
 - **gate**: PA-API 承認 (180日以内 3 売上) = Phase 5 アフィリエイトサイト公開後
 - **判断**: 本命。openBD よりも筋が良い (アフィリエイト target そのもの、adult 判定が direct、ASIN/画像も同時取得)
 
-## Phase 5 までに進められる準備 (今は未着手)
+## Phase 5 までに進められる準備
+
+完了:
+
+- ✅ **schema 先行 migration** (2026-05-05, schema_version 4 → 5):
+  - `amazon_metadata` テーブル新設 (PK = asin)。columns: `isbn13` (volumes への弱 FK), `browse_node_path` ("Books > コミック > 成年コミック" 等), `is_adult_browse_node` (0/1), `sales_rank`, `fetched_at`
+  - 既存 `volumes.asin` / `volumes.cover_url` / `asins` table はそのまま (ASIN cache + locale variants で十分)
+  - PA-API 承認まで空のまま。 Phase 5 開始時に migration 不要で書き込み可
+  - 当初 `editions.amazon_asin` / `editions.amazon_image_url` を提案していたが、 ASIN 階層は volume レベルが正しいため amazon_metadata sidecar table に修正
+
+未着手:
 
 1. Associate Tag 取得 / 申請プロセス
 2. 成年コミック BrowseNode ID の human 探索 (Amazon.co.jp 公開ページ経由、認証不要)
-3. `editions.amazon_asin` / `editions.amazon_image_url` 列の予約 (schema migration)
-4. PA-API 5.0 SDK 選定 (公式 SDK 廃止済 → community SDK or SigV4 自前署名)
+3. PA-API 5.0 SDK 選定 (公式 SDK 廃止済 → community SDK or SigV4 自前署名)
+4. `computeAdultScore` への `amazon_browse_node_adult` signal 追加 (Phase 5 開始時)
 
 ## 次セッションでの推奨スタートアクション
 
