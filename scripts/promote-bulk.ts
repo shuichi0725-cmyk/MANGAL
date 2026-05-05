@@ -432,6 +432,23 @@ async function main() {
     // editions を先に取り出して imprint を集める (adult score にも、後段の YAML
     // 構築にも使う)。
     const editions = buildEditionsForSeries(db, row.id);
+
+    // adult-score 計算用の imprint は editions テーブルから直接拾う。
+    // buildEditionsForSeries は「volumes が 0 件の edition を捨てる」フィルタを
+    // 持っているので、adult imprint を持つ edition の volumes が全部 is_extra=1
+    // / number<1 だった場合にその imprint を見落とす。adult 判定は
+    // 「draft を出すかどうか」より広いカバレッジで判断する必要があるので、
+    // 全 imprint を adult 判定にだけ与える。
+    const imprintsForAdultScore = (
+      db
+        .prepare(
+          `SELECT DISTINCT imprint FROM editions
+           WHERE series_id = ? AND imprint IS NOT NULL AND imprint != ''`,
+        )
+        .all(row.id) as { imprint: string }[]
+    ).map((r) => r.imprint);
+
+    // YAML への publisher 解決には buildEditions 後の (= volumes ありの) imprint を使う
     const imprintCandidatesPre = editions
       .map((e) => (e as { imprint?: string }).imprint ?? "")
       .filter(Boolean);
@@ -440,7 +457,7 @@ async function main() {
     const { score: adultScore, signals: adultSignals } = computeAdultScore({
       hasWikidataCredit: author.has_adult_credit === 1,
       authorName: author.name,
-      imprints: imprintCandidatesPre,
+      imprints: imprintsForAdultScore,
       knownAdultMangaka,
       knownAdultPublishers,
     });
