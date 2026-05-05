@@ -51,14 +51,3 @@ export function buildAmazonUrlForVolume(
 export function buildAmazonUrl(manga: Manga, opts: AmazonLinkOptions = {}): string {
   return buildAmazonUrlForVolume(primaryVolume(manga), manga, opts);
 }
-
-/**
- * フェーズA: openBD のカバー画像 URL を ISBN13 から組み立てる。
- * 再配布可で、PA-API 承認前でも合法に表示できる。
- */
-export function openBdCoverUrl(isbn13?: string | number | null): string | null {
-  if (!isbn13) return null;
-  const id = String(isbn13).replace(/[^0-9X]/gi, "");
-  if (id.length !== 13) return null;
-  return `https://cover.openbd.jp/${id}.jpg`;
-}

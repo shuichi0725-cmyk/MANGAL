@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { openBdCoverUrl } from "@/lib/amazon";
 import { formatReleaseDate, yearStatusLabel } from "@/lib/format";
 import {
   allVolumes,
@@ -22,7 +21,10 @@ type Props = {
 
 export default function MangaCard({ manga, publishers, genres, demographics }: Props) {
   const v1 = primaryVolume(manga);
-  const cover = v1?.cover_url || openBdCoverUrl(v1?.isbn13 ?? null);
+  // 表紙は volume.cover_url のみ。openBD/NDL からの fallback は将来 risk
+  // (画像配信停止) があるので使わない。Amazon PA-API 経由で公式画像を
+  // 入れるまでは CoverImage 側の "表紙なし" placeholder を表示する。
+  const cover = v1?.cover_url ?? null;
   const cardVolumes = primaryEdition(manga).volumes;
 
   const publisherName =

@@ -3,7 +3,6 @@ import { notFound } from "next/navigation";
 import AffiliateLink from "@/components/AffiliateLink";
 import CoverImage from "@/components/CoverImage";
 import VolumeRow from "@/components/VolumeRow";
-import { openBdCoverUrl } from "@/lib/amazon";
 import { yearStatusLabel } from "@/lib/format";
 import { loadAllManga } from "@/lib/loadData";
 import { primaryVolume } from "@/lib/schema";
@@ -23,7 +22,8 @@ export default async function MangaDetailPage({
   if (!manga) notFound();
 
   const v1 = primaryVolume(manga);
-  const cover = v1?.cover_url || openBdCoverUrl(v1?.isbn13 ?? null);
+  // 表紙は volume.cover_url のみ。openBD/NDL fallback は使わない方針。
+  const cover = v1?.cover_url ?? null;
 
   const publisher = data.publishers.find((p) => p.key === manga.publisher);
   const magazine = data.magazines.find((m) => m.key === manga.magazine);

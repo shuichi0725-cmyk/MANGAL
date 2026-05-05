@@ -1,4 +1,3 @@
-import { openBdCoverUrl } from "@/lib/amazon";
 import { formatReleaseDate, volumeLabel } from "@/lib/format";
 import type { Edition, Manga, Volume } from "@/lib/schema";
 import AffiliateLink from "./AffiliateLink";
@@ -11,7 +10,8 @@ type Props = {
 };
 
 export default function VolumeTile({ manga, volume, edition }: Props) {
-  const cover = volume.cover_url || openBdCoverUrl(volume.isbn13 ?? null);
+  // 表紙は volume.cover_url のみ。openBD/NDL fallback は将来 risk なので不採用。
+  const cover = volume.cover_url ?? null;
   const date = formatReleaseDate(volume.release_date);
   const label = volumeLabel(volume);
   const editionLabel = edition ? `${edition.label} ` : "";
