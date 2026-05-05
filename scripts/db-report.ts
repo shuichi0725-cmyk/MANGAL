@@ -102,6 +102,17 @@ function main() {
   }
 
   if (args.showAdult) {
+    console.log("\n=== adult_publishers (Wikipedia 由来 known list) ===");
+    const aps = db
+      .prepare("SELECT name, source FROM adult_publishers ORDER BY name")
+      .all() as { name: string; source: string }[];
+    if (aps.length === 0) {
+      console.log("  (なし — fetch:adult-lists 未実行?)");
+    } else {
+      for (const p of aps) console.log(`  ${p.name}`);
+      console.log(`  → ${aps.length} entries`);
+    }
+
     console.log("\n=== adult-credit mangaka (Wikidata hentai genre 経由) ===");
     const ms = db
       .prepare(
@@ -117,10 +128,11 @@ function main() {
       if (ms.length === 50) console.log("  ... (truncated to 50)");
     }
 
-    console.log("\n=== adult_score>0 series ===");
+    console.log("\n=== adult_score>0 series (with edition imprints) ===");
     const ss = db
       .prepare(
-        `SELECT s.title, s.year_started, s.adult_score, s.publisher_key, GROUP_CONCAT(m.name, ' / ') AS authors
+        `SELECT s.id, s.title, s.year_started, s.adult_score, s.publisher_key,
+                GROUP_CONCAT(DISTINCT m.name) AS authors
          FROM series s
          LEFT JOIN series_authors sa ON sa.series_id = s.id
          LEFT JOIN mangaka m ON m.id = sa.mangaka_id
@@ -130,6 +142,7 @@ function main() {
          LIMIT 50`,
       )
       .all() as {
+      id: number;
       title: string;
       year_started: number | null;
       adult_score: number;
@@ -139,10 +152,24 @@ function main() {
     if (ss.length === 0) {
       console.log("  (なし)");
     } else {
+      const imprintStmt = db.prepare(
+        `SELECT DISTINCT imprint FROM editions WHERE series_id = ? AND imprint IS NOT NULL`,
+      );
+      const sigStmt = db.prepare(
+        `SELECT signal, weight FROM adult_signals WHERE series_id = ?`,
+      );
       for (const s of ss) {
+        const imps = (imprintStmt.all(s.id) as { imprint: string }[])
+          .map((r) => r.imprint)
+          .join(" / ") || "(no imprint)";
+        const sigs = (sigStmt.all(s.id) as { signal: string; weight: number }[])
+          .map((r) => `${r.signal}=${r.weight}`)
+          .join(", ");
         console.log(
           `  score=${pad(String(s.adult_score), 3)} ${pad(s.title, 30)} ${pad(s.year_started, 5)} ${pad(s.publisher_key, 18)} ${s.authors ?? ""}`,
         );
+        console.log(`        imprint: ${imps}`);
+        console.log(`        signals: ${sigs || "(none recorded)"}`);
       }
       if (ss.length === 50) console.log("  ... (truncated to 50)");
     }
