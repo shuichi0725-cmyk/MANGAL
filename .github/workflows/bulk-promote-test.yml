@@ -166,6 +166,75 @@ jobs:
             done
           fi
 
+      - name: Drafts quality stats (placeholder breakdown)
+        # 233 件 (試金石 50-mangaka run) の draft が production-ready か placeholder
+        # 漬けかを定量化する診断 step。 loadData は TODO_genre / TODO_publisher
+        # を弾くので、 placeholder 多い draft は本番に乗らない = 無駄。 Wikipedia
+        # 連携の hit/miss が直接効く。
+        run: |
+          DRAFTS=data/manga/_drafts
+          TOTAL=$(ls -1 $DRAFTS/*.yml 2>/dev/null | wc -l)
+          if [ "$TOTAL" -eq 0 ]; then
+            echo "(no drafts to analyze)"
+            exit 0
+          fi
+          echo "=== placeholder field counts (lower = better) ==="
+          echo "total drafts: $TOTAL"
+          KANA=$(grep -l '^title_kana: TODO_kana$' $DRAFTS/*.yml 2>/dev/null | wc -l)
+          MAG=$(grep -l '^magazine: null$' $DRAFTS/*.yml 2>/dev/null | wc -l)
+          GENRE=$(grep -l '^  - TODO_genre$' $DRAFTS/*.yml 2>/dev/null | wc -l)
+          PUB=$(grep -l '^publisher: TODO_publisher$' $DRAFTS/*.yml 2>/dev/null | wc -l)
+          SYN=$(grep -l '^synopsis: ""$' $DRAFTS/*.yml 2>/dev/null | wc -l)
+          printf "  title_kana == TODO_kana       : %4d / %4d (%3d%%)\n" "$KANA"  "$TOTAL" $(( KANA  * 100 / TOTAL ))
+          printf "  magazine == null              : %4d / %4d (%3d%%)\n" "$MAG"   "$TOTAL" $(( MAG   * 100 / TOTAL ))
+          printf "  genres == [TODO_genre]        : %4d / %4d (%3d%%)\n" "$GENRE" "$TOTAL" $(( GENRE * 100 / TOTAL ))
+          printf "  publisher == TODO_publisher   : %4d / %4d (%3d%%)\n" "$PUB"   "$TOTAL" $(( PUB   * 100 / TOTAL ))
+          printf "  synopsis == empty             : %4d / %4d (%3d%%)\n" "$SYN"   "$TOTAL" $(( SYN   * 100 / TOTAL ))
+          echo
+          echo "=== distribution: drafts grouped by # of placeholders (0 = production-ready) ==="
+          B0=0; B1=0; B2=0; B3=0; B4=0; B5=0
+          for f in $DRAFTS/*.yml; do
+            c=0
+            grep -q '^title_kana: TODO_kana$'        "$f" && c=$((c+1))
+            grep -q '^magazine: null$'               "$f" && c=$((c+1))
+            grep -q '^  - TODO_genre$'               "$f" && c=$((c+1))
+            grep -q '^publisher: TODO_publisher$'    "$f" && c=$((c+1))
+            grep -q '^synopsis: ""$'                 "$f" && c=$((c+1))
+            case $c in
+              0) B0=$((B0+1));;
+              1) B1=$((B1+1));;
+              2) B2=$((B2+1));;
+              3) B3=$((B3+1));;
+              4) B4=$((B4+1));;
+              5) B5=$((B5+1));;
+            esac
+          done
+          printf "  0 (ready)        : %4d\n" $B0
+          printf "  1 placeholder    : %4d\n" $B1
+          printf "  2 placeholders   : %4d\n" $B2
+          printf "  3 placeholders   : %4d\n" $B3
+          printf "  4 placeholders   : %4d\n" $B4
+          printf "  5 (all empty)    : %4d\n" $B5
+          echo
+          echo "=== top 10 source mangaka by draft count ==="
+          grep -h '^# Source mangaka:' $DRAFTS/*.yml | sed -E 's/^# Source mangaka: (.*); Source series.*$/\1/' | sort | uniq -c | sort -rn | head -10
+          echo
+          echo "=== first 5 production-ready drafts (0 placeholders) ==="
+          ready_shown=0
+          for f in $DRAFTS/*.yml; do
+            c=0
+            grep -q '^title_kana: TODO_kana$'        "$f" && c=$((c+1))
+            grep -q '^magazine: null$'               "$f" && c=$((c+1))
+            grep -q '^  - TODO_genre$'               "$f" && c=$((c+1))
+            grep -q '^publisher: TODO_publisher$'    "$f" && c=$((c+1))
+            grep -q '^synopsis: ""$'                 "$f" && c=$((c+1))
+            if [ $c -eq 0 ]; then
+              ready_shown=$((ready_shown+1))
+              [ $ready_shown -gt 5 ] && break
+              echo "  $(basename $f)"
+            fi
+          done
+
       - name: Upload SQLite + drafts as artifact
         uses: actions/upload-artifact@v4
         if: always()
