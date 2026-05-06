@@ -29,6 +29,7 @@
     "seed:adult-imprints:clean": "tsx scripts/clean-imprint-dump.ts",
     "promote:series": "tsx scripts/promote-series.ts",
     "promote:bulk": "tsx scripts/promote-bulk.ts",
+    "promote:drafts": "tsx scripts/promote-drafts.ts",
     "deploy": "wrangler deploy"
   },
   "dependencies": {

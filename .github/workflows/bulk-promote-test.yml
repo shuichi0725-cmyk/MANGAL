@@ -244,6 +244,14 @@ jobs:
             fi
           done
 
+      - name: Promote ready drafts to data/manga/
+        # Option 1 (2026-05-06): production-ready (= 0 placeholder) draft を
+        # data/manga/_drafts/<slug>.yml から data/manga/<slug>.yml に移動。
+        # MangaSchema 検証 + 末尾で loadAllManga 全体検証を通過したものだけ書く。
+        # 既存 data/manga/<slug>.yml がある場合は --force 無しでスキップ (上書き
+        # しない、 21 件の既存 production ファイル保護)。
+        run: npm run promote:drafts
+
       - name: Upload SQLite + drafts as artifact
         uses: actions/upload-artifact@v4
         if: always()
@@ -254,4 +262,5 @@ jobs:
             .cache/ndl/
             .cache/wikipedia/
             data/manga/_drafts/
+            data/manga/*.yml
           if-no-files-found: warn
