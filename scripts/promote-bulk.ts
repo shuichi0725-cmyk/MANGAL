@@ -35,6 +35,7 @@ import {
   type EditionType,
 } from "../lib/edition";
 import { computeAdultScore } from "../lib/adult-score";
+import { BORDERLINE_ADULT_PUBLISHERS } from "../lib/adult-borderline";
 import { readKanaFromTitle } from "../lib/kana";
 
 type Args = {
@@ -401,6 +402,7 @@ async function main() {
       knownAdultMangaka,
       knownAdultPublishers,
       knownAdultImprints,
+      borderlineAdultPublishers: BORDERLINE_ADULT_PUBLISHERS,
     });
     if (adultScore > 0) {
       tx(db, () => {
