@@ -426,6 +426,17 @@ async function main() {
     synopsisExtracted: 0,
   };
 
+  // Layer C 改善 (magazines.yml 拡張) のため、 master 解決に失敗した raw 値を
+  // 集計。 末尾で頻度降順に出力 → どの magazine 名を master に追加すべきか判断材料。
+  const unresolved = {
+    magazine: new Map<string, number>(),
+    publisher: new Map<string, number>(),
+    genres: new Map<string, number>(),
+  };
+  const bumpUnresolved = (m: Map<string, number>, key: string): void => {
+    m.set(key, (m.get(key) ?? 0) + 1);
+  };
+
   let processed = 0;
   let firstReq = true;
   for (const s of limited) {
@@ -483,6 +494,9 @@ async function main() {
     const publisherKey =
       publisherText ? lookupSubstring(masters.publisher, publisherText) : null;
     if (publisherKey) stats.publisherResolved++;
+    if (publisherText && !publisherKey) {
+      bumpUnresolved(unresolved.publisher, publisherText);
+    }
     const magazineText = stripWikitext(
       fields.get("掲載誌") ??
         fields.get("掲載紙") ??
@@ -493,6 +507,9 @@ async function main() {
     const magazineKey =
       magazineText ? lookupSubstring(masters.magazine, magazineText) : null;
     if (magazineKey) stats.magazineResolved++;
+    if (magazineText && !magazineKey) {
+      bumpUnresolved(unresolved.magazine, magazineText);
+    }
     const demographic = magazineKey
       ? masters.magazineDemographic.get(magazineKey) ?? null
       : null;
@@ -500,6 +517,9 @@ async function main() {
     if (genresStr) stats.genresExtracted++;
     const genreKeys = mapGenres(genresStr, masters.genre);
     if (genreKeys.length > 0) stats.genresResolvedAny++;
+    if (genresStr && genreKeys.length === 0) {
+      bumpUnresolved(unresolved.genres, genresStr);
+    }
     const synopsis = (summary.extract || "").slice(0, 800);
     if (synopsis) stats.synopsisExtracted++;
     // 「発表期間」 = "1987年 - 2007年" 形式 (Infobox animanga/Print) を分解。
@@ -614,6 +634,24 @@ async function main() {
     `    genres resolved >= 1  : ${stats.genresResolvedAny} (${pct(stats.genresResolvedAny, stats.genresExtracted)} of genresExtracted)`,
   );
   console.log(`  raw cache dir : ${RAW_DIR}`);
+
+  // Layer C 改善のための diagnostic: 解決に失敗した raw 値を頻度降順で出す。
+  // ここに出てくる頻度の高い名前を data/magazines.yml 等に追加すれば fill 率が上がる。
+  const dumpUnresolved = (label: string, m: Map<string, number>): void => {
+    if (m.size === 0) return;
+    const sorted = [...m.entries()].sort((a, b) => b[1] - a[1]);
+    console.log(`\n=== unresolved ${label} (raw → no master match), top 30 ===`);
+    for (const [name, count] of sorted.slice(0, 30)) {
+      console.log(`  ${count.toString().padStart(3, " ")}× ${name}`);
+    }
+    if (sorted.length > 30) {
+      console.log(`  ... (${sorted.length - 30} more)`);
+    }
+  };
+  dumpUnresolved("magazine", unresolved.magazine);
+  dumpUnresolved("publisher", unresolved.publisher);
+  dumpUnresolved("genres", unresolved.genres);
+
   db.close();
 }
 
