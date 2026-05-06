@@ -98,6 +98,12 @@ jobs:
         # 試行して layer A/B/C の統計信頼性を上げる。
         run: npm run fetch:wikipedia
 
+      - name: Probe openBD coverage (read-only diagnostic)
+        # B-2 (2026-05-06): Wikipedia 18% ceiling 後の補完候補として openBD を試験。
+        # ISBN 1700+ 件を bulk で叩き、 publisher / collationkey / synopsis /
+        # C-code / cover の取得率を測定。 DB は変更しない (read-only)。
+        run: npm run probe:openbd
+
       - name: DB top 30 (post-Wikipedia, with metadata filled)
         run: npm run db:report -- --top 30
 
