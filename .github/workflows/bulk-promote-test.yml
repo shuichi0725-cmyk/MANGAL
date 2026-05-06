@@ -108,6 +108,28 @@ jobs:
         # ここで「どの series がどの signal で skip されたか」が workflow log に残る。
         run: npm run db:report -- --adult
 
+      - name: SQL diagnostics (editions.imprint distribution + adult_imprints state)
+        # Tier 2 (adult_imprints) がなぜ発火しないかの診断材料を出す。
+        # editions.imprint が真のサブレーベル名 (クリベロン等) を持っているか、
+        # それとも publisher 名 (リイド社等) しか持っていないかを確認する。
+        run: |
+          DB=.cache/db.sqlite
+          echo "=== editions.imprint distribution (top 30) ==="
+          sqlite3 -separator $'\t' "$DB" "SELECT COUNT(*) AS n, COALESCE(imprint,'(NULL)') FROM editions GROUP BY imprint ORDER BY n DESC LIMIT 30"
+          echo
+          echo "=== series.magazine_key fill rate ==="
+          sqlite3 "$DB" "SELECT COUNT(*) AS total, SUM(magazine_key IS NOT NULL) AS filled, SUM(magazine_key IS NULL) AS empty FROM series" -header
+          echo
+          echo "=== series.magazine_key distribution (top 30) ==="
+          sqlite3 -separator $'\t' "$DB" "SELECT COUNT(*) AS n, magazine_key FROM series WHERE magazine_key IS NOT NULL GROUP BY magazine_key ORDER BY n DESC LIMIT 30"
+          echo
+          echo "=== adult_imprints sample (top 30 by count) ==="
+          sqlite3 -separator $'\t' "$DB" "SELECT count, imprint, COALESCE(publisher,'(NULL)') FROM adult_imprints ORDER BY count DESC LIMIT 30"
+          echo
+          echo "=== editions.imprint × adult_imprints intersection ==="
+          # editions に存在する imprint が adult_imprints にも存在するか
+          sqlite3 -separator $'\t' "$DB" "SELECT e.imprint, COUNT(DISTINCT e.series_id) AS series_count FROM editions e JOIN adult_imprints ai ON instr(e.imprint, ai.imprint) > 0 OR instr(ai.imprint, e.imprint) > 0 GROUP BY e.imprint ORDER BY series_count DESC LIMIT 30"
+
       - name: Count + list drafts produced
         run: |
           COUNT=$(ls -1 data/manga/_drafts/ 2>/dev/null | wc -l)
