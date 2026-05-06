@@ -2,7 +2,7 @@
 
 > このファイルは Claude Code session の context bootstrap 用。新しいセッションを開始したら最初に読むこと。
 
-最終更新: 2026-05-05
+最終更新: 2026-05-06
 
 ## プロジェクト概要
 
@@ -13,32 +13,41 @@
 
 ## 主要ファイル
 
-- `db/schema.sql`: 現行 schema_version = 5 (Phase 5 prep で 4 → 5: amazon_metadata 追加)
+- `db/schema.sql`: 現行 schema_version = 6 (5 → 6: adult_imprints 追加 [Tier 2])
 - `scripts/promote-bulk.ts`: NDL → series/editions 自動 promote。adult 検出は `lib/adult-score.ts` 経由
-- `lib/adult-score.ts`: `computeAdultScore` の純関数実装 + 19 件の unit test (`lib/adult-score.test.ts`)
+- `lib/adult-score.ts`: `computeAdultScore` の純関数実装 + 27 件の unit test (`lib/adult-score.test.ts`)
+- `lib/adult-imprints.ts`: `data/seeds/adult-imprints.yml` の Zod schema + reader
 - `scripts/fetch-adult-lists.ts`: JA Wikipedia から adult publishers / mangaka リスト取得 (Fix C)
+- `scripts/seed-adult-imprints.ts`: yaml seed → adult_imprints テーブル INSERT (Tier 2)
+- `scripts/clean-imprint-dump.ts`: raw imprint dump → adult-imprints.yml 生成 (Tier 2)
 - `scripts/fetch-ndl.ts`, `scripts/fetch-wikidata.ts`: 既存の主要 fetcher
 - `lib/edition.ts`: `normalizeCreatorName`, `matchAdultPublisher` 等の utility
+- `data/seeds/_raw-imprint-dump.txt`: ユーザ提示の raw imprint→publisher dump (~339 entry)
+- `data/seeds/adult-imprints.yml`: 整形済 adult imprint seed (252 imprints + 14 distribution_channels + 13 ambiguous)
 - `data/seeds/adult-publishers-manual.yml`: 白夜書房等の manual seed (Wikipedia 抽出に出ない補完)
 - `.github/workflows/bulk-promote-test.yml`: CI 試験 workflow (試金石作家 run)
 
-## 現在の adult 検出設計 (Fix C, 2026-05 完成)
+## 現在の adult 検出設計 (Fix C + Tier 1B/2, 2026-05 完成)
 
-`lib/adult-score.ts` の `computeAdultScore` (純関数。 unit test は `lib/adult-score.test.ts` に 19 ケース) が 3 signal を additive 合算 (threshold = 3 で skip):
+`lib/adult-score.ts` の `computeAdultScore` (純関数。 unit test は `lib/adult-score.test.ts` に 27 ケース) が 4 signal を additive 合算 (threshold = 3 で skip):
 
 | Signal | Source | Weight |
 |---|---|---|
 | `wikidata_hentai_credit` | mangaka.has_adult_credit (Wikidata P136=Q172241) | +2 |
 | `wikipedia_adult_mangaka_list` | adult_mangaka_known テーブル (Wikipedia「日本の成人向け漫画家の一覧」) | +2 |
-| `adult_publisher_imprint` | adult_publishers テーブルとの imprint マッチ (Wikipedia「成人向け漫画雑誌の一覧」+ manual seed) | +3 |
+| `adult_imprint` | adult_imprints テーブル (manga-db.com 系 dump、 252 imprint、 Tier 2) | +3 |
+| `adult_publisher_imprint` | adult_publishers テーブル (Wikipedia「成人向け漫画雑誌の一覧」+ manual seed) | +3 |
 
-Option B 設計: 作家シグナルのみ (2 or 4) では threshold に届かない/届くで線を引き、出版社シグナル (+3) は単独で確定とする。**`adult_score >= 3` で promote-bulk が draft skip**。試金石 run #11 (qids=Q193300 Q1121064) で:
+Option B 設計: 作家シグナルのみ (2 or 4) では threshold に届かない/届くで線を引き、出版社/imprint シグナル (+3) は単独で確定とする。
+imprint と publisher は **排他** (どちらか一方だけ発火、 imprint の方が granular なので優先)。
+**`adult_score >= 3` で promote-bulk が draft skip**。試金石 run #11 (qids=Q193300 Q1121064) で:
 
 - 唯登詩樹 ジャンクション/Uma・uma (白夜書房) → score=5 → skip ✅
 - 唯登詩樹 集英社/講談社 一般作品 (Kirara, Yui shop, ボクのふたつの翼 等) → score=2 → drafted ✅
 - 手塚治虫 全 13 シリーズ → score=0 → drafted ✅
 
 `adult_publishers` は精選 21 件 (五十音/ノイズ/「○○書店」等を除外)。
+Tier 1B (2026-05-06) で大手 mainstream publisher (講談社・白泉社・集英社・小学館・秋田書店・KADOKAWA・芳文社・実業之日本社・少年画報社・ぶんか社 等 22 社) を `PUBLISHER_DENY_LIST` に追加。
 
 ## 試金石 (canary) 作家
 
@@ -53,13 +62,17 @@ Option B 設計: 作家シグナルのみ (2 or 4) では threshold に届かな
 - **「きい」(Q38276629) false positive**: Wikipedia 「日本の成人向け漫画家の一覧」の短名 「きい」 が我々の DB の 堀田きいち (別名「きい」) と normalize 後一致し、 君と僕。@ Square Enix Gangan を始め全 50+ シリーズに `wikipedia_adult_mangaka_list=2` を誤発火させていた (Option B のおかげで score=2 < 3 で drafted されており実害なしだが、 review 時 misleading)
 - **対処**: `scripts/fetch-adult-lists.ts` の `extractAdultMangaka` で normalized 後 length < 3 を弾くよう変更。 publisher 側 (line 200) は元から `< 2` フィルタあり、これで mangaka 側も対称化。 1-2 文字の legitimate な adult-only 作家がいた場合は将来的に `data/seeds/adult-mangaka-supplement.yml` (未作成) で手動救済する前提
 
-### 未解消 (Tier 2 で扱う)
+### 解消済み (Tier 1B + Tier 2, 2026-05-06)
 
-- **倉科遼 (Q8979654) / 氏賀Y太 (Q1610292) の adult_publisher_imprint 不発火**: 倉科遼の女帝/嬢王/夜王 (リイド社・集英社・日本文芸社・小学館) は publisher 単位の adult 二値分類では捕捉不能。 リイド社・双葉社・辰巳出版は `fetch-adult-lists.ts` line 162 の `PUBLISHER_DENY_LIST` で意図的に除外 (一般作品メインの publisher のため)。 構造的問題: 中堅 publisher は一般作品と adult 作品を同じ publisher 名で出すため、 真の granularity は magazine または imprint 単位
-- **対応候補**:
-  - 2A: `data/seeds/adult-mangaka-supplement.yml` を作って 倉科遼 / 氏賀Y太 を手動追加
-  - 2B: 新テーブル `adult_magazines` + 新シグナル `adult_magazine` (+3) で magazine_key ベース判定。 Wikipedia の magazine 連携が必要
-  - 3 (将来): Phase 5 で Amazon PA-API BrowseNode による direct 判定 (`amazon_metadata.is_adult_browse_node` 経由)
+- **倉科遼 / 氏賀Y太 などの adult-leaning 作家の false-negative**:
+  - 原因: publisher 単位 (リイド社・辰巳出版・ぶんか社等) では adult/mainstream 二値判定不能、 真の granularity は imprint 単位 (例: クリベロン@リイド社、 ペンギンクラブ@辰巳出版、 サイベリア系@ぶんか社)
+  - **対処 Tier 2**: ユーザ提示の imprint→publisher dump (~339 entry、 manga-db.com 系) を整形して 252 imprint を `data/seeds/adult-imprints.yml` に seed、 新テーブル `adult_imprints` + 新シグナル `adult_imprint` (+3) を `computeAdultScore` に追加。 imprint 単位 (granular) と publisher 単位 (coarse) は排他で発火
+  - **対処 Tier 1B**: dump にゼロ件 / 0.x% 程度の大手 mainstream publisher (講談社・白泉社・集英社・小学館・秋田書店・KADOKAWA・芳文社・実業之日本社・少年画報社・ぶんか社 等 22 社) を `PUBLISHER_DENY_LIST` に追加、 publisher 単位 false-positive を抑制
+  - 排他 collision (アクションコミックス: 双葉社 mainstream + 双葉社（アクションピザッツ） adult 両方共有) は `ambiguous` セクションに分離して seed には入れない (false-positive 防止)。 13 entry が ambiguous、 14 entry が distribution_channels (DLwolf18 系)
+
+### 未解消 (将来)
+
+- **3A (Phase 5)**: Amazon PA-API BrowseNode による direct 判定 (`amazon_metadata.is_adult_browse_node` 経由) — PA-API 承認後
 
 ## 未解決の課題 / 観察
 

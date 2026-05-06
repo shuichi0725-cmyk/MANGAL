@@ -6,13 +6,22 @@
  *                                       同じ作家が一般青年誌で描いた作品まで巻き込まない
  *                                       ように単独では threshold(3) に届かないようにする
  *   wikipedia_adult_mangaka_list : 2  ← 同上
- *   adult_publisher_imprint      : 3  ← 出版社/レーベルが成人系なら作品単位で確定
+ *   adult_imprint                : 3  ← imprint 単位 (granular) の adult 判定
+ *   adult_publisher_imprint      : 3  ← publisher 単位 (coarse) の adult 判定
  *
  * 結果 (利用側 promote-bulk は score >= 3 で draft skip):
  *   作家シグナルのみ                      → score = 2  → drafted
- *   出版社シグナルのみ                    → score = 3  → skip
- *   作家 + 出版社                         → score = 5  → skip (強い確証)
+ *   imprint シグナルのみ                  → score = 3  → skip
+ *   publisher シグナルのみ                → score = 3  → skip
+ *   作家 + imprint                        → score = 5  → skip (強い確証)
  *   作家両方ヒット (Wikidata + Wiki list) → score = 4  → skip
+ *
+ * imprint と publisher の関係:
+ *   両方とも weight=3 だが排他扱いにする (どちらか一方だけ発火)。
+ *   imprint 単位 (granular) の方を優先 → 該当時に publisher 判定はスキップ。
+ *   publisher 単位は「どの imprint も該当しなかった時の保険」として残す。
+ *   重複加算しないのは: 同種シグナル (= レーベル/出版社の adult カタログ照合)
+ *   なので独立した証拠ではない、 という思想。
  *
  * Phase 5 で `amazon_browse_node_adult` signal を追加する余地あり (`amazon_metadata`
  * テーブルの `is_adult_browse_node` を参照する形)。
@@ -36,6 +45,7 @@ export type AdultScoreInput = {
   imprints: string[];
   knownAdultMangaka: ReadonlySet<string>;
   knownAdultPublishers: ReadonlySet<string>;
+  knownAdultImprints: ReadonlySet<string>;
 };
 
 export function computeAdultScore(input: AdultScoreInput): AdultScoreResult {
@@ -63,17 +73,35 @@ export function computeAdultScore(input: AdultScoreInput): AdultScoreResult {
     });
   }
 
-  // 3. imprint が既知の成人系出版社に部分一致 (同一 series 内で複数当たっても 1 回だけ加算)
+  // 3. imprint 単位の adult 判定 (granular)。 一致すれば 4 (publisher) はスキップ。
+  let imprintMatched = false;
   for (const imprint of input.imprints) {
-    const matched = matchAdultPublisher(imprint, input.knownAdultPublishers);
+    const matched = matchAdultPublisher(imprint, input.knownAdultImprints);
     if (matched) {
       score += 3;
       signals.push({
-        signal: "adult_publisher_imprint",
+        signal: "adult_imprint",
         weight: 3,
         evidence: `${imprint} ⟵ ${matched}`,
       });
+      imprintMatched = true;
       break;
+    }
+  }
+
+  // 4. publisher 単位の adult 判定 (coarser)。 imprint で当たらなかった時のみ。
+  if (!imprintMatched) {
+    for (const imprint of input.imprints) {
+      const matched = matchAdultPublisher(imprint, input.knownAdultPublishers);
+      if (matched) {
+        score += 3;
+        signals.push({
+          signal: "adult_publisher_imprint",
+          weight: 3,
+          evidence: `${imprint} ⟵ ${matched}`,
+        });
+        break;
+      }
     }
   }
 

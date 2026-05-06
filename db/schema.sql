@@ -20,7 +20,7 @@ CREATE TABLE IF NOT EXISTS meta (
   value TEXT NOT NULL
 );
 INSERT OR IGNORE INTO meta (key, value) VALUES
-  ('schema_version', '5'),
+  ('schema_version', '6'),
   ('created_at', strftime('%Y-%m-%dT%H:%M:%SZ', 'now'));
 
 -- M3: publishers / magazines は data/*.yml が source-of-truth だが、
@@ -161,6 +161,22 @@ CREATE TABLE IF NOT EXISTS adult_mangaka_known (
   fetched_at  TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%SZ', 'now'))
 );
 
+-- Tier 2 (schema v6, 2026-05): imprint レベルの adult シード。
+-- adult_publishers (publisher 単位) では捕捉できない「大手 publisher の adult
+-- 専用 sub-imprint」 (例: KADOKAWA フルールコミックス、 リイド社クリベロン系、
+-- ぶんか社サイベリア系) を編集ぐらしの粒度で識別する。
+-- seed source: data/seeds/adult-imprints.yml (~250 entry)
+-- 生成: scripts/seed-adult-imprints.ts が yaml を読んで INSERT OR REPLACE。
+-- 照合: editions.imprint が `imprint` 列を substring 包含する場合に
+-- adult_imprint シグナル (+3) を発火させる (lib/adult-score.ts)。
+CREATE TABLE IF NOT EXISTS adult_imprints (
+  imprint     TEXT PRIMARY KEY,    -- NFKC 正規化済の imprint 名
+  publisher   TEXT,                 -- 補助情報 (検出ロジックは未使用)
+  count       INTEGER,              -- raw dump 由来の件数 (信頼度 weight 用)
+  source      TEXT NOT NULL,        -- 'manual_seed' / 'wikipedia' / etc.
+  fetched_at  TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%SZ', 'now'))
+);
+
 -- L4: ASIN は ISBN-13 と 1:N（ロケール別・楽天/Amazon 出品差異など）。
 -- volumes.asin の単一カラムだと運用で詰まるので、別表で複数登録を許す。
 -- volumes.asin はキャッシュとして「主に使う1件」を保持する位置付けに留める。
@@ -189,6 +205,7 @@ CREATE TABLE IF NOT EXISTS amazon_metadata (
   FOREIGN KEY (isbn13) REFERENCES volumes(isbn13) ON DELETE SET NULL
 );
 
+CREATE INDEX IF NOT EXISTS idx_adult_imprints_imprint  ON adult_imprints(imprint);
 CREATE INDEX IF NOT EXISTS idx_volumes_edition         ON volumes(edition_id);
 CREATE INDEX IF NOT EXISTS idx_editions_series         ON editions(series_id);
 CREATE INDEX IF NOT EXISTS idx_series_authors_mangaka  ON series_authors(mangaka_id);

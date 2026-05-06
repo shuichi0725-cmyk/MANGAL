@@ -1,0 +1,872 @@
+# data/seeds/adult-imprints.yml
+#
+# 自動生成: scripts/clean-imprint-dump.ts (data/seeds/_raw-imprint-dump.txt より)。
+# 編集する場合は raw dump を更新してから clean script を再実行する。
+#
+# 用途: scripts/seed-adult-imprints.ts が読み、 adult_imprints テーブルへ INSERT。
+# computeAdultScore は editions.imprint がここに含まれる名前を substring 包含
+# する場合 +3 シグナル (adult_imprint) を発火する (lib/adult-score.ts)。
+#
+# セクション:
+#   imprints              : adult publisher が確定 (publisher も保持、 weight 用に count も)
+#   distribution_channels : imprint は adult だが publisher 欄が配信プラットフォーム
+#                           (DLwolf18 等)。 publisher は信頼できないので捨てる。
+#   ambiguous             : 同名 imprint × 異 publisher の collision 注意エントリ。
+#                           DB に投入しない (false-positive 防止)。
+
+schema_version: 1
+
+imprints:
+  - imprint: 'カゲキヤコミック'
+    publisher: 'DEEPER-ZERO'
+    count: 4494
+  - imprint: '二次元ドリームコミックス'
+    publisher: 'キルタイムコミュニケーション'
+    count: 3893
+  - imprint: 'COMIC BAVEL'
+    publisher: '文苑堂'
+    count: 3085
+  - imprint: 'MENSスクリーモ'
+    publisher: 'スクリーモ'
+    count: 2876
+  - imprint: 'マガジンサイベリア'
+    publisher: 'ぶんか社'
+    count: 2832
+  - imprint: 'ペンギンクラブ'
+    publisher: '辰巳出版'
+    count: 2497
+  - imprint: 'アンリアルコミックス'
+    publisher: 'キルタイムコミュニケーション'
+    count: 2350
+  - imprint: 'KATTS'
+    publisher: 'KATTS'
+    count: 2159
+  - imprint: 'ガチコミ'
+    publisher: 'forcs'
+    count: 1935
+  - imprint: '絶頂征服Z!'
+    publisher: 'STDパブリッシング'
+    count: 1835
+  - imprint: 'MOOG COMICS'
+    publisher: 'ジーウォーク'
+    count: 1831
+  - imprint: 'むっちりプルコミ'
+    publisher: 'Bevy'
+    count: 1731
+  - imprint: 'もえスタビースト'
+    publisher: 'DEEPER-ZERO'
+    count: 1645
+  - imprint: 'E×E'
+    publisher: 'ジーオーティー'
+    count: 1556
+  - imprint: 'アララブMAX'
+    publisher: 'FILL-IN'
+    count: 1439
+  - imprint: 'comicアンスリウム'
+    publisher: 'ジーオーティー'
+    count: 1389
+  - imprint: 'こすりクラブ'
+    publisher: 'FILL-IN'
+    count: 1367
+  - imprint: 'エンジェル出版☆(エンジェル倶楽部)'
+    publisher: 'エンジェル出版'
+    count: 1259
+  - imprint: 'アンスリウム'
+    publisher: 'ジーオーティー'
+    count: 1224
+  - imprint: 'アシオナcomic'
+    publisher: '株式会社渋谷六花舎'
+    count: 1185
+  - imprint: 'WANIMAGAZINE COMICS SPECIAL'
+    publisher: 'ワニマガジン社'
+    count: 1149
+  - imprint: 'コミックグレープ'
+    publisher: 'ジーオーティー'
+    count: 1109
+  - imprint: 'クリベロン'
+    publisher: 'リイド社'
+    count: 974
+  - imprint: 'メガバースト'
+    publisher: '激ちゅぱっ'
+    count: 970
+  - imprint: 'GOT COMICS'
+    publisher: 'ジーオーティー'
+    count: 834
+  - imprint: 'アシオナNEXT'
+    publisher: '株式会社渋谷六花舎'
+    count: 775
+  - imprint: 'COMICペンギンクラブ山賊版'
+    publisher: '辰巳出版'
+    count: 770
+  - imprint: 'いずみコミックス'
+    publisher: '一水社'
+    count: 752
+  - imprint: 'ゲネシスコミックス'
+    publisher: 'ゲネシス'
+    count: 739
+  - imprint: '美少女文庫'
+    publisher: 'フランス書院'
+    count: 674
+  - imprint: 'COMICペンギンセレブ'
+    publisher: '辰巳出版'
+    count: 592
+  - imprint: 'クリベロンDUMA'
+    publisher: 'リイド社'
+    count: 581
+  - imprint: 'サイベリアplus'
+    publisher: 'ぶんか社'
+    count: 565
+  - imprint: 'メガストアコミックス'
+    publisher: 'コアマガジン'
+    count: 555
+  - imprint: '絶対領域R!'
+    publisher: 'スクリーモ'
+    count: 551
+  - imprint: 'ダスコミ'
+    publisher: '文苑堂'
+    count: 516
+  - imprint: 'アイアンコミックス'
+    publisher: '激ちゅぱっ'
+    count: 515
+  - imprint: 'GEEコミックス'
+    publisher: 'ブレインハウス'
+    count: 513
+  - imprint: '二次元ドリームノベルズ'
+    publisher: 'キルタイムコミュニケーション'
+    count: 503
+  - imprint: 'サークルコネクト アダルト'
+    publisher: 'サークルコネクト'
+    count: 495
+  - imprint: 'COMIC-XXX'
+    publisher: 'DEEPER-ZERO'
+    count: 489
+  - imprint: 'イケ★マン'
+    publisher: 'forcs'
+    count: 484
+  - imprint: 'COMIC失楽天'
+    publisher: 'ワニマガジン社'
+    count: 470
+  - imprint: 'COMIC LO'
+    publisher: '茜新社'
+    count: 440
+  - imprint: 'サンワコミックス'
+    publisher: '三和出版'
+    count: 438
+  - imprint: 'MUJIN COMICS'
+    publisher: 'ティーアイネット'
+    count: 438
+  - imprint: 'COMIC快楽天'
+    publisher: 'ワニマガジン社'
+    count: 432
+  - imprint: '二次元ドリーム文庫'
+    publisher: 'キルタイムコミュニケーション'
+    count: 424
+  - imprint: 'COMIC快楽天ビースト'
+    publisher: 'ワニマガジン社'
+    count: 411
+  - imprint: 'ダンジョン攻略はSEXで!!'
+    publisher: '文苑堂'
+    count: 386
+  - imprint: 'メンズゴールド'
+    publisher: 'リイド社'
+    count: 380
+  - imprint: 'セラフィンコミックス'
+    publisher: 'ヒット出版社'
+    count: 373
+  - imprint: 'リビドリーム'
+    publisher: 'セ・キララ文庫'
+    count: 367
+  - imprint: 'TENMA COMICS LO'
+    publisher: '茜新社'
+    count: 359
+  - imprint: 'Ziggurat comics'
+    publisher: 'Ziggurat'
+    count: 350
+  - imprint: 'コミックマグナム'
+    publisher: 'ジーオーティー'
+    count: 348
+  - imprint: 'WEBバズーカ'
+    publisher: '辰巳出版'
+    count: 343
+  - imprint: 'eternal'
+    publisher: 'eternal'
+    count: 333
+  - imprint: 'ホットミルクコミックス'
+    publisher: 'コアマガジン'
+    count: 329
+  - imprint: 'BAVEL COMICS'
+    publisher: '文苑堂'
+    count: 327
+  - imprint: 'WEEKLY快楽天SELECTION'
+    publisher: 'ワニマガジン社'
+    count: 320
+  - imprint: 'Rush! Z'
+    publisher: 'Rush!'
+    count: 299
+  - imprint: 'COMICネクロシス'
+    publisher: '三和出版'
+    count: 296
+  - imprint: 'ワコーコミックス'
+    publisher: '若生出版'
+    count: 296
+  - imprint: 'NIKI'
+    publisher: 'NIKI'
+    count: 286
+  - imprint: 'Grape(グレープ)'
+    publisher: 'ジーオーティー'
+    count: 281
+  - imprint: '漫画ローレンス'
+    publisher: '辰巳出版'
+    count: 276
+  - imprint: '二次元ぷち文庫'
+    publisher: 'キルタイムコミュニケーション'
+    count: 273
+  - imprint: 'サイコロコミックス'
+    publisher: 'サイコロブックス'
+    count: 268
+  - imprint: 'COMIC ゼロス'
+    publisher: 'ワニマガジン社'
+    count: 266
+  - imprint: 'ちゅるーむ'
+    publisher: 'パチカ'
+    count: 266
+  - imprint: 'COMICエウロパ'
+    publisher: '文苑堂'
+    count: 251
+  - imprint: 'BAVEL DIGITAL COMICS'
+    publisher: '文苑堂'
+    count: 233
+  - imprint: 'リアルドリーム文庫'
+    publisher: 'キルタイムコミュニケーション'
+    count: 217
+  - imprint: '異世快楽天SELECTION'
+    publisher: 'ワニマガジン社'
+    count: 210
+  - imprint: 'comic Blast'
+    publisher: 'Rush!'
+    count: 201
+  - imprint: 'コミックMate L'
+    publisher: '一水社'
+    count: 195
+  - imprint: '別冊エースファイブコミックス'
+    publisher: '松文館'
+    count: 192
+  - imprint: '妄想ブックス'
+    publisher: '妄想ブックス'
+    count: 187
+  - imprint: 'リビッシュ'
+    publisher: 'wwwave comics'
+    count: 186
+  - imprint: '真激COMICS'
+    publisher: 'クロエ出版'
+    count: 184
+  - imprint: 'ピンクパイナップル'
+    publisher: 'ピンクパイナップル'
+    count: 183
+  - imprint: 'WANIMAGAZINE COMICS'
+    publisher: 'ワニマガジン社'
+    count: 178
+  - imprint: 'WANIMAGAZINE COMICS LOG'
+    publisher: 'ワニマガジン社'
+    count: 177
+  - imprint: 'Web配信月刊隣の気になる奥さん'
+    publisher: '一水社'
+    count: 173
+  - imprint: 'メガストアウェブコミックス'
+    publisher: 'コアマガジン'
+    count: 171
+  - imprint: 'TENMACOMICS'
+    publisher: '茜新社'
+    count: 167
+  - imprint: 'comic Trigger'
+    publisher: '三和出版'
+    count: 162
+  - imprint: '紅文庫'
+    publisher: 'ジーウォーク'
+    count: 156
+  - imprint: 'コミックマショウ'
+    publisher: '三和出版'
+    count: 156
+  - imprint: 'クリベロンコミックス'
+    publisher: 'リイド社'
+    count: 155
+  - imprint: 'コミック刺激的SQUIRT!!'
+    publisher: '一水社'
+    count: 155
+  - imprint: 'comicホエール'
+    publisher: 'セ・キララ文庫'
+    count: 142
+  - imprint: 'COMIC BASS'
+    publisher: 'ブレインハウス'
+    count: 140
+  - imprint: '本能爆発'
+    publisher: 'グループ・ゼロ'
+    count: 139
+  - imprint: '3E'
+    publisher: '3E'
+    count: 134
+  - imprint: 'オトナ文庫'
+    publisher: 'パラダイム'
+    count: 133
+  - imprint: 'RK COMICS CYBERIA SERIES'
+    publisher: 'ぶんか社'
+    count: 131
+  - imprint: 'SPコミックス'
+    publisher: 'リイド社'
+    count: 130
+  - imprint: 'Comic G-Es'
+    publisher: 'ジーオーティー'
+    count: 130
+  - imprint: 'LOE'
+    publisher: '茜新社(電子)'
+    count: 127
+  - imprint: 'らめぇコミック'
+    publisher: 'アイプロダクション'
+    count: 122
+  - imprint: 'ワニデジタル'
+    publisher: 'ワニデジタル'
+    count: 122
+  - imprint: 'COMICオルガ'
+    publisher: '一水社'
+    count: 121
+  - imprint: 'Masyo Ecole'
+    publisher: '三和出版'
+    count: 120
+  - imprint: '二次元ドリームマガジン'
+    publisher: 'キルタイムコミュニケーション'
+    count: 110
+  - imprint: 'Warikiri★TIMES 全国版'
+    publisher: '三和出版'
+    count: 108
+  - imprint: 'COMIC Luxuria'
+    publisher: 'D-core'
+    count: 103
+  - imprint: 'Webコミックトウテツ'
+    publisher: '一水社'
+    count: 100
+  - imprint: 'マイウェイコミックス'
+    publisher: 'メディアックス'
+    count: 100
+  - imprint: 'BugBug'
+    publisher: '辰巳出版'
+    count: 99
+  - imprint: 'ましゅまろ倶楽部'
+    publisher: '株式会社クリエイティブエンタテインメント'
+    count: 92
+  - imprint: 'デジタルぷにぺどッ!'
+    publisher: '一水社'
+    count: 90
+  - imprint: 'アクリコミック'
+    publisher: 'アクリコミック'
+    count: 88
+  - imprint: 'デジタルマショウアンソロジー'
+    publisher: '三和出版'
+    count: 85
+  - imprint: 'いずみコミックス・ハーフ版'
+    publisher: '一水社'
+    count: 81
+  - imprint: 'ビギニングノベルズ'
+    publisher: 'キルタイムコミュニケーション'
+    count: 78
+  - imprint: 'COMIC真激'
+    publisher: 'クロエ出版'
+    count: 77
+  - imprint: '@夜噺+'
+    publisher: 'DEEPER-ZERO'
+    count: 72
+  - imprint: 'おむつ倶楽部'
+    publisher: '三和出版'
+    count: 72
+  - imprint: '劇画王'
+    publisher: '劇画王'
+    count: 71
+  - imprint: 'あとみっく文庫'
+    publisher: 'キルタイムコミュニケーション'
+    count: 69
+  - imprint: 'デカジョ!'
+    publisher: '一水社'
+    count: 65
+  - imprint: 'BBB COMICS'
+    publisher: '文苑堂'
+    count: 65
+  - imprint: '黄金のソナタXXX'
+    publisher: '一水社'
+    count: 62
+  - imprint: 'ラ・フランスCOMICS-R'
+    publisher: 'フランス書院'
+    count: 62
+  - imprint: '茜新社DIGITALプレミアム'
+    publisher: '茜新社'
+    count: 61
+  - imprint: 'キャノプリCOMICS'
+    publisher: 'ジーオーティー'
+    count: 60
+  - imprint: '催ぷにッ!'
+    publisher: '一水社'
+    count: 60
+  - imprint: 'TENMA COMICS 高'
+    publisher: '茜新社'
+    count: 58
+  - imprint: 'キングノベルス'
+    publisher: 'パラダイム'
+    count: 57
+  - imprint: 'Ziggurat colorcomics'
+    publisher: 'Ziggurat'
+    count: 57
+  - imprint: 'COMIC桃姫DEEPEST'
+    publisher: '辰巳出版'
+    count: 56
+  - imprint: 'SYNAPSEHEART'
+    publisher: 'SYNAPSE HEART'
+    count: 53
+  - imprint: 'マグナムコミック'
+    publisher: 'ジーオーティー'
+    count: 53
+  - imprint: 'ロリババア専門アンソロジー 千代娘'
+    publisher: '一水社'
+    count: 53
+  - imprint: 'バベル縦コミシリーズ'
+    publisher: '文苑堂'
+    count: 52
+  - imprint: 'TENMAコミックス'
+    publisher: 'コミックハウス'
+    count: 51
+  - imprint: 'WEB配信転生ものアンソロジー 転生したら交合しちまった件'
+    publisher: '一水社'
+    count: 48
+  - imprint: 'XCOMICS'
+    publisher: 'フランス書院'
+    count: 48
+  - imprint: 'TENMA COMICS RiN'
+    publisher: '茜新社'
+    count: 47
+  - imprint: 'AOHA COMICS'
+    publisher: '茜新社'
+    count: 45
+  - imprint: 'マンガ・パンゲア'
+    publisher: 'A-WAGON R'
+    count: 45
+  - imprint: 'COMIC はぴにんぐ'
+    publisher: 'ワニマガジン社'
+    count: 40
+  - imprint: 'サイベリアコミックス'
+    publisher: 'ぶんか社'
+    count: 35
+  - imprint: 'ギャレット'
+    publisher: 'セ・キララ文庫'
+    count: 34
+  - imprint: '永遠草紙'
+    publisher: '茜新社'
+    count: 34
+  - imprint: 'モラルハザード'
+    publisher: 'A-WAGON R'
+    count: 33
+  - imprint: '異世界娘との交接'
+    publisher: '一水社'
+    count: 31
+  - imprint: 'ウォー!コミックスDX'
+    publisher: 'ジュネット'
+    count: 31
+  - imprint: 'COMIC夢幻転生'
+    publisher: 'ティーアイネット'
+    count: 31
+  - imprint: 'ポプリコミックス'
+    publisher: 'マックス'
+    count: 31
+  - imprint: 'COMIC Reboot'
+    publisher: 'ジーウォーク'
+    count: 30
+  - imprint: 'TECHGIAN STYLE'
+    publisher: 'KADOKAWA'
+    count: 30
+  - imprint: 'メガストアアートワークス'
+    publisher: 'コアマガジン'
+    count: 30
+  - imprint: 'ヤング宣言'
+    publisher: '秋水社ORIGINAL'
+    count: 29
+  - imprint: 'アンリアルTOON'
+    publisher: 'キルタイムコミュニケーション'
+    count: 28
+  - imprint: 'EROS BOYS COMICS'
+    publisher: 'メディアックス'
+    count: 26
+  - imprint: 'COMIC 高'
+    publisher: '茜新社'
+    count: 26
+  - imprint: '黒ひめコミック'
+    publisher: 'アイプロダクション'
+    count: 25
+  - imprint: 'デジタルオリジナルコミックス'
+    publisher: '若生出版'
+    count: 25
+  - imprint: 'XO COMICS'
+    publisher: 'オークス'
+    count: 24
+  - imprint: 'ダイトコミックス'
+    publisher: '大都社/少年画報社'
+    count: 24
+  - imprint: 'ダンジョンCOMICS'
+    publisher: '文苑堂'
+    count: 22
+  - imprint: 'TL★オトメチカ'
+    publisher: 'CLLENN'
+    count: 22
+  - imprint: 'TENMACOMICS JC(ジューシー)'
+    publisher: '茜新社'
+    count: 21
+  - imprint: '侍侍'
+    publisher: '侍侍'
+    count: 21
+  - imprint: 'エンドロール'
+    publisher: 'ジーウォーク'
+    count: 20
+  - imprint: '月刊Web男の娘・れくしょんッ!S'
+    publisher: '一水社'
+    count: 20
+  - imprint: 'コミックゲンま!'
+    publisher: 'forcs'
+    count: 20
+  - imprint: '晋遊舎コミックス'
+    publisher: 'マックス'
+    count: 20
+  - imprint: 'MENSスクリーモCompi!'
+    publisher: 'スクリーモ'
+    count: 20
+  - imprint: 'EUROPA COMICS'
+    publisher: '文苑堂'
+    count: 19
+  - imprint: '絶頂快感コミック'
+    publisher: 'forcs'
+    count: 19
+  - imprint: 'TENMACOMICS G4M'
+    publisher: '茜新社'
+    count: 19
+  - imprint: 'ネオコミックス'
+    publisher: '辰巳出版'
+    count: 19
+  - imprint: 'MD COMICS NEO'
+    publisher: '一水社'
+    count: 18
+  - imprint: '時代艶文庫'
+    publisher: 'フランス書院'
+    count: 17
+  - imprint: 'COMIC群青'
+    publisher: '茜新社(電子)'
+    count: 16
+  - imprint: 'ワールドコミックススペシャル'
+    publisher: '久保書店'
+    count: 16
+  - imprint: 'TENMA COMICS 好色少年'
+    publisher: '茜新社'
+    count: 15
+  - imprint: '阿吽改'
+    publisher: 'ヒット出版社'
+    count: 15
+  - imprint: '外楽WEB COMICS'
+    publisher: 'コアマガジン'
+    count: 15
+  - imprint: 'COMICバズーカ'
+    publisher: '辰巳出版'
+    count: 15
+  - imprint: '新鮮少女果樹園'
+    publisher: '松文館'
+    count: 15
+  - imprint: 'TENMA COMICS EX'
+    publisher: '茜新社'
+    count: 15
+  - imprint: 'ビニュウ特選隊'
+    publisher: 'A-WAGON R'
+    count: 15
+  - imprint: 'マンガの金字塔'
+    publisher: 'グループ・ゼロ'
+    count: 15
+  - imprint: '枕絵草子'
+    publisher: '松文館'
+    count: 15
+  - imprint: 'あまとりあコミックス'
+    publisher: '久保書店'
+    count: 14
+  - imprint: '電撃萌王増刊'
+    publisher: 'KADOKAWA'
+    count: 13
+  - imprint: 'TENMAコミックス LO'
+    publisher: 'コミックハウス'
+    count: 13
+  - imprint: 'マスターズ文庫'
+    publisher: 'フランス書院'
+    count: 13
+  - imprint: 'R文庫'
+    publisher: 'フランス書院'
+    count: 12
+  - imprint: '乙女チック'
+    publisher: 'CLLENN'
+    count: 12
+  - imprint: 'COMIC アオハ'
+    publisher: '茜新社'
+    count: 12
+  - imprint: 'COMICプルメロ'
+    publisher: '若生出版'
+    count: 12
+  - imprint: 'BICKY'
+    publisher: 'アイプロダクション'
+    count: 12
+  - imprint: 'ROCKコミックK'
+    publisher: 'A-WAGON R'
+    count: 12
+  - imprint: 'OKS COMIX'
+    publisher: 'オークス'
+    count: 11
+  - imprint: 'コアコミックス'
+    publisher: 'コアマガジン'
+    count: 11
+  - imprint: 'こみっくすかぁれっと'
+    publisher: 'forcs'
+    count: 11
+  - imprint: 'LO尊いチョイス'
+    publisher: '茜新社(電子)'
+    count: 10
+  - imprint: '危険恋愛M'
+    publisher: '松文館'
+    count: 10
+  - imprint: 'コミックプリズム'
+    publisher: 'キルタイムコミュニケーション'
+    count: 10
+  - imprint: 'JUNEコミックス B-men''s comics'
+    publisher: 'サン出版'
+    count: 10
+  - imprint: 'マグナムX'
+    publisher: 'ジーオーティー'
+    count: 10
+  - imprint: '男の娘・れくしょんッ!S AD'
+    publisher: '一水社'
+    count: 9
+  - imprint: 'おしっ娘☆でちゃう!! for Digital'
+    publisher: '一水社'
+    count: 9
+  - imprint: 'KTCイラストコレクション'
+    publisher: 'キルタイムコミュニケーション'
+    count: 9
+  - imprint: 'コミック文庫'
+    publisher: 'フランス書院'
+    count: 9
+  - imprint: '絶倫ぷりん'
+    publisher: '松文館'
+    count: 9
+  - imprint: '東漫スピリット'
+    publisher: 'A-WAGON R'
+    count: 9
+  - imprint: 'コミックアンリアル'
+    publisher: 'キルタイムコミュニケーション'
+    count: 8
+  - imprint: 'リターンフェスティバル'
+    publisher: '久保書店'
+    count: 8
+  - imprint: 'KATTS-L'
+    publisher: 'KATTS'
+    count: 7
+  - imprint: 'COMIC MILF'
+    publisher: 'ティーアイネット'
+    count: 7
+  - imprint: 'GL★オトメチカ'
+    publisher: 'CLLENN'
+    count: 7
+  - imprint: 'ダイナコミックス'
+    publisher: '松文館'
+    count: 7
+  - imprint: 'ディスカバリー'
+    publisher: 'ディスカバリー'
+    count: 7
+  - imprint: 'マンサンコミックス'
+    publisher: '実業之日本社'
+    count: 7
+  - imprint: '夢雅COMICS'
+    publisher: 'オークス'
+    count: 7
+  - imprint: 'リアルドリームコミックス'
+    publisher: 'キルタイムコミュニケーション'
+    count: 7
+  - imprint: 'アイプロダクション/MAHK'
+    publisher: 'アイプロダクション/MAHK'
+    count: 6
+  - imprint: 'ウォー!コミックDX'
+    publisher: 'マガジン・マガジン'
+    count: 6
+  - imprint: '華陵COMICS'
+    publisher: 'オークス'
+    count: 6
+  - imprint: 'ももまんじるし'
+    publisher: 'モエールオンライン'
+    count: 6
+  - imprint: 'GOT ART BOOK X‐RATED'
+    publisher: 'ジーオーティー'
+    count: 5
+  - imprint: '秋水社ORIGINAL'
+    publisher: '秋水社ORIGINAL'
+    count: 5
+  - imprint: '二次元ゲーム文庫'
+    publisher: 'キルタイムコミュニケーション'
+    count: 5
+  - imprint: 'パインコミック'
+    publisher: '松文館'
+    count: 5
+  - imprint: 'MAXムック'
+    publisher: 'マックス'
+    count: 5
+  - imprint: 'ラスティナ'
+    publisher: 'セ・キララ文庫'
+    count: 5
+  - imprint: 'ワールドコミックスMAX'
+    publisher: '久保書店'
+    count: 5
+  - imprint: 'OKSコミックス百合シリーズ'
+    publisher: 'オークス'
+    count: 4
+  - imprint: 'ZCOMICS'
+    publisher: 'フランス書院'
+    count: 4
+  - imprint: 'COMIC saseco'
+    publisher: '茜新社'
+    count: 3
+  - imprint: 'GOT NIGHT NOVEL'
+    publisher: 'ジーオーティー'
+    count: 2
+  - imprint: 'TENMA COMICS SPECIAL'
+    publisher: '茜新社'
+    count: 2
+  - imprint: '真激コレクション'
+    publisher: 'クロエ出版'
+    count: 2
+  - imprint: 'デルタコミックス'
+    publisher: 'キルタイムコミュニケーション'
+    count: 2
+  - imprint: 'いずみコミックス特別編集版'
+    publisher: '一水社'
+    count: 1
+  - imprint: 'ヴァルキリーコミックス'
+    publisher: 'キルタイムコミュニケーション'
+    count: 1
+  - imprint: 'Girls forM SAVAGE'
+    publisher: '茜新社(電子)'
+    count: 1
+  - imprint: '好色少年'
+    publisher: '茜新社'
+    count: 1
+  - imprint: 'CHコミック'
+    publisher: 'コミックハウス'
+    count: 1
+  - imprint: 'セキララ文庫'
+    publisher: 'セ・キララ文庫'
+    count: 1
+  - imprint: 'DOコミックス'
+    publisher: 'ヒット出版社'
+    count: 1
+  - imprint: 'DMMエクスタシー'
+    publisher: 'ジーオーティー'
+    count: 1
+  - imprint: '永遠撰集'
+    publisher: '茜新社(電子)'
+    count: 1
+  - imprint: 'ライト・マニアック・テキストシリーズ'
+    publisher: '三和出版'
+    count: 1
+  - imprint: 'ワールドコミックス'
+    publisher: '久保書店'
+    count: 1
+
+distribution_channels:
+  - imprint: 'comico'
+    notes: '配信プラットフォーム: comico (合計 347 件)'
+  - imprint: 'comicトピア'
+    notes: '配信プラットフォーム: Mobile Media Research / モバイルメディアリサーチ (合計 517 件)'
+  - imprint: 'comicトピア+'
+    notes: '配信プラットフォーム: Mobile Media Research (合計 16 件)'
+  - imprint: 'Dlsite成年オリジナル'
+    notes: '配信プラットフォーム: DLsite成年オリジナル (合計 12 件)'
+  - imprint: 'DLwolf18'
+    notes: '配信プラットフォーム: All Contents & VR / FACON / Mr.Blue / NUWARU / Nuon / StorySoop / Toons family / WEBTOON TV / Webtoon Koi Contents (合計 3867 件)'
+  - imprint: 'e-Color Comic'
+    notes: '配信プラットフォーム: TMEプラス / TMEプラス/ウィルクリエイション (合計 1808 件)'
+  - imprint: 'Ruby RED'
+    notes: '配信プラットフォーム: Webtoon Koi Contents (合計 40 件)'
+  - imprint: 'StorySoop'
+    notes: '配信プラットフォーム: StorySoop (合計 25 件)'
+  - imprint: 'TOPTOON'
+    notes: '配信プラットフォーム: TOPCO JAPAN (合計 2436 件)'
+  - imprint: 'Webtoon Koi Contents'
+    notes: '配信プラットフォーム: Webtoon Koi Contents (合計 354 件)'
+  - imprint: 'エロマンガ島'
+    notes: '配信プラットフォーム: Mobile Media Research / モバイルメディアリサーチ (合計 8262 件)'
+  - imprint: 'コミックトピア'
+    notes: '配信プラットフォーム: モバイルメディアリサーチ (合計 21 件)'
+  - imprint: 'レジコミ Red'
+    notes: '配信プラットフォーム: レジンコミックス / レジンコミックス / Kidari Studio (合計 4228 件)'
+  - imprint: '妄想現実メディア'
+    notes: '配信プラットフォーム: デジタルコミック流通ネットワーク (合計 568 件)'
+
+ambiguous:
+  - imprint: 'MDコミックス'
+    publishers:
+      - 'メディアックス'
+      - 'モエールオンライン'
+    note: '同名 imprint × 複数 publisher (2 groups) → adult/mainstream collision の可能性、 seed には入れない'
+  - imprint: 'MISAKI COMICS'
+    publishers:
+      - '茜新社'
+      - '茜新社(電子)'
+    note: 'sub-imprint 注釈あり (mainstream + adult の同名 imprint collision の可能性)、 seed には入れない'
+  - imprint: 'アクションコミックス'
+    publishers:
+      - '双葉社'
+      - '双葉社(アクションピザッツ)'
+    note: 'sub-imprint 注釈あり (mainstream + adult の同名 imprint collision の可能性)、 seed には入れない'
+  - imprint: 'ウォー!コミックス'
+    publishers:
+      - 'サン出版'
+      - 'マガジン・マガジン'
+    note: '同名 imprint × 複数 publisher (2 groups) → adult/mainstream collision の可能性、 seed には入れない'
+  - imprint: 'ウォー!コミックスSP'
+    publishers:
+      - 'ジュネット'
+      - 'マガジン・マガジン'
+    note: '同名 imprint × 複数 publisher (2 groups) → adult/mainstream collision の可能性、 seed には入れない'
+  - imprint: 'エンジェルコミックス'
+    publishers:
+      - 'エンジェル出版'
+      - '双葉社'
+    note: '同名 imprint × 複数 publisher (2 groups) → adult/mainstream collision の可能性、 seed には入れない'
+  - imprint: 'ガールズポップコレクション'
+    publishers:
+      - 'グループ・ゼロ'
+      - '松文館'
+    note: '同名 imprint × 複数 publisher (2 groups) → adult/mainstream collision の可能性、 seed には入れない'
+  - imprint: 'メンズ宣言'
+    publishers:
+      - '大都社/秋水社'
+      - '秋水社ORIGINAL'
+    note: '同名 imprint × 複数 publisher (2 groups) → adult/mainstream collision の可能性、 seed には入れない'
+  - imprint: 'レジェンドコミック'
+    publishers:
+      - 'グループ・ゼロ'
+      - '松文館'
+    note: '同名 imprint × 複数 publisher (2 groups) → adult/mainstream collision の可能性、 seed には入れない'
+  - imprint: '永遠娘'
+    publishers:
+      - '茜新社'
+      - '茜新社(電子)'
+    note: 'sub-imprint 注釈あり (mainstream + adult の同名 imprint collision の可能性)、 seed には入れない'
+  - imprint: '禁断ハーレム'
+    publishers:
+      - 'グループ・ゼロ'
+      - '松文館'
+    note: '同名 imprint × 複数 publisher (2 groups) → adult/mainstream collision の可能性、 seed には入れない'
+  - imprint: '女子校生美女マニア'
+    publishers:
+      - 'グループ・ゼロ'
+      - '松文館'
+    note: '同名 imprint × 複数 publisher (2 groups) → adult/mainstream collision の可能性、 seed には入れない'
+  - imprint: '萌姫コミック'
+    publishers:
+      - 'グループ・ゼロ'
+      - '松文館'
+    note: '同名 imprint × 複数 publisher (2 groups) → adult/mainstream collision の可能性、 seed には入れない'

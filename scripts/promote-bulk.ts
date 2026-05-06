@@ -127,6 +127,14 @@ function loadAdultMangakaSet(db: DB): Set<string> {
   return new Set(rows.map((r) => r.name));
 }
 
+/** Tier 2: adult_imprints を SQLite から読んで Set を返す (NFKC 正規化済 imprint 名) */
+function loadAdultImprintSet(db: DB): Set<string> {
+  const rows = db
+    .prepare("SELECT imprint FROM adult_imprints")
+    .all() as { imprint: string }[];
+  return new Set(rows.map((r) => r.imprint));
+}
+
 type SeriesRow = {
   id: number;
   series_key: string;
@@ -318,10 +326,12 @@ async function main() {
 
   // Fix C: 既知の adult publishers / mangaka をメモリにキャッシュ。
   // テーブルが空なら空 Set を返す（fetch:adult-lists 未実行でも壊れない）。
+  // Tier 2: adult_imprints も同様。 seed:adult-imprints 未実行でも壊れない。
   const knownAdultPublishers = loadAdultPublisherSet(db);
   const knownAdultMangaka = loadAdultMangakaSet(db);
+  const knownAdultImprints = loadAdultImprintSet(db);
   console.log(
-    `[adult] known publishers: ${knownAdultPublishers.size}, known mangaka: ${knownAdultMangaka.size}`,
+    `[adult] known publishers: ${knownAdultPublishers.size}, known mangaka: ${knownAdultMangaka.size}, known imprints: ${knownAdultImprints.size}`,
   );
 
   const updateScore = db.prepare(
@@ -390,6 +400,7 @@ async function main() {
       imprints: imprintsForAdultScore,
       knownAdultMangaka,
       knownAdultPublishers,
+      knownAdultImprints,
     });
     if (adultScore > 0) {
       tx(db, () => {

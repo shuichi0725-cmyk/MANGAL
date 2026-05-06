@@ -163,6 +163,31 @@ const PUBLISHER_DENY_LIST: ReadonlySet<string> = new Set([
   "大都社",
   "メディアックス",
   "竹書房", // 一般 / アダルト両方 (一般の方が多数派)
+  // Tier 1B (2026-05): adult-imprint dump (~250 entry) でゼロ件 / 0.x% 程度の
+  // 大手 mainstream publisher。 publisher 単位 flag は不適切なので明示除外し、
+  // adult sub-imprint があれば adult_imprints テーブル (Tier 2) で個別に拾う。
+  "講談社",
+  "白泉社",
+  "集英社",
+  "小学館",
+  "秋田書店",
+  "KADOKAWA",
+  "角川書店",
+  "学習研究社",
+  "芳文社",
+  "主婦と生活社",
+  "祥伝社",
+  "少年画報社",
+  "太田出版",
+  "宝島社",
+  "光文社",
+  "実業之日本社",
+  "朝日ソノラマ",
+  "ホビージャパン",
+  "ジャイブ",
+  "ワニブックス",
+  "ポット出版",
+  "ぶんか社", // adult imprint (サイベリア系) は adult_imprints で拾う、 BLACK 文庫等は mainstream
 ]);
 
 /**

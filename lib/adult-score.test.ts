@@ -4,12 +4,21 @@ import { normalizeCreatorName } from "./edition";
 
 const NO_AUTHORS = new Set<string>();
 const NO_PUBLISHERS = new Set<string>();
+const NO_IMPRINTS = new Set<string>();
 
 const KNOWN_ADULT_PUBLISHERS = new Set([
   "白夜書房",
   "茜新社",
   "コアマガジン",
   "ティーアイネット",
+]);
+
+// Tier 2: adult_imprints (NFKC 正規化済の imprint レーベル名)
+const KNOWN_ADULT_IMPRINTS = new Set([
+  "COMIC LO",
+  "クリベロン",
+  "WEBバズーカ",
+  "フルールコミックス",
 ]);
 
 // adult_mangaka_known テーブルは normalizeCreatorName 後の文字列で持つので、
@@ -27,6 +36,7 @@ describe("computeAdultScore", () => {
         imprints: [],
         knownAdultMangaka: KNOWN_ADULT_MANGAKA,
         knownAdultPublishers: KNOWN_ADULT_PUBLISHERS,
+        knownAdultImprints: KNOWN_ADULT_IMPRINTS,
       });
       expect(result.score).toBe(0);
       expect(result.signals).toEqual([]);
@@ -39,6 +49,7 @@ describe("computeAdultScore", () => {
         imprints: ["集英社", "講談社"],
         knownAdultMangaka: KNOWN_ADULT_MANGAKA,
         knownAdultPublishers: KNOWN_ADULT_PUBLISHERS,
+        knownAdultImprints: KNOWN_ADULT_IMPRINTS,
       });
       expect(result.score).toBe(0);
       expect(result.signals).toEqual([]);
@@ -51,6 +62,7 @@ describe("computeAdultScore", () => {
         imprints: [],
         knownAdultMangaka: NO_AUTHORS,
         knownAdultPublishers: KNOWN_ADULT_PUBLISHERS,
+        knownAdultImprints: NO_IMPRINTS,
       });
       expect(result.score).toBe(0);
     });
@@ -64,6 +76,7 @@ describe("computeAdultScore", () => {
         imprints: [],
         knownAdultMangaka: NO_AUTHORS,
         knownAdultPublishers: NO_PUBLISHERS,
+        knownAdultImprints: NO_IMPRINTS,
       });
       expect(result.score).toBe(2);
       expect(result.signals).toEqual([
@@ -82,6 +95,7 @@ describe("computeAdultScore", () => {
         imprints: [],
         knownAdultMangaka: KNOWN_ADULT_MANGAKA,
         knownAdultPublishers: NO_PUBLISHERS,
+        knownAdultImprints: NO_IMPRINTS,
       });
       expect(result.score).toBe(2);
       expect(result.signals).toHaveLength(1);
@@ -99,6 +113,7 @@ describe("computeAdultScore", () => {
         imprints: ["白夜書房"],
         knownAdultMangaka: NO_AUTHORS,
         knownAdultPublishers: KNOWN_ADULT_PUBLISHERS,
+        knownAdultImprints: NO_IMPRINTS,
       });
       expect(result.score).toBe(3);
       expect(result.signals).toEqual([
@@ -108,6 +123,59 @@ describe("computeAdultScore", () => {
           evidence: "白夜書房 ⟵ 白夜書房",
         },
       ]);
+    });
+
+    it("adult_imprint alone scores 3 (Tier 2 imprint-level signal)", () => {
+      // Tier 2: 倉科遼の嬢王/夜王/女帝 (リイド社・クリベロン*) を再現
+      const result = computeAdultScore({
+        hasWikidataCredit: false,
+        authorName: "ある作家",
+        imprints: ["クリベロンDUMA"],
+        knownAdultMangaka: NO_AUTHORS,
+        knownAdultPublishers: NO_PUBLISHERS,
+        knownAdultImprints: KNOWN_ADULT_IMPRINTS,
+      });
+      expect(result.score).toBe(3);
+      expect(result.signals).toEqual([
+        {
+          signal: "adult_imprint",
+          weight: 3,
+          evidence: "クリベロンDUMA ⟵ クリベロン",
+        },
+      ]);
+    });
+  });
+
+  describe("imprint vs publisher exclusivity", () => {
+    it("imprint match takes precedence over publisher match (single signal)", () => {
+      // imprint と publisher 両方が当たる状況 → imprint 単位の方が granular なので
+      // adult_imprint のみ発火、 adult_publisher_imprint はスキップ。
+      const result = computeAdultScore({
+        hasWikidataCredit: false,
+        authorName: "ある作家",
+        imprints: ["フルールコミックス", "白夜書房"],
+        knownAdultMangaka: NO_AUTHORS,
+        knownAdultPublishers: KNOWN_ADULT_PUBLISHERS,
+        knownAdultImprints: KNOWN_ADULT_IMPRINTS,
+      });
+      expect(result.score).toBe(3);
+      expect(result.signals).toHaveLength(1);
+      expect(result.signals[0].signal).toBe("adult_imprint");
+    });
+
+    it("publisher match fires when no imprint matches", () => {
+      // imprint 候補が adult_imprints に該当しない時、 publisher 単位で照合
+      const result = computeAdultScore({
+        hasWikidataCredit: false,
+        authorName: "ある作家",
+        imprints: ["白夜書房"],
+        knownAdultMangaka: NO_AUTHORS,
+        knownAdultPublishers: KNOWN_ADULT_PUBLISHERS,
+        knownAdultImprints: KNOWN_ADULT_IMPRINTS,
+      });
+      expect(result.score).toBe(3);
+      expect(result.signals).toHaveLength(1);
+      expect(result.signals[0].signal).toBe("adult_publisher_imprint");
     });
   });
 
@@ -120,6 +188,7 @@ describe("computeAdultScore", () => {
         imprints: [],
         knownAdultMangaka: KNOWN_ADULT_MANGAKA,
         knownAdultPublishers: NO_PUBLISHERS,
+        knownAdultImprints: NO_IMPRINTS,
       });
       expect(result.score).toBe(4);
       expect(result.signals.map((s) => s.signal)).toEqual([
@@ -135,6 +204,7 @@ describe("computeAdultScore", () => {
         imprints: ["白夜書房"],
         knownAdultMangaka: NO_AUTHORS,
         knownAdultPublishers: KNOWN_ADULT_PUBLISHERS,
+        knownAdultImprints: NO_IMPRINTS,
       });
       expect(result.score).toBe(5);
       expect(result.signals.map((s) => s.signal)).toEqual([
@@ -143,19 +213,37 @@ describe("computeAdultScore", () => {
       ]);
     });
 
-    it("all three signals stack (2+2+3=7)", () => {
+    it("wikidata + adult imprint = 5 (Tier 2 strong skip)", () => {
+      const result = computeAdultScore({
+        hasWikidataCredit: true,
+        authorName: "ある作家",
+        imprints: ["COMIC LO"],
+        knownAdultMangaka: NO_AUTHORS,
+        knownAdultPublishers: NO_PUBLISHERS,
+        knownAdultImprints: KNOWN_ADULT_IMPRINTS,
+      });
+      expect(result.score).toBe(5);
+      expect(result.signals.map((s) => s.signal)).toEqual([
+        "wikidata_hentai_credit",
+        "adult_imprint",
+      ]);
+    });
+
+    it("all author + imprint signals stack (2+2+3=7), publisher skipped", () => {
+      // imprint match があると publisher は重複加算しない設計なので 7 まで。
       const result = computeAdultScore({
         hasWikidataCredit: true,
         authorName: "唯登詩樹",
-        imprints: ["白夜書房"],
+        imprints: ["COMIC LO", "白夜書房"],
         knownAdultMangaka: KNOWN_ADULT_MANGAKA,
         knownAdultPublishers: KNOWN_ADULT_PUBLISHERS,
+        knownAdultImprints: KNOWN_ADULT_IMPRINTS,
       });
       expect(result.score).toBe(7);
       expect(result.signals.map((s) => s.signal)).toEqual([
         "wikidata_hentai_credit",
         "wikipedia_adult_mangaka_list",
-        "adult_publisher_imprint",
+        "adult_imprint",
       ]);
     });
 
@@ -168,6 +256,7 @@ describe("computeAdultScore", () => {
         imprints: ["集英社", "ヤングジャンプ"],
         knownAdultMangaka: KNOWN_ADULT_MANGAKA,
         knownAdultPublishers: KNOWN_ADULT_PUBLISHERS,
+        knownAdultImprints: KNOWN_ADULT_IMPRINTS,
       });
       expect(result.score).toBe(2);
     });
@@ -183,6 +272,7 @@ describe("computeAdultScore", () => {
         imprints: ["白夜書房", "コアマガジン"],
         knownAdultMangaka: NO_AUTHORS,
         knownAdultPublishers: KNOWN_ADULT_PUBLISHERS,
+        knownAdultImprints: NO_IMPRINTS,
       });
       expect(result.score).toBe(3);
       expect(result.signals).toHaveLength(1);
@@ -199,6 +289,7 @@ describe("computeAdultScore", () => {
         imprints: ["茜新社コミックス"],
         knownAdultMangaka: NO_AUTHORS,
         knownAdultPublishers: KNOWN_ADULT_PUBLISHERS,
+        knownAdultImprints: NO_IMPRINTS,
       });
       expect(result.score).toBe(3);
       expect(result.signals[0].evidence).toBe("茜新社コミックス ⟵ 茜新社");
@@ -211,6 +302,7 @@ describe("computeAdultScore", () => {
         imprints: ["集英社", "白夜書房"],
         knownAdultMangaka: NO_AUTHORS,
         knownAdultPublishers: KNOWN_ADULT_PUBLISHERS,
+        knownAdultImprints: NO_IMPRINTS,
       });
       expect(result.score).toBe(3);
       expect(result.signals[0].evidence).toBe("白夜書房 ⟵ 白夜書房");
@@ -223,6 +315,7 @@ describe("computeAdultScore", () => {
         imprints: [""],
         knownAdultMangaka: NO_AUTHORS,
         knownAdultPublishers: KNOWN_ADULT_PUBLISHERS,
+        knownAdultImprints: KNOWN_ADULT_IMPRINTS,
       });
       expect(result.score).toBe(0);
       expect(result.signals).toEqual([]);
@@ -238,6 +331,7 @@ describe("computeAdultScore", () => {
         imprints: [],
         knownAdultMangaka: KNOWN_ADULT_MANGAKA,
         knownAdultPublishers: NO_PUBLISHERS,
+        knownAdultImprints: NO_IMPRINTS,
       });
       expect(result.score).toBe(2);
       expect(result.signals[0].signal).toBe("wikipedia_adult_mangaka_list");
@@ -254,6 +348,7 @@ describe("computeAdultScore", () => {
         imprints: [],
         knownAdultMangaka: setWithFujiko,
         knownAdultPublishers: NO_PUBLISHERS,
+        knownAdultImprints: NO_IMPRINTS,
       });
       expect(result.score).toBe(2);
     });
@@ -265,6 +360,7 @@ describe("computeAdultScore", () => {
         imprints: [],
         knownAdultMangaka: KNOWN_ADULT_MANGAKA,
         knownAdultPublishers: KNOWN_ADULT_PUBLISHERS,
+        knownAdultImprints: KNOWN_ADULT_IMPRINTS,
       });
       expect(result.score).toBe(0);
       expect(result.signals).toEqual([]);
@@ -279,6 +375,7 @@ describe("computeAdultScore", () => {
         imprints: ["白夜書房 メディアックス"],
         knownAdultMangaka: NO_AUTHORS,
         knownAdultPublishers: KNOWN_ADULT_PUBLISHERS,
+        knownAdultImprints: NO_IMPRINTS,
       });
       // 派生表記 "白夜書房 メディアックス" でも substring マッチで catalog 側
       // の "白夜書房" にひもづいたことが evidence で追跡できる
@@ -287,20 +384,21 @@ describe("computeAdultScore", () => {
       );
     });
 
-    it("preserves signal order: wikidata → wikipedia_list → imprint", () => {
+    it("preserves signal order: wikidata → wikipedia_list → imprint > publisher", () => {
       // signals 配列の順序は db への書き込み順 / レビューでの可読性に影響するので
-      // 固定されていることを確認
+      // 固定されていることを確認。 imprint と publisher は排他なので imprint 優先。
       const result = computeAdultScore({
         hasWikidataCredit: true,
         authorName: "唯登詩樹",
-        imprints: ["白夜書房"],
+        imprints: ["COMIC LO"],
         knownAdultMangaka: KNOWN_ADULT_MANGAKA,
         knownAdultPublishers: KNOWN_ADULT_PUBLISHERS,
+        knownAdultImprints: KNOWN_ADULT_IMPRINTS,
       });
       expect(result.signals.map((s) => s.signal)).toEqual([
         "wikidata_hentai_credit",
         "wikipedia_adult_mangaka_list",
-        "adult_publisher_imprint",
+        "adult_imprint",
       ]);
     });
   });
