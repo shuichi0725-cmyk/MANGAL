@@ -44,6 +44,22 @@ Option B 設計: 作家シグナルのみ (2 or 4) では threshold に届かな
 
 - **Q193300 = 手塚治虫**: 一般中心。false positive 検出用
 - **Q1121064 = 唯登詩樹**: adult/general 混在型。mixed-portfolio 検出用 (難ケース)
+- **scaling-sample-50** (`data/seed/scaling-sample-50.txt`, 2026-05-05): 6,752 名 CSV から stride 135 で 50 名 sample。 GH Actions run #25389566324 (8 分 29 秒、緑、 599 series → 233 drafts)
+
+## scaling-sample-50 で判明した知見 (2026-05-05)
+
+### 解消済み (Tier 1A)
+
+- **「きい」(Q38276629) false positive**: Wikipedia 「日本の成人向け漫画家の一覧」の短名 「きい」 が我々の DB の 堀田きいち (別名「きい」) と normalize 後一致し、 君と僕。@ Square Enix Gangan を始め全 50+ シリーズに `wikipedia_adult_mangaka_list=2` を誤発火させていた (Option B のおかげで score=2 < 3 で drafted されており実害なしだが、 review 時 misleading)
+- **対処**: `scripts/fetch-adult-lists.ts` の `extractAdultMangaka` で normalized 後 length < 3 を弾くよう変更。 publisher 側 (line 200) は元から `< 2` フィルタあり、これで mangaka 側も対称化。 1-2 文字の legitimate な adult-only 作家がいた場合は将来的に `data/seeds/adult-mangaka-supplement.yml` (未作成) で手動救済する前提
+
+### 未解消 (Tier 2 で扱う)
+
+- **倉科遼 (Q8979654) / 氏賀Y太 (Q1610292) の adult_publisher_imprint 不発火**: 倉科遼の女帝/嬢王/夜王 (リイド社・集英社・日本文芸社・小学館) は publisher 単位の adult 二値分類では捕捉不能。 リイド社・双葉社・辰巳出版は `fetch-adult-lists.ts` line 162 の `PUBLISHER_DENY_LIST` で意図的に除外 (一般作品メインの publisher のため)。 構造的問題: 中堅 publisher は一般作品と adult 作品を同じ publisher 名で出すため、 真の granularity は magazine または imprint 単位
+- **対応候補**:
+  - 2A: `data/seeds/adult-mangaka-supplement.yml` を作って 倉科遼 / 氏賀Y太 を手動追加
+  - 2B: 新テーブル `adult_magazines` + 新シグナル `adult_magazine` (+3) で magazine_key ベース判定。 Wikipedia の magazine 連携が必要
+  - 3 (将来): Phase 5 で Amazon PA-API BrowseNode による direct 判定 (`amazon_metadata.is_adult_browse_node` 経由)
 
 ## 未解決の課題 / 観察
 

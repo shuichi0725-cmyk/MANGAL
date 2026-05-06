@@ -239,12 +239,25 @@ function extractAdultMangaka(
     if (!display) continue;
     display = stripWikitext(display).trim();
     if (!display) continue;
-    if (display.length < 1 || display.length > 40) continue;
+    // 上限は parser ノイズ (引用文・複数名連結) を弾く。下限はあえて
+    // 緩めにして、normalized 段階で 3 文字未満を弾く (「き い」 のように
+    // raw は長くても normalize 後 2 文字になるケースを捕捉するため)。
+    if (display.length > 40) continue;
     // ヘッダ行 (== あ行 == 等) や見出しっぽいテキストを弾く
     if (/^\d{4}年|^[#=]/.test(display)) continue;
 
     const normalized = normalizeCreatorName(display);
     if (!normalized || seen.has(normalized)) continue;
+    // 正規化後 3 文字未満は別人作家との衝突リスクが極めて高い。
+    // 例: Wikipedia 成人向け作家リスト の「きい」は、我々の DB の
+    //     Q38276629 (堀田きいち、別名「きい」) と normalize 後完全一致し、
+    //     君と僕。(集英社 Gangan) 等の mainstream 作品に
+    //     wikipedia_adult_mangaka_list=2 を誤発火させる (50-name scaling
+    //     test 2026-05-05 で観察)。 短名 (1-2 文字) は legitimate な
+    //     adult-only 作家であっても data/seeds/adult-mangaka-supplement.yml
+    //     の手動補完で救う前提とする。 publisher 側 (line 200) も length<2
+    //     で同様のフィルタを入れている。
+    if (normalized.length < 3) continue;
     seen.add(normalized);
     out.push({ display, normalized });
   }
