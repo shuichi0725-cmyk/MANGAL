@@ -27,19 +27,25 @@ const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 type OpenBDEntry = {
   onix?: {
     DescriptiveDetail?: {
-      TitleDetail?: Array<{
-        TitleElement?: {
-          TitleText?: { content?: string; collationkey?: string };
-        };
-      }>;
-      Subject?: Array<{
-        SubjectCode?: string;
-        SubjectSchemeIdentifier?: string;
-        SubjectHeadingText?: string;
-      }>;
+      TitleDetail?:
+        | {
+            TitleElement?: {
+              TitleText?: { content?: string; collationkey?: string };
+            };
+          }
+        | Array<{
+            TitleElement?: {
+              TitleText?: { content?: string; collationkey?: string };
+            };
+          }>;
+      Subject?:
+        | { SubjectCode?: string; SubjectSchemeIdentifier?: string }
+        | Array<{ SubjectCode?: string; SubjectSchemeIdentifier?: string }>;
     };
     CollateralDetail?: {
-      TextContent?: Array<{ TextType?: string; Text?: string }>;
+      TextContent?:
+        | { TextType?: string; Text?: string }
+        | Array<{ TextType?: string; Text?: string }>;
     };
   };
   summary?: {
@@ -51,6 +57,12 @@ type OpenBDEntry = {
     isbn?: string;
   };
 };
+
+/** openBD ONIX は object / array 双方で返るので、 安全に配列化する。 */
+function asArray<T>(x: T | T[] | undefined | null): T[] {
+  if (x === null || x === undefined) return [];
+  return Array.isArray(x) ? x : [x];
+}
 
 function pct(num: number, denom: number): string {
   if (denom === 0) return "  -%";
@@ -143,7 +155,7 @@ async function main(): Promise<void> {
 
       const pub = entry.summary?.publisher?.trim() || null;
       const cover = entry.summary?.cover || null;
-      const titleDetails = entry.onix?.DescriptiveDetail?.TitleDetail ?? [];
+      const titleDetails = asArray(entry.onix?.DescriptiveDetail?.TitleDetail);
       let kana: string | null = null;
       for (const td of titleDetails) {
         const ck = td.TitleElement?.TitleText?.collationkey;
@@ -152,15 +164,14 @@ async function main(): Promise<void> {
           break;
         }
       }
-      const text03 = entry.onix?.CollateralDetail?.TextContent?.find(
-        (t) => t.TextType === "03",
-      )?.Text;
+      const text03 = asArray(
+        entry.onix?.CollateralDetail?.TextContent,
+      ).find((t) => t.TextType === "03")?.Text;
       const synopsis = text03?.trim() || null;
       // Cコード = 日本図書コード分類。 SubjectSchemeIdentifier: "78"
-      const subjectC =
-        entry.onix?.DescriptiveDetail?.Subject?.filter(
-          (s) => s.SubjectSchemeIdentifier === "78",
-        ).map((s) => s.SubjectCode ?? "") ?? [];
+      const subjectC = asArray(entry.onix?.DescriptiveDetail?.Subject)
+        .filter((s) => s.SubjectSchemeIdentifier === "78")
+        .map((s) => s.SubjectCode ?? "");
 
       if (pub) stats.hasPublisher++;
       if (kana) stats.hasCollationkey++;
