@@ -5,14 +5,6 @@ import { normalizeCreatorName } from "./edition";
 const NO_AUTHORS = new Set<string>();
 const NO_PUBLISHERS = new Set<string>();
 const NO_IMPRINTS = new Set<string>();
-const NO_BORDERLINE = new Set<string>();
-
-// Option A: 中堅 publisher で adult カタログも持つ
-const BORDERLINE_PUBLISHERS = new Set([
-  "リイド社",
-  "日本文芸社",
-  "竹書房",
-]);
 
 const KNOWN_ADULT_PUBLISHERS = new Set([
   "白夜書房",
@@ -45,7 +37,6 @@ describe("computeAdultScore", () => {
         knownAdultMangaka: KNOWN_ADULT_MANGAKA,
         knownAdultPublishers: KNOWN_ADULT_PUBLISHERS,
         knownAdultImprints: KNOWN_ADULT_IMPRINTS,
-        borderlineAdultPublishers: NO_BORDERLINE,
       });
       expect(result.score).toBe(0);
       expect(result.signals).toEqual([]);
@@ -59,7 +50,6 @@ describe("computeAdultScore", () => {
         knownAdultMangaka: KNOWN_ADULT_MANGAKA,
         knownAdultPublishers: KNOWN_ADULT_PUBLISHERS,
         knownAdultImprints: KNOWN_ADULT_IMPRINTS,
-        borderlineAdultPublishers: NO_BORDERLINE,
       });
       expect(result.score).toBe(0);
       expect(result.signals).toEqual([]);
@@ -73,7 +63,6 @@ describe("computeAdultScore", () => {
         knownAdultMangaka: NO_AUTHORS,
         knownAdultPublishers: KNOWN_ADULT_PUBLISHERS,
         knownAdultImprints: NO_IMPRINTS,
-        borderlineAdultPublishers: NO_BORDERLINE,
       });
       expect(result.score).toBe(0);
     });
@@ -88,7 +77,6 @@ describe("computeAdultScore", () => {
         knownAdultMangaka: NO_AUTHORS,
         knownAdultPublishers: NO_PUBLISHERS,
         knownAdultImprints: NO_IMPRINTS,
-        borderlineAdultPublishers: NO_BORDERLINE,
       });
       expect(result.score).toBe(2);
       expect(result.signals).toEqual([
@@ -108,7 +96,6 @@ describe("computeAdultScore", () => {
         knownAdultMangaka: KNOWN_ADULT_MANGAKA,
         knownAdultPublishers: NO_PUBLISHERS,
         knownAdultImprints: NO_IMPRINTS,
-        borderlineAdultPublishers: NO_BORDERLINE,
       });
       expect(result.score).toBe(2);
       expect(result.signals).toHaveLength(1);
@@ -127,7 +114,6 @@ describe("computeAdultScore", () => {
         knownAdultMangaka: NO_AUTHORS,
         knownAdultPublishers: KNOWN_ADULT_PUBLISHERS,
         knownAdultImprints: NO_IMPRINTS,
-        borderlineAdultPublishers: NO_BORDERLINE,
       });
       expect(result.score).toBe(3);
       expect(result.signals).toEqual([
@@ -148,7 +134,6 @@ describe("computeAdultScore", () => {
         knownAdultMangaka: NO_AUTHORS,
         knownAdultPublishers: NO_PUBLISHERS,
         knownAdultImprints: KNOWN_ADULT_IMPRINTS,
-        borderlineAdultPublishers: NO_BORDERLINE,
       });
       expect(result.score).toBe(3);
       expect(result.signals).toEqual([
@@ -172,7 +157,6 @@ describe("computeAdultScore", () => {
         knownAdultMangaka: NO_AUTHORS,
         knownAdultPublishers: KNOWN_ADULT_PUBLISHERS,
         knownAdultImprints: KNOWN_ADULT_IMPRINTS,
-        borderlineAdultPublishers: NO_BORDERLINE,
       });
       expect(result.score).toBe(3);
       expect(result.signals).toHaveLength(1);
@@ -188,7 +172,6 @@ describe("computeAdultScore", () => {
         knownAdultMangaka: NO_AUTHORS,
         knownAdultPublishers: KNOWN_ADULT_PUBLISHERS,
         knownAdultImprints: KNOWN_ADULT_IMPRINTS,
-        borderlineAdultPublishers: NO_BORDERLINE,
       });
       expect(result.score).toBe(3);
       expect(result.signals).toHaveLength(1);
@@ -206,7 +189,6 @@ describe("computeAdultScore", () => {
         knownAdultMangaka: KNOWN_ADULT_MANGAKA,
         knownAdultPublishers: NO_PUBLISHERS,
         knownAdultImprints: NO_IMPRINTS,
-        borderlineAdultPublishers: NO_BORDERLINE,
       });
       expect(result.score).toBe(4);
       expect(result.signals.map((s) => s.signal)).toEqual([
@@ -223,7 +205,6 @@ describe("computeAdultScore", () => {
         knownAdultMangaka: NO_AUTHORS,
         knownAdultPublishers: KNOWN_ADULT_PUBLISHERS,
         knownAdultImprints: NO_IMPRINTS,
-        borderlineAdultPublishers: NO_BORDERLINE,
       });
       expect(result.score).toBe(5);
       expect(result.signals.map((s) => s.signal)).toEqual([
@@ -240,7 +221,6 @@ describe("computeAdultScore", () => {
         knownAdultMangaka: NO_AUTHORS,
         knownAdultPublishers: NO_PUBLISHERS,
         knownAdultImprints: KNOWN_ADULT_IMPRINTS,
-        borderlineAdultPublishers: NO_BORDERLINE,
       });
       expect(result.score).toBe(5);
       expect(result.signals.map((s) => s.signal)).toEqual([
@@ -258,7 +238,6 @@ describe("computeAdultScore", () => {
         knownAdultMangaka: KNOWN_ADULT_MANGAKA,
         knownAdultPublishers: KNOWN_ADULT_PUBLISHERS,
         knownAdultImprints: KNOWN_ADULT_IMPRINTS,
-        borderlineAdultPublishers: NO_BORDERLINE,
       });
       expect(result.score).toBe(7);
       expect(result.signals.map((s) => s.signal)).toEqual([
@@ -278,7 +257,6 @@ describe("computeAdultScore", () => {
         knownAdultMangaka: KNOWN_ADULT_MANGAKA,
         knownAdultPublishers: KNOWN_ADULT_PUBLISHERS,
         knownAdultImprints: KNOWN_ADULT_IMPRINTS,
-        borderlineAdultPublishers: NO_BORDERLINE,
       });
       expect(result.score).toBe(2);
     });
@@ -295,7 +273,6 @@ describe("computeAdultScore", () => {
         knownAdultMangaka: NO_AUTHORS,
         knownAdultPublishers: KNOWN_ADULT_PUBLISHERS,
         knownAdultImprints: NO_IMPRINTS,
-        borderlineAdultPublishers: NO_BORDERLINE,
       });
       expect(result.score).toBe(3);
       expect(result.signals).toHaveLength(1);
@@ -313,7 +290,6 @@ describe("computeAdultScore", () => {
         knownAdultMangaka: NO_AUTHORS,
         knownAdultPublishers: KNOWN_ADULT_PUBLISHERS,
         knownAdultImprints: NO_IMPRINTS,
-        borderlineAdultPublishers: NO_BORDERLINE,
       });
       expect(result.score).toBe(3);
       expect(result.signals[0].evidence).toBe("茜新社コミックス ⟵ 茜新社");
@@ -327,7 +303,6 @@ describe("computeAdultScore", () => {
         knownAdultMangaka: NO_AUTHORS,
         knownAdultPublishers: KNOWN_ADULT_PUBLISHERS,
         knownAdultImprints: NO_IMPRINTS,
-        borderlineAdultPublishers: NO_BORDERLINE,
       });
       expect(result.score).toBe(3);
       expect(result.signals[0].evidence).toBe("白夜書房 ⟵ 白夜書房");
@@ -341,7 +316,6 @@ describe("computeAdultScore", () => {
         knownAdultMangaka: NO_AUTHORS,
         knownAdultPublishers: KNOWN_ADULT_PUBLISHERS,
         knownAdultImprints: KNOWN_ADULT_IMPRINTS,
-        borderlineAdultPublishers: NO_BORDERLINE,
       });
       expect(result.score).toBe(0);
       expect(result.signals).toEqual([]);
@@ -358,7 +332,6 @@ describe("computeAdultScore", () => {
         knownAdultMangaka: KNOWN_ADULT_MANGAKA,
         knownAdultPublishers: NO_PUBLISHERS,
         knownAdultImprints: NO_IMPRINTS,
-        borderlineAdultPublishers: NO_BORDERLINE,
       });
       expect(result.score).toBe(2);
       expect(result.signals[0].signal).toBe("wikipedia_adult_mangaka_list");
@@ -376,7 +349,6 @@ describe("computeAdultScore", () => {
         knownAdultMangaka: setWithFujiko,
         knownAdultPublishers: NO_PUBLISHERS,
         knownAdultImprints: NO_IMPRINTS,
-        borderlineAdultPublishers: NO_BORDERLINE,
       });
       expect(result.score).toBe(2);
     });
@@ -389,7 +361,6 @@ describe("computeAdultScore", () => {
         knownAdultMangaka: KNOWN_ADULT_MANGAKA,
         knownAdultPublishers: KNOWN_ADULT_PUBLISHERS,
         knownAdultImprints: KNOWN_ADULT_IMPRINTS,
-        borderlineAdultPublishers: NO_BORDERLINE,
       });
       expect(result.score).toBe(0);
       expect(result.signals).toEqual([]);
@@ -405,7 +376,6 @@ describe("computeAdultScore", () => {
         knownAdultMangaka: NO_AUTHORS,
         knownAdultPublishers: KNOWN_ADULT_PUBLISHERS,
         knownAdultImprints: NO_IMPRINTS,
-        borderlineAdultPublishers: NO_BORDERLINE,
       });
       // 派生表記 "白夜書房 メディアックス" でも substring マッチで catalog 側
       // の "白夜書房" にひもづいたことが evidence で追跡できる
@@ -424,124 +394,12 @@ describe("computeAdultScore", () => {
         knownAdultMangaka: KNOWN_ADULT_MANGAKA,
         knownAdultPublishers: KNOWN_ADULT_PUBLISHERS,
         knownAdultImprints: KNOWN_ADULT_IMPRINTS,
-        borderlineAdultPublishers: NO_BORDERLINE,
       });
       expect(result.signals.map((s) => s.signal)).toEqual([
         "wikidata_hentai_credit",
         "wikipedia_adult_mangaka_list",
         "adult_imprint",
       ]);
-    });
-  });
-
-  describe("borderline publisher × known mangaka (Option A)", () => {
-    it("known mangaka + borderline publisher fires +3 → score=5", () => {
-      // 倉科遼 (= adult_mangaka_known) × リイド社 (= borderline) を再現。
-      // editions.imprint が publisher 名そのもの (NDL の現状) でも捕捉できる。
-      const result = computeAdultScore({
-        hasWikidataCredit: false,
-        authorName: "唯登詩樹",
-        imprints: ["リイド社"],
-        knownAdultMangaka: KNOWN_ADULT_MANGAKA,
-        knownAdultPublishers: KNOWN_ADULT_PUBLISHERS,
-        knownAdultImprints: KNOWN_ADULT_IMPRINTS,
-        borderlineAdultPublishers: BORDERLINE_PUBLISHERS,
-      });
-      expect(result.score).toBe(5);
-      expect(result.signals.map((s) => s.signal)).toEqual([
-        "wikipedia_adult_mangaka_list",
-        "adult_mangaka_borderline_publisher",
-      ]);
-      expect(result.signals[1].evidence).toBe(
-        "唯登詩樹 × リイド社 ⟵ リイド社",
-      );
-    });
-
-    it("borderline publisher alone (no mangaka match) does NOT fire", () => {
-      // 真行寺たつや × 角川書店 のような mainstream-only ケース。 publisher が
-      // borderline にあっても mangaka が adult_mangaka_known に無ければ無発火。
-      const result = computeAdultScore({
-        hasWikidataCredit: false,
-        authorName: "ある作家",
-        imprints: ["リイド社"],
-        knownAdultMangaka: NO_AUTHORS,
-        knownAdultPublishers: KNOWN_ADULT_PUBLISHERS,
-        knownAdultImprints: KNOWN_ADULT_IMPRINTS,
-        borderlineAdultPublishers: BORDERLINE_PUBLISHERS,
-      });
-      expect(result.score).toBe(0);
-      expect(result.signals).toEqual([]);
-    });
-
-    it("known mangaka + non-borderline mainstream publisher = 2 (drafted)", () => {
-      // 真行寺たつや (adult-list 該当) × 角川書店 (= NOT borderline) → +2 のみ
-      const result = computeAdultScore({
-        hasWikidataCredit: false,
-        authorName: "唯登詩樹",
-        imprints: ["角川書店"],
-        knownAdultMangaka: KNOWN_ADULT_MANGAKA,
-        knownAdultPublishers: KNOWN_ADULT_PUBLISHERS,
-        knownAdultImprints: KNOWN_ADULT_IMPRINTS,
-        borderlineAdultPublishers: BORDERLINE_PUBLISHERS,
-      });
-      expect(result.score).toBe(2);
-      expect(result.signals.map((s) => s.signal)).toEqual([
-        "wikipedia_adult_mangaka_list",
-      ]);
-    });
-
-    it("adult_publisher_imprint takes precedence over borderline (no double-count)", () => {
-      // 純 adult publisher が当たっている時は borderline 判定はスキップ。
-      const result = computeAdultScore({
-        hasWikidataCredit: false,
-        authorName: "唯登詩樹",
-        imprints: ["白夜書房", "リイド社"],
-        knownAdultMangaka: KNOWN_ADULT_MANGAKA,
-        knownAdultPublishers: KNOWN_ADULT_PUBLISHERS,
-        knownAdultImprints: KNOWN_ADULT_IMPRINTS,
-        borderlineAdultPublishers: BORDERLINE_PUBLISHERS,
-      });
-      expect(result.score).toBe(5);
-      expect(result.signals.map((s) => s.signal)).toEqual([
-        "wikipedia_adult_mangaka_list",
-        "adult_publisher_imprint",
-      ]);
-    });
-
-    it("adult_imprint takes precedence over borderline (no double-count)", () => {
-      // imprint match の方が granular なので borderline はスキップ。
-      const result = computeAdultScore({
-        hasWikidataCredit: false,
-        authorName: "唯登詩樹",
-        imprints: ["クリベロン", "リイド社"],
-        knownAdultMangaka: KNOWN_ADULT_MANGAKA,
-        knownAdultPublishers: KNOWN_ADULT_PUBLISHERS,
-        knownAdultImprints: KNOWN_ADULT_IMPRINTS,
-        borderlineAdultPublishers: BORDERLINE_PUBLISHERS,
-      });
-      expect(result.score).toBe(5);
-      expect(result.signals.map((s) => s.signal)).toEqual([
-        "wikipedia_adult_mangaka_list",
-        "adult_imprint",
-      ]);
-    });
-
-    it("multiple borderline imprints fire only once (single +3)", () => {
-      const result = computeAdultScore({
-        hasWikidataCredit: false,
-        authorName: "唯登詩樹",
-        imprints: ["リイド社", "日本文芸社", "竹書房"],
-        knownAdultMangaka: KNOWN_ADULT_MANGAKA,
-        knownAdultPublishers: KNOWN_ADULT_PUBLISHERS,
-        knownAdultImprints: KNOWN_ADULT_IMPRINTS,
-        borderlineAdultPublishers: BORDERLINE_PUBLISHERS,
-      });
-      expect(result.score).toBe(5);
-      expect(
-        result.signals.filter(
-          (s) => s.signal === "adult_mangaka_borderline_publisher",
-        ),
-      ).toHaveLength(1);
     });
   });
 });
