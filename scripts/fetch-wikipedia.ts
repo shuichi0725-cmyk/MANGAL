@@ -118,37 +118,6 @@ async function fetchSummary(title: string): Promise<SummaryResult> {
 }
 
 /**
- * Layer A 改善 (B-1.1, 2026-05-06): 直接 title match で見つからなかった場合、
- * Wikipedia の disambiguation suffix 規約に従って再試行する。
- * - 「タイトル」 → 「タイトル（漫画）」 → 「タイトル (漫画)」
- * 多くの manga 記事は他作品 (アニメ、 楽曲等) との衝突を避けるため
- * `（漫画）` suffix で曖昧さ回避されている。
- *
- * Throws on transport error (caller wraps); not-found / disambiguation は
- * 単に次の suffix を試行する (= silent fall-through)。
- */
-const TITLE_RETRY_SUFFIXES = ["", "（漫画）", " (漫画)"] as const;
-
-async function findArticle(rawTitle: string): Promise<{
-  summary: SummaryResult;
-  resolvedTitle: string;
-  suffixUsed: string;
-}> {
-  let lastNonOk: SummaryResult = { kind: "not-found" };
-  for (let i = 0; i < TITLE_RETRY_SUFFIXES.length; i++) {
-    const suffix = TITLE_RETRY_SUFFIXES[i];
-    const candidate = rawTitle + suffix;
-    if (i > 0) await sleep(REQUEST_INTERVAL_MS);
-    const result = await fetchSummary(candidate);
-    if (result.kind === "ok") {
-      return { summary: result, resolvedTitle: candidate, suffixUsed: suffix };
-    }
-    lastNonOk = result;
-  }
-  return { summary: lastNonOk, resolvedTitle: rawTitle, suffixUsed: "" };
-}
-
-/**
  * parse API で wikitext 全文を取得。infobox parse の素。
  */
 async function fetchWikitext(title: string): Promise<string | null> {
@@ -438,11 +407,9 @@ async function main() {
 
   // B-1 (2026-05-06): hit-rate 解明のため layer 別カウンタを取る。
   // layer A = 記事発見、 layer B = infobox 抽出、 layer C = master 解決。
-  // B-1.1 で articleFoundViaSuffix を追加 (disambiguation suffix retry の効果測定)。
   const stats = {
     attempted: 0,
     articleFound: 0,
-    articleFoundViaSuffix: 0, // suffix retry でヒットした件数
     articleNotFound: 0,
     disambiguation: 0,
     summaryError: 0,
@@ -478,20 +445,15 @@ async function main() {
 
     stats.attempted++;
     process.stdout.write(`[${++processed}/${limited.length}] ${s.title} ... `);
-    let articleResult: {
-      summary: SummaryResult;
-      resolvedTitle: string;
-      suffixUsed: string;
-    };
+    let summary: SummaryResult;
     try {
-      articleResult = await findArticle(s.title);
+      summary = await fetchSummary(s.title);
     } catch (err) {
       const msg = err instanceof Error ? err.message : String(err);
       console.log(`✗ summary failed: ${msg.slice(0, 100)}`);
       stats.summaryError++;
       continue;
     }
-    const { summary, resolvedTitle, suffixUsed } = articleResult;
     if (summary.kind === "not-found") {
       console.log("✗ not-found");
       stats.articleNotFound++;
@@ -505,12 +467,11 @@ async function main() {
       continue;
     }
     stats.articleFound++;
-    if (suffixUsed) stats.articleFoundViaSuffix++;
 
     let wikitext: string | null = null;
     try {
       await sleep(REQUEST_INTERVAL_MS / 2);
-      wikitext = await fetchWikitext(resolvedTitle);
+      wikitext = await fetchWikitext(s.title);
     } catch (err) {
       const msg = err instanceof Error ? err.message : String(err);
       console.warn(`  wikitext failed: ${msg.slice(0, 80)}`);
@@ -628,8 +589,7 @@ async function main() {
     }
     if (titleKana) parts.push(`kana=${titleKana}`);
     if (synopsis) parts.push("syn ✓");
-    const suffixTag = suffixUsed ? ` [via "${suffixUsed.trim()}"]` : "";
-    console.log(`✓ article${suffixTag} ${parts.join(" ")}`);
+    console.log(`✓ article ${parts.join(" ")}`);
   }
 
   // B-1 (2026-05-06): layer A/B/C 3 層で hit/miss を可視化する。
@@ -642,12 +602,6 @@ async function main() {
   console.log(`  layer A (article find):`);
   console.log(
     `    article found         : ${stats.articleFound} (${pct(stats.articleFound, stats.attempted)})`,
-  );
-  console.log(
-    `      via direct title    : ${stats.articleFound - stats.articleFoundViaSuffix}`,
-  );
-  console.log(
-    `      via suffix retry    : ${stats.articleFoundViaSuffix}  (B-1.1: 「（漫画）」 等で発見)`,
   );
   console.log(`    article not-found     : ${stats.articleNotFound}`);
   console.log(`    disambiguation        : ${stats.disambiguation}`);
