@@ -70,6 +70,9 @@ jobs:
         # promote:bulk が adult_score を計算する前提データ。
         run: npm run fetch:adult-lists
 
+      - name: Seed adult imprints from manga-db.com dump
+        run: npm run seed:adult-imprints
+
       - name: Fetch NDL for each mangaka QID
         run: |
           INCLUDE_FLAG=()
