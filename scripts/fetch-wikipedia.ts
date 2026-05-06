@@ -88,24 +88,30 @@ async function fetchWithRetry(url: string, label: string): Promise<Response> {
 }
 
 /**
- * REST summary API で extract（あらすじ素材）と canonical URL を取得。
- * ページが見つからなければ null。
+ * REST `summary` API のレスポンスを 3 通りに分類して返す。
+ *   ok             : 記事発見、 url + extract あり
+ *   not-found      : 404
+ *   disambiguation : 曖昧さ回避ページ (採用しない)
+ *
+ * diagnostic で「(A) 記事発見ミス」 の内訳を取るため null 返しを廃止。
  */
-async function fetchSummary(title: string): Promise<{
-  url: string;
-  extract: string;
-} | null> {
+type SummaryResult =
+  | { kind: "ok"; url: string; extract: string }
+  | { kind: "not-found" }
+  | { kind: "disambiguation" };
+
+async function fetchSummary(title: string): Promise<SummaryResult> {
   const url = `${SUMMARY_API}/${encodeURIComponent(title)}`;
   const res = await fetchWithRetry(url, `summary ${title}`);
-  if (res.status === 404) return null;
+  if (res.status === 404) return { kind: "not-found" };
   const json = (await res.json()) as {
     content_urls?: { desktop?: { page?: string } };
     extract?: string;
     type?: string;
   };
-  // 曖昧さ回避ページ等は採用しない
-  if (json.type === "disambiguation") return null;
+  if (json.type === "disambiguation") return { kind: "disambiguation" };
   return {
+    kind: "ok",
     url: json.content_urls?.desktop?.page ?? "",
     extract: (json.extract ?? "").trim(),
   };
@@ -399,27 +405,57 @@ async function main() {
     `UPDATE series SET wikipedia_url = '' WHERE id = ?`,
   );
 
+  // B-1 (2026-05-06): hit-rate 解明のため layer 別カウンタを取る。
+  // layer A = 記事発見、 layer B = infobox 抽出、 layer C = master 解決。
+  const stats = {
+    attempted: 0,
+    articleFound: 0,
+    articleNotFound: 0,
+    disambiguation: 0,
+    summaryError: 0,
+    wikitextFound: 0,
+    wikitextError: 0,
+    infoboxFound: 0,
+    magazineExtracted: 0,
+    magazineResolved: 0,
+    publisherExtracted: 0,
+    publisherResolved: 0,
+    genresExtracted: 0,
+    genresResolvedAny: 0,
+    kanaExtracted: 0,
+    synopsisExtracted: 0,
+  };
+
   let processed = 0;
-  let hits = 0;
   let firstReq = true;
   for (const s of limited) {
     if (!firstReq) await sleep(REQUEST_INTERVAL_MS);
     firstReq = false;
 
+    stats.attempted++;
     process.stdout.write(`[${++processed}/${limited.length}] ${s.title} ... `);
-    let summary: { url: string; extract: string } | null;
+    let summary: SummaryResult;
     try {
       summary = await fetchSummary(s.title);
     } catch (err) {
       const msg = err instanceof Error ? err.message : String(err);
-      console.log(`summary failed: ${msg.slice(0, 100)}`);
+      console.log(`✗ summary failed: ${msg.slice(0, 100)}`);
+      stats.summaryError++;
       continue;
     }
-    if (!summary) {
-      console.log("not found");
+    if (summary.kind === "not-found") {
+      console.log("✗ not-found");
+      stats.articleNotFound++;
       setNotFound.run(s.id);
       continue;
     }
+    if (summary.kind === "disambiguation") {
+      console.log("✗ disambiguation");
+      stats.disambiguation++;
+      setNotFound.run(s.id);
+      continue;
+    }
+    stats.articleFound++;
 
     let wikitext: string | null = null;
     try {
@@ -428,33 +464,44 @@ async function main() {
     } catch (err) {
       const msg = err instanceof Error ? err.message : String(err);
       console.warn(`  wikitext failed: ${msg.slice(0, 80)}`);
+      stats.wikitextError++;
     }
+    if (wikitext) stats.wikitextFound++;
 
     const fields = wikitext ? extractInfoboxFields(wikitext) : new Map();
+    if (fields.size > 0) stats.infoboxFound++;
 
     const kanaFromExtract = extractReadingFromExtract(summary.extract, s.title);
     const kanaFromInfobox =
       stripWikitext(fields.get("ふりがな") ?? fields.get("読み") ?? "") || null;
     const titleKana = kanaFromExtract ?? kanaFromInfobox;
+    if (titleKana) stats.kanaExtracted++;
     const publisherText = stripWikitext(
       fields.get("出版社") ?? fields.get("出版社1") ?? "",
     );
+    if (publisherText) stats.publisherExtracted++;
     const publisherKey =
       publisherText ? lookupSubstring(masters.publisher, publisherText) : null;
+    if (publisherKey) stats.publisherResolved++;
     const magazineText = stripWikitext(
       fields.get("掲載誌") ??
         fields.get("掲載紙") ??
         fields.get("レーベル") ??
         "",
     );
+    if (magazineText) stats.magazineExtracted++;
     const magazineKey =
       magazineText ? lookupSubstring(masters.magazine, magazineText) : null;
+    if (magazineKey) stats.magazineResolved++;
     const demographic = magazineKey
       ? masters.magazineDemographic.get(magazineKey) ?? null
       : null;
     const genresStr = stripWikitext(fields.get("ジャンル") ?? "");
+    if (genresStr) stats.genresExtracted++;
     const genreKeys = mapGenres(genresStr, masters.genre);
+    if (genreKeys.length > 0) stats.genresResolvedAny++;
     const synopsis = (summary.extract || "").slice(0, 800);
+    if (synopsis) stats.synopsisExtracted++;
     // 「発表期間」 = "1987年 - 2007年" 形式 (Infobox animanga/Print) を分解。
     // それ以外は「開始号」「終了号」「開始日」「終了日」を個別に拾う。
     const periodText = stripWikitext(
@@ -503,20 +550,69 @@ async function main() {
       );
     }
 
-    hits++;
-    console.log(
-      `ok` +
-        (titleKana ? ` kana=${titleKana}` : "") +
-        (magazineKey ? ` mag=${magazineKey}` : "") +
-        (genreKeys.length ? ` g=${genreKeys.join("|")}` : "") +
-        (publisherKey ? ` pub=${publisherKey}` : ""),
-    );
+    // 構造化 log: layer 別に ✓ / ✗ を出して、 どの段階で何が落ちたか観察可能。
+    // mag/pub は raw → resolved 両方を表示 (master 解決失敗が見える)。
+    const parts: string[] = [];
+    if (fields.size > 0) {
+      parts.push("infobox ✓");
+    } else {
+      parts.push(wikitext ? "infobox ✗" : "no-wikitext");
+    }
+    if (magazineText) {
+      parts.push(`mag=${magazineText}→${magazineKey ?? "✗"}`);
+    }
+    if (publisherText) {
+      parts.push(`pub=${publisherText}→${publisherKey ?? "✗"}`);
+    }
+    if (genresStr) {
+      parts.push(`g=${genresStr}→${genreKeys.join("|") || "✗"}`);
+    }
+    if (titleKana) parts.push(`kana=${titleKana}`);
+    if (synopsis) parts.push("syn ✓");
+    console.log(`✓ article ${parts.join(" ")}`);
   }
 
-  console.log("\n=== fetch:wikipedia summary ===");
-  console.log(`  series queued : ${limited.length}`);
-  console.log(`  hits          : ${hits}`);
-  console.log(`  not-found     : ${processed - hits}`);
+  // B-1 (2026-05-06): layer A/B/C 3 層で hit/miss を可視化する。
+  const pct = (num: number, denom: number): string =>
+    denom === 0 ? "  -%" : `${Math.round((num * 100) / denom)
+      .toString()
+      .padStart(3, " ")}%`;
+  console.log("\n=== fetch:wikipedia diagnostic ===");
+  console.log(`  attempted               : ${stats.attempted}`);
+  console.log(`  layer A (article find):`);
+  console.log(
+    `    article found         : ${stats.articleFound} (${pct(stats.articleFound, stats.attempted)})`,
+  );
+  console.log(`    article not-found     : ${stats.articleNotFound}`);
+  console.log(`    disambiguation        : ${stats.disambiguation}`);
+  console.log(`    summary error         : ${stats.summaryError}`);
+  console.log(`  layer B (infobox extract):`);
+  console.log(
+    `    wikitext fetched      : ${stats.wikitextFound} (${pct(stats.wikitextFound, stats.articleFound)} of articleFound)`,
+  );
+  console.log(`    wikitext error        : ${stats.wikitextError}`);
+  console.log(
+    `    infobox detected      : ${stats.infoboxFound} (${pct(stats.infoboxFound, stats.articleFound)} of articleFound)`,
+  );
+  console.log(
+    `    magazine raw extract  : ${stats.magazineExtracted} (${pct(stats.magazineExtracted, stats.infoboxFound)} of infoboxFound)`,
+  );
+  console.log(`    publisher raw extract : ${stats.publisherExtracted}`);
+  console.log(`    genres raw extract    : ${stats.genresExtracted}`);
+  console.log(`    kana extract          : ${stats.kanaExtracted}`);
+  console.log(
+    `    synopsis extract      : ${stats.synopsisExtracted} (${pct(stats.synopsisExtracted, stats.articleFound)} of articleFound)`,
+  );
+  console.log(`  layer C (master resolve):`);
+  console.log(
+    `    magazine resolved     : ${stats.magazineResolved} (${pct(stats.magazineResolved, stats.magazineExtracted)} of magazineExtracted)`,
+  );
+  console.log(
+    `    publisher resolved    : ${stats.publisherResolved} (${pct(stats.publisherResolved, stats.publisherExtracted)} of publisherExtracted)`,
+  );
+  console.log(
+    `    genres resolved >= 1  : ${stats.genresResolvedAny} (${pct(stats.genresResolvedAny, stats.genresExtracted)} of genresExtracted)`,
+  );
   console.log(`  raw cache dir : ${RAW_DIR}`);
   db.close();
 }
