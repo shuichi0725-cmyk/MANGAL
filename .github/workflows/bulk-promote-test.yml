@@ -98,11 +98,13 @@ jobs:
         # 試行して layer A/B/C の統計信頼性を上げる。
         run: npm run fetch:wikipedia
 
-      - name: Probe openBD coverage (read-only diagnostic)
-        # B-2 (2026-05-06): Wikipedia 18% ceiling 後の補完候補として openBD を試験。
-        # ISBN 1700+ 件を bulk で叩き、 publisher / collationkey / synopsis /
-        # C-code / cover の取得率を測定。 DB は変更しない (read-only)。
-        run: npm run probe:openbd
+      - name: openBD bulk fetch (title_kana のみ補完)
+        # B-2 (2026-05-06): Wikipedia 18% ceiling の後段補完。 probe 結果から
+        # collationkey (= ヨミガナ) のみ ROI 高 (66% カバレッジ) と判明。
+        # title_kana が NULL/empty な series のみ対象、 Wikipedia 由来の kana
+        # は触らない。 publisher/synopsis/cover は probe で 1〜2% カバーで
+        # 役立たず判明、 触らない。
+        run: npm run fetch:openbd:bulk
 
       - name: DB top 30 (post-Wikipedia, with metadata filled)
         run: npm run db:report -- --top 30

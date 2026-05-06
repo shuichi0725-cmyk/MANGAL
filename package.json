@@ -11,6 +11,7 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "fetch:openbd": "tsx scripts/fetch-openbd.ts",
+    "fetch:openbd:bulk": "tsx scripts/fetch-openbd-bulk.ts",
     "probe:openbd": "tsx scripts/probe-openbd.ts",
     "fetch:volumes": "tsx scripts/fetch-volumes.ts",
     "fetch:mangaka": "tsx scripts/fetch-mangaka.ts",
