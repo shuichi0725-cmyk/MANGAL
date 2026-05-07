@@ -7,41 +7,31 @@ type Props = {
   src: string | null;
   alt: string;
   sizes?: string;
-  /** 画面幅小さめ枠か大きめ枠か。プレースホルダのフォントサイズだけ変える */
+  /** 画面幅小さめ枠か大きめ枠か。 (現状は描画ロジックに影響しないが API 互換のため残す) */
   size?: "card" | "detail";
 };
 
 /**
- * 表紙画像。src が null か、読み込みに失敗したら "表紙なし" を表示する。
- * next/image を使うが onError で自前のプレースホルダにフォールバックする。
+ * 表紙画像。 src が null か読み込み失敗 (onError) なら **何も描画しない** (null を返す)。
+ *
+ * 親側で `{cover && <div className="relative aspect-[2/3] bg-black/5 ...">...</div>}`
+ * の形で wrapper を conditional 化することで、 cover が無いシリーズは灰色枠ごと
+ * 完全に消える。 将来 Amazon PA-API 等で cover_url が入った時、 自然に表示される。
  */
-export default function CoverImage({ src, alt, sizes, size = "card" }: Props) {
+export default function CoverImage({ src, alt, sizes }: Props) {
   const [errored, setErrored] = useState(false);
 
-  const showPlaceholder = !src || errored;
+  if (!src || errored) return null;
 
   return (
-    <div className="absolute inset-0">
-      {showPlaceholder ? (
-        <div
-          className={
-            "absolute inset-0 grid place-items-center text-black/40 " +
-            (size === "detail" ? "text-sm" : "text-xs")
-          }
-        >
-          表紙なし
-        </div>
-      ) : (
-        <Image
-          src={src}
-          alt={alt}
-          fill
-          sizes={sizes}
-          className="object-cover"
-          unoptimized
-          onError={() => setErrored(true)}
-        />
-      )}
-    </div>
+    <Image
+      src={src}
+      alt={alt}
+      fill
+      sizes={sizes}
+      className="object-cover"
+      unoptimized
+      onError={() => setErrored(true)}
+    />
   );
 }

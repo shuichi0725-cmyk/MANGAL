@@ -25,6 +25,7 @@ export type Author = z.infer<typeof AuthorSchema>;
 export const VolumeSchema = z.object({
   number: z.number().int().min(1),
   asin: z.string().nullable().optional(),
+  kindle_asin: z.string().nullable().optional(),
   isbn13: z.union([z.string(), z.number()]).nullable().optional(),
   cover_url: z.string().url().nullable().optional(),
   release_date: z
@@ -32,6 +33,7 @@ export const VolumeSchema = z.object({
     .regex(/^\d{4}(-\d{2}(-\d{2})?)?$/)
     .nullable()
     .optional(),
+  description: z.string().optional(),
 });
 export type Volume = z.infer<typeof VolumeSchema>;
 

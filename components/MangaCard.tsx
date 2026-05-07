@@ -9,7 +9,6 @@ import {
   type Manga,
   type Publisher,
 } from "@/lib/schema";
-import AffiliateLink from "./AffiliateLink";
 import CoverImage from "./CoverImage";
 
 type Props = {
@@ -21,9 +20,8 @@ type Props = {
 
 export default function MangaCard({ manga, publishers, genres, demographics }: Props) {
   const v1 = primaryVolume(manga);
-  // 表紙は volume.cover_url のみ。openBD/NDL からの fallback は将来 risk
-  // (画像配信停止) があるので使わない。Amazon PA-API 経由で公式画像を
-  // 入れるまでは CoverImage 側の "表紙なし" placeholder を表示する。
+  // 表紙は volume.cover_url のみ。 cover が無ければ枠ごと描画しない方針。
+  // Amazon PA-API 経由で cover_url が入ったら自然に表示される。
   const cover = v1?.cover_url ?? null;
   const cardVolumes = primaryEdition(manga).volumes;
 
@@ -39,15 +37,17 @@ export default function MangaCard({ manga, publishers, genres, demographics }: P
 
   return (
     <article className="group rounded-lg border border-black/10 bg-white overflow-hidden flex flex-col hover:shadow-md transition-shadow">
-      <Link href={`/manga/${manga.slug}`} className="block">
-        <div className="relative aspect-[2/3] bg-black/5">
-          <CoverImage
-            src={cover}
-            alt={`${manga.title} 1巻 表紙`}
-            sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 200px"
-          />
-        </div>
-      </Link>
+      {cover && (
+        <Link href={`/manga/${manga.slug}`} className="block">
+          <div className="relative aspect-[2/3] bg-black/5">
+            <CoverImage
+              src={cover}
+              alt={`${manga.title} 1巻 表紙`}
+              sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 200px"
+            />
+          </div>
+        </Link>
+      )}
       <div className="p-3 flex-1 flex flex-col gap-1.5">
         <Link href={`/manga/${manga.slug}`} className="font-bold leading-tight line-clamp-2 hover:text-[var(--color-accent)]">
           {manga.title}
@@ -76,14 +76,6 @@ export default function MangaCard({ manga, publishers, genres, demographics }: P
         <p className="text-xs text-black/60 line-clamp-1">
           {genreNames.slice(0, 4).join(" / ")}
         </p>
-        <div className="mt-auto pt-2">
-          <AffiliateLink
-            manga={manga}
-            className="inline-block text-xs px-3 py-1.5 rounded bg-[var(--color-accent)] text-white hover:opacity-90"
-          >
-            Amazonで見る
-          </AffiliateLink>
-        </div>
       </div>
     </article>
   );

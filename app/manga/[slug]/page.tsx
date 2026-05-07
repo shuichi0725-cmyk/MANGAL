@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import AffiliateLink from "@/components/AffiliateLink";
 import CoverImage from "@/components/CoverImage";
 import VolumeRow from "@/components/VolumeRow";
 import { yearStatusLabel } from "@/lib/format";
@@ -49,10 +48,12 @@ export default async function MangaDetailPage({
       <Link href="/" className="text-sm text-black/60 hover:text-black">
         ← 一覧へ戻る
       </Link>
-      <div className="mt-6 grid md:grid-cols-[260px_1fr] gap-8">
-        <div className="relative aspect-[2/3] bg-black/5 rounded overflow-hidden">
-          <CoverImage src={cover} alt={`${manga.title} 1巻 表紙`} sizes="260px" size="detail" />
-        </div>
+      <div className={`mt-6 grid gap-8 ${cover ? "md:grid-cols-[260px_1fr]" : ""}`}>
+        {cover && (
+          <div className="relative aspect-[2/3] bg-black/5 rounded overflow-hidden">
+            <CoverImage src={cover} alt={`${manga.title} 1巻 表紙`} sizes="260px" size="detail" />
+          </div>
+        )}
         <div>
           <h1 className="text-2xl md:text-3xl font-bold">{manga.title}</h1>
           <p className="text-sm text-black/60 mt-1">{manga.title_kana}</p>
@@ -135,18 +136,6 @@ export default async function MangaDetailPage({
           {manga.synopsis && (
             <p className="mt-6 text-sm leading-relaxed text-black/80">{manga.synopsis}</p>
           )}
-
-          <div className="mt-8">
-            <AffiliateLink
-              manga={manga}
-              className="inline-block px-5 py-2.5 rounded bg-[var(--color-accent)] text-white font-semibold hover:opacity-90"
-            >
-              Amazonで1巻を見る
-            </AffiliateLink>
-            <p className="text-[11px] text-black/45 mt-2">
-              リンクは Amazon アソシエイト・プログラムによる紹介です。
-            </p>
-          </div>
 
           <VolumeRow manga={manga} />
         </div>
