@@ -1,8 +1,6 @@
 import Link from "next/link";
-import { formatReleaseDate, yearStatusLabel } from "@/lib/format";
+import { yearStatusLabel } from "@/lib/format";
 import {
-  allVolumes,
-  primaryEdition,
   primaryVolume,
   type DemographicLabel,
   type Genre,
@@ -18,65 +16,44 @@ type Props = {
   demographics: DemographicLabel[];
 };
 
+/**
+ * 一覧ページの 1 行 (= 1 作品)。 horizontal flex で左に cover (将来用)、
+ * 右に 4 行のメタ (タイトル・著者・出版社・年代) を縦 stack。
+ *
+ * 現状 cover_url は全部 null なので左のサムネイルは描画されず、 右の 4 行
+ * のみが表示される (= 全行同じ高さ)。 将来 PA-API 等で cover_url が入った
+ * 時、 左に 64px 幅のサムネイルが自動で出る。
+ */
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export default function MangaCard({ manga, publishers, genres, demographics }: Props) {
   const v1 = primaryVolume(manga);
-  // 表紙は volume.cover_url のみ。 cover が無ければ枠ごと描画しない方針。
-  // Amazon PA-API 経由で cover_url が入ったら自然に表示される。
   const cover = v1?.cover_url ?? null;
-  const cardVolumes = primaryEdition(manga).volumes;
 
   const publisherName =
     publishers.find((p) => p.key === manga.publisher)?.name ?? manga.publisher;
-  const demographicName =
-    demographics.find((d) => d.key === manga.demographic)?.name ?? manga.demographic;
-  const genreNames = manga.genres.map(
-    (g) => genres.find((x) => x.key === g)?.name ?? g,
-  );
 
-  const hasAnyDate = allVolumes(manga).some((v) => v.release_date);
+  const authorLine =
+    manga.authors.map((a) => a.name).join(" / ") +
+    (manga.original_authors.length
+      ? `（原作: ${manga.original_authors.map((a) => a.name).join(" / ")}）`
+      : "");
 
   return (
-    <article className="group rounded-lg border border-black/10 bg-white overflow-hidden flex flex-col hover:shadow-md transition-shadow">
+    <Link
+      href={`/manga/${manga.slug}`}
+      className="flex gap-3 px-4 py-3 hover:bg-black/[0.02] transition-colors"
+    >
       {cover && (
-        <Link href={`/manga/${manga.slug}`} className="block">
-          <div className="relative aspect-[2/3] bg-black/5">
-            <CoverImage
-              src={cover}
-              alt={`${manga.title} 1巻 表紙`}
-              sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 200px"
-            />
-          </div>
-        </Link>
+        <div className="relative w-16 aspect-[2/3] bg-black/5 rounded overflow-hidden shrink-0">
+          <CoverImage src={cover} alt={`${manga.title} 1巻 表紙`} sizes="64px" />
+        </div>
       )}
-      <div className="p-3 flex-1 flex flex-col gap-1.5">
-        <Link href={`/manga/${manga.slug}`} className="font-bold leading-tight line-clamp-2 hover:text-[var(--color-accent)]">
-          {manga.title}
-        </Link>
-        <p className="text-xs text-black/60 line-clamp-1">
-          {manga.authors.map((a) => a.name).join(" / ")}
-          {manga.original_authors.length
-            ? `（原作: ${manga.original_authors.map((a) => a.name).join(" / ")}）`
-            : ""}
-        </p>
-        <p className="text-xs text-black/50">
-          {yearStatusLabel(manga)}・{publisherName}・{demographicName}
-        </p>
-        {hasAnyDate && (
-          <ul className="text-[11px] text-black/55 max-h-24 overflow-y-auto pr-1 space-y-0.5">
-            {cardVolumes.map((v) => (
-              <li key={v.number} className="flex items-baseline justify-between gap-2">
-                <span className="shrink-0">第{v.number}巻</span>
-                <span className="text-black/45 truncate">
-                  {formatReleaseDate(v.release_date) || "—"}
-                </span>
-              </li>
-            ))}
-          </ul>
-        )}
-        <p className="text-xs text-black/60 line-clamp-1">
-          {genreNames.slice(0, 4).join(" / ")}
-        </p>
+      <div className="flex-1 min-w-0">
+        <p className="font-bold text-base leading-tight">{manga.title}</p>
+        <p className="text-xs text-black/65 mt-1.5 line-clamp-1">{authorLine}</p>
+        <p className="text-xs text-black/55 mt-0.5 line-clamp-1">{publisherName}</p>
+        <p className="text-xs text-black/45 mt-0.5">{yearStatusLabel(manga)}</p>
       </div>
-    </article>
+    </Link>
   );
 }
