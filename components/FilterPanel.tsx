@@ -1,7 +1,7 @@
 "use client";
 
-import type { FilterState } from "@/lib/filters";
-import type { DataBundle } from "@/lib/schema";
+import { emptyFilterState, type FilterState, type SortKey } from "@/lib/filters";
+import type { DataBundle, StatusT } from "@/lib/schema";
 
 type Props = {
   data: DataBundle;
@@ -24,8 +24,70 @@ export default function FilterPanel({
 }: Props) {
   const update = (patch: Partial<FilterState>) => setState({ ...state, ...patch });
 
+  const STATUS_LABELS: Record<StatusT, string> = {
+    completed: "完結",
+    ongoing: "連載中",
+    hiatus: "休載",
+  };
+  const SORT_OPTIONS: { key: SortKey; label: string }[] = [
+    { key: "default", label: "標準" },
+    { key: "year-desc", label: "年代 (新しい順)" },
+    { key: "year-asc", label: "年代 (古い順)" },
+    { key: "title", label: "タイトル (五十音順)" },
+    { key: "volumes", label: "巻数 (多い順)" },
+  ];
+
   return (
     <aside className="space-y-6 text-sm">
+      <Section title="種類">
+        <label className="flex items-center gap-2 cursor-pointer">
+          <input
+            type="checkbox"
+            checked={state.anime}
+            onChange={() => update({ anime: !state.anime })}
+          />
+          <span>アニメ化作品のみ</span>
+        </label>
+        <label className="flex items-center gap-2 cursor-pointer mt-1">
+          <input
+            type="checkbox"
+            checked={state.hasAwards}
+            onChange={() => update({ hasAwards: !state.hasAwards })}
+          />
+          <span>受賞作品のみ</span>
+        </label>
+      </Section>
+
+      <Section title="連載状態">
+        <div className="flex flex-wrap gap-1.5">
+          {(Object.keys(STATUS_LABELS) as StatusT[]).map((s) => (
+            <Chip
+              key={s}
+              active={state.statuses.includes(s)}
+              onClick={() =>
+                update({ statuses: toggle(state.statuses, s) as StatusT[] })
+              }
+            >
+              {STATUS_LABELS[s]}
+            </Chip>
+          ))}
+        </div>
+      </Section>
+
+      <Section title="並び順">
+        <select
+          value={state.sort}
+          onChange={(e) => update({ sort: e.target.value as SortKey })}
+          className="w-full rounded border border-black/15 px-2 py-1"
+        >
+          {SORT_OPTIONS.map((o) => (
+            <option key={o.key} value={o.key}>
+              {o.label}
+            </option>
+          ))}
+        </select>
+      </Section>
+
       <Section title="出版年">
         <div className="flex items-center gap-2">
           <input
@@ -166,20 +228,7 @@ export default function FilterPanel({
 
       <button
         type="button"
-        onClick={() =>
-          setState({
-            query: state.query,
-            yearMin: null,
-            yearMax: null,
-            demographics: [],
-            publishers: [],
-            magazines: [],
-            authors: [],
-            originalAuthors: [],
-            genres: [],
-            genreMode: "or",
-          })
-        }
+        onClick={() => setState({ ...emptyFilterState(), query: state.query })}
         className="w-full text-xs px-3 py-2 rounded border border-black/15 hover:bg-black/5"
       >
         条件をリセット

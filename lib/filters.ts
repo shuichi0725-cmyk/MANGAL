@@ -1,5 +1,12 @@
-import type { Manga } from "./schema";
+import type { Manga, StatusT } from "./schema";
 import { kanaToRomaji, normalizeForSearch, romajiToHiragana } from "./romaji";
+
+export type SortKey =
+  | "default"
+  | "year-desc"
+  | "year-asc"
+  | "title"
+  | "volumes";
 
 export type FilterState = {
   query: string;
@@ -12,6 +19,11 @@ export type FilterState = {
   originalAuthors: string[];
   genres: string[];
   genreMode: "and" | "or";
+  // 新規 (2026-05-07): カテゴリハブ + 拡張フィルタ
+  anime: boolean;                // true = アニメ化作品のみ
+  hasAwards: boolean;            // true = 受賞作品のみ
+  statuses: StatusT[];           // 空配列 = 全て、 完結/連載中/休載 のサブセット
+  sort: SortKey;                 // ソートキー
 };
 
 export const emptyFilterState = (): FilterState => ({
@@ -25,6 +37,10 @@ export const emptyFilterState = (): FilterState => ({
   originalAuthors: [],
   genres: [],
   genreMode: "or",
+  anime: false,
+  hasAwards: false,
+  statuses: [],
+  sort: "default",
 });
 
 /**
@@ -90,8 +106,30 @@ function containsAll<T>(needles: T[], haystack: T[]): boolean {
   return needles.every((n) => haystack.includes(n));
 }
 
+function totalVolumes(m: Manga): number {
+  return m.editions.reduce((s, e) => s + e.volumes.length, 0);
+}
+
+function sortItems(items: Manga[], sort: SortKey): Manga[] {
+  switch (sort) {
+    case "year-desc":
+      return [...items].sort((a, b) => b.year_started - a.year_started);
+    case "year-asc":
+      return [...items].sort((a, b) => a.year_started - b.year_started);
+    case "title":
+      return [...items].sort((a, b) =>
+        a.title_kana.localeCompare(b.title_kana, "ja"),
+      );
+    case "volumes":
+      return [...items].sort((a, b) => totalVolumes(b) - totalVolumes(a));
+    case "default":
+    default:
+      return items;
+  }
+}
+
 export function applyFilters(items: Manga[], state: FilterState): Manga[] {
-  return items.filter((m) => {
+  const filtered = items.filter((m) => {
     if (!matchText(state.query, m)) return false;
     if (!inRange(m.year_started, state.yearMin, state.yearMax)) return false;
     if (state.demographics.length && !state.demographics.includes(m.demographic)) return false;
@@ -111,8 +149,12 @@ export function applyFilters(items: Manga[], state: FilterState): Manga[] {
         : intersects(state.genres, m.genres);
       if (!ok) return false;
     }
+    if (state.anime && !m.anime_adapted) return false;
+    if (state.hasAwards && (!m.awards || m.awards.length === 0)) return false;
+    if (state.statuses.length && !state.statuses.includes(m.status)) return false;
     return true;
   });
+  return sortItems(filtered, state.sort);
 }
 
 export function uniqueAuthors(items: Manga[], includeOriginal = false): string[] {
@@ -169,5 +211,27 @@ export function filtersFromSearchParams(p: ParamsLike | null | undefined): Parti
   if (genres) out.genres = genres;
   const genreMode = p.get("genreMode");
   if (genreMode === "and" || genreMode === "or") out.genreMode = genreMode;
+  // 新規 params (2026-05-07)
+  const anime = p.get("anime");
+  if (anime === "true") out.anime = true;
+  const hasAwards = p.get("hasAwards");
+  if (hasAwards === "true") out.hasAwards = true;
+  const statuses = pickList("status");
+  if (statuses) {
+    const valid = statuses.filter(
+      (s): s is StatusT => s === "ongoing" || s === "completed" || s === "hiatus",
+    );
+    if (valid.length > 0) out.statuses = valid;
+  }
+  const sort = p.get("sort");
+  if (
+    sort === "year-desc" ||
+    sort === "year-asc" ||
+    sort === "title" ||
+    sort === "volumes" ||
+    sort === "default"
+  ) {
+    out.sort = sort;
+  }
   return out;
 }

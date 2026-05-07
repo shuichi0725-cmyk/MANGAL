@@ -2,6 +2,7 @@
 
 import { useSearchParams } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
+import CategoryHub from "@/components/CategoryHub";
 import FilterPanel from "@/components/FilterPanel";
 import MangaGrid from "@/components/MangaGrid";
 import SearchBox from "@/components/SearchBox";
@@ -47,6 +48,8 @@ export default function HomeClient({ data }: Props) {
           <SearchBox value={state.query} onChange={(q) => setState({ ...state, query: q })} />
         </div>
       </section>
+
+      <CategoryHub data={data} />
 
       <button
         type="button"
