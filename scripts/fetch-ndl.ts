@@ -195,6 +195,12 @@ type NdlRec = {
   publisher: string | null;
   issued: string | null;      // YYYY-MM-DD or YYYY-MM or YYYY
   ndc: string | null;
+  /**
+   * NDLC (NDL Classification) コード。 manga は "Y84" 系、 novelization は "Y16"
+   * (児童文学) になる。 NDC=726 だけでは novelization が混入するので NDLC で
+   * 補強する。 missing 時は null。
+   */
+  ndlc: string | null;
   rawJson: unknown;
 };
 
@@ -368,11 +374,20 @@ function parseRecords(xml: string): { total: number; recs: NdlRec[] } {
 
       const subjectNodes = asArray((b["dcterms:subject"] ?? b["dc:subject"]) as unknown);
       let ndc: string | null = null;
+      let ndlc: string | null = null;
       for (const s of subjectNodes) {
+        // 一部の record では subject が plain text でくる
         const t = pickText(s);
         if (t && /^\d{3}(\.\d+)?$/.test(t)) {
           ndc = t;
-          break;
+        }
+        // 主流は rdf:resource URL 形式 (= http://id.ndl.go.jp/class/{ndc9|ndlc}/CODE)
+        const resource = (s as Record<string, unknown>)["@_rdf:resource"];
+        if (typeof resource === "string") {
+          const ndcMatch = resource.match(/\/ndc\d*\/([^/?#]+)/);
+          if (ndcMatch && !ndc) ndc = ndcMatch[1];
+          const ndlcMatch = resource.match(/\/ndlc\/([^/?#]+)/);
+          if (ndlcMatch && !ndlc) ndlc = ndlcMatch[1];
         }
       }
 
@@ -418,6 +433,7 @@ function parseRecords(xml: string): { total: number; recs: NdlRec[] } {
         publisher: publisherText,
         issued,
         ndc,
+        ndlc,
         rawJson: b,
       });
       manifestationProcessed = true;
@@ -558,6 +574,24 @@ function upsertVolume(
   if (!matched) {
     console.warn(
       `  [skip-mismatch] "${rec.seriesTitle ?? rec.title}" — NDL creators=[${rec.creators.join(",")}] ≠ ${authorRef.name}`,
+    );
+    return {
+      seriesId: -1,
+      editionId: -1,
+      isbn: rec.isbn13,
+      rebound: false,
+      mismatchSkipped: true,
+    };
+  }
+
+  // ===== NDLC フィルタ (novelization 排除、 2026-05-07) =====
+  // NDC=726 (= 漫画類) だけでは ノベライズ版 が混入する (= 例: 「金色のガッシュ
+  // ベル!! 第1巻」 by 矢高鈴央 が NDLC=Y16 (児童文学) なのに NDC=726.1 を持つ)。
+  // NDLC が "Y84" prefix (= 漫画クラス) でないものは skip。 NDLC missing 時は
+  // 既存 NDC=726 filter の通過を尊重 (= 古い records 互換)。
+  if (rec.ndlc && !rec.ndlc.startsWith("Y84")) {
+    console.warn(
+      `  [skip-ndlc] "${rec.seriesTitle ?? rec.title}" — NDLC=${rec.ndlc} (= 漫画外、 ノベライズ等)`,
     );
     return {
       seriesId: -1,
