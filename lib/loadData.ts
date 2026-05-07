@@ -77,9 +77,14 @@ export function loadAllManga(): DataBundle {
   const genreKeys = new Set(genres.map((g) => g.key));
 
   const mangaDir = path.join(DATA_DIR, "manga");
-  const files = fs
-    .readdirSync(mangaDir)
-    .filter((f) => f.endsWith(".yml") || f.endsWith(".yaml"));
+  // CI で全 yaml 削除した状態 (= データ準備中) でも build を通すため、
+  // ディレクトリ不在時は空配列で扱う。 通常運用では .gitkeep があるため
+  // ディレクトリは存在する。
+  const files = fs.existsSync(mangaDir)
+    ? fs
+        .readdirSync(mangaDir)
+        .filter((f) => f.endsWith(".yml") || f.endsWith(".yaml"))
+    : [];
 
   const manga: Manga[] = files.map((f) => {
     const m: Manga = readYaml(path.join(mangaDir, f), MangaSchema);
