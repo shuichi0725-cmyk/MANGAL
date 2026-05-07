@@ -1,0 +1,75 @@
+name: Deploy to Cloudflare
+
+# Phase B (2026-05-07): GH Actions auto-deploy。 push (data/manga/ 編集等) で
+# 自動 trigger される。 secret 設定前は workflow_dispatch で手動 trigger 推奨。
+#
+# 必要 GH Secrets:
+#   CLOUDFLARE_API_TOKEN  : CF Dashboard > My Profile > API Tokens で発行
+#                           (Edit Cloudflare Workers template) のトークン
+#   CLOUDFLARE_ACCOUNT_ID : CF Dashboard 右下、 もしくは Workers & Pages
+#                           overview ページに表示される 32 桁の hex
+#
+# wrangler.jsonc の name: "mangal" (Workers + Assets) が deploy target。
+# assets.directory が ./out で、 Next.js の `output: "export"` 出力をそのまま
+# CDN にアップロードする構成。
+
+on:
+  push:
+    branches:
+      - main
+      - claude/manga-database-affiliate-3x0ms
+    paths:
+      - "data/manga/**"
+      - "data/*.yml"
+      - "app/**"
+      - "components/**"
+      - "lib/**"
+      - "public/**"
+      - "next.config.ts"
+      - "wrangler.jsonc"
+      - "package.json"
+      - "package-lock.json"
+      - ".github/workflows/deploy-cloudflare.yml"
+  workflow_dispatch: {}
+
+jobs:
+  deploy:
+    name: Build + Deploy to Cloudflare
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      deployments: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Type check + tests (sanity gate)
+        # build 前に壊れた状態で deploy しないよう軽く検証。
+        # 既に各 PR で個別に走っていてもここで再実行してコスト低 (~10s)。
+        run: npx tsc --noEmit && npx vitest run
+
+      - name: Build Next.js (static export → out/)
+        run: npm run build
+
+      - name: Verify build output
+        run: |
+          COUNT=$(ls out/manga/*.html 2>/dev/null | wc -l)
+          echo "manga pages built: $COUNT"
+          ls out/index.html out/about.html
+          echo
+          echo "=== first 10 manga pages ==="
+          ls out/manga/*.html | head -10
+
+      - name: Deploy to Cloudflare
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: deploy
