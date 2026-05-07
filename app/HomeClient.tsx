@@ -23,10 +23,14 @@ export default function HomeClient({ data }: Props) {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
+    // URL の検索 params が source of truth。 前 state を merge せず、
+    // emptyFilterState + URL params で毎回 fresh に組み直す。 これによって
+    // CategoryHub click や browser back/forward で前の filter が累積せず
+    // 「期待した内容だけ」 が反映される。 ユーザの FilterPanel 手動編集は
+    // URL を更新しないので state には残るが、 URL 経由の navigation で
+    // reset される (= 期待挙動)。
     const patch = filtersFromSearchParams(searchParams);
-    if (Object.keys(patch).length > 0) {
-      setState((prev) => ({ ...emptyFilterState(), ...prev, ...patch }));
-    }
+    setState({ ...emptyFilterState(), ...patch });
   }, [searchParams]);
 
   const bounds = useMemo(() => yearBounds(data.manga), [data.manga]);
