@@ -32,6 +32,10 @@ on:
         description: "1 件だけテストする場合の slug (例: vyinrando-saga)、 空なら全件"
         required: false
         type: string
+      skip_slugs:
+        description: "誤マッチ対策で除外する slug のカンマ区切り (例: death-note,kimitoboku,zetsubounohantou)"
+        required: false
+        type: string
 
 jobs:
   fetch:
@@ -55,11 +59,13 @@ jobs:
           MODE: ${{ inputs.mode }}
           FORCE: ${{ inputs.force }}
           SLUG: ${{ inputs.slug }}
+          SKIP_SLUGS: ${{ inputs.skip_slugs }}
         run: |
           ARGS=()
           if [ "$MODE" = "apply" ]; then ARGS+=(--apply); else ARGS+=(--dry-run); fi
           if [ "$FORCE" = "true" ]; then ARGS+=(--force); fi
           if [ -n "$SLUG" ]; then ARGS+=(--slug "$SLUG"); fi
+          if [ -n "$SKIP_SLUGS" ]; then ARGS+=(--skip-slugs "$SKIP_SLUGS"); fi
           echo "Running: npm run fetch:wikidata:qid -- ${ARGS[*]}"
           npm run fetch:wikidata:qid -- "${ARGS[@]}"
 

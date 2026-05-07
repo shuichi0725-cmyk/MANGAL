@@ -48,10 +48,17 @@ type Args = {
   apply: boolean;
   force: boolean;
   slug: string | null;
+  skipSlugs: Set<string>;
 };
 
 function parseArgs(argv: string[]): Args {
-  const out: Args = { dryRun: true, apply: false, force: false, slug: null };
+  const out: Args = {
+    dryRun: true,
+    apply: false,
+    force: false,
+    slug: null,
+    skipSlugs: new Set(),
+  };
   for (let i = 0; i < argv.length; i++) {
     const a = argv[i];
     if (a === "--apply") {
@@ -62,6 +69,10 @@ function parseArgs(argv: string[]): Args {
       out.apply = false;
     } else if (a === "--force") out.force = true;
     else if (a === "--slug" && argv[i + 1]) out.slug = argv[++i];
+    else if (a === "--skip-slugs" && argv[i + 1]) {
+      const list = argv[++i].split(",").map((x) => x.trim()).filter(Boolean);
+      for (const s of list) out.skipSlugs.add(s);
+    }
   }
   return out;
 }
@@ -91,7 +102,7 @@ async function searchEntities(query: string): Promise<SearchResult[]> {
     search: query,
     language: "ja",
     type: "item",
-    limit: "10",
+    limit: "20",
   })) as { search?: SearchResult[] };
   return json.search ?? [];
 }
@@ -205,17 +216,36 @@ async function findQid(manga: Manga): Promise<FindResult> {
     }
   }
 
-  // Step 2: title search
-  const candidates = await searchEntities(manga.title);
-  if (candidates.length === 0) return null;
+  // Step 2: title search (= title 単独でまず試す)
+  const expectedAuthors = manga.authors.map((a) => a.name);
+  const queries = [manga.title];
+  // 短い / 一般的 title の場合は title+著者 で再検索 (= "NANA" 単独だと同名異作品が
+  // top10 を埋めるので manga が埋もれる)
+  if (expectedAuthors.length > 0) {
+    queries.push(`${manga.title} ${expectedAuthors[0]}`);
+  }
+
+  const seenIds = new Set<string>();
+  const allCandidates: SearchResult[] = [];
+  let firstSearch = true;
+  for (const q of queries) {
+    if (!firstSearch) await sleep(REQUEST_INTERVAL_MS);
+    firstSearch = false;
+    const results = await searchEntities(q);
+    for (const r of results) {
+      if (!seenIds.has(r.id)) {
+        seenIds.add(r.id);
+        allCandidates.push(r);
+      }
+    }
+  }
+  if (allCandidates.length === 0) return null;
 
   await sleep(REQUEST_INTERVAL_MS);
-  const entityData = await getEntities(candidates.map((c) => c.id));
-
-  const expectedAuthors = manga.authors.map((a) => a.name);
+  const entityData = await getEntities(allCandidates.map((c) => c.id));
 
   // Pass 1: title match + author match → high confidence
-  for (const c of candidates) {
+  for (const c of allCandidates) {
     const e = entityData[c.id];
     if (!e || !isMangaInstance(e)) continue;
     const { matched, wikidataAuthors } = await authorMatches(e, expectedAuthors);
@@ -229,7 +259,7 @@ async function findQid(manga: Manga): Promise<FindResult> {
   }
 
   // Pass 2: title match + manga instance, no author match → low confidence
-  for (const c of candidates) {
+  for (const c of allCandidates) {
     const e = entityData[c.id];
     if (!e || !isMangaInstance(e)) continue;
     return {
@@ -281,6 +311,12 @@ async function main(): Promise<void> {
 
     if (manga.wikidata_qid && !args.force) {
       console.log(`[skip-existing] ${manga.slug} (qid=${manga.wikidata_qid})`);
+      stats.skippedExisting++;
+      continue;
+    }
+
+    if (args.skipSlugs.has(manga.slug)) {
+      console.log(`[skip-list] ${manga.slug} (--skip-slugs に含まれる)`);
       stats.skippedExisting++;
       continue;
     }
