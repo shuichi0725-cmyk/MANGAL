@@ -526,9 +526,50 @@ function getStmts(db: DB): VolumeStmts {
 function upsertVolume(
   db: DB,
   mangakaId: number,
-  authorRef: { qid: string | null; name: string },
+  authorRef: { qid: string | null; name: string; altNames: string[] },
   rec: NdlRec,
-): { seriesId: number; editionId: number; isbn: string; rebound: boolean } {
+): {
+  seriesId: number;
+  editionId: number;
+  isbn: string;
+  rebound: boolean;
+  mismatchSkipped?: boolean;
+} {
+  // ===== 著者一致検証 (NDL bug fix, 2026-05-07) =====
+  // NDL の CQL fuzzy match や alt_names 経由で別作者の作品が混入する問題を防ぐ。
+  // 例: 「きい」 (Q38276629 = 堀田きいち) で fetch すると 紀伊カンナの 「春風の
+  // エトランゼ」 や 笹倉綾人 manga 化の 「塩の街」 が NDL から返り、 すべて
+  // 「きい」 名義で series_authors に紐付けられてしまう。
+  //
+  // 対策: NDL 返却 record の creators が、 我々の expected names (= primary +
+  // 3 char 以上の alt_names) のいずれかと前方/後方/両方向 substring match
+  // するか確認。 短すぎる creator (= "きい" 単独等) は信頼しない。
+  // 不一致なら series_authors への紐付けを skip + 警告。
+  const validNames = [authorRef.name, ...authorRef.altNames]
+    .map(normalizeCreatorName)
+    .filter((n) => n.length >= 3);
+  const matched =
+    validNames.length === 0 ||
+    rec.creators.some((c) => {
+      const cn = normalizeCreatorName(c);
+      if (cn.length < 3) return false; // 短い creator は単独で信頼しない
+      return validNames.some(
+        (vn) => cn === vn || cn.includes(vn) || vn.includes(cn),
+      );
+    });
+  if (!matched) {
+    console.warn(
+      `  [skip-mismatch] "${rec.seriesTitle ?? rec.title}" — NDL creators=[${rec.creators.join(",")}] ≠ ${authorRef.name}`,
+    );
+    return {
+      seriesId: -1,
+      editionId: -1,
+      isbn: rec.isbn13,
+      rebound: false,
+      mismatchSkipped: true,
+    };
+  }
+
   // H1: seriesTitle が取れたら baseTitle より先にそちらを優先する。
   // dcndl:seriesTitle = "うる星やつら〔新装版〕" のように既にシリーズ束ね用に
   // 整理されているケースが多く、自前の baseTitle 文字列削りより信頼できる。
@@ -597,13 +638,7 @@ function upsertVolume(
     seriesId = Number(info.lastInsertRowid);
   }
 
-  // series_authors 紐付け
-  // H2: NDL の creator 表記揺れチェック（実害は出ないが将来の差分検知用に保留）。
-  const targetNorm = normalizeCreatorName(authorRef.name);
-  const matched = rec.creators.some(
-    (c) => normalizeCreatorName(c) === targetNorm,
-  );
-  void matched; // 現状は warning に使わず、CQL ヒット事実を尊重して紐付け
+  // series_authors 紐付け (= 関数頭で著者一致検証済 = 安全に紐付け可)
   stmts.insertSeriesAuthor.run(seriesId, mangakaId, "writer_artist");
 
   // edition upsert
@@ -746,8 +781,14 @@ async function main() {
   // 各 variant の応答 XML は .cache/ndl/probes/ に残してデバッグ可能に。
   // 1 個失敗（CQL 構文エラー等）しても次の variant を試す。host blocked
   // のような構造的エラーは即 abort（同 host で他 variant 試しても無駄）。
-  const altNames = csvRow?.alt_names ?? [];
-  const allNames = [name, ...altNames];
+  // NDL bug fix (2026-05-07): 2 文字以下の alt_names を CQL から除外。
+  // 短い alt_names は NDL の fuzzy match で別作者の作品を引っ張る原因になる
+  // (例: 「きい」 = 堀田きいち の alt が 紀伊カンナ の作品にもヒット)。
+  const altNamesFull = csvRow?.alt_names ?? [];
+  const altNamesForQuery = altNamesFull.filter(
+    (n) => normalizeCreatorName(n).length >= 3,
+  );
+  const allNames = [name, ...altNamesForQuery];
 
   type VariantSpec = { name: string; sql: string; warn?: boolean };
   const candidates: VariantSpec[] = [
@@ -855,6 +896,7 @@ async function main() {
   let fetched = 0;
   let inserted = 0;
   let reboundCount = 0;
+  let mismatchSkippedCount = 0;
   // Issue 1: クロスページの ISBN 重複も dedup する。parseRecords 側で
   // 同一レスポンス内の重複は弾いているが、ページをまたいで同じ ISBN が
   // 出ることもあるため belt-and-suspenders。
@@ -889,7 +931,16 @@ async function main() {
         if (seenIsbnAcrossPages.has(rec.isbn13)) continue;
         seenIsbnAcrossPages.add(rec.isbn13);
         try {
-          const r = upsertVolume(db, mangakaId, { qid, name }, rec);
+          const r = upsertVolume(
+            db,
+            mangakaId,
+            { qid, name, altNames: altNamesFull },
+            rec,
+          );
+          if (r.mismatchSkipped) {
+            mismatchSkippedCount++;
+            continue;
+          }
           if (r.rebound) {
             reboundCount++;
             // H6: edition 切り替わりは silent rebind しない。
@@ -926,6 +977,9 @@ async function main() {
   console.log(`  fetched    : ${fetched}`);
   console.log(`  upserted   : ${inserted} volumes`);
   console.log(`  rebinds    : ${reboundCount} (edition 分類が後から変わった ISBN)`);
+  console.log(
+    `  mismatch skip: ${mismatchSkippedCount} (NDL creators が ${name} と不一致のため除外)`,
+  );
 
   const seriesRows = db
     .prepare(
