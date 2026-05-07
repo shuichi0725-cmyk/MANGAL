@@ -20,6 +20,14 @@ on:
         options:
           - dry-run
           - apply
+      high_only:
+        description: "true なら high confidence (= author 一致確認済) のみ apply、 low は除外"
+        required: false
+        default: "true"
+        type: choice
+        options:
+          - "true"
+          - "false"
       force:
         description: "true なら既存の wikidata_qid を上書き"
         required: false
@@ -57,12 +65,14 @@ jobs:
       - name: Fetch Wikidata QIDs
         env:
           MODE: ${{ inputs.mode }}
+          HIGH_ONLY: ${{ inputs.high_only }}
           FORCE: ${{ inputs.force }}
           SLUG: ${{ inputs.slug }}
           SKIP_SLUGS: ${{ inputs.skip_slugs }}
         run: |
           ARGS=()
           if [ "$MODE" = "apply" ]; then ARGS+=(--apply); else ARGS+=(--dry-run); fi
+          if [ "$HIGH_ONLY" = "true" ]; then ARGS+=(--high-only); fi
           if [ "$FORCE" = "true" ]; then ARGS+=(--force); fi
           if [ -n "$SLUG" ]; then ARGS+=(--slug "$SLUG"); fi
           if [ -n "$SKIP_SLUGS" ]; then ARGS+=(--skip-slugs "$SKIP_SLUGS"); fi

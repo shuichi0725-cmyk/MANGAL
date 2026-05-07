@@ -47,6 +47,7 @@ type Args = {
   dryRun: boolean;
   apply: boolean;
   force: boolean;
+  highOnly: boolean;
   slug: string | null;
   skipSlugs: Set<string>;
 };
@@ -56,6 +57,7 @@ function parseArgs(argv: string[]): Args {
     dryRun: true,
     apply: false,
     force: false,
+    highOnly: false,
     slug: null,
     skipSlugs: new Set(),
   };
@@ -68,6 +70,7 @@ function parseArgs(argv: string[]): Args {
       out.dryRun = true;
       out.apply = false;
     } else if (a === "--force") out.force = true;
+    else if (a === "--high-only") out.highOnly = true;
     else if (a === "--slug" && argv[i + 1]) out.slug = argv[++i];
     else if (a === "--skip-slugs" && argv[i + 1]) {
       const list = argv[++i].split(",").map((x) => x.trim()).filter(Boolean);
@@ -346,6 +349,10 @@ async function main(): Promise<void> {
     else stats.foundLow++;
 
     if (args.apply) {
+      if (args.highOnly && result.confidence !== "high") {
+        console.log(`  [skip-low] ${manga.slug} (--high-only により low confidence は yaml に書かない)`);
+        continue;
+      }
       // Insert wikidata_qid right before "editions:" line.
       const newLine = `wikidata_qid: ${result.qid}\n`;
       let updated: string;
