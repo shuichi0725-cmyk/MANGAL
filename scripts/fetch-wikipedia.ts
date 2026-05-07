@@ -23,6 +23,7 @@ import fs from "node:fs";
 import path from "node:path";
 import YAML from "yaml";
 import { openDb, recordSource, tx } from "./_db";
+import { normalizeCreatorName } from "../lib/edition";
 
 const PARSE_API = "https://ja.wikipedia.org/w/api.php";
 const SUMMARY_API = "https://ja.wikipedia.org/api/rest_v1/page/summary";
@@ -375,9 +376,15 @@ async function main() {
 
   const all = db
     .prepare(
-      `SELECT id, title, title_kana, wikipedia_url FROM series ORDER BY id`,
+      `SELECT s.id, s.title, s.title_kana, s.wikipedia_url,
+              GROUP_CONCAT(m.name, '||') AS expected_authors
+       FROM series s
+       LEFT JOIN series_authors sa ON sa.series_id = s.id
+       LEFT JOIN mangaka m ON m.id = sa.mangaka_id
+       GROUP BY s.id
+       ORDER BY s.id`,
     )
-    .all() as SeriesRow[];
+    .all() as (SeriesRow & { expected_authors: string | null })[];
 
   const queue = args.refetch
     ? all
@@ -481,6 +488,44 @@ async function main() {
 
     const fields = wikitext ? extractInfoboxFields(wikitext) : new Map();
     if (fields.size > 0) stats.infoboxFound++;
+
+    // ===== 著者一致検証 (2026-05-07) =====
+    // Wikipedia 記事の作者と series の expected author (= series_authors 経由の
+    // mangaka.name) が不一致なら、 別作品の Wikipedia 記事 を拾った可能性大
+    // (例: 矢高鈴央 4コマ ガッシュベル → main 雷句誠 article へ redirect)。
+    // 不一致時は url のみ記録して synopsis/metadata を skip し pollution 防止。
+    const wikiAuthorRaw = stripWikitext(
+      fields.get("作者") ??
+        fields.get("漫画") ??
+        fields.get("作画") ??
+        fields.get("著者") ??
+        "",
+    );
+    const expectedAuthors = (s.expected_authors ?? "")
+      .split("||")
+      .map((n) => normalizeCreatorName(n))
+      .filter(Boolean);
+    let authorMatched = true;
+    if (wikiAuthorRaw && expectedAuthors.length > 0) {
+      // Wikipedia article の作者を names に分割 (= 「諫山創」 / 「大場つぐみ・小畑健」 等)
+      const wikiAuthors = wikiAuthorRaw
+        .split(/[,、・\/／\n]/)
+        .map((s) => normalizeCreatorName(s))
+        .filter((s) => s.length > 0);
+      authorMatched = wikiAuthors.some((wa) =>
+        expectedAuthors.some(
+          (ea) => wa === ea || wa.includes(ea) || ea.includes(wa),
+        ),
+      );
+      if (!authorMatched) {
+        console.warn(
+          `  [skip-author] "${s.title}" — Wikipedia 作者=${wikiAuthorRaw} ≠ DB ${s.expected_authors}`,
+        );
+        // url 記録だけして次回再 query 防止 (= 既知不一致として cache)
+        setNotFound.run(s.id);
+        continue;
+      }
+    }
 
     const kanaFromExtract = extractReadingFromExtract(summary.extract, s.title);
     const kanaFromInfobox =
