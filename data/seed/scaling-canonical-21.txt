@@ -1,0 +1,32 @@
+# canonical-21 mangaka sample for pipeline behavior observation.
+#
+# 旧 canonical 21 yamls (= attack-on-titan, berserk, ..., vagabond) の作家を
+# 半自動 pipeline で fetch。 復元目的ではなく、 これら有名作品が pipeline で
+# どこまで produc-ready 化できるか挙動観察用。
+#
+# 19 unique QIDs (= 21 作品 - 高橋留美子 重複 - 大場つぐみ/雁屋哲 が CSV 不在)。
+# DEATH NOTE は 小畑健 (artist) で代用、 美味しんぼ は 花咲アキラ (artist) で代用。
+#
+# 作家: 諫山創 三浦建太郎 久保帯人 小畑健 青山剛昌 鳥山明 高屋奈月 荒川弘
+#       高橋留美子 吾峠呼世晴 原泰久 矢沢あい 岸本斉史 花咲アキラ 尾田栄一郎
+#       浅野いにお 武内直子 井上雄彦 浦沢直樹
+
+Q3782468
+Q715725
+Q295073
+Q313703
+Q313945
+Q208582
+Q241885
+Q230962
+Q219948
+Q24865213
+Q9116547
+Q234425
+Q1993
+Q11615162
+Q2010
+Q600217
+Q229724
+Q459911
+Q348436
