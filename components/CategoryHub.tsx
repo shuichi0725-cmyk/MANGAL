@@ -95,21 +95,21 @@ export default function CategoryHub({ data }: Props) {
   return (
     <section className="mb-6">
       <h2 className="text-xs font-semibold tracking-wider uppercase text-black/60 mb-2">
-        カテゴリで探す ({total} 作品中)
+        カテゴリで探す
       </h2>
-      <ul className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2">
+      <ul className="grid grid-cols-4 gap-1.5">
         {categories.map((c) => (
           <li key={c.href}>
             <Link
               href={c.href}
-              className="flex flex-col items-center justify-center gap-1 rounded-lg border border-black/10 bg-white px-3 py-3 hover:bg-black/[0.02] hover:border-black/20 transition-colors"
+              className="flex flex-col items-center justify-center gap-0.5 rounded-md bg-black/[0.035] hover:bg-black/[0.08] px-1.5 py-2 transition-colors text-center"
             >
-              <span className="text-xl leading-none">{c.icon}</span>
-              <span className="text-xs font-medium text-center leading-tight">
+              <span className="text-sm leading-none">{c.icon}</span>
+              <span className="text-[11px] font-medium leading-tight mt-1">
                 {c.label}
               </span>
-              <span className="text-[10px] text-black/45">
-                {c.count} 作品
+              <span className="text-[9px] text-black/45 leading-none mt-0.5">
+                {c.count}
               </span>
             </Link>
           </li>
