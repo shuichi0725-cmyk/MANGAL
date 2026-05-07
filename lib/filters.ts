@@ -36,11 +36,24 @@ export function matchText(query: string, manga: Manga): boolean {
   const q = normalizeForSearch(query);
   if (!q) return true;
 
+  const altTitles = manga.alternative_titles
+    ? [
+        manga.alternative_titles.en,
+        manga.alternative_titles.fr,
+        manga.alternative_titles.de,
+        manga.alternative_titles.it,
+        manga.alternative_titles.pt,
+      ]
+        .filter((t): t is string => Boolean(t))
+        .map((t) => normalizeForSearch(t))
+    : [];
+
   const haystacks = [
     normalizeForSearch(manga.title),
     normalizeForSearch(manga.title_kana),
     normalizeForSearch(manga.title_romaji),
     normalizeForSearch(kanaToRomaji(manga.title_kana)),
+    ...altTitles,
   ];
   if (haystacks.some((h) => h && h.includes(q))) return true;
 

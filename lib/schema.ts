@@ -59,6 +59,15 @@ export const EditionSchema = z.object({
 });
 export type Edition = z.infer<typeof EditionSchema>;
 
+export const AlternativeTitlesSchema = z.object({
+  en: z.string().optional(),
+  fr: z.string().optional(),
+  de: z.string().optional(),
+  it: z.string().optional(),
+  pt: z.string().optional(),
+});
+export type AlternativeTitles = z.infer<typeof AlternativeTitlesSchema>;
+
 export const MangaSchema = z.object({
   slug: z.string().regex(/^[a-z0-9-]+$/, "slug は小文字英数字とハイフンのみ"),
   title: z.string().min(1),
@@ -74,6 +83,16 @@ export const MangaSchema = z.object({
   demographic: Demographic,
   genres: z.array(z.string().min(1)).min(1),
   synopsis: z.string().default(""),
+  /** アニメ化されたか (= 何らかの形で映像化済) */
+  anime_adapted: z.boolean().optional(),
+  /** 最初のアニメ化年 (= 複数あれば一番古い) */
+  anime_first_year: z.number().int().min(1900).max(2100).optional(),
+  /** 海外配信タイトル / 別名。 検索の柔軟性 + SEO 用 */
+  alternative_titles: AlternativeTitlesSchema.optional(),
+  /** 受賞歴。 自由記述 (例: "講談社漫画賞 少年部門 1985") */
+  awards: z.array(z.string()).optional(),
+  /** Wikidata の QID (例: "Q282470")、 cross-reference / debug 用 */
+  wikidata_qid: z.string().regex(/^Q\d+$/).optional(),
   editions: z.array(EditionSchema).min(1),
 });
 export type Manga = z.infer<typeof MangaSchema>;
