@@ -16,9 +16,12 @@ export default function VolumeRow({ manga }: Props) {
               全 {ed.volumes.length} 巻
             </span>
           </h2>
-          <ul className="grid grid-cols-4 gap-3">
+          <ul className="space-y-4">
             {ed.volumes.map((v) => (
-              <li key={`${ed.type}-${v.number}`}>
+              <li
+                key={`${ed.type}-${v.number}`}
+                className="border-b border-black/5 pb-4 last:border-b-0"
+              >
                 <VolumeTile manga={manga} volume={v} edition={ed} />
               </li>
             ))}

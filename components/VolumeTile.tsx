@@ -10,9 +10,12 @@ type Props = {
 };
 
 /**
- * 単一巻の表示。 cover / Amazon ボタン / 巻説明 はそれぞれ「データがあれば描画、
- * 無ければ skip」 の方針。 tile 全体を Amazon リンクで wrap していた旧構造は
- * 廃止し、 明示的なボタンに統一 (= 大半の巻で ASIN 未取得な現状で誤誘導しない)。
+ * 単一巻を 1 行として表示する layout (横並び)。 cover は左に小さく、 残りの
+ * メタ (巻ラベル / 発売日 / Amazon ボタン / 巻説明) を右に縦積み。
+ *
+ * cover / asin / description は **データがあれば描画、 無ければ skip** の方針。
+ * tile 全体を Amazon リンクで wrap していた旧構造は廃止し、 明示的なボタン
+ * のみで Amazon に遷移する。
  */
 export default function VolumeTile({ manga, volume, edition }: Props) {
   const cover = volume.cover_url ?? null;
@@ -21,35 +24,37 @@ export default function VolumeTile({ manga, volume, edition }: Props) {
   const editionLabel = edition ? `${edition.label} ` : "";
 
   return (
-    <div className="block">
+    <div className="flex gap-3">
       {cover && (
-        <div className="relative aspect-[2/3] bg-black/5 rounded overflow-hidden">
+        <div className="relative w-20 aspect-[2/3] bg-black/5 rounded overflow-hidden shrink-0">
           <CoverImage
             src={cover}
             alt={`${manga.title} ${label} 表紙`}
-            sizes="110px"
+            sizes="80px"
           />
         </div>
       )}
-      <p className="mt-1 text-xs font-medium leading-tight">{label}</p>
-      <p className="text-[11px] text-black/50 leading-tight">
-        {date || "発売日未取得"}
-      </p>
-      {volume.asin && (
-        <AffiliateLink
-          manga={manga}
-          volume={volume}
-          ariaLabel={`${manga.title} ${editionLabel}${label} を Amazon で見る`}
-          className="inline-block mt-1.5 text-[11px] px-2.5 py-1 rounded bg-[var(--color-accent)] text-white hover:opacity-90"
-        >
-          アマゾン
-        </AffiliateLink>
-      )}
-      {volume.description && (
-        <p className="mt-1.5 text-[11px] text-black/65 leading-relaxed">
-          {volume.description}
+      <div className="flex-1 min-w-0">
+        <p className="text-sm font-semibold leading-tight">{label}</p>
+        <p className="text-xs text-black/50 mt-0.5 leading-tight">
+          {date || "発売日未取得"}
         </p>
-      )}
+        {volume.asin && (
+          <AffiliateLink
+            manga={manga}
+            volume={volume}
+            ariaLabel={`${manga.title} ${editionLabel}${label} を Amazon で見る`}
+            className="inline-block mt-2 text-xs px-3 py-1 rounded bg-[var(--color-accent)] text-white hover:opacity-90"
+          >
+            アマゾン
+          </AffiliateLink>
+        )}
+        {volume.description && (
+          <p className="mt-2 text-xs text-black/70 leading-relaxed whitespace-pre-line">
+            {volume.description}
+          </p>
+        )}
+      </div>
     </div>
   );
 }
