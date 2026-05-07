@@ -1,0 +1,84 @@
+name: Fetch Wikidata QID
+
+# B3.2/3.3 (2026-05-07): 各 manga yaml に wikidata_qid を追記する。
+# Wikidata API は外部で叩く必要があるため CI 上で実行。 Android 完結フローで
+# user は手動 trigger (workflow_dispatch) するだけ。
+#
+# mode=dry-run: 何が QID として見つかるか log に出力、 yaml は変更しない
+# mode=apply  : yaml に wikidata_qid を書き込み、 自動 commit + push
+#
+# 既存 wikidata_qid を持つ yaml は force=false ならスキップ。
+
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "dry-run (出力のみ) or apply (yaml 書込 + commit)"
+        required: true
+        default: "dry-run"
+        type: choice
+        options:
+          - dry-run
+          - apply
+      force:
+        description: "true なら既存の wikidata_qid を上書き"
+        required: false
+        default: "false"
+        type: choice
+        options:
+          - "false"
+          - "true"
+      slug:
+        description: "1 件だけテストする場合の slug (例: vyinrando-saga)、 空なら全件"
+        required: false
+        type: string
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      - name: Fetch Wikidata QIDs
+        env:
+          MODE: ${{ inputs.mode }}
+          FORCE: ${{ inputs.force }}
+          SLUG: ${{ inputs.slug }}
+        run: |
+          ARGS=()
+          if [ "$MODE" = "apply" ]; then ARGS+=(--apply); else ARGS+=(--dry-run); fi
+          if [ "$FORCE" = "true" ]; then ARGS+=(--force); fi
+          if [ -n "$SLUG" ]; then ARGS+=(--slug "$SLUG"); fi
+          echo "Running: npm run fetch:wikidata:qid -- ${ARGS[*]}"
+          npm run fetch:wikidata:qid -- "${ARGS[@]}"
+
+      - name: Verify yaml integrity (apply mode)
+        if: inputs.mode == 'apply'
+        run: |
+          npx tsc --noEmit
+          npx vitest run
+
+      - name: Commit + push (apply mode)
+        if: inputs.mode == 'apply'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if git diff --quiet data/manga/; then
+            echo "No yaml changes to commit"
+            exit 0
+          fi
+          git add data/manga/
+          COUNT=$(git diff --staged --numstat data/manga/ | wc -l)
+          git commit -m "data: auto-populate wikidata_qid for $COUNT manga via fetch:wikidata:qid"
+          git push origin HEAD:${{ github.ref_name }}

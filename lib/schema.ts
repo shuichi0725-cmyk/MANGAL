@@ -93,6 +93,8 @@ export const MangaSchema = z.object({
   awards: z.array(z.string()).optional(),
   /** Wikidata の QID (例: "Q282470")、 cross-reference / debug 用 */
   wikidata_qid: z.string().regex(/^Q\d+$/).optional(),
+  /** 日本語 Wikipedia 記事 URL (= fetch:wikipedia で発見した canonical link) */
+  wikipedia_url: z.string().url().optional(),
   editions: z.array(EditionSchema).min(1),
 });
 export type Manga = z.infer<typeof MangaSchema>;

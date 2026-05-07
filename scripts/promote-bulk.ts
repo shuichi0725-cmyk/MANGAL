@@ -150,6 +150,7 @@ type SeriesRow = {
   genres: string | null;     // CSV
   synopsis: string | null;
   status: string | null;
+  wikipedia_url: string | null;
 };
 
 type EditionRow = {
@@ -299,7 +300,7 @@ async function main() {
       `SELECT s.id, s.series_key, s.qid, s.title, s.title_kana,
               s.year_started, s.year_ended, s.status,
               s.publisher_key, s.magazine_key, s.demographic,
-              s.genres, s.synopsis
+              s.genres, s.synopsis, s.wikipedia_url
        FROM series s
        ORDER BY s.id`,
     )
@@ -486,6 +487,7 @@ async function main() {
       demographic,
       genres,
       synopsis,
+      ...(row.wikipedia_url ? { wikipedia_url: row.wikipedia_url } : {}),
       editions,
     };
 
