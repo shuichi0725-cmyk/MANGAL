@@ -535,28 +535,26 @@ function upsertVolume(
   rebound: boolean;
   mismatchSkipped?: boolean;
 } {
-  // ===== 著者一致検証 (NDL bug fix, 2026-05-07) =====
+  // ===== 著者一致検証 (NDL bug fix v2, 2026-05-07) =====
   // NDL の CQL fuzzy match や alt_names 経由で別作者の作品が混入する問題を防ぐ。
-  // 例: 「きい」 (Q38276629 = 堀田きいち) で fetch すると 紀伊カンナの 「春風の
-  // エトランゼ」 や 笹倉綾人 manga 化の 「塩の街」 が NDL から返り、 すべて
-  // 「きい」 名義で series_authors に紐付けられてしまう。
+  // 例: 「きい」 (Q38276629) で fetch すると 紀伊カンナ・堀田きいち・笹倉綾人 等
+  // 別作家の作品が NDL から返り、 すべて 「きい」 名義で series_authors に紐付け
+  // られてしまう。
   //
-  // 対策: NDL 返却 record の creators が、 我々の expected names (= primary +
-  // 3 char 以上の alt_names) のいずれかと前方/後方/両方向 substring match
-  // するか確認。 短すぎる creator (= "きい" 単独等) は信頼しない。
-  // 不一致なら series_authors への紐付けを skip + 警告。
-  const validNames = [authorRef.name, ...authorRef.altNames]
-    .map(normalizeCreatorName)
-    .filter((n) => n.length >= 3);
-  const matched =
-    validNames.length === 0 ||
-    rec.creators.some((c) => {
-      const cn = normalizeCreatorName(c);
-      if (cn.length < 3) return false; // 短い creator は単独で信頼しない
-      return validNames.some(
-        (vn) => cn === vn || cn.includes(vn) || vn.includes(cn),
-      );
-    });
+  // 戦略: NDL 返却 record の creator (normalized) が、 我々の expected names
+  // (primary + alt_names、 length filter 無し) のいずれかと **完全一致** すれば
+  // 紐付け、 そうでなければ skip。 substring 包含は使わない (= 「堀田きいち」 が
+  // 「きい」 を含むからといって 同じ人物とは限らない)。
+  //
+  // トレードオフ: target「堀田きいち」 で NDL が abbreviated「きい」 のみ記録した
+  // 巻 は equality 不一致で skip される (= 取りこぼし)。 但し別作家の誤帰属
+  // (= false-positive) を避ける方が 6,751 名 scale で安全。
+  const validNames = [authorRef.name, ...authorRef.altNames].map(
+    normalizeCreatorName,
+  );
+  const matched = rec.creators.some((c) =>
+    validNames.includes(normalizeCreatorName(c)),
+  );
   if (!matched) {
     console.warn(
       `  [skip-mismatch] "${rec.seriesTitle ?? rec.title}" — NDL creators=[${rec.creators.join(",")}] ≠ ${authorRef.name}`,
