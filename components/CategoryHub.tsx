@@ -88,6 +88,31 @@ export default function CategoryHub({ data }: Props) {
       count: joseiCount,
       icon: "👩",
     },
+    // 並び順 (= filter ではなく sort、 全件対象なので count = total)
+    {
+      href: "/?sort=year-desc",
+      label: "新しい順",
+      count: total,
+      icon: "🆕",
+    },
+    {
+      href: "/?sort=year-asc",
+      label: "古い順",
+      count: total,
+      icon: "📜",
+    },
+    {
+      href: "/?sort=volumes",
+      label: "巻数順",
+      count: total,
+      icon: "📚",
+    },
+    {
+      href: "/?sort=title",
+      label: "五十音順",
+      count: total,
+      icon: "🅰️",
+    },
   ].filter((c) => c.count > 0);
 
   if (categories.length === 0) return null;
