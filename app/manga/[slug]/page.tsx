@@ -7,7 +7,10 @@ import { loadAllManga } from "@/lib/loadData";
 import { primaryVolume } from "@/lib/schema";
 
 export function generateStaticParams() {
-  return loadAllManga().manga.map((m) => ({ slug: m.slug }));
+  const slugs = loadAllManga().manga.map((m) => ({ slug: m.slug }));
+  // empty state (= データ準備中) でも build を通すための placeholder。
+  // detail page 側で `manga not found` → 404 にフォールバックする。
+  return slugs.length > 0 ? slugs : [{ slug: "_empty" }];
 }
 
 export default async function MangaDetailPage({
