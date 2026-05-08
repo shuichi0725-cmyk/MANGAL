@@ -94,9 +94,9 @@ function parseArgs(argv: string[]): Args {
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
 /**
- * MADB の publisher / magazine literal は「漢字　∥　カナ」 (= 全角空白 +
+ * MADB の publisher literal は「漢字　∥　カナ」 (= 全角空白 +
  * ダブルスラッシュ + 全角空白) で連結された 1 文字列で発行される。
- * 例: "講談社　∥　コウダンシャ" / "週刊少年ジャンプ　∥　シュウカンショウネンジャンプ"
+ * 例: "講談社　∥　コウダンシャ"
  *
  * downstream で扱いやすいよう漢字部分のみ抽出。 連結子が無い場合は元値
  * をそのまま返す (= 海外版書誌 等の例外ケース安全)。
@@ -108,12 +108,12 @@ function splitMadbLiteral(s: string | null): string | null {
 }
 
 /**
- * publishers.yml / magazines.yml を読み込んで「name → key」 逆引きマップ
- * を作る。 fetch-wikipedia の loadMasterMaps を縮約した版。 read-only。
+ * publishers.yml を読み込んで「name → key」 逆引きマップを作る。
+ * magazine_key は MADB graph 構造上 単行本側から取れないので、
+ * fetch:wikipedia 担当 (= ここでは扱わない)。
  */
 type MasterMaps = {
   publisher: Map<string, string>;
-  magazine: Map<string, string>;
 };
 
 let cachedMasters: MasterMaps | null = null;
@@ -124,18 +124,11 @@ function getMasters(): MasterMaps {
   const pubYaml = YAML.parse(
     fs.readFileSync(path.join(dataDir, "publishers.yml"), "utf8"),
   ) as Record<string, { name: string }>;
-  const magYaml = YAML.parse(
-    fs.readFileSync(path.join(dataDir, "magazines.yml"), "utf8"),
-  ) as Record<string, { name: string }>;
   const publisher = new Map<string, string>();
   for (const [k, v] of Object.entries(pubYaml)) {
     publisher.set(v.name.normalize("NFKC"), k);
   }
-  const magazine = new Map<string, string>();
-  for (const [k, v] of Object.entries(magYaml)) {
-    magazine.set(v.name.normalize("NFKC"), k);
-  }
-  cachedMasters = { publisher, magazine };
+  cachedMasters = { publisher };
   return cachedMasters;
 }
 
@@ -236,26 +229,16 @@ async function fetchMadbForName(
     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
     PREFIX class: <https://mediaarts-db.artmuseums.go.jp/data/class#>
     PREFIX prop: <https://mediaarts-db.artmuseums.go.jp/data/property#>
-    SELECT DISTINCT ?manifestation ?title ?creator ?isbn ?publisher ?magazine ?magazineType ?datePublished WHERE {
+    SELECT DISTINCT ?manifestation ?title ?creator ?isbn ?publisher ?datePublished WHERE {
       ?manifestation a class:MangaBook .
       ${creatorClause}
       FILTER(REGEX(STR(?creator), "${re}"))
       OPTIONAL { ?manifestation rdfs:label ?title }
       OPTIONAL { ?manifestation schema:isbn ?isbn }
       OPTIONAL { ?manifestation schema:publisher ?publisher }
-      # 雑誌取得: schema:isPartOf の指す C-id は class:MangaMagazine とは
-      # 限らず、 class:MangaBookSeries (= シリーズ entity) を指すケースが
-      # 多い (= 過去 run で class:MangaMagazine filter が 0% だった理由)。
-      # ここでは type filter なしで rdfs:label を素直に取り、 type は
-      # 別変数で同時取得して post-processing で series/magazine を識別。
-      OPTIONAL {
-        ?manifestation schema:isPartOf ?magazineUri .
-        ?magazineUri rdfs:label ?magazine .
-      }
-      OPTIONAL {
-        ?manifestation schema:isPartOf ?magazineUri .
-        ?magazineUri a ?magazineType .
-      }
+      # 雑誌 (= MangaMagazine) は MADB の graph 構造上 単行本側からは
+      # 直接到達できない (= MangaBook と MangaMagazine が分離されたサブ
+      # グラフ、 確認済)。 magazine_key は fetch:wikipedia で別途補完する。
       OPTIONAL { ?manifestation schema:datePublished ?datePublished }
     } LIMIT ${QUERY_LIMIT}
   `;
@@ -268,8 +251,6 @@ type MadbRec = {
   creator: string;
   isbn13: string;
   publisher: string | null;
-  magazine: string | null;
-  magazineType: string | null;
   datePublished: string | null;
 };
 
@@ -290,8 +271,6 @@ function normalizeBinding(b: SparqlBinding): MadbRec | null {
     creator,
     isbn13,
     publisher: b["publisher"]?.value?.trim() || null,
-    magazine: b["magazine"]?.value?.trim() || null,
-    magazineType: b["magazineType"]?.value?.trim() || null,
     datePublished: b["datePublished"]?.value?.trim() || null,
   };
 }
@@ -304,7 +283,6 @@ type VolumeStmts = {
   insertSeries: Stmt;
   updateSeriesYear: Stmt;
   updateSeriesPublisherKey: Stmt;
-  updateSeriesMagazineKey: Stmt;
   insertSeriesAuthor: Stmt;
   selectEdition: Stmt;
   insertEdition: Stmt;
@@ -334,16 +312,11 @@ function getStmts(db: DB): VolumeStmts {
        WHERE id = ?`,
     ),
     // COALESCE で既存値があれば touch しない (= 別 record で先に設定された
-    // publisher_key / magazine_key を上書きで失わないため)。
+    // publisher_key を上書きで失わないため)。 magazine_key は fetch:wikipedia
+    // が後段で埋めるので fetch-madb では扱わない。
     updateSeriesPublisherKey: db.prepare(
       `UPDATE series
        SET publisher_key = COALESCE(publisher_key, ?),
-           updated_at = strftime('%Y-%m-%dT%H:%M:%SZ','now')
-       WHERE id = ?`,
-    ),
-    updateSeriesMagazineKey: db.prepare(
-      `UPDATE series
-       SET magazine_key = COALESCE(magazine_key, ?),
            updated_at = strftime('%Y-%m-%dT%H:%M:%SZ','now')
        WHERE id = ?`,
     ),
@@ -424,19 +397,14 @@ function upsertVolume(db: DB, author: AuthorRef, rec: MadbRec): void {
     releaseDate && /^\d{4}/.test(releaseDate) ? Number(releaseDate.slice(0, 4)) : null;
 
   // Task 2: publisher literal を 「漢字　∥　カナ」 から漢字だけ抽出。
-  // Task 3: 同様に magazine literal の漢字部分のみ取る。
+  // (magazine_key は fetch:wikipedia 担当、 ここでは扱わない)
   const publisherName = splitMadbLiteral(rec.publisher);
-  const magazineName = splitMadbLiteral(rec.magazine);
 
   const stmts = getStmts(db);
   const masters = getMasters();
   const publisherKey =
     publisherName !== null
       ? (masters.publisher.get(publisherName.normalize("NFKC")) ?? null)
-      : null;
-  const magazineKey =
-    magazineName !== null
-      ? (masters.magazine.get(magazineName.normalize("NFKC")) ?? null)
       : null;
 
   // ===== series upsert =====
@@ -478,14 +446,11 @@ function upsertVolume(db: DB, author: AuthorRef, rec: MadbRec): void {
     stmts.insertSeriesAuthor.run(seriesId, author.mangakaId, "writer_artist");
   }
 
-  // Task 2/3: series.publisher_key / magazine_key を master 解決値で埋める。
-  // 既存値がある場合は COALESCE で touch しない (= 別 record で先に設定
-  // された値を新しい record で上書きしない)。
+  // Task 2: series.publisher_key を master 解決値で埋める。 既存値がある
+  // 場合は COALESCE で touch しない (= 別 record で先に設定された値を
+  // 新しい record で上書きしない)。 magazine_key は fetch:wikipedia 担当。
   if (publisherKey !== null) {
     stmts.updateSeriesPublisherKey.run(publisherKey, seriesId);
-  }
-  if (magazineKey !== null) {
-    stmts.updateSeriesMagazineKey.run(magazineKey, seriesId);
   }
 
   // ===== edition upsert =====
@@ -563,7 +528,6 @@ function upsertVolume(db: DB, author: AuthorRef, rec: MadbRec): void {
     title: rec.title,
     creator: rec.creator,
     publisher: rec.publisher,
-    magazine: rec.magazine,
     datePublished: rec.datePublished,
   });
 }
@@ -722,70 +686,6 @@ async function processAuthor(
   return { inserted, updated, skipped };
 }
 
-/**
- * Phase 0+ schema discovery: schema:isPartOf chain の真の構造を発見。
- * 1) MangaBook → schema:isPartOf → ?part の ?part type 分布
- * 2) ?part の outgoing predicates 上位 (= MangaMagazine への真の link を発見)
- * 3) 鎖がもう 1 段必要なら ?part → ?? → MangaMagazine の predicate も sample
- *
- * 結果は console.log で出力 (= GH workflow 上で読める)。 この情報を元に
- * fetchMadbForName の SPARQL を修正する次イテレーションを設計する。
- */
-async function discoverIsPartOfChain(): Promise<void> {
-  console.log("\n=== Phase 0+: schema:isPartOf chain discovery ===");
-
-  // (1) MangaBook → schema:isPartOf → ?part type distribution
-  const q1 = `
-    PREFIX schema: <https://schema.org/>
-    PREFIX class: <https://mediaarts-db.artmuseums.go.jp/data/class#>
-    SELECT ?type (COUNT(*) AS ?n) WHERE {
-      ?m a class:MangaBook ;
-         schema:isPartOf ?p .
-      ?p a ?type .
-    } GROUP BY ?type ORDER BY DESC(?n) LIMIT 10
-  `;
-  const r1 = await sparqlFetch(q1);
-  console.log(`  [1] schema:isPartOf target type distribution:`);
-  for (const b of r1.bindings) {
-    console.log(`      ${b["n"]?.value} × ${b["type"]?.value}`);
-  }
-
-  // (2) 第一 hop ?part の outgoing predicates 上位 (= MangaMagazine 等への
-  //     真の link predicate を発見)
-  const q2 = `
-    PREFIX schema: <https://schema.org/>
-    PREFIX class: <https://mediaarts-db.artmuseums.go.jp/data/class#>
-    SELECT ?p (COUNT(*) AS ?n) WHERE {
-      ?m a class:MangaBook ;
-         schema:isPartOf ?part .
-      ?part ?p ?o .
-    } GROUP BY ?p ORDER BY DESC(?n) LIMIT 25
-  `;
-  const r2 = await sparqlFetch(q2);
-  console.log(`  [2] outgoing predicates of schema:isPartOf target:`);
-  for (const b of r2.bindings) {
-    console.log(`      ${b["n"]?.value} × ${b["p"]?.value}`);
-  }
-
-  // (3) ?part → ?next の type 分布 (= 第二 hop で MangaMagazine が見つかるか)
-  const q3 = `
-    PREFIX schema: <https://schema.org/>
-    PREFIX class: <https://mediaarts-db.artmuseums.go.jp/data/class#>
-    SELECT ?type (COUNT(*) AS ?n) WHERE {
-      ?m a class:MangaBook ;
-         schema:isPartOf ?part .
-      ?part ?anyP ?next .
-      ?next a ?type .
-    } GROUP BY ?type ORDER BY DESC(?n) LIMIT 15
-  `;
-  const r3 = await sparqlFetch(q3);
-  console.log(`  [3] second-hop type distribution (= ?part ?anyP ?next):`);
-  for (const b of r3.bindings) {
-    console.log(`      ${b["n"]?.value} × ${b["type"]?.value}`);
-  }
-  console.log("");
-}
-
 async function main(): Promise<void> {
   const args = parseArgs(process.argv.slice(2));
   if (!args.qid && !args.name && !args.all) {
@@ -806,13 +706,6 @@ async function main(): Promise<void> {
   console.log(
     `[fetch-madb] start: ${authors.length} mangaka, includeOriginalAuthor=${args.includeOriginalAuthor}`,
   );
-
-  // Phase 0+: schema:isPartOf chain の discovery (= 雑誌 entity への
-  // 真の経路を発見するため)。 過去 run で MangaMagazine filter が 0%
-  // だった原因は、 MangaBook → schema:isPartOf → ??? の ??? が
-  // MangaBookSeries 等の中間 entity だったから。 真の type 分布と
-  // 中間 entity の outgoing predicates を 1 回だけログに出す。
-  await discoverIsPartOfChain();
 
   const totals = { inserted: 0, updated: 0, skipped: 0 };
   for (const author of authors) {
