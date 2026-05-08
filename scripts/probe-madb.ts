@@ -31,7 +31,10 @@ import path from "node:path";
 import { openDb } from "./_db";
 import { normalizeIsbn13 } from "../lib/edition";
 
-const MADB_SPARQL_ENDPOINT = "https://mediaarts-db.bunka.go.jp/sparql";
+// 2026-05-08: 正規 endpoint は artmuseums.go.jp 系 (= 旧 bunka.go.jp/sparql は
+// DNS 解決失敗、 GH runner からも `fetch failed`)。 出典:
+// https://lodc2022-culture-art.metadata.moe/docs/mediaartsdb/
+const MADB_SPARQL_ENDPOINT = "https://mediaarts-db.artmuseums.go.jp/sparql";
 const MADB_INTERVAL_MS = 1000;
 const OUT_DIR = path.join(process.cwd(), "out", "probe-madb");
 const DOCS_PATH = path.join(process.cwd(), "docs", "madb-probe.md");
@@ -89,17 +92,20 @@ function safeFilename(s: string): string {
 
 async function probeSanity(): Promise<{ ok: boolean; note: string }> {
   if (DRY_RUN) return { ok: false, note: "dry-run: skipped" };
-  const query = "SELECT * WHERE { ?s ?p ?o } LIMIT 1";
-  const url = `${MADB_SPARQL_ENDPOINT}?query=${encodeURIComponent(query)}`;
+  // 漫画単行本 (class:MangaBook) の総数を数えて endpoint 到達 + dataset
+  // 規模を同時確認。 hit 0 なら class URI 想定が外れている目印になる。
+  const query = `
+    PREFIX schema: <http://schema.org/>
+    PREFIX class: <https://mediaarts-db.artmuseums.go.jp/ns/class#>
+    SELECT (COUNT(?m) AS ?n) WHERE { ?m a class:MangaBook }
+  `;
   try {
-    const res = await fetch(url, {
-      headers: { Accept: "application/sparql-results+json" },
-    });
+    const res = await sparqlFetch(query);
     if (!res.ok) {
-      return { ok: false, note: `HTTP ${res.status}` };
+      return { ok: false, note: res.error ?? "unknown error" };
     }
-    const text = await res.text();
-    return { ok: true, note: `responded ${text.length} bytes` };
+    const n = res.bindings[0]?.["n"]?.value ?? "?";
+    return { ok: true, note: `class:MangaBook count=${n}` };
   } catch (err) {
     return {
       ok: false,
@@ -110,47 +116,83 @@ async function probeSanity(): Promise<{ ok: boolean; note: string }> {
 
 type SparqlBinding = Record<string, { type?: string; value?: string }>;
 
-async function fetchMadb(authorName: string): Promise<{
+/**
+ * SPARQL を POST で叩く共通関数。 GET は URL 長制限と CDN キャッシュで
+ * 不安定なので、 LOD クライアントの慣行通り POST + form-urlencoded を使う。
+ */
+async function sparqlFetch(query: string): Promise<{
+  ok: boolean;
   bindings: SparqlBinding[];
   error: string | null;
 }> {
-  if (DRY_RUN) return { bindings: [], error: "dry-run" };
-  // MADB の class/property URI は LOD ドキュメント未確認のため、
-  // 一般的な Schema.org マッピング前提で query を構築。 endpoint が
-  // 存在しない / property がマッチしないケースは error として記録される。
-  const query = `
-    PREFIX schema: <http://schema.org/>
-    PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-    SELECT ?manifestation ?title ?isbn ?publisher ?image ?description ?magazine WHERE {
-      ?manifestation schema:author ?author .
-      ?author schema:name ?authorName .
-      FILTER(STR(?authorName) = "${authorName}")
-      OPTIONAL { ?manifestation schema:name ?title }
-      OPTIONAL { ?manifestation schema:isbn ?isbn }
-      OPTIONAL { ?manifestation schema:publisher/schema:name ?publisher }
-      OPTIONAL { ?manifestation schema:image ?image }
-      OPTIONAL { ?manifestation schema:description ?description }
-      OPTIONAL { ?manifestation schema:isPartOf/schema:name ?magazine }
-    } LIMIT 500
-  `;
-  const url = `${MADB_SPARQL_ENDPOINT}?query=${encodeURIComponent(query)}`;
   try {
-    const res = await fetch(url, {
-      headers: { Accept: "application/sparql-results+json" },
+    const res = await fetch(MADB_SPARQL_ENDPOINT, {
+      method: "POST",
+      headers: {
+        Accept: "application/sparql-results+json",
+        "Content-Type": "application/x-www-form-urlencoded",
+        "User-Agent":
+          "MANGAL-MADBProbe/0.1 (+https://github.com/shuichi0725-cmyk/MANGAL)",
+      },
+      body: `query=${encodeURIComponent(query)}`,
     });
     if (!res.ok) {
-      return { bindings: [], error: `HTTP ${res.status}` };
+      const body = (await res.text()).slice(0, 200);
+      return {
+        ok: false,
+        bindings: [],
+        error: `HTTP ${res.status}${body ? `: ${body.replace(/\s+/g, " ")}` : ""}`,
+      };
     }
     const j = (await res.json()) as {
       results?: { bindings?: SparqlBinding[] };
     };
-    return { bindings: j.results?.bindings ?? [], error: null };
+    return { ok: true, bindings: j.results?.bindings ?? [], error: null };
   } catch (err) {
     return {
+      ok: false,
       bindings: [],
       error: err instanceof Error ? err.message : String(err),
     };
   }
+}
+
+async function fetchMadb(authorName: string): Promise<{
+  bindings: SparqlBinding[];
+  error: string | null;
+  queryUsed: string;
+}> {
+  if (DRY_RUN) return { bindings: [], error: "dry-run", queryUsed: "" };
+  // MADB vocabulary (= LOD ハンズオン教材ベース):
+  //   class:MangaBook        → 漫画単行本 manifestation
+  //   schema:creator         → 作者 (= 作家 entity URI)
+  //   rdfs:label / schema:name → 作者名 literal (どちらに入っているかは
+  //     dataset 内で混在し得るので両方 OPTIONAL で取得し UNION する)
+  //   schema:isbn            → ISBN
+  //   schema:publisher       → 出版社 entity (rdfs:label に名前)
+  //   schema:isPartOf        → 上位 work / 雑誌など
+  // 作家名は完全一致 (= NFKC 想定)。 LIMIT 1000 で巨大作家でも上限超過しない。
+  const query = `
+    PREFIX schema: <http://schema.org/>
+    PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+    PREFIX class: <https://mediaarts-db.artmuseums.go.jp/ns/class#>
+    SELECT DISTINCT ?manifestation ?title ?isbn ?publisher ?image ?description ?magazine WHERE {
+      ?manifestation a class:MangaBook ;
+                     schema:creator ?author .
+      { ?author rdfs:label ?authorName }
+      UNION
+      { ?author schema:name ?authorName }
+      FILTER(STR(?authorName) = "${authorName}")
+      OPTIONAL { ?manifestation rdfs:label ?title }
+      OPTIONAL { ?manifestation schema:isbn ?isbn }
+      OPTIONAL { ?manifestation schema:publisher ?pub . ?pub rdfs:label ?publisher }
+      OPTIONAL { ?manifestation schema:image ?image }
+      OPTIONAL { ?manifestation schema:description ?description }
+      OPTIONAL { ?manifestation schema:isPartOf ?part . ?part rdfs:label ?magazine }
+    } LIMIT 1000
+  `;
+  const res = await sparqlFetch(query);
+  return { bindings: res.bindings, error: res.error, queryUsed: query };
 }
 
 function normalizeMadbBinding(b: SparqlBinding): NormalizedItem {
