@@ -847,7 +847,11 @@ async function main() {
     },
   ];
 
-  const fileSafe = (s: string) => encodeURIComponent(s).replace(/%/g, "_");
+  // 注: encodeURIComponent は `* ' ( ) ! ~` を escape しないため、 これらが
+  // タイトルに含まれると filename に残って GH Actions の upload-artifact が
+  // 拒否する。 allowlist で `[A-Za-z0-9._-]` 以外を全て `_` に置換する。
+  const fileSafe = (s: string) =>
+    encodeURIComponent(s).replace(/[^A-Za-z0-9._-]/g, "_");
   const probeStem = fileSafe(qid ?? `name-${name}`);
 
   let adoptedQuery = "";

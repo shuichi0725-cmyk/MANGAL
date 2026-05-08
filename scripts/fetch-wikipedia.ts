@@ -607,7 +607,13 @@ async function main() {
 
     // raw もファイルに残す（後段デバッグ・帰属表示の根拠用）
     if (wikitext) {
-      const safe = encodeURIComponent(s.title).replace(/%/g, "_").slice(0, 80);
+      // encodeURIComponent は `* ' ( ) ! ~` を escape しないので、 タイトル末尾の
+      // `*` (= 「不安の種*」 等) がそのまま残り actions/upload-artifact@v4 が拒否
+      // (= 不正文字 `* " : < > | ? \r \n` を含むパスを reject) する。 そのため
+      // allowlist で `[A-Za-z0-9._-]` 以外を全て `_` に置換する。
+      const safe = encodeURIComponent(s.title)
+        .replace(/[^A-Za-z0-9._-]/g, "_")
+        .slice(0, 80);
       fs.writeFileSync(
         path.join(RAW_DIR, `${s.id}-${safe}.wikitext`),
         wikitext,
