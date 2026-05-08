@@ -11,9 +11,9 @@ on:
   workflow_dispatch:
     inputs:
       qids:
-        description: "空白区切りの QID 列 (= 既定: 6 作家 probe-madb と同じ subset)"
+        description: "空白区切りの QID 列 (= 既定: 6 作家 probe-madb と同じ subset、 CSV mangaka.qid 真値)"
         required: true
-        default: "Q11331084 Q231007 Q310385 Q1145902 Q56022442 Q1366247"
+        default: "Q3782468 Q241885 Q348436 Q600217 Q24865213 Q972529"
       include_original_author:
         description: "[原作] credits も拾う (= 諫山創 → キメツ学園スピンオフ等)"
         required: false

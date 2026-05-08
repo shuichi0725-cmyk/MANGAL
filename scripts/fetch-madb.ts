@@ -170,10 +170,12 @@ async function fetchMadbForName(
   includeOriginalAuthor: boolean,
 ): Promise<{ ok: boolean; bindings: SparqlBinding[]; error: string | null }> {
   const escaped = escapeRegex(authorName);
-  // SPARQL string 内で \\ は 1 文字 backslash になる。 JS template の
-  // \\\\ は JS 文字列の \\ (2 文字)、 SPARQL parser を通って regex 引数の
-  // 1 文字 \ となる。 末尾の \\] は regex 内で literal ] (= ASCII 0x5D)。
-  const re = `(^|\\\\]|,|[ \\u3000])${escaped}($|,|[ \\u3000\\\\]])`;
+  // SPARQL の string literal は C 風 escape (\\ → \) で、 さらに regex
+  // 引数で \] = literal ] になる。 JS template の \\\\ は JS string の \\
+  // (2 文字)、 SPARQL parser 後 \ (1 文字)、 regex は ] と組合わせて \] と読む。
+  // 全角空白は literal char そのもの (= U+3000) を入れる (\\u3000 は SPARQL
+  // string escape として標準じゃないので避ける)。
+  const re = `(^|\\\\]|,|[ 　])${escaped}($|,|[ 　\\\\]])`;
 
   const creatorClause = includeOriginalAuthor
     ? `{ ?manifestation schema:creator ?creator }

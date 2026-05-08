@@ -47,14 +47,16 @@ type ProbeAuthor = { name: string; qid: string; surname: string };
 
 // 既存 13 yaml の代表作家 6 名 (= seed-canonical-21 の subset)
 // surname は表記揺れ発掘用の CONTAINS キー (= 全角空白入り「諫山 創」 や
-// カナ「ゴトウゲ コヨハル」 を網羅的に拾う)
+// カナ「ゴトウゲ コヨハル」 を網羅的に拾う)。
+// QID は data/seed/mangaka.csv の真値に合わせる (= 過去 hardcode は誤値で
+// fetch-madb での mangaka resolve が失敗していた)。
 const PROBE_AUTHORS: ProbeAuthor[] = [
-  { name: "諫山創", surname: "諫山", qid: "Q11331084" },
-  { name: "高屋奈月", surname: "高屋", qid: "Q231007" },
-  { name: "浦沢直樹", surname: "浦沢", qid: "Q310385" },
-  { name: "浅野いにお", surname: "浅野", qid: "Q1145902" },
-  { name: "吾峠呼世晴", surname: "吾峠", qid: "Q56022442" },
-  { name: "雷句誠", surname: "雷句", qid: "Q1366247" },
+  { name: "諫山創", surname: "諫山", qid: "Q3782468" },
+  { name: "高屋奈月", surname: "高屋", qid: "Q241885" },
+  { name: "浦沢直樹", surname: "浦沢", qid: "Q348436" },
+  { name: "浅野いにお", surname: "浅野", qid: "Q600217" },
+  { name: "吾峠呼世晴", surname: "吾峠", qid: "Q24865213" },
+  { name: "雷句誠", surname: "雷句", qid: "Q972529" },
 ];
 
 type NormalizedItem = {
