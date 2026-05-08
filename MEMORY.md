@@ -2,7 +2,7 @@
 
 > このファイルは Claude Code session の context bootstrap 用。新しいセッションを開始したら最初に読むこと。
 
-最終更新: 2026-05-08
+最終更新: 2026-05-08 (夜)
 
 ## プロジェクト概要
 
@@ -14,22 +14,26 @@
 ## 主要ファイル
 
 ### Backend / DB / pipeline
-- `db/schema.sql`: 現行 schema_version = 6 (5 → 6: adult_imprints 追加 [Tier 2])
+- `db/schema.sql`: 現行 schema_version = **7** (6 → 7: 3-state model 用に `series_archive` / `series_excluded` / `admin_audit` 追加。 詳細は最後の 2026-05-08 夜セクション)
 - `scripts/promote-bulk.ts`: NDL → series/editions 自動 promote。adult 検出は `lib/adult-score.ts` 経由
 - `scripts/promote-drafts.ts`: `_drafts/*.yml` のうち placeholder 0 件のものを `data/manga/*.yml` へ昇格
 - `lib/adult-score.ts`: `computeAdultScore` の純関数実装 + unit test (`lib/adult-score.test.ts`)
-- `lib/adult-imprints.ts`: `data/seeds/adult-imprints.yml` の Zod schema + reader
+- `lib/adult-imprints.ts`: `data/seeds/adult-imprints.yml` の Zod schema + reader (= `imprints` / `distribution_channels` / `ambiguous` / `false_positives` の 4 セクション)
+- `lib/admin-state.ts`: 3-state model 操作 library (listExcluded / reinstate / permanentDelete / manualExcludeSeries / listAudit)。 全 transaction + admin_audit logging
 - `lib/openbd-kana.ts`: openBD collationkey (= ヨミガナ katakana) → hiragana 変換ヘルパ + tests
 - `scripts/fetch-adult-lists.ts`: JA Wikipedia から adult publishers / mangaka リスト取得 (Fix C)
 - `scripts/seed-adult-imprints.ts`: yaml seed → adult_imprints テーブル INSERT (Tier 2)
 - `scripts/clean-imprint-dump.ts`: raw imprint dump → adult-imprints.yml 生成 (Tier 2)
+- `scripts/admin-state.ts`: 3-state CLI (= `npm run admin:state <list-excluded|counts|reinstate|delete|exclude-series|audit>`)
+- `scripts/admin-server.ts`: 管理 UI server (zero-deps node:http、 Basic Auth、 server-rendered HTML、 localhost-only、 /admin/excluded + /admin/audit)
+- `scripts/backfill-archive.ts`: 既存 series → series_archive 一回限り migration (= schema v7 移行用)
 - `scripts/fetch-ndl.ts`, `scripts/fetch-wikidata.ts`: 既存の主要 fetcher
 - `scripts/fetch-wikipedia.ts`: layer A/B/C diagnostic 入り、 magazine/genre/synopsis/kana 補完
 - `scripts/fetch-openbd-bulk.ts`: title_kana のみ openBD で補完 (66% カバレッジ)
 - `scripts/probe-openbd.ts`: openBD coverage 測定 (read-only diagnostic)
 - `lib/edition.ts`: `normalizeCreatorName`, `matchAdultPublisher` 等の utility
 - `data/seeds/_raw-imprint-dump.txt`: ユーザ提示の raw imprint→publisher dump (~339 entry)
-- `data/seeds/adult-imprints.yml`: 整形済 adult imprint seed (252 imprints + 14 distribution_channels + 13 ambiguous)
+- `data/seeds/adult-imprints.yml`: 整形済 adult imprint seed (= **235 imprints** + 14 distribution_channels + 13 ambiguous + **17 false_positives** [= probe で FP rate >=50% と判明、 DB 投入から除外])
 - `data/seeds/adult-publishers-manual.yml`: 白夜書房等の manual seed (Wikipedia 抽出に出ない補完)
 
 ### Frontend (Next.js 15.5.15 + Tailwind 4.2.4)
@@ -60,7 +64,7 @@
 |---|---|---|
 | `wikidata_hentai_credit` | mangaka.has_adult_credit (Wikidata P136=Q172241) | +2 |
 | `wikipedia_adult_mangaka_list` | adult_mangaka_known テーブル (Wikipedia「日本の成人向け漫画家の一覧」) | +2 |
-| `adult_imprint` | adult_imprints テーブル (manga-db.com 系 dump、 252 imprint、 Tier 2) | +3 |
+| `adult_imprint` | adult_imprints テーブル (manga-db.com 系 dump、 **235 imprint** [= 252 から probe FP 17 件除外後]、 Tier 2) | +3 |
 | `adult_publisher_imprint` | adult_publishers テーブル (Wikipedia「成人向け漫画雑誌の一覧」+ manual seed) | +3 |
 
 Option B 設計: 作家シグナルのみ (2 or 4) では threshold に届かない/届くで線を引き、出版社/imprint シグナル (+3) は単独で確定とする。
@@ -585,3 +589,234 @@ quality 改善) で対処予定。
 3. workflow GH run で `csv_url` 経由動作確認 (= 公式 download URL 確定後)
 4. adult_imprints seed quality 改善 (= マンサンコミックス / SP コミックス 等の
    false-positive 除外)。 既存 Phase 0-5 計画範疇
+
+---
+
+# 2026-05-08 (夜): 3-state model 導入 (live/excluded/archive) + 管理 UI
+
+## 経緯と動機
+
+ユーザの要件:
+
+> 「除外したものがちゃんと残っていつでも復帰できる構造」
+> 「管理者だけ閲覧可能で、 確実に削除な状態」
+> 「3 つの DB に分けたい (= 公開・除外・全履歴)」
+
+既存の adult filter 設計 (= adult signal で当たったら fetch 時に DROP、 後で取り戻せない)
+を見直し、 import の全 record を archive に保持し、 公開する live と review 中の
+excluded と完全削除済み deleted を区別する **3-state model** に転換した。
+
+ユーザの mental model 「3 つの DB」 は、 操作の整合性 (= cross-state reinstate を
+1 transaction で扱える) を考えて 1 file 内 3 テーブルで実装。
+
+## 設計
+
+### Schema v7 (= 3 新テーブル + 1 INDEX 群)
+
+```
+series_archive   ← 全 import 履歴の source-of-truth。 削除しない (UPDATE のみ)。
+                   current_state ∈ {live, excluded, deleted} で意味を付与する。
+                   live=series テーブルにあり公開中、 excluded=series_excluded
+                   にあり管理者 review 中、 deleted=どちらにも無い (= archive
+                   にのみ残存、 監査 / 復活専用)。
+
+series_excluded  ← 管理者 review queue (= 「グレーゾーン」)。 archive_id PK +
+                   reason / signals_json / excluded_at / excluded_by。
+                   reason は 'adult_rating' / 'adult_imprint' /
+                   'adult_publisher' / 'adult_description' / 'manual_admin' 等。
+
+admin_audit      ← reinstate / permanent_delete / manual_exclude の監査ログ。
+                   action / target_id / performed_by / reason / metadata_json。
+```
+
+(`series` / `editions` / `volumes` / `series_authors` 等の既存テーブルは
+ そのまま **live state の row** を保持する役割になる。 schema 変更なし。)
+
+### 状態遷移
+
+```
+import 時 (scripts/fetch-madb.ts):
+  archive 無し         → archive.live (clean) または
+                         archive.excluded + series_excluded (adult signal)
+  archive.live         → live のまま、 adult signal を 無視 (= sticky reinstate)
+  archive.excluded     → 引き続き excluded
+  archive.deleted      → 全て no-op (= 完全削除済み、 import が来ても復活しない)
+
+admin 操作 (lib/admin-state.ts):
+  excluded → live      reinstate (= series stub 行を archive snapshot から作成、
+                       series_excluded から DELETE、 archive.current_state=live、
+                       admin_audit に reinstate 記録)
+  excluded → deleted   permanent_delete (= series_excluded から DELETE、
+                       series テーブルにあれば DELETE [cascade で editions/
+                       volumes も]、 archive.current_state=deleted、 archive 行
+                       自体は残す。 admin_audit に permanent_delete 記録)
+  live     → excluded  manual_exclude (= series テーブルから DELETE、
+                       series_excluded に upsert、 archive.current_state=excluded、
+                       admin_audit に manual_exclude 記録)
+```
+
+reinstate 後は **`npm run fetch:madb` 再実行で巻情報が再投入される**
+(= archive.current_state='live' が sticky に効き adult signal を無視するため)。
+
+### Sticky semantics の意義
+
+- 「admin が誤検出を救った series」 が 次回 import で 再度 自動 excluded に飛ばされない
+- 「admin が確実に削除した series」 が 再 import で勝手に復活しない
+- 全ての操作が admin_audit に残るため、 後追いで「誰が、 いつ、 何を、 なぜ」 が分かる
+
+## 完成した成果物
+
+### 新規ファイル
+- `lib/admin-state.ts` (~330 行): 純 library。 listExcluded / countExcluded /
+  excludedReasonCounts / reinstate / permanentDelete / manualExcludeSeries /
+  listAudit。 全操作が transaction + admin_audit logging
+- `scripts/admin-state.ts` (~180 行): CLI。
+  ```
+  npm run admin:state list-excluded [--reason X] [--limit N]
+  npm run admin:state counts
+  npm run admin:state reinstate --archive-id N --by USER [--reason ...]
+  npm run admin:state delete    --archive-id N --by USER [--reason ...]
+  npm run admin:state exclude-series --series-id N --by USER [--reason ...]
+  npm run admin:state audit
+  ```
+- `scripts/admin-server.ts` (~460 行): standalone local 管理 UI server。
+  - zero-deps node:http、 Basic Auth (= ADMIN_USER / ADMIN_PASS env、 未設定なら起動拒否)
+  - ADMIN_HOST 既定 = `127.0.0.1` (= LAN 非公開)、 ADMIN_PORT 既定 = 8787
+  - server-rendered HTML、 minimal CSS、 noindex meta
+  - GET /admin/excluded (= reason filter / pagination / 復帰・削除ボタン)
+  - GET /admin/audit (= 監査ログ + metadata pretty print)
+  - POST /admin/api/reinstate / delete / exclude-series → lib/admin-state.ts へ委譲
+- `scripts/backfill-archive.ts`: 既存 6650 series → series_archive 一回限り migration (= schema v7 移行)
+
+### 編集
+- `db/schema.sql`: schema_version 6 → 7、 3 新テーブル + 7 INDEX 追加。
+  `INSERT OR IGNORE` だけでは既存 DB の version が上がらないので
+  `UPDATE meta SET value='7'` も追加 (= migration 兼用)
+- `scripts/_db.ts`: `applySchemaIfNeeded` を **「mangaka テーブルが無ければ流す」**
+  から **「常に exec」** に変更。 schema.sql は全 `CREATE TABLE IF NOT EXISTS` /
+  `CREATE INDEX IF NOT EXISTS` / `INSERT OR IGNORE` で書かれていて idempotent
+  なので毎回 exec しても安全 (= 既存 DB に新テーブル / INDEX だけが追加される)。
+  将来 ALTER TABLE 等の非 idempotent migration が必要になったら schema_version
+  分岐に切り替える方針
+- `scripts/fetch-madb.ts`: 大幅改修。
+  - adult signal を **早期 skip しない**。 全 matched record を queued に積む
+  - 各 record に `seriesKey` + `adultSig` を付与
+  - Transaction 内 2 pass:
+    - Pass A: seriesKey 単位に集約 (= adult signal set / year span / publisher)
+      → series_archive を upsert + state 判定 (= live / excluded / deleted skip)
+      → excluded なら series_excluded を upsert (= signals_json + reason)
+    - Pass B: queued の record 1 つずつ upsertVolume (既存路線)。
+      ただし Pass A で goLive=false 判定された seriesKey の record は skip
+  - Stats を改編 (= `excludedSeries` / `archivedSeriesNew` / `liveDespiteSignal`
+    / `skippedDeleted` 等の新カウンタを log 出力)
+- `data/seeds/adult-imprints.yml`: 17 imprint を `imprints[]` から
+  `false_positives[]` セクションへ移動 (= 252 → 235 投入対象)
+- `lib/adult-imprints.ts`: `AdultFalsePositiveSchema` 追加 (= imprint /
+  publisher / fp_total / total_hits / fp_rate / note)、 `AdultImprintsFileSchema`
+  に `false_positives` を optional で追加
+- `scripts/seed-adult-imprints.ts`: false_positives count を log 出力 (= 投入は
+  しないが視認性を上げる)
+- `scripts/fetch-wikipedia.ts` / `scripts/fetch-ndl.ts`: filename sanitizer を
+  `encodeURIComponent → replace(/%/g, "_")` から
+  `encodeURIComponent → replace(/[^A-Za-z0-9._-]/g, "_")` に強化。
+  encodeURIComponent は `* ' ( ) ! ~` を escape しないので、
+  タイトル末尾 `*` (= 「不安の種*」) が filename に残って
+  actions/upload-artifact@v4 (= 不正文字 `* " : < > | ? \r \n` を含むパスを
+  reject) で失敗する事象を修正 (= GH Actions Fetch MADB workflow が 2h50m
+  完走後に Upload artifact step で停止していた)
+- `package.json`: `db:backfill-archive` / `admin:state` / `admin:server`
+  scripts 追加
+
+## adult_imprints false-positive 整理 (= 17 件)
+
+`scripts/probe-adult-imprints.ts` (= MADB JSON-LD vs schema:contentRating で
+TP/FP 集計) を実走し、 FP rate >=50% の 17 entry を identify:
+
+| imprint | publisher | total | FP rate | サンプル mainstream |
+|---|---|---|---|---|
+| SPコミックス | リイド社 | 2212 | 100% | ゴルゴ13 / 浅見光彦 系 |
+| マンサンコミックス | 実業之日本社 | 1526 | 100% | 浅見光彦トラベルミステリー |
+| ヴァルキリーコミックス | キルタイムコミュニケーション | 409 | 100% | 異世界喰滅のサメ 等 |
+| コアコミックス | コアマガジン | 181 | 93.9% | 過半 mainstream |
+| ネオコミックス | 辰巳出版 | 12 | 91.7% | 極楽レディース 等 |
+| OKS COMIX | オークス | 74 | 83.8% | BLACK GENERATION 等 |
+| ワールドコミックス | 久保書店 | 92 | 76.1% | バーサスアース 等 |
+| 別冊エースファイブコミックス | 松文館 | 248 | 57.7% | きまぐれギャルビーチ 等 |
+| TECHGIAN STYLE | KADOKAWA | 15 | 100% | フォトカノHappy Album |
+| ダイナコミックス | 松文館 | 4 | 100% | (small sample) |
+| マイウェイコミックス | メディアックス | 2 | 100% | (small sample) |
+| ダイトコミックス | 大都社/少年画報社 | 2 | 100% | 湘南グラフィティ |
+| ホットミルクコミックス | コアマガジン | 1 | 100% | (sample 1) |
+| コミック文庫 | フランス書院 | 1 | 100% | (sample 1) |
+| DOコミックス | ヒット出版社 | 1 | 100% | (sample 1) |
+| サンワコミックス | 三和出版 | 2 | 50% | (small sample, ambiguous) |
+| TENMA COMICS EX | 茜新社 | 2 | 50% | (small sample, ambiguous) |
+
+`adult_imprints` テーブル: 252 → **235 行** (= refresh 後)。
+これにより mainstream 漫画 (= ゴルゴ13・浅見光彦・異世界系 等) が adult_imprint
+シグナルで誤検出される問題が大幅に解消。
+
+## 検証
+
+- `npx tsc --noEmit` 全 clean
+- `npm test` (vitest) **154 / 154 passed**
+- admin-state CLI smoke test:
+  live → excluded → reinstate → permanent_delete → reinstate 全遷移成功、
+  audit log に 4 操作全て記録される
+- admin-server smoke test:
+  401 (no auth) / 200 (with auth) / 303 (POST → redirect) 全期待通り、
+  /admin/excluded と /admin/audit 両 page render 成功
+
+## 起動方法 (= 運用 cheat sheet)
+
+```sh
+# 既存 DB を schema v7 へ migrate
+npm run db:init                 # 新テーブル/INDEX 追加 (= 既存 series 6650 件 保持)
+npm run db:backfill-archive     # series → series_archive 複製 (= 一回限り、 冪等)
+
+# 管理 UI 起動
+ADMIN_USER=ops ADMIN_PASS=secret npm run admin:server
+# → http://localhost:8787/admin/excluded
+
+# CLI 操作
+npm run admin:state list-excluded
+npm run admin:state counts
+npm run admin:state reinstate --archive-id 123 --by ops --reason "誤検出"
+npm run admin:state delete --archive-id 123 --by ops --reason "確実に成人向け"
+npm run admin:state audit
+```
+
+## 注意事項
+
+- **admin 操作後は静的サイトを再 build** (`npm run build`) して `out/` を更新する
+  必要あり。 admin-server は本番 site cache の invalidation までは行わない
+- reinstate は series stub 行のみ作成 (= editions / volumes は空)。
+  巻情報を埋めるには `npm run fetch:madb -- --jsonld-path .cache/madb/metadata101.json --all`
+  を再実行する (= sticky reinstate により adult signal が無視され自然に埋まる)
+- `next.config.ts` の `output: "export"` のため admin UI は Next.js に組み込め
+  ない (= server runtime 無し)。 admin は **localhost-only の standalone server**
+  として運用、 公開デプロイには含めない
+- ADMIN_USER / ADMIN_PASS が未設定なら admin-server は起動拒否 (= 事故防止)。
+  ADMIN_HOST も 既定 `127.0.0.1` で LAN 非公開
+
+## 関連 commit
+
+```
+aa3d921  feat(schema): add 3-state model (live / excluded / archive) tables
+f6b6329  feat(3-state): wire fetch-madb to archive/excluded + admin lib & CLI
+df26df4  feat(admin): standalone local admin server with Basic Auth + UI
+f0f953d  chore(adult-imprints): move 17 high-FP-rate seeds to false_positives
+c734395  fix(fetch): sanitize cached filenames so upload-artifact accepts them
+```
+
+## 次セッションでの推奨アクション
+
+1. **localhost で admin-server を起動**して /admin/excluded を実際に開く
+   (= ユーザ自身が UI を触ってフィードバックを得る)。 ローカル DB に excluded
+   行を入れるには `fetch:madb --all` を再実行するか、 `admin:state exclude-series`
+   で既存 series を手動で excluded に飛ばす
+2. fetch:madb の本番 GH run (= filename sanitizer fix が効いて完走するか)
+3. ユーザのフィードバックを受けて UI 微調整 (= フィルタ追加 / 一括操作 /
+   エクスポート 等)
+4. 「未解決の課題」 セクション #1 (= 重版 ISBN 集約) や #4 (= 既存 13 yaml の
+   MADB 再生成) は引き続き別プランで持ち越し
