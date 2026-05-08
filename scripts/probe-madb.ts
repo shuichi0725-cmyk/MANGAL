@@ -114,6 +114,95 @@ async function probeSanity(): Promise<{ ok: boolean; note: string }> {
   }
 }
 
+/**
+ * Schema discovery: dataset 内の vocabulary を実地で探る。 GH workflow
+ * log + raw dump に結果を吐いて、 真の class / property URI を特定する。
+ *
+ * 1. 全 RDF type の上位 50 (= どの class が漫画 manifestation か手掛り)
+ * 2. 既知の漫画家名 literal "諫山創" を含む subject の (s, p) ペア
+ *    (= 作家 entity の URI と name property の URI を一気に確定する)
+ * 3. その作家 URI の outgoing predicate 全部 (= 作家 → 作品の link を発見)
+ */
+async function discoverSchema(): Promise<{
+  topTypes: SparqlBinding[];
+  authorMatches: SparqlBinding[];
+  authorLinks: SparqlBinding[];
+}> {
+  if (DRY_RUN) {
+    return { topTypes: [], authorMatches: [], authorLinks: [] };
+  }
+
+  // (1) 全 type の出現上位 50。 漫画 class の真名がここに入る想定。
+  const topTypesQuery = `
+    SELECT ?type (COUNT(?s) AS ?n) WHERE {
+      ?s a ?type .
+    } GROUP BY ?type ORDER BY DESC(?n) LIMIT 50
+  `;
+  const topTypes = await sparqlFetch(topTypesQuery);
+  console.log(`  [schema] topTypes: ${topTypes.bindings.length} rows`);
+  for (const b of topTypes.bindings.slice(0, 15)) {
+    console.log(`    ${b["n"]?.value ?? "?"} × ${b["type"]?.value ?? "?"}`);
+  }
+
+  // (2) "諫山創" literal を持つ (s, p) ペア。 作家 entity の URI と
+  //     name property URI を同時に取れる。 漢字を含むのでこれは
+  //     ピンポイントで作家を当てに行く query。
+  const authorMatchesQuery = `
+    SELECT DISTINCT ?s ?p WHERE {
+      ?s ?p ?o .
+      FILTER(isLiteral(?o) && STR(?o) = "諫山創")
+    } LIMIT 20
+  `;
+  const authorMatches = await sparqlFetch(authorMatchesQuery);
+  console.log(`  [schema] authorMatches "諫山創": ${authorMatches.bindings.length} rows`);
+  for (const b of authorMatches.bindings.slice(0, 10)) {
+    console.log(
+      `    s=${b["s"]?.value ?? "?"} p=${b["p"]?.value ?? "?"}`,
+    );
+  }
+
+  // (3) (2) で 1 つでも author URI が取れたら、 その URI の outgoing
+  //     predicate を列挙して、 「作家 → 作品」 の関係を発見する。
+  let authorLinks: SparqlBinding[] = [];
+  const firstAuthorUri = authorMatches.bindings[0]?.["s"]?.value;
+  if (firstAuthorUri) {
+    const authorLinksQuery = `
+      SELECT DISTINCT ?p (COUNT(?o) AS ?n) WHERE {
+        <${firstAuthorUri}> ?p ?o .
+      } GROUP BY ?p ORDER BY DESC(?n) LIMIT 50
+    `;
+    const r = await sparqlFetch(authorLinksQuery);
+    authorLinks = r.bindings;
+    console.log(`  [schema] authorLinks for <${firstAuthorUri}>: ${r.bindings.length} rows`);
+    for (const b of r.bindings.slice(0, 15)) {
+      console.log(`    ${b["n"]?.value ?? "?"} × ${b["p"]?.value ?? "?"}`);
+    }
+  }
+
+  // raw dump (= artifact 経由でフル内容を回収できるように)
+  fs.writeFileSync(
+    path.join(OUT_DIR, "_schema-types.json"),
+    JSON.stringify(topTypes.bindings, null, 2),
+    "utf8",
+  );
+  fs.writeFileSync(
+    path.join(OUT_DIR, "_schema-author-matches.json"),
+    JSON.stringify(authorMatches.bindings, null, 2),
+    "utf8",
+  );
+  fs.writeFileSync(
+    path.join(OUT_DIR, "_schema-author-links.json"),
+    JSON.stringify(authorLinks, null, 2),
+    "utf8",
+  );
+
+  return {
+    topTypes: topTypes.bindings,
+    authorMatches: authorMatches.bindings,
+    authorLinks,
+  };
+}
+
 type SparqlBinding = Record<string, { type?: string; value?: string }>;
 
 /**
@@ -304,6 +393,11 @@ async function processAuthor(author: ProbeAuthor): Promise<AuthorResult> {
 function renderMarkdown(
   results: AuthorResult[],
   sanity: { ok: boolean; note: string },
+  discovery: {
+    topTypes: SparqlBinding[];
+    authorMatches: SparqlBinding[];
+    authorLinks: SparqlBinding[];
+  } | null,
 ): string {
   const now = new Date().toISOString();
   const lines: string[] = [];
@@ -340,6 +434,42 @@ function renderMarkdown(
   lines.push("|---|---|");
   lines.push(`| ${sanity.ok ? "OK" : "FAIL"} | ${sanity.note} |`);
   lines.push("");
+
+  if (discovery) {
+    lines.push("## Phase 0+: schema discovery");
+    lines.push("");
+    lines.push(
+      "実 dataset に存在する vocabulary を SPARQL で発掘した結果。 真の class / property URI を特定するための最重要セクション。",
+    );
+    lines.push("");
+
+    lines.push("### Top RDF types (上位 50)");
+    lines.push("");
+    lines.push("| count | type URI |");
+    lines.push("|---|---|");
+    for (const b of discovery.topTypes.slice(0, 50)) {
+      lines.push(`| ${b["n"]?.value ?? "?"} | \`${b["type"]?.value ?? "?"}\` |`);
+    }
+    lines.push("");
+
+    lines.push("### \"諫山創\" literal を持つ (s, p) ペア");
+    lines.push("");
+    lines.push("| subject (= 作家 entity URI) | predicate (= name property URI) |");
+    lines.push("|---|---|");
+    for (const b of discovery.authorMatches) {
+      lines.push(`| \`${b["s"]?.value ?? "?"}\` | \`${b["p"]?.value ?? "?"}\` |`);
+    }
+    lines.push("");
+
+    lines.push("### 作家 entity の outgoing predicates (= 作品への link)");
+    lines.push("");
+    lines.push("| count | predicate URI |");
+    lines.push("|---|---|");
+    for (const b of discovery.authorLinks.slice(0, 50)) {
+      lines.push(`| ${b["n"]?.value ?? "?"} | \`${b["p"]?.value ?? "?"}\` |`);
+    }
+    lines.push("");
+  }
 
   lines.push("## Phase 1: per-mangaka 結果");
   lines.push("");
@@ -415,6 +545,15 @@ async function main(): Promise<void> {
   const sanity = await probeSanity();
   console.log(`  madb: ${sanity.ok ? "OK" : "FAIL"} (${sanity.note})`);
 
+  // Phase 0+: schema discovery (= class:MangaBook count=0 だった場合に
+  // 真の vocabulary を実地で発見するための調査 phase。 endpoint OK
+  // なら必ず実行して log + raw dump を残す)
+  let discovery: Awaited<ReturnType<typeof discoverSchema>> | null = null;
+  if (sanity.ok) {
+    console.log("\n=== Phase 0+: schema discovery ===");
+    discovery = await discoverSchema();
+  }
+
   // Phase 1
   console.log("\n=== Phase 1: per-mangaka probe ===");
   const results: AuthorResult[] = [];
@@ -425,7 +564,7 @@ async function main(): Promise<void> {
 
   // Phase 2 & 3
   console.log("\n=== Phase 2: aggregate + write Markdown ===");
-  const md = renderMarkdown(results, sanity);
+  const md = renderMarkdown(results, sanity, discovery);
   fs.writeFileSync(DOCS_PATH, md, "utf8");
   console.log(`  wrote ${path.relative(process.cwd(), DOCS_PATH)}`);
   console.log(`  raw dumps in ${path.relative(process.cwd(), OUT_DIR)}/`);
