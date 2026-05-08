@@ -23,6 +23,7 @@
     "db:report": "tsx scripts/db-report.ts",
     "db:backfill-archive": "tsx scripts/backfill-archive.ts",
     "admin:state": "tsx scripts/admin-state.ts",
+    "admin:server": "tsx scripts/admin-server.ts",
     "db:import:mangaka": "tsx scripts/import-mangaka-csv.ts",
     "db:import:masters": "tsx scripts/import-masters.ts",
     "fetch:ndl": "tsx scripts/fetch-ndl.ts",
