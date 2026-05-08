@@ -243,7 +243,16 @@ async function fetchMadbForName(
       OPTIONAL { ?manifestation rdfs:label ?title }
       OPTIONAL { ?manifestation schema:isbn ?isbn }
       OPTIONAL { ?manifestation schema:publisher ?publisher }
-      OPTIONAL { ?manifestation schema:isPartOf ?magazine }
+      # 雑誌の取得は 2 段 dereference が必要:
+      # ?manifestation schema:isPartOf -> ?magazineUri (= class:MangaMagazine の C-id URI)
+      # ?magazineUri rdfs:label -> "雑誌名　∥　ヨミ" literal
+      # property path schema:isPartOf+ で 1 階層以上の連結を許容 (=
+      # MangaBookSeries 経由の間接参照ケースも吸収)。
+      OPTIONAL {
+        ?manifestation schema:isPartOf+ ?magazineUri .
+        ?magazineUri a class:MangaMagazine ;
+                     rdfs:label ?magazine .
+      }
       OPTIONAL { ?manifestation schema:datePublished ?datePublished }
     } LIMIT ${QUERY_LIMIT}
   `;
