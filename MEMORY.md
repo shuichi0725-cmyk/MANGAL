@@ -312,6 +312,7 @@ db:init
 - publisher_key fill: **119/123 (97%)** ← MADB 118 + Wiki 補完で +1
 - title_kana fill (Wiki 由来): 18/123 / synopsis: 37/123 / genres: 20/123
 - Layer A 記事発見率: **31% (38/123)** ← MADB の series 粒度が細かすぎ (= Monster が 10 series、 Happy! が 16 series 等に分割) で Wikipedia 検索 hit 率が低い。 真の改善は Tier 2 #1 (重版集約) / #4 (yaml 再生成) 必要
+- **2026-05-08 baseTitle 強化後**: series **123 → 83 (-33%)**, Wikipedia hit rate **31% → 46% (+15pt)**, magazine_key fill **21% → 31%**。 Monster 10 series → 1、 Happy! 16 → 1、 20世紀少年 12 → 1 series に集約。 「20世紀少年 通常版 22 巻 + 完全版 11 巻」 が同 series 内 2 edition (= standard + other) に分離成功 (= ただし完全版 entries が `kanzenban` でなく `other` になっている件は要追加調査、 MADB title に「完全版」 keyword が含まれていない可能性)
 
 ## 重要な hardcode 修正 履歴
 
