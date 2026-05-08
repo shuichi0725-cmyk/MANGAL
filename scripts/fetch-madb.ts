@@ -203,7 +203,16 @@ type VolumeStmts = {
   updateVolume: Stmt;
 };
 
+type ArchiveStmts = {
+  selectArchive: Stmt;
+  insertArchive: Stmt;
+  updateArchive: Stmt;
+  upsertExcluded: Stmt;
+  deleteExcluded: Stmt;
+};
+
 let cachedStmts: { db: DB; stmts: VolumeStmts } | null = null;
+let cachedArchiveStmts: { db: DB; stmts: ArchiveStmts } | null = null;
 
 function getStmts(db: DB): VolumeStmts {
   if (cachedStmts && cachedStmts.db === db) return cachedStmts.stmts;
@@ -270,6 +279,68 @@ function getStmts(db: DB): VolumeStmts {
   cachedStmts = { db, stmts };
   return stmts;
 }
+
+function getArchiveStmts(db: DB): ArchiveStmts {
+  if (cachedArchiveStmts && cachedArchiveStmts.db === db)
+    return cachedArchiveStmts.stmts;
+  const stmts: ArchiveStmts = {
+    selectArchive: db.prepare(
+      `SELECT id, year_started, year_ended, current_state, adult_score
+       FROM series_archive WHERE series_key = ?`,
+    ),
+    insertArchive: db.prepare(
+      `INSERT INTO series_archive
+         (series_key, title, year_started, year_ended, publisher_key,
+          adult_score, current_state)
+       VALUES (?, ?, ?, ?, ?, ?, ?)`,
+    ),
+    updateArchive: db.prepare(
+      `UPDATE series_archive
+       SET title         = ?,
+           year_started  = ?,
+           year_ended    = ?,
+           publisher_key = COALESCE(publisher_key, ?),
+           adult_score   = MAX(adult_score, ?),
+           current_state = ?,
+           last_imported_at = strftime('%Y-%m-%dT%H:%M:%SZ','now')
+       WHERE id = ?`,
+    ),
+    upsertExcluded: db.prepare(
+      `INSERT INTO series_excluded
+         (archive_id, reason, signals_json, excluded_at, excluded_by)
+       VALUES (?, ?, ?, strftime('%Y-%m-%dT%H:%M:%SZ','now'), 'auto')
+       ON CONFLICT(archive_id) DO UPDATE SET
+         reason       = excluded.reason,
+         signals_json = excluded.signals_json`,
+    ),
+    deleteExcluded: db.prepare(
+      `DELETE FROM series_excluded WHERE archive_id = ?`,
+    ),
+  };
+  cachedArchiveStmts = { db, stmts };
+  return stmts;
+}
+
+/**
+ * AdultMatchSignal → archive.adult_score 用の重み。 admin UI で
+ * 重い signal 順にソートする時の sort key として使う。
+ */
+const ADULT_SIGNAL_WEIGHT: Record<NonNullable<AdultMatchSignal>, number> = {
+  rating: 5,
+  description: 3,
+  imprint: 3,
+  publisher: 3,
+};
+
+/**
+ * AdultMatchSignal → series_excluded.reason への label 変換 (= UI 表示・集計用)。
+ */
+const ADULT_SIGNAL_REASON: Record<NonNullable<AdultMatchSignal>, string> = {
+  rating: "adult_rating",
+  description: "adult_description",
+  imprint: "adult_imprint",
+  publisher: "adult_publisher",
+};
 
 /**
  * 1 record を upsert。
@@ -526,11 +597,22 @@ function buildAuthorIndex(
 type Stats = {
   totalRecords: number;
   parseErrors: number;
-  skippedAdultRating: number;
-  skippedAdultDescription: number;
-  skippedAdultImprint: number;
-  skippedAdultPublisher: number;
+  /** record 単位で adult signal が当たった件数の内訳 (= debug 用) */
+  adultRecordsRating: number;
+  adultRecordsDescription: number;
+  adultRecordsImprint: number;
+  adultRecordsPublisher: number;
   matchedRecords: number;
+  /** archive (= source-of-truth) に upsert した uniqe series 数 */
+  archivedSeriesNew: number;
+  archivedSeriesUpdated: number;
+  /** 自動的に excluded に振り分けた series 数 (= 今 run 内で新規/再評価) */
+  excludedSeries: number;
+  /** archive.current_state='live' (= 過去に admin 復帰させた) の series で
+   * adult signal が当たったが live を維持した件数。 admin に通知すべき可能性あり。 */
+  liveDespiteSignal: number;
+  /** archive.current_state='deleted' で skip した series 数 */
+  skippedDeleted: number;
   upsertedVolumes: number;
   insertedVolumes: number;
   updatedVolumes: number;
@@ -541,11 +623,16 @@ function newStats(): Stats {
   return {
     totalRecords: 0,
     parseErrors: 0,
-    skippedAdultRating: 0,
-    skippedAdultDescription: 0,
-    skippedAdultImprint: 0,
-    skippedAdultPublisher: 0,
+    adultRecordsRating: 0,
+    adultRecordsDescription: 0,
+    adultRecordsImprint: 0,
+    adultRecordsPublisher: 0,
     matchedRecords: 0,
+    archivedSeriesNew: 0,
+    archivedSeriesUpdated: 0,
+    excludedSeries: 0,
+    liveDespiteSignal: 0,
+    skippedDeleted: 0,
     upsertedVolumes: 0,
     insertedVolumes: 0,
     updatedVolumes: 0,
@@ -554,18 +641,39 @@ function newStats(): Stats {
 }
 
 function bumpAdultStat(stats: Stats, signal: AdultMatchSignal): void {
-  if (signal === "rating") stats.skippedAdultRating++;
-  else if (signal === "description") stats.skippedAdultDescription++;
-  else if (signal === "imprint") stats.skippedAdultImprint++;
-  else if (signal === "publisher") stats.skippedAdultPublisher++;
+  if (signal === "rating") stats.adultRecordsRating++;
+  else if (signal === "description") stats.adultRecordsDescription++;
+  else if (signal === "imprint") stats.adultRecordsImprint++;
+  else if (signal === "publisher") stats.adultRecordsPublisher++;
 }
+
+/**
+ * 1 series 分の archive 用メタ。 stream で record を見ながら集約していく。
+ */
+type SeriesMeta = {
+  seriesKey: string;
+  title: string;
+  yearStarted: number | null;
+  yearEnded: number | null;
+  publisherKey: string | null;
+};
 
 /**
  * stream-json で `@graph` array を pull しながら 1 record ずつ:
  *   1. extractRecord で typed shape に変換
- *   2. adult filter 4 層
+ *   2. adult filter 4 層 (= 結果は早期 skip せず record に付与する)
  *   3. 作者 index で mangaka 紐付け (= 共著は 1:N)
  *   4. matched record をキューに積む (= 全行スキャン後に 1 transaction で投入)
+ *
+ * Transaction phase は 2 pass:
+ *   Pass A: 各 series_key について
+ *     - series_archive を upsert (= source-of-truth、 全 import 履歴を保持)
+ *     - 既に archive.current_state='deleted' なら以後 skip (= 完全削除済み)
+ *     - 既に archive.current_state='live' なら adult signal を無視して live (= sticky reinstate)
+ *     - それ以外で adult signal が当たれば series_excluded に upsert、 state='excluded'
+ *     - それ以外は state='live'
+ *   Pass B: queued の 1 record ずつ upsertVolume (= 既存の series/editions/volumes 経路)
+ *           ただし pass A で 'live' 判定されなかった series_key の record は skip。
  *
  * メモリ: queued 配列のみ蓄積 (= 397k record × 一部 mangaka match なので
  * 通常 数十 MB で収まる)。
@@ -582,7 +690,16 @@ async function processJsonld(
     throw new Error(`json-ld not found: ${jsonldPath}`);
   }
 
-  const queued: { author: ResolvedAuthor; rec: UpsertRec }[] = [];
+  const masters = getMasters();
+
+  type Queued = {
+    author: ResolvedAuthor;
+    rec: UpsertRec;
+    seriesKey: string;
+    /** この record が当たった adult signal (= null なら clean) */
+    adultSig: AdultMatchSignal;
+  };
+  const queued: Queued[] = [];
 
   // stream-json の filter は dotted path 表記または RegExp。 `@graph` は
   // `@` 記号入りなので RegExp で表す。 stream-chain の chain() で typing
@@ -611,17 +728,14 @@ async function processJsonld(
       continue;
     }
 
-    if (!args.includeAdult) {
-      const adultSig = isAdultMadbRecord(
-        rec,
-        adultSeeds.adultImprints,
-        adultSeeds.adultPublishers,
-      );
-      if (adultSig) {
-        bumpAdultStat(stats, adultSig);
-        continue;
-      }
-    }
+    // adult signal は record 単位で判定する。 ここでは early skip せず、
+    // queued に持ち越して transaction で series 単位に集約する。
+    const adultSig = isAdultMadbRecord(
+      rec,
+      adultSeeds.adultImprints,
+      adultSeeds.adultPublishers,
+    );
+    if (adultSig) bumpAdultStat(stats, adultSig);
 
     const matched: ResolvedAuthor[] = [];
     for (const a of rec.authors) {
@@ -644,7 +758,12 @@ async function processJsonld(
       const key = a.mangakaId ?? `name:${a.name}`;
       if (seen.has(key)) continue;
       seen.add(key);
-      queued.push({ author: a, rec: up });
+      const titleForKey = up.title ?? up.isbn13;
+      const seriesKey = buildSeriesKey(titleForKey, {
+        qid: a.qid,
+        name: a.name,
+      });
+      queued.push({ author: a, rec: up, seriesKey, adultSig });
     }
   }
 
@@ -652,9 +771,163 @@ async function processJsonld(
     `[stream] read ${stats.totalRecords} records, matched=${stats.matchedRecords}, queued=${queued.length}`,
   );
 
+  // Transaction phase
   tx(db, () => {
     const stmts = getStmts(db);
-    for (const { author, rec } of queued) {
+    const archiveStmts = getArchiveStmts(db);
+
+    // ----- 集約: series_key 単位の meta + adult signal set -----
+    const seriesMeta = new Map<string, SeriesMeta>();
+    const seriesAdultSigs = new Map<
+      string,
+      Set<NonNullable<AdultMatchSignal>>
+    >();
+    for (const q of queued) {
+      let meta = seriesMeta.get(q.seriesKey);
+      if (!meta) {
+        meta = {
+          seriesKey: q.seriesKey,
+          title: baseTitle(q.rec.title ?? q.rec.isbn13),
+          yearStarted: null,
+          yearEnded: null,
+          publisherKey: null,
+        };
+        seriesMeta.set(q.seriesKey, meta);
+      }
+      const releaseDate = normalizeReleaseDate(q.rec.datePublished);
+      const issuedYear =
+        releaseDate && /^\d{4}/.test(releaseDate)
+          ? Number(releaseDate.slice(0, 4))
+          : null;
+      if (issuedYear !== null) {
+        meta.yearStarted =
+          meta.yearStarted === null
+            ? issuedYear
+            : Math.min(meta.yearStarted, issuedYear);
+        meta.yearEnded =
+          meta.yearEnded === null
+            ? issuedYear
+            : Math.max(meta.yearEnded, issuedYear);
+      }
+      if (meta.publisherKey === null && q.rec.publisher) {
+        meta.publisherKey =
+          masters.publisher.get(q.rec.publisher.normalize("NFKC")) ?? null;
+      }
+      if (q.adultSig) {
+        let sigs = seriesAdultSigs.get(q.seriesKey);
+        if (!sigs) {
+          sigs = new Set();
+          seriesAdultSigs.set(q.seriesKey, sigs);
+        }
+        sigs.add(q.adultSig);
+      }
+    }
+
+    // ----- Pass A: archive + excluded -----
+    const goLive = new Map<string, boolean>();
+    for (const [seriesKey, meta] of seriesMeta) {
+      const existing = archiveStmts.selectArchive.get(seriesKey) as
+        | {
+            id: number;
+            year_started: number | null;
+            year_ended: number | null;
+            current_state: "live" | "excluded" | "deleted";
+            adult_score: number;
+          }
+        | undefined;
+
+      if (existing?.current_state === "deleted") {
+        // 完全削除済み: archive 行は触らず (= last_imported_at も更新しない)、
+        // live への投入も行わない。 admin が明示的に復活させない限り消えたまま。
+        stats.skippedDeleted++;
+        goLive.set(seriesKey, false);
+        continue;
+      }
+
+      const sigs = seriesAdultSigs.get(seriesKey);
+      const sigList = sigs ? [...sigs] : [];
+      const adultScore =
+        sigList.length > 0
+          ? Math.max(...sigList.map((s) => ADULT_SIGNAL_WEIGHT[s]))
+          : 0;
+
+      // state 判定。
+      //   - 既に live (= 過去 import 済み or admin 復帰): live を維持。
+      //     adult signal が新たに当たっていても sticky に live のまま (= 通知のみ)。
+      //   - includeAdult=true: live にする (= dev 用 override)。
+      //   - 上記以外で adult signal あり: excluded。
+      //   - それ以外: live。
+      let newState: "live" | "excluded";
+      if (existing?.current_state === "live") {
+        newState = "live";
+        if (sigList.length > 0) stats.liveDespiteSignal++;
+      } else if (args.includeAdult) {
+        newState = "live";
+      } else if (sigList.length > 0) {
+        newState = "excluded";
+      } else {
+        newState = "live";
+      }
+
+      // start/end year は既存値と min/max で merge (= archive は全 import の包絡)
+      const mergedStart =
+        existing?.year_started === null || existing?.year_started === undefined
+          ? meta.yearStarted
+          : meta.yearStarted === null
+            ? existing.year_started
+            : Math.min(existing.year_started, meta.yearStarted);
+      const mergedEnd =
+        existing?.year_ended === null || existing?.year_ended === undefined
+          ? meta.yearEnded
+          : meta.yearEnded === null
+            ? existing.year_ended
+            : Math.max(existing.year_ended, meta.yearEnded);
+
+      let archiveId: number;
+      if (existing) {
+        archiveStmts.updateArchive.run(
+          meta.title,
+          mergedStart,
+          mergedEnd,
+          meta.publisherKey,
+          adultScore,
+          newState,
+          existing.id,
+        );
+        archiveId = existing.id;
+        stats.archivedSeriesUpdated++;
+      } else {
+        const info = archiveStmts.insertArchive.run(
+          seriesKey,
+          meta.title,
+          meta.yearStarted,
+          meta.yearEnded,
+          meta.publisherKey,
+          adultScore,
+          newState,
+        );
+        archiveId = Number(info.lastInsertRowid);
+        stats.archivedSeriesNew++;
+      }
+
+      if (newState === "excluded") {
+        const reason = ADULT_SIGNAL_REASON[sigList[0]];
+        const signalsJson = JSON.stringify(sigList);
+        archiveStmts.upsertExcluded.run(archiveId, reason, signalsJson);
+        stats.excludedSeries++;
+      } else {
+        // state が live になった (= reinstate 含む) なら excluded を掃除する。
+        // 過去に excluded だった record でも、 admin が live に戻した後の re-run
+        // では excluded 行が残らないように。
+        archiveStmts.deleteExcluded.run(archiveId);
+      }
+
+      goLive.set(seriesKey, newState === "live");
+    }
+
+    // ----- Pass B: live volumes (= 既存 series/editions/volumes 経路) -----
+    for (const { author, rec, seriesKey } of queued) {
+      if (!goLive.get(seriesKey)) continue;
       try {
         const before = stmts.selectVolume.get(rec.isbn13);
         upsertVolume(db, author, rec);
@@ -719,11 +992,16 @@ async function main(): Promise<void> {
   console.log(`\n[fetch-madb] done`);
   console.log(`  total records          : ${stats.totalRecords}`);
   console.log(`  parse errors           : ${stats.parseErrors}`);
-  console.log(`  skipped (rating)       : ${stats.skippedAdultRating}`);
-  console.log(`  skipped (description)  : ${stats.skippedAdultDescription}`);
-  console.log(`  skipped (imprint)      : ${stats.skippedAdultImprint}`);
-  console.log(`  skipped (publisher)    : ${stats.skippedAdultPublisher}`);
   console.log(`  matched records        : ${stats.matchedRecords}`);
+  console.log(`  adult records (rating) : ${stats.adultRecordsRating}`);
+  console.log(`  adult records (desc)   : ${stats.adultRecordsDescription}`);
+  console.log(`  adult records (imprint): ${stats.adultRecordsImprint}`);
+  console.log(`  adult records (pub)    : ${stats.adultRecordsPublisher}`);
+  console.log(`  archive new            : ${stats.archivedSeriesNew}`);
+  console.log(`  archive updated        : ${stats.archivedSeriesUpdated}`);
+  console.log(`  excluded series        : ${stats.excludedSeries}`);
+  console.log(`  live despite signal    : ${stats.liveDespiteSignal}`);
+  console.log(`  skipped (deleted)      : ${stats.skippedDeleted}`);
   console.log(`  upserted volumes       : ${stats.upsertedVolumes}`);
   console.log(`    inserted             : ${stats.insertedVolumes}`);
   console.log(`    updated              : ${stats.updatedVolumes}`);
