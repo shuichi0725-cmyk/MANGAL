@@ -419,7 +419,98 @@ c879e72  probe(isbn-sources): add Google Books + MADB comparison probe
 
 ---
 
-# 2026-05-08 (午後): MADB SPARQL → CSV 路線に転換
+# 2026-05-08 (午後): MADB SPARQL → CSV → JSON-LD 路線に最終確定
+
+## 最終形 (= JSON-LD)
+
+公式 GitHub `mediaarts-db/dataset` の release asset
+(= 例 tag `1.2.15`、 `metadata101_json.zip` 47.5MB / 展開 627MB) を直接
+streaming 読み込み、 397k records を 1 パスで処理する。
+
+成果物:
+- `lib/madb-jsonld.ts` (= 30 unit tests 緑)
+- `scripts/fetch-madb.ts` (= stream-json + stream-chain で streaming JSON 処理)
+- `.github/workflows/fetch-madb.yml` (= release_tag input、 GitHub API で
+  latest 自動解決、 zip download → unzip → import)
+
+ローカル実 run (= 6,751 mangaka 全員 vs cm101 全 397k records):
+- 所要時間: **1m35s** (= ≈4,184 records/sec)
+- adult filter: rating 8,155 (1次) + imprint 4,928 (3次追加 catch) = 13,083 件 skip
+- 投入: 6,650 series / 6,729 editions / 10,615 volumes / 6,650 author 紐付け
+- top series: ゴルゴ13 70巻、 ドラえもん 69巻、 名探偵コナン 38巻、 ONE PIECE 31巻
+- edition type 内訳: standard 3376 / other 3346 / kanzenban 5 / aizoban 2
+
+## 経緯 (= 1 日で 3 回方針転換)
+
+### 1. SPARQL 路線 (午前) — 廃案
+
+probe + 5 round の schema discovery で完全版判定 (= cm106 isPartOf 経由) 不可、
+magazine link は MADB 構造上 SPARQL でも取れない (= MangaBook → MangaMagazine
+関係が standalone records で表現)。
+
+### 2. CSV 路線 (午後前半) — 一時実装後に転換
+
+ユーザがアップした `cm104_*.csv` (10000 件、 cm101 差分) を発見。
+公式 `レーティング` column で 1 行 filter に成功。 lib/madb-csv.ts +
+scripts/fetch-madb.ts (CSV) を実装、 cm104 でローカル検証 OK (commit `e9c9d86`)。
+
+しかし公式 GitHub release は CSV 提供なし (= JSON-LD / TTL のみ) と判明。
+portal 由来 CSV は dynamic URL でめんどう。
+
+### 3. JSON-LD 路線 (午後後半) — 最終確定
+
+公式 GitHub release が JSON-LD で **stable URL + 自動化容易** と判定して切換。
+JSON-LD 内部構造で重要発見:
+- `schema:contentRating` = "成年コミック" → CSV と同じ adult signal
+- `schema:alternativeHeadline` = サブタイトル (= 「完全版」 等が入る) →
+  classifyEdition の最優先入力
+- 共著は `schema:creator` array に複数 string 要素を flat に並べる
+- 単一 JSON 内 `@graph` array に全 record → stream-json 必須
+
+## ユーザ意思決定の trail (= AskUserQuestion 3 回)
+
+1. CSV/SPARQL データソース → "C: cm101 全量 CSV" → 後に JSON-LD に再転換
+2. 成年コミック扱い → "完全除外、 ぬけがあると思われる" → 4 層 filter 設計
+3. JSON-LD vs TTL → "JSON-LD" → 最終確定
+
+## 4 層 adult filter の効き (= 397k records 実走実測)
+
+| 層 | 件数 | 比率 |
+|---|---|---|
+| 1. schema:contentRating | 8,155 | 2.05% |
+| 2. schema:description text match | 0 | (1 次で全 catch) |
+| 3. schema:brand → adult_imprints | 4,928 | 1.24% |
+| 4. schema:publisher → adult_publishers | 0 | (seed が空) |
+
+3 次が 4,928 件追加 catch していて、 これは rating 空欄でも adult imprint 由来の
+record。 ユーザ懸念 「ぬけがあると思われる」 が **実証** された (= 公式 rating
+column だけでは漏れる)。
+
+ただし 3 次は false-positive も含む (= ヴァルキリー / GOT は本物 adult、 マン
+サン / SP は mainstream の混在)。 既存 Phase 0-5 計画 (adult_imprints seed
+quality 改善) で対処予定。
+
+## アーキテクチャ転換: 既存プランへの影響
+
+| プラン | 扱い |
+|---|---|
+| 「MADB 本格 fetcher (SPARQL)」 | **廃案**。 JSON-LD 路線で全面書き直し済 |
+| 「baseTitle 強化プラン」 | **継続有効**。 lib/edition.ts は JSON-LD 路線でも必要 |
+| 「完全版判定 + chapter 集約」 | **大幅縮小**。 schema:alternativeHeadline が直接判定材料 |
+| 「Tier 1B DENY_LIST + adult_imprints」 | **継続有効、 役割変更**。 4 層 filter の 3 次 catch を担う |
+| 「fetch:wikipedia hit-rate 解明」 | **継続有効**。 magazine_key は JSON-LD でも取れない |
+
+## 次セッションでの推奨アクション
+
+1. **GH workflow 実 run** (= release tag を空で latest 自動解決させる)。
+   ローカル 1m35s なので CI でも 数分。 6,751 規模 coverage 計測。
+2. 既存 50 mangaka batch との比較 (= NDL のみ vs MADB JSON-LD のみ)
+3. adult_imprints seed quality 改善 (= マンサン / SP コミックス false-positive 除外)
+4. その後 promote-bulk 統合 → yaml 再生成
+
+---
+
+# (旧記録) 2026-05-08 午後: MADB SPARQL → CSV 路線に転換
 
 ## 経緯
 

@@ -1,31 +1,30 @@
-name: 📥 Fetch MADB (CSV import test run)
+name: 📥 Fetch MADB (JSON-LD import test run)
 
-# 2026-05-08: SPARQL 路線を廃止し、 MADB 公式 CSV (= cm101 マンガ単行本)
-# を直接 import する形に転換した。 旧 workflow は schema discovery / 完全版
-# 判定の SPARQL probe step を含んでいたが、 CSV では「版表示」「巻」「レー
-# ティング」 が独立 column 化されているため不要になった。
+# 2026-05-08: SPARQL → CSV → JSON-LD と段階的に転換した最終形。 公式
+# GitHub release `mediaarts-db/dataset` の latest tag asset
+# (= metadata101_json.zip、 ≈47.5MB / 展開後 ≈627MB / ≈397k records)
+# を直接 fetch して streaming 投入する。
 #
 # データ責務分担 (= Tier 1 で確定):
 #   - MADB:      ISBN / publisher_key / volume_number / release_date / edition.type
 #   - Wikipedia: magazine_key / title_kana / genres / synopsis / demographic
 #
 # adult filter (= scripts/fetch-madb.ts 4 層):
-#   1. レーティング = 成年コミック     ← MADB 公式 (= 一次)
-#   2. 概要 に 成年コミック 含む        ← rating 漏れ catch
-#   3. 単行本レーベル ∈ adult_imprints ← Tier 2 シード DB 照合
-#   4. 発行者名 ∈ adult_publishers      ← Tier 1 シード DB 照合
-#
-# bulk-promote-test workflow への統合は別プラン。
+#   1. schema:contentRating == "成年コミック"   ← MADB 公式 (= 一次)
+#   2. schema:description に "成年コミック" 含む ← rating 漏れ catch
+#   3. schema:brand ∈ adult_imprints              ← Tier 2 シード DB 照合
+#   4. schema:publisher ∈ adult_publishers         ← Tier 1 シード DB 照合
 
 on:
   workflow_dispatch:
     inputs:
-      csv_url:
-        description: "MADB cm101.csv の直リンク URL (= 公式 portal の download ボタンからコピー)"
-        required: true
+      release_tag:
+        description: "mediaarts-db/dataset の release tag (= 例 1.2.15)。 空で latest 自動解決"
+        required: false
+        default: ""
         type: string
       mangaka_limit:
-        description: "import 対象の mangaka 数上限 (= 動作確認用、 空 / 0 で全員)"
+        description: "import 対象の mangaka 数上限 (= 0 で全員)"
         required: false
         default: "0"
         type: string
@@ -37,22 +36,10 @@ jobs:
   fetch:
     runs-on: ubuntu-latest
     env:
-      INPUT_CSV_URL: ${{ inputs.csv_url }}
+      INPUT_TAG: ${{ inputs.release_tag }}
       INPUT_LIMIT: ${{ inputs.mangaka_limit }}
     steps:
       - uses: actions/checkout@v4
-
-      - name: Validate inputs
-        run: |
-          if [ -z "$INPUT_CSV_URL" ]; then
-            echo "::error::csv_url is required"
-            exit 1
-          fi
-          # URL は https:// 始まりのみ許可 (= file:// 等を防ぐ)
-          if ! printf '%s' "$INPUT_CSV_URL" | grep -Eq '^https://'; then
-            echo "::error::csv_url must be https://"
-            exit 1
-          fi
 
       - uses: actions/setup-node@v4
         with:
@@ -60,6 +47,25 @@ jobs:
           cache: "npm"
 
       - run: npm ci
+
+      - name: Resolve release tag (= latest if empty)
+        id: tag
+        run: |
+          if [ -n "$INPUT_TAG" ]; then
+            TAG="$INPUT_TAG"
+          else
+            # GitHub API で latest tag 取得。 -L で redirect 追従。
+            TAG=$(curl -sSL \
+              -H "Accept: application/vnd.github+json" \
+              "https://api.github.com/repos/mediaarts-db/dataset/releases/latest" \
+              | jq -r '.tag_name')
+            if [ -z "$TAG" ] || [ "$TAG" = "null" ]; then
+              echo "::error::failed to resolve latest tag"
+              exit 1
+            fi
+          fi
+          echo "tag=$TAG" >> "$GITHUB_OUTPUT"
+          echo "[ok] resolved tag: $TAG"
 
       - name: Initialize empty DB
         run: npm run db:init
@@ -71,47 +77,47 @@ jobs:
         run: npm run db:import:mangaka
 
       - name: Seed adult publisher / mangaka lists (= Wikipedia + manual)
-        # adult-publishers / adult-mangaka-known テーブルを seed しておくと
-        # MADB CSV の adult filter 4 次 (= 発行者名照合) が発火する。 imprint
-        # seed (Tier 2) は data/seeds/adult-imprints.yml が source-of-truth で
-        # db:init 後に seed:adult-imprints から流す。
         run: |
           npm run fetch:adult-lists
           npm run seed:adult-imprints
 
-      - name: Download MADB cm101 CSV
+      - name: Download MADB metadata101_json.zip
+        env:
+          TAG: ${{ steps.tag.outputs.tag }}
         run: |
           mkdir -p .cache/madb
-          # User-Agent を付ける (= portal が bot を弾く可能性に対する保険)
+          URL="https://github.com/mediaarts-db/dataset/releases/download/${TAG}/metadata101_json.zip"
+          echo "[fetch] $URL"
           curl -sSL \
-            -A "MANGAL-MADBFetcher/0.2 (+https://github.com/shuichi0725-cmyk/MANGAL)" \
-            -o .cache/madb/cm101.csv \
-            "$INPUT_CSV_URL"
-          # 期待 column 数 (= 52) を header で確認
-          head -1 .cache/madb/cm101.csv | awk -F',' '
-            { if (NF != 52) { print "ERROR: expected 52 columns, got " NF; exit 1 } else { print "ok: 52 columns" } }
-          '
-          echo "csv lines: $(wc -l < .cache/madb/cm101.csv)"
-          echo "csv bytes: $(stat -c%s .cache/madb/cm101.csv)"
+            -A "MANGAL-MADBFetcher/0.3 (+https://github.com/shuichi0725-cmyk/MANGAL)" \
+            -o .cache/madb/metadata101_json.zip \
+            "$URL"
+          echo "zip bytes: $(stat -c%s .cache/madb/metadata101_json.zip)"
 
-      - name: Fetch MADB (CSV import)
-        # mangaka_limit が空 / 0 なら全員 import、 数値なら DB の上から N 名のみ。
+      - name: Extract metadata101.json
         run: |
-          ARGS=(--csv-path .cache/madb/cm101.csv --all)
+          cd .cache/madb
+          unzip -p metadata101_json.zip metadata101.json > metadata101.json
+          ls -la metadata101.json
+          echo "json bytes: $(stat -c%s metadata101.json)"
+
+      - name: Fetch MADB (JSON-LD streaming import)
+        run: |
+          ARGS=(--jsonld-path .cache/madb/metadata101.json --all)
           if [ -n "$INPUT_LIMIT" ] && [ "$INPUT_LIMIT" != "0" ]; then
             ARGS+=(--limit "$INPUT_LIMIT")
           fi
-          npm run fetch:madb -- "${ARGS[@]}"
+          # Node の heap を増やしておく (= queued 配列が数十 MB 膨らむため、
+          # default 1.5GB だが余裕を見て 4GB)。
+          NODE_OPTIONS="--max-old-space-size=4096" npm run fetch:madb -- "${ARGS[@]}"
 
       - name: Fetch Wikipedia (= magazine_key / title_kana / genres / synopsis 補完)
-        # MADB CSV には magazine link が無いので、 既存 NDL pipeline と同じ
-        # Wikipedia infobox 補完を流す。 1.1 s/req × series 数。
         run: npm run fetch:wikipedia
 
       - name: DB summary report
         run: npm run db:report -- --series --sources
 
-      - name: DB top 30 (= MADB 由来 series が並ぶ想定)
+      - name: DB top 30
         run: npm run db:report -- --top 30
 
       - name: Upload artifact

@@ -1,31 +1,43 @@
 /**
- * メディア芸術データベース (MADB) 公式 CSV (= cm101 マンガ単行本 全量、
- * もしくは cm104 差分) を読み込んで SQLite に投入する fetcher。
+ * メディア芸術データベース (MADB) 公式 JSON-LD (= GitHub release
+ * `metadata101_json.zip` を展開した `metadata101.json`) を streaming
+ * 読み込みして SQLite に投入する fetcher。
  *
  * 使い方:
- *   npm run fetch:madb -- --csv-path .cache/madb/cm101.csv --qid Q11331084     # 単一 mangaka
- *   npm run fetch:madb -- --csv-path .cache/madb/cm101.csv --name "諫山創"     # 名前指定
- *   npm run fetch:madb -- --csv-path .cache/madb/cm101.csv --all               # mangaka.qid IS NOT NULL の全員
- *   npm run fetch:madb -- --csv-path .cache/madb/cm101.csv --all --limit 50    # 動作確認
- *   npm run fetch:madb -- --csv-path .cache/madb/cm101.csv --all --include-adult   # adult-credit 作家もスキップしない
+ *   npm run fetch:madb -- --jsonld-path .cache/madb/metadata101.json --qid Q11331084
+ *   npm run fetch:madb -- --jsonld-path .cache/madb/metadata101.json --name "諫山創"
+ *   npm run fetch:madb -- --jsonld-path .cache/madb/metadata101.json --all
+ *   npm run fetch:madb -- --jsonld-path .cache/madb/metadata101.json --all --limit 50
+ *   npm run fetch:madb -- --jsonld-path .cache/madb/metadata101.json --all --include-adult
  *
- * SPARQL 路線 (旧実装) からの転換理由:
- *   - rate limit / schema discovery 不要
- *   - 「版表示」「巻」「レーティング」が独立 column 化されており、 完全版判定 +
- *     成年コミック判定が SPARQL より正確
- *   - 70MB CSV を 1 パス読むだけで 397k record 全件処理 (= 数分)
+ * 経緯:
+ *   - SPARQL 路線 (= 旧実装) を廃止: rate limit / schema discovery / 完全版
+ *     判定の複雑さを回避。
+ *   - CSV 路線 (= 5/8 午前の実装) も廃止: 公式 GitHub release は CSV を
+ *     提供せず JSON-LD / TTL のみ。 安定 URL のため JSON-LD 採用。
+ *   - data source: GitHub `mediaarts-db/dataset` の latest release asset
+ *     (= 例 tag `1.2.15`、 `metadata101_json.zip` 47.5MB)。 展開後 627MB
+ *     の単一 JSON で `@graph` array に ≈390k records。 stream-json で
+ *     1 record ずつ pull。
  *
- * adult filter は 4 層 (= lib/madb-csv.ts isAdultMadbRecord 参照):
- *   1. レーティング = 成年コミック     ← MADB 公式 rating (= 一次)
- *   2. 概要に 成年コミック 含む          ← rating 漏れ catch
- *   3. 単行本レーベル ∈ adult_imprints  ← imprint 単位の DB seed (= Tier 2)
- *   4. 発行者名 ∈ adult_publishers      ← publisher 単位の DB seed (= Tier 1)
+ * adult filter (= lib/madb-jsonld.ts isAdultMadbRecord、 4 層):
+ *   1. schema:contentRating == "成年コミック"   ← MADB 公式 (= 一次)
+ *   2. schema:description に "成年コミック" 含む ← rating 漏れ catch
+ *   3. schema:brand ∈ adult_imprints              ← Tier 2 シード DB 照合
+ *   4. schema:publisher ∈ adult_publishers         ← Tier 1 シード DB 照合
  */
 import "./_env";
 import fs from "node:fs";
 import path from "node:path";
-import readline from "node:readline";
 import YAML from "yaml";
+// stream-json v2.1.0 は CJS で `export = make` の形。 esModuleInterop で
+// default import 可能だが、 サブパスは `.js` 拡張子を明示しないと resolve
+// 失敗する (= package.json exports の `./*` パターン由来)。
+// stream-chain の `chain()` を使うと .pipe() の型問題を避けられる。
+import chain from "stream-chain";
+import sjParser from "stream-json";
+import streamArray from "stream-json/streamers/stream-array.js";
+import pick from "stream-json/filters/pick.js";
 import {
   type EditionType,
   EDITION_LABELS,
@@ -38,22 +50,20 @@ import {
   normalizeReleaseDate,
 } from "../lib/edition";
 import {
+  extractRecord,
   isAdultMadbRecord,
-  parseCsvLine,
   parseVolumeNumber,
-  rowToMadbCsvRow,
-  splitAuthors,
-  stripBom,
   type AdultMatchSignal,
-  type MadbCsvRow,
-} from "../lib/madb-csv";
+  type MadbJsonLdRecord,
+  type MadbRecord,
+} from "../lib/madb-jsonld";
 import type { Statement as BSStatement } from "better-sqlite3";
 import { openDb, recordSource, tx, type DB } from "./_db";
 
 type Stmt = BSStatement<unknown[], unknown>;
 
 type Args = {
-  csvPath: string | null;
+  jsonldPath: string | null;
   qid: string | null;
   name: string | null;
   all: boolean;
@@ -63,7 +73,7 @@ type Args = {
 
 function parseArgs(argv: string[]): Args {
   const out: Args = {
-    csvPath: null,
+    jsonldPath: null,
     qid: null,
     name: null,
     all: false,
@@ -73,8 +83,8 @@ function parseArgs(argv: string[]): Args {
   for (let i = 0; i < argv.length; i++) {
     const a = argv[i];
     const next = argv[i + 1];
-    if (a === "--csv-path" && next) {
-      out.csvPath = next;
+    if (a === "--jsonld-path" && next) {
+      out.jsonldPath = next;
       i++;
     } else if (a === "--qid" && next) {
       out.qid = next;
@@ -95,9 +105,7 @@ function parseArgs(argv: string[]): Args {
 }
 
 /**
- * publishers.yml の name → key 逆引きマップ。 series.publisher_key を
- * MADB CSV の 発行者名 から解決するのに使う。
- * magazine_key は MADB 構造上 単行本側から取れないので fetch:wikipedia 担当。
+ * publishers.yml の name → key 逆引きマップ。
  */
 type MasterMaps = {
   publisher: Map<string, string>;
@@ -119,10 +127,6 @@ function getMasters(): MasterMaps {
   return cachedMasters;
 }
 
-/**
- * adult_imprints / adult_publishers テーブルから NFKC 正規化済の Set を作る。
- * isAdultMadbRecord の引数として CSV の 1 row ごとに参照される。
- */
 function loadAdultSeeds(db: DB): {
   adultImprints: Set<string>;
   adultPublishers: Set<string>;
@@ -142,7 +146,6 @@ function loadAdultSeeds(db: DB): {
   return { adultImprints, adultPublishers };
 }
 
-/** upsertVolume が要求する作家識別。 mangaka_id が無い場合は null で OK。 */
 type AuthorRef = {
   qid: string | null;
   name: string;
@@ -150,55 +153,41 @@ type AuthorRef = {
   mangakaId: number | null;
 };
 
-/**
- * MadbRec は upsertVolume の入力。 CSV row を直接食わせるのでなく、
- * 旧 SPARQL 経路で慣らしたシェイプを保つ (= 後で SPARQL を再採用したく
- * なっても upsertVolume を変える必要がない)。
- */
-type MadbRec = {
+/** upsertVolume の入力。 旧 SPARQL/CSV 経路と同じシェイプを保つ。 */
+type UpsertRec = {
   manifestationUri: string;
   title: string | null;
   creator: string;
   isbn13: string;
-  /** 発行者 (= 出版社、 series.publisher_key 解決の入力) */
   publisher: string | null;
-  /** 単行本レーベル (= imprint、 editions.imprint 行き) */
   imprint: string | null;
-  /** 版表示 (= "完全版" / "特装版" 等。 classifyEdition 入力に最優先で使う) */
+  /** 「完全版」 等の判定に使う 副題的文字列 (= JSON-LD では schema:alternativeHeadline) */
   editionLabel: string | null;
-  /** YYYY-MM-DD or partial */
   datePublished: string | null;
-  /** CSV 由来の純数字巻番号 (= 取れた時のみ。 取れなければ null で title fallback) */
   csvVolumeNumber: number | null;
 };
 
 /**
- * MadbCsvRow → MadbRec 変換。 ISBN 不正 / 必須 field 欠落は null で skip。
+ * MadbRecord (= JSON-LD 抽出後の typed shape) を upsertVolume 入力に変換。
  */
-function csvRowToMadbRec(row: MadbCsvRow): MadbRec | null {
-  const isbn13 = normalizeIsbn13(row.isbn);
+function recordToUpsert(rec: MadbRecord): UpsertRec | null {
+  const isbn13 = normalizeIsbn13(rec.isbn);
   if (!isbn13) return null;
-  // creator は CSV では 1 個の string (= "X　＼＼　Y" 形式)。 mangaka 紐付け
-  // 用に splitAuthors した個別名は別経路、 ここは raw value を保存して
-  // sources.raw_json で audit できるようにしておく。
-  const creator = row.authorName.trim();
+  const creator = rec.authors.join(" / ").trim();
   if (!creator) return null;
   return {
-    manifestationUri: `https://mediaarts-db.artmuseums.go.jp/data/manifestation/${row.madbId}`,
-    title: row.title.trim() || null,
+    manifestationUri: `https://mediaarts-db.artmuseums.go.jp/id/${rec.madbId}`,
+    title: rec.title || null,
     creator,
     isbn13,
-    publisher: row.publisherName.trim() || null,
-    imprint: row.bookLabel.trim() || null,
-    editionLabel: row.editionLabel.trim() || null,
-    datePublished: row.publishedAt.trim() || null,
-    csvVolumeNumber: parseVolumeNumber(row.volumeNumber),
+    publisher: rec.publisher || null,
+    imprint: rec.brand || null,
+    editionLabel: rec.subtitle || null,
+    datePublished: rec.datePublished || null,
+    csvVolumeNumber: parseVolumeNumber(rec.volumeNumber),
   };
 }
 
-/**
- * fetch-ndl と同じく prepared statements をモジュールレベルにキャッシュ。
- */
 type VolumeStmts = {
   selectSeries: Stmt;
   insertSeries: Stmt;
@@ -268,7 +257,6 @@ function getStmts(db: DB): VolumeStmts {
       `INSERT INTO volumes (edition_id, isbn13, number, is_extra, release_date)
        VALUES (?, ?, ?, ?, ?)`,
     ),
-    // ユーザ意思: 既存 NDL 由来 volume は MADB データで上書き。
     updateVolume: db.prepare(
       `UPDATE volumes
        SET edition_id   = ?,
@@ -284,17 +272,17 @@ function getStmts(db: DB): VolumeStmts {
 }
 
 /**
- * 1 record を upsert。 fetch-ndl の upsertVolume と同等の責務。
+ * 1 record を upsert。
  *
- * CSV 由来データの優先順:
- *   - editionType: rec.editionLabel (= 「版表示」 column) を最優先 →
- *     fallback で title から classifyEdition
- *   - volumeNumber: rec.csvVolumeNumber (= 「巻」 column の純数字) →
- *     fallback で title から extractVolumeNumber
- *   - imprint: rec.imprint (= 「単行本レーベル」)
- *   - publisher_key: rec.publisher (= 「発行者名」 を publishers.yml で解決)
+ * JSON-LD 由来データの優先順:
+ *   - editionType: rec.editionLabel (= schema:alternativeHeadline、 「完全版」
+ *     等が入る) を最優先 → fallback で title から classifyEdition
+ *   - volumeNumber: rec.csvVolumeNumber (= schema:volumeNumber) → fallback
+ *     で title から extractVolumeNumber
+ *   - imprint: rec.imprint (= schema:brand)
+ *   - publisher_key: rec.publisher (= schema:publisher を publishers.yml で解決)
  */
-function upsertVolume(db: DB, author: AuthorRef, rec: MadbRec): void {
+function upsertVolume(db: DB, author: AuthorRef, rec: UpsertRec): void {
   const titleForKey = rec.title ?? rec.isbn13;
   const seriesKey = buildSeriesKey(titleForKey, {
     qid: author.qid,
@@ -302,16 +290,13 @@ function upsertVolume(db: DB, author: AuthorRef, rec: MadbRec): void {
   });
   const seriesDisplay = baseTitle(titleForKey);
 
-  // editionLabel が空でないなら最優先 (= MADB 公式の「版表示」)。
-  // 空なら title から classifyEdition (= keyword scan)。
+  // editionLabel (= schema:alternativeHeadline) があれば最優先。
+  // CSV 路線では 「版表示」 column だったが、 JSON-LD では subtitle に
+  // 完全版 / 特装版 等が記録される。 空なら title から classifyEdition。
   const editionInput = rec.editionLabel ?? rec.title ?? "";
   let editionType: EditionType = classifyEdition(editionInput);
-  // 巻番号は CSV の 「巻」 column を最優先、 取れなければ title fallback。
   const volumeNumber =
     rec.csvVolumeNumber ?? (rec.title ? extractVolumeNumber(rec.title) : null);
-  // 巻番号取れない record は本編 series でないことが多い (= 関連書籍 /
-  // セット商品 / ガイドブック)。 standard edition に混ぜると vol1 集約で
-  // 誤集計になるので type=other に分離。
   if (volumeNumber === null && editionType === "standard") {
     editionType = "other";
   }
@@ -328,7 +313,6 @@ function upsertVolume(db: DB, author: AuthorRef, rec: MadbRec): void {
       ? (masters.publisher.get(rec.publisher.normalize("NFKC")) ?? null)
       : null;
 
-  // ===== series upsert =====
   const existingSeries = stmts.selectSeries.get(seriesKey) as
     | { id: number; year_started: number | null; year_ended: number | null }
     | undefined;
@@ -362,22 +346,18 @@ function upsertVolume(db: DB, author: AuthorRef, rec: MadbRec): void {
     seriesId = Number(info.lastInsertRowid);
   }
 
-  // ===== series_authors 紐付け =====
   if (author.mangakaId !== null) {
     stmts.insertSeriesAuthor.run(seriesId, author.mangakaId, "writer_artist");
   }
 
-  // series.publisher_key を master 解決値で埋める。 既存値があれば touch しない。
   if (publisherKey !== null) {
     stmts.updateSeriesPublisherKey.run(publisherKey, seriesId);
   }
 
-  // ===== edition upsert =====
   const existingEdition = stmts.selectEdition.get(seriesId, editionType) as
     | { id: number; year_started: number | null; year_ended: number | null }
     | undefined;
 
-  // imprint には CSV の 「単行本レーベル」 を最優先。 無ければ publisher 名で fallback。
   const imprintForRow = rec.imprint ?? rec.publisher;
 
   let editionId: number;
@@ -414,7 +394,6 @@ function upsertVolume(db: DB, author: AuthorRef, rec: MadbRec): void {
     editionId = Number(info.lastInsertRowid);
   }
 
-  // ===== volume upsert (= 既存 NDL volume があれば MADB で上書き) =====
   const numberVal = volumeNumber ?? 1;
   const isExtra = volumeNumber === null ? 1 : 0;
   const existingVolume = stmts.selectVolume.get(rec.isbn13) as
@@ -438,7 +417,6 @@ function upsertVolume(db: DB, author: AuthorRef, rec: MadbRec): void {
     );
   }
 
-  // ===== sources 記録 =====
   recordSource(db, "madb", "volumes", rec.isbn13, {
     manifestation: rec.manifestationUri,
     title: rec.title,
@@ -450,7 +428,6 @@ function upsertVolume(db: DB, author: AuthorRef, rec: MadbRec): void {
   });
 }
 
-/** 解決済 mangaka 情報。 名前 index と 1:N 紐付けに使う。 */
 type ResolvedAuthor = AuthorRef & { display: string };
 
 function resolveAuthors(db: DB, args: Args): ResolvedAuthor[] {
@@ -529,11 +506,6 @@ function resolveAuthors(db: DB, args: Args): ResolvedAuthor[] {
   return [];
 }
 
-/**
- * 「正規化済名前 → 紐付ける ResolvedAuthor 群」 の index を作る。
- * MADB CSV の 作者名 column (= splitAuthors 後) と normalizeCreatorName で
- * exact match させて 1:N 解決する。
- */
 function buildAuthorIndex(
   authors: ResolvedAuthor[],
 ): Map<string, ResolvedAuthor[]> {
@@ -552,14 +524,13 @@ function buildAuthorIndex(
 }
 
 type Stats = {
-  totalRows: number;
-  parsedRows: number;
+  totalRecords: number;
   parseErrors: number;
   skippedAdultRating: number;
-  skippedAdultSummary: number;
+  skippedAdultDescription: number;
   skippedAdultImprint: number;
   skippedAdultPublisher: number;
-  matchedRows: number;
+  matchedRecords: number;
   upsertedVolumes: number;
   insertedVolumes: number;
   updatedVolumes: number;
@@ -568,14 +539,13 @@ type Stats = {
 
 function newStats(): Stats {
   return {
-    totalRows: 0,
-    parsedRows: 0,
+    totalRecords: 0,
     parseErrors: 0,
     skippedAdultRating: 0,
-    skippedAdultSummary: 0,
+    skippedAdultDescription: 0,
     skippedAdultImprint: 0,
     skippedAdultPublisher: 0,
-    matchedRows: 0,
+    matchedRecords: 0,
     upsertedVolumes: 0,
     insertedVolumes: 0,
     updatedVolumes: 0,
@@ -585,62 +555,65 @@ function newStats(): Stats {
 
 function bumpAdultStat(stats: Stats, signal: AdultMatchSignal): void {
   if (signal === "rating") stats.skippedAdultRating++;
-  else if (signal === "summary") stats.skippedAdultSummary++;
+  else if (signal === "description") stats.skippedAdultDescription++;
   else if (signal === "imprint") stats.skippedAdultImprint++;
   else if (signal === "publisher") stats.skippedAdultPublisher++;
 }
 
 /**
- * CSV を 1 パスで読み、 各 row を adult filter → 作者 index で紐付け →
- * 該当 mangaka 全員に対して upsertVolume を呼ぶ。
+ * stream-json で `@graph` array を pull しながら 1 record ずつ:
+ *   1. extractRecord で typed shape に変換
+ *   2. adult filter 4 層
+ *   3. 作者 index で mangaka 紐付け (= 共著は 1:N)
+ *   4. matched record をキューに積む (= 全行スキャン後に 1 transaction で投入)
  *
- * トランザクション境界は CSV 全体で 1 つ。 better-sqlite3 は同期 API なので
- * stream の各行で immediate 実行できる。
+ * メモリ: queued 配列のみ蓄積 (= 397k record × 一部 mangaka match なので
+ * 通常 数十 MB で収まる)。
  */
-async function processCsv(
+async function processJsonld(
   db: DB,
-  csvPath: string,
+  jsonldPath: string,
   authorIndex: Map<string, ResolvedAuthor[]>,
   adultSeeds: { adultImprints: Set<string>; adultPublishers: Set<string> },
   args: Args,
 ): Promise<Stats> {
   const stats = newStats();
-
-  if (!fs.existsSync(csvPath)) {
-    throw new Error(`csv not found: ${csvPath}`);
+  if (!fs.existsSync(jsonldPath)) {
+    throw new Error(`json-ld not found: ${jsonldPath}`);
   }
 
-  const rl = readline.createInterface({
-    input: fs.createReadStream(csvPath, { encoding: "utf8" }),
-    crlfDelay: Infinity,
-  });
+  const queued: { author: ResolvedAuthor; rec: UpsertRec }[] = [];
 
-  let isFirstLine = true;
-  // tx() は同期関数を要求するので、 CSV 行を一旦配列に貯めてから transaction
-  // で投入する。 メモリは 397k × 12 column ≈ 数十 MB の想定。
-  const queued: { author: ResolvedAuthor; rec: MadbRec }[] = [];
+  // stream-json の filter は dotted path 表記または RegExp。 `@graph` は
+  // `@` 記号入りなので RegExp で表す。 stream-chain の chain() で typing
+  // 整合 (= .pipe() で組むと Flushable 型と Node Stream 型の差異で TS error)。
+  const stream = chain([
+    fs.createReadStream(jsonldPath),
+    sjParser(),
+    pick({ filter: /^@graph$/ }),
+    streamArray(),
+  ]);
 
-  for await (let line of rl) {
-    if (isFirstLine) {
-      isFirstLine = false;
-      // header 行は捨てる (= column position は EXPECTED_COLUMN_COUNT で
-      // 固定前提)
-      line = stripBom(line);
-      continue;
+  let progressCounter = 0;
+  for await (const item of stream) {
+    const value = (item as { key: number; value: MadbJsonLdRecord }).value;
+    stats.totalRecords++;
+    progressCounter++;
+    if (progressCounter % 50000 === 0) {
+      console.log(
+        `[progress] processed=${progressCounter}, matched=${stats.matchedRecords}, queued=${queued.length}`,
+      );
     }
-    stats.totalRows++;
 
-    const cells = parseCsvLine(line);
-    const csvRow = rowToMadbCsvRow(cells);
-    if (!csvRow) {
+    const rec = extractRecord(value);
+    if (!rec) {
       stats.parseErrors++;
       continue;
     }
-    stats.parsedRows++;
 
     if (!args.includeAdult) {
       const adultSig = isAdultMadbRecord(
-        csvRow,
+        rec,
         adultSeeds.adultImprints,
         adultSeeds.adultPublishers,
       );
@@ -650,40 +623,35 @@ async function processCsv(
       }
     }
 
-    // 作者 1:N 紐付け
-    const authorsInRow = splitAuthors(csvRow.authorName);
     const matched: ResolvedAuthor[] = [];
-    for (const a of authorsInRow) {
+    for (const a of rec.authors) {
       const key = normalizeCreatorName(a);
       if (!key) continue;
       const hits = authorIndex.get(key);
       if (hits) matched.push(...hits);
     }
     if (matched.length === 0) continue;
-    stats.matchedRows++;
+    stats.matchedRecords++;
 
-    const rec = csvRowToMadbRec(csvRow);
-    if (!rec) {
+    const up = recordToUpsert(rec);
+    if (!up) {
       stats.parseErrors++;
       continue;
     }
 
-    // 同じ csv row が複数 mangaka にヒットすることもある (共著)。 重複なく
-    // 1 record × N author で投入。
     const seen = new Set<number | string>();
     for (const a of matched) {
       const key = a.mangakaId ?? `name:${a.name}`;
       if (seen.has(key)) continue;
       seen.add(key);
-      queued.push({ author: a, rec });
+      queued.push({ author: a, rec: up });
     }
   }
 
   console.log(
-    `[csv] read ${stats.totalRows} rows, parsed=${stats.parsedRows}, matched=${stats.matchedRows}, queued=${queued.length}`,
+    `[stream] read ${stats.totalRecords} records, matched=${stats.matchedRecords}, queued=${queued.length}`,
   );
 
-  // ===== DB 投入 (= 1 トランザクション) =====
   tx(db, () => {
     const stmts = getStmts(db);
     for (const { author, rec } of queued) {
@@ -707,9 +675,9 @@ async function processCsv(
 
 async function main(): Promise<void> {
   const args = parseArgs(process.argv.slice(2));
-  if (!args.csvPath) {
+  if (!args.jsonldPath) {
     console.error(
-      "usage: fetch-madb --csv-path <path> [--qid Q1234 | --name 'X' | --all] [--limit N] [--include-adult]",
+      "usage: fetch-madb --jsonld-path <path> [--qid Q1234 | --name 'X' | --all] [--limit N] [--include-adult]",
     );
     process.exit(1);
   }
@@ -727,7 +695,7 @@ async function main(): Promise<void> {
   }
 
   console.log(
-    `[fetch-madb] csv=${args.csvPath} authors=${authors.length}, includeAdult=${args.includeAdult}`,
+    `[fetch-madb] jsonld=${args.jsonldPath} authors=${authors.length}, includeAdult=${args.includeAdult}`,
   );
 
   const adultSeeds = loadAdultSeeds(db);
@@ -740,21 +708,26 @@ async function main(): Promise<void> {
     `[author-index] ${authorIndex.size} unique normalized name keys (incl. alt_names)`,
   );
 
-  const stats = await processCsv(db, args.csvPath, authorIndex, adultSeeds, args);
+  const stats = await processJsonld(
+    db,
+    args.jsonldPath,
+    authorIndex,
+    adultSeeds,
+    args,
+  );
 
   console.log(`\n[fetch-madb] done`);
-  console.log(`  total rows           : ${stats.totalRows}`);
-  console.log(`  parsed rows          : ${stats.parsedRows}`);
-  console.log(`  parse errors         : ${stats.parseErrors}`);
-  console.log(`  skipped (rating)     : ${stats.skippedAdultRating}`);
-  console.log(`  skipped (summary)    : ${stats.skippedAdultSummary}`);
-  console.log(`  skipped (imprint)    : ${stats.skippedAdultImprint}`);
-  console.log(`  skipped (publisher)  : ${stats.skippedAdultPublisher}`);
-  console.log(`  matched rows         : ${stats.matchedRows}`);
-  console.log(`  upserted volumes     : ${stats.upsertedVolumes}`);
-  console.log(`    inserted           : ${stats.insertedVolumes}`);
-  console.log(`    updated            : ${stats.updatedVolumes}`);
-  console.log(`  errors               : ${stats.errors}`);
+  console.log(`  total records          : ${stats.totalRecords}`);
+  console.log(`  parse errors           : ${stats.parseErrors}`);
+  console.log(`  skipped (rating)       : ${stats.skippedAdultRating}`);
+  console.log(`  skipped (description)  : ${stats.skippedAdultDescription}`);
+  console.log(`  skipped (imprint)      : ${stats.skippedAdultImprint}`);
+  console.log(`  skipped (publisher)    : ${stats.skippedAdultPublisher}`);
+  console.log(`  matched records        : ${stats.matchedRecords}`);
+  console.log(`  upserted volumes       : ${stats.upsertedVolumes}`);
+  console.log(`    inserted             : ${stats.insertedVolumes}`);
+  console.log(`    updated              : ${stats.updatedVolumes}`);
+  console.log(`  errors                 : ${stats.errors}`);
 
   db.close();
 }
