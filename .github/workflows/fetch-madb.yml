@@ -79,6 +79,22 @@ jobs:
           echo "=== .cache/madb/ files ==="
           ls -la .cache/madb/ || true
 
+      - name: Inspect first record per author (= magazine field debug)
+        if: always()
+        run: |
+          for f in .cache/madb/*.json; do
+            echo "::group::$(basename $f) — first record"
+            jq '.records[0]' "$f" 2>/dev/null || cat "$f" | head -30
+            echo "::endgroup::"
+          done
+
+      - name: Show unique magazine literals (= master 解決の手掛り)
+        if: always()
+        run: |
+          echo "=== unique magazine literals across all authors ==="
+          jq -r '.records[].magazine' .cache/madb/*.json 2>/dev/null \
+            | sort -u | head -50 || true
+
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         if: always()
