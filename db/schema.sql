@@ -20,8 +20,11 @@ CREATE TABLE IF NOT EXISTS meta (
   value TEXT NOT NULL
 );
 INSERT OR IGNORE INTO meta (key, value) VALUES
-  ('schema_version', '6'),
+  ('schema_version', '7'),
   ('created_at', strftime('%Y-%m-%dT%H:%M:%SZ', 'now'));
+-- 既存 DB の schema_version は INSERT OR IGNORE では更新されないので、
+-- schema.sql 適用時に常に最新値へ揃える (= migration を兼ねる)。
+UPDATE meta SET value = '7' WHERE key = 'schema_version';
 
 -- M3: publishers / magazines は data/*.yml が source-of-truth だが、
 -- series.publisher_key が孤立しないかチェックできるよう SQLite にも
@@ -205,7 +208,91 @@ CREATE TABLE IF NOT EXISTS amazon_metadata (
   FOREIGN KEY (isbn13) REFERENCES volumes(isbn13) ON DELETE SET NULL
 );
 
+-- 3-state model (schema v7, 2026-05): live / excluded / archive の責務分離。
+--
+-- 全体像:
+--   series_archive   = 全 import 履歴 (= source-of-truth)。 INSERT/UPDATE のみ、 DELETE しない。
+--                      adult filter で弾かれた record も、 後から手動除外された record も、
+--                      管理者が 「完全削除」 した record も、 ここには残り続ける。
+--                      復帰の元データ。
+--   series           = 公開用 (= 一般ユーザに見せる現在の state)。 既存テーブル流用。
+--                      live state の row だけがここにある。
+--   series_excluded  = 管理者の review queue。 「グレーゾーン」 (= adult filter で弾かれたが
+--                      実は健全かもしれないもの) を保持。 admin が見て reinstate / 完全削除を判断する。
+--
+-- 状態遷移:
+--   import        → archive に必ず INSERT/UPDATE、 adult なら excluded に追加 + series には入れない、
+--                   そうでなければ series (= live) に INSERT。
+--   reinstate     → series に archive snapshot から INSERT、 excluded から DELETE、
+--                   archive.current_state = 'live'。
+--   permanent del → series と excluded から DELETE、 archive.current_state = 'deleted'。
+--                   archive 行は残るので 「再 import で復活」 や 「監査」 はずっと可能。
+--   re-import     → archive.last_imported_at 更新 + 必要なら state 再評価。
+
+-- series_archive: 全 import 履歴 (= source-of-truth)。 削除しない。
+CREATE TABLE IF NOT EXISTS series_archive (
+  id                INTEGER PRIMARY KEY AUTOINCREMENT,
+  series_key        TEXT NOT NULL UNIQUE,
+  -- series テーブルと同じ列を snapshot
+  qid               TEXT,
+  title             TEXT NOT NULL,
+  title_kana        TEXT,
+  year_started      INTEGER,
+  year_ended        INTEGER,
+  status            TEXT,
+  demographic       TEXT,
+  publisher_key     TEXT,
+  magazine_key      TEXT,
+  genres            TEXT,
+  synopsis          TEXT,
+  wikipedia_url     TEXT,
+  adult_score       INTEGER NOT NULL DEFAULT 0,
+  -- audit
+  first_imported_at TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%SZ', 'now')),
+  last_imported_at  TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%SZ', 'now')),
+  -- 現在の状態。 live=series テーブルにあり公開、 excluded=series_excluded にあり管理者 review 中、
+  -- deleted=どちらにも無い (= 完全削除済み、 archive にのみ残る)。
+  current_state     TEXT NOT NULL DEFAULT 'live'
+                    CHECK(current_state IN ('live','excluded','deleted'))
+);
+
+-- series_excluded: 管理者の review queue (= 「グレーゾーン」)。
+-- adult filter で auto 除外されたものや、 admin が手動で hide したものを保持。
+-- ここから reinstate (= 公開へ戻す) または完全削除 (= series_archive のみ残る) する。
+CREATE TABLE IF NOT EXISTS series_excluded (
+  archive_id   INTEGER PRIMARY KEY,
+  -- 除外理由のラベル。 'adult_score' / 'adult_imprint' / 'manual_admin' / 'duplicate' など。
+  -- UI でフィルタリング/集計する用。
+  reason       TEXT NOT NULL,
+  -- 発火した signal の JSON (= adult-score の signal リスト等)。 admin UI で根拠を表示する用。
+  signals_json TEXT,
+  excluded_at  TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%SZ', 'now')),
+  -- 'auto' = import 時の rule で自動、 'admin:<user>' = 手動。
+  excluded_by  TEXT NOT NULL DEFAULT 'auto',
+  FOREIGN KEY (archive_id) REFERENCES series_archive(id) ON DELETE CASCADE
+);
+
+-- admin_audit: 管理者操作の監査ログ。
+-- reinstate / permanent_delete / manual_exclude の 3 操作を記録する。
+-- 「誰が、 いつ、 何を、 なぜ」 を後追いできる。
+CREATE TABLE IF NOT EXISTS admin_audit (
+  id            INTEGER PRIMARY KEY AUTOINCREMENT,
+  action        TEXT NOT NULL,        -- 'reinstate' | 'permanent_delete' | 'manual_exclude'
+  target_table  TEXT NOT NULL,        -- 'series_archive' (= 主に archive_id を指す)
+  target_id     INTEGER NOT NULL,
+  performed_by  TEXT,                  -- 'admin:<user>' or 'system'
+  performed_at  TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%SZ', 'now')),
+  reason        TEXT,                  -- 自由記述
+  metadata_json TEXT                   -- 補助情報 (= reinstate 時の signal snapshot 等)
+);
+
 CREATE INDEX IF NOT EXISTS idx_adult_imprints_imprint  ON adult_imprints(imprint);
+CREATE INDEX IF NOT EXISTS idx_series_archive_state    ON series_archive(current_state);
+CREATE INDEX IF NOT EXISTS idx_series_archive_adult    ON series_archive(adult_score);
+CREATE INDEX IF NOT EXISTS idx_series_excluded_reason  ON series_excluded(reason);
+CREATE INDEX IF NOT EXISTS idx_series_excluded_at      ON series_excluded(excluded_at);
+CREATE INDEX IF NOT EXISTS idx_admin_audit_target      ON admin_audit(target_table, target_id);
+CREATE INDEX IF NOT EXISTS idx_admin_audit_performed   ON admin_audit(performed_at);
 CREATE INDEX IF NOT EXISTS idx_volumes_edition         ON volumes(edition_id);
 CREATE INDEX IF NOT EXISTS idx_editions_series         ON editions(series_id);
 CREATE INDEX IF NOT EXISTS idx_series_authors_mangaka  ON series_authors(mangaka_id);

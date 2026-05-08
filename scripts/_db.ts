@@ -41,16 +41,15 @@ export function openDb(filePath: string = DB_PATH): DB {
 }
 
 /**
- * 「mangaka テーブルが無ければ schema.sql 全部を流す」というシンプル判定。
- * IF NOT EXISTS が schema.sql 側に書いてあるので二重実行しても安全。
+ * schema.sql を常に exec する。 全ての CREATE/INSERT が IF NOT EXISTS / OR IGNORE
+ * で書かれている前提なので、 既存 DB に対して新テーブル/新 INDEX だけが追加される。
+ * これにより schema_version が上がった時の追従 (= v6 → v7 のテーブル追加等) が
+ * `npm run db:init` だけで完了する。
+ *
+ * NOTE: 将来 ALTER TABLE 等の非 idempotent な migration が必要になったら、
+ * meta.schema_version を見て分岐する仕組みに切り替える。
  */
 function applySchemaIfNeeded(db: DB): void {
-  const row = db
-    .prepare(
-      "SELECT name FROM sqlite_master WHERE type='table' AND name='mangaka'",
-    )
-    .get();
-  if (row) return;
   if (!fs.existsSync(SCHEMA_PATH)) {
     throw new Error(`schema not found at ${SCHEMA_PATH}`);
   }
