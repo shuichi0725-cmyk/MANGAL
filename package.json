@@ -13,7 +13,7 @@
     "fetch:openbd": "tsx scripts/fetch-openbd.ts",
     "fetch:openbd:bulk": "tsx scripts/fetch-openbd-bulk.ts",
     "probe:openbd": "tsx scripts/probe-openbd.ts",
-    "probe:isbn-sources": "tsx scripts/probe-isbn-sources.ts",
+    "probe:madb": "tsx scripts/probe-madb.ts",
     "fetch:volumes": "tsx scripts/fetch-volumes.ts",
     "fetch:mangaka": "tsx scripts/fetch-mangaka.ts",
     "fetch:rakuten": "tsx scripts/fetch-rakuten.ts",
