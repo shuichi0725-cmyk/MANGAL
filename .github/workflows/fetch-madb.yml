@@ -99,6 +99,63 @@ jobs:
           jq -r '.records[].magazineType' .cache/madb/*.json 2>/dev/null \
             | sort | uniq -c | sort -rn || true
 
+      - name: Probe MangaBookSeries → MangaMagazine link predicate
+        if: always()
+        # 前 run で schema:isPartOf は MangaBookSeries を指しており (=
+        # 665/689)、 真の雑誌情報はそこから更に 1 hop 必要だと判明。
+        # MangaBookSeries の outgoing predicates と、 各 predicate の
+        # target type 分布を SPARQL で直接取得して、 雑誌への正しい link
+        # predicate を発見する。
+        run: |
+          set -euo pipefail
+          MADB_SPARQL="https://mediaarts-db.artmuseums.go.jp/sparql"
+
+          echo "=== [1] outgoing predicates of class:MangaBookSeries (top 30) ==="
+          QUERY1='PREFIX schema: <https://schema.org/>
+          PREFIX class: <https://mediaarts-db.artmuseums.go.jp/data/class#>
+          SELECT ?p (COUNT(*) AS ?n) WHERE {
+            ?s a class:MangaBookSeries ;
+               ?p ?o .
+          } GROUP BY ?p ORDER BY DESC(?n) LIMIT 30'
+          curl -sS -X POST \
+            -H 'Accept: application/sparql-results+json' \
+            --data-urlencode "query=$QUERY1" \
+            "$MADB_SPARQL" \
+            | jq -r '.results.bindings[] | "\(.n.value | tonumber | tostring) × \(.p.value)"' \
+            || echo "(SPARQL fetch failed)"
+
+          echo
+          echo "=== [2] target type distribution from MangaBookSeries (any predicate, top 15) ==="
+          QUERY2='PREFIX schema: <https://schema.org/>
+          PREFIX class: <https://mediaarts-db.artmuseums.go.jp/data/class#>
+          SELECT ?type (COUNT(*) AS ?n) WHERE {
+            ?s a class:MangaBookSeries ;
+               ?p ?next .
+            ?next a ?type .
+          } GROUP BY ?type ORDER BY DESC(?n) LIMIT 15'
+          curl -sS -X POST \
+            -H 'Accept: application/sparql-results+json' \
+            --data-urlencode "query=$QUERY2" \
+            "$MADB_SPARQL" \
+            | jq -r '.results.bindings[] | "\(.n.value | tonumber | tostring) × \(.type.value)"' \
+            || echo "(SPARQL fetch failed)"
+
+          echo
+          echo "=== [3] specific predicates from MangaBookSeries → MangaMagazine ==="
+          QUERY3='PREFIX schema: <https://schema.org/>
+          PREFIX class: <https://mediaarts-db.artmuseums.go.jp/data/class#>
+          SELECT ?p (COUNT(*) AS ?n) WHERE {
+            ?s a class:MangaBookSeries ;
+               ?p ?mag .
+            ?mag a class:MangaMagazine .
+          } GROUP BY ?p ORDER BY DESC(?n) LIMIT 10'
+          curl -sS -X POST \
+            -H 'Accept: application/sparql-results+json' \
+            --data-urlencode "query=$QUERY3" \
+            "$MADB_SPARQL" \
+            | jq -r '.results.bindings[] | "\(.n.value | tonumber | tostring) × \(.p.value)"' \
+            || echo "(SPARQL fetch failed)"
+
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         if: always()
