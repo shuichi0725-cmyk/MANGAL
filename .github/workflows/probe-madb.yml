@@ -1,0 +1,57 @@
+name: 🔍 Probe MADB (ISBN source)
+
+# 2026-05-08: MADB (メディア芸術データベース) SPARQL endpoint への到達性
+# と作家別 ISBN 取得率を GH runner から実測する。 ローカル環境では
+# HTTP 403 で blocked だが、 GH runner のネットワークなら通る可能性が
+# 高いという仮説の検証。
+#
+# - read-only (= DB 書き込みなし、 yaml 編集なし)
+# - 結果は artifact 経由 (docs/madb-probe.md + raw response dumps)
+# - 必要なら手元で artifact を回収してレポートを review する
+
+on:
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: "npm"
+
+      - run: npm ci
+
+      - name: Initialize empty DB (probe reads NDL ISBN overlap)
+        # probe-madb.ts が openDb() を呼び、 mangaka が居なくても
+        # 空 DB から SELECT する。 schema が無いと SQL エラーになるので
+        # db:init で schema だけ作っておく。
+        run: npm run db:init
+
+      - name: Run MADB probe
+        run: npm run probe:madb
+
+      - name: Show probe report (head)
+        if: always()
+        run: |
+          echo "=== docs/madb-probe.md (head) ==="
+          head -80 docs/madb-probe.md || true
+          echo
+          echo "=== out/probe-madb/ files ==="
+          ls -la out/probe-madb/ || true
+
+      - name: Upload probe artifact
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: probe-madb-run-${{ github.run_number }}
+          path: |
+            docs/madb-probe.md
+            out/probe-madb/
+          if-no-files-found: warn
