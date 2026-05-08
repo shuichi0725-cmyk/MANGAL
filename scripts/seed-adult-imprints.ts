@@ -40,6 +40,11 @@ function main(): void {
       `[seed:adult-imprints] distribution_channels=${file.distribution_channels.length} (skip — 現在は投入しない)`,
     );
   }
+  if (file.false_positives && file.false_positives.length > 0) {
+    console.log(
+      `[seed:adult-imprints] false_positives=${file.false_positives.length} (skip — probe で FP rate >=50% と判明)`,
+    );
+  }
 
   const db = openDb();
   if (args.refresh) {

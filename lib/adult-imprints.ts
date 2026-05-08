@@ -5,8 +5,12 @@
  * 手書きの追記もできるが、 raw dump 側に追加するのが正攻法。
  *
  * adult_imprints テーブルへ INSERT するのは imprints セクションのみ。
- * distribution_channels セクションは当面 (= signal weight 設計を確認するまで)
- * INSERT しない。 ambiguous は false-positive 防止のため絶対に INSERT しない。
+ * 他のセクションは false-positive 防止のため絶対に INSERT しない:
+ *   - distribution_channels: imprint は adult だが publisher が配信プラットフォーム
+ *   - ambiguous:             同名 imprint × 複数 publisher (= mainstream/adult collision)
+ *   - false_positives:       probe-adult-imprints の結果 FP rate >=50% で
+ *                            mainstream 寄りと判明した seed (= 過去に投入していたが
+ *                            誤検出を起こすので除外)
  */
 import fs from "node:fs";
 import { z } from "zod";
@@ -34,11 +38,26 @@ export const AdultAmbiguousSchema = z.object({
 });
 export type AdultAmbiguous = z.infer<typeof AdultAmbiguousSchema>;
 
+/**
+ * probe-adult-imprints (= MADB JSON-LD vs contentRating) で FP 率が高いと
+ * 判明した seed。 imprints から除外し、 ここに記録 (= 履歴として残す)。
+ */
+export const AdultFalsePositiveSchema = z.object({
+  imprint: z.string().min(1),
+  publisher: z.string().min(1),
+  fp_total: z.number().int().nonnegative(),
+  fp_rate: z.number().min(0).max(100),
+  total_hits: z.number().int().nonnegative(),
+  note: z.string().optional(),
+});
+export type AdultFalsePositive = z.infer<typeof AdultFalsePositiveSchema>;
+
 export const AdultImprintsFileSchema = z.object({
   schema_version: z.number().int().positive(),
   imprints: z.array(AdultImprintEntrySchema),
   distribution_channels: z.array(AdultDistributionChannelSchema).optional(),
   ambiguous: z.array(AdultAmbiguousSchema).optional(),
+  false_positives: z.array(AdultFalsePositiveSchema).optional(),
 });
 export type AdultImprintsFile = z.infer<typeof AdultImprintsFileSchema>;
 

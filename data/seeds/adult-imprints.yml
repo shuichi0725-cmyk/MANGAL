@@ -13,6 +13,9 @@
 #                           (DLwolf18 等)。 publisher は信頼できないので捨てる。
 #   ambiguous             : 同名 imprint × 異 publisher の collision 注意エントリ。
 #                           DB に投入しない (false-positive 防止)。
+#   false_positives       : probe-adult-imprints の結果 FP rate >=50% で
+#                           mainstream 寄りと判明した過去 seed。 imprints から
+#                           除外済み。 DB には入れない。 履歴として残す。
 
 schema_version: 1
 
@@ -149,9 +152,6 @@ imprints:
   - imprint: 'COMIC LO'
     publisher: '茜新社'
     count: 440
-  - imprint: 'サンワコミックス'
-    publisher: '三和出版'
-    count: 438
   - imprint: 'MUJIN COMICS'
     publisher: 'ティーアイネット'
     count: 438
@@ -191,9 +191,6 @@ imprints:
   - imprint: 'eternal'
     publisher: 'eternal'
     count: 333
-  - imprint: 'ホットミルクコミックス'
-    publisher: 'コアマガジン'
-    count: 329
   - imprint: 'BAVEL COMICS'
     publisher: '文苑堂'
     count: 327
@@ -248,9 +245,6 @@ imprints:
   - imprint: 'コミックMate L'
     publisher: '一水社'
     count: 195
-  - imprint: '別冊エースファイブコミックス'
-    publisher: '松文館'
-    count: 192
   - imprint: '妄想ブックス'
     publisher: '妄想ブックス'
     count: 187
@@ -311,9 +305,6 @@ imprints:
   - imprint: 'RK COMICS CYBERIA SERIES'
     publisher: 'ぶんか社'
     count: 131
-  - imprint: 'SPコミックス'
-    publisher: 'リイド社'
-    count: 130
   - imprint: 'Comic G-Es'
     publisher: 'ジーオーティー'
     count: 130
@@ -343,9 +334,6 @@ imprints:
     count: 103
   - imprint: 'Webコミックトウテツ'
     publisher: '一水社'
-    count: 100
-  - imprint: 'マイウェイコミックス'
-    publisher: 'メディアックス'
     count: 100
   - imprint: 'BugBug'
     publisher: '辰巳出版'
@@ -476,9 +464,6 @@ imprints:
   - imprint: 'COMIC Reboot'
     publisher: 'ジーウォーク'
     count: 30
-  - imprint: 'TECHGIAN STYLE'
-    publisher: 'KADOKAWA'
-    count: 30
   - imprint: 'メガストアアートワークス'
     publisher: 'コアマガジン'
     count: 30
@@ -502,9 +487,6 @@ imprints:
     count: 25
   - imprint: 'XO COMICS'
     publisher: 'オークス'
-    count: 24
-  - imprint: 'ダイトコミックス'
-    publisher: '大都社/少年画報社'
     count: 24
   - imprint: 'ダンジョンCOMICS'
     publisher: '文苑堂'
@@ -542,9 +524,6 @@ imprints:
   - imprint: 'TENMACOMICS G4M'
     publisher: '茜新社'
     count: 19
-  - imprint: 'ネオコミックス'
-    publisher: '辰巳出版'
-    count: 19
   - imprint: 'MD COMICS NEO'
     publisher: '一水社'
     count: 18
@@ -571,9 +550,6 @@ imprints:
     count: 15
   - imprint: '新鮮少女果樹園'
     publisher: '松文館'
-    count: 15
-  - imprint: 'TENMA COMICS EX'
-    publisher: '茜新社'
     count: 15
   - imprint: 'ビニュウ特選隊'
     publisher: 'A-WAGON R'
@@ -614,12 +590,6 @@ imprints:
   - imprint: 'ROCKコミックK'
     publisher: 'A-WAGON R'
     count: 12
-  - imprint: 'OKS COMIX'
-    publisher: 'オークス'
-    count: 11
-  - imprint: 'コアコミックス'
-    publisher: 'コアマガジン'
-    count: 11
   - imprint: 'こみっくすかぁれっと'
     publisher: 'forcs'
     count: 11
@@ -647,9 +617,6 @@ imprints:
   - imprint: 'KTCイラストコレクション'
     publisher: 'キルタイムコミュニケーション'
     count: 9
-  - imprint: 'コミック文庫'
-    publisher: 'フランス書院'
-    count: 9
   - imprint: '絶倫ぷりん'
     publisher: '松文館'
     count: 9
@@ -671,14 +638,8 @@ imprints:
   - imprint: 'GL★オトメチカ'
     publisher: 'CLLENN'
     count: 7
-  - imprint: 'ダイナコミックス'
-    publisher: '松文館'
-    count: 7
   - imprint: 'ディスカバリー'
     publisher: 'ディスカバリー'
-    count: 7
-  - imprint: 'マンサンコミックス'
-    publisher: '実業之日本社'
     count: 7
   - imprint: '夢雅COMICS'
     publisher: 'オークス'
@@ -743,9 +704,6 @@ imprints:
   - imprint: 'いずみコミックス特別編集版'
     publisher: '一水社'
     count: 1
-  - imprint: 'ヴァルキリーコミックス'
-    publisher: 'キルタイムコミュニケーション'
-    count: 1
   - imprint: 'Girls forM SAVAGE'
     publisher: '茜新社(電子)'
     count: 1
@@ -758,9 +716,6 @@ imprints:
   - imprint: 'セキララ文庫'
     publisher: 'セ・キララ文庫'
     count: 1
-  - imprint: 'DOコミックス'
-    publisher: 'ヒット出版社'
-    count: 1
   - imprint: 'DMMエクスタシー'
     publisher: 'ジーオーティー'
     count: 1
@@ -769,9 +724,6 @@ imprints:
     count: 1
   - imprint: 'ライト・マニアック・テキストシリーズ'
     publisher: '三和出版'
-    count: 1
-  - imprint: 'ワールドコミックス'
-    publisher: '久保書店'
     count: 1
 
 distribution_channels:
@@ -784,7 +736,8 @@ distribution_channels:
   - imprint: 'Dlsite成年オリジナル'
     notes: '配信プラットフォーム: DLsite成年オリジナル (合計 12 件)'
   - imprint: 'DLwolf18'
-    notes: '配信プラットフォーム: All Contents & VR / FACON / Mr.Blue / NUWARU / Nuon / StorySoop / Toons family / WEBTOON TV / Webtoon Koi Contents (合計 3867 件)'
+    notes: '配信プラットフォーム: All Contents & VR / FACON / Mr.Blue / NUWARU / Nuon /
+      StorySoop / Toons family / WEBTOON TV / Webtoon Koi Contents (合計 3867 件)'
   - imprint: 'e-Color Comic'
     notes: '配信プラットフォーム: TMEプラス / TMEプラス/ウィルクリエイション (合計 1808 件)'
   - imprint: 'Ruby RED'
@@ -809,64 +762,180 @@ ambiguous:
     publishers:
       - 'メディアックス'
       - 'モエールオンライン'
-    note: '同名 imprint × 複数 publisher (2 groups) → adult/mainstream collision の可能性、 seed には入れない'
+    note: '同名 imprint × 複数 publisher (2 groups) → adult/mainstream collision の可能性、
+      seed には入れない'
   - imprint: 'MISAKI COMICS'
     publishers:
       - '茜新社'
       - '茜新社(電子)'
-    note: 'sub-imprint 注釈あり (mainstream + adult の同名 imprint collision の可能性)、 seed には入れない'
+    note: 'sub-imprint 注釈あり (mainstream + adult の同名 imprint collision の可能性)、 seed
+      には入れない'
   - imprint: 'アクションコミックス'
     publishers:
       - '双葉社'
       - '双葉社(アクションピザッツ)'
-    note: 'sub-imprint 注釈あり (mainstream + adult の同名 imprint collision の可能性)、 seed には入れない'
+    note: 'sub-imprint 注釈あり (mainstream + adult の同名 imprint collision の可能性)、 seed
+      には入れない'
   - imprint: 'ウォー!コミックス'
     publishers:
       - 'サン出版'
       - 'マガジン・マガジン'
-    note: '同名 imprint × 複数 publisher (2 groups) → adult/mainstream collision の可能性、 seed には入れない'
+    note: '同名 imprint × 複数 publisher (2 groups) → adult/mainstream collision の可能性、
+      seed には入れない'
   - imprint: 'ウォー!コミックスSP'
     publishers:
       - 'ジュネット'
       - 'マガジン・マガジン'
-    note: '同名 imprint × 複数 publisher (2 groups) → adult/mainstream collision の可能性、 seed には入れない'
+    note: '同名 imprint × 複数 publisher (2 groups) → adult/mainstream collision の可能性、
+      seed には入れない'
   - imprint: 'エンジェルコミックス'
     publishers:
       - 'エンジェル出版'
       - '双葉社'
-    note: '同名 imprint × 複数 publisher (2 groups) → adult/mainstream collision の可能性、 seed には入れない'
+    note: '同名 imprint × 複数 publisher (2 groups) → adult/mainstream collision の可能性、
+      seed には入れない'
   - imprint: 'ガールズポップコレクション'
     publishers:
       - 'グループ・ゼロ'
       - '松文館'
-    note: '同名 imprint × 複数 publisher (2 groups) → adult/mainstream collision の可能性、 seed には入れない'
+    note: '同名 imprint × 複数 publisher (2 groups) → adult/mainstream collision の可能性、
+      seed には入れない'
   - imprint: 'メンズ宣言'
     publishers:
       - '大都社/秋水社'
       - '秋水社ORIGINAL'
-    note: '同名 imprint × 複数 publisher (2 groups) → adult/mainstream collision の可能性、 seed には入れない'
+    note: '同名 imprint × 複数 publisher (2 groups) → adult/mainstream collision の可能性、
+      seed には入れない'
   - imprint: 'レジェンドコミック'
     publishers:
       - 'グループ・ゼロ'
       - '松文館'
-    note: '同名 imprint × 複数 publisher (2 groups) → adult/mainstream collision の可能性、 seed には入れない'
+    note: '同名 imprint × 複数 publisher (2 groups) → adult/mainstream collision の可能性、
+      seed には入れない'
   - imprint: '永遠娘'
     publishers:
       - '茜新社'
       - '茜新社(電子)'
-    note: 'sub-imprint 注釈あり (mainstream + adult の同名 imprint collision の可能性)、 seed には入れない'
+    note: 'sub-imprint 注釈あり (mainstream + adult の同名 imprint collision の可能性)、 seed
+      には入れない'
   - imprint: '禁断ハーレム'
     publishers:
       - 'グループ・ゼロ'
       - '松文館'
-    note: '同名 imprint × 複数 publisher (2 groups) → adult/mainstream collision の可能性、 seed には入れない'
+    note: '同名 imprint × 複数 publisher (2 groups) → adult/mainstream collision の可能性、
+      seed には入れない'
   - imprint: '女子校生美女マニア'
     publishers:
       - 'グループ・ゼロ'
       - '松文館'
-    note: '同名 imprint × 複数 publisher (2 groups) → adult/mainstream collision の可能性、 seed には入れない'
+    note: '同名 imprint × 複数 publisher (2 groups) → adult/mainstream collision の可能性、
+      seed には入れない'
   - imprint: '萌姫コミック'
     publishers:
       - 'グループ・ゼロ'
       - '松文館'
-    note: '同名 imprint × 複数 publisher (2 groups) → adult/mainstream collision の可能性、 seed には入れない'
+    note: '同名 imprint × 複数 publisher (2 groups) → adult/mainstream collision の可能性、
+      seed には入れない'
+false_positives:
+  - imprint: SPコミックス
+    publisher: リイド社
+    fp_total: 2212
+    total_hits: 2212
+    fp_rate: 100
+    note: probe 100% FP, mainstream (ゴルゴ13 / 浅見光彦 系)
+  - imprint: マンサンコミックス
+    publisher: 実業之日本社
+    fp_total: 1526
+    total_hits: 1526
+    fp_rate: 100
+    note: probe 100% FP, mystery (浅見光彦トラベルミステリー 等)
+  - imprint: ヴァルキリーコミックス
+    publisher: キルタイムコミュニケーション
+    fp_total: 409
+    total_hits: 409
+    fp_rate: 100
+    note: probe 100% FP, modern action manga (異世界喰滅のサメ 等)
+  - imprint: コアコミックス
+    publisher: コアマガジン
+    fp_total: 170
+    total_hits: 181
+    fp_rate: 93.9
+    note: probe 93.9% FP, mainstream 寄り
+  - imprint: OKS COMIX
+    publisher: オークス
+    fp_total: 62
+    total_hits: 74
+    fp_rate: 83.8
+    note: probe 83.8% FP, mainstream 寄り
+  - imprint: ワールドコミックス
+    publisher: 久保書店
+    fp_total: 70
+    total_hits: 92
+    fp_rate: 76.1
+    note: probe 76.1% FP, 同名 imprint で mainstream の方が多い
+  - imprint: 別冊エースファイブコミックス
+    publisher: 松文館
+    fp_total: 143
+    total_hits: 248
+    fp_rate: 57.7
+    note: probe 57.7% FP, 過半数が mainstream
+  - imprint: ネオコミックス
+    publisher: 辰巳出版
+    fp_total: 11
+    total_hits: 12
+    fp_rate: 91.7
+    note: probe 91.7% FP
+  - imprint: TECHGIAN STYLE
+    publisher: KADOKAWA
+    fp_total: 15
+    total_hits: 15
+    fp_rate: 100
+    note: probe 100% FP (フォトカノ等の game 派生)
+  - imprint: ダイナコミックス
+    publisher: 松文館
+    fp_total: 4
+    total_hits: 4
+    fp_rate: 100
+    note: probe 100% FP (sample 少)
+  - imprint: マイウェイコミックス
+    publisher: メディアックス
+    fp_total: 2
+    total_hits: 2
+    fp_rate: 100
+    note: probe 100% FP (sample 少)
+  - imprint: ダイトコミックス
+    publisher: 大都社/少年画報社
+    fp_total: 2
+    total_hits: 2
+    fp_rate: 100
+    note: probe 100% FP (湘南グラフィティ 等)
+  - imprint: ホットミルクコミックス
+    publisher: コアマガジン
+    fp_total: 1
+    total_hits: 1
+    fp_rate: 100
+    note: probe 100% FP (sample 1 件のみ、 削除候補)
+  - imprint: コミック文庫
+    publisher: フランス書院
+    fp_total: 1
+    total_hits: 1
+    fp_rate: 100
+    note: probe 100% FP (sample 1 件のみ、 削除候補)
+  - imprint: DOコミックス
+    publisher: ヒット出版社
+    fp_total: 1
+    total_hits: 1
+    fp_rate: 100
+    note: probe 100% FP (sample 1 件のみ、 削除候補)
+  - imprint: サンワコミックス
+    publisher: 三和出版
+    fp_total: 1
+    total_hits: 2
+    fp_rate: 50
+    note: probe 50% FP (sample 少、 ambiguous)
+  - imprint: TENMA COMICS EX
+    publisher: 茜新社
+    fp_total: 1
+    total_hits: 2
+    fp_rate: 50
+    note: probe 50% FP (sample 少、 ambiguous)
