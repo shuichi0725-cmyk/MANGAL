@@ -233,6 +233,52 @@ describe("baseTitle / normalizeSeriesKey", () => {
       normalizeSeriesKey("境界のRinne (りんね)"),
     );
   });
+
+  // 2026-05-08: MADB-style 通巻表記サフィックスの集約。
+  // MADB は「Monster v.5」 「20世紀少年 Volume.1」 「Happy! v.13」 「21世紀少年 上」
+  // のような space 区切りで series を細分化発行する。 これらを親 series 名に
+  // 集約する。 keyword (no/vol/v/volume) または 上/下 が必須なので、 単純な
+  // 末尾英単語 (Dr. House) や bare title は誤マッチしない。
+  it("strips MADB-style v.N / vol.N / Volume.N suffix (space-only delimiter)", () => {
+    expect(baseTitle("Monster v.1")).toBe("Monster");
+    expect(baseTitle("Monster v.5")).toBe("Monster");
+    expect(baseTitle("Monster v.9")).toBe("Monster");
+    expect(baseTitle("Happy! v.13")).toBe("Happy!");
+    expect(baseTitle("Happy! v.1")).toBe("Happy!");
+    expect(baseTitle("Pineapple army v.2")).toBe("Pineapple army");
+    expect(baseTitle("20世紀少年 Volume.1")).toBe("20世紀少年");
+    expect(baseTitle("20世紀少年 Volume.10")).toBe("20世紀少年");
+  });
+
+  it("strips MADB-style 上 / 下 / 上巻 / 下巻 (space-only delimiter)", () => {
+    expect(baseTitle("21世紀少年 上")).toBe("21世紀少年");
+    expect(baseTitle("21世紀少年 下")).toBe("21世紀少年");
+    expect(baseTitle("21世紀少年 上巻")).toBe("21世紀少年");
+    expect(baseTitle("21世紀少年 下巻")).toBe("21世紀少年");
+  });
+
+  it("regression: bare titles and english punctuation must not be eaten", () => {
+    // bare title をそのまま残す
+    expect(baseTitle("Monster")).toBe("Monster");
+    expect(baseTitle("21世紀少年")).toBe("21世紀少年");
+    expect(baseTitle("Happy!")).toBe("Happy!");
+    // 英語 punctuation 入りタイトル (= keyword 一致なし、 誤マッチしない)
+    expect(baseTitle("Dr. House")).toBe("Dr. House");
+  });
+
+  it("21世紀少年 と 20世紀少年 は別作品として保持される (continuity check)", () => {
+    // 20世紀少年 と 21世紀少年 は別 series。 baseTitle が 21 → 20 に
+    // 削るような誤動作をしないことを担保。
+    expect(baseTitle("20世紀少年")).toBe("20世紀少年");
+    expect(baseTitle("21世紀少年")).toBe("21世紀少年");
+    expect(baseTitle("20世紀少年 Volume.1")).toBe("20世紀少年");
+    expect(baseTitle("21世紀少年 Volume.1")).toBe("21世紀少年");
+    expect(baseTitle("21世紀少年 上巻")).toBe("21世紀少年");
+    // normalizeSeriesKey でも別物として保持
+    expect(normalizeSeriesKey("20世紀少年")).not.toBe(
+      normalizeSeriesKey("21世紀少年"),
+    );
+  });
 });
 
 describe("buildSeriesKey (C2 fix)", () => {
