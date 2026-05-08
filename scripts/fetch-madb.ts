@@ -27,6 +27,7 @@
 import "./_env";
 import fs from "node:fs";
 import path from "node:path";
+import YAML from "yaml";
 import {
   type EditionType,
   EDITION_LABELS,
@@ -91,6 +92,52 @@ function parseArgs(argv: string[]): Args {
 }
 
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
+
+/**
+ * MADB の publisher / magazine literal は「漢字　∥　カナ」 (= 全角空白 +
+ * ダブルスラッシュ + 全角空白) で連結された 1 文字列で発行される。
+ * 例: "講談社　∥　コウダンシャ" / "週刊少年ジャンプ　∥　シュウカンショウネンジャンプ"
+ *
+ * downstream で扱いやすいよう漢字部分のみ抽出。 連結子が無い場合は元値
+ * をそのまま返す (= 海外版書誌 等の例外ケース安全)。
+ */
+function splitMadbLiteral(s: string | null): string | null {
+  if (!s) return null;
+  const idx = s.indexOf("∥");
+  return (idx >= 0 ? s.slice(0, idx) : s).trim() || null;
+}
+
+/**
+ * publishers.yml / magazines.yml を読み込んで「name → key」 逆引きマップ
+ * を作る。 fetch-wikipedia の loadMasterMaps を縮約した版。 read-only。
+ */
+type MasterMaps = {
+  publisher: Map<string, string>;
+  magazine: Map<string, string>;
+};
+
+let cachedMasters: MasterMaps | null = null;
+
+function getMasters(): MasterMaps {
+  if (cachedMasters) return cachedMasters;
+  const dataDir = path.join(process.cwd(), "data");
+  const pubYaml = YAML.parse(
+    fs.readFileSync(path.join(dataDir, "publishers.yml"), "utf8"),
+  ) as Record<string, { name: string }>;
+  const magYaml = YAML.parse(
+    fs.readFileSync(path.join(dataDir, "magazines.yml"), "utf8"),
+  ) as Record<string, { name: string }>;
+  const publisher = new Map<string, string>();
+  for (const [k, v] of Object.entries(pubYaml)) {
+    publisher.set(v.name.normalize("NFKC"), k);
+  }
+  const magazine = new Map<string, string>();
+  for (const [k, v] of Object.entries(magYaml)) {
+    magazine.set(v.name.normalize("NFKC"), k);
+  }
+  cachedMasters = { publisher, magazine };
+  return cachedMasters;
+}
 
 type SparqlBinding = Record<string, { type?: string; value?: string }>;
 
@@ -242,6 +289,8 @@ type VolumeStmts = {
   selectSeries: Stmt;
   insertSeries: Stmt;
   updateSeriesYear: Stmt;
+  updateSeriesPublisherKey: Stmt;
+  updateSeriesMagazineKey: Stmt;
   insertSeriesAuthor: Stmt;
   selectEdition: Stmt;
   insertEdition: Stmt;
@@ -267,6 +316,20 @@ function getStmts(db: DB): VolumeStmts {
     updateSeriesYear: db.prepare(
       `UPDATE series
        SET year_started = ?, year_ended = ?,
+           updated_at = strftime('%Y-%m-%dT%H:%M:%SZ','now')
+       WHERE id = ?`,
+    ),
+    // COALESCE で既存値があれば touch しない (= 別 record で先に設定された
+    // publisher_key / magazine_key を上書きで失わないため)。
+    updateSeriesPublisherKey: db.prepare(
+      `UPDATE series
+       SET publisher_key = COALESCE(publisher_key, ?),
+           updated_at = strftime('%Y-%m-%dT%H:%M:%SZ','now')
+       WHERE id = ?`,
+    ),
+    updateSeriesMagazineKey: db.prepare(
+      `UPDATE series
+       SET magazine_key = COALESCE(magazine_key, ?),
            updated_at = strftime('%Y-%m-%dT%H:%M:%SZ','now')
        WHERE id = ?`,
     ),
@@ -332,13 +395,35 @@ function upsertVolume(db: DB, author: AuthorRef, rec: MadbRec): void {
   });
   const seriesDisplay = baseTitle(titleForKey);
 
-  const editionType: EditionType = classifyEdition(rec.title ?? "");
+  let editionType: EditionType = classifyEdition(rec.title ?? "");
   const volumeNumber = rec.title ? extractVolumeNumber(rec.title) : null;
+  // Task 1: 巻番号が抽出できない record は本編 series でないことが多い
+  // (= 関連書籍 / セット商品 / ガイドブック / 全巻パック)。 標準 edition
+  // (= type=standard) に混ぜると vol1 に集約されて誤集計になるため、
+  // edition.type='other' に分離する。 既に classifyEdition が "完全版"
+  // 等を識別している場合 (= editionType !== "standard") は触らない。
+  if (volumeNumber === null && editionType === "standard") {
+    editionType = "other";
+  }
   const releaseDate = normalizeReleaseDate(rec.datePublished);
   const issuedYear =
     releaseDate && /^\d{4}/.test(releaseDate) ? Number(releaseDate.slice(0, 4)) : null;
 
+  // Task 2: publisher literal を 「漢字　∥　カナ」 から漢字だけ抽出。
+  // Task 3: 同様に magazine literal の漢字部分のみ取る。
+  const publisherName = splitMadbLiteral(rec.publisher);
+  const magazineName = splitMadbLiteral(rec.magazine);
+
   const stmts = getStmts(db);
+  const masters = getMasters();
+  const publisherKey =
+    publisherName !== null
+      ? (masters.publisher.get(publisherName.normalize("NFKC")) ?? null)
+      : null;
+  const magazineKey =
+    magazineName !== null
+      ? (masters.magazine.get(magazineName.normalize("NFKC")) ?? null)
+      : null;
 
   // ===== series upsert =====
   const existingSeries = stmts.selectSeries.get(seriesKey) as
@@ -379,6 +464,16 @@ function upsertVolume(db: DB, author: AuthorRef, rec: MadbRec): void {
     stmts.insertSeriesAuthor.run(seriesId, author.mangakaId, "writer_artist");
   }
 
+  // Task 2/3: series.publisher_key / magazine_key を master 解決値で埋める。
+  // 既存値がある場合は COALESCE で touch しない (= 別 record で先に設定
+  // された値を新しい record で上書きしない)。
+  if (publisherKey !== null) {
+    stmts.updateSeriesPublisherKey.run(publisherKey, seriesId);
+  }
+  if (magazineKey !== null) {
+    stmts.updateSeriesMagazineKey.run(magazineKey, seriesId);
+  }
+
   // ===== edition upsert =====
   const existingEdition = stmts.selectEdition.get(seriesId, editionType) as
     | { id: number; year_started: number | null; year_ended: number | null }
@@ -387,8 +482,9 @@ function upsertVolume(db: DB, author: AuthorRef, rec: MadbRec): void {
   let editionId: number;
   if (existingEdition) {
     editionId = existingEdition.id;
-    if (rec.publisher) {
-      stmts.updateEditionImprint.run(rec.publisher, editionId);
+    // Task 2: imprint には publisher 漢字部分のみ (= ∥ カナ部分は除外)
+    if (publisherName) {
+      stmts.updateEditionImprint.run(publisherName, editionId);
     }
     if (issuedYear !== null) {
       const newStart =
@@ -408,11 +504,12 @@ function upsertVolume(db: DB, author: AuthorRef, rec: MadbRec): void {
     }
   } else {
     // editions.label は NOT NULL なので EDITION_LABELS の固定文字列を使う。
+    // Task 2: imprint には publisher 漢字部分のみ (= ∥ カナ部分は除外)
     const info = stmts.insertEdition.run(
       seriesId,
       editionType,
       EDITION_LABELS[editionType],
-      rec.publisher,
+      publisherName,
       issuedYear,
       issuedYear,
     );
