@@ -308,7 +308,10 @@ db:init
 - volumes: 689
 - sources `madb`: 689 行
 - publisher_key fill: **118/123 (96%)**
-- magazine_key fill: 0/123 (= fetch:wikipedia 後段で埋まる想定、 未確認)
+- magazine_key fill: **26/123 (21%)** ← Wikipedia 補完で 0 → 26 (= 2026-05-08 wiki 実走で達成、 layer C 解決率 100%)
+- publisher_key fill: **119/123 (97%)** ← MADB 118 + Wiki 補完で +1
+- title_kana fill (Wiki 由来): 18/123 / synopsis: 37/123 / genres: 20/123
+- Layer A 記事発見率: **31% (38/123)** ← MADB の series 粒度が細かすぎ (= Monster が 10 series、 Happy! が 16 series 等に分割) で Wikipedia 検索 hit 率が低い。 真の改善は Tier 2 #1 (重版集約) / #4 (yaml 再生成) 必要
 
 ## 重要な hardcode 修正 履歴
 
