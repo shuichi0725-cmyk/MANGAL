@@ -37,10 +37,22 @@ jobs:
       - name: Run MADB probe
         run: npm run probe:madb
 
-      - name: Show probe report (head)
+      - name: Show Phase 1 result table
         if: always()
         run: |
-          echo "=== docs/madb-probe.md (head) ==="
+          echo "=== Phase 1: per-mangaka 結果 ==="
+          awk '/^## Phase 1: per-mangaka 結果/{flag=1; next} /^## /{flag=0} flag' docs/madb-probe.md || true
+
+      - name: Show creator literal patterns (top 30 per author)
+        if: always()
+        run: |
+          echo "=== creator literal patterns (per surname CONTAINS) ==="
+          awk '/^### 各作家の姓 CONTAINS で発掘/,0' docs/madb-probe.md || true
+
+      - name: Show probe report (head 80)
+        if: always()
+        run: |
+          echo "=== docs/madb-probe.md (head 80, for sanity check) ==="
           head -80 docs/madb-probe.md || true
           echo
           echo "=== out/probe-madb/ files ==="
