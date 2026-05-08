@@ -101,60 +101,63 @@ jobs:
 
       - name: Probe MangaBookSeries → MangaMagazine link predicate
         if: always()
-        # 前 run で schema:isPartOf は MangaBookSeries を指しており (=
-        # 665/689)、 真の雑誌情報はそこから更に 1 hop 必要だと判明。
-        # MangaBookSeries の outgoing predicates と、 各 predicate の
-        # target type 分布を SPARQL で直接取得して、 雑誌への正しい link
-        # predicate を発見する。
+        # 前 run で確定: MangaBookSeries の outgoing には MangaMagazine
+        # への直接 link が無い (= [3] 0 件)。 outgoing 先の entity は
+        # Agent (= 作家) のみ。 つまり magazine 情報は MangaBookSeries
+        # にはなく、 別 entity 経由で繋がっている。 MangaMagazinePublication
+        # (30k 件) を pivot にした探索を追加。
         run: |
           set -euo pipefail
           MADB_SPARQL="https://mediaarts-db.artmuseums.go.jp/sparql"
 
-          echo "=== [1] outgoing predicates of class:MangaBookSeries (top 30) ==="
-          QUERY1='PREFIX schema: <https://schema.org/>
-          PREFIX class: <https://mediaarts-db.artmuseums.go.jp/data/class#>
-          SELECT ?p (COUNT(*) AS ?n) WHERE {
-            ?s a class:MangaBookSeries ;
-               ?p ?o .
-          } GROUP BY ?p ORDER BY DESC(?n) LIMIT 30'
-          curl -sS -X POST \
-            -H 'Accept: application/sparql-results+json' \
-            --data-urlencode "query=$QUERY1" \
-            "$MADB_SPARQL" \
-            | jq -r '.results.bindings[] | "\(.n.value | tonumber | tostring) × \(.p.value)"' \
-            || echo "(SPARQL fetch failed)"
+          run_query() {
+            local label="$1"
+            local query="$2"
+            echo "=== $label ==="
+            curl -sS -X POST \
+              -H 'Accept: application/sparql-results+json' \
+              --data-urlencode "query=$query" \
+              "$MADB_SPARQL" \
+              | jq -r '.results.bindings[] | [(.[].value)] | join("  ×  ")' \
+              || echo "(SPARQL fetch failed)"
+            echo
+          }
 
-          echo
-          echo "=== [2] target type distribution from MangaBookSeries (any predicate, top 15) ==="
-          QUERY2='PREFIX schema: <https://schema.org/>
-          PREFIX class: <https://mediaarts-db.artmuseums.go.jp/data/class#>
-          SELECT ?type (COUNT(*) AS ?n) WHERE {
-            ?s a class:MangaBookSeries ;
-               ?p ?next .
-            ?next a ?type .
-          } GROUP BY ?type ORDER BY DESC(?n) LIMIT 15'
-          curl -sS -X POST \
-            -H 'Accept: application/sparql-results+json' \
-            --data-urlencode "query=$QUERY2" \
-            "$MADB_SPARQL" \
-            | jq -r '.results.bindings[] | "\(.n.value | tonumber | tostring) × \(.type.value)"' \
-            || echo "(SPARQL fetch failed)"
+          # [4] MangaMagazinePublication の outgoing predicates
+          run_query "[4] MangaMagazinePublication outgoing predicates (top 25)" \
+            'PREFIX class: <https://mediaarts-db.artmuseums.go.jp/data/class#>
+             SELECT ?p (COUNT(*) AS ?n) WHERE {
+               ?pub a class:MangaMagazinePublication ; ?p ?o .
+             } GROUP BY ?p ORDER BY DESC(?n) LIMIT 25'
 
-          echo
-          echo "=== [3] specific predicates from MangaBookSeries → MangaMagazine ==="
-          QUERY3='PREFIX schema: <https://schema.org/>
-          PREFIX class: <https://mediaarts-db.artmuseums.go.jp/data/class#>
-          SELECT ?p (COUNT(*) AS ?n) WHERE {
-            ?s a class:MangaBookSeries ;
-               ?p ?mag .
-            ?mag a class:MangaMagazine .
-          } GROUP BY ?p ORDER BY DESC(?n) LIMIT 10'
-          curl -sS -X POST \
-            -H 'Accept: application/sparql-results+json' \
-            --data-urlencode "query=$QUERY3" \
-            "$MADB_SPARQL" \
-            | jq -r '.results.bindings[] | "\(.n.value | tonumber | tostring) × \(.p.value)"' \
-            || echo "(SPARQL fetch failed)"
+          # [5] MangaMagazinePublication が MangaBookSeries と MangaMagazine
+          #     を両方指すなら、 真の pivot 確定
+          run_query "[5] MangaMagazinePublication pivot predicates (?p1 to BookSeries, ?p2 to Magazine)" \
+            'PREFIX class: <https://mediaarts-db.artmuseums.go.jp/data/class#>
+             SELECT ?p1 ?p2 (COUNT(*) AS ?n) WHERE {
+               ?pub a class:MangaMagazinePublication ;
+                    ?p1 ?series ;
+                    ?p2 ?mag .
+               ?series a class:MangaBookSeries .
+               ?mag a class:MangaMagazine .
+             } GROUP BY ?p1 ?p2 ORDER BY DESC(?n) LIMIT 10'
+
+          # [6] 逆向き: MangaMagazine を指している predicates (= incoming)
+          run_query "[6] predicates pointing TO MangaMagazine (top 10)" \
+            'PREFIX class: <https://mediaarts-db.artmuseums.go.jp/data/class#>
+             SELECT ?p (COUNT(*) AS ?n) WHERE {
+               ?s ?p ?mag . ?mag a class:MangaMagazine .
+             } GROUP BY ?p ORDER BY DESC(?n) LIMIT 10'
+
+          # [7] MangaBook 自身が MangaMagazinePublication / MangaMagazineIssue を
+          #     直接指す predicate がないか (= isPartOf 以外)
+          run_query "[7] MangaBook outgoing predicates pointing to Magazine-family entity" \
+            'PREFIX class: <https://mediaarts-db.artmuseums.go.jp/data/class#>
+             SELECT ?p ?type (COUNT(*) AS ?n) WHERE {
+               ?b a class:MangaBook ; ?p ?o .
+               ?o a ?type .
+               FILTER(?type IN (class:MangaMagazine, class:MangaMagazineIssue, class:MangaMagazinePublication))
+             } GROUP BY ?p ?type ORDER BY DESC(?n) LIMIT 10'
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
