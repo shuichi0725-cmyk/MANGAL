@@ -416,3 +416,81 @@ c879e72  probe(isbn-sources): add Google Books + MADB comparison probe
 - 開発ブランチ: `claude/manga-database-affiliate-3x0ms`
 - すべての変更はこのブランチ上で commit/push
 - main へ merge していない (= ユーザの判断待ち)
+
+---
+
+# 2026-05-08 (午後): MADB SPARQL → CSV 路線に転換
+
+## 経緯
+
+ユーザが MADB 公式 download 機能由来の `cm104_*.csv` (= 10000 件、 cm101 全量
+の差分 export) をアップロード。 中身を分析して以下が判明:
+
+1. **`レーティング` column の存在**: 成年コミック判定が **1 列の equality check**
+   で完結。 SPARQL で組もうとしていた publisher/imprint ベース判定 (= Phase 0-5
+   既設計) より圧倒的にクリーン。 cm104 では 216 件 (2.16%) が rating=成年コミック。
+2. **「版表示」「巻」 column が独立化**: `完全版` / `特装版` / 巻番号が CSV では
+   structured で取得可能。 SPARQL で必要だった schema discovery / chapter 集約
+   ロジックが不要になる。
+3. **rate limit 一切なし**: 70MB CSV を 1 パス読むだけで 397k record 全件処理可能。
+
+ユーザ意思決定 (= AskUserQuestion 2 回):
+- **データソース**: cm101 全量 CSV を毎回 fetch (= SPARQL 廃止)
+- **adult 扱い**: import 時に完全除外、 「ぬけ」 catch のため二重 filter
+
+## 完成した成果物
+
+1. **`lib/madb-csv.ts`** (新規、 ≈210 行) — CSV parser + 4 層 adult filter +
+   row 変換ユーティリティ
+2. **`lib/madb-csv.test.ts`** (新規、 26 tests) — parser / adult filter /
+   author 分割 / volume 数値化 / BOM strip 全 unit test 緑
+3. **`scripts/fetch-madb.ts`** (全面書き換え、 SPARQL → CSV) — 1 パス CSV 読み +
+   作者 1:N index 紐付け + 既存 upsertVolume パターン流用
+4. **`.github/workflows/fetch-madb.yml`** (改修) — `csv_url` input 受け付け、
+   curl 取得 → `--csv-path` 渡し、 SPARQL probe step 撤去
+
+## ローカル検証結果 (= cm104 で 100 mangaka sample)
+
+```
+[csv] read 10000 rows, parsed=10000, matched=24, queued=24
+  total rows           : 10000
+  parsed rows          : 10000
+  parse errors         : 0
+  skipped (rating)     : 216    ← 1 次 filter (= MADB 公式 rating)
+  skipped (summary)    : 0      ← 2 次 (= rating 漏れ catch、 cm104 では発火なし)
+  skipped (imprint)    : 48     ← 3 次 (= adult_imprints DB 照合、 ヴァルキリー等 catch)
+  skipped (publisher)  : 0      ← 4 次 (= adult_publishers DB 照合)
+  matched rows         : 24
+  upserted volumes     : 24
+    inserted           : 24
+```
+
+→ 1 次 (= レーティング column) で 216 件全件 catch、 3 次 (= imprint 照合) で
+さらに 48 件追加 catch (= レーティング空欄でも adult imprint 由来の record)。
+ユーザ懸念 「ぬけがあると思われる」 への保険として機能している。
+
+検証で確認した投入データの精度:
+- publisher_key 解決: shonen-gahosha / kadokawa / mag-garden 等 全て publishers.yml と整合
+- imprint 値: HARTA COMIX / ACTION COMICS / ヤングジャンプコミックス・ウルトラ 等正確
+- volume 番号: CSV 「巻」 column 直接採用で 7 / 14 / 6 / 9 / 11 等 正解
+- edition type: 巻番号取れた record は standard、 取れない 「けんかめし」 は other
+- author 紐付け: ONE → ワンパンマン + バーサス (= 1:N 紐付け正常)
+
+## アーキテクチャ転換: 既存プランへの影響
+
+| プラン | 扱い |
+|---|---|
+| 「MADB 本格 fetcher (SPARQL)」 | **廃案**。 CSV 路線で fetch-madb.ts 書き直し済 |
+| 「baseTitle 強化プラン」 | **継続有効**。 lib/edition.ts の baseTitle rule は CSV 路線でも必要 |
+| 「完全版判定 + chapter 集約」 | **大幅縮小**。 CSV の「版表示」 column が直接判定材料 |
+| 「Tier 1B DENY_LIST + adult_imprints」 | **継続有効、 役割変更**。 CSV `レーティング` 漏れ catch 用 secondary filter |
+| 「fetch:wikipedia hit-rate 解明」 | **継続有効**。 magazine_key は CSV / JSON-LD でも取れない |
+
+## 次セッションでの推奨アクション
+
+1. ユーザが **cm101.csv 全量 をアップロード** (= 公式 portal 由来) → 397k 件
+   フル import で 6,751 mangaka 全員 coverage 計測
+2. 既存 50 mangaka batch との比較 (= NDL のみ vs MADB のみ)
+3. workflow GH run で `csv_url` 経由動作確認 (= 公式 download URL 確定後)
+4. adult_imprints seed quality 改善 (= マンサンコミックス / SP コミックス 等の
+   false-positive 除外)。 既存 Phase 0-5 計画範疇

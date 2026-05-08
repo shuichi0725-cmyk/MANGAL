@@ -1,28 +1,34 @@
-name: 📥 Fetch MADB (test run)
+name: 📥 Fetch MADB (CSV import test run)
 
-# 2026-05-08: scripts/fetch-madb.ts の動作確認用 standalone workflow。
-# bulk-promote-test workflow への統合は別プラン。
+# 2026-05-08: SPARQL 路線を廃止し、 MADB 公式 CSV (= cm101 マンガ単行本)
+# を直接 import する形に転換した。 旧 workflow は schema discovery / 完全版
+# 判定の SPARQL probe step を含んでいたが、 CSV では「版表示」「巻」「レー
+# ティング」 が独立 column 化されているため不要になった。
 #
 # データ責務分担 (= Tier 1 で確定):
 #   - MADB:      ISBN / publisher_key / volume_number / release_date / edition.type
 #   - Wikipedia: magazine_key / title_kana / genres / synopsis / demographic
 #
-# MADB は graph 構造的に 単行本 と 雑誌 の link を持たない (= MangaBook と
-# MangaMagazine が分離されたサブグラフ)。 そのため magazine 情報は
-# 既存の fetch:wikipedia (= NDL pipeline で実証済) で別途埋める。
+# adult filter (= scripts/fetch-madb.ts 4 層):
+#   1. レーティング = 成年コミック     ← MADB 公式 (= 一次)
+#   2. 概要 に 成年コミック 含む        ← rating 漏れ catch
+#   3. 単行本レーベル ∈ adult_imprints ← Tier 2 シード DB 照合
+#   4. 発行者名 ∈ adult_publishers      ← Tier 1 シード DB 照合
+#
+# bulk-promote-test workflow への統合は別プラン。
 
 on:
   workflow_dispatch:
     inputs:
-      qids:
-        description: "空白区切りの QID 列 (= 既定: 6 作家 probe-madb と同じ subset、 CSV mangaka.qid 真値)"
+      csv_url:
+        description: "MADB cm101.csv の直リンク URL (= 公式 portal の download ボタンからコピー)"
         required: true
-        default: "Q3782468 Q241885 Q348436 Q600217 Q24865213 Q972529"
-      include_original_author:
-        description: "[原作] credits も拾う (= 諫山創 → キメツ学園スピンオフ等)"
+        type: string
+      mangaka_limit:
+        description: "import 対象の mangaka 数上限 (= 動作確認用、 空 / 0 で全員)"
         required: false
-        default: "false"
-        type: boolean
+        default: "0"
+        type: string
 
 permissions:
   contents: read
@@ -31,15 +37,20 @@ jobs:
   fetch:
     runs-on: ubuntu-latest
     env:
-      INPUT_QIDS: ${{ inputs.qids }}
-      INPUT_INCLUDE_OA: ${{ inputs.include_original_author }}
+      INPUT_CSV_URL: ${{ inputs.csv_url }}
+      INPUT_LIMIT: ${{ inputs.mangaka_limit }}
     steps:
       - uses: actions/checkout@v4
 
       - name: Validate inputs
         run: |
-          if ! printf '%s' "$INPUT_QIDS" | grep -Eq '^Q[0-9]+( +Q[0-9]+)*$'; then
-            echo "::error::qids は空白区切りの 'Q+数字' のみ"
+          if [ -z "$INPUT_CSV_URL" ]; then
+            echo "::error::csv_url is required"
+            exit 1
+          fi
+          # URL は https:// 始まりのみ許可 (= file:// 等を防ぐ)
+          if ! printf '%s' "$INPUT_CSV_URL" | grep -Eq '^https://'; then
+            echo "::error::csv_url must be https://"
             exit 1
           fi
 
@@ -59,22 +70,42 @@ jobs:
       - name: Import mangaka CSV (full)
         run: npm run db:import:mangaka
 
-      - name: Fetch MADB for each QID (= ISBN + publisher 担当)
+      - name: Seed adult publisher / mangaka lists (= Wikipedia + manual)
+        # adult-publishers / adult-mangaka-known テーブルを seed しておくと
+        # MADB CSV の adult filter 4 次 (= 発行者名照合) が発火する。 imprint
+        # seed (Tier 2) は data/seeds/adult-imprints.yml が source-of-truth で
+        # db:init 後に seed:adult-imprints から流す。
         run: |
-          OA_FLAG=()
-          if [ "$INPUT_INCLUDE_OA" = "true" ]; then
-            OA_FLAG+=(--include-original-author)
+          npm run fetch:adult-lists
+          npm run seed:adult-imprints
+
+      - name: Download MADB cm101 CSV
+        run: |
+          mkdir -p .cache/madb
+          # User-Agent を付ける (= portal が bot を弾く可能性に対する保険)
+          curl -sSL \
+            -A "MANGAL-MADBFetcher/0.2 (+https://github.com/shuichi0725-cmyk/MANGAL)" \
+            -o .cache/madb/cm101.csv \
+            "$INPUT_CSV_URL"
+          # 期待 column 数 (= 52) を header で確認
+          head -1 .cache/madb/cm101.csv | awk -F',' '
+            { if (NF != 52) { print "ERROR: expected 52 columns, got " NF; exit 1 } else { print "ok: 52 columns" } }
+          '
+          echo "csv lines: $(wc -l < .cache/madb/cm101.csv)"
+          echo "csv bytes: $(stat -c%s .cache/madb/cm101.csv)"
+
+      - name: Fetch MADB (CSV import)
+        # mangaka_limit が空 / 0 なら全員 import、 数値なら DB の上から N 名のみ。
+        run: |
+          ARGS=(--csv-path .cache/madb/cm101.csv --all)
+          if [ -n "$INPUT_LIMIT" ] && [ "$INPUT_LIMIT" != "0" ]; then
+            ARGS+=(--limit "$INPUT_LIMIT")
           fi
-          for q in $INPUT_QIDS; do
-            echo "::group::fetch:madb $q"
-            npm run fetch:madb -- --qid "$q" "${OA_FLAG[@]}"
-            echo "::endgroup::"
-          done
+          npm run fetch:madb -- "${ARGS[@]}"
 
       - name: Fetch Wikipedia (= magazine_key / title_kana / genres / synopsis 補完)
-        # MADB は graph 構造上 単行本 → 雑誌 link を持たないので、 magazine
-        # 情報は Wikipedia infobox から補完する (= 既存 NDL pipeline と同じ)。
-        # 1.1 s/req × series 数。 6 作家 probe (= ~123 series) なら 数分。
+        # MADB CSV には magazine link が無いので、 既存 NDL pipeline と同じ
+        # Wikipedia infobox 補完を流す。 1.1 s/req × series 数。
         run: npm run fetch:wikipedia
 
       - name: DB summary report
@@ -83,48 +114,6 @@ jobs:
       - name: DB top 30 (= MADB 由来 series が並ぶ想定)
         run: npm run db:report -- --top 30
 
-      - name: Show MADB raw dumps directory
-        if: always()
-        run: |
-          echo "=== .cache/madb/ files ==="
-          ls -la .cache/madb/ || true
-
-      - name: Probe edition predicate (= 「版表示」 URI 確定)
-        if: always()
-        # Monster CSV 分析で MADB は title でなく独立 column 「版表示」 で
-        # 「完全版」 / 「特装版」 を保持していると判明。 RDF predicate URI
-        # を発見するため、 MangaBook の outgoing predicates のうち value に
-        # 「完全版」 を持つものを直接 SPARQL で探る。 1 度判明したら fetcher
-        # の SPARQL に hard code して、 この step は削除可能。
-        run: |
-          set -euo pipefail
-          MADB_SPARQL="https://mediaarts-db.artmuseums.go.jp/sparql"
-          echo "=== predicates of class:MangaBook whose literal contains \"完全版\" ==="
-          QUERY='PREFIX class: <https://mediaarts-db.artmuseums.go.jp/data/class#>
-          SELECT ?p (COUNT(*) AS ?n) WHERE {
-            ?b a class:MangaBook ; ?p ?o .
-            FILTER(isLiteral(?o) && CONTAINS(STR(?o), "完全版"))
-          } GROUP BY ?p ORDER BY DESC(?n) LIMIT 10'
-          curl -sS -X POST \
-            -H 'Accept: application/sparql-results+json' \
-            --data-urlencode "query=$QUERY" \
-            "$MADB_SPARQL" \
-            | jq -r '.results.bindings[] | "\(.n.value) × \(.p.value)"' \
-            || echo "(SPARQL fetch failed)"
-          echo
-          echo "=== sample MangaBook with 完全版 (= verify URI mapping) ==="
-          QUERY2='PREFIX class: <https://mediaarts-db.artmuseums.go.jp/data/class#>
-          SELECT ?b ?p ?o WHERE {
-            ?b a class:MangaBook ; ?p ?o .
-            FILTER(isLiteral(?o) && STR(?o) = "完全版")
-          } LIMIT 3'
-          curl -sS -X POST \
-            -H 'Accept: application/sparql-results+json' \
-            --data-urlencode "query=$QUERY2" \
-            "$MADB_SPARQL" \
-            | jq -r '.results.bindings[] | "\(.b.value) -- \(.p.value) -- \(.o.value)"' \
-            || echo "(SPARQL fetch failed)"
-
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         if: always()
@@ -132,6 +121,5 @@ jobs:
           name: fetch-madb-run-${{ github.run_number }}
           path: |
             .cache/db.sqlite
-            .cache/madb/
             .cache/wikipedia/
           if-no-files-found: warn

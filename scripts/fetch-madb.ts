@@ -1,32 +1,30 @@
 /**
- * メディア芸術データベース (MADB) の SPARQL endpoint から、 指定漫画家の
- * 作品を取得して SQLite に投入する。 既存 fetch-ndl.ts の構造を踏襲、
- * NDL pipeline と並走する想定 (= ユーザ意思: NDL 仕組みは残置、 データは
- * MADB 由来に置換)。
+ * メディア芸術データベース (MADB) 公式 CSV (= cm101 マンガ単行本 全量、
+ * もしくは cm104 差分) を読み込んで SQLite に投入する fetcher。
  *
  * 使い方:
- *   npm run fetch:madb -- --qid Q11331084                    # 単一 mangaka (DB 紐付けあり)
- *   npm run fetch:madb -- --name "諫山創"                      # 名前指定 (= DB 紐付けなし)
- *   npm run fetch:madb -- --qid Q11331084 --include-original-author  # [原作] credits も拾う
- *   npm run fetch:madb -- --all                              # mangaka.qid IS NOT NULL の全員
- *   npm run fetch:madb -- --all --limit 50                   # 動作確認用
- *   npm run fetch:madb -- --qid Q11331084 --include-adult    # adult-credit 作家もスキップしない
+ *   npm run fetch:madb -- --csv-path .cache/madb/cm101.csv --qid Q11331084     # 単一 mangaka
+ *   npm run fetch:madb -- --csv-path .cache/madb/cm101.csv --name "諫山創"     # 名前指定
+ *   npm run fetch:madb -- --csv-path .cache/madb/cm101.csv --all               # mangaka.qid IS NOT NULL の全員
+ *   npm run fetch:madb -- --csv-path .cache/madb/cm101.csv --all --limit 50    # 動作確認
+ *   npm run fetch:madb -- --csv-path .cache/madb/cm101.csv --all --include-adult   # adult-credit 作家もスキップしない
  *
- * SPARQL endpoint: https://mediaarts-db.artmuseums.go.jp/sparql
+ * SPARQL 路線 (旧実装) からの転換理由:
+ *   - rate limit / schema discovery 不要
+ *   - 「版表示」「巻」「レーティング」が独立 column 化されており、 完全版判定 +
+ *     成年コミック判定が SPARQL より正確
+ *   - 70MB CSV を 1 パス読むだけで 397k record 全件処理 (= 数分)
  *
- * MADB の vocabulary は probe-madb.ts の schema discovery で確定済:
- *   class:MangaBook (= 漫画単行本、 397k 件)
- *   schema:creator (= 役割タグ + 名前を連結した literal、 例 "[著]諫山創")
- *   schema:isbn / schema:publisher / schema:isPartOf / schema:datePublished
- *   prop: prefix で MADB 独自プロパティ (= originalWorkCreator 等)
- *
- * NDL fetcher と異なり、 MADB は creator が literal なので URI dereferencing
- * 不要。 役割タグ (= [著]/[原作]/[画]/[作画]/[漫画]) と共著連結 (= [著]A,B)
- * を REGEX で吸収する。
+ * adult filter は 4 層 (= lib/madb-csv.ts isAdultMadbRecord 参照):
+ *   1. レーティング = 成年コミック     ← MADB 公式 rating (= 一次)
+ *   2. 概要に 成年コミック 含む          ← rating 漏れ catch
+ *   3. 単行本レーベル ∈ adult_imprints  ← imprint 単位の DB seed (= Tier 2)
+ *   4. 発行者名 ∈ adult_publishers      ← publisher 単位の DB seed (= Tier 1)
  */
 import "./_env";
 import fs from "node:fs";
 import path from "node:path";
+import readline from "node:readline";
 import YAML from "yaml";
 import {
   type EditionType,
@@ -35,43 +33,50 @@ import {
   buildSeriesKey,
   classifyEdition,
   extractVolumeNumber,
+  normalizeCreatorName,
   normalizeIsbn13,
   normalizeReleaseDate,
 } from "../lib/edition";
+import {
+  isAdultMadbRecord,
+  parseCsvLine,
+  parseVolumeNumber,
+  rowToMadbCsvRow,
+  splitAuthors,
+  stripBom,
+  type AdultMatchSignal,
+  type MadbCsvRow,
+} from "../lib/madb-csv";
 import type { Statement as BSStatement } from "better-sqlite3";
 import { openDb, recordSource, tx, type DB } from "./_db";
 
 type Stmt = BSStatement<unknown[], unknown>;
 
-const ENDPOINT = "https://mediaarts-db.artmuseums.go.jp/sparql";
-const REQUEST_INTERVAL_MS = 1100;
-const MAX_RETRIES = 4;
-const QUERY_LIMIT = 2000;
-
-const RAW_DIR = path.join(process.cwd(), ".cache", "madb");
-
 type Args = {
+  csvPath: string | null;
   qid: string | null;
   name: string | null;
   all: boolean;
   limit: number | null;
   includeAdult: boolean;
-  includeOriginalAuthor: boolean;
 };
 
 function parseArgs(argv: string[]): Args {
   const out: Args = {
+    csvPath: null,
     qid: null,
     name: null,
     all: false,
     limit: null,
     includeAdult: false,
-    includeOriginalAuthor: false,
   };
   for (let i = 0; i < argv.length; i++) {
     const a = argv[i];
     const next = argv[i + 1];
-    if (a === "--qid" && next) {
+    if (a === "--csv-path" && next) {
+      out.csvPath = next;
+      i++;
+    } else if (a === "--qid" && next) {
       out.qid = next;
       i++;
     } else if (a === "--name" && next) {
@@ -84,33 +89,15 @@ function parseArgs(argv: string[]): Args {
       i++;
     } else if (a === "--include-adult") {
       out.includeAdult = true;
-    } else if (a === "--include-original-author") {
-      out.includeOriginalAuthor = true;
     }
   }
   return out;
 }
 
-const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
-
 /**
- * MADB の publisher literal は「漢字　∥　カナ」 (= 全角空白 +
- * ダブルスラッシュ + 全角空白) で連結された 1 文字列で発行される。
- * 例: "講談社　∥　コウダンシャ"
- *
- * downstream で扱いやすいよう漢字部分のみ抽出。 連結子が無い場合は元値
- * をそのまま返す (= 海外版書誌 等の例外ケース安全)。
- */
-function splitMadbLiteral(s: string | null): string | null {
-  if (!s) return null;
-  const idx = s.indexOf("∥");
-  return (idx >= 0 ? s.slice(0, idx) : s).trim() || null;
-}
-
-/**
- * publishers.yml を読み込んで「name → key」 逆引きマップを作る。
- * magazine_key は MADB graph 構造上 単行本側から取れないので、
- * fetch:wikipedia 担当 (= ここでは扱わない)。
+ * publishers.yml の name → key 逆引きマップ。 series.publisher_key を
+ * MADB CSV の 発行者名 から解決するのに使う。
+ * magazine_key は MADB 構造上 単行本側から取れないので fetch:wikipedia 担当。
  */
 type MasterMaps = {
   publisher: Map<string, string>;
@@ -132,153 +119,80 @@ function getMasters(): MasterMaps {
   return cachedMasters;
 }
 
-type SparqlBinding = Record<string, { type?: string; value?: string }>;
-
 /**
- * SPARQL を POST + form-urlencoded で叩く。 GET より長文 query / CDN
- * キャッシュ回避に有利。 リトライは 5xx 系のみ exponential backoff。
+ * adult_imprints / adult_publishers テーブルから NFKC 正規化済の Set を作る。
+ * isAdultMadbRecord の引数として CSV の 1 row ごとに参照される。
  */
-async function sparqlFetch(query: string): Promise<{
-  ok: boolean;
-  bindings: SparqlBinding[];
-  error: string | null;
-}> {
-  for (let attempt = 0; attempt < MAX_RETRIES; attempt++) {
-    try {
-      const res = await fetch(ENDPOINT, {
-        method: "POST",
-        headers: {
-          Accept: "application/sparql-results+json",
-          "Content-Type": "application/x-www-form-urlencoded",
-          "User-Agent":
-            "MANGAL-MADBFetcher/0.1 (+https://github.com/shuichi0725-cmyk/MANGAL)",
-        },
-        body: `query=${encodeURIComponent(query)}`,
-      });
-      if (res.ok) {
-        const j = (await res.json()) as {
-          results?: { bindings?: SparqlBinding[] };
-        };
-        return {
-          ok: true,
-          bindings: j.results?.bindings ?? [],
-          error: null,
-        };
-      }
-      // 4xx は再試行しても変わらないので即座に失敗。 5xx のみ retry。
-      if (res.status < 500) {
-        const body = (await res.text()).slice(0, 200);
-        return {
-          ok: false,
-          bindings: [],
-          error: `HTTP ${res.status}: ${body.replace(/\s+/g, " ")}`,
-        };
-      }
-      console.warn(
-        `  [retry ${attempt + 1}/${MAX_RETRIES}] HTTP ${res.status}, backoff...`,
-      );
-    } catch (err) {
-      console.warn(
-        `  [retry ${attempt + 1}/${MAX_RETRIES}] ${err instanceof Error ? err.message : String(err)}, backoff...`,
-      );
-    }
-    await sleep(1000 * Math.pow(2, attempt)); // 1s / 2s / 4s / 8s
+function loadAdultSeeds(db: DB): {
+  adultImprints: Set<string>;
+  adultPublishers: Set<string>;
+} {
+  const adultImprints = new Set<string>();
+  for (const r of db.prepare("SELECT imprint FROM adult_imprints").all() as {
+    imprint: string;
+  }[]) {
+    adultImprints.add(r.imprint.normalize("NFKC"));
   }
-  return { ok: false, bindings: [], error: `failed after ${MAX_RETRIES} retries` };
+  const adultPublishers = new Set<string>();
+  for (const r of db.prepare("SELECT name FROM adult_publishers").all() as {
+    name: string;
+  }[]) {
+    adultPublishers.add(r.name.normalize("NFKC"));
+  }
+  return { adultImprints, adultPublishers };
 }
+
+/** upsertVolume が要求する作家識別。 mangaka_id が無い場合は null で OK。 */
+type AuthorRef = {
+  qid: string | null;
+  name: string;
+  altNames: string[];
+  mangakaId: number | null;
+};
 
 /**
- * SPARQL の REGEX literal にそのまま埋める時に正規表現メタ文字を escape。
- * MADB の創作者 literal には漢字主体だが、 念のためカッコ・アスタリスク等を
- * 安全にする。
+ * MadbRec は upsertVolume の入力。 CSV row を直接食わせるのでなく、
+ * 旧 SPARQL 経路で慣らしたシェイプを保つ (= 後で SPARQL を再採用したく
+ * なっても upsertVolume を変える必要がない)。
  */
-function escapeRegex(s: string): string {
-  return s.replace(/[\\^$.*+?()[\]{}|]/g, "\\\\$&");
-}
-
-/**
- * MADB SPARQL に作家名で query。 役割タグ ([著]/[原作]/[画] 等) と共著連結
- * ([著]A,B) を REGEX で吸収する。 末尾境界を「文字列終端 / カンマ / 半角空白
- * / 全角空白 / ]」 で固定して、 同名別人 (= "諫山創 太郎") を排除。
- *
- *   FILTER(REGEX(?creator, "(^|\\]|,|[ 　])諫山創($|,|[ 　\\]])"))
- *
- * --include-original-author 無しなら schema:creator のみ、 ありなら
- * prop:originalWorkCreator も UNION (= [原作] 名義の作品も拾う)。
- */
-async function fetchMadbForName(
-  authorName: string,
-  includeOriginalAuthor: boolean,
-): Promise<{ ok: boolean; bindings: SparqlBinding[]; error: string | null }> {
-  const escaped = escapeRegex(authorName);
-  // SPARQL の string literal は C 風 escape (\\ → \) で、 さらに regex
-  // 引数で \] = literal ] になる。 JS template の \\\\ は JS string の \\
-  // (2 文字)、 SPARQL parser 後 \ (1 文字)、 regex は ] と組合わせて \] と読む。
-  // 全角空白は literal char そのもの (= U+3000) を入れる (\\u3000 は SPARQL
-  // string escape として標準じゃないので避ける)。
-  const re = `(^|\\\\]|,|[ 　])${escaped}($|,|[ 　\\\\]])`;
-
-  const creatorClause = includeOriginalAuthor
-    ? `{ ?manifestation schema:creator ?creator }
-       UNION
-       { ?manifestation prop:originalWorkCreator ?creator }`
-    : `?manifestation schema:creator ?creator .`;
-
-  const query = `
-    PREFIX schema: <https://schema.org/>
-    PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-    PREFIX class: <https://mediaarts-db.artmuseums.go.jp/data/class#>
-    PREFIX prop: <https://mediaarts-db.artmuseums.go.jp/data/property#>
-    SELECT DISTINCT ?manifestation ?title ?creator ?isbn ?publisher ?editionLabel ?datePublished WHERE {
-      ?manifestation a class:MangaBook .
-      ${creatorClause}
-      FILTER(REGEX(STR(?creator), "${re}"))
-      OPTIONAL { ?manifestation rdfs:label ?title }
-      OPTIONAL { ?manifestation schema:isbn ?isbn }
-      OPTIONAL { ?manifestation schema:publisher ?publisher }
-      # MADB Monster CSV で「版表示」 (= 「完全版」/「特装版」) が独立 column
-      # として存在することが判明。 schema:bookEdition は Schema.org 標準で
-      # この目的に対応する property。 schema discovery (= workflow probe)
-      # で URI を確認してから本コード化したが、 違っていた場合は後続イテレーションで修正。
-      OPTIONAL { ?manifestation schema:bookEdition ?editionLabel }
-      # 雑誌 (= MangaMagazine) は MADB の graph 構造上 単行本側からは
-      # 直接到達できない (= MangaBook と MangaMagazine が分離されたサブ
-      # グラフ、 確認済)。 magazine_key は fetch:wikipedia で別途補完する。
-      OPTIONAL { ?manifestation schema:datePublished ?datePublished }
-    } LIMIT ${QUERY_LIMIT}
-  `;
-  return sparqlFetch(query);
-}
-
 type MadbRec = {
   manifestationUri: string;
   title: string | null;
   creator: string;
   isbn13: string;
+  /** 発行者 (= 出版社、 series.publisher_key 解決の入力) */
   publisher: string | null;
+  /** 単行本レーベル (= imprint、 editions.imprint 行き) */
+  imprint: string | null;
+  /** 版表示 (= "完全版" / "特装版" 等。 classifyEdition 入力に最優先で使う) */
   editionLabel: string | null;
+  /** YYYY-MM-DD or partial */
   datePublished: string | null;
+  /** CSV 由来の純数字巻番号 (= 取れた時のみ。 取れなければ null で title fallback) */
+  csvVolumeNumber: number | null;
 };
 
 /**
- * SPARQL binding を内部 record に正規化。 ISBN 不正 / 欠落は null 返しで
- * 呼び出し側が skip。
+ * MadbCsvRow → MadbRec 変換。 ISBN 不正 / 必須 field 欠落は null で skip。
  */
-function normalizeBinding(b: SparqlBinding): MadbRec | null {
-  const manifestationUri = b["manifestation"]?.value;
-  const rawIsbn = b["isbn"]?.value?.trim();
-  const creator = b["creator"]?.value?.trim();
-  if (!manifestationUri || !rawIsbn || !creator) return null;
-  const isbn13 = normalizeIsbn13(rawIsbn);
+function csvRowToMadbRec(row: MadbCsvRow): MadbRec | null {
+  const isbn13 = normalizeIsbn13(row.isbn);
   if (!isbn13) return null;
+  // creator は CSV では 1 個の string (= "X　＼＼　Y" 形式)。 mangaka 紐付け
+  // 用に splitAuthors した個別名は別経路、 ここは raw value を保存して
+  // sources.raw_json で audit できるようにしておく。
+  const creator = row.authorName.trim();
+  if (!creator) return null;
   return {
-    manifestationUri,
-    title: b["title"]?.value?.trim() || null,
+    manifestationUri: `https://mediaarts-db.artmuseums.go.jp/data/manifestation/${row.madbId}`,
+    title: row.title.trim() || null,
     creator,
     isbn13,
-    publisher: b["publisher"]?.value?.trim() || null,
-    editionLabel: b["editionLabel"]?.value?.trim() || null,
-    datePublished: b["datePublished"]?.value?.trim() || null,
+    publisher: row.publisherName.trim() || null,
+    imprint: row.bookLabel.trim() || null,
+    editionLabel: row.editionLabel.trim() || null,
+    datePublished: row.publishedAt.trim() || null,
+    csvVolumeNumber: parseVolumeNumber(row.volumeNumber),
   };
 }
 
@@ -318,9 +232,6 @@ function getStmts(db: DB): VolumeStmts {
            updated_at = strftime('%Y-%m-%dT%H:%M:%SZ','now')
        WHERE id = ?`,
     ),
-    // COALESCE で既存値があれば touch しない (= 別 record で先に設定された
-    // publisher_key を上書きで失わないため)。 magazine_key は fetch:wikipedia
-    // が後段で埋めるので fetch-madb では扱わない。
     updateSeriesPublisherKey: db.prepare(
       `UPDATE series
        SET publisher_key = COALESCE(publisher_key, ?),
@@ -358,7 +269,6 @@ function getStmts(db: DB): VolumeStmts {
        VALUES (?, ?, ?, ?, ?)`,
     ),
     // ユーザ意思: 既存 NDL 由来 volume は MADB データで上書き。
-    // edition_id も MADB 由来 edition に貼り替える。
     updateVolume: db.prepare(
       `UPDATE volumes
        SET edition_id   = ?,
@@ -373,14 +283,17 @@ function getStmts(db: DB): VolumeStmts {
   return stmts;
 }
 
-type AuthorRef = {
-  qid: string | null;
-  name: string;
-  altNames: string[];
-  mangakaId: number | null;
-};
-
-/** 1 record を upsert。 fetch-ndl の upsertVolume と同等の責務。 */
+/**
+ * 1 record を upsert。 fetch-ndl の upsertVolume と同等の責務。
+ *
+ * CSV 由来データの優先順:
+ *   - editionType: rec.editionLabel (= 「版表示」 column) を最優先 →
+ *     fallback で title から classifyEdition
+ *   - volumeNumber: rec.csvVolumeNumber (= 「巻」 column の純数字) →
+ *     fallback で title から extractVolumeNumber
+ *   - imprint: rec.imprint (= 「単行本レーベル」)
+ *   - publisher_key: rec.publisher (= 「発行者名」 を publishers.yml で解決)
+ */
 function upsertVolume(db: DB, author: AuthorRef, rec: MadbRec): void {
   const titleForKey = rec.title ?? rec.isbn13;
   const seriesKey = buildSeriesKey(titleForKey, {
@@ -389,37 +302,30 @@ function upsertVolume(db: DB, author: AuthorRef, rec: MadbRec): void {
   });
   const seriesDisplay = baseTitle(titleForKey);
 
-  // MADB は「版表示」 (= editionLabel) を独立 column として持ち、 「完全版」
-  // 「特装版」 「文庫版」 等の真値を直接保持する (= Monster CSV で確認)。
-  // classifyEdition は title-based に keyword 検索する設計だが、 editionLabel
-  // が ある場合はそれが最も信頼できる入力なので優先する (= title="Monster"
-  // / editionLabel="完全版" だと title から完全版を拾えないが、 editionLabel
-  // 直接入力なら kanzenban 判定できる)。 editionLabel が null なら title
-  // fallback (= 既存挙動を維持)。
+  // editionLabel が空でないなら最優先 (= MADB 公式の「版表示」)。
+  // 空なら title から classifyEdition (= keyword scan)。
   const editionInput = rec.editionLabel ?? rec.title ?? "";
   let editionType: EditionType = classifyEdition(editionInput);
-  const volumeNumber = rec.title ? extractVolumeNumber(rec.title) : null;
-  // Task 1: 巻番号が抽出できない record は本編 series でないことが多い
-  // (= 関連書籍 / セット商品 / ガイドブック / 全巻パック)。 標準 edition
-  // (= type=standard) に混ぜると vol1 に集約されて誤集計になるため、
-  // edition.type='other' に分離する。 既に classifyEdition が "完全版"
-  // 等を識別している場合 (= editionType !== "standard") は触らない。
+  // 巻番号は CSV の 「巻」 column を最優先、 取れなければ title fallback。
+  const volumeNumber =
+    rec.csvVolumeNumber ?? (rec.title ? extractVolumeNumber(rec.title) : null);
+  // 巻番号取れない record は本編 series でないことが多い (= 関連書籍 /
+  // セット商品 / ガイドブック)。 standard edition に混ぜると vol1 集約で
+  // 誤集計になるので type=other に分離。
   if (volumeNumber === null && editionType === "standard") {
     editionType = "other";
   }
   const releaseDate = normalizeReleaseDate(rec.datePublished);
   const issuedYear =
-    releaseDate && /^\d{4}/.test(releaseDate) ? Number(releaseDate.slice(0, 4)) : null;
-
-  // Task 2: publisher literal を 「漢字　∥　カナ」 から漢字だけ抽出。
-  // (magazine_key は fetch:wikipedia 担当、 ここでは扱わない)
-  const publisherName = splitMadbLiteral(rec.publisher);
+    releaseDate && /^\d{4}/.test(releaseDate)
+      ? Number(releaseDate.slice(0, 4))
+      : null;
 
   const stmts = getStmts(db);
   const masters = getMasters();
   const publisherKey =
-    publisherName !== null
-      ? (masters.publisher.get(publisherName.normalize("NFKC")) ?? null)
+    rec.publisher !== null
+      ? (masters.publisher.get(rec.publisher.normalize("NFKC")) ?? null)
       : null;
 
   // ===== series upsert =====
@@ -456,14 +362,12 @@ function upsertVolume(db: DB, author: AuthorRef, rec: MadbRec): void {
     seriesId = Number(info.lastInsertRowid);
   }
 
-  // ===== series_authors 紐付け (mangaka_id があるときのみ) =====
+  // ===== series_authors 紐付け =====
   if (author.mangakaId !== null) {
     stmts.insertSeriesAuthor.run(seriesId, author.mangakaId, "writer_artist");
   }
 
-  // Task 2: series.publisher_key を master 解決値で埋める。 既存値がある
-  // 場合は COALESCE で touch しない (= 別 record で先に設定された値を
-  // 新しい record で上書きしない)。 magazine_key は fetch:wikipedia 担当。
+  // series.publisher_key を master 解決値で埋める。 既存値があれば touch しない。
   if (publisherKey !== null) {
     stmts.updateSeriesPublisherKey.run(publisherKey, seriesId);
   }
@@ -473,12 +377,14 @@ function upsertVolume(db: DB, author: AuthorRef, rec: MadbRec): void {
     | { id: number; year_started: number | null; year_ended: number | null }
     | undefined;
 
+  // imprint には CSV の 「単行本レーベル」 を最優先。 無ければ publisher 名で fallback。
+  const imprintForRow = rec.imprint ?? rec.publisher;
+
   let editionId: number;
   if (existingEdition) {
     editionId = existingEdition.id;
-    // Task 2: imprint には publisher 漢字部分のみ (= ∥ カナ部分は除外)
-    if (publisherName) {
-      stmts.updateEditionImprint.run(publisherName, editionId);
+    if (imprintForRow) {
+      stmts.updateEditionImprint.run(imprintForRow, editionId);
     }
     if (issuedYear !== null) {
       const newStart =
@@ -497,13 +403,11 @@ function upsertVolume(db: DB, author: AuthorRef, rec: MadbRec): void {
       }
     }
   } else {
-    // editions.label は NOT NULL なので EDITION_LABELS の固定文字列を使う。
-    // Task 2: imprint には publisher 漢字部分のみ (= ∥ カナ部分は除外)
     const info = stmts.insertEdition.run(
       seriesId,
       editionType,
       EDITION_LABELS[editionType],
-      publisherName,
+      imprintForRow,
       issuedYear,
       issuedYear,
     );
@@ -511,9 +415,6 @@ function upsertVolume(db: DB, author: AuthorRef, rec: MadbRec): void {
   }
 
   // ===== volume upsert (= 既存 NDL volume があれば MADB で上書き) =====
-  // volumes.number は NOT NULL なので、 タイトルから抽出できなかった
-  // ケース (= "総集編" / "外伝" 等) は 1 でフォールバック + is_extra=1 で
-  // 識別。 fetch-ndl と同じ運用。
   const numberVal = volumeNumber ?? 1;
   const isExtra = volumeNumber === null ? 1 : 0;
   const existingVolume = stmts.selectVolume.get(rec.isbn13) as
@@ -543,12 +444,13 @@ function upsertVolume(db: DB, author: AuthorRef, rec: MadbRec): void {
     title: rec.title,
     creator: rec.creator,
     publisher: rec.publisher,
+    imprint: rec.imprint,
     editionLabel: rec.editionLabel,
     datePublished: rec.datePublished,
   });
 }
 
-/** mangaka を解決 (= --qid / --name / --all で異なる経路) */
+/** 解決済 mangaka 情報。 名前 index と 1:N 紐付けに使う。 */
 type ResolvedAuthor = AuthorRef & { display: string };
 
 function resolveAuthors(db: DB, args: Args): ResolvedAuthor[] {
@@ -567,9 +469,7 @@ function resolveAuthors(db: DB, args: Args): ResolvedAuthor[] {
         }
       | undefined;
     if (!row) {
-      console.warn(
-        `[warn] qid=${args.qid} not found in DB.mangaka; falling back to bare name from CLI is not supported. exit.`,
-      );
+      console.warn(`[warn] qid=${args.qid} not found in DB.mangaka. exit.`);
       return [];
     }
     if (row.has_adult_credit && !args.includeAdult) {
@@ -629,85 +529,192 @@ function resolveAuthors(db: DB, args: Args): ResolvedAuthor[] {
   return [];
 }
 
-async function processAuthor(
+/**
+ * 「正規化済名前 → 紐付ける ResolvedAuthor 群」 の index を作る。
+ * MADB CSV の 作者名 column (= splitAuthors 後) と normalizeCreatorName で
+ * exact match させて 1:N 解決する。
+ */
+function buildAuthorIndex(
+  authors: ResolvedAuthor[],
+): Map<string, ResolvedAuthor[]> {
+  const idx = new Map<string, ResolvedAuthor[]>();
+  for (const a of authors) {
+    const names = [a.name, ...a.altNames];
+    for (const n of names) {
+      const key = normalizeCreatorName(n);
+      if (!key) continue;
+      const list = idx.get(key);
+      if (list) list.push(a);
+      else idx.set(key, [a]);
+    }
+  }
+  return idx;
+}
+
+type Stats = {
+  totalRows: number;
+  parsedRows: number;
+  parseErrors: number;
+  skippedAdultRating: number;
+  skippedAdultSummary: number;
+  skippedAdultImprint: number;
+  skippedAdultPublisher: number;
+  matchedRows: number;
+  upsertedVolumes: number;
+  insertedVolumes: number;
+  updatedVolumes: number;
+  errors: number;
+};
+
+function newStats(): Stats {
+  return {
+    totalRows: 0,
+    parsedRows: 0,
+    parseErrors: 0,
+    skippedAdultRating: 0,
+    skippedAdultSummary: 0,
+    skippedAdultImprint: 0,
+    skippedAdultPublisher: 0,
+    matchedRows: 0,
+    upsertedVolumes: 0,
+    insertedVolumes: 0,
+    updatedVolumes: 0,
+    errors: 0,
+  };
+}
+
+function bumpAdultStat(stats: Stats, signal: AdultMatchSignal): void {
+  if (signal === "rating") stats.skippedAdultRating++;
+  else if (signal === "summary") stats.skippedAdultSummary++;
+  else if (signal === "imprint") stats.skippedAdultImprint++;
+  else if (signal === "publisher") stats.skippedAdultPublisher++;
+}
+
+/**
+ * CSV を 1 パスで読み、 各 row を adult filter → 作者 index で紐付け →
+ * 該当 mangaka 全員に対して upsertVolume を呼ぶ。
+ *
+ * トランザクション境界は CSV 全体で 1 つ。 better-sqlite3 は同期 API なので
+ * stream の各行で immediate 実行できる。
+ */
+async function processCsv(
   db: DB,
-  author: ResolvedAuthor,
+  csvPath: string,
+  authorIndex: Map<string, ResolvedAuthor[]>,
+  adultSeeds: { adultImprints: Set<string>; adultPublishers: Set<string> },
   args: Args,
-): Promise<{ inserted: number; updated: number; skipped: number }> {
-  console.log(`[fetch] ${author.display}`);
+): Promise<Stats> {
+  const stats = newStats();
 
-  // primary name を first attempt、 alt_names は fallback として連結試行。
-  // 6 作家 probe 結果 (= 諫山創 89 件 / 浦沢直樹 328 件) は primary だけで
-  // 十分取れることが確認済。 alt_names は珍しい表記揺れの fallback。
-  const allNames = [author.name, ...author.altNames];
-  const seenIsbns = new Set<string>();
-  const records: MadbRec[] = [];
-
-  for (const name of allNames) {
-    const r = await fetchMadbForName(name, args.includeOriginalAuthor);
-    if (!r.ok) {
-      console.warn(`  [error] name="${name}": ${r.error}`);
-      continue;
-    }
-    let added = 0;
-    for (const b of r.bindings) {
-      const rec = normalizeBinding(b);
-      if (!rec) continue;
-      if (seenIsbns.has(rec.isbn13)) continue;
-      seenIsbns.add(rec.isbn13);
-      records.push(rec);
-      added++;
-    }
-    console.log(
-      `  [ok] name="${name}" ${r.bindings.length} bindings → ${added} new ISBN13s`,
-    );
-    await sleep(REQUEST_INTERVAL_MS);
+  if (!fs.existsSync(csvPath)) {
+    throw new Error(`csv not found: ${csvPath}`);
   }
 
-  // raw dump
-  fs.mkdirSync(RAW_DIR, { recursive: true });
-  const dumpPath = path.join(
-    RAW_DIR,
-    `${(author.qid ?? author.name).replace(/[^A-Za-z0-9_.-]/g, "_")}.json`,
-  );
-  fs.writeFileSync(
-    dumpPath,
-    JSON.stringify({ author: author.display, records }, null, 2),
-    "utf8",
+  const rl = readline.createInterface({
+    input: fs.createReadStream(csvPath, { encoding: "utf8" }),
+    crlfDelay: Infinity,
+  });
+
+  let isFirstLine = true;
+  // tx() は同期関数を要求するので、 CSV 行を一旦配列に貯めてから transaction
+  // で投入する。 メモリは 397k × 12 column ≈ 数十 MB の想定。
+  const queued: { author: ResolvedAuthor; rec: MadbRec }[] = [];
+
+  for await (let line of rl) {
+    if (isFirstLine) {
+      isFirstLine = false;
+      // header 行は捨てる (= column position は EXPECTED_COLUMN_COUNT で
+      // 固定前提)
+      line = stripBom(line);
+      continue;
+    }
+    stats.totalRows++;
+
+    const cells = parseCsvLine(line);
+    const csvRow = rowToMadbCsvRow(cells);
+    if (!csvRow) {
+      stats.parseErrors++;
+      continue;
+    }
+    stats.parsedRows++;
+
+    if (!args.includeAdult) {
+      const adultSig = isAdultMadbRecord(
+        csvRow,
+        adultSeeds.adultImprints,
+        adultSeeds.adultPublishers,
+      );
+      if (adultSig) {
+        bumpAdultStat(stats, adultSig);
+        continue;
+      }
+    }
+
+    // 作者 1:N 紐付け
+    const authorsInRow = splitAuthors(csvRow.authorName);
+    const matched: ResolvedAuthor[] = [];
+    for (const a of authorsInRow) {
+      const key = normalizeCreatorName(a);
+      if (!key) continue;
+      const hits = authorIndex.get(key);
+      if (hits) matched.push(...hits);
+    }
+    if (matched.length === 0) continue;
+    stats.matchedRows++;
+
+    const rec = csvRowToMadbRec(csvRow);
+    if (!rec) {
+      stats.parseErrors++;
+      continue;
+    }
+
+    // 同じ csv row が複数 mangaka にヒットすることもある (共著)。 重複なく
+    // 1 record × N author で投入。
+    const seen = new Set<number | string>();
+    for (const a of matched) {
+      const key = a.mangakaId ?? `name:${a.name}`;
+      if (seen.has(key)) continue;
+      seen.add(key);
+      queued.push({ author: a, rec });
+    }
+  }
+
+  console.log(
+    `[csv] read ${stats.totalRows} rows, parsed=${stats.parsedRows}, matched=${stats.matchedRows}, queued=${queued.length}`,
   );
 
-  // DB 投入
-  let inserted = 0;
-  let updated = 0;
-  let skipped = 0;
+  // ===== DB 投入 (= 1 トランザクション) =====
   tx(db, () => {
     const stmts = getStmts(db);
-    for (const rec of records) {
+    for (const { author, rec } of queued) {
       try {
         const before = stmts.selectVolume.get(rec.isbn13);
         upsertVolume(db, author, rec);
-        if (before) updated++;
-        else inserted++;
+        if (before) stats.updatedVolumes++;
+        else stats.insertedVolumes++;
+        stats.upsertedVolumes++;
       } catch (err) {
-        skipped++;
+        stats.errors++;
         console.warn(
-          `  [skip] isbn=${rec.isbn13}: ${err instanceof Error ? err.message : String(err)}`,
+          `  [error] isbn=${rec.isbn13}: ${err instanceof Error ? err.message : String(err)}`,
         );
       }
     }
   });
-  console.log(
-    `  [db] ${records.length} records → inserted=${inserted} updated=${updated} skipped=${skipped}`,
-  );
-  return { inserted, updated, skipped };
+
+  return stats;
 }
 
 async function main(): Promise<void> {
   const args = parseArgs(process.argv.slice(2));
-  if (!args.qid && !args.name && !args.all) {
+  if (!args.csvPath) {
     console.error(
-      "usage: fetch-madb --qid Q1234 | --name 'X' | --all [--limit N] [--include-adult] [--include-original-author]",
+      "usage: fetch-madb --csv-path <path> [--qid Q1234 | --name 'X' | --all] [--limit N] [--include-adult]",
     );
+    process.exit(1);
+  }
+  if (!args.qid && !args.name && !args.all) {
+    console.error("require --qid, --name, or --all");
     process.exit(1);
   }
 
@@ -720,21 +727,35 @@ async function main(): Promise<void> {
   }
 
   console.log(
-    `[fetch-madb] start: ${authors.length} mangaka, includeOriginalAuthor=${args.includeOriginalAuthor}`,
+    `[fetch-madb] csv=${args.csvPath} authors=${authors.length}, includeAdult=${args.includeAdult}`,
   );
 
-  const totals = { inserted: 0, updated: 0, skipped: 0 };
-  for (const author of authors) {
-    const r = await processAuthor(db, author, args);
-    totals.inserted += r.inserted;
-    totals.updated += r.updated;
-    totals.skipped += r.skipped;
-  }
-
+  const adultSeeds = loadAdultSeeds(db);
   console.log(
-    `\n[fetch-madb] done: total inserted=${totals.inserted} updated=${totals.updated} skipped=${totals.skipped}`,
+    `[adult-seeds] imprints=${adultSeeds.adultImprints.size}, publishers=${adultSeeds.adultPublishers.size}`,
   );
-  console.log(`  raw dumps in .cache/madb/`);
+
+  const authorIndex = buildAuthorIndex(authors);
+  console.log(
+    `[author-index] ${authorIndex.size} unique normalized name keys (incl. alt_names)`,
+  );
+
+  const stats = await processCsv(db, args.csvPath, authorIndex, adultSeeds, args);
+
+  console.log(`\n[fetch-madb] done`);
+  console.log(`  total rows           : ${stats.totalRows}`);
+  console.log(`  parsed rows          : ${stats.parsedRows}`);
+  console.log(`  parse errors         : ${stats.parseErrors}`);
+  console.log(`  skipped (rating)     : ${stats.skippedAdultRating}`);
+  console.log(`  skipped (summary)    : ${stats.skippedAdultSummary}`);
+  console.log(`  skipped (imprint)    : ${stats.skippedAdultImprint}`);
+  console.log(`  skipped (publisher)  : ${stats.skippedAdultPublisher}`);
+  console.log(`  matched rows         : ${stats.matchedRows}`);
+  console.log(`  upserted volumes     : ${stats.upsertedVolumes}`);
+  console.log(`    inserted           : ${stats.insertedVolumes}`);
+  console.log(`    updated            : ${stats.updatedVolumes}`);
+  console.log(`  errors               : ${stats.errors}`);
+
   db.close();
 }
 
