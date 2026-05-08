@@ -180,6 +180,7 @@ function main() {
     const ss = db
       .prepare(
         `SELECT s.id, s.title, s.year_started, s.year_ended, s.status, s.adult_score,
+                s.publisher_key, s.magazine_key,
                 COUNT(DISTINCT e.id) AS editions_n,
                 COUNT(DISTINCT v.id) AS volumes_n
          FROM series s
@@ -196,14 +197,34 @@ function main() {
       year_ended: number | null;
       status: string | null;
       adult_score: number;
+      publisher_key: string | null;
+      magazine_key: string | null;
       editions_n: number;
       volumes_n: number;
     }[];
     for (const s of ss) {
+      const meta = `${s.publisher_key ?? "-"}/${s.magazine_key ?? "-"}`;
       console.log(
-        `  #${pad(s.id, 4)} ${pad(s.title, 28)} ${pad(s.year_started, 5)}-${pad(s.year_ended ?? "", 4)} ed=${s.editions_n} vol=${s.volumes_n}${s.adult_score ? ` adult=${s.adult_score}` : ""}`,
+        `  #${pad(s.id, 4)} ${pad(s.title, 28)} ${pad(s.year_started, 5)}-${pad(s.year_ended ?? "", 4)} ed=${s.editions_n} vol=${s.volumes_n} ${pad(meta, 35)}${s.adult_score ? ` adult=${s.adult_score}` : ""}`,
       );
     }
+
+    // 集計: publisher_key / magazine_key の埋まり率
+    const meta = db
+      .prepare(
+        `SELECT
+           COUNT(*) AS total,
+           SUM(CASE WHEN publisher_key IS NOT NULL THEN 1 ELSE 0 END) AS pub_filled,
+           SUM(CASE WHEN magazine_key IS NOT NULL THEN 1 ELSE 0 END) AS mag_filled
+         FROM series`,
+      )
+      .get() as { total: number; pub_filled: number; mag_filled: number };
+    console.log(
+      `\n  series.publisher_key filled: ${meta.pub_filled}/${meta.total}`,
+    );
+    console.log(
+      `  series.magazine_key filled : ${meta.mag_filled}/${meta.total}`,
+    );
   }
 
   if (args.showMangaka) {
