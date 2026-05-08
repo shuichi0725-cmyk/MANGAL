@@ -250,6 +250,17 @@ describe("baseTitle / normalizeSeriesKey", () => {
     expect(baseTitle("20世紀少年 Volume.10")).toBe("20世紀少年");
   });
 
+  // MADB Monster CSV で発覚: 通常版が "Monster chapter X" / "Monster X" の
+  // 表記揺らぎで series が分離される。 chapter X 形式も親 series に集約する。
+  it("strips MADB-style chapter N suffix (= 通常版 chapter 表記揺らぎ)", () => {
+    expect(baseTitle("Monster chapter 1")).toBe("Monster");
+    expect(baseTitle("Monster chapter 5")).toBe("Monster");
+    expect(baseTitle("Monster chapter 18")).toBe("Monster");
+    // 「chapter」 keyword 必須で他英単語は誤マッチしない (= regression check)
+    expect(baseTitle("Monster")).toBe("Monster");
+    expect(baseTitle("Monster Special Paperback")).toBe("Monster Special Paperback");
+  });
+
   it("strips MADB-style 上 / 下 / 上巻 / 下巻 (space-only delimiter)", () => {
     expect(baseTitle("21世紀少年 上")).toBe("21世紀少年");
     expect(baseTitle("21世紀少年 下")).toBe("21世紀少年");

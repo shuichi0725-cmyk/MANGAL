@@ -89,6 +89,42 @@ jobs:
           echo "=== .cache/madb/ files ==="
           ls -la .cache/madb/ || true
 
+      - name: Probe edition predicate (= 「版表示」 URI 確定)
+        if: always()
+        # Monster CSV 分析で MADB は title でなく独立 column 「版表示」 で
+        # 「完全版」 / 「特装版」 を保持していると判明。 RDF predicate URI
+        # を発見するため、 MangaBook の outgoing predicates のうち value に
+        # 「完全版」 を持つものを直接 SPARQL で探る。 1 度判明したら fetcher
+        # の SPARQL に hard code して、 この step は削除可能。
+        run: |
+          set -euo pipefail
+          MADB_SPARQL="https://mediaarts-db.artmuseums.go.jp/sparql"
+          echo "=== predicates of class:MangaBook whose literal contains \"完全版\" ==="
+          QUERY='PREFIX class: <https://mediaarts-db.artmuseums.go.jp/data/class#>
+          SELECT ?p (COUNT(*) AS ?n) WHERE {
+            ?b a class:MangaBook ; ?p ?o .
+            FILTER(isLiteral(?o) && CONTAINS(STR(?o), "完全版"))
+          } GROUP BY ?p ORDER BY DESC(?n) LIMIT 10'
+          curl -sS -X POST \
+            -H 'Accept: application/sparql-results+json' \
+            --data-urlencode "query=$QUERY" \
+            "$MADB_SPARQL" \
+            | jq -r '.results.bindings[] | "\(.n.value) × \(.p.value)"' \
+            || echo "(SPARQL fetch failed)"
+          echo
+          echo "=== sample MangaBook with 完全版 (= verify URI mapping) ==="
+          QUERY2='PREFIX class: <https://mediaarts-db.artmuseums.go.jp/data/class#>
+          SELECT ?b ?p ?o WHERE {
+            ?b a class:MangaBook ; ?p ?o .
+            FILTER(isLiteral(?o) && STR(?o) = "完全版")
+          } LIMIT 3'
+          curl -sS -X POST \
+            -H 'Accept: application/sparql-results+json' \
+            --data-urlencode "query=$QUERY2" \
+            "$MADB_SPARQL" \
+            | jq -r '.results.bindings[] | "\(.b.value) -- \(.p.value) -- \(.o.value)"' \
+            || echo "(SPARQL fetch failed)"
+
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         if: always()

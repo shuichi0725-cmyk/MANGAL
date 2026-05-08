@@ -229,13 +229,18 @@ async function fetchMadbForName(
     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
     PREFIX class: <https://mediaarts-db.artmuseums.go.jp/data/class#>
     PREFIX prop: <https://mediaarts-db.artmuseums.go.jp/data/property#>
-    SELECT DISTINCT ?manifestation ?title ?creator ?isbn ?publisher ?datePublished WHERE {
+    SELECT DISTINCT ?manifestation ?title ?creator ?isbn ?publisher ?editionLabel ?datePublished WHERE {
       ?manifestation a class:MangaBook .
       ${creatorClause}
       FILTER(REGEX(STR(?creator), "${re}"))
       OPTIONAL { ?manifestation rdfs:label ?title }
       OPTIONAL { ?manifestation schema:isbn ?isbn }
       OPTIONAL { ?manifestation schema:publisher ?publisher }
+      # MADB Monster CSV で「版表示」 (= 「完全版」/「特装版」) が独立 column
+      # として存在することが判明。 schema:bookEdition は Schema.org 標準で
+      # この目的に対応する property。 schema discovery (= workflow probe)
+      # で URI を確認してから本コード化したが、 違っていた場合は後続イテレーションで修正。
+      OPTIONAL { ?manifestation schema:bookEdition ?editionLabel }
       # 雑誌 (= MangaMagazine) は MADB の graph 構造上 単行本側からは
       # 直接到達できない (= MangaBook と MangaMagazine が分離されたサブ
       # グラフ、 確認済)。 magazine_key は fetch:wikipedia で別途補完する。
@@ -251,6 +256,7 @@ type MadbRec = {
   creator: string;
   isbn13: string;
   publisher: string | null;
+  editionLabel: string | null;
   datePublished: string | null;
 };
 
@@ -271,6 +277,7 @@ function normalizeBinding(b: SparqlBinding): MadbRec | null {
     creator,
     isbn13,
     publisher: b["publisher"]?.value?.trim() || null,
+    editionLabel: b["editionLabel"]?.value?.trim() || null,
     datePublished: b["datePublished"]?.value?.trim() || null,
   };
 }
@@ -382,7 +389,15 @@ function upsertVolume(db: DB, author: AuthorRef, rec: MadbRec): void {
   });
   const seriesDisplay = baseTitle(titleForKey);
 
-  let editionType: EditionType = classifyEdition(rec.title ?? "");
+  // MADB は「版表示」 (= editionLabel) を独立 column として持ち、 「完全版」
+  // 「特装版」 「文庫版」 等の真値を直接保持する (= Monster CSV で確認)。
+  // classifyEdition は title-based に keyword 検索する設計だが、 editionLabel
+  // が ある場合はそれが最も信頼できる入力なので優先する (= title="Monster"
+  // / editionLabel="完全版" だと title から完全版を拾えないが、 editionLabel
+  // 直接入力なら kanzenban 判定できる)。 editionLabel が null なら title
+  // fallback (= 既存挙動を維持)。
+  const editionInput = rec.editionLabel ?? rec.title ?? "";
+  let editionType: EditionType = classifyEdition(editionInput);
   const volumeNumber = rec.title ? extractVolumeNumber(rec.title) : null;
   // Task 1: 巻番号が抽出できない record は本編 series でないことが多い
   // (= 関連書籍 / セット商品 / ガイドブック / 全巻パック)。 標準 edition
@@ -528,6 +543,7 @@ function upsertVolume(db: DB, author: AuthorRef, rec: MadbRec): void {
     title: rec.title,
     creator: rec.creator,
     publisher: rec.publisher,
+    editionLabel: rec.editionLabel,
     datePublished: rec.datePublished,
   });
 }

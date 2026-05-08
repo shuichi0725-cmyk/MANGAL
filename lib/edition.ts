@@ -176,13 +176,14 @@ export function baseTitle(text: string): string {
   // 2) 「: サブタイトル」を切る (NDL の ISBD 慣用区切り)
   t = t.replace(/\s+:\s+.*$/, "");
 
-  // 3) NDL/MARC + MADB の連番表記 (`, no.` `. vol.` `. v.` `. no.` `Volume.1` 等)
-  //    数字が後ろに付く/付かない両方をカバー。
-  //    MADB は "Monster v.5" や "20世紀少年 Volume.1" のように `[.,]` 区切り
-  //    なしの space 区切りで series を細分化発行するため、 `[.,]` を optional
-  //    にして `\s+` (= 空白必須) で keyword と分離。 keyword (no/vol/v/volume)
-  //    が必須なので "Dr. House" 等は誤マッチしない。
-  t = t.replace(/\s*[.,]?\s+(no|vol|v|volume)\.?\s*\d*\s*$/i, "");
+  // 3) NDL/MARC + MADB の連番表記 (`, no.` `. vol.` `. v.` `. no.` `Volume.1`
+  //    `chapter 5` 等)。 数字が後ろに付く/付かない両方をカバー。
+  //    MADB は "Monster v.5" や "20世紀少年 Volume.1" "Monster chapter 5"
+  //    のように `[.,]` 区切りなしの space 区切りで series を細分化発行する
+  //    ため、 `[.,]` を optional にして `\s+` (= 空白必須) で keyword と分離。
+  //    keyword (no/vol/v/volume/chapter) が必須なので "Dr. House" 等は
+  //    誤マッチしない。
+  t = t.replace(/\s*[.,]?\s+(no|vol|v|volume|chapter)\.?\s*\d*\s*$/i, "");
 
   // 4) 「. 上 / . 下 / . 上巻 / . 下巻」 「上 / 下 / 上巻 / 下巻」 の半巻表記を切る
   //    (令和版ラブセレクション / 劇場版犬夜叉時代を越える想い、
