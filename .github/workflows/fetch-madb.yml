@@ -1,0 +1,90 @@
+name: 📥 Fetch MADB (test run)
+
+# 2026-05-08: scripts/fetch-madb.ts の動作確認用 standalone workflow。
+# bulk-promote-test workflow への統合は別プラン (= 本プラン Out of scope)。
+#
+# - 空 DB を作って mangaka CSV import → 指定 QID で MADB fetch を実行
+# - DB report で投入された series / editions / volumes を確認
+# - artifact: .cache/db.sqlite + .cache/madb/ raw dumps
+
+on:
+  workflow_dispatch:
+    inputs:
+      qids:
+        description: "空白区切りの QID 列 (= 既定: 6 作家 probe-madb と同じ subset)"
+        required: true
+        default: "Q11331084 Q231007 Q310385 Q1145902 Q56022442 Q1366247"
+      include_original_author:
+        description: "[原作] credits も拾う (= 諫山創 → キメツ学園スピンオフ等)"
+        required: false
+        default: "false"
+        type: boolean
+
+permissions:
+  contents: read
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    env:
+      INPUT_QIDS: ${{ inputs.qids }}
+      INPUT_INCLUDE_OA: ${{ inputs.include_original_author }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validate inputs
+        run: |
+          if ! printf '%s' "$INPUT_QIDS" | grep -Eq '^Q[0-9]+( +Q[0-9]+)*$'; then
+            echo "::error::qids は空白区切りの 'Q+数字' のみ"
+            exit 1
+          fi
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: "npm"
+
+      - run: npm ci
+
+      - name: Initialize empty DB
+        run: npm run db:init
+
+      - name: Import publisher / magazine masters
+        run: npm run db:import:masters
+
+      - name: Import mangaka CSV (full)
+        run: npm run db:import:mangaka
+
+      - name: Fetch MADB for each QID
+        run: |
+          OA_FLAG=()
+          if [ "$INPUT_INCLUDE_OA" = "true" ]; then
+            OA_FLAG+=(--include-original-author)
+          fi
+          for q in $INPUT_QIDS; do
+            echo "::group::fetch:madb $q"
+            npm run fetch:madb -- --qid "$q" "${OA_FLAG[@]}"
+            echo "::endgroup::"
+          done
+
+      - name: DB summary report
+        run: npm run db:report -- --series --sources
+
+      - name: DB top 30 (= MADB 由来 series が並ぶ想定)
+        run: npm run db:report -- --top 30
+
+      - name: Show MADB raw dumps directory
+        if: always()
+        run: |
+          echo "=== .cache/madb/ files ==="
+          ls -la .cache/madb/ || true
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: fetch-madb-run-${{ github.run_number }}
+          path: |
+            .cache/db.sqlite
+            .cache/madb/
+          if-no-files-found: warn

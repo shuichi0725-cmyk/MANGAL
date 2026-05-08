@@ -24,6 +24,7 @@
     "db:import:mangaka": "tsx scripts/import-mangaka-csv.ts",
     "db:import:masters": "tsx scripts/import-masters.ts",
     "fetch:ndl": "tsx scripts/fetch-ndl.ts",
+    "fetch:madb": "tsx scripts/fetch-madb.ts",
     "fetch:wikipedia": "tsx scripts/fetch-wikipedia.ts",
     "fetch:adult-lists": "tsx scripts/fetch-adult-lists.ts",
     "fetch:wikidata:qid": "tsx scripts/fetch-wikidata-qid.ts",
