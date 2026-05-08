@@ -43,16 +43,18 @@ const DRY_RUN = process.argv.includes("--dry-run");
 
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
-type ProbeAuthor = { name: string; qid: string };
+type ProbeAuthor = { name: string; qid: string; surname: string };
 
 // 既存 13 yaml の代表作家 6 名 (= seed-canonical-21 の subset)
+// surname は表記揺れ発掘用の CONTAINS キー (= 全角空白入り「諫山 創」 や
+// カナ「ゴトウゲ コヨハル」 を網羅的に拾う)
 const PROBE_AUTHORS: ProbeAuthor[] = [
-  { name: "諫山創", qid: "Q11331084" },
-  { name: "高屋奈月", qid: "Q231007" },
-  { name: "浦沢直樹", qid: "Q310385" },
-  { name: "浅野いにお", qid: "Q1145902" },
-  { name: "吾峠呼世晴", qid: "Q56022442" },
-  { name: "雷句誠", qid: "Q1366247" },
+  { name: "諫山創", surname: "諫山", qid: "Q11331084" },
+  { name: "高屋奈月", surname: "高屋", qid: "Q231007" },
+  { name: "浦沢直樹", surname: "浦沢", qid: "Q310385" },
+  { name: "浅野いにお", surname: "浅野", qid: "Q1145902" },
+  { name: "吾峠呼世晴", surname: "吾峠", qid: "Q56022442" },
+  { name: "雷句誠", surname: "雷句", qid: "Q1366247" },
 ];
 
 type NormalizedItem = {
@@ -127,9 +129,15 @@ async function discoverSchema(): Promise<{
   topTypes: SparqlBinding[];
   authorMatches: SparqlBinding[];
   authorLinks: SparqlBinding[];
+  creatorPatterns: { surname: string; bindings: SparqlBinding[] }[];
 }> {
   if (DRY_RUN) {
-    return { topTypes: [], authorMatches: [], authorLinks: [] };
+    return {
+      topTypes: [],
+      authorMatches: [],
+      authorLinks: [],
+      creatorPatterns: [],
+    };
   }
 
   // (1) 全 type の出現上位 50。 漫画 class の真名がここに入る想定。
@@ -179,6 +187,33 @@ async function discoverSchema(): Promise<{
     }
   }
 
+  // (4) 各作家の姓を含む schema:creator literal の全パターン。
+  //     Phase 1 で hits=0 / 低件数だった作家の真の表記揺れを発掘する。
+  //     例: "諫山創" 完全一致では 1 hit でも、 "諫山" CONTAINS で
+  //     "諫山 創" / "諫山 創 (進撃の巨人)" 等の variant が出る想定。
+  const creatorPatterns: { surname: string; bindings: SparqlBinding[] }[] = [];
+  for (const author of PROBE_AUTHORS) {
+    const q = `
+      PREFIX schema: <https://schema.org/>
+      PREFIX class: <https://mediaarts-db.artmuseums.go.jp/data/class#>
+      SELECT ?creator (COUNT(?m) AS ?n) WHERE {
+        ?m a class:MangaBook ; schema:creator ?creator .
+        FILTER(CONTAINS(STR(?creator), "${author.surname}"))
+      } GROUP BY ?creator ORDER BY DESC(?n) LIMIT 30
+    `;
+    const r = await sparqlFetch(q);
+    creatorPatterns.push({ surname: author.surname, bindings: r.bindings });
+    console.log(
+      `  [schema] creatorPatterns "${author.surname}": ${r.bindings.length} variants`,
+    );
+    for (const b of r.bindings.slice(0, 8)) {
+      console.log(
+        `    ${b["n"]?.value ?? "?"} × "${b["creator"]?.value ?? "?"}"`,
+      );
+    }
+    await sleep(500); // SPARQL endpoint への負荷分散
+  }
+
   // raw dump (= artifact 経由でフル内容を回収できるように)
   fs.writeFileSync(
     path.join(OUT_DIR, "_schema-types.json"),
@@ -195,11 +230,17 @@ async function discoverSchema(): Promise<{
     JSON.stringify(authorLinks, null, 2),
     "utf8",
   );
+  fs.writeFileSync(
+    path.join(OUT_DIR, "_schema-creator-patterns.json"),
+    JSON.stringify(creatorPatterns, null, 2),
+    "utf8",
+  );
 
   return {
     topTypes: topTypes.bindings,
     authorMatches: authorMatches.bindings,
     authorLinks,
+    creatorPatterns,
   };
 }
 
@@ -396,6 +437,7 @@ function renderMarkdown(
     topTypes: SparqlBinding[];
     authorMatches: SparqlBinding[];
     authorLinks: SparqlBinding[];
+    creatorPatterns: { surname: string; bindings: SparqlBinding[] }[];
   } | null,
 ): string {
   const now = new Date().toISOString();
@@ -468,6 +510,29 @@ function renderMarkdown(
       lines.push(`| ${b["n"]?.value ?? "?"} | \`${b["p"]?.value ?? "?"}\` |`);
     }
     lines.push("");
+
+    lines.push("### 各作家の姓 CONTAINS で発掘した creator literal パターン (上位 30)");
+    lines.push("");
+    lines.push(
+      "Phase 1 で hits=0 / 低件数だった作家の真の表記揺れを直接観察する。 表記が判明したら次回 commit で fetchMadb の filter を拡張する。",
+    );
+    lines.push("");
+    for (const cp of discovery.creatorPatterns) {
+      lines.push(`#### "${cp.surname}" を含む creator literal`);
+      lines.push("");
+      if (cp.bindings.length === 0) {
+        lines.push("(該当なし)");
+      } else {
+        lines.push("| count | creator literal |");
+        lines.push("|---|---|");
+        for (const b of cp.bindings) {
+          lines.push(
+            `| ${b["n"]?.value ?? "?"} | \`${(b["creator"]?.value ?? "?").replace(/\|/g, "\\|")}\` |`,
+          );
+        }
+      }
+      lines.push("");
+    }
   }
 
   lines.push("## Phase 1: per-mangaka 結果");
