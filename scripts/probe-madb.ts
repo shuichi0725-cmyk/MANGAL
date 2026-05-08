@@ -255,29 +255,28 @@ async function fetchMadb(authorName: string): Promise<{
   // MADB vocabulary (= schema discovery で確定):
   //   schema: prefix         → https://schema.org/  (← https に注意)
   //   class:MangaBook        → 漫画単行本 manifestation (397k 件)
-  //   schema:creator         → 作家 → 作品の link (= 主要)
-  //   prop:originalWorkCreator → 原作者 (= 必要なら UNION 追加)
-  //   作家 entity (class:Agent) は rdfs:label と schema:name 両方で
-  //     name literal を持つ → UNION で両対応
+  //   schema:creator         → 作家名 **literal** (= URI 参照ではない)
+  //                            例: <id/M848951> schema:creator "諫山創"
+  //                            STR() で言語タグ付き literal も吸収。
+  //   prop:originalWorkCreator → 原作者 literal (= 必要なら UNION 追加)
   //   schema:isbn / schema:publisher / schema:image / schema:description /
-  //     schema:isPartOf も全て https://schema.org/ namespace
-  // 作家名は完全一致 (= NFKC 想定)。 LIMIT 1000 で巨大作家でも上限超過しない。
+  //     schema:isPartOf は全て https://schema.org/ namespace
+  //   publisher / magazine も literal の可能性あり、 .value で吸収。
+  // 作家名は STR() 経由で完全一致。 LIMIT 1000 で打切り。
   const query = `
     PREFIX schema: <https://schema.org/>
     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
     PREFIX class: <https://mediaarts-db.artmuseums.go.jp/data/class#>
     SELECT DISTINCT ?manifestation ?title ?isbn ?publisher ?image ?description ?magazine WHERE {
       ?manifestation a class:MangaBook ;
-                     schema:creator ?author .
-      { ?author rdfs:label "${authorName}" }
-      UNION
-      { ?author schema:name "${authorName}" }
+                     schema:creator ?creator .
+      FILTER(STR(?creator) = "${authorName}")
       OPTIONAL { ?manifestation rdfs:label ?title }
       OPTIONAL { ?manifestation schema:isbn ?isbn }
-      OPTIONAL { ?manifestation schema:publisher ?pub . ?pub rdfs:label ?publisher }
+      OPTIONAL { ?manifestation schema:publisher ?publisher }
       OPTIONAL { ?manifestation schema:image ?image }
       OPTIONAL { ?manifestation schema:description ?description }
-      OPTIONAL { ?manifestation schema:isPartOf ?part . ?part rdfs:label ?magazine }
+      OPTIONAL { ?manifestation schema:isPartOf ?magazine }
     } LIMIT 1000
   `;
   const res = await sparqlFetch(query);
