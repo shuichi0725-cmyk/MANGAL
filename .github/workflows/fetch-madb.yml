@@ -159,6 +159,53 @@ jobs:
                FILTER(?type IN (class:MangaMagazine, class:MangaMagazineIssue, class:MangaMagazinePublication))
              } GROUP BY ?p ?type ORDER BY DESC(?n) LIMIT 10'
 
+          # [8] MangaMagazinePublication への incoming predicates
+          run_query "[8] predicates pointing TO MangaMagazinePublication (top 10)" \
+            'PREFIX class: <https://mediaarts-db.artmuseums.go.jp/data/class#>
+             SELECT ?p (COUNT(*) AS ?n) WHERE {
+               ?s ?p ?pub . ?pub a class:MangaMagazinePublication .
+             } GROUP BY ?p ORDER BY DESC(?n) LIMIT 10'
+
+          # [9] schema:isPartOf で MangaMagazine を指している側の type 分布
+          #     (= 173k の正体が MangaMagazineIssue かどうか確認)
+          run_query "[9] source types of (?s schema:isPartOf MangaMagazine)" \
+            'PREFIX schema: <https://schema.org/>
+             PREFIX class: <https://mediaarts-db.artmuseums.go.jp/data/class#>
+             SELECT ?type (COUNT(*) AS ?n) WHERE {
+               ?s schema:isPartOf ?mag .
+               ?mag a class:MangaMagazine .
+               ?s a ?type .
+             } GROUP BY ?type ORDER BY DESC(?n) LIMIT 10'
+
+          # [10] (name, creator) bridge feasibility: 進撃の巨人 を例に、
+          #      MangaBookSeries と MangaMagazinePublication で同じ
+          #      (name, creator) ペアが取れるか確認
+          run_query "[10] bridge feasibility — 進撃の巨人 (name, creator) match" \
+            'PREFIX schema: <https://schema.org/>
+             PREFIX class: <https://mediaarts-db.artmuseums.go.jp/data/class#>
+             SELECT ?series ?seriesCreator ?pub ?pubCreator WHERE {
+               ?series a class:MangaBookSeries ;
+                       schema:name "進撃の巨人" ;
+                       schema:creator ?seriesCreator .
+               ?pub a class:MangaMagazinePublication ;
+                    schema:name "進撃の巨人" ;
+                    schema:creator ?pubCreator .
+               FILTER(STR(?seriesCreator) = STR(?pubCreator))
+             } LIMIT 5'
+
+          # [11] 進撃の巨人 publication → magazine への path 探索
+          #      MangaMagazinePublication が雑誌 entity に届く predicate chain
+          run_query "[11] 進撃の巨人 MagazinePublication → Magazine path probe" \
+            'PREFIX schema: <https://schema.org/>
+             PREFIX class: <https://mediaarts-db.artmuseums.go.jp/data/class#>
+             SELECT ?p1 ?intermediateType ?p2 (COUNT(*) AS ?n) WHERE {
+               ?pub a class:MangaMagazinePublication ;
+                    schema:name "進撃の巨人" .
+               ?intermediate ?p1 ?pub .
+               ?intermediate a ?intermediateType .
+               OPTIONAL { ?intermediate ?p2 ?mag . ?mag a class:MangaMagazine }
+             } GROUP BY ?p1 ?intermediateType ?p2 ORDER BY DESC(?n) LIMIT 10'
+
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         if: always()
