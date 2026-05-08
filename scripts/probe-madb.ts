@@ -93,10 +93,10 @@ function safeFilename(s: string): string {
 async function probeSanity(): Promise<{ ok: boolean; note: string }> {
   if (DRY_RUN) return { ok: false, note: "dry-run: skipped" };
   // 漫画単行本 (class:MangaBook) の総数を数えて endpoint 到達 + dataset
-  // 規模を同時確認。 hit 0 なら class URI 想定が外れている目印になる。
+  // 規模を同時確認。 schema discovery で確定した URI prefix:
+  //   /data/class#MangaBook  (= /ns/class# ではない)
   const query = `
-    PREFIX schema: <http://schema.org/>
-    PREFIX class: <https://mediaarts-db.artmuseums.go.jp/ns/class#>
+    PREFIX class: <https://mediaarts-db.artmuseums.go.jp/data/class#>
     SELECT (COUNT(?m) AS ?n) WHERE { ?m a class:MangaBook }
   `;
   try {
@@ -252,26 +252,26 @@ async function fetchMadb(authorName: string): Promise<{
   queryUsed: string;
 }> {
   if (DRY_RUN) return { bindings: [], error: "dry-run", queryUsed: "" };
-  // MADB vocabulary (= LOD ハンズオン教材ベース):
-  //   class:MangaBook        → 漫画単行本 manifestation
-  //   schema:creator         → 作者 (= 作家 entity URI)
-  //   rdfs:label / schema:name → 作者名 literal (どちらに入っているかは
-  //     dataset 内で混在し得るので両方 OPTIONAL で取得し UNION する)
-  //   schema:isbn            → ISBN
-  //   schema:publisher       → 出版社 entity (rdfs:label に名前)
-  //   schema:isPartOf        → 上位 work / 雑誌など
+  // MADB vocabulary (= schema discovery で確定):
+  //   schema: prefix         → https://schema.org/  (← https に注意)
+  //   class:MangaBook        → 漫画単行本 manifestation (397k 件)
+  //   schema:creator         → 作家 → 作品の link (= 主要)
+  //   prop:originalWorkCreator → 原作者 (= 必要なら UNION 追加)
+  //   作家 entity (class:Agent) は rdfs:label と schema:name 両方で
+  //     name literal を持つ → UNION で両対応
+  //   schema:isbn / schema:publisher / schema:image / schema:description /
+  //     schema:isPartOf も全て https://schema.org/ namespace
   // 作家名は完全一致 (= NFKC 想定)。 LIMIT 1000 で巨大作家でも上限超過しない。
   const query = `
-    PREFIX schema: <http://schema.org/>
+    PREFIX schema: <https://schema.org/>
     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-    PREFIX class: <https://mediaarts-db.artmuseums.go.jp/ns/class#>
+    PREFIX class: <https://mediaarts-db.artmuseums.go.jp/data/class#>
     SELECT DISTINCT ?manifestation ?title ?isbn ?publisher ?image ?description ?magazine WHERE {
       ?manifestation a class:MangaBook ;
                      schema:creator ?author .
-      { ?author rdfs:label ?authorName }
+      { ?author rdfs:label "${authorName}" }
       UNION
-      { ?author schema:name ?authorName }
-      FILTER(STR(?authorName) = "${authorName}")
+      { ?author schema:name "${authorName}" }
       OPTIONAL { ?manifestation rdfs:label ?title }
       OPTIONAL { ?manifestation schema:isbn ?isbn }
       OPTIONAL { ?manifestation schema:publisher ?pub . ?pub rdfs:label ?publisher }
