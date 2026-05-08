@@ -29,6 +29,7 @@ import fs from "node:fs";
 import path from "node:path";
 import {
   type EditionType,
+  EDITION_LABELS,
   baseTitle,
   buildSeriesKey,
   classifyEdition,
@@ -406,10 +407,11 @@ function upsertVolume(db: DB, author: AuthorRef, rec: MadbRec): void {
       }
     }
   } else {
+    // editions.label は NOT NULL なので EDITION_LABELS の固定文字列を使う。
     const info = stmts.insertEdition.run(
       seriesId,
       editionType,
-      null, // label は NULL (= edition.type で十分判別可能)
+      EDITION_LABELS[editionType],
       rec.publisher,
       issuedYear,
       issuedYear,
@@ -418,19 +420,30 @@ function upsertVolume(db: DB, author: AuthorRef, rec: MadbRec): void {
   }
 
   // ===== volume upsert (= 既存 NDL volume があれば MADB で上書き) =====
+  // volumes.number は NOT NULL なので、 タイトルから抽出できなかった
+  // ケース (= "総集編" / "外伝" 等) は 1 でフォールバック + is_extra=1 で
+  // 識別。 fetch-ndl と同じ運用。
+  const numberVal = volumeNumber ?? 1;
+  const isExtra = volumeNumber === null ? 1 : 0;
   const existingVolume = stmts.selectVolume.get(rec.isbn13) as
     | { edition_id: number }
     | undefined;
   if (existingVolume) {
     stmts.updateVolume.run(
       editionId,
-      volumeNumber,
-      0,
+      numberVal,
+      isExtra,
       releaseDate,
       rec.isbn13,
     );
   } else {
-    stmts.insertVolume.run(editionId, rec.isbn13, volumeNumber, 0, releaseDate);
+    stmts.insertVolume.run(
+      editionId,
+      rec.isbn13,
+      numberVal,
+      isExtra,
+      releaseDate,
+    );
   }
 
   // ===== sources 記録 =====
