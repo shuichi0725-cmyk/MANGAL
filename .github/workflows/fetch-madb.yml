@@ -94,6 +94,10 @@ jobs:
           echo "=== unique magazine literals across all authors ==="
           jq -r '.records[].magazine' .cache/madb/*.json 2>/dev/null \
             | sort -u | head -50 || true
+          echo
+          echo "=== unique magazineType across all authors ==="
+          jq -r '.records[].magazineType' .cache/madb/*.json 2>/dev/null \
+            | sort | uniq -c | sort -rn || true
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4

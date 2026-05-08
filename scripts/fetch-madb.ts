@@ -236,22 +236,25 @@ async function fetchMadbForName(
     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
     PREFIX class: <https://mediaarts-db.artmuseums.go.jp/data/class#>
     PREFIX prop: <https://mediaarts-db.artmuseums.go.jp/data/property#>
-    SELECT DISTINCT ?manifestation ?title ?creator ?isbn ?publisher ?magazine ?datePublished WHERE {
+    SELECT DISTINCT ?manifestation ?title ?creator ?isbn ?publisher ?magazine ?magazineType ?datePublished WHERE {
       ?manifestation a class:MangaBook .
       ${creatorClause}
       FILTER(REGEX(STR(?creator), "${re}"))
       OPTIONAL { ?manifestation rdfs:label ?title }
       OPTIONAL { ?manifestation schema:isbn ?isbn }
       OPTIONAL { ?manifestation schema:publisher ?publisher }
-      # 雑誌の取得は 2 段 dereference が必要:
-      # ?manifestation schema:isPartOf -> ?magazineUri (= class:MangaMagazine の C-id URI)
-      # ?magazineUri rdfs:label -> "雑誌名　∥　ヨミ" literal
-      # property path schema:isPartOf+ で 1 階層以上の連結を許容 (=
-      # MangaBookSeries 経由の間接参照ケースも吸収)。
+      # 雑誌取得: schema:isPartOf の指す C-id は class:MangaMagazine とは
+      # 限らず、 class:MangaBookSeries (= シリーズ entity) を指すケースが
+      # 多い (= 過去 run で class:MangaMagazine filter が 0% だった理由)。
+      # ここでは type filter なしで rdfs:label を素直に取り、 type は
+      # 別変数で同時取得して post-processing で series/magazine を識別。
       OPTIONAL {
-        ?manifestation schema:isPartOf+ ?magazineUri .
-        ?magazineUri a class:MangaMagazine ;
-                     rdfs:label ?magazine .
+        ?manifestation schema:isPartOf ?magazineUri .
+        ?magazineUri rdfs:label ?magazine .
+      }
+      OPTIONAL {
+        ?manifestation schema:isPartOf ?magazineUri .
+        ?magazineUri a ?magazineType .
       }
       OPTIONAL { ?manifestation schema:datePublished ?datePublished }
     } LIMIT ${QUERY_LIMIT}
@@ -266,6 +269,7 @@ type MadbRec = {
   isbn13: string;
   publisher: string | null;
   magazine: string | null;
+  magazineType: string | null;
   datePublished: string | null;
 };
 
@@ -287,6 +291,7 @@ function normalizeBinding(b: SparqlBinding): MadbRec | null {
     isbn13,
     publisher: b["publisher"]?.value?.trim() || null,
     magazine: b["magazine"]?.value?.trim() || null,
+    magazineType: b["magazineType"]?.value?.trim() || null,
     datePublished: b["datePublished"]?.value?.trim() || null,
   };
 }
@@ -717,6 +722,70 @@ async function processAuthor(
   return { inserted, updated, skipped };
 }
 
+/**
+ * Phase 0+ schema discovery: schema:isPartOf chain の真の構造を発見。
+ * 1) MangaBook → schema:isPartOf → ?part の ?part type 分布
+ * 2) ?part の outgoing predicates 上位 (= MangaMagazine への真の link を発見)
+ * 3) 鎖がもう 1 段必要なら ?part → ?? → MangaMagazine の predicate も sample
+ *
+ * 結果は console.log で出力 (= GH workflow 上で読める)。 この情報を元に
+ * fetchMadbForName の SPARQL を修正する次イテレーションを設計する。
+ */
+async function discoverIsPartOfChain(): Promise<void> {
+  console.log("\n=== Phase 0+: schema:isPartOf chain discovery ===");
+
+  // (1) MangaBook → schema:isPartOf → ?part type distribution
+  const q1 = `
+    PREFIX schema: <https://schema.org/>
+    PREFIX class: <https://mediaarts-db.artmuseums.go.jp/data/class#>
+    SELECT ?type (COUNT(*) AS ?n) WHERE {
+      ?m a class:MangaBook ;
+         schema:isPartOf ?p .
+      ?p a ?type .
+    } GROUP BY ?type ORDER BY DESC(?n) LIMIT 10
+  `;
+  const r1 = await sparqlFetch(q1);
+  console.log(`  [1] schema:isPartOf target type distribution:`);
+  for (const b of r1.bindings) {
+    console.log(`      ${b["n"]?.value} × ${b["type"]?.value}`);
+  }
+
+  // (2) 第一 hop ?part の outgoing predicates 上位 (= MangaMagazine 等への
+  //     真の link predicate を発見)
+  const q2 = `
+    PREFIX schema: <https://schema.org/>
+    PREFIX class: <https://mediaarts-db.artmuseums.go.jp/data/class#>
+    SELECT ?p (COUNT(*) AS ?n) WHERE {
+      ?m a class:MangaBook ;
+         schema:isPartOf ?part .
+      ?part ?p ?o .
+    } GROUP BY ?p ORDER BY DESC(?n) LIMIT 25
+  `;
+  const r2 = await sparqlFetch(q2);
+  console.log(`  [2] outgoing predicates of schema:isPartOf target:`);
+  for (const b of r2.bindings) {
+    console.log(`      ${b["n"]?.value} × ${b["p"]?.value}`);
+  }
+
+  // (3) ?part → ?next の type 分布 (= 第二 hop で MangaMagazine が見つかるか)
+  const q3 = `
+    PREFIX schema: <https://schema.org/>
+    PREFIX class: <https://mediaarts-db.artmuseums.go.jp/data/class#>
+    SELECT ?type (COUNT(*) AS ?n) WHERE {
+      ?m a class:MangaBook ;
+         schema:isPartOf ?part .
+      ?part ?anyP ?next .
+      ?next a ?type .
+    } GROUP BY ?type ORDER BY DESC(?n) LIMIT 15
+  `;
+  const r3 = await sparqlFetch(q3);
+  console.log(`  [3] second-hop type distribution (= ?part ?anyP ?next):`);
+  for (const b of r3.bindings) {
+    console.log(`      ${b["n"]?.value} × ${b["type"]?.value}`);
+  }
+  console.log("");
+}
+
 async function main(): Promise<void> {
   const args = parseArgs(process.argv.slice(2));
   if (!args.qid && !args.name && !args.all) {
@@ -737,6 +806,13 @@ async function main(): Promise<void> {
   console.log(
     `[fetch-madb] start: ${authors.length} mangaka, includeOriginalAuthor=${args.includeOriginalAuthor}`,
   );
+
+  // Phase 0+: schema:isPartOf chain の discovery (= 雑誌 entity への
+  // 真の経路を発見するため)。 過去 run で MangaMagazine filter が 0%
+  // だった原因は、 MangaBook → schema:isPartOf → ??? の ??? が
+  // MangaBookSeries 等の中間 entity だったから。 真の type 分布と
+  // 中間 entity の outgoing predicates を 1 回だけログに出す。
+  await discoverIsPartOfChain();
 
   const totals = { inserted: 0, updated: 0, skipped: 0 };
   for (const author of authors) {
