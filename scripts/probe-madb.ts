@@ -308,10 +308,14 @@ async function fetchMadb(authorName: string): Promise<{
     PREFIX schema: <https://schema.org/>
     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
     PREFIX class: <https://mediaarts-db.artmuseums.go.jp/data/class#>
-    SELECT DISTINCT ?manifestation ?title ?isbn ?publisher ?image ?description ?magazine WHERE {
+    SELECT DISTINCT ?manifestation ?title ?isbn ?publisher ?image ?description ?magazine ?creator WHERE {
       ?manifestation a class:MangaBook ;
                      schema:creator ?creator .
-      FILTER(STR(?creator) = "${authorName}")
+      # MADB の creator literal は "[原作]吾峠呼世晴" / "[著]諫山創" /
+      # "[作画]<who>" のように役割タグが prefix されたケースが大半。
+      # bare 名前 + "]" 直後 + 末尾 のいずれにマッチさせる REGEX で
+      # 全パターンを吸収しつつ、 同名別人 ("諫山創 太郎" 等) は弾く。
+      FILTER(REGEX(STR(?creator), "(^|\\\\])${authorName}$"))
       OPTIONAL { ?manifestation rdfs:label ?title }
       OPTIONAL { ?manifestation schema:isbn ?isbn }
       OPTIONAL { ?manifestation schema:publisher ?publisher }
