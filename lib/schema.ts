@@ -45,6 +45,7 @@ export const EditionType = z.enum([
   "aizoban",
   "wideban",
   "renewal",
+  "anime",
   "other",
 ]);
 export type EditionTypeT = z.infer<typeof EditionType>;

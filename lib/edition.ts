@@ -22,6 +22,7 @@ export type EditionType =
   | "aizoban"
   | "wideban"
   | "renewal"
+  | "anime"
   | "other";
 
 export const EDITION_LABELS: Record<EditionType, string> = {
@@ -32,6 +33,7 @@ export const EDITION_LABELS: Record<EditionType, string> = {
   aizoban: "愛蔵版",
   wideban: "ワイド版",
   renewal: "新装版（カバーリニューアル）",
+  anime: "アニメ版",
   other: "その他",
 };
 
@@ -44,6 +46,7 @@ export const EDITION_ORDER: EditionType[] = [
   "wideban",
   "bunkobon",
   "renewal",
+  "anime",
   "other",
 ];
 
@@ -76,6 +79,7 @@ export function classifyEdition(text: string): EditionType {
     aizoban: 0,
     wideban: 0,
     renewal: 0,
+    anime: 0,
     other: 0,
   };
   if (/完全版/.test(t)) scores.kanzenban += 3;
@@ -84,6 +88,7 @@ export function classifyEdition(text: string): EditionType {
   if (/新装版/.test(t)) scores.shinsoban += 3;
   if (/カバー新装|カバーリニューアル/.test(t)) scores.renewal += 2;
   if (/文庫/.test(t)) scores.bunkobon += 3;
+  if (/(TVアニメ版|アニメ版)/.test(t)) scores.anime += 3;
 
   let best: EditionType = "standard";
   let bestScore = scores.standard;
@@ -94,6 +99,34 @@ export function classifyEdition(text: string): EditionType {
     }
   }
   return best;
+}
+
+/**
+ * MADB の単行本レーベル (= imprint) 文字列から edition 種別を分類。
+ * fetch-madb で 1 series に複数 imprint の records が混在 (= 通常版/ワイド版/
+ * 文庫/アニメ版 等) しても、 imprint 名 suffix で確実に分離可能。
+ *
+ * tax key:
+ *   - "少年サンデーコミックス・アニメ版" → anime
+ *   - "少年サンデーコミックスワイド版"     → wideban
+ *   - "小学館文庫"                        → bunkobon
+ *   - "ジャンプ・コミックス愛蔵版"         → aizoban
+ *   - "完全版コミックス"                  → kanzenban
+ *   - "新装版コミックス"                  → shinsoban
+ *   - "少年サンデーコミックス" (= 通常版)   → standard
+ */
+export function classifyEditionFromImprint(imprint: string): EditionType {
+  if (!imprint) return "standard";
+  const t = imprint.normalize("NFKC");
+  // 優先順: 「アニメ版」 を最優先 (= 「コミックス」 接尾辞より厳格な signal)
+  if (/(TVアニメ|アニメ版)/.test(t)) return "anime";
+  if (/ワイド版/.test(t)) return "wideban";
+  if (/(文庫|文庫版)/.test(t)) return "bunkobon";
+  if (/愛蔵/.test(t)) return "aizoban";
+  if (/完全/.test(t)) return "kanzenban";
+  if (/新装/.test(t)) return "shinsoban";
+  if (/(カバー新装|カバーリニューアル)/.test(t)) return "renewal";
+  return "standard";
 }
 
 /**

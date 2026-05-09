@@ -45,6 +45,7 @@ import { MangaSchema } from "../lib/schema";
 import {
   EDITION_LABELS,
   EDITION_PRIORITY,
+  classifyEditionFromImprint,
   slugFromTitle,
   type EditionType,
 } from "../lib/edition";
@@ -200,15 +201,6 @@ type SeriesRow = {
   wikipedia_url: string | null;
 };
 
-type EditionRow = {
-  id: number;
-  type: string;
-  label: string;
-  imprint: string | null;
-  year_started: number | null;
-  year_ended: number | null;
-};
-
 type VolumeRow = {
   number: number;
   isbn13: string;
@@ -234,94 +226,165 @@ function detectVolumeGaps(numbers: number[]): number[] {
   return missing;
 }
 
+type VolumeWithImprint = VolumeRow & {
+  perRecImprint: string;
+  derivedType: EditionType;
+};
+
+type BuiltEdition = {
+  type: EditionType;
+  label: string;
+  imprint?: string;
+  year_started?: number;
+  year_ended?: number;
+  volumes: {
+    number: number;
+    asin: string | null;
+    isbn13: string;
+    cover_url: string | null;
+    release_date: string | null;
+  }[];
+};
+
 function buildEditionsForSeries(
   db: DB,
   seriesId: number,
 ): {
-  editions: ReturnType<typeof buildSingleEditionResult>[];
-  /** edition.type → 欠番 number 配列 (= 警告 log 用) */
+  editions: BuiltEdition[];
   gaps: { editionType: string; missing: number[] }[];
 } {
-  // editions の取得順は EDITION_PRIORITY を主、 year_started を tie-break。
-  // ユーザの意図する 「通常版 → 完全版的なもの → その他」 階層を yaml 出力にそのまま反映する。
-  const editions = db
+  // 5 軸改善: DB の editions テーブル (= fetch-madb 段で title 由来分類した結果) を
+  // 信用せず、 全 volumes を sources.raw_json (= MADB per-record imprint) で
+  // 再分類して virtual edition を組み直す。
+  //
+  // 動機: fetch-madb は title="うる星やつら" だけを見て classifyEdition() するため、
+  // ワイド版/文庫/アニメ版/通常版が同じ standard edition に詰め込まれる。 DB の
+  // edition.imprint は最後/最初に見た 1 値しか持たず実態と乖離する。 MADB raw の
+  // imprint (= 単行本レーベル) こそ真値。
+  const rows = db
     .prepare(
-      `SELECT id, type, label, imprint, year_started, year_ended
-       FROM editions
-       WHERE series_id = ?
-       ORDER BY
-         CASE type
-           WHEN 'standard'  THEN 0
-           WHEN 'kanzenban' THEN 1
-           WHEN 'shinsoban' THEN 2
-           WHEN 'aizoban'   THEN 3
-           WHEN 'wideban'   THEN 4
-           WHEN 'bunkobon'  THEN 5
-           WHEN 'renewal'   THEN 6
-           WHEN 'other'     THEN 7
-           ELSE 99
-         END ASC,
-         COALESCE(year_started, 9999) ASC`,
+      `SELECT v.number, v.isbn13, v.release_date, v.cover_url, v.asin,
+              e.imprint AS db_imprint,
+              src.raw_json AS raw_madb
+       FROM volumes v
+       JOIN editions e ON v.edition_id = e.id
+       LEFT JOIN sources src ON src.source_name = 'madb'
+                             AND src.ref_table = 'volumes'
+                             AND src.ref_id = v.isbn13
+       WHERE e.series_id = ? AND v.is_extra = 0 AND v.number >= 1`,
     )
-    .all(seriesId) as EditionRow[];
+    .all(seriesId) as (VolumeRow & {
+      db_imprint: string | null;
+      raw_madb: string | null;
+    })[];
 
+  // 各 volume を per-record imprint で再分類
+  const enriched: VolumeWithImprint[] = rows.map((r) => {
+    let perRecImprint = r.db_imprint ?? "";
+    if (r.raw_madb) {
+      try {
+        const raw = JSON.parse(r.raw_madb) as { imprint?: string };
+        if (raw.imprint && typeof raw.imprint === "string") {
+          perRecImprint = raw.imprint;
+        }
+      } catch {
+        // raw_json が壊れていれば db_imprint fallback
+      }
+    }
+    return {
+      number: r.number,
+      isbn13: r.isbn13,
+      release_date: r.release_date,
+      cover_url: r.cover_url,
+      asin: r.asin,
+      perRecImprint,
+      derivedType: classifyEditionFromImprint(perRecImprint),
+    };
+  });
+
+  // edition type で grouping
+  const groups = new Map<EditionType, VolumeWithImprint[]>();
+  for (const v of enriched) {
+    const list = groups.get(v.derivedType);
+    if (list) list.push(v);
+    else groups.set(v.derivedType, [v]);
+  }
+
+  const built: BuiltEdition[] = [];
   const gaps: { editionType: string; missing: number[] }[] = [];
-  const result = editions.map((e) => {
-    const built = buildSingleEditionResult(db, e);
-    const numbers = built.volumes.map((v) => v.number);
+
+  for (const [type, list] of groups) {
+    // group 内で最頻 imprint を採用 (= 表記揺れの中で代表 1 つを選ぶ)
+    const impCount = new Map<string, number>();
+    for (const v of list) {
+      if (!v.perRecImprint) continue;
+      impCount.set(v.perRecImprint, (impCount.get(v.perRecImprint) ?? 0) + 1);
+    }
+    const topImprint =
+      [...impCount.entries()].sort((a, b) => b[1] - a[1])[0]?.[0] ?? "";
+
+    // sort: number → release_date 昇順 → ISBN tie-break
+    const sorted = [...list].sort((a, b) => {
+      if (a.number !== b.number) return a.number - b.number;
+      const ad = a.release_date ?? "9999-99-99";
+      const bd = b.release_date ?? "9999-99-99";
+      if (ad !== bd) return ad < bd ? -1 : 1;
+      const ac = a.cover_url == null ? 1 : 0;
+      const bc = b.cover_url == null ? 1 : 0;
+      if (ac !== bc) return ac - bc;
+      return a.isbn13 < b.isbn13 ? -1 : 1;
+    });
+
+    // 同 number は先頭 1 件 (= release_date 最古) を primary に採用
+    const seen = new Set<number>();
+    const unique = sorted.filter((v) => {
+      if (seen.has(v.number)) return false;
+      seen.add(v.number);
+      return true;
+    });
+    if (unique.length === 0) continue;
+
+    // 軸 4: year_started/ended を primary set min/max で再計算 (= DB の
+    // editions.year_started/ended は混入 ISBN を含むので信用しない)
+    const years = unique
+      .map((v) => v.release_date)
+      .filter((d): d is string => Boolean(d))
+      .map((d) => parseInt(d.slice(0, 4), 10))
+      .filter((y) => !Number.isNaN(y) && y >= 1900 && y <= 2100);
+    const yearStarted = years.length > 0 ? Math.min(...years) : null;
+    const yearEnded = years.length > 0 ? Math.max(...years) : null;
+
+    const numbers = unique.map((v) => v.number);
     const missing = detectVolumeGaps(numbers);
-    if (missing.length > 0) gaps.push({ editionType: e.type, missing });
-    return built;
+    if (missing.length > 0) gaps.push({ editionType: type, missing });
+
+    built.push({
+      type,
+      label: EDITION_LABELS[type],
+      ...(topImprint ? { imprint: topImprint } : {}),
+      ...(yearStarted !== null ? { year_started: yearStarted } : {}),
+      ...(yearEnded !== null ? { year_ended: yearEnded } : {}),
+      volumes: unique.map((v) => ({
+        number: v.number,
+        asin: v.asin,
+        isbn13: v.isbn13,
+        cover_url: v.cover_url,
+        release_date: v.release_date,
+      })),
+    });
+  }
+
+  // EDITION_PRIORITY 順で sort (= standard → kanzenban → … → anime → other)
+  built.sort((a, b) => {
+    const pa = EDITION_PRIORITY[a.type] ?? 99;
+    const pb = EDITION_PRIORITY[b.type] ?? 99;
+    if (pa !== pb) return pa - pb;
+    return (a.year_started ?? 9999) - (b.year_started ?? 9999);
   });
 
   return {
-    editions: result.filter((e) => e.volumes.length > 0),
+    editions: built.filter((e) => e.volumes.length > 0),
     gaps,
-  };
-}
-
-/**
- * 1 edition の volumes 取得 + 同 number で重複する ISBN を 1 件に絞る。
- * 採用順: release_date 最古 → cover_url あり → ISBN-13 順 (= deterministic)。
- * 「最古日」 の意図は、 重版 / 廉価版バリアント が混入していても初版を primary
- * として安定採用すること (= 「途中で違う物が混ざる」 ユーザ最悪ケースの抑止)。
- */
-function buildSingleEditionResult(db: DB, e: EditionRow) {
-  const vols = db
-    .prepare(
-      `SELECT number, isbn13, release_date, cover_url, asin
-       FROM volumes
-       WHERE edition_id = ? AND is_extra = 0 AND number >= 1
-       ORDER BY
-         number ASC,
-         COALESCE(release_date, '9999-99-99') ASC,
-         CASE WHEN cover_url IS NULL THEN 1 ELSE 0 END ASC,
-         isbn13 ASC`,
-    )
-    .all(e.id) as VolumeRow[];
-
-  // 同 number で複数 ISBN ある case (= 0.8% 程度) は先頭 (= 上の ORDER BY で
-  // primary 確定済) のみ採用。 残りは drop (= 集約)。
-  const seen = new Set<number>();
-  const uniqueVols = vols.filter((v) => {
-    if (seen.has(v.number)) return false;
-    seen.add(v.number);
-    return true;
-  });
-
-  return {
-    type: e.type as EditionType,
-    label: e.label,
-    ...(e.imprint ? { imprint: e.imprint } : {}),
-    ...(e.year_started !== null ? { year_started: e.year_started } : {}),
-    ...(e.year_ended !== null ? { year_ended: e.year_ended } : {}),
-    volumes: uniqueVols.map((v) => ({
-      number: v.number,
-      asin: v.asin,
-      isbn13: v.isbn13,
-      cover_url: v.cover_url,
-      release_date: v.release_date,
-    })),
   };
 }
 

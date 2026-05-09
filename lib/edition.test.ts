@@ -7,6 +7,7 @@ import {
   buildCreatorClause,
   buildSeriesKey,
   classifyEdition,
+  classifyEditionFromImprint,
   escapeCql,
   extractVolumeNumber,
   matchAdultPublisher,
@@ -28,6 +29,7 @@ describe("EDITION_PRIORITY", () => {
       "aizoban",
       "wideban",
       "renewal",
+      "anime",
       "other",
     ];
     for (const t of allTypes) {
@@ -127,6 +129,51 @@ describe("classifyEdition (M5: scoring-based)", () => {
 
   it("standard wins on ties (no edition tokens at all)", () => {
     expect(classifyEdition("ふつうの単行本タイトル 1")).toBe("standard");
+  });
+
+  it("recognizes anime edition", () => {
+    expect(classifyEdition("アニメ版うる星やつら 35")).toBe("anime");
+    expect(classifyEdition("ドラゴンボール TVアニメ版 1")).toBe("anime");
+  });
+});
+
+describe("classifyEditionFromImprint", () => {
+  it("classifies 通常版 imprint as standard", () => {
+    expect(classifyEditionFromImprint("少年サンデーコミックス")).toBe("standard");
+    expect(classifyEditionFromImprint("ジャンプ・コミックス")).toBe("standard");
+    expect(classifyEditionFromImprint("ビッグコミックス")).toBe("standard");
+    expect(classifyEditionFromImprint("")).toBe("standard");
+  });
+
+  it("classifies アニメ版 imprint as anime (= 真値 priority over standard)", () => {
+    expect(classifyEditionFromImprint("少年サンデーコミックス・アニメ版")).toBe(
+      "anime",
+    );
+    expect(classifyEditionFromImprint("少年サンデーコミックス アニメ版")).toBe(
+      "anime",
+    );
+    expect(classifyEditionFromImprint("TVアニメ コミックス")).toBe("anime");
+  });
+
+  it("classifies ワイド版 / 文庫 / 完全版 / 愛蔵 / 新装 imprint", () => {
+    expect(classifyEditionFromImprint("少年サンデーコミックスワイド版")).toBe(
+      "wideban",
+    );
+    expect(classifyEditionFromImprint("小学館文庫")).toBe("bunkobon");
+    expect(classifyEditionFromImprint("ジャンプ・コミックス文庫版")).toBe(
+      "bunkobon",
+    );
+    expect(classifyEditionFromImprint("ジャンプ・コミックス愛蔵版")).toBe(
+      "aizoban",
+    );
+    expect(classifyEditionFromImprint("完全版コミックス")).toBe("kanzenban");
+    expect(classifyEditionFromImprint("新装版コミックス")).toBe("shinsoban");
+  });
+
+  it("normalizes NFKC half-width hyphens / spaces", () => {
+    expect(classifyEditionFromImprint("少年サンデーコミックス・アニメ版")).toBe(
+      "anime",
+    );
   });
 });
 
