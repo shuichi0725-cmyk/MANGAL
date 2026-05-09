@@ -223,6 +223,32 @@ export function splitMadbLiteral(s: string): string {
 }
 
 /**
+ * MADB の brand / publisher 値で観測される 「明らかに同義の char」 だけを
+ * 選択的に正規化する。 NFKC は範囲が広すぎ (= 全角アルファベットや
+ * 全角括弧まで触る) ため、 ユーザの判断で **B/C/D のみ** を統一する:
+ *
+ *   B. U+3000 (全角空白)        → U+0020 (半角空白)
+ *   C. U+FF05 (全角％)          → U+0025 (半角%)
+ *   D. U+FF65 (半角中黒 ･)      → U+30FB (全角中黒 ・)
+ *
+ * 含めない:
+ *   A. 全角括弧 (U+FF08/U+FF09 () / U+FF3B/U+FF3D []) — 出版社の意匠
+ *      意図を残すため触らない (ユーザ判断 N commit)
+ *   その他 全角アルファベット / 全角数字 / カタカナ全角←→半角 — 観測なし
+ *
+ * D は他と方向が逆 (= 半→全) で、 これは Unicode 規格上 中黒の canonical 形が
+ * U+30FB と定義されているため (= U+FF65 → U+30FB は NFKC でも同じ方向)。
+ */
+export function selectiveNormalize(s: string): string {
+  return s.replace(/[　％･]/g, (c) => {
+    if (c === "　") return " ";
+    if (c === "％") return "%";
+    if (c === "･") return "・";
+    return c;
+  });
+}
+
+/**
  * field の @language=ja-hrkt の @value を返す (= ヨミ取得)。 無ければ空文字。
  */
 export function findKanaLiteral(field: MadbJsonLdField | undefined): string {

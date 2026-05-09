@@ -55,6 +55,7 @@ import {
   cleanCreatorStrings,
   flattenStringArray,
   rebuildSchemaName,
+  selectiveNormalize,
   splitMadbLiteral,
   type MadbJsonLdRecord,
 } from "../lib/madb-jsonld";
@@ -184,8 +185,10 @@ function applyPublisherCanonical(
   if (typeof field === "string") {
     const split = splitMadbLiteral(field);
     if (!split) return field;
-    const key = split.normalize("NFKC").toLowerCase().trim();
-    return canonical.get(key) ?? split;
+    const norm = selectiveNormalize(split);
+    const key = norm.toLowerCase().trim();
+    // canonical 不在の edge case でも norm を返す (= ∥ 削除 + B/C/D 統一)
+    return canonical.get(key) ?? norm;
   }
   if (Array.isArray(field)) {
     return field.map((x) => applyPublisherCanonical(x, canonical));
@@ -203,8 +206,13 @@ function applyImprintCanonical(
   canonical: Map<string, string>,
 ): unknown {
   if (typeof field === "string") {
-    const key = field.normalize("NFKC").toLowerCase().trim();
-    return canonical.get(key) ?? field;
+    const norm = selectiveNormalize(field);
+    const key = norm.toLowerCase().trim();
+    // canonical 引きで canonical 形に置換。 canonical 不在 (= whitespace-only
+    // 等で集計時に skip された edge case) でも selectiveNormalize 適用済の
+    // norm を返すことで 「　」 (= 全角空白 1 char) → 「 」 (= 半角空白 1 char)
+    // のような統一を保証。
+    return canonical.get(key) ?? norm;
   }
   if (Array.isArray(field)) {
     return field.map((x) => applyImprintCanonical(x, canonical));
@@ -214,8 +222,11 @@ function applyImprintCanonical(
 
 /**
  * 同 lowercase key の中で 「最頻出 form」 を canonical として選択。 同点は
- * code-point 順 (= deterministic)。 単一 form の group は map に入れない
- * (= no-op で十分)。
+ * code-point 順 (= deterministic)。
+ *
+ * 全 group (= 単一 form group も) を canonical map に入れる。 これにより、
+ * 単一 form group の値も apply 時に「selectiveNormalize 後の form」 に
+ * 置換される (= 全角空白 → 半角空白 等の統一が確実に効く)。
  */
 function pickCanonicalFromGroups(
   groups: Map<string, Map<string, number>>,
@@ -223,8 +234,7 @@ function pickCanonicalFromGroups(
   const canonical = new Map<string, string>();
   let groupsWithVariation = 0;
   for (const [lower, formMap] of groups) {
-    if (formMap.size === 1) continue;
-    groupsWithVariation++;
+    if (formMap.size > 1) groupsWithVariation++;
     let bestForm = "";
     let bestCount = -1;
     for (const [form, count] of formMap) {
@@ -274,17 +284,18 @@ async function aggregateBrandsAndPublishers(
   }>) {
     recordsScanned++;
 
-    // brand 集計: NFKC + lowercase + trim を group key に。
-    // form は NFKC + trim で保管 (= 末尾の全角空白等を削除、 case は保持)。
-    // これで 「きみとぼくCOLLECTION　」 (末尾 U+3000) と 「きみとぼくcollection」
-    // が同 group に集約され、 canonical も末尾空白なしの形になる。
+    // brand 集計: selectiveNormalize + lowercase + trim を group key に。
+    // selectiveNormalize は B/C/D (= 全角空白/全角％/半角中黒) のみ統一する。
+    // 全角括弧 (= pattern A) はユーザ判断で保持 → 異なる group のまま。
+    // form も selectiveNormalize + trim で保管、 末尾空白等 を削除。
     const brand = item.value["schema:brand"];
     if (brand !== undefined && brand !== null) {
       const visitBrand = (v: unknown): void => {
         if (typeof v === "string" && v) {
-          const key = v.normalize("NFKC").toLowerCase().trim();
+          const norm = selectiveNormalize(v);
+          const key = norm.toLowerCase().trim();
           if (!key) return;
-          const form = v.normalize("NFKC").trim();
+          const form = norm.trim();
           const inner = brandGroups.get(key);
           if (inner) inner.set(form, (inner.get(form) || 0) + 1);
           else brandGroups.set(key, new Map([[form, 1]]));
@@ -295,16 +306,17 @@ async function aggregateBrandsAndPublishers(
       visitBrand(brand);
     }
 
-    // publisher 集計: ∥ split → NFKC + lowercase + trim を key に
+    // publisher 集計: ∥ split → selectiveNormalize + lowercase + trim を key に
     const pub = item.value["schema:publisher"];
     if (pub !== undefined && pub !== null) {
       const visitPub = (v: unknown): void => {
         if (typeof v === "string" && v) {
           const split = splitMadbLiteral(v);
           if (!split) return;
-          const key = split.normalize("NFKC").toLowerCase().trim();
+          const norm = selectiveNormalize(split);
+          const key = norm.toLowerCase().trim();
           if (!key) return;
-          const form = split.normalize("NFKC").trim();
+          const form = norm.trim();
           const inner = publisherGroups.get(key);
           if (inner) inner.set(form, (inner.get(form) || 0) + 1);
           else publisherGroups.set(key, new Map([[form, 1]]));

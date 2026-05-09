@@ -9,10 +9,49 @@ import {
   isAdultMadbRecord,
   parseVolumeNumber,
   rebuildSchemaName,
+  selectiveNormalize,
   splitMadbLiteral,
   type MadbJsonLdRecord,
   type MadbRecord,
 } from "./madb-jsonld";
+
+describe("selectiveNormalize (= B/C/D のみ統一、 括弧他は保持)", () => {
+  it("converts 全角空白 (U+3000) to 半角空白 (= pattern B)", () => {
+    expect(selectiveNormalize("集英社文庫　コミック版")).toBe("集英社文庫 コミック版");
+  });
+
+  it("converts 全角 ％ (U+FF05) to 半角 % (= pattern C)", () => {
+    expect(selectiveNormalize("ニュータイプ100％コミックス")).toBe("ニュータイプ100%コミックス");
+  });
+
+  it("converts 半角中黒 ･ (U+FF65) to 全角中黒 ・ (= pattern D, half→full)", () => {
+    expect(selectiveNormalize("ダ･ヴィンチブックス")).toBe("ダ・ヴィンチブックス");
+  });
+
+  it("preserves 全角括弧 (= pattern A excluded by user choice)", () => {
+    // デザインコンセプトとして保持されるべき
+    expect(selectiveNormalize("Daito comics PC（pet comic）シリーズ")).toBe("Daito comics PC（pet comic）シリーズ");
+    expect(selectiveNormalize("［コミックエッセイの森］")).toBe("［コミックエッセイの森］");
+  });
+
+  it("preserves 全角アルファベット (= NFKC would touch but we don't)", () => {
+    // ユーザ明示選択スコープ外
+    expect(selectiveNormalize("ＫＡＤＯＫＡＷＡ")).toBe("ＫＡＤＯＫＡＷＡ");
+  });
+
+  it("handles mixed B+C+D in single string", () => {
+    // 全角空白 + 全角％ + 半角中黒 を同時に
+    expect(selectiveNormalize("Foo　50％･bar")).toBe("Foo 50%・bar");
+  });
+
+  it("returns empty string unchanged", () => {
+    expect(selectiveNormalize("")).toBe("");
+  });
+
+  it("returns plain ASCII unchanged", () => {
+    expect(selectiveNormalize("Hello World")).toBe("Hello World");
+  });
+});
 
 describe("rebuildSchemaName (= 種2 用 schema:name 仕様準拠化)", () => {
   it("demotes ASCII-only ja-hrkt values to en (= 進撃の巨人 case)", () => {
