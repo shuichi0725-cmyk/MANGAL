@@ -37,9 +37,12 @@
     "promote:series": "tsx scripts/promote-series.ts",
     "promote:bulk": "tsx scripts/promote-bulk.ts",
     "promote:drafts": "tsx scripts/promote-drafts.ts",
+    "seed:build3": "tsx scripts/build-seed3.ts",
+    "seed:build3:diff": "tsx scripts/build-seed3.ts --diff-mode",
     "deploy": "wrangler deploy"
   },
   "dependencies": {
+    "@anthropic-ai/sdk": "^0.95.1",
     "better-sqlite3": "11.7.0",
     "fast-xml-parser": "4.5.1",
     "kuromoji": "0.1.2",

@@ -51,6 +51,7 @@ import {
 } from "../lib/edition";
 import { computeAdultScore } from "../lib/adult-score";
 import { readKanaFromTitle } from "../lib/kana";
+import { loadSeed3, seed3Key, type Seed3Entry } from "../lib/seed3";
 
 type Args = {
   outDir: string;
@@ -546,6 +547,12 @@ async function main() {
     `[adult] known publishers: ${knownAdultPublishers.size}, known mangaka: ${knownAdultMangaka.size}, known imprints: ${knownAdultImprints.size}`,
   );
 
+  // 種3 (= series-supplement.yml) を読み込み。 magazine / demographic / genres /
+  // synopsis / status / slug を AI 補完済 entry で 上書きする。 entry 不在 series
+  // は従来通り Wikipedia row.* / placeholder fallback。
+  const seed3 = loadSeed3();
+  console.log(`[seed3] loaded ${seed3.size} entries from data/seeds/series-supplement.yml`);
+
   // データソース別の volumes 件数 (= MADB 主導か NDL 主導かを把握するため)。
   const sourcesSummary = db
     .prepare(
@@ -689,6 +696,10 @@ async function main() {
     // collision suffix を含む slug を使うと "inuyasha 2" のように巻数表記に見えてしまう。
     const titleRomaji = baseSlug.replace(/-/g, " ");
 
+    // 種3 entry の lookup (= qid + baseTitle 複合 key)。 series.title は
+    // fetch-madb 段で既に baseTitle 化されているので そのまま key 構築可能。
+    const s3 = seed3.get(seed3Key(row.qid ?? author.qid, row.title));
+
     // B-1: Wikipedia 由来データがあれば優先採用。無ければ placeholder。
     const wikiGenres = row.genres
       ? row.genres
@@ -696,9 +707,23 @@ async function main() {
           .map((s) => s.trim())
           .filter(Boolean)
       : [];
-    const genres = wikiGenres.length > 0 ? wikiGenres : ["TODO_genre"];
-    const demographic = row.demographic ?? "shounen";
-    const synopsis = row.synopsis ?? "";
+    // 優先順: 種3 (= AI 補完) > Wikipedia (= row.*) > placeholder
+    const genres =
+      s3?.genres && s3.genres.length > 0
+        ? s3.genres
+        : wikiGenres.length > 0
+          ? wikiGenres
+          : ["TODO_genre"];
+    const demographic = s3?.demographic ?? row.demographic ?? "shounen";
+    const synopsis = s3?.synopsis ?? row.synopsis ?? "";
+    const magazine = s3?.magazine ?? row.magazine_key ?? null;
+    // status: 種3 > DB row.status (= Wikipedia 由来) > year_ended-based default
+    // ただし year_ended >= 2025 で 種3/row.status 両方無いなら ongoing 安全側に
+    const recentEnd = yearEnded != null && yearEnded >= 2025;
+    const status: "ongoing" | "completed" | "hiatus" =
+      s3?.status ??
+      (row.status as "ongoing" | "completed" | "hiatus" | null) ??
+      (recentEnd ? "ongoing" : yearEnded ? "completed" : "ongoing");
 
     const manga = {
       slug,
@@ -707,16 +732,17 @@ async function main() {
       title_romaji: titleRomaji || "TODO_romaji",
       year_started: yearStarted ?? 2000,
       year_ended: yearEnded ?? null,
-      status:
-        (row.status as "ongoing" | "completed" | "hiatus" | null) ??
-        (yearEnded ? ("completed" as const) : ("ongoing" as const)),
+      status,
       authors: [{ name: author.name, role: "writer_artist" as const }],
       original_authors: [],
       publisher: publisherKey,
-      magazine: row.magazine_key ?? null,
+      magazine,
       demographic,
       genres,
       synopsis,
+      ...(s3?.anime_adapted !== undefined ? { anime_adapted: s3.anime_adapted } : {}),
+      ...(s3?.awards && s3.awards.length > 0 ? { awards: s3.awards } : {}),
+      ...(s3?.alternative_titles ? { alternative_titles: s3.alternative_titles } : {}),
       ...(row.wikipedia_url ? { wikipedia_url: row.wikipedia_url } : {}),
       editions,
     };

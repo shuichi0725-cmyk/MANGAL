@@ -1,7 +1,7 @@
 # Bulk-promoted draft by scripts/promote-bulk.ts
 # Sources: madb
 # Source mangaka: 高橋留美子 (Q219948); Source series: #45367
-# REVIEW REQUIRED: magazine, demographic, genres, synopsis
+# REVIEW REQUIRED: magazine, demographic, synopsis
 slug: shounen-sandee-90-serekushon
 title: 少年サンデー'90セレクション
 title_kana: ショウネン サンデー '90 セレクション
@@ -14,11 +14,12 @@ authors:
     role: writer_artist
 original_authors: []
 publisher: shogakukan
-magazine: weekly-shonen-sunday
+magazine: null
 demographic: shounen
 genres:
+  - drama
   - comedy
-synopsis: 週刊少年サンデー 90 年代の高橋留美子作品セレクション。
+synopsis: 少年サンデー 創刊 90 年代を代表するセレクション短編集。 高橋留美子の短編を収録。
 editions:
   - type: standard
     label: 通常版
