@@ -53,10 +53,13 @@ export type MadbJsonLdRecord = {
   "schema:datePublished"?: string;
   "schema:description"?: string;
   "schema:name"?: MadbJsonLdField;
+  "dcterms:creator"?: MadbJsonLdField;
   "schema:creator"?: MadbJsonLdField;
   "schema:brand"?: MadbJsonLdField;
   "schema:publisher"?: MadbJsonLdField;
   "schema:volumeNumber"?: string;
+  "schema:position"?: string | number;
+  "schema:image"?: string | string[];
   "schema:alternativeHeadline"?: string;
   [key: string]: unknown;
 };
@@ -89,8 +92,31 @@ export type MadbRecord = {
   publisher: string;
   /** YYYY-MM-DD or partial */
   datePublished: string;
-  /** 巻 (= schema:volumeNumber の数字 string、 解釈は呼び側で) */
+  /** 巻 (= schema:volumeNumber の表示文字列、 例 "13" / "巻ノ五十" / "其之1") */
   volumeNumber: string;
+  /**
+   * 巻ソート (= schema:position の数値、 仕様 page 72 「巻号の順序を示す数値」)。
+   * volumeNumber が表示文字列であるのに対し、 position は **連続する巻の順序を
+   * 示す deterministic な integer**。 数値が無い record は null。 銀魂 のように
+   * volumeNumber="其之1" / "巻ノ五十" の表示で来る record でも、 position には
+   * 通常 整数が入っているため parse 失敗が激減する。
+   */
+  volumeSort: number | null;
+  /**
+   * cover 画像 URL (= schema:image)。 仕様 page 66 「当該リソースの画像」。
+   * 我々の volumes.cover_url にそのまま投入する。 record によっては URL 配列で
+   * 来ることもある (= 複数候補) ので、 ここでは最初の URL を採用。
+   */
+  coverImage: string;
+  /**
+   * 作者 (= dcterms:creator) の **責任主体 (Agent) entity への URI 参照**。
+   * 仕様 page 70 に [責任主体] と定義され、 値は MADB 内 C-ID URI
+   * (例: "https://mediaarts-db.artmuseums.go.jp/id/C53400")。 共著なら配列で
+   * 複数。 schema:creator が表示文字列 (= "[著]吾峠呼世晴") なのに対し、
+   * dcterms:creator は構造的識別子。 ここでは URI suffix (= "C53400") のみ
+   * 抽出して保持する。 fetch-madb 側で record 間の C-ID ↔ author 学習に使用。
+   */
+  creatorRefs: string[];
 };
 
 /**
@@ -284,7 +310,76 @@ export function extractRecord(raw: MadbJsonLdRecord): MadbRecord | null {
       typeof raw["schema:volumeNumber"] === "string"
         ? raw["schema:volumeNumber"]
         : "",
+    volumeSort: parsePositionToInt(raw["schema:position"]),
+    coverImage: extractFirstImageUrl(raw["schema:image"]),
+    creatorRefs: extractCreatorRefs(raw["dcterms:creator"]),
   };
+}
+
+/**
+ * dcterms:creator の値から MADB 内 entity の C-ID 群を抽出。
+ *   入力例:
+ *     {"@id": "...id/C53400"}                                        → ["C53400"]
+ *     [{"@id": "...id/C61882"}, {"@id": "...id/C61883"}]              → ["C61882", "C61883"]
+ *     undefined                                                      → []
+ *   `@id` が C で始まらないもの (= 妥当な C-ID 形式でない) は drop。
+ *   schema:creator (= 表示文字列) との pairing で C-ID ↔ author 名 を学習する
+ *   材料にすることが主目的。 ここでは raw URI の suffix だけ取り出す軽量処理。
+ */
+function extractCreatorRefs(field: MadbJsonLdField | undefined): string[] {
+  if (field === undefined || field === null) return [];
+  const out: string[] = [];
+  const visit = (v: unknown): void => {
+    if (Array.isArray(v)) {
+      for (const x of v) visit(x);
+      return;
+    }
+    if (typeof v === "object" && v !== null) {
+      const obj = v as Record<string, unknown>;
+      const id = obj["@id"];
+      if (typeof id === "string") {
+        const m = id.match(/\/(C\d+)$/);
+        if (m) out.push(m[1]);
+      }
+    }
+  };
+  visit(field);
+  return out;
+}
+
+/**
+ * schema:position は 仕様上 「10 進数」 で、 JSON-LD 内では string か number で
+ * 入り得る。 整数 (= 巻番号) のみ採用、 小数 / 非数値は null。 例外的に
+ * "13.0" のような表示が来ることもあるので NFKC 後に floor。
+ */
+function parsePositionToInt(raw: unknown): number | null {
+  if (typeof raw === "number") {
+    if (!Number.isFinite(raw) || raw < 0) return null;
+    return Math.trunc(raw);
+  }
+  if (typeof raw === "string") {
+    const t = raw.normalize("NFKC").trim();
+    if (!t) return null;
+    const n = Number(t);
+    if (!Number.isFinite(n) || n < 0) return null;
+    return Math.trunc(n);
+  }
+  return null;
+}
+
+/**
+ * schema:image は 仕様上 リテラル URL string。 record によっては配列で複数
+ * URL が並ぶこともあるので、 最初の string を採用。 URL 検証は行わない (= MADB
+ * の指示に従う、 後段の cover fetcher で 404 等は handle する想定)。
+ */
+function extractFirstImageUrl(raw: unknown): string {
+  if (typeof raw === "string") return raw;
+  if (Array.isArray(raw)) {
+    for (const v of raw) {
+      if (typeof v === "string" && v) return v;
+    }
+  }
+  return "";
 }
 
 /** 4 層 adult filter のマッチ結果 (= log 用) */

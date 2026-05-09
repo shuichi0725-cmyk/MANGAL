@@ -303,6 +303,104 @@ describe("extractRecord", () => {
     });
   });
 
+  it("captures schema:position as volumeSort (= integer) and schema:image as coverImage", () => {
+    const raw = {
+      "@id": "https://mediaarts-db.artmuseums.go.jp/id/M999",
+      "schema:isbn": "9784000000000",
+      "schema:name": "テスト",
+      "schema:position": "13.0",
+      "schema:image": "https://example.com/cover.jpg",
+      "schema:volumeNumber": "其之十三",
+    } as MadbJsonLdRecord;
+    const rec = extractRecord(raw);
+    // 表示文字列 「其之十三」 と numeric position "13.0" の両方を保持
+    expect(rec?.volumeNumber).toBe("其之十三");
+    expect(rec?.volumeSort).toBe(13);
+    expect(rec?.coverImage).toBe("https://example.com/cover.jpg");
+  });
+
+  it("returns null volumeSort when schema:position is missing or non-numeric", () => {
+    const raw = {
+      "@id": "https://mediaarts-db.artmuseums.go.jp/id/M998",
+      "schema:isbn": "9784000000017",
+      "schema:name": "テスト2",
+      "schema:volumeNumber": "1",
+    } as MadbJsonLdRecord;
+    const rec = extractRecord(raw);
+    expect(rec?.volumeSort).toBeNull();
+    expect(rec?.coverImage).toBe("");
+  });
+
+  it("accepts numeric schema:position (= JSON number, not string)", () => {
+    const raw = {
+      "@id": "https://mediaarts-db.artmuseums.go.jp/id/M997",
+      "schema:isbn": "9784000000024",
+      "schema:position": 5,
+    } as unknown as MadbJsonLdRecord;
+    const rec = extractRecord(raw);
+    expect(rec?.volumeSort).toBe(5);
+  });
+
+  it("extracts dcterms:creator C-ID suffixes (= single ref)", () => {
+    const raw = {
+      "@id": "https://mediaarts-db.artmuseums.go.jp/id/M001",
+      "schema:isbn": "9784000000048",
+      "dcterms:creator": {
+        "@id": "https://mediaarts-db.artmuseums.go.jp/id/C53400",
+      },
+    } as unknown as MadbJsonLdRecord;
+    const rec = extractRecord(raw);
+    expect(rec?.creatorRefs).toEqual(["C53400"]);
+  });
+
+  it("extracts multiple C-IDs (= 共著 array form)", () => {
+    const raw = {
+      "@id": "https://mediaarts-db.artmuseums.go.jp/id/M002",
+      "schema:isbn": "9784000000055",
+      "dcterms:creator": [
+        { "@id": "https://mediaarts-db.artmuseums.go.jp/id/C61882" },
+        { "@id": "https://mediaarts-db.artmuseums.go.jp/id/C61883" },
+      ],
+    } as unknown as MadbJsonLdRecord;
+    const rec = extractRecord(raw);
+    expect(rec?.creatorRefs).toEqual(["C61882", "C61883"]);
+  });
+
+  it("ignores dcterms:creator @id values that are not C-prefixed", () => {
+    const raw = {
+      "@id": "https://mediaarts-db.artmuseums.go.jp/id/M003",
+      "schema:isbn": "9784000000062",
+      "dcterms:creator": [
+        { "@id": "https://example.com/no-c-id" },
+        { "@id": "https://mediaarts-db.artmuseums.go.jp/id/C99" },
+      ],
+    } as unknown as MadbJsonLdRecord;
+    const rec = extractRecord(raw);
+    expect(rec?.creatorRefs).toEqual(["C99"]);
+  });
+
+  it("returns empty array when dcterms:creator is missing", () => {
+    const raw = {
+      "@id": "https://mediaarts-db.artmuseums.go.jp/id/M004",
+      "schema:isbn": "9784000000079",
+    } as MadbJsonLdRecord;
+    const rec = extractRecord(raw);
+    expect(rec?.creatorRefs).toEqual([]);
+  });
+
+  it("picks first URL from schema:image when given an array", () => {
+    const raw = {
+      "@id": "https://mediaarts-db.artmuseums.go.jp/id/M996",
+      "schema:isbn": "9784000000031",
+      "schema:image": [
+        "https://example.com/a.jpg",
+        "https://example.com/b.jpg",
+      ],
+    } as unknown as MadbJsonLdRecord;
+    const rec = extractRecord(raw);
+    expect(rec?.coverImage).toBe("https://example.com/a.jpg");
+  });
+
   it("extracts adult record correctly (= rating filled, brand set)", () => {
     const rec = extractRecord(ADULT_RAW);
     expect(rec).toMatchObject({
@@ -351,6 +449,9 @@ describe("isAdultMadbRecord", () => {
       publisher: "",
       datePublished: "",
       volumeNumber: "",
+      volumeSort: null,
+      coverImage: "",
+      creatorRefs: [],
       ...overrides,
     };
   }

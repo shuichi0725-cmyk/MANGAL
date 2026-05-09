@@ -164,7 +164,15 @@ type UpsertRec = {
   /** 「完全版」 等の判定に使う 副題的文字列 (= JSON-LD では schema:alternativeHeadline) */
   editionLabel: string | null;
   datePublished: string | null;
+  /**
+   * 巻番号 (= 採用優先順位)。 仕様上 schema:position が deterministic な数値、
+   * schema:volumeNumber は表示文字列なので、 まず position を採用、 不在時のみ
+   * volumeNumber を parseVolumeNumber で解釈。 これにより銀魂 (= "其之1" / "巻ノ
+   * 五十") のような非数値表示でも position が integer なら正しく拾える。
+   */
   csvVolumeNumber: number | null;
+  /** schema:image 由来の cover URL。 無ければ null。 */
+  coverUrl: string | null;
 };
 
 /**
@@ -184,7 +192,9 @@ function recordToUpsert(rec: MadbRecord): UpsertRec | null {
     imprint: rec.brand || null,
     editionLabel: rec.subtitle || null,
     datePublished: rec.datePublished || null,
-    csvVolumeNumber: parseVolumeNumber(rec.volumeNumber),
+    // position 優先 → 不在なら volumeNumber を parse。
+    csvVolumeNumber: rec.volumeSort ?? parseVolumeNumber(rec.volumeNumber),
+    coverUrl: rec.coverImage || null,
   };
 }
 
@@ -263,8 +273,8 @@ function getStmts(db: DB): VolumeStmts {
       "SELECT edition_id FROM volumes WHERE isbn13 = ?",
     ),
     insertVolume: db.prepare(
-      `INSERT INTO volumes (edition_id, isbn13, number, is_extra, release_date)
-       VALUES (?, ?, ?, ?, ?)`,
+      `INSERT INTO volumes (edition_id, isbn13, number, is_extra, release_date, cover_url)
+       VALUES (?, ?, ?, ?, ?, ?)`,
     ),
     updateVolume: db.prepare(
       `UPDATE volumes
@@ -272,6 +282,7 @@ function getStmts(db: DB): VolumeStmts {
            number       = ?,
            is_extra     = ?,
            release_date = COALESCE(?, release_date),
+           cover_url    = COALESCE(?, cover_url),
            updated_at   = strftime('%Y-%m-%dT%H:%M:%SZ','now')
        WHERE isbn13 = ?`,
     ),
@@ -476,6 +487,7 @@ function upsertVolume(db: DB, author: AuthorRef, rec: UpsertRec): void {
       numberVal,
       isExtra,
       releaseDate,
+      rec.coverUrl,
       rec.isbn13,
     );
   } else {
@@ -485,6 +497,7 @@ function upsertVolume(db: DB, author: AuthorRef, rec: UpsertRec): void {
       numberVal,
       isExtra,
       releaseDate,
+      rec.coverUrl,
     );
   }
 
@@ -603,6 +616,9 @@ type Stats = {
   adultRecordsImprint: number;
   adultRecordsPublisher: number;
   matchedRecords: number;
+  /** 2nd pass で dcterms:creator の C-ID 経由 で 解決できた件数 (= 1st pass の
+   *  schema:creator 文字列 match が外れた record で C-ID 学習済 author を当てた数)。 */
+  matchedViaCid: number;
   /** archive (= source-of-truth) に upsert した uniqe series 数 */
   archivedSeriesNew: number;
   archivedSeriesUpdated: number;
@@ -628,6 +644,7 @@ function newStats(): Stats {
     adultRecordsImprint: 0,
     adultRecordsPublisher: 0,
     matchedRecords: 0,
+    matchedViaCid: 0,
     archivedSeriesNew: 0,
     archivedSeriesUpdated: 0,
     excludedSeries: 0,
@@ -701,6 +718,11 @@ async function processJsonld(
   };
   const queued: Queued[] = [];
 
+  // dcterms:creator (= C-ID URI) を schema:creator match と 紐付けて学習する
+  // single-pass map。 同 C-ID の record が以降に出てきた時、 schema:creator
+  // 文字列 match が外れていても以前の学習結果で author 解決できる。
+  const cidIndex = new Map<string, ResolvedAuthor[]>();
+
   // stream-json の filter は dotted path 表記または RegExp。 `@graph` は
   // `@` 記号入りなので RegExp で表す。 stream-chain の chain() で typing
   // 整合 (= .pipe() で組むと Flushable 型と Node Stream 型の差異で TS error)。
@@ -737,6 +759,8 @@ async function processJsonld(
     );
     if (adultSig) bumpAdultStat(stats, adultSig);
 
+    // 1st pass match: schema:creator 文字列ベース (= cleanCreatorStrings 後の
+    // clean 著者名で authorIndex を引く)。
     const matched: ResolvedAuthor[] = [];
     for (const a of rec.authors) {
       const key = normalizeCreatorName(a);
@@ -744,8 +768,49 @@ async function processJsonld(
       const hits = authorIndex.get(key);
       if (hits) matched.push(...hits);
     }
+
+    // 2nd pass match: dcterms:creator (= C-ID Agent entity URI) ベース。
+    // 同 C-ID が以前の record で schema:creator 経由で mangaka に解決済の場合、
+    // それを再利用する。 schema:creator が空 / 異形 prefix で 1st pass を
+    // すり抜けた record を救う仕組み。 C-ID の学習は下で行う。
+    if (matched.length === 0 && rec.creatorRefs.length > 0) {
+      for (const cid of rec.creatorRefs) {
+        const learned = cidIndex.get(cid);
+        if (learned) {
+          for (const a of learned) {
+            if (
+              !matched.some((m) => m.qid === a.qid && m.name === a.name)
+            ) {
+              matched.push(a);
+            }
+          }
+        }
+      }
+      if (matched.length > 0) stats.matchedViaCid++;
+    }
+
     if (matched.length === 0) continue;
     stats.matchedRecords++;
+
+    // 学習: C-ID ↔ author を **1:1 の record でのみ** 紐付ける。 共著 record
+    // (= matched.length>1 or creatorRefs.length>1) で位置対応が不明な場合に
+    // 学習すると、 1 つの C-ID に複数 author を誤紐付けして以降の lookup が
+    // 暴発する (= 同 C-ID の他 record が全 author を queued に追加) ため除外。
+    // 1:1 record だけ学習しても、 同 author の単独著作 record は通常多数あるので
+    // C-ID 解決の coverage はほぼ落ちない。
+    if (matched.length === 1 && rec.creatorRefs.length === 1) {
+      const cid = rec.creatorRefs[0];
+      const existing = cidIndex.get(cid);
+      if (!existing) {
+        cidIndex.set(cid, [matched[0]]);
+      } else if (
+        !existing.some(
+          (e) => e.qid === matched[0].qid && e.name === matched[0].name,
+        )
+      ) {
+        existing.push(matched[0]);
+      }
+    }
 
     const up = recordToUpsert(rec);
     if (!up) {
@@ -993,6 +1058,7 @@ async function main(): Promise<void> {
   console.log(`  total records          : ${stats.totalRecords}`);
   console.log(`  parse errors           : ${stats.parseErrors}`);
   console.log(`  matched records        : ${stats.matchedRecords}`);
+  console.log(`    via dcterms:creator  : ${stats.matchedViaCid}`);
   console.log(`  adult records (rating) : ${stats.adultRecordsRating}`);
   console.log(`  adult records (desc)   : ${stats.adultRecordsDescription}`);
   console.log(`  adult records (imprint): ${stats.adultRecordsImprint}`);
