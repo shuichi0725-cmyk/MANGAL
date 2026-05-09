@@ -120,7 +120,7 @@ const SYSTEM_PROMPT = `あなたは漫画作品のメタデータ補完アシス
   slug          - 半角英数 + ハイフンのみの URL slug (= 例 "shingeki-no-kyojin")
   magazine      - 連載誌の master key (= 後述 enum) または null
   demographic   - "shounen" | "shoujo" | "seinen" | "josei" | "kodomo" | "other"
-  genres        - genre key の array (1-4 個、 後述 enum、 配列)
+  genres        - genre key の array、 **3-8 個 推奨** (短編 / アンソロジー / 1-shot は 1-3 個でも OK)、 後述 enum のみ
   synopsis      - 80-200 字の独自要約 (= 「物語」 / 「主人公」 / 「世界観」 を簡潔に)
   status        - "ongoing" | "completed" | "hiatus"
   anime_adapted - true | false (= TVアニメ / 劇場版アニメ 1 つでも作られたら true)
@@ -132,6 +132,7 @@ const SYSTEM_PROMPT = `あなたは漫画作品のメタデータ補完アシス
 - 確信が無い field は推測せず null / "" / [] に。 幻覚厳禁。
 - year_ended ≥ 2025 の作品で、 完結確定情報を知らない場合は status="ongoing" に。
 - adult / 成人向け作品は普通に補完して良い (= 表示は別 filter で制御)。
+- genres は **作品の本質を 3-8 個** で表現。 長編メジャー作品ほど多角的タグを (= action+adventure+fantasy+drama 等)、 短編 / 1-shot は 1-3 個に。 26 keys から無理に水増しせず、 該当しないなら少なくて OK。
 - 出力は JSON のみ、 前置き / コードブロック / 解説 一切なし。`;
 
 const VALID_GENRE_ARRAY = [
@@ -170,11 +171,11 @@ function sanitizeEntry(
   if (!raw || typeof raw !== "object") return null;
   const r = raw as Record<string, unknown>;
 
-  // genres: filter to valid keys only
+  // genres: filter to valid keys only、 上限 8 個
   const rawGenres = Array.isArray(r.genres) ? r.genres : [];
   const genres = rawGenres
     .filter((g): g is string => typeof g === "string" && VALID_GENRES.has(g))
-    .slice(0, 4);
+    .slice(0, 8);
 
   // magazine: must be in master keys, null otherwise
   const rawMag = r.magazine;
