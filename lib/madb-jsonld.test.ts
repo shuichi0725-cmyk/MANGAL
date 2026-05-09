@@ -8,10 +8,152 @@ import {
   flattenStringArray,
   isAdultMadbRecord,
   parseVolumeNumber,
+  rebuildSchemaName,
   splitMadbLiteral,
   type MadbJsonLdRecord,
   type MadbRecord,
 } from "./madb-jsonld";
+
+describe("rebuildSchemaName (= 種2 用 schema:name 仕様準拠化)", () => {
+  it("demotes ASCII-only ja-hrkt values to en (= 進撃の巨人 case)", () => {
+    const input = [
+      "進撃の巨人 = attack on titan",
+      { "@value": "attack on titan", "@language": "ja-hrkt" },
+      { "@value": "シンゲキ ノ キョジン", "@language": "ja-hrkt" },
+    ];
+    const output = rebuildSchemaName(input) as Array<unknown>;
+    // 漢字 string 残存
+    expect(output[0]).toBe("進撃の巨人 = attack on titan");
+    // カタカナ含む ja-hrkt 残存
+    expect(output).toContainEqual({
+      "@value": "シンゲキ ノ キョジン",
+      "@language": "ja-hrkt",
+    });
+    // ASCII-only ja-hrkt は en に降格
+    expect(output).toContainEqual({
+      "@value": "attack on titan",
+      "@language": "en",
+    });
+    // 元の ja-hrkt slot に attack on titan は残ってない
+    expect(output).not.toContainEqual({
+      "@value": "attack on titan",
+      "@language": "ja-hrkt",
+    });
+  });
+
+  it("preserves clean array (= no ja-hrkt mixing)", () => {
+    const input = [
+      "鬼滅の刃",
+      { "@value": "キメツ ノ ヤイバ", "@language": "ja-hrkt" },
+    ];
+    const output = rebuildSchemaName(input);
+    expect(output).toEqual(input);
+  });
+
+  it("does NOT add en when en already exists (= ZETMAN case)", () => {
+    // 仮想: "Zetman" が ja-hrkt に居て、 en にも別の英文があるケース
+    const input = [
+      "ZETMAN",
+      { "@value": "Existing English Title", "@language": "en" },
+      { "@value": "Zetman", "@language": "ja-hrkt" },
+      { "@value": "ゼットマン", "@language": "ja-hrkt" },
+    ];
+    const output = rebuildSchemaName(input) as Array<unknown>;
+    // カタカナ ja-hrkt 残存
+    expect(output).toContainEqual({
+      "@value": "ゼットマン",
+      "@language": "ja-hrkt",
+    });
+    // 既存 en 残存
+    expect(output).toContainEqual({
+      "@value": "Existing English Title",
+      "@language": "en",
+    });
+    // Zetman は ja-hrkt から消えてる (= 既に en あるので追加もされない)
+    expect(output).not.toContainEqual({
+      "@value": "Zetman",
+      "@language": "ja-hrkt",
+    });
+    expect(output).not.toContainEqual({
+      "@value": "Zetman",
+      "@language": "en",
+    });
+  });
+
+  it("keeps ja-hrkt with hiragana (= ひらがな含むも カナ扱い)", () => {
+    const input = [
+      "ふしぎな駄菓子屋",
+      { "@value": "ふしぎな ダガシヤ", "@language": "ja-hrkt" },
+    ];
+    const output = rebuildSchemaName(input);
+    expect(output).toEqual(input);
+  });
+
+  it("handles all-ASCII record (= 全 ja-hrkt が ASCII)", () => {
+    const input = [
+      "Eva lady",
+      { "@value": "Eva lady", "@language": "ja-hrkt" },
+    ];
+    const output = rebuildSchemaName(input) as Array<unknown>;
+    // ja-hrkt は空
+    expect(output).not.toContainEqual({
+      "@value": "Eva lady",
+      "@language": "ja-hrkt",
+    });
+    // en に降格
+    expect(output).toContainEqual({
+      "@value": "Eva lady",
+      "@language": "en",
+    });
+  });
+
+  it("preserves @id references", () => {
+    const input = [
+      "タイトル",
+      { "@id": "https://example.com/id/X1" },
+      { "@value": "タイトル ヨミ", "@language": "ja-hrkt" },
+    ];
+    const output = rebuildSchemaName(input) as Array<unknown>;
+    expect(output).toContainEqual({ "@id": "https://example.com/id/X1" });
+    expect(output).toContainEqual({
+      "@value": "タイトル ヨミ",
+      "@language": "ja-hrkt",
+    });
+  });
+
+  it("returns undefined for undefined / null", () => {
+    expect(rebuildSchemaName(undefined)).toBeUndefined();
+    expect(rebuildSchemaName(null as never)).toBeNull();
+  });
+
+  it("returns plain string unchanged (= no array)", () => {
+    expect(rebuildSchemaName("単純タイトル")).toBe("単純タイトル");
+  });
+
+  it("handles 3+ ja-hrkt values keeping all kana ones", () => {
+    const input = [
+      "美味しんぼ",
+      { "@value": "オイシンボ", "@language": "ja-hrkt" },
+      { "@value": "Oishinbo", "@language": "ja-hrkt" },
+      { "@value": "メイヒンシュウ", "@language": "ja-hrkt" },
+    ];
+    const output = rebuildSchemaName(input) as Array<unknown>;
+    // カタカナ 2 件 とも 残存
+    expect(output).toContainEqual({
+      "@value": "オイシンボ",
+      "@language": "ja-hrkt",
+    });
+    expect(output).toContainEqual({
+      "@value": "メイヒンシュウ",
+      "@language": "ja-hrkt",
+    });
+    // ASCII は en に降格
+    expect(output).toContainEqual({
+      "@value": "Oishinbo",
+      "@language": "en",
+    });
+  });
+});
 
 describe("cleanCreatorStrings (= MADB old-format [著] prefix handling)", () => {
   it("strips [著] role prefix from single-author old-format string", () => {

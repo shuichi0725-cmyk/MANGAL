@@ -249,6 +249,89 @@ export function findKanaLiteral(field: MadbJsonLdField | undefined): string {
   return visit(field) ?? "";
 }
 
+/** カタカナ U+30A0-U+30FF or ひらがな U+3040-U+309F を含むか */
+function containsKana(s: string): boolean {
+  return /[぀-ゟ゠-ヿ]/.test(s);
+}
+
+/**
+ * MADB の `schema:name` array (= 漢字 string + ja-hrkt object + 言語別 object)
+ * を 仕様準拠 array に再構築する (= 種2 = metadata101-clean.json 生成用)。
+ *
+ * 入力例 (= 進撃の巨人 の MADB record で観測):
+ *   [
+ *     "進撃の巨人 = attack on titan",
+ *     {"@value": "attack on titan", "@language": "ja-hrkt"},  ← 仕様違反 (= en を ja-hrkt slot に)
+ *     {"@value": "シンゲキ ノ キョジン", "@language": "ja-hrkt"}
+ *   ]
+ *
+ * 出力 (= ja-hrkt 由来の英文を en に降格):
+ *   [
+ *     "進撃の巨人 = attack on titan",
+ *     {"@value": "シンゲキ ノ キョジン", "@language": "ja-hrkt"},
+ *     {"@value": "attack on titan", "@language": "en"}
+ *   ]
+ *
+ * 規則:
+ *   - 言語タグ無しの string (= 漢字 / 元タイトル) はそのまま順序保持
+ *   - ja-hrkt 値群を カタカナ/ひらがな含むもの と ASCII-only に分離
+ *     - カタカナ含むものは ja-hrkt として残す
+ *     - ASCII-only は ja-hrkt から削除し、 同 record に既に @language=en が
+ *       無ければ en として追加 (= 仕様準拠化)
+ *   - 既存の @language=en / ja-Latn / その他 は pass through
+ *   - @id 参照は pass through
+ *
+ * 全部 ASCII の 「Eva lady」 のような元から英文 record は ja-hrkt slot が空に
+ * なる (= 我々が追加で en 補完しないので元から無い場合は無い)。
+ */
+export function rebuildSchemaName(
+  field: MadbJsonLdField | undefined,
+): MadbJsonLdField | undefined {
+  if (field === undefined || field === null) return field;
+  if (!Array.isArray(field)) return field;
+
+  type Localized = { "@value": string; "@language": string };
+  const out: Array<string | Localized | { "@id": string }> = [];
+  const jaHrktKana: Localized[] = [];
+  const jaHrktAscii: Localized[] = [];
+  let hasEn = false;
+
+  for (const x of field) {
+    if (typeof x === "string") {
+      out.push(x);
+      continue;
+    }
+    if (typeof x === "object" && x !== null) {
+      const obj = x as Record<string, unknown>;
+      if (typeof obj["@id"] === "string") {
+        out.push({ "@id": obj["@id"] });
+        continue;
+      }
+      const value = typeof obj["@value"] === "string" ? obj["@value"] : "";
+      const lang =
+        typeof obj["@language"] === "string" ? obj["@language"] : "";
+      if (!value) continue;
+      const normalized = lang.toLowerCase();
+      if (normalized === "ja-hrkt") {
+        if (containsKana(value)) jaHrktKana.push({ "@value": value, "@language": lang });
+        else jaHrktAscii.push({ "@value": value, "@language": "en" });
+      } else {
+        if (normalized === "en") hasEn = true;
+        out.push({ "@value": value, "@language": lang });
+      }
+    }
+  }
+
+  // ja-hrkt にカタカナ含み を残す
+  for (const v of jaHrktKana) out.push(v);
+  // ASCII-only ja-hrkt 値は en へ降格 (= 既に en があれば追加しない、 重複防止)
+  if (!hasEn) {
+    for (const v of jaHrktAscii) out.push(v);
+  }
+
+  return out;
+}
+
 /**
  * MADB ID URI から接尾辞を取り出す (= "https://.../id/M1032568" → "M1032568")。
  * 不正値や空 URI (= 著者なし record の dcterms:creator が "../id/" 等) は

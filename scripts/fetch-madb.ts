@@ -73,7 +73,9 @@ type Args = {
 
 function parseArgs(argv: string[]): Args {
   const out: Args = {
-    jsonldPath: null,
+    // default は種2 (= clean-madb-seed.ts で生成済の正規化済 JSON)。
+    // 種1 を直接読みたい場合は --jsonld-path .cache/madb/metadata101.json で明示。
+    jsonldPath: ".cache/madb/metadata101-clean.json",
     qid: null,
     name: null,
     all: false,
@@ -1050,7 +1052,23 @@ async function main(): Promise<void> {
   const args = parseArgs(process.argv.slice(2));
   if (!args.jsonldPath) {
     console.error(
-      "usage: fetch-madb --jsonld-path <path> [--qid Q1234 | --name 'X' | --all] [--limit N] [--include-adult]",
+      "usage: fetch-madb [--jsonld-path <path>] [--qid Q1234 | --name 'X' | --all] [--limit N] [--include-adult]",
+    );
+    process.exit(1);
+  }
+  // 種2 (= clean) が存在しない場合は clean-madb-seed の実行を促す。
+  // 明示的に --jsonld-path を渡された場合は何もしない (= 種1 直読 OK)。
+  if (
+    args.jsonldPath === ".cache/madb/metadata101-clean.json" &&
+    !require("node:fs").existsSync(args.jsonldPath)
+  ) {
+    console.error(
+      `[err] ${args.jsonldPath} が見つかりません。\n` +
+        `  種2 を先に生成してください:\n` +
+        `    npx tsx scripts/clean-madb-seed.ts \\\n` +
+        `      --in .cache/madb/metadata101.json \\\n` +
+        `      --out .cache/madb/metadata101-clean.json\n` +
+        `  または --jsonld-path で 種1 を直接指定してください。`,
     );
     process.exit(1);
   }
