@@ -157,6 +157,14 @@ type AuthorRef = {
 type UpsertRec = {
   manifestationUri: string;
   title: string | null;
+  /**
+   * タイトルのヨミ (= MADB schema:name の @language=ja-hrkt 値、 例
+   * "キメツ ノ ヤイバ")。 100% の record に入っているので NULL は稀。
+   * series_archive.title_kana に流して promote-bulk が slug 生成 (= 「鬼滅」
+   * → "kimetsunoyaiba" 音読 正しく) に使う。 これを落とすと slug が title
+   * 直接 roman 化 (= "onimetsunoha" 訓読誤り) にフォールバック。
+   */
+  titleKana: string | null;
   creator: string;
   isbn13: string;
   publisher: string | null;
@@ -186,6 +194,7 @@ function recordToUpsert(rec: MadbRecord): UpsertRec | null {
   return {
     manifestationUri: `https://mediaarts-db.artmuseums.go.jp/id/${rec.madbId}`,
     title: rec.title || null,
+    titleKana: rec.titleKana || null,
     creator,
     isbn13,
     publisher: rec.publisher || null,
@@ -202,6 +211,7 @@ type VolumeStmts = {
   selectSeries: Stmt;
   insertSeries: Stmt;
   updateSeriesYear: Stmt;
+  updateSeriesTitleKana: Stmt;
   updateSeriesPublisherKey: Stmt;
   insertSeriesAuthor: Stmt;
   selectEdition: Stmt;
@@ -231,12 +241,22 @@ function getStmts(db: DB): VolumeStmts {
       "SELECT id, year_started, year_ended FROM series WHERE series_key = ?",
     ),
     insertSeries: db.prepare(
-      `INSERT INTO series (series_key, title, year_started, year_ended)
-       VALUES (?, ?, ?, ?)`,
+      `INSERT INTO series (series_key, title, title_kana, year_started, year_ended)
+       VALUES (?, ?, ?, ?, ?)`,
     ),
     updateSeriesYear: db.prepare(
       `UPDATE series
        SET year_started = ?, year_ended = ?,
+           updated_at = strftime('%Y-%m-%dT%H:%M:%SZ','now')
+       WHERE id = ?`,
+    ),
+    /**
+     * series.title_kana を 後追いで埋める。 既存値が NULL の時のみ更新
+     * (= NDL etc. の他 source で先に入った値を上書きしない)。
+     */
+    updateSeriesTitleKana: db.prepare(
+      `UPDATE series
+       SET title_kana = COALESCE(title_kana, ?),
            updated_at = strftime('%Y-%m-%dT%H:%M:%SZ','now')
        WHERE id = ?`,
     ),
@@ -301,13 +321,14 @@ function getArchiveStmts(db: DB): ArchiveStmts {
     ),
     insertArchive: db.prepare(
       `INSERT INTO series_archive
-         (series_key, title, year_started, year_ended, publisher_key,
+         (series_key, title, title_kana, year_started, year_ended, publisher_key,
           adult_score, current_state)
-       VALUES (?, ?, ?, ?, ?, ?, ?)`,
+       VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
     ),
     updateArchive: db.prepare(
       `UPDATE series_archive
        SET title         = ?,
+           title_kana    = COALESCE(title_kana, ?),
            year_started  = ?,
            year_ended    = ?,
            publisher_key = COALESCE(publisher_key, ?),
@@ -417,11 +438,17 @@ function upsertVolume(db: DB, author: AuthorRef, rec: UpsertRec): void {
       ) {
         stmts.updateSeriesYear.run(newStart, newEnd, seriesId);
       }
+      // 既存 series 行に title_kana が無ければ MADB record の値で埋める
+      // (= COALESCE で既存値優先、 NDL etc. の上書き禁止)
+      if (rec.titleKana) {
+        stmts.updateSeriesTitleKana.run(rec.titleKana, seriesId);
+      }
     }
   } else {
     const info = stmts.insertSeries.run(
       seriesKey,
       seriesDisplay,
+      rec.titleKana,
       issuedYear,
       issuedYear,
     );
@@ -670,6 +697,8 @@ function bumpAdultStat(stats: Stats, signal: AdultMatchSignal): void {
 type SeriesMeta = {
   seriesKey: string;
   title: string;
+  /** タイトルのヨミ (= 同 series 内の最初の non-empty 値を採用) */
+  titleKana: string | null;
   yearStarted: number | null;
   yearEnded: number | null;
   publisherKey: string | null;
@@ -853,11 +882,15 @@ async function processJsonld(
         meta = {
           seriesKey: q.seriesKey,
           title: baseTitle(q.rec.title ?? q.rec.isbn13),
+          titleKana: q.rec.titleKana,
           yearStarted: null,
           yearEnded: null,
           publisherKey: null,
         };
         seriesMeta.set(q.seriesKey, meta);
+      } else if (!meta.titleKana && q.rec.titleKana) {
+        // 既存 meta にヨミが無く、 後続 record で出てきたら採用 (= 1st non-null wins)
+        meta.titleKana = q.rec.titleKana;
       }
       const releaseDate = normalizeReleaseDate(q.rec.datePublished);
       const issuedYear =
@@ -952,6 +985,7 @@ async function processJsonld(
       if (existing) {
         archiveStmts.updateArchive.run(
           meta.title,
+          meta.titleKana,
           mergedStart,
           mergedEnd,
           meta.publisherKey,
@@ -965,6 +999,7 @@ async function processJsonld(
         const info = archiveStmts.insertArchive.run(
           seriesKey,
           meta.title,
+          meta.titleKana,
           meta.yearStarted,
           meta.yearEnded,
           meta.publisherKey,

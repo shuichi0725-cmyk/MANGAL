@@ -58,6 +58,13 @@ type Args = {
   includeAdult: boolean;
   dryRun: boolean;
   force: boolean;
+  /**
+   * Wikidata QID list で series を絞り込むための seed file。 1 行 1 qid
+   * (= "Q1993" 形式)、 # 始まりはコメント、 空行無視。 TSV/CSV の場合は
+   * **行内に最初に出現する Q\d+ token** を qid として採用する (= 既存
+   * `data/seed/verification-20.tsv` のような複数列フォーマットも accept)。
+   */
+  seedFile: string | null;
 };
 
 function parseArgs(argv: string[]): Args {
@@ -68,6 +75,7 @@ function parseArgs(argv: string[]): Args {
     includeAdult: false,
     dryRun: false,
     force: false,
+    seedFile: null,
   };
   for (let i = 0; i < argv.length; i++) {
     const a = argv[i];
@@ -87,7 +95,32 @@ function parseArgs(argv: string[]): Args {
       out.dryRun = true;
     } else if (a === "--force") {
       out.force = true;
+    } else if (a === "--seed-file" && next) {
+      out.seedFile = next;
+      i++;
     }
+  }
+  return out;
+}
+
+/**
+ * seed file (= line-separated qid list) を読み込む。 各行から最初の Q\d+
+ * token を抽出。 # コメント / 空行 / header 行 を無視。 重複 qid は dedup。
+ *
+ * accept する format 例:
+ *   Q1993                           ← 単純な qid 列
+ *   Q1993 諫山創 進撃の巨人          ← space 区切りの行
+ *   美味しんぼ\t...\tQ11615162\t... ← TSV (= verification-20.tsv 形式)
+ *   # コメント                        ← 無視
+ */
+function loadSeedQids(seedFile: string): Set<string> {
+  const raw = fs.readFileSync(seedFile, "utf8");
+  const out = new Set<string>();
+  for (const line of raw.split(/\r?\n/)) {
+    const t = line.trim();
+    if (!t || t.startsWith("#")) continue;
+    const m = t.match(/Q\d+/);
+    if (m) out.add(m[0]);
   }
   return out;
 }
@@ -370,16 +403,45 @@ async function main() {
 
   // 1 シリーズに 1 行ずつ。primary author は writer_artist > writer >
   // artist > original_author の優先順、最初の 1 名を採用する。
-  const seriesRows = db
-    .prepare(
-      `SELECT s.id, s.series_key, s.qid, s.title, s.title_kana,
-              s.year_started, s.year_ended, s.status,
-              s.publisher_key, s.magazine_key, s.demographic,
-              s.genres, s.synopsis, s.wikipedia_url
-       FROM series s
-       ORDER BY s.id`,
-    )
-    .all() as SeriesRow[];
+  // --seed-file 指定時は mangaka.qid IN (...) で series を絞り込む。
+  let seriesRows: SeriesRow[];
+  if (args.seedFile) {
+    const qids = loadSeedQids(args.seedFile);
+    if (qids.size === 0) {
+      throw new Error(`seed file ${args.seedFile} contains no qids`);
+    }
+    const placeholders = Array.from(qids, () => "?").join(",");
+    seriesRows = db
+      .prepare(
+        `SELECT s.id, s.series_key, s.qid, s.title, s.title_kana,
+                s.year_started, s.year_ended, s.status,
+                s.publisher_key, s.magazine_key, s.demographic,
+                s.genres, s.synopsis, s.wikipedia_url
+         FROM series s
+         WHERE s.id IN (
+           SELECT DISTINCT sa.series_id
+           FROM series_authors sa
+           JOIN mangaka m ON m.id = sa.mangaka_id
+           WHERE m.qid IN (${placeholders})
+         )
+         ORDER BY s.id`,
+      )
+      .all(...qids) as SeriesRow[];
+    console.log(
+      `[seed-file] ${args.seedFile} → ${qids.size} qids → ${seriesRows.length} series matched`,
+    );
+  } else {
+    seriesRows = db
+      .prepare(
+        `SELECT s.id, s.series_key, s.qid, s.title, s.title_kana,
+                s.year_started, s.year_ended, s.status,
+                s.publisher_key, s.magazine_key, s.demographic,
+                s.genres, s.synopsis, s.wikipedia_url
+         FROM series s
+         ORDER BY s.id`,
+      )
+      .all() as SeriesRow[];
+  }
 
   const authorStmt = db.prepare(
     `SELECT m.id AS mid, m.qid, m.name, m.has_adult_credit, sa.role

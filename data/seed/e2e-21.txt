@@ -1,0 +1,32 @@
+# 21 mangaka e2e seed (= drafts → published → site 表示 試験用)
+#
+# 内訳: data/seed/verification-20.tsv の 20 unique qids (= 小畑健は
+#      DEATH NOTE と バクマン の両方を持つので重複) + 高橋留美子 全件。
+#
+# 用途: scripts/promote-bulk.ts に `--seed-file` で渡して subset drafts
+#      を生成。 全件展開時の問題を 数十件 規模で先取りするための focused test。
+#
+# format: 1 行 1 qid (= "Q\d+")。 # コメント / 空行 OK。
+# loadSeedQids() (scripts/promote-bulk.ts) は最初の Q\d+ token を抽出するので
+# qid の後にコメントを書いても良い。
+
+Q11615162  # 花咲アキラ (美味しんぼ)
+Q313703    # 小畑健 (DEATH NOTE / バクマン)
+Q47465101  # 小林有吾 (アオアシ)
+Q3782468   # 諫山創 (進撃の巨人)
+Q459911    # 井上雄彦 (SLAM DUNK)
+Q719354    # 荒木飛呂彦 (ジョジョの奇妙な冒険)
+Q208582    # 鳥山明 (ドラゴンボール)
+Q230962    # 荒川弘 (鋼の錬金術師)
+Q2010      # 尾田栄一郎 (ONE PIECE)
+Q1993      # 岸本斉史 (NARUTO)
+Q295073    # 久保帯人 (BLEACH)
+Q24865213  # 吾峠呼世晴 (鬼滅の刃)
+Q313945    # 青山剛昌 (名探偵コナン)
+Q550311    # 冨樫義博 (HUNTER×HUNTER)
+Q11411575  # 古舘春一 (ハイキュー!!)
+Q9116547   # 原泰久 (キングダム)
+Q715725    # 三浦建太郎 (ベルセルク)
+Q3981526   # 遠藤達哉 (SPY×FAMILY)
+Q1324593   # 空知英秋 (銀魂)
+Q219948    # 高橋留美子 (★ 全件: うる星 / めぞん / らんま / 犬夜叉 / RINNE / MAO)
