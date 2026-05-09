@@ -7,6 +7,7 @@ import {
   flattenStringArray,
   isAdultMadbRecord,
   parseVolumeNumber,
+  splitMadbLiteral,
   type MadbJsonLdRecord,
   type MadbRecord,
 } from "./madb-jsonld";
@@ -84,6 +85,32 @@ describe("firstString", () => {
   it("returns empty for empty / undefined", () => {
     expect(firstString(undefined)).toBe("");
     expect(firstString([])).toBe("");
+  });
+});
+
+describe("splitMadbLiteral", () => {
+  it("strips ∥-separated kana, full-width spaces", () => {
+    expect(splitMadbLiteral("集英社　∥　シュウエイシャ")).toBe("集英社");
+    expect(splitMadbLiteral("白夜書房　∥　ビャクヤ ショボウ")).toBe("白夜書房");
+    expect(splitMadbLiteral("祥伝社　∥　ショウデンシャ")).toBe("祥伝社");
+  });
+
+  it("handles half-width spaces and missing spaces around ∥", () => {
+    expect(splitMadbLiteral("集英社 ∥ シュウエイシャ")).toBe("集英社");
+    expect(splitMadbLiteral("集英社∥シュウエイシャ")).toBe("集英社");
+  });
+
+  it("returns input unchanged when no ∥", () => {
+    expect(splitMadbLiteral("集英社")).toBe("集英社");
+    expect(splitMadbLiteral("KADOKAWA")).toBe("KADOKAWA");
+  });
+
+  it("returns empty for empty input", () => {
+    expect(splitMadbLiteral("")).toBe("");
+  });
+
+  it("trims trailing whitespace", () => {
+    expect(splitMadbLiteral("集英社 　")).toBe("集英社");
   });
 });
 

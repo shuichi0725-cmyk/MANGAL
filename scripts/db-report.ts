@@ -2,8 +2,9 @@
  * SQLite DB の中身をテキスト形式で表示する診断ツール。
  * 主な用途は「成人判定で弾かれるはずのレコード」の目視確認。
  *
- *   npm run db:report                 # 全体サマリ
+ *   npm run db:report                 # 全体サマリ (= archive live/excluded/deleted 含む)
  *   npm run db:report -- --adult      # 成人フラグ/スコアが立っているもの
+ *   npm run db:report -- --excluded   # excluded queue の reason 別 + 直近 30 件
  *   npm run db:report -- --series     # シリーズ一覧（先頭20）
  *   npm run db:report -- --mangaka    # 漫画家一覧（先頭20）
  *   npm run db:report -- --sources    # source 別の件数
@@ -19,6 +20,7 @@ type Args = {
   showSeries: boolean;
   showMangaka: boolean;
   showSources: boolean;
+  showExcluded: boolean;
   topN: number | null;
   query: string | null;
 };
@@ -29,6 +31,7 @@ function parseArgs(argv: string[]): Args {
     showSeries: false,
     showMangaka: false,
     showSources: false,
+    showExcluded: false,
     topN: null,
     query: null,
   };
@@ -38,6 +41,7 @@ function parseArgs(argv: string[]): Args {
     else if (a === "--series") out.showSeries = true;
     else if (a === "--mangaka") out.showMangaka = true;
     else if (a === "--sources") out.showSources = true;
+    else if (a === "--excluded") out.showExcluded = true;
     else if (a === "--top" && argv[i + 1]) {
       const n = Number(argv[++i]);
       if (Number.isFinite(n) && n > 0) out.topN = n;
@@ -80,6 +84,19 @@ function main() {
     editions: (db.prepare("SELECT COUNT(*) AS n FROM editions").get() as { n: number }).n,
     volumes: (db.prepare("SELECT COUNT(*) AS n FROM volumes").get() as { n: number }).n,
     sources: (db.prepare("SELECT COUNT(*) AS n FROM sources").get() as { n: number }).n,
+    archive_total: (
+      db.prepare("SELECT COUNT(*) AS n FROM series_archive").get() as { n: number }
+    ).n,
+    archive_excluded: (
+      db
+        .prepare("SELECT COUNT(*) AS n FROM series_archive WHERE current_state='excluded'")
+        .get() as { n: number }
+    ).n,
+    archive_deleted: (
+      db
+        .prepare("SELECT COUNT(*) AS n FROM series_archive WHERE current_state='deleted'")
+        .get() as { n: number }
+    ).n,
   };
 
   console.log("=== summary ===");
@@ -88,6 +105,11 @@ function main() {
   console.log(`  editions: ${counts.editions}`);
   console.log(`  volumes : ${counts.volumes}`);
   console.log(`  sources : ${counts.sources}`);
+  console.log(
+    `  archive : ${counts.archive_total} ` +
+      `(live=${counts.archive_total - counts.archive_excluded - counts.archive_deleted}, ` +
+      `excluded=${counts.archive_excluded}, deleted=${counts.archive_deleted})`,
+  );
 
   if (args.showSources) {
     console.log("\n=== sources by name ===");
@@ -98,6 +120,72 @@ function main() {
       .all() as { source_name: string; ref_table: string; n: number }[];
     for (const r of rows) {
       console.log(`  ${pad(r.source_name, 16)} ${pad(r.ref_table, 12)} ${r.n}`);
+    }
+  }
+
+  if (args.showExcluded) {
+    console.log("\n=== excluded by reason ===");
+    const reasonRows = db
+      .prepare(
+        `SELECT reason, COUNT(*) AS n
+         FROM series_excluded
+         GROUP BY reason
+         ORDER BY n DESC`,
+      )
+      .all() as { reason: string; n: number }[];
+    if (reasonRows.length === 0) {
+      console.log("  (なし — series_excluded 空)");
+    } else {
+      for (const r of reasonRows) {
+        console.log(`  ${pad(r.reason, 22)} ${r.n}`);
+      }
+      const total = reasonRows.reduce((a, b) => a + b.n, 0);
+      console.log(`  ${pad("total", 22)} ${total}`);
+    }
+
+    console.log("\n=== recent excluded (top 30 by excluded_at desc) ===");
+    const recent = db
+      .prepare(
+        `SELECT a.id        AS arc_id,
+                a.title     AS title,
+                a.year_started AS year_started,
+                a.year_ended   AS year_ended,
+                a.publisher_key AS pub,
+                a.adult_score AS score,
+                e.reason     AS reason,
+                e.signals_json AS signals_json,
+                e.excluded_at  AS excluded_at,
+                e.excluded_by  AS excluded_by
+         FROM series_excluded e
+         JOIN series_archive a ON a.id = e.archive_id
+         ORDER BY e.excluded_at DESC, a.id DESC
+         LIMIT 30`,
+      )
+      .all() as {
+      arc_id: number;
+      title: string;
+      year_started: number | null;
+      year_ended: number | null;
+      pub: string | null;
+      score: number;
+      reason: string;
+      signals_json: string | null;
+      excluded_at: string;
+      excluded_by: string;
+    }[];
+
+    if (recent.length === 0) {
+      console.log("  (なし)");
+    } else {
+      console.log(
+        `  ${pad("arc#", 6)} ${pad("score", 5)} ${pad("reason", 18)} ${pad("year", 11)} ${pad("by", 14)} title`,
+      );
+      for (const r of recent) {
+        const yr = `${r.year_started ?? "????"}-${r.year_ended ?? ""}`;
+        console.log(
+          `  ${pad(r.arc_id, 6)} ${pad(r.score, 5)} ${pad(r.reason, 18)} ${pad(yr, 11)} ${pad(r.excluded_by, 14)} ${r.title}`,
+        );
+      }
     }
   }
 

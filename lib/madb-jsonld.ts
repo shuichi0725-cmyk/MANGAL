@@ -146,6 +146,26 @@ export function firstString(field: MadbJsonLdField | undefined): string {
 }
 
 /**
+ * MADB literal の 「漢字 ∥ カナ」 形式から漢字部分のみ抽出する。
+ *
+ *   "集英社　∥　シュウエイシャ"   → "集英社"
+ *   "白夜書房　∥　ビャクヤ ショボウ" → "白夜書房"
+ *   "集英社"                      → "集英社"  (= ∥ 無しならそのまま)
+ *
+ * MADB の `schema:publisher` は ~43% の record で 全角空白 ∥ 全角空白 の前後に
+ * 漢字とカナを並べる慣習があり、 publisher master との string 一致を妨げる。
+ * ヨミは別 field (= {@value, @language=ja-hrkt}) に既に分離されているので、
+ * literal 側のヨミは捨てて漢字側だけ採用する。
+ */
+export function splitMadbLiteral(s: string): string {
+  if (!s) return "";
+  // 全角空白を周辺許容、 半角空白も含む robust な split (= 表記揺れ対策)。
+  const idx = s.search(/[\s　]*∥[\s　]*/);
+  if (idx < 0) return s.trim();
+  return s.slice(0, idx).trim();
+}
+
+/**
  * field の @language=ja-hrkt の @value を返す (= ヨミ取得)。 無ければ空文字。
  */
 export function findKanaLiteral(field: MadbJsonLdField | undefined): string {
@@ -210,8 +230,11 @@ export function extractRecord(raw: MadbJsonLdRecord): MadbRecord | null {
     // 共著の場合 schema:creator array に複数 string 要素が並ぶ。
     // {@value: kana} の object は無視 (= 漢字名のみ取り出す)。
     authors: flattenStringArray(raw["schema:creator"]),
-    brand: firstString(raw["schema:brand"]),
-    publisher: firstString(raw["schema:publisher"]),
+    // brand / publisher は ~43% の record で 「漢字 ∥ カナ」 形式の literal が
+    // 入るので splitMadbLiteral で 漢字のみ抽出する (= でないと publisher master
+    // との完全一致照合が大量に miss する)。
+    brand: splitMadbLiteral(firstString(raw["schema:brand"])),
+    publisher: splitMadbLiteral(firstString(raw["schema:publisher"])),
     datePublished:
       typeof raw["schema:datePublished"] === "string"
         ? raw["schema:datePublished"]
