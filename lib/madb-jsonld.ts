@@ -249,6 +249,30 @@ export function selectiveNormalize(s: string): string {
 }
 
 /**
+ * publisher 値の **先頭 [role] prefix** だけを strip する。 例:
+ *
+ *   "[発売]KADOKAWA"        → "KADOKAWA"
+ *   "[頒布]鉄人社"           → "鉄人社"
+ *   "[共同刊行・発売]講談社" → "講談社"
+ *   "KADOKAWA"              → "KADOKAWA"  (= no prefix, no change)
+ *
+ * Edge case: strip 後に **空文字** になる値 (= bracket そのものが content 全体)
+ * は元値を保持する。 これにより publisher 値が消失しない:
+ *
+ *   "[出版者不明]"   → "" → 元の "[出版者不明]" を返す  (= 「出版者不明」 という情報を保持)
+ *   "[光文社]"       → "" → 元の "[光文社]" を返す      (= 出版社名そのもの)
+ *   "[いしいたける]" → "" → 元の "[いしいたける]" を返す (= 個人名 / ZINE 系)
+ *
+ * 著者の `cleanCreatorStrings` (= 全 [...] strip + comma split) と違って、
+ * publisher は 通常 1 record 1 publisher なので **leading 1 個のみ** strip し、
+ * comma split は行わない。
+ */
+export function stripLeadingRolePrefix(s: string): string {
+  const stripped = s.replace(/^\s*\[[^\]]+\]\s*/, "");
+  return stripped || s;
+}
+
+/**
  * field の @language=ja-hrkt の @value を返す (= ヨミ取得)。 無ければ空文字。
  */
 export function findKanaLiteral(field: MadbJsonLdField | undefined): string {

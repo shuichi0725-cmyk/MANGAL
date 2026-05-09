@@ -11,9 +11,48 @@ import {
   rebuildSchemaName,
   selectiveNormalize,
   splitMadbLiteral,
+  stripLeadingRolePrefix,
   type MadbJsonLdRecord,
   type MadbRecord,
 } from "./madb-jsonld";
+
+describe("stripLeadingRolePrefix (= publisher [発売]/[頒布] 等の prefix 除去)", () => {
+  it("strips [発売] prefix", () => {
+    expect(stripLeadingRolePrefix("[発売]KADOKAWA")).toBe("KADOKAWA");
+  });
+
+  it("strips [頒布] prefix", () => {
+    expect(stripLeadingRolePrefix("[頒布]鉄人社")).toBe("鉄人社");
+  });
+
+  it("strips compound role like [共同刊行・発売]", () => {
+    expect(stripLeadingRolePrefix("[共同刊行・発売]講談社")).toBe("講談社");
+  });
+
+  it("preserves value when no prefix", () => {
+    expect(stripLeadingRolePrefix("KADOKAWA")).toBe("KADOKAWA");
+    expect(stripLeadingRolePrefix("集英社")).toBe("集英社");
+  });
+
+  it("preserves bracket-only content when strip would produce empty (= 出版者不明 case)", () => {
+    expect(stripLeadingRolePrefix("[出版者不明]")).toBe("[出版者不明]");
+    expect(stripLeadingRolePrefix("[光文社]")).toBe("[光文社]");
+    expect(stripLeadingRolePrefix("[いしいたける]")).toBe("[いしいたける]");
+  });
+
+  it("strips only leading prefix (= keeps trailing brackets)", () => {
+    // 仮想ケース: prefix + content + 末尾括弧
+    expect(stripLeadingRolePrefix("[発売]社名(出版部門)")).toBe("社名(出版部門)");
+  });
+
+  it("handles whitespace around prefix", () => {
+    expect(stripLeadingRolePrefix(" [発売] KADOKAWA")).toBe("KADOKAWA");
+  });
+
+  it("returns empty input as-is", () => {
+    expect(stripLeadingRolePrefix("")).toBe("");
+  });
+});
 
 describe("selectiveNormalize (= B/C/D のみ統一、 括弧他は保持)", () => {
   it("converts 全角空白 (U+3000) to 半角空白 (= pattern B)", () => {

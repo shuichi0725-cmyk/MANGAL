@@ -57,6 +57,7 @@ import {
   rebuildSchemaName,
   selectiveNormalize,
   splitMadbLiteral,
+  stripLeadingRolePrefix,
   type MadbJsonLdRecord,
 } from "../lib/madb-jsonld";
 
@@ -185,9 +186,10 @@ function applyPublisherCanonical(
   if (typeof field === "string") {
     const split = splitMadbLiteral(field);
     if (!split) return field;
-    const norm = selectiveNormalize(split);
+    const stripped = stripLeadingRolePrefix(split);
+    const norm = selectiveNormalize(stripped);
     const key = norm.toLowerCase().trim();
-    // canonical 不在の edge case でも norm を返す (= ∥ 削除 + B/C/D 統一)
+    // canonical 不在の edge case でも norm を返す (= ∥ 削除 + role strip + B/C/D 統一)
     return canonical.get(key) ?? norm;
   }
   if (Array.isArray(field)) {
@@ -306,14 +308,18 @@ async function aggregateBrandsAndPublishers(
       visitBrand(brand);
     }
 
-    // publisher 集計: ∥ split → selectiveNormalize + lowercase + trim を key に
+    // publisher 集計: ∥ split → leading [role] strip → selectiveNormalize +
+    // lowercase + trim を key に。 [発売] / [頒布] / [共同刊行・発売] 等の
+    // 流通区分 prefix を除去して、 「[発売]KADOKAWA」 と 「KADOKAWA」 を
+    // 同 group に統合する。
     const pub = item.value["schema:publisher"];
     if (pub !== undefined && pub !== null) {
       const visitPub = (v: unknown): void => {
         if (typeof v === "string" && v) {
           const split = splitMadbLiteral(v);
           if (!split) return;
-          const norm = selectiveNormalize(split);
+          const stripped = stripLeadingRolePrefix(split);
+          const norm = selectiveNormalize(stripped);
           const key = norm.toLowerCase().trim();
           if (!key) return;
           const form = norm.trim();
