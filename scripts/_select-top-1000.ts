@@ -77,8 +77,8 @@ candidates.sort((a, b) => {
   return a.id - b.id;
 });
 
-// top 1000
-const top1000 = candidates.slice(0, 1000).map((r) => {
+// top 9000
+const top9000 = candidates.slice(0, 9000).map((r) => {
   const qid = r.series_qid ?? r.author_qid;
   const key = qid ? `${qid}|${r.title}` : `sid:${r.id}|${r.title}`;
   return {
@@ -94,18 +94,14 @@ const top1000 = candidates.slice(0, 1000).map((r) => {
     vol_count_total: r.vol_count_total,
   };
 });
-top1000.forEach((r, i) => (r.rank = i + 1));
+top9000.forEach((r, i) => (r.rank = i + 1));
 
 fs.mkdirSync(".cache", { recursive: true });
-fs.writeFileSync(".cache/top-1000.json", JSON.stringify(top1000, null, 2));
-console.log(`[select] wrote .cache/top-1000.json (= ${top1000.length} entries)`);
+fs.writeFileSync(".cache/top-9000.json", JSON.stringify(top9000, null, 2));
+console.log(`[select] wrote .cache/top-9000.json (= ${top9000.length} entries)`);
 
-// Top 30 を ログ表示 (= sanity check)
-console.log("\n=== top 30 (= rank/vol_count/title/author) ===");
-for (const r of top1000.slice(0, 30)) {
-  console.log(`  ${r.rank.toString().padStart(4)}: vol=${r.vol_count.toString().padStart(3)} / ${r.title} (${r.author})`);
-}
-console.log(`\n=== rank 950-1000 ===`);
-for (const r of top1000.slice(950, 1000)) {
+// Sanity check: rank 8950-9000
+console.log(`\n=== rank 8950-9000 (= tail) ===`);
+for (const r of top9000.slice(8950, 9000)) {
   console.log(`  ${r.rank.toString().padStart(4)}: vol=${r.vol_count.toString().padStart(3)} / ${r.title} (${r.author})`);
 }
