@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import {
+  cleanCreatorStrings,
   extractMadbId,
   extractRecord,
   findKanaLiteral,
@@ -11,6 +12,52 @@ import {
   type MadbJsonLdRecord,
   type MadbRecord,
 } from "./madb-jsonld";
+
+describe("cleanCreatorStrings (= MADB old-format [著] prefix handling)", () => {
+  it("strips [著] role prefix from single-author old-format string", () => {
+    expect(cleanCreatorStrings(["[著]吾峠呼世晴"])).toEqual(["吾峠呼世晴"]);
+  });
+
+  it("strips prefix and splits comma-packed multi-author old-format string", () => {
+    expect(cleanCreatorStrings(["[著]浦沢直樹,スタジオ・ナッツ"])).toEqual([
+      "浦沢直樹",
+      "スタジオ・ナッツ",
+    ]);
+  });
+
+  it("passes through clean new-format names unchanged", () => {
+    expect(cleanCreatorStrings(["原泰久"])).toEqual(["原泰久"]);
+    expect(cleanCreatorStrings(["花咲アキラ", "雁屋哲"])).toEqual([
+      "花咲アキラ",
+      "雁屋哲",
+    ]);
+  });
+
+  it("handles compound roles like [著・画]", () => {
+    expect(cleanCreatorStrings(["[著・画]山田太郎"])).toEqual(["山田太郎"]);
+  });
+
+  it("splits records with multiple [role]name pairs joined by full-width slash", () => {
+    expect(cleanCreatorStrings(["[原作]大場つぐみ／[漫画]小畑健"])).toEqual([
+      "大場つぐみ",
+      "小畑健",
+    ]);
+  });
+
+  it("filters out empty strings and whitespace-only fragments", () => {
+    expect(cleanCreatorStrings(["", "  ", "[著]"])).toEqual([]);
+  });
+
+  it("handles half-width comma + various role labels", () => {
+    expect(
+      cleanCreatorStrings(["[原作]A,[作画]B,[編集協力]C"]),
+    ).toEqual(["A", "B", "C"]);
+  });
+
+  it("keeps Japanese punctuation (= 中黒) inside a name", () => {
+    expect(cleanCreatorStrings(["[著]スタジオ・ナッツ"])).toEqual(["スタジオ・ナッツ"]);
+  });
+});
 
 describe("flattenStringArray", () => {
   it("returns empty for undefined / null", () => {

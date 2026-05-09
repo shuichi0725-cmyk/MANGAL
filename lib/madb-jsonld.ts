@@ -106,6 +106,37 @@ export type MadbRecord = {
  * `keepLocalized=true` で {@value} string も配列に残す。 default は raw
  * string のみ (= 漢字相当)。
  */
+/**
+ * MADB の旧 format `schema:creator` (= "[著]吾峠呼世晴" / "[著]浦沢直樹,スタジオ・ナッツ"
+ * 等の role prefix + comma-packed string) を clean 著者名 array に変換する。
+ *
+ *   "[著]吾峠呼世晴"               → ["吾峠呼世晴"]
+ *   "[著]浦沢直樹,スタジオ・ナッツ"   → ["浦沢直樹", "スタジオ・ナッツ"]
+ *   "原泰久"                       → ["原泰久"]                (= 新 format pass-through)
+ *   "[著・画]山田太郎"              → ["山田太郎"]              (= 複合 role)
+ *   "[原作]A／[漫画]B"              → ["A", "B"]               (= 全角スラッシュ separator)
+ *   ""                            → []
+ *
+ * - 各 string について冒頭の `[<role>]` (= 任意の文字列、 ASCII bracket 必須) を除去
+ * - 区切り文字 `,` `，` `、` `／` `/` で分割して個別著者に展開
+ * - trim 後 empty なら drop
+ *
+ * authorIndex match は role を見ないので role 情報は捨てて良い (= 著者名さえ
+ * mangaka.csv と一致すれば writer/artist 区別なく拾う)。
+ */
+export function cleanCreatorStrings(arr: string[]): string[] {
+  const out: string[] = [];
+  for (const raw of arr) {
+    if (!raw) continue;
+    const stripped = raw.replace(/\[[^\]]+\]/g, " ");
+    for (const part of stripped.split(/[,，、／/]/)) {
+      const t = part.trim();
+      if (t) out.push(t);
+    }
+  }
+  return out;
+}
+
 export function flattenStringArray(
   field: MadbJsonLdField | undefined,
   opts: { keepLocalized?: boolean } = {},
@@ -229,7 +260,17 @@ export function extractRecord(raw: MadbJsonLdRecord): MadbRecord | null {
         : "",
     // 共著の場合 schema:creator array に複数 string 要素が並ぶ。
     // {@value: kana} の object は無視 (= 漢字名のみ取り出す)。
-    authors: flattenStringArray(raw["schema:creator"]),
+    //
+    // MADB は record によって creator 形式が異なる:
+    //   - 新 format (= 2020 以降の多く): array 要素ごとに 1 著者の clean 名前
+    //     例 ["原泰久", {@value: "ハラヤスヒサ"}]
+    //   - 旧 format (= 2018 以前の多く): role prefix + comma-packed 1 string
+    //     例 "[著]吾峠呼世晴"  /  "[著]浦沢直樹,スタジオ・ナッツ"
+    //     prefix の種類: [著] [原作] [漫画] [作画] [作] [画] [絵] [編] [編集]
+    //                    [監修] [著・画] [協力] etc.
+    // cleanCreatorStrings で role prefix 剥離 + comma 分割 を行うことで
+    // 両 format を unified array として下流に渡す。
+    authors: cleanCreatorStrings(flattenStringArray(raw["schema:creator"])),
     // brand / publisher は ~43% の record で 「漢字 ∥ カナ」 形式の literal が
     // 入るので splitMadbLiteral で 漢字のみ抽出する (= でないと publisher master
     // との完全一致照合が大量に miss する)。

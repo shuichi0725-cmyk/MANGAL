@@ -1,0 +1,51 @@
+# 20-manga verification seed (= rebuild quality gate)
+#
+# 種 (= .cache/madb/metadata101.json) から完全データを fetch できるかを 20 の
+# 著名作品で検証するためのリスト。 美味しんぼ で発覚した 「95% 取りこぼし」
+# が他作品でも起きていないか、 6900 series 再 fetch 前に確認する。
+#
+# 各行は title (= NDC 検索キー)、 著者名 (= primary | secondary, パイプ区切り)、
+# 主 QID (= mangaka.csv に既に存在するもの)、 副 QID (= 共著、 TBD は要追加)、
+# 想定巻数 (= 公知の巻数、 検証 baseline)、 fail-mode tags。
+#
+# Coverage 計測時は title (substring 部分一致) で metadata101.json を grep し、
+# 著者名でフィルタしてユニーク ISBN-13 数を真値とする。 我々の DB の同 series 行
+# にぶら下がる ISBN 数を比較。 目標は ≥95%。
+#
+# tags の意味:
+#   cowriter        = 共著 (= primary + secondary 両方が必要)
+#   multi-imprint   = 複数 imprint で同 series が刊行
+#   multi-edition   = standard 以外に kanzenban / 文庫版 等を持つ
+#   completed       = 完結済 (= 巻数 fix)
+#   ongoing         = 連載中 (= 巻数増加中、 ±1 まで許容)
+#   long-tail       = 100 vol 超
+#   short           = 30 vol 以下
+#
+# col1: title_canonical
+# col2: authors_jp (primary | secondary, 単独なら | 無し)
+# col3: primary_qid
+# col4: secondary_qid (なければ "" or TBD)
+# col5: expected_vols (= 公知の巻数 / 連載中は ±)
+# col6: tags (CSV)
+
+title_canonical	authors_jp	primary_qid	secondary_qid	expected_vols	tags
+美味しんぼ	花咲アキラ|雁屋哲	Q11615162	TBD	111	cowriter,multi-imprint,completed,long-tail
+DEATH NOTE	小畑健|大場つぐみ	Q313703	TBD	12	cowriter,completed,short
+バクマン。	小畑健|大場つぐみ	Q313703	TBD	20	cowriter,completed,short
+アオアシ	小林有吾|上野直彦	Q47465101	TBD	38	cowriter,ongoing
+進撃の巨人	諫山創	Q3782468		34	multi-edition,completed
+SLAM DUNK	井上雄彦	Q459911		31	multi-edition,completed,short
+ジョジョの奇妙な冒険	荒木飛呂彦	Q719354		131	multi-edition,long-tail,multi-part
+ドラゴンボール	鳥山明	Q208582		42	multi-edition,completed
+鋼の錬金術師	荒川弘	Q230962		27	multi-edition,completed,short
+ONE PIECE	尾田栄一郎	Q2010		112	ongoing,long-tail
+NARUTO	岸本斉史	Q1993		72	completed
+BLEACH	久保帯人	Q295073		74	completed
+鬼滅の刃	吾峠呼世晴	Q24865213		23	completed,short
+名探偵コナン	青山剛昌	Q313945		106	ongoing,long-tail
+HUNTER×HUNTER	冨樫義博	Q550311		37	ongoing
+ハイキュー!!	古舘春一	Q11411575		45	completed
+キングダム	原泰久	Q9116547		78	multi-edition,ongoing,long-tail
+ベルセルク	三浦建太郎	Q715725		42	ongoing
+SPY×FAMILY	遠藤達哉	Q3981526		14	ongoing,short
+銀魂	空知英秋	Q1324593		77	completed
