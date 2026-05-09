@@ -89,6 +89,7 @@ function parseArgs(argv: string[]): Args {
 function normalizeRecord(
   raw: MadbJsonLdRecord,
   stats: NormalizeStats,
+  imprintCanonical: Map<string, string>,
 ): MadbJsonLdRecord {
   const out: MadbJsonLdRecord = { ...raw };
 
@@ -126,7 +127,114 @@ function normalizeRecord(
     }
   }
 
+  // 3. schema:brand: 大文字小文字 揺れ統一 (= imprint canonical 形に置換)
+  //    例: "My first big" / "My First BIG" / "My First Big" → "My first big" (= 最頻出)
+  //    Pass 1 (= aggregateImprints) で集計済の canonical map を参照。
+  //    string 値は置換、 object (= ヨミ etc.) / @id 参照 は pass through。
+  //    case 違いが無い (= group 内 form 1 個) imprint は何も変わらない。
+  if (raw["schema:brand"] !== undefined) {
+    const before = raw["schema:brand"];
+    const replaced = applyImprintCanonical(before, imprintCanonical) as
+      | typeof before;
+    out["schema:brand"] = replaced;
+    if (JSON.stringify(before) !== JSON.stringify(replaced)) {
+      stats.brandNormalized++;
+    }
+  }
+
   return out;
+}
+
+/**
+ * brand 値に canonical map を適用。 string なら lowercase 引きで canonical に
+ * 置換。 array なら各要素を再帰処理 (= object はそのまま、 string は置換)。
+ * canonical map に key 不在なら元値を保持 (= 安全)。
+ */
+function applyImprintCanonical(
+  field: unknown,
+  canonical: Map<string, string>,
+): unknown {
+  if (typeof field === "string") {
+    return canonical.get(field.toLowerCase()) ?? field;
+  }
+  if (Array.isArray(field)) {
+    return field.map((x) => applyImprintCanonical(x, canonical));
+  }
+  return field;
+}
+
+/**
+ * 1st pass: 全 record を scan して imprint 集計。 canonical 形 (= 同 lowercase
+ * key の中で最頻出 form) を確定する。 結果は { lowercase: canonical_form } の
+ * Map で返す。 単一 form の group は map に入れない (= no-op で十分)。
+ */
+async function aggregateImprints(
+  inPath: string,
+): Promise<{
+  canonical: Map<string, string>;
+  totalGroups: number;
+  groupsWithVariation: number;
+}> {
+  const groups = new Map<string, Map<string, number>>();
+
+  const stream = chain([
+    fs.createReadStream(inPath),
+    sjParser(),
+    pick({ filter: /^@graph$/ }),
+    streamArray(),
+  ]);
+
+  let recordsScanned = 0;
+  for await (const item of stream as AsyncIterable<{
+    key: number;
+    value: MadbJsonLdRecord;
+  }>) {
+    recordsScanned++;
+    const brand = item.value["schema:brand"];
+    if (brand === undefined || brand === null) continue;
+    const visit = (v: unknown): void => {
+      if (typeof v === "string" && v) {
+        const lower = v.toLowerCase();
+        const inner = groups.get(lower);
+        if (inner) inner.set(v, (inner.get(v) || 0) + 1);
+        else groups.set(lower, new Map([[v, 1]]));
+      } else if (Array.isArray(v)) {
+        for (const x of v) visit(x);
+      }
+    };
+    visit(brand);
+    if (recordsScanned % 100000 === 0) {
+      console.log(`  [agg-pass] ${recordsScanned} records scanned`);
+    }
+  }
+
+  // canonical form 選択: 最頻出 (= count desc)、 同点なら code-point 順 (= deterministic)
+  const canonical = new Map<string, string>();
+  let groupsWithVariation = 0;
+  for (const [lower, formMap] of groups) {
+    if (formMap.size === 1) continue; // 単一 form は normalize 不要
+    groupsWithVariation++;
+    let bestForm = "";
+    let bestCount = -1;
+    for (const [form, count] of formMap) {
+      if (
+        count > bestCount ||
+        (count === bestCount && form < bestForm)
+      ) {
+        bestForm = form;
+        bestCount = count;
+      }
+    }
+    canonical.set(lower, bestForm);
+    // 全 form (= bestForm 含む) に同 canonical をマップ。 lookup 時の lowercase で
+    // 引けば常に canonical を返す。
+  }
+
+  return {
+    canonical,
+    totalGroups: groups.size,
+    groupsWithVariation,
+  };
 }
 
 type NormalizeStats = {
@@ -135,6 +243,7 @@ type NormalizeStats = {
   creatorNormalized: number;
   schemaNameRebuilt: number;
   schemaNameUnchanged: number;
+  brandNormalized: number;
 };
 
 async function main() {
@@ -147,16 +256,26 @@ async function main() {
 
   console.log(`[clean-madb-seed] in=${args.inPath} out=${args.outPath}`);
 
+  // === Pass 1: imprint 集計 ===
+  console.log(`\n[pass 1/2] aggregating imprint case variations...`);
+  const t0 = Date.now();
+  const aggResult = await aggregateImprints(args.inPath);
+  const elapsed1 = ((Date.now() - t0) / 1000).toFixed(1);
+  console.log(
+    `  done in ${elapsed1}s: ${aggResult.totalGroups} unique imprint groups, ${aggResult.groupsWithVariation} with case variation, ${aggResult.canonical.size} canonical entries`,
+  );
+
   const stats: NormalizeStats = {
     totalRead: 0,
     totalWritten: 0,
     creatorNormalized: 0,
     schemaNameRebuilt: 0,
     schemaNameUnchanged: 0,
+    brandNormalized: 0,
   };
 
-  // 出力 stream open。 JSON-LD 全体は { "@graph": [...record, ...record] }
-  // 形式なので、 ブラケット + record を逐次書き出す。
+  // === Pass 2: 出力 ===
+  console.log(`\n[pass 2/2] writing normalized records...`);
   const outFp = fs.openSync(args.outPath, "w");
   const writeChunk = (chunk: string): void => {
     fs.writeSync(outFp, chunk);
@@ -176,7 +295,7 @@ async function main() {
     value: MadbJsonLdRecord;
   }>) {
     stats.totalRead++;
-    const cleaned = normalizeRecord(item.value, stats);
+    const cleaned = normalizeRecord(item.value, stats, aggResult.canonical);
     if (stats.totalWritten > 0) writeChunk(",");
     writeChunk(JSON.stringify(cleaned));
     stats.totalWritten++;
@@ -194,6 +313,9 @@ async function main() {
   console.log(`  creator normalized     : ${stats.creatorNormalized}`);
   console.log(`  schema:name rebuilt    : ${stats.schemaNameRebuilt}`);
   console.log(`  schema:name unchanged  : ${stats.schemaNameUnchanged}`);
+  console.log(`  brand normalized       : ${stats.brandNormalized}`);
+  console.log(`  imprint groups         : ${aggResult.totalGroups}`);
+  console.log(`  imprint w/ case var    : ${aggResult.groupsWithVariation}`);
   console.log(`  output                 : ${args.outPath}`);
 
   if (stats.totalRead !== stats.totalWritten) {
