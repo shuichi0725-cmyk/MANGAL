@@ -1,5 +1,5 @@
 schema_version: 1
-generated_at: 2026-05-09T16:44:01.757Z
+generated_at: 2026-05-09T16:48:03.033Z
 generator: claude-opus-4-7-direct-fill
 series:
   - key: Q1001784|GOLDEN SPIRAL
@@ -29,12 +29,44 @@ series:
   - key: Q1002730|青の島とねこ一匹
   - key: Q100329008|とっかぶ
   - key: Q100329008|空挺ドラゴンズ
+    magazine: monthly-afternoon
+    demographic: seinen
+    genres:
+      - fantasy
+      - adventure
+      - gourmet
+    synopsis: 捕龍船「クィン・ザザ号」 の竜ハンター達がドラゴンを獲り、 食べる ファンタジー。 桑原太矩のグルメ冒険漫画。
+    status: ongoing
+    anime_adapted: true
+    alternative_titles:
+      en: Drifting Dragons
   - key: Q100330360|イジらないで、長瀞さん
   - key: Q100453611|フルドラム
   - key: Q100453611|満州アヘンスクワッド
+    magazine: weekly-young-magazine
+    demographic: seinen
+    genres:
+      - historical
+      - drama
+      - suspense
+    synopsis: 戦中の満州を舞台にしたアヘン密造を描く 門馬司原作・鹿子作画の歴史クライム漫画。
+    status: completed
+    anime_adapted: false
   - key: Q100453682|お迎え渋谷くん
   - key: Q100453682|デジログ恋愛生活
   - key: Q100454750|アオのハコ
+    magazine: weekly-shonen-jump
+    demographic: shounen
+    genres:
+      - sports
+      - romance
+      - school
+      - drama
+    synopsis: 高校バドミントン部の少年・猪股大喜が、 同じ部活の先輩・千夏との恋を描く 三浦糀のスポーツ恋愛漫画。
+    status: ongoing
+    anime_adapted: true
+    alternative_titles:
+      en: Blue Box
   - key: Q100454750|先生、好きです。
   - key: Q100454750|青空ラバー
   - key: Q100454841|トラと陽子
@@ -132,6 +164,15 @@ series:
     status: completed
     anime_adapted: true
   - key: Q1015799|DEAR BOYS ACT
+    magazine: monthly-shonen-magazine
+    demographic: shounen
+    genres:
+      - sports
+      - drama
+      - school
+    synopsis: 「DEAR BOYS」 シリーズ。 八神ひろきのバスケットボール漫画。
+    status: ongoing
+    anime_adapted: false
   - key: Q1015799|DEAR BOYS ACT2
   - key: Q1015799|DEAR BOYS ACT3
   - key: Q1015799|DEAR BOYS ACTII
@@ -336,6 +377,16 @@ series:
   - key: Q104012842|ボクは宇宙人に恋をした。
   - key: Q104012842|マルコと数学王子
   - key: Q104012890|甘神さんちの縁結び
+    magazine: weekly-shonen-magazine
+    demographic: shounen
+    genres:
+      - romcom
+      - comedy
+      - school
+      - fantasy
+    synopsis: 神社の三姉妹の縁結びをするためにやってきた高校生・上終 のラブコメ。 内藤マーシー作。
+    status: ongoing
+    anime_adapted: true
   - key: Q104012978|お嬢さんと呼ばないで
   - key: Q104012978|ヒロインはじめました。
   - key: Q104012978|ヒロくんが先生
@@ -501,6 +552,15 @@ series:
   - key: Q104538840|愛のコトノハ
   - key: Q104538840|愛のように幻想りなさい
   - key: Q104538840|朝倉くんちょっと!
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - comedy
+      - school
+    synopsis: 石塚夢見の少女漫画。
+    status: completed
+    anime_adapted: false
   - key: Q104538840|週末Heaven
   - key: Q104538840|階上のライオン
   - key: Q104538840|風の盆恋歌
@@ -1105,6 +1165,18 @@ series:
       en: Police in a Pod
   - key: Q106308250|ハコヅメ~交番女子の逆襲~別章アンボックス
   - key: Q1063594|School Rumble
+    magazine: weekly-shonen-magazine
+    demographic: shounen
+    genres:
+      - romcom
+      - comedy
+      - school
+      - gag
+    synopsis: おバカな女子高生・塚本天満と不良少年・播磨拳児を中心とした 多角恋愛ハイテンションラブコメ。 小林尽作。
+    status: completed
+    anime_adapted: true
+    alternative_titles:
+      en: School Rumble
   - key: Q1063594|School Rumble STAY WITH ME,PLEASE
   - key: Q1063594|School Rumble Z
   - key: Q1063594|一路平安!
@@ -1200,6 +1272,18 @@ series:
   - key: Q106478769|毒頭
   - key: Q106478780|I AM SHERLOCK
   - key: Q106478780|やはり俺の青春ラブコメはまちがっている。@comic
+    magazine: monthly-shonen-gangan
+    demographic: shounen
+    genres:
+      - romcom
+      - comedy
+      - school
+      - drama
+    synopsis: 渡航のラノベを 伊緒直道 が漫画化。 ぼっち高校生・比企谷八幡の歪んだ青春ラブコメ。
+    status: completed
+    anime_adapted: true
+    alternative_titles:
+      en: My Teen Romantic Comedy SNAFU
   - key: Q106478780|一年に一度しか会えない君の話。
   - key: Q106478780|平成ヲタクリメンバーズ
   - key: Q106478886|シガンバナ
@@ -2015,6 +2099,18 @@ series:
   - key: Q108776612|今日も、なんとか生きてます。
   - key: Q108776612|永田町ワールドフェイマス
   - key: Q108776616|王様ランキング
+    magazine: null
+    demographic: seinen
+    genres:
+      - fantasy
+      - adventure
+      - drama
+      - comedy
+    synopsis: 耳が聞こえず話せないが心優しい王子・ボッジが王を目指す 十日草輔のファンタジー童話。
+    status: ongoing
+    anime_adapted: true
+    alternative_titles:
+      en: Ranking of Kings
   - key: Q108776616|脱サラ41歳のマンガ家再挑戦
   - key: Q108776782|カオス・ウィザードと悪魔のしもべ
   - key: Q108776782|力技のシスター
@@ -2760,6 +2856,13 @@ series:
   - key: Q110403918|めざせ!山カゾク♪
   - key: Q110403918|ゆるナチュライフ。
   - key: Q110403918|二月の勝者
+    magazine: big-comic-spirits
+    demographic: seinen
+    genres:
+      - drama
+    synopsis: 中学受験塾「桜花ゼミナール」 のカリスマ講師・黒木蔵人が中学受験を勝ち抜くため戦う 高瀬志帆の受験ドラマ。
+    status: completed
+    anime_adapted: false
   - key: Q110403918|彼岸花
   - key: Q110403918|恋する童話
   - key: Q110403918|恋をするにもほどがある!
@@ -3307,6 +3410,16 @@ series:
   - key: Q11128765|妹は思春期
   - key: Q11128765|濃厚!!ヤンマガエロバカセレクション♡
   - key: Q11128765|生徒会役員共
+    magazine: weekly-shonen-magazine
+    demographic: shounen
+    genres:
+      - comedy
+      - school
+      - gag
+      - 4-koma
+    synopsis: 元女子校に共学化したての桜才学園で、 生徒会長・天草シノら下ネタ全開な生徒会役員と平凡な男子生徒・津田タカトシの ギャグコメディ。
+    status: completed
+    anime_adapted: true
   - key: Q111302554|Armored core
   - key: Q111302554|えむえむっ!
   - key: Q111302554|スレイヤーズEVOLUTION-R
@@ -5416,6 +5529,16 @@ series:
   - key: Q11264134|転生担当女神が100人いたのでチートスキル100個貰えた
   - key: Q11264134|転生賢者は娘と暮らす。
   - key: Q11264155|KATANA
+    magazine: petit-flower
+    demographic: shoujo
+    genres:
+      - fantasy
+      - samurai
+      - drama
+      - historical
+    synopsis: 刀をテーマにした かまたきみこの伝奇少女漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11264155|Tu casa
   - key: Q11264155|きらきらdust
   - key: Q11264155|クレメンテ商会
@@ -7126,6 +7249,14 @@ series:
   - key: Q11273356|3カ月で20kg減成功すんのよ!ダイエット
   - key: Q11273356|G.P
   - key: Q11273356|My pure lady
+    magazine: null
+    demographic: josei
+    genres:
+      - romance
+      - drama
+    synopsis: とみさわ千夏の女性漫画。
+    status: ongoing
+    anime_adapted: false
   - key: Q11273356|P女子寮のネコ
   - key: Q11273356|P女子寮のネコである
   - key: Q11273356|いただき〔□/〕幸せごはんセレクション
@@ -7284,6 +7415,14 @@ series:
   - key: Q11273723|なにわ極楽会館
   - key: Q11273723|なにわ爆裂野球団
   - key: Q11273723|なにわ遊侠伝
+    magazine: weekly-manga-action
+    demographic: seinen
+    genres:
+      - action
+      - drama
+    synopsis: どおくまんの大阪ヤクザ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11273723|なにわ遊侠伝大傑作選
   - key: Q11273723|なんでもあり
   - key: Q11273723|なんぼのもんじゃい!
@@ -10155,6 +10294,15 @@ series:
   - key: Q11301864|不良×暴力
   - key: Q11301864|肉の唄
   - key: Q11301864|警部補ダイマジン
+    magazine: weekly-comic-bunch
+    demographic: seinen
+    genres:
+      - mystery
+      - drama
+      - suspense
+    synopsis: コウノコウジの刑事ドラマ漫画。
+    status: ongoing
+    anime_adapted: false
   - key: Q11302059|OL世紀末劇場
   - key: Q11302059|いも虫ランド
   - key: Q11302059|ゲタばきかあちゃん
@@ -11459,6 +11607,14 @@ series:
   - key: Q11353135|Dust to Dust
   - key: Q11353135|くろこだいるダディ
   - key: Q11353135|ダービージョッキー
+    magazine: big-comic-spirits
+    demographic: seinen
+    genres:
+      - sports
+      - drama
+    synopsis: 競馬騎手の世界を描く 一色登希彦の競馬漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11353135|モーティヴ
   - key: Q11353135|九段坂下クロニクル
   - key: Q11353135|会社を変えた男たち
@@ -11600,6 +11756,18 @@ series:
   - key: Q11354950|ARGONAVIS from BanG Dream!COMICS
   - key: Q11354950|ぷちゴナビス
   - key: Q11354950|憂国のモリアーティ
+    magazine: jump-square
+    demographic: shounen
+    genres:
+      - mystery
+      - suspense
+      - drama
+      - historical
+    synopsis: 「シャーロック・ホームズ」 の宿敵モリアーティ教授を主役にした 19 世紀イギリスを舞台の犯罪コンサルタント。 三好輝作画の正史リイマジネーション。
+    status: ongoing
+    anime_adapted: true
+    alternative_titles:
+      en: Moriarty the Patriot
   - key: Q11354950|憂国のモリアーティ-The Remains-
   - key: Q11354950|監視官常守朱
   - key: Q11354962|いるのにいない日曜日
@@ -12103,6 +12271,16 @@ series:
   - key: Q11362720|現在官僚系もふ
   - key: Q11362843|テンカイチ
   - key: Q11362843|我間乱
+    magazine: weekly-young-magazine
+    demographic: seinen
+    genres:
+      - action
+      - samurai
+      - historical
+      - drama
+    synopsis: 中丸洋介の時代格闘漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11362843|我間乱-修羅-
     magazine: weekly-young-magazine
     demographic: seinen
@@ -13052,6 +13230,15 @@ series:
   - key: Q11372142|スクラッチタイム
   - key: Q11372142|ペリカンロード
   - key: Q11372142|めいわく荘の人々
+    magazine: monthly-asuka
+    demographic: shoujo
+    genres:
+      - comedy
+      - fantasy
+      - school
+    synopsis: 五十嵐浩一のおばけアパートコメディ。
+    status: completed
+    anime_adapted: false
   - key: Q11372142|迷惑の人
   - key: Q11372159|Blue Drawing
   - key: Q11372159|ローファイ・アフタースクール
@@ -14320,6 +14507,16 @@ series:
   - key: Q11384990|大神先生は鼻がキく
   - key: Q11384990|村ドル
   - key: Q11384990|森田さんは無口
+    magazine: weekly-manga-times
+    demographic: seinen
+    genres:
+      - 4-koma
+      - comedy
+      - slice-of-life
+      - school
+    synopsis: 極端に無口な女子高生・森田まゆの日常を描く 佐野妙の 4 コマ。
+    status: completed
+    anime_adapted: true
   - key: Q11384990|森田さんは無口S
   - key: Q11384990|淑女の笑顔は崩れません
   - key: Q11384990|理想のおとなりさん
@@ -14388,6 +14585,15 @@ series:
   - key: Q11385435|ひぐらしのなく頃に 恋映し編
   - key: Q11385435|ひぐらしのなく頃に 昼壊し編
   - key: Q11385435|やはり俺の青春ラブコメはまちがっている。
+    magazine: monthly-sunday-gx
+    demographic: seinen
+    genres:
+      - romcom
+      - comedy
+      - school
+    synopsis: 渡航のラノベ漫画化。 佳月玲茅作画版。
+    status: completed
+    anime_adapted: true
   - key: Q11385435|先輩アンソロジー
   - key: Q11385542|AMETORA-雨寅-
   - key: Q11385542|on blue
@@ -15268,6 +15474,15 @@ series:
     anime_adapted: false
   - key: Q11398700|くろアゲハ
   - key: Q11398700|ジゴロ次五郎
+    magazine: weekly-shonen-magazine
+    demographic: shounen
+    genres:
+      - comedy
+      - drama
+      - school
+    synopsis: 「カメレオン」 の 加瀬あつしの不良漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11398700|ゼロセン
   - key: Q11398700|ばくだん!
   - key: Q11398700|ポリ公マン
@@ -17137,6 +17352,14 @@ series:
   - key: Q11420594|愛にチェックイン
   - key: Q11420594|摩天楼のYUKI ODA
   - key: Q11420594|新・幸せの時間
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - horror
+    synopsis: 国友やすゆきの大人向けサスペンス。
+    status: completed
+    anime_adapted: false
   - key: Q11420594|明日を信じて
   - key: Q11420594|時男
   - key: Q11420594|月色狂想曲
@@ -17267,6 +17490,14 @@ series:
   - key: Q11423339|喧嘩ラーメン
   - key: Q11423339|喧嘩ラーメンスペシャル
   - key: Q11423339|喰いしん坊!
+    magazine: weekly-manga-goraku
+    demographic: seinen
+    genres:
+      - gourmet
+      - drama
+    synopsis: 土山しげるの大食いバトル漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11423339|喰いしん坊!スペシャル
   - key: Q11423339|喰王 スペシャル
   - key: Q11423339|土山しげる自選がっつり飯マンガ特別選!
@@ -17585,6 +17816,14 @@ series:
   - key: Q11427846|ガッタレ!塁
   - key: Q11427846|燃えろ!一歩
   - key: Q11427846|銀玉マサやん
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+      - drama
+    synopsis: 堂上まさ志のパチンコ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11427846|銀玉命!銀次郎
   - key: Q11427895|ウブかわ
   - key: Q11427895|コイバナ
@@ -17653,6 +17892,16 @@ series:
   - key: Q11429362|今朝も揺られてます
   - key: Q11429362|夢見が丘ワンダーランド
   - key: Q11429362|実は私は
+    magazine: weekly-shonen-champion
+    demographic: shounen
+    genres:
+      - romcom
+      - comedy
+      - fantasy
+      - school
+    synopsis: クラスメイトの白神葉子が実は吸血鬼で、 秘密を知ってしまった黒峰朝陽が 学園ラブコメに巻き込まれる 増田英二のラブコメ。
+    status: completed
+    anime_adapted: true
   - key: Q11429362|透明人間の作り方
   - key: Q11429362|週刊少年ハチ
   - key: Q11429643|ガーディアン・ガーデン 護り人の庭
@@ -17918,6 +18167,15 @@ series:
   - key: Q11432186|アインシュタイン1904
   - key: Q11432186|おいしい学び夜
   - key: Q11432186|おくさん
+    magazine: weekly-young-jump
+    demographic: seinen
+    genres:
+      - romcom
+      - comedy
+      - slice-of-life
+    synopsis: 美人妻と若いサラリーマン夫の新婚日常を描く 大井昌和のラブコメ。
+    status: completed
+    anime_adapted: false
   - key: Q11432186|ここが限界のオーバル学園
   - key: Q11432186|すこしふしぎな小松さん
   - key: Q11432186|ストーリーズ
@@ -18285,6 +18543,16 @@ series:
   - key: Q11438516|スタンドバイミー
   - key: Q11438516|ボックス!
   - key: Q11438516|天空侵犯
+    magazine: monthly-shonen-magazine
+    demographic: shounen
+    genres:
+      - horror
+      - suspense
+      - drama
+      - action
+    synopsis: 謎のマスク男達によって屋上で殺戮ゲームに巻き込まれた高校生・本城遊理の戦いを描く 大羽隆廣のサスペンス。
+    status: completed
+    anime_adapted: false
   - key: Q11438516|天空侵犯arrive
   - key: Q11438516|毒を喰らわばサクラまで
   - key: Q11438516|近野智夏の腐じょうな日常
@@ -19811,6 +20079,16 @@ series:
   - key: Q11460683|イヌノサバキ
   - key: Q11460683|オトナノススメ
   - key: Q11460683|シマウマ
+    magazine: weekly-young-king
+    demographic: seinen
+    genres:
+      - action
+      - horror
+      - drama
+      - suspense
+    synopsis: 復讐請負業「シマウマ」 を中心に、 裏社会の仁義なき戦いを描く 小幡文生の暴力タッチアクション。
+    status: completed
+    anime_adapted: false
   - key: Q11460683|シマウマ外伝シマウマ
   - key: Q11460683|シマウマ外伝再回収
   - key: Q11460683|シマウマ外伝廃品回収
@@ -22529,6 +22807,15 @@ series:
   - key: Q11483065|ブラックエンジェルズスペシャル
   - key: Q11483065|ブラックエンジェルズワイドSP
   - key: Q11483065|マーダーライセンス牙
+    magazine: weekly-shonen-jump
+    demographic: shounen
+    genres:
+      - action
+      - drama
+      - suspense
+    synopsis: 敵討ちのため法外な力を得た男・牙の戦いを描く 平松伸二の暴力アクション。
+    status: completed
+    anime_adapted: false
   - key: Q11483065|マーダーライセンス牙&ブラックエンジェルズ
   - key: Q11483065|マーダーライセンス牙&ブラックエンジェルズスペシャル
   - key: Q11483065|マーダーライセンス牙スペシャル
@@ -23088,6 +23375,15 @@ series:
   - key: Q11492266|恋色劣情ガール
   - key: Q11492266|淫蜜チロリズム
   - key: Q11492362|ACMA:GAME
+    magazine: weekly-shonen-magazine
+    demographic: shounen
+    genres:
+      - suspense
+      - drama
+      - fantasy
+    synopsis: 悪魔の鍵を継いだ高校生が悪魔のゲームに挑む 恵広史の頭脳バトル。
+    status: completed
+    anime_adapted: false
   - key: Q11492362|BLOODY MONDAY
   - key: Q11492362|Bloody Monday season 2 絶望ノ匣
   - key: Q11492362|This Man
@@ -25126,6 +25422,15 @@ series:
   - key: Q11520635|クローズリスペクト
   - key: Q11520635|サイコ×パスト
   - key: Q11520635|ハカイジュウ
+    magazine: monthly-shonen-magazine
+    demographic: shounen
+    genres:
+      - horror
+      - action
+      - suspense
+    synopsis: 突如現れた怪獣達に蹂躙される世界を描く 本田真吾のサバイバルホラー。
+    status: completed
+    anime_adapted: false
   - key: Q11520635|ピエロマン
   - key: Q11520635|切子
   - key: Q11520635|切子殺
@@ -25417,6 +25722,14 @@ series:
   - key: Q11523385|きまぐれマイロード
   - key: Q11523385|キャッシュボーイスペシャル
   - key: Q11523385|サークルゲーム
+    magazine: null
+    demographic: seinen
+    genres:
+      - romance
+      - drama
+    synopsis: 村生ミオの大人向け恋愛漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11523385|サイドシート・パーティー
   - key: Q11523385|スニーカーすとりいと
   - key: Q11523385|セックスレス
@@ -25825,6 +26138,15 @@ series:
   - key: Q11526669|ほぼほぼ商店
   - key: Q11526669|ムダヅモ無き第二次改革
   - key: Q11526669|リコーダーとランドセル
+    magazine: manga-time-special
+    demographic: seinen
+    genres:
+      - 4-koma
+      - comedy
+      - school
+    synopsis: 見た目大人の小学生・あつしと見た目小学生の高校生・あつ美の兄妹を描く 東屋めめの 4 コマ。
+    status: ongoing
+    anime_adapted: true
   - key: Q11526669|偽装男子
   - key: Q11526669|小春さん、ずれてない?
   - key: Q11526669|押しかけ時姫
@@ -26991,6 +27313,14 @@ series:
   - key: Q11535849|怨み屋本舗REVENGE
   - key: Q11535849|怨み屋本舗STREAM
   - key: Q11535849|怨み屋本舗WORST
+    magazine: weekly-young-jump
+    demographic: seinen
+    genres:
+      - suspense
+      - drama
+    synopsis: 「怨み屋本舗」 シリーズの新章。 復讐請負業の怨み屋を描く 栗原正尚のサスペンス。
+    status: completed
+    anime_adapted: false
   - key: Q11535849|怨み屋本舗巣来間風介
   - key: Q11535849|神アプリ
     magazine: monthly-shonen-magazine
@@ -27329,6 +27659,15 @@ series:
   - key: Q11538067|読者投稿DX
   - key: Q11538067|非常識にもほどがある!
   - key: Q11538098|いぬばか
+    magazine: weekly-young-jump
+    demographic: seinen
+    genres:
+      - comedy
+      - drama
+      - slice-of-life
+    synopsis: ペットショップを舞台にした 桜木雪弥のペット漫画。
+    status: completed
+    anime_adapted: true
   - key: Q11538098|マイホームみらの
   - key: Q11538098|ヤスミンのdance!
   - key: Q11538139|Grandeek
@@ -28382,6 +28721,15 @@ series:
   - key: Q11545734|こみっく・すたじお
   - key: Q11545734|こみっく☆すたじお
   - key: Q11545734|変女
+    magazine: weekly-young-magazine
+    demographic: seinen
+    genres:
+      - romcom
+      - comedy
+      - drama
+    synopsis: 此ノ木よしるのお色気変態ラブコメ。
+    status: ongoing
+    anime_adapted: false
   - key: Q11545734|進撃のえろ子さん
   - key: Q11545746|Aika
   - key: Q11545746|きゃぷてんX
@@ -29054,6 +29402,14 @@ series:
   - key: Q11551638|フェアウエイの侍
   - key: Q11551638|ミッドシップ隼
   - key: Q11551638|モデナの剣
+    magazine: weekly-shonen-jump
+    demographic: shounen
+    genres:
+      - sports
+      - drama
+    synopsis: 池沢早人師のレース漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11551638|痛快!!マイホーム
   - key: Q11551639|クロガネ
   - key: Q11551639|ノアズノーツ
@@ -31082,6 +31438,15 @@ series:
   - key: Q11567007|されど罪人は竜と踊る
   - key: Q11567007|回游の森
   - key: Q11567007|応天の門
+    magazine: weekly-comic-bunch
+    demographic: seinen
+    genres:
+      - historical
+      - mystery
+      - drama
+    synopsis: 平安京を舞台に、 若き菅原道真と在原業平が陰陽の事件を解決する 灰原薬の平安ミステリー。
+    status: ongoing
+    anime_adapted: false
   - key: Q11567009|ローリターン
   - key: Q11567009|母親誘惑
   - key: Q11567009|熟恋の罠
@@ -31809,6 +32174,15 @@ series:
   - key: Q11575427|超漫画ゴラク
   - key: Q11575427|鬼堂龍太郎・その生き様
   - key: Q11575458|Bad boys
+    magazine: weekly-young-magazine
+    demographic: seinen
+    genres:
+      - action
+      - drama
+      - school
+    synopsis: 田中宏の不良漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11575458|Bad boys×女神の鬼
   - key: Q11575458|BAD BOYSグレアー
   - key: Q11575458|CARP BOY SHOW鯉
@@ -31946,6 +32320,15 @@ series:
   - key: Q11576073|マリアナ伝説DEEP
   - key: Q11576073|よりぬきヒロシさん
   - key: Q11576073|ラブやん
+    magazine: monthly-afternoon
+    demographic: seinen
+    genres:
+      - comedy
+      - fantasy
+      - gag
+    synopsis: 20 代ニートのもとに 愛のキューピッド「ラブやん」 がやってきて 童貞卒業のため奔走する 田丸浩史のシュールコメディ。
+    status: completed
+    anime_adapted: false
   - key: Q11576073|レイモンド
   - key: Q11576073|最近のヒロシ。
   - key: Q11576073|課長王子外伝
@@ -32936,6 +33319,18 @@ series:
   - key: Q11584464|古代王者恐竜キングDキッズアドベンチャー翼竜伝説
   - key: Q11584464|金色のガッシュベル!!
   - key: Q11584822|信長協奏曲
+    magazine: monthly-shonen-sunday
+    demographic: shounen
+    genres:
+      - historical
+      - samurai
+      - drama
+      - comedy
+    synopsis: 戦国時代にタイムスリップした高校生・サブローが、 病弱な織田信長と入れ替わって信長を演じる 石井あゆみの戦国漫画。
+    status: ongoing
+    anime_adapted: true
+    alternative_titles:
+      en: Nobunaga Concerto
   - key: Q11584822|石井あゆみ短編集
   - key: Q11584823|750 ライダー
     magazine: weekly-shonen-champion
@@ -34384,6 +34779,18 @@ series:
   - key: Q11603014|シド・クラフトの最終推理
   - key: Q11603014|フカシギフィリア
   - key: Q11603014|ぼくたちは勉強ができない
+    magazine: weekly-shonen-jump
+    demographic: shounen
+    genres:
+      - romcom
+      - comedy
+      - school
+      - romance
+    synopsis: 成績優秀な高校生・唯我成幸が、 個性的な美少女 5 人に勉強を教えるラブコメ。 筒井大志のハーレムラブコメ。
+    status: completed
+    anime_adapted: true
+    alternative_titles:
+      en: We Never Learn
   - key: Q11603014|マジカルパティシエ小咲ちゃん!!
   - key: Q11603014|ミサイルとプランクトン
   - key: Q11603026|CHERRY
@@ -35067,6 +35474,15 @@ series:
   - key: Q11611036|くのまち商店街
   - key: Q11611036|サンデーパパ
   - key: Q11611036|だから笑介
+    magazine: big-comic-spirits
+    demographic: seinen
+    genres:
+      - comedy
+      - drama
+      - slice-of-life
+    synopsis: 「なぜか笑介」 続編。 聖日出夫のサラリーマン漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11611036|なぜか笑介
     magazine: big-comic-spirits
     demographic: seinen
@@ -36786,6 +37202,14 @@ series:
   - key: Q11624398|いただき〔□/〕幸せごはんセレクション
   - key: Q11624398|おもてなしの仕事
   - key: Q11624398|コンシェルジュ
+    magazine: monthly-comic-bunch
+    demographic: seinen
+    genres:
+      - drama
+      - slice-of-life
+    synopsis: ホテルのコンシェルジュを主人公にした 藤栄道彦のホテル漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11624398|コンシェルジュインペリアル
   - key: Q11624398|コンシェルジュプラチナム
   - key: Q11624398|スゴ盛!本当にあった(生)ここだけの話極
@@ -38235,6 +38659,14 @@ series:
   - key: Q11644318|いただき〔□/〕幸せごはんセレクション
   - key: Q11644318|おいしい下町
   - key: Q11644318|おいしい銀座
+    magazine: null
+    demographic: josei
+    genres:
+      - gourmet
+      - drama
+    synopsis: 酒川郁子の銀座グルメ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11644318|おいしい銀座バイヤー真理
   - key: Q11644318|お江戸まかない帖
   - key: Q11644318|お江戸まかない帖 深川めし
@@ -39903,6 +40335,14 @@ series:
   - key: Q11661588|恋は、けだもの。
   - key: Q11661588|東京ミュウミュウオーレ!
   - key: Q11661588|熱愛プリンス
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - drama
+    synopsis: 青月まどかの少女漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11661606|シキザクラ
   - key: Q11661606|トラウマ量子結晶
   - key: Q11661606|マクロスF
@@ -40162,6 +40602,16 @@ series:
   - key: Q11665645|すてきな結婚
   - key: Q11665645|すももも 桃も
   - key: Q11665645|ダーク・エンジェル
+    magazine: weekly-shoujo-comic
+    demographic: shoujo
+    genres:
+      - fantasy
+      - horror
+      - drama
+      - romance
+    synopsis: 風間宏子のダーク少女ファンタジー。
+    status: completed
+    anime_adapted: false
   - key: Q11665645|ダーク・エンジェルselection
   - key: Q11665645|ドクターM
   - key: Q11665645|パラダイス・ファミリー
@@ -40282,6 +40732,15 @@ series:
   - key: Q11666374|北海の堕天使
   - key: Q11666374|天地無用!
   - key: Q11666374|新旭日の艦隊
+    magazine: null
+    demographic: seinen
+    genres:
+      - sci-fi
+      - historical
+      - action
+    synopsis: 荒巻義雄原作の架空戦記漫画。 飯島祐輔作画。
+    status: completed
+    anime_adapted: false
   - key: Q11666374|新海底軍艦
   - key: Q11666374|栄光の戦艦大和
   - key: Q11666374|海の王者戦艦大和
@@ -41801,6 +42260,15 @@ series:
   - key: Q117998834|蝉法師
   - key: Q117998834|鉄界の戦士
   - key: Q118152105|薫る花は凛と咲く
+    magazine: weekly-shonen-magazine
+    demographic: shounen
+    genres:
+      - romance
+      - school
+      - drama
+    synopsis: 三香見サカの男子校とお嬢様学校の恋愛少年漫画。
+    status: ongoing
+    anime_adapted: true
   - key: Q118213928|こづれ行楽!
   - key: Q118213928|マリッジグレー
   - key: Q118213928|温泉街のメデューサ
@@ -41834,6 +42302,16 @@ series:
   - key: Q118697137|それゆけ!異世界チート魔術師
   - key: Q118697137|七億円を手に入れた僕にありがちなこと。
   - key: Q118697137|事情を知らない転校生がグイグイくる。
+    magazine: monthly-gfantasy
+    demographic: shounen
+    genres:
+      - romcom
+      - comedy
+      - school
+      - drama
+    synopsis: 孤立している小学生・西村くんに、 何も知らずグイグイ来る転校生・高田 さんのほっこり学園ラブコメ。 川村拓作。
+    status: ongoing
+    anime_adapted: true
   - key: Q118697137|嘘の子供
   - key: Q118697137|小林さんちのメイドラゴン公式アンソロジーAll Stars!
   - key: Q118697137|留年!とどめ先輩
@@ -42059,6 +42537,14 @@ series:
   - key: Q1195859|告白~コンフェッション~
   - key: Q1195859|天
   - key: Q1195859|新黒沢最強伝説
+    magazine: big-comic-original
+    demographic: seinen
+    genres:
+      - drama
+      - comedy
+    synopsis: 「最強伝説黒沢」 続編。 中年サラリーマン黒沢のシュールな日常を描く 福本伸行の大人ヒーロー漫画。
+    status: completed
+    anime_adapted: false
   - key: Q1195859|春風にようこそ
   - key: Q1195859|横浜ロック
   - key: Q1195859|無頼伝涯
@@ -42082,6 +42568,16 @@ series:
   - key: Q1195859|食べコミ傑作選 名作マンガのオイシイとこ取り!!マンガに学ぶ『絶対の肉』!!
   - key: Q119800651|ルリドラゴン
   - key: Q1207120|トリニティ・ブラッド
+    magazine: monthly-asuka
+    demographic: shoujo
+    genres:
+      - fantasy
+      - horror
+      - action
+      - drama
+    synopsis: 吸血鬼と人類が共存する未来世界、 ヴァチカン異端審問官の活躍を描く 吉田直のラノベを 九条キヨが漫画化したダークファンタジー。
+    status: ongoing
+    anime_adapted: true
   - key: Q1207120|熱風海陸ブシロードSIDE:SUOU
   - key: Q1207548|Early days
   - key: Q1207548|KUNIE
@@ -42122,6 +42618,19 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q1207548|機動警察パトレイバー
+    magazine: weekly-shonen-sunday
+    demographic: shounen
+    genres:
+      - sci-fi
+      - mecha
+      - action
+      - drama
+      - comedy
+    synopsis: 近未来、 警察の特殊機動隊「特車二課」 の人型機動警察「パトレイバー」 と隊員達の活躍を描く ゆうきまさみの SF 警察漫画。
+    status: completed
+    anime_adapted: true
+    alternative_titles:
+      en: Patlabor
   - key: Q1207548|白暮のクロニクル
   - key: Q1207548|究極超人あ~る
   - key: Q1207548|究極超人あーる
@@ -42189,6 +42698,15 @@ series:
   - key: Q123290866|ドットインベーダー
   - key: Q123290866|ブレイクハンズ
   - key: Q123290866|中卒労働者から始める高校生活
+    magazine: monthly-comic-rex
+    demographic: seinen
+    genres:
+      - drama
+      - school
+      - romance
+    synopsis: 中学を卒業して職人になった少年が高校に入る 佐々木ミノルの青春ドラマ。
+    status: ongoing
+    anime_adapted: false
   - key: Q123290866|炎天のいろは
   - key: Q123405071|退屈嫌いの封印術師
   - key: Q123405289|先輩はおとこのこ
@@ -42545,6 +43063,15 @@ series:
   - key: Q1319232|花の慶次
   - key: Q1319232|花の慶次 雲のかなたに
   - key: Q1319232|蒼天の拳
+    magazine: weekly-comic-bunch
+    demographic: seinen
+    genres:
+      - action
+      - drama
+      - samurai
+    synopsis: 「北斗の拳」 の前史。 1930 年代上海を舞台に、 北斗神拳 62 代目伝承者・霞拳志郎 の 戦いを描く 原哲夫の格闘漫画。
+    status: completed
+    anime_adapted: true
   - key: Q1319232|蒼天の拳リジェネシス
   - key: Q1319232|蒼黒の餓狼
   - key: Q1319232|鉄のドンキホーテ
@@ -42595,6 +43122,14 @@ series:
   - key: Q1319237|新カラテ地獄変 孤狼放浪編
   - key: Q1319237|新巨人の星
   - key: Q1319237|新約「巨人の星」 花形
+    magazine: weekly-manga-victory
+    demographic: seinen
+    genres:
+      - sports
+      - drama
+    synopsis: 「巨人の星」 のスピンオフ。 花形満を主人公にした 梶原一騎原作の野球漫画。
+    status: completed
+    anime_adapted: false
   - key: Q1319237|昭和一代女
   - key: Q1319237|朝日の恋人
   - key: Q1319237|柔道一直線
@@ -43690,9 +44225,25 @@ series:
   - key: Q1578169|宮川匡代the best
   - key: Q1578169|彼の温度
   - key: Q1578169|林檎と蜂蜜
+    magazine: betsucomi
+    demographic: shoujo
+    genres:
+      - romance
+      - drama
+    synopsis: 宮川匡代の少女漫画。
+    status: completed
+    anime_adapted: false
   - key: Q1578169|林檎と蜂蜜 危険な青林檎編
   - key: Q1578169|林檎と蜂蜜 憂鬱な赤林檎編
   - key: Q1578169|林檎と蜂蜜walk
+    magazine: betsucomi
+    demographic: shoujo
+    genres:
+      - romance
+      - drama
+    synopsis: 「林檎と蜂蜜」 続編。 宮川匡代の少女漫画。
+    status: completed
+    anime_adapted: false
   - key: Q1578169|果実
   - key: Q1578169|殿*姫*王子
   - key: Q1578169|海の季節はまだ遠い
@@ -45482,6 +46033,13 @@ series:
   - key: Q17217827|妄想シンデレラ
   - key: Q17217827|流れ星レンズ
   - key: Q17218399|〔月賓〕
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+    synopsis: 星野浩字の漫画。
+    status: completed
+    anime_adapted: false
   - key: Q17218399|君の縄
   - key: Q17219116|この中に1人、妹がいる!
   - key: Q17219118|女だけど女装してキャバ嬢してみた!
@@ -46525,6 +47083,16 @@ series:
   - key: Q17572|地底大魔王の謎
   - key: Q17572|夢カメラ
   - key: Q17572|大長編ドラえもん
+    magazine: coro-coro-comic
+    demographic: kodomo
+    genres:
+      - adventure
+      - comedy
+      - sci-fi
+      - fantasy
+    synopsis: 「ドラえもん」 の長編シリーズ。 のび太と仲間達が大冒険を繰り広げる 藤子・F・不二雄の 国民的長編 SF 冒険。
+    status: completed
+    anime_adapted: true
   - key: Q17572|大長編ドラエもん
   - key: Q17572|大長編ドラえもん のび太と竜の騎士
   - key: Q17572|大長編ドラえもんのび太と鉄人兵団
@@ -50483,6 +51051,16 @@ series:
   - key: Q2232808|運命の夜
   - key: Q2232808|鬼切丸
   - key: Q2232808|鬼切丸伝
+    magazine: monthly-action
+    demographic: seinen
+    genres:
+      - fantasy
+      - horror
+      - yokai
+      - action
+    synopsis: 「鬼切丸」 続編。 楠桂の鬼退治オムニバス。
+    status: ongoing
+    anime_adapted: false
   - key: Q2232808|鬼魔
   - key: Q2233211|Dear my DOLL
   - key: Q2233211|LOVE FRUIT
@@ -51482,6 +52060,15 @@ series:
   - key: Q24273188|花と黒鋼
   - key: Q24273188|鶯谷ワールドエンド
   - key: Q24273190|Servamp
+    magazine: monthly-comic-avarus
+    demographic: shounen
+    genres:
+      - action
+      - fantasy
+      - horror
+    synopsis: 高校生・有栖院真昼が拾った猫が「Servamp」 (= サーヴァンプ、 七人の吸血鬼) と判明する 田中ストライクのダーク吸血鬼バトル。
+    status: ongoing
+    anime_adapted: true
   - key: Q242774|Alpha
   - key: Q242774|AQUA
   - key: Q242774|Aria
@@ -53509,6 +54096,15 @@ series:
   - key: Q277940|ヴィジョンノア
   - key: Q277940|ウダウダやってるヒマはねェ!
   - key: Q277940|サンセットローズ
+    magazine: weekly-shonen-champion
+    demographic: shounen
+    genres:
+      - adventure
+      - fantasy
+      - action
+    synopsis: 米原秀幸の海賊冒険ファンタジー。
+    status: completed
+    anime_adapted: false
   - key: Q277940|ダイモンズ
   - key: Q277940|チョコレートぶるーす
   - key: Q277940|フルアヘッド!ココ
@@ -53717,6 +54313,16 @@ series:
   - key: Q2829067|遊戯王R
   - key: Q2829079|ターンエーガンダム月の風
   - key: Q28418257|リィンカーネーションの花弁
+    magazine: weekly-shonen-champion
+    demographic: shounen
+    genres:
+      - fantasy
+      - horror
+      - action
+      - historical
+    synopsis: 歴史上の偉人達の能力を継ぐ「リィンカーネ」 達の戦いを描く 小西幹久のダークファンタジー。
+    status: completed
+    anime_adapted: false
   - key: Q28418257|素足のメテオライト
   - key: Q285084|「イノセンス」methods押井守演出ノート
   - key: Q285084|イノセンス創作ノート
@@ -54224,6 +54830,15 @@ series:
   - key: Q29561711|メイドインアビス
   - key: Q2960876|Baby hips
   - key: Q2960876|Cheers!
+    magazine: monthly-shonen-magazine
+    demographic: shounen
+    genres:
+      - sports
+      - drama
+      - school
+    synopsis: チャーリーにしなかのチアリーディング漫画。
+    status: completed
+    anime_adapted: false
   - key: Q2960876|choice!
   - key: Q2960876|Petitチャイム
   - key: Q2960876|twins!
@@ -55050,6 +55665,16 @@ series:
   - key: Q3100347|爆笑戦士!SDガンダム
   - key: Q3100347|餓狼伝説special 4コマ大行進
   - key: Q3101367|RAINBOW
+    magazine: big-comic-spirits
+    demographic: seinen
+    genres:
+      - drama
+      - historical
+    synopsis: 戦後日本、 少年院に入れられた7 人の若者の青春と友情を描く 安部譲二原作・柿崎正澄作画の少年院ドラマ。
+    status: completed
+    anime_adapted: true
+    alternative_titles:
+      en: "Rainbow: Nisha Rokubou no Shichinin"
   - key: Q3101367|アプサラス
   - key: Q3101367|塀の中の懲りない面々
   - key: Q3101367|紅蓮
@@ -55406,6 +56031,17 @@ series:
   - key: Q3135502|大斬
   - key: Q3135502|猫本
   - key: Q3135502|聖☆おにいさん
+    magazine: monthly-morning-2
+    demographic: seinen
+    genres:
+      - comedy
+      - slice-of-life
+      - gag
+    synopsis: ブッダとイエスの 2 大聖人が東京の立川で バカンス共同生活を送る 中村光のシュール宗教コメディ。
+    status: ongoing
+    anime_adapted: true
+    alternative_titles:
+      en: Saint Young Men
   - key: Q3135502|聖☆おにいさん「スペシャルセレクション」
   - key: Q3135502|荒川アンダーザブリッジ
   - key: Q3136353|The 幕末
@@ -55811,6 +56447,16 @@ series:
   - key: Q313945|青山剛昌短編集
   - key: Q313945|青山剛昌短編集名探偵登場!
   - key: Q3140672|Dragon quest-ダイの大冒険
+    magazine: weekly-shonen-jump
+    demographic: shounen
+    genres:
+      - action
+      - adventure
+      - fantasy
+      - drama
+    synopsis: 「ドラゴンクエスト ダイの大冒険」 の英訳・別表記版。 三条陸原作・稲田浩司作画のファンタジー。
+    status: completed
+    anime_adapted: true
   - key: Q3140672|クソッタレだぜェ!!
   - key: Q3140672|ドラゴンクエスト
   - key: Q3140672|ドラゴンクエスト ダイの大冒険
@@ -55925,6 +56571,16 @@ series:
   - key: Q3190112|おとぎ奉り
   - key: Q3190112|妖怪HUNTER
   - key: Q3190112|怪獣自衛隊
+    magazine: weekly-young-jump
+    demographic: seinen
+    genres:
+      - action
+      - horror
+      - drama
+      - sci-fi
+    synopsis: 突如現れた怪獣達と戦う自衛隊員の戦いを描く 井上淳哉のミリタリー怪獣アクション。
+    status: ongoing
+    anime_adapted: false
   - key: Q3190112|限定M彼女
   - key: Q3191990|アンジェリーク
   - key: Q3191990|アンジェリークtreasure
@@ -56072,6 +56728,15 @@ series:
   - key: Q3201016|暁のイージス
   - key: Q3201016|牙の旅商人
   - key: Q3201016|闇のイージス
+    magazine: weekly-young-sunday
+    demographic: seinen
+    genres:
+      - action
+      - drama
+      - suspense
+    synopsis: 凄腕の便利屋・楯岡を主人公にした 七月鏡一原作の暴力アクション。
+    status: completed
+    anime_adapted: false
   - key: Q3201020|SWAN
   - key: Q3201020|SWAN ドイツ編
   - key: Q3201020|SWAN モスクワ編
@@ -57312,6 +57977,18 @@ series:
   - key: Q3482405|秘密のう・ふ・ふ
   - key: Q3482405|空ちゃんのぼうし
   - key: Q348436|20世紀少年
+    magazine: big-comic-spirits
+    demographic: seinen
+    genres:
+      - mystery
+      - suspense
+      - drama
+      - sci-fi
+    synopsis: ケンヂら少年達が遊びで作った「ともだち」 の予言が大人になって現実化していく 浦沢直樹の傑作 SF サスペンス。
+    status: completed
+    anime_adapted: false
+    alternative_titles:
+      en: 20th Century Boys
   - key: Q348436|20世紀少年の脇役
   - key: Q348436|21世紀少年
   - key: Q348436|Billy bat
@@ -57795,6 +58472,15 @@ series:
   - key: Q352353|フードハンター双雷伝
   - key: Q352353|中華一番!
   - key: Q352353|中華一番!極
+    magazine: monthly-shonen-magazine
+    demographic: shounen
+    genres:
+      - gourmet
+      - drama
+      - comedy
+    synopsis: 「中華一番!」 続編。 中華料理人を目指す少年・劉昴星の戦いを描く 小川悦司の続編。
+    status: ongoing
+    anime_adapted: true
   - key: Q352353|味一番!美味セレクション
   - key: Q352353|天使のフライパン
   - key: Q352353|幕末双雷伝
@@ -58894,6 +59580,15 @@ series:
   - key: Q3869906|ストーリー311 あれから3年
   - key: Q3869906|ねひめのとき
   - key: Q3869906|パフェちっく!
+    magazine: ribon
+    demographic: shoujo
+    genres:
+      - romance
+      - school
+      - drama
+    synopsis: ななじ眺の少女漫画。
+    status: completed
+    anime_adapted: false
   - key: Q3869906|ふつうの恋子ちゃん
   - key: Q3869906|ミックスジュースみたい
   - key: Q3869906|愛があれば!!
@@ -59893,6 +60588,15 @@ series:
   - key: Q4348970|銀牙伝説Weed原画集
   - key: Q4348970|銀牙伝説Weed外伝
   - key: Q4348970|銀牙伝説ウィード
+    magazine: weekly-manga-goraku
+    demographic: seinen
+    genres:
+      - action
+      - adventure
+      - drama
+    synopsis: 「銀牙伝説Weed」 別名タイトル。 高橋よしひろの動物アクション。
+    status: completed
+    anime_adapted: false
   - key: Q4348970|銀牙伝説ウィード外伝
   - key: Q4348970|銀牙伝説ノア
   - key: Q4348970|銀牙伝説リキ
@@ -60152,6 +60856,16 @@ series:
   - key: Q4386086|そらのおとしもの
   - key: Q4386086|そらのおとしものpico
   - key: Q4386086|プランダラ
+    magazine: monthly-comic-alive
+    demographic: seinen
+    genres:
+      - action
+      - fantasy
+      - sci-fi
+      - drama
+    synopsis: 数字に支配された世界で、 力を奪い合う「プランダラ」 達の戦いを描く 水無月すうのバトルファンタジー。
+    status: completed
+    anime_adapted: true
   - key: Q4386086|へ~ん○しん!!
   - key: Q4386086|優良物件もうダメ荘
   - key: Q4386086|最期の願いに月が泣く
@@ -61524,6 +62238,16 @@ series:
   - key: Q4700966|雨柳堂夢咄画集
   - key: Q4701123|BOXER's BLAST
   - key: Q4701123|めだかボックス
+    magazine: weekly-shonen-jump
+    demographic: shounen
+    genres:
+      - action
+      - comedy
+      - school
+      - drama
+    synopsis: 全人類最強の女子生徒会長・黒神めだかと、 幼馴染の人吉善吉の高校生活を描く 西尾維新原作・暁月あきら作画の異能学園バトル。
+    status: completed
+    anime_adapted: true
   - key: Q4701123|十二大戦
   - key: Q4701123|地雷グリコ
   - key: Q4701123|大斬
@@ -61959,6 +62683,15 @@ series:
   - key: Q471133|死神
   - key: Q471133|殷周伝説
   - key: Q471133|殷周伝説 太公望伝奇
+    magazine: null
+    demographic: seinen
+    genres:
+      - historical
+      - fantasy
+      - action
+    synopsis: 古代中国・殷周革命を 横山光輝が劇画化。 太公望と神獣を巡る伝奇歴史漫画。
+    status: completed
+    anime_adapted: false
   - key: Q471133|水滸伝
   - key: Q471133|江戸川乱歩妖美劇画館
   - key: Q471133|火盗斬風録
@@ -64491,6 +65224,16 @@ series:
     status: completed
     anime_adapted: false
   - key: Q553105|天上天下
+    magazine: weekly-young-jump
+    demographic: seinen
+    genres:
+      - action
+      - school
+      - fantasy
+      - drama
+    synopsis: 高校に巣食う武術会と転校してきた最強コンビを描く 大暮維人の格闘学園漫画。
+    status: completed
+    anime_adapted: true
   - key: Q553105|火魅子伝~恋解~
   - key: Q553105|灰仭巫覡
   - key: Q553105|魔人
@@ -64800,6 +65543,14 @@ series:
   - key: Q55541674|イコン
   - key: Q55541674|エンバンメイズ
   - key: Q55541674|ジャンケットバンク
+    magazine: weekly-young-jump
+    demographic: seinen
+    genres:
+      - suspense
+      - drama
+    synopsis: 「赤の銀行員」 真経津 (まふつ) と「白の銀行員」 御手洗が、 富豪相手の命懸けギャンブルで戦う 田中一行のギャンブル漫画。
+    status: ongoing
+    anime_adapted: false
   - key: Q55541674|概念ドロボウ
   - key: Q55541922|おうまがとき
   - key: Q55541938|ぷるるんハーレム注意報っ!
@@ -65437,6 +66188,17 @@ series:
   - key: Q597117|妖
   - key: Q597117|桜の降る夜
   - key: Q5973592|オリエント
+    magazine: weekly-shonen-magazine
+    demographic: shounen
+    genres:
+      - action
+      - fantasy
+      - adventure
+      - samurai
+      - historical
+    synopsis: 戦国時代風の異世界、 鬼神に支配された日本で武士を目指す少年達の戦いを描く 大高忍の和風ファンタジー。
+    status: completed
+    anime_adapted: true
   - key: Q5973592|すもももももも
   - key: Q5973592|マギ
     magazine: weekly-shonen-sunday
@@ -65707,6 +66469,15 @@ series:
   - key: Q60231010|呪術廻戦≡
   - key: Q602746|ADAMAS
   - key: Q602746|Arms
+    magazine: weekly-shonen-sunday
+    demographic: shounen
+    genres:
+      - action
+      - sci-fi
+      - drama
+    synopsis: 腕に超兵器「ARMS」 を持つ少年達が組織と戦う 七月鏡一原作・皆川亮二作画の SF アクション。
+    status: completed
+    anime_adapted: true
   - key: Q602746|D-LIVE!!
   - key: Q602746|Kyo^
   - key: Q602746|PEACE MAKER
@@ -66267,6 +67038,15 @@ series:
   - key: Q618961|タロット山荘殺人事件
   - key: Q618961|怪盗紳士の殺人
   - key: Q618961|探偵学園Q
+    magazine: weekly-shonen-magazine
+    demographic: shounen
+    genres:
+      - mystery
+      - school
+      - drama
+    synopsis: 難事件を解決する探偵養成学校「DDS」 の Q クラスの中学生・キュウ達を描く 天樹征丸原作・さとうふみや作画のミステリー。
+    status: completed
+    anime_adapted: true
   - key: Q618961|探偵学園Qプレミアム
   - key: Q618961|明智少年の華麗なる事件簿
   - key: Q618961|明智警視の優雅なる事件簿
@@ -67001,6 +67781,17 @@ series:
   - key: Q6388734|密❤リターンズ!
   - key: Q6389192|アイアムアヒーロ
   - key: Q6389192|アイアムアヒーロー
+    magazine: big-comic-spirits
+    demographic: seinen
+    genres:
+      - horror
+      - suspense
+      - drama
+    synopsis: 売れない漫画家アシスタント・鈴木英雄が ZQN (= ゾンビ) パンデミックに巻き込まれる 花沢健吾のサバイバルホラー。
+    status: completed
+    anime_adapted: true
+    alternative_titles:
+      en: I Am a Hero
   - key: Q6389192|アイアムアヒーロー 終わりの始まりだ
   - key: Q6389192|アイアムアヒーローin IBARAKI
   - key: Q6389192|アイアムアヒーローin NAGASAKI
@@ -68209,6 +69000,16 @@ series:
   - key: Q6782363|アクマでふけい!
   - key: Q6782363|あつまれ!ふしぎ研究部
   - key: Q6782363|侵略!イカ娘
+    magazine: weekly-shonen-champion
+    demographic: shounen
+    genres:
+      - comedy
+      - fantasy
+      - slice-of-life
+      - gag
+    synopsis: 海から地上を侵略するため上陸した「イカ娘」 が、 海の家「れもん」 でアルバイトする 安部真弘のシュールコメディ。
+    status: completed
+    anime_adapted: true
   - key: Q6782715|SDガンダムフォース絵巻武者列伝
   - key: Q6782715|SDガンダムフォース絵巻武者烈伝
   - key: Q6782715|SDガンダム武者番長風雲録
@@ -68992,6 +69793,15 @@ series:
   - key: Q6964569|ルシフェルの右手
   - key: Q6964569|東京デスレース
   - key: Q6964569|猿ロック
+    magazine: weekly-young-magazine
+    demographic: seinen
+    genres:
+      - mystery
+      - drama
+      - suspense
+    synopsis: 鍵屋・猿丸との依頼を巡る 芹沢直樹の犯罪ミステリー。
+    status: completed
+    anime_adapted: true
   - key: Q6964569|猿ロックreboot
   - key: Q6964569|迷探偵史郎シリーズ
   - key: Q6964777|カードファイト!!ヴァンガードターナバウト
@@ -69164,6 +69974,14 @@ series:
   - key: Q707783|いろはにほう作
   - key: Q707783|いわゆるA級戦犯
   - key: Q707783|おぼっちゃまくん
+    magazine: coro-coro-comic
+    demographic: kodomo
+    genres:
+      - comedy
+      - gag
+    synopsis: 大金持ちの小学生・御坊茶魔が貧乏人を見下すギャグ漫画。 小林よしのりの代表的児童ギャグ。
+    status: completed
+    anime_adapted: true
   - key: Q707783|おぼっちゃまくん傑作選
   - key: Q707783|ゴーマニスト大パーティー
   - key: Q707783|ゴーマニズム宣言
@@ -70241,6 +71059,13 @@ series:
   - key: Q7500116|Hi Hi Hi!
   - key: Q7500116|RIDER
   - key: Q7500116|RIDEX
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+    synopsis: 東本昌平のバイク漫画。
+    status: ongoing
+    anime_adapted: false
   - key: Q7500116|RIDEX HONDA
   - key: Q7500116|RIDEX KAWASAKI
   - key: Q7500116|SS
@@ -70895,6 +71720,14 @@ series:
   - key: Q7827649|鵺
   - key: Q7827779|Alas~輝ける翼
   - key: Q7827779|Monacoの空へ
+    magazine: weekly-young-jump
+    demographic: seinen
+    genres:
+      - sports
+      - drama
+    synopsis: 野部利雄のレース漫画。
+    status: completed
+    anime_adapted: false
   - key: Q7827779|RISING
   - key: Q7827779|Youkiの直球
   - key: Q7827779|タイムスリッパー
@@ -71049,6 +71882,15 @@ series:
   - key: Q7902263|Zとうちゃん the
   - key: Q7902263|キラーBOY
   - key: Q7902263|砂ぼうず
+    magazine: monthly-comic-beam
+    demographic: seinen
+    genres:
+      - sci-fi
+      - action
+      - comedy
+    synopsis: 砂漠化した近未来の関東を舞台にした うすね正俊の便利屋 SF。
+    status: completed
+    anime_adapted: true
   - key: Q795120|乃木坂春香の秘密
   - key: Q795120|盲目の織姫は後宮で皇帝との恋を紡ぐ
   - key: Q795120|艦隊これくしょん-艦これ-水雷戦隊クロニクル
@@ -71455,6 +72297,19 @@ series:
   - key: Q8062701|雷火
   - key: Q8062701|項羽と劉邦
   - key: Q8062771|暗殺教室
+    magazine: weekly-shonen-jump
+    demographic: shounen
+    genres:
+      - action
+      - comedy
+      - school
+      - drama
+    synopsis: 月を 7 割破壊した謎の生物「殺せんせー」 が中学 3 年生 E 組の担任となり、 生徒達が 1 年で先生を暗殺する課題に挑む
+      松井優征のバトル学園漫画。
+    status: completed
+    anime_adapted: true
+    alternative_titles:
+      en: Assassination Classroom
   - key: Q8062771|殺せんせーQ!
   - key: Q8062771|逃げ上手の若君
     magazine: weekly-shonen-jump
@@ -71764,6 +72619,19 @@ series:
   - key: Q83680573|天穹は遥か
   - key: Q83680573|書生葛木信二郎の日常
   - key: Q83680573|薬屋のひとりごと
+    magazine: monthly-big-gangan
+    demographic: seinen
+    genres:
+      - mystery
+      - historical
+      - drama
+      - romance
+      - fantasy
+    synopsis: 後宮の薬師・猫猫 (マオマオ) が宮廷の事件を解決していく 日向夏原作・倉田三ノ路作画の本格中華風ミステリー。
+    status: ongoing
+    anime_adapted: true
+    alternative_titles:
+      en: The Apothecary Diaries
   - key: Q83680573|迷探偵の条件
   - key: Q83680917|2DK、Gペン、アフタータイム。
   - key: Q83680917|2DK、Gペン、目覚まし時計。
@@ -72249,6 +73117,15 @@ series:
   - key: Q859232|Love & tears
   - key: Q859232|イジワルしないで!
   - key: Q859232|カノジョは嘘を愛しすぎてる
+    magazine: cheese!
+    demographic: shoujo
+    genres:
+      - romance
+      - drama
+      - music
+    synopsis: 音楽プロデューサー兼バンドメンバーの青木琴音の少女音楽ラブストーリー。
+    status: completed
+    anime_adapted: false
   - key: Q859232|こんな結婚、まさか私がするなんて!?な本。
   - key: Q859232|ジーザス!
   - key: Q859232|僕の初恋をキミに捧ぐ
@@ -72312,6 +73189,14 @@ series:
     status: completed
     anime_adapted: false
   - key: Q871684|インベスターZ
+    magazine: weekly-morning
+    demographic: seinen
+    genres:
+      - drama
+      - school
+    synopsis: 私立中学校の投資部「インベスターZ」 の中学生達が学費 8 億円を目指して投資する 三田紀房の投資漫画。
+    status: completed
+    anime_adapted: false
   - key: Q871684|エンゼルバンク
   - key: Q871684|クロカン
     magazine: monthly-shonen-magazine
@@ -72608,6 +73493,15 @@ series:
   - key: Q8952464|南から来たインディラ
   - key: Q8952464|夢みる佳人
   - key: Q8952464|夢幻アンソロジー
+    magazine: monthly-asuka
+    demographic: shoujo
+    genres:
+      - fantasy
+      - drama
+      - horror
+    synopsis: 遠藤淑子の幻想短編アンソロジー。
+    status: completed
+    anime_adapted: false
   - key: Q8952464|天使ですよ
   - key: Q8952464|家族ごっこ
   - key: Q8952464|山アラシのジレンマ
@@ -72936,6 +73830,14 @@ series:
   - key: Q8972749|悪夢城の主
   - key: Q8972749|懐かしい花の思い出
   - key: Q8972749|文鳥様と私
+    magazine: monthly-comic-blade
+    demographic: josei
+    genres:
+      - essay
+      - comedy
+    synopsis: 今市子の文鳥飼育エッセイ漫画。
+    status: ongoing
+    anime_adapted: false
   - key: Q8972749|文鳥様と私 miniイラストコミック
   - key: Q8972749|旅人の樹
   - key: Q8972749|月影の長城
@@ -73260,6 +74162,16 @@ series:
   - key: Q8979577|ねこまん
   - key: Q8979577|ブルー・ジーン
   - key: Q8979577|マドンナ
+    magazine: weekly-shonen-magazine
+    demographic: shounen
+    genres:
+      - sports
+      - school
+      - drama
+      - comedy
+    synopsis: くじらいいく子のラグビー学園漫画。
+    status: completed
+    anime_adapted: true
   - key: Q8979577|リリコイ恋愛内科
   - key: Q8979577|守ってあげたい!
   - key: Q8979577|新宿ギョインバット
@@ -74324,6 +75236,15 @@ series:
   - key: Q9075138|ミスターKiss MAN
   - key: Q9075138|ミステリー民俗学者八雲樹
   - key: Q9075138|不倫食堂
+    magazine: weekly-young-jump
+    demographic: seinen
+    genres:
+      - romance
+      - gourmet
+      - drama
+    synopsis: 山口譲司の大人向けグルメ恋愛漫画。
+    status: completed
+    anime_adapted: false
   - key: Q9075138|太陽がいっぱい
   - key: Q9075138|奥さまは女スパイ
   - key: Q9075138|女王の穴
@@ -74935,6 +75856,15 @@ series:
   - key: Q9130343|ナンバMG5
   - key: Q9130343|ナンバデッドエンド
   - key: Q9130343|フジケン
+    magazine: weekly-shonen-jump
+    demographic: shounen
+    genres:
+      - comedy
+      - school
+      - gag
+    synopsis: 小沢としおの不良学園コメディ。
+    status: completed
+    anime_adapted: false
   - key: Q9130343|ブラザー仁義
   - key: Q9130359|My Precious
   - key: Q9130359|さよならの理由
@@ -76516,6 +77446,14 @@ series:
   - key: Q958412|家庭教師神宮山美佳
   - key: Q958412|文化祭ウラ実行委員会
   - key: Q958412|日露戦争物語
+    magazine: big-comic-spirits
+    demographic: seinen
+    genres:
+      - historical
+      - drama
+    synopsis: 日露戦争を題材にした 江川達也の歴史漫画。
+    status: completed
+    anime_adapted: false
   - key: Q958412|東京大学物語
     magazine: big-comic-spirits
     demographic: seinen
