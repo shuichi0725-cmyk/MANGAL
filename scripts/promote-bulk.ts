@@ -15,13 +15,26 @@
  *   npm run promote:bulk -- --dry-run         # 書かずにサマリだけ
  *   npm run promote:bulk -- --force           # 既存 draft を上書き
  *
+ * データソース対応:
+ *   この script は series / editions / volumes テーブルのみを読むので、
+ *   投入元 (= NDL / MADB / 両方) を問わず動作する。 schema v7 (= 3-state model)
+ *   導入後は series テーブル自体が live state のみを保持するため、
+ *   excluded / deleted な series は自然に対象外となる (= filter 不要)。
+ *
+ *   2026-05-08 以降、 主データソースは MADB JSON-LD に切り替わっている。
+ *   MADB 由来データ + fetch:wikipedia 補完で以下が series テーブルへ直接入る:
+ *     publisher_key  (MADB → splitMadbLiteral → publishers.yml master 解決、 ~78%)
+ *     magazine_key   (Wikipedia infobox)
+ *     title_kana     (Wikipedia / openBD)
+ *     demographic / genres / synopsis (Wikipedia)
+ *
  * 既知の placeholder（必ず人手レビューで埋める）:
- *   - publisher: imprint 文字列が data/publishers.yml の name と一致した場合
- *     のみ key を埋める。それ以外は "TODO_publisher"。
- *   - magazine: 常に null（NDL からは取れない、Wikipedia 連携が Level B）
- *   - demographic: 常に "shounen"（誤りの確率が高い）
- *   - genres: 常に ["TODO_genre"]（loadData が即落とすので _drafts の中だけ）
- *   - synopsis: 常に ""（Wikipedia 連携が Level B）
+ *   - publisher: 多くは MADB / Wikipedia で解決済。 残った imprint 文字列が
+ *     publishers.yml と一致しない場合のみ "TODO_publisher"。
+ *   - magazine:    fetch:wikipedia layer C 解決率次第。 NULL は許容。
+ *   - demographic: Wikipedia 由来なら正しい値、 無ければ "shounen" 既定 (= 誤確率高)。
+ *   - genres:     Wikipedia 由来なら正しい配列、 無ければ ["TODO_genre"] (= loadData が落とす)。
+ *   - synopsis:   Wikipedia 由来なら抜粋、 無ければ ""。
  */
 import "./_env";
 import fs from "node:fs";
@@ -323,6 +336,17 @@ async function main() {
      LIMIT 1`,
   );
 
+  // Per-series provenance を sources テーブルから引いて header comment に
+  // 「どのデータソース由来か」 を記録する (= レビュー時に NDL/MADB を区別したい)。
+  const sourcesStmt = db.prepare(
+    `SELECT DISTINCT source_name FROM sources
+     WHERE ref_table = 'volumes' AND ref_id IN (
+       SELECT v.isbn13 FROM volumes v JOIN editions e ON e.id = v.edition_id
+       WHERE e.series_id = ?
+     )
+     ORDER BY source_name`,
+  );
+
   const taken = existingSlugs();
 
   // Fix C: 既知の adult publishers / mangaka をメモリにキャッシュ。
@@ -333,6 +357,20 @@ async function main() {
   const knownAdultImprints = loadAdultImprintSet(db);
   console.log(
     `[adult] known publishers: ${knownAdultPublishers.size}, known mangaka: ${knownAdultMangaka.size}, known imprints: ${knownAdultImprints.size}`,
+  );
+
+  // データソース別の volumes 件数 (= MADB 主導か NDL 主導かを把握するため)。
+  const sourcesSummary = db
+    .prepare(
+      `SELECT source_name, COUNT(*) AS n
+       FROM sources
+       WHERE ref_table = 'volumes'
+       GROUP BY source_name
+       ORDER BY n DESC`,
+    )
+    .all() as { source_name: string; n: number }[];
+  console.log(
+    `[sources] volumes by source: ${sourcesSummary.map((s) => `${s.source_name}=${s.n}`).join(", ")}`,
   );
 
   const updateScore = db.prepare(
@@ -504,10 +542,24 @@ async function main() {
     }
 
     if (!args.dryRun) {
+      const provenance = (sourcesStmt.all(row.id) as { source_name: string }[])
+        .map((r) => r.source_name)
+        .join(",") || "unknown";
+      const todos: string[] = [];
+      if (publisherKey === "TODO_publisher") todos.push("publisher");
+      if (!row.magazine_key) todos.push("magazine");
+      if (!row.demographic) todos.push("demographic");
+      if (genres.includes("TODO_genre")) todos.push("genres");
+      if (!row.synopsis) todos.push("synopsis");
+      if (!row.title_kana) todos.push("title_kana");
+      const reviewLine = todos.length > 0
+        ? `# REVIEW REQUIRED: ${todos.join(", ")}\n`
+        : `# (auto-promotable: no TODO placeholders)\n`;
       const yamlText =
-        `# Bulk-promoted draft from NDL pipeline by scripts/promote-bulk.ts\n` +
+        `# Bulk-promoted draft by scripts/promote-bulk.ts\n` +
+        `# Sources: ${provenance}\n` +
         `# Source mangaka: ${author.name} (${author.qid}); Source series: #${row.id}\n` +
-        `# REVIEW REQUIRED: publisher (TODO_), magazine, demographic, genres, synopsis\n` +
+        reviewLine +
         YAML.stringify(result.data);
       fs.writeFileSync(outPath, yamlText, "utf8");
     }
