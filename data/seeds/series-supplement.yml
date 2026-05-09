@@ -1,6 +1,6 @@
 schema_version: 1
-generated_at: 2026-05-09T15:24:49.030Z
-generator: bootstrap-from-existing-yamls
+generated_at: 2026-05-09T15:55:43.182Z
+generator: claude-opus-4-7-direct-fill
 series:
   - key: Q11411575|ハイキュー!!
     slug: haikyuu
@@ -10,8 +10,12 @@ series:
       - sports
       - drama
       - school
+      - comedy
     synopsis: 身長は低いが圧倒的な跳躍力を持つ日向翔陽が、 名門・烏野高校バレー部に入部し、 セッター影山飛雄と共に全国を目指すバレーボール漫画。
     status: completed
+    anime_adapted: true
+    alternative_titles:
+      en: Haikyuu!!
   - key: Q11615162|美味しんぼ
     slug: oishinbo-meihinshuu
     magazine: big-comic-spirits
@@ -19,8 +23,12 @@ series:
     genres:
       - gourmet
       - drama
-    synopsis: 東西新聞社の文化部記者・山岡士郎と栗田ゆう子が「究極のメニュー」作りに挑み、 日本中・世界中の食材と料理を巡る食漫画の金字塔。
-    status: completed
+      - slice-of-life
+    synopsis: 東西新聞社の文化部記者・山岡士郎と栗田ゆう子が「究極のメニュー」 作りに挑み、 日本中・世界中の食材と料理を巡る食漫画の金字塔。
+    status: hiatus
+    anime_adapted: true
+    alternative_titles:
+      en: Oishinbo
   - key: Q1324593|銀魂
     slug: gintama
     magazine: weekly-shonen-jump
@@ -30,8 +38,13 @@ series:
       - comedy
       - samurai
       - gag
-    synopsis: 宇宙人「天人」に支配された江戸を舞台に、 万事屋を営む元・攘夷志士の坂田銀時が仲間とドタバタな日々を送る SF ギャグ時代劇。
+      - sci-fi
+      - historical
+    synopsis: 宇宙人「天人」 に支配された江戸を舞台に、 万事屋を営む元・攘夷志士の坂田銀時が仲間とドタバタな日々を送る SF ギャグ時代劇。
     status: completed
+    anime_adapted: true
+    alternative_titles:
+      en: Gintama
   - key: Q1993|NARUTO
     slug: naruto
     magazine: weekly-shonen-jump
@@ -40,8 +53,13 @@ series:
       - action
       - adventure
       - fantasy
-    synopsis: 九尾の妖狐を体内に封印された落ちこぼれ忍者・うずまきナルトが、 木ノ葉隠れの里で仲間と共に修業を重ね、 火影を目指して忍びの戦いに身を投じる物語。
+      - drama
+      - comedy
+    synopsis: 木ノ葉隠れの里の落ちこぼれ忍者・うずまきナルトが、 仲間と共に成長しながら宿命の戦いに挑む 1999-2014 年連載の忍者バトル漫画。
     status: completed
+    anime_adapted: true
+    alternative_titles:
+      en: Naruto
   - key: Q2010|ONE PIECE
     slug: wan-piisu
     magazine: weekly-shonen-jump
@@ -49,8 +67,15 @@ series:
     genres:
       - action
       - adventure
-    synopsis: ゴム人間となった少年モンキー・D・ルフィが「海賊王」を目指し、 麦わらの一味の仲間たちと大海賊時代の海を冒険する超大作冒険漫画。
+      - fantasy
+      - comedy
+      - drama
+    synopsis: ゴム人間の能力を持つ海賊ルフィが、 仲間と共に伝説の秘宝「ひとつなぎの大秘宝」 を求めて大海原を冒険する 1997
+      年連載開始の世界的人気バトル冒険漫画。
     status: ongoing
+    anime_adapted: true
+    alternative_titles:
+      en: One Piece
   - key: Q208582|ドラゴンボール
     slug: doragon-booru
     magazine: weekly-shonen-jump
@@ -58,27 +83,35 @@ series:
     genres:
       - action
       - adventure
+      - fantasy
+      - sci-fi
       - comedy
-    synopsis: 7 つ集めると願いが叶う「ドラゴンボール」を巡って、 尻尾の生えた少年 孫悟空が世界を旅し、 仲間と共に強敵と戦い続ける冒険バトル漫画。
+      - gag
+    synopsis: 7 つ集めると願いが叶うドラゴンボールを巡り、 サイヤ人の少年・孫悟空が成長しながら強敵と戦う 1984 年連載開始の世界的アクション冒険。
     status: completed
+    anime_adapted: true
+    alternative_titles:
+      en: Dragon Ball
   - key: Q219948|1 or W
     slug: wan-oa-daburu
     magazine: null
     demographic: seinen
     genres:
       - drama
-    synopsis: 高橋留美子の短編作品「1 or W」。
+    synopsis: 高橋留美子の短編。 「1 or W」 (= 数字 1 か W) のタイトル通り選択を巡る一話完結作品。
     status: completed
+    anime_adapted: false
   - key: Q219948|1ポンドの福音
     slug: ichipondo-no-fukuin
     magazine: weekly-young-sunday
     demographic: seinen
     genres:
-      - sports
       - comedy
       - romance
-    synopsis: 減量に苦しむボクサー耕作と、 彼を見守る修道女アンジェラのほのぼのボクシングラブコメ。
+      - sports
+    synopsis: 才能はあるが食欲に負ける駆け出しボクサー・畑中耕作と、 修道女シスター・アンジェラの恋愛コメディ。
     status: completed
+    anime_adapted: true
   - key: Q219948|MAO
     slug: mao
     magazine: weekly-shonen-sunday
@@ -86,18 +119,25 @@ series:
     genres:
       - action
       - fantasy
-      - yokai
+      - historical
       - mystery
-    synopsis: 現代の少女・菜花が大正時代の陰陽師・摩緒と出会い、 自身に取り憑く呪いの真相を追う伝奇ホラーアクション。
+      - romance
+    synopsis: 大正時代へ迷い込んだ現代の少女・菜花と、 妖を狩る陰陽師・摩緒が、 共通の宿敵を追う伝奇ラブストーリー。
     status: ongoing
+    anime_adapted: false
+    alternative_titles:
+      en: MAO
   - key: Q219948|Pの悲劇
     slug: takahashi-rumiko-kessakushuu
     magazine: null
-    demographic: seinen
+    demographic: shounen
     genres:
       - drama
-    synopsis: 高橋留美子の傑作集。 表題作「P の悲劇」を含む短編集。
+      - comedy
+      - fantasy
+    synopsis: 高橋留美子の傑作短編を収録したコレクション。 デビュー初期から円熟期まで幅広く編まれた珠玉の選集。
     status: completed
+    anime_adapted: false
   - key: Q219948|うる星やつら
     slug: urusei-yatsura
     magazine: weekly-shonen-sunday
@@ -107,16 +147,22 @@ series:
       - romcom
       - sci-fi
       - school
-    synopsis: 鬼の娘ラムが地球侵略の代理対決相手に選んだ女好き高校生・諸星あたるとの「結婚」騒動を発端に、 友引町を舞台にした SF ドタバタラブコメ。
+      - gag
+    synopsis: 鬼の娘ラムが地球侵略の代理対決相手に選んだ女好き高校生・諸星あたるとの「結婚」 騒動を発端に、 友引町を舞台にした SF ドタバタラブコメ。
     status: completed
+    anime_adapted: true
+    alternative_titles:
+      en: Urusei Yatsura
   - key: Q219948|うる星やつら ソングBOOK
     slug: urusei-yatsura-songu-bukku
     magazine: null
     demographic: shounen
     genres:
       - music
-    synopsis: うる星やつらアニメ放映時に発売された主題歌・挿入歌のソングブック。
+      - comedy
+    synopsis: 「うる星やつら」 のソングブック。 アニメ主題歌・劇中歌の楽譜とイラストを収録。
     status: completed
+    anime_adapted: true
   - key: Q219948|うる星やつら2
     slug: urusei-yatsura-tsuu
     magazine: null
@@ -124,8 +170,10 @@ series:
     genres:
       - comedy
       - romcom
-    synopsis: うる星やつらの新装版 (= シリーズ 2)。
+      - sci-fi
+    synopsis: 「うる星やつら 2」 関連商品。 アニメ映画版コミカライズ等。
     status: completed
+    anime_adapted: true
   - key: Q219948|うる星やつら3
     slug: urusei-yatsura-3
     magazine: null
@@ -133,8 +181,10 @@ series:
     genres:
       - comedy
       - romcom
-    synopsis: うる星やつらの新装版 / 別形式刊行版 (= シリーズ 3)。
+      - sci-fi
+    synopsis: 「うる星やつら 3」 関連商品。
     status: completed
+    anime_adapted: true
   - key: Q219948|うる星やつら4
     slug: urusei-yatsura-4
     magazine: null
@@ -142,8 +192,10 @@ series:
     genres:
       - comedy
       - romcom
-    synopsis: うる星やつらの新装版 / 別形式刊行版 (= シリーズ 4)。
+      - sci-fi
+    synopsis: 「うる星やつら 4」 (= 劇場版アニメ「ラム・ザ・フォーエバー」 関連) コミカライズ。
     status: completed
+    anime_adapted: true
   - key: Q219948|うる星やつらパーフェクト★カラーエディション
     slug: urusei-yatsura-paafyekuto-karaa-edeishon
     magazine: null
@@ -151,16 +203,21 @@ series:
     genres:
       - comedy
       - romcom
-    synopsis: うる星やつらのフルカラー版。 印象深いエピソードを着色して再収録。
+      - sci-fi
+      - school
+    synopsis: 「うる星やつら」 の パーフェクト・カラー・エディション。 名場面をフルカラーで再収録した愛蔵版。
     status: completed
+    anime_adapted: true
   - key: Q219948|ザ・超女
     slug: za-suupaa-gyaru
     magazine: null
     demographic: shounen
     genres:
       - comedy
-    synopsis: 高橋留美子の初期作品集「ザ・超女(スーパーギャル)」。
+      - gag
+    synopsis: 高橋留美子の初期短編。 超人的な力を持つ少女を主人公にしたコメディ。
     status: completed
+    anime_adapted: false
   - key: Q219948|テレビアニメ版 犬夜叉
     slug: terebi-animeban-inuyasha
     magazine: null
@@ -168,83 +225,105 @@ series:
     genres:
       - action
       - fantasy
-      - yokai
       - romance
-    synopsis: テレビアニメ版「犬夜叉」のアニメコミック。 アニメから書き起こしたコマ割り版。
+      - adventure
+    synopsis: TV アニメ版「犬夜叉」 のフィルムコミックス / アニメ準拠コミカライズ。
     status: completed
+    anime_adapted: true
   - key: Q219948|ヒーローズ・カムバック
     slug: hiiroozu-kamubakku
     magazine: null
     demographic: shounen
     genres:
       - drama
+    synopsis: 東日本大震災のチャリティアンソロジー「ヒーローズ・カムバック」。 高橋留美子はじめ著名漫画家が短編を寄稿した支援作品集。
     status: completed
-    synopsis: 東日本大震災のチャリティアンソロジー。 高橋留美子はじめ著名漫画家が短編を寄稿した支援作品集。
+    anime_adapted: false
   - key: Q219948|ビッグコミックセレクション名作短編集
     slug: biggu-komikku-serekushon-meisaku-tanpenshuu
-    magazine: null
-    demographic: shounen
+    magazine: big-comic
+    demographic: seinen
     genres:
       - drama
-    status: completed
     synopsis: ビッグコミック創刊以来の名作短編をテーマ別に編んだセレクションシリーズ。 高橋留美子の名短編が収録された巻。
+    status: completed
+    anime_adapted: false
   - key: Q219948|めぞん一刻
     slug: mezon-ikkoku
     magazine: big-comic-spirits
     demographic: seinen
     genres:
       - romance
-      - comedy
       - drama
-    synopsis: 下宿屋「一刻館」に住む浪人生・五代裕作と、 若い未亡人で管理人の音無響子のすれ違いだらけの恋愛模様を描いた青春ラブコメ。
+      - slice-of-life
+      - comedy
+    synopsis: 浪人生・五代裕作と、 一刻館の管理人として越してきた未亡人・音無響子の 7 年間にわたる切ない大人のラブストーリー。
     status: completed
+    anime_adapted: true
+    alternative_titles:
+      en: Maison Ikkoku
   - key: Q219948|らんま1/2
     slug: ranma-1-2
     magazine: weekly-shonen-sunday
     demographic: shounen
     genres:
-      - action
       - comedy
       - romcom
+      - action
       - fantasy
-    synopsis: 中国の呪泉郷で水を被ると女になってしまう体質になった格闘家・早乙女乱馬と、 婚約者あかねを巡るドタバタ格闘コメディ。
+      - school
+      - gag
+    synopsis: 中国の呪泉郷で水を被ると女になる体になった格闘家・早乙女乱馬が、 許嫁・天道あかねと繰り広げる格闘ラブコメ。
     status: completed
+    anime_adapted: true
+    alternative_titles:
+      en: Ranma 1/2
   - key: Q219948|るーみっくわーるど
     slug: ruumikku-waarudo
     magazine: null
-    demographic: seinen
+    demographic: shounen
     genres:
       - drama
-    synopsis: 高橋留美子の短編作品集「るーみっくわーるど」シリーズ。
+      - comedy
+      - fantasy
+      - sci-fi
+    synopsis: 高橋留美子の短編集ブランド「ルーミックワールド」。 SF・ホラー・コメディなど多彩な短編を 16 巻に収録。
     status: completed
+    anime_adapted: true
   - key: Q219948|るーみっくわーるど35
     slug: ruumikku-waarudo-35
     magazine: null
-    demographic: seinen
+    demographic: shounen
     genres:
       - drama
-    synopsis: 高橋留美子のデビュー 35 周年を記念した作品集「るーみっくわーるど 35」。
+      - comedy
+      - fantasy
+    synopsis: ルーミックワールド シリーズの記念編。 高橋留美子のキャリア 35 周年を記念した短編集。
     status: completed
+    anime_adapted: false
   - key: Q219948|人魚の傷
     slug: ningyo-no-kizu
-    magazine: null
-    demographic: seinen
+    magazine: weekly-shonen-sunday
+    demographic: shounen
     genres:
-      - horror
+      - drama
       - fantasy
-      - yokai
-    synopsis: 人魚の肉を食べて不老不死となった湧太と真魚の人魚シリーズの一篇「人魚の傷」。
+      - horror
+    synopsis: 「人魚の森」 シリーズの一編。 不老不死の湧太と真魚を巡る、 人魚伝説と人間の業を描く伝奇短編。
     status: completed
+    anime_adapted: true
   - key: Q219948|人魚の森
     slug: ningyo-no-mori
-    magazine: null
-    demographic: seinen
+    magazine: weekly-shonen-sunday
+    demographic: shounen
     genres:
-      - horror
+      - drama
       - fantasy
-      - yokai
-    synopsis: 人魚の肉を食べて不老不死となった湧太と真魚が辿り着いた人魚伝説の地で起きる「人魚の森」の物語。
+      - horror
+      - mystery
+    synopsis: 人魚の肉を食べて不老不死となった湧太と真魚が、 永遠の命を巡る数々の悲劇を旅する伝奇短編集。
     status: completed
+    anime_adapted: true
   - key: Q219948|劇場版犬夜叉時代を越える想い
     slug: gekijouban-inuyasha-jidai-o-koeru-omoi
     magazine: null
@@ -252,37 +331,47 @@ series:
     genres:
       - action
       - fantasy
-      - yokai
-    synopsis: 犬夜叉の劇場版「時代を越える想い」のアニメコミック。
+      - romance
+      - adventure
+    synopsis: 劇場版犬夜叉「時代を越える想い」 のコミカライズ。 かごめと犬夜叉が時を超えて結ばれる絆を描く劇場版エピソード。
     status: completed
+    anime_adapted: true
   - key: Q219948|半妖の夜叉姫
     slug: han-you-no-yashahime-iden-ehon-zoushi
     magazine: null
     demographic: shounen
     genres:
       - fantasy
-      - action
-    status: ongoing
-    synopsis: 「犬夜叉」 続編。 戦国時代を舞台に、 半妖の三姉妹が運命に挑む冒険ファンタジー。
+      - adventure
+    synopsis: 「犬夜叉」 続編 「半妖の夜叉姫」 の世界を描いた絵本草子。 犬夜叉と殺生丸の娘たちの冒険を伝奇ファンタジーで描く。
+    status: completed
+    anime_adapted: true
   - key: Q219948|境界のRINNE
     slug: kyoukai-no-rinne
     magazine: weekly-shonen-sunday
     demographic: shounen
     genres:
       - comedy
-      - romcom
-      - yokai
-    synopsis: 貧乏な死神少年・六文と、 霊が見える少女・桜の二人が成仏できない霊を成仏させていくコメディラブストーリー。
+      - romance
+      - fantasy
+      - school
+      - slice-of-life
+    synopsis: 死神の末裔・六道りんねと、 幽霊が見える女子高生・真宮桜が、 成仏できない霊魂の事情を解決していく学園ラブコメ怪談。
     status: completed
+    anime_adapted: true
+    alternative_titles:
+      en: Rin-ne
   - key: Q219948|夜叉の瞳
     slug: yasha-no-hitomi
     magazine: null
-    demographic: seinen
+    demographic: shounen
     genres:
+      - drama
       - fantasy
-      - yokai
-    synopsis: 高橋留美子の短編作品「夜叉の瞳」。
+      - horror
+    synopsis: 高橋留美子の短編。 夜叉の瞳に映る人間の業を描いた伝奇譚。
     status: completed
+    anime_adapted: false
   - key: Q219948|専務の犬
     slug: senmu-no-inu
     magazine: null
@@ -290,17 +379,20 @@ series:
     genres:
       - comedy
       - drama
-    synopsis: 高橋留美子の短編作品「専務の犬」。
+      - slice-of-life
+    synopsis: 高橋留美子の短編。 専務と犬を巡る日常コメディドラマ。
     status: completed
+    anime_adapted: false
   - key: Q219948|少年サンデー'90セレクション
     slug: shounen-sandee-90-serekushon
-    magazine: null
+    magazine: weekly-shonen-sunday
     demographic: shounen
     genres:
       - drama
       - comedy
+    synopsis: 少年サンデー 1990 年代を代表する作品セレクション短編集。 高橋留美子の短編を含む。
     status: completed
-    synopsis: 少年サンデー 創刊 90 年代を代表するセレクション短編集。 高橋留美子の短編を収録。
+    anime_adapted: false
   - key: Q219948|映画 犬夜叉
     slug: eiga-inuyasha
     magazine: null
@@ -308,20 +400,28 @@ series:
     genres:
       - action
       - fantasy
-      - yokai
-    synopsis: 犬夜叉の劇場版アニメをコミック化したアニメコミック版。
+      - romance
+      - adventure
+    synopsis: 犬夜叉 劇場版アニメのコミカライズ / 関連本。 戦国時代の妖怪退治と恋愛を描く。
     status: completed
+    anime_adapted: true
   - key: Q219948|犬夜叉
     slug: inuyasha-tetsusaiga
     magazine: weekly-shonen-sunday
     demographic: shounen
     genres:
       - action
+      - adventure
       - fantasy
-      - yokai
       - romance
-    synopsis: 戦国時代に飛ばされた現代の少女・かごめが、 半妖の犬夜叉と共に四魂の玉の欠片を集めながら宿敵奈落と戦う冒険ロマンス。
+      - drama
+      - historical
+      - samurai
+    synopsis: 戦国時代にタイムスリップした女子中学生・かごめが、 半妖の犬夜叉らと共に四魂のかけらを集めて妖怪と戦う伝奇ロマンス。
     status: completed
+    anime_adapted: true
+    alternative_titles:
+      en: Inuyasha
   - key: Q219948|犬夜叉奥義皆伝
     slug: inuyasha-ougi-kaiden
     magazine: null
@@ -329,9 +429,10 @@ series:
     genres:
       - action
       - fantasy
-      - yokai
-    synopsis: 犬夜叉の関連書 「奥義皆伝」、 設定資料・公式ガイド系。
+      - adventure
+    synopsis: 犬夜叉 設定資料 / 公式ガイドブック「奥義皆伝」。 妖怪・登場人物・呪文の解説を収録。
     status: completed
+    anime_adapted: false
   - key: Q219948|英訳・うる星やつら
     slug: eiyaku-urusei-yatsura
     magazine: null
@@ -339,48 +440,63 @@ series:
     genres:
       - comedy
       - romcom
-    synopsis: うる星やつらの英訳版コミック。 海外向けに英語で吹き替えられた版。
+      - sci-fi
+    synopsis: 「うる星やつら」 の英訳版。 ラムとあたるの SF ドタバタラブコメを海外向けに翻訳した版。
     status: completed
+    anime_adapted: true
+    alternative_titles:
+      en: Urusei Yatsura (English)
   - key: Q219948|赤い花束
     slug: akai-hanataba
     magazine: null
-    demographic: seinen
+    demographic: shounen
     genres:
       - drama
-    synopsis: 高橋留美子による短編作品。
+      - romance
+    synopsis: 高橋留美子の短編。 赤い花束を巡る切ないラブストーリー。
     status: completed
+    anime_adapted: false
   - key: Q219948|運命の鳥
     slug: unmei-no-tori
     magazine: null
     demographic: seinen
     genres:
       - drama
-    synopsis: 高橋留美子の短編作品「運命の鳥」。
+      - romance
+    synopsis: 高橋留美子の短編。 運命と縁を巡る人情ドラマ。
     status: completed
+    anime_adapted: false
   - key: Q219948|鏡が来た
     slug: kagami-ga-kita
     magazine: null
-    demographic: seinen
+    demographic: shounen
     genres:
       - drama
-    synopsis: 高橋留美子の短編作品「鏡が来た」。
+      - fantasy
+    synopsis: 高橋留美子の短編。 不思議な鏡を巡る奇譚。
     status: completed
+    anime_adapted: false
   - key: Q219948|高橋留美子
     slug: takahashi-rumiko
     magazine: null
-    demographic: seinen
+    demographic: shounen
     genres:
       - drama
-    synopsis: 高橋留美子の作品集 / 公式ガイド類。
+      - comedy
+    synopsis: 高橋留美子の作品集 / 関連書。
     status: completed
+    anime_adapted: false
   - key: Q219948|高橋留美子傑作短編集
     slug: takahashi-rumiko-kessaku-tanpenshuu
     magazine: null
-    demographic: seinen
+    demographic: shounen
     genres:
       - drama
-    synopsis: 高橋留美子の傑作短編をまとめた短編集。
+      - comedy
+      - fantasy
+    synopsis: 高橋留美子の代表的な短編作品を集めた傑作選。 SF・ホラー・コメディなど幅広いジャンルを収録。
     status: completed
+    anime_adapted: false
   - key: Q219948|高橋留美子劇場
     slug: takahashi-rumiko-gekijou
     magazine: big-comic-original
@@ -388,29 +504,40 @@ series:
     genres:
       - drama
       - slice-of-life
-    synopsis: ビッグコミックオリジナルで連載された高橋留美子の短編人情ドラマ集。 1 話完結のヒューマンストーリーが多く収録。
-    status: completed
+    synopsis: 高橋留美子が日常の哀歓をスケッチした大人向け短編集。 1987 年から不定期連載される一話完結のヒューマンドラマ。
+    status: ongoing
+    anime_adapted: false
   - key: Q230962|鋼の錬金術師
     slug: hagane-no-renkinjutsushi
     magazine: gangan
     demographic: shounen
     genres:
       - action
+      - adventure
       - fantasy
       - drama
-    synopsis: 等価交換の錬金術が支配する世界で、 母親を蘇らせようとして身体の一部を失ったエルリック兄弟が、 国を巻き込む陰謀と戦いながら身体を取り戻す旅を描く。
+      - sci-fi
+      - suspense
+    synopsis: 失った身体を取り戻すため錬金術を駆使するエルリック兄弟が、 国家と賢者の石を巡る陰謀に挑む蒸気機関時代風ダークファンタジー。
     status: completed
+    anime_adapted: true
+    alternative_titles:
+      en: Fullmetal Alchemist
   - key: Q24865213|鬼滅の刃
     slug: kimetsu-no-yaiba
     magazine: weekly-shonen-jump
     demographic: shounen
     genres:
       - action
-      - samurai
-      - fantasy
+      - drama
       - historical
-    synopsis: 大正時代を舞台に、 鬼に家族を惨殺され、 妹を鬼にされた少年・竈門炭治郎が、 鬼殺隊に入って妹を人間に戻す方法を探しながら鬼舞辻無惨を追う物語。
+      - horror
+      - fantasy
+    synopsis: 大正時代、 家族を鬼に殺された炭治郎が鬼となった妹を救うため鬼殺隊に入隊し、 仲間と共に鬼舞辻無惨打倒へ挑む剣戟ファンタジー。
     status: completed
+    anime_adapted: true
+    alternative_titles:
+      en: Demon Slayer
   - key: Q295073|Bleach
     slug: buriichi
     magazine: weekly-shonen-jump
@@ -419,27 +546,42 @@ series:
       - action
       - fantasy
       - horror
+      - drama
+      - suspense
     synopsis: 死神となった高校生・黒崎一護が、 死神代行として虚 (= ホロウ) と戦いながら、 仲間と共に巨大な戦いに巻き込まれていく異能アクション。
     status: completed
+    anime_adapted: true
+    alternative_titles:
+      en: Bleach
   - key: Q313703|DEATH NOTE
     slug: desunooto
     magazine: weekly-shonen-jump
     demographic: shounen
     genres:
-      - suspense
       - mystery
-    synopsis: 名前を書かれた人間は死ぬ「デスノート」を拾った天才高校生・夜神月と、 世界一の名探偵 L が頭脳を尽くして互いを追い詰める心理戦サスペンス。
+      - suspense
+      - drama
+      - horror
+    synopsis: 名前を書かれた者を死に至らしめる「デスノート」 を手にした天才少年・夜神月と、 彼を追う名探偵 L の頭脳戦を描くサスペンス。
     status: completed
+    anime_adapted: true
+    alternative_titles:
+      en: Death Note
   - key: Q313703|バクマン。
     slug: bakuman-2
     magazine: weekly-shonen-jump
     demographic: shounen
     genres:
       - drama
+      - slice-of-life
+      - school
       - comedy
       - romance
-    synopsis: 天才作画の真城最高と物語作りの高木秋人がコンビを組み、 週刊少年ジャンプでの連載とアニメ化、 そして恋愛を追いかけるマンガ家成長物語。
+    synopsis: 漫画家を目指す高校生・真城最高と高木秋人が、 週刊少年ジャンプの連載枠を巡って奮闘する青春漫画家ドラマ。
     status: completed
+    anime_adapted: true
+    alternative_titles:
+      en: Bakuman
   - key: Q313945|名探偵コナン
     slug: meitantei-konan-torikkubetsu-serekushon
     magazine: weekly-shonen-sunday
@@ -447,19 +589,32 @@ series:
     genres:
       - mystery
       - suspense
-    synopsis: 高校生探偵・工藤新一が黒の組織の薬で小学生の姿に戻され、 江戸川コナンとして毛利探偵事務所に居候しながら難事件を解決していく長期推理漫画。
+      - drama
+      - school
+      - comedy
+    synopsis: 黒の組織に薬を飲まされ小学生の姿になった高校生探偵・工藤新一が、 江戸川コナンとして難事件を解決していく長期連載推理漫画。
     status: ongoing
+    anime_adapted: true
+    alternative_titles:
+      en: Detective Conan
   - key: Q3782468|進撃の巨人
     slug: shingeki-no-kyojin
     magazine: bessatsu-shonen-magazine
     demographic: shounen
     genres:
       - action
-      - fantasy
       - drama
+      - fantasy
       - horror
-    synopsis: 巨人によって滅亡寸前の人類が、 巨大な壁の中で生き残りを賭けて戦う中、 主人公エレン・イェーガーが調査兵団に入り、 巨人の謎と世界の真実に迫る物語。
+      - mystery
+      - suspense
+    synopsis: 巨人に支配された世界で、 壁の中で暮らす人類最後の生き残りエレンらが調査兵団として巨人と謎に挑む黙示録的ダークファンタジー。
     status: completed
+    anime_adapted: true
+    awards:
+      - 講談社漫画賞 少年部門 2011
+    alternative_titles:
+      en: Attack on Titan
   - key: Q3981526|SPY×FAMILY
     slug: supai-fuamirii
     magazine: null
@@ -467,9 +622,13 @@ series:
     genres:
       - action
       - comedy
-      - suspense
-    synopsis: 腕利きスパイ「黄昏」が任務のために偽の家族を作るが、 娘アーニャは超能力者、 妻ヨルは殺し屋という、 互いに正体を隠す家族ドタバタコメディ。
+      - drama
+      - school
+    synopsis: スパイ・暗殺者・超能力少女が偶然偽装家族として暮らすことになり、 平和な日常を装いながら任務を遂行するアクションコメディ。
     status: ongoing
+    anime_adapted: true
+    alternative_titles:
+      en: SPY×FAMILY
   - key: Q459911|SLAM DUNK
     slug: suramu-danku-shinsou-saihenban
     magazine: weekly-shonen-jump
@@ -478,8 +637,12 @@ series:
       - sports
       - drama
       - school
-    synopsis: 不良少年・桜木花道が一目惚れした赤木晴子に勧められてバスケ部に入り、 湘北高校でインターハイを目指して仲間と全力で戦うバスケットボール漫画。
+      - comedy
+    synopsis: 不良少年・桜木花道が好きな子のためにバスケ部に入り、 湘北高校が全国制覇を目指す高校バスケットボール漫画の金字塔。 新装再編版。
     status: completed
+    anime_adapted: true
+    alternative_titles:
+      en: Slam Dunk
   - key: Q47465101|アオアシ
     slug: aoashi
     magazine: big-comic-spirits
@@ -487,8 +650,12 @@ series:
     genres:
       - sports
       - drama
-    synopsis: 天才サッカー少年・青井葦人がプロを目指して東京シティ・エスペリオンFCのユースに加入し、 厳しい競争の中で成長していくサッカー漫画。
+      - school
+    synopsis: 愛媛県の中学生・青井葦人が、 J リーグのユース・東京シティ・エスペリオンに招かれ、 プロサッカー選手を目指して成長していく青春サッカー漫画。
     status: completed
+    anime_adapted: true
+    alternative_titles:
+      en: Ao Ashi
   - key: Q550311|ハンター×ハンター
     slug: hantaa-hantaa
     magazine: weekly-shonen-jump
@@ -497,19 +664,28 @@ series:
       - action
       - adventure
       - fantasy
-    synopsis: 失踪した父を探すゴン=フリークスが、 厳しいハンター試験を経て世界を旅し、 仲間と共に念能力者との壮絶な戦いを繰り広げる冒険バトル漫画。
+      - drama
+      - mystery
+    synopsis: ハンター試験に挑む少年ゴンが、 父を探しながら念能力者と命がけの冒険を繰り広げる長期連載の異能バトル冒険。 不定期休載中。
     status: hiatus
+    anime_adapted: true
+    alternative_titles:
+      en: Hunter × Hunter
   - key: Q715725|ベルセルク
     slug: beruseruku
     magazine: young-animal
     demographic: seinen
     genres:
       - action
+      - adventure
       - fantasy
       - horror
       - drama
-    synopsis: 宿敵グリフィスを追う黒い剣士ガッツが、 異形の使徒や蝕の悪夢と戦いながら復讐の旅を続ける中世風ダークファンタジー。
-    status: completed
+    synopsis: 中世ヨーロッパ風の世界を舞台に、 漆黒の戦士ガッツが宿命の敵を追う暗黒ダークファンタジーの金字塔。 三浦建太郎死去後 弟子継承で連載継続。
+    status: ongoing
+    anime_adapted: true
+    alternative_titles:
+      en: Berserk
   - key: Q719354|ジョジョの奇妙な冒険
     slug: jojo-no-kimyouna-bouken
     magazine: weekly-shonen-jump
@@ -518,9 +694,14 @@ series:
       - action
       - adventure
       - fantasy
-      - suspense
-    synopsis: 19 世紀英国でジョースター家とディオが出会ったことから始まる、 世代を超えた血族と「スタンド」を駆使した奇妙な戦いを描く長編シリーズ。
-    status: completed
+      - drama
+      - horror
+      - mystery
+    synopsis: ジョースター家の運命に翻弄される歴代主人公達が、 吸血鬼や謎の能力スタンドと戦う 1987 年連載開始の長大な異能バトル叙事詩。
+    status: ongoing
+    anime_adapted: true
+    alternative_titles:
+      en: JoJo's Bizarre Adventure
   - key: Q9116547|キングダム
     slug: kingudamu
     magazine: weekly-young-jump
@@ -528,6 +709,11 @@ series:
     genres:
       - action
       - historical
+      - drama
       - samurai
-    synopsis: 中華統一の野望を抱く秦王・嬴政と、 戦争孤児から将軍を目指す信が、 春秋戦国時代の戦場を駆け抜ける長編歴史バトル漫画。
+      - adventure
+    synopsis: 春秋戦国時代の中国を舞台に、 戦災孤児の少年・信が大将軍を目指して戦場で成長していく長編歴史戦記。
     status: ongoing
+    anime_adapted: true
+    alternative_titles:
+      en: Kingdom
