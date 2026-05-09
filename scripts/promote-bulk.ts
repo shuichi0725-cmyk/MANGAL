@@ -44,6 +44,7 @@ import { openDb, tx, type DB } from "./_db";
 import { MangaSchema } from "../lib/schema";
 import {
   EDITION_LABELS,
+  EDITION_PRIORITY,
   slugFromTitle,
   type EditionType,
 } from "../lib/edition";
@@ -183,51 +184,112 @@ type VolumeRow = {
   asin: string | null;
 };
 
-function buildEditionsForSeries(db: DB, seriesId: number) {
+/**
+ * vol number 列に欠番があれば返す (= 「巻が抜ける」 ユーザ最悪ケースの可視化)。
+ *   detectVolumeGaps([1,2,3,5]) === [4]
+ *   detectVolumeGaps([2,3])     === [1]   (= 1 が抜けてる扱い、 max まで埋める)
+ *   detectVolumeGaps([1,2,3])   === []
+ *
+ * 補完は行わない (= MADB の欠番が原因で promote 側では補完不能)。 警告のみ。
+ */
+function detectVolumeGaps(numbers: number[]): number[] {
+  if (numbers.length === 0) return [];
+  const present = new Set(numbers);
+  const max = Math.max(...numbers);
+  const missing: number[] = [];
+  for (let i = 1; i <= max; i++) if (!present.has(i)) missing.push(i);
+  return missing;
+}
+
+function buildEditionsForSeries(
+  db: DB,
+  seriesId: number,
+): {
+  editions: ReturnType<typeof buildSingleEditionResult>[];
+  /** edition.type → 欠番 number 配列 (= 警告 log 用) */
+  gaps: { editionType: string; missing: number[] }[];
+} {
+  // editions の取得順は EDITION_PRIORITY を主、 year_started を tie-break。
+  // ユーザの意図する 「通常版 → 完全版的なもの → その他」 階層を yaml 出力にそのまま反映する。
   const editions = db
     .prepare(
       `SELECT id, type, label, imprint, year_started, year_ended
        FROM editions
        WHERE series_id = ?
-       ORDER BY COALESCE(year_started, 9999), type`,
+       ORDER BY
+         CASE type
+           WHEN 'standard'  THEN 0
+           WHEN 'kanzenban' THEN 1
+           WHEN 'shinsoban' THEN 2
+           WHEN 'aizoban'   THEN 3
+           WHEN 'wideban'   THEN 4
+           WHEN 'bunkobon'  THEN 5
+           WHEN 'renewal'   THEN 6
+           WHEN 'other'     THEN 7
+           ELSE 99
+         END ASC,
+         COALESCE(year_started, 9999) ASC`,
     )
     .all(seriesId) as EditionRow[];
 
+  const gaps: { editionType: string; missing: number[] }[] = [];
   const result = editions.map((e) => {
-    const vols = db
-      .prepare(
-        `SELECT number, isbn13, release_date, cover_url, asin
-         FROM volumes
-         WHERE edition_id = ? AND is_extra = 0 AND number >= 1
-         ORDER BY number, isbn13`,
-      )
-      .all(e.id) as VolumeRow[];
-
-    // 同一 (edition, number) の ISBN 重複は最初の 1 件採用
-    const seen = new Set<number>();
-    const uniqueVols = vols.filter((v) => {
-      if (seen.has(v.number)) return false;
-      seen.add(v.number);
-      return true;
-    });
-
-    return {
-      type: e.type as EditionType,
-      label: e.label,
-      ...(e.imprint ? { imprint: e.imprint } : {}),
-      ...(e.year_started !== null ? { year_started: e.year_started } : {}),
-      ...(e.year_ended !== null ? { year_ended: e.year_ended } : {}),
-      volumes: uniqueVols.map((v) => ({
-        number: v.number,
-        asin: v.asin,
-        isbn13: v.isbn13,
-        cover_url: v.cover_url,
-        release_date: v.release_date,
-      })),
-    };
+    const built = buildSingleEditionResult(db, e);
+    const numbers = built.volumes.map((v) => v.number);
+    const missing = detectVolumeGaps(numbers);
+    if (missing.length > 0) gaps.push({ editionType: e.type, missing });
+    return built;
   });
 
-  return result.filter((e) => e.volumes.length > 0);
+  return {
+    editions: result.filter((e) => e.volumes.length > 0),
+    gaps,
+  };
+}
+
+/**
+ * 1 edition の volumes 取得 + 同 number で重複する ISBN を 1 件に絞る。
+ * 採用順: release_date 最古 → cover_url あり → ISBN-13 順 (= deterministic)。
+ * 「最古日」 の意図は、 重版 / 廉価版バリアント が混入していても初版を primary
+ * として安定採用すること (= 「途中で違う物が混ざる」 ユーザ最悪ケースの抑止)。
+ */
+function buildSingleEditionResult(db: DB, e: EditionRow) {
+  const vols = db
+    .prepare(
+      `SELECT number, isbn13, release_date, cover_url, asin
+       FROM volumes
+       WHERE edition_id = ? AND is_extra = 0 AND number >= 1
+       ORDER BY
+         number ASC,
+         COALESCE(release_date, '9999-99-99') ASC,
+         CASE WHEN cover_url IS NULL THEN 1 ELSE 0 END ASC,
+         isbn13 ASC`,
+    )
+    .all(e.id) as VolumeRow[];
+
+  // 同 number で複数 ISBN ある case (= 0.8% 程度) は先頭 (= 上の ORDER BY で
+  // primary 確定済) のみ採用。 残りは drop (= 集約)。
+  const seen = new Set<number>();
+  const uniqueVols = vols.filter((v) => {
+    if (seen.has(v.number)) return false;
+    seen.add(v.number);
+    return true;
+  });
+
+  return {
+    type: e.type as EditionType,
+    label: e.label,
+    ...(e.imprint ? { imprint: e.imprint } : {}),
+    ...(e.year_started !== null ? { year_started: e.year_started } : {}),
+    ...(e.year_ended !== null ? { year_ended: e.year_ended } : {}),
+    volumes: uniqueVols.map((v) => ({
+      number: v.number,
+      asin: v.asin,
+      isbn13: v.isbn13,
+      cover_url: v.cover_url,
+      release_date: v.release_date,
+    })),
+  };
 }
 
 /**
@@ -389,7 +451,12 @@ async function main() {
     skippedNoAuthor: 0,
     skippedExisting: 0,
     skippedInvalid: 0,
+    /** detectVolumeGaps が non-empty を返した series 数 (= 巻番号に欠番がある) */
+    seriesWithGaps: 0,
+    /** 警告 sample (= 最初の N 件、 user の目視確認用) */
+    gapSamples: [] as string[],
   };
+  const GAP_SAMPLE_LIMIT = 8;
 
   for (const row of seriesRows) {
     if (args.limit !== null && stats.written >= args.limit) break;
@@ -409,8 +476,8 @@ async function main() {
     }
 
     // editions を先に取り出して imprint を集める (adult score にも、後段の YAML
-    // 構築にも使う)。
-    const editions = buildEditionsForSeries(db, row.id);
+    // 構築にも使う)。 buildEditionsForSeries は EDITION_PRIORITY 順にソート済。
+    const { editions, gaps: editionGaps } = buildEditionsForSeries(db, row.id);
 
     // adult-score 計算用の imprint は editions テーブルから直接拾う。
     // buildEditionsForSeries は「volumes が 0 件の edition を捨てる」フィルタを
@@ -564,6 +631,18 @@ async function main() {
       fs.writeFileSync(outPath, yamlText, "utf8");
     }
     stats.written++;
+    if (editionGaps.length > 0) {
+      stats.seriesWithGaps++;
+      if (stats.gapSamples.length < GAP_SAMPLE_LIMIT) {
+        const detail = editionGaps
+          .map(
+            (g) =>
+              `${g.editionType}=[${g.missing.slice(0, 8).join(",")}${g.missing.length > 8 ? ",..." : ""}]`,
+          )
+          .join(" ");
+        stats.gapSamples.push(`#${row.id} ${row.title}: ${detail}`);
+      }
+    }
     if (stats.written % 100 === 0) {
       console.log(`  ... ${stats.written} drafts written`);
     }
@@ -579,8 +658,19 @@ async function main() {
   );
   console.log(`  skipped (existing)  : ${stats.skippedExisting}`);
   console.log(`  skipped (invalid)   : ${stats.skippedInvalid}`);
+  console.log(`  series with vol gaps: ${stats.seriesWithGaps}`);
   console.log(`  output dir          : ${args.outDir}`);
   if (args.dryRun) console.log(`  (dry-run: no files were actually written)`);
+
+  if (stats.gapSamples.length > 0) {
+    console.log(`\n=== volume gap samples (= 巻番号の欠番、 修正は別 issue) ===`);
+    for (const s of stats.gapSamples) console.log(`  ${s}`);
+    if (stats.seriesWithGaps > stats.gapSamples.length) {
+      console.log(
+        `  ... and ${stats.seriesWithGaps - stats.gapSamples.length} more series with gaps`,
+      );
+    }
+  }
 
   db.close();
 }

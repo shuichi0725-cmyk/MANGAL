@@ -1,5 +1,8 @@
 import { describe, expect, it } from "vitest";
 import {
+  EDITION_LABELS,
+  EDITION_ORDER,
+  EDITION_PRIORITY,
   baseTitle,
   buildCreatorClause,
   buildSeriesKey,
@@ -12,7 +15,44 @@ import {
   normalizeSeriesKey,
   slugFromTitle,
   toLccCreatorForm,
+  type EditionType,
 } from "./edition";
+
+describe("EDITION_PRIORITY", () => {
+  it("covers every EditionType exactly once", () => {
+    const allTypes: EditionType[] = [
+      "standard",
+      "kanzenban",
+      "bunkobon",
+      "shinsoban",
+      "aizoban",
+      "wideban",
+      "renewal",
+      "other",
+    ];
+    for (const t of allTypes) {
+      expect(EDITION_PRIORITY[t]).toBeTypeOf("number");
+    }
+    expect(Object.keys(EDITION_PRIORITY).length).toBe(allTypes.length);
+  });
+
+  it("places standard first and other last", () => {
+    expect(EDITION_PRIORITY.standard).toBe(0);
+    expect(EDITION_PRIORITY.other).toBe(EDITION_ORDER.length - 1);
+  });
+
+  it("matches EDITION_ORDER index", () => {
+    for (let i = 0; i < EDITION_ORDER.length; i++) {
+      expect(EDITION_PRIORITY[EDITION_ORDER[i]]).toBe(i);
+    }
+  });
+
+  it("EDITION_LABELS covers same keys", () => {
+    for (const t of EDITION_ORDER) {
+      expect(EDITION_LABELS[t]).toBeTypeOf("string");
+    }
+  });
+});
 
 describe("extractVolumeNumber", () => {
   it("extracts simple trailing number", () => {

@@ -48,6 +48,17 @@ export const EDITION_ORDER: EditionType[] = [
 ];
 
 /**
+ * 表示時の優先順位 (= EDITION_ORDER から導出)。 同 series 内で複数 edition
+ * を表示する時の sort key として使う。 数値が小さいほど上に表示。
+ *
+ * promote-bulk で editions を並べる時に使い、 ユーザの意図する 「通常版 →
+ * 完全版的なもの → その他」 の階層を出力 yaml にそのまま反映する。
+ */
+export const EDITION_PRIORITY: Record<EditionType, number> = Object.fromEntries(
+  EDITION_ORDER.map((type, i) => [type, i]),
+) as Record<EditionType, number>;
+
+/**
  * タイトル文字列からエディション種別を推定。
  * 入力は title + subTitle + seriesName を空白連結したものを想定。
  *
