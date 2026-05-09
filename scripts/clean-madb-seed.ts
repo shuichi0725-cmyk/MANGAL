@@ -55,6 +55,7 @@ import {
   cleanCreatorStrings,
   flattenStringArray,
   rebuildSchemaName,
+  splitMadbLiteral,
   type MadbJsonLdRecord,
 } from "../lib/madb-jsonld";
 
@@ -90,6 +91,7 @@ function normalizeRecord(
   raw: MadbJsonLdRecord,
   stats: NormalizeStats,
   imprintCanonical: Map<string, string>,
+  publisherCanonical: Map<string, string>,
 ): MadbJsonLdRecord {
   const out: MadbJsonLdRecord = { ...raw };
 
@@ -142,7 +144,53 @@ function normalizeRecord(
     }
   }
 
+  // 4. schema:publisher: ∥ split + case 揺れ統一
+  //    例: "KADOKAWA ∥ カドカワ" → "KADOKAWA"
+  //    例: "Kadokawa" → "KADOKAWA" (= canonical 引き)
+  //    fetch-madb.ts:472 の `imprint = rec.imprint ?? rec.publisher` fallback
+  //    経由で imprint に流れる publisher 値を 種2 で先に統一しておくことで、
+  //    DB の editions.imprint で "KADOKAWA" / "Kadokawa" 混在を防ぐ。
+  //    array なら各要素を再帰、 object (= ヨミ) は pass through。
+  if (raw["schema:publisher"] !== undefined) {
+    const before = raw["schema:publisher"];
+    const replaced = applyPublisherCanonical(
+      before,
+      publisherCanonical,
+    ) as typeof before;
+    out["schema:publisher"] = replaced;
+    if (JSON.stringify(before) !== JSON.stringify(replaced)) {
+      stats.publisherNormalized++;
+    }
+  }
+
   return out;
+}
+
+/**
+ * publisher 値に canonical map を適用。 string なら ∥ split で 漢字部分を取り出し、
+ * lowercase 引きで canonical 形に置換。 array は再帰、 object は pass through。
+ *
+ *   "KADOKAWA ∥ カドカワ" → split → "KADOKAWA" → lookup → "KADOKAWA" (canonical)
+ *   "Kadokawa"            → split → "Kadokawa" → lookup → "KADOKAWA" (canonical)
+ *   "集英社 ∥ シュウエイシャ" → split → "集英社" → lookup → "集英社" (no change)
+ *
+ * 結果: 種2 の schema:publisher は ∥ 抜き + canonical case 形だけになる。
+ * 既存 splitMadbLiteral を extractRecord で重複 apply しても冪等 (= no-op)。
+ */
+function applyPublisherCanonical(
+  field: unknown,
+  canonical: Map<string, string>,
+): unknown {
+  if (typeof field === "string") {
+    const split = splitMadbLiteral(field);
+    if (!split) return field;
+    const key = split.normalize("NFKC").toLowerCase().trim();
+    return canonical.get(key) ?? split;
+  }
+  if (Array.isArray(field)) {
+    return field.map((x) => applyPublisherCanonical(x, canonical));
+  }
+  return field;
 }
 
 /**
@@ -155,7 +203,8 @@ function applyImprintCanonical(
   canonical: Map<string, string>,
 ): unknown {
   if (typeof field === "string") {
-    return canonical.get(field.toLowerCase()) ?? field;
+    const key = field.normalize("NFKC").toLowerCase().trim();
+    return canonical.get(key) ?? field;
   }
   if (Array.isArray(field)) {
     return field.map((x) => applyImprintCanonical(x, canonical));
@@ -164,18 +213,52 @@ function applyImprintCanonical(
 }
 
 /**
- * 1st pass: 全 record を scan して imprint 集計。 canonical 形 (= 同 lowercase
- * key の中で最頻出 form) を確定する。 結果は { lowercase: canonical_form } の
- * Map で返す。 単一 form の group は map に入れない (= no-op で十分)。
+ * 同 lowercase key の中で 「最頻出 form」 を canonical として選択。 同点は
+ * code-point 順 (= deterministic)。 単一 form の group は map に入れない
+ * (= no-op で十分)。
  */
-async function aggregateImprints(
+function pickCanonicalFromGroups(
+  groups: Map<string, Map<string, number>>,
+): { canonical: Map<string, string>; groupsWithVariation: number } {
+  const canonical = new Map<string, string>();
+  let groupsWithVariation = 0;
+  for (const [lower, formMap] of groups) {
+    if (formMap.size === 1) continue;
+    groupsWithVariation++;
+    let bestForm = "";
+    let bestCount = -1;
+    for (const [form, count] of formMap) {
+      if (
+        count > bestCount ||
+        (count === bestCount && form < bestForm)
+      ) {
+        bestForm = form;
+        bestCount = count;
+      }
+    }
+    canonical.set(lower, bestForm);
+  }
+  return { canonical, groupsWithVariation };
+}
+
+/**
+ * 1st pass: 全 record を scan して schema:brand と schema:publisher を同時集計。
+ * 両 field とも 「最頻出 form を canonical として選ぶ」 同じ algorithm だが、
+ * publisher は **∥ split 後の漢字部分** で集計する点が異なる (= 「集英社 ∥
+ * シュウエイシャ」 の漢字部分 「集英社」 で grouping)。
+ */
+async function aggregateBrandsAndPublishers(
   inPath: string,
 ): Promise<{
-  canonical: Map<string, string>;
-  totalGroups: number;
-  groupsWithVariation: number;
+  brandCanonical: Map<string, string>;
+  brandTotalGroups: number;
+  brandGroupsWithVariation: number;
+  publisherCanonical: Map<string, string>;
+  publisherTotalGroups: number;
+  publisherGroupsWithVariation: number;
 }> {
-  const groups = new Map<string, Map<string, number>>();
+  const brandGroups = new Map<string, Map<string, number>>();
+  const publisherGroups = new Map<string, Map<string, number>>();
 
   const stream = chain([
     fs.createReadStream(inPath),
@@ -190,50 +273,63 @@ async function aggregateImprints(
     value: MadbJsonLdRecord;
   }>) {
     recordsScanned++;
+
+    // brand 集計: NFKC + lowercase + trim を group key に。
+    // form は NFKC + trim で保管 (= 末尾の全角空白等を削除、 case は保持)。
+    // これで 「きみとぼくCOLLECTION　」 (末尾 U+3000) と 「きみとぼくcollection」
+    // が同 group に集約され、 canonical も末尾空白なしの形になる。
     const brand = item.value["schema:brand"];
-    if (brand === undefined || brand === null) continue;
-    const visit = (v: unknown): void => {
-      if (typeof v === "string" && v) {
-        const lower = v.toLowerCase();
-        const inner = groups.get(lower);
-        if (inner) inner.set(v, (inner.get(v) || 0) + 1);
-        else groups.set(lower, new Map([[v, 1]]));
-      } else if (Array.isArray(v)) {
-        for (const x of v) visit(x);
-      }
-    };
-    visit(brand);
+    if (brand !== undefined && brand !== null) {
+      const visitBrand = (v: unknown): void => {
+        if (typeof v === "string" && v) {
+          const key = v.normalize("NFKC").toLowerCase().trim();
+          if (!key) return;
+          const form = v.normalize("NFKC").trim();
+          const inner = brandGroups.get(key);
+          if (inner) inner.set(form, (inner.get(form) || 0) + 1);
+          else brandGroups.set(key, new Map([[form, 1]]));
+        } else if (Array.isArray(v)) {
+          for (const x of v) visitBrand(x);
+        }
+      };
+      visitBrand(brand);
+    }
+
+    // publisher 集計: ∥ split → NFKC + lowercase + trim を key に
+    const pub = item.value["schema:publisher"];
+    if (pub !== undefined && pub !== null) {
+      const visitPub = (v: unknown): void => {
+        if (typeof v === "string" && v) {
+          const split = splitMadbLiteral(v);
+          if (!split) return;
+          const key = split.normalize("NFKC").toLowerCase().trim();
+          if (!key) return;
+          const form = split.normalize("NFKC").trim();
+          const inner = publisherGroups.get(key);
+          if (inner) inner.set(form, (inner.get(form) || 0) + 1);
+          else publisherGroups.set(key, new Map([[form, 1]]));
+        } else if (Array.isArray(v)) {
+          for (const x of v) visitPub(x);
+        }
+      };
+      visitPub(pub);
+    }
+
     if (recordsScanned % 100000 === 0) {
       console.log(`  [agg-pass] ${recordsScanned} records scanned`);
     }
   }
 
-  // canonical form 選択: 最頻出 (= count desc)、 同点なら code-point 順 (= deterministic)
-  const canonical = new Map<string, string>();
-  let groupsWithVariation = 0;
-  for (const [lower, formMap] of groups) {
-    if (formMap.size === 1) continue; // 単一 form は normalize 不要
-    groupsWithVariation++;
-    let bestForm = "";
-    let bestCount = -1;
-    for (const [form, count] of formMap) {
-      if (
-        count > bestCount ||
-        (count === bestCount && form < bestForm)
-      ) {
-        bestForm = form;
-        bestCount = count;
-      }
-    }
-    canonical.set(lower, bestForm);
-    // 全 form (= bestForm 含む) に同 canonical をマップ。 lookup 時の lowercase で
-    // 引けば常に canonical を返す。
-  }
+  const brandResult = pickCanonicalFromGroups(brandGroups);
+  const publisherResult = pickCanonicalFromGroups(publisherGroups);
 
   return {
-    canonical,
-    totalGroups: groups.size,
-    groupsWithVariation,
+    brandCanonical: brandResult.canonical,
+    brandTotalGroups: brandGroups.size,
+    brandGroupsWithVariation: brandResult.groupsWithVariation,
+    publisherCanonical: publisherResult.canonical,
+    publisherTotalGroups: publisherGroups.size,
+    publisherGroupsWithVariation: publisherResult.groupsWithVariation,
   };
 }
 
@@ -244,6 +340,7 @@ type NormalizeStats = {
   schemaNameRebuilt: number;
   schemaNameUnchanged: number;
   brandNormalized: number;
+  publisherNormalized: number;
 };
 
 async function main() {
@@ -256,13 +353,15 @@ async function main() {
 
   console.log(`[clean-madb-seed] in=${args.inPath} out=${args.outPath}`);
 
-  // === Pass 1: imprint 集計 ===
-  console.log(`\n[pass 1/2] aggregating imprint case variations...`);
+  // === Pass 1: brand + publisher 集計 ===
+  console.log(`\n[pass 1/2] aggregating brand + publisher case variations...`);
   const t0 = Date.now();
-  const aggResult = await aggregateImprints(args.inPath);
+  const aggResult = await aggregateBrandsAndPublishers(args.inPath);
   const elapsed1 = ((Date.now() - t0) / 1000).toFixed(1);
   console.log(
-    `  done in ${elapsed1}s: ${aggResult.totalGroups} unique imprint groups, ${aggResult.groupsWithVariation} with case variation, ${aggResult.canonical.size} canonical entries`,
+    `  done in ${elapsed1}s:\n` +
+      `    brand     ${aggResult.brandTotalGroups} unique groups, ${aggResult.brandGroupsWithVariation} with case var, ${aggResult.brandCanonical.size} canonical\n` +
+      `    publisher ${aggResult.publisherTotalGroups} unique groups (after ∥ split), ${aggResult.publisherGroupsWithVariation} with case var, ${aggResult.publisherCanonical.size} canonical`,
   );
 
   const stats: NormalizeStats = {
@@ -272,6 +371,7 @@ async function main() {
     schemaNameRebuilt: 0,
     schemaNameUnchanged: 0,
     brandNormalized: 0,
+    publisherNormalized: 0,
   };
 
   // === Pass 2: 出力 ===
@@ -295,7 +395,12 @@ async function main() {
     value: MadbJsonLdRecord;
   }>) {
     stats.totalRead++;
-    const cleaned = normalizeRecord(item.value, stats, aggResult.canonical);
+    const cleaned = normalizeRecord(
+      item.value,
+      stats,
+      aggResult.brandCanonical,
+      aggResult.publisherCanonical,
+    );
     if (stats.totalWritten > 0) writeChunk(",");
     writeChunk(JSON.stringify(cleaned));
     stats.totalWritten++;
@@ -314,8 +419,11 @@ async function main() {
   console.log(`  schema:name rebuilt    : ${stats.schemaNameRebuilt}`);
   console.log(`  schema:name unchanged  : ${stats.schemaNameUnchanged}`);
   console.log(`  brand normalized       : ${stats.brandNormalized}`);
-  console.log(`  imprint groups         : ${aggResult.totalGroups}`);
-  console.log(`  imprint w/ case var    : ${aggResult.groupsWithVariation}`);
+  console.log(`  publisher normalized   : ${stats.publisherNormalized}`);
+  console.log(`  brand groups           : ${aggResult.brandTotalGroups}`);
+  console.log(`  brand w/ case var      : ${aggResult.brandGroupsWithVariation}`);
+  console.log(`  publisher groups       : ${aggResult.publisherTotalGroups}`);
+  console.log(`  publisher w/ case var  : ${aggResult.publisherGroupsWithVariation}`);
   console.log(`  output                 : ${args.outPath}`);
 
   if (stats.totalRead !== stats.totalWritten) {
