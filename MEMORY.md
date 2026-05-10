@@ -2,7 +2,7 @@
 
 > このファイルは Claude Code session の context bootstrap 用。新しいセッションを開始したら最初に読むこと。
 
-最終更新: 2026-05-08 (夜)
+最終更新: 2026-05-10 (種3 fill 進捗 + 月次蒸留 protocol 登録)
 
 ## プロジェクト概要
 
@@ -820,3 +820,95 @@ c734395  fix(fetch): sanitize cached filenames so upload-artifact accepts them
    エクスポート 等)
 4. 「未解決の課題」 セクション #1 (= 重版 ISBN 集約) や #4 (= 既存 13 yaml の
    MADB 再生成) は引き続き別プランで持ち越し
+
+---
+
+# 2026-05-10: 種3 (series-supplement.yml) AI 直筆 fill 進捗 + 月次蒸留 protocol
+
+## 種の整理 (= 用語確定)
+
+- **種1 (seed1)**: MADB raw 源 (= cm101.csv / metadata101.json) + `data/seed/mangaka.csv` (= 6,751 mangaka master)
+- **種2 (seed2)**: 派生 SQLite DB (= `.cache/db.sqlite`、 series=70,202 / editions=71,480 / volumes=222,315 / mangaka=6,751)
+- **種3 (seed3)**: `data/seeds/series-supplement.yml` (= 70,202 entries、 schema_version 1、 generator `claude-opus-4-7-direct-fill`)
+
+種3 は **AI (= Opus 4.7) 直筆 fill** で per-series に以下を埋める supplement layer:
+- `magazine` (= 連載誌 string、 magazines.yml に master 不在の値も自由記述)
+- `demographic` (= shounen / shoujo / seinen / josei / kodomo / other)
+- `genres` (= 25 master keys から複数選択)
+- `synopsis` (= 1-3 文の要約)
+- `status` (= ongoing / completed / hiatus)
+- `anime_adapted` (= bool)
+
+batch JSON 形式: `{"qid|baseTitle": {magazine, demographic, genres, synopsis, status, anime_adapted}}`、
+`scripts/_apply-fills.ts` で apply、 各 batch 後 `applied=N missing=0` 確認。
+
+## fill 進捗 (= 累計 12,202 / 70,202 = 17.4%、 残り 58,000 件)
+
+| Session | batch range | rank range | 件数 | commit prefix |
+|---|---|---|---|---|
+| 5 | 71-90 | top-9000.json | 2,000 | (本会話以前) |
+| 6 | 91-103 | 9001-10202 | 1,202 | `data(seed3): batch NNN/123` |
+| 7 | 104-123 | 10203-12202 | 2,000 | `data(seed3): batch NNN/123` |
+
+**選定 ranking algorithm** (= `scripts/_select-*.ts`):
+- filter: `adult_score < 3 && !author_adult_credit && author_name && std_unique_vols >= 1`
+- sort: `std_unique_vols DESC, year_started DESC, id ASC`
+
+session 7 の最終件: **ビューティフルピープル・パーフェクトワールド** (vol=2)。
+次 session で続行する場合は rank 12203 から (= `scripts/_select-10203-20202.ts` の 2001 行目以降が未消化、 同パターンの新 select script を別 range で書く)。
+
+## 月次蒸留 protocol (= 2026-05-10 登録、 commit `4402d3a`)
+
+ユーザが **「月次蒸留して」** (= 完全一致トリガー) と発話したら、 私 (= Claude) が以下を厳密に実行する。 永続化先: `CLAUDE.md` (= 毎 session 自動読み込み、 `/clear` 後も保持)。
+
+### 大原則 (= 絶対遵守)
+**種1 / 種2 / 種3 は壊さない**。 差分追加 = **純粋追加 only**、 既存への上書き / 削除 / 編集は禁止。
+検出時は即 abort + ユーザ通知。
+
+### Phase 0: 前提確認 (= 1 つでも欠ければ即 abort + ユーザ通知)
+- `.cache/madb-last-release.txt` (= 前回取込 MADB release tag)
+- `.cache/db.sqlite` (= 種2)
+- `data/seeds/series-supplement.yml` (= 種3)
+- `data/seed/mangaka.csv` (= 種1)
+- `scripts/_diff-madb.ts` / `_diff-series.ts` / `_select-supplement-diff.ts` (= 未実装)
+- `git status` clean
+
+### Phase 1: 差分 report → Go サイン待ち
+種1/2/3 の差分件数 + AI fill 予想 batch 数 + 削除予測 0 を表示、 ユーザ Go サイン受領まで Phase 2 に進まない。
+
+### Phase 2: Go サイン後の実行
+種1 取込 → 種2 incremental fetch → 種3 diff 元生成 → AI fill batch loop (= 100 entry/batch、 JST 報告、 commit + push) → 最終 summary。
+
+### 5 層保護策
+1. 取込前 `.cache/db.sqlite` を `.cache/db.sqlite.bak-YYYYMMDD-HHMMSS` に backup
+2. 種1/2/3 各取込は単独 commit で分離 (= revert 容易)
+3. 各 batch 後 `applied=N, missing=0, overwrites=0` 強制 log
+4. tsc / vitest が以前緑なのに赤転落で abort
+5. 想定外 delete / overwrite 検出で abort
+
+### 本番 DB 生成は対象外
+yaml export / promote pipeline は **月次蒸留の範囲外**。 改善余地が残っているので、 時期が来たらユーザから別途相談 → 設計確定 → CLAUDE.md に追記、 の流れで対応。
+
+## 月次蒸留が動くために必要な未実装 (= 次セッション以降の宿題)
+
+- `scripts/_diff-madb.ts` (= 種1 差分抽出、 前回 release との比較)
+- `scripts/_diff-series.ts` (= 種2 差分抽出)
+- `scripts/_select-supplement-diff.ts` (= 種3 fill 候補生成 = series-supplement.yml に未存在の key のみ抽出)
+- `.cache/madb-last-release.txt` 初期化 (= 現在取込済 tag を記録)
+
+これらが揃うまでは 「月次蒸留して」 を投げると Phase 0 で「対象が無い」 と abort される (= 安全側に倒れる、 想定通り)。
+
+## 関連 commit
+
+```
+4402d3a  chore: register 月次蒸留 protocol in CLAUDE.md
+153202e  data(seed3): batch 123/123 (= rank 12103-12202) FINAL 2000/2000
+18097d8  data(seed3): batch 122/123 ... (以下 session 7 の 20 batch)
+... (session 6 の 13 batch、 session 5 の 20 batch も同様)
+```
+
+## 次セッションでの推奨アクション (= 上書き)
+
+1. ユーザの方針確認: 「種3 fill 続行」 vs 「月次蒸留 script 群を実装」 vs 「本番 DB 生成の改善議論」
+2. 種3 fill 続行なら rank 12203 から新 select script + 件数指定をユーザから受領
+3. 月次蒸留 script 実装は `scripts/_diff-*.ts` 3 本 + `.cache/madb-last-release.txt` 初期化、 別プランとして設計提示
