@@ -1,5 +1,5 @@
 schema_version: 1
-generated_at: 2026-05-10T22:38:39.955Z
+generated_at: 2026-05-10T22:41:03.104Z
 generator: claude-opus-4-7-direct-fill
 series:
   - key: Q1001784|GOLDEN SPIRAL
@@ -11216,7 +11216,23 @@ series:
     status: completed
     anime_adapted: false
   - key: Q108110240|マジキュー4コマ 月姫
+    magazine: null
+    demographic: seinen
+    genres:
+      - 4-koma
+      - fantasy
+    synopsis: TYPE-MOON「月姫」 のマジキュー4コマ版。 多彩な作家による月姫4コマ作品集。
+    status: completed
+    anime_adapted: true
   - key: Q108110254|カペラの眩光
+    magazine: null
+    demographic: shoujo
+    genres:
+      - fantasy
+      - drama
+    synopsis: カペラの眩光を描く、 少女向けファンタジードラマ作品。
+    status: completed
+    anime_adapted: false
   - key: Q108110254|モディリアーニにお願い
     demographic: shoujo
     genres:
@@ -11225,8 +11241,32 @@ series:
     synopsis: 相澤いくえによる少女漫画。芸術と青春をテーマにした物語。
     status: completed
   - key: Q108110254|君と銀木犀に
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - school
+    synopsis: 君と銀木犀の下で過ごす、 切ない少女ラブストーリー作品。
+    status: completed
+    anime_adapted: false
   - key: Q108110254|恐竜とカッパのいる図書室
+    magazine: null
+    demographic: shoujo
+    genres:
+      - fantasy
+      - school
+    synopsis: 恐竜とカッパのいる不思議な図書室を描く、 学園ファンタジー少女作品。
+    status: completed
+    anime_adapted: false
   - key: Q108110254|珈琲と猫の隠れ家
+    magazine: null
+    demographic: shoujo
+    genres:
+      - slice-of-life
+      - gourmet
+    synopsis: 珈琲と猫の隠れ家を描く、 少女向け癒し系カフェドラマ作品。
+    status: completed
+    anime_adapted: false
   - key: Q108110312|アイテルシー
     demographic: shoujo
     genres:
@@ -11262,7 +11302,23 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q108110337|AM8:02、はつこい
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - school
+    synopsis: AM8:02 のはつこいを描く、 学園少女ラブストーリー作品。
+    status: completed
+    anime_adapted: false
   - key: Q108110337|pure love seasons
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - school
+    synopsis: 純愛の四季を描く、 少女向けラブストーリーオムニバス作品。
+    status: completed
+    anime_adapted: false
   - key: Q108110337|Pure Love Seasons2
     magazine: null
     demographic: shoujo
@@ -11273,10 +11329,50 @@ series:
     status: completed
     anime_adapted: false
   - key: Q108110337|スイートボーイにご用心
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - school
+    synopsis: スイートボーイにご用心と警告する、 学園少女ラブコメディ作品。
+    status: completed
+    anime_adapted: false
   - key: Q108110337|先生だってお年ごろ
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - school
+    synopsis: 先生だってお年ごろの恋を描く、 学園少女ラブストーリー作品。
+    status: completed
+    anime_adapted: false
   - key: Q108110337|初恋楽園
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - school
+    synopsis: 初恋楽園を描く、 ピュア少女ラブストーリー作品。
+    status: completed
+    anime_adapted: false
   - key: Q108110337|好きになってもいいですか
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - school
+    synopsis: 「好きになってもいいですか」 と問う少女ラブストーリー作品。
+    status: completed
+    anime_adapted: false
   - key: Q108110337|恋々ざかり
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - drama
+    synopsis: 恋々ざかりを描く、 少女向けロマンス作品。
+    status: completed
+    anime_adapted: false
   - key: Q108110337|明日の3600秒
     demographic: shoujo
     genres:
@@ -11285,7 +11381,23 @@ series:
     synopsis: 紺野りさによる少女ラブストーリー。明日の3600秒(1時間)を描く青春恋愛物語。
     status: completed
   - key: Q108110337|無敵カレシ
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - school
+    synopsis: 無敵カレシを描く、 学園少女ラブコメディ作品。
+    status: completed
+    anime_adapted: false
   - key: Q108110337|片恋ドロップス
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - school
+    synopsis: 片恋ドロップスを描く、 切ない少女ラブストーリー作品。
+    status: completed
+    anime_adapted: false
   - key: Q108110337|胸が鳴るのは君のせい
     magazine: ribon
     demographic: shoujo
@@ -11295,6 +11407,14 @@ series:
     synopsis: 紺野りさが描く、胸が鳴る恋を綴る少女ラブストーリー。実写映画化。
     status: completed
   - key: Q108110337|蜜愛セレブ
+    magazine: null
+    demographic: josei
+    genres:
+      - romance
+      - drama
+    synopsis: 蜜愛するセレブを描く、 大人の女性向けロマンス作品。
+    status: completed
+    anime_adapted: false
   - key: Q108110341|ジガ-ZIGA-
     magazine: null
     demographic: seinen
@@ -11305,7 +11425,23 @@ series:
     status: completed
     anime_adapted: false
   - key: Q108110341|すごいスマホ
+    magazine: weekly-shonen-jump
+    demographic: shounen
+    genres:
+      - sci-fi
+      - school
+    synopsis: 週刊少年ジャンプ短期連載。 全知のスマホを手にした若者の SF 学園作品。
+    status: completed
+    anime_adapted: false
   - key: Q108110341|怪獣8号side B
+    magazine: null
+    demographic: shounen
+    genres:
+      - action
+      - fantasy
+    synopsis: 松本直也「怪獣8号」 のスピンオフ side B。 防衛隊たちの番外サイドストーリー作品。
+    status: ongoing
+    anime_adapted: true
   - key: Q108110361|レディ・ジャスティス
     magazine: null
     demographic: seinen
@@ -11323,8 +11459,32 @@ series:
     synopsis: オッサンになってから冒険者を始めた主人公が、最強パーティに鍛え抜かれて無敵になる王道ファンタジー。
     status: completed
   - key: Q108110417|快傑蜃氣樓
+    magazine: null
+    demographic: seinen
+    genres:
+      - historical
+      - action
+    synopsis: 快傑蜃氣樓を描く、 江戸時代劇アクション作品。
+    status: completed
+    anime_adapted: false
   - key: Q108110417|薔薇と拳銃
+    magazine: null
+    demographic: seinen
+    genres:
+      - action
+      - drama
+    synopsis: 薔薇と拳銃を描く、 ハードボイルドアクションドラマ作品。
+    status: completed
+    anime_adapted: false
   - key: Q108110417|錆びた拳銃
+    magazine: null
+    demographic: seinen
+    genres:
+      - action
+      - drama
+    synopsis: 錆びた拳銃を描く、 ハードボイルドアクションドラマ作品。
+    status: completed
+    anime_adapted: false
   - key: Q108110443|蒼天の拳リジェネシス
     magazine: null
     demographic: seinen
@@ -11335,6 +11495,14 @@ series:
     status: completed
     anime_adapted: true
   - key: Q108110456|モミジの棋節
+    magazine: null
+    demographic: shounen
+    genres:
+      - sports
+      - drama
+    synopsis: モミジの棋節を描く、 将棋系学園スポ根ドラマ作品。
+    status: completed
+    anime_adapted: false
   - key: Q108110456|紅葉の棋節
     magazine: null
     demographic: shounen
@@ -11382,8 +11550,32 @@ series:
     status: completed
     anime_adapted: false
   - key: Q108110556|まんが良寛ものがたり
+    magazine: null
+    demographic: kodomo
+    genres:
+      - historical
+      - drama
+    synopsis: 良寛和尚の物語をマンガ化。 子供向け学習歴史伝記作品。
+    status: completed
+    anime_adapted: false
   - key: Q108110556|まんが良寛を慕う貞心尼ものがたり
+    magazine: null
+    demographic: kodomo
+    genres:
+      - historical
+      - drama
+    synopsis: 良寛を慕う貞心尼の物語をマンガ化。 子供向け歴史伝記作品。
+    status: completed
+    anime_adapted: false
   - key: Q108110556|まんが蓮の露
+    magazine: null
+    demographic: kodomo
+    genres:
+      - historical
+      - drama
+    synopsis: 良寛と貞心尼の歌集「蓮の露」 をマンガ化。 子供向け学習歴史作品。
+    status: completed
+    anime_adapted: false
   - key: Q108124237|SAKURA TABOO
     demographic: shoujo
     genres:
@@ -11411,13 +11603,77 @@ series:
     status: completed
     anime_adapted: true
   - key: Q108415280|ナースのお仕事
+    magazine: null
+    demographic: josei
+    genres:
+      - drama
+      - comedy
+    synopsis: ドラマ「ナースのお仕事」 のコミック化。 ナース観月ありさのドタバタお仕事コメディ作品。
+    status: completed
+    anime_adapted: true
   - key: Q108415280|ばく盛!本当にあった〔○生〕ここだけの話祭
+    magazine: null
+    demographic: seinen
+    genres:
+      - essay
+      - comedy
+    synopsis: 本当にあった話を爆盛で描く、 シュール系コミックエッセイ作品。
+    status: completed
+    anime_adapted: false
   - key: Q108415280|ぶっちゃけナース
+    magazine: null
+    demographic: josei
+    genres:
+      - essay
+      - drama
+    synopsis: ぶっちゃけナースの本音を描く、 医療系コミックエッセイ作品。
+    status: completed
+    anime_adapted: false
   - key: Q108415280|卒業
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+      - school
+    synopsis: 卒業を描く、 切ない少女学園ドラマ作品。
+    status: completed
+    anime_adapted: false
   - key: Q108415280|天使のたまご
+    magazine: null
+    demographic: josei
+    genres:
+      - drama
+      - essay
+    synopsis: 天使のたまご(赤ちゃん) を描く、 大人の女性向け育児コミックエッセイ作品。
+    status: completed
+    anime_adapted: false
   - key: Q108415280|天使のたまごin東京
+    magazine: null
+    demographic: josei
+    genres:
+      - drama
+      - essay
+    synopsis: 東京で育てる天使のたまごを描く、 大人の女性向け育児作品。
+    status: completed
+    anime_adapted: false
   - key: Q108415280|白衣の男子
+    magazine: null
+    demographic: josei
+    genres:
+      - romance
+      - drama
+    synopsis: 白衣の男子(医師) を描く、 大人の女性向け医療ロマンス作品。
+    status: completed
+    anime_adapted: false
   - key: Q108415280|超盛!本当にあった〔○生〕まるごと県民性SP
+    magazine: null
+    demographic: seinen
+    genres:
+      - essay
+      - comedy
+    synopsis: 県民性をテーマにした、 ご当地系コミックエッセイ作品。
+    status: completed
+    anime_adapted: false
   - key: Q10843732|アイドルクロニクル
     magazine: null
     demographic: shoujo
@@ -11438,6 +11694,14 @@ series:
     status: completed
     anime_adapted: true
   - key: Q10843732|艦隊これくしょん-艦これ-コミックアラカルト 舞鶴鎮守府編
+    magazine: null
+    demographic: seinen
+    genres:
+      - action
+      - comedy
+    synopsis: 「艦隊これくしょん」 公式アンソロジー舞鶴鎮守府編。 艦娘たちのコミック作品集。
+    status: completed
+    anime_adapted: true
   - key: Q10846957|Kiss×sis
     magazine: monthly-young-magazine
     demographic: seinen
@@ -11468,7 +11732,23 @@ series:
     status: completed
     anime_adapted: true
   - key: Q10846957|よつのは
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+      - school
+    synopsis: 四つ葉のクローバー「よつのは」 を描く、 学園少女ドラマ作品。
+    status: completed
+    anime_adapted: false
   - key: Q10846957|好きだけど好きだから
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - school
+    synopsis: 「好きだけど好きだから」 と告げる少女ラブストーリー作品。
+    status: completed
+    anime_adapted: false
   - key: Q10846957|小学生がママでもいいですか?
     demographic: seinen
     genres:
@@ -11477,6 +11757,14 @@ series:
     synopsis: ぢたま(某)による異色コメディ。小学生がママでもいいですかと問う物語。
     status: completed
   - key: Q10846957|父ちゃんはいつも仕事場
+    magazine: null
+    demographic: seinen
+    genres:
+      - essay
+      - drama
+    synopsis: 父ちゃんがいつも仕事場にいる、 漫画家業界系コミックエッセイ作品。
+    status: completed
+    anime_adapted: false
   - key: Q108525345|うらみちお兄さん
     magazine: null
     demographic: seinen
@@ -11501,11 +11789,59 @@ series:
     synopsis: 久世岳による青年漫画。睨めっこをモチーフにした物語。
     status: ongoing
   - key: Q108532625|ショパン 哀愁のデュエット
+    magazine: null
+    demographic: shoujo
+    genres:
+      - historical
+      - music
+    synopsis: ショパンの哀愁のデュエットを描く、 少女向け音楽歴史ドラマ作品。
+    status: completed
+    anime_adapted: false
   - key: Q108532625|山野美容の挑戦
+    magazine: null
+    demographic: josei
+    genres:
+      - drama
+      - essay
+    synopsis: 山野美容の挑戦を描く、 美容業界系大人女性向けドラマ作品。
+    status: completed
+    anime_adapted: false
   - key: Q108532625|決定版!怪盗こうもり男爵
+    magazine: null
+    demographic: shounen
+    genres:
+      - adventure
+      - mystery
+    synopsis: 怪盗こうもり男爵を描く、 少年向けミステリーアドベンチャー作品。
+    status: completed
+    anime_adapted: false
   - key: Q108532625|魔術のプリンセス引田天功
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+      - essay
+    synopsis: マジシャン引田天功(プリンセス) を描く、 少女向け芸能ドラマ作品。
+    status: completed
+    anime_adapted: false
   - key: Q108532639|マイ・ブロークン・マリコ
+    magazine: null
+    demographic: josei
+    genres:
+      - drama
+      - romance
+    synopsis: 平庫ワカによる話題作。 親友マリコの遺骨を抱えて旅する女性のヒューマンドラマ作品。
+    status: completed
+    anime_adapted: true
   - key: Q108532639|天雷様と人間のへそ
+    magazine: null
+    demographic: seinen
+    genres:
+      - yokai
+      - comedy
+    synopsis: 天雷様と人間のへそを描く、 異色の和風ファンタジーコメディ作品。
+    status: completed
+    anime_adapted: false
   - key: Q10855273|ゴーダ君
     demographic: seinen
     genres:
@@ -11517,10 +11853,50 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q10855273|ゴーダ哲学堂
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+      - essay
+    synopsis: 業田良家「ゴーダ哲学堂」。 哲学的な4コマギャグ作品。
+    status: completed
+    anime_adapted: false
   - key: Q10855273|ゴーダ哲学堂悲劇排除システム
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+      - essay
+    synopsis: ゴーダ哲学堂の悲劇排除システム編。 哲学的シニカル4コマ作品。
+    status: completed
+    anime_adapted: false
   - key: Q10855273|ゴーダ哲学堂空気人形
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - fantasy
+    synopsis: 業田良家「空気人形」。 是枝裕和監督映画原作の幻想的ヒューマンドラマ作品。
+    status: completed
+    anime_adapted: true
   - key: Q10855273|シアターアッパレ
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+      - drama
+    synopsis: シアターアッパレを描く、 演劇系コメディ作品。
+    status: completed
+    anime_adapted: false
   - key: Q10855273|シアターアッパレ 完結編
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+      - drama
+    synopsis: 「シアターアッパレ」 の完結編。 演劇系コメディ作品。
+    status: completed
+    anime_adapted: false
   - key: Q10855273|それ行け!天安悶
     magazine: null
     demographic: seinen
@@ -11531,7 +11907,23 @@ series:
     status: completed
     anime_adapted: false
   - key: Q10855273|ど忘れ日本政治
+    magazine: null
+    demographic: seinen
+    genres:
+      - essay
+      - comedy
+    synopsis: ど忘れしがちな日本政治を解説する、 風刺コメディ作品。
+    status: completed
+    anime_adapted: false
   - key: Q10855273|ひどいよ!沼二郎
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+      - drama
+    synopsis: 「ひどいよ!沼二郎」 と称される、 業田良家のシュール系コメディ作品。
+    status: completed
+    anime_adapted: false
   - key: Q10855273|ヨシイエ童話
     demographic: seinen
     genres:
@@ -11540,7 +11932,23 @@ series:
     synopsis: 業田良家が描く、ブラックユーモア満載の童話風オムニバスギャグ。
     status: completed
   - key: Q10855273|ロボット小雪
+    magazine: null
+    demographic: seinen
+    genres:
+      - sci-fi
+      - drama
+    synopsis: ロボット小雪を描く、 業田良家の SF ヒューマンドラマ作品。
+    status: completed
+    anime_adapted: false
   - key: Q10855273|わんわん外交❤物語
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+      - essay
+    synopsis: わんわん外交を描く、 異色の犬系外交コメディ作品。
+    status: completed
+    anime_adapted: false
   - key: Q10855273|世直し源さん
     demographic: seinen
     genres:
@@ -11552,12 +11960,68 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q10855273|俗物くん
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+      - drama
+    synopsis: 俗物くんを描く、 業田良家のシニカルコメディ作品。
+    status: completed
+    anime_adapted: false
   - key: Q10855273|執念の刑事
+    magazine: null
+    demographic: seinen
+    genres:
+      - mystery
+      - drama
+    synopsis: 執念の刑事を描く、 ハードボイルド刑事ドラマ作品。
+    status: completed
+    anime_adapted: false
   - key: Q10855273|太郎と一郎、国盗り合戦!
+    magazine: null
+    demographic: seinen
+    genres:
+      - historical
+      - comedy
+    synopsis: 太郎と一郎の国盗り合戦を描く、 異色の歴史コメディ作品。
+    status: completed
+    anime_adapted: false
   - key: Q10855273|女はつらいよ
+    magazine: null
+    demographic: josei
+    genres:
+      - drama
+      - comedy
+    synopsis: 「女はつらいよ」 を描く、 大人の女性向け人生ドラマコメディ作品。
+    status: completed
+    anime_adapted: false
   - key: Q10855273|年金制度はフィクションでした!
+    magazine: null
+    demographic: seinen
+    genres:
+      - essay
+      - drama
+    synopsis: 年金制度を風刺した、 業田良家の社会派コメディエッセイ作品。
+    status: completed
+    anime_adapted: false
   - key: Q10855273|新ど忘れ日本政治
+    magazine: null
+    demographic: seinen
+    genres:
+      - essay
+      - comedy
+    synopsis: 「ど忘れ日本政治」 の新シリーズ。 政治風刺コメディエッセイ作品。
+    status: completed
+    anime_adapted: false
   - key: Q10855273|新川柳虎の皮
+    magazine: null
+    demographic: seinen
+    genres:
+      - essay
+      - comedy
+    synopsis: 「川柳虎の皮」 の新シリーズ。 川柳系シニカルエッセイ作品。
+    status: completed
+    anime_adapted: false
   - key: Q10855273|機械仕掛けの愛
     magazine: big-comic-original
     demographic: seinen
@@ -11576,13 +12040,77 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q10855273|歌男
+    magazine: null
+    demographic: seinen
+    genres:
+      - music
+      - drama
+    synopsis: 歌男を描く、 業田良家による音楽ドラマ作品。
+    status: completed
+    anime_adapted: false
   - key: Q10855273|歌男と詩人ケン
+    magazine: null
+    demographic: seinen
+    genres:
+      - music
+      - drama
+    synopsis: 歌男と詩人ケンを描く、 業田良家による音楽 × 詩のドラマ作品。
+    status: completed
+    anime_adapted: false
   - key: Q10855273|武士の魂
+    magazine: null
+    demographic: seinen
+    genres:
+      - historical
+      - samurai
+    synopsis: 武士の魂を描く、 業田良家による時代劇ドラマ作品。
+    status: completed
+    anime_adapted: false
   - key: Q10855273|源さん刑事
+    magazine: null
+    demographic: seinen
+    genres:
+      - mystery
+      - drama
+    synopsis: 源さん刑事を描く、 業田良家による刑事ヒューマンドラマ作品。
+    status: completed
+    anime_adapted: false
   - key: Q10855273|独裁君
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+      - essay
+    synopsis: 独裁君を描く、 業田良家の政治風刺コメディ作品。
+    status: completed
+    anime_adapted: false
   - key: Q10855273|猫本
+    magazine: null
+    demographic: seinen
+    genres:
+      - essay
+      - comedy
+    synopsis: 猫を題材にした業田良家の本。 ねこ系コミックエッセイ作品。
+    status: completed
+    anime_adapted: false
   - key: Q10855273|男の操
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - comedy
+    synopsis: 男の操を描く、 業田良家のヒューマンドラマコメディ作品。
+    status: completed
+    anime_adapted: false
   - key: Q10855273|痛さと格差に感動した!
+    magazine: null
+    demographic: seinen
+    genres:
+      - essay
+      - comedy
+    synopsis: 痛さと格差に感動した! と社会風刺する、 業田良家のコメディエッセイ作品。
+    status: completed
+    anime_adapted: false
   - key: Q10855273|百人物語
     demographic: seinen
     genres:
@@ -11594,14 +12122,86 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q10855273|百年川柳
+    magazine: null
+    demographic: seinen
+    genres:
+      - essay
+      - comedy
+    synopsis: 業田良家による百年分の川柳エッセイ作品。
+    status: completed
+    anime_adapted: false
   - key: Q10855273|短篇集ヒミツキチ
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - essay
+    synopsis: 業田良家による短篇集ヒミツキチ。 多彩な作品集。
+    status: completed
+    anime_adapted: false
   - key: Q10855273|祝福屋福助
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+      - drama
+    synopsis: 祝福屋福助を描く、 業田良家による異色のコメディドラマ作品。
+    status: completed
+    anime_adapted: false
   - key: Q10855273|祝福屋福助大入
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+      - drama
+    synopsis: 「祝福屋福助」 の大入編。 業田良家のコメディドラマ作品。
+    status: completed
+    anime_adapted: false
   - key: Q10855273|神様物語
+    magazine: null
+    demographic: seinen
+    genres:
+      - fantasy
+      - drama
+    synopsis: 神様物語を描く、 業田良家のファンタジードラマ作品。
+    status: completed
+    anime_adapted: false
   - key: Q10855273|福沢悪人塾
+    magazine: null
+    demographic: seinen
+    genres:
+      - essay
+      - comedy
+    synopsis: 福沢諭吉をモチーフにした悪人塾を描く、 業田良家の風刺コメディ作品。
+    status: completed
+    anime_adapted: false
   - key: Q10855273|続川柳虎の皮
+    magazine: null
+    demographic: seinen
+    genres:
+      - essay
+      - comedy
+    synopsis: 「川柳虎の皮」 の続編。 川柳系シニカルエッセイ作品。
+    status: completed
+    anime_adapted: false
   - key: Q10855273|自虐の詩
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - comedy
+    synopsis: 業田良家「自虐の詩」。 不幸な日々を生きる女性幸江を描く感動の人生ドラマ作品。
+    status: completed
+    anime_adapted: true
   - key: Q10855273|詩人ケン
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - music
+    synopsis: 詩人ケンを描く、 業田良家による詩 × ヒューマンドラマ作品。
+    status: completed
+    anime_adapted: false
   - key: Q10855533|LOST MAN
     magazine: weekly-shonen-sunday
     demographic: shounen
@@ -11639,6 +12239,14 @@ series:
     status: completed
     anime_adapted: false
   - key: Q10855533|少年サンデー'90セレクション
+    magazine: null
+    demographic: shounen
+    genres:
+      - drama
+      - essay
+    synopsis: 1990年代の少年サンデーセレクション。 当時の名作を集めた少年漫画集。
+    status: completed
+    anime_adapted: false
   - key: Q10855533|第九の波濤
     magazine: weekly-shonen-sunday
     demographic: shounen
@@ -11657,6 +12265,14 @@ series:
     synopsis: 草場道輝が描く、空手少年たちの青春スポーツ漫画。
     status: completed
   - key: Q10855535|COMIC吉宗プレミアム全集
+    magazine: null
+    demographic: seinen
+    genres:
+      - historical
+      - samurai
+    synopsis: COMIC「吉宗」 のプレミアム全集。 江戸時代を舞台にした時代劇作品。
+    status: completed
+    anime_adapted: false
   - key: Q10855535|REIJI
     demographic: seinen
     genres:
@@ -11665,11 +12281,59 @@ series:
     synopsis: 楠本哲によるハードボイルド・アクション。REIJIを描く物語。
     status: completed
   - key: Q10855535|あひる
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - slice-of-life
+    synopsis: あひるを題材にした、 ノスタルジックヒューマンドラマ作品。
+    status: completed
+    anime_adapted: false
   - key: Q10855535|エリカ
+    magazine: null
+    demographic: josei
+    genres:
+      - romance
+      - drama
+    synopsis: エリカを描く、 大人の女性向けロマンスドラマ作品。
+    status: completed
+    anime_adapted: false
   - key: Q10855535|エリカふたたび
+    magazine: null
+    demographic: josei
+    genres:
+      - romance
+      - drama
+    synopsis: 「エリカ」 の続編。 大人の女性向けロマンスドラマ作品。
+    status: completed
+    anime_adapted: false
   - key: Q10855535|ゴラクのグルメ
+    magazine: null
+    demographic: seinen
+    genres:
+      - gourmet
+      - essay
+    synopsis: 「漫画ゴラク」 のグルメ作品。 大人向け食通系コミック作品。
+    status: completed
+    anime_adapted: false
   - key: Q10855535|ズタボロ
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - action
+    synopsis: ズタボロな男たちを描く、 ハードボイルドドラマ作品。
+    status: completed
+    anime_adapted: false
   - key: Q10855535|ストーカー
+    magazine: null
+    demographic: seinen
+    genres:
+      - suspense
+      - horror
+    synopsis: ストーカーを描く、 ダークサスペンスホラー作品。
+    status: completed
+    anime_adapted: false
   - key: Q10855535|ファミリーレンタル
     demographic: seinen
     genres:
@@ -11689,12 +12353,68 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q10855535|マナブ
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - essay
+    synopsis: マナブを描く、 ヒューマンドラマ作品。
+    status: completed
+    anime_adapted: false
   - key: Q10855535|ヤクザの交渉術
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - essay
+    synopsis: ヤクザの交渉術を解説する、 ハウツー × ハードボイルドコミック作品。
+    status: completed
+    anime_adapted: false
   - key: Q10855535|ヤクザ喰い
+    magazine: null
+    demographic: seinen
+    genres:
+      - action
+      - drama
+    synopsis: ヤクザを喰う(打ち倒す) 男を描く、 ハードボイルドアクション作品。
+    status: completed
+    anime_adapted: false
   - key: Q10855535|ヤクザ式交渉術
+    magazine: null
+    demographic: seinen
+    genres:
+      - essay
+      - drama
+    synopsis: ヤクザ式の交渉術を解説する、 ハウツーコミック作品。
+    status: completed
+    anime_adapted: false
   - key: Q10855535|ヤミ金封じ
+    magazine: null
+    demographic: seinen
+    genres:
+      - suspense
+      - drama
+    synopsis: ヤミ金を封じる男を描く、 ハードボイルドサスペンスドラマ作品。
+    status: completed
+    anime_adapted: false
   - key: Q10855535|レイナ
+    magazine: null
+    demographic: josei
+    genres:
+      - drama
+      - romance
+    synopsis: レイナを描く、 大人の女性向けロマンスドラマ作品。
+    status: completed
+    anime_adapted: false
   - key: Q10855535|わが粛清
+    magazine: null
+    demographic: seinen
+    genres:
+      - action
+      - drama
+    synopsis: わが粛清を描く、 ハードボイルドアクションドラマ作品。
+    status: completed
+    anime_adapted: false
   - key: Q10855535|乱歩の美食
     magazine: null
     demographic: seinen
@@ -11705,6 +12425,14 @@ series:
     status: completed
     anime_adapted: false
   - key: Q10855535|乱歩の美食 スペシャル
+    magazine: null
+    demographic: seinen
+    genres:
+      - gourmet
+      - historical
+    synopsis: 「乱歩の美食」 のスペシャル編。 江戸川乱歩の食生活を描くグルメ歴史作品。
+    status: completed
+    anime_adapted: false
   - key: Q10855535|交渉人堂本零時
     demographic: seinen
     genres:
@@ -11713,11 +12441,59 @@ series:
     synopsis: 楠本哲が描く、危険な交渉に挑む交渉人・堂本零時のサスペンス。
     status: completed
   - key: Q10855535|今日からホームレス
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - essay
+    synopsis: 今日からホームレスになる男を描く、 シニカル系コミックエッセイ作品。
+    status: completed
+    anime_adapted: false
   - key: Q10855535|佐藤さん
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - slice-of-life
+    synopsis: 佐藤さんを描く、 ヒューマンドラマ作品。
+    status: completed
+    anime_adapted: false
   - key: Q10855535|最強アウトロー伝説
+    magazine: null
+    demographic: seinen
+    genres:
+      - action
+      - drama
+    synopsis: 最強アウトロー伝説を描く、 ヤクザアクションドラマ作品。
+    status: completed
+    anime_adapted: false
   - key: Q10855535|処刑道
+    magazine: null
+    demographic: seinen
+    genres:
+      - action
+      - drama
+    synopsis: 処刑の道を歩む男を描く、 ハードボイルドアクション作品。
+    status: completed
+    anime_adapted: false
   - key: Q10855535|外道外伝
+    magazine: null
+    demographic: seinen
+    genres:
+      - action
+      - drama
+    synopsis: 外道の外伝を描く、 ハードボイルドアクションドラマ作品。
+    status: completed
+    anime_adapted: false
   - key: Q10855535|対ヤクザ
+    magazine: null
+    demographic: seinen
+    genres:
+      - action
+      - drama
+    synopsis: 対ヤクザを描く、 ハードボイルドアクションドラマ作品。
+    status: completed
+    anime_adapted: false
   - key: Q10855535|恨まれ屋
     demographic: seinen
     genres:
@@ -11726,6 +12502,14 @@ series:
     synopsis: 楠本哲が描く、人々の恨みを引き受ける「恨まれ屋」のサスペンス。
     status: completed
   - key: Q10855535|新宿歌舞伎町駆け込み寺
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - essay
+    synopsis: 新宿歌舞伎町の駆け込み寺を描く、 都会系ヒューマンドラマ作品。
+    status: completed
+    anime_adapted: false
   - key: Q10855535|極楽バタフライ
     demographic: seinen
     genres:
@@ -11734,6 +12518,14 @@ series:
     synopsis: 楠本哲による青年向けスポーツ漫画。極楽バタフライを描く物語。
     status: completed
   - key: Q10855535|極道交渉人その男、常勝無敗につき
+    magazine: null
+    demographic: seinen
+    genres:
+      - action
+      - drama
+    synopsis: 極道交渉人を描く、 ハードボイルドアクションドラマ作品。
+    status: completed
+    anime_adapted: false
   - key: Q10855535|横浜ばっくれ隊
     magazine: weekly-shonen-magazine
     demographic: shounen
@@ -11766,6 +12558,14 @@ series:
     synopsis: 楠本哲が描く、無敵を目指す格闘家の戦いを描く格闘漫画。
     status: completed
   - key: Q10855535|笑撃!ばっくれハイスクール
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+      - school
+    synopsis: 笑撃のばっくれハイスクールを描く、 学園コメディ作品。
+    status: completed
+    anime_adapted: false
   - key: Q10855535|給料日のグルメ
     magazine: null
     demographic: seinen
