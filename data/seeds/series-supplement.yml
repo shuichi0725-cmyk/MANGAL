@@ -1,5 +1,5 @@
 schema_version: 1
-generated_at: 2026-05-11T20:24:04.921Z
+generated_at: 2026-05-11T20:25:46.820Z
 generator: claude-opus-4-7-direct-fill
 series:
   - key: Q1001784|GOLDEN SPIRAL
@@ -342295,6 +342295,13 @@ series:
     synopsis: 福本伸行の『天 天和通りの快男児』に登場した謎の女雀士・マミヤを主人公にしたスピンオフ麻雀漫画。
     status: completed
   - key: Q1195859|食べコミ傑作選 名作マンガのオイシイとこ取り!!マンガに学ぶ『絶対の肉』!!
+    magazine: null
+    demographic: seinen
+    genres:
+      - food
+    synopsis: グルメ漫画傑作選。
+    status: completed
+    anime_adapted: false
   - key: Q119800651|ルリドラゴン
     magazine: shounen-jump
     demographic: shounen
@@ -342316,7 +342323,22 @@ series:
     status: ongoing
     anime_adapted: true
   - key: Q1207120|熱風海陸ブシロードSIDE:SUOU
+    magazine: null
+    demographic: shounen
+    genres:
+      - fantasy
+      - action
+    synopsis: ブシロードSIDE:SUOU。
+    status: completed
+    anime_adapted: false
   - key: Q1207548|Early days
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+    synopsis: ゆうきまさみ初期作品集。
+    status: completed
+    anime_adapted: false
   - key: Q1207548|KUNIE
     demographic: seinen
     genres:
@@ -342325,9 +342347,39 @@ series:
     synopsis: ゆうきまさみによる近未来SF。KUNIEと呼ばれる少女の物語。
     status: completed
   - key: Q1207548|PANTY
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+    synopsis: ゆうきまさみコメディ。
+    status: completed
+    anime_adapted: false
   - key: Q1207548|アッセンブル・インサート
+    magazine: null
+    demographic: seinen
+    genres:
+      - sci_fi
+      - comedy
+    synopsis: ゆうきまさみSFコメディ。
+    status: completed
+    anime_adapted: true
   - key: Q1207548|アトムザ・ビギニング
+    magazine: null
+    demographic: seinen
+    genres:
+      - sci_fi
+    synopsis: アトムザ・ビギニング。
+    status: completed
+    anime_adapted: true
   - key: Q1207548|アニメ・マンガ・戦争
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - historical
+    synopsis: 戦争をテーマにしたアンソロジー。
+    status: completed
+    anime_adapted: false
   - key: Q1207548|じゃじゃ馬グルーミン★UP!
     magazine: weekly-young-sunday
     demographic: seinen
@@ -342350,15 +342402,87 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q1207548|となりの異邦人
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+    synopsis: ゆうきまさみ作品。
+    status: completed
+    anime_adapted: false
   - key: Q1207548|ヒーローズ・カムバック
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+    synopsis: ヒーローズ・カムバックアンソロジー。
+    status: completed
+    anime_adapted: false
   - key: Q1207548|マリアナ伝説
+    magazine: null
+    demographic: seinen
+    genres:
+      - sci_fi
+    synopsis: ゆうきまさみSF。
+    status: completed
+    anime_adapted: false
   - key: Q1207548|マリアナ伝説DEEP
+    magazine: null
+    demographic: seinen
+    genres:
+      - sci_fi
+    synopsis: マリアナ伝説続編。
+    status: completed
+    anime_adapted: false
   - key: Q1207548|ゆうきまさみのはてしない物語
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+    synopsis: ゆうきまさみエッセイ。
+    status: completed
+    anime_adapted: false
   - key: Q1207548|ゆうきまさみのまだまだはてしない物語
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+    synopsis: ゆうきまさみエッセイ。
+    status: completed
+    anime_adapted: false
   - key: Q1207548|ゆうきまさみのもっとはてしない物語
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+    synopsis: ゆうきまさみエッセイ。
+    status: completed
+    anime_adapted: false
   - key: Q1207548|ゆうきまさみ年代記
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+    synopsis: ゆうきまさみ作品集。
+    status: completed
+    anime_adapted: false
   - key: Q1207548|土曜ワイド殺人事件
+    magazine: null
+    demographic: seinen
+    genres:
+      - mystery
+      - comedy
+    synopsis: ゆうきまさみコメディ。
+    status: completed
+    anime_adapted: false
   - key: Q1207548|新・土曜ワイド殺人事件
+    magazine: null
+    demographic: seinen
+    genres:
+      - mystery
+      - comedy
+    synopsis: 土曜ワイド殺人事件続編。
+    status: completed
+    anime_adapted: false
   - key: Q1207548|新九郎、奔る!
     magazine: big-comic-spirits
     demographic: seinen
@@ -342403,6 +342527,15 @@ series:
     status: completed
     anime_adapted: true
   - key: Q1207548|究極超人あーる
+    magazine: null
+    demographic: shounen
+    genres:
+      - sci_fi
+      - comedy
+      - school
+    synopsis: ゆうきまさみ代表作。
+    status: completed
+    anime_adapted: true
   - key: Q1207548|鉄腕バーディー
     magazine: weekly-young-sunday
     demographic: seinen
@@ -342414,6 +342547,14 @@ series:
     status: completed
     anime_adapted: true
   - key: Q1207548|鉄腕バーディーarchive
+    magazine: null
+    demographic: seinen
+    genres:
+      - sci_fi
+      - action
+    synopsis: 鉄腕バーディーアーカイブ。
+    status: completed
+    anime_adapted: false
   - key: Q1207548|鉄腕バーディーevolution
     magazine: weekly-shonen-sunday
     demographic: shounen
@@ -342433,6 +342574,13 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q120757217|懲役マイナス
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+    synopsis: 青年向けドラマ。
+    status: completed
+    anime_adapted: false
   - key: Q120757217|鍔鳴の太刀
     demographic: seinen
     genres:
@@ -342490,8 +342638,31 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q121354870|スイミングらいふ
+    magazine: null
+    demographic: seinen
+    genres:
+      - sports
+      - ecchi
+    synopsis: 水泳をテーマにした成人向け作品。
+    status: completed
+    anime_adapted: false
   - key: Q121354870|わいせつスキンシップ
+    magazine: null
+    demographic: seinen
+    genres:
+      - ecchi
+    synopsis: 成人向けコミック。
+    status: completed
+    anime_adapted: false
   - key: Q121355086|ポケットモンスターX・Yポケモン竜王伝
+    magazine: null
+    demographic: shounen
+    genres:
+      - adventure
+      - fantasy
+    synopsis: ポケモンX・Y関連作品。
+    status: completed
+    anime_adapted: false
   - key: Q121355086|モンスター烈伝オレカバトル2
     demographic: shounen
     genres:
@@ -342552,6 +342723,13 @@ series:
     status: ongoing
     anime_adapted: true
   - key: Q121355303|ライザのアトリエ~常闇の女王と秘密の隠れ家~
+    magazine: null
+    demographic: shounen
+    genres:
+      - fantasy
+    synopsis: ライザのアトリエコミカライズ。
+    status: completed
+    anime_adapted: false
   - key: Q121355303|二周目チートの転生魔導士
     demographic: shounen
     genres:
@@ -342587,6 +342765,13 @@ series:
     synopsis: とあるアラ子による女性向けドラマ。ルッキズムをテーマに繊細に描いた話題作。
     status: completed
   - key: Q121832611|わたしはあの子と絶対ちがうの
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+    synopsis: 少女向け短編。
+    status: completed
+    anime_adapted: false
   - key: Q121832611|美人が婚活してみたら
     demographic: josei
     genres:
@@ -342597,13 +342782,73 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q122147131|40歳になったことだし
+    magazine: null
+    demographic: josei
+    genres:
+      - slice_of_life
+      - comedy
+    synopsis: 40代エッセイ。
+    status: completed
+    anime_adapted: false
   - key: Q122147131|あしたの、のぞみ
+    magazine: null
+    demographic: josei
+    genres:
+      - drama
+    synopsis: 女性向け短編。
+    status: completed
+    anime_adapted: false
   - key: Q122147131|あせるのはやめました。
+    magazine: null
+    demographic: josei
+    genres:
+      - slice_of_life
+    synopsis: 女性向けエッセイ。
+    status: completed
+    anime_adapted: false
   - key: Q122147131|えみこ、開運中!
+    magazine: null
+    demographic: josei
+    genres:
+      - comedy
+      - slice_of_life
+    synopsis: 女性向けエッセイ。
+    status: completed
+    anime_adapted: false
   - key: Q122147131|ほどほど女子のおていれ日記
+    magazine: null
+    demographic: josei
+    genres:
+      - slice_of_life
+    synopsis: 女性向けエッセイ。
+    status: completed
+    anime_adapted: false
   - key: Q122147131|まんが子どものいない私たちの生き方
+    magazine: null
+    demographic: josei
+    genres:
+      - drama
+      - slice_of_life
+    synopsis: 女性向けエッセイ。
+    status: completed
+    anime_adapted: false
   - key: Q122147131|まんぷく名古屋
+    magazine: null
+    demographic: josei
+    genres:
+      - food
+    synopsis: 名古屋グルメエッセイ。
+    status: completed
+    anime_adapted: false
   - key: Q122147131|今日も朝からたまご焼き
+    magazine: null
+    demographic: josei
+    genres:
+      - food
+      - slice_of_life
+    synopsis: 家庭料理エッセイ。
+    status: completed
+    anime_adapted: false
   - key: Q122147131|女どうしだもの
     demographic: josei
     genres:
@@ -342614,6 +342859,13 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q122147131|本日も独りでできるもん
+    magazine: null
+    demographic: josei
+    genres:
+      - slice_of_life
+    synopsis: 一人暮らしエッセイ。
+    status: completed
+    anime_adapted: false
   - key: Q122147131|独りでできるもん
     demographic: josei
     genres:
@@ -342624,9 +342876,38 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q1229355|HHHトリプルエッチ
+    magazine: null
+    demographic: seinen
+    genres:
+      - ecchi
+      - comedy
+    synopsis: 成人向けコメディ。
+    status: completed
+    anime_adapted: false
   - key: Q1229355|My sister
+    magazine: null
+    demographic: seinen
+    genres:
+      - ecchi
+    synopsis: 成人向けコミック。
+    status: completed
+    anime_adapted: false
   - key: Q1229355|あねこもりplus
+    magazine: null
+    demographic: seinen
+    genres:
+      - ecchi
+    synopsis: 成人向けコミック。
+    status: completed
+    anime_adapted: false
   - key: Q1229355|じょしラク!
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+    synopsis: 女子コメディ。
+    status: completed
+    anime_adapted: false
   - key: Q1229355|じょしラク!2 Years Later
     demographic: seinen
     genres:
@@ -342635,13 +342916,71 @@ series:
     synopsis: DISTANCEによる『じょしラク!』2年後編。女子落語家たちの2年後を描く愉快な物語。
     status: completed
   - key: Q1229355|トリプルエッチ
+    magazine: null
+    demographic: seinen
+    genres:
+      - ecchi
+      - comedy
+    synopsis: 成人向けコメディ。
+    status: completed
+    anime_adapted: false
   - key: Q1229355|ひなた・ひなたplus
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+    synopsis: 青年向けコメディ。
+    status: completed
+    anime_adapted: false
   - key: Q1229355|元気を出して!!
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+    synopsis: 青年向けコメディ。
+    status: completed
+    anime_adapted: false
   - key: Q1229355|妄筆ハルシネーション
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+    synopsis: 青年向けコメディ。
+    status: completed
+    anime_adapted: false
   - key: Q1229355|美~ちく
+    magazine: null
+    demographic: seinen
+    genres:
+      - ecchi
+    synopsis: 成人向けコミック。
+    status: completed
+    anime_adapted: false
   - key: Q1229355|部長より愛をこめて
+    magazine: null
+    demographic: seinen
+    genres:
+      - ecchi
+      - comedy
+    synopsis: 成人向けOLコメディ。
+    status: completed
+    anime_adapted: false
   - key: Q123021746|知らないこと知りたいの?
+    magazine: null
+    demographic: seinen
+    genres:
+      - ecchi
+    synopsis: 成人向けコミック。
+    status: completed
+    anime_adapted: false
   - key: Q123021746|蕩けるカラダは乙女色
+    magazine: null
+    demographic: seinen
+    genres:
+      - ecchi
+    synopsis: 成人向けコミック。
+    status: completed
+    anime_adapted: false
   - key: Q123142098|アザミの城の魔女
     demographic: seinen
     genres:
@@ -342650,6 +342989,14 @@ series:
     synopsis: たらちねジョンによるファンタジー漫画。アザミの城の魔女を描く物語。
     status: completed
   - key: Q123142098|アルコホール・コミュニケイション
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - slice_of_life
+    synopsis: 酒エッセイ。
+    status: completed
+    anime_adapted: false
   - key: Q123142098|グッドナイト、アイラブユー
     demographic: seinen
     genres:
@@ -342658,6 +343005,13 @@ series:
     synopsis: たらちねジョンによる青年ロマンス。グッドナイト、アイラブユーと囁く物語。
     status: completed
   - key: Q123142098|東雲探偵異聞録
+    magazine: null
+    demographic: seinen
+    genres:
+      - mystery
+    synopsis: 青年向け探偵もの。
+    status: completed
+    anime_adapted: false
   - key: Q123142098|海が走るエンドロール
     magazine: monthly-comic-zenon
     demographic: josei
@@ -342667,6 +343021,14 @@ series:
     synopsis: 夫を亡くした65歳の海野うみ子が、映画美学校で映画製作を学び始める、たらちねジョンの感動の遅咲き青春ドラマ。
     status: completed
   - key: Q123290866|あかつきに漣
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+      - historical
+    synopsis: 少女向け歴史作品。
+    status: completed
+    anime_adapted: false
   - key: Q123290866|お嬢さまから始める結婚生活
     demographic: josei
     genres:
@@ -342759,15 +343121,89 @@ series:
     synopsis: 倉地千尋による少女ラブストーリー。清楚なフリをする少女の物語。
     status: completed
   - key: Q123405559|だらしない夫じゃなくて依存症でした
+    magazine: null
+    demographic: josei
+    genres:
+      - drama
+      - slice_of_life
+    synopsis: 依存症エッセイ。
+    status: completed
+    anime_adapted: false
   - key: Q123405639|ひぐらしのなく頃に
+    magazine: null
+    demographic: seinen
+    genres:
+      - mystery
+      - horror
+    synopsis: ひぐらしのなく頃に関連コミック。
+    status: completed
+    anime_adapted: true
   - key: Q123405649|いたずら彼女の魅惑のスキマ
+    magazine: null
+    demographic: seinen
+    genres:
+      - ecchi
+    synopsis: 成人向けコミック。
+    status: completed
+    anime_adapted: false
   - key: Q123405649|もっとたまらないHな体験教えます
+    magazine: null
+    demographic: josei
+    genres:
+      - ecchi
+      - drama
+    synopsis: 実話系成人向け。
+    status: completed
+    anime_adapted: false
   - key: Q123405649|妄想手淫少女
+    magazine: null
+    demographic: seinen
+    genres:
+      - ecchi
+    synopsis: 成人向けコミック。
+    status: completed
+    anime_adapted: false
   - key: Q123405649|寝取り願望
+    magazine: null
+    demographic: seinen
+    genres:
+      - ecchi
+    synopsis: 成人向けコミック。
+    status: completed
+    anime_adapted: false
   - key: Q123405649|恋ごころ
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+    synopsis: 少女向け恋愛。
+    status: completed
+    anime_adapted: false
   - key: Q123405649|清楚な黒髪美少女と朝から晩までエッチなデート♥
+    magazine: null
+    demographic: seinen
+    genres:
+      - ecchi
+    synopsis: 成人向けコミック。
+    status: completed
+    anime_adapted: false
   - key: Q123405652|15年後に俺たちは
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+    synopsis: 青年向け短編。
+    status: completed
+    anime_adapted: false
   - key: Q123405652|潜入捜査官はセックスもお仕事です。
+    magazine: null
+    demographic: seinen
+    genres:
+      - ecchi
+      - action
+    synopsis: 成人向けコミック。
+    status: completed
+    anime_adapted: false
   - key: Q123405652|美女と賢者と魔人の剣
     demographic: shounen
     genres:
@@ -342823,7 +343259,22 @@ series:
     status: completed
     anime_adapted: false
   - key: Q123406019|梢の森
+    magazine: null
+    demographic: shoujo
+    genres:
+      - fantasy
+      - drama
+    synopsis: 少女向けファンタジー。
+    status: completed
+    anime_adapted: false
   - key: Q123408574|Fellows!
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+    synopsis: Fellows!誌掲載作品。
+    status: completed
+    anime_adapted: false
   - key: Q123408574|On blue
     demographic: josei
     genres:
@@ -342832,6 +343283,13 @@ series:
     synopsis: 紗久楽さわによるBL漫画。On blueな繊細な恋を描く。
     status: completed
   - key: Q123408574|あだうち
+    magazine: null
+    demographic: seinen
+    genres:
+      - historical
+    synopsis: 時代劇青年作品。
+    status: completed
+    anime_adapted: false
   - key: Q123408574|かぶき伊左
     demographic: josei
     genres:
@@ -342840,6 +343298,14 @@ series:
     synopsis: 紗久楽さわによる女性向け歌舞伎漫画。かぶき伊左の物語を描く。
     status: completed
   - key: Q123408574|しゃばけ漫画
+    magazine: null
+    demographic: shoujo
+    genres:
+      - historical
+      - supernatural
+    synopsis: 畠中恵原作コミカライズ。
+    status: completed
+    anime_adapted: false
   - key: Q123408574|まんまこと
     demographic: josei
     genres:
@@ -342850,6 +343316,13 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q123408574|号外 on BLUE
+    magazine: null
+    demographic: shoujo
+    genres:
+      - yaoi
+    synopsis: BLアンソロジー。
+    status: completed
+    anime_adapted: false
   - key: Q123408574|百と卍
     demographic: josei
     genres:
@@ -342859,7 +343332,23 @@ series:
     synopsis: 紗久楽さわによる江戸時代BL漫画。百助と卍次郎の禁断の愛を耽美に描く話題作。
     status: completed
   - key: Q124096848|BraveSword×BlazeSoul電撃コミックアンソロジー
+    magazine: null
+    demographic: seinen
+    genres:
+      - fantasy
+      - action
+    synopsis: BraveSword×BlazeSoulアンソロジー。
+    status: completed
+    anime_adapted: false
   - key: Q124096848|J.C.Lovers
+    magazine: null
+    demographic: seinen
+    genres:
+      - romance
+      - comedy
+    synopsis: 青年向けラブコメ。
+    status: completed
+    anime_adapted: false
   - key: Q124096848|L△L△L
     magazine: null
     demographic: shoujo
@@ -342870,7 +343359,21 @@ series:
     status: completed
     anime_adapted: false
   - key: Q124096848|くあどら!
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+    synopsis: 青年向けコメディ。
+    status: completed
+    anime_adapted: false
   - key: Q124096848|ちこはゲーセン一番星!
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+    synopsis: ゲーセンコメディ。
+    status: completed
+    anime_adapted: false
   - key: Q124096848|ヒトでなしに振り回される童貞。とてもつらい
     magazine: null
     demographic: seinen
@@ -342908,8 +343411,32 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q124096848|真・恋姫・無双 萌将伝 とく村長編
+    magazine: null
+    demographic: seinen
+    genres:
+      - historical
+      - comedy
+    synopsis: 真・恋姫・無双関連作品。
+    status: completed
+    anime_adapted: false
   - key: Q124096848|窓香さんの天然なゆーわく
+    magazine: null
+    demographic: seinen
+    genres:
+      - ecchi
+      - comedy
+    synopsis: 成人向けコメディ。
+    status: completed
+    anime_adapted: false
   - key: Q124096848|翼のはえたえんじぇる♪
+    magazine: null
+    demographic: seinen
+    genres:
+      - fantasy
+      - comedy
+    synopsis: 青年向けファンタジーコメディ。
+    status: completed
+    anime_adapted: false
   - key: Q124096857|異世界らくらくサバイバル
     demographic: shounen
     genres:
@@ -342920,6 +343447,14 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q124096936|ハーレムレーン
+    magazine: null
+    demographic: seinen
+    genres:
+      - ecchi
+      - harem
+    synopsis: 成人向けハーレムコミック。
+    status: completed
+    anime_adapted: false
   - key: Q124096936|はぐれ勇者の鬼畜美学
     demographic: seinen
     genres:
@@ -342958,7 +343493,23 @@ series:
     status: ongoing
     anime_adapted: true
   - key: Q124096967|ひだまりが聴こえる リミット
+    magazine: null
+    demographic: shoujo
+    genres:
+      - yaoi
+      - drama
+    synopsis: ひだまりが聴こえる続編。
+    status: completed
+    anime_adapted: false
   - key: Q124096967|ひだまりが聴こえる-幸福論-
+    magazine: null
+    demographic: shoujo
+    genres:
+      - yaoi
+      - drama
+    synopsis: ひだまりが聴こえる続編。
+    status: completed
+    anime_adapted: false
   - key: Q124096967|ひだまりが聴こえる-春夏秋冬-
     demographic: josei
     genres:
@@ -342967,7 +343518,22 @@ series:
     synopsis: 茜田千による『ひだまりが聴こえる』新編。春夏秋冬を描くBLロマンス。
     status: completed
   - key: Q124096967|ユア・マイ・サン
+    magazine: null
+    demographic: shoujo
+    genres:
+      - yaoi
+    synopsis: BL作品。
+    status: completed
+    anime_adapted: false
   - key: Q124096967|水平線はやがて瞬く
+    magazine: null
+    demographic: shoujo
+    genres:
+      - yaoi
+      - drama
+    synopsis: BL作品。
+    status: completed
+    anime_adapted: false
   - key: Q124097051|アクマでこれは恋じゃない!
     demographic: shoujo
     genres:
@@ -343081,8 +343647,29 @@ series:
     status: completed
     anime_adapted: false
   - key: Q124480179|BLife
+    magazine: null
+    demographic: shoujo
+    genres:
+      - yaoi
+    synopsis: BLアンソロジー。
+    status: completed
+    anime_adapted: false
   - key: Q124480179|ゾロサンRomantic Cruise
+    magazine: null
+    demographic: shoujo
+    genres:
+      - yaoi
+    synopsis: ワンピース同人ゾロサンアンソロジー。
+    status: completed
+    anime_adapted: false
   - key: Q124480179|ゾロサンromantic ocean
+    magazine: null
+    demographic: shoujo
+    genres:
+      - yaoi
+    synopsis: ワンピース同人ゾロサンアンソロジー。
+    status: completed
+    anime_adapted: false
   - key: Q124480179|三連アルチザン
     magazine: null
     demographic: seinen
@@ -343093,13 +343680,71 @@ series:
     status: completed
     anime_adapted: false
   - key: Q124480179|猿屋ハチ
+    magazine: null
+    demographic: shoujo
+    genres:
+      - yaoi
+    synopsis: BL作品。
+    status: completed
+    anime_adapted: false
   - key: Q124480405|お元気❤愛ランド
+    magazine: null
+    demographic: seinen
+    genres:
+      - ecchi
+      - comedy
+    synopsis: 成人向けコメディ。
+    status: completed
+    anime_adapted: false
   - key: Q124480405|くりクリしないで
+    magazine: null
+    demographic: seinen
+    genres:
+      - ecchi
+    synopsis: 成人向けコミック。
+    status: completed
+    anime_adapted: false
   - key: Q124480405|だいたん看護婦さん
+    magazine: null
+    demographic: seinen
+    genres:
+      - ecchi
+    synopsis: 成人向けナースコミック。
+    status: completed
+    anime_adapted: false
   - key: Q124480405|ぬくぬく愛パック
+    magazine: null
+    demographic: seinen
+    genres:
+      - ecchi
+    synopsis: 成人向けコミック。
+    status: completed
+    anime_adapted: false
   - key: Q124480405|ポテポテト
+    magazine: null
+    demographic: seinen
+    genres:
+      - ecchi
+      - comedy
+    synopsis: 成人向けコメディ。
+    status: completed
+    anime_adapted: false
   - key: Q124480405|半熟Fカップ娘
+    magazine: null
+    demographic: seinen
+    genres:
+      - ecchi
+    synopsis: 成人向けコミック。
+    status: completed
+    anime_adapted: false
   - key: Q124480405|半熟奥様・生ミルク
+    magazine: null
+    demographic: seinen
+    genres:
+      - ecchi
+    synopsis: 成人向けコミック。
+    status: completed
+    anime_adapted: false
   - key: Q124481359|13DOGs
     demographic: seinen
     genres:
@@ -343110,8 +343755,29 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q124481359|プロジェクトX 挑戦者たち
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+    synopsis: NHK番組コミカライズ。
+    status: completed
+    anime_adapted: false
   - key: Q124481359|奇跡のヒト
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+    synopsis: 実話系青年作品。
+    status: completed
+    anime_adapted: false
   - key: Q124481359|極道騎手
+    magazine: null
+    demographic: seinen
+    genres:
+      - sports
+    synopsis: 競馬騎手青年作品。
+    status: completed
+    anime_adapted: false
   - key: Q124483426|ギャルソン
     demographic: josei
     genres:
@@ -343156,11 +343822,54 @@ series:
     status: completed
     anime_adapted: false
   - key: Q124483426|異世界編集者
+    magazine: null
+    demographic: shounen
+    genres:
+      - fantasy
+      - comedy
+    synopsis: 異世界編集者コメディ。
+    status: completed
+    anime_adapted: false
   - key: Q124608338|カッラフルなエッッブリデイ
+    magazine: null
+    demographic: shoujo
+    genres:
+      - slice_of_life
+    synopsis: 少女向け日常作品。
+    status: completed
+    anime_adapted: false
   - key: Q124936635|アオハル・ワンスモア
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+    synopsis: 少女向け恋愛。
+    status: completed
+    anime_adapted: false
   - key: Q124936635|カタコイシーソー
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+    synopsis: 少女向け恋愛。
+    status: completed
+    anime_adapted: false
   - key: Q124936635|デリバリーハグセラピー
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+    synopsis: 少女向け恋愛。
+    status: completed
+    anime_adapted: false
   - key: Q124936635|なんかもうあーあって感じ。
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+    synopsis: 少女向け短編。
+    status: completed
+    anime_adapted: false
   - key: Q124936635|君に注ぐ100dB
     demographic: shoujo
     genres:
@@ -343169,9 +343878,39 @@ series:
     synopsis: 宮田トヲルによる少女音楽ロマンス。君に注ぐ100dBの愛を描く。
     status: completed
   - key: Q124936635|彼のいる生活
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+    synopsis: 少女向け恋愛。
+    status: completed
+    anime_adapted: false
   - key: Q125471727|あやかし恋華
+    magazine: null
+    demographic: shoujo
+    genres:
+      - fantasy
+      - romance
+    synopsis: 妖怪をテーマにした少女作品。
+    status: completed
+    anime_adapted: false
   - key: Q125471727|まんがこのミステリーが面白い!タブーの凶悪事件SP
+    magazine: null
+    demographic: josei
+    genres:
+      - mystery
+    synopsis: ミステリーアンソロジー。
+    status: completed
+    anime_adapted: false
   - key: Q125471727|上様のみだらな寵愛アンソロジー
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - historical
+    synopsis: 歴史ロマンスアンソロジー。
+    status: completed
+    anime_adapted: false
   - key: Q125471727|偽り姫と蜜の香
   - key: Q125471727|呼び覚まされた屈辱
   - key: Q125471727|宝石王と淫らな契約
