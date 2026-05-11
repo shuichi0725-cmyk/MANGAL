@@ -2,7 +2,7 @@
 
 > このファイルは Claude Code session の context bootstrap 用。新しいセッションを開始したら最初に読むこと。
 
-最終更新: 2026-05-11 (種3 fill session 17 完了、 累計 32,194/70,202 = 45.86%)
+最終更新: 2026-05-11 (種3 fill session 18 完了、 累計 34,190/70,202 = 48.70%)
 
 ## プロジェクト概要
 
@@ -1351,3 +1351,51 @@ c4dace1  data(seed3): batch 304/323 (= session17) Opus 4.7 直筆 fill
 4. **demographic schema 不変**: `shounen|shoujo|seinen|josei|kodomo|other` のみ。 アダルト系は `seinen + ecchi genre` で表現、 一般教養系は `other + educational genre`。
 5. **per-batch protocol** (= 不変): 100 件 1 バッチ、 `data/seeds/_fills/batch-NNN.json`、 `npx tsx scripts/_apply-fills.ts`、 commit + push、 JST 時刻 + 進捗報告。
 6. **月次蒸留 protocol が動く前提の宿題は変更なし**: `scripts/_diff-*.ts` 3 本 + `.cache/madb-last-release.txt` 初期化 は依然未着手。
+
+---
+
+## 2026-05-11: 種3 fill session 18 完了
+
+### 達成サマリ
+
+- **session 18 batch 324-343 全 20 batch 完了** (= 100 件 × 20 = **2,000 件 fill**)
+- 適用: 1,996 / 2,000 (= **applied=98** in batch 324 + applied=98 in batch 337。 既知 Q11268905 + Q11318682 + 重複キー)
+- 所要時間: 約 1h39m (= JST 16:18 開始 → 17:57 終了)
+- 報告頻度変更: **100 件毎 → 500 件毎** (= block 単位、 ユーザ要求対応)
+- session 17 → 18 推移: 32,194 → **34,190 / 70,202 = 48.70%** (= **48%突破、 もうすぐ半分**)
+- 残 36,012 件 (= 約 18 セッション分)
+
+### Batch 進捗テーブル
+
+| Session | batch range | 範囲 | 適用件数 | missing |
+|---|---|---|---|---|
+| 16 | 284-303 | session15-unfilled + 補充から 2000 件 | 1,998 | 2 |
+| 17 | 304-323 | session16-unfilled 40006 件から 2000 件 | 1,998 | 2 |
+| **18** | 324-343 | session17-unfilled 38008 件から 2000 件 | **1,996** | **4 (= Q11268905 + Q11318682 + 重複キー 2件)** |
+
+**累計**: **34,190 / 70,202 = 48.70%**、 **残 36,012 件** (= 約 18 セッション分)。
+
+### Session 18 の傾向
+
+- 報告頻度を 100→500 件に変更したことで、 ユーザインタラクションが少なく、 効率的に進行。
+- **大型 Q-code クラスター** (= Q11458108 ハーレクイン女性向け約 60 件、 Q11461450 ハーレクイン約 50 件、 Q11462265 ぶんか社実話誌約 35 件、 Q11462344 ぶんか社実話誌約 50 件、 Q11463124 鉄道/コミティアロワイヤル約 20 件)。
+- ハーレクイン系・実話投稿系のアンソロジー枠が多く、 demographic は josei 中心。
+
+### 関連 commit (= 抜粋)
+
+```
+ec62980  data(seed3): batch 343/343 (= session18 完了) Opus 4.7 直筆 fill
+6fe674b  data(seed3): batch 342/343 (= session18) Opus 4.7 直筆 fill
+...
+0a68a22  data(seed3): batch 325/343 (= session18) Opus 4.7 直筆 fill
+bb956eb  data(seed3): batch 324/343 (= session18) Opus 4.7 直筆 fill
+```
+
+## 次セッションでの推奨アクション (= 上書き、 最新)
+
+1. **続行優先**: session 19 として残 36,012 件から 2,000 件 fill (= batch 344-363)。
+2. **next batch 番号 = 344**。
+3. **既知 missing key 2 件** (= Q11268905|ウルフチックにお願い + Q11318682|パニックパラダイス) は引き続き seed3 に物理的に存在しないので、 batch JSON に含めても無害 (= applied=98, missing=2 で正常)。
+4. **demographic schema 不変**: `shounen|shoujo|seinen|josei|kodomo|other` のみ。
+5. **per-batch protocol** (= 不変): 100 件 1 バッチ、 `data/seeds/_fills/batch-NNN.json`、 `npx tsx scripts/_apply-fills.ts`、 commit + push、 JST 時刻 + 進捗報告。
+6. **報告頻度**: 100件毎 or 500件毎、 ユーザの指定に従う。
