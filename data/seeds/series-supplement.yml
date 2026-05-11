@@ -1,5 +1,5 @@
 schema_version: 1
-generated_at: 2026-05-11T12:47:12.043Z
+generated_at: 2026-05-11T12:49:25.416Z
 generator: claude-opus-4-7-direct-fill
 series:
   - key: Q1001784|GOLDEN SPIRAL
@@ -204978,10 +204978,50 @@ series:
     status: completed
     anime_adapted: false
   - key: Q11519028|コミック日本の名城
+    magazine: null
+    demographic: seinen
+    genres:
+      - historical
+      - educational
+    synopsis: 日本の名城を題材にした歴史コミック。
+    status: completed
+    anime_adapted: false
   - key: Q11519028|ハッスルもん太
+    magazine: null
+    demographic: shounen
+    genres:
+      - sports
+      - comedy
+    synopsis: ハッスルもん太を主人公にしたスポーツコメディ。
+    status: completed
+    anime_adapted: false
   - key: Q11519028|マルボウ!
+    magazine: null
+    demographic: seinen
+    genres:
+      - action
+      - drama
+    synopsis: マルボウを題材にした青年向けドラマ。
+    status: completed
+    anime_adapted: false
   - key: Q11519028|まんが知ってはいけない消えた有名人の謎
+    magazine: null
+    demographic: seinen
+    genres:
+      - mystery
+      - drama
+    synopsis: 消えた有名人を題材にしたミステリー。
+    status: completed
+    anime_adapted: false
   - key: Q11519028|ラズウェル細木の美食パラダイス
+    magazine: null
+    demographic: seinen
+    genres:
+      - food
+      - slice of life
+    synopsis: ラズウェル細木による美食コミック。
+    status: completed
+    anime_adapted: false
   - key: Q11519028|冒険王
     demographic: shounen
     genres:
@@ -204990,6 +205030,14 @@ series:
     synopsis: 木村知夫による少年冒険漫画。冒険王を描く物語。
     status: completed
   - key: Q11519028|必殺!七人の女
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - ecchi
+    synopsis: 七人の女を主人公にした青年向けドラマ。
+    status: completed
+    anime_adapted: false
   - key: Q11519028|必殺仕置長屋
     demographic: seinen
     genres:
@@ -205008,8 +205056,32 @@ series:
     synopsis: 木村知夫による『Let'sダチ公』新編。不良少年たちの愉快な物語。
     status: completed
   - key: Q11519028|新Let'sダチ公スペシャル
+    magazine: null
+    demographic: shounen
+    genres:
+      - drama
+      - school
+    synopsis: Let'sダチ公シリーズのスペシャル編。
+    status: completed
+    anime_adapted: false
   - key: Q11519028|旬魚礼讃
+    magazine: null
+    demographic: seinen
+    genres:
+      - food
+      - slice of life
+    synopsis: 旬の魚を題材にしたグルメコミック。
+    status: completed
+    anime_adapted: false
   - key: Q11519028|武頼漢
+    magazine: null
+    demographic: seinen
+    genres:
+      - action
+      - drama
+    synopsis: 武頼漢を主人公にしたアクション。
+    status: completed
+    anime_adapted: false
   - key: Q11519028|毒舌桃平強いか弱いか!?
     demographic: shounen
     genres:
@@ -205085,9 +205157,41 @@ series:
     synopsis: 木根ヲサムが描く、黒い羊と白い羊の禁断のラブストーリー。
     status: completed
   - key: Q11519437|Fellows!
+    magazine: null
+    demographic: seinen
+    genres:
+      - fantasy
+      - drama
+    synopsis: エンターブレイン『Fellows!』掲載作品。
+    status: completed
+    anime_adapted: false
   - key: Q11519437|Swimsuits Fellows! 2009
+    magazine: null
+    demographic: seinen
+    genres:
+      - ecchi
+      - comedy
+    synopsis: 『Fellows!』水着特集2009。
+    status: completed
+    anime_adapted: false
   - key: Q11519437|人妻のくせに!
+    magazine: null
+    demographic: seinen
+    genres:
+      - ecchi
+      - drama
+    synopsis: 人妻を題材にした青年向け作品。
+    status: completed
+    anime_adapted: false
   - key: Q11519437|怪奇宴
+    magazine: null
+    demographic: seinen
+    genres:
+      - horror
+      - mystery
+    synopsis: 怪奇宴を題材にしたホラー作品。
+    status: completed
+    anime_adapted: false
   - key: Q11519474|イチロー!
     demographic: shounen
     genres:
@@ -205114,6 +205218,14 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q11519474|乙女のいろは!
+    magazine: null
+    demographic: shoujo
+    genres:
+      - comedy
+      - school
+    synopsis: 乙女のいろはを描く少女コメディ。
+    status: completed
+    anime_adapted: false
   - key: Q11519474|無駄だと追放された〈宮廷獣医〉、獣の国に好待遇で招かれる
     demographic: shounen
     genres:
@@ -205133,16 +205245,104 @@ series:
     status: completed
     anime_adapted: false
   - key: Q11519474|舞-HIME コミックアンソロジー
+    magazine: null
+    demographic: seinen
+    genres:
+      - action
+      - supernatural
+    synopsis: サンライズ『舞-HiME』のコミックアンソロジー。
+    status: completed
+    anime_adapted: true
   - key: Q11519474|舞-乙HiME コミックアンソロジー
+    magazine: null
+    demographic: seinen
+    genres:
+      - action
+      - fantasy
+    synopsis: サンライズ『舞-乙HiME』のコミックアンソロジー。
+    status: completed
+    anime_adapted: true
   - key: Q11519766|二階屋の売春婦
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - ecchi
+    synopsis: 売春婦を題材にした青年向けドラマ。
+    status: completed
+    anime_adapted: false
   - key: Q11519766|家庭の主婦的恋愛
+    magazine: null
+    demographic: josei
+    genres:
+      - romance
+      - drama
+    synopsis: 主婦の恋愛を描く女性向け作品。
+    status: completed
+    anime_adapted: false
   - key: Q11519766|銀恋
+    magazine: null
+    demographic: josei
+    genres:
+      - romance
+      - drama
+    synopsis: 銀座を題材にした女性向け恋愛。
+    status: completed
+    anime_adapted: false
   - key: Q11519792|The prizer
+    magazine: null
+    demographic: seinen
+    genres:
+      - action
+      - drama
+    synopsis: プライザーを題材にした青年向け作品。
+    status: completed
+    anime_adapted: false
   - key: Q11519792|エ恋スト
+    magazine: null
+    demographic: seinen
+    genres:
+      - romance
+      - ecchi
+    synopsis: エ恋ストを題材にした青年向け作品。
+    status: completed
+    anime_adapted: false
   - key: Q11519792|オジバディ!!
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+      - slice of life
+    synopsis: オジバディを題材にしたコメディ。
+    status: completed
+    anime_adapted: false
   - key: Q11519792|おしりペンペン
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+      - ecchi
+    synopsis: おしりペンペンを題材にしたコメディ。
+    status: completed
+    anime_adapted: false
   - key: Q11519792|コミックごくうま!
+    magazine: null
+    demographic: seinen
+    genres:
+      - food
+      - drama
+    synopsis: ごくうまな食をテーマにした青年向け作品。
+    status: completed
+    anime_adapted: false
   - key: Q11519792|ザ・プライザー
+    magazine: null
+    demographic: seinen
+    genres:
+      - action
+      - drama
+    synopsis: プライザーを題材にした青年向け作品。
+    status: completed
+    anime_adapted: false
   - key: Q11519792|ストラック
     demographic: shounen
     genres:
@@ -205153,7 +205353,23 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q11519792|てなもんや剛速球
+    magazine: null
+    demographic: seinen
+    genres:
+      - sports
+      - comedy
+    synopsis: 野球を題材にしたコメディ。
+    status: completed
+    anime_adapted: false
   - key: Q11519792|トリック・スター
+    magazine: null
+    demographic: seinen
+    genres:
+      - action
+      - mystery
+    synopsis: トリックスターを主人公にした青年向け作品。
+    status: completed
+    anime_adapted: false
   - key: Q11519792|ハルの肴
     demographic: seinen
     genres:
@@ -205162,9 +205378,41 @@ series:
     synopsis: 末田雄一郎が描く、肴と酒の組み合わせを巡るほのぼのグルメ漫画。
     status: completed
   - key: Q11519792|ハルの肴スペシャル
+    magazine: null
+    demographic: seinen
+    genres:
+      - food
+      - slice of life
+    synopsis: ハルの肴シリーズのスペシャル編。
+    status: completed
+    anime_adapted: false
   - key: Q11519792|ピンからブラザーズ
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+      - drama
+    synopsis: ピンからブラザーズを描く青年向け作品。
+    status: completed
+    anime_adapted: false
   - key: Q11519792|女太刀卑弥呼
+    magazine: null
+    demographic: seinen
+    genres:
+      - historical
+      - action
+    synopsis: 卑弥呼を題材にした歴史アクション。
+    status: completed
+    anime_adapted: false
   - key: Q11519792|新・蒼太の包丁
+    magazine: null
+    demographic: seinen
+    genres:
+      - food
+      - drama
+    synopsis: 『蒼太の包丁』の続編。
+    status: completed
+    anime_adapted: false
   - key: Q11519792|昭和の中坊
     demographic: seinen
     genres:
@@ -205174,15 +205422,95 @@ series:
     synopsis: 末田雄一郎による昭和の青春漫画。昭和時代の中学生たちの懐かしき日々を描く。
     status: completed
   - key: Q11519792|極上!美味コミ
+    magazine: null
+    demographic: seinen
+    genres:
+      - food
+      - drama
+    synopsis: 極上の美味を題材にしたコミック。
+    status: completed
+    anime_adapted: false
   - key: Q11519792|殴れ!帝城高校拳闘部
+    magazine: null
+    demographic: seinen
+    genres:
+      - sports
+      - action
+    synopsis: 帝城高校拳闘部を描くスポーツアクション。
+    status: completed
+    anime_adapted: false
   - key: Q11519792|秘命監察官ドン
+    magazine: null
+    demographic: seinen
+    genres:
+      - action
+      - drama
+    synopsis: 秘命監察官ドンを描くアクション。
+    status: completed
+    anime_adapted: false
   - key: Q11519792|絶叫教師エディー
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+      - school
+    synopsis: 絶叫教師エディーを主人公にしたコメディ。
+    status: completed
+    anime_adapted: false
   - key: Q11519792|蒼太の包丁
+    magazine: null
+    demographic: seinen
+    genres:
+      - food
+      - drama
+    synopsis: 本庄敬・本山一城『蒼太の包丁』。料理を題材にしたドラマ。
+    status: completed
+    anime_adapted: false
   - key: Q11519792|蒼太の包丁 special
+    magazine: null
+    demographic: seinen
+    genres:
+      - food
+      - drama
+    synopsis: 『蒼太の包丁』のスペシャル編。
+    status: completed
+    anime_adapted: false
   - key: Q11519792|蒼太の包丁deluxe
+    magazine: null
+    demographic: seinen
+    genres:
+      - food
+      - drama
+    synopsis: 『蒼太の包丁』のdeluxe版。
+    status: completed
+    anime_adapted: false
   - key: Q11519792|蒼太の包丁ザ・ベスト
+    magazine: null
+    demographic: seinen
+    genres:
+      - food
+      - drama
+    synopsis: 『蒼太の包丁』ベスト版。
+    status: completed
+    anime_adapted: false
   - key: Q11519792|蒼太の包丁傑作選
+    magazine: null
+    demographic: seinen
+    genres:
+      - food
+      - drama
+    synopsis: 『蒼太の包丁』の傑作選。
+    status: completed
+    anime_adapted: false
   - key: Q11519792|駅員ジョニー
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+      - slice of life
+    synopsis: 駅員ジョニーを主人公にしたコメディ。
+    status: completed
+    anime_adapted: false
   - key: Q11519835|Dog style
     demographic: josei
     genres:
@@ -205193,11 +205521,59 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q11519835|グラン・ギニョール
+    magazine: null
+    demographic: shounen
+    genres:
+      - horror
+      - drama
+    synopsis: グラン・ギニョールを題材にしたホラー。
+    status: completed
+    anime_adapted: false
   - key: Q11519835|スタンレー・ホークの事件簿
+    magazine: null
+    demographic: shounen
+    genres:
+      - mystery
+      - drama
+    synopsis: スタンレー・ホークを主人公にしたミステリー。
+    status: completed
+    anime_adapted: false
   - key: Q11519835|テツ×リカ 飼育係・理〔イ火〕
+    magazine: null
+    demographic: shounen
+    genres:
+      - drama
+      - school
+    synopsis: テツとリカの飼育係物語。
+    status: completed
+    anime_adapted: false
   - key: Q11519835|ポイズン・チェリー・ドライブ
+    magazine: null
+    demographic: shounen
+    genres:
+      - action
+      - drama
+    synopsis: ポイズン・チェリー・ドライブを描くアクション。
+    status: completed
+    anime_adapted: false
   - key: Q11519835|僕の先生はフィーバーwith本マン
+    magazine: null
+    demographic: shounen
+    genres:
+      - comedy
+      - school
+    synopsis: 先生フィーバーを描くコメディ。
+    status: completed
+    anime_adapted: false
   - key: Q11519835|怪物王子
+    magazine: null
+    demographic: shounen
+    genres:
+      - horror
+      - fantasy
+    synopsis: 怪物王子を題材にしたホラー作品。
+    status: completed
+    anime_adapted: false
   - key: Q11519835|恋が僕等を許す範囲
     demographic: josei
     genres:
@@ -205217,7 +205593,23 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q11519835|蜂の巣の秘密
+    magazine: null
+    demographic: shounen
+    genres:
+      - mystery
+      - drama
+    synopsis: 蜂の巣の秘密を描くミステリー。
+    status: completed
+    anime_adapted: false
   - key: Q11519835|飼育係・理〔イ火〕
+    magazine: null
+    demographic: shounen
+    genres:
+      - drama
+      - school
+    synopsis: 飼育係を題材にしたドラマ。
+    status: completed
+    anime_adapted: false
   - key: Q11519835|高速エンジェル・エンジン
     demographic: seinen
     genres:
@@ -205228,10 +205620,50 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q11519883|クラック!!
+    magazine: null
+    demographic: shounen
+    genres:
+      - action
+      - comedy
+    synopsis: クラックを題材にした少年向け作品。
+    status: completed
+    anime_adapted: false
   - key: Q11520170|NHKその時歴史が動いた
+    magazine: null
+    demographic: other
+    genres:
+      - historical
+      - educational
+    synopsis: NHK歴史番組のコミカライズ別シリーズ。
+    status: completed
+    anime_adapted: false
   - key: Q11520170|SUPER DONKEY KONG with マリオ
+    magazine: null
+    demographic: kodomo
+    genres:
+      - adventure
+      - comedy
+    synopsis: 任天堂『スーパードンキーコング』のコミカライズ。
+    status: completed
+    anime_adapted: true
   - key: Q11520170|おシャカさまと弟子たち
+    magazine: null
+    demographic: other
+    genres:
+      - religion
+      - drama
+    synopsis: 釈迦と弟子達を描く宗教コミック。
+    status: completed
+    anime_adapted: false
   - key: Q11520170|スーパーマリオ 4コマ大行進
+    magazine: null
+    demographic: kodomo
+    genres:
+      - comedy
+      - adventure
+    synopsis: 任天堂『スーパーマリオ』の4コマアンソロジー。
+    status: completed
+    anime_adapted: false
   - key: Q11520170|スーパーマリオ64
     demographic: kodomo
     genres:
@@ -205240,7 +205672,23 @@ series:
     synopsis: 本山一城による任天堂のゲーム『スーパーマリオ64』のコミカライズ。マリオたちのドタバタ冒険を描く。
     status: completed
   - key: Q11520170|スーパーマリオカート
+    magazine: null
+    demographic: kodomo
+    genres:
+      - sports
+      - comedy
+    synopsis: 任天堂『スーパーマリオカート』のコミカライズ。
+    status: completed
+    anime_adapted: false
   - key: Q11520170|スーパーマリオドンキーコング
+    magazine: null
+    demographic: kodomo
+    genres:
+      - adventure
+      - comedy
+    synopsis: 任天堂『スーパーマリオ』『ドンキーコング』のコミカライズ。
+    status: completed
+    anime_adapted: false
   - key: Q11520170|スーパーマリオヨッシーアイランド
     demographic: kodomo
     genres:
@@ -205260,7 +205708,23 @@ series:
     status: ongoing
     anime_adapted: true
   - key: Q11520170|スーパーマリオランド2 6つの金貨
+    magazine: null
+    demographic: kodomo
+    genres:
+      - adventure
+      - comedy
+    synopsis: 任天堂『スーパーマリオランド2』のコミカライズ。
+    status: completed
+    anime_adapted: false
   - key: Q11520170|スーパーマリオランド3 ワリオランド
+    magazine: null
+    demographic: kodomo
+    genres:
+      - adventure
+      - comedy
+    synopsis: 任天堂『スーパーマリオランド3 ワリオランド』のコミカライズ。
+    status: completed
+    anime_adapted: false
   - key: Q11520170|スーパーマリオワールド
     demographic: kodomo
     genres:
@@ -205269,12 +205733,68 @@ series:
     synopsis: 本山一城による任天堂『スーパーマリオワールド』のコミカライズ。マリオの愉快な冒険を描く。
     status: completed
   - key: Q11520170|スーパーマリオワリオの森
+    magazine: null
+    demographic: kodomo
+    genres:
+      - adventure
+      - comedy
+    synopsis: 任天堂『スーパーマリオワリオの森』のコミカライズ。
+    status: completed
+    anime_adapted: false
   - key: Q11520170|どっきり!エンジェル
+    magazine: null
+    demographic: kodomo
+    genres:
+      - comedy
+      - fantasy
+    synopsis: 天使を題材にしたコメディ。
+    status: completed
+    anime_adapted: false
   - key: Q11520170|マリオとワリオ
+    magazine: null
+    demographic: kodomo
+    genres:
+      - adventure
+      - comedy
+    synopsis: 任天堂『マリオとワリオ』のコミカライズ。
+    status: completed
+    anime_adapted: false
   - key: Q11520170|ヨッシーストーリー編
+    magazine: null
+    demographic: kodomo
+    genres:
+      - adventure
+      - comedy
+    synopsis: 任天堂『ヨッシーストーリー』のコミカライズ。
+    status: completed
+    anime_adapted: false
   - key: Q11520170|南総里見八犬伝
+    magazine: null
+    demographic: shounen
+    genres:
+      - historical
+      - action
+    synopsis: 曲亭馬琴『南総里見八犬伝』のコミカライズ。
+    status: completed
+    anime_adapted: false
   - key: Q11520170|戦国落城列伝
+    magazine: null
+    demographic: seinen
+    genres:
+      - historical
+      - drama
+    synopsis: 戦国時代の落城を題材にした歴史アンソロジー。
+    status: completed
+    anime_adapted: false
   - key: Q11520170|武田信玄
+    magazine: null
+    demographic: seinen
+    genres:
+      - historical
+      - drama
+    synopsis: 武田信玄を主人公にした歴史漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11520170|法華経物語
     demographic: shoujo
     genres:
@@ -205285,8 +205805,32 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q11520170|禅のはなし
+    magazine: null
+    demographic: other
+    genres:
+      - religion
+      - educational
+    synopsis: 禅を題材にした宗教学習コミック。
+    status: completed
+    anime_adapted: false
   - key: Q11520170|般若心経色即是空のお経
+    magazine: null
+    demographic: other
+    genres:
+      - religion
+      - educational
+    synopsis: 般若心経を題材にした宗教コミック。
+    status: completed
+    anime_adapted: false
   - key: Q11520194|お金持ちになる生き方
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - educational
+    synopsis: お金持ちになる生き方を描くエッセイコミック。
+    status: completed
+    anime_adapted: false
   - key: Q11520276|Asahiyama
     demographic: seinen
     genres:
@@ -205313,9 +205857,41 @@ series:
     synopsis: 本庄敬が描く、種(Seed)を巡る青年ドラマ。
     status: completed
   - key: Q11520276|オーロラの下で
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - adventure
+    synopsis: オーロラを舞台にしたドラマ。
+    status: completed
+    anime_adapted: false
   - key: Q11520276|クジラの唄が聞こえる
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - adventure
+    synopsis: クジラの唄を題材にしたドラマ。
+    status: completed
+    anime_adapted: false
   - key: Q11520276|コミックごくうま!
+    magazine: null
+    demographic: seinen
+    genres:
+      - food
+      - drama
+    synopsis: ごくうまな食をテーマにした青年向け作品。
+    status: completed
+    anime_adapted: false
   - key: Q11520276|ゴラクのグルメ
+    magazine: null
+    demographic: seinen
+    genres:
+      - food
+      - drama
+    synopsis: 日本文芸社『漫画ゴラク』のグルメコミック。
+    status: completed
+    anime_adapted: false
   - key: Q11520276|ニッポン動物記
     demographic: seinen
     genres:
@@ -205326,9 +205902,41 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q11520276|ニッポン職人列伝
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - biography
+    synopsis: ニッポン職人を題材にしたコミック。
+    status: completed
+    anime_adapted: false
   - key: Q11520276|ハルの肴
+    magazine: null
+    demographic: seinen
+    genres:
+      - food
+      - slice of life
+    synopsis: ハルの肴を題材にしたグルメコミック。
+    status: completed
+    anime_adapted: false
   - key: Q11520276|ハルの肴スペシャル
+    magazine: null
+    demographic: seinen
+    genres:
+      - food
+      - slice of life
+    synopsis: 『ハルの肴』のスペシャル編。
+    status: completed
+    anime_adapted: false
   - key: Q11520276|一杯の魂
+    magazine: null
+    demographic: seinen
+    genres:
+      - food
+      - drama
+    synopsis: 一杯の魂を題材にしたグルメドラマ。
+    status: completed
+    anime_adapted: false
   - key: Q11520276|三国志メシ
     demographic: seinen
     genres:
@@ -205339,7 +205947,23 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q11520276|子熊物語
+    magazine: null
+    demographic: seinen
+    genres:
+      - adventure
+      - drama
+    synopsis: 子熊を主人公にしたドラマ。
+    status: completed
+    anime_adapted: false
   - key: Q11520276|文豪の食彩
+    magazine: null
+    demographic: seinen
+    genres:
+      - food
+      - historical
+    synopsis: 文豪の食彩を題材にしたグルメコミック。
+    status: completed
+    anime_adapted: false
   - key: Q11520276|新・蒼太の包丁
     magazine: weekly-manga-times
     demographic: seinen
@@ -205356,8 +205980,32 @@ series:
     synopsis: 本庄敬による時代劇漫画。朔風の挽歌を奏でる物語。
     status: completed
   - key: Q11520276|植村直己
+    magazine: null
+    demographic: seinen
+    genres:
+      - biography
+      - adventure
+    synopsis: 冒険家植村直己の伝記漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11520276|極上!美味コミ
+    magazine: null
+    demographic: seinen
+    genres:
+      - food
+      - drama
+    synopsis: 極上の美味を題材にしたコミック。
+    status: completed
+    anime_adapted: false
   - key: Q11520276|漫画昔の美味いもん
+    magazine: null
+    demographic: seinen
+    genres:
+      - food
+      - historical
+    synopsis: 昔の美味いものを題材にしたコミック。
+    status: completed
+    anime_adapted: false
   - key: Q11520276|父物語斧
     demographic: seinen
     genres:
@@ -205368,7 +206016,23 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q11520276|狼の碑
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - historical
+    synopsis: 狼の碑を題材にしたドラマ。
+    status: completed
+    anime_adapted: false
   - key: Q11520276|生命ー40億年はるかな旅ー
+    magazine: null
+    demographic: other
+    genres:
+      - educational
+      - documentary
+    synopsis: NHKドキュメンタリーのコミカライズ。
+    status: completed
+    anime_adapted: false
   - key: Q11520276|羆撃ちのサムライ
     demographic: seinen
     genres:
@@ -205404,7 +206068,23 @@ series:
     status: completed
     anime_adapted: false
   - key: Q11520276|蒼太の包丁ザ・ベスト
+    magazine: null
+    demographic: seinen
+    genres:
+      - food
+      - drama
+    synopsis: 『蒼太の包丁』ベスト版。
+    status: completed
+    anime_adapted: false
   - key: Q11520276|蒼太の包丁傑作選
+    magazine: null
+    demographic: seinen
+    genres:
+      - food
+      - drama
+    synopsis: 『蒼太の包丁』の傑作選。
+    status: completed
+    anime_adapted: false
   - key: Q11520276|隠密包丁
     demographic: seinen
     genres:
@@ -205413,11 +206093,59 @@ series:
     synopsis: 本庄敬による江戸時代料理時代劇。隠密包丁の活躍を描く物語。
     status: completed
   - key: Q11520276|隠密包丁 本日も憂いなし スペシャル
+    magazine: null
+    demographic: seinen
+    genres:
+      - food
+      - historical
+    synopsis: 『隠密包丁本日も憂いなし』のスペシャル編。
+    status: completed
+    anime_adapted: false
   - key: Q11520602|12光年のMOTOKO
+    magazine: null
+    demographic: shoujo
+    genres:
+      - sci-fi
+      - romance
+    synopsis: 12光年先のMOTOKOを描く少女向けSF。
+    status: completed
+    anime_adapted: false
   - key: Q11520602|13月の花束
+    magazine: null
+    demographic: shoujo
+    genres:
+      - fantasy
+      - romance
+    synopsis: 13月の花束を描く少女ファンタジー。
+    status: completed
+    anime_adapted: false
   - key: Q11520602|Wedding eve
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - drama
+    synopsis: 結婚前夜を描く少女ロマンス。
+    status: completed
+    anime_adapted: false
   - key: Q11520602|いるかちゃんヨロシク
+    magazine: null
+    demographic: shoujo
+    genres:
+      - comedy
+      - school
+    synopsis: いるかちゃんを主人公にした少女コメディ。
+    status: completed
+    anime_adapted: false
   - key: Q11520602|おきゃんでゴメン
+    magazine: null
+    demographic: shoujo
+    genres:
+      - comedy
+      - school
+    synopsis: おきゃんな少女を主人公にしたコメディ。
+    status: completed
+    anime_adapted: false
   - key: Q11520602|お江戸はねむれない!
     demographic: shoujo
     genres:
@@ -205426,8 +206154,32 @@ series:
     synopsis: 本田恵子による江戸時代少女漫画。眠らないお江戸を舞台にしたロマンス。
     status: completed
   - key: Q11520602|ガールの法則
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - comedy
+    synopsis: 少女の法則を描く少女ロマンス。
+    status: completed
+    anime_adapted: false
   - key: Q11520602|きみがドレスを脱ぐ前に
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - drama
+    synopsis: ドレスを脱ぐ前の少女ロマンス。
+    status: completed
+    anime_adapted: false
   - key: Q11520602|ことり・かたり
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+      - slice of life
+    synopsis: ことりの語りを描く少女向け作品。
+    status: completed
+    anime_adapted: false
   - key: Q11520602|ザ★デビュー
     demographic: shoujo
     genres:
@@ -205438,11 +206190,59 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q11520602|サニー・サイド・アップ
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - comedy
+    synopsis: サニーサイドアップを描く少女ロマンス。
+    status: completed
+    anime_adapted: false
   - key: Q11520602|シナモンリング星雲
+    magazine: null
+    demographic: shoujo
+    genres:
+      - sci-fi
+      - romance
+    synopsis: シナモンリング星雲を舞台にした少女向けSF。
+    status: completed
+    anime_adapted: false
   - key: Q11520602|つんつん月子
+    magazine: null
+    demographic: shoujo
+    genres:
+      - comedy
+      - school
+    synopsis: つんつんした月子を主人公にしたコメディ。
+    status: completed
+    anime_adapted: false
   - key: Q11520602|バージンロード渋滞情報
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - comedy
+    synopsis: 結婚を題材にした少女ラブコメディ。
+    status: completed
+    anime_adapted: false
   - key: Q11520602|ビビデ・バビデ・ラブ
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - fantasy
+    synopsis: 魔法を題材にした少女ロマンス。
+    status: completed
+    anime_adapted: false
   - key: Q11520602|ひまわりと子犬の7日間
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+      - slice of life
+    synopsis: ひまわりと子犬の7日間を描くドラマ。
+    status: completed
+    anime_adapted: false
   - key: Q11520602|ぼくらは妻を愛してる
     demographic: josei
     genres:
