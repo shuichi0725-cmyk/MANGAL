@@ -1,5 +1,5 @@
 schema_version: 1
-generated_at: 2026-05-11T16:10:04.168Z
+generated_at: 2026-05-11T16:12:00.234Z
 generator: claude-opus-4-7-direct-fill
 series:
   - key: Q1001784|GOLDEN SPIRAL
@@ -270412,7 +270412,23 @@ series:
     status: completed
     anime_adapted: false
   - key: Q11584832|情熱に届かない
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - drama
+    synopsis: 少女向け恋愛。
+    status: completed
+    anime_adapted: false
   - key: Q11584832|我が名はミセス
+    magazine: null
+    demographic: josei
+    genres:
+      - romance
+      - drama
+    synopsis: 女性向け短編。
+    status: completed
+    anime_adapted: false
   - key: Q11584832|新ロッカーのハナコさん
     demographic: shoujo
     genres:
@@ -270423,6 +270439,13 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q11584832|未だ未
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+    synopsis: 少女向け短編。
+    status: completed
+    anime_adapted: false
   - key: Q11584832|歌うたいの黒うさぎ
     demographic: josei
     genres:
@@ -270439,11 +270462,56 @@ series:
     synopsis: 石井まゆみの『歌うたいの黒うさぎ』姉妹編・黒兎編。
     status: completed
   - key: Q11584832|気まぐれマロン
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - comedy
+    synopsis: 少女向けラブコメ。
+    status: completed
+    anime_adapted: false
   - key: Q11584832|海星は今夜も待っている
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+    synopsis: 少女向けロマンス。
+    status: completed
+    anime_adapted: false
   - key: Q11584832|猫の101の愛し方
+    magazine: null
+    demographic: shoujo
+    genres:
+      - slice_of_life
+      - comedy
+    synopsis: 猫モチーフ少女エッセイ。
+    status: completed
+    anime_adapted: false
   - key: Q11584832|王家の蝶
+    magazine: null
+    demographic: shoujo
+    genres:
+      - historical
+      - romance
+    synopsis: 少女向け歴史ロマンス。
+    status: completed
+    anime_adapted: false
   - key: Q11584832|珈理子とカルシウム
+    magazine: null
+    demographic: shoujo
+    genres:
+      - comedy
+    synopsis: 少女向けコメディ。
+    status: completed
+    anime_adapted: false
   - key: Q11584832|石井まゆみBest Selection
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+    synopsis: 石井まゆみ作品集。
+    status: completed
+    anime_adapted: false
   - key: Q11584832|石井まゆみ恋愛傑作選
     magazine: null
     demographic: shoujo
@@ -270454,13 +270522,72 @@ series:
     status: completed
     anime_adapted: false
   - key: Q11584832|絶対したい純愛!
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+    synopsis: 少女向け純愛短編。
+    status: completed
+    anime_adapted: false
   - key: Q11584832|胸の奥のリズム*プリズム
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+    synopsis: 少女向けロマンス。
+    status: completed
+    anime_adapted: false
   - key: Q11584832|誘う夜
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - drama
+    synopsis: 少女向け短編。
+    status: completed
+    anime_adapted: false
   - key: Q11584832|誰かの胸で泣く夜も
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - drama
+    synopsis: 少女向け恋愛短編。
+    status: completed
+    anime_adapted: false
   - key: Q11584832|週末に花束を抱いて
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+    synopsis: 少女向け恋愛。
+    status: completed
+    anime_adapted: false
   - key: Q11584832|闇闇来るり
+    magazine: null
+    demographic: shoujo
+    genres:
+      - supernatural
+      - romance
+    synopsis: 少女向け超常ロマンス。
+    status: completed
+    anime_adapted: false
   - key: Q11584832|風よきいて!
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+    synopsis: 少女向け恋愛短編。
+    status: completed
+    anime_adapted: false
   - key: Q11585198|イルベックの精霊術士
+    magazine: null
+    demographic: shoujo
+    genres:
+      - fantasy
+    synopsis: 少女向けファンタジー。
+    status: completed
+    anime_adapted: false
   - key: Q11585198|コーセルテルの竜術士
     demographic: shoujo
     genres:
@@ -270483,10 +270610,46 @@ series:
     synopsis: 石動あゆまの『コーセルテルの竜術士』本編。
     status: completed
   - key: Q11585198|ななつの星とお月さま コーセルテルのイラスト集
+    magazine: null
+    demographic: shoujo
+    genres:
+      - fantasy
+    synopsis: コーセルテルの竜術士イラスト集。
+    status: completed
+    anime_adapted: false
   - key: Q11585216|GENGO
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+    synopsis: 青年向けコメディ短編。
+    status: completed
+    anime_adapted: false
   - key: Q11585216|JAH3名様
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+    synopsis: THE3名様シリーズ派生作品。
+    status: completed
+    anime_adapted: false
   - key: Q11585216|THE3名様
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+      - slice_of_life
+    synopsis: 石原まこちん原作のサラリーマンコメディ。
+    status: completed
+    anime_adapted: true
   - key: Q11585216|THE3名様Ωメガ盛り
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+    synopsis: THE3名様メガ盛り版。
+    status: completed
+    anime_adapted: false
   - key: Q11585216|THE超人様
     demographic: seinen
     genres:
@@ -270495,20 +270658,134 @@ series:
     synopsis: 石原まこちんによる超人プロレス漫画。THE超人様の戦いを描く。
     status: completed
   - key: Q11585216|THE魔王さま
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+    synopsis: 魔王コメディ。
+    status: completed
+    anime_adapted: false
   - key: Q11585216|TRIPPA!
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+    synopsis: 青年コメディ。
+    status: completed
+    anime_adapted: false
   - key: Q11585216|アベックシャバダァ
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+      - romance
+    synopsis: カップルコメディ。
+    status: completed
+    anime_adapted: false
   - key: Q11585216|キミ!さいよー
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+    synopsis: 青年向けギャグ。
+    status: completed
+    anime_adapted: false
   - key: Q11585216|コミックいわてQ
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+    synopsis: 岩手をテーマにしたアンソロジー。
+    status: completed
+    anime_adapted: false
   - key: Q11585216|にぎっとレゲエ寿司
+    magazine: null
+    demographic: seinen
+    genres:
+      - food
+      - comedy
+    synopsis: 寿司を題材にしたコメディ。
+    status: completed
+    anime_adapted: false
   - key: Q11585216|ぷち本当にあった愉快な話ヤブから神まで!病院の極意SP
+    magazine: null
+    demographic: josei
+    genres:
+      - comedy
+      - drama
+    synopsis: 実話系コミック。
+    status: completed
+    anime_adapted: false
   - key: Q11585216|ぷち本当にあった愉快な話絶叫!!ヤブ医者SP
+    magazine: null
+    demographic: josei
+    genres:
+      - comedy
+      - drama
+    synopsis: 実話系コミック。
+    status: completed
+    anime_adapted: false
   - key: Q11585216|マチビト
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+    synopsis: 青年向け短編。
+    status: completed
+    anime_adapted: false
   - key: Q11585216|メガ盛!!本当にあった愉快な話ブラックな職場SP
+    magazine: null
+    demographic: josei
+    genres:
+      - comedy
+      - drama
+    synopsis: 実話系コミック。
+    status: completed
+    anime_adapted: false
   - key: Q11585216|一服いきますか!!
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+      - slice_of_life
+    synopsis: 煙草をテーマにしたコメディ。
+    status: completed
+    anime_adapted: false
   - key: Q11585216|一杯いきますか!!
+    magazine: null
+    demographic: seinen
+    genres:
+      - food
+      - comedy
+    synopsis: 酒をテーマにしたコメディ。
+    status: completed
+    anime_adapted: false
   - key: Q11585216|妻しか女性を知りません
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+      - romance
+    synopsis: 夫婦コメディ。
+    status: completed
+    anime_adapted: false
   - key: Q11585216|陰謀論THE3名様Q
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+    synopsis: THE3名様シリーズ陰謀論編。
+    status: completed
+    anime_adapted: false
   - key: Q11585349|I'm home
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - psychological
+    synopsis: 石坂啓による家庭ドラマ。
+    status: completed
+    anime_adapted: false
   - key: Q11585349|MONEY MOON
     demographic: josei
     genres:
@@ -270528,8 +270805,31 @@ series:
     status: completed
     anime_adapted: true
   - key: Q11585349|アレルギー戦士
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+      - drama
+    synopsis: アレルギーをテーマにした青年作品。
+    status: completed
+    anime_adapted: false
   - key: Q11585349|エルフ
+    magazine: null
+    demographic: seinen
+    genres:
+      - fantasy
+      - drama
+    synopsis: エルフを題材にした青年作品。
+    status: completed
+    anime_adapted: false
   - key: Q11585349|お金の思い出
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+    synopsis: 青年向けエッセイ。
+    status: completed
+    anime_adapted: false
   - key: Q11585349|キスより簡単
     demographic: josei
     genres:
@@ -270538,12 +270838,63 @@ series:
     synopsis: 石坂啓による女性向け恋愛漫画。大人の恋を繊細に描く。
     status: completed
   - key: Q11585349|キャリング
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+    synopsis: 青年向け短編。
+    status: completed
+    anime_adapted: false
   - key: Q11585349|さよなら家族
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+    synopsis: 家族ドラマ。
+    status: completed
+    anime_adapted: false
   - key: Q11585349|セカンドベスト
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+    synopsis: 青年向け短編。
+    status: completed
+    anime_adapted: false
   - key: Q11585349|パパイラズ
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - comedy
+    synopsis: 家族コメディ。
+    status: completed
+    anime_adapted: false
   - key: Q11585349|ハルコロ
+    magazine: null
+    demographic: seinen
+    genres:
+      - historical
+      - drama
+    synopsis: アイヌをテーマにした青年作品。
+    status: completed
+    anime_adapted: false
   - key: Q11585349|ひみつの箱
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+    synopsis: 青年向け短編。
+    status: completed
+    anime_adapted: false
   - key: Q11585349|ブラック・ジャックREAL 感動の医療体験談
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+    synopsis: BJをモチーフにした医療実話。
+    status: completed
+    anime_adapted: false
   - key: Q11585349|マンチャラ小日向くん
     demographic: shoujo
     genres:
@@ -270554,9 +270905,40 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q11585349|ムスコン
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+      - drama
+    synopsis: 息子コンプレックスコメディ。
+    status: completed
+    anime_adapted: false
   - key: Q11585349|もの食う人びと
+    magazine: null
+    demographic: seinen
+    genres:
+      - food
+      - drama
+    synopsis: 辺見庸ルポルタージュコミカライズ。
+    status: completed
+    anime_adapted: false
   - key: Q11585349|下北なあなあイズム
+    magazine: null
+    demographic: seinen
+    genres:
+      - slice_of_life
+      - comedy
+    synopsis: 下北沢を舞台にした青年作品。
+    status: completed
+    anime_adapted: false
   - key: Q11585349|俺になりたい男
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+    synopsis: 青年向け短編。
+    status: completed
+    anime_adapted: false
   - key: Q11585349|夢みるトマト
     demographic: seinen
     genres:
@@ -270565,6 +270947,14 @@ series:
     synopsis: 石坂啓が描く、夢みるトマトを題材にした大人ドラマ。
     status: completed
   - key: Q11585349|子どもたちの戦争
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - historical
+    synopsis: 戦争をテーマにしたルポ作品。
+    status: completed
+    anime_adapted: false
   - key: Q11585349|安穏族
     magazine: weekly-young-jump
     demographic: seinen
@@ -270574,12 +270964,63 @@ series:
     synopsis: 石坂啓が描く、安穏に暮らす人々を綴る大人ドラマ。
     status: completed
   - key: Q11585349|引き揚げの悲劇
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - historical
+    synopsis: 戦後引き揚げをテーマにした作品。
+    status: completed
+    anime_adapted: false
   - key: Q11585349|手塚治虫アンソロジー犬傑作集
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+    synopsis: 手塚治虫犬テーマ作品集。
+    status: completed
+    anime_adapted: false
   - key: Q11585349|手塚治虫名作集
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+    synopsis: 手塚治虫名作集。
+    status: completed
+    anime_adapted: false
   - key: Q11585349|新友録
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+    synopsis: 青年向け短編。
+    status: completed
+    anime_adapted: false
   - key: Q11585349|私はカラス
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+    synopsis: カラスを題材にした青年作品。
+    status: completed
+    anime_adapted: false
   - key: Q11585349|竜宮家族
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - fantasy
+    synopsis: 家族をテーマにした青年作品。
+    status: completed
+    anime_adapted: false
   - key: Q11585349|茶番劇
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+    synopsis: 青年向け短編。
+    status: completed
+    anime_adapted: false
   - key: Q11585381|100万$キッド
     demographic: shounen
     genres:
@@ -270595,6 +271036,14 @@ series:
     synopsis: 石垣ゆうきによるスポーツ漫画。100万ドルの価値を持つキッドの物語。
     status: completed
   - key: Q11585381|MMR
+    magazine: null
+    demographic: shounen
+    genres:
+      - mystery
+      - supernatural
+    synopsis: マガジンミステリー調査班MMRシリーズ。
+    status: completed
+    anime_adapted: false
   - key: Q11585381|MMRマガジンミステリー調査班
     magazine: weekly-shonen-magazine
     demographic: shounen
@@ -270615,7 +271064,22 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q11585381|キラキラ!
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+    synopsis: 少女向けロマンス。
+    status: completed
+    anime_adapted: false
   - key: Q11585381|スクープハンター多聞
+    magazine: null
+    demographic: shounen
+    genres:
+      - mystery
+      - drama
+    synopsis: スクープを題材にした少年作品。
+    status: completed
+    anime_adapted: false
   - key: Q11585381|マジシャン探偵A
     demographic: seinen
     genres:
@@ -270624,7 +271088,23 @@ series:
     synopsis: 石垣ゆうきが描く、マジシャン探偵Aの活躍を描くサスペンス。
     status: completed
   - key: Q11585381|新世紀黙示録MMR Resurrection
+    magazine: null
+    demographic: shounen
+    genres:
+      - mystery
+      - supernatural
+    synopsis: MMR新世紀黙示録版。
+    status: completed
+    anime_adapted: false
   - key: Q11585381|新生MMR迫りくる人類滅亡3大危機!!
+    magazine: null
+    demographic: shounen
+    genres:
+      - mystery
+      - supernatural
+    synopsis: 新生MMR人類滅亡版。
+    status: completed
+    anime_adapted: false
   - key: Q11585413|ウィザードリィ
     demographic: shounen
     genres:
@@ -270644,6 +271124,13 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q11585450|アノアの森
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+    synopsis: 青年向け短編。
+    status: completed
+    anime_adapted: false
   - key: Q11585450|じゃんぷる
     demographic: shoujo
     genres:
@@ -270658,22 +271145,141 @@ series:
     synopsis: 石塚2祐子によるハガキ職人コメディ。ハガキ戦士ジャンプ団の愉快な物語。
     status: completed
   - key: Q11585450|犬マユゲでいこう
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+    synopsis: 石塚2祐子による4コマギャグ。
+    status: completed
+    anime_adapted: false
   - key: Q11585450|犬マユゲでいこう 旅マユどっちかというと福岡
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+    synopsis: 犬マユゲ旅編。
+    status: completed
+    anime_adapted: false
   - key: Q11585450|犬マユゲでいこう 犬辞林
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+    synopsis: 犬マユゲ辞典編。
+    status: completed
+    anime_adapted: false
   - key: Q11585450|犬マユゲでいこう・熊田クリスピー
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+    synopsis: 犬マユゲ熊田編。
+    status: completed
+    anime_adapted: false
   - key: Q11585450|犬マユゲでいこうA・TiEMPO
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+    synopsis: 犬マユゲシリーズ。
+    status: completed
+    anime_adapted: false
   - key: Q11585450|犬マユゲでいこうGX
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+    synopsis: 犬マユゲシリーズ。
+    status: completed
+    anime_adapted: false
   - key: Q11585450|犬マユゲでいこうnotまちがいさがし
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+    synopsis: 犬マユゲシリーズ。
+    status: completed
+    anime_adapted: false
   - key: Q11585450|犬マユゲでいこうSORPRESA
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+    synopsis: 犬マユゲシリーズ。
+    status: completed
+    anime_adapted: false
   - key: Q11585450|犬マユゲでいこうURGENTE
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+    synopsis: 犬マユゲシリーズ。
+    status: completed
+    anime_adapted: false
   - key: Q11585450|犬マユゲでいこうイヌマユオブアヴェルス
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+    synopsis: 犬マユゲシリーズ。
+    status: completed
+    anime_adapted: false
   - key: Q11585450|犬マユゲでいこうかんたんいぬまゆげ
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+    synopsis: 犬マユゲシリーズ。
+    status: completed
+    anime_adapted: false
   - key: Q11585450|犬マユゲでいこうくまだくんとそとなるかみ
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+    synopsis: 犬マユゲシリーズ。
+    status: completed
+    anime_adapted: false
   - key: Q11585450|犬マユゲでいこうそこそこ何かの学習帳
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+    synopsis: 犬マユゲシリーズ。
+    status: completed
+    anime_adapted: false
   - key: Q11585450|犬マユゲでいこうひとりで読めるはじめての犬マユゲ
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+    synopsis: 犬マユゲシリーズ。
+    status: completed
+    anime_adapted: false
   - key: Q11585450|犬マユゲでいこうワクワクいぬりえ
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+    synopsis: 犬マユゲシリーズ。
+    status: completed
+    anime_adapted: false
   - key: Q11585450|犬マユゲでいこう犬まゆ~げコミックス
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+    synopsis: 犬マユゲシリーズ。
+    status: completed
+    anime_adapted: false
   - key: Q11585450|犬マユゲでいこう石塚の犬眉毛
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+    synopsis: 犬マユゲシリーズ。
+    status: completed
+    anime_adapted: false
   - key: Q11585479|Blue giant
     magazine: big-comic
     demographic: seinen
@@ -270708,8 +271314,30 @@ series:
     synopsis: サックス奏者・宮本大が世界一のジャズプレイヤーを目指してヨーロッパに渡った、『BLUE GIANT』の続編。
     status: completed
   - key: Q11585479|TOKYO CHECK IN
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+    synopsis: 青年向け短編。
+    status: completed
+    anime_adapted: false
   - key: Q11585479|そんでよし!
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+    synopsis: 青年向け短編。
+    status: completed
+    anime_adapted: false
   - key: Q11585479|ブルージャイアントライブセレクション
+    magazine: null
+    demographic: seinen
+    genres:
+      - music
+      - drama
+    synopsis: BLUE GIANTライブ選集。
+    status: completed
+    anime_adapted: false
   - key: Q11585479|岳
     magazine: big-comic-original
     demographic: seinen
@@ -270722,7 +271350,21 @@ series:
     alternative_titles:
       en: Gaku
   - key: Q11585479|岳傑作集
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+    synopsis: 石塚真一の岳傑作集。
+    status: completed
+    anime_adapted: false
   - key: Q11585479|自然とかかわる仕事
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+    synopsis: 自然をテーマにした青年作品。
+    status: completed
+    anime_adapted: false
   - key: Q11585537|MAPマッピィ
     magazine: weekly-shonen-jump
     demographic: shounen
@@ -270732,6 +271374,13 @@ series:
     synopsis: 石山東吉が描く、地図に挑む少年マッピィのスポーツ漫画。
     status: completed
   - key: Q11585537|RUMBLE EYES
+    magazine: null
+    demographic: seinen
+    genres:
+      - action
+    synopsis: 青年向けアクション。
+    status: completed
+    anime_adapted: false
   - key: Q11585537|からじしぼたん
     demographic: seinen
     genres:
@@ -270754,9 +271403,37 @@ series:
     synopsis: 石山東吉が描く、学園クラブのドタバタ青春コメディ。
     status: completed
   - key: Q11585537|トキちゃんのパチスロ万枚倶楽部
+    magazine: null
+    demographic: seinen
+    genres:
+      - gambling
+    synopsis: パチスロを題材にした青年作品。
+    status: completed
+    anime_adapted: false
   - key: Q11585537|実戦パチスロオレ主義!!
+    magazine: null
+    demographic: seinen
+    genres:
+      - gambling
+    synopsis: パチスロ実戦作品。
+    status: completed
+    anime_adapted: false
   - key: Q11585537|実戦攻略!ガチンコ裏テク13時間
+    magazine: null
+    demographic: seinen
+    genres:
+      - gambling
+    synopsis: パチスロ攻略本コミカライズ。
+    status: completed
+    anime_adapted: false
   - key: Q11585537|実践パチスロオレ主義!!スペシャル
+    magazine: null
+    demographic: seinen
+    genres:
+      - gambling
+    synopsis: パチスロ実戦SP。
+    status: completed
+    anime_adapted: false
   - key: Q11585537|男旗
     magazine: weekly-shonen-jump
     demographic: shounen
@@ -270768,6 +271445,13 @@ series:
     status: completed
     anime_adapted: false
   - key: Q11585537|石山東吉の爆裂パチスロ万枚スペシャル
+    magazine: null
+    demographic: seinen
+    genres:
+      - gambling
+    synopsis: 石山東吉パチスロ作品。
+    status: completed
+    anime_adapted: false
   - key: Q11585537|覇王の森
     demographic: seinen
     genres:
@@ -270776,8 +271460,30 @@ series:
     synopsis: 石山東吉が描く、覇王の森を巡る時代劇。
     status: completed
   - key: Q11585537|闘神サイト
+    magazine: null
+    demographic: seinen
+    genres:
+      - gambling
+      - action
+    synopsis: ギャンブルアクション。
+    status: completed
+    anime_adapted: false
   - key: Q11585558|LEO the GOLD
+    magazine: null
+    demographic: shounen
+    genres:
+      - sports
+    synopsis: ボクシングを題材にした少年作品。
+    status: completed
+    anime_adapted: false
   - key: Q11585558|Party! 東日本大震災チャリティー漫画本
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+    synopsis: 東日本大震災チャリティー漫画集。
+    status: completed
+    anime_adapted: false
   - key: Q11585558|ベルモンド Le VisiteuR
     demographic: seinen
     genres:
@@ -270788,8 +271494,30 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q11585645|あした翔ける!
+    magazine: null
+    demographic: shounen
+    genres:
+      - sports
+      - school
+    synopsis: 少年向けスポーツ作品。
+    status: completed
+    anime_adapted: false
   - key: Q11585645|ありがとう
+    magazine: null
+    demographic: shounen
+    genres:
+      - drama
+    synopsis: 少年向け短編。
+    status: completed
+    anime_adapted: false
   - key: Q11585645|オレの瞬間
+    magazine: null
+    demographic: shounen
+    genres:
+      - sports
+    synopsis: 少年向けスポーツ短編。
+    status: completed
+    anime_adapted: false
   - key: Q11585645|がばい
     demographic: seinen
     genres:
@@ -270807,6 +271535,14 @@ series:
     status: completed
     anime_adapted: false
   - key: Q11585645|はっちゃき先生
+    magazine: null
+    demographic: shounen
+    genres:
+      - comedy
+      - school
+    synopsis: 学園コメディ。
+    status: completed
+    anime_adapted: false
   - key: Q11585645|ファイター伝説 金と銀
   - key: Q11585645|ゆきのいろ
     demographic: seinen
