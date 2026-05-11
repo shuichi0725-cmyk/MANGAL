@@ -1,5 +1,5 @@
 schema_version: 1
-generated_at: 2026-05-11T23:32:35.685Z
+generated_at: 2026-05-11T23:34:17.058Z
 generator: claude-opus-4-7-direct-fill
 series:
   - key: Q1001784|GOLDEN SPIRAL
@@ -372148,6 +372148,14 @@ series:
     status: completed
     anime_adapted: false
   - key: Q17223912|ユーガッタラブソング
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - music
+    synopsis: 音楽恋愛短編。
+    status: completed
+    anime_adapted: false
   - key: Q17223912|ロマンス暴風域
     magazine: null
     demographic: josei
@@ -372158,6 +372166,13 @@ series:
     status: completed
     anime_adapted: false
   - key: Q17223912|わかってないのはわたしだけ
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+    synopsis: 少女向け恋愛短編。
+    status: completed
+    anime_adapted: false
   - key: Q17223912|先生の白い嘘
     magazine: null
     demographic: josei
@@ -372177,6 +372192,14 @@ series:
     synopsis: 女性中学教師・原美鈴が、無自覚な性差別とハラスメントに苦しむ姿を、鳥飼茜が痛切に描いた問題作。実写映画化。
     status: completed
   - key: Q17223912|前略、前進の君
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - drama
+    synopsis: 少女向け恋愛短編。
+    status: completed
+    anime_adapted: false
   - key: Q17223912|地獄のガールフレンド
     demographic: josei
     genres:
@@ -372187,8 +372210,29 @@ series:
     status: ongoing
     anime_adapted: true
   - key: Q17223912|好きです、草食男子。
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+    synopsis: 草食男子恋愛。
+    status: completed
+    anime_adapted: false
   - key: Q17223912|恋シタイ
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+    synopsis: 少女向け恋愛短編。
+    status: completed
+    anime_adapted: false
   - key: Q17223912|絶対・年下男子
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+    synopsis: 年下男子恋愛。
+    status: completed
+    anime_adapted: false
   - key: Q17224076|?TRAIL
     magazine: null
     demographic: seinen
@@ -372213,6 +372257,14 @@ series:
     synopsis: 樋口彰彦が描く、家族の絆をテーマにしたファンタジーコメディ。
     status: completed
   - key: Q17224076|クルリのヒトトセ
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - slice_of_life
+    synopsis: 少女向け短編。
+    status: completed
+    anime_adapted: false
   - key: Q17224076|ルー=ガルー
     demographic: seinen
     genres:
@@ -372233,7 +372285,23 @@ series:
     status: ongoing
     anime_adapted: true
   - key: Q17224256|まんが理不尽すぎる現実異常な国ニッポン
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - slice_of_life
+    synopsis: 理不尽ニッポン実話。
+    status: completed
+    anime_adapted: false
   - key: Q17224256|まんが関わったら負け!!地雷ニンゲン地獄変
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - slice_of_life
+    synopsis: 地雷ニンゲン実話。
+    status: completed
+    anime_adapted: false
   - key: Q17224490|この男子、シェアハウスで小説書いてます。
     magazine: null
     demographic: shoujo
@@ -372244,6 +372312,14 @@ series:
     status: completed
     anime_adapted: false
   - key: Q17224776|チャッピーとゆかいな下僕ども
+    magazine: null
+    demographic: josei
+    genres:
+      - slice_of_life
+      - comedy
+    synopsis: 犬チャッピー家族エッセイ。
+    status: completed
+    anime_adapted: false
   - key: Q17224776|神聖モテモテ王国
     magazine: weekly-shonen-sunday
     demographic: shounen
@@ -372259,17 +372335,111 @@ series:
     synopsis: ながいけん(『神聖モテモテ王国』作者)による青年向けシュールコメディ。第三世界の長井を描く異色の物語。
     status: completed
   - key: Q17225147|One Love
+    magazine: null
+    demographic: josei
+    genres:
+      - romance
+    synopsis: BL/女性向け短編。
+    status: completed
+    anime_adapted: false
   - key: Q17225147|キズナ
+    magazine: null
+    demographic: josei
+    genres:
+      - romance
+      - drama
+    synopsis: BL/女性向け短編。
+    status: completed
+    anime_adapted: false
   - key: Q17225147|シーラ日記
+    magazine: null
+    demographic: josei
+    genres:
+      - romance
+      - slice_of_life
+    synopsis: BL/女性向け短編。
+    status: completed
+    anime_adapted: false
   - key: Q17225147|セーラー服の香り
+    magazine: null
+    demographic: josei
+    genres:
+      - romance
+      - drama
+    synopsis: BL/女性向け短編。
+    status: completed
+    anime_adapted: false
   - key: Q17225147|ディーバ
+    magazine: null
+    demographic: josei
+    genres:
+      - music
+      - drama
+    synopsis: 音楽ドラマ短編。
+    status: completed
+    anime_adapted: false
   - key: Q17225147|同居人
+    magazine: null
+    demographic: josei
+    genres:
+      - romance
+      - slice_of_life
+    synopsis: BL/女性向け短編。
+    status: completed
+    anime_adapted: false
   - key: Q17225147|四季
+    magazine: null
+    demographic: josei
+    genres:
+      - drama
+      - slice_of_life
+    synopsis: 四季短編。
+    status: completed
+    anime_adapted: false
   - key: Q17225147|夜のクラゲに抱かれて
+    magazine: null
+    demographic: josei
+    genres:
+      - drama
+      - romance
+    synopsis: 夜のクラゲドラマ。
+    status: completed
+    anime_adapted: false
   - key: Q17225147|天翔る時の雫
+    magazine: null
+    demographic: josei
+    genres:
+      - fantasy
+      - drama
+    synopsis: 時の雫ファンタジー。
+    status: completed
+    anime_adapted: false
   - key: Q17225147|色彩時計
+    magazine: null
+    demographic: josei
+    genres:
+      - drama
+    synopsis: 色彩時計短編。
+    status: completed
+    anime_adapted: false
   - key: Q17225879|ナカGの推しメン最強伝説
+    magazine: null
+    demographic: seinen
+    genres:
+      - idol
+      - comedy
+    synopsis: 推しメンコメディ。
+    status: completed
+    anime_adapted: false
   - key: Q17226466|ねこだのみ
+    magazine: null
+    demographic: josei
+    genres:
+      - slice_of_life
+      - comedy
+    synopsis: 猫エッセイ。
+    status: completed
+    anime_adapted: false
   - key: Q17226466|東伍郎とまろすけ
     demographic: seinen
     genres:
@@ -372280,21 +372450,148 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q17226828|ウォール・ストリート物語
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - historical
+    synopsis: ウォール街経済ドラマ。
+    status: completed
+    anime_adapted: false
   - key: Q17226828|まんが 西鶴名作集
+    magazine: null
+    demographic: seinen
+    genres:
+      - historical
+      - anthology
+    synopsis: 西鶴名作コミカライズ。
+    status: completed
+    anime_adapted: false
   - key: Q17226828|マンガ今昔物語集
+    magazine: null
+    demographic: seinen
+    genres:
+      - historical
+      - anthology
+    synopsis: 今昔物語集コミカライズ。
+    status: completed
+    anime_adapted: false
   - key: Q17226828|マンガ太平記
+    magazine: null
+    demographic: seinen
+    genres:
+      - historical
+      - war
+    synopsis: 太平記コミカライズ。
+    status: completed
+    anime_adapted: false
   - key: Q17226828|宇宙の謎を知りたい!
+    magazine: null
+    demographic: kodomo
+    genres:
+      - educational
+    synopsis: 宇宙学習まんが。
+    status: completed
+    anime_adapted: false
   - key: Q17226828|日本史人物55人のひみつ
+    magazine: null
+    demographic: kodomo
+    genres:
+      - educational
+      - historical
+    synopsis: 日本史人物学習まんが。
+    status: completed
+    anime_adapted: false
   - key: Q17226828|福沢諭吉
+    magazine: null
+    demographic: kodomo
+    genres:
+      - historical
+      - biographical
+      - educational
+    synopsis: 福沢諭吉伝記まんが。
+    status: completed
+    anime_adapted: false
   - key: Q17226905|おぢさん誘惑講座
+    magazine: null
+    demographic: josei
+    genres:
+      - romance
+      - ecchi
+    synopsis: BL/女性向け恋愛。
+    status: completed
+    anime_adapted: false
   - key: Q17226905|マザーファッカー
+    magazine: null
+    demographic: josei
+    genres:
+      - drama
+      - ecchi
+    synopsis: BL/女性向け禁断恋愛。
+    status: completed
+    anime_adapted: false
   - key: Q17226905|ロミオ
+    magazine: null
+    demographic: josei
+    genres:
+      - romance
+    synopsis: BL/女性向け恋愛。
+    status: completed
+    anime_adapted: false
   - key: Q17226905|僕のクリーム、君のポタージュ
+    magazine: null
+    demographic: josei
+    genres:
+      - romance
+      - comedy
+    synopsis: BL/女性向けグルメ恋愛。
+    status: completed
+    anime_adapted: false
   - key: Q17226905|女教師の鑑
+    magazine: null
+    demographic: josei
+    genres:
+      - romance
+      - ecchi
+    synopsis: 女教師恋愛。
+    status: completed
+    anime_adapted: false
   - key: Q17226905|好色少年のススメ
+    magazine: null
+    demographic: josei
+    genres:
+      - romance
+      - ecchi
+    synopsis: 好色少年恋愛。
+    status: completed
+    anime_adapted: false
   - key: Q17226905|少年嗜好夏休みスペシャル
+    magazine: null
+    demographic: josei
+    genres:
+      - romance
+      - anthology
+    synopsis: 少年嗜好アンソロジー夏休み号。
+    status: completed
+    anime_adapted: false
   - key: Q17226905|拝啓labyrinth club
+    magazine: null
+    demographic: josei
+    genres:
+      - romance
+      - drama
+    synopsis: BL/女性向け短編。
+    status: completed
+    anime_adapted: false
   - key: Q17226905|放課後ひみつ講座
+    magazine: null
+    demographic: josei
+    genres:
+      - romance
+      - school
+    synopsis: BL/女性向け学園恋愛。
+    status: completed
+    anime_adapted: false
   - key: Q17226905|秘密の地下室
     demographic: josei
     genres:
@@ -372303,36 +372600,276 @@ series:
     synopsis: 中ノ尾恵による女性向けサスペンス。秘密の地下室を巡る恐怖譚。
     status: completed
   - key: Q17229098|ジャガーの眼
+    magazine: null
+    demographic: shounen
+    genres:
+      - action
+      - adventure
+    synopsis: ジャガーの眼冒険物語。
+    status: completed
+    anime_adapted: false
   - key: Q17229111|乱世に生きた足利尊氏 まんが太平記
+    magazine: null
+    demographic: seinen
+    genres:
+      - historical
+      - war
+    synopsis: 足利尊氏太平記コミカライズ。
+    status: completed
+    anime_adapted: false
   - key: Q17229111|二つの世界対戦
+    magazine: null
+    demographic: seinen
+    genres:
+      - historical
+      - war
+    synopsis: 世界大戦歴史漫画。
+    status: completed
+    anime_adapted: false
   - key: Q17229111|学研まんが 日本の歴史
+    magazine: null
+    demographic: kodomo
+    genres:
+      - educational
+      - historical
+    synopsis: 学研まんが日本の歴史。
+    status: completed
+    anime_adapted: false
   - key: Q17230032|ergo
+    magazine: null
+    demographic: josei
+    genres:
+      - romance
+    synopsis: BL/女性向け短編。
+    status: completed
+    anime_adapted: false
   - key: Q17230032|イジワルな再会
+    magazine: null
+    demographic: josei
+    genres:
+      - romance
+    synopsis: BL/女性向け短編。
+    status: completed
+    anime_adapted: false
   - key: Q17230032|コールミーダーリン
+    magazine: null
+    demographic: josei
+    genres:
+      - romance
+    synopsis: BL/女性向け短編。
+    status: completed
+    anime_adapted: false
   - key: Q17230032|それは僕の愛じゃない
+    magazine: null
+    demographic: josei
+    genres:
+      - romance
+      - drama
+    synopsis: BL/女性向け短編。
+    status: completed
+    anime_adapted: false
   - key: Q17230032|もっとも淫靡で残酷な6人の姫君
+    magazine: null
+    demographic: josei
+    genres:
+      - romance
+      - drama
+      - anthology
+    synopsis: 童話モチーフ恋愛アンソロジー。
+    status: completed
+    anime_adapted: false
   - key: Q17230032|よるの教室
+    magazine: null
+    demographic: josei
+    genres:
+      - romance
+      - school
+    synopsis: BL/女性向け学園恋愛。
+    status: completed
+    anime_adapted: false
   - key: Q17230032|侯爵様はウェディング・ベルを鳴らしたい
+    magazine: null
+    demographic: josei
+    genres:
+      - romance
+      - historical
+    synopsis: 侯爵様恋愛。
+    status: completed
+    anime_adapted: false
   - key: Q17230032|光降る朝、初めてきみと
+    magazine: null
+    demographic: josei
+    genres:
+      - romance
+    synopsis: BL/女性向け短編。
+    status: completed
+    anime_adapted: false
   - key: Q17230032|六月の丘のひなげし
+    magazine: null
+    demographic: josei
+    genres:
+      - romance
+      - drama
+    synopsis: BL/女性向け短編。
+    status: completed
+    anime_adapted: false
   - key: Q17230032|南美隆輔の傲慢な正餐
+    magazine: null
+    demographic: josei
+    genres:
+      - romance
+      - drama
+    synopsis: BL/女性向け短編。
+    status: completed
+    anime_adapted: false
   - key: Q17230032|可愛い秘書ではいさせない
+    magazine: null
+    demographic: josei
+    genres:
+      - romance
+    synopsis: BL/女性向け秘書恋愛。
+    status: completed
+    anime_adapted: false
   - key: Q17230032|可憐に乱れ舞うシンデレラ
+    magazine: null
+    demographic: josei
+    genres:
+      - romance
+    synopsis: BL/女性向けシンデレラ。
+    status: completed
+    anime_adapted: false
   - key: Q17230032|情熱のイングリッシュローズ
+    magazine: null
+    demographic: josei
+    genres:
+      - romance
+      - historical
+    synopsis: BL/女性向け英国恋愛。
+    status: completed
+    anime_adapted: false
   - key: Q17230032|愛と偽りのキス
+    magazine: null
+    demographic: josei
+    genres:
+      - romance
+    synopsis: BL/女性向け短編。
+    status: completed
+    anime_adapted: false
   - key: Q17230032|指先で愛を語れ
+    magazine: null
+    demographic: josei
+    genres:
+      - romance
+    synopsis: BL/女性向け短編。
+    status: completed
+    anime_adapted: false
   - key: Q17230032|本当は淫らなヘンゼルとグレーテル
+    magazine: null
+    demographic: josei
+    genres:
+      - romance
+      - fantasy
+    synopsis: 童話モチーフBL恋愛。
+    status: completed
+    anime_adapted: false
   - key: Q17230032|楕円少年
+    magazine: null
+    demographic: josei
+    genres:
+      - sports
+      - romance
+    synopsis: ラグビーBL/女性向け短編。
+    status: completed
+    anime_adapted: false
   - key: Q17230032|極道婚
+    magazine: null
+    demographic: josei
+    genres:
+      - romance
+      - yakuza
+    synopsis: BL/女性向け極道婚物語。
+    status: completed
+    anime_adapted: false
   - key: Q17230032|水妖
+    magazine: null
+    demographic: josei
+    genres:
+      - fantasy
+      - romance
+    synopsis: 水妖ファンタジー。
+    status: completed
+    anime_adapted: false
   - key: Q17230032|淫欲な白雪姫
+    magazine: null
+    demographic: josei
+    genres:
+      - romance
+      - fantasy
+    synopsis: 童話モチーフBL恋愛。
+    status: completed
+    anime_adapted: false
   - key: Q17230032|男の上手な泣かせ方
+    magazine: null
+    demographic: josei
+    genres:
+      - romance
+      - drama
+    synopsis: BL/女性向け短編。
+    status: completed
+    anime_adapted: false
   - key: Q17230032|禁断の愛に溺れた6人の処女
+    magazine: null
+    demographic: josei
+    genres:
+      - romance
+      - anthology
+    synopsis: 禁断恋愛アンソロジー。
+    status: completed
+    anime_adapted: false
   - key: Q17230032|秘書とボディガード
+    magazine: null
+    demographic: josei
+    genres:
+      - romance
+    synopsis: BL/女性向けオフィス恋愛。
+    status: completed
+    anime_adapted: false
   - key: Q17230032|童貞刑事
+    magazine: null
+    demographic: josei
+    genres:
+      - romance
+      - comedy
+    synopsis: BL/女性向け童貞刑事コメディ。
+    status: completed
+    anime_adapted: false
   - key: Q17230032|蓮二ロンジ巌治
+    magazine: null
+    demographic: josei
+    genres:
+      - romance
+      - drama
+    synopsis: BL/女性向け短編。
+    status: completed
+    anime_adapted: false
   - key: Q17230032|麗しく濡れる真実の人魚姫
+    magazine: null
+    demographic: josei
+    genres:
+      - romance
+      - fantasy
+    synopsis: 童話モチーフBL恋愛。
+    status: completed
+    anime_adapted: false
   - key: Q17230032|黒のシンデレラ
+    magazine: null
+    demographic: josei
+    genres:
+      - romance
+      - drama
+    synopsis: シンデレラモチーフBL/女性向け。
+    status: completed
+    anime_adapted: false
   - key: Q17230522|お姉ちゃんの翠くん
     demographic: shoujo
     genres:
@@ -372341,6 +372878,14 @@ series:
     synopsis: 目黒あむが描く、お姉ちゃんと翠くんを巡るラブストーリー。
     status: ongoing
   - key: Q17230522|ちぐはぐプラネット
+    magazine: null
+    demographic: shoujo
+    genres:
+      - sci_fi
+      - comedy
+    synopsis: SFコメディ短編。
+    status: completed
+    anime_adapted: false
   - key: Q17230522|てをつなごうよ
     magazine: ribon
     demographic: shoujo
@@ -372365,6 +372910,14 @@ series:
     synopsis: 目黒あむが描く、ひなたとブルーの少女ラブストーリー。
     status: completed
   - key: Q17230522|マコとアキちゃんの恋心
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - school
+    synopsis: 少女向け恋愛短編。
+    status: completed
+    anime_adapted: false
   - key: Q17230546|あじさいの唄
     magazine: weekly-young-jump
     demographic: seinen
@@ -372383,7 +372936,23 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q17230546|江戸町人文化
+    magazine: null
+    demographic: seinen
+    genres:
+      - historical
+      - educational
+    synopsis: 江戸町人文化解説。
+    status: completed
+    anime_adapted: false
   - key: Q17230626|「からかい上手の高木さん」アニメ振り返り傑作選
+    magazine: null
+    demographic: shounen
+    genres:
+      - romance
+      - comedy
+    synopsis: 高木さんアニメ振り返り傑作選。
+    status: completed
+    anime_adapted: true
   - key: Q17230626|あしたは土曜日
     magazine: null
     demographic: shoujo
@@ -372464,8 +373033,32 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q17230626|ロマンチック
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+    synopsis: 少女向け恋愛短編。
+    status: completed
+    anime_adapted: false
   - key: Q17230626|亜人ちゃんは語りたい公式アンソロジーコミック
+    magazine: null
+    demographic: seinen
+    genres:
+      - anthology
+      - comedy
+      - supernatural
+    synopsis: 亜人ちゃんアンソロジー。
+    status: completed
+    anime_adapted: true
   - key: Q17230626|怪獣のトカゲ
+    magazine: null
+    demographic: seinen
+    genres:
+      - fantasy
+      - comedy
+    synopsis: 怪獣トカゲファンタジー。
+    status: completed
+    anime_adapted: false
   - key: Q17230626|恋に恋するユカリちゃん
     demographic: shounen
     genres:
@@ -372475,29 +373068,210 @@ series:
     synopsis: 山本崇一朗(『からかい上手の高木さん』作者)による『からかい上手の(元)高木さん』スピンオフ。次世代の女子小学生・ユカリちゃんと友達の物語。
     status: completed
   - key: Q17230626|恋文
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - drama
+    synopsis: 少女向け恋愛短編。
+    status: completed
+    anime_adapted: false
   - key: Q17230859|ナガシマくん
+    magazine: null
+    demographic: shounen
+    genres:
+      - sports
+      - comedy
+    synopsis: 野球少年ナガシマくん。
+    status: completed
+    anime_adapted: false
   - key: Q17230859|子どもたちの戦争
+    magazine: null
+    demographic: shounen
+    genres:
+      - war
+      - historical
+    synopsis: 戦争児童ドキュメント。
+    status: completed
+    anime_adapted: false
   - key: Q17230859|少年画報 昭和35年正月号 完全復刻版スペシャルBOX
+    magazine: null
+    demographic: shounen
+    genres:
+      - anthology
+      - historical
+    synopsis: 少年画報昭和35年復刻版。
+    status: completed
+    anime_adapted: false
   - key: Q17230859|豆パンチ
+    magazine: null
+    demographic: shounen
+    genres:
+      - comedy
+    synopsis: 豆パンチコメディ。
+    status: completed
+    anime_adapted: false
   - key: Q17231413|はつ恋地獄変
+    magazine: null
+    demographic: shoujo
+    genres:
+      - horror
+      - romance
+    synopsis: ホラー恋愛短編。
+    status: completed
+    anime_adapted: false
   - key: Q17231413|ミイラの叫び人喰い屋敷
+    magazine: null
+    demographic: shoujo
+    genres:
+      - horror
+    synopsis: ホラー短編。
+    status: completed
+    anime_adapted: false
   - key: Q17231413|ゆうれい館の花嫁の血
+    magazine: null
+    demographic: shoujo
+    genres:
+      - horror
+    synopsis: ホラー短編。
+    status: completed
+    anime_adapted: false
   - key: Q17231413|わたし、もぎたて
+    magazine: null
+    demographic: shoujo
+    genres:
+      - horror
+      - drama
+    synopsis: ホラー短編。
+    status: completed
+    anime_adapted: false
   - key: Q17231413|人喰い屋敷
+    magazine: null
+    demographic: shoujo
+    genres:
+      - horror
+    synopsis: ホラー短編。
+    status: completed
+    anime_adapted: false
   - key: Q17231413|呪わしき友情
+    magazine: null
+    demographic: shoujo
+    genres:
+      - horror
+    synopsis: ホラー短編。
+    status: completed
+    anime_adapted: false
   - key: Q17231413|墓を掘る少女
+    magazine: null
+    demographic: shoujo
+    genres:
+      - horror
+    synopsis: ホラー短編。
+    status: completed
+    anime_adapted: false
   - key: Q17231413|墓場のいけにえ
+    magazine: null
+    demographic: shoujo
+    genres:
+      - horror
+    synopsis: ホラー短編。
+    status: completed
+    anime_adapted: false
   - key: Q17231413|夜歩く吸血少女
+    magazine: null
+    demographic: shoujo
+    genres:
+      - horror
+      - supernatural
+    synopsis: 吸血鬼ホラー。
+    status: completed
+    anime_adapted: false
   - key: Q17231413|怪談 お七狂乱
+    magazine: null
+    demographic: shoujo
+    genres:
+      - horror
+      - supernatural
+    synopsis: お七怪談。
+    status: completed
+    anime_adapted: false
   - key: Q17231413|怪談 奇理子の墓
+    magazine: null
+    demographic: shoujo
+    genres:
+      - horror
+    synopsis: 怪談ホラー。
+    status: completed
+    anime_adapted: false
   - key: Q17231413|怪談 黒髪の呪い
+    magazine: null
+    demographic: shoujo
+    genres:
+      - horror
+    synopsis: 黒髪の呪い怪談。
+    status: completed
+    anime_adapted: false
   - key: Q17231413|怪談・雨月物語
+    magazine: null
+    demographic: shoujo
+    genres:
+      - horror
+      - historical
+    synopsis: 雨月物語怪談。
+    status: completed
+    anime_adapted: false
   - key: Q17231413|怪談ふたり岩さま
+    magazine: null
+    demographic: shoujo
+    genres:
+      - horror
+    synopsis: ホラー短編。
+    status: completed
+    anime_adapted: false
   - key: Q17231413|怪談ぼたん灯籠
+    magazine: null
+    demographic: shoujo
+    genres:
+      - horror
+      - historical
+    synopsis: ぼたん灯籠怪談。
+    status: completed
+    anime_adapted: false
   - key: Q17231413|怪談恋人形
+    magazine: null
+    demographic: shoujo
+    genres:
+      - horror
+      - supernatural
+    synopsis: 恋人形怪談。
+    status: completed
+    anime_adapted: false
   - key: Q17231413|恐怖のテレパシー
+    magazine: null
+    demographic: shoujo
+    genres:
+      - horror
+      - supernatural
+    synopsis: テレパシーホラー。
+    status: completed
+    anime_adapted: false
   - key: Q17231413|恨み女の呪いぐし
+    magazine: null
+    demographic: shoujo
+    genres:
+      - horror
+      - supernatural
+    synopsis: 呪いぐしホラー。
+    status: completed
+    anime_adapted: false
   - key: Q17231413|淫らすぎて...!!
+    magazine: null
+    demographic: shoujo
+    genres:
+      - horror
+    synopsis: ホラー短編。
+    status: completed
+    anime_adapted: false
   - key: Q17231413|生血が欲しい妖怪人形
   - key: Q17231413|私は幽霊になる
   - key: Q17231413|私を墓に埋めないで!
