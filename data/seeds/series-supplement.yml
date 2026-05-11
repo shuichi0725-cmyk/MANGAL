@@ -1,5 +1,5 @@
 schema_version: 1
-generated_at: 2026-05-11T02:35:13.199Z
+generated_at: 2026-05-11T02:37:19.505Z
 generator: claude-opus-4-7-direct-fill
 series:
   - key: Q1001784|GOLDEN SPIRAL
@@ -47321,7 +47321,23 @@ series:
     status: completed
     anime_adapted: false
   - key: Q11266128|突撃!ゲームボーイ
+    magazine: null
+    demographic: kodomo
+    genres:
+      - comedy
+      - slice-of-life
+    synopsis: 任天堂「ゲームボーイ」 を題材にした突撃!ゲームボーイ。 子供向けゲームコメディ作品。
+    status: completed
+    anime_adapted: false
   - key: Q11266138|Cut×out
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - ecchi
+    synopsis: Cut×outを描く成人向け作品。
+    status: completed
+    anime_adapted: false
   - key: Q11266138|Let it be!!
     demographic: shoujo
     genres:
@@ -47332,7 +47348,23 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q11266138|お姉さまとお呼びっ!!
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+      - ecchi
+    synopsis: お姉さまとお呼びを描く成人向け年上ロマンスコメディ作品。
+    status: completed
+    anime_adapted: false
   - key: Q11266138|ガーデンオブエデン
+    magazine: null
+    demographic: seinen
+    genres:
+      - fantasy
+      - ecchi
+    synopsis: ガーデンオブエデンを描く成人向けファンタジー作品。
+    status: completed
+    anime_adapted: false
   - key: Q11266138|コイズミ学習ブック
     demographic: seinen
     genres:
@@ -47341,6 +47373,14 @@ series:
     synopsis: こいずみまりによる学習エッセイ4コマ。コイズミ学習ブックなギャグ漫画。
     status: completed
   - key: Q11266138|ジンクホワイト
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - ecchi
+    synopsis: ジンクホワイトを描く成人向け作品。
+    status: completed
+    anime_adapted: false
   - key: Q11266138|スーパー♥sisterみお
     demographic: shoujo
     genres:
@@ -47351,8 +47391,32 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q11266138|マスタースレイブ
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - ecchi
+    synopsis: マスタースレイブを描く成人向け作品。
+    status: completed
+    anime_adapted: false
   - key: Q11266138|亀甲商店街未亡人八百屋桃谷つゆ子
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - ecchi
+    synopsis: 亀甲商店街未亡人八百屋桃谷つゆ子を描く成人向け未亡人作品。
+    status: completed
+    anime_adapted: false
   - key: Q11266138|健全恋愛ライフ
+    magazine: null
+    demographic: seinen
+    genres:
+      - romance
+      - ecchi
+    synopsis: 健全恋愛ライフを描く成人向けロマンス作品。
+    status: completed
+    anime_adapted: false
   - key: Q11266138|家政婦のエツ子さん
     demographic: josei
     genres:
@@ -47361,7 +47425,23 @@ series:
     synopsis: こいずみまりが描く、家政婦エツ子さんのお仕事ドラマ。
     status: completed
   - key: Q11266138|愛のふじつぼ
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - ecchi
+    synopsis: 愛のふじつぼを描く成人向け作品。
+    status: completed
+    anime_adapted: false
   - key: Q11266138|横浜物語
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - romance
+    synopsis: 横浜物語を描く青年向け横浜ロマンスドラマ作品。
+    status: completed
+    anime_adapted: false
   - key: Q11266138|渋谷ガーディアンガールズ
     demographic: shoujo
     genres:
@@ -47399,24 +47479,175 @@ series:
     status: completed
     anime_adapted: false
   - key: Q11266144|RPGこわい
+    magazine: null
+    demographic: seinen
+    genres:
+      - fantasy
+      - comedy
+    synopsis: RPGこわいを描く青年向け RPG コメディ作品。
+    status: completed
+    anime_adapted: false
   - key: Q11266144|RPGなんてこわくない!
+    magazine: null
+    demographic: seinen
+    genres:
+      - fantasy
+      - comedy
+    synopsis: RPGなんてこわくないを描く青年向け RPG コメディ作品。
+    status: completed
+    anime_adapted: false
   - key: Q11266144|ぎるど見聞録!
+    magazine: null
+    demographic: seinen
+    genres:
+      - fantasy
+      - comedy
+    synopsis: ぎるど見聞録を描く青年向けギルド見聞録ファンタジー作品。
+    status: completed
+    anime_adapted: false
   - key: Q11266144|しゃーまんず・さんくちゅあり
+    magazine: null
+    demographic: seinen
+    genres:
+      - fantasy
+      - comedy
+    synopsis: しゃーまんず・さんくちゅありを描く青年向けシャーマンファンタジー作品。
+    status: completed
+    anime_adapted: false
   - key: Q11266144|スーパーロボット大戦α さいこどらいばあず
+    magazine: null
+    demographic: seinen
+    genres:
+      - mecha
+      - comedy
+    synopsis: バンプレスト「スパロボα」 のさいこどらいばあず編。 SRW 4 コマコメディアンソロジー作品。
+    status: completed
+    anime_adapted: false
   - key: Q11266144|ダブルゼータくんここにあり
+    magazine: null
+    demographic: seinen
+    genres:
+      - mecha
+      - comedy
+    synopsis: ガンダム ZZ 関連のダブルゼータくんここにあり。 SD ガンダムコメディ作品。
+    status: completed
+    anime_adapted: false
   - key: Q11266144|なんでも!?タイホマン
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+      - action
+    synopsis: なんでも!?タイホマンを描く青年向け警察コメディ作品。
+    status: completed
+    anime_adapted: false
   - key: Q11266144|ユルミとシメル
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+      - romance
+    synopsis: ユルミとシメルを描く青年向けロマンスコメディ作品。
+    status: completed
+    anime_adapted: false
   - key: Q11266144|勇者くん
+    magazine: null
+    demographic: seinen
+    genres:
+      - fantasy
+      - comedy
+    synopsis: 勇者くんを描く青年向け勇者ファンタジーコメディ作品。
+    status: completed
+    anime_adapted: false
   - key: Q11266144|私立RPGハイスクール
+    magazine: null
+    demographic: seinen
+    genres:
+      - fantasy
+      - school
+    synopsis: 私立RPGハイスクールを描く青年向け RPG 学園作品。
+    status: completed
+    anime_adapted: false
   - key: Q11266144|舞-HiME
+    magazine: null
+    demographic: seinen
+    genres:
+      - fantasy
+      - action
+    synopsis: アニメ「舞-HiME」 のコミカライズ。 風華学園を舞台に HiME と呼ばれる少女たちの戦いを描く学園バトルファンタジー作品。
+    status: completed
+    anime_adapted: true
   - key: Q11266148|N.G!
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - comedy
+    synopsis: N.G!を描く少女向けロマンスコメディ作品。
+    status: completed
+    anime_adapted: false
   - key: Q11266148|オーバードライブ
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - drama
+    synopsis: オーバードライブを描く少女向けロマンスドラマ作品。
+    status: completed
+    anime_adapted: false
   - key: Q11266148|がまんできない君と俺
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - comedy
+    synopsis: がまんできない君と俺を描く少女向けロマンスコメディ作品。
+    status: completed
+    anime_adapted: false
   - key: Q11266148|ガラスの靴を拾った大富豪
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+    synopsis: ガラスの靴を拾った大富豪を描く少女向け大富豪ロマンス作品。
+    status: completed
+    anime_adapted: false
   - key: Q11266148|キスじゃとまらない!
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - comedy
+    synopsis: キスじゃとまらないを描く少女向けロマンスコメディ作品。
+    status: completed
+    anime_adapted: false
   - key: Q11266148|それは終わらない恋になる
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - drama
+    synopsis: それは終わらない恋になるを描く少女向けロマンスドラマ作品。
+    status: completed
+    anime_adapted: false
   - key: Q11266148|ハーフムーン・エモーション
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - drama
+    synopsis: ハーフムーン・エモーションを描く少女向けロマンスドラマ作品。
+    status: completed
+    anime_adapted: false
   - key: Q11266148|フラチな兄貴
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - comedy
+    synopsis: フラチな兄貴を描く少女向け兄妹ロマンスコメディ作品。
+    status: completed
+    anime_adapted: false
   - key: Q11266148|やってらんねェぜ!
     demographic: josei
     genres:
@@ -47427,15 +47658,92 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q11266148|ロマンスにおまかせ!
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - comedy
+    synopsis: ロマンスにおまかせを描く少女向けロマンスコメディ作品。
+    status: completed
+    anime_adapted: false
   - key: Q11266148|一周回って恋をする
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+    synopsis: 一周回って恋をするを描く少女向けロマンス作品。
+    status: completed
+    anime_adapted: false
   - key: Q11266148|不器用でごめん
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+    synopsis: 不器用でごめんを描く少女向けロマンス作品。
+    status: completed
+    anime_adapted: false
   - key: Q11266148|二葉狂奏曲
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - drama
+    synopsis: 二葉狂奏曲を描く少女向けロマンスドラマ作品。
+    status: completed
+    anime_adapted: false
   - key: Q11266148|僕がきみに会いたい理由
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+    synopsis: 僕がきみに会いたい理由を描く少女向けロマンス作品。
+    status: completed
+    anime_adapted: false
   - key: Q11266148|最後の約束
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - drama
+    synopsis: 最後の約束を描く少女向けロマンスドラマ作品。
+    status: completed
+    anime_adapted: false
   - key: Q11266148|唇に甘い毒
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - drama
+    synopsis: 唇に甘い毒を描く少女向けロマンスドラマ作品。
+    status: completed
+    anime_adapted: false
   - key: Q11266148|好きだから嘘をつきました
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - drama
+    synopsis: 好きだから嘘をつきましたを描く少女向けロマンスドラマ作品。
+    status: completed
+    anime_adapted: false
   - key: Q11266148|官能漫画家の口説き方
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - comedy
+    synopsis: 官能漫画家の口説き方を描く少女向け漫画家ロマンスコメディ作品。
+    status: completed
+    anime_adapted: false
   - key: Q11266148|寝ても醒めても
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - drama
+    synopsis: 寝ても醒めてもを描く少女向けロマンスドラマ作品。
+    status: completed
+    anime_adapted: false
   - key: Q11266148|強引社長の過剰な独占愛
     demographic: josei
     genres:
@@ -47446,19 +47754,129 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q11266148|微熱のカルテ
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - drama
+    synopsis: 微熱のカルテを描く少女向け医療ロマンス作品。
+    status: completed
+    anime_adapted: false
   - key: Q11266148|恋の病につける薬
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - comedy
+    synopsis: 恋の病につける薬を描く少女向けロマンスコメディ作品。
+    status: completed
+    anime_adapted: false
   - key: Q11266148|愛があれば年の差なんて
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+    synopsis: 愛があれば年の差なんてを描く少女向け年の差ロマンス作品。
+    status: completed
+    anime_adapted: false
   - key: Q11266148|愛とピースと
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - drama
+    synopsis: 愛とピースとを描く少女向けロマンスドラマ作品。
+    status: completed
+    anime_adapted: false
   - key: Q11266148|放課後の職員室
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - school
+    synopsis: 放課後の職員室を描く少女向け学園ロマンス作品。
+    status: completed
+    anime_adapted: false
   - key: Q11266148|残酷遊戯
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+      - romance
+    synopsis: 残酷遊戯を描く少女向けダークロマンス作品。
+    status: completed
+    anime_adapted: false
   - key: Q11266148|片恋の奴隷
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - drama
+    synopsis: 片恋の奴隷を描く少女向け片想いロマンスドラマ作品。
+    status: completed
+    anime_adapted: false
   - key: Q11266148|片恋パラダイス
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - comedy
+    synopsis: 片恋パラダイスを描く少女向け片想いロマンスコメディ作品。
+    status: completed
+    anime_adapted: false
   - key: Q11266148|空室なし!!
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - comedy
+    synopsis: 空室なしを描く少女向けロマンスコメディ作品。
+    status: completed
+    anime_adapted: false
   - key: Q11266148|身代わりなんてお断り!
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - drama
+    synopsis: 身代わりなんてお断りを描く少女向け身代わりロマンスドラマ作品。
+    status: completed
+    anime_adapted: false
   - key: Q11266148|進入禁止の恋
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+    synopsis: 進入禁止の恋を描く少女向け禁断ロマンス作品。
+    status: completed
+    anime_adapted: false
   - key: Q11266148|銭湯王子と貧乏男子
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - comedy
+    synopsis: 銭湯王子と貧乏男子を描く少女向け銭湯ロマンスコメディ作品。
+    status: completed
+    anime_adapted: false
   - key: Q11266148|鎖でつないで
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - drama
+    synopsis: 鎖でつないでを描く少女向けダークロマンスドラマ作品。
+    status: completed
+    anime_adapted: false
   - key: Q11266148|闇に哭く光
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+      - supernatural
+    synopsis: 闇に哭く光を描く少女向けダークドラマ作品。
+    status: completed
+    anime_adapted: false
   - key: Q11266184|LIFE SO HAPPY
     demographic: shoujo
     genres:
@@ -47477,6 +47895,14 @@ series:
     status: completed
     anime_adapted: false
   - key: Q11266199|’70年-ぼくらの時代
+    magazine: null
+    demographic: seinen
+    genres:
+      - historical
+      - drama
+    synopsis: "'70 年ぼくらの時代を描く青年向け 70 年代ノスタルジードラマ作品。"
+    status: completed
+    anime_adapted: false
   - key: Q11266328|あさひなぐ
     magazine: big-comic-spirits
     demographic: seinen
@@ -47496,6 +47922,14 @@ series:
     synopsis: 16世紀イングランド・テューダー朝を舞台に、エリザベス1世とその顧問ウィリアム・セシルを描く、こざき亜衣の本格歴史劇。
     status: ongoing
   - key: Q11266338|Dr
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - slice-of-life
+    synopsis: Drを描く青年向け医療ドラマ作品。
+    status: completed
+    anime_adapted: false
   - key: Q11266338|Dr. アシュラ
     demographic: seinen
     genres:
@@ -47514,7 +47948,23 @@ series:
     status: completed
     anime_adapted: true
   - key: Q11266338|Ns'あおいthose days
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - slice-of-life
+    synopsis: こしのりょう「Ns'あおい」 のthose days編。 青年向け看護師医療ドラマスピンオフ作品。
+    status: completed
+    anime_adapted: false
   - key: Q11266338|するりのベント酒
+    magazine: null
+    demographic: seinen
+    genres:
+      - slice-of-life
+      - drama
+    synopsis: するりのベント酒を描く青年向け酒場日常作品。
+    status: completed
+    anime_adapted: false
   - key: Q11266338|バウンスバック
     magazine: monthly-morning
     demographic: seinen
@@ -47525,7 +47975,23 @@ series:
     status: completed
     anime_adapted: false
   - key: Q11266338|はなうた
+    magazine: null
+    demographic: seinen
+    genres:
+      - slice-of-life
+      - drama
+    synopsis: はなうたを描く青年向け日常ドラマ作品。
+    status: completed
+    anime_adapted: false
   - key: Q11266338|投資アドバイザー有利子
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - essay
+    synopsis: 投資アドバイザー有利子を描く青年向け投資ドラマ作品。
+    status: completed
+    anime_adapted: false
   - key: Q11266338|町医者ジャンボ!!
     magazine: weekly-morning
     demographic: seinen
@@ -47551,6 +48017,14 @@ series:
     status: completed
     anime_adapted: false
   - key: Q11266340|Body girl
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - ecchi
+    synopsis: Body girlを描く成人向け作品。
+    status: completed
+    anime_adapted: false
   - key: Q11266340|Ikenai!いんびテーション
     demographic: seinen
     genres:
@@ -47604,7 +48078,23 @@ series:
     status: completed
     anime_adapted: false
   - key: Q11266340|援助交際撲滅運動
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - ecchi
+    synopsis: 援助交際撲滅運動を描く成人向け社会派作品。
+    status: completed
+    anime_adapted: false
   - key: Q11266340|満開少女
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - ecchi
+    synopsis: 満開少女を描く成人向け作品。
+    status: completed
+    anime_adapted: false
   - key: Q11266346|PLUG
     demographic: seinen
     genres:
@@ -47647,9 +48137,41 @@ series:
     status: completed
     anime_adapted: false
   - key: Q11266346|艦隊これくしょん-艦これ-電撃コミックアンソロジー 佐世保鎮守府編
+    magazine: null
+    demographic: seinen
+    genres:
+      - anthology
+      - comedy
+    synopsis: 艦これの電撃コミックアンソロジー佐世保鎮守府編。 艦娘たちの日常アンソロジー作品。
+    status: completed
+    anime_adapted: false
   - key: Q11266357|ああ一郎
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+      - slice-of-life
+    synopsis: ああ一郎を描く青年向けサラリーマンコメディ作品。
+    status: completed
+    anime_adapted: false
   - key: Q11266357|オバー自慢の爆弾鍋
+    magazine: null
+    demographic: seinen
+    genres:
+      - slice-of-life
+      - comedy
+    synopsis: オバー自慢の爆弾鍋を描く青年向け沖縄料理コメディ作品。
+    status: completed
+    anime_adapted: false
   - key: Q11266357|スクラム
+    magazine: null
+    demographic: seinen
+    genres:
+      - sports
+      - drama
+    synopsis: スクラムを描く青年向けラグビードラマ作品。
+    status: completed
+    anime_adapted: false
   - key: Q11266357|ペナントレースやまだたいちの奇蹟
     magazine: null
     demographic: shounen
@@ -47669,8 +48191,32 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q11266357|ぽっかり助之介
+    magazine: null
+    demographic: seinen
+    genres:
+      - historical
+      - comedy
+    synopsis: ぽっかり助之介を描く青年向け時代劇コメディ作品。
+    status: completed
+    anime_adapted: false
   - key: Q11266357|世界に大自慢したい日本の会社
+    magazine: null
+    demographic: seinen
+    genres:
+      - essay
+      - drama
+    synopsis: 世界に大自慢したい日本の会社を描く青年向けビジネスドキュメンタリー作品。
+    status: completed
+    anime_adapted: false
   - key: Q11266357|大田舎中学校の大事件
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+      - school
+    synopsis: 大田舎中学校の大事件を描く青年向け田舎学園コメディ作品。
+    status: completed
+    anime_adapted: false
   - key: Q11266357|山下たろーくん
     demographic: shounen
     genres:
@@ -47688,6 +48234,14 @@ series:
     status: completed
     anime_adapted: false
   - key: Q11266357|漫画日本一短い母への手紙
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - anthology
+    synopsis: 日本一短い母への手紙を漫画化したアンソロジー作品。
+    status: completed
+    anime_adapted: false
   - key: Q11266357|県立海空高校野球部員山下たろ~くん
     magazine: weekly-shonen-jump
     demographic: shounen
@@ -47706,18 +48260,122 @@ series:
     synopsis: こせきこうじによる弱小高校野球漫画の名作。県立海空高校の落ちこぼれ野球部員・山下たろーくんの愉快な物語。
     status: completed
   - key: Q11266504|かいけつ!るるこ
+    magazine: null
+    demographic: shoujo
+    genres:
+      - comedy
+      - fantasy
+    synopsis: かいけつ!るるこを描く少女向けかいけつコメディ作品。
+    status: completed
+    anime_adapted: false
   - key: Q11266504|クイーンズブレイドアンソロジーコミック
+    magazine: null
+    demographic: seinen
+    genres:
+      - anthology
+      - action
+    synopsis: ホビージャパン「クイーンズブレイド」 のアンソロジーコミック作品。
+    status: completed
+    anime_adapted: false
   - key: Q11266504|幼なじみとイケないコト?
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - comedy
+    synopsis: 幼なじみとイケないコトを描く少女向け幼なじみロマンスコメディ作品。
+    status: completed
+    anime_adapted: false
   - key: Q11266798|包帯少女哀話
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+      - horror
+    synopsis: 包帯少女哀話を描く少女向け哀しいドラマ作品。
+    status: completed
+    anime_adapted: false
   - key: Q11266798|放課後のSOS
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+      - school
+    synopsis: 放課後の SOS を描く少女向け学園ドラマ作品。
+    status: completed
+    anime_adapted: false
   - key: Q11266801|おとなのおくすり
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - drama
+    synopsis: おとなのおくすりを描く少女向け大人ロマンス作品。
+    status: completed
+    anime_adapted: false
   - key: Q11266801|てるてる恋予報
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - fantasy
+    synopsis: てるてる恋予報を描く少女向けてるてる坊主ロマンス作品。
+    status: completed
+    anime_adapted: false
   - key: Q11266801|トイレの花子さん
+    magazine: null
+    demographic: shoujo
+    genres:
+      - horror
+      - school
+    synopsis: 学校怪談の代表格・トイレの花子さんを題材にした少女向け学園ホラー作品。
+    status: completed
+    anime_adapted: false
   - key: Q11266801|ノンストップ☆のん!!
+    magazine: null
+    demographic: shoujo
+    genres:
+      - comedy
+      - slice-of-life
+    synopsis: ノンストップ☆のんを描く少女向けコメディ作品。
+    status: completed
+    anime_adapted: false
   - key: Q11266801|ママ❤トラブル
+    magazine: null
+    demographic: shoujo
+    genres:
+      - comedy
+      - drama
+    synopsis: ママ❤トラブルを描く少女向け母娘コメディ作品。
+    status: completed
+    anime_adapted: false
   - key: Q11266801|楽園☆キッズ
+    magazine: null
+    demographic: shoujo
+    genres:
+      - comedy
+      - slice-of-life
+    synopsis: 楽園☆キッズを描く少女向けコメディ作品。
+    status: completed
+    anime_adapted: false
   - key: Q11266807|Hiyoko brand
+    magazine: null
+    demographic: seinen
+    genres:
+      - anthology
+      - comedy
+    synopsis: Hiyoko brandを描く青年向けひよこブランドアンソロジー作品。
+    status: completed
+    anime_adapted: false
   - key: Q11266807|oui chef!
+    magazine: null
+    demographic: seinen
+    genres:
+      - slice-of-life
+      - comedy
+    synopsis: oui chef!を描く青年向け料理人コメディ作品。
+    status: completed
+    anime_adapted: false
   - key: Q11266807|Peridot
     demographic: shoujo
     genres:
@@ -47754,13 +48412,77 @@ series:
     status: completed
     anime_adapted: false
   - key: Q11266807|ハンツー×トラッシュとってもエッチな読み切り集
+    magazine: null
+    demographic: seinen
+    genres:
+      - anthology
+      - ecchi
+    synopsis: ハンツー×トラッシュとってもエッチな読み切り集。 成人向け関連アンソロジー作品。
+    status: completed
+    anime_adapted: false
   - key: Q11266807|ぴんくのひよこ
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+      - slice-of-life
+    synopsis: ぴんくのひよこを描く青年向け 4 コマコメディ作品。
+    status: completed
+    anime_adapted: false
   - key: Q11266807|南国育ちアンソロジー
+    magazine: null
+    demographic: seinen
+    genres:
+      - anthology
+      - ecchi
+    synopsis: パチスロ「南国育ち」 のアンソロジー。 青年向けパチスロアンソロジー作品。
+    status: completed
+    anime_adapted: false
   - key: Q11266895|Angel Beats!The 4コマ
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+      - anthology
+    synopsis: Key「Angel Beats!」 の The 4 コマ。 青年向け 4 コマアンソロジー作品。
+    status: completed
+    anime_adapted: false
   - key: Q11266895|Angel Beats!The4コマ お空の死んだ世界から
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+      - anthology
+    synopsis: Key「Angel Beats!」 の The4 コマ お空の死んだ世界から編。 青年向け 4 コマアンソロジー作品。
+    status: completed
+    anime_adapted: false
   - key: Q11266895|Charlotte The 4コマ
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+      - anthology
+    synopsis: Key「Charlotte」 の The 4 コマ。 青年向け 4 コマアンソロジー作品。
+    status: completed
+    anime_adapted: false
   - key: Q11266895|ラブライブ!コミックアンソロジー
+    magazine: null
+    demographic: seinen
+    genres:
+      - anthology
+      - music
+    synopsis: プロジェクト「ラブライブ!」 のコミックアンソロジー作品。
+    status: completed
+    anime_adapted: false
   - key: Q11266895|リトルバスターズ!エクスタシーコミックアンソロジー
+    magazine: null
+    demographic: seinen
+    genres:
+      - anthology
+      - romance
+    synopsis: Key「リトルバスターズ!エクスタシー」 のコミックアンソロジー作品。
+    status: completed
+    anime_adapted: false
   - key: Q11266902|Rusty bloom
     magazine: null
     demographic: seinen
@@ -47807,6 +48529,14 @@ series:
     synopsis: 赤松中学のラノベ『緋弾のアリア』のスピンオフ。こよかよしの作画のGの血族編。
     status: completed
   - key: Q11266902|魔法少女なら1105号室にいます。
+    magazine: null
+    demographic: seinen
+    genres:
+      - fantasy
+      - comedy
+    synopsis: 魔法少女なら 1105 号室にいますを描く青年向け魔法少女コメディ作品。
+    status: completed
+    anime_adapted: false
   - key: Q11267004|おりたたぶ
     demographic: seinen
     genres:
@@ -47825,6 +48555,14 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q11267004|とある女子大生の日常にみる
+    magazine: null
+    demographic: seinen
+    genres:
+      - slice-of-life
+      - comedy
+    synopsis: とある女子大生の日常にみるを描く青年向け女子大生日常作品。
+    status: completed
+    anime_adapted: false
   - key: Q11267004|フルチャージ!!家電ちゃん
     demographic: shounen
     genres:
@@ -47833,8 +48571,32 @@ series:
     synopsis: こんちきによる擬人化家電コメディ。家電ちゃんたちのフルチャージな日常を描く。
     status: completed
   - key: Q11267004|好きスタイル
+    magazine: null
+    demographic: seinen
+    genres:
+      - romance
+      - comedy
+    synopsis: 好きスタイルを描く青年向けロマンスコメディ作品。
+    status: completed
+    anime_adapted: false
   - key: Q11267004|涙そうそう
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - romance
+    synopsis: 森山良子の楽曲「涙そうそう」 関連のコミック化作品。 青年向け感動ドラマ作品。
+    status: completed
+    anime_adapted: false
   - key: Q11267004|蔵出し選集!!コミック乱創刊20周年記念特別編集
+    magazine: コミック乱
+    demographic: seinen
+    genres:
+      - historical
+      - anthology
+    synopsis: リイド社「コミック乱」 創刊 20 周年記念特別編集の蔵出し選集アンソロジー。
+    status: completed
+    anime_adapted: false
   - key: Q11267004|魔乳秘剣帖
     magazine: champion-red
     demographic: seinen
@@ -47846,9 +48608,40 @@ series:
     status: completed
     anime_adapted: true
   - key: Q11267194|Eggs
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+      - romance
+    synopsis: Eggsを描く少女向けロマンスドラマ作品。
+    status: completed
+    anime_adapted: false
   - key: Q11267194|Jealousy
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - drama
+    synopsis: Jealousyを描く少女向け嫉妬ロマンス作品。
+    status: completed
+    anime_adapted: false
   - key: Q11267194|June pride
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - drama
+    synopsis: June prideを描く少女向け 6 月のロマンスドラマ作品。
+    status: completed
+    anime_adapted: false
   - key: Q11267194|Pure
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+    synopsis: Pureを描く少女向けピュアロマンス作品。
+    status: completed
+    anime_adapted: false
   - key: Q11267194|ぐれちゃわないでね
   - key: Q11267194|そして春風にささやいて
   - key: Q11267194|タイムラグ
