@@ -2,7 +2,7 @@
 
 > このファイルは Claude Code session の context bootstrap 用。新しいセッションを開始したら最初に読むこと。
 
-最終更新: 2026-05-12 (種3 fill session 24 完了、 累計 約 46,196/70,202 ≈ 65.80%)
+最終更新: 2026-05-12 (種3 fill session 25 完了、 累計 約 48,196/70,202 ≈ 68.65%)
 
 ## プロジェクト概要
 
@@ -1804,11 +1804,74 @@ d2d4a06  data(seed3): batch 463/463 (= session24, block 4/4 完了 = 2000件達�
 4a4d59b  data(seed3): batch 444/463 (= session24) Opus 4.7 直筆 fill
 ```
 
+---
+
+## 2026-05-12: 種3 fill session 25 完了 (68.65%到達)
+
+### 達成サマリ
+
+- **session 25 batch 464-483 全 20 batch 完了** (= 100 件 × 20 = **2,000 件 fill**)
+- 適用: **1,991 / 2,000** (= batch 464 applied=95 missing=9 [既知PUA + 正規化問題]、 残り 19 batches は applied=100 missing=0)
+- 所要時間: 約 36分 (= JST 04:27 開始 → 05:03 終了)
+- 報告頻度: **500 件毎** (= block 単位、 ユーザ要求対応)
+- session 24 → 25 推移: 約 46,196 → **約 48,196 / 70,202 ≈ 68.65%**
+- 残 約 22,006 件 (= 約 11 セッション分)
+
+### Batch 進捗テーブル
+
+| Session | batch range | 範囲 | 適用件数 | missing |
+|---|---|---|---|---|
+| 19 | 344-363 | session18-unfilled 36012 件から 2000 件 | 1,996 | 4 |
+| 20 | 364-383 | session19-unfilled 34017 件から 2000 件 | 1,999 | 1 |
+| 21 | 384-403 | session20-unfilled 34017 件から 2000 件 | 2,000 | 0 |
+| 22 | 404-423 | session21-unfilled 32018 件から 2000 件 | 1,998 | 2 |
+| 23 | 424-443 | session22-unfilled 28020 件から 2000 件 | 2,000 | 0 |
+| 24 | 444-463 | session23-unfilled 26020 件から 2000 件 | 1,998 | 2 |
+| **25** | 464-483 | session24-unfilled 24022 件から 2000 件 | **1,991** | **9 (= PUA + 正規化問題)** |
+
+**累計**: **約 48,196 / 70,202 ≈ 68.65%**、 **残 約 22,006 件** (= 約 11 セッション分)。
+
+### Session 25 の傾向
+
+- 65%突破→68%台到達。 残 11 セッション程度で 100% 到達見込み。
+- **大型 Q-code クラスター** (=
+  - Q11644242 TL系恋愛・ハーレクイン約 50 件、
+  - Q11646326 コミック乱セレクション歴史漫画約 35 件、
+  - Q11646844 女性向け家族ドラマ約 30 件、
+  - Q11648840 小川彌生作品集約 15 件、
+  - Q11649194 少女向け短編集約 17 件、
+  - Q11649440 成人向け学園コミック約 40 件、
+  - Q11652142 少女向け歴史短編集約 30 件、
+  - Q11653302 二ノ宮知子作品集約 40 件、
+  - Q11657721 名探偵コナン劇場版コミカライズ約 25 件、
+  - Q11658580 陸奥A子おとめちっく作品集約 50 件、
+  - Q11659171 Fellows!誌掲載青年作品約 25 件、
+  - Q11659258 少女向け恋愛短編集約 40 件、
+  - Q11659711 成人向けコミック約 50 件、
+  - Q11661712 成人向け学園コミック約 25 件、
+  - Q11665971 ノストラダムス・予言・ドラえもん映画コミック約 25 件、
+  - Q11668955 高口里純少女作品集約 70 件、
+  - Q11669300 ゴルフ青年作品約 15 件、
+  - Q11669705 成人向けコミック約 25 件、
+  - Q11669817 加瀬さんシリーズ百合作品約 13 件、
+  - Q11671965 少女向け恋愛短編集約 25 件、
+  - Q11673225 少女向け怪奇/ミステリー約 35 件)。
+- 陸奥A子おとめちっく・高口里純・二ノ宮知子・名探偵コナン劇場版・少女向け怪奇/ミステリー・成人向けが中心。
+
+### 関連 commit (= 抜粋)
+
+```
+95756e2  data(seed3): batch 483/483 (= session25, block 4/4 完了 = 2000件達成) Opus 4.7 直筆 fill
+f15b646  data(seed3): batch 482/483 (= session25) Opus 4.7 直筆 fill
+...
+7dc8b42  data(seed3): batch 464/483 (= session25) Opus 4.7 直筆 fill
+```
+
 ## 次セッションでの推奨アクション (= 上書き、 最新)
 
-1. **続行優先**: session 25 として残 約 24,006 件から 2,000 件 fill (= batch 464-483)。
-2. **next batch 番号 = 464**。
-3. **既知 missing key**: 7+ つのPUA/正規化問題キー (Q11268905+Q11318682+Q11460951×2+Q11513040+Q11559342+Q11572016 + 新規 Q11621242|バージンラブ, Q11642002|いずみタッチダウン!) が毎セッションの top に出現するため、 batch 464 でも全て含める必要がある (applied=100, missing=8-9 期待)。
+1. **続行優先**: session 26 として残 約 22,006 件から 2,000 件 fill (= batch 484-503)。
+2. **next batch 番号 = 484**。
+3. **既知 missing key**: 9+ つのPUA/正規化問題キー (Q11268905+Q11318682+Q11460951×2+Q11513040+Q11559342+Q11572016+Q11621242|バージンラブ+Q11642002|いずみタッチダウン!) が毎セッションの top に出現するため、 batch 484 でも全て含める必要がある (applied=95, missing=9 期待)。
 4. **demographic schema 不変**: `shounen|shoujo|seinen|josei|kodomo|other` のみ。
 5. **per-batch protocol** (= 不変): 100 件 1 バッチ、 `data/seeds/_fills/batch-NNN.json`、 `npx tsx scripts/_apply-fills.ts`、 commit + push、 JST 時刻 + 進捗報告。
 6. **報告頻度**: 100件毎 or 500件毎、 ユーザの指定に従う。
@@ -1819,11 +1882,11 @@ d2d4a06  data(seed3): batch 463/463 (= session24, block 4/4 完了 = 2000件達�
    series = seed['series']
    filled = set(s['key'] for s in series if s.get('status') == 'completed')
    seed_keys = set(s['key'] for s in series)
-   orig = json.load(open('.cache/session24-unfilled.json'))
+   orig = json.load(open('.cache/session25-unfilled.json'))
    rem = [e for e in orig if e['key'] not in filled and e['key'] in seed_keys]
    if len(rem) < 2100:
        seen = set(e['key'] for e in rem)
        extra = [{'key': s['key']} for s in series if s['key'] not in filled and s['key'] not in seen]
        rem.extend(extra)
-   json.dump(rem, open('.cache/session25-unfilled.json','w'), ensure_ascii=False)
+   json.dump(rem, open('.cache/session26-unfilled.json','w'), ensure_ascii=False)
    ```
