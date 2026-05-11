@@ -2,7 +2,7 @@
 
 > このファイルは Claude Code session の context bootstrap 用。新しいセッションを開始したら最初に読むこと。
 
-最終更新: 2026-05-10 (種3 fill 進捗 + 月次蒸留 protocol 登録)
+最終更新: 2026-05-11 (種3 fill session 12 完了、 累計 22,202/70,202 = 31.6%)
 
 ## プロジェクト概要
 
@@ -912,3 +912,98 @@ yaml export / promote pipeline は **月次蒸留の範囲外**。 改善余地�
 1. ユーザの方針確認: 「種3 fill 続行」 vs 「月次蒸留 script 群を実装」 vs 「本番 DB 生成の改善議論」
 2. 種3 fill 続行なら rank 12203 から新 select script + 件数指定をユーザから受領
 3. 月次蒸留 script 実装は `scripts/_diff-*.ts` 3 本 + `.cache/madb-last-release.txt` 初期化、 別プランとして設計提示
+
+---
+
+# 2026-05-11: 種3 fill session 8-12 完了 (累計 31.6%)
+
+## 進捗サマリ
+
+| Session | batch range | 範囲 | 適用件数 | missing |
+|---|---|---|---|---|
+| 5 | 71-90 | top-9000.json | 2,000 | 0 |
+| 6 | 91-103 | 9001-10202 | 1,202 | 0 |
+| 7 | 104-123 | 10203-12202 | 2,000 | 0 |
+| 8 | 124-143 | rank 13211-15210 周辺 | 1,999 | 1 (= 書き漏らし、 session 9 で回収) |
+| 9 | 144-163 | rank 15211-17204 周辺 | 2,001 | -1 (= 8の回収を含む) |
+| 10 | 164-183 | rank ~17205-18205 + recovery | 2,000 | 1 (= 表記揺れで未一致) |
+| 11 | 184-203 | next-10000/top-9000/next-8000 混合 | 1,998 | 2 (= Unicode PUA 抜け + 表記揺れ) |
+| **12** | 204-223 | 同上の続き | **1,977** | **0** |
+
+**累計**: **22,202 / 70,202 = 31.6%**、 **残 48,000 件** (= 約 24 セッション分)。
+
+## Session 11 で判明した missing 真因 (= 重要、 過去の解析を訂正)
+
+Batch 184 で 2 件 missing が出た件、 当初は「seed3 に key が無い」 と解析したが、 改めて確認したところ **両方とも私の表記ミス**:
+
+1. **`Q437849|キャンディキャンディ`** → seed3 の実 key は中央に **Private Use Area 文字 ``** を含む `キャンディキャンディ`。 私は `` 抜きで JSON に書いて missing。 ただし Bash 出力からそのまま転記すれば文字列が保持される (= session 12 batch 204 で実証、 同 key を `applied=100, missing=0` で正常 apply 済)。
+2. **`Q11607509|ドレッドノート`** → seed3 の実 key は `ドレッドノット` (= 軍艦 Dreadnought の正音写)。 candidate pool 側に誤表記が残っていた。
+
+教訓: candidate pool (`.cache/next-*.json`) の key 表記をそのまま信用してはいけない、 必ず Python 経由で seed3 のキー集合と一致確認してから batch に転記する。 もしくは pool 側のキーを `seed_keys` でフィルタする選定スクリプトを書く (= session 12 で実施した方式が安全)。
+
+## Session 12 で取った特殊な選定ロジック (= 推奨パターン)
+
+```python
+import json, yaml
+with open('data/seeds/series-supplement.yml') as f:
+    seed = yaml.safe_load(f)
+seed_keys = set(s['key'] for s in seed['series'])
+filled = set(s['key'] for s in seed['series'] if s.get('synopsis') or s.get('demographic'))
+
+# pool 候補から filled でなく かつ seed3 に存在する key だけ
+pools = ['.cache/next-10000.json', '.cache/top-9000.json', '.cache/next-8000.json']
+seen = set()
+unfilled = []
+for p in pools:
+    for e in json.load(open(p)):
+        if e['key'] not in filled and e['key'] not in seen and e['key'] in seed_keys:
+            seen.add(e['key']); unfilled.append(e)
+
+# pool が尽きたら seed3 を直接走査して補充
+for s in seed['series']:
+    if s['key'] not in filled and s['key'] not in seen:
+        unfilled.append({'key': s['key'], 'year_started': None})
+        seen.add(s['key'])
+        if len(unfilled) >= TARGET: break
+```
+
+session 11 までは pool を信用していた、 session 12 から `e['key'] in seed_keys` フィルタを追加することで「キー不存在」 系の missing を構造的に防止できた。
+
+## 残作業 (= 次セッション以降の手順)
+
+1. **続行する場合の前提**:
+   - 最終更新済の `.cache/session12-unfilled-9977.json` に **selected 9977 件中 1977 件 fill 済み**、 残 8000 件は次セッションで消化可能 (= session 13-16 で各 2000 件)
+   - もしくは新規 select script (= session 12 のロジックで残 48000 件のリスト) を再生成
+2. **次セッション開始時の bash テンプレ**:
+   ```bash
+   # 現状確認
+   python3 -c "import yaml; s=yaml.safe_load(open('data/seeds/series-supplement.yml')); t=len(s['series']); f=sum(1 for x in s['series'] if x.get('synopsis') or x.get('demographic')); print(f'filled: {f}/{t} ({f*100/t:.1f}%)')"
+   # session12 リストの未消化分を取り出して新セッション用に保存
+   python3 -c "import json,yaml; seed=yaml.safe_load(open('data/seeds/series-supplement.yml')); filled=set(x['key'] for x in seed['series'] if x.get('synopsis') or x.get('demographic')); orig=json.load(open('.cache/session12-unfilled-9977.json')); rem=[e for e in orig if e['key'] not in filled]; print(f'remaining: {len(rem)}'); json.dump(rem, open('.cache/session13-unfilled.json','w'), ensure_ascii=False)"
+   ```
+3. **batch 番号**: 次セッションは **batch 224 から**。 commit message pattern は `data(seed3): batch NNN/MMM (= session13) Opus 4.7 直筆 fill`、 MMM はそのセッションで決める batch 総数。
+4. **per-batch protocol** (= 不変):
+   - 100 件 1 バッチ、 `data/seeds/_fills/batch-NNN.json` に書き込み
+   - `npx tsx scripts/_apply-fills.ts data/seeds/_fills/batch-NNN.json` で apply、 `applied=N, missing=M` を強制確認
+   - commit + push、 末尾に `🎉 Batch NNN/MMM 完了 (= X/Y = Z%) [JST YYYY-MM-DD HH:MM:SS]` を出力
+
+## 観察された傾向 (= 残作業の難易度予想)
+
+- Rank が下がるほど (= vol=2 系列 + マイナー系列) **私が title から内容判別できない作品の比率が増える**。 session 11-12 では「読者投稿コミックエッセイの大量同シリーズ (Q108777305、 Q109596249/250/251 で計 250+ 件)」 や「SDガンダム外伝バリエーション数十件」 のような同質的塊が増加し、 同パターンの synopsis を反復生成する場面が多くなった。
+- Session 8 (= 7分/batch) → session 12 (= 11分/batch) と所要時間が緩やかに増加。 主因は (a) conversation context の膨張、 (b) マイナー作品の synopsis 作成の判断コスト。 1 セッションあたり 2000 件が今の上限近い。
+
+## 関連 commit (= 抜粋)
+
+```
+6db6216  data(seed3): batch 223/223 (= session12 完) Opus 4.7 直筆 fill
+621c3d9  data(seed3): batch 222/223 (= session12) Opus 4.7 直筆 fill
+... (session 12 = batch 204-223、 20 commits)
+b60363d  data(seed3): batch 183/183 (= rank 18106-18205) Opus 4.7 直筆 fill (= session 10 完)
+... (session 8-11 も同様)
+```
+
+## 次セッションでの推奨アクション (= 上書き、 最新)
+
+1. **続行優先**: session 13 として残 48000 件から 2000 件 fill (= batch 224-243)。 上記 bash テンプレで `session13-unfilled.json` を生成 → 同じ per-batch protocol で消化
+2. **キー一致確認の徹底**: 必ず `e['key'] in seed_keys` フィルタで pool を絞る、 もしくは Python 経由で出力した key 文字列をそのまま JSON に貼る (= Bash 出力経由で PUA 文字や特殊文字を保持)
+3. **月次蒸留 protocol が動く前提の宿題は変更なし**: `scripts/_diff-*.ts` 3 本 + `.cache/madb-last-release.txt` 初期化 は依然未着手。 ユーザが「月次蒸留して」 と発話するなら Phase 0 abort のままなので、 別プランとして設計提示が必要
