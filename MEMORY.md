@@ -2,7 +2,7 @@
 
 > このファイルは Claude Code session の context bootstrap 用。新しいセッションを開始したら最初に読むこと。
 
-最終更新: 2026-05-11 (種3 fill session 16 完了、 累計 30,196/70,202 = 43.01%)
+最終更新: 2026-05-11 (種3 fill session 17 完了、 累計 32,194/70,202 = 45.86%)
 
 ## プロジェクト概要
 
@@ -1275,6 +1275,79 @@ c6a8f89  data(seed3): batch 288/303 (= session16) Opus 4.7 直筆 fill
    ```
 2. **next batch 番号 = 304**。
 3. **既知 missing key 2 件** (= Q11268905|ウルフチックにお願い + Q11318682|パニックパラダイス) は PUA 文字 / 表記揺れ問題で seed3 に物理的に存在しないので、 batch JSON に含めても無害 (= applied=98, missing=2 で正常)。
+4. **demographic schema 不変**: `shounen|shoujo|seinen|josei|kodomo|other` のみ。 アダルト系は `seinen + ecchi genre` で表現、 一般教養系は `other + educational genre`。
+5. **per-batch protocol** (= 不変): 100 件 1 バッチ、 `data/seeds/_fills/batch-NNN.json`、 `npx tsx scripts/_apply-fills.ts`、 commit + push、 JST 時刻 + 進捗報告。
+6. **月次蒸留 protocol が動く前提の宿題は変更なし**: `scripts/_diff-*.ts` 3 本 + `.cache/madb-last-release.txt` 初期化 は依然未着手。
+
+---
+
+## 2026-05-11: 種3 fill session 17 完了
+
+### 達成サマリ
+
+- **session 17 batch 304-323 全 20 batch 完了** (= 100 件 × 20 = **2,000 件 fill**)
+- 適用: 1,998 / 2,000 (= **applied=98** in batch 304: Q11268905|ウルフチックにお願い + Q11318682|パニックパラダイス 既知 missing 含む)
+- 残 batch 305-323 は applied=100/100 で missing なし
+- 所要時間: 約 50 分 (= JST 16:18 開始 → 17:08 終了、 約 2.5 分/batch ペース)
+- session 16 → 17 推移: 30,196 → **32,194 / 70,202 = 45.86%** (= **45%突破**)
+- 残 38,008 件 (= 約 19 セッション分)
+
+### Batch 進捗テーブル
+
+| Session | batch range | 範囲 | 適用件数 | missing |
+|---|---|---|---|---|
+| 15 | 264-283 | session14-unfilled 4002 件から 2000 件 | 1,998 | 2 |
+| 16 | 284-303 | session15-unfilled 2002 件 + 補充から 2000 件 | 1,998 | 2 |
+| **17** | 304-323 | session16-unfilled 40006 件から 2000 件 | **1,998** | **2 (= Q11268905 + Q11318682 再発)** |
+
+**累計**: **32,194 / 70,202 = 45.86%**、 **残 38,008 件** (= 約 19 セッション分)。
+
+### Session 17 で観察された傾向
+
+- 所要時間: 16:18:39 → 17:08:29 = **約 50 分** (= 2.5 分/batch、 session 13-16 と同等)。
+- **Q-code 群の傾向**: 引き続き Q11400000-Q11430000 帯の雑誌・出版社・アンソロジー枠が中心。 主な大型クラスター:
+  - **Q11394055** = ぶんか社系女性向けロマンス枠 約 35 件
+  - **Q11394193** = ハーレクイン系女性向け漫画枠 約 60 件
+  - **Q11405238** = レディースコミック女性向けダーク枠 約 60 件
+  - **Q11405623** = 海王社GUSH系ティーンズラブ少女漫画枠 約 35 件
+  - **Q11409335** = 集英社少女向けハーレクイン系枠 約 60 件
+  - **Q11413524** = 吉田まゆみ作品集 約 30 件
+  - **Q11414061** = ぶんか社系実話投稿漫画枠 約 70 件
+  - **Q11418081** = 同上、別シリーズ実話投稿漫画枠 約 30 件
+  - **Q11418590** = 唐沢なをき作品集 約 40 件
+  - **Q1141948** = 楳図かずお作品集 約 100 件
+  - **Q11423339** = 土山しげるグルメ漫画作品集 約 70 件
+  - **Q11425929** = 城アラキ酒・グルメ系作品集 約 25 件
+- **タイトル特徴**: 楳図かずお作品集 (Q1141948) が大きなクラスターを形成し、 ホラー名作の派生作・短編集が中心。 ぶんか社系の実話投稿漫画 (○生 ここだけの話) も継続的に多数。
+
+### 関連 commit (= 抜粋)
+
+```
+6e09925  data(seed3): batch 323/323 (= session17 完了) Opus 4.7 直筆 fill
+671db69  data(seed3): batch 322/323 (= session17) Opus 4.7 直筆 fill
+...
+3d5d1a0  data(seed3): batch 305/323 (= session17) Opus 4.7 直筆 fill
+c4dace1  data(seed3): batch 304/323 (= session17) Opus 4.7 直筆 fill
+```
+
+## 次セッションでの推奨アクション (= 上書き、 最新)
+
+1. **続行優先**: session 18 として残 38,008 件から 2,000 件 fill (= batch 324-343)。 selection ロジック:
+   ```python
+   import json, yaml
+   seed = yaml.safe_load(open('data/seeds/series-supplement.yml'))
+   filled = set(x['key'] for x in seed['series'] if x.get('synopsis') or x.get('demographic'))
+   seed_keys = set(x['key'] for x in seed['series'])
+   orig = json.load(open('.cache/session17-unfilled.json'))
+   rem = [e for e in orig if e['key'] not in filled and e['key'] in seed_keys]
+   if len(rem) < 2100:
+       seen = set(e['key'] for e in rem)
+       extra = [{'key': x['key']} for x in seed['series'] if x['key'] not in filled and x['key'] not in seen]
+       rem.extend(extra)
+   json.dump(rem, open('.cache/session18-unfilled.json','w'), ensure_ascii=False)
+   ```
+2. **next batch 番号 = 324**。
+3. **既知 missing key 2 件** (= Q11268905|ウルフチックにお願い + Q11318682|パニックパラダイス) は引き続き seed3 に物理的に存在しないので、 batch JSON に含めても無害 (= applied=98, missing=2 で正常)。
 4. **demographic schema 不変**: `shounen|shoujo|seinen|josei|kodomo|other` のみ。 アダルト系は `seinen + ecchi genre` で表現、 一般教養系は `other + educational genre`。
 5. **per-batch protocol** (= 不変): 100 件 1 バッチ、 `data/seeds/_fills/batch-NNN.json`、 `npx tsx scripts/_apply-fills.ts`、 commit + push、 JST 時刻 + 進捗報告。
 6. **月次蒸留 protocol が動く前提の宿題は変更なし**: `scripts/_diff-*.ts` 3 本 + `.cache/madb-last-release.txt` 初期化 は依然未着手。
