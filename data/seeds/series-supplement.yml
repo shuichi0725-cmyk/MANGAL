@@ -1,5 +1,5 @@
 schema_version: 1
-generated_at: 2026-05-11T05:27:10.851Z
+generated_at: 2026-05-11T05:29:22.353Z
 generator: claude-opus-4-7-direct-fill
 series:
   - key: Q1001784|GOLDEN SPIRAL
@@ -111355,16 +111355,101 @@ series:
     status: completed
     anime_adapted: false
   - key: Q11379565|恐竜大集合
+    magazine: null
+    demographic: kodomo
+    genres:
+      - educational
+    synopsis: 様々な恐竜たちを紹介する児童向け図鑑形式の学習漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11379565|戦国の猛将 武田信玄
+    magazine: null
+    demographic: kodomo
+    genres:
+      - historical
+      - educational
+    synopsis: 戦国武将・武田信玄の生涯を漫画化した児童向け学習漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11379565|暴君おやじと対決
+    magazine: null
+    demographic: kodomo
+    genres:
+      - comedy
+      - slice_of_life
+    synopsis: 暴君なお父さんに立ち向かう子どもを描く児童向けコメディ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11379565|狼少年ケン
+    magazine: null
+    demographic: kodomo
+    genres:
+      - adventure
+      - action
+    synopsis: ジャングルで狼に育てられた少年ケンの活躍を描く児童向け冒険漫画。アニメ化もされた。
+    status: completed
+    anime_adapted: true
   - key: Q11379565|猿人ルルくん・原人ネネさん
+    magazine: null
+    demographic: kodomo
+    genres:
+      - comedy
+      - historical
+    synopsis: 猿人と原人を主人公にした児童向けコメディ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11379565|頭つきのチャンピオン
+    magazine: null
+    demographic: kodomo
+    genres:
+      - sports
+      - comedy
+    synopsis: 頭つきのチャンピオンを目指す少年を描く児童向けスポーツコメディ。
+    status: completed
+    anime_adapted: false
   - key: Q11379645|インセスト
+    magazine: null
+    demographic: seinen
+    genres:
+      - ecchi
+      - drama
+    synopsis: インセスト(近親相姦)を題材にした青年向け官能漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11379645|中出し人妻会
+    magazine: null
+    demographic: seinen
+    genres:
+      - ecchi
+    synopsis: 人妻を題材にした青年向け官能アンソロジー。
+    status: completed
+    anime_adapted: false
   - key: Q11379645|母姦。
+    magazine: null
+    demographic: seinen
+    genres:
+      - ecchi
+      - drama
+    synopsis: 母性を題材にした青年向け官能漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11379815|3日に1回はユーレイ視る人の怖い話
+    magazine: null
+    demographic: josei
+    genres:
+      - horror
+      - supernatural
+    synopsis: 頻繁に幽霊を見る人の怖い話を漫画化した女性向けホラー漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11379815|コミック幽
+    magazine: null
+    demographic: seinen
+    genres:
+      - horror
+    synopsis: メディアファクトリーのホラー漫画雑誌『幽』掲載作品。
+    status: completed
+    anime_adapted: false
   - key: Q11379815|スピ☆ヲタ子ちゃん
     demographic: josei
     genres:
@@ -111375,6 +111460,14 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q11379815|スピ☆散歩
+    magazine: null
+    demographic: josei
+    genres:
+      - supernatural
+      - slice_of_life
+    synopsis: スピリチュアルな散歩を題材にした女性向けエッセイ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11379815|スピ☆散歩 ぶらりパワスポ霊感旅
     demographic: josei
     genres:
@@ -111384,10 +111477,50 @@ series:
     synopsis: 伊藤三巳華による霊感エッセイ漫画。霊能者ミミミと友人がパワースポットを巡る散歩エッセイ。
     status: completed
   - key: Q11379815|ぷち本当にあった愉快な話呪いの心霊max
+    magazine: null
+    demographic: josei
+    genres:
+      - horror
+      - supernatural
+    synopsis: 呪いの心霊エピソードを集めた女性向け実話ホラー漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11379815|もっともっと視えるんです。
+    magazine: null
+    demographic: josei
+    genres:
+      - supernatural
+      - slice_of_life
+    synopsis: 霊が視える女性の日常を描く女性向けスピリチュアルエッセイ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11379815|山怪談
+    magazine: null
+    demographic: seinen
+    genres:
+      - horror
+      - supernatural
+    synopsis: 山にまつわる怪談を漫画化した青年向けホラー漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11379815|怪眼
+    magazine: null
+    demographic: seinen
+    genres:
+      - horror
+      - supernatural
+    synopsis: 怪しい眼を持つ人々を描く青年向けホラー漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11379815|濡れそぼつ黒髪
+    magazine: null
+    demographic: seinen
+    genres:
+      - horror
+      - drama
+    synopsis: 濡れた黒髪を題材にした青年向けホラー漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11379815|視えるんです。
     magazine: monthly-comic-zenon
     demographic: josei
@@ -111397,11 +111530,59 @@ series:
     synopsis: 霊が視える漫画家・伊藤三巳華の実録オカルトエッセイ。
     status: ongoing
   - key: Q11379815|視えるんです。 ミミカのとおの物語
+    magazine: null
+    demographic: josei
+    genres:
+      - supernatural
+      - slice_of_life
+    synopsis: 霊が視えるミミカの遠野での物語を描く女性向けスピリチュアル漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11379815|禁煙はじめました
+    magazine: null
+    demographic: josei
+    genres:
+      - slice_of_life
+      - comedy
+    synopsis: 禁煙にチャレンジする女性のコミックエッセイ。
+    status: completed
+    anime_adapted: false
   - key: Q11379815|金運スピ散歩
+    magazine: null
+    demographic: josei
+    genres:
+      - supernatural
+      - slice_of_life
+    synopsis: 金運を呼ぶスピリチュアルな散歩を題材にした女性向けエッセイ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11379918|ドラゴン・オールスターズ
+    magazine: null
+    demographic: shounen
+    genres:
+      - fantasy
+      - action
+    synopsis: 様々なドラゴンが集結するファンタジー少年漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11379918|ドラゴンロアーズ
+    magazine: null
+    demographic: shounen
+    genres:
+      - fantasy
+      - action
+    synopsis: ドラゴンの咆哮を題材にしたファンタジー少年漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11379918|ニルヴァーナ・パニック
+    magazine: null
+    demographic: shounen
+    genres:
+      - fantasy
+      - comedy
+    synopsis: ニルヴァーナの大混乱を描くファンタジー少年漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11379918|モンスター・コレクション
     magazine: monthly-comic-dragon
     demographic: shounen
@@ -111436,6 +111617,14 @@ series:
     synopsis: 伊藤勢が描く、平将門の娘・瀧夜叉姫を主人公にした伝奇時代劇。
     status: ongoing
   - key: Q11379918|羅[ゴウ]伝
+    magazine: null
+    demographic: shounen
+    genres:
+      - fantasy
+      - action
+    synopsis: 羅ゴウの伝説を描く少年向けファンタジーアクション漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11379918|荒野に獣 慟哭す
     magazine: monthly-comic-flapper
     demographic: seinen
@@ -111446,7 +111635,23 @@ series:
     synopsis: 夢枕獏のヒロイック・ファンタジー小説『荒野に獣 慟哭す』を、伊藤勢が漫画化。獣化する戦士たちの戦いを描く。
     status: completed
   - key: Q11379918|闇狩り師キマイラ天龍変
+    magazine: null
+    demographic: shounen
+    genres:
+      - fantasy
+      - action
+    synopsis: 夢枕獏原作『闇狩り師』のスピンオフ。キマイラ天龍変を描く少年漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11379918|陰陽頭賀茂保憲
+    magazine: null
+    demographic: shounen
+    genres:
+      - historical
+      - supernatural
+    synopsis: 平安時代の陰陽師・賀茂保憲を題材にした少年向け陰陽道漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11380031|いちばんうしろの大魔王
     demographic: seinen
     genres:
@@ -111473,8 +111678,31 @@ series:
     synopsis: 伊藤宗一による異世界ソロライフファンタジー。ポイントギフター能力で最強となる物語。
     status: completed
   - key: Q11380031|退屈嫌いの封印術師
+    magazine: null
+    demographic: seinen
+    genres:
+      - fantasy
+      - action
+    synopsis: 退屈嫌いな封印術師を主人公にした青年向けファンタジーアクション漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11380031|魔王令嬢の執行者
+    magazine: null
+    demographic: seinen
+    genres:
+      - fantasy
+      - isekai
+    synopsis: 魔王令嬢の執行者を題材にした青年向け異世界ファンタジー漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11380043|アイシテル -海容-
+    magazine: null
+    demographic: josei
+    genres:
+      - drama
+    synopsis: 犯罪加害者の家族のドラマを描いた女性向けシリアスドラマ漫画。実写ドラマ化された『アイシテル~海容~』の派生作品。
+    status: completed
+    anime_adapted: false
   - key: Q11380043|アイシテル -絆-
     magazine: null
     demographic: josei
@@ -111494,13 +111722,76 @@ series:
     status: completed
     anime_adapted: false
   - key: Q11380043|しまっていこー!
+    magazine: null
+    demographic: shounen
+    genres:
+      - sports
+      - comedy
+    synopsis: しまっていこーをかけ声にする少年向けスポーツコメディ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11380043|スター・ステップス
+    magazine: null
+    demographic: shounen
+    genres:
+      - sports
+      - drama
+    synopsis: スター選手を目指すスポーツ少年たちの物語。
+    status: completed
+    anime_adapted: false
   - key: Q11380043|せいしゅん添加物
+    magazine: null
+    demographic: shounen
+    genres:
+      - comedy
+      - school
+    synopsis: 青春に添加物を加えるユニークな少年漫画コメディ。
+    status: completed
+    anime_adapted: false
   - key: Q11380043|チィ寮母
+    magazine: null
+    demographic: seinen
+    genres:
+      - slice_of_life
+      - comedy
+    synopsis: チィ寮母を主人公にした青年向け日常コメディ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11380043|どぶてけし
+    magazine: null
+    demographic: shounen
+    genres:
+      - comedy
+    synopsis: どぶてけしをテーマにした少年向けコメディ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11380043|やってらんねえや
+    magazine: null
+    demographic: shounen
+    genres:
+      - comedy
+      - slice_of_life
+    synopsis: やってらんねえやと愚痴る少年を描くコメディ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11380043|東日本ふるさと物語
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - slice_of_life
+    synopsis: 東日本のふるさとを題材にした青年向けヒューマンドラマ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11380130|ULTRAJUMP MEGAMIX
+    magazine: null
+    demographic: seinen
+    genres:
+      - anthology
+      - drama
+    synopsis: 集英社の青年漫画誌『ウルトラジャンプ』掲載作品のアンソロジー。
+    status: completed
+    anime_adapted: false
   - key: Q11380130|オオカミライズ
     demographic: shounen
     genres:
@@ -111519,6 +111810,14 @@ series:
     status: completed
     anime_adapted: false
   - key: Q11380130|歌屑
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - historical
+    synopsis: 歌屑を題材にした青年向け短編集。
+    status: completed
+    anime_adapted: false
   - key: Q11380130|皇国の守護者
     demographic: seinen
     genres:
@@ -111528,11 +111827,59 @@ series:
     synopsis: 伊藤悠による佐藤大輔原作『皇国の守護者』のコミカライズ。架空の戦争を舞台にした戦記ファンタジーの傑作。
     status: completed
   - key: Q11380130|面影丸
+    magazine: null
+    demographic: seinen
+    genres:
+      - historical
+      - action
+    synopsis: 面影丸を主人公にした青年向け時代劇漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11380186|BRAINS
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - psychological
+    synopsis: 頭脳をテーマにした青年向けドラマ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11380186|ちびまる子ちゃんの樋口一葉
+    magazine: null
+    demographic: kodomo
+    genres:
+      - historical
+      - educational
+    synopsis: ちびまる子ちゃんのキャラと共に明治の女流文学者・樋口一葉の生涯を学ぶ児童向け学習漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11380186|ブレインズ
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - psychological
+    synopsis: ブレインズをテーマにした青年向けドラマ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11380186|栄光なき天才たち
+    magazine: null
+    demographic: seinen
+    genres:
+      - biography
+      - drama
+    synopsis: 歴史に埋もれた天才たちを描く伊藤智義原作・森田信吾作画の青年向け伝記漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11380186|永遠の一手
+    magazine: null
+    demographic: seinen
+    genres:
+      - sports
+      - drama
+    synopsis: 将棋を題材にした青年向けドラマ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11380307|びょ~ん!!陽快学級
     magazine: null
     demographic: kodomo
@@ -111543,9 +111890,41 @@ series:
     status: completed
     anime_adapted: false
   - key: Q11380307|びよーん!!陽快学級
+    magazine: null
+    demographic: kodomo
+    genres:
+      - comedy
+      - school
+    synopsis: びよーんと伸びる陽快学級を舞台にした児童向けコメディ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11380324|JAPAN
+    magazine: null
+    demographic: seinen
+    genres:
+      - action
+      - historical
+    synopsis: 日本を舞台にしたカプコン系青年向けアクション漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11380324|カプコン・セレクションマレフィカールム
+    magazine: null
+    demographic: seinen
+    genres:
+      - action
+      - fantasy
+    synopsis: カプコンのゲーム『マレフィカールム』を題材にしたコミカライズ。
+    status: completed
+    anime_adapted: false
   - key: Q11380324|スーパーストリートファイターIIX外伝
+    magazine: null
+    demographic: seinen
+    genres:
+      - action
+      - martial_arts
+    synopsis: カプコンの格闘ゲーム『スーパーストリートファイターII X』の外伝コミカライズ。
+    status: completed
+    anime_adapted: false
   - key: Q11380324|ピルグリム・イェーガー
     magazine: monthly-shonen-ace
     demographic: seinen
@@ -111556,10 +111935,48 @@ series:
     synopsis: 伊藤真美が描く、巡礼者(ピルグリム)を狩る教会の戦士たちの戦いを描く宗教ファンタジー。
     status: completed
   - key: Q11380324|マレフィカールムOps Villa
+    magazine: null
+    demographic: seinen
+    genres:
+      - action
+      - fantasy
+    synopsis: カプコン『マレフィカールム』のOps Villa編。青年向けアクション漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11380324|秘身譚
+    magazine: null
+    demographic: seinen
+    genres:
+      - historical
+      - supernatural
+    synopsis: 秘身譚を題材にした青年向け時代劇怪奇漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11380432|カナ
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - slice_of_life
+    synopsis: カナを主人公にした青年向けドラマ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11380432|シャモア
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+    synopsis: シャモアを題材にした青年向けドラマ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11380432|ユキヒョウ
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+    synopsis: ユキヒョウを題材にした青年向けドラマ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11380432|兎
     magazine: weekly-young-jump
     demographic: seinen
@@ -111579,9 +111996,40 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q11380432|鴉
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - mystery
+    synopsis: 鴉を主人公にした青年向けハードボイルド漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11380501|おつかれごはん
+    magazine: null
+    demographic: seinen
+    genres:
+      - gourmet
+      - slice_of_life
+    synopsis: 疲れた一日の終わりのごはんを描く青年向けグルメ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11380501|ゴラクのグルメ
+    magazine: null
+    demographic: seinen
+    genres:
+      - gourmet
+    synopsis: 週刊漫画ゴラク掲載のグルメ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11380501|すたんどあっぷ
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+      - slice_of_life
+    synopsis: スタンドアップを題材にした青年向けコメディ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11380501|とこよかくりよ
     magazine: null
     demographic: seinen
@@ -111625,9 +112073,40 @@ series:
     synopsis: 伊藤静によるグルメラブコメディ。優しい声より美味しいメシを選ぶヒロインの物語。
     status: completed
   - key: Q11380501|山田飯
+    magazine: null
+    demographic: seinen
+    genres:
+      - gourmet
+      - comedy
+    synopsis: 山田の食生活を描く青年向けグルメコメディ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11380501|常世幽世
+    magazine: null
+    demographic: seinen
+    genres:
+      - supernatural
+      - drama
+    synopsis: 常世と幽世を行き来する物語を描く青年向け怪奇漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11380501|福助
+    magazine: null
+    demographic: seinen
+    genres:
+      - slice_of_life
+      - comedy
+    synopsis: 福助を主人公にした青年向け人情漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11380501|美味の異国飯
+    magazine: null
+    demographic: seinen
+    genres:
+      - gourmet
+    synopsis: 美味しい異国料理を題材にした青年向けグルメ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11380516|イヴ愛してる
     magazine: null
     demographic: shoujo
@@ -111645,33 +112124,255 @@ series:
     synopsis: 伊藤黒介が描く、犬のベルと飼い主の二人暮らしのほのぼのエッセイ。
     status: completed
   - key: Q11380516|ムダヅモ無き第二次改革
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+      - sports
+    synopsis: 大和田秀樹『ムダヅモ無き改革』の続編。麻雀で政治家たちが戦う青年向けギャグ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11381019|キャスター亜矢子
+    magazine: null
+    demographic: seinen
+    genres:
+      - ecchi
+      - drama
+    synopsis: キャスター亜矢子を主人公にした青年向け官能漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11381019|ピアスクラブ
+    magazine: null
+    demographic: seinen
+    genres:
+      - ecchi
+      - drama
+    synopsis: ピアスをテーマにした青年向け官能漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11381019|人妻凌辱
+    magazine: null
+    demographic: seinen
+    genres:
+      - ecchi
+      - drama
+    synopsis: 人妻を題材にした青年向け官能漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11381019|人妻女教師
+    magazine: null
+    demographic: seinen
+    genres:
+      - ecchi
+      - drama
+    synopsis: 女教師の人妻を題材にした青年向け官能漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11381019|今日介と6人の女たち
+    magazine: null
+    demographic: seinen
+    genres:
+      - ecchi
+      - drama
+    synopsis: 今日介と6人の女たちの関係を描く青年向け官能漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11381019|伊駒一平・next!!
+    magazine: null
+    demographic: seinen
+    genres:
+      - ecchi
+      - drama
+    synopsis: 伊駒一平の青年向け官能漫画作品集。
+    status: completed
+    anime_adapted: false
   - key: Q11381019|伊駒一平junk!!
+    magazine: null
+    demographic: seinen
+    genres:
+      - ecchi
+      - drama
+    synopsis: 伊駒一平の青年向け官能漫画作品集。
+    status: completed
+    anime_adapted: false
   - key: Q11381019|奴隷少女飼育記
+    magazine: null
+    demographic: seinen
+    genres:
+      - ecchi
+      - drama
+    synopsis: 青年向け官能漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11381019|学園の蟲螻
+    magazine: null
+    demographic: seinen
+    genres:
+      - ecchi
+      - drama
+    synopsis: 学園を舞台にした青年向け官能漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11381019|官能小説家森雪麗美
+    magazine: null
+    demographic: seinen
+    genres:
+      - ecchi
+      - drama
+    synopsis: 官能小説家・森雪麗美を主人公にした青年向け官能漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11381019|少女スリットえぐられ地獄
+    magazine: null
+    demographic: seinen
+    genres:
+      - ecchi
+      - drama
+    synopsis: 青年向け官能漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11381019|巨乳と貧乳
+    magazine: null
+    demographic: seinen
+    genres:
+      - ecchi
+      - comedy
+    synopsis: 巨乳と貧乳の女性たちを題材にした青年向け官能コメディ。
+    status: completed
+    anime_adapted: false
   - key: Q11381019|母娘喰玩
+    magazine: null
+    demographic: seinen
+    genres:
+      - ecchi
+      - drama
+    synopsis: 青年向け官能漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11381019|淫乱痴女子
+    magazine: null
+    demographic: seinen
+    genres:
+      - ecchi
+      - drama
+    synopsis: 青年向け官能漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11381019|無人島サバイバルファック 完結編
+    magazine: null
+    demographic: seinen
+    genres:
+      - ecchi
+      - drama
+    synopsis: 無人島サバイバルを題材にした青年向け官能漫画の完結編。
+    status: completed
+    anime_adapted: false
   - key: Q11381019|牝犬調教
+    magazine: null
+    demographic: seinen
+    genres:
+      - ecchi
+      - drama
+    synopsis: 青年向け官能漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11381019|生姦痴漢電車
+    magazine: null
+    demographic: seinen
+    genres:
+      - ecchi
+      - drama
+    synopsis: 青年向け官能漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11381019|生猟り
+    magazine: null
+    demographic: seinen
+    genres:
+      - ecchi
+      - drama
+    synopsis: 青年向け官能漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11381019|秘虐
+    magazine: null
+    demographic: seinen
+    genres:
+      - ecchi
+      - drama
+    synopsis: 青年向け官能漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11381019|秘辱
+    magazine: null
+    demographic: seinen
+    genres:
+      - ecchi
+      - drama
+    synopsis: 青年向け官能漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11381019|脱がされ女脱ぎ男
+    magazine: null
+    demographic: seinen
+    genres:
+      - ecchi
+      - comedy
+    synopsis: 青年向け官能漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11381019|贄の家系
+    magazine: null
+    demographic: seinen
+    genres:
+      - ecchi
+      - drama
+    synopsis: 青年向け官能漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11381019|野外プレイのススメ
+    magazine: null
+    demographic: seinen
+    genres:
+      - ecchi
+      - comedy
+    synopsis: 青年向け官能漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11381019|隣の奥たま!!
+    magazine: null
+    demographic: seinen
+    genres:
+      - ecchi
+      - comedy
+    synopsis: 隣の奥様を題材にした青年向け官能コメディ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q1138133|21世紀のための吾妻ひでお
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+      - sci_fi
+    synopsis: 吾妻ひでおの21世紀向け作品集。SF・ナンセンスコメディ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q1138133|Comic新現実
+    magazine: null
+    demographic: seinen
+    genres:
+      - anthology
+    synopsis: 吾妻ひでお参加の青年向け漫画アンソロジー誌『コミック新現実』。
+    status: completed
+    anime_adapted: false
   - key: Q1138133|Oh!アヅマ
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+    synopsis: 吾妻ひでおの青年向けコメディ漫画作品集。
+    status: completed
+    anime_adapted: false
   - key: Q1138133|アズマニア
     demographic: seinen
     genres:
@@ -111682,16 +112383,102 @@ series:
     status: completed
     anime_adapted: false
   - key: Q1138133|あめいじんぐマリー
+    magazine: null
+    demographic: shounen
+    genres:
+      - comedy
+      - sci_fi
+    synopsis: 吾妻ひでおのSFナンセンスコメディ少年漫画。
+    status: completed
+    anime_adapted: false
   - key: Q1138133|あるいは吾妻ひでおでいっぱいの吾妻ひでお
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+    synopsis: 吾妻ひでお作品の集大成的アンソロジー。
+    status: completed
+    anime_adapted: false
   - key: Q1138133|アル中病棟
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - biography
+    synopsis: 吾妻ひでお自身のアルコール依存症体験を描いた自伝コミック。『失踪日記2』とも。
+    status: completed
+    anime_adapted: false
   - key: Q1138133|うつうつひでお日記
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - biography
+    synopsis: 吾妻ひでお自身のうつ状態の日々を綴った自伝コミック。
+    status: completed
+    anime_adapted: false
   - key: Q1138133|うつうつひでお日記DX
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - biography
+    synopsis: 『うつうつひでお日記』のDX版。吾妻ひでおの自伝コミック。
+    status: completed
+    anime_adapted: false
   - key: Q1138133|エイト・ビート
+    magazine: null
+    demographic: shounen
+    genres:
+      - comedy
+      - music
+    synopsis: 吾妻ひでおの音楽を題材にした少年向けコメディ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q1138133|オリンポスのポロン
+    magazine: null
+    demographic: shoujo
+    genres:
+      - fantasy
+      - comedy
+    synopsis: ギリシャ神話のポロンを主人公にした吾妻ひでおの少女向けコメディ漫画。アニメ化もされた。
+    status: completed
+    anime_adapted: true
   - key: Q1138133|カオスノート
+    magazine: null
+    demographic: seinen
+    genres:
+      - sci_fi
+      - comedy
+    synopsis: 吾妻ひでおのSFナンセンスコメディ青年漫画。
+    status: completed
+    anime_adapted: false
   - key: Q1138133|きのこ漫画名作選
+    magazine: null
+    demographic: seinen
+    genres:
+      - anthology
+      - fantasy
+    synopsis: 吾妻ひでお参加のきのこをテーマにした漫画アンソロジー。
+    status: completed
+    anime_adapted: false
   - key: Q1138133|きまぐれ悟空
+    magazine: null
+    demographic: shounen
+    genres:
+      - comedy
+      - fantasy
+    synopsis: 吾妻ひでおの孫悟空を題材にした少年向けコメディ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q1138133|さまよえる成年のための吾妻ひでお
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+    synopsis: 成年向けに編集された吾妻ひでお作品アンソロジー。
+    status: completed
+    anime_adapted: false
   - key: Q1138133|スクラップ学園
     demographic: shounen
     genres:
