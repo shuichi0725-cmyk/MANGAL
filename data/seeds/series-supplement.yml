@@ -1,5 +1,5 @@
 schema_version: 1
-generated_at: 2026-05-11T20:16:43.982Z
+generated_at: 2026-05-11T20:18:15.930Z
 generator: claude-opus-4-7-direct-fill
 series:
   - key: Q1001784|GOLDEN SPIRAL
@@ -337154,8 +337154,29 @@ series:
     status: completed
     anime_adapted: false
   - key: Q11675527|緑茶子ちゃんのこと
+    magazine: null
+    demographic: shoujo
+    genres:
+      - comedy
+    synopsis: 少女向けコメディ。
+    status: completed
+    anime_adapted: false
   - key: Q11675527|金魚のうろこ
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+    synopsis: 少女向け短編。
+    status: completed
+    anime_adapted: false
   - key: Q11675527|鏡をみてはいけません
+    magazine: null
+    demographic: shoujo
+    genres:
+      - horror
+    synopsis: 少女向け怪奇作品。
+    status: completed
+    anime_adapted: false
   - key: Q11675527|雲の上のキスケさん
     demographic: josei
     genres:
@@ -337164,8 +337185,30 @@ series:
     synopsis: 鴨居まさねによる女性向けファンタジー。雲の上に住むキスケさんとの物語。
     status: completed
   - key: Q11675527|鴨居家のマルちんは猫です
+    magazine: null
+    demographic: shoujo
+    genres:
+      - comedy
+      - slice_of_life
+    synopsis: 猫エッセイ。
+    status: completed
+    anime_adapted: false
   - key: Q11675545|ドラネコロック
+    magazine: null
+    demographic: shounen
+    genres:
+      - action
+    synopsis: 少年向けアクション。
+    status: completed
+    anime_adapted: false
   - key: Q11675545|マカロニ2
+    magazine: null
+    demographic: shounen
+    genres:
+      - action
+    synopsis: マカロニ続編。
+    status: completed
+    anime_adapted: false
   - key: Q11675545|マカロニほうれん荘
     magazine: weekly-shonen-champion
     demographic: shounen
@@ -337175,12 +337218,61 @@ series:
     synopsis: 鴨川つばめの伝説的ハイテンション学園ギャグ。きんどーさん・トシちゃん・ひかるくんの破天荒な日常。
     status: completed
   - key: Q11675593|かわいいしっぽのペロくん
+    magazine: null
+    demographic: kodomo
+    genres:
+      - comedy
+    synopsis: 鴨沢祐仁作品。
+    status: completed
+    anime_adapted: false
   - key: Q11675593|クシー君のピカビアな夜
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+    synopsis: 鴨沢祐仁クシー君シリーズ。
+    status: completed
+    anime_adapted: false
   - key: Q11675593|クシー君の夜の散歩
+    magazine: null
+    demographic: seinen
+    genres:
+      - slice_of_life
+    synopsis: 鴨沢祐仁クシー君シリーズ。
+    status: completed
+    anime_adapted: false
   - key: Q11675593|クシー君の発明
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+    synopsis: 鴨沢祐仁クシー君シリーズ。
+    status: completed
+    anime_adapted: false
   - key: Q11675593|三日月国のレプス君
+    magazine: null
+    demographic: seinen
+    genres:
+      - fantasy
+    synopsis: 鴨沢祐仁ファンタジー。
+    status: completed
+    anime_adapted: false
   - key: Q11675801|医学のひみつ
+    magazine: null
+    demographic: kodomo
+    genres:
+      - educational
+    synopsis: 医学学習漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11675801|大自然のふしぎ50のひみつ
+    magazine: null
+    demographic: kodomo
+    genres:
+      - educational
+    synopsis: 自然学習漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11675947|EDEN
     demographic: seinen
     genres:
@@ -337191,6 +337283,13 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q11675947|METAL FINISH
+    magazine: null
+    demographic: seinen
+    genres:
+      - action
+    synopsis: 青年向けアクション。
+    status: completed
+    anime_adapted: false
   - key: Q11675947|妖刀に魅入られしスケルトン
     demographic: shounen
     genres:
@@ -337200,9 +337299,37 @@ series:
     synopsis: 鶴岡伸寿が描く、スケルトンに転生して妖刀の力を得る男の異世界ファンタジー。
     status: completed
   - key: Q11675947|戦国武将
+    magazine: null
+    demographic: seinen
+    genres:
+      - historical
+    synopsis: 戦国武将伝記漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11675947|戦国激女100人伝
+    magazine: null
+    demographic: seinen
+    genres:
+      - historical
+    synopsis: 戦国時代女性伝記漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11675947|日本経済沈没2004
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+    synopsis: 経済をテーマにした青年作品。
+    status: completed
+    anime_adapted: false
   - key: Q11676101|B.リアクション!
+    magazine: null
+    demographic: shounen
+    genres:
+      - action
+    synopsis: 少年向けアクション。
+    status: completed
+    anime_adapted: false
   - key: Q11676101|なつきクライシス
     magazine: weekly-young-jump
     demographic: seinen
@@ -337222,12 +337349,63 @@ series:
     synopsis: 鶴田洋久による少女ファンタジー。弁天様にまつわる秘密の物語。
     status: completed
   - key: Q11676101|風牙
+    magazine: null
+    demographic: shounen
+    genres:
+      - action
+      - historical
+    synopsis: 少年向け時代劇アクション。
+    status: completed
+    anime_adapted: false
   - key: Q11676325|ちゅーぼーですよっ
+    magazine: null
+    demographic: seinen
+    genres:
+      - food
+      - comedy
+    synopsis: 厨房コメディ。
+    status: completed
+    anime_adapted: false
   - key: Q11676325|ひな缶
+    magazine: null
+    demographic: seinen
+    genres:
+      - ecchi
+    synopsis: 成人向けコミック。
+    status: completed
+    anime_adapted: false
   - key: Q11676325|ヒミツの少年団
+    magazine: null
+    demographic: seinen
+    genres:
+      - ecchi
+    synopsis: 成人向けコミック。
+    status: completed
+    anime_adapted: false
   - key: Q11676325|ぶるまぁく
+    magazine: null
+    demographic: seinen
+    genres:
+      - ecchi
+    synopsis: 成人向けコミック。
+    status: completed
+    anime_adapted: false
   - key: Q11676325|ボクらの♀パコだいありー
+    magazine: null
+    demographic: seinen
+    genres:
+      - ecchi
+    synopsis: 成人向けコミック。
+    status: completed
+    anime_adapted: false
   - key: Q11676325|好色少年のススメ
+    magazine: null
+    demographic: seinen
+    genres:
+      - ecchi
+    synopsis: 成人向けアンソロジー。
+    status: completed
+    anime_adapted: false
   - key: Q11676387|8マンインフィニティ
     demographic: seinen
     genres:
@@ -337236,7 +337414,21 @@ series:
     synopsis: 平井和正原作・鷹氏隆之作画の『8マン』新シリーズ・インフィニティ編。
     status: completed
   - key: Q11676387|grunden
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+    synopsis: 青年向け短編。
+    status: completed
+    anime_adapted: false
   - key: Q11676387|アルケミスト 錬金術師
+    magazine: null
+    demographic: seinen
+    genres:
+      - fantasy
+    synopsis: 錬金術師ファンタジー。
+    status: completed
+    anime_adapted: false
   - key: Q11676387|風使い
     magazine: null
     demographic: shounen
@@ -337248,9 +337440,37 @@ series:
     status: completed
     anime_adapted: false
   - key: Q11676465|$10 Ten dollars
+    magazine: null
+    demographic: shoujo
+    genres:
+      - yaoi
+    synopsis: 鹿乃しうこBL作品。
+    status: completed
+    anime_adapted: false
   - key: Q11676465|Dive
+    magazine: null
+    demographic: shoujo
+    genres:
+      - yaoi
+    synopsis: BL作品。
+    status: completed
+    anime_adapted: false
   - key: Q11676465|ESCAPE
+    magazine: null
+    demographic: shoujo
+    genres:
+      - yaoi
+    synopsis: BL作品。
+    status: completed
+    anime_adapted: false
   - key: Q11676465|Gatenなアイツ
+    magazine: null
+    demographic: shoujo
+    genres:
+      - yaoi
+    synopsis: BL作品。
+    status: completed
+    anime_adapted: false
   - key: Q11676465|P.B.B
     demographic: josei
     genres:
@@ -337266,35 +337486,246 @@ series:
     synopsis: 鹿乃しうこが描く、ボクシングを題材にしたBLラブストーリー。
     status: completed
   - key: Q11676465|Punch↑ + 次男上等
+    magazine: null
+    demographic: shoujo
+    genres:
+      - yaoi
+    synopsis: BL作品。
+    status: completed
+    anime_adapted: false
   - key: Q11676465|アブナゲ。
+    magazine: null
+    demographic: shoujo
+    genres:
+      - yaoi
+    synopsis: BL作品。
+    status: completed
+    anime_adapted: false
   - key: Q11676465|オトコギ。
+    magazine: null
+    demographic: shoujo
+    genres:
+      - yaoi
+    synopsis: BL作品。
+    status: completed
+    anime_adapted: false
   - key: Q11676465|こんな男に誰がした
+    magazine: null
+    demographic: shoujo
+    genres:
+      - yaoi
+    synopsis: BL作品。
+    status: completed
+    anime_adapted: false
   - key: Q11676465|ササクレ・インパクト
+    magazine: null
+    demographic: shoujo
+    genres:
+      - yaoi
+    synopsis: 鹿乃しうこBLシリーズ。
+    status: completed
+    anime_adapted: false
   - key: Q11676465|ササクレ・クライシス
+    magazine: null
+    demographic: shoujo
+    genres:
+      - yaoi
+    synopsis: 鹿乃しうこBLシリーズ。
+    status: completed
+    anime_adapted: false
   - key: Q11676465|ササクレ・クロニクル
+    magazine: null
+    demographic: shoujo
+    genres:
+      - yaoi
+    synopsis: 鹿乃しうこBLシリーズ。
+    status: completed
+    anime_adapted: false
   - key: Q11676465|ササクレ・メモリアル
+    magazine: null
+    demographic: shoujo
+    genres:
+      - yaoi
+    synopsis: 鹿乃しうこBLシリーズ。
+    status: completed
+    anime_adapted: false
   - key: Q11676465|ササクレ・レクイエム
+    magazine: null
+    demographic: shoujo
+    genres:
+      - yaoi
+    synopsis: 鹿乃しうこBLシリーズ。
+    status: completed
+    anime_adapted: false
   - key: Q11676465|つつぬけ。
+    magazine: null
+    demographic: shoujo
+    genres:
+      - yaoi
+    synopsis: BL作品。
+    status: completed
+    anime_adapted: false
   - key: Q11676465|できのいいキス悪いキス
+    magazine: null
+    demographic: shoujo
+    genres:
+      - yaoi
+    synopsis: BL作品。
+    status: completed
+    anime_adapted: false
   - key: Q11676465|はかなげ。
+    magazine: null
+    demographic: shoujo
+    genres:
+      - yaoi
+    synopsis: BL作品。
+    status: completed
+    anime_adapted: false
   - key: Q11676465|バクダンヘブン
+    magazine: null
+    demographic: shoujo
+    genres:
+      - yaoi
+    synopsis: BL作品。
+    status: completed
+    anime_adapted: false
   - key: Q11676465|フェイク♂
+    magazine: null
+    demographic: shoujo
+    genres:
+      - yaoi
+    synopsis: BL作品。
+    status: completed
+    anime_adapted: false
   - key: Q11676465|プライスレス・ハニー
+    magazine: null
+    demographic: shoujo
+    genres:
+      - yaoi
+    synopsis: BL作品。
+    status: completed
+    anime_adapted: false
   - key: Q11676465|ブラブラ・ぶんぶん
+    magazine: null
+    demographic: shoujo
+    genres:
+      - yaoi
+    synopsis: BL作品。
+    status: completed
+    anime_adapted: false
   - key: Q11676465|ブルと歩けば
+    magazine: null
+    demographic: shoujo
+    genres:
+      - yaoi
+    synopsis: BL作品。
+    status: completed
+    anime_adapted: false
   - key: Q11676465|ラストキスから始めよう
+    magazine: null
+    demographic: shoujo
+    genres:
+      - yaoi
+    synopsis: BL作品。
+    status: completed
+    anime_adapted: false
   - key: Q11676465|仏頂baby
+    magazine: null
+    demographic: shoujo
+    genres:
+      - yaoi
+    synopsis: BL作品。
+    status: completed
+    anime_adapted: false
   - key: Q11676465|兄貴上等
+    magazine: null
+    demographic: shoujo
+    genres:
+      - yaoi
+    synopsis: BL作品。
+    status: completed
+    anime_adapted: false
   - key: Q11676465|兎の城
+    magazine: null
+    demographic: shoujo
+    genres:
+      - yaoi
+    synopsis: 鹿乃しうこBL作品。
+    status: completed
+    anime_adapted: false
   - key: Q11676465|兎の城 鹿乃しうこ初期作品集
+    magazine: null
+    demographic: shoujo
+    genres:
+      - yaoi
+    synopsis: 鹿乃しうこ初期BL作品集。
+    status: completed
+    anime_adapted: false
   - key: Q11676465|君さえいれば
+    magazine: null
+    demographic: shoujo
+    genres:
+      - yaoi
+    synopsis: BL作品。
+    status: completed
+    anime_adapted: false
   - key: Q11676465|後ろの正面Darling
+    magazine: null
+    demographic: shoujo
+    genres:
+      - yaoi
+    synopsis: BL作品。
+    status: completed
+    anime_adapted: false
   - key: Q11676465|心霊メイト
+    magazine: null
+    demographic: shoujo
+    genres:
+      - yaoi
+      - supernatural
+    synopsis: BL作品。
+    status: completed
+    anime_adapted: false
   - key: Q11676465|懺悔
+    magazine: null
+    demographic: shoujo
+    genres:
+      - yaoi
+    synopsis: BL作品。
+    status: completed
+    anime_adapted: false
   - key: Q11676465|持たざる男
+    magazine: null
+    demographic: shoujo
+    genres:
+      - yaoi
+    synopsis: BL作品。
+    status: completed
+    anime_adapted: false
   - key: Q11676465|永久磁石の法則
+    magazine: null
+    demographic: shoujo
+    genres:
+      - yaoi
+    synopsis: BL作品。
+    status: completed
+    anime_adapted: false
   - key: Q11676465|生意気。
+    magazine: null
+    demographic: shoujo
+    genres:
+      - yaoi
+    synopsis: BL作品。
+    status: completed
+    anime_adapted: false
   - key: Q11676465|花いぬ日記
+    magazine: null
+    demographic: shoujo
+    genres:
+      - yaoi
+    synopsis: BL作品。
+    status: completed
+    anime_adapted: false
   - key: Q11676465|花組仁侠伝
     demographic: josei
     genres:
@@ -337305,6 +337736,13 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q11676465|萌えの真理
+    magazine: null
+    demographic: shoujo
+    genres:
+      - yaoi
+    synopsis: BL作品。
+    status: completed
+    anime_adapted: false
   - key: Q11677176|ベジたべる
     magazine: null
     demographic: josei
@@ -337315,11 +337753,56 @@ series:
     status: completed
     anime_adapted: false
   - key: Q11677176|リンガフランカ
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+    synopsis: 青年向け短編。
+    status: completed
+    anime_adapted: false
   - key: Q11677176|夜鳴きメシ
+    magazine: null
+    demographic: seinen
+    genres:
+      - food
+      - drama
+    synopsis: 深夜食堂系青年作品。
+    status: completed
+    anime_adapted: false
   - key: Q11677176|学園夢探偵獏
+    magazine: null
+    demographic: shounen
+    genres:
+      - mystery
+      - school
+    synopsis: 学園探偵作品。
+    status: completed
+    anime_adapted: false
   - key: Q11677176|猫本
+    magazine: null
+    demographic: seinen
+    genres:
+      - slice_of_life
+    synopsis: 猫エッセイ。
+    status: completed
+    anime_adapted: false
   - key: Q11677176|細雪 マンガ版
+    magazine: null
+    demographic: seinen
+    genres:
+      - historical
+      - drama
+    synopsis: 谷崎潤一郎細雪コミカライズ。
+    status: completed
+    anime_adapted: false
   - key: Q11677429|201号室の災厄
+    magazine: null
+    demographic: shoujo
+    genres:
+      - mystery
+    synopsis: 少女向けミステリー。
+    status: completed
+    anime_adapted: false
   - key: Q11677429|AQUADOM
     demographic: shoujo
     genres:
@@ -337328,6 +337811,13 @@ series:
     synopsis: 麻々原絵里依による少女ファンタジー。AQUADOMを描く物語。
     status: completed
   - key: Q11677429|Darling,I love you
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+    synopsis: 少女向け恋愛。
+    status: completed
+    anime_adapted: false
   - key: Q11677429|Fake
     demographic: shoujo
     genres:
@@ -337338,11 +337828,54 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q11677429|From dusk till dawn
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+    synopsis: 少女向け短編。
+    status: completed
+    anime_adapted: false
   - key: Q11677429|Funky city bad time
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+    synopsis: 少女向け短編。
+    status: completed
+    anime_adapted: false
   - key: Q11677429|J1
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+    synopsis: 少女向け短編。
+    status: completed
+    anime_adapted: false
   - key: Q11677429|PLATINUM BOYS
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+    synopsis: 少女向け短編。
+    status: completed
+    anime_adapted: false
   - key: Q11677429|Sweet blood
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+      - supernatural
+    synopsis: 少女向け短編。
+    status: completed
+    anime_adapted: false
   - key: Q11677429|Varnish
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+    synopsis: 少女向け短編。
+    status: completed
+    anime_adapted: false
   - key: Q11677429|WARNING
     demographic: shoujo
     genres:
@@ -337353,15 +337886,88 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q11677429|エイリアンゴーホーム
+    magazine: null
+    demographic: shoujo
+    genres:
+      - sci_fi
+      - comedy
+    synopsis: 少女向けSFコメディ。
+    status: completed
+    anime_adapted: false
   - key: Q11677429|きぐるみプラネット
+    magazine: null
+    demographic: shoujo
+    genres:
+      - fantasy
+      - comedy
+    synopsis: 少女向けファンタジー。
+    status: completed
+    anime_adapted: false
   - key: Q11677429|この世は金しだい
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+    synopsis: 少女向け短編。
+    status: completed
+    anime_adapted: false
   - key: Q11677429|ジュテーム・スキャンダル
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+      - romance
+    synopsis: 少女向け短編。
+    status: completed
+    anime_adapted: false
   - key: Q11677429|ダブルキャスト
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+    synopsis: 少女向け短編。
+    status: completed
+    anime_adapted: false
   - key: Q11677429|ひみつのおとうさん
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+    synopsis: 少女向け短編。
+    status: completed
+    anime_adapted: false
   - key: Q11677429|ブラジル蝶の謎
+    magazine: null
+    demographic: seinen
+    genres:
+      - mystery
+    synopsis: 有栖川有栖原作コミカライズ。
+    status: completed
+    anime_adapted: false
   - key: Q11677429|プリティ・ベイビィズ
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+    synopsis: 少女向け短編。
+    status: completed
+    anime_adapted: false
   - key: Q11677429|ヘビー×ビューティ
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+    synopsis: 少女向け短編。
+    status: completed
+    anime_adapted: false
   - key: Q11677429|マカロニ
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+    synopsis: 少女向け短編。
+    status: completed
+    anime_adapted: false
   - key: Q11677429|ラブ・テロリスト
     demographic: shoujo
     genres:
@@ -337370,9 +337976,38 @@ series:
     synopsis: 麻々原絵里依による少女ラブコメディ。ラブ・テロリストの愉快な物語。
     status: completed
   - key: Q11677429|ロシア紅茶の謎
+    magazine: null
+    demographic: seinen
+    genres:
+      - mystery
+    synopsis: 有栖川有栖原作コミカライズ。
+    status: completed
+    anime_adapted: false
   - key: Q11677429|下宿日和
+    magazine: null
+    demographic: shoujo
+    genres:
+      - slice_of_life
+    synopsis: 少女向け日常作品。
+    status: completed
+    anime_adapted: false
   - key: Q11677429|人喰いの滝
+    magazine: null
+    demographic: shoujo
+    genres:
+      - horror
+      - mystery
+    synopsis: 少女向け怪奇ミステリー。
+    status: completed
+    anime_adapted: false
   - key: Q11677429|星矢同人誌傑作アンソロジー
+    magazine: null
+    demographic: shoujo
+    genres:
+      - fantasy
+    synopsis: 聖闘士星矢同人傑作集。
+    status: completed
+    anime_adapted: false
   - key: Q11677429|朱色の研究
     magazine: null
     demographic: seinen
@@ -337383,13 +338018,72 @@ series:
     status: completed
     anime_adapted: false
   - key: Q11677429|朱色の研究夕陽丘殺人事件
+    magazine: null
+    demographic: shoujo
+    genres:
+      - mystery
+    synopsis: 少女向けミステリー。
+    status: completed
+    anime_adapted: false
   - key: Q11677429|朱色の研究枯木灘殺人事件
+    magazine: null
+    demographic: shoujo
+    genres:
+      - mystery
+    synopsis: 少女向けミステリー。
+    status: completed
+    anime_adapted: false
   - key: Q11677429|極東キッド
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+    synopsis: 少女向け短編。
+    status: completed
+    anime_adapted: false
   - key: Q11677429|極楽カフェ
+    magazine: null
+    demographic: shoujo
+    genres:
+      - food
+      - comedy
+    synopsis: カフェコメディ。
+    status: completed
+    anime_adapted: false
   - key: Q11677429|泡と欲望
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+    synopsis: 少女向け短編。
+    status: completed
+    anime_adapted: false
   - key: Q11677429|狼を狩る法則
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+      - fantasy
+    synopsis: 少女向け短編。
+    status: completed
+    anime_adapted: false
   - key: Q11677429|花吹雪デンゲイ野郎
+    magazine: null
+    demographic: shoujo
+    genres:
+      - historical
+      - comedy
+    synopsis: 少女向け歴史コメディ。
+    status: completed
+    anime_adapted: false
   - key: Q11677429|英国庭園の謎
+    magazine: null
+    demographic: seinen
+    genres:
+      - mystery
+    synopsis: 有栖川有栖原作コミカライズ。
+    status: completed
+    anime_adapted: false
   - key: Q11677429|茅島氏の優雅な生活
     demographic: josei
     genres:
@@ -337400,8 +338094,31 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q11677429|辛口食堂
+    magazine: null
+    demographic: shoujo
+    genres:
+      - food
+      - comedy
+    synopsis: グルメコメディ。
+    status: completed
+    anime_adapted: false
   - key: Q11677429|須臾楼閣
+    magazine: null
+    demographic: shoujo
+    genres:
+      - fantasy
+      - historical
+    synopsis: 少女向け歴史ファンタジー。
+    status: completed
+    anime_adapted: false
   - key: Q11677429|黄昏の姫君
+    magazine: null
+    demographic: shoujo
+    genres:
+      - fantasy
+    synopsis: 少女向けファンタジー。
+    status: completed
+    anime_adapted: false
   - key: Q11677457|Final Mission
   - key: Q11677457|GREEN PARADISE
   - key: Q11677457|JOKER
