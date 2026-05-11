@@ -1,5 +1,5 @@
 schema_version: 1
-generated_at: 2026-05-11T09:45:28.114Z
+generated_at: 2026-05-11T09:47:38.722Z
 generator: claude-opus-4-7-direct-fill
 series:
   - key: Q1001784|GOLDEN SPIRAL
@@ -171829,9 +171829,41 @@ series:
     status: completed
     anime_adapted: false
   - key: Q11468731|おねーさんとあそぼうっ!
+    magazine: null
+    demographic: shounen
+    genres:
+      - comedy
+      - romance
+    synopsis: おねーさんとあそぼうを題材にした少年向けラブコメ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11468731|しあわせ
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+      - slice_of_life
+    synopsis: しあわせを題材にした少女向けほのぼのドラマ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11468731|テン・アフター
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+      - romance
+    synopsis: テン・アフターを題材にした少女向けロマンス漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11468731|ハーレムヘブン
+    magazine: null
+    demographic: seinen
+    genres:
+      - ecchi
+      - comedy
+    synopsis: ハーレムヘブンを題材にした青年向けエロコメディ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11468731|七彩のラミュロス
     demographic: josei
     genres:
@@ -171851,19 +171883,130 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q11468731|沙雪の里
+    magazine: null
+    demographic: shoujo
+    genres:
+      - historical
+      - drama
+    synopsis: 沙雪の里を舞台にした少女向け時代劇ドラマ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11468731|灼熱の炎
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+      - romance
+    synopsis: 灼熱の炎を題材にした少女向けロマンス漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11468731|砂の鎖
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+      - fantasy
+    synopsis: 砂の鎖を題材にした少女向けファンタジードラマ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11468731|禁断の方程式
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+      - romance
+    synopsis: 禁断の方程式を題材にした少女向けロマンスドラマ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11468731|窓のない部屋
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+      - mystery
+    synopsis: 窓のない部屋を題材にした少女向けミステリードラマ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11468731|笑顔のすべて
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+      - slice_of_life
+    synopsis: 笑顔のすべてを題材にした少女向けほのぼのドラマ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11468731|緋色の刻
+    magazine: null
+    demographic: shoujo
+    genres:
+      - historical
+      - drama
+    synopsis: 緋色の刻を題材にした少女向け時代劇ドラマ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11468731|蒼月の季節
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+      - fantasy
+    synopsis: 蒼月の季節を題材にした少女向けファンタジードラマ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11468731|頃刻の迷夢
+    magazine: null
+    demographic: shoujo
+    genres:
+      - fantasy
+      - drama
+    synopsis: 頃刻の迷夢を題材にした少女向けファンタジードラマ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11468762|「どんぐりの家」のデッサン
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - biography
+    synopsis: 山本おさむ『どんぐりの家』のデッサン編。青年向けドキュメンタリー漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11468762|Hey!!ブルースマン
+    magazine: null
+    demographic: seinen
+    genres:
+      - music
+      - drama
+    synopsis: ブルースマンを題材にした青年向け音楽ドラマ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11468762|オーロラの街
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - slice_of_life
+    synopsis: オーロラの街を題材にした青年向けドラマ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11468762|コキーユ
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+    synopsis: コキーユを題材にした青年向けドラマ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11468762|さよならレフティ
+    magazine: null
+    demographic: seinen
+    genres:
+      - sports
+      - drama
+    synopsis: さよならレフティを題材にした青年向け野球ドラマ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11468762|そばもん
     magazine: big-comic-original
     demographic: seinen
@@ -171881,8 +172024,32 @@ series:
     synopsis: 聾(ろう)で重複障害を持つ娘・田崎圭子と家族の苦悩を、山本おさむが本格的に取材して描いた感動の社会派ドラマ。
     status: completed
   - key: Q11468762|ねっけつ放課後クラブ
+    magazine: null
+    demographic: shounen
+    genres:
+      - comedy
+      - school
+    synopsis: ねっけつ放課後クラブを題材にした少年向け学園コメディ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11468762|ヘイ!!ブルースマン
+    magazine: null
+    demographic: seinen
+    genres:
+      - music
+      - drama
+    synopsis: 山本おさむ『ヘイ!!ブルースマン』。青年向け音楽ドラマ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11468762|もものこと
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - slice_of_life
+    synopsis: 山本おさむのもものことを題材にした青年向けドラマ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11468762|れむ
     demographic: seinen
     genres:
@@ -171916,9 +172083,41 @@ series:
     synopsis: 戦時下日本に渡来した実在のヴァイオリン製作家・陳昌鉉の半生を、山本おさむが描く感動の音楽ドラマ。
     status: completed
   - key: Q11468762|威風堂々
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - music
+    synopsis: 威風堂々を題材にした青年向け音楽ドラマ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11468762|津軽
+    magazine: null
+    demographic: seinen
+    genres:
+      - historical
+      - drama
+    synopsis: 太宰治の小説『津軽』を題材にした青年向け文芸ドラマ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11468762|漫画昔の美味いもん
+    magazine: null
+    demographic: seinen
+    genres:
+      - gourmet
+      - historical
+    synopsis: 昔の美味いもんを題材にした青年向け歴史グルメ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11468762|父を焼く
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - biography
+    synopsis: 山本おさむの父を焼くを題材にした青年向け家族ドラマ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11468762|聖
     magazine: big-comic-original
     demographic: seinen
@@ -171944,8 +172143,31 @@ series:
     synopsis: 戸部良也の小説を山本おさむが漫画化。風疹で耳が聞こえない高校球児たちの甲子園挑戦を描く感動ドキュメンタリー。
     status: completed
   - key: Q11468762|食にかかわる仕事
+    magazine: null
+    demographic: kodomo
+    genres:
+      - educational
+    synopsis: 食にかかわる職業を紹介する児童向け学習漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11468776|ゴールデンボーイ
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - comedy
+    synopsis: 江口寿史のゴールデンボーイを題材にした青年向けドラマ漫画。アニメ化された。
+    status: completed
+    anime_adapted: true
   - key: Q11468776|風の又三郎
+    magazine: null
+    demographic: kodomo
+    genres:
+      - fantasy
+      - historical
+    synopsis: 宮沢賢治の『風の又三郎』を漫画化した児童向け文芸漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11468794|ガタピシ車でいこう!!
     demographic: seinen
     genres:
@@ -171955,6 +172177,14 @@ series:
     synopsis: 山本マサユキによる青年向けクラシックカー漫画。ガタピシ車でいこう!!の愉快な物語。
     status: completed
   - key: Q11468794|六本木リサイクルショップシーサー
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+      - slice_of_life
+    synopsis: 六本木リサイクルショップシーサーを舞台にした青年向けコメディ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11468794|奇食ハンター
     demographic: seinen
     genres:
@@ -171964,6 +172194,14 @@ series:
     synopsis: 山本マサユキによる奇妙なグルメ漫画。世界の奇食を求めて旅するハンターの物語。
     status: completed
   - key: Q11468794|妹あいどる
+    magazine: null
+    demographic: seinen
+    genres:
+      - ecchi
+      - comedy
+    synopsis: 妹あいどるを題材にした青年向けエロコメディ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11468794|攻殻機動隊STAND ALONE COMPLEXタチコマなヒビ
     magazine: monthly-young-magazine
     demographic: seinen
@@ -171973,8 +172211,32 @@ series:
     synopsis: 士郎正宗『攻殻機動隊』のSACシリーズに登場する思考戦車タチコマたちのほのぼの日常を、山本マサユキが描く。
     status: completed
   - key: Q11468794|痛車でいこう!!
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+      - slice_of_life
+    synopsis: 痛車でいこうを題材にした青年向け車コメディ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11468795|Hop!Papamocco
+    magazine: null
+    demographic: kodomo
+    genres:
+      - slice_of_life
+      - comedy
+    synopsis: Hop!Papamoccoを題材にした児童向けほのぼのコメディ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11468795|One moreマシュマロ通信
+    magazine: null
+    demographic: shoujo
+    genres:
+      - comedy
+      - slice_of_life
+    synopsis: One moreマシュマロ通信を題材にした少女向けほのぼの漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11468795|オリオン街
     demographic: shoujo
     genres:
@@ -171992,7 +172254,23 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q11468795|シトラス学園
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - school
+    synopsis: シトラス学園を舞台にした少女向け学園ロマンス漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11468795|ないしょの話
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - drama
+    synopsis: ないしょの話を題材にした少女向けロマンスドラマ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11468795|はずんで!パパモッコ
     magazine: null
     demographic: kodomo
@@ -172011,6 +172289,14 @@ series:
     synopsis: 山本ルンルンが描く、マシュマロ通信を運営する女子小学生のレトロかわいいコメディ。
     status: completed
   - key: Q11468795|ミス・ポピーシードのメルヘン横丁
+    magazine: null
+    demographic: shoujo
+    genres:
+      - fantasy
+      - comedy
+    synopsis: ミス・ポピーシードのメルヘン横丁を題材にした少女向けファンタジー漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11468795|宇宙の白鳥
     demographic: shoujo
     genres:
@@ -172030,6 +172316,14 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q11469324|アッパーロード
+    magazine: null
+    demographic: seinen
+    genres:
+      - sports
+      - drama
+    synopsis: 山本航暉の医療作品関連『アッパーロード』。青年向けドラマ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11469324|ゴッドハンド輝
     magazine: weekly-shonen-magazine
     demographic: shounen
@@ -172040,7 +172334,23 @@ series:
     status: completed
     anime_adapted: false
   - key: Q11469324|ゴッドハンド輝 症例別セレクション
+    magazine: null
+    demographic: shounen
+    genres:
+      - medical
+      - drama
+    synopsis: 山本航暉『ゴッドハンド輝』の症例別セレクション。少年向け医療漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11469324|ゴッドハンド輝~沈黙のコロナ2020~
+    magazine: null
+    demographic: shounen
+    genres:
+      - medical
+      - drama
+    synopsis: 山本航暉『ゴッドハンド輝』のコロナ2020編。少年向け医療ドラマ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11469324|スピノザの海
     demographic: seinen
     genres:
@@ -172060,7 +172370,23 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q11469324|会いにいくよ
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - drama
+    synopsis: 離れた相手に会いにいくヒロインの恋を描く少女漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11469324|戦国の疾風
+    magazine: null
+    demographic: seinen
+    genres:
+      - historical
+      - action
+    synopsis: 戦国の疾風を題材にした青年向け時代劇アクション漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11469324|疾風伝説 彦佐
     magazine: weekly-shonen-magazine
     demographic: shounen
@@ -172079,9 +172405,41 @@ series:
     status: completed
     anime_adapted: false
   - key: Q11469324|疾風伝説彦佐 疾風の絆
+    magazine: null
+    demographic: shounen
+    genres:
+      - sports
+      - action
+    synopsis: 疾風伝説彦佐の疾風の絆編。少年向けスポーツアクション漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11469369|SPEED
+    magazine: null
+    demographic: shounen
+    genres:
+      - sports
+      - action
+    synopsis: SPEEDを題材にした少年向けスポーツアクション漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11469369|trash
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - thriller
+    synopsis: trashを題材にした青年向けサスペンスドラマ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11469369|お姉チャンバラ紅
+    magazine: null
+    demographic: seinen
+    genres:
+      - action
+      - ecchi
+    synopsis: D3パブリッシャーのゲーム『お姉チャンバラ』の紅編コミカライズ。
+    status: completed
+    anime_adapted: true
   - key: Q11469369|カオシックルーン
     demographic: seinen
     genres:
@@ -172108,7 +172466,23 @@ series:
     synopsis: 山本賢治によるダーク・ファンタジー。クリム・ゾン(深紅)を巡る戦いを描く。
     status: completed
   - key: Q11469369|ダンスはこれから!
+    magazine: null
+    demographic: shoujo
+    genres:
+      - sports
+      - music
+    synopsis: ダンスはこれからと宣言する少女向けダンスドラマ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11469369|ブラック・ジャック 黒い医師
+    magazine: null
+    demographic: seinen
+    genres:
+      - medical
+      - drama
+    synopsis: 手塚治虫『ブラック・ジャック』派生作品。青年向け医療漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11469369|ブラックジャック
     demographic: shounen
     genres:
@@ -172119,13 +172493,77 @@ series:
     status: ongoing
     anime_adapted: true
   - key: Q11469369|まゆたんのお家
+    magazine: null
+    demographic: shoujo
+    genres:
+      - slice_of_life
+      - comedy
+    synopsis: まゆたんのお家を題材にした少女向けほのぼの漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11469369|ラジカルフィスト
+    magazine: null
+    demographic: shounen
+    genres:
+      - action
+      - sports
+    synopsis: ラジカルフィストを題材にした少年向け格闘アクション漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11469369|恋愛パラノイア
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - drama
+    synopsis: 恋愛パラノイアを題材にした少女向けロマンスドラマ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11469369|正拳シンデレラ
+    magazine: null
+    demographic: shoujo
+    genres:
+      - sports
+      - drama
+    synopsis: 正拳シンデレラを題材にした少女向け格闘ドラマ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11469369|直撃スパイS
+    magazine: null
+    demographic: shounen
+    genres:
+      - action
+      - comedy
+    synopsis: 直撃スパイSを題材にした少年向けアクションコメディ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11469369|装甲悪鬼村正鏖
+    magazine: null
+    demographic: seinen
+    genres:
+      - historical
+      - action
+    synopsis: ニトロプラスのゲーム『装甲悪鬼村正』の鏖編。青年向け時代劇アクション漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11469369|高速ドリルディ
+    magazine: null
+    demographic: shounen
+    genres:
+      - action
+      - sci_fi
+    synopsis: 高速ドリルディを題材にした少年向けSFアクション漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11469401|GOLD
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - action
+    synopsis: GOLDを題材にした青年向けドラマアクション漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11469401|Losers
     demographic: seinen
     genres:
@@ -172134,7 +172572,23 @@ series:
     synopsis: 山本隆一郎による敗者たちの物語。Losersたちの人生と再起を描く青年ドラマ。
     status: completed
   - key: Q11469401|カタメン
+    magazine: null
+    demographic: seinen
+    genres:
+      - gourmet
+      - drama
+    synopsis: カタメンを題材にした青年向けラーメンドラマ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11469401|ゴールド
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - action
+    synopsis: ゴールドを題材にした青年向けドラマアクション漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11469401|サムライソルジャー
     magazine: weekly-shonen-champion
     demographic: shounen
@@ -172154,6 +172608,14 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q11469401|ランブルフィッシュ
+    magazine: null
+    demographic: seinen
+    genres:
+      - sports
+      - drama
+    synopsis: ランブルフィッシュを題材にした青年向けスポーツドラマ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11469401|元ヤン
     magazine: big-comic-spirits
     demographic: seinen
@@ -172163,6 +172625,14 @@ series:
     status: completed
     anime_adapted: false
   - key: Q11469401|最強アウトロー伝説
+    magazine: null
+    demographic: seinen
+    genres:
+      - action
+      - drama
+    synopsis: 最強アウトローの伝説を描く青年向け不良漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11469401|最後の不良
     demographic: seinen
     genres:
@@ -172181,6 +172651,14 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q11469402|GIGANTIS-ジャイガンティス-
+    magazine: null
+    demographic: shounen
+    genres:
+      - action
+      - sci_fi
+    synopsis: GIGANTISを題材にした少年向けSFアクション漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11469402|ひゃくはち
     demographic: shounen
     genres:
@@ -172191,6 +172669,14 @@ series:
     status: ongoing
     anime_adapted: true
   - key: Q11469427|マーブルケェキ
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - comedy
+    synopsis: マーブルケェキを題材にした少女向けロマンスコメディ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11469496|スパロウズホテル
     magazine: null
     demographic: seinen
@@ -172201,6 +172687,14 @@ series:
     status: ongoing
     anime_adapted: true
   - key: Q11469496|スパロウズホテルAnnex
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+      - slice_of_life
+    synopsis: 山東ユカ『スパロウズホテル』のAnnex編。青年向けコメディ漫画。
+    status: completed
+    anime_adapted: true
   - key: Q11469496|トリセツなカテキョ
     demographic: shoujo
     genres:
@@ -172218,6 +172712,14 @@ series:
     synopsis: 山東ユカによる青年向け学園コメディ。ヒミツの保健室の愉快な物語。
     status: completed
   - key: Q11469496|ムダヅモ無き第二次改革
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+      - sports
+    synopsis: 大和田秀樹『ムダヅモ無き改革』続編。麻雀政治コメディ。
+    status: completed
+    anime_adapted: false
   - key: Q11469496|ロボ娘のアーキテクチャ
     demographic: seinen
     genres:
@@ -172235,6 +172737,14 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q11469496|學園のムスメ
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+      - school
+    synopsis: 學園のムスメを題材にした青年向け学園コメディ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11469496|渚は太陽をひとりじめ
     magazine: null
     demographic: shoujo
@@ -172245,17 +172755,111 @@ series:
     status: completed
     anime_adapted: false
   - key: Q11469516|ああ!!あとがない
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+      - drama
+    synopsis: 山松ゆうきちのああ!!あとがないと描く青年向けコメディ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11469516|インドへ馬鹿がやって来た
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+      - travel
+    synopsis: 山松ゆうきちのインドへ馬鹿がやって来たを題材にした青年向け旅エッセイ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11469516|にっぽん自転車王
+    magazine: null
+    demographic: seinen
+    genres:
+      - sports
+      - drama
+    synopsis: 山松ゆうきちのにっぽん自転車王を題材にした青年向け競輪漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11469516|またまたインドへ馬鹿がやって来た
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+      - travel
+    synopsis: 山松ゆうきちの『またまたインドへ馬鹿がやって来た』。青年向け旅エッセイ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11469516|万の病をもつ男
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - medical
+    synopsis: 山松ゆうきちの万の病をもつ男を題材にした青年向け医療ドラマ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11469516|中年死刑囚
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+    synopsis: 山松ゆうきちの中年死刑囚を題材にした青年向けドラマ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11469516|宮沢賢治・漫画館
+    magazine: null
+    demographic: seinen
+    genres:
+      - historical
+      - anthology
+    synopsis: 山松ゆうきちの宮沢賢治作品を漫画化したアンソロジー。
+    status: completed
+    anime_adapted: false
   - key: Q11469516|山松very best of early years
+    magazine: null
+    demographic: seinen
+    genres:
+      - anthology
+    synopsis: 山松ゆうきちの初期傑作集。青年向けアンソロジー漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11469516|山松ゆうきちのにっぽん神童伝
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+      - drama
+    synopsis: 山松ゆうきちのにっぽん神童伝を題材にした青年向けコメディ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11469516|立川ウインズ通り
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - slice_of_life
+    synopsis: 山松ゆうきちの立川ウインズ通りを舞台にした青年向け競馬ドラマ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11469541|GAMBLE FISH
+    magazine: null
+    demographic: shounen
+    genres:
+      - thriller
+      - school
+    synopsis: 山根和俊『GAMBLE FISH』。賭博学園を舞台にした少年向けギャンブルバトル漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11469541|JOKER
+    magazine: null
+    demographic: seinen
+    genres:
+      - action
+      - thriller
+    synopsis: JOKERを題材にした青年向けサスペンスアクション漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11469541|ガンリュウ
     magazine: weekly-shonen-magazine
     demographic: shounen
@@ -172265,13 +172869,77 @@ series:
     synopsis: 山根和俊が描く、剣豪・佐々木小次郎(=巌流)を主人公にした時代劇。
     status: completed
   - key: Q11469541|クルセイド
+    magazine: null
+    demographic: shounen
+    genres:
+      - fantasy
+      - action
+    synopsis: クルセイドを題材にした少年向けファンタジーアクション漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11469541|ジハード
+    magazine: null
+    demographic: shounen
+    genres:
+      - fantasy
+      - action
+    synopsis: ジハードを題材にした少年向けファンタジーアクション漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11469541|バード
+    magazine: null
+    demographic: shounen
+    genres:
+      - sports
+      - drama
+    synopsis: 山根和俊『バード』。麻雀を題材にした少年向け麻雀漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11469541|バード BLACK MARKET
+    magazine: null
+    demographic: shounen
+    genres:
+      - sports
+      - drama
+    synopsis: 山根和俊『バード』BLACK MARKET編。少年向け麻雀漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11469541|バード 最凶雀士VS天才魔術師
+    magazine: null
+    demographic: shounen
+    genres:
+      - sports
+      - drama
+    synopsis: 山根和俊『バード』最凶雀士VS天才魔術師編。少年向け麻雀漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11469541|バード 雀界天使VS天才魔術師
+    magazine: null
+    demographic: shounen
+    genres:
+      - sports
+      - drama
+    synopsis: 山根和俊『バード』雀界天使VS天才魔術師編。少年向け麻雀漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11469541|プロトタイプ
+    magazine: null
+    demographic: shounen
+    genres:
+      - sci_fi
+      - action
+    synopsis: プロトタイプを題材にした少年向けSFアクション漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11469541|大江戸バーリトゥード
+    magazine: null
+    demographic: shounen
+    genres:
+      - historical
+      - action
+    synopsis: 大江戸バーリトゥードを題材にした少年向け時代劇格闘漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11469541|超人戦線
     demographic: shounen
     genres:
@@ -172280,6 +172948,14 @@ series:
     synopsis: 山根和俊が描く、超人たちの戦いを描くファンタジーアクション。
     status: completed
   - key: Q11469541|超弩級戦士ジャスティス
+    magazine: null
+    demographic: shounen
+    genres:
+      - action
+      - sci_fi
+    synopsis: 超弩級戦士ジャスティスを題材にした少年向けSFアクション漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11469541|黄金バット
     demographic: shounen
     genres:
@@ -172290,10 +172966,49 @@ series:
     status: ongoing
     anime_adapted: true
   - key: Q11469580|かばどんとなおみちゃん
+    magazine: null
+    demographic: kodomo
+    genres:
+      - slice_of_life
+      - comedy
+    synopsis: かばどんとなおみちゃんを題材にした児童向けほのぼの漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11469580|ドクターのらくろ奮戦記
+    magazine: null
+    demographic: shounen
+    genres:
+      - comedy
+      - medical
+    synopsis: 田河水泡『のらくろ』の医療奮戦記編。少年向けコメディ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11469580|のらくろの川柳まんが
+    magazine: null
+    demographic: shounen
+    genres:
+      - comedy
+    synopsis: 田河水泡『のらくろ』の川柳まんが編。少年向けコメディ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11469580|よたろうくん
+    magazine: null
+    demographic: shounen
+    genres:
+      - comedy
+      - slice_of_life
+    synopsis: 田河水泡のよたろうくんを主人公にした少年向けコメディ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11469582|でこちん
+    magazine: null
+    demographic: shounen
+    genres:
+      - comedy
+      - slice_of_life
+    synopsis: でこちんを題材にした少年向けコメディ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11469582|名たんていカゲマン
     demographic: kodomo
     genres:
@@ -172304,7 +173019,23 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q11469582|熱血!!コロコロ伝説
+    magazine: null
+    demographic: shounen
+    genres:
+      - historical
+      - comedy
+    synopsis: 月刊コロコロコミックの歴史と名作を振り返る記念漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11470076|いけない看護婦さん
+    magazine: null
+    demographic: seinen
+    genres:
+      - ecchi
+      - medical
+    synopsis: いけない看護婦さんを題材にした青年向け医療官能漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11470076|オモチャのYoYoYo
     demographic: seinen
     genres:
@@ -172328,11 +173059,59 @@ series:
     synopsis: 山田こうすけによる青年向けコメディ。ちょっとだけよの愉快な物語。
     status: completed
   - key: Q11470076|ドキドキ☆シスターズ
+    magazine: null
+    demographic: seinen
+    genres:
+      - ecchi
+      - comedy
+    synopsis: ドキドキ☆シスターズを題材にした青年向けエロコメディ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11470076|ときめき☆ダブルス
+    magazine: null
+    demographic: seinen
+    genres:
+      - ecchi
+      - comedy
+    synopsis: ときめき☆ダブルスを題材にした青年向けエロコメディ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11470076|やさしくシ★テ★ネ
+    magazine: null
+    demographic: seinen
+    genres:
+      - ecchi
+      - romance
+    synopsis: やさしくシテネと願う青年向け官能漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11470076|同居時代
+    magazine: null
+    demographic: seinen
+    genres:
+      - romance
+      - comedy
+    synopsis: 同居時代を題材にした青年向けラブコメ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11470076|愛NOメモリー
+    magazine: null
+    demographic: seinen
+    genres:
+      - romance
+      - drama
+    synopsis: 愛NOメモリーを題材にした青年向けロマンスドラマ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11470076|課長透明社員
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+      - business
+    synopsis: 課長透明社員を主人公にした青年向けオフィスコメディ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11470076|透明社員
     demographic: seinen
     genres:
@@ -172350,6 +173129,14 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q11470077|8番目の罪
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+      - mystery
+    synopsis: 8番目の罪を題材にした少女向けミステリードラマ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11470077|おとなの時間
     demographic: josei
     genres:
@@ -172365,6 +173152,14 @@ series:
     synopsis: 山田こももによる少女ラブストーリー。これからはじまる恋をおしえてと願う物語。
     status: completed
   - key: Q11470077|個人授業
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - school
+    synopsis: 個人授業を題材にした少女向け学園ロマンス漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11470077|最強コイバナ
   - key: Q11470077|初恋はかなわない
   - key: Q11470077|初恋は中毒のようで
