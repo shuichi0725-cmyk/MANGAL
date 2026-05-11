@@ -1,5 +1,5 @@
 schema_version: 1
-generated_at: 2026-05-11T18:59:54.244Z
+generated_at: 2026-05-11T19:01:27.492Z
 generator: claude-opus-4-7-direct-fill
 series:
   - key: Q1001784|GOLDEN SPIRAL
@@ -292604,6 +292604,13 @@ series:
     status: completed
     anime_adapted: false
   - key: Q11619414|Puzzle+
+    magazine: null
+    demographic: shoujo
+    genres:
+      - comedy
+    synopsis: 少女向けコメディ。
+    status: completed
+    anime_adapted: false
   - key: Q11619414|ひまわりさん
     magazine: null
     demographic: seinen
@@ -292614,11 +292621,54 @@ series:
     status: completed
     anime_adapted: false
   - key: Q11619414|良い子さんと不良先生
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - school
+    synopsis: 教師と生徒の少女ロマンス。
+    status: completed
+    anime_adapted: false
   - key: Q11619417|アックス
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+    synopsis: アックス誌掲載作品。
+    status: completed
+    anime_adapted: false
   - key: Q11619417|夏の空
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+    synopsis: 青年向け短編。
+    status: completed
+    anime_adapted: false
   - key: Q11619417|夜行
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+    synopsis: 青年向け短編。
+    status: completed
+    anime_adapted: false
   - key: Q11619417|犬泥棒の夜
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+    synopsis: 青年向け短編。
+    status: completed
+    anime_adapted: false
   - key: Q11619417|筋子
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+    synopsis: 青年向け短編。
+    status: completed
+    anime_adapted: false
   - key: Q11619425|ぱらいそロード
     demographic: seinen
     genres:
@@ -292638,7 +292688,23 @@ series:
     status: ongoing
     anime_adapted: true
   - key: Q11619425|ミュータントタートルズ外伝
+    magazine: null
+    demographic: shounen
+    genres:
+      - action
+      - comedy
+    synopsis: ミュータントタートルズ外伝。
+    status: completed
+    anime_adapted: false
   - key: Q11619425|亜州黄龍伝奇
+    magazine: null
+    demographic: seinen
+    genres:
+      - historical
+      - action
+    synopsis: 中華武侠青年作品。
+    status: completed
+    anime_adapted: false
   - key: Q11619425|地球防衛企業ダイ・ガード
     demographic: seinen
     genres:
@@ -292649,7 +292715,22 @@ series:
     status: ongoing
     anime_adapted: true
   - key: Q11619425|天晴れ!カッポーレ
+    magazine: null
+    demographic: shounen
+    genres:
+      - comedy
+    synopsis: 少年向けコメディ。
+    status: completed
+    anime_adapted: false
   - key: Q11619425|東京事件
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - mystery
+    synopsis: 青年向けサスペンス。
+    status: completed
+    anime_adapted: false
   - key: Q11619436|Crimsons
     demographic: seinen
     genres:
@@ -292658,8 +292739,29 @@ series:
     synopsis: 菅野孝典によるダーク・ファンタジー。Crimsonsを描く戦いを描く。
     status: completed
   - key: Q11619436|ずりちちヘブン!!
+    magazine: null
+    demographic: seinen
+    genres:
+      - ecchi
+    synopsis: 成人向けコミック。
+    status: completed
+    anime_adapted: false
   - key: Q11619436|ぱいぱこ・ぱらだいす
+    magazine: null
+    demographic: seinen
+    genres:
+      - ecchi
+    synopsis: 成人向けコミック。
+    status: completed
+    anime_adapted: false
   - key: Q11619436|むちちち
+    magazine: null
+    demographic: seinen
+    genres:
+      - ecchi
+    synopsis: 成人向けコミック。
+    status: completed
+    anime_adapted: false
   - key: Q11619436|深海獣
     magazine: null
     demographic: seinen
@@ -292670,49 +292772,376 @@ series:
     status: completed
     anime_adapted: false
   - key: Q11619497|このクソったれの寝取られ妻共よ
+    magazine: null
+    demographic: seinen
+    genres:
+      - ecchi
+    synopsis: 成人向けコミック。
+    status: completed
+    anime_adapted: false
   - key: Q11619497|このクソったれの雌豚共よ
+    magazine: null
+    demographic: seinen
+    genres:
+      - ecchi
+    synopsis: 成人向けコミック。
+    status: completed
+    anime_adapted: false
   - key: Q11619497|尻雌奴ライフ
+    magazine: null
+    demographic: seinen
+    genres:
+      - ecchi
+    synopsis: 成人向けコミック。
+    status: completed
+    anime_adapted: false
   - key: Q11619508|地獄少女閻魔あいセレクション激こわストーリー
+    magazine: null
+    demographic: shoujo
+    genres:
+      - horror
+      - supernatural
+    synopsis: 地獄少女セレクション。
+    status: completed
+    anime_adapted: true
   - key: Q11619664|あこがれルージュマジック
+    magazine: null
+    demographic: shoujo
+    genres:
+      - mystery
+      - supernatural
+    synopsis: 篠原千絵ミステリー作品。
+    status: completed
+    anime_adapted: false
   - key: Q11619664|いのちの火が見える
+    magazine: null
+    demographic: shoujo
+    genres:
+      - mystery
+      - supernatural
+    synopsis: 篠原千絵作品。
+    status: completed
+    anime_adapted: false
   - key: Q11619664|くちびるのポリシー
+    magazine: null
+    demographic: shoujo
+    genres:
+      - mystery
+    synopsis: 篠原千絵ミステリー作品。
+    status: completed
+    anime_adapted: false
   - key: Q11619664|しあわせくらべ
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+    synopsis: 篠原千絵作品。
+    status: completed
+    anime_adapted: false
   - key: Q11619664|しあわせマニュアル
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+    synopsis: 篠原千絵作品。
+    status: completed
+    anime_adapted: false
   - key: Q11619664|スイート・スキャンダル
+    magazine: null
+    demographic: shoujo
+    genres:
+      - mystery
+    synopsis: 篠原千絵ミステリー作品。
+    status: completed
+    anime_adapted: false
   - key: Q11619664|ステキ宣言
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+    synopsis: 篠原千絵作品。
+    status: completed
+    anime_adapted: false
   - key: Q11619664|そして僕は結婚にはしった
+    magazine: null
+    demographic: shoujo
+    genres:
+      - mystery
+    synopsis: 篠原千絵作品。
+    status: completed
+    anime_adapted: false
   - key: Q11619664|ドアを開けたら殺意
+    magazine: null
+    demographic: shoujo
+    genres:
+      - mystery
+      - horror
+    synopsis: 篠原千絵ミステリー作品。
+    status: completed
+    anime_adapted: false
   - key: Q11619664|ピアスの惑い
+    magazine: null
+    demographic: shoujo
+    genres:
+      - mystery
+    synopsis: 篠原千絵作品。
+    status: completed
+    anime_adapted: false
   - key: Q11619664|ミステリー傑作選
+    magazine: null
+    demographic: shoujo
+    genres:
+      - mystery
+    synopsis: 篠原千絵ミステリー傑作選。
+    status: completed
+    anime_adapted: false
   - key: Q11619664|ゆがんだ視線
+    magazine: null
+    demographic: shoujo
+    genres:
+      - mystery
+    synopsis: 篠原千絵作品。
+    status: completed
+    anime_adapted: false
   - key: Q11619664|一緒に暮らしたい!
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+    synopsis: 篠原千絵作品。
+    status: completed
+    anime_adapted: false
   - key: Q11619664|十六歳の悪夢
+    magazine: null
+    demographic: shoujo
+    genres:
+      - mystery
+      - horror
+    synopsis: 篠原千絵ミステリー作品。
+    status: completed
+    anime_adapted: false
   - key: Q11619664|呪詛
+    magazine: null
+    demographic: shoujo
+    genres:
+      - horror
+      - supernatural
+    synopsis: 篠原千絵怪奇作品。
+    status: completed
+    anime_adapted: false
   - key: Q11619664|夜のトライアングル
+    magazine: null
+    demographic: shoujo
+    genres:
+      - mystery
+    synopsis: 篠原千絵作品。
+    status: completed
+    anime_adapted: false
   - key: Q11619664|夢色マジック
+    magazine: null
+    demographic: shoujo
+    genres:
+      - fantasy
+    synopsis: 篠原千絵作品。
+    status: completed
+    anime_adapted: false
   - key: Q11619664|幸せのキーワード
+    magazine: null
+    demographic: shoujo
+    genres:
+      - mystery
+    synopsis: 篠原千絵作品。
+    status: completed
+    anime_adapted: false
   - key: Q11619664|幸せの呪術
+    magazine: null
+    demographic: shoujo
+    genres:
+      - supernatural
+    synopsis: 篠原千絵作品。
+    status: completed
+    anime_adapted: false
   - key: Q11619664|彼女売ります
+    magazine: null
+    demographic: shoujo
+    genres:
+      - mystery
+    synopsis: 篠原千絵作品。
+    status: completed
+    anime_adapted: false
   - key: Q11619664|心霊夜
+    magazine: null
+    demographic: shoujo
+    genres:
+      - horror
+      - supernatural
+    synopsis: 篠原千絵怪奇作品。
+    status: completed
+    anime_adapted: false
   - key: Q11619664|怪奇植物誌 マンドラゴラ夢想
+    magazine: null
+    demographic: shoujo
+    genres:
+      - horror
+      - supernatural
+    synopsis: 篠原千絵怪奇作品。
+    status: completed
+    anime_adapted: false
   - key: Q11619664|恋人模様
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+    synopsis: 篠原千絵作品。
+    status: completed
+    anime_adapted: false
   - key: Q11619664|悪霊さまお手やわらかに
+    magazine: null
+    demographic: shoujo
+    genres:
+      - supernatural
+      - comedy
+    synopsis: 篠原千絵作品。
+    status: completed
+    anime_adapted: false
   - key: Q11619664|悪魔のほほえみ
+    magazine: null
+    demographic: shoujo
+    genres:
+      - mystery
+      - horror
+    synopsis: 篠原千絵作品。
+    status: completed
+    anime_adapted: false
   - key: Q11619664|悪魔の招待状
+    magazine: null
+    demographic: shoujo
+    genres:
+      - mystery
+      - horror
+    synopsis: 篠原千絵作品。
+    status: completed
+    anime_adapted: false
   - key: Q11619664|悪魔は眠らず
+    magazine: null
+    demographic: shoujo
+    genres:
+      - mystery
+      - horror
+    synopsis: 篠原千絵作品。
+    status: completed
+    anime_adapted: false
   - key: Q11619664|愛の呪文
+    magazine: null
+    demographic: shoujo
+    genres:
+      - supernatural
+      - romance
+    synopsis: 篠原千絵作品。
+    status: completed
+    anime_adapted: false
   - key: Q11619664|愛の迷路にご用心
+    magazine: null
+    demographic: shoujo
+    genres:
+      - mystery
+    synopsis: 篠原千絵作品。
+    status: completed
+    anime_adapted: false
   - key: Q11619664|愛情レンタル
+    magazine: null
+    demographic: shoujo
+    genres:
+      - mystery
+    synopsis: 篠原千絵作品。
+    status: completed
+    anime_adapted: false
   - key: Q11619664|指輪の吐息
+    magazine: null
+    demographic: shoujo
+    genres:
+      - mystery
+    synopsis: 篠原千絵作品。
+    status: completed
+    anime_adapted: false
   - key: Q11619664|残酷のパズル
+    magazine: null
+    demographic: shoujo
+    genres:
+      - mystery
+      - horror
+    synopsis: 篠原千絵作品。
+    status: completed
+    anime_adapted: false
   - key: Q11619664|殺人セールス
+    magazine: null
+    demographic: shoujo
+    genres:
+      - mystery
+    synopsis: 篠原千絵ミステリー作品。
+    status: completed
+    anime_adapted: false
   - key: Q11619664|気まぐれなイブたち
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - drama
+    synopsis: 篠原千絵作品。
+    status: completed
+    anime_adapted: false
   - key: Q11619664|浮気ビールス発生中!
+    magazine: null
+    demographic: shoujo
+    genres:
+      - comedy
+      - romance
+    synopsis: 篠原千絵作品。
+    status: completed
+    anime_adapted: false
   - key: Q11619664|犯人あてコミック ミステリークイズ
+    magazine: null
+    demographic: shoujo
+    genres:
+      - mystery
+    synopsis: 篠原千絵ミステリー作品。
+    status: completed
+    anime_adapted: false
   - key: Q11619664|百の眼が見ていた
+    magazine: null
+    demographic: shoujo
+    genres:
+      - mystery
+      - horror
+    synopsis: 篠原千絵怪奇作品。
+    status: completed
+    anime_adapted: false
   - key: Q11619664|瞳の中の悪魔
+    magazine: null
+    demographic: shoujo
+    genres:
+      - mystery
+      - horror
+    synopsis: 篠原千絵怪奇作品。
+    status: completed
+    anime_adapted: false
   - key: Q11619664|砂糖菓子の心理学
+    magazine: null
+    demographic: shoujo
+    genres:
+      - mystery
+      - drama
+    synopsis: 篠原千絵作品。
+    status: completed
+    anime_adapted: false
   - key: Q11619664|私についてのスキャンダル
+    magazine: null
+    demographic: shoujo
+    genres:
+      - mystery
+    synopsis: 篠原千絵作品。
+    status: completed
+    anime_adapted: false
   - key: Q11619664|紅色の骨
     demographic: seinen
     genres:
@@ -292721,16 +293150,100 @@ series:
     synopsis: 菊川近子による青年向け怪奇漫画。紅色の骨を描く物語。
     status: completed
   - key: Q11619664|結婚のレシピ
+    magazine: null
+    demographic: shoujo
+    genres:
+      - mystery
+    synopsis: 篠原千絵作品。
+    status: completed
+    anime_adapted: false
   - key: Q11619664|美食の罠
+    magazine: null
+    demographic: shoujo
+    genres:
+      - mystery
+      - food
+    synopsis: 篠原千絵作品。
+    status: completed
+    anime_adapted: false
   - key: Q11619664|見えない叫び
+    magazine: null
+    demographic: shoujo
+    genres:
+      - mystery
+      - horror
+    synopsis: 篠原千絵作品。
+    status: completed
+    anime_adapted: false
   - key: Q11619664|赤い爪あと
+    magazine: null
+    demographic: shoujo
+    genres:
+      - mystery
+      - horror
+    synopsis: 篠原千絵作品。
+    status: completed
+    anime_adapted: false
   - key: Q11619664|通りすがりの魔女
+    magazine: null
+    demographic: shoujo
+    genres:
+      - supernatural
+      - mystery
+    synopsis: 篠原千絵作品。
+    status: completed
+    anime_adapted: false
   - key: Q11619664|闇のシナリオ
+    magazine: null
+    demographic: shoujo
+    genres:
+      - mystery
+    synopsis: 篠原千絵作品。
+    status: completed
+    anime_adapted: false
   - key: Q11619664|闇夜の恋人
+    magazine: null
+    demographic: shoujo
+    genres:
+      - mystery
+      - romance
+    synopsis: 篠原千絵作品。
+    status: completed
+    anime_adapted: false
   - key: Q11619664|食虫花
+    magazine: null
+    demographic: shoujo
+    genres:
+      - mystery
+      - horror
+    synopsis: 篠原千絵作品。
+    status: completed
+    anime_adapted: false
   - key: Q11619664|魅せられた殺人者
+    magazine: null
+    demographic: shoujo
+    genres:
+      - mystery
+    synopsis: 篠原千絵作品。
+    status: completed
+    anime_adapted: false
   - key: Q11619664|黒魔術の女
+    magazine: null
+    demographic: shoujo
+    genres:
+      - supernatural
+      - horror
+    synopsis: 篠原千絵怪奇作品。
+    status: completed
+    anime_adapted: false
   - key: Q11619700|YOH
+    magazine: null
+    demographic: shounen
+    genres:
+      - action
+    synopsis: 少年向けアクション。
+    status: completed
+    anime_adapted: false
   - key: Q11619700|アスラ
     demographic: shounen
     genres:
@@ -292755,6 +293268,13 @@ series:
     status: completed
     anime_adapted: false
   - key: Q11619700|東京タワー恋人たちの戦い
+    magazine: null
+    demographic: shounen
+    genres:
+      - drama
+    synopsis: 少年向け短編。
+    status: completed
+    anime_adapted: false
   - key: Q11619707|COMPLEX
     demographic: shoujo
     genres:
@@ -292770,6 +293290,14 @@ series:
     synopsis: 菊池久美子による少女コメディ。おばあちゃんはアイドルの愉快な物語。
     status: completed
   - key: Q11619707|モンタージュ
+    magazine: null
+    demographic: seinen
+    genres:
+      - mystery
+      - drama
+    synopsis: 青年向けミステリー。
+    status: completed
+    anime_adapted: false
   - key: Q11619707|天使攻略マニュアル
     demographic: shoujo
     genres:
@@ -292778,10 +293306,49 @@ series:
     synopsis: 菊池久美子が描く、天使を攻略するマニュアル少女ラブコメ。
     status: completed
   - key: Q11619827|20代、親を看取る。
+    magazine: null
+    demographic: josei
+    genres:
+      - drama
+      - slice_of_life
+    synopsis: 介護エッセイ。
+    status: completed
+    anime_adapted: false
   - key: Q11619827|ある吹部での出来事
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - music
+      - school
+    synopsis: 吹奏楽部をテーマにした作品。
+    status: completed
+    anime_adapted: false
   - key: Q11619827|筒井漫画涜本ふたたび
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+    synopsis: 筒井康隆原作アンソロジー。
+    status: completed
+    anime_adapted: false
   - key: Q11619827|色情のエロス
+    magazine: null
+    demographic: seinen
+    genres:
+      - ecchi
+      - drama
+    synopsis: 成人向け劇画。
+    status: completed
+    anime_adapted: false
   - key: Q11619827|行徳駅下車
+    magazine: null
+    demographic: seinen
+    genres:
+      - slice_of_life
+    synopsis: 青年向け短編。
+    status: completed
+    anime_adapted: false
   - key: Q11619827|鉄子の旅
     magazine: weekly-comic-spirits
     demographic: seinen
@@ -292793,7 +293360,22 @@ series:
     status: completed
     anime_adapted: true
   - key: Q11619827|鉄子の旅菊池直恵セレクション
+    magazine: null
+    demographic: seinen
+    genres:
+      - slice_of_life
+    synopsis: 鉄子の旅セレクション。
+    status: completed
+    anime_adapted: false
   - key: Q11620006|ガールフード
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+      - food
+    synopsis: 青年向け食ものコメディ。
+    status: completed
+    anime_adapted: false
   - key: Q11620006|きらきら☆スタディー
     demographic: shoujo
     genres:
@@ -292828,6 +293410,14 @@ series:
     synopsis: 華々つぼみが描く、TYPE-MOON作品キャラのSDパロディ・ちび版。
     status: completed
   - key: Q11620006|宮河家が満腹!?
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+      - food
+    synopsis: らき☆すた派生作品。
+    status: completed
+    anime_adapted: false
   - key: Q11620006|放課後アトリエといろ
     demographic: shoujo
     genres:
@@ -292869,10 +293459,45 @@ series:
     synopsis: 華不魅が描く、鉄錆びた廃園を舞台にした幻想ドラマ。
     status: completed
   - key: Q11620031|カリクラ
+    magazine: null
+    demographic: shoujo
+    genres:
+      - fantasy
+    synopsis: 少女向けファンタジー。
+    status: completed
+    anime_adapted: false
   - key: Q11620031|デッド・トリック!
+    magazine: null
+    demographic: shoujo
+    genres:
+      - mystery
+    synopsis: 少女向けミステリー。
+    status: completed
+    anime_adapted: false
   - key: Q11620057|1/2 LOVE!
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+    synopsis: 少女向け恋愛。
+    status: completed
+    anime_adapted: false
   - key: Q11620057|16歳、新婚はじめました。
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+    synopsis: 少女向け恋愛。
+    status: completed
+    anime_adapted: false
   - key: Q11620057|17歳、はじめて
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+    synopsis: 少女向け恋愛。
+    status: completed
+    anime_adapted: false
   - key: Q11620057|お嬢様、大人のキスのお時間です。
     demographic: josei
     genres:
@@ -292881,8 +293506,29 @@ series:
     synopsis: 華夜による女性向けロマンス。お嬢様と執事の禁断のキスを描く。
     status: completed
   - key: Q11620057|かなめエトワール
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+    synopsis: 少女向け恋愛。
+    status: completed
+    anime_adapted: false
   - key: Q11620057|ずっと好きだったくせに
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+    synopsis: 少女向け恋愛。
+    status: completed
+    anime_adapted: false
   - key: Q11620057|メガネ
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+    synopsis: 少女向け恋愛。
+    status: completed
+    anime_adapted: false
   - key: Q11620057|会長様がフィアンセで
     demographic: shoujo
     genres:
@@ -292902,6 +293548,14 @@ series:
     status: completed
     anime_adapted: false
   - key: Q11620057|先生
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - school
+    synopsis: 少女向け学園ロマンス。
+    status: completed
+    anime_adapted: false
   - key: Q11620057|先生、〆切まで待って!
     demographic: josei
     genres:
@@ -292912,11 +293566,53 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q11620057|初めてのチュウ
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+    synopsis: 少女向け恋愛。
+    status: completed
+    anime_adapted: false
   - key: Q11620057|初恋ダンデライオン
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+    synopsis: 少女向け恋愛。
+    status: completed
+    anime_adapted: false
   - key: Q11620057|好きって言えない。
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+    synopsis: 少女向け恋愛。
+    status: completed
+    anime_adapted: false
   - key: Q11620057|好きになってはいけない人
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+    synopsis: 少女向け恋愛。
+    status: completed
+    anime_adapted: false
   - key: Q11620057|彼は、あの子のモノ
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+    synopsis: 少女向け恋愛。
+    status: completed
+    anime_adapted: false
   - key: Q11620057|悪魔の苺
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+    synopsis: 少女向け恋愛。
+    status: completed
+    anime_adapted: false
   - key: Q11620057|月とメープルシロップ
     demographic: josei
     genres:
@@ -292925,6 +293621,13 @@ series:
     synopsis: 華夜による女性向けロマンス。月とメープルシロップの甘い物語。
     status: completed
   - key: Q11620057|純愛ブライド
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+    synopsis: 少女向け恋愛。
+    status: completed
+    anime_adapted: false
   - key: Q11620057|絶対恋愛プログラム
     magazine: null
     demographic: shoujo
@@ -292935,7 +293638,22 @@ series:
     status: completed
     anime_adapted: false
   - key: Q11620057|薔薇と銃弾
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - action
+    synopsis: 少女向け恋愛。
+    status: completed
+    anime_adapted: false
   - key: Q11620057|雪咲・恋咲
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+    synopsis: 少女向け恋愛。
+    status: completed
+    anime_adapted: false
   - key: Q11620057|鬼宮先生のキスには逆らえない
     demographic: josei
     genres:
@@ -292953,7 +293671,21 @@ series:
     status: completed
     anime_adapted: false
   - key: Q11620062|Robotics;Notes 瀬乃宮みさ希の未発表手記
+    magazine: null
+    demographic: seinen
+    genres:
+      - sci_fi
+    synopsis: Robotics;Notes派生作品。
+    status: completed
+    anime_adapted: false
   - key: Q11620062|Robotics;Notes電撃コミックアンソロジー
+    magazine: null
+    demographic: seinen
+    genres:
+      - sci_fi
+    synopsis: Robotics;Notesアンソロジー。
+    status: completed
+    anime_adapted: false
   - key: Q11620062|ウエポンギーク
     magazine: null
     demographic: seinen
@@ -293014,6 +293746,13 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q11620094|〔○生〕パニック24時読者投稿ベスト 頭真っ白パニくり体験!ガクブル鳥肌スクープ416p!!
+    magazine: null
+    demographic: josei
+    genres:
+      - drama
+    synopsis: 実話系コミック。
+    status: completed
+    anime_adapted: false
   - key: Q11620094|〔○生〕職場の変なひと読者投稿ベスト 前代未聞のキモリーマン&ヘンテコOL大集合416p!!
   - key: Q11620094|オトナの本当にあった笑える話
   - key: Q11620094|スゴ盛!本当にあった(生)ここだけの話極
