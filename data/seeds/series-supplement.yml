@@ -1,5 +1,5 @@
 schema_version: 1
-generated_at: 2026-05-11T20:32:22.160Z
+generated_at: 2026-05-11T20:33:59.790Z
 generator: claude-opus-4-7-direct-fill
 series:
   - key: Q1001784|GOLDEN SPIRAL
@@ -349038,6 +349038,14 @@ series:
     status: completed
     anime_adapted: true
   - key: Q1335515|トライガン・マルチプルバレッツ
+    magazine: null
+    demographic: seinen
+    genres:
+      - sci_fi
+      - action
+    synopsis: トライガンアンソロジー。
+    status: completed
+    anime_adapted: false
   - key: Q1335515|トライガンマキシマム
     magazine: young-king-ours
     demographic: seinen
@@ -349097,15 +349105,87 @@ series:
     status: ongoing
     anime_adapted: true
   - key: Q1335548|JC.COM
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+    synopsis: 少女向け恋愛。
+    status: completed
+    anime_adapted: false
   - key: Q1335558|PANNA COTTA
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+    synopsis: 駕籠真太郎作品。
+    status: completed
+    anime_adapted: false
   - key: Q1335558|アイコ十六歳
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+    synopsis: 堀田あけみ原作コミカライズ。
+    status: completed
+    anime_adapted: false
   - key: Q1335558|あなたのとなりの闇世界
+    magazine: null
+    demographic: josei
+    genres:
+      - drama
+    synopsis: 実話系コミック。
+    status: completed
+    anime_adapted: false
   - key: Q1335558|あなたの知らないニッポン絶望社会
+    magazine: null
+    demographic: josei
+    genres:
+      - drama
+    synopsis: 実話系コミック。
+    status: completed
+    anime_adapted: false
   - key: Q1335558|アナモルフォシスの冥獣
+    magazine: null
+    demographic: seinen
+    genres:
+      - horror
+    synopsis: 駕籠真太郎怪奇作品。
+    status: completed
+    anime_adapted: false
   - key: Q1335558|アリ地獄vsバラバラ少女
+    magazine: null
+    demographic: seinen
+    genres:
+      - horror
+    synopsis: 駕籠真太郎怪奇作品。
+    status: completed
+    anime_adapted: false
   - key: Q1335558|かすとろ式
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+    synopsis: 駕籠真太郎作品。
+    status: completed
+    anime_adapted: false
   - key: Q1335558|すべての時代を通じての殺人術
+    magazine: null
+    demographic: seinen
+    genres:
+      - historical
+      - horror
+    synopsis: 駕籠真太郎作品。
+    status: completed
+    anime_adapted: false
   - key: Q1335558|ハーレムエンド
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+      - ecchi
+    synopsis: 駕籠真太郎作品。
+    status: completed
+    anime_adapted: false
   - key: Q1335558|パラノイアストリート
     demographic: seinen
     genres:
@@ -349116,52 +349196,394 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q1335558|ハンニャハラミタ
+    magazine: null
+    demographic: seinen
+    genres:
+      - horror
+    synopsis: 駕籠真太郎怪奇作品。
+    status: completed
+    anime_adapted: false
   - key: Q1335558|ビッグ・バン
+    magazine: null
+    demographic: seinen
+    genres:
+      - sci_fi
+    synopsis: 駕籠真太郎SF。
+    status: completed
+    anime_adapted: false
   - key: Q1335558|フラクション
+    magazine: null
+    demographic: seinen
+    genres:
+      - horror
+    synopsis: 駕籠真太郎怪奇作品。
+    status: completed
+    anime_adapted: false
   - key: Q1335558|ブラックシアターおばあちゃんが死体くさいよ
+    magazine: null
+    demographic: seinen
+    genres:
+      - horror
+    synopsis: 駕籠真太郎怪奇作品。
+    status: completed
+    anime_adapted: false
   - key: Q1335558|ブレインダメージ
+    magazine: null
+    demographic: seinen
+    genres:
+      - horror
+      - psychological
+    synopsis: 駕籠真太郎作品。
+    status: completed
+    anime_adapted: false
   - key: Q1335558|まんが2014年解禁!!日本悪の世界
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+    synopsis: 実話系コミック。
+    status: completed
+    anime_adapted: false
   - key: Q1335558|まんがこれが現実貧しい日本
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+    synopsis: 実話系コミック。
+    status: completed
+    anime_adapted: false
   - key: Q1335558|まんが一億総非大人社会
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+    synopsis: 実話系コミック。
+    status: completed
+    anime_adapted: false
   - key: Q1335558|まんが凶悪死刑囚大全獄
+    magazine: null
+    demographic: seinen
+    genres:
+      - crime
+      - drama
+    synopsis: 実話系コミック。
+    status: completed
+    anime_adapted: false
   - key: Q1335558|まんが恐怖のお仕事体験DX
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+    synopsis: 実話系コミック。
+    status: completed
+    anime_adapted: false
   - key: Q1335558|まんが死んだ悪人たち
+    magazine: null
+    demographic: seinen
+    genres:
+      - crime
+    synopsis: 実話系コミック。
+    status: completed
+    anime_adapted: false
   - key: Q1335558|まんが衝撃の実話 悲惨な人
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+    synopsis: 実話系コミック。
+    status: completed
+    anime_adapted: false
   - key: Q1335558|レモンキッズ
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+    synopsis: 駕籠真太郎作品。
+    status: completed
+    anime_adapted: false
   - key: Q1335558|万事快調
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+    synopsis: 駕籠真太郎作品。
+    status: completed
+    anime_adapted: false
   - key: Q1335558|乱歩アムネシア二十一番目の人格
+    magazine: null
+    demographic: seinen
+    genres:
+      - mystery
+      - horror
+    synopsis: 江戸川乱歩原作コミカライズ。
+    status: completed
+    anime_adapted: false
   - key: Q1335558|人間を狂気に導いた悪魔のような犯罪者たち!!
+    magazine: null
+    demographic: seinen
+    genres:
+      - crime
+    synopsis: 実話系犯罪コミック。
+    status: completed
+    anime_adapted: false
   - key: Q1335558|人間以上
+    magazine: null
+    demographic: seinen
+    genres:
+      - sci_fi
+    synopsis: シオドア・スタージョン原作コミカライズ。
+    status: completed
+    anime_adapted: false
   - key: Q1335558|健康の設計
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+    synopsis: 駕籠真太郎作品。
+    status: completed
+    anime_adapted: false
   - key: Q1335558|六識転想アタラクシア
+    magazine: null
+    demographic: seinen
+    genres:
+      - sci_fi
+      - psychological
+    synopsis: 駕籠真太郎作品。
+    status: completed
+    anime_adapted: false
   - key: Q1335558|凸凹ニンフォマニア
+    magazine: null
+    demographic: seinen
+    genres:
+      - ecchi
+    synopsis: 駕籠真太郎成人向けコミック。
+    status: completed
+    anime_adapted: false
   - key: Q1335558|喜劇駅前虐殺
+    magazine: null
+    demographic: seinen
+    genres:
+      - horror
+      - comedy
+    synopsis: 駕籠真太郎作品。
+    status: completed
+    anime_adapted: false
   - key: Q1335558|大葬儀
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+    synopsis: 駕籠真太郎作品。
+    status: completed
+    anime_adapted: false
   - key: Q1335558|奇人画報
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+    synopsis: 駕籠真太郎作品。
+    status: completed
+    anime_adapted: false
   - key: Q1335558|女の子の頭の中はお菓子がいっぱい詰まっています
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+    synopsis: 駕籠真太郎作品。
+    status: completed
+    anime_adapted: false
   - key: Q1335558|宇宙かける純情
+    magazine: null
+    demographic: seinen
+    genres:
+      - sci_fi
+    synopsis: 駕籠真太郎SF。
+    status: completed
+    anime_adapted: false
   - key: Q1335558|実話犯罪(秘)大事典
+    magazine: null
+    demographic: seinen
+    genres:
+      - crime
+    synopsis: 実話犯罪コミック。
+    status: completed
+    anime_adapted: false
   - key: Q1335558|実録!体験談刑務所の中
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+    synopsis: 刑務所実話コミック。
+    status: completed
+    anime_adapted: false
   - key: Q1335558|実録悪い人
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - crime
+    synopsis: 実話系コミック。
+    status: completed
+    anime_adapted: false
   - key: Q1335558|実録悪い人DX
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - crime
+    synopsis: 実話系コミック。
+    status: completed
+    anime_adapted: false
   - key: Q1335558|実録悪い人DX あわれなゴミ人間
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - crime
+    synopsis: 実話系コミック。
+    status: completed
+    anime_adapted: false
   - key: Q1335558|左側に気をつけろ!
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+    synopsis: 駕籠真太郎作品。
+    status: completed
+    anime_adapted: false
   - key: Q1335558|恋の超時空砲
+    magazine: null
+    demographic: seinen
+    genres:
+      - sci_fi
+      - comedy
+    synopsis: 駕籠真太郎SFコメディ。
+    status: completed
+    anime_adapted: false
   - key: Q1335558|殺殺草紙
+    magazine: null
+    demographic: seinen
+    genres:
+      - horror
+    synopsis: 駕籠真太郎怪奇作品。
+    status: completed
+    anime_adapted: false
   - key: Q1335558|犯罪芸能タブーとスキャンダルDX 御用必至!タレントたちのエグい日常
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+    synopsis: 実話系コミック。
+    status: completed
+    anime_adapted: false
   - key: Q1335558|異物混入
+    magazine: null
+    demographic: seinen
+    genres:
+      - horror
+    synopsis: 駕籠真太郎怪奇作品。
+    status: completed
+    anime_adapted: false
   - key: Q1335558|登校途中の出会い頭の偶然キスはありうるか?実験
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+    synopsis: 駕籠真太郎作品。
+    status: completed
+    anime_adapted: false
   - key: Q1335558|真説★世界史大全
+    magazine: null
+    demographic: seinen
+    genres:
+      - historical
+      - comedy
+    synopsis: 駕籠真太郎歴史パロディ。
+    status: completed
+    anime_adapted: false
   - key: Q1335558|穴、文字、血液などが現れる漫画
+    magazine: null
+    demographic: seinen
+    genres:
+      - horror
+    synopsis: 駕籠真太郎怪奇作品。
+    status: completed
+    anime_adapted: false
   - key: Q1335558|行列のできる〔○超〕有名事件裁判傍聴ファイル
+    magazine: null
+    demographic: josei
+    genres:
+      - drama
+    synopsis: 裁判傍聴コミック。
+    status: completed
+    anime_adapted: false
   - key: Q1335558|超伝脳パラタクシス
+    magazine: null
+    demographic: seinen
+    genres:
+      - sci_fi
+    synopsis: 駕籠真太郎作品。
+    status: completed
+    anime_adapted: false
   - key: Q1335558|超動力蒙古大襲来
+    magazine: null
+    demographic: seinen
+    genres:
+      - historical
+      - comedy
+    synopsis: 駕籠真太郎歴史パロディ。
+    status: completed
+    anime_adapted: false
   - key: Q1335558|輝け!大東亜共栄圏
+    magazine: null
+    demographic: seinen
+    genres:
+      - historical
+      - comedy
+    synopsis: 駕籠真太郎歴史パロディ。
+    status: completed
+    anime_adapted: false
   - key: Q1335558|都市とインフラストラクチャー
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+    synopsis: 駕籠真太郎作品。
+    status: completed
+    anime_adapted: false
   - key: Q1335558|飛び出す妄想
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+    synopsis: 駕籠真太郎作品。
+    status: completed
+    anime_adapted: false
   - key: Q1335558|駅前浪漫奇行
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+    synopsis: 駕籠真太郎作品。
+    status: completed
+    anime_adapted: false
   - key: Q1335558|駅前花嫁
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+    synopsis: 駕籠真太郎作品。
+    status: completed
+    anime_adapted: false
   - key: Q1335558|駕籠真太郎のスカトロジー大全
+    magazine: null
+    demographic: seinen
+    genres:
+      - ecchi
+      - comedy
+    synopsis: 駕籠真太郎作品集。
+    status: completed
+    anime_adapted: false
   - key: Q1335743|♂と♀の方程式
     demographic: shoujo
     genres:
@@ -349185,7 +349607,21 @@ series:
     synopsis: すぎ恵美子による少女ラブストーリー。Cherryのまんまを描く青春恋愛物語。
     status: completed
   - key: Q1335743|D-boy
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+    synopsis: 少女向け恋愛。
+    status: completed
+    anime_adapted: false
   - key: Q1335743|JUN-AI天使
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+    synopsis: 少女向け恋愛。
+    status: completed
+    anime_adapted: false
   - key: Q1335743|R-18
     demographic: josei
     genres:
@@ -349209,8 +349645,29 @@ series:
     synopsis: すぎ恵美子が描く、ウサギキャラのドタバタ少女ラブコメ。
     status: completed
   - key: Q1335743|UワクCテネ
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+    synopsis: 少女向け恋愛。
+    status: completed
+    anime_adapted: false
   - key: Q1335743|W&W
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+    synopsis: 少女向け恋愛。
+    status: completed
+    anime_adapted: false
   - key: Q1335743|あ・ぶ・な・い男女交際
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+    synopsis: 少女向け恋愛。
+    status: completed
+    anime_adapted: false
   - key: Q1335743|ア・リ・サ
     demographic: shoujo
     genres:
@@ -349219,7 +349676,21 @@ series:
     synopsis: すぎ恵美子による少女ラブストーリー。ア・リ・サを描く青春恋愛物語。
     status: completed
   - key: Q1335743|お兄ちゃんにはわかるまい!
+    magazine: null
+    demographic: shoujo
+    genres:
+      - comedy
+    synopsis: 少女向けコメディ。
+    status: completed
+    anime_adapted: false
   - key: Q1335743|カップルズ
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+    synopsis: 少女向け恋愛アンソロジー。
+    status: completed
+    anime_adapted: false
   - key: Q1335743|くちびるから魔法
     magazine: shoujo-comic
     demographic: shoujo
@@ -349229,6 +349700,13 @@ series:
     synopsis: すぎ恵美子が描く、くちびるから魔法をかける少女のラブストーリー。
     status: completed
   - key: Q1335743|くる☆くるみらくる
+    magazine: null
+    demographic: shoujo
+    genres:
+      - comedy
+    synopsis: 少女向けコメディ。
+    status: completed
+    anime_adapted: false
   - key: Q1335743|げっちゅー
     magazine: null
     demographic: shoujo
@@ -349239,12 +349717,62 @@ series:
     status: completed
     anime_adapted: false
   - key: Q1335743|コイバナ
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+    synopsis: 少女向け恋愛アンソロジー。
+    status: completed
+    anime_adapted: false
   - key: Q1335743|どきどきしすぎの恋物語
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+    synopsis: 少女向け恋愛。
+    status: completed
+    anime_adapted: false
   - key: Q1335743|ときめき❤えるサイズ
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+    synopsis: 少女向け恋愛。
+    status: completed
+    anime_adapted: false
   - key: Q1335743|はずかしHな恋物語
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - ecchi
+    synopsis: 成人向け少女コミック。
+    status: completed
+    anime_adapted: false
   - key: Q1335743|ボディー・トーク
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+    synopsis: 少女向け恋愛。
+    status: completed
+    anime_adapted: false
   - key: Q1335743|マジカル★チェイサーAKI
+    magazine: null
+    demographic: shoujo
+    genres:
+      - fantasy
+    synopsis: 少女向けファンタジー。
+    status: completed
+    anime_adapted: false
   - key: Q1335743|まりあーじゅ
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+    synopsis: 少女向け恋愛。
+    status: completed
+    anime_adapted: false
   - key: Q1335743|ラブ・クリニック
     demographic: josei
     genres:
@@ -349255,9 +349783,38 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q1335743|ラブ・ハンター・Ren
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+    synopsis: 少女向け恋愛。
+    status: completed
+    anime_adapted: false
   - key: Q1335743|ラブラボ
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - comedy
+    synopsis: 少女向けラブコメ。
+    status: completed
+    anime_adapted: false
   - key: Q1335743|ろまんちっく迷宮
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+    synopsis: 少女向け恋愛。
+    status: completed
+    anime_adapted: false
   - key: Q1335743|夏・体験しましょ
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+    synopsis: 少女向け恋愛。
+    status: completed
+    anime_adapted: false
   - key: Q1335743|子供じゃないモン!
     demographic: shoujo
     genres:
@@ -349266,6 +349823,13 @@ series:
     synopsis: すぎ恵美子による少女漫画。子供じゃないモン!と主張する少女の物語。
     status: completed
   - key: Q1335743|彼と彼女とガーターベルト
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+    synopsis: 少女向け恋愛。
+    status: completed
+    anime_adapted: false
   - key: Q1335743|愛・少女
     demographic: shoujo
     genres:
@@ -349274,11 +349838,55 @@ series:
     synopsis: すぎ恵美子による少女漫画。愛・少女を描く物語。
     status: completed
   - key: Q1335743|抱きしめてミッドナイト
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+    synopsis: 少女向け恋愛。
+    status: completed
+    anime_adapted: false
   - key: Q1335743|東京★エロガンス
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+    synopsis: 少女向け恋愛。
+    status: completed
+    anime_adapted: false
   - key: Q1335743|砂糖菓子少年
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+    synopsis: 少女向け恋愛。
+    status: completed
+    anime_adapted: false
   - key: Q1335743|罪より甘い愛に溺れて
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+    synopsis: 少女向け恋愛。
+    status: completed
+    anime_adapted: false
   - key: Q13365079|クラッシュバンディクー
+    magazine: null
+    demographic: kodomo
+    genres:
+      - adventure
+      - comedy
+    synopsis: クラッシュバンディクーコミカライズ。
+    status: completed
+    anime_adapted: false
   - key: Q134139328|ねこねこ天国
+    magazine: null
+    demographic: shounen
+    genres:
+      - comedy
+      - slice_of_life
+    synopsis: 猫コメディ。
+    status: completed
+    anime_adapted: false
   - key: Q134139328|紡ぐ乙女と大正の月
     demographic: shoujo
     genres:
@@ -349301,6 +349909,14 @@ series:
     alternative_titles:
       en: Bastard!!
   - key: Q1343976|バスタード
+    magazine: null
+    demographic: shounen
+    genres:
+      - fantasy
+      - action
+    synopsis: 萩原一至バスタード!!。
+    status: completed
+    anime_adapted: true
   - key: Q134508014|見るからに怪しい二人
     demographic: seinen
     genres:
@@ -349311,7 +349927,22 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q134508205|白卓HAKUTAKU
+    magazine: null
+    demographic: seinen
+    genres:
+      - mystery
+      - drama
+    synopsis: 白卓青年作品。
+    status: completed
+    anime_adapted: false
   - key: Q134508620|Jupiter
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+    synopsis: 少女向け短編。
+    status: completed
+    anime_adapted: false
   - key: Q134508620|なまいきざかり。
     magazine: hana-to-yume
     demographic: shoujo
@@ -349323,8 +349954,30 @@ series:
     status: completed
     anime_adapted: false
   - key: Q134508620|ハダカの万里くん
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - comedy
+    synopsis: 少女向けラブコメ。
+    status: completed
+    anime_adapted: false
   - key: Q134508620|ピンクスクラップ
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+    synopsis: 少女向け恋愛。
+    status: completed
+    anime_adapted: false
   - key: Q134508620|ラブ×テキ!
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+    synopsis: 少女向け恋愛。
+    status: completed
+    anime_adapted: false
   - key: Q134508620|姫君と三匹の獣
     demographic: josei
     genres:
@@ -349340,7 +349993,22 @@ series:
     synopsis: ミユキ蜜蜂が描く、春の嵐のような男に翻弄される少女のラブストーリー。
     status: completed
   - key: Q134508620|正義のミカタ!
+    magazine: null
+    demographic: shoujo
+    genres:
+      - action
+      - comedy
+    synopsis: 少女向けアクション。
+    status: completed
+    anime_adapted: false
   - key: Q134508620|花ざかりの君たちへトリビュート
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+    synopsis: 花ざかりの君たちへトリビュート。
+    status: completed
+    anime_adapted: false
   - key: Q134508620|野良猫と狼
     demographic: josei
     genres:
@@ -349349,6 +350017,13 @@ series:
     synopsis: ミユキ蜜蜂による女性向けロマンス。野良猫のような自由人と狼のような男の恋を描く。
     status: completed
   - key: Q134942786|トラックドライバーの怪談
+    magazine: null
+    demographic: seinen
+    genres:
+      - horror
+    synopsis: トラック運転手怪談コミック。
+    status: completed
+    anime_adapted: false
   - key: Q134985466|正反対な君と僕
     magazine: weekly-shonen-jump
     demographic: shounen
@@ -349370,6 +350045,14 @@ series:
     status: completed
     anime_adapted: false
   - key: Q135311998|こんな幼馴染がいてほしい
+    magazine: null
+    demographic: seinen
+    genres:
+      - romance
+      - comedy
+    synopsis: 青年向けラブコメ。
+    status: completed
+    anime_adapted: false
   - key: Q135311998|怪堂茜のトーチャクだもん!
     demographic: shoujo
     genres:
@@ -349388,11 +350071,54 @@ series:
     synopsis: おみなえしによる異世界転移ライフ。魔法使いロゼが佐渡で過ごす穏やかな日々を描く。
     status: ongoing
   - key: Q1353888|「ガロ」「COM」漫画名作選
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+    synopsis: ガロ・COM名作アンソロジー。
+    status: completed
+    anime_adapted: false
   - key: Q1353888|COM傑作選
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+    synopsis: COM誌傑作選アンソロジー。
+    status: completed
+    anime_adapted: false
   - key: Q1353888|ガロ1968前衛マンガの試行と軌跡
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+    synopsis: ガロ1968アンソロジー。
+    status: completed
+    anime_adapted: false
   - key: Q1353888|ゲンセンカン主人
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+    synopsis: つげ義春代表作。
+    status: completed
+    anime_adapted: false
   - key: Q1353888|つげ義春とぼく
+    magazine: null
+    demographic: seinen
+    genres:
+      - slice_of_life
+      - drama
+    synopsis: つげ義春エッセイ。
+    status: completed
+    anime_adapted: false
   - key: Q1353888|つげ義春の温泉
+    magazine: null
+    demographic: seinen
+    genres:
+      - slice_of_life
+    synopsis: つげ義春温泉エッセイ。
+    status: completed
+    anime_adapted: false
   - key: Q1353888|つげ義春作品集
   - key: Q1353888|つげ義春全集
     demographic: seinen
