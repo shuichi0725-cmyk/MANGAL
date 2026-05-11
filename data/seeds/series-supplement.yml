@@ -1,5 +1,5 @@
 schema_version: 1
-generated_at: 2026-05-11T13:46:46.499Z
+generated_at: 2026-05-11T13:48:36.914Z
 generator: claude-opus-4-7-direct-fill
 series:
   - key: Q1001784|GOLDEN SPIRAL
@@ -221363,12 +221363,68 @@ series:
     status: completed
     anime_adapted: false
   - key: Q11535896|愛を禁じた二人
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - drama
+    synopsis: 愛を禁じた二人を描く少女ロマンス。
+    status: completed
+    anime_adapted: false
   - key: Q11535896|桜姫ろまんちっく・ゲーム
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - fantasy
+    synopsis: 桜姫ろまんちっくゲームを題材にした少女向け作品。
+    status: completed
+    anime_adapted: false
   - key: Q11535896|金のオーラを持つ少女
+    magazine: null
+    demographic: shoujo
+    genres:
+      - fantasy
+      - drama
+    synopsis: 金のオーラを持つ少女を主人公にした作品。
+    status: completed
+    anime_adapted: false
   - key: Q11535964|最強不運少年バット君
+    magazine: null
+    demographic: shounen
+    genres:
+      - comedy
+      - sports
+    synopsis: 不運少年バット君を主人公にしたコメディ。
+    status: completed
+    anime_adapted: false
   - key: Q11536381|恐怖博士の研究室
+    magazine: null
+    demographic: shounen
+    genres:
+      - horror
+      - mystery
+    synopsis: 恐怖博士の研究室を題材にしたホラー。
+    status: completed
+    anime_adapted: false
   - key: Q11536414|クリちゃんのアフリカ動物旅行
+    magazine: null
+    demographic: kodomo
+    genres:
+      - adventure
+      - kids
+    synopsis: クリちゃんのアフリカ動物旅行を描く児童向け作品。
+    status: completed
+    anime_adapted: false
   - key: Q11536582|だから僕は、Hができない。
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+      - ecchi
+    synopsis: ぱんち。原作・松山靖『だから僕は、Hができない。』のコミカライズ。
+    status: completed
+    anime_adapted: true
   - key: Q11536753|BLOOD+
     demographic: seinen
     genres:
@@ -221379,6 +221435,14 @@ series:
     status: completed
     anime_adapted: true
   - key: Q11536753|コゼットの肖像
+    magazine: null
+    demographic: seinen
+    genres:
+      - horror
+      - drama
+    synopsis: 麻宮騎亜『コゼットの肖像』のコミカライズ。
+    status: completed
+    anime_adapted: true
   - key: Q11536753|スロウハイツの神様
     demographic: josei
     genres:
@@ -221388,6 +221452,14 @@ series:
     synopsis: 桂明日香による辻村深月原作『スロウハイツの神様』のコミカライズ。クリエイターたちが集うシェアハウスの物語。
     status: completed
   - key: Q11536753|そこはぼくらの問題ですから
+    magazine: null
+    demographic: shounen
+    genres:
+      - comedy
+      - school
+    synopsis: そこはぼくらの問題を描くコメディ。
+    status: completed
+    anime_adapted: false
   - key: Q11536753|ビリオネアガール
     demographic: shoujo
     genres:
@@ -221398,6 +221470,14 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q11536753|レディ・ハニカム
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - drama
+    synopsis: レディ・ハニカムを題材にした少女向け作品。
+    status: completed
+    anime_adapted: false
   - key: Q11536753|わくらばん
     demographic: shoujo
     genres:
@@ -221415,8 +221495,32 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q11536753|新世紀エヴァンゲリオン
+    magazine: null
+    demographic: shounen
+    genres:
+      - sci-fi
+      - drama
+    synopsis: 貞本義行『新世紀エヴァンゲリオン』のコミカライズ。
+    status: completed
+    anime_adapted: true
   - key: Q11536753|神話ポンチ
+    magazine: null
+    demographic: shounen
+    genres:
+      - comedy
+      - fantasy
+    synopsis: 神話を題材にしたパロディコメディ。
+    status: completed
+    anime_adapted: false
   - key: Q11536753|美少年名言集
+    magazine: null
+    demographic: shoujo
+    genres:
+      - comedy
+      - drama
+    synopsis: 美少年の名言を集めた作品。
+    status: completed
+    anime_adapted: false
   - key: Q11536753|花やしきの住人たち
     demographic: shoujo
     genres:
@@ -221427,8 +221531,32 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q11536753|螺子とランタン
+    magazine: null
+    demographic: shounen
+    genres:
+      - fantasy
+      - drama
+    synopsis: 螺子とランタンを題材にしたファンタジー。
+    status: completed
+    anime_adapted: false
   - key: Q11536967|カエル姫と王子
+    magazine: null
+    demographic: shoujo
+    genres:
+      - fantasy
+      - romance
+    synopsis: カエル姫と王子を題材にした少女ファンタジー。
+    status: completed
+    anime_adapted: false
   - key: Q11536967|くちびるに聞いてみて
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - drama
+    synopsis: くちびるに聞いてみてを描く少女ロマンス。
+    status: completed
+    anime_adapted: false
   - key: Q11536967|コレが純愛
     demographic: shoujo
     genres:
@@ -221437,10 +221565,50 @@ series:
     synopsis: 桃伊いづみによる少女ラブストーリー。コレが純愛と謳う物語。
     status: completed
   - key: Q11536967|せつなくて甘くて
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - drama
+    synopsis: せつなくて甘い少女ロマンス。
+    status: completed
+    anime_adapted: false
   - key: Q11536967|それでもまじめに!男女交際
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - comedy
+    synopsis: まじめな男女交際を描く少女ロマンス。
+    status: completed
+    anime_adapted: false
   - key: Q11536967|ねむれないほど
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - drama
+    synopsis: 眠れないほどの恋を描く少女ロマンス。
+    status: completed
+    anime_adapted: false
   - key: Q11536967|ぷくぷくモモちゃん
+    magazine: null
+    demographic: shoujo
+    genres:
+      - comedy
+      - slice of life
+    synopsis: ぷくぷくモモちゃんを主人公にした少女コメディ。
+    status: completed
+    anime_adapted: false
   - key: Q11536967|まさかと思うけど
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - comedy
+    synopsis: まさかと思うけどを描く少女ロマンス。
+    status: completed
+    anime_adapted: false
   - key: Q11536967|まじめに!男女交際
     magazine: null
     demographic: shoujo
@@ -221452,7 +221620,23 @@ series:
     status: completed
     anime_adapted: false
   - key: Q11536967|やっぱりまじめに!男女交際
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - comedy
+    synopsis: 『それでもまじめに!男女交際』の続編。
+    status: completed
+    anime_adapted: false
   - key: Q11536967|君はカタいのだ
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - comedy
+    synopsis: カタい彼を描く少女ロマンス。
+    status: completed
+    anime_adapted: false
   - key: Q11536967|恋してしまった
     demographic: shoujo
     genres:
@@ -221463,6 +221647,14 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q11536967|男にはわかんない!
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - comedy
+    synopsis: 男にはわかんないを描く少女ロマンス。
+    status: completed
+    anime_adapted: false
   - key: Q11537066|200m先の熱
     magazine: null
     demographic: shoujo
@@ -221474,7 +221666,23 @@ series:
     status: completed
     anime_adapted: false
   - key: Q11537066|NOT FRIEND,BUT・・・
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - drama
+    synopsis: NOT FRIENDを描く少女ロマンス。
+    status: completed
+    anime_adapted: false
   - key: Q11537066|トンガリルート
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+      - school
+    synopsis: トンガリルートを描く少女ドラマ。
+    status: completed
+    anime_adapted: false
   - key: Q11537066|ハツカレ
     magazine: betsucomi
     demographic: shoujo
@@ -221484,6 +221692,14 @@ series:
     synopsis: 桃森ミヨシが描く、初彼氏と過ごす女子高生の初々しいラブストーリー。
     status: completed
   - key: Q11537066|ブラスラブ!!
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - music
+    synopsis: ブラスラブを描く少女ロマンス。
+    status: completed
+    anime_adapted: false
   - key: Q11537066|悪魔とラブソング
     magazine: margaret
     demographic: shoujo
@@ -221495,8 +221711,32 @@ series:
     status: completed
     anime_adapted: false
   - key: Q11537066|愛が死ぬのは君のせい
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - drama
+    synopsis: 愛が死ぬのは君のせいを描く少女ロマンス。
+    status: completed
+    anime_adapted: false
   - key: Q11537066|桃骨
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+      - school
+    synopsis: 桃骨を題材にした少女ドラマ。
+    status: completed
+    anime_adapted: false
   - key: Q11537066|桐島、部活やめるってよ
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - school
+    synopsis: 朝井リョウ『桐島、部活やめるってよ』のコミカライズ。
+    status: completed
+    anime_adapted: false
   - key: Q11537066|皇子かプリンス
     demographic: shoujo
     genres:
@@ -221507,7 +221747,23 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q11537066|菜の花の彼
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - drama
+    synopsis: 菜の花の彼を描く少女ロマンス。
+    status: completed
+    anime_adapted: false
   - key: Q11537170|Fw:ゾンビネス・レギーナ
+    magazine: null
+    demographic: shounen
+    genres:
+      - horror
+      - comedy
+    synopsis: ゾンビを題材にしたコメディ。
+    status: completed
+    anime_adapted: false
   - key: Q11537170|アキラとひより
     magazine: null
     demographic: shoujo
@@ -221518,6 +221774,14 @@ series:
     status: completed
     anime_adapted: false
   - key: Q11537170|ココノカの魔女
+    magazine: null
+    demographic: shounen
+    genres:
+      - fantasy
+      - drama
+    synopsis: ココノカの魔女を題材にしたファンタジー。
+    status: completed
+    anime_adapted: false
   - key: Q11537170|サボテンの娘
     demographic: shoujo
     genres:
@@ -221528,7 +221792,23 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q11537170|ショコラ
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - food
+    synopsis: ショコラを題材にした少女ロマンス。
+    status: completed
+    anime_adapted: false
   - key: Q11537170|パパのいうことを聞きなさい!
+    magazine: null
+    demographic: shounen
+    genres:
+      - comedy
+      - slice of life
+    synopsis: 松智洋『パパのいうことを聞きなさい!』のコミカライズ。
+    status: completed
+    anime_adapted: true
   - key: Q11537170|ひとひら
     demographic: seinen
     genres:
@@ -221539,6 +221819,14 @@ series:
     status: completed
     anime_adapted: true
   - key: Q11537170|ひとひらアンコール
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - slice of life
+    synopsis: 桐木憲一『ひとひら』のアンコール編。
+    status: completed
+    anime_adapted: true
   - key: Q11537170|また、同じ夢を見ていた
     demographic: shoujo
     genres:
@@ -221549,6 +221837,14 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q11537170|僕らは静河くんを愛でている
+    magazine: null
+    demographic: shoujo
+    genres:
+      - comedy
+      - romance
+    synopsis: 静河くんを愛でる少女コメディ。
+    status: completed
+    anime_adapted: false
   - key: Q11537170|君の膵臓をたべたい
     magazine: null
     demographic: seinen
@@ -221559,6 +221855,14 @@ series:
     status: completed
     anime_adapted: true
   - key: Q11537170|小悪魔系JKなので小学生を誘惑してます
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+      - ecchi
+    synopsis: 小悪魔JKを題材にしたコメディ。
+    status: completed
+    anime_adapted: false
   - key: Q11537170|悪役令嬢のショコラティエは推しの攻略に有効でした
     demographic: shoujo
     genres:
@@ -221587,6 +221891,14 @@ series:
     synopsis: 桐原いづみによる少女ラブコメディ。榊美麗のためなら僕は...ッ!!と尽くす愉快な物語。
     status: completed
   - key: Q11537170|無職の私と天然ハーブ王子の魔女レシピ
+    magazine: null
+    demographic: shoujo
+    genres:
+      - fantasy
+      - romance
+    synopsis: 無職の私と天然ハーブ王子の魔女レシピを描く少女ロマンス。
+    status: completed
+    anime_adapted: false
   - key: Q11537170|白雪ぱにみくす!
     magazine: manga-time-kirara-max
     demographic: seinen
@@ -221604,8 +221916,32 @@ series:
     synopsis: 桐原いづみによる少女漫画。群青色に染まる青春ラブストーリー。
     status: completed
   - key: Q11537173|Fate/hollow ataraxia
+    magazine: null
+    demographic: seinen
+    genres:
+      - fantasy
+      - supernatural
+    synopsis: TYPE-MOON『Fate/hollow ataraxia』のコミカライズ。
+    status: completed
+    anime_adapted: true
   - key: Q11537173|Fate/stay night
+    magazine: null
+    demographic: seinen
+    genres:
+      - fantasy
+      - supernatural
+    synopsis: TYPE-MOON『Fate/stay night』のコミカライズ。
+    status: completed
+    anime_adapted: true
   - key: Q11537173|イン・ザ・スカート
+    magazine: null
+    demographic: seinen
+    genres:
+      - ecchi
+      - comedy
+    synopsis: イン・ザ・スカートを題材にした青年向け作品。
+    status: completed
+    anime_adapted: false
   - key: Q11537173|おにいちゃんと呼ばないで
     magazine: null
     demographic: shoujo
@@ -221625,7 +221961,23 @@ series:
     status: completed
     anime_adapted: false
   - key: Q11537173|コミックHi-t
+    magazine: null
+    demographic: seinen
+    genres:
+      - ecchi
+      - comedy
+    synopsis: コミックHi-t掲載作品。
+    status: completed
+    anime_adapted: false
   - key: Q11537173|ハートフル4コマFate/hollow ataraxia
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+      - fantasy
+    synopsis: TYPE-MOON『Fate/hollow ataraxia』の4コマ。
+    status: completed
+    anime_adapted: true
   - key: Q11537173|ヒゲとセーラー
     demographic: shoujo
     genres:
@@ -221644,10 +221996,50 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q11537173|俺の生徒は神メイド
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+      - ecchi
+    synopsis: 神メイドを題材にした青年向けコメディ。
+    status: completed
+    anime_adapted: false
   - key: Q11537173|冬のアゲハ
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - ecchi
+    synopsis: 冬のアゲハを題材にした青年向け作品。
+    status: completed
+    anime_adapted: false
   - key: Q11537173|大貧乳エース
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+      - ecchi
+    synopsis: 大貧乳エースを題材にした青年向け作品。
+    status: completed
+    anime_adapted: false
   - key: Q11537173|大貧乳ビーム
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+      - ecchi
+    synopsis: 大貧乳ビームを題材にしたコメディ。
+    status: completed
+    anime_adapted: false
   - key: Q11537173|少女病
+    magazine: null
+    demographic: seinen
+    genres:
+      - ecchi
+      - drama
+    synopsis: 少女病を題材にした青年向け作品。
+    status: completed
+    anime_adapted: false
   - key: Q11537173|朱月のアゲハ
     magazine: null
     demographic: shoujo
@@ -221658,9 +222050,41 @@ series:
     status: completed
     anime_adapted: false
   - key: Q11537173|清純病
+    magazine: null
+    demographic: seinen
+    genres:
+      - ecchi
+      - drama
+    synopsis: 清純病を題材にした青年向け作品。
+    status: completed
+    anime_adapted: false
   - key: Q11537173|荊冠のアゲハ
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - ecchi
+    synopsis: 荊冠のアゲハを題材にした青年向け作品。
+    status: completed
+    anime_adapted: false
   - key: Q11537173|貧乳が斬る!
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+      - ecchi
+    synopsis: 貧乳が斬るを題材にしたコメディ。
+    status: completed
+    anime_adapted: false
   - key: Q11537173|貧乳牧場
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+      - ecchi
+    synopsis: 貧乳牧場を題材にしたコメディ。
+    status: completed
+    anime_adapted: false
   - key: Q11537216|いじわるキラーチューン
     magazine: null
     demographic: shoujo
@@ -221680,6 +222104,14 @@ series:
     status: completed
     anime_adapted: false
   - key: Q11537216|トレモロレトラ
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+      - music
+    synopsis: トレモロレトラを題材にした少女向け作品。
+    status: completed
+    anime_adapted: false
   - key: Q11537216|世界の端っことあんずジャム
     demographic: shoujo
     genres:
@@ -221698,6 +222130,14 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q11537216|王子様ゲーム
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - school
+    synopsis: 王子様ゲームを題材にした少女ロマンス。
+    status: completed
+    anime_adapted: false
   - key: Q11537228|MELTY BLOOD
     magazine: monthly-comp-ace
     demographic: shounen
@@ -221726,6 +222166,14 @@ series:
     status: completed
     anime_adapted: false
   - key: Q11537228|N・a・n・o
+    magazine: null
+    demographic: shounen
+    genres:
+      - sci-fi
+      - action
+    synopsis: N・a・n・oを題材にしたSFアクション。
+    status: completed
+    anime_adapted: false
   - key: Q11537228|ゴクドーくん漫遊記
     demographic: shounen
     genres:
@@ -221745,9 +222193,41 @@ series:
     status: ongoing
     anime_adapted: true
   - key: Q11537228|ストラスト・フォー
+    magazine: null
+    demographic: shounen
+    genres:
+      - sci-fi
+      - action
+    synopsis: ストラストフォーを題材にしたSFアクション。
+    status: completed
+    anime_adapted: false
   - key: Q11537228|ツイン・ファルカン
+    magazine: null
+    demographic: shounen
+    genres:
+      - sci-fi
+      - action
+    synopsis: ツインファルカンを題材にした作品。
+    status: completed
+    anime_adapted: false
   - key: Q11537228|でもホントはカバが好き
+    magazine: null
+    demographic: shounen
+    genres:
+      - comedy
+      - slice of life
+    synopsis: カバを題材にしたコメディ。
+    status: completed
+    anime_adapted: false
   - key: Q11537228|極道くん漫遊記
+    magazine: null
+    demographic: shounen
+    genres:
+      - comedy
+      - action
+    synopsis: 極道くん漫遊記を題材にしたコメディ。
+    status: completed
+    anime_adapted: false
   - key: Q11537228|神無
     demographic: shoujo
     genres:
@@ -221783,9 +222263,41 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q11537243|写真甲子園シャッターガールmoment
+    magazine: null
+    demographic: shounen
+    genres:
+      - drama
+      - school
+    synopsis: 写真甲子園を題材にした少年ドラマ。
+    status: completed
+    anime_adapted: false
   - key: Q11537243|地上最速青春卓球少年 ぷーやん
+    magazine: null
+    demographic: shounen
+    genres:
+      - sports
+      - comedy
+    synopsis: 卓球少年ぷーやんを主人公にしたスポーツコメディ。
+    status: completed
+    anime_adapted: false
   - key: Q11537243|実録大逆転裁判
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - crime
+    synopsis: 裁判の大逆転を扱った実録コミック。
+    status: completed
+    anime_adapted: false
   - key: Q11537243|探偵事務所5”
+    magazine: null
+    demographic: shounen
+    genres:
+      - mystery
+      - drama
+    synopsis: 探偵事務所5を主人公にしたミステリー。
+    status: completed
+    anime_adapted: false
   - key: Q11537243|東京シャッターガール
     demographic: seinen
     genres:
@@ -221796,8 +222308,32 @@ series:
     status: ongoing
     anime_adapted: true
   - key: Q11537243|研修医少女
+    magazine: null
+    demographic: seinen
+    genres:
+      - medical
+      - ecchi
+    synopsis: 研修医少女を主人公にした青年向け作品。
+    status: completed
+    anime_adapted: false
   - key: Q11537243|研修医少女 スペシャル
+    magazine: null
+    demographic: seinen
+    genres:
+      - medical
+      - ecchi
+    synopsis: 『研修医少女』のスペシャル編。
+    status: completed
+    anime_adapted: false
   - key: Q11537243|金沢シャッターガール
+    magazine: null
+    demographic: shounen
+    genres:
+      - drama
+      - slice of life
+    synopsis: 金沢を舞台にしたシャッターガール作品。
+    status: completed
+    anime_adapted: false
   - key: Q11537576|8マン
     demographic: shounen
     genres:
@@ -221806,6 +222342,14 @@ series:
     synopsis: 平井和正原作・桑田二郎作画の名作SFヒーロー漫画『エイトマン』。サイボーグ刑事8マンの戦い。
     status: completed
   - key: Q11537576|8マンvsサイボーグ009
+    magazine: null
+    demographic: shounen
+    genres:
+      - action
+      - sci-fi
+    synopsis: 『8マン』と『サイボーグ009』のクロスオーバー作品。
+    status: completed
+    anime_adapted: false
   - key: Q11537576|Xマン
     demographic: shounen
     genres:
@@ -221816,10 +222360,50 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q11537576|インテリ五エ門+宇宙の放浪者フーテンベラ号
+    magazine: null
+    demographic: shounen
+    genres:
+      - comedy
+      - sci-fi
+    synopsis: 桑田二郎のSFコメディ。
+    status: completed
+    anime_adapted: false
   - key: Q11537576|ウルトラセブン
+    magazine: null
+    demographic: shounen
+    genres:
+      - sci-fi
+      - tokusatsu
+    synopsis: 円谷プロ『ウルトラセブン』のコミカライズ。
+    status: completed
+    anime_adapted: true
   - key: Q11537576|エイトマン
+    magazine: null
+    demographic: shounen
+    genres:
+      - sci-fi
+      - action
+    synopsis: 桑田二郎『エイトマン』。SFアクション。
+    status: completed
+    anime_adapted: true
   - key: Q11537576|エスパー3
+    magazine: null
+    demographic: shounen
+    genres:
+      - sci-fi
+      - action
+    synopsis: エスパー3を題材にしたSFアクション。
+    status: completed
+    anime_adapted: false
   - key: Q11537576|エリート
+    magazine: null
+    demographic: shounen
+    genres:
+      - action
+      - drama
+    synopsis: エリートを題材にした作品。
+    status: completed
+    anime_adapted: false
   - key: Q11537576|ガロロQ
     demographic: shounen
     genres:
@@ -221830,18 +222414,121 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q11537576|カワリ大いに笑う!
+    magazine: null
+    demographic: shounen
+    genres:
+      - comedy
+    synopsis: カワリ大いに笑うを題材にしたコメディ。
+    status: completed
+    anime_adapted: false
   - key: Q11537576|キングロボ
+    magazine: null
+    demographic: shounen
+    genres:
+      - sci-fi
+      - action
+    synopsis: キングロボを題材にした作品。
+    status: completed
+    anime_adapted: false
   - key: Q11537576|ゴジラVSメカゴジラ決戦史
+    magazine: null
+    demographic: shounen
+    genres:
+      - sci-fi
+      - action
+    synopsis: 東宝『ゴジラVSメカゴジラ』のコミカライズ。
+    status: completed
+    anime_adapted: false
   - key: Q11537576|ゴッド・アーム
+    magazine: null
+    demographic: shounen
+    genres:
+      - action
+      - sci-fi
+    synopsis: ゴッドアームを題材にしたアクション。
+    status: completed
+    anime_adapted: false
   - key: Q11537576|しらゆり姫
+    magazine: null
+    demographic: kodomo
+    genres:
+      - fantasy
+      - kids
+    synopsis: しらゆり姫を題材にした児童向け作品。
+    status: completed
+    anime_adapted: false
   - key: Q11537576|スーパージャイアンツ
+    magazine: null
+    demographic: shounen
+    genres:
+      - sci-fi
+      - tokusatsu
+    synopsis: スーパージャイアンツのコミカライズ。
+    status: completed
+    anime_adapted: false
   - key: Q11537576|スペードJ
+    magazine: null
+    demographic: shounen
+    genres:
+      - action
+      - drama
+    synopsis: スペードJを題材にしたアクション。
+    status: completed
+    anime_adapted: false
   - key: Q11537576|たんぽぽ姫
+    magazine: null
+    demographic: kodomo
+    genres:
+      - fantasy
+      - kids
+    synopsis: たんぽぽ姫を題材にした児童向け作品。
+    status: completed
+    anime_adapted: false
   - key: Q11537576|ちゆうりっぷ姫
+    magazine: null
+    demographic: kodomo
+    genres:
+      - fantasy
+      - kids
+    synopsis: ちゆうりっぷ姫を題材にした児童向け作品。
+    status: completed
+    anime_adapted: false
   - key: Q11537576|デスハンター
+    magazine: null
+    demographic: shounen
+    genres:
+      - action
+      - horror
+    synopsis: デスハンターを題材にしたアクション。
+    status: completed
+    anime_adapted: false
   - key: Q11537576|ドッグ・トーリィ
+    magazine: null
+    demographic: shounen
+    genres:
+      - drama
+      - slice of life
+    synopsis: ドッグ・トーリィを描く作品。
+    status: completed
+    anime_adapted: false
   - key: Q11537576|バットマン THE BAT MANGA JIRO KUWATA EDITION
+    magazine: null
+    demographic: shounen
+    genres:
+      - action
+      - drama
+    synopsis: 桑田二郎『バットマン』。
+    status: completed
+    anime_adapted: false
   - key: Q11537576|ピノチオの冒険
+    magazine: null
+    demographic: kodomo
+    genres:
+      - fantasy
+      - adventure
+    synopsis: ピノキオの冒険を題材にした作品。
+    status: completed
+    anime_adapted: false
   - key: Q11537576|ベビーテック
     demographic: seinen
     genres:
@@ -221869,8 +222556,32 @@ series:
     synopsis: 桑田二郎が描く、覆面探偵まぼろし探偵の活躍を描く名作ヒーロー漫画。
     status: completed
   - key: Q11537576|マンガで解きあかす 観音経
+    magazine: null
+    demographic: other
+    genres:
+      - religion
+      - educational
+    synopsis: 観音経を題材にした宗教コミック。
+    status: completed
+    anime_adapted: false
   - key: Q11537576|マンガで読む般若心経
+    magazine: null
+    demographic: other
+    genres:
+      - religion
+      - educational
+    synopsis: 般若心経を題材にした宗教コミック。
+    status: completed
+    anime_adapted: false
   - key: Q11537576|ミュータント伝
+    magazine: null
+    demographic: shounen
+    genres:
+      - sci-fi
+      - action
+    synopsis: ミュータント伝を題材にしたSF。
+    status: completed
+    anime_adapted: false
   - key: Q11537576|ムサシ
     demographic: seinen
     genres:
@@ -221882,16 +222593,103 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q11537576|リングのタカ王
+    magazine: null
+    demographic: shounen
+    genres:
+      - sports
+      - drama
+    synopsis: リングのタカ王を主人公にしたボクシング作品。
+    status: completed
+    anime_adapted: false
   - key: Q11537576|古塔の決闘
+    magazine: null
+    demographic: shounen
+    genres:
+      - action
+      - historical
+    synopsis: 古塔の決闘を題材にしたアクション。
+    status: completed
+    anime_adapted: false
   - key: Q11537576|名探偵シンキングマシン完全脱獄
+    magazine: null
+    demographic: shounen
+    genres:
+      - mystery
+      - drama
+    synopsis: 名探偵シンキングマシンを主人公にしたミステリー。
+    status: completed
+    anime_adapted: false
   - key: Q11537576|天の岩戸ものがたり
+    magazine: null
+    demographic: shounen
+    genres:
+      - historical
+      - fantasy
+    synopsis: 天の岩戸を題材にした神話作品。
+    status: completed
+    anime_adapted: false
   - key: Q11537576|失われたムー大陸
+    magazine: null
+    demographic: shounen
+    genres:
+      - sci-fi
+      - adventure
+    synopsis: ムー大陸を題材にしたSF。
+    status: completed
+    anime_adapted: false
   - key: Q11537576|奇怪星團
+    magazine: null
+    demographic: shounen
+    genres:
+      - sci-fi
+      - horror
+    synopsis: 奇怪星團を題材にした作品。
+    status: completed
+    anime_adapted: false
   - key: Q11537576|少年ジュピター
+    magazine: null
+    demographic: shounen
+    genres:
+      - sci-fi
+      - adventure
+    synopsis: 少年ジュピターを題材にしたSF。
+    status: completed
+    anime_adapted: false
   - key: Q11537576|少年画報 昭和35年正月号 完全復刻版スペシャルBOX
+    magazine: null
+    demographic: shounen
+    genres:
+      - historical
+    synopsis: 『少年画報』昭和35年正月号復刻版。
+    status: completed
+    anime_adapted: false
   - key: Q11537576|嵐のチャンピオン
+    magazine: null
+    demographic: shounen
+    genres:
+      - sports
+      - drama
+    synopsis: 嵐のチャンピオンを題材にしたスポーツドラマ。
+    status: completed
+    anime_adapted: false
   - key: Q11537576|巨人16号
+    magazine: null
+    demographic: shounen
+    genres:
+      - sci-fi
+      - action
+    synopsis: 巨人16号を題材にしたSF。
+    status: completed
+    anime_adapted: false
   - key: Q11537576|平原児
+    magazine: null
+    demographic: shounen
+    genres:
+      - adventure
+      - drama
+    synopsis: 平原児を主人公にしたアドベンチャー。
+    status: completed
+    anime_adapted: false
   - key: Q11537576|弾丸トップ
   - key: Q11537576|忍法十番勝負
   - key: Q11537576|怪奇大作戦
