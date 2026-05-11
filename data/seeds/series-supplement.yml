@@ -1,5 +1,5 @@
 schema_version: 1
-generated_at: 2026-05-11T20:48:11.064Z
+generated_at: 2026-05-11T23:16:59.711Z
 generator: claude-opus-4-7-direct-fill
 series:
   - key: Q1001784|GOLDEN SPIRAL
@@ -359300,6 +359300,13 @@ series:
     status: completed
     anime_adapted: false
   - key: Q16264845|空飛べ!プッチ
+    magazine: null
+    demographic: shounen
+    genres:
+      - comedy
+    synopsis: 古谷実コメディ短編。
+    status: completed
+    anime_adapted: false
   - key: Q16264845|銀河宅配便マグロ
     demographic: seinen
     genres:
@@ -359310,6 +359317,14 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q16264862|ウルトラQ
+    magazine: null
+    demographic: shounen
+    genres:
+      - sci_fi
+      - horror
+    synopsis: 特撮ウルトラQコミカライズ。
+    status: completed
+    anime_adapted: true
   - key: Q16264862|リーンの翼
     demographic: seinen
     genres:
@@ -359320,6 +359335,14 @@ series:
     status: ongoing
     anime_adapted: true
   - key: Q16264862|心霊物件2008
+    magazine: null
+    demographic: seinen
+    genres:
+      - horror
+      - supernatural
+    synopsis: 心霊物件ホラー。
+    status: completed
+    anime_adapted: false
   - key: Q16264862|機動戦士ガンダム00
     demographic: shounen
     genres:
@@ -359349,6 +359372,14 @@ series:
     status: completed
     anime_adapted: true
   - key: Q16264862|機動戦士ガンダムU.C.戦記追憶のシャア・アズナブル
+    magazine: null
+    demographic: seinen
+    genres:
+      - mecha
+      - war
+    synopsis: ガンダムU.C.戦記、シャア・アズナブル追憶編。
+    status: completed
+    anime_adapted: false
   - key: Q16264862|機動戦士ガンダムUCバンデシネ
     magazine: monthly-gundam-ace
     demographic: seinen
@@ -359378,8 +359409,32 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q16264919|彼女のアーマメント
+    magazine: null
+    demographic: seinen
+    genres:
+      - action
+      - sci_fi
+    synopsis: 武装少女アクション。
+    status: completed
+    anime_adapted: false
   - key: Q16264919|機動戦士Vガンダム外伝オデロ・ヘンリークからの手紙
+    magazine: null
+    demographic: seinen
+    genres:
+      - mecha
+      - war
+    synopsis: Vガンダム外伝オデロ・ヘンリーク手紙編。
+    status: completed
+    anime_adapted: false
   - key: Q16264919|機動戦士ガンダムゼロの旧ザク
+    magazine: null
+    demographic: seinen
+    genres:
+      - mecha
+      - war
+    synopsis: ガンダム外伝旧ザク編。
+    status: completed
+    anime_adapted: false
   - key: Q16265092|おえどかしばな
     magazine: null
     demographic: shoujo
@@ -359390,6 +359445,14 @@ series:
     status: completed
     anime_adapted: false
   - key: Q16265092|ばけもの茶処 いらっしゃいませ。
+    magazine: null
+    demographic: shoujo
+    genres:
+      - supernatural
+      - comedy
+    synopsis: あやかし茶店日常譚。
+    status: completed
+    anime_adapted: false
   - key: Q16265092|ベタ惚れの婚約者が悪役令嬢にされそうなので。
     demographic: shoujo
     genres:
@@ -359399,7 +359462,23 @@ series:
     synopsis: おやまだみむが描く、ベタ惚れの婚約者を悪役令嬢化から守る乙女ゲーム転生もの。
     status: ongoing
   - key: Q16265092|山中鹿介物語
+    magazine: null
+    demographic: shounen
+    genres:
+      - historical
+      - drama
+    synopsis: 戦国武将山中鹿介物語。
+    status: completed
+    anime_adapted: false
   - key: Q16265092|腐ってもアニ。
+    magazine: null
+    demographic: shoujo
+    genres:
+      - comedy
+      - slice_of_life
+    synopsis: 兄妹コメディ。
+    status: completed
+    anime_adapted: false
   - key: Q16265123|よなよなかちかち。
     demographic: seinen
     genres:
@@ -359437,6 +359516,13 @@ series:
     status: completed
     anime_adapted: false
   - key: Q16265154|Liqueur
+    magazine: null
+    demographic: josei
+    genres:
+      - romance
+    synopsis: 女性向け恋愛短編。
+    status: completed
+    anime_adapted: false
   - key: Q16265154|せなかぐらし
     demographic: shoujo
     genres:
@@ -359455,8 +359541,31 @@ series:
     synopsis: カザマアヤミが描く、小さなお姫さまのほのぼの4コマ。
     status: completed
   - key: Q16265154|どこ見てるかバレバレだよ?
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - comedy
+    synopsis: 少女向け恋愛コメディ短編。
+    status: completed
+    anime_adapted: false
   - key: Q16265154|なきむしステップ
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - slice_of_life
+    synopsis: 少女向け恋愛短編。
+    status: completed
+    anime_adapted: false
   - key: Q16265154|はつきあい
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+    synopsis: 少女向け初恋短編。
+    status: completed
+    anime_adapted: false
   - key: Q16265154|ひとりみ葉月さんと。
     magazine: null
     demographic: josei
@@ -359467,11 +359576,58 @@ series:
     status: completed
     anime_adapted: false
   - key: Q16265154|ひらり、
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+    synopsis: 少女向け恋愛短編。
+    status: completed
+    anime_adapted: false
   - key: Q16265154|ボクの創る世界
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - drama
+    synopsis: 創作テーマ少女ドラマ。
+    status: completed
+    anime_adapted: false
   - key: Q16265154|まんがで即実践!犬とアーユルヴェーダと私
+    magazine: null
+    demographic: josei
+    genres:
+      - educational
+      - slice_of_life
+    synopsis: 犬とアーユルヴェーダ実践エッセイ。
+    status: completed
+    anime_adapted: false
   - key: Q16265154|出産の仕方がわからない!
+    magazine: null
+    demographic: josei
+    genres:
+      - comedy
+      - slice_of_life
+    synopsis: 出産体験エッセイコメディ。
+    status: completed
+    anime_adapted: false
   - key: Q16265154|女子校育ちはなおらない
+    magazine: null
+    demographic: josei
+    genres:
+      - comedy
+      - slice_of_life
+    synopsis: 女子校出身者エッセイ。
+    status: completed
+    anime_adapted: false
   - key: Q16265154|嫁いでもオタクです。
+    magazine: null
+    demographic: josei
+    genres:
+      - comedy
+      - slice_of_life
+    synopsis: オタク主婦エッセイ。
+    status: completed
+    anime_adapted: false
   - key: Q16265154|小林さんちのメイドラゴン エルマのOL日記
     magazine: monthly-action
     demographic: seinen
@@ -359482,7 +359638,23 @@ series:
     synopsis: クール教信者『小林さんちのメイドラゴン』スピンオフ。OLとして人間社会で生活するドラゴン・エルマの日常コメディ。カザマアヤミ作画。
     status: completed
   - key: Q16265154|小林さんちのメイドラゴン公式アンソロジー
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+      - supernatural
+    synopsis: メイドラゴン公式アンソロジー。
+    status: completed
+    anime_adapted: true
   - key: Q16265154|恋愛3次元デビュー
+    magazine: null
+    demographic: josei
+    genres:
+      - romance
+      - comedy
+    synopsis: 恋愛初心者エッセイ。
+    status: completed
+    anime_adapted: false
   - key: Q16265154|恥ずかしそうな顔でおっぱい見せてもらいたい
     magazine: null
     demographic: seinen
@@ -359493,7 +359665,22 @@ series:
     status: completed
     anime_adapted: false
   - key: Q16265154|星をふたりで
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+    synopsis: 少女向け恋愛短編。
+    status: completed
+    anime_adapted: false
   - key: Q16265166|シートン
+    magazine: null
+    demographic: shounen
+    genres:
+      - adventure
+      - drama
+    synopsis: シートン動物記コミカライズ。
+    status: completed
+    anime_adapted: false
   - key: Q16265166|バロンドリロンド
     magazine: weekly-shonen-jump
     demographic: shounen
@@ -359530,7 +359717,22 @@ series:
     synopsis: かたおか徹治によるウルトラマン兄弟漫画。ウルトラ兄弟たちの物語を描く。
     status: completed
   - key: Q16265197|世界の歴史
+    magazine: null
+    demographic: shounen
+    genres:
+      - educational
+      - historical
+    synopsis: 学習まんが世界の歴史。
+    status: completed
+    anime_adapted: false
   - key: Q16265197|熱血!!コロコロ伝説
+    magazine: null
+    demographic: shounen
+    genres:
+      - anthology
+    synopsis: コロコロコミック歴代名作復刻アンソロジー。
+    status: completed
+    anime_adapted: false
   - key: Q16265246|機動戦士ガンダムAGE First Evolution
     demographic: seinen
     genres:
@@ -359558,6 +359760,14 @@ series:
     synopsis: 葛木ヒヨンが描く、ガンダムU.C.0096のサイドストーリー・ラスト・サン編。
     status: completed
   - key: Q16265246|機動戦士ガンダムUC虹にのれなかった男
+    magazine: null
+    demographic: seinen
+    genres:
+      - mecha
+      - war
+    synopsis: ガンダムUC外伝。
+    status: completed
+    anime_adapted: false
   - key: Q16265246|機動戦士ガンダムヴァルプルギス
     magazine: monthly-gundam-ace
     demographic: seinen
@@ -359577,6 +359787,13 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q1627449|Baby Baby
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+    synopsis: 大塚英志原作青年作品。
+    status: completed
+    anime_adapted: false
   - key: Q1627449|BROTHERS
     demographic: seinen
     genres:
@@ -359585,9 +359802,41 @@ series:
     synopsis: 田島昭宇による青年向けドラマ。BROTHERSを描く物語。
     status: completed
   - key: Q1627449|GALERIANS A HEAD
+    magazine: null
+    demographic: seinen
+    genres:
+      - sci_fi
+      - horror
+    synopsis: ガレリアンズ系SFホラー。
+    status: completed
+    anime_adapted: false
   - key: Q1627449|GORILLA KICK!
+    magazine: null
+    demographic: seinen
+    genres:
+      - action
+      - comedy
+    synopsis: アクションコメディ。
+    status: completed
+    anime_adapted: false
   - key: Q1627449|LOVE GOD MURDER
+    magazine: null
+    demographic: seinen
+    genres:
+      - mystery
+      - thriller
+    synopsis: 大塚英志ミステリー。
+    status: completed
+    anime_adapted: false
   - key: Q1627449|MADARA
+    magazine: null
+    demographic: shounen
+    genres:
+      - action
+      - fantasy
+    synopsis: 魍魎戦記MADARA本編。
+    status: completed
+    anime_adapted: true
   - key: Q1627449|MADARA ARCHIVES
     demographic: seinen
     genres:
@@ -359597,11 +359846,59 @@ series:
     synopsis: 田島昭宇による『MADARA』アーカイブ。陀羅尼の少年マダラの戦いを集成した名作集。
     status: completed
   - key: Q1627449|MADARA 壱
+    magazine: null
+    demographic: shounen
+    genres:
+      - action
+      - fantasy
+    synopsis: MADARA壱編。
+    status: completed
+    anime_adapted: false
   - key: Q1627449|Madara 転生編
+    magazine: null
+    demographic: shounen
+    genres:
+      - action
+      - fantasy
+    synopsis: MADARA転生編。
+    status: completed
+    anime_adapted: false
   - key: Q1627449|Madara赤
+    magazine: null
+    demographic: shounen
+    genres:
+      - action
+      - fantasy
+    synopsis: MADARA赤編。
+    status: completed
+    anime_adapted: false
   - key: Q1627449|ROSARIO YETI
+    magazine: null
+    demographic: seinen
+    genres:
+      - action
+      - supernatural
+    synopsis: 大塚英志原作伝奇アクション。
+    status: completed
+    anime_adapted: false
   - key: Q1627449|ネオデビルマン
+    magazine: null
+    demographic: seinen
+    genres:
+      - action
+      - supernatural
+    synopsis: デビルマンリブートアンソロジー。
+    status: completed
+    anime_adapted: false
   - key: Q1627449|光速ガールズ
+    magazine: null
+    demographic: seinen
+    genres:
+      - sci_fi
+      - comedy
+    synopsis: 光速少女SFコメディ。
+    status: completed
+    anime_adapted: false
   - key: Q1627449|多重人格探偵サイコ
     magazine: monthly-comic-beam
     demographic: seinen
@@ -359612,6 +359909,15 @@ series:
     synopsis: 多重人格の探偵・小林洋介が、自身の人格と凶悪事件に挑む、大塚英志原作・田島昭宇作画の長期サイコサスペンス。
     status: completed
   - key: Q1627449|多重人格探偵サイコ'
+    magazine: null
+    demographic: seinen
+    genres:
+      - mystery
+      - psychological
+      - horror
+    synopsis: 多重人格探偵サイコサイドストーリー。
+    status: completed
+    anime_adapted: true
   - key: Q1627449|魍魎戦記MADARA
     magazine: monthly-comic-comp
     demographic: shounen
@@ -359623,7 +359929,23 @@ series:
     status: completed
     anime_adapted: true
   - key: Q1627449|魍魎戦記MADARA 転生編
+    magazine: null
+    demographic: shounen
+    genres:
+      - action
+      - fantasy
+    synopsis: 魍魎戦記MADARA転生編。
+    status: completed
+    anime_adapted: false
   - key: Q1627449|魍魎戦記Madara赤
+    magazine: null
+    demographic: shounen
+    genres:
+      - action
+      - fantasy
+    synopsis: 魍魎戦記MADARA赤編。
+    status: completed
+    anime_adapted: false
   - key: Q1627449|魍魎戦記摩陀羅BASARA
     demographic: seinen
     genres:
@@ -359634,13 +359956,74 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q16335996|キャタピラー
+    magazine: null
+    demographic: seinen
+    genres:
+      - horror
+      - war
+    synopsis: キャタピラー戦争ホラー。
+    status: completed
+    anime_adapted: false
   - key: Q16336026|まんがなぞなぞクイズ学校
+    magazine: null
+    demographic: kodomo
+    genres:
+      - educational
+      - comedy
+    synopsis: 学習まんがクイズ。
+    status: completed
+    anime_adapted: false
   - key: Q16336029|10月のプラネタリウム
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - drama
+    synopsis: 少女向け短編。
+    status: completed
+    anime_adapted: false
   - key: Q16336029|地上の記憶
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+    synopsis: 少女向けドラマ短編。
+    status: completed
+    anime_adapted: false
   - key: Q16336029|少年塔
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+      - fantasy
+    synopsis: 少女向けファンタジー短編。
+    status: completed
+    anime_adapted: false
   - key: Q16336029|幻の花
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+    synopsis: 少女向けドラマ短編。
+    status: completed
+    anime_adapted: false
   - key: Q16336046|太陽の子
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+    synopsis: 少女向けドラマ。
+    status: completed
+    anime_adapted: false
   - key: Q1637181|ボクの好きな女の子
+    magazine: null
+    demographic: seinen
+    genres:
+      - romance
+      - ecchi
+    synopsis: 成人向け恋愛。
+    status: completed
+    anime_adapted: false
   - key: Q1637181|ミミア姫
     demographic: seinen
     genres:
@@ -359651,10 +360034,50 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q1637181|もと子先生の恋人
+    magazine: null
+    demographic: seinen
+    genres:
+      - romance
+      - ecchi
+    synopsis: 成人向け恋愛。
+    status: completed
+    anime_adapted: false
   - key: Q1637181|ラブシチュエーション
+    magazine: null
+    demographic: seinen
+    genres:
+      - romance
+      - ecchi
+    synopsis: 成人向け恋愛。
+    status: completed
+    anime_adapted: false
   - key: Q1637181|人魚姫のキス
+    magazine: null
+    demographic: seinen
+    genres:
+      - romance
+      - ecchi
+    synopsis: 成人向けファンタジー恋愛。
+    status: completed
+    anime_adapted: false
   - key: Q1637181|初夜
+    magazine: null
+    demographic: seinen
+    genres:
+      - romance
+      - ecchi
+    synopsis: 成人向け恋愛。
+    status: completed
+    anime_adapted: false
   - key: Q1637181|初夜2
+    magazine: null
+    demographic: seinen
+    genres:
+      - romance
+      - ecchi
+    synopsis: 成人向け恋愛続編。
+    status: completed
+    anime_adapted: false
   - key: Q1637181|初愛
     demographic: seinen
     genres:
@@ -359665,6 +360088,14 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q1637181|好きでいっぱい♡
+    magazine: null
+    demographic: seinen
+    genres:
+      - romance
+      - ecchi
+    synopsis: 成人向け恋愛。
+    status: completed
+    anime_adapted: false
   - key: Q1637181|愛しのかな
     demographic: seinen
     genres:
@@ -359682,9 +360113,41 @@ series:
     synopsis: 田中ユタカによる青年向けラブストーリー。愛人と呼ばれる関係を繊細に描く。
     status: completed
   - key: Q1637181|感じる?
+    magazine: null
+    demographic: seinen
+    genres:
+      - romance
+      - ecchi
+    synopsis: 成人向け恋愛。
+    status: completed
+    anime_adapted: false
   - key: Q1637181|気持ちいい発見
+    magazine: null
+    demographic: seinen
+    genres:
+      - romance
+      - ecchi
+    synopsis: 成人向け恋愛。
+    status: completed
+    anime_adapted: false
   - key: Q1637181|無垢な彼女の初体験事情
+    magazine: null
+    demographic: seinen
+    genres:
+      - romance
+      - ecchi
+    synopsis: 成人向け恋愛。
+    status: completed
+    anime_adapted: false
   - key: Q1637181|秘めごとの関係
+    magazine: null
+    demographic: seinen
+    genres:
+      - romance
+      - ecchi
+    synopsis: 成人向け恋愛。
+    status: completed
+    anime_adapted: false
   - key: Q1637181|笑うあげは
     demographic: seinen
     genres:
@@ -359693,16 +360156,103 @@ series:
     synopsis: 田中ユタカによる青年ドラマ。笑うあげはを描く物語。
     status: completed
   - key: Q1637181|純愛
+    magazine: null
+    demographic: seinen
+    genres:
+      - romance
+      - ecchi
+    synopsis: 成人向け恋愛。
+    status: completed
+    anime_adapted: false
   - key: Q1637181|純潔カノジョ
+    magazine: null
+    demographic: seinen
+    genres:
+      - romance
+      - ecchi
+    synopsis: 成人向け恋愛。
+    status: completed
+    anime_adapted: false
   - key: Q1637181|純潔カノジョの秘めハジメ
+    magazine: null
+    demographic: seinen
+    genres:
+      - romance
+      - ecchi
+    synopsis: 成人向け恋愛続編。
+    status: completed
+    anime_adapted: false
   - key: Q1637181|純白オトメ
+    magazine: null
+    demographic: seinen
+    genres:
+      - romance
+      - ecchi
+    synopsis: 成人向け恋愛。
+    status: completed
+    anime_adapted: false
   - key: Q1637181|美少女雀士!スパローガール!
+    magazine: null
+    demographic: seinen
+    genres:
+      - mahjong
+      - ecchi
+    synopsis: 美少女麻雀コメディ。
+    status: completed
+    anime_adapted: false
   - key: Q1647940|一平全集
+    magazine: null
+    demographic: seinen
+    genres:
+      - anthology
+      - comedy
+    synopsis: 岡本一平作品全集。
+    status: completed
+    anime_adapted: false
   - key: Q1647940|岡本一平漫画漫文集
+    magazine: null
+    demographic: seinen
+    genres:
+      - anthology
+      - comedy
+    synopsis: 岡本一平漫画漫文集。
+    status: completed
+    anime_adapted: false
   - key: Q1647940|漫画と訳文
+    magazine: null
+    demographic: seinen
+    genres:
+      - anthology
+    synopsis: 岡本一平漫画と訳文集。
+    status: completed
+    anime_adapted: false
   - key: Q1647940|紙上世界漫画漫遊
+    magazine: null
+    demographic: seinen
+    genres:
+      - anthology
+      - travel
+    synopsis: 岡本一平世界漫遊漫画集。
+    status: completed
+    anime_adapted: false
   - key: Q16482060|スペクトルマン
+    magazine: null
+    demographic: shounen
+    genres:
+      - sci_fi
+      - action
+    synopsis: 特撮スペクトルマンコミカライズ。
+    status: completed
+    anime_adapted: true
   - key: Q16482060|スペクトルマンvsライオン丸
+    magazine: null
+    demographic: shounen
+    genres:
+      - sci_fi
+      - action
+    synopsis: 特撮クロスオーバー作品。
+    status: completed
+    anime_adapted: false
   - key: Q16482060|ライオン丸G
     demographic: seinen
     genres:
@@ -359713,22 +360263,147 @@ series:
     status: ongoing
     anime_adapted: true
   - key: Q16482060|宇宙猿人ゴリ 宇宙猿人ゴリ対スペクトルマン スペクトルマン
+    magazine: null
+    demographic: shounen
+    genres:
+      - sci_fi
+      - action
+    synopsis: 宇宙猿人ゴリ対スペクトルマンコミカライズ。
+    status: completed
+    anime_adapted: true
   - key: Q16482060|快傑ライオン丸
+    magazine: null
+    demographic: shounen
+    genres:
+      - action
+      - historical
+    synopsis: 特撮快傑ライオン丸コミカライズ。
+    status: completed
+    anime_adapted: true
   - key: Q16482060|電人ザボーガー
+    magazine: null
+    demographic: shounen
+    genres:
+      - sci_fi
+      - action
+    synopsis: 特撮電人ザボーガーコミカライズ。
+    status: completed
+    anime_adapted: true
   - key: Q16482060|風雲ライオン丸
+    magazine: null
+    demographic: shounen
+    genres:
+      - action
+      - historical
+    synopsis: 特撮風雲ライオン丸コミカライズ。
+    status: completed
+    anime_adapted: true
   - key: Q1658164|Shoe maker
+    magazine: null
+    demographic: josei
+    genres:
+      - drama
+    synopsis: 靴職人物語。
+    status: completed
+    anime_adapted: false
   - key: Q1658164|Spangle
+    magazine: null
+    demographic: josei
+    genres:
+      - drama
+    synopsis: 短編集。
+    status: completed
+    anime_adapted: false
   - key: Q1658164|エルネストの鳩舎
+    magazine: null
+    demographic: josei
+    genres:
+      - drama
+    synopsis: 鳩舎を舞台にしたドラマ。
+    status: completed
+    anime_adapted: false
   - key: Q1658164|カストラチュラ
+    magazine: null
+    demographic: josei
+    genres:
+      - drama
+    synopsis: ドラマ短編。
+    status: completed
+    anime_adapted: false
   - key: Q1658164|スパングル
+    magazine: null
+    demographic: josei
+    genres:
+      - drama
+    synopsis: ドラマ短編。
+    status: completed
+    anime_adapted: false
   - key: Q1658164|ダゲレオタイピスト
+    magazine: null
+    demographic: josei
+    genres:
+      - historical
+      - drama
+    synopsis: 写真技師ダゲレオタイピスト物語。
+    status: completed
+    anime_adapted: false
   - key: Q1658164|ミカセ
+    magazine: null
+    demographic: josei
+    genres:
+      - drama
+    synopsis: ドラマ短編。
+    status: completed
+    anime_adapted: false
   - key: Q1658164|ゆきしろ、ばらべに
+    magazine: null
+    demographic: josei
+    genres:
+      - drama
+      - romance
+    synopsis: ロマンスドラマ短編。
+    status: completed
+    anime_adapted: false
   - key: Q1658164|リテレール
+    magazine: null
+    demographic: josei
+    genres:
+      - drama
+    synopsis: 文学テーマ短編。
+    status: completed
+    anime_adapted: false
   - key: Q1658164|寝台鳩舎
+    magazine: null
+    demographic: josei
+    genres:
+      - drama
+    synopsis: 鳩舎物語。
+    status: completed
+    anime_adapted: false
   - key: Q1658164|月にひらく襟
+    magazine: null
+    demographic: josei
+    genres:
+      - drama
+    synopsis: ドラマ短編。
+    status: completed
+    anime_adapted: false
   - key: Q1658164|羽ばたき
+    magazine: null
+    demographic: josei
+    genres:
+      - drama
+    synopsis: ドラマ短編。
+    status: completed
+    anime_adapted: false
   - key: Q1658164|青い菊
+    magazine: null
+    demographic: josei
+    genres:
+      - drama
+    synopsis: ドラマ短編。
+    status: completed
+    anime_adapted: false
   - key: Q16769878|ヒトガタナ
     demographic: seinen
     genres:
@@ -359748,8 +360423,32 @@ series:
     status: completed
     anime_adapted: true
   - key: Q16769933|〔○生〕ブラックお仕事ウラ話読者投稿ベスト
+    magazine: null
+    demographic: josei
+    genres:
+      - comedy
+      - slice_of_life
+    synopsis: 読者投稿実話エッセイ。
+    status: completed
+    anime_adapted: false
   - key: Q16769933|ある幼なじみが結婚するまでの話
+    magazine: null
+    demographic: josei
+    genres:
+      - romance
+      - slice_of_life
+    synopsis: 幼馴染結婚体験エッセイ。
+    status: completed
+    anime_adapted: false
   - key: Q16769933|ある男が親友の妹と結婚するまでの話
+    magazine: null
+    demographic: josei
+    genres:
+      - romance
+      - slice_of_life
+    synopsis: 結婚体験エッセイ。
+    status: completed
+    anime_adapted: false
   - key: Q16769933|おじさんと女子高生
     magazine: null
     demographic: seinen
@@ -359760,6 +360459,14 @@ series:
     status: completed
     anime_adapted: false
   - key: Q16769933|スゴ盛!本当にあった〔○生〕ここだけの話極
+    magazine: null
+    demographic: josei
+    genres:
+      - slice_of_life
+      - drama
+    synopsis: 実話投稿エッセイ。
+    status: completed
+    anime_adapted: false
   - key: Q16769933|やせっぽちとふとっちょ
     magazine: null
     demographic: seinen
