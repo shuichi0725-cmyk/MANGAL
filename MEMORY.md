@@ -2,7 +2,7 @@
 
 > このファイルは Claude Code session の context bootstrap 用。新しいセッションを開始したら最初に読むこと。
 
-最終更新: 2026-05-11 (種3 fill session 18 完了、 累計 34,190/70,202 = 48.70%)
+最終更新: 2026-05-11 (種3 fill session 19 完了、 累計 約 36,186/70,202 ≈ 51.55% = **50%突破**)
 
 ## プロジェクト概要
 
@@ -1399,3 +1399,75 @@ bb956eb  data(seed3): batch 324/343 (= session18) Opus 4.7 直筆 fill
 4. **demographic schema 不変**: `shounen|shoujo|seinen|josei|kodomo|other` のみ。
 5. **per-batch protocol** (= 不変): 100 件 1 バッチ、 `data/seeds/_fills/batch-NNN.json`、 `npx tsx scripts/_apply-fills.ts`、 commit + push、 JST 時刻 + 進捗報告。
 6. **報告頻度**: 100件毎 or 500件毎、 ユーザの指定に従う。
+
+---
+
+## 2026-05-11: 種3 fill session 19 完了 (= 50%突破、 半分達成!)
+
+### 達成サマリ
+
+- **session 19 batch 344-363 全 20 batch 完了** (= 100 件 × 20 = **2,000 件 fill**)
+- 適用: **1,996 / 2,000** (= batch 344 で applied=96, missing=4 [= Q11268905 + Q11318682 + Q11460951 重複 2件]、 残り 19 batches は applied=100, missing=0)
+- 所要時間: 約 1h20m (= JST 17:50頃 開始 → 19:22 終了)
+- 報告頻度: **500 件毎** (= block 単位、 ユーザ要求対応)
+- session 18 → 19 推移: 34,190 → **約 36,186 / 70,202 ≈ 51.55%** (= **50%突破、 折り返し地点到達!**)
+- 残 約 34,016 件 (= 約 17 セッション分)
+
+### Batch 進捗テーブル
+
+| Session | batch range | 範囲 | 適用件数 | missing |
+|---|---|---|---|---|
+| 16 | 284-303 | session15-unfilled + 補充から 2000 件 | 1,998 | 2 |
+| 17 | 304-323 | session16-unfilled 40006 件から 2000 件 | 1,998 | 2 |
+| 18 | 324-343 | session17-unfilled 38008 件から 2000 件 | 1,996 | 4 |
+| **19** | 344-363 | session18-unfilled 36012 件から 2000 件 | **1,996** | **4 (= Q11268905 + Q11318682 + Q11460951 重複 2件)** |
+
+**累計**: **約 36,186 / 70,202 ≈ 51.55%**、 **残 約 34,016 件** (= 約 17 セッション分)。
+
+### Session 19 の傾向
+
+- **50%節目突破** (= Block 2 終了時点)。 残 17 セッション程度で 100% 到達見込み。
+- **大型 Q-code クラスター** (=
+  - Q11488080 横溝正史系ミステリーアンソロジー約 25 件、
+  - Q11488393 ぶんか社実話投稿系約 50 件、
+  - Q11489301 ホラーアンソロジー約 50 件、
+  - Q11497486 折原みと感動少女ロマンス約 50 件、
+  - Q11500003 ハーレクイン少女ロマンス約 80 件、
+  - Q11483065 平松伸二スペシャル編約 25 件、
+  - Q11483613 リイド社時代劇アンソロジー約 20 件、
+  - Q11485734 TYPE-MOON系コミックアンソロジー約 15 件、
+  - Q11490500 ティーンズラブ少女系約 20 件)。
+- 折原みと、 ハーレクイン、 横溝正史、 平松伸二、 御茶漬海苔の作品集が中心。
+
+### 関連 commit (= 抜粋)
+
+```
+782ab41  data(seed3): batch 363/363 (= session19 完了) Opus 4.7 直筆 fill
+f416926  data(seed3): batch 362/363 (= session19) Opus 4.7 直筆 fill
+...
+b0ffeef  data(seed3): batch 354/363 (= session19) Opus 4.7 直筆 fill
+7a0c6a1  data(seed3): batch 353/363 (= session19) Opus 4.7 直筆 fill
+```
+
+## 次セッションでの推奨アクション (= 上書き、 最新)
+
+1. **続行優先**: session 20 として残 約 34,016 件から 2,000 件 fill (= batch 364-383)。
+2. **next batch 番号 = 364**。
+3. **既知 missing key 2 件** (= Q11268905|ウルフチックにお願い + Q11318682|パニックパラダイス) は引き続き seed3 に物理的に存在しないので、 batch JSON に含めても無害。
+4. **demographic schema 不変**: `shounen|shoujo|seinen|josei|kodomo|other` のみ。
+5. **per-batch protocol** (= 不変): 100 件 1 バッチ、 `data/seeds/_fills/batch-NNN.json`、 `npx tsx scripts/_apply-fills.ts`、 commit + push、 JST 時刻 + 進捗報告。
+6. **報告頻度**: 100件毎 or 500件毎、 ユーザの指定に従う。
+7. **selection ロジック (= series-supplement.yml は単一 key dict 形式)**:
+   ```python
+   import json, yaml
+   seed = yaml.safe_load(open('data/seeds/series-supplement.yml'))
+   filled = set(k for k, v in seed.items() if v and v.get('status') == 'completed')
+   seed_keys = set(seed.keys())
+   orig = json.load(open('.cache/session19-unfilled.json'))
+   rem = [e for e in orig if e['key'] not in filled and e['key'] in seed_keys]
+   if len(rem) < 2100:
+       seen = set(e['key'] for e in rem)
+       extra = [{'key': k} for k in seed_keys if k not in filled and k not in seen]
+       rem.extend(extra)
+   json.dump(rem, open('.cache/session20-unfilled.json','w'), ensure_ascii=False)
+   ```
