@@ -2,7 +2,7 @@
 
 > このファイルは Claude Code session の context bootstrap 用。新しいセッションを開始したら最初に読むこと。
 
-最終更新: 2026-05-11 (種3 fill session 14 完了、 累計 26,200/70,202 = 37.3%)
+最終更新: 2026-05-11 (種3 fill session 15 完了、 累計 28,198/70,202 = 40.2%)
 
 ## プロジェクト概要
 
@@ -1137,3 +1137,60 @@ e47cc27  data(seed3): batch 224/243 (= session13) Opus 4.7 直筆 fill
 2. **demographic schema 注意**: `shounen|shoujo|seinen|josei|kodomo|other` のみ。 アダルト系は `seinen + ecchi genre` で表現、 一般教養系は `other + educational genre`。
 3. **per-batch protocol** (= 不変): 100 件 1 バッチ、 `data/seeds/_fills/batch-NNN.json`、 `npx tsx scripts/_apply-fills.ts`、 commit + push、 JST 時刻 + 進捗報告。
 4. **月次蒸留 protocol が動く前提の宿題は変更なし**: `scripts/_diff-*.ts` 3 本 + `.cache/madb-last-release.txt` 初期化 は依然未着手。
+
+---
+
+# 2026-05-11: 種3 fill session 15 完了 (累計 40.2%、 40% 突破)
+
+## 進捗サマリ
+
+| Session | batch range | 範囲 | 適用件数 | missing |
+|---|---|---|---|---|
+| 14 | 244-263 | session13-unfilled 6001 件から 2000 件 | 1,999 | 1 |
+| **15** | 264-283 | session14-unfilled 4002 件から 2000 件 | **1,998** | **2 (= Q11268905\|ウルフチックにお願い 再発 + Q11318682\|パニックパラダイス 表記揺れ)** |
+
+**累計**: **28,198 / 70,202 = 40.2%** (= **40% 突破!**)、 **残 42,000 件** (= 約 21 セッション分)。
+
+## Session 15 で観察された傾向
+
+- 所要時間: 12:52:13 → 13:34:50 = **約 43 分** (= 2 分/batch、 session 13-14 と同等)。 効率化パターン定着。
+- **KNOWN_MISSING フィルタは失敗**: session14 で記載した除外フィルタが効かなかった (PUA 文字や Python 文字列正規化の問題)。 batch 264 で 1 件 missing 再発、 batch 273 でも別 key で 1 件 missing (中点表記揺れ)。
+- Q-code 群は session 13-14 と類似パターンの「**雑誌・出版社・アンソロジー枠**」 中心:
+  - **Q11301333** = ぶんか社系ケン月影時代劇艶本枠 約 70 件
+  - **Q11317653** = ダーティ松本系の成人向け劇画枠 約 70 件
+  - **Q11347037** = ラズウェル細木グルメ枠 (酒のほそ道・居酒屋グルメ等) 約 70 件
+  - **Q11342349** = BL ロマンス枠 約 40 件
+  - **Q11281877** = 渡辺航「弱虫ペダル」 関連枠 約 30 件
+  - **Q11352635** = 円谷プロ系特撮ヒーロー枠 (ウルトラセブン・ウルトラマン等) 約 30 件
+  - **Q11333289** = フジモトマサル作品集 約 20 件
+  - **Q113548545** = 女性向け実録エッセイ枠 (毒親サバイバル等)
+  - **Q11294917** = カラスヤサトシ系のエッセイ枠 約 30 件
+
+## 関連 commit (= 抜粋)
+
+```
+ac8878a  data(seed3): batch 283/283 (= session15 完) Opus 4.7 直筆 fill
+338ef32  data(seed3): batch 282/283 (= session15) Opus 4.7 直筆 fill
+...
+4de2212  data(seed3): batch 264/283 (= session15) Opus 4.7 直筆 fill
+```
+
+## 次セッションでの推奨アクション (= 上書き、 最新)
+
+1. **続行優先**: session 16 として残 42,000 件から 2,000 件 fill (= batch 284-303)。 selection ロジック:
+   ```python
+   import json, yaml
+   seed = yaml.safe_load(open('data/seeds/series-supplement.yml'))
+   filled = set(x['key'] for x in seed['series'] if x.get('synopsis') or x.get('demographic'))
+   seed_keys = set(x['key'] for x in seed['series'])
+   orig = json.load(open('.cache/session15-unfilled.json'))
+   rem = [e for e in orig if e['key'] not in filled and e['key'] in seed_keys]
+   json.dump(rem, open('.cache/session16-unfilled.json','w'), ensure_ascii=False)
+   # rem ≒ 2002 件 (session 15 の元 4002 から 2000 件消化済、 残 ~2000)
+   # session 15 残が尽きそうなら、 seed3 全体から未 filled を再 selection:
+   # rem = [{'key': x['key']} for x in seed['series'] if x['key'] not in filled][:N]
+   ```
+2. **KNOWN_MISSING は文字列比較で除外できない場合がある**: PUA 文字・正規化問題の可能性。 batch ファイルに含めて 99/100 適用とする方が安全。
+3. **demographic schema 注意**: `shounen|shoujo|seinen|josei|kodomo|other` のみ。 アダルト系は `seinen + ecchi genre` で表現、 一般教養系は `other + educational genre`。
+4. **per-batch protocol** (= 不変): 100 件 1 バッチ、 `data/seeds/_fills/batch-NNN.json`、 `npx tsx scripts/_apply-fills.ts`、 commit + push、 JST 時刻 + 進捗報告。
+5. **月次蒸留 protocol が動く前提の宿題は変更なし**: `scripts/_diff-*.ts` 3 本 + `.cache/madb-last-release.txt` 初期化 は依然未着手。
