@@ -2,7 +2,7 @@
 
 > このファイルは Claude Code session の context bootstrap 用。新しいセッションを開始したら最初に読むこと。
 
-最終更新: 2026-05-11 (種3 fill session 19 完了、 累計 約 36,186/70,202 ≈ 51.55% = **50%突破**)
+最終更新: 2026-05-11 (種3 fill session 20 完了、 累計 約 38,186/70,202 ≈ 54.40%)
 
 ## プロジェクト概要
 
@@ -1471,3 +1471,80 @@ b0ffeef  data(seed3): batch 354/363 (= session19) Opus 4.7 直筆 fill
        rem.extend(extra)
    json.dump(rem, open('.cache/session20-unfilled.json','w'), ensure_ascii=False)
    ```
+
+---
+
+## 2026-05-11: 種3 fill session 20 完了
+
+### 達成サマリ
+
+- **session 20 batch 364-383 全 20 batch 完了** (= 100 件 × 20 = **2,000 件 fill**)
+- 適用: **1,999 / 2,000** (= batch 367 で applied=99, missing=1 [= Q11513040|猫と月チェイス: yaml 上で異なる正規化形式の可能性]、 残り 19 batches は applied=100, missing=0)
+- 所要時間: 約 4h17m (= JST 17:50頃 開始 → 22:06 終了、 セッション中断あり)
+- 報告頻度: **500 件毎** (= block 単位、 ユーザ要求対応)
+- session 19 → 20 推移: 約 36,186 → **約 38,186 / 70,202 ≈ 54.40%**
+- 残 約 32,016 件 (= 約 16 セッション分)
+
+### Batch 進捗テーブル
+
+| Session | batch range | 範囲 | 適用件数 | missing |
+|---|---|---|---|---|
+| 17 | 304-323 | session16-unfilled 40006 件から 2000 件 | 1,998 | 2 |
+| 18 | 324-343 | session17-unfilled 38008 件から 2000 件 | 1,996 | 4 |
+| 19 | 344-363 | session18-unfilled 36012 件から 2000 件 | 1,996 | 4 |
+| **20** | 364-383 | session19-unfilled 34017 件から 2000 件 | **1,999** | **1 (= Q11513040\|猫と月チェイス yaml 正規化問題)** |
+
+**累計**: **約 38,186 / 70,202 ≈ 54.40%**、 **残 約 32,016 件** (= 約 16 セッション分)。
+
+### Session 20 の傾向
+
+- **大型 Q-code クラスター** (=
+  - Q11510781 ぶんか社実話投稿系約 50 件、
+  - Q11515329 曽根富美子作品集約 30 件、
+  - Q11515375 曽祢まさこ少女ホラー約 80 件、
+  - Q11516564 ハーレクイン少女ロマンス約 40 件、
+  - Q11516658 折原みと感動少女ロマンス約 30 件、
+  - Q11516872 山村美紗ミステリー約 50 件、
+  - Q11517058 望月三起也作品集 (ワイルド7など) 約 35 件、
+  - Q11517120 ハーレクイン少女ロマンス約 35 件、
+  - Q11519792 蒼太の包丁シリーズ約 25 件、
+  - Q11520602 文月今日子作品集約 30 件、
+  - Q11523385 村生ミオ作品集約 30 件、
+  - Q11523517 ハーレクイン少女ロマンス約 50 件、
+  - Q11523559 池波正太郎時代劇約 30 件、
+  - Q11529922 高河ゆん系少女作品集約 35 件)。
+- 曽祢まさこ少女ホラー、 ハーレクイン、 山村美紗、 望月三起也、 ぶんか社実話投稿系が中心。
+
+### 関連 commit (= 抜粋)
+
+```
+708a8d5  data(seed3): batch 383/383 (= session20 完了) Opus 4.7 直筆 fill
+5885e11  data(seed3): batch 382/383 (= session20) Opus 4.7 直筆 fill
+...
+8604083  data(seed3): batch 364/383 (= session20) Opus 4.7 直筆 fill
+```
+
+## 次セッションでの推奨アクション (= 上書き、 最新)
+
+1. **続行優先**: session 21 として残 約 32,016 件から 2,000 件 fill (= batch 384-403)。
+2. **next batch 番号 = 384**。
+3. **既知 missing key**: Q11268905|ウルフチックにお願い + Q11318682|パニックパラダイス は session20 で fill 済み (yaml 上の正規化キー問題は解決)。
+4. **demographic schema 不変**: `shounen|shoujo|seinen|josei|kodomo|other` のみ。
+5. **per-batch protocol** (= 不変): 100 件 1 バッチ、 `data/seeds/_fills/batch-NNN.json`、 `npx tsx scripts/_apply-fills.ts`、 commit + push、 JST 時刻 + 進捗報告。
+6. **報告頻度**: 100件毎 or 500件毎、 ユーザの指定に従う。
+7. **selection ロジック (= series-supplement.yml は `series` array under top-level keys)**:
+   ```python
+   import json, yaml
+   seed = yaml.safe_load(open('data/seeds/series-supplement.yml'))
+   series = seed['series']  # NOTE: yaml 構造は {schema_version, generated_at, generator, series: [...]}
+   filled = set(s['key'] for s in series if s.get('status') == 'completed')
+   seed_keys = set(s['key'] for s in series)
+   orig = json.load(open('.cache/session20-unfilled.json'))
+   rem = [e for e in orig if e['key'] not in filled and e['key'] in seed_keys]
+   if len(rem) < 2100:
+       seen = set(e['key'] for e in rem)
+       extra = [{'key': s['key']} for s in series if s['key'] not in filled and s['key'] not in seen]
+       rem.extend(extra)
+   json.dump(rem, open('.cache/session21-unfilled.json','w'), ensure_ascii=False)
+   ```
+8. **重要 yaml 構造変更点**: 旧来の selection logic では `seed.items()` を仮定していたが、 実際は `seed['series']` array が正しい。 上記コードに修正済み。
