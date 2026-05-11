@@ -1,5 +1,5 @@
 schema_version: 1
-generated_at: 2026-05-11T05:15:58.471Z
+generated_at: 2026-05-11T05:18:20.669Z
 generator: claude-opus-4-7-direct-fill
 series:
   - key: Q1001784|GOLDEN SPIRAL
@@ -105567,14 +105567,86 @@ series:
     status: completed
     anime_adapted: true
   - key: Q11370540|まんが世界史202
+    magazine: null
+    demographic: kodomo
+    genres:
+      - educational
+      - historical
+    synopsis: 世界史の主要トピック202を漫画で解説する児童向け学習漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11370563|Crash junky × spirit
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - ecchi
+    synopsis: ティーンズ向け恋愛コミック。情熱的な恋愛を描いたティーンズラブ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11370563|SYSTEM
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - ecchi
+    synopsis: ティーンズラブ系少女漫画。情熱的な恋愛を描く。
+    status: completed
+    anime_adapted: false
   - key: Q11370563|S系セレブ男子
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - ecchi
+    synopsis: S系セレブ男子に翻弄されるヒロインを描くティーンズラブ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11370563|S級カレシの独占愛
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - ecchi
+    synopsis: S級カレシの独占欲を題材にしたティーンズラブ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11370563|あくまなんだもん!?
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - supernatural
+    synopsis: 悪魔の彼氏に振り回されるヒロインを描くティーンズラブ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11370563|ウブ秘書は社長の玩具
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - ecchi
+    synopsis: ウブな秘書と社長のオフィスラブを描くティーンズラブ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11370563|オオカミくんと蜜恋レッスン
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - ecchi
+    synopsis: オオカミくんと甘い恋愛レッスンを描くティーンズラブ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11370563|オオカミ君の結婚命令!
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - ecchi
+    synopsis: オオカミ君の結婚命令から始まる甘い恋愛を描くティーンズラブ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11370563|おさかなはあみの中
     demographic: seinen
     genres:
@@ -105585,60 +105657,498 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q11370563|おしおき♥スイートルーム
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - ecchi
+    synopsis: スイートルームでのおしおき愛を題材にしたティーンズラブ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11370563|おじさま、教えて
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - ecchi
+    synopsis: 年上のおじさまに大人の恋愛を教わるティーンズラブ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11370563|オフィス♥イケメン野獣名鑑
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - ecchi
+    synopsis: オフィスのイケメン野獣たちを集めたティーンズラブアンソロジー。
+    status: completed
+    anime_adapted: false
   - key: Q11370563|オフィスの獣は焦らし上手
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - ecchi
+    synopsis: 焦らし上手な上司との社内恋愛を描くティーンズラブ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11370563|おまえだけに、おねだりH
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - ecchi
+    synopsis: 彼にしか見せない大胆な姿を描いたティーンズラブ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11370563|お兄ちゃんと恋はじめました。
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - ecchi
+    synopsis: 義兄妹の禁断の恋を描くティーンズラブ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11370563|キミはえっちな幼なじみ
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - ecchi
+    synopsis: 幼なじみとの大人の恋愛を描くティーンズラブ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11370563|クセモノ幼なじみの不埒な求愛
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - ecchi
+    synopsis: クセモノ幼なじみの強引な求愛を描くティーンズラブ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11370563|けだもの執事の調教合宿♥
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - ecchi
+    synopsis: けだものな執事との調教合宿を描くティーンズラブ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11370563|ケダモノ彼の淫らな愛し方
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - ecchi
+    synopsis: ケダモノな彼の情熱的な愛を描くティーンズラブ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11370563|ケダモノ御曹司×極Sスーツ男子
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - ecchi
+    synopsis: 御曹司とS系スーツ男子に挟まれるヒロインを描くティーンズラブ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11370563|ケダモノ紳士と色欲一夜
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - ecchi
+    synopsis: 紳士の仮面を被ったケダモノとの一夜を描くティーンズラブ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11370563|この恋は秘密♥禁断カレシ
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - ecchi
+    synopsis: 禁断の恋愛を秘密にしながら進める甘いティーンズラブ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11370563|ジラさないで♥W暴君
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - ecchi
+    synopsis: ダブル暴君に翻弄されるヒロインを描くティーンズラブ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11370563|スーツの悪魔に捕らわれて
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - ecchi
+    synopsis: スーツ姿の悪魔的男性に捕らわれるヒロインを描くティーンズラブ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11370563|せんせのことが好きなのさ♡
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - school
+    synopsis: 先生への秘密の恋を描くティーンズラブ少女漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11370563|タイラント♥タイフーン
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - ecchi
+    synopsis: 暴君のような彼との嵐のような恋愛を描くティーンズラブ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11370563|ちっぱい彼女と愛したがり彼氏
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - comedy
+    synopsis: コンプレックスを抱える彼女と溺愛彼氏のラブコメディ。
+    status: completed
+    anime_adapted: false
   - key: Q11370563|ドS先生の極上調教
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - ecchi
+    synopsis: ドSな先生による特別な指導を描くティーンズラブ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11370563|ドS制服カレシ図鑑
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - ecchi
+    synopsis: ドSな制服姿の彼を集めたティーンズラブアンソロジー。
+    status: completed
+    anime_adapted: false
   - key: Q11370563|ドS眼鏡のフラチな誘惑
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - ecchi
+    synopsis: ドS眼鏡男子の不埒な誘惑を描くティーンズラブ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11370563|どっちに愛されたい!?兄vs. 弟
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - ecchi
+    synopsis: 兄と弟どちらに愛されるかという三角関係ティーンズラブ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11370563|ふぞろいなセフレたち
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - ecchi
+    synopsis: ふぞろいな関係から始まる恋愛を描くティーンズラブ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11370563|不良社長とデキてます。
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - ecchi
+    synopsis: 不良社長との禁断のオフィスラブを描くティーンズラブ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11370563|乱して和服暴君
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - ecchi
+    synopsis: 和服姿の暴君との情熱的な恋を描くティーンズラブ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11370563|俺様スーツと調教オフィス
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - ecchi
+    synopsis: 俺様スーツ男子のオフィスでの調教を描くティーンズラブ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11370563|俺様彼氏
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - ecchi
+    synopsis: 俺様な彼氏との恋愛模様を描くティーンズラブ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11370563|再会愛のはじめかた
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+    synopsis: かつての恋人との再会から始まるティーンズラブ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11370563|制服Sカレ
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - school
+    synopsis: 制服姿のS系彼氏との恋を描くティーンズラブ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11370563|午前0時秘密のキス
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - ecchi
+    synopsis: 夜中の秘密のキスから始まる恋を描くティーンズラブ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11370563|和服カレシは発情中。
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - ecchi
+    synopsis: 和服姿の彼氏の情熱を描くティーンズラブ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11370563|密室で甘噛み
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - ecchi
+    synopsis: 密室での甘い恋愛を描くティーンズラブ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11370563|少女と野獣。
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - ecchi
+    synopsis: 野獣のような彼との禁断の恋を描くティーンズラブ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11370563|少年嗜好夏休みスペシャル
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+    synopsis: 夏休みの少年たちを描くティーンズラブ特別号。
+    status: completed
+    anime_adapted: false
   - key: Q11370563|年上彼氏のトリセツ
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - comedy
+    synopsis: 年上彼氏の取扱説明を描くティーンズラブ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11370563|年下彼氏はオオカミ君
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - ecchi
+    synopsis: 年下のオオカミ君との恋愛を描くティーンズラブ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11370563|幼なじみはケダモノでした。
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - ecchi
+    synopsis: 幼なじみがケダモノ化する展開のティーンズラブ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11370563|店員さんとミダラに恋する7つの方法
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - ecchi
+    synopsis: 様々な店員との禁断恋愛を集めたティーンズラブアンソロジー。
+    status: completed
+    anime_adapted: false
   - key: Q11370563|快感・発情カレ
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - ecchi
+    synopsis: 発情モードの彼氏との情熱的な恋愛を描くティーンズラブ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11370563|愛されすぎ花嫁
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - ecchi
+    synopsis: 愛され過ぎる花嫁の物語を描くティーンズラブ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11370563|暴かれて...羞恥心
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - ecchi
+    synopsis: 羞恥心を煽る恋愛を描くティーンズラブ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11370563|暴君と背徳ロマンス
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - ecchi
+    synopsis: 暴君的男性との背徳ロマンスを描くティーンズラブ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11370563|暴君の運命的プロポーズ
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - ecchi
+    synopsis: 暴君のプロポーズから始まる運命の恋を描くティーンズラブ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11370563|本日、お仕事後に抱かれたい。
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - ecchi
+    synopsis: 仕事後の社内恋愛を描くティーンズラブ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11370563|欲情×残業
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - ecchi
+    synopsis: 残業中の社内恋愛を描くティーンズラブ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11370563|欲情❤メガネ男子
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - ecchi
+    synopsis: メガネ男子との情熱的な恋愛を描くティーンズラブ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11370563|溺愛暴君
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - ecchi
+    synopsis: 溺愛しながらも暴君な彼を描くティーンズラブ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11370563|発情♥怪盗少女ねこまんま
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - comedy
+    synopsis: 怪盗少女の恋愛を描くティーンズラブコメディ。
+    status: completed
+    anime_adapted: false
   - key: Q11370563|眼鏡で愛して!?
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - ecchi
+    synopsis: 眼鏡男子との恋愛を描くティーンズラブ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11370563|禁断♥ドSお兄ちゃん
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - ecchi
+    synopsis: 禁断のドSお兄ちゃんとの恋を描くティーンズラブ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11370563|絶対愛玩♥強制ダーリン
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - ecchi
+    synopsis: 強制ダーリンとの絶対愛玩関係を描くティーンズラブ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11370563|絶頂ホテル
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - ecchi
+    synopsis: ホテルでの極上の恋愛を描くティーンズラブ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11370563|肉食系スーツ男子
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - ecchi
+    synopsis: 肉食系のスーツ男子との恋愛を描くティーンズラブ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11370563|近キョリ蜜愛
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - ecchi
+    synopsis: 近距離での甘い恋愛を描くティーンズラブ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11370563|野獣彼氏カタログ
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - ecchi
+    synopsis: 野獣のような彼氏たちを集めたティーンズラブアンソロジー。
+    status: completed
+    anime_adapted: false
   - key: Q11370563|隣の男はよく食べる
     demographic: josei
     genres:
@@ -105648,8 +106158,32 @@ series:
     synopsis: 乱魔猫吉が描く、隣の男とよく食事する大人女性のラブストーリー。
     status: completed
   - key: Q11370563|鬼畜王子vs. インテリ野獣
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - ecchi
+    synopsis: 鬼畜王子とインテリ野獣の三角関係を描くティーンズラブ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11370563|魔界伝説
+    magazine: null
+    demographic: shounen
+    genres:
+      - fantasy
+      - action
+    synopsis: 魔界を舞台にしたファンタジーアクション漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11370602|暁の文
+    magazine: null
+    demographic: seinen
+    genres:
+      - historical
+      - drama
+    synopsis: 暁の手紙を題材にした青年向け歴史ドラマ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11370602|緋の纏
     demographic: shoujo
     genres:
@@ -105674,6 +106208,14 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q11370679|ブラック・ジャック ALIVE
+    magazine: null
+    demographic: seinen
+    genres:
+      - medical
+      - drama
+    synopsis: 手塚治虫の名作『ブラック・ジャック』のオマージュアンソロジー。多数の漫画家による追悼作品集。
+    status: completed
+    anime_adapted: false
   - key: Q11370679|ワンダフルワンダーワールド
     magazine: null
     demographic: shoujo
@@ -105709,6 +106251,14 @@ series:
     status: completed
     anime_adapted: true
   - key: Q11371047|SPEC ~零~
+    magazine: null
+    demographic: seinen
+    genres:
+      - mystery
+      - supernatural
+    synopsis: TBSドラマ『SPEC』のスピンオフ作品『SPEC~零~』のコミカライズ。
+    status: completed
+    anime_adapted: false
   - key: Q11371047|SPEC~結~
     magazine: null
     demographic: seinen
@@ -105719,10 +106269,49 @@ series:
     status: completed
     anime_adapted: true
   - key: Q11371047|イビツ
+    magazine: null
+    demographic: seinen
+    genres:
+      - mystery
+      - psychological
+    synopsis: 歪んだ人間関係を描いた青年向けサイコサスペンス。
+    status: completed
+    anime_adapted: false
   - key: Q11371047|実録怪談本当にあった怪奇村
+    magazine: null
+    demographic: seinen
+    genres:
+      - horror
+    synopsis: 実録怪談を題材にした青年向けホラー漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11371253|人間失格 壊
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - psychological
+    synopsis: 太宰治の『人間失格』をモチーフにした青年向け文学コミック。
+    status: completed
+    anime_adapted: false
   - key: Q11371253|魔女の騎士
+    magazine: null
+    demographic: seinen
+    genres:
+      - fantasy
+      - action
+    synopsis: 魔女に仕える騎士の物語を描く青年向けファンタジー。
+    status: completed
+    anime_adapted: false
   - key: Q11371584|Fellows!
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - slice_of_life
+    synopsis: エンターブレイン刊の青年向け漫画雑誌『Fellows!』。後に『ハルタ』に改題された。
+    status: completed
+    anime_adapted: false
   - key: Q11371584|京都ゆうても端のほう
     demographic: seinen
     genres:
@@ -105740,10 +106329,50 @@ series:
     status: completed
     anime_adapted: false
   - key: Q11371584|愛しの戦国武将boys
+    magazine: null
+    demographic: shoujo
+    genres:
+      - historical
+      - romance
+    synopsis: 戦国武将を美少年化したアンソロジー少女漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11371584|白紙魚取扱店美鬚堂
+    magazine: null
+    demographic: seinen
+    genres:
+      - fantasy
+      - slice_of_life
+    synopsis: 白紙魚を取り扱う不思議な店『美鬚堂』を舞台にした青年向けファンタジー漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11371875|スペースナースペペロン
+    magazine: null
+    demographic: shounen
+    genres:
+      - sci_fi
+      - comedy
+    synopsis: 宇宙の看護師ペペロンの活躍を描くSFコメディ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11371875|なぎパラ
+    magazine: null
+    demographic: shounen
+    genres:
+      - comedy
+      - slice_of_life
+    synopsis: なぎパラを題材にした少年向けコメディ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11371875|本当にあった美味しい体験教えます
+    magazine: null
+    demographic: josei
+    genres:
+      - gourmet
+      - slice_of_life
+    synopsis: 読者投稿による美味しい体験談を漫画化した主婦向けグルメ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11371877|Atomicネコカブッ
     demographic: shounen
     genres:
@@ -105786,26 +106415,192 @@ series:
     status: completed
     anime_adapted: false
   - key: Q11371877|無敵王トライゼノンファイアー
+    magazine: null
+    demographic: shounen
+    genres:
+      - mecha
+      - action
+    synopsis: ロボットアニメ『無敵王トライゼノン』派生作品のコミカライズ。
+    status: completed
+    anime_adapted: true
   - key: Q11371891|スーパースター・ババ
+    magazine: null
+    demographic: shounen
+    genres:
+      - comedy
+      - sports
+    synopsis: スーパースター・ババを主人公にした少年向けコメディ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11371891|のりこ
+    magazine: null
+    demographic: shoujo
+    genres:
+      - slice_of_life
+      - drama
+    synopsis: のりこを主人公にした少女向けドラマ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11371891|まんが宮沢賢治物語
+    magazine: null
+    demographic: kodomo
+    genres:
+      - historical
+      - educational
+    synopsis: 童話作家・宮沢賢治の生涯と作品を描いた児童向け学習漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11371891|ムーさん
+    magazine: null
+    demographic: shounen
+    genres:
+      - comedy
+      - slice_of_life
+    synopsis: ムーさんを主人公にした少年向けコメディ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11371891|少年宮本無茶四
+    magazine: null
+    demographic: shounen
+    genres:
+      - historical
+      - action
+    synopsis: 宮本武蔵をモチーフにした少年無茶四の活躍を描く時代劇漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11371891|恩讐の彼方に
+    magazine: null
+    demographic: seinen
+    genres:
+      - historical
+      - drama
+    synopsis: 菊池寛の小説『恩讐の彼方に』を漫画化した文芸コミック。
+    status: completed
+    anime_adapted: false
   - key: Q11371891|新・極楽町一丁目
+    magazine: null
+    demographic: seinen
+    genres:
+      - slice_of_life
+      - comedy
+    synopsis: 下町・極楽町一丁目の住人たちを描く人情漫画の続編。
+    status: completed
+    anime_adapted: false
   - key: Q11371891|新選組不始末記・近藤勇
+    magazine: null
+    demographic: seinen
+    genres:
+      - historical
+      - drama
+    synopsis: 新選組の局長・近藤勇の生涯を描いた時代劇漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11371891|極楽町一丁目
+    magazine: null
+    demographic: seinen
+    genres:
+      - slice_of_life
+      - comedy
+    synopsis: 下町・極楽町一丁目の住人たちを描く人情漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11371891|極楽町一丁目界隈
+    magazine: null
+    demographic: seinen
+    genres:
+      - slice_of_life
+      - comedy
+    synopsis: 極楽町一丁目とその界隈の人々を描く人情漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11371891|無茶四
+    magazine: null
+    demographic: shounen
+    genres:
+      - historical
+      - action
+    synopsis: 宮本無茶四の活躍を描く時代劇漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11371891|無茶四と13人の鎌倉時代
+    magazine: null
+    demographic: shounen
+    genres:
+      - historical
+      - action
+    synopsis: 鎌倉時代を舞台にした無茶四と仲間たちの時代劇漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11371891|裏極楽町一丁目行かないで
+    magazine: null
+    demographic: seinen
+    genres:
+      - slice_of_life
+      - comedy
+    synopsis: 極楽町一丁目シリーズの番外編。下町の人情を描く。
+    status: completed
+    anime_adapted: false
   - key: Q11371891|鬼平生半可帳
+    magazine: null
+    demographic: seinen
+    genres:
+      - historical
+      - drama
+    synopsis: 池波正太郎『鬼平犯科帳』をモチーフにした時代劇漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11372069|06:04~ロクヨン~
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+      - mystery
+    synopsis: 横山秀夫の小説『64』をモチーフにした少女向けドラマ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11372069|あなたの知らない世界
+    magazine: null
+    demographic: shoujo
+    genres:
+      - horror
+      - supernatural
+    synopsis: 視聴者投稿による怪奇体験を漫画化した少女向けホラーシリーズ。
+    status: completed
+    anime_adapted: false
   - key: Q11372069|いじめ
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+    synopsis: 学校でのいじめを題材にしたシリアスな少女漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11372069|いじめ-ティアーズセレクション-
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+    synopsis: 『いじめ』シリーズのベストセレクション。少女向けシリアスドラマ。
+    status: completed
+    anime_adapted: false
   - key: Q11372069|ともだち
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+      - slice_of_life
+    synopsis: ともだちをテーマにした少女向けドラマ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11372069|バクレツ☆歌姫21
+    magazine: null
+    demographic: shoujo
+    genres:
+      - music
+      - drama
+    synopsis: アイドル歌姫を目指す少女のサクセスストーリーを描く少女漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11372069|ユウキらぶエール
   - key: Q11372069|らぶりー・デコレーション!!
   - key: Q11372069|学園クライシス!
