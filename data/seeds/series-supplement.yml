@@ -1,5 +1,5 @@
 schema_version: 1
-generated_at: 2026-05-11T16:24:18.410Z
+generated_at: 2026-05-11T16:26:20.240Z
 generator: claude-opus-4-7-direct-fill
 series:
   - key: Q1001784|GOLDEN SPIRAL
@@ -278750,7 +278750,21 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q11598322|Be wild ユウ
+    magazine: null
+    demographic: shounen
+    genres:
+      - sports
+    synopsis: ゴルフをテーマにした少年作品。
+    status: completed
+    anime_adapted: false
   - key: Q11598322|J・BOY
+    magazine: null
+    demographic: shounen
+    genres:
+      - sports
+    synopsis: 野球をテーマにした少年作品。
+    status: completed
+    anime_adapted: false
   - key: Q11598322|インパクト
     magazine: weekly-shonen-magazine
     demographic: shounen
@@ -278776,6 +278790,13 @@ series:
     synopsis: 竜崎遼児による少年スポーツ漫画。おれがヒーローと豪語する愉快な物語。
     status: completed
   - key: Q11598322|ストリートファイター
+    magazine: null
+    demographic: shounen
+    genres:
+      - action
+    synopsis: ストリートファイターコミカライズ。
+    status: completed
+    anime_adapted: false
   - key: Q11598322|どぐされ球団
     demographic: shounen
     genres:
@@ -278784,6 +278805,13 @@ series:
     synopsis: 竜崎遼児による弱小野球漫画。どぐされ球団の愉快な戦いを描く。
     status: completed
   - key: Q11598322|ナック
+    magazine: null
+    demographic: shounen
+    genres:
+      - sports
+    synopsis: 少年向けスポーツ作品。
+    status: completed
+    anime_adapted: false
   - key: Q11598322|ばっくれ一平!
     demographic: shounen
     genres:
@@ -278798,8 +278826,29 @@ series:
     synopsis: 竜崎遼児による野球漫画。弾アライブで戦う選手の物語。
     status: completed
   - key: Q11598322|湾
+    magazine: null
+    demographic: shounen
+    genres:
+      - drama
+    synopsis: 少年向け短編。
+    status: completed
+    anime_adapted: false
   - key: Q11598322|熱狂短編マンガ傑作集'83
+    magazine: null
+    demographic: shounen
+    genres:
+      - drama
+    synopsis: 少年向けアンソロジー。
+    status: completed
+    anime_adapted: false
   - key: Q11598322|甲子園の狼
+    magazine: null
+    demographic: shounen
+    genres:
+      - sports
+    synopsis: 甲子園を題材にした少年作品。
+    status: completed
+    anime_adapted: false
   - key: Q11598322|闘翔ボーイ
     magazine: weekly-shonen-magazine
     demographic: shounen
@@ -278816,6 +278865,14 @@ series:
     synopsis: 竜崎遼児による少年スポーツ漫画。雷電王を描く物語。
     status: completed
   - key: Q11598792|こちらでお召し上がりですか?
+    magazine: null
+    demographic: shoujo
+    genres:
+      - food
+      - romance
+    synopsis: 少女向けグルメ作品。
+    status: completed
+    anime_adapted: false
   - key: Q11598792|セーブ&ロードのできる宿屋さん
     demographic: shounen
     genres:
@@ -278843,6 +278900,14 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q11598792|巫女姉妹
+    magazine: null
+    demographic: shoujo
+    genres:
+      - supernatural
+      - comedy
+    synopsis: 巫女姉妹をテーマにした少女作品。
+    status: completed
+    anime_adapted: false
   - key: Q11598792|追放された魔王は地球を目指す!
     demographic: shounen
     genres:
@@ -278861,39 +278926,288 @@ series:
     synopsis: 竹内佐千子による青年向け同居コメディ。2DKを舞台にした愉快な物語。
     status: completed
   - key: Q11598817|Bye-Byeアタシのお兄ちゃん
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - drama
+    synopsis: 兄妹をテーマにした少女作品。
+    status: completed
+    anime_adapted: false
   - key: Q11598817|On blue
+    magazine: null
+    demographic: shoujo
+    genres:
+      - yaoi
+    synopsis: BLアンソロジー誌。
+    status: completed
+    anime_adapted: false
   - key: Q11598817|イケメンに会えない今、私たちはどう生きるか。
+    magazine: null
+    demographic: josei
+    genres:
+      - comedy
+    synopsis: イケメン追っかけエッセイ。
+    status: completed
+    anime_adapted: false
   - key: Q11598817|おっかけ!
+    magazine: null
+    demographic: shoujo
+    genres:
+      - comedy
+    synopsis: アイドルおっかけコメディ。
+    status: completed
+    anime_adapted: false
   - key: Q11598817|くされ女子!
+    magazine: null
+    demographic: shoujo
+    genres:
+      - comedy
+    synopsis: 腐女子をテーマにしたコメディ。
+    status: completed
+    anime_adapted: false
   - key: Q11598817|くされ女子!in Deep
+    magazine: null
+    demographic: shoujo
+    genres:
+      - comedy
+    synopsis: くされ女子続編。
+    status: completed
+    anime_adapted: false
   - key: Q11598817|これからは、イケメンのことだけ考えて生きていく。
+    magazine: null
+    demographic: josei
+    genres:
+      - comedy
+    synopsis: イケメン追っかけエッセイ。
+    status: completed
+    anime_adapted: false
   - key: Q11598817|ずっとイケメンを追いかけていたかったけど、そうもいかないよ現実は。
+    magazine: null
+    demographic: josei
+    genres:
+      - comedy
+    synopsis: イケメンエッセイ。
+    status: completed
+    anime_adapted: false
   - key: Q11598817|ハニー&ハニー
+    magazine: null
+    demographic: josei
+    genres:
+      - yuri
+      - slice_of_life
+    synopsis: レズビアンカップルエッセイ。
+    status: completed
+    anime_adapted: false
   - key: Q11598817|ハニー&ハニーデラックス
+    magazine: null
+    demographic: josei
+    genres:
+      - yuri
+      - slice_of_life
+    synopsis: ハニー&ハニーDX版。
+    status: completed
+    anime_adapted: false
   - key: Q11598817|ぷち本当にあった愉快な話 体験!目撃!!黒い事件簿SP
+    magazine: null
+    demographic: josei
+    genres:
+      - drama
+    synopsis: 実話系コミック。
+    status: completed
+    anime_adapted: false
   - key: Q11598817|ぷち本当にあった愉快な話ギラギラ!!夜遊びSP
+    magazine: null
+    demographic: josei
+    genres:
+      - drama
+    synopsis: 実話系コミック。
+    status: completed
+    anime_adapted: false
   - key: Q11598817|ぷち本当にあった愉快な話ドキドキ❤火遊びSP
+    magazine: null
+    demographic: josei
+    genres:
+      - drama
+    synopsis: 実話系コミック。
+    status: completed
+    anime_adapted: false
   - key: Q11598817|ぷち本当にあった愉快な話ヤブから神まで!病院の極意SP
+    magazine: null
+    demographic: josei
+    genres:
+      - drama
+    synopsis: 実話系コミック。
+    status: completed
+    anime_adapted: false
   - key: Q11598817|ぷち本当にあった愉快な話実話!!鬼畜な事件ファイル
+    magazine: null
+    demographic: josei
+    genres:
+      - drama
+      - crime
+    synopsis: 実話系コミック。
+    status: completed
+    anime_adapted: false
   - key: Q11598817|ぷち本当にあった愉快な話激ヤバ!!死ぬかと思ったSP
+    magazine: null
+    demographic: josei
+    genres:
+      - drama
+    synopsis: 実話系コミック。
+    status: completed
+    anime_adapted: false
   - key: Q11598817|ぷち本当にあった愉快な話目撃!!事件現場max
+    magazine: null
+    demographic: josei
+    genres:
+      - drama
+    synopsis: 実話系コミック。
+    status: completed
+    anime_adapted: false
   - key: Q11598817|ぷち本当にあった愉快な話目撃!!事件現場SP
+    magazine: null
+    demographic: josei
+    genres:
+      - drama
+    synopsis: 実話系コミック。
+    status: completed
+    anime_adapted: false
   - key: Q11598817|ぷち本当にあった愉快な話絶叫!!ヤブ医者SP
+    magazine: null
+    demographic: josei
+    genres:
+      - drama
+    synopsis: 実話系コミック。
+    status: completed
+    anime_adapted: false
   - key: Q11598817|ぷち本当にあった愉快な話芸能人ダメ出しスクープSP
+    magazine: null
+    demographic: josei
+    genres:
+      - drama
+    synopsis: 実話系コミック。
+    status: completed
+    anime_adapted: false
   - key: Q11598817|ぷち本当にあった愉快な話間一髪!死ぬかと思ったSP
+    magazine: null
+    demographic: josei
+    genres:
+      - drama
+    synopsis: 実話系コミック。
+    status: completed
+    anime_adapted: false
   - key: Q11598817|ブラブラ珍所
+    magazine: null
+    demographic: josei
+    genres:
+      - comedy
+      - drama
+    synopsis: 実話系コミック。
+    status: completed
+    anime_adapted: false
   - key: Q11598817|メガ盛!!本当にあった愉快な話最凶!!事件現場SP
+    magazine: null
+    demographic: josei
+    genres:
+      - drama
+    synopsis: 実話系コミック。
+    status: completed
+    anime_adapted: false
   - key: Q11598817|メゾン・ド・ねこ
+    magazine: null
+    demographic: josei
+    genres:
+      - slice_of_life
+    synopsis: 猫エッセイ。
+    status: completed
+    anime_adapted: false
   - key: Q11598817|もう楽しいことしかしたくないから、イケメンに会いに行った。
+    magazine: null
+    demographic: josei
+    genres:
+      - comedy
+    synopsis: イケメン追っかけエッセイ。
+    status: completed
+    anime_adapted: false
   - key: Q11598817|わたしが女の子を好きになった日
+    magazine: null
+    demographic: josei
+    genres:
+      - yuri
+      - drama
+    synopsis: 百合エッセイ。
+    status: completed
+    anime_adapted: false
   - key: Q11598817|午後のハレンチティータイム
+    magazine: null
+    demographic: josei
+    genres:
+      - ecchi
+    synopsis: 成人向け女性コミック。
+    status: completed
+    anime_adapted: false
   - key: Q11598817|恋バナリアル
+    magazine: null
+    demographic: josei
+    genres:
+      - romance
+      - drama
+    synopsis: 実話系恋愛コミック。
+    status: completed
+    anime_adapted: false
   - key: Q11598817|歌舞伎町カラオケ店員としくにさん
+    magazine: null
+    demographic: josei
+    genres:
+      - drama
+      - slice_of_life
+    synopsis: 歌舞伎町を舞台にした女性作品。
+    status: completed
+    anime_adapted: false
   - key: Q11598817|沼の中で不惑を迎えます。
+    magazine: null
+    demographic: josei
+    genres:
+      - comedy
+    synopsis: 40代を題材にしたエッセイ。
+    status: completed
+    anime_adapted: false
   - key: Q11598817|生きるために必要だから、イケメンに会いに行った。
+    magazine: null
+    demographic: josei
+    genres:
+      - comedy
+    synopsis: イケメン追っかけエッセイ。
+    status: completed
+    anime_adapted: false
   - key: Q11598817|男になりタイ!
+    magazine: null
+    demographic: josei
+    genres:
+      - comedy
+      - drama
+    synopsis: ニューハーフをテーマにしたコミック。
+    status: completed
+    anime_adapted: false
   - key: Q11598817|男子禁制
+    magazine: null
+    demographic: shoujo
+    genres:
+      - yuri
+      - comedy
+    synopsis: 百合コメディ。
+    status: completed
+    anime_adapted: false
   - key: Q11598817|花より女子
+    magazine: null
+    demographic: shoujo
+    genres:
+      - yuri
+      - comedy
+    synopsis: 百合コメディ。
+    status: completed
+    anime_adapted: false
   - key: Q11598817|赤ちゃん本部長
     magazine: morning
     demographic: seinen
@@ -278905,10 +279219,50 @@ series:
     status: ongoing
     anime_adapted: true
   - key: Q11598817|迷走ラブゲーム
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - drama
+    synopsis: 少女向けラブストーリー。
+    status: completed
+    anime_adapted: false
   - key: Q11598830|Dr.リアンが診てあげる
+    magazine: null
+    demographic: shounen
+    genres:
+      - comedy
+      - romance
+    synopsis: Dr.リアンシリーズ。
+    status: completed
+    anime_adapted: false
   - key: Q11598830|Dr.リアンが診てあげる...夏
+    magazine: null
+    demographic: shounen
+    genres:
+      - comedy
+      - romance
+    synopsis: Dr.リアンシリーズ夏編。
+    status: completed
+    anime_adapted: false
   - key: Q11598830|Dr.リアンが診てあげるTHE MOVIE
+    magazine: null
+    demographic: shounen
+    genres:
+      - comedy
+      - romance
+    synopsis: Dr.リアン映画化版。
+    status: completed
+    anime_adapted: false
   - key: Q11598830|Dr.リアンが診てあげる純情派
+    magazine: null
+    demographic: shounen
+    genres:
+      - comedy
+      - romance
+    synopsis: Dr.リアン純情派。
+    status: completed
+    anime_adapted: false
   - key: Q11598830|いめるいめな
     magazine: null
     demographic: seinen
@@ -278919,6 +279273,14 @@ series:
     status: completed
     anime_adapted: false
   - key: Q11598830|シスター・ルカは祈らないで!!
+    magazine: null
+    demographic: shounen
+    genres:
+      - comedy
+      - supernatural
+    synopsis: シスターを題材にした少年コメディ。
+    status: completed
+    anime_adapted: false
   - key: Q11598830|チカちゃんは知りたがる
     demographic: seinen
     genres:
@@ -278938,8 +279300,32 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q11598830|新世紀エヴァンゲリオン
+    magazine: null
+    demographic: shounen
+    genres:
+      - sci_fi
+      - mecha
+    synopsis: エヴァ関連コミック。
+    status: completed
+    anime_adapted: true
   - key: Q11598830|未来日記モザイク消し
+    magazine: null
+    demographic: shounen
+    genres:
+      - mystery
+      - supernatural
+    synopsis: 未来日記パロディ。
+    status: completed
+    anime_adapted: false
   - key: Q11598830|神はサイコロを振らない
+    magazine: null
+    demographic: seinen
+    genres:
+      - sci_fi
+      - drama
+    synopsis: 大石英司原作SFコミカライズ。
+    status: completed
+    anime_adapted: false
   - key: Q11598842|ボールルームへようこそ
     magazine: monthly-shonen-magazine
     demographic: shounen
@@ -278953,8 +279339,30 @@ series:
     alternative_titles:
       en: Welcome to the Ballroom
   - key: Q11598898|ある日突然ハブられた
+    magazine: null
+    demographic: josei
+    genres:
+      - drama
+    synopsis: ハブり実話エッセイ。
+    status: completed
+    anime_adapted: false
   - key: Q11598898|おかあさん、お空のセカイのはなしをしてあげる!
+    magazine: null
+    demographic: josei
+    genres:
+      - drama
+      - slice_of_life
+    synopsis: 子育てエッセイ。
+    status: completed
+    anime_adapted: false
   - key: Q11598898|カテメン
+    magazine: null
+    demographic: josei
+    genres:
+      - drama
+    synopsis: 女性向け短編。
+    status: completed
+    anime_adapted: false
   - key: Q11598898|凛!
     demographic: shoujo
     genres:
@@ -278974,6 +279382,13 @@ series:
     status: completed
     anime_adapted: false
   - key: Q11598910|JC.COM
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+    synopsis: 少女向け恋愛。
+    status: completed
+    anime_adapted: false
   - key: Q11598910|STUDIO FIVE
     magazine: null
     demographic: seinen
@@ -278984,6 +279399,13 @@ series:
     status: completed
     anime_adapted: false
   - key: Q11598910|うしみつ★inc
+    magazine: null
+    demographic: shoujo
+    genres:
+      - comedy
+    synopsis: 少女向けコメディ。
+    status: completed
+    anime_adapted: false
   - key: Q11598910|ちょこッとSister
     magazine: weekly-young-jump
     demographic: seinen
@@ -279010,19 +279432,124 @@ series:
     synopsis: 竹内桜が描く、民法改正を題材にした弁護士ドラマ。
     status: completed
   - key: Q11598910|特命高校生
+    magazine: null
+    demographic: shoujo
+    genres:
+      - action
+      - school
+    synopsis: 少女向け学園アクション。
+    status: completed
+    anime_adapted: false
   - key: Q11598910|竹内桜短編集
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+    synopsis: 竹内桜短編集。
+    status: completed
+    anime_adapted: false
   - key: Q11598910|赤龍の乙女
+    magazine: null
+    demographic: shoujo
+    genres:
+      - fantasy
+      - romance
+    synopsis: 少女向けファンタジー。
+    status: completed
+    anime_adapted: false
   - key: Q11598960|All You Need Is Kill
+    magazine: null
+    demographic: shounen
+    genres:
+      - sci_fi
+      - action
+    synopsis: 桜坂洋原作のSFコミカライズ。
+    status: completed
+    anime_adapted: false
   - key: Q11598960|ST&RS
+    magazine: null
+    demographic: shounen
+    genres:
+      - sci_fi
+    synopsis: 宇宙を題材にした少年作品。
+    status: completed
+    anime_adapted: false
   - key: Q11598960|憂国のモリアーティ
+    magazine: null
+    demographic: shounen
+    genres:
+      - mystery
+      - historical
+    synopsis: 竹内良輔・三好輝による青年ミステリー。
+    status: completed
+    anime_adapted: true
   - key: Q11599056|JOUR DE NEIGE
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - drama
+    synopsis: 少女向け短編。
+    status: completed
+    anime_adapted: false
   - key: Q11599056|オールド・ファッションド・ラブソング
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+    synopsis: 少女向けロマンス。
+    status: completed
+    anime_adapted: false
   - key: Q11599056|サー・ハムレット事件帳
+    magazine: null
+    demographic: shoujo
+    genres:
+      - mystery
+    synopsis: 少女向けミステリー。
+    status: completed
+    anime_adapted: false
   - key: Q11599056|ねこまん
+    magazine: null
+    demographic: shoujo
+    genres:
+      - slice_of_life
+    synopsis: 猫エッセイ。
+    status: completed
+    anime_adapted: false
   - key: Q11599056|パルティータ
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+      - music
+    synopsis: 音楽をテーマにした少女作品。
+    status: completed
+    anime_adapted: false
   - key: Q11599056|最終ページ
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+    synopsis: 少女向け短編。
+    status: completed
+    anime_adapted: false
   - key: Q11599056|橋の下のギャルソン
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+    synopsis: 少女向け短編。
+    status: completed
+    anime_adapted: false
   - key: Q11599056|漫画版世界の歴史
+    magazine: null
+    demographic: kodomo
+    genres:
+      - historical
+      - educational
+    synopsis: 世界史学習漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11599056|空のオルガン
     demographic: shoujo
     genres:
@@ -279040,6 +279567,13 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q11599091|KAIZER SPIKE
+    magazine: null
+    demographic: shounen
+    genres:
+      - action
+    synopsis: 少年向けアクション。
+    status: completed
+    anime_adapted: false
   - key: Q11599091|サムライリーガーズ
     demographic: shounen
     genres:
@@ -279048,6 +279582,14 @@ series:
     synopsis: 竹山祐右によるサッカー漫画。サムライリーガーズを描く物語。
     status: completed
   - key: Q11599091|トライガン・マルチプルバレッツ
+    magazine: null
+    demographic: seinen
+    genres:
+      - action
+      - sci_fi
+    synopsis: トライガン関連アンソロジー。
+    status: completed
+    anime_adapted: false
   - key: Q11599091|はやめブラストギア
     magazine: monthly-shonen-magazine
     demographic: shounen
@@ -279058,8 +279600,32 @@ series:
     synopsis: 竹山祐右が描く、エアソフトガンを題材にした青春スポーツ漫画。
     status: completed
   - key: Q11599091|悪霊神
+    magazine: null
+    demographic: shounen
+    genres:
+      - supernatural
+      - action
+    synopsis: 少年向け怪奇アクション。
+    status: completed
+    anime_adapted: false
   - key: Q11599091|本当にあった美味しい体験教えます
+    magazine: null
+    demographic: josei
+    genres:
+      - food
+      - slice_of_life
+    synopsis: 実話グルメ系コミック。
+    status: completed
+    anime_adapted: false
   - key: Q11599091|特捜戦隊デカレンジャーTHE MOVIE
+    magazine: null
+    demographic: shounen
+    genres:
+      - action
+      - tokusatsu
+    synopsis: デカレンジャー劇場版コミカライズ。
+    status: completed
+    anime_adapted: false
   - key: Q11599172|Magi×es
     demographic: shoujo
     genres:
@@ -279095,8 +279661,30 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q11599172|アポカリプスホテルぷすぷす
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+    synopsis: 青年向けコメディ。
+    status: completed
+    anime_adapted: false
   - key: Q11599172|ある日とある日ととある日のクル
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+    synopsis: あらきかなお4コマ系作品。
+    status: completed
+    anime_adapted: false
   - key: Q11599172|ある日とある日の猫たち
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+      - slice_of_life
+    synopsis: 猫4コマ。
+    status: completed
+    anime_adapted: false
   - key: Q11599172|あんみつ姫
     demographic: shoujo
     genres:
@@ -279105,9 +279693,37 @@ series:
     synopsis: 竹本泉による少女時代劇コメディ。あんみつ姫の愉快な物語。
     status: completed
   - key: Q11599172|イーナスコレクション
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+    synopsis: あらきかなお作品集。
+    status: completed
+    anime_adapted: false
   - key: Q11599172|いろ2もの
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+    synopsis: あらきかなお4コマ。
+    status: completed
+    anime_adapted: false
   - key: Q11599172|いろ3もの
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+    synopsis: あらきかなお4コマ。
+    status: completed
+    anime_adapted: false
   - key: Q11599172|うさぎパラダイス
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+    synopsis: うさぎ4コマ。
+    status: completed
+    anime_adapted: false
   - key: Q11599172|がーでん姉妹
     demographic: seinen
     genres:
@@ -279117,9 +279733,37 @@ series:
     synopsis: 竹本泉が描く、がーでん姉妹のほのぼのファンタジー4コマ。
     status: completed
   - key: Q11599172|カラフルビーム
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+    synopsis: あらきかなお4コマ。
+    status: completed
+    anime_adapted: false
   - key: Q11599172|かわいいや
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+    synopsis: あらきかなお4コマ。
+    status: completed
+    anime_adapted: false
   - key: Q11599172|コオニライフ
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+    synopsis: あらきかなお4コマ。
+    status: completed
+    anime_adapted: false
   - key: Q11599172|ここめ不定点
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+    synopsis: あらきかなお4コマ。
+    status: completed
+    anime_adapted: false
   - key: Q11599172|さくらの境
     demographic: shoujo
     genres:
@@ -279137,6 +279781,13 @@ series:
     synopsis: 竹本泉による青年向けSFコメディ。さよりなパラレルの愉快な物語。
     status: completed
   - key: Q11599172|しましま曜日
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+    synopsis: あらきかなお4コマ。
+    status: completed
+    anime_adapted: false
   - key: Q11599172|シンリャクモノデ
     demographic: seinen
     genres:
@@ -279147,9 +279798,38 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q11599172|せ~ふくもの
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+      - school
+    synopsis: あらきかなお4コマ。
+    status: completed
+    anime_adapted: false
   - key: Q11599172|たちこめるバラのかおり
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+    synopsis: あらきかなお4コマ。
+    status: completed
+    anime_adapted: false
   - key: Q11599172|ちまりまわるつ
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+    synopsis: あらきかなお4コマ。
+    status: completed
+    anime_adapted: false
   - key: Q11599172|ちょっとコマーシャル
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+    synopsis: あらきかなお4コマ。
+    status: completed
+    anime_adapted: false
   - key: Q11599172|てきぱきワーキン・ラブ
     demographic: seinen
     genres:
@@ -279166,11 +279846,53 @@ series:
     synopsis: 竹本泉が描く、てけてけ歩く小さな心が主人公のほのぼのファンタジー4コマ。
     status: completed
   - key: Q11599172|とある日のクル
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+    synopsis: あらきかなお4コマ。
+    status: completed
+    anime_adapted: false
   - key: Q11599172|トゥインクルスターのんのんじー
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+    synopsis: あらきかなおシリーズ。
+    status: completed
+    anime_adapted: false
   - key: Q11599172|トゥインクルスターのんのんじーEX
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+    synopsis: のんのんじーシリーズ。
+    status: completed
+    anime_adapted: false
   - key: Q11599172|トゥインクルスターのんのんじーSUN
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+    synopsis: のんのんじーシリーズ。
+    status: completed
+    anime_adapted: false
   - key: Q11599172|トゥインクルスターのんのんじーTetra
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+    synopsis: のんのんじーシリーズ。
+    status: completed
+    anime_adapted: false
   - key: Q11599172|ととある日のクル
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+    synopsis: あらきかなお4コマ。
+    status: completed
+    anime_adapted: false
   - key: Q11599172|トランジスタにヴィーナス
     demographic: seinen
     genres:
@@ -279179,7 +279901,22 @@ series:
     synopsis: 竹本泉が描く、ヴィーナスのトランジスタ姉妹を題材にしたほのぼのSFコメディ。
     status: completed
   - key: Q11599172|ながるるるるるこ
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+    synopsis: あらきかなお4コマ。
+    status: completed
+    anime_adapted: false
   - key: Q11599172|ねことも倶楽部
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+      - slice_of_life
+    synopsis: 猫4コマ。
+    status: completed
+    anime_adapted: false
   - key: Q11599172|ねこめ(~わく)
     demographic: seinen
     genres:
