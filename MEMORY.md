@@ -2,7 +2,7 @@
 
 > このファイルは Claude Code session の context bootstrap 用。新しいセッションを開始したら最初に読むこと。
 
-最終更新: 2026-05-11 (種3 fill session 20 完了、 累計 約 38,186/70,202 ≈ 54.40%)
+最終更新: 2026-05-11 (種3 fill session 21 完了、 累計 約 40,198/70,202 ≈ 57.26%)
 
 ## プロジェクト概要
 
@@ -1548,3 +1548,77 @@ b0ffeef  data(seed3): batch 354/363 (= session19) Opus 4.7 直筆 fill
    json.dump(rem, open('.cache/session21-unfilled.json','w'), ensure_ascii=False)
    ```
 8. **重要 yaml 構造変更点**: 旧来の selection logic では `seed.items()` を仮定していたが、 実際は `seed['series']` array が正しい。 上記コードに修正済み。
+
+---
+
+## 2026-05-11: 種3 fill session 21 完了
+
+### 達成サマリ
+
+- **session 21 batch 384-403 全 20 batch 完了** (= 100 件 × 20 = **2,000 件 fill**)
+- 適用: **2,000 / 2,000** (= 全 20 batches で applied=100, missing=0、 完全成功)
+- batch 384 で既知 missing key (Q11268905, Q11318682, Q11460951×2, Q11513040) を最終的に fill 完了 (yaml 正規化キー問題解決)
+- 所要時間: 約 1h26m (= JST 21:50頃 開始 → 23:16 終了)
+- 報告頻度: **500 件毎** (= block 単位、 ユーザ要求対応)
+- session 20 → 21 推移: 約 38,186 → **約 40,198 / 70,202 ≈ 57.26%**
+- 残 約 30,016 件 (= 約 15 セッション分)
+
+### Batch 進捗テーブル
+
+| Session | batch range | 範囲 | 適用件数 | missing |
+|---|---|---|---|---|
+| 18 | 324-343 | session17-unfilled 38008 件から 2000 件 | 1,996 | 4 |
+| 19 | 344-363 | session18-unfilled 36012 件から 2000 件 | 1,996 | 4 |
+| 20 | 364-383 | session19-unfilled 34017 件から 2000 件 | 1,999 | 1 |
+| **21** | 384-403 | session20-unfilled 34017 件から 2000 件 | **2,000** | **0 (= 完全成功)** |
+
+**累計**: **約 40,198 / 70,202 ≈ 57.26%**、 **残 約 30,016 件** (= 約 15 セッション分)。
+
+### Session 21 の傾向
+
+- **完全成功** (= 全 20 batches で missing=0)、 既知 PUA/正規化問題キーも batch 384 で解決。
+- **大型 Q-code クラスター** (=
+  - Q11537576 桑田次郎作品集約 50 件、
+  - Q11537760 まんがナックルズ系約 35 件、
+  - Q11538067 桜木さゆみ系実話エッセイ約 50 件、
+  - Q11539567 ハーレクイン系少女ロマンス約 20 件、
+  - Q11541279 TYPE-MOON系アンソロジー約 20 件、
+  - Q11541939 槙村さとる作品集約 30 件、
+  - Q11545822 少女ロマンス約 25 件、
+  - Q11548393 BLロマンス系約 30 件、
+  - Q11551231 伝記漫画系約 15 件、
+  - Q11553925 平安・歴史少女漫画約 40 件)。
+- 桑田次郎、 桜木さゆみ、 槙村さとる、 BLロマンス、 平安歴史漫画が中心。
+
+### 関連 commit (= 抜粋)
+
+```
+17d0440  data(seed3): batch 403/403 (= session21 完了) Opus 4.7 直筆 fill
+a5a7de4  data(seed3): batch 402/403 (= session21) Opus 4.7 直筆 fill
+...
+51ea470  data(seed3): batch 384/403 (= session21) Opus 4.7 直筆 fill
+```
+
+## 次セッションでの推奨アクション (= 上書き、 最新)
+
+1. **続行優先**: session 22 として残 約 30,016 件から 2,000 件 fill (= batch 404-423)。
+2. **next batch 番号 = 404**。
+3. **既知 missing key**: 全て session 21 で fill 済み。
+4. **demographic schema 不変**: `shounen|shoujo|seinen|josei|kodomo|other` のみ。
+5. **per-batch protocol** (= 不変): 100 件 1 バッチ、 `data/seeds/_fills/batch-NNN.json`、 `npx tsx scripts/_apply-fills.ts`、 commit + push、 JST 時刻 + 進捗報告。
+6. **報告頻度**: 100件毎 or 500件毎、 ユーザの指定に従う。
+7. **selection ロジック**:
+   ```python
+   import json, yaml
+   seed = yaml.safe_load(open('data/seeds/series-supplement.yml'))
+   series = seed['series']
+   filled = set(s['key'] for s in series if s.get('status') == 'completed')
+   seed_keys = set(s['key'] for s in series)
+   orig = json.load(open('.cache/session21-unfilled.json'))
+   rem = [e for e in orig if e['key'] not in filled and e['key'] in seed_keys]
+   if len(rem) < 2100:
+       seen = set(e['key'] for e in rem)
+       extra = [{'key': s['key']} for s in series if s['key'] not in filled and s['key'] not in seen]
+       rem.extend(extra)
+   json.dump(rem, open('.cache/session22-unfilled.json','w'), ensure_ascii=False)
+   ```
