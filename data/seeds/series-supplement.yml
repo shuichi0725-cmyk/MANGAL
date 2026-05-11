@@ -1,5 +1,5 @@
 schema_version: 1
-generated_at: 2026-05-11T23:44:33.916Z
+generated_at: 2026-05-11T23:46:12.765Z
 generator: claude-opus-4-7-direct-fill
 series:
   - key: Q1001784|GOLDEN SPIRAL
@@ -379916,10 +379916,18 @@ series:
     genres:
       - historical
       - anthology
-    synopsis: 西鶴名作集コミカライズ。
+    synopsis: 西鶴名作コミカライズ。
     status: completed
     anime_adapted: false
   - key: Q18054546|マンガ今昔物語集
+    magazine: null
+    demographic: seinen
+    genres:
+      - historical
+      - anthology
+    synopsis: 今昔物語集コミカライズ。
+    status: completed
+    anime_adapted: false
   - key: Q18054546|マンガ太平記
     demographic: seinen
     genres:
@@ -379931,72 +379939,572 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q18054546|宇宙の謎を知りたい!
+    magazine: null
+    demographic: kodomo
+    genres:
+      - educational
+    synopsis: 宇宙学習まんが。
+    status: completed
+    anime_adapted: false
   - key: Q18054546|日本史人物55人のひみつ
+    magazine: null
+    demographic: kodomo
+    genres:
+      - educational
+      - historical
+    synopsis: 日本史人物学習まんが。
+    status: completed
+    anime_adapted: false
   - key: Q18054546|福沢諭吉
+    magazine: null
+    demographic: kodomo
+    genres:
+      - historical
+      - biographical
+      - educational
+    synopsis: 福沢諭吉伝記まんが。
+    status: completed
+    anime_adapted: false
   - key: Q18054556|ただいま参上!!ヤッターマン
+    magazine: null
+    demographic: kodomo
+    genres:
+      - comedy
+      - adventure
+    synopsis: ヤッターマンコミカライズ。
+    status: completed
+    anime_adapted: true
   - key: Q18054556|爆丸爆tech焔
+    magazine: null
+    demographic: shounen
+    genres:
+      - action
+      - adventure
+    synopsis: 爆丸爆tech焔コミカライズ。
+    status: completed
+    anime_adapted: true
   - key: Q18054718|...ヴァージンラブ。
+    magazine: null
+    demographic: josei
+    genres:
+      - romance
+    synopsis: BL/女性向け恋愛。
+    status: completed
+    anime_adapted: false
   - key: Q18054718|...純愛の青年
+    magazine: null
+    demographic: josei
+    genres:
+      - romance
+    synopsis: BL/女性向け恋愛。
+    status: completed
+    anime_adapted: false
   - key: Q18054718|from 701号室
+    magazine: null
+    demographic: josei
+    genres:
+      - romance
+    synopsis: BL/女性向け恋愛。
+    status: completed
+    anime_adapted: false
   - key: Q18054718|エロティックにこじ開けて
+    magazine: null
+    demographic: josei
+    genres:
+      - romance
+      - ecchi
+    synopsis: BL/女性向け恋愛。
+    status: completed
+    anime_adapted: false
   - key: Q18054718|オンリー・パートナー
+    magazine: null
+    demographic: josei
+    genres:
+      - romance
+    synopsis: BL/女性向け恋愛。
+    status: completed
+    anime_adapted: false
   - key: Q18054718|お坊ちゃまご乱心
+    magazine: null
+    demographic: josei
+    genres:
+      - romance
+      - comedy
+    synopsis: BL/女性向け恋愛コメディ。
+    status: completed
+    anime_adapted: false
   - key: Q18054718|キング&プリンス
+    magazine: null
+    demographic: josei
+    genres:
+      - romance
+    synopsis: BL/女性向け恋愛。
+    status: completed
+    anime_adapted: false
   - key: Q18054718|キング&プリンス + カイザー
+    magazine: null
+    demographic: josei
+    genres:
+      - romance
+    synopsis: BL/女性向け恋愛続編。
+    status: completed
+    anime_adapted: false
   - key: Q18054718|こんなはずじゃなかったのに。
+    magazine: null
+    demographic: josei
+    genres:
+      - romance
+    synopsis: BL/女性向け恋愛。
+    status: completed
+    anime_adapted: false
   - key: Q18054718|ストイックな獣の饗宴
+    magazine: null
+    demographic: josei
+    genres:
+      - romance
+    synopsis: BL/女性向け恋愛。
+    status: completed
+    anime_adapted: false
   - key: Q18054718|セクシー・クールボイス
+    magazine: null
+    demographic: josei
+    genres:
+      - romance
+    synopsis: BL/女性向け恋愛。
+    status: completed
+    anime_adapted: false
   - key: Q18054718|せんせいを殺したい
+    magazine: null
+    demographic: josei
+    genres:
+      - romance
+      - drama
+    synopsis: BL/女性向け学園恋愛。
+    status: completed
+    anime_adapted: false
   - key: Q18054718|ハダカの将軍!
+    magazine: null
+    demographic: josei
+    genres:
+      - romance
+      - comedy
+    synopsis: BL/女性向け恋愛コメディ。
+    status: completed
+    anime_adapted: false
   - key: Q18054718|ハッピーヤローウエディング♡
+    magazine: null
+    demographic: josei
+    genres:
+      - romance
+      - comedy
+    synopsis: BL/女性向け結婚物語。
+    status: completed
+    anime_adapted: false
   - key: Q18054718|フェロモントラップ
+    magazine: null
+    demographic: josei
+    genres:
+      - romance
+    synopsis: BL/女性向け恋愛。
+    status: completed
+    anime_adapted: false
   - key: Q18054718|プレイボーイ・アムール。
+    magazine: null
+    demographic: josei
+    genres:
+      - romance
+    synopsis: BL/女性向け恋愛。
+    status: completed
+    anime_adapted: false
   - key: Q18054718|メンズ・ラヴ
+    magazine: null
+    demographic: josei
+    genres:
+      - romance
+    synopsis: BL/女性向け恋愛。
+    status: completed
+    anime_adapted: false
   - key: Q18054718|下克上にカンパイ!
+    magazine: null
+    demographic: josei
+    genres:
+      - romance
+      - comedy
+    synopsis: BL/女性向け恋愛コメディ。
+    status: completed
+    anime_adapted: false
   - key: Q18054718|僕のスーパーヒーロー
+    magazine: null
+    demographic: josei
+    genres:
+      - romance
+    synopsis: BL/女性向け恋愛。
+    status: completed
+    anime_adapted: false
   - key: Q18054718|囚われた甘い獣たち
+    magazine: null
+    demographic: josei
+    genres:
+      - romance
+    synopsis: BL/女性向け恋愛。
+    status: completed
+    anime_adapted: false
   - key: Q18054718|寝技イッポン❤
+    magazine: null
+    demographic: josei
+    genres:
+      - romance
+      - sports
+    synopsis: BL/女性向け柔道恋愛。
+    status: completed
+    anime_adapted: false
   - key: Q18054718|恋人スクランブル
+    magazine: null
+    demographic: josei
+    genres:
+      - romance
+    synopsis: BL/女性向け恋愛。
+    status: completed
+    anime_adapted: false
   - key: Q18054718|愛しあう獣たち
+    magazine: null
+    demographic: josei
+    genres:
+      - romance
+    synopsis: BL/女性向け恋愛。
+    status: completed
+    anime_adapted: false
   - key: Q18054718|愛しのスウィートボイス
+    magazine: null
+    demographic: josei
+    genres:
+      - romance
+    synopsis: BL/女性向け恋愛。
+    status: completed
+    anime_adapted: false
   - key: Q18054718|抱けない時間
+    magazine: null
+    demographic: josei
+    genres:
+      - romance
+      - drama
+    synopsis: BL/女性向け恋愛。
+    status: completed
+    anime_adapted: false
   - key: Q18054718|殉愛に囚われて
+    magazine: null
+    demographic: josei
+    genres:
+      - romance
+      - drama
+    synopsis: BL/女性向け恋愛。
+    status: completed
+    anime_adapted: false
   - key: Q18054718|気高き獣のテリトリー
+    magazine: null
+    demographic: josei
+    genres:
+      - romance
+    synopsis: BL/女性向け恋愛。
+    status: completed
+    anime_adapted: false
   - key: Q18054718|溺れる獣の恋人。
+    magazine: null
+    demographic: josei
+    genres:
+      - romance
+    synopsis: BL/女性向け恋愛。
+    status: completed
+    anime_adapted: false
   - key: Q18054718|獣のマーキング
+    magazine: null
+    demographic: josei
+    genres:
+      - romance
+    synopsis: BL/女性向け恋愛。
+    status: completed
+    anime_adapted: false
   - key: Q18054718|獣のラブリーストイック
+    magazine: null
+    demographic: josei
+    genres:
+      - romance
+    synopsis: BL/女性向け恋愛。
+    status: completed
+    anime_adapted: false
   - key: Q18054718|獣は愛で、癒される。
+    magazine: null
+    demographic: josei
+    genres:
+      - romance
+    synopsis: BL/女性向け恋愛。
+    status: completed
+    anime_adapted: false
   - key: Q18054718|獣は高潔なエゴイスト
+    magazine: null
+    demographic: josei
+    genres:
+      - romance
+    synopsis: BL/女性向け恋愛。
+    status: completed
+    anime_adapted: false
   - key: Q18054718|甘えた獣のしつけ方
+    magazine: null
+    demographic: josei
+    genres:
+      - romance
+    synopsis: BL/女性向け恋愛。
+    status: completed
+    anime_adapted: false
   - key: Q18054718|男のプロポーズ
+    magazine: null
+    demographic: josei
+    genres:
+      - romance
+    synopsis: BL/女性向け恋愛。
+    status: completed
+    anime_adapted: false
   - key: Q18054718|男の密会はベッドの中で
+    magazine: null
+    demographic: josei
+    genres:
+      - romance
+    synopsis: BL/女性向け恋愛。
+    status: completed
+    anime_adapted: false
   - key: Q18054718|相方
+    magazine: null
+    demographic: josei
+    genres:
+      - romance
+    synopsis: BL/女性向け恋愛。
+    status: completed
+    anime_adapted: false
   - key: Q18054718|相方の愛しかた
+    magazine: null
+    demographic: josei
+    genres:
+      - romance
+    synopsis: BL/女性向け恋愛。
+    status: completed
+    anime_adapted: false
   - key: Q18054718|秘密の男子
+    magazine: null
+    demographic: josei
+    genres:
+      - romance
+    synopsis: BL/女性向け恋愛。
+    status: completed
+    anime_adapted: false
   - key: Q18054718|結婚前夜
+    magazine: null
+    demographic: josei
+    genres:
+      - romance
+    synopsis: BL/女性向け結婚物語。
+    status: completed
+    anime_adapted: false
   - key: Q18054718|絶頂トライアングル
+    magazine: null
+    demographic: josei
+    genres:
+      - romance
+    synopsis: BL/女性向け恋愛。
+    status: completed
+    anime_adapted: false
   - key: Q18054718|美しき獣たち。
+    magazine: null
+    demographic: josei
+    genres:
+      - romance
+    synopsis: BL/女性向け恋愛。
+    status: completed
+    anime_adapted: false
   - key: Q18054718|色男のイロゴト
+    magazine: null
+    demographic: josei
+    genres:
+      - romance
+    synopsis: BL/女性向け恋愛。
+    status: completed
+    anime_adapted: false
   - key: Q18054718|虜になった...獣
+    magazine: null
+    demographic: josei
+    genres:
+      - romance
+    synopsis: BL/女性向け恋愛。
+    status: completed
+    anime_adapted: false
   - key: Q18054718|飢えた相方
+    magazine: null
+    demographic: josei
+    genres:
+      - romance
+    synopsis: BL/女性向け恋愛。
+    status: completed
+    anime_adapted: false
   - key: Q18054720|スゴ盛!本当にあった〔○生〕ここだけの話極
+    magazine: null
+    demographic: josei
+    genres:
+      - anthology
+      - slice_of_life
+    synopsis: 実話投稿エッセイ。
+    status: completed
+    anime_adapted: false
   - key: Q18054720|めちゃ盛!本当にあった〔○生〕ここだけの話祭
+    magazine: null
+    demographic: josei
+    genres:
+      - anthology
+      - slice_of_life
+    synopsis: 実話投稿エッセイ。
+    status: completed
+    anime_adapted: false
   - key: Q18054720|ヤバ盛!本当にあった〔○生〕ここだけの話極
+    magazine: null
+    demographic: josei
+    genres:
+      - anthology
+      - slice_of_life
+    synopsis: 実話投稿エッセイ。
+    status: completed
+    anime_adapted: false
   - key: Q18054720|激盛!本当にあった〔○生〕
+    magazine: null
+    demographic: josei
+    genres:
+      - anthology
+      - slice_of_life
+    synopsis: 実話投稿エッセイ。
+    status: completed
+    anime_adapted: false
   - key: Q18054720|激盛!本当にあった〔○生〕ここだけの話〔○超〕
+    magazine: null
+    demographic: josei
+    genres:
+      - anthology
+      - slice_of_life
+    synopsis: 実話投稿エッセイ。
+    status: completed
+    anime_adapted: false
   - key: Q18054720|激盛!本当にあった〔○生〕ラブホ&衝撃エッチSP
+    magazine: null
+    demographic: josei
+    genres:
+      - ecchi
+      - anthology
+    synopsis: ラブホ実話。
+    status: completed
+    anime_adapted: false
   - key: Q18054720|激盛!本当にあった〔○生〕史上サイテー病院SP
+    magazine: null
+    demographic: josei
+    genres:
+      - medical
+      - anthology
+    synopsis: サイテー病院実話。
+    status: completed
+    anime_adapted: false
   - key: Q18054720|激盛!本当にあった〔○生〕真夏のカミングアウトSP
+    magazine: null
+    demographic: josei
+    genres:
+      - drama
+      - anthology
+    synopsis: カミングアウト実話。
+    status: completed
+    anime_adapted: false
   - key: Q18054720|超盛!本当にあった〔○生〕maxムカウザ体験SP
+    magazine: null
+    demographic: josei
+    genres:
+      - comedy
+      - anthology
+    synopsis: ムカウザ体験実話。
+    status: completed
+    anime_adapted: false
   - key: Q18054720|超盛!本当にあった〔○生〕ここだけの話〔○超 〕
+    magazine: null
+    demographic: josei
+    genres:
+      - anthology
+      - slice_of_life
+    synopsis: 実話投稿エッセイ。
+    status: completed
+    anime_adapted: false
   - key: Q18054720|超盛!本当にあった〔○生〕ここだけの話超
+    magazine: null
+    demographic: josei
+    genres:
+      - anthology
+      - slice_of_life
+    synopsis: 実話投稿エッセイ。
+    status: completed
+    anime_adapted: false
   - key: Q18054720|超盛!本当にあった〔○生〕ムカつく女店員SP
+    magazine: null
+    demographic: josei
+    genres:
+      - drama
+      - anthology
+    synopsis: ムカつく女店員実話。
+    status: completed
+    anime_adapted: false
   - key: Q18054720|超盛!本当にあった〔○生〕壮絶恋愛トラブルSP
+    magazine: null
+    demographic: josei
+    genres:
+      - romance
+      - anthology
+    synopsis: 恋愛トラブル実話。
+    status: completed
+    anime_adapted: false
   - key: Q18054848|クラブアンダルシア
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - action
+    synopsis: クラブアンダルシア。
+    status: completed
+    anime_adapted: false
   - key: Q18054848|スキャンダル・ハンター
+    magazine: null
+    demographic: seinen
+    genres:
+      - mystery
+      - drama
+    synopsis: スキャンダル・ハンター。
+    status: completed
+    anime_adapted: false
   - key: Q18054848|ドロボーマン
+    magazine: null
+    demographic: seinen
+    genres:
+      - action
+      - comedy
+    synopsis: ドロボーマン。
+    status: completed
+    anime_adapted: false
   - key: Q18054848|マグナム坊主
+    magazine: null
+    demographic: seinen
+    genres:
+      - action
+      - comedy
+    synopsis: マグナム坊主アクション。
+    status: completed
+    anime_adapted: false
   - key: Q18054848|保険屋バク
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+    synopsis: 保険屋バクドラマ。
+    status: completed
+    anime_adapted: false
   - key: Q18054848|女喰い
     demographic: seinen
     genres:
@@ -380006,7 +380514,23 @@ series:
     synopsis: みね武が描く、女喰いの男たちを描く成人向けドラマ。
     status: completed
   - key: Q18054848|悪太郎
+    magazine: null
+    demographic: seinen
+    genres:
+      - action
+      - yakuza
+    synopsis: 悪太郎ヤクザアクション。
+    status: completed
+    anime_adapted: false
   - key: Q18054848|新・野獣警察
+    magazine: null
+    demographic: seinen
+    genres:
+      - action
+      - drama
+    synopsis: 新・野獣警察。
+    status: completed
+    anime_adapted: false
   - key: Q18054848|新女喰い
     demographic: seinen
     genres:
@@ -380015,6 +380539,14 @@ series:
     synopsis: みね武による青年向け艶笑漫画。新女喰いを描く物語。
     status: completed
   - key: Q18054848|月光仮面
+    magazine: null
+    demographic: shounen
+    genres:
+      - action
+      - superhero
+    synopsis: 月光仮面コミカライズ。
+    status: completed
+    anime_adapted: true
   - key: Q18054848|格闘王V
     demographic: seinen
     genres:
@@ -380023,7 +380555,22 @@ series:
     synopsis: みね武による格闘漫画。格闘王Vの戦いを描く。
     status: completed
   - key: Q18054848|破戒記者
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+    synopsis: 破戒記者ドラマ。
+    status: completed
+    anime_adapted: false
   - key: Q18054848|私刑執行人
+    magazine: null
+    demographic: seinen
+    genres:
+      - action
+      - thriller
+    synopsis: 私刑執行人サスペンス。
+    status: completed
+    anime_adapted: false
   - key: Q18054848|艶恋師
     demographic: seinen
     genres:
@@ -380041,19 +380588,131 @@ series:
     synopsis: みね武による江戸時代艶恋師漫画。放浪する艶恋師の物語。
     status: completed
   - key: Q18054848|艶恋師special
+    magazine: null
+    demographic: seinen
+    genres:
+      - romance
+      - drama
+    synopsis: 艶恋師スペシャル。
+    status: completed
+    anime_adapted: false
   - key: Q18054848|野獣の都
+    magazine: null
+    demographic: seinen
+    genres:
+      - action
+      - drama
+    synopsis: 野獣の都。
+    status: completed
+    anime_adapted: false
   - key: Q18054942|コミックアイヌの歴史
+    magazine: null
+    demographic: seinen
+    genres:
+      - historical
+      - educational
+    synopsis: アイヌ歴史学習。
+    status: completed
+    anime_adapted: false
   - key: Q18054942|トキワ荘青春物語
+    magazine: null
+    demographic: seinen
+    genres:
+      - biographical
+      - historical
+    synopsis: トキワ荘青春物語。
+    status: completed
+    anime_adapted: false
   - key: Q18054942|世相漫画で知る中国
+    magazine: null
+    demographic: seinen
+    genres:
+      - educational
+      - historical
+    synopsis: 中国世相解説。
+    status: completed
+    anime_adapted: false
   - key: Q18054942|中国からの引揚げ 少年たちの記憶
+    magazine: null
+    demographic: seinen
+    genres:
+      - war
+      - historical
+    synopsis: 戦時引揚げ少年記憶。
+    status: completed
+    anime_adapted: false
   - key: Q18054942|少年兵レイテに消ゆ
+    magazine: null
+    demographic: seinen
+    genres:
+      - war
+      - historical
+    synopsis: 少年兵レイテ戦記。
+    status: completed
+    anime_adapted: false
   - key: Q18054942|枕草子
+    magazine: null
+    demographic: seinen
+    genres:
+      - historical
+      - drama
+    synopsis: 枕草子コミカライズ。
+    status: completed
+    anime_adapted: false
   - key: Q18054942|源氏物語
+    magazine: null
+    demographic: seinen
+    genres:
+      - historical
+      - romance
+    synopsis: 源氏物語コミカライズ。
+    status: completed
+    anime_adapted: false
   - key: Q18054942|諸葛孔明グラフティー
+    magazine: null
+    demographic: seinen
+    genres:
+      - historical
+      - biographical
+    synopsis: 諸葛孔明伝記。
+    status: completed
+    anime_adapted: false
   - key: Q181569|ひぐらしのなく頃に 恋映し編
+    magazine: null
+    demographic: seinen
+    genres:
+      - horror
+      - mystery
+    synopsis: ひぐらし恋映し編。
+    status: completed
+    anime_adapted: true
   - key: Q181569|ひぐらしのなく頃に 綿流し編
+    magazine: null
+    demographic: seinen
+    genres:
+      - horror
+      - mystery
+    synopsis: ひぐらし綿流し編。
+    status: completed
+    anime_adapted: true
   - key: Q181569|ひぐらしのなく頃に 語咄し編
+    magazine: null
+    demographic: seinen
+    genres:
+      - horror
+      - mystery
+    synopsis: ひぐらし語咄し編。
+    status: completed
+    anime_adapted: false
   - key: Q181569|ひぐらしのなく頃に 鬼隠し編
+    magazine: null
+    demographic: seinen
+    genres:
+      - horror
+      - mystery
+    synopsis: ひぐらし鬼隠し編。
+    status: completed
+    anime_adapted: true
   - key: Q181569|ひぐらしのなく頃に解 目明し編
     demographic: shoujo
     genres:
@@ -380064,8 +380723,32 @@ series:
     status: ongoing
     anime_adapted: true
   - key: Q181569|ひぐらしのなく頃に解 罪滅し編
+    magazine: null
+    demographic: seinen
+    genres:
+      - horror
+      - mystery
+    synopsis: ひぐらし解罪滅し編。
+    status: completed
+    anime_adapted: true
   - key: Q181569|マッシブドライブ
+    magazine: null
+    demographic: seinen
+    genres:
+      - action
+      - sci_fi
+    synopsis: マッシブドライブアクション。
+    status: completed
+    anime_adapted: false
   - key: Q181569|人形峠
+    magazine: null
+    demographic: seinen
+    genres:
+      - horror
+      - drama
+    synopsis: 人形峠ホラー。
+    status: completed
+    anime_adapted: false
   - key: Q181569|学園ナイトメア
     demographic: shoujo
     genres:
@@ -380076,13 +380759,75 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q181569|晴明さんはがんばらない
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+      - supernatural
+    synopsis: 晴明さんコメディ。
+    status: completed
+    anime_adapted: false
   - key: Q181569|迷想区閾
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - psychological
+    synopsis: 迷想区閾ドラマ。
+    status: completed
+    anime_adapted: false
   - key: Q181575|でじこ☆あどべんちゃー
+    magazine: null
+    demographic: shoujo
+    genres:
+      - comedy
+      - adventure
+    synopsis: でじこ☆あどべんちゃー。
+    status: completed
+    anime_adapted: true
   - key: Q181575|でじこ☆あらもーど
+    magazine: null
+    demographic: shoujo
+    genres:
+      - comedy
+    synopsis: でじこ☆あらもーど。
+    status: completed
+    anime_adapted: true
   - key: Q181575|てんしのはねとアクマのシッポ
+    magazine: null
+    demographic: shoujo
+    genres:
+      - fantasy
+      - comedy
+    synopsis: 天使と悪魔ファンタジー。
+    status: completed
+    anime_adapted: false
   - key: Q181575|ハニカミ the 4コマ
+    magazine: null
+    demographic: shoujo
+    genres:
+      - comedy
+    synopsis: ハニカミ4コマ。
+    status: completed
+    anime_adapted: false
   - key: Q181575|ボク×ネコ?
+    magazine: null
+    demographic: shoujo
+    genres:
+      - comedy
+      - fantasy
+    synopsis: ボク×ネココメディ。
+    status: completed
+    anime_adapted: false
   - key: Q181575|百合天国
+    magazine: null
+    demographic: seinen
+    genres:
+      - yuri
+      - anthology
+    synopsis: 百合天国アンソロジー。
+    status: completed
+    anime_adapted: false
   - key: Q181575|艦隊これくしょん-艦これ-コミックアラカルト 舞鶴鎮守府編
     demographic: seinen
     genres:
@@ -380102,7 +380847,24 @@ series:
     status: completed
     anime_adapted: false
   - key: Q182191|Kanonプレミアムストーリーズ
+    magazine: null
+    demographic: seinen
+    genres:
+      - romance
+      - drama
+      - anthology
+    synopsis: Kanonプレミアムストーリーズ。
+    status: completed
+    anime_adapted: true
   - key: Q182191|PRINCESS☆BRIDE☆STORY
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - fantasy
+    synopsis: プリンセスブライドストーリー。
+    status: completed
+    anime_adapted: false
   - key: Q182191|あの日見た桜
   - key: Q182191|こわメシ
     demographic: seinen
