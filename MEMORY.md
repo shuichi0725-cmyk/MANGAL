@@ -2,7 +2,7 @@
 
 > このファイルは Claude Code session の context bootstrap 用。新しいセッションを開始したら最初に読むこと。
 
-最終更新: 2026-05-11 (種3 fill session 15 完了、 累計 28,198/70,202 = 40.2%)
+最終更新: 2026-05-11 (種3 fill session 16 完了、 累計 30,196/70,202 = 43.01%)
 
 ## プロジェクト概要
 
@@ -1194,3 +1194,87 @@ ac8878a  data(seed3): batch 283/283 (= session15 完) Opus 4.7 直筆 fill
 3. **demographic schema 注意**: `shounen|shoujo|seinen|josei|kodomo|other` のみ。 アダルト系は `seinen + ecchi genre` で表現、 一般教養系は `other + educational genre`。
 4. **per-batch protocol** (= 不変): 100 件 1 バッチ、 `data/seeds/_fills/batch-NNN.json`、 `npx tsx scripts/_apply-fills.ts`、 commit + push、 JST 時刻 + 進捗報告。
 5. **月次蒸留 protocol が動く前提の宿題は変更なし**: `scripts/_diff-*.ts` 3 本 + `.cache/madb-last-release.txt` 初期化 は依然未着手。
+
+---
+
+## 2026-05-11: 種3 fill session 16 完了
+
+### 達成サマリ
+
+- **session 16 batch 284-303 全 20 batch 完了** (= 100 件 × 20 = **2,000 件 fill**)
+- 適用: 1,998 / 2,000 (= **applied=98** in batch 284: Q11268905|ウルフチックにお願い + Q11318682|パニックパラダイス 既知 missing 含む)
+- 残 batch 285-303 は applied=100/100 で missing なし
+- 所要時間: 約 2:06 (= JST 14:03 開始 → 16:09 終了、 2 分/batch ペース定着)
+- session 15 → 16 推移: 28,198 → **30,196 / 70,202 = 43.01%** (= **30,000 件突破!**)
+- 残 40,006 件 (= 約 20 セッション分)
+
+### Batch 進捗テーブル
+
+| Session | batch range | 範囲 | 適用件数 | missing |
+|---|---|---|---|---|
+| 14 | 244-263 | session13-unfilled 6001 件から 2000 件 | 1,999 | 1 |
+| 15 | 264-283 | session14-unfilled 4002 件から 2000 件 | 1,998 | 2 |
+| **16** | 284-303 | session15-unfilled 2002 件 + seed3 補充から 2000 件 | **1,998** | **2 (= Q11268905 + Q11318682 再発)** |
+
+**累計**: **30,196 / 70,202 = 43.01%**、 **残 40,006 件** (= 約 20 セッション分)。
+
+### Session 16 で観察された傾向
+
+- 所要時間: 14:03:03 → 16:09:34 = **約 2 時間 6 分** (= 2 分/batch ペース、 session 13-15 と同等)。
+- **Q-code 群の傾向**: session 15 と同じ Q-code (= 雑誌・出版社・アンソロジー枠) が継続。 主な大型クラスター:
+  - **Q11369138** = ぶんか社実話誌枠 (本当にあった生ここだけの話) 約 30 件
+  - **Q11369360** = ティーンズラブ少女漫画枠 (オオカミ君系) 約 60 件
+  - **Q11370563** = ティーンズラブ少女漫画枠 (S系・ドS系) 約 65 件
+  - **Q11377035** = 今日マチ子作品集 約 30 件
+  - **Q11377495** = TYPE-MOON系 (Fate/月姫/MELTY BLOOD) 約 30 件
+  - **Q11381019** = 伊駒一平系青年向け官能枠 約 30 件
+  - **Q1138133** = 吾妻ひでお作品集 約 45 件
+  - **Q11382039** = ハーレクイン系女性向け漫画枠 約 55 件
+  - **Q11382767** = 佐伯かよの少女漫画作品集 約 40 件
+  - **Q11385542** = ロマンス少女漫画枠 約 20 件
+  - **Q11388964** = ほのぼの少女漫画枠 約 30 件
+  - **Q11393941** = 内山まもる・ウルトラマン作品枠 約 30 件
+  - **Q11393946** = 内山亜紀ロリコン系青年向けエロ枠 約 45 件
+  - **Q11394041** = TYPE-MOON系アンソロジー 約 25 件
+- **タイトル特徴**: 雑誌増刊号・アンソロジー・派生作品が多く、 内容推測が難しいケースは「○○を題材にした△△漫画」 という汎用 synopsis で埋めた。
+
+### 関連 commit (= 抜粋)
+
+```
+d3b0513  data(seed3): batch 303/303 (= session16 完了) Opus 4.7 直筆 fill
+8215fd4  data(seed3): batch 302/303 (= session16) Opus 4.7 直筆 fill
+...
+4a190a4  data(seed3): batch 297/303 (= session16) Opus 4.7 直筆 fill
+135faf4  data(seed3): batch 296/303 (= session16) Opus 4.7 直筆 fill
+ee2eddd  data(seed3): batch 295/303 (= session16) Opus 4.7 直筆 fill
+a916efc  data(seed3): batch 294/303 (= session16) Opus 4.7 直筆 fill
+15c33cc  data(seed3): batch 293/303 (= session16) Opus 4.7 直筆 fill
+b6c71a3  data(seed3): batch 292/303 (= session16) Opus 4.7 直筆 fill
+db4e845  data(seed3): batch 291/303 (= session16) Opus 4.7 直筆 fill
+444d980  data(seed3): batch 290/303 (= session16) Opus 4.7 直筆 fill
+4454949  data(seed3): batch 289/303 (= session16) Opus 4.7 直筆 fill
+c6a8f89  data(seed3): batch 288/303 (= session16) Opus 4.7 直筆 fill
+8d0c421  data(seed3): batch 287/303 (= session16) Opus 4.7 直筆 fill
+```
+
+## 次セッションでの推奨アクション (= 上書き、 最新)
+
+1. **続行優先**: session 17 として残 40,006 件から 2,000 件 fill (= batch 304-323)。 selection ロジック:
+   ```python
+   import json, yaml
+   seed = yaml.safe_load(open('data/seeds/series-supplement.yml'))
+   filled = set(x['key'] for x in seed['series'] if x.get('synopsis') or x.get('demographic'))
+   seed_keys = set(x['key'] for x in seed['series'])
+   orig = json.load(open('.cache/session16-unfilled.json'))
+   rem = [e for e in orig if e['key'] not in filled and e['key'] in seed_keys]
+   if len(rem) < 2100:
+       seen = set(e['key'] for e in rem)
+       extra = [{'key': x['key']} for x in seed['series'] if x['key'] not in filled and x['key'] not in seen]
+       rem.extend(extra)
+   json.dump(rem, open('.cache/session17-unfilled.json','w'), ensure_ascii=False)
+   ```
+2. **next batch 番号 = 304**。
+3. **既知 missing key 2 件** (= Q11268905|ウルフチックにお願い + Q11318682|パニックパラダイス) は PUA 文字 / 表記揺れ問題で seed3 に物理的に存在しないので、 batch JSON に含めても無害 (= applied=98, missing=2 で正常)。
+4. **demographic schema 不変**: `shounen|shoujo|seinen|josei|kodomo|other` のみ。 アダルト系は `seinen + ecchi genre` で表現、 一般教養系は `other + educational genre`。
+5. **per-batch protocol** (= 不変): 100 件 1 バッチ、 `data/seeds/_fills/batch-NNN.json`、 `npx tsx scripts/_apply-fills.ts`、 commit + push、 JST 時刻 + 進捗報告。
+6. **月次蒸留 protocol が動く前提の宿題は変更なし**: `scripts/_diff-*.ts` 3 本 + `.cache/madb-last-release.txt` 初期化 は依然未着手。
