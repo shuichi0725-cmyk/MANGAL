@@ -1,5 +1,5 @@
 schema_version: 1
-generated_at: 2026-05-11T10:07:39.414Z
+generated_at: 2026-05-11T10:09:30.111Z
 generator: claude-opus-4-7-direct-fill
 series:
   - key: Q1001784|GOLDEN SPIRAL
@@ -184186,7 +184186,23 @@ series:
     synopsis: 平本アキラによるブルース漫画。20世紀初頭アメリカのブルースマン・ロバート・ジョンソンを題材にした音楽歴史ドラマ。
     status: completed
   - key: Q11483043|攻殻機動隊ゴースト・イン・ザ・シェルコミックトリビュート
+    magazine: null
+    demographic: seinen
+    genres:
+      - sci-fi
+      - action
+    synopsis: 士郎正宗『攻殻機動隊』のトリビュートアンソロジー。
+    status: completed
+    anime_adapted: false
   - key: Q11483043|濃厚!!ヤンマガエロバカセレクション♡
+    magazine: null
+    demographic: seinen
+    genres:
+      - ecchi
+      - comedy
+    synopsis: ヤングマガジンのエロコメディ作品セレクション。
+    status: completed
+    anime_adapted: false
   - key: Q11483043|監獄学園
     magazine: weekly-young-magazine
     demographic: seinen
@@ -184200,7 +184216,23 @@ series:
     alternative_titles:
       en: Prison School
   - key: Q11483043|眼福
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - slice of life
+    synopsis: 短編作品集。
+    status: completed
+    anime_adapted: false
   - key: Q11483065|キララ
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - action
+    synopsis: 青年向けドラマ作品。
+    status: completed
+    anime_adapted: false
   - key: Q11483065|ザ・松田
     demographic: seinen
     genres:
@@ -184211,6 +184243,14 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q11483065|ザ・松田スペシャル
+    magazine: null
+    demographic: seinen
+    genres:
+      - action
+      - drama
+    synopsis: 平松伸二の作品スペシャル編。
+    status: completed
+    anime_adapted: false
   - key: Q11483065|ザ・松田超人最強伝説
     magazine: null
     demographic: seinen
@@ -184221,6 +184261,14 @@ series:
     status: completed
     anime_adapted: false
   - key: Q11483065|ザ・松田超人最強伝説スペシャル
+    magazine: null
+    demographic: seinen
+    genres:
+      - action
+      - drama
+    synopsis: 平松伸二『ザ・松田』のスペシャル編。
+    status: completed
+    anime_adapted: false
   - key: Q11483065|そしてボクは外道マンになる
     demographic: seinen
     genres:
@@ -184229,6 +184277,14 @@ series:
     synopsis: 平松伸二による自伝的漫画。著者・平松伸二が漫画家としての道を描いた話題作。
     status: completed
   - key: Q11483065|そしてボクは外道マンになるスペシャル
+    magazine: null
+    demographic: seinen
+    genres:
+      - action
+      - drama
+    synopsis: 平松伸二の自伝的作品スペシャル編。
+    status: completed
+    anime_adapted: false
   - key: Q11483065|ドーベルマン刑事
     magazine: weekly-shonen-jump
     demographic: shounen
@@ -184240,6 +184296,14 @@ series:
     status: completed
     anime_adapted: false
   - key: Q11483065|ドーベルマン刑事スペシャル
+    magazine: null
+    demographic: seinen
+    genres:
+      - action
+      - police
+    synopsis: 平松伸二『ドーベルマン刑事』のスペシャル編。
+    status: completed
+    anime_adapted: false
   - key: Q11483065|どす恋ジゴロ
     demographic: seinen
     genres:
@@ -184258,7 +184322,23 @@ series:
     status: completed
     anime_adapted: false
   - key: Q11483065|ブラックエンジェルズスペシャル
+    magazine: null
+    demographic: seinen
+    genres:
+      - action
+      - drama
+    synopsis: 平松伸二『ブラックエンジェルズ』のスペシャル編。
+    status: completed
+    anime_adapted: false
   - key: Q11483065|ブラックエンジェルズワイドSP
+    magazine: null
+    demographic: seinen
+    genres:
+      - action
+      - drama
+    synopsis: 平松伸二『ブラックエンジェルズ』のワイドSP編。
+    status: completed
+    anime_adapted: false
   - key: Q11483065|マーダーライセンス牙
     magazine: weekly-shonen-jump
     demographic: shounen
@@ -184279,10 +184359,50 @@ series:
     status: completed
     anime_adapted: false
   - key: Q11483065|マーダーライセンス牙&ブラックエンジェルズスペシャル
+    magazine: null
+    demographic: seinen
+    genres:
+      - action
+      - drama
+    synopsis: 平松伸二作品の合同スペシャル編。
+    status: completed
+    anime_adapted: false
   - key: Q11483065|マーダーライセンス牙スペシャル
+    magazine: null
+    demographic: seinen
+    genres:
+      - action
+      - drama
+    synopsis: 平松伸二『マーダーライセンス牙』のスペシャル編。
+    status: completed
+    anime_adapted: false
   - key: Q11483065|マーダーライセンス牙ワイドSP
+    magazine: null
+    demographic: seinen
+    genres:
+      - action
+      - drama
+    synopsis: 平松伸二『マーダーライセンス牙』のワイドSP編。
+    status: completed
+    anime_adapted: false
   - key: Q11483065|モンスターハンター
+    magazine: null
+    demographic: shounen
+    genres:
+      - action
+      - fantasy
+    synopsis: カプコン『モンスターハンター』のコミカライズ。
+    status: completed
+    anime_adapted: true
   - key: Q11483065|ラブ&ファイヤー
+    magazine: null
+    demographic: seinen
+    genres:
+      - action
+      - romance
+    synopsis: アクションとロマンスを描く青年向け作品。
+    status: completed
+    anime_adapted: false
   - key: Q11483065|リッキー台風
     demographic: seinen
     genres:
@@ -184291,8 +184411,32 @@ series:
     synopsis: 平松伸二による青年向けスポーツ漫画。リッキー台風を描く物語。
     status: completed
   - key: Q11483065|嗚呼どす恋ジゴロ
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+      - ecchi
+    synopsis: コメディタッチの青年向け作品。
+    status: completed
+    anime_adapted: false
   - key: Q11483065|嗚呼どす恋ジゴロスペシャル
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+      - ecchi
+    synopsis: 『嗚呼どす恋ジゴロ』のスペシャル編。
+    status: completed
+    anime_adapted: false
   - key: Q11483065|地上最強の男
+    magazine: null
+    demographic: seinen
+    genres:
+      - action
+      - martial arts
+    synopsis: 格闘技を題材にしたアクション作品。
+    status: completed
+    anime_adapted: false
   - key: Q11483065|外道坊
     demographic: seinen
     genres:
@@ -184308,9 +184452,41 @@ series:
     synopsis: 平松伸二による『外道坊』と『マーダーライセンス牙』のクロスオーバー。ハードボイルドアクション。
     status: completed
   - key: Q11483065|外道坊&マーダーライセンス牙スペシャル
+    magazine: null
+    demographic: seinen
+    genres:
+      - action
+      - drama
+    synopsis: 平松伸二作品の合同スペシャル編。
+    status: completed
+    anime_adapted: false
   - key: Q11483065|外道坊&マーダーライセンス牙ワイドSP
+    magazine: null
+    demographic: seinen
+    genres:
+      - action
+      - drama
+    synopsis: 平松伸二作品の合同ワイドSP編。
+    status: completed
+    anime_adapted: false
   - key: Q11483065|外道坊スペシャル
+    magazine: null
+    demographic: seinen
+    genres:
+      - action
+      - drama
+    synopsis: 平松伸二『外道坊』のスペシャル編。
+    status: completed
+    anime_adapted: false
   - key: Q11483065|外道坊ワイドSP
+    magazine: null
+    demographic: seinen
+    genres:
+      - action
+      - drama
+    synopsis: 平松伸二『外道坊』のワイドSP編。
+    status: completed
+    anime_adapted: false
   - key: Q11483065|大江戸ブラック・エンジェルズ
     magazine: monthly-comic-zenon
     demographic: seinen
@@ -184340,6 +184516,14 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q11483065|戦国Sanada紅蓮隊スペシャル
+    magazine: null
+    demographic: seinen
+    genres:
+      - historical
+      - action
+    synopsis: 真田家を題材にした戦国アクションスペシャル。
+    status: completed
+    anime_adapted: false
   - key: Q11483065|新ドーベルマン刑事
     magazine: null
     demographic: seinen
@@ -184350,9 +184534,41 @@ series:
     status: completed
     anime_adapted: false
   - key: Q11483065|新ドーベルマン刑事スペシャル
+    magazine: null
+    demographic: seinen
+    genres:
+      - action
+      - police
+    synopsis: 平松伸二『新ドーベルマン刑事』のスペシャル編。
+    status: completed
+    anime_adapted: false
   - key: Q11483065|東京直下型地震M8
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - disaster
+    synopsis: 東京直下型地震を題材にした災害ドラマ。
+    status: completed
+    anime_adapted: false
   - key: Q11483065|極ラクゴ 柳亭奇譚誘噺
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - historical
+    synopsis: 落語を題材にしたドラマ作品。
+    status: completed
+    anime_adapted: false
   - key: Q11483065|武闘マン餓王
+    magazine: null
+    demographic: seinen
+    genres:
+      - action
+      - martial arts
+    synopsis: 格闘技を題材にした青年向けアクション。
+    status: completed
+    anime_adapted: false
   - key: Q11483065|相場師
     demographic: seinen
     genres:
@@ -184361,17 +184577,113 @@ series:
     synopsis: 平松伸二による株式相場師漫画。激動の相場で生きる男の物語。
     status: completed
   - key: Q11483613|TURUGI
+    magazine: null
+    demographic: seinen
+    genres:
+      - historical
+      - action
+    synopsis: 剣豪を題材にした時代劇アクション。
+    status: completed
+    anime_adapted: false
   - key: Q11483613|コミック乱セレクション
+    magazine: null
+    demographic: seinen
+    genres:
+      - historical
+      - drama
+    synopsis: リイド社『コミック乱』掲載作品のセレクション。
+    status: completed
+    anime_adapted: false
   - key: Q11483613|コミック乱セレクション万里一空
+    magazine: null
+    demographic: seinen
+    genres:
+      - historical
+      - drama
+    synopsis: 『コミック乱』時代劇アンソロジー。
+    status: completed
+    anime_adapted: false
   - key: Q11483613|コミック乱セレクション勇猛無比
+    magazine: null
+    demographic: seinen
+    genres:
+      - historical
+      - action
+    synopsis: 『コミック乱』時代劇アンソロジー。
+    status: completed
+    anime_adapted: false
   - key: Q11483613|コミック乱セレクション忠魂義胆
+    magazine: null
+    demographic: seinen
+    genres:
+      - historical
+      - drama
+    synopsis: 『コミック乱』時代劇アンソロジー。
+    status: completed
+    anime_adapted: false
   - key: Q11483613|コミック乱セレクション琴心剣胆
+    magazine: null
+    demographic: seinen
+    genres:
+      - historical
+      - action
+    synopsis: 『コミック乱』時代劇アンソロジー。
+    status: completed
+    anime_adapted: false
   - key: Q11483613|コミック乱セレクション竜闘虎争
+    magazine: null
+    demographic: seinen
+    genres:
+      - historical
+      - action
+    synopsis: 『コミック乱』時代劇アンソロジー。
+    status: completed
+    anime_adapted: false
   - key: Q11483613|コミック乱セレクション金剛不壊
+    magazine: null
+    demographic: seinen
+    genres:
+      - historical
+      - action
+    synopsis: 『コミック乱』時代劇アンソロジー。
+    status: completed
+    anime_adapted: false
   - key: Q11483613|コミック乱セレクション雷轟電撃
+    magazine: null
+    demographic: seinen
+    genres:
+      - historical
+      - action
+    synopsis: 『コミック乱』時代劇アンソロジー。
+    status: completed
+    anime_adapted: false
   - key: Q11483613|サハラ
+    magazine: null
+    demographic: seinen
+    genres:
+      - historical
+      - drama
+    synopsis: 歴史を題材にした青年向けドラマ。
+    status: completed
+    anime_adapted: false
   - key: Q11483613|一式戦「隼」
+    magazine: null
+    demographic: seinen
+    genres:
+      - historical
+      - military
+    synopsis: 戦闘機『一式戦隼』を題材にした戦記漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11483613|凶悪犯罪ファイル格差地獄
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - crime
+    synopsis: 格差社会の凶悪犯罪を扱ったドラマ。
+    status: completed
+    anime_adapted: false
   - key: Q11483613|孔明伝
     demographic: seinen
     genres:
@@ -184389,11 +184701,59 @@ series:
     synopsis: 平野仁が描く、少年の町ZFを舞台にしたSFアクション。
     status: completed
   - key: Q11483613|戦国武将列伝ベストコレクション
+    magazine: null
+    demographic: seinen
+    genres:
+      - historical
+      - drama
+    synopsis: 戦国武将を題材にしたアンソロジー。
+    status: completed
+    anime_adapted: false
   - key: Q11483613|戦国落城列伝
+    magazine: null
+    demographic: seinen
+    genres:
+      - historical
+      - drama
+    synopsis: 戦国時代の落城を題材にした歴史アンソロジー。
+    status: completed
+    anime_adapted: false
   - key: Q11483613|新撰組風雲録 沖田総司
+    magazine: null
+    demographic: seinen
+    genres:
+      - historical
+      - action
+    synopsis: 新撰組沖田総司を主人公にした歴史漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11483613|無双の剣
+    magazine: null
+    demographic: seinen
+    genres:
+      - historical
+      - action
+    synopsis: 剣豪を題材にした時代劇アクション。
+    status: completed
+    anime_adapted: false
   - key: Q11483613|眠狂四郎
+    magazine: null
+    demographic: seinen
+    genres:
+      - historical
+      - action
+    synopsis: 柴田錬三郎『眠狂四郎』のコミカライズ。
+    status: completed
+    anime_adapted: false
   - key: Q11483613|織田信長豊臣秀吉武将伝
+    magazine: null
+    demographic: seinen
+    genres:
+      - historical
+      - drama
+    synopsis: 織田信長と豊臣秀吉を主人公にした歴史漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11483613|芝の貴婦人
     demographic: seinen
     genres:
@@ -184418,10 +184778,50 @@ series:
     synopsis: 平野仁による青年向けバイク漫画。飛ばしてなンボ猛がチャージを描く物語。
     status: completed
   - key: Q11483613|魔人刑事
+    magazine: null
+    demographic: seinen
+    genres:
+      - action
+      - supernatural
+    synopsis: 魔人と刑事の超常アクション。
+    status: completed
+    anime_adapted: false
   - key: Q11483972|RPGの人々
+    magazine: null
+    demographic: shounen
+    genres:
+      - comedy
+      - fantasy
+    synopsis: RPG世界の住人を描くコメディ。
+    status: completed
+    anime_adapted: false
   - key: Q11483972|RPGの彼女
+    magazine: null
+    demographic: shounen
+    genres:
+      - comedy
+      - fantasy
+    synopsis: RPG世界のヒロインを描くコメディ。
+    status: completed
+    anime_adapted: false
   - key: Q11483972|オタ婚。
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+      - romance
+    synopsis: オタクの婚活を描くコメディ。
+    status: completed
+    anime_adapted: false
   - key: Q11483972|スターオーシャン セカンドストーリー
+    magazine: null
+    demographic: shounen
+    genres:
+      - sci-fi
+      - adventure
+    synopsis: エニックス(現スクウェア・エニックス)『スターオーシャン セカンドストーリー』のコミカライズ。
+    status: completed
+    anime_adapted: true
   - key: Q11483972|ちぱパニック!!
     demographic: shoujo
     genres:
@@ -184440,8 +184840,32 @@ series:
     synopsis: 幸宮チノが、スクエニのRPG『ドラゴンクエストIV/V/VI』天空シリーズを題材に描くファンタジー外伝。
     status: completed
   - key: Q11483972|ひみつの華蝶ちゃん
+    magazine: null
+    demographic: shoujo
+    genres:
+      - comedy
+      - romance
+    synopsis: 華蝶ちゃんを主人公にした少女コメディ。
+    status: completed
+    anime_adapted: false
   - key: Q11483972|モンスターファーム
+    magazine: null
+    demographic: shounen
+    genres:
+      - fantasy
+      - adventure
+    synopsis: テクモのゲーム『モンスターファーム』のコミカライズ。
+    status: completed
+    anime_adapted: true
   - key: Q11483972|ラグナロクオンライン-ギルドメンバー募集中!-
+    magazine: null
+    demographic: shounen
+    genres:
+      - fantasy
+      - comedy
+    synopsis: MMORPG『ラグナロクオンライン』のコミカライズ。
+    status: completed
+    anime_adapted: false
   - key: Q11483972|恋姫☆ようちえん
     demographic: seinen
     genres:
@@ -184453,11 +184877,59 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q11484025|きらが行く
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - comedy
+    synopsis: 少女向けコメディ作品。
+    status: completed
+    anime_adapted: false
   - key: Q11484025|セカンドすてーじ
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+      - slice of life
+    synopsis: 人生の第二幕を描く少女ドラマ。
+    status: completed
+    anime_adapted: false
   - key: Q11484025|ドキドキ・ロコモーション
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - comedy
+    synopsis: ドキドキするロマンスコメディ。
+    status: completed
+    anime_adapted: false
   - key: Q11484025|東方鉄腕小町ドキドキ♡ロコモーション
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - comedy
+    synopsis: 鉄腕小町を主人公にしたロマンスコメディ。
+    status: completed
+    anime_adapted: false
   - key: Q11484025|琴乃でRANBU!!
+    magazine: null
+    demographic: shoujo
+    genres:
+      - comedy
+      - school
+    synopsis: 琴乃を主人公にした学園コメディ。
+    status: completed
+    anime_adapted: false
   - key: Q11484101|ネコダン。
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+      - slice of life
+    synopsis: 猫団地を描くコメディ作品。
+    status: completed
+    anime_adapted: false
   - key: Q11484101|ノーブルチルドレンの残酷
     magazine: null
     demographic: shoujo
@@ -184484,25 +184956,185 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q11484101|美大生・月浪縁の怪談
+    magazine: null
+    demographic: seinen
+    genres:
+      - horror
+      - mystery
+    synopsis: 美大生を主人公にした怪談作品。
+    status: completed
+    anime_adapted: false
   - key: Q11484186|試考錯誤
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+      - slice of life
+    synopsis: 試行錯誤の日常を描くコメディ。
+    status: completed
+    anime_adapted: false
   - key: Q11484186|辺境自警隊
+    magazine: null
+    demographic: seinen
+    genres:
+      - action
+      - drama
+    synopsis: 辺境を守る自警団を描くドラマ。
+    status: completed
+    anime_adapted: false
   - key: Q11484296|NHKその時歴史が動いた
+    magazine: null
+    demographic: other
+    genres:
+      - historical
+      - educational
+    synopsis: NHK歴史番組のコミカライズ別シリーズ。
+    status: completed
+    anime_adapted: false
   - key: Q11484296|W1ララバイ
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - music
+    synopsis: 音楽を題材にしたドラマ作品。
+    status: completed
+    anime_adapted: false
   - key: Q11484296|世界の歴史
+    magazine: null
+    demographic: other
+    genres:
+      - historical
+      - educational
+    synopsis: 世界史を学べる学習漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11484296|夢のロータリーエンジン誕生
+    magazine: null
+    demographic: seinen
+    genres:
+      - historical
+      - drama
+    synopsis: マツダのロータリーエンジン開発秘話を描くドキュメンタリー漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11484394|「吾郎とゆき」ある愛の物語
+    magazine: null
+    demographic: seinen
+    genres:
+      - romance
+      - drama
+    synopsis: 吾郎とゆきの愛を描くドラマ。
+    status: completed
+    anime_adapted: false
   - key: Q11484394|AIDS未知への挑戦
+    magazine: null
+    demographic: other
+    genres:
+      - educational
+      - drama
+    synopsis: エイズについての啓発漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11484394|なぜ巨大企業はウソをついたのか?
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - documentary
+    synopsis: 企業の不祥事を扱った社会派ドラマ。
+    status: completed
+    anime_adapted: false
   - key: Q11484394|マンガエンロン
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - documentary
+    synopsis: エンロン事件を扱ったドキュメンタリー漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11484394|マンガ三猿金泉秘録
+    magazine: null
+    demographic: seinen
+    genres:
+      - historical
+      - drama
+    synopsis: 三猿金泉秘録を扱った歴史漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11484394|まんが日本の歴史クイズ
+    magazine: null
+    demographic: other
+    genres:
+      - historical
+      - educational
+    synopsis: 日本史をクイズ形式で学べる漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11484394|五人囃子
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - music
+    synopsis: 音楽を題材にしたドラマ作品。
+    status: completed
+    anime_adapted: false
   - key: Q11484394|学習コミック 戦国の武将
+    magazine: null
+    demographic: other
+    genres:
+      - historical
+      - educational
+    synopsis: 戦国武将を学べる学習漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11484394|火子伝説
+    magazine: null
+    demographic: shounen
+    genres:
+      - fantasy
+      - adventure
+    synopsis: 火子を主人公にしたファンタジー作品。
+    status: completed
+    anime_adapted: false
   - key: Q11484394|芭蕉おくのほそ道
+    magazine: null
+    demographic: other
+    genres:
+      - historical
+      - educational
+    synopsis: 松尾芭蕉『おくのほそ道』のコミカライズ。
+    status: completed
+    anime_adapted: false
   - key: Q11484394|走れメロス 富嶽百景
+    magazine: null
+    demographic: other
+    genres:
+      - drama
+      - educational
+    synopsis: 太宰治『走れメロス』『富嶽百景』のコミカライズ。
+    status: completed
+    anime_adapted: false
   - key: Q11484394|走れメロス・富岳百景
+    magazine: null
+    demographic: other
+    genres:
+      - drama
+      - educational
+    synopsis: 太宰治『走れメロス』『富岳百景』のコミカライズ。
+    status: completed
+    anime_adapted: false
   - key: Q11485710|シンソウガクシャ
+    magazine: null
+    demographic: seinen
+    genres:
+      - mystery
+      - drama
+    synopsis: 真相学者を主人公にしたミステリー作品。
+    status: completed
+    anime_adapted: false
   - key: Q11485710|銭の力で、戦国の世を駆け抜ける。
     demographic: seinen
     genres:
@@ -184511,14 +185143,86 @@ series:
     synopsis: 広石匡司が描く、銭の力で戦国時代を駆け抜ける商人を主人公にした歴史劇。
     status: ongoing
   - key: Q11485734|MELTY BLOODコミックアンソロジー
+    magazine: null
+    demographic: seinen
+    genres:
+      - action
+      - fantasy
+    synopsis: TYPE-MOON『MELTY BLOOD』のコミックアンソロジー。
+    status: completed
+    anime_adapted: false
   - key: Q11485734|あざとカワイイ彼女のたわわに包まれたい
+    magazine: null
+    demographic: seinen
+    genres:
+      - ecchi
+      - romance
+    synopsis: あざとかわいい彼女とのラブコメディ。
+    status: completed
+    anime_adapted: false
   - key: Q11485734|あの陽キャのヤバイカノジョがこんな僕とHなことになるなんて
+    magazine: null
+    demographic: seinen
+    genres:
+      - ecchi
+      - romance
+    synopsis: 陽キャ彼女とのラブコメディ。
+    status: completed
+    anime_adapted: false
   - key: Q11485734|おとなりの現代エルフのえろ事情アンソロジーコミック
+    magazine: null
+    demographic: seinen
+    genres:
+      - ecchi
+      - fantasy
+    synopsis: エルフを題材にしたアンソロジー。
+    status: completed
+    anime_adapted: false
   - key: Q11485734|しっかりメイドのぽんこつお嬢さま観察日記
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+      - slice of life
+    synopsis: メイドとお嬢様の日常を描くコメディ。
+    status: completed
+    anime_adapted: false
   - key: Q11485734|ショタヒーロー大ピンチ!?おねえさん怪人の甘すぎる罠
+    magazine: null
+    demographic: seinen
+    genres:
+      - ecchi
+      - action
+    synopsis: ショタヒーローと怪人のラブコメディ。
+    status: completed
+    anime_adapted: false
   - key: Q11485734|すとぽに
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+      - ecchi
+    synopsis: アンソロジーコミック。
+    status: completed
+    anime_adapted: false
   - key: Q11485734|ボクのNTR RPGアンソロジーコミック
+    magazine: null
+    demographic: seinen
+    genres:
+      - ecchi
+      - fantasy
+    synopsis: NTRをテーマにしたRPGアンソロジー。
+    status: completed
+    anime_adapted: false
   - key: Q11485734|月姫コミックアンソロジー
+    magazine: null
+    demographic: seinen
+    genres:
+      - supernatural
+      - romance
+    synopsis: TYPE-MOON『月姫』のコミックアンソロジー。
+    status: completed
+    anime_adapted: true
   - key: Q11485734|甘辛義姉妹に挟まれてます
     magazine: null
     demographic: seinen
@@ -184529,11 +185233,59 @@ series:
     status: completed
     anime_adapted: false
   - key: Q11485734|異世界のお姫さまがピンチでエロいことされちゃうアンソロジーコミック
+    magazine: null
+    demographic: seinen
+    genres:
+      - ecchi
+      - fantasy
+    synopsis: 異世界のお姫さまを題材にしたアンソロジー。
+    status: completed
+    anime_adapted: false
   - key: Q11485734|舞-HIME コミックアンソロジー
+    magazine: null
+    demographic: seinen
+    genres:
+      - action
+      - supernatural
+    synopsis: サンライズ『舞-HiME』のコミックアンソロジー。
+    status: completed
+    anime_adapted: true
   - key: Q11485734|舞-乙HiME コミックアンソロジー
+    magazine: null
+    demographic: seinen
+    genres:
+      - action
+      - fantasy
+    synopsis: サンライズ『舞-乙HiME』のコミックアンソロジー。
+    status: completed
+    anime_adapted: true
   - key: Q11485734|舞-乙HiMEアンソロジーコミックス
+    magazine: null
+    demographic: seinen
+    genres:
+      - action
+      - fantasy
+    synopsis: サンライズ『舞-乙HiME』のアンソロジー。
+    status: completed
+    anime_adapted: true
   - key: Q11485734|陰キャなボクのこと好きなヤバイギャルとのニクタイ事情アンソロジーコミック
+    magazine: null
+    demographic: seinen
+    genres:
+      - ecchi
+      - romance
+    synopsis: 陰キャとギャルのラブコメアンソロジー。
+    status: completed
+    anime_adapted: false
   - key: Q11485850|三文未来の家庭訪問
+    magazine: null
+    demographic: seinen
+    genres:
+      - sci-fi
+      - drama
+    synopsis: 近未来を舞台にした短編集。
+    status: completed
+    anime_adapted: false
   - key: Q11485850|勇者ヴォグ・ランバ
     magazine: null
     demographic: seinen
@@ -184553,7 +185305,23 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q11487103|HOT STUFF
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - comedy
+    synopsis: 少女向けロマンスコメディ短編。
+    status: completed
+    anime_adapted: false
   - key: Q11487103|エイリアン1/2
+    magazine: null
+    demographic: shoujo
+    genres:
+      - comedy
+      - sci-fi
+    synopsis: 宇宙人を題材にした少女向けコメディ。
+    status: completed
+    anime_adapted: false
   - key: Q11487103|エリート狂走曲
     demographic: shoujo
     genres:
@@ -184569,8 +185337,32 @@ series:
     synopsis: 弓月光による青年向けラブコメディ。シンデレラ・エクスプレスを描く物語。
     status: completed
   - key: Q11487103|トラブル急行
+    magazine: null
+    demographic: shoujo
+    genres:
+      - comedy
+      - romance
+    synopsis: 少女向けトラブルコメディ。
+    status: completed
+    anime_adapted: false
   - key: Q11487103|にくいあんちきしょう
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - comedy
+    synopsis: 少女向けラブコメディ短編。
+    status: completed
+    anime_adapted: false
   - key: Q11487103|ボクの初体験
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - comedy
+    synopsis: 初恋を題材にした少女向けロマンス。
+    status: completed
+    anime_adapted: false
   - key: Q11487103|ボクの婚約者
     demographic: shoujo
     genres:
@@ -184579,6 +185371,14 @@ series:
     synopsis: 弓月光が描く、ボクの婚約者を題材にした少女ラブコメ。
     status: completed
   - key: Q11487103|まじだよ!!
+    magazine: null
+    demographic: shoujo
+    genres:
+      - comedy
+      - romance
+    synopsis: 少女向けラブコメディ短編。
+    status: completed
+    anime_adapted: false
   - key: Q11487103|みんなあげちゃう
     magazine: null
     demographic: seinen
