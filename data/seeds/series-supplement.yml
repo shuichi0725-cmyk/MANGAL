@@ -1,5 +1,5 @@
 schema_version: 1
-generated_at: 2026-05-11T13:02:26.487Z
+generated_at: 2026-05-11T13:04:17.700Z
 generator: claude-opus-4-7-direct-fill
 series:
   - key: Q1001784|GOLDEN SPIRAL
@@ -214596,8 +214596,32 @@ series:
     status: completed
     anime_adapted: false
   - key: Q11529922|青竜抄
+    magazine: null
+    demographic: shoujo
+    genres:
+      - fantasy
+      - historical
+    synopsis: 青竜抄を題材にしたファンタジー。
+    status: completed
+    anime_adapted: false
   - key: Q11530128|ショー☆バン
+    magazine: null
+    demographic: shounen
+    genres:
+      - sports
+      - drama
+    synopsis: 村田ひろゆき『ショー☆バン』。野球を題材にしたスポーツドラマ。
+    status: completed
+    anime_adapted: false
   - key: Q11530128|ストライプブルー
+    magazine: null
+    demographic: shounen
+    genres:
+      - sports
+      - drama
+    synopsis: 野球を題材にした少年向けスポーツドラマ。
+    status: completed
+    anime_adapted: false
   - key: Q11530128|チェイサーゲーム
     magazine: null
     demographic: seinen
@@ -214607,6 +214631,14 @@ series:
     status: ongoing
     anime_adapted: true
   - key: Q11530128|少年探偵狩野俊介
+    magazine: null
+    demographic: shounen
+    genres:
+      - mystery
+      - drama
+    synopsis: 太田忠司『少年探偵狩野俊介』のコミカライズ。
+    status: completed
+    anime_adapted: false
   - key: Q11530128|永遠の一手
     magazine: null
     demographic: seinen
@@ -214617,6 +214649,14 @@ series:
     status: completed
     anime_adapted: false
   - key: Q11530748|8月の日記はラズライト
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - drama
+    synopsis: 8月を舞台にした少女ロマンス。
+    status: completed
+    anime_adapted: false
   - key: Q11530748|ふくろう荘空きあります
     demographic: shoujo
     genres:
@@ -214627,6 +214667,14 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q11530748|ラムネ万能薬
+    magazine: null
+    demographic: shoujo
+    genres:
+      - fantasy
+      - comedy
+    synopsis: ラムネ万能薬を題材にした少女向け作品。
+    status: completed
+    anime_adapted: false
   - key: Q11530748|婚前アットホーム
     demographic: josei
     genres:
@@ -214647,6 +214695,14 @@ series:
     status: completed
     anime_adapted: false
   - key: Q11530748|幸福喫茶3丁目2番地
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - slice of life
+    synopsis: 松月滉『幸福喫茶3丁目』のコミック。
+    status: completed
+    anime_adapted: false
   - key: Q11530748|放課後せんせいと。
     demographic: shoujo
     genres:
@@ -214675,9 +214731,41 @@ series:
     status: completed
     anime_adapted: true
   - key: Q11530791|Duel Masters LOST~忘却の太陽~
+    magazine: null
+    demographic: shounen
+    genres:
+      - fantasy
+      - action
+    synopsis: タカラトミー『デュエル・マスターズ LOST』忘却の太陽編。
+    status: completed
+    anime_adapted: true
   - key: Q11530791|Duel Masters LOST~月下の死神~
+    magazine: null
+    demographic: shounen
+    genres:
+      - fantasy
+      - action
+    synopsis: 『デュエル・マスターズ LOST』月下の死神編。
+    status: completed
+    anime_adapted: true
   - key: Q11530791|DUEL MASTERS 外伝
+    magazine: null
+    demographic: shounen
+    genres:
+      - fantasy
+      - action
+    synopsis: 『デュエル・マスターズ』の外伝。
+    status: completed
+    anime_adapted: true
   - key: Q11530791|ウルトラマン:アロング・ケイム・ア・スパイダーマン
+    magazine: null
+    demographic: shounen
+    genres:
+      - action
+      - sci-fi
+    synopsis: ウルトラマンとスパイダーマンのコラボ作品。
+    status: completed
+    anime_adapted: false
   - key: Q11530791|おどろき!ももの木笑店街
     demographic: shounen
     genres:
@@ -214697,6 +214785,14 @@ series:
     status: completed
     anime_adapted: true
   - key: Q11530791|ゼロ デュエル・マスターズ
+    magazine: null
+    demographic: shounen
+    genres:
+      - fantasy
+      - action
+    synopsis: 『デュエル・マスターズ』ゼロ編。
+    status: completed
+    anime_adapted: true
   - key: Q11530791|デュエル・マスターズ
     magazine: coro-coro-comic
     demographic: kodomo
@@ -214758,15 +214854,95 @@ series:
     status: completed
     anime_adapted: true
   - key: Q11530791|デュエル・マスターズ傑作決闘集
+    magazine: null
+    demographic: shounen
+    genres:
+      - fantasy
+      - action
+    synopsis: 『デュエル・マスターズ』の傑作決闘集。
+    status: completed
+    anime_adapted: true
   - key: Q11530791|バトルミー
+    magazine: null
+    demographic: shounen
+    genres:
+      - action
+      - comedy
+    synopsis: バトルミーを題材にした少年向け作品。
+    status: completed
+    anime_adapted: false
   - key: Q11530791|みんなで空気読み。コロコロコミックVer
+    magazine: null
+    demographic: shounen
+    genres:
+      - comedy
+      - kids
+    synopsis: ゲーム『みんなで空気読み』のコロコロ版コミカライズ。
+    status: completed
+    anime_adapted: false
   - key: Q11530791|切札勝舞はマジック:ザ・ギャザリングを使いつづける
+    magazine: null
+    demographic: shounen
+    genres:
+      - fantasy
+      - action
+    synopsis: 『デュエル・マスターズ』のMTGを題材にしたスピンオフ。
+    status: completed
+    anime_adapted: false
   - key: Q11530791|大長編 デュエルマスターズ
+    magazine: null
+    demographic: shounen
+    genres:
+      - fantasy
+      - action
+    synopsis: 『デュエル・マスターズ』の大長編。
+    status: completed
+    anime_adapted: true
   - key: Q11530791|大長編デュエル・マスターズ
+    magazine: null
+    demographic: shounen
+    genres:
+      - fantasy
+      - action
+    synopsis: 『デュエル・マスターズ』の大長編別表記。
+    status: completed
+    anime_adapted: true
   - key: Q11530791|新星輝デュエル・マスターズフラッシュ
+    magazine: null
+    demographic: shounen
+    genres:
+      - fantasy
+      - action
+    synopsis: 『デュエル・マスターズ』新星輝フラッシュ編。
+    status: completed
+    anime_adapted: true
   - key: Q11530791|熱血!!コロコロ伝説
+    magazine: null
+    demographic: shounen
+    genres:
+      - historical
+      - comedy
+    synopsis: 月刊コロコロコミックの伝説作品アンソロジー。
+    status: completed
+    anime_adapted: false
   - key: Q11530791|錬人
+    magazine: null
+    demographic: shounen
+    genres:
+      - fantasy
+      - action
+    synopsis: 錬人を題材にしたファンタジーアクション。
+    status: completed
+    anime_adapted: false
   - key: Q11530801|いきものがたり
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - slice of life
+    synopsis: いきものがたりを題材にしたドラマ。
+    status: completed
+    anime_adapted: false
   - key: Q11530801|さばげぶっ!
     magazine: nakayoshi
     demographic: shoujo
@@ -214813,8 +214989,32 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q11530801|島耕作他5大アニメ化作品共演
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - comedy
+    synopsis: 弘兼憲史『島耕作』他5大アニメ化作品の共演。
+    status: completed
+    anime_adapted: true
   - key: Q11530801|島耕作他5大アニメ化作品登場
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - comedy
+    synopsis: 弘兼憲史『島耕作』他5大アニメ化作品の登場。
+    status: completed
+    anime_adapted: true
   - key: Q11530801|水木しげる漫画大全集
+    magazine: null
+    demographic: seinen
+    genres:
+      - horror
+      - supernatural
+    synopsis: 水木しげるの漫画大全集。
+    status: completed
+    anime_adapted: true
   - key: Q11530801|犬と猫どっちも飼ってると毎日たのしい
     magazine: twitter
     demographic: seinen
@@ -214852,20 +215052,140 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q11530823|オトコの娘 コミックアンソロジー
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+      - ecchi
+    synopsis: 男の娘を題材にしたコミックアンソロジー。
+    status: completed
+    anime_adapted: false
   - key: Q11530823|クラスメイトの女装を手伝ったら可愛すぎて震えが止まらない件
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+      - romance
+    synopsis: 女装クラスメイトを描くコメディ。
+    status: completed
+    anime_adapted: false
   - key: Q11530823|トランススイッチ
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+      - ecchi
+    synopsis: トランススイッチを題材にしたコメディ。
+    status: completed
+    anime_adapted: false
   - key: Q11530823|勝利の女神だって野球したい!
+    magazine: null
+    demographic: seinen
+    genres:
+      - sports
+      - comedy
+    synopsis: 勝利の女神を題材にしたスポーツコメディ。
+    status: completed
+    anime_adapted: false
   - key: Q11530823|女装少年アンソロジーコミック
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+      - ecchi
+    synopsis: 女装少年を題材にしたアンソロジー。
+    status: completed
+    anime_adapted: false
   - key: Q11530823|楽兎学園催眠部
+    magazine: null
+    demographic: seinen
+    genres:
+      - ecchi
+      - school
+    synopsis: 楽兎学園催眠部を題材にした作品。
+    status: completed
+    anime_adapted: false
   - key: Q11530823|正しいエースの攻略法
+    magazine: null
+    demographic: seinen
+    genres:
+      - sports
+      - comedy
+    synopsis: 正しいエースの攻略法を描くスポーツコメディ。
+    status: completed
+    anime_adapted: false
   - key: Q11530823|異世界同人活動記
+    magazine: null
+    demographic: seinen
+    genres:
+      - fantasy
+      - comedy
+    synopsis: 異世界同人活動を描くコメディ。
+    status: completed
+    anime_adapted: false
   - key: Q11530823|非リア充集団がクラスメイトを女装させて彼女にしてみた
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+      - school
+    synopsis: 非リア充集団を描くコメディ。
+    status: completed
+    anime_adapted: false
   - key: Q11530825|on blue
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - drama
+    synopsis: 祥伝社『on BLUE』掲載作品。
+    status: completed
+    anime_adapted: false
   - key: Q11530825|お遊びはそこまで
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - drama
+    synopsis: お遊びはそこまでを描く少女ロマンス。
+    status: completed
+    anime_adapted: false
   - key: Q11530825|きみ諦めることなかれ
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - drama
+    synopsis: 諦めない少女のロマンス作品。
+    status: completed
+    anime_adapted: false
   - key: Q11530825|ひよこと愛と恋とカナヅチ
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - comedy
+    synopsis: ひよこを題材にした少女ロマンス。
+    status: completed
+    anime_adapted: false
   - key: Q11530825|ひらり、
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - drama
+    synopsis: 少女向け短編ロマンス。
+    status: completed
+    anime_adapted: false
   - key: Q11530825|ファンタジー
+    magazine: null
+    demographic: shoujo
+    genres:
+      - fantasy
+      - romance
+    synopsis: ファンタジー要素の少女向け短編。
+    status: completed
+    anime_adapted: false
   - key: Q11530825|ボーイズラブ!
     demographic: josei
     genres:
@@ -214876,7 +215196,23 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q11530825|みどりのまきば
+    magazine: null
+    demographic: shoujo
+    genres:
+      - slice of life
+      - drama
+    synopsis: 牧場を舞台にした少女向け作品。
+    status: completed
+    anime_adapted: false
   - key: Q11530825|号外 on BLUE
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - drama
+    synopsis: 祥伝社『号外 on BLUE』掲載作品。
+    status: completed
+    anime_adapted: false
   - key: Q11530825|号外On BLUE 2nd SEASON
     magazine: null
     demographic: josei
@@ -214894,6 +215230,14 @@ series:
     synopsis: 松本ミーコハウスによる青年向けドラマ。堀居姉妹の五月を描く物語。
     status: completed
   - key: Q11530825|男友達が激甘カレシになりました
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - comedy
+    synopsis: 男友達との恋愛を描く少女向け作品。
+    status: completed
+    anime_adapted: false
   - key: Q11530825|美しい野菜
     demographic: josei
     genres:
@@ -214910,11 +215254,57 @@ series:
     synopsis: 松本ミーコハウスが描く、腐女子の日常を綴るオタクエッセイギャグ。
     status: completed
   - key: Q11530825|象の背中
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+    synopsis: 城山三郎『象の背中』のコミカライズ。
+    status: completed
+    anime_adapted: false
   - key: Q11530842|Deltora quest special book
+    magazine: null
+    demographic: shounen
+    genres:
+      - fantasy
+      - adventure
+    synopsis: エミリー・ロッダ『デルトラ・クエスト』のスペシャルブック。
+    status: completed
+    anime_adapted: true
   - key: Q11530842|アストラルアーム
+    magazine: null
+    demographic: shounen
+    genres:
+      - fantasy
+      - action
+    synopsis: アストラルアームを題材にしたアクション。
+    status: completed
+    anime_adapted: false
   - key: Q11530842|ウイルスから人体を守れ!
+    magazine: null
+    demographic: kodomo
+    genres:
+      - educational
+    synopsis: ウイルスから人体を守る学習コミック。
+    status: completed
+    anime_adapted: false
   - key: Q11530842|ガンダム短編集
+    magazine: null
+    demographic: shounen
+    genres:
+      - sci-fi
+      - action
+    synopsis: サンライズ『ガンダム』シリーズの短編集。
+    status: completed
+    anime_adapted: true
   - key: Q11530842|クラッシュギアN
+    magazine: null
+    demographic: shounen
+    genres:
+      - sports
+      - action
+    synopsis: サンライズ『激闘!クラッシュギアTURBO』のNシリーズ。
+    status: completed
+    anime_adapted: true
   - key: Q11530842|クラッシュギアNitro
     demographic: shounen
     genres:
@@ -214925,10 +215315,50 @@ series:
     status: ongoing
     anime_adapted: true
   - key: Q11530842|トミカヒーローレスキューフォース&レスキューファイアー
+    magazine: null
+    demographic: kodomo
+    genres:
+      - action
+      - tokusatsu
+    synopsis: タカラトミー『トミカヒーロー』のコミカライズ。
+    status: completed
+    anime_adapted: true
   - key: Q11530842|ヘラクレス
+    magazine: null
+    demographic: shounen
+    genres:
+      - fantasy
+      - action
+    synopsis: ヘラクレスを題材にしたファンタジー。
+    status: completed
+    anime_adapted: false
   - key: Q11530842|亡装遺体ネクロマン
+    magazine: null
+    demographic: shounen
+    genres:
+      - horror
+      - action
+    synopsis: ネクロマンを題材にしたホラーアクション。
+    status: completed
+    anime_adapted: false
   - key: Q11530842|妖獣戦線ブライオー
+    magazine: null
+    demographic: shounen
+    genres:
+      - action
+      - fantasy
+    synopsis: 妖獣戦線ブライオーを描くアクション。
+    status: completed
+    anime_adapted: false
   - key: Q11530842|妖獣武装ブライオー
+    magazine: null
+    demographic: shounen
+    genres:
+      - action
+      - fantasy
+    synopsis: 妖獣武装ブライオーを描くアクション。
+    status: completed
+    anime_adapted: false
   - key: Q11530842|小さな巨人ミクロマン
     demographic: shounen
     genres:
@@ -214939,6 +215369,14 @@ series:
     status: ongoing
     anime_adapted: true
   - key: Q11530842|悪がよぶ
+    magazine: null
+    demographic: shounen
+    genres:
+      - horror
+      - action
+    synopsis: 悪がよぶを題材にしたホラー作品。
+    status: completed
+    anime_adapted: false
   - key: Q11530842|悪がよぶ!
     demographic: shounen
     genres:
@@ -214949,6 +215387,14 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q11530842|時空忍人紫炎
+    magazine: null
+    demographic: shounen
+    genres:
+      - action
+      - fantasy
+    synopsis: 時空忍人紫炎を主人公にしたアクション。
+    status: completed
+    anime_adapted: false
   - key: Q11530842|激闘!クラッシュギアTURBO
     demographic: kodomo
     genres:
@@ -214957,16 +215403,104 @@ series:
     synopsis: 松本久志による『クラッシュギア』TURBO編。クラッシュギアバトルの戦いを描く。
     status: completed
   - key: Q11530842|特捜サイコップ
+    magazine: null
+    demographic: shounen
+    genres:
+      - action
+      - police
+    synopsis: 特捜サイコップを描くアクション。
+    status: completed
+    anime_adapted: false
   - key: Q11530842|闘神伝
+    magazine: null
+    demographic: shounen
+    genres:
+      - action
+      - fantasy
+    synopsis: タムソフト『闘神伝』のコミカライズ。
+    status: completed
+    anime_adapted: true
   - key: Q11530842|魔弾戦記リュウケンドーアンソロジー
+    magazine: null
+    demographic: shounen
+    genres:
+      - action
+      - tokusatsu
+    synopsis: 東宝『魔弾戦記リュウケンドー』のアンソロジー。
+    status: completed
+    anime_adapted: true
   - key: Q11530893|DROP BY DROP
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+      - slice of life
+    synopsis: DROP BY DROPを描く少女ドラマ。
+    status: completed
+    anime_adapted: false
   - key: Q11530893|Dutch Doll
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+      - fantasy
+    synopsis: Dutch Dollを題材にした少女向け作品。
+    status: completed
+    anime_adapted: false
   - key: Q11530893|ダリヤ・ダリヤ
+    magazine: null
+    demographic: shoujo
+    genres:
+      - fantasy
+      - romance
+    synopsis: ダリヤを題材にした少女ファンタジー。
+    status: completed
+    anime_adapted: false
   - key: Q11530893|健康不良の学生
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+      - school
+    synopsis: 健康不良の学生を描く少女ドラマ。
+    status: completed
+    anime_adapted: false
   - key: Q11530893|潜む声 鏡の中の遺書
+    magazine: null
+    demographic: shoujo
+    genres:
+      - mystery
+      - horror
+    synopsis: 潜む声を題材にした少女ミステリー。
+    status: completed
+    anime_adapted: false
   - key: Q11530893|私に足りないもの
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+      - slice of life
+    synopsis: 私に足りないものを描く少女ドラマ。
+    status: completed
+    anime_adapted: false
   - key: Q11530893|記憶のたまご
+    magazine: null
+    demographic: shoujo
+    genres:
+      - fantasy
+      - drama
+    synopsis: 記憶のたまごを題材にしたファンタジー。
+    status: completed
+    anime_adapted: false
   - key: Q11530893|青のマーブル
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+      - romance
+    synopsis: 青のマーブルを題材にした少女向け作品。
+    status: completed
+    anime_adapted: false
   - key: Q11530895|クーデタークラブ
     demographic: seinen
     genres:
@@ -214975,6 +215509,14 @@ series:
     synopsis: 松本光司が描く、クーデターを企てる男たちのサスペンス。
     status: completed
   - key: Q11530895|サオリ
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+      - romance
+    synopsis: サオリを主人公にした少女向け作品。
+    status: completed
+    anime_adapted: false
   - key: Q11530895|大門寺と問題児
     demographic: seinen
     genres:
@@ -215030,7 +215572,23 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q11530916|すみれの花咲く頃
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+      - music
+    synopsis: すみれの花咲く頃を描く少女ドラマ。
+    status: completed
+    anime_adapted: false
   - key: Q11530916|ハナモモ
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+      - slice of life
+    synopsis: ハナモモを題材にした少女向け作品。
+    status: completed
+    anime_adapted: false
   - key: Q11530916|ロッタレイン
     demographic: seinen
     genres:
@@ -215041,20 +215599,140 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q11530916|北京的夏
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+      - romance
+    synopsis: 北京を舞台にした少女向け作品。
+    status: completed
+    anime_adapted: false
   - key: Q11530916|甘い水
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+      - romance
+    synopsis: 甘い水を題材にした少女向け作品。
+    status: completed
+    anime_adapted: false
   - key: Q11530974|アリスから魔法
+    magazine: null
+    demographic: shoujo
+    genres:
+      - fantasy
+      - romance
+    synopsis: アリスから魔法を題材にした少女ファンタジー。
+    status: completed
+    anime_adapted: false
   - key: Q11530974|ヴァンパイア・KISS
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - supernatural
+    synopsis: ヴァンパイアを題材にした少女ロマンス。
+    status: completed
+    anime_adapted: false
   - key: Q11530974|エンジェル・タイム
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - fantasy
+    synopsis: エンジェルタイムを描く少女ロマンス。
+    status: completed
+    anime_adapted: false
   - key: Q11530974|クレオパトラ
+    magazine: null
+    demographic: shoujo
+    genres:
+      - historical
+      - drama
+    synopsis: クレオパトラを主人公にした少女向け歴史漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11530974|それぞれの秘密
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - drama
+    synopsis: それぞれの秘密を描く少女ロマンス。
+    status: completed
+    anime_adapted: false
   - key: Q11530974|タロット・ラビリンス
+    magazine: null
+    demographic: shoujo
+    genres:
+      - mystery
+      - fantasy
+    synopsis: タロットラビリンスを題材にした少女向け作品。
+    status: completed
+    anime_adapted: false
   - key: Q11530974|テレパシー・ピアス
+    magazine: null
+    demographic: shoujo
+    genres:
+      - fantasy
+      - supernatural
+    synopsis: テレパシーピアスを題材にした少女向け作品。
+    status: completed
+    anime_adapted: false
   - key: Q11530974|めざめれば人魚姫
+    magazine: null
+    demographic: shoujo
+    genres:
+      - fantasy
+      - romance
+    synopsis: 人魚姫を題材にした少女ファンタジー。
+    status: completed
+    anime_adapted: false
   - key: Q11530974|九十日間のミセス
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - drama
+    synopsis: 九十日間のミセスを描く少女ロマンス。
+    status: completed
+    anime_adapted: false
   - key: Q11530974|仮面舞踏会の夜に愛して
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - drama
+    synopsis: 仮面舞踏会を題材にした少女ロマンス。
+    status: completed
+    anime_adapted: false
   - key: Q11530974|冷徹支配人は孤独なシンデレラへの迸る激愛欲を我慢しない
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - drama
+    synopsis: 冷徹支配人とシンデレラを描く少女ロマンス。
+    status: completed
+    anime_adapted: false
   - key: Q11530974|君だけのデビル
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - fantasy
+    synopsis: 君だけのデビルを描く少女ロマンス。
+    status: completed
+    anime_adapted: false
   - key: Q11530974|君とドルチェヴィータ
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - drama
+    synopsis: 君とドルチェヴィータを描く少女ロマンス。
+    status: completed
+    anime_adapted: false
   - key: Q11530974|夢色パティシエール
     magazine: ribon
     demographic: shoujo
@@ -215066,8 +215744,32 @@ series:
     status: completed
     anime_adapted: true
   - key: Q11530974|天使が降ってくる
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - fantasy
+    synopsis: 天使を題材にした少女ロマンス。
+    status: completed
+    anime_adapted: false
   - key: Q11530974|愛を信じるその日まで
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - drama
+    synopsis: 愛を信じる日を描く少女ロマンス。
+    status: completed
+    anime_adapted: false
   - key: Q11530974|晴明様のJK花嫁
+    magazine: null
+    demographic: shoujo
+    genres:
+      - fantasy
+      - romance
+    synopsis: 晴明様のJK花嫁を描く少女ロマンス。
+    status: completed
+    anime_adapted: false
   - key: Q11530974|聖・ドラゴンガール
     magazine: ribon
     demographic: shoujo
@@ -215084,9 +215786,41 @@ series:
     synopsis: 松本夏実による『聖・ドラゴンガール』みらくる編。ドラゴンガールの新たな魔法物語。
     status: completed
   - key: Q11530974|追いついた初恋
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - drama
+    synopsis: 追いついた初恋を描く少女ロマンス。
+    status: completed
+    anime_adapted: false
   - key: Q11530974|魔女のレッスン
+    magazine: null
+    demographic: shoujo
+    genres:
+      - fantasy
+      - comedy
+    synopsis: 魔女のレッスンを題材にした少女ファンタジー。
+    status: completed
+    anime_adapted: false
   - key: Q11530974|黒猫怪奇クラブ
+    magazine: null
+    demographic: shoujo
+    genres:
+      - horror
+      - supernatural
+    synopsis: 黒猫怪奇クラブを題材にしたホラー。
+    status: completed
+    anime_adapted: false
   - key: Q11530981|ストレイキャット
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+      - romance
+    synopsis: ストレイキャットを題材にした少女ドラマ。
+    status: completed
+    anime_adapted: false
   - key: Q11531009|GREEN FINGER
     demographic: shoujo
     genres:
@@ -215095,6 +215829,14 @@ series:
     synopsis: 松本小夢が描く、グリーンフィンガー(植物が育つ手)を持つ少女のラブストーリー。
     status: completed
   - key: Q11531009|ウドの樹木医
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - slice of life
+    synopsis: 樹木医を題材にしたドラマ。
+    status: completed
+    anime_adapted: false
   - key: Q11531009|コマメのお仕事
     magazine: null
     demographic: shoujo
@@ -215112,6 +215854,14 @@ series:
     synopsis: 松本小夢による少女ラブコメディ。コンビニで生まれる恋を描く。
     status: completed
   - key: Q11531009|としえの恋人
+    magazine: null
+    demographic: seinen
+    genres:
+      - romance
+      - drama
+    synopsis: としえの恋人を描く青年向けドラマ。
+    status: completed
+    anime_adapted: false
   - key: Q11531009|ドボジョ!
     demographic: josei
     genres:
@@ -215150,10 +215900,50 @@ series:
     alternative_titles:
       en: Kaiju No. 8
   - key: Q11531207|怪獣8号RELAX
+    magazine: null
+    demographic: shounen
+    genres:
+      - action
+      - comedy
+    synopsis: 松本直也『怪獣8号』のRELAXスピンオフ。
+    status: completed
+    anime_adapted: true
   - key: Q11531207|怪獣8号side B
+    magazine: null
+    demographic: shounen
+    genres:
+      - action
+      - sci-fi
+    synopsis: 松本直也『怪獣8号』のside Bスピンオフ。
+    status: completed
+    anime_adapted: true
   - key: Q11531267|...And I love her
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - drama
+    synopsis: ...And I love herを描く少女ロマンス。
+    status: completed
+    anime_adapted: false
   - key: Q11531267|27歳、ナオの決断
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+      - romance
+    synopsis: 27歳の決断を描く少女ドラマ。
+    status: completed
+    anime_adapted: false
   - key: Q11531267|Birthday
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - drama
+    synopsis: 誕生日を題材にした少女ロマンス。
+    status: completed
+    anime_adapted: false
   - key: Q11531267|RISING SUN
     demographic: shoujo
     genres:
@@ -215173,6 +215963,14 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q11531267|Younx
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+      - romance
+    synopsis: Younxを描く少女向け作品。
+    status: completed
+    anime_adapted: false
   - key: Q11531267|あんたたちの伝説
   - key: Q11531267|サイアイの定義
   - key: Q11531267|シュガー・ダーリン
