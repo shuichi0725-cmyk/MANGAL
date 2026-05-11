@@ -1,5 +1,5 @@
 schema_version: 1
-generated_at: 2026-05-11T16:32:07.336Z
+generated_at: 2026-05-11T16:34:17.756Z
 generator: claude-opus-4-7-direct-fill
 series:
   - key: Q1001784|GOLDEN SPIRAL
@@ -283369,10 +283369,49 @@ series:
     status: completed
     anime_adapted: false
   - key: Q11605805|SDガンダムフォース 外伝
+    magazine: null
+    demographic: shounen
+    genres:
+      - sci_fi
+      - comedy
+    synopsis: SDガンダムフォース外伝。
+    status: completed
+    anime_adapted: false
   - key: Q11605805|カードダス少年団
+    magazine: null
+    demographic: shounen
+    genres:
+      - adventure
+    synopsis: カードダスをテーマにした少年作品。
+    status: completed
+    anime_adapted: false
   - key: Q11605805|ガンダムマガジン名作集
+    magazine: null
+    demographic: shounen
+    genres:
+      - sci_fi
+      - mecha
+    synopsis: ガンダムマガジン名作集。
+    status: completed
+    anime_adapted: false
   - key: Q11605805|一式戦「隼」
+    magazine: null
+    demographic: shounen
+    genres:
+      - historical
+      - action
+    synopsis: 戦闘機を題材にした少年作品。
+    status: completed
+    anime_adapted: false
   - key: Q11605805|仮面ライダーZX
+    magazine: null
+    demographic: shounen
+    genres:
+      - action
+      - tokusatsu
+    synopsis: 仮面ライダーZXコミカライズ。
+    status: completed
+    anime_adapted: true
   - key: Q11605805|天空の要塞
     demographic: shounen
     genres:
@@ -283383,8 +283422,31 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q11605805|太平洋の荒鷲
+    magazine: null
+    demographic: shounen
+    genres:
+      - historical
+      - action
+    synopsis: 戦争を題材にした少年作品。
+    status: completed
+    anime_adapted: false
   - key: Q11605805|少年探偵ジュンの事件簿
+    magazine: null
+    demographic: shounen
+    genres:
+      - mystery
+    synopsis: 少年探偵もの。
+    status: completed
+    anime_adapted: false
   - key: Q11605805|撃墜王
+    magazine: null
+    demographic: shounen
+    genres:
+      - historical
+      - action
+    synopsis: 戦闘機エースを題材にした少年作品。
+    status: completed
+    anime_adapted: false
   - key: Q11605805|新黎明の艦隊
     magazine: null
     demographic: seinen
@@ -283396,9 +283458,38 @@ series:
     status: completed
     anime_adapted: false
   - key: Q11605805|日中激戦!!東シナ海
+    magazine: null
+    demographic: shounen
+    genres:
+      - action
+    synopsis: ミリタリーアクション。
+    status: completed
+    anime_adapted: false
   - key: Q11605805|熱血!!コロコロ伝説
+    magazine: null
+    demographic: shounen
+    genres:
+      - comedy
+    synopsis: コロコロコミック歴史アンソロジー。
+    status: completed
+    anime_adapted: false
   - key: Q11605805|皆川睦雄
+    magazine: null
+    demographic: shounen
+    genres:
+      - sports
+    synopsis: プロ野球選手伝記漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11605805|蒼空の盾
+    magazine: null
+    demographic: shounen
+    genres:
+      - action
+      - historical
+    synopsis: 戦闘機を題材にした少年作品。
+    status: completed
+    anime_adapted: false
   - key: Q11605805|超潜水艦出撃
     demographic: shounen
     genres:
@@ -283409,8 +283500,31 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q11605805|超獣戦隊ライブマン
+    magazine: null
+    demographic: shounen
+    genres:
+      - action
+      - tokusatsu
+    synopsis: ライブマンコミカライズ。
+    status: completed
+    anime_adapted: true
   - key: Q11605805|電子戦隊デンジマン
+    magazine: null
+    demographic: shounen
+    genres:
+      - action
+      - tokusatsu
+    synopsis: デンジマンコミカライズ。
+    status: completed
+    anime_adapted: true
   - key: Q11605805|餓狼伝説
+    magazine: null
+    demographic: shounen
+    genres:
+      - action
+    synopsis: 餓狼伝説コミカライズ。
+    status: completed
+    anime_adapted: false
   - key: Q11605805|餓狼伝説2
     demographic: shounen
     genres:
@@ -283419,35 +283533,253 @@ series:
     synopsis: 細井雄二によるSNK格闘ゲーム『餓狼伝説2』のコミカライズ。テリー・ボガードらの戦いを描く。
     status: completed
   - key: Q11606008|40歳から「キレイ」と「オシャレ」始めました。
+    magazine: null
+    demographic: josei
+    genres:
+      - slice_of_life
+    synopsis: 細川貂々によるエッセイ。
+    status: completed
+    anime_adapted: false
   - key: Q11606008|アタックPTA
+    magazine: null
+    demographic: josei
+    genres:
+      - comedy
+      - drama
+    synopsis: PTAエッセイ。
+    status: completed
+    anime_adapted: false
   - key: Q11606008|イグアナの嫁
+    magazine: null
+    demographic: josei
+    genres:
+      - slice_of_life
+      - comedy
+    synopsis: イグアナをテーマにしたエッセイ。
+    status: completed
+    anime_adapted: false
   - key: Q11606008|イグその愛と死
+    magazine: null
+    demographic: josei
+    genres:
+      - drama
+    synopsis: イグアナエッセイ。
+    status: completed
+    anime_adapted: false
   - key: Q11606008|ウチのコ、ご近所さんに育てられました
+    magazine: null
+    demographic: josei
+    genres:
+      - slice_of_life
+    synopsis: 育児エッセイ。
+    status: completed
+    anime_adapted: false
   - key: Q11606008|お多福来い来い
+    magazine: null
+    demographic: josei
+    genres:
+      - slice_of_life
+    synopsis: 細川貂々エッセイ。
+    status: completed
+    anime_adapted: false
   - key: Q11606008|かわいいダンナとほっこり生活。
+    magazine: null
+    demographic: josei
+    genres:
+      - slice_of_life
+      - comedy
+    synopsis: 夫婦エッセイ。
+    status: completed
+    anime_adapted: false
   - key: Q11606008|きょとんチャン。
+    magazine: null
+    demographic: josei
+    genres:
+      - comedy
+    synopsis: 細川貂々エッセイ。
+    status: completed
+    anime_adapted: false
   - key: Q11606008|きょとんチャン。1歩前へ!
+    magazine: null
+    demographic: josei
+    genres:
+      - comedy
+    synopsis: きょとんチャンシリーズ。
+    status: completed
+    anime_adapted: false
   - key: Q11606008|こうして、大人になっていくんだね
+    magazine: null
+    demographic: josei
+    genres:
+      - slice_of_life
+    synopsis: 細川貂々エッセイ。
+    status: completed
+    anime_adapted: false
   - key: Q11606008|そして<彼>は<彼女>になった
+    magazine: null
+    demographic: josei
+    genres:
+      - drama
+    synopsis: 性別変更を扱ったエッセイ。
+    status: completed
+    anime_adapted: false
   - key: Q11606008|それでいい。
+    magazine: null
+    demographic: josei
+    genres:
+      - slice_of_life
+      - drama
+    synopsis: 細川貂々エッセイ。
+    status: completed
+    anime_adapted: false
   - key: Q11606008|それでも母が大好きです
+    magazine: null
+    demographic: josei
+    genres:
+      - drama
+      - slice_of_life
+    synopsis: 母をテーマにしたエッセイ。
+    status: completed
+    anime_adapted: false
   - key: Q11606008|タカラヅカ
+    magazine: null
+    demographic: josei
+    genres:
+      - slice_of_life
+    synopsis: 宝塚をテーマにしたエッセイ。
+    status: completed
+    anime_adapted: false
   - key: Q11606008|タカラヅカが好きすぎて。
+    magazine: null
+    demographic: josei
+    genres:
+      - slice_of_life
+    synopsis: 宝塚エッセイ。
+    status: completed
+    anime_adapted: false
   - key: Q11606008|ちゃんとキレイにヤセたくて。
+    magazine: null
+    demographic: josei
+    genres:
+      - slice_of_life
+      - comedy
+    synopsis: ダイエットエッセイ。
+    status: completed
+    anime_adapted: false
   - key: Q11606008|ツレと私のコドモ時代くらべ
+    magazine: null
+    demographic: josei
+    genres:
+      - slice_of_life
+    synopsis: ツレうつシリーズ。
+    status: completed
+    anime_adapted: false
   - key: Q11606008|ツレと私のふたりぐらしマニュアル
+    magazine: null
+    demographic: josei
+    genres:
+      - slice_of_life
+    synopsis: ツレうつシリーズ。
+    status: completed
+    anime_adapted: false
   - key: Q11606008|ツレはパパ1年生
+    magazine: null
+    demographic: josei
+    genres:
+      - slice_of_life
+    synopsis: ツレうつシリーズ育児編。
+    status: completed
+    anime_adapted: false
   - key: Q11606008|ツレはパパ2年生
+    magazine: null
+    demographic: josei
+    genres:
+      - slice_of_life
+    synopsis: ツレうつシリーズ育児編。
+    status: completed
+    anime_adapted: false
   - key: Q11606008|ツレはパパ3年生
+    magazine: null
+    demographic: josei
+    genres:
+      - slice_of_life
+    synopsis: ツレうつシリーズ育児編。
+    status: completed
+    anime_adapted: false
   - key: Q11606008|ツレ元気からだにいいゴハン計画
+    magazine: null
+    demographic: josei
+    genres:
+      - food
+      - slice_of_life
+    synopsis: ツレうつシリーズ食事編。
+    status: completed
+    anime_adapted: false
   - key: Q11606008|てんてんツレの「コマった!」育児
+    magazine: null
+    demographic: josei
+    genres:
+      - slice_of_life
+    synopsis: ツレうつシリーズ育児編。
+    status: completed
+    anime_adapted: false
   - key: Q11606008|てんてんの大丈夫、きっとうまくいく。
+    magazine: null
+    demographic: josei
+    genres:
+      - slice_of_life
+    synopsis: 細川貂々エッセイ。
+    status: completed
+    anime_adapted: false
   - key: Q11606008|てんてん手帖
+    magazine: null
+    demographic: josei
+    genres:
+      - slice_of_life
+    synopsis: 細川貂々エッセイ。
+    status: completed
+    anime_adapted: false
   - key: Q11606008|どーすんの?私
+    magazine: null
+    demographic: josei
+    genres:
+      - comedy
+      - slice_of_life
+    synopsis: 細川貂々エッセイ。
+    status: completed
+    anime_adapted: false
   - key: Q11606008|どうして死んじゃうんだろう?
+    magazine: null
+    demographic: josei
+    genres:
+      - drama
+    synopsis: 細川貂々エッセイ。
+    status: completed
+    anime_adapted: false
   - key: Q11606008|なぜか突然、中学受験。
+    magazine: null
+    demographic: josei
+    genres:
+      - slice_of_life
+    synopsis: 中学受験エッセイ。
+    status: completed
+    anime_adapted: false
   - key: Q11606008|ねたみパンダ
+    magazine: null
+    demographic: josei
+    genres:
+      - comedy
+    synopsis: 細川貂々コメディ。
+    status: completed
+    anime_adapted: false
   - key: Q11606008|びっくり妊娠なんとか出産
+    magazine: null
+    demographic: josei
+    genres:
+      - slice_of_life
+    synopsis: 出産エッセイ。
+    status: completed
+    anime_adapted: false
   - key: Q11606008|ぷにぷに
     magazine: null
     demographic: kodomo
@@ -283458,18 +283790,114 @@ series:
     status: completed
     anime_adapted: false
   - key: Q11606008|またまたどーすんの?私
+    magazine: null
+    demographic: josei
+    genres:
+      - comedy
+      - slice_of_life
+    synopsis: 細川貂々エッセイ。
+    status: completed
+    anime_adapted: false
   - key: Q11606008|やっぱり、それでいい。
+    magazine: null
+    demographic: josei
+    genres:
+      - slice_of_life
+    synopsis: それでいい。続編。
+    status: completed
+    anime_adapted: false
   - key: Q11606008|万願寺偉人クリニック
+    magazine: null
+    demographic: josei
+    genres:
+      - comedy
+      - historical
+    synopsis: 歴史偉人コメディ。
+    status: completed
+    anime_adapted: false
   - key: Q11606008|夫婦・パートナー関係もそれでいい。
+    magazine: null
+    demographic: josei
+    genres:
+      - slice_of_life
+    synopsis: 夫婦エッセイ。
+    status: completed
+    anime_adapted: false
   - key: Q11606008|実はボク、コンカツ中です。
+    magazine: null
+    demographic: josei
+    genres:
+      - comedy
+    synopsis: 婚活エッセイ。
+    status: completed
+    anime_adapted: false
   - key: Q11606008|息子とワタシ、ときどきツレ
+    magazine: null
+    demographic: josei
+    genres:
+      - slice_of_life
+    synopsis: 細川貂々家族エッセイ。
+    status: completed
+    anime_adapted: false
   - key: Q11606008|日帰り旅行は電車に乗って
+    magazine: null
+    demographic: josei
+    genres:
+      - slice_of_life
+    synopsis: 旅エッセイ。
+    status: completed
+    anime_adapted: false
   - key: Q11606008|本当はずっとヤセたくて。
+    magazine: null
+    demographic: josei
+    genres:
+      - slice_of_life
+    synopsis: ダイエットエッセイ。
+    status: completed
+    anime_adapted: false
   - key: Q11606008|生きづらいでしたか?
+    magazine: null
+    demographic: josei
+    genres:
+      - drama
+      - slice_of_life
+    synopsis: 細川貂々エッセイ。
+    status: completed
+    anime_adapted: false
   - key: Q11606008|私が結婚できるとは
+    magazine: null
+    demographic: josei
+    genres:
+      - comedy
+      - slice_of_life
+    synopsis: 結婚エッセイ。
+    status: completed
+    anime_adapted: false
   - key: Q11606008|私とツレとこだわりMac
+    magazine: null
+    demographic: josei
+    genres:
+      - slice_of_life
+    synopsis: Macエッセイ。
+    status: completed
+    anime_adapted: false
   - key: Q11606008|親が子どもになるころに
+    magazine: null
+    demographic: josei
+    genres:
+      - drama
+      - slice_of_life
+    synopsis: 介護エッセイ。
+    status: completed
+    anime_adapted: false
   - key: Q11606008|親子テツ
+    magazine: null
+    demographic: josei
+    genres:
+      - slice_of_life
+    synopsis: 鉄道親子エッセイ。
+    status: completed
+    anime_adapted: false
   - key: Q11606019|HiGH & LOW
     demographic: seinen
     genres:
@@ -283480,6 +283908,13 @@ series:
     status: ongoing
     anime_adapted: true
   - key: Q11606019|コミックとり漫
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+    synopsis: 青年向けアンソロジー。
+    status: completed
+    anime_adapted: false
   - key: Q11606019|シュガーレス
     magazine: young-king
     demographic: seinen
@@ -283491,6 +283926,13 @@ series:
     status: completed
     anime_adapted: false
   - key: Q11606019|星のブンガ
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+    synopsis: 青年向け短編。
+    status: completed
+    anime_adapted: false
   - key: Q11606019|逃亡者エリオ
     demographic: shounen
     genres:
@@ -283508,8 +283950,29 @@ series:
     status: completed
     anime_adapted: false
   - key: Q11606185|BLAZE
+    magazine: null
+    demographic: shounen
+    genres:
+      - action
+    synopsis: 少年向けアクション。
+    status: completed
+    anime_adapted: false
   - key: Q11606185|CANAANスフィル
+    magazine: null
+    demographic: seinen
+    genres:
+      - action
+    synopsis: CANAAN関連作品。
+    status: completed
+    anime_adapted: false
   - key: Q11606185|Sandy & Johnny
+    magazine: null
+    demographic: shounen
+    genres:
+      - comedy
+    synopsis: 少年向けコメディ。
+    status: completed
+    anime_adapted: false
   - key: Q11606185|ZZ
     demographic: seinen
     genres:
@@ -283520,9 +283983,40 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q11606185|おきらくTABLE
+    magazine: null
+    demographic: shounen
+    genres:
+      - comedy
+    synopsis: 少年向けコメディ。
+    status: completed
+    anime_adapted: false
   - key: Q11606185|ジェネレイターガウル
+    magazine: null
+    demographic: shounen
+    genres:
+      - sci_fi
+      - action
+    synopsis: ジェネレイターガウルコミカライズ。
+    status: completed
+    anime_adapted: true
   - key: Q11606185|メルティランサー
+    magazine: null
+    demographic: seinen
+    genres:
+      - sci_fi
+      - action
+    synopsis: メルティランサーコミカライズ。
+    status: completed
+    anime_adapted: true
   - key: Q11606185|勇者指令ダグオン
+    magazine: null
+    demographic: shounen
+    genres:
+      - mecha
+      - action
+    synopsis: 勇者指令ダグオンコミカライズ。
+    status: completed
+    anime_adapted: true
   - key: Q11606185|哄う合戦屋
     magazine: null
     demographic: seinen
@@ -283533,9 +284027,39 @@ series:
     status: completed
     anime_adapted: false
   - key: Q11606185|奈良時代のサバイバル
+    magazine: null
+    demographic: kodomo
+    genres:
+      - historical
+      - educational
+    synopsis: 歴史サバイバル学習漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11606185|悪霊岩奇談
+    magazine: null
+    demographic: shounen
+    genres:
+      - horror
+    synopsis: 少年向け怪奇作品。
+    status: completed
+    anime_adapted: false
   - key: Q11606185|新機動戦記ガンダムW
+    magazine: null
+    demographic: shounen
+    genres:
+      - sci_fi
+      - mecha
+    synopsis: ガンダムWコミカライズ。
+    status: completed
+    anime_adapted: true
   - key: Q11606185|暗闇祭奇談
+    magazine: null
+    demographic: shounen
+    genres:
+      - horror
+    synopsis: 少年向け怪奇作品。
+    status: completed
+    anime_adapted: false
   - key: Q11606185|熱風海陸ブシロードSIDE:SUOU
     magazine: null
     demographic: shounen
@@ -283555,6 +284079,13 @@ series:
     status: ongoing
     anime_adapted: true
   - key: Q11606185|細雪百貨店
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+    synopsis: 百貨店をテーマにした少女作品。
+    status: completed
+    anime_adapted: false
   - key: Q11606185|花咲くいろはGreen Girls Graffiti
     magazine: null
     demographic: seinen
@@ -283565,7 +284096,22 @@ series:
     status: completed
     anime_adapted: true
   - key: Q11606185|銀河ロイドコスモX
+    magazine: null
+    demographic: shounen
+    genres:
+      - sci_fi
+    synopsis: 少年向けSF。
+    status: completed
+    anime_adapted: false
   - key: Q11606185|飛鳥時代のサバイバル
+    magazine: null
+    demographic: kodomo
+    genres:
+      - historical
+      - educational
+    synopsis: 歴史サバイバル学習漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11606185|魔法戦士リウイ
     magazine: monthly-dragon-magazine
     demographic: shounen
@@ -283575,7 +284121,23 @@ series:
     synopsis: 水野良のラノベ『魔法戦士リウイ』を、細雪純がコミカライズ。
     status: completed
   - key: Q11606185|魔法戦士リウイパロディ 4コマ劇場
+    magazine: null
+    demographic: shounen
+    genres:
+      - comedy
+      - fantasy
+    synopsis: 魔法戦士リウイ4コマ。
+    status: completed
+    anime_adapted: false
   - key: Q11606185|魔法戦士リウイパロディ祭り
+    magazine: null
+    demographic: shounen
+    genres:
+      - comedy
+      - fantasy
+    synopsis: 魔法戦士リウイ4コマ祭り。
+    status: completed
+    anime_adapted: false
   - key: Q11606229|俺のキスで世界が変わるなら
     magazine: null
     demographic: shoujo
@@ -283586,6 +284148,13 @@ series:
     status: completed
     anime_adapted: false
   - key: Q11606229|最低。
+    magazine: null
+    demographic: josei
+    genres:
+      - drama
+    synopsis: 女性向け短編。
+    status: completed
+    anime_adapted: false
   - key: Q11606235|こえでおしごと!
     magazine: monthly-comic-flapper
     demographic: seinen
@@ -283615,6 +284184,14 @@ series:
     status: completed
     anime_adapted: true
   - key: Q11606235|思春期クレイジーズ
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+      - school
+    synopsis: 思春期をテーマにした少女作品。
+    status: completed
+    anime_adapted: false
   - key: Q11606235|私立はかない学園
     demographic: seinen
     genres:
@@ -283624,13 +284201,70 @@ series:
     synopsis: 紺野あずれによる学園コメディ。儚い少女たちが集う私立はかない学園の物語。
     status: completed
   - key: Q11606236|コンビニ
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+    synopsis: 少女向け短編。
+    status: completed
+    anime_adapted: false
   - key: Q11606236|ラブミースルーザナイト
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+    synopsis: 少女向け恋愛短編。
+    status: completed
+    anime_adapted: false
   - key: Q11606236|勝手にしやがれ
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - drama
+    synopsis: 少女向け短編。
+    status: completed
+    anime_adapted: false
   - key: Q11606236|可愛いひと
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+    synopsis: 少女向け恋愛。
+    status: completed
+    anime_adapted: false
   - key: Q11606236|少女漫画家の恋
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+    synopsis: 少女漫画家の恋愛短編。
+    status: completed
+    anime_adapted: false
   - key: Q11606236|接吻修業
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+    synopsis: 少女向け恋愛。
+    status: completed
+    anime_adapted: false
   - key: Q11606236|紺野けい子初期作品集
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+    synopsis: 紺野けい子初期作品集。
+    status: completed
+    anime_adapted: false
   - key: Q11606240|Cotton
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+    synopsis: 少女向け短編。
+    status: completed
+    anime_adapted: false
   - key: Q11606240|Lily lily rose
     magazine: null
     demographic: shoujo
@@ -283641,8 +284275,29 @@ series:
     status: completed
     anime_adapted: false
   - key: Q11606240|あかりをください
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+    synopsis: 少女向け短編。
+    status: completed
+    anime_adapted: false
   - key: Q11606240|カナシカナシカ
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+    synopsis: 少女向け短編。
+    status: completed
+    anime_adapted: false
   - key: Q11606240|コミックFantasy
+    magazine: null
+    demographic: shoujo
+    genres:
+      - fantasy
+    synopsis: 少女向けファンタジー。
+    status: completed
+    anime_adapted: false
   - key: Q11606240|つづきはまた明日
     demographic: shoujo
     genres:
@@ -283651,10 +284306,47 @@ series:
     synopsis: 紺野キタによる少女ラブストーリー。つづきはまた明日と願う物語。
     status: completed
   - key: Q11606240|ひみつの階段
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+    synopsis: 少女向け短編。
+    status: completed
+    anime_adapted: false
   - key: Q11606240|ひらり、
+    magazine: null
+    demographic: shoujo
+    genres:
+      - yuri
+      - romance
+    synopsis: 百合アンソロジー。
+    status: completed
+    anime_adapted: false
   - key: Q11606240|乙女は祈る
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+    synopsis: 少女向け短編。
+    status: completed
+    anime_adapted: false
   - key: Q11606240|夜の童話
+    magazine: null
+    demographic: shoujo
+    genres:
+      - fantasy
+      - drama
+    synopsis: 少女向けファンタジー。
+    status: completed
+    anime_adapted: false
   - key: Q11606240|女の子の設計図
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+    synopsis: 少女向け短編。
+    status: completed
+    anime_adapted: false
   - key: Q11606240|猫の手はかりない!
     magazine: null
     demographic: seinen
@@ -283665,11 +284357,54 @@ series:
     status: completed
     anime_adapted: false
   - key: Q11606240|田園少年
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+    synopsis: 少女向け短編。
+    status: completed
+    anime_adapted: false
   - key: Q11606240|貴様と俺
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+    synopsis: 少女向け短編。
+    status: completed
+    anime_adapted: false
   - key: Q11606245|1ねん3くみ桃ちゃん先生。
+    magazine: null
+    demographic: kodomo
+    genres:
+      - comedy
+      - school
+    synopsis: 子供向け学園コメディ。
+    status: completed
+    anime_adapted: false
   - key: Q11606245|ぎょ!っとパラダイス
+    magazine: null
+    demographic: kodomo
+    genres:
+      - comedy
+    synopsis: 子供向けコメディ。
+    status: completed
+    anime_adapted: false
   - key: Q11606245|ちまちまぱぺっと
+    magazine: null
+    demographic: kodomo
+    genres:
+      - comedy
+    synopsis: 子供向けコメディ。
+    status: completed
+    anime_adapted: false
   - key: Q11606245|デ・ジ・キャラットぴよぴよぴよこちゃん
+    magazine: null
+    demographic: kodomo
+    genres:
+      - comedy
+    synopsis: デ・ジ・キャラット派生作品。
+    status: completed
+    anime_adapted: true
   - key: Q11606245|ぴよこにおまかせっ!
   - key: Q11606245|図書委員長の品格
   - key: Q11606245|妹のジンテーゼ
