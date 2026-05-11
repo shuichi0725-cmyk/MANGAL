@@ -1,5 +1,5 @@
 schema_version: 1
-generated_at: 2026-05-11T08:49:43.340Z
+generated_at: 2026-05-11T08:51:43.017Z
 generator: claude-opus-4-7-direct-fill
 series:
   - key: Q1001784|GOLDEN SPIRAL
@@ -164834,6 +164834,14 @@ series:
     status: completed
     anime_adapted: false
   - key: Q11462110|夢の人たち
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+      - romance
+    synopsis: 夢の人たちを題材にした少女向けロマンス漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11462110|天のテラス
     demographic: shoujo
     genres:
@@ -164844,17 +164852,110 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q11462110|好きです、この少女まんが。
+    magazine: null
+    demographic: shoujo
+    genres:
+      - anthology
+    synopsis: 少女漫画家たちが愛する少女まんがを語る青年向けエッセイ集。
+    status: completed
+    anime_adapted: false
   - key: Q11462110|小椋冬美 THE BEST
+    magazine: null
+    demographic: shoujo
+    genres:
+      - anthology
+    synopsis: 漫画家・小椋冬美のベスト作品集。
+    status: completed
+    anime_adapted: false
   - key: Q11462110|小椋冬美の総ざらい
+    magazine: null
+    demographic: shoujo
+    genres:
+      - anthology
+    synopsis: 小椋冬美の総ざらい作品集。
+    status: completed
+    anime_adapted: false
   - key: Q11462110|彼女の生活
+    magazine: null
+    demographic: shoujo
+    genres:
+      - slice_of_life
+      - drama
+    synopsis: 彼女の生活を題材にした少女向けほのぼのドラマ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11462110|星草の園
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+      - fantasy
+    synopsis: 星草の園を題材にした少女向けファンタジー漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11462110|眠れぬ森
+    magazine: null
+    demographic: shoujo
+    genres:
+      - fantasy
+      - romance
+    synopsis: 眠れぬ森を題材にした少女向けファンタジー漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11462110|薔薇色のお酒
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - drama
+    synopsis: 薔薇色のお酒を題材にした少女向けロマンス漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11462110|金曜日にはママレード
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - slice_of_life
+    synopsis: 金曜日にはママレードと描く少女向けロマンス漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11462124|パラノ天国
+    magazine: null
+    demographic: seinen
+    genres:
+      - psychological
+      - comedy
+    synopsis: パラノ天国を題材にした青年向け心理コメディ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11462262|fellows
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - slice_of_life
+    synopsis: エンターブレイン刊の青年向け漫画雑誌『Fellows!』掲載作品。
+    status: completed
+    anime_adapted: false
   - key: Q11462262|Fellows!
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - slice_of_life
+    synopsis: エンターブレイン刊の青年向け漫画雑誌『Fellows!』。後に『ハルタ』に改題。
+    status: completed
+    anime_adapted: false
   - key: Q11462262|キラキラしても、しなくても
+    magazine: null
+    demographic: seinen
+    genres:
+      - slice_of_life
+      - drama
+    synopsis: キラキラしてもしなくてもと描く青年向けドラマ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11462262|ゴーゴーダイナマイツ
     demographic: josei
     genres:
@@ -164891,15 +164992,93 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q11462262|魔法少女チキチキ
+    magazine: null
+    demographic: seinen
+    genres:
+      - fantasy
+      - comedy
+    synopsis: 魔法少女チキチキを題材にした青年向けファンタジーコメディ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11462265|〔○生〕ダメ医者とキモい患者読者投稿ベスト
+    magazine: null
+    demographic: josei
+    genres:
+      - comedy
+      - medical
+    synopsis: ダメ医者とキモい患者読者投稿ベスト。主婦向け実話投稿漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11462265|〔○生〕トンデモ冠婚葬祭読者投稿ベスト 結婚式こぼれ話!新郎新婦ドタバタ目撃談416p!!
+    magazine: null
+    demographic: josei
+    genres:
+      - comedy
+      - drama
+    synopsis: トンデモ冠婚葬祭の読者投稿ベスト。主婦向け実話投稿漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11462265|〔○生〕冬の大反省会GP読者投稿ベスト
+    magazine: null
+    demographic: josei
+    genres:
+      - drama
+    synopsis: 冬の大反省会GP読者投稿ベスト。主婦向け実話投稿漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11462265|〔○生〕夏九死に一生読者投稿ベスト
+    magazine: null
+    demographic: josei
+    genres:
+      - drama
+    synopsis: 夏九死に一生読者投稿ベスト。主婦向け実話投稿漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11462265|Spring!!
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - school
+    synopsis: Spring!!を題材にした少女向け青春ロマンス漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11462265|あれるげん。F
+    magazine: null
+    demographic: josei
+    genres:
+      - comedy
+      - slice_of_life
+    synopsis: あれるげん。F編。女性向けアレルギーコミックエッセイ。
+    status: completed
+    anime_adapted: false
   - key: Q11462265|あれるげん。R
+    magazine: null
+    demographic: josei
+    genres:
+      - comedy
+      - slice_of_life
+    synopsis: あれるげん。R編。女性向けアレルギーコミックエッセイ。
+    status: completed
+    anime_adapted: false
   - key: Q11462265|あれるげん。S
+    magazine: null
+    demographic: josei
+    genres:
+      - comedy
+      - slice_of_life
+    synopsis: あれるげん。S編。女性向けアレルギーコミックエッセイ。
+    status: completed
+    anime_adapted: false
   - key: Q11462265|いただき〔□/〕幸せごはん
+    magazine: null
+    demographic: josei
+    genres:
+      - gourmet
+      - slice_of_life
+    synopsis: 幸せごはんを題材にした主婦向けグルメ漫画アンソロジー。
+    status: completed
+    anime_adapted: false
   - key: Q11462265|うちは寿!
     demographic: shoujo
     genres:
@@ -164917,6 +165096,13 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q11462265|スゴ盛!本当にあった〔○生〕ここだけの話極
+    magazine: null
+    demographic: josei
+    genres:
+      - drama
+    synopsis: 実話投稿エピソードを集めた主婦向け実話漫画増刊号。
+    status: completed
+    anime_adapted: false
   - key: Q11462265|ななこまっしぐら!
     magazine: null
     demographic: shoujo
@@ -164927,31 +165113,229 @@ series:
     status: completed
     anime_adapted: false
   - key: Q11462265|ばく盛!本当にあった〔○生〕ここだけの話祭
+    magazine: null
+    demographic: josei
+    genres:
+      - drama
+    synopsis: 実話投稿エピソード特集号。主婦向け実話漫画増刊。
+    status: completed
+    anime_adapted: false
   - key: Q11462265|ぷち本当にあった愉快な話 人外魔境!!心霊怪異SP
+    magazine: null
+    demographic: josei
+    genres:
+      - horror
+      - supernatural
+    synopsis: 人外魔境の心霊怪異エピソードを集めた主婦向け実話ホラー漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11462265|ぷち本当にあった愉快な話 壮絶!!怪異体験EX
+    magazine: null
+    demographic: josei
+    genres:
+      - horror
+      - supernatural
+    synopsis: 壮絶怪異体験EXを集めた主婦向け実話ホラー漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11462265|ぷち本当にあった愉快な話 激コワ!!心霊MAX
+    magazine: null
+    demographic: josei
+    genres:
+      - horror
+      - supernatural
+    synopsis: 激コワ心霊MAXを集めた主婦向け実話ホラー漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11462265|ぷち本当にあった愉快な話トリハダ!!心霊MAX
+    magazine: null
+    demographic: josei
+    genres:
+      - horror
+      - supernatural
+    synopsis: トリハダ心霊エピソードMAX版。主婦向け実話ホラー漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11462265|ぷち本当にあった愉快な話マジ恐!心霊プレミアム
+    magazine: null
+    demographic: josei
+    genres:
+      - horror
+      - supernatural
+    synopsis: マジ恐心霊プレミアムを集めた主婦向け実話ホラー漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11462265|ぷち本当にあった愉快な話怪幽!!心霊体験SP
+    magazine: null
+    demographic: josei
+    genres:
+      - horror
+      - supernatural
+    synopsis: 怪幽な心霊体験を集めた主婦向け実話ホラー漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11462265|ぷち本当にあった愉快な話新版!刑務所の人々SP
+    magazine: null
+    demographic: josei
+    genres:
+      - drama
+      - documentary
+    synopsis: 新版刑務所の人々SPを集めた主婦向け実話漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11462265|ぷち本当にあった愉快な話激コワ!!恐怖体験SP
+    magazine: null
+    demographic: josei
+    genres:
+      - horror
+    synopsis: 激コワ恐怖体験を集めた主婦向け実話ホラー漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11462265|メガ盛!本当にあった(生)すっぽん妊娠出産SP
+    magazine: null
+    demographic: josei
+    genres:
+      - drama
+      - medical
+    synopsis: 妊娠出産特集メガ盛版。主婦向け実話漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11462265|メガ盛!本当にあった〔○生〕)絶叫パニック24時SP
+    magazine: null
+    demographic: josei
+    genres:
+      - drama
+      - thriller
+    synopsis: 絶叫パニック24時を題材にした主婦向け実話漫画メガ盛版。
+    status: completed
+    anime_adapted: false
   - key: Q11462265|メガ盛!本当にあった〔○生〕ブチギレ病院体験SP
+    magazine: null
+    demographic: josei
+    genres:
+      - drama
+      - medical
+    synopsis: ブチギレ病院体験を集めた主婦向け実話漫画メガ盛版。
+    status: completed
+    anime_adapted: false
   - key: Q11462265|メガ盛!本当にあった〔○生〕ブラック会社大告発SP
+    magazine: null
+    demographic: josei
+    genres:
+      - drama
+      - documentary
+    synopsis: ブラック会社大告発を集めた主婦向け実話漫画メガ盛版。
+    status: completed
+    anime_adapted: false
   - key: Q11462265|メガ盛!本当にあった〔○生〕九死に一生体験SP
+    magazine: null
+    demographic: josei
+    genres:
+      - drama
+    synopsis: 九死に一生体験を集めた主婦向け実話漫画メガ盛版。
+    status: completed
+    anime_adapted: false
   - key: Q11462265|メガ盛!本当にあった〔○生〕人生max痛かったSP
+    magazine: null
+    demographic: josei
+    genres:
+      - drama
+      - comedy
+    synopsis: 人生max痛かった体験を集めた主婦向け実話漫画メガ盛版。
+    status: completed
+    anime_adapted: false
   - key: Q11462265|ヤバ盛!本当にあった(生)ここだけの話極
+    magazine: null
+    demographic: josei
+    genres:
+      - drama
+    synopsis: ヤバ盛の実話エピソード集。主婦向け実話漫画増刊号。
+    status: completed
+    anime_adapted: false
   - key: Q11462265|ヤバ盛!本当にあった〔○生〕ここだけの話極
+    magazine: null
+    demographic: josei
+    genres:
+      - drama
+    synopsis: 実話投稿エピソード集ヤバ盛版。主婦向け実話漫画増刊号。
+    status: completed
+    anime_adapted: false
   - key: Q11462265|女子刑務所に2度入りました
+    magazine: null
+    demographic: josei
+    genres:
+      - drama
+      - documentary
+    synopsis: 女子刑務所に2度入った体験を描く女性向け実録コミックエッセイ。
+    status: completed
+    anime_adapted: false
   - key: Q11462265|女子刑務所はこわいよ
+    magazine: null
+    demographic: josei
+    genres:
+      - drama
+      - documentary
+    synopsis: 女子刑務所はこわいよと描く女性向け実録コミックエッセイ。
+    status: completed
+    anime_adapted: false
   - key: Q11462265|本当にあった〔○生〕ここだけの話〔○超 〕
+    magazine: null
+    demographic: josei
+    genres:
+      - drama
+    synopsis: 読者投稿による実話エピソード集。主婦向け実話漫画増刊号。
+    status: completed
+    anime_adapted: false
   - key: Q11462265|激盛!本当にあった〔○生〕ウザい患者とダメな病院SP
+    magazine: null
+    demographic: josei
+    genres:
+      - drama
+      - medical
+    synopsis: ウザい患者とダメな病院特集激盛版。主婦向け実話漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11462265|激盛!本当にあった〔○生〕ここだけの話〔○超 〕
+    magazine: null
+    demographic: josei
+    genres:
+      - drama
+    synopsis: 実話投稿エピソード集激盛超版。主婦向け実話漫画増刊号。
+    status: completed
+    anime_adapted: false
   - key: Q11462265|超盛!本当にあった〔○生〕
+    magazine: null
+    demographic: josei
+    genres:
+      - drama
+    synopsis: 超盛実話投稿エピソード集。主婦向け実話漫画増刊号。
+    status: completed
+    anime_adapted: false
   - key: Q11462265|超盛!本当にあった〔○生〕ここだけの話〔○超 〕
+    magazine: null
+    demographic: josei
+    genres:
+      - drama
+    synopsis: 実話投稿エピソード集超盛超版。主婦向け実話漫画増刊号。
+    status: completed
+    anime_adapted: false
   - key: Q11462265|超盛!本当にあった〔○生〕ここだけの話超
+    magazine: null
+    demographic: josei
+    genres:
+      - drama
+    synopsis: 実話投稿エピソード集超盛超版。主婦向け実話漫画増刊号。
+    status: completed
+    anime_adapted: false
   - key: Q11462265|超盛!本当にあった〔○生〕片付けできない女SP
+    magazine: null
+    demographic: josei
+    genres:
+      - comedy
+      - drama
+    synopsis: 片付けできない女特集超盛版。主婦向け実話漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11462265|路傍のミオ
     magazine: null
     demographic: seinen
@@ -164962,6 +165346,14 @@ series:
     status: completed
     anime_adapted: false
   - key: Q11462265|迷走乙女日記
+    magazine: null
+    demographic: josei
+    genres:
+      - comedy
+      - slice_of_life
+    synopsis: 迷走乙女日記を題材にした女性向けコミックエッセイ。
+    status: completed
+    anime_adapted: false
   - key: Q11462329|Tales of Eternia
     magazine: monthly-comic-blade
     demographic: shounen
@@ -164980,54 +165372,426 @@ series:
     status: ongoing
     anime_adapted: true
   - key: Q11462344|「神様」のいる家で育ちました
+    magazine: null
+    demographic: josei
+    genres:
+      - drama
+      - religious
+    synopsis: 神様のいる家で育った体験を描く女性向け宗教二世コミックエッセイ。
+    status: completed
+    anime_adapted: false
   - key: Q11462344|〔○生〕うっかり大失言読者投稿ベスト
+    magazine: null
+    demographic: josei
+    genres:
+      - comedy
+    synopsis: うっかり大失言の読者投稿ベスト。主婦向け実話投稿漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11462344|〔○生〕お仕事ウラ話読者投稿ベスト 元スタッフが激白!衝撃ヤバヤバ業界(秘)スクープ416p!!
+    magazine: null
+    demographic: josei
+    genres:
+      - comedy
+      - drama
+    synopsis: 業界の裏話を題材にした主婦向け実話投稿漫画特集。
+    status: completed
+    anime_adapted: false
   - key: Q11462344|〔○生〕トンデモ冠婚葬祭読者投稿ベスト 結婚式こぼれ話!新郎新婦ドタバタ目撃談416p!!
+    magazine: null
+    demographic: josei
+    genres:
+      - comedy
+      - drama
+    synopsis: トンデモ冠婚葬祭の読者投稿ベスト。主婦向け実話投稿漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11462344|〔○生〕パニック24時読者投稿ベスト 頭真っ白パニくり体験!ガクブル鳥肌スクープ416p!!
+    magazine: null
+    demographic: josei
+    genres:
+      - drama
+      - thriller
+    synopsis: パニック24時読者投稿ベスト。主婦向け実話投稿漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11462344|〔○生〕冬の死ぬかと思った読者投稿ベスト
+    magazine: null
+    demographic: josei
+    genres:
+      - drama
+    synopsis: 冬の死ぬかと思ったエピソードを集めた主婦向け実話漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11462344|〔○生〕夏九死に一生読者投稿ベスト
+    magazine: null
+    demographic: josei
+    genres:
+      - drama
+    synopsis: 夏九死に一生読者投稿ベスト。主婦向け実話投稿漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11462344|アブナイところに行ってきました
+    magazine: null
+    demographic: josei
+    genres:
+      - documentary
+      - travel
+    synopsis: アブナイところに行ってきた体験を描く女性向けルポコミックエッセイ。
+    status: completed
+    anime_adapted: false
   - key: Q11462344|あやしい人に遭ってきました。
+    magazine: null
+    demographic: josei
+    genres:
+      - documentary
+      - comedy
+    synopsis: あやしい人に遭ってきた体験を描く女性向けルポコミックエッセイ。
+    status: completed
+    anime_adapted: false
   - key: Q11462344|あやしい取材に逝ってきました。
+    magazine: null
+    demographic: josei
+    genres:
+      - documentary
+      - comedy
+    synopsis: あやしい取材に逝ってきた体験を描く女性向けルポコミックエッセイ。
+    status: completed
+    anime_adapted: false
   - key: Q11462344|あやしい男と失恋ってきました。
+    magazine: null
+    demographic: josei
+    genres:
+      - comedy
+      - romance
+    synopsis: あやしい男と失恋ってきた体験を描く女性向け恋愛コミックエッセイ。
+    status: completed
+    anime_adapted: false
   - key: Q11462344|うちは「問題」のある家族でした
+    magazine: null
+    demographic: josei
+    genres:
+      - drama
+      - slice_of_life
+    synopsis: うちは問題のある家族でしたと描く女性向け家族コミックエッセイ。
+    status: completed
+    anime_adapted: false
   - key: Q11462344|キツい取材に逝ってきました。
+    magazine: null
+    demographic: josei
+    genres:
+      - documentary
+      - comedy
+    synopsis: キツい取材に逝ってきた体験を描く女性向けルポコミックエッセイ。
+    status: completed
+    anime_adapted: false
   - key: Q11462344|コミコミ5万でどれだけ海外旅行を楽しめるのか!?
+    magazine: null
+    demographic: josei
+    genres:
+      - travel
+      - comedy
+    synopsis: 5万円でどれだけ海外旅行を楽しめるかを試す女性向け旅エッセイ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11462344|スゴ盛!本当にあった(生)ここだけの話極
+    magazine: null
+    demographic: josei
+    genres:
+      - drama
+    synopsis: 読者投稿による実話エピソードを集めた主婦向け実話漫画特別号。
+    status: completed
+    anime_adapted: false
   - key: Q11462344|スゴ盛!本当にあった〔○生〕ここだけの話極
+    magazine: null
+    demographic: josei
+    genres:
+      - drama
+    synopsis: 実話投稿エピソードを集めた主婦向け実話漫画増刊号。
+    status: completed
+    anime_adapted: false
   - key: Q11462344|だから死ぬ気で旅に出た
+    magazine: null
+    demographic: josei
+    genres:
+      - travel
+      - drama
+    synopsis: だから死ぬ気で旅に出たと描く女性向け旅エッセイ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11462344|ばく盛!本当にあった〔○生〕ここだけの話祭
+    magazine: null
+    demographic: josei
+    genres:
+      - drama
+    synopsis: 実話投稿エピソード特集号。主婦向け実話漫画増刊。
+    status: completed
+    anime_adapted: false
   - key: Q11462344|ぷち本当にあった愉快な話トリハダ!!心霊MAX
+    magazine: null
+    demographic: josei
+    genres:
+      - horror
+      - supernatural
+    synopsis: トリハダ心霊エピソードMAX版。主婦向け実話ホラー漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11462344|ぷち本当にあった愉快な話最恐!!心霊体験SP
+    magazine: null
+    demographic: josei
+    genres:
+      - horror
+      - supernatural
+    synopsis: 最恐の心霊体験を集めた主婦向け実話ホラー漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11462344|ぷち本当にあった愉快な話危ない場所に逝ッテQ
+    magazine: null
+    demographic: josei
+    genres:
+      - horror
+      - supernatural
+    synopsis: 危ない場所に潜入する主婦向け実話投稿ホラー漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11462344|ぷち本当にあった愉快な話悶絶!!死ぬかと思ったSP
+    magazine: null
+    demographic: josei
+    genres:
+      - drama
+      - comedy
+    synopsis: 悶絶死ぬかと思った体験を集めた主婦向け実話漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11462344|ぷち本当にあった愉快な話激コワ!!恐怖体験SP
+    magazine: null
+    demographic: josei
+    genres:
+      - horror
+    synopsis: 激コワ恐怖体験を集めた主婦向け実話ホラー漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11462344|ぷち本当にあった愉快な話激ヤバ!!死ぬかと思ったSP
+    magazine: null
+    demographic: josei
+    genres:
+      - drama
+      - comedy
+    synopsis: 激ヤバ死ぬかと思ったSPを集めた主婦向け実話漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11462344|ぷち本当にあった愉快な話病院で殺されかけましたレポ
+    magazine: null
+    demographic: josei
+    genres:
+      - drama
+      - medical
+    synopsis: 病院で殺されかけたレポを集めた主婦向け実話漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11462344|マンガでわかる身近な法律相談SOS!
+    magazine: null
+    demographic: josei
+    genres:
+      - educational
+    synopsis: 身近な法律相談をマンガで学ぶ女性向け実用書。
+    status: completed
+    anime_adapted: false
   - key: Q11462344|みんなの〔○秘〕エッチスペシャル!!本当にあった赤っ恥読者体験談!!
+    magazine: null
+    demographic: josei
+    genres:
+      - comedy
+      - ecchi
+    synopsis: 赤っ恥読者体験談を集めた主婦向け実話漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11462344|メガ盛!!本当にあった愉快な話ブラック病院SP
+    magazine: null
+    demographic: josei
+    genres:
+      - drama
+      - comedy
+    synopsis: ブラック病院特集メガ盛版。主婦向け実話漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11462344|メガ盛!!本当にあった愉快な話最凶!!事件現場SP
+    magazine: null
+    demographic: josei
+    genres:
+      - drama
+      - thriller
+    synopsis: 最凶事件現場メガ盛版。主婦向け実話漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11462344|メガ盛!本当にあった〔○生〕)絶叫パニック24時SP
+    magazine: null
+    demographic: josei
+    genres:
+      - drama
+      - thriller
+    synopsis: 絶叫パニック24時を題材にした主婦向け実話漫画メガ盛版。
+    status: completed
+    anime_adapted: false
   - key: Q11462344|メガ盛!本当にあった〔○生〕ブラック会社大告発SP
+    magazine: null
+    demographic: josei
+    genres:
+      - drama
+      - documentary
+    synopsis: ブラック会社大告発を集めた主婦向け実話漫画メガ盛版。
+    status: completed
+    anime_adapted: false
   - key: Q11462344|メガ盛!本当にあった〔○生〕ムカつく先生と最悪な学校SP
+    magazine: null
+    demographic: josei
+    genres:
+      - drama
+    synopsis: ムカつく先生と最悪な学校特集メガ盛版。主婦向け実話漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11462344|めちゃ盛!本当にあった〔○生〕ここだけの話祭
+    magazine: null
+    demographic: josei
+    genres:
+      - drama
+    synopsis: 読者投稿による実話エピソード集めちゃ盛版。主婦向け実話漫画増刊号。
+    status: completed
+    anime_adapted: false
   - key: Q11462344|ヤバ盛!本当にあった(生)ここだけの話極
+    magazine: null
+    demographic: josei
+    genres:
+      - drama
+    synopsis: ヤバ盛の実話エピソード集。主婦向け実話漫画増刊号。
+    status: completed
+    anime_adapted: false
   - key: Q11462344|ヤバ盛!本当にあった〔○生〕ここだけの話極
+    magazine: null
+    demographic: josei
+    genres:
+      - drama
+    synopsis: 実話投稿エピソード集ヤバ盛版。主婦向け実話漫画増刊号。
+    status: completed
+    anime_adapted: false
   - key: Q11462344|依存症ってなんですか?
+    magazine: null
+    demographic: josei
+    genres:
+      - medical
+      - documentary
+    synopsis: 依存症ってなんですかと問う女性向け医療コミックエッセイ。
+    status: completed
+    anime_adapted: false
   - key: Q11462344|全部ホンネの笑える話
+    magazine: null
+    demographic: josei
+    genres:
+      - comedy
+    synopsis: 全部ホンネの笑える話を集めた主婦向け実話投稿漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11462344|全部ホンネの笑える話本当にあった赤っ恥体験
+    magazine: null
+    demographic: josei
+    genres:
+      - comedy
+    synopsis: 赤っ恥体験を集めた主婦向け実話漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11462344|全部ホンネの笑える話私の痛タタ恥ずかし病院体験
+    magazine: null
+    demographic: josei
+    genres:
+      - comedy
+      - medical
+    synopsis: 病院での痛タタ恥ずかし体験を集めた主婦向け実話漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11462344|全部ホンネの笑える話笑っちゃうH体験談
+    magazine: null
+    demographic: josei
+    genres:
+      - comedy
+      - ecchi
+    synopsis: 笑っちゃうH体験談を集めた主婦向け実話漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11462344|壊れる前に旅に出た
+    magazine: null
+    demographic: josei
+    genres:
+      - travel
+      - drama
+    synopsis: 壊れる前に旅に出たと描く女性向け旅エッセイ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11462344|本当にあった!!プチ恐怖体験談
+    magazine: null
+    demographic: josei
+    genres:
+      - horror
+    synopsis: 本当にあったプチ恐怖体験談を集めた主婦向け実話ホラー漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11462344|本当にあった〔○生〕ここだけの話超
+    magazine: null
+    demographic: josei
+    genres:
+      - drama
+    synopsis: 読者投稿による実話エピソードを集めた主婦向け実話漫画増刊号超版。
+    status: completed
+    anime_adapted: false
   - key: Q11462344|東京23区女ひとり風呂
+    magazine: null
+    demographic: josei
+    genres:
+      - slice_of_life
+      - travel
+    synopsis: 東京23区を女ひとりで巡る風呂エッセイ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11462344|毒親サバイバル
+    magazine: null
+    demographic: josei
+    genres:
+      - drama
+      - documentary
+    synopsis: 毒親サバイバルを題材にした女性向け実録コミックエッセイ。
+    status: completed
+    anime_adapted: false
   - key: Q11462344|激盛!本当にあった〔○生〕
+    magazine: null
+    demographic: josei
+    genres:
+      - drama
+    synopsis: 激盛実話投稿エピソード集。主婦向け実話漫画増刊号。
+    status: completed
+    anime_adapted: false
   - key: Q11462344|激盛!本当にあった〔○生〕ここだけの話〔○超〕
+    magazine: null
+    demographic: josei
+    genres:
+      - drama
+    synopsis: 実話投稿エピソード集激盛超版。主婦向け実話漫画増刊号。
+    status: completed
+    anime_adapted: false
   - key: Q11462344|激盛!本当にあった〔○生〕ここだけの話超
+    magazine: null
+    demographic: josei
+    genres:
+      - drama
+    synopsis: 実話投稿エピソード集激盛超版。主婦向け実話漫画増刊号。
+    status: completed
+    anime_adapted: false
   - key: Q11462344|激盛!本当にあった〔○生〕サイテー葬式&結婚式SP
+    magazine: null
+    demographic: josei
+    genres:
+      - drama
+    synopsis: サイテー葬式&結婚式特集激盛版。主婦向け実話漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11462344|激盛!本当にあった〔○生〕マジギレ悪徳業者SP
   - key: Q11462344|激盛!本当にあった〔○生〕真夏のカミングアウトSP
   - key: Q11462344|激盛!本当にあった〔○生〕私の夏大反省会SP
