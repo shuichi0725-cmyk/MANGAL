@@ -1,5 +1,5 @@
 schema_version: 1
-generated_at: 2026-05-11T13:59:14.224Z
+generated_at: 2026-05-11T14:01:07.432Z
 generator: claude-opus-4-7-direct-fill
 series:
   - key: Q1001784|GOLDEN SPIRAL
@@ -229857,7 +229857,23 @@ series:
     status: completed
     anime_adapted: false
   - key: Q11542017|てっぺん!
+    magazine: null
+    demographic: shounen
+    genres:
+      - sports
+      - drama
+    synopsis: てっぺんを題材にしたスポーツドラマ。
+    status: completed
+    anime_adapted: false
   - key: Q11542017|メガネアパート
+    magazine: null
+    demographic: shounen
+    genres:
+      - comedy
+      - slice of life
+    synopsis: メガネアパートを舞台にしたコメディ。
+    status: completed
+    anime_adapted: false
   - key: Q11542017|楽園ルウト
     demographic: shoujo
     genres:
@@ -229866,6 +229882,14 @@ series:
     synopsis: 槻宮杏が描く、楽園を目指す少女ルウトのファンタジー。
     status: completed
   - key: Q11542157|イエス・キリスト
+    magazine: null
+    demographic: other
+    genres:
+      - religion
+      - biography
+    synopsis: イエス・キリストの伝記漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11542157|グリム童話
     demographic: kodomo
     genres:
@@ -229876,6 +229900,14 @@ series:
     status: completed
     anime_adapted: false
   - key: Q11542157|デビルっ子ルル
+    magazine: null
+    demographic: shoujo
+    genres:
+      - fantasy
+      - comedy
+    synopsis: デビルっ子ルルを主人公にした少女向け作品。
+    status: completed
+    anime_adapted: false
   - key: Q11542157|まんがグリム童話
     demographic: kodomo
     genres:
@@ -229884,10 +229916,50 @@ series:
     synopsis: 樋口雅一によるグリム童話のコミカライズ。本来のダークなグリム童話を漫画で再現。
     status: completed
   - key: Q11542157|マンガメディチ家物語
+    magazine: null
+    demographic: shoujo
+    genres:
+      - historical
+      - drama
+    synopsis: メディチ家を題材にした歴史漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11542157|まんが聖書物語
+    magazine: null
+    demographic: other
+    genres:
+      - religion
+      - historical
+    synopsis: 聖書を題材にした宗教漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11542157|マンガ聖書物語
+    magazine: null
+    demographic: other
+    genres:
+      - religion
+      - historical
+    synopsis: 聖書を題材にした宗教漫画別表記。
+    status: completed
+    anime_adapted: false
   - key: Q11542157|天翔ける瞬間
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+      - romance
+    synopsis: 天翔ける瞬間を描く少女ドラマ。
+    status: completed
+    anime_adapted: false
   - key: Q11542157|高度救命救急センター
+    magazine: null
+    demographic: seinen
+    genres:
+      - medical
+      - drama
+    synopsis: 救命救急センターを舞台にしたドラマ。
+    status: completed
+    anime_adapted: false
   - key: Q11542187|京四郎
     magazine: weekly-shonen-magazine
     demographic: shounen
@@ -229899,17 +229971,113 @@ series:
     status: completed
     anime_adapted: false
   - key: Q11542187|京四郎 少年ヤクザ編
+    magazine: null
+    demographic: shounen
+    genres:
+      - action
+      - drama
+    synopsis: 京四郎少年ヤクザを描くアクション。
+    status: completed
+    anime_adapted: false
   - key: Q11542187|戦士は眠らない!?
+    magazine: null
+    demographic: shounen
+    genres:
+      - action
+      - drama
+    synopsis: 戦士は眠らないを題材にしたアクション。
+    status: completed
+    anime_adapted: false
   - key: Q11542468|おしのび倶楽部
+    magazine: null
+    demographic: shoujo
+    genres:
+      - comedy
+      - school
+    synopsis: おしのび倶楽部を題材にした少女コメディ。
+    status: completed
+    anime_adapted: false
   - key: Q11542468|ご町内回覧板
+    magazine: null
+    demographic: shoujo
+    genres:
+      - comedy
+      - slice of life
+    synopsis: ご町内回覧板を題材にしたコメディ。
+    status: completed
+    anime_adapted: false
   - key: Q11542468|スクランブル効果
+    magazine: null
+    demographic: shoujo
+    genres:
+      - comedy
+      - school
+    synopsis: スクランブル効果を題材にした少女向け作品。
+    status: completed
+    anime_adapted: false
   - key: Q11542468|でじたる小学校日記
+    magazine: null
+    demographic: shoujo
+    genres:
+      - comedy
+      - school
+    synopsis: でじたる小学校日記を題材にしたコメディ。
+    status: completed
+    anime_adapted: false
   - key: Q11542468|マンスリー・プラネット
+    magazine: null
+    demographic: shoujo
+    genres:
+      - sci-fi
+      - comedy
+    synopsis: マンスリープラネットを題材にした少女向け作品。
+    status: completed
+    anime_adapted: false
   - key: Q11542468|ルンナ姫放浪記
+    magazine: null
+    demographic: shoujo
+    genres:
+      - fantasy
+      - adventure
+    synopsis: ルンナ姫の放浪記を描く少女ファンタジー。
+    status: completed
+    anime_adapted: false
   - key: Q11542468|京美ちゃんの家出
+    magazine: null
+    demographic: shoujo
+    genres:
+      - comedy
+      - slice of life
+    synopsis: 京美ちゃんの家出を題材にした少女コメディ。
+    status: completed
+    anime_adapted: false
   - key: Q11542468|宇宙大雑貨
+    magazine: null
+    demographic: shoujo
+    genres:
+      - sci-fi
+      - comedy
+    synopsis: 宇宙大雑貨を題材にした少女SFコメディ。
+    status: completed
+    anime_adapted: false
   - key: Q11542475|「70年代エロ劇画伝説」大盛りザ・ベスト集
+    magazine: null
+    demographic: seinen
+    genres:
+      - ecchi
+      - drama
+    synopsis: 70年代エロ劇画のベスト集。
+    status: completed
+    anime_adapted: false
   - key: Q11542475|「ああ硫黄島」「人間魚雷回天」
+    magazine: null
+    demographic: seinen
+    genres:
+      - historical
+      - drama
+    synopsis: 戦争を題材にしたコミック。
+    status: completed
+    anime_adapted: false
   - key: Q11542475|ザ・騙し人
     demographic: seinen
     genres:
@@ -229918,6 +230086,14 @@ series:
     synopsis: 横山まさみちによる青年向け詐欺師漫画。ザ・騙し人を描く物語。
     status: completed
   - key: Q11542475|スーパージャイアンツ
+    magazine: null
+    demographic: shounen
+    genres:
+      - sci-fi
+      - tokusatsu
+    synopsis: スーパージャイアンツのコミカライズ。
+    status: completed
+    anime_adapted: false
   - key: Q11542475|びんびん物語
     demographic: seinen
     genres:
@@ -229928,6 +230104,14 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q11542475|マイティジャック
+    magazine: null
+    demographic: shounen
+    genres:
+      - sci-fi
+      - tokusatsu
+    synopsis: 円谷プロ『マイティジャック』のコミカライズ。
+    status: completed
+    anime_adapted: true
   - key: Q11542475|マンガ武田信玄
     demographic: seinen
     genres:
@@ -229936,9 +230120,41 @@ series:
     synopsis: 横山まさみちによる戦国大名・武田信玄の歴史漫画。
     status: completed
   - key: Q11542475|やる気まんまんザ・グレイトセレクション
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+      - ecchi
+    synopsis: 村生ミオ『やる気まんまん』のグレイトセレクション。
+    status: completed
+    anime_adapted: true
   - key: Q11542475|やる気まんまんザ・マキシマムセレクション
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+      - ecchi
+    synopsis: 『やる気まんまん』のマキシマムセレクション。
+    status: completed
+    anime_adapted: true
   - key: Q11542475|最澄の願い
+    magazine: null
+    demographic: other
+    genres:
+      - religion
+      - historical
+    synopsis: 最澄を題材にした宗教漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11542475|坂本竜馬
+    magazine: null
+    demographic: seinen
+    genres:
+      - historical
+      - drama
+    synopsis: 坂本龍馬を主人公にした歴史漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11542475|坂本龍馬
     demographic: seinen
     genres:
@@ -229950,7 +230166,23 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q11542475|大奥
+    magazine: null
+    demographic: seinen
+    genres:
+      - historical
+      - drama
+    synopsis: 大奥を題材にした歴史漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11542475|天下御免その首頂戴
+    magazine: null
+    demographic: seinen
+    genres:
+      - historical
+      - action
+    synopsis: 天下御免を題材にした時代劇。
+    status: completed
+    anime_adapted: false
   - key: Q11542475|太平記
     demographic: seinen
     genres:
@@ -229959,9 +230191,41 @@ series:
     synopsis: 横山まさみちが描く、南北朝時代の歴史書『太平記』漫画化。
     status: completed
   - key: Q11542475|太平記新田義貞
+    magazine: null
+    demographic: seinen
+    genres:
+      - historical
+      - drama
+    synopsis: 太平記の新田義貞を主人公にした歴史漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11542475|太平記楠木正成
+    magazine: null
+    demographic: seinen
+    genres:
+      - historical
+      - drama
+    synopsis: 太平記の楠木正成を主人公にした歴史漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11542475|太平記足利尊氏
+    magazine: null
+    demographic: seinen
+    genres:
+      - historical
+      - drama
+    synopsis: 太平記の足利尊氏を主人公にした歴史漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11542475|奥州戦国時代藤原三代の栄華
+    magazine: null
+    demographic: seinen
+    genres:
+      - historical
+      - drama
+    synopsis: 奥州藤原三代を題材にした歴史漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11542475|奥州藤原四代
     demographic: seinen
     genres:
@@ -229982,12 +230246,68 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q11542475|戦争とコミック
+    magazine: null
+    demographic: seinen
+    genres:
+      - historical
+      - drama
+    synopsis: 戦争を題材にしたコミックアンソロジー。
+    status: completed
+    anime_adapted: false
   - key: Q11542475|戦国風林火山
+    magazine: null
+    demographic: seinen
+    genres:
+      - historical
+      - drama
+    synopsis: 戦国時代を舞台にした風林火山。
+    status: completed
+    anime_adapted: false
   - key: Q11542475|戦場
+    magazine: null
+    demographic: seinen
+    genres:
+      - historical
+      - drama
+    synopsis: 戦場を題材にしたドラマ。
+    status: completed
+    anime_adapted: false
   - key: Q11542475|拳豪伝
+    magazine: null
+    demographic: seinen
+    genres:
+      - action
+      - drama
+    synopsis: 拳豪伝を題材にしたアクション。
+    status: completed
+    anime_adapted: false
   - key: Q11542475|明日へ奔れ
+    magazine: null
+    demographic: shounen
+    genres:
+      - sports
+      - drama
+    synopsis: 明日へ奔れを題材にしたスポーツドラマ。
+    status: completed
+    anime_adapted: false
   - key: Q11542475|明日へ奔れ 栄光への道の巻
+    magazine: null
+    demographic: shounen
+    genres:
+      - sports
+      - drama
+    synopsis: 『明日へ奔れ』栄光への道編。
+    status: completed
+    anime_adapted: false
   - key: Q11542475|春日局
+    magazine: null
+    demographic: seinen
+    genres:
+      - historical
+      - drama
+    synopsis: 春日局を主人公にした歴史漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11542475|漫画西郷隆盛
     demographic: seinen
     genres:
@@ -229996,6 +230316,14 @@ series:
     synopsis: 横山まさみちによる西郷隆盛伝。維新の英雄・西郷隆盛の生涯を描く歴史漫画。
     status: completed
   - key: Q11542475|真田幸村
+    magazine: null
+    demographic: seinen
+    genres:
+      - historical
+      - drama
+    synopsis: 真田幸村を主人公にした歴史漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11542475|西郷隆盛
     demographic: seinen
     genres:
@@ -230004,11 +230332,59 @@ series:
     synopsis: 横山まさみちが描く、明治維新の英雄・西郷隆盛の生涯を骨太に描く歴史漫画。
     status: completed
   - key: Q11542475|風林火山
+    magazine: null
+    demographic: seinen
+    genres:
+      - historical
+      - drama
+    synopsis: 井上靖『風林火山』のコミカライズ。
+    status: completed
+    anime_adapted: false
   - key: Q11542475|風林火山 武田信玄
+    magazine: null
+    demographic: seinen
+    genres:
+      - historical
+      - drama
+    synopsis: 武田信玄を主人公にした風林火山。
+    status: completed
+    anime_adapted: false
   - key: Q11542475|龍馬
+    magazine: null
+    demographic: seinen
+    genres:
+      - historical
+      - drama
+    synopsis: 坂本龍馬を主人公にした歴史漫画。
+    status: completed
+    anime_adapted: false
   - key: Q11542496|【悲報】魔法少女のその後の日常。
+    magazine: null
+    demographic: shounen
+    genres:
+      - comedy
+      - fantasy
+    synopsis: 魔法少女のその後を描くコメディ。
+    status: completed
+    anime_adapted: false
   - key: Q11542496|きょうの横山家
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+      - slice of life
+    synopsis: 横山家を題材にしたエッセイコミック。
+    status: completed
+    anime_adapted: false
   - key: Q11542496|どちらかの家庭が崩壊する漫画
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+      - drama
+    synopsis: 家庭崩壊を題材にしたコメディ。
+    status: completed
+    anime_adapted: false
   - key: Q11542496|北のダンナと西のヨメ
     magazine: null
     demographic: josei
@@ -230019,6 +230395,14 @@ series:
     status: completed
     anime_adapted: false
   - key: Q11542496|息子の俺への態度が基本的にヒドイので漫画にしてみました。
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+      - slice of life
+    synopsis: 息子の態度を題材にしたエッセイコミック。
+    status: completed
+    anime_adapted: false
   - key: Q11542496|戦国コミケ
     demographic: seinen
     genres:
@@ -230027,12 +230411,68 @@ series:
     synopsis: 横山了一による戦国コメディ。戦国時代にコミケが開催される異色の歴史ギャグ。
     status: completed
   - key: Q11542496|新しいパパがどう見ても凶悪すぎる
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+      - drama
+    synopsis: 新しいパパを題材にしたコメディ。
+    status: completed
+    anime_adapted: false
   - key: Q11542496|極☆漫
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+      - slice of life
+    synopsis: 極漫を題材にしたコメディ。
+    status: completed
+    anime_adapted: false
   - key: Q11542496|横山さんちの理不尽むすこ
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+      - slice of life
+    synopsis: 横山さんちの理不尽むすこを描くコメディ。
+    status: completed
+    anime_adapted: false
   - key: Q11542496|漫画専門学校生の青春
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+      - school
+    synopsis: 漫画専門学校生の青春を描くコメディ。
+    status: completed
+    anime_adapted: false
   - key: Q11542496|熱血番長鬼瓦椿
+    magazine: null
+    demographic: shounen
+    genres:
+      - comedy
+      - school
+    synopsis: 熱血番長鬼瓦椿を主人公にしたコメディ。
+    status: completed
+    anime_adapted: false
   - key: Q11542496|破天荒息子としたたか娘の取扱説明書
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+      - slice of life
+    synopsis: 破天荒息子としたたか娘を描くコメディ。
+    status: completed
+    anime_adapted: false
   - key: Q11542496|結婚までの歩みをリレー漫画にしてみました。
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+      - romance
+    synopsis: 結婚までの歩みを描くエッセイコミック。
+    status: completed
+    anime_adapted: false
   - key: Q11542496|飯田橋のふたばちゃん
     magazine: null
     demographic: seinen
@@ -230076,6 +230516,14 @@ series:
     synopsis: 横山裕二による書店エッセイ漫画。ツール・ド・本屋さんを描く愉快な物語。
     status: completed
   - key: Q11542631|ねこだのみ
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+      - slice of life
+    synopsis: 猫を題材にしたコメディ。
+    status: completed
+    anime_adapted: false
   - key: Q11542631|十勝ひとりぼっち農園
     magazine: null
     demographic: seinen
@@ -230087,18 +230535,122 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q11542632|NIWA
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - slice of life
+    synopsis: NIWAを題材にした青年向け作品。
+    status: completed
+    anime_adapted: false
   - key: Q11542632|アイスランド
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - travel
+    synopsis: アイスランドを舞台にした青年向け作品。
+    status: completed
+    anime_adapted: false
   - key: Q11542632|アウトドアー
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+      - slice of life
+    synopsis: アウトドアーを題材にした青年向け作品。
+    status: completed
+    anime_adapted: false
   - key: Q11542632|トラベル
+    magazine: null
+    demographic: seinen
+    genres:
+      - travel
+      - slice of life
+    synopsis: トラベルを題材にした青年向け作品。
+    status: completed
+    anime_adapted: false
   - key: Q11542632|ニュー土木
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - slice of life
+    synopsis: ニュー土木を題材にした青年向け作品。
+    status: completed
+    anime_adapted: false
   - key: Q11542632|ネオ万葉
+    magazine: null
+    demographic: seinen
+    genres:
+      - historical
+      - drama
+    synopsis: ネオ万葉を題材にした青年向け作品。
+    status: completed
+    anime_adapted: false
   - key: Q11542632|ファッションと密室
+    magazine: null
+    demographic: seinen
+    genres:
+      - mystery
+      - drama
+    synopsis: ファッションと密室を題材にしたミステリー。
+    status: completed
+    anime_adapted: false
   - key: Q11542632|プラザ
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - slice of life
+    synopsis: プラザを題材にした青年向け作品。
+    status: completed
+    anime_adapted: false
   - key: Q11542632|ベビーブーム
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+      - slice of life
+    synopsis: ベビーブームを題材にしたコメディ。
+    status: completed
+    anime_adapted: false
   - key: Q11542632|ルーム
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - slice of life
+    synopsis: ルームを題材にした青年向け作品。
+    status: completed
+    anime_adapted: false
   - key: Q11542632|世界地図の間
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - slice of life
+    synopsis: 世界地図の間を題材にした青年向け作品。
+    status: completed
+    anime_adapted: false
   - key: Q11542632|巨象
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - slice of life
+    synopsis: 巨象を題材にした青年向け作品。
+    status: completed
+    anime_adapted: false
   - key: Q11543582|うちのネコは飼い主に優しい。
+    magazine: null
+    demographic: shounen
+    genres:
+      - comedy
+      - slice of life
+    synopsis: うちのネコを題材にしたコメディ。
+    status: completed
+    anime_adapted: false
   - key: Q11543582|キメルのyoyo!
     demographic: kodomo
     genres:
@@ -230126,9 +230678,41 @@ series:
     synopsis: 樫本学ヴの『コロッケ!』新章。さらに大人向けに展開する続編シリーズ。
     status: completed
   - key: Q11543582|コロッケ!BSVer
+    magazine: null
+    demographic: shounen
+    genres:
+      - action
+      - fantasy
+    synopsis: 樫本学ヴ『コロッケ!』のBSバージョン。
+    status: completed
+    anime_adapted: true
   - key: Q11543582|コロッケ!FGVer
+    magazine: null
+    demographic: shounen
+    genres:
+      - action
+      - fantasy
+    synopsis: 『コロッケ!』のFGバージョン。
+    status: completed
+    anime_adapted: true
   - key: Q11543582|コロッケ!LBVer
+    magazine: null
+    demographic: shounen
+    genres:
+      - action
+      - fantasy
+    synopsis: 『コロッケ!』のLBバージョン。
+    status: completed
+    anime_adapted: true
   - key: Q11543582|コロッケ!NKVer
+    magazine: null
+    demographic: shounen
+    genres:
+      - action
+      - fantasy
+    synopsis: 『コロッケ!』のNKバージョン。
+    status: completed
+    anime_adapted: true
   - key: Q11543582|ぶっとびスピナーキメル!!
     demographic: kodomo
     genres:
@@ -230154,6 +230738,14 @@ series:
     synopsis: 樫本学ヴが描く、児童向けの科学ギャグ。
     status: completed
   - key: Q11543582|みんなで空気読み。コロコロコミックVer
+    magazine: null
+    demographic: shounen
+    genres:
+      - comedy
+      - kids
+    synopsis: ゲーム『みんなで空気読み』のコロコロ版コミカライズ。
+    status: completed
+    anime_adapted: false
   - key: Q11543582|やったね!ラモズくん
     magazine: monthly-corocoro-comic
     demographic: shounen
@@ -230163,6 +230755,14 @@ series:
     synopsis: Jリーガー・ラモス瑠偉をモデルにした、樫本学ヴの児童サッカーコメディ。
     status: completed
   - key: Q11543582|ヨシモトムチッ子物語
+    magazine: null
+    demographic: shounen
+    genres:
+      - comedy
+      - kids
+    synopsis: 吉本興業を題材にしたコメディ。
+    status: completed
+    anime_adapted: false
   - key: Q11543582|学級王ヤマザキ
     magazine: monthly-corocoro-comic
     demographic: shounen
@@ -230172,6 +230772,14 @@ series:
     status: completed
     anime_adapted: true
   - key: Q11543582|学級王ヤマザキトラウマEdition
+    magazine: null
+    demographic: shounen
+    genres:
+      - comedy
+      - school
+    synopsis: 樫本学ヴ『学級王ヤマザキ』のトラウマ編。
+    status: completed
+    anime_adapted: true
   - key: Q11543582|嵐のJボーイ ぶっとび闘人
     magazine: monthly-corocoro-comic
     demographic: shounen
@@ -230198,8 +230806,32 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q11543582|熱血!!コロコロ伝説
+    magazine: null
+    demographic: shounen
+    genres:
+      - historical
+      - comedy
+    synopsis: 月刊コロコロコミックの伝説作品アンソロジー。
+    status: completed
+    anime_adapted: false
   - key: Q11543582|爆走!ダッシュクラブ
+    magazine: null
+    demographic: shounen
+    genres:
+      - sports
+      - comedy
+    synopsis: ミニ四駆を題材にしたコメディ。
+    status: completed
+    anime_adapted: false
   - key: Q11543582|超番ワニオ
+    magazine: null
+    demographic: shounen
+    genres:
+      - comedy
+      - kids
+    synopsis: 超番ワニオを主人公にしたコメディ。
+    status: completed
+    anime_adapted: false
   - key: Q11543601|チート転生した猫は嫁の膝で丸くなりたい
     demographic: shounen
     genres:
@@ -230209,6 +230841,14 @@ series:
     synopsis: 樹るうが描く、チート猫に転生した男の異世界スローライフコメディ。
     status: ongoing
   - key: Q11543601|ナチュラル・ハイ
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+      - slice of life
+    synopsis: ナチュラル・ハイを題材にした青年向け作品。
+    status: completed
+    anime_adapted: false
   - key: Q11543601|ニャンコロカムイ
     demographic: kodomo
     genres:
@@ -230219,7 +230859,23 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q11543601|パンむすめ
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+      - food
+    synopsis: パンむすめを題材にしたコメディ。
+    status: completed
+    anime_adapted: false
   - key: Q11543601|ぼくの奥さん
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+      - romance
+    synopsis: ぼくの奥さんを題材にしたコメディ。
+    status: completed
+    anime_adapted: false
   - key: Q11543601|ポヨポヨ観察日記
     magazine: null
     demographic: josei
@@ -230231,13 +230887,77 @@ series:
     status: completed
     anime_adapted: true
   - key: Q11543601|ポヨポヨ観察日記ぷらす
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+      - slice of life
+    synopsis: 樹なつみ『ポヨポヨ観察日記』のぷらす編。
+    status: completed
+    anime_adapted: true
   - key: Q11543601|よりぬきポヨポヨ観察日記 ヒアー?ポヨは猫だよ編
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+      - slice of life
+    synopsis: 『ポヨポヨ観察日記』のよりぬき編。
+    status: completed
+    anime_adapted: true
   - key: Q11543601|よりぬきポヨポヨ観察日記 ヒアーポヨが来たよ!編
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+      - slice of life
+    synopsis: 『ポヨポヨ観察日記』のよりぬき編。
+    status: completed
+    anime_adapted: true
   - key: Q11543601|よりぬきポヨポヨ観察日記 ヒアヒア!ポヨと暮らそう編
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+      - slice of life
+    synopsis: 『ポヨポヨ観察日記』のよりぬき編。
+    status: completed
+    anime_adapted: true
   - key: Q11543601|よりぬきポヨポヨ観察日記 ポヨとなごもう!ヒア♥編
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+      - slice of life
+    synopsis: 『ポヨポヨ観察日記』のよりぬき編。
+    status: completed
+    anime_adapted: true
   - key: Q11543601|よりぬきポヨポヨ観察日記 ポヨと遊ぼう♪ヒアー!編
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+      - slice of life
+    synopsis: 『ポヨポヨ観察日記』のよりぬき編。
+    status: completed
+    anime_adapted: true
   - key: Q11543601|よりぬきポヨポヨ観察日記 ポヨはマルマル!編
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+      - slice of life
+    synopsis: 『ポヨポヨ観察日記』のよりぬき編。
+    status: completed
+    anime_adapted: true
   - key: Q11543601|わたしのお嬢様
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+      - slice of life
+    synopsis: お嬢様を題材にしたコメディ。
+    status: completed
+    anime_adapted: false
   - key: Q11543601|二つの歌三つの物語
     magazine: null
     demographic: shoujo
@@ -230248,9 +230968,41 @@ series:
     status: completed
     anime_adapted: false
   - key: Q11543601|漫画描きと猫♪
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+      - slice of life
+    synopsis: 漫画描きと猫を題材にしたエッセイ。
+    status: completed
+    anime_adapted: false
   - key: Q11543601|骨盤先生の保健室
+    magazine: null
+    demographic: seinen
+    genres:
+      - medical
+      - comedy
+    synopsis: 骨盤先生の保健室を題材にしたコメディ。
+    status: completed
+    anime_adapted: false
   - key: Q11543605|おたすけ天使
+    magazine: null
+    demographic: shoujo
+    genres:
+      - fantasy
+      - comedy
+    synopsis: おたすけ天使を題材にした少女向け作品。
+    status: completed
+    anime_adapted: false
   - key: Q11543605|おまかせ健さん
+    magazine: null
+    demographic: shoujo
+    genres:
+      - comedy
+      - slice of life
+    synopsis: おまかせ健さんを題材にした少女コメディ。
+    status: completed
+    anime_adapted: false
   - key: Q11543605|かん忍!!茜
     demographic: shoujo
     genres:
@@ -230259,11 +231011,59 @@ series:
     synopsis: 樹原ちさとによる少女コメディ。かん忍!!茜の愉快な物語。
     status: completed
   - key: Q11543605|こらこらキララ!
+    magazine: null
+    demographic: shoujo
+    genres:
+      - comedy
+      - school
+    synopsis: こらこらキララを題材にした少女コメディ。
+    status: completed
+    anime_adapted: false
   - key: Q11543605|ハムスター倶楽部
+    magazine: null
+    demographic: shoujo
+    genres:
+      - comedy
+      - slice of life
+    synopsis: ハムスター倶楽部を題材にした少女向け作品。
+    status: completed
+    anime_adapted: false
   - key: Q11543605|ランチタイムがはじまる
+    magazine: null
+    demographic: shoujo
+    genres:
+      - comedy
+      - school
+    synopsis: ランチタイムを題材にした少女コメディ。
+    status: completed
+    anime_adapted: false
   - key: Q11543605|太郎先生がやってきた!
+    magazine: null
+    demographic: shoujo
+    genres:
+      - comedy
+      - school
+    synopsis: 太郎先生を題材にした少女コメディ。
+    status: completed
+    anime_adapted: false
   - key: Q11543605|恋は100kg
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - comedy
+    synopsis: 恋は100kgを描く少女ロマンス。
+    status: completed
+    anime_adapted: false
   - key: Q11543605|本町一丁目栗本菓子店
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+      - food
+    synopsis: 栗本菓子店を舞台にした少女ドラマ。
+    status: completed
+    anime_adapted: false
   - key: Q11543605|桃色ミステリー
     demographic: shoujo
     genres:
