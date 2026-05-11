@@ -1,5 +1,5 @@
 schema_version: 1
-generated_at: 2026-05-11T20:27:22.238Z
+generated_at: 2026-05-11T20:28:58.979Z
 generator: claude-opus-4-7-direct-fill
 series:
   - key: Q1001784|GOLDEN SPIRAL
@@ -345336,8 +345336,31 @@ series:
     status: completed
     anime_adapted: false
   - key: Q131010521|少年式少女
+    magazine: null
+    demographic: shoujo
+    genres:
+      - yuri
+      - drama
+    synopsis: 少女向け百合作品。
+    status: completed
+    anime_adapted: false
   - key: Q131010521|親友は悪女
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+    synopsis: 少女向け短編。
+    status: completed
+    anime_adapted: false
   - key: Q131225979|アビスマル
+    magazine: null
+    demographic: seinen
+    genres:
+      - fantasy
+      - horror
+    synopsis: 青年向けファンタジー。
+    status: completed
+    anime_adapted: false
   - key: Q131225979|クロシオカレント
     demographic: seinen
     genres:
@@ -345381,8 +345404,32 @@ series:
     status: ongoing
     anime_adapted: true
   - key: Q131746095|えぶりでいホスト
+    magazine: null
+    demographic: shoujo
+    genres:
+      - comedy
+      - drama
+    synopsis: ホストコメディ。
+    status: completed
+    anime_adapted: false
   - key: Q131746095|かみさまとX
+    magazine: null
+    demographic: shoujo
+    genres:
+      - fantasy
+      - romance
+    synopsis: 少女向けファンタジー。
+    status: completed
+    anime_adapted: false
   - key: Q131802290|いつか、眠りにつく日
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+      - fantasy
+    synopsis: いぬじゅん原作コミカライズ。
+    status: completed
+    anime_adapted: false
   - key: Q131802290|小説の神様
     demographic: shoujo
     genres:
@@ -345402,6 +345449,14 @@ series:
     status: ongoing
     anime_adapted: true
   - key: Q131905358|sin七つの大罪日常黙示録
+    magazine: null
+    demographic: seinen
+    genres:
+      - fantasy
+      - comedy
+    synopsis: sin七つの大罪派生作品。
+    status: completed
+    anime_adapted: false
   - key: Q131905358|ライアー・ライアー
     demographic: shounen
     genres:
@@ -345421,6 +345476,14 @@ series:
     status: completed
     anime_adapted: false
   - key: Q131905358|魔法使い候補生と魔王さま
+    magazine: null
+    demographic: shounen
+    genres:
+      - fantasy
+      - comedy
+    synopsis: 少年向けファンタジー。
+    status: completed
+    anime_adapted: false
   - key: Q131905358|黒と黒と白のプリュネル
     magazine: null
     demographic: seinen
@@ -345466,6 +345529,13 @@ series:
     status: completed
     anime_adapted: false
   - key: Q1319232|クロスバトラーズ
+    magazine: null
+    demographic: shounen
+    genres:
+      - action
+    synopsis: 原哲夫アクション。
+    status: completed
+    anime_adapted: false
   - key: Q1319232|サイバーブルー
     demographic: shounen
     genres:
@@ -345476,8 +345546,32 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q1319232|サイバーブルー失われた子供たち
+    magazine: null
+    demographic: shounen
+    genres:
+      - sci_fi
+      - action
+    synopsis: サイバーブルー続編。
+    status: completed
+    anime_adapted: false
   - key: Q1319232|九頭龍
+    magazine: null
+    demographic: seinen
+    genres:
+      - historical
+      - action
+    synopsis: 原哲夫時代劇。
+    status: completed
+    anime_adapted: false
   - key: Q1319232|公権力横領捜査官中坊林太郎
+    magazine: null
+    demographic: seinen
+    genres:
+      - action
+      - crime
+    synopsis: 原哲夫青年作品。
+    status: completed
+    anime_adapted: false
   - key: Q1319232|前田慶次かぶき旅
     magazine: weekly-comic-bunch
     demographic: seinen
@@ -345501,9 +345595,38 @@ series:
     alternative_titles:
       en: Fist of the North Star
   - key: Q1319232|北斗の拳 イチゴ味
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+    synopsis: 北斗の拳パロディ。
+    status: completed
+    anime_adapted: false
   - key: Q1319232|北斗の拳 世紀末ザコ伝説
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+      - action
+    synopsis: 北斗の拳パロディ。
+    status: completed
+    anime_adapted: false
   - key: Q1319232|北斗の拳 究極版
+    magazine: null
+    demographic: shounen
+    genres:
+      - action
+    synopsis: 北斗の拳完全版。
+    status: completed
+    anime_adapted: true
   - key: Q1319232|北斗の拳世紀末ドラマ撮影伝
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+    synopsis: 北斗の拳パロディ。
+    status: completed
+    anime_adapted: false
   - key: Q1319232|北斗の拳拳王軍ザコたちの挽歌
     magazine: null
     demographic: seinen
@@ -345523,7 +345646,23 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q1319232|左近
+    magazine: null
+    demographic: seinen
+    genres:
+      - historical
+      - action
+    synopsis: 原哲夫時代劇。
+    status: completed
+    anime_adapted: false
   - key: Q1319232|影武者
+    magazine: null
+    demographic: seinen
+    genres:
+      - historical
+      - action
+    synopsis: 原哲夫時代劇。
+    status: completed
+    anime_adapted: false
   - key: Q1319232|影武者徳川家康
     magazine: weekly-shonen-jump
     demographic: shounen
@@ -345550,13 +345689,75 @@ series:
     status: completed
     anime_adapted: false
   - key: Q1319232|極悪ノ華
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - crime
+    synopsis: 原哲夫青年作品。
+    status: completed
+    anime_adapted: false
   - key: Q1319232|猛き竜星
+    magazine: null
+    demographic: seinen
+    genres:
+      - historical
+      - action
+    synopsis: 原哲夫青年作品。
+    status: completed
+    anime_adapted: false
   - key: Q1319232|猛き龍星
+    magazine: null
+    demographic: seinen
+    genres:
+      - historical
+      - action
+    synopsis: 原哲夫青年作品。
+    status: completed
+    anime_adapted: false
   - key: Q1319232|究極
+    magazine: null
+    demographic: seinen
+    genres:
+      - action
+    synopsis: 原哲夫青年作品。
+    status: completed
+    anime_adapted: false
   - key: Q1319232|綱鉄騎士
+    magazine: null
+    demographic: seinen
+    genres:
+      - action
+    synopsis: 原哲夫青年作品。
+    status: completed
+    anime_adapted: false
   - key: Q1319232|義風堂々 直江兼続 前田慶次酒語り
+    magazine: null
+    demographic: seinen
+    genres:
+      - historical
+      - action
+    synopsis: 義風堂々シリーズ。
+    status: completed
+    anime_adapted: false
   - key: Q1319232|義風堂々!!
+    magazine: null
+    demographic: seinen
+    genres:
+      - historical
+      - action
+    synopsis: 義風堂々シリーズ。
+    status: completed
+    anime_adapted: false
   - key: Q1319232|義風堂々!! 直江兼続 前田慶次 月語り
+    magazine: null
+    demographic: seinen
+    genres:
+      - historical
+      - action
+    synopsis: 義風堂々月語り編。
+    status: completed
+    anime_adapted: false
   - key: Q1319232|義風堂々!!疾風 の軍師黒田官兵衛
     magazine: monthly-comic-zenon
     demographic: seinen
@@ -345566,6 +345767,14 @@ series:
     synopsis: 原哲夫が描く、戦国軍師・黒田官兵衛の生涯を骨太に描く歴史劇。
     status: completed
   - key: Q1319232|義風堂々!!直江兼続-前田慶次月語り
+    magazine: null
+    demographic: seinen
+    genres:
+      - historical
+      - action
+    synopsis: 義風堂々月語り編。
+    status: completed
+    anime_adapted: false
   - key: Q1319232|義風堂々!!直江兼続-前田慶次花語り
     demographic: seinen
     genres:
@@ -345575,6 +345784,14 @@ series:
     synopsis: 戦国の智将・直江兼続と前田慶次の友情と義を、原哲夫が骨太に描く時代劇。
     status: completed
   - key: Q1319232|義風堂々!!直江兼続-前田慶次酒語り
+    magazine: null
+    demographic: seinen
+    genres:
+      - historical
+      - action
+    synopsis: 義風堂々酒語り編。
+    status: completed
+    anime_adapted: false
   - key: Q1319232|義風堂々!!直江兼続~前田慶次花語り~
     magazine: null
     demographic: seinen
@@ -345618,6 +345835,14 @@ series:
     status: completed
     anime_adapted: true
   - key: Q1319232|蒼天の拳リジェネシス
+    magazine: null
+    demographic: seinen
+    genres:
+      - historical
+      - action
+    synopsis: 蒼天の拳リジェネシス。
+    status: completed
+    anime_adapted: true
   - key: Q1319232|蒼黒の餓狼
     demographic: seinen
     genres:
@@ -345628,15 +345853,92 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q1319232|鉄のドンキホーテ
+    magazine: null
+    demographic: seinen
+    genres:
+      - action
+    synopsis: 原哲夫青年作品。
+    status: completed
+    anime_adapted: false
   - key: Q1319232|銀の聖者
+    magazine: null
+    demographic: seinen
+    genres:
+      - historical
+      - action
+    synopsis: 北斗の拳外伝。
+    status: completed
+    anime_adapted: false
   - key: Q1319232|阿弖流為2世
+    magazine: null
+    demographic: seinen
+    genres:
+      - historical
+      - action
+    synopsis: 阿弖流為2世コミック。
+    status: completed
+    anime_adapted: false
   - key: Q1319232|阿弖流為II世
+    magazine: null
+    demographic: seinen
+    genres:
+      - historical
+      - action
+    synopsis: 阿弖流為II世コミック。
+    status: completed
+    anime_adapted: false
   - key: Q1319237|「ああ硫黄島」「人間魚雷回天」
+    magazine: null
+    demographic: shounen
+    genres:
+      - historical
+      - drama
+    synopsis: 戦争劇画。
+    status: completed
+    anime_adapted: false
   - key: Q1319237|「あしたのジョー」伝説
+    magazine: null
+    demographic: seinen
+    genres:
+      - sports
+    synopsis: あしたのジョー伝説。
+    status: completed
+    anime_adapted: false
   - key: Q1319237|0戦チャンピオン
+    magazine: null
+    demographic: shounen
+    genres:
+      - historical
+      - action
+    synopsis: ゼロ戦少年作品。
+    status: completed
+    anime_adapted: false
   - key: Q1319237|0戦仮面
+    magazine: null
+    demographic: shounen
+    genres:
+      - historical
+      - action
+    synopsis: ゼロ戦少年作品。
+    status: completed
+    anime_adapted: false
   - key: Q1319237|TIGER MASK-シャドウ・オブ・ジャスティス-
+    magazine: null
+    demographic: shounen
+    genres:
+      - sports
+      - action
+    synopsis: タイガーマスク続編。
+    status: completed
+    anime_adapted: false
   - key: Q1319237|あしたのジョ-
+    magazine: null
+    demographic: shounen
+    genres:
+      - sports
+    synopsis: あしたのジョー関連作品。
+    status: completed
+    anime_adapted: true
   - key: Q1319237|あしたのジョー
     demographic: shounen
     genres:
@@ -345646,8 +345948,30 @@ series:
     status: completed
     anime_adapted: true
   - key: Q1319237|いきなり最終回
+    magazine: null
+    demographic: shounen
+    genres:
+      - comedy
+    synopsis: 少年向けコメディ。
+    status: completed
+    anime_adapted: false
   - key: Q1319237|おとこ道
+    magazine: null
+    demographic: shounen
+    genres:
+      - action
+      - drama
+    synopsis: 少年向けアクション。
+    status: completed
+    anime_adapted: false
   - key: Q1319237|おれとカネやん
+    magazine: null
+    demographic: shounen
+    genres:
+      - sports
+    synopsis: 少年向け野球作品。
+    status: completed
+    anime_adapted: false
   - key: Q1319237|カラテ地獄変 牙
     demographic: seinen
     genres:
@@ -345658,8 +345982,30 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q1319237|カラテ地獄変・牙
+    magazine: null
+    demographic: shounen
+    genres:
+      - sports
+      - action
+    synopsis: 空手少年作品。
+    status: completed
+    anime_adapted: false
   - key: Q1319237|キックの鬼
+    magazine: null
+    demographic: shounen
+    genres:
+      - sports
+    synopsis: 梶原一騎キック作品。
+    status: completed
+    anime_adapted: true
   - key: Q1319237|キック魂
+    magazine: null
+    demographic: shounen
+    genres:
+      - sports
+    synopsis: キックボクシング少年作品。
+    status: completed
+    anime_adapted: false
   - key: Q1319237|ゴッド・アーム
     demographic: seinen
     genres:
@@ -345670,11 +346016,54 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q1319237|ジャイアント台風
+    magazine: null
+    demographic: shounen
+    genres:
+      - sports
+    synopsis: ジャイアント馬場伝記漫画。
+    status: completed
+    anime_adapted: false
   - key: Q1319237|タイガーマスク
+    magazine: null
+    demographic: shounen
+    genres:
+      - sports
+    synopsis: 梶原一騎タイガーマスク。
+    status: completed
+    anime_adapted: true
   - key: Q1319237|タイガーマスク二世
+    magazine: null
+    demographic: shounen
+    genres:
+      - sports
+    synopsis: タイガーマスク二世。
+    status: completed
+    anime_adapted: true
   - key: Q1319237|チャンピオン太
+    magazine: null
+    demographic: shounen
+    genres:
+      - sports
+    synopsis: 梶原一騎ボクシング。
+    status: completed
+    anime_adapted: false
   - key: Q1319237|デビルマン
+    magazine: null
+    demographic: shounen
+    genres:
+      - supernatural
+      - horror
+    synopsis: 永井豪デビルマン。
+    status: completed
+    anime_adapted: true
   - key: Q1319237|ハリス無段
+    magazine: null
+    demographic: shounen
+    genres:
+      - sports
+    synopsis: 梶原一騎ハリス無段。
+    status: completed
+    anime_adapted: false
   - key: Q1319237|ピストン堀口物語
     demographic: seinen
     genres:
@@ -345704,6 +346093,14 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q1319237|リボンの騎士
+    magazine: null
+    demographic: shoujo
+    genres:
+      - fantasy
+      - drama
+    synopsis: 手塚治虫リボンの騎士。
+    status: completed
+    anime_adapted: true
   - key: Q1319237|人間兇器
     demographic: seinen
     genres:
@@ -345712,9 +346109,39 @@ series:
     synopsis: 梶原一騎原作のハードな格闘漫画。人間兇器と化した男の戦いを描く。
     status: completed
   - key: Q1319237|侍ジャイアンツ
+    magazine: null
+    demographic: shounen
+    genres:
+      - sports
+    synopsis: 梶原一騎侍ジャイアンツ。
+    status: completed
+    anime_adapted: true
   - key: Q1319237|剣は道なり
+    magazine: null
+    demographic: shounen
+    genres:
+      - sports
+    synopsis: 剣道少年作品。
+    status: completed
+    anime_adapted: false
   - key: Q1319237|友情山脈
+    magazine: null
+    demographic: shounen
+    genres:
+      - sports
+      - drama
+    synopsis: 登山少年作品。
+    status: completed
+    anime_adapted: false
   - key: Q1319237|吹けよ!カミカゼ
+    magazine: null
+    demographic: shounen
+    genres:
+      - historical
+      - action
+    synopsis: 戦争少年作品。
+    status: completed
+    anime_adapted: false
   - key: Q1319237|四角いジャングル
     demographic: shounen
     genres:
@@ -345723,8 +346150,31 @@ series:
     synopsis: 梶原一騎原作の格闘技漫画。四角いリングのジャングルで戦う格闘家たちを描く名作。
     status: completed
   - key: Q1319237|夕やけ番長
+    magazine: null
+    demographic: shounen
+    genres:
+      - action
+      - school
+    synopsis: 梶原一騎ヤンキー作品。
+    status: completed
+    anime_adapted: true
   - key: Q1319237|大空三四郎
+    magazine: null
+    demographic: shounen
+    genres:
+      - sports
+      - action
+    synopsis: 三四郎少年作品。
+    status: completed
+    anime_adapted: false
   - key: Q1319237|巨人のサムライ炎
+    magazine: null
+    demographic: shounen
+    genres:
+      - sports
+    synopsis: プロ野球少年作品。
+    status: completed
+    anime_adapted: false
   - key: Q1319237|巨人の星
     demographic: shounen
     genres:
@@ -345734,6 +346184,14 @@ series:
     status: completed
     anime_adapted: true
   - key: Q1319237|復讐記
+    magazine: null
+    demographic: shounen
+    genres:
+      - action
+      - drama
+    synopsis: 梶原一騎作品。
+    status: completed
+    anime_adapted: false
   - key: Q1319237|愛と誠
     demographic: shounen
     genres:
@@ -345743,8 +346201,31 @@ series:
     synopsis: 梶原一騎原作の名作ロマン漫画。誠と愛の宿命の純愛を描く青春劇。
     status: completed
   - key: Q1319237|戦争とコミック
+    magazine: null
+    demographic: seinen
+    genres:
+      - historical
+      - drama
+    synopsis: 戦争をテーマにしたアンソロジー。
+    status: completed
+    anime_adapted: false
   - key: Q1319237|挑戦者AAA
+    magazine: null
+    demographic: shounen
+    genres:
+      - sports
+    synopsis: 梶原一騎ボクシング。
+    status: completed
+    anime_adapted: false
   - key: Q1319237|斬殺者
+    magazine: null
+    demographic: seinen
+    genres:
+      - historical
+      - action
+    synopsis: 梶原一騎時代劇。
+    status: completed
+    anime_adapted: false
   - key: Q1319237|新カラテ地獄変
     demographic: seinen
     genres:
@@ -345778,9 +346259,38 @@ series:
     status: completed
     anime_adapted: false
   - key: Q1319237|昭和一代女
+    magazine: null
+    demographic: seinen
+    genres:
+      - historical
+      - drama
+    synopsis: 梶原一騎昭和女性ドラマ。
+    status: completed
+    anime_adapted: false
   - key: Q1319237|朝日の恋人
+    magazine: null
+    demographic: shounen
+    genres:
+      - drama
+    synopsis: 梶原一騎作品。
+    status: completed
+    anime_adapted: false
   - key: Q1319237|柔道一直線
+    magazine: null
+    demographic: shounen
+    genres:
+      - sports
+    synopsis: 梶原一騎柔道作品。
+    status: completed
+    anime_adapted: true
   - key: Q1319237|柔道讃歌
+    magazine: null
+    demographic: shounen
+    genres:
+      - sports
+    synopsis: 梶原一騎柔道作品。
+    status: completed
+    anime_adapted: true
   - key: Q1319237|格闘士ローマの星
     demographic: seinen
     genres:
@@ -345791,9 +346301,38 @@ series:
     status: completed
     anime_adapted: true
   - key: Q1319237|格闘王V
+    magazine: null
+    demographic: shounen
+    genres:
+      - sports
+      - action
+    synopsis: 梶原一騎格闘技作品。
+    status: completed
+    anime_adapted: false
   - key: Q1319237|水木しげる漫画大全集
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+    synopsis: 水木しげる作品集。
+    status: completed
+    anime_adapted: false
   - key: Q1319237|火子伝説
+    magazine: null
+    demographic: shounen
+    genres:
+      - action
+    synopsis: 梶原一騎作品。
+    status: completed
+    anime_adapted: false
   - key: Q1319237|甲子園の土
+    magazine: null
+    demographic: shounen
+    genres:
+      - sports
+    synopsis: 梶原一騎野球作品。
+    status: completed
+    anime_adapted: false
   - key: Q1319237|男の星座
     demographic: seinen
     genres:
@@ -345803,7 +346342,21 @@ series:
     synopsis: 梶原一騎による自伝的格闘技漫画。著者・梶原一騎の波瀾万丈の人生と昭和格闘技黎明期を描く晩年の傑作。
     status: completed
   - key: Q1319237|男の条件
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+    synopsis: 梶原一騎青年作品。
+    status: completed
+    anime_adapted: false
   - key: Q1319237|白鯨
+    magazine: null
+    demographic: shounen
+    genres:
+      - adventure
+    synopsis: メルヴィル原作コミカライズ。
+    status: completed
+    anime_adapted: false
   - key: Q1319237|空手バカ一代
     magazine: weekly-shonen-magazine
     demographic: shounen
@@ -345821,12 +346374,61 @@ series:
     synopsis: 梶原一騎原作の空手漫画。空手家たちの壮絶な戦争を描く。
     status: completed
   - key: Q1319237|紅の挑戦者
+    magazine: null
+    demographic: shounen
+    genres:
+      - sports
+    synopsis: 梶原一騎ボクシング作品。
+    status: completed
+    anime_adapted: false
   - key: Q1319237|虹をよぶ拳
+    magazine: null
+    demographic: shounen
+    genres:
+      - sports
+    synopsis: 梶原一騎ボクシング作品。
+    status: completed
+    anime_adapted: true
   - key: Q1319237|赤き血のイレブン
+    magazine: null
+    demographic: shounen
+    genres:
+      - sports
+    synopsis: 梶原一騎サッカー作品。
+    status: completed
+    anime_adapted: true
   - key: Q1319237|青春山脈
+    magazine: null
+    demographic: shounen
+    genres:
+      - drama
+    synopsis: 梶原一騎青春作品。
+    status: completed
+    anime_adapted: false
   - key: Q1319237|魔犬ムサシ+キリマンジャロの風
+    magazine: null
+    demographic: shounen
+    genres:
+      - adventure
+    synopsis: 少年向け冒険作品。
+    status: completed
+    anime_adapted: false
   - key: Q1319777|#アンソロジー#レンアイ離婚#異世界オバサン
+    magazine: null
+    demographic: josei
+    genres:
+      - romance
+    synopsis: 女性向けアンソロジー。
+    status: completed
+    anime_adapted: false
   - key: Q1319777|11月でも花火
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+    synopsis: 柴門ふみ作品。
+    status: completed
+    anime_adapted: false
   - key: Q1319777|Age,35
     demographic: josei
     genres:
@@ -345837,6 +346439,13 @@ series:
     status: ongoing
     anime_adapted: true
   - key: Q1319777|Big Selection
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+    synopsis: 柴門ふみ作品集。
+    status: completed
+    anime_adapted: false
   - key: Q1319777|P.S.元気です、俊平
     magazine: weekly-shonen-magazine
     demographic: shounen
@@ -345847,6 +346456,13 @@ series:
     synopsis: 幼馴染の少女と離れて暮らす男子高校生・俊平の手紙と恋を、柴門ふみが瑞々しく描いた青春ラブストーリー。
     status: completed
   - key: Q1319777|あしたになれば虹は
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+    synopsis: 柴門ふみ作品。
+    status: completed
+    anime_adapted: false
   - key: Q1319777|あすなろ白書
     demographic: josei
     genres:
@@ -345855,6 +346471,14 @@ series:
     synopsis: 柴門ふみによる女性向け恋愛漫画の金字塔。大学を舞台にした5人の男女の青春を描いた話題作。実写ドラマ化(『あすなろ白書』)、社会的大ヒット。
     status: completed
   - key: Q1319777|あすなろ白書 最終章~宝物
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - drama
+    synopsis: あすなろ白書続編。
+    status: completed
+    anime_adapted: false
   - key: Q1319777|あすなろ白書 学生編
     demographic: josei
     genres:
@@ -345874,11 +346498,53 @@ series:
     status: completed
     anime_adapted: true
   - key: Q1319777|アナタとわたしの探偵社
+    magazine: null
+    demographic: shoujo
+    genres:
+      - mystery
+    synopsis: 柴門ふみ探偵作品。
+    status: completed
+    anime_adapted: false
   - key: Q1319777|いつも犬が居た
+    magazine: null
+    demographic: shoujo
+    genres:
+      - slice_of_life
+    synopsis: 柴門ふみ犬エッセイ。
+    status: completed
+    anime_adapted: false
   - key: Q1319777|ヴォイス
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+    synopsis: 柴門ふみ作品。
+    status: completed
+    anime_adapted: false
   - key: Q1319777|うぬぼれ姫
+    magazine: null
+    demographic: shoujo
+    genres:
+      - comedy
+    synopsis: 柴門ふみコメディ。
+    status: completed
+    anime_adapted: false
   - key: Q1319777|オシャベリな目玉焼
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+    synopsis: 柴門ふみ作品。
+    status: completed
+    anime_adapted: false
   - key: Q1319777|オルゴール
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+    synopsis: 柴門ふみ作品。
+    status: completed
+    anime_adapted: false
   - key: Q1319777|お仕事です!
     demographic: josei
     genres:
@@ -345888,13 +346554,70 @@ series:
     synopsis: 柴門ふみによる女性向けお仕事ドラマ。様々な職業の女性たちの仕事と恋を描く。
     status: completed
   - key: Q1319777|コージ苑 夢の競演編
+    magazine: null
+    demographic: shoujo
+    genres:
+      - comedy
+    synopsis: コージ苑関連作品。
+    status: completed
+    anime_adapted: false
   - key: Q1319777|ザ・ゴールデン
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+    synopsis: 柴門ふみ作品。
+    status: completed
+    anime_adapted: false
   - key: Q1319777|サイモン・セッズ
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+    synopsis: 柴門ふみ作品。
+    status: completed
+    anime_adapted: false
   - key: Q1319777|さくらんぼ爆弾
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+    synopsis: 柴門ふみ作品。
+    status: completed
+    anime_adapted: false
   - key: Q1319777|さっきまでパパがいた
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+    synopsis: 柴門ふみ作品。
+    status: completed
+    anime_adapted: false
   - key: Q1319777|さみしい同盟
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+    synopsis: 柴門ふみ作品。
+    status: completed
+    anime_adapted: false
   - key: Q1319777|さらば愛しきペテン師
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+      - romance
+    synopsis: 柴門ふみ作品。
+    status: completed
+    anime_adapted: false
   - key: Q1319777|とっても、愛ブーム
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+    synopsis: 柴門ふみ作品。
+    status: completed
+    anime_adapted: false
   - key: Q1319777|はんなり!
     demographic: josei
     genres:
@@ -345903,8 +346626,29 @@ series:
     synopsis: 柴門ふみによる女性向けロマンス。はんなり!と京都を描く物語。
     status: completed
   - key: Q1319777|ビリーブ・ユー
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+    synopsis: 柴門ふみ作品。
+    status: completed
+    anime_adapted: false
   - key: Q1319777|ふしだらな灰かぶり達
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+    synopsis: 柴門ふみ作品。
+    status: completed
+    anime_adapted: false
   - key: Q1319777|ブックエンド
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+    synopsis: 柴門ふみ作品。
+    status: completed
+    anime_adapted: false
   - key: Q1319777|ペンキ木馬の恋人
   - key: Q1319777|ホワイトノート
   - key: Q1319777|マイリトルタウン
