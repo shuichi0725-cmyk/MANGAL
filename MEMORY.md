@@ -2,7 +2,7 @@
 
 > このファイルは Claude Code session の context bootstrap 用。新しいセッションを開始したら最初に読むこと。
 
-最終更新: 2026-05-11 (種3 fill session 13 完了、 累計 24,201/70,202 = 34.5%)
+最終更新: 2026-05-11 (種3 fill session 14 完了、 累計 26,200/70,202 = 37.3%)
 
 ## プロジェクト概要
 
@@ -1077,5 +1077,63 @@ e47cc27  data(seed3): batch 224/243 (= session13) Opus 4.7 直筆 fill
    # rem ≒ 6000 件 (session 12 の元 9977 から 1977+1999 = 3976 件消化済、 残 ~6000)
    ```
 2. **demographic schema 注意**: `shounen|shoujo|seinen|josei|kodomo|other` のみ。 アダルト系は `seinen + ecchi genre` で表現。
+3. **per-batch protocol** (= 不変): 100 件 1 バッチ、 `data/seeds/_fills/batch-NNN.json`、 `npx tsx scripts/_apply-fills.ts`、 commit + push、 JST 時刻 + 進捗報告。
+4. **月次蒸留 protocol が動く前提の宿題は変更なし**: `scripts/_diff-*.ts` 3 本 + `.cache/madb-last-release.txt` 初期化 は依然未着手。
+
+---
+
+# 2026-05-11: 種3 fill session 14 完了 (累計 37.3%)
+
+## 進捗サマリ
+
+| Session | batch range | 範囲 | 適用件数 | missing |
+|---|---|---|---|---|
+| 13 | 224-243 | session12-unfilled 8000 件から 2000 件 | 1,999 | 1 |
+| **14** | 244-263 | session13-unfilled 6001 件から 2000 件 | **1,999** | **1 (= Q11268905 \| ウルフチックにお願い、 再発・ seed3 に key 不存在)** |
+
+**累計**: **26,200 / 70,202 = 37.3%**、 **残 44,000 件** (= 約 22 セッション分)。
+
+## Session 14 で観察された傾向
+
+- 所要時間: 12:02:57 → 12:44:35 = **約 42 分** (= 2 分/batch、 session 13 と同等)。 効率化パターン定着済。
+- batch 244 初回 apply で 1 件 missing (`Q11268905|ウルフチックにお願い`)。 session 13 と同じ key、 seed3 自体に key が存在しないが selection script では `seed_keys` フィルタを通過した。 1 件影響軽微なため放置。 次セッション以降は selection 時に明示的に exclude すると良い。
+- Q-code 群は session 13 と類似パターンの「**雑誌・出版社・アンソロジー枠**」 中心:
+  - **Q11225/27/29/30 系**: ハーレクイン・横溝正史・コミック乱・実録エッセイ系の続き
+  - **Q11267967** (Q1125852 と同筆者?) = 短編集系
+  - **Q11268113** = 寿司魂・江戸前の旬・海釣りスペシャル (= 九十九森・さとう輝のグルメ釣り枠) 約 35 件
+  - **Q11272388** = つのだじろう「うしろの百太郎」「恐怖新聞」 + 横溝正史合本の少女向け怪奇ホラー枠 約 40 件
+  - **Q11272314** = つげ忠男作品集 約 25 件
+  - **Q11273362** = リイド社コミック乱セレクション「不惜身命/古今無双/壮士凌雲/明鏡止水/眼光炯炯/百錬成鋼/豪胆無比」 等の 4 文字熟語シリーズ 約 30 件
+  - **Q11277855** = 「メカ・怪獣人生」「虎漫」「コージ苑」 系の青年向け脱力エッセイ 約 25 件
+  - **Q11278399** = 残酷ホラー姫君・グリム童話の闇版系 (もっとも淫靡で残酷な 6 人の姫君、 等) 約 60 件
+  - **Q11278817** = いじられ系・クラスのアイドル・はつこい・性活指導等の成人向け学園 25 件
+  - **Q11279194** = 牝畜・少女強制系の成人向けダーク 15 件
+  - **Q11280180** = もんでんあきこ系の女性向けコメディドラマ枠 25 件
+  - **Q11280478** = 池波正太郎・徳川家康・優駿記・ディープインパクト等の青年向け時代劇・競馬枠 30 件
+
+## 関連 commit (= 抜粋)
+
+```
+35cb7b2  data(seed3): batch 263/263 (= session14 完) Opus 4.7 直筆 fill
+46090a6  data(seed3): batch 262/263 (= session14) Opus 4.7 直筆 fill
+...
+92ed8e0  data(seed3): batch 244/263 (= session14) Opus 4.7 直筆 fill
+```
+
+## 次セッションでの推奨アクション (= 上書き、 最新)
+
+1. **続行優先**: session 15 として残 44,000 件から 2,000 件 fill (= batch 264-283)。 selection ロジックは session 12 の `seed_keys` フィルタ方式を継続、 加えて missing 防止のため `Q11268905|ウルフチックにお願い` 等の既知 missing key を exclude:
+   ```python
+   import json, yaml
+   seed = yaml.safe_load(open('data/seeds/series-supplement.yml'))
+   filled = set(x['key'] for x in seed['series'] if x.get('synopsis') or x.get('demographic'))
+   seed_keys = set(x['key'] for x in seed['series'])
+   KNOWN_MISSING = {'Q11268905|ウルフチックにお願い'}  # apply で missing 確定の key
+   orig = json.load(open('.cache/session14-unfilled.json'))
+   rem = [e for e in orig if e['key'] not in filled and e['key'] in seed_keys and e['key'] not in KNOWN_MISSING]
+   json.dump(rem, open('.cache/session15-unfilled.json','w'), ensure_ascii=False)
+   # rem ≒ 4000 件 (session 13 の元 6001 から 1999+1999 = 3998 件消化済、 残 ~4000)
+   ```
+2. **demographic schema 注意**: `shounen|shoujo|seinen|josei|kodomo|other` のみ。 アダルト系は `seinen + ecchi genre` で表現、 一般教養系は `other + educational genre`。
 3. **per-batch protocol** (= 不変): 100 件 1 バッチ、 `data/seeds/_fills/batch-NNN.json`、 `npx tsx scripts/_apply-fills.ts`、 commit + push、 JST 時刻 + 進捗報告。
 4. **月次蒸留 protocol が動く前提の宿題は変更なし**: `scripts/_diff-*.ts` 3 本 + `.cache/madb-last-release.txt` 初期化 は依然未着手。
