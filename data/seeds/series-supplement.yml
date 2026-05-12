@@ -1,5 +1,5 @@
 schema_version: 1
-generated_at: 2026-05-12T11:28:12.503Z
+generated_at: 2026-05-12T11:30:48.311Z
 generator: claude-opus-4-7-direct-fill
 series:
   - key: Q1001784|GOLDEN SPIRAL
@@ -556307,6 +556307,14 @@ series:
     status: completed
     anime_adapted: false
   - key: Q7784543|ぶきみな5週間
+    magazine: null
+    demographic: shounen
+    genres:
+      - horror
+      - mystery
+    synopsis: 藤子不二雄Aによる初期作品。不気味な5週間を題材にしたサスペンス短編。
+    status: completed
+    anime_adapted: false
   - key: Q7784543|ブラック商会変奇郎
     demographic: shounen
     genres:
@@ -556315,6 +556323,14 @@ series:
     synopsis: 藤子不二雄Ⓐが描く、変奇郎を巡る怪奇短編集。
     status: completed
   - key: Q7784543|プリンスデモキン
+    magazine: null
+    demographic: shounen
+    genres:
+      - comedy
+      - adventure
+    synopsis: 藤子不二雄A作品。プリンス・デモキンを主役にした冒険ギャグ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q7784543|プロゴルファー猿
     magazine: weekly-shonen-sunday
     demographic: shounen
@@ -556327,7 +556343,23 @@ series:
     alternative_titles:
       en: Pro Golfer Saru
   - key: Q7784543|プロジェクトPOS
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - comedy
+    synopsis: 藤子不二雄Aによるプロジェクト題材のドラマコミック。
+    status: completed
+    anime_adapted: false
   - key: Q7784543|マボロシ変太夫
+    magazine: null
+    demographic: shounen
+    genres:
+      - comedy
+      - supernatural
+    synopsis: 藤子不二雄Aが描く変な太夫「マボロシ変太夫」を主役にしたギャグ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q7784543|まんが道
     magazine: null
     demographic: shounen
@@ -556338,8 +556370,34 @@ series:
     status: completed
     anime_adapted: true
   - key: Q7784543|メトロポリス
+    magazine: null
+    demographic: shounen
+    genres:
+      - sci-fi
+      - adventure
+      - drama
+    synopsis: 藤子不二雄(A・F合作)の初期SF。手塚治虫の同名作との関連も。
+    status: completed
+    anime_adapted: false
   - key: Q7784543|ラーメン大好き!
+    magazine: null
+    demographic: shounen
+    genres:
+      - cooking
+      - comedy
+      - slice-of-life
+    synopsis: 藤子不二雄Aが描くラーメン愛好家の少年漫画。
+    status: completed
+    anime_adapted: false
   - key: Q7784543|ワールド漂流記
+    magazine: null
+    demographic: shounen
+    genres:
+      - adventure
+      - drama
+    synopsis: 藤子不二雄Aが描く世界漂流の冒険記。
+    status: completed
+    anime_adapted: false
   - key: Q7784543|わかとの
     demographic: shounen
     genres:
@@ -556360,14 +556418,92 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q7784543|不思議町怪奇通り
+    magazine: null
+    demographic: seinen
+    genres:
+      - horror
+      - mystery
+      - supernatural
+    synopsis: 藤子不二雄Aが描く不思議町の怪奇通りを題材にしたオムニバスホラー漫画。
+    status: completed
+    anime_adapted: false
   - key: Q7784543|仙べえ
+    magazine: null
+    demographic: shounen
+    genres:
+      - comedy
+      - fantasy
+      - supernatural
+    synopsis: 藤子不二雄Aの代表ギャグ漫画。仙人見習いの少年・仙べえが活躍するドタバタコメディ。
+    status: completed
+    anime_adapted: true
   - key: Q7784543|仮面太郎
+    magazine: null
+    demographic: shounen
+    genres:
+      - comedy
+      - action
+    synopsis: 藤子不二雄Aが描く仮面をかぶった少年「仮面太郎」を主役にしたヒーローコメディ。
+    status: completed
+    anime_adapted: false
   - key: Q7784543|切人がきた!!
+    magazine: null
+    demographic: shounen
+    genres:
+      - action
+      - comedy
+    synopsis: 藤子不二雄Aの作品。切人を題材にしたアクションコメディ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q7784543|劇画毛沢東伝
+    magazine: null
+    demographic: seinen
+    genres:
+      - historical
+      - biography
+      - drama
+    synopsis: 藤子不二雄Aが描く中国共産党指導者・毛沢東の生涯を題材にした劇画伝記漫画。
+    status: completed
+    anime_adapted: false
   - key: Q7784543|喪黒福次郎の仕事
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - supernatural
+      - horror
+    synopsis: 藤子不二雄A「笑ゥせぇるすまん」の喪黒福造の弟・喪黒福次郎を主役にしたスピンオフ。
+    status: completed
+    anime_adapted: false
   - key: Q7784543|園山俊二傑作集
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+      - drama
+    synopsis: ギャトルズで知られる漫画家・園山俊二の傑作短編を集めた選集。
+    status: completed
+    anime_adapted: false
   - key: Q7784543|夢トンネル
+    magazine: null
+    demographic: seinen
+    genres:
+      - fantasy
+      - drama
+      - mystery
+    synopsis: 藤子不二雄Aが描く夢のトンネルを題材にした幻想ドラマ短編。
+    status: completed
+    anime_adapted: false
   - key: Q7784543|夢魔子
+    magazine: null
+    demographic: seinen
+    genres:
+      - horror
+      - supernatural
+      - drama
+    synopsis: 藤子不二雄Aが描く夢魔の少女「夢魔子」を題材にした怪奇ホラー作品。
+    status: completed
+    anime_adapted: false
   - key: Q7784543|宇宙少年団ロケットくん
     magazine: null
     demographic: kodomo
@@ -556378,6 +556514,13 @@ series:
     status: completed
     anime_adapted: false
   - key: Q7784543|小池さん!大集合
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+    synopsis: 藤子不二雄キャラ「小池さん」が大集合するファン向けアンソロジー。ラーメンを愛する小池さんの活躍。
+    status: completed
+    anime_adapted: false
   - key: Q7784543|少年時代
     demographic: seinen
     genres:
@@ -556387,9 +556530,45 @@ series:
     synopsis: 藤子不二雄Ⓐによる柏原兵三原作『少年時代』のコミカライズ。戦時下の少年たちの友情と別れを描いた感動の名作。実写映画化。
     status: completed
   - key: Q7784543|巨人の復讐
+    magazine: null
+    demographic: shounen
+    genres:
+      - sports
+      - drama
+      - action
+    synopsis: 藤子不二雄Aが描く野球漫画。プロ野球・巨人を題材にした復讐劇。
+    status: completed
+    anime_adapted: false
   - key: Q7784543|帰ッテキタせぇるすまん
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - supernatural
+      - horror
+    synopsis: 藤子不二雄A「笑ゥせぇるすまん」の続編。喪黒福造が再び現代社会の闇と心の隙に迫る。
+    status: completed
+    anime_adapted: true
   - key: Q7784543|帰ッテキタせぇるすまんspecial
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - supernatural
+      - horror
+    synopsis: 藤子不二雄A「帰ッテキタせぇるすまん」のスペシャル編。
+    status: completed
+    anime_adapted: false
   - key: Q7784543|忍法十番勝負
+    magazine: null
+    demographic: shounen
+    genres:
+      - historical
+      - action
+      - comedy
+    synopsis: 藤子不二雄Aが描く忍法十番勝負を題材にした少年向け時代劇アクション。
+    status: completed
+    anime_adapted: false
   - key: Q7784543|忍者ハットリくん
     magazine: coro-coro
     demographic: kodomo
@@ -556400,7 +556579,24 @@ series:
     status: completed
     anime_adapted: true
   - key: Q7784543|怪人わかとの
+    magazine: null
+    demographic: shounen
+    genres:
+      - comedy
+      - mystery
+    synopsis: 藤子不二雄Aが描く怪人「わかとの」を題材にしたコメディ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q7784543|怪人二十面相
+    magazine: null
+    demographic: shounen
+    genres:
+      - mystery
+      - action
+      - adventure
+    synopsis: 江戸川乱歩原作の名作探偵小説「怪人二十面相」を題材にしたコミカライズ。明智小五郎と少年探偵団の活躍。
+    status: completed
+    anime_adapted: false
   - key: Q7784543|怪物くん
     magazine: weekly-shonen-king
     demographic: kodomo
@@ -556415,7 +556611,25 @@ series:
     alternative_titles:
       en: Monster Kid
   - key: Q7784543|怪物くん ベストセレクション
+    magazine: null
+    demographic: shounen
+    genres:
+      - comedy
+      - fantasy
+      - supernatural
+    synopsis: 藤子不二雄A代表作「怪物くん」のベストセレクション。怪物ランドの王子と仲間たちのドタバタ。
+    status: completed
+    anime_adapted: true
   - key: Q7784543|怪物くんベスト・セレクション
+    magazine: null
+    demographic: shounen
+    genres:
+      - comedy
+      - fantasy
+      - supernatural
+    synopsis: 藤子不二雄A「怪物くん」の名エピソードを集めたベストセレクション版。
+    status: completed
+    anime_adapted: true
   - key: Q7784543|愛...しりそめし頃に
     magazine: big-comic
     demographic: seinen
@@ -556425,7 +556639,23 @@ series:
     synopsis: 藤子・F・不二雄(=安孫子素雄)が、亡き相棒・藤本弘との青春時代をふり返って描く、トキワ荘の自伝的ドラマ。
     status: completed
   - key: Q7784543|愛たずねびと
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - romance
+    synopsis: 藤子不二雄Aが描く愛をたずね歩く人の物語を題材にしたドラマ短編。
+    status: completed
+    anime_adapted: false
   - key: Q7784543|愛ぬすびと
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - romance
+    synopsis: 藤子不二雄Aが描く愛をぬすむ人を題材にしたドラマ短編。
+    status: completed
+    anime_adapted: false
   - key: Q7784543|憂夢
     demographic: seinen
     genres:
@@ -556436,7 +556666,23 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q7784543|戯れ男
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - romance
+    synopsis: 藤子不二雄Aが描く戯れに生きる男を題材にしたドラマ短編。
+    status: completed
+    anime_adapted: false
   - key: Q7784543|手塚治虫名作集
+    magazine: null
+    demographic: shounen
+    genres:
+      - drama
+      - historical
+    synopsis: 手塚治虫の名作を集めたセレクション。漫画の神様の傑作を厳選収録。
+    status: completed
+    anime_adapted: false
   - key: Q7784543|新プロゴルファー猿
     demographic: shounen
     genres:
@@ -556452,6 +556698,14 @@ series:
     synopsis: 藤子不二雄Ⓐ『忍者ハットリくん』新シリーズ。
     status: completed
   - key: Q7784543|日本短編漫画傑作集
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - slice-of-life
+    synopsis: 日本の名作短編漫画を集めた傑作選。藤子不二雄Aの作品も収録。
+    status: completed
+    anime_adapted: false
   - key: Q7784543|海の王子
     demographic: shounen
     genres:
@@ -556462,9 +556716,43 @@ series:
     status: completed
     anime_adapted: true
   - key: Q7784543|漫画家が見た手塚治虫
+    magazine: null
+    demographic: seinen
+    genres:
+      - biography
+      - drama
+    synopsis: 藤子不二雄Aら漫画家たちが見た手塚治虫を題材にした伝記アンソロジー。
+    status: completed
+    anime_adapted: false
   - key: Q7784543|熱血!!コロコロ伝説
+    magazine: null
+    demographic: shounen
+    genres:
+      - historical
+      - comedy
+    synopsis: コロコロコミックの歴史を熱く綴ったアンソロジー。藤子不二雄Aら作家の作品も収録。
+    status: completed
+    anime_adapted: false
   - key: Q7784543|狐狗狸伝説
+    magazine: null
+    demographic: seinen
+    genres:
+      - horror
+      - supernatural
+      - mystery
+    synopsis: 藤子不二雄Aが描く狐狗狸さんの伝説を題材にした怪奇ホラー漫画。
+    status: completed
+    anime_adapted: false
   - key: Q7784543|用心棒
+    magazine: null
+    demographic: seinen
+    genres:
+      - historical
+      - action
+      - drama
+    synopsis: 藤子不二雄Aが描く用心棒を題材にした時代劇アクション漫画。
+    status: completed
+    anime_adapted: false
   - key: Q7784543|笑ゥせぇるすまん
     magazine: manga-sunday
     demographic: seinen
@@ -556478,10 +556766,54 @@ series:
     alternative_titles:
       en: The Laughing Salesman
   - key: Q7784543|藤子不二雄(A)ブラックユーモア傑作選
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - horror
+      - comedy
+    synopsis: 藤子不二雄Aのブラックユーモア作品を集めた傑作選。「笑ゥせぇるすまん」「魔太郎がくる!!」等。
+    status: completed
+    anime_adapted: false
   - key: Q7784543|藤子不二雄(A)ブラックユーモア短篇集
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - horror
+      - comedy
+    synopsis: 藤子不二雄Aのブラックユーモア短編集。
+    status: completed
+    anime_adapted: false
   - key: Q7784543|藤子不二雄A
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - biography
+    synopsis: 「忍者ハットリくん」「怪物くん」「笑ゥせぇるすまん」で知られる漫画家・藤子不二雄Aの自選作品集または関連作。
+    status: completed
+    anime_adapted: false
   - key: Q7784543|藤子不二雄Aのブラックユーモア
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - horror
+      - comedy
+    synopsis: 藤子不二雄Aのブラックユーモア作品を集めたセレクション。
+    status: completed
+    anime_adapted: false
   - key: Q7784543|藤子不二雄Aブラックユーモア傑作選
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - horror
+      - comedy
+    synopsis: 藤子不二雄Aのブラックユーモア傑作選。
+    status: completed
+    anime_adapted: false
   - key: Q7784543|藤子不二雄Aブラックユーモア短篇集
     demographic: seinen
     genres:
@@ -556502,7 +556834,23 @@ series:
     status: completed
     anime_adapted: false
   - key: Q7784543|黒ベエ
+    magazine: null
+    demographic: shounen
+    genres:
+      - comedy
+      - supernatural
+    synopsis: 藤子不二雄Aの代表作。黒い小鬼「黒ベエ」を主役にしたシュールギャグ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q78120289|シニギワ
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - horror
+    synopsis: シニギワ(死に際)を題材にした人間ドラマ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q78120289|デビリーマン
     magazine: null
     demographic: seinen
@@ -556539,6 +556887,15 @@ series:
     synopsis: 松浦聡彦が描く、お笑いの神様を題材にした青年コメディ。
     status: completed
   - key: Q7813586|ゼロからの中学受験ザ・コミック
+    magazine: null
+    demographic: seinen
+    genres:
+      - educational
+      - drama
+      - comedy
+    synopsis: ゼロから始める中学受験の奮闘を綴ったコミックエッセイ。
+    status: completed
+    anime_adapted: false
   - key: Q7813586|タキシード銀
     magazine: weekly-shonen-sunday
     demographic: shounen
@@ -556549,9 +556906,42 @@ series:
     status: completed
     anime_adapted: true
   - key: Q7813586|タローの小太郎
+    magazine: null
+    demographic: shounen
+    genres:
+      - comedy
+      - slice-of-life
+    synopsis: タローの友達の小太郎を主役にした少年漫画コメディ。
+    status: completed
+    anime_adapted: false
   - key: Q7813586|ブレイブ猿s
+    magazine: null
+    demographic: shounen
+    genres:
+      - action
+      - comedy
+      - adventure
+    synopsis: 勇敢な猿たちを主役にした少年向けアクションコメディ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q7813586|まにまに
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - slice-of-life
+    synopsis: 「まにまに」をタイトルにした青年漫画作品。
+    status: completed
+    anime_adapted: false
   - key: Q7813586|モクの関白宣言
+    magazine: null
+    demographic: shounen
+    genres:
+      - comedy
+      - drama
+    synopsis: モクという少年の関白宣言を題材にしたコメディ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q7813586|よとぎばなし
     demographic: seinen
     genres:
@@ -556608,6 +556998,15 @@ series:
     synopsis: TONOによるエッセイ漫画。著者Tonoちゃんのしましまな日常を描く。
     status: completed
   - key: Q7821611|TONOちゃんの裏しまえぶりでぃ
+    magazine: null
+    demographic: josei
+    genres:
+      - comedy
+      - biography
+      - slice-of-life
+    synopsis: 漫画家TONOの自伝的エッセイ漫画。日常の裏側を綴る。
+    status: completed
+    anime_adapted: false
   - key: Q7821611|アデライトの花
     demographic: shoujo
     genres:
@@ -556616,11 +557015,61 @@ series:
     synopsis: TONOが描く、アデライトの花を題材にした幻想少女漫画。
     status: completed
   - key: Q7821611|うぐいす姉妹ごはん日記
+    magazine: null
+    demographic: josei
+    genres:
+      - cooking
+      - slice-of-life
+      - comedy
+    synopsis: TONOによる「うぐいす姉妹」シリーズのごはん日記編。
+    status: completed
+    anime_adapted: false
   - key: Q7821611|うぐいす姉妹のはらぺこごはん
+    magazine: null
+    demographic: josei
+    genres:
+      - cooking
+      - slice-of-life
+      - comedy
+    synopsis: TONO「うぐいす姉妹」のはらぺこごはん編。姉妹のグルメ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q7821611|うぐいす姉妹のへっぽこ子育て録
+    magazine: null
+    demographic: josei
+    genres:
+      - comedy
+      - slice-of-life
+    synopsis: TONO「うぐいす姉妹」のへっぽこ子育てを綴ったエッセイ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q7821611|うぐいす姉妹ゆるゆる旅行本
+    magazine: null
+    demographic: josei
+    genres:
+      - comedy
+      - slice-of-life
+    synopsis: TONO「うぐいす姉妹」のゆるゆる旅行を綴ったエッセイ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q7821611|うぐいす姉妹愛しのネコ本
+    magazine: null
+    demographic: josei
+    genres:
+      - comedy
+      - slice-of-life
+    synopsis: TONO「うぐいす姉妹」の愛猫との日常を綴ったエッセイ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q7821611|うぐいす姉妹毛だらけ猫だらけ
+    magazine: null
+    demographic: josei
+    genres:
+      - comedy
+      - slice-of-life
+    synopsis: TONO「うぐいす姉妹」の毛だらけ猫だらけの日常を綴ったエッセイ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q7821611|ウサギコットン100%
     magazine: null
     demographic: seinen
@@ -556631,6 +557080,14 @@ series:
     status: completed
     anime_adapted: false
   - key: Q7821611|おれたちの葬式本
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+      - drama
+    synopsis: TONOらが葬式をテーマに綴ったコミックエッセイ本。
+    status: completed
+    anime_adapted: false
   - key: Q7821611|カルバニア物語
     magazine: melody
     demographic: shoujo
@@ -556642,6 +557099,14 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q7821611|カレンのファスナー
+    magazine: null
+    demographic: shoujo
+    genres:
+      - fantasy
+      - drama
+    synopsis: TONOの作品。ファスナーを開けると別世界へ通じる少女漫画ファンタジー。
+    status: completed
+    anime_adapted: false
   - key: Q7821611|コーラル
     demographic: josei
     genres:
@@ -556650,8 +557115,34 @@ series:
     synopsis: TONOによる海洋ファンタジー。コーラル(珊瑚)を巡る少女漫画。
     status: completed
   - key: Q7821611|ダスクストーリィ
+    magazine: null
+    demographic: shoujo
+    genres:
+      - fantasy
+      - drama
+      - romance
+    synopsis: TONOの代表作。19世紀英国を舞台にした幻想的なゴシック少女漫画。
+    status: completed
+    anime_adapted: false
   - key: Q7821611|ダスクストリート
+    magazine: null
+    demographic: shoujo
+    genres:
+      - fantasy
+      - drama
+      - romance
+    synopsis: TONO「ダスクストーリィ」関連作品。黄昏の街を舞台にしたゴシックドラマ。
+    status: completed
+    anime_adapted: false
   - key: Q7821611|だらだら日和
+    magazine: null
+    demographic: josei
+    genres:
+      - comedy
+      - slice-of-life
+    synopsis: TONOが描くだらだらした日和を綴る日常コメディエッセイ。
+    status: completed
+    anime_adapted: false
   - key: Q7821611|チキタ・gugu
     magazine: monthly-comic-zero-sum
     demographic: shoujo
@@ -556669,8 +557160,33 @@ series:
     synopsis: TONOの『チキタ・GUGU』新装版。
     status: completed
   - key: Q7821611|とのとのとのこのぐだぐだ雑記
+    magazine: null
+    demographic: josei
+    genres:
+      - comedy
+      - biography
+      - slice-of-life
+    synopsis: TONO(殿野)の日常をぐだぐだ綴ったエッセイ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q7821611|とのとのとのこのとってもゴーマン
+    magazine: null
+    demographic: josei
+    genres:
+      - comedy
+      - biography
+    synopsis: TONOがとってもゴーマンに自分を綴るエッセイ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q7821611|とのとのとのこのなんとかしま~す
+    magazine: null
+    demographic: josei
+    genres:
+      - comedy
+      - biography
+    synopsis: TONOがなんとかしますとぼやくエッセイ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q7821611|ナバナバパラダイス犬童医院繁盛記
     demographic: josei
     genres:
@@ -556681,12 +557197,69 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q7821611|ひらり、
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - drama
+    synopsis: TONOが描く「ひらり、」と舞う花や恋を題材にした少女漫画。
+    status: completed
+    anime_adapted: false
   - key: Q7821611|ピンク・ラッシュ
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - comedy
+    synopsis: TONOが描くピンクの恋愛ラッシュを題材にした少女漫画ラブコメ。
+    status: completed
+    anime_adapted: false
   - key: Q7821611|めろねこ
+    magazine: null
+    demographic: josei
+    genres:
+      - comedy
+      - slice-of-life
+    synopsis: TONOが愛猫「めろ」との生活を綴ったエッセイ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q7821611|よからぬ話
+    magazine: null
+    demographic: seinen
+    genres:
+      - horror
+      - mystery
+      - drama
+    synopsis: TONOが描くよからぬ話を集めた怪奇ホラー短編集。
+    status: completed
+    anime_adapted: false
   - key: Q7821611|ラビット・ハンティング
+    magazine: null
+    demographic: shoujo
+    genres:
+      - mystery
+      - drama
+    synopsis: TONOが描くウサギ狩りをモチーフにしたミステリー少女漫画。
+    status: completed
+    anime_adapted: false
   - key: Q7821611|博士の魚たち
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+      - fantasy
+    synopsis: TONOが描く博士と魚たちの幻想的な少女漫画。
+    status: completed
+    anime_adapted: false
   - key: Q7821611|博士の魚たち+薫さんの帰郷
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+      - fantasy
+    synopsis: TONO「博士の魚たち」と「薫さんの帰郷」の合本版。
+    status: completed
+    anime_adapted: false
   - key: Q7821611|新・私の部屋の猫放題
     magazine: null
     demographic: seinen
@@ -556697,6 +557270,15 @@ series:
     status: completed
     anime_adapted: false
   - key: Q7821611|犬童医院繁盛記
+    magazine: null
+    demographic: seinen
+    genres:
+      - medical
+      - comedy
+      - drama
+    synopsis: TONOが描く犬童医院を舞台にした人情コメディ。獣医ものを題材にする。
+    status: completed
+    anime_adapted: false
   - key: Q7821611|猫で語る怪異
     magazine: null
     demographic: seinen
@@ -556707,7 +557289,23 @@ series:
     status: completed
     anime_adapted: false
   - key: Q7821611|生きてゆく私
+    magazine: null
+    demographic: josei
+    genres:
+      - drama
+      - biography
+    synopsis: TONOが自身の生き方を綴ったエッセイ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q7821611|砂の下の夢
+    magazine: null
+    demographic: shoujo
+    genres:
+      - fantasy
+      - drama
+    synopsis: TONOが描く砂の下に眠る夢を題材にした幻想少女漫画。
+    status: completed
+    anime_adapted: false
   - key: Q7821611|私の部屋の猫放題
     demographic: josei
     genres:
@@ -556718,10 +557316,54 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q7821611|薫さんの帰郷
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+      - slice-of-life
+    synopsis: TONOが描くヒロイン薫さんの帰郷を題材にした少女漫画ドラマ。
+    status: completed
+    anime_adapted: false
   - key: Q7821611|黄色い海岸
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+      - fantasy
+      - romance
+    synopsis: TONOが描く黄色い海岸を舞台にした幻想的な少女漫画。
+    status: completed
+    anime_adapted: false
   - key: Q7827649|あ~らわが殿!
+    magazine: null
+    demographic: shoujo
+    genres:
+      - historical
+      - comedy
+      - romance
+    synopsis: 木原敏江の代表作。江戸時代の若殿様と忍びのお小姓を題材にした少女漫画歴史コメディ。
+    status: completed
+    anime_adapted: false
   - key: Q7827649|あーらわが殿
+    magazine: null
+    demographic: shoujo
+    genres:
+      - historical
+      - comedy
+      - romance
+    synopsis: 木原敏江「あ~らわが殿!」の表記違い版。
+    status: completed
+    anime_adapted: false
   - key: Q7827649|あーらわが殿!
+    magazine: null
+    demographic: shoujo
+    genres:
+      - historical
+      - comedy
+      - romance
+    synopsis: 木原敏江「あ~らわが殿!」の表記違い版。江戸の若殿と侍たちの少女漫画歴史コメディ。
+    status: completed
+    anime_adapted: false
   - key: Q7827649|アンジェリク
     demographic: shoujo
     genres:
@@ -556730,27 +557372,220 @@ series:
     synopsis: 木原敏江による少女歴史ロマン。フランスの女性アンジェリクを巡る物語。
     status: completed
   - key: Q7827649|うしろの守護天使
+    magazine: null
+    demographic: shoujo
+    genres:
+      - fantasy
+      - romance
+      - drama
+    synopsis: 木原敏江が描く守護天使を題材にした少女漫画ファンタジー。
+    status: completed
+    anime_adapted: false
   - key: Q7827649|エメラルドの海賊
+    magazine: null
+    demographic: shoujo
+    genres:
+      - adventure
+      - romance
+      - historical
+    synopsis: 木原敏江が描くエメラルドを巡る海賊と少女のロマン少女漫画。
+    status: completed
+    anime_adapted: false
   - key: Q7827649|お出合いあそばせ
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - comedy
+      - historical
+    synopsis: 木原敏江が描く出合いを題材にした少女漫画ラブコメ。
+    status: completed
+    anime_adapted: false
   - key: Q7827649|クラシックなサファリ
+    magazine: null
+    demographic: shoujo
+    genres:
+      - adventure
+      - drama
+      - historical
+    synopsis: 木原敏江が描くクラシックなサファリを題材にした少女漫画。
+    status: completed
+    anime_adapted: false
   - key: Q7827649|くれないに燃ゆるとも
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+      - historical
+      - romance
+    synopsis: 木原敏江が描く紅に燃える情熱を題材にした少女漫画歴史ドラマ。
+    status: completed
+    anime_adapted: false
   - key: Q7827649|サイボーグ009
+    magazine: null
+    demographic: shounen
+    genres:
+      - sci-fi
+      - action
+      - drama
+    synopsis: 石ノ森章太郎の代表作「サイボーグ009」を木原敏江らがコミカライズした作品。9人の改造人間サイボーグ戦士たちの闘い。
+    status: completed
+    anime_adapted: true
   - key: Q7827649|ジークリンデの子守歌
+    magazine: null
+    demographic: shoujo
+    genres:
+      - historical
+      - drama
+      - romance
+    synopsis: 木原敏江がジークリンデを題材にした少女漫画ドラマ。
+    status: completed
+    anime_adapted: false
   - key: Q7827649|しまりんごスペシャル
+    magazine: null
+    demographic: shoujo
+    genres:
+      - comedy
+      - slice-of-life
+    synopsis: 木原敏江の「しまりんご」スペシャル編。
+    status: completed
+    anime_adapted: false
   - key: Q7827649|それは常世のレクイエム
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+      - fantasy
+      - historical
+    synopsis: 木原敏江が描く常世のレクイエムを題材にした幻想少女漫画。
+    status: completed
+    anime_adapted: false
   - key: Q7827649|ダイヤモンド❤ゴジラーン
+    magazine: null
+    demographic: shoujo
+    genres:
+      - comedy
+      - romance
+    synopsis: 木原敏江が描くダイヤモンド・ゴジラーンを題材にした少女漫画コメディ。
+    status: completed
+    anime_adapted: false
   - key: Q7827649|どうしたのデイジー?
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - comedy
+      - school
+    synopsis: 木原敏江が描くデイジーの恋の悩みを題材にした少女漫画。
+    status: completed
+    anime_adapted: false
   - key: Q7827649|とっておきのリボン
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - drama
+    synopsis: 木原敏江の短編。とっておきのリボンに込めた想いを描く少女漫画。
+    status: completed
+    anime_adapted: false
   - key: Q7827649|とりかえばや異聞
+    magazine: null
+    demographic: shoujo
+    genres:
+      - historical
+      - drama
+      - romance
+    synopsis: 木原敏江の歴史少女漫画。平安朝の古典「とりかえばや物語」を題材にした男女の取り違えドラマ。
+    status: completed
+    anime_adapted: false
   - key: Q7827649|ふるふる
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - comedy
+    synopsis: 木原敏江が描く震える(ふるふる)恋を題材にした少女漫画。
+    status: completed
+    anime_adapted: false
   - key: Q7827649|ベルンシュタイン
+    magazine: null
+    demographic: shoujo
+    genres:
+      - historical
+      - drama
+      - romance
+    synopsis: 木原敏江が描くベルンシュタインを題材にしたドイツ風歴史少女漫画。
+    status: completed
+    anime_adapted: false
   - key: Q7827649|ユンター・ムアリー
+    magazine: null
+    demographic: shoujo
+    genres:
+      - fantasy
+      - drama
+      - romance
+    synopsis: 木原敏江が描くユンター・ムアリーを題材にしたファンタジー少女漫画。
+    status: completed
+    anime_adapted: false
   - key: Q7827649|ラストタンゴ
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - drama
+      - music
+    synopsis: 木原敏江が描く最後のタンゴを題材にした少女漫画ロマンス。
+    status: completed
+    anime_adapted: false
   - key: Q7827649|わたしが嫌いなお姐様
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+      - school
+    synopsis: 木原敏江が描く女学院の対立する姐様を題材にした少女漫画ドラマ。
+    status: completed
+    anime_adapted: false
   - key: Q7827649|伊勢物語
+    magazine: null
+    demographic: shoujo
+    genres:
+      - historical
+      - romance
+      - drama
+    synopsis: 木原敏江が古典「伊勢物語」を題材にコミカライズした少女漫画。在原業平の風流と恋を綴る。
+    status: completed
+    anime_adapted: false
   - key: Q7827649|千歳の再会
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - drama
+      - historical
+    synopsis: 木原敏江が千年の時を超えた再会を題材にした少女漫画。
+    status: completed
+    anime_adapted: false
   - key: Q7827649|古代・王朝絵巻
+    magazine: null
+    demographic: shoujo
+    genres:
+      - historical
+      - drama
+      - romance
+    synopsis: 木原敏江が古代・王朝を題材に絵巻物のように描いた少女漫画歴史ドラマ。
+    status: completed
+    anime_adapted: false
   - key: Q7827649|四十七文字
+    magazine: null
+    demographic: shoujo
+    genres:
+      - historical
+      - drama
+      - romance
+    synopsis: 木原敏江が描く忠臣蔵・四十七士をオマージュした少女漫画。
+    status: completed
+    anime_adapted: false
   - key: Q7827649|夢の碑
     magazine: null
     demographic: shoujo
@@ -556762,7 +557597,25 @@ series:
     status: completed
     anime_adapted: false
   - key: Q7827649|夢の碑 とりかえばや異聞
+    magazine: null
+    demographic: shoujo
+    genres:
+      - historical
+      - drama
+      - romance
+    synopsis: 木原敏江の「夢の碑」シリーズの「とりかえばや異聞」編。平安朝を舞台にした幻想少女漫画。
+    status: completed
+    anime_adapted: false
   - key: Q7827649|夢の碑 風恋記
+    magazine: null
+    demographic: shoujo
+    genres:
+      - historical
+      - drama
+      - romance
+    synopsis: 木原敏江の「夢の碑」シリーズの「風恋記」編。風雅な恋を綴る歴史少女漫画。
+    status: completed
+    anime_adapted: false
   - key: Q7827649|夢占舟
   - key: Q7827649|夢幻花伝
   - key: Q7827649|大江山花伝
