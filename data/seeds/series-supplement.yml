@@ -1,5 +1,5 @@
 schema_version: 1
-generated_at: 2026-05-12T02:22:25.138Z
+generated_at: 2026-05-12T02:23:55.202Z
 generator: claude-opus-4-7-direct-fill
 series:
   - key: Q1001784|GOLDEN SPIRAL
@@ -423260,6 +423260,14 @@ series:
     synopsis: 紅林直によるフランス歴史漫画。ポンパドール夫人を描く物語。
     status: completed
   - key: Q26771426|フォーチュン
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+      - romance
+    synopsis: フォーチュン短編。
+    status: completed
+    anime_adapted: false
   - key: Q26771426|嬢王
     magazine: weekly-comic-bunch
     demographic: seinen
@@ -423282,6 +423290,14 @@ series:
     synopsis: 紅林直による登山漫画。山靴で疾走する登山家の物語。
     status: completed
   - key: Q26771426|恋極
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - drama
+    synopsis: 恋極短編。
+    status: completed
+    anime_adapted: false
   - key: Q26771426|月やあらぬ
     magazine: null
     demographic: shoujo
@@ -423292,13 +423308,74 @@ series:
     status: completed
     anime_adapted: false
   - key: Q26771426|花屋=式
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+    synopsis: 花屋=式。
+    status: completed
+    anime_adapted: false
   - key: Q26776652|さよなら星
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+      - romance
+    synopsis: さよなら星短編。
+    status: completed
+    anime_adapted: false
   - key: Q26776652|バレエ星
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+      - music
+    synopsis: バレエ星短編。
+    status: completed
+    anime_adapted: false
   - key: Q26776652|まりもの星
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+    synopsis: まりもの星短編。
+    status: completed
+    anime_adapted: false
   - key: Q268152|かみちゅ!
+    magazine: null
+    demographic: seinen
+    genres:
+      - slice_of_life
+      - supernatural
+    synopsis: かみちゅコミカライズ。
+    status: completed
+    anime_adapted: true
   - key: Q268152|つぼみ
+    magazine: null
+    demographic: shoujo
+    genres:
+      - yuri
+      - anthology
+    synopsis: 百合誌つぼみ。
+    status: completed
+    anime_adapted: false
   - key: Q268152|メバエ
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+    synopsis: メバエ短編。
+    status: completed
+    anime_adapted: false
   - key: Q268152|少女マテリアル
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+      - anthology
+    synopsis: 少女マテリアル。
+    status: completed
+    anime_adapted: false
   - key: Q268152|翠星のガルガンティア
     demographic: seinen
     genres:
@@ -423334,16 +423411,100 @@ series:
     synopsis: 竹宮惠子による少女SF漫画。5時PM以降に革命を起こす物語。
     status: completed
   - key: Q268789|ANDROMEDA STORES
+    magazine: null
+    demographic: shoujo
+    genres:
+      - sci_fi
+      - drama
+    synopsis: ANDROMEDA STORES。
+    status: completed
+    anime_adapted: false
   - key: Q268789|ANDROMEDA STORIES
+    magazine: null
+    demographic: shoujo
+    genres:
+      - sci_fi
+      - drama
+    synopsis: ANDROMEDA STORIES。
+    status: completed
+    anime_adapted: false
   - key: Q268789|behind
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+    synopsis: 竹宮恵子behind。
+    status: completed
+    anime_adapted: false
   - key: Q268789|Big Selection
+    magazine: null
+    demographic: shoujo
+    genres:
+      - anthology
+    synopsis: Big Selection。
+    status: completed
+    anime_adapted: false
   - key: Q268789|COM傑作選
+    magazine: null
+    demographic: seinen
+    genres:
+      - anthology
+    synopsis: COM傑作選。
+    status: completed
+    anime_adapted: false
   - key: Q268789|MIRAGE
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+    synopsis: 竹宮恵子MIRAGE。
+    status: completed
+    anime_adapted: false
   - key: Q268789|Qの字塔
+    magazine: null
+    demographic: shoujo
+    genres:
+      - sci_fi
+      - fantasy
+    synopsis: Qの字塔SF。
+    status: completed
+    anime_adapted: false
   - key: Q268789|アストロツイン
+    magazine: null
+    demographic: shoujo
+    genres:
+      - sci_fi
+      - drama
+    synopsis: アストロツイン。
+    status: completed
+    anime_adapted: false
   - key: Q268789|アタゴオル
+    magazine: null
+    demographic: shoujo
+    genres:
+      - fantasy
+      - anthology
+    synopsis: ますむらひろしアタゴオル。
+    status: completed
+    anime_adapted: false
   - key: Q268789|あなたの好きな花
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+      - romance
+    synopsis: あなたの好きな花。
+    status: completed
+    anime_adapted: false
   - key: Q268789|アリス・ブック
+    magazine: null
+    demographic: shoujo
+    genres:
+      - fantasy
+      - drama
+    synopsis: アリス・ブック。
+    status: completed
+    anime_adapted: false
   - key: Q268789|アンドロメダ・ストーリーズ
     demographic: shoujo
     genres:
@@ -423361,16 +423522,101 @@ series:
     synopsis: 異世界イズァローンを舞台に、運命を背負った双子の王子の戦いを竹宮惠子が壮大に描く幻想叙事詩。
     status: completed
   - key: Q268789|ヴァージン・ラビット
+    magazine: null
+    demographic: shoujo
+    genres:
+      - fantasy
+      - drama
+    synopsis: ヴァージン・ラビット。
+    status: completed
+    anime_adapted: false
   - key: Q268789|ウィーン協奏曲
+    magazine: null
+    demographic: shoujo
+    genres:
+      - music
+      - drama
+    synopsis: ウィーン協奏曲。
+    status: completed
+    anime_adapted: false
   - key: Q268789|ウェディング・ライセンス
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+    synopsis: ウェディング・ライセンス。
+    status: completed
+    anime_adapted: false
   - key: Q268789|エデン2185
+    magazine: null
+    demographic: shoujo
+    genres:
+      - sci_fi
+      - drama
+    synopsis: エデン2185。
+    status: completed
+    anime_adapted: false
   - key: Q268789|エメレンティア
+    magazine: null
+    demographic: shoujo
+    genres:
+      - historical
+      - drama
+    synopsis: エメレンティア。
+    status: completed
+    anime_adapted: false
   - key: Q268789|エルメスの道
+    magazine: null
+    demographic: shoujo
+    genres:
+      - historical
+      - biographical
+    synopsis: エルメスの道。
+    status: completed
+    anime_adapted: false
   - key: Q268789|オルフェの遺言
+    magazine: null
+    demographic: shoujo
+    genres:
+      - fantasy
+      - drama
+    synopsis: オルフェの遺言。
+    status: completed
+    anime_adapted: false
   - key: Q268789|カノン
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+      - music
+    synopsis: 竹宮恵子カノン。
+    status: completed
+    anime_adapted: false
   - key: Q268789|ここのつの友情
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+    synopsis: ここのつの友情。
+    status: completed
+    anime_adapted: false
   - key: Q268789|サンルームにて
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+    synopsis: 竹宮恵子サンルームにて。
+    status: completed
+    anime_adapted: false
   - key: Q268789|ジルベスターの星から
+    magazine: null
+    demographic: shoujo
+    genres:
+      - fantasy
+      - drama
+    synopsis: ジルベスターの星から。
+    status: completed
+    anime_adapted: false
   - key: Q268789|スパニッシュ・ハーレム
     demographic: shoujo
     genres:
@@ -423379,7 +423625,21 @@ series:
     synopsis: 竹宮惠子が描く、スパニッシュ・ハーレムを舞台にした歴史ロマン少女漫画。
     status: completed
   - key: Q268789|そばかすの少年
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+    synopsis: そばかすの少年。
+    status: completed
+    anime_adapted: false
   - key: Q268789|トゥ・リップルくん
+    magazine: null
+    demographic: shoujo
+    genres:
+      - comedy
+    synopsis: トゥ・リップルくん。
+    status: completed
+    anime_adapted: false
   - key: Q268789|ファラオの墓
     demographic: shoujo
     genres:
@@ -423389,18 +423649,116 @@ series:
     synopsis: 竹宮惠子による少女漫画の金字塔。古代エジプトを舞台に、奪われた王国の王子サリオキスの復讐と愛を描いた壮大な歴史ロマンの名作。
     status: completed
   - key: Q268789|ブライトの憂鬱
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+    synopsis: ブライトの憂鬱。
+    status: completed
+    anime_adapted: false
   - key: Q268789|ブラボー!ラ・ネッシー
+    magazine: null
+    demographic: shoujo
+    genres:
+      - comedy
+      - fantasy
+    synopsis: ブラボー!ラ・ネッシー。
+    status: completed
+    anime_adapted: false
   - key: Q268789|ほほえむ少年
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+    synopsis: ほほえむ少年。
+    status: completed
+    anime_adapted: false
   - key: Q268789|まほうつかいの弟子
+    magazine: null
+    demographic: shoujo
+    genres:
+      - fantasy
+      - drama
+    synopsis: まほうつかいの弟子。
+    status: completed
+    anime_adapted: false
   - key: Q268789|まぼろしの旗
+    magazine: null
+    demographic: shoujo
+    genres:
+      - historical
+      - drama
+    synopsis: まぼろしの旗。
+    status: completed
+    anime_adapted: false
   - key: Q268789|まんがグリム童話
+    magazine: null
+    demographic: josei
+    genres:
+      - fantasy
+      - horror
+    synopsis: まんがグリム童話。
+    status: completed
+    anime_adapted: false
   - key: Q268789|マンションネコの興味シンシン
+    magazine: null
+    demographic: shoujo
+    genres:
+      - slice_of_life
+      - comedy
+    synopsis: マンションネコ。
+    status: completed
+    anime_adapted: false
   - key: Q268789|りんたろうパニック!
+    magazine: null
+    demographic: shoujo
+    genres:
+      - comedy
+    synopsis: りんたろうパニック。
+    status: completed
+    anime_adapted: false
   - key: Q268789|ロンド・カプリチオーソ
+    magazine: null
+    demographic: shoujo
+    genres:
+      - music
+      - drama
+    synopsis: ロンド・カプリチオーソ。
+    status: completed
+    anime_adapted: false
   - key: Q268789|ワン・ノート・サンバ
+    magazine: null
+    demographic: shoujo
+    genres:
+      - music
+      - drama
+    synopsis: ワン・ノート・サンバ。
+    status: completed
+    anime_adapted: false
   - key: Q268789|七階からの手紙
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+    synopsis: 七階からの手紙。
+    status: completed
+    anime_adapted: false
   - key: Q268789|会話
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+    synopsis: 竹宮恵子会話。
+    status: completed
+    anime_adapted: false
   - key: Q268789|僕だけが知っている
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+    synopsis: 僕だけが知っている。
+    status: completed
+    anime_adapted: false
   - key: Q268789|吾妻鏡
     demographic: shoujo
     genres:
@@ -423411,7 +423769,21 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q268789|告白
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+    synopsis: 竹宮恵子告白。
+    status: completed
+    anime_adapted: false
   - key: Q268789|嘘つきな真珠たち
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+    synopsis: 嘘つきな真珠たち。
+    status: completed
+    anime_adapted: false
   - key: Q268789|地球へ
     demographic: shoujo
     genres:
@@ -423432,6 +423804,14 @@ series:
     status: completed
     anime_adapted: false
   - key: Q268789|夏への扉
+    magazine: null
+    demographic: shoujo
+    genres:
+      - sci_fi
+      - drama
+    synopsis: 夏への扉。
+    status: completed
+    anime_adapted: false
   - key: Q268789|天馬の血族
     magazine: asuka
     demographic: shoujo
@@ -423444,16 +423824,98 @@ series:
     status: completed
     anime_adapted: false
   - key: Q268789|天馬の血族 総集編
+    magazine: null
+    demographic: shoujo
+    genres:
+      - historical
+      - drama
+    synopsis: 天馬の血族総集編。
+    status: completed
+    anime_adapted: false
   - key: Q268789|姫くずし
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+    synopsis: 姫くずし。
+    status: completed
+    anime_adapted: false
   - key: Q268789|少女マンガ大全集
+    magazine: null
+    demographic: shoujo
+    genres:
+      - anthology
+    synopsis: 少女マンガ大全集。
+    status: completed
+    anime_adapted: false
   - key: Q268789|少年の詩
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+    synopsis: 少年の詩。
+    status: completed
+    anime_adapted: false
   - key: Q268789|平安情瑠璃物語
+    magazine: null
+    demographic: shoujo
+    genres:
+      - historical
+      - drama
+    synopsis: 平安情瑠璃物語。
+    status: completed
+    anime_adapted: false
   - key: Q268789|扉はひらくいくたびも
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+    synopsis: 扉はひらくいくたびも。
+    status: completed
+    anime_adapted: false
   - key: Q268789|新橋の5分間
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+    synopsis: 新橋の5分間。
+    status: completed
+    anime_adapted: false
   - key: Q268789|時を往く馬
+    magazine: null
+    demographic: shoujo
+    genres:
+      - fantasy
+      - drama
+    synopsis: 時を往く馬。
+    status: completed
+    anime_adapted: false
   - key: Q268789|殺意の底
+    magazine: null
+    demographic: shoujo
+    genres:
+      - mystery
+      - thriller
+    synopsis: 殺意の底。
+    status: completed
+    anime_adapted: false
   - key: Q268789|水木しげる漫画大全集
+    magazine: null
+    demographic: seinen
+    genres:
+      - anthology
+    synopsis: 水木しげる作品集。
+    status: completed
+    anime_adapted: false
   - key: Q268789|海の天使
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+      - fantasy
+    synopsis: 海の天使。
+    status: completed
+    anime_adapted: false
   - key: Q268789|疾風のまつりごと
     demographic: shoujo
     genres:
@@ -423472,8 +423934,29 @@ series:
     synopsis: 竹宮惠子による近未来SFラブコメディ。宇宙開発時代の月面を舞台に、超能力少女ニナと宇宙飛行士ダンの恋と冒険を描く。
     status: completed
   - key: Q268789|空がすき
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+    synopsis: 竹宮恵子空がすき。
+    status: completed
+    anime_adapted: false
   - key: Q268789|空がすき!
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+    synopsis: 竹宮恵子空がすき。
+    status: completed
+    anime_adapted: false
   - key: Q268789|竹宮恵子全集
+    magazine: null
+    demographic: shoujo
+    genres:
+      - anthology
+    synopsis: 竹宮恵子全集。
+    status: completed
+    anime_adapted: false
   - key: Q268789|紅にほふ
     demographic: shoujo
     genres:
@@ -423484,8 +423967,32 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q268789|花びらの幻想 続花びらの幻想
+    magazine: null
+    demographic: shoujo
+    genres:
+      - fantasy
+      - drama
+    synopsis: 花びらの幻想。
+    status: completed
+    anime_adapted: false
   - key: Q268789|通りすがりに殺したい
+    magazine: null
+    demographic: shoujo
+    genres:
+      - thriller
+      - drama
+    synopsis: 通りすがりに殺したい。
+    status: completed
+    anime_adapted: false
   - key: Q268789|遥かなり夢のかなた
+    magazine: null
+    demographic: shoujo
+    genres:
+      - fantasy
+      - drama
+    synopsis: 遥かなり夢のかなた。
+    status: completed
+    anime_adapted: false
   - key: Q268789|風と木の詩
     magazine: weekly-shojo-comic
     demographic: shoujo
@@ -423500,21 +424007,147 @@ series:
     alternative_titles:
       en: The Poem of Wind and Trees
   - key: Q268789|魔女はホットなお年頃
+    magazine: null
+    demographic: shoujo
+    genres:
+      - fantasy
+      - comedy
+    synopsis: 魔女はホットなお年頃。
+    status: completed
+    anime_adapted: false
   - key: Q26927316|1スウの銅貨
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+      - historical
+    synopsis: 1スウの銅貨。
+    status: completed
+    anime_adapted: false
   - key: Q26927316|グレンデル星座
+    magazine: null
+    demographic: shoujo
+    genres:
+      - sci_fi
+      - drama
+    synopsis: グレンデル星座。
+    status: completed
+    anime_adapted: false
   - key: Q26927316|たんぽぽクレーター
+    magazine: null
+    demographic: shoujo
+    genres:
+      - sci_fi
+      - drama
+    synopsis: たんぽぽクレーター。
+    status: completed
+    anime_adapted: false
   - key: Q26927316|ものまね鳥シンフォニー
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+      - music
+    synopsis: ものまね鳥シンフォニー。
+    status: completed
+    anime_adapted: false
   - key: Q26927316|リトル・コンサート
+    magazine: null
+    demographic: shoujo
+    genres:
+      - music
+      - drama
+    synopsis: リトル・コンサート。
+    status: completed
+    anime_adapted: false
   - key: Q26927316|火星に捧げるデュエット
+    magazine: null
+    demographic: shoujo
+    genres:
+      - sci_fi
+      - romance
+    synopsis: 火星に捧げるデュエット。
+    status: completed
+    anime_adapted: false
   - key: Q26927316|空の上のアレン
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+      - fantasy
+    synopsis: 空の上のアレン。
+    status: completed
+    anime_adapted: false
   - key: Q269498|17歳初めてのH
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - drama
+    synopsis: 17歳初めてのH。
+    status: completed
+    anime_adapted: false
   - key: Q269498|Love & sex
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - drama
+    synopsis: Love & sex。
+    status: completed
+    anime_adapted: false
   - key: Q269498|Make loveしよ!!
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+    synopsis: Make loveしよ。
+    status: completed
+    anime_adapted: false
   - key: Q269498|SA・KU・YA
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - drama
+    synopsis: 新條まゆSA・KU・YA。
+    status: completed
+    anime_adapted: false
   - key: Q269498|SEX=LOVE2
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+    synopsis: SEX=LOVE2。
+    status: completed
+    anime_adapted: false
   - key: Q269498|SEXYガーディアン
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - action
+    synopsis: SEXYガーディアン。
+    status: completed
+    anime_adapted: false
   - key: Q269498|TABOOに抱いて
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - drama
+    synopsis: TABOOに抱いて。
+    status: completed
+    anime_adapted: false
   - key: Q269498|あなたに繋がれたい
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - drama
+    synopsis: あなたに繋がれたい。
+    status: completed
+    anime_adapted: false
   - key: Q269498|あやかし恋絵巻
     demographic: shoujo
     genres:
@@ -423532,10 +424165,49 @@ series:
     synopsis: 新條まゆによる少女漫画。エリートな男たちとの恋愛模様を描く。
     status: completed
   - key: Q269498|ご指名です!
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - comedy
+    synopsis: ご指名です。
+    status: completed
+    anime_adapted: false
   - key: Q269498|すきしてサディスト
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+    synopsis: すきしてサディスト。
+    status: completed
+    anime_adapted: false
   - key: Q269498|ストーリー311
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - anthology
+    synopsis: ストーリー311震災作品。
+    status: completed
+    anime_adapted: false
   - key: Q269498|ストーリー311 あれから3年
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - anthology
+    synopsis: ストーリー311 3年後。
+    status: completed
+    anime_adapted: false
   - key: Q269498|ソノ声で、ソノ歌を。
+    magazine: null
+    demographic: shoujo
+    genres:
+      - music
+      - romance
+    synopsis: ソノ声で、ソノ歌を。
+    status: completed
+    anime_adapted: false
   - key: Q269498|ハートのダイヤ
     demographic: shoujo
     genres:
@@ -423546,10 +424218,48 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q269498|バカでも描けるまんが教室
+    magazine: null
+    demographic: shoujo
+    genres:
+      - educational
+      - comedy
+    synopsis: バカでも描けるまんが教室。
+    status: completed
+    anime_adapted: false
   - key: Q269498|フィアンセしたい
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+    synopsis: フィアンセしたい。
+    status: completed
+    anime_adapted: false
   - key: Q269498|ミッドナイト☆チルドレン
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - drama
+    synopsis: ミッドナイト☆チルドレン。
+    status: completed
+    anime_adapted: false
   - key: Q269498|もっと教えて
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+    synopsis: もっと教えて。
+    status: completed
+    anime_adapted: false
   - key: Q269498|ヨメトレ!
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - comedy
+    synopsis: ヨメトレ!。
+    status: completed
+    anime_adapted: false
   - key: Q269498|ラブセレブ
     magazine: shoujo-comic
     demographic: shoujo
@@ -423559,11 +424269,58 @@ series:
     synopsis: 新條まゆが描く、お金持ちセレブの恋を描く少女ラブストーリー。
     status: completed
   - key: Q269498|ロング・ディスタンス
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - drama
+    synopsis: ロング・ディスタンス。
+    status: completed
+    anime_adapted: false
   - key: Q269498|先輩
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - school
+    synopsis: 先輩短編。
+    status: completed
+    anime_adapted: false
   - key: Q269498|最強コイバナ
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - anthology
+    synopsis: 最強コイバナ。
+    status: completed
+    anime_adapted: false
   - key: Q269498|同級生
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+    synopsis: 同級生恋愛短編。
+    status: completed
+    anime_adapted: false
   - key: Q269498|君さえも愛の鎖
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - drama
+    synopsis: 君さえも愛の鎖。
+    status: completed
+    anime_adapted: false
   - key: Q269498|心を裸にして
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - drama
+    synopsis: 心を裸にして。
+    status: completed
+    anime_adapted: false
   - key: Q269498|快感・フレーズ
     magazine: shojo-comic
     demographic: shoujo
@@ -423606,6 +424363,13 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q269498|新條まゆThe Best Selection
+    magazine: null
+    demographic: shoujo
+    genres:
+      - anthology
+    synopsis: 新條まゆベスト集。
+    status: completed
+    anime_adapted: false
   - key: Q269498|機動戦士ガンダムジオン公国幼年学校
   - key: Q269498|純愛ストリップ
   - key: Q269498|覇王・愛人
