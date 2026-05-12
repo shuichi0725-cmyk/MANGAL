@@ -1,5 +1,5 @@
 schema_version: 1
-generated_at: 2026-05-12T11:50:48.278Z
+generated_at: 2026-05-12T11:52:57.133Z
 generator: claude-opus-4-7-direct-fill
 series:
   - key: Q1001784|GOLDEN SPIRAL
@@ -570585,13 +570585,80 @@ series:
     synopsis: あずまゆきが描く、小学校の恋愛クラブを舞台にしたほのぼのラブコメ。
     status: completed
   - key: Q8919606|男子禁制!!フレーゼ女学院
+    magazine: null
+    demographic: shoujo
+    genres:
+      - comedy
+      - school
+      - yuri
+    synopsis: 男子禁制のフレーゼ女学院を舞台にした少女漫画コメディ。
+    status: completed
+    anime_adapted: false
   - key: Q8919861|99回死んだ七瀬くん
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+      - fantasy
+      - supernatural
+    synopsis: 99回死んだ七瀬くんを題材にした幻想少女漫画。
+    status: completed
+    anime_adapted: false
   - key: Q8919861|ぼくのリリィ
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - drama
+    synopsis: 「ぼくのリリィ」を題材にした少女漫画ロマンス。
+    status: completed
+    anime_adapted: false
   - key: Q8919861|天国の切符
+    magazine: null
+    demographic: shoujo
+    genres:
+      - fantasy
+      - drama
+    synopsis: 天国への切符を題材にした少女漫画幻想ドラマ。
+    status: completed
+    anime_adapted: false
   - key: Q8919861|月光クロネコ屋
+    magazine: null
+    demographic: shoujo
+    genres:
+      - fantasy
+      - mystery
+      - romance
+    synopsis: 月光のクロネコ屋を題材にした少女漫画幻想ファンタジー。
+    status: completed
+    anime_adapted: false
   - key: Q8919861|眠れぬ蝶
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+      - romance
+      - fantasy
+    synopsis: 眠れぬ蝶を題材にした少女漫画幻想ドラマ。
+    status: completed
+    anime_adapted: false
   - key: Q89448774|あっち向いて!Par
+    magazine: null
+    demographic: shounen
+    genres:
+      - comedy
+    synopsis: 「あっち向いて!Par」を題材にした少年漫画コメディ。
+    status: completed
+    anime_adapted: false
   - key: Q89448774|お山の大将
+    magazine: null
+    demographic: shounen
+    genres:
+      - comedy
+      - action
+    synopsis: お山の大将を題材にした少年漫画ドラマコメディ。
+    status: completed
+    anime_adapted: false
   - key: Q89448774|ゼニ番付
     demographic: seinen
     genres:
@@ -570602,6 +570669,14 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q89448774|つんころ太介
+    magazine: null
+    demographic: shounen
+    genres:
+      - comedy
+      - action
+    synopsis: つんころ太介を主役にした少年漫画コメディ。
+    status: completed
+    anime_adapted: false
   - key: Q89448774|みどり
     demographic: shoujo
     genres:
@@ -570610,8 +570685,34 @@ series:
     synopsis: 山崎匡佑による少女漫画。みどりと呼ばれる少女の物語。
     status: completed
   - key: Q89448774|やぐらの力丸
+    magazine: null
+    demographic: shounen
+    genres:
+      - sports
+      - action
+      - drama
+    synopsis: 相撲を題材にしたやぐらの力丸を主役にした少年漫画。
+    status: completed
+    anime_adapted: false
   - key: Q89448774|劇画・青木功のゴルフ五輪書
+    magazine: null
+    demographic: seinen
+    genres:
+      - sports
+      - drama
+      - educational
+    synopsis: プロゴルファー青木功監修の劇画ゴルフ五輪書コミック。
+    status: completed
+    anime_adapted: false
   - key: Q89448774|北の大将
+    magazine: null
+    demographic: shounen
+    genres:
+      - action
+      - drama
+    synopsis: 北国の大将を題材にした少年漫画ドラマ。
+    status: completed
+    anime_adapted: false
   - key: Q89448774|白鵬本紀
     demographic: seinen
     genres:
@@ -570620,12 +570721,69 @@ series:
     synopsis: 山崎匡佑が描く、横綱白鵬の半生を綴る相撲伝記漫画。
     status: completed
   - key: Q89449044|ぷらせぼくらぶ
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - comedy
+    synopsis: プラセボくらぶを題材にした少女漫画ラブコメ。
+    status: completed
+    anime_adapted: false
   - key: Q89449044|心臓
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+      - romance
+    synopsis: 心臓を題材にした少女漫画ドラマ。
+    status: completed
+    anime_adapted: false
   - key: Q89449258|100日後に死ぬ×ネズミ
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+      - drama
+    synopsis: 「100日後に死ぬ×ネズミ」をパロディした漫画。
+    status: completed
+    anime_adapted: false
   - key: Q89449258|100日後に死ぬワニ
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+      - drama
+      - slice-of-life
+    synopsis: きくちゆうきのTwitter漫画。100日後に死ぬワニの日常を描き、最終話で衝撃を呼んだ感動コミック。
+    status: completed
+    anime_adapted: false
   - key: Q89449258|FLYING AWAY AZARASHI
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+      - slice-of-life
+    synopsis: 「FLYING AWAY AZARASHI」を題材にした青年漫画。
+    status: completed
+    anime_adapted: false
   - key: Q89449258|SUPER SUPERどうぶつーズ
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+      - slice-of-life
+    synopsis: 「SUPER どうぶつーズ」のスーパー版続編。動物たちの愉快な日常コメディ。
+    status: completed
+    anime_adapted: false
   - key: Q89449258|SUPERどうぶつーズ
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+      - slice-of-life
+    synopsis: きくちゆうきの動物擬人化コメディ漫画「SUPERどうぶつーズ」。
+    status: completed
+    anime_adapted: false
   - key: Q89520891|獣王と薬草
     demographic: shoujo
     genres:
@@ -570656,11 +570814,59 @@ series:
     alternative_titles:
       en: "Mashle: Magic and Muscles"
   - key: Q8952464|アリル
+    magazine: null
+    demographic: shoujo
+    genres:
+      - fantasy
+      - drama
+    synopsis: 佐々木倫子らによるアリルを題材にした少女漫画ファンタジー。
+    status: completed
+    anime_adapted: false
   - key: Q8952464|いつか夢の中で
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - drama
+    synopsis: 佐々木倫子が描くいつか夢の中での再会を題材にした少女漫画。
+    status: completed
+    anime_adapted: false
   - key: Q8952464|カッキーン!
+    magazine: null
+    demographic: shounen
+    genres:
+      - sports
+      - comedy
+    synopsis: カッキーン!と打つ野球を題材にしたコメディ少年漫画。
+    status: completed
+    anime_adapted: false
   - key: Q8952464|スイートホーム
+    magazine: null
+    demographic: shoujo
+    genres:
+      - comedy
+      - slice-of-life
+    synopsis: 佐々木倫子が描くスイートホームを題材にした家族コメディ少女漫画。
+    status: completed
+    anime_adapted: false
   - key: Q8952464|スマリの森
+    magazine: null
+    demographic: shoujo
+    genres:
+      - fantasy
+      - drama
+    synopsis: 佐々木倫子のスマリの森を題材にした幻想少女漫画。
+    status: completed
+    anime_adapted: false
   - key: Q8952464|だからパパには敵わない
+    magazine: null
+    demographic: shoujo
+    genres:
+      - comedy
+      - slice-of-life
+    synopsis: 「だからパパには敵わない」を題材にした少女漫画家族コメディ。
+    status: completed
+    anime_adapted: false
   - key: Q8952464|なごみクラブ
     magazine: null
     demographic: shoujo
@@ -570680,8 +570886,33 @@ series:
     status: completed
     anime_adapted: false
   - key: Q8952464|ハネムーンは西海岸へ
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - comedy
+    synopsis: ハネムーンで西海岸へ行く夫婦を題材にした少女漫画ラブコメ。
+    status: completed
+    anime_adapted: false
   - key: Q8952464|ピーチツアー
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - comedy
+      - slice-of-life
+    synopsis: ピーチツアーを題材にした少女漫画コメディ。
+    status: completed
+    anime_adapted: false
   - key: Q8952464|ファミリーアワー
+    magazine: null
+    demographic: shoujo
+    genres:
+      - comedy
+      - slice-of-life
+    synopsis: ファミリーアワーを題材にした少女漫画家族コメディ。
+    status: completed
+    anime_adapted: false
   - key: Q8952464|プラネット
     demographic: shoujo
     genres:
@@ -570692,7 +570923,23 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q8952464|プレイバウ!
+    magazine: null
+    demographic: shoujo
+    genres:
+      - comedy
+      - slice-of-life
+    synopsis: 佐々木倫子が描く犬のお辞儀(プレイバウ)を題材にしたコメディ少女漫画。
+    status: completed
+    anime_adapted: false
   - key: Q8952464|ヘヴン
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+      - fantasy
+    synopsis: 佐々木倫子の作品「ヘヴン」。天国を題材にした少女漫画。
+    status: completed
+    anime_adapted: false
   - key: Q8952464|マダムとミスター
     demographic: shoujo
     genres:
@@ -570701,9 +570948,42 @@ series:
     synopsis: 遠藤淑子による少女ラブストーリー。マダムとミスターの大人の恋を描く。
     status: completed
   - key: Q8952464|ヨシツネ
+    magazine: null
+    demographic: shoujo
+    genres:
+      - historical
+      - drama
+    synopsis: 佐々木倫子が源義経を題材にした少女漫画歴史ドラマ。
+    status: completed
+    anime_adapted: false
   - key: Q8952464|ラッコはじめました
+    magazine: null
+    demographic: shoujo
+    genres:
+      - comedy
+      - slice-of-life
+    synopsis: 佐々木倫子がラッコ飼育を題材にしたコミックエッセイ。
+    status: completed
+    anime_adapted: false
   - key: Q8952464|今月のわんこ生活
+    magazine: null
+    demographic: josei
+    genres:
+      - comedy
+      - slice-of-life
+    synopsis: 佐々木倫子の愛犬との生活を綴ったエッセイ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q8952464|兄貴
+    magazine: null
+    demographic: shoujo
+    genres:
+      - comedy
+      - drama
+      - slice-of-life
+    synopsis: 佐々木倫子が兄貴を題材にした少女漫画コメディ。
+    status: completed
+    anime_adapted: false
   - key: Q8952464|午後のお茶は妖精の国で
     demographic: shoujo
     genres:
@@ -570714,7 +570994,23 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q8952464|南から来たインディラ
+    magazine: null
+    demographic: shoujo
+    genres:
+      - adventure
+      - drama
+    synopsis: 南から来たインディラを題材にした少女漫画。
+    status: completed
+    anime_adapted: false
   - key: Q8952464|夢みる佳人
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - drama
+    synopsis: 佐々木倫子が描く夢みる佳人を題材にした少女漫画ロマンス。
+    status: completed
+    anime_adapted: false
   - key: Q8952464|夢幻アンソロジー
     magazine: monthly-asuka
     demographic: shoujo
@@ -570726,11 +571022,61 @@ series:
     status: completed
     anime_adapted: false
   - key: Q8952464|天使ですよ
+    magazine: null
+    demographic: shoujo
+    genres:
+      - comedy
+      - fantasy
+    synopsis: 天使ですよを題材にした少女漫画コメディ。
+    status: completed
+    anime_adapted: false
   - key: Q8952464|家族ごっこ
+    magazine: null
+    demographic: shoujo
+    genres:
+      - comedy
+      - drama
+      - slice-of-life
+    synopsis: 家族ごっこを題材にした少女漫画コメディ。
+    status: completed
+    anime_adapted: false
   - key: Q8952464|山アラシのジレンマ
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+      - romance
+    synopsis: 山アラシのジレンマを題材にした少女漫画ドラマ。
+    status: completed
+    anime_adapted: false
   - key: Q8952464|幸せな食卓
+    magazine: null
+    demographic: shoujo
+    genres:
+      - cooking
+      - drama
+      - slice-of-life
+    synopsis: 佐々木倫子が幸せな食卓を題材にした少女漫画。
+    status: completed
+    anime_adapted: false
   - key: Q8952464|心の家路
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+      - slice-of-life
+    synopsis: 心の家路を題材にした少女漫画。
+    status: completed
+    anime_adapted: false
   - key: Q8952464|犬ぐらし
+    magazine: null
+    demographic: josei
+    genres:
+      - comedy
+      - slice-of-life
+    synopsis: 佐々木倫子が愛犬との暮らしを綴ったエッセイ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q8952464|狼には気をつけて
     demographic: shoujo
     genres:
@@ -570739,11 +571085,60 @@ series:
     synopsis: 遠藤淑子による少女ファンタジー。狼には気をつけてと諭す物語。
     status: completed
   - key: Q8952464|王室スキャンダル騒動
+    magazine: null
+    demographic: shoujo
+    genres:
+      - comedy
+      - drama
+    synopsis: 王室スキャンダル騒動を題材にした少女漫画コメディ。
+    status: completed
+    anime_adapted: false
   - key: Q8952464|空のむこう
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+      - fantasy
+    synopsis: 空のむこうを題材にした少女漫画幻想ドラマ。
+    status: completed
+    anime_adapted: false
   - key: Q8952464|美少女 (?) 戦隊クアッズ!!
+    magazine: null
+    demographic: shoujo
+    genres:
+      - comedy
+      - action
+      - parody
+    synopsis: 佐々木倫子が描く美少女戦隊クアッズを題材にしたパロディコメディ少女漫画。
+    status: completed
+    anime_adapted: false
   - key: Q8952464|解決浪漫倶楽部
+    magazine: null
+    demographic: shoujo
+    genres:
+      - comedy
+      - mystery
+    synopsis: 事件解決を浪漫的に題材にした少女漫画ミステリーコメディ。
+    status: completed
+    anime_adapted: false
   - key: Q8952464|退引町1丁目15番地
+    magazine: null
+    demographic: shoujo
+    genres:
+      - comedy
+      - slice-of-life
+    synopsis: 佐々木倫子の代表作「動物のお医者さん」と並ぶシリーズの一作。「退引町1丁目15番地」を舞台にした近所コメディ。
+    status: completed
+    anime_adapted: false
   - key: Q8952464|退引町お騒がせ界隈
+    magazine: null
+    demographic: shoujo
+    genres:
+      - comedy
+      - slice-of-life
+    synopsis: 佐々木倫子「退引町」シリーズのお騒がせ界隈編。
+    status: completed
+    anime_adapted: false
   - key: Q8952464|魔王引退
     demographic: shoujo
     genres:
@@ -570761,10 +571156,52 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q8952511|かかってきなさい!
+    magazine: null
+    demographic: shoujo
+    genres:
+      - comedy
+      - romance
+    synopsis: 「かかってきなさい!」と挑発するヒロインの少女漫画ラブコメ。
+    status: completed
+    anime_adapted: false
   - key: Q8952511|ナツの甲子園
+    magazine: null
+    demographic: shoujo
+    genres:
+      - sports
+      - romance
+      - school
+    synopsis: ナツの甲子園を題材にした少女漫画スポーツロマンス。
+    status: completed
+    anime_adapted: false
   - key: Q8952511|ラブゲーム・ラブエール
+    magazine: null
+    demographic: shoujo
+    genres:
+      - sports
+      - romance
+    synopsis: テニス(ラブゲーム)とエールを題材にした少女漫画。
+    status: completed
+    anime_adapted: false
   - key: Q8952511|花まるGO!GO!
+    magazine: null
+    demographic: shoujo
+    genres:
+      - comedy
+      - romance
+    synopsis: 花まるGO!GO!を題材にした少女漫画ラブコメ。
+    status: completed
+    anime_adapted: false
   - key: Q8955318|COLORFUL MEMORIES
+    magazine: null
+    demographic: shounen
+    genres:
+      - sports
+      - drama
+      - school
+    synopsis: 藤巻忠俊「黒子のバスケ」のメモリーズアンソロジー「COLORFUL MEMORIES」。
+    status: completed
+    anime_adapted: false
   - key: Q8955318|ROBOT×LASERBEAM
     magazine: weekly-shonen-jump
     demographic: shounen
@@ -570774,6 +571211,14 @@ series:
     synopsis: 藤巻忠俊(『黒子のバスケ』)が描く、無感情な天才ゴルファーを主人公にした青春ゴルフ漫画。
     status: completed
   - key: Q8955318|アニバスEXアートコレクション
+    magazine: null
+    demographic: shounen
+    genres:
+      - sports
+      - art
+    synopsis: 藤巻忠俊「黒子のバスケ」のアニメ「アニバス」のEXアートコレクション。
+    status: completed
+    anime_adapted: true
   - key: Q8955318|キルアオ
     magazine: weekly-shonen-jump
     demographic: shounen
@@ -570798,6 +571243,14 @@ series:
     alternative_titles:
       en: Kuroko's Basketball
   - key: Q8955318|黒子のバスケEX
+    magazine: null
+    demographic: shounen
+    genres:
+      - sports
+      - drama
+    synopsis: 藤巻忠俊「黒子のバスケ」のEX編。本編エピソードの番外編アンソロジー。
+    status: completed
+    anime_adapted: true
   - key: Q8955318|黒子のバスケEXTRA GAME
     magazine: null
     demographic: shounen
@@ -570817,8 +571270,34 @@ series:
     status: completed
     anime_adapted: true
   - key: Q8955318|黒子のバスケ公式ビジュアルブックブライトカラーズ
+    magazine: null
+    demographic: shounen
+    genres:
+      - sports
+      - art
+    synopsis: 藤巻忠俊「黒子のバスケ」の公式ビジュアルブック「ブライトカラーズ」。
+    status: completed
+    anime_adapted: false
   - key: Q8955453|Doll master
+    magazine: null
+    demographic: shounen
+    genres:
+      - fantasy
+      - action
+      - sci-fi
+    synopsis: ほしの竜一が描く人形を操るDoll masterを題材にしたファンタジーアクション。
+    status: completed
+    anime_adapted: false
   - key: Q8955453|DOLLMASTER 蒼穹の翼
+    magazine: null
+    demographic: shounen
+    genres:
+      - fantasy
+      - action
+      - sci-fi
+    synopsis: ほしの竜一「DOLLMASTER」の蒼穹の翼編。
+    status: completed
+    anime_adapted: false
   - key: Q8955453|GUNDAM INLE
     magazine: monthly-gundam-ace
     demographic: seinen
@@ -570829,6 +571308,14 @@ series:
     synopsis: 藤岡建機が描く、ガンダム宇宙世紀のサイドストーリーINLE編。
     status: completed
   - key: Q8955453|おじゃる丸外伝野望の少女マンガ家うすいさちよ
+    magazine: null
+    demographic: kodomo
+    genres:
+      - comedy
+      - supernatural
+    synopsis: 犬丸りん「おじゃる丸」の外伝。野望の少女マンガ家うすいさちよを題材にしたコメディ。
+    status: completed
+    anime_adapted: false
   - key: Q8955453|メダロッターりんたろう!
     demographic: shounen
     genres:
@@ -570839,19 +571326,136 @@ series:
     status: ongoing
     anime_adapted: true
   - key: Q8955453|メダロッターりんたろう! メダロットR
+    magazine: null
+    demographic: shounen
+    genres:
+      - sci-fi
+      - action
+      - comedy
+    synopsis: ほしの竜一「メダロット」のスピンオフ「メダロッターりんたろう」のR編。
+    status: completed
+    anime_adapted: true
   - key: Q8955453|メダロット・ナビ
+    magazine: null
+    demographic: shounen
+    genres:
+      - sci-fi
+      - action
+      - comedy
+    synopsis: ほしの竜一「メダロット」のナビ編コミカライズ。
+    status: completed
+    anime_adapted: true
   - key: Q8955453|第九征空騎兵師団
+    magazine: null
+    demographic: shounen
+    genres:
+      - mecha
+      - sci-fi
+      - action
+    synopsis: ほしの竜一が描く第九征空騎兵師団を題材にしたSF軍記漫画。
+    status: completed
+    anime_adapted: false
   - key: Q8955845|アップフェルラント物語
+    magazine: null
+    demographic: kodomo
+    genres:
+      - fantasy
+      - adventure
+      - drama
+    synopsis: あさりよしとお作画のNHKアニメ「アップフェルラント物語」のコミカライズ。少女ティオラの冒険ファンタジー。
+    status: completed
+    anime_adapted: true
   - key: Q8955845|アマノガワ
+    magazine: null
+    demographic: kodomo
+    genres:
+      - drama
+      - fantasy
+    synopsis: アマノガワを題材にした児童向け幻想ドラマ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q8955845|オリヒメ
+    magazine: null
+    demographic: kodomo
+    genres:
+      - drama
+      - fantasy
+    synopsis: 織姫を題材にした児童向け七夕ファンタジー漫画。
+    status: completed
+    anime_adapted: false
   - key: Q8955845|お父さんのクリスマス
+    magazine: null
+    demographic: kodomo
+    genres:
+      - drama
+      - slice-of-life
+    synopsis: お父さんのクリスマスを題材にした児童向け家族ドラマ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q8955845|グラニュー島とカリンちゃん
+    magazine: null
+    demographic: kodomo
+    genres:
+      - fantasy
+      - adventure
+      - comedy
+    synopsis: グラニュー島とカリンちゃんを題材にした児童向けファンタジー漫画。
+    status: completed
+    anime_adapted: false
   - key: Q8955845|コミックFantasy
+    magazine: null
+    demographic: shoujo
+    genres:
+      - fantasy
+      - drama
+    synopsis: コミックFantasyアンソロジー。
+    status: completed
+    anime_adapted: false
   - key: Q8955845|サイゴーさんの幸せ
+    magazine: null
+    demographic: kodomo
+    genres:
+      - drama
+      - comedy
+    synopsis: サイゴーさんの幸せを題材にした児童向け人情ドラマ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q8955845|すてきな瞳
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - drama
+    synopsis: すてきな瞳を題材にした少女漫画。
+    status: completed
+    anime_adapted: false
   - key: Q8955845|タップ君の探偵室
+    magazine: null
+    demographic: kodomo
+    genres:
+      - mystery
+      - comedy
+    synopsis: タップ君の探偵室を題材にした児童向けミステリーコメディ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q8955845|チカチカ☆ミミちゃん
+    magazine: null
+    demographic: kodomo
+    genres:
+      - comedy
+      - fantasy
+    synopsis: チカチカミミちゃんを主役にした児童向けコメディ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q8955845|つるのおん返し・けんじゃのおくり物ほか
+    magazine: null
+    demographic: kodomo
+    genres:
+      - fantasy
+      - drama
+    synopsis: 「つるのおん返し」「けんじゃのおくり物」など昔話を題材にした児童向けコミック集。
+    status: completed
+    anime_adapted: false
   - key: Q8955845|ナノトリノ
     demographic: shoujo
     genres:
@@ -570862,6 +571466,14 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q8955845|ヒコボシ
+    magazine: null
+    demographic: kodomo
+    genres:
+      - drama
+      - fantasy
+    synopsis: 彦星を題材にした児童向け七夕ファンタジー漫画。
+    status: completed
+    anime_adapted: false
   - key: Q8955845|ひなぎく純真女学園
     demographic: shoujo
     genres:
@@ -570881,7 +571493,24 @@ series:
     status: completed
     anime_adapted: false
   - key: Q8955845|へのへの
+    magazine: null
+    demographic: kodomo
+    genres:
+      - comedy
+      - slice-of-life
+    synopsis: 「へのへの」を題材にした児童向けコメディ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q8955845|ポケモンピカチュウ・ニャースの大ぼうけん
+    magazine: null
+    demographic: kodomo
+    genres:
+      - adventure
+      - fantasy
+      - comedy
+    synopsis: 「ポケットモンスター」のピカチュウとニャースを主役にした児童向け大冒険コミック。
+    status: completed
+    anime_adapted: false
   - key: Q8955845|まぼろし谷のねんねこ姫
     demographic: shoujo
     genres:
@@ -570890,12 +571519,72 @@ series:
     synopsis: ふくやまけいこによる少女ファンタジー。まぼろし谷のねんねこ姫の愉快な物語。
     status: completed
   - key: Q8955845|メルモちゃん
+    magazine: null
+    demographic: kodomo
+    genres:
+      - fantasy
+      - drama
+    synopsis: 手塚治虫「ふしぎなメルモ」を題材にしたコミカライズ。メルモちゃんがキャンディで大人になる児童ファンタジー。
+    status: completed
+    anime_adapted: true
   - key: Q8955845|レイニー通りの虹
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+      - romance
+      - fantasy
+    synopsis: レイニー通りの虹を題材にした少女漫画。
+    status: completed
+    anime_adapted: false
   - key: Q8955845|全艦出撃!!
+    magazine: null
+    demographic: shounen
+    genres:
+      - war
+      - action
+      - sci-fi
+    synopsis: 全艦出撃を題材にした少年漫画戦記アクション。
+    status: completed
+    anime_adapted: false
   - key: Q8955845|夏の魔術
+    magazine: null
+    demographic: shoujo
+    genres:
+      - fantasy
+      - drama
+      - romance
+    synopsis: 夏の魔術を題材にした少女漫画ファンタジー。
+    status: completed
+    anime_adapted: false
   - key: Q8955845|妖精の秘密
+    magazine: null
+    demographic: shoujo
+    genres:
+      - fantasy
+      - drama
+    synopsis: 妖精の秘密を題材にした少女漫画ファンタジー。
+    status: completed
+    anime_adapted: false
   - key: Q8955845|星の島のるるちゃん
+    magazine: null
+    demographic: kodomo
+    genres:
+      - fantasy
+      - adventure
+      - comedy
+    synopsis: 星の島のるるちゃんを主役にした児童向けファンタジー漫画。
+    status: completed
+    anime_adapted: false
   - key: Q8955845|有機くんの隣人
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+      - fantasy
+    synopsis: 有機くんの隣人を題材にした少女漫画。
+    status: completed
+    anime_adapted: false
   - key: Q8955845|東京物語
     demographic: shoujo
     genres:
@@ -570904,15 +571593,98 @@ series:
     synopsis: ふくやまけいこが描く、東京を舞台にしたほのぼの大人少女漫画。
     status: completed
   - key: Q8955845|熱狂短編マンガ傑作集'83
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+      - drama
+    synopsis: 1983年の熱狂短編漫画傑作集。
+    status: completed
+    anime_adapted: false
   - key: Q8955845|話の話
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+      - fantasy
+    synopsis: 「話の話」を題材にした少女漫画。
+    status: completed
+    anime_adapted: false
   - key: Q8955845|髪切虫
+    magazine: null
+    demographic: shoujo
+    genres:
+      - horror
+      - supernatural
+    synopsis: 髪切虫の伝承を題材にした少女漫画怪奇譚。
+    status: completed
+    anime_adapted: false
   - key: Q8955956|お嬢様ご命令を
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - comedy
+    synopsis: お嬢様にご命令される設定の少女漫画ラブコメ。
+    status: completed
+    anime_adapted: false
   - key: Q8955956|ハートの国でお茶会
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - fantasy
+    synopsis: 「ハートの国のアリス」シリーズのお茶会編。少女漫画ロマンスファンタジー。
+    status: completed
+    anime_adapted: false
   - key: Q8955956|ブラッディKISS
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - supernatural
+      - horror
+    synopsis: 血のキスを題材にした少女漫画ヴァンパイアロマンス。
+    status: completed
+    anime_adapted: false
   - key: Q8955956|ぼくの地球を守ってトリビュート
+    magazine: null
+    demographic: shoujo
+    genres:
+      - sci-fi
+      - romance
+      - drama
+    synopsis: 日渡早紀「ぼくの地球を守って」を題材にしたトリビュートアンソロジー。
+    status: completed
+    anime_adapted: false
   - key: Q8955956|会長さんちの子ねこ
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - comedy
+    synopsis: 会長さんちの子ねこを題材にした少女漫画ラブコメ。
+    status: completed
+    anime_adapted: false
   - key: Q8955956|君とスキャンダル!
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - comedy
+    synopsis: 君とスキャンダルを題材にした少女漫画ラブコメ。
+    status: completed
+    anime_adapted: false
   - key: Q8955956|花ざかりの君たちへトリビュート
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - comedy
+      - school
+    synopsis: 中条比紗也「花ざかりの君たちへ」のトリビュートアンソロジー。
+    status: completed
+    anime_adapted: false
   - key: Q8958700|Wakaba花ふぶき
     demographic: shoujo
     genres:
@@ -570923,10 +571695,52 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q8958700|あいつが魔法使い!
+    magazine: null
+    demographic: shoujo
+    genres:
+      - fantasy
+      - romance
+      - comedy
+    synopsis: 「あいつが魔法使い!」を題材にした少女漫画ファンタジーラブコメ。
+    status: completed
+    anime_adapted: false
   - key: Q8958700|う・わ・さのrisky boy
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - comedy
+    synopsis: うわさのrisky boyを題材にした少女漫画ラブコメ。
+    status: completed
+    anime_adapted: false
   - key: Q8958700|ヴァンプに薔薇薔薇
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - supernatural
+      - fantasy
+    synopsis: ヴァンパイアと薔薇を題材にした少女漫画ロマンス。
+    status: completed
+    anime_adapted: false
   - key: Q8958700|ウエディングケーキをぶち壊せ!
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - comedy
+    synopsis: ウエディングケーキをぶち壊す設定の少女漫画ラブコメ。
+    status: completed
+    anime_adapted: false
   - key: Q8958700|ウソでいかせてヒツミでだまして
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - comedy
+    synopsis: 嘘と秘密を題材にした少女漫画ラブコメ。
+    status: completed
+    anime_adapted: false
   - key: Q8958700|キューティーハニーF
     demographic: shoujo
     genres:
@@ -570945,7 +571759,25 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q8958700|ジョリーロジャー☆ファンタジー
+    magazine: null
+    demographic: shoujo
+    genres:
+      - fantasy
+      - adventure
+      - romance
+    synopsis: 海賊旗ジョリーロジャーを題材にした少女漫画ファンタジー。
+    status: completed
+    anime_adapted: false
   - key: Q8958700|たすけて!バンパイア
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - supernatural
+      - comedy
+    synopsis: 「たすけて!バンパイア」を題材にした少女漫画ファンタジーラブコメ。
+    status: completed
+    anime_adapted: false
   - key: Q8958700|ドリーム・ウォーカーRiona
   - key: Q8958700|バトルガール藍
     demographic: shoujo
