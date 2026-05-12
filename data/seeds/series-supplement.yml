@@ -1,5 +1,5 @@
 schema_version: 1
-generated_at: 2026-05-12T06:57:27.937Z
+generated_at: 2026-05-12T06:59:07.555Z
 generator: claude-opus-4-7-direct-fill
 series:
   - key: Q1001784|GOLDEN SPIRAL
@@ -490685,6 +490685,14 @@ series:
     status: completed
     anime_adapted: true
   - key: Q471133|影丸と胡蝶ほか七編
+    magazine: null
+    demographic: shounen
+    genres:
+      - action
+      - anthology
+    synopsis: 影丸と胡蝶ほか七編。
+    status: completed
+    anime_adapted: false
   - key: Q471133|徳川家康
     magazine: null
     demographic: seinen
@@ -490696,7 +490704,21 @@ series:
     status: completed
     anime_adapted: false
   - key: Q471133|忍法十番勝負
+    magazine: null
+    demographic: shounen
+    genres:
+      - action
+    synopsis: 忍法十番勝負横山。
+    status: completed
+    anime_adapted: false
   - key: Q471133|戦国乱世
+    magazine: null
+    demographic: seinen
+    genres:
+      - historical
+    synopsis: 戦国乱世横山。
+    status: completed
+    anime_adapted: false
   - key: Q471133|戦国獅子伝
     demographic: seinen
     genres:
@@ -490719,6 +490741,13 @@ series:
     synopsis: 横山光輝による戦国武将・伊達政宗の歴史漫画。
     status: completed
   - key: Q471133|文明開化・富国強兵
+    magazine: null
+    demographic: seinen
+    genres:
+      - historical
+    synopsis: 文明開化富国強兵。
+    status: completed
+    anime_adapted: false
   - key: Q471133|新・仮面の忍者赤影
     demographic: shounen
     genres:
@@ -490730,7 +490759,21 @@ series:
     status: ongoing
     anime_adapted: true
   - key: Q471133|日本短編漫画傑作集
+    magazine: null
+    demographic: seinen
+    genres:
+      - anthology
+    synopsis: 日本短編漫画傑作集横山。
+    status: completed
+    anime_adapted: false
   - key: Q471133|昆虫惑星
+    magazine: null
+    demographic: shounen
+    genres:
+      - sci_fi
+    synopsis: 昆虫惑星横山。
+    status: completed
+    anime_adapted: false
   - key: Q471133|時の行者
     demographic: seinen
     genres:
@@ -490740,11 +490783,54 @@ series:
     synopsis: 横山光輝による時間旅行歴史漫画。時を超える行者が様々な歴史的事件に介入する物語。
     status: completed
   - key: Q471133|横山光輝セレクション
+    magazine: null
+    demographic: shounen
+    genres:
+      - anthology
+    synopsis: 横山光輝セレクション。
+    status: completed
+    anime_adapted: false
   - key: Q471133|横山光輝まんが集
+    magazine: null
+    demographic: shounen
+    genres:
+      - anthology
+    synopsis: 横山光輝まんが集。
+    status: completed
+    anime_adapted: false
   - key: Q471133|横山光輝レア・コレクション
+    magazine: null
+    demographic: shounen
+    genres:
+      - anthology
+    synopsis: 横山光輝レアコレクション。
+    status: completed
+    anime_adapted: false
   - key: Q471133|横山光輝三国志おもしろゼミナール
+    magazine: null
+    demographic: shounen
+    genres:
+      - historical
+      - educational
+    synopsis: 横山光輝三国志おもしろゼミナール。
+    status: completed
+    anime_adapted: true
   - key: Q471133|横山光輝初期作品集少女編
+    magazine: null
+    demographic: shoujo
+    genres:
+      - anthology
+    synopsis: 横山光輝初期作品集少女編。
+    status: completed
+    anime_adapted: false
   - key: Q471133|横山光輝原画集
+    magazine: null
+    demographic: shounen
+    genres:
+      - anthology
+    synopsis: 横山光輝原画集。
+    status: completed
+    anime_adapted: false
   - key: Q471133|横山光輝戦国時代史
     demographic: seinen
     genres:
@@ -490753,8 +490839,30 @@ series:
     synopsis: 横山光輝による戦国時代を描く歴史漫画選集。武将たちの戦いを骨太に描く。
     status: completed
   - key: Q471133|横山光輝戦国武将列伝徳川家康vs.石田三成関ケ原の戦い
+    magazine: null
+    demographic: seinen
+    genres:
+      - historical
+    synopsis: 横山光輝戦国武将列伝関ケ原の戦い。
+    status: completed
+    anime_adapted: false
   - key: Q471133|横山光輝戦国武将列伝織田信長vs.今川義元桶狭間の戦い
+    magazine: null
+    demographic: seinen
+    genres:
+      - historical
+    synopsis: 横山光輝戦国武将列伝桶狭間の戦い。
+    status: completed
+    anime_adapted: false
   - key: Q471133|横山光輝時代傑作選
+    magazine: null
+    demographic: seinen
+    genres:
+      - historical
+      - anthology
+    synopsis: 横山光輝時代傑作選。
+    status: completed
+    anime_adapted: false
   - key: Q471133|横山光輝時代劇傑作集
     magazine: null
     demographic: seinen
@@ -490765,7 +490873,21 @@ series:
     status: completed
     anime_adapted: false
   - key: Q471133|横山光輝超絶レアコレクション
+    magazine: null
+    demographic: shounen
+    genres:
+      - anthology
+    synopsis: 横山光輝超絶レアコレクション。
+    status: completed
+    anime_adapted: false
   - key: Q471133|武士の誇り
+    magazine: null
+    demographic: seinen
+    genres:
+      - historical
+    synopsis: 武士の誇り。
+    status: completed
+    anime_adapted: false
   - key: Q471133|武田信玄
     demographic: seinen
     genres:
@@ -490781,6 +490903,14 @@ series:
     synopsis: 横山光輝による戦国大名・武田勝頼の生涯を描く歴史漫画。
     status: completed
   - key: Q471133|死神
+    magazine: null
+    demographic: shounen
+    genres:
+      - horror
+      - fantasy
+    synopsis: 死神横山。
+    status: completed
+    anime_adapted: false
   - key: Q471133|殷周伝説
     demographic: seinen
     genres:
@@ -490806,8 +490936,32 @@ series:
     synopsis: 中国古典『水滸伝』を、横山光輝が骨太に漫画化した歴史活劇。
     status: completed
   - key: Q471133|江戸川乱歩妖美劇画館
+    magazine: null
+    demographic: seinen
+    genres:
+      - mystery
+      - anthology
+    synopsis: 江戸川乱歩妖美劇画館。
+    status: completed
+    anime_adapted: false
   - key: Q471133|火盗斬風録
+    magazine: null
+    demographic: shounen
+    genres:
+      - historical
+      - action
+    synopsis: 火盗斬風録。
+    status: completed
+    anime_adapted: false
   - key: Q471133|片目猿
+    magazine: null
+    demographic: shounen
+    genres:
+      - historical
+      - action
+    synopsis: 片目猿。
+    status: completed
+    anime_adapted: false
   - key: Q471133|狼の星座
     demographic: seinen
     genres:
@@ -490816,9 +490970,39 @@ series:
     synopsis: 横山光輝による青年向け歴史漫画。狼の星座を描く物語。
     status: completed
   - key: Q471133|白髪鬼
+    magazine: null
+    demographic: shounen
+    genres:
+      - mystery
+      - horror
+    synopsis: 白髪鬼。
+    status: completed
+    anime_adapted: false
   - key: Q471133|秀吉
+    magazine: null
+    demographic: seinen
+    genres:
+      - historical
+    synopsis: 秀吉横山。
+    status: completed
+    anime_adapted: false
   - key: Q471133|竜神伝説
+    magazine: null
+    demographic: shounen
+    genres:
+      - fantasy
+      - historical
+    synopsis: 竜神伝説。
+    status: completed
+    anime_adapted: false
   - key: Q471133|紅ばら黒ばら
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+    synopsis: 紅ばら黒ばら。
+    status: completed
+    anime_adapted: false
   - key: Q471133|続・鉄人28号
     magazine: null
     demographic: kodomo
@@ -490837,6 +491021,13 @@ series:
     synopsis: 横山光輝による戦国武将漫画。第六天魔王・織田信長の生涯を骨太に描く歴史絵巻。
     status: completed
   - key: Q471133|蛟竜
+    magazine: null
+    demographic: shounen
+    genres:
+      - fantasy
+    synopsis: 蛟竜横山。
+    status: completed
+    anime_adapted: false
   - key: Q471133|血笑鴉
     demographic: seinen
     genres:
@@ -490855,9 +491046,38 @@ series:
     synopsis: 横山光輝が描く、豊臣秀吉の生涯を題材にした異本太閤記。
     status: completed
   - key: Q471133|赤壁
+    magazine: null
+    demographic: seinen
+    genres:
+      - historical
+      - action
+    synopsis: 赤壁横山。
+    status: completed
+    anime_adapted: false
   - key: Q471133|野獣
+    magazine: null
+    demographic: shounen
+    genres:
+      - action
+    synopsis: 野獣横山。
+    status: completed
+    anime_adapted: false
   - key: Q471133|金色のキューピット
+    magazine: null
+    demographic: shoujo
+    genres:
+      - fantasy
+    synopsis: 金色のキューピット。
+    status: completed
+    anime_adapted: false
   - key: Q471133|鉄のサムソン
+    magazine: null
+    demographic: shounen
+    genres:
+      - action
+    synopsis: 鉄のサムソン。
+    status: completed
+    anime_adapted: false
   - key: Q471133|鉄人28号
     magazine: null
     demographic: kodomo
@@ -490885,11 +491105,56 @@ series:
     synopsis: 横山光輝『鉄人28号』のオリジナル版復刻大全集。
     status: completed
   - key: Q471133|鉄人28号 皇帝の紋章
+    magazine: null
+    demographic: shounen
+    genres:
+      - sci_fi
+      - action
+    synopsis: 鉄人28号皇帝の紋章。
+    status: completed
+    anime_adapted: true
   - key: Q471133|鉄人28号 鉄人奪還作戦
+    magazine: null
+    demographic: shounen
+    genres:
+      - sci_fi
+      - action
+    synopsis: 鉄人28号鉄人奪還作戦。
+    status: completed
+    anime_adapted: true
   - key: Q471133|鉄人28号DELUXE
+    magazine: null
+    demographic: shounen
+    genres:
+      - sci_fi
+      - action
+    synopsis: 鉄人28号DELUXE。
+    status: completed
+    anime_adapted: true
   - key: Q471133|鉄甲軍団
+    magazine: null
+    demographic: shounen
+    genres:
+      - action
+    synopsis: 鉄甲軍団。
+    status: completed
+    anime_adapted: false
   - key: Q471133|長征
+    magazine: null
+    demographic: seinen
+    genres:
+      - historical
+    synopsis: 長征。
+    status: completed
+    anime_adapted: false
   - key: Q471133|闇におどる猫
+    magazine: null
+    demographic: shounen
+    genres:
+      - mystery
+    synopsis: 闇におどる猫。
+    status: completed
+    anime_adapted: false
   - key: Q471133|闇の土鬼
     demographic: seinen
     genres:
@@ -490899,6 +491164,13 @@ series:
     synopsis: 横山光輝による戦国伝奇漫画。闇に生きる土鬼の戦いを描く。
     status: completed
   - key: Q471133|闇の顔
+    magazine: null
+    demographic: shounen
+    genres:
+      - mystery
+    synopsis: 闇の顔横山。
+    status: completed
+    anime_adapted: false
   - key: Q471133|隻眼の竜
     demographic: seinen
     genres:
@@ -490907,6 +491179,14 @@ series:
     synopsis: 横山光輝が描く、隻眼の竜・伊達政宗を主人公にした歴史劇。
     status: completed
   - key: Q471133|音無しの剣
+    magazine: null
+    demographic: shounen
+    genres:
+      - historical
+      - action
+    synopsis: 音無しの剣。
+    status: completed
+    anime_adapted: false
   - key: Q471133|項羽と劉邦
     magazine: null
     demographic: seinen
@@ -490918,16 +491198,96 @@ series:
     status: completed
     anime_adapted: false
   - key: Q471133|項羽と劉邦 若き獅子たち
+    magazine: null
+    demographic: seinen
+    genres:
+      - historical
+    synopsis: 項羽と劉邦若き獅子たち。
+    status: completed
+    anime_adapted: false
   - key: Q471133|風の天兵
+    magazine: null
+    demographic: shounen
+    genres:
+      - action
+      - historical
+    synopsis: 風の天兵。
+    status: completed
+    anime_adapted: false
   - key: Q471133|風小僧
+    magazine: null
+    demographic: shounen
+    genres:
+      - action
+    synopsis: 風小僧横山。
+    status: completed
+    anime_adapted: false
   - key: Q471133|風林火山栄枯盛衰武田勝頼
+    magazine: null
+    demographic: seinen
+    genres:
+      - historical
+    synopsis: 風林火山栄枯盛衰武田勝頼。
+    status: completed
+    anime_adapted: false
   - key: Q471133|風盗伝
+    magazine: null
+    demographic: shounen
+    genres:
+      - historical
+      - action
+    synopsis: 風盗伝。
+    status: completed
+    anime_adapted: false
   - key: Q471133|風雲児黒田官兵衛蛟竜
+    magazine: null
+    demographic: seinen
+    genres:
+      - historical
+    synopsis: 風雲児黒田官兵衛蛟竜。
+    status: completed
+    anime_adapted: false
   - key: Q471133|鬼火
+    magazine: null
+    demographic: shounen
+    genres:
+      - horror
+    synopsis: 鬼火横山。
+    status: completed
+    anime_adapted: false
   - key: Q471133|魔剣烈剣
+    magazine: null
+    demographic: shounen
+    genres:
+      - action
+    synopsis: 魔剣烈剣。
+    status: completed
+    anime_adapted: false
   - key: Q471133|魔法使いサリー
+    magazine: null
+    demographic: shoujo
+    genres:
+      - magical_girl
+    synopsis: 魔法使いサリー。
+    status: completed
+    anime_adapted: true
   - key: Q471133|魔界衆
+    magazine: null
+    demographic: shounen
+    genres:
+      - horror
+      - fantasy
+    synopsis: 魔界衆。
+    status: completed
+    anime_adapted: false
   - key: Q471133|黄金都市
+    magazine: null
+    demographic: shounen
+    genres:
+      - adventure
+    synopsis: 黄金都市横山。
+    status: completed
+    anime_adapted: false
   - key: Q471137|DEAD ROCK
     magazine: weekly-shonen-magazine
     demographic: shounen
@@ -491008,7 +491368,23 @@ series:
     status: completed
     anime_adapted: true
   - key: Q471137|FAIRY TAIL ZERO
+    magazine: null
+    demographic: shounen
+    genres:
+      - fantasy
+      - action
+    synopsis: FAIRY TAIL ZERO。
+    status: completed
+    anime_adapted: true
   - key: Q471137|FAIRY TAIL エルザアンソロジーwith Be@rbrick
+    magazine: null
+    demographic: shounen
+    genres:
+      - anthology
+      - fantasy
+    synopsis: FAIRY TAILエルザアンソロジー。
+    status: completed
+    anime_adapted: true
   - key: Q471137|FAIRY TAIL ブルー・ミストラル
     demographic: shounen
     genres:
@@ -491018,6 +491394,14 @@ series:
     synopsis: 真島ヒロによる『FAIRY TAIL』ブルー・ミストラル編。妖精のしっぽ少年版を描く。
     status: completed
   - key: Q471137|FAIRY TAILハッピーの大冒険
+    magazine: null
+    demographic: shounen
+    genres:
+      - fantasy
+      - adventure
+    synopsis: FAIRY TAILハッピーの大冒険。
+    status: completed
+    anime_adapted: true
   - key: Q471137|FAIRY TAIL外伝
     demographic: shounen
     genres:
@@ -491028,6 +491412,13 @@ series:
     status: ongoing
     anime_adapted: true
   - key: Q471137|FANTASIA
+    magazine: null
+    demographic: shounen
+    genres:
+      - fantasy
+    synopsis: FANTASIA真島ヒロ。
+    status: completed
+    anime_adapted: false
   - key: Q471137|Gate of Nightmares
     demographic: shounen
     genres:
@@ -491038,6 +491429,13 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q471137|HARVEST
+    magazine: null
+    demographic: shounen
+    genres:
+      - drama
+    synopsis: HARVEST真島。
+    status: completed
+    anime_adapted: false
   - key: Q471137|ICE TRAIL
     magazine: null
     demographic: shounen
@@ -491048,7 +491446,22 @@ series:
     status: completed
     anime_adapted: true
   - key: Q471137|Mashima HERO'S
+    magazine: null
+    demographic: shounen
+    genres:
+      - anthology
+    synopsis: Mashima HEROS。
+    status: completed
+    anime_adapted: false
   - key: Q471137|MONSTER HUNTER ORAGE
+    magazine: null
+    demographic: shounen
+    genres:
+      - fantasy
+      - action
+    synopsis: MONSTER HUNTER ORAGE。
+    status: completed
+    anime_adapted: true
   - key: Q471137|RAVE
     magazine: weekly-shonen-magazine
     demographic: shounen
@@ -491080,7 +491493,22 @@ series:
     status: completed
     anime_adapted: false
   - key: Q471137|ましまえん
+    magazine: null
+    demographic: shounen
+    genres:
+      - comedy
+    synopsis: ましまえん。
+    status: completed
+    anime_adapted: false
   - key: Q471137|モンスターソウル
+    magazine: null
+    demographic: shounen
+    genres:
+      - fantasy
+      - action
+    synopsis: モンスターソウル。
+    status: completed
+    anime_adapted: false
   - key: Q471137|モンスターハンターオラージュ
     demographic: shounen
     genres:
@@ -491099,6 +491527,13 @@ series:
     status: completed
     anime_adapted: false
   - key: Q471137|会いにいくよ
+    magazine: null
+    demographic: shounen
+    genres:
+      - drama
+    synopsis: 会いにいくよ。
+    status: completed
+    anime_adapted: false
   - key: Q471137|血戦の九遠
     magazine: null
     demographic: seinen
@@ -491161,11 +491596,56 @@ series:
     status: completed
     anime_adapted: false
   - key: Q4721168|コミック刑事ミステリー傑作集
+    magazine: null
+    demographic: shoujo
+    genres:
+      - mystery
+      - anthology
+    synopsis: コミック刑事ミステリー傑作集。
+    status: completed
+    anime_adapted: false
   - key: Q4721168|コミック横溝正史
+    magazine: null
+    demographic: shoujo
+    genres:
+      - mystery
+      - anthology
+    synopsis: コミック横溝正史。
+    status: completed
+    anime_adapted: false
   - key: Q4721168|ブラック・ジャック ALIVE
+    magazine: null
+    demographic: seinen
+    genres:
+      - medical
+      - anthology
+    synopsis: ブラックジャックALIVE。
+    status: completed
+    anime_adapted: false
   - key: Q4721168|ブラック・ジャックM
+    magazine: null
+    demographic: seinen
+    genres:
+      - medical
+    synopsis: ブラックジャックM。
+    status: completed
+    anime_adapted: false
   - key: Q4721168|メイド・アンソロジーコミック
+    magazine: null
+    demographic: shoujo
+    genres:
+      - anthology
+    synopsis: メイドアンソロジーコミック。
+    status: completed
+    anime_adapted: false
   - key: Q4721168|ヨコハマ異邦人
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+    synopsis: ヨコハマ異邦人。
+    status: completed
+    anime_adapted: false
   - key: Q4721168|ワトソンの陰謀
     demographic: shoujo
     genres:
@@ -491176,7 +491656,22 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q4721168|三毛猫ホームズの事件簿
+    magazine: null
+    demographic: shoujo
+    genres:
+      - mystery
+    synopsis: 三毛猫ホームズの事件簿。
+    status: completed
+    anime_adapted: false
   - key: Q4721168|三毛猫ホームズの冒険
+    magazine: null
+    demographic: shoujo
+    genres:
+      - mystery
+      - adventure
+    synopsis: 三毛猫ホームズの冒険。
+    status: completed
+    anime_adapted: false
   - key: Q4721168|仮面探偵
     demographic: shoujo
     genres:
@@ -491185,6 +491680,13 @@ series:
     synopsis: 秋乃茉莉(『Petshop of Horrors』作者)による少女ミステリー。仮面探偵を描く物語。
     status: completed
   - key: Q4721168|倚天の翼
+    magazine: null
+    demographic: shoujo
+    genres:
+      - fantasy
+    synopsis: 倚天の翼。
+    status: completed
+    anime_adapted: false
   - key: Q4721168|傀儡華遊戯
     demographic: shoujo
     genres:
@@ -491203,6 +491705,13 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q4721168|千尋に咲く花
+    magazine: null
+    demographic: shoujo
+    genres:
+      - fantasy
+    synopsis: 千尋に咲く花。
+    status: completed
+    anime_adapted: false
   - key: Q4721168|名探偵浅見光彦&旅情ミステリーコミックセレクション
     magazine: null
     demographic: seinen
@@ -491213,8 +491722,31 @@ series:
     status: completed
     anime_adapted: true
   - key: Q4721168|夜の過客
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+    synopsis: 夜の過客。
+    status: completed
+    anime_adapted: false
   - key: Q4721168|夢幻アンソロジー
+    magazine: null
+    demographic: shoujo
+    genres:
+      - fantasy
+      - anthology
+    synopsis: 夢幻アンソロジー。
+    status: completed
+    anime_adapted: false
   - key: Q4721168|幻想ファンタジー
+    magazine: null
+    demographic: shoujo
+    genres:
+      - fantasy
+      - anthology
+    synopsis: 幻想ファンタジー。
+    status: completed
+    anime_adapted: false
   - key: Q4721168|幻想ラビリンス
     magazine: null
     demographic: seinen
@@ -491251,7 +491783,21 @@ series:
     synopsis: 秋乃茉莉の『幻獣の星座』星獣編。
     status: completed
   - key: Q4721168|幻獣の星座龍王伝
+    magazine: null
+    demographic: shoujo
+    genres:
+      - fantasy
+    synopsis: 幻獣の星座龍王伝。
+    status: completed
+    anime_adapted: false
   - key: Q4721168|幻華宵月
+    magazine: null
+    demographic: shoujo
+    genres:
+      - fantasy
+    synopsis: 幻華宵月。
+    status: completed
+    anime_adapted: false
   - key: Q4721168|怪盗アレキサンドライト
     magazine: monthly-asuka
     demographic: shoujo
@@ -491261,6 +491807,13 @@ series:
     synopsis: 秋乃茉莉が描く、宝石をモチーフにした怪盗アレキサンドライトの少女漫画。
     status: completed
   - key: Q4721168|新・仮面探偵
+    magazine: null
+    demographic: shoujo
+    genres:
+      - mystery
+    synopsis: 新仮面探偵。
+    status: completed
+    anime_adapted: false
   - key: Q4721168|新Petshop of Horrors
     magazine: monthly-asuka
     demographic: shoujo
@@ -491281,17 +491834,102 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q4721168|月明らかに星稀なり
+    magazine: null
+    demographic: shoujo
+    genres:
+      - fantasy
+    synopsis: 月明らかに星稀なり。
+    status: completed
+    anime_adapted: false
   - key: Q4721168|朱雀抄
+    magazine: null
+    demographic: shoujo
+    genres:
+      - fantasy
+    synopsis: 朱雀抄秋乃茉莉。
+    status: completed
+    anime_adapted: false
   - key: Q4721168|水晶宮
+    magazine: null
+    demographic: shoujo
+    genres:
+      - fantasy
+    synopsis: 水晶宮。
+    status: completed
+    anime_adapted: false
   - key: Q4721168|水鏡抄
+    magazine: null
+    demographic: shoujo
+    genres:
+      - fantasy
+    synopsis: 水鏡抄秋乃。
+    status: completed
+    anime_adapted: false
   - key: Q4721168|浅見光彦ミステリー&旅情サスペンス
+    magazine: null
+    demographic: shoujo
+    genres:
+      - mystery
+    synopsis: 浅見光彦ミステリー旅情サスペンス。
+    status: completed
+    anime_adapted: false
   - key: Q4721168|浅見光彦ミステリー&旅情サスペンスSPECIAL
+    magazine: null
+    demographic: shoujo
+    genres:
+      - mystery
+    synopsis: 浅見光彦ミステリーSPECIAL。
+    status: completed
+    anime_adapted: false
   - key: Q4721168|犬神家の一族
+    magazine: null
+    demographic: shoujo
+    genres:
+      - mystery
+      - historical
+    synopsis: 犬神家の一族秋乃。
+    status: completed
+    anime_adapted: false
   - key: Q4721168|玄武抄
+    magazine: null
+    demographic: shoujo
+    genres:
+      - fantasy
+    synopsis: 玄武抄。
+    status: completed
+    anime_adapted: false
   - key: Q4721168|珊瑚宮
+    magazine: null
+    demographic: shoujo
+    genres:
+      - fantasy
+    synopsis: 珊瑚宮。
+    status: completed
+    anime_adapted: false
   - key: Q4721168|琥珀宮
+    magazine: null
+    demographic: shoujo
+    genres:
+      - fantasy
+    synopsis: 琥珀宮。
+    status: completed
+    anime_adapted: false
   - key: Q4721168|琵琶湖周航殺人歌 終幕のない殺人 シーラカンス殺人事件
+    magazine: null
+    demographic: shoujo
+    genres:
+      - mystery
+    synopsis: 琵琶湖周航殺人歌終幕のない殺人シーラカンス殺人事件。
+    status: completed
+    anime_adapted: false
   - key: Q4721168|白虎抄
+    magazine: null
+    demographic: shoujo
+    genres:
+      - fantasy
+    synopsis: 白虎抄。
+    status: completed
+    anime_adapted: false
   - key: Q4721168|神苑の狩人
     demographic: shoujo
     genres:
@@ -491302,11 +491940,54 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q4721168|終幕のない殺人
+    magazine: null
+    demographic: shoujo
+    genres:
+      - mystery
+    synopsis: 終幕のない殺人。
+    status: completed
+    anime_adapted: false
   - key: Q4721168|翡翠宮
+    magazine: null
+    demographic: shoujo
+    genres:
+      - fantasy
+    synopsis: 翡翠宮秋乃。
+    status: completed
+    anime_adapted: false
   - key: Q4721168|翡翠抄
+    magazine: null
+    demographic: shoujo
+    genres:
+      - fantasy
+    synopsis: 翡翠抄秋乃。
+    status: completed
+    anime_adapted: false
   - key: Q4721168|聖女ルネスと獣の少年
+    magazine: null
+    demographic: shoujo
+    genres:
+      - fantasy
+    synopsis: 聖女ルネスと獣の少年。
+    status: completed
+    anime_adapted: false
   - key: Q4721168|華佗風来伝
+    magazine: null
+    demographic: shoujo
+    genres:
+      - historical
+      - fantasy
+    synopsis: 華佗風来伝。
+    status: completed
+    anime_adapted: false
   - key: Q4721168|買われた貴婦人
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+    synopsis: 買われた貴婦人。
+    status: completed
+    anime_adapted: false
   - key: Q4721168|賢者の石
     demographic: shoujo
     genres:
@@ -491315,10 +491996,45 @@ series:
     synopsis: 秋乃茉莉が描く、錬金術師ニコラ・フラメルを題材にした歴史伝奇ファンタジー。
     status: completed
   - key: Q4721168|賢者の石 冥府の柘榴
+    magazine: null
+    demographic: shoujo
+    genres:
+      - fantasy
+    synopsis: 賢者の石冥府の柘榴。
+    status: completed
+    anime_adapted: false
   - key: Q4721168|賢者の石 天空の城
+    magazine: null
+    demographic: shoujo
+    genres:
+      - fantasy
+    synopsis: 賢者の石天空の城。
+    status: completed
+    anime_adapted: false
   - key: Q4721168|賢者の石 赤い聖杯
+    magazine: null
+    demographic: shoujo
+    genres:
+      - fantasy
+    synopsis: 賢者の石赤い聖杯。
+    status: completed
+    anime_adapted: false
   - key: Q4721168|赤川次郎三毛猫ホームズの事件簿
+    magazine: null
+    demographic: shoujo
+    genres:
+      - mystery
+    synopsis: 赤川次郎三毛猫ホームズの事件簿。
+    status: completed
+    anime_adapted: false
   - key: Q4721168|銀鈴夜話
+    magazine: null
+    demographic: shoujo
+    genres:
+      - fantasy
+    synopsis: 銀鈴夜話秋乃。
+    status: completed
+    anime_adapted: false
   - key: Q4721168|霊感商法株式会社
     magazine: monthly-asuka
     demographic: shoujo
@@ -491330,7 +492046,22 @@ series:
     status: completed
     anime_adapted: false
   - key: Q4721168|青竜抄
+    magazine: null
+    demographic: shoujo
+    genres:
+      - fantasy
+    synopsis: 青竜抄。
+    status: completed
+    anime_adapted: false
   - key: Q4721168|風よ、万里を翔けよ
+    magazine: null
+    demographic: shoujo
+    genres:
+      - historical
+      - fantasy
+    synopsis: 風よ万里を翔けよ。
+    status: completed
+    anime_adapted: false
   - key: Q47465052|Mono
     demographic: seinen
     genres:
