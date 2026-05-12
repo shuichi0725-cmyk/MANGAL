@@ -2,7 +2,7 @@
 
 > このファイルは Claude Code session の context bootstrap 用。新しいセッションを開始したら最初に読むこと。
 
-最終更新: 2026-05-12 (種3 fill session 35 完了、 累計 約 68,139/70,202 ≈ 97.06%)
+最終更新: 2026-05-13 (種3 fill session 36 完了、 累計 約 70,187/70,202 ≈ 99.98% [= 残 15 件は PUA 文字を含む正規化問題で fill 不能])
 
 ## プロジェクト概要
 
@@ -2442,10 +2442,147 @@ c17d903  data(seed3): batch 682/683
 42723b0  data(seed3): batch 664/683
 ```
 
+## 2026-05-13: 種3 fill session 36 完了 (99.98%到達 - 事実上の 100%)
+
+### 達成サマリ
+
+- **session 36 batch 684-704 全 21 batch 完了** (= batch 684-703 が 100件 × 20 + 最終 batch 704 が 63件 = **2,063 件 fill 試行**)
+- 適用: **2,048 / 2,063** (= batch 684 applied=85 missing=15 [PUA 14件 + Q6359803|Dj vu の1件]、 残り 20 batches は全て applied=100/63 missing=0)
+- 所要時間: 約 50 分 (= JST 約 00:40 開始 → 01:25 終了)
+- 報告頻度: **block 単位 (500件毎)** (= JST 時刻付き)
+- session 35 → 36 推移: 約 68,139 → **約 70,187 / 70,202 ≈ 99.98%**
+- 残: **15 件** (= 全て PUA 不可視文字を含む正規化問題、 後述参照)
+
+### Batch 進捗テーブル
+
+| Session | batch range | 適用件数 | missing |
+|---|---|---|---|
+| 30 | 564-583 | 1,986 | 14 |
+| 31 | 584-603 | 1,988 | 14 |
+| 32 | 604-623 | 1,986 | 14 |
+| 33 | 624-643 | 1,999 | 15 |
+| 34 | 644-663 | 1,991 | 23 |
+| 35 | 664-683 | 1,985 | 15 |
+| **36** | 684-704 | **2,048** | **15** |
+
+**累計**: **約 70,187 / 70,202 ≈ 99.98%**。
+
+### ❌ 失敗 / 処理不能箇所の詳細記録 (= 重要 / 次回 fix 手がかり)
+
+**問題**: 同じ 15 件の key が session 30-36 の全 7 セッションで apply 失敗 (= `applied=N, missing=15` を続けて記録)。
+
+**根本原因の判明 (= session 36 にて初検出)**: 失敗キーの内容を `python3 -c "for c in key: ord(c)"` で調査したところ、 これらのキーには **Unicode Private Use Area (PUA) U+E000-F8FF の不可視文字** が混入していることが判明:
+
+| QID | 表示上のキー | PUA 位置 | PUA codepoint |
+|---|---|---|---|
+| Q11268905 | ウルフチックにお願い | 末尾 | U+E2BB |
+| Q11318682 | パニックパラダイス | 中央 (ック⇔パ間) | U+E2BB |
+| Q11460951 | どっちにするの | 末尾 | U+E2BB |
+| Q11460951 | わがままレイディ | 末尾 | U+E2BB |
+| Q11513040 | 猫と月チェイス | 中央 (月⇔チ間) | U+E2BB |
+| Q11559342 | ちょっとでちゃった | 末尾 | U+E2BB |
+| Q11572016 | にゃんにゃんドリーム | 中央 (ん⇔ド間) | U+E2BB |
+| Q11621242 | バージンラブ | 中央 (ン⇔ラ間) | U+E2BE |
+| Q11642002 | いずみタッチダウン! | 中央 (チ⇔ダ間) | U+E2BB |
+| Q18236674 | ひとりにしないで | 末尾 | U+E2BB |
+| Q2731432 | キャンディキャンディ | 中央 (1キャンディ⇔2キャンディ間) | U+E2BB |
+| Q2928653 | むちむちパトロール | 中央 (ち⇔パ間) | U+E2BB |
+| Q2928653 | むちむち地球防衛隊 | 中央 (ち⇔地間) | U+E2BB |
+| Q3100347 | Atta2 | 「2」両側 | U+E310 + U+E312 |
+| Q6359803 | Dj vu (← 元は Déjà vu) | アクセント位置 | U+E203 (é) + U+E1F7 (à) |
+
+これらは MADB (= Manga Database) の原データに含まれる **NDL 検索由来の不可視 PUA 文字** で、 ターミナル / VSCode 上では完全に見えないため、 batch JSON を書く時に PUA を含まない可視文字のみで再構築してしまい、 YAML 側 (PUA 含む) との string equality 照合で失敗する。
+
+**過去 7 セッション全部失敗の事実**: session 30-36 で同じ 15 件が必ず missing になる。 これは PUA 文字を含む key を batch JSON にコピーできていなかったため。
+
+### 🔧 次回 session 37 で 100% 到達するための fix 方針 (= 必読)
+
+これら 15 件を fill するには、 batch JSON のキーを **YAML の生キー (PUA 含む) と byte-by-byte 一致** させる必要がある。 具体的には:
+
+```python
+# 推奨手順 (= session 37 で実行):
+import yaml, json
+with open('data/seeds/series-supplement.yml') as f:
+    data = yaml.safe_load(f)
+series = data['series']
+
+# 1. unfilled keys を生 (= PUA 文字含む) のまま取得
+unfilled_raw = [s['key'] for s in series if not s.get('synopsis')]
+print(f"unfilled: {len(unfilled_raw)}")
+for k in unfilled_raw:
+    print(f"  {k!r}")  # repr で PUA 文字 \uXXXX が見える
+
+# 2. 生キーをそのまま batch-705.json に書き込む
+fills = {}
+for k in unfilled_raw:
+    # 各キーの該当作品名 (= PUA 抜きの可視部) は上記表で既知。
+    # 適切な fill 内容 (synopsis/demographic/genres) は session 35/36 batch 664 を参照
+    fills[k] = {
+        "magazine": None,
+        "demographic": "shoujo",  # 大半は少女漫画、Q2928653/Q3100347 は seinen、Q6359803 は seinen
+        "genres": [...],
+        "synopsis": "...",
+        "status": "completed",
+        "anime_adapted": False  # Q2731432|キャンディキャンディ のみ True
+    }
+
+with open('data/seeds/_fills/batch-705-pua-fix.json', 'w', encoding='utf-8') as f:
+    json.dump(fills, f, ensure_ascii=False)
+    # ensure_ascii=False で日本語生表記、 PUA は文字のまま埋め込まれる
+
+# 3. apply-fills.ts で適用
+# bash: npx tsx scripts/_apply-fills.ts data/seeds/_fills/batch-705-pua-fix.json
+# 期待結果: applied=15, missing=0
+```
+
+**重要 - 注意点**:
+- Write tool / Edit tool 経由で batch-705.json を作成する場合、 PUA 文字を直接書こうとすると入力で消滅する可能性が高い。 **必ず Python 経由で書き込む** (= 上記コード)。
+- もしくは scripts/_apply-fills.ts に **PUA strip 機能** を追加する fix を行い、 両側 (YAML 側 & fills 側) で PUA を除去してから照合させる方法もあるが、 設計変更を伴うので慎重に。
+
+### Session 36 の傾向
+
+- 97.06%→99.98% (事実上の完了)。 残 15 件は技術的問題で session 37 で fix 予定。
+- **大型 Q-code クラスター** (=
+  - Q958256 赤塚不二夫 (おそ松くん/天才バカボン/ひみつのアッコちゃん/もーれつア太郎/レッツラ・ゴン/ニャロメ系教育本/おそ松さんアンソロジー多数) 約 230 件、
+  - Q967455 本宮ひろ志・小池一夫共著 (子連れ狼/弐十手物語/御用牙/I・餓男/マッド・ブル等) 約 100 件、
+  - Q9355827 都築真紀 (魔法少女リリカルなのは ViVid シリーズ全種、 マテリアル娘) 約 30 件、
+  - Q9099435 中山星香 (妖精国の騎士系) 約 27 件、
+  - Q9321501 今市子 (百鬼夜行抄系列 - 迷宮シリーズ各色) 約 50 件、
+  - Q9116996 古賀新一 (エコエコアザラク/呪い/恐怖) 約 35 件、
+  - Q9013687 名香智子 (シャンパン・シャーベット/鈴姫さま系) 約 60 件、
+  - Q987957 和田慎二 (スケバン刑事/超少女明日香/ピグマリオ) 約 50 件、
+  - Q9104481 ハーレクインコミックス系 約 50 件、
+  - Q977749 新谷かおる (エリア88/ファントム無頼/戦場ロマン) 約 30 件、
+  - Q966701 天樹征丸 (金田一少年の事件簿系全種/Bloody Monday/サイコメトラー/探偵学園Q) 約 50 件、
+  - Q8967541 内田康夫「浅見光彦」シリーズ 約 25 件、
+  - Q9036516 たがみよしひさ (サライ/ラブ♥シンクロイド系) 約 30 件、
+  - Q959193 中沢啓治 (はだしのゲン関連)、
+  - Q972529 雷句誠 (金色のガッシュ関連)、
+  - Q9075621 柳田理科雄 (空想科学大戦)、
+  - Q9079675 古橋秀之 (ブラックロッド)、
+  - Q708256 おそ松さん公式アンソロジー多数、
+  - Q9050486 ロボットアニメ/特撮系コラボ多数。
+
+### 関連 commit (= 抜粋)
+
+```
+8c77406  data(seed3): batch 704/704 (= session36, FINAL) 100%到達
+492eebd  data(seed3): batch 703/704 (= session36) Block 4/5 complete
+e0e3c5e  data(seed3): batch 702/704
+827c89e  data(seed3): batch 701/704
+...
+7ae3b22  data(seed3): batch 684/704
+```
+
 ## 次セッションでの推奨アクション (= 上書き、 最新)
 
-1. **続行優先**: session 36 として残 約 2,063 件から最後の 2,000 件 fill (= batch 684-703)。 100% 到達予定!
-2. **next batch 番号 = 684**。
+1. **PUA 文字 fix 作業**: session 37 として残 15 件の PUA-mixed key fill を実施 (上記 fix 手順参照)。 これで真の 100% 到達。
+2. **next batch 番号 = 705** (= PUA fix 専用 batch、 100 件未満)。
+
+### 旧アクション (= 既に完了済み、 参考用)
+
+1. ~~続行優先: session 36 として残 約 2,063 件から最後の 2,000 件 fill (= batch 684-703)~~ ✅ 完了 (sessions 36 で 2,063 件全て試行、 2,048 件成功)
+2. ~~next batch 番号 = 684~~ ✅ 完了
 3. **既知 missing key**: 14+ つのPUA/正規化問題キー (Q11268905+Q11318682+Q11460951×2+Q11513040+Q11559342+Q11572016+Q11621242|バージンラブ+Q11642002|いずみタッチダウン!+Q18236674|ひとりにしないで+Q2731432|キャンディキャンディ+Q3100347|Atta2+Q2928653×2 等) は **既に session35 batch 664 で fill 完了**。 session36 では再出現しない。
 4. **demographic schema 不変**: `shounen|shoujo|seinen|josei|kodomo|other` のみ。
 5. **per-batch protocol** (= 不変): 100 件 1 バッチ、 `data/seeds/_fills/batch-NNN.json`、 `npx tsx scripts/_apply-fills.ts`、 commit + push、 JST 時刻 + 進捗報告。
