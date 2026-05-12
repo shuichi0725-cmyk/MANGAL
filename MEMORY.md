@@ -2,7 +2,7 @@
 
 > このファイルは Claude Code session の context bootstrap 用。新しいセッションを開始したら最初に読むこと。
 
-最終更新: 2026-05-12 (種3 fill session 33 完了、 累計 約 64,148/70,202 ≈ 91.38%)
+最終更新: 2026-05-12 (種3 fill session 34 完了、 累計 約 66,139/70,202 ≈ 94.21%)
 
 ## プロジェクト概要
 
@@ -2330,26 +2330,78 @@ abb4324  data(seed3): batch 642/643
 9bd299e  data(seed3): batch 624/643
 ```
 
+## 2026-05-12: 種3 fill session 34 完了 (94.21%到達)
+
+### 達成サマリ
+
+- **session 34 batch 644-663 全 20 batch 完了** (= 平均 100 件 × 20 = **2,000 件 fill**)
+- 適用: **1,991 / 2,000** (= batch 644 applied=91 missing=14 [PUA 14件未適用]、 batch 652 初回 applied=0 [JSON format 誤りで dict 形式へ修正後 applied=100]、 残り 18 batches は applied=100 missing=0)
+- 所要時間: 約 38 分 (= JST 約 19:40 開始 → 20:18 終了、 ※途中 session 圧縮あり)
+- 報告頻度: **block 単位 (500件毎)** (= JST 時刻付き)
+- session 33 → 34 推移: 約 64,148 → **約 66,139 / 70,202 ≈ 94.21%**
+- 残 約 4,063 件 (= 約 2 セッション分)、 **94%到達!90% 大台後の追い込み**
+
+### Batch 進捗テーブル
+
+| Session | batch range | 適用件数 | missing |
+|---|---|---|---|
+| 30 | 564-583 | 1,986 | 14 |
+| 31 | 584-603 | 1,988 | 14 |
+| 32 | 604-623 | 1,986 | 14 |
+| 33 | 624-643 | 1,999 | 15 |
+| **34** | 644-663 | **1,991** | **23** |
+
+**累計**: **約 66,139 / 70,202 ≈ 94.21%**、 **残 約 4,063 件**。
+
+### Session 34 の傾向
+
+- 91.38%→94.21%。 残 2 セッション程度で 100% 到達見込み。
+- **大型 Q-code クラスター** (=
+  - Q6918002 小林源文 (戦記漫画の巨匠、 Cat Shit One/黒騎士物語/ヴィットマン戦記等) 約 45 件、
+  - Q707783 小林よしのり (おぼっちゃまくん/ゴーマニズム宣言/沖縄論等評論) 約 45 件、
+  - Q723853 谷口ジロー (孤独のグルメ/歩くひと/遥かな町へ等) 約 65 件、
+  - Q6961717 レディコミ作家成人向け短編 約 50 件、
+  - Q6858005 レディコミ作家成人向け短編 約 90 件、
+  - Q6883357 三浦みつる (Theかぼちゃワイン/シャコタンブギ等) 約 20 件、
+  - Q6883359 すがやみつる (こんにちはマイコン/ゲームセンターあらし/仮面ライダーシリーズ) 約 24 件、
+  - Q725387 車田正美 (聖闘士星矢関連各種スピンオフ) 約 23 件、
+  - Q744237 伊藤潤二 (富江/うずまき/ギョ/双一等ホラー) 約 50 件、
+  - Q7497596 水島新司 (ドカベン/あぶさん) 約 15 件、
+  - Q7635423 田河水泡 (のらくろシリーズ) 約 22 件、
+  - Q6837861 楠みちはる (湾岸MIDNIGHT/シャコタンブギ) 約 9 件)。
+- 戦記/評論/ホラー/野球/ファンタジー/レディコミの幅広いジャンル。
+
+### 関連 commit (= 抜粋)
+
+```
+31ec3e9  data(seed3): batch 663/663 (= session34, Block 4/4 complete)
+bffc2ba  data(seed3): batch 662/663
+c10dbd0  data(seed3): batch 661/663
+...
+b1b1b1b  data(seed3): batch 644/663
+```
+
 ## 次セッションでの推奨アクション (= 上書き、 最新)
 
-1. **続行優先**: session 34 として残 約 6,054 件から 2,000 件 fill (= batch 644-663)。
-2. **next batch 番号 = 644**。
-3. **既知 missing key**: 14+ つのPUA/正規化問題キー (Q11268905+Q11318682+Q11460951×2+Q11513040+Q11559342+Q11572016+Q11621242|バージンラブ+Q11642002|いずみタッチダウン!+Q18236674|ひとりにしないで+Q2731432|キャンディキャンディ+Q3100347|Atta2+Q2928653×2 等) が毎セッションの top に出現するため、 batch 644 でも全て含める必要がある (applied≈100, missing≈14 期待)。
+1. **続行優先**: session 35 として残 約 4,063 件から 2,000 件 fill (= batch 664-683)。
+2. **next batch 番号 = 664**。
+3. **既知 missing key**: 14+ つのPUA/正規化問題キー (Q11268905+Q11318682+Q11460951×2+Q11513040+Q11559342+Q11572016+Q11621242|バージンラブ+Q11642002|いずみタッチダウン!+Q18236674|ひとりにしないで+Q2731432|キャンディキャンディ+Q3100347|Atta2+Q2928653×2 等) が毎セッションの top に出現するため、 batch 664 でも全て含める必要がある (applied≈100, missing≈14 期待)。
 4. **demographic schema 不変**: `shounen|shoujo|seinen|josei|kodomo|other` のみ。
 5. **per-batch protocol** (= 不変): 100 件 1 バッチ、 `data/seeds/_fills/batch-NNN.json`、 `npx tsx scripts/_apply-fills.ts`、 commit + push、 JST 時刻 + 進捗報告。
-6. **報告頻度**: 500 件毎 (= block 単位)、 ユーザの指定に従う。
-7. **selection ロジック**:
+6. **重要 - JSON format**: batch-NNN.json は **dict 形式 (key→object map)** のみ受理。 array 形式 `[{key,...}]` は applied=0 missing=100 になる。 cf. batch-651/653 等の既存 batch を参照。
+7. **報告頻度**: 500 件毎 (= block 単位)、 ユーザの指定に従う。
+8. **selection ロジック**:
    ```python
    import json, yaml
    seed = yaml.safe_load(open('data/seeds/series-supplement.yml'))
    series = seed['series']
    filled = set(s['key'] for s in series if s.get('synopsis') or s.get('demographic'))
    seed_keys = set(s['key'] for s in series)
-   orig = json.load(open('.cache/session33-unfilled.json'))
+   orig = json.load(open('.cache/session34-unfilled.json'))
    rem = [e for e in orig if e['key'] not in filled and e['key'] in seed_keys]
    if len(rem) < 2100:
        seen = set(e['key'] for e in rem)
        extra = [{'key': s['key']} for s in series if s['key'] not in filled and s['key'] not in seen]
        rem.extend(extra)
-   json.dump(rem, open('.cache/session34-unfilled.json','w'), ensure_ascii=False)
+   json.dump(rem, open('.cache/session35-unfilled.json','w'), ensure_ascii=False)
    ```
