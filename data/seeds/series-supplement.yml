@@ -1,5 +1,5 @@
 schema_version: 1
-generated_at: 2026-05-12T05:43:39.448Z
+generated_at: 2026-05-12T05:45:14.792Z
 generator: claude-opus-4-7-direct-fill
 series:
   - key: Q1001784|GOLDEN SPIRAL
@@ -473244,6 +473244,14 @@ series:
     synopsis: 松本零士の名作『大四畳半大物語』元祖版。
     status: completed
   - key: Q431443|元祖大四畳半大物語ベストセレクション
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+      - anthology
+    synopsis: 元祖大四畳半大物語ベストセレクション。
+    status: completed
+    anime_adapted: false
   - key: Q431443|光速エスパー
     demographic: shounen
     genres:
@@ -473254,15 +473262,89 @@ series:
     status: completed
     anime_adapted: true
   - key: Q431443|児女英雄伝
+    magazine: null
+    demographic: seinen
+    genres:
+      - historical
+    synopsis: 児女英雄伝。
+    status: completed
+    anime_adapted: false
   - key: Q431443|出戻社員伝
+    magazine: null
+    demographic: seinen
+    genres:
+      - business
+      - comedy
+    synopsis: 出戻社員伝。
+    status: completed
+    anime_adapted: false
   - key: Q431443|原水爆漫画コレクション
+    magazine: null
+    demographic: seinen
+    genres:
+      - anthology
+    synopsis: 原水爆漫画コレクション。
+    status: completed
+    anime_adapted: false
   - key: Q431443|四次元世界
+    magazine: null
+    demographic: shounen
+    genres:
+      - sci_fi
+    synopsis: 四次元世界。
+    status: completed
+    anime_adapted: false
   - key: Q431443|四次元時計
+    magazine: null
+    demographic: shounen
+    genres:
+      - sci_fi
+    synopsis: 四次元時計。
+    status: completed
+    anime_adapted: false
   - key: Q431443|夢奥の細道
+    magazine: null
+    demographic: seinen
+    genres:
+      - historical
+      - drama
+    synopsis: 夢奥の細道。
+    status: completed
+    anime_adapted: false
   - key: Q431443|大不倫伝
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+      - ecchi
+    synopsis: 大不倫伝。
+    status: completed
+    anime_adapted: false
   - key: Q431443|大四畳半大物語
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+    synopsis: 大四畳半大物語。
+    status: completed
+    anime_adapted: false
   - key: Q431443|大純情くん
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+      - romance
+    synopsis: 大純情くん。
+    status: completed
+    anime_adapted: false
   - key: Q431443|大草原の小さな四畳半
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+    synopsis: 大草原の小さな四畳半。
+    status: completed
+    anime_adapted: false
   - key: Q431443|天使の時空船
     demographic: seinen
     genres:
@@ -473271,8 +473353,30 @@ series:
     synopsis: 松本零士が描く、天使の時空船で時を超える壮大なSFファンタジー。
     status: completed
   - key: Q431443|妖星伝
+    magazine: null
+    demographic: shounen
+    genres:
+      - sci_fi
+      - fantasy
+    synopsis: 妖星伝。
+    status: completed
+    anime_adapted: false
   - key: Q431443|宇宙作戦第一号
+    magazine: null
+    demographic: shounen
+    genres:
+      - sci_fi
+    synopsis: 宇宙作戦第一号。
+    status: completed
+    anime_adapted: false
   - key: Q431443|宇宙博物史火星ホテル
+    magazine: null
+    demographic: shounen
+    genres:
+      - sci_fi
+    synopsis: 宇宙博物史火星ホテル。
+    status: completed
+    anime_adapted: false
   - key: Q431443|宇宙戦艦ヤマト
     demographic: shounen
     genres:
@@ -473283,9 +473387,41 @@ series:
     status: completed
     anime_adapted: true
   - key: Q431443|宇宙戦艦ヤマト 完結編
+    magazine: null
+    demographic: shounen
+    genres:
+      - sci_fi
+      - action
+    synopsis: 宇宙戦艦ヤマト完結編。
+    status: completed
+    anime_adapted: true
   - key: Q431443|宇宙戦艦ヤマト 新たなる旅立ち
+    magazine: null
+    demographic: shounen
+    genres:
+      - sci_fi
+      - action
+    synopsis: 宇宙戦艦ヤマト新たなる旅立ち。
+    status: completed
+    anime_adapted: true
   - key: Q431443|宇宙戦艦ヤマト2
+    magazine: null
+    demographic: shounen
+    genres:
+      - sci_fi
+      - action
+    synopsis: 宇宙戦艦ヤマト2。
+    status: completed
+    anime_adapted: true
   - key: Q431443|宇宙戦鑑ヤマト
+    magazine: null
+    demographic: shounen
+    genres:
+      - sci_fi
+      - action
+    synopsis: 宇宙戦鑑ヤマト。
+    status: completed
+    anime_adapted: true
   - key: Q431443|宇宙海賊キャプテンハーロック
     demographic: shounen
     genres:
@@ -473296,37 +473432,274 @@ series:
     status: completed
     anime_adapted: true
   - key: Q431443|宮澤賢治・漫画館
+    magazine: null
+    demographic: shounen
+    genres:
+      - anthology
+    synopsis: 宮澤賢治漫画館。
+    status: completed
+    anime_adapted: false
   - key: Q431443|帰らざる時の物語
+    magazine: null
+    demographic: shounen
+    genres:
+      - sci_fi
+      - drama
+    synopsis: 帰らざる時の物語。
+    status: completed
+    anime_adapted: false
   - key: Q431443|平賀源内
+    magazine: null
+    demographic: shounen
+    genres:
+      - historical
+      - biography
+    synopsis: 平賀源内松本。
+    status: completed
+    anime_adapted: false
   - key: Q431443|幻想新幹線0
+    magazine: null
+    demographic: shounen
+    genres:
+      - sci_fi
+    synopsis: 幻想新幹線0。
+    status: completed
+    anime_adapted: false
   - key: Q431443|忍法十番勝負
+    magazine: null
+    demographic: shounen
+    genres:
+      - action
+    synopsis: 忍法十番勝負。
+    status: completed
+    anime_adapted: false
   - key: Q431443|思春期100万年
+    magazine: null
+    demographic: shounen
+    genres:
+      - drama
+    synopsis: 思春期100万年。
+    status: completed
+    anime_adapted: false
   - key: Q431443|怪盗M
+    magazine: null
+    demographic: shounen
+    genres:
+      - mystery
+    synopsis: 怪盗M松本。
+    status: completed
+    anime_adapted: false
   - key: Q431443|恐竜荘物語
+    magazine: null
+    demographic: shounen
+    genres:
+      - adventure
+      - comedy
+    synopsis: 恐竜荘物語。
+    status: completed
+    anime_adapted: false
   - key: Q431443|惑星ロボダンガードA
+    magazine: null
+    demographic: shounen
+    genres:
+      - sci_fi
+      - action
+    synopsis: 惑星ロボダンガードA。
+    status: completed
+    anime_adapted: true
   - key: Q431443|戦場コミックシリーズ
+    magazine: null
+    demographic: shounen
+    genres:
+      - action
+      - anthology
+    synopsis: 戦場コミックシリーズ。
+    status: completed
+    anime_adapted: false
   - key: Q431443|戦場の現実と正体
+    magazine: null
+    demographic: seinen
+    genres:
+      - historical
+    synopsis: 戦場の現実と正体松本。
+    status: completed
+    anime_adapted: false
   - key: Q431443|手塚治虫名作集
+    magazine: null
+    demographic: shounen
+    genres:
+      - anthology
+    synopsis: 手塚治虫名作集松本。
+    status: completed
+    anime_adapted: false
   - key: Q431443|新宇宙戦艦ヤマト
+    magazine: null
+    demographic: shounen
+    genres:
+      - sci_fi
+      - action
+    synopsis: 新宇宙戦艦ヤマト。
+    status: completed
+    anime_adapted: true
   - key: Q431443|日本短編漫画傑作集
+    magazine: null
+    demographic: seinen
+    genres:
+      - anthology
+    synopsis: 日本短編漫画傑作集松本。
+    status: completed
+    anime_adapted: false
   - key: Q431443|昆虫皇帝
+    magazine: null
+    demographic: shounen
+    genres:
+      - sci_fi
+    synopsis: 昆虫皇帝。
+    status: completed
+    anime_adapted: false
   - key: Q431443|星の海,美の遺伝子
+    magazine: null
+    demographic: shounen
+    genres:
+      - sci_fi
+    synopsis: 星の海美の遺伝子。
+    status: completed
+    anime_adapted: false
   - key: Q431443|星よきえないで
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+    synopsis: 星よきえないで。
+    status: completed
+    anime_adapted: false
   - key: Q431443|昭和漫画風雲録
+    magazine: null
+    demographic: seinen
+    genres:
+      - biography
+    synopsis: 昭和漫画風雲録。
+    status: completed
+    anime_adapted: false
   - key: Q431443|未復刻SF作品集
+    magazine: null
+    demographic: shounen
+    genres:
+      - anthology
+      - sci_fi
+    synopsis: 未復刻SF作品集。
+    status: completed
+    anime_adapted: false
   - key: Q431443|未来の戦争
+    magazine: null
+    demographic: shounen
+    genres:
+      - sci_fi
+      - action
+    synopsis: 未来の戦争松本。
+    status: completed
+    anime_adapted: false
   - key: Q431443|松本零士・戦場漫画クロニクル
+    magazine: null
+    demographic: seinen
+    genres:
+      - action
+      - historical
+    synopsis: 松本零士戦場漫画クロニクル。
+    status: completed
+    anime_adapted: false
   - key: Q431443|松本零士セレクション
+    magazine: null
+    demographic: shounen
+    genres:
+      - anthology
+    synopsis: 松本零士セレクション。
+    status: completed
+    anime_adapted: false
   - key: Q431443|松本零士の大宇宙
+    magazine: null
+    demographic: shounen
+    genres:
+      - anthology
+      - sci_fi
+    synopsis: 松本零士の大宇宙。
+    status: completed
+    anime_adapted: false
   - key: Q431443|松本零士の飛び出せ!宇宙へ
+    magazine: null
+    demographic: shounen
+    genres:
+      - sci_fi
+      - educational
+    synopsis: 松本零士の飛び出せ宇宙へ。
+    status: completed
+    anime_adapted: false
   - key: Q431443|松本零士不滅のアレグレット
+    magazine: null
+    demographic: shounen
+    genres:
+      - anthology
+    synopsis: 松本零士不滅のアレグレット。
+    status: completed
+    anime_adapted: false
   - key: Q431443|松本零士戦場まんが初期傑作選
+    magazine: null
+    demographic: shounen
+    genres:
+      - action
+      - anthology
+    synopsis: 松本零士戦場まんが初期傑作選。
+    status: completed
+    anime_adapted: false
   - key: Q431443|松本零士自選傑作集
+    magazine: null
+    demographic: shounen
+    genres:
+      - anthology
+    synopsis: 松本零士自選傑作集。
+    status: completed
+    anime_adapted: false
   - key: Q431443|機械化人都市
+    magazine: null
+    demographic: shounen
+    genres:
+      - sci_fi
+    synopsis: 機械化人都市。
+    status: completed
+    anime_adapted: false
   - key: Q431443|水木しげる漫画大全集
+    magazine: null
+    demographic: seinen
+    genres:
+      - anthology
+    synopsis: 水木しげる漫画大全集松本。
+    status: completed
+    anime_adapted: false
   - key: Q431443|海の王者戦艦大和
+    magazine: null
+    demographic: shounen
+    genres:
+      - action
+      - historical
+    synopsis: 海の王者戦艦大和。
+    status: completed
+    anime_adapted: false
   - key: Q431443|漂流3000万光年
+    magazine: null
+    demographic: shounen
+    genres:
+      - sci_fi
+    synopsis: 漂流3000万光年。
+    status: completed
+    anime_adapted: false
   - key: Q431443|漂流幹線000
+    magazine: null
+    demographic: shounen
+    genres:
+      - sci_fi
+    synopsis: 漂流幹線000。
+    status: completed
+    anime_adapted: false
   - key: Q431443|漱石と倫敦ミイラ殺人事件
     demographic: seinen
     genres:
@@ -473335,12 +473708,64 @@ series:
     synopsis: 松本零士による島田荘司原作のミステリーコミカライズ。夏目漱石が倫敦でミイラ殺人事件に挑む物語。
     status: completed
   - key: Q431443|潜水艦スーパー99
+    magazine: null
+    demographic: shounen
+    genres:
+      - action
+    synopsis: 潜水艦スーパー99。
+    status: completed
+    anime_adapted: true
   - key: Q431443|火星令嬢
+    magazine: null
+    demographic: shounen
+    genres:
+      - sci_fi
+    synopsis: 火星令嬢。
+    status: completed
+    anime_adapted: false
   - key: Q431443|火星探険
+    magazine: null
+    demographic: shounen
+    genres:
+      - sci_fi
+      - adventure
+    synopsis: 火星探険松本。
+    status: completed
+    anime_adapted: false
   - key: Q431443|火聖旅団ダナサイト999.9
+    magazine: null
+    demographic: shounen
+    genres:
+      - sci_fi
+    synopsis: 火聖旅団ダナサイト9999。
+    status: completed
+    anime_adapted: false
   - key: Q431443|無の黒船
+    magazine: null
+    demographic: shounen
+    genres:
+      - sci_fi
+      - historical
+    synopsis: 無の黒船。
+    status: completed
+    anime_adapted: false
   - key: Q431443|無限海漂流記
+    magazine: null
+    demographic: shounen
+    genres:
+      - adventure
+    synopsis: 無限海漂流記。
+    status: completed
+    anime_adapted: false
   - key: Q431443|特攻
+    magazine: null
+    demographic: seinen
+    genres:
+      - historical
+      - drama
+    synopsis: 特攻松本。
+    status: completed
+    anime_adapted: false
   - key: Q431443|男おいどん
     demographic: seinen
     genres:
@@ -473349,8 +473774,30 @@ series:
     synopsis: 松本零士による青春漫画の金字塔。九州出身の浪人生・大山昇太の貧しくも逞しい四畳半生活を描いた人情ギャグの傑作。
     status: completed
   - key: Q431443|眠れる宇宙の王女
+    magazine: null
+    demographic: shounen
+    genres:
+      - sci_fi
+    synopsis: 眠れる宇宙の王女。
+    status: completed
+    anime_adapted: false
   - key: Q431443|空の王者ゼロ戦
+    magazine: null
+    demographic: shounen
+    genres:
+      - action
+      - historical
+    synopsis: 空の王者ゼロ戦。
+    status: completed
+    anime_adapted: false
   - key: Q431443|緑の天使
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+    synopsis: 緑の天使松本。
+    status: completed
+    anime_adapted: false
   - key: Q431443|聖凡人伝
     demographic: seinen
     genres:
@@ -473359,12 +473806,62 @@ series:
     synopsis: 松本零士による人情漫画。市井の凡人たちが見せる聖なる輝きを描いた連作。
     status: completed
   - key: Q431443|蛍の泣く島
+    magazine: null
+    demographic: shounen
+    genres:
+      - drama
+    synopsis: 蛍の泣く島。
+    status: completed
+    anime_adapted: false
   - key: Q431443|蜃気楼フェリーアイランダー0
+    magazine: null
+    demographic: shounen
+    genres:
+      - sci_fi
+    synopsis: 蜃気楼フェリーアイランダー0。
+    status: completed
+    anime_adapted: false
   - key: Q431443|蜃気楼綺譚
+    magazine: null
+    demographic: shounen
+    genres:
+      - sci_fi
+    synopsis: 蜃気楼綺譚。
+    status: completed
+    anime_adapted: false
   - key: Q431443|蜜蜂の冒険
+    magazine: null
+    demographic: shounen
+    genres:
+      - adventure
+    synopsis: 蜜蜂の冒険。
+    status: completed
+    anime_adapted: false
   - key: Q431443|語り継ぐ特攻
+    magazine: null
+    demographic: seinen
+    genres:
+      - historical
+    synopsis: 語り継ぐ特攻。
+    status: completed
+    anime_adapted: false
   - key: Q431443|超時空戦艦まほろば
+    magazine: null
+    demographic: shounen
+    genres:
+      - sci_fi
+      - action
+    synopsis: 超時空戦艦まほろば。
+    status: completed
+    anime_adapted: false
   - key: Q431443|近眼人類詩集
+    magazine: null
+    demographic: shounen
+    genres:
+      - comedy
+    synopsis: 近眼人類詩集。
+    status: completed
+    anime_adapted: false
   - key: Q431443|銀河鉄道999
     magazine: weekly-shonen-king
     demographic: shounen
@@ -473378,7 +473875,23 @@ series:
     alternative_titles:
       en: Galaxy Express 999
   - key: Q431443|銀河鉄道999 ANOTHER STORYアルティメットジャーニー
+    magazine: null
+    demographic: shounen
+    genres:
+      - sci_fi
+      - adventure
+    synopsis: 銀河鉄道999アルティメットジャーニー。
+    status: completed
+    anime_adapted: true
   - key: Q431443|銀河鉄道999 perfect book
+    magazine: null
+    demographic: shounen
+    genres:
+      - sci_fi
+      - adventure
+    synopsis: 銀河鉄道999 perfect book。
+    status: completed
+    anime_adapted: true
   - key: Q431443|銀河鉄道999アンドロメダ編
     demographic: seinen
     genres:
@@ -473387,7 +473900,22 @@ series:
     synopsis: 松本零士の『銀河鉄道999』アンドロメダ編。
     status: completed
   - key: Q431443|銀河鉄道999エターナル編
+    magazine: null
+    demographic: shounen
+    genres:
+      - sci_fi
+      - adventure
+    synopsis: 銀河鉄道999エターナル編。
+    status: completed
+    anime_adapted: true
   - key: Q431443|闇夜の鴉の物語
+    magazine: null
+    demographic: shounen
+    genres:
+      - drama
+    synopsis: 闇夜の鴉の物語。
+    status: completed
+    anime_adapted: false
   - key: Q431443|陽炎の紋章
     demographic: seinen
     genres:
@@ -473396,24 +473924,159 @@ series:
     synopsis: 松本零士による青年向け時代劇。陽炎の紋章を描く物語。
     status: completed
   - key: Q431443|零次元機械紀行
+    magazine: null
+    demographic: shounen
+    genres:
+      - sci_fi
+    synopsis: 零次元機械紀行。
+    status: completed
+    anime_adapted: false
   - key: Q431443|青い花びら
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+    synopsis: 青い花びら松本。
+    status: completed
+    anime_adapted: false
   - key: Q431443|魔境惑星の恋人
+    magazine: null
+    demographic: shounen
+    genres:
+      - sci_fi
+      - romance
+    synopsis: 魔境惑星の恋人。
+    status: completed
+    anime_adapted: false
   - key: Q431443|魔女天使
+    magazine: null
+    demographic: shoujo
+    genres:
+      - fantasy
+    synopsis: 魔女天使松本。
+    status: completed
+    anime_adapted: false
   - key: Q431975|Blue sky
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+    synopsis: Blue sky昭日。
+    status: completed
+    anime_adapted: false
   - key: Q431975|COM傑作選
+    magazine: null
+    demographic: seinen
+    genres:
+      - anthology
+    synopsis: COM傑作選昭日。
+    status: completed
+    anime_adapted: false
   - key: Q431975|しあわせつぶて
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+    synopsis: しあわせつぶて。
+    status: completed
+    anime_adapted: false
   - key: Q431975|しんきらり
+    magazine: null
+    demographic: shoujo
+    genres:
+      - slice_of_life
+    synopsis: しんきらり。
+    status: completed
+    anime_adapted: false
   - key: Q431975|ねこだのみ
+    magazine: null
+    demographic: shoujo
+    genres:
+      - slice_of_life
+    synopsis: ねこだのみ昭日。
+    status: completed
+    anime_adapted: false
   - key: Q431975|ねこのふしぎ話
+    magazine: null
+    demographic: shoujo
+    genres:
+      - slice_of_life
+    synopsis: ねこのふしぎ話。
+    status: completed
+    anime_adapted: false
   - key: Q431975|ゆらりうす色
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+    synopsis: ゆらりうす色。
+    status: completed
+    anime_adapted: false
   - key: Q431975|夢の迷子たち
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+    synopsis: 夢の迷子たち。
+    status: completed
+    anime_adapted: false
   - key: Q431975|宮沢賢治・漫画館
+    magazine: null
+    demographic: shoujo
+    genres:
+      - anthology
+    synopsis: 宮沢賢治漫画館。
+    status: completed
+    anime_adapted: false
   - key: Q431975|御伽草子
+    magazine: null
+    demographic: shoujo
+    genres:
+      - historical
+      - fantasy
+    synopsis: 御伽草子昭日。
+    status: completed
+    anime_adapted: false
   - key: Q431975|性悪猫
+    magazine: null
+    demographic: shoujo
+    genres:
+      - slice_of_life
+    synopsis: 性悪猫。
+    status: completed
+    anime_adapted: false
   - key: Q431975|新編性悪猫
+    magazine: null
+    demographic: shoujo
+    genres:
+      - slice_of_life
+    synopsis: 新編性悪猫。
+    status: completed
+    anime_adapted: false
   - key: Q431975|日本短編漫画傑作集
+    magazine: null
+    demographic: shoujo
+    genres:
+      - anthology
+    synopsis: 日本短編漫画傑作集昭日。
+    status: completed
+    anime_adapted: false
   - key: Q431975|空におちる
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+    synopsis: 空におちる。
+    status: completed
+    anime_adapted: false
   - key: Q431975|続 しんきらり
+    magazine: null
+    demographic: shoujo
+    genres:
+      - slice_of_life
+    synopsis: 続しんきらり。
+    status: completed
+    anime_adapted: false
   - key: Q433101|1001
     demographic: shoujo
     genres:
@@ -473422,6 +474085,14 @@ series:
     synopsis: 千夜一夜物語をモチーフにした、杉崎ゆきるのファンタジー少女漫画。
     status: completed
   - key: Q433101|BRAIN POWERD
+    magazine: null
+    demographic: shounen
+    genres:
+      - sci_fi
+      - action
+    synopsis: BRAIN POWERD杉崎ゆきる。
+    status: completed
+    anime_adapted: true
   - key: Q433101|D・N・ANGEL
     magazine: monthly-asuka
     demographic: shoujo
@@ -473433,11 +474104,54 @@ series:
     status: completed
     anime_adapted: true
   - key: Q433101|D・N・ANGEL Illustrations FEDER
+    magazine: null
+    demographic: shoujo
+    genres:
+      - anthology
+    synopsis: DNANGEL Illustrations FEDER。
+    status: completed
+    anime_adapted: true
   - key: Q433101|DDNAngels
+    magazine: null
+    demographic: shoujo
+    genres:
+      - anthology
+    synopsis: DDNAngels。
+    status: completed
+    anime_adapted: false
   - key: Q433101|NEUTRAL
+    magazine: null
+    demographic: shoujo
+    genres:
+      - fantasy
+    synopsis: NEUTRAL。
+    status: completed
+    anime_adapted: false
   - key: Q433101|PLATINUM BOYS
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+    synopsis: PLATINUM BOYS杉崎。
+    status: completed
+    anime_adapted: false
   - key: Q433101|アスクライブ・トゥ・ヘヴン
+    magazine: null
+    demographic: shoujo
+    genres:
+      - fantasy
+    synopsis: アスクライブトゥヘヴン。
+    status: completed
+    anime_adapted: false
   - key: Q433101|ブレンパワード
+    magazine: null
+    demographic: shounen
+    genres:
+      - sci_fi
+      - action
+    synopsis: ブレンパワード。
+    status: completed
+    anime_adapted: true
   - key: Q433101|ラグーンエンジン
     magazine: monthly-comic-zero-sum
     demographic: shoujo
@@ -473448,7 +474162,22 @@ series:
     synopsis: 杉崎ゆきるが描く、退魔師の少年たちの戦いを描く伝奇ファンタジー少女漫画。
     status: completed
   - key: Q433101|ラグーンエンジンアインザッツ
+    magazine: null
+    demographic: shoujo
+    genres:
+      - fantasy
+    synopsis: ラグーンエンジンアインザッツ。
+    status: completed
+    anime_adapted: false
   - key: Q433101|りぜるまいん
+    magazine: null
+    demographic: shounen
+    genres:
+      - comedy
+      - romance
+    synopsis: りぜるまいん。
+    status: completed
+    anime_adapted: true
   - key: Q433101|卒業M
     demographic: shoujo
     genres:
@@ -473475,6 +474204,13 @@ series:
     status: completed
     anime_adapted: false
   - key: Q4332514|Lover's diary
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+    synopsis: Lovers diary。
+    status: completed
+    anime_adapted: false
   - key: Q4332514|Queen
   - key: Q4332514|アーティ・スクエア
   - key: Q4332514|デミアン症候群
