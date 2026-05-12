@@ -2,7 +2,7 @@
 
 > このファイルは Claude Code session の context bootstrap 用。新しいセッションを開始したら最初に読むこと。
 
-最終更新: 2026-05-12 (種3 fill session 28 完了、 累計 約 54,168/70,202 ≈ 77.16%)
+最終更新: 2026-05-12 (種3 fill session 29 完了、 累計 約 56,158/70,202 ≈ 80.00%)
 
 ## プロジェクト概要
 
@@ -2049,11 +2049,64 @@ e1c8470  data(seed3): batch 543/543 (= session28, block 4/4 完了 = 2000件達�
 3868ef2  data(seed3): batch 524/543 (= session28) Opus 4.7 直筆 fill
 ```
 
+---
+
+## 2026-05-12: 種3 fill session 29 完了 (80.00%到達)
+
+### 達成サマリ
+
+- **session 29 batch 544-563 全 20 batch 完了** (= 平均 100 件 × 20 = **2,000 件 fill**)
+- 適用: **1,989 / 2,000** (= batch 544 applied=90 missing=10 [既知PUA+正規化問題]、 batch 559 applied=99 missing=1 [duplicate]、 残り 18 batches は missing=0)
+- 所要時間: 約 1時間13分 (= JST 10:22 開始 → 11:35 終了)
+- 報告頻度: **500 件毎** (= block 単位)
+- session 28 → 29 推移: 約 54,168 → **約 56,158 / 70,202 ≈ 80.00%**
+- 残 約 14,044 件 (= 約 7 セッション分)、 **80% milestone 到達!**
+
+### Batch 進捗テーブル
+
+| Session | batch range | 適用件数 | missing |
+|---|---|---|---|
+| 25 | 464-483 | 1,991 | 9 |
+| 26 | 484-503 | 1,991 | 9 |
+| 27 | 504-523 | 1,991 | 10 |
+| 28 | 524-543 | 1,990 | 10 |
+| **29** | 544-563 | **1,989** | **11** |
+
+**累計**: **約 56,158 / 70,202 ≈ 80.00%**、 **残 約 14,044 件**。
+
+### Session 29 の傾向
+
+- 77%突破→80%台到達。 残 7 セッション程度で 100% 到達見込み。
+- **大型 Q-code クラスター** (=
+  - Q193300 手塚治虫続編 (前session続き)、
+  - Q2235128 田村由美作品集約 37 件、
+  - Q23901397 BL/女性向け恋愛多数約 45 件、
+  - Q23292367 時代劇画約 30 件、
+  - Q24865900 ハーレクイン恋愛約 30 件、
+  - Q256425 池田理代子作品集約 30 件、
+  - Q265061 萩尾望都ポー他作品集約 50 件、
+  - Q268789 竹宮恵子作品集約 55 件、
+  - Q2526458 さいとうちほ作品集約 45 件、
+  - Q2601844 麻生いずみ作品集約 30 件、
+  - Q2661273 ゴルゴ13/さいとう・たかを/鬼平犯科帳約 170 件 (= session29 最大)、
+  - Q276378 麻生海BL/女性向け約 65 件、
+  - Q2875041 飯森広一作品集約 47 件)。
+- 手塚治虫→田村由美→ハーレクイン→ゴルゴ13→さいとうちほ→萩尾望都→池田理代子→竹宮恵子等、 巨匠少女漫画家・劇画作家の大全集が中心。
+
+### 関連 commit (= 抜粋)
+
+```
+6a39e22  data(seed3): batch 563/563 (= session29, block 4/4 完了 = 2000件達成)
+fe69bea  data(seed3): batch 562/563 (= session29)
+...
+7723543  data(seed3): batch 544/563 (= session29)
+```
+
 ## 次セッションでの推奨アクション (= 上書き、 最新)
 
-1. **続行優先**: session 29 として残 約 16,034 件から 2,000 件 fill (= batch 544-563)。
-2. **next batch 番号 = 544**。
-3. **既知 missing key**: 9+ つのPUA/正規化問題キー (Q11268905+Q11318682+Q11460951×2+Q11513040+Q11559342+Q11572016+Q11621242|バージンラブ+Q11642002|いずみタッチダウン!) が毎セッションの top に出現するため、 batch 544 でも全て含める必要がある (applied=91, missing=9 期待)。
+1. **続行優先**: session 30 として残 約 14,044 件から 2,000 件 fill (= batch 564-583)。
+2. **next batch 番号 = 564**。
+3. **既知 missing key**: 9+ つのPUA/正規化問題キー (Q11268905+Q11318682+Q11460951×2+Q11513040+Q11559342+Q11572016+Q11621242|バージンラブ+Q11642002|いずみタッチダウン!) + 累積 normalization issue が毎セッションの top に出現するため、 batch 564 でも全て含める必要がある (applied≈90, missing≈10 期待)。
 4. **demographic schema 不変**: `shounen|shoujo|seinen|josei|kodomo|other` のみ。
 5. **per-batch protocol** (= 不変): 100 件 1 バッチ、 `data/seeds/_fills/batch-NNN.json`、 `npx tsx scripts/_apply-fills.ts`、 commit + push、 JST 時刻 + 進捗報告。
 6. **報告頻度**: 100件毎 or 500件毎、 ユーザの指定に従う。
@@ -2064,11 +2117,11 @@ e1c8470  data(seed3): batch 543/543 (= session28, block 4/4 完了 = 2000件達�
    series = seed['series']
    filled = set(s['key'] for s in series if s.get('status') == 'completed')
    seed_keys = set(s['key'] for s in series)
-   orig = json.load(open('.cache/session28-unfilled.json'))
+   orig = json.load(open('.cache/session29-unfilled.json'))
    rem = [e for e in orig if e['key'] not in filled and e['key'] in seed_keys]
    if len(rem) < 2100:
        seen = set(e['key'] for e in rem)
        extra = [{'key': s['key']} for s in series if s['key'] not in filled and s['key'] not in seen]
        rem.extend(extra)
-   json.dump(rem, open('.cache/session29-unfilled.json','w'), ensure_ascii=False)
+   json.dump(rem, open('.cache/session30-unfilled.json','w'), ensure_ascii=False)
    ```
