@@ -2,7 +2,7 @@
 
 > このファイルは Claude Code session の context bootstrap 用。新しいセッションを開始したら最初に読むこと。
 
-最終更新: 2026-05-13 (種3 fill session 36 完了、 累計 約 70,187/70,202 ≈ 99.98% [= 残 15 件は PUA 文字を含む正規化問題で fill 不能])
+最終更新: 2026-05-13 (種3 fill **真の 100% 到達** 70,202/70,202、 session 37 で PUA fix 完了)
 
 ## プロジェクト概要
 
@@ -2442,7 +2442,40 @@ c17d903  data(seed3): batch 682/683
 42723b0  data(seed3): batch 664/683
 ```
 
-## 2026-05-13: 種3 fill session 36 完了 (99.98%到達 - 事実上の 100%)
+## 2026-05-13: 種3 fill session 37 完了 (🎉 真の 100% 到達 - 70,202/70,202)
+
+### 達成サマリ
+
+- **session 37 batch 705 のみ実行** (= PUA 文字混入 15 件の fix 専用)
+- 適用: **15 / 15** (= applied=15, missing=0)
+- 所要時間: 約 5 分 (= JST 約 07:15 開始 → 07:20 終了)
+- session 36 → 37 推移: 約 70,187 → **70,202 / 70,202 = 100.0000%**
+
+### 実施手順 (= 成功記録)
+
+1. Python 経由で YAML から **PUA 文字を含む生キー** を抽出 (= `for s in series if not s.get('synopsis')`)
+2. 取得した 15 件の生キー (例: `'Q11268905|ウルフチックにお願い'`) をそのまま辞書のキーとして使用し、 `json.dump(fills, f, ensure_ascii=False)` で `batch-705.json` に書き込み
+3. `npx tsx scripts/_apply-fills.ts data/seeds/_fills/batch-705.json` で適用 → `applied=15, missing=0`
+4. 最終検証: filled=70,202 / total=70,202 → **100.0000%**
+
+### 関連 commit
+
+```
+311b680  data(seed3): batch 705/705 (= session37 PUA fix) 真の100%到達 70202/70202
+```
+
+## 次セッションでの推奨アクション (= 上書き、 最新)
+
+種3 fill は **完全に完了**。 次の段階としては:
+
+1. **Phase 5 準備**: Amazon PA-API 申請 (= アフィリエイトサイト本格運用への移行)
+2. **frontend MVP 動作確認**: 70,202 件 fill 済 series-supplement.yml が反映された Next.js export の検証
+3. **データ品質チェック**: 種3 fill 内容のサンプリングレビュー (= synopsis 品質、 demographic 妥当性、 genres 一貫性)
+4. **月次蒸留 protocol** (= CLAUDE.md 記載) の発動準備 (= MADB 新 release 取り込み)
+
+---
+
+## 2026-05-13: 種3 fill session 36 完了 (99.98%到達 - PUA問題で15件残)
 
 ### 達成サマリ
 
