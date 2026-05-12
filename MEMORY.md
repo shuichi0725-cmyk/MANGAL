@@ -2,7 +2,7 @@
 
 > このファイルは Claude Code session の context bootstrap 用。新しいセッションを開始したら最初に読むこと。
 
-最終更新: 2026-05-12 (種3 fill session 30 完了、 累計 約 58,175/70,202 ≈ 82.87%)
+最終更新: 2026-05-12 (種3 fill session 31 完了、 累計 約 60,163/70,202 ≈ 85.70%)
 
 ## プロジェクト概要
 
@@ -2160,11 +2160,73 @@ eedbd73  data(seed3): batch 579/583
 ...
 ```
 
+---
+
+## 2026-05-12: 種3 fill session 31 完了 (85.70%到達)
+
+### 達成サマリ
+
+- **session 31 batch 584-603 全 20 batch 完了** (= 平均 100 件 × 20 = **2,000 件 fill**)
+- 適用: **1,988 / 2,000** (= batch 584 applied=88 missing=14 [既知 PUA + 正規化問題 + 追加 missing])、 残り 19 batches は applied=100 missing=0
+- 所要時間: 約 30 分 (= JST 約 14:25 開始 → 14:56 終了)
+- 報告頻度: **500 件毎** (= block 単位 / JST 時刻付き)
+- session 30 → 31 推移: 約 58,175 → **約 60,163 / 70,202 ≈ 85.70%**
+- 残 約 10,039 件 (= 約 5 セッション分)、 **80%代後半到達、 60,000 件突破!**
+
+### Batch 進捗テーブル
+
+| Session | batch range | 適用件数 | missing |
+|---|---|---|---|
+| 25 | 464-483 | 1,991 | 9 |
+| 26 | 484-503 | 1,991 | 9 |
+| 27 | 504-523 | 1,991 | 10 |
+| 28 | 524-543 | 1,990 | 10 |
+| 29 | 544-563 | 1,989 | 11 |
+| 30 | 564-583 | 1,986 | 14 |
+| **31** | 584-603 | **1,988** | **14** |
+
+**累計**: **約 60,163 / 70,202 ≈ 85.70%**、 **残 約 10,039 件**。
+
+### Session 31 の傾向
+
+- 82.87%→85.70%。 残 5 セッション程度で 100% 到達見込み。
+- **大型 Q-code クラスター** (=
+  - Q3514183 矢口高雄釣りキチ三平/マタギ系約 38 件、
+  - Q3514203 長崎尚志/浦沢直樹原作系約 22 件、
+  - Q3516091 山上たつひこがきデカ系約 30 件、
+  - Q351742 あだち充タッチ/ナイン約 22 件、
+  - Q3531399 ハーレクイン恋愛系約 28 件、
+  - Q360638 臼井儀人クレヨンしんちゃん約 50 件、
+  - Q3776935 里中満智子ギリシア神話/歴史系約 70 件、
+  - Q3776937 古谷三敏BARレモンハート系約 27 件、
+  - Q3778019 ジョージ秋山銭ゲバ/浮浪雲系約 28 件、
+  - Q38842 安野モヨコ作品集約 30 件、
+  - Q40039813 三浦真奈美ハーレクイン系約 45 件、
+  - Q4022589 大島やすいちコミック乱セレクション系約 45 件、
+  - Q431443 松本零士ヤマト/銀河鉄道999系約 100 件 (= session31 最大)、
+  - Q437849 井上洋子古典文学系約 30 件、
+  - Q438368 桜沢エリカ恋愛系約 60 件、
+  - Q445827 山岸凉子歴史/horror系約 50 件、
+  - Q445875 大島弓子バナナブレッド系約 45 件、
+  - Q4531338 ますむらひろし宮沢賢治系約 30 件)。
+- 矢口高雄→あだち充→臼井儀人→里中満智子→松本零士→桜沢エリカ→山岸凉子→大島弓子等、 戦後〜現代の seinen/shoujo ベテラン作家中心。
+
+### 関連 commit (= 抜粋)
+
+```
+48b802b  data(seed3): batch 603/603 (= session31, block 4/4 完了 = 2000件達成)
+a4ea577  data(seed3): batch 602/603
+1f6b986  data(seed3): batch 601/603
+058036c  data(seed3): batch 600/603
+...
+6e334bb  data(seed3): batch 584/603
+```
+
 ## 次セッションでの推奨アクション (= 上書き、 最新)
 
-1. **続行優先**: session 31 として残 約 12,027 件から 2,000 件 fill (= batch 584-603)。
-2. **next batch 番号 = 584**。
-3. **既知 missing key**: 10+ つのPUA/正規化問題キー (Q11268905+Q11318682+Q11460951×2+Q11513040+Q11559342+Q11572016+Q11621242|バージンラブ+Q11642002|いずみタッチダウン!+Q18236674|ひとりにしないで+Q2731432|キャンディキャンディ+Q3100347|Atta2 等) が毎セッションの top に出現するため、 batch 584 でも全て含める必要がある (applied≈87, missing≈13 期待)。
+1. **続行優先**: session 32 として残 約 10,039 件から 2,000 件 fill (= batch 604-623)。
+2. **next batch 番号 = 604**。
+3. **既知 missing key**: 14+ つのPUA/正規化問題キー (Q11268905+Q11318682+Q11460951×2+Q11513040+Q11559342+Q11572016+Q11621242|バージンラブ+Q11642002|いずみタッチダウン!+Q18236674|ひとりにしないで+Q2731432|キャンディキャンディ+Q3100347|Atta2+Q2928653×2 等) が毎セッションの top に出現するため、 batch 604 でも全て含める必要がある (applied≈86, missing≈14 期待)。
 4. **demographic schema 不変**: `shounen|shoujo|seinen|josei|kodomo|other` のみ。
 5. **per-batch protocol** (= 不変): 100 件 1 バッチ、 `data/seeds/_fills/batch-NNN.json`、 `npx tsx scripts/_apply-fills.ts`、 commit + push、 JST 時刻 + 進捗報告。
 6. **報告頻度**: 500 件毎 (= block 単位)、 ユーザの指定に従う。
@@ -2175,11 +2237,11 @@ eedbd73  data(seed3): batch 579/583
    series = seed['series']
    filled = set(s['key'] for s in series if s.get('synopsis') or s.get('demographic'))
    seed_keys = set(s['key'] for s in series)
-   orig = json.load(open('.cache/session30-unfilled.json'))
+   orig = json.load(open('.cache/session31-unfilled.json'))
    rem = [e for e in orig if e['key'] not in filled and e['key'] in seed_keys]
    if len(rem) < 2100:
        seen = set(e['key'] for e in rem)
        extra = [{'key': s['key']} for s in series if s['key'] not in filled and s['key'] not in seen]
        rem.extend(extra)
-   json.dump(rem, open('.cache/session31-unfilled.json','w'), ensure_ascii=False)
+   json.dump(rem, open('.cache/session32-unfilled.json','w'), ensure_ascii=False)
    ```
