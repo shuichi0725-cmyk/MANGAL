@@ -1,5 +1,5 @@
 schema_version: 1
-generated_at: 2026-05-12T06:49:10.097Z
+generated_at: 2026-05-12T06:50:56.778Z
 generator: claude-opus-4-7-direct-fill
 series:
   - key: Q1001784|GOLDEN SPIRAL
@@ -485040,7 +485040,21 @@ series:
     status: completed
     anime_adapted: false
   - key: Q463594|ちよこれいと
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+    synopsis: ちよこれいと。
+    status: completed
+    anime_adapted: false
   - key: Q463594|ビビってむーちょ
+    magazine: null
+    demographic: shoujo
+    genres:
+      - comedy
+    synopsis: ビビってむーちょ。
+    status: completed
+    anime_adapted: false
   - key: Q463594|伯爵さまは甘い夜がお好き
     demographic: shoujo
     genres:
@@ -485069,6 +485083,13 @@ series:
     status: completed
     anime_adapted: false
   - key: Q463594|彼は今、恋をしている。
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+    synopsis: 彼は今恋をしている。
+    status: completed
+    anime_adapted: false
   - key: Q463594|微炭酸なぼくら
     magazine: null
     demographic: shoujo
@@ -485079,7 +485100,21 @@ series:
     status: completed
     anime_adapted: false
   - key: Q463594|恋は、けだもの。
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+    synopsis: 恋はけだもの。
+    status: completed
+    anime_adapted: false
   - key: Q463594|未成年ごっこ
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+    synopsis: 未成年ごっこ。
+    status: completed
+    anime_adapted: false
   - key: Q463594|桜井芽衣の作り方
     demographic: shoujo
     genres:
@@ -485113,7 +485148,22 @@ series:
     alternative_titles:
       en: D.Gray-man
   - key: Q464351|NOCHE
+    magazine: null
+    demographic: shounen
+    genres:
+      - drama
+    synopsis: NOCHE。
+    status: completed
+    anime_adapted: false
   - key: Q464351|革命機ヴァルヴレイヴ
+    magazine: null
+    demographic: shounen
+    genres:
+      - sci_fi
+      - action
+    synopsis: 革命機ヴァルヴレイヴ。
+    status: completed
+    anime_adapted: true
   - key: Q465369|ケモっちびより!
     demographic: kodomo
     genres:
@@ -485124,6 +485174,13 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q465369|ちぇんじ!
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+    synopsis: ちぇんじ。
+    status: completed
+    anime_adapted: false
   - key: Q465369|ちび☆デビ!
     magazine: ciao
     demographic: shoujo
@@ -485135,6 +485192,13 @@ series:
     status: completed
     anime_adapted: true
   - key: Q465369|ちび☆デビ!ラブリー・セレクション
+    magazine: null
+    demographic: shoujo
+    genres:
+      - comedy
+    synopsis: ちびデビラブリーセレクション。
+    status: completed
+    anime_adapted: false
   - key: Q465369|プリプリちぃちゃん!!
     magazine: ciao
     demographic: shoujo
@@ -485144,6 +485208,13 @@ series:
     synopsis: 篠塚ひろむが描く、ちぃちゃんを主人公にした少女向けプリプリギャグ。
     status: completed
   - key: Q465369|プリンきら☆モード
+    magazine: null
+    demographic: shoujo
+    genres:
+      - comedy
+    synopsis: プリンきらモード。
+    status: completed
+    anime_adapted: false
   - key: Q465369|ポンポコロボ アト&スゥ
     demographic: kodomo
     genres:
@@ -485169,6 +485240,13 @@ series:
     synopsis: 篠塚ひろむによる少女ファンタジー。メロと恋の魔法を描く物語。
     status: completed
   - key: Q465369|らぶらぶ❤ちぇんじ
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+    synopsis: らぶらぶちぇんじ。
+    status: completed
+    anime_adapted: false
   - key: Q465369|わがまま・フェアリーミルモでポン!
     demographic: shoujo
     genres:
@@ -485184,42 +485262,306 @@ series:
     synopsis: 篠塚ひろむによる少女ラブコメディ。恋するプリンのような甘い恋を描く。
     status: completed
   - key: Q465369|恋はオン・エア!
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+    synopsis: 恋はオンエア。
+    status: completed
+    anime_adapted: false
   - key: Q465369|恋はゲームで!
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+    synopsis: 恋はゲームで。
+    status: completed
+    anime_adapted: false
   - key: Q465645|Pink
+    magazine: null
+    demographic: josei
+    genres:
+      - drama
+      - ecchi
+    synopsis: Pink岡崎京子。
+    status: completed
+    anime_adapted: false
   - key: Q465645|Rock
+    magazine: null
+    demographic: josei
+    genres:
+      - music
+      - drama
+    synopsis: Rock岡崎。
+    status: completed
+    anime_adapted: false
   - key: Q465645|RUDE BOY
+    magazine: null
+    demographic: josei
+    genres:
+      - drama
+    synopsis: RUDE BOY岡崎。
+    status: completed
+    anime_adapted: false
   - key: Q465645|TAKE IT EASY
+    magazine: null
+    demographic: josei
+    genres:
+      - drama
+    synopsis: TAKE IT EASY岡崎。
+    status: completed
+    anime_adapted: false
   - key: Q465645|UNTITLED
+    magazine: null
+    demographic: josei
+    genres:
+      - drama
+    synopsis: UNTITLED岡崎。
+    status: completed
+    anime_adapted: false
   - key: Q465645|アンタイトルド
+    magazine: null
+    demographic: josei
+    genres:
+      - drama
+    synopsis: アンタイトルド。
+    status: completed
+    anime_adapted: false
   - key: Q465645|うたかたの日々
+    magazine: null
+    demographic: josei
+    genres:
+      - drama
+    synopsis: うたかたの日々。
+    status: completed
+    anime_adapted: false
   - key: Q465645|エンド・オブ・ザ・ワールド
+    magazine: null
+    demographic: josei
+    genres:
+      - drama
+    synopsis: エンドオブザワールド。
+    status: completed
+    anime_adapted: false
   - key: Q465645|カトゥーンズ
+    magazine: null
+    demographic: josei
+    genres:
+      - anthology
+    synopsis: カトゥーンズ。
+    status: completed
+    anime_adapted: false
   - key: Q465645|カリブsong
+    magazine: null
+    demographic: josei
+    genres:
+      - drama
+    synopsis: カリブsong岡崎。
+    status: completed
+    anime_adapted: false
   - key: Q465645|くちびるから散弾銃
+    magazine: null
+    demographic: josei
+    genres:
+      - drama
+    synopsis: くちびるから散弾銃。
+    status: completed
+    anime_adapted: false
   - key: Q465645|ジオラマボーイ・パノラマガール
+    magazine: null
+    demographic: josei
+    genres:
+      - drama
+    synopsis: ジオラマボーイパノラマガール。
+    status: completed
+    anime_adapted: true
   - key: Q465645|ショコラ・エブリデイ
+    magazine: null
+    demographic: josei
+    genres:
+      - drama
+    synopsis: ショコラエブリデイ。
+    status: completed
+    anime_adapted: false
   - key: Q465645|チャオ☆アンファンテリブル
+    magazine: null
+    demographic: josei
+    genres:
+      - drama
+    synopsis: チャオアンファンテリブル。
+    status: completed
+    anime_adapted: false
   - key: Q465645|チワワちゃん
+    magazine: null
+    demographic: josei
+    genres:
+      - drama
+    synopsis: チワワちゃん。
+    status: completed
+    anime_adapted: true
   - key: Q465645|テイクイットイージー
+    magazine: null
+    demographic: josei
+    genres:
+      - drama
+    synopsis: テイクイットイージー。
+    status: completed
+    anime_adapted: false
   - key: Q465645|バージン
+    magazine: null
+    demographic: josei
+    genres:
+      - drama
+    synopsis: バージン岡崎。
+    status: completed
+    anime_adapted: false
   - key: Q465645|ハッピィ・ハウス
+    magazine: null
+    demographic: josei
+    genres:
+      - drama
+    synopsis: ハッピィハウス。
+    status: completed
+    anime_adapted: false
   - key: Q465645|ヘテロセクシャル
+    magazine: null
+    demographic: josei
+    genres:
+      - drama
+    synopsis: ヘテロセクシャル。
+    status: completed
+    anime_adapted: false
   - key: Q465645|ヘルター・スケルター
+    magazine: null
+    demographic: josei
+    genres:
+      - drama
+      - psychological
+    synopsis: ヘルタースケルター。
+    status: completed
+    anime_adapted: true
   - key: Q465645|マジック・ポイント
+    magazine: null
+    demographic: josei
+    genres:
+      - drama
+    synopsis: マジックポイント。
+    status: completed
+    anime_adapted: false
   - key: Q465645|マンガでわかる戦後ニッポン
+    magazine: null
+    demographic: josei
+    genres:
+      - historical
+      - educational
+    synopsis: マンガでわかる戦後ニッポン岡崎。
+    status: completed
+    anime_adapted: false
   - key: Q465645|メルティ・レモン FOR BOYS
+    magazine: null
+    demographic: josei
+    genres:
+      - anthology
+    synopsis: メルティレモンFOR BOYS。
+    status: completed
+    anime_adapted: false
   - key: Q465645|リバーズ・エッジ
+    magazine: null
+    demographic: josei
+    genres:
+      - drama
+    synopsis: リバーズエッジ。
+    status: completed
+    anime_adapted: true
   - key: Q465645|レアリティーズ
+    magazine: null
+    demographic: josei
+    genres:
+      - anthology
+    synopsis: レアリティーズ。
+    status: completed
+    anime_adapted: false
   - key: Q465645|危険な二人
+    magazine: null
+    demographic: josei
+    genres:
+      - romance
+      - drama
+    synopsis: 危険な二人。
+    status: completed
+    anime_adapted: false
   - key: Q465645|好き好き大嫌い
+    magazine: null
+    demographic: josei
+    genres:
+      - romance
+    synopsis: 好き好き大嫌い。
+    status: completed
+    anime_adapted: false
   - key: Q465645|恋とはどういうものかしら?
+    magazine: null
+    demographic: josei
+    genres:
+      - romance
+    synopsis: 恋とはどういうものかしら。
+    status: completed
+    anime_adapted: false
   - key: Q465645|愛の生活
+    magazine: null
+    demographic: josei
+    genres:
+      - drama
+    synopsis: 愛の生活岡崎。
+    status: completed
+    anime_adapted: false
   - key: Q465645|日本短編漫画傑作集
+    magazine: null
+    demographic: josei
+    genres:
+      - anthology
+    synopsis: 日本短編漫画傑作集岡崎。
+    status: completed
+    anime_adapted: false
   - key: Q465645|東京ガールズブラボー
+    magazine: null
+    demographic: josei
+    genres:
+      - drama
+    synopsis: 東京ガールズブラボー。
+    status: completed
+    anime_adapted: false
   - key: Q465645|東方見聞録
+    magazine: null
+    demographic: josei
+    genres:
+      - historical
+    synopsis: 東方見聞録岡崎。
+    status: completed
+    anime_adapted: false
   - key: Q465645|森
+    magazine: null
+    demographic: josei
+    genres:
+      - drama
+    synopsis: 森岡崎。
+    status: completed
+    anime_adapted: false
   - key: Q465645|私は貴兄のオモチャなの
+    magazine: null
+    demographic: josei
+    genres:
+      - drama
+    synopsis: 私は貴兄のオモチャなの。
+    status: completed
+    anime_adapted: false
   - key: Q465645|退屈が大好き
+    magazine: null
+    demographic: josei
+    genres:
+      - drama
+    synopsis: 退屈が大好き。
+    status: completed
+    anime_adapted: false
   - key: Q46575543|BREAK BACK
     magazine: weekly-shonen-champion
     demographic: shounen
@@ -485231,6 +485573,14 @@ series:
     status: completed
     anime_adapted: false
   - key: Q467415|Cat's eye
+    magazine: null
+    demographic: shounen
+    genres:
+      - action
+      - comedy
+    synopsis: Cats eye北条版。
+    status: completed
+    anime_adapted: true
   - key: Q467415|Cat's・eye
     magazine: null
     demographic: shounen
@@ -485253,7 +485603,23 @@ series:
     status: completed
     anime_adapted: true
   - key: Q467415|CITY HUNTER SPECIAL
+    magazine: null
+    demographic: shounen
+    genres:
+      - action
+      - comedy
+    synopsis: CITY HUNTER SPECIAL。
+    status: completed
+    anime_adapted: true
   - key: Q467415|City hunterジャンプベストシーン
+    magazine: null
+    demographic: shounen
+    genres:
+      - anthology
+      - action
+    synopsis: City hunterジャンプベストシーン。
+    status: completed
+    anime_adapted: true
   - key: Q467415|F. compo
     demographic: seinen
     genres:
@@ -485262,7 +485628,21 @@ series:
     synopsis: 性別逆転の家族と暮らすことになった青年・雅彦の珍居候生活を描く、北条司の家族コメディの新装版。
     status: completed
   - key: Q467415|Parrot
+    magazine: null
+    demographic: shounen
+    genres:
+      - action
+    synopsis: Parrot北条。
+    status: completed
+    anime_adapted: false
   - key: Q467415|Rash!!
+    magazine: null
+    demographic: shounen
+    genres:
+      - action
+    synopsis: Rash北条。
+    status: completed
+    anime_adapted: false
   - key: Q467415|エンジェル・ハート
     magazine: weekly-comic-bunch
     demographic: seinen
@@ -485334,6 +485714,13 @@ series:
     alternative_titles:
       en: City Hunter
   - key: Q467415|シティーハンター-XYZ-
+    magazine: null
+    demographic: shounen
+    genres:
+      - action
+    synopsis: シティーハンターXYZ。
+    status: completed
+    anime_adapted: true
   - key: Q467415|ファミリー・コンポ
     magazine: young-animal
     demographic: seinen
@@ -485345,15 +485732,87 @@ series:
     status: completed
     anime_adapted: true
   - key: Q467415|北条司漫画家20周年記念イラストレーションズ
+    magazine: null
+    demographic: shounen
+    genres:
+      - anthology
+    synopsis: 北条司漫画家20周年記念イラストレーションズ。
+    status: completed
+    anime_adapted: false
   - key: Q467415|北条司漫画家25周年記念自選イラストレーション100
+    magazine: null
+    demographic: shounen
+    genres:
+      - anthology
+    synopsis: 北条司25周年自選イラストレーション100。
+    status: completed
+    anime_adapted: false
   - key: Q467415|北条司短編集
+    magazine: null
+    demographic: shounen
+    genres:
+      - anthology
+    synopsis: 北条司短編集。
+    status: completed
+    anime_adapted: false
   - key: Q467415|天使の贈りもの
+    magazine: null
+    demographic: shounen
+    genres:
+      - drama
+    synopsis: 天使の贈りもの北条。
+    status: completed
+    anime_adapted: false
   - key: Q467415|少年たちのいた夏
+    magazine: null
+    demographic: shounen
+    genres:
+      - drama
+    synopsis: 少年たちのいた夏。
+    status: completed
+    anime_adapted: false
   - key: Q467415|戦争の傷あと
+    magazine: null
+    demographic: shounen
+    genres:
+      - drama
+      - historical
+    synopsis: 戦争の傷あと北条。
+    status: completed
+    anime_adapted: false
   - key: Q467415|桜の花咲くころ
+    magazine: null
+    demographic: shounen
+    genres:
+      - drama
+    synopsis: 桜の花咲くころ。
+    status: completed
+    anime_adapted: false
   - key: Q467415|漫画が語る戦争
+    magazine: null
+    demographic: shounen
+    genres:
+      - anthology
+      - historical
+    synopsis: 漫画が語る戦争北条。
+    status: completed
+    anime_adapted: false
   - key: Q467415|熱狂短編マンガ傑作集'83
+    magazine: null
+    demographic: shounen
+    genres:
+      - anthology
+    synopsis: 熱狂短編マンガ傑作集83北条。
+    status: completed
+    anime_adapted: false
   - key: Q4675114|LOST CHILD
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+    synopsis: LOST CHILD。
+    status: completed
+    anime_adapted: false
   - key: Q4675114|SUPER LOVERS
     magazine: ciel-tres-tres
     demographic: josei
@@ -485365,6 +485824,13 @@ series:
     status: ongoing
     anime_adapted: true
   - key: Q4675114|Sweet vs home
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+    synopsis: Sweet vs home。
+    status: completed
+    anime_adapted: false
   - key: Q4675114|WHIZ KID
     demographic: shoujo
     genres:
@@ -485373,7 +485839,23 @@ series:
     synopsis: あべ美幸が描く、WHIZ KIDのファンタジー少女漫画。
     status: completed
   - key: Q4675114|バッシング恋愛
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - drama
+    synopsis: バッシング恋愛。
+    status: completed
+    anime_adapted: false
   - key: Q4675114|もっと!!困った時には星に聞け!
+    magazine: null
+    demographic: shoujo
+    genres:
+      - fantasy
+      - comedy
+    synopsis: もっと困った時には星に聞け。
+    status: completed
+    anime_adapted: false
   - key: Q4675114|八犬伝
     magazine: monthly-asuka
     demographic: shoujo
@@ -485386,6 +485868,13 @@ series:
     status: completed
     anime_adapted: false
   - key: Q4675114|初恋
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+    synopsis: 初恋望月。
+    status: completed
+    anime_adapted: false
   - key: Q4675114|君は僕を好きになる
     demographic: josei
     genres:
@@ -485404,7 +485893,22 @@ series:
     status: completed
     anime_adapted: false
   - key: Q467750|Flip Flap
+    magazine: null
+    demographic: shounen
+    genres:
+      - drama
+    synopsis: Flip Flap岡本倫。
+    status: completed
+    anime_adapted: false
   - key: Q467750|SDガンダムスペシャルアンソロジー
+    magazine: null
+    demographic: shounen
+    genres:
+      - anthology
+      - sci_fi
+    synopsis: SDガンダムスペシャルアンソロジー。
+    status: completed
+    anime_adapted: true
   - key: Q467750|エルフェンリート
     magazine: weekly-young-jump
     demographic: seinen
@@ -485448,6 +485952,13 @@ series:
     status: completed
     anime_adapted: false
   - key: Q467750|岡本倫短編集flip flap
+    magazine: null
+    demographic: shounen
+    genres:
+      - anthology
+    synopsis: 岡本倫短編集flip flap。
+    status: completed
+    anime_adapted: false
   - key: Q467750|極黒のブリュンヒルデ
     magazine: weekly-young-jump
     demographic: seinen
@@ -485460,6 +485971,14 @@ series:
     status: completed
     anime_adapted: true
   - key: Q468571|DAHLIA THE VAMPIRE
+    magazine: null
+    demographic: shoujo
+    genres:
+      - horror
+      - fantasy
+    synopsis: DAHLIA THE VAMPIRE。
+    status: completed
+    anime_adapted: false
   - key: Q468571|Fairy Jewel
     magazine: null
     demographic: shoujo
@@ -485470,10 +485989,49 @@ series:
     status: completed
     anime_adapted: false
   - key: Q468571|Flawless
+    magazine: null
+    demographic: shoujo
+    genres:
+      - fantasy
+    synopsis: Flawless垣野内。
+    status: completed
+    anime_adapted: false
   - key: Q468571|SP2薬師寺涼子の怪奇事件簿 短編集
+    magazine: null
+    demographic: shoujo
+    genres:
+      - mystery
+      - fantasy
+    synopsis: SP2薬師寺涼子の怪奇事件簿短編集。
+    status: completed
+    anime_adapted: false
   - key: Q468571|SP3薬師寺涼子の怪奇事件簿 短編集
+    magazine: null
+    demographic: shoujo
+    genres:
+      - mystery
+      - fantasy
+    synopsis: SP3薬師寺涼子の怪奇事件簿短編集。
+    status: completed
+    anime_adapted: false
   - key: Q468571|SP薬師寺涼子の怪奇事件簿
+    magazine: null
+    demographic: shoujo
+    genres:
+      - mystery
+      - fantasy
+    synopsis: SP薬師寺涼子の怪奇事件簿。
+    status: completed
+    anime_adapted: false
   - key: Q468571|Susperia select
+    magazine: null
+    demographic: shoujo
+    genres:
+      - horror
+      - anthology
+    synopsis: Susperia select。
+    status: completed
+    anime_adapted: false
   - key: Q468571|THE WANDERER
     demographic: shoujo
     genres:
@@ -485491,12 +486049,64 @@ series:
     synopsis: 垣野内成美による少女スパイ漫画。コードネームはCharmerを描く物語。
     status: completed
   - key: Q468571|チャイナ・ブルーJASMINE
+    magazine: null
+    demographic: shoujo
+    genres:
+      - fantasy
+    synopsis: チャイナブルーJASMINE。
+    status: completed
+    anime_adapted: false
   - key: Q468571|ブラック・ジャック ALIVE
+    magazine: null
+    demographic: seinen
+    genres:
+      - medical
+      - anthology
+    synopsis: ブラックジャックALIVE。
+    status: completed
+    anime_adapted: false
   - key: Q468571|ブラック・ジャックM
+    magazine: null
+    demographic: seinen
+    genres:
+      - medical
+    synopsis: ブラックジャックM。
+    status: completed
+    anime_adapted: false
   - key: Q468571|マーメイドトリップ
+    magazine: null
+    demographic: shoujo
+    genres:
+      - fantasy
+    synopsis: マーメイドトリップ。
+    status: completed
+    anime_adapted: false
   - key: Q468571|マスク
+    magazine: null
+    demographic: shoujo
+    genres:
+      - fantasy
+      - horror
+    synopsis: マスク垣野内。
+    status: completed
+    anime_adapted: false
   - key: Q468571|ムーンプリンセス
+    magazine: null
+    demographic: shoujo
+    genres:
+      - fantasy
+    synopsis: ムーンプリンセス。
+    status: completed
+    anime_adapted: false
   - key: Q468571|ルビーブラッド
+    magazine: null
+    demographic: shoujo
+    genres:
+      - fantasy
+      - horror
+    synopsis: ルビーブラッド。
+    status: completed
+    anime_adapted: false
   - key: Q468571|レイスイーパーCROSS
     demographic: shoujo
     genres:
@@ -485528,6 +486138,14 @@ series:
     synopsis: 垣野内成美の『吸血姫美夕』姉妹編・夕維編。
     status: completed
   - key: Q468571|吸血姫夕維 最終章
+    magazine: null
+    demographic: shoujo
+    genres:
+      - horror
+      - fantasy
+    synopsis: 吸血姫夕維最終章。
+    status: completed
+    anime_adapted: false
   - key: Q468571|吸血姫美夕
     magazine: monthly-asuka
     demographic: shoujo
@@ -485547,6 +486165,14 @@ series:
     synopsis: 垣野内成美の『吸血姫美夕』朔編。
     status: completed
   - key: Q468571|幻想ファンタジー
+    magazine: null
+    demographic: shoujo
+    genres:
+      - fantasy
+      - anthology
+    synopsis: 幻想ファンタジー。
+    status: completed
+    anime_adapted: false
   - key: Q468571|恋水蓮
     demographic: shoujo
     genres:
@@ -485586,8 +486212,30 @@ series:
     status: completed
     anime_adapted: true
   - key: Q468571|歌姫Fight!
+    magazine: null
+    demographic: shoujo
+    genres:
+      - music
+      - drama
+    synopsis: 歌姫Fight。
+    status: completed
+    anime_adapted: false
   - key: Q468571|水鏡抄
+    magazine: null
+    demographic: shoujo
+    genres:
+      - fantasy
+    synopsis: 水鏡抄。
+    status: completed
+    anime_adapted: false
   - key: Q468571|翡翠抄
+    magazine: null
+    demographic: shoujo
+    genres:
+      - fantasy
+    synopsis: 翡翠抄。
+    status: completed
+    anime_adapted: false
   - key: Q468571|薬師寺涼子の怪奇事件簿
     magazine: monthly-asuka
     demographic: shoujo
@@ -485598,8 +486246,32 @@ series:
     synopsis: 田中芳樹の小説を垣野内成美が漫画化。傲岸不遜の超キャリア女性・薬師寺涼子と部下・泉田が東京の怪奇事件を解決する。
     status: completed
   - key: Q468571|薬師寺涼子の怪奇事件簿 女王陛下の招き猫
+    magazine: null
+    demographic: shoujo
+    genres:
+      - mystery
+      - fantasy
+    synopsis: 薬師寺涼子女王陛下の招き猫。
+    status: completed
+    anime_adapted: true
   - key: Q468571|薬師寺涼子の怪奇事件簿 霧の訪問者
+    magazine: null
+    demographic: shoujo
+    genres:
+      - mystery
+      - fantasy
+    synopsis: 薬師寺涼子霧の訪問者。
+    status: completed
+    anime_adapted: true
   - key: Q468571|薬師寺涼子の怪奇事件簿 魔境の女王陛下
+    magazine: null
+    demographic: shoujo
+    genres:
+      - mystery
+      - fantasy
+    synopsis: 薬師寺涼子魔境の女王陛下。
+    status: completed
+    anime_adapted: true
   - key: Q468571|薬師寺涼子の怪奇事件簿水妖日にご用心
     magazine: null
     demographic: shoujo
@@ -485610,8 +486282,29 @@ series:
     status: completed
     anime_adapted: true
   - key: Q468571|赤川次郎三毛猫ホームズ
+    magazine: null
+    demographic: shoujo
+    genres:
+      - mystery
+    synopsis: 赤川次郎三毛猫ホームズ。
+    status: completed
+    anime_adapted: false
   - key: Q468571|銀鈴夜話
+    magazine: null
+    demographic: shoujo
+    genres:
+      - fantasy
+    synopsis: 銀鈴夜話。
+    status: completed
+    anime_adapted: false
   - key: Q468571|面幻想
+    magazine: null
+    demographic: shoujo
+    genres:
+      - fantasy
+    synopsis: 面幻想。
+    status: completed
+    anime_adapted: false
   - key: Q468571|風雲三姉妹LIN3
     demographic: shoujo
     genres:
@@ -485620,6 +486313,14 @@ series:
     synopsis: 垣野内成美による少女ファンタジー。風雲三姉妹LIN3の戦いを描く。
     status: completed
   - key: Q468571|魔境の女王陛下
+    magazine: null
+    demographic: shoujo
+    genres:
+      - mystery
+      - fantasy
+    synopsis: 魔境の女王陛下。
+    status: completed
+    anime_adapted: false
   - key: Q468761|Border境界線
     demographic: josei
     genres:
@@ -485628,6 +486329,13 @@ series:
     synopsis: こだか和麻が描く、境界線を越えてしまう男たちのBL。
     status: completed
   - key: Q468761|Ki・me・ra
+    magazine: null
+    demographic: shoujo
+    genres:
+      - fantasy
+    synopsis: Kimera。
+    status: completed
+    anime_adapted: false
   - key: Q468761|KIZUNA
     demographic: josei
     genres:
@@ -485637,6 +486345,14 @@ series:
     synopsis: こだか和麻が描く、男子高校生たちの絆と恋を綴る代表作BL。
     status: completed
   - key: Q468761|Not ready!? センセイ
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - school
+    synopsis: Not readyセンセイ。
+    status: completed
+    anime_adapted: false
   - key: Q468761|イクメン☆アフター
     magazine: null
     demographic: josei
@@ -485647,7 +486363,22 @@ series:
     status: completed
     anime_adapted: false
   - key: Q468761|イクメン☆アフター+a
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - comedy
+    synopsis: イクメンアフタープラスa。
+    status: completed
+    anime_adapted: false
   - key: Q468761|ガンアンドヘヴン
+    magazine: null
+    demographic: shoujo
+    genres:
+      - action
+    synopsis: ガンアンドヘヴン。
+    status: completed
+    anime_adapted: false
   - key: Q468761|キメラ
   - key: Q468761|こだか和麻
   - key: Q468761|こだか和麻illustrations
