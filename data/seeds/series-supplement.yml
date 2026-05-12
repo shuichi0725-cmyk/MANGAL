@@ -1,5 +1,5 @@
 schema_version: 1
-generated_at: 2026-05-12T03:10:47.107Z
+generated_at: 2026-05-12T03:12:20.320Z
 generator: claude-opus-4-7-direct-fill
 series:
   - key: Q1001784|GOLDEN SPIRAL
@@ -448045,8 +448045,30 @@ series:
     status: completed
     anime_adapted: true
   - key: Q320818|宮河家の空腹
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+      - slice_of_life
+    synopsis: 宮河家の空腹。
+    status: completed
+    anime_adapted: true
   - key: Q3234503|BREAK FREE
+    magazine: null
+    demographic: seinen
+    genres:
+      - action
+    synopsis: BREAK FREE。
+    status: completed
+    anime_adapted: false
   - key: Q3234503|Break free+
+    magazine: null
+    demographic: seinen
+    genres:
+      - action
+    synopsis: Break free+。
+    status: completed
+    anime_adapted: false
   - key: Q3234503|GO AHEAD
     demographic: shounen
     genres:
@@ -448055,6 +448077,13 @@ series:
     synopsis: 樋口大輔(『ホイッスル!』作者)による少年スポーツ漫画。GO AHEADと進む物語。
     status: completed
   - key: Q3234503|ア・ラ・カルト
+    magazine: null
+    demographic: seinen
+    genres:
+      - anthology
+    synopsis: ア・ラ・カルト。
+    status: completed
+    anime_adapted: false
   - key: Q3234503|あかしや銀河商店街
     demographic: shounen
     genres:
@@ -448097,19 +448126,121 @@ series:
     synopsis: 樋口大輔による『ホイッスル!』新編。サッカー少年たちの新たな戦いを描く。
     status: completed
   - key: Q3234503|戦国BASARA3 ~鬼神の如く~
+    magazine: null
+    demographic: shounen
+    genres:
+      - historical
+      - action
+    synopsis: 戦国BASARA3鬼神の如く。
+    status: completed
+    anime_adapted: true
   - key: Q3234503|日本の歴史
+    magazine: null
+    demographic: kodomo
+    genres:
+      - historical
+      - educational
+    synopsis: 日本の歴史学習。
+    status: completed
+    anime_adapted: false
   - key: Q3234503|精霊学者綺談黎鏡花伝
+    magazine: null
+    demographic: shoujo
+    genres:
+      - fantasy
+      - supernatural
+    synopsis: 精霊学者綺談黎鏡花伝。
+    status: completed
+    anime_adapted: false
   - key: Q3247143|親指の秘めごと
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+    synopsis: 親指の秘めごと。
+    status: completed
+    anime_adapted: false
   - key: Q324980|21世紀のための吾妻ひでお
+    magazine: null
+    demographic: seinen
+    genres:
+      - anthology
+    synopsis: 21世紀のための吾妻ひでお。
+    status: completed
+    anime_adapted: false
   - key: Q324980|BLUE
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+    synopsis: 吾妻ひでおBLUE。
+    status: completed
+    anime_adapted: false
   - key: Q324980|Climber
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+    synopsis: Climber短編。
+    status: completed
+    anime_adapted: false
   - key: Q324980|MUSHROOM
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - comedy
+    synopsis: MUSHROOM。
+    status: completed
+    anime_adapted: false
   - key: Q324980|Orange
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+    synopsis: Orange短編。
+    status: completed
+    anime_adapted: false
   - key: Q324980|Pegimin H
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+    synopsis: Pegimin H。
+    status: completed
+    anime_adapted: false
   - key: Q324980|Rough & Ready
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+    synopsis: Rough & Ready。
+    status: completed
+    anime_adapted: false
   - key: Q324980|SERVANT
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+    synopsis: SERVANT短編。
+    status: completed
+    anime_adapted: false
   - key: Q324980|YOUNG & FINE
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+    synopsis: YOUNG & FINE。
+    status: completed
+    anime_adapted: false
   - key: Q324980|YOUNG&FIN
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+    synopsis: YOUNG&FIN。
+    status: completed
+    anime_adapted: false
   - key: Q324980|あさってDANCE
     magazine: big-comic-spirits
     demographic: seinen
@@ -448120,6 +448251,14 @@ series:
     synopsis: 山本直樹が描く、女性が主人公の大人ラブコメ。
     status: completed
   - key: Q324980|あとは寝るだけ
+    magazine: null
+    demographic: seinen
+    genres:
+      - slice_of_life
+      - comedy
+    synopsis: あとは寝るだけ。
+    status: completed
+    anime_adapted: false
   - key: Q324980|ありがとう
     demographic: seinen
     genres:
@@ -448128,15 +448267,90 @@ series:
     synopsis: 山本直樹による青年向けドラマ。ありがとうを描く物語。
     status: completed
   - key: Q324980|お姫さまといろいろ
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+      - anthology
+    synopsis: お姫さまといろいろ。
+    status: completed
+    anime_adapted: false
   - key: Q324980|お家につくまでが遠足です
+    magazine: null
+    demographic: seinen
+    genres:
+      - slice_of_life
+      - comedy
+    synopsis: お家につくまでが遠足です。
+    status: completed
+    anime_adapted: false
   - key: Q324980|コージ苑 夢の競演編
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+      - anthology
+    synopsis: コージ苑夢の競演編。
+    status: completed
+    anime_adapted: false
   - key: Q324980|こけティッシュ
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+    synopsis: こけティッシュ。
+    status: completed
+    anime_adapted: false
   - key: Q324980|ごめんねBボーイ
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+    synopsis: ごめんねBボーイ。
+    status: completed
+    anime_adapted: false
   - key: Q324980|こんな娘といいな
+    magazine: null
+    demographic: seinen
+    genres:
+      - romance
+      - comedy
+    synopsis: こんな娘といいな。
+    status: completed
+    anime_adapted: false
   - key: Q324980|じっとしててね
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+      - ecchi
+    synopsis: じっとしててね。
+    status: completed
+    anime_adapted: false
   - key: Q324980|ずっと朝まで
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+    synopsis: ずっと朝まで。
+    status: completed
+    anime_adapted: false
   - key: Q324980|テレビばかり見てると馬鹿になる
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+    synopsis: テレビばかり見てると馬鹿になる。
+    status: completed
+    anime_adapted: false
   - key: Q324980|なんかヘンな気
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+    synopsis: なんかヘンな気。
+    status: completed
+    anime_adapted: false
   - key: Q324980|はっぱ64
     demographic: seinen
     genres:
@@ -448147,6 +448361,14 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q324980|ビリーバーズ
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - psychological
+    synopsis: 吾妻ひでおビリーバーズ。
+    status: completed
+    anime_adapted: false
   - key: Q324980|フラグメンツ
     demographic: seinen
     genres:
@@ -448155,8 +448377,30 @@ series:
     synopsis: 山本直樹による青年向けドラマ。フラグメンツを描く繊細な物語。
     status: completed
   - key: Q324980|フレイクス
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+    synopsis: フレイクス。
+    status: completed
+    anime_adapted: false
   - key: Q324980|まかせなさいっ!
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+    synopsis: まかせなさいっ。
+    status: completed
+    anime_adapted: false
   - key: Q324980|よい子の性教育
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+      - ecchi
+    synopsis: よい子の性教育。
+    status: completed
+    anime_adapted: false
   - key: Q324980|レッド
     magazine: monthly-evening
     demographic: seinen
@@ -448175,7 +448419,23 @@ series:
     synopsis: 山本直樹による『レッド』完結編。あさま山荘事件に至る連合赤軍の最後の60日を描く重厚な歴史ドラマ。
     status: completed
   - key: Q324980|レッド最終章あさま山荘の10日間
+    magazine: null
+    demographic: seinen
+    genres:
+      - historical
+      - drama
+    synopsis: レッドあさま山荘。
+    status: completed
+    anime_adapted: false
   - key: Q324980|世界最後の日々
+    magazine: null
+    demographic: seinen
+    genres:
+      - sci_fi
+      - drama
+    synopsis: 世界最後の日々。
+    status: completed
+    anime_adapted: false
   - key: Q324980|僕らはみんな生きている
     demographic: seinen
     genres:
@@ -448193,6 +448453,13 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q324980|君といつまでも
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+    synopsis: 君といつまでも。
+    status: completed
+    anime_adapted: false
   - key: Q324980|堀田
     demographic: seinen
     genres:
@@ -448201,13 +448468,72 @@ series:
     synopsis: 山本直樹による青年向け人間ドラマ。堀田を描く物語。
     status: completed
   - key: Q324980|夏の思い出
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+    synopsis: 夏の思い出。
+    status: completed
+    anime_adapted: false
   - key: Q324980|夕方のおともだち
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+    synopsis: 夕方のおともだち。
+    status: completed
+    anime_adapted: false
   - key: Q324980|夜のおたのしみ袋
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+      - ecchi
+    synopsis: 夜のおたのしみ袋。
+    status: completed
+    anime_adapted: false
   - key: Q324980|夜の領域
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+    synopsis: 夜の領域。
+    status: completed
+    anime_adapted: false
   - key: Q324980|夢で逢いましょう
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - fantasy
+    synopsis: 夢で逢いましょう。
+    status: completed
+    anime_adapted: false
   - key: Q324980|学校
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - school
+    synopsis: 学校。
+    status: completed
+    anime_adapted: false
   - key: Q324980|守ってあげたい
+    magazine: null
+    demographic: seinen
+    genres:
+      - romance
+    synopsis: 守ってあげたい。
+    status: completed
+    anime_adapted: false
   - key: Q324980|安住の地
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+    synopsis: 安住の地。
+    status: completed
+    anime_adapted: false
   - key: Q324980|定本レッド
     demographic: seinen
     genres:
@@ -448217,6 +448543,13 @@ series:
     synopsis: 山本直樹による『レッド』の定本版。連合赤軍事件をテーマにした重厚な歴史ドラマ。
     status: completed
   - key: Q324980|明日また電話するよ
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+    synopsis: 明日また電話するよ。
+    status: completed
+    anime_adapted: false
   - key: Q324980|極めてかもしだ
     demographic: seinen
     genres:
@@ -448225,21 +448558,145 @@ series:
     synopsis: 山本直樹による不条理コメディ。独特のシュールな世界観で展開する青春日常譚。
     status: completed
   - key: Q324980|田舎
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - slice_of_life
+    synopsis: 田舎。
+    status: completed
+    anime_adapted: false
   - key: Q324980|真夜中のクロール
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+    synopsis: 真夜中のクロール。
+    status: completed
+    anime_adapted: false
   - key: Q324980|短篇集ヒミツキチ
+    magazine: null
+    demographic: seinen
+    genres:
+      - anthology
+    synopsis: 短篇集ヒミツキチ。
+    status: completed
+    anime_adapted: false
   - key: Q324980|破戒
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+    synopsis: 島崎藤村破戒コミカライズ。
+    status: completed
+    anime_adapted: false
   - key: Q324980|誘ってあげる
+    magazine: null
+    demographic: seinen
+    genres:
+      - romance
+      - comedy
+    synopsis: 誘ってあげる。
+    status: completed
+    anime_adapted: false
   - key: Q326247|Amasia
+    magazine: null
+    demographic: seinen
+    genres:
+      - sci_fi
+      - drama
+    synopsis: 鶴田謙二Amasia。
+    status: completed
+    anime_adapted: false
   - key: Q326247|Forget-me-not
+    magazine: null
+    demographic: seinen
+    genres:
+      - sci_fi
+      - drama
+    synopsis: Forget-me-not。
+    status: completed
+    anime_adapted: false
   - key: Q326247|FUTURE
+    magazine: null
+    demographic: seinen
+    genres:
+      - sci_fi
+      - drama
+    synopsis: FUTURE。
+    status: completed
+    anime_adapted: false
   - key: Q326247|SF名物
+    magazine: null
+    demographic: seinen
+    genres:
+      - sci_fi
+      - anthology
+    synopsis: SF名物。
+    status: completed
+    anime_adapted: false
   - key: Q326247|Spirit of Wonder
+    magazine: null
+    demographic: seinen
+    genres:
+      - sci_fi
+      - drama
+    synopsis: Spirit of Wonder。
+    status: completed
+    anime_adapted: true
   - key: Q326247|おもいでエマノン
+    magazine: null
+    demographic: seinen
+    genres:
+      - sci_fi
+      - drama
+    synopsis: おもいでエマノン。
+    status: completed
+    anime_adapted: false
   - key: Q326247|コメット
+    magazine: null
+    demographic: seinen
+    genres:
+      - sci_fi
+      - drama
+    synopsis: コメット。
+    status: completed
+    anime_adapted: false
   - key: Q326247|さすらいエマノン
+    magazine: null
+    demographic: seinen
+    genres:
+      - sci_fi
+      - drama
+    synopsis: さすらいエマノン。
+    status: completed
+    anime_adapted: false
   - key: Q326247|ひたひた
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+    synopsis: ひたひた。
+    status: completed
+    anime_adapted: false
   - key: Q326247|ポム・プリゾニエール
+    magazine: null
+    demographic: seinen
+    genres:
+      - sci_fi
+      - drama
+    synopsis: ポム・プリゾニエール。
+    status: completed
+    anime_adapted: false
   - key: Q326247|まんがアベノ橋魔法☆商店街
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+      - fantasy
+    synopsis: アベノ橋魔法商店街。
+    status: completed
+    anime_adapted: true
   - key: Q326247|モモ艦長の秘密基地
     demographic: seinen
     genres:
@@ -448259,8 +448716,31 @@ series:
     status: completed
     anime_adapted: false
   - key: Q326247|日本ふるさと沈没
+    magazine: null
+    demographic: seinen
+    genres:
+      - sci_fi
+      - anthology
+    synopsis: 日本ふるさと沈没。
+    status: completed
+    anime_adapted: false
   - key: Q326247|水素
+    magazine: null
+    demographic: seinen
+    genres:
+      - sci_fi
+    synopsis: 水素。
+    status: completed
+    anime_adapted: false
   - key: Q326247|空は世界のひとつ屋根
+    magazine: null
+    demographic: seinen
+    genres:
+      - sci_fi
+      - drama
+    synopsis: 空は世界のひとつ屋根。
+    status: completed
+    anime_adapted: false
   - key: Q3267171|カーバンクル
     demographic: shounen
     genres:
@@ -448269,7 +448749,23 @@ series:
     synopsis: JUDALが描く、宝石カーバンクルを巡るファンタジー。
     status: completed
   - key: Q3267171|ディーバ
+    magazine: null
+    demographic: shoujo
+    genres:
+      - music
+      - drama
+    synopsis: ディーバ。
+    status: completed
+    anime_adapted: false
   - key: Q3267171|ネルヴァ神獣記
+    magazine: null
+    demographic: shoujo
+    genres:
+      - fantasy
+      - adventure
+    synopsis: ネルヴァ神獣記。
+    status: completed
+    anime_adapted: false
   - key: Q3267171|吸血遊戯
     magazine: monthly-comic-blade
     demographic: shoujo
@@ -448290,11 +448786,59 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q3267171|眠り姫2099
+    magazine: null
+    demographic: shoujo
+    genres:
+      - sci_fi
+      - fantasy
+    synopsis: 眠り姫2099。
+    status: completed
+    anime_adapted: false
   - key: Q3267171|魔界三国志chimaera
+    magazine: null
+    demographic: shoujo
+    genres:
+      - fantasy
+      - historical
+    synopsis: 魔界三国志キマイラ。
+    status: completed
+    anime_adapted: false
   - key: Q3267171|魔界三国志キマイラ
+    magazine: null
+    demographic: shoujo
+    genres:
+      - fantasy
+      - historical
+    synopsis: 魔界三国志キマイラ。
+    status: completed
+    anime_adapted: false
   - key: Q326800|99ハッピーソウル
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - fantasy
+    synopsis: 99ハッピーソウル。
+    status: completed
+    anime_adapted: false
   - key: Q326800|GOTH
+    magazine: null
+    demographic: seinen
+    genres:
+      - thriller
+      - psychological
+    synopsis: 乙一GOTHコミカライズ。
+    status: completed
+    anime_adapted: false
   - key: Q326800|MIDAS EATER
+    magazine: null
+    demographic: seinen
+    genres:
+      - thriller
+      - drama
+    synopsis: MIDAS EATER。
+    status: completed
+    anime_adapted: false
   - key: Q326800|NHKにようこそ!
     magazine: monthly-shonen-ace
     demographic: seinen
@@ -448315,6 +448859,14 @@ series:
     status: completed
     anime_adapted: false
   - key: Q326800|VARI DRIVE
+    magazine: null
+    demographic: seinen
+    genres:
+      - sci_fi
+      - action
+    synopsis: VARI DRIVE。
+    status: completed
+    anime_adapted: false
   - key: Q326800|アサシンクリード4
     magazine: null
     demographic: seinen
@@ -448325,6 +448877,13 @@ series:
     status: completed
     anime_adapted: true
   - key: Q326800|エレGY
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+    synopsis: エレGY。
+    status: completed
+    anime_adapted: false
   - key: Q326800|シュガーダーク 埋められた闇と少女
     demographic: shounen
     genres:
@@ -448334,8 +448893,31 @@ series:
     synopsis: 大岩ケンヂによる新井円侍原作のラノベ『シュガーダーク』のコミカライズ。墓守と謎の少女のダーク・ファンタジー。
     status: completed
   - key: Q326800|つらみ相互感系
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+    synopsis: つらみ相互感系。
+    status: completed
+    anime_adapted: false
   - key: Q326800|マヒルの用心棒
+    magazine: null
+    demographic: seinen
+    genres:
+      - action
+      - drama
+    synopsis: マヒルの用心棒。
+    status: completed
+    anime_adapted: false
   - key: Q326800|夢渡りプルチネッラ
+    magazine: null
+    demographic: seinen
+    genres:
+      - fantasy
+      - drama
+    synopsis: 夢渡りプルチネッラ。
+    status: completed
+    anime_adapted: false
   - key: Q326800|貴族から庶民になったので、婚約を解消されました!
     demographic: shoujo
     genres:
@@ -448390,9 +448972,39 @@ series:
     status: completed
     anime_adapted: false
   - key: Q326982|バットマン~デスマスク
+    magazine: null
+    demographic: seinen
+    genres:
+      - action
+      - superhero
+    synopsis: バットマンデスマスク。
+    status: completed
+    anime_adapted: false
   - key: Q326982|モチモチ
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+    synopsis: モチモチ。
+    status: completed
+    anime_adapted: false
   - key: Q326982|最強アウトロー伝説
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - yakuza
+    synopsis: 最強アウトロー伝説。
+    status: completed
+    anime_adapted: false
   - key: Q3269998|Axis PowersヘタリアArtesole ARTBOOK
+    magazine: null
+    demographic: seinen
+    genres:
+      - anthology
+    synopsis: ヘタリア画集。
+    status: completed
+    anime_adapted: true
   - key: Q3269998|ちびさんデイト
     demographic: shoujo
     genres:
@@ -448427,7 +449039,23 @@ series:
     synopsis: 日丸屋秀和の世界各国擬人化コメディ『ヘタリア』の続編。WORLD STARS編。
     status: completed
   - key: Q3269998|ヘタリアWorld★Stars Gangsta
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+      - historical
+    synopsis: ヘタリアWorld★Stars。
+    status: completed
+    anime_adapted: true
   - key: Q3269998|別冊ヘタリア
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+      - anthology
+    synopsis: 別冊ヘタリア。
+    status: completed
+    anime_adapted: true
   - key: Q3269998|大正浪漫鬼さんやめてえぇっ!!
     magazine: null
     demographic: shoujo
@@ -448446,6 +449074,14 @@ series:
     synopsis: 日丸屋秀和の『ヘタリア』姉妹編。日本の歴代総理大臣を擬人化したパロディコメディ。
     status: completed
   - key: Q3272581|Mr.マリック超魔術少年団
+    magazine: null
+    demographic: shounen
+    genres:
+      - action
+      - supernatural
+    synopsis: Mr.マリック超魔術少年団。
+    status: completed
+    anime_adapted: false
   - key: Q3272581|ベイブレード
     magazine: coro-coro-comic
     demographic: kodomo
@@ -448456,6 +449092,14 @@ series:
     status: completed
     anime_adapted: true
   - key: Q3272581|ベイブレード大戦聖龍伝
+    magazine: null
+    demographic: shounen
+    genres:
+      - action
+      - sports
+    synopsis: ベイブレード聖龍伝。
+    status: completed
+    anime_adapted: true
   - key: Q3272581|ミニ四ファイターV
     magazine: monthly-corocoro-comic
     demographic: shounen
@@ -448472,8 +449116,31 @@ series:
     synopsis: 青木たかおによる少女怪奇漫画。世にも奇怪な物語Xゾーンを描く物語。
     status: completed
   - key: Q3272581|熱血!!コロコロ伝説
+    magazine: null
+    demographic: shounen
+    genres:
+      - anthology
+    synopsis: コロコロ伝説アンソロジー。
+    status: completed
+    anime_adapted: false
   - key: Q3272581|爆封スラッシュ!キズナ
+    magazine: null
+    demographic: shounen
+    genres:
+      - action
+      - fantasy
+    synopsis: 爆封スラッシュキズナ。
+    status: completed
+    anime_adapted: false
   - key: Q3272581|爆走戦記メタルウォーカー
+    magazine: null
+    demographic: shounen
+    genres:
+      - sci_fi
+      - action
+    synopsis: 爆走戦記メタルウォーカー。
+    status: completed
+    anime_adapted: true
   - key: Q3272581|爆転SHOOTベイブレードRISING
     demographic: kodomo
     genres:
@@ -448482,16 +449149,100 @@ series:
     synopsis: 青木たかおによる『爆転SHOOTベイブレード』RISING編。新世代ブレーダーたちの戦いを描く。
     status: completed
   - key: Q3272581|爆転シュートベイブレード
+    magazine: null
+    demographic: shounen
+    genres:
+      - action
+      - sports
+    synopsis: 爆転シュートベイブレード。
+    status: completed
+    anime_adapted: true
   - key: Q3272581|特攻!!ゾイド少年隊
+    magazine: null
+    demographic: shounen
+    genres:
+      - mecha
+      - action
+    synopsis: 特攻ゾイド少年隊。
+    status: completed
+    anime_adapted: true
   - key: Q3272581|霊界教室
+    magazine: null
+    demographic: shounen
+    genres:
+      - supernatural
+      - school
+    synopsis: 霊界教室。
+    status: completed
+    anime_adapted: false
   - key: Q3272581|魔神英雄伝ワタル2
+    magazine: null
+    demographic: shounen
+    genres:
+      - fantasy
+      - adventure
+    synopsis: 魔神英雄伝ワタル2。
+    status: completed
+    anime_adapted: true
   - key: Q3272581|魔神英雄伝ワタル外伝
+    magazine: null
+    demographic: shounen
+    genres:
+      - fantasy
+      - adventure
+    synopsis: 魔神英雄伝ワタル外伝。
+    status: completed
+    anime_adapted: true
   - key: Q3272992|ABOの天使たち
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - drama
+    synopsis: ABOの天使たち。
+    status: completed
+    anime_adapted: false
   - key: Q3272992|Kiss kiss kiss
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+    synopsis: Kiss kiss kiss。
+    status: completed
+    anime_adapted: false
   - key: Q3272992|Kiss♪kiss♪kiss
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+    synopsis: Kiss kiss kiss。
+    status: completed
+    anime_adapted: false
   - key: Q3272992|あしたきっとあなたに
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - drama
+    synopsis: あしたきっとあなたに。
+    status: completed
+    anime_adapted: false
   - key: Q3272992|こ~んなにきみをI LOVE YOU!
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+    synopsis: こんなにきみをI LOVE YOU。
+    status: completed
+    anime_adapted: false
   - key: Q3272992|こーんなにきみを I love you!
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+    synopsis: こーんなにきみをI love you。
+    status: completed
+    anime_adapted: false
   - key: Q3272992|だいすき!!
     magazine: kiss
     demographic: josei
@@ -448502,6 +449253,14 @@ series:
     status: completed
     anime_adapted: true
   - key: Q3272992|ハーフ・ボイルド・エンジェル
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - drama
+    synopsis: ハーフ・ボイルド・エンジェル。
+    status: completed
+    anime_adapted: false
   - key: Q3272992|ハーフ♦ボイルド♥エンジェル
   - key: Q3272992|ひまわり!!
     magazine: be-love
