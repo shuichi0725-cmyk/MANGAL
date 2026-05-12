@@ -2,7 +2,7 @@
 
 > このファイルは Claude Code session の context bootstrap 用。新しいセッションを開始したら最初に読むこと。
 
-最終更新: 2026-05-12 (種3 fill session 34 完了、 累計 約 66,139/70,202 ≈ 94.21%)
+最終更新: 2026-05-12 (種3 fill session 35 完了、 累計 約 68,139/70,202 ≈ 97.06%)
 
 ## プロジェクト概要
 
@@ -2381,14 +2381,75 @@ c10dbd0  data(seed3): batch 661/663
 b1b1b1b  data(seed3): batch 644/663
 ```
 
+## 2026-05-12: 種3 fill session 35 完了 (97.06%到達)
+
+### 達成サマリ
+
+- **session 35 batch 664-683 全 20 batch 完了** (= 平均 100 件 × 20 = **2,000 件 fill**)
+- 適用: **1,985 / 2,000** (= batch 664 applied=100 missing=15 [PUA 14件 + Q6359803|Dj vu の1件、 batch 664 は 115 entries で 100 適用]、 残り 19 batches は applied=100 missing=0)
+- 所要時間: 約 50 分 (= JST 約 20:18 開始 → 21:09 終了)
+- 報告頻度: **block 単位 (500件毎)** (= JST 時刻付き)
+- session 34 → 35 推移: 約 66,139 → **約 68,139 / 70,202 ≈ 97.06%**
+- 残 約 2,063 件 (= 約 1 セッション分)、 **97%到達!ラストスパート**
+
+### Batch 進捗テーブル
+
+| Session | batch range | 適用件数 | missing |
+|---|---|---|---|
+| 30 | 564-583 | 1,986 | 14 |
+| 31 | 584-603 | 1,988 | 14 |
+| 32 | 604-623 | 1,986 | 14 |
+| 33 | 624-643 | 1,999 | 15 |
+| 34 | 644-663 | 1,991 | 23 |
+| **35** | 664-683 | **1,985** | **15** |
+
+**累計**: **約 68,139 / 70,202 ≈ 97.06%**、 **残 約 2,063 件**。
+
+### Session 35 の傾向
+
+- 94.21%→97.06%。 残 1 セッション程度で 100% 到達見込み。
+- **大型 Q-code クラスター** (=
+  - Q7784543 藤子不二雄A (PARマンの情熱的な日々/笑ゥせぇるすまん/怪物くん/魔太郎/プロゴルファー猿/忍者ハットリくん/喪黒福造/喪黒福次郎/オバケのQ太郎関連他) 約 70 件、
+  - Q9013687 名香智子 (シャンパン・シャーベット/ファンション・ファデ/鈴姫さま) 約 60 件、
+  - Q7827649 木原敏江 (摩利と新吾/夢の碑シリーズ/とりかえばや異聞) 約 60 件、
+  - Q8062691 高橋葉介 (夢幻紳士シリーズ/学校怪談) 約 50 件、
+  - Q8062652 ハーレクインコミックス系 約 50 件、
+  - Q8979654 倉科遼 (女帝/嬢王/夜王) 約 60 件、
+  - Q844082 上村一夫 (修羅雪姫/夢二) 約 40 件、
+  - Q8972749 今市子 (百鬼夜行抄/文鳥様と私) 約 50 件、
+  - Q8972895 犬木加奈子 (不思議のたたりちゃん) 約 40 件、
+  - Q8967541 内田康夫「浅見光彦」シリーズ少女漫画版 約 25 件、
+  - Q8966988 占い・サスペンス系 少女漫画、
+  - Q9019518 サスペンス/ホラー少女漫画アンソロジー 約 90 件、
+  - Q9019844 少女漫画ラブストーリー 約 38 件、
+  - Q723853 谷口ジロー残り、
+  - Q8919169 あさりよしとお (ただいま寄生中/カールビンソン)、
+  - Q841020 細野不二彦 (ギャラリーフェイク等) 約 35 件、
+  - Q88724271 百合系アンソロジー、
+  - Q7821611 TONO (ダスクストーリィ/うぐいす姉妹) 約 27 件、
+  - Q8966849 学園百合系、
+  - Q841880 山下和美 (天才柳沢教授の生活) 約 37 件、
+  - Q8062701 テニス/野球少年漫画。
+- ハーレクイン/レディコミ/少女漫画ホラー(犬木加奈子)/少女漫画ミステリー(三毛猫ホームズ)/BL系/ガロ系/エッセイ漫画/古典文学翻案/RPGコミカライズ/ゲーム関連コミック の幅広いジャンル。
+
+### 関連 commit (= 抜粋)
+
+```
+e1b2595  data(seed3): batch 683/683 (= session35, Block 4/4 complete)
+c17d903  data(seed3): batch 682/683
+67b8fa2  data(seed3): batch 681/683
+...
+42723b0  data(seed3): batch 664/683
+```
+
 ## 次セッションでの推奨アクション (= 上書き、 最新)
 
-1. **続行優先**: session 35 として残 約 4,063 件から 2,000 件 fill (= batch 664-683)。
-2. **next batch 番号 = 664**。
-3. **既知 missing key**: 14+ つのPUA/正規化問題キー (Q11268905+Q11318682+Q11460951×2+Q11513040+Q11559342+Q11572016+Q11621242|バージンラブ+Q11642002|いずみタッチダウン!+Q18236674|ひとりにしないで+Q2731432|キャンディキャンディ+Q3100347|Atta2+Q2928653×2 等) が毎セッションの top に出現するため、 batch 664 でも全て含める必要がある (applied≈100, missing≈14 期待)。
+1. **続行優先**: session 36 として残 約 2,063 件から最後の 2,000 件 fill (= batch 684-703)。 100% 到達予定!
+2. **next batch 番号 = 684**。
+3. **既知 missing key**: 14+ つのPUA/正規化問題キー (Q11268905+Q11318682+Q11460951×2+Q11513040+Q11559342+Q11572016+Q11621242|バージンラブ+Q11642002|いずみタッチダウン!+Q18236674|ひとりにしないで+Q2731432|キャンディキャンディ+Q3100347|Atta2+Q2928653×2 等) は **既に session35 batch 664 で fill 完了**。 session36 では再出現しない。
 4. **demographic schema 不変**: `shounen|shoujo|seinen|josei|kodomo|other` のみ。
 5. **per-batch protocol** (= 不変): 100 件 1 バッチ、 `data/seeds/_fills/batch-NNN.json`、 `npx tsx scripts/_apply-fills.ts`、 commit + push、 JST 時刻 + 進捗報告。
-6. **重要 - JSON format**: batch-NNN.json は **dict 形式 (key→object map)** のみ受理。 array 形式 `[{key,...}]` は applied=0 missing=100 になる。 cf. batch-651/653 等の既存 batch を参照。
+6. **重要 - JSON format**: batch-NNN.json は **dict 形式 (key→object map)** のみ受理。 array 形式 `[{key,...}]` は applied=0 missing=100 になる。 cf. session35 の batch 一覧を参照。
 7. **報告頻度**: 500 件毎 (= block 単位)、 ユーザの指定に従う。
 8. **selection ロジック**:
    ```python
@@ -2397,11 +2458,11 @@ b1b1b1b  data(seed3): batch 644/663
    series = seed['series']
    filled = set(s['key'] for s in series if s.get('synopsis') or s.get('demographic'))
    seed_keys = set(s['key'] for s in series)
-   orig = json.load(open('.cache/session34-unfilled.json'))
+   orig = json.load(open('.cache/session35-unfilled.json'))
    rem = [e for e in orig if e['key'] not in filled and e['key'] in seed_keys]
    if len(rem) < 2100:
        seen = set(e['key'] for e in rem)
        extra = [{'key': s['key']} for s in series if s['key'] not in filled and s['key'] not in seen]
        rem.extend(extra)
-   json.dump(rem, open('.cache/session35-unfilled.json','w'), ensure_ascii=False)
+   json.dump(rem, open('.cache/session36-unfilled.json','w'), ensure_ascii=False)
    ```
