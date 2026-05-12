@@ -45,7 +45,7 @@
 1. **種1 取込** (= cm101.csv 取得 → 新 ISBN のみ追記、 既存行不変)
 2. **種2 差分反映** (= fetch-madb incremental、 INSERT only、 削除禁止)
 3. **種3 diff 元生成** (= select-supplement-diff で未 fill key list 出力)
-4. **AI fill batch loop** (= 既存 protocol、 100 entry/batch、 JST 時刻付き、 commit + push)
+4. **AI fill batch loop** = `MEMORY.md` 末尾 「種3 fill 作り方 (= 再利用 guide)」 セクションの protocol を厳密に踏襲 (= dict 形式 JSON、 100 entry/batch、 `_apply-fills.ts` 適用、 PUA 文字混入時は Python 経由で生キー書き出し、 JST 時刻付き block 単位報告、 commit + push)
 5. **最終 summary** (= 全件数 + 削除 0 確認 + 次月予測)
 
 ### 保護策 (= 5 層)
