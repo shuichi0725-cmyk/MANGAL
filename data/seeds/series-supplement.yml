@@ -1,5 +1,5 @@
 schema_version: 1
-generated_at: 2026-05-12T01:24:26.648Z
+generated_at: 2026-05-12T01:25:58.868Z
 generator: claude-opus-4-7-direct-fill
 series:
   - key: Q1001784|GOLDEN SPIRAL
@@ -386828,6 +386828,14 @@ series:
     status: completed
     anime_adapted: false
   - key: Q1906779|濃縮フリテンくん
+    magazine: null
+    demographic: seinen
+    genres:
+      - mahjong
+      - comedy
+    synopsis: 濃縮フリテンくん。
+    status: completed
+    anime_adapted: false
   - key: Q1906779|熱中!コボちゃん
     demographic: kodomo
     genres:
@@ -386836,6 +386844,13 @@ series:
     synopsis: 植田まさしによる『コボちゃん』の派生4コマ。元気いっぱいのコボちゃんが熱中する日常を描く。
     status: completed
   - key: Q1906779|特盛!おとぼけ課長
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+    synopsis: おとぼけ課長特盛。
+    status: completed
+    anime_adapted: false
   - key: Q1906779|特盛!コボちゃん
     demographic: seinen
     genres:
@@ -386856,7 +386871,22 @@ series:
     status: completed
     anime_adapted: false
   - key: Q1906779|特選 かりあげクン
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+    synopsis: かりあげクン特選集。
+    status: completed
+    anime_adapted: false
   - key: Q1906779|特選!!俺たちの野郎めし!
+    magazine: null
+    demographic: seinen
+    genres:
+      - gourmet
+      - comedy
+    synopsis: 野郎めし特選。
+    status: completed
+    anime_adapted: false
   - key: Q1906779|特選おとぼけ課長
     demographic: seinen
     genres:
@@ -386875,11 +386905,59 @@ series:
     synopsis: 植田まさしによる『コボちゃん』の特選版。コボちゃんファミリーのほのぼの4コマ。
     status: completed
   - key: Q1906779|特選すっから母さん
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+      - family
+    synopsis: すっから母さん特選集。
+    status: completed
+    anime_adapted: false
   - key: Q1906779|真打!!フリテンくん
+    magazine: null
+    demographic: seinen
+    genres:
+      - mahjong
+      - comedy
+    synopsis: 真打フリテンくん。
+    status: completed
+    anime_adapted: false
   - key: Q1906779|究極フリテンくん
+    magazine: null
+    demographic: seinen
+    genres:
+      - mahjong
+      - comedy
+    synopsis: 究極フリテンくん。
+    status: completed
+    anime_adapted: false
   - key: Q1906779|純情フリテンくん
+    magazine: null
+    demographic: seinen
+    genres:
+      - mahjong
+      - comedy
+    synopsis: 純情フリテンくん。
+    status: completed
+    anime_adapted: false
   - key: Q1906779|絢爛!!フリテンくん
+    magazine: null
+    demographic: seinen
+    genres:
+      - mahjong
+      - comedy
+    synopsis: 絢爛フリテンくん。
+    status: completed
+    anime_adapted: false
   - key: Q1906779|超絶フリテンくん
+    magazine: null
+    demographic: seinen
+    genres:
+      - mahjong
+      - comedy
+    synopsis: 超絶フリテンくん。
+    status: completed
+    anime_adapted: false
   - key: Q1906779|進め!コボちゃん
     magazine: yomiuri-shimbun
     demographic: seinen
@@ -386889,9 +386967,37 @@ series:
     synopsis: 植田まさし『コボちゃん』新シリーズ。進化するコボちゃんと家族の4コマギャグ。
     status: completed
   - key: Q193300|「いのち」と「こころ」の教科書
+    magazine: null
+    demographic: seinen
+    genres:
+      - educational
+    synopsis: 手塚治虫教育書。
+    status: completed
+    anime_adapted: false
   - key: Q193300|「おかね」と「こころ」の教科書
+    magazine: null
+    demographic: seinen
+    genres:
+      - educational
+    synopsis: 手塚治虫教育書。
+    status: completed
+    anime_adapted: false
   - key: Q193300|「ガロ」「COM」漫画名作選
+    magazine: null
+    demographic: seinen
+    genres:
+      - anthology
+    synopsis: ガロ・COM名作選。
+    status: completed
+    anime_adapted: false
   - key: Q193300|「漫画読本」傑作集
+    magazine: null
+    demographic: seinen
+    genres:
+      - anthology
+    synopsis: 漫画読本傑作集。
+    status: completed
+    anime_adapted: false
   - key: Q193300|#こんなブラック・ジャックはイヤだ
     demographic: seinen
     genres:
@@ -386907,8 +387013,31 @@ series:
     synopsis: 手塚治虫が描く、人類より進化した「0マン」と人類の戦いを描くSF傑作。
     status: completed
   - key: Q193300|0マン 少年サンデー版
+    magazine: null
+    demographic: shounen
+    genres:
+      - sci_fi
+      - adventure
+    synopsis: 手塚治虫0マンサンデー版。
+    status: completed
+    anime_adapted: false
   - key: Q193300|1冊で3度楽しめる手塚治虫ヒット選集
+    magazine: null
+    demographic: shounen
+    genres:
+      - anthology
+    synopsis: 手塚治虫ヒット選集。
+    status: completed
+    anime_adapted: false
   - key: Q193300|38度線上の怪物
+    magazine: null
+    demographic: shounen
+    genres:
+      - sci_fi
+      - thriller
+    synopsis: 手塚治虫38度線上の怪物。
+    status: completed
+    anime_adapted: false
   - key: Q193300|ASTRO BOY 鉄腕アトム
     demographic: shounen
     genres:
@@ -386929,18 +387058,117 @@ series:
     status: completed
     anime_adapted: true
   - key: Q193300|BLACK JACK NEO
+    magazine: null
+    demographic: seinen
+    genres:
+      - medical
+      - drama
+    synopsis: ブラック・ジャックNEO続編。
+    status: completed
+    anime_adapted: false
   - key: Q193300|BLACK JACK OAV版
+    magazine: null
+    demographic: seinen
+    genres:
+      - medical
+      - drama
+    synopsis: ブラック・ジャックOAV版。
+    status: completed
+    anime_adapted: true
   - key: Q193300|Black Jack treasure book
+    magazine: null
+    demographic: seinen
+    genres:
+      - medical
+      - anthology
+    synopsis: ブラック・ジャック宝物集。
+    status: completed
+    anime_adapted: true
   - key: Q193300|BRUTUS図書館 手塚治虫
+    magazine: null
+    demographic: seinen
+    genres:
+      - anthology
+    synopsis: BRUTUS図書館手塚治虫。
+    status: completed
+    anime_adapted: false
   - key: Q193300|comic S
+    magazine: null
+    demographic: seinen
+    genres:
+      - anthology
+    synopsis: 手塚治虫comic S。
+    status: completed
+    anime_adapted: false
   - key: Q193300|COM傑作選
+    magazine: null
+    demographic: seinen
+    genres:
+      - anthology
+    synopsis: COM誌傑作選。
+    status: completed
+    anime_adapted: false
   - key: Q193300|Dämons
+    magazine: null
+    demographic: seinen
+    genres:
+      - horror
+      - supernatural
+    synopsis: 手塚治虫ダーモンズ。
+    status: completed
+    anime_adapted: false
   - key: Q193300|Dr.キリコ白い死神
+    magazine: null
+    demographic: seinen
+    genres:
+      - medical
+      - drama
+    synopsis: Dr.キリコスピンオフ。
+    status: completed
+    anime_adapted: false
   - key: Q193300|GRINGO
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+    synopsis: 手塚治虫GRINGO。
+    status: completed
+    anime_adapted: false
   - key: Q193300|HeiSei七色いんこ
+    magazine: null
+    demographic: seinen
+    genres:
+      - mystery
+      - drama
+    synopsis: 七色いんこ平成リブート。
+    status: completed
+    anime_adapted: false
   - key: Q193300|Holy
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+    synopsis: 手塚治虫Holy。
+    status: completed
+    anime_adapted: false
   - key: Q193300|I・L
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - sci_fi
+    synopsis: 手塚治虫I・L。
+    status: completed
+    anime_adapted: false
   - key: Q193300|I.L
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - sci_fi
+    synopsis: 手塚治虫I.L。
+    status: completed
+    anime_adapted: false
   - key: Q193300|MW
     demographic: seinen
     genres:
@@ -386970,11 +387198,59 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q193300|Romanesque
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - romance
+    synopsis: 手塚治虫Romanesque。
+    status: completed
+    anime_adapted: false
   - key: Q193300|SF・ファイブ
+    magazine: null
+    demographic: seinen
+    genres:
+      - sci_fi
+      - anthology
+    synopsis: SFファイブ。
+    status: completed
+    anime_adapted: false
   - key: Q193300|SFファンシーフリー
+    magazine: null
+    demographic: seinen
+    genres:
+      - sci_fi
+      - anthology
+    synopsis: SFファンシーフリー。
+    status: completed
+    anime_adapted: false
   - key: Q193300|SFミックス
+    magazine: null
+    demographic: seinen
+    genres:
+      - sci_fi
+      - anthology
+    synopsis: SFミックス短編集。
+    status: completed
+    anime_adapted: false
   - key: Q193300|SF三部作完全復刻版と創作ノート
+    magazine: null
+    demographic: seinen
+    genres:
+      - sci_fi
+      - anthology
+    synopsis: SF三部作完全復刻。
+    status: completed
+    anime_adapted: false
   - key: Q193300|SF傑作集 ベスト・オブ・手塚治虫III 続もうひとりのアトム
+    magazine: null
+    demographic: seinen
+    genres:
+      - sci_fi
+      - anthology
+    synopsis: 手塚治虫SF傑作集。
+    status: completed
+    anime_adapted: false
   - key: Q193300|W3
     demographic: shounen
     genres:
@@ -386985,10 +387261,49 @@ series:
     status: completed
     anime_adapted: true
   - key: Q193300|Μψτηοσ 異界へ誘う24の招待状
+    magazine: null
+    demographic: seinen
+    genres:
+      - fantasy
+      - anthology
+    synopsis: 手塚治虫異界アンソロジー。
+    status: completed
+    anime_adapted: false
   - key: Q193300|アセチレン・ランプの夜
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+    synopsis: 手塚治虫短編。
+    status: completed
+    anime_adapted: false
   - key: Q193300|アトムキャット
+    magazine: null
+    demographic: shounen
+    genres:
+      - sci_fi
+      - comedy
+    synopsis: 手塚治虫アトムキャット。
+    status: completed
+    anime_adapted: false
   - key: Q193300|アトムザ・ビギニング
+    magazine: null
+    demographic: shounen
+    genres:
+      - sci_fi
+      - action
+    synopsis: アトム ザ・ビギニング。
+    status: completed
+    anime_adapted: true
   - key: Q193300|アトムちゃん
+    magazine: null
+    demographic: kodomo
+    genres:
+      - sci_fi
+      - comedy
+    synopsis: 手塚治虫アトムちゃん。
+    status: completed
+    anime_adapted: false
   - key: Q193300|アトム今昔物語
     demographic: shounen
     genres:
@@ -387008,6 +387323,14 @@ series:
       日本のユダヤ系少年)の運命を絡め合わせ、戦争と差別の本質を描いた重厚な歴史ドラマ。講談社漫画賞受賞。
     status: completed
   - key: Q193300|あなたが選ぶブラック・ジャックBEST40
+    magazine: null
+    demographic: seinen
+    genres:
+      - medical
+      - anthology
+    synopsis: ブラック・ジャックBEST40。
+    status: completed
+    anime_adapted: true
   - key: Q193300|アニメブック ブラックジャック
     demographic: shounen
     genres:
@@ -387018,6 +387341,13 @@ series:
     status: completed
     anime_adapted: true
   - key: Q193300|アバンチュール21
+    magazine: null
+    demographic: shounen
+    genres:
+      - adventure
+    synopsis: 手塚治虫アバンチュール21。
+    status: completed
+    anime_adapted: false
   - key: Q193300|アポロの歌
     demographic: shounen
     genres:
@@ -387028,14 +387358,81 @@ series:
     status: completed
     anime_adapted: false
   - key: Q193300|アメリカの歴史
+    magazine: null
+    demographic: kodomo
+    genres:
+      - educational
+      - historical
+    synopsis: アメリカ史学習。
+    status: completed
+    anime_adapted: false
   - key: Q193300|あらしの妖精
+    magazine: null
+    demographic: shounen
+    genres:
+      - fantasy
+    synopsis: 手塚治虫あらしの妖精。
+    status: completed
+    anime_adapted: false
   - key: Q193300|アラバスター
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - thriller
+    synopsis: 手塚治虫アラバスター。
+    status: completed
+    anime_adapted: false
   - key: Q193300|アリと巨人
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+    synopsis: 手塚治虫アリと巨人。
+    status: completed
+    anime_adapted: false
   - key: Q193300|イエスの誕生
+    magazine: null
+    demographic: kodomo
+    genres:
+      - religion
+      - historical
+    synopsis: イエス生誕学習。
+    status: completed
+    anime_adapted: false
   - key: Q193300|いのちと向き合う仕事
+    magazine: null
+    demographic: kodomo
+    genres:
+      - educational
+    synopsis: いのちと向き合う仕事学習。
+    status: completed
+    anime_adapted: false
   - key: Q193300|いのちの理由
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+    synopsis: 手塚治虫いのちの理由。
+    status: completed
+    anime_adapted: false
   - key: Q193300|エンゼルの丘
+    magazine: null
+    demographic: shoujo
+    genres:
+      - fantasy
+      - drama
+    synopsis: 手塚治虫エンゼルの丘。
+    status: completed
+    anime_adapted: false
   - key: Q193300|おかあさんのむかしむかし
+    magazine: null
+    demographic: kodomo
+    genres:
+      - drama
+    synopsis: 手塚治虫おかあさんむかしむかし。
+    status: completed
+    anime_adapted: false
   - key: Q193300|オズマ隊長
     demographic: shounen
     genres:
@@ -387044,15 +387441,90 @@ series:
     synopsis: 手塚治虫によるSF漫画。オズマ隊長の宇宙冒険を描く。
     status: completed
   - key: Q193300|おもしろブック版ライオンブックス
+    magazine: null
+    demographic: kodomo
+    genres:
+      - anthology
+    synopsis: 手塚治虫ライオンブックス。
+    status: completed
+    anime_adapted: false
   - key: Q193300|オヤヂ探偵
+    magazine: null
+    demographic: seinen
+    genres:
+      - mystery
+      - comedy
+    synopsis: 手塚治虫オヤヂ探偵。
+    status: completed
+    anime_adapted: false
   - key: Q193300|おれは猿飛だ!
+    magazine: null
+    demographic: shounen
+    genres:
+      - action
+      - historical
+    synopsis: 手塚治虫おれは猿飛。
+    status: completed
+    anime_adapted: false
   - key: Q193300|カノン
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+    synopsis: 手塚治虫カノン。
+    status: completed
+    anime_adapted: false
   - key: Q193300|ガムガムパンチ
+    magazine: null
+    demographic: kodomo
+    genres:
+      - comedy
+    synopsis: 手塚治虫ガムガムパンチ。
+    status: completed
+    anime_adapted: false
   - key: Q193300|ガラスの地球を救え
+    magazine: null
+    demographic: seinen
+    genres:
+      - educational
+    synopsis: 手塚治虫ガラスの地球を救え。
+    status: completed
+    anime_adapted: false
   - key: Q193300|ガラスの城の記録
+    magazine: null
+    demographic: shoujo
+    genres:
+      - fantasy
+      - drama
+    synopsis: 手塚治虫ガラスの城。
+    status: completed
+    anime_adapted: false
   - key: Q193300|かわいそうなぞう
+    magazine: null
+    demographic: kodomo
+    genres:
+      - drama
+    synopsis: 戦争動物哀話。
+    status: completed
+    anime_adapted: false
   - key: Q193300|キャプテンKen
+    magazine: null
+    demographic: shounen
+    genres:
+      - sci_fi
+      - adventure
+    synopsis: 手塚治虫キャプテンKen。
+    status: completed
+    anime_adapted: false
   - key: Q193300|キャプテンKen 少年サンデー版
+    magazine: null
+    demographic: shounen
+    genres:
+      - sci_fi
+      - adventure
+    synopsis: キャプテンKenサンデー版。
+    status: completed
+    anime_adapted: false
   - key: Q193300|きりひと讃歌
     demographic: seinen
     genres:
@@ -387062,6 +387534,14 @@ series:
     synopsis: 手塚治虫による青年向け医療ドラマの傑作。モンモウ病という風土病に侵された医師・桐人の苦悩を描く名作。
     status: completed
   - key: Q193300|グランドール
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - sci_fi
+    synopsis: 手塚治虫グランドール。
+    status: completed
+    anime_adapted: false
   - key: Q193300|グリンゴ
     demographic: seinen
     genres:
@@ -387072,11 +387552,55 @@ series:
     status: completed
     anime_adapted: false
   - key: Q193300|クレオパトラ
+    magazine: null
+    demographic: seinen
+    genres:
+      - historical
+      - drama
+    synopsis: 手塚治虫クレオパトラ。
+    status: completed
+    anime_adapted: true
   - key: Q193300|ケン1探偵長
+    magazine: null
+    demographic: shounen
+    genres:
+      - mystery
+    synopsis: 手塚治虫ケン1探偵長。
+    status: completed
+    anime_adapted: false
   - key: Q193300|こけし探偵局
+    magazine: null
+    demographic: shounen
+    genres:
+      - mystery
+      - comedy
+    synopsis: 手塚治虫こけし探偵局。
+    status: completed
+    anime_adapted: false
   - key: Q193300|ゴッドファーザーの息子
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+    synopsis: 手塚治虫ゴッドファーザーの息子。
+    status: completed
+    anime_adapted: false
   - key: Q193300|ゴブリン公爵
+    magazine: null
+    demographic: shoujo
+    genres:
+      - fantasy
+    synopsis: 手塚治虫ゴブリン公爵。
+    status: completed
+    anime_adapted: false
   - key: Q193300|コミック1970
+    magazine: null
+    demographic: seinen
+    genres:
+      - anthology
+    synopsis: コミック1970傑作集。
+    status: completed
+    anime_adapted: false
   - key: Q193300|ザ・クレーター
     demographic: seinen
     genres:
@@ -387087,8 +387611,30 @@ series:
     status: completed
     anime_adapted: false
   - key: Q193300|サーチアンドデストロイ
+    magazine: null
+    demographic: seinen
+    genres:
+      - action
+    synopsis: 手塚治虫サーチアンドデストロイ。
+    status: completed
+    anime_adapted: false
   - key: Q193300|さいとう・たかをONビッグコミック
+    magazine: null
+    demographic: seinen
+    genres:
+      - anthology
+    synopsis: さいとう・たかを傑作集。
+    status: completed
+    anime_adapted: false
   - key: Q193300|サスピション
+    magazine: null
+    demographic: seinen
+    genres:
+      - thriller
+      - mystery
+    synopsis: 手塚治虫サスピション。
+    status: completed
+    anime_adapted: false
   - key: Q193300|サファイア
     demographic: shoujo
     genres:
@@ -387097,13 +387643,73 @@ series:
     synopsis: 手塚治虫による『リボンの騎士』のサファイア編。男女両方の心を持つ王子サファイアの物語。
     status: completed
   - key: Q193300|サボテン君
+    magazine: null
+    demographic: kodomo
+    genres:
+      - comedy
+    synopsis: 手塚治虫サボテン君。
+    status: completed
+    anime_adapted: false
   - key: Q193300|サボテン君 レモン・キッド
+    magazine: null
+    demographic: kodomo
+    genres:
+      - comedy
+    synopsis: サボテン君レモン・キッド。
+    status: completed
+    anime_adapted: false
   - key: Q193300|サボテン君 快傑シラノ
+    magazine: null
+    demographic: kodomo
+    genres:
+      - comedy
+      - adventure
+    synopsis: サボテン君快傑シラノ。
+    status: completed
+    anime_adapted: false
   - key: Q193300|サンダーマスク
+    magazine: null
+    demographic: shounen
+    genres:
+      - sci_fi
+      - action
+    synopsis: 手塚治虫サンダーマスク。
+    status: completed
+    anime_adapted: true
   - key: Q193300|ジェッターマルス傑作選
+    magazine: null
+    demographic: shounen
+    genres:
+      - sci_fi
+      - anthology
+    synopsis: ジェッターマルス傑作選。
+    status: completed
+    anime_adapted: true
   - key: Q193300|ジェットキング
+    magazine: null
+    demographic: shounen
+    genres:
+      - sci_fi
+      - adventure
+    synopsis: 手塚治虫ジェットキング。
+    status: completed
+    anime_adapted: false
   - key: Q193300|シャリ河の秘密基地
+    magazine: null
+    demographic: shounen
+    genres:
+      - adventure
+    synopsis: 手塚治虫シャリ河の秘密基地。
+    status: completed
+    anime_adapted: false
   - key: Q193300|ジャングルタロ
+    magazine: null
+    demographic: kodomo
+    genres:
+      - adventure
+    synopsis: 手塚治虫ジャングルタロ。
+    status: completed
+    anime_adapted: false
   - key: Q193300|ジャングル大帝
     demographic: shounen
     genres:
@@ -387113,7 +387719,22 @@ series:
     status: completed
     anime_adapted: true
   - key: Q193300|ジャングル大帝レオ
+    magazine: null
+    demographic: shounen
+    genres:
+      - adventure
+      - drama
+    synopsis: ジャングル大帝レオ。
+    status: completed
+    anime_adapted: true
   - key: Q193300|ジャングル魔境
+    magazine: null
+    demographic: shounen
+    genres:
+      - adventure
+    synopsis: 手塚治虫ジャングル魔境。
+    status: completed
+    anime_adapted: false
   - key: Q193300|シュマリ
     demographic: seinen
     genres:
@@ -387122,11 +387743,57 @@ series:
     synopsis: 手塚治虫による青年向け歴史漫画。明治期の北海道開拓を背景にした和人とアイヌの男・シュマリの生涯を描く名作。
     status: completed
   - key: Q193300|ショート・アラベスク
+    magazine: null
+    demographic: seinen
+    genres:
+      - anthology
+      - drama
+    synopsis: 手塚治虫ショート・アラベスク。
+    status: completed
+    anime_adapted: false
   - key: Q193300|スーパー太平記
+    magazine: null
+    demographic: shounen
+    genres:
+      - sci_fi
+      - historical
+    synopsis: 手塚治虫スーパー太平記。
+    status: completed
+    anime_adapted: false
   - key: Q193300|すっぽん物語
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+    synopsis: 手塚治虫すっぽん物語。
+    status: completed
+    anime_adapted: false
   - key: Q193300|スリル博士
+    magazine: null
+    demographic: shounen
+    genres:
+      - mystery
+      - adventure
+    synopsis: 手塚治虫スリル博士。
+    status: completed
+    anime_adapted: false
   - key: Q193300|スリル博士 少年サンデー版
+    magazine: null
+    demographic: shounen
+    genres:
+      - mystery
+      - adventure
+    synopsis: スリル博士サンデー版。
+    status: completed
+    anime_adapted: false
   - key: Q193300|そよ風さん
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+    synopsis: 手塚治虫そよ風さん。
+    status: completed
+    anime_adapted: false
   - key: Q193300|タイガーブックス
     demographic: seinen
     genres:
@@ -387136,9 +387803,38 @@ series:
     synopsis: 手塚治虫の中・短編作品を集めた選集。
     status: completed
   - key: Q193300|タイガーランド
+    magazine: null
+    demographic: shounen
+    genres:
+      - adventure
+    synopsis: 手塚治虫タイガーランド。
+    status: completed
+    anime_adapted: false
   - key: Q193300|ダイモンズ
+    magazine: null
+    demographic: seinen
+    genres:
+      - horror
+      - supernatural
+    synopsis: 手塚治虫ダイモンズ。
+    status: completed
+    anime_adapted: false
   - key: Q193300|ダスト18
+    magazine: null
+    demographic: seinen
+    genres:
+      - sci_fi
+    synopsis: 手塚治虫ダスト18。
+    status: completed
+    anime_adapted: false
   - key: Q193300|ダスト8
+    magazine: null
+    demographic: seinen
+    genres:
+      - sci_fi
+    synopsis: 手塚治虫ダスト8。
+    status: completed
+    anime_adapted: false
   - key: Q193300|チーム・フェニックス
     demographic: shounen
     genres:
@@ -387149,12 +387845,66 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q193300|チッポくんこんにちは
+    magazine: null
+    demographic: kodomo
+    genres:
+      - comedy
+    synopsis: 手塚治虫チッポくん。
+    status: completed
+    anime_adapted: false
   - key: Q193300|チョコっとドラキュラ
+    magazine: null
+    demographic: kodomo
+    genres:
+      - horror
+      - comedy
+    synopsis: 手塚治虫チョコっとドラキュラ。
+    status: completed
+    anime_adapted: false
   - key: Q193300|チンギス・ハンの世界帝国
+    magazine: null
+    demographic: kodomo
+    genres:
+      - historical
+      - educational
+    synopsis: チンギス・ハン学習。
+    status: completed
+    anime_adapted: false
   - key: Q193300|トキワ荘パワー!
+    magazine: null
+    demographic: seinen
+    genres:
+      - historical
+      - biographical
+    synopsis: トキワ荘伝記。
+    status: completed
+    anime_adapted: false
   - key: Q193300|トキワ荘青春物語
+    magazine: null
+    demographic: seinen
+    genres:
+      - biographical
+      - historical
+    synopsis: トキワ荘青春物語。
+    status: completed
+    anime_adapted: false
   - key: Q193300|どついたれ
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+    synopsis: 手塚治虫どついたれ。
+    status: completed
+    anime_adapted: false
   - key: Q193300|とらわれのエデン
+    magazine: null
+    demographic: seinen
+    genres:
+      - sci_fi
+      - drama
+    synopsis: 手塚治虫とらわれのエデン。
+    status: completed
+    anime_adapted: false
   - key: Q193300|どろろ
     demographic: shounen
     genres:
@@ -387165,6 +387915,14 @@ series:
     status: completed
     anime_adapted: true
   - key: Q193300|どろろとえん魔くん
+    magazine: null
+    demographic: shounen
+    genres:
+      - fantasy
+      - action
+    synopsis: どろろ×えん魔くんクロスオーバー。
+    status: completed
+    anime_adapted: false
   - key: Q193300|どろろと百鬼丸伝
   - key: Q193300|どろろ梵
     demographic: shounen
