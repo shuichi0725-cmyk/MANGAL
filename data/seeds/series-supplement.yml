@@ -1,5 +1,5 @@
 schema_version: 1
-generated_at: 2026-05-12T16:19:44.202Z
+generated_at: 2026-05-12T16:21:53.487Z
 generator: claude-opus-4-7-direct-fill
 series:
   - key: Q1001784|GOLDEN SPIRAL
@@ -605647,6 +605647,15 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q97031321|痩せたいさんと失恋ちゃん
+    magazine: null
+    demographic: josei
+    genres:
+      - drama
+      - romance
+      - slice-of-life
+    synopsis: 痩せたいさんと失恋ちゃんを題材にした女性向けエッセイ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q97031321|私と彼女のお泊まり映画
     demographic: seinen
     genres:
@@ -605719,6 +605728,15 @@ series:
     synopsis: 小うどんによる川上亮原作『人狼ゲーム』のコミカライズ。命を賭けたデスゲーム人狼を描いた話題作。実写映画化。
     status: completed
   - key: Q97161483|人狼ゲーム クレイジーフォックス
+    magazine: null
+    demographic: seinen
+    genres:
+      - mystery
+      - horror
+      - drama
+    synopsis: 川上亮原作「人狼ゲーム」のクレイジーフォックス編。デスゲーム系ホラーサスペンス。
+    status: completed
+    anime_adapted: false
   - key: Q97161483|人狼ゲームビーストサイド
     demographic: seinen
     genres:
@@ -605768,6 +605786,15 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q97165143|SEKIRO外伝死なず半兵衛
+    magazine: null
+    demographic: seinen
+    genres:
+      - action
+      - historical
+      - drama
+    synopsis: フロムソフトウェア「SEKIRO」の外伝「死なず半兵衛」コミカライズ。
+    status: completed
+    anime_adapted: false
   - key: Q97165143|セカイはアレでデキテイル
     demographic: seinen
     genres:
@@ -605817,6 +605844,14 @@ series:
     synopsis: おかもととかさが描く、町の人気者・千葉くんに恋する少女のラブストーリー。
     status: completed
   - key: Q97169244|いのちの教室
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - educational
+    synopsis: いのちの教室を題材にしたドキュメンタリー漫画。
+    status: completed
+    anime_adapted: false
   - key: Q97169244|リヒト
     demographic: shoujo
     genres:
@@ -605837,6 +605872,14 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q97169244|推し博物館ひとり旅
+    magazine: null
+    demographic: josei
+    genres:
+      - comedy
+      - slice-of-life
+    synopsis: 推し博物館ひとり旅を題材にした女性向けエッセイ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q97169244|漫画家しながらツアーナースしています。
     demographic: josei
     genres:
@@ -605854,8 +605897,34 @@ series:
     synopsis: ながらりょうこが描く、ドイツで猫と暮らす日本人女性の海外生活エッセイ。
     status: completed
   - key: Q97187065|ヨーロッパたびごはん
+    magazine: null
+    demographic: josei
+    genres:
+      - cooking
+      - slice-of-life
+      - comedy
+    synopsis: ヨーロッパたびごはんを題材にしたグルメ旅エッセイ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q97187065|北国ゆらゆら紀行
+    magazine: null
+    demographic: josei
+    genres:
+      - slice-of-life
+      - comedy
+    synopsis: 北国ゆらゆら紀行を題材にした旅エッセイ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q97188820|本好きの下剋上
+    magazine: null
+    demographic: shoujo
+    genres:
+      - fantasy
+      - isekai
+      - drama
+    synopsis: 香月美夜のラノベ「本好きの下剋上」のコミカライズ。本好きの少女が中世風異世界の貧しい家に転生し、本を作り出そうとするファンタジー。
+    status: completed
+    anime_adapted: true
   - key: Q97189093|タナカの異世界成り上がり
     demographic: seinen
     genres:
@@ -605866,12 +605935,71 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q97189093|ファイナルファンタジー11ガルカ、はじめました。
+    magazine: null
+    demographic: seinen
+    genres:
+      - fantasy
+      - comedy
+    synopsis: スクエニ「ファイナルファンタジー11」のガルカ、はじめました。コミカライズ。
+    status: completed
+    anime_adapted: false
   - key: Q97189093|マジキュー4コマ ひぐらしのなく頃に
+    magazine: null
+    demographic: seinen
+    genres:
+      - horror
+      - comedy
+    synopsis: 「ひぐらしのなく頃に」のマジキュー4コマ版。
+    status: completed
+    anime_adapted: false
   - key: Q97189093|刀剣乱舞-ONLINE-アンソロジーコミック4コマらんぶっぷちらんぶっ
+    magazine: null
+    demographic: shoujo
+    genres:
+      - historical
+      - comedy
+      - fantasy
+    synopsis: ニトロプラス「刀剣乱舞-ONLINE-」の4コマアンソロジー「らんぶっぷちらんぶっ」。
+    status: completed
+    anime_adapted: false
   - key: Q97189093|捨てられ勇者は帰宅中
+    magazine: null
+    demographic: shounen
+    genres:
+      - fantasy
+      - isekai
+      - comedy
+    synopsis: 捨てられ勇者は帰宅中を題材にした少年漫画ファンタジー。
+    status: completed
+    anime_adapted: false
   - key: Q97189093|艦隊これくしょん-艦これ-アンソロジーコミック 横須賀鎮守府編
+    magazine: null
+    demographic: seinen
+    genres:
+      - military
+      - comedy
+    synopsis: 「艦これ」横須賀鎮守府を題材にしたアンソロジーコミック。
+    status: completed
+    anime_adapted: false
   - key: Q97189093|菊野郎のCAPCOM大好き本
+    magazine: null
+    demographic: seinen
+    genres:
+      - games
+      - comedy
+    synopsis: 菊野郎のCAPCOM大好き本を題材にしたエッセイ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q97189093|超兄貴
+    magazine: null
+    demographic: seinen
+    genres:
+      - games
+      - comedy
+      - action
+    synopsis: メサイヤのシューティング「超兄貴」のコミカライズ。マッチョな兄貴たちが宇宙を戦うシュールアクション。
+    status: completed
+    anime_adapted: false
   - key: Q97189093|青春ラリアット!!
     magazine: null
     demographic: shounen
@@ -605899,9 +606027,41 @@ series:
     synopsis: 鈴華による『本好きの下剋上』派生コミック。本を作る情熱に溢れた異世界転生物語。
     status: completed
   - key: Q97189270|艦隊これくしょん-艦これ-アンソロジーコミック 横須賀鎮守府編
+    magazine: null
+    demographic: seinen
+    genres:
+      - military
+      - comedy
+    synopsis: 「艦これ」横須賀鎮守府を題材にしたアンソロジーコミック。
+    status: completed
+    anime_adapted: false
   - key: Q97189270|艦隊これくしょん-艦これ-電撃コミックアンソロジー 佐世保鎮守府編
+    magazine: null
+    demographic: seinen
+    genres:
+      - military
+      - comedy
+    synopsis: 「艦これ」佐世保鎮守府を題材にした電撃コミックアンソロジー。
+    status: completed
+    anime_adapted: false
   - key: Q97189270|葬送鬼レギナルト
+    magazine: null
+    demographic: shounen
+    genres:
+      - fantasy
+      - action
+    synopsis: 葬送鬼レギナルトを題材にした少年漫画ファンタジー。
+    status: completed
+    anime_adapted: false
   - key: Q97190292|BELLES RUELLES
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+      - romance
+    synopsis: 「BELLES RUELLES」を題材にした少女漫画。
+    status: completed
+    anime_adapted: false
   - key: Q97190292|さめない街の喫茶店
     magazine: null
     demographic: seinen
@@ -605912,9 +606072,41 @@ series:
     status: completed
     anime_adapted: false
   - key: Q97190292|フィリピンではしゃぐ。
+    magazine: null
+    demographic: josei
+    genres:
+      - comedy
+      - slice-of-life
+    synopsis: フィリピンではしゃぐを題材にした旅エッセイ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q97190292|眠くなる前に話したいことがあと3つあって
+    magazine: null
+    demographic: josei
+    genres:
+      - drama
+      - slice-of-life
+    synopsis: 眠くなる前に話したいことがあと3つあってを題材にした女性向けエッセイ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q97191696|キミが、イイ。
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - drama
+    synopsis: キミが、イイを題材にした少女漫画。
+    status: completed
+    anime_adapted: false
   - key: Q97191696|スキノウラガワ
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - drama
+    synopsis: スキノウラガワを題材にした少女漫画。
+    status: completed
+    anime_adapted: false
   - key: Q97217950|こはるの日々
     demographic: seinen
     genres:
@@ -605985,8 +606177,33 @@ series:
     status: completed
     anime_adapted: false
   - key: Q972529|会いにいくよ
+    magazine: null
+    demographic: shounen
+    genres:
+      - drama
+      - fantasy
+    synopsis: 雷句誠の会いにいくよを題材にした少年漫画。
+    status: completed
+    anime_adapted: false
   - key: Q972529|映画版 金色のガッシュベル!!
+    magazine: null
+    demographic: shounen
+    genres:
+      - fantasy
+      - action
+      - comedy
+    synopsis: 雷句誠「金色のガッシュ!!」の映画版コミック。魔界の魔物の子・ガッシュと中学生・高嶺清麿の魔王決定戦バトル。
+    status: completed
+    anime_adapted: true
   - key: Q972529|玄米ブレード
+    magazine: null
+    demographic: shounen
+    genres:
+      - fantasy
+      - action
+    synopsis: 雷句誠の玄米ブレードを題材にした少年漫画。
+    status: completed
+    anime_adapted: false
   - key: Q972529|金色のガッシュ!!
     magazine: weekly-shonen-sunday
     demographic: shounen
@@ -606019,8 +606236,32 @@ series:
     status: completed
     anime_adapted: true
   - key: Q972529|金色のガッシュベル!! 4コマスペシャル
+    magazine: null
+    demographic: shounen
+    genres:
+      - fantasy
+      - comedy
+    synopsis: 雷句誠「金色のガッシュ!!」の4コマスペシャル編。
+    status: completed
+    anime_adapted: true
   - key: Q972529|金色のガッシュベル!!ひみつストーリーファイル
+    magazine: null
+    demographic: shounen
+    genres:
+      - fantasy
+      - action
+    synopsis: 雷句誠「金色のガッシュ!!」のひみつストーリーファイル。
+    status: completed
+    anime_adapted: true
   - key: Q972529|金色のガッシュベル!!ひみつストーリーファイル 石版魔物編
+    magazine: null
+    demographic: shounen
+    genres:
+      - fantasy
+      - action
+    synopsis: 雷句誠「金色のガッシュ!!」のひみつストーリーファイル石版魔物編。
+    status: completed
+    anime_adapted: true
   - key: Q97273053|怪異と乙女と神隠し
     magazine: big-comic-superior
     demographic: seinen
@@ -606031,6 +606272,15 @@ series:
     status: completed
     anime_adapted: true
   - key: Q97273053|歌うヘッドフォン娘
+    magazine: null
+    demographic: seinen
+    genres:
+      - music
+      - drama
+      - comedy
+    synopsis: 歌うヘッドフォン娘を題材にした青年漫画。
+    status: completed
+    anime_adapted: false
   - key: Q97273053|虎子、あんまり壊しちゃだめだよ
     magazine: null
     demographic: seinen
@@ -606041,7 +606291,23 @@ series:
     status: completed
     anime_adapted: false
   - key: Q97341897|微笑女Mitsu
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - romance
+    synopsis: 微笑女Mitsuを題材にした青年漫画。
+    status: completed
+    anime_adapted: false
   - key: Q974911|GENEROUS
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - romance
+    synopsis: 「GENEROUS」を題材にした青年漫画。
+    status: completed
+    anime_adapted: false
   - key: Q974911|うちの執事が言うことには
     demographic: shoujo
     genres:
@@ -606051,7 +606317,23 @@ series:
     synopsis: 高里椎奈の小説を原作にした、夢花李の執事ミステリー少女漫画。
     status: completed
   - key: Q974911|チョウになる日
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+      - romance
+    synopsis: チョウになる日を題材にした少女漫画。
+    status: completed
+    anime_adapted: false
   - key: Q974911|バス走る。
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - slice-of-life
+    synopsis: バス走るを題材にした青年漫画。
+    status: completed
+    anime_adapted: false
   - key: Q974911|ハネチンとブッキーのお子さま診療録
     demographic: josei
     genres:
@@ -606060,6 +606342,15 @@ series:
     synopsis: 夢花李による小児科漫画。ハネチンとブッキーのお子さま診療録を描く。
     status: ongoing
   - key: Q974911|ほしのこえ
+    magazine: null
+    demographic: seinen
+    genres:
+      - sci-fi
+      - romance
+      - drama
+    synopsis: 新海誠のアニメ「ほしのこえ」のコミカライズ。宇宙を隔てた中学生男女の切ない通信SFラブストーリー。
+    status: completed
+    anime_adapted: true
   - key: Q974911|マイガール
     demographic: josei
     genres:
@@ -606086,7 +606377,24 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q974911|先生のいうとおり!!
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - comedy
+      - school
+    synopsis: 先生のいうとおり!!を題材にした少女漫画ラブコメ。
+    status: completed
+    anime_adapted: false
   - key: Q974911|同細胞生物
+    magazine: null
+    demographic: seinen
+    genres:
+      - sci-fi
+      - drama
+    synopsis: 同細胞生物を題材にした青年漫画SF。
+    status: completed
+    anime_adapted: false
   - key: Q974911|夜さん
     magazine: null
     demographic: seinen
@@ -606097,7 +606405,23 @@ series:
     status: completed
     anime_adapted: false
   - key: Q974911|夢幻アンソロジー
+    magazine: null
+    demographic: shoujo
+    genres:
+      - fantasy
+      - drama
+    synopsis: 夢幻をテーマにした少女漫画アンソロジー。
+    status: completed
+    anime_adapted: false
   - key: Q974911|天狗神
+    magazine: null
+    demographic: seinen
+    genres:
+      - fantasy
+      - supernatural
+    synopsis: 天狗神を題材にした和風青年漫画ファンタジー。
+    status: completed
+    anime_adapted: false
   - key: Q974911|尾かしら付き。
     demographic: josei
     genres:
@@ -606113,9 +606437,41 @@ series:
     synopsis: 夢花李による明治時代ロマンス。文明開化期の浪漫綺話を描く。
     status: completed
   - key: Q974911|昔久街のロジオネ
+    magazine: null
+    demographic: seinen
+    genres:
+      - fantasy
+      - drama
+    synopsis: 昔久街のロジオネを題材にした青年漫画。
+    status: completed
+    anime_adapted: false
   - key: Q974911|神様のジョーカー
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - fantasy
+    synopsis: 神様のジョーカーを題材にした青年漫画。
+    status: completed
+    anime_adapted: false
   - key: Q974911|私たちの幸せな時間
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - romance
+    synopsis: 私たちの幸せな時間を題材にした青年漫画。
+    status: completed
+    anime_adapted: false
   - key: Q974911|私と私
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - fantasy
+    synopsis: 私と私を題材にした青年漫画。
+    status: completed
+    anime_adapted: false
   - key: Q974911|赤き月の廻るころ
     magazine: null
     demographic: seinen
@@ -606162,7 +606518,23 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q97496369|コミックとり漫
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+      - slice-of-life
+    synopsis: 鳥をテーマにしたコミックアンソロジー。
+    status: completed
+    anime_adapted: false
   - key: Q97496369|サラリーマン民富論
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - comedy
+    synopsis: サラリーマン民富論を題材にした青年漫画。
+    status: completed
+    anime_adapted: false
   - key: Q97496369|マネー・ハンター
     demographic: seinen
     genres:
@@ -606173,6 +606545,14 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q97496369|企業戦士デパートメント
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - comedy
+    synopsis: 企業戦士デパートメントを題材にした青年漫画。
+    status: completed
+    anime_adapted: false
   - key: Q97496369|東京騎士
     demographic: shounen
     genres:
@@ -606188,22 +606568,161 @@ series:
     synopsis: 玄太郎が描く、日本海の漁師たちの男気を描くハードボイルド。
     status: completed
   - key: Q97496369|男!日本海スペシャル
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - action
+    synopsis: 男!日本海スペシャルを題材にした青年漫画。
+    status: completed
+    anime_adapted: false
   - key: Q97496369|野望の帝国
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - action
+      - war
+    synopsis: 野望の帝国を題材にした架空戦記青年漫画。
+    status: completed
+    anime_adapted: false
   - key: Q97496369|金田一さん、また事件ですよ!!
+    magazine: null
+    demographic: shounen
+    genres:
+      - mystery
+      - comedy
+    synopsis: 「金田一少年の事件簿」のパロディ「金田一さん、また事件ですよ!!」。
+    status: completed
+    anime_adapted: true
   - key: Q97496369|陰陽児来たる
+    magazine: null
+    demographic: seinen
+    genres:
+      - fantasy
+      - supernatural
+    synopsis: 陰陽児来たるを題材にした青年漫画。
+    status: completed
+    anime_adapted: false
   - key: Q97496369|鬼人菩薩
+    magazine: null
+    demographic: seinen
+    genres:
+      - historical
+      - supernatural
+      - action
+    synopsis: 鬼人菩薩を題材にした青年漫画和風ファンタジー。
+    status: completed
+    anime_adapted: false
   - key: Q975235|おんなの街
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - ecchi
+    synopsis: ダーティ松本のおんなの街を題材にした成人向け漫画。
+    status: completed
+    anime_adapted: false
   - key: Q975235|カンタレッラの匣
+    magazine: null
+    demographic: seinen
+    genres:
+      - mystery
+      - horror
+    synopsis: ダーティ松本のカンタレッラの匣を題材にした青年漫画。
+    status: completed
+    anime_adapted: false
   - key: Q975235|ラストワルツ
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - romance
+    synopsis: ダーティ松本のラストワルツを題材にした青年漫画。
+    status: completed
+    anime_adapted: false
   - key: Q975235|名美・イン・ブルー
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - romance
+      - ecchi
+    synopsis: ダーティ松本の名美・イン・ブルーを題材にした青年漫画。
+    status: completed
+    anime_adapted: false
   - key: Q975235|名美returns
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - romance
+    synopsis: ダーティ松本の名美returnsを題材にした青年漫画。
+    status: completed
+    anime_adapted: false
   - key: Q975235|愛の行方
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - romance
+    synopsis: ダーティ松本の愛の行方を題材にした青年漫画。
+    status: completed
+    anime_adapted: false
   - key: Q975235|曼珠沙華
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - historical
+    synopsis: ダーティ松本の曼珠沙華を題材にした青年漫画。
+    status: completed
+    anime_adapted: false
   - key: Q975235|月物語
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - fantasy
+    synopsis: ダーティ松本の月物語を題材にした青年漫画。
+    status: completed
+    anime_adapted: false
   - key: Q975235|赤い眩暈
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - ecchi
+    synopsis: ダーティ松本の赤い眩暈を題材にした青年漫画。
+    status: completed
+    anime_adapted: false
   - key: Q975235|雨物語
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - romance
+    synopsis: ダーティ松本の雨物語を題材にした青年漫画。
+    status: completed
+    anime_adapted: false
   - key: Q975235|魔樂
+    magazine: null
+    demographic: seinen
+    genres:
+      - fantasy
+      - horror
+    synopsis: ダーティ松本の魔樂を題材にした青年漫画。
+    status: completed
+    anime_adapted: false
   - key: Q975235|黒の天使
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - fantasy
+    synopsis: ダーティ松本の黒の天使を題材にした青年漫画。
+    status: completed
+    anime_adapted: false
   - key: Q97590120|あなたソレでいいんですか
     magazine: null
     demographic: josei
@@ -606214,6 +606733,15 @@ series:
     status: completed
     anime_adapted: false
   - key: Q97590120|はたらく細胞マッスル
+    magazine: null
+    demographic: shounen
+    genres:
+      - comedy
+      - educational
+      - sports
+    synopsis: 清水茜「はたらく細胞」のマッスル編。筋肉をテーマにした擬人化細胞コメディ。
+    status: completed
+    anime_adapted: true
   - key: Q97590120|激辛課長
     demographic: seinen
     genres:
@@ -606274,9 +606802,43 @@ series:
     synopsis: 五味まちとによる『ポケットモンスター』新編。サトシとゴウの愉快な冒険を描く。
     status: completed
   - key: Q97674187|ポケットモンスターミュウツー!我ハココニ在リ
+    magazine: null
+    demographic: kodomo
+    genres:
+      - fantasy
+      - adventure
+      - drama
+    synopsis: 「ポケットモンスター」のミュウツー!我ハココニ在リ編コミカライズ。
+    status: completed
+    anime_adapted: true
   - key: Q97674187|ミュウツーの逆襲EVOLUTION
+    magazine: null
+    demographic: kodomo
+    genres:
+      - fantasy
+      - action
+      - drama
+    synopsis: 「劇場版ポケットモンスター ミュウツーの逆襲EVOLUTION」のコミカライズ。
+    status: completed
+    anime_adapted: true
   - key: Q97706270|ACTION!!
+    magazine: null
+    demographic: seinen
+    genres:
+      - action
+      - drama
+    synopsis: 「ACTION!!」を題材にした青年漫画。
+    status: completed
+    anime_adapted: false
   - key: Q97706270|DOWN LIMIT
+    magazine: null
+    demographic: seinen
+    genres:
+      - action
+      - drama
+    synopsis: 「DOWN LIMIT」を題材にした青年漫画。
+    status: completed
+    anime_adapted: false
   - key: Q97706270|こういうのがいい
     demographic: seinen
     genres:
@@ -606286,6 +606848,15 @@ series:
     synopsis: オンラインゲームで出会った男女が、一緒に住んでもセックスしない"ちょうどいい"関係を探っていく現代恋愛漫画。
     status: completed
   - key: Q97706270|フェロモンデイズ
+    magazine: null
+    demographic: seinen
+    genres:
+      - romance
+      - comedy
+      - ecchi
+    synopsis: フェロモンデイズを題材にした成人向け漫画。
+    status: completed
+    anime_adapted: false
   - key: Q97706270|ブラック学校に勤めてしまった先生
     demographic: seinen
     genres:
@@ -606295,8 +606866,32 @@ series:
     synopsis: 双龍が描く、ブラック企業並みの学校に勤めることになった教師のドタバタコメディ。
     status: completed
   - key: Q97706270|封淫の歪み
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - ecchi
+    synopsis: 封淫の歪みを題材にした成人向け漫画。
+    status: completed
+    anime_adapted: false
   - key: Q97706270|快楽聖戦
+    magazine: null
+    demographic: seinen
+    genres:
+      - action
+      - ecchi
+    synopsis: 快楽聖戦を題材にした成人向け漫画。
+    status: completed
+    anime_adapted: false
   - key: Q97706270|美少女戦士04R1
+    magazine: null
+    demographic: seinen
+    genres:
+      - action
+      - ecchi
+    synopsis: 美少女戦士04R1を題材にした成人向け漫画。
+    status: completed
+    anime_adapted: false
   - key: Q97706270|間違った子を魔法少女にしてしまった
     magazine: null
     demographic: seinen
@@ -606324,6 +606919,14 @@ series:
     synopsis: 川原礫『ソードアート・オンライン』のスピンオフ。女性キャラクターたちの戦いを猫猫猫が描く。
     status: completed
   - key: Q97706319|ナイトウィザードヴァリアブルウィッチ
+    magazine: null
+    demographic: shounen
+    genres:
+      - fantasy
+      - action
+    synopsis: TRPG「ナイトウィザード」のヴァリアブルウィッチ編コミカライズ。
+    status: completed
+    anime_adapted: true
   - key: Q97706319|マイ・リトル・ウィッシュ
     magazine: null
     demographic: shoujo
@@ -606374,6 +606977,15 @@ series:
     synopsis: 魔王の城に迷い込んだ少女・すだちと魔王たちの、ほのぼのファンタジーコメディ。
     status: ongoing
   - key: Q97734567|悪魔さんとお歌
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - supernatural
+      - music
+    synopsis: 悪魔さんとお歌を題材にした少女漫画。
+    status: completed
+    anime_adapted: false
   - key: Q97754543|ノケモノたちの夜
     magazine: monthly-comic-garden
     demographic: seinen
@@ -606384,7 +606996,23 @@ series:
     status: completed
     anime_adapted: true
   - key: Q97754543|ノケモノたちの夜フレイムナイト
+    magazine: null
+    demographic: shounen
+    genres:
+      - fantasy
+      - drama
+    synopsis: 星野リリィ「ノケモノたちの夜」のフレイムナイト編。
+    status: completed
+    anime_adapted: false
   - key: Q97754543|男子の品格
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - comedy
+    synopsis: 男子の品格を題材にした少女漫画。
+    status: completed
+    anime_adapted: false
   - key: Q97754543|竜送りのイサギ
     magazine: monthly-comic-garden
     demographic: seinen
@@ -606394,8 +607022,34 @@ series:
     synopsis: 星野真が描く、竜送りの少年イサギの旅を描くファンタジー。
     status: completed
   - key: Q977749|ALICE12
+    magazine: null
+    demographic: seinen
+    genres:
+      - fantasy
+      - drama
+    synopsis: 新谷かおるのALICE12を題材にした青年漫画。
+    status: completed
+    anime_adapted: false
   - key: Q977749|Area-88
+    magazine: null
+    demographic: seinen
+    genres:
+      - war
+      - action
+      - drama
+    synopsis: 新谷かおるの代表作「エリア88」。日本人パイロットが中東の砂漠の戦場で戦う傭兵戦記漫画。
+    status: completed
+    anime_adapted: true
   - key: Q977749|Area88
+    magazine: null
+    demographic: seinen
+    genres:
+      - war
+      - action
+      - drama
+    synopsis: 新谷かおる「エリア88」の表記違い版。
+    status: completed
+    anime_adapted: true
   - key: Q977749|Cleopatra D.C
     demographic: seinen
     genres:
@@ -606404,6 +607058,14 @@ series:
     synopsis: 新谷かおるによる青年向けアクション。Cleopatra D.Cを描く物語。
     status: completed
   - key: Q977749|DAT13
+    magazine: null
+    demographic: seinen
+    genres:
+      - sci-fi
+      - action
+    synopsis: 新谷かおるのDAT13を題材にした青年漫画。
+    status: completed
+    anime_adapted: false
   - key: Q977749|DRAKEN・CODE
     demographic: seinen
     genres:
@@ -606414,14 +607076,89 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q977749|ELAN
+    magazine: null
+    demographic: seinen
+    genres:
+      - sports
+      - drama
+    synopsis: 新谷かおるのELANを題材にした青年漫画。
+    status: completed
+    anime_adapted: false
   - key: Q977749|NAVI
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - adventure
+    synopsis: 新谷かおるのNAVIを題材にした青年漫画。
+    status: completed
+    anime_adapted: false
   - key: Q977749|QUEEN1313
+    magazine: null
+    demographic: seinen
+    genres:
+      - sci-fi
+      - action
+    synopsis: 新谷かおるのQUEEN1313を題材にした青年漫画SF。
+    status: completed
+    anime_adapted: false
   - key: Q977749|Quo Vadis
+    magazine: null
+    demographic: seinen
+    genres:
+      - historical
+      - drama
+      - action
+    synopsis: 新谷かおる「クオ・ヴァディス」を題材にしたSF叙事詩。
+    status: completed
+    anime_adapted: false
   - key: Q977749|Quo Vadisクオ・ヴァディス外伝漆黒 の玉座静寂 の回廊
+    magazine: null
+    demographic: seinen
+    genres:
+      - sci-fi
+      - drama
+    synopsis: 新谷かおる「Quo Vadis」の外伝「漆黒の玉座静寂の回廊」。
+    status: completed
+    anime_adapted: false
   - key: Q977749|SONIC DESERTER
+    magazine: null
+    demographic: seinen
+    genres:
+      - sci-fi
+      - war
+      - action
+    synopsis: 新谷かおるのSONIC DESERTERを題材にした青年漫画SF。
+    status: completed
+    anime_adapted: false
   - key: Q977749|ああ特攻
+    magazine: null
+    demographic: seinen
+    genres:
+      - war
+      - historical
+      - drama
+    synopsis: 新谷かおるのああ特攻を題材にした戦記漫画。
+    status: completed
+    anime_adapted: false
   - key: Q977749|アリス12
+    magazine: null
+    demographic: seinen
+    genres:
+      - fantasy
+      - drama
+    synopsis: 新谷かおるのアリス12を題材にした青年漫画。
+    status: completed
+    anime_adapted: false
   - key: Q977749|イカロスの飛ぶ日
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - adventure
+    synopsis: 新谷かおるのイカロスの飛ぶ日を題材にした青年漫画。
+    status: completed
+    anime_adapted: false
   - key: Q977749|エラン
     demographic: shounen
     genres:
@@ -606444,6 +607181,14 @@ series:
     alternative_titles:
       en: Area 88
   - key: Q977749|エリアファイル88
+    magazine: null
+    demographic: seinen
+    genres:
+      - war
+      - action
+    synopsis: 新谷かおる「エリア88」のファイル88編。
+    status: completed
+    anime_adapted: true
   - key: Q977749|ガッデム
     demographic: seinen
     genres:
@@ -606466,6 +607211,15 @@ series:
     synopsis: 新谷かおるによる『クリスティ』新編。ロンドンを舞台にしたマッシブな冒険を描く。
     status: completed
   - key: Q977749|グルマン定期便 戦場ロマン・シリーズ
+    magazine: null
+    demographic: seinen
+    genres:
+      - war
+      - drama
+      - cooking
+    synopsis: 新谷かおる「戦場ロマン・シリーズ」のグルマン定期便編。
+    status: completed
+    anime_adapted: false
   - key: Q977749|クレオパトラD.C
     magazine: weekly-shonen-king
     demographic: shounen
@@ -606475,7 +607229,25 @@ series:
     synopsis: 新谷かおるが描く、ニューヨークの女性CEO・クレオパトラの活躍を描くアクションコメディ。
     status: completed
   - key: Q977749|こいきな奴ら
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - comedy
+      - action
+    synopsis: 新谷かおるのこいきな奴らを題材にした青年漫画。
+    status: completed
+    anime_adapted: false
   - key: Q977749|ザ・ベトナム
+    magazine: null
+    demographic: seinen
+    genres:
+      - war
+      - action
+      - drama
+    synopsis: 新谷かおるのザ・ベトナムを題材にした戦記漫画。
+    status: completed
+    anime_adapted: false
   - key: Q977749|ジェントル萬
     demographic: seinen
     genres:
@@ -606484,9 +607256,42 @@ series:
     synopsis: 新谷かおるによる青年向けアクション。ジェントル萬を描く物語。
     status: completed
   - key: Q977749|シリーズ1/1000sec
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - sci-fi
+    synopsis: 新谷かおるのシリーズ1/1000secを題材にした青年漫画。
+    status: completed
+    anime_adapted: false
   - key: Q977749|ソニック・デザーター
+    magazine: null
+    demographic: seinen
+    genres:
+      - sci-fi
+      - war
+      - action
+    synopsis: 新谷かおる「SONIC DESERTER」のカナ表記版。
+    status: completed
+    anime_adapted: false
   - key: Q977749|ドラゴン株式会社
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+      - drama
+    synopsis: 新谷かおるのドラゴン株式会社を題材にした青年漫画。
+    status: completed
+    anime_adapted: false
   - key: Q977749|パスカル・シティ
+    magazine: null
+    demographic: seinen
+    genres:
+      - sci-fi
+      - drama
+    synopsis: 新谷かおるのパスカル・シティを題材にした青年漫画SF。
+    status: completed
+    anime_adapted: false
   - key: Q977749|バランサー
     demographic: shounen
     genres:
@@ -606497,6 +607302,14 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q977749|ファントム無頼
+    magazine: null
+    demographic: seinen
+    genres:
+      - action
+      - drama
+    synopsis: 新谷かおる「ファントム無頼」。航空自衛隊のF-4ファントム戦闘機パイロットの活躍を描く青年漫画。
+    status: completed
+    anime_adapted: false
   - key: Q977749|ふたり鷹
     magazine: shonen-king
     demographic: shounen
@@ -606523,7 +607336,23 @@ series:
     synopsis: 新谷かおるによる青年向け時代劇。刀神妖緋伝を描く物語。
     status: completed
   - key: Q977749|孤独の虎
+    magazine: null
+    demographic: seinen
+    genres:
+      - action
+      - drama
+    synopsis: 新谷かおるの孤独の虎を題材にした青年漫画。
+    status: completed
+    anime_adapted: false
   - key: Q977749|左のオクロック
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - action
+    synopsis: 新谷かおるの左のオクロックを題材にした青年漫画。
+    status: completed
+    anime_adapted: false
   - key: Q977749|幽霊戦闘機
   - key: Q977749|戦場ロマンシリーズ
   - key: Q977749|戦闘親衛隊
