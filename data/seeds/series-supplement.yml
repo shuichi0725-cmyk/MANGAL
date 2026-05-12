@@ -1,5 +1,5 @@
 schema_version: 1
-generated_at: 2026-05-12T16:09:27.749Z
+generated_at: 2026-05-12T16:11:30.062Z
 generator: claude-opus-4-7-direct-fill
 series:
   - key: Q1001784|GOLDEN SPIRAL
@@ -599761,8 +599761,30 @@ series:
     status: completed
     anime_adapted: false
   - key: Q958256|COM傑作選
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - historical
+    synopsis: 実験的漫画雑誌「COM」の傑作選。赤塚不二夫らの作品も収録。
+    status: completed
+    anime_adapted: false
   - key: Q958256|MR.マサシ
+    magazine: null
+    demographic: shounen
+    genres:
+      - comedy
+    synopsis: 赤塚不二夫のMR.マサシを題材にしたギャグ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q958256|TOKIOとカケル
+    magazine: null
+    demographic: shounen
+    genres:
+      - comedy
+    synopsis: 赤塚不二夫のTOKIOとカケルを題材にしたギャグ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q958256|TVアニメおそ松さんアニメコミックス
     demographic: seinen
     genres:
@@ -599770,14 +599792,80 @@ series:
     synopsis: 赤塚不二夫『おそ松くん』のリブートアニメ『おそ松さん』のアニメコミックス版。
     status: completed
   - key: Q958256|アナーキーおじさん
+    magazine: null
+    demographic: shounen
+    genres:
+      - comedy
+    synopsis: 赤塚不二夫のアナーキーおじさんを題材にしたギャグ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q958256|アニマル作戦
+    magazine: null
+    demographic: shounen
+    genres:
+      - comedy
+      - action
+    synopsis: 赤塚不二夫のアニマル作戦を題材にしたギャグ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q958256|あべこべ3番地
+    magazine: null
+    demographic: shounen
+    genres:
+      - comedy
+    synopsis: 赤塚不二夫のあべこべ3番地を題材にしたギャグ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q958256|ア太郎+おそ松
+    magazine: null
+    demographic: shounen
+    genres:
+      - comedy
+    synopsis: 赤塚不二夫の「もーれつア太郎」と「おそ松くん」のクロスオーバー作品。
+    status: completed
+    anime_adapted: true
   - key: Q958256|いじわる一家
+    magazine: null
+    demographic: shounen
+    genres:
+      - comedy
+    synopsis: 赤塚不二夫のいじわる一家を題材にしたギャグ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q958256|いじわる爺さん
+    magazine: null
+    demographic: shounen
+    genres:
+      - comedy
+    synopsis: 赤塚不二夫のいじわる爺さんを題材にしたギャグ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q958256|いま来たこの道帰りゃんせ
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - biography
+    synopsis: 赤塚不二夫の自伝「いま来たこの道帰りゃんせ」。
+    status: completed
+    anime_adapted: false
   - key: Q958256|ウル松さん
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+      - sci-fi
+    synopsis: 赤塚不二夫「おそ松」と「ウルトラ」シリーズのクロスオーバー「ウル松さん」。
+    status: completed
+    anime_adapted: false
   - key: Q958256|えいがのおそ松さんアニメコミック
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+    synopsis: 赤塚不二夫「おそ松さん」の劇場版アニメコミック。
+    status: completed
+    anime_adapted: true
   - key: Q958256|えりぬき天才バカボン
     demographic: shounen
     genres:
@@ -599785,10 +599873,47 @@ series:
     synopsis: 赤塚不二夫の名作『天才バカボン』の選り抜き編。バカボン親子の名エピソードを集成。
     status: completed
   - key: Q958256|おかあさんのうた
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+      - family
+    synopsis: 赤塚不二夫のおかあさんのうたを題材にした少女漫画。
+    status: completed
+    anime_adapted: false
   - key: Q958256|おじさんはパースーマン
+    magazine: null
+    demographic: shounen
+    genres:
+      - comedy
+      - action
+    synopsis: 赤塚不二夫のおじさんはパースーマンを題材にしたギャグ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q958256|おそ松&バカボン
+    magazine: null
+    demographic: shounen
+    genres:
+      - comedy
+    synopsis: 赤塚不二夫「おそ松くん」と「天才バカボン」のクロスオーバー作品。
+    status: completed
+    anime_adapted: true
   - key: Q958256|おそ松&バカボン ヒイキのイヤミ先生編
+    magazine: null
+    demographic: shounen
+    genres:
+      - comedy
+    synopsis: 赤塚不二夫「おそ松&バカボン」のヒイキのイヤミ先生編。
+    status: completed
+    anime_adapted: true
   - key: Q958256|おそ松&バカボン ぼくらのクラスは先生が二人編
+    magazine: null
+    demographic: shounen
+    genres:
+      - comedy
+    synopsis: 赤塚不二夫「おそ松&バカボン」のぼくらのクラスは先生が二人編。
+    status: completed
+    anime_adapted: true
   - key: Q958256|おそ松くん
     magazine: weekly-shonen-sunday
     demographic: kodomo
@@ -599801,15 +599926,85 @@ series:
     alternative_titles:
       en: Osomatsu-kun
   - key: Q958256|おそ松くんべスト・オブ・ベスト・コレクション
+    magazine: null
+    demographic: shounen
+    genres:
+      - comedy
+    synopsis: 赤塚不二夫「おそ松くん」のベスト・オブ・ベスト・コレクション。
+    status: completed
+    anime_adapted: true
   - key: Q958256|おそ松くんベスト・コレクション
+    magazine: null
+    demographic: shounen
+    genres:
+      - comedy
+    synopsis: 赤塚不二夫「おそ松くん」のベスト・コレクション。
+    status: completed
+    anime_adapted: true
   - key: Q958256|おそ松くんベスト・セレクション
+    magazine: null
+    demographic: shounen
+    genres:
+      - comedy
+    synopsis: 赤塚不二夫「おそ松くん」のベスト・セレクション。
+    status: completed
+    anime_adapted: true
   - key: Q958256|おそ松さん
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+    synopsis: 赤塚不二夫「おそ松くん」のリメイク「おそ松さん」のアニメコミカライズ。20歳になった6つ子のニート生活コメディ。
+    status: completed
+    anime_adapted: true
   - key: Q958256|おそ松さん公式アンソロジー~コント松集~
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+    synopsis: 「おそ松さん」公式アンソロジーのコント松集。
+    status: completed
+    anime_adapted: true
   - key: Q958256|おそ松さん公式アンソロジーコミック F6
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+    synopsis: 「おそ松さん」公式アンソロジーのF6編。
+    status: completed
+    anime_adapted: true
   - key: Q958256|おそ松さん公式アンソロジーコミック キレイ
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+    synopsis: 「おそ松さん」公式アンソロジーのキレイ編。
+    status: completed
+    anime_adapted: true
   - key: Q958256|おそ松さん公式アンソロジーコミック ゲス
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+    synopsis: 「おそ松さん」公式アンソロジーのゲス編。
+    status: completed
+    anime_adapted: true
   - key: Q958256|おそ松さん公式アンソロジーコミック ゲスゲス
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+    synopsis: 「おそ松さん」公式アンソロジーのゲスゲス編。
+    status: completed
+    anime_adapted: true
   - key: Q958256|おそ松さん公式アンソロジーコミック ケモケモ
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+    synopsis: 「おそ松さん」公式アンソロジーのケモケモ編。
+    status: completed
+    anime_adapted: true
   - key: Q958256|おそ松さん公式アンソロジーコミック こぼれ話集
     magazine: null
     demographic: seinen
@@ -599820,9 +600015,37 @@ series:
     status: completed
     anime_adapted: true
   - key: Q958256|おそ松さん公式アンソロジーコミック メス
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+    synopsis: 「おそ松さん」公式アンソロジーのメス編。
+    status: completed
+    anime_adapted: true
   - key: Q958256|おそ松さん公式アンソロジーコミック 呑んだくれ
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+    synopsis: 「おそ松さん」公式アンソロジーの呑んだくれ編。
+    status: completed
+    anime_adapted: true
   - key: Q958256|おそ松さん公式アンソロジーコミック 祭り
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+    synopsis: 「おそ松さん」公式アンソロジーの祭り編。
+    status: completed
+    anime_adapted: true
   - key: Q958256|おそ松さん公式アンソロジーコミックNEET GOING ON!
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+    synopsis: 「おそ松さん」公式アンソロジーのNEET GOING ON!編。
+    status: completed
+    anime_adapted: true
   - key: Q958256|おそ松さん公式コミックアンソロジー
     magazine: null
     demographic: seinen
@@ -599833,7 +600056,21 @@ series:
     status: completed
     anime_adapted: true
   - key: Q958256|おそ松さん公式コミックアンソロジー今夜は寝かさない
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+    synopsis: 「おそ松さん」公式コミックアンソロジーの今夜は寝かさない編。
+    status: completed
+    anime_adapted: true
   - key: Q958256|おそ松さん公式コミックアンソロジー明日も寝かさない
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+    synopsis: 「おそ松さん」公式コミックアンソロジーの明日も寝かさない編。
+    status: completed
+    anime_adapted: true
   - key: Q958256|おた助くん
     demographic: shounen
     genres:
@@ -599847,10 +600084,47 @@ series:
     synopsis: 赤塚不二夫によるギャグ漫画。オッチャンの愉快な物語。
     status: completed
   - key: Q958256|おバカさん
+    magazine: null
+    demographic: shounen
+    genres:
+      - comedy
+    synopsis: 赤塚不二夫のおバカさんを題材にしたギャグ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q958256|おハナちゃん
+    magazine: null
+    demographic: shoujo
+    genres:
+      - comedy
+    synopsis: 赤塚不二夫のおハナちゃんを題材にした少女漫画。
+    status: completed
+    anime_adapted: false
   - key: Q958256|おれはゲバ鉄!
+    magazine: null
+    demographic: shounen
+    genres:
+      - comedy
+      - action
+    synopsis: 赤塚不二夫のおれはゲバ鉄!を題材にしたギャグアクション漫画。
+    status: completed
+    anime_adapted: false
   - key: Q958256|お宝系
+    magazine: null
+    demographic: shounen
+    genres:
+      - comedy
+    synopsis: 赤塚不二夫のお宝系を題材にしたギャグ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q958256|お笑いはこれからだ
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+      - biography
+    synopsis: 赤塚不二夫のお笑いはこれからだを題材にしたエッセイ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q958256|かわいいおそ松くん
     magazine: null
     demographic: kodomo
@@ -599861,8 +600135,29 @@ series:
     status: completed
     anime_adapted: true
   - key: Q958256|カン太郎
+    magazine: null
+    demographic: shounen
+    genres:
+      - comedy
+    synopsis: 赤塚不二夫のカン太郎を題材にしたギャグ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q958256|キビママちゃん
+    magazine: null
+    demographic: shounen
+    genres:
+      - comedy
+    synopsis: 赤塚不二夫のキビママちゃんを題材にしたギャグ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q958256|ギャグ21世紀
+    magazine: null
+    demographic: shounen
+    genres:
+      - comedy
+    synopsis: 赤塚不二夫のギャグ21世紀を題材にしたギャグ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q958256|ギャグゲリラ
     magazine: null
     demographic: seinen
@@ -599874,18 +600169,111 @@ series:
     status: completed
     anime_adapted: false
   - key: Q958256|ギャグゲリラ1980
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+    synopsis: 赤塚不二夫のギャグゲリラ1980年版。
+    status: completed
+    anime_adapted: false
   - key: Q958256|ギャグゲリラ1981
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+    synopsis: 赤塚不二夫のギャグゲリラ1981年版。
+    status: completed
+    anime_adapted: false
   - key: Q958256|ギャグゲリラ1982
+    magazine: null
+    demographic: seinen
+    genres:
+      - comedy
+    synopsis: 赤塚不二夫のギャグゲリラ1982年版。
+    status: completed
+    anime_adapted: false
   - key: Q958256|ギャグの王様
+    magazine: null
+    demographic: shounen
+    genres:
+      - comedy
+    synopsis: 赤塚不二夫のギャグの王様を題材にしたギャグ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q958256|ギャグランド
+    magazine: null
+    demographic: shounen
+    genres:
+      - comedy
+    synopsis: 赤塚不二夫のギャグランドを題材にしたギャグ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q958256|ギャグ屋
+    magazine: null
+    demographic: shounen
+    genres:
+      - comedy
+    synopsis: 赤塚不二夫のギャグ屋を題材にしたギャグ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q958256|キラキラ☆プリキュアアラモード
+    magazine: null
+    demographic: kodomo
+    genres:
+      - magical-girl
+      - cooking
+      - comedy
+    synopsis: 東映アニメ「キラキラ☆プリキュアアラモード」のコミカライズ。スイーツを題材にした魔法少女もの。
+    status: completed
+    anime_adapted: true
   - key: Q958256|くそババア!!
+    magazine: null
+    demographic: shounen
+    genres:
+      - comedy
+    synopsis: 赤塚不二夫のくそババア!!を題材にしたギャグ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q958256|クレイジー・アニマルズ
+    magazine: null
+    demographic: shounen
+    genres:
+      - comedy
+    synopsis: 赤塚不二夫のクレイジー・アニマルズを題材にしたギャグ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q958256|クロッケくん
+    magazine: null
+    demographic: shounen
+    genres:
+      - comedy
+    synopsis: 赤塚不二夫のクロッケくんを題材にしたギャグ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q958256|これでいいのだ
+    magazine: null
+    demographic: shounen
+    genres:
+      - comedy
+    synopsis: 赤塚不二夫「これでいいのだ」(天才バカボン名台詞)を題材にしたギャグ漫画。
+    status: completed
+    anime_adapted: true
   - key: Q958256|コングおやじ
+    magazine: null
+    demographic: shounen
+    genres:
+      - comedy
+    synopsis: 赤塚不二夫のコングおやじを題材にしたギャグ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q958256|さいしん天才バカボン
+    magazine: null
+    demographic: shounen
+    genres:
+      - comedy
+    synopsis: 赤塚不二夫「天才バカボン」のさいしん編。
+    status: completed
+    anime_adapted: true
   - key: Q958256|しびれのスカタン
     demographic: shounen
     genres:
@@ -599896,12 +600284,64 @@ series:
     status: completed
     anime_adapted: false
   - key: Q958256|ジャジャ子ちゃん
+    magazine: null
+    demographic: shoujo
+    genres:
+      - comedy
+    synopsis: 赤塚不二夫のジャジャ子ちゃんを題材にした少女漫画。
+    status: completed
+    anime_adapted: false
   - key: Q958256|スリラー教授いじわる教授
+    magazine: null
+    demographic: shounen
+    genres:
+      - comedy
+      - horror
+    synopsis: 赤塚不二夫のスリラー教授いじわる教授を題材にしたギャグ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q958256|そんごくん
+    magazine: null
+    demographic: shounen
+    genres:
+      - comedy
+      - fantasy
+    synopsis: 赤塚不二夫「西遊記」をベースにした「そんごくん」コミック。
+    status: completed
+    anime_adapted: false
   - key: Q958256|そんごくん別巻
+    magazine: null
+    demographic: shounen
+    genres:
+      - comedy
+      - fantasy
+    synopsis: 赤塚不二夫「そんごくん」の別巻。
+    status: completed
+    anime_adapted: false
   - key: Q958256|タトル君
+    magazine: null
+    demographic: shounen
+    genres:
+      - comedy
+    synopsis: 赤塚不二夫のタトル君を題材にしたギャグ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q958256|たまねぎたまちゃん
+    magazine: null
+    demographic: shoujo
+    genres:
+      - comedy
+    synopsis: 赤塚不二夫のたまねぎたまちゃんを題材にした少女漫画。
+    status: completed
+    anime_adapted: false
   - key: Q958256|チビドン
+    magazine: null
+    demographic: shounen
+    genres:
+      - comedy
+    synopsis: 赤塚不二夫のチビドンを題材にしたギャグ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q958256|チビ太
     demographic: shounen
     genres:
@@ -599912,9 +600352,41 @@ series:
     status: completed
     anime_adapted: true
   - key: Q958256|つまんない子ちゃん
+    magazine: null
+    demographic: shoujo
+    genres:
+      - comedy
+    synopsis: 赤塚不二夫のつまんない子ちゃんを題材にした少女漫画。
+    status: completed
+    anime_adapted: false
   - key: Q958256|トキワ荘パワー!
+    magazine: null
+    demographic: seinen
+    genres:
+      - biography
+      - drama
+      - comedy
+    synopsis: 手塚治虫・藤子不二雄・赤塚不二夫らが暮らしたトキワ荘の力を題材にした伝記コミック。
+    status: completed
+    anime_adapted: false
   - key: Q958256|トキワ荘青春物語
+    magazine: null
+    demographic: seinen
+    genres:
+      - biography
+      - drama
+    synopsis: トキワ荘青春物語を題材にした伝記コミック。
+    status: completed
+    anime_adapted: false
   - key: Q958256|ドリームタイムズ
+    magazine: null
+    demographic: shounen
+    genres:
+      - comedy
+      - fantasy
+    synopsis: 赤塚不二夫のドリームタイムズを題材にしたギャグ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q958256|なのだ!?天才バカボン
     demographic: shounen
     genres:
@@ -599922,26 +600394,189 @@ series:
     synopsis: 赤塚不二夫の名作ギャグ『天才バカボン』なのだ!?編。
     status: completed
   - key: Q958256|なのだ!?天才バカボンのおやじ
+    magazine: null
+    demographic: shounen
+    genres:
+      - comedy
+    synopsis: 赤塚不二夫「天才バカボン」のおやじにスポットを当てた派生作。
+    status: completed
+    anime_adapted: true
   - key: Q958256|ナマちゃん
+    magazine: null
+    demographic: shounen
+    genres:
+      - comedy
+    synopsis: 赤塚不二夫のナマちゃんを題材にしたギャグ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q958256|なんじゃらママ
+    magazine: null
+    demographic: shoujo
+    genres:
+      - comedy
+    synopsis: 赤塚不二夫のなんじゃらママを題材にした少女漫画。
+    status: completed
+    anime_adapted: false
   - key: Q958256|ニャロメ!!
+    magazine: null
+    demographic: shounen
+    genres:
+      - comedy
+    synopsis: 赤塚不二夫「もーれつア太郎」のキャラ「ニャロメ」のスピンオフ「ニャロメ!!」。
+    status: completed
+    anime_adapted: true
   - key: Q958256|ニャロメのおかしなおかしな囲碁格言
+    magazine: null
+    demographic: shounen
+    genres:
+      - comedy
+      - educational
+    synopsis: ニャロメのおかしなおかしな囲碁格言を題材にした教育コメディ。
+    status: completed
+    anime_adapted: false
   - key: Q958256|ニャロメのおもしろコンピュータ探険
+    magazine: null
+    demographic: shounen
+    genres:
+      - educational
+      - comedy
+    synopsis: ニャロメのおもしろコンピュータ探険を題材にした教育コメディ。
+    status: completed
+    anime_adapted: false
   - key: Q958256|ニャロメのおもしろ体の不思議探険
+    magazine: null
+    demographic: shounen
+    genres:
+      - educational
+      - comedy
+    synopsis: ニャロメのおもしろ体の不思議探険を題材にした教育コメディ。
+    status: completed
+    anime_adapted: false
   - key: Q958256|ニャロメのおもしろ宇宙論
+    magazine: null
+    demographic: shounen
+    genres:
+      - educational
+      - comedy
+    synopsis: ニャロメのおもしろ宇宙論を題材にした教育コメディ。
+    status: completed
+    anime_adapted: false
   - key: Q958256|ニャロメのおもしろ将棋入門
+    magazine: null
+    demographic: shounen
+    genres:
+      - educational
+      - comedy
+    synopsis: ニャロメのおもしろ将棋入門を題材にした教育コメディ。
+    status: completed
+    anime_adapted: false
   - key: Q958256|ニャロメのおもしろ性教室
+    magazine: null
+    demographic: shounen
+    genres:
+      - educational
+      - comedy
+    synopsis: ニャロメのおもしろ性教室を題材にした教育コメディ。
+    status: completed
+    anime_adapted: false
   - key: Q958256|ニャロメのおもしろ数学教室
+    magazine: null
+    demographic: shounen
+    genres:
+      - educational
+      - comedy
+    synopsis: ニャロメのおもしろ数学教室を題材にした教育コメディ。
+    status: completed
+    anime_adapted: false
   - key: Q958256|ニャロメのおもしろ生命科学教室
+    magazine: null
+    demographic: shounen
+    genres:
+      - educational
+      - comedy
+    synopsis: ニャロメのおもしろ生命科学教室を題材にした教育コメディ。
+    status: completed
+    anime_adapted: false
   - key: Q958256|ニャロメのおもしろ麻雀入門
+    magazine: null
+    demographic: shounen
+    genres:
+      - educational
+      - comedy
+      - mahjong
+    synopsis: ニャロメのおもしろ麻雀入門を題材にした教育コメディ。
+    status: completed
+    anime_adapted: false
   - key: Q958256|ニャロメのスターウォーズ大研究
+    magazine: null
+    demographic: shounen
+    genres:
+      - educational
+      - comedy
+      - sci-fi
+    synopsis: ニャロメのスターウォーズ大研究を題材にした教育コメディ。
+    status: completed
+    anime_adapted: false
   - key: Q958256|ニャロメの地震大研究
+    magazine: null
+    demographic: shounen
+    genres:
+      - educational
+      - comedy
+    synopsis: ニャロメの地震大研究を題材にした教育コメディ。
+    status: completed
+    anime_adapted: false
   - key: Q958256|ニャロメの異常気象大研究
+    magazine: null
+    demographic: shounen
+    genres:
+      - educational
+      - comedy
+    synopsis: ニャロメの異常気象大研究を題材にした教育コメディ。
+    status: completed
+    anime_adapted: false
   - key: Q958256|ニャロメの血液型おもしろ雑学知識
+    magazine: null
+    demographic: shounen
+    genres:
+      - educational
+      - comedy
+    synopsis: ニャロメの血液型おもしろ雑学知識を題材にした教育コメディ。
+    status: completed
+    anime_adapted: false
   - key: Q958256|ニャロメの血液型大研究
+    magazine: null
+    demographic: shounen
+    genres:
+      - educational
+      - comedy
+    synopsis: ニャロメの血液型大研究を題材にした教育コメディ。
+    status: completed
+    anime_adapted: false
   - key: Q958256|ニャンニャンニャンダ
+    magazine: null
+    demographic: shounen
+    genres:
+      - comedy
+    synopsis: 赤塚不二夫のニャンニャンニャンダを題材にしたギャグ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q958256|ネコの大家さん
+    magazine: null
+    demographic: shounen
+    genres:
+      - comedy
+    synopsis: 赤塚不二夫のネコの大家さんを題材にしたギャグ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q958256|ネコの目ニュース
+    magazine: null
+    demographic: shounen
+    genres:
+      - comedy
+    synopsis: 赤塚不二夫のネコの目ニュースを題材にしたギャグ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q958256|のらガキ
     demographic: shounen
     genres:
@@ -599950,14 +600585,79 @@ series:
     synopsis: 赤塚不二夫によるギャグ漫画。のらガキたちの愉快な物語。
     status: completed
   - key: Q958256|ハウスジャックナナちゃん
+    magazine: null
+    demographic: shoujo
+    genres:
+      - comedy
+    synopsis: 赤塚不二夫のハウスジャックナナちゃんを題材にした少女漫画。
+    status: completed
+    anime_adapted: false
   - key: Q958256|バカボン線友録
+    magazine: null
+    demographic: shounen
+    genres:
+      - comedy
+    synopsis: 赤塚不二夫「天才バカボン」のバカボン線友録編。
+    status: completed
+    anime_adapted: true
   - key: Q958256|バカ田大学なのだ!?
+    magazine: null
+    demographic: shounen
+    genres:
+      - comedy
+    synopsis: 赤塚不二夫「天才バカボン」のバカ田大学編。
+    status: completed
+    anime_adapted: true
   - key: Q958256|ハタ坊とワンペイ
+    magazine: null
+    demographic: shounen
+    genres:
+      - comedy
+    synopsis: 赤塚不二夫のハタ坊とワンペイを題材にしたギャグ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q958256|ハッピィちゃん
+    magazine: null
+    demographic: shoujo
+    genres:
+      - comedy
+    synopsis: 赤塚不二夫のハッピィちゃんを題材にした少女漫画。
+    status: completed
+    anime_adapted: false
   - key: Q958256|ババッチ先生
+    magazine: null
+    demographic: shounen
+    genres:
+      - comedy
+      - school
+    synopsis: 赤塚不二夫のババッチ先生を題材にしたギャグ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q958256|ハラペコだけどシアワセなのだ!!
+    magazine: null
+    demographic: shounen
+    genres:
+      - comedy
+    synopsis: 赤塚不二夫のハラペコだけどシアワセなのだを題材にしたギャグ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q958256|ひさし・不二夫の漫画全集
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - comedy
+    synopsis: 赤塚不二夫らの漫画全集。
+    status: completed
+    anime_adapted: false
   - key: Q958256|ヒッピーちゃん
+    magazine: null
+    demographic: shoujo
+    genres:
+      - comedy
+    synopsis: 赤塚不二夫のヒッピーちゃんを題材にした少女漫画。
+    status: completed
+    anime_adapted: false
   - key: Q958256|ひみつのアッコちゃん
     magazine: ribon
     demographic: shoujo
@@ -599975,9 +600675,39 @@ series:
     synopsis: 赤塚不二夫による『ひみつのアッコちゃん』μ編。コンパクト魔法少女アッコの新たな物語。
     status: completed
   - key: Q958256|ひみつのアッコちゃんなかよし版
+    magazine: null
+    demographic: shoujo
+    genres:
+      - magical-girl
+      - comedy
+    synopsis: 赤塚不二夫の代表作「ひみつのアッコちゃん」のなかよし版。コンパクトで変身する少女アッコちゃんの魔法少女の元祖的作品。
+    status: completed
+    anime_adapted: true
   - key: Q958256|ひみつのアッコちゃん別巻
+    magazine: null
+    demographic: shoujo
+    genres:
+      - magical-girl
+      - comedy
+    synopsis: 赤塚不二夫「ひみつのアッコちゃん」の別巻。
+    status: completed
+    anime_adapted: true
   - key: Q958256|ピヨ13世
+    magazine: null
+    demographic: shounen
+    genres:
+      - comedy
+    synopsis: 赤塚不二夫のピヨ13世を題材にしたギャグ漫画。
+    status: completed
+    anime_adapted: false
   - key: Q958256|ひらがなおそまつくん
+    magazine: null
+    demographic: kodomo
+    genres:
+      - comedy
+    synopsis: 赤塚不二夫「おそ松くん」の児童向けひらがな版。
+    status: completed
+    anime_adapted: true
   - key: Q958256|ぶっかれ*ダン
     demographic: shounen
     genres:
@@ -599988,6 +600718,13 @@ series:
     status: completed
     anime_adapted: false
   - key: Q958256|へんな子ちゃん
+    magazine: null
+    demographic: shoujo
+    genres:
+      - comedy
+    synopsis: 赤塚不二夫のへんな子ちゃんを題材にした少女漫画。
+    status: completed
+    anime_adapted: false
   - key: Q958256|へんな子ちゃん1991
   - key: Q958256|へんな子ちゃん1992
   - key: Q958256|へんな子ちゃん1993
