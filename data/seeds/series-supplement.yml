@@ -1,5 +1,5 @@
 schema_version: 1
-generated_at: 2026-05-12T02:33:50.252Z
+generated_at: 2026-05-12T02:35:24.498Z
 generator: claude-opus-4-7-direct-fill
 series:
   - key: Q1001784|GOLDEN SPIRAL
@@ -432029,9 +432029,40 @@ series:
     status: completed
     anime_adapted: false
   - key: Q28690604|アックス
+    magazine: null
+    demographic: seinen
+    genres:
+      - anthology
+    synopsis: アックス漫画雑誌。
+    status: completed
+    anime_adapted: false
   - key: Q28690604|みぃんなじろうちゃん
+    magazine: null
+    demographic: seinen
+    genres:
+      - slice_of_life
+      - comedy
+    synopsis: みぃんなじろうちゃん。
+    status: completed
+    anime_adapted: false
   - key: Q28690738|少女イノセント
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+      - anthology
+    synopsis: 少女イノセント。
+    status: completed
+    anime_adapted: false
   - key: Q28690738|少女カラフル
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+      - anthology
+    synopsis: 少女カラフル。
+    status: completed
+    anime_adapted: false
   - key: Q28690972|ルリアーにゃ!!
     demographic: shoujo
     genres:
@@ -432050,7 +432081,23 @@ series:
     status: completed
     anime_adapted: false
   - key: Q28692056|コレットは死ぬことにした-女神編-
+    magazine: null
+    demographic: josei
+    genres:
+      - fantasy
+      - romance
+    synopsis: コレット女神編。
+    status: completed
+    anime_adapted: false
   - key: Q28692056|はちみつとバタフライ
+    magazine: null
+    demographic: josei
+    genres:
+      - romance
+      - drama
+    synopsis: はちみつとバタフライ。
+    status: completed
+    anime_adapted: false
   - key: Q28692056|ピチカートの眠る森
     demographic: shoujo
     genres:
@@ -432059,7 +432106,23 @@ series:
     synopsis: 幸村アルトによるファンタジー少女漫画。ピチカートが眠る神秘の森の物語。
     status: completed
   - key: Q28692056|六百頁のミステリー
+    magazine: null
+    demographic: josei
+    genres:
+      - mystery
+      - drama
+    synopsis: 六百頁のミステリー。
+    status: completed
+    anime_adapted: false
   - key: Q28692056|福衛門レース
+    magazine: null
+    demographic: seinen
+    genres:
+      - sports
+      - comedy
+    synopsis: 福衛門レース。
+    status: completed
+    anime_adapted: false
   - key: Q28692056|銀砂糖師と黒の妖精
     magazine: null
     demographic: shoujo
@@ -432079,10 +432142,46 @@ series:
     synopsis: ヤクザの組長と就活生の同居生活を描く、福澤徹三原作・薩美佑作画のグルメドラマ。実写ドラマ化。
     status: completed
   - key: Q2869849|3ツのお願い
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+    synopsis: 古屋兎丸3ツのお願い。
+    status: completed
+    anime_adapted: false
   - key: Q2869849|B.Q
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - anthology
+    synopsis: 古屋兎丸B.Q。
+    status: completed
+    anime_adapted: false
   - key: Q2869849|B.Q.outtakes the roach book
+    magazine: null
+    demographic: seinen
+    genres:
+      - anthology
+    synopsis: B.Q outtakes the roach。
+    status: completed
+    anime_adapted: false
   - key: Q2869849|B.Q.the fly book
+    magazine: null
+    demographic: seinen
+    genres:
+      - anthology
+    synopsis: B.Q the fly。
+    status: completed
+    anime_adapted: false
   - key: Q2869849|B.Q.the mouse book
+    magazine: null
+    demographic: seinen
+    genres:
+      - anthology
+    synopsis: B.Q the mouse。
+    status: completed
+    anime_adapted: false
   - key: Q2869849|BAMBi
     magazine: monthly-comic-beam
     demographic: seinen
@@ -432092,6 +432191,13 @@ series:
     synopsis: カネコアツシが描く、女戦闘員BAMBiを主人公にしたハードアクション。
     status: completed
   - key: Q2869849|Comic?
+    magazine: null
+    demographic: seinen
+    genres:
+      - anthology
+    synopsis: Comic?短編集。
+    status: completed
+    anime_adapted: false
   - key: Q2869849|EVOL
     magazine: monthly-ikki
     demographic: seinen
@@ -432102,8 +432208,30 @@ series:
     synopsis: カネコアツシが描く、進化(EVOLve)する生物と人類の戦いを描くSFサスペンス。
     status: completed
   - key: Q2869849|Hunky×Punky
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+    synopsis: Hunky×Punky。
+    status: completed
+    anime_adapted: false
   - key: Q2869849|Odd jobs
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - anthology
+    synopsis: Odd jobs。
+    status: completed
+    anime_adapted: false
   - key: Q2869849|R the original
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+    synopsis: R the original。
+    status: completed
+    anime_adapted: false
   - key: Q2869849|Soil
     magazine: monthly-comic-beam
     demographic: seinen
@@ -432123,6 +432251,14 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q2869849|アトミック?
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - psychological
+    synopsis: 古屋兎丸アトミック?。
+    status: completed
+    anime_adapted: false
   - key: Q2869849|サーチアンドデストロイ
     demographic: seinen
     genres:
@@ -432149,9 +432285,39 @@ series:
     synopsis: カネコアツシが描く、女戦闘員バンビを主人公にしたハードボイルドアクション。
     status: completed
   - key: Q2869849|バンビ零オルタナティヴ
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+    synopsis: バンビ零オルタナティヴ。
+    status: completed
+    anime_adapted: false
   - key: Q2869849|ロックンロール以外は全部嘘。
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - music
+    synopsis: ロックンロール以外は全部嘘。
+    status: completed
+    anime_adapted: false
   - key: Q2875041|After school wars
+    magazine: null
+    demographic: shounen
+    genres:
+      - action
+      - school
+    synopsis: After school wars。
+    status: completed
+    anime_adapted: false
   - key: Q2875041|Am a Boy
+    magazine: null
+    demographic: shounen
+    genres:
+      - drama
+    synopsis: Am a Boy。
+    status: completed
+    anime_adapted: false
   - key: Q2875041|Boys be夏くん!!
     demographic: shounen
     genres:
@@ -432160,9 +432326,40 @@ series:
     synopsis: 立原あゆみによる少年スポーツ漫画。Boys be夏くん!!を描く物語。
     status: completed
   - key: Q2875041|I'mダチ公
+    magazine: null
+    demographic: shounen
+    genres:
+      - action
+      - school
+    synopsis: I'mダチ公。
+    status: completed
+    anime_adapted: false
   - key: Q2875041|Let'sダチ公
+    magazine: null
+    demographic: shounen
+    genres:
+      - action
+      - school
+    synopsis: Let'sダチ公。
+    status: completed
+    anime_adapted: false
   - key: Q2875041|Red data book赤
+    magazine: null
+    demographic: shounen
+    genres:
+      - drama
+    synopsis: Red data book赤。
+    status: completed
+    anime_adapted: false
   - key: Q2875041|ああ特攻
+    magazine: null
+    demographic: seinen
+    genres:
+      - war
+      - historical
+    synopsis: ああ特攻。
+    status: completed
+    anime_adapted: false
   - key: Q2875041|あばよ白書
     demographic: seinen
     genres:
@@ -432171,6 +432368,13 @@ series:
     synopsis: ヤクザ世界に生きる男たちの仁義と別れを、立原あゆみが描いた任侠ドラマ。
     status: completed
   - key: Q2875041|うさねこちゃん
+    magazine: null
+    demographic: shoujo
+    genres:
+      - comedy
+    synopsis: うさねこちゃん。
+    status: completed
+    anime_adapted: false
   - key: Q2875041|オレは力だ!
     demographic: seinen
     genres:
@@ -432188,8 +432392,31 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q2875041|ぎんねこMINMIN
+    magazine: null
+    demographic: shoujo
+    genres:
+      - fantasy
+      - comedy
+    synopsis: ぎんねこMINMIN。
+    status: completed
+    anime_adapted: false
   - key: Q2875041|クジラ
+    magazine: null
+    demographic: shounen
+    genres:
+      - adventure
+      - drama
+    synopsis: クジラドラマ。
+    status: completed
+    anime_adapted: false
   - key: Q2875041|グッバイ・カンパニー
+    magazine: null
+    demographic: shounen
+    genres:
+      - drama
+    synopsis: グッバイ・カンパニー。
+    status: completed
+    anime_adapted: false
   - key: Q2875041|さくらんぼ物語
     demographic: seinen
     genres:
@@ -432198,12 +432425,67 @@ series:
     synopsis: 立原あゆみによる青年向け恋愛漫画。さくらんぼのような甘酸っぱい物語。
     status: completed
   - key: Q2875041|すーぱー・アスパラガス
+    magazine: null
+    demographic: shounen
+    genres:
+      - comedy
+    synopsis: すーぱー・アスパラガス。
+    status: completed
+    anime_adapted: false
   - key: Q2875041|スーパーマンの子供
+    magazine: null
+    demographic: shounen
+    genres:
+      - drama
+      - fantasy
+    synopsis: スーパーマンの子供。
+    status: completed
+    anime_adapted: false
   - key: Q2875041|ブラック・ジャック ALIVE
+    magazine: null
+    demographic: seinen
+    genres:
+      - medical
+      - anthology
+    synopsis: B.J.ALIVE。
+    status: completed
+    anime_adapted: false
   - key: Q2875041|プレッシャーあっぷるず
+    magazine: null
+    demographic: shoujo
+    genres:
+      - comedy
+      - romance
+    synopsis: プレッシャーあっぷるず。
+    status: completed
+    anime_adapted: false
   - key: Q2875041|プレ桜桃物語
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+      - romance
+    synopsis: プレ桜桃物語。
+    status: completed
+    anime_adapted: false
   - key: Q2875041|ボーイズ
+    magazine: null
+    demographic: shounen
+    genres:
+      - drama
+      - action
+    synopsis: ボーイズ。
+    status: completed
+    anime_adapted: false
   - key: Q2875041|ぼくたちの群れ
+    magazine: null
+    demographic: shounen
+    genres:
+      - drama
+      - school
+    synopsis: ぼくたちの群れ。
+    status: completed
+    anime_adapted: false
   - key: Q2875041|ぼくはウイリー!
     demographic: shoujo
     genres:
@@ -432219,10 +432501,48 @@ series:
     synopsis: 立原あゆみによる警察漫画。ポリ公(警察官)を主人公にした物語。
     status: completed
   - key: Q2875041|マルボウ!
+    magazine: null
+    demographic: shounen
+    genres:
+      - action
+      - drama
+    synopsis: マルボウ。
+    status: completed
+    anime_adapted: false
   - key: Q2875041|リストラ大王
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - comedy
+    synopsis: リストラ大王。
+    status: completed
+    anime_adapted: false
   - key: Q2875041|ルージュ
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+    synopsis: ルージュ。
+    status: completed
+    anime_adapted: false
   - key: Q2875041|ルージュ/red data book赤
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+    synopsis: ルージュ/red data book赤。
+    status: completed
+    anime_adapted: false
   - key: Q2875041|不良レポート
+    magazine: null
+    demographic: shounen
+    genres:
+      - drama
+      - school
+    synopsis: 不良レポート。
+    status: completed
+    anime_adapted: false
   - key: Q2875041|仁義
     magazine: weekly-manga-goraku
     demographic: seinen
@@ -432254,8 +432574,32 @@ series:
     synopsis: 立原あゆみ『仁義』抗争決着編。
     status: completed
   - key: Q2875041|仁義2
+    magazine: null
+    demographic: seinen
+    genres:
+      - yakuza
+      - drama
+    synopsis: 仁義2。
+    status: completed
+    anime_adapted: false
   - key: Q2875041|仁義AFTER
+    magazine: null
+    demographic: seinen
+    genres:
+      - yakuza
+      - drama
+    synopsis: 仁義AFTER。
+    status: completed
+    anime_adapted: false
   - key: Q2875041|仁義BEFORE
+    magazine: null
+    demographic: seinen
+    genres:
+      - yakuza
+      - drama
+    synopsis: 仁義BEFORE。
+    status: completed
+    anime_adapted: false
   - key: Q2875041|仁義S
     magazine: weekly-manga-goraku
     demographic: seinen
@@ -432275,8 +432619,32 @@ series:
     status: completed
     anime_adapted: false
   - key: Q2875041|先公
+    magazine: null
+    demographic: shounen
+    genres:
+      - drama
+      - school
+    synopsis: 先公教師ドラマ。
+    status: completed
+    anime_adapted: false
   - key: Q2875041|冒険王
+    magazine: null
+    demographic: shounen
+    genres:
+      - adventure
+      - anthology
+    synopsis: 冒険王。
+    status: completed
+    anime_adapted: false
   - key: Q2875041|喰人
+    magazine: null
+    demographic: seinen
+    genres:
+      - horror
+      - drama
+    synopsis: 喰人ホラー。
+    status: completed
+    anime_adapted: false
   - key: Q2875041|地球儀
     demographic: seinen
     genres:
@@ -432285,7 +432653,23 @@ series:
     synopsis: 立原あゆみによる青年漫画。地球儀を巡る人間ドラマ。
     status: completed
   - key: Q2875041|夢人
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - fantasy
+    synopsis: 夢人。
+    status: completed
+    anime_adapted: false
   - key: Q2875041|少女ざかり
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+      - romance
+    synopsis: 少女ざかり。
+    status: completed
+    anime_adapted: false
   - key: Q2875041|弱虫
     magazine: weekly-manga-goraku
     demographic: seinen
@@ -432296,6 +432680,13 @@ series:
     status: completed
     anime_adapted: false
   - key: Q2875041|弱虫 帆船のある町編
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+    synopsis: 弱虫帆船のある町編。
+    status: completed
+    anime_adapted: false
   - key: Q2875041|弱虫 静かな逃避行編
     demographic: seinen
     genres:
@@ -432320,10 +432711,50 @@ series:
     synopsis: 立原あゆみによる青年向け恋愛漫画。大人の恋愛模様を描く。
     status: completed
   - key: Q2875041|悪い男たち
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - yakuza
+    synopsis: 悪い男たち。
+    status: completed
+    anime_adapted: false
   - key: Q2875041|新Let'sダチ公
+    magazine: null
+    demographic: shounen
+    genres:
+      - action
+      - school
+    synopsis: 新Let'sダチ公。
+    status: completed
+    anime_adapted: false
   - key: Q2875041|新Let'sダチ公スペシャル
+    magazine: null
+    demographic: shounen
+    genres:
+      - action
+      - school
+    synopsis: 新Let'sダチ公スペシャル。
+    status: completed
+    anime_adapted: false
   - key: Q2875041|星家族
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+      - family
+    synopsis: 星家族。
+    status: completed
+    anime_adapted: false
   - key: Q2875041|月の教室
+    magazine: null
+    demographic: shoujo
+    genres:
+      - school
+      - drama
+    synopsis: 月の教室。
+    status: completed
+    anime_adapted: false
   - key: Q2875041|本気!
     magazine: manga-goraku
     demographic: seinen
@@ -432403,7 +432834,21 @@ series:
     synopsis: 立原あゆみが描く、東京を舞台にしたハードボイルドドラマ。
     status: completed
   - key: Q2875041|林檎たちの森
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+    synopsis: 林檎たちの森。
+    status: completed
+    anime_adapted: false
   - key: Q2875041|林檎物語
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+    synopsis: 林檎物語。
+    status: completed
+    anime_adapted: false
   - key: Q2875041|桜桃物語
     magazine: null
     demographic: seinen
@@ -432414,6 +432859,14 @@ series:
     status: completed
     anime_adapted: false
   - key: Q2875041|森のイルカ
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+      - fantasy
+    synopsis: 森のイルカ。
+    status: completed
+    anime_adapted: false
   - key: Q2875041|極道の食卓
     magazine: null
     demographic: seinen
@@ -432433,6 +432886,14 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q2875041|漫画が語る戦争
+    magazine: null
+    demographic: seinen
+    genres:
+      - war
+      - anthology
+    synopsis: 漫画が語る戦争。
+    status: completed
+    anime_adapted: false
   - key: Q2875041|熱くんの微熱
     demographic: shoujo
     genres:
@@ -432441,13 +432902,73 @@ series:
     synopsis: 立原あゆみによる少女ラブストーリー。熱くんの微熱な恋を描く。
     status: completed
   - key: Q2875041|熱狂短編マンガ傑作集'83
+    magazine: null
+    demographic: seinen
+    genres:
+      - anthology
+    synopsis: 短編マンガ傑作集。
+    status: completed
+    anime_adapted: false
   - key: Q2875041|猫の惑星
+    magazine: null
+    demographic: shoujo
+    genres:
+      - sci_fi
+      - drama
+    synopsis: 猫の惑星。
+    status: completed
+    anime_adapted: false
   - key: Q2875041|瞬くんの瞬間
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+    synopsis: 瞬くんの瞬間。
+    status: completed
+    anime_adapted: false
   - key: Q2875041|自由律
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+    synopsis: 自由律ドラマ。
+    status: completed
+    anime_adapted: false
   - key: Q2875041|花火
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+      - romance
+    synopsis: 花火短編。
+    status: completed
+    anime_adapted: false
   - key: Q2875041|草原白書
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+    synopsis: 草原白書。
+    status: completed
+    anime_adapted: false
   - key: Q2875041|遠い放課後
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+      - school
+    synopsis: 遠い放課後。
+    status: completed
+    anime_adapted: false
   - key: Q2875041|銀翼
+    magazine: null
+    demographic: seinen
+    genres:
+      - war
+      - action
+    synopsis: 銀翼戦記。
+    status: completed
+    anime_adapted: false
   - key: Q2875041|青の群れ
     demographic: seinen
     genres:
@@ -432456,6 +432977,13 @@ series:
     synopsis: 立原あゆみによる青年向けドラマ。青の群れを描く物語。
     status: completed
   - key: Q2875041|青銅時代
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+    synopsis: 青銅時代。
+    status: completed
+    anime_adapted: false
   - key: Q2875041|風家族
     demographic: seinen
     genres:
@@ -432473,6 +433001,14 @@ series:
     synopsis: 立原あゆみによる青年向けドラマ。森鴎外『ヰタ・セクスアリス』に倣った麦ちゃんの物語。
     status: completed
   - key: Q28802257|バーチャルYouTuberキズナアイ公式コミックアンソロジー
+    magazine: null
+    demographic: seinen
+    genres:
+      - anthology
+      - comedy
+    synopsis: キズナアイ公式アンソロジー。
+    status: completed
+    anime_adapted: false
   - key: Q28802257|ぶんぐりころころ
     magazine: null
     demographic: kodomo
@@ -432483,6 +433019,14 @@ series:
     status: completed
     anime_adapted: false
   - key: Q28802257|モジポニカ!
+    magazine: null
+    demographic: shoujo
+    genres:
+      - comedy
+      - fantasy
+    synopsis: モジポニカ。
+    status: completed
+    anime_adapted: false
   - key: Q28802257|八十亀ちゃんかんさつにっき
     magazine: null
     demographic: seinen
@@ -432501,6 +433045,14 @@ series:
     synopsis: 赤石路代による少女ファンタジー。「あると」の「あ」を描く物語。
     status: completed
   - key: Q2880551|6秒の9月
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+      - romance
+    synopsis: 赤石路代6秒の9月。
+    status: completed
+    anime_adapted: false
   - key: Q2880551|AMAKUSA 1637
     magazine: monthly-asuka
     demographic: shoujo
@@ -432512,6 +433064,13 @@ series:
     status: completed
     anime_adapted: false
   - key: Q2880551|NEWS 6:30
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+    synopsis: NEWS 6:30。
+    status: completed
+    anime_adapted: false
   - key: Q2880551|P.A
     magazine: ciao
     demographic: shoujo
@@ -432544,6 +433103,14 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q2880551|アスターリスク
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+      - romance
+    synopsis: アスターリスク。
+    status: completed
+    anime_adapted: false
   - key: Q2880551|アルペンローゼ
     magazine: ciao
     demographic: shoujo
@@ -432573,6 +433140,13 @@ series:
     status: completed
     anime_adapted: false
   - key: Q2880551|アンダー・スタディー
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+    synopsis: アンダー・スタディー。
+    status: completed
+    anime_adapted: false
   - key: Q2880551|うしろに何かみえてますが
     demographic: shoujo
     genres:
@@ -432597,8 +433171,30 @@ series:
     status: completed
     anime_adapted: false
   - key: Q2880551|エンジェル・トランペットアフター・ストーリーズ
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+    synopsis: エンジェル・トランペット続編。
+    status: completed
+    anime_adapted: false
   - key: Q2880551|キャッチ30秒
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - drama
+    synopsis: キャッチ30秒。
+    status: completed
+    anime_adapted: false
   - key: Q2880551|ケータイが落ちていた。
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+    synopsis: ケータイが落ちていた。
+    status: completed
+    anime_adapted: false
   - key: Q2880551|サイレント・アイ
     demographic: shoujo
     genres:
@@ -432614,9 +433210,39 @@ series:
     synopsis: 赤石路代による少女ドラマ。シネマの帝国を描く物語。
     status: completed
   - key: Q2880551|ストロベリームーン
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+    synopsis: ストロベリームーン。
+    status: completed
+    anime_adapted: false
   - key: Q2880551|スパークリングストリート
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+      - romance
+    synopsis: スパークリングストリート。
+    status: completed
+    anime_adapted: false
   - key: Q2880551|セブンピース
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+    synopsis: セブンピース。
+    status: completed
+    anime_adapted: false
   - key: Q2880551|デザート・ストーム
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+      - action
+    synopsis: デザート・ストーム。
+    status: completed
+    anime_adapted: false
   - key: Q2880551|ないしょのハーフムーン
     demographic: shoujo
     genres:
@@ -432633,7 +433259,23 @@ series:
     synopsis: 赤石路代が描く、不思議な少女RINを主人公にしたファンタジー少女漫画。
     status: completed
   - key: Q2880551|ファイヤーオンアイス
+    magazine: null
+    demographic: shoujo
+    genres:
+      - sports
+      - drama
+    synopsis: ファイヤーオンアイス。
+    status: completed
+    anime_adapted: false
   - key: Q2880551|フェアレディは涙をながす
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+      - romance
+    synopsis: フェアレディは涙をながす。
+    status: completed
+    anime_adapted: false
   - key: Q2880551|めもくらむ
     demographic: shoujo
     genres:
@@ -432650,8 +433292,30 @@ series:
     synopsis: 赤石路代が描く、フィギュアスケートに挑む少女のスポーツ少女漫画。
     status: completed
   - key: Q2880551|出会いと別離
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+    synopsis: 出会いと別離。
+    status: completed
+    anime_adapted: false
   - key: Q2880551|君ニ送ル11通ノ手紙
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+      - romance
+    synopsis: 君ニ送ル11通ノ手紙。
+    status: completed
+    anime_adapted: false
   - key: Q2880551|土曜日にはきっと行くから
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+    synopsis: 土曜日にはきっと行くから。
+    status: completed
+    anime_adapted: false
   - key: Q2880551|夜がおわらない
     demographic: shoujo
     genres:
@@ -432712,7 +433376,22 @@ series:
     synopsis: 赤石路代が描く、永遠の愛を描く大人少女漫画。
     status: completed
   - key: Q2880551|海ヘト続ク地図ニ無イ道
+    magazine: null
+    demographic: shoujo
+    genres:
+      - adventure
+      - drama
+    synopsis: 海ヘト続ク地図ニ無イ道。
+    status: completed
+    anime_adapted: false
   - key: Q2880551|燃えてMiko
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+    synopsis: 燃えてMiko。
+    status: completed
+    anime_adapted: false
   - key: Q2880551|神無月紫子の優雅な暇潰し
     magazine: null
     demographic: shoujo
@@ -432723,7 +433402,21 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q2880551|箱庭の茶室
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+    synopsis: 箱庭の茶室。
+    status: completed
+    anime_adapted: false
   - key: Q2880551|赤石路代The Best Selection
+    magazine: null
+    demographic: shoujo
+    genres:
+      - anthology
+    synopsis: 赤石路代ベスト集。
+    status: completed
+    anime_adapted: false
   - key: Q2880551|鎌倉けしや闇絵巻
     demographic: shoujo
     genres:
@@ -432732,6 +433425,14 @@ series:
     synopsis: 赤石路代が描く、鎌倉時代の闇を描く伝奇少女漫画。
     status: completed
   - key: Q2880551|雨の似合う部屋
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+      - romance
+    synopsis: 雨の似合う部屋。
+    status: completed
+    anime_adapted: false
   - key: Q2908735|10年ぶりに再会したクソガキは清純美少女JKに成長していた
     demographic: shounen
     genres:
@@ -432742,6 +433443,14 @@ series:
     status: ongoing
     anime_adapted: true
   - key: Q2908735|Tokyo 7thシスターズナナシス☆ダイアリー
+    magazine: null
+    demographic: seinen
+    genres:
+      - idol
+      - drama
+    synopsis: Tokyo 7thシスターズ。
+    status: completed
+    anime_adapted: false
   - key: Q2908735|お兄ちゃんだけど愛さえあれば関係ないよねっ
     magazine: monthly-comic-rex
     demographic: seinen
@@ -432771,7 +433480,23 @@ series:
     status: ongoing
     anime_adapted: false
   - key: Q2908735|異世界出版の編集さん
+    magazine: null
+    demographic: seinen
+    genres:
+      - fantasy
+      - comedy
+    synopsis: 異世界出版の編集さん。
+    status: completed
+    anime_adapted: false
   - key: Q290896|Crimson-Shell
+    magazine: null
+    demographic: shoujo
+    genres:
+      - fantasy
+      - action
+    synopsis: 望月淳Crimson-Shell。
+    status: completed
+    anime_adapted: false
   - key: Q290896|PandoraHearts
     magazine: monthly-gfantasy
     demographic: shounen
@@ -432784,6 +433509,14 @@ series:
     status: completed
     anime_adapted: true
   - key: Q290896|PandoraHearts「There is.」
+    magazine: null
+    demographic: shoujo
+    genres:
+      - fantasy
+      - drama
+    synopsis: PandoraHearts There is。
+    status: completed
+    anime_adapted: true
   - key: Q290896|ヴァニタスの手記
     magazine: monthly-gangan-joker
     demographic: shounen
@@ -432795,6 +433528,14 @@ series:
     status: completed
     anime_adapted: true
   - key: Q292664|BLUE WARS
+    magazine: null
+    demographic: shoujo
+    genres:
+      - action
+      - drama
+    synopsis: BLUE WARS。
+    status: completed
+    anime_adapted: false
   - key: Q292664|MVPは譲れない!
     demographic: shoujo
     genres:
@@ -432817,6 +433558,14 @@ series:
     alternative_titles:
       en: Skip Beat!
   - key: Q292664|夢で会うより素敵
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - drama
+    synopsis: 夢で会うより素敵。
+    status: completed
+    anime_adapted: false
   - key: Q292664|東京クレイジーパラダイス
     magazine: hana-to-yume
     demographic: shoujo
@@ -432829,6 +433578,14 @@ series:
     status: completed
     anime_adapted: false
   - key: Q292664|聖恋
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - fantasy
+    synopsis: 聖恋。
+    status: completed
+    anime_adapted: false
   - key: Q292715|ARISA
     magazine: nakayoshi
     demographic: shoujo
@@ -432840,6 +433597,14 @@ series:
     status: completed
     anime_adapted: false
   - key: Q292715|LET'S DANCE A WALTZ
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - drama
+    synopsis: LET'S DANCE A WALTZ。
+    status: completed
+    anime_adapted: false
   - key: Q292715|キッチンのお姫さま
     magazine: nakayoshi
     demographic: shoujo
