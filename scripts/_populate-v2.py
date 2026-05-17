@@ -144,6 +144,15 @@ def extract_volume_number(label: str, vol_field: str) -> tuple[int | None, str |
     """
     if vol_field:
         s = vol_field.strip()
+        # MADB 異常 record 正規化: '23　／　第23巻' (= 数字/separator/第N巻) → '第23巻'
+        m_dup = re.match(r"^(\d+)[\s　]*[／/|][\s　]*(第[〇零一二三四五六七八九十百千壱弐参肆伍陸漆捌玖拾\d]+[巻集編卷]?)$", s)
+        if m_dup:
+            n_str = m_dup.group(1)
+            return int(n_str), None, False
+        # 第<算用数字>巻 (= '第24巻') → vlabel=None (= 冗長 label 抑制)
+        m_plain = re.match(r"^第(\d+)[巻集編卷]$", s)
+        if m_plain:
+            return int(m_plain.group(1)), None, False
         # 純粋数字
         if re.match(r"^\d+$", s):
             return int(s), None, False
@@ -305,7 +314,13 @@ def main():
                 get_or_create_edition(r["brand"])
 
         # 4. volumes (= ISBN なしも 投入、 madb_book_id で uniqueness)
-        for book in c["books"]:
+        # 同 ISBN の重複 record (= MADB 内 別表記 entry) に対して date あり + vol あり
+        # 優先で sort、 後 record が dup skip される時 「情報量の多い方」 が 残るように。
+        sorted_books = sorted(
+            c["books"],
+            key=lambda b: (not bool(b.get("date")), not bool(b.get("vol"))),
+        )
+        for book in sorted_books:
             edition_id = get_or_create_edition(book["brand"])
             if edition_id is None:
                 continue

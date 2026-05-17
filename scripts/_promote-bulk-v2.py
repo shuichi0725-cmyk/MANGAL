@@ -225,9 +225,10 @@ def get_editions_with_volumes(con: sqlite3.Connection, series_ids: list[int] | i
     for ed in eds:
         if not edition_passes_filter(dict(ed)):
             continue
+        # ORDER BY で release_date NULL を 後回し (= date あり record を dedup で 優先採用)
         vols = cur.execute(
             """SELECT * FROM volumes WHERE edition_id=?
-               ORDER BY number, release_date""",
+               ORDER BY number, (release_date IS NULL), release_date""",
             (ed["id"],),
         ).fetchall()
         if not vols:
