@@ -1,41 +1,46 @@
-"""metadata104 を 全件 load → cluster 化 → .cache/series-v2.json 出力。
+"""新種2 build (= path B' option A hybrid)
 
-cluster 化 ロジック (= path B'):
+Phase 1: metadata104 を 全件 load → cluster 化 (= series identity の source of truth)
+Phase 2: metadata101 個別 book を 各 cluster に linkage
+Phase 3: 紐づかない orphan books を baseTitle で 自前集約 → 補完 cluster
+Phase 4: 合体 → .cache/series-v2.json
+
+cluster 化 ロジック (= Phase 1):
   - 各 MADB series record (= C25xxxx) を 以下の key で 集約:
-      (qid, base_title, subtitle)
+      (creator_id_or_name, base_title, subtitle)
   - 同じ key の records は 1 user-facing series (= edition variants として 統合)
+
+linkage ルール (= Phase 2):
+  - book を (base, subtitle, creator name) で cluster lookup
+  - 副題 ignore でも 試す (= 補助)
+
+orphan 集約 ルール (= Phase 3):
+  - book の (parsed_label, subtitle, primary creator) で grouping
+  - 副題分離は path B' のルール 適用 (= bare ` : ` で 別作品扱い)
 
 抽出ロジック:
   - creator: schema:creator (= '[著]高橋留美子' 等) から 名前抽出
             → mangaka.csv で name + alt_names match → qid 解決
-  - base_title + subtitle: rdfs:label の ` : ` で split (= 副題込みで identity)
-  - title_kana: schema:name の ja-hrkt entry から (= 最初の カタカナ)
+  - base_title + subtitle: rdfs:label / schema:name の ` : ` で split
+  - title_kana: schema:name の ja-hrkt entry から
   - title_official_en: schema:alternateName から ASCII のみ entry を 選択
-
-入力:
-  - .cache/madb/metadata104.json (= 139,130 series records)
-  - data/seed/mangaka.csv (= 6,751 mangaka with qid)
-
-出力:
-  - .cache/series-v2.json (= 全 cluster の dict array)
-  - stats: cluster 数 / qid 解決率 / 副題分離数 等を stderr に
 """
 
 import csv
 import json
 import re
 import sys
-from collections import defaultdict
+from collections import defaultdict, Counter
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 META104 = ROOT / ".cache" / "madb" / "metadata104.json"
+META101 = ROOT / ".cache" / "madb" / "metadata101-clean.json"
 MANGAKA_CSV = ROOT / "data" / "seed" / "mangaka.csv"
 OUT = ROOT / ".cache" / "series-v2.json"
 
 
 def load_mangaka_map() -> dict[str, dict]:
-    """name (+ alt_names) → mangaka info (qid, name, has_adult_credit)"""
     name_map: dict[str, dict] = {}
     with MANGAKA_CSV.open("r", encoding="utf-8") as f:
         reader = csv.DictReader(f)
@@ -54,7 +59,6 @@ def load_mangaka_map() -> dict[str, dict]:
 
 
 def extract_creator_names(schema_creator) -> list[str]:
-    """'[著]高橋留美子' '[原作]X / [漫画]Y' '[著]X∥xxxx' '[原作]X, Y' 等から 名前 list 抽出。"""
     if not schema_creator:
         return []
     if isinstance(schema_creator, list):
@@ -65,18 +69,13 @@ def extract_creator_names(schema_creator) -> list[str]:
         s = s.get("@value", "")
     if not isinstance(s, str):
         return []
-    # ' / ' (= space slash space) または ', ' で 複数著者分割
     parts = re.split(r"\s*[/,]\s+", s)
     names = []
     for chunk in parts:
-        # 役職 tag '[著]' '[原作]' 等を 剥がす
         chunk = re.sub(r"^\[[^\]]+\]\s*", "", chunk)
-        # ∥ (= U+2225) 以降 (= 振り仮名) を 落とす
         if "∥" in chunk:
             chunk = chunk.split("∥", 1)[0]
-        # 全/半角スペース trim
         chunk = chunk.strip().rstrip(",").strip()
-        # 末尾 「[ほか]」「[ほか作画]」 等のメタ tag を 剥がす
         chunk = re.sub(r"\s*\[[^\]]+\]\s*$", "", chunk).strip()
         if chunk:
             names.append(chunk)
@@ -92,7 +91,6 @@ def get_name_array(schema_name) -> list:
 
 
 def get_primary_label(name_arr) -> str:
-    """schema:name[0] = 主題 (= 副題込みの日本語題)"""
     if not name_arr:
         return ""
     first = name_arr[0]
@@ -104,7 +102,6 @@ def get_primary_label(name_arr) -> str:
 
 
 def get_kana_from_name(name_arr) -> str:
-    """schema:name の ja-hrkt language tag の中で 最初の katakana を 採用。"""
     if not name_arr:
         return ""
     for item in name_arr[1:]:
@@ -115,14 +112,12 @@ def get_kana_from_name(name_arr) -> str:
         v = item.get("@value", "")
         if not v:
             continue
-        # カタカナ含むなら 採用 (= 「URUSEI YATSURA」 は ローマ字 で skip、 「ウルセイ ヤツラ」 を 取る)
         if re.search(r"[ァ-ヿ]", v):
             return v
     return ""
 
 
 def get_official_en(alt_name) -> str:
-    """schema:alternateName から ASCII のみの 1 つを 採用。"""
     if not alt_name:
         return ""
     if not isinstance(alt_name, list):
@@ -134,35 +129,22 @@ def get_official_en(alt_name) -> str:
             v = item
         if not isinstance(v, str) or not v:
             continue
-        # ASCII の英数記号のみ ?
         if re.match(r"^[A-Za-z0-9\s\-\!\?\.\,\:\;\/\&\(\)']+$", v):
             return v
     return ""
 
 
 def parse_label(label: str) -> tuple[str, str]:
-    """rdfs:label → (base, subtitle)
-    ` : ` で 副題分離。 ` = ` 以降は (= 英語題) 剥がす。
-    巻番号 (` 第N巻` etc.) は metadata104 では 普通含まれないので 簡易処理。
-    """
+    """rdfs:label → (base, subtitle)。 ` = ` 以降 strip、 ` : ` で 副題分離。"""
     if not label:
         return "", ""
     t = label.strip()
-    # ` = ` 以降 strip (= 英語題は alternateName 側で取る)
     if " = " in t:
         t = t.split(" = ", 1)[0].strip()
-    # 副題 ` : Y` 分離
     if " : " in t:
         b, y = t.split(" : ", 1)
         return b.strip(), y.strip()
     return t, ""
-
-
-def get_qid_id(b) -> str:
-    c = b.get("dcterms:creator", {})
-    if isinstance(c, dict):
-        return c.get("@id", "").split("/")[-1]
-    return ""
 
 
 def get_brand_label(b) -> str:
@@ -177,29 +159,40 @@ def get_brand_label(b) -> str:
     return br if isinstance(br, str) else ""
 
 
-def main():
-    print(f"loading mangaka.csv ...", file=sys.stderr)
-    mangaka = load_mangaka_map()
-    print(f"  mangaka name → qid: {len(mangaka)} entries", file=sys.stderr)
+def get_isbn(b) -> str:
+    isbn = b.get("schema:isbn", "")
+    if isinstance(isbn, list):
+        isbn = isbn[0] if isbn else ""
+    return str(isbn or "")
 
-    print(f"loading metadata104 ...", file=sys.stderr)
+
+def get_vol(b) -> str:
+    vol = b.get("schema:volumeNumber", "") or ""
+    if isinstance(vol, list):
+        vol = vol[0] if vol else ""
+    return str(vol or "")
+
+
+# =============================================================================
+# Phase 1: metadata104 → clusters
+# =============================================================================
+
+def build_metadata104_clusters(mangaka: dict) -> tuple[list[dict], dict]:
+    print(f"[phase 1] loading {META104} ...", file=sys.stderr)
     with META104.open("r", encoding="utf-8") as f:
         data = json.load(f)
     print(f"  MADB series records: {len(data['@graph'])}", file=sys.stderr)
 
-    # cluster: (qid, base, subtitle) → list of MADB records
     clusters: dict[tuple[str, str, str], list[dict]] = defaultdict(list)
-    no_qid_records: list[dict] = []  # qid 解決失敗
     stats = {
-        "total_series_records": 0,
+        "total_madb104": 0,
         "qid_resolved": 0,
         "qid_unresolved": 0,
         "no_creator": 0,
         "no_label": 0,
     }
-
     for b in data["@graph"]:
-        stats["total_series_records"] += 1
+        stats["total_madb104"] += 1
         rdfs = b.get("rdfs:label", "")
         if not rdfs:
             stats["no_label"] += 1
@@ -208,13 +201,10 @@ def main():
         if not base:
             stats["no_label"] += 1
             continue
-
-        # creator 解決
         creator_names = extract_creator_names(b.get("schema:creator", ""))
         if not creator_names:
             stats["no_creator"] += 1
             continue
-        # 最初に hit する creator の qid を採用
         qid = ""
         matched_name = ""
         for nm in creator_names:
@@ -226,16 +216,12 @@ def main():
             stats["qid_resolved"] += 1
         else:
             stats["qid_unresolved"] += 1
-            # fallback: 作家名 (= 最初の name) を qid 代用 identifier に
             matched_name = creator_names[0]
 
-        # cluster に 追加
         name_arr = get_name_array(b.get("schema:name"))
         record = {
             "madb_id": b.get("schema:identifier"),
             "rdfs_label": rdfs,
-            "name_primary": get_primary_label(name_arr),
-            "name_array": name_arr,
             "title_kana": get_kana_from_name(name_arr),
             "official_en": get_official_en(b.get("schema:alternateName")),
             "creator_qid": qid,
@@ -246,106 +232,210 @@ def main():
             "number_of_items": b.get("schema:numberOfItems", 0),
             "content_rating": b.get("schema:contentRating", ""),
         }
-        # cluster key: qid あれば qid、 なければ creator_name で 区別
-        creator_id_part = qid if qid else f"name:{matched_name}"
-        clusters[(creator_id_part, base, subtitle)].append(record)
+        cluster_key_part = qid if qid else f"name:{matched_name}"
+        clusters[(cluster_key_part, base, subtitle)].append(record)
 
-    # cluster を list 化、 各 cluster で 集約値生成
+    # cluster → output dict
     clusters_out = []
-    for (creator_id_part, base, sub), records in clusters.items():
-        # title_kana: records の最頻値 (= 副題 と同じ logic)
-        from collections import Counter
+    for (_, base, sub), records in clusters.items():
         kana_counter = Counter(r["title_kana"] for r in records if r["title_kana"])
         title_kana = kana_counter.most_common(1)[0][0] if kana_counter else ""
-        # subtitle_kana: 各 record の ` : ` 右側 kana
         sub_kanas = []
         for r in records:
             tk = r["title_kana"]
             if " : " in tk:
                 sub_kanas.append(tk.split(" : ", 1)[1].strip())
         sub_kana = Counter(sub_kanas).most_common(1)[0][0] if sub_kanas else ""
-        # title_kana から ` : ` 以降剥がす
         if " : " in title_kana:
             title_kana = title_kana.split(" : ", 1)[0].strip()
 
-        # official_en: 最頻値
         en_counter = Counter(r["official_en"] for r in records if r["official_en"])
         official_en = en_counter.most_common(1)[0][0] if en_counter else ""
 
-        # series_key (= qid あり / なし で分岐)
-        # qid 取得は cluster 単位ではなく records[0] の qid を 採用 (= 同 cluster は同 creator)
         first_rec = records[0]
         creator_qid = first_rec["creator_qid"]
         creator_name = first_rec["creator_name_matched"]
-        if creator_qid:
-            id_part = f"qid:{creator_qid}"
-        else:
-            id_part = f"name:{creator_name}"
+        id_part = f"qid:{creator_qid}" if creator_qid else f"name:{creator_name}"
         if sub:
             series_key = f"{id_part}|name:{base}|sub:{sub}"
         else:
             series_key = f"{id_part}|name:{base}"
 
-        # adult flag: いずれかの record で 「成年コミック」 なら true
-        is_adult = any(
-            "成年" in (r["content_rating"] or "") for r in records
-        )
+        is_adult = any("成年" in (r["content_rating"] or "") for r in records)
 
-        clusters_out.append(
-            {
-                "series_key": series_key,
-                "qid": creator_qid,             # 解決済 qid (= 無ければ "")
-                "creator_name": creator_name,   # name fallback 用
-                "title": base,
-                "subtitle": sub,
-                "title_kana": title_kana,
-                "subtitle_kana": sub_kana,
-                "title_official_en": official_en,
-                "is_adult": is_adult,
-                "madb_records": records,
-                "n_madb_records": len(records),
-            }
-        )
+        clusters_out.append({
+            "series_key": series_key,
+            "source": "madb104",
+            "qid": creator_qid,
+            "creator_name": creator_name,
+            "title": base,
+            "subtitle": sub,
+            "title_kana": title_kana,
+            "subtitle_kana": sub_kana,
+            "title_official_en": official_en,
+            "is_adult": is_adult,
+            "madb_records": records,
+            "n_madb_records": len(records),
+            "books": [],
+        })
 
-    # 出力 sort: qid → base → subtitle
-    clusters_out.sort(key=lambda c: (c["qid"] or "zzz", c["title"], c["subtitle"]))
+    return clusters_out, stats
+
+
+# =============================================================================
+# Phase 2 + 3: metadata101 link + orphan aggregate
+# =============================================================================
+
+def link_and_aggregate(clusters: list[dict], mangaka: dict) -> dict:
+    print(f"[phase 2/3] loading {META101} ...", file=sys.stderr)
+    with META101.open("r", encoding="utf-8") as f:
+        data = json.load(f)
+    print(f"  books: {len(data['@graph'])}", file=sys.stderr)
+
+    # lookup index for Phase 1 clusters
+    # key: (base, subtitle, creator_name) → cluster index
+    cluster_idx: dict[tuple[str, str, str], int] = {}
+    cluster_idx_no_sub: dict[tuple[str, str], int] = {}
+    for i, c in enumerate(clusters):
+        for r in c["madb_records"]:
+            for nm in r["creator_names_all"]:
+                cluster_idx.setdefault((c["title"], c["subtitle"], nm), i)
+                cluster_idx_no_sub.setdefault((c["title"], nm), i)
+
+    stats = {
+        "total_books": 0,
+        "linked": 0,
+        "orphan_books": 0,
+        "no_label": 0,
+        "no_creator": 0,
+    }
+    orphan_groups: dict[tuple[str, str, str], list[dict]] = defaultdict(list)
+
+    for b in data["@graph"]:
+        stats["total_books"] += 1
+        label = get_primary_label(get_name_array(b.get("schema:name")))
+        if not label:
+            stats["no_label"] += 1
+            continue
+        base, sub = parse_label(label)
+        if not base:
+            stats["no_label"] += 1
+            continue
+        names = extract_creator_names(b.get("schema:creator", ""))
+        if not names:
+            stats["no_creator"] += 1
+            continue
+        # ISBN normalize は 後段 (= sqlite 投入時) で。 ここでは生 ISBN 保持。
+        book_record = {
+            "isbn": get_isbn(b),
+            "vol": get_vol(b),
+            "date": b.get("schema:datePublished", ""),
+            "brand": get_brand_label(b),
+            "label": label,
+            "creator_names": names,
+        }
+        # linkage 試行
+        matched_idx = None
+        for nm in names:
+            if (base, sub, nm) in cluster_idx:
+                matched_idx = cluster_idx[(base, sub, nm)]
+                break
+            if (base, nm) in cluster_idx_no_sub:
+                matched_idx = cluster_idx_no_sub[(base, nm)]
+                break
+        if matched_idx is not None:
+            clusters[matched_idx]["books"].append(book_record)
+            stats["linked"] += 1
+        else:
+            # orphan group key: (base, sub, primary creator)
+            orphan_groups[(base, sub, names[0])].append(book_record)
+            stats["orphan_books"] += 1
+
+    # orphan → cluster 化
+    orphan_out = []
+    for (base, sub, creator), books in orphan_groups.items():
+        qid = mangaka.get(creator, {}).get("qid", "")
+        id_part = f"qid:{qid}" if qid else f"name:{creator}"
+        if sub:
+            series_key = f"{id_part}|name:{base}|sub:{sub}|source:orphan"
+        else:
+            series_key = f"{id_part}|name:{base}|source:orphan"
+        # title_kana: 各 book に kana が無いので 空。 後で 別 source で 補強想定
+        # adult: book level の contentRating は metadata101 で 存在するなら拾う
+        orphan_out.append({
+            "series_key": series_key,
+            "source": "orphan101",
+            "qid": qid,
+            "creator_name": creator,
+            "title": base,
+            "subtitle": sub,
+            "title_kana": "",
+            "subtitle_kana": "",
+            "title_official_en": "",
+            "is_adult": False,  # TODO: book level rating で 判定
+            "madb_records": [],
+            "n_madb_records": 0,
+            "books": books,
+            "n_orphan_books": len(books),
+        })
+
+    stats["orphan_clusters"] = len(orphan_out)
+    return {
+        "stats": stats,
+        "orphan_clusters": orphan_out,
+        "clusters_with_books": clusters,
+    }
+
+
+# =============================================================================
+# Main
+# =============================================================================
+
+def main():
+    print(f"loading mangaka.csv ...", file=sys.stderr)
+    mangaka = load_mangaka_map()
+    print(f"  mangaka name → qid: {len(mangaka)} entries", file=sys.stderr)
+
+    # Phase 1
+    clusters, p1_stats = build_metadata104_clusters(mangaka)
+    print(f"\n[phase 1 stats]", file=sys.stderr)
+    for k, v in p1_stats.items():
+        print(f"  {k}: {v}", file=sys.stderr)
+    print(f"  clusters: {len(clusters)}", file=sys.stderr)
+
+    # Phase 2 + 3
+    out = link_and_aggregate(clusters, mangaka)
+    print(f"\n[phase 2/3 stats]", file=sys.stderr)
+    for k, v in out["stats"].items():
+        print(f"  {k}: {v}", file=sys.stderr)
+
+    # combine
+    all_clusters = out["clusters_with_books"] + out["orphan_clusters"]
+    all_clusters.sort(key=lambda c: (c["source"], c["qid"] or "zzz", c["title"], c["subtitle"]))
+
+    final_stats = {
+        "phase1_madb104": p1_stats,
+        "phase2_3_link": out["stats"],
+        "total_clusters": len(all_clusters),
+        "clusters_from_madb104": sum(1 for c in all_clusters if c["source"] == "madb104"),
+        "clusters_from_orphan": sum(1 for c in all_clusters if c["source"] == "orphan101"),
+        "clusters_with_books_attached": sum(1 for c in all_clusters if c["books"]),
+        "clusters_no_books": sum(1 for c in all_clusters if not c["books"]),
+    }
 
     OUT.parent.mkdir(parents=True, exist_ok=True)
     with OUT.open("w", encoding="utf-8") as f:
-        json.dump(
-            {"clusters": clusters_out, "stats": stats},
-            f,
-            ensure_ascii=False,
-            indent=2,
-        )
+        json.dump({"clusters": all_clusters, "stats": final_stats}, f, ensure_ascii=False, indent=2)
 
-    # stats を stderr へ
-    print("\n=== stats ===", file=sys.stderr)
-    print(f"  total series records   : {stats['total_series_records']:>7}", file=sys.stderr)
-    print(f"  qid resolved           : {stats['qid_resolved']:>7}", file=sys.stderr)
-    print(f"  qid unresolved (= log) : {stats['qid_unresolved']:>7}", file=sys.stderr)
-    print(f"  no creator             : {stats['no_creator']:>7}", file=sys.stderr)
-    print(f"  no label               : {stats['no_label']:>7}", file=sys.stderr)
-    print(f"  clusters (= 新 series) : {len(clusters_out):>7}", file=sys.stderr)
-    # 副題持ち cluster
-    with_sub = sum(1 for c in clusters_out if c["subtitle"])
-    print(f"  cluster with subtitle  : {with_sub:>7}", file=sys.stderr)
+    print(f"\n=== final stats ===", file=sys.stderr)
+    for k, v in final_stats.items():
+        if isinstance(v, dict):
+            print(f"  {k}:", file=sys.stderr)
+            for kk, vv in v.items():
+                print(f"    {kk}: {vv}", file=sys.stderr)
+        else:
+            print(f"  {k}: {v}", file=sys.stderr)
     print(f"\nwrote {OUT}", file=sys.stderr)
-
-    # 旧 種2 series 数 と 比較
-    try:
-        import sqlite3
-        c = sqlite3.connect(ROOT / ".cache" / "db.sqlite")
-        cur = c.cursor()
-        cur.execute("SELECT COUNT(*) FROM series")
-        old = cur.fetchone()[0]
-        print(f"\n  (reference) old 種 2 series rows: {old}", file=sys.stderr)
-        # qid resolution rate も
-        cur.execute("SELECT COUNT(*) FROM series WHERE qid IS NOT NULL")
-        old_qid = cur.fetchone()[0]
-        print(f"  (reference) old qid 解決済   : {old_qid}", file=sys.stderr)
-    except Exception:
-        pass
 
 
 if __name__ == "__main__":
