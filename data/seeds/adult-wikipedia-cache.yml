@@ -1,0 +1,6158 @@
+# data/seeds/adult-wikipedia-cache.yml
+# JA Wikipedia の 「成人向け漫画雑誌の一覧」 「日本の成人向け漫画家の一覧」 由来。
+# 生成: GitHub Actions fetch-adult-lists.yml (= scripts/fetch-adult-lists.ts +
+#       scripts/_dump-adult-tables.py)
+# 用途: scripts/_apply-adult-filter-v2.py が読込、 db-v2.sqlite に seed。
+
+schema_version: 1
+
+adult_publishers:
+  - name: エンジェル出版
+    source: wikipedia_adult_magazines
+  - name: オークラ出版
+    source: manual_seed
+  - name: キルタイムコミュニケーション
+    source: wikipedia_adult_magazines
+  - name: クロエ出版
+    source: wikipedia_adult_magazines
+  - name: コアマガジン
+    source: wikipedia_adult_magazines
+  - name: ジーオーティー
+    source: wikipedia_adult_magazines
+  - name: ティーアイネット
+    source: wikipedia_adult_magazines
+  - name: ヒット出版社
+    source: wikipedia_adult_magazines
+  - name: フランス書院
+    source: manual_seed
+  - name: ブレインハウス
+    source: wikipedia_adult_magazines
+  - name: メロンブックス
+    source: wikipedia_adult_magazines
+  - name: ワニマガジン社
+    source: wikipedia_adult_magazines
+  - name: 一水社
+    source: wikipedia_adult_magazines
+  - name: 三和出版
+    source: wikipedia_adult_magazines
+  - name: 久保書店
+    source: manual_seed
+  - name: 司書房
+    source: manual_seed
+  - name: 文苑堂
+    source: wikipedia_adult_magazines
+  - name: 楽楽出版
+    source: wikipedia_adult_magazines
+  - name: 白夜書房
+    source: manual_seed
+  - name: 秋水社
+    source: wikipedia_adult_magazines
+  - name: 茜新社
+    source: wikipedia_adult_magazines
+
+adult_mangaka_known:
+  - name: 3号リラ
+    display: 3号リラ
+    source: wikipedia_adult_mangaka_list
+  - name: "<!翔丸"
+    display: "<!-- 翔丸"
+    source: wikipedia_adult_mangaka_list
+  - name: "A10(漫画家)"
+    display: "A-10 (漫画家)"
+    source: wikipedia_adult_mangaka_list
+  - name: AHOBAKA
+    display: AHOBAKA
+    source: wikipedia_adult_mangaka_list
+  - name: "AKIRA(漫画家)"
+    display: "AKIRA (漫画家)"
+    source: wikipedia_adult_mangaka_list
+  - name: AMDVL
+    display: AM-DVL
+    source: wikipedia_adult_mangaka_list
+  - name: ANDY
+    display: ANDY
+    source: wikipedia_adult_mangaka_list
+  - name: "Aoko(漫画家)"
+    display: "Aoko (漫画家)"
+    source: wikipedia_adult_mangaka_list
+  - name: Ash横島
+    display: Ash横島
+    source: wikipedia_adult_mangaka_list
+  - name: "BENNY'S"
+    display: "BENNY'S"
+    source: wikipedia_adult_mangaka_list
+  - name: "BLUEBLOOD(漫画家)"
+    display: "BLUE BLOOD (漫画家)"
+    source: wikipedia_adult_mangaka_list
+  - name: BMARY
+    display: B-MARY
+    source: wikipedia_adult_mangaka_list
+  - name: BOSS珍
+    display: BOSS珍
+    source: wikipedia_adult_mangaka_list
+  - name: BTあづま
+    display: B.T.あづま
+    source: wikipedia_adult_mangaka_list
+  - name: "Beat(漫画家)"
+    display: "Beat (漫画家)"
+    source: wikipedia_adult_mangaka_list
+  - name: "Bell's"
+    display: "Bell's"
+    source: wikipedia_adult_mangaka_list
+  - name: Beなんとか
+    display: Beなんとか
+    source: wikipedia_adult_mangaka_list
+  - name: Boichi
+    display: Boichi
+    source: wikipedia_adult_mangaka_list
+  - name: Bたろう
+    display: B.たろう
+    source: wikipedia_adult_mangaka_list
+  - name: "CAW=ZOO"
+    display: "CAW=ZOO"
+    source: wikipedia_adult_mangaka_list
+  - name: Cuvie
+    display: Cuvie
+    source: wikipedia_adult_mangaka_list
+  - name: "DASH(漫画家)"
+    display: "DASH (漫画家)"
+    source: wikipedia_adult_mangaka_list
+  - name: DELTAM
+    display: "DELTA・M"
+    source: wikipedia_adult_mangaka_list
+  - name: DENJIRO
+    display: DENJIRO
+    source: wikipedia_adult_mangaka_list
+  - name: DEN助
+    display: DEN助
+    source: wikipedia_adult_mangaka_list
+  - name: "DISTANCE(漫画家)"
+    display: "DISTANCE (漫画家)"
+    source: wikipedia_adult_mangaka_list
+  - name: DONKEY
+    display: DONKEY
+    source: wikipedia_adult_mangaka_list
+  - name: DON繁
+    display: DON繁
+    source: wikipedia_adult_mangaka_list
+  - name: "De(漫画家)"
+    display: "De (漫画家)"
+    source: wikipedia_adult_mangaka_list
+  - name: DrP
+    display: "Dr. P"
+    source: wikipedia_adult_mangaka_list
+  - name: DrぴょんR
+    display: Dr.ぴょんR
+    source: wikipedia_adult_mangaka_list
+  - name: Drライスケ
+    display: Dr.ライスケ
+    source: wikipedia_adult_mangaka_list
+  - name: Dr天
+    display: Dr.天
+    source: wikipedia_adult_mangaka_list
+  - name: EB110SS
+    display: EB110SS
+    source: wikipedia_adult_mangaka_list
+  - name: "EBA(漫画家)"
+    display: "EBA (漫画家)"
+    source: wikipedia_adult_mangaka_list
+  - name: "EXTREME(漫画家)"
+    display: "EXTREME (漫画家)"
+    source: wikipedia_adult_mangaka_list
+  - name: "Emily(漫画家)"
+    display: "Emily (漫画家)"
+    source: wikipedia_adult_mangaka_list
+  - name: "F4U(漫画家)"
+    display: "F4U (漫画家)"
+    source: wikipedia_adult_mangaka_list
+  - name: FEENAA
+    display: FEENAA
+    source: wikipedia_adult_mangaka_list
+  - name: "G=ヒコロウ"
+    display: "G＝ヒコロウ"
+    source: wikipedia_adult_mangaka_list
+  - name: "GEN(漫画家)"
+    display: "GEN (漫画家)"
+    source: wikipedia_adult_mangaka_list
+  - name: GHtype
+    display: GHtype
+    source: wikipedia_adult_mangaka_list
+  - name: GRIFON
+    display: GRIFON
+    source: wikipedia_adult_mangaka_list
+  - name: HEAVEN11
+    display: "HEAVEN・11"
+    source: wikipedia_adult_mangaka_list
+  - name: "Hal(漫画家)"
+    display: "Hal (漫画家)"
+    source: wikipedia_adult_mangaka_list
+  - name: Hamao
+    display: Hamao
+    source: wikipedia_adult_mangaka_list
+  - name: Hisasi
+    display: Hisasi
+    source: wikipedia_adult_mangaka_list
+  - name: Hmagic
+    display: H-magic
+    source: wikipedia_adult_mangaka_list
+  - name: ISUTOSHI
+    display: ISUTOSHI
+    source: wikipedia_adult_mangaka_list
+  - name: "Jun(漫画家)"
+    display: "Jun (漫画家)"
+    source: wikipedia_adult_mangaka_list
+  - name: KAKERU
+    display: KAKERU
+    source: wikipedia_adult_mangaka_list
+  - name: KASHIみちのく
+    display: KASHIみちのく
+    source: wikipedia_adult_mangaka_list
+  - name: KEPPI
+    display: KEPPI
+    source: wikipedia_adult_mangaka_list
+  - name: "KIKI(漫画家)"
+    display: "KIKI (漫画家)"
+    source: wikipedia_adult_mangaka_list
+  - name: "KINGOH!"
+    display: "KING-OH!"
+    source: wikipedia_adult_mangaka_list
+  - name: "KOJIROU!"
+    display: "KOJIROU!"
+    source: wikipedia_adult_mangaka_list
+  - name: Ken1
+    display: Ken-1
+    source: wikipedia_adult_mangaka_list
+  - name: K津斗夢
+    display: "K・津斗夢"
+    source: wikipedia_adult_mangaka_list
+  - name: LALAmate
+    display: LALAmate
+    source: wikipedia_adult_mangaka_list
+  - name: "LEE(漫画家)"
+    display: "LEE (漫画家)"
+    source: wikipedia_adult_mangaka_list
+  - name: LEYMEI
+    display: LEYMEI
+    source: wikipedia_adult_mangaka_list
+  - name: LINDA
+    display: LINDA
+    source: wikipedia_adult_mangaka_list
+  - name: "LapisLazuli(漫画家)"
+    display: "Lapis Lazuli (漫画家)"
+    source: wikipedia_adult_mangaka_list
+  - name: LazyClub
+    display: "Lazy Club"
+    source: wikipedia_adult_mangaka_list
+  - name: "Louis&Visee"
+    display: "Louis&Visee"
+    source: wikipedia_adult_mangaka_list
+  - name: MACKY
+    display: MACKY
+    source: wikipedia_adult_mangaka_list
+  - name: MACV
+    display: MAC-V
+    source: wikipedia_adult_mangaka_list
+  - name: "MAKI(漫画家)"
+    display: "MAKI (漫画家)"
+    source: wikipedia_adult_mangaka_list
+  - name: MALUMI
+    display: MALUMI
+    source: wikipedia_adult_mangaka_list
+  - name: MARUTA
+    display: MARUTA
+    source: wikipedia_adult_mangaka_list
+  - name: MEE
+    display: MEE
+    source: wikipedia_adult_mangaka_list
+  - name: MGジョー
+    display: MGジョー
+    source: wikipedia_adult_mangaka_list
+  - name: MITSUO
+    display: MITSUO
+    source: wikipedia_adult_mangaka_list
+  - name: MOMO
+    display: "MO・MO"
+    source: wikipedia_adult_mangaka_list
+  - name: MONMON
+    display: MON-MON
+    source: wikipedia_adult_mangaka_list
+  - name: MRB
+    display: MR.B
+    source: wikipedia_adult_mangaka_list
+  - name: Macop
+    display: Macop.
+    source: wikipedia_adult_mangaka_list
+  - name: "Maruto!"
+    display: "Maruto!"
+    source: wikipedia_adult_mangaka_list
+  - name: Mえっち系
+    display: Mえっち系
+    source: wikipedia_adult_mangaka_list
+  - name: NOちゃちゃ丸
+    display: N.O.ちゃちゃ丸
+    source: wikipedia_adult_mangaka_list
+  - name: NeWMeN
+    display: NeWMeN
+    source: wikipedia_adult_mangaka_list
+  - name: "Noise(漫画家)"
+    display: "Noise (漫画家)"
+    source: wikipedia_adult_mangaka_list
+  - name: OKAMA
+    display: OKAMA
+    source: wikipedia_adult_mangaka_list
+  - name: OKAWARI
+    display: OKAWARI
+    source: wikipedia_adult_mangaka_list
+  - name: OKINA
+    display: OKINA
+    source: wikipedia_adult_mangaka_list
+  - name: ORI
+    display: O.RI
+    source: wikipedia_adult_mangaka_list
+  - name: OUMA
+    display: OUMA
+    source: wikipedia_adult_mangaka_list
+  - name: PONPON
+    display: PONPON
+    source: wikipedia_adult_mangaka_list
+  - name: PROPER
+    display: PROPER
+    source: wikipedia_adult_mangaka_list
+  - name: PURUpyon西東
+    display: PURUpyon西東
+    source: wikipedia_adult_mangaka_list
+  - name: "Q(漫画家)"
+    display: "Q (漫画家)"
+    source: wikipedia_adult_mangaka_list
+  - name: RANKA
+    display: RANKA
+    source: wikipedia_adult_mangaka_list
+  - name: "RAVEN(漫画家)"
+    display: "RAVEN (漫画家)"
+    source: wikipedia_adult_mangaka_list
+  - name: RAYMON
+    display: RAYMON
+    source: wikipedia_adult_mangaka_list
+  - name: REDLIGHT
+    display: REDLIGHT
+    source: wikipedia_adult_mangaka_list
+  - name: REDRUM
+    display: RED-RUM
+    source: wikipedia_adult_mangaka_list
+  - name: REN
+    display: REN
+    source: wikipedia_adult_mangaka_list
+  - name: RIKI
+    display: RIKI
+    source: wikipedia_adult_mangaka_list
+  - name: RINRIN
+    display: RINRIN
+    source: wikipedia_adult_mangaka_list
+  - name: RKIDS
+    display: R-KIDS
+    source: wikipedia_adult_mangaka_list
+  - name: RaTe
+    display: RaTe
+    source: wikipedia_adult_mangaka_list
+  - name: ReDrop
+    display: ReDrop
+    source: wikipedia_adult_mangaka_list
+  - name: "Rico(漫画家)"
+    display: "Rico (漫画家)"
+    source: wikipedia_adult_mangaka_list
+  - name: RustySoul
+    display: "Rusty Soul"
+    source: wikipedia_adult_mangaka_list
+  - name: SABE
+    display: SABE
+    source: wikipedia_adult_mangaka_list
+  - name: SABUROH
+    display: SABUROH
+    source: wikipedia_adult_mangaka_list
+  - name: "SAS(漫画家)"
+    display: "SAS (漫画家)"
+    source: wikipedia_adult_mangaka_list
+  - name: SASAYUKi
+    display: SASAYUKi
+    source: wikipedia_adult_mangaka_list
+  - name: SHIZUKA
+    display: SHIZUKA
+    source: wikipedia_adult_mangaka_list
+  - name: SPY
+    display: S.P.Y
+    source: wikipedia_adult_mangaka_list
+  - name: SeeO
+    display: See.O
+    source: wikipedia_adult_mangaka_list
+  - name: ShAKe
+    display: ShAKe
+    source: wikipedia_adult_mangaka_list
+  - name: "T'ege"
+    display: "T'ege"
+    source: wikipedia_adult_mangaka_list
+  - name: TAGRO
+    display: TAGRO
+    source: wikipedia_adult_mangaka_list
+  - name: TAMAO
+    display: TAMAO
+    source: wikipedia_adult_mangaka_list
+  - name: THESEIJI
+    display: "THE SEIJI"
+    source: wikipedia_adult_mangaka_list
+  - name: TK1
+    display: T.K-1
+    source: wikipedia_adult_mangaka_list
+  - name: "TRIGGER(漫画家)"
+    display: "TRIGGER (漫画家)"
+    source: wikipedia_adult_mangaka_list
+  - name: TRUMP
+    display: TRUMP
+    source: wikipedia_adult_mangaka_list
+  - name: "TWILIGHT(漫画家)"
+    display: "TWILIGHT (漫画家)"
+    source: wikipedia_adult_mangaka_list
+  - name: TYPE90
+    display: TYPE90
+    source: wikipedia_adult_mangaka_list
+  - name: TriageTag
+    display: "Triage Tag"
+    source: wikipedia_adult_mangaka_list
+  - name: TwinBox
+    display: TwinBox
+    source: wikipedia_adult_mangaka_list
+  - name: T郁弥
+    display: "T・郁弥"
+    source: wikipedia_adult_mangaka_list
+  - name: "UK(漫画家)"
+    display: "U-K (漫画家)"
+    source: wikipedia_adult_mangaka_list
+  - name: "URAN(漫画家)"
+    display: "URAN (漫画家)"
+    source: wikipedia_adult_mangaka_list
+  - name: "Usi(成年漫画家)"
+    display: "Usi (成年漫画家)"
+    source: wikipedia_adult_mangaka_list
+  - name: "WING☆BIRD"
+    display: "WING☆BIRD"
+    source: wikipedia_adult_mangaka_list
+  - name: WoodyRinn
+    display: Woody-Rinn
+    source: wikipedia_adult_mangaka_list
+  - name: Yaski
+    display: Yaski
+    source: wikipedia_adult_mangaka_list
+  - name: ZERRY藤尾
+    display: ZERRY藤尾
+    source: wikipedia_adult_mangaka_list
+  - name: "ZION(漫画家)"
+    display: "ZION (漫画家)"
+    source: wikipedia_adult_mangaka_list
+  - name: ZOL
+    display: ZOL
+    source: wikipedia_adult_mangaka_list
+  - name: ZUKI樹
+    display: ZUKI樹
+    source: wikipedia_adult_mangaka_list
+  - name: Zummy
+    display: Zummy
+    source: wikipedia_adult_mangaka_list
+  - name: chaccu
+    display: chaccu
+    source: wikipedia_adult_mangaka_list
+  - name: "clover(漫画家)"
+    display: "clover (漫画家)"
+    source: wikipedia_adult_mangaka_list
+  - name: elfk
+    display: elf.k
+    source: wikipedia_adult_mangaka_list
+  - name: "faith(漫画家)"
+    display: "faith (漫画家)"
+    source: wikipedia_adult_mangaka_list
+  - name: kanbe
+    display: kanbe
+    source: wikipedia_adult_mangaka_list
+  - name: "kika=ざる"
+    display: "kika=ざる"
+    source: wikipedia_adult_mangaka_list
+  - name: kinntarou
+    display: kinntarou
+    source: wikipedia_adult_mangaka_list
+  - name: mizu
+    display: mizu
+    source: wikipedia_adult_mangaka_list
+  - name: mogg
+    display: mogg
+    source: wikipedia_adult_mangaka_list
+  - name: momi
+    display: momi
+    source: wikipedia_adult_mangaka_list
+  - name: saitom
+    display: saitom
+    source: wikipedia_adult_mangaka_list
+  - name: urute
+    display: urute
+    source: wikipedia_adult_mangaka_list
+  - name: utu
+    display: utu
+    source: wikipedia_adult_mangaka_list
+  - name: "vanilla(漫画家)"
+    display: "vanilla (漫画家)"
+    source: wikipedia_adult_mangaka_list
+  - name: zen9
+    display: zen9
+    source: wikipedia_adult_mangaka_list
+  - name: "あ〜るこが"
+    display: "あ〜る・こが"
+    source: wikipedia_adult_mangaka_list
+  - name: あいかわくみか
+    display: あいかわくみか
+    source: wikipedia_adult_mangaka_list
+  - name: あいけん
+    display: あいけん
+    source: wikipedia_adult_mangaka_list
+  - name: あいじん
+    display: "あい・じん"
+    source: wikipedia_adult_mangaka_list
+  - name: あうら聖児
+    display: あうら聖児
+    source: wikipedia_adult_mangaka_list
+  - name: あおいにゃおこ
+    display: あおいにゃおこ
+    source: wikipedia_adult_mangaka_list
+  - name: あかいすいせい
+    display: あかいすいせい
+    source: wikipedia_adult_mangaka_list
+  - name: あかうめ
+    display: あかうめ
+    source: wikipedia_adult_mangaka_list
+  - name: あかざわRED
+    display: あかざわRED
+    source: wikipedia_adult_mangaka_list
+  - name: あがた有為
+    display: あがた有為
+    source: wikipedia_adult_mangaka_list
+  - name: あきすぐり
+    display: あきすぐり
+    source: wikipedia_adult_mangaka_list
+  - name: あきのそら
+    display: あきのそら
+    source: wikipedia_adult_mangaka_list
+  - name: "あきは@"
+    display: "あきは@"
+    source: wikipedia_adult_mangaka_list
+  - name: あきひこ
+    display: あきひこ
+    source: wikipedia_adult_mangaka_list
+  - name: あきふじさとし
+    display: あきふじさとし
+    source: wikipedia_adult_mangaka_list
+  - name: あきやまけんた
+    display: あきやまけんた
+    source: wikipedia_adult_mangaka_list
+  - name: あきら肇
+    display: あきら肇
+    source: wikipedia_adult_mangaka_list
+  - name: "あここ。"
+    display: "あここ。"
+    source: wikipedia_adult_mangaka_list
+  - name: あさいもとゆき
+    display: あさいもとゆき
+    source: wikipedia_adult_mangaka_list
+  - name: あさの亜依
+    display: あさの亜依
+    source: wikipedia_adult_mangaka_list
+  - name: "あしか(漫画家)"
+    display: "あしか (漫画家)"
+    source: wikipedia_adult_mangaka_list
+  - name: あじまる
+    display: あじまる
+    source: wikipedia_adult_mangaka_list
+  - name: あずき紅
+    display: あずき紅
+    source: wikipedia_adult_mangaka_list
+  - name: あずまきよひこ
+    display: あずまきよひこ
+    source: wikipedia_adult_mangaka_list
+  - name: あずまゆき
+    display: あずまゆき
+    source: wikipedia_adult_mangaka_list
+  - name: あたげ
+    display: あたげ
+    source: wikipedia_adult_mangaka_list
+  - name: あだちけん
+    display: あだちけん
+    source: wikipedia_adult_mangaka_list
+  - name: あづき甘栗
+    display: あづき甘栗
+    source: wikipedia_adult_mangaka_list
+  - name: あとりK
+    display: あとりK
+    source: wikipedia_adult_mangaka_list
+  - name: あぶひゃく
+    display: あぶひゃく
+    source: wikipedia_adult_mangaka_list
+  - name: あべつくも
+    display: あべつくも
+    source: wikipedia_adult_mangaka_list
+  - name: あべもりおか
+    display: あべもりおか
+    source: wikipedia_adult_mangaka_list
+  - name: あまあま
+    display: あまあま
+    source: wikipedia_adult_mangaka_list
+  - name: あまぎみちひと
+    display: あまぎみちひと
+    source: wikipedia_adult_mangaka_list
+  - name: あまなつまこと
+    display: あまなつまこと
+    source: wikipedia_adult_mangaka_list
+  - name: あまのがみだい
+    display: あまのがみだい
+    source: wikipedia_adult_mangaka_list
+  - name: "あまのよ〜き"
+    display: "あまの・よ〜き"
+    source: wikipedia_adult_mangaka_list
+  - name: あまゆみ
+    display: あまゆみ
+    source: wikipedia_adult_mangaka_list
+  - name: あやかわりく
+    display: あやかわりく
+    source: wikipedia_adult_mangaka_list
+  - name: あゆま紗由
+    display: あゆま紗由
+    source: wikipedia_adult_mangaka_list
+  - name: あらいぐま
+    display: あらいぐま
+    source: wikipedia_adult_mangaka_list
+  - name: あらきあきら
+    display: あらきあきら
+    source: wikipedia_adult_mangaka_list
+  - name: あらきかなお
+    display: あらきかなお
+    source: wikipedia_adult_mangaka_list
+  - name: あらなが輝
+    display: あらなが輝
+    source: wikipedia_adult_mangaka_list
+  - name: ありのひろし
+    display: ありのひろし
+    source: wikipedia_adult_mangaka_list
+  - name: あろうれい
+    display: あろうれい
+    source: wikipedia_adult_mangaka_list
+  - name: あろひろし
+    display: あろひろし
+    source: wikipedia_adult_mangaka_list
+  - name: あわじひめじ
+    display: あわじひめじ
+    source: wikipedia_adult_mangaka_list
+  - name: いくさりゅうじ
+    display: いくさりゅうじ
+    source: wikipedia_adult_mangaka_list
+  - name: いけださくら
+    display: いけださくら
+    source: wikipedia_adult_mangaka_list
+  - name: いずみの杏理
+    display: いずみの杏理
+    source: wikipedia_adult_mangaka_list
+  - name: いただき頂上
+    display: いただき頂上
+    source: wikipedia_adult_mangaka_list
+  - name: いたちょう
+    display: いたちょう
+    source: wikipedia_adult_mangaka_list
+  - name: いちはや
+    display: いちはや
+    source: wikipedia_adult_mangaka_list
+  - name: いちまつ
+    display: いちまつ
+    source: wikipedia_adult_mangaka_list
+  - name: いづみやおとは
+    display: いづみやおとは
+    source: wikipedia_adult_mangaka_list
+  - name: いとうえい
+    display: いとうえい
+    source: wikipedia_adult_mangaka_list
+  - name: いとう直
+    display: いとう直
+    source: wikipedia_adult_mangaka_list
+  - name: いぬぶろ
+    display: いぬぶろ
+    source: wikipedia_adult_mangaka_list
+  - name: いのの
+    display: いのの
+    source: wikipedia_adult_mangaka_list
+  - name: いぶきち
+    display: いぶきち
+    source: wikipedia_adult_mangaka_list
+  - name: いぶきのぶたか
+    display: いぶきのぶたか
+    source: wikipedia_adult_mangaka_list
+  - name: いまいずみあつし
+    display: いまいずみあつし
+    source: wikipedia_adult_mangaka_list
+  - name: いまざきいつき
+    display: いまざきいつき
+    source: wikipedia_adult_mangaka_list
+  - name: いるまかみり
+    display: いるまかみり
+    source: wikipedia_adult_mangaka_list
+  - name: いわまよしき
+    display: いわまよしき
+    source: wikipedia_adult_mangaka_list
+  - name: いわまん
+    display: いわまん
+    source: wikipedia_adult_mangaka_list
+  - name: いトう
+    display: いトう
+    source: wikipedia_adult_mangaka_list
+  - name: いーむすアキ
+    display: "いーむす・アキ"
+    source: wikipedia_adult_mangaka_list
+  - name: "ういろう(漫画家)"
+    display: "ういろう (漫画家)"
+    source: wikipedia_adult_mangaka_list
+  - name: うういずみ
+    display: うういずみ
+    source: wikipedia_adult_mangaka_list
+  - name: うえかん
+    display: うえかん
+    source: wikipedia_adult_mangaka_list
+  - name: うおなてれぴん
+    display: うおなてれぴん
+    source: wikipedia_adult_mangaka_list
+  - name: うさぎのたまご
+    display: うさぎのたまご
+    source: wikipedia_adult_mangaka_list
+  - name: うさくん
+    display: うさくん
+    source: wikipedia_adult_mangaka_list
+  - name: うさみ優
+    display: うさみ優
+    source: wikipedia_adult_mangaka_list
+  - name: うさ銀太郎
+    display: うさ銀太郎
+    source: wikipedia_adult_mangaka_list
+  - name: うすべに桜子
+    display: うすべに桜子
+    source: wikipedia_adult_mangaka_list
+  - name: うたたねひろゆき
+    display: うたたねひろゆき
+    source: wikipedia_adult_mangaka_list
+  - name: うた乃
+    display: うた乃
+    source: wikipedia_adult_mangaka_list
+  - name: うちの文吾
+    display: うちの文吾
+    source: wikipedia_adult_mangaka_list
+  - name: うまくち醤油
+    display: うまくち醤油
+    source: wikipedia_adult_mangaka_list
+  - name: うましか
+    display: うましか
+    source: wikipedia_adult_mangaka_list
+  - name: "うみうし(漫画家)"
+    display: "うみうし (漫画家)"
+    source: wikipedia_adult_mangaka_list
+  - name: うめやしきみつよし
+    display: うめやしきみつよし
+    source: wikipedia_adult_mangaka_list
+  - name: うらべすう
+    display: うらべすう
+    source: wikipedia_adult_mangaka_list
+  - name: うろたん
+    display: うろたん
+    source: wikipedia_adult_mangaka_list
+  - name: うーりん
+    display: うーりん
+    source: wikipedia_adult_mangaka_list
+  - name: えかきびと
+    display: えかきびと
+    source: wikipedia_adult_mangaka_list
+  - name: えこふぃるたぁ
+    display: えこふぃるたぁ
+    source: wikipedia_adult_mangaka_list
+  - name: えすお
+    display: えすお
+    source: wikipedia_adult_mangaka_list
+  - name: えのあきら
+    display: えのあきら
+    source: wikipedia_adult_mangaka_list
+  - name: えばら翔
+    display: えばら翔
+    source: wikipedia_adult_mangaka_list
+  - name: えびふらい
+    display: えびふらい
+    source: wikipedia_adult_mangaka_list
+  - name: おおたたけし
+    display: おおたたけし
+    source: wikipedia_adult_mangaka_list
+  - name: おおとりりゅうじ
+    display: おおとりりゅうじ
+    source: wikipedia_adult_mangaka_list
+  - name: おおなみつとし
+    display: おおなみつとし
+    source: wikipedia_adult_mangaka_list
+  - name: おおぬまひろし
+    display: おおぬまひろし
+    source: wikipedia_adult_mangaka_list
+  - name: おかもとふじお
+    display: おかもとふじお
+    source: wikipedia_adult_mangaka_list
+  - name: おかもと大輔
+    display: おかもと大輔
+    source: wikipedia_adult_mangaka_list
+  - name: おかゆさん
+    display: おかゆさん
+    source: wikipedia_adult_mangaka_list
+  - name: "おから(漫画家)"
+    display: "おから (漫画家)"
+    source: wikipedia_adult_mangaka_list
+  - name: おがわ甘藍
+    display: おがわ甘藍
+    source: wikipedia_adult_mangaka_list
+  - name: おちよしひこ
+    display: おちよしひこ
+    source: wikipedia_adult_mangaka_list
+  - name: おりもとみまな
+    display: おりもとみまな
+    source: wikipedia_adult_mangaka_list
+  - name: かいづか
+    display: かいづか
+    source: wikipedia_adult_mangaka_list
+  - name: かいとうぴんく
+    display: かいとうぴんく
+    source: wikipedia_adult_mangaka_list
+  - name: かかし朝浩
+    display: かかし朝浩
+    source: wikipedia_adult_mangaka_list
+  - name: かがみふみを
+    display: かがみふみを
+    source: wikipedia_adult_mangaka_list
+  - name: かすかべはじめ
+    display: かすかべはじめ
+    source: wikipedia_adult_mangaka_list
+  - name: かすみ亜里沙
+    display: かすみ亜里沙
+    source: wikipedia_adult_mangaka_list
+  - name: かたせなの
+    display: かたせなの
+    source: wikipedia_adult_mangaka_list
+  - name: かたせ湘
+    display: かたせ湘
+    source: wikipedia_adult_mangaka_list
+  - name: かたみこいみずえ
+    display: かたみこいみずえ
+    source: wikipedia_adult_mangaka_list
+  - name: かつまたかずき
+    display: かつまたかずき
+    source: wikipedia_adult_mangaka_list
+  - name: かなめ薙
+    display: かなめ薙
+    source: wikipedia_adult_mangaka_list
+  - name: "かにかに(漫画家)"
+    display: "かにかに (漫画家)"
+    source: wikipedia_adult_mangaka_list
+  - name: かにゃぴぃ
+    display: かにゃぴぃ
+    source: wikipedia_adult_mangaka_list
+  - name: かねことしあき
+    display: かねことしあき
+    source: wikipedia_adult_mangaka_list
+  - name: からすま弐式
+    display: からすま弐式
+    source: wikipedia_adult_mangaka_list
+  - name: かるま龍狼
+    display: かるま龍狼
+    source: wikipedia_adult_mangaka_list
+  - name: かわはらしん
+    display: かわはらしん
+    source: wikipedia_adult_mangaka_list
+  - name: かわもりみさき
+    display: かわもりみさき
+    source: wikipedia_adult_mangaka_list
+  - name: かわらじま晃
+    display: かわらじま晃
+    source: wikipedia_adult_mangaka_list
+  - name: かわりだね秋都
+    display: かわりだね秋都
+    source: wikipedia_adult_mangaka_list
+  - name: かーみら
+    display: かーみら
+    source: wikipedia_adult_mangaka_list
+  - name: がぁさん
+    display: がぁさん
+    source: wikipedia_adult_mangaka_list
+  - name: きお誠児
+    display: きお誠児
+    source: wikipedia_adult_mangaka_list
+  - name: "きくらげ(イラストレーター)"
+    display: "きくらげ (イラストレーター)"
+    source: wikipedia_adult_mangaka_list
+  - name: きたじま晶
+    display: きたじま晶
+    source: wikipedia_adult_mangaka_list
+  - name: きただりょうま
+    display: きただりょうま
+    source: wikipedia_adult_mangaka_list
+  - name: きのした順市
+    display: きのした順市
+    source: wikipedia_adult_mangaka_list
+  - name: きのした黎
+    display: きのした黎
+    source: wikipedia_adult_mangaka_list
+  - name: きみおたまこ
+    display: きみおたまこ
+    source: wikipedia_adult_mangaka_list
+  - name: きみづか葵
+    display: きみづか葵
+    source: wikipedia_adult_mangaka_list
+  - name: きゃらめる堂
+    display: きゃらめる堂
+    source: wikipedia_adult_mangaka_list
+  - name: "きょん(作家)"
+    display: "きょん_(作家)"
+    source: wikipedia_adult_mangaka_list
+  - name: きらら萌
+    display: きらら萌
+    source: wikipedia_adult_mangaka_list
+  - name: きりがくれたかや
+    display: きりがくれたかや
+    source: wikipedia_adult_mangaka_list
+  - name: きりやましんご
+    display: きりやましんご
+    source: wikipedia_adult_mangaka_list
+  - name: きりりん
+    display: きりりん
+    source: wikipedia_adult_mangaka_list
+  - name: ぎうにう
+    display: ぎうにう
+    source: wikipedia_adult_mangaka_list
+  - name: くしだあしゅら
+    display: くしだあしゅら
+    source: wikipedia_adult_mangaka_list
+  - name: くどうひさし
+    display: くどうひさし
+    source: wikipedia_adult_mangaka_list
+  - name: くまこう
+    display: くまこう
+    source: wikipedia_adult_mangaka_list
+  - name: くまたかつみ
+    display: くまたかつみ
+    source: wikipedia_adult_mangaka_list
+  - name: くもいたかし
+    display: くもいたかし
+    source: wikipedia_adult_mangaka_list
+  - name: "くら☆りっさ"
+    display: "くら☆りっさ"
+    source: wikipedia_adult_mangaka_list
+  - name: くらむぼん
+    display: くらむぼん
+    source: wikipedia_adult_mangaka_list
+  - name: くりから
+    display: くりから
+    source: wikipedia_adult_mangaka_list
+  - name: くれいちろう
+    display: くれいちろう
+    source: wikipedia_adult_mangaka_list
+  - name: "くろ(漫画家)"
+    display: "くろ (漫画家)"
+    source: wikipedia_adult_mangaka_list
+  - name: ぐら乳頭
+    display: ぐら乳頭
+    source: wikipedia_adult_mangaka_list
+  - name: けいじえい
+    display: けいじえい
+    source: wikipedia_adult_mangaka_list
+  - name: "けものの★"
+    display: "けものの★"
+    source: wikipedia_adult_mangaka_list
+  - name: けろりん
+    display: けろりん
+    source: wikipedia_adult_mangaka_list
+  - name: けんたろう
+    display: けんたろう
+    source: wikipedia_adult_mangaka_list
+  - name: げげら俊和
+    display: げげら俊和
+    source: wikipedia_adult_mangaka_list
+  - name: こうのゆきよ
+    display: こうのゆきよ
+    source: wikipedia_adult_mangaka_list
+  - name: "こけこっこ☆こま"
+    display: "こけこっこ☆こま"
+    source: wikipedia_adult_mangaka_list
+  - name: "こけし☆メン"
+    display: "こけし☆メン"
+    source: wikipedia_adult_mangaka_list
+  - name: ここのき奈緒
+    display: ここのき奈緒
+    source: wikipedia_adult_mangaka_list
+  - name: ことぎ蘭浦
+    display: ことぎ蘭浦
+    source: wikipedia_adult_mangaka_list
+  - name: ことぶきまいむ
+    display: ことぶきまいむ
+    source: wikipedia_adult_mangaka_list
+  - name: このどんと
+    display: このどんと
+    source: wikipedia_adult_mangaka_list
+  - name: こりす
+    display: こりす
+    source: wikipedia_adult_mangaka_list
+  - name: ごばん
+    display: ごばん
+    source: wikipedia_adult_mangaka_list
+  - name: さいこ
+    display: さいこ
+    source: wikipedia_adult_mangaka_list
+  - name: さいだ一明
+    display: さいだ一明
+    source: wikipedia_adult_mangaka_list
+  - name: さいとうつかさ
+    display: さいとうつかさ
+    source: wikipedia_adult_mangaka_list
+  - name: さかきいずみ
+    display: さかきいずみ
+    source: wikipedia_adult_mangaka_list
+  - name: さかきなおもと
+    display: さかきなおもと
+    source: wikipedia_adult_mangaka_list
+  - name: さがみゆう
+    display: さがみゆう
+    source: wikipedia_adult_mangaka_list
+  - name: さくらがい
+    display: "さくら・がい"
+    source: wikipedia_adult_mangaka_list
+  - name: さくらの輝
+    display: さくらの輝
+    source: wikipedia_adult_mangaka_list
+  - name: ささきタツヤ
+    display: ささきタツヤ
+    source: wikipedia_adult_mangaka_list
+  - name: さじぺん
+    display: さじぺん
+    source: wikipedia_adult_mangaka_list
+  - name: さっさきくじ
+    display: さっさきくじ
+    source: wikipedia_adult_mangaka_list
+  - name: さつきあしゃ
+    display: さつきあしゃ
+    source: wikipedia_adult_mangaka_list
+  - name: さとみひでふみ
+    display: さとみひでふみ
+    source: wikipedia_adult_mangaka_list
+  - name: さどっこ
+    display: さどっこ
+    source: wikipedia_adult_mangaka_list
+  - name: さばのにわとり
+    display: さばのにわとり
+    source: wikipedia_adult_mangaka_list
+  - name: さめだ小判
+    display: さめだ小判
+    source: wikipedia_adult_mangaka_list
+  - name: さらしな瑞穂
+    display: さらしな瑞穂
+    source: wikipedia_adult_mangaka_list
+  - name: さらだ
+    display: さらだ
+    source: wikipedia_adult_mangaka_list
+  - name: さわらの五庵
+    display: さわらの五庵
+    source: wikipedia_adult_mangaka_list
+  - name: さんりようこ
+    display: さんりようこ
+    source: wikipedia_adult_mangaka_list
+  - name: しあわせ1500
+    display: しあわせ1500
+    source: wikipedia_adult_mangaka_list
+  - name: しいなかずき
+    display: しいなかずき
+    source: wikipedia_adult_mangaka_list
+  - name: しかげなぎ
+    display: しかげなぎ
+    source: wikipedia_adult_mangaka_list
+  - name: しきがみあずま
+    display: しきがみあずま
+    source: wikipedia_adult_mangaka_list
+  - name: しぐにゃん
+    display: しぐにゃん
+    source: wikipedia_adult_mangaka_list
+  - name: しげの理
+    display: しげの理
+    source: wikipedia_adult_mangaka_list
+  - name: しっかり者のタカシくん
+    display: しっかり者のタカシくん
+    source: wikipedia_adult_mangaka_list
+  - name: しでん晶
+    display: しでん晶
+    source: wikipedia_adult_mangaka_list
+  - name: しなま
+    display: しなま
+    source: wikipedia_adult_mangaka_list
+  - name: しのかつ
+    display: しのかつ
+    source: wikipedia_adult_mangaka_list
+  - name: しのぎけい
+    display: しのぎけい
+    source: wikipedia_adult_mangaka_list
+  - name: しのぎ鋭介
+    display: しのぎ鋭介
+    source: wikipedia_adult_mangaka_list
+  - name: しのざき嶺
+    display: しのざき嶺
+    source: wikipedia_adult_mangaka_list
+  - name: しのづかあつと
+    display: しのづかあつと
+    source: wikipedia_adult_mangaka_list
+  - name: しばはらごちょ
+    display: しばはらごちょ
+    source: wikipedia_adult_mangaka_list
+  - name: しまじ
+    display: しまじ
+    source: wikipedia_adult_mangaka_list
+  - name: しまたか
+    display: しまたか
+    source: wikipedia_adult_mangaka_list
+  - name: しらいちご
+    display: しらいちご
+    source: wikipedia_adult_mangaka_list
+  - name: しらたき春
+    display: しらたき春
+    source: wikipedia_adult_mangaka_list
+  - name: しらんたかし
+    display: しらんたかし
+    source: wikipedia_adult_mangaka_list
+  - name: "しんしん(漫画家)"
+    display: "しんしん (漫画家)"
+    source: wikipedia_adult_mangaka_list
+  - name: しんどう
+    display: しんどう
+    source: wikipedia_adult_mangaka_list
+  - name: しーあーる
+    display: しーあーる
+    source: wikipedia_adult_mangaka_list
+  - name: しーざー
+    display: しーざー
+    source: wikipedia_adult_mangaka_list
+  - name: しーらかんす
+    display: しーらかんす
+    source: wikipedia_adult_mangaka_list
+  - name: じゃこうねずみ
+    display: じゃこうねずみ
+    source: wikipedia_adult_mangaka_list
+  - name: じゃじゃかなめ
+    display: じゃじゃかなめ
+    source: wikipedia_adult_mangaka_list
+  - name: じゃみんぐ
+    display: じゃみんぐ
+    source: wikipedia_adult_mangaka_list
+  - name: じゃんぬだっく
+    display: じゃんぬだっく
+    source: wikipedia_adult_mangaka_list
+  - name: じゅら
+    display: じゅら
+    source: wikipedia_adult_mangaka_list
+  - name: じょん同助
+    display: じょん同助
+    source: wikipedia_adult_mangaka_list
+  - name: "じんじん(漫画家)"
+    display: "じんじん (漫画家)"
+    source: wikipedia_adult_mangaka_list
+  - name: すえひろがり
+    display: すえひろがり
+    source: wikipedia_adult_mangaka_list
+  - name: すえみつぢっか
+    display: すえみつぢっか
+    source: wikipedia_adult_mangaka_list
+  - name: すがはらなお
+    display: すがはらなお
+    source: wikipedia_adult_mangaka_list
+  - name: すぎやま現象
+    display: すぎやま現象
+    source: wikipedia_adult_mangaka_list
+  - name: すけきよ
+    display: すけきよ
+    source: wikipedia_adult_mangaka_list
+  - name: すずきみら
+    display: すずきみら
+    source: wikipedia_adult_mangaka_list
+  - name: すどおかおる
+    display: すどおかおる
+    source: wikipedia_adult_mangaka_list
+  - name: "すな☆ねずみ"
+    display: "すな☆ねずみ"
+    source: wikipedia_adult_mangaka_list
+  - name: すみ兵
+    display: すみ兵
+    source: wikipedia_adult_mangaka_list
+  - name: すめらぎ琥珀
+    display: すめらぎ琥珀
+    source: wikipedia_adult_mangaka_list
+  - name: せいほうけい
+    display: せいほうけい
+    source: wikipedia_adult_mangaka_list
+  - name: せきはん
+    display: せきはん
+    source: wikipedia_adult_mangaka_list
+  - name: "そう!でんがく"
+    display: "そう!でんがく"
+    source: wikipedia_adult_mangaka_list
+  - name: そうま竜也
+    display: そうま竜也
+    source: wikipedia_adult_mangaka_list
+  - name: そよき
+    display: そよき
+    source: wikipedia_adult_mangaka_list
+  - name: たいらはじめ
+    display: たいらはじめ
+    source: wikipedia_adult_mangaka_list
+  - name: たかしたたかし
+    display: たかしたたかし
+    source: wikipedia_adult_mangaka_list
+  - name: "たかねのはな(漫画家)"
+    display: "たかねのはな (漫画家)"
+    source: wikipedia_adult_mangaka_list
+  - name: "たかのゆき(漫画家)"
+    display: "たかのゆき (漫画家)"
+    source: wikipedia_adult_mangaka_list
+  - name: たかやKi
+    display: たかやKi
+    source: wikipedia_adult_mangaka_list
+  - name: たくま朋正
+    display: たくま朋正
+    source: wikipedia_adult_mangaka_list
+  - name: たくろう
+    display: たくろう
+    source: wikipedia_adult_mangaka_list
+  - name: "たくわん(漫画家)"
+    display: "たくわん (漫画家)"
+    source: wikipedia_adult_mangaka_list
+  - name: たけのこ星人
+    display: たけのこ星人
+    source: wikipedia_adult_mangaka_list
+  - name: たちばなとしひろ
+    display: たちばなとしひろ
+    source: wikipedia_adult_mangaka_list
+  - name: たつみひろし
+    display: たつみひろし
+    source: wikipedia_adult_mangaka_list
+  - name: たなかなぶる
+    display: たなかなぶる
+    source: wikipedia_adult_mangaka_list
+  - name: たにぐち童子
+    display: たにぐち童子
+    source: wikipedia_adult_mangaka_list
+  - name: たべこーじ
+    display: "たべ・こーじ"
+    source: wikipedia_adult_mangaka_list
+  - name: "たまごかけごはん(漫画家)"
+    display: "たまごかけごはん (漫画家)"
+    source: wikipedia_adult_mangaka_list
+  - name: たまちゆき
+    display: たまちゆき
+    source: wikipedia_adult_mangaka_list
+  - name: たらかん
+    display: たらかん
+    source: wikipedia_adult_mangaka_list
+  - name: たれめどん
+    display: たれめどん
+    source: wikipedia_adult_mangaka_list
+  - name: たろプン
+    display: たろプン
+    source: wikipedia_adult_mangaka_list
+  - name: たんたん
+    display: たんたん
+    source: wikipedia_adult_mangaka_list
+  - name: ちゃたろー
+    display: ちゃたろー
+    source: wikipedia_adult_mangaka_list
+  - name: ちゃんぽん雅
+    display: ちゃんぽん雅
+    source: wikipedia_adult_mangaka_list
+  - name: ちるどれん
+    display: ちるどれん
+    source: wikipedia_adult_mangaka_list
+  - name: ちんじゃおろおす
+    display: ちんじゃおろおす
+    source: wikipedia_adult_mangaka_list
+  - name: "ぢたま(某)"
+    display: "ぢたま(某)"
+    source: wikipedia_adult_mangaka_list
+  - name: つくすん
+    display: つくすん
+    source: wikipedia_adult_mangaka_list
+  - name: つつみ進
+    display: つつみ進
+    source: wikipedia_adult_mangaka_list
+  - name: "てっちゃん(漫画家)"
+    display: "てっちゃん (漫画家)"
+    source: wikipedia_adult_mangaka_list
+  - name: "てつ(漫画家)"
+    display: "てつ (漫画家)"
+    source: wikipedia_adult_mangaka_list
+  - name: てりてりお
+    display: てりてりお
+    source: wikipedia_adult_mangaka_list
+  - name: とがわはなまる
+    display: とがわはなまる
+    source: wikipedia_adult_mangaka_list
+  - name: とけーうさぎ
+    display: とけーうさぎ
+    source: wikipedia_adult_mangaka_list
+  - name: "としきゆうぢ(仮"
+    display: "としきゆうぢ（仮"
+    source: wikipedia_adult_mangaka_list
+  - name: となみむか
+    display: となみむか
+    source: wikipedia_adult_mangaka_list
+  - name: とみあきゆう
+    display: とみあきゆう
+    source: wikipedia_adult_mangaka_list
+  - name: とみさわ千夏
+    display: とみさわ千夏
+    source: wikipedia_adult_mangaka_list
+  - name: とめきち
+    display: とめきち
+    source: wikipedia_adult_mangaka_list
+  - name: ともだ秀和
+    display: ともだ秀和
+    source: wikipedia_adult_mangaka_list
+  - name: とりあ
+    display: とりあ
+    source: wikipedia_adult_mangaka_list
+  - name: とんのすけ
+    display: とんのすけ
+    source: wikipedia_adult_mangaka_list
+  - name: とんぷう
+    display: とんぷう
+    source: wikipedia_adult_mangaka_list
+  - name: どくろさん
+    display: どくろさん
+    source: wikipedia_adult_mangaka_list
+  - name: どざむら
+    display: どざむら
+    source: wikipedia_adult_mangaka_list
+  - name: どわるこふ
+    display: どわるこふ
+    source: wikipedia_adult_mangaka_list
+  - name: なおむ
+    display: なおむ
+    source: wikipedia_adult_mangaka_list
+  - name: ながしま超助
+    display: ながしま超助
+    source: wikipedia_adult_mangaka_list
+  - name: なぎさわゆう
+    display: なぎさわゆう
+    source: wikipedia_adult_mangaka_list
+  - name: なつのふじまろ
+    display: なつのふじまろ
+    source: wikipedia_adult_mangaka_list
+  - name: ななみ静
+    display: ななみ静
+    source: wikipedia_adult_mangaka_list
+  - name: なぱた
+    display: なぱた
+    source: wikipedia_adult_mangaka_list
+  - name: なるさわ景
+    display: なるさわ景
+    source: wikipedia_adult_mangaka_list
+  - name: にぃと
+    display: にぃと
+    source: wikipedia_adult_mangaka_list
+  - name: にしまきとおる
+    display: にしまきとおる
+    source: wikipedia_adult_mangaka_list
+  - name: にったじゅん
+    display: にったじゅん
+    source: wikipedia_adult_mangaka_list
+  - name: にの子
+    display: にの子
+    source: wikipedia_adult_mangaka_list
+  - name: にびなも凸面体
+    display: にびなも凸面体
+    source: wikipedia_adult_mangaka_list
+  - name: にゃご丸
+    display: にゃご丸
+    source: wikipedia_adult_mangaka_list
+  - name: にゅーAB
+    display: にゅーAB
+    source: wikipedia_adult_mangaka_list
+  - name: にわのまこと
+    display: にわのまこと
+    source: wikipedia_adult_mangaka_list
+  - name: ねくたー
+    display: ねくたー
+    source: wikipedia_adult_mangaka_list
+  - name: "ねぐら☆なお"
+    display: "ねぐら☆なお"
+    source: wikipedia_adult_mangaka_list
+  - name: ねこしたPONG
+    display: ねこしたPONG
+    source: wikipedia_adult_mangaka_list
+  - name: ねことはと
+    display: ねことはと
+    source: wikipedia_adult_mangaka_list
+  - name: ねこまたなおみ
+    display: ねこまたなおみ
+    source: wikipedia_adult_mangaka_list
+  - name: ねむり太陽
+    display: ねむり太陽
+    source: wikipedia_adult_mangaka_list
+  - name: ねりまよしと
+    display: ねりまよしと
+    source: wikipedia_adult_mangaka_list
+  - name: ねりわさび
+    display: ねりわさび
+    source: wikipedia_adult_mangaka_list
+  - name: "ねんど。"
+    display: "ねんど。"
+    source: wikipedia_adult_mangaka_list
+  - name: のぞみ侑海
+    display: のぞみ侑海
+    source: wikipedia_adult_mangaka_list
+  - name: のでらゆき
+    display: のでらゆき
+    source: wikipedia_adult_mangaka_list
+  - name: のなかたま
+    display: のなかたま
+    source: wikipedia_adult_mangaka_list
+  - name: のぶきちひろ
+    display: のぶきちひろ
+    source: wikipedia_adult_mangaka_list
+  - name: のら猫長屋
+    display: のら猫長屋
+    source: wikipedia_adult_mangaka_list
+  - name: はすぶろ
+    display: はすぶろ
+    source: wikipedia_adult_mangaka_list
+  - name: はだかの長者
+    display: はだかの長者
+    source: wikipedia_adult_mangaka_list
+  - name: はっとり忍
+    display: はっとり忍
+    source: wikipedia_adult_mangaka_list
+  - name: はなうな
+    display: はなうな
+    source: wikipedia_adult_mangaka_list
+  - name: はなぢ
+    display: "は・な・ぢ"
+    source: wikipedia_adult_mangaka_list
+  - name: はぬまあん
+    display: はぬまあん
+    source: wikipedia_adult_mangaka_list
+  - name: "はも(漫画家)"
+    display: "はも (漫画家)"
+    source: wikipedia_adult_mangaka_list
+  - name: はやぶさ真吾
+    display: はやぶさ真吾
+    source: wikipedia_adult_mangaka_list
+  - name: はらさける
+    display: はらさける
+    source: wikipedia_adult_mangaka_list
+  - name: はるほんや
+    display: はるほんや
+    source: wikipedia_adult_mangaka_list
+  - name: はんざきじろう
+    display: はんざきじろう
+    source: wikipedia_adult_mangaka_list
+  - name: ばにー浦沢
+    display: ばにー浦沢
+    source: wikipedia_adult_mangaka_list
+  - name: "ぱり〜みき"
+    display: "ぱり〜みき"
+    source: wikipedia_adult_mangaka_list
+  - name: ひげなむち
+    display: ひげなむち
+    source: wikipedia_adult_mangaka_list
+  - name: "ひな。"
+    display: "ひな。"
+    source: wikipedia_adult_mangaka_list
+  - name: ひばりれい
+    display: "ひばり・れい"
+    source: wikipedia_adult_mangaka_list
+  - name: ひめはち
+    display: ひめはち
+    source: wikipedia_adult_mangaka_list
+  - name: ひょころー
+    display: ひょころー
+    source: wikipedia_adult_mangaka_list
+  - name: ひよひよ
+    display: ひよひよ
+    source: wikipedia_adult_mangaka_list
+  - name: ひりほりはりもる
+    display: ひりほりはりもる
+    source: wikipedia_adult_mangaka_list
+  - name: ひろせみほ
+    display: ひろせみほ
+    source: wikipedia_adult_mangaka_list
+  - name: ひんでんブルグ
+    display: ひんでんブルグ
+    source: wikipedia_adult_mangaka_list
+  - name: ふうたまろ
+    display: ふうたまろ
+    source: wikipedia_adult_mangaka_list
+  - name: ふくしま政美
+    display: ふくしま政美
+    source: wikipedia_adult_mangaka_list
+  - name: ふじいあきこ
+    display: ふじいあきこ
+    source: wikipedia_adult_mangaka_list
+  - name: ふじかつぴこ
+    display: ふじかつぴこ
+    source: wikipedia_adult_mangaka_list
+  - name: ふじさわたつろー
+    display: ふじさわたつろー
+    source: wikipedia_adult_mangaka_list
+  - name: ふじもとせい
+    display: ふじもとせい
+    source: wikipedia_adult_mangaka_list
+  - name: ふじよし
+    display: ふじよし
+    source: wikipedia_adult_mangaka_list
+  - name: ふとがね裕美
+    display: ふとがね裕美
+    source: wikipedia_adult_mangaka_list
+  - name: ふを留実
+    display: ふを留実
+    source: wikipedia_adult_mangaka_list
+  - name: ぶるまほげろー
+    display: ぶるまほげろー
+    source: wikipedia_adult_mangaka_list
+  - name: へかとん
+    display: へかとん
+    source: wikipedia_adult_mangaka_list
+  - name: へっぽこくん
+    display: へっぽこくん
+    source: wikipedia_adult_mangaka_list
+  - name: へのへの
+    display: へのへの
+    source: wikipedia_adult_mangaka_list
+  - name: へんりいだ
+    display: へんりいだ
+    source: wikipedia_adult_mangaka_list
+  - name: べてぃ
+    display: べてぃ
+    source: wikipedia_adult_mangaka_list
+  - name: ぺがさす
+    display: ぺがさす
+    source: wikipedia_adult_mangaka_list
+  - name: ぺるそな
+    display: ぺるそな
+    source: wikipedia_adult_mangaka_list
+  - name: ほかまみつり
+    display: ほかまみつり
+    source: wikipedia_adult_mangaka_list
+  - name: ほしのふうた
+    display: ほしのふうた
+    source: wikipedia_adult_mangaka_list
+  - name: "ほた。"
+    display: "ほた。"
+    source: wikipedia_adult_mangaka_list
+  - name: ほんだありま
+    display: ほんだありま
+    source: wikipedia_adult_mangaka_list
+  - name: ぼっしぃ
+    display: ぼっしぃ
+    source: wikipedia_adult_mangaka_list
+  - name: ぽいんとたかし
+    display: ぽいんとたかし
+    source: wikipedia_adult_mangaka_list
+  - name: ぽてころ
+    display: ぽてころ
+    source: wikipedia_adult_mangaka_list
+  - name: ぽるたん
+    display: ぽるたん
+    source: wikipedia_adult_mangaka_list
+  - name: ぽるのいぶき
+    display: ぽるのいぶき
+    source: wikipedia_adult_mangaka_list
+  - name: ぽんこつわーくす
+    display: ぽんこつわーくす
+    source: wikipedia_adult_mangaka_list
+  - name: "ま☆くわ"
+    display: "ま☆くわ"
+    source: wikipedia_adult_mangaka_list
+  - name: まあみ
+    display: まあみ
+    source: wikipedia_adult_mangaka_list
+  - name: まいなぁぼぉい
+    display: まいなぁぼぉい
+    source: wikipedia_adult_mangaka_list
+  - name: まきお
+    display: まきお
+    source: wikipedia_adult_mangaka_list
+  - name: まぐろ帝國
+    display: まぐろ帝國
+    source: wikipedia_adult_mangaka_list
+  - name: まじころ
+    display: まじころ
+    source: wikipedia_adult_mangaka_list
+  - name: ますだ犬
+    display: ますだ犬
+    source: wikipedia_adult_mangaka_list
+  - name: まっぷ
+    display: まっぷ
+    source: wikipedia_adult_mangaka_list
+  - name: まつりみこ
+    display: まつりみこ
+    source: wikipedia_adult_mangaka_list
+  - name: まの純
+    display: まの純
+    source: wikipedia_adult_mangaka_list
+  - name: まばん
+    display: まばん
+    source: wikipedia_adult_mangaka_list
+  - name: まひるの影郎
+    display: まひるの影郎
+    source: wikipedia_adult_mangaka_list
+  - name: まめこ
+    display: まめこ
+    source: wikipedia_adult_mangaka_list
+  - name: まめぞう
+    display: まめぞう
+    source: wikipedia_adult_mangaka_list
+  - name: まよねーず
+    display: まよねーず
+    source: wikipedia_adult_mangaka_list
+  - name: "まりぴょん(漫画家)"
+    display: "まりぴょん (漫画家)"
+    source: wikipedia_adult_mangaka_list
+  - name: まるごと林檎
+    display: まるごと林檎
+    source: wikipedia_adult_mangaka_list
+  - name: まるキ堂
+    display: まるキ堂
+    source: wikipedia_adult_mangaka_list
+  - name: まる寝子
+    display: まる寝子
+    source: wikipedia_adult_mangaka_list
+  - name: まんだ林檎
+    display: まんだ林檎
+    source: wikipedia_adult_mangaka_list
+  - name: みうらたけひろ
+    display: みうらたけひろ
+    source: wikipedia_adult_mangaka_list
+  - name: みかんR
+    display: みかんR
+    source: wikipedia_adult_mangaka_list
+  - name: みきかず
+    display: みきかず
+    source: wikipedia_adult_mangaka_list
+  - name: みき姫
+    display: みき姫
+    source: wikipedia_adult_mangaka_list
+  - name: みぎわこうじ
+    display: みぎわこうじ
+    source: wikipedia_adult_mangaka_list
+  - name: みくに瑞貴
+    display: みくに瑞貴
+    source: wikipedia_adult_mangaka_list
+  - name: みこくのほまれ
+    display: みこくのほまれ
+    source: wikipedia_adult_mangaka_list
+  - name: みことあけみ
+    display: みことあけみ
+    source: wikipedia_adult_mangaka_list
+  - name: みさぎ和
+    display: みさぎ和
+    source: wikipedia_adult_mangaka_list
+  - name: みさくらなんこつ
+    display: みさくらなんこつ
+    source: wikipedia_adult_mangaka_list
+  - name: みさわひろこ
+    display: みさわひろこ
+    source: wikipedia_adult_mangaka_list
+  - name: みずい
+    display: みずい
+    source: wikipedia_adult_mangaka_list
+  - name: みずきえいむ
+    display: みずきえいむ
+    source: wikipedia_adult_mangaka_list
+  - name: みずきひとし
+    display: みずきひとし
+    source: wikipedia_adult_mangaka_list
+  - name: みずのまこと
+    display: みずのまこと
+    source: wikipedia_adult_mangaka_list
+  - name: みそカツ
+    display: みそカツ
+    source: wikipedia_adult_mangaka_list
+  - name: みたくるみ
+    display: みたくるみ
+    source: wikipedia_adult_mangaka_list
+  - name: みたらし候成
+    display: みたらし候成
+    source: wikipedia_adult_mangaka_list
+  - name: みた森たつや
+    display: みた森たつや
+    source: wikipedia_adult_mangaka_list
+  - name: みちきんぐ
+    display: みちきんぐ
+    source: wikipedia_adult_mangaka_list
+  - name: みつや
+    display: みつや
+    source: wikipedia_adult_mangaka_list
+  - name: みづき春人
+    display: みづき春人
+    source: wikipedia_adult_mangaka_list
+  - name: みなすきぽぷり
+    display: みなすきぽぷり
+    source: wikipedia_adult_mangaka_list
+  - name: みなづきふたご
+    display: みなづきふたご
+    source: wikipedia_adult_mangaka_list
+  - name: みなづきゆず
+    display: みなづきゆず
+    source: wikipedia_adult_mangaka_list
+  - name: みなみ遥
+    display: みなみ遥
+    source: wikipedia_adult_mangaka_list
+  - name: みにおん
+    display: みにおん
+    source: wikipedia_adult_mangaka_list
+  - name: みみずしき
+    display: みみずしき
+    source: wikipedia_adult_mangaka_list
+  - name: みむだ良雑
+    display: みむだ良雑
+    source: wikipedia_adult_mangaka_list
+  - name: みやしたけい
+    display: みやしたけい
+    source: wikipedia_adult_mangaka_list
+  - name: みやすのんき
+    display: みやすのんき
+    source: wikipedia_adult_mangaka_list
+  - name: みやはらみみかき
+    display: みやはらみみかき
+    source: wikipedia_adult_mangaka_list
+  - name: みやびつづる
+    display: みやびつづる
+    source: wikipedia_adult_mangaka_list
+  - name: みやもとゆう
+    display: みやもとゆう
+    source: wikipedia_adult_mangaka_list
+  - name: みやもと留美
+    display: みやもと留美
+    source: wikipedia_adult_mangaka_list
+  - name: むかいきよはる
+    display: むかいきよはる
+    source: wikipedia_adult_mangaka_list
+  - name: むこうじまてんろ
+    display: むこうじまてんろ
+    source: wikipedia_adult_mangaka_list
+  - name: むつきつとむ
+    display: むつきつとむ
+    source: wikipedia_adult_mangaka_list
+  - name: むらさき朱
+    display: むらさき朱
+    source: wikipedia_adult_mangaka_list
+  - name: めいびい
+    display: めいびい
+    source: wikipedia_adult_mangaka_list
+  - name: めの子
+    display: めの子
+    source: wikipedia_adult_mangaka_list
+  - name: もけ太
+    display: もけ太
+    source: wikipedia_adult_mangaka_list
+  - name: "もず(漫画家)"
+    display: "もず (漫画家)"
+    source: wikipedia_adult_mangaka_list
+  - name: もずK
+    display: もずK
+    source: wikipedia_adult_mangaka_list
+  - name: もとみやみつき
+    display: もとみやみつき
+    source: wikipedia_adult_mangaka_list
+  - name: ものぐさうるふ
+    display: ものぐさうるふ
+    source: wikipedia_adult_mangaka_list
+  - name: ものたりぬ
+    display: ものたりぬ
+    source: wikipedia_adult_mangaka_list
+  - name: ももひろこ
+    display: ももひろこ
+    source: wikipedia_adult_mangaka_list
+  - name: もりしげ
+    display: もりしげ
+    source: wikipedia_adult_mangaka_list
+  - name: もりたき良士之
+    display: もりたき良士之
+    source: wikipedia_adult_mangaka_list
+  - name: もりやねこ
+    display: もりやねこ
+    source: wikipedia_adult_mangaka_list
+  - name: もんぷち
+    display: もんぷち
+    source: wikipedia_adult_mangaka_list
+  - name: やがみだい
+    display: やがみだい
+    source: wikipedia_adult_mangaka_list
+  - name: やすいひろさと
+    display: やすいひろさと
+    source: wikipedia_adult_mangaka_list
+  - name: やながわ理央
+    display: やながわ理央
+    source: wikipedia_adult_mangaka_list
+  - name: やまたのをろち
+    display: やまたのをろち
+    source: wikipedia_adult_mangaka_list
+  - name: やまだ浩一
+    display: やまだ浩一
+    source: wikipedia_adult_mangaka_list
+  - name: ゆうきつむぎ
+    display: ゆうきつむぎ
+    source: wikipedia_adult_mangaka_list
+  - name: ゆうきともか
+    display: ゆうきともか
+    source: wikipedia_adult_mangaka_list
+  - name: ゆうみゃご
+    display: ゆうみゃご
+    source: wikipedia_adult_mangaka_list
+  - name: ゆかりがわ弓夜
+    display: ゆかりがわ弓夜
+    source: wikipedia_adult_mangaka_list
+  - name: ゆきのゆきかぜ
+    display: ゆきのゆきかぜ
+    source: wikipedia_adult_mangaka_list
+  - name: ゆきまろゆっきー
+    display: ゆきまろゆっきー
+    source: wikipedia_adult_mangaka_list
+  - name: ゆきみ
+    display: ゆきみ
+    source: wikipedia_adult_mangaka_list
+  - name: ゆきやなぎ
+    display: ゆきやなぎ
+    source: wikipedia_adult_mangaka_list
+  - name: "ゆずぽん(漫画家)"
+    display: "ゆずぽん (漫画家)"
+    source: wikipedia_adult_mangaka_list
+  - name: ゆむら博雪
+    display: ゆむら博雪
+    source: wikipedia_adult_mangaka_list
+  - name: ゆめおりあむ
+    display: ゆめおりあむ
+    source: wikipedia_adult_mangaka_list
+  - name: よこたかずゆき
+    display: よこたかずゆき
+    source: wikipedia_adult_mangaka_list
+  - name: よこやまちちゃ
+    display: よこやまちちゃ
+    source: wikipedia_adult_mangaka_list
+  - name: よこやまなおき
+    display: よこやまなおき
+    source: wikipedia_adult_mangaka_list
+  - name: よしだけい
+    display: よしだけい
+    source: wikipedia_adult_mangaka_list
+  - name: "よしの(漫画家)"
+    display: "よしの (漫画家)"
+    source: wikipedia_adult_mangaka_list
+  - name: よしろん
+    display: よしろん
+    source: wikipedia_adult_mangaka_list
+  - name: よつ葉真澄
+    display: よつ葉真澄
+    source: wikipedia_adult_mangaka_list
+  - name: らいぶらり
+    display: らいぶらり
+    source: wikipedia_adult_mangaka_list
+  - name: らくじん
+    display: らくじん
+    source: wikipedia_adult_mangaka_list
+  - name: らする
+    display: らする
+    source: wikipedia_adult_mangaka_list
+  - name: "らっこ(漫画家)"
+    display: "らっこ (漫画家)"
+    source: wikipedia_adult_mangaka_list
+  - name: りえちゃん14歳
+    display: りえちゃん14歳
+    source: wikipedia_adult_mangaka_list
+  - name: りゅうき夕海
+    display: りゅうき夕海
+    source: wikipedia_adult_mangaka_list
+  - name: りゅうとひさし
+    display: りゅうとひさし
+    source: wikipedia_adult_mangaka_list
+  - name: "りょう(漫画家)"
+    display: "りょう (漫画家)"
+    source: wikipedia_adult_mangaka_list
+  - name: るりあ046
+    display: るりあ046
+    source: wikipedia_adult_mangaka_list
+  - name: ろーるぱんつ
+    display: ろーるぱんつ
+    source: wikipedia_adult_mangaka_list
+  - name: わたなべよしまさ
+    display: わたなべよしまさ
+    source: wikipedia_adult_mangaka_list
+  - name: わたなべわたる
+    display: わたなべわたる
+    source: wikipedia_adult_mangaka_list
+  - name: "わらしべ(漫画家)"
+    display: "わらしべ (漫画家)"
+    source: wikipedia_adult_mangaka_list
+  - name: "わんぱく(漫画家)"
+    display: "わんぱく (漫画家)"
+    source: wikipedia_adult_mangaka_list
+  - name: アシオ
+    display: アシオ
+    source: wikipedia_adult_mangaka_list
+  - name: アスヒロ
+    display: アスヒロ
+    source: wikipedia_adult_mangaka_list
+  - name: アズマサワヨシ
+    display: アズマサワヨシ
+    source: wikipedia_adult_mangaka_list
+  - name: "アップルトン(漫画家)"
+    display: "アップルトン (漫画家)"
+    source: wikipedia_adult_mangaka_list
+  - name: "アーセナル(漫画家)"
+    display: "アーセナル (漫画家)"
+    source: wikipedia_adult_mangaka_list
+  - name: "イコール(漫画家)"
+    display: "イコール (漫画家)"
+    source: wikipedia_adult_mangaka_list
+  - name: イシガキタカシ
+    display: イシガキタカシ
+    source: wikipedia_adult_mangaka_list
+  - name: イソラシ
+    display: イソラシ
+    source: wikipedia_adult_mangaka_list
+  - name: イナフミン
+    display: イナフミン
+    source: wikipedia_adult_mangaka_list
+  - name: イノウエマキト
+    display: イノウエマキト
+    source: wikipedia_adult_mangaka_list
+  - name: ウエノ直哉
+    display: ウエノ直哉
+    source: wikipedia_adult_mangaka_list
+  - name: ウエモン
+    display: ウエモン
+    source: wikipedia_adult_mangaka_list
+  - name: ウメ吉
+    display: ウメ吉
+    source: wikipedia_adult_mangaka_list
+  - name: "ウルツ(漫画家)"
+    display: "ウルツ (漫画家)"
+    source: wikipedia_adult_mangaka_list
+  - name: エレクトさわる
+    display: エレクトさわる
+    source: wikipedia_adult_mangaka_list
+  - name: エンゾ円蔵
+    display: エンゾ円蔵
+    source: wikipedia_adult_mangaka_list
+  - name: "オイスター(漫画家)"
+    display: "オイスター (漫画家)"
+    source: wikipedia_adult_mangaka_list
+  - name: オオカミうお
+    display: オオカミうお
+    source: wikipedia_adult_mangaka_list
+  - name: オオツカマヒロ
+    display: オオツカマヒロ
+    source: wikipedia_adult_mangaka_list
+  - name: オガタガタロー
+    display: オガタガタロー
+    source: wikipedia_adult_mangaka_list
+  - name: オクモト悠太
+    display: オクモト悠太
+    source: wikipedia_adult_mangaka_list
+  - name: オジロマコト
+    display: オジロマコト
+    source: wikipedia_adult_mangaka_list
+  - name: オノメシン
+    display: オノメシン
+    source: wikipedia_adult_mangaka_list
+  - name: カイシンシ
+    display: カイシンシ
+    source: wikipedia_adult_mangaka_list
+  - name: カタセミナミ
+    display: カタセミナミ
+    source: wikipedia_adult_mangaka_list
+  - name: カナタ
+    display: カナタ
+    source: wikipedia_adult_mangaka_list
+  - name: カネヤマシン
+    display: カネヤマシン
+    source: wikipedia_adult_mangaka_list
+  - name: "カマキリ(漫画家)"
+    display: "カマキリ (漫画家)"
+    source: wikipedia_adult_mangaka_list
+  - name: カミタニ
+    display: カミタニ
+    source: wikipedia_adult_mangaka_list
+  - name: カワディMAX
+    display: カワディMAX
+    source: wikipedia_adult_mangaka_list
+  - name: ガッツン
+    display: ガッツン
+    source: wikipedia_adult_mangaka_list
+  - name: ガビョ布
+    display: ガビョ布
+    source: wikipedia_adult_mangaka_list
+  - name: キシリトヲル
+    display: キシリトヲル
+    source: wikipedia_adult_mangaka_list
+  - name: キヨセ薫
+    display: キヨセ薫
+    source: wikipedia_adult_mangaka_list
+  - name: クジラックス
+    display: クジラックス
+    source: wikipedia_adult_mangaka_list
+  - name: "クリムゾン(漫画家)"
+    display: "クリムゾン (漫画家)"
+    source: wikipedia_adult_mangaka_list
+  - name: "クロマメ(漫画家)"
+    display: "クロマメ (漫画家)"
+    source: wikipedia_adult_mangaka_list
+  - name: ケイプラス
+    display: ケイ-プラス
+    source: wikipedia_adult_mangaka_list
+  - name: ケン月影
+    display: ケン月影
+    source: wikipedia_adult_mangaka_list
+  - name: ゲンツキ
+    display: ゲンツキ
+    source: wikipedia_adult_mangaka_list
+  - name: コア助
+    display: コア助
+    source: wikipedia_adult_mangaka_list
+  - name: コオリズ
+    display: コオリズ
+    source: wikipedia_adult_mangaka_list
+  - name: コテング
+    display: コテング
+    source: wikipedia_adult_mangaka_list
+  - name: コバルト機
+    display: コバルト機
+    source: wikipedia_adult_mangaka_list
+  - name: "ゴブリン(漫画家)"
+    display: "ゴブリン (漫画家)"
+    source: wikipedia_adult_mangaka_list
+  - name: ゴンざぶろー
+    display: ゴンざぶろー
+    source: wikipedia_adult_mangaka_list
+  - name: ゴージャス宝田
+    display: ゴージャス宝田
+    source: wikipedia_adult_mangaka_list
+  - name: サイコロステーキ
+    display: "サイコロ・ステーキ"
+    source: wikipedia_adult_mangaka_list
+  - name: サカワキヒロ太
+    display: サカワキヒロ太
+    source: wikipedia_adult_mangaka_list
+  - name: サガノヘルマー
+    display: サガノヘルマー
+    source: wikipedia_adult_mangaka_list
+  - name: "シオマネキ(漫画家)"
+    display: "シオマネキ (漫画家)"
+    source: wikipedia_adult_mangaka_list
+  - name: シオロク
+    display: シオロク
+    source: wikipedia_adult_mangaka_list
+  - name: "シノ(漫画家)"
+    display: "シノ (漫画家)"
+    source: wikipedia_adult_mangaka_list
+  - name: シヒラ竜也
+    display: シヒラ竜也
+    source: wikipedia_adult_mangaka_list
+  - name: シャチカマボコ
+    display: シャチカマボコ
+    source: wikipedia_adult_mangaka_list
+  - name: シャーク闇鍋
+    display: シャーク闇鍋
+    source: wikipedia_adult_mangaka_list
+  - name: シュウキ
+    display: シュウキ
+    source: wikipedia_adult_mangaka_list
+  - name: シュリンプ小林
+    display: シュリンプ小林
+    source: wikipedia_adult_mangaka_list
+  - name: ショーツ和人
+    display: ショーツ和人
+    source: wikipedia_adult_mangaka_list
+  - name: シロガネヒナ
+    display: シロガネヒナ
+    source: wikipedia_adult_mangaka_list
+  - name: シロタクロタ
+    display: シロタクロタ
+    source: wikipedia_adult_mangaka_list
+  - name: ジェームスほたて
+    display: ジェームスほたて
+    source: wikipedia_adult_mangaka_list
+  - name: ジャイロ余目
+    display: ジャイロ余目
+    source: wikipedia_adult_mangaka_list
+  - name: ジャム王子
+    display: ジャム王子
+    source: wikipedia_adult_mangaka_list
+  - name: ジョンKペー太
+    display: "ジョン・K・ペー太"
+    source: wikipedia_adult_mangaka_list
+  - name: ジョンソン勉
+    display: ジョンソン勉
+    source: wikipedia_adult_mangaka_list
+  - name: スノーベリ
+    display: スノーベリ
+    source: wikipedia_adult_mangaka_list
+  - name: スパークうたまろ
+    display: スパークうたまろ
+    source: wikipedia_adult_mangaka_list
+  - name: スミヤ
+    display: スミヤ
+    source: wikipedia_adult_mangaka_list
+  - name: "スミロドン(漫画家)"
+    display: "スミロドン (漫画家)"
+    source: wikipedia_adult_mangaka_list
+  - name: ズンダレぽん
+    display: ズンダレぽん
+    source: wikipedia_adult_mangaka_list
+  - name: セキグチヒロキ
+    display: セキグチヒロキ
+    source: wikipedia_adult_mangaka_list
+  - name: セキケン
+    display: セキケン
+    source: wikipedia_adult_mangaka_list
+  - name: セキスズメ
+    display: セキスズメ
+    source: wikipedia_adult_mangaka_list
+  - name: ゼロの者
+    display: ゼロの者
+    source: wikipedia_adult_mangaka_list
+  - name: ソメジマ
+    display: ソメジマ
+    source: wikipedia_adult_mangaka_list
+  - name: "タ☆マ"
+    display: "タ☆マ"
+    source: wikipedia_adult_mangaka_list
+  - name: タカスギコウ
+    display: タカスギコウ
+    source: wikipedia_adult_mangaka_list
+  - name: タケイツカサ
+    display: タケイツカサ
+    source: wikipedia_adult_mangaka_list
+  - name: "タナカ☆コージ"
+    display: "タナカ☆コージ"
+    source: wikipedia_adult_mangaka_list
+  - name: "タブリス(漫画家)"
+    display: "タブリス (漫画家)"
+    source: wikipedia_adult_mangaka_list
+  - name: タマイシキネ
+    display: タマイシキネ
+    source: wikipedia_adult_mangaka_list
+  - name: ダーティ松本
+    display: "ダーティ・松本"
+    source: wikipedia_adult_mangaka_list
+  - name: チキコ
+    display: チキコ
+    source: wikipedia_adult_mangaka_list
+  - name: "チキン(漫画家)"
+    display: "チキン (漫画家)"
+    source: wikipedia_adult_mangaka_list
+  - name: チサト
+    display: チサト
+    source: wikipedia_adult_mangaka_list
+  - name: チドリヌ
+    display: チドリヌ
+    source: wikipedia_adult_mangaka_list
+  - name: チバトシロウ
+    display: チバトシロウ
+    source: wikipedia_adult_mangaka_list
+  - name: チャーリーにしなか
+    display: チャーリーにしなか
+    source: wikipedia_adult_mangaka_list
+  - name: チョコぱへ
+    display: チョコぱへ
+    source: wikipedia_adult_mangaka_list
+  - name: チンズリーナ
+    display: チンズリーナ
+    source: wikipedia_adult_mangaka_list
+  - name: "ツインテール(漫画家)"
+    display: "ツインテール (漫画家)"
+    source: wikipedia_adult_mangaka_list
+  - name: ツカモリシュウジ
+    display: ツカモリシュウジ
+    source: wikipedia_adult_mangaka_list
+  - name: トキサナ
+    display: トキサナ
+    source: wikipedia_adult_mangaka_list
+  - name: トグチマサヤ
+    display: トグチマサヤ
+    source: wikipedia_adult_mangaka_list
+  - name: トミヒロ
+    display: "トミヒロ、"
+    source: wikipedia_adult_mangaka_list
+  - name: "ドゥンガ(漫画家)"
+    display: "ドゥンガ (漫画家)"
+    source: wikipedia_adult_mangaka_list
+  - name: "ドウモウ(漫画家)"
+    display: "ドウモウ (漫画家)"
+    source: wikipedia_adult_mangaka_list
+  - name: "ドバト(漫画家)"
+    display: "ドバト (漫画家)"
+    source: wikipedia_adult_mangaka_list
+  - name: ドリルムラタ
+    display: ドリルムラタ
+    source: wikipedia_adult_mangaka_list
+  - name: "ナイロン(漫画家)"
+    display: "ナイロン (漫画家)"
+    source: wikipedia_adult_mangaka_list
+  - name: "ナックルカーブ(漫画家)"
+    display: "ナックルカーブ (漫画家)"
+    source: wikipedia_adult_mangaka_list
+  - name: ナナシ
+    display: ナナシ
+    source: wikipedia_adult_mangaka_list
+  - name: ニシカワ醇
+    display: ニシカワ醇
+    source: wikipedia_adult_mangaka_list
+  - name: "ニム(漫画家)"
+    display: "ニム (漫画家)"
+    source: wikipedia_adult_mangaka_list
+  - name: ネムネム
+    display: ネムネム
+    source: wikipedia_adult_mangaka_list
+  - name: ノレソレ
+    display: ノレソレ
+    source: wikipedia_adult_mangaka_list
+  - name: ハスミヒロ
+    display: ハスミヒロ
+    source: wikipedia_adult_mangaka_list
+  - name: ハセイアガナ
+    display: ハセイアガナ
+    source: wikipedia_adult_mangaka_list
+  - name: "ハッチ(漫画家)"
+    display: "ハッチ (漫画家)"
+    source: wikipedia_adult_mangaka_list
+  - name: ハマダユタカ
+    display: ハマダユタカ
+    source: wikipedia_adult_mangaka_list
+  - name: ハルミチヒロ
+    display: ハルミチヒロ
+    source: wikipedia_adult_mangaka_list
+  - name: バケダヌキ
+    display: バケダヌキ
+    source: wikipedia_adult_mangaka_list
+  - name: "パニックアタック(漫画家)"
+    display: "パニックアタック (漫画家)"
+    source: wikipedia_adult_mangaka_list
+  - name: パルコ長嶋
+    display: パルコ長嶋
+    source: wikipedia_adult_mangaka_list
+  - name: ヒヤマシュリ
+    display: ヒヤマシュリ
+    source: wikipedia_adult_mangaka_list
+  - name: ヒロモト森一
+    display: ヒロモト森一
+    source: wikipedia_adult_mangaka_list
+  - name: "ビッチ☆ゴイゴスター"
+    display: "ビッチ☆ゴイゴスター"
+    source: wikipedia_adult_mangaka_list
+  - name: ビューティヘア
+    display: "ビューティ・ヘア"
+    source: wikipedia_adult_mangaka_list
+  - name: ピクピクン
+    display: ピクピクン
+    source: wikipedia_adult_mangaka_list
+  - name: フエタキシ
+    display: フエタキシ
+    source: wikipedia_adult_mangaka_list
+  - name: フクダーダ
+    display: フクダーダ
+    source: wikipedia_adult_mangaka_list
+  - name: ブッチャーU
+    display: ブッチャーU
+    source: wikipedia_adult_mangaka_list
+  - name: ブラザーピエロ
+    display: ブラザーピエロ
+    source: wikipedia_adult_mangaka_list
+  - name: ブランシェア
+    display: ブランシェア
+    source: wikipedia_adult_mangaka_list
+  - name: プロトンザウルス
+    display: プロトンザウルス
+    source: wikipedia_adult_mangaka_list
+  - name: "ペテン師(漫画家)"
+    display: "ペテン師 (漫画家)"
+    source: wikipedia_adult_mangaka_list
+  - name: ペンネームは無い
+    display: ペンネームは無い
+    source: wikipedia_adult_mangaka_list
+  - name: "ホムンクルス(漫画家)"
+    display: "ホムンクルス (漫画家)"
+    source: wikipedia_adult_mangaka_list
+  - name: ホリエ
+    display: ホリエ
+    source: wikipedia_adult_mangaka_list
+  - name: ホーミング
+    display: ホーミング
+    source: wikipedia_adult_mangaka_list
+  - name: "ボボボ(漫画家)"
+    display: "ボボボ (漫画家)"
+    source: wikipedia_adult_mangaka_list
+  - name: ポンスケ
+    display: ポンスケ
+    source: wikipedia_adult_mangaka_list
+  - name: ポン貴花田
+    display: ポン貴花田
+    source: wikipedia_adult_mangaka_list
+  - name: マゴロク
+    display: マゴロク
+    source: wikipedia_adult_mangaka_list
+  - name: マサキ真司
+    display: マサキ真司
+    source: wikipedia_adult_mangaka_list
+  - name: マスタングR
+    display: マスタングR
+    source: wikipedia_adult_mangaka_list
+  - name: マーシーラビット
+    display: マーシーラビット
+    source: wikipedia_adult_mangaka_list
+  - name: ミルフィーユ
+    display: "ミル・フィーユ"
+    source: wikipedia_adult_mangaka_list
+  - name: ムサシマル
+    display: ムサシマル
+    source: wikipedia_adult_mangaka_list
+  - name: ムラさん
+    display: ムラさん
+    source: wikipedia_adult_mangaka_list
+  - name: メトニウム
+    display: メトニウム
+    source: wikipedia_adult_mangaka_list
+  - name: メネアザドッグ
+    display: "メネア・ザ・ドッグ"
+    source: wikipedia_adult_mangaka_list
+  - name: メメ50
+    display: メメ50
+    source: wikipedia_adult_mangaka_list
+  - name: メラメラジェラシー
+    display: メラメラジェラシー
+    source: wikipedia_adult_mangaka_list
+  - name: "モチ(漫画家)"
+    display: "モチ (漫画家)"
+    source: wikipedia_adult_mangaka_list
+  - name: モリカツキ
+    display: モリカツキ
+    source: wikipedia_adult_mangaka_list
+  - name: "モリス(漫画家)"
+    display: "モリス (漫画家)"
+    source: wikipedia_adult_mangaka_list
+  - name: ヤサカニアン
+    display: "ヤサカニ・アン"
+    source: wikipedia_adult_mangaka_list
+  - name: ヤスイリオスケ
+    display: ヤスイリオスケ
+    source: wikipedia_adult_mangaka_list
+  - name: ユキヲ
+    display: ユキヲ
+    source: wikipedia_adult_mangaka_list
+  - name: ユズハ
+    display: ユズハ
+    source: wikipedia_adult_mangaka_list
+  - name: ユナイト双児
+    display: ユナイト双児
+    source: wikipedia_adult_mangaka_list
+  - name: "ルーシア(漫画家)"
+    display: "ルーシア (漫画家)"
+    source: wikipedia_adult_mangaka_list
+  - name: レフトハンド
+    display: レフトハンド
+    source: wikipedia_adult_mangaka_list
+  - name: ロクロイチ
+    display: ロクロイチ
+    source: wikipedia_adult_mangaka_list
+  - name: "ロケットエンジン(漫画家)"
+    display: "ロケットエンジン (漫画家)"
+    source: wikipedia_adult_mangaka_list
+  - name: ロケット兄弟
+    display: ロケット兄弟
+    source: wikipedia_adult_mangaka_list
+  - name: ロシヤの脱走兵
+    display: ロシヤの脱走兵
+    source: wikipedia_adult_mangaka_list
+  - name: 一ノ瀬ランド
+    display: 一ノ瀬ランド
+    source: wikipedia_adult_mangaka_list
+  - name: 一市裕納
+    display: 一市裕納
+    source: wikipedia_adult_mangaka_list
+  - name: 一智和智
+    display: 一智和智
+    source: wikipedia_adult_mangaka_list
+  - name: 七尾ゆきじ
+    display: 七尾ゆきじ
+    source: wikipedia_adult_mangaka_list
+  - name: 七瀬瑞穂
+    display: 七瀬瑞穂
+    source: wikipedia_adult_mangaka_list
+  - name: 七瀬真琴
+    display: 七瀬真琴
+    source: wikipedia_adult_mangaka_list
+  - name: 七鍵智志
+    display: 七鍵智志
+    source: wikipedia_adult_mangaka_list
+  - name: 三ツ森あきら
+    display: 三ツ森あきら
+    source: wikipedia_adult_mangaka_list
+  - name: 三上キャノン
+    display: 三上キャノン
+    source: wikipedia_adult_mangaka_list
+  - name: 三国ハヂメ
+    display: 三国ハヂメ
+    source: wikipedia_adult_mangaka_list
+  - name: 三月さんいち
+    display: 三月さんいち
+    source: wikipedia_adult_mangaka_list
+  - name: 三条友美
+    display: 三条友美
+    source: wikipedia_adult_mangaka_list
+  - name: 三浦靖冬
+    display: 三浦靖冬
+    source: wikipedia_adult_mangaka_list
+  - name: 三舞野かかし
+    display: 三舞野かかし
+    source: wikipedia_adult_mangaka_list
+  - name: 三菱そあら
+    display: 三菱そあら
+    source: wikipedia_adult_mangaka_list
+  - name: 三葉りを
+    display: 三葉りを
+    source: wikipedia_adult_mangaka_list
+  - name: 三部敬
+    display: 三部敬
+    source: wikipedia_adult_mangaka_list
+  - name: 三野いのみ
+    display: 三野いのみ
+    source: wikipedia_adult_mangaka_list
+  - name: 三顕人
+    display: 三顕人
+    source: wikipedia_adult_mangaka_list
+  - name: 上乃龍也
+    display: 上乃龍也
+    source: wikipedia_adult_mangaka_list
+  - name: 上月まんまる
+    display: 上月まんまる
+    source: wikipedia_adult_mangaka_list
+  - name: 上杉陽子
+    display: 上杉陽子
+    source: wikipedia_adult_mangaka_list
+  - name: 上杉響士郎
+    display: 上杉響士郎
+    source: wikipedia_adult_mangaka_list
+  - name: 上村一夫
+    display: 上村一夫
+    source: wikipedia_adult_mangaka_list
+  - name: 上田リエコ
+    display: 上田リエコ
+    source: wikipedia_adult_mangaka_list
+  - name: 上田夢人
+    display: 上田夢人
+    source: wikipedia_adult_mangaka_list
+  - name: 上田裕
+    display: 上田裕
+    source: wikipedia_adult_mangaka_list
+  - name: 上石ニーニー
+    display: 上石ニーニー
+    source: wikipedia_adult_mangaka_list
+  - name: 上総志摩
+    display: 上総志摩
+    source: wikipedia_adult_mangaka_list
+  - name: 上藤政樹
+    display: 上藤政樹
+    source: wikipedia_adult_mangaka_list
+  - name: 上連雀三平
+    display: 上連雀三平
+    source: wikipedia_adult_mangaka_list
+  - name: 上里竹春
+    display: 上里竹春
+    source: wikipedia_adult_mangaka_list
+  - name: 上高野御池
+    display: 上高野御池
+    source: wikipedia_adult_mangaka_list
+  - name: 下月重吾
+    display: 下月重吾
+    source: wikipedia_adult_mangaka_list
+  - name: 不二河聡
+    display: 不二河聡
+    source: wikipedia_adult_mangaka_list
+  - name: "不可知(漫画家)"
+    display: "不可知 (漫画家)"
+    source: wikipedia_adult_mangaka_list
+  - name: 不破悟
+    display: 不破悟
+    source: wikipedia_adult_mangaka_list
+  - name: 世徒ゆうき
+    display: 世徒ゆうき
+    source: wikipedia_adult_mangaka_list
+  - name: 世棄犬
+    display: 世棄犬
+    source: wikipedia_adult_mangaka_list
+  - name: 中ノ尾恵
+    display: 中ノ尾恵
+    source: wikipedia_adult_mangaka_list
+  - name: 中乃空
+    display: 中乃空
+    source: wikipedia_adult_mangaka_list
+  - name: 中原とも
+    display: 中原とも
+    source: wikipedia_adult_mangaka_list
+  - name: 中島初美
+    display: 中島初美
+    source: wikipedia_adult_mangaka_list
+  - name: 中島史雄
+    display: 中島史雄
+    source: wikipedia_adult_mangaka_list
+  - name: 中島零
+    display: 中島零
+    source: wikipedia_adult_mangaka_list
+  - name: "中年(漫画家)"
+    display: "中年 (漫画家)"
+    source: wikipedia_adult_mangaka_list
+  - name: 中村カンコ
+    display: 中村カンコ
+    source: wikipedia_adult_mangaka_list
+  - name: 中村モリス
+    display: 中村モリス
+    source: wikipedia_adult_mangaka_list
+  - name: 中村卯月
+    display: 中村卯月
+    source: wikipedia_adult_mangaka_list
+  - name: 中村嘉宏
+    display: 中村嘉宏
+    source: wikipedia_adult_mangaka_list
+  - name: 中村葛湯
+    display: 中村葛湯
+    source: wikipedia_adult_mangaka_list
+  - name: 中村錦
+    display: 中村錦
+    source: wikipedia_adult_mangaka_list
+  - name: 中森愛
+    display: 中森愛
+    source: wikipedia_adult_mangaka_list
+  - name: 中海義影
+    display: 中海義影
+    source: wikipedia_adult_mangaka_list
+  - name: 中田ゆみ
+    display: 中田ゆみ
+    source: wikipedia_adult_mangaka_list
+  - name: 中田モデム
+    display: 中田モデム
+    source: wikipedia_adult_mangaka_list
+  - name: 中田雅喜
+    display: 中田雅喜
+    source: wikipedia_adult_mangaka_list
+  - name: 中畑義浩
+    display: 中畑義浩
+    source: wikipedia_adult_mangaka_list
+  - name: 中華なると
+    display: 中華なると
+    source: wikipedia_adult_mangaka_list
+  - name: 中野ゆう
+    display: 中野ゆう
+    source: wikipedia_adult_mangaka_list
+  - name: 丸和太郎
+    display: 丸和太郎
+    source: wikipedia_adult_mangaka_list
+  - name: 丸居まる
+    display: 丸居まる
+    source: wikipedia_adult_mangaka_list
+  - name: 丹下スズキ
+    display: 丹下スズキ
+    source: wikipedia_adult_mangaka_list
+  - name: 乃良紳二
+    display: 乃良紳二
+    source: wikipedia_adult_mangaka_list
+  - name: 乃藤悟志
+    display: 乃藤悟志
+    source: wikipedia_adult_mangaka_list
+  - name: 久保田チヒロ
+    display: 久保田チヒロ
+    source: wikipedia_adult_mangaka_list
+  - name: 久富慎太郎
+    display: 久富慎太郎
+    source: wikipedia_adult_mangaka_list
+  - name: 久川ちん
+    display: 久川ちん
+    source: wikipedia_adult_mangaka_list
+  - name: 久我山リカコ
+    display: 久我山リカコ
+    source: wikipedia_adult_mangaka_list
+  - name: 久水あるた
+    display: 久水あるた
+    source: wikipedia_adult_mangaka_list
+  - name: 久神あんず
+    display: 久神あんず
+    source: wikipedia_adult_mangaka_list
+  - name: 久藤清雅
+    display: 久藤清雅
+    source: wikipedia_adult_mangaka_list
+  - name: 久遠ミチヨシ
+    display: 久遠ミチヨシ
+    source: wikipedia_adult_mangaka_list
+  - name: 久里夢亜美
+    display: 久里夢亜美
+    source: wikipedia_adult_mangaka_list
+  - name: "乙(漫画家)"
+    display: "乙 (漫画家)"
+    source: wikipedia_adult_mangaka_list
+  - name: 乙川カヅキ
+    display: 乙川カヅキ
+    source: wikipedia_adult_mangaka_list
+  - name: 九紋竜
+    display: 九紋竜
+    source: wikipedia_adult_mangaka_list
+  - name: 九部玖凛
+    display: 九部玖凛
+    source: wikipedia_adult_mangaka_list
+  - name: 乱魔猫吉
+    display: 乱魔猫吉
+    source: wikipedia_adult_mangaka_list
+  - name: 乾はるか
+    display: 乾はるか
+    source: wikipedia_adult_mangaka_list
+  - name: 亀吉いちこ
+    display: 亀吉いちこ
+    source: wikipedia_adult_mangaka_list
+  - name: 亀鶴孔明
+    display: 亀鶴孔明
+    source: wikipedia_adult_mangaka_list
+  - name: 二階堂みつき
+    display: 二階堂みつき
+    source: wikipedia_adult_mangaka_list
+  - name: 五十五うね
+    display: 五十五うね
+    source: wikipedia_adult_mangaka_list
+  - name: 五十嵐電マ
+    display: 五十嵐電マ
+    source: wikipedia_adult_mangaka_list
+  - name: 五月五日
+    display: 五月五日
+    source: wikipedia_adult_mangaka_list
+  - name: 井ノ本リカ子
+    display: 井ノ本リカ子
+    source: wikipedia_adult_mangaka_list
+  - name: 井上よしひさ
+    display: 井上よしひさ
+    source: wikipedia_adult_mangaka_list
+  - name: "井上純一(イラストレーター)"
+    display: "井上純一 (イラストレーター)"
+    source: wikipedia_adult_mangaka_list
+  - name: 井口ユミ
+    display: 井口ユミ
+    source: wikipedia_adult_mangaka_list
+  - name: 井河隆志
+    display: 井河隆志
+    source: wikipedia_adult_mangaka_list
+  - name: 井荻寿一
+    display: 井荻寿一
+    source: wikipedia_adult_mangaka_list
+  - name: 井藤ななみ
+    display: 井藤ななみ
+    source: wikipedia_adult_mangaka_list
+  - name: 井雲くす
+    display: 井雲くす
+    source: wikipedia_adult_mangaka_list
+  - name: 亜木祭
+    display: "亜木・祭"
+    source: wikipedia_adult_mangaka_list
+  - name: 亜神和美
+    display: 亜神和美
+    source: wikipedia_adult_mangaka_list
+  - name: 亜麻木硅
+    display: 亜麻木硅
+    source: wikipedia_adult_mangaka_list
+  - name: 今村陽子
+    display: 今村陽子
+    source: wikipedia_adult_mangaka_list
+  - name: "介錯(漫画家)"
+    display: "介錯 (漫画家)"
+    source: wikipedia_adult_mangaka_list
+  - name: 仙台魔人
+    display: 仙台魔人
+    source: wikipedia_adult_mangaka_list
+  - name: 仲峰紘史
+    display: 仲峰紘史
+    source: wikipedia_adult_mangaka_list
+  - name: 伊佐美ノゾミ
+    display: 伊佐美ノゾミ
+    source: wikipedia_adult_mangaka_list
+  - name: 伊武秀吉
+    display: 伊武秀吉
+    source: wikipedia_adult_mangaka_list
+  - name: 伊沙和
+    display: 伊沙和
+    source: wikipedia_adult_mangaka_list
+  - name: 伊沢慎壱
+    display: 伊沢慎壱
+    source: wikipedia_adult_mangaka_list
+  - name: 伊藤琳朶
+    display: 伊藤琳朶
+    source: wikipedia_adult_mangaka_list
+  - name: 伊集院808
+    display: 伊集院808
+    source: wikipedia_adult_mangaka_list
+  - name: 伊駒一平
+    display: 伊駒一平
+    source: wikipedia_adult_mangaka_list
+  - name: "伏竜(漫画家)"
+    display: "伏竜 (漫画家)"
+    source: wikipedia_adult_mangaka_list
+  - name: 伴カズヤス
+    display: 伴カズヤス
+    source: wikipedia_adult_mangaka_list
+  - name: 佐々木あかね
+    display: 佐々木あかね
+    source: wikipedia_adult_mangaka_list
+  - name: 佐々木みずき
+    display: 佐々木みずき
+    source: wikipedia_adult_mangaka_list
+  - name: 佐々木バレット
+    display: 佐々木バレット
+    source: wikipedia_adult_mangaka_list
+  - name: "佐伯(漫画家)"
+    display: "佐伯 (漫画家)"
+    source: wikipedia_adult_mangaka_list
+  - name: "佐伯俊(漫画家)"
+    display: "佐伯俊 (漫画家)"
+    source: wikipedia_adult_mangaka_list
+  - name: 佐倉はなつみ
+    display: 佐倉はなつみ
+    source: wikipedia_adult_mangaka_list
+  - name: 佐倉小枝
+    display: 佐倉小枝
+    source: wikipedia_adult_mangaka_list
+  - name: 佐古前あいち
+    display: 佐古前あいち
+    source: wikipedia_adult_mangaka_list
+  - name: 佐治ジロー
+    display: 佐治ジロー
+    source: wikipedia_adult_mangaka_list
+  - name: 佐波サトル
+    display: 佐波サトル
+    source: wikipedia_adult_mangaka_list
+  - name: 佐藤ショウジ
+    display: 佐藤ショウジ
+    source: wikipedia_adult_mangaka_list
+  - name: 佐藤丸美
+    display: 佐藤丸美
+    source: wikipedia_adult_mangaka_list
+  - name: 佐藤沙緒理
+    display: 佐藤沙緒理
+    source: wikipedia_adult_mangaka_list
+  - name: 佐藤登志雄
+    display: 佐藤登志雄
+    source: wikipedia_adult_mangaka_list
+  - name: 佐藤茶菓子
+    display: 佐藤茶菓子
+    source: wikipedia_adult_mangaka_list
+  - name: 佐野タカシ
+    display: 佐野タカシ
+    source: wikipedia_adult_mangaka_list
+  - name: 何処乃アイツ
+    display: 何処乃アイツ
+    source: wikipedia_adult_mangaka_list
+  - name: 保汀一葉
+    display: 保汀一葉
+    source: wikipedia_adult_mangaka_list
+  - name: 保谷良三
+    display: 保谷良三
+    source: wikipedia_adult_mangaka_list
+  - name: 倉上淳士
+    display: 倉上淳士
+    source: wikipedia_adult_mangaka_list
+  - name: 倭丸けるを
+    display: 倭丸けるを
+    source: wikipedia_adult_mangaka_list
+  - name: 倶梨伽羅
+    display: 倶梨伽羅
+    source: wikipedia_adult_mangaka_list
+  - name: 備前泥舟
+    display: 備前泥舟
+    source: wikipedia_adult_mangaka_list
+  - name: 傭兵小僧
+    display: 傭兵小僧
+    source: wikipedia_adult_mangaka_list
+  - name: 優実かづあき
+    display: 優実かづあき
+    source: wikipedia_adult_mangaka_list
+  - name: 克亜樹
+    display: "克・亜樹"
+    source: wikipedia_adult_mangaka_list
+  - name: 八十八良
+    display: 八十八良
+    source: wikipedia_adult_mangaka_list
+  - name: 八尋ぽち
+    display: 八尋ぽち
+    source: wikipedia_adult_mangaka_list
+  - name: 八月明久
+    display: 八月明久
+    source: wikipedia_adult_mangaka_list
+  - name: 八月朔日珈瑠
+    display: 八月朔日珈瑠
+    source: wikipedia_adult_mangaka_list
+  - name: 八月薫
+    display: 八月薫
+    source: wikipedia_adult_mangaka_list
+  - name: 八的暁
+    display: 八的暁
+    source: wikipedia_adult_mangaka_list
+  - name: 八神ひでゆき
+    display: 八神ひでゆき
+    source: wikipedia_adult_mangaka_list
+  - name: 八神健
+    display: 八神健
+    source: wikipedia_adult_mangaka_list
+  - name: 六堂真稀
+    display: 六堂真稀
+    source: wikipedia_adult_mangaka_list
+  - name: 六条麦
+    display: 六条麦
+    source: wikipedia_adult_mangaka_list
+  - name: 六角八十助
+    display: 六角八十助
+    source: wikipedia_adult_mangaka_list
+  - name: 六道神士
+    display: 六道神士
+    source: wikipedia_adult_mangaka_list
+  - name: 内々けやき
+    display: 内々けやき
+    source: wikipedia_adult_mangaka_list
+  - name: 内山亜紀
+    display: 内山亜紀
+    source: wikipedia_adult_mangaka_list
+  - name: 内田こねり
+    display: 内田こねり
+    source: wikipedia_adult_mangaka_list
+  - name: 内藤らぶか
+    display: 内藤らぶか
+    source: wikipedia_adult_mangaka_list
+  - name: "冨樫(漫画家)"
+    display: "冨樫 (漫画家)"
+    source: wikipedia_adult_mangaka_list
+  - name: 冬和こたつ
+    display: 冬和こたつ
+    source: wikipedia_adult_mangaka_list
+  - name: 冬野みかん
+    display: 冬野みかん
+    source: wikipedia_adult_mangaka_list
+  - name: 冬魔乱
+    display: 冬魔乱
+    source: wikipedia_adult_mangaka_list
+  - name: 冴樹高雄
+    display: 冴樹高雄
+    source: wikipedia_adult_mangaka_list
+  - name: 冴草こはく
+    display: 冴草こはく
+    source: wikipedia_adult_mangaka_list
+  - name: 出水守真名
+    display: 出水守真名
+    source: wikipedia_adult_mangaka_list
+  - name: 出縞臣
+    display: 出縞臣
+    source: wikipedia_adult_mangaka_list
+  - name: 出雲空太郎
+    display: 出雲空太郎
+    source: wikipedia_adult_mangaka_list
+  - name: "前川かずお(漫画家)"
+    display: "前川かずお (漫画家)"
+    source: wikipedia_adult_mangaka_list
+  - name: 前田俊夫
+    display: 前田俊夫
+    source: wikipedia_adult_mangaka_list
+  - name: 前田健二郎
+    display: 前田健二郎
+    source: wikipedia_adult_mangaka_list
+  - name: 前田千石
+    display: 前田千石
+    source: wikipedia_adult_mangaka_list
+  - name: 加古川太郎
+    display: 加古川太郎
+    source: wikipedia_adult_mangaka_list
+  - name: 加瀬大輝
+    display: 加瀬大輝
+    source: wikipedia_adult_mangaka_list
+  - name: 加藤じゅん
+    display: 加藤じゅん
+    source: wikipedia_adult_mangaka_list
+  - name: 加藤礼次朗
+    display: 加藤礼次朗
+    source: wikipedia_adult_mangaka_list
+  - name: 加藤茶吉
+    display: 加藤茶吉
+    source: wikipedia_adult_mangaka_list
+  - name: 加賀あくる
+    display: 加賀あくる
+    source: wikipedia_adult_mangaka_list
+  - name: 北原武志
+    display: 北原武志
+    source: wikipedia_adult_mangaka_list
+  - name: 北御牧慶
+    display: 北御牧慶
+    source: wikipedia_adult_mangaka_list
+  - name: 北方国明
+    display: 北方国明
+    source: wikipedia_adult_mangaka_list
+  - name: 北条千早
+    display: 北条千早
+    source: wikipedia_adult_mangaka_list
+  - name: 北河トウタ
+    display: 北河トウタ
+    source: wikipedia_adult_mangaka_list
+  - name: 北里ナヲキ
+    display: 北里ナヲキ
+    source: wikipedia_adult_mangaka_list
+  - name: 北野うらら
+    display: 北野うらら
+    source: wikipedia_adult_mangaka_list
+  - name: 北野健一
+    display: 北野健一
+    source: wikipedia_adult_mangaka_list
+  - name: 十勝源十郎
+    display: 十勝源十郎
+    source: wikipedia_adult_mangaka_list
+  - name: 十神真
+    display: 十神真
+    source: wikipedia_adult_mangaka_list
+  - name: 十羽織ましゅまろ
+    display: 十羽織ましゅまろ
+    source: wikipedia_adult_mangaka_list
+  - name: 千之ナイフ
+    display: 千之ナイフ
+    source: wikipedia_adult_mangaka_list
+  - name: 南Q太
+    display: 南Q太
+    source: wikipedia_adult_mangaka_list
+  - name: "南北(漫画家)"
+    display: "南北 (漫画家)"
+    source: wikipedia_adult_mangaka_list
+  - name: 南条飛鳥
+    display: 南条飛鳥
+    source: wikipedia_adult_mangaka_list
+  - name: 単ユキモト
+    display: 単ユキモト
+    source: wikipedia_adult_mangaka_list
+  - name: 原口清志
+    display: 原口清志
+    source: wikipedia_adult_mangaka_list
+  - name: 厦門潤
+    display: 厦門潤
+    source: wikipedia_adult_mangaka_list
+  - name: 友原道哉
+    display: 友原道哉
+    source: wikipedia_adult_mangaka_list
+  - name: 友永和
+    display: 友永和
+    source: wikipedia_adult_mangaka_list
+  - name: 友美イチロウ
+    display: 友美イチロウ
+    source: wikipedia_adult_mangaka_list
+  - name: 友野ヒロ
+    display: 友野ヒロ
+    source: wikipedia_adult_mangaka_list
+  - name: 反村幼児
+    display: 反村幼児
+    source: wikipedia_adult_mangaka_list
+  - name: 古事記王子
+    display: 古事記王子
+    source: wikipedia_adult_mangaka_list
+  - name: 古賀亮一
+    display: 古賀亮一
+    source: wikipedia_adult_mangaka_list
+  - name: 古賀燕
+    display: 古賀燕
+    source: wikipedia_adult_mangaka_list
+  - name: 史鬼匠人
+    display: 史鬼匠人
+    source: wikipedia_adult_mangaka_list
+  - name: 叶竜児
+    display: 叶竜児
+    source: wikipedia_adult_mangaka_list
+  - name: 司人形
+    display: 司人形
+    source: wikipedia_adult_mangaka_list
+  - name: 吉岡宏純
+    display: 吉岡宏純
+    source: wikipedia_adult_mangaka_list
+  - name: 吉川かば夫
+    display: 吉川かば夫
+    source: wikipedia_adult_mangaka_list
+  - name: "吉田(漫画家)"
+    display: "吉田 (漫画家)"
+    source: wikipedia_adult_mangaka_list
+  - name: 吉田あぺぢ
+    display: 吉田あぺぢ
+    source: wikipedia_adult_mangaka_list
+  - name: 吉田鳶牡
+    display: 吉田鳶牡
+    source: wikipedia_adult_mangaka_list
+  - name: 吉祥寺もなか
+    display: 吉祥寺もなか
+    source: wikipedia_adult_mangaka_list
+  - name: 吉祥寺北四郎
+    display: 吉祥寺北四郎
+    source: wikipedia_adult_mangaka_list
+  - name: 吉良広義
+    display: 吉良広義
+    source: wikipedia_adult_mangaka_list
+  - name: 吉野志穂
+    display: 吉野志穂
+    source: wikipedia_adult_mangaka_list
+  - name: 名仁川るい
+    display: 名仁川るい
+    source: wikipedia_adult_mangaka_list
+  - name: 向後つぐお
+    display: 向後つぐお
+    source: wikipedia_adult_mangaka_list
+  - name: 向正義
+    display: 向正義
+    source: wikipedia_adult_mangaka_list
+  - name: 呉マサヒロ
+    display: 呉マサヒロ
+    source: wikipedia_adult_mangaka_list
+  - name: 命わずか
+    display: 命わずか
+    source: wikipedia_adult_mangaka_list
+  - name: 和六里ハル
+    display: 和六里ハル
+    source: wikipedia_adult_mangaka_list
+  - name: 和気一作
+    display: 和気一作
+    source: wikipedia_adult_mangaka_list
+  - name: 和泉航
+    display: 和泉航
+    source: wikipedia_adult_mangaka_list
+  - name: 和馬村政
+    display: 和馬村政
+    source: wikipedia_adult_mangaka_list
+  - name: 咲夜しおん
+    display: 咲夜しおん
+    source: wikipedia_adult_mangaka_list
+  - name: 咲村kajima
+    display: 咲村kajima
+    source: wikipedia_adult_mangaka_list
+  - name: 咲耶洸
+    display: 咲耶洸
+    source: wikipedia_adult_mangaka_list
+  - name: 咲香里
+    display: 咲香里
+    source: wikipedia_adult_mangaka_list
+  - name: 品川ハム
+    display: 品川ハム
+    source: wikipedia_adult_mangaka_list
+  - name: 唄飛鳥
+    display: 唄飛鳥
+    source: wikipedia_adult_mangaka_list
+  - name: 唐沢涼
+    display: 唐沢涼
+    source: wikipedia_adult_mangaka_list
+  - name: 唐辛子ひでゆ
+    display: 唐辛子ひでゆ
+    source: wikipedia_adult_mangaka_list
+  - name: 唯登詩樹
+    display: 唯登詩樹
+    source: wikipedia_adult_mangaka_list
+  - name: 問合来人
+    display: 問合来人
+    source: wikipedia_adult_mangaka_list
+  - name: 四万十曜太
+    display: 四万十曜太
+    source: wikipedia_adult_mangaka_list
+  - name: 四島由紀夫
+    display: 四島由紀夫
+    source: wikipedia_adult_mangaka_list
+  - name: 四条定史
+    display: 四条定史
+    source: wikipedia_adult_mangaka_list
+  - name: 國津武士
+    display: 國津武士
+    source: wikipedia_adult_mangaka_list
+  - name: 園崎宗一
+    display: 園崎宗一
+    source: wikipedia_adult_mangaka_list
+  - name: 土居坂崎
+    display: 土居坂崎
+    source: wikipedia_adult_mangaka_list
+  - name: 土屋慎吾
+    display: 土屋慎吾
+    source: wikipedia_adult_mangaka_list
+  - name: 坂上海
+    display: 坂上海
+    source: wikipedia_adult_mangaka_list
+  - name: 坂井音太
+    display: 坂井音太
+    source: wikipedia_adult_mangaka_list
+  - name: 坂本しゅうじ
+    display: 坂本しゅうじ
+    source: wikipedia_adult_mangaka_list
+  - name: 坂辺周一
+    display: 坂辺周一
+    source: wikipedia_adult_mangaka_list
+  - name: 城爪草
+    display: 城爪草
+    source: wikipedia_adult_mangaka_list
+  - name: 堀博昭
+    display: 堀博昭
+    source: wikipedia_adult_mangaka_list
+  - name: 堀川悟郎
+    display: 堀川悟郎
+    source: wikipedia_adult_mangaka_list
+  - name: 堂本奈央
+    display: 堂本奈央
+    source: wikipedia_adult_mangaka_list
+  - name: 堺はまち
+    display: 堺はまち
+    source: wikipedia_adult_mangaka_list
+  - name: 塚本ミエイ
+    display: 塚本ミエイ
+    source: wikipedia_adult_mangaka_list
+  - name: 塩屋舞子
+    display: 塩屋舞子
+    source: wikipedia_adult_mangaka_list
+  - name: 増田剛
+    display: 増田剛
+    source: wikipedia_adult_mangaka_list
+  - name: 増田晴彦
+    display: 増田晴彦
+    source: wikipedia_adult_mangaka_list
+  - name: 増田逢羅
+    display: 増田逢羅
+    source: wikipedia_adult_mangaka_list
+  - name: 士土大介
+    display: 士土大介
+    source: wikipedia_adult_mangaka_list
+  - name: 士崎雅雪
+    display: 士崎雅雪
+    source: wikipedia_adult_mangaka_list
+  - name: 夏川冬
+    display: 夏川冬
+    source: wikipedia_adult_mangaka_list
+  - name: 夏木清人
+    display: 夏木清人
+    source: wikipedia_adult_mangaka_list
+  - name: 夏生恒
+    display: 夏生恒
+    source: wikipedia_adult_mangaka_list
+  - name: 夏蜜柑
+    display: 夏蜜柑
+    source: wikipedia_adult_mangaka_list
+  - name: 多田イサム
+    display: 多田イサム
+    source: wikipedia_adult_mangaka_list
+  - name: 夜馬勝絵
+    display: 夜馬勝絵
+    source: wikipedia_adult_mangaka_list
+  - name: 夜魔咲翔
+    display: 夜魔咲翔
+    source: wikipedia_adult_mangaka_list
+  - name: "夢〜眠"
+    display: "夢〜眠"
+    source: wikipedia_adult_mangaka_list
+  - name: 夢乃狸
+    display: 夢乃狸
+    source: wikipedia_adult_mangaka_list
+  - name: 夢咲三十郎
+    display: 夢咲三十郎
+    source: wikipedia_adult_mangaka_list
+  - name: 大友卓二
+    display: 大友卓二
+    source: wikipedia_adult_mangaka_list
+  - name: "大和川(漫画家)"
+    display: "大和川 (漫画家)"
+    source: wikipedia_adult_mangaka_list
+  - name: 大場よしひろ
+    display: 大場よしひろ
+    source: wikipedia_adult_mangaka_list
+  - name: 大塚子虎
+    display: 大塚子虎
+    source: wikipedia_adult_mangaka_list
+  - name: 大塚弘樹
+    display: 大塚弘樹
+    source: wikipedia_adult_mangaka_list
+  - name: 大塚麗夏
+    display: 大塚麗夏
+    source: wikipedia_adult_mangaka_list
+  - name: 大孛輝はな
+    display: 大孛輝はな
+    source: wikipedia_adult_mangaka_list
+  - name: 大守春雨
+    display: 大守春雨
+    source: wikipedia_adult_mangaka_list
+  - name: 大山ミミず
+    display: 大山ミミず
+    source: wikipedia_adult_mangaka_list
+  - name: 大島岳詩
+    display: 大島岳詩
+    source: wikipedia_adult_mangaka_list
+  - name: 大島永遠
+    display: 大島永遠
+    source: wikipedia_adult_mangaka_list
+  - name: 大川田ナン
+    display: 大川田ナン
+    source: wikipedia_adult_mangaka_list
+  - name: 大庭佳文
+    display: 大庭佳文
+    source: wikipedia_adult_mangaka_list
+  - name: 大暮維人
+    display: 大暮維人
+    source: wikipedia_adult_mangaka_list
+  - name: 大朋めがね
+    display: 大朋めがね
+    source: wikipedia_adult_mangaka_list
+  - name: 大林森
+    display: 大林森
+    source: wikipedia_adult_mangaka_list
+  - name: 大槻サチ
+    display: 大槻サチ
+    source: wikipedia_adult_mangaka_list
+  - name: 大槻ミチロヲ
+    display: 大槻ミチロヲ
+    source: wikipedia_adult_mangaka_list
+  - name: 大槻保彦
+    display: 大槻保彦
+    source: wikipedia_adult_mangaka_list
+  - name: 大橋薫
+    display: 大橋薫
+    source: wikipedia_adult_mangaka_list
+  - name: 大波耀子
+    display: 大波耀子
+    source: wikipedia_adult_mangaka_list
+  - name: 大石まさる
+    display: 大石まさる
+    source: wikipedia_adult_mangaka_list
+  - name: 大秦国王安敦
+    display: 大秦国王安敦
+    source: wikipedia_adult_mangaka_list
+  - name: 大見武士
+    display: 大見武士
+    source: wikipedia_adult_mangaka_list
+  - name: "大豹(漫画家)"
+    display: "大豹 (漫画家)"
+    source: wikipedia_adult_mangaka_list
+  - name: 大貫まくり
+    display: 大貫まくり
+    source: wikipedia_adult_mangaka_list
+  - name: 大越孝太郎
+    display: 大越孝太郎
+    source: wikipedia_adult_mangaka_list
+  - name: 大野哲也
+    display: 大野哲也
+    source: wikipedia_adult_mangaka_list
+  - name: 天乃紅葉
+    display: 天乃紅葉
+    source: wikipedia_adult_mangaka_list
+  - name: 天太郎
+    display: 天太郎
+    source: wikipedia_adult_mangaka_list
+  - name: 天櫻みとの
+    display: 天櫻みとの
+    source: wikipedia_adult_mangaka_list
+  - name: 天津冴
+    display: 天津冴
+    source: wikipedia_adult_mangaka_list
+  - name: 天海まとば
+    display: 天海まとば
+    source: wikipedia_adult_mangaka_list
+  - name: 天漸雅
+    display: 天漸雅
+    source: wikipedia_adult_mangaka_list
+  - name: 天瀬晴之
+    display: 天瀬晴之
+    source: wikipedia_adult_mangaka_list
+  - name: 天王寺きつね
+    display: 天王寺きつね
+    source: wikipedia_adult_mangaka_list
+  - name: 天竺浪人
+    display: 天竺浪人
+    source: wikipedia_adult_mangaka_list
+  - name: 天羽真理
+    display: 天羽真理
+    source: wikipedia_adult_mangaka_list
+  - name: 天誅丸
+    display: 天誅丸
+    source: wikipedia_adult_mangaka_list
+  - name: 天道まさえ
+    display: 天道まさえ
+    source: wikipedia_adult_mangaka_list
+  - name: 天野英美
+    display: 天野英美
+    source: wikipedia_adult_mangaka_list
+  - name: 天野雨乃
+    display: 天野雨乃
+    source: wikipedia_adult_mangaka_list
+  - name: 太刀椿
+    display: 太刀椿
+    source: wikipedia_adult_mangaka_list
+  - name: 太平さんせっと
+    display: 太平さんせっと
+    source: wikipedia_adult_mangaka_list
+  - name: 奈塚Q弥
+    display: 奈塚Q弥
+    source: wikipedia_adult_mangaka_list
+  - name: 奥森ボウイ
+    display: 奥森ボウイ
+    source: wikipedia_adult_mangaka_list
+  - name: 奥間まさみ
+    display: 奥間まさみ
+    source: wikipedia_adult_mangaka_list
+  - name: 奴隷ジャッキー
+    display: 奴隷ジャッキー
+    source: wikipedia_adult_mangaka_list
+  - name: 如月群真
+    display: 如月群真
+    source: wikipedia_adult_mangaka_list
+  - name: 如羅罹くらり
+    display: 如羅罹くらり
+    source: wikipedia_adult_mangaka_list
+  - name: 姫はじめ
+    display: 姫はじめ
+    source: wikipedia_adult_mangaka_list
+  - name: 姫美川涙
+    display: 姫美川涙
+    source: wikipedia_adult_mangaka_list
+  - name: 姫野蜜柑
+    display: 姫野蜜柑
+    source: wikipedia_adult_mangaka_list
+  - name: 嬉野めぐみ
+    display: 嬉野めぐみ
+    source: wikipedia_adult_mangaka_list
+  - name: 宇内鉄朗
+    display: 宇内鉄朗
+    source: wikipedia_adult_mangaka_list
+  - name: 安世夢
+    display: 安世夢
+    source: wikipedia_adult_mangaka_list
+  - name: 安原司
+    display: 安原司
+    source: wikipedia_adult_mangaka_list
+  - name: 安藤ユイ
+    display: 安藤ユイ
+    source: wikipedia_adult_mangaka_list
+  - name: 安藤慈朗
+    display: 安藤慈朗
+    source: wikipedia_adult_mangaka_list
+  - name: 安藤裕行
+    display: 安藤裕行
+    source: wikipedia_adult_mangaka_list
+  - name: 安達拓実
+    display: 安達拓実
+    source: wikipedia_adult_mangaka_list
+  - name: "完顔阿骨打(漫画家)"
+    display: "完顔阿骨打 (漫画家)"
+    source: wikipedia_adult_mangaka_list
+  - name: 宗我部としのり
+    display: 宗我部としのり
+    source: wikipedia_adult_mangaka_list
+  - name: 定広美香
+    display: 定広美香
+    source: wikipedia_adult_mangaka_list
+  - name: 宝あきひと
+    display: 宝あきひと
+    source: wikipedia_adult_mangaka_list
+  - name: 宮下未紀
+    display: 宮下未紀
+    source: wikipedia_adult_mangaka_list
+  - name: 宮内由香
+    display: 宮内由香
+    source: wikipedia_adult_mangaka_list
+  - name: 宮原ナオ
+    display: 宮原ナオ
+    source: wikipedia_adult_mangaka_list
+  - name: 宮崎摩耶
+    display: 宮崎摩耶
+    source: wikipedia_adult_mangaka_list
+  - name: 宮本りず
+    display: 宮本りず
+    source: wikipedia_adult_mangaka_list
+  - name: 宮越和草
+    display: 宮越和草
+    source: wikipedia_adult_mangaka_list
+  - name: 宮野桃太郎
+    display: 宮野桃太郎
+    source: wikipedia_adult_mangaka_list
+  - name: 宵野コタロー
+    display: 宵野コタロー
+    source: wikipedia_adult_mangaka_list
+  - name: "家内制自転車操業。"
+    display: "家内制自転車操業。"
+    source: wikipedia_adult_mangaka_list
+  - name: 富士やま
+    display: 富士やま
+    source: wikipedia_adult_mangaka_list
+  - name: 富沢順
+    display: 富沢順
+    source: wikipedia_adult_mangaka_list
+  - name: "寒天(漫画家)"
+    display: "寒天 (漫画家)"
+    source: wikipedia_adult_mangaka_list
+  - name: 寿ねね
+    display: 寿ねね
+    source: wikipedia_adult_mangaka_list
+  - name: 将貴和寿
+    display: 将貴和寿
+    source: wikipedia_adult_mangaka_list
+  - name: 将門つかさ
+    display: 将門つかさ
+    source: wikipedia_adult_mangaka_list
+  - name: 小だまたけし
+    display: 小だまたけし
+    source: wikipedia_adult_mangaka_list
+  - name: 小倉脩一
+    display: 小倉脩一
+    source: wikipedia_adult_mangaka_list
+  - name: 小宮裕太
+    display: 小宮裕太
+    source: wikipedia_adult_mangaka_list
+  - name: 小山雲鶴
+    display: 小山雲鶴
+    source: wikipedia_adult_mangaka_list
+  - name: 小峯つばさ
+    display: 小峯つばさ
+    source: wikipedia_adult_mangaka_list
+  - name: 小島紗
+    display: 小島紗
+    source: wikipedia_adult_mangaka_list
+  - name: 小店街光景
+    display: 小店街光景
+    source: wikipedia_adult_mangaka_list
+  - name: 小本田絵舞
+    display: 小本田絵舞
+    source: wikipedia_adult_mangaka_list
+  - name: 小林かずみ
+    display: 小林かずみ
+    source: wikipedia_adult_mangaka_list
+  - name: "小林少年(漫画家)"
+    display: "小林少年 (漫画家)"
+    source: wikipedia_adult_mangaka_list
+  - name: 小林拓己
+    display: 小林拓己
+    source: wikipedia_adult_mangaka_list
+  - name: 小林王桂
+    display: 小林王桂
+    source: wikipedia_adult_mangaka_list
+  - name: 小柳ロイヤル
+    display: 小柳ロイヤル
+    source: wikipedia_adult_mangaka_list
+  - name: 小梅けいと
+    display: 小梅けいと
+    source: wikipedia_adult_mangaka_list
+  - name: 小沢田健吾
+    display: 小沢田健吾
+    source: wikipedia_adult_mangaka_list
+  - name: 小河レンジ
+    display: 小河レンジ
+    source: wikipedia_adult_mangaka_list
+  - name: 小河将良
+    display: 小河将良
+    source: wikipedia_adult_mangaka_list
+  - name: 小澤奈央
+    display: 小澤奈央
+    source: wikipedia_adult_mangaka_list
+  - name: 小白京介
+    display: 小白京介
+    source: wikipedia_adult_mangaka_list
+  - name: 小石ちかさ
+    display: 小石ちかさ
+    source: wikipedia_adult_mangaka_list
+  - name: 小石川ふに
+    display: 小石川ふに
+    source: wikipedia_adult_mangaka_list
+  - name: 小菅勇太郎
+    display: 小菅勇太郎
+    source: wikipedia_adult_mangaka_list
+  - name: 小路あゆむ
+    display: 小路あゆむ
+    source: wikipedia_adult_mangaka_list
+  - name: 小野寺浩二
+    display: 小野寺浩二
+    source: wikipedia_adult_mangaka_list
+  - name: 尚たかみ
+    display: 尚たかみ
+    source: wikipedia_adult_mangaka_list
+  - name: 尾山泰永
+    display: 尾山泰永
+    source: wikipedia_adult_mangaka_list
+  - name: 尾崎晶
+    display: 尾崎晶
+    source: wikipedia_adult_mangaka_list
+  - name: 尾崎未来
+    display: 尾崎未来
+    source: wikipedia_adult_mangaka_list
+  - name: 尾野けぬじ
+    display: 尾野けぬじ
+    source: wikipedia_adult_mangaka_list
+  - name: 尾鈴明臣
+    display: 尾鈴明臣
+    source: wikipedia_adult_mangaka_list
+  - name: 山いもとろとろ
+    display: 山いもとろとろ
+    source: wikipedia_adult_mangaka_list
+  - name: 山下うり
+    display: 山下うり
+    source: wikipedia_adult_mangaka_list
+  - name: 山下クロヲ
+    display: 山下クロヲ
+    source: wikipedia_adult_mangaka_list
+  - name: 山井逆太郎
+    display: 山井逆太郎
+    source: wikipedia_adult_mangaka_list
+  - name: 山内繁利
+    display: 山内繁利
+    source: wikipedia_adult_mangaka_list
+  - name: 山吹ムック
+    display: 山吹ムック
+    source: wikipedia_adult_mangaka_list
+  - name: 山吹珠美
+    display: 山吹珠美
+    source: wikipedia_adult_mangaka_list
+  - name: 山咲まさと
+    display: 山咲まさと
+    source: wikipedia_adult_mangaka_list
+  - name: 山岡鋼鉄郎
+    display: 山岡鋼鉄郎
+    source: wikipedia_adult_mangaka_list
+  - name: 山崎かずま
+    display: 山崎かずま
+    source: wikipedia_adult_mangaka_list
+  - name: "山崎亨(漫画家)"
+    display: "山崎亨 (漫画家)"
+    source: wikipedia_adult_mangaka_list
+  - name: 山川純一
+    display: 山川純一
+    source: wikipedia_adult_mangaka_list
+  - name: 山形せい
+    display: 山形せい
+    source: wikipedia_adult_mangaka_list
+  - name: 山文京伝
+    display: 山文京伝
+    source: wikipedia_adult_mangaka_list
+  - name: 山本よし文
+    display: 山本よし文
+    source: wikipedia_adult_mangaka_list
+  - name: 山本夜羽音
+    display: 山本夜羽音
+    source: wikipedia_adult_mangaka_list
+  - name: 山本直樹
+    display: 山本直樹
+    source: wikipedia_adult_mangaka_list
+  - name: 山本貴嗣
+    display: 山本貴嗣
+    source: wikipedia_adult_mangaka_list
+  - name: 山本賢治
+    display: 山本賢治
+    source: wikipedia_adult_mangaka_list
+  - name: 山本雲居
+    display: 山本雲居
+    source: wikipedia_adult_mangaka_list
+  - name: 山村なつる
+    display: 山村なつる
+    source: wikipedia_adult_mangaka_list
+  - name: 山田こうすけ
+    display: 山田こうすけ
+    source: wikipedia_adult_mangaka_list
+  - name: 山田のら
+    display: 山田のら
+    source: wikipedia_adult_mangaka_list
+  - name: 山田ひより
+    display: 山田ひより
+    source: wikipedia_adult_mangaka_list
+  - name: 山田タヒチ
+    display: 山田タヒチ
+    source: wikipedia_adult_mangaka_list
+  - name: 山田双葉
+    display: 山田双葉
+    source: wikipedia_adult_mangaka_list
+  - name: 山田可南
+    display: 山田可南
+    source: wikipedia_adult_mangaka_list
+  - name: 山田秋太郎
+    display: 山田秋太郎
+    source: wikipedia_adult_mangaka_list
+  - name: 山野一
+    display: 山野一
+    source: wikipedia_adult_mangaka_list
+  - name: 山﨑あつし
+    display: 山﨑あつし
+    source: wikipedia_adult_mangaka_list
+  - name: 岡すんどめ
+    display: 岡すんどめ
+    source: wikipedia_adult_mangaka_list
+  - name: 岡崎那緒
+    display: 岡崎那緒
+    source: wikipedia_adult_mangaka_list
+  - name: 岡村杜巳
+    display: 岡村杜巳
+    source: wikipedia_adult_mangaka_list
+  - name: 岡田コウ
+    display: 岡田コウ
+    source: wikipedia_adult_mangaka_list
+  - name: 岡田正尚
+    display: 岡田正尚
+    source: wikipedia_adult_mangaka_list
+  - name: 岡田鯛
+    display: 岡田鯛
+    source: wikipedia_adult_mangaka_list
+  - name: 岩永亮太郎
+    display: 岩永亮太郎
+    source: wikipedia_adult_mangaka_list
+  - name: 岩泉翔
+    display: 岩泉翔
+    source: wikipedia_adult_mangaka_list
+  - name: 岩谷テンホー
+    display: 岩谷テンホー
+    source: wikipedia_adult_mangaka_list
+  - name: 岩越国雄
+    display: 岩越国雄
+    source: wikipedia_adult_mangaka_list
+  - name: 岬ゆきひろ
+    display: 岬ゆきひろ
+    source: wikipedia_adult_mangaka_list
+  - name: 岸田圭市
+    display: 岸田圭市
+    source: wikipedia_adult_mangaka_list
+  - name: 峠比呂
+    display: 峠比呂
+    source: wikipedia_adult_mangaka_list
+  - name: 島本晴海
+    display: 島本晴海
+    source: wikipedia_adult_mangaka_list
+  - name: 島田ひろかず
+    display: 島田ひろかず
+    source: wikipedia_adult_mangaka_list
+  - name: 嶋尾和
+    display: 嶋尾和
+    source: wikipedia_adult_mangaka_list
+  - name: 嶺川れーこ
+    display: 嶺川れーこ
+    source: wikipedia_adult_mangaka_list
+  - name: 嶺本八美
+    display: 嶺本八美
+    source: wikipedia_adult_mangaka_list
+  - name: 川上聖
+    display: 川上聖
+    source: wikipedia_adult_mangaka_list
+  - name: 川原みんつ
+    display: 川原みんつ
+    source: wikipedia_adult_mangaka_list
+  - name: 川原流寺
+    display: 川原流寺
+    source: wikipedia_adult_mangaka_list
+  - name: 川尻よしひろ
+    display: 川尻よしひろ
+    source: wikipedia_adult_mangaka_list
+  - name: 川崎犬太郎
+    display: 川崎犬太郎
+    source: wikipedia_adult_mangaka_list
+  - name: 川崎直孝
+    display: 川崎直孝
+    source: wikipedia_adult_mangaka_list
+  - name: 川本貴裕
+    display: 川本貴裕
+    source: wikipedia_adult_mangaka_list
+  - name: 川津健二朗
+    display: 川津健二朗
+    source: wikipedia_adult_mangaka_list
+  - name: 川邑司
+    display: 川邑司
+    source: wikipedia_adult_mangaka_list
+  - name: 工藤洋
+    display: 工藤洋
+    source: wikipedia_adult_mangaka_list
+  - name: 左カゲトラ
+    display: 左カゲトラ
+    source: wikipedia_adult_mangaka_list
+  - name: 左橋レンヤ
+    display: 左橋レンヤ
+    source: wikipedia_adult_mangaka_list
+  - name: 巫代凪遠
+    display: 巫代凪遠
+    source: wikipedia_adult_mangaka_list
+  - name: 巻田佳春
+    display: 巻田佳春
+    source: wikipedia_adult_mangaka_list
+  - name: 巻貝一ヶ
+    display: 巻貝一ヶ
+    source: wikipedia_adult_mangaka_list
+  - name: 市井時計
+    display: 市井時計
+    source: wikipedia_adult_mangaka_list
+  - name: 市原和真
+    display: 市原和真
+    source: wikipedia_adult_mangaka_list
+  - name: 市川和彦
+    display: 市川和彦
+    source: wikipedia_adult_mangaka_list
+  - name: 師走の翁
+    display: 師走の翁
+    source: wikipedia_adult_mangaka_list
+  - name: 平こさか
+    display: 平こさか
+    source: wikipedia_adult_mangaka_list
+  - name: 平口広美
+    display: 平口広美
+    source: wikipedia_adult_mangaka_list
+  - name: 平木直利
+    display: 平木直利
+    source: wikipedia_adult_mangaka_list
+  - name: 平野耕太
+    display: 平野耕太
+    source: wikipedia_adult_mangaka_list
+  - name: 平間ひろかず
+    display: 平間ひろかず
+    source: wikipedia_adult_mangaka_list
+  - name: 幸せ共和国
+    display: 幸せ共和国
+    source: wikipedia_adult_mangaka_list
+  - name: 幸田朋弘
+    display: 幸田朋弘
+    source: wikipedia_adult_mangaka_list
+  - name: 幻桜花
+    display: 幻桜花
+    source: wikipedia_adult_mangaka_list
+  - name: 幻超二
+    display: 幻超二
+    source: wikipedia_adult_mangaka_list
+  - name: 幾夜大黒堂
+    display: 幾夜大黒堂
+    source: wikipedia_adult_mangaka_list
+  - name: 幾花にいろ
+    display: 幾花にいろ
+    source: wikipedia_adult_mangaka_list
+  - name: 広川浩一郎
+    display: 広川浩一郎
+    source: wikipedia_adult_mangaka_list
+  - name: 広輪凪
+    display: 広輪凪
+    source: wikipedia_adult_mangaka_list
+  - name: 庄司二号
+    display: 庄司二号
+    source: wikipedia_adult_mangaka_list
+  - name: "庚(漫画家)"
+    display: "庚 (漫画家)"
+    source: wikipedia_adult_mangaka_list
+  - name: 座間翔二
+    display: 座間翔二
+    source: wikipedia_adult_mangaka_list
+  - name: 弐駆緒
+    display: 弐駆緒
+    source: wikipedia_adult_mangaka_list
+  - name: 弥美津ヒロ
+    display: 弥美津ヒロ
+    source: wikipedia_adult_mangaka_list
+  - name: 彦馬ヒロユキ
+    display: 彦馬ヒロユキ
+    source: wikipedia_adult_mangaka_list
+  - name: 彩画堂
+    display: 彩画堂
+    source: wikipedia_adult_mangaka_list
+  - name: 影乃いりす
+    display: 影乃いりす
+    source: wikipedia_adult_mangaka_list
+  - name: 影原半蔵
+    display: 影原半蔵
+    source: wikipedia_adult_mangaka_list
+  - name: 影夢優
+    display: 影夢優
+    source: wikipedia_adult_mangaka_list
+  - name: 影崎由那
+    display: 影崎由那
+    source: wikipedia_adult_mangaka_list
+  - name: 影狼ぼが夫
+    display: 影狼ぼが夫
+    source: wikipedia_adult_mangaka_list
+  - name: "後藤寿庵(漫画家)"
+    display: "後藤寿庵 (漫画家)"
+    source: wikipedia_adult_mangaka_list
+  - name: 後藤晶
+    display: 後藤晶
+    source: wikipedia_adult_mangaka_list
+  - name: 後藤羽矢子
+    display: 後藤羽矢子
+    source: wikipedia_adult_mangaka_list
+  - name: 御免なさい
+    display: 御免なさい
+    source: wikipedia_adult_mangaka_list
+  - name: 御前怜
+    display: 御前怜
+    source: wikipedia_adult_mangaka_list
+  - name: 御形屋はるか
+    display: 御形屋はるか
+    source: wikipedia_adult_mangaka_list
+  - name: 御影獏
+    display: 御影獏
+    source: wikipedia_adult_mangaka_list
+  - name: 御手洗佑樹
+    display: 御手洗佑樹
+    source: wikipedia_adult_mangaka_list
+  - name: 御手洗光靖
+    display: 御手洗光靖
+    source: wikipedia_adult_mangaka_list
+  - name: 御米椎
+    display: 御米椎
+    source: wikipedia_adult_mangaka_list
+  - name: 御野眠
+    display: 御野眠
+    source: wikipedia_adult_mangaka_list
+  - name: 復八磨直兎
+    display: 復八磨直兎
+    source: wikipedia_adult_mangaka_list
+  - name: 徳田しんのすけ
+    display: 徳田しんのすけ
+    source: wikipedia_adult_mangaka_list
+  - name: 忍野しのぶ
+    display: 忍野しのぶ
+    source: wikipedia_adult_mangaka_list
+  - name: 志乃武丹英
+    display: 志乃武丹英
+    source: wikipedia_adult_mangaka_list
+  - name: 志峨丘トウキ
+    display: 志峨丘トウキ
+    source: wikipedia_adult_mangaka_list
+  - name: 恋緒みなと
+    display: 恋緒みなと
+    source: wikipedia_adult_mangaka_list
+  - name: 恩田チロ
+    display: 恩田チロ
+    source: wikipedia_adult_mangaka_list
+  - name: 恵田真芽
+    display: 恵田真芽
+    source: wikipedia_adult_mangaka_list
+  - name: 恵荘介
+    display: 恵荘介
+    source: wikipedia_adult_mangaka_list
+  - name: 悠宇樹
+    display: 悠宇樹
+    source: wikipedia_adult_mangaka_list
+  - name: 悠木しん
+    display: 悠木しん
+    source: wikipedia_adult_mangaka_list
+  - name: 悠理愛
+    display: 悠理愛
+    source: wikipedia_adult_mangaka_list
+  - name: 悪瑞派武羅雨
+    display: 悪瑞派武羅雨
+    source: wikipedia_adult_mangaka_list
+  - name: 愛上陸
+    display: 愛上陸
+    source: wikipedia_adult_mangaka_list
+  - name: 愛夢由宇
+    display: 愛夢由宇
+    source: wikipedia_adult_mangaka_list
+  - name: 愛染五郎
+    display: 愛染五郎
+    source: wikipedia_adult_mangaka_list
+  - name: 憧明良
+    display: 憧明良
+    source: wikipedia_adult_mangaka_list
+  - name: 成人向け漫画雑誌の一覧
+    display: 成人向け漫画雑誌の一覧
+    source: wikipedia_adult_mangaka_list
+  - name: 成島ゴドー
+    display: 成島ゴドー
+    source: wikipedia_adult_mangaka_list
+  - name: 成田りうく
+    display: 成田りうく
+    source: wikipedia_adult_mangaka_list
+  - name: 成田アキラ
+    display: 成田アキラ
+    source: wikipedia_adult_mangaka_list
+  - name: 成田香車
+    display: 成田香車
+    source: wikipedia_adult_mangaka_list
+  - name: 或十せねか
+    display: 或十せねか
+    source: wikipedia_adult_mangaka_list
+  - name: 戦国くん
+    display: 戦国くん
+    source: wikipedia_adult_mangaka_list
+  - name: 戦闘的越中
+    display: 戦闘的越中
+    source: wikipedia_adult_mangaka_list
+  - name: 戯遊群
+    display: 戯遊群
+    source: wikipedia_adult_mangaka_list
+  - name: 戸浦きゅら
+    display: 戸浦きゅら
+    source: wikipedia_adult_mangaka_list
+  - name: 戸田ぼと
+    display: 戸田ぼと
+    source: wikipedia_adult_mangaka_list
+  - name: 戸田泰成
+    display: 戸田泰成
+    source: wikipedia_adult_mangaka_list
+  - name: 才谷ウメタロウ
+    display: 才谷ウメタロウ
+    source: wikipedia_adult_mangaka_list
+  - name: 抹茶ちゃもも
+    display: 抹茶ちゃもも
+    source: wikipedia_adult_mangaka_list
+  - name: 拔山蓋世
+    display: 拔山蓋世
+    source: wikipedia_adult_mangaka_list
+  - name: 掃除朋具
+    display: 掃除朋具
+    source: wikipedia_adult_mangaka_list
+  - name: 掘骨砕三
+    display: 掘骨砕三
+    source: wikipedia_adult_mangaka_list
+  - name: 摩周子
+    display: 摩周子
+    source: wikipedia_adult_mangaka_list
+  - name: 文月晃
+    display: 文月晃
+    source: wikipedia_adult_mangaka_list
+  - name: 新名昭彦
+    display: 新名昭彦
+    source: wikipedia_adult_mangaka_list
+  - name: 新堂なおと
+    display: 新堂なおと
+    source: wikipedia_adult_mangaka_list
+  - name: 新堂エル
+    display: 新堂エル
+    source: wikipedia_adult_mangaka_list
+  - name: 新山たかし
+    display: 新山たかし
+    source: wikipedia_adult_mangaka_list
+  - name: 新田真子
+    display: 新田真子
+    source: wikipedia_adult_mangaka_list
+  - name: 新貝田鉄也郎
+    display: 新貝田鉄也郎
+    source: wikipedia_adult_mangaka_list
+  - name: 日月ネコ
+    display: 日月ネコ
+    source: wikipedia_adult_mangaka_list
+  - name: 日根野もすたり
+    display: 日根野もすたり
+    source: wikipedia_adult_mangaka_list
+  - name: 日比木リカ
+    display: 日比木リカ
+    source: wikipedia_adult_mangaka_list
+  - name: 早川守
+    display: 早川守
+    source: wikipedia_adult_mangaka_list
+  - name: 早見純
+    display: 早見純
+    source: wikipedia_adult_mangaka_list
+  - name: "旭(漫画家)"
+    display: "旭 (漫画家)"
+    source: wikipedia_adult_mangaka_list
+  - name: 昆童虫
+    display: 昆童虫
+    source: wikipedia_adult_mangaka_list
+  - name: 昇龍亭圓楽
+    display: 昇龍亭圓楽
+    source: wikipedia_adult_mangaka_list
+  - name: 明治カナ子
+    display: 明治カナ子
+    source: wikipedia_adult_mangaka_list
+  - name: 明誠助
+    display: 明誠助
+    source: wikipedia_adult_mangaka_list
+  - name: 星憑ネオン
+    display: 星憑ネオン
+    source: wikipedia_adult_mangaka_list
+  - name: 星逢ひろ
+    display: 星逢ひろ
+    source: wikipedia_adult_mangaka_list
+  - name: 星野浩字
+    display: 星野浩字
+    source: wikipedia_adult_mangaka_list
+  - name: 星野竜一
+    display: 星野竜一
+    source: wikipedia_adult_mangaka_list
+  - name: 春城秋介
+    display: 春城秋介
+    source: wikipedia_adult_mangaka_list
+  - name: 春眠MKIII
+    display: 春眠MK.III
+    source: wikipedia_adult_mangaka_list
+  - name: 春籠漸
+    display: 春籠漸
+    source: wikipedia_adult_mangaka_list
+  - name: 春藤玉三郎
+    display: 春藤玉三郎
+    source: wikipedia_adult_mangaka_list
+  - name: 春風紅茶
+    display: 春風紅茶
+    source: wikipedia_adult_mangaka_list
+  - name: 春風道人
+    display: 春風道人
+    source: wikipedia_adult_mangaka_list
+  - name: 昭嶋しゅん
+    display: 昭嶋しゅん
+    source: wikipedia_adult_mangaka_list
+  - name: "昼寝(漫画家)"
+    display: "昼寝 (漫画家)"
+    source: wikipedia_adult_mangaka_list
+  - name: 時積恵美之
+    display: 時積恵美之
+    source: wikipedia_adult_mangaka_list
+  - name: 景山ロウ
+    display: 景山ロウ
+    source: wikipedia_adult_mangaka_list
+  - name: 晴永牧兎
+    display: 晴永牧兎
+    source: wikipedia_adult_mangaka_list
+  - name: 智代次
+    display: 智代次
+    source: wikipedia_adult_mangaka_list
+  - name: 智弘カイ
+    display: 智弘カイ
+    source: wikipedia_adult_mangaka_list
+  - name: 智沢渚優
+    display: 智沢渚優
+    source: wikipedia_adult_mangaka_list
+  - name: 暗躍人
+    display: 暗躍人
+    source: wikipedia_adult_mangaka_list
+  - name: 書店院まとり
+    display: 書店院まとり
+    source: wikipedia_adult_mangaka_list
+  - name: 月上宏
+    display: 月上宏
+    source: wikipedia_adult_mangaka_list
+  - name: 月下冴喜
+    display: 月下冴喜
+    source: wikipedia_adult_mangaka_list
+  - name: 月吉ヒロキ
+    display: 月吉ヒロキ
+    source: wikipedia_adult_mangaka_list
+  - name: 月岡麗太朗
+    display: 月岡麗太朗
+    source: wikipedia_adult_mangaka_list
+  - name: 月森泉
+    display: 月森泉
+    source: wikipedia_adult_mangaka_list
+  - name: 月森雅子
+    display: 月森雅子
+    source: wikipedia_adult_mangaka_list
+  - name: 月見里中
+    display: 月見里中
+    source: wikipedia_adult_mangaka_list
+  - name: 月野定規
+    display: 月野定規
+    source: wikipedia_adult_mangaka_list
+  - name: 有坂亜摘
+    display: 有坂亜摘
+    source: wikipedia_adult_mangaka_list
+  - name: 有村しのぶ
+    display: 有村しのぶ
+    source: wikipedia_adult_mangaka_list
+  - name: 有栖賀明
+    display: 有栖賀明
+    source: wikipedia_adult_mangaka_list
+  - name: 有馬侭
+    display: 有馬侭
+    source: wikipedia_adult_mangaka_list
+  - name: 有馬啓太郎
+    display: 有馬啓太郎
+    source: wikipedia_adult_mangaka_list
+  - name: 服部ミツカ
+    display: 服部ミツカ
+    source: wikipedia_adult_mangaka_list
+  - name: 朔ユキ蔵
+    display: 朔ユキ蔵
+    source: wikipedia_adult_mangaka_list
+  - name: 望月あづみ
+    display: 望月あづみ
+    source: wikipedia_adult_mangaka_list
+  - name: 望月かつみ
+    display: 望月かつみ
+    source: wikipedia_adult_mangaka_list
+  - name: 望月奈々
+    display: 望月奈々
+    source: wikipedia_adult_mangaka_list
+  - name: 朝倉満
+    display: 朝倉満
+    source: wikipedia_adult_mangaka_list
+  - name: 朝峰テル
+    display: 朝峰テル
+    source: wikipedia_adult_mangaka_list
+  - name: 朝木貴行
+    display: 朝木貴行
+    source: wikipedia_adult_mangaka_list
+  - name: 朝森瑞季
+    display: 朝森瑞季
+    source: wikipedia_adult_mangaka_list
+  - name: 朝比奈まこと
+    display: 朝比奈まこと
+    source: wikipedia_adult_mangaka_list
+  - name: 木上蘭子
+    display: 木上蘭子
+    source: wikipedia_adult_mangaka_list
+  - name: 木塚詠路
+    display: 木塚詠路
+    source: wikipedia_adult_mangaka_list
+  - name: "木工用ボンド(漫画家)"
+    display: "木工用ボンド (漫画家)"
+    source: wikipedia_adult_mangaka_list
+  - name: 木村屋いづみ
+    display: 木村屋いづみ
+    source: wikipedia_adult_mangaka_list
+  - name: 木谷さい
+    display: 木谷さい
+    source: wikipedia_adult_mangaka_list
+  - name: 木谷椎
+    display: 木谷椎
+    source: wikipedia_adult_mangaka_list
+  - name: 木静謙二
+    display: 木静謙二
+    source: wikipedia_adult_mangaka_list
+  - name: 本能猛
+    display: 本能猛
+    source: wikipedia_adult_mangaka_list
+  - name: 杉友カヅヒロ
+    display: 杉友カヅヒロ
+    source: wikipedia_adult_mangaka_list
+  - name: 杉村麦太
+    display: 杉村麦太
+    source: wikipedia_adult_mangaka_list
+  - name: 杉浦次郎
+    display: 杉浦次郎
+    source: wikipedia_adult_mangaka_list
+  - name: 李KPA
+    display: 李KPA
+    source: wikipedia_adult_mangaka_list
+  - name: 村上隆史
+    display: 村上隆史
+    source: wikipedia_adult_mangaka_list
+  - name: 村山一夫
+    display: 村山一夫
+    source: wikipedia_adult_mangaka_list
+  - name: 村正みかど
+    display: 村正みかど
+    source: wikipedia_adult_mangaka_list
+  - name: 村田やすゆき
+    display: 村田やすゆき
+    source: wikipedia_adult_mangaka_list
+  - name: 村祖俊一
+    display: 村祖俊一
+    source: wikipedia_adult_mangaka_list
+  - name: "村雨丸(漫画家)"
+    display: "村雨丸 (漫画家)"
+    source: wikipedia_adult_mangaka_list
+  - name: 村雨真澄
+    display: 村雨真澄
+    source: wikipedia_adult_mangaka_list
+  - name: 杜拓哉
+    display: 杜拓哉
+    source: wikipedia_adult_mangaka_list
+  - name: 東タイラ
+    display: 東タイラ
+    source: wikipedia_adult_mangaka_list
+  - name: 東山翔
+    display: 東山翔
+    source: wikipedia_adult_mangaka_list
+  - name: 東御堂ひさぎ
+    display: 東御堂ひさぎ
+    source: wikipedia_adult_mangaka_list
+  - name: 東海道みっちい
+    display: 東海道みっちい
+    source: wikipedia_adult_mangaka_list
+  - name: 東磨樹
+    display: 東磨樹
+    source: wikipedia_adult_mangaka_list
+  - name: 東野みかん
+    display: 東野みかん
+    source: wikipedia_adult_mangaka_list
+  - name: 東鉄神
+    display: 東鉄神
+    source: wikipedia_adult_mangaka_list
+  - name: 東雲太郎
+    display: 東雲太郎
+    source: wikipedia_adult_mangaka_list
+  - name: 東雲水生
+    display: 東雲水生
+    source: wikipedia_adult_mangaka_list
+  - name: 東雲舞樹
+    display: 東雲舞樹
+    source: wikipedia_adult_mangaka_list
+  - name: 東雲龍
+    display: 東雲龍
+    source: wikipedia_adult_mangaka_list
+  - name: 松任知基
+    display: 松任知基
+    source: wikipedia_adult_mangaka_list
+  - name: 松原香織
+    display: 松原香織
+    source: wikipedia_adult_mangaka_list
+  - name: 松山せいじ
+    display: 松山せいじ
+    source: wikipedia_adult_mangaka_list
+  - name: 松本きちぢ
+    display: 松本きちぢ
+    source: wikipedia_adult_mangaka_list
+  - name: 松本ひかる
+    display: 松本ひかる
+    source: wikipedia_adult_mangaka_list
+  - name: 松本ドリル研究所
+    display: 松本ドリル研究所
+    source: wikipedia_adult_mangaka_list
+  - name: 松本英
+    display: 松本英
+    source: wikipedia_adult_mangaka_list
+  - name: 松波留美
+    display: 松波留美
+    source: wikipedia_adult_mangaka_list
+  - name: 松野すすむ
+    display: 松野すすむ
+    source: wikipedia_adult_mangaka_list
+  - name: 松阪剛志
+    display: 松阪剛志
+    source: wikipedia_adult_mangaka_list
+  - name: 板場広志
+    display: 板場広志
+    source: wikipedia_adult_mangaka_list
+  - name: 林原ひかり
+    display: 林原ひかり
+    source: wikipedia_adult_mangaka_list
+  - name: 林家志弦
+    display: 林家志弦
+    source: wikipedia_adult_mangaka_list
+  - name: 架空まさる
+    display: 架空まさる
+    source: wikipedia_adult_mangaka_list
+  - name: 柊柾葵
+    display: 柊柾葵
+    source: wikipedia_adult_mangaka_list
+  - name: 柑武遼
+    display: 柑武遼
+    source: wikipedia_adult_mangaka_list
+  - name: "柚木N'"
+    display: "柚木N'"
+    source: wikipedia_adult_mangaka_list
+  - name: 柚木貴
+    display: 柚木貴
+    source: wikipedia_adult_mangaka_list
+  - name: 柴七世
+    display: 柴七世
+    source: wikipedia_adult_mangaka_list
+  - name: 柴山かおる
+    display: 柴山かおる
+    source: wikipedia_adult_mangaka_list
+  - name: 柿ノ本歌麿
+    display: 柿ノ本歌麿
+    source: wikipedia_adult_mangaka_list
+  - name: 栗田勇午
+    display: 栗田勇午
+    source: wikipedia_adult_mangaka_list
+  - name: 桂24號
+    display: 桂24號
+    source: wikipedia_adult_mangaka_list
+  - name: 桂よしひろ
+    display: 桂よしひろ
+    source: wikipedia_adult_mangaka_list
+  - name: 桂井よしあき
+    display: 桂井よしあき
+    source: wikipedia_adult_mangaka_list
+  - name: 桂木たくみ
+    display: 桂木たくみ
+    source: wikipedia_adult_mangaka_list
+  - name: 桃之助
+    display: 桃之助
+    source: wikipedia_adult_mangaka_list
+  - name: 桃姫しぶき
+    display: 桃姫しぶき
+    source: wikipedia_adult_mangaka_list
+  - name: 桃山ジロウ
+    display: 桃山ジロウ
+    source: wikipedia_adult_mangaka_list
+  - name: 桃川げん
+    display: 桃川げん
+    source: wikipedia_adult_mangaka_list
+  - name: 桃月すず
+    display: 桃月すず
+    source: wikipedia_adult_mangaka_list
+  - name: 桃色卍流
+    display: 桃色卍流
+    source: wikipedia_adult_mangaka_list
+  - name: 桐原ふたは
+    display: 桐原ふたは
+    source: wikipedia_adult_mangaka_list
+  - name: 桐木せつな
+    display: 桐木せつな
+    source: wikipedia_adult_mangaka_list
+  - name: 桐沢みんと
+    display: 桐沢みんと
+    source: wikipedia_adult_mangaka_list
+  - name: 桐生知彦
+    display: 桐生知彦
+    source: wikipedia_adult_mangaka_list
+  - name: 桜井トシフミ
+    display: 桜井トシフミ
+    source: wikipedia_adult_mangaka_list
+  - name: 桜井画門
+    display: 桜井画門
+    source: wikipedia_adult_mangaka_list
+  - name: 桜井綾
+    display: 桜井綾
+    source: wikipedia_adult_mangaka_list
+  - name: 桜吹雪ねる
+    display: 桜吹雪ねる
+    source: wikipedia_adult_mangaka_list
+  - name: 桜庭丈一朗
+    display: 桜庭丈一朗
+    source: wikipedia_adult_mangaka_list
+  - name: 桜月マサル
+    display: 桜月マサル
+    source: wikipedia_adult_mangaka_list
+  - name: 桜肉馬太郎
+    display: 桜肉馬太郎
+    source: wikipedia_adult_mangaka_list
+  - name: 梅乃木裕二
+    display: 梅乃木裕二
+    source: wikipedia_adult_mangaka_list
+  - name: 梅沢たけき
+    display: 梅沢たけき
+    source: wikipedia_adult_mangaka_list
+  - name: 梅谷ケンヂ
+    display: 梅谷ケンヂ
+    source: wikipedia_adult_mangaka_list
+  - name: 梶山浩
+    display: 梶山浩
+    source: wikipedia_adult_mangaka_list
+  - name: 森島コン
+    display: 森島コン
+    source: wikipedia_adult_mangaka_list
+  - name: 森崎くるみ
+    display: 森崎くるみ
+    source: wikipedia_adult_mangaka_list
+  - name: 森永みるく
+    display: 森永みるく
+    source: wikipedia_adult_mangaka_list
+  - name: 森見明日
+    display: 森見明日
+    source: wikipedia_adult_mangaka_list
+  - name: 森谷誠
+    display: 森谷誠
+    source: wikipedia_adult_mangaka_list
+  - name: 椋陽児
+    display: 椋陽児
+    source: wikipedia_adult_mangaka_list
+  - name: 椿十四郎
+    display: 椿十四郎
+    source: wikipedia_adult_mangaka_list
+  - name: 楠木りん
+    display: 楠木りん
+    source: wikipedia_adult_mangaka_list
+  - name: 楠見かずま
+    display: 楠見かずま
+    source: wikipedia_adult_mangaka_list
+  - name: 榊原薫奈緒子
+    display: 榊原薫奈緒子
+    source: wikipedia_adult_mangaka_list
+  - name: 榊歌丸
+    display: 榊歌丸
+    source: wikipedia_adult_mangaka_list
+  - name: 榎木やつこ
+    display: 榎木やつこ
+    source: wikipedia_adult_mangaka_list
+  - name: 榎本ハイツ
+    display: 榎本ハイツ
+    source: wikipedia_adult_mangaka_list
+  - name: 槍衣七五三太
+    display: 槍衣七五三太
+    source: wikipedia_adult_mangaka_list
+  - name: 横井レゴ
+    display: 横井レゴ
+    source: wikipedia_adult_mangaka_list
+  - name: 横山まさみち
+    display: 横山まさみち
+    source: wikipedia_adult_mangaka_list
+  - name: 横山私刑
+    display: 横山私刑
+    source: wikipedia_adult_mangaka_list
+  - name: 横山葱
+    display: 横山葱
+    source: wikipedia_adult_mangaka_list
+  - name: 横槍メンゴ
+    display: 横槍メンゴ
+    source: wikipedia_adult_mangaka_list
+  - name: 横溝さとり
+    display: 横溝さとり
+    source: wikipedia_adult_mangaka_list
+  - name: 樽本一
+    display: 樽本一
+    source: wikipedia_adult_mangaka_list
+  - name: 橘セブン
+    display: 橘セブン
+    source: wikipedia_adult_mangaka_list
+  - name: 橘敦司
+    display: 橘敦司
+    source: wikipedia_adult_mangaka_list
+  - name: 橘立夏
+    display: 橘立夏
+    source: wikipedia_adult_mangaka_list
+  - name: 櫻井マキ
+    display: 櫻井マキ
+    source: wikipedia_adult_mangaka_list
+  - name: 止田卓史
+    display: 止田卓史
+    source: wikipedia_adult_mangaka_list
+  - name: 武内一真
+    display: 武内一真
+    source: wikipedia_adult_mangaka_list
+  - name: 武林武士
+    display: 武林武士
+    source: wikipedia_adult_mangaka_list
+  - name: 武田弘光
+    display: 武田弘光
+    source: wikipedia_adult_mangaka_list
+  - name: 武羅淫怒我帝
+    display: 武羅淫怒我帝
+    source: wikipedia_adult_mangaka_list
+  - name: 武若丸
+    display: 武若丸
+    source: wikipedia_adult_mangaka_list
+  - name: 武蔵ダイチ
+    display: 武蔵ダイチ
+    source: wikipedia_adult_mangaka_list
+  - name: 武蔵野太郎
+    display: 武蔵野太郎
+    source: wikipedia_adult_mangaka_list
+  - name: 武藤鉄
+    display: 武藤鉄
+    source: wikipedia_adult_mangaka_list
+  - name: 武輝導明
+    display: 武輝導明
+    source: wikipedia_adult_mangaka_list
+  - name: 比呂カズキ
+    display: 比呂カズキ
+    source: wikipedia_adult_mangaka_list
+  - name: "毛羽毛現(漫画家)"
+    display: "毛羽毛現 (漫画家)"
+    source: wikipedia_adult_mangaka_list
+  - name: 氏家もく
+    display: 氏家もく
+    source: wikipedia_adult_mangaka_list
+  - name: 氏賀Y太
+    display: 氏賀Y太
+    source: wikipedia_adult_mangaka_list
+  - name: 民草涙
+    display: 民草涙
+    source: wikipedia_adult_mangaka_list
+  - name: "水ようかん(漫画家)"
+    display: "水ようかん (漫画家)"
+    source: wikipedia_adult_mangaka_list
+  - name: 水上桜
+    display: 水上桜
+    source: wikipedia_adult_mangaka_list
+  - name: 水上蘭丸
+    display: 水上蘭丸
+    source: wikipedia_adult_mangaka_list
+  - name: 水原賢治
+    display: 水原賢治
+    source: wikipedia_adult_mangaka_list
+  - name: 水城たくや
+    display: 水城たくや
+    source: wikipedia_adult_mangaka_list
+  - name: 水尾ろむ
+    display: 水尾ろむ
+    source: wikipedia_adult_mangaka_list
+  - name: 水島空彦
+    display: 水島空彦
+    source: wikipedia_adult_mangaka_list
+  - name: 水月あるみ
+    display: 水月あるみ
+    source: wikipedia_adult_mangaka_list
+  - name: 水月林太郎
+    display: 水月林太郎
+    source: wikipedia_adult_mangaka_list
+  - name: 水無月十三
+    display: 水無月十三
+    source: wikipedia_adult_mangaka_list
+  - name: 水無月露葉
+    display: 水無月露葉
+    source: wikipedia_adult_mangaka_list
+  - name: 水田ケンジ
+    display: 水田ケンジ
+    source: wikipedia_adult_mangaka_list
+  - name: 水田魚01
+    display: 水田魚01
+    source: wikipedia_adult_mangaka_list
+  - name: 水野透子
+    display: 水野透子
+    source: wikipedia_adult_mangaka_list
+  - name: 水風天
+    display: 水風天
+    source: wikipedia_adult_mangaka_list
+  - name: 水龍敬
+    display: 水龍敬
+    source: wikipedia_adult_mangaka_list
+  - name: 氷室芹夏
+    display: 氷室芹夏
+    source: wikipedia_adult_mangaka_list
+  - name: 氷純舞
+    display: 氷純舞
+    source: wikipedia_adult_mangaka_list
+  - name: 永井道紀
+    display: 永井道紀
+    source: wikipedia_adult_mangaka_list
+  - name: 永瀬るりを
+    display: 永瀬るりを
+    source: wikipedia_adult_mangaka_list
+  - name: 永田トマト
+    display: 永田トマト
+    source: wikipedia_adult_mangaka_list
+  - name: 永野あかね
+    display: 永野あかね
+    source: wikipedia_adult_mangaka_list
+  - name: 永間ひさし
+    display: 永間ひさし
+    source: wikipedia_adult_mangaka_list
+  - name: 江川広美
+    display: 江川広美
+    source: wikipedia_adult_mangaka_list
+  - name: 江戸屋ぽち
+    display: 江戸屋ぽち
+    source: wikipedia_adult_mangaka_list
+  - name: 江戸川ガバル
+    display: 江戸川ガバル
+    source: wikipedia_adult_mangaka_list
+  - name: 江戸川プレコ
+    display: 江戸川プレコ
+    source: wikipedia_adult_mangaka_list
+  - name: 江本明宏
+    display: 江本明宏
+    source: wikipedia_adult_mangaka_list
+  - name: 江森美沙樹
+    display: 江森美沙樹
+    source: wikipedia_adult_mangaka_list
+  - name: 池田一成
+    display: 池田一成
+    source: wikipedia_adult_mangaka_list
+  - name: 池田圭一
+    display: 池田圭一
+    source: wikipedia_adult_mangaka_list
+  - name: "沈没(漫画家)"
+    display: "沈没 (漫画家)"
+    source: wikipedia_adult_mangaka_list
+  - name: 沖圭一郎
+    display: 沖圭一郎
+    source: wikipedia_adult_mangaka_list
+  - name: 沙藤昌
+    display: 沙藤昌
+    source: wikipedia_adult_mangaka_list
+  - name: 沢田大介
+    display: 沢田大介
+    source: wikipedia_adult_mangaka_list
+  - name: 沢田竜治
+    display: 沢田竜治
+    source: wikipedia_adult_mangaka_list
+  - name: 河上康
+    display: 河上康
+    source: wikipedia_adult_mangaka_list
+  - name: 河合二葉
+    display: 河合二葉
+    source: wikipedia_adult_mangaka_list
+  - name: 河本ひろし
+    display: 河本ひろし
+    source: wikipedia_adult_mangaka_list
+  - name: 河野シンタロヲ
+    display: 河野シンタロヲ
+    source: wikipedia_adult_mangaka_list
+  - name: "泉ゆうじろ〜"
+    display: "泉ゆうじろ〜"
+    source: wikipedia_adult_mangaka_list
+  - name: 法田恵
+    display: 法田恵
+    source: wikipedia_adult_mangaka_list
+  - name: 流一本
+    display: 流一本
+    source: wikipedia_adult_mangaka_list
+  - name: 流星ひかる
+    display: 流星ひかる
+    source: wikipedia_adult_mangaka_list
+  - name: "浅野香織(漫画家)"
+    display: "浅野香織 (漫画家)"
+    source: wikipedia_adult_mangaka_list
+  - name: 浦乃まみ
+    display: 浦乃まみ
+    source: wikipedia_adult_mangaka_list
+  - name: 浦井民
+    display: 浦井民
+    source: wikipedia_adult_mangaka_list
+  - name: 浦嶋嶺至
+    display: 浦嶋嶺至
+    source: wikipedia_adult_mangaka_list
+  - name: 浦瀬しおじ
+    display: 浦瀬しおじ
+    source: wikipedia_adult_mangaka_list
+  - name: 海原港
+    display: 海原港
+    source: wikipedia_adult_mangaka_list
+  - name: 海明寺裕
+    display: 海明寺裕
+    source: wikipedia_adult_mangaka_list
+  - name: 海野やよい
+    display: 海野やよい
+    source: wikipedia_adult_mangaka_list
+  - name: 海野幸
+    display: 海野幸
+    source: wikipedia_adult_mangaka_list
+  - name: 海野螢
+    display: 海野螢
+    source: wikipedia_adult_mangaka_list
+  - name: 涼栗乱成
+    display: 涼栗乱成
+    source: wikipedia_adult_mangaka_list
+  - name: 涼樹天晴
+    display: 涼樹天晴
+    source: wikipedia_adult_mangaka_list
+  - name: 深田拓士
+    display: 深田拓士
+    source: wikipedia_adult_mangaka_list
+  - name: "深紫'72"
+    display: "深紫'72"
+    source: wikipedia_adult_mangaka_list
+  - name: "清水清(漫画家)"
+    display: "清水清 (漫画家)"
+    source: wikipedia_adult_mangaka_list
+  - name: 渚ミナミ
+    display: 渚ミナミ
+    source: wikipedia_adult_mangaka_list
+  - name: 渡瀬のぞみ
+    display: 渡瀬のぞみ
+    source: wikipedia_adult_mangaka_list
+  - name: "渡辺純子(漫画家)"
+    display: "渡辺純子 (漫画家)"
+    source: wikipedia_adult_mangaka_list
+  - name: "渡辺電機(株)"
+    display: "渡辺電機(株)"
+    source: wikipedia_adult_mangaka_list
+  - name: 湯河原あたみ
+    display: 湯河原あたみ
+    source: wikipedia_adult_mangaka_list
+  - name: 滝沢ひろゆき
+    display: 滝沢ひろゆき
+    source: wikipedia_adult_mangaka_list
+  - name: 滝沢ナイア
+    display: 滝沢ナイア
+    source: wikipedia_adult_mangaka_list
+  - name: 滝美梨香
+    display: 滝美梨香
+    source: wikipedia_adult_mangaka_list
+  - name: 漢弾地
+    display: 漢弾地
+    source: wikipedia_adult_mangaka_list
+  - name: 澤野明
+    display: 澤野明
+    source: wikipedia_adult_mangaka_list
+  - name: 瀬口たかひろ
+    display: 瀬口たかひろ
+    source: wikipedia_adult_mangaka_list
+  - name: 瀬奈陽太郎
+    display: 瀬奈陽太郎
+    source: wikipedia_adult_mangaka_list
+  - name: 瀬菜モナコ
+    display: 瀬菜モナコ
+    source: wikipedia_adult_mangaka_list
+  - name: 火浦R
+    display: 火浦R
+    source: wikipedia_adult_mangaka_list
+  - name: 灯ひでかず
+    display: 灯ひでかず
+    source: wikipedia_adult_mangaka_list
+  - name: 炎輝樹
+    display: 炎輝樹
+    source: wikipedia_adult_mangaka_list
+  - name: 烏有あつの
+    display: 烏有あつの
+    source: wikipedia_adult_mangaka_list
+  - name: 焔すばる
+    display: 焔すばる
+    source: wikipedia_adult_mangaka_list
+  - name: 無有利安
+    display: 無有利安
+    source: wikipedia_adult_mangaka_list
+  - name: 無望菜志
+    display: 無望菜志
+    source: wikipedia_adult_mangaka_list
+  - name: "無洗米(漫画家)"
+    display: "無洗米 (漫画家)"
+    source: wikipedia_adult_mangaka_list
+  - name: 無道叡智
+    display: 無道叡智
+    source: wikipedia_adult_mangaka_list
+  - name: 焼肉キング
+    display: 焼肉キング
+    source: wikipedia_adult_mangaka_list
+  - name: 煌野一人
+    display: 煌野一人
+    source: wikipedia_adult_mangaka_list
+  - name: 爆発壱號
+    display: 爆発壱號
+    source: wikipedia_adult_mangaka_list
+  - name: 片山誠
+    display: 片山誠
+    source: wikipedia_adult_mangaka_list
+  - name: 片桐火華
+    display: 片桐火華
+    source: wikipedia_adult_mangaka_list
+  - name: 牛乳リンダ
+    display: 牛乳リンダ
+    source: wikipedia_adult_mangaka_list
+  - name: 牧だいきち
+    display: 牧だいきち
+    source: wikipedia_adult_mangaka_list
+  - name: 牧小太郎
+    display: 牧小太郎
+    source: wikipedia_adult_mangaka_list
+  - name: "犬(漫画家)"
+    display: "犬 (漫画家)"
+    source: wikipedia_adult_mangaka_list
+  - name: 犬威赤彦
+    display: 犬威赤彦
+    source: wikipedia_adult_mangaka_list
+  - name: 犬江しんすけ
+    display: 犬江しんすけ
+    source: wikipedia_adult_mangaka_list
+  - name: 狂一郎
+    display: 狂一郎
+    source: wikipedia_adult_mangaka_list
+  - name: 狩野ハスミ
+    display: 狩野ハスミ
+    source: wikipedia_adult_mangaka_list
+  - name: 狩野蒼穹
+    display: 狩野蒼穹
+    source: wikipedia_adult_mangaka_list
+  - name: 猫モード
+    display: 猫モード
+    source: wikipedia_adult_mangaka_list
+  - name: 猫井ミィ
+    display: 猫井ミィ
+    source: wikipedia_adult_mangaka_list
+  - name: 猫守麻里鈴
+    display: 猫守麻里鈴
+    source: wikipedia_adult_mangaka_list
+  - name: 猫屋敷ねこ丸
+    display: 猫屋敷ねこ丸
+    source: wikipedia_adult_mangaka_list
+  - name: 猫島礼
+    display: 猫島礼
+    source: wikipedia_adult_mangaka_list
+  - name: 猿ノ手功
+    display: 猿ノ手功
+    source: wikipedia_adult_mangaka_list
+  - name: 獅月しんら
+    display: 獅月しんら
+    source: wikipedia_adult_mangaka_list
+  - name: 獅童ありす
+    display: 獅童ありす
+    source: wikipedia_adult_mangaka_list
+  - name: 獲る猫
+    display: 獲る猫
+    source: wikipedia_adult_mangaka_list
+  - name: 玄鉄絢
+    display: 玄鉄絢
+    source: wikipedia_adult_mangaka_list
+  - name: 玉木たまお
+    display: 玉木たまお
+    source: wikipedia_adult_mangaka_list
+  - name: 玉置勉強
+    display: 玉置勉強
+    source: wikipedia_adult_mangaka_list
+  - name: 王者之風
+    display: 王者之風
+    source: wikipedia_adult_mangaka_list
+  - name: 珍特集
+    display: "珍・特集"
+    source: wikipedia_adult_mangaka_list
+  - name: 球魔王
+    display: 球魔王
+    source: wikipedia_adult_mangaka_list
+  - name: 琴の若子
+    display: 琴の若子
+    source: wikipedia_adult_mangaka_list
+  - name: 琴義弓介
+    display: 琴義弓介
+    source: wikipedia_adult_mangaka_list
+  - name: 瑞井鹿央
+    display: 瑞井鹿央
+    source: wikipedia_adult_mangaka_list
+  - name: 瑞浪遥
+    display: 瑞浪遥
+    source: wikipedia_adult_mangaka_list
+  - name: 瑠夏ひかる
+    display: 瑠夏ひかる
+    source: wikipedia_adult_mangaka_list
+  - name: 環々唯
+    display: 環々唯
+    source: wikipedia_adult_mangaka_list
+  - name: 甘竹朱郎
+    display: 甘竹朱郎
+    source: wikipedia_adult_mangaka_list
+  - name: 甘詰留太
+    display: 甘詰留太
+    source: wikipedia_adult_mangaka_list
+  - name: 田中あじ
+    display: 田中あじ
+    source: wikipedia_adult_mangaka_list
+  - name: 田中ひろあき
+    display: 田中ひろあき
+    source: wikipedia_adult_mangaka_list
+  - name: 田中エキス
+    display: 田中エキス
+    source: wikipedia_adult_mangaka_list
+  - name: 田中ユキ
+    display: 田中ユキ
+    source: wikipedia_adult_mangaka_list
+  - name: 田中ユタカ
+    display: 田中ユタカ
+    source: wikipedia_adult_mangaka_list
+  - name: 田中十酢
+    display: 田中十酢
+    source: wikipedia_adult_mangaka_list
+  - name: 田中浩人
+    display: 田中浩人
+    source: wikipedia_adult_mangaka_list
+  - name: 田中誠司
+    display: 田中誠司
+    source: wikipedia_adult_mangaka_list
+  - name: 田中雅人
+    display: 田中雅人
+    source: wikipedia_adult_mangaka_list
+  - name: 田倉まひろ
+    display: 田倉まひろ
+    source: wikipedia_adult_mangaka_list
+  - name: 田口正雪
+    display: 田口正雪
+    source: wikipedia_adult_mangaka_list
+  - name: 田嶋安恵
+    display: 田嶋安恵
+    source: wikipedia_adult_mangaka_list
+  - name: 田沼雄一郎
+    display: 田沼雄一郎
+    source: wikipedia_adult_mangaka_list
+  - name: 田辺優綺
+    display: 田辺優綺
+    source: wikipedia_adult_mangaka_list
+  - name: 由河朝巳
+    display: 由河朝巳
+    source: wikipedia_adult_mangaka_list
+  - name: 由浦カズヤ
+    display: 由浦カズヤ
+    source: wikipedia_adult_mangaka_list
+  - name: 由瞳綺麗
+    display: 由瞳綺麗
+    source: wikipedia_adult_mangaka_list
+  - name: 由雅なおは
+    display: 由雅なおは
+    source: wikipedia_adult_mangaka_list
+  - name: 甲斐ひろゆき
+    display: 甲斐ひろゆき
+    source: wikipedia_adult_mangaka_list
+  - name: 甲斐まるこ
+    display: 甲斐まるこ
+    source: wikipedia_adult_mangaka_list
+  - name: 甲斐正村
+    display: 甲斐正村
+    source: wikipedia_adult_mangaka_list
+  - name: "甲賀三郎(漫画家)"
+    display: "甲賀三郎 (漫画家)"
+    source: wikipedia_adult_mangaka_list
+  - name: 町田ひらく
+    display: 町田ひらく
+    source: wikipedia_adult_mangaka_list
+  - name: 町野変丸
+    display: 町野変丸
+    source: wikipedia_adult_mangaka_list
+  - name: 留萌純
+    display: 留萌純
+    source: wikipedia_adult_mangaka_list
+  - name: 畠山桃哉
+    display: 畠山桃哉
+    source: wikipedia_adult_mangaka_list
+  - name: 番外地貢
+    display: 番外地貢
+    source: wikipedia_adult_mangaka_list
+  - name: 異文化交龍
+    display: 異文化交龍
+    source: wikipedia_adult_mangaka_list
+  - name: "白(漫画家)"
+    display: "白 (漫画家)"
+    source: wikipedia_adult_mangaka_list
+  - name: "白ぅ〜凪ぃ"
+    display: "白ぅ〜凪ぃ"
+    source: wikipedia_adult_mangaka_list
+  - name: 白井薫範
+    display: 白井薫範
+    source: wikipedia_adult_mangaka_list
+  - name: 白家ミカ
+    display: 白家ミカ
+    source: wikipedia_adult_mangaka_list
+  - name: 白玉もち
+    display: 白玉もち
+    source: wikipedia_adult_mangaka_list
+  - name: 白石なぎさ
+    display: 白石なぎさ
+    source: wikipedia_adult_mangaka_list
+  - name: 白石ガッタ
+    display: 白石ガッタ
+    source: wikipedia_adult_mangaka_list
+  - name: 白石明日香
+    display: 白石明日香
+    source: wikipedia_adult_mangaka_list
+  - name: 白羽まと
+    display: 白羽まと
+    source: wikipedia_adult_mangaka_list
+  - name: 白虎丸
+    display: 白虎丸
+    source: wikipedia_adult_mangaka_list
+  - name: 白駒らい
+    display: 白駒らい
+    source: wikipedia_adult_mangaka_list
+  - name: 百武士
+    display: 百武士
+    source: wikipedia_adult_mangaka_list
+  - name: 的良みらん
+    display: 的良みらん
+    source: wikipedia_adult_mangaka_list
+  - name: 皐月芋網
+    display: 皐月芋網
+    source: wikipedia_adult_mangaka_list
+  - name: "相沢早苗(漫画家)"
+    display: "相沢早苗 (漫画家)"
+    source: wikipedia_adult_mangaka_list
+  - name: 相田麻希
+    display: 相田麻希
+    source: wikipedia_adult_mangaka_list
+  - name: 真倉翔
+    display: 真倉翔
+    source: wikipedia_adult_mangaka_list
+  - name: 真弓大介
+    display: 真弓大介
+    source: wikipedia_adult_mangaka_list
+  - name: 真未たつや
+    display: 真未たつや
+    source: wikipedia_adult_mangaka_list
+  - name: 真田鈴
+    display: 真田鈴
+    source: wikipedia_adult_mangaka_list
+  - name: 真矢村明
+    display: 真矢村明
+    source: wikipedia_adult_mangaka_list
+  - name: 真行寺たつや
+    display: 真行寺たつや
+    source: wikipedia_adult_mangaka_list
+  - name: 真里まさとし
+    display: 真里まさとし
+    source: wikipedia_adult_mangaka_list
+  - name: 真野大五
+    display: 真野大五
+    source: wikipedia_adult_mangaka_list
+  - name: 真鍋譲治
+    display: 真鍋譲治
+    source: wikipedia_adult_mangaka_list
+  - name: "睦月(漫画家)"
+    display: "睦月 (漫画家)"
+    source: wikipedia_adult_mangaka_list
+  - name: 睦月のぞみ
+    display: 睦月のぞみ
+    source: wikipedia_adult_mangaka_list
+  - name: 矢凪まさし
+    display: 矢凪まさし
+    source: wikipedia_adult_mangaka_list
+  - name: 矢吹豪
+    display: 矢吹豪
+    source: wikipedia_adult_mangaka_list
+  - name: 矢島Index
+    display: 矢島Index
+    source: wikipedia_adult_mangaka_list
+  - name: 矢河真衣斗
+    display: 矢河真衣斗
+    source: wikipedia_adult_mangaka_list
+  - name: 矢追町成増
+    display: 矢追町成増
+    source: wikipedia_adult_mangaka_list
+  - name: "矢野健太郎(漫画家)"
+    display: "矢野健太郎 (漫画家)"
+    source: wikipedia_adult_mangaka_list
+  - name: 知るかバカうどん
+    display: 知るかバカうどん
+    source: wikipedia_adult_mangaka_list
+  - name: 石原歌織
+    display: 石原歌織
+    source: wikipedia_adult_mangaka_list
+  - name: 石原浩平
+    display: 石原浩平
+    source: wikipedia_adult_mangaka_list
+  - name: 石川シスケ
+    display: 石川シスケ
+    source: wikipedia_adult_mangaka_list
+  - name: 石川トミー
+    display: 石川トミー
+    source: wikipedia_adult_mangaka_list
+  - name: 石川マサキ
+    display: 石川マサキ
+    source: wikipedia_adult_mangaka_list
+  - name: 石田のどあめ
+    display: 石田のどあめ
+    source: wikipedia_adult_mangaka_list
+  - name: 石紙一
+    display: 石紙一
+    source: wikipedia_adult_mangaka_list
+  - name: "砂(漫画家)"
+    display: "砂 (漫画家)"
+    source: wikipedia_adult_mangaka_list
+  - name: 破李拳竜
+    display: 破李拳竜
+    source: wikipedia_adult_mangaka_list
+  - name: 破軍星
+    display: 破軍星
+    source: wikipedia_adult_mangaka_list
+  - name: 神保ひとで
+    display: 神保ひとで
+    source: wikipedia_adult_mangaka_list
+  - name: 神保玉蘭
+    display: 神保玉蘭
+    source: wikipedia_adult_mangaka_list
+  - name: 神吉李花
+    display: 神吉李花
+    source: wikipedia_adult_mangaka_list
+  - name: 神楽ゆういち
+    display: 神楽ゆういち
+    source: wikipedia_adult_mangaka_list
+  - name: 神楽武志
+    display: 神楽武志
+    source: wikipedia_adult_mangaka_list
+  - name: 神楽紅葉
+    display: 神楽紅葉
+    source: wikipedia_adult_mangaka_list
+  - name: 神楽雄隆丸
+    display: 神楽雄隆丸
+    source: wikipedia_adult_mangaka_list
+  - name: 神武裕仁
+    display: 神武裕仁
+    source: wikipedia_adult_mangaka_list
+  - name: 神毛物由宇
+    display: 神毛物由宇
+    source: wikipedia_adult_mangaka_list
+  - name: 神瀧望早
+    display: 神瀧望早
+    source: wikipedia_adult_mangaka_list
+  - name: 神無さつき
+    display: 神無さつき
+    source: wikipedia_adult_mangaka_list
+  - name: 神馬耶樹
+    display: 神馬耶樹
+    source: wikipedia_adult_mangaka_list
+  - name: 祥寺はるか
+    display: 祥寺はるか
+    source: wikipedia_adult_mangaka_list
+  - name: 祭丘ヒデユキ
+    display: 祭丘ヒデユキ
+    source: wikipedia_adult_mangaka_list
+  - name: 秋乃秀文
+    display: 秋乃秀文
+    source: wikipedia_adult_mangaka_list
+  - name: 秋元カルマ
+    display: 秋元カルマ
+    source: wikipedia_adult_mangaka_list
+  - name: 秋奈つかこ
+    display: 秋奈つかこ
+    source: wikipedia_adult_mangaka_list
+  - name: 秋月たかひろ
+    display: 秋月たかひろ
+    source: wikipedia_adult_mangaka_list
+  - name: 秋月ひろずみ
+    display: 秋月ひろずみ
+    source: wikipedia_adult_mangaka_list
+  - name: 秋神サトル
+    display: 秋神サトル
+    source: wikipedia_adult_mangaka_list
+  - name: 秋葉凪人
+    display: 秋葉凪人
+    source: wikipedia_adult_mangaka_list
+  - name: 秋鈴木
+    display: 秋鈴木
+    source: wikipedia_adult_mangaka_list
+  - name: 科手黒
+    display: 科手黒
+    source: wikipedia_adult_mangaka_list
+  - name: 稍日向
+    display: 稍日向
+    source: wikipedia_adult_mangaka_list
+  - name: 稚名はなび
+    display: 稚名はなび
+    source: wikipedia_adult_mangaka_list
+  - name: 種梨みや
+    display: 種梨みや
+    source: wikipedia_adult_mangaka_list
+  - name: 稲荷金蔵
+    display: 稲荷金蔵
+    source: wikipedia_adult_mangaka_list
+  - name: 稲葉COZY
+    display: 稲葉COZY
+    source: wikipedia_adult_mangaka_list
+  - name: 稲葉晃次
+    display: 稲葉晃次
+    source: wikipedia_adult_mangaka_list
+  - name: 稲鳴四季
+    display: 稲鳴四季
+    source: wikipedia_adult_mangaka_list
+  - name: 空本光王
+    display: 空本光王
+    source: wikipedia_adult_mangaka_list
+  - name: 立花オミナ
+    display: 立花オミナ
+    source: wikipedia_adult_mangaka_list
+  - name: 童帝ねろ
+    display: 童帝ねろ
+    source: wikipedia_adult_mangaka_list
+  - name: 竹下堅次朗
+    display: 竹下堅次朗
+    source: wikipedia_adult_mangaka_list
+  - name: 竹井正樹
+    display: 竹井正樹
+    source: wikipedia_adult_mangaka_list
+  - name: 竹内冷於奈
+    display: 竹内冷於奈
+    source: wikipedia_adult_mangaka_list
+  - name: 竹山祐右
+    display: 竹山祐右
+    source: wikipedia_adult_mangaka_list
+  - name: 竹村雪秀
+    display: 竹村雪秀
+    source: wikipedia_adult_mangaka_list
+  - name: 笑花偽
+    display: 笑花偽
+    source: wikipedia_adult_mangaka_list
+  - name: 笛曲男
+    display: 笛曲男
+    source: wikipedia_adult_mangaka_list
+  - name: 笠間しろう
+    display: 笠間しろう
+    source: wikipedia_adult_mangaka_list
+  - name: "第25歩兵師団(漫画家)"
+    display: "第25歩兵師団 (漫画家)"
+    source: wikipedia_adult_mangaka_list
+  - name: 笹倉綾人
+    display: 笹倉綾人
+    source: wikipedia_adult_mangaka_list
+  - name: 笹峰ひでとし
+    display: 笹峰ひでとし
+    source: wikipedia_adult_mangaka_list
+  - name: 笹川ハヤシ
+    display: 笹川ハヤシ
+    source: wikipedia_adult_mangaka_list
+  - name: 笹本義隆
+    display: 笹本義隆
+    source: wikipedia_adult_mangaka_list
+  - name: 筆吟堂
+    display: 筆吟堂
+    source: wikipedia_adult_mangaka_list
+  - name: 筧あさと
+    display: 筧あさと
+    source: wikipedia_adult_mangaka_list
+  - name: 筧秀隆
+    display: 筧秀隆
+    source: wikipedia_adult_mangaka_list
+  - name: 箕神北都
+    display: 箕神北都
+    source: wikipedia_adult_mangaka_list
+  - name: 篠塚醸二
+    display: 篠塚醸二
+    source: wikipedia_adult_mangaka_list
+  - name: 米倉けんご
+    display: 米倉けんご
+    source: wikipedia_adult_mangaka_list
+  - name: 米餅昭彦
+    display: 米餅昭彦
+    source: wikipedia_adult_mangaka_list
+  - name: 糸杉柾宏
+    display: 糸杉柾宏
+    source: wikipedia_adult_mangaka_list
+  - name: 紅ゆーじ
+    display: 紅ゆーじ
+    source: wikipedia_adult_mangaka_list
+  - name: 紅威ヨル
+    display: 紅威ヨル
+    source: wikipedia_adult_mangaka_list
+  - name: 紅林直
+    display: 紅林直
+    source: wikipedia_adult_mangaka_list
+  - name: 納都花丸
+    display: 納都花丸
+    source: wikipedia_adult_mangaka_list
+  - name: "紗雪(漫画家)"
+    display: "紗雪 (漫画家)"
+    source: wikipedia_adult_mangaka_list
+  - name: 紙魚丸
+    display: 紙魚丸
+    source: wikipedia_adult_mangaka_list
+  - name: 素崎彰
+    display: 素崎彰
+    source: wikipedia_adult_mangaka_list
+  - name: 紬きゅうた
+    display: 紬きゅうた
+    source: wikipedia_adult_mangaka_list
+  - name: 紺條夏生
+    display: 紺條夏生
+    source: wikipedia_adult_mangaka_list
+  - name: 紺野あずれ
+    display: 紺野あずれ
+    source: wikipedia_adult_mangaka_list
+  - name: "終焉(漫画家)"
+    display: "終焉 (漫画家)"
+    source: wikipedia_adult_mangaka_list
+  - name: 結城焔
+    display: 結城焔
+    source: wikipedia_adult_mangaka_list
+  - name: 結城稜
+    display: 結城稜
+    source: wikipedia_adult_mangaka_list
+  - name: "結晶水(漫画家)"
+    display: "結晶水 (漫画家)"
+    source: wikipedia_adult_mangaka_list
+  - name: "綴り(漫画家)"
+    display: "綴り (漫画家)"
+    source: wikipedia_adult_mangaka_list
+  - name: 綺堂無一
+    display: 綺堂無一
+    source: wikipedia_adult_mangaka_list
+  - name: 綾乃れな
+    display: 綾乃れな
+    source: wikipedia_adult_mangaka_list
+  - name: 綾枷ちよこ
+    display: 綾枷ちよこ
+    source: wikipedia_adult_mangaka_list
+  - name: 綾瀬さとみ
+    display: 綾瀬さとみ
+    source: wikipedia_adult_mangaka_list
+  - name: 綾那瑞奇
+    display: 綾那瑞奇
+    source: wikipedia_adult_mangaka_list
+  - name: 綾野なおと
+    display: 綾野なおと
+    source: wikipedia_adult_mangaka_list
+  - name: 緋乃ひの
+    display: 緋乃ひの
+    source: wikipedia_adult_mangaka_list
+  - name: 緋呂河とも
+    display: 緋呂河とも
+    source: wikipedia_adult_mangaka_list
+  - name: 緋村えいじ
+    display: 緋村えいじ
+    source: wikipedia_adult_mangaka_list
+  - name: 緋村まさる
+    display: 緋村まさる
+    source: wikipedia_adult_mangaka_list
+  - name: 緋邑陣
+    display: 緋邑陣
+    source: wikipedia_adult_mangaka_list
+  - name: 緋鍵龍彦
+    display: 緋鍵龍彦
+    source: wikipedia_adult_mangaka_list
+  - name: 緑のルーペ
+    display: 緑のルーペ
+    source: wikipedia_adult_mangaka_list
+  - name: 緑沢みゆき
+    display: 緑沢みゆき
+    source: wikipedia_adult_mangaka_list
+  - name: 緒図乃真朋
+    display: 緒図乃真朋
+    source: wikipedia_adult_mangaka_list
+  - name: 織倉まこと
+    display: 織倉まこと
+    source: wikipedia_adult_mangaka_list
+  - name: 織倉伊音
+    display: 織倉伊音
+    source: wikipedia_adult_mangaka_list
+  - name: 織田non
+    display: 織田non
+    source: wikipedia_adult_mangaka_list
+  - name: 羅ぶい
+    display: 羅ぶい
+    source: wikipedia_adult_mangaka_list
+  - name: "美女木ジャンクション(漫画家)"
+    display: "美女木ジャンクション (漫画家)"
+    source: wikipedia_adult_mangaka_list
+  - name: 美崎志づ魚
+    display: 美崎志づ魚
+    source: wikipedia_adult_mangaka_list
+  - name: 美矢火
+    display: 美矢火
+    source: wikipedia_adult_mangaka_list
+  - name: 美衣暁
+    display: 美衣暁
+    source: wikipedia_adult_mangaka_list
+  - name: 羽中ルイ
+    display: 羽中ルイ
+    source: wikipedia_adult_mangaka_list
+  - name: "老眼(漫画家)"
+    display: "老眼 (漫画家)"
+    source: wikipedia_adult_mangaka_list
+  - name: 聖レイ
+    display: 聖レイ
+    source: wikipedia_adult_mangaka_list
+  - name: "肉そうきゅー。"
+    display: "肉そうきゅー。"
+    source: wikipedia_adult_mangaka_list
+  - name: 肴耶珈暖
+    display: 肴耶珈暖
+    source: wikipedia_adult_mangaka_list
+  - name: 胡桃子
+    display: 胡桃子
+    source: wikipedia_adult_mangaka_list
+  - name: 胡桃屋ましみん
+    display: 胡桃屋ましみん
+    source: wikipedia_adult_mangaka_list
+  - name: 能條純一
+    display: 能條純一
+    source: wikipedia_adult_mangaka_list
+  - name: 興津惣介
+    display: 興津惣介
+    source: wikipedia_adult_mangaka_list
+  - name: 舞亜美VICE
+    display: 舞亜美VICE
+    source: wikipedia_adult_mangaka_list
+  - name: 舞六まいむ
+    display: 舞六まいむ
+    source: wikipedia_adult_mangaka_list
+  - name: 舞原マツゲ
+    display: 舞原マツゲ
+    source: wikipedia_adult_mangaka_list
+  - name: 舞大夢
+    display: 舞大夢
+    source: wikipedia_adult_mangaka_list
+  - name: 舞栖トロ
+    display: 舞栖トロ
+    source: wikipedia_adult_mangaka_list
+  - name: 舞浜楓
+    display: 舞浜楓
+    source: wikipedia_adult_mangaka_list
+  - name: 舞登志郎
+    display: 舞登志郎
+    source: wikipedia_adult_mangaka_list
+  - name: 船堀斉晃
+    display: 船堀斉晃
+    source: wikipedia_adult_mangaka_list
+  - name: 色白好
+    display: 色白好
+    source: wikipedia_adult_mangaka_list
+  - name: 花井ヒロナオ
+    display: 花井ヒロナオ
+    source: wikipedia_adult_mangaka_list
+  - name: 花屋敷ぼたん
+    display: 花屋敷ぼたん
+    source: wikipedia_adult_mangaka_list
+  - name: 花札さくらの
+    display: 花札さくらの
+    source: wikipedia_adult_mangaka_list
+  - name: 花沢太
+    display: 花沢太
+    source: wikipedia_adult_mangaka_list
+  - name: 花見沢Q太郎
+    display: 花見沢Q太郎
+    source: wikipedia_adult_mangaka_list
+  - name: 花門初海
+    display: 花門初海
+    source: wikipedia_adult_mangaka_list
+  - name: 芳原舞人
+    display: 芳原舞人
+    source: wikipedia_adult_mangaka_list
+  - name: 芹沢克己
+    display: 芹沢克己
+    source: wikipedia_adult_mangaka_list
+  - name: 英田舞
+    display: 英田舞
+    source: wikipedia_adult_mangaka_list
+  - name: 英語で出版された日本の成人向け漫画一覧
+    display: 英語で出版された日本の成人向け漫画一覧
+    source: wikipedia_adult_mangaka_list
+  - name: 苺野しずく
+    display: 苺野しずく
+    source: wikipedia_adult_mangaka_list
+  - name: 茅薙隆裕
+    display: 茅薙隆裕
+    source: wikipedia_adult_mangaka_list
+  - name: 茜しゅうへい
+    display: 茜しゅうへい
+    source: wikipedia_adult_mangaka_list
+  - name: 草凪とんぼ
+    display: 草凪とんぼ
+    source: wikipedia_adult_mangaka_list
+  - name: 草原空貴
+    display: 草原空貴
+    source: wikipedia_adult_mangaka_list
+  - name: 草津てるにょ
+    display: 草津てるにょ
+    source: wikipedia_adult_mangaka_list
+  - name: 草薙竜樹
+    display: 草薙竜樹
+    source: wikipedia_adult_mangaka_list
+  - name: 草野ゆぅ
+    display: 草野ゆぅ
+    source: wikipedia_adult_mangaka_list
+  - name: 草野紅壱
+    display: 草野紅壱
+    source: wikipedia_adult_mangaka_list
+  - name: 荒井アラヤ
+    display: 荒井アラヤ
+    source: wikipedia_adult_mangaka_list
+  - name: 荒井海鑑
+    display: 荒井海鑑
+    source: wikipedia_adult_mangaka_list
+  - name: 荒木アキヒト
+    display: 荒木アキヒト
+    source: wikipedia_adult_mangaka_list
+  - name: 荒草まほん
+    display: 荒草まほん
+    source: wikipedia_adult_mangaka_list
+  - name: 荻野眞弓
+    display: 荻野眞弓
+    source: wikipedia_adult_mangaka_list
+  - name: 菊のすけまる
+    display: 菊のすけまる
+    source: wikipedia_adult_mangaka_list
+  - name: 菊一もんじ
+    display: 菊一もんじ
+    source: wikipedia_adult_mangaka_list
+  - name: "華咲'03"
+    display: "華咲'03"
+    source: wikipedia_adult_mangaka_list
+  - name: 華瑠羅翔
+    display: 華瑠羅翔
+    source: wikipedia_adult_mangaka_list
+  - name: 萩尾ノブト
+    display: 萩尾ノブト
+    source: wikipedia_adult_mangaka_list
+  - name: 葉月京
+    display: 葉月京
+    source: wikipedia_adult_mangaka_list
+  - name: 葛城ゆう
+    display: 葛城ゆう
+    source: wikipedia_adult_mangaka_list
+  - name: 葵ヒトリ
+    display: 葵ヒトリ
+    source: wikipedia_adult_mangaka_list
+  - name: 葵蜜柑
+    display: 葵蜜柑
+    source: wikipedia_adult_mangaka_list
+  - name: 蒔田真記
+    display: 蒔田真記
+    source: wikipedia_adult_mangaka_list
+  - name: 蒔野靖弘
+    display: 蒔野靖弘
+    source: wikipedia_adult_mangaka_list
+  - name: 蒟吉人
+    display: 蒟吉人
+    source: wikipedia_adult_mangaka_list
+  - name: 蒲郡りょう
+    display: 蒲郡りょう
+    source: wikipedia_adult_mangaka_list
+  - name: 蒼山哲
+    display: 蒼山哲
+    source: wikipedia_adult_mangaka_list
+  - name: 蒼色えれじ
+    display: 蒼色えれじ
+    source: wikipedia_adult_mangaka_list
+  - name: 蓬瑠璃
+    display: 蓬瑠璃
+    source: wikipedia_adult_mangaka_list
+  - name: 蔵吉光
+    display: 蔵吉光
+    source: wikipedia_adult_mangaka_list
+  - name: "蔵王(漫画家)"
+    display: "蔵王 (漫画家)"
+    source: wikipedia_adult_mangaka_list
+  - name: 藍まりと
+    display: 藍まりと
+    source: wikipedia_adult_mangaka_list
+  - name: 藍吉はづき
+    display: 藍吉はづき
+    source: wikipedia_adult_mangaka_list
+  - name: 藤ます
+    display: 藤ます
+    source: wikipedia_adult_mangaka_list
+  - name: 藤ノ宮悠
+    display: 藤ノ宮悠
+    source: wikipedia_adult_mangaka_list
+  - name: "藤丸(漫画家)"
+    display: "藤丸 (漫画家)"
+    source: wikipedia_adult_mangaka_list
+  - name: 藤原いづみ
+    display: 藤原いづみ
+    source: wikipedia_adult_mangaka_list
+  - name: 藤原俊一
+    display: 藤原俊一
+    source: wikipedia_adult_mangaka_list
+  - name: 藤坂リリック
+    display: 藤坂リリック
+    source: wikipedia_adult_mangaka_list
+  - name: 藤坂空樹
+    display: 藤坂空樹
+    source: wikipedia_adult_mangaka_list
+  - name: 藤堂玖麗
+    display: 藤堂玖麗
+    source: wikipedia_adult_mangaka_list
+  - name: 藤守郁乃
+    display: 藤守郁乃
+    source: wikipedia_adult_mangaka_list
+  - name: 藤岡タマエ
+    display: 藤岡タマエ
+    source: wikipedia_adult_mangaka_list
+  - name: 藤島製1号
+    display: 藤島製1号
+    source: wikipedia_adult_mangaka_list
+  - name: 藤崎ひかり
+    display: 藤崎ひかり
+    source: wikipedia_adult_mangaka_list
+  - name: 藤崎りえ
+    display: 藤崎りえ
+    source: wikipedia_adult_mangaka_list
+  - name: 藤沢とおる
+    display: 藤沢とおる
+    source: wikipedia_adult_mangaka_list
+  - name: 藤渕タカヒサ
+    display: 藤渕タカヒサ
+    source: wikipedia_adult_mangaka_list
+  - name: 藤瀬あきら
+    display: 藤瀬あきら
+    source: wikipedia_adult_mangaka_list
+  - name: 藤真拓哉
+    display: 藤真拓哉
+    source: wikipedia_adult_mangaka_list
+  - name: 蘭宮涼
+    display: 蘭宮涼
+    source: wikipedia_adult_mangaka_list
+  - name: 虎向ひゅうら
+    display: 虎向ひゅうら
+    source: wikipedia_adult_mangaka_list
+  - name: 虎顎かずや
+    display: 虎顎かずや
+    source: wikipedia_adult_mangaka_list
+  - name: 蛙子丁字
+    display: 蛙子丁字
+    source: wikipedia_adult_mangaka_list
+  - name: 蛹虎次郎
+    display: 蛹虎次郎
+    source: wikipedia_adult_mangaka_list
+  - name: 蜂文太
+    display: 蜂文太
+    source: wikipedia_adult_mangaka_list
+  - name: 蜂矢マコト
+    display: 蜂矢マコト
+    source: wikipedia_adult_mangaka_list
+  - name: 蜈蚣Melibe
+    display: 蜈蚣Melibe
+    source: wikipedia_adult_mangaka_list
+  - name: 蜜キング
+    display: 蜜キング
+    source: wikipedia_adult_mangaka_list
+  - name: 蟹森ぐり
+    display: 蟹森ぐり
+    source: wikipedia_adult_mangaka_list
+  - name: 行方ふみあき
+    display: 行方ふみあき
+    source: wikipedia_adult_mangaka_list
+  - name: 袁藤沖人
+    display: 袁藤沖人
+    source: wikipedia_adult_mangaka_list
+  - name: 西E田
+    display: 西E田
+    source: wikipedia_adult_mangaka_list
+  - name: 西又葵
+    display: 西又葵
+    source: wikipedia_adult_mangaka_list
+  - name: "西安(漫画家)"
+    display: "西安 (漫画家)"
+    source: wikipedia_adult_mangaka_list
+  - name: 西崎えいむ
+    display: 西崎えいむ
+    source: wikipedia_adult_mangaka_list
+  - name: 西崎泰正
+    display: 西崎泰正
+    source: wikipedia_adult_mangaka_list
+  - name: 西川康
+    display: 西川康
+    source: wikipedia_adult_mangaka_list
+  - name: 西川秀明
+    display: 西川秀明
+    source: wikipedia_adult_mangaka_list
+  - name: 西川魯介
+    display: 西川魯介
+    source: wikipedia_adult_mangaka_list
+  - name: 西木史郎
+    display: 西木史郎
+    source: wikipedia_adult_mangaka_list
+  - name: 西村はるか
+    display: 西村はるか
+    source: wikipedia_adult_mangaka_list
+  - name: 西村有未
+    display: 西村有未
+    source: wikipedia_adult_mangaka_list
+  - name: 西条真二
+    display: 西条真二
+    source: wikipedia_adult_mangaka_list
+  - name: 西瓜波山
+    display: 西瓜波山
+    source: wikipedia_adult_mangaka_list
+  - name: 西野映一
+    display: 西野映一
+    source: wikipedia_adult_mangaka_list
+  - name: 要青豆
+    display: 要青豆
+    source: wikipedia_adult_mangaka_list
+  - name: 見田竜介
+    display: 見田竜介
+    source: wikipedia_adult_mangaka_list
+  - name: 見習い雑兵
+    display: 見習い雑兵
+    source: wikipedia_adult_mangaka_list
+  - name: 角井陽一
+    display: 角井陽一
+    source: wikipedia_adult_mangaka_list
+  - name: 計奈恵
+    display: 計奈恵
+    source: wikipedia_adult_mangaka_list
+  - name: 記伊孝
+    display: 記伊孝
+    source: wikipedia_adult_mangaka_list
+  - name: 詩乃譜
+    display: 詩乃譜
+    source: wikipedia_adult_mangaka_list
+  - name: 諸井愛
+    display: 諸井愛
+    source: wikipedia_adult_mangaka_list
+  - name: 諸汰鎮孝
+    display: 諸汰鎮孝
+    source: wikipedia_adult_mangaka_list
+  - name: 谷口さん
+    display: 谷口さん
+    source: wikipedia_adult_mangaka_list
+  - name: 谷口敬
+    display: 谷口敬
+    source: wikipedia_adult_mangaka_list
+  - name: 谷咲ナオ
+    display: 谷咲ナオ
+    source: wikipedia_adult_mangaka_list
+  - name: 谷村まりか
+    display: 谷村まりか
+    source: wikipedia_adult_mangaka_list
+  - name: 谷澤史紀
+    display: 谷澤史紀
+    source: wikipedia_adult_mangaka_list
+  - name: 谷町めいど
+    display: 谷町めいど
+    source: wikipedia_adult_mangaka_list
+  - name: 谷間夢路
+    display: 谷間夢路
+    source: wikipedia_adult_mangaka_list
+  - name: 豊嶋ゆーさく
+    display: 豊嶋ゆーさく
+    source: wikipedia_adult_mangaka_list
+  - name: 貴志元則
+    display: 貴志元則
+    source: wikipedia_adult_mangaka_list
+  - name: 赤井丸乃進
+    display: 赤井丸乃進
+    source: wikipedia_adult_mangaka_list
+  - name: "赤人(イラストレーター)"
+    display: "赤人 (イラストレーター)"
+    source: wikipedia_adult_mangaka_list
+  - name: 赤坂かずひろ
+    display: 赤坂かずひろ
+    source: wikipedia_adult_mangaka_list
+  - name: 赤城シンデン
+    display: 赤城シンデン
+    source: wikipedia_adult_mangaka_list
+  - name: 赤星たみこ
+    display: 赤星たみこ
+    source: wikipedia_adult_mangaka_list
+  - name: 赤木城吉
+    display: 赤木城吉
+    source: wikipedia_adult_mangaka_list
+  - name: 赤銅茉莉
+    display: 赤銅茉莉
+    source: wikipedia_adult_mangaka_list
+  - name: "走為上(漫画家)"
+    display: "走為上 (漫画家)"
+    source: wikipedia_adult_mangaka_list
+  - name: 跳馬遊鹿
+    display: 跳馬遊鹿
+    source: wikipedia_adult_mangaka_list
+  - name: "車海老(漫画家)"
+    display: "車海老 (漫画家)"
+    source: wikipedia_adult_mangaka_list
+  - name: 軽部ぐり
+    display: 軽部ぐり
+    source: wikipedia_adult_mangaka_list
+  - name: 辰巳ゆめ
+    display: 辰巳ゆめ
+    source: wikipedia_adult_mangaka_list
+  - name: 辰波要徳
+    display: 辰波要徳
+    source: wikipedia_adult_mangaka_list
+  - name: 辺ヒロユキ
+    display: 辺ヒロユキ
+    source: wikipedia_adult_mangaka_list
+  - name: "辻風(漫画家)"
+    display: "辻風 (漫画家)"
+    source: wikipedia_adult_mangaka_list
+  - name: 近石まさし
+    display: 近石まさし
+    source: wikipedia_adult_mangaka_list
+  - name: 近藤ようこ
+    display: 近藤ようこ
+    source: wikipedia_adult_mangaka_list
+  - name: 逆襲武士
+    display: 逆襲武士
+    source: wikipedia_adult_mangaka_list
+  - name: 速瀬羽柴
+    display: 速瀬羽柴
+    source: wikipedia_adult_mangaka_list
+  - name: 逢魔刻壱
+    display: 逢魔刻壱
+    source: wikipedia_adult_mangaka_list
+  - name: 逸架ぱずる
+    display: 逸架ぱずる
+    source: wikipedia_adult_mangaka_list
+  - name: 道満晴明
+    display: 道満晴明
+    source: wikipedia_adult_mangaka_list
+  - name: 達華モモヤ
+    display: 達華モモヤ
+    source: wikipedia_adult_mangaka_list
+  - name: 遠山光
+    display: 遠山光
+    source: wikipedia_adult_mangaka_list
+  - name: "那由他(漫画家)"
+    display: "那由他 (漫画家)"
+    source: wikipedia_adult_mangaka_list
+  - name: 邪夢猫
+    display: 邪夢猫
+    source: wikipedia_adult_mangaka_list
+  - name: 邪武丸
+    display: 邪武丸
+    source: wikipedia_adult_mangaka_list
+  - name: 邪琅明
+    display: 邪琅明
+    source: wikipedia_adult_mangaka_list
+  - name: 都夢たみお
+    display: 都夢たみお
+    source: wikipedia_adult_mangaka_list
+  - name: 都築真紀
+    display: 都築真紀
+    source: wikipedia_adult_mangaka_list
+  - name: 酒井ヒロヤス
+    display: 酒井ヒロヤス
+    source: wikipedia_adult_mangaka_list
+  - name: 酒井童人
+    display: 酒井童人
+    source: wikipedia_adult_mangaka_list
+  - name: 野々村秀樹
+    display: 野々村秀樹
+    source: wikipedia_adult_mangaka_list
+  - name: 野上武志
+    display: 野上武志
+    source: wikipedia_adult_mangaka_list
+  - name: 野良黒ネロ
+    display: 野良黒ネロ
+    source: wikipedia_adult_mangaka_list
+  - name: 金たロウ
+    display: 金たロウ
+    source: wikipedia_adult_mangaka_list
+  - name: 金子ねつ造
+    display: 金子ねつ造
+    source: wikipedia_adult_mangaka_list
+  - name: 金目鯛ぴんく
+    display: 金目鯛ぴんく
+    source: wikipedia_adult_mangaka_list
+  - name: "金魚(漫画家)"
+    display: "金魚 (漫画家)"
+    source: wikipedia_adult_mangaka_list
+  - name: 針生幸太
+    display: 針生幸太
+    source: wikipedia_adult_mangaka_list
+  - name: 鈴井ナルミ
+    display: 鈴井ナルミ
+    source: wikipedia_adult_mangaka_list
+  - name: 鈴呂灰司
+    display: 鈴呂灰司
+    source: wikipedia_adult_mangaka_list
+  - name: 鈴平ひろ
+    display: 鈴平ひろ
+    source: wikipedia_adult_mangaka_list
+  - name: 鈴木がんま
+    display: 鈴木がんま
+    source: wikipedia_adult_mangaka_list
+  - name: 鈴木ひろみち
+    display: 鈴木ひろみち
+    source: wikipedia_adult_mangaka_list
+  - name: 鈴木岳生
+    display: 鈴木岳生
+    source: wikipedia_adult_mangaka_list
+  - name: 鈴木狂太郎
+    display: 鈴木狂太郎
+    source: wikipedia_adult_mangaka_list
+  - name: 鈴木音吉
+    display: 鈴木音吉
+    source: wikipedia_adult_mangaka_list
+  - name: 鈴根らい
+    display: 鈴根らい
+    source: wikipedia_adult_mangaka_list
+  - name: 鈴玉レンリ
+    display: 鈴玉レンリ
+    source: wikipedia_adult_mangaka_list
+  - name: 鉄観音千夜
+    display: 鉄観音千夜
+    source: wikipedia_adult_mangaka_list
+  - name: 銀仮面
+    display: 銀仮面
+    source: wikipedia_adult_mangaka_list
+  - name: 鋭利菊
+    display: 鋭利菊
+    source: wikipedia_adult_mangaka_list
+  - name: "鋼鉄(漫画家)"
+    display: "鋼鉄 (漫画家)"
+    source: wikipedia_adult_mangaka_list
+  - name: 鎌やん
+    display: 鎌やん
+    source: wikipedia_adult_mangaka_list
+  - name: 長月ふつか
+    display: 長月ふつか
+    source: wikipedia_adult_mangaka_list
+  - name: 長月みそか
+    display: 長月みそか
+    source: wikipedia_adult_mangaka_list
+  - name: 長田要
+    display: 長田要
+    source: wikipedia_adult_mangaka_list
+  - name: 長谷川ユキノ
+    display: 長谷川ユキノ
+    source: wikipedia_adult_mangaka_list
+  - name: 門井文雄
+    display: 門井文雄
+    source: wikipedia_adult_mangaka_list
+  - name: 間宮聖士
+    display: 間宮聖士
+    source: wikipedia_adult_mangaka_list
+  - name: 関場すぐる
+    display: 関場すぐる
+    source: wikipedia_adult_mangaka_list
+  - name: 関谷あさみ
+    display: 関谷あさみ
+    source: wikipedia_adult_mangaka_list
+  - name: 阿乱霊
+    display: 阿乱霊
+    source: wikipedia_adult_mangaka_list
+  - name: 阿部いのり
+    display: 阿部いのり
+    source: wikipedia_adult_mangaka_list
+  - name: 阿部川キネコ
+    display: 阿部川キネコ
+    source: wikipedia_adult_mangaka_list
+  - name: 陣卦吾雄
+    display: 陣卦吾雄
+    source: wikipedia_adult_mangaka_list
+  - name: 陽気婢
+    display: 陽気婢
+    source: wikipedia_adult_mangaka_list
+  - name: 陽炎1991
+    display: 陽炎1991
+    source: wikipedia_adult_mangaka_list
+  - name: 隅田かずあさ
+    display: 隅田かずあさ
+    source: wikipedia_adult_mangaka_list
+  - name: 雅亜公
+    display: 雅亜公
+    source: wikipedia_adult_mangaka_list
+  - name: 雛原えみ
+    display: 雛原えみ
+    source: wikipedia_adult_mangaka_list
+  - name: 雛咲葉
+    display: 雛咲葉
+    source: wikipedia_adult_mangaka_list
+  - name: 雛瀬あや
+    display: 雛瀬あや
+    source: wikipedia_adult_mangaka_list
+  - name: 雨がっぱ少女群
+    display: 雨がっぱ少女群
+    source: wikipedia_adult_mangaka_list
+  - name: "雨宮淳(漫画家)"
+    display: "雨宮淳 (漫画家)"
+    source: wikipedia_adult_mangaka_list
+  - name: 雨山電信
+    display: 雨山電信
+    source: wikipedia_adult_mangaka_list
+  - name: 雨部ヨシキ
+    display: 雨部ヨシキ
+    source: wikipedia_adult_mangaka_list
+  - name: 雪城よし
+    display: 雪城よし
+    source: wikipedia_adult_mangaka_list
+  - name: 雪見野ユキオ
+    display: 雪見野ユキオ
+    source: wikipedia_adult_mangaka_list
+  - name: 雪路時愛
+    display: 雪路時愛
+    source: wikipedia_adult_mangaka_list
+  - name: 雪雨こん
+    display: 雪雨こん
+    source: wikipedia_adult_mangaka_list
+  - name: 電光石火轟
+    display: 電光石火轟
+    source: wikipedia_adult_mangaka_list
+  - name: 電動院
+    display: 電動院
+    source: wikipedia_adult_mangaka_list
+  - name: 霜月眠兎
+    display: 霜月眠兎
+    source: wikipedia_adult_mangaka_list
+  - name: 霞香うらら
+    display: 霞香うらら
+    source: wikipedia_adult_mangaka_list
+  - name: 霧島雫
+    display: 霧島雫
+    source: wikipedia_adult_mangaka_list
+  - name: 青山一海
+    display: 青山一海
+    source: wikipedia_adult_mangaka_list
+  - name: 青山怜央
+    display: 青山怜央
+    source: wikipedia_adult_mangaka_list
+  - name: 青木幹治
+    display: 青木幹治
+    source: wikipedia_adult_mangaka_list
+  - name: 鞍馬大
+    display: 鞍馬大
+    source: wikipedia_adult_mangaka_list
+  - name: 音乃夏
+    display: 音乃夏
+    source: wikipedia_adult_mangaka_list
+  - name: 音無響介
+    display: 音無響介
+    source: wikipedia_adult_mangaka_list
+  - name: 音霧みなも
+    display: 音霧みなも
+    source: wikipedia_adult_mangaka_list
+  - name: 須藤くろす
+    display: 須藤くろす
+    source: wikipedia_adult_mangaka_list
+  - name: 須藤るく
+    display: 須藤るく
+    source: wikipedia_adult_mangaka_list
+  - name: 須藤謙
+    display: 須藤謙
+    source: wikipedia_adult_mangaka_list
+  - name: 須郷良
+    display: 須郷良
+    source: wikipedia_adult_mangaka_list
+  - name: "風のごとく!"
+    display: "風のごとく!"
+    source: wikipedia_adult_mangaka_list
+  - name: 風船クラブ
+    display: 風船クラブ
+    source: wikipedia_adult_mangaka_list
+  - name: "飛燕(漫画家)"
+    display: "飛燕 (漫画家)"
+    source: wikipedia_adult_mangaka_list
+  - name: 飛野俊之
+    display: 飛野俊之
+    source: wikipedia_adult_mangaka_list
+  - name: 飛鳥弓樹
+    display: 飛鳥弓樹
+    source: wikipedia_adult_mangaka_list
+  - name: 飛龍乱
+    display: 飛龍乱
+    source: wikipedia_adult_mangaka_list
+  - name: 飯島優希
+    display: 飯島優希
+    source: wikipedia_adult_mangaka_list
+  - name: 養酒オヘペ
+    display: 養酒オヘペ
+    source: wikipedia_adult_mangaka_list
+  - name: 香月りお
+    display: 香月りお
+    source: wikipedia_adult_mangaka_list
+  - name: 馬場康誌
+    display: 馬場康誌
+    source: wikipedia_adult_mangaka_list
+  - name: "馬鈴薯(漫画家)"
+    display: "馬鈴薯 (漫画家)"
+    source: wikipedia_adult_mangaka_list
+  - name: 馴染しん
+    display: 馴染しん
+    source: wikipedia_adult_mangaka_list
+  - name: 駕籠真太郎
+    display: 駕籠真太郎
+    source: wikipedia_adult_mangaka_list
+  - name: 高円寺まりも
+    display: 高円寺まりも
+    source: wikipedia_adult_mangaka_list
+  - name: 高句タビー
+    display: 高句タビー
+    source: wikipedia_adult_mangaka_list
+  - name: 高屋良樹
+    display: 高屋良樹
+    source: wikipedia_adult_mangaka_list
+  - name: 高崎たけまる
+    display: 高崎たけまる
+    source: wikipedia_adult_mangaka_list
+  - name: 高崎隆
+    display: 高崎隆
+    source: wikipedia_adult_mangaka_list
+  - name: 高木さとる
+    display: 高木さとる
+    source: wikipedia_adult_mangaka_list
+  - name: 高松誠人
+    display: 高松誠人
+    source: wikipedia_adult_mangaka_list
+  - name: 高橋こばと
+    display: 高橋こばと
+    source: wikipedia_adult_mangaka_list
+  - name: 高橋和男
+    display: 高橋和男
+    source: wikipedia_adult_mangaka_list
+  - name: "高津(漫画家)"
+    display: "高津 (漫画家)"
+    source: wikipedia_adult_mangaka_list
+  - name: 高浜太郎
+    display: 高浜太郎
+    source: wikipedia_adult_mangaka_list
+  - name: "高田馬場(漫画家)"
+    display: "高田馬場 (漫画家)"
+    source: wikipedia_adult_mangaka_list
+  - name: 高苗京鈴
+    display: 高苗京鈴
+    source: wikipedia_adult_mangaka_list
+  - name: 高野美紀
+    display: 高野美紀
+    source: wikipedia_adult_mangaka_list
+  - name: 高鍋千歳
+    display: 高鍋千歳
+    source: wikipedia_adult_mangaka_list
+  - name: 高雄右京
+    display: 高雄右京
+    source: wikipedia_adult_mangaka_list
+  - name: 鬼ノ仁
+    display: 鬼ノ仁
+    source: wikipedia_adult_mangaka_list
+  - name: "鬼姫(漫画家)"
+    display: "鬼姫 (漫画家)"
+    source: wikipedia_adult_mangaka_list
+  - name: 鬼月あるちゅ
+    display: 鬼月あるちゅ
+    source: wikipedia_adult_mangaka_list
+  - name: 鬼束直
+    display: 鬼束直
+    source: wikipedia_adult_mangaka_list
+  - name: 鬼窪浩久
+    display: 鬼窪浩久
+    source: wikipedia_adult_mangaka_list
+  - name: 鬼魔あづさ
+    display: 鬼魔あづさ
+    source: wikipedia_adult_mangaka_list
+  - name: 魔北葵
+    display: 魔北葵
+    source: wikipedia_adult_mangaka_list
+  - name: 魔訶不思議
+    display: 魔訶不思議
+    source: wikipedia_adult_mangaka_list
+  - name: 魚肉ん
+    display: 魚肉ん
+    source: wikipedia_adult_mangaka_list
+  - name: "鮭(漫画家)"
+    display: "鮭 (漫画家)"
+    source: wikipedia_adult_mangaka_list
+  - name: 鰤てり
+    display: 鰤てり
+    source: wikipedia_adult_mangaka_list
+  - name: 鳥遊里都
+    display: 鳥遊里都
+    source: wikipedia_adult_mangaka_list
+  - name: 鳩こんろ
+    display: 鳩こんろ
+    source: wikipedia_adult_mangaka_list
+  - name: 鳴子ハナハル
+    display: 鳴子ハナハル
+    source: wikipedia_adult_mangaka_list
+  - name: 鳴沢綾
+    display: 鳴沢綾
+    source: wikipedia_adult_mangaka_list
+  - name: 鳴瀬ひろふみ
+    display: 鳴瀬ひろふみ
+    source: wikipedia_adult_mangaka_list
+  - name: 鶴山ミト
+    display: 鶴山ミト
+    source: wikipedia_adult_mangaka_list
+  - name: 鷹勢優
+    display: 鷹勢優
+    source: wikipedia_adult_mangaka_list
+  - name: 鷹那優輝
+    display: 鷹那優輝
+    source: wikipedia_adult_mangaka_list
+  - name: 鹿島田しき
+    display: 鹿島田しき
+    source: wikipedia_adult_mangaka_list
+  - name: 鹿狼一
+    display: 鹿狼一
+    source: wikipedia_adult_mangaka_list
+  - name: 鹿間紀男
+    display: 鹿間紀男
+    source: wikipedia_adult_mangaka_list
+  - name: 鹿鳴叶
+    display: 鹿鳴叶
+    source: wikipedia_adult_mangaka_list
+  - name: 麻田起奈
+    display: 麻田起奈
+    source: wikipedia_adult_mangaka_list
+  - name: 黄上恵里
+    display: 黄上恵里
+    source: wikipedia_adult_mangaka_list
+  - name: 黒ノ樹
+    display: 黒ノ樹
+    source: wikipedia_adult_mangaka_list
+  - name: 黒乃マサカド
+    display: 黒乃マサカド
+    source: wikipedia_adult_mangaka_list
+  - name: 黒咲練導
+    display: 黒咲練導
+    source: wikipedia_adult_mangaka_list
+  - name: 黒岩よしひろ
+    display: 黒岩よしひろ
+    source: wikipedia_adult_mangaka_list
+  - name: 黒岩瑪瑙
+    display: 黒岩瑪瑙
+    source: wikipedia_adult_mangaka_list
+  - name: 黒岸風興
+    display: 黒岸風興
+    source: wikipedia_adult_mangaka_list
+  - name: 黒崎仔虎
+    display: 黒崎仔虎
+    source: wikipedia_adult_mangaka_list
+  - name: 黒木秀彦
+    display: 黒木秀彦
+    source: wikipedia_adult_mangaka_list
+  - name: 黒柾志西
+    display: 黒柾志西
+    source: wikipedia_adult_mangaka_list
+  - name: 黒澤R
+    display: 黒澤R
+    source: wikipedia_adult_mangaka_list
+  - name: 黒田有明
+    display: 黒田有明
+    source: wikipedia_adult_mangaka_list
+  - name: 黒荒馬双海
+    display: 黒荒馬双海
+    source: wikipedia_adult_mangaka_list
+  - name: 黒越陽
+    display: 黒越陽
+    source: wikipedia_adult_mangaka_list
+  - name: 龍堂ねね
+    display: 龍堂ねね
+    source: wikipedia_adult_mangaka_list
+  - name: 龍瀬弓乃
+    display: 龍瀬弓乃
+    source: wikipedia_adult_mangaka_list
+  - name: 龍炎狼牙
+    display: 龍炎狼牙
+    source: wikipedia_adult_mangaka_list
+  - name: 龍牙翔
+    display: 龍牙翔
+    source: wikipedia_adult_mangaka_list
