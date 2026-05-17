@@ -32,6 +32,76 @@ OUT_DIR = ROOT / "data" / "manga.v2"
 
 CUTOFF_YEAR = 2015  # spinoff で この年 以降なら keep
 KEEP_EDITION_TYPES = {"standard", "bunkobon", "wideban", "kanzenban", "shinsoban", "aizoban"}
+
+# brand (= MADB imprint) → magazine key (= data/magazines.yml master)
+# 確度高い 1対1 のみ。 詳細は scripts/_extract-top-completed.py の BRAND_TO_MAGAZINE と同期。
+BRAND_TO_MAGAZINE = {
+    "ジャンプコミックス": "weekly-shonen-jump",
+    "JUMPCOMICS": "weekly-shonen-jump",
+    "ジャンプcomics": "weekly-shonen-jump",
+    "Jumpcomics": "weekly-shonen-jump",
+    "少年サンデーコミックス": "weekly-shonen-sunday",
+    "SHONENSUNDAYCOMICS": "weekly-shonen-sunday",
+    "少年マガジンコミックス": "weekly-shonen-magazine",
+    "SHONENMAGAZINECOMICS": "weekly-shonen-magazine",
+    "少年チャンピオンコミックス": "champion",
+    "SHONENCHAMPIONCOMICS": "champion",
+    "SHŌNENCHAMPIONCOMICS": "champion",
+    "ガンガンコミックス": "gangan",
+    "Gangancomics": "gangan",
+    "角川コミックスエース": "shonen-ace",
+    "コミックボンボン": "comic-bonbon",
+    "月刊少年マガジン": "monthly-shonen-magazine",
+    "別冊少年マガジン": "bessatsu-shonen-magazine",
+    "ヤングジャンプコミックス": "weekly-young-jump",
+    "YOUNGJUMPCOMICS": "weekly-young-jump",
+    "ヤングマガジンKC": "weekly-young-magazine",
+    "ヤンマガKC": "weekly-young-magazine",
+    "ヤングサンデーコミックス": "weekly-young-sunday",
+    "ウルトラジャンプコミックス": "ultra-jump",
+    "ビッグコミックス": "big-comic",
+    "BIGCOMICS": "big-comic",
+    "ビッグコミックススペシャル": "big-comic",
+    "BIGCOMICSSPECIAL": "big-comic",
+    "モーニングKC": "morning",
+    "MorningKC": "morning",
+    "アフタヌーンKC": "afternoon",
+    "AfternoonKC": "afternoon",
+    "アクションコミックス": "manga-action",
+    "ACTIONCOMICS": "manga-action",
+    "マーガレットコミックス": "margaret",
+    "MARGARETCOMICS": "margaret",
+    "別冊マーガレットコミックス": "betsuma",
+    "りぼんマスコットコミックス": "ribon",
+    "なかよしコミックス": "nakayoshi",
+    "ちゃおコミックス": "ciao",
+    "花とゆめCOMICS": "hana-to-yume",
+    "花とゆめコミックス": "hana-to-yume",
+    "LaLacomics": "lala",
+    "LaLaCOMICS": "lala",
+    "ヤングアニマルコミックス": "young-animal",
+    "YOUNGANIMALCOMICS": "young-animal",
+    "BELOVE": "be-love",
+    "てんとう虫コミックス": "ciao",
+}
+
+
+def _normalize_brand_for_mag(brand: str) -> str:
+    """brand を BRAND_TO_MAGAZINE key 形式に正規化 (= 中黒/空白 strip)。"""
+    if not brand:
+        return ""
+    return brand.replace("・", "").replace("　", "").replace(" ", "").strip()
+
+
+def infer_magazine_from_brand(editions: list[dict], valid_mags: set) -> str | None:
+    """editions の 主 brand から magazine 推定。"""
+    for ed in editions:
+        norm = _normalize_brand_for_mag(ed.get("imprint") or "")
+        if norm in BRAND_TO_MAGAZINE:
+            mag = BRAND_TO_MAGAZINE[norm]
+            if not valid_mags or mag in valid_mags:
+                return mag
+    return None
 DROP_IMPRINT_PATTERNS = ["My first big", "コンビニ", "増刊", "同人", "ジャンプremix"]
 # bilingual / 英訳版 imprint は drop (= 翻訳版 は 別 product)
 DROP_IMPRINT_LOWER_PATTERNS = ["bilingual"]
@@ -572,12 +642,15 @@ def build_yml(
     o["publisher"] = pub_cand or "(unknown)"
 
     # magazine: 種3 由来は AI fill で 旧 master key と 揃ってない 可能性
-    # master 未定義時は 旧 yml に fallback、 それでも未定義なら null
+    # master 未定義時は 旧 yml に fallback、 それでも未定義なら brand から推定、
+    # 最後に null
     mag_cand = (seed3 or {}).get("magazine") or src_yml.get("magazine")
     if mag_cand and valid_mags and mag_cand not in valid_mags:
-        # 旧 yml の magazine を 優先で 使う
         old_mag = src_yml.get("magazine")
         mag_cand = old_mag if old_mag and old_mag in valid_mags else None
+    # brand → magazine 推定 (= 種3 fill 漏れ 補完)
+    if not mag_cand:
+        mag_cand = infer_magazine_from_brand(editions, valid_mags)
     o["magazine"] = mag_cand
 
     o["demographic"] = (seed3 or {}).get("demographic") or src_yml.get("demographic", "shounen")

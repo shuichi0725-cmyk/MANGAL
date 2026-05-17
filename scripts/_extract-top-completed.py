@@ -57,6 +57,90 @@ DROP_TITLE_CONTAINS = [
 
 KEEP_EDITION_TYPES = {"standard", "bunkobon", "wideban", "kanzenban", "shinsoban", "aizoban"}
 
+# brand (= MADB imprint) → magazine key (= data/magazines.yml master)
+# 確度高い 1対1 mapping のみ。 曖昧 (= 同 brand で 複数 magazine 可能) は 入れない。
+# normalize_imprint() で 中黒/空白 strip 後の key (= e.g. 'ジャンプ・コミックス' → 'ジャンプコミックス')。
+BRAND_TO_MAGAZINE = {
+    # 少年週刊
+    "ジャンプコミックス": "weekly-shonen-jump",
+    "JUMPCOMICS": "weekly-shonen-jump",
+    "ジャンプcomics": "weekly-shonen-jump",
+    "Jumpcomics": "weekly-shonen-jump",
+    "少年サンデーコミックス": "weekly-shonen-sunday",
+    "SHONENSUNDAYCOMICS": "weekly-shonen-sunday",
+    "少年マガジンコミックス": "weekly-shonen-magazine",
+    "SHONENMAGAZINECOMICS": "weekly-shonen-magazine",
+    "少年チャンピオンコミックス": "champion",
+    "SHONENCHAMPIONCOMICS": "champion",
+    "SHŌNENCHAMPIONCOMICS": "champion",
+    "SHONENCHAMPIONCOMICS少年チャンピオンコミックス": "champion",
+    # 少年月刊
+    "ガンガンコミックス": "gangan",
+    "Gangancomics": "gangan",
+    "角川コミックスエース": "shonen-ace",
+    "コミックボンボン": "comic-bonbon",
+    "月刊少年マガジン": "monthly-shonen-magazine",
+    "別冊少年マガジン": "bessatsu-shonen-magazine",
+    # ヤング週刊
+    "ヤングジャンプコミックス": "weekly-young-jump",
+    "YOUNGJUMPCOMICS": "weekly-young-jump",
+    "ヤングマガジンKC": "weekly-young-magazine",
+    "ヤンマガKC": "weekly-young-magazine",
+    "ヤングサンデーコミックス": "weekly-young-sunday",
+    "ウルトラジャンプコミックス": "ultra-jump",
+    # ビッグコミック系
+    "ビッグコミックス": "big-comic",
+    "BIGCOMICS": "big-comic",
+    "ビッグコミックススペシャル": "big-comic",
+    "BIGCOMICSSPECIAL": "big-comic",
+    # 青年月刊
+    "モーニングKC": "morning",
+    "MorningKC": "morning",
+    "アフタヌーンKC": "afternoon",
+    "AfternoonKC": "afternoon",
+    "アクションコミックス": "manga-action",
+    "ACTIONCOMICS": "manga-action",
+    # 少女
+    "マーガレットコミックス": "margaret",
+    "MARGARETCOMICS": "margaret",
+    "別冊マーガレットコミックス": "betsuma",
+    "りぼんマスコットコミックス": "ribon",
+    "なかよしコミックス": "nakayoshi",
+    "ちゃおコミックス": "ciao",
+    "花とゆめCOMICS": "hana-to-yume",
+    "花とゆめコミックス": "hana-to-yume",
+    "LaLacomics": "lala",
+    "LaLaCOMICS": "lala",
+    "ヤングアニマルコミックス": "young-animal",
+    "YOUNGANIMALCOMICS": "young-animal",
+    "BELOVE": "be-love",
+    # 児童
+    "てんとう虫コミックス": "ciao",  # = 小学館児童向け、 主に ちゃお系
+}
+
+
+def _normalize_brand_for_mag(brand: str) -> str:
+    """brand を BRAND_TO_MAGAZINE key 形式に正規化 (= 中黒/空白/小文字 fold)。"""
+    if not brand:
+        return ""
+    s = brand.replace("・", "").replace("　", "").replace(" ", "").strip()
+    return s
+
+
+def infer_magazine_from_brand(editions: list[dict], valid_mags: set) -> str | None:
+    """editions の 主 brand (= 最古 first vol を持つ edition) から magazine 推定。"""
+    if not editions:
+        return None
+    # 各 edition の imprint で 試行 (= 最初 edition から)
+    for ed in editions:
+        imp = ed.get("imprint") or ""
+        norm = _normalize_brand_for_mag(imp)
+        if norm in BRAND_TO_MAGAZINE:
+            mag = BRAND_TO_MAGAZINE[norm]
+            if not valid_mags or mag in valid_mags:
+                return mag
+    return None
+
 # ISBN-13 prefix → publisher key (= data/publishers.yml master と一致)
 # 大半 メジャー 出版社 を カバー。 推定 不能 cases は skip。
 ISBN_PUBLISHER_PREFIXES = [
@@ -396,6 +480,9 @@ def build_yml_for_candidate(
     mag_cand = (seed_entry or {}).get("magazine")
     if mag_cand and valid_mags and mag_cand not in valid_mags:
         mag_cand = None
+    # brand → magazine 推定 (= 種3 fill 漏れ 補完)
+    if not mag_cand:
+        mag_cand = infer_magazine_from_brand(editions, valid_mags)
 
     demographic = (seed_entry or {}).get("demographic") or "shounen"
 
