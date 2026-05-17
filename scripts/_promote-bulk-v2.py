@@ -169,6 +169,28 @@ def _title_punct_suffix(title: str | None) -> str:
     return re.sub(r"[a-zA-Z0-9ぁ-んァ-ヶー一-龯々〆〇 　]", "", title)
 
 
+def _normalize_kana(kana: str | None) -> str:
+    """title_kana を normalize (= 空白 / 中黒 / × 等 strip)。
+
+    'ハンター ハンター' と 'ハンター × ハンター' を 共通 'ハンターハンター' に
+    寄せて kana match の 表記揺れ吸収。
+    """
+    if not kana:
+        return ""
+    return re.sub(r"[^ぁ-んァ-ヶー一-龯]", "", kana)
+
+
+def _is_ascii_title(title: str | None) -> bool:
+    """title に 漢字/かな が 含まれない なら ASCII (= ローマ字表記) 扱い。
+
+    'Hunter×hunter' = ASCII (= 'H','u','n',...,×,'h','u','n','t','e','r' で kana/kanji なし)
+    'ハンター×ハンター' = non-ASCII (= カナ含む)
+    """
+    if not title:
+        return False
+    return not bool(re.search(r"[ぁ-んァ-ヶー一-龯]", title))
+
+
 def find_related_series_ids(con: sqlite3.Connection, main: dict) -> list[int]:
     """main series と 関連 series id を 返す。
 
@@ -203,23 +225,53 @@ def find_related_series_ids(con: sqlite3.Connection, main: dict) -> list[int]:
     ).fetchall():
         ids.add(r[0])
     # title_kana + punct suffix 一致 (= romaji/katakana 表記揺れ cluster)
-    # 安全策: 片方が pure ASCII (= ローマ字表記、 e.g. 'BAKUMAN。') の cases のみ。
+    # 安全策: 片方が ASCII (= ローマ字表記、 e.g. 'BAKUMAN。', 'Hunter×hunter') の cases のみ。
     # でないと 'テレビアニメ版 犬夜叉' と '犬夜叉' (= 両方 kana='イヌヤシャ') が
     # 誤 merge され、 別作品 が 統合されてしまう。
+    # kana は normalize (= 空白/×/中黒 strip) で 'ハンター ハンター' と
+    # 'ハンター × ハンター' を 同 'ハンターハンター' として 比較。
     main_title = main["title"] or ""
-    main_is_ascii = bool(re.fullmatch(r"[A-Za-z0-9\s]+[^A-Za-z0-9\s]*", main_title))
-    if main_kana:
+    main_is_ascii = _is_ascii_title(main_title)
+    main_kana_norm = _normalize_kana(main_kana)
+    if main_kana_norm:
         for r in cur.execute(
-            "SELECT id, title FROM series WHERE title_kana=? AND id<>?",
-            (main_kana, main["id"]),
+            "SELECT id, title, title_kana FROM series WHERE id<>? AND title_kana IS NOT NULL",
+            (main["id"],),
         ).fetchall():
+            if _normalize_kana(r[2]) != main_kana_norm:
+                continue
             other_title = r[1] or ""
-            other_is_ascii = bool(re.fullmatch(r"[A-Za-z0-9\s]+[^A-Za-z0-9\s]*", other_title))
+            other_is_ascii = _is_ascii_title(other_title)
             # 片方が ASCII の場合のみ kana match を merge 条件に
             if not (main_is_ascii or other_is_ascii):
                 continue
             if _title_punct_suffix(other_title) == main_punct:
                 ids.add(r[0])
+    # transitive expansion: 既に merge 済 ids の titles から 同 qid +
+    # case-insensitive title match を 追加探索 (= e.g. HUNTER で kana=NULL な
+    # 'HUNTER×HUNTER' cluster を 'Hunter×hunter' cluster 経由で 拾う)
+    merged_titles_lower = set()
+    if ids:
+        ph = ",".join("?" for _ in ids)
+        for r in cur.execute(
+            f"SELECT title, qid FROM series WHERE id IN ({ph})", list(ids)
+        ).fetchall():
+            if r[0]:
+                merged_titles_lower.add((r[0].lower(), r[1] or ""))
+    for t_lower, q in merged_titles_lower:
+        # 同 qid + title case-insensitive 一致 で merge (= 安全: ASCII variant 同士)
+        if q:
+            for r in cur.execute(
+                "SELECT id, title FROM series WHERE qid=?", (q,)
+            ).fetchall():
+                if (r[1] or "").lower() == t_lower:
+                    ids.add(r[0])
+        # qid 無し orphan で title case-insensitive 一致
+        for r in cur.execute(
+            "SELECT id FROM series WHERE LOWER(title)=? AND qid IS NULL",
+            (t_lower,),
+        ).fetchall():
+            ids.add(r[0])
     return list(ids)
 
 
@@ -631,7 +683,12 @@ def main():
                 dropped.append(f"{ypath.name}  title={title}  max_year={max_y}")
                 continue
         # 同一作品 cluster 分裂 を 検出 (= main + 同qid + 同title orphan)、 全部 merge
-        related_ids = find_related_series_ids(con, series)
+        # yml の title_kana を fallback (= db series row の kana が NULL の cases、
+        # e.g. id=128570 'ハンター×ハンター' kana=NULL では kana match 効かない)
+        merged_series = dict(series)
+        if not merged_series.get("title_kana") and src.get("title_kana"):
+            merged_series["title_kana"] = src["title_kana"]
+        related_ids = find_related_series_ids(con, merged_series)
         editions = get_editions_with_volumes(con, related_ids)
         if not editions:
             stats["no_editions"] += 1

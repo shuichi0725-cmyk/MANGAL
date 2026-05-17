@@ -156,6 +156,10 @@ def extract_volume_number(label: str, vol_field: str) -> tuple[int | None, str |
         m_plain = re.match(r"^第(\d+)[巻集編卷]$", s)
         if m_plain:
             return int(m_plain.group(1)), None, False
+        # 'NO.35' / 'No.35' / 'no. 35' / 'Vol. 17' / 'vol.1' 等 → vlabel=None
+        m_no = re.match(r"^(?:NO\.?|No\.?|no\.?|VOL\.?|Vol\.?|vol\.?|#)\s*(\d+)$", s)
+        if m_no:
+            return int(m_no.group(1)), None, False
         # 純粋数字
         if re.match(r"^\d+$", s):
             return int(s), None, False
