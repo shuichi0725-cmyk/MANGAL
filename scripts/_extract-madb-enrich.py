@@ -84,15 +84,22 @@ def aggregate(books):
     - title_kana: 最頻値採用
     """
 
-    def all_agree(vals):
-        s = [v for v in vals if v]
-        if not s:
+    def majority_value(vals, threshold=0.5):
+        """空文字列を含めた全 book 中で 最頻値が threshold 以上なら採用。
+        - キングダム例: 13% が "完全版"、 87% が "" → top "" が勝つ → "" 返却
+        - 半妖の夜叉姫例: 78% が "異伝・絵本草子" → top 採用 → 副題返却
+        旧実装の strict all_agree は MADB の data 揺れで弱すぎ、
+        旧 majority は空文字列を pre-filter して 13% でも採用してしまう bug があった。"""
+        if not vals:
             return ""
-        if len(set(s)) == 1:
-            return s[0]
+        c = Counter(vals)
+        top, top_cnt = c.most_common(1)[0]
+        if top_cnt / len(vals) >= threshold:
+            return top
         return ""
 
-    def majority(vals):
+    def majority_nonempty(vals):
+        """空を除外して 最頻値採用 (= title_kana 用、 空 kana 本は除外して 多数決)。"""
         s = [v for v in vals if v]
         if not s:
             return ""
@@ -103,10 +110,10 @@ def aggregate(books):
         return ""
 
     return {
-        "title_official_en": all_agree([b["title_en"] for b in books]),
-        "subtitle": all_agree([b["subtitle_jp"] for b in books]),
-        "subtitle_kana": all_agree([b["subtitle_kana"] for b in books]),
-        "title_kana_correct": majority([b["title_kana"] for b in books]),
+        "title_official_en": majority_value([b["title_en"] for b in books]),
+        "subtitle": majority_value([b["subtitle_jp"] for b in books]),
+        "subtitle_kana": majority_value([b["subtitle_kana"] for b in books]),
+        "title_kana_correct": majority_nonempty([b["title_kana"] for b in books]),
         "n_books": len(books),
     }
 

@@ -116,8 +116,10 @@ def apply_to_yml(path, enrich, raw_kana_set):
             stats["fixed_title_kana"] += 1
             changed = True
 
-    # 2. subtitle 追加
+    # 2. subtitle + subtitle_kana 追加 (= subtitle が無ければ kana も追加しない、
+    #    片方だけの中途半端な状態を避ける)
     subtitle = rec.get("subtitle", "")
+    subtitle_kana = rec.get("subtitle_kana", "")
     if subtitle and not has_top_level(new_lines, "subtitle"):
         anchor = next(
             (
@@ -127,34 +129,12 @@ def apply_to_yml(path, enrich, raw_kana_set):
             ),
             idx_title,
         )
-        new_lines = insert_after(
-            new_lines, anchor, [f"subtitle: {quote_yaml_string(subtitle)}"]
-        )
+        inserts = [f"subtitle: {quote_yaml_string(subtitle)}"]
+        if subtitle_kana and not has_top_level(new_lines, "subtitle_kana"):
+            inserts.append(f"subtitle_kana: {quote_yaml_string(subtitle_kana)}")
+            stats["added_subtitle_kana"] += 1
+        new_lines = insert_after(new_lines, anchor, inserts)
         stats["added_subtitle"] += 1
-        changed = True
-
-    # 3. subtitle_kana 追加
-    subtitle_kana = rec.get("subtitle_kana", "")
-    if subtitle_kana and not has_top_level(new_lines, "subtitle_kana"):
-        anchor = next(
-            (i for i, l in enumerate(new_lines) if l.startswith("subtitle:")),
-            -1,
-        )
-        if anchor < 0:
-            anchor = next(
-                (
-                    i
-                    for i, l in enumerate(new_lines)
-                    if l.startswith("title_romaji:") or l.startswith("title_kana:")
-                ),
-                idx_title,
-            )
-        new_lines = insert_after(
-            new_lines,
-            anchor,
-            [f"subtitle_kana: {quote_yaml_string(subtitle_kana)}"],
-        )
-        stats["added_subtitle_kana"] += 1
         changed = True
 
     # 4. alternative_titles.en 追加 (= 無ければ)
