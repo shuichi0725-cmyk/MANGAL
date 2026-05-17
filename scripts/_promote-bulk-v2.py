@@ -35,6 +35,13 @@ KEEP_EDITION_TYPES = {"standard", "bunkobon", "wideban", "kanzenban", "shinsoban
 DROP_IMPRINT_PATTERNS = ["My first big", "コンビニ", "増刊", "同人", "ジャンプremix"]
 # bilingual / 英訳版 imprint は drop (= 翻訳版 は 別 product)
 DROP_IMPRINT_LOWER_PATTERNS = ["bilingual"]
+# 漫画以外 series は MANGAL 掲載対象外 (= title prefix で detect)。
+# CLAUDE.md / MEMORY.md 大原則: 「通常版/ワイド版/文庫版/愛蔵版 等 漫画 only」
+DROP_TITLE_PREFIX_PATTERNS = [
+    "テレビアニメ版", "TVアニメ版", "TVアニメ", "アニメコミック",
+    "劇場版", "映画", "OVA",
+    "ノベライズ", "ノベル",
+]
 
 
 def load_seed3() -> dict:
@@ -592,9 +599,11 @@ def main():
     print(f"  検出 spinoff series 数: {len(parent_map)}", file=sys.stderr)
 
     stats = {"total": 0, "regenerated": 0, "not_found_in_db": 0,
-             "no_editions": 0, "dropped_spinoff_old": 0}
+             "no_editions": 0, "dropped_spinoff_old": 0,
+             "dropped_non_manga": 0}
     not_found = []
     dropped = []
+    dropped_non_manga = []
 
     for ypath in sorted(SRC_DIR.glob("*.yml")):
         stats["total"] += 1
@@ -603,6 +612,11 @@ def main():
         slug = src["slug"]
         title = src["title"]
         qid = src.get("wikidata_qid")
+        # 漫画以外 (= テレビアニメ版 / 映画 / 劇場版 等) は MANGAL 対象外
+        if any(title.startswith(pat) for pat in DROP_TITLE_PREFIX_PATTERNS):
+            stats["dropped_non_manga"] += 1
+            dropped_non_manga.append(f"{ypath.name}  title={title}")
+            continue
         series = find_series(con, slug, title, qid)
         if not series:
             stats["not_found_in_db"] += 1
@@ -643,6 +657,10 @@ def main():
         print(f"\n=== dropped (= spinoff & old) ===", file=sys.stderr)
         for d in dropped:
             print(f"  🗑️  {d}", file=sys.stderr)
+    if dropped_non_manga:
+        print(f"\n=== dropped (= non-manga: anime/movie/novel) ===", file=sys.stderr)
+        for d in dropped_non_manga:
+            print(f"  🚫 {d}", file=sys.stderr)
 
     print(f"\nwrote {stats['regenerated']} yml to {OUT_DIR}", file=sys.stderr)
 

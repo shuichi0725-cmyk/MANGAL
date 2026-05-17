@@ -76,3 +76,30 @@
 - commit 時 push までセット (= ユーザが artifact を即取得できるよう)
 - 大規模変更 / 既存破壊リスクある操作は **必ず Go サイン** を待つ
 - ユーザの `/clear` 後も protocol が機能するよう、 重要な約束はこの CLAUDE.md か MEMORY.md に永続化
+
+---
+
+## MANGAL 掲載対象 (= 漫画 only protocol)
+
+MANGAL は **漫画作品** の database。 以下は **掲載対象外** (= 弾く):
+
+### series-level (= scripts/_promote-bulk-v2.py の DROP_TITLE_PREFIX_PATTERNS)
+
+- 「テレビアニメ版」「TVアニメ版」「アニメコミック」 = アニメコミカライズ
+- 「劇場版」「映画」「OVA」 = 映像作品 + その コミカライズ
+- 「ノベライズ」「ノベル」 = 小説版
+
+### edition-level (= scripts/_promote-bulk-v2.py の KEEP_EDITION_TYPES)
+
+keep: standard / bunkobon / wideban / kanzenban / shinsoban / aizoban
+drop: anime / other / renewal
+
+drop imprint patterns:
+  - 'My first big' / 'コンビニ' / '増刊' / '同人' / 'ジャンプremix' / 'bilingual'
+
+### 関連書 patterns (= 別途検討、 現状一部漏れ)
+
+- ガイドブック / ファンブック / 設定資料集 / 公式図録 / アンソロジー
+- キャラクター名鑑 / 心理分析書 / 攻略本
+
+これらは MEMORY.md の 「path B' 未解決課題」 で 個別 fix 中。
