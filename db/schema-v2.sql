@@ -7,14 +7,16 @@
 --      - title_official_en TEXT  : MADB schema:alternateName 由来
 --      - source TEXT             : 'madb104' / 'orphan101'
 --      (madb_series_ids は editions.madb_series_id で集計可能なため不要)
---   2. editions テーブルに madb_series_id TEXT 追加
+--   2. editions テーブルは (series_id, type, imprint) UNIQUE で merge:
+--      同 brand の MADB 重複 record (= 例 C258774 / C258780 両方 通常版 少年サンデー
+--      コミックス) は 1 edition に merge、 volumes は全て統合保持。
+--      MADB record id 追跡は sources テーブルで 行う。
 --   3. volumes テーブルに volume_label TEXT 追加 (= 「上」「下」「特装版」)
+--      (edition_id, number) は UNIQUE しない (= 初版/重版/廉価版 全 ISBN 保持)。
 --   4. series_key 仕様変更:
 --      旧: "norm:<baseTitle>|qid:Q…" or "norm:<baseTitle>|name:…"
 --      新: "qid:Q…|name:<title>" or "qid:Q…|name:<title>|sub:<subtitle>"
 --          または qid 無し時 "name:<creator>|name:<title>"
---   5. editions の UNIQUE(series_id, type) 制約を緩める (= 同一 series で
---      同 type の edition が複数 MADB record になることがあるため)
 --
 -- 旧 schema.sql は 引き続き 既存 .cache/db.sqlite で稼働。
 -- v2 schema は .cache/db-v2.sqlite に 別途投入。
@@ -109,15 +111,12 @@ CREATE TABLE IF NOT EXISTS series_authors (
   FOREIGN KEY (mangaka_id) REFERENCES mangaka(id) ON DELETE CASCADE
 );
 
--- editions v2: madb_series_id 追加 (= 該当 MADB record の C25xxxx)。
--- UNIQUE(series_id, type) 制約は 緩める (= 同 type の editions が 複数 brand
--- で存在しうる、 例: 通常版が 「少年サンデーコミックス」 と 「Shonen sunday novels」
--- 両方ある等)。 代わりに (series_id, madb_series_id) または (series_id, type, imprint)
--- で 一意性 担保。
+-- editions v2: 同 (series_id, type, imprint) で merge して 1 edition。
+-- 複数 MADB record (= 同 brand の重複登録) は merge し、 全 volumes を 統合保持。
+-- MADB record id の 追跡は sources テーブルで 行う (= edition と 1:N 関係)。
 CREATE TABLE IF NOT EXISTS editions (
   id              INTEGER PRIMARY KEY AUTOINCREMENT,
   series_id       INTEGER NOT NULL,
-  madb_series_id  TEXT,             -- MADB C25xxxx (= 新規、 orphan 由来は NULL)
   type            TEXT NOT NULL,    -- standard/kanzenban/bunkobon/...
   label           TEXT NOT NULL,    -- 通常版 / 文庫版 / etc.
   imprint         TEXT,             -- レーベル名 (= schema:brand)
@@ -125,13 +124,11 @@ CREATE TABLE IF NOT EXISTS editions (
   year_ended     INTEGER,
   created_at      TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%SZ', 'now')),
   updated_at      TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%SZ', 'now')),
-  -- madb_series_id 単位で 重複防止 (= 同 MADB record が 複数 edition rows にならない)
-  -- ただし orphan は madb_series_id=NULL なので uniqueness 担保せず、
-  -- (series_id, type, imprint) で 重複避ける
-  UNIQUE (series_id, madb_series_id),
   UNIQUE (series_id, type, imprint),
   FOREIGN KEY (series_id) REFERENCES series(id) ON DELETE CASCADE
 );
+
+-- volumes index は volumes テーブル定義の後で 作成 (= 後述)
 
 -- volumes v2: volume_label 追加 (= 「上」「下」「特装版」等の生 label)
 CREATE TABLE IF NOT EXISTS volumes (
@@ -323,6 +320,8 @@ CREATE INDEX IF NOT EXISTS idx_series_excluded_at      ON series_excluded(exclud
 CREATE INDEX IF NOT EXISTS idx_admin_audit_target      ON admin_audit(target_table, target_id);
 CREATE INDEX IF NOT EXISTS idx_admin_audit_performed   ON admin_audit(performed_at);
 CREATE INDEX IF NOT EXISTS idx_volumes_edition         ON volumes(edition_id);
+-- v2: (edition_id, number, release_date) で 同 number の複数 ISBN を 日付順で取れる
+CREATE INDEX IF NOT EXISTS idx_volumes_edition_num_date ON volumes(edition_id, number, release_date);
 CREATE INDEX IF NOT EXISTS idx_editions_series         ON editions(series_id);
 CREATE INDEX IF NOT EXISTS idx_series_authors_mangaka  ON series_authors(mangaka_id);
 CREATE INDEX IF NOT EXISTS idx_series_qid              ON series(qid);
