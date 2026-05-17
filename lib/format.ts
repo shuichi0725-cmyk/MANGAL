@@ -21,5 +21,5 @@ export function formatReleaseDate(date?: string | null): string {
 }
 
 export function volumeLabel(v: Volume): string {
-  return `第${v.number}巻`;
+  return v.volume_label ?? `第${v.number}巻`;
 }
