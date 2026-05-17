@@ -50,6 +50,104 @@ DROP_TITLE_CONTAINS = [
 
 KEEP_EDITION_TYPES = {"standard", "bunkobon", "wideban", "kanzenban", "shinsoban", "aizoban"}
 
+# ISBN-13 prefix → publisher key (= data/publishers.yml master と一致)
+# 大半 メジャー 出版社 を カバー。 推定 不能 cases は skip。
+ISBN_PUBLISHER_PREFIXES = [
+    # 長い prefix を 先 (= 4-08 集英社 と 4-08-XX の sub-prefix は 先頭一致 順)
+    ("978487731", "core-magazine"),
+    ("978487572", "kubo-shoten"),
+    ("978486554", "overlap"),
+    ("978486442", "byakuya-shobo"),
+    ("978486127", "mag-garden"),
+    ("978484585", "leed"),
+    ("978484584", "leed"),
+    ("978484583", "leed"),
+    ("978484582", "leed"),
+    ("978484581", "leed"),
+    ("978484580", "leed"),
+    ("978484519", "leed"),
+    ("978478598", "shonen-gahosha"),
+    ("978478594", "shonen-gahosha"),
+    ("978479861", "hobby-japan"),
+    ("978479860", "hobby-japan"),
+    ("978477323", "kaiohsha"),
+    ("978477081", "line-digital-frontier"),
+    ("978477080", "line-digital-frontier"),
+    ("978477077", "line-digital-frontier"),
+    ("978479262", "seirinkogeisha"),
+    ("978478754", "square-enix"),
+    ("978478753", "square-enix"),
+    ("978478752", "square-enix"),
+    ("978478751", "square-enix"),
+    ("978478750", "square-enix"),
+    ("978483874", "magazine-house"),
+    ("978483873", "magazine-house"),
+    ("978483872", "magazine-house"),
+    ("978483871", "magazine-house"),
+    ("978480197", "tatsumi"),
+    ("978480198", "tatsumi"),
+    ("978480199", "takeshobo"),
+    ("978480192", "takeshobo"),
+    ("978480193", "takeshobo"),
+    ("978480194", "takeshobo"),
+    ("978480195", "takeshobo"),
+    ("978482116", "bunkasha"),
+    ("978482113", "bunkasha"),
+    ("978482111", "bunkasha"),
+    ("978483224", "houbunsha"),
+    ("978483222", "houbunsha"),
+    ("978483223", "houbunsha"),
+    ("978483444", "gentosha-comics"),
+    ("978483447", "gentosha-comics"),
+    ("978483449", "gentosha-comics"),
+    ("9784592", "hakusensha"),
+    ("9784253", "akita"),
+    ("9784408", "jitsugyo-no-nihon"),
+    ("9784403", "shinshokan"),
+    ("9784480", "chikuma-shobo"),
+    ("9784537", "nihon-bungeisha"),
+    ("9784575", "futabasha"),
+    ("9784396", "shodensha"),
+    ("9784596", "harpercollins-japan"),
+    ("9784344", "gentosha"),
+    ("978404", "kadokawa"),
+    ("9784091", "shogakukan"),
+    ("9784093", "shogakukan"),
+    ("9784092", "shogakukan"),
+    ("9784094", "shogakukan"),
+    ("9784099", "shogakukan"),
+    ("9784065", "kodansha"),
+    ("9784063", "kodansha"),
+    ("9784061", "kodansha"),
+    ("9784062", "kodansha"),
+    ("9784064", "kodansha"),
+    ("9784066", "kodansha"),
+    ("9784068", "kodansha"),
+    ("9784069", "kodansha"),
+    ("9784088", "shueisha"),
+    ("9784087", "shueisha"),
+    ("9784086", "shueisha"),
+    ("9784085", "shueisha"),
+    ("9784084", "shueisha"),
+    ("9784083", "shueisha"),
+    ("9784082", "shueisha"),
+    ("9784081", "shueisha"),
+    ("9784080", "shueisha"),
+]
+
+
+def infer_publisher_from_isbn(isbn: str | None) -> str | None:
+    """ISBN-13 prefix から publisher を 推定。"""
+    if not isbn:
+        return None
+    s = re.sub(r"[^0-9]", "", isbn)
+    if len(s) != 13:
+        return None
+    for prefix, pub in ISBN_PUBLISHER_PREFIXES:
+        if s.startswith(prefix):
+            return pub
+    return None
+
 # pykakasi kakasi 初期化 (= グローバル に 1 回)
 _KKS = pykakasi.kakasi()
 
@@ -227,6 +325,16 @@ def build_yml_for_candidate(
     pub_cand = (seed_entry or {}).get("publisher")
     if pub_cand and valid_pubs and pub_cand not in valid_pubs:
         pub_cand = None
+    # ISBN prefix から publisher 推定 (= 種3 fill 漏れ 補完)
+    if not pub_cand:
+        for ed in editions:
+            for v in ed["volumes"]:
+                p = infer_publisher_from_isbn(v.get("isbn13"))
+                if p and (not valid_pubs or p in valid_pubs):
+                    pub_cand = p
+                    break
+            if pub_cand:
+                break
 
     mag_cand = (seed_entry or {}).get("magazine")
     if mag_cand and valid_mags and mag_cand not in valid_mags:
@@ -254,7 +362,9 @@ def build_yml_for_candidate(
     o["status"] = status
     o["authors"] = writers
     o["original_authors"] = originals
-    o["publisher"] = pub_cand or "(unknown)"
+    if not pub_cand:
+        return None  # publisher 推定不能 → skip
+    o["publisher"] = pub_cand
     o["magazine"] = mag_cand
     o["demographic"] = demographic
     o["genres"] = genres_cand
