@@ -58,7 +58,41 @@ def load_mangaka_map() -> dict[str, dict]:
     return name_map
 
 
+def strip_residue(s: str) -> str:
+    """残骸 bracket / 役職 tag / ∥カナ等を 剥がす。"""
+    # 役職 tag '[著]' '[原作]' 等
+    s = re.sub(r"^\[[^\]]+\]\s*", "", s)
+    # 残骸 bracket close `]` `)` `}` 単独 (= bracket open 抜け)
+    s = re.sub(r"^[\]\)\}]+\s*", "", s)
+    # 末尾 メタ tag `[ほか]` 等
+    s = re.sub(r"\s*\[[^\]]+\]\s*$", "", s)
+    # ∥ (= U+2225) 以降 振り仮名 落とす
+    if "∥" in s:
+        s = s.split("∥", 1)[0]
+    return s.strip().rstrip(",").strip()
+
+
+def split_compound_japanese_name(s: str) -> list[str]:
+    """半角 / 全角 空白で 複合作家名を 分割。 ただし Latin only chunk は 分割しない
+    (= 'Tom Smith' を 1 名扱い)。"""
+    # 全角空白で 必ず分割
+    parts = s.split("　")
+    out = []
+    for p in parts:
+        # 半角 space ある場合: 両側に CJK あれば 分割、 そうでなければ 維持
+        if " " in p and re.search(r"[ぁ-ヿ一-鿿]", p):
+            for sp in re.split(r"\s+", p):
+                if sp.strip():
+                    out.append(sp.strip())
+        else:
+            if p.strip():
+                out.append(p.strip())
+    return out
+
+
 def extract_creator_names(schema_creator) -> list[str]:
+    """'[著]高橋留美子' '[原作]X / [漫画]Y' '[著]X∥xxxx' '[原作]X, Y'
+    '池波正太郎 さいとう・たかを' '落合裕介 漫画 : 池波正太郎' 等から 名前 list 抽出。"""
     if not schema_creator:
         return []
     if isinstance(schema_creator, list):
@@ -69,17 +103,48 @@ def extract_creator_names(schema_creator) -> list[str]:
         s = s.get("@value", "")
     if not isinstance(s, str):
         return []
-    parts = re.split(r"\s*[/,]\s+", s)
+    # primary 分割: ' / ' または ', ' または ' : ' (= 漫画 : X パターン)
+    parts = re.split(r"\s*[/,:]\s+", s)
     names = []
     for chunk in parts:
-        chunk = re.sub(r"^\[[^\]]+\]\s*", "", chunk)
-        if "∥" in chunk:
-            chunk = chunk.split("∥", 1)[0]
-        chunk = chunk.strip().rstrip(",").strip()
-        chunk = re.sub(r"\s*\[[^\]]+\]\s*$", "", chunk).strip()
-        if chunk:
-            names.append(chunk)
+        chunk = strip_residue(chunk)
+        if not chunk:
+            continue
+        # 「池波正太郎 さいとう・たかを」 等 内側空白で 複合分割
+        for nm in split_compound_japanese_name(chunk):
+            nm = strip_residue(nm)
+            # 中黒 「・」 を 取り除いた version も lookup 試行用に 名前自体は 中黒残し
+            if nm:
+                names.append(nm)
     return names
+
+
+def normalize_for_lookup(s: str) -> str:
+    """中黒 / 全角スペース / 記号 を 削って lookup 用 key にする。"""
+    return re.sub(r"[・\s　]+", "", s)
+
+
+def resolve_qid(creator_names: list[str], mangaka: dict, mangaka_norm: dict) -> tuple[str, str]:
+    """直接 match → normalize match の順で qid 解決。 戻り値: (qid, matched_name)。"""
+    for nm in creator_names:
+        if nm in mangaka:
+            return mangaka[nm]["qid"], nm
+    # normalize 後 match
+    for nm in creator_names:
+        n = normalize_for_lookup(nm)
+        if n and n in mangaka_norm:
+            return mangaka_norm[n]["qid"], mangaka_norm[n]["name"]
+    return "", ""
+
+
+def build_mangaka_norm_map(mangaka: dict) -> dict:
+    """中黒/空白除いた key で lookup 可能な map を 別途 構築。"""
+    out = {}
+    for nm, info in mangaka.items():
+        k = normalize_for_lookup(nm)
+        if k and k not in out:
+            out[k] = info
+    return out
 
 
 def get_name_array(schema_name) -> list:
@@ -177,7 +242,7 @@ def get_vol(b) -> str:
 # Phase 1: metadata104 → clusters
 # =============================================================================
 
-def build_metadata104_clusters(mangaka: dict) -> tuple[list[dict], dict]:
+def build_metadata104_clusters(mangaka: dict, mangaka_norm: dict) -> tuple[list[dict], dict]:
     print(f"[phase 1] loading {META104} ...", file=sys.stderr)
     with META104.open("r", encoding="utf-8") as f:
         data = json.load(f)
@@ -205,13 +270,7 @@ def build_metadata104_clusters(mangaka: dict) -> tuple[list[dict], dict]:
         if not creator_names:
             stats["no_creator"] += 1
             continue
-        qid = ""
-        matched_name = ""
-        for nm in creator_names:
-            if nm in mangaka:
-                qid = mangaka[nm]["qid"]
-                matched_name = nm
-                break
+        qid, matched_name = resolve_qid(creator_names, mangaka, mangaka_norm)
         if qid:
             stats["qid_resolved"] += 1
         else:
@@ -286,21 +345,33 @@ def build_metadata104_clusters(mangaka: dict) -> tuple[list[dict], dict]:
 # Phase 2 + 3: metadata101 link + orphan aggregate
 # =============================================================================
 
-def link_and_aggregate(clusters: list[dict], mangaka: dict) -> dict:
+def link_and_aggregate(clusters: list[dict], mangaka: dict, mangaka_norm: dict) -> dict:
     print(f"[phase 2/3] loading {META101} ...", file=sys.stderr)
     with META101.open("r", encoding="utf-8") as f:
         data = json.load(f)
     print(f"  books: {len(data['@graph'])}", file=sys.stderr)
+
+    # 同 qid を 持つ mangaka.csv の 全 alias 名 を 引ける map
+    qid_to_aliases: dict[str, set[str]] = defaultdict(set)
+    for nm, info in mangaka.items():
+        qid_to_aliases[info["qid"]].add(nm)
 
     # lookup index for Phase 1 clusters
     # key: (base, subtitle, creator_name) → cluster index
     cluster_idx: dict[tuple[str, str, str], int] = {}
     cluster_idx_no_sub: dict[tuple[str, str], int] = {}
     for i, c in enumerate(clusters):
+        # MADB record で観測された creator_names
+        name_set = set()
         for r in c["madb_records"]:
             for nm in r["creator_names_all"]:
-                cluster_idx.setdefault((c["title"], c["subtitle"], nm), i)
-                cluster_idx_no_sub.setdefault((c["title"], nm), i)
+                name_set.add(nm)
+        # qid が 解決済なら mangaka.csv の 全 alias も追加
+        if c["qid"] and c["qid"] in qid_to_aliases:
+            name_set |= qid_to_aliases[c["qid"]]
+        for nm in name_set:
+            cluster_idx.setdefault((c["title"], c["subtitle"], nm), i)
+            cluster_idx_no_sub.setdefault((c["title"], nm), i)
 
     stats = {
         "total_books": 0,
@@ -351,10 +422,31 @@ def link_and_aggregate(clusters: list[dict], mangaka: dict) -> dict:
             orphan_groups[(base, sub, names[0])].append(book_record)
             stats["orphan_books"] += 1
 
-    # orphan → cluster 化
-    orphan_out = []
+    # orphan → cluster 化 (= 中黒等 normalize で 重複 cluster を merge)
+    # 1st pass: key を (qid_or_normalized_creator, base, sub) に統一
+    merged_orphans: dict[tuple[str, str, str], list[dict]] = defaultdict(list)
+    orphan_creator_for_key: dict[tuple[str, str, str], str] = {}
     for (base, sub, creator), books in orphan_groups.items():
-        qid = mangaka.get(creator, {}).get("qid", "")
+        # creator を normalize して mangaka.csv lookup
+        qid, matched = resolve_qid([creator], mangaka, mangaka_norm)
+        if qid:
+            key = (qid, base, sub)
+            display_creator = matched
+        else:
+            # name fallback も normalize で 揃える
+            key = (f"name:{normalize_for_lookup(creator)}", base, sub)
+            display_creator = creator
+        merged_orphans[key].extend(books)
+        orphan_creator_for_key.setdefault(key, display_creator)
+
+    orphan_out = []
+    for (key_id, base, sub), books in merged_orphans.items():
+        # qid か name か 判定
+        if key_id.startswith("name:"):
+            qid = ""
+        else:
+            qid = key_id
+        creator = orphan_creator_for_key[(key_id, base, sub)]
         id_part = f"qid:{qid}" if qid else f"name:{creator}"
         if sub:
             series_key = f"{id_part}|name:{base}|sub:{sub}|source:orphan"
@@ -394,17 +486,19 @@ def link_and_aggregate(clusters: list[dict], mangaka: dict) -> dict:
 def main():
     print(f"loading mangaka.csv ...", file=sys.stderr)
     mangaka = load_mangaka_map()
+    mangaka_norm = build_mangaka_norm_map(mangaka)
     print(f"  mangaka name → qid: {len(mangaka)} entries", file=sys.stderr)
+    print(f"  mangaka norm key  : {len(mangaka_norm)} entries", file=sys.stderr)
 
     # Phase 1
-    clusters, p1_stats = build_metadata104_clusters(mangaka)
+    clusters, p1_stats = build_metadata104_clusters(mangaka, mangaka_norm)
     print(f"\n[phase 1 stats]", file=sys.stderr)
     for k, v in p1_stats.items():
         print(f"  {k}: {v}", file=sys.stderr)
     print(f"  clusters: {len(clusters)}", file=sys.stderr)
 
     # Phase 2 + 3
-    out = link_and_aggregate(clusters, mangaka)
+    out = link_and_aggregate(clusters, mangaka, mangaka_norm)
     print(f"\n[phase 2/3 stats]", file=sys.stderr)
     for k, v in out["stats"].items():
         print(f"  {k}: {v}", file=sys.stderr)
