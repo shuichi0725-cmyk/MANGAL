@@ -439,9 +439,18 @@ def link_and_aggregate(clusters: list[dict], mangaka: dict, mangaka_norm: dict) 
         merged_orphans[key].extend(books)
         orphan_creator_for_key.setdefault(key, display_creator)
 
+    # Phase 1 cluster と 同 series_key になる orphan は merge (= Q2 案 c)
+    # series_key 構築:
+    #   qid あり: "qid:<qid>|name:<base>" or "qid:<qid>|name:<base>|sub:<sub>"
+    #   qid なし: "name:<creator>|name:<base>" or 同 + sub
+    # → Phase 1 と Phase 3 の series_key を 統一形式にして 衝突検出
+    p1_keys: dict[str, int] = {}
+    for i, c in enumerate(clusters):
+        p1_keys[c["series_key"]] = i
+
     orphan_out = []
+    n_merged_into_p1 = 0
     for (key_id, base, sub), books in merged_orphans.items():
-        # qid か name か 判定
         if key_id.startswith("name:"):
             qid = ""
         else:
@@ -449,11 +458,15 @@ def link_and_aggregate(clusters: list[dict], mangaka: dict, mangaka_norm: dict) 
         creator = orphan_creator_for_key[(key_id, base, sub)]
         id_part = f"qid:{qid}" if qid else f"name:{creator}"
         if sub:
-            series_key = f"{id_part}|name:{base}|sub:{sub}|source:orphan"
+            series_key = f"{id_part}|name:{base}|sub:{sub}"
         else:
-            series_key = f"{id_part}|name:{base}|source:orphan"
-        # title_kana: 各 book に kana が無いので 空。 後で 別 source で 補強想定
-        # adult: book level の contentRating は metadata101 で 存在するなら拾う
+            series_key = f"{id_part}|name:{base}"
+        # 既存 Phase 1 cluster と同じ key なら merge (= Q2 案 c)
+        if series_key in p1_keys:
+            clusters[p1_keys[series_key]]["books"].extend(books)
+            n_merged_into_p1 += 1
+            continue
+        # 新規 orphan cluster (= source=orphan101)
         orphan_out.append({
             "series_key": series_key,
             "source": "orphan101",
@@ -472,6 +485,7 @@ def link_and_aggregate(clusters: list[dict], mangaka: dict, mangaka_norm: dict) 
         })
 
     stats["orphan_clusters"] = len(orphan_out)
+    stats["orphan_merged_into_madb104"] = n_merged_into_p1
     return {
         "stats": stats,
         "orphan_clusters": orphan_out,
