@@ -121,10 +121,19 @@ def main():
             target = no_sub[0]
             stats["migrated_1to1" if len(no_sub) == 1 else "migrated_1tom_no_sub"] += 1
         else:
-            # 副題あり しかない → ambiguous
-            stats["ambiguous_only_sub"] += 1
-            ambiguous_old_keys.append(old_key)
-            continue
+            # 副題なし候補なし AND 副題あり候補 1 件 → 1:1 migrate (= 唯一なので)
+            # 旧 baseTitle で 副題剥がし済 entry を 新 副題込み cluster に attach する
+            # ケース (例: 旧 Q219948|うる星やつら2 → 新 qid:Q219948|name:うる星やつら2|
+            # sub:ビューティフル・ドリーマー)
+            sub_cands = [c for c in candidates if c["subtitle"]]
+            if len(sub_cands) == 1:
+                target = sub_cands[0]
+                stats["migrated_unique_sub"] += 1
+            else:
+                # 副題あり 複数候補 → ambiguous で skip
+                stats["ambiguous_only_sub"] += 1
+                ambiguous_old_keys.append(old_key)
+                continue
 
         # migrate
         new_key = target["series_key"]
