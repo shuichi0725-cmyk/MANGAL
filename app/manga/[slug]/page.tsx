@@ -67,7 +67,14 @@ export default async function MangaDetailPage({
               </span>
             )}
           </div>
-          <p className="text-sm text-black/60 mt-1">{manga.title_kana}</p>
+          {/* 副題 (= MADB の ` : ` 右側、 ない時は β 案で空白行を保持) */}
+          <p className="text-base text-black/75 mt-1 min-h-[1.5rem]">
+            {manga.subtitle ?? " "}
+          </p>
+          <p className="text-sm text-black/60 mt-1">
+            {manga.title_kana}
+            {manga.subtitle_kana ? ` : ${manga.subtitle_kana}` : ""}
+          </p>
 
           {manga.alternative_titles && (
             <p className="text-xs text-black/55 mt-1.5">

@@ -74,6 +74,10 @@ export const MangaSchema = z.object({
   title: z.string().min(1),
   title_kana: z.string().min(1),
   title_romaji: z.string().min(1),
+  /** 副題 (= MADB title field の ` : ` 右側、 例: 「ジョジョの奇妙な冒険 Part8」) */
+  subtitle: z.string().optional(),
+  /** 副題ふりがな (= MADB kana の ` : ` 右側、 無い時は空) */
+  subtitle_kana: z.string().optional(),
   year_started: z.number().int().min(1900).max(2100),
   year_ended: z.number().int().min(1900).max(2100).nullable(),
   status: Status,
