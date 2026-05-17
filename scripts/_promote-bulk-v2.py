@@ -150,6 +150,18 @@ def find_series(con: sqlite3.Connection, slug: str, title: str, qid: str | None)
     return None
 
 
+def _title_punct_suffix(title: str | None) -> str:
+    """title から alphanumeric + kana + 漢字 を 全部 strip し、 残った punctuation を 返す。
+
+    例: 'バクマン。' → '。'、 'BAKUMAN。' → '。'、 'バクマン!' → '!'
+    『BAKUMAN。』 と 『バクマン。』 は match (= 同作品の表記揺れ)、
+    『バクマン!』 (= 別作品) は punct 違いで 非 match。
+    """
+    if not title:
+        return ""
+    return re.sub(r"[a-zA-Z0-9ぁ-んァ-ヶー一-龯々〆〇 　]", "", title)
+
+
 def find_related_series_ids(con: sqlite3.Connection, main: dict) -> list[int]:
     """main series と 関連 series id を 返す。
 
@@ -163,10 +175,14 @@ def find_related_series_ids(con: sqlite3.Connection, main: dict) -> list[int]:
         高橋留美子 全作品 が flood する 事故 防止)
       - 同 title (= 完全一致) で qid IS NULL な orphan (= 著者属性 違いで qid 取れず
         孤立した cluster)
+      - title_kana 一致 + title 末尾 punctuation 一致 (= 'BAKUMAN。' と 'バクマン。' の
+        ローマ字/カタカナ 表記揺れ。 'バクマン!' (= 別作品) は punct違い で 除外)
     """
     cur = con.cursor()
     ids = {main["id"]}
     main_title_lower = (main["title"] or "").lower()
+    main_kana = main.get("title_kana") or ""
+    main_punct = _title_punct_suffix(main["title"])
     # 同 qid で title case-insensitive 一致
     if main.get("qid"):
         for r in cur.execute(
@@ -179,6 +195,24 @@ def find_related_series_ids(con: sqlite3.Connection, main: dict) -> list[int]:
         "SELECT id FROM series WHERE title=? AND qid IS NULL", (main["title"],)
     ).fetchall():
         ids.add(r[0])
+    # title_kana + punct suffix 一致 (= romaji/katakana 表記揺れ cluster)
+    # 安全策: 片方が pure ASCII (= ローマ字表記、 e.g. 'BAKUMAN。') の cases のみ。
+    # でないと 'テレビアニメ版 犬夜叉' と '犬夜叉' (= 両方 kana='イヌヤシャ') が
+    # 誤 merge され、 別作品 が 統合されてしまう。
+    main_title = main["title"] or ""
+    main_is_ascii = bool(re.fullmatch(r"[A-Za-z0-9\s]+[^A-Za-z0-9\s]*", main_title))
+    if main_kana:
+        for r in cur.execute(
+            "SELECT id, title FROM series WHERE title_kana=? AND id<>?",
+            (main_kana, main["id"]),
+        ).fetchall():
+            other_title = r[1] or ""
+            other_is_ascii = bool(re.fullmatch(r"[A-Za-z0-9\s]+[^A-Za-z0-9\s]*", other_title))
+            # 片方が ASCII の場合のみ kana match を merge 条件に
+            if not (main_is_ascii or other_is_ascii):
+                continue
+            if _title_punct_suffix(other_title) == main_punct:
+                ids.add(r[0])
     return list(ids)
 
 
