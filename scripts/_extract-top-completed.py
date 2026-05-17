@@ -226,13 +226,15 @@ def select_candidates(con: sqlite3.Connection, limit: int) -> list[dict]:
         ORDER BY (CASE WHEN s.qid IS NOT NULL THEN 100 ELSE 0 END) + vol_count DESC
         LIMIT ?
         """,
-        list(KEEP_EDITION_TYPES) + [limit * 3],  # 3x で 取得 後 filter
+        list(KEEP_EDITION_TYPES) + [limit * 5],  # 5x で 取得 後 filter
     ).fetchall()
     out = []
     seen_titles = set()
     for r in rows:
         if not title_passes_filter(r["title"]):
             continue
+        if not r["title_kana"]:
+            continue  # kana 必須
         # 同一作品 (= main + orphan + kana 表記揺れ) は 1 件 のみ
         # 簡易 dedup key: (title_kana_normalized, vol_count) で 似た series を merge
         kana_norm = re.sub(r"[\s　]", "", r["title_kana"] or "")
@@ -266,10 +268,14 @@ def build_yml_for_candidate(
     authors = authors_loader(con, series_row["id"])
     seed_entry = seed3.get(series_row["series_key"])
 
-    # title_kana strip space
+    # title_kana strip space (= 必須 field、 空なら skip)
     raw_kana = series_row.get("title_kana") or ""
     title_kana = re.sub(r"[\s　]+", "", raw_kana)
+    if not title_kana:
+        return None  # title_kana 不明 → skip
     title_romaji = title_to_romaji(raw_kana)
+    if not title_romaji:
+        return None  # title_romaji 推定不能 → skip
 
     # subtitle 空 でも edition 名 strip 不要 (= 種3 直接出力)
     sub = series_row.get("subtitle")
