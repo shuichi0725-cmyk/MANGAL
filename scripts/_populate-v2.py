@@ -56,6 +56,9 @@ def classify_edition_from_imprint(imprint: str) -> str:
         return "wideban"
     if re.search(r"文庫", t):
         return "bunkobon"
+    # MADB 表記揺れ: 'コミック版' 単独は 99.6% が 集英社文庫 (= ISBN prefix 9784086)
+    if t.strip() == "コミック版":
+        return "bunkobon"
     if "愛蔵" in t:
         return "aizoban"
     if "完全" in t:
