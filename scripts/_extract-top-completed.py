@@ -309,6 +309,140 @@ def kana_to_slug(kana: str | None) -> str:
     return "-".join(romaji_parts)
 
 
+# 数字 → カタカナ普通読み map (= CLAUDE.md slug ルール 「ふりがな で 判断」 自動化)
+DIGIT_KANA = {
+    "0": ["ゼロ", "マル", "レイ"],
+    "1": ["イチ"],
+    "2": ["ニ"],
+    "3": ["サン"],
+    "4": ["ヨン", "シ"],
+    "5": ["ゴ"],
+    "6": ["ロク"],
+    "7": ["ナナ", "シチ"],
+    "8": ["ハチ"],
+    "9": ["キュウ", "ク"],
+}
+
+
+def gen_digit_readings(digits: str) -> set[str]:
+    """digit string → 「普通読み」 variant のカタカナ set。
+
+    e.g. '21' → {'ニジュウイチ', 'ニイチ'}
+         '17' → {'ジュウナナ', 'ジュウシチ', 'イチナナ', 'イチシチ'}
+         '707' → {'ナナヒャクナナ', 'ナナマルナナ', 'ナナレイナナ' 等}
+         '6' → {'ロク'}
+    """
+    readings: set[str] = set()
+    # digit-by-digit reading (= 707 → 'ナナマルナナ')
+    def expand(idx: int, acc: str) -> None:
+        if idx == len(digits):
+            readings.add(acc)
+            return
+        for kana in DIGIT_KANA.get(digits[idx], []):
+            expand(idx + 1, acc + kana)
+    expand(0, "")
+    # 数 単位 reading (= 21 → 'ニジュウイチ', 100 → 'ヒャク')
+    try:
+        n = int(digits)
+        if n < 10:
+            for k in DIGIT_KANA[str(n)]:
+                readings.add(k)
+        elif n < 20:
+            ones = n - 10
+            if ones == 0:
+                readings.add("ジュウ")
+            else:
+                for k in DIGIT_KANA[str(ones)]:
+                    readings.add("ジュウ" + k)
+        elif n < 100:
+            tens = n // 10
+            ones = n % 10
+            tens_kana = DIGIT_KANA[str(tens)][0] + "ジュウ"
+            if ones == 0:
+                readings.add(tens_kana)
+            else:
+                for k in DIGIT_KANA[str(ones)]:
+                    readings.add(tens_kana + k)
+        # 100-999 = 雑な variant 数あるが 主要 4 桁 sample のみ追加
+        elif n < 1000:
+            hundreds = n // 100
+            rest = n % 100
+            # 100 = ヒャク、 300 = サンビャク、 600 = ロッピャク、 800 = ハッピャク (= 簡略 standard のみ)
+            h_variant = "ヒャク" if hundreds == 1 else DIGIT_KANA[str(hundreds)][0] + "ヒャク"
+            if rest == 0:
+                readings.add(h_variant)
+            else:
+                for sub in gen_digit_readings(str(rest)):
+                    readings.add(h_variant + sub)
+    except ValueError:
+        pass
+    return readings
+
+
+def title_to_slug_keep_digit(title: str, kana: str) -> str | None:
+    """title に 数字 を 含み、 ふりがな (= kana) が 「普通数字読み」 なら、
+    title を walk し digit を keep + 非数字部 を pykakasi で ローマ字化。
+
+    e.g. 'はるか17' kana='ハルカ17' → 'haruka-17'
+    e.g. 'AMAKUSA 1637' kana='アマクサ1637' → 'amakusa-1637'
+    e.g. 'らんま1/2' kana='ランマ ニブンノイチ' → None (= 特殊読み、 caller が kana_to_slug fallback)
+    """
+    if not title or not re.search(r"\d", title):
+        return None
+    kana_compact = re.sub(r"[\s　]+", "", kana or "")
+    if not kana_compact:
+        return None
+    # 数字 group が kana に literal で あるか、 reading が kana segment と完全一致 か
+    # 厳格 matching (= 'ナナ' が 'ナナツ' の 部分 だと 誤マッチ する のを 防ぐ):
+    #   - kana を space で分割し、 segment と digit reading が **完全一致** のみ match
+    #   - kana の literal digit (= 'ハルカ17' に '17') も match
+    digit_groups = re.findall(r"\d+", title)
+    kana_segments = [s for s in re.split(r"[\s　]+", kana or "") if s]
+    matched = False
+    for dg in digit_groups:
+        if dg in kana_compact:
+            matched = True
+            break
+        readings = gen_digit_readings(dg)
+        if any(seg in readings for seg in kana_segments):
+            matched = True
+            break
+    if not matched:
+        return None  # 特殊読み → caller が kana_to_slug fallback
+    # digit keep mode: title walk
+    parts: list[str] = []
+    cur_text = ""
+    cur_is_digit = False
+
+    def flush() -> None:
+        nonlocal cur_text
+        if not cur_text:
+            return
+        if cur_is_digit:
+            parts.append(cur_text)
+        else:
+            result = _KKS.convert(cur_text)
+            rom = "".join(r["hepburn"] for r in result).lower()
+            rom = re.sub(r"[^a-z0-9]", "", rom)
+            if rom:
+                parts.append(rom)
+        cur_text = ""
+
+    for c in title:
+        is_d = c.isdigit()
+        if cur_text == "":
+            cur_text = c
+            cur_is_digit = is_d
+        elif is_d == cur_is_digit:
+            cur_text += c
+        else:
+            flush()
+            cur_text = c
+            cur_is_digit = is_d
+    flush()
+    return "-".join(p for p in parts if p)
+
+
 def title_to_romaji(kana: str | None) -> str:
     """title_romaji 生成 (= 全小文字 + space 区切り)。"""
     if not kana:
@@ -583,7 +717,11 @@ def main():
     print(f"[step 3] slug 生成...", file=sys.stderr)
     slug_count: dict[str, int] = defaultdict(int)
     for c in cands:
-        base_slug = kana_to_slug(c["title_kana"])
+        # 数字 含む title は ふりがな で 判定:
+        # 普通数字読み なら 数字 keep (= 'eyeshield-21')、 特殊読み なら kana ローマ字化
+        base_slug = title_to_slug_keep_digit(c["title"] or "", c["title_kana"] or "")
+        if not base_slug:
+            base_slug = kana_to_slug(c["title_kana"])
         if not base_slug:
             # title から ASCII 部分 抽出 fallback
             base_slug = re.sub(r"[^a-z0-9]+", "-", (c["title"] or "").lower()).strip("-")
