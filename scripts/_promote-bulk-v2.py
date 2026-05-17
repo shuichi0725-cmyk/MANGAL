@@ -150,6 +150,28 @@ def find_series(con: sqlite3.Connection, slug: str, title: str, qid: str | None)
     return None
 
 
+def find_related_series_ids(con: sqlite3.Connection, main: dict) -> list[int]:
+    """main series と 関連 (= 同 title の orphan) の series id を 返す。
+
+    cluster 分裂で 同一作品の volumes が 別 series row に 散らばってる cases
+    (= e.g. SLAM DUNK 主 + orphan ホーム社版 「7 巻 抜け」) を 統合する helper。
+
+    安全策:
+      - 同 qid merge は 「作者 QID 共有」 cases (= e.g. Q219948 = 高橋留美子 全作品) で
+        全 作品 が 1 つに flood するので 禁止
+      - 同 title (= 完全一致) で qid IS NULL な orphan のみ merge (= 作品単位安全)
+      - 同 title で main qid と 異なる qid を持つ series は merge しない
+    """
+    cur = con.cursor()
+    ids = {main["id"]}
+    # 同 title で qid 無し orphan のみ
+    for r in cur.execute(
+        "SELECT id FROM series WHERE title=? AND qid IS NULL", (main["title"],)
+    ).fetchall():
+        ids.add(r[0])
+    return list(ids)
+
+
 def get_authors(con: sqlite3.Connection, series_id: int) -> list[dict]:
     cur = con.cursor()
     cur.row_factory = sqlite3.Row
@@ -180,7 +202,7 @@ def edition_passes_filter(ed_row: dict) -> bool:
     return True
 
 
-def get_editions_with_volumes(con: sqlite3.Connection, series_id: int) -> list[dict]:
+def get_editions_with_volumes(con: sqlite3.Connection, series_ids: list[int] | int) -> list[dict]:
     """editions + volumes を まとめて取得し、 同 type editions を 1 つに merge。
 
     merge logic (= 同 series 内の 同 type editions = 限定版/DVD付き 等 packaging variant が
@@ -192,8 +214,11 @@ def get_editions_with_volumes(con: sqlite3.Connection, series_id: int) -> list[d
     """
     cur = con.cursor()
     cur.row_factory = sqlite3.Row
+    if isinstance(series_ids, int):
+        series_ids = [series_ids]
+    placeholders = ",".join("?" for _ in series_ids)
     eds = cur.execute(
-        "SELECT * FROM editions WHERE series_id=?", (series_id,)
+        f"SELECT * FROM editions WHERE series_id IN ({placeholders})", series_ids
     ).fetchall()
     # type → [edition+volumes] list
     by_type: dict[str, list[dict]] = defaultdict(list)
@@ -546,7 +571,9 @@ def main():
                 stats["dropped_spinoff_old"] += 1
                 dropped.append(f"{ypath.name}  title={title}  max_year={max_y}")
                 continue
-        editions = get_editions_with_volumes(con, series["id"])
+        # 同一作品 cluster 分裂 を 検出 (= main + 同qid + 同title orphan)、 全部 merge
+        related_ids = find_related_series_ids(con, series)
+        editions = get_editions_with_volumes(con, related_ids)
         if not editions:
             stats["no_editions"] += 1
             continue
