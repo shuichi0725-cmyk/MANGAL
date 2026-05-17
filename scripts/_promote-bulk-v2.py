@@ -6,7 +6,14 @@ v1 scope: 既存 56 yml に 対応する series のみ regenerate
   - data/manga.v2/<slug>.yml に書き出し (= 旧 data/manga は 不変)
   - 後で diff で 比較
 
-(完全な promote-bulk v2 = 全 152k series 対象は 別途実装)
+filter (= step A/B、 「本編以外は極力表示しない」):
+  - step A: 同 qid series で 「親 / 子」 関係 検出
+            親 = title が prefix で 親 has MORE volumes → 子 is spinoff
+  - step B: 本編 series 内の edition filter
+            keep: standard / bunkobon / wideban / kanzenban / shinsoban / aizoban
+            drop: anime / other / renewal
+            drop imprint: 'My first big%' / '%コンビニ%' / '%増刊%'
+            spinoff series は max(release_date) >= CUTOFF_YEAR なら keep
 """
 
 import re
@@ -23,12 +30,97 @@ SEED3 = ROOT / "data" / "seeds" / "series-supplement-v2.yml"
 SRC_DIR = ROOT / "data" / "manga"
 OUT_DIR = ROOT / "data" / "manga.v2"
 
+CUTOFF_YEAR = 2015  # spinoff で この年 以降なら keep
+KEEP_EDITION_TYPES = {"standard", "bunkobon", "wideban", "kanzenban", "shinsoban", "aizoban"}
+DROP_IMPRINT_PATTERNS = ["My first big", "コンビニ", "増刊", "同人"]
+
 
 def load_seed3() -> dict:
     """series_key → seed3 entry の dict"""
     with SEED3.open("r", encoding="utf-8") as f:
         d = yaml.safe_load(f)
     return {e["key"]: e for e in d["series"]}
+
+
+def normalize_title_for_prefix(t: str) -> str:
+    """『〜』 strip、 「英訳・」「劇場版」「テレビアニメ版」 等 接頭辞 strip。"""
+    s = t.strip()
+    # 『...』 → ...
+    s = re.sub(r"[『「【〔]", "", s)
+    s = re.sub(r"[』」】〕]", "", s)
+    # 接頭辞 strip
+    for prefix in ["英訳・", "劇場版", "劇場用アニメ", "テレビアニメ版",
+                   "映画 ", "映画"]:
+        if s.startswith(prefix):
+            s = s[len(prefix):].lstrip()
+    return s
+
+
+def build_parent_map(con: sqlite3.Connection) -> dict[int, int]:
+    """series_id → parent_series_id (= 親検出済 only)。 公開対象 (= score<3) のみ。
+
+    親判定:
+      - 同 qid または 同 creator_name
+      - 親 title が 子 title の prefix (= normalize 後)
+      - 親 has MORE total ISBN volumes than 子
+      - 親 自身 が 副題なし
+    """
+    cur = con.cursor()
+    cur.row_factory = sqlite3.Row
+    cur.execute("""
+        SELECT s.id, s.qid, s.title, s.subtitle,
+               (SELECT COUNT(*) FROM volumes v JOIN editions e ON e.id=v.edition_id
+                WHERE e.series_id=s.id AND v.isbn13 IS NOT NULL) AS n_isbn
+        FROM series s
+        WHERE s.adult_score < 3
+    """)
+    all_series = [dict(r) for r in cur.fetchall()]
+    by_qid = defaultdict(list)
+    for s in all_series:
+        if s["qid"]:
+            by_qid[s["qid"]].append(s)
+    parent_map: dict[int, int] = {}
+    for qid, sib in by_qid.items():
+        # 候補 parent (= 副題なし、 n_isbn 多い順)
+        parents = [s for s in sib if not s["subtitle"]]
+        parents.sort(key=lambda s: -s["n_isbn"])
+        for child in sib:
+            child_norm = normalize_title_for_prefix(child["title"])
+            for parent in parents:
+                if parent["id"] == child["id"]:
+                    continue
+                parent_norm = normalize_title_for_prefix(parent["title"])
+                if not parent_norm:
+                    continue
+                # parent_norm が child_norm の prefix
+                if child_norm.startswith(parent_norm) and child_norm != parent_norm:
+                    # 親 has more vol
+                    if parent["n_isbn"] > child["n_isbn"]:
+                        parent_map[child["id"]] = parent["id"]
+                        break
+                # 副題ある child は parent と base title が一致 (= no prefix relation)
+                # ケースも spinoff 扱い
+                elif child.get("subtitle") and parent_norm == child_norm:
+                    if parent["n_isbn"] > child["n_isbn"]:
+                        parent_map[child["id"]] = parent["id"]
+                        break
+    return parent_map
+
+
+def get_max_release_year(con: sqlite3.Connection, series_id: int) -> int | None:
+    cur = con.cursor()
+    cur.row_factory = sqlite3.Row
+    r = cur.execute("""
+        SELECT MAX(SUBSTR(v.release_date, 1, 4)) AS y
+        FROM volumes v JOIN editions e ON e.id=v.edition_id
+        WHERE e.series_id=? AND v.release_date IS NOT NULL
+    """, (series_id,)).fetchone()
+    if r and r["y"]:
+        try:
+            return int(r["y"])
+        except ValueError:
+            return None
+    return None
 
 
 def find_series(con: sqlite3.Connection, slug: str, title: str, qid: str | None) -> dict | None:
@@ -71,6 +163,17 @@ def get_authors(con: sqlite3.Connection, series_id: int) -> list[dict]:
     return [{"name": r["name"], "role": r["role"]} for r in rows]
 
 
+def edition_passes_filter(ed_row: dict) -> bool:
+    """edition の type / imprint で 本編判定。 step B filter。"""
+    if ed_row["type"] not in KEEP_EDITION_TYPES:
+        return False
+    imp = ed_row["imprint"] or ""
+    for pat in DROP_IMPRINT_PATTERNS:
+        if pat in imp:
+            return False
+    return True
+
+
 def get_editions_with_volumes(con: sqlite3.Connection, series_id: int) -> list[dict]:
     """editions + volumes を まとめて取得。 volumes は number 昇順、 同 number で release_date 古順。"""
     cur = con.cursor()
@@ -80,6 +183,8 @@ def get_editions_with_volumes(con: sqlite3.Connection, series_id: int) -> list[d
     ).fetchall()
     out = []
     for ed in eds:
+        if not edition_passes_filter(dict(ed)):
+            continue
         vols = cur.execute(
             """SELECT * FROM volumes WHERE edition_id=?
                ORDER BY number, release_date""",
@@ -293,8 +398,15 @@ def main():
     for p in OUT_DIR.glob("*.yml"):
         p.unlink()
 
-    stats = {"total": 0, "regenerated": 0, "not_found_in_db": 0, "no_editions": 0}
+    # step A: 親 series 検出 map
+    print("[step A] 親 series 検出 中 ...", file=sys.stderr)
+    parent_map = build_parent_map(con)
+    print(f"  検出 spinoff series 数: {len(parent_map)}", file=sys.stderr)
+
+    stats = {"total": 0, "regenerated": 0, "not_found_in_db": 0,
+             "no_editions": 0, "dropped_spinoff_old": 0}
     not_found = []
+    dropped = []
 
     for ypath in sorted(SRC_DIR.glob("*.yml")):
         stats["total"] += 1
@@ -308,6 +420,14 @@ def main():
             stats["not_found_in_db"] += 1
             not_found.append(f"{ypath.name}  title={title}")
             continue
+        # step A: spinoff 判定 (= 親があれば 子 = spinoff)
+        is_spinoff = series["id"] in parent_map
+        if is_spinoff:
+            max_y = get_max_release_year(con, series["id"])
+            if max_y is None or max_y < CUTOFF_YEAR:
+                stats["dropped_spinoff_old"] += 1
+                dropped.append(f"{ypath.name}  title={title}  max_year={max_y}")
+                continue
         editions = get_editions_with_volumes(con, series["id"])
         if not editions:
             stats["no_editions"] += 1
@@ -329,6 +449,10 @@ def main():
         print(f"\n=== not found in db-v2 ===", file=sys.stderr)
         for n in not_found:
             print(f"  ❌ {n}", file=sys.stderr)
+    if dropped:
+        print(f"\n=== dropped (= spinoff & old) ===", file=sys.stderr)
+        for d in dropped:
+            print(f"  🗑️  {d}", file=sys.stderr)
 
     print(f"\nwrote {stats['regenerated']} yml to {OUT_DIR}", file=sys.stderr)
 
