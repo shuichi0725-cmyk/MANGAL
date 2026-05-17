@@ -79,6 +79,27 @@
 
 ---
 
+## MANGAL データ形式 protocol (= 必須遵守)
+
+### slug 命名規則
+
+- ローマ字 (= 訓令式 or ヘボン式) で hyphen 区切り
+- **数字 は ローマ字化**: `1/2` → `nibunnoichi`、 `2` → `tsuu` 等
+- 例: `ranma-nibunnoichi` (○) / `ranma-1-2` (×)、 `bakuman` (○) / `bakuman-2` (×)
+- 既存 slug の rename は **URL 互換性** に配慮、 user 確認 を 取る
+
+### title_kana / subtitle_kana
+
+- **スペース は 入れない** (= 半角空白 / 全角空白 とも 全削除)
+- 例: `ランマニブンノイチ` (○) / `ランマ ニブンノイチ` (×)
+- `_promote-bulk-v2.py` で 出力時 自動 strip (= 防御策)
+
+### title_romaji
+
+- 全小文字 + space 区切り (= 例: `ranma 1 2`、 `shingeki no kyojin`)
+
+---
+
 ## MANGAL 掲載対象 (= 漫画 only protocol)
 
 MANGAL は **漫画作品** の database。 以下は **掲載対象外** (= 弾く):

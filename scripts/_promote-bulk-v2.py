@@ -480,7 +480,9 @@ def build_yml(
     o: dict = {}
     o["slug"] = src_yml["slug"]
     o["title"] = series_row["title"]
-    o["title_kana"] = series_row["title_kana"] or src_yml.get("title_kana", "")
+    # title_kana は スペース削除 (= MANGAL protocol: ふりがな に空白 入れない)
+    raw_kana = series_row["title_kana"] or src_yml.get("title_kana", "")
+    o["title_kana"] = re.sub(r"[\s　]+", "", raw_kana) if raw_kana else ""
     o["title_romaji"] = src_yml.get("title_romaji", "")
     # subtitle が edition 名 (= '新装再編版' 等) なら strip (= 全 edition 含む page には不適)
     sub = series_row["subtitle"]
@@ -492,7 +494,7 @@ def build_yml(
     if sub:
         o["subtitle"] = sub
     if series_row["subtitle_kana"] and sub:
-        o["subtitle_kana"] = series_row["subtitle_kana"]
+        o["subtitle_kana"] = re.sub(r"[\s　]+", "", series_row["subtitle_kana"])
 
     # 年代: editions の volumes.release_date から 計算
     # year_started = 最も古い edition の 最初の volume year
