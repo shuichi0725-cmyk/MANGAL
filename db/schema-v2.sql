@@ -5,8 +5,8 @@
 --      - subtitle TEXT           : 副題本文
 --      - subtitle_kana TEXT      : 副題ふりがな
 --      - title_official_en TEXT  : MADB schema:alternateName 由来
---      - madb_series_ids TEXT    : MADB C25xxxx の JSON array
 --      - source TEXT             : 'madb104' / 'orphan101'
+--      (madb_series_ids は editions.madb_series_id で集計可能なため不要)
 --   2. editions テーブルに madb_series_id TEXT 追加
 --   3. volumes テーブルに volume_label TEXT 追加 (= 「上」「下」「特装版」)
 --   4. series_key 仕様変更:
@@ -86,7 +86,6 @@ CREATE TABLE IF NOT EXISTS series (
   title_kana          TEXT,
   subtitle_kana       TEXT,            -- 副題ふりがな (= path B' で 新規)
   title_official_en   TEXT,            -- MADB schema:alternateName 由来 (= 新規)
-  madb_series_ids     TEXT,            -- JSON array '["C258774", "C258780", ...]' (= 新規)
   year_started        INTEGER,
   year_ended          INTEGER,
   status              TEXT,            -- ongoing/completed/hiatus
