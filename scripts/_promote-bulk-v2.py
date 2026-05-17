@@ -151,20 +151,30 @@ def find_series(con: sqlite3.Connection, slug: str, title: str, qid: str | None)
 
 
 def find_related_series_ids(con: sqlite3.Connection, main: dict) -> list[int]:
-    """main series と 関連 (= 同 title の orphan) の series id を 返す。
+    """main series と 関連 series id を 返す。
 
-    cluster 分裂で 同一作品の volumes が 別 series row に 散らばってる cases
-    (= e.g. SLAM DUNK 主 + orphan ホーム社版 「7 巻 抜け」) を 統合する helper。
+    cluster 分裂で 同一作品の volumes が 別 series row に 散らばってる cases を 統合する。
 
-    安全策:
-      - 同 qid merge は 「作者 QID 共有」 cases (= e.g. Q219948 = 高橋留美子 全作品) で
-        全 作品 が 1 つに flood するので 禁止
-      - 同 title (= 完全一致) で qid IS NULL な orphan のみ merge (= 作品単位安全)
-      - 同 title で main qid と 異なる qid を持つ series は merge しない
+    rules:
+      - main 自身
+      - 同 qid で title が case-insensitive 一致 (= 'SLAM DUNK' と 'Slam dunk'、
+        '境界のRINNE' と '境界のRinne' 等 表記揺れ cluster)。
+        異 title は 同 qid でも 別作品の可能性 (= 作者 QID 共有 cases、 e.g. Q219948 で
+        高橋留美子 全作品 が flood する 事故 防止)
+      - 同 title (= 完全一致) で qid IS NULL な orphan (= 著者属性 違いで qid 取れず
+        孤立した cluster)
     """
     cur = con.cursor()
     ids = {main["id"]}
-    # 同 title で qid 無し orphan のみ
+    main_title_lower = (main["title"] or "").lower()
+    # 同 qid で title case-insensitive 一致
+    if main.get("qid"):
+        for r in cur.execute(
+            "SELECT id, title FROM series WHERE qid=?", (main["qid"],)
+        ).fetchall():
+            if (r[1] or "").lower() == main_title_lower:
+                ids.add(r[0])
+    # 同 title で qid 無し orphan
     for r in cur.execute(
         "SELECT id FROM series WHERE title=? AND qid IS NULL", (main["title"],)
     ).fetchall():
