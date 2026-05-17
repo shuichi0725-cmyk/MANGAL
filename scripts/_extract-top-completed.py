@@ -100,6 +100,49 @@ ISBN_PUBLISHER_PREFIXES = [
     ("978483444", "gentosha-comics"),
     ("978483447", "gentosha-comics"),
     ("978483449", "gentosha-comics"),
+    # 拡張 prefix (= G.17 publisher 推定救済)
+    ("9784757", "enterbrain"),
+    ("9784758", "enterbrain"),
+    ("9784785", "shonen-gahosha"),
+    ("9784801", "takeshobo"),
+    ("9784800", "takeshobo"),
+    ("9784812", "futabasha"),
+    ("9784814", "square-enix"),
+    ("9784821", "bunkasha"),
+    ("9784832", "shonen-gahosha"),
+    ("9784834", "furebel-kan"),
+    ("9784835", "kaiohsha"),
+    ("9784845", "kaiohsha"),
+    ("9784847", "shufu-no-tomo"),
+    ("9784861", "mediafactory"),
+    ("9784862", "mediafactory"),
+    ("9784864", "mediafactory"),
+    ("9784884", "shodensha"),
+    ("9784886", "shodensha"),
+    ("9784887", "shodensha"),
+    ("9784591", "poplar"),
+    ("9784620", "mainichi"),
+    ("9784124", "chuokoron"),
+    ("9784122", "chuokoron"),
+    ("9784120", "chuokoron"),
+    ("9784199", "tokuma"),
+    ("9784198", "tokuma"),
+    ("9784197", "tokuma"),
+    ("9784420", "tokuma"),
+    ("9784267", "kodansha"),
+    ("9784334", "kobunsha"),
+    ("9784391", "shufu-to-seikatsu"),
+    ("9784107", "asahi-shimbun"),
+    ("9784022", "asahi-shimbun"),
+    ("9784257", "asahi-shimbun"),
+    ("9784051", "gakken"),
+    ("9784052", "gakken"),
+    ("9784053", "gakken"),
+    ("9784054", "gakken"),
+    ("9784055", "gakken"),
+    ("9784056", "gakken"),
+    ("9784073", "shogakukan"),
+    # 既存 main prefixes
     ("9784592", "hakusensha"),
     ("9784253", "akita"),
     ("9784408", "jitsugyo-no-nihon"),
@@ -110,6 +153,7 @@ ISBN_PUBLISHER_PREFIXES = [
     ("9784396", "shodensha"),
     ("9784596", "harpercollins-japan"),
     ("9784344", "gentosha"),
+    ("978404", "kadokawa"),
     ("978404", "kadokawa"),
     ("9784091", "shogakukan"),
     ("9784093", "shogakukan"),
@@ -433,7 +477,8 @@ def main():
     print(f"  spinoff: {len(parent_map)}", file=sys.stderr)
 
     print(f"[step 2] 候補抽出...", file=sys.stderr)
-    cands = select_candidates(con, TARGET_COUNT)
+    # 余裕持って 3x 取得 (= publisher 推定 不能 / kana 空 等で skip された場合 backfill)
+    cands = select_candidates(con, TARGET_COUNT * 3)
     print(f"  候補: {len(cands)}", file=sys.stderr)
 
     # spinoff drop
@@ -456,11 +501,14 @@ def main():
         else:
             c["__slug__"] = f"{base_slug}-{slug_count[base_slug]}"
 
-    print(f"[step 4] yml 生成...", file=sys.stderr)
-    stats = {"written": 0, "no_editions": 0}
+    print(f"[step 4] yml 生成 (= {TARGET_COUNT} 達成まで)...", file=sys.stderr)
+    stats = {"written": 0, "no_editions": 0, "error": 0}
     for i, c in enumerate(cands):
-        if i % 200 == 0:
-            print(f"  progress: {i}/{len(cands)}", file=sys.stderr)
+        if stats["written"] >= TARGET_COUNT:
+            print(f"  達成: {TARGET_COUNT} 件、 残り 候補 {len(cands)-i} は skip", file=sys.stderr)
+            break
+        if i % 500 == 0:
+            print(f"  progress: written={stats['written']} skipped={stats['no_editions']} scanned={i}/{len(cands)}", file=sys.stderr)
         try:
             yml_dict = build_yml_for_candidate(
                 con, c, seed3, valid_pubs, valid_mags, valid_gens,
@@ -469,7 +517,7 @@ def main():
                 pm.get_authors,
             )
         except Exception as e:
-            print(f"  ❌ {c['title']!r}: {e}", file=sys.stderr)
+            stats["error"] += 1
             continue
         if not yml_dict:
             stats["no_editions"] += 1
