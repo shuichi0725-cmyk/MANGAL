@@ -30,59 +30,6 @@ wikidata_qid: Q3782468
 editions:
 - type: standard
   label: 通常版
-  imprint: KC magazine
-  volumes:
-  - number: 15
-    asin: null
-    isbn13: '9784063587227'
-    cover_url: null
-    release_date: 2014-12
-  - number: 26
-    asin: null
-    isbn13: '9784063970494'
-    cover_url: null
-    release_date: 2018-08
-  - number: 29
-    asin: null
-    isbn13: '9784065162279'
-    cover_url: null
-    release_date: 2019-08
-  - number: 30
-    asin: null
-    isbn13: '9784065175477'
-    cover_url: null
-    release_date: 2019-12
-  - number: 31
-    asin: null
-    isbn13: '9784065186886'
-    cover_url: null
-    release_date: 2020-04
-- type: standard
-  label: 通常版
-  imprint: Kodansha bilingual comics
-  volumes:
-  - number: 1
-    asin: null
-    isbn13: '9784062501521'
-    cover_url: null
-    release_date: 2013-12
-  - number: 2
-    asin: null
-    isbn13: '9784062501538'
-    cover_url: null
-    release_date: 2014-08
-  - number: 3
-    asin: null
-    isbn13: '9784062501545'
-    cover_url: null
-    release_date: 2015-08
-  - number: 4
-    asin: null
-    isbn13: '9784065232958'
-    cover_url: null
-    release_date: 2021-04
-- type: standard
-  label: 通常版
   imprint: SHONEN MAGAZINE COMICS
   volumes:
   - number: 1
@@ -232,25 +179,6 @@ editions:
     release_date: 2021-01
 - type: standard
   label: 通常版
-  imprint: シリウスKC
-  volumes:
-  - number: 15
-    asin: null
-    isbn13: '9784065122884'
-    cover_url: null
-    release_date: 2018-08
-  - number: 16
-    asin: null
-    isbn13: '9784065138120'
-    cover_url: null
-    release_date: 2018-12
-  - number: 17
-    asin: null
-    isbn13: '9784065152041'
-    cover_url: null
-    release_date: 2019-04
-- type: standard
-  label: 通常版
   imprint: プレミアムKC
   volumes:
   - number: 8
@@ -293,3 +221,75 @@ editions:
     isbn13: '9784065234167'
     cover_url: null
     release_date: 2021-06
+- type: standard
+  label: 通常版
+  imprint: Kodansha bilingual comics
+  volumes:
+  - number: 1
+    asin: null
+    isbn13: '9784062501521'
+    cover_url: null
+    release_date: 2013-12
+  - number: 2
+    asin: null
+    isbn13: '9784062501538'
+    cover_url: null
+    release_date: 2014-08
+  - number: 3
+    asin: null
+    isbn13: '9784062501545'
+    cover_url: null
+    release_date: 2015-08
+  - number: 4
+    asin: null
+    isbn13: '9784065232958'
+    cover_url: null
+    release_date: 2021-04
+- type: standard
+  label: 通常版
+  imprint: KC magazine
+  volumes:
+  - number: 15
+    asin: null
+    isbn13: '9784063587227'
+    cover_url: null
+    release_date: 2014-12
+  - number: 26
+    asin: null
+    isbn13: '9784063970494'
+    cover_url: null
+    release_date: 2018-08
+  - number: 29
+    asin: null
+    isbn13: '9784065162279'
+    cover_url: null
+    release_date: 2019-08
+  - number: 30
+    asin: null
+    isbn13: '9784065175477'
+    cover_url: null
+    release_date: 2019-12
+  - number: 31
+    asin: null
+    isbn13: '9784065186886'
+    cover_url: null
+    release_date: 2020-04
+- type: standard
+  label: 通常版
+  imprint: シリウスKC
+  volumes:
+  - number: 15
+    asin: null
+    isbn13: '9784065122884'
+    cover_url: null
+    release_date: 2018-08
+  - number: 16
+    asin: null
+    isbn13: '9784065138120'
+    cover_url: null
+    release_date: 2018-12
+  - number: 17
+    asin: null
+    isbn13: '9784065152041'
+    cover_url: null
+    release_date: 2019-04

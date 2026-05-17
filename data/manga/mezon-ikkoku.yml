@@ -24,100 +24,6 @@ alternative_titles:
   en: Maison Ikkoku
 wikidata_qid: Q219948
 editions:
-- type: bunkobon
-  label: 文庫版
-  imprint: 小学館文庫
-  volumes:
-  - number: 1
-    asin: null
-    isbn13: '9784091921710'
-    cover_url: null
-    release_date: 1997-01
-  - number: 2
-    asin: null
-    isbn13: '9784091921727'
-    cover_url: null
-    release_date: 1997-01
-  - number: 3
-    asin: null
-    isbn13: '9784091921734'
-    cover_url: null
-    release_date: 1997-02
-  - number: 4
-    asin: null
-    isbn13: '9784091921741'
-    cover_url: null
-    release_date: 1997-02
-  - number: 5
-    asin: null
-    isbn13: '9784091921758'
-    cover_url: null
-    release_date: 1997-03
-  - number: 6
-    asin: null
-    isbn13: '9784091921765'
-    cover_url: null
-    release_date: 1997-03
-  - number: 7
-    asin: null
-    isbn13: '9784091921772'
-    cover_url: null
-    release_date: 1997-04
-  - number: 8
-    asin: null
-    isbn13: '9784091921789'
-    cover_url: null
-    release_date: 1997-04
-  - number: 9
-    asin: null
-    isbn13: '9784091921796'
-    cover_url: null
-    release_date: 1997-05
-  - number: 10
-    asin: null
-    isbn13: '9784091921802'
-    cover_url: null
-    release_date: 1997-05
-- type: standard
-  label: 通常版
-  imprint: My first wide
-  volumes:
-  - number: 1
-    volume_label: 第1巻
-    asin: null
-    isbn13: '9784091621214'
-    cover_url: null
-    release_date: 2002-03
-  - number: 2
-    volume_label: 第2巻
-    asin: null
-    isbn13: '9784091621221'
-    cover_url: null
-    release_date: 2002-03
-  - number: 3
-    volume_label: 第3巻
-    asin: null
-    isbn13: '9784091621238'
-    cover_url: null
-    release_date: 2002-04
-  - number: 4
-    volume_label: 第4巻
-    asin: null
-    isbn13: '9784091621245'
-    cover_url: null
-    release_date: 2002-04
-  - number: 5
-    volume_label: 第5巻
-    asin: null
-    isbn13: '9784091621269'
-    cover_url: null
-    release_date: 2002-05
-  - number: 6
-    volume_label: 第6巻
-    asin: null
-    isbn13: '9784091621276'
-    cover_url: null
-    release_date: 2002-05
 - type: standard
   label: 通常版
   imprint: ビッグコミックス
@@ -312,3 +218,106 @@ editions:
     isbn13: '9784091838100'
     cover_url: null
     release_date: '1993-06-01'
+- type: bunkobon
+  label: 文庫版
+  imprint: 小学館文庫
+  volumes:
+  - number: 1
+    asin: null
+    isbn13: '9784091921710'
+    cover_url: null
+    release_date: 1997-01
+  - number: 2
+    asin: null
+    isbn13: '9784091921727'
+    cover_url: null
+    release_date: 1997-01
+  - number: 3
+    asin: null
+    isbn13: '9784091921734'
+    cover_url: null
+    release_date: 1997-02
+  - number: 4
+    asin: null
+    isbn13: '9784091921741'
+    cover_url: null
+    release_date: 1997-02
+  - number: 5
+    asin: null
+    isbn13: '9784091921758'
+    cover_url: null
+    release_date: 1997-03
+  - number: 6
+    asin: null
+    isbn13: '9784091921765'
+    cover_url: null
+    release_date: 1997-03
+  - number: 7
+    asin: null
+    isbn13: '9784091921772'
+    cover_url: null
+    release_date: 1997-04
+  - number: 8
+    asin: null
+    isbn13: '9784091921789'
+    cover_url: null
+    release_date: 1997-04
+  - number: 9
+    asin: null
+    isbn13: '9784091921796'
+    cover_url: null
+    release_date: 1997-05
+  - number: 10
+    asin: null
+    isbn13: '9784091921802'
+    cover_url: null
+    release_date: 1997-05
+- type: standard
+  label: 通常版
+  imprint: My first wide
+  volumes:
+  - number: 1
+    volume_label: 第1巻
+    asin: null
+    isbn13: '9784091621214'
+    cover_url: null
+    release_date: 2002-03
+  - number: 2
+    volume_label: 第2巻
+    asin: null
+    isbn13: '9784091621221'
+    cover_url: null
+    release_date: 2002-03
+  - number: 3
+    volume_label: 第3巻
+    asin: null
+    isbn13: '9784091621238'
+    cover_url: null
+    release_date: 2002-04
+  - number: 4
+    volume_label: 第4巻
+    asin: null
+    isbn13: '9784091621245'
+    cover_url: null
+    release_date: 2002-04
+  - number: 5
+    volume_label: 第5巻
+    asin: null
+    isbn13: '9784091621269'
+    cover_url: null
+    release_date: 2002-05
+  - number: 6
+    volume_label: 第6巻
+    asin: null
+    isbn13: '9784091621276'
+    cover_url: null
+    release_date: 2002-05
+- type: standard
+  label: 通常版
+  imprint: Big comic compact
+  volumes:
+  - number: 1
+    asin: null
+    isbn13: null
+    cover_url: null
+    release_date: 2005-06

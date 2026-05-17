@@ -179,7 +179,7 @@ def get_editions_with_volumes(con: sqlite3.Connection, series_id: int) -> list[d
     cur = con.cursor()
     cur.row_factory = sqlite3.Row
     eds = cur.execute(
-        "SELECT * FROM editions WHERE series_id=? ORDER BY type, imprint", (series_id,)
+        "SELECT * FROM editions WHERE series_id=?", (series_id,)
     ).fetchall()
     out = []
     for ed in eds:
@@ -219,6 +219,11 @@ def get_editions_with_volumes(con: sqlite3.Connection, series_id: int) -> list[d
                 "volumes": primary_vols,
             }
         )
+    # editions を 第1巻 (= 最古 volume) の release_date 昇順 で sort
+    def first_vol_date(ed_dict):
+        dates = [v["release_date"] for v in ed_dict["volumes"] if v["release_date"]]
+        return min(dates) if dates else "9999-99"
+    out.sort(key=first_vol_date)
     return out
 
 

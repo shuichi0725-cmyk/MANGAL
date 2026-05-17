@@ -28,25 +28,6 @@ wikidata_qid: Q208582
 editions:
 - type: standard
   label: 通常版
-  imprint: ジャンプコミックス
-  volumes:
-  - number: 3
-    asin: null
-    isbn13: '9784088518336'
-    cover_url: null
-    release_date: '1986-06-15'
-  - number: 7
-    asin: null
-    isbn13: '9784088518374'
-    cover_url: null
-    release_date: '1987-05-15'
-  - number: 9
-    asin: null
-    isbn13: '9784088518398'
-    cover_url: null
-    release_date: '1987-09-15'
-- type: standard
-  label: 通常版
   imprint: ジャンプ・コミックス
   volumes:
   - number: 1
@@ -258,3 +239,22 @@ editions:
     isbn13: '9784088510903'
     cover_url: null
     release_date: 1995-08
+- type: standard
+  label: 通常版
+  imprint: ジャンプコミックス
+  volumes:
+  - number: 3
+    asin: null
+    isbn13: '9784088518336'
+    cover_url: null
+    release_date: '1986-06-15'
+  - number: 7
+    asin: null
+    isbn13: '9784088518374'
+    cover_url: null
+    release_date: '1987-05-15'
+  - number: 9
+    asin: null
+    isbn13: '9784088518398'
+    cover_url: null
+    release_date: '1987-09-15'

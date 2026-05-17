@@ -131,21 +131,26 @@ CREATE TABLE IF NOT EXISTS editions (
 -- volumes index は volumes テーブル定義の後で 作成 (= 後述)
 
 -- volumes v2: volume_label 追加 (= 「上」「下」「特装版」等の生 label)
+-- isbn13 を nullable 化 (= 1980 年代以前等 ISBN 制度未浸透 巻 を 投入できるよう)。
+-- madb_book_id で 重複防止 (= ISBN なし book も MADB が固有 ID を持つ)。
 CREATE TABLE IF NOT EXISTS volumes (
-  id            INTEGER PRIMARY KEY AUTOINCREMENT,
-  edition_id    INTEGER NOT NULL,
-  isbn13        TEXT NOT NULL UNIQUE,
-  number        INTEGER NOT NULL,           -- 数字化済 (= 上下は 1/2 に変換、 表示は volume_label 優先)
-  volume_label  TEXT,                       -- 生 label (= '上', '下', '特装版', 'vol.1' 等、 新規)
-  is_extra      INTEGER NOT NULL DEFAULT 0, -- 外伝・0巻
-  release_date  TEXT,                       -- YYYY-MM-DD
-  cover_url     TEXT,
-  price         INTEGER,                    -- 円
-  asin          TEXT,
-  created_at    TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%SZ', 'now')),
-  updated_at    TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%SZ', 'now')),
+  id             INTEGER PRIMARY KEY AUTOINCREMENT,
+  edition_id     INTEGER NOT NULL,
+  madb_book_id   TEXT UNIQUE,                -- MADB M-prefix ID (= 重複防止 PK 代用、 新規)
+  isbn13         TEXT,                       -- ISBN-13 (= nullable、 古い巻は無いことあり)
+  number         INTEGER NOT NULL,           -- 数字化済
+  volume_label   TEXT,                       -- 生 label (= '上', '下', '特装版' 等)
+  is_extra       INTEGER NOT NULL DEFAULT 0, -- 外伝・0巻
+  release_date   TEXT,                       -- YYYY-MM-DD
+  cover_url      TEXT,
+  price          INTEGER,                    -- 円
+  asin           TEXT,
+  created_at     TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%SZ', 'now')),
+  updated_at     TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%SZ', 'now')),
   FOREIGN KEY (edition_id) REFERENCES editions(id) ON DELETE CASCADE
 );
+-- ISBN 持つ volume の lookup index (= NULL 多い場合 cardinality 高い)
+CREATE INDEX IF NOT EXISTS idx_volumes_isbn13 ON volumes(isbn13) WHERE isbn13 IS NOT NULL;
 
 CREATE TABLE IF NOT EXISTS sources (
   id          INTEGER PRIMARY KEY AUTOINCREMENT,

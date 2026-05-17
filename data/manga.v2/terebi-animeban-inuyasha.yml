@@ -23,16 +23,6 @@ wikidata_qid: Q219948
 editions:
 - type: standard
   label: 通常版
-  imprint: 少年サンデーコミックスビジュアルセレクション
-  volumes:
-  - number: 1
-    volume_label: 参
-    asin: null
-    isbn13: '9784091267535'
-    cover_url: null
-    release_date: '2001-04-15'
-- type: standard
-  label: 通常版
   imprint: 少年サンデービジュアルセレクション
   volumes:
   - number: 1
@@ -41,3 +31,13 @@ editions:
     isbn13: '9784091267511'
     cover_url: null
     release_date: '2001-03-15'
+- type: standard
+  label: 通常版
+  imprint: 少年サンデーコミックスビジュアルセレクション
+  volumes:
+  - number: 1
+    volume_label: 参
+    asin: null
+    isbn13: '9784091267535'
+    cover_url: null
+    release_date: '2001-04-15'

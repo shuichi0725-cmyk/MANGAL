@@ -398,6 +398,7 @@ def link_and_aggregate(clusters: list[dict], mangaka: dict, mangaka_norm: dict) 
             continue
         # ISBN normalize は 後段 (= sqlite 投入時) で。 ここでは生 ISBN 保持。
         book_record = {
+            "madb_id": b.get("schema:identifier", ""),
             "isbn": get_isbn(b),
             "vol": get_vol(b),
             "date": b.get("schema:datePublished", ""),

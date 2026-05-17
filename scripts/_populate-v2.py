@@ -158,6 +158,7 @@ def main():
         qid_to_mangaka_id[r["qid"]] = r["id"]
 
     isbn_seen: set[str] = set()
+    madb_book_seen: set[str] = set()
 
     for c in clusters:
         # 1. series row
@@ -231,16 +232,20 @@ def main():
             for r in c["madb_records"]:
                 get_or_create_edition(r["brand"])
 
-        # 4. volumes
+        # 4. volumes (= ISBN なしも 投入、 madb_book_id で uniqueness)
         for book in c["books"]:
             edition_id = get_or_create_edition(book["brand"])
             if edition_id is None:
                 continue
-            isbn = normalize_isbn(book["isbn"])
-            if not isbn:
-                stats["volumes_skip_no_isbn"] += 1
+            madb_book_id = book.get("madb_id", "")
+            if not madb_book_id:
+                stats["volumes_skip_no_madb_id"] = stats.get("volumes_skip_no_madb_id", 0) + 1
                 continue
-            if isbn in isbn_seen:
+            if madb_book_id in madb_book_seen:
+                stats["volumes_skip_dup_madb"] = stats.get("volumes_skip_dup_madb", 0) + 1
+                continue
+            isbn = normalize_isbn(book["isbn"]) or None
+            if isbn and isbn in isbn_seen:
                 # 同 ISBN が 別 cluster で 重複登録 (= データ不整合) → skip
                 stats["volumes_skip_dup_isbn"] += 1
                 continue
@@ -253,10 +258,12 @@ def main():
             try:
                 cur.execute(
                     """INSERT INTO volumes
-                       (edition_id, isbn13, number, volume_label, is_extra, release_date)
-                       VALUES (?, ?, ?, ?, ?, ?)""",
+                       (edition_id, madb_book_id, isbn13, number, volume_label,
+                        is_extra, release_date)
+                       VALUES (?, ?, ?, ?, ?, ?, ?)""",
                     (
                         edition_id,
+                        madb_book_id,
                         isbn,
                         num,
                         vlabel,
@@ -264,10 +271,14 @@ def main():
                         book.get("date") or None,
                     ),
                 )
-                isbn_seen.add(isbn)
+                madb_book_seen.add(madb_book_id)
+                if isbn:
+                    isbn_seen.add(isbn)
                 stats["volumes_inserted"] += 1
+                if not isbn:
+                    stats["volumes_no_isbn"] = stats.get("volumes_no_isbn", 0) + 1
             except sqlite3.IntegrityError as e:
-                stats["volumes_skip_dup_isbn"] += 1
+                stats["volumes_skip_dup_madb"] = stats.get("volumes_skip_dup_madb", 0) + 1
 
     db.commit()
 

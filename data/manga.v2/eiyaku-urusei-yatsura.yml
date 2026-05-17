@@ -25,15 +25,6 @@ wikidata_qid: Q219948
 editions:
 - type: standard
   label: 通常版
-  imprint: 少年サンデーコミックス ワイドカラー版
-  volumes:
-  - number: 4
-    asin: null
-    isbn13: '9784091218308'
-    cover_url: null
-    release_date: '1985-01-15'
-- type: standard
-  label: 通常版
   imprint: 少年サンデーコミックス・ワイドカラー版
   volumes:
   - number: 1
@@ -51,3 +42,12 @@ editions:
     isbn13: '9784091218186'
     cover_url: null
     release_date: 1984-04
+- type: standard
+  label: 通常版
+  imprint: 少年サンデーコミックス ワイドカラー版
+  volumes:
+  - number: 4
+    asin: null
+    isbn13: '9784091218308'
+    cover_url: null
+    release_date: '1985-01-15'

@@ -29,24 +29,6 @@ wikidata_qid: Q219948
 editions:
 - type: standard
   label: 通常版
-  imprint: SHONEN SUNDAY COMICS SPECIAL
-  volumes:
-  - number: 1
-    asin: null
-    isbn13: '9784091277121'
-    cover_url: null
-    release_date: 2003-12
-- type: standard
-  label: 通常版
-  imprint: 少年サンデーグラフィック
-  volumes:
-  - number: 1
-    asin: null
-    isbn13: '9784091011893'
-    cover_url: null
-    release_date: 2001-01
-- type: standard
-  label: 通常版
   imprint: 少年サンデーコミックス
   volumes:
   - number: 1
@@ -331,6 +313,58 @@ editions:
     release_date: '2009-02-23'
 - type: standard
   label: 通常版
+  imprint: 少年サンデーグラフィック
+  volumes:
+  - number: 1
+    asin: null
+    isbn13: '9784091011893'
+    cover_url: null
+    release_date: 2001-01
+- type: standard
+  label: 通常版
+  imprint: 少年サンデーコミックスビジュアルセレクション
+  volumes:
+  - number: 1
+    volume_label: 八
+    asin: null
+    isbn13: '9784091267580'
+    cover_url: null
+    release_date: '2001-09-15'
+  - number: 5
+    volume_label: 5巻
+    asin: null
+    isbn13: '9784091267559'
+    cover_url: null
+    release_date: 2001-06
+  - number: 6
+    volume_label: 6巻
+    asin: null
+    isbn13: '9784091267566'
+    cover_url: null
+    release_date: 2001-07
+  - number: 7
+    volume_label: 7巻
+    asin: null
+    isbn13: '9784091267573'
+    cover_url: null
+    release_date: 2001-08
+  - number: 17
+    volume_label: 17巻
+    asin: null
+    isbn13: '9784091267979'
+    cover_url: null
+    release_date: 2002-06
+- type: standard
+  label: 通常版
+  imprint: SHONEN SUNDAY COMICS SPECIAL
+  volumes:
+  - number: 1
+    asin: null
+    isbn13: '9784091277121'
+    cover_url: null
+    release_date: 2003-12
+- type: standard
+  label: 通常版
   imprint: 少年サンデーコミックス スペシャル
   volumes:
   - number: 1
@@ -478,37 +512,3 @@ editions:
     isbn13: '9784091241658'
     cover_url: null
     release_date: '2015-06-23'
-- type: standard
-  label: 通常版
-  imprint: 少年サンデーコミックスビジュアルセレクション
-  volumes:
-  - number: 1
-    volume_label: 八
-    asin: null
-    isbn13: '9784091267580'
-    cover_url: null
-    release_date: '2001-09-15'
-  - number: 5
-    volume_label: 5巻
-    asin: null
-    isbn13: '9784091267559'
-    cover_url: null
-    release_date: 2001-06
-  - number: 6
-    volume_label: 6巻
-    asin: null
-    isbn13: '9784091267566'
-    cover_url: null
-    release_date: 2001-07
-  - number: 7
-    volume_label: 7巻
-    asin: null
-    isbn13: '9784091267573'
-    cover_url: null
-    release_date: 2001-08
-  - number: 17
-    volume_label: 17巻
-    asin: null
-    isbn13: '9784091267979'
-    cover_url: null
-    release_date: 2002-06

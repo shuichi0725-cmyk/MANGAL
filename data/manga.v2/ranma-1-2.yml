@@ -28,119 +28,6 @@ wikidata_qid: Q219948
 editions:
 - type: standard
   label: 通常版
-  imprint: SHONEN SUNDAY COMICS SPECIAL
-  volumes:
-  - number: 1
-    asin: null
-    isbn13: '9784091272706'
-    cover_url: null
-    release_date: '2016-07-20'
-  - number: 2
-    asin: null
-    isbn13: '9784091272751'
-    cover_url: null
-    release_date: '2016-07-20'
-  - number: 3
-    asin: null
-    isbn13: '9784091272768'
-    cover_url: null
-    release_date: '2016-08-23'
-  - number: 4
-    asin: null
-    isbn13: '9784091272775'
-    cover_url: null
-    release_date: '2016-09-21'
-  - number: 5
-    asin: null
-    isbn13: '9784091272782'
-    cover_url: null
-    release_date: '2016-10-23'
-  - number: 6
-    asin: null
-    isbn13: '9784091272799'
-    cover_url: null
-    release_date: '2016-11-23'
-  - number: 7
-    asin: null
-    isbn13: '9784091272805'
-    cover_url: null
-    release_date: '2016-12-21'
-  - number: 8
-    asin: null
-    isbn13: '9784091272843'
-    cover_url: null
-    release_date: '2017-01-23'
-  - number: 9
-    asin: null
-    isbn13: '9784091272850'
-    cover_url: null
-    release_date: '2017-02-22'
-  - number: 10
-    asin: null
-    isbn13: '9784091272867'
-    cover_url: null
-    release_date: '2017-03-22'
-  - number: 11
-    asin: null
-    isbn13: '9784091272874'
-    cover_url: null
-    release_date: '2017-04-23'
-  - number: 12
-    asin: null
-    isbn13: '9784091272881'
-    cover_url: null
-    release_date: '2017-05-23'
-  - number: 13
-    asin: null
-    isbn13: '9784091272898'
-    cover_url: null
-    release_date: 2017-06
-  - number: 14
-    asin: null
-    isbn13: '9784091272904'
-    cover_url: null
-    release_date: 2017-07
-  - number: 15
-    asin: null
-    isbn13: '9784091272942'
-    cover_url: null
-    release_date: 2017-08
-  - number: 16
-    asin: null
-    isbn13: '9784091272959'
-    cover_url: null
-    release_date: 2017-09
-  - number: 17
-    asin: null
-    isbn13: '9784091272966'
-    cover_url: null
-    release_date: 2017-10
-  - number: 18
-    asin: null
-    isbn13: '9784091272973'
-    cover_url: null
-    release_date: 2017-11
-  - number: 19
-    asin: null
-    isbn13: '9784091272980'
-    cover_url: null
-    release_date: 2017-12
-  - number: 20
-    asin: null
-    isbn13: '9784091272997'
-    cover_url: null
-    release_date: 2018-01
-- type: standard
-  label: 通常版
-  imprint: ビジュアルセレクション
-  volumes:
-  - number: 1
-    asin: null
-    isbn13: '9784091218797'
-    cover_url: null
-    release_date: '1994-10-15'
-- type: standard
-  label: 通常版
   imprint: 少年サンデーコミックス
   volumes:
   - number: 1
@@ -335,6 +222,15 @@ editions:
     release_date: '1996-06-15'
 - type: standard
   label: 通常版
+  imprint: ビジュアルセレクション
+  volumes:
+  - number: 1
+    asin: null
+    isbn13: '9784091218797'
+    cover_url: null
+    release_date: '1994-10-15'
+- type: standard
+  label: 通常版
   imprint: 少年サンデーコミックススペシャル
   volumes:
   - number: 1
@@ -349,3 +245,107 @@ editions:
     isbn13: '9784091234766'
     cover_url: null
     release_date: '2011-12-06'
+- type: standard
+  label: 通常版
+  imprint: SHONEN SUNDAY COMICS SPECIAL
+  volumes:
+  - number: 1
+    asin: null
+    isbn13: '9784091272706'
+    cover_url: null
+    release_date: '2016-07-20'
+  - number: 2
+    asin: null
+    isbn13: '9784091272751'
+    cover_url: null
+    release_date: '2016-07-20'
+  - number: 3
+    asin: null
+    isbn13: '9784091272768'
+    cover_url: null
+    release_date: '2016-08-23'
+  - number: 4
+    asin: null
+    isbn13: '9784091272775'
+    cover_url: null
+    release_date: '2016-09-21'
+  - number: 5
+    asin: null
+    isbn13: '9784091272782'
+    cover_url: null
+    release_date: '2016-10-23'
+  - number: 6
+    asin: null
+    isbn13: '9784091272799'
+    cover_url: null
+    release_date: '2016-11-23'
+  - number: 7
+    asin: null
+    isbn13: '9784091272805'
+    cover_url: null
+    release_date: '2016-12-21'
+  - number: 8
+    asin: null
+    isbn13: '9784091272843'
+    cover_url: null
+    release_date: '2017-01-23'
+  - number: 9
+    asin: null
+    isbn13: '9784091272850'
+    cover_url: null
+    release_date: '2017-02-22'
+  - number: 10
+    asin: null
+    isbn13: '9784091272867'
+    cover_url: null
+    release_date: '2017-03-22'
+  - number: 11
+    asin: null
+    isbn13: '9784091272874'
+    cover_url: null
+    release_date: '2017-04-23'
+  - number: 12
+    asin: null
+    isbn13: '9784091272881'
+    cover_url: null
+    release_date: '2017-05-23'
+  - number: 13
+    asin: null
+    isbn13: '9784091272898'
+    cover_url: null
+    release_date: 2017-06
+  - number: 14
+    asin: null
+    isbn13: '9784091272904'
+    cover_url: null
+    release_date: 2017-07
+  - number: 15
+    asin: null
+    isbn13: '9784091272942'
+    cover_url: null
+    release_date: 2017-08
+  - number: 16
+    asin: null
+    isbn13: '9784091272959'
+    cover_url: null
+    release_date: 2017-09
+  - number: 17
+    asin: null
+    isbn13: '9784091272966'
+    cover_url: null
+    release_date: 2017-10
+  - number: 18
+    asin: null
+    isbn13: '9784091272973'
+    cover_url: null
+    release_date: 2017-11
+  - number: 19
+    asin: null
+    isbn13: '9784091272980'
+    cover_url: null
+    release_date: 2017-12
+  - number: 20
+    asin: null
+    isbn13: '9784091272997'
+    cover_url: null
+    release_date: 2018-01

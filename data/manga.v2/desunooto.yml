@@ -23,54 +23,6 @@ anime_adapted: true
 alternative_titles:
   en: Death Note
 editions:
-- type: aizoban
-  label: 愛蔵版
-  imprint: 愛蔵版コミックス
-  volumes:
-  - number: 1
-    asin: null
-    isbn13: '9784087925111'
-    cover_url: null
-    release_date: 2016-10
-- type: bunkobon
-  label: 文庫版
-  imprint: 集英社文庫
-  volumes:
-  - number: 1
-    asin: null
-    isbn13: '9784086194860'
-    cover_url: null
-    release_date: 2014-03
-  - number: 2
-    asin: null
-    isbn13: '9784086194877'
-    cover_url: null
-    release_date: 2014-03
-  - number: 3
-    asin: null
-    isbn13: '9784086194884'
-    cover_url: null
-    release_date: 2014-04
-  - number: 4
-    asin: null
-    isbn13: '9784086194891'
-    cover_url: null
-    release_date: 2014-05
-  - number: 5
-    asin: null
-    isbn13: '9784086194907'
-    cover_url: null
-    release_date: 2014-06
-  - number: 6
-    asin: null
-    isbn13: '9784086194914'
-    cover_url: null
-    release_date: 2014-07
-  - number: 7
-    asin: null
-    isbn13: '9784086194921'
-    cover_url: null
-    release_date: 2014-08
 - type: standard
   label: 通常版
   imprint: ジャンプ・コミックス
@@ -140,3 +92,51 @@ editions:
     isbn13: '9784088740959'
     cover_url: null
     release_date: '2006-10-18'
+- type: bunkobon
+  label: 文庫版
+  imprint: 集英社文庫
+  volumes:
+  - number: 1
+    asin: null
+    isbn13: '9784086194860'
+    cover_url: null
+    release_date: 2014-03
+  - number: 2
+    asin: null
+    isbn13: '9784086194877'
+    cover_url: null
+    release_date: 2014-03
+  - number: 3
+    asin: null
+    isbn13: '9784086194884'
+    cover_url: null
+    release_date: 2014-04
+  - number: 4
+    asin: null
+    isbn13: '9784086194891'
+    cover_url: null
+    release_date: 2014-05
+  - number: 5
+    asin: null
+    isbn13: '9784086194907'
+    cover_url: null
+    release_date: 2014-06
+  - number: 6
+    asin: null
+    isbn13: '9784086194914'
+    cover_url: null
+    release_date: 2014-07
+  - number: 7
+    asin: null
+    isbn13: '9784086194921'
+    cover_url: null
+    release_date: 2014-08
+- type: aizoban
+  label: 愛蔵版
+  imprint: 愛蔵版コミックス
+  volumes:
+  - number: 1
+    asin: null
+    isbn13: '9784087925111'
+    cover_url: null
+    release_date: 2016-10

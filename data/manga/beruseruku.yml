@@ -27,20 +27,6 @@ wikidata_qid: Q715725
 editions:
 - type: standard
   label: 通常版
-  imprint: Jets cimics
-  volumes:
-  - number: 25
-    asin: null
-    isbn13: '9784592137238'
-    cover_url: null
-    release_date: 2003-07
-  - number: 26
-    asin: null
-    isbn13: '9784592137245'
-    cover_url: null
-    release_date: 2003-12
-- type: standard
-  label: 通常版
   imprint: Jets comics
   volumes:
   - number: 1
@@ -195,6 +181,49 @@ editions:
     release_date: 2013-04
 - type: standard
   label: 通常版
+  imprint: ジェッツコミックス
+  volumes:
+  - number: 9
+    asin: null
+    isbn13: '9784592136910'
+    cover_url: null
+    release_date: '1995-03-31'
+  - number: 10
+    asin: null
+    isbn13: '9784592136927'
+    cover_url: null
+    release_date: '1995-09-30'
+  - number: 18
+    asin: null
+    isbn13: '9784592137160'
+    cover_url: null
+    release_date: '1999-10-05'
+  - number: 20
+    asin: null
+    isbn13: '9784592137184'
+    cover_url: null
+    release_date: '2000-11-05'
+  - number: 22
+    asin: null
+    isbn13: '9784592137207'
+    cover_url: null
+    release_date: '2001-12-24'
+- type: standard
+  label: 通常版
+  imprint: Jets cimics
+  volumes:
+  - number: 25
+    asin: null
+    isbn13: '9784592137238'
+    cover_url: null
+    release_date: 2003-07
+  - number: 26
+    asin: null
+    isbn13: '9784592137245'
+    cover_url: null
+    release_date: 2003-12
+- type: standard
+  label: 通常版
   imprint: MyBestRemix
   volumes:
   - number: 1
@@ -241,32 +270,3 @@ editions:
     isbn13: '9784592106296'
     cover_url: null
     release_date: 2021-12
-- type: standard
-  label: 通常版
-  imprint: ジェッツコミックス
-  volumes:
-  - number: 9
-    asin: null
-    isbn13: '9784592136910'
-    cover_url: null
-    release_date: '1995-03-31'
-  - number: 10
-    asin: null
-    isbn13: '9784592136927'
-    cover_url: null
-    release_date: '1995-09-30'
-  - number: 18
-    asin: null
-    isbn13: '9784592137160'
-    cover_url: null
-    release_date: '1999-10-05'
-  - number: 20
-    asin: null
-    isbn13: '9784592137184'
-    cover_url: null
-    release_date: '2000-11-05'
-  - number: 22
-    asin: null
-    isbn13: '9784592137207'
-    cover_url: null
-    release_date: '2001-12-24'

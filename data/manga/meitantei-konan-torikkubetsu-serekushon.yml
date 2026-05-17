@@ -27,15 +27,6 @@ wikidata_qid: Q313945
 editions:
 - type: standard
   label: 通常版
-  imprint: マイ・ファースト・ワイドスペシャル
-  volumes:
-  - number: 1
-    asin: null
-    isbn13: '9784091621924'
-    cover_url: null
-    release_date: 2003-05
-- type: standard
-  label: 通常版
   imprint: 少年サンデーコミックス
   volumes:
   - number: 1
@@ -652,6 +643,15 @@ editions:
     isbn13: '9784099431914'
     cover_url: null
     release_date: '2025-04-19'
+- type: standard
+  label: 通常版
+  imprint: マイ・ファースト・ワイドスペシャル
+  volumes:
+  - number: 1
+    asin: null
+    isbn13: '9784091621924'
+    cover_url: null
+    release_date: 2003-05
 - type: standard
   label: 通常版
   imprint: 少年サンデーコミックススペシャル
