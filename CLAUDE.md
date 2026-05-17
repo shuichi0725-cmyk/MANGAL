@@ -84,16 +84,45 @@
 ### slug 命名規則
 
 - ローマ字 (= 訓令式 or ヘボン式) で hyphen 区切り
-- **アラビア数字の扱いは ふりがな で 判断**:
-  - ふりがな が 普通の 数字読み (= イチ / ニ / ジュウ / ニジュウイチ 等) なら **数字 keep**
-    - 例: アイシールド21 = `アイシールドニジュウイチ` → `eyeshield-21` (○)
-    - 例: ジョジョの奇妙な冒険 第6部 = 普通読み → `jojo-6` (○)
-  - ふりがな が 特殊読み (= 分数 / 当て字 / 略号) なら **ローマ字化**
-    - 例: らんま1/2 = `ランマニブンノイチ` (= 分数読み) → `ranma-nibunnoichi` (○) / `ranma-1-2` (×)
-    - 例: 3×3 EYES = `サザンアイズ` (= 当て字) → `sazan-eyes` 等
+
+#### 優先順 (= scripts/_extract-top-completed.py で 自動判定)
+
+1. **種3 の slug field** (= 手動 override)
+2. **DB の 英語名** (= alternative_titles.en / title_official_en) → 外来語 で slug 化
+   - 例: ONE PIECE alt_en=`One Piece` → `one-piece` (○)
+   - 例: ジョジョの奇妙な冒険 alt_en=`JoJo's Bizarre Adventure` → `jojos-bizarre-adventure` (○)
+   - 例: 進撃の巨人 alt_en=`Attack on Titan` → `attack-on-titan` (○)
+3. **title が 純 ASCII** (= 'W3', 'MAJOR', 'AMAKUSA 1637') → 直接 lowercase + 数字境界 split
+   - 例: W3 → `w-3`、 H2 → `h-2`、 MAJOR → `major`
+4. **数字 含む title で 普通読み** (= alignment 検証 通過) → 数字 keep
+5. **kana → ローマ字** (= fallback)
+
+#### アラビア数字 ルール
+
+- **ふりがな で 判断**:
+  - 普通の 数字読み (= 日本語 イチ/ニ/ジュウ/ニジュウイチ + 英語 ワン/ツー/スリー/フォー
+    /セブン 等) なら **数字 keep**
+    - 例: アイシールド21 = `アイシールドニジュウイチ` → `aishiirudo-21`
+    - 例: ペルソナ4 = `ペルソナフォー` → `perusona-4`
+    - 例: ワイルド7 = `ワイルドセブン` → `wairudo-7`
+    - 例: ジョジョの奇妙な冒険 第6部 → `jojo-6`
+  - 特殊読み (= 分数 / 当て字 / 略号) なら **ローマ字化** (= 数字 を kana に 戻して 表記)
+    - 例: らんま1/2 = `ランマニブンノイチ` (= 分数読み) → `ranma-nibunnoichi`
+    - 例: 3×3 EYES = `サザンアイズ` (= 当て字) → `sazanaizu`
+    - 例: 7つの黄金郷 = `ナナツノエルドラド` (= 特殊読み) → `nanatsunoerudorado`
 - 漢字数字 (= 七、 三、 etc.) は ふりがな の カナ表記を ローマ字化
   - 例: 七つの大罪 = `ナナツノタイザイ` → `nanatsu-no-taizai`
-- 既存 slug の rename は **URL 互換性** に配慮、 user 確認 を 取る
+
+#### 種3 fill protocol (= AI fill)
+
+- **外来語 (= 英語起源) title** は `alternative_titles.en` を 必ず fill する
+  - 例: 「ワンピース」 → en: 'One Piece'、 「ドラゴンボール」 → en: 'Dragon Ball'
+  - 例: 「ベルセルク」 → en: 'Berserk'、 「ブリーチ」 → en: 'Bleach'
+- これにより slug 生成 で 外来語 を 優先採用 (= ローマ字読み 'wanpiisu' でなく 'one-piece')
+
+#### 既存 slug の rename
+
+- **URL 互換性** に配慮、 user 確認 を 取る
 
 ### title_kana / subtitle_kana
 

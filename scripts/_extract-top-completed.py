@@ -290,17 +290,29 @@ _KKS = pykakasi.kakasi()
 def kana_to_slug(kana: str | None) -> str:
     """カタカナ / ひらがな → slug 形式 ローマ字 (= 小文字 + hyphen 区切り)。
 
-    space で 分割し、 各 part を pykakasi で hepburn ローマ字化。
+    space / 中黒 / 数字境界 で 分割し、 各 part を pykakasi で hepburn ローマ字化。
     非 [a-z0-9] は strip、 part 内 で 連結。 part 同士は hyphen で 結合。
 
     e.g. 'シンゲキ ノ キョジン' → 'shingeki-no-kyojin'
     e.g. 'ランマニブンノイチ' → 'ranmanibunnoichi' (= space なしで 連結)
+    e.g. 'アマクサ1637' → 'amakusa-1637' (= 数字境界 で split)
     """
     if not kana:
         return ""
-    parts = [p for p in re.split(r"[\s　・]+", kana) if p]
+    # space / 中黒 で 分割、 さらに 数字境界 でも split (= 'アマクサ1637' → ['アマクサ','1637'])
+    raw_parts = re.split(r"[\s　・]+", kana)
+    parts: list[str] = []
+    for p in raw_parts:
+        # 数字 / 非数字 boundary で 更に split
+        sub = re.split(r"(\d+)", p)
+        for s in sub:
+            if s:
+                parts.append(s)
     romaji_parts: list[str] = []
     for p in parts:
+        if re.fullmatch(r"\d+", p):
+            romaji_parts.append(p)
+            continue
         result = _KKS.convert(p)
         rom = "".join(r["hepburn"] for r in result).lower()
         rom = re.sub(r"[^a-z0-9]", "", rom)
@@ -310,30 +322,88 @@ def kana_to_slug(kana: str | None) -> str:
 
 
 # 数字 → カタカナ普通読み map (= CLAUDE.md slug ルール 「ふりがな で 判断」 自動化)
+# 日本語読み + 英語読み (= スリー/フォー/ツー 等 も 普通読み 扱い)
 DIGIT_KANA = {
-    "0": ["ゼロ", "マル", "レイ"],
-    "1": ["イチ"],
-    "2": ["ニ"],
-    "3": ["サン"],
-    "4": ["ヨン", "シ"],
-    "5": ["ゴ"],
-    "6": ["ロク"],
-    "7": ["ナナ", "シチ"],
-    "8": ["ハチ"],
-    "9": ["キュウ", "ク"],
+    "0": ["ゼロ", "マル", "レイ", "オウ"],
+    "1": ["イチ", "ワン"],
+    "2": ["ニ", "ツー"],
+    "3": ["サン", "スリー"],
+    "4": ["ヨン", "シ", "フォー"],
+    "5": ["ゴ", "ファイブ"],
+    "6": ["ロク", "シックス"],
+    "7": ["ナナ", "シチ", "セブン"],
+    "8": ["ハチ", "エイト"],
+    "9": ["キュウ", "ク", "ナイン"],
+}
+# 2 桁以上 の 英語 数 reading (= 一部 のみ覆い)
+DIGIT_KANA_EN_MULTI = {
+    "10": ["テン"],
+    "11": ["イレブン"],
+    "12": ["トゥエルブ"],
+    "13": ["サーティーン"],
+    "14": ["フォーティーン"],
+    "15": ["フィフティーン"],
+    "16": ["シックスティーン"],
+    "17": ["セブンティーン"],
+    "18": ["エイティーン"],
+    "19": ["ナインティーン"],
+    "20": ["トゥエンティ"],
+    "21": ["トゥエンティワン"],
+    "100": ["ハンドレッド"],
+    "1000": ["サウザンド"],
 }
 
 
-def gen_digit_readings(digits: str) -> set[str]:
-    """digit string → 「普通読み」 variant のカタカナ set。
+def slug_from_ascii_title(title: str | None) -> str:
+    """title が 純 ASCII (= 'W3', 'AMAKUSA 1637', 'MAJOR') なら 直接 slug 化。
 
-    e.g. '21' → {'ニジュウイチ', 'ニイチ'}
-         '17' → {'ジュウナナ', 'ジュウシチ', 'イチナナ', 'イチシチ'}
-         '707' → {'ナナヒャクナナ', 'ナナマルナナ', 'ナナレイナナ' 等}
-         '6' → {'ロク'}
+    e.g. 'W3' → 'w-3'
+         'AMAKUSA 1637' → 'amakusa-1637'
+         'MAJOR' → 'major'
+         'H2' → 'h-2'
+    """
+    if not title:
+        return ""
+    # 非 ASCII / 非 数字 / 非 記号 が 1 つでも あれば skip (= 漢字/かな含む)
+    if re.search(r"[^\x00-\x7F]", title):
+        return ""
+    # alpha / digit segment 抽出 (= space や punct を 区切り に)
+    parts = re.findall(r"[A-Za-z]+|\d+", title)
+    if not parts:
+        return ""
+    return "-".join(p.lower() for p in parts)
+
+
+def slug_from_alt_en(alt_en: str | None) -> str:
+    """英語タイトル → slug (lowercase + hyphen)。
+
+    e.g. 'One Piece' → 'one-piece'
+         'Dragon Ball' → 'dragon-ball'
+         "JoJo's Bizarre Adventure" → 'jojos-bizarre-adventure'
+         'Haikyuu!!' → 'haikyuu'
+         'Maison Ikkoku' → 'maison-ikkoku'
+    """
+    if not alt_en:
+        return ""
+    s = alt_en.strip()
+    # apostrophe / 句読点 を strip
+    s = re.sub(r"['!?.,]", "", s)
+    # 非 ASCII alphanumeric を hyphen 化
+    s = re.sub(r"[^A-Za-z0-9]+", "-", s).strip("-").lower()
+    s = re.sub(r"-+", "-", s).strip("-")
+    return s
+
+
+def gen_digit_readings(digits: str) -> set[str]:
+    """digit string → 「普通読み」 variant のカタカナ set。 日本語 + 英語読み 含む。
+
+    e.g. '21' → {'ニジュウイチ', 'トゥエンティワン', 'ニイチ' 等}
+         '4' → {'ヨン', 'シ', 'フォー'}
+         '3' → {'サン', 'スリー'}
+         '707' → {'ナナマルナナ', 'セブンゼロセブン' 等}
     """
     readings: set[str] = set()
-    # digit-by-digit reading (= 707 → 'ナナマルナナ')
+    # digit-by-digit reading (= 707 → 'ナナマルナナ', 'セブンゼロセブン')
     def expand(idx: int, acc: str) -> None:
         if idx == len(digits):
             readings.add(acc)
@@ -341,7 +411,7 @@ def gen_digit_readings(digits: str) -> set[str]:
         for kana in DIGIT_KANA.get(digits[idx], []):
             expand(idx + 1, acc + kana)
     expand(0, "")
-    # 数 単位 reading (= 21 → 'ニジュウイチ', 100 → 'ヒャク')
+    # 日本語 数 単位 reading (= 21 → 'ニジュウイチ', 100 → 'ヒャク')
     try:
         n = int(digits)
         if n < 10:
@@ -353,6 +423,9 @@ def gen_digit_readings(digits: str) -> set[str]:
                 readings.add("ジュウ")
             else:
                 for k in DIGIT_KANA[str(ones)]:
+                    if k in {"ワン", "ツー", "スリー", "フォー", "ファイブ",
+                             "シックス", "セブン", "エイト", "ナイン"}:
+                        continue  # 英語読みは ジュウ 接頭しない
                     readings.add("ジュウ" + k)
         elif n < 100:
             tens = n // 10
@@ -362,12 +435,13 @@ def gen_digit_readings(digits: str) -> set[str]:
                 readings.add(tens_kana)
             else:
                 for k in DIGIT_KANA[str(ones)]:
+                    if k in {"ワン", "ツー", "スリー", "フォー", "ファイブ",
+                             "シックス", "セブン", "エイト", "ナイン"}:
+                        continue
                     readings.add(tens_kana + k)
-        # 100-999 = 雑な variant 数あるが 主要 4 桁 sample のみ追加
         elif n < 1000:
             hundreds = n // 100
             rest = n % 100
-            # 100 = ヒャク、 300 = サンビャク、 600 = ロッピャク、 800 = ハッピャク (= 簡略 standard のみ)
             h_variant = "ヒャク" if hundreds == 1 else DIGIT_KANA[str(hundreds)][0] + "ヒャク"
             if rest == 0:
                 readings.add(h_variant)
@@ -376,71 +450,99 @@ def gen_digit_readings(digits: str) -> set[str]:
                     readings.add(h_variant + sub)
     except ValueError:
         pass
+    # 英語 数 reading (= 17 → 'セブンティーン', 100 → 'ハンドレッド')
+    if digits in DIGIT_KANA_EN_MULTI:
+        for k in DIGIT_KANA_EN_MULTI[digits]:
+            readings.add(k)
     return readings
+
+
+def title_part_to_kana(text: str) -> str:
+    """title segment (= 漢字混じり 可) を カタカナ に。 pykakasi で 標準読み。
+
+    特殊読み (= 「黄金郷」 = 'エルドラド') は 通常 dict にないので 標準読み (= 'コガネサト' 等)
+    を返す。 alignment check で この差異 を 利用 して 特殊読み判定。
+    """
+    if not text:
+        return ""
+    result = _KKS.convert(text)
+    out = "".join(r["kana"] for r in result)
+    return re.sub(r"[\s　]+", "", out)
 
 
 def title_to_slug_keep_digit(title: str, kana: str) -> str | None:
     """title に 数字 を 含み、 ふりがな (= kana) が 「普通数字読み」 なら、
     title を walk し digit を keep + 非数字部 を pykakasi で ローマ字化。
 
-    e.g. 'はるか17' kana='ハルカ17' → 'haruka-17'
-    e.g. 'AMAKUSA 1637' kana='アマクサ1637' → 'amakusa-1637'
-    e.g. 'らんま1/2' kana='ランマ ニブンノイチ' → None (= 特殊読み、 caller が kana_to_slug fallback)
+    Alignment check: title を 数字 / 非数字 segment に 分割し、
+    各 segment が 実 kana に 対応するか 確認:
+    - 非数字 segment: pykakasi で kana 化 し、 実 kana の 対応 position と 比較
+    - 数字 segment: literal '数字' or reading が 対応 position に あるか 確認
+    アラインメント 成功 → digit keep。 失敗 → 特殊読み 認定で fallback。
+
+    e.g. 'ペルソナ4' kana='ペルソナフォー' → 'perusona-4' (= 'ペルソナ' align + 'フォー' = 4)
+    e.g. '7つの黄金郷' kana='ナナツノエルドラド' → None (= 'コガネサト' vs 'エルドラド' で align失敗)
     """
     if not title or not re.search(r"\d", title):
         return None
     kana_compact = re.sub(r"[\s　]+", "", kana or "")
     if not kana_compact:
         return None
-    # 数字 group が kana に literal で あるか、 reading が kana segment と完全一致 か
-    # 厳格 matching (= 'ナナ' が 'ナナツ' の 部分 だと 誤マッチ する のを 防ぐ):
-    #   - kana を space で分割し、 segment と digit reading が **完全一致** のみ match
-    #   - kana の literal digit (= 'ハルカ17' に '17') も match
-    digit_groups = re.findall(r"\d+", title)
-    kana_segments = [s for s in re.split(r"[\s　]+", kana or "") if s]
-    matched = False
-    for dg in digit_groups:
-        if dg in kana_compact:
-            matched = True
-            break
-        readings = gen_digit_readings(dg)
-        if any(seg in readings for seg in kana_segments):
-            matched = True
-            break
-    if not matched:
-        return None  # 特殊読み → caller が kana_to_slug fallback
-    # digit keep mode: title walk
-    parts: list[str] = []
-    cur_text = ""
-    cur_is_digit = False
-
-    def flush() -> None:
-        nonlocal cur_text
-        if not cur_text:
-            return
-        if cur_is_digit:
-            parts.append(cur_text)
-        else:
-            result = _KKS.convert(cur_text)
-            rom = "".join(r["hepburn"] for r in result).lower()
-            rom = re.sub(r"[^a-z0-9]", "", rom)
-            if rom:
-                parts.append(rom)
-        cur_text = ""
-
+    # title を 数字 / 非数字 で split
+    parts: list[tuple[str, bool]] = []
+    cur, cur_is_digit = "", None
     for c in title:
         is_d = c.isdigit()
-        if cur_text == "":
-            cur_text = c
-            cur_is_digit = is_d
-        elif is_d == cur_is_digit:
-            cur_text += c
+        if cur_is_digit is None:
+            cur, cur_is_digit = c, is_d
+        elif cur_is_digit == is_d:
+            cur += c
         else:
-            flush()
-            cur_text = c
-            cur_is_digit = is_d
-    flush()
-    return "-".join(p for p in parts if p)
+            parts.append((cur, cur_is_digit))
+            cur, cur_is_digit = c, is_d
+    if cur:
+        parts.append((cur, cur_is_digit))
+    # Alignment check
+    pos = 0
+    for text, is_d in parts:
+        if is_d:
+            # 数字 segment: literal or reading match at pos
+            if kana_compact[pos:pos + len(text)] == text:
+                pos += len(text)
+                continue
+            readings = gen_digit_readings(text)
+            found = None
+            for r in sorted(readings, key=lambda x: -len(x)):
+                if kana_compact[pos:pos + len(r)] == r:
+                    found = r
+                    break
+            if found:
+                pos += len(found)
+            else:
+                return None  # alignment 失敗
+        else:
+            # 非数字 segment: pykakasi → 実 kana startswith ?
+            expected = title_part_to_kana(text)
+            if not expected:
+                continue  # 空 (= 全 punctuation 等) は skip
+            if kana_compact[pos:pos + len(expected)] == expected:
+                pos += len(expected)
+            else:
+                return None
+    if pos != len(kana_compact):
+        # 余り kana あり → align 失敗
+        return None
+    # 全 align 成功 → walk して slug 構築
+    slug_parts: list[str] = []
+    for text, is_d in parts:
+        if is_d:
+            slug_parts.append(text)
+        else:
+            rom = "".join(r["hepburn"] for r in _KKS.convert(text)).lower()
+            rom = re.sub(r"[^a-z0-9]", "", rom)
+            if rom:
+                slug_parts.append(rom)
+    return "-".join(p for p in slug_parts if p)
 
 
 def title_to_romaji(kana: str | None) -> str:
@@ -478,6 +580,7 @@ def select_candidates(con: sqlite3.Connection, limit: int) -> list[dict]:
     rows = cur.execute(
         f"""
         SELECT s.id, s.title, s.subtitle, s.title_kana, s.subtitle_kana, s.qid,
+               s.title_official_en,
                s.adult_score, s.source, s.series_key,
                MAX(v.release_date) AS last_date,
                MIN(v.release_date) AS first_date,
@@ -717,9 +820,23 @@ def main():
     print(f"[step 3] slug 生成...", file=sys.stderr)
     slug_count: dict[str, int] = defaultdict(int)
     for c in cands:
-        # 数字 含む title は ふりがな で 判定:
-        # 普通数字読み なら 数字 keep (= 'eyeshield-21')、 特殊読み なら kana ローマ字化
-        base_slug = title_to_slug_keep_digit(c["title"] or "", c["title_kana"] or "")
+        # slug 優先順:
+        # 1. 種3 entry の slug field (= 手動 override)
+        # 2. 種3 alternative_titles.en or DB title_official_en (= 'one-piece' 等 外来語)
+        # 3. title が 純 ASCII (= 'W3', 'MAJOR', 'AMAKUSA 1637' 等) → 直接 slug 化
+        # 4. 数字 含む title で 普通数字読み (= 英語含む) なら digit keep + alignment 検証
+        # 5. kana → ローマ字 fallback (= 'ranma-nibunnoichi' 等)
+        seed_entry = seed3.get(c["series_key"]) if c.get("series_key") else None
+        base_slug = (seed_entry or {}).get("slug") or ""
+        if not base_slug:
+            alt_en = (seed_entry or {}).get("alternative_titles", {}).get("en") if seed_entry else None
+            official_en = c.get("title_official_en") or None
+            en_name = alt_en or official_en
+            base_slug = slug_from_alt_en(en_name) if en_name else ""
+        if not base_slug:
+            base_slug = slug_from_ascii_title(c["title"])
+        if not base_slug:
+            base_slug = title_to_slug_keep_digit(c["title"] or "", c["title_kana"] or "")
         if not base_slug:
             base_slug = kana_to_slug(c["title_kana"])
         if not base_slug:
