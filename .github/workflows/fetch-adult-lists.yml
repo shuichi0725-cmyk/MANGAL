@@ -1,0 +1,74 @@
+name: 🔞 Fetch adult lists (Wikipedia)
+
+# JA Wikipedia から 成人向け漫画雑誌・漫画家 リストを 取得し、
+# data/seeds/adult-wikipedia-cache.yml に commit する。
+#
+# サンドボックス (= Claude Code 環境) からは Wikipedia 403 で fetch 不可なため、
+# GitHub Actions の clouds 環境で 実行し、 結果を yml で git 管理する仕組み。
+
+on:
+  workflow_dispatch:
+    inputs:
+      refresh:
+        description: "既存テーブルを TRUNCATE して 再 seed する"
+        required: false
+        default: "true"
+        type: boolean
+
+permissions:
+  contents: write
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: "npm"
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install npm dependencies
+        run: npm ci
+
+      - name: Install pyyaml
+        run: pip install pyyaml
+
+      - name: Init empty DB (= for fetch-adult-lists 一時 sqlite)
+        run: npm run db:init
+
+      - name: Run fetch:adult-lists
+        run: |
+          if [ "${{ inputs.refresh }}" = "true" ]; then
+            npm run fetch:adult-lists -- --refresh
+          else
+            npm run fetch:adult-lists
+          fi
+
+      - name: Dump adult tables → yml
+        run: python3 scripts/_dump-adult-tables.py
+
+      - name: Show summary
+        run: |
+          echo "=== adult-wikipedia-cache.yml summary ==="
+          head -20 data/seeds/adult-wikipedia-cache.yml
+          echo "..."
+          echo "publishers: $(grep -c '^  - name:' data/seeds/adult-wikipedia-cache.yml | head -1)"
+          wc -l data/seeds/adult-wikipedia-cache.yml
+
+      - name: Commit and push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/seeds/adult-wikipedia-cache.yml
+          if git diff --cached --quiet; then
+            echo "差分なし、コミット不要"
+          else
+            git commit -m "data(seed): refresh adult-wikipedia-cache.yml from Wikipedia"
+            git push
+          fi
