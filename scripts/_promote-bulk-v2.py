@@ -32,7 +32,7 @@ OUT_DIR = ROOT / "data" / "manga.v2"
 
 CUTOFF_YEAR = 2015  # spinoff で この年 以降なら keep
 KEEP_EDITION_TYPES = {"standard", "bunkobon", "wideban", "kanzenban", "shinsoban", "aizoban"}
-DROP_IMPRINT_PATTERNS = ["My first big", "コンビニ", "増刊", "同人"]
+DROP_IMPRINT_PATTERNS = ["My first big", "コンビニ", "増刊", "同人", "ジャンプremix"]
 # bilingual / 英訳版 imprint は drop (= 翻訳版 は 別 product)
 DROP_IMPRINT_LOWER_PATTERNS = ["bilingual"]
 
@@ -207,23 +207,44 @@ def get_editions_with_volumes(con: sqlite3.Connection, series_id: int) -> list[d
         ).fetchall()
         if not vols:
             continue
+        # number=0 (= 巻号 extract 失敗) 扱い:
+        #   - edition 内に 1 つでも numbered vol あれば → number=0 は skip (= 偽 #1 dedup 弊害除去)
+        #   - edition 内 全部 number=0 → release_date 昇順で #1, #2,... 連番付与 (= 短編集等)
+        nonzero_exists = any(v["number"] for v in vols)
         # 同 number 内で 一番古い 1 件のみ採用 (= 初版 representative、 同 edition 内 dedup)
         seen = set()
         primary_vols = []
-        for v in vols:
-            if v["number"] in seen:
-                continue
-            seen.add(v["number"])
-            primary_vols.append(
-                {
-                    "number": v["number"] if v["number"] else 1,
-                    "volume_label": v["volume_label"],
-                    "isbn13": v["isbn13"],
-                    "release_date": v["release_date"],
-                    "cover_url": v["cover_url"],
-                    "asin": v["asin"],
-                }
-            )
+        if nonzero_exists:
+            for v in vols:
+                if not v["number"]:
+                    continue
+                if v["number"] in seen:
+                    continue
+                seen.add(v["number"])
+                primary_vols.append(
+                    {
+                        "number": v["number"],
+                        "volume_label": v["volume_label"],
+                        "isbn13": v["isbn13"],
+                        "release_date": v["release_date"],
+                        "cover_url": v["cover_url"],
+                        "asin": v["asin"],
+                    }
+                )
+        else:
+            # 全 vol が number=0 → release_date 順で連番
+            vols_sorted = sorted(vols, key=lambda x: x["release_date"] or "9999-99")
+            for idx, v in enumerate(vols_sorted, start=1):
+                primary_vols.append(
+                    {
+                        "number": idx,
+                        "volume_label": v["volume_label"],
+                        "isbn13": v["isbn13"],
+                        "release_date": v["release_date"],
+                        "cover_url": v["cover_url"],
+                        "asin": v["asin"],
+                    }
+                )
         if not primary_vols:
             continue
         by_type[ed["type"]].append(

@@ -96,6 +96,37 @@ KANJI_VOLUME_MAP = {
     "前編": 1, "後編": 2,
 }
 
+KANJI_DIGIT = {"〇": 0, "零": 0, "一": 1, "二": 2, "三": 3, "四": 4, "五": 5,
+               "六": 6, "七": 7, "八": 8, "九": 9,
+               # 大字 (= 銀行記帳用)
+               "壱": 1, "弐": 2, "参": 3, "肆": 4, "伍": 5,
+               "陸": 6, "漆": 7, "捌": 8, "玖": 9}
+KANJI_UNIT = {"十": 10, "百": 100, "千": 1000, "拾": 10}
+
+# Roman numerals (= unicode 2160-2168 = Ⅰ-Ⅸ、 Ⅹ=2169)
+ROMAN_MAP = {chr(0x2160 + i): i + 1 for i in range(20)}  # Ⅰ-ⅩⅨ → 1-20
+
+
+def parse_kanji_number(s: str) -> int | None:
+    """漢数字 string を int に。 例: '一'→1, '十'→10, '三十一'→31, '百二十三'→123。"""
+    if not s:
+        return None
+    # 全文字が 漢数字系か確認
+    if not all(c in KANJI_DIGIT or c in KANJI_UNIT for c in s):
+        return None
+    total = 0
+    current_digit = 0  # 直前の数字 (= 0 なら 暗黙的 1)
+    for c in s:
+        if c in KANJI_DIGIT:
+            current_digit = KANJI_DIGIT[c]
+        else:
+            # unit (十/百/千)
+            unit = KANJI_UNIT[c]
+            total += (current_digit if current_digit else 1) * unit
+            current_digit = 0
+    total += current_digit
+    return total if total > 0 else None
+
 
 def extract_volume_number(label: str, vol_field: str) -> tuple[int | None, str | None, bool]:
     """(number, volume_label, is_extra) を返す。
@@ -103,6 +134,7 @@ def extract_volume_number(label: str, vol_field: str) -> tuple[int | None, str |
     rule:
       - vol_field が 純粋数字 → number = int、 volume_label = None
       - vol_field が KANJI_VOLUME_MAP に hit → number = map 値、 volume_label = 元
+      - vol_field が '第<漢数字>巻' → 漢数字を int 化、 volume_label = 元
       - vol_field が 数字 含む → 数字抽出 → number、 volume_label = 元
       - vol_field 空 + label から 末尾数字 抽出 → number、 volume_label = None
       - extraction 不能 → number = None, is_extra = True
@@ -112,9 +144,23 @@ def extract_volume_number(label: str, vol_field: str) -> tuple[int | None, str |
         # 純粋数字
         if re.match(r"^\d+$", s):
             return int(s), None, False
-        # KANJI_VOLUME_MAP
+        # KANJI_VOLUME_MAP (= 上/中/下 等)
         if s in KANJI_VOLUME_MAP:
             return KANJI_VOLUME_MAP[s], s, False
+        # roman numeral (= 'Ⅰ', 'Ⅱ', etc.)
+        if s in ROMAN_MAP:
+            return ROMAN_MAP[s], s, False
+        # 第<漢数字>巻 / 第<漢数字>集 / 第<漢数字>編 / 第<漢数字>部 / 巻<漢数字>
+        m = re.match(r"^(?:第|巻)([〇零一二三四五六七八九十百千壱弐参肆伍陸漆捌玖拾]+)[巻集編卷部篇]?$", s)
+        if m:
+            n = parse_kanji_number(m.group(1))
+            if n is not None:
+                return n, s, False
+        # 漢数字単独 (= '一', '二', '三十一' 等)
+        if re.fullmatch(r"[〇零一二三四五六七八九十百千壱弐参肆伍陸漆捌玖拾]+", s):
+            n = parse_kanji_number(s)
+            if n is not None:
+                return n, s, False
         # 数字含む (例: 'NO.27', 'vol.1', '第3巻', '上巻', '01')
         m = re.search(r"\d+", s)
         if m:
@@ -124,9 +170,20 @@ def extract_volume_number(label: str, vol_field: str) -> tuple[int | None, str |
 
     # vol_field 空 → label から
     if label:
+        # 末尾 空白 + 数字
         m = re.search(r"\s+(\d{1,3})\s*$", label)
         if m:
             return int(m.group(1)), None, False
+        # 末尾 () 内 数字 (例: 'ゴルゴ13(125)')
+        m = re.search(r"[(（](\d{1,3})[)）]\s*$", label)
+        if m:
+            return int(m.group(1)), None, False
+        # 末尾 漢数字
+        m = re.search(r"([〇零一二三四五六七八九十百千壱弐参肆伍陸漆捌玖拾]+)$", label)
+        if m:
+            n = parse_kanji_number(m.group(1))
+            if n is not None:
+                return n, None, False
 
     return None, None, True
 
