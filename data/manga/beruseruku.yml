@@ -69,6 +69,16 @@ editions:
     isbn13: '9784592136903'
     cover_url: null
     release_date: '1994-09-30'
+  - number: 9
+    asin: null
+    isbn13: '9784592136910'
+    cover_url: null
+    release_date: '1995-03-31'
+  - number: 10
+    asin: null
+    isbn13: '9784592136927'
+    cover_url: null
+    release_date: '1995-09-30'
   - number: 11
     asin: null
     isbn13: '9784592136934'
@@ -104,16 +114,31 @@ editions:
     isbn13: '9784592136996'
     cover_url: null
     release_date: 1999-04
+  - number: 18
+    asin: null
+    isbn13: '9784592137160'
+    cover_url: null
+    release_date: '1999-10-05'
   - number: 19
     asin: null
     isbn13: '9784592137177'
     cover_url: null
     release_date: 2000-04
+  - number: 20
+    asin: null
+    isbn13: '9784592137184'
+    cover_url: null
+    release_date: '2000-11-05'
   - number: 21
     asin: null
     isbn13: '9784592137191'
     cover_url: null
     release_date: '2001-06-05'
+  - number: 22
+    asin: null
+    isbn13: '9784592137207'
+    cover_url: null
+    release_date: '2001-12-24'
   - number: 23
     asin: null
     isbn13: '9784592137214'
@@ -124,6 +149,16 @@ editions:
     isbn13: '9784592137221'
     cover_url: null
     release_date: 2002-12
+  - number: 25
+    asin: null
+    isbn13: '9784592137238'
+    cover_url: null
+    release_date: 2003-07
+  - number: 26
+    asin: null
+    isbn13: '9784592137245'
+    cover_url: null
+    release_date: 2003-12
   - number: 27
     asin: null
     isbn13: '9784592137252'
@@ -179,63 +214,6 @@ editions:
     isbn13: '9784592144373'
     cover_url: null
     release_date: 2013-04
-- type: standard
-  label: 通常版
-  imprint: ジェッツコミックス
-  volumes:
-  - number: 9
-    asin: null
-    isbn13: '9784592136910'
-    cover_url: null
-    release_date: '1995-03-31'
-  - number: 10
-    asin: null
-    isbn13: '9784592136927'
-    cover_url: null
-    release_date: '1995-09-30'
-  - number: 18
-    asin: null
-    isbn13: '9784592137160'
-    cover_url: null
-    release_date: '1999-10-05'
-  - number: 20
-    asin: null
-    isbn13: '9784592137184'
-    cover_url: null
-    release_date: '2000-11-05'
-  - number: 22
-    asin: null
-    isbn13: '9784592137207'
-    cover_url: null
-    release_date: '2001-12-24'
-- type: standard
-  label: 通常版
-  imprint: Jets cimics
-  volumes:
-  - number: 25
-    asin: null
-    isbn13: '9784592137238'
-    cover_url: null
-    release_date: 2003-07
-  - number: 26
-    asin: null
-    isbn13: '9784592137245'
-    cover_url: null
-    release_date: 2003-12
-- type: standard
-  label: 通常版
-  imprint: MyBestRemix
-  volumes:
-  - number: 1
-    volume_label: EPISODE:１
-    asin: null
-    isbn13: '9784592842019'
-    cover_url: null
-    release_date: '2007-05-17'
-- type: standard
-  label: 通常版
-  imprint: YOUNG ANIMAL COMICS
-  volumes:
   - number: 38
     asin: null
     isbn13: '9784592144380'
@@ -261,12 +239,3 @@ editions:
     isbn13: '9784592106357'
     cover_url: null
     release_date: 2023-10
-- type: standard
-  label: 通常版
-  imprint: Young animal comics = ヤングアニマルcomics
-  volumes:
-  - number: 41
-    asin: null
-    isbn13: '9784592106296'
-    cover_url: null
-    release_date: 2021-12

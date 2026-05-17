@@ -33,6 +33,8 @@ OUT_DIR = ROOT / "data" / "manga.v2"
 CUTOFF_YEAR = 2015  # spinoff で この年 以降なら keep
 KEEP_EDITION_TYPES = {"standard", "bunkobon", "wideban", "kanzenban", "shinsoban", "aizoban"}
 DROP_IMPRINT_PATTERNS = ["My first big", "コンビニ", "増刊", "同人"]
+# bilingual / 英訳版 imprint は drop (= 翻訳版 は 別 product)
+DROP_IMPRINT_LOWER_PATTERNS = ["bilingual"]
 
 
 def load_seed3() -> dict:
@@ -171,17 +173,30 @@ def edition_passes_filter(ed_row: dict) -> bool:
     for pat in DROP_IMPRINT_PATTERNS:
         if pat in imp:
             return False
+    imp_l = imp.lower()
+    for pat in DROP_IMPRINT_LOWER_PATTERNS:
+        if pat in imp_l:
+            return False
     return True
 
 
 def get_editions_with_volumes(con: sqlite3.Connection, series_id: int) -> list[dict]:
-    """editions + volumes を まとめて取得。 volumes は number 昇順、 同 number で release_date 古順。"""
+    """editions + volumes を まとめて取得し、 同 type editions を 1 つに merge。
+
+    merge logic (= 同 series 内の 同 type editions = 限定版/DVD付き 等 packaging variant が
+                  imprint 違いで 分裂しているため):
+      - imprint 違いの 同 type editions を 1 つに統合
+      - volume number で dedup、 同 number は 最古 release_date の entry を採用
+      - 統合後 edition の imprint = 最多 volumes を持つ imprint
+      - label は 最多 volumes を持つ edition から
+    """
     cur = con.cursor()
     cur.row_factory = sqlite3.Row
     eds = cur.execute(
         "SELECT * FROM editions WHERE series_id=?", (series_id,)
     ).fetchall()
-    out = []
+    # type → [edition+volumes] list
+    by_type: dict[str, list[dict]] = defaultdict(list)
     for ed in eds:
         if not edition_passes_filter(dict(ed)):
             continue
@@ -190,7 +205,9 @@ def get_editions_with_volumes(con: sqlite3.Connection, series_id: int) -> list[d
                ORDER BY number, release_date""",
             (ed["id"],),
         ).fetchall()
-        # 同 number 内で 一番古い 1 件のみ採用 (= 初版 representative)
+        if not vols:
+            continue
+        # 同 number 内で 一番古い 1 件のみ採用 (= 初版 representative、 同 edition 内 dedup)
         seen = set()
         primary_vols = []
         for v in vols:
@@ -209,7 +226,7 @@ def get_editions_with_volumes(con: sqlite3.Connection, series_id: int) -> list[d
             )
         if not primary_vols:
             continue
-        out.append(
+        by_type[ed["type"]].append(
             {
                 "type": ed["type"],
                 "label": ed["label"],
@@ -217,6 +234,39 @@ def get_editions_with_volumes(con: sqlite3.Connection, series_id: int) -> list[d
                 "year_started": ed["year_started"],
                 "year_ended": ed["year_ended"],
                 "volumes": primary_vols,
+            }
+        )
+    out = []
+    for type_key, ed_group in by_type.items():
+        if len(ed_group) == 1:
+            out.append(ed_group[0])
+            continue
+        # 同 type で 複数 edition → merge
+        # 全 volumes を集めて number で dedup、 同 number は release_date 最古 entry 優先
+        by_num: dict[int, dict] = {}
+        for ed in ed_group:
+            for v in ed["volumes"]:
+                n = v["number"]
+                cur_v = by_num.get(n)
+                if cur_v is None:
+                    by_num[n] = v
+                    continue
+                # release_date 比較 (= None は 最後扱い)
+                cur_d = cur_v.get("release_date") or "9999-99"
+                new_d = v.get("release_date") or "9999-99"
+                if new_d < cur_d:
+                    by_num[n] = v
+        merged_vols = [by_num[n] for n in sorted(by_num.keys())]
+        # 代表 imprint / label = 最多 volumes を持つ edition から (= main 印象維持)
+        primary_ed = max(ed_group, key=lambda e: len(e["volumes"]))
+        out.append(
+            {
+                "type": type_key,
+                "label": primary_ed["label"],
+                "imprint": primary_ed["imprint"],
+                "year_started": primary_ed["year_started"],
+                "year_ended": primary_ed["year_ended"],
+                "volumes": merged_vols,
             }
         )
     # editions を 第1巻 (= 最古 volume) の release_date 昇順 で sort

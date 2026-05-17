@@ -30,6 +30,11 @@ editions:
   label: 通常版
   imprint: ジャンプ・コミックス
   volumes:
+  - number: 1
+    asin: null
+    isbn13: '9784081060764'
+    cover_url: null
+    release_date: null
   - number: 2
     asin: null
     isbn13: '9784088511276'
@@ -113,10 +118,48 @@ editions:
     isbn13: '9784088512204'
     cover_url: null
     release_date: null
-- type: standard
-  label: 通常版
-  imprint: Jump comics = ジャンプ・コミックス
-  volumes:
+  - number: 22
+    volume_label: vol.22
+    asin: null
+    isbn13: '9784081065127'
+    cover_url: null
+    release_date: 2003-10
+  - number: 23
+    volume_label: vol.23
+    asin: null
+    isbn13: '9784081065226'
+    cover_url: null
+    release_date: 2003-11
+  - number: 25
+    volume_label: vol.25
+    asin: null
+    isbn13: '9784081065301'
+    cover_url: null
+    release_date: 2003-12
+  - number: 26
+    volume_label: vol.26
+    asin: null
+    isbn13: '9784081065653'
+    cover_url: null
+    release_date: 2003-12
+  - number: 27
+    volume_label: vol.27
+    asin: null
+    isbn13: '9784081065769'
+    cover_url: null
+    release_date: 2004-01
+  - number: 28
+    volume_label: vol.28
+    asin: null
+    isbn13: '9784081065868'
+    cover_url: null
+    release_date: 2004-02
+  - number: 30
+    volume_label: vol.30
+    asin: null
+    isbn13: '9784081066094'
+    cover_url: null
+    release_date: 2004-03
   - number: 62
     volume_label: 第62巻
     asin: null
@@ -377,75 +420,3 @@ editions:
     isbn13: '9784086187466'
     cover_url: null
     release_date: 2009-02
-- type: standard
-  label: 通常版
-  imprint: Shueisha jump remix
-  volumes:
-  - number: 4
-    volume_label: part.4
-    asin: null
-    isbn13: '9784081091751'
-    cover_url: null
-    release_date: 2006-04
-  - number: 10
-    volume_label: vol.10
-    asin: null
-    isbn13: '9784081061686'
-    cover_url: null
-    release_date: 2002-03
-  - number: 11
-    volume_label: vol.11
-    asin: null
-    isbn13: '9784081061761'
-    cover_url: null
-    release_date: 2002-04
-  - number: 22
-    volume_label: vol.22
-    asin: null
-    isbn13: '9784081065127'
-    cover_url: null
-    release_date: 2003-10
-  - number: 23
-    volume_label: vol.23
-    asin: null
-    isbn13: '9784081065226'
-    cover_url: null
-    release_date: 2003-11
-  - number: 25
-    volume_label: vol.25
-    asin: null
-    isbn13: '9784081065301'
-    cover_url: null
-    release_date: 2003-12
-  - number: 26
-    volume_label: vol.26
-    asin: null
-    isbn13: '9784081065653'
-    cover_url: null
-    release_date: 2003-12
-  - number: 27
-    volume_label: vol.27
-    asin: null
-    isbn13: '9784081065769'
-    cover_url: null
-    release_date: 2004-01
-  - number: 28
-    volume_label: vol.28
-    asin: null
-    isbn13: '9784081065868'
-    cover_url: null
-    release_date: 2004-02
-  - number: 30
-    volume_label: vol.30
-    asin: null
-    isbn13: '9784081066094'
-    cover_url: null
-    release_date: 2004-03
-- type: standard
-  label: 通常版
-  volumes:
-  - number: 1
-    asin: null
-    isbn13: '9784081060764'
-    cover_url: null
-    release_date: null
