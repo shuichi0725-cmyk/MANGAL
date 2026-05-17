@@ -348,10 +348,10 @@ def build_yml_for_candidate(
 
     demographic = (seed_entry or {}).get("demographic") or "shounen"
 
-    genres_cand = (seed_entry or {}).get("genres") or ["other"]
+    genres_cand = (seed_entry or {}).get("genres") or ["drama"]
     if valid_gens:
         filtered = [g for g in genres_cand if g in valid_gens]
-        genres_cand = filtered or ["other"]
+        genres_cand = filtered or ["drama"]
 
     o: dict = {
         "slug": cand["__slug__"],
