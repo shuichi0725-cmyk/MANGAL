@@ -1049,3 +1049,287 @@ with open('data/seeds/_fills/batch-NNN.json', 'w', encoding='utf-8') as f:
 ... (batch 1-704 = sessions 1-36 の全 batch commit、 略)
 4402d3a  chore: register 月次蒸留 protocol in CLAUDE.md
 ```
+
+---
+
+# 2026-05-17 セッション: path B' = 種2 rebuild プロジェクト (= A2.5)
+
+## 経緯 / 動機
+
+既存 種2 sqlite (= `.cache/db.sqlite`、 70,202 series) に **構造的 bug** 多数発覚:
+
+1. `lib/edition.ts:baseTitle()` が ` : <副題>` を強制 strip → 「うる星やつら」 と
+   「うる星やつら : オンリー・ユー」 「うる星やつら : 小説」 が **同 series に merge**
+2. `title_kana` の選択ロジックが book 単位 任意採用 (= 多数決せず)、 結果
+   「らんま 1/2」 の kana が `ランマ 1 2` (= 100 books 中 2 件しかない少数派) になる
+3. `volumes.number` INTEGER で `上`/`下`/`特装版` を 強制数字化 (= 表示時に label 失う)
+4. edition 分類が imprint base で粗い (= 小説版 / アニメ版 が standard edition に混入)
+5. series.title に 副題本文 を保持せず (= 「ビューティフル・ドリーマー」 等 消失)
+6. MADB schema:alternateName (= 公式英語題) を保持せず
+
+そのため **path B' = 種2 を 別ファイル (= `.cache/db-v2.sqlite`) に rebuild** する大手術を実行。
+旧 `.cache/db.sqlite` は **完全に不変**、 並走運用。
+
+## 完成した成果物 (= 全 commit push 済 `claude/manga-database-affiliate-3x0ms`)
+
+### scripts (= path B' pipeline、 順番に実行)
+
+```
+1. scripts/_build-series-v2.py     (= 種1 → 中間 JSON)
+   - 入力: .cache/madb/metadata104.json (= MangaBookSeries 139k records)
+          .cache/madb/metadata101-clean.json (= MangaBook 397k books)
+          data/seed/mangaka.csv (= 9,562 mangaka with qid)
+   - 処理: 
+     Phase 1: metadata104 全件 cluster 化 (= 120,673 clusters)
+              clustering key: (qid_or_creator_name, base_title, subtitle)
+              副題は ` : ` 右側で 分離、 base に含めない
+     Phase 2: metadata101 個別 book を Phase 1 cluster に linkage 
+              (= name+creator match で 314,624 books 紐づけ = 78.8%)
+     Phase 3: 紐づかない orphan books を 自前 baseTitle で 集約 
+              (= 37,590 補完 clusters、 メジャー作品 HUNTER×HUNTER 等を救う)
+   - 出力: .cache/series-v2.json (= 158,263 clusters)
+
+2. scripts/_db-init-v2.py          (= sqlite 初期化)
+   - 入力: db/schema-v2.sql + master yml/csv
+   - 処理: 旧 db-v2.sqlite は backup .bak-* に退避、 空 db 作成、
+          publishers/magazines/mangaka を seed
+   - 出力: .cache/db-v2.sqlite (= 空 schema、 19 tables)
+
+3. scripts/_populate-v2.py         (= cluster → sqlite)
+   - 入力: .cache/series-v2.json + db-v2.sqlite
+   - 処理: 158k clusters を series rows に投入、 
+          editions は (type, normalize_imprint(brand)) で 集約、
+          books は madb_book_id (= M-prefix) で 一意化、 ISBN なし volume も投入、
+          normalize_imprint: 中黒/全角空白/半角空白 を 全除去 (例: 'ジャンプ・コミックス' = 'ジャンプコミックス')
+   - 出力: db-v2 に 158,263 series / ~170k editions / ~381k volumes
+
+4. scripts/_apply-adult-filter-v2.py  (= 5-signal adult filter)
+   - 入力: db-v2 + data/seeds/adult-imprints.yml (= local)
+          + data/seeds/adult-wikipedia-cache.yml (= GitHub Actions 由来)
+   - 処理: 5 signal で adult_score 計算 + adult_signals 投入
+     - madb_content_rating: weight=5 (= MADB schema:contentRating='成年コミック')
+     - wikidata_hentai_credit: weight=2 (= mangaka.has_adult_credit=1)
+     - wikipedia_adult_mangaka_list: weight=2 (= 2,035 名)
+     - adult_imprint: weight=3 (= 235 件 yml seed)
+     - adult_publisher_imprint: weight=3 (= 21 件 Wikipedia 由来)
+   - 結果: 6,160 series が score>=3 (= 非公開)、 152,103 公開
+
+5. scripts/_migrate-seed3.py         (= 旧種3 → 新 series_key)
+   - 入力: 旧 data/seeds/series-supplement.yml (= 70,202 entries) + db-v2
+   - 処理: 旧 key 「qid|baseTitle」 → 新 series_key (= db-v2.series.series_key)
+          副題なし候補 優先、 副題 1 件のみなら 1:1 migrate (= "migrated_unique_sub")
+   - 結果:
+     - migrated 1:1   : 49,828
+     - migrated unique sub: 997
+     - orphan (= 旧 MADB 由来で 消失): 19,338
+     - ambiguous     : 39
+     - 出力: data/seeds/series-supplement-v2.yml (= 50,825 entries)
+     - 出力: data/seeds/migration-stats.yml
+
+6. scripts/_build-ai-fill-queue.py   (= 不足分 filter)
+   - 入力: db-v2 (= 152k 公開) - series-supplement-v2.yml (= 50k 移行済)
+   - 処理: need_fill (= 103,278 件) を isbn>=2 で filter
+   - 結果: 25,617 件 = AI fill 対象 (= 257 batch、 概算 cost ~$591)
+   - 出力: data/seeds/_ai-fill-queue.yml
+
+7. scripts/_promote-bulk-v2.py       (= db-v2 + seed3-v2 → user yml)
+   - 入力: db-v2 + series-supplement-v2.yml + 旧 data/manga/*.yml (= slug source)
+   - 処理:
+     - step A: 親 series 検出 (= 同 qid + title prefix + parent has more vol)
+              → 子 series を spinoff 判定
+     - step B: 本編 edition filter
+              keep type ∈ {standard, bunkobon, wideban, kanzenban, shinsoban, aizoban}
+              drop type ∈ {anime, other, renewal}
+              drop imprint LIKE 'My first big%' / '%コンビニ%' / '%増刊%' / '%同人%'
+     - spinoff series は max(release_date) >= CUTOFF_YEAR=2015 なら keep、 else drop
+     - editions を 第1巻 release_date 昇順で sort (= 通常版→ワイド版→文庫版)
+     - year_started = MIN year (全 volumes)
+     - year_ended = 最初 edition の MAX year (= outlier 1件除外 = 末尾年が直前と5年以上空くなら drop)
+     - status=ongoing なら year_ended=null
+     - magazine/publisher key を master yml で validate (= 不正 key は src yml fallback)
+   - 結果: 47 yml 生成 (= 9 件 spinoff/anthology drop)、 data/manga.v2/ に出力
+
+8. scripts/_dump-adult-tables.py     (= GitHub Actions 用、 db → yml dump)
+   - .cache/db.sqlite の adult_publishers/adult_mangaka_known を yml export
+
+### GitHub Actions
+
+- `.github/workflows/fetch-adult-lists.yml`:
+  - サンドボックス (= Claude Code 環境) は Wikipedia 403 でブロック
+  - GitHub clouds 環境で `npm run fetch:adult-lists` 実行 → 
+    `data/seeds/adult-wikipedia-cache.yml` に commit
+  - workflow_dispatch trigger で 手動実行
+  - 既に 1 回実行済 → cache yml 存在
+  - 月次蒸留時 再 trigger 推奨 (= Wikipedia 更新反映)
+
+### schema 拡張
+
+`db/schema-v2.sql` (= 旧 schema.sql は 不変、 並走):
+
+```
+series (21 cols):
+  + source TEXT NOT NULL ('madb104' or 'orphan101')
+  + subtitle TEXT
+  + subtitle_kana TEXT
+  + title_official_en TEXT
+  qid UNIQUE 解除 (= 旧仕様だが実質 0 件使用、 path B' で 用途復活)
+  series_key 形式変更:
+    旧: norm:<baseTitle>|qid:Q…
+    新: qid:Q...|name:<title>
+        qid:Q...|name:<title>|sub:<subtitle>
+        name:<creator>|name:<title>
+
+editions (9 cols):
+  UNIQUE (series_id, type, imprint)
+  (旧 series_id, type のみ → ワイド版 etc 混在解消)
+
+volumes (12 cols):
+  + madb_book_id TEXT UNIQUE (= M-prefix、 ISBN なし book 用 dedup key)
+  + volume_label TEXT (= '上'/'下'/'特装版' 等 生 label)
+  isbn13 nullable (= 旧 NOT NULL UNIQUE 解除、 1980 年代以前 巻 対応)
+```
+
+## design review (= 7 Q 全部議論済)
+
+| # | 項目 | 決定 |
+|---|------|------|
+| Q1 | series.qid UNIQUE 解除 | 解除 (= 1 mangaka が複数 series を持つため) |
+| Q2 | series_key の source suffix | 案 c: suffix なし、 madb104 + orphan を 同 key で 統合 |
+| Q3 | madb_series_ids の 持ち方 | series 列 削除 (= editions.madb_series_id で集計可能) |
+| Q4 | editions.madb_series_id | 削除 + UNIQUE(series_id, type, imprint) (= 同 brand 重複 MADB record を merge) |
+| Q5 | 同 series+type で複数 editions | Q4 で解決 (= 別 imprint なら OK) |
+| Q6 | volumes.number + volume_label | INTEGER + label (= 強制数字化、 表示は label) |
+| Q7 | orphan の magazine/demographic | NULL → 種3 fill (= 既存運用継承) |
+
+## 現状: deploy + 視覚確認段階
+
+- data/manga/ に 47 yml 配置済 (= 旧 data/manga.bak-* に backup)
+- typecheck pass、 vitest 209 tests pass、 loadAllManga 47 entries 成功
+- frontend deploy で 視覚確認できる状態
+- ユーザ 確認済の 主要 series:
+  - うる星やつら: 1980〜1987 完結、 通常版 34 + ワイド版 15 + 文庫版 18 ✅
+  - らんま1/2: 1988〜1996 完結、 kana=ランマ ニブンノイチ ✅
+  - ハイキュー!!: 2012〜2020 完結 (= imprint 中黒違い 統合 fix で 直った)
+
+## 未解決の課題 (= 次セッション で 続行)
+
+### 🔴 重要
+
+1. **mezon-ikkoku / doragon-booru 等で year_ended が 過剰** 
+   - mezon-ikkoku: 1982〜2007 (= 期待 1987)
+   - doragon-booru: 1986〜2004 (= 期待 1995)
+   - 原因: 複数巻の 1980 年代 ISBN が MADB に なく、 リニューアル版 (2000s) ISBN のみ
+   - 「outlier 1件除外」 logic では救えない (= 多数巻が同様パターン)
+   - 案: 1990年代初版の ISBN-10 を ISBN-13 化 で別ソース取得 / 種3 に year_ended 追加
+   - 影響: completed 旧作品 (= 1990 年代以前) の 一部 で 同様パターン
+
+2. **AI fill 25,617 件 (= ~$591) 未実施 (= step I)**
+   - data/seeds/_ai-fill-queue.yml に 候補リスト準備済
+   - 巻数最多 鬼平犯科帳 329、 美味しんぼ 244、 キン肉マン 166 等 メジャー作品多数
+   - これらは 旧種3 でも 一部 fill 済だったが creator name 違い cluster で migration 失敗
+   - source 内訳: madb104 16,402 + orphan101 9,215
+   - 旧 MEMORY.md 末尾 「種3 fill 作り方」 セクション の protocol で 実行可能
+
+3. **「creator merge logic」 未実装**
+   - 鬼平犯科帳 が 4 cluster (= 池波正太郎/さいとう・たかを/さいとうたかを/大原久澄)
+   - 同一作品の 原作者 vs 漫画家 別 attribution で 別 cluster 化
+   - merge 実装で AI fill 件数を 数千件削減可能
+   - heuristic: 同 base title + 同 qid 候補 multiple → merge?
+
+### 🟡 中程度
+
+4. **edition imprint 表記揺れの 更なる統合**
+   - 中黒/空白 strip は 実装済 (= G.6 fix)
+   - 残: 「Big comics」 vs 「ビッグコミックス」、 「Jets cimics」 vs 「Jets comics」 等
+   - 解決案: ISBN prefix から publisher 推定、 同 publisher の imprint variation を 統合
+
+5. **「マンガその他」 (= metadata103) leak 経由の関連書**
+   - うる星 だと 「『うる星やつら』の秘密」 が madb104 にも あるため leak
+   - 関連書 keyword filter (= 'ガイド'/'画集'/'ファンブック' 等) 実装案あるが 未適用
+   - 影響: 47 promoted yml には 直接影響少ない (= step A spinoff filter で大半 catch)
+
+6. **brand → magazine 静的 mapping (= option D from Q7)**
+   - 現状: magazine/demographic は 種3 経由のみ
+   - 未 fill series は magazine=null 表示
+   - data/seeds/brand-to-magazine.yml 等 新設で 自動推定可能 (= 100~200 brand 手書き)
+   - 優先度: step I 完了後で再検討
+
+### 🟢 低
+
+7. **腎臓盤 (= step B filter) の枯渇候補**
+   - drop pattern: 'My first big%' / '%コンビニ%' / '%増刊%' / '%同人%'
+   - 「BOOK」 「スペシャル」 「プレミアム」 等 1,400+ 件 microscopic candidates 残り
+
+8. **MADB 表記揺れの追加 fix (= 旧 cluster 残骸)**
+   - 「英訳・うる星やつら」 「劇場版犬夜叉時代を越える想い」 等 接頭辞付き title が
+     parent 検出失敗で 「本編 spinoff」 判定漏れ
+   - title normalize で 接頭辞 strip 実装案あるが 未適用
+
+9. **smiloid 鬼平犯科帳 など Mangaka.csv 未登録**
+   - 「綱本将也」 (= GIANT KILLING 作者) が mangaka.csv に居ないため orphan
+   - 大原久澄 等 同様
+   - 解決案: mangaka.csv 拡充 (= 種1 強化)、 月次蒸留 protocol で fetch:mangaka 再実行
+
+### ⚪ 設計レベル
+
+10. **promote-bulk-v2 が 既存 56 yml のみ regenerate**
+    - 全 152k 公開 series → yml は 別作業
+    - data/manga/_drafts/ に 大量生成 → 人手 review 経由運用 (= 旧フロー)
+    - 現状 47 yml は 視覚確認用
+
+11. **deploy 確認 未完**
+    - frontend は Cloudflare Workers (= huichi0725.workers.dev)
+    - ユーザが 各 fix 後 手動 deploy + 視覚確認
+    - 最後の確認: 2026-05-17 ハイキュー fix push 後
+
+## 主要 commit (= path B' trail)
+
+```
+806f637  fix(G.6): imprint normalize で 中黒・空白違い edition を 統合
+fac97e0  fix(G.5): year_ended で outlier 1件除外で 全 yml 改善
+c244aa3  fix(G.4): year_ended を 本編原作完結年で 算出
+ec28539  fix(G.3): edition 順序 + ISBN なし volume 投入 (= fix 2)
+bd158be  feat(G.2): step A/B filter で 「本編以外は極力非表示」 適用
+4bda25d  feat(G+H): data/manga/ を v2 出力で置換 + validate fix
+0ce98fb  feat(G): _promote-bulk-v2.py で v2 yml 生成
+ef03e39  feat(F.2): migration 改善 + AI fill queue 生成
+164a7dd  feat(F): _migrate-seed3.py で 旧種3 70k → 新 series_key
+5d09e41  feat(E): _apply-adult-filter-v2.py で adult filter 5 signal 適用
+fa6ca58  chore(E.prep): GitHub Actions で Wikipedia adult lists fetch
+0ba6177  feat(D): _populate-v2.py で db-v2.sqlite に 158k series 投入
+562087b  refactor(C.2): schema-v2 で editions.madb_series_id 削除
+0415a4b  refactor(C.1): schema-v2 で series.madb_series_ids 削除
+017d530  feat(C): db/schema-v2.sql + scripts/_db-init-v2.py
+75c1418  fix(A.3): creator name normalize 強化で cluster 分裂 改善
+b5d91ef  feat(A.2): _build-series-v2.py hybrid 化 (= option A)
+5aba001  feat(A): scripts/_build-series-v2.py + .cache/series-v2.json
+afffd82  chore: subtitle-review scaffold 破棄 (= path B' へ戦略変更)
+```
+
+## 次セッションでの推奨 スタートアクション
+
+1. **MEMORY.md 読了** (= このセクション)、 CLAUDE.md 読了
+2. `git pull origin claude/manga-database-affiliate-3x0ms` で最新取得
+3. ユーザの 視覚確認 結果 を 聞く (= deploy 後の MANGAL 画面で 47 yml が どう見えるか)
+4. 残課題から 優先順位を 聞いて 着手:
+   - 「mezon-ikkoku / doragon-booru year_ended 問題」 を fix するか
+   - 「step I (= AI fill 25k 件) を 始める」 か
+   - 「creator merge logic」 を試すか
+   - 別のメジャー作品 (= ジョジョリオン / ベルセルク等) を 視覚確認する
+
+## 重要設定値
+
+```python
+# scripts/_promote-bulk-v2.py
+CUTOFF_YEAR = 2015  # spinoff で この年以降なら keep
+KEEP_EDITION_TYPES = {"standard", "bunkobon", "wideban", "kanzenban", "shinsoban", "aizoban"}
+DROP_IMPRINT_PATTERNS = ["My first big", "コンビニ", "増刊", "同人"]
+```
+
+## 重要な user 意図 メモ
+
+- 「本編 = 通常版 + ワイド版 + 文庫版 + 完全版 + 愛蔵版 + 新装版」
+- 「アニメ版 / 廉価版 / 関連書 / 別作品コミカライズ は 表示不要 (= 最近 物は除く)」
+- 「CUTOFF_YEAR で 古い spinoff は drop、 最近 は keep」 という方針合意済
+- edition 順序: 第 1 巻 release_date 昇順 (= 通常版→ワイド版→文庫版)
+- year_ended: 本編原作完結年 (= リニューアル版 含めない)
