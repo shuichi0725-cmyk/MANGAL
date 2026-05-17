@@ -287,13 +287,41 @@ def build_yml(
     if series_row["subtitle_kana"]:
         o["subtitle_kana"] = series_row["subtitle_kana"]
 
-    # 年代 (= editions.year_started/ended を 集約)
-    years = [ed["year_started"] for ed in editions if ed["year_started"]]
-    o["year_started"] = min(years) if years else src_yml.get("year_started", 2000)
-    y_end = [ed["year_ended"] for ed in editions if ed["year_ended"]]
-    o["year_ended"] = max(y_end) if y_end else src_yml.get("year_ended")
+    # 年代: editions の volumes.release_date から 計算
+    # year_started = 最も古い edition の 最初の volume year
+    # year_ended = 「最初の edition (= 本編初版)」 の 最後の volume year
+    #              (= リニューアル版を 含めずに 原作連載終了年を出す)
+    def year_of(d: str | None) -> int | None:
+        if not d or len(d) < 4:
+            return None
+        try:
+            return int(d[:4])
+        except ValueError:
+            return None
+
+    all_years = []
+    for ed in editions:
+        for v in ed["volumes"]:
+            y = year_of(v.get("release_date"))
+            if y:
+                all_years.append(y)
+    o["year_started"] = min(all_years) if all_years else src_yml.get("year_started", 2000)
+
+    # year_ended: 最初の edition (= sorted by first vol date) の max year
+    if editions:
+        first_ed_years = [year_of(v.get("release_date")) for v in editions[0]["volumes"]]
+        first_ed_years = [y for y in first_ed_years if y]
+        if first_ed_years:
+            o["year_ended"] = max(first_ed_years)
+        else:
+            o["year_ended"] = src_yml.get("year_ended")
+    else:
+        o["year_ended"] = src_yml.get("year_ended")
     # status は 種3 から
     o["status"] = (seed3 or {}).get("status") or src_yml.get("status", "completed")
+    # status=ongoing なら year_ended は null
+    if o["status"] == "ongoing":
+        o["year_ended"] = None
 
     # authors / original_authors
     writers, originals = [], []
