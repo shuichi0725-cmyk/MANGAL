@@ -42,6 +42,20 @@ DROP_TITLE_PREFIX_PATTERNS = [
     "劇場版", "映画", "OVA",
     "ノベライズ", "ノベル",
 ]
+# 関連書 (= ガイドブック / 設定資料集 / 攻略本 等、 漫画作品ではない 副次出版物)。
+# title 内 包含で detect。 「大全集」 は 主作品 compilation 多いので 除外しない。
+DROP_TITLE_CONTAINS_PATTERNS = [
+    "ガイドブック", "ファンブック", "設定資料集",
+    "公式図録", "公式読本", "公式ファン", "公式コミックガイド",
+    "アンソロジー",
+    "キャラクター名鑑", "人物名鑑",
+    "心理分析", "心理解析", "完全解析", "完全攻略", "攻略本",
+    "解析書", "解体新書", "解体全書",
+    "大研究", "最終研究", "超研究", "大事典", "大百科", "大解剖",
+    "パーフェクトガイド", "完全読本", "完全ガイド", "必勝法",
+    "の秘密", "の謎", "コミック大全", "コミックスペシャル",
+    "ナビゲーション", "考察",
+]
 
 
 def load_seed3() -> dict:
@@ -670,6 +684,11 @@ def main():
         if any(title.startswith(pat) for pat in DROP_TITLE_PREFIX_PATTERNS):
             stats["dropped_non_manga"] += 1
             dropped_non_manga.append(f"{ypath.name}  title={title}")
+            continue
+        # 関連書 (= ガイドブック / 設定資料集 / アンソロジー / 攻略本 等) は対象外
+        if any(pat in title for pat in DROP_TITLE_CONTAINS_PATTERNS):
+            stats["dropped_non_manga"] += 1
+            dropped_non_manga.append(f"{ypath.name}  title={title}  (= 関連書)")
             continue
         series = find_series(con, slug, title, qid)
         if not series:
