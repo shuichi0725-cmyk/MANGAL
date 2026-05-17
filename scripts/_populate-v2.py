@@ -80,6 +80,15 @@ EDITION_LABELS = {
 }
 
 
+def normalize_imprint(s: str) -> str:
+    """imprint 正規化: 中黒 / 全角空白 / 半角空白 を 全部除去。
+    例: 'ジャンプ・コミックス' / 'ジャンプ コミックス' / 'ジャンプコミックス' → 同一扱い
+    """
+    if not s:
+        return ""
+    return s.replace("・", "").replace("　", "").replace(" ", "").strip()
+
+
 KANJI_VOLUME_MAP = {
     "上": 1, "中": 2, "下": 3,
     "上巻": 1, "中巻": 2, "下巻": 3,
@@ -200,30 +209,33 @@ def main():
             brand = brand or ""
             type_ = classify_edition_from_imprint(brand)
             label = EDITION_LABELS.get(type_, "通常版")
-            imprint = brand or None
-            key = (type_, imprint or "")
+            # imprint は normalize した値で grouping key (= 中黒/空白 差異の編集 統合)
+            norm_imprint = normalize_imprint(brand) or None
+            imprint_display = brand or None
+            key = (type_, norm_imprint or "")
             if key in edition_map:
                 return edition_map[key]
             try:
                 cur.execute(
                     """INSERT INTO editions (series_id, type, label, imprint)
                        VALUES (?, ?, ?, ?)""",
-                    (series_id, type_, label, imprint),
+                    (series_id, type_, label, imprint_display),
                 )
                 eid = cur.lastrowid
                 edition_map[key] = eid
                 stats["editions_inserted"] += 1
                 return eid
             except sqlite3.IntegrityError:
-                # UNIQUE (series_id, type, imprint) 衝突 → 既存 edition_id 取得
-                row = cur.execute(
-                    """SELECT id FROM editions WHERE series_id=? AND type=?
-                                          AND IFNULL(imprint,'') = IFNULL(?,'')""",
-                    (series_id, type_, imprint),
-                ).fetchone()
-                if row:
-                    edition_map[key] = row["id"]
-                    return row["id"]
+                # UNIQUE (series_id, type, imprint) 衝突
+                # 既存 edition のうち normalize 一致するものを 検索
+                cur.execute(
+                    """SELECT id, imprint FROM editions WHERE series_id=? AND type=?""",
+                    (series_id, type_),
+                )
+                for row in cur.fetchall():
+                    if normalize_imprint(row["imprint"] or "") == (norm_imprint or ""):
+                        edition_map[key] = row["id"]
+                        return row["id"]
                 return None
 
         # books が 空 (= madb104 cluster で book 紐づけ失敗) でも madb_records.brand で
