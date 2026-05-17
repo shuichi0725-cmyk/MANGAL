@@ -50,6 +50,9 @@ export default function MangaCard({ manga, publishers, genres, demographics }: P
       )}
       <div className="flex-1 min-w-0">
         <p className="font-bold text-base leading-tight">{manga.title}</p>
+        {manga.subtitle && (
+          <p className="text-xs text-black/55 mt-0.5 line-clamp-1">{manga.subtitle}</p>
+        )}
         <p className="text-xs text-black/65 mt-1.5 line-clamp-1">{authorLine}</p>
         <p className="text-xs text-black/55 mt-0.5 line-clamp-1">{publisherName}</p>
         <p className="text-xs text-black/45 mt-0.5">{yearStatusLabel(manga)}</p>
