@@ -353,9 +353,16 @@ def build_yml(
     o["title"] = series_row["title"]
     o["title_kana"] = series_row["title_kana"] or src_yml.get("title_kana", "")
     o["title_romaji"] = src_yml.get("title_romaji", "")
-    if series_row["subtitle"]:
-        o["subtitle"] = series_row["subtitle"]
-    if series_row["subtitle_kana"]:
+    # subtitle が edition 名 (= '新装再編版' 等) なら strip (= 全 edition 含む page には不適)
+    sub = series_row["subtitle"]
+    EDITION_NAME_SUBTITLES = {"新装再編版", "新装版", "完全版", "愛蔵版", "文庫版",
+                              "ワイド版", "デラックス", "新装新版", "リニューアル版",
+                              "廉価版", "新装版コミックス", "新装版", "復刻版"}
+    if sub and sub in EDITION_NAME_SUBTITLES:
+        sub = None
+    if sub:
+        o["subtitle"] = sub
+    if series_row["subtitle_kana"] and sub:
         o["subtitle_kana"] = series_row["subtitle_kana"]
 
     # 年代: editions の volumes.release_date から 計算

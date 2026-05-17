@@ -64,6 +64,9 @@ def classify_edition_from_imprint(imprint: str) -> str:
         return "shinsoban"
     if re.search(r"カバー新装|カバーリニューアル", t):
         return "renewal"
+    # デラックス = 新装再編版 / 大判版 系 (= e.g. ジャンプ・コミックスデラックス)
+    if "デラックス" in t or "DELUXE" in t.upper():
+        return "shinsoban"
     return "standard"
 
 
