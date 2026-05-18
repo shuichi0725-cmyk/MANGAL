@@ -147,8 +147,10 @@ def extract_volume_number(label: str, vol_field: str) -> tuple[int | None, str |
     """
     if vol_field:
         s = vol_field.strip()
-        # MADB 異常 record 正規化: '23　／　第23巻' / '1　／　Ⅰ' / 'v.1　／　volume 1' 等
-        # 数字 / separator(/、|) / 何か の 形式 → 先頭 数字 を 採用、 label strip
+        # 全角 数字 → 半角 (= 「第１部」 等 全角 数字含む patterns catch のため 最初に変換)
+        s = re.sub(r"[０-９]", lambda x: chr(ord(x.group(0)) - 0xFEE0), s)
+        # MADB 異常 record 正規化: '23　／　第23巻' / '1　／　Ⅰ' / 'v.1　／　volume 1' /
+        # '第2巻　／　第二巻' / '巻ノ55　／　巻ノ五十五' 等 任意 prefix + 数字 + 区切り + 何か
         m_dup = re.match(r"^(\d+)[\s　]*[／/|][\s　]*(.+)$", s)
         if m_dup:
             n_str = m_dup.group(1)
@@ -157,8 +159,39 @@ def extract_volume_number(label: str, vol_field: str) -> tuple[int | None, str |
         m_dup_vol = re.match(r"^(?:VOLUME\.?|Volume\.?|volume\.?|VOL\.?|Vol\.?|vol\.?|V\.|v\.|[＃#])\s*(\d+)[\s　]*[／/|][\s　]*(.+)$", s)
         if m_dup_vol:
             return int(m_dup_vol.group(1)), None, False
-        # 第<算用数字>巻 (= '第24巻') → vlabel=None (= 冗長 label 抑制)
-        m_plain = re.match(r"^第(\d+)[巻集編卷]$", s)
+        # '第2巻 ／ 第二巻' / '第一巻 ／ 第1巻' 等 第N巻 prefix dup
+        m_dup_dai = re.match(r"^第([0-9〇零一二三四五六七八九十百千壱弐参肆伍陸漆捌玖拾]+)[巻集編卷部篇]?[\s　]*[／/|][\s　]*.+$", s)
+        if m_dup_dai:
+            g = m_dup_dai.group(1)
+            if g.isdigit():
+                return int(g), None, False
+            n = parse_kanji_number(g)
+            if n is not None:
+                return n, None, False
+        # '巻ノ55 ／ 巻ノ五十五' 等 巻ノN prefix dup
+        m_dup_kano = re.match(r"^(?:巻[のノ之]|其[ノの之])([0-9〇零一二三四五六七八九十百千壱弐参肆伍陸漆捌玖拾]+)[巻集編卷]?[\s　]*[／/|][\s　]*.+$", s)
+        if m_dup_kano:
+            g = m_dup_kano.group(1)
+            if g.isdigit():
+                return int(g), None, False
+            n = parse_kanji_number(g)
+            if n is not None:
+                return n, None, False
+        # 'その1' / 'しょの1' / 'その10' / '会報1' / '第N号' 等 特殊 prefix + 数字
+        m_misc = re.match(r"^(?:その|しょの|会報|号|karte\s*no\.?|Karte\s*no\.?)\s*\.?\s*(\d+)$", s)
+        if m_misc:
+            return int(m_misc.group(1)), None, False
+        # '第N号' (= 雑誌風 issue 番号)
+        m_go = re.match(r"^第([0-9〇零一二三四五六七八九十百千]+)号$", s)
+        if m_go:
+            g = m_go.group(1)
+            if g.isdigit():
+                return int(g), None, False
+            n = parse_kanji_number(g)
+            if n is not None:
+                return n, None, False
+        # 第<算用数字>巻/部/集/編 (= '第24巻'/'第1部') → vlabel=None (= 冗長 label 抑制)
+        m_plain = re.match(r"^第(\d+)[巻集編卷部篇]$", s)
         if m_plain:
             return int(m_plain.group(1)), None, False
         # 'NO.35' / 'No.35' / 'Vol. 17' / 'vol.1' / 'V.1' / 'VOLUME1' / 'volume 10' / 'volume.2'
@@ -166,8 +199,8 @@ def extract_volume_number(label: str, vol_field: str) -> tuple[int | None, str |
         m_no = re.match(r"^(?:NO\.?|No\.?|no\.?|VOLUME\.?|Volume\.?|volume\.?|VOL\.?|Vol\.?|vol\.?|V\.|v\.|[＃#])\s*(\d+)$", s)
         if m_no:
             return int(m_no.group(1)), None, False
-        # '巻ノN' / '巻のN' / '巻之N' / '其ノN' (= 巻ノN 同形 異記号、 'ノ'/'の'/'之' interchangeable)
-        m_kano = re.match(r"^(?:巻[のノ之]|其ノ)([〇零一二三四五六七八九十百千壱弐参肆伍陸漆捌玖拾]+|\d+)[巻集編卷]?$", s)
+        # '巻ノN' / '巻のN' / '巻之N' / '其ノN' / '其之N' (= 同形 異記号、 'ノ'/'の'/'之' interchangeable)
+        m_kano = re.match(r"^(?:巻[のノ之]|其[ノの之])([〇零一二三四五六七八九十百千壱弐参肆伍陸漆捌玖拾]+|\d+)[巻集編卷]?$", s)
         if m_kano:
             g = m_kano.group(1)
             if g.isdigit():
