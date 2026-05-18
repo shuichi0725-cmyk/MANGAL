@@ -59,7 +59,7 @@ export const Seed3EntrySchema = z.object({
 export type Seed3Entry = z.infer<typeof Seed3EntrySchema>;
 
 export const Seed3FileSchema = z.object({
-  schema_version: z.literal(1),
+  schema_version: z.union([z.literal(1), z.literal(2)]),
   generated_at: z.string(),
   generator: z.string(),
   series: z.array(Seed3EntrySchema),
