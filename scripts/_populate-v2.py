@@ -160,12 +160,37 @@ def extract_volume_number(label: str, vol_field: str) -> tuple[int | None, str |
         m_no = re.match(r"^(?:NO\.?|No\.?|no\.?|VOL\.?|Vol\.?|vol\.?|#)\s*(\d+)$", s)
         if m_no:
             return int(m_no.group(1)), None, False
-        # '巻ノN' (= NARUTO 等 '巻ノ54', '巻ノ五十一')
-        m_kano = re.match(r"^巻ノ([〇零一二三四五六七八九十百千壱弐参肆伍陸漆捌玖拾]+|\d+)[巻集編卷]?$", s)
+        # '巻ノN' / '巻のN' (= NARUTO 等 '巻ノ54', '巻ノ五十一'、 ひらがな の も)
+        m_kano = re.match(r"^巻[のノ]([〇零一二三四五六七八九十百千壱弐参肆伍陸漆捌玖拾]+|\d+)[巻集編卷]?$", s)
         if m_kano:
             g = m_kano.group(1)
             if g.isdigit():
                 return int(g), None, False
+            n = parse_kanji_number(g)
+            if n is not None:
+                return n, None, False
+        # '<漢数字/算用>巻' (= 第 prefix なし、 '一巻', '二巻', '54巻')
+        m_no_prefix = re.match(r"^([〇零一二三四五六七八九十百千壱弐参肆伍陸漆捌玖拾]+|\d+)[巻集編卷]$", s)
+        if m_no_prefix:
+            g = m_no_prefix.group(1)
+            if g.isdigit():
+                return int(g), None, False
+            n = parse_kanji_number(g)
+            if n is not None:
+                return n, None, False
+        # '第<N>章' (= 「第二章」 「第三章」)
+        m_chapter = re.match(r"^第([〇零一二三四五六七八九十百千壱弐参肆伍陸漆捌玖拾]+|\d+)章$", s)
+        if m_chapter:
+            g = m_chapter.group(1)
+            if g.isdigit():
+                return int(g), None, False
+            n = parse_kanji_number(g)
+            if n is not None:
+                return n, None, False
+        # '壱ノ巻' / '弐ノ巻' (= 大字 + ノ巻、 vol field 先頭 大字 で 始まる)
+        m_daiji_no = re.match(r"^([壱弐参肆伍陸漆捌玖拾])ノ巻$", s)
+        if m_daiji_no:
+            g = m_daiji_no.group(1)
             n = parse_kanji_number(g)
             if n is not None:
                 return n, None, False
