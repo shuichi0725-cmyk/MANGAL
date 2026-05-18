@@ -749,23 +749,29 @@ def build_yml_for_candidate(
                     pass
     year_started = min(all_years) if all_years else 2000
     year_ended = None
+    # year_ended: standard edition の 「最大 vol number の 初版 date」 (= 真の 連載完結年)
+    # 各 vol number で MIN release_date (= 初版) → 最大 vol number の date を 採用
+    # これで reissue date (= vol 1 が 2000 reissue 等) を 排除
     if editions:
-        first_ed_years = []
-        for v in editions[0]["volumes"]:
-            d = v.get("release_date")
-            if d and len(d) >= 4:
+        standard_eds = [ed for ed in editions if ed.get("type") == "standard"]
+        target_eds = standard_eds if standard_eds else editions
+        per_vol_min_date = {}
+        for ed in target_eds:
+            for v in ed["volumes"]:
+                n = v.get("number")
+                dd = v.get("release_date")
+                if not n or not dd:
+                    continue
+                if n not in per_vol_min_date or dd < per_vol_min_date[n]:
+                    per_vol_min_date[n] = dd
+        if per_vol_min_date:
+            max_vol = max(per_vol_min_date.keys())
+            d_max = per_vol_min_date[max_vol]
+            if d_max and len(d_max) >= 4:
                 try:
-                    first_ed_years.append(int(d[:4]))
+                    year_ended = int(d_max[:4])
                 except ValueError:
                     pass
-        first_ed_years.sort()
-        while len(first_ed_years) > 5:
-            if first_ed_years[-1] - first_ed_years[-2] > 5:
-                first_ed_years.pop()
-            else:
-                break
-        if first_ed_years:
-            year_ended = max(first_ed_years)
 
     status = (seed_entry or {}).get("status") or "completed"  # 抽出時点で 完結扱い
     if status == "ongoing":
