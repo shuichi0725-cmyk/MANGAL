@@ -3,8 +3,8 @@ slug: nipponchinbotsu
 title: 日本沈没
 title_kana: ニッポンチンボツ
 title_romaji: nipponchinbotsu
-year_started: 1973
-year_ended: 2009
+year_started: 2006
+year_ended: 2006
 status: completed
 authors:
 - name: 小松左京
@@ -19,16 +19,31 @@ genres:
 synopsis: 小松左京原作のSFパニックの金字塔『日本沈没』のコミカライズ。地殻変動で沈みゆく日本列島と日本人の運命を描く。
 wikidata_qid: Q717936
 editions:
-- type: standard
-  label: 通常版
-  imprint: カッパ・ノベルス
+- type: bunkobon
+  label: 文庫版
+  imprint: 小学館文庫
   volumes:
   - number: 1
     volume_label: 上
     asin: null
-    isbn13: null
+    isbn13: '9784094080650'
     cover_url: null
-    release_date: '1973-03-20'
+    release_date: '2006-01-01'
+  - number: 3
+    volume_label: 下
+    asin: null
+    isbn13: '9784094080667'
+    cover_url: null
+    release_date: '2006-01-01'
+- type: standard
+  label: 通常版
+  imprint: SPコミックス
+  volumes:
+  - number: 1
+    asin: null
+    isbn13: '9784845831616'
+    cover_url: null
+    release_date: 2006-07
   - number: 2
     volume_label: 2　／　2集
     asin: null
@@ -36,11 +51,11 @@ editions:
     cover_url: null
     release_date: '2006-08-01'
   - number: 3
-    volume_label: 下
+    volume_label: 3　／　3集
     asin: null
-    isbn13: null
+    isbn13: '9784091805690'
     cover_url: null
-    release_date: '1973-03-20'
+    release_date: '2006-09-01'
   - number: 4
     volume_label: 4　／　4集
     asin: null
@@ -113,19 +128,3 @@ editions:
     isbn13: '9784091823571'
     cover_url: null
     release_date: '2009-03-04'
-- type: bunkobon
-  label: 文庫版
-  imprint: 小学館文庫
-  volumes:
-  - number: 1
-    volume_label: 上
-    asin: null
-    isbn13: '9784094080650'
-    cover_url: null
-    release_date: '2006-01-01'
-  - number: 3
-    volume_label: 下
-    asin: null
-    isbn13: '9784094080667'
-    cover_url: null
-    release_date: '2006-01-01'
