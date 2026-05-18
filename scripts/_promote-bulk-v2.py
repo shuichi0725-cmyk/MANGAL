@@ -104,7 +104,12 @@ def infer_magazine_from_brand(editions: list[dict], valid_mags: set) -> str | No
     return None
 DROP_IMPRINT_PATTERNS = ["My first big", "コンビニ", "増刊", "同人", "ジャンプremix", "フィルムコミック"]
 # bilingual / 英訳版 imprint は drop (= 翻訳版 は 別 product)
-DROP_IMPRINT_LOWER_PATTERNS = ["bilingual"]
+DROP_IMPRINT_LOWER_PATTERNS = ["bilingual", "english"]
+# 'complete works' は 英訳 全集 で 多用 (= 「TEZUKA OSAMU THE COMPLETE WORKS」、
+# 「The complete works of Fujiko・F・Fujio」 等)。 但し 日本語 imprint で 「= English」
+# 並列表記 cases (= 「藤子・F・不二雄大全集 = The Complete Works of Fujiko・F・Fujio」)
+# は 日本語版 で keep。 「=」 含む imprint は drop 対象外。
+DROP_IMPRINT_LOWER_PATTERNS_NO_EQ = ["complete works"]
 # 漫画以外 series は MANGAL 掲載対象外 (= title prefix で detect)。
 # CLAUDE.md / MEMORY.md 大原則: 「通常版/ワイド版/文庫版/愛蔵版 等 漫画 only」
 DROP_TITLE_PREFIX_PATTERNS = [
@@ -306,6 +311,8 @@ def get_major_publisher_prefix(con: sqlite3.Connection, series_id: int) -> str |
         imp_l = imp.lower()
         if any(pat in imp_l for pat in DROP_IMPRINT_LOWER_PATTERNS):
             continue
+        if "=" not in imp and any(pat in imp_l for pat in DROP_IMPRINT_LOWER_PATTERNS_NO_EQ):
+            continue
         p = (r[0] or "").replace("-", "")
         if len(p) >= 6:
             counter[p[:6]] += 1
@@ -340,6 +347,8 @@ def get_publisher_prefixes(con: sqlite3.Connection, series_id: int) -> set:
             continue
         imp_l = imp.lower()
         if any(pat in imp_l for pat in DROP_IMPRINT_LOWER_PATTERNS):
+            continue
+        if "=" not in imp and any(pat in imp_l for pat in DROP_IMPRINT_LOWER_PATTERNS_NO_EQ):
             continue
         p = (r[0] or "").replace("-", "")
         if len(p) >= 6:
@@ -477,6 +486,11 @@ def edition_passes_filter(ed_row: dict) -> bool:
     for pat in DROP_IMPRINT_LOWER_PATTERNS:
         if pat in imp_l:
             return False
+    # 'complete works' 等 「=」 並列表記 除く 英訳 全集 系
+    if "=" not in imp:
+        for pat in DROP_IMPRINT_LOWER_PATTERNS_NO_EQ:
+            if pat in imp_l:
+                return False
     return True
 
 
