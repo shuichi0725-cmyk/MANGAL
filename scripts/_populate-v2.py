@@ -147,17 +147,23 @@ def extract_volume_number(label: str, vol_field: str) -> tuple[int | None, str |
     """
     if vol_field:
         s = vol_field.strip()
-        # MADB 異常 record 正規化: '23　／　第23巻' (= 数字/separator/第N巻) → '第23巻'
-        m_dup = re.match(r"^(\d+)[\s　]*[／/|][\s　]*(第[〇零一二三四五六七八九十百千壱弐参肆伍陸漆捌玖拾\d]+[巻集編卷]?)$", s)
+        # MADB 異常 record 正規化: '23　／　第23巻' / '1　／　Ⅰ' / 'v.1　／　volume 1' 等
+        # 数字 / separator(/、|) / 何か の 形式 → 先頭 数字 を 採用、 label strip
+        m_dup = re.match(r"^(\d+)[\s　]*[／/|][\s　]*(.+)$", s)
         if m_dup:
             n_str = m_dup.group(1)
             return int(n_str), None, False
+        # 'v.1　／　X' のように 先頭 が VOL prefix の dup 表記
+        m_dup_vol = re.match(r"^(?:VOLUME\.?|Volume\.?|volume\.?|VOL\.?|Vol\.?|vol\.?|V\.|v\.|[＃#])\s*(\d+)[\s　]*[／/|][\s　]*(.+)$", s)
+        if m_dup_vol:
+            return int(m_dup_vol.group(1)), None, False
         # 第<算用数字>巻 (= '第24巻') → vlabel=None (= 冗長 label 抑制)
         m_plain = re.match(r"^第(\d+)[巻集編卷]$", s)
         if m_plain:
             return int(m_plain.group(1)), None, False
-        # 'NO.35' / 'No.35' / 'no. 35' / 'Vol. 17' / 'vol.1' 等 → vlabel=None
-        m_no = re.match(r"^(?:NO\.?|No\.?|no\.?|VOL\.?|Vol\.?|vol\.?|#)\s*(\d+)$", s)
+        # 'NO.35' / 'No.35' / 'Vol. 17' / 'vol.1' / 'V.1' / 'VOLUME1' / 'volume 10' / 'volume.2'
+        # / '#23' / '＃1' 等 → vlabel=None (= 冗長 label 抑制)
+        m_no = re.match(r"^(?:NO\.?|No\.?|no\.?|VOLUME\.?|Volume\.?|volume\.?|VOL\.?|Vol\.?|vol\.?|V\.|v\.|[＃#])\s*(\d+)$", s)
         if m_no:
             return int(m_no.group(1)), None, False
         # '巻ノN' / '巻のN' (= NARUTO 等 '巻ノ54', '巻ノ五十一'、 ひらがな の も)
@@ -197,12 +203,12 @@ def extract_volume_number(label: str, vol_field: str) -> tuple[int | None, str |
         # 純粋数字
         if re.match(r"^\d+$", s):
             return int(s), None, False
-        # KANJI_VOLUME_MAP (= 上/中/下 等)
+        # KANJI_VOLUME_MAP (= 上/中/下 等) → vlabel keep (= 「上」「下」 は 表示価値あり)
         if s in KANJI_VOLUME_MAP:
             return KANJI_VOLUME_MAP[s], s, False
-        # roman numeral (= 'Ⅰ', 'Ⅱ', etc.)
+        # roman numeral (= 'Ⅰ', 'Ⅱ', etc.) → vlabel=None (= number で 表示十分)
         if s in ROMAN_MAP:
-            return ROMAN_MAP[s], s, False
+            return ROMAN_MAP[s], None, False
         # 第<漢数字>巻 / 第<漢数字>集 / 第<漢数字>編 / 第<漢数字>部 / 巻<漢数字>
         m = re.match(r"^(?:第|巻)([〇零一二三四五六七八九十百千壱弐参肆伍陸漆捌玖拾]+)[巻集編卷部篇]?$", s)
         if m:
