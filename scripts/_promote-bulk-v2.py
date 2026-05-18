@@ -713,11 +713,19 @@ def build_yml(
                 all_years.append(y)
     o["year_started"] = min(all_years) if all_years else src_yml.get("year_started", 2000)
 
-    # year_ended: 最初の edition (= sorted by first vol date) の max year
-    # ただし outlier 1 件 (= 単一巻だけ 重版年が混入) は drop
+    # year_ended: standard edition の max year (= 「本編 連載完結」 推定)
+    # standard edition が ない (= 文庫/愛蔵 のみ 等) 場合は 全 editions の MAX
+    # 但し outlier 1 件 (= 単一巻だけ 重版年が混入) は drop
     if editions:
-        first_ed_years = [year_of(v.get("release_date")) for v in editions[0]["volumes"]]
-        first_ed_years = sorted([y for y in first_ed_years if y])
+        standard_eds = [ed for ed in editions if ed.get("type") == "standard"]
+        target_eds = standard_eds if standard_eds else editions
+        first_ed_years = []
+        for ed in target_eds:
+            for v in ed["volumes"]:
+                y = year_of(v.get("release_date"))
+                if y:
+                    first_ed_years.append(y)
+        first_ed_years = sorted(first_ed_years)
         # outlier 除外: 末尾の年が 直前と 5 年以上空くなら drop
         while len(first_ed_years) > 5:
             if first_ed_years[-1] - first_ed_years[-2] > 5:
