@@ -160,6 +160,15 @@ def extract_volume_number(label: str, vol_field: str) -> tuple[int | None, str |
         m_no = re.match(r"^(?:NO\.?|No\.?|no\.?|VOL\.?|Vol\.?|vol\.?|#)\s*(\d+)$", s)
         if m_no:
             return int(m_no.group(1)), None, False
+        # '巻ノN' (= NARUTO 等 '巻ノ54', '巻ノ五十一')
+        m_kano = re.match(r"^巻ノ([〇零一二三四五六七八九十百千壱弐参肆伍陸漆捌玖拾]+|\d+)[巻集編卷]?$", s)
+        if m_kano:
+            g = m_kano.group(1)
+            if g.isdigit():
+                return int(g), None, False
+            n = parse_kanji_number(g)
+            if n is not None:
+                return n, None, False
         # 純粋数字
         if re.match(r"^\d+$", s):
             return int(s), None, False
