@@ -66,7 +66,7 @@ export const Seed3FileSchema = z.object({
 });
 export type Seed3File = z.infer<typeof Seed3FileSchema>;
 
-const DEFAULT_PATH = "data/seeds/series-supplement.yml";
+const DEFAULT_PATH = "data/seeds/series-supplement-v2.yml";
 
 /**
  * 種3 ファイル を 読んで (key → entry) Map を返す。
