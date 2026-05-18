@@ -102,7 +102,8 @@ def infer_magazine_from_brand(editions: list[dict], valid_mags: set) -> str | No
             if not valid_mags or mag in valid_mags:
                 return mag
     return None
-DROP_IMPRINT_PATTERNS = ["My first big", "コンビニ", "増刊", "同人", "ジャンプremix", "フィルムコミック"]
+DROP_IMPRINT_PATTERNS = ["My first big", "コンビニ", "増刊", "同人", "ジャンプremix", "フィルムコミック",
+                         "カッパ・ノベル", "カッパノベル", "カッパ・ホーム", "カッパホーム"]
 # bilingual / 英訳版 imprint は drop (= 翻訳版 は 別 product)
 DROP_IMPRINT_LOWER_PATTERNS = ["bilingual", "english"]
 # 'complete works' は 英訳 全集 で 多用 (= 「TEZUKA OSAMU THE COMPLETE WORKS」、
