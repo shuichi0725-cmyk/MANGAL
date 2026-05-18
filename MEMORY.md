@@ -2,7 +2,228 @@
 
 > このファイルは Claude Code session の context bootstrap 用。新しいセッションを開始したら最初に読むこと。
 
-最終更新: 2026-05-13 (種3 fill **真の 100% 到達** 70,202/70,202、 session 37 で PUA fix 完了)
+最終更新: 2026-05-18 23:43 JST (B2 = 種3-v2 top 2000 fill 完了 = batch 706-725)
+
+---
+
+# 2026-05-18 セッション: 種3-v2 top 2000 fill (= B2 完了) + 種2/種3 v2 体系の整理
+
+## TL;DR (= 次セッション 5 行サマリ)
+
+- **種2 = `.cache/db-v2.sqlite`** (= path B' rebuild、 series 158,263 / editions 多数 / volumes 多数)、 旧 `.cache/db.sqlite` は触らない
+- **種3 = `data/seeds/series-supplement-v2.yml`** (= schema_version 2、 現在 **52,825 entries**)。 旧 `data/seeds/series-supplement.yml` (= 70,202 entries) と **完全 disjoint**、 別物として共存
+- **B2 (= top 2000 AI fill) 完了**: 累計 batch 706-725 で queue[0:2000] を Opus 4.7 直筆 fill。 全 `applied=100, missing=0` 確認、 commit + push 済 (= 21 commits)
+- **残課題**: queue 残り **23,617 entries** (= 順位 2001-25617) が未 fill。 これは次回以降。 また promote-bulk-v2 で実 yaml 出力 + frontend 視覚確認 もまだ
+- **`/ultrareview` 注意**: B2 完了 commit の deploy / vitest / typecheck がまだ通っているか未確認 (= 次セッション最初に `npm run typecheck && npm test` で safety check 推奨)
+
+## 種2 / 種3 (v2 系) の確定整理 (= 2026-05-17~18 path B' 経由の最新版)
+
+### 種2 v2 = `.cache/db-v2.sqlite` (= 158,263 series)
+
+旧 `.cache/db.sqlite` (= 70,202 series、 構造的 bug あり) は **完全に不変** のまま並走、 v2 は別ファイル。
+schema は `db/schema-v2.sql`、 19 tables。 生成 pipeline (= 直列実行):
+
+```
+1. scripts/_build-series-v2.py    (= 種1 → .cache/series-v2.json、 158,263 clusters)
+2. scripts/_db-init-v2.py         (= db-v2.sqlite を空 schema で初期化、 master を seed)
+3. scripts/_populate-v2.py        (= cluster → db-v2.sqlite に投入、 巻号 parse 等)
+4. scripts/_apply-adult-filter-v2.py (= adult signal 5 で skip)
+5. scripts/_promote-bulk-v2.py    (= db-v2 → data/manga/<slug>/index.yml に書き出し)
+6. scripts/_extract-top-completed.py (= 主要完結作品 top N 抽出、 試験用)
+7. scripts/_scan-anomaly.py       (= I1-I6 anomaly 検出)
+8. scripts/_backfill-title-kana-v2.py (= madb-enrich.json から title_kana 補完、 90.1% 救出)
+```
+
+**重要設定値** (= 2026-05-18 時点):
+
+```python
+# scripts/_promote-bulk-v2.py
+KEEP_EDITION_TYPES = {"standard", "bunkobon", "wideban", "kanzenban", "shinsoban", "aizoban"}
+DROP_IMPRINT_PATTERNS = ["My first big", "コンビニ", "増刊", "同人", "ジャンプremix", "フィルムコミック", "カッパ・ノベル", "カッパ・ホーム"]
+DROP_IMPRINT_LOWER_PATTERNS = ["bilingual", "english"]
+DROP_IMPRINT_LOWER_PATTERNS_NO_EQ = ["complete works"]  # 「=」並列除外
+DROP_TITLE_PREFIX_PATTERNS = ["テレビアニメ版", "TVアニメ版", "アニメコミック", "劇場版", "映画", "OVA", "ノベライズ", "ノベル"]
+DROP_TITLE_CONTAINS_PATTERNS = [34 patterns]  # ガイドブック / ファンブック / 設定資料集 等 (= 詳細 CLAUDE.md 参照)
+CUTOFF_YEAR = 2015  # spinoff で この年以降なら keep
+```
+
+### 種3 v2 = `data/seeds/series-supplement-v2.yml`
+
+- `schema_version: 2`、 `generator: claude-opus-4-7-direct-fill`
+- 現在 **52,825 entries** (= 50,825 placeholder + top 2000 fill = batch 706-725)
+- 旧 `data/seeds/series-supplement.yml` (= schema_version 1、 70,202 entries) と **disjoint** = key 重複 0、 別物として共存
+- schema 定義: `lib/seed3.ts` (= `schema_version: z.union([z.literal(1), z.literal(2)])` で v1/v2 両対応)
+- default path も lib/seed3.ts で `data/seeds/series-supplement-v2.yml` に切替済
+- Seed3EntrySchema は v1 と互換 + `alternative_titles.{en,fr,de,it,pt}` optional 追加
+
+### 種3 v2 各 entry の fill schema (= 種3 旧と互換 + 拡張)
+
+```json
+{
+  "<key>": {
+    "magazine": "weekly-shonen-jump" or null,        # magazines.yml の key、 不明時 null
+    "demographic": "shounen|shoujo|seinen|josei|kodomo|other",
+    "genres": ["action", "adventure"],                # 1-4 tag、 master keys は genres.yml
+    "synopsis": "80-200 char の独自要約",
+    "status": "ongoing|completed|hiatus",
+    "anime_adapted": true|false,
+    "alternative_titles": {"en": "One Piece"}        # 外来語 title では必須 fill
+  }
+}
+```
+
+- **key**: `(qid + baseTitle)` 複合 ID。 qid 無し series は `name:<creator>|name:<title>` 形式
+- **slug 命名規則** は CLAUDE.md 参照 (= ふりがな判定 + 数字読み判定 + alt_en 優先)
+- **alternative_titles.en** は 外来語起源 title (= 「ワンピース」「ブリーチ」 等) に必須 fill — これで slug 生成が `wanpiisu` ではなく `one-piece` になる
+
+### B2 完了状態 (= 2026-05-18 23:43 JST 達成)
+
+| Item | Value |
+|---|---|
+| Queue 全体 (= `data/seeds/_ai-fill-queue.yml`) | 25,617 entries (= isbn ≥ 2 threshold) |
+| B2 = top 2000 fill 完了 | batch 706-725 = 20 batches |
+| 各 batch 結果 | 全件 `applied=100, missing=0` |
+| commits | 21 (= 20 batch + 1 PUA fix) |
+| 残 queue | 23,617 entries (= rank 2001-25617、 isbn ≥ 2 だが未 fill) |
+| 種3 v2 file size | 52,825 entries (= 50,825 placeholder + 2000 fill) |
+| JST 進捗報告 | 22:19 (500件), 22:48 (1000件), 23:16 (1500件), 23:43 (2000件) |
+
+**batch 706-725 で fill した主要シリーズ** (= sample):
+- 鬼平犯科帳 (329 ISBN)、 美味しんぼ (244)、 キン肉マン、 ONE PIECE、 ジョジョ、 BLEACH、 DEATH NOTE
+- バクマン、 進撃の巨人、 NARUTO、 はじめの一歩、 ドラゴンボール、 名探偵コナン
+- なろう系 (= 転スラ / オーバーロード / リゼロ / 八男 / ナイツマ 等)
+- 競馬 / ボクシング / ヤンキー / グルメ等の中堅作品
+
+## 蒸留 protocol の更新 (= 2026-05-18 現在の正)
+
+### 月次蒸留 protocol (= CLAUDE.md 登録済、 触らない)
+
+CLAUDE.md に既に登録済の月次蒸留 protocol は **大原則不変**:
+- ユーザ 「月次蒸留して」 (= 完全一致) で起動
+- 種1 / 種2 / 種3 は壊さない (= 純粋追加 only)
+- Phase 0 前提確認 → Phase 1 差分 report + Go サイン待ち → Phase 2 実行
+
+### 蒸留が現在指す「種2 / 種3」 の対応関係
+
+CLAUDE.md の protocol 文面は **v1 系の path 名で書かれている** (= `.cache/db.sqlite` / `data/seeds/series-supplement.yml`)。 実体は path B' 移行後 **v2 系を指すべき** (= `.cache/db-v2.sqlite` / `data/seeds/series-supplement-v2.yml`)。
+
+**次セッションで CLAUDE.md の以下を v2 path に書き換える宿題**:
+
+| CLAUDE.md 内 旧 path | 真の現役 path |
+|---|---|
+| `.cache/db.sqlite` | `.cache/db-v2.sqlite` |
+| `data/seeds/series-supplement.yml` | `data/seeds/series-supplement-v2.yml` |
+| `scripts/_diff-series.ts` | path B' では `scripts/_build-series-v2.py` の incremental 化として再設計が必要 |
+| `scripts/_select-supplement-diff.ts` | v2 で同等の placeholder 抽出 (= synopsis 不在 entry list 化) |
+
+ただしユーザの「壊すな」 protocol が最優先なので、 v2 path に書き換える前に **必ずユーザ確認** を取ること。
+
+### 蒸留 Phase 2 (実行) の AI fill loop は本セッション B2 で確立した protocol を踏襲
+
+= 「種3 fill 作り方 (= 再利用 guide / 月次蒸留 & 新規シリーズ追加時)」 セクション (= MEMORY.md 末尾) に書いてある手順を **そのまま流用**。 v2 用に default path だけ書き換え:
+
+```bash
+# v2 系での適用 (= 2026-05-18 以降)
+npx tsx scripts/_apply-fills.ts data/seeds/_fills/batch-NNN.json
+# → 既定で series-supplement-v2.yml に適用 (= lib/seed3.ts の DEFAULT_PATH)
+# 期待: applied=N, missing=0, total entries=52825 (= 種3 v2 現在 size)
+```
+
+batch JSON 形式 (dict) は v1 と同一、 ただし key は v2 では qid 形式と name: 形式が混在 (= 旧種3 は qid 形式のみだった)。
+
+## 未解決の課題 (= 次セッション で 続行) — 重要度順
+
+### 🔴 重要 (= 早めに着手)
+
+1. **種3 v2 queue 残 23,617 entries の fill** (= ISBN 巻数 1 = 中堅 / マイナー作品)
+   - 現状 top 2000 (= rank 1-2000) は B2 で fill 済 → 99.7% カバレッジを目指すなら残全部
+   - 作業量: 25,617 - 2,000 = 23,617 entries → 100/batch なら 236 batches
+   - cost 概算: Opus 4.7 直筆 fill は 2 時間 / 2000 件 ペースなので 236 batches なら ~24 時間 (= 複数セッション要)
+   - 着手判断はユーザに確認 (= 「優先度低でいい」 / 「順次進めて」 / 「promote-bulk 動作確認が先」 等)
+
+2. **promote-bulk-v2 で実 yaml 出力 + frontend 視覚確認**
+   - 現在 種2 v2 + 種3 v2 が揃ったが、 promote-bulk-v2 が実 yaml 出力したか? 出力済 47 yml は **古い**(B2 fill 前) ので **再生成必要**
+   - `scripts/_promote-bulk-v2.py` を v2 種3 でもう一度 run → `data/manga/<slug>/index.yml` 再生成
+   - その後 frontend を deploy + 視覚確認 (= 鬼平犯科帳 / 美味しんぼ / ONE PIECE / ジョジョ の表示確認、 magazine/synopsis 等の v2 種3 fill が反映されてるか)
+
+3. **typecheck / vitest 確認**
+   - B2 commit 群で `lib/seed3.ts` を `z.union([z.literal(1), z.literal(2)])` に変更している
+   - 次セッション最初に `npm run typecheck && npm test` で safety check (= 想定外の breakage が無いか)
+
+### 🟡 中程度
+
+4. **CLAUDE.md の v1 → v2 path 書き換え** (= 上記蒸留 protocol セクション参照)
+   - ユーザに「v2 path に書き換えていい?」 確認後実施
+   - 月次蒸留 protocol の Phase 0 で参照する path を v2 に揃える
+
+5. **`scripts/_diff-series.ts` / `_select-supplement-diff.ts` / `_diff-madb.ts` が未実装**
+   - 月次蒸留 protocol Phase 0 でこれらの存在 check があるので、 実装するまでは「月次蒸留して」 を投げると abort される (= 安全側、 想定通り)
+   - 実装の優先度は低 (= 月次蒸留する前まで)
+
+6. **anomaly I1-I6 残**
+   - I1 巻号飛び、 I2 edition多、 I4 期間矛盾 (= 0 件)、 I6 label残 (= 43 件)
+   - `scripts/_scan-anomaly.py` を v2 種3 反映後に再 run して状況把握
+
+### 🟢 低
+
+7. **mezon-ikkoku / doragon-booru の year_ended 過剰** (= 旧 MEMORY.md 課題 #1)
+   - v2 種3 の `status: completed` で救えるなら解決可
+   - per-vol 初版 MAX cutoff は実装済 (= 2026-05-17)
+
+8. **creator merge logic 未実装** (= 旧 MEMORY.md 課題 #3)
+   - 「鬼平犯科帳」 が 4 cluster (= 池波正太郎 / さいとう・たかを 等) になる
+   - B2 で同一 base title の複数 cluster を別々に fill しているので、 merge logic 実装は後回し可
+
+9. **`/ultrareview` を B2 完了 push に対して走らせる**
+   - もしユーザが望むなら、 21 commits の品質を確認
+
+### ⚪ 設計
+
+10. **旧 種3 (= series-supplement.yml、 70,202 entries) の扱い**
+    - v1 系で 100% fill 済、 v2 系と完全 disjoint
+    - 月次蒸留で v1 系を引退する判断は未定 (= ユーザ確認要)
+    - 現状 frontend は 種3 v1 を参照しているはず (= 確認要)
+
+## ⚠️ 次セッション 開始時の必読 / 必実行
+
+1. **このセクション (= MEMORY.md 冒頭の 2026-05-18 section) を熟読**
+2. CLAUDE.md 全文読了 (= 自動)
+3. `git pull origin claude/manga-database-affiliate-3x0ms` で最新取得 (= B2 commit 群)
+4. `git log --oneline -25` で B2 commit (= batch 706-725) を確認
+5. `wc -l data/seeds/series-supplement-v2.yml` で 種3 v2 size が 52,825 entries であることを確認
+6. `npm run typecheck && npm test` で safety check (= B2 で lib/seed3.ts 変更してるので)
+7. ユーザに優先順位を聞く:
+   - 「B2 残 23,617 entries の続き fill 進める?」
+   - 「promote-bulk-v2 再 run + 視覚確認 進める?」
+   - 「別作業 (= CLAUDE.md v2 化 / 月次蒸留 script 実装 / 旧 yaml クリーンアップ) 進める?」
+
+## 関連 commit (= 本セッション = B2 完了)
+
+```
+d89438d  data(seed3): batch 725 fix PUA char + reformat
+d153246  data(seed3): batch 725 (= entries 1901-2000) Opus 4.7 直筆 fill - B2 完了 2000/2000
+a9649a3  data(seed3): batch 724 (= entries 1801-1900) Opus 4.7 直筆 fill
+493451a  data(seed3): batch 723 (= entries 1701-1800) Opus 4.7 直筆 fill
+79db437  data(seed3): batch 722 (= entries 1601-1700) Opus 4.7 直筆 fill
+d8a5110  data(seed3): batch 721 (= entries 1501-1600) Opus 4.7 直筆 fill
+ce2dff0  data(seed3): batch 720 (= entries 1401-1500) Opus 4.7 直筆 fill
+0a68ddd  data(seed3): batch 719 (= entries 1301-1400) Opus 4.7 直筆 fill
+adaad92  data(seed3): batch 718 (= entries 1201-1300) Opus 4.7 直筆 fill
+91e0255  data(seed3): batch 717 (= entries 1101-1200) Opus 4.7 直筆 fill
+6c64d56  data(seed3): batch 716 (= entries 1001-1100) Opus 4.7 直筆 fill
+b2aca6b  data(seed3): batch 715 (= entries 901-1000) Opus 4.7 直筆 fill   [JST 22:48 = 1000件]
+66bb1c4  data(seed3): batch 714 (= entries 801-900) Opus 4.7 直筆 fill
+e19f054  data(seed3): batch 713 (= entries 701-800) Opus 4.7 直筆 fill
+b8e6c68  data(seed3): batch 712 (= entries 601-700) Opus 4.7 直筆 fill
+5b5f800  data(seed3): batch 711 (= entries 501-600) Opus 4.7 直筆 fill
+4d453c7  data(seed3): batch 710 (= entries 401-500) Opus 4.7 直筆 fill   [JST 22:19 = 500件]
+cb2b96b  data(seed3): batch 709 (= entries 301-400) Opus 4.7 直筆 fill
+c4cd973  data(seed3): batch 708 (= entries 201-300) Opus 4.7 直筆 fill
+ada10ca  data(seed3): batch 707 (= entries 101-200) Opus 4.7 直筆 fill
+c0c788c  data(seed3): batch 706 (= entries 1-100) Opus 4.7 直筆 fill  (前セッション)
+```
+
+---
 
 ## プロジェクト概要
 
