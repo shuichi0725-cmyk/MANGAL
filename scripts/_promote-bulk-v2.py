@@ -284,26 +284,67 @@ def _strip_trailing_punct(title: str | None) -> str:
     return re.sub(r"[.,。．・、]+$", "", title.strip())
 
 
-def get_primary_publisher_prefix(con: sqlite3.Connection, series_id: int) -> str | None:
-    """series の volumes の ISBN-13 prefix (= 6 桁) 多数決 で publisher group 判定。
+def get_major_publisher_prefix(con: sqlite3.Connection, series_id: int) -> str | None:
+    """series の volumes ISBN prefix (= 6 桁) で 最大 vol 数 を 持つ 1 つ を 返す。
 
-    '978408' = 集英社 系、 '978419' = 徳間、 '978406' = 講談社、 等。
-    別 publisher 系 cluster (= 道原版 徳間 vs 藤崎竜版 集英社) は merge しない 用途。
+    edition filter 適用 後 の volumes のみ 対象。
+    """
+    from collections import Counter
+    cur = con.cursor()
+    rows = cur.execute(
+        "SELECT v.isbn13, e.type, e.imprint "
+        "FROM volumes v JOIN editions e ON e.id=v.edition_id "
+        "WHERE e.series_id=? AND v.isbn13 IS NOT NULL", (series_id,)
+    ).fetchall()
+    counter: Counter = Counter()
+    for r in rows:
+        if r[1] not in KEEP_EDITION_TYPES:
+            continue
+        imp = r[2] or ""
+        if any(pat in imp for pat in DROP_IMPRINT_PATTERNS):
+            continue
+        imp_l = imp.lower()
+        if any(pat in imp_l for pat in DROP_IMPRINT_LOWER_PATTERNS):
+            continue
+        p = (r[0] or "").replace("-", "")
+        if len(p) >= 6:
+            counter[p[:6]] += 1
+    if not counter:
+        return None
+    return counter.most_common(1)[0][0]
+
+
+def get_publisher_prefixes(con: sqlite3.Connection, series_id: int) -> set:
+    """series の volumes ISBN-13 prefix (= 6 桁) を 集合 で 返す。
+
+    edition filter (= KEEP_EDITION_TYPES + DROP_IMPRINT_PATTERNS) 適用 後の volumes のみ
+    対象 (= 銀英伝 id=117723 内 「アニメージュコミックススペシャル フィルムコミック」
+    徳間 vols を 除外 する 為)。
+
+    別 publisher 系 cluster (= 銀英伝 道原 徳間 vs 藤崎竜 集英社) は overlap 0 で
+    merge しない。 但し ドラえもん id=78712 (= てんとう虫小学館 + 中公 mix) のように
+    主 publisher が 異なる が 一部 overlap ある cluster は merge OK。
     """
     cur = con.cursor()
-    from collections import Counter
-    prefixes: Counter = Counter()
+    prefixes: set = set()
     rows = cur.execute(
-        "SELECT v.isbn13 FROM volumes v JOIN editions e ON e.id=v.edition_id "
+        "SELECT v.isbn13, e.type, e.imprint "
+        "FROM volumes v JOIN editions e ON e.id=v.edition_id "
         "WHERE e.series_id=? AND v.isbn13 IS NOT NULL", (series_id,)
     ).fetchall()
     for r in rows:
-        i = (r[0] or "").replace("-", "")
-        if len(i) >= 6:
-            prefixes[i[:6]] += 1
-    if not prefixes:
-        return None
-    return prefixes.most_common(1)[0][0]
+        if r[1] not in KEEP_EDITION_TYPES:
+            continue
+        imp = r[2] or ""
+        if any(pat in imp for pat in DROP_IMPRINT_PATTERNS):
+            continue
+        imp_l = imp.lower()
+        if any(pat in imp_l for pat in DROP_IMPRINT_LOWER_PATTERNS):
+            continue
+        p = (r[0] or "").replace("-", "")
+        if len(p) >= 6:
+            prefixes.add(p[:6])
+    return prefixes
 
 
 def find_related_series_ids(con: sqlite3.Connection, main: dict) -> list[int]:
@@ -326,16 +367,23 @@ def find_related_series_ids(con: sqlite3.Connection, main: dict) -> list[int]:
     main_title_strip = _strip_trailing_punct(main["title"])
     main_kana = main.get("title_kana") or ""
     main_punct = _title_punct_suffix(main["title"])
-    main_pub = get_primary_publisher_prefix(con, main["id"])
+    main_pubs = get_publisher_prefixes(con, main["id"])
 
     def pub_compatible(cand_id: int) -> bool:
-        """publisher 一致 or どちらか 不明 なら OK。"""
-        if not main_pub:
+        """候補の major publisher (= 最多 vol publisher prefix) が main の publishers
+        set に 含まれる か 候補 不明なら merge OK。
+
+        - 銀英伝 117723 (= 主 集英社 ヤング ジャンプ 33 vols、 副 徳間 アニメ 6 vols)
+          → major=集英社 978408、 道原 main pubs={978419} → skip
+        - ドラえもん 78712 (= 主 小学館 てんとう虫 36、 副 中公 35)
+          → major=小学館 978409、 main pubs={978409} → merge OK
+        """
+        if not main_pubs:
             return True
-        cp = get_primary_publisher_prefix(con, cand_id)
-        if not cp:
+        cand_major = get_major_publisher_prefix(con, cand_id)
+        if not cand_major:
             return True
-        return cp == main_pub
+        return cand_major in main_pubs
 
     # 同 qid で title case-insensitive 一致
     if main.get("qid"):
@@ -534,8 +582,15 @@ def get_editions_with_volumes(con: sqlite3.Connection, series_ids: list[int] | i
                 if new_d < cur_d:
                     by_num[n] = v
         merged_vols = [by_num[n] for n in sorted(by_num.keys())]
-        # 代表 imprint / label = 最多 volumes を持つ edition から (= main 印象維持)
-        primary_ed = max(ed_group, key=lambda e: len(e["volumes"]))
+        # 代表 imprint / label 選定:
+        #   1. 最古 first vol release_date を 持つ edition (= 元祖 imprint 優先)
+        #   2. 同点なら 最多 vol 数
+        # 例: ドラえもん で 中公 35 vols (1984~) と てんとう虫 34 vols (1974~) → てんとう虫
+        def _ed_priority(e):
+            dates = [v["release_date"] for v in e["volumes"] if v["release_date"]]
+            first_date = min(dates) if dates else "9999-99"
+            return (first_date, -len(e["volumes"]))
+        primary_ed = sorted(ed_group, key=_ed_priority)[0]
         out.append(
             {
                 "type": type_key,
