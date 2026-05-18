@@ -1,5 +1,5 @@
 schema_version: 1
-generated_at: 2026-05-18T16:48:58.008Z
+generated_at: 2026-05-18T16:54:22.261Z
 generator: claude-opus-4-7-direct-fill
 series:
   - key: name:「R」Otomo|name:Akira
@@ -307,6 +307,17 @@ series:
     status: completed
     anime_adapted: false
   - key: name:Byeonduck|name:夜画帳
+    magazine: null
+    demographic: josei
+    genres:
+      - bl
+      - historical
+      - drama
+    synopsis: 韓国漫画家Byeonduckの代表作。朝鮮時代を舞台にした男たちの禁断の関係を描く、ダーク系BLウェブ漫画。
+    status: completed
+    anime_adapted: false
+    alternative_titles:
+      en: Painter of the Night
   - key: name:C.H.Line|name:Front mission dog life ＆ dog style
     magazine: null
     demographic: seinen
@@ -772,6 +783,17 @@ series:
     alternative_titles:
       en: "Neon Genesis Evangelion: Shinji Ikari Raising Project"
   - key: name:GAINAX|name:新世紀エヴァンゲリオン 鋼鉄のガールフレンド2nd
+    magazine: null
+    demographic: seinen
+    genres:
+      - mecha
+      - sci-fi
+      - drama
+    synopsis: 庵野秀明監督『新世紀エヴァンゲリオン』派生ゲーム『鋼鉄のガールフレンド』の2ndコミカライズ。シンジと新キャラ・霧島マナの恋愛と戦い。
+    status: completed
+    anime_adapted: true
+    alternative_titles:
+      en: "Neon Genesis Evangelion: Iron Maiden 2nd"
   - key: name:Garuku|name:ニトの怠惰な異世界症候群
     magazine: null
     demographic: shounen
@@ -819,6 +841,17 @@ series:
     alternative_titles:
       en: Yuki Onna to Kani wo Kuu
   - key: name:GJK|name:忘却の旋律
+    magazine: null
+    demographic: shounen
+    genres:
+      - sci-fi
+      - music
+      - drama
+    synopsis: サテライトアニメ『忘却の旋律』のコミカライズ。GJKによる、メロディを忘れた世界を旅する音楽幻想SF。
+    status: completed
+    anime_adapted: true
+    alternative_titles:
+      en: Boukyaku no Senritsu
   - key: name:Guy・Jeans|name:Reggie
     magazine: null
     demographic: seinen
@@ -1005,6 +1038,17 @@ series:
     status: ongoing
     anime_adapted: false
   - key: name:Izumi|name:後宮妃の管理人
+    magazine: null
+    demographic: shoujo
+    genres:
+      - isekai
+      - fantasy
+      - romance
+    synopsis: しきみ彰原作のラノベが原作。明や唐に似た王朝の後宮の女官・優蘭が、訳ありの妃たちと若き皇帝を支える中華風後宮ロマン。Izumiコミカライズ。
+    status: ongoing
+    anime_adapted: false
+    alternative_titles:
+      en: Manager of the Imperial Concubine Quarters
   - key: name:Izumi|name:茉莉花官吏伝|sub:後宮女官、気まぐれ皇帝に見初められ
     magazine: the-margaret
     demographic: shoujo
@@ -1030,6 +1074,15 @@ series:
     alternative_titles:
       en: Inherit the Stars
   - key: name:JAXA|name:宇宙(そら)めし!
+    magazine: null
+    demographic: kodomo
+    genres:
+      - educational
+      - gourmet
+      - essay
+    synopsis: JAXA協力。宇宙飛行士が食べる「宇宙食」の知られざる世界を、児童向けに描く宇宙学習グルメ漫画。
+    status: completed
+    anime_adapted: false
   - key: name:Jet|name:シャーロック・ホームズの冒険
     magazine: null
     demographic: shoujo
@@ -1165,6 +1218,15 @@ series:
     status: completed
     anime_adapted: false
   - key: name:keepout|name:地下室ダンジョン
+    magazine: null
+    demographic: shounen
+    genres:
+      - isekai
+      - fantasy
+      - comedy
+    synopsis: 自宅の地下室がダンジョンに変わってしまった青年の、keepoutの異世界融合コメディ。
+    status: ongoing
+    anime_adapted: false
   - key: name:keepout|name:異世界薬局
     magazine: young-ace-up
     demographic: shounen
@@ -1498,6 +1560,17 @@ series:
     alternative_titles:
       en: As Miss Beelzebub Likes
   - key: name:Meen X Baekdoo|name:復讐の毒鼓
+    magazine: null
+    demographic: seinen
+    genres:
+      - action
+      - thriller
+      - drama
+    synopsis: Meen X Baekdooコンビによる韓国ウェブトゥーン。「毒鼓」と呼ばれる復讐者の戦いを描くダーク韓国系アクション。
+    status: completed
+    anime_adapted: false
+    alternative_titles:
+      en: The Poisonous Drumming
   - key: name:Meen X Baekdoo|name:復讐の毒鼓REWIND
     magazine: null
     demographic: seinen
@@ -2604,6 +2677,15 @@ series:
     alternative_titles:
       en: Shiawase no Jikan
   - key: name:Studio TRON|name:彼女のカレラRS
+    magazine: null
+    demographic: seinen
+    genres:
+      - sports
+      - drama
+      - romance
+    synopsis: 彼女がポルシェ「カレラRS」を駆る、Studio TRONの自動車レース漫画。
+    status: completed
+    anime_adapted: false
   - key: name:Sugisaki|name:D・N・Angel
     magazine: asuka
     demographic: shoujo
@@ -3422,6 +3504,15 @@ series:
     alternative_titles:
       en: Cosme no Mahou
   - key: name:あいかわももこ|name:新コスメの魔法
+    magazine: null
+    demographic: shoujo
+    genres:
+      - essay
+      - comedy
+      - slice-of-life
+    synopsis: あいかわももこによる、新作コスメの魅力を語るコスメエッセイ漫画。
+    status: ongoing
+    anime_adapted: false
   - key: name:あいだいろ|name:地縛少年花子くん
     magazine: monthly-gfantasy
     demographic: shoujo
@@ -3786,6 +3877,15 @@ series:
     status: completed
     anime_adapted: false
   - key: name:あどべんちゃら|name:据次タカシの憂鬱
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - office
+      - essay
+    synopsis: サラリーマン・据次タカシの憂鬱な日常を、あどべんちゃらが描く脱力系会社員ドラマ。
+    status: completed
+    anime_adapted: false
   - key: name:アナステーシア・モレノ|name:まりんこゆみ
     magazine: null
     demographic: seinen
@@ -4014,6 +4114,15 @@ series:
     status: ongoing
     anime_adapted: false
   - key: name:あるぷ|name:年上エリート女騎士が僕の前でだけ可愛い
+    magazine: null
+    demographic: shounen
+    genres:
+      - romcom
+      - fantasy
+      - school
+    synopsis: クールな年上エリート女騎士が、僕の前でだけ可愛い表情を見せる、あるぷの異世界系ギャップ系ラブコメ。
+    status: ongoing
+    anime_adapted: false
   - key: name:アルファ・システム|name:式神の城
     magazine: monthly-shonen-gangan
     demographic: shounen
@@ -4037,6 +4146,15 @@ series:
     status: ongoing
     anime_adapted: false
   - key: name:あわいぽっぽ|name:幼馴染は一卵性の獣
+    magazine: null
+    demographic: josei
+    genres:
+      - bl
+      - romance
+      - school
+    synopsis: 一卵性双生児の幼馴染と「獣」のような関係になる主人公の、あわいぽっぽの双子系BLロマンス。
+    status: completed
+    anime_adapted: false
   - key: name:あわむら赤光|name:我が驍勇にふるえよ天地|sub:アレクシス帝国興隆記
     magazine: null
     demographic: shounen
@@ -4229,6 +4347,14 @@ series:
     alternative_titles:
       en: Boys Be... Next Season
   - key: name:イチヒ|name:廃バスに住む
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - slice-of-life
+    synopsis: 廃バスを住居とする男たちのサバイバル日常を、イチヒが描くダークライフ系漫画。
+    status: completed
+    anime_adapted: false
   - key: name:いつまちゃん|name:来世ではちゃんとします
     magazine: young-jump
     demographic: seinen
@@ -4521,6 +4647,17 @@ series:
     status: ongoing
     anime_adapted: false
   - key: name:うみぼうず|name:探偵はもう、死んでいる。
+    magazine: null
+    demographic: shounen
+    genres:
+      - mystery
+      - school
+      - supernatural
+    synopsis: 二語十のラノベが原作。すでに死んでいる名探偵シエスタとの記憶を引きずる助手・君塚君彦の青春ミステリー。うみぼうずコミカライズ、アニメ化。
+    status: ongoing
+    anime_adapted: true
+    alternative_titles:
+      en: The Detective Is Already Dead
   - key: name:うめ|name:ちゃぶだいケンタ
     magazine: null
     demographic: seinen
@@ -5345,6 +5482,17 @@ series:
     alternative_titles:
       en: A Sister's All You Need
   - key: name:かんの糖子|name:恋と選挙とチョコレート
+    magazine: null
+    demographic: shounen
+    genres:
+      - romcom
+      - school
+      - drama
+    synopsis: spritesの恋愛ゲーム『恋と選挙とチョコレート』のコミカライズ。生徒会選挙を背景にした学園恋愛物語。
+    status: completed
+    anime_adapted: true
+    alternative_titles:
+      en: Koi to Senkyo to Chocolate
   - key: name:きさいちさとし|name:ブラックチャンネル
     magazine: null
     demographic: seinen
@@ -5767,6 +5915,15 @@ series:
     status: completed
     anime_adapted: false
   - key: name:こうじま奈月|name:大江戸下町こもり堂
+    magazine: null
+    demographic: shoujo
+    genres:
+      - historical
+      - supernatural
+      - drama
+    synopsis: 江戸下町の不思議な書店「こもり堂」を舞台にした、こうじま奈月の和風幻想譚。
+    status: completed
+    anime_adapted: false
   - key: name:ココナス☆ルンバ|name:あつまれどうぶつの森～無人島Diary～
     magazine: ciao
     demographic: kodomo
@@ -5935,6 +6092,15 @@ series:
     alternative_titles:
       en: Devilman
   - key: name:コミックス|name:手天童子
+    magazine: null
+    demographic: shounen
+    genres:
+      - action
+      - supernatural
+      - yokai
+    synopsis: 永井豪『手天童子』のコミックス各種版。鬼の血を継ぐ少年の戦いを描く和風妖怪バトル。
+    status: completed
+    anime_adapted: false
   - key: name:コミックス|name:鉄腕アトム
     magazine: null
     demographic: shounen
@@ -6075,6 +6241,15 @@ series:
     status: completed
     anime_adapted: true
   - key: name:さいふうめい|name:少年無宿シンクロウ
+    magazine: null
+    demographic: shounen
+    genres:
+      - historical
+      - samurai
+      - drama
+    synopsis: さいふうめい原作。無宿者の少年シンクロウの幕末を生き抜く時代劇。
+    status: completed
+    anime_adapted: false
   - key: name:さおとめやぎ|name:あいだにはたち
     magazine: null
     demographic: shoujo
@@ -6095,6 +6270,14 @@ series:
     status: completed
     anime_adapted: false
   - key: name:さかきしん|name:大正の献立
+    magazine: null
+    demographic: seinen
+    genres:
+      - historical
+      - gourmet
+    synopsis: 大正時代の献立を再現する、さかきしんの和風大正グルメ漫画。
+    status: completed
+    anime_adapted: false
   - key: name:サカズキ九|name:送球ボーイズ
     magazine: weekly-young-jump
     demographic: seinen
@@ -6107,7 +6290,27 @@ series:
     anime_adapted: false
   - key: name:さかたのり子|name:私のステキなダンナ様
   - key: name:サカノ景子|name:封神しない演義
+    magazine: null
+    demographic: shoujo
+    genres:
+      - isekai
+      - fantasy
+      - comedy
+    synopsis: 『封神演義』の世界に転生したヒロインが、封神しない選択をする、サカノ景子の中国系異世界ファンタジー。
+    status: ongoing
+    anime_adapted: false
   - key: name:サカノ景子|name:暁花薬殿物語
+    magazine: null
+    demographic: shoujo
+    genres:
+      - isekai
+      - fantasy
+      - romance
+    synopsis: 佐槻奏多原作。中華風の宮廷を舞台に、後宮で薬を扱う女性医師の和風ファンタジー。サカノ景子コミカライズ。
+    status: ongoing
+    anime_adapted: false
+    alternative_titles:
+      en: Kyouka Kusudono Monogatari
   - key: name:サカノ景子|name:鬼の花嫁は喰べられたい
     magazine: null
     demographic: josei
@@ -6987,6 +7190,17 @@ series:
     status: completed
     anime_adapted: false
   - key: name:セガ|name:戦場のヴァルキュリア
+    magazine: null
+    demographic: seinen
+    genres:
+      - mecha
+      - military
+      - drama
+    synopsis: セガのRPG『戦場のヴァルキュリア』のコミカライズ。架空のヨーロッパ戦争を舞台にしたメカニカルな戦記。
+    status: completed
+    anime_adapted: true
+    alternative_titles:
+      en: "Valkyria Chronicles: Wish Your Smile"
   - key: name:セツコ・山田|name:一丁目のトラ吉
     magazine: null
     demographic: shounen
@@ -7565,6 +7779,17 @@ series:
     alternative_titles:
       en: My Teacher, Mr. T
   - key: name:でこぽん吾郎|name:実録保育士でこ先生
+    magazine: null
+    demographic: josei
+    genres:
+      - comedy
+      - essay
+      - slice-of-life
+    synopsis: 現役保育士「でこ先生」の保育園実録エッセイ漫画。Twitter発の人気保育コミック。
+    status: ongoing
+    anime_adapted: false
+    alternative_titles:
+      en: Deko Sensei
   - key: name:てつぶた|name:六姫は神護衛に恋をする|sub:最強の守護騎士、転生して魔法学園に行く
     magazine: manga-up
     demographic: shounen
@@ -7696,6 +7921,15 @@ series:
     alternative_titles:
       en: Classroom of the Elite
   - key: name:とやま十成|name:寝たふりしても、無駄だから|sub:姉の彼氏が私を夜這う
+    magazine: null
+    demographic: josei
+    genres:
+      - romance
+      - ecchi
+      - drama
+    synopsis: 姉の彼氏が夜這ってくる禁断の関係を、とやま十成が描く濃厚TLサスペンス。
+    status: completed
+    anime_adapted: false
   - key: name:トヤヨシエ|name:靴下にゃんこ
     magazine: null
     demographic: seinen
@@ -7900,6 +8134,17 @@ series:
     status: ongoing
     anime_adapted: false
   - key: name:なま|name:最弱テイマーはゴミ拾いの旅を始めました。|sub:@COMIC
+    magazine: null
+    demographic: shounen
+    genres:
+      - isekai
+      - fantasy
+      - slice-of-life
+    synopsis: 最弱テイマーがゴミ拾いの旅を始める、なまの脱力系異世界スローライフファンタジー。
+    status: ongoing
+    anime_adapted: true
+    alternative_titles:
+      en: The Weakest Tamer Began a Journey to Pick Up Trash
   - key: name:なま子|name:ドラマティック・アイロニー
     magazine: null
     demographic: shoujo
@@ -8095,6 +8340,15 @@ series:
     anime_adapted: false
   - key: name:ねこ田太子|name:追放された悪役令嬢ですが、モフモフ付き!?スローライフはじめました
   - key: name:ねじがなめた|name:女の子が抱いちゃダメですか?
+    magazine: null
+    demographic: shoujo
+    genres:
+      - bl
+      - romance
+      - school
+    synopsis: 女の子が女の子を抱きたい気持ちを描く、ねじがなめたの百合系少女ロマンス。
+    status: completed
+    anime_adapted: false
   - key: name:ノアール出版|name:Fate騎士
     magazine: null
     demographic: shounen
@@ -8124,6 +8378,14 @@ series:
     status: completed
     anime_adapted: false
   - key: name:ノアール出版|name:大海賊同盟 EXTRA EDITION
+    magazine: null
+    demographic: seinen
+    genres:
+      - adventure
+      - action
+    synopsis: ノアール出版の海賊バトル『大海賊同盟』のエクストラ編。海賊団の冒険番外編。
+    status: completed
+    anime_adapted: false
   - key: name:のちた紳|name:村人転生
     magazine: monthly-comic-flapper
     demographic: shounen
@@ -8188,6 +8450,17 @@ series:
     status: completed
     anime_adapted: false
   - key: name:のん|name:安達としまむら
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - school
+      - slice-of-life
+    synopsis: 入間人間のラノベ原作。安達と島村の女子高生2人の繊細な感情を描く、のんの百合系青春ストーリー。アニメ化。
+    status: ongoing
+    anime_adapted: true
+    alternative_titles:
+      en: Adachi and Shimamura
   - key: name:パーダ|name:十字道
     magazine: null
     demographic: seinen
@@ -8822,6 +9095,17 @@ series:
     status: ongoing
     anime_adapted: false
   - key: name:ふーみ|name:新米錬金術師の店舗経営
+    magazine: null
+    demographic: shoujo
+    genres:
+      - isekai
+      - fantasy
+      - slice-of-life
+    synopsis: 新米錬金術師サラサの店舗経営を、ふーみが描く異世界スローライフファンタジー。原作:いつきみずほ。アニメ化。
+    status: ongoing
+    anime_adapted: true
+    alternative_titles:
+      en: Management of a Novice Alchemist
   - key: name:ふーろ|name:追放されたS級鑑定士は最強のギルドを創る
   - key: name:ファルまろ|name:七聖剣と魔剣の姫
     magazine: null
@@ -9618,6 +9902,15 @@ series:
     alternative_titles:
       en: Ten yori Takaku
   - key: name:ホーム社|name:天空の門
+    magazine: null
+    demographic: seinen
+    genres:
+      - fantasy
+      - adventure
+      - action
+    synopsis: ホーム社系の天空の門を巡るファンタジー戦記。
+    status: completed
+    anime_adapted: false
   - key: name:ホーム社|name:孔雀王 退魔聖伝
     magazine: young-jump
     demographic: seinen
@@ -9643,7 +9936,26 @@ series:
     alternative_titles:
       en: Houshin Engi
   - key: name:ホーム社|name:小類人
+    magazine: null
+    demographic: seinen
+    genres:
+      - sci-fi
+      - thriller
+      - horror
+    synopsis: 「小類人(チャイルド)」と呼ばれる人類型生物を巡る、ホーム社系のSFサスペンス。
+    status: completed
+    anime_adapted: false
   - key: name:ホーム社|name:少年は荒野をめざす
+    magazine: null
+    demographic: shoujo
+    genres:
+      - drama
+      - school
+    synopsis: 吉田秋生の少女漫画『少年は荒野をめざす』。文学少女と少年の青春を描く青春ドラマ。
+    status: completed
+    anime_adapted: false
+    alternative_titles:
+      en: Shounen wa Kouya wo Mezasu
   - key: name:ホーム社|name:幕張
     magazine: weekly-shonen-jump
     demographic: shounen
@@ -10938,6 +11250,15 @@ series:
     status: completed
     anime_adapted: false
   - key: name:ヤミーゴ|name:妖精印の薬屋さん
+    magazine: null
+    demographic: shoujo
+    genres:
+      - isekai
+      - fantasy
+      - slice-of-life
+    synopsis: 妖精の印を持つ薬屋を営むヒロインの、ヤミーゴの異世界スローライフファンタジー。
+    status: ongoing
+    anime_adapted: false
   - key: name:やんBARU|name:美人女上司滝沢さん
     magazine: null
     demographic: seinen
@@ -11421,6 +11742,15 @@ series:
       en: Unbreakable Machine-Doll
   - key: name:るろお|name:転生したら剣でしたAnother Wish
   - key: name:れいた|name:地味で目立たない私は、今日で終わりにします。
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - school
+      - drama
+    synopsis: 地味な自分を終わりにすると決意したヒロインの、れいたのイメチェン系学園ラブストーリー。
+    status: ongoing
+    anime_adapted: false
   - key: name:れい亜|name:世界最高の暗殺者、異世界貴族に転生する
     magazine: null
     demographic: shounen
@@ -11954,6 +12284,15 @@ series:
     status: ongoing
     anime_adapted: false
   - key: name:三弥カズトモ|name:女だから、とパーティを追放されたので伝説の魔女と最強タッグを組みました
+    magazine: null
+    demographic: shounen
+    genres:
+      - isekai
+      - fantasy
+      - action
+    synopsis: 性別を理由に追放された女剣士が伝説の魔女と組んで最強となる、三弥カズトモの追放系異世界ファンタジー。
+    status: ongoing
+    anime_adapted: false
   - key: name:三弥カズトモ|name:異世界で上前はねて生きていく|sub:再生魔法使いのゆるふわ人材派遣生活
     magazine: monthly-comic-cune
     demographic: shounen
@@ -12070,6 +12409,16 @@ series:
     anime_adapted: false
   - key: name:三浦しをん|name:風が強く吹いている
   - key: name:三浦ひらく|name:愛×野獣
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romcom
+      - school
+    synopsis: 愛と野獣のような関係を描く、三浦ひらくの少女系ラブコメ。
+    status: completed
+    anime_adapted: false
+    alternative_titles:
+      en: Love and Wanko
   - key: name:三浦ひらく|name:王子様に溺愛されて困ってます|sub:転生ヒロイン、乙女ゲーム奮闘記
   - key: name:三浦勇雄|name:聖剣の刀鍛冶
   - key: name:三浦実子|name:FREE
@@ -12615,6 +12964,15 @@ series:
     alternative_titles:
       en: Six on the Cross
   - key: name:中田アキラ|name:恋する鉄面皮
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - school
+      - comedy
+    synopsis: 鉄面皮(無表情)な少女が恋に揺れる、中田アキラの少女系青春ラブコメ。
+    status: completed
+    anime_adapted: false
   - key: name:中目黒さくら|name:キャッツ♥愛
     magazine: null
     demographic: josei
@@ -12718,6 +13076,15 @@ series:
     alternative_titles:
       en: Train Man
   - key: name:中間淳生|name:年の差婚
+    magazine: null
+    demographic: josei
+    genres:
+      - romance
+      - comedy
+      - drama
+    synopsis: 年の差カップルの結婚生活を、中間淳生がほのぼのと描くTLロマンス。
+    status: completed
+    anime_adapted: false
   - key: name:丸井まお|name:となりのフィギュア原型師
     magazine: null
     demographic: seinen
@@ -12836,6 +13203,17 @@ series:
     alternative_titles:
       en: Suikoden
   - key: name:久保田千太郎|name:墨攻
+    magazine: null
+    demographic: seinen
+    genres:
+      - historical
+      - action
+      - drama
+    synopsis: 酒見賢一の歴史小説『墨攻』が原作。中国戦国時代の墨家集団に属する革離が、寡兵で大軍を退ける守城戦記。森秀樹作画。
+    status: completed
+    anime_adapted: true
+    alternative_titles:
+      en: Bokkou
   - key: name:久保聡美|name:サリシオン
     magazine: null
     demographic: shoujo
@@ -13511,6 +13889,14 @@ series:
     status: completed
     anime_adapted: false
   - key: name:仲垣友恵|name:愛人・失格|sub:嘘をもう一つだけ
+    magazine: null
+    demographic: josei
+    genres:
+      - romance
+      - drama
+    synopsis: 愛人として失格と烙印を押された女性の、嘘で繋がる関係を仲垣友恵が描く大人ロマン。
+    status: completed
+    anime_adapted: false
   - key: name:仲曽良ハミ|name:しなのんちのいくる
     magazine: null
     demographic: shoujo
@@ -14190,6 +14576,14 @@ series:
     status: completed
     anime_adapted: false
   - key: name:依河和希|name:恋と選挙とチョコレートSLC
+    magazine: null
+    demographic: shounen
+    genres:
+      - romcom
+      - school
+    synopsis: 『恋と選挙とチョコレート』派生のSLC編。依河和希作画による学園選挙ラブコメ。
+    status: completed
+    anime_adapted: true
   - key: name:依田温|name:琥珀の夢で酔いましょう
     magazine: null
     demographic: seinen
@@ -14313,6 +14707,17 @@ series:
     alternative_titles:
       en: In Another World With My Smartphone
   - key: name:兎山もなか|name:才川夫妻の恋愛事情
+    magazine: null
+    demographic: josei
+    genres:
+      - romance
+      - comedy
+      - ecchi
+    synopsis: 兎山もなか原作。年下夫と年上妻の才川夫妻の濃厚な新婚生活を描く大人のTLラブコメ。
+    status: completed
+    anime_adapted: false
+    alternative_titles:
+      en: Saikawa Fuusai no Renai Jijou
   - key: name:八十八良|name:ウワガキ
     magazine: null
     demographic: seinen
@@ -14501,6 +14906,15 @@ series:
     alternative_titles:
       en: The Dark History of the Reincarnated Villainess
   - key: name:冬森雪湖|name:愛と欲望の螺旋
+    magazine: null
+    demographic: josei
+    genres:
+      - romance
+      - drama
+      - ecchi
+    synopsis: 愛と欲望が交錯する螺旋関係を、冬森雪湖が描く大人TLロマンス。
+    status: completed
+    anime_adapted: false
   - key: name:冬織透真|name:邪神の花嫁
     magazine: null
     demographic: shoujo
@@ -14605,6 +15019,15 @@ series:
     anime_adapted: false
   - key: name:凪かすみ|name:転生先で捨てられたので、もふもふ達とお料理しますR|sub:お飾り王妃はマイペースに最強です
   - key: name:凪庵|name:待機列ガール
+    magazine: null
+    demographic: shoujo
+    genres:
+      - comedy
+      - school
+      - essay
+    synopsis: オタク女子の待機列ライフを描く、凪庵のオタクカルチャー系コメディ。
+    status: completed
+    anime_adapted: false
   - key: name:出水高軌|name:若者の黒魔法離れが深刻ですが、就職してみたら待遇いいし、社長も使い魔もかわいくて最高です!
     magazine: monthly-comic-flapper
     demographic: shounen
@@ -14934,6 +15357,14 @@ series:
     alternative_titles:
       en: I'm Not an Angel
   - key: name:創美社|name:天国の花
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - drama
+    synopsis: 創美社の少女漫画。天国の花のような儚い少女の青春系ロマンス。
+    status: completed
+    anime_adapted: false
   - key: name:創美社|name:姫ちゃんのリボン
     magazine: ribon
     demographic: shoujo
@@ -15131,6 +15562,15 @@ series:
     status: completed
     anime_adapted: false
   - key: name:加門七海|name:晴明。
+    magazine: null
+    demographic: shoujo
+    genres:
+      - historical
+      - supernatural
+      - drama
+    synopsis: 加門七海原作。平安京の陰陽師・安倍晴明を巡る、和風幻想伝奇ドラマ。
+    status: completed
+    anime_adapted: false
   - key: name:勝見直人|name:トレジャーガウスト史上最強のハンターコンビ!!
     magazine: null
     demographic: kodomo
@@ -15260,6 +15700,15 @@ series:
     status: completed
     anime_adapted: false
   - key: name:北条新九郎|name:常敗将軍、また敗れる
+    magazine: null
+    demographic: seinen
+    genres:
+      - historical
+      - comedy
+      - samurai
+    synopsis: 戦に必ず負ける「常敗将軍」の悲哀をコミカルに描く、北条新九郎の戦国コメディ。
+    status: completed
+    anime_adapted: false
   - key: name:北欧ゆう|name:高橋さんが聞いている。
     magazine: null
     demographic: seinen
@@ -15722,6 +16171,15 @@ series:
     alternative_titles:
       en: Naniwa Sendou
   - key: name:及川七生|name:月夜烏草紙
+    magazine: null
+    demographic: shoujo
+    genres:
+      - historical
+      - supernatural
+      - drama
+    synopsis: 月夜に現れる烏の妖怪を巡る、及川七生の和風幻想系少女漫画。
+    status: completed
+    anime_adapted: false
   - key: name:友橋かめつ|name:Sランク冒険者である俺の娘たちは重度のファザコンでした
     magazine: young-ace-up
     demographic: shounen
@@ -15983,6 +16441,17 @@ series:
     alternative_titles:
       en: Vagabond
   - key: name:吉川英治|name:宮本武蔵
+    magazine: null
+    demographic: seinen
+    genres:
+      - historical
+      - samurai
+      - drama
+    synopsis: 吉川英治の歴史小説『宮本武蔵』のコミカライズ。剣聖・宮本武蔵の修行と求道の生涯を描く時代劇画の金字塔。
+    status: completed
+    anime_adapted: true
+    alternative_titles:
+      en: Miyamoto Musashi
   - key: name:吉川英治|name:戦群
     magazine: null
     demographic: seinen
@@ -16381,6 +16850,16 @@ series:
     alternative_titles:
       en: The Holy Maiden and the Black Pastor
   - key: name:和泉誠|name:大のアタック
+    magazine: null
+    demographic: shounen
+    genres:
+      - sports
+      - school
+    synopsis: 和泉誠による、バレーボール「大のアタック」を題材にしたスポーツ漫画。
+    status: completed
+    anime_adapted: false
+    alternative_titles:
+      en: Legend of Vtwein
   - key: name:和田竜|name:村上海賊の娘
     magazine: big-comic-spirits
     demographic: seinen
@@ -16462,6 +16941,15 @@ series:
     alternative_titles:
       en: Undefeated Bahamut Chronicle
   - key: name:喜名朝飛|name:幕末風来伝斬郎汰
+    magazine: null
+    demographic: shounen
+    genres:
+      - historical
+      - samurai
+      - action
+    synopsis: 幕末の風来坊・斬郎汰の活躍を、喜名朝飛が描く時代剣劇画。
+    status: completed
+    anime_adapted: false
   - key: name:喬林知|name:今日から〔○マ〕のつく自由業!
     magazine: monthly-asuka
     demographic: shoujo
@@ -16830,6 +17318,14 @@ series:
     status: completed
     anime_adapted: false
   - key: name:坂田信弘|name:奈緒子 新たなる疾風
+    magazine: null
+    demographic: shounen
+    genres:
+      - sports
+      - drama
+    synopsis: 坂田信弘『奈緒子』派生『新たなる疾風』。マラソンランナー奈緒子の続編スポーツ漫画。
+    status: completed
+    anime_adapted: false
   - key: name:坂田信弘|name:風の大地
     magazine: big-comic-original
     demographic: seinen
@@ -17157,6 +17653,17 @@ series:
     status: completed
     anime_adapted: false
   - key: name:夏目漱石|name:坊っちゃん
+    magazine: null
+    demographic: seinen
+    genres:
+      - historical
+      - comedy
+      - drama
+    synopsis: 夏目漱石の不朽の名作小説『坊っちゃん』のコミカライズ。江戸っ子気質の青年教師が四国松山中学に赴任する明治文学の古典。
+    status: completed
+    anime_adapted: true
+    alternative_titles:
+      en: Botchan
   - key: name:夏目靫子|name:おこしやす、ちとせちゃん
     magazine: null
     demographic: seinen
@@ -17432,6 +17939,15 @@ series:
     status: completed
     anime_adapted: false
   - key: name:大地翔|name:奥様ランチ
+    magazine: null
+    demographic: josei
+    genres:
+      - gourmet
+      - slice-of-life
+      - essay
+    synopsis: 奥様たちが集うランチ会を描く、大地翔のジョセイグルメ漫画。
+    status: completed
+    anime_adapted: false
   - key: name:大城さとし|name:おばぁタイムス
     magazine: null
     demographic: seinen
@@ -17719,6 +18235,15 @@ series:
     alternative_titles:
       en: "Mobile Suit Gundam: The Origin"
   - key: name:大沼良太|name:地獄の教頭
+    magazine: null
+    demographic: shounen
+    genres:
+      - comedy
+      - school
+      - drama
+    synopsis: 地獄のように厳しい教頭先生を描く、大沼良太の学園ハードボイルドコメディ。
+    status: completed
+    anime_adapted: false
   - key: name:大沼隆揮|name:INNU
   - key: name:大津秀一|name:はっぴーえんど
     magazine: null
@@ -18218,6 +18743,17 @@ series:
     anime_adapted: false
   - key: name:奥たまむし|name:どれが恋かがわからない
   - key: name:奥たまむし|name:明るい記憶喪失
+    magazine: null
+    demographic: shoujo
+    genres:
+      - bl
+      - comedy
+      - romance
+    synopsis: 奥たまむし原作。記憶喪失になった男たちの、明るく前向きな関係を描くBLコメディ。
+    status: completed
+    anime_adapted: false
+    alternative_titles:
+      en: Cheerful Amnesia
   - key: name:奥山ケニチ|name:ワンナイト・モーニング
     magazine: monthly-action
     demographic: seinen
@@ -18381,6 +18917,15 @@ series:
     status: completed
     anime_adapted: false
   - key: name:守月史貴|name:捻じ曲げファクター
+    magazine: null
+    demographic: shounen
+    genres:
+      - sci-fi
+      - action
+      - thriller
+    synopsis: 現実を「捻じ曲げる」ファクター(因子)を巡る、守月史貴の超能力SFアクション。
+    status: completed
+    anime_adapted: false
   - key: name:守月史貴|name:神さまの怨結び
     magazine: monthly-comic-rex
     demographic: shounen
@@ -18654,6 +19199,15 @@ series:
     alternative_titles:
       en: Tonbi
   - key: name:宮崎克|name:新選組黙示録
+    magazine: null
+    demographic: seinen
+    genres:
+      - historical
+      - samurai
+      - drama
+    synopsis: 宮崎克原作。新選組を黙示録として描く、終末感漂う幕末歴史漫画。
+    status: completed
+    anime_adapted: false
   - key: name:宮崎克|name:松田優作物語
     magazine: null
     demographic: seinen
@@ -18798,6 +19352,17 @@ series:
     alternative_titles:
       en: "Combat Mecha Xabungle: Another Gale"
   - key: name:富野由悠季|name:新機動戦記ガンダムW
+    magazine: null
+    demographic: shounen
+    genres:
+      - mecha
+      - sci-fi
+      - drama
+    synopsis: サンライズ『新機動戦記ガンダムW』のコミカライズ。AC195年を舞台に5機のガンダムパイロットとオペレーションメテオの戦い。
+    status: completed
+    anime_adapted: true
+    alternative_titles:
+      en: Mobile Suit Gundam Wing
   - key: name:富野由悠季|name:機動戦士ガンダム00
     magazine: monthly-gundam-ace
     demographic: seinen
@@ -19338,6 +19903,17 @@ series:
     alternative_titles:
       en: I'm the Villainess, So I'm Taming the Final Boss
   - key: name:屋久ユウキ|name:弱キャラ友崎くん-comic
+    magazine: null
+    demographic: shounen
+    genres:
+      - romance
+      - school
+      - drama
+    synopsis: 屋久ユウキのラノベ原作。人生を「クソゲー」と諦めていた地味な高校生・友崎くんが、ヒロインに「強キャラ化」を指導される青春ラブコメ。アニメ化。
+    status: ongoing
+    anime_adapted: true
+    alternative_titles:
+      en: Bottom-Tier Character Tomozaki-kun
   - key: name:屡那|name:異世界建国記
     magazine: monthly-comic-cune
     demographic: shounen
@@ -19842,6 +20418,15 @@ series:
     alternative_titles:
       en: O Maidens in Your Savage Season
   - key: name:岡谷|name:大公妃候補だけど、堅実に行こうと思います
+    magazine: null
+    demographic: shoujo
+    genres:
+      - isekai
+      - fantasy
+      - romance
+    synopsis: 大公妃候補として転生したヒロインが、堅実な道を選ぶ、岡谷の転生型異世界ロマンス。
+    status: ongoing
+    anime_adapted: false
   - key: name:岡谷|name:異世界に飛ばされたおっさんは何処へ行く?
     magazine: young-ace-up
     demographic: seinen
@@ -20396,6 +20981,15 @@ series:
     status: completed
     anime_adapted: false
   - key: name:布施龍太|name:商社マンの異世界サバイバル|sub:絶対人とはつるまねえ
+    magazine: null
+    demographic: shounen
+    genres:
+      - isekai
+      - fantasy
+      - drama
+    synopsis: 「絶対人とはつるまねえ」と決意した商社マンが異世界でソロサバイバルする、布施龍太の孤独系異世界ファンタジー。
+    status: ongoing
+    anime_adapted: false
   - key: name:布施龍太|name:強くてニューサーガ
     magazine: monthly-comic-alive
     demographic: shounen
@@ -20626,6 +21220,17 @@ series:
     alternative_titles:
       en: Nokemono to Hanayome
   - key: name:広瀬章人|name:将棋めし
+    magazine: null
+    demographic: seinen
+    genres:
+      - sports
+      - gourmet
+      - essay
+    synopsis: プロ棋士・広瀬章人原作。将棋対局中のおやつや食事「将棋めし」を題材にした、将棋×グルメ漫画。実写ドラマ化。
+    status: completed
+    anime_adapted: false
+    alternative_titles:
+      en: Shogi Meshi
   - key: name:広田奈都美|name:スーの家
     magazine: null
     demographic: shoujo
@@ -20979,6 +21584,15 @@ series:
     status: ongoing
     anime_adapted: false
   - key: name:志賀伯|name:四稲家の人々
+    magazine: null
+    demographic: shoujo
+    genres:
+      - comedy
+      - school
+      - slice-of-life
+    synopsis: 四稲家の風変わりな人々を描く、志賀伯のほのぼの少女系ファミリーコメディ。
+    status: completed
+    anime_adapted: false
   - key: name:志連ユキ枝|name:2LDKイケメン付き物件あります。|sub:入社の条件がドS専務と同居なんて!
     magazine: null
     demographic: josei
@@ -21560,6 +22174,14 @@ series:
     status: completed
     anime_adapted: false
   - key: name:日下直子|name:大正ガールズエクスプレス
+    magazine: null
+    demographic: shoujo
+    genres:
+      - historical
+      - romance
+    synopsis: 大正時代のモガたちの恋と冒険を、日下直子が描く少女系大正ロマン。
+    status: completed
+    anime_adapted: false
   - key: name:日向きょう|name:ブラザー・トラップ
     magazine: null
     demographic: shoujo
@@ -21882,6 +22504,15 @@ series:
     status: ongoing
     anime_adapted: false
   - key: name:星窓ぽんきち|name:悪役令嬢の取り巻きやめようと思います
+    magazine: null
+    demographic: shoujo
+    genres:
+      - isekai
+      - fantasy
+      - comedy
+    synopsis: 悪役令嬢の取り巻きキャラに転生したヒロインが、破滅を回避すべく取り巻きを辞める転生型異世界コメディ。
+    status: ongoing
+    anime_adapted: false
   - key: name:星見SK|name:鬼島さんと山田さん
   - key: name:星野広明|name:GREAT HORSE
     magazine: null
@@ -22349,6 +22980,14 @@ series:
     status: completed
     anime_adapted: false
   - key: name:朝倉誠一|name:新ナニワ金融道R
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - suspense
+    synopsis: 青木雄二『ナニワ金融道』の系譜を継ぐ朝倉誠一『新ナニワ金融道』のリターンズ編。街金業界の生々しい現代を描く金融ノワール。
+    status: completed
+    anime_adapted: false
   - key: name:朝野やぐら|name:灼熱の卓球娘
     magazine: weekly-shonen-jump
     demographic: shounen
@@ -24370,6 +25009,15 @@ series:
     status: completed
     anime_adapted: false
   - key: name:森井暁正|name:彼女とつーぴー
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - school
+      - comedy
+    synopsis: 彼女と「つーぴー(2P)」のように二人並びで歩むカップルを、森井暁正が描く少女系ラブコメ。
+    status: completed
+    anime_adapted: false
   - key: name:森伸一郎|name:あばれ花組
     magazine: null
     demographic: shounen
@@ -24776,6 +25424,15 @@ series:
     alternative_titles:
       en: Isekai Mahou wa Okureteru!
   - key: name:横尾公敏|name:妄想戦記ロボット残党兵
+    magazine: null
+    demographic: seinen
+    genres:
+      - mecha
+      - comedy
+      - essay
+    synopsis: 横尾公敏による、戦後ロボットの「残党兵」の妄想戦記を描くシュール系メカコメディ。
+    status: completed
+    anime_adapted: false
   - key: name:横山コウヂ|name:レッドナイト・イヴ
     magazine: null
     demographic: shounen
@@ -24786,6 +25443,15 @@ series:
     status: completed
     anime_adapted: false
   - key: name:横山秀夫|name:強行
+    magazine: null
+    demographic: seinen
+    genres:
+      - mystery
+      - suspense
+      - drama
+    synopsis: 横山秀夫の警察小説『強行』が原作。刑事課強行犯係を舞台にした硬派刑事ドラマミステリー。
+    status: completed
+    anime_adapted: false
   - key: name:横幕智裕|name:スモーキングガン
     magazine: grand-jump
     demographic: seinen
@@ -25035,6 +25701,17 @@ series:
     status: completed
     anime_adapted: false
   - key: name:櫻井圭記|name:攻殻機動隊STAND ALONE COMPLEXタチコマなヒビ
+    magazine: null
+    demographic: seinen
+    genres:
+      - sci-fi
+      - comedy
+      - mecha
+    synopsis: 士郎正宗『攻殻機動隊』アニメ版『STAND ALONE COMPLEX』派生『タチコマなヒビ』。タチコマたちの日常を描くSFほのぼのコメディ。
+    status: completed
+    anime_adapted: true
+    alternative_titles:
+      en: "Ghost in the Shell: Tachikoma na Hibi"
   - key: name:櫻井夏香|name:キミは宙のすべて
     magazine: null
     demographic: shoujo
@@ -25455,6 +26132,17 @@ series:
     alternative_titles:
       en: Susano-Oh
   - key: name:永井豪＆ダイナミックプロ|name:手天童子
+    magazine: null
+    demographic: shounen
+    genres:
+      - action
+      - supernatural
+      - yokai
+    synopsis: 永井豪&ダイナミックプロによる『手天童子』。鬼の血を継ぐ少年・玄が酒呑童子の伝説に立ち向かう和風伝奇アクション。
+    status: completed
+    anime_adapted: false
+    alternative_titles:
+      en: Shuten Doji
   - key: name:永尾まる|name:猫絵十兵衛
     magazine: nemuki-plus
     demographic: seinen
@@ -25508,6 +26196,14 @@ series:
     alternative_titles:
       en: Kimongai Karma
   - key: name:永田諒|name:園田の歌
+    magazine: null
+    demographic: seinen
+    genres:
+      - drama
+      - music
+    synopsis: 永田諒原作。歌手「園田」の人生を描く青年系音楽ドラマ。
+    status: completed
+    anime_adapted: false
   - key: name:汐邑雛|name:異世界で、王太子妃はじめました。
     magazine: null
     demographic: shoujo
@@ -26311,6 +27007,15 @@ series:
     status: completed
     anime_adapted: false
   - key: name:清涼院流水|name:探偵儀式
+    magazine: null
+    demographic: seinen
+    genres:
+      - mystery
+      - supernatural
+      - thriller
+    synopsis: 清涼院流水原作。探偵が「儀式」として事件を解決する、独特の世界観のメタミステリー。
+    status: completed
+    anime_adapted: false
   - key: name:渋染かずき|name:こちら新宿FIPPERS
     magazine: null
     demographic: seinen
@@ -26655,6 +27360,15 @@ series:
     status: completed
     anime_adapted: false
   - key: name:瀬尾みいのすけ|name:推しが公認ストーカーになりました
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romcom
+      - school
+      - comedy
+    synopsis: 推しのアイドルが公認ストーカーになってしまった女子高生の、瀬尾みいのすけのドキドキラブコメ。
+    status: ongoing
+    anime_adapted: false
   - key: name:瀬戸カズヨシ|name:MINECRAFT～世界の果てへの旅～
     magazine: null
     demographic: kodomo
@@ -27415,6 +28129,15 @@ series:
     status: ongoing
     anime_adapted: false
   - key: name:田中利花|name:娘。物語
+    magazine: null
+    demographic: shoujo
+    genres:
+      - romance
+      - school
+      - music
+    synopsis: モーニング娘。をモチーフにした、田中利花のアイドル系少女漫画。
+    status: completed
+    anime_adapted: false
   - key: name:田中芳樹|name:アルスラーン戦記
     magazine: monthly-shonen-sirius
     demographic: shounen
@@ -27452,6 +28175,17 @@ series:
     alternative_titles:
       en: "Souryuden: Legend of the Dragon Kings"
   - key: name:田中芳樹|name:天竺熱風録
+    magazine: null
+    demographic: seinen
+    genres:
+      - historical
+      - action
+      - drama
+    synopsis: 田中芳樹の歴史小説『天竺熱風録』が原作。唐時代の中国とインドを舞台にした旅と戦の冒険歴史漫画。
+    status: completed
+    anime_adapted: false
+    alternative_titles:
+      en: Tenjiku Nepuuroku
   - key: name:田中芳樹|name:薬師寺涼子の怪奇事件簿
     magazine: young-magazine
     demographic: seinen
@@ -29527,6 +30261,15 @@ series:
     alternative_titles:
       en: The Saga of Tanya the Evil
   - key: name:米白粕|name:帰ってきた元勇者
+    magazine: null
+    demographic: shounen
+    genres:
+      - isekai
+      - fantasy
+      - comedy
+    synopsis: 魔王を倒して帰ってきた元勇者の、米白粕の異世界生還コメディ。
+    status: ongoing
+    anime_adapted: false
   - key: name:粂田晃宏|name:モンキーピーク
     magazine: monthly-manga-goraku
     demographic: seinen
@@ -29570,6 +30313,15 @@ series:
     status: completed
     anime_adapted: false
   - key: name:紅緒|name:数字で救う!弱小国家|sub:電卓で戦争する方法を求めよ。ただし敵は剣と火薬で武装しているものとする。
+    magazine: null
+    demographic: shounen
+    genres:
+      - isekai
+      - fantasy
+      - drama
+    synopsis: 電卓と数学で弱小国家を救う異世界転生者の、紅緒の数学系異世界戦記ファンタジー。
+    status: ongoing
+    anime_adapted: false
   - key: name:紫式部|name:源氏物語
     magazine: null
     demographic: seinen
@@ -29757,6 +30509,17 @@ series:
     status: ongoing
     anime_adapted: false
   - key: name:綾辻行人|name:月館の殺人
+    magazine: null
+    demographic: seinen
+    genres:
+      - mystery
+      - suspense
+      - thriller
+    synopsis: 綾辻行人原作・佐々木倫子作画。北海道に向かう寝台特急『幻夜』で起こる、月館を巡る連続殺人事件を描く本格鉄道ミステリー。
+    status: completed
+    anime_adapted: false
+    alternative_titles:
+      en: Murder in the Moon Mansion
   - key: name:緋月アキラ|name:欲望パンドラ
   - key: name:緋色の雨|name:悪役令嬢の執事様|sub:破滅フラグは俺が潰させていただきます
     magazine: null
@@ -29897,6 +30660,15 @@ series:
     alternative_titles:
       en: Giant Ojou-sama
   - key: name:脊髄引き抜きの刑|name:推しのアイドルが隣の部屋に引っ越してきた
+    magazine: null
+    demographic: shounen
+    genres:
+      - romcom
+      - school
+      - music
+    synopsis: 推しのアイドルが隣に引っ越してきた、というオタクの夢を描く、脊髄引き抜きの刑の青春系ラブコメ。
+    status: ongoing
+    anime_adapted: false
   - key: name:臼井儀人&UYスタジオ|name:新クレヨンしんちゃん
     magazine: null
     demographic: kodomo
@@ -30476,6 +31248,15 @@ series:
     alternative_titles:
       en: Aspel-Kanojo
   - key: name:葉月秋水|name:時使い魔術師の転生無双|sub:魔術学院の劣等生、実は最強の時間系魔術師でした
+    magazine: null
+    demographic: shounen
+    genres:
+      - isekai
+      - fantasy
+      - action
+    synopsis: 時間操作魔術を駆使する転生劣等生の、葉月秋水の異世界学院無双ファンタジー。
+    status: ongoing
+    anime_adapted: false
   - key: name:葉芝真己|name:Bingo!
   - key: name:葉芝真己|name:BINGO!
     magazine: null
@@ -30658,6 +31439,15 @@ series:
     status: ongoing
     anime_adapted: false
   - key: name:蓮禾|name:巻き込まれ召喚!?そして私は『神』でした??
+    magazine: null
+    demographic: shoujo
+    genres:
+      - isekai
+      - fantasy
+      - comedy
+    synopsis: 巻き込まれて異世界召喚されたヒロインが、実は神だったと判明する転生型異世界コメディ。
+    status: ongoing
+    anime_adapted: false
   - key: name:蓮見ナツメ|name:噂屋
     magazine: null
     demographic: shoujo
@@ -31099,6 +31889,17 @@ series:
     status: completed
     anime_adapted: false
   - key: name:藤川桂介|name:宇宙戦艦ヤマト
+    magazine: null
+    demographic: shounen
+    genres:
+      - sci-fi
+      - mecha
+      - drama
+    synopsis: 松本零士のメディアミックス『宇宙戦艦ヤマト』のコミカライズ。地球を救うためイスカンダルへ向かう古代進と森雪らの宇宙SF叙事詩。
+    status: completed
+    anime_adapted: true
+    alternative_titles:
+      en: Space Battleship Yamato
   - key: name:藤方まゆ|name:あぁ愛しの番長さま
     magazine: betsucomi
     demographic: shoujo
@@ -31550,6 +32351,14 @@ series:
     status: completed
     anime_adapted: false
   - key: name:西荻弓絵|name:天を射る
+    magazine: null
+    demographic: shounen
+    genres:
+      - sports
+      - drama
+    synopsis: 弓道で天を射ようとする青年を、西荻弓絵が描くスポーツ漫画。
+    status: completed
+    anime_adapted: false
   - key: name:西荻弓絵|name:相続探偵
     magazine: null
     demographic: seinen
@@ -31680,6 +32489,15 @@ series:
     status: completed
     anime_adapted: false
   - key: name:説話社|name:妖 (あやかし)|sub:還魂の事件簿
+    magazine: null
+    demographic: shoujo
+    genres:
+      - supernatural
+      - mystery
+      - yokai
+    synopsis: あやかしと還魂を巡る事件簿を、説話社が描く和風幻想ミステリー。
+    status: completed
+    anime_adapted: false
   - key: name:説話社|name:快傑!鈴鳴学園探偵部
     magazine: null
     demographic: shounen
@@ -31723,6 +32541,17 @@ series:
       en: Watamote
   - key: name:谷本和弘|name:華と修羅
   - key: name:谷瑞恵|name:思い出のとき修理します
+    magazine: null
+    demographic: shoujo
+    genres:
+      - mystery
+      - supernatural
+      - drama
+    synopsis: 谷瑞恵のライト文芸原作。古道具修理店「明里堂」を舞台に、思い出が宿る品物の謎を解き明かす和風ミステリーロマンス。
+    status: completed
+    anime_adapted: false
+    alternative_titles:
+      en: Omoide no Toki Shuuri Shimasu
   - key: name:谷菊秀|name:鬼神童子Zenki
     magazine: monthly-shonen-jump
     demographic: shounen
@@ -32931,6 +33760,15 @@ series:
     status: completed
     anime_adapted: false
   - key: name:長野雪|name:授か離婚|sub:一刻も早く身籠って、私から解放してさしあげます!
+    magazine: null
+    demographic: josei
+    genres:
+      - romance
+      - drama
+      - ecchi
+    synopsis: 授かったら離婚する契約結婚を巡る、長野雪の濃厚TLラブストーリー。
+    status: completed
+    anime_adapted: false
   - key: name:門司柿家|name:冒険者になりたいと都に出て行った娘がSランクになってた
     magazine: null
     demographic: shounen
@@ -33475,6 +34313,15 @@ series:
     alternative_titles:
       en: The Strongest Magical Swordsman Ever Reborn as an F-Rank Adventurer
   - key: name:青井ぬゐ|name:少年を飼う
+    magazine: null
+    demographic: josei
+    genres:
+      - bl
+      - drama
+      - supernatural
+    synopsis: 少年を「飼う」ように愛する大人男性の禁断の関係を、青井ぬゐが描くダークBL。
+    status: completed
+    anime_adapted: false
   - key: name:青井聖|name:杖と剣のウィストリア
     magazine: monthly-shonen-magazine
     demographic: shounen
@@ -33541,6 +34388,17 @@ series:
     alternative_titles:
       en: Magilumiere Magical Girls Inc.
   - key: name:青柳碧人|name:放課後ミンコフスキー
+    magazine: null
+    demographic: shounen
+    genres:
+      - mystery
+      - school
+      - sci-fi
+    synopsis: 青柳碧人原作。数学者ミンコフスキーをモチーフにした、放課後の数学ミステリー。
+    status: completed
+    anime_adapted: false
+    alternative_titles:
+      en: Afterschool Minkowski
   - key: name:青桐ナツ|name:あめつちだれかれそこかしこ
     magazine: monthly-shonen-gangan
     demographic: shounen
@@ -33886,6 +34744,15 @@ series:
     status: completed
     anime_adapted: false
   - key: name:高坂曇天|name:拝啓…殺し屋さんと結婚しました
+    magazine: null
+    demographic: josei
+    genres:
+      - romance
+      - drama
+      - yakuza
+    synopsis: 知らずに殺し屋と結婚してしまったヒロインの、高坂曇天の犯罪系TLラブコメ。
+    status: completed
+    anime_adapted: false
   - key: name:高城可奈|name:嵐のデスティニィ
     magazine: null
     demographic: josei
@@ -33914,6 +34781,15 @@ series:
     status: completed
     anime_adapted: false
   - key: name:高尾鷹浬|name:女体化ヤンキー学園★
+    magazine: null
+    demographic: shounen
+    genres:
+      - comedy
+      - school
+      - ecchi
+    synopsis: ヤンキーたちが女体化してしまう学園を舞台にした、高尾鷹浬のお色気ジェンダーコメディ。
+    status: completed
+    anime_adapted: false
   - key: name:高山こば|name:俺の上腕二頭筋、エッチな目で見てたでしょ?
     magazine: null
     demographic: josei
@@ -34164,6 +35040,17 @@ series:
     status: ongoing
     anime_adapted: false
   - key: name:高橋那津子|name:昴とスーさん
+    magazine: null
+    demographic: shoujo
+    genres:
+      - comedy
+      - school
+      - slice-of-life
+    synopsis: 高橋那津子による、昴とスーさんの不思議な日常を描く脱力系少女コメディ。
+    status: completed
+    anime_adapted: false
+    alternative_titles:
+      en: The Strange Life of Subaru
   - key: name:高殿円|name:銃姫
     magazine: monthly-comic-blade
     demographic: shoujo
@@ -34228,6 +35115,15 @@ series:
     status: completed
     anime_adapted: false
   - key: name:高田ミレイ|name:映画クレヨンしんちゃんゴールデン・カップリング
+    magazine: null
+    demographic: kodomo
+    genres:
+      - comedy
+      - gag
+      - slice-of-life
+    synopsis: 臼井儀人『クレヨンしんちゃん』映画版「ゴールデン・カップリング」のコミカライズ。野原家の劇場版エピソード。
+    status: completed
+    anime_adapted: true
   - key: name:高田ローズ|name:やさしいミルク
   - key: name:高田優|name:逃亡弁護士成田誠
   - key: name:高田祐子|name:Eクライシス
@@ -34295,6 +35191,15 @@ series:
     status: completed
     anime_adapted: false
   - key: name:高野洋|name:国境を駆ける医師イコマ
+    magazine: null
+    demographic: seinen
+    genres:
+      - medical
+      - drama
+      - action
+    synopsis: 高野洋原作。国境なき医師団のモデルとなった生駒医師の活躍を描く、国際医療ヒューマンドラマ。
+    status: completed
+    anime_adapted: false
   - key: name:髙橋美由紀|name:9番目のムサシ
     magazine: monthly-bonita
     demographic: shoujo
@@ -34500,6 +35405,15 @@ series:
     alternative_titles:
       en: Ohana Holoholo
   - key: name:鳥飼やすゆき|name:指輪の選んだ婚約者
+    magazine: null
+    demographic: shoujo
+    genres:
+      - isekai
+      - fantasy
+      - romance
+    synopsis: 魔法の指輪が選んだ運命の婚約者との関係を、鳥飼やすゆきが描く異世界ロマンス。
+    status: ongoing
+    anime_adapted: false
   - key: name:鳩屋タマ|name:えっちなお尻じゃダメですか?
     magazine: null
     demographic: seinen
@@ -34670,6 +35584,15 @@ series:
     status: completed
     anime_adapted: false
   - key: name:黄波戸井ショウリ|name:月50万もらっても生き甲斐のない隣のお姉さんに30万で雇われて「おかえり」って言うお仕事が楽しい
+    magazine: null
+    demographic: seinen
+    genres:
+      - romance
+      - comedy
+      - slice-of-life
+    synopsis: 生き甲斐のない隣のお姉さんに30万で「おかえり」と言うバイトをするコメディ。黄波戸井ショウリの脱力系現代ラブコメ。
+    status: ongoing
+    anime_adapted: false
   - key: name:黒おーじ|name:育成スキルはもういらないと勇者パーティを解雇されたので、退職金がわりにもらった【領地】を強くしてみる
     magazine: manga-up
     demographic: shounen
@@ -34695,7 +35618,27 @@ series:
     alternative_titles:
       en: The Misfit Adventurers
   - key: name:黒井ススム|name:影の宮廷魔術師
+    magazine: null
+    demographic: shounen
+    genres:
+      - isekai
+      - fantasy
+      - action
+    synopsis: 黒井ススム原作。影として宮廷に潜む魔術師の活躍を描く異世界ファンタジー。
+    status: ongoing
+    anime_adapted: false
   - key: name:黒井嵐輔|name:地上100階
+    magazine: null
+    demographic: seinen
+    genres:
+      - thriller
+      - suspense
+      - action
+    synopsis: 地上100階の超高層ビルを舞台にした、黒井嵐輔のサバイバルアクション。
+    status: completed
+    anime_adapted: false
+    alternative_titles:
+      en: One Hundred Storey Tower
   - key: name:黒星紅白|name:キノの旅
     magazine: monthly-shonen-ace
     demographic: seinen
@@ -34763,6 +35706,15 @@ series:
     alternative_titles:
       en: Lottery in Another World
   - key: name:黒獅子|name:宝くじで40億当たったんだけど異世界に移住する～マリーのイステリア商業開発記～
+    magazine: null
+    demographic: shounen
+    genres:
+      - isekai
+      - fantasy
+      - slice-of-life
+    synopsis: 宝くじで40億当てた女性が異世界移住して商業開発する、黒獅子の異世界転生スローライフファンタジー。
+    status: ongoing
+    anime_adapted: false
   - key: name:黒碕薫|name:るろうに剣心-明治剣客浪漫譚・北海道編-
     magazine: jump-square
     demographic: shounen
