@@ -354,6 +354,39 @@ DIGIT_KANA_EN_MULTI = {
 }
 
 
+def extract_title_suffix(title: str) -> str | None:
+    """title 末尾 の 「第N部」「II/III/IV/V」「2/3」 等 part 番号 を 抽出。
+
+    返り値: '2', '3' 等 数字 string (slug suffix 用)、 無ければ None。
+
+    e.g. 'カムイ伝全集 第2部' → '2'
+         'やじきた学園道中記Ⅱ' → '2'
+         'エリートヤンキー三郎 第2部' → '2'
+         'うる星やつら2' → '2'
+    """
+    if not title:
+        return None
+    s = title.strip()
+    # 「第N部」 (= 漢数字/算用数字)
+    m = re.search(r"第([0-9０-９一二三四五六七八九十]+)部$", s)
+    if m:
+        g = m.group(1)
+        # 算用 / 全角 → 半角
+        g = re.sub(r"[０-９]", lambda x: chr(ord(x.group(0)) - 0xFEE0), g)
+        if g.isdigit():
+            return g
+        # 漢数字 → int
+        kanji_map = {"一":1,"二":2,"三":3,"四":4,"五":5,"六":6,"七":7,"八":8,"九":9,"十":10}
+        if g in kanji_map:
+            return str(kanji_map[g])
+    # ローマ数字 末尾 (= Ⅰ-Ⅹ)
+    m = re.search(r"([ⅠⅡⅢⅣⅤⅥⅦⅧⅨⅩ])$", s)
+    if m:
+        roman = {"Ⅰ":1,"Ⅱ":2,"Ⅲ":3,"Ⅳ":4,"Ⅴ":5,"Ⅵ":6,"Ⅶ":7,"Ⅷ":8,"Ⅸ":9,"Ⅹ":10}
+        return str(roman[m.group(1)])
+    return None
+
+
 def slug_from_ascii_title(title: str | None) -> str:
     """title が 純 ASCII (= 'W3', 'AMAKUSA 1637', 'MAJOR') なら 直接 slug 化。
 
@@ -572,6 +605,22 @@ def title_passes_filter(title: str) -> bool:
     return True
 
 
+def _normalize_title_for_dedup(title: str) -> str:
+    """title を 正規化 (= 大小揃え + 中黒/句読点 strip + 全角/半角 揺れ 吸収)。
+
+    e.g. 'BLACK JACK', 'Black Jack', 'ブラック・ジャック' → 同じ key (kana 一致 必要)
+    e.g. 'おーい!竜馬', 'お～い！竜馬', 'お～い!竜馬' → 同じ
+    """
+    if not title:
+        return ""
+    s = title.lower()
+    # 中黒 / 全半角空白 / 全半角! / ★❤❣ / ASCII 句読点 strip
+    s = re.sub(r"[・\s　!！?？★☆♥❤❣◆◇♪～~・，,．.。]", "", s)
+    # 全角 ASCII → 半角 (= 簡略)
+    s = re.sub(r"[Ａ-Ｚａ-ｚ０-９]", lambda m: chr(ord(m.group(0)) - 0xFEE0), s)
+    return s
+
+
 def select_candidates(con: sqlite3.Connection, limit: int) -> list[dict]:
     """完結 推定 series を 抽出。 ranking 順 で limit 件 返す。"""
     cur = con.cursor()
@@ -607,10 +656,13 @@ def select_candidates(con: sqlite3.Connection, limit: int) -> list[dict]:
             continue
         if not r["title_kana"]:
             continue  # kana 必須
-        # 同一作品 (= main + orphan + kana 表記揺れ) は 1 件 のみ
-        # 簡易 dedup key: (title_kana_normalized, vol_count) で 似た series を merge
+        # 同一作品 (= 大小違い / 中黒違い / ASCII vs カタカナ) は 1 件 のみ
+        # dedup key: (title_kana_norm, part_suffix)
+        # - kana_norm: 表記揺れ (= 'BLACK JACK','ブラック・ジャック' 共 kana 同じ) 吸収
+        # - part_suffix: 続編 (= 「第N部」「II」) は 別 entry 保持
         kana_norm = re.sub(r"[\s　]", "", r["title_kana"] or "")
-        key = (kana_norm, r["title"])
+        part = extract_title_suffix(r["title"] or "") or "main"
+        key = (kana_norm, part)
         if key in seen_titles:
             continue
         seen_titles.add(key)
@@ -844,6 +896,11 @@ def main():
             base_slug = re.sub(r"[^a-z0-9]+", "-", (c["title"] or "").lower()).strip("-")
         if not base_slug:
             base_slug = f"series-{c['id']}"
+        # title 末尾 「第N部」「II」 等 part 番号 を slug suffix に 反映
+        # (= '第2部' → '-2' で 続編 を 区別、 '-2'/'-3' 自動 suffix より 意味あり)
+        part_suffix = extract_title_suffix(c["title"] or "")
+        if part_suffix and not base_slug.endswith(f"-{part_suffix}"):
+            base_slug = f"{base_slug}-{part_suffix}"
         slug_count[base_slug] += 1
         if slug_count[base_slug] == 1:
             c["__slug__"] = base_slug
