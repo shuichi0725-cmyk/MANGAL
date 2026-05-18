@@ -290,11 +290,74 @@ def _strip_trailing_punct(title: str | None) -> str:
     return re.sub(r"[.,。．・、]+$", "", title.strip())
 
 
-def get_major_publisher_prefix(con: sqlite3.Connection, series_id: int) -> str | None:
-    """series の volumes ISBN prefix (= 6 桁) で 最大 vol 数 を 持つ 1 つ を 返す。
+# publisher prefix + kana normalize cache (= 起動時 1 回 build、 lookup O(1))
+# extract で 2000 candidates × find_related_series_ids = 大量 SQL を 回避
+_PUB_CACHE: dict | None = None
+_MAJOR_CACHE: dict | None = None
+_KANA_INDEX: dict | None = None  # normalized_kana → list of (series_id, title, title_kana)
 
-    edition filter 適用 後 の volumes のみ 対象。
-    """
+
+def _build_kana_index(con: sqlite3.Connection) -> None:
+    """全 series で normalize_kana(title_kana) → [(id, title, title_kana)] map 構築。"""
+    global _KANA_INDEX
+    if _KANA_INDEX is not None:
+        return
+    from collections import defaultdict
+    _KANA_INDEX = defaultdict(list)
+    cur = con.cursor()
+    rows = cur.execute(
+        "SELECT id, title, title_kana FROM series WHERE title_kana IS NOT NULL"
+    ).fetchall()
+    for sid, title, kana in rows:
+        k_norm = _normalize_kana(kana)
+        if k_norm:
+            _KANA_INDEX[k_norm].append((sid, title, kana))
+
+
+def _build_publisher_cache(con: sqlite3.Connection) -> None:
+    """全 series の publisher prefixes を 1 回 SQL scan で 構築 (= cache)。"""
+    global _PUB_CACHE, _MAJOR_CACHE
+    if _PUB_CACHE is not None:
+        return
+    from collections import defaultdict, Counter
+    _PUB_CACHE = defaultdict(set)
+    counters: dict = defaultdict(Counter)
+    cur = con.cursor()
+    rows = cur.execute(
+        "SELECT e.series_id, v.isbn13, e.type, e.imprint "
+        "FROM volumes v JOIN editions e ON e.id=v.edition_id "
+        "WHERE v.isbn13 IS NOT NULL"
+    ).fetchall()
+    for sid, isbn, type_, imp in rows:
+        if type_ not in KEEP_EDITION_TYPES:
+            continue
+        imp = imp or ""
+        if any(pat in imp for pat in DROP_IMPRINT_PATTERNS):
+            continue
+        imp_l = imp.lower()
+        if any(pat in imp_l for pat in DROP_IMPRINT_LOWER_PATTERNS):
+            continue
+        if "=" not in imp and any(pat in imp_l for pat in DROP_IMPRINT_LOWER_PATTERNS_NO_EQ):
+            continue
+        p = (isbn or "").replace("-", "")
+        if len(p) >= 6:
+            prefix = p[:6]
+            _PUB_CACHE[sid].add(prefix)
+            counters[sid][prefix] += 1
+    _MAJOR_CACHE = {
+        sid: cnt.most_common(1)[0][0]
+        for sid, cnt in counters.items()
+    }
+
+
+def get_major_publisher_prefix(con: sqlite3.Connection, series_id: int) -> str | None:
+    """cache から series の 最大 vol 数 publisher prefix 取得。"""
+    _build_publisher_cache(con)
+    return _MAJOR_CACHE.get(series_id) if _MAJOR_CACHE else None
+
+
+def _get_major_publisher_prefix_legacy(con: sqlite3.Connection, series_id: int) -> str | None:
+    """旧 (= cache 不使用) 実装、 比較 / 確認 用。"""
     from collections import Counter
     cur = con.cursor()
     rows = cur.execute(
@@ -323,16 +386,13 @@ def get_major_publisher_prefix(con: sqlite3.Connection, series_id: int) -> str |
 
 
 def get_publisher_prefixes(con: sqlite3.Connection, series_id: int) -> set:
-    """series の volumes ISBN-13 prefix (= 6 桁) を 集合 で 返す。
+    """cache から series の publisher prefixes set 取得。"""
+    _build_publisher_cache(con)
+    return _PUB_CACHE.get(series_id, set()) if _PUB_CACHE else set()
 
-    edition filter (= KEEP_EDITION_TYPES + DROP_IMPRINT_PATTERNS) 適用 後の volumes のみ
-    対象 (= 銀英伝 id=117723 内 「アニメージュコミックススペシャル フィルムコミック」
-    徳間 vols を 除外 する 為)。
 
-    別 publisher 系 cluster (= 銀英伝 道原 徳間 vs 藤崎竜 集英社) は overlap 0 で
-    merge しない。 但し ドラえもん id=78712 (= てんとう虫小学館 + 中公 mix) のように
-    主 publisher が 異なる が 一部 overlap ある cluster は merge OK。
-    """
+def _get_publisher_prefixes_legacy(con: sqlite3.Connection, series_id: int) -> set:
+    """旧 (= cache 不使用) 実装。"""
     cur = con.cursor()
     prefixes: set = set()
     rows = cur.execute(
@@ -418,19 +478,17 @@ def find_related_series_ids(con: sqlite3.Connection, main: dict) -> list[int]:
     main_is_ascii = _is_ascii_title(main_title)
     main_kana_norm = _normalize_kana(main_kana)
     if main_kana_norm:
-        for r in cur.execute(
-            "SELECT id, title, title_kana FROM series WHERE id<>? AND title_kana IS NOT NULL",
-            (main["id"],),
-        ).fetchall():
-            if _normalize_kana(r[2]) != main_kana_norm:
+        # cache から 同 normalized kana の series を 即取得 (= 旧 full table scan 回避)
+        _build_kana_index(con)
+        for sid, other_title, _other_kana in _KANA_INDEX.get(main_kana_norm, []):
+            if sid == main["id"]:
                 continue
-            other_title = r[1] or ""
+            other_title = other_title or ""
             other_is_ascii = _is_ascii_title(other_title)
-            # 片方が ASCII の場合のみ kana match を merge 条件に
             if not (main_is_ascii or other_is_ascii):
                 continue
-            if _title_punct_suffix(other_title) == main_punct and pub_compatible(r[0]):
-                ids.add(r[0])
+            if _title_punct_suffix(other_title) == main_punct and pub_compatible(sid):
+                ids.add(sid)
     # transitive expansion: 既に merge 済 ids の titles から 同 qid +
     # case-insensitive title match を 追加探索 (= e.g. HUNTER で kana=NULL な
     # 'HUNTER×HUNTER' cluster を 'Hunter×hunter' cluster 経由で 拾う)
