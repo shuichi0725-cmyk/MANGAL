@@ -166,8 +166,8 @@ def extract_volume_number(label: str, vol_field: str) -> tuple[int | None, str |
         m_no = re.match(r"^(?:NO\.?|No\.?|no\.?|VOLUME\.?|Volume\.?|volume\.?|VOL\.?|Vol\.?|vol\.?|V\.|v\.|[＃#])\s*(\d+)$", s)
         if m_no:
             return int(m_no.group(1)), None, False
-        # '巻ノN' / '巻のN' (= NARUTO 等 '巻ノ54', '巻ノ五十一'、 ひらがな の も)
-        m_kano = re.match(r"^巻[のノ]([〇零一二三四五六七八九十百千壱弐参肆伍陸漆捌玖拾]+|\d+)[巻集編卷]?$", s)
+        # '巻ノN' / '巻のN' / '巻之N' / '其ノN' (= 巻ノN 同形 異記号、 'ノ'/'の'/'之' interchangeable)
+        m_kano = re.match(r"^(?:巻[のノ之]|其ノ)([〇零一二三四五六七八九十百千壱弐参肆伍陸漆捌玖拾]+|\d+)[巻集編卷]?$", s)
         if m_kano:
             g = m_kano.group(1)
             if g.isdigit():
@@ -175,6 +175,14 @@ def extract_volume_number(label: str, vol_field: str) -> tuple[int | None, str |
             n = parse_kanji_number(g)
             if n is not None:
                 return n, None, False
+        # 'round 1' / 'file 1' / 'stage 1' / 'episode 1' / 'chapter 1' 等 英語 prefix
+        m_eng = re.match(r"^(?:ROUND|Round|round|FILE|File|file|STAGE|Stage|stage|EPISODE|Episode|episode|CHAPTER|Chapter|chapter|CASE|Case|case|EP|Ep|ep|Q)\s*\.?\s*(\d+)$", s)
+        if m_eng:
+            return int(m_eng.group(1)), None, False
+        # '巻1' / '巻10' (= 巻 prefix + 数字、 第 なし)
+        m_kan_prefix = re.match(r"^巻\s*(\d+)$", s)
+        if m_kan_prefix:
+            return int(m_kan_prefix.group(1)), None, False
         # '<漢数字/算用>巻' (= 第 prefix なし、 '一巻', '二巻', '54巻')
         m_no_prefix = re.match(r"^([〇零一二三四五六七八九十百千壱弐参肆伍陸漆捌玖拾]+|\d+)[巻集編卷]$", s)
         if m_no_prefix:
@@ -210,16 +218,17 @@ def extract_volume_number(label: str, vol_field: str) -> tuple[int | None, str |
         if s in ROMAN_MAP:
             return ROMAN_MAP[s], None, False
         # 第<漢数字>巻 / 第<漢数字>集 / 第<漢数字>編 / 第<漢数字>部 / 巻<漢数字>
+        # → vlabel=None (= 「第一巻」 等 冗長 label 抑制)
         m = re.match(r"^(?:第|巻)([〇零一二三四五六七八九十百千壱弐参肆伍陸漆捌玖拾]+)[巻集編卷部篇]?$", s)
         if m:
             n = parse_kanji_number(m.group(1))
             if n is not None:
-                return n, s, False
-        # 漢数字単独 (= '一', '二', '三十一' 等)
+                return n, None, False
+        # 漢数字単独 (= '一', '二', '三十一' 等) → vlabel=None
         if re.fullmatch(r"[〇零一二三四五六七八九十百千壱弐参肆伍陸漆捌玖拾]+", s):
             n = parse_kanji_number(s)
             if n is not None:
-                return n, s, False
+                return n, None, False
         # 数字含む (例: 'NO.27', 'vol.1', '第3巻', '上巻', '01')
         m = re.search(r"\d+", s)
         if m:
