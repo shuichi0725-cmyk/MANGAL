@@ -102,7 +102,7 @@ def infer_magazine_from_brand(editions: list[dict], valid_mags: set) -> str | No
             if not valid_mags or mag in valid_mags:
                 return mag
     return None
-DROP_IMPRINT_PATTERNS = ["My first big", "コンビニ", "増刊", "同人", "ジャンプremix"]
+DROP_IMPRINT_PATTERNS = ["My first big", "コンビニ", "増刊", "同人", "ジャンプremix", "フィルムコミック"]
 # bilingual / 英訳版 imprint は drop (= 翻訳版 は 別 product)
 DROP_IMPRINT_LOWER_PATTERNS = ["bilingual"]
 # 漫画以外 series は MANGAL 掲載対象外 (= title prefix で detect)。
@@ -275,6 +275,37 @@ def _is_ascii_title(title: str | None) -> bool:
     return not bool(re.search(r"[ぁ-んァ-ヶー一-龯]", title))
 
 
+def _strip_trailing_punct(title: str | None) -> str:
+    """title 末尾 の punct (= '.', ',', '。', '．' 等) を strip。
+    '銀河英雄伝説.' と '銀河英雄伝説' を 同一視 する 用途。
+    """
+    if not title:
+        return ""
+    return re.sub(r"[.,。．・、]+$", "", title.strip())
+
+
+def get_primary_publisher_prefix(con: sqlite3.Connection, series_id: int) -> str | None:
+    """series の volumes の ISBN-13 prefix (= 6 桁) 多数決 で publisher group 判定。
+
+    '978408' = 集英社 系、 '978419' = 徳間、 '978406' = 講談社、 等。
+    別 publisher 系 cluster (= 道原版 徳間 vs 藤崎竜版 集英社) は merge しない 用途。
+    """
+    cur = con.cursor()
+    from collections import Counter
+    prefixes: Counter = Counter()
+    rows = cur.execute(
+        "SELECT v.isbn13 FROM volumes v JOIN editions e ON e.id=v.edition_id "
+        "WHERE e.series_id=? AND v.isbn13 IS NOT NULL", (series_id,)
+    ).fetchall()
+    for r in rows:
+        i = (r[0] or "").replace("-", "")
+        if len(i) >= 6:
+            prefixes[i[:6]] += 1
+    if not prefixes:
+        return None
+    return prefixes.most_common(1)[0][0]
+
+
 def find_related_series_ids(con: sqlite3.Connection, main: dict) -> list[int]:
     """main series と 関連 series id を 返す。
 
@@ -282,32 +313,43 @@ def find_related_series_ids(con: sqlite3.Connection, main: dict) -> list[int]:
 
     rules:
       - main 自身
-      - 同 qid で title が case-insensitive 一致 (= 'SLAM DUNK' と 'Slam dunk'、
-        '境界のRINNE' と '境界のRinne' 等 表記揺れ cluster)。
-        異 title は 同 qid でも 別作品の可能性 (= 作者 QID 共有 cases、 e.g. Q219948 で
-        高橋留美子 全作品 が flood する 事故 防止)
-      - 同 title (= 完全一致) で qid IS NULL な orphan (= 著者属性 違いで qid 取れず
-        孤立した cluster)
-      - title_kana 一致 + title 末尾 punctuation 一致 (= 'BAKUMAN。' と 'バクマン。' の
-        ローマ字/カタカナ 表記揺れ。 'バクマン!' (= 別作品) は punct違い で 除外)
+      - 同 qid で title が case-insensitive 一致
+      - 同 title (= 完全一致 + 末尾 punct strip 後) で qid IS NULL な orphan
+      - title_kana + punct suffix 一致 (= ローマ字/カタカナ 表記揺れ)
+      - **publisher group check**: main の publisher と 候補の publisher が 別 (= 6桁
+        ISBN prefix で 別 系列) なら merge しない (= 銀河英雄伝説 道原版 徳間 vs
+        藤崎竜版 集英社 の 誤統合 防止)
     """
     cur = con.cursor()
     ids = {main["id"]}
     main_title_lower = (main["title"] or "").lower()
+    main_title_strip = _strip_trailing_punct(main["title"])
     main_kana = main.get("title_kana") or ""
     main_punct = _title_punct_suffix(main["title"])
+    main_pub = get_primary_publisher_prefix(con, main["id"])
+
+    def pub_compatible(cand_id: int) -> bool:
+        """publisher 一致 or どちらか 不明 なら OK。"""
+        if not main_pub:
+            return True
+        cp = get_primary_publisher_prefix(con, cand_id)
+        if not cp:
+            return True
+        return cp == main_pub
+
     # 同 qid で title case-insensitive 一致
     if main.get("qid"):
         for r in cur.execute(
             "SELECT id, title FROM series WHERE qid=?", (main["qid"],)
         ).fetchall():
-            if (r[1] or "").lower() == main_title_lower:
+            if (r[1] or "").lower() == main_title_lower and pub_compatible(r[0]):
                 ids.add(r[0])
-    # 同 title で qid 無し orphan
+    # 同 title (= 末尾 punct strip 後) で qid 無し orphan
     for r in cur.execute(
-        "SELECT id FROM series WHERE title=? AND qid IS NULL", (main["title"],)
+        "SELECT id, title FROM series WHERE qid IS NULL"
     ).fetchall():
-        ids.add(r[0])
+        if _strip_trailing_punct(r[1]) == main_title_strip and pub_compatible(r[0]):
+            ids.add(r[0])
     # title_kana + punct suffix 一致 (= romaji/katakana 表記揺れ cluster)
     # 安全策: 片方が ASCII (= ローマ字表記、 e.g. 'BAKUMAN。', 'Hunter×hunter') の cases のみ。
     # でないと 'テレビアニメ版 犬夜叉' と '犬夜叉' (= 両方 kana='イヌヤシャ') が
@@ -329,7 +371,7 @@ def find_related_series_ids(con: sqlite3.Connection, main: dict) -> list[int]:
             # 片方が ASCII の場合のみ kana match を merge 条件に
             if not (main_is_ascii or other_is_ascii):
                 continue
-            if _title_punct_suffix(other_title) == main_punct:
+            if _title_punct_suffix(other_title) == main_punct and pub_compatible(r[0]):
                 ids.add(r[0])
     # transitive expansion: 既に merge 済 ids の titles から 同 qid +
     # case-insensitive title match を 追加探索 (= e.g. HUNTER で kana=NULL な
@@ -348,14 +390,15 @@ def find_related_series_ids(con: sqlite3.Connection, main: dict) -> list[int]:
             for r in cur.execute(
                 "SELECT id, title FROM series WHERE qid=?", (q,)
             ).fetchall():
-                if (r[1] or "").lower() == t_lower:
+                if (r[1] or "").lower() == t_lower and pub_compatible(r[0]):
                     ids.add(r[0])
         # qid 無し orphan で title case-insensitive 一致
         for r in cur.execute(
             "SELECT id FROM series WHERE LOWER(title)=? AND qid IS NULL",
             (t_lower,),
         ).fetchall():
-            ids.add(r[0])
+            if pub_compatible(r[0]):
+                ids.add(r[0])
     return list(ids)
 
 
