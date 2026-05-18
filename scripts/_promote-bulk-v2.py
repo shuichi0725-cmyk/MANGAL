@@ -713,27 +713,25 @@ def build_yml(
                 all_years.append(y)
     o["year_started"] = min(all_years) if all_years else src_yml.get("year_started", 2000)
 
-    # year_ended: standard edition の max year (= 「本編 連載完結」 推定)
-    # standard edition が ない (= 文庫/愛蔵 のみ 等) 場合は 全 editions の MAX
-    # 但し outlier 1 件 (= 単一巻だけ 重版年が混入) は drop
+    # year_ended: standard edition の 「最大 vol number の 初版 date」 (= 真の 連載完結年)
+    # standard edition が ない (= 文庫/愛蔵 のみ 等) 場合は 全 editions
+    # vol 1 の 「reissue date 2000」 が 混入 する のを 避ける ため、 各 vol の MIN
+    # (= 初版) を 取り、 最大 vol number の date を 採用
     if editions:
         standard_eds = [ed for ed in editions if ed.get("type") == "standard"]
         target_eds = standard_eds if standard_eds else editions
-        first_ed_years = []
+        per_vol_min_date: dict = {}
         for ed in target_eds:
             for v in ed["volumes"]:
-                y = year_of(v.get("release_date"))
-                if y:
-                    first_ed_years.append(y)
-        first_ed_years = sorted(first_ed_years)
-        # outlier 除外: 末尾の年が 直前と 5 年以上空くなら drop
-        while len(first_ed_years) > 5:
-            if first_ed_years[-1] - first_ed_years[-2] > 5:
-                first_ed_years.pop()
-            else:
-                break
-        if first_ed_years:
-            o["year_ended"] = max(first_ed_years)
+                n = v.get("number")
+                d = v.get("release_date")
+                if not n or not d:
+                    continue
+                if n not in per_vol_min_date or d < per_vol_min_date[n]:
+                    per_vol_min_date[n] = d
+        if per_vol_min_date:
+            max_vol = max(per_vol_min_date.keys())
+            o["year_ended"] = year_of(per_vol_min_date[max_vol])
         else:
             o["year_ended"] = src_yml.get("year_ended")
     else:
