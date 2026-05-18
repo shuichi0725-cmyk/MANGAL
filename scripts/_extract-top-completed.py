@@ -622,32 +622,60 @@ def _normalize_title_for_dedup(title: str) -> str:
 
 
 def select_candidates(con: sqlite3.Connection, limit: int) -> list[dict]:
-    """完結 推定 series を 抽出。 ranking 順 で limit 件 返す。"""
+    """完結 推定 series を 抽出。 ranking 順 で limit 件 返す。
+
+    完結判定: 「edition filter 適用後 の 各 vol number 初版 release_date の MAX」 が
+    cutoff_date 以前 なら 完結扱い (= 3 年 新刊なし)。 reissue / 新版 で 同 vol number
+    異 ISBN 出版された 巻 を MIN で 取り、 真の 連載完結 date を 反映。
+
+    User の判断 (D3): BASTARD!! / ガラスの仮面 等 休載長 作品は 完結扱い、 後 AI 個別判断
+    で 休載/連載中 に 修正。
+    """
+    import datetime
+    cutoff_years = 3
+    today = datetime.date.today()
+    cutoff_date = today.replace(year=today.year - cutoff_years).isoformat()[:7]
     cur = con.cursor()
     cur.row_factory = sqlite3.Row
     types_in = ",".join("?" for _ in KEEP_EDITION_TYPES)
+    filter_clause = f"""
+        e.type IN ({types_in})
+        AND e.imprint NOT LIKE '%My first big%'
+        AND e.imprint NOT LIKE '%コンビニ%'
+        AND e.imprint NOT LIKE '%増刊%'
+        AND e.imprint NOT LIKE '%同人%'
+        AND e.imprint NOT LIKE '%ジャンプremix%'
+        AND e.imprint NOT LIKE '%フィルムコミック%'
+        AND LOWER(COALESCE(e.imprint, '')) NOT LIKE '%bilingual%'
+        AND LOWER(COALESCE(e.imprint, '')) NOT LIKE '%english%'
+        AND (LOWER(COALESCE(e.imprint, '')) NOT LIKE '%complete works%' OR e.imprint LIKE '%=%')
+        AND v.number > 0
+        AND v.release_date IS NOT NULL
+    """
     rows = cur.execute(
         f"""
+        WITH per_vol AS (
+            SELECT e.series_id, v.number, MIN(v.release_date) AS first_release
+            FROM editions e JOIN volumes v ON v.edition_id=e.id
+            WHERE {filter_clause}
+            GROUP BY e.series_id, v.number
+        )
         SELECT s.id, s.title, s.subtitle, s.title_kana, s.subtitle_kana, s.qid,
                s.title_official_en,
                s.adult_score, s.source, s.series_key,
-               MAX(v.release_date) AS last_date,
-               MIN(v.release_date) AS first_date,
-               COUNT(DISTINCT v.id) AS vol_count
+               MAX(pv.first_release) AS filtered_last,
+               MIN(pv.first_release) AS first_date,
+               COUNT(pv.number) AS vol_count
         FROM series s
-        JOIN editions e ON e.series_id = s.id
-        JOIN volumes v ON v.edition_id = e.id
+        JOIN per_vol pv ON pv.series_id = s.id
         WHERE s.adult_score < 3
-          AND e.type IN ({types_in})
-          AND v.release_date IS NOT NULL
-          AND v.number > 0
         GROUP BY s.id
         HAVING vol_count >= 5
-           AND SUBSTR(last_date, 1, 4) <= '2020'
+           AND filtered_last <= ?
         ORDER BY (CASE WHEN s.qid IS NOT NULL THEN 100 ELSE 0 END) + vol_count DESC
         LIMIT ?
         """,
-        list(KEEP_EDITION_TYPES) + [limit * 5],  # 5x で 取得 後 filter
+        list(KEEP_EDITION_TYPES) + [cutoff_date, limit * 5],
     ).fetchall()
     out = []
     seen_titles = set()
