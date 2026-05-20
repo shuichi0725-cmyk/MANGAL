@@ -44,6 +44,7 @@ import {
   baseTitle,
   buildSeriesKey,
   classifyEdition,
+  classifyEditionFromImprint,
   extractVolumeNumber,
   normalizeCreatorName,
   normalizeIsbn13,
@@ -400,6 +401,12 @@ function upsertVolume(db: DB, author: AuthorRef, rec: UpsertRec): void {
   // 完全版 / 特装版 等が記録される。 空なら title から classifyEdition。
   const editionInput = rec.editionLabel ?? rec.title ?? "";
   let editionType: EditionType = classifyEdition(editionInput);
+  // fallback: title/editionLabel に edition 表記が無く standard 判定された場合、
+  // imprint (= 「少年サンデーコミックスワイド版」 「小学館文庫」 等) から再分類。
+  // MADB record では edition 情報が imprint にしか出ない cases が多い。
+  if (editionType === "standard" && rec.imprint) {
+    editionType = classifyEditionFromImprint(rec.imprint);
+  }
   const volumeNumber =
     rec.csvVolumeNumber ?? (rec.title ? extractVolumeNumber(rec.title) : null);
   if (volumeNumber === null && editionType === "standard") {
