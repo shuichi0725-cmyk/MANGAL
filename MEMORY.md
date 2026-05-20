@@ -67,14 +67,15 @@ CUTOFF_YEAR = 2015  # spinoff で この年以降なら keep
     "synopsis": "80-200 char の独自要約",
     "status": "ongoing|completed|hiatus",
     "anime_adapted": true|false,
-    "alternative_titles": {"en": "One Piece"}        # 外来語 title では必須 fill
+    "alternative_titles": {"en": "One Piece"}        # 外来語 title では ⚠️必須 fill (= 漏れると slug rename 困難)
   }
 }
 ```
 
 - **key**: `(qid + baseTitle)` 複合 ID。 qid 無し series は `name:<creator>|name:<title>` 形式
 - **slug 命名規則** は CLAUDE.md 参照 (= ふりがな判定 + 数字読み判定 + alt_en 優先)
-- **alternative_titles.en** は 外来語起源 title (= 「ワンピース」「ブリーチ」 等) に必須 fill — これで slug 生成が `wanpiisu` ではなく `one-piece` になる
+- **alternative_titles.en** は ⚠️ **外来語起源 title (= 「ワンピース」「ブリーチ」「アイシールド21」「ドラゴンボール」 等) に必須 fill** — これで slug 生成が `wanpiisu` ではなく `one-piece` になる。 fill 漏れすると `wanpiisu.yml` / `aishiirudo-21.yml` のような ローマ字 slug が生成され、 **後から rename 困難** (= URL 互換性 / backup / 外部参照に影響)。 fill 時の判定基準: カタカナ含む外来語起源 (= 英語 / 独語 / 仏語 / 西語 から音写) なら必須
+- **genres** は CLAUDE.md の 「genres 規約」 参照 (= sports は包括タグ、 baseball / soccer のみ併用サブタグ、 他スポーツはサブ分類しない)
 
 ### B2 完了状態 (= 2026-05-18 23:43 JST 達成)
 

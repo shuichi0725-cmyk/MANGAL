@@ -97,32 +97,44 @@
 4. **数字 含む title で 普通読み** (= alignment 検証 通過) → 数字 keep
 5. **kana → ローマ字** (= fallback)
 
-#### アラビア数字 ルール
+#### アラビア数字 ルール (= 優先順 #4 適用時のみ)
+
+**前提**: 優先順 #1-#3 (= 種3 slug field / alt_en / 純 ASCII title) が当たらず、 数字を含む title で **純和語 / 漢語 ベース** の場合に適用。 外来語 title (= 「アイシールド21」 「ペルソナ4」 「ワイルド7」 等) は #2 で先に当たる ため、 ここではなく `eyeshield-21` / `persona-4` / `wild-7` のような **英語 slug** になる。
 
 - **ふりがな で 判断**:
-  - 普通の 数字読み (= 日本語 イチ/ニ/ジュウ/ニジュウイチ + 英語 ワン/ツー/スリー/フォー
-    /セブン 等) なら **数字 keep**
-    - 例: アイシールド21 = `アイシールドニジュウイチ` → `aishiirudo-21`
-    - 例: ペルソナ4 = `ペルソナフォー` → `perusona-4`
-    - 例: ワイルド7 = `ワイルドセブン` → `wairudo-7`
-    - 例: ジョジョの奇妙な冒険 第6部 → `jojo-6`
-  - 特殊読み (= 分数 / 当て字 / 略号) なら **ローマ字化** (= 数字 を kana に 戻して 表記)
-    - 例: らんま1/2 = `ランマニブンノイチ` (= 分数読み) → `ranma-nibunnoichi`
-    - 例: 3×3 EYES = `サザンアイズ` (= 当て字) → `sazanaizu`
-    - 例: 7つの黄金郷 = `ナナツノエルドラド` (= 特殊読み) → `nanatsunoerudorado`
-- 漢字数字 (= 七、 三、 etc.) は ふりがな の カナ表記を ローマ字化
+  - **普通の 数字読み** (= 日本語 イチ/ニ/ジュウ/ニジュウイチ + 英語 ワン/ツー/スリー/フォー/セブン 等) なら **数字 keep**
+    - 例: 15歳の地図 = `ジュウゴサイノチズ` → `15-sai-no-chizu`
+    - 例: 連ちゃんパパ第1巻 → `renchan-papa-1` (= 巻数)
+    - 例: 不滅のあなたへ第3部 → `fumetsu-no-anatae-3`
+  - **特殊読み** (= 分数 / 当て字 / 略号) なら **ローマ字化** (= 数字 を kana に 戻して 表記)
+    - 例: らんま1/2 = `ランマニブンノイチ` (= 分数読み) → `ranma-nibun-no-ichi`
+    - 例: 3×3 EYES = `サザンアイズ` (= 当て字) → `sazan-aizu` (= ン+ア の境界を hyphen で明示)
+    - 例: 7つの黄金郷 = `ナナツノエルドラド` (= 特殊読み) → `nanatsu-no-erudorado`
+- **漢字数字** (= 七、 三、 etc.) は ふりがな の カナ表記を ローマ字化
   - 例: 七つの大罪 = `ナナツノタイザイ` → `nanatsu-no-taizai`
+
+**注意**: 助詞 (= ノ / ヲ / ニ / ト 等) を含む title は hyphen で区切る (= `nanatsu-no-taizai`、 `ranma-nibun-no-ichi`)。 連結すると 「nanatsunotaizai」 のように読みづらく、 ン+母音 の境界も曖昧になる。
 
 #### 種3 fill protocol (= AI fill)
 
-- **外来語 (= 英語起源) title** は `alternative_titles.en` を 必ず fill する
-  - 例: 「ワンピース」 → en: 'One Piece'、 「ドラゴンボール」 → en: 'Dragon Ball'
-  - 例: 「ベルセルク」 → en: 'Berserk'、 「ブリーチ」 → en: 'Bleach'
+- **外来語 (= 英語起源) title** は `alternative_titles.en` を **必ず fill する** (= 漏らすと slug が ローマ字読みで生成され、 後から rename 困難)
+  - 例: 「ワンピース」 → en: 'One Piece' → slug: `one-piece`
+  - 例: 「ドラゴンボール」 → en: 'Dragon Ball' → slug: `dragon-ball`
+  - 例: 「ベルセルク」 → en: 'Berserk' → slug: `berserk`
+  - 例: 「ブリーチ」 → en: 'Bleach' → slug: `bleach`
+  - 例: 「アイシールド21」 → en: 'Eyeshield 21' → slug: `eyeshield-21`
+  - 例: 「デスノート」 → en: 'Death Note' → slug: `death-note`
+  - 例: 「ハンター×ハンター」 → en: 'Hunter x Hunter' → slug: `hunter-x-hunter`
+- **判定基準**: title が カタカナ含む 外来語起源 (= 英語 / 独語 / 仏語 / 西語 など からの音写) なら en を必ず fill
+  - 注意: 「ジョジョの奇妙な冒険」 のような 和語混在型も、 英語版が確立している作品は en を fill (= 'JoJo's Bizarre Adventure')
 - これにより slug 生成 で 外来語 を 優先採用 (= ローマ字読み 'wanpiisu' でなく 'one-piece')
 
-#### 既存 slug の rename
+#### ⚠️ フォルダ名 (= slug) は後から rename が困難
 
-- **URL 互換性** に配慮、 user 確認 を 取る
+- URL 互換性 / backup / 外部参照 に影響
+- en fill 漏れで `wanpiisu.yml` のような slug が生成されると、 後の修正コストが高い
+- **既存 entry の en fill 状況は定期チェックすべき**
+- 確定済み slug の rename は必ず user 確認 + 旧 slug の alias / redirect mapping を残す
 
 ### title_kana / subtitle_kana
 
@@ -133,6 +145,33 @@
 ### title_romaji
 
 - 全小文字 + space 区切り (= 例: `ranma 1 2`、 `shingeki no kyojin`)
+
+### genres 規約
+
+#### タグ運用ルール
+
+- master keys は `data/genres.yml` で管理 (= 25 種類前後)
+- 1 entry に 1-4 tag 付与
+- 包括タグ + サブタグの **併用方式** (= 階層検索可能化)
+
+#### スポーツ系の例外的サブタグ
+
+- 包括タグ: `sports` (= スポーツ漫画 全般)
+- **独立サブタグ**: `baseball` (= 野球漫画)、 `soccer` (= サッカー漫画)
+  - **理由**: 件数が突出 (= 各 数百〜千タイトル)、 ジャンル境界が明確
+  - **併用ルール**: 野球漫画 → `sports` + `baseball` の 2タグ付与 (= 階層検索のため sports は必ず併記)
+- **マイナースポーツは独立化しない**: バスケ / ボクシング / テニス / 麻雀 / ゴルフ / 格闘技 / 自転車 / 水泳 等は `sports` のみ
+  - 理由: ジャンル境界が曖昧 (= 「タッチ」 にボクシング描写、 「ドカベン」 に柔道編 等)、 線引き議論を避ける
+
+#### サブタグ追加の判定軸
+
+新規サブタグ独立化は 以下 3軸 **全て** を満たす場合のみ:
+
+1. **件数が突出している** (= 数百以上)
+2. **境界判定が容易** (= 「メジャー」 = baseball で迷わない、 等)
+3. **検索ニーズが高い** (= 書店の特集コーナーで定番)
+
+baseball / soccer が現状唯一の例外。 他ジャンル (= romance、 fantasy 等) も同原則で **サブ分類しない**。
 
 ---
 
