@@ -2,7 +2,53 @@
 
 > このファイルは Claude Code session の context bootstrap 用。新しいセッションを開始したら最初に読むこと。
 
-最終更新: 2026-05-22 (a-miss fill 全 285 batch 完了 = qid: prefix 全消化、 残り = name: prefix 1,699 件 + qid: 異常キー 26 件)
+最終更新: 2026-05-22 (a-miss fill **完全消化** = qid: 26 + name: 14 = 40 件 直接 fill 完了、 a-miss 合計 0 件)
+
+---
+
+# 2026-05-22 セッション 18: Phase 0 完了 (= a-miss 残務 + safety check)
+
+## TL;DR
+
+- **a-miss qid: 26 件 fill 完了** (= commit `5456a69`) — PUA / smart-quote / special-chars 混入で過去 skip された entries を Python 経由で直接 fill
+- **a-miss name: 14 件 fill 完了** (= commit 本セッション) — name: prefix 残務 (実数値、 後述 bug 参照)
+- **a-miss 合計 残り = 0 件 ✅** (= en filled 40,990 / 76,435 = 53.63%)
+- **typecheck + vitest 緑** (= 7 files / 209 tests pass、 lib/seed3.ts v1/v2 union schema 安全動作確認)
+- **state check script の bug 発見 + 修正** (= 次節)
+
+## state check script の bug (= 1,699 件 と誤 count していた件)
+
+旧 logic (= MEMORY.md セッション 17 の Step 2 に記載):
+```python
+title = next((p[5:] for p in parts if p.startswith('name:')), '')  # ← FIRST = creator!
+```
+
+`name:` prefix entries の key format は `name:<creator>|name:<title>` (= 必ず 2 parts)。
+旧 logic では **最初の** name: field = **creator 名** を title と誤認識して katakana 判定 →
+creator がカタカナ含む entries (= 「azuタロウ」 等) を a-miss 対象と誤 count。
+
+修正 logic:
+```python
+name_parts = [p[5:] for p in parts if p.startswith('name:')]
+title = name_parts[-1] if name_parts else ''  # ← LAST = actual title
+```
+
+この修正で 旧 count 1,699 → 実数値 14 件 と判明、 即 fill して 0 件達成。
+
+## 種2 / 種3 v2 の キー一覧資料 を生成
+
+- `scripts/_build-schema-doc.py` → `docs/schema-reference.html` (= A4 縦印刷向け、 commit `74ea092`)
+- 種2 18 tables + 種3 10 fields の キー名 / 型 / 日本語説明 / サンプル値 / 充足率 を一覧化
+- 主要 table は ONE PIECE 系列の実 data で sample 統一
+
+## 次セッション候補 (= Phase 1 以降)
+
+a-miss fill が完全消化したので、 次は **Phase 1 = 本番出力 + 視覚確認**:
+1. `scripts/_promote-bulk-v2.py` を 全件実行 → `data/manga/<slug>/index.yml` を 大規模生成
+2. 生成結果の sanity check (= slug 重複 / ローマ字 slug 漏れ / カウント)
+3. frontend deploy + 主要作品の表示確認
+
+それ以降は Phase 2 (= 残 queue 23,617 fill) / Phase 3 (= 月次蒸留 protocol 実装) を 状況に応じて。
 
 ---
 
