@@ -1,0 +1,1558 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>MANGAL データベース キー一覧 (= 種2 + 種3 v2)</title>
+<style>
+  @page { size: A4 portrait; margin: 12mm 10mm; }
+  body {
+    font-family: "Hiragino Sans", "Yu Gothic", "Noto Sans CJK JP", sans-serif;
+    font-size: 9pt;
+    line-height: 1.4;
+    color: #111;
+    margin: 0;
+  }
+  h1 { font-size: 18pt; border-bottom: 2px solid #222; padding-bottom: 4pt; margin: 0 0 6pt; }
+  h2 { font-size: 14pt; background: #222; color: #fff; padding: 4pt 8pt; margin: 16pt 0 8pt; page-break-before: always; }
+  h2:first-of-type { page-break-before: auto; }
+  h3 { font-size: 11pt; border-left: 4pt solid #222; padding-left: 6pt; margin: 12pt 0 4pt; page-break-after: avoid; }
+  h3 .count { font-size: 9pt; color: #666; font-weight: normal; }
+  h4 { font-size: 10pt; margin: 10pt 0 4pt; color: #444; }
+  p.intro { margin: 4pt 0 8pt; font-size: 9pt; }
+  p.table-desc { margin: 0 0 4pt; font-size: 8.5pt; color: #555; font-style: italic; }
+  table { width: 100%; border-collapse: collapse; margin-bottom: 8pt; page-break-inside: avoid; }
+  th, td { border: 0.5pt solid #aaa; padding: 2pt 4pt; vertical-align: top; }
+  th { background: #eee; font-weight: 600; font-size: 8.5pt; text-align: left; }
+  td.key { font-family: "Menlo", "Consolas", monospace; font-size: 8.5pt; white-space: nowrap; }
+  td.type { font-family: "Menlo", "Consolas", monospace; font-size: 8pt; color: #666; white-space: nowrap; }
+  td.flag { text-align: center; font-size: 8pt; color: #c00; white-space: nowrap; }
+  td.desc { font-size: 8.5pt; }
+  td.sample { font-family: "Menlo", "Consolas", monospace; font-size: 8pt; color: #036; word-break: break-all; }
+  td.cov { text-align: right; font-size: 8pt; color: #666; white-space: nowrap; }
+  i.null { color: #999; font-size: 7.5pt; font-style: italic; }
+  i.truncate { color: #999; font-style: normal; }
+  .group-intro { background: #f5f5f5; padding: 6pt 8pt; margin: 6pt 0; font-size: 9pt; border-left: 3pt solid #888; }
+  .meta-box { background: #fffde7; border: 1pt solid #c90; padding: 6pt 8pt; margin: 8pt 0; font-size: 9pt; }
+  .meta-box ul { margin: 4pt 0 0 16pt; padding: 0; }
+  .col-widths col:nth-child(1) { width: 18%; }
+  .col-widths col:nth-child(2) { width: 8%; }
+  .col-widths col:nth-child(3) { width: 6%; }
+  .col-widths col:nth-child(4) { width: 32%; }
+  .col-widths col:nth-child(5) { width: 28%; }
+  .col-widths col:nth-child(6) { width: 8%; }
+  table { table-layout: fixed; }
+  td, th { overflow-wrap: break-word; }
+</style>
+</head>
+<body>
+
+<h1>MANGAL データベース キー一覧</h1>
+<p class="intro">
+  生成日時: 2026-05-22 05:43 JST<br>
+  対象: 種2 (= <code>.cache/db-v2.sqlite</code>、 18 tables) + 種3 (= <code>data/seeds/series-supplement-v2.yml</code>、 76,435 entries)
+</p>
+
+<div class="meta-box">
+  <strong>サンプル値について</strong>
+  <ul>
+    <li>主要 table (= series / editions / volumes / mangaka / series_authors / publishers / magazines) は <strong>「ONE PIECE」 系列の実 data</strong> を使用 (= 把握しやすさのため)。 他 table は最初の 1 row。</li>
+    <li>「充足率」 = その column が NULL でも空文字でもない row の割合 (= data の埋まり具合)。</li>
+    <li>「制約」 PK = 主キー、 ○ = NOT NULL。</li>
+  </ul>
+</div>
+
+<h2>パート 1: 種2 = MADB 由来 DB (= <code>.cache/db-v2.sqlite</code>)</h2>
+<p class="intro">
+  MADB (= マンガデータベース) から取得した <strong>客観的 data</strong> を SQLite に格納。
+  158,263 series / 176,319 editions / 381,393 volumes。 ジャンル / あらすじ / 雑誌 等の
+  「客観的に取れない data」 は ここに無く、 種3 (= 次のパート) で補う。
+</p>
+<h3 class="group-header" style="background:#444;color:#fff;padding:3pt 6pt;border:0;">主要 (= 漫画作品の中心 data)</h3>
+
+    <section class="table-section">
+      <h3>series <span class="count">(158,263 rows)</span></h3>
+      <p class="table-desc">作品マスタ (= 漫画作品の中心 table)</p>
+      <table><colgroup class="col-widths"><col><col><col><col><col><col></colgroup>
+        <thead>
+          <tr>
+            <th>キー名</th>
+            <th>型</th>
+            <th>制約</th>
+            <th>日本語説明</th>
+            <th>サンプル値</th>
+            <th>充足率</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="key">id</td>
+            <td class="type">INTEGER</td>
+            <td class="flag">PK</td>
+            <td class="desc">内部 ID (= 自動採番)</td>
+            <td class="sample">33576</td>
+            <td class="cov">100%</td>
+          </tr>
+          <tr>
+            <td class="key">series_key</td>
+            <td class="type">TEXT</td>
+            <td class="flag">○</td>
+            <td class="desc">作品の一意キー (= &#x27;qid:Q…|name:タイトル&#x27; または &#x27;name:作者|name:タイトル&#x27;)</td>
+            <td class="sample">qid:Q2010|name:ONE PIECE</td>
+            <td class="cov">100%</td>
+          </tr>
+          <tr>
+            <td class="key">qid</td>
+            <td class="type">TEXT</td>
+            <td class="flag"></td>
+            <td class="desc">Wikidata ID (= 作品が Wikidata に存在する場合のみ)</td>
+            <td class="sample">Q2010</td>
+            <td class="cov">40%</td>
+          </tr>
+          <tr>
+            <td class="key">source</td>
+            <td class="type">TEXT</td>
+            <td class="flag">○</td>
+            <td class="desc">由来 (= &#x27;madb104&#x27; = MADB 由来 / &#x27;orphan101&#x27; = 自前集約)</td>
+            <td class="sample">madb104</td>
+            <td class="cov">100%</td>
+          </tr>
+          <tr>
+            <td class="key">title</td>
+            <td class="type">TEXT</td>
+            <td class="flag">○</td>
+            <td class="desc">作品タイトル (= 主タイトル)</td>
+            <td class="sample">ONE PIECE</td>
+            <td class="cov">100%</td>
+          </tr>
+          <tr>
+            <td class="key">subtitle</td>
+            <td class="type">TEXT</td>
+            <td class="flag"></td>
+            <td class="desc">副題 (= 副題ありの場合のみ、 例: &#x27;JOJOLION&#x27;)</td>
+            <td class="sample"><i class="null">NULL</i></td>
+            <td class="cov">5%</td>
+          </tr>
+          <tr>
+            <td class="key">title_kana</td>
+            <td class="type">TEXT</td>
+            <td class="flag"></td>
+            <td class="desc">タイトルふりがな (= カタカナ表記)</td>
+            <td class="sample">ワンピース ゴヒャク クイズ ブック</td>
+            <td class="cov">97%</td>
+          </tr>
+          <tr>
+            <td class="key">subtitle_kana</td>
+            <td class="type">TEXT</td>
+            <td class="flag"></td>
+            <td class="desc">副題ふりがな</td>
+            <td class="sample"><i class="null">NULL</i></td>
+            <td class="cov">5%</td>
+          </tr>
+          <tr>
+            <td class="key">title_official_en</td>
+            <td class="type">TEXT</td>
+            <td class="flag"></td>
+            <td class="desc">MADB 由来の英題 (= schema:alternateName)</td>
+            <td class="sample"><i class="null">NULL</i></td>
+            <td class="cov">4%</td>
+          </tr>
+          <tr>
+            <td class="key">year_started</td>
+            <td class="type">INTEGER</td>
+            <td class="flag"></td>
+            <td class="desc">連載開始年</td>
+            <td class="sample"><i class="null">NULL</i></td>
+            <td class="cov">0%</td>
+          </tr>
+          <tr>
+            <td class="key">year_ended</td>
+            <td class="type">INTEGER</td>
+            <td class="flag"></td>
+            <td class="desc">連載終了年 (= 連載中は NULL)</td>
+            <td class="sample"><i class="null">NULL</i></td>
+            <td class="cov">0%</td>
+          </tr>
+          <tr>
+            <td class="key">status</td>
+            <td class="type">TEXT</td>
+            <td class="flag"></td>
+            <td class="desc">連載状態 (= ongoing/completed/hiatus) ※ 種3 で上書きされる</td>
+            <td class="sample"><i class="null">NULL</i></td>
+            <td class="cov">0%</td>
+          </tr>
+          <tr>
+            <td class="key">demographic</td>
+            <td class="type">TEXT</td>
+            <td class="flag"></td>
+            <td class="desc">対象年齢層 (= shounen/shoujo/seinen/josei/kodomo/other) ※ 種3 で上書き</td>
+            <td class="sample"><i class="null">NULL</i></td>
+            <td class="cov">0%</td>
+          </tr>
+          <tr>
+            <td class="key">publisher_key</td>
+            <td class="type">TEXT</td>
+            <td class="flag"></td>
+            <td class="desc">出版社キー (= publishers.key、 例: &#x27;shueisha&#x27;)</td>
+            <td class="sample"><i class="null">NULL</i></td>
+            <td class="cov">0%</td>
+          </tr>
+          <tr>
+            <td class="key">magazine_key</td>
+            <td class="type">TEXT</td>
+            <td class="flag"></td>
+            <td class="desc">連載誌キー (= magazines.key、 例: &#x27;weekly-shonen-jump&#x27;)</td>
+            <td class="sample"><i class="null">NULL</i></td>
+            <td class="cov">0%</td>
+          </tr>
+          <tr>
+            <td class="key">genres</td>
+            <td class="type">TEXT</td>
+            <td class="flag"></td>
+            <td class="desc">ジャンル (= カンマ区切り、 例: &#x27;action,adventure&#x27;) ※ 種3 で上書き</td>
+            <td class="sample"><i class="null">NULL</i></td>
+            <td class="cov">0%</td>
+          </tr>
+          <tr>
+            <td class="key">synopsis</td>
+            <td class="type">TEXT</td>
+            <td class="flag"></td>
+            <td class="desc">あらすじ ※ 種3 で上書き</td>
+            <td class="sample"><i class="null">NULL</i></td>
+            <td class="cov">0%</td>
+          </tr>
+          <tr>
+            <td class="key">wikipedia_url</td>
+            <td class="type">TEXT</td>
+            <td class="flag"></td>
+            <td class="desc">Wikipedia URL</td>
+            <td class="sample"><i class="null">NULL</i></td>
+            <td class="cov">0%</td>
+          </tr>
+          <tr>
+            <td class="key">adult_score</td>
+            <td class="type">INTEGER</td>
+            <td class="flag">○</td>
+            <td class="desc">成人向けスコア (= 5 以上で公開除外)</td>
+            <td class="sample">0</td>
+            <td class="cov">100%</td>
+          </tr>
+          <tr>
+            <td class="key">created_at</td>
+            <td class="type">TEXT</td>
+            <td class="flag">○</td>
+            <td class="desc">DB 投入日時</td>
+            <td class="sample">2026-05-18T10:03:01Z</td>
+            <td class="cov">100%</td>
+          </tr>
+          <tr>
+            <td class="key">updated_at</td>
+            <td class="type">TEXT</td>
+            <td class="flag">○</td>
+            <td class="desc">DB 更新日時</td>
+            <td class="sample">2026-05-18T10:03:01Z</td>
+            <td class="cov">100%</td>
+          </tr></tbody>
+      </table>
+    </section>
+
+    <section class="table-section">
+      <h3>mangaka <span class="count">(6,751 rows)</span></h3>
+      <p class="table-desc">漫画家マスタ (= Wikidata QID で一意)</p>
+      <table><colgroup class="col-widths"><col><col><col><col><col><col></colgroup>
+        <thead>
+          <tr>
+            <th>キー名</th>
+            <th>型</th>
+            <th>制約</th>
+            <th>日本語説明</th>
+            <th>サンプル値</th>
+            <th>充足率</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="key">id</td>
+            <td class="type">INTEGER</td>
+            <td class="flag">PK</td>
+            <td class="desc">内部 ID (= 自動採番)</td>
+            <td class="sample">5956</td>
+            <td class="cov">100%</td>
+          </tr>
+          <tr>
+            <td class="key">qid</td>
+            <td class="type">TEXT</td>
+            <td class="flag">○</td>
+            <td class="desc">Wikidata ID (= 例: Q193300)、 漫画家を 一意識別</td>
+            <td class="sample">Q2010</td>
+            <td class="cov">100%</td>
+          </tr>
+          <tr>
+            <td class="key">name</td>
+            <td class="type">TEXT</td>
+            <td class="flag">○</td>
+            <td class="desc">漫画家名 (= 正式表記)</td>
+            <td class="sample">尾田栄一郎</td>
+            <td class="cov">100%</td>
+          </tr>
+          <tr>
+            <td class="key">birth_year</td>
+            <td class="type">INTEGER</td>
+            <td class="flag"></td>
+            <td class="desc">生年 (= 西暦、 不明時 NULL)</td>
+            <td class="sample">1975</td>
+            <td class="cov">53%</td>
+          </tr>
+          <tr>
+            <td class="key">death_year</td>
+            <td class="type">INTEGER</td>
+            <td class="flag"></td>
+            <td class="desc">没年 (= 西暦、 存命時 NULL)</td>
+            <td class="sample"><i class="null">NULL</i></td>
+            <td class="cov">7%</td>
+          </tr>
+          <tr>
+            <td class="key">alt_names</td>
+            <td class="type">TEXT</td>
+            <td class="flag"></td>
+            <td class="desc">別名・ペンネーム (= pipe 区切り、 例: &#x27;尾田っち|月火水木金土&#x27;)</td>
+            <td class="sample">尾田っち|月火水木金土</td>
+            <td class="cov">27%</td>
+          </tr>
+          <tr>
+            <td class="key">has_adult_credit</td>
+            <td class="type">INTEGER</td>
+            <td class="flag">○</td>
+            <td class="desc">成人向け作品実績フラグ (= 0/1)</td>
+            <td class="sample">0</td>
+            <td class="cov">100%</td>
+          </tr>
+          <tr>
+            <td class="key">created_at</td>
+            <td class="type">TEXT</td>
+            <td class="flag">○</td>
+            <td class="desc">DB 投入日時 (= ISO8601)</td>
+            <td class="sample">2026-05-17T13:49:00Z</td>
+            <td class="cov">100%</td>
+          </tr>
+          <tr>
+            <td class="key">updated_at</td>
+            <td class="type">TEXT</td>
+            <td class="flag">○</td>
+            <td class="desc">DB 更新日時 (= ISO8601)</td>
+            <td class="sample">2026-05-17T13:49:00Z</td>
+            <td class="cov">100%</td>
+          </tr></tbody>
+      </table>
+    </section>
+
+    <section class="table-section">
+      <h3>series_authors <span class="count">(63,133 rows)</span></h3>
+      <p class="table-desc">作品と漫画家の関連 (= 1 作品 N 作者の中間 table)</p>
+      <table><colgroup class="col-widths"><col><col><col><col><col><col></colgroup>
+        <thead>
+          <tr>
+            <th>キー名</th>
+            <th>型</th>
+            <th>制約</th>
+            <th>日本語説明</th>
+            <th>サンプル値</th>
+            <th>充足率</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="key">series_id</td>
+            <td class="type">INTEGER</td>
+            <td class="flag">PK○</td>
+            <td class="desc">作品 ID</td>
+            <td class="sample">33576</td>
+            <td class="cov">100%</td>
+          </tr>
+          <tr>
+            <td class="key">mangaka_id</td>
+            <td class="type">INTEGER</td>
+            <td class="flag">PK○</td>
+            <td class="desc">漫画家 ID</td>
+            <td class="sample">5956</td>
+            <td class="cov">100%</td>
+          </tr>
+          <tr>
+            <td class="key">role</td>
+            <td class="type">TEXT</td>
+            <td class="flag">PK○</td>
+            <td class="desc">役割 (= writer/artist/writer_artist/original_author)</td>
+            <td class="sample">writer_artist</td>
+            <td class="cov">100%</td>
+          </tr></tbody>
+      </table>
+    </section>
+
+    <section class="table-section">
+      <h3>editions <span class="count">(176,319 rows)</span></h3>
+      <p class="table-desc">版型 (= 通常版 / 文庫版 / 完全版 等、 1 作品 N 版型)</p>
+      <table><colgroup class="col-widths"><col><col><col><col><col><col></colgroup>
+        <thead>
+          <tr>
+            <th>キー名</th>
+            <th>型</th>
+            <th>制約</th>
+            <th>日本語説明</th>
+            <th>サンプル値</th>
+            <th>充足率</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="key">id</td>
+            <td class="type">INTEGER</td>
+            <td class="flag">PK</td>
+            <td class="desc">内部 ID</td>
+            <td class="sample">40309</td>
+            <td class="cov">100%</td>
+          </tr>
+          <tr>
+            <td class="key">series_id</td>
+            <td class="type">INTEGER</td>
+            <td class="flag">○</td>
+            <td class="desc">親作品 ID (= series.id への参照)</td>
+            <td class="sample">33576</td>
+            <td class="cov">100%</td>
+          </tr>
+          <tr>
+            <td class="key">type</td>
+            <td class="type">TEXT</td>
+            <td class="flag">○</td>
+            <td class="desc">版型 (= standard/bunkobon/wideban/kanzenban/shinsoban/aizoban/anime/other)</td>
+            <td class="sample">standard</td>
+            <td class="cov">100%</td>
+          </tr>
+          <tr>
+            <td class="key">label</td>
+            <td class="type">TEXT</td>
+            <td class="flag">○</td>
+            <td class="desc">版型ラベル (= 例: &#x27;通常版&#x27;/&#x27;文庫版&#x27;/&#x27;完全版&#x27;)</td>
+            <td class="sample">通常版</td>
+            <td class="cov">100%</td>
+          </tr>
+          <tr>
+            <td class="key">imprint</td>
+            <td class="type">TEXT</td>
+            <td class="flag"></td>
+            <td class="desc">レーベル名 (= 例: &#x27;ジャンプコミックス&#x27;)</td>
+            <td class="sample">ジャンプコミックス</td>
+            <td class="cov">87%</td>
+          </tr>
+          <tr>
+            <td class="key">year_started</td>
+            <td class="type">INTEGER</td>
+            <td class="flag"></td>
+            <td class="desc">この版型の発刊開始年</td>
+            <td class="sample"><i class="null">NULL</i></td>
+            <td class="cov">0%</td>
+          </tr>
+          <tr>
+            <td class="key">year_ended</td>
+            <td class="type">INTEGER</td>
+            <td class="flag"></td>
+            <td class="desc">この版型の発刊終了年</td>
+            <td class="sample"><i class="null">NULL</i></td>
+            <td class="cov">0%</td>
+          </tr>
+          <tr>
+            <td class="key">created_at</td>
+            <td class="type">TEXT</td>
+            <td class="flag">○</td>
+            <td class="desc">DB 投入日時</td>
+            <td class="sample">2026-05-18T10:03:01Z</td>
+            <td class="cov">100%</td>
+          </tr>
+          <tr>
+            <td class="key">updated_at</td>
+            <td class="type">TEXT</td>
+            <td class="flag">○</td>
+            <td class="desc">DB 更新日時</td>
+            <td class="sample">2026-05-18T10:03:01Z</td>
+            <td class="cov">100%</td>
+          </tr></tbody>
+      </table>
+    </section>
+
+    <section class="table-section">
+      <h3>volumes <span class="count">(381,393 rows)</span></h3>
+      <p class="table-desc">巻 (= 各版型 N 巻の物理単位、 1 巻 = 1 ISBN)</p>
+      <table><colgroup class="col-widths"><col><col><col><col><col><col></colgroup>
+        <thead>
+          <tr>
+            <th>キー名</th>
+            <th>型</th>
+            <th>制約</th>
+            <th>日本語説明</th>
+            <th>サンプル値</th>
+            <th>充足率</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="key">id</td>
+            <td class="type">INTEGER</td>
+            <td class="flag">PK</td>
+            <td class="desc">内部 ID</td>
+            <td class="sample">105464</td>
+            <td class="cov">100%</td>
+          </tr>
+          <tr>
+            <td class="key">edition_id</td>
+            <td class="type">INTEGER</td>
+            <td class="flag">○</td>
+            <td class="desc">親版型 ID (= editions.id への参照)</td>
+            <td class="sample">40309</td>
+            <td class="cov">100%</td>
+          </tr>
+          <tr>
+            <td class="key">madb_book_id</td>
+            <td class="type">TEXT</td>
+            <td class="flag"></td>
+            <td class="desc">MADB book ID (= M-prefix、 重複防止 PK 代用)</td>
+            <td class="sample">M1037106</td>
+            <td class="cov">100%</td>
+          </tr>
+          <tr>
+            <td class="key">isbn13</td>
+            <td class="type">TEXT</td>
+            <td class="flag"></td>
+            <td class="desc">ISBN-13 (= 古い巻は NULL あり)</td>
+            <td class="sample">9784088844916</td>
+            <td class="cov">89%</td>
+          </tr>
+          <tr>
+            <td class="key">number</td>
+            <td class="type">INTEGER</td>
+            <td class="flag">○</td>
+            <td class="desc">巻数 (= 数字、 例: 111)</td>
+            <td class="sample">111</td>
+            <td class="cov">100%</td>
+          </tr>
+          <tr>
+            <td class="key">volume_label</td>
+            <td class="type">TEXT</td>
+            <td class="flag"></td>
+            <td class="desc">巻ラベル生表記 (= &#x27;上&#x27;/&#x27;下&#x27;/&#x27;特装版&#x27; 等)</td>
+            <td class="sample"><i class="null">NULL</i></td>
+            <td class="cov">3%</td>
+          </tr>
+          <tr>
+            <td class="key">is_extra</td>
+            <td class="type">INTEGER</td>
+            <td class="flag">○</td>
+            <td class="desc">外伝・0 巻フラグ (= 0/1)</td>
+            <td class="sample">0</td>
+            <td class="cov">100%</td>
+          </tr>
+          <tr>
+            <td class="key">release_date</td>
+            <td class="type">TEXT</td>
+            <td class="flag"></td>
+            <td class="desc">発売日 (= YYYY-MM-DD)</td>
+            <td class="sample">2025-03-24</td>
+            <td class="cov">95%</td>
+          </tr>
+          <tr>
+            <td class="key">cover_url</td>
+            <td class="type">TEXT</td>
+            <td class="flag"></td>
+            <td class="desc">表紙画像 URL</td>
+            <td class="sample"><i class="null">NULL</i></td>
+            <td class="cov">0%</td>
+          </tr>
+          <tr>
+            <td class="key">price</td>
+            <td class="type">INTEGER</td>
+            <td class="flag"></td>
+            <td class="desc">価格 (= 円)</td>
+            <td class="sample"><i class="null">NULL</i></td>
+            <td class="cov">0%</td>
+          </tr>
+          <tr>
+            <td class="key">asin</td>
+            <td class="type">TEXT</td>
+            <td class="flag"></td>
+            <td class="desc">Amazon ASIN (= primary、 詳細は asins テーブル)</td>
+            <td class="sample"><i class="null">NULL</i></td>
+            <td class="cov">0%</td>
+          </tr>
+          <tr>
+            <td class="key">created_at</td>
+            <td class="type">TEXT</td>
+            <td class="flag">○</td>
+            <td class="desc">DB 投入日時</td>
+            <td class="sample">2026-05-18T10:03:01Z</td>
+            <td class="cov">100%</td>
+          </tr>
+          <tr>
+            <td class="key">updated_at</td>
+            <td class="type">TEXT</td>
+            <td class="flag">○</td>
+            <td class="desc">DB 更新日時</td>
+            <td class="sample">2026-05-18T10:03:01Z</td>
+            <td class="cov">100%</td>
+          </tr></tbody>
+      </table>
+    </section>
+<h3 class="group-header" style="background:#444;color:#fff;padding:3pt 6pt;border:0;">マスタ (= 参照辞書)</h3>
+
+    <section class="table-section">
+      <h3>publishers <span class="count">(35 rows)</span></h3>
+      <p class="table-desc">出版社マスタ</p>
+      <table><colgroup class="col-widths"><col><col><col><col><col><col></colgroup>
+        <thead>
+          <tr>
+            <th>キー名</th>
+            <th>型</th>
+            <th>制約</th>
+            <th>日本語説明</th>
+            <th>サンプル値</th>
+            <th>充足率</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="key">key</td>
+            <td class="type">TEXT</td>
+            <td class="flag">PK</td>
+            <td class="desc">出版社キー (= 例: &#x27;shueisha&#x27;)</td>
+            <td class="sample">shueisha</td>
+            <td class="cov">100%</td>
+          </tr>
+          <tr>
+            <td class="key">name</td>
+            <td class="type">TEXT</td>
+            <td class="flag">○</td>
+            <td class="desc">出版社名 (= 例: &#x27;集英社&#x27;)</td>
+            <td class="sample">集英社</td>
+            <td class="cov">100%</td>
+          </tr></tbody>
+      </table>
+    </section>
+
+    <section class="table-section">
+      <h3>magazines <span class="count">(51 rows)</span></h3>
+      <p class="table-desc">連載誌マスタ</p>
+      <table><colgroup class="col-widths"><col><col><col><col><col><col></colgroup>
+        <thead>
+          <tr>
+            <th>キー名</th>
+            <th>型</th>
+            <th>制約</th>
+            <th>日本語説明</th>
+            <th>サンプル値</th>
+            <th>充足率</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="key">key</td>
+            <td class="type">TEXT</td>
+            <td class="flag">PK</td>
+            <td class="desc">連載誌キー (= 例: &#x27;weekly-shonen-jump&#x27;)</td>
+            <td class="sample">weekly-shonen-jump</td>
+            <td class="cov">100%</td>
+          </tr>
+          <tr>
+            <td class="key">name</td>
+            <td class="type">TEXT</td>
+            <td class="flag">○</td>
+            <td class="desc">連載誌名 (= 例: &#x27;週刊少年ジャンプ&#x27;)</td>
+            <td class="sample">週刊少年ジャンプ</td>
+            <td class="cov">100%</td>
+          </tr>
+          <tr>
+            <td class="key">publisher</td>
+            <td class="type">TEXT</td>
+            <td class="flag">○</td>
+            <td class="desc">発行元 (= publishers.key)</td>
+            <td class="sample">shueisha</td>
+            <td class="cov">100%</td>
+          </tr>
+          <tr>
+            <td class="key">demographic</td>
+            <td class="type">TEXT</td>
+            <td class="flag">○</td>
+            <td class="desc">対象年齢層 (= shounen/shoujo/seinen/...)</td>
+            <td class="sample">shounen</td>
+            <td class="cov">100%</td>
+          </tr></tbody>
+      </table>
+    </section>
+<h3 class="group-header" style="background:#444;color:#fff;padding:3pt 6pt;border:0;">成人判定</h3>
+
+    <section class="table-section">
+      <h3>adult_signals <span class="count">(15,852 rows)</span></h3>
+      <p class="table-desc">成人判定 signal の内訳 (= 何が当たったかの記録)</p>
+      <table><colgroup class="col-widths"><col><col><col><col><col><col></colgroup>
+        <thead>
+          <tr>
+            <th>キー名</th>
+            <th>型</th>
+            <th>制約</th>
+            <th>日本語説明</th>
+            <th>サンプル値</th>
+            <th>充足率</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="key">series_id</td>
+            <td class="type">INTEGER</td>
+            <td class="flag">PK○</td>
+            <td class="desc">対象作品 ID</td>
+            <td class="sample">13</td>
+            <td class="cov">100%</td>
+          </tr>
+          <tr>
+            <td class="key">signal</td>
+            <td class="type">TEXT</td>
+            <td class="flag">PK○</td>
+            <td class="desc">判定 signal 名 (= 例: &#x27;wikipedia_adult_mangaka_list&#x27;)</td>
+            <td class="sample">wikipedia_adult_mangaka_list</td>
+            <td class="cov">100%</td>
+          </tr>
+          <tr>
+            <td class="key">weight</td>
+            <td class="type">INTEGER</td>
+            <td class="flag">○</td>
+            <td class="desc">寄与スコア</td>
+            <td class="sample">2</td>
+            <td class="cov">100%</td>
+          </tr>
+          <tr>
+            <td class="key">evidence</td>
+            <td class="type">TEXT</td>
+            <td class="flag"></td>
+            <td class="desc">根拠 (= マッチした文字列など)</td>
+            <td class="sample">ナナシ</td>
+            <td class="cov">100%</td>
+          </tr>
+          <tr>
+            <td class="key">fetched_at</td>
+            <td class="type">TEXT</td>
+            <td class="flag">○</td>
+            <td class="desc">判定実行日時</td>
+            <td class="sample">2026-05-17T13:49:27Z</td>
+            <td class="cov">100%</td>
+          </tr></tbody>
+      </table>
+    </section>
+
+    <section class="table-section">
+      <h3>adult_publishers <span class="count">(21 rows)</span></h3>
+      <p class="table-desc">既知の成人系出版社・レーベル seed list</p>
+      <table><colgroup class="col-widths"><col><col><col><col><col><col></colgroup>
+        <thead>
+          <tr>
+            <th>キー名</th>
+            <th>型</th>
+            <th>制約</th>
+            <th>日本語説明</th>
+            <th>サンプル値</th>
+            <th>充足率</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="key">name</td>
+            <td class="type">TEXT</td>
+            <td class="flag">PK</td>
+            <td class="desc">成人系出版社・レーベル名 (= NFKC 正規化済)</td>
+            <td class="sample">エンジェル出版</td>
+            <td class="cov">100%</td>
+          </tr>
+          <tr>
+            <td class="key">source</td>
+            <td class="type">TEXT</td>
+            <td class="flag">○</td>
+            <td class="desc">由来 (= &#x27;wikipedia_adult_magazines&#x27; / &#x27;manual&#x27;)</td>
+            <td class="sample">wikipedia_adult_magazines</td>
+            <td class="cov">100%</td>
+          </tr>
+          <tr>
+            <td class="key">fetched_at</td>
+            <td class="type">TEXT</td>
+            <td class="flag">○</td>
+            <td class="desc">投入日時</td>
+            <td class="sample">2026-05-17T13:49:24Z</td>
+            <td class="cov">100%</td>
+          </tr></tbody>
+      </table>
+    </section>
+
+    <section class="table-section">
+      <h3>adult_mangaka_known <span class="count">(2,035 rows)</span></h3>
+      <p class="table-desc">既知の成人向け作家 seed list</p>
+      <table><colgroup class="col-widths"><col><col><col><col><col><col></colgroup>
+        <thead>
+          <tr>
+            <th>キー名</th>
+            <th>型</th>
+            <th>制約</th>
+            <th>日本語説明</th>
+            <th>サンプル値</th>
+            <th>充足率</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="key">name</td>
+            <td class="type">TEXT</td>
+            <td class="flag">PK</td>
+            <td class="desc">成人向け作家名 (= NFKC 正規化済)</td>
+            <td class="sample">3号リラ</td>
+            <td class="cov">100%</td>
+          </tr>
+          <tr>
+            <td class="key">display</td>
+            <td class="type">TEXT</td>
+            <td class="flag">○</td>
+            <td class="desc">元表記</td>
+            <td class="sample">3号リラ</td>
+            <td class="cov">100%</td>
+          </tr>
+          <tr>
+            <td class="key">source</td>
+            <td class="type">TEXT</td>
+            <td class="flag">○</td>
+            <td class="desc">由来</td>
+            <td class="sample">wikipedia_adult_mangaka_list</td>
+            <td class="cov">100%</td>
+          </tr>
+          <tr>
+            <td class="key">fetched_at</td>
+            <td class="type">TEXT</td>
+            <td class="flag">○</td>
+            <td class="desc">投入日時</td>
+            <td class="sample">2026-05-17T13:49:24Z</td>
+            <td class="cov">100%</td>
+          </tr></tbody>
+      </table>
+    </section>
+
+    <section class="table-section">
+      <h3>adult_imprints <span class="count">(235 rows)</span></h3>
+      <p class="table-desc">成人系 imprint seed list (= publisher より細かい粒度)</p>
+      <table><colgroup class="col-widths"><col><col><col><col><col><col></colgroup>
+        <thead>
+          <tr>
+            <th>キー名</th>
+            <th>型</th>
+            <th>制約</th>
+            <th>日本語説明</th>
+            <th>サンプル値</th>
+            <th>充足率</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="key">imprint</td>
+            <td class="type">TEXT</td>
+            <td class="flag">PK</td>
+            <td class="desc">成人系 imprint 名 (= NFKC 正規化済)</td>
+            <td class="sample">カゲキヤコミック</td>
+            <td class="cov">100%</td>
+          </tr>
+          <tr>
+            <td class="key">publisher</td>
+            <td class="type">TEXT</td>
+            <td class="flag"></td>
+            <td class="desc">発行元 (= 補助情報)</td>
+            <td class="sample">DEEPER-ZERO</td>
+            <td class="cov">100%</td>
+          </tr>
+          <tr>
+            <td class="key">count</td>
+            <td class="type">INTEGER</td>
+            <td class="flag"></td>
+            <td class="desc">raw dump 件数 (= 信頼度 weight)</td>
+            <td class="sample">4494</td>
+            <td class="cov">100%</td>
+          </tr>
+          <tr>
+            <td class="key">source</td>
+            <td class="type">TEXT</td>
+            <td class="flag">○</td>
+            <td class="desc">由来</td>
+            <td class="sample">manual_seed</td>
+            <td class="cov">100%</td>
+          </tr>
+          <tr>
+            <td class="key">fetched_at</td>
+            <td class="type">TEXT</td>
+            <td class="flag">○</td>
+            <td class="desc">投入日時</td>
+            <td class="sample">2026-05-17T13:49:23Z</td>
+            <td class="cov">100%</td>
+          </tr></tbody>
+      </table>
+    </section>
+<h3 class="group-header" style="background:#444;color:#fff;padding:3pt 6pt;border:0;">data 由来追跡</h3>
+
+    <section class="table-section">
+      <h3>sources <span class="count">(0 rows)</span></h3>
+      <p class="table-desc">data provenance 追跡 (= どの source からいつ取ったか)</p>
+      <table><colgroup class="col-widths"><col><col><col><col><col><col></colgroup>
+        <thead>
+          <tr>
+            <th>キー名</th>
+            <th>型</th>
+            <th>制約</th>
+            <th>日本語説明</th>
+            <th>サンプル値</th>
+            <th>充足率</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="key">id</td>
+            <td class="type">INTEGER</td>
+            <td class="flag">PK</td>
+            <td class="desc">内部 ID</td>
+            <td class="sample"><i class="null">NULL</i></td>
+            <td class="cov">—</td>
+          </tr>
+          <tr>
+            <td class="key">source_name</td>
+            <td class="type">TEXT</td>
+            <td class="flag">○</td>
+            <td class="desc">由来 source (= wikidata/ndl/openbd/rakuten/wikipedia_llm)</td>
+            <td class="sample"><i class="null">NULL</i></td>
+            <td class="cov">—</td>
+          </tr>
+          <tr>
+            <td class="key">ref_table</td>
+            <td class="type">TEXT</td>
+            <td class="flag">○</td>
+            <td class="desc">対象 table (= mangaka/series/editions/volumes)</td>
+            <td class="sample"><i class="null">NULL</i></td>
+            <td class="cov">—</td>
+          </tr>
+          <tr>
+            <td class="key">ref_id</td>
+            <td class="type">TEXT</td>
+            <td class="flag">○</td>
+            <td class="desc">対象 row の 自然キー</td>
+            <td class="sample"><i class="null">NULL</i></td>
+            <td class="cov">—</td>
+          </tr>
+          <tr>
+            <td class="key">fetched_at</td>
+            <td class="type">TEXT</td>
+            <td class="flag">○</td>
+            <td class="desc">取得日時</td>
+            <td class="sample"><i class="null">NULL</i></td>
+            <td class="cov">—</td>
+          </tr>
+          <tr>
+            <td class="key">raw_json</td>
+            <td class="type">TEXT</td>
+            <td class="flag"></td>
+            <td class="desc">生 JSON snapshot</td>
+            <td class="sample"><i class="null">NULL</i></td>
+            <td class="cov">—</td>
+          </tr></tbody>
+      </table>
+    </section>
+<h3 class="group-header" style="background:#444;color:#fff;padding:3pt 6pt;border:0;">Amazon 連携 (= 現状空、 Phase 5 で稼働)</h3>
+
+    <section class="table-section">
+      <h3>asins <span class="count">(0 rows)</span></h3>
+      <p class="table-desc">ISBN-13 と Amazon ASIN の 多対多関係 (= ロケール別)</p>
+      <table><colgroup class="col-widths"><col><col><col><col><col><col></colgroup>
+        <thead>
+          <tr>
+            <th>キー名</th>
+            <th>型</th>
+            <th>制約</th>
+            <th>日本語説明</th>
+            <th>サンプル値</th>
+            <th>充足率</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="key">isbn13</td>
+            <td class="type">TEXT</td>
+            <td class="flag">PK○</td>
+            <td class="desc">ISBN-13</td>
+            <td class="sample"><i class="null">NULL</i></td>
+            <td class="cov">—</td>
+          </tr>
+          <tr>
+            <td class="key">asin</td>
+            <td class="type">TEXT</td>
+            <td class="flag">PK○</td>
+            <td class="desc">Amazon ASIN</td>
+            <td class="sample"><i class="null">NULL</i></td>
+            <td class="cov">—</td>
+          </tr>
+          <tr>
+            <td class="key">locale</td>
+            <td class="type">TEXT</td>
+            <td class="flag">PK○</td>
+            <td class="desc">ロケール (= &#x27;jp&#x27;/&#x27;com&#x27;/...)</td>
+            <td class="sample"><i class="null">NULL</i></td>
+            <td class="cov">—</td>
+          </tr>
+          <tr>
+            <td class="key">source</td>
+            <td class="type">TEXT</td>
+            <td class="flag">○</td>
+            <td class="desc">由来 (= &#x27;paapi&#x27;/&#x27;rakuten&#x27;/...)</td>
+            <td class="sample"><i class="null">NULL</i></td>
+            <td class="cov">—</td>
+          </tr>
+          <tr>
+            <td class="key">fetched_at</td>
+            <td class="type">TEXT</td>
+            <td class="flag">○</td>
+            <td class="desc">取得日時</td>
+            <td class="sample"><i class="null">NULL</i></td>
+            <td class="cov">—</td>
+          </tr></tbody>
+      </table>
+    </section>
+
+    <section class="table-section">
+      <h3>amazon_metadata <span class="count">(0 rows)</span></h3>
+      <p class="table-desc">Amazon per-ASIN メタデータ (= Phase 5 用、 現状空)</p>
+      <table><colgroup class="col-widths"><col><col><col><col><col><col></colgroup>
+        <thead>
+          <tr>
+            <th>キー名</th>
+            <th>型</th>
+            <th>制約</th>
+            <th>日本語説明</th>
+            <th>サンプル値</th>
+            <th>充足率</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="key">asin</td>
+            <td class="type">TEXT</td>
+            <td class="flag">PK</td>
+            <td class="desc">Amazon ASIN</td>
+            <td class="sample"><i class="null">NULL</i></td>
+            <td class="cov">—</td>
+          </tr>
+          <tr>
+            <td class="key">isbn13</td>
+            <td class="type">TEXT</td>
+            <td class="flag"></td>
+            <td class="desc">対応 ISBN-13</td>
+            <td class="sample"><i class="null">NULL</i></td>
+            <td class="cov">—</td>
+          </tr>
+          <tr>
+            <td class="key">browse_node_path</td>
+            <td class="type">TEXT</td>
+            <td class="flag"></td>
+            <td class="desc">Amazon カテゴリパス (= &#x27;Books &gt; コミック &gt; ...&#x27;)</td>
+            <td class="sample"><i class="null">NULL</i></td>
+            <td class="cov">—</td>
+          </tr>
+          <tr>
+            <td class="key">is_adult_browse_node</td>
+            <td class="type">INTEGER</td>
+            <td class="flag">○</td>
+            <td class="desc">成年コミックノード含むフラグ</td>
+            <td class="sample"><i class="null">NULL</i></td>
+            <td class="cov">—</td>
+          </tr>
+          <tr>
+            <td class="key">sales_rank</td>
+            <td class="type">INTEGER</td>
+            <td class="flag"></td>
+            <td class="desc">Amazon 売上順位</td>
+            <td class="sample"><i class="null">NULL</i></td>
+            <td class="cov">—</td>
+          </tr>
+          <tr>
+            <td class="key">fetched_at</td>
+            <td class="type">TEXT</td>
+            <td class="flag">○</td>
+            <td class="desc">取得日時</td>
+            <td class="sample"><i class="null">NULL</i></td>
+            <td class="cov">—</td>
+          </tr></tbody>
+      </table>
+    </section>
+<h3 class="group-header" style="background:#444;color:#fff;padding:3pt 6pt;border:0;">3-state model (= 公開 / 除外 / 履歴、 現状空)</h3>
+
+    <section class="table-section">
+      <h3>series_archive <span class="count">(0 rows)</span></h3>
+      <p class="table-desc">全 import 履歴 (= source-of-truth、 削除しない)</p>
+      <table><colgroup class="col-widths"><col><col><col><col><col><col></colgroup>
+        <thead>
+          <tr>
+            <th>キー名</th>
+            <th>型</th>
+            <th>制約</th>
+            <th>日本語説明</th>
+            <th>サンプル値</th>
+            <th>充足率</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="key">id</td>
+            <td class="type">INTEGER</td>
+            <td class="flag">PK</td>
+            <td class="desc">内部 ID</td>
+            <td class="sample"><i class="null">NULL</i></td>
+            <td class="cov">—</td>
+          </tr>
+          <tr>
+            <td class="key">series_key</td>
+            <td class="type">TEXT</td>
+            <td class="flag">○</td>
+            <td class="desc">作品の一意キー</td>
+            <td class="sample"><i class="null">NULL</i></td>
+            <td class="cov">—</td>
+          </tr>
+          <tr>
+            <td class="key">qid</td>
+            <td class="type">TEXT</td>
+            <td class="flag"></td>
+            <td class="desc">Wikidata ID</td>
+            <td class="sample"><i class="null">NULL</i></td>
+            <td class="cov">—</td>
+          </tr>
+          <tr>
+            <td class="key">title</td>
+            <td class="type">TEXT</td>
+            <td class="flag">○</td>
+            <td class="desc">作品タイトル</td>
+            <td class="sample"><i class="null">NULL</i></td>
+            <td class="cov">—</td>
+          </tr>
+          <tr>
+            <td class="key">title_kana</td>
+            <td class="type">TEXT</td>
+            <td class="flag"></td>
+            <td class="desc">タイトルふりがな</td>
+            <td class="sample"><i class="null">NULL</i></td>
+            <td class="cov">—</td>
+          </tr>
+          <tr>
+            <td class="key">year_started</td>
+            <td class="type">INTEGER</td>
+            <td class="flag"></td>
+            <td class="desc">連載開始年</td>
+            <td class="sample"><i class="null">NULL</i></td>
+            <td class="cov">—</td>
+          </tr>
+          <tr>
+            <td class="key">year_ended</td>
+            <td class="type">INTEGER</td>
+            <td class="flag"></td>
+            <td class="desc">連載終了年</td>
+            <td class="sample"><i class="null">NULL</i></td>
+            <td class="cov">—</td>
+          </tr>
+          <tr>
+            <td class="key">status</td>
+            <td class="type">TEXT</td>
+            <td class="flag"></td>
+            <td class="desc">連載状態</td>
+            <td class="sample"><i class="null">NULL</i></td>
+            <td class="cov">—</td>
+          </tr>
+          <tr>
+            <td class="key">demographic</td>
+            <td class="type">TEXT</td>
+            <td class="flag"></td>
+            <td class="desc">対象年齢層</td>
+            <td class="sample"><i class="null">NULL</i></td>
+            <td class="cov">—</td>
+          </tr>
+          <tr>
+            <td class="key">publisher_key</td>
+            <td class="type">TEXT</td>
+            <td class="flag"></td>
+            <td class="desc">出版社キー</td>
+            <td class="sample"><i class="null">NULL</i></td>
+            <td class="cov">—</td>
+          </tr>
+          <tr>
+            <td class="key">magazine_key</td>
+            <td class="type">TEXT</td>
+            <td class="flag"></td>
+            <td class="desc">連載誌キー</td>
+            <td class="sample"><i class="null">NULL</i></td>
+            <td class="cov">—</td>
+          </tr>
+          <tr>
+            <td class="key">genres</td>
+            <td class="type">TEXT</td>
+            <td class="flag"></td>
+            <td class="desc">ジャンル</td>
+            <td class="sample"><i class="null">NULL</i></td>
+            <td class="cov">—</td>
+          </tr>
+          <tr>
+            <td class="key">synopsis</td>
+            <td class="type">TEXT</td>
+            <td class="flag"></td>
+            <td class="desc">あらすじ</td>
+            <td class="sample"><i class="null">NULL</i></td>
+            <td class="cov">—</td>
+          </tr>
+          <tr>
+            <td class="key">wikipedia_url</td>
+            <td class="type">TEXT</td>
+            <td class="flag"></td>
+            <td class="desc">Wikipedia URL</td>
+            <td class="sample"><i class="null">NULL</i></td>
+            <td class="cov">—</td>
+          </tr>
+          <tr>
+            <td class="key">adult_score</td>
+            <td class="type">INTEGER</td>
+            <td class="flag">○</td>
+            <td class="desc">成人スコア</td>
+            <td class="sample"><i class="null">NULL</i></td>
+            <td class="cov">—</td>
+          </tr>
+          <tr>
+            <td class="key">first_imported_at</td>
+            <td class="type">TEXT</td>
+            <td class="flag">○</td>
+            <td class="desc">初回投入日時</td>
+            <td class="sample"><i class="null">NULL</i></td>
+            <td class="cov">—</td>
+          </tr>
+          <tr>
+            <td class="key">last_imported_at</td>
+            <td class="type">TEXT</td>
+            <td class="flag">○</td>
+            <td class="desc">最終更新日時</td>
+            <td class="sample"><i class="null">NULL</i></td>
+            <td class="cov">—</td>
+          </tr>
+          <tr>
+            <td class="key">current_state</td>
+            <td class="type">TEXT</td>
+            <td class="flag">○</td>
+            <td class="desc">現在の状態 (= live/excluded/deleted)</td>
+            <td class="sample"><i class="null">NULL</i></td>
+            <td class="cov">—</td>
+          </tr></tbody>
+      </table>
+    </section>
+
+    <section class="table-section">
+      <h3>series_excluded <span class="count">(0 rows)</span></h3>
+      <p class="table-desc">管理者 review queue (= グレーゾーン)</p>
+      <table><colgroup class="col-widths"><col><col><col><col><col><col></colgroup>
+        <thead>
+          <tr>
+            <th>キー名</th>
+            <th>型</th>
+            <th>制約</th>
+            <th>日本語説明</th>
+            <th>サンプル値</th>
+            <th>充足率</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="key">archive_id</td>
+            <td class="type">INTEGER</td>
+            <td class="flag">PK</td>
+            <td class="desc">archive ID (= series_archive.id)</td>
+            <td class="sample"><i class="null">NULL</i></td>
+            <td class="cov">—</td>
+          </tr>
+          <tr>
+            <td class="key">reason</td>
+            <td class="type">TEXT</td>
+            <td class="flag">○</td>
+            <td class="desc">除外理由 (= &#x27;adult_score&#x27;/&#x27;manual_admin&#x27; 等)</td>
+            <td class="sample"><i class="null">NULL</i></td>
+            <td class="cov">—</td>
+          </tr>
+          <tr>
+            <td class="key">signals_json</td>
+            <td class="type">TEXT</td>
+            <td class="flag"></td>
+            <td class="desc">発火 signal JSON</td>
+            <td class="sample"><i class="null">NULL</i></td>
+            <td class="cov">—</td>
+          </tr>
+          <tr>
+            <td class="key">excluded_at</td>
+            <td class="type">TEXT</td>
+            <td class="flag">○</td>
+            <td class="desc">除外日時</td>
+            <td class="sample"><i class="null">NULL</i></td>
+            <td class="cov">—</td>
+          </tr>
+          <tr>
+            <td class="key">excluded_by</td>
+            <td class="type">TEXT</td>
+            <td class="flag">○</td>
+            <td class="desc">実行者 (= &#x27;auto&#x27; / &#x27;admin:&lt;user&gt;&#x27;)</td>
+            <td class="sample"><i class="null">NULL</i></td>
+            <td class="cov">—</td>
+          </tr></tbody>
+      </table>
+    </section>
+
+    <section class="table-section">
+      <h3>admin_audit <span class="count">(0 rows)</span></h3>
+      <p class="table-desc">管理者操作の監査ログ</p>
+      <table><colgroup class="col-widths"><col><col><col><col><col><col></colgroup>
+        <thead>
+          <tr>
+            <th>キー名</th>
+            <th>型</th>
+            <th>制約</th>
+            <th>日本語説明</th>
+            <th>サンプル値</th>
+            <th>充足率</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="key">id</td>
+            <td class="type">INTEGER</td>
+            <td class="flag">PK</td>
+            <td class="desc">内部 ID</td>
+            <td class="sample"><i class="null">NULL</i></td>
+            <td class="cov">—</td>
+          </tr>
+          <tr>
+            <td class="key">action</td>
+            <td class="type">TEXT</td>
+            <td class="flag">○</td>
+            <td class="desc">操作種別 (= reinstate/permanent_delete/manual_exclude)</td>
+            <td class="sample"><i class="null">NULL</i></td>
+            <td class="cov">—</td>
+          </tr>
+          <tr>
+            <td class="key">target_table</td>
+            <td class="type">TEXT</td>
+            <td class="flag">○</td>
+            <td class="desc">対象 table</td>
+            <td class="sample"><i class="null">NULL</i></td>
+            <td class="cov">—</td>
+          </tr>
+          <tr>
+            <td class="key">target_id</td>
+            <td class="type">INTEGER</td>
+            <td class="flag">○</td>
+            <td class="desc">対象 row ID</td>
+            <td class="sample"><i class="null">NULL</i></td>
+            <td class="cov">—</td>
+          </tr>
+          <tr>
+            <td class="key">performed_by</td>
+            <td class="type">TEXT</td>
+            <td class="flag"></td>
+            <td class="desc">実行者</td>
+            <td class="sample"><i class="null">NULL</i></td>
+            <td class="cov">—</td>
+          </tr>
+          <tr>
+            <td class="key">performed_at</td>
+            <td class="type">TEXT</td>
+            <td class="flag">○</td>
+            <td class="desc">実行日時</td>
+            <td class="sample"><i class="null">NULL</i></td>
+            <td class="cov">—</td>
+          </tr>
+          <tr>
+            <td class="key">reason</td>
+            <td class="type">TEXT</td>
+            <td class="flag"></td>
+            <td class="desc">理由 (= 自由記述)</td>
+            <td class="sample"><i class="null">NULL</i></td>
+            <td class="cov">—</td>
+          </tr>
+          <tr>
+            <td class="key">metadata_json</td>
+            <td class="type">TEXT</td>
+            <td class="flag"></td>
+            <td class="desc">補助情報 (= JSON)</td>
+            <td class="sample"><i class="null">NULL</i></td>
+            <td class="cov">—</td>
+          </tr></tbody>
+      </table>
+    </section>
+<h3 class="group-header" style="background:#444;color:#fff;padding:3pt 6pt;border:0;">内部</h3>
+
+    <section class="table-section">
+      <h3>meta <span class="count">(3 rows)</span></h3>
+      <p class="table-desc">schema 情報など内部メタ</p>
+      <table><colgroup class="col-widths"><col><col><col><col><col><col></colgroup>
+        <thead>
+          <tr>
+            <th>キー名</th>
+            <th>型</th>
+            <th>制約</th>
+            <th>日本語説明</th>
+            <th>サンプル値</th>
+            <th>充足率</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="key">key</td>
+            <td class="type">TEXT</td>
+            <td class="flag">PK</td>
+            <td class="desc">メタ情報のキー (= &#x27;schema_version&#x27; 等)</td>
+            <td class="sample">schema_version</td>
+            <td class="cov">100%</td>
+          </tr>
+          <tr>
+            <td class="key">value</td>
+            <td class="type">TEXT</td>
+            <td class="flag">○</td>
+            <td class="desc">値</td>
+            <td class="sample">v2.0</td>
+            <td class="cov">100%</td>
+          </tr></tbody>
+      </table>
+    </section>
+
+<h2>パート 2: 種3 = AI 補完 yaml (= <code>data/seeds/series-supplement-v2.yml</code>)</h2>
+<p class="intro">
+  種2 に <strong>無い</strong> 「主観的 / curated data」 を AI (= Claude Opus 4.7) で 1 件ずつ補完し
+  yaml に蓄積。 76,435 entries (= 種2 series の subset)。
+  promote-bulk 起動時に 種2 + 種3 を merge して 最終 <code>data/manga/&lt;slug&gt;/index.yml</code> を生成。
+</p>
+
+<div class="meta-box">
+  <strong>種3 の キー体系</strong>
+  <ul>
+    <li>各 entry は <code>key</code> field で 種2 の series 1 件と紐づく。</li>
+    <li>key 形式: <code>qid:Q…|name:&lt;タイトル&gt;</code> または <code>name:&lt;作者&gt;|name:&lt;タイトル&gt;</code> (= qid 無し時)</li>
+    <li>fill 漏れた entry は yaml に 存在しない or field が空 → promote-bulk で fallback (= TODO_genre / 空文字 / null) 化。</li>
+  </ul>
+</div>
+
+<h3>seed3 entry の 全 field <span class="count">(76,435 entries)</span></h3>
+<p class="table-desc">サンプル値は ONE PIECE entry の実 data。</p>
+<table>
+  <colgroup class="col-widths"><col><col><col><col><col><col></colgroup>
+  <thead>
+    <tr>
+      <th>キー名</th>
+      <th>型</th>
+      <th>必須</th>
+      <th>日本語説明</th>
+      <th>サンプル値 (= ONE PIECE)</th>
+      <th>充足率</th>
+    </tr>
+  </thead>
+  <tbody>
+          <tr>
+            <td class="key">key</td>
+            <td class="type">string</td>
+            <td class="flag">必須</td>
+            <td class="desc">(qid + baseTitle) 複合 ID。 例: &#x27;qid:Q2010|name:ONE PIECE&#x27; / &#x27;name:作者|name:タイトル&#x27;</td>
+            <td class="sample">&#x27;qid:Q2010|name:ONE PIECE&#x27;</td>
+            <td class="cov">100.0%</td>
+          </tr>
+          <tr>
+            <td class="key">slug</td>
+            <td class="type">string?</td>
+            <td class="flag">任意</td>
+            <td class="desc">AI 提案 slug (= フォルダ名 / URL)。 promote-bulk の自動 slug より優先。 ほぼ未使用 (= 自動生成に任せる)</td>
+            <td class="sample">&#x27;(空)&#x27;</td>
+            <td class="cov">0.0%</td>
+          </tr>
+          <tr>
+            <td class="key">magazine</td>
+            <td class="type">string?</td>
+            <td class="flag">任意</td>
+            <td class="desc">連載誌キー (= magazines.yml の key)。 不明時 null</td>
+            <td class="sample">&#x27;weekly-shonen-jump&#x27;</td>
+            <td class="cov">11.1%</td>
+          </tr>
+          <tr>
+            <td class="key">demographic</td>
+            <td class="type">enum?</td>
+            <td class="flag">任意</td>
+            <td class="desc">対象年齢層 (= shounen/shoujo/seinen/josei/kodomo/other)</td>
+            <td class="sample">&#x27;shounen&#x27;</td>
+            <td class="cov">100.0%</td>
+          </tr>
+          <tr>
+            <td class="key">genres</td>
+            <td class="type">string[]?</td>
+            <td class="flag">任意</td>
+            <td class="desc">ジャンルタグ 1-4 個 (= genres.yml の master keys から)</td>
+            <td class="sample">[&#x27;action&#x27;, &#x27;adventure&#x27;, &#x27;fantasy&#x27;, &#x27;comedy&#x27;, &#x27;dram<i class="truncate">…</i></td>
+            <td class="cov">100.0%</td>
+          </tr>
+          <tr>
+            <td class="key">synopsis</td>
+            <td class="type">string?</td>
+            <td class="flag">任意</td>
+            <td class="desc">あらすじ 80-200 字 (= 独自要約)</td>
+            <td class="sample">&#x27;ゴム人間の能力を持つ海賊ルフィが、 仲間と共に伝説の秘宝「ひとつなぎの大秘宝」 を求めて大海原を冒<i class="truncate">…</i></td>
+            <td class="cov">100.0%</td>
+          </tr>
+          <tr>
+            <td class="key">status</td>
+            <td class="type">enum?</td>
+            <td class="flag">任意</td>
+            <td class="desc">連載状態 (= ongoing/completed/hiatus)</td>
+            <td class="sample">&#x27;ongoing&#x27;</td>
+            <td class="cov">100.0%</td>
+          </tr>
+          <tr>
+            <td class="key">anime_adapted</td>
+            <td class="type">bool?</td>
+            <td class="flag">任意</td>
+            <td class="desc">アニメ化されたか</td>
+            <td class="sample">True</td>
+            <td class="cov">9.6%</td>
+          </tr>
+          <tr>
+            <td class="key">awards</td>
+            <td class="type">string[]?</td>
+            <td class="flag">任意</td>
+            <td class="desc">受賞歴 (= ほぼ未使用)</td>
+            <td class="sample">&#x27;(空)&#x27;</td>
+            <td class="cov">0.0%</td>
+          </tr>
+          <tr>
+            <td class="key">alternative_titles</td>
+            <td class="type">object?</td>
+            <td class="flag">任意</td>
+            <td class="desc">他言語タイトル (= {en, fr, de, it, pt})。 ⚠️ en は slug 生成に使うため カタカナ title では必須 fill</td>
+            <td class="sample">{&#x27;en&#x27;: &#x27;One Piece&#x27;}</td>
+            <td class="cov">53.6%</td>
+          </tr></tbody>
+</table>
+
+<h3>種2 ⟷ 種3 の対応 (= 同じ概念がどちら側にあるか)</h3>
+<table>
+  <colgroup><col style="width:20%"><col style="width:20%"><col style="width:35%"><col style="width:25%"></colgroup>
+  <thead><tr><th>概念</th><th>種2 (DB)</th><th>種3 (yaml)</th><th>備考</th></tr></thead>
+  <tbody>
+    <tr><td>タイトル</td><td><code>series.title</code></td><td>(key 内に含む)</td><td>種2 が主、 種3 は紐付けに使う</td></tr>
+    <tr><td>ジャンル</td><td><code>series.genres</code></td><td><code>genres</code></td><td>種3 で上書き (= 種2 はほぼ空)</td></tr>
+    <tr><td>あらすじ</td><td><code>series.synopsis</code></td><td><code>synopsis</code></td><td>種3 で上書き</td></tr>
+    <tr><td>連載誌</td><td><code>series.magazine_key</code></td><td><code>magazine</code></td><td>種3 で上書き</td></tr>
+    <tr><td>対象年齢</td><td><code>series.demographic</code></td><td><code>demographic</code></td><td>種3 で上書き</td></tr>
+    <tr><td>連載状態</td><td><code>series.status</code></td><td><code>status</code></td><td>種3 で上書き</td></tr>
+    <tr><td>アニメ化</td><td>(無)</td><td><code>anime_adapted</code></td><td>種3 のみ</td></tr>
+    <tr><td>英題</td><td><code>series.title_official_en</code></td><td><code>alternative_titles.en</code></td><td>種3 を slug 生成に使う</td></tr>
+    <tr><td>巻 / ISBN</td><td><code>volumes.*</code></td><td>(無)</td><td>種2 のみ (= 客観的 data)</td></tr>
+    <tr><td>作者</td><td><code>mangaka.* + series_authors</code></td><td>(無)</td><td>種2 のみ</td></tr>
+  </tbody>
+</table>
+
+</body>
+</html>
