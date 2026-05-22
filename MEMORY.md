@@ -2,7 +2,229 @@
 
 > このファイルは Claude Code session の context bootstrap 用。新しいセッションを開始したら最初に読むこと。
 
-最終更新: 2026-05-18 23:43 JST (B2 = 種3-v2 top 2000 fill 完了 = batch 706-725)
+最終更新: 2026-05-22 (a-miss fill 全 285 batch 完了 = qid: prefix 全消化、 残り = name: prefix 1,699 件 + qid: 異常キー 26 件)
+
+---
+
+# 2026-05-22 セッション 1-17: 種3 a-miss fill 全 285 batch 完了 (= 28,500 件 fill)
+
+## TL;DR (= 次セッション 8 行サマリ)
+
+- **a-miss 全 batch (= 1-285) fill 完了**: 17 セッションで 約 28,500 entries の `alternative_titles.en` を Opus 4.7 直筆 fill。 全 commit + push 済 (= `claude/manga-database-affiliate-3x0ms` branch)
+- **現在の seed3 状態**: 76,435 entries 中 en filled = **40,950 (54%)**、 en missing = **35,485 (46%)**
+- **a-miss 残り (= カタカナ含む title で en 無し) = 1,725 件**
+  - 内訳 1: **qid: prefix = 26 件** (= 過去 17 セッションで 異常キーによりスキップ、 手動修復対象)
+  - 内訳 2: **name: prefix = 1,699 件** (= mangaka に Wikidata QID 無し、 a-miss 抽出対象外だった group)
+- **次セッションでの作業候補** (= ユーザに確認):
+  - (A) qid: 26 件の異常キー 手動修復 (= 即着手可能、 小規模)
+  - (B) name: 1,699 件の fill (= 17 batch 新規生成 + 17 セッション相当の作業)
+  - (C) 別タスク (= 月次蒸留 / promote-bulk-v2 全件 / deploy 視覚確認 等)
+
+## 作業の構造 (= 完全 protocol)
+
+### Pipeline 全体
+
+```
+1. .cache/amiss/input-NNN.json (= 100 entries/batch、 list of {title, key})
+   ↓
+2. AI fill (= Opus 4.7 が key → {"alternative_titles": {"en": "..."}}) を生成)
+   ↓
+3. data/seeds/_fills/amiss-NNN.json (= dict 形式 JSON、 100 entries/batch)
+   ↓
+4. npx tsx scripts/_apply-fills.ts data/seeds/_fills/amiss-NNN.json
+   ↓ [apply] existing: 76435, fills: 100
+   ↓ [apply] done: applied=N, missing=M, total entries=76435
+5. data/seeds/series-supplement-v2.yml が更新 (= 既存 entry に en field 追加)
+   ↓
+6. git add + commit + push (= ユーザが artifact を即取得)
+```
+
+### 1 セッションでの作業量
+
+- **2000 件 = 20 batch = 4 parallel agents × 5 batch each**
+- 各 agent は input-NNN.json を読み、 Python json.dump(ensure_ascii=False) で amiss-NNN.json を書き出す
+- 全 20 batch を 一括 apply (= sequential for ループ)
+- 1 commit (= 20 fill files + series-supplement-v2.yml の diff) で push
+
+### Fill 規則 (= agent への prompt 仕様)
+
+```
+1. 公式英題が存在する → それを使う (e.g. ドラえもん → "Doraemon")
+2. カタカナ外来語 title → 元の言語に back-transliterate (e.g. バトル → "Battle")
+3. シリーズ variant/spinoff → 親シリーズ英題 + 説明的 subtitle
+4. 公式英題なし日本オリジナル → Hepburn romaji
+5. en field は **必ず非空文字列**
+```
+
+## 各セッションの実績 (= 全 17 セッション履歴)
+
+| Session | Batches | Entries | Applied | Missing | Commit |
+|---------|---------|---------|---------|---------|--------|
+| 1-11 | 003-180 | ~18,000 | ~18,000 | ~数件 | 372eb08...6499918 |
+| 12 | 181-200 | 2000 | 1999 | 1 (WORKING!!Re anomalous) | 121a2d4 |
+| 13 | 201-220 | 2000 | 1997 | 3 (Tezuka, IDOLiSH7, キャンディキャンディ) | bcfa46f |
+| 14 | 221-240 | 2000 | 1999 | 1 (ドッグデイズ) | 74a5480 |
+| 15 | 241-260 | 2000 | 1997 | 3 (244,255,258 leading-quote) | f8581d8 |
+| 16 | 261-280 | 2000 | 2000 | 0 (281-280 99 entries due to duplicate key in input) | 71f29e5 |
+| 17 | 281-285 | 424 | 423 | 1 (隠れビッチ smart-quote) | 2aacb15 |
+
+**累計**: 28,500 entries 処理、 約 28,470 件 apply 成功、 約 30 件異常キーで skip。
+
+## 残り a-miss 1,725 件の詳細
+
+### Category A: qid: prefix の異常キー (= 26 件、 直接 fill 対象)
+
+過去 17 セッションで apply スキップされた entries。 全て手動対処可能。 異常パターン:
+
+```
+1. leading double-quote in key (= 12 件):
+   "qid:Q193300|name:やじうまマーチ|sub:手塚治虫学年誌傑作集 : 完全限定版""
+   "qid:Q232660|name:アイドリッシュセブンre: member""
+   "qid:Q4348970|name:ドッグデイズ|sub:銀牙少年伝説 : ロクとボクの一番熱かった日々"
+   "qid:Q48762211|name:愛とエロスの日本近代文学史|sub:..."
+   "qid:Q617888|name:ヤスダスズヒト画集 シューティングスター・カルナバルside: 夜桜四重奏"
+   "qid:Q6455305|name:ギャグマンガ日和&ギャグマンガ日和GB|sub:..."
+   (他 6 件)
+
+2. smart-quote (= U+201C/U+201D) in key (= 例 1 件):
+   qid:Q96127776|name:"隠れビッチ"やってました。 (= スマートクォート)
+
+3. その他 colon / special char 異常 (= 残り 13 件):
+   ウルフチックにお願い、 パニックパラダイス、 食戟のソーマL'etoile、
+   アウターゾーン リ: ビジテッド、 スター・ウォーズ: マンダロリアン、
+   わがままレイディ、 猫と月チェイス、 アレが生えてre: start!、
+   この愛は、異端。: ベリアル文書、 アラサーバツイチ女が魔性の猫の愛人に...、
+   にゃんにゃんドリーム、 "Good Boy!"ガウディ、 プラスティック: ベイビイズ、
+   バージンラブ、 西村しのぶの神戸・元町"下山手ドレス"、 いずみタッチダウン!、
+   キャンディキャンディ (= seed にキー無し anomaly)、
+   魔法少女リリカルなのはA's PORTABLE -THE GEARS OF DESTINY-マテリアル娘。 ダッシュ (= 重複)
+```
+
+### Category B: name: prefix entries (= 1,699 件、 別 batch 必要)
+
+これらは mangaka に Wikidata QID が無い series。 過去の `.cache/amiss/input-*.json` 抽出時に **対象外** だった (= qid: prefix のみ抽出)。
+
+サンプル (= 多くは作者名そのもの、 タイトルではない):
+```
+azuタロウ、 Dr.モロー＆スタジオ寿、 Eve音楽アーティスト、
+Guy・Jeans、 LINEマンガ、 アイディアファクトリー (× 3)、
+あーもんど (× 2)、 アオイ、 アオエナ、 アカコッコ、 ...
+```
+
+**注意**: これら 1,699 件には 「mangaka 名そのもの」 が key の `name:` field に入っている パターン (= タイトル不在) も含まれており、 fill 対象として適切かは別途判定要 (= mangaka name は en filling 対象として無意味)。
+
+## 次セッションでの再開手順
+
+### Step 1: 状態確認 (= 最初 30 秒)
+
+```bash
+cd /home/user/MANGAL
+git pull origin claude/manga-database-affiliate-3x0ms
+git status   # clean のはず
+git log --oneline -5   # 2aacb15 が最新のはず
+```
+
+### Step 2: 残り a-miss 件数の再確認
+
+```bash
+python3 << 'EOF'
+import yaml, re
+with open('data/seeds/series-supplement-v2.yml') as f:
+    doc = yaml.safe_load(f)
+KATAKANA = re.compile(r'[゠-ヿ]')
+qid_remaining = []
+name_remaining = []
+for e in doc['series']:
+    key = e.get('key', '')
+    parts = key.split('|')
+    title = next((p[5:] for p in parts if p.startswith('name:')), '')
+    en = (e.get('alternative_titles') or {}).get('en') or ''
+    if KATAKANA.search(title) and not en:
+        if key.startswith('qid:'): qid_remaining.append((key, title))
+        elif key.startswith('name:'): name_remaining.append((key, title))
+print(f'qid: 残り {len(qid_remaining)} 件')
+print(f'name: 残り {len(name_remaining)} 件')
+EOF
+```
+
+期待値: `qid: 残り 26 件 / name: 残り 1,699 件` (= 月次蒸留や種3 追加が無ければ不変)
+
+### Step 3: ユーザに作業方針を聞く
+
+「現状は a-miss 1,725 件残り (qid: 26、 name: 1,699)。 どれから着手しますか?」
+- (A) qid: 26 件の手動 fill (= 即終了)
+- (B) name: 1,699 件 fill 用 batch 再生成 + 17 batch fill (= 約 17 セッション)
+- (C) 別タスク (= 月次蒸留 / promote-bulk-v2 / deploy 視覚確認 等)
+
+### Step 4-A: qid: 26 件処理の手順
+
+```bash
+# 1. 残り qid: 異常キー 26 件を 直接 JSON で書き出す
+python3 << 'EOF'
+import yaml, re, json
+with open('data/seeds/series-supplement-v2.yml') as f:
+    doc = yaml.safe_load(f)
+KATAKANA = re.compile(r'[゠-ヿ]')
+fills = {}
+for e in doc['series']:
+    key = e.get('key', '')
+    if not key.startswith('qid:'): continue
+    parts = key.split('|')
+    title = next((p[5:] for p in parts if p.startswith('name:')), '')
+    en = (e.get('alternative_titles') or {}).get('en') or ''
+    if KATAKANA.search(title) and not en:
+        fills[key] = {"alternative_titles": {"en": ""}}  # 各 title を Opus 直筆で埋める
+# data/seeds/_fills/amiss-fix-qid.json に書き出し
+EOF
+
+# 2. 各 title に対し Opus が en を入力 (= 26 件、 1 prompt で全部済む)
+# 3. apply: npx tsx scripts/_apply-fills.ts data/seeds/_fills/amiss-fix-qid.json
+# 4. commit + push
+```
+
+注意: 一部の key (= leading quote 等) は seed の キー自体が壊れている可能性、 その場合は seed 側の キー訂正が必要 (= 種3 既存破壊 にあたるため ⚠️ Go サイン 必要)。
+
+### Step 4-B: name: 1,699 件処理の手順
+
+```bash
+# 1. a-miss 抽出 script を 改修して name: prefix も対象に追加
+# (= 元の抽出 script を要調査、 .cache/amiss/input-*.json を生成する script)
+# 2. .cache/amiss/input-286.json 以降を新規生成 (= 17 batch = 1,699 件)
+# 3. 通常通り 4 parallel agent で fill 生成 + apply
+# 4. 1 セッション = 2000 件想定だが、 残り 1,699 件なので 1 セッションで全完了可能
+```
+
+⚠️ **未確認**: 「.cache/amiss/input-*.json を生成した script は どこにあるか」 — `ls scripts/_select-* scripts/_extract-amiss*` で見つからなかった。 過去のセッション (= session 1-11) で生成された pre-existing file の可能性。 次セッションで `git log -- scripts/ .cache/amiss/` で 履歴確認推奨。
+
+## 重要ファイル一覧
+
+```
+data/seeds/series-supplement-v2.yml         # 種3 v2 本体 (76,435 entries)
+data/seeds/_fills/amiss-NNN.json            # batch 003-285 (= 285 fill files)
+.cache/amiss/input-NNN.json                 # batch input (= 285 input files)
+scripts/_apply-fills.ts                     # 汎用 apply runner (= 既存利用)
+lib/seed3.ts                                # Seed3 schema 定義 (= load/write)
+CLAUDE.md                                   # protocol 定義 (= 毎セッション自動読み込み)
+MEMORY.md                                   # このファイル
+```
+
+## 重要な protocol 遵守事項 (= CLAUDE.md 参照)
+
+- **branch**: `claude/manga-database-affiliate-3x0ms` 固定
+- **commit 時 push までセット**: ユーザが artifact を即取得できるよう
+- **既存破壊禁止**: 種3 既存 entry の上書き/削除/編集は禁止 (= 純粋追加 only)
+- **abort 条件**: 既存 key の content が変わった / typecheck red 等
+- **2000 件づつ終わったらセッション終了**: ユーザ次の指示待ち
+
+## 既知の anomaly パターン (= 次回 fill で再発の可能性)
+
+1. **leading double-quote in JSON key** — Python json.dump で `ensure_ascii=False` 利用時、 key 内の特殊文字で 発生
+2. **smart-quote (U+201C/U+201D)** in key — 日本語 IME 由来
+3. **duplicate key in input file** — input-280 で 1 件発生 (= 元 data 重複)
+4. **seed key mismatch** — key は input に存在するが seed の YAML には存在しない (= input 抽出時の glitch?)
+5. **special chars (`:` , `'` , `&`, `"` 等)** — colon + space 等で key parse 異常
+
+これらは いずれも `missing=N` で report され、 apply は止まらない (= 残りは正常 apply)。
 
 ---
 
