@@ -1,0 +1,75 @@
+"""
+qid: prefix の異常キー 26 件 (= PUA / smart-quote / special chars 混入) を
+直接 fill する fills JSON を生成。 PUA 文字保持のため Python 経由で書き出し。
+"""
+import json
+import os
+
+# 各 entry の key は YAML から抽出した生 string (= PUA / smart-quote 含む)
+PUA_BB = ""
+PUA_BE = ""
+LDQ = "“"  # smart left double-quote
+RDQ = "”"  # smart right double-quote
+
+fills = {
+    f"qid:Q11268905|name:ウルフチックにお願い{PUA_BB}":
+        {"alternative_titles": {"en": "Wolfchic ni Onegai"}},
+    f"qid:Q11318682|name:パニック{PUA_BB}パラダイス":
+        {"alternative_titles": {"en": "Panic Paradise"}},
+    "qid:Q11382791|name:食戟のソーマL’etoile":
+        {"alternative_titles": {"en": "Food Wars! Shokugeki no Soma L'etoile"}},
+    "qid:Q11388305|name:アウターゾーン リ: ビジテッド":
+        {"alternative_titles": {"en": "Outer Zone Re: Visited"}},
+    "qid:Q11436991|name:スター・ウォーズ: マンダロリアン":
+        {"alternative_titles": {"en": "Star Wars: The Mandalorian"}},
+    f"qid:Q11460951|name:わがままレイディ{PUA_BB}":
+        {"alternative_titles": {"en": "Wagamama Lady"}},
+    f"qid:Q11513040|name:猫と月{PUA_BB}チェイス":
+        {"alternative_titles": {"en": "Neko to Tsuki Chase"}},
+    "qid:Q11528722|name:アレが生えてre: start!":
+        {"alternative_titles": {"en": "Are ga Haete Re: Start!"}},
+    "qid:Q11539498|name:この愛は、異端。: ベリアル文書":
+        {"alternative_titles": {"en": "Kono Ai wa, Itan.: Belial Documents"}},
+    "qid:Q11549126|name:アラサーバツイチ女が魔性の猫の愛人になって愛され方を教わるまで|sub:After divorce,Chatte fatale will be my mentor!":
+        {"alternative_titles": {"en": "After Divorce, Chatte Fatale Will Be My Mentor!"}},
+    f"qid:Q11572016|name:にゃんにゃん{PUA_BB}ドリーム":
+        {"alternative_titles": {"en": "Nyan Nyan Dream"}},
+    f"qid:Q11580564|name:{LDQ}Good Boy!{RDQ}ガウディ":
+        {"alternative_titles": {"en": '"Good Boy!" Gaudi'}},
+    "qid:Q11609056|name:プラスティック: ベイビイズ":
+        {"alternative_titles": {"en": "Plastic: Babies"}},
+    f"qid:Q11621242|name:バージン{PUA_BE}ラブ":
+        {"alternative_titles": {"en": "Virgin Love"}},
+    f"qid:Q11628495|name:西村しのぶの神戸・元町{LDQ}下山手ドレス{RDQ}":
+        {"alternative_titles": {"en": 'Shinobu Nishimura\'s Kobe Motomachi "Shimoyamate Dress"'}},
+    f"qid:Q11642002|name:いずみタッチ{PUA_BB}ダウン!":
+        {"alternative_titles": {"en": "Izumi Touchdown!"}},
+    "qid:Q11671779|name:WORKING!!Re: オーダー":
+        {"alternative_titles": {"en": "WORKING!! Re: Order"}},
+    "qid:Q193300|name:やじうまマーチ|sub:手塚治虫学年誌傑作集 : 完全限定版":
+        {"alternative_titles": {"en": "Yajiuma March"}},
+    "qid:Q232660|name:アイドリッシュセブンre: member":
+        {"alternative_titles": {"en": "IDOLiSH7 re: member"}},
+    f"qid:Q2731432|name:キャンディ{PUA_BB}キャンディ":
+        {"alternative_titles": {"en": "Candy Candy"}},
+    "qid:Q4348970|name:ドッグデイズ|sub:銀牙少年伝説 : ロクとボクの一番熱かった日々":
+        {"alternative_titles": {"en": "Dog Days"}},
+    "qid:Q48762211|name:愛とエロスの日本近代文学史|sub:病むほどに恋した文豪たち : 燦然と輝く巨匠たちの特異な恋愛体験を綴る!":
+        {"alternative_titles": {"en": "Ai to Eros no Nihon Kindai Bungakushi"}},
+    "qid:Q617888|name:ヤスダスズヒト画集 シューティングスター・カルナバルside: 夜桜四重奏":
+        {"alternative_titles": {"en": "Suzuhito Yasuda Art Book: Shooting Star Carnival side: Yozakura Quartet"}},
+    "qid:Q6455305|name:ギャグマンガ日和&ギャグマンガ日和GB|sub:増田こうすけ劇場 : 連載20周年メモリアル日和":
+        {"alternative_titles": {"en": "Gag Manga Biyori & Gag Manga Biyori GB"}},
+    "qid:Q9355827|name:魔法少女リリカルなのはA's PORTABLE -THE GEARS OF DESTINY-マテリアル娘。 ダッシュ":
+        {"alternative_titles": {"en": "Magical Girl Lyrical Nanoha A's PORTABLE -THE GEARS OF DESTINY- Material Musume. Dash"}},
+    f"qid:Q96127776|name:{LDQ}隠れビッチ{RDQ}やってました。":
+        {"alternative_titles": {"en": 'I Was a "Hidden Bitch"'}},
+}
+
+assert len(fills) == 26, f"Expected 26 entries, got {len(fills)}"
+
+out_path = "data/seeds/_fills/amiss-fix-qid.json"
+os.makedirs(os.path.dirname(out_path), exist_ok=True)
+with open(out_path, "w", encoding="utf-8") as f:
+    json.dump(fills, f, ensure_ascii=False, indent=2)
+print(f"Wrote {len(fills)} entries to {out_path}")
