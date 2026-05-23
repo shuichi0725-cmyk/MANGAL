@@ -75,6 +75,9 @@
 
 - branch は常に `claude/manga-database-affiliate-3x0ms` で作業
 - commit 時 push までセット (= ユーザが artifact を即取得できるよう)
+- **こまめに commit & push** (= Android リモート操作 中心、 小単位で 履歴 残す)
+- 長い処理は事前に 1 行 状況予告、 60 秒以上は Monitor で 進捗 emit
+- 不明 / 停滞時 は ユーザから 聞かれる前に 「待機中 / 進行中」 を 明示報告
 - 大規模変更 / 既存破壊リスクある操作は **必ず Go サイン** を待つ
 - ユーザの `/clear` 後も protocol が機能するよう、 重要な約束はこの CLAUDE.md か MEMORY.md に永続化
 
