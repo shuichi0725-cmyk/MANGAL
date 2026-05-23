@@ -1,171 +1,188 @@
 # MADB JSON-LD field inventory (= 仕様書 vs 現状コード coverage)
 
-> 文化庁 MADB (Media Arts Database) Ver. 1.0 仕様書 (= 2021-03-22) に定義された
-> 全 property URI を、 現状の MANGAL コードベースで extract / 部分活用 / 未活用
-> の 3 status に 分類した一覧。
+> 文化庁 MADB (Media Arts Database) Ver. 1.0 仕様書 (= 2021-03-22、 339 ページ) を
+> 直接読破し、 漫画関連 7 classes の全 property を抽出。 現状の MANGAL コードベース
+> と cross-reference し、 extract 済 / 部分活用 / 未活用 の 3 status で 分類。
 >
-> **作成日**: 2026-05-23
+> **作成日**: 2026-05-23 (= 初版)、 **更新日**: 2026-05-23 (= PDF 読破後の確定情報で書き直し)
 > **base にした仕様書 PDF**: https://github.com/mediaarts-db/dataset/blob/main/doc/MADB%E3%83%A1%E3%82%BF%E3%83%87%E3%83%BC%E3%82%BF%E3%82%B9%E3%82%AD%E3%83%BC%E3%83%9E%E4%BB%95%E6%A7%98%E6%9B%B8%EF%BC%88Ver.1.0%EF%BC%89.pdf
->
-> **状態**: pdftotext で抽出した URI list と既存コードの cross-reference は完了。
-> 仕様書本文 (= 各 property の **適用クラス / 多重度 / 値型 / 定義原文**) は
-> PDF の表組内 日本語テキスト が pdftotext で 抽出できない (= font CID encoding
-> 問題、 pdftoppm 未 install) ため **未確定**。 自宅 PC で poppler install 後
-> に Read tool で 各 page を 画像読みして 各表に追記する想定。
+> **読破ページ**: p-27 〜 p-86 (= 漫画関連 7 class の全定義領域)
 
-## 全体集計
+## クラス階層 (= 仕様書から確定)
 
-| カテゴリ | URI 数 | 備考 |
-|---|---:|---|
-| **schema.org** 系 (= 標準 vocabulary) | 90+ | Book/CreativeWork/Person 等の汎用属性 |
-| **purl.org/dc/terms** 系 (= Dublin Core) | 4 | contributor / creator / publisher / relation |
-| **w3.org rdf-schema** 系 | 1 | rdfs:label のみ |
-| **mediaarts-db.bunka.go.jp/data/property** 系 (= MADB 固有) | **150** | series / 巻号 / variant / 関連作品 等の独自 拡張 |
-| **合計** | **約 245** | 全 entity (Manga / Animation / VideoGame / Item / Series / Magazine / Agent) 共通の dictionary |
+```
+MangaWork (= 抽象 manga 作品、 仕様 p-27〜p-32)
+  上位: Manga, Collection
+  URI: class#MangaWork
+  ├─ MangaBookSeries (= 単行本シリーズ instance、 p-33〜p-42)
+  │   上位: Manga, Collection
+  │   URI: class#MangaBookSeries
+  │   isPartOf → MangaWork
+  │   hasPart → MangaBook
+  │   └─ MangaBook (= 単行本 1 冊、 p-58〜p-67)
+  │       上位: Manga, Item
+  │       URI: class#MangaBook
+  │       isPartOf → MangaBookSeries (= "単行本全巻まとめ" 経由)
+  └─ MangaMagazinePublication (= 雑誌連載 instance、 p-51〜p-57)
+      上位: Manga, Collection
+      URI: class#MangaMagazinePublication
+      isPartOf → MangaWork
 
-manga 関連 entity (= MangaBook / MangaBookSeries / MangaMagazine / MangaMagazineIssue / MangaMagazinePublication / Agent) で 適用される property は 全体の **約 60-80** と推定 (= 仕様書 PDF 読破時に 適用クラス column で 確定)。
+MangaMagazine (= 雑誌全体、 p-43〜p-50)
+  上位: Manga, Collection
+  URI: class#MangaMagazine
+  └─ MangaMagazineVolume (= 雑誌各号、 p-68〜p-77)
+      上位: Manga, Item
+      URI: class#MangaMagazineVolume
+      isPartOf → MangaMagazine (= "雑誌全号まとめ" 経由)
 
-## 現状コードベースで extract している property (= 計 17 種)
+MangaOther (= その他 漫画関連物、 p-78〜p-86)
+  上位: Manga, Item
+  URI: class#MangaOther
+  isPartOf → MangaWork (= "関連作品" 経由)
+  定義: 「単行本」「雑誌各号」を除くマンガが掲載された、 もしくはマンガ作品が体現されている出版物や製作物
+  例: 同人誌 / 販促冊子 / 貸本短編 (= サブジャンル の値例)
+```
 
-`lib/madb-jsonld.ts` (= MangaBook record の typed 抽出) + `scripts/_build-series-v2.py` (= MangaBookSeries record の cluster build) で 引いている key の和集合。
+## 重要 property のクラス所属マトリクス (= 旧推測の訂正版)
 
-### `@id` / `@type` / 基本 metadata
+旧 inventory doc では 「volumeNumberFinal は MangaBookSeries」 等を 推測していたが、 **仕様書本文で確定** したので訂正:
 
-| URI / key | 用途 | コード位置 | downstream |
-|---|---|---|---|
-| `@id` | MADB entity URI (= "M..." / "C..." / "A..." 等の suffix 抽出に利用) | `lib/madb-jsonld.ts:401` extractMadbId | `volumes.madb_book_id` (= UNIQUE), series cluster id |
-| `@type` | entity class (= class:MangaBook / class:MangaBookSeries 等) | fixture でのみ確認 | (現状: filter には未使用、 stream 側で 既に絞られて来る前提) |
-| `rdfs:label` | entity の人間可読 ラベル (= 単行本 title 等) | `lib/madb-jsonld.ts:50`, `_build-series-v2.py:261` | series cluster の base / subtitle 分離 |
+| Property URI | 仕様書ラベル | 実適用クラス | 現状コード | MANGAL での価値 |
+|---|---|---|---|---|
+| **`schema:numberOfItems`** | **マンガ単行本全巻数** (= 整数) | **MangaBookSeries** | `_build-series-v2.py:291` extract のみ、 dead | 🔴 **総巻数 cache の正解 source** |
+| **`property/datePublishedFinal`** | **最終巻発行日** (= リテラル) | **MangaBookSeries** (= 「終刊した当該リソースを構成する最新の単行本が発行された日付」)、 + MangaMagazine (= 終刊日) | 未抽出 | 🔴 **完結判定 + year_ended の direct source** |
+| `property/volumeNumberFinal` | **終刊号** | **MangaMagazine のみ** | 未抽出 | ⚪ MANGAL 不要 (= 雑誌のみ) |
+| `property/totalVolumeNumberFinal` | **終刊通巻号** | **MangaMagazine のみ** | 未抽出 | ⚪ MANGAL 不要 |
+| `property/issueNumberDisplayedFinal` | **終刊表示号数** | **MangaMagazine のみ** | 未抽出 | ⚪ MANGAL 不要 |
+| `property/issueNumberPublished` | 終刊号 (= 出版上の号) | MangaMagazine のみ | 未抽出 | ⚪ |
+| `property/totalVolumeNumber` | **通巻** | **MangaMagazineVolume のみ** (= 各号の通巻番号) | 未抽出 | ⚪ MANGAL 不要 |
+| `schema:position` | **巻ソート** (= 連続する巻の順序を示す数値、 10 進数) | **MangaBook** | `lib/madb-jsonld.ts:61, 446` ✅ | ✅ 活用済 (= `volumes.number` primary source、 commit `bb1786c`) |
+| `schema:volumeNumber` | **巻** (= 出版における巻次の指定、 整数推奨) | **MangaBook** | `lib/madb-jsonld.ts:60, 443` ✅ | ✅ fallback で活用 |
+| `schema:issueNumber` | **号** (= Issue or Number の指定) | **MangaMagazine, MangaMagazineVolume** | 未抽出 | ⚪ MANGAL 不要 |
+| `schema:numberOfPages` | **ページ数** | **MangaBook, MangaMagazineVolume** | 未抽出 | 🟡 巻ごとの分量、 詳細表示で有用 |
+| `schema:price` | **価格** (= 発行者が設定した希望小売価格) | **MangaBook, MangaMagazineVolume, MangaOther** | 未抽出 | 🟡 出版時 MSRP、 Amazon 価格と並行表示 候補 |
+| `property/seriesName` | **シリーズ名** (= 当該リソースが所属するシリーズの名称) | **全 class 共通** | `_build-series-v2.py` 経由で title から推測のみ | 🟡 series cluster build の direct hint |
+| `schema:genre` | ジャンル | 全 class 共通、 ただし **値は type 識別子** (= "マンガ作品" / "単行本全巻まとめ" / "雑誌全号まとめ" / "雑誌各号" / "単行本" / "マンガその他") | 未抽出 | ⚪ **コンテンツ ジャンルではない**、 MANGAL の genres 補完には使えない |
+| `property/additionalGenre` | **サブジャンル** (= 情報資源分類の下位の分類) | MangaWork / MangaBookSeries / MangaMagazinePublication / MangaBook / MangaMagazineVolume / MangaOther | 未抽出 | 🟡 **MangaOther では「同人誌」「販促冊子」「貸本短編」 の値**。 MangaBookSeries での値域は要 data 検証 (= 真の content genre かは不明) |
+| `property/originalWorkCreator` | **原作者名** (= 原作・原案を作成した責任主体の名称) | MangaWork / MangaBookSeries / MangaMagazinePublication / MangaBook / MangaOther | 未抽出 | 🟢 コミカライズ判別、 `original_authors` role の direct source |
+| `schema:editor` | **編集人** (= 編集人である個人の名称) | MangaMagazineVolume のみ | 未抽出 | ⚪ 雑誌のみ |
+| `schema:contributor` | **スタッフ名** (= 作画やストーリー作成以外で作成に貢献した責任主体、 連載全体に関わる者のみ) | MangaBookSeries / MangaMagazine / MangaMagazinePublication / MangaBook / MangaMagazineVolume / MangaOther | 未抽出 | 🟢 staff credit (= 編集 / アシスタント 等)、 拡張 credit |
+| `schema:actor` | **キャスト名** (= 出演したキャストの名称、 マンガ では adapted アニメ等の キャラクター？) | MangaWork / MangaBookSeries / MangaMagazine / MangaMagazinePublication / MangaBook / MangaMagazineVolume | 未抽出 | ⚪ MANGAL では多分 不要 |
+| `schema:countryOfOrigin` | **国際地域** (= 統制語彙: 国際地域) | MangaWork / MangaBookSeries / MangaMagazine / MangaMagazinePublication / MangaBook / MangaMagazineVolume / MangaOther | 未抽出 | 🟢 海外漫画判別 (= 日本 以外 が値) |
+| `schema:contentRating` | **レイティング** (= 想定される年齢に基づく利用制限) | 全 class 共通 | `lib/madb-jsonld.ts:51, 407` ✅ | ✅ adult filter (= "成年コミック") |
+| `schema:image` | **サムネイル** (= 当該リソースの画像) | 全 class 共通 | `lib/madb-jsonld.ts:62, 447` ✅ (= ただし 実 data に 0 件) | dead (= MADB の data 側 0 件) |
+| `schema:hasPart` | **関係 (hasPart)** | MangaBookSeries / MangaMagazine | 未抽出 | 🟡 series → 巻 link の direct source (= 現状 序列推定で 自前) |
+| `schema:isPartOf` | **マンガ作品 / 単行本全巻まとめ / 雑誌全号まとめ / 関連作品** (= 親 link) | MangaWork 以下全 class | 未抽出 | 🟡 階層構造の direct source (= series cluster build の hint) |
+| `property/jpno` | **全国書誌番号** (= 全国書誌番号による識別子) | MangaBookSeries / MangaBook / MangaOther | 未抽出 | 🟢 NDL bibliography ID (= NDL data との突合 hint) |
+| `property/binder` | **製本・造本形態** (= 中綴じ / 平綴 / 無線綴 等) | MangaOther | 未抽出 | ⚪ MANGAL 不要 |
+| `schema:productID` | **レーベル番号** (= 発行者が定家する型番) | MangaMagazineVolume のみ | 未抽出 | ⚪ |
+| `property/seriesNumber` | **シリーズ番号** (= シリーズ内における順序番号) | MangaOther | 未抽出 | ⚪ MangaOther 専用 |
+| `property/note` | **備考** | 全 class 共通 | 未抽出 | ⚪ 雑多 |
+| `property/ndc` | **分類** (= 日本十進分類法 NDC による分類記号) | MangaBookSeries / MangaBook / MangaMagazineVolume / MangaOther | 未抽出 | ⚪ 図書館分類、 manga genre とは別軸 |
 
-### schema.org 系 (= 13 種)
+## 現状 extract 済 一覧 (= 17 種、 既存 inventory 表 と同じ)
 
-| URI | 用途 | コード位置 | downstream |
-|---|---|---|---|
-| `schema:contentRating` | "成年コミック" 文字列 (= 1 次 adult filter) | `lib/madb-jsonld.ts:51, 407` | `isAdultMadbRecord` の rating signal |
-| `schema:description` | 概要 string (= 2 次 adult filter で "成年コミック" 部分一致 check) | `lib/madb-jsonld.ts:54, 411` | `isAdultMadbRecord` の description signal |
-| `schema:isbn` | ISBN raw (= normalize 前) | `lib/madb-jsonld.ts:52, 405` | `volumes.isbn13` (NFKC normalize 後) |
-| `schema:datePublished` | YYYY-MM-DD or partial | `lib/madb-jsonld.ts:53, 439` | `volumes.release_date` + `series.year_started/year_ended` 集計 |
-| `schema:name` | localized title (= ja-Hrkt の {@value} で kana 取得) | `lib/madb-jsonld.ts:55, 414` | `volumes` の表示 title / `series.title_kana` |
-| `schema:alternateName` | 公式英語題 (= ASCII のみ entry を選択) | `_build-series-v2.py:285` | `series.title_official_en` |
-| `schema:alternativeHeadline` | サブタイトル (= "完全版" 等の edition label が入ることあり) | `lib/madb-jsonld.ts:63, 417` | `series.subtitle` / edition label |
-| `schema:creator` | 著者 表示文字列 (= "[著]諫山創,スタジオ・ナッツ" 等 role prefix + comma-packed) | `lib/madb-jsonld.ts:57, 432` | `cleanCreatorStrings` で 漢字名 array 化 → mangaka.csv match |
-| `schema:brand` | 単行本レーベル (= 漢字 ∥ カナ literal) | `lib/madb-jsonld.ts:58, 436` | `editions.imprint` (= 漢字部分のみ) |
-| `schema:publisher` | 発行者名 (= 漢字 ∥ カナ literal) | `lib/madb-jsonld.ts:59, 437` | `series.publisher_key` (= publishers.yml master 解決) |
-| `schema:volumeNumber` | 巻番号 表示文字列 (= "13" / "巻ノ五十" / "其之1") | `lib/madb-jsonld.ts:60, 443` | `volumes.number` の **fallback** (= position 不在時のみ) |
-| **`schema:position`** | 巻ソート 数値 (= deterministic integer、 仕様 page 72) | `lib/madb-jsonld.ts:61, 446` | **`volumes.number` の primary source** (= commit `bb1786c`) |
-| `schema:image` | cover URL (= 1 件目を採用) | `lib/madb-jsonld.ts:62, 447` | `volumes.cover_url` (= ただし MADB 実 data に 0 件、 dead) |
-| `schema:identifier` | MADB internal ID (= cluster build 時に使用) | `_build-series-v2.py:282` | record の "madb_id" field |
-| **`schema:numberOfItems`** | 総アイテム数 (= MangaBookSeries record の総巻数 候補?) | `_build-series-v2.py:291` | **extract のみ、 dead field** (= cluster の "number_of_items" に保持されるが SQLite 投入 / yaml 出力経路で 未使用) |
+| URI | コード位置 |
+|---|---|
+| `@id` (extractMadbId) | `lib/madb-jsonld.ts:401` |
+| `@type` | (fixture でのみ確認) |
+| `rdfs:label` | `lib/madb-jsonld.ts:50` |
+| `schema:contentRating` | `lib/madb-jsonld.ts:51, 407` |
+| `schema:description` | `lib/madb-jsonld.ts:54, 411` |
+| `schema:isbn` | `lib/madb-jsonld.ts:52, 405` |
+| `schema:datePublished` | `lib/madb-jsonld.ts:53, 439` |
+| `schema:name` | `lib/madb-jsonld.ts:55, 414` |
+| `schema:alternateName` | `_build-series-v2.py:285` |
+| `schema:alternativeHeadline` | `lib/madb-jsonld.ts:63, 417` |
+| `schema:creator` | `lib/madb-jsonld.ts:57, 432` |
+| `schema:brand` | `lib/madb-jsonld.ts:58, 436` |
+| `schema:publisher` | `lib/madb-jsonld.ts:59, 437` |
+| `schema:volumeNumber` | `lib/madb-jsonld.ts:60, 443` |
+| `schema:position` | `lib/madb-jsonld.ts:61, 446` |
+| `schema:image` | `lib/madb-jsonld.ts:62, 447` |
+| `schema:identifier` | `_build-series-v2.py:282` |
+| `schema:numberOfItems` | `_build-series-v2.py:291` (= dead, downstream 未配線) |
+| `dcterms:creator` | `lib/madb-jsonld.ts:56, 448` |
 
-### dcterms 系 (= 1 種)
+## 未活用 property の取込優先順位 (= 仕様書 確定後の更新版)
 
-| URI | 用途 | コード位置 | downstream |
-|---|---|---|---|
-| `dcterms:creator` | 作者 Agent への URI 参照 (= "C53400" 等) | `lib/madb-jsonld.ts:56, 448` | `creatorRefs` で C-ID 抽出 → schema:creator (表示文字列) との pairing 学習に利用 |
+### 🔴 HIGH (= 単行本 series の core info)
 
----
+1. **`schema:numberOfItems` を downstream に配線** (= 既 extract、 dead)
+   - 対象: MangaBookSeries record
+   - 配線先: 種2 schema に `series.total_volumes_madb INTEGER` 追加 → `_populate-v2.py` で 投入
+   - 効果: promote-bulk-v2 が 巻数 を `COUNT(*) FROM volumes` でなく direct read 可能、 「全 X 巻」 表示が正確に
 
-## 未活用の manga 関連 property (= 仕様書記載、 コード抽出なし)
+2. **`property/datePublishedFinal` を extract + 配線**
+   - 対象: MangaBookSeries record
+   - 配線先: 種2 schema に `series.date_published_final TEXT` 追加 (= or 既存 `year_ended` で 代替)
+   - 効果: 完結 manga の `year_ended` が 確定値 に、 status='completed' の判定 が 仕様 由来
 
-仕様書 URI list から manga / book / series 関連 と判定したもの。 優先度は **想定される MANGAL での価値** で 主観評価。
+### 🟡 MED (= 補助 info)
 
-### 🔴 HIGH: 巻数 / 完結判定 の direct source
+3. **`schema:isPartOf` / `schema:hasPart` 取込**
+   - MangaBook → MangaBookSeries の direct link (= 現状 base+creator key で 自前 cluster build)
+   - 効果: cluster 分裂 (= 「鬼平犯科帳」 4 cluster 等) の根本解決の hint
 
-| URI | 推測される意味 | MANGAL での活用案 | 仕様書 確認事項 (= PDF 読破時) |
-|---|---|---|---|
-| `madb:totalVolumeNumber` | **総巻数** (= 推定 値) | `series.total_volumes` cache column を追加、 promote-bulk の COUNT(*) を 不要に | 適用クラス (= MangaBookSeries で確定？) / 多重度 / 値型 |
-| `madb:totalVolumeNumberFinal` | **確定 総巻数** (= 完結後の値) | 完結判定 + 巻数 cache の 決定打 | `totalVolumeNumber` との違い (= 確定 vs 推定?) |
-| `madb:volumeNumberFinal` | **最終巻番号** (= 数値) | `series.status = 'completed'` の signal | `schema:position` (= 巻 per-record) との関係 |
-| `madb:issueNumberDisplayedFinal` | **最終巻 表示文字列** (= "其之二十三" 等) | 表示用、 数値 + 表示の組合せ | `schema:volumeNumber` (= 巻 per-record) との関係 |
-| `madb:datePublishedFinal` | **最終 出版日** | `series.year_ended` の direct source (= 現状 volumes.release_date の MAX 集計) | 多重度 (= 1 or N?) |
+4. **`property/originalWorkCreator` 取込**
+   - 対象: 全 class
+   - 配線: `series_authors.role = 'original_author'` の direct source
+   - 効果: 共著 role の AI 推定不要
 
-### 🟠 MED: 関連作品 / シリーズ間 link
+5. **`property/seriesName` 取込**
+   - 対象: 全 class (= 多 lang variant 含む)
+   - 配線: series cluster の `series_name` field、 現状の base title 推測の補強
 
-| URI | 推測される意味 | MANGAL での活用案 |
+6. **`schema:numberOfPages` 取込**
+   - 対象: MangaBook
+   - 配線: `volumes.page_count INTEGER` 追加
+   - 効果: 巻 detail の 分量 表示
+
+7. **`schema:price` 取込**
+   - 対象: MangaBook
+   - 配線: `volumes.price_msrp INTEGER` 追加 (= 既存 `volumes.price` と区別)
+   - 効果: 発売時 MSRP の保持、 Amazon 価格 と並行 表示
+
+8. **`property/jpno` 取込**
+   - 対象: MangaBookSeries / MangaBook
+   - 配線: `series.jpno TEXT` / `volumes.jpno TEXT`
+   - 効果: NDL data との突合 ID
+
+### 🟢 LOW (= future / 検証要)
+
+9. **`property/additionalGenre` 値域 検証**
+   - MangaOther では "同人誌" 等の type、 MangaBookSeries では 何が入るか **実 data 確認要**
+   - もし 真の content genre なら AI fill 廃止可能
+
+10. **`schema:countryOfOrigin` 取込**
+    - 海外 manga (= 日本 以外) を 別ライン 扱いするための signal
+
+## 期待される改善 (= 上位 1-2 を導入した場合)
+
+- `_promote-bulk-v2.py` で `n_isbn = COUNT(*) FROM volumes` が `total_volumes_madb` の direct read に
+- `series.year_ended` の AI fill / volumes.release_date MAX 集計 が `date_published_final` の direct read に
+- `_promote-bulk-v2.py build_parent_map` の自前推定 (= n_isbn 比較 で 親子) が **不要 or 補強** される (= hasPart の有無で 確実)
+- 種3 v2 の AI fill 不要 field が 2 種 増加 (= total_volumes と year_ended 系)
+
+## Out-of-scope (= MANGAL では使わない)
+
+| URI | 適用クラス | 理由 |
 |---|---|---|
-| `madb:spinOff` | spinoff 関係 (= → child) | `_promote-bulk-v2.py build_parent_map` の自前推定を 不要に |
-| `madb:sequel` / `madb:sequelTo` | 続編 関係 | シリーズ chain 可視化 (= 例: 「タッチ」 → 「H2」 → 「MAJOR」?) |
-| `madb:precedes` / `madb:succeeds` | 前後関係 (= シリーズ chain) | 上記同 |
-| `madb:variantTitle` / `madb:variation` / `madb:variationOf` | 表記揺れ / variant 関係 | slug rename 不要化、 別表記 候補 |
-| `madb:expandedAs` / `madb:localizedAs` / `madb:remadeAs` | 翻訳版 / リメイク 関係 | 「英訳版」 「リブート」 等の 関係性 表示 |
-| `madb:embodiment` / `madb:embodimentOf` | 抽象 work と 具体 manifestation の関係 | (= 多分 内部 model 用、 我々は使わない) |
-
-### 🟡 MED: 識別子 / 外部 link
-
-| URI | 推測される意味 | MANGAL での活用案 |
-|---|---|---|
-| `madb:wikidata` | **Wikidata QID 直 link** | `series.qid` / `mangaka.qid` を NDL/Wikidata 経由 解決から MADB direct に切替 |
-| `madb:viaf` | VIAF identifier | 海外 図書館 link |
-| `madb:imdb` | IMDb ID | (= アニメ化 link、 多分 AnimationTVProgram にのみ適用) |
-| `madb:freebase` | Freebase ID | (= 死んだ DB だが MADB は持ってる) |
-| `madb:metacritic` / `madb:mobyGames` | (= VideoGame 専用、 manga 不適用) | — |
-
-### 🟢 MED: 原作 / クレジット詳細
-
-| URI | 推測される意味 | MANGAL での活用案 |
-|---|---|---|
-| `madb:originalTitle` | 原題 | 翻訳 manga の 原題 表示 |
-| `madb:originalWorkName` | 原作 作品名 | コミカライズ の 原作 link |
-| `madb:originalWorkCreator` | 原作者 | 共著 role 補完 (= `mangaka.role = 'original_author'`) |
-| `madb:originalWorkMedia` | 原作 media 種別 (= 小説 / アニメ / ゲーム) | コミカライズ判定 |
-| `madb:wakuTitle` | 「枠 タイトル」 (= 仕様確認要、 シリーズ 集合 title?) | TBD |
-| `madb:abbreviatedTitle` | 略称 | 検索 hit 拡張 |
-
-### 🟢 MED: schema.org の manga 適用 候補 (= 仕様書で manga class に適用と確認できれば)
-
-| URI | 推測される意味 | MANGAL での活用案 |
-|---|---|---|
-| `schema:genre` | ジャンル | 現状 AI fill で genres 補完中、 MADB に元値あれば優先 |
-| `schema:numberOfPages` | ページ数 (= per-volume) | `volumes.page_count` 追加 (= 巻ごとの 分量) |
-| `schema:isPartOf` | 親 entity link (= MangaBook → MangaBookSeries) | series cluster build の hint (= 現状 _build-series-v2.py の base+creator key で 自前) |
-| `schema:hasPart` | 子 entity (= MangaBookSeries → MangaBook) | 上記の inverse |
-| `schema:award` | 受賞 | `manga.awards` field の direct source (= 現状 手動 fill) |
-| `schema:editor` | 編集者 | クレジット 拡張 |
-| `schema:character` | キャラクター | character 検索 (= 大型 feature) |
-| `schema:firstAppearance` | 初出 (= character の) | 上記の補完 |
-| `schema:copyrightYear` | 著作権年 | `series.year_started` の補強 |
-| `schema:copyrightHolder` | 著作権者 | publisher 補強 |
-| `schema:keywords` | キーワード | 検索 拡張 (= ジャンル / 設定 tag) |
-
-### ⚪ LOW: 巻 詳細 / 体裁
-
-| URI | 用途 | 備考 |
-|---|---|---|
-| `madb:format` / `madb:mediaFormat` / `madb:fileType` | フォーマット (= 紙 / 電子) | 電子書籍判定 |
-| `madb:price` | 価格 | 過去価格、 現在価格は Amazon に任せる方針 |
-| `madb:dataProvider` / `madb:providerIdentifier` / `madb:providerUrl` | 提供元 metadata | 内部 provenance、 我々は使わない |
-| `madb:note` / `madb:productionNote` / `madb:publicationNote` | 雑多な note | データ次第 |
-| `madb:relatedItem` / `madb:relatedItemName` / `madb:relatedCollection` | 関連物 | データ次第 |
-
----
-
-## Out-of-scope (= manga 適用外の class 専用)
-
-| URI | 適用 class | 理由 |
-|---|---|---|
-| `schema:numberOfEpisodes` / `madb:numberOfPrograms` / `schema:actor` / `schema:productionCompany` | AnimationTVProgram | アニメ |
-| `schema:gamePlatform` / `madb:porting` / `madb:crossPlay` / `schema:numberOfPlayers` / `madb:metacritic` / `madb:mobyGames` / `madb:twitch` / `schema:operatingSystem` / `schema:softwareVersion` / `schema:availableOnDevice` | VideoGame | ゲーム |
-| `madb:eirin` | 映画 (= 映倫) | 映画 |
-
----
-
-## 仕様書 PDF 読破時の to-do (= 各表に追記する column)
-
-PDF 再 readable 後、 各 property entry に 以下 5 column を追記:
-
-1. **適用クラス** (= MangaBook / MangaBookSeries / MangaMagazine / Agent / Item 等 のどれに 出現するか)
-2. **多重度** (= 0..1 / 1 / 0..N / 1..N)
-3. **値型** (= literal string / xsd:integer / xsd:date / URI ref / localized literal)
-4. **定義 原文** (= 仕様書 page X の 一文)
-5. **実 data 出現率** (= MADB metadata104.json / metadata101.json での populated 比率、 PDF と は別軸で .cache/ 復活後に measure)
-
----
+| volumeNumberFinal / issueNumberDisplayedFinal / totalVolumeNumberFinal / issueNumberPublished | MangaMagazine | MANGAL は雑誌 表示しない |
+| totalVolumeNumber | MangaMagazineVolume | 同上 |
+| publicationPeriodicity (= 発行頻度) | MangaMagazine | 同上 |
+| binder (= 製本形態) | MangaOther | 関連書扱いで弾く |
+| schema:editor (= 編集人) | MangaMagazineVolume | 同上 |
+| eirin (= 映倫) | 映画 | manga 不適用 |
+| 各 schema.org video/game/animation 系 | AnimationTVProgram / VideoGame | 別 entity |
 
 ## 関連 commit / file
 
 - `lib/madb-jsonld.ts` (= MangaBook record 抽出、 30+ unit tests in `lib/madb-jsonld.test.ts`)
 - `scripts/fetch-madb.ts` (= upsertVolume、 schema:position 採用 commit `bb1786c`)
-- `scripts/_build-series-v2.py` (= MangaBookSeries cluster build、 numberOfItems extract)
+- `scripts/_build-series-v2.py` (= MangaBookSeries cluster build、 numberOfItems extract のみ・ dead)
 - `scripts/clean-madb-seed.ts` (= raw seed 整形)
 - `scripts/_extract-madb-volume-labels.py` (= volume label 抽出)
 - 仕様書 元 repo: `mediaarts-db/dataset` (= 文化庁)
+- 関連 inventory memory: [[madb-spec-review-pending]] (= 再開手順)
