@@ -92,11 +92,25 @@ def split_compound_japanese_name(s: str) -> list[str]:
 
 def extract_creator_names(schema_creator) -> list[str]:
     """'[著]高橋留美子' '[原作]X / [漫画]Y' '[著]X∥xxxx' '[原作]X, Y'
-    '池波正太郎 さいとう・たかを' '落合裕介 漫画 : 池波正太郎' 等から 名前 list 抽出。"""
+    '池波正太郎 さいとう・たかを' '落合裕介 漫画 : 池波正太郎' 等から 名前 list 抽出。
+
+    L2 修正 5: schema:creator が list の時、 「[著]/[作]」 role を 優先採用。
+    旧: list[0] 固定 → C268196「[編]ホーム社」 採用で 本編 cluster 分離 bug
+    新: 「[著]」 を 探して 採用、 なければ role なし → その他 role
+    """
     if not schema_creator:
         return []
     if isinstance(schema_creator, list):
-        s = schema_creator[0] if schema_creator else ""
+        author_entries = []
+        other_entries = []
+        for item in schema_creator:
+            if not isinstance(item, str):
+                continue  # dict (= @value entry 等) は skip
+            if item.startswith("[著]") or item.startswith("[作]") or not item.startswith("["):
+                author_entries.append(item)
+            else:
+                other_entries.append(item)
+        s = author_entries[0] if author_entries else (other_entries[0] if other_entries else "")
     else:
         s = schema_creator
     if isinstance(s, dict):
