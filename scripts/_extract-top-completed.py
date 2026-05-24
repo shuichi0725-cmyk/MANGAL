@@ -419,6 +419,8 @@ def slug_from_alt_en(alt_en: str | None) -> str:
     if not alt_en:
         return ""
     s = alt_en.strip()
+    # U+00D7 (×) を 半角 x に (= 「Hunter × Hunter」 → 「Hunter x Hunter」 で slug 化)
+    s = s.replace("×", "x")
     # apostrophe / 句読点 を strip
     s = re.sub(r"['!?.,]", "", s)
     # 非 ASCII alphanumeric を hyphen 化
