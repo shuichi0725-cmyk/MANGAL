@@ -852,14 +852,27 @@ def build_yml(
     if "anime_first_year" in src_yml:
         o["anime_first_year"] = src_yml["anime_first_year"]
 
-    alt_en = series_row["title_official_en"]
+    # alt_en 優先順: 種3 (= ユーザ手動修正) > 種3 で明示削除 (= en: null) > db-v2 (= 種1直) > src_yml
+    # L3 計画 Phase C: 旧 logic は 種3 を 全く参照せず、 _fix-seed3-en-values.py 修正が 永久 未反映 bug。
+    seed3_alt = (seed3 or {}).get("alternative_titles") or {}
     src_alt = src_yml.get("alternative_titles") or {}
-    if alt_en or src_alt:
+    db_alt_en = series_row["title_official_en"]
+
+    # 種3 で 「en: null」 明示 = 削除意思 (= ranma 等)
+    if "en" in seed3_alt and seed3_alt.get("en") is None:
+        merged_alt = {k: v for k, v in seed3_alt.items() if v is not None}
+    else:
         merged_alt = dict(src_alt)
-        if alt_en and "en" not in merged_alt:
-            merged_alt["en"] = alt_en
-        if merged_alt:
-            o["alternative_titles"] = merged_alt
+        # 種3 値で 上書き (= ユーザ手動修正 を 最優先)
+        for k, v in seed3_alt.items():
+            if v is not None:
+                merged_alt[k] = v
+        # db-v2 alt_en fallback (= 種3/旧 yml に en なければ)
+        if db_alt_en and "en" not in merged_alt:
+            merged_alt["en"] = db_alt_en
+
+    if merged_alt:
+        o["alternative_titles"] = merged_alt
 
     if "awards" in src_yml:
         o["awards"] = src_yml["awards"]
