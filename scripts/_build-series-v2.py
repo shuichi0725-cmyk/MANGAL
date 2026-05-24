@@ -309,16 +309,37 @@ def build_metadata104_clusters(mangaka: dict, mangaka_norm: dict) -> tuple[list[
         clusters[(cluster_key_part, base, subtitle)].append(record)
 
     # cluster → output dict
+    KATA_RE = re.compile(r"[ァ-ヿ]+")
+
+    def kana_matches_title(title_text: str, kana_text: str) -> bool:
+        """title 内 カタカナ列 が kana に 含まれるか check (= L2 修正 6)。
+        title カタカナなし は True (= check 対象外、 skip)。
+        例: title「ドラゴンボール」 kana「ソンゴクウトナカマタチ」 → False (= 別物)
+        例: title「ザ・超女」 kana「ザスーパーギャル」 → True (= 「ザ」 含む)
+        """
+        katas = KATA_RE.findall(title_text)
+        if not katas:
+            return True
+        kana_norm = re.sub(r"[\s　・]+", "", kana_text)
+        return any(k in kana_norm for k in katas)
+
     clusters_out = []
     for (_, base, sub), records in clusters.items():
-        # title_kana = 最古 datePublished record の kana を 優先採用 (= L2 修正、 派生本混入対策)
+        # title_kana = 最古 datePublished record の kana を 優先採用 (= L2 修正 2)
+        # + カタカナ整合 check で 別シリーズ kana 混入 排除 (= L2 修正 6)
         # fallback = 全件 kana 多数決 (= 旧 logic)
         records_by_date = sorted(records, key=lambda r: r["date_published"] or "9999")
         title_kana = ""
         for r in records_by_date:
-            if r["title_kana"]:
+            if r["title_kana"] and kana_matches_title(base, r["title_kana"]):
                 title_kana = r["title_kana"]
                 break
+        if not title_kana:
+            # 修正 6 fallback: カタカナ check 無視で 最古採用 (= 全件 不一致 case)
+            for r in records_by_date:
+                if r["title_kana"]:
+                    title_kana = r["title_kana"]
+                    break
         if not title_kana:
             kana_counter = Counter(r["title_kana"] for r in records if r["title_kana"])
             title_kana = kana_counter.most_common(1)[0][0] if kana_counter else ""
