@@ -34,7 +34,7 @@ CUTOFF_YEAR = 2015  # spinoff で この年 以降なら keep
 KEEP_EDITION_TYPES = {"standard", "bunkobon", "wideban", "kanzenban", "shinsoban", "aizoban"}
 
 # brand (= MADB imprint) → magazine key (= data/magazines.yml master)
-# 確度高い 1対1 のみ。 詳細は scripts/_extract-top-completed.py の BRAND_TO_MAGAZINE と同期。
+# 確度高い 1対1 のみ。
 BRAND_TO_MAGAZINE = {
     "ジャンプコミックス": "weekly-shonen-jump",
     "JUMPCOMICS": "weekly-shonen-jump",

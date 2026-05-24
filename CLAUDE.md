@@ -89,7 +89,7 @@
 
 - ローマ字 (= 訓令式 or ヘボン式) で hyphen 区切り
 
-#### 優先順 (= scripts/_extract-top-completed.py で 自動判定)
+#### 優先順 (= build script で 自動判定)
 
 1. **種3 の slug field** (= 手動 override)
 2. **DB の 英語名** (= alternative_titles.en / title_official_en) → 外来語 で slug 化
