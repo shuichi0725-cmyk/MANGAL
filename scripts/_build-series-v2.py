@@ -297,8 +297,17 @@ def build_metadata104_clusters(mangaka: dict, mangaka_norm: dict) -> tuple[list[
     # cluster → output dict
     clusters_out = []
     for (_, base, sub), records in clusters.items():
-        kana_counter = Counter(r["title_kana"] for r in records if r["title_kana"])
-        title_kana = kana_counter.most_common(1)[0][0] if kana_counter else ""
+        # title_kana = 最古 datePublished record の kana を 優先採用 (= L2 修正、 派生本混入対策)
+        # fallback = 全件 kana 多数決 (= 旧 logic)
+        records_by_date = sorted(records, key=lambda r: r["date_published"] or "9999")
+        title_kana = ""
+        for r in records_by_date:
+            if r["title_kana"]:
+                title_kana = r["title_kana"]
+                break
+        if not title_kana:
+            kana_counter = Counter(r["title_kana"] for r in records if r["title_kana"])
+            title_kana = kana_counter.most_common(1)[0][0] if kana_counter else ""
         sub_kanas = []
         for r in records:
             tk = r["title_kana"]
@@ -320,7 +329,8 @@ def build_metadata104_clusters(mangaka: dict, mangaka_norm: dict) -> tuple[list[
         else:
             series_key = f"{id_part}|name:{base}"
 
-        is_adult = any("成年" in (r["content_rating"] or "") for r in records)
+        # is_adult = 「成年」「成人」 両 prefix を 拾う (= L2 修正、 「成人コミック」 漏れ対策)
+        is_adult = any(re.match(r"成[年人]", r["content_rating"] or "") for r in records)
 
         clusters_out.append({
             "series_key": series_key,
