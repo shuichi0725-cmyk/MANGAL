@@ -13,6 +13,8 @@ OUT = Path(".cache/series-bookcount.tsv")
 
 ID_RE = re.compile(r'"@id":\s*"https://mediaarts-db\.artmuseums\.go\.jp/id/(C\d+)"')
 VOLNUM_RE = re.compile(r'"schema:volumeNumber":\s*"((?:[^"\\]|\\.)*)"')
+POS_RE = re.compile(r'"schema:position":\s*"((?:[^"\\]|\\.)*)"')
+ISBN_RE = re.compile(r'"schema:isbn":\s*"((?:[^"\\]|\\.)*)"')
 MID_RE = re.compile(r'"@id":\s*"https://mediaarts-db\.artmuseums\.go\.jp/id/(M\d+)"')
 
 
@@ -26,6 +28,8 @@ def main() -> None:
     in_rec = False
     cur_series = ""
     cur_volnum = ""
+    cur_pos = ""
+    cur_isbn = ""
     cur_mid = ""
     in_ispartof = False
     with SRC.open(encoding="utf-8") as f:
@@ -34,6 +38,8 @@ def main() -> None:
                 in_rec = True
                 cur_series = ""
                 cur_volnum = ""
+                cur_pos = ""
+                cur_isbn = ""
                 cur_mid = ""
                 in_ispartof = False
                 continue
@@ -42,8 +48,19 @@ def main() -> None:
             if line.rstrip().startswith("    }"):
                 n_books += 1
                 if cur_series:
-                    # volume key = volumeNumber (= あれば) or 「mid:M???」 fallback (= 1 巻完結 等)
-                    vkey = cur_volnum if cur_volnum else f"mid:{cur_mid}"
+                    # dedupe key 優先順: position (= 数値 揺れに強い) → ISBN → volumeNumber → mid
+                    vkey = ""
+                    if cur_pos:
+                        try:
+                            vkey = f"pos:{float(cur_pos)}"
+                        except ValueError:
+                            pass
+                    if not vkey and cur_isbn:
+                        vkey = f"isbn:{cur_isbn}"
+                    if not vkey and cur_volnum:
+                        vkey = f"vn:{cur_volnum}"
+                    if not vkey:
+                        vkey = f"mid:{cur_mid}"
                     vols.setdefault(cur_series, set()).add(vkey)
                     records[cur_series] = records.get(cur_series, 0) + 1
                     n_with_series += 1
@@ -58,6 +75,12 @@ def main() -> None:
             v = VOLNUM_RE.search(line)
             if v and not cur_volnum:
                 cur_volnum = v.group(1)
+            p = POS_RE.search(line)
+            if p and not cur_pos:
+                cur_pos = p.group(1)
+            i = ISBN_RE.search(line)
+            if i and not cur_isbn:
+                cur_isbn = i.group(1)
             if '"schema:isPartOf"' in line:
                 in_ispartof = True
                 continue
