@@ -105,7 +105,7 @@ def infer_magazine_from_brand(editions: list[dict], valid_mags: set) -> str | No
 DROP_IMPRINT_PATTERNS = ["My first big", "コンビニ", "増刊", "同人", "ジャンプremix", "フィルムコミック",
                          "カッパ・ノベル", "カッパノベル", "カッパ・ホーム", "カッパホーム"]
 # bilingual / 英訳版 imprint は drop (= 翻訳版 は 別 product)
-DROP_IMPRINT_LOWER_PATTERNS = ["bilingual", "english"]
+DROP_IMPRINT_LOWER_PATTERNS = ["bilingual", "english", "novel", "novels"]
 # 'complete works' は 英訳 全集 で 多用 (= 「TEZUKA OSAMU THE COMPLETE WORKS」、
 # 「The complete works of Fujiko・F・Fujio」 等)。 但し 日本語 imprint で 「= English」
 # 並列表記 cases (= 「藤子・F・不二雄大全集 = The Complete Works of Fujiko・F・Fujio」)
@@ -117,6 +117,7 @@ DROP_TITLE_PREFIX_PATTERNS = [
     "テレビアニメ版", "TVアニメ版", "TVアニメ", "アニメコミック",
     "劇場版", "映画", "OVA",
     "ノベライズ", "ノベル",
+    "英訳・", "英訳",
 ]
 # 関連書 (= ガイドブック / 設定資料集 / 攻略本 等、 漫画作品ではない 副次出版物)。
 # title 内 包含で detect。 「大全集」 は 主作品 compilation 多いので 除外しない。

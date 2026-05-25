@@ -201,6 +201,7 @@ MANGAL は **漫画作品** の database。 以下は **掲載対象外** (= 弾
 - 「テレビアニメ版」「TVアニメ版」「アニメコミック」 = アニメコミカライズ
 - 「劇場版」「映画」「OVA」 = 映像作品 + その コミカライズ
 - 「ノベライズ」「ノベル」 = 小説版
+- 「英訳・」「英訳」 = 翻訳版 (= 元 ja 版 別 entry で keep される、 翻訳 別 product 扱い)
 
 ### edition-level (= scripts/_promote-bulk-v2.py の KEEP_EDITION_TYPES)
 
@@ -209,6 +210,7 @@ drop: anime / other / renewal
 
 drop imprint patterns:
   - 'My first big' / 'コンビニ' / '増刊' / '同人' / 'ジャンプremix' / 'bilingual'
+  - 'novel' / 'novels' (= 「Shonen sunday novels」 等 = ライトノベルレーベル / 小説版)
 
 ### 関連書 patterns (= scripts/_promote-bulk-v2.py の DROP_TITLE_CONTAINS_PATTERNS)
 

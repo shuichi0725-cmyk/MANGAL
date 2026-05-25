@@ -24,8 +24,10 @@ where cluster_key =
 """
 from __future__ import annotations
 import csv
+import pickle
 import re
 import sqlite3
+import sys
 import unicodedata
 from pathlib import Path
 
@@ -36,11 +38,97 @@ except ImportError:
 
 DB = Path(".cache/db-v2.sqlite")
 MERGE_YML = Path("data/seeds/series-merge.yml")
+SEED3_YML = Path("data/seeds/series-supplement-v2.yml")
+SEED3_CACHE = Path(".cache/seed3-keys.pkl")
 OUT_CSV = Path(".cache/volume-gaps.csv")
 OUT_TOP = Path(".cache/volume-gaps-top.txt")
 TOP_N = 100
 MIN_MAX = 3
 MAX_MAX = 300
+
+# --- filter constants (= _promote-bulk-v2.py から コピー、 CLAUDE.md L195- 準拠) ---
+KEEP_EDITION_TYPES = {"standard", "bunkobon", "wideban", "kanzenban", "shinsoban", "aizoban"}
+DROP_IMPRINT_PATTERNS = [
+    "My first big", "コンビニ", "増刊", "同人", "ジャンプremix", "フィルムコミック",
+    "カッパ・ノベル", "カッパノベル", "カッパ・ホーム", "カッパホーム",
+]
+DROP_IMPRINT_LOWER_PATTERNS = ["bilingual", "english", "novel", "novels"]
+DROP_IMPRINT_LOWER_PATTERNS_NO_EQ = ["complete works"]
+DROP_TITLE_PREFIX_PATTERNS = [
+    "テレビアニメ版", "TVアニメ版", "TVアニメ", "アニメコミック",
+    "劇場版", "映画", "OVA",
+    "ノベライズ", "ノベル",
+    "英訳・", "英訳",
+]
+DROP_TITLE_CONTAINS_PATTERNS = [
+    "ガイドブック", "ファンブック", "設定資料集",
+    "公式図録", "公式読本", "公式ファン", "公式コミックガイド",
+    "アンソロジー",
+    "キャラクター名鑑", "人物名鑑",
+    "心理分析", "心理解析", "完全解析", "完全攻略", "攻略本",
+    "解析書", "解体新書", "解体全書",
+    "大研究", "最終研究", "超研究", "大事典", "大百科", "大解剖",
+    "パーフェクトガイド", "完全読本", "完全ガイド", "必勝法",
+    "の秘密", "の謎", "コミック大全", "コミックスペシャル",
+    "ナビゲーション", "考察",
+]
+
+
+def edition_passes(edition_type: str | None, imprint: str | None) -> bool:
+    if (edition_type or "") not in KEEP_EDITION_TYPES:
+        return False
+    imp = imprint or ""
+    imp_l = imp.lower()
+    for pat in DROP_IMPRINT_PATTERNS:
+        if pat in imp:
+            return False
+    for pat in DROP_IMPRINT_LOWER_PATTERNS:
+        if pat in imp_l:
+            return False
+    if "=" not in imp:
+        for pat in DROP_IMPRINT_LOWER_PATTERNS_NO_EQ:
+            if pat in imp_l:
+                return False
+    return True
+
+
+def title_passes(title: str | None) -> bool:
+    if not title:
+        return True
+    t = title.strip()
+    for pat in DROP_TITLE_PREFIX_PATTERNS:
+        if t.startswith(pat):
+            return False
+    for pat in DROP_TITLE_CONTAINS_PATTERNS:
+        if pat in t:
+            return False
+    return True
+
+
+def load_seed3_keys() -> tuple[set, set]:
+    """種3 yml から (series_keys, qids) set を 返す。 pickle cache 利用。"""
+    if SEED3_CACHE.exists() and SEED3_YML.exists():
+        if SEED3_CACHE.stat().st_mtime >= SEED3_YML.stat().st_mtime:
+            with SEED3_CACHE.open("rb") as f:
+                return pickle.load(f)
+    if not SEED3_YML.exists() or yaml is None:
+        return set(), set()
+    with SEED3_YML.open("r", encoding="utf-8") as f:
+        data = yaml.safe_load(f)
+    keys = {e["key"] for e in data.get("series", [])}
+    qids = set()
+    for e in data.get("series", []):
+        if e["key"].startswith("qid:"):
+            qids.add(e["key"].split("|", 1)[0][4:])
+    SEED3_CACHE.parent.mkdir(parents=True, exist_ok=True)
+    with SEED3_CACHE.open("wb") as f:
+        pickle.dump((keys, qids), f)
+    return keys, qids
+
+
+# command-line options
+NO_FILTER = "--no-filter" in sys.argv  # filter skip = 既存挙動 (= 全件)
+NO_SEED3 = "--include-non-seed3" in sys.argv  # 種3 紐付き外 も含める
 
 NUM_RE = re.compile(r"^\s*(\d+)\s*$")
 
@@ -93,10 +181,28 @@ def main() -> None:
                 alias_to_main[alias] = main
         print(f"[info] series-merge.yml loaded: {len(alias_to_main)} aliases → main")
 
+    # ---- 種3 yml load (= 紐付き scope filter) ----
+    seed3_sids: set[int] = set()
+    if not NO_SEED3:
+        seed3_keys, seed3_qids = load_seed3_keys()
+        if seed3_keys or seed3_qids:
+            print(f"[info] seed3 loaded: {len(seed3_keys):,} keys + {len(seed3_qids):,} qids")
+        else:
+            print(f"[warn] seed3 not available; --include-non-seed3 effectively on")
+
     # ---- series 全件 (= cluster key 解決用) ----
     series_rows = con.execute(
-        "SELECT id, qid, title, subtitle FROM series"
+        "SELECT id, qid, series_key, title, subtitle FROM series"
     ).fetchall()
+
+    # 種3 紐付き sid set 構築
+    if not NO_SEED3 and (seed3_keys or seed3_qids):
+        for r in series_rows:
+            if r["series_key"] in seed3_keys:
+                seed3_sids.add(r["id"])
+            elif r["qid"] and r["qid"] in seed3_qids:
+                seed3_sids.add(r["id"])
+        print(f"[info] 種3 紐付き 種2 sid: {len(seed3_sids):,}")
 
     # title norm → qid mapping (= qid 持ち series のみ)
     title_to_qid: dict[str, str] = {}
@@ -135,7 +241,7 @@ def main() -> None:
         display_title = effective_title or r["title"] or ""
         series_cluster[r["id"]] = (ckey, display_title)
 
-    # ---- volume + edition 取得 ----
+    # ---- volume + edition 取得 (= imprint も filter 判定用に取得) ----
     rows = con.execute(
         """
         SELECT
@@ -144,6 +250,7 @@ def main() -> None:
           s.title_official_en AS title_en,
           e.id              AS edition_id,
           e.type            AS edition_type,
+          e.imprint         AS edition_imprint,
           v.number          AS vol_number,
           v.is_extra        AS is_extra
         FROM volumes v
@@ -152,15 +259,40 @@ def main() -> None:
         """
     ).fetchall()
 
+    # filter 適用前後 の カウント
+    n_total = len(rows)
+    n_drop_extra = 0
+    n_drop_seed3 = 0
+    n_drop_title = 0
+    n_drop_edition = 0
+    n_drop_num = 0
+    n_kept = 0
+
     # cluster 単位で 集計
     # key = (cluster_key, edition_type)
     buckets: dict[tuple[str, str], dict] = {}
     for r in rows:
         if r["is_extra"]:
+            n_drop_extra += 1
             continue
+        # 種3 紐付き filter
+        if not NO_SEED3 and (seed3_keys or seed3_qids):
+            if r["series_id"] not in seed3_sids:
+                n_drop_seed3 += 1
+                continue
+        # promote filter (= CLAUDE.md L195- 準拠)
+        if not NO_FILTER:
+            if not title_passes(r["series_title"]):
+                n_drop_title += 1
+                continue
+            if not edition_passes(r["edition_type"], r["edition_imprint"]):
+                n_drop_edition += 1
+                continue
         n = to_int(r["vol_number"])
         if n is None or n <= 0:
+            n_drop_num += 1
             continue
+        n_kept += 1
         ckey, ctitle = series_cluster.get(r["series_id"], (f"id:{r['series_id']}", r["series_title"] or ""))
         edt = r["edition_type"] or "standard"
         key = (ckey, edt)
@@ -243,8 +375,24 @@ def main() -> None:
             f"{r['gap_count']:>4} {r['max_vol']:>4} {r['present']:>4} {r['series_id_count']:>3}  "
             f"{r['edition_type']:<10}  {title}  ({miss})"
         )
-    OUT_TOP.write_text("\n".join(lines) + "\n", encoding="utf-8")
+    # filter 効果 summary を 先頭に挿入
+    filter_summary = [
+        "",
+        "--- filter 効果 (= 全 volumes 件数 内訳) ---",
+        f"全 volume record         : {n_total:,}",
+        f"  ✗ is_extra=1 除外       : {n_drop_extra:,}",
+        f"  ✗ 種3 紐付き外 除外     : {n_drop_seed3:,}" + (" (= --include-non-seed3 で off)" if NO_SEED3 else ""),
+        f"  ✗ title filter 除外     : {n_drop_title:,}" + (" (= --no-filter で off)" if NO_FILTER else ""),
+        f"  ✗ edition filter 除外   : {n_drop_edition:,}" + (" (= --no-filter で off)" if NO_FILTER else ""),
+        f"  ✗ number 不正 除外      : {n_drop_num:,}",
+        f"  ✓ 集計対象              : {n_kept:,}",
+        "",
+    ]
+    OUT_TOP.write_text("\n".join(lines[:4] + filter_summary + lines[4:]) + "\n", encoding="utf-8")
     print(f"target clusters: {len(buckets):,}  gap-containing: {len(results):,}")
+    print(f"volume records: total={n_total:,}, kept={n_kept:,}, "
+          f"dropped: extra={n_drop_extra:,}, seed3={n_drop_seed3:,}, "
+          f"title={n_drop_title:,}, edition={n_drop_edition:,}, num={n_drop_num:,}")
     print(f"csv: {OUT_CSV}")
     print(f"top: {OUT_TOP}")
 
