@@ -1,0 +1,38 @@
+# 改題 chain による series 統合定義。
+# 種2 sqlite は不変、 audit script + 本番 yml 生成時に lookup する mapping のみ。
+# 自動生成元: scripts/_gen-series-merge.py (= kaitai-chain-strong.csv 由来)
+# 各 entry: main = 統合先 (= 検索性/知名度高い親 title)、 aliases = 統合元 子 title 配列。
+#
+- main: Fate/stay nightコミックアラカルト
+  aliases:
+  - Fate/stay night［Unlimited Blade Works］コミックアラカルト
+  note: 'M446757: 「Fate/stay nightコミックアラカルト」の改題,巻次を継承'
+- main: takt op
+  aliases:
+  - takt op.Destiny
+  note: 'M970837: 本文は日本語 ／ 表現種別 : テキスト ／ 表現種別 : 静止画 ／ 機器種別 : 機器不用 ／ キャリア種別 : 冊子 ／ 「takt op.Destiny」の改題、巻次を継承'
+- main: けっきょく!女のはしょり道
+  aliases:
+  - なんだかんだで!女のはしょり道
+  note: 'M968872: 表現種別 : テキスト ／ 表現種別 : 静止画 ／ 機器種別 : 機器不用 ／ キャリア種別 : 冊子 ／ 「けっきょく!女のはしょり道」の改題、巻次を継承'
+- main: ウマ娘プリティーダービーアンソロジーコミックSTAR
+  aliases:
+  - UMAMUSUME PRETTY DERBY anthologycomic STAR
+  note: 'M965486: 表現種別 : テキスト ／ 表現種別 : 静止画 ／ 機器種別 : 機器不用 ／ キャリア種別 : 冊子 ／ 奥付、背のタイトル: ウマ娘プリティーダービーアンソロジーコミックSTAR ／ 「ウマ娘プリティーダービーアンソロジーコミックSTAR」の改題、巻次を継承 ／ 本文は日本語
+
+    M971681: 表現種別 : テキスト ／ 表現種別 : 静止画 ／ 機器種別 : 機器不用 ／ キャリア種別 : 冊子 ／ タイトル・ページ、表紙のタイトル: UMAMUSUME PRETTY DERBY anthologycomic STAR ／ 「UMAMUSUME PRETTY DERBY anthologycomic STAR」の改題、巻次を継承'
+- main: 機動戦士ZガンダムDefine
+  aliases:
+  - 機動戦士ΖガンダムDefineシャア・アズナブル赤の分水嶺
+  - 機動戦士ΖガンダムDefineシャア・アズナブルグリプス戦役
+  note: 'M517465: 「機動戦士ZガンダムDefine」の改題、巻次を継承
+
+    M967459: 表現種別 : テキスト ／ 表現種別 : 静止画 ／ 機器種別 : 機器不用 ／ キャリア種別 : 冊子 ／ 「機動戦士ΖガンダムDefineシャア・アズナブル赤の分水嶺」の改題、巻次を継承'
+- main: 艦隊これくしょん-艦これ-コミックアラカルト
+  aliases:
+  - 艦隊これくしょん-艦これ-コミックアラカルト改
+  note: 'M810549: 「艦隊これくしょん-艦これ-コミックアラカルト」の改題、巻次を継承 ／ NDC（9版）はNDC（10版）を自動変換した値である。'
+- main: 艦隊これくしょん-艦これ-電撃コミックアンソロジー
+  aliases:
+  - 艦隊これくしょん-艦これ-電撃コミックアンソロジー改
+  note: 'M812763: 「艦隊これくしょん-艦これ-電撃コミックアンソロジー」の改題、巻次を継承 ／ NDC（9版）はNDC（10版）を自動変換した値である。'

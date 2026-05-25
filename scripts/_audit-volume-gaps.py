@@ -29,7 +29,13 @@ import sqlite3
 import unicodedata
 from pathlib import Path
 
+try:
+    import yaml
+except ImportError:
+    yaml = None  # type: ignore
+
 DB = Path(".cache/db-v2.sqlite")
+MERGE_YML = Path("data/seeds/series-merge.yml")
 OUT_CSV = Path(".cache/volume-gaps.csv")
 OUT_TOP = Path(".cache/volume-gaps-top.txt")
 TOP_N = 100
@@ -76,6 +82,17 @@ def main() -> None:
     con = sqlite3.connect(DB)
     con.row_factory = sqlite3.Row
 
+    # ---- series-merge.yml 読込 (= 改題 chain 統合) ----
+    alias_to_main: dict[str, str] = {}
+    if MERGE_YML.exists() and yaml is not None:
+        with MERGE_YML.open("r", encoding="utf-8") as f:
+            merge_data = yaml.safe_load(f) or []
+        for entry in merge_data:
+            main = entry.get("main")
+            for alias in entry.get("aliases", []) or []:
+                alias_to_main[alias] = main
+        print(f"[info] series-merge.yml loaded: {len(alias_to_main)} aliases → main")
+
     # ---- series 全件 (= cluster key 解決用) ----
     series_rows = con.execute(
         "SELECT id, qid, title, subtitle FROM series"
@@ -85,24 +102,38 @@ def main() -> None:
     title_to_qid: dict[str, str] = {}
     for r in series_rows:
         if r["qid"]:
-            key = norm_title(r["title"], r["subtitle"])
-            # 既に登録あり (= 同 norm_title で 異なる qid) は最初の qid を採用
+            # alias なら main に置換した title で 登録
+            t = alias_to_main.get(r["title"], r["title"])
+            key = norm_title(t, r["subtitle"])
             title_to_qid.setdefault(key, r["qid"])
+
+    # 改題 main → qid mapping (= 親 main title が qid なくても 子側 qid を 親に引き寄せ)
+    main_to_qid: dict[str, str] = {}
+    for r in series_rows:
+        if r["qid"] and r["title"] in alias_to_main:
+            main_t = alias_to_main[r["title"]]
+            main_to_qid.setdefault(main_t, r["qid"])
 
     # series_id → cluster_key (+ 表示 title)
     series_cluster: dict[int, tuple[str, str]] = {}
     for r in series_rows:
+        # alias なら main title に置換 (= 改題 chain 統合)
+        effective_title = alias_to_main.get(r["title"], r["title"])
+        # cluster key 決定
         if r["qid"]:
             ckey = f"qid:{r['qid']}"
+        elif effective_title in main_to_qid:
+            # 親 main title の 子側 qid に 引き寄せ
+            ckey = f"qid:{main_to_qid[effective_title]}"
         else:
-            norm = norm_title(r["title"], r["subtitle"])
-            # qid 失敗 流出分 を 正規 qid に 引き寄せ
+            norm = norm_title(effective_title, r["subtitle"])
             if norm in title_to_qid:
                 ckey = f"qid:{title_to_qid[norm]}"
             else:
                 ckey = f"title:{norm}"
-        # 表示用 title (= qid あり優先で 採用)
-        series_cluster[r["id"]] = (ckey, r["title"] or "")
+        # 表示用 title = 親 main を 優先
+        display_title = effective_title or r["title"] or ""
+        series_cluster[r["id"]] = (ckey, display_title)
 
     # ---- volume + edition 取得 ----
     rows = con.execute(
