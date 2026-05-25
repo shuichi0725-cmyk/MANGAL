@@ -5,7 +5,9 @@
 集計 key:
   (cluster_key, edition.type)
 where cluster_key =
-  - qid があれば 'qid:<qid>'
+  - qid があれば 'qid:<qid>'  (default = 作家 qid 統合)
+  - --by-title flag = 'qid:<qid>|t:<norm_title>' (= 作家 qid 内で作品別分割、
+    高橋留美子の RINNE / MAO 等の 真の抜け 露出に有効、 ただし cluster 数倍増)
   - qid なくても title が qid 持ち series と完全一致 → qid 側に 引き寄せ
   - それ以外は 'title:<正規化 title>'
 
@@ -130,6 +132,7 @@ def load_seed3_keys() -> tuple[set, set]:
 # command-line options
 NO_FILTER = "--no-filter" in sys.argv  # filter skip = 既存挙動 (= 全件)
 NO_SEED3 = "--include-non-seed3" in sys.argv  # 種3 紐付き外 も含める
+BY_TITLE = "--by-title" in sys.argv  # cluster_key を qid+title norm で 分割 (= 作家 qid 統合解除)
 
 NUM_RE = re.compile(r"^\s*(\d+)\s*$")
 
@@ -246,14 +249,24 @@ def main() -> None:
         effective_title = alias_to_main.get(r["title"], r["title"])
         # cluster key 決定
         if r["qid"]:
-            ckey = f"qid:{r['qid']}"
+            if BY_TITLE:
+                # --by-title = 作家 qid 統合解除、 作品 title で 分割
+                ckey = f"qid:{r['qid']}|t:{norm_title(effective_title, r['subtitle'])}"
+            else:
+                ckey = f"qid:{r['qid']}"
         elif effective_title in main_to_qid:
             # 親 main title の 子側 qid に 引き寄せ
-            ckey = f"qid:{main_to_qid[effective_title]}"
+            if BY_TITLE:
+                ckey = f"qid:{main_to_qid[effective_title]}|t:{norm_title(effective_title, r['subtitle'])}"
+            else:
+                ckey = f"qid:{main_to_qid[effective_title]}"
         else:
             norm = norm_title(effective_title, r["subtitle"])
             if norm in title_to_qid:
-                ckey = f"qid:{title_to_qid[norm]}"
+                if BY_TITLE:
+                    ckey = f"qid:{title_to_qid[norm]}|t:{norm}"
+                else:
+                    ckey = f"qid:{title_to_qid[norm]}"
             else:
                 ckey = f"title:{norm}"
         # 表示用 title = 親 main を 優先
