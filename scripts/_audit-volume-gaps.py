@@ -137,6 +137,51 @@ def load_seed3_keys() -> tuple[set, set]:
 NO_FILTER = "--no-filter" in sys.argv  # filter skip = 既存挙動 (= 全件)
 NO_SEED3 = "--include-non-seed3" in sys.argv  # 種3 紐付き外 も含める
 BY_TITLE = "--by-title" in sys.argv  # cluster_key を qid+title norm で 分割 (= 作家 qid 統合解除)
+NO_HIER_DROP = "--no-hier-drop" in sys.argv  # 階層的派生本排除 を off (= 既存挙動)
+
+# 階層的排除 = keep override patterns (= 派生候補のうち title+sub に hit したら keep)
+DERIVATIVE_DROP_THRESHOLD_PCT = 1.0
+KEEP_OVERRIDE_PATTERNS = [
+    "フルカラー", "総カラー", "オールカラー", "カラー版", "カラーエディション",
+    "大全集", "復刻版", "復刊",
+]
+
+
+def compute_derivative_drop_sids(con) -> set[int]:
+    """同 qid 内で 主軸 (= title prefix 親) の 1% 未満 巻数 sid を 派生候補 として 列挙。
+    ただし title+subtitle に KEEP_OVERRIDE_PATTERNS 含む sid は 除外 (= keep)。"""
+    if NO_HIER_DROP:
+        return set()
+    from collections import defaultdict
+    rows = con.execute("""
+        SELECT s.id, s.qid, s.title, s.subtitle,
+               COUNT(DISTINCT v.id) AS vc
+        FROM series s
+        LEFT JOIN editions e ON e.series_id=s.id
+        LEFT JOIN volumes v ON v.edition_id=e.id AND v.is_extra=0
+        WHERE s.qid IS NOT NULL
+        GROUP BY s.id
+    """).fetchall()
+    by_qid: dict = defaultdict(list)
+    for r in rows:
+        by_qid[r["qid"]].append((r["id"], r["title"] or "", r["subtitle"] or "", r["vc"]))
+    drop_sids: set[int] = set()
+    for qid, sids in by_qid.items():
+        if len(sids) < 2: continue
+        main_sid, main_title, _, main_vc = max(sids, key=lambda x: x[3])
+        if main_vc < 5: continue  # メイン本人 5 vol 未満 = 主軸不確定
+        for sid, t, sub, vc in sids:
+            if sid == main_sid: continue
+            if not t.startswith(main_title): continue
+            # title 完全一致 (= sub 違い) でも 別 sid なら 派生候補対象
+            ratio = vc / main_vc * 100 if main_vc else 0
+            if ratio >= DERIVATIVE_DROP_THRESHOLD_PCT: continue
+            # 派生候補 = keep override check
+            combined = t + sub
+            if any(p in combined for p in KEEP_OVERRIDE_PATTERNS):
+                continue  # keep override で救済
+            drop_sids.add(sid)
+    return drop_sids
 
 NUM_RE = re.compile(r"^\s*(\d+)\s*$")
 
@@ -209,6 +254,11 @@ def main() -> None:
             print(f"[info] seed3 loaded: {len(seed3_keys):,} keys + {len(seed3_qids):,} qids")
         else:
             print(f"[warn] seed3 not available; --include-non-seed3 effectively on")
+
+    # ---- 階層的派生本排除 = drop_sids set 構築 ----
+    derivative_drop_sids = compute_derivative_drop_sids(con)
+    if derivative_drop_sids:
+        print(f"[info] hierarchical drop: {len(derivative_drop_sids)} sid 派生本判定")
 
     # ---- series 全件 (= cluster key 解決用) ----
     series_rows = con.execute(
@@ -302,6 +352,7 @@ def main() -> None:
     n_drop_title = 0
     n_drop_edition = 0
     n_drop_num = 0
+    n_drop_hier = 0
     n_kept = 0
 
     # cluster 単位で 集計
@@ -340,6 +391,10 @@ def main() -> None:
             if not edition_passes(r["edition_type"], r["edition_imprint"]):
                 n_drop_edition += 1
                 continue
+        # 階層的派生本排除 (= 同 qid 内 主軸 1% 未満 + override hit なし)
+        if r["series_id"] in derivative_drop_sids:
+            n_drop_hier += 1
+            continue
         n = to_int(r["vol_number"])
         if n is None or n <= 0:
             n_drop_num += 1
@@ -506,6 +561,7 @@ def main() -> None:
         f"  ✗ 種3 紐付き外 除外     : {n_drop_seed3:,}" + (" (= --include-non-seed3 で off)" if NO_SEED3 else ""),
         f"  ✗ title filter 除外     : {n_drop_title:,}" + (" (= --no-filter で off)" if NO_FILTER else ""),
         f"  ✗ edition filter 除外   : {n_drop_edition:,}" + (" (= --no-filter で off)" if NO_FILTER else ""),
+        f"  ✗ 階層的派生本 除外     : {n_drop_hier:,}" + (" (= --no-hier-drop で off)" if NO_HIER_DROP else ""),
         f"  ✗ number 不正 除外      : {n_drop_num:,}",
         f"  ✓ 集計対象              : {n_kept:,}",
         "",

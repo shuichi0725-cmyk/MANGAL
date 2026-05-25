@@ -259,6 +259,19 @@ drop imprint patterns:
 
 ### 関連書 patterns (= scripts/_promote-bulk-v2.py の DROP_TITLE_CONTAINS_PATTERNS)
 
+### 階層的排除 (= 2026-05-26 追加)
+
+派生本 vs 独立シリーズ vs 本編 の 自動区別 logic:
+
+1. **階層 1 = 強 drop** = DROP_TITLE_CONTAINS_PATTERNS hit → 無条件 drop (= 抜粋本/関連書)
+2. **階層 2 = 派生判定** = 同 qid 内 主軸 (= title prefix 親) の **1% 未満** 巻数 sid = 派生候補 drop
+3. **階層 3 = keep override** = 派生候補のうち title + subtitle に下記 word 含む = keep 救済
+   - カラー系: フルカラー / 総カラー / オールカラー / カラー版 / カラーエディション
+   - 全集 / 復刻: 大全集 / 復刻版 / 復刊
+4. **偽 keep > 偽 drop** 原則: 復活困難なので drop 側 保守的、 残った偽 keep は 種3 mark で 個別drop (= 将来)
+
+---
+
 title 内 包含 で 弾く (= 漫画 ではない 副次出版物 / 本編ではない 抜粋本):
 
 - ガイドブック / ファンブック / 設定資料集 / 公式図録 / 公式読本 / 公式ファン
