@@ -40,6 +40,7 @@ DB = Path(".cache/db-v2.sqlite")
 MERGE_YML = Path("data/seeds/series-merge.yml")
 SEED3_YML = Path("data/seeds/series-supplement-v2.yml")
 SEED3_CACHE = Path(".cache/seed3-keys.pkl")
+SUPP_YML = Path("data/seeds/volumes-supplement.yml")
 OUT_CSV = Path(".cache/volume-gaps.csv")
 OUT_TOP = Path(".cache/volume-gaps-top.txt")
 TOP_N = 100
@@ -170,8 +171,9 @@ def main() -> None:
     con = sqlite3.connect(DB)
     con.row_factory = sqlite3.Row
 
-    # ---- series-merge.yml 読込 (= 改題 chain 統合) ----
+    # ---- series-merge.yml 読込 (= 改題 chain 統合 + sid 直接マージ) ----
     alias_to_main: dict[str, str] = {}
+    sid_to_forced_cluster: dict[int, str] = {}  # sid → forced cluster_key (= merge_sids 由来)
     if MERGE_YML.exists() and yaml is not None:
         with MERGE_YML.open("r", encoding="utf-8") as f:
             merge_data = yaml.safe_load(f) or []
@@ -179,7 +181,14 @@ def main() -> None:
             main = entry.get("main")
             for alias in entry.get("aliases", []) or []:
                 alias_to_main[alias] = main
-        print(f"[info] series-merge.yml loaded: {len(alias_to_main)} aliases → main")
+            # merge_sids = 個別判断 sid 直接マージ (= 表記揺れ救済等)
+            forced_sids = entry.get("merge_sids") or []
+            if forced_sids:
+                forced_ckey = f"merge:{main}"
+                for sid in forced_sids:
+                    sid_to_forced_cluster[int(sid)] = forced_ckey
+        print(f"[info] series-merge.yml loaded: {len(alias_to_main)} aliases, "
+              f"{len(sid_to_forced_cluster)} forced sids → main")
 
     # ---- 種3 yml load (= 紐付き scope filter) ----
     seed3_sids: set[int] = set()
@@ -223,6 +232,12 @@ def main() -> None:
     # series_id → cluster_key (+ 表示 title)
     series_cluster: dict[int, tuple[str, str]] = {}
     for r in series_rows:
+        # ★ forced merge_sids が 最優先 (= 個別判断、 表記揺れ救済等)
+        if r["id"] in sid_to_forced_cluster:
+            ckey = sid_to_forced_cluster[r["id"]]
+            display_title = ckey.split(":", 1)[1]
+            series_cluster[r["id"]] = (ckey, display_title)
+            continue
         # alias なら main title に置換 (= 改題 chain 統合)
         effective_title = alias_to_main.get(r["title"], r["title"])
         # cluster key 決定
@@ -276,10 +291,26 @@ def main() -> None:
             n_drop_extra += 1
             continue
         # 種3 紐付き filter
+        # ただし forced merge_sids (= 個別判断 cluster) に含まれる sid は cluster 単位で
+        # 1 sid でも 種3 OK なら cluster 全 sid 採用 (= 表記揺れ救済の 安全範囲限定版)
         if not NO_SEED3 and (seed3_keys or seed3_qids):
-            if r["series_id"] not in seed3_sids:
-                n_drop_seed3 += 1
-                continue
+            sid = r["series_id"]
+            if sid not in seed3_sids:
+                forced_ckey = sid_to_forced_cluster.get(sid)
+                if forced_ckey:
+                    # 同 forced cluster 内に seed3 OK sid が 1+ あるか check
+                    cluster_has_seed3 = any(
+                        other_sid in seed3_sids
+                        for other_sid, ck in sid_to_forced_cluster.items()
+                        if ck == forced_ckey
+                    )
+                    if not cluster_has_seed3:
+                        n_drop_seed3 += 1
+                        continue
+                    # else: cluster 救済で keep
+                else:
+                    n_drop_seed3 += 1
+                    continue
         # promote filter (= CLAUDE.md L195- 準拠)
         if not NO_FILTER:
             if not title_passes(r["series_title"]):
@@ -311,6 +342,72 @@ def main() -> None:
         b["numbers"].add(n)
         # title 上書き (= qid:Q...の正規 title 優先したい場合は別 logic 必要だが
         # 通常 cluster 内では 主 series の title が 多数派なので問題なし)
+
+    # ---- 種4 = volumes-supplement.yml load + 補完 ----
+    n_supp_applied = 0
+    n_supp_unmatched = 0
+    if SUPP_YML.exists() and yaml is not None:
+        with SUPP_YML.open("r", encoding="utf-8") as f:
+            supp_data = yaml.safe_load(f) or {}
+        supp_records = supp_data.get("volumes", []) or []
+        # series_key → sid mapping
+        sk_to_sids: dict[str, list[int]] = {}
+        for sr in series_rows:
+            sk_to_sids.setdefault(sr["series_key"], []).append(sr["id"])
+        qid_to_sids: dict[str, list[int]] = {}
+        for sr in series_rows:
+            if sr["qid"]:
+                qid_to_sids.setdefault(sr["qid"], []).append(sr["id"])
+        for entry in supp_records:
+            number = entry.get("number")
+            if number is None:
+                continue
+            try:
+                n_int = int(number)
+            except (ValueError, TypeError):
+                continue
+            if n_int <= 0:
+                continue
+            edt = entry.get("edition_type") or "standard"
+            sks = entry.get("series_keys") or []
+            entry_qid = entry.get("qid")
+            matched_sids: set[int] = set()
+            for sk in sks:
+                matched_sids.update(sk_to_sids.get(sk, []))
+            if entry_qid and entry_qid in qid_to_sids:
+                matched_sids.update(qid_to_sids[entry_qid])
+            if not matched_sids:
+                n_supp_unmatched += 1
+                print(f"[warn] supplement entry not matched (no sid): "
+                      f"keys={sks}, qid={entry_qid}, number={n_int}")
+                continue
+            # 各 sid の cluster_key を 取り、 該当 bucket に number 追加
+            added_to = set()
+            for sid in matched_sids:
+                ckey_ctitle = series_cluster.get(sid)
+                if not ckey_ctitle:
+                    continue
+                ckey, ctitle = ckey_ctitle
+                key = (ckey, edt)
+                if key in added_to:
+                    continue
+                added_to.add(key)
+                b = buckets.setdefault(
+                    key,
+                    {
+                        "cluster_key": ckey,
+                        "edition_type": edt,
+                        "series_title": ctitle,
+                        "title_en": "",
+                        "series_ids": set(),
+                        "numbers": set(),
+                    },
+                )
+                b["numbers"].add(n_int)
+            n_supp_applied += 1
+        if n_supp_applied or n_supp_unmatched:
+            print(f"[info] volumes-supplement applied: {n_supp_applied} entries "
+                  f"(unmatched: {n_supp_unmatched})")
 
     results = []
     for b in buckets.values():
