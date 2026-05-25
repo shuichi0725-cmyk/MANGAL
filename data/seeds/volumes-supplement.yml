@@ -48,3 +48,23 @@ volumes:
       シャングリラフロンティア は 硬梨菜 (= 原作) と 不二涼介 (= 漫画) の 2 著者で
       MADB が 巻ごと creator 振り分け 差異で 種2 内 sid=141297 + sid=141298 に
       分散登録、 双方の series_key に 紐付け。
+
+  - series_keys:
+      - 'qid:Q719354|name:岸辺露伴は動かない'
+    qid: Q719354
+    number: 1
+    isbn13: '9784088708720'
+    release_date: '2013-11'
+    publisher: 集英社
+    edition_type: standard
+    title_display: '岸辺露伴は動かない (1)'
+    source: madb-rescue
+    added_at: '2026-05-25'
+    note: |
+      MADB record は 存在する (= M406985) が、 number 表記なしのため 種2 build script が
+      「number=0 + is_extra=1 (= 番外編)」 と 判定 → audit から 二重弾きされていた。
+      実態は 「岸辺露伴は動かない」 シリーズの 1 巻目 (= 全 3 巻、 2 巻 M520911 = 2018-07、
+      3 巻 M1062734 = 2025-05)。 種4 で number=1 として 補完登録、 audit cluster に
+      1 巻 として 反映。
+      根本対策は 種2 build script 「number 不明 = extra 扱い」 logic の修正だが
+      全件影響 で 別議論。 短期は 種4 補完で 個別対処。
