@@ -26,6 +26,7 @@ from __future__ import annotations
 import csv
 import re
 import sqlite3
+import unicodedata
 from pathlib import Path
 
 DB = Path(".cache/db-v2.sqlite")
@@ -45,10 +46,28 @@ def to_int(s) -> int | None:
     return int(m.group(1)) if m else None
 
 
+def _clean(s: str | None) -> str:
+    """Unicode カテゴリ P* (= 句読点) / Z* (= separator) + 横棒類 を 全除去 + lowercase。
+
+    対象例: 半角/全角の空白、 ・、 、 。 ! ? ' " . , : ; / 〜 ~ ー ― 「」 『』 等。
+    これで MADB の 表記揺れ (= 末尾 .、 中黒 ありなし、 全角句読点 等) を 吸収。
+    """
+    if not s:
+        return ""
+    out = []
+    for ch in s:
+        cat = unicodedata.category(ch)
+        if cat[0] in ("P", "Z"):
+            continue
+        if ch in "ー―~〜":
+            continue
+        out.append(ch.lower())
+    return "".join(out)
+
+
 def norm_title(t: str | None, sub: str | None) -> str:
-    """title 正規化 = スペース類除去 + lowercase。 subtitle も含む。"""
-    base = (t or "") + "|" + (sub or "")
-    return re.sub(r"[\s　・.,!?'\-―ー]+", "", base).lower()
+    """title + subtitle 正規化。 | で 境界保持 = subtitle 違いは別 cluster のまま。"""
+    return _clean(t) + "|" + _clean(sub)
 
 
 def main() -> None:
