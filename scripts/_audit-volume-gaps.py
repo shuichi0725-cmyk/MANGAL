@@ -171,9 +171,10 @@ def main() -> None:
     con = sqlite3.connect(DB)
     con.row_factory = sqlite3.Row
 
-    # ---- series-merge.yml 読込 (= 改題 chain 統合 + sid 直接マージ) ----
+    # ---- series-merge.yml 読込 (= 改題 chain 統合 + sid 直接マージ + edition 統合) ----
     alias_to_main: dict[str, str] = {}
     sid_to_forced_cluster: dict[int, str] = {}  # sid → forced cluster_key (= merge_sids 由来)
+    cluster_merge_editions: set[str] = set()    # cluster_key (forced) で edition.type 区別 無効
     if MERGE_YML.exists() and yaml is not None:
         with MERGE_YML.open("r", encoding="utf-8") as f:
             merge_data = yaml.safe_load(f) or []
@@ -187,8 +188,11 @@ def main() -> None:
                 forced_ckey = f"merge:{main}"
                 for sid in forced_sids:
                     sid_to_forced_cluster[int(sid)] = forced_ckey
+                if entry.get("merge_edition_types"):
+                    cluster_merge_editions.add(forced_ckey)
         print(f"[info] series-merge.yml loaded: {len(alias_to_main)} aliases, "
-              f"{len(sid_to_forced_cluster)} forced sids → main")
+              f"{len(sid_to_forced_cluster)} forced sids, "
+              f"{len(cluster_merge_editions)} edition-merged clusters → main")
 
     # ---- 種3 yml load (= 紐付き scope filter) ----
     seed3_sids: set[int] = set()
@@ -326,6 +330,9 @@ def main() -> None:
         n_kept += 1
         ckey, ctitle = series_cluster.get(r["series_id"], (f"id:{r['series_id']}", r["series_title"] or ""))
         edt = r["edition_type"] or "standard"
+        # cluster_merge_editions に登録された cluster は edition.type 統合 (= 集計 key で 区別なし)
+        if ckey in cluster_merge_editions:
+            edt = "*"
         key = (ckey, edt)
         b = buckets.setdefault(
             key,
@@ -388,7 +395,8 @@ def main() -> None:
                 if not ckey_ctitle:
                     continue
                 ckey, ctitle = ckey_ctitle
-                key = (ckey, edt)
+                effective_edt = "*" if ckey in cluster_merge_editions else edt
+                key = (ckey, effective_edt)
                 if key in added_to:
                     continue
                 added_to.add(key)
@@ -396,7 +404,7 @@ def main() -> None:
                     key,
                     {
                         "cluster_key": ckey,
-                        "edition_type": edt,
+                        "edition_type": effective_edt,
                         "series_title": ctitle,
                         "title_en": "",
                         "series_ids": set(),

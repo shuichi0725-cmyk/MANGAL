@@ -7,6 +7,10 @@
 #     aliases: 統合元 子 title 配列 (= title 単位 merge、 改題 chain 主用途)
 #     merge_sids: [int,...] (= optional) ★ 種2 series.id 直接指定で merge
 #                          (= 表記揺れ救済、 個別判断ケース、 同名異作リスク回避)
+#     merge_edition_types: bool (= optional) ★ True で audit 集計時 edition.type
+#                          区別を 解除 (= 装丁切り替えで standard → shinsoban に
+#                          移行した 連続巻 を 1 bucket 集計、 例: シャングリラ
+#                          フロンティア 23/26 巻 「KC magazine deluxe」)
 #     note: |
 #       根拠 / 確認内容
 #
@@ -46,6 +50,7 @@
 - main: シャングリラフロンティア
   aliases: []
   merge_sids: [77559, 141297, 141298, 141299]
+  merge_edition_types: true
   note: |
     表記揺れ + 著者振り分け 差異で 種2 内 4 sid に分散登録:
       - sid=77559  : 中黒違い 「シャングリラ・フロンティア」 sub=クソゲーハンター...
@@ -54,4 +59,7 @@
       - sid=141299 : 末尾 . 揺れ sub=クソゲーハンター...とす.
     実態 = 1-26 巻 同一作品 (= 20 巻 は MADB 取込もれ、 種4 で補完済 ISBN 9784065377437)。
     硬梨菜 (原作) / 不二涼介 (漫画) の 2 著者で MADB が 巻ごと creator 振り分け 差異。
+    23 / 26 巻 = brand 「KC magazine deluxe」 で 種2 build script が shinsoban に
+    振り分けたが、 実態は 連続通常巻 = merge_edition_types: true で standard と
+    shinsoban を 同 bucket 集計。
     cluster 統合により audit 偽陽性 解消。 ユーザ判断 = 2026-05-25。
