@@ -1,17 +1,21 @@
 """metadata101.json から 改題 chain を 抽出 + 種2 sqlite と マッチング。
 
-抽出 pattern:
-  「<旧 series 名>」の改題、巻次を継承  ← 強 chain (= 安全に merge 候補)
-  「<旧 series 名>」の改題                ← 弱 chain (= 別物の可能性あり、 別出力)
+★ v2 = 安全側 pattern 拡張 (= A + C + D)
 
-種2 sqlite と照合:
-  - 旧 series 名 と 新 series 名 (= 当該 MangaBook の schema:name) を
-    `series.title` で lookup
-  - 両方 hit したら series_id ペアを 出力
+拡張点:
+A. strong pattern variation 追加 (= 「巻次/巻号 を 継承/引き継ぐ/引き継ぎ/継続」)
+   + 二重カギ括弧 『』 対応
+   + ma:note の list 形式対応 (= 続き行も拾う)
+   + schema:description も対象に追加 (= 同 strong pattern のみ、 危険 keyword exclude)
+D. 「改題」 直後 30 文字 に 危険 keyword (= 合本/外伝/抜粋/再構成/加筆/セレクション/続編)
+   含む match は **strong から弾く** (= 巻番衝突 / 別シリーズリスク 回避)
 
 出力:
-  .cache/kaitai-chain-strong.csv  = 巻次継承あり (= merge 推奨候補)
-  .cache/kaitai-chain-weak.csv    = 巻次継承なし (= 別物の可能性、 目視確認用)
+  .cache/kaitai-chain-strong.csv  = 安全に merge できる候補 (= 自動採用想定)
+  .cache/kaitai-chain-weak.csv    = 「改題」 のみ patternの 全件 (= 手動 review 用)
+
+注意: 種2 sqlite は **不変** (C 原則)。 これは audit script + 本番 yml 生成時
+の lookup 用 mapping source。
 """
 from __future__ import annotations
 import csv
@@ -24,71 +28,127 @@ DB = Path(".cache/db-v2.sqlite")
 OUT_STRONG = Path(".cache/kaitai-chain-strong.csv")
 OUT_WEAK = Path(".cache/kaitai-chain-weak.csv")
 
-# 「○○」の改題、巻次を継承
-STRONG_RE = re.compile(r"「([^」]+?)」の改題.{0,15}(?:巻次|巻号|巻次を継承|巻号を継承|巻次引き継ぎ)")
-# 「○○」の改題 (= 巻次継承なし)
-ANY_RE = re.compile(r"「([^」]+?)」の改題")
-# 当該 MangaBook の title 抽出 (= schema:name の 1 個目 = 日本語名)
-# JSON-LD では schema:name = list の場合あり (= ja + ja-hrkt)、 当面は schema:name 行末の 値を 取る
-# pattern (簡易): "schema:name": "<title>"
+# 「○○」の改題、 + 巻次/巻号 + を + 継承/引き継ぐ/引き継ぎ/継続
+STRONG_RE = re.compile(
+    r"[「『]([^」』]+?)[」』]の改題.{0,20}(?:巻次|巻号)(?:を)?(?:継承|引き継ぐ|引き継ぎ|継続)"
+)
+ANY_RE = re.compile(r"[「『]([^」』]+?)[」』]の改題")
+
+# strong から弾く 危険 keyword (= 改題 直後 30 文字以内に 含まれたら不採用)
+DANGER_KEYWORDS = [
+    "合本", "外伝", "抜粋", "再構成", "加筆", "セレクション",
+    "続編", "続巻", "別冊", "総集編", "ベスト版", "復刻"
+]
+
 NAME_INLINE_RE = re.compile(r'"schema:name":\s*"([^"]+)"')
-# list の場合 1 行目に `"schema:name": [` が来て 2 行目に "<title>"
 NAME_LIST_START_RE = re.compile(r'"schema:name":\s*\[')
+NOTE_INLINE_RE = re.compile(r'"ma:note":\s*"([^"]+)"')
+NOTE_LIST_START_RE = re.compile(r'"ma:note":\s*\[')
+DESC_INLINE_RE = re.compile(r'"schema:description":\s*"([^"]+)"')
 ID_RE = re.compile(r'"@id":\s*"https://mediaarts-db\.artmuseums\.go\.jp/id/(M\d+)"')
+# list 内の単純文字列値 (= "..." ja のみ)
+SIMPLE_STR_RE = re.compile(r'^\s*"([^"]+)"\s*,?\s*$')
+
+
+def is_safe(note: str, m: re.Match) -> bool:
+    """match の 直後 30 文字 に 危険 keyword 含まれるか チェック。"""
+    after = note[m.end(): m.end() + 30]
+    for kw in DANGER_KEYWORDS:
+        if kw in after:
+            return False
+    return True
 
 
 def extract_pairs():
-    """metadata101.json を 行 stream 解析。 各 entity の (madb_id, name, ma:note) を抽出。"""
+    """metadata101.json を 行 stream 解析。"""
     cur_id: str | None = None
     cur_name: str | None = None
     cur_notes: list[str] = []
+    cur_descs: list[str] = []
     in_name_list = False
+    in_note_list = False
 
-    pairs_strong: list[tuple[str, str, str, str]] = []  # (madb_id, new_name, old_name, note)
-    pairs_weak: list[tuple[str, str, str, str]] = []
+    pairs_strong: list[tuple[str, str, str, str, str]] = []  # id, new, old, note, src
+    pairs_weak: list[tuple[str, str, str, str, str]] = []
+
+    def add_strong(text: str, src: str):
+        for m in STRONG_RE.finditer(text):
+            if is_safe(text, m):
+                pairs_strong.append((cur_id, cur_name, m.group(1), text[:300], src))
+
+    def add_weak(text: str, src: str):
+        for m in ANY_RE.finditer(text):
+            # strong に該当する match は 既に 集計済 → ここでは strong に該当しないものだけ
+            sm = STRONG_RE.search(text, m.start(), m.start() + 200)
+            if sm and sm.start() == m.start():
+                continue
+            pairs_weak.append((cur_id, cur_name, m.group(1), text[:300], src))
 
     def flush():
-        nonlocal cur_id, cur_name, cur_notes
-        if cur_id and cur_name and cur_notes:
+        nonlocal cur_id, cur_name, cur_notes, cur_descs
+        if cur_id and cur_name:
             for note in cur_notes:
-                m = STRONG_RE.search(note)
-                if m:
-                    pairs_strong.append((cur_id, cur_name, m.group(1), note))
-                    continue
-                m2 = ANY_RE.search(note)
-                if m2:
-                    pairs_weak.append((cur_id, cur_name, m2.group(1), note))
+                add_strong(note, "ma:note")
+                add_weak(note, "ma:note")
+            for desc in cur_descs:
+                add_strong(desc, "schema:description")
+                add_weak(desc, "schema:description")
         cur_id = None
         cur_name = None
         cur_notes = []
+        cur_descs = []
 
     with SRC.open("r", encoding="utf-8") as f:
         for line in f:
             m_id = ID_RE.search(line)
             if m_id:
-                # 新 entity 開始 = 直前の entity flush
                 flush()
                 cur_id = m_id.group(1)
                 in_name_list = False
+                in_note_list = False
                 continue
+
+            # ma:note の list 形式 続き行 対応
+            if in_note_list:
+                m_s = SIMPLE_STR_RE.match(line)
+                if m_s and "@" not in m_s.group(1):
+                    cur_notes.append(m_s.group(1))
+                    continue
+                if "]" in line:
+                    in_note_list = False
+                    continue
+
+            # name list 形式 続き行
+            if in_name_list and cur_name is None:
+                m_s = SIMPLE_STR_RE.match(line)
+                if m_s and "@" not in m_s.group(1):
+                    cur_name = m_s.group(1)
+                    in_name_list = False
+                    continue
+                if "]" in line:
+                    in_name_list = False
+                    continue
+
             if cur_name is None:
+                m_n = NOTE_INLINE_RE.search(line) and None
                 m_n = NAME_INLINE_RE.search(line)
                 if m_n:
                     cur_name = m_n.group(1)
                 elif NAME_LIST_START_RE.search(line):
                     in_name_list = True
                     continue
-                elif in_name_list:
-                    # list 内の最初の 単純文字列値 (= "..." で囲まれた値) = 日本語 title
-                    s = line.strip().rstrip(",")
-                    if s.startswith('"') and s.endswith('"') and "@" not in s:
-                        cur_name = s[1:-1]
-                        in_name_list = False
+
             if '"ma:note"' in line:
-                # 値抽出: "ma:note": "<...>"  もしくは 複数行 = 当面 単行のみ対象
-                m_v = re.search(r'"ma:note":\s*"([^"]+)"', line)
+                m_v = NOTE_INLINE_RE.search(line)
                 if m_v:
                     cur_notes.append(m_v.group(1))
+                elif NOTE_LIST_START_RE.search(line):
+                    in_note_list = True
+                    continue
+            if '"schema:description"' in line:
+                m_v = DESC_INLINE_RE.search(line)
+                if m_v:
+                    cur_descs.append(m_v.group(1))
     flush()
     return pairs_strong, pairs_weak
 
@@ -100,7 +160,12 @@ def lookup_in_db(pairs):
     con = sqlite3.connect(DB)
     con.row_factory = sqlite3.Row
     results = []
-    for madb_id, new_name, old_name, note in pairs:
+    seen = set()  # (new_name, old_name) で dedupe (= 同 chain 複数巻で 重複)
+    for madb_id, new_name, old_name, note, src in pairs:
+        key = (new_name, old_name)
+        if key in seen:
+            continue
+        seen.add(key)
         new_rows = con.execute(
             "SELECT id, qid, title FROM series WHERE title=? LIMIT 5",
             (new_name,),
@@ -113,6 +178,7 @@ def lookup_in_db(pairs):
             continue
         results.append({
             "madb_id": madb_id,
+            "src_field": src,
             "new_name": new_name,
             "old_name": old_name,
             "new_series_ids": ",".join(str(r["id"]) for r in new_rows),
@@ -143,7 +209,7 @@ def main() -> None:
     print(f"[2/3] DB matching against {DB}...")
     strong_matched = lookup_in_db(strong)
     weak_matched = lookup_in_db(weak)
-    print(f"  matched both ends: strong={len(strong_matched):,}, weak={len(weak_matched):,}")
+    print(f"  matched both ends + deduped: strong={len(strong_matched):,}, weak={len(weak_matched):,}")
 
     print(f"[3/3] writing csv...")
     write_csv(OUT_STRONG, strong_matched)
@@ -151,10 +217,10 @@ def main() -> None:
     print(f"  {OUT_STRONG}")
     print(f"  {OUT_WEAK}")
 
-    # 先頭 sample を console にも出す
-    print("\n=== strong sample (= 巻次継承 = merge 候補) ===")
-    for r in strong_matched[:15]:
-        print(f"  {r['madb_id']}: '{r['old_name']}' (= sid:{r['old_series_ids']}) "
+    print("\n=== strong sample (= 自動採用候補) ===")
+    for r in strong_matched[:30]:
+        print(f"  {r['madb_id']} [{r['src_field']}]: "
+              f"'{r['old_name']}' (= sid:{r['old_series_ids']}) "
               f"→ '{r['new_name']}' (= sid:{r['new_series_ids']})")
 
 
