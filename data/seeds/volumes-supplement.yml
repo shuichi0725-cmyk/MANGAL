@@ -51,7 +51,7 @@ volumes:
 
   - series_keys:
       - 'qid:Q719354|name:岸辺露伴は動かない'
-    qid: Q719354
+    qid: null  # ★ qid 指定で ジョジョ 33 sid 全部に 1 巻追加される副作用回避 = series_keys のみ
     number: 1
     isbn13: '9784088708720'
     release_date: '2013-11'
@@ -68,3 +68,24 @@ volumes:
       1 巻 として 反映。
       根本対策は 種2 build script 「number 不明 = extra 扱い」 logic の修正だが
       全件影響 で 別議論。 短期は 種4 補完で 個別対処。
+
+  - series_keys:
+      - 'qid:Q2661273|name:ゴルゴ13'
+    qid: null  # ★ qid 指定すると 同 qid の 派生作品 全部 (= 「ゴルゴ13 in Africa」 等 55 sid) に
+              # 214 が 追加されて gap 爆発するため、 series_keys 完全一致 のみで sid=38124 限定
+    number: 214
+    isbn13: '9784845866878'
+    release_date: '2024-09-05'
+    pages: 252
+    publisher: リイド社
+    edition_type: standard
+    title_display: 'ゴルゴ13 214'
+    source: amazon
+    added_at: '2026-05-26'
+    note: |
+      MADB 完全取込もれ (= 種1 metadata101.json で ISBN/214 巻 grep hit ゼロ確認)。
+      Amazon に 公式販売 (= 4.4 / 48 レビュー)、 リイド社、 252 ページ。
+      audit --by-title で 唯一の 抜け検出 (= 1-219 のうち 214 巻 のみ欠)。
+      qid=Q2661273 = さいとう・たかを 作家 qid (= 鬼平 + ゴルゴ 統合)、
+      ゴルゴ13 main sid=38124 (= series_key qid:Q2661273|name:ゴルゴ13、 791 vol保持)
+      に紐付け。 ONE PIECE 110 / シャングリラ 20 と 同 patternの 取込もれ補完。
