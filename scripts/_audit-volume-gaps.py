@@ -1,13 +1,26 @@
 """種2 sqlite を 走査して、 連続する 巻番号 に 抜けが出るシリーズ を 一覧化。
 
-判定:
-- volumes.number を edition 単位で集計 (= standard / bunkobon は別 edition)
-- 整数化できる number のみ対象 (= 「上」「下」「番外」 等は除外)
-- is_extra=1 は除外
-- 1 〜 max(N) のうち 欠番を抽出
-- max <= 2 (= 1〜2 巻完結) は noise なので除外
+★ v2: cluster key を 改良 = 真の MADB 巻抜け を 抽出。
 
-出力: top N (= 抜け数多い順 / max 多い順) + 全件 csv。
+集計 key:
+  (cluster_key, edition.type)
+where cluster_key =
+  - qid があれば 'qid:<qid>'
+  - qid なくても title が qid 持ち series と完全一致 → qid 側に 引き寄せ
+  - それ以外は 'title:<正規化 title>'
+
+これにより:
+  - 同じ qid で 複数 imprint に 分裂した edition を 統合
+  - qid 紐付け失敗で 別 series_id に 流出した 巻も 同 cluster に統合
+  - edition.type は 区別 (= standard / bunkobon / shinsoban は 別系列)
+
+判定:
+  - integer 化できる number のみ対象
+  - is_extra=1 除外、 number<=0 除外
+  - max が 3〜300 巻の cluster のみ (= 1-2 巻完結 と data noise 除外)
+  - 1 〜 max(N) のうち 欠番を抽出
+
+出力: top txt + 全件 csv。
 """
 from __future__ import annotations
 import csv
@@ -18,18 +31,24 @@ from pathlib import Path
 DB = Path(".cache/db-v2.sqlite")
 OUT_CSV = Path(".cache/volume-gaps.csv")
 OUT_TOP = Path(".cache/volume-gaps-top.txt")
-TOP_N = 80
-MIN_MAX = 3   # max 巻 が これ未満の series は noise として skip
-MAX_MAX = 300 # max 巻 が これ超 = 発行年混入 等の data noise として skip
+TOP_N = 100
+MIN_MAX = 3
+MAX_MAX = 300
 
 NUM_RE = re.compile(r"^\s*(\d+)\s*$")
 
 
-def to_int(s: str | None) -> int | None:
+def to_int(s) -> int | None:
     if s is None:
         return None
     m = NUM_RE.match(str(s))
     return int(m.group(1)) if m else None
+
+
+def norm_title(t: str | None, sub: str | None) -> str:
+    """title 正規化 = スペース類除去 + lowercase。 subtitle も含む。"""
+    base = (t or "") + "|" + (sub or "")
+    return re.sub(r"[\s　・.,!?'\-―ー]+", "", base).lower()
 
 
 def main() -> None:
@@ -38,6 +57,35 @@ def main() -> None:
     con = sqlite3.connect(DB)
     con.row_factory = sqlite3.Row
 
+    # ---- series 全件 (= cluster key 解決用) ----
+    series_rows = con.execute(
+        "SELECT id, qid, title, subtitle FROM series"
+    ).fetchall()
+
+    # title norm → qid mapping (= qid 持ち series のみ)
+    title_to_qid: dict[str, str] = {}
+    for r in series_rows:
+        if r["qid"]:
+            key = norm_title(r["title"], r["subtitle"])
+            # 既に登録あり (= 同 norm_title で 異なる qid) は最初の qid を採用
+            title_to_qid.setdefault(key, r["qid"])
+
+    # series_id → cluster_key (+ 表示 title)
+    series_cluster: dict[int, tuple[str, str]] = {}
+    for r in series_rows:
+        if r["qid"]:
+            ckey = f"qid:{r['qid']}"
+        else:
+            norm = norm_title(r["title"], r["subtitle"])
+            # qid 失敗 流出分 を 正規 qid に 引き寄せ
+            if norm in title_to_qid:
+                ckey = f"qid:{title_to_qid[norm]}"
+            else:
+                ckey = f"title:{norm}"
+        # 表示用 title (= qid あり優先で 採用)
+        series_cluster[r["id"]] = (ckey, r["title"] or "")
+
+    # ---- volume + edition 取得 ----
     rows = con.execute(
         """
         SELECT
@@ -46,38 +94,41 @@ def main() -> None:
           s.title_official_en AS title_en,
           e.id              AS edition_id,
           e.type            AS edition_type,
-          e.label           AS edition_label,
           v.number          AS vol_number,
           v.is_extra        AS is_extra
         FROM volumes v
         JOIN editions e ON e.id = v.edition_id
         JOIN series s   ON s.id = e.series_id
-        ORDER BY s.id, e.id, v.number
         """
     ).fetchall()
 
-    # edition 単位で 集計
-    buckets: dict[tuple[int, int], dict] = {}
+    # cluster 単位で 集計
+    # key = (cluster_key, edition_type)
+    buckets: dict[tuple[str, str], dict] = {}
     for r in rows:
         if r["is_extra"]:
             continue
         n = to_int(r["vol_number"])
         if n is None or n <= 0:
             continue
-        key = (r["series_id"], r["edition_id"])
+        ckey, ctitle = series_cluster.get(r["series_id"], (f"id:{r['series_id']}", r["series_title"] or ""))
+        edt = r["edition_type"] or "standard"
+        key = (ckey, edt)
         b = buckets.setdefault(
             key,
             {
-                "series_id": r["series_id"],
-                "series_title": r["series_title"],
+                "cluster_key": ckey,
+                "edition_type": edt,
+                "series_title": ctitle,
                 "title_en": r["title_en"] or "",
-                "edition_id": r["edition_id"],
-                "edition_type": r["edition_type"] or "",
-                "edition_label": r["edition_label"] or "",
+                "series_ids": set(),
                 "numbers": set(),
             },
         )
+        b["series_ids"].add(r["series_id"])
         b["numbers"].add(n)
+        # title 上書き (= qid:Q...の正規 title 優先したい場合は別 logic 必要だが
+        # 通常 cluster 内では 主 series の title が 多数派なので問題なし)
 
     results = []
     for b in buckets.values():
@@ -91,12 +142,11 @@ def main() -> None:
             continue
         results.append(
             {
-                "series_id": b["series_id"],
+                "cluster_key": b["cluster_key"],
                 "series_title": b["series_title"],
                 "title_en": b["title_en"],
-                "edition_id": b["edition_id"],
                 "edition_type": b["edition_type"],
-                "edition_label": b["edition_label"],
+                "series_id_count": len(b["series_ids"]),
                 "max_vol": mx,
                 "present": len(nums),
                 "gap_count": len(missing),
@@ -104,7 +154,6 @@ def main() -> None:
             }
         )
 
-    # 抜け数 多い順 → max 多い順
     results.sort(key=lambda x: (-x["gap_count"], -x["max_vol"]))
 
     OUT_CSV.parent.mkdir(parents=True, exist_ok=True)
@@ -112,12 +161,11 @@ def main() -> None:
         w = csv.DictWriter(
             f,
             fieldnames=[
-                "series_id",
+                "cluster_key",
                 "series_title",
                 "title_en",
-                "edition_id",
                 "edition_type",
-                "edition_label",
+                "series_id_count",
                 "max_vol",
                 "present",
                 "gap_count",
@@ -127,30 +175,26 @@ def main() -> None:
         w.writeheader()
         w.writerows(results)
 
-    # console (= PowerShell の Shift-JIS) では化けるので file 出力 メインに
     lines = []
-    lines.append("=== 巻番号 gap 精査 結果 ===")
-    lines.append(f"対象 edition (= max>={MIN_MAX} かつ max<={MAX_MAX}): {len(buckets):,}")
+    lines.append("=== 巻番号 gap 精査 v2 (= cluster 統合版) ===")
+    lines.append(f"対象 cluster (= max>={MIN_MAX} かつ max<={MAX_MAX}): {len(buckets):,}")
     lines.append(f"gap あり: {len(results):,}")
     lines.append(f"csv: {OUT_CSV}")
     lines.append("")
     lines.append(f"--- top {TOP_N} (= gap 数多い順) ---")
-    lines.append(f"{'gap':>4} {'max':>4} {'pres':>4}  {'edition':<10}  title  (missing)")
-    lines.append("-" * 110)
+    lines.append(f"{'gap':>4} {'max':>4} {'pres':>4} {'sid':>3}  {'edition':<10}  title  (missing)")
+    lines.append("-" * 115)
     for r in results[:TOP_N]:
         title = r["series_title"]
-        if r["edition_label"] and r["edition_label"] != title:
-            title = f"{title} [{r['edition_label']}]"
         miss = r["missing"]
-        if len(miss) > 60:
-            miss = miss[:60] + "..."
+        if len(miss) > 70:
+            miss = miss[:70] + "..."
         lines.append(
-            f"{r['gap_count']:>4} {r['max_vol']:>4} {r['present']:>4}  "
+            f"{r['gap_count']:>4} {r['max_vol']:>4} {r['present']:>4} {r['series_id_count']:>3}  "
             f"{r['edition_type']:<10}  {title}  ({miss})"
         )
     OUT_TOP.write_text("\n".join(lines) + "\n", encoding="utf-8")
-    # ASCII summary は console にも出す
-    print(f"target editions: {len(buckets):,}  gap-containing: {len(results):,}")
+    print(f"target clusters: {len(buckets):,}  gap-containing: {len(results):,}")
     print(f"csv: {OUT_CSV}")
     print(f"top: {OUT_TOP}")
 
