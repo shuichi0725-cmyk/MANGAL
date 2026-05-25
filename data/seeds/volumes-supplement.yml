@@ -1,0 +1,50 @@
+# MADB 取込もれ巻 の 補完 yml (= 種4 = 別 source 由来 巻情報)。
+#
+# 用途: MADB に 入っていないが 実在する 巻 を 別 source (= Amazon / NDL Search /
+# 出版社公式) で 確認後、 ここに登録 → audit + 本番 yml 生成で 反映。
+#
+# 種2 sqlite は 不変 (= 月次蒸留 protocol 抵触なし)。 audit + 本番 yml 生成時に
+# lookup される 4 つ目の seed。
+#
+# 各 entry 仕様:
+#   series_keys: list  ← 紐付ける series_key (= 表記揺れ / 別著者で 種2 内 複数 sid に
+#                          分散している場合 全部 列挙)
+#   qid: optional      ← Wikidata Q-id (= qid 紐付き 種2 sid を 一括 cover する場合)
+#   number: int        ← 巻番号 (= MADB volumeNumber 相当)
+#   isbn13: string     ← 確定 ISBN (= 別 source から)
+#   release_date: string  ← YYYY-MM-DD or YYYY-MM
+#   pages: int (optional)
+#   publisher: string  ← 出版社
+#   edition_type: standard/bunkobon/wideban/kanzenban/shinsoban/aizoban
+#   title_display: string  ← 公式 商品名 (= Amazon 表記等)
+#   source: string     ← 確認 source (= amazon / ndl / publisher-official 等)
+#   added_at: YYYY-MM-DD
+#   note: |            ← 補完根拠 / 確認内容
+#
+# 命名理由: 種3 (= series-supplement) と 区別、 「volume 単位の補完」 という意味で
+# volumes-supplement。 種3 は シリーズマスター、 種4 は 巻補完。
+
+schema_version: 1
+generated_at: '2026-05-25'
+generator: user-manual-fill
+
+volumes:
+  - series_keys:
+      - 'name:不二涼介|name:シャングリラフロンティア'
+      - 'name:硬梨菜|name:シャングリラフロンティア|sub:クソゲーハンター、神ゲーに挑まんとす'
+    qid: null
+    number: 20
+    isbn13: '9784065377437'
+    release_date: '2024-11-15'
+    pages: 192
+    publisher: 講談社
+    edition_type: standard
+    title_display: 'シャングリラ・フロンティア(20) ~クソゲーハンター、神ゲーに挑まんとす~'
+    source: amazon
+    added_at: '2026-05-25'
+    note: |
+      MADB 取込もれ。 全 26 巻中 第 20 巻、 公式販売中、 4.8 / 1,450 レビュー。
+      MADB は 19 巻 (M1033220) + 21 巻 (M1036336) を 持つが 20 巻が 完全欠落。
+      シャングリラフロンティア は 硬梨菜 (= 原作) と 不二涼介 (= 漫画) の 2 著者で
+      MADB が 巻ごと creator 振り分け 差異で 種2 内 sid=141297 + sid=141298 に
+      分散登録、 双方の series_key に 紐付け。

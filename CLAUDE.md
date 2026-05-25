@@ -83,6 +83,51 @@
 
 ---
 
+## 種4 = MADB 取込もれ巻 補完 yml (= data/seeds/volumes-supplement.yml)
+
+### 目的
+
+MADB に **取込もれた巻** (= 公式販売されているが MADB record にない) を 別 source
+(= Amazon / NDL Search / 出版社公式) で 確認後、 種4 yml に 登録 → audit + 本番 yml
+生成時に **補完反映**。 種2 sqlite は不変。
+
+例: シャングリラフロンティア 20 巻 = MADB 取込もれ、 公式発売中 (ISBN 9784065377437)。
+ONE PIECE 110 巻 等 多数 同種ケース。
+
+### 形式 (= 各 entry)
+
+```yaml
+volumes:
+  - series_keys: list  ← 紐付ける series_key (= 表記揺れ / 別著者で 種2 内 複数 sid に
+                         分散している場合 全部 列挙)
+    qid: optional      ← Wikidata Q-id (= qid 紐付き 種2 sid を 一括 cover 用)
+    number: int        ← 巻番号
+    isbn13: string     ← 確定 ISBN
+    release_date: string
+    pages: int (optional)
+    publisher: string
+    edition_type: standard/bunkobon/wideban/...
+    title_display: string
+    source: amazon/ndl/publisher-official
+    added_at: YYYY-MM-DD
+    note: |
+      補完根拠 / 確認内容
+```
+
+### 命名理由
+
+- 種3 = `series-supplement` = **シリーズマスター** (= 作品単位 metadata 補完)
+- 種4 = `volumes-supplement` = **巻単位 補完** (= MADB 取込もれ巻の 個別データ)
+- 両者は独立、 種4 は 種3 entry に 紐付き
+
+### 月次蒸留 protocol との関係
+
+- 種4 は 月次蒸留 で 触らない (= 手動 add only)
+- audit + 本番 yml 生成 時に load される
+- 種2 sqlite は不変 = 保護策 layer 1 (= backup) と 同レベルの安全性
+
+---
+
 ## MANGAL データ形式 protocol (= 必須遵守)
 
 ### slug 命名規則
