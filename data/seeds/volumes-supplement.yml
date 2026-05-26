@@ -101,6 +101,24 @@ volumes:
       MADB 取込もれ (= MAO 22 巻 と 同 pattern)。 ISBN 978-4-09-854009-9。
 
   - series_keys:
+      - 'qid:Q2010|name:ONE PIECE'
+    qid: null
+    number: 110
+    isbn13: '9784088843148'
+    release_date: '2024-11-01'
+    pages: 208
+    publisher: 集英社
+    edition_type: standard
+    title_display: 'ONE PIECE 110'
+    source: shueisha
+    added_at: '2026-05-26'
+    note: |
+      MADB 取込もれ。 集英社公式 + 楽天 + Wikipedia 確認、 ISBN
+      9784088843148、 第 1111-1121 話収録、 208 ページ、 520 円+税。
+      MADB は 109 巻 (M971114) + 111 巻 (M1037106) を 持つが 110 巻が
+      取込もれ。 シャングリラ 20 / ゴルゴ 214 / MAO 22,23 と 同 pattern。
+
+  - series_keys:
       - 'qid:Q2661273|name:ゴルゴ13'
     qid: null  # ★ qid 指定すると 同 qid の 派生作品 全部 (= 「ゴルゴ13 in Africa」 等 55 sid) に
               # 214 が 追加されて gap 爆発するため、 series_keys 完全一致 のみで sid=38124 限定
