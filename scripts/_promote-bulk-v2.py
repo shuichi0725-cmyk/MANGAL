@@ -51,13 +51,78 @@ def load_merge_sids() -> dict[int, list[int]]:
     return sid_to_group
 
 
+def load_merge_edition_types() -> set[int]:
+    """merge_edition_types: true の cluster の 全 sid set を 返す (= shinsoban→standard 統合対象)。"""
+    if not MERGE_YML.exists():
+        return set()
+    sids: set[int] = set()
+    with MERGE_YML.open(encoding="utf-8") as f:
+        for entry in (yaml.safe_load(f) or []):
+            if entry.get("merge_edition_types"):
+                for sid in (entry.get("merge_sids") or []):
+                    sids.add(int(sid))
+    return sids
+
+
+SUPP_YML = ROOT / "data" / "seeds" / "volumes-supplement.yml"
+
+def load_volumes_supplement(con: sqlite3.Connection) -> dict[int, list[dict]]:
+    """volumes-supplement.yml → {sid: [補完 vol dict, ...]} dict 構築。
+    series_keys (= 種2 series.series_key) と qid で 該当 sid を 引く。"""
+    if not SUPP_YML.exists():
+        return {}
+    cur = con.cursor()
+    out: dict[int, list[dict]] = {}
+    with SUPP_YML.open(encoding="utf-8") as f:
+        data = yaml.safe_load(f) or {}
+    for entry in (data.get("volumes") or []):
+        # 紐付き sid 解決
+        sids: set[int] = set()
+        for sk in (entry.get("series_keys") or []):
+            for r in cur.execute("SELECT id FROM series WHERE series_key=?", (sk,)).fetchall():
+                sids.add(r[0])
+        qid = entry.get("qid")
+        if qid:
+            for r in cur.execute("SELECT id FROM series WHERE qid=?", (qid,)).fetchall():
+                sids.add(r[0])
+        if not sids:
+            continue
+        vol_dict = {
+            "number": entry["number"],
+            "volume_label": None,
+            "isbn13": entry.get("isbn13"),
+            "release_date": entry.get("release_date"),
+            "cover_url": None,
+            "asin": None,
+            "_edition_type": entry.get("edition_type") or "standard",
+            "_imprint": entry.get("publisher") or "",
+        }
+        for sid in sids:
+            out.setdefault(sid, []).append(vol_dict)
+    return out
+
+
 # 起動時 1 回 load
 _MERGE_SIDS = None
+_MERGE_EDT = None
+_SUPP_VOLS = None
 def get_merge_sids() -> dict[int, list[int]]:
     global _MERGE_SIDS
     if _MERGE_SIDS is None:
         _MERGE_SIDS = load_merge_sids()
     return _MERGE_SIDS
+
+def get_merge_edition_types() -> set[int]:
+    global _MERGE_EDT
+    if _MERGE_EDT is None:
+        _MERGE_EDT = load_merge_edition_types()
+    return _MERGE_EDT
+
+def get_supplement_vols(con) -> dict[int, list[dict]]:
+    global _SUPP_VOLS
+    if _SUPP_VOLS is None:
+        _SUPP_VOLS = load_volumes_supplement(con)
+    return _SUPP_VOLS
 
 CUTOFF_YEAR = 2015  # spinoff で この年 以降なら keep
 KEEP_EDITION_TYPES = {"standard", "bunkobon", "wideban", "kanzenban", "shinsoban", "aizoban"}
@@ -611,6 +676,9 @@ def get_editions_with_volumes(con: sqlite3.Connection, series_ids: list[int] | i
     eds = cur.execute(
         f"SELECT * FROM editions WHERE series_id IN ({placeholders})", series_ids
     ).fetchall()
+    # merge_edition_types: true の sid なら shinsoban/aizoban 等 → standard 統合
+    merge_edt_sids = get_merge_edition_types()
+    apply_edt_merge = any(sid in merge_edt_sids for sid in series_ids)
     # type → [edition+volumes] list
     by_type: dict[str, list[dict]] = defaultdict(list)
     for ed in eds:
@@ -664,9 +732,13 @@ def get_editions_with_volumes(con: sqlite3.Connection, series_ids: list[int] | i
                 )
         if not primary_vols:
             continue
-        by_type[ed["type"]].append(
+        # merge_edition_types: true なら shinsoban/aizoban/kanzenban → standard 統合
+        effective_type = ed["type"]
+        if apply_edt_merge and effective_type in ("shinsoban", "aizoban", "kanzenban"):
+            effective_type = "standard"
+        by_type[effective_type].append(
             {
-                "type": ed["type"],
+                "type": effective_type,
                 "label": ed["label"],
                 "imprint": ed["imprint"],
                 "year_started": ed["year_started"],
@@ -674,6 +746,33 @@ def get_editions_with_volumes(con: sqlite3.Connection, series_ids: list[int] | i
                 "volumes": primary_vols,
             }
         )
+    # ★ 種4 補完 = volumes-supplement.yml from 該当 sid の vol を 該当 edition_type に 追加
+    supp_map = get_supplement_vols(con)
+    for sid in series_ids:
+        for supp_vol in supp_map.get(sid, []):
+            target_type = supp_vol["_edition_type"]
+            if apply_edt_merge and target_type in ("shinsoban", "aizoban", "kanzenban"):
+                target_type = "standard"
+            ed_group = by_type.get(target_type)
+            if not ed_group:
+                # 新 edition group 作成 (= 補完巻 1 巻のみ)
+                ed_group = [{
+                    "type": target_type, "label": "通常版",
+                    "imprint": supp_vol["_imprint"] or "",
+                    "year_started": None, "year_ended": None,
+                    "volumes": [],
+                }]
+                by_type[target_type] = ed_group
+            # 既存 ed_group の volumes に追加 (= dedup は merge 段階)
+            clean_vol = {k: v for k, v in supp_vol.items() if not k.startswith("_")}
+            ed_group[0]["volumes"].append(clean_vol)
+    # 全 edition_group の volumes を number 順 sort (= 単一 edition + 補完追加 で 順序崩れ防止)
+    def _vol_sort_key(v):
+        try: return (0, int(v.get("number") or 0))
+        except (ValueError, TypeError): return (1, str(v.get("number") or ""))
+    for ed_group in by_type.values():
+        for ed in ed_group:
+            ed["volumes"].sort(key=_vol_sort_key)
     out = []
     for type_key, ed_group in by_type.items():
         if len(ed_group) == 1:
