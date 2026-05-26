@@ -29,6 +29,35 @@ DB = ROOT / ".cache" / "db-v2.sqlite"
 SEED3 = ROOT / "data" / "seeds" / "series-supplement-v2.yml"
 SRC_DIR = ROOT / "data" / "manga"
 OUT_DIR = ROOT / "data" / "manga.v2"
+MERGE_YML = ROOT / "data" / "seeds" / "series-merge.yml"
+
+# --dry-run = 別 dir に出力 (= 既存上書きしない、 diff 比較用)
+if "--dry-run" in sys.argv:
+    OUT_DIR = ROOT / "data" / "manga.dryrun"
+
+
+def load_merge_sids() -> dict[int, list[int]]:
+    """series-merge.yml の merge_sids → {sid: [all_sids_in_group]} dict 構築。"""
+    if not MERGE_YML.exists():
+        return {}
+    sid_to_group: dict[int, list[int]] = {}
+    with MERGE_YML.open(encoding="utf-8") as f:
+        for entry in (yaml.safe_load(f) or []):
+            sids = entry.get("merge_sids") or []
+            if not sids:
+                continue
+            for sid in sids:
+                sid_to_group[int(sid)] = [int(s) for s in sids]
+    return sid_to_group
+
+
+# 起動時 1 回 load
+_MERGE_SIDS = None
+def get_merge_sids() -> dict[int, list[int]]:
+    global _MERGE_SIDS
+    if _MERGE_SIDS is None:
+        _MERGE_SIDS = load_merge_sids()
+    return _MERGE_SIDS
 
 CUTOFF_YEAR = 2015  # spinoff で この年 以降なら keep
 KEEP_EDITION_TYPES = {"standard", "bunkobon", "wideban", "kanzenban", "shinsoban", "aizoban"}
@@ -520,6 +549,12 @@ def find_related_series_ids(con: sqlite3.Connection, main: dict) -> list[int]:
         ).fetchall():
             if pub_compatible(r[0]):
                 ids.add(r[0])
+    # ★ merge.yml の merge_sids 強制統合 (= 個別判断、 既存 logic で 漏れる
+    # 表記揺れ / 著者振り分け差異 等 を ユーザ明示で 統合)
+    merge_sids_map = get_merge_sids()
+    for sid in list(ids):
+        if sid in merge_sids_map:
+            ids.update(merge_sids_map[sid])
     return list(ids)
 
 
