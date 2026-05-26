@@ -70,6 +70,37 @@ volumes:
       全件影響 で 別議論。 短期は 種4 補完で 個別対処。
 
   - series_keys:
+      - 'qid:Q219948|name:MAO'
+    qid: null
+    number: 22
+    isbn13: '9784098536795'
+    release_date: '2024-11-18'
+    publisher: 小学館
+    edition_type: standard
+    title_display: 'MAO(22)'
+    source: wikipedia
+    added_at: '2026-05-26'
+    note: |
+      MADB 取込もれ。 Wikipedia (= ja.wikipedia.org/wiki/MAO_(漫画)) で 確認。
+      MADB は 21 巻 (M972739, 2024-08) + 24 巻 (M1062384, 2025-05) を 持つが
+      22 巻 / 23 巻が 取込もれ。 ISBN 978-4-09-853679-5、 小学館 少年サンデー
+      コミックス。 シャングリラ 20 / ゴルゴ 214 と 同 pattern。
+
+  - series_keys:
+      - 'qid:Q219948|name:MAO'
+    qid: null
+    number: 23
+    isbn13: '9784098540099'
+    release_date: '2025-02-18'
+    publisher: 小学館
+    edition_type: standard
+    title_display: 'MAO(23)'
+    source: wikipedia
+    added_at: '2026-05-26'
+    note: |
+      MADB 取込もれ (= MAO 22 巻 と 同 pattern)。 ISBN 978-4-09-854009-9。
+
+  - series_keys:
       - 'qid:Q2661273|name:ゴルゴ13'
     qid: null  # ★ qid 指定すると 同 qid の 派生作品 全部 (= 「ゴルゴ13 in Africa」 等 55 sid) に
               # 214 が 追加されて gap 爆発するため、 series_keys 完全一致 のみで sid=38124 限定
