@@ -140,7 +140,7 @@ BY_TITLE = "--by-title" in sys.argv  # cluster_key を qid+title norm で 分割
 NO_HIER_DROP = "--no-hier-drop" in sys.argv  # 階層的派生本排除 を off (= 既存挙動)
 
 # 階層的排除 = keep override patterns (= 派生候補のうち title+sub に hit したら keep)
-DERIVATIVE_DROP_THRESHOLD_PCT = 1.0
+DERIVATIVE_DROP_MAX_VOL = 2  # vol <= 2 + 同 qid 主軸あり + title prefix一致 = 派生本 drop
 KEEP_OVERRIDE_PATTERNS = [
     "フルカラー", "総カラー", "オールカラー", "カラー版", "カラーエディション",
     "大全集", "復刻版", "復刊",
@@ -148,7 +148,8 @@ KEEP_OVERRIDE_PATTERNS = [
 
 
 def compute_derivative_drop_sids(con) -> set[int]:
-    """同 qid 内で 主軸 (= title prefix 親) の 1% 未満 巻数 sid を 派生候補 として 列挙。
+    """同 qid 内で 主軸 (= title prefix 親) を持つ sid のうち、
+    vol <= DERIVATIVE_DROP_MAX_VOL (= 2) の sid を 派生候補 drop。
     ただし title+subtitle に KEEP_OVERRIDE_PATTERNS 含む sid は 除外 (= keep)。"""
     if NO_HIER_DROP:
         return set()
@@ -173,9 +174,8 @@ def compute_derivative_drop_sids(con) -> set[int]:
         for sid, t, sub, vc in sids:
             if sid == main_sid: continue
             if not t.startswith(main_title): continue
-            # title 完全一致 (= sub 違い) でも 別 sid なら 派生候補対象
-            ratio = vc / main_vc * 100 if main_vc else 0
-            if ratio >= DERIVATIVE_DROP_THRESHOLD_PCT: continue
+            # vol 絶対値判定 (= 比率ではない、 「上下/数巻完結」 派生本検出)
+            if vc > DERIVATIVE_DROP_MAX_VOL: continue
             # 派生候補 = keep override check
             combined = t + sub
             if any(p in combined for p in KEEP_OVERRIDE_PATTERNS):
