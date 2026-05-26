@@ -259,6 +259,30 @@ drop imprint patterns:
 
 ### 関連書 patterns (= scripts/_promote-bulk-v2.py の DROP_TITLE_CONTAINS_PATTERNS)
 
+### 表示 sort 仕様 (= 2026-05-26 確定)
+
+全ページ共通 sort 軸 = 3 種:
+
+1. **発売日 昇順** (= 古い順、 default 想定)
+2. 発売日 降順 (= 新しい順)
+3. 名前 昇順 (= フリガナ 50音順)
+
+各 series の sort key = **`first_volume_date`** (= standard edition の number=1 最小
+datePublished、 種2 から計算)。
+
+### saga / シリーズ統括ページ = 不要 (= 2026-05-26 確定)
+
+各漫画 = 個別ページ (= 別作品扱い)。 ジョジョ第1-9部 + スピンオフ 等 同シリーズ
+でも 全部 別ページ、 1 巻発売日 sort で 結果的に シリーズ順に並ぶ。
+
+- うる星やつら本編 = 通常版/ワイド/文庫 (= 既存 multi-edition 統合)
+- うる星パーフェクト★カラーエディション = 別ページ (= merge_sids で上下統合)
+- ジョジョ第1-5部 / 第6部 / 第7部 / 等 = 各別ページ
+- 岸辺露伴 / クレイジー・D 等スピンオフ = 別ページ
+
+これにより 「edition 親子関係」 schema 不要、 saga_id schema 不要 = 設計大幅
+シンプル化。
+
 ### 階層的排除 (= 2026-05-26 追加)
 
 派生本 vs 独立シリーズ vs 本編 の 自動区別 logic:
