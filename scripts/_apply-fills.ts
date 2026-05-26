@@ -31,6 +31,10 @@ for (const [key, fill] of Object.entries(fills)) {
   const merged: Seed3Entry = {
     key,
     ...(cur.slug || fill.slug ? { slug: fill.slug ?? cur.slug } : {}),
+    ...(fill.title_kana ?? cur.title_kana ? { title_kana: fill.title_kana ?? cur.title_kana } : {}),
+    ...(fill.title_kana_segmented ?? cur.title_kana_segmented ? { title_kana_segmented: fill.title_kana_segmented ?? cur.title_kana_segmented } : {}),
+    ...(fill.subtitle_kana ?? cur.subtitle_kana ? { subtitle_kana: fill.subtitle_kana ?? cur.subtitle_kana } : {}),
+    ...(fill.subtitle_kana_segmented ?? cur.subtitle_kana_segmented ? { subtitle_kana_segmented: fill.subtitle_kana_segmented ?? cur.subtitle_kana_segmented } : {}),
     ...(fill.magazine !== undefined ? { magazine: fill.magazine } : (cur.magazine !== undefined ? { magazine: cur.magazine } : {})),
     ...(fill.demographic ?? cur.demographic ? { demographic: fill.demographic ?? cur.demographic } : {}),
     ...(fill.genres && fill.genres.length > 0 ? { genres: fill.genres } : (cur.genres && cur.genres.length > 0 ? { genres: cur.genres } : {})),

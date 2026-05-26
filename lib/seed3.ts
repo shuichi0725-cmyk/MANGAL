@@ -39,6 +39,13 @@ export const Seed3EntrySchema = z.object({
   key: z.string().min(1),
   /** AI 提案 slug。 promote-bulk の自動 slug より優先する */
   slug: z.string().regex(/^[a-z0-9-]+$/).optional(),
+  /** HP 表示用 フリガナ (= スペースなし、 カタカナ)。 例: "ジョジョノキミョウナボウケン" */
+  title_kana: z.string().optional(),
+  /** slug 生成元 フリガナ (= MADB ja-hrkt 仕様、 スペース区切り)。 例: "ジョジョ ノ キミョウナ ボウケン" */
+  title_kana_segmented: z.string().optional(),
+  /** subtitle あり entry 用 (= 上記 title_kana と同仕様、 副題側) */
+  subtitle_kana: z.string().optional(),
+  subtitle_kana_segmented: z.string().optional(),
   magazine: z.string().nullable().optional(),
   demographic: Demographic.optional(),
   genres: z.array(z.string()).optional(),
@@ -48,11 +55,11 @@ export const Seed3EntrySchema = z.object({
   awards: z.array(z.string()).optional(),
   alternative_titles: z
     .object({
-      en: z.string().optional(),
-      fr: z.string().optional(),
-      de: z.string().optional(),
-      it: z.string().optional(),
-      pt: z.string().optional(),
+      en: z.string().nullable().optional(),
+      fr: z.string().nullable().optional(),
+      de: z.string().nullable().optional(),
+      it: z.string().nullable().optional(),
+      pt: z.string().nullable().optional(),
     })
     .optional(),
 });
