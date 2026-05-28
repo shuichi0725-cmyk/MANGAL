@@ -24,6 +24,25 @@ anime_adapted: true
 alternative_titles:
   en: Urusei Yatsura
 wikidata_qid: Q219948
+# === AniList overlay 試験 (= 2026-05-28 適用、 single commit 単位で revert 可能) ===
+anilist_id: 30304
+genres_anilist:
+  - Comedy
+  - Ecchi
+  - Romance
+  - Sci-Fi
+  - Slice of Life
+  - Supernatural
+tags:
+  # 案2 filter: Demographic 常時 / Theme-* rank>=60 / Cast-Traits rank>=70 / Setting-* rank>=70
+  # 除外: Sexual Content cat / Technical cat / isMediaSpoiler=True
+  - {name: Shounen,        category: Demographic,    rank: 75}
+  - {name: Surreal Comedy, category: Theme-Comedy,   rank: 92}
+  - {name: Slapstick,      category: Theme-Comedy,   rank: 79}
+  - {name: Heterosexual,   category: Theme-Romance,  rank: 72}
+  - {name: Female Harem,   category: Theme-Romance,  rank: 60}
+  - {name: Youkai,         category: Theme-Fantasy,  rank: 66}
+  - {name: Aliens,         category: Cast-Traits,    rank: 88}
 editions:
 - type: standard
   label: 通常版

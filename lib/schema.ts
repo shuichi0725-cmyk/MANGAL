@@ -102,6 +102,20 @@ export const MangaSchema = z.object({
   wikidata_qid: z.string().regex(/^Q\d+$/).optional(),
   /** 日本語 Wikipedia 記事 URL (= fetch:wikipedia で発見した canonical link) */
   wikipedia_url: z.string().url().optional(),
+  /** AniList 由来 genres (= 種3 genres と並列保持、 上書きしない、 比較用) */
+  genres_anilist: z.array(z.string()).optional(),
+  /** AniList 由来 tags (= 案2 filter 適用後 = Demographic + Theme rank≥60 + Cast/Setting rank≥70) */
+  tags: z
+    .array(
+      z.object({
+        name: z.string(),
+        category: z.string(),
+        rank: z.number().int().min(0).max(100),
+      }),
+    )
+    .optional(),
+  /** AniList entry ID (= source 追跡、 後の更新差分取得用) */
+  anilist_id: z.number().int().positive().optional(),
   editions: z.array(EditionSchema).min(1),
 });
 export type Manga = z.infer<typeof MangaSchema>;

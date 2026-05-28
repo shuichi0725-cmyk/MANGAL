@@ -169,6 +169,63 @@ export default async function MangaDetailPage({
             <p className="mt-6 text-sm leading-relaxed text-black/80">{manga.synopsis}</p>
           )}
 
+          {(manga.genres_anilist || manga.tags || manga.anilist_id) && (
+            <div className="mt-6 rounded border border-indigo-200 bg-indigo-50/50 p-4">
+              <p className="text-xs font-semibold text-indigo-900 mb-2">
+                ★ AniList overlay 試験 (= 種3 既存 fields 不変、 純粋追加)
+              </p>
+              {manga.genres_anilist && manga.genres_anilist.length > 0 && (
+                <div className="mt-2">
+                  <p className="text-[11px] text-indigo-700/80 mb-1">AniList genres</p>
+                  <ul className="flex flex-wrap gap-1.5">
+                    {manga.genres_anilist.map((g) => (
+                      <li
+                        key={g}
+                        className="px-2 py-0.5 text-[11px] rounded bg-white text-indigo-900 border border-indigo-200"
+                      >
+                        {g}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+              {manga.tags && manga.tags.length > 0 && (
+                <div className="mt-3">
+                  <p className="text-[11px] text-indigo-700/80 mb-1">
+                    AniList tags (= 案2 filter 後、 rank 順)
+                  </p>
+                  <ul className="flex flex-wrap gap-1.5">
+                    {[...manga.tags]
+                      .sort((a, b) => b.rank - a.rank)
+                      .map((t) => (
+                        <li
+                          key={t.name}
+                          className="px-2 py-0.5 text-[11px] rounded bg-white text-indigo-900 border border-indigo-200"
+                          title={`${t.category} / rank ${t.rank}`}
+                        >
+                          {t.name}{" "}
+                          <span className="text-indigo-500/70">[{t.category} / {t.rank}]</span>
+                        </li>
+                      ))}
+                  </ul>
+                </div>
+              )}
+              {manga.anilist_id && (
+                <p className="mt-3 text-[11px] text-indigo-700/80">
+                  source:{" "}
+                  <a
+                    href={`https://anilist.co/manga/${manga.anilist_id}`}
+                    target="_blank"
+                    rel="noopener nofollow"
+                    className="underline decoration-dotted underline-offset-2 hover:text-indigo-900"
+                  >
+                    AniList #{manga.anilist_id}
+                  </a>
+                </p>
+              )}
+            </div>
+          )}
+
           {manga.awards && manga.awards.length > 0 && (
             <div className="mt-6">
               <p className="text-xs font-semibold text-black/70 mb-2">受賞歴</p>
