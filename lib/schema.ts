@@ -116,6 +116,8 @@ export const MangaSchema = z.object({
     .optional(),
   /** AniList entry ID (= source 追跡、 後の更新差分取得用) */
   anilist_id: z.number().int().positive().optional(),
+  /** 他言語タイトル / 別名 (= AniList synonyms 由来、 alternative_titles.en 補助) */
+  synonyms: z.array(z.string().min(1)).optional(),
   editions: z.array(EditionSchema).min(1),
 });
 export type Manga = z.infer<typeof MangaSchema>;

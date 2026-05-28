@@ -90,6 +90,11 @@ export default async function MangaDetailPage({
                 .join(" / ")}
             </p>
           )}
+          {manga.synonyms && manga.synonyms.length > 0 && (
+            <p className="text-[11px] text-black/45 mt-1 leading-relaxed">
+              他言語・別名: {manga.synonyms.join(" / ")}
+            </p>
+          )}
 
           <dl className="mt-6 grid grid-cols-[6em_1fr] gap-y-1.5 text-sm">
             <dt className="text-black/50">出版年</dt>
