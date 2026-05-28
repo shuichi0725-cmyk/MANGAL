@@ -5,6 +5,7 @@ import VolumeRow from "@/components/VolumeRow";
 import { yearStatusLabel } from "@/lib/format";
 import { loadAllManga } from "@/lib/loadData";
 import { primaryVolume } from "@/lib/schema";
+import { jaCategory, jaGenre, jaTag } from "@/lib/anilist-i18n";
 
 export function generateStaticParams() {
   const slugs = loadAllManga().manga.map((m) => ({ slug: m.slug }));
@@ -176,14 +177,15 @@ export default async function MangaDetailPage({
               </p>
               {manga.genres_anilist && manga.genres_anilist.length > 0 && (
                 <div className="mt-2">
-                  <p className="text-[11px] text-indigo-700/80 mb-1">AniList genres</p>
+                  <p className="text-[11px] text-indigo-700/80 mb-1">AniList ジャンル</p>
                   <ul className="flex flex-wrap gap-1.5">
                     {manga.genres_anilist.map((g) => (
                       <li
                         key={g}
                         className="px-2 py-0.5 text-[11px] rounded bg-white text-indigo-900 border border-indigo-200"
+                        title={g}
                       >
-                        {g}
+                        {jaGenre(g)}
                       </li>
                     ))}
                   </ul>
@@ -192,7 +194,7 @@ export default async function MangaDetailPage({
               {manga.tags && manga.tags.length > 0 && (
                 <div className="mt-3">
                   <p className="text-[11px] text-indigo-700/80 mb-1">
-                    AniList tags (= 案2 filter 後、 rank 順)
+                    AniList タグ (= 案2 filter 後、 rank 順)
                   </p>
                   <ul className="flex flex-wrap gap-1.5">
                     {[...manga.tags]
@@ -201,10 +203,12 @@ export default async function MangaDetailPage({
                         <li
                           key={t.name}
                           className="px-2 py-0.5 text-[11px] rounded bg-white text-indigo-900 border border-indigo-200"
-                          title={`${t.category} / rank ${t.rank}`}
+                          title={`${t.name} / ${t.category} / rank ${t.rank}`}
                         >
-                          {t.name}{" "}
-                          <span className="text-indigo-500/70">[{t.category} / {t.rank}]</span>
+                          {jaTag(t.name)}{" "}
+                          <span className="text-indigo-500/70">
+                            [{jaCategory(t.category)} / {t.rank}]
+                          </span>
                         </li>
                       ))}
                   </ul>
@@ -212,7 +216,7 @@ export default async function MangaDetailPage({
               )}
               {manga.anilist_id && (
                 <p className="mt-3 text-[11px] text-indigo-700/80">
-                  source:{" "}
+                  出典:{" "}
                   <a
                     href={`https://anilist.co/manga/${manga.anilist_id}`}
                     target="_blank"
