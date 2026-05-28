@@ -152,17 +152,58 @@ export default async function MangaDetailPage({
             </dd>
             <dt className="text-black/50">ジャンル</dt>
             <dd>
-              {manga.genres.map((g, i) => {
-                const name = data.genres.find((x) => x.key === g)?.name ?? g;
-                return (
-                  <span key={g}>
+              {(() => {
+                // 種3 既存 ジャンル (= filter link 付き) + AniList 由来 (= filter なし) を 統合
+                const seenNames = new Set<string>();
+                const items: Array<{ name: string; key?: string }> = [];
+                for (const g of manga.genres) {
+                  const name = data.genres.find((x) => x.key === g)?.name ?? g;
+                  if (seenNames.has(name)) continue;
+                  seenNames.add(name);
+                  items.push({ name, key: g });
+                }
+                // AniList genres (= 19 種類)
+                for (const g of manga.genres_anilist ?? []) {
+                  const ja = jaGenre(g);
+                  if (seenNames.has(ja)) continue;
+                  // 種3 マスター に 同名 key があれば filter 付ける
+                  const masterKey = data.genres.find((x) => x.name === ja)?.key;
+                  seenNames.add(ja);
+                  items.push({ name: ja, key: masterKey });
+                }
+                // AniList tags (= 案2 filter 後)
+                // mainstream で 情報価値の低い tag は 除外
+                const NOISE_TAGS = new Set([
+                  "Heterosexual", // mainstream default
+                  "Male Protagonist", // 当然
+                  "Female Protagonist",
+                  "Primarily Adult Cast",
+                  "Primarily Child Cast",
+                  "Primarily Teen Cast",
+                ]);
+                for (const t of manga.tags ?? []) {
+                  // 読者層 (= Demographic) は 「分野」 行で 既出のため 除外
+                  if (t.category === "Demographic") continue;
+                  if (NOISE_TAGS.has(t.name)) continue;
+                  const ja = jaTag(t.name);
+                  if (seenNames.has(ja)) continue;
+                  const masterKey = data.genres.find((x) => x.name === ja)?.key;
+                  seenNames.add(ja);
+                  items.push({ name: ja, key: masterKey });
+                }
+                return items.map((it, i) => (
+                  <span key={it.name}>
                     {i > 0 && " / "}
-                    <FilterLink href={`/?genre=${encodeURIComponent(g)}`}>
-                      {name}
-                    </FilterLink>
+                    {it.key ? (
+                      <FilterLink href={`/?genre=${encodeURIComponent(it.key)}`}>
+                        {it.name}
+                      </FilterLink>
+                    ) : (
+                      <span className="text-black/70">{it.name}</span>
+                    )}
                   </span>
-                );
-              })}
+                ));
+              })()}
             </dd>
           </dl>
 
@@ -170,64 +211,18 @@ export default async function MangaDetailPage({
             <p className="mt-6 text-sm leading-relaxed text-black/80">{manga.synopsis}</p>
           )}
 
-          {(manga.genres_anilist || manga.tags || manga.anilist_id) && (
-            <div className="mt-6 rounded border border-indigo-200 bg-indigo-50/50 p-4">
-              <p className="text-xs font-semibold text-indigo-900 mb-2">
-                ★ AniList overlay 試験 (= 種3 既存 fields 不変、 純粋追加)
-              </p>
-              {manga.genres_anilist && manga.genres_anilist.length > 0 && (
-                <div className="mt-2">
-                  <p className="text-[11px] text-indigo-700/80 mb-1">AniList ジャンル</p>
-                  <ul className="flex flex-wrap gap-1.5">
-                    {manga.genres_anilist.map((g) => (
-                      <li
-                        key={g}
-                        className="px-2 py-0.5 text-[11px] rounded bg-white text-indigo-900 border border-indigo-200"
-                        title={g}
-                      >
-                        {jaGenre(g)}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-              {manga.tags && manga.tags.length > 0 && (
-                <div className="mt-3">
-                  <p className="text-[11px] text-indigo-700/80 mb-1">
-                    AniList タグ (= 案2 filter 後、 rank 順)
-                  </p>
-                  <ul className="flex flex-wrap gap-1.5">
-                    {[...manga.tags]
-                      .sort((a, b) => b.rank - a.rank)
-                      .map((t) => (
-                        <li
-                          key={t.name}
-                          className="px-2 py-0.5 text-[11px] rounded bg-white text-indigo-900 border border-indigo-200"
-                          title={`${t.name} / ${t.category} / rank ${t.rank}`}
-                        >
-                          {jaTag(t.name)}{" "}
-                          <span className="text-indigo-500/70">
-                            [{jaCategory(t.category)} / {t.rank}]
-                          </span>
-                        </li>
-                      ))}
-                  </ul>
-                </div>
-              )}
-              {manga.anilist_id && (
-                <p className="mt-3 text-[11px] text-indigo-700/80">
-                  出典:{" "}
-                  <a
-                    href={`https://anilist.co/manga/${manga.anilist_id}`}
-                    target="_blank"
-                    rel="noopener nofollow"
-                    className="underline decoration-dotted underline-offset-2 hover:text-indigo-900"
-                  >
-                    AniList #{manga.anilist_id}
-                  </a>
-                </p>
-              )}
-            </div>
+          {manga.anilist_id && (
+            <p className="mt-3 text-[11px] text-black/40">
+              ジャンル 補助データ:{" "}
+              <a
+                href={`https://anilist.co/manga/${manga.anilist_id}`}
+                target="_blank"
+                rel="noopener nofollow"
+                className="underline decoration-dotted underline-offset-2 hover:text-black/60"
+              >
+                AniList #{manga.anilist_id}
+              </a>
+            </p>
           )}
 
           {manga.awards && manga.awards.length > 0 && (
