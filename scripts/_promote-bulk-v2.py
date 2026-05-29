@@ -226,10 +226,20 @@ DROP_TITLE_CONTAINS_PATTERNS = [
     "パーフェクトガイド", "完全読本", "完全ガイド", "必勝法",
     "の秘密", "の謎", "コミック大全", "コミックスペシャル",
     "ナビゲーション", "考察",
-    # 抜粋本 / 編集本 (= 本編ではない、 2026-05-26 追加):
+    # 抜粋本 / 編集本 (= 本編ではない、 既刊の再編。 2026-05-26 追加、 2026-05-29 拡充):
+    # 注意: 「短編集 / 作品集」 は 描き下ろし漫画 が多く keep (= drop しない)。
+    #       既刊抜粋系のみ drop。
     "傑作選", "傑作集", "ベストセレクション", "特集号", "特別総集編",
+    "名作集", "名作選", "自選", "総集編",
     # 画集 / 関連書 (= 漫画でない):
     "原画集", "画集", "ポケット画廊", "うちあけ話",
+]
+
+# subtitle に隠れた 抜粋本 (= title 判定を 素通りする 「○○傑作集」 等)。
+# 抜粋本系語のみ sub 適用 (= 「の秘密」 等 他の title pattern を sub に広げると
+# 誤爆するため、 既刊抜粋系 に限定。 2026-05-29 追加)。
+DROP_SUBTITLE_PATTERNS = [
+    "傑作集", "傑作選", "ベストセレクション", "名作集", "名作選", "自選", "総集編",
 ]
 
 
@@ -1096,6 +1106,12 @@ def main():
         if not series:
             stats["not_found_in_db"] += 1
             not_found.append(f"{ypath.name}  title={title}")
+            continue
+        # 種2 subtitle に隠れた 抜粋本 (= title が本編名 + sub=「○○傑作集」 等) を drop
+        sub = series.get("subtitle") or ""
+        if any(pat in sub for pat in DROP_SUBTITLE_PATTERNS):
+            stats["dropped_non_manga"] += 1
+            dropped_non_manga.append(f"{ypath.name}  title={title}  sub={sub}  (= 抜粋本 sub)")
             continue
         # step A: spinoff 判定 (= 親があれば 子 = spinoff)
         is_spinoff = series["id"] in parent_map
