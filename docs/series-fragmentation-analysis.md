@@ -164,11 +164,32 @@ held (manual)     : 56
 
 → 現 sim の gating(「semantic sub が 1 つでもあれば group 全体を保留」)は保守的すぎる。 **実装時は held group 内でも sub なし/装丁差は統合し、 arc/番外/部 だけ分離**する 2 段 gating が必要。 この 56 group の arc 境界判断は CLAUDE.md「各漫画=個別ページ、 部/スピンオフは別ページ」哲学に直結するため **ユーザ裁定が望ましい**(自動化しない)。
 
-## 6. 次アクション(Go サイン待ち)
+## 6. 案A 実装結果(2026-05-30 実施、 Go サイン受領後)
 
-1. `.cache/proposed-author-set-merges.csv` をユーザがレビュー(特に held 56 + distinct_qids 2+)。
-2. OK なら 案A: sim → `series-merge.yml` 追記生成スクリプトを作成(既存 `_gen-series-merge.py` と同形式、 merge_sids entry を append)。
-3. 本番 yml 再生成 → SLF が 1 ページ(全26巻)に集約されることを確認。
-4. 将来: 案B で build/promote に恒久組込 + marker list 拡充。
+`scripts/_gen-author-set-merges.py` → `data/seeds/series-merge-auto.json`(9,967 group)を生成、
+`_promote-bulk-v2.py` の `load_merge_sids` を auto(JSON)+hand(YAML) 両 load に改修
+(同 sid は **hand 優先** = うる星カラー版/SLF の手動キュレーションを上書きしない)。
 
-**現時点で本番 db / 種3 / series-merge.yml は一切変更していない。**
+- **JSON 採用理由**: 約1万 group の PyYAML パースは 30-60秒。 json.load なら <0.2秒。
+- **edition-type 統合は hand のみ**(auto は通常巻の表記揺れ統合なので edition 区別は保持)。
+
+### 検証(find_related 直接呼び出し、 SEED3 load 回避で高速)
+
+現行本番 42 ページ中、 分裂 group に該当する 11 ページで auto OFF/ON 比較:
+
+| ページ | 効果 | 判定 |
+|---|---|---|
+| うる星パーフェクトカラーエディション | 本編に吸収されず別ページ維持 | ✓ over-merge なし |
+| うる星本編 / SLF / DEATH NOTE / ドラゴンボール / ONE PIECE / 犬夜叉 / らんま / バクマン。 | 不変(既存 find_related/hand で十分) | ✓ |
+| アオアシ | +「アオアシ.」(末尾ピリオド, 同qid, 3巻)74→77巻 | ✓ find_related の取りこぼし修正 |
+| 半妖の夜叉姫 | +sid129242(同qid, 2巻)7→9巻 | ✓ |
+
+**誤吸収ゼロ・正しい補完のみ。** 種2 sqlite 不変・種3 不変・series_key 不変・完全可逆(commit 9cac0a1)。
+
+### 残作業 / 既知の制約
+
+1. **本番 yml 再生成**: 実施中(アオアシ/半妖 に巻追加が反映される)。 SLF は hand merge 済で不変。
+2. **SEED3 load が遅い**(`series-supplement-v2.yml` = 33MB/92万行 の PyYAML パース = 数分)。 案A とは無関係の既存 perf 課題。 将来 CSafeLoader 化検討(種3 read のみ、 data 不変)。
+3. **audit 系**(`_audit-volume-gaps.py` 等)は現状 hand 版のみ load。 gap 分析を auto と揃えるなら同様の 2-source load 化が follow-up。
+4. **保留 56 group** の arc 境界判断(`.cache/held-groups-classified.txt`)はユーザ裁定待ち = 別ページ維持のまま。
+5. 将来: 案B で build/promote に恒久組込 + semantic marker list 拡充。
