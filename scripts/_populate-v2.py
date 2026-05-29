@@ -67,9 +67,9 @@ def classify_edition_from_imprint(imprint: str) -> str:
         return "shinsoban"
     if re.search(r"カバー新装|カバーリニューアル", t):
         return "renewal"
-    # デラックス = 新装再編版 / 大判版 系 (= e.g. ジャンプ・コミックスデラックス)
-    if "デラックス" in t or "DELUXE" in t.upper():
-        return "shinsoban"
+    # デラックス (= ジャンプ・コミックスデラックス 等) は 大判版で 新装版とは別物。
+    # lib/edition.ts に該当ルールが無く、 旧実装の shinsoban 寄せは誤分類だったため撤去。
+    # 専用 edition type を作らず standard 扱い (= 単一 edition の作品が大半)。
     return "standard"
 
 
@@ -350,8 +350,21 @@ def main():
         series_id = cur.lastrowid
         stats["series_inserted"] += 1
 
-        # 2. series_authors (= qid 解決済の場合のみ)
-        if c["qid"] and c["qid"] in qid_to_mangaka_id:
+        # 2. series_authors = cluster の全著者 (= C-ID 解決済、 役割付き) を投入。
+        #    qid 解決済 (= mangaka.csv に居る) 著者のみ紐付け。 原作者等で mangaka 未登録の
+        #    人物は当面 skip (= mangaka.csv 拡充は別段階)。
+        authors = c.get("authors") or []
+        if authors:
+            for a in authors:
+                aq = a.get("qid")
+                if aq and aq in qid_to_mangaka_id:
+                    cur.execute(
+                        """INSERT OR IGNORE INTO series_authors (series_id, mangaka_id, role)
+                           VALUES (?, ?, ?)""",
+                        (series_id, qid_to_mangaka_id[aq], a.get("role") or "writer_artist"),
+                    )
+        elif c["qid"] and c["qid"] in qid_to_mangaka_id:
+            # 後方互換 fallback (= authors 未生成の旧 series-v2.json 用)
             cur.execute(
                 """INSERT OR IGNORE INTO series_authors (series_id, mangaka_id, role)
                    VALUES (?, ?, ?)""",

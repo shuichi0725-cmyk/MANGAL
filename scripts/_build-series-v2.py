@@ -33,9 +33,12 @@ import sys
 from collections import defaultdict, Counter
 from pathlib import Path
 
+from _madb_authors import load_agent_master, resolve_authors, union_authors
+
 ROOT = Path(__file__).resolve().parent.parent
 META104 = ROOT / ".cache" / "madb" / "metadata104.json"
 META101 = ROOT / ".cache" / "madb" / "metadata101-clean.json"
+META504 = ROOT / ".cache" / "madb" / "metadata504.json"
 MANGAKA_CSV = ROOT / "data" / "seed" / "mangaka.csv"
 OUT = ROOT / ".cache" / "series-v2.json"
 
@@ -256,7 +259,7 @@ def get_vol(b) -> str:
 # Phase 1: metadata104 → clusters
 # =============================================================================
 
-def build_metadata104_clusters(mangaka: dict, mangaka_norm: dict) -> tuple[list[dict], dict]:
+def build_metadata104_clusters(mangaka: dict, mangaka_norm: dict, agent: dict, name_to_qid) -> tuple[list[dict], dict]:
     print(f"[phase 1] loading {META104} ...", file=sys.stderr)
     with META104.open("r", encoding="utf-8") as f:
         data = json.load(f)
@@ -291,6 +294,9 @@ def build_metadata104_clusters(mangaka: dict, mangaka_norm: dict) -> tuple[list[
             stats["qid_unresolved"] += 1
             matched_name = creator_names[0]
 
+        # 全著者を C-ID ベースで解決 (= series_authors 用、 クラスタ判定には影響させない)
+        authors = resolve_authors(b, agent, name_to_qid, extract_creator_names)
+
         name_arr = get_name_array(b.get("schema:name"))
         record = {
             "madb_id": b.get("schema:identifier"),
@@ -300,6 +306,7 @@ def build_metadata104_clusters(mangaka: dict, mangaka_norm: dict) -> tuple[list[
             "creator_qid": qid,
             "creator_name_matched": matched_name,
             "creator_names_all": creator_names,
+            "authors": authors,
             "brand": get_brand_label(b),
             "date_published": b.get("schema:datePublished", ""),
             "number_of_items": b.get("schema:numberOfItems", 0),
@@ -367,6 +374,9 @@ def build_metadata104_clusters(mangaka: dict, mangaka_norm: dict) -> tuple[list[
         # is_adult = 「成年」「成人」 両 prefix を 拾う (= L2 修正、 「成人コミック」 漏れ対策)
         is_adult = any(re.match(r"成[年人]", r["content_rating"] or "") for r in records)
 
+        # cluster 内 全 record の authors を ndla/cid/name で名寄せ統合
+        cluster_authors = union_authors(a for r in records for a in r.get("authors", []))
+
         clusters_out.append({
             "series_key": series_key,
             "source": "madb104",
@@ -378,6 +388,7 @@ def build_metadata104_clusters(mangaka: dict, mangaka_norm: dict) -> tuple[list[
             "subtitle_kana": sub_kana,
             "title_official_en": official_en,
             "is_adult": is_adult,
+            "authors": cluster_authors,
             "madb_records": records,
             "n_madb_records": len(records),
             "books": [],
@@ -390,7 +401,7 @@ def build_metadata104_clusters(mangaka: dict, mangaka_norm: dict) -> tuple[list[
 # Phase 2 + 3: metadata101 link + orphan aggregate
 # =============================================================================
 
-def link_and_aggregate(clusters: list[dict], mangaka: dict, mangaka_norm: dict) -> dict:
+def link_and_aggregate(clusters: list[dict], mangaka: dict, mangaka_norm: dict, agent: dict, name_to_qid) -> dict:
     print(f"[phase 2/3] loading {META101} ...", file=sys.stderr)
     with META101.open("r", encoding="utf-8") as f:
         data = json.load(f)
@@ -450,6 +461,7 @@ def link_and_aggregate(clusters: list[dict], mangaka: dict, mangaka_norm: dict) 
             "brand": get_brand_label(b),
             "label": label,
             "creator_names": names,
+            "authors": resolve_authors(b, agent, name_to_qid, extract_creator_names),
         }
         # linkage 試行
         matched_idx = None
@@ -512,7 +524,8 @@ def link_and_aggregate(clusters: list[dict], mangaka: dict, mangaka_norm: dict) 
             clusters[p1_keys[series_key]]["books"].extend(books)
             n_merged_into_p1 += 1
             continue
-        # 新規 orphan cluster (= source=orphan101)
+        # 新規 orphan cluster (= source=orphan101)。 authors は books から集約
+        orphan_authors = union_authors(a for bk in books for a in bk.get("authors", []))
         orphan_out.append({
             "series_key": series_key,
             "source": "orphan101",
@@ -524,6 +537,7 @@ def link_and_aggregate(clusters: list[dict], mangaka: dict, mangaka_norm: dict) 
             "subtitle_kana": "",
             "title_official_en": "",
             "is_adult": False,  # TODO: book level rating で 判定
+            "authors": orphan_authors,
             "madb_records": [],
             "n_madb_records": 0,
             "books": books,
@@ -550,15 +564,23 @@ def main():
     print(f"  mangaka name → qid: {len(mangaka)} entries", file=sys.stderr)
     print(f"  mangaka norm key  : {len(mangaka_norm)} entries", file=sys.stderr)
 
+    print(f"loading agent master (metadata504) ...", file=sys.stderr)
+    agent = load_agent_master(META504)
+    print(f"  agents: {len(agent)}", file=sys.stderr)
+
+    def name_to_qid(nm: str) -> str:
+        info = mangaka.get(nm) or mangaka_norm.get(normalize_for_lookup(nm))
+        return info["qid"] if info else ""
+
     # Phase 1
-    clusters, p1_stats = build_metadata104_clusters(mangaka, mangaka_norm)
+    clusters, p1_stats = build_metadata104_clusters(mangaka, mangaka_norm, agent, name_to_qid)
     print(f"\n[phase 1 stats]", file=sys.stderr)
     for k, v in p1_stats.items():
         print(f"  {k}: {v}", file=sys.stderr)
     print(f"  clusters: {len(clusters)}", file=sys.stderr)
 
     # Phase 2 + 3
-    out = link_and_aggregate(clusters, mangaka, mangaka_norm)
+    out = link_and_aggregate(clusters, mangaka, mangaka_norm, agent, name_to_qid)
     print(f"\n[phase 2/3 stats]", file=sys.stderr)
     for k, v in out["stats"].items():
         print(f"  {k}: {v}", file=sys.stderr)
