@@ -16,6 +16,7 @@ filter (= step A/B、 「本編以外は極力表示しない」):
             spinoff series は max(release_date) >= CUTOFF_YEAR なら keep
 """
 
+import json
 import re
 import sqlite3
 import sys
@@ -30,6 +31,10 @@ SEED3 = ROOT / "data" / "seeds" / "series-supplement-v2.yml"
 SRC_DIR = ROOT / "data" / "manga"
 OUT_DIR = ROOT / "data" / "manga.v2"
 MERGE_YML = ROOT / "data" / "seeds" / "series-merge.yml"
+# 自動生成 merge (= 著者集合+title、 scripts/_gen-author-set-merges.py)。 JSON で持つ
+# (= 約1万 group の PyYAML パースは遅い、 json.load は <1秒)。 hand yaml と両方 load し
+# 同 sid は hand 版優先。 docs/series-fragmentation-analysis.md。
+AUTO_MERGE_JSON = ROOT / "data" / "seeds" / "series-merge-auto.json"
 
 # --dry-run = 別 dir に出力 (= 既存上書きしない、 diff 比較用)
 if "--dry-run" in sys.argv:
@@ -37,22 +42,31 @@ if "--dry-run" in sys.argv:
 
 
 def load_merge_sids() -> dict[int, list[int]]:
-    """series-merge.yml の merge_sids → {sid: [all_sids_in_group]} dict 構築。"""
-    if not MERGE_YML.exists():
-        return {}
+    """merge_sids → {sid: [all_sids_in_group]} dict 構築。
+    auto (JSON) を先に load → hand (YAML) で上書き (= 同 sid は手動版優先)。"""
     sid_to_group: dict[int, list[int]] = {}
-    with MERGE_YML.open(encoding="utf-8") as f:
-        for entry in (yaml.safe_load(f) or []):
-            sids = entry.get("merge_sids") or []
-            if not sids:
-                continue
-            for sid in sids:
-                sid_to_group[int(sid)] = [int(s) for s in sids]
+    # auto 版 (= 自動生成 JSON、 高速)
+    if AUTO_MERGE_JSON.exists():
+        with AUTO_MERGE_JSON.open(encoding="utf-8") as f:
+            for entry in (json.load(f).get("merges") or []):
+                sids = entry.get("merge_sids") or []
+                for sid in sids:
+                    sid_to_group[int(sid)] = [int(s) for s in sids]
+    # hand 版 (= 手動キュレーション YAML、 後勝ち)
+    if MERGE_YML.exists():
+        with MERGE_YML.open(encoding="utf-8") as f:
+            for entry in (yaml.safe_load(f) or []):
+                sids = entry.get("merge_sids") or []
+                if not sids:
+                    continue
+                for sid in sids:
+                    sid_to_group[int(sid)] = [int(s) for s in sids]
     return sid_to_group
 
 
 def load_merge_edition_types() -> set[int]:
-    """merge_edition_types: true の cluster の 全 sid set を 返す (= shinsoban→standard 統合対象)。"""
+    """merge_edition_types: true の cluster の 全 sid set を 返す (= shinsoban→standard 統合対象)。
+    edition-type 統合は hand 版のみ (auto 版は通常巻の表記揺れ統合 = edition 区別は保持)。"""
     if not MERGE_YML.exists():
         return set()
     sids: set[int] = set()
