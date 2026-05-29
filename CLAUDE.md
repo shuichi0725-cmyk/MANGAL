@@ -130,79 +130,77 @@ volumes:
 
 ## MANGAL データ形式 protocol (= 必須遵守)
 
-### slug 命名規則
+### slug 命名規則 (= 2026-05-29 全面改訂)
 
-- ローマ字 (= 訓令式 or ヘボン式) で hyphen 区切り
+slug = ローマ字 hyphen 区切り。 **公式英題 (= Demon Slayer 等の 意訳英題) は slug に使わない**。
+読み (= title_kana) と 元綴り を 基点に 機械生成する。 旧 「英語名優先」 ルールは 廃止。
 
-#### 優先順 (= build script で 自動判定)
+#### 判定フロー (= build script、 上から順に適用)
 
-1. **種3 の slug field** (= 手動 override)
-2. **DB の 英語名** (= alternative_titles.en / title_official_en) → 外来語 で slug 化
-   - 例: ONE PIECE alt_en=`One Piece` → `one-piece` (○)
-   - 例: ジョジョの奇妙な冒険 alt_en=`JoJo's Bizarre Adventure` → `jojos-bizarre-adventure` (○)
-   - 例: 進撃の巨人 alt_en=`Attack on Titan` → `attack-on-titan` (○)
-3. **title が 純 ASCII** (= 'W3', 'MAJOR', 'AMAKUSA 1637') → 直接 lowercase + 数字境界 split
-   - 例: W3 → `w-3`、 H2 → `h-2`、 MAJOR → `major`
-4. **数字 含む title で 普通読み** (= alignment 検証 通過) → 数字 keep
-5. **kana → ローマ字** (= fallback)
+1. **種3 の slug field** (= 手動 override) があれば それを使う
+2. **漢字 / ひらがな主体 + 通常読み** → **ヘボン式** (= 読みをローマ字化)
+   - 鬼滅の刃 → `kimetsu-no-yaiba` (= 公式英題 Demon Slayer は 使わない)
+   - 進撃の巨人 → `shingeki-no-kyojin`
+3. **数字を含む** → 読み (title_kana) で **4 分岐**:
+   - 音読み数詞 (= イチ / ニ / ジュウゴ) → **算用数字 keep**: ×一→`batsu-1`, ×2→`kakeru-2`, 15歳の地図→`15-sai-no-chizu`
+   - 訓読み助数詞 (= ナナ**ツ** / ミッ**ツ**) → **ヘボン式**: 七つの大罪→`nanatsu-no-taizai`
+   - 特殊読み (= 分数 ニブンノイチ / 当て字) → **ヘボン式**: らんま1/2→`ranma-nibunnoichi`
+   - 英語読み (= ナインティーン / ワン) → **英語**: 19(ナインティーン)→`nineteen`
+4. **カタカナ主体 (= 外来語)** → 元の外国語綴り。 判定は **種a (AniList) english の 音写フィルタ**:
+   - 種a english を カタカナに戻して 元タイトルと一致 (= 音写) → その綴りを採用: ベルセルク→`berserk`, ワンピース→`one-piece`
+   - 種a english が 意訳 (= 音が合わない) → 採用せず ヘボン fallback (= 鬼滅は Demon Slayer が意訳なので 弾かれ #2 へ)
+   - 英語以外 (= 独 / 西語) も 種a / Wikipedia の綴り採用 (= エルドラド→`el-dorado`)
+   - 造語 / 人名 (= 元綴りなし) は ヘボン式 (= ナルト→`naruto`)
+5. **字面に 外国語が併記** → その外国語を 英語化:
+   - 東京喰種トーキョーグール → `tokyo-ghoul` (= カタカナ側採用)
+   - 鋼の錬金術師 (= FULLMETAL は字面外) → `hagane-no-renkinjutsushi` (= 字面に英題ないので ヘボン)
+6. **1 文字英字 / 記号** → 英語読みは英字のまま、 特殊読みは読みヘボン:
+   - X (= エックス、 英語読み) → `x` / × (= ペケ、 特殊読み) → `peke`
+7. **当て字 (= カタカナ特殊読み)** → 読みを基点に、 英語起源なら英語綴り:
+   - ザ・超女 (= スーパーギャル) → `super-girl` / GS美神 (= ゴーストスイーパーミカミ) → `ghost-sweeper-mikami`
 
-#### アラビア数字 ルール (= 優先順 #4 適用時のみ)
+#### 当て字 / 特殊読みの判定 (= 3ソース突合)
 
-**前提**: 優先順 #1-#3 (= 種3 slug field / alt_en / 純 ASCII title) が当たらず、 数字を含む title で **純和語 / 漢語 ベース** の場合に適用。 外来語 title (= 「アイシールド21」 「ペルソナ4」 「ワイルド7」 等) は #2 で先に当たる ため、 ここではなく `eyeshield-21` / `persona-4` / `wild-7` のような **英語 slug** になる。
+漢字の素直な読みと違う「当て字」は機械では判別しにくい。 3ソースで裁定:
+- **MADB ja-hrkt** = 複数読み (= 普通読み + 当て字) を持つ作品 (= 約 19,000) → 当て字候補の一次ソース
+- **種a (AniList) english / romaji** = 公式読みの裏取り
+- **Wikipedia 記事冒頭よみがな** = 最終裁定 (= 記事ある作品で 高精度)
+- どちらが当て字かは順序不定 (= GS美神は後ろ、 妖精標本は前) なので 種a/Wiki で確定する
 
-- **ふりがな で 判断**:
-  - **普通の 数字読み** (= 日本語 イチ/ニ/ジュウ/ニジュウイチ + 英語 ワン/ツー/スリー/フォー/セブン 等) なら **数字 keep**
-    - 例: 15歳の地図 = `ジュウゴサイノチズ` → `15-sai-no-chizu`
-    - 例: 連ちゃんパパ第1巻 → `renchan-papa-1` (= 巻数)
-    - 例: 不滅のあなたへ第3部 → `fumetsu-no-anatae-3`
-  - **特殊読み** (= 分数 / 当て字 / 略号) なら **ローマ字化** (= 数字 を kana に 戻して 表記)
-    - 例: らんま1/2 = `ランマニブンノイチ` (= 分数読み) → `ranma-nibunnoichi` (= 数字読み 「ニブンノイチ」 内の 「ノ」 は **分離しない**、 title-level の 助詞 「の」 とは 区別)
-    - 例: 3×3 EYES = `サザンアイズ` (= 当て字) → `sazan-aizu` (= ン+ア の境界を hyphen で明示)
-    - 例: 7つの黄金郷 = `ナナツノエルドラド` (= 特殊読み) → `nanatsu-no-eldorado` (= カタカナ外来語 「エルドラド」 は **国際通用形 'Eldorado' に復元**、 ヘボン式 'erudorado' は 採用しない)
-- **漢字数字** (= 七、 三、 etc.) は ふりがな の カナ表記を ローマ字化
-  - 例: 七つの大罪 = `ナナツノタイザイ` → `nanatsu-no-taizai`
+#### 助詞は hyphen 区切り
 
-**注意**: 助詞 (= ノ / ヲ / ニ / ト 等) を含む title は hyphen で区切る (= `nanatsu-no-taizai`、 `ranma-nibun-no-ichi`)。 連結すると 「nanatsunotaizai」 のように読みづらく、 ン+母音 の境界も曖昧になる。
+ノ / ヲ / ニ / ト 等の助詞を含む title は hyphen で区切る (= `nanatsu-no-taizai`)。 連結すると読みづらく ン+母音の境界も曖昧。 ただし `ranma-nibunnoichi` の 「ニブンノイチ」 内の 「ノ」 は 分数読みの一部なので **分離しない** (= title-level 助詞「の」 とは区別)。
 
-#### 種3 fill protocol (= AI fill)
+#### 同名 slug 衝突
 
-- **外来語 (= 英語起源) title** は `alternative_titles.en` を **必ず fill する** (= 漏らすと slug が ローマ字読みで生成され、 後から rename 困難)
-  - 例: 「ワンピース」 → en: 'One Piece' → slug: `one-piece`
-  - 例: 「ドラゴンボール」 → en: 'Dragon Ball' → slug: `dragon-ball`
-  - 例: 「ベルセルク」 → en: 'Berserk' → slug: `berserk`
-  - 例: 「ブリーチ」 → en: 'Bleach' → slug: `bleach`
-  - 例: 「アイシールド21」 → en: 'Eyeshield 21' → slug: `eyeshield-21`
-  - 例: 「デスノート」 → en: 'Death Note' → slug: `death-note`
-  - 例: 「ハンター×ハンター」 → en: 'Hunter x Hunter' → slug: `hunter-x-hunter`
-- **判定基準**: title が カタカナ含む 外来語起源 (= 英語 / 独語 / 仏語 / 西語 など からの音写) なら en を必ず fill
-  - 注意: 「ジョジョの奇妙な冒険」 のような 和語混在型も、 英語版が確立している作品は en を fill (= 'JoJo's Bizarre Adventure')
-- これにより slug 生成 で 外来語 を 優先採用 (= ローマ字読み 'wanpiisu' でなく 'one-piece')
+同名異作品 (= 中華一番 真鍋版 / 小川版) で slug 衝突する場合:
+- **主版 (= 巻数多い / 有名 / 古い) を 無印**、 従版に **`-姓+発売年`** suffix
+  - 小川版 → `chuka-ichiban` / 真鍋版 → `chuka-ichiban-manabe1993`
+- 作者姓ローマ字 = 種a staff.full (= 「名 姓」順、 姓は最後の語) → mangaka.qid (= 作者QID) を Wikidata で引く → ヘボン式 の順
+- 姓+年 の 2 要素で 同年・同姓の 二重衝突も ほぼ回避
+
+#### 検索性 (= 公式英題は slug でなく メタに持つ)
+
+公式英題 (= Demon Slayer 等) は slug に使わないが、 `alternative_titles.en` として **保持**し、 **HP 表示・検索・リダイレクト** に使う (= 海外ユーザが demon-slayer で 辿り着けるように)。
 
 #### ⚠️ フォルダ名 (= slug) は後から rename が困難
 
 - URL 互換性 / backup / 外部参照 に影響
-- en fill 漏れで `wanpiisu.yml` のような slug が生成されると、 後の修正コストが高い
-- **既存 entry の en fill 状況は定期チェックすべき**
-- 確定済み slug の rename は必ず user 確認 + 旧 slug の alias / redirect mapping を残す
+- 確定済み slug の rename は 必ず user 確認 + 旧 slug の alias / redirect mapping を残す
 
-### title_kana / subtitle_kana
+### title_kana / title_kana_segmented (= フリガナ 2 形式)
 
-- **スペース は 入れない** (= 半角空白 / 全角空白 とも 全削除)
-- 例: `ランマニブンノイチ` (○) / `ランマ ニブンノイチ` (×)
-- `_promote-bulk-v2.py` で 出力時 自動 strip (= 防御策)
+種3 は フリガナを **2 形式** 持つ (= 意図的並存):
+- **title_kana** (= スペースなし 連結) = **HP 表示用** + 50音ソート / 検索キー。 半角 / 全角空白 とも 全削除 (= `ランマニブンノイチ` ○ / `ランマ ニブンノイチ` ×)。 `_promote-bulk-v2.py` 出力時に 自動 strip (= 防御策)。
+- **title_kana_segmented** (= スペースあり 分かち書き) = **slug 生成用** (= 語境界・助詞を 半角スペースで区切り、 ローマ字化の手がかり)。 例: 「機動戦士Zガンダム」 → `キドウ センシ Z ガンダム`。 表示には使わない。
 
-#### MADB が 複数 ja-hrkt entry を 持つ場合 (= 普通読み + 当て字読み 両方ある cases)
+#### MADB が 複数 ja-hrkt を持つ場合 (= 普通読み + 当て字読み)
 
-- **当て字読み を 優先採用** (= 作者意図 / 通称 / 公式呼称 を 尊重)
-- スペース除去後の カタカナ連結形 を そのまま HP 表示用フリガナ として採用
-- 例:
-  - 「GS美神極楽大作戦!!」
-    - 普通読み (= 機械処理): `ジーエスビシンゴクラクダイサクセン`
-    - 当て字 (= 公式): **`ゴーストスイーパーミカミゴクラクダイサクセン`** ★ 採用
-  - 「ザ・超女」
-    - 当て字: **`ザスーパーギャル`** ★ 採用
-- **slug 生成 も この 「当て字フリガナ」 を 基点** (= B-1b ルートで 外来語辞書復元、 例: ゴーストスイーパーミカミ → `ghost-sweeper-mikami`)
-- 注: MADB は 1 entry のみ (= 普通読み or 当て字 片方のみ) のケースも多い、 その場合は そのまま採用
+- **当て字読み を 優先採用** (= 作者意図 / 通称 / 公式呼称 を 尊重)。 HP 表示フリガナも slug 生成も この当て字読みを基点。
+- 例: 「GS美神極楽大作戦!!」 → 普通読み `ジーエスビシン…` でなく 当て字 **`ゴーストスイーパーミカミ…`** ★ 採用 (= slug `ghost-sweeper-mikami`)
+- 「ザ・超女」 → 当て字 **`スーパーギャル`** ★ 採用 (= slug `super-girl`)
+- どちらが当て字かの確定は slug 規則の **3ソース突合** (= MADB / 種a / Wikipedia) を使う
+- 注: MADB が 1 読みのみ の作品も多い、 その場合は そのまま採用
 
 ### title_romaji
 
