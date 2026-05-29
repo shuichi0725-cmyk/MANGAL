@@ -138,3 +138,26 @@ volumes:
       qid=Q2661273 = さいとう・たかを 作家 qid (= 鬼平 + ゴルゴ 統合)、
       ゴルゴ13 main sid=38124 (= series_key qid:Q2661273|name:ゴルゴ13、 791 vol保持)
       に紐付け。 ONE PIECE 110 / シャングリラ 20 と 同 patternの 取込もれ補完。
+
+  - series_keys:
+      - 'name:愛英史|name:ゼロ'
+    qid: null
+    number: 50
+    isbn13: '9784088594491'
+    release_date: '2004-12-03'
+    pages: 194
+    publisher: 集英社
+    edition_type: standard
+    title_display: 'ゼロ THE MAN OF THE CREATION 50'
+    source: amazon
+    added_at: '2026-05-29'
+    note: |
+      MADB 取込もれ。 Amazon 確認 (= ISBN 978-4-08-859449-1、 2004-12-03、 194p、
+      4.4 / 12 レビュー)。 「ゼロ THE MAN OF THE CREATION」 全78巻中 第50巻、
+      原作 愛英史 / 漫画 里見桂、 集英社ジャンプコミックスデラックス。
+      audit --by-title で shinsoban max=78 / present=77 / 欠番=50 として検出。
+      ★ 注: 種2 の この series (= sid=79110、 series_key name:愛英史|name:ゼロ) は
+      (1) edition が shinsoban 誤分類 (= 「ジャンプ・コミックスデラックス」 を 新装版判定。
+          本来 standard) (2) 作者空 (= 愛英史 master外 + 里見桂 未紐付け)。
+      = build 側の別問題。 edition を standard に直せば 本 entry で gap 解消 (= 全78巻揃う)。
+      edition誤分類 / 作者紐付け は build 修正で 別途対応。
