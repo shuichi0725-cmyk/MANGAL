@@ -22,7 +22,7 @@ import json
 import re
 import sqlite3
 import sys
-from collections import Counter
+from collections import Counter, defaultdict
 from pathlib import Path
 
 import yaml
@@ -127,8 +127,22 @@ def main():
     # known sets (= in-memory)
     known_imprints = {r["imprint"] for r in cur.execute("SELECT imprint FROM adult_imprints")}
     known_publishers = {r["name"] for r in cur.execute("SELECT name FROM adult_publishers")}
-    known_mangaka = {r["name"] for r in cur.execute("SELECT name FROM adult_mangaka_known")}
+    known_mangaka = {normalize_creator_name(r["name"]) for r in cur.execute("SELECT name FROM adult_mangaka_known")}
     print(f"\nin-memory sets: imprints={len(known_imprints)}, publishers={len(known_publishers)}, mangaka={len(known_mangaka)}", file=sys.stderr)
+
+    # 作者ごとの MADB 成年比率を 事前計算 (= signal 3 の重み付け用)。
+    # cluster.is_adult(contentRating由来) を 全 cluster の 全著者に配って 集計。
+    author_tot: dict[str, int] = defaultdict(int)
+    author_adult: dict[str, int] = defaultdict(int)
+    for c in cluster_by_key.values():
+        ad = 1 if c.get("is_adult") else 0
+        for a in (c.get("authors") or []):
+            nm = normalize_creator_name(a.get("name") or "")
+            if not nm:
+                continue
+            author_tot[nm] += 1
+            author_adult[nm] += ad
+    print(f"author adult-ratio 算出: {len(author_tot)} 作者", file=sys.stderr)
 
     # process each series
     cur.execute("""
@@ -170,14 +184,26 @@ def main():
                 score += 2
                 signals.append(("wikidata_hentai_credit", 2, author_name))
 
-        # 3. wikipedia_adult_mangaka_list (= known_mangaka 名前一致)
-        # cluster の creator_name を normalize して 照合
+        # 3. wikipedia_adult_mangaka_list = series の 全著者 × MADB成年比率の重み。
+        #    主著者だけでなく 作画/原作 含む全員を照合。 重み = adult率 * 5 (四捨五入、最大5)。
+        #    純成年作家(率≈1)→ 重み大(MADB未rating作も閾値超で非公開)。
+        #    クロスオーバー(率低、例 楳図かずお=0)→ 重み≈0 → 一般作は公開維持。
         if cluster:
-            cname = cluster.get("creator_name") or ""
-            norm = normalize_creator_name(cname)
-            if norm and norm in known_mangaka:
-                score += 2
-                signals.append(("wikipedia_adult_mangaka_list", 2, cname))
+            best_w = 0
+            best_ev = ""
+            for a in (cluster.get("authors") or []):
+                nm = normalize_creator_name(a.get("name") or "")
+                if not nm or nm not in known_mangaka:
+                    continue
+                tot = author_tot.get(nm, 0)
+                ratio = (author_adult.get(nm, 0) / tot) if tot else 0.0
+                w = int(ratio * 5 + 0.5)
+                if w > best_w:
+                    best_w = w
+                    best_ev = f"{a.get('name')} (adult率 {ratio:.2f})"
+            if best_w > 0:
+                score += best_w
+                signals.append(("wikipedia_adult_mangaka_list", best_w, best_ev))
 
         # 4 + 5. imprints (= editions.imprint で 照合、 imprint 当たれば publisher skip)
         cur2 = db.cursor()

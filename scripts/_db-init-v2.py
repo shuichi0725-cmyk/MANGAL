@@ -20,6 +20,7 @@ SCHEMA = ROOT / "db" / "schema-v2.sql"
 DB_NEW = ROOT / ".cache" / "db-v2.sqlite"
 DB_OLD = ROOT / ".cache" / "db.sqlite"
 MANGAKA_CSV = ROOT / "data" / "seed" / "mangaka.csv"
+MANGAKA_MADB_CSV = ROOT / "data" / "seed" / "mangaka-madb.csv"
 PUBLISHERS_YML = ROOT / "data" / "publishers.yml"
 MAGAZINES_YML = ROOT / "data" / "magazines.yml"
 
@@ -75,26 +76,31 @@ def seed_magazines(db: sqlite3.Connection) -> int:
 
 
 def seed_mangaka(db: sqlite3.Connection) -> int:
-    if not MANGAKA_CSV.exists():
-        return 0
+    """Wikidata 由来 mangaka.csv + MADB 由来 mangaka-madb.csv の両方を seed。
+    qid は UNIQUE。 mangaka.csv(Q...) を先に入れ、 INSERT OR IGNORE で madb 補完を後追加
+    (= madb 側は生成時に名前重複を skip 済だが、 qid 衝突は無いので順序非依存)。"""
     n = 0
-    with MANGAKA_CSV.open("r", encoding="utf-8") as f:
-        reader = csv.DictReader(f)
-        for row in reader:
-            db.execute(
-                """INSERT OR IGNORE INTO mangaka
-                   (qid, name, birth_year, death_year, alt_names, has_adult_credit)
-                   VALUES (?, ?, ?, ?, ?, ?)""",
-                (
-                    row["qid"],
-                    row["name"],
-                    int(row["birth_year"]) if row.get("birth_year") else None,
-                    int(row["death_year"]) if row.get("death_year") else None,
-                    row.get("alt_names") or None,
-                    1 if row.get("has_adult_credit", "false").lower() == "true" else 0,
-                ),
-            )
-            n += 1
+    for path in (MANGAKA_CSV, MANGAKA_MADB_CSV):
+        if not path.exists():
+            continue
+        with path.open("r", encoding="utf-8") as f:
+            for row in csv.DictReader(f):
+                if not row.get("qid") or not row.get("name"):
+                    continue
+                db.execute(
+                    """INSERT OR IGNORE INTO mangaka
+                       (qid, name, birth_year, death_year, alt_names, has_adult_credit)
+                       VALUES (?, ?, ?, ?, ?, ?)""",
+                    (
+                        row["qid"],
+                        row["name"],
+                        int(row["birth_year"]) if row.get("birth_year") else None,
+                        int(row["death_year"]) if row.get("death_year") else None,
+                        row.get("alt_names") or None,
+                        1 if row.get("has_adult_credit", "false").lower() == "true" else 0,
+                    ),
+                )
+                n += 1
     return n
 
 

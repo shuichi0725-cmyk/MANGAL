@@ -40,6 +40,7 @@ META104 = ROOT / ".cache" / "madb" / "metadata104.json"
 META101 = ROOT / ".cache" / "madb" / "metadata101-clean.json"
 META504 = ROOT / ".cache" / "madb" / "metadata504.json"
 MANGAKA_CSV = ROOT / "data" / "seed" / "mangaka.csv"
+MANGAKA_MADB = ROOT / "data" / "seed" / "mangaka-madb.csv"
 OUT = ROOT / ".cache" / "series-v2.json"
 
 
@@ -568,9 +569,31 @@ def main():
     agent = load_agent_master(META504)
     print(f"  agents: {len(agent)}", file=sys.stderr)
 
+    # MADB 由来 作者補完 (= mangaka-madb.csv)。 clustering(resolve_qid)には使わず、
+    # resolve_authors の name_to_qid (= series_authors 紐付け) だけに混ぜる。
+    # → series_key は Wikidata-only のまま不変 (種3 無傷)。
+    madb_map: dict[str, str] = {}
+    madb_norm: dict[str, str] = {}
+    if MANGAKA_MADB.exists():
+        with MANGAKA_MADB.open(encoding="utf-8") as f:
+            for row in csv.DictReader(f):
+                q = row["qid"]
+                for nm in [row["name"], *(row.get("alt_names") or "").split("|")]:
+                    nm = nm.strip()
+                    if not nm:
+                        continue
+                    madb_map.setdefault(nm, q)
+                    k = normalize_for_lookup(nm)
+                    if k:
+                        madb_norm.setdefault(k, q)
+        print(f"  mangaka-madb 補完: {len(madb_map)} names", file=sys.stderr)
+
     def name_to_qid(nm: str) -> str:
+        # Wikidata (mangaka.csv) 優先 → MADB 補完 fallback
         info = mangaka.get(nm) or mangaka_norm.get(normalize_for_lookup(nm))
-        return info["qid"] if info else ""
+        if info:
+            return info["qid"]
+        return madb_map.get(nm) or madb_norm.get(normalize_for_lookup(nm), "")
 
     # Phase 1
     clusters, p1_stats = build_metadata104_clusters(mangaka, mangaka_norm, agent, name_to_qid)
