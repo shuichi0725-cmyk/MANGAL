@@ -147,7 +147,7 @@ volumes:
     release_date: '2004-12-03'
     pages: 194
     publisher: 集英社
-    edition_type: standard
+    edition_type: deluxe
     title_display: 'ゼロ THE MAN OF THE CREATION 50'
     source: amazon
     added_at: '2026-05-29'
@@ -155,9 +155,8 @@ volumes:
       MADB 取込もれ。 Amazon 確認 (= ISBN 978-4-08-859449-1、 2004-12-03、 194p、
       4.4 / 12 レビュー)。 「ゼロ THE MAN OF THE CREATION」 全78巻中 第50巻、
       原作 愛英史 / 漫画 里見桂、 集英社ジャンプコミックスデラックス。
-      audit --by-title で shinsoban max=78 / present=77 / 欠番=50 として検出。
-      ★ 注: 種2 の この series (= sid=79110、 series_key name:愛英史|name:ゼロ) は
-      (1) edition が shinsoban 誤分類 (= 「ジャンプ・コミックスデラックス」 を 新装版判定。
-          本来 standard) (2) 作者空 (= 愛英史 master外 + 里見桂 未紐付け)。
-      = build 側の別問題。 edition を standard に直せば 本 entry で gap 解消 (= 全78巻揃う)。
-      edition誤分類 / 作者紐付け は build 修正で 別途対応。
+      audit --by-title で max=78 / present=77 / 欠番=50 として検出。
+      ★ build 修正済 (2026-05-29): 種2 の この series (= sid=79110) は
+      (1) edition が「ジャンプ・コミックスデラックス」 = deluxe type に是正
+          (旧 shinsoban 誤分類)。 本 entry も edition_type: deluxe に揃え 78巻通しに合流。
+      (2) 作者 = 里見桂(作画) を C-ID 解決で紐付け (愛英史=原作 は mangaka.csv 未登録で保留)。

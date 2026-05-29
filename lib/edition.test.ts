@@ -28,6 +28,7 @@ describe("EDITION_PRIORITY", () => {
       "shinsoban",
       "aizoban",
       "wideban",
+      "deluxe",
       "renewal",
       "anime",
       "other",

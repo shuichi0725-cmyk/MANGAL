@@ -46,6 +46,7 @@ export const EditionType = z.enum([
   "shinsoban",
   "aizoban",
   "wideban",
+  "deluxe",
   "renewal",
   "anime",
   "other",

@@ -67,9 +67,10 @@ def classify_edition_from_imprint(imprint: str) -> str:
         return "shinsoban"
     if re.search(r"カバー新装|カバーリニューアル", t):
         return "renewal"
-    # デラックス (= ジャンプ・コミックスデラックス 等) は 大判版で 新装版とは別物。
-    # lib/edition.ts に該当ルールが無く、 旧実装の shinsoban 寄せは誤分類だったため撤去。
-    # 専用 edition type を作らず standard 扱い (= 単一 edition の作品が大半)。
+    # デラックス (= ジャンプ・コミックスデラックス 等) は 大判再版で 愛蔵版/ワイド版 と
+    # 同格の独立 edition。 旧実装の shinsoban 寄せは誤分類だったため deluxe へ。
+    if "デラックス" in t or "DELUXE" in t.upper():
+        return "deluxe"
     return "standard"
 
 
@@ -80,6 +81,7 @@ EDITION_LABELS = {
     "shinsoban": "新装版",
     "aizoban": "愛蔵版",
     "wideban": "ワイド版",
+    "deluxe": "デラックス版",
     "renewal": "カバーリニューアル",
     "anime": "アニメ版",
     "other": "その他",

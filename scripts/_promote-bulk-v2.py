@@ -125,7 +125,7 @@ def get_supplement_vols(con) -> dict[int, list[dict]]:
     return _SUPP_VOLS
 
 CUTOFF_YEAR = 2015  # spinoff で この年 以降なら keep
-KEEP_EDITION_TYPES = {"standard", "bunkobon", "wideban", "kanzenban", "shinsoban", "aizoban"}
+KEEP_EDITION_TYPES = {"standard", "bunkobon", "wideban", "kanzenban", "shinsoban", "aizoban", "deluxe"}
 
 # brand (= MADB imprint) → magazine key (= data/magazines.yml master)
 # 確度高い 1対1 のみ。

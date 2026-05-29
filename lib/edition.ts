@@ -21,6 +21,7 @@ export type EditionType =
   | "shinsoban"
   | "aizoban"
   | "wideban"
+  | "deluxe"
   | "renewal"
   | "anime"
   | "other";
@@ -32,6 +33,7 @@ export const EDITION_LABELS: Record<EditionType, string> = {
   shinsoban: "新装版",
   aizoban: "愛蔵版",
   wideban: "ワイド版",
+  deluxe: "デラックス版",
   renewal: "新装版（カバーリニューアル）",
   anime: "アニメ版",
   other: "その他",
@@ -43,6 +45,7 @@ export const EDITION_ORDER: EditionType[] = [
   "kanzenban",
   "shinsoban",
   "aizoban",
+  "deluxe",
   "wideban",
   "bunkobon",
   "renewal",
@@ -78,6 +81,7 @@ export function classifyEdition(text: string): EditionType {
     shinsoban: 0,
     aizoban: 0,
     wideban: 0,
+    deluxe: 0,
     renewal: 0,
     anime: 0,
     other: 0,
@@ -86,6 +90,7 @@ export function classifyEdition(text: string): EditionType {
   if (/愛蔵版/.test(t)) scores.aizoban += 3;
   if (/ワイド版/.test(t)) scores.wideban += 3;
   if (/新装版/.test(t)) scores.shinsoban += 3;
+  if (/デラックス|DELUXE/i.test(t)) scores.deluxe += 3;
   if (/カバー新装|カバーリニューアル/.test(t)) scores.renewal += 2;
   if (/文庫/.test(t)) scores.bunkobon += 3;
   if (/(TVアニメ版|アニメ版)/.test(t)) scores.anime += 3;
@@ -126,6 +131,8 @@ export function classifyEditionFromImprint(imprint: string): EditionType {
   if (/完全/.test(t)) return "kanzenban";
   if (/新装/.test(t)) return "shinsoban";
   if (/(カバー新装|カバーリニューアル)/.test(t)) return "renewal";
+  // デラックス (= 大判再版) は 愛蔵版/ワイド版 と同格の独立 edition。
+  if (/デラックス/.test(t) || /DELUXE/i.test(t)) return "deluxe";
   return "standard";
 }
 
