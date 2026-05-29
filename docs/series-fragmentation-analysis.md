@@ -155,6 +155,15 @@ held (manual)     : 56
 
 ---
 
+### 保留 56 group の事前分類(`.cache/held-groups-classified.txt`)
+
+保留 56 group を確認した結果、 **「全部別ページ」ではなく group 内で部分統合が必要**と判明:
+- 釣りバカ日誌: sub なし 2 sid(117262+11028)は**統合**、 「番外編」(117263)だけ**別ページ**。
+- 将太の寿司: 「全国大会編」2 sid は相互統合、 本編(48621)とは別ページ判断。
+- ドカベン: 本編 + 「名勝負編」= arc 別ページ。 鬼平犯科帳: 本編 + ワイド版(=edition 統合)+ ベストセレクション/総集編(=後段 drop)。
+
+→ 現 sim の gating(「semantic sub が 1 つでもあれば group 全体を保留」)は保守的すぎる。 **実装時は held group 内でも sub なし/装丁差は統合し、 arc/番外/部 だけ分離**する 2 段 gating が必要。 この 56 group の arc 境界判断は CLAUDE.md「各漫画=個別ページ、 部/スピンオフは別ページ」哲学に直結するため **ユーザ裁定が望ましい**(自動化しない)。
+
 ## 6. 次アクション(Go サイン待ち)
 
 1. `.cache/proposed-author-set-merges.csv` をユーザがレビュー(特に held 56 + distinct_qids 2+)。
