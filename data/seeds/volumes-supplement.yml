@@ -160,3 +160,28 @@ volumes:
       (1) edition が「ジャンプ・コミックスデラックス」 = deluxe type に是正
           (旧 shinsoban 誤分類)。 本 entry も edition_type: deluxe に揃え 78巻通しに合流。
       (2) 作者 = 里見桂(作画) を C-ID 解決で紐付け (愛英史=原作 は mangaka.csv 未登録で保留)。
+
+  - series_keys:
+      - 'qid:Q219948|name:半妖の夜叉姫|sub:異伝・絵本草子'
+      - 'qid:Q8193642|name:半妖の夜叉姫'
+    qid: null  # ★ qid 指定回避: Q219948=高橋留美子 / Q8193642=椎名高志 とも他作品多数に波及するため series_keys のみ
+    number: 8
+    isbn13: '9784098537563'
+    release_date: '2024-11-18'
+    pages: 192
+    publisher: 小学館
+    edition_type: standard
+    title_display: '～異伝・絵本草子～ 半妖の夜叉姫 8'
+    source: publisher-official
+    added_at: '2026-05-30'
+    note: |
+      MADB 取込もれ。 小学館公式 (shogakukan-comic.jp/book?isbn=9784098537563) で確認。
+      ISBN 978-4-09-853756-3、 2024-11-18、 192p、 B6判、 770円。
+      漫画 椎名高志 / メインキャラクターデザイン 高橋留美子 / 脚本協力 隅沢克之、
+      少年サンデーコミックススペシャル。 全10巻中 第8巻。
+      MADB は 1-7 巻 (M860396..M968896) + 9 巻 (M1062635) + 10 巻 (M1075784) を持つが
+      8 巻が取込もれ。 SLF 20 / ONE PIECE 110 / MAO 22,23 と同 pattern。
+      ★ 本作は 2 著者 (高橋留美子=キャラ原案 / 椎名高志=作画) で MADB が巻ごと主著者を
+      振り分け、 種2 内 sid=126415 (vols1-7, 高橋qid+subtitle) と sid=129242
+      (vols9-10, 椎名qid+subtitleなし) に分散。 著者集合 merge (series-merge-auto)
+      で 1 ページに統合済、 双方の series_key に紐付け。
