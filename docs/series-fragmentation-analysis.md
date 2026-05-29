@@ -148,9 +148,10 @@ held (manual)     : 56
 
 ### 残リスク(要レビュー)
 
-1. **same-author-set + same-normalized-title だが別作品**: 著者集合完全一致 + title 完全一致を要求するため確率は低いが、 同一作者の同名読切が稀に衝突しうる。 → 56 件の保留に加え、 distinct_qids が 2+ の group(qid 複数割り当て)はレビュー対象として csv に flag 済。
-2. **semantic marker の取りこぼし**: 「SEASON2」等 英字 marker。 marker list は要拡充。
-3. **著者ゼロ series**(6,669 件)は本解析の対象外 = 著者集合が空のため別途。
+1. **same-author-set + same-normalized-title だが別作品**: 著者集合完全一致 + title 完全一致を要求するため確率は低いが、 同一作者の同名読切が稀に衝突しうる。 → **レビュー対象は保留 56 group のみで十分**。
+2. **distinct_qids≥2 は誤統合フラグではない(確認済)**: auto 9,969 のうち 307 group が 2+ の Wikidata QID を持つが、 これは **2 著者作品(原作+作画)で両者とも Wikidata 既知**という正常パターン。 あしたのジョー(梶原一騎+ちばてつや)・子連れ狼(小池一夫+小島剛夕)・終わりのセラフ(鏡貴也+降矢大輔+山本ヤマト、 著者集合は両 sid 完全一致で series.qid だけ別)等を実体確認 = 全て同一作品の正しい統合。 → **307 件はレビュー不要**。
+3. **semantic marker の取りこぼし**: 「SEASON2」等 英字 marker。 marker list は要拡充。
+4. **著者ゼロ series**(6,669 件)は本解析の対象外 = 著者集合が空のため別途。
 
 ---
 
