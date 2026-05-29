@@ -25,6 +25,19 @@ from pathlib import Path
 
 import yaml
 
+# 高速 YAML loader (= libyaml の CSafeLoader、 なければ pure-python に fallback)。
+# series-supplement-v2.yml (= 92万行) を pure-python で読むと数分かかるため。
+# parse 結果は yaml.safe_load と完全同一。
+try:
+    from yaml import CSafeLoader as _YLoader
+except ImportError:  # libyaml 無し環境
+    from yaml import SafeLoader as _YLoader
+
+
+def _yload(f):
+    return yaml.load(f, Loader=_YLoader)
+
+
 ROOT = Path(__file__).resolve().parent.parent
 DB = ROOT / ".cache" / "db-v2.sqlite"
 SEED3 = ROOT / "data" / "seeds" / "series-supplement-v2.yml"
@@ -39,6 +52,13 @@ AUTO_MERGE_JSON = ROOT / "data" / "seeds" / "series-merge-auto.json"
 # --dry-run = 別 dir に出力 (= 既存上書きしない、 diff 比較用)
 if "--dry-run" in sys.argv:
     OUT_DIR = ROOT / "data" / "manga.dryrun"
+
+# --only slug1,slug2 = 指定 slug だけ再生成 (= ターゲット再生成、 高速反復用)。
+# 指定時は OUT_DIR 全削除をスキップし、 他ページを温存。
+ONLY_SLUGS: set[str] = set()
+for _i, _a in enumerate(sys.argv):
+    if _a == "--only" and _i + 1 < len(sys.argv):
+        ONLY_SLUGS = {s.strip() for s in sys.argv[_i + 1].split(",") if s.strip()}
 
 
 def load_merge_sids() -> dict[int, list[int]]:
@@ -55,7 +75,7 @@ def load_merge_sids() -> dict[int, list[int]]:
     # hand 版 (= 手動キュレーション YAML、 後勝ち)
     if MERGE_YML.exists():
         with MERGE_YML.open(encoding="utf-8") as f:
-            for entry in (yaml.safe_load(f) or []):
+            for entry in (_yload(f) or []):
                 sids = entry.get("merge_sids") or []
                 if not sids:
                     continue
@@ -71,7 +91,7 @@ def load_merge_edition_types() -> set[int]:
         return set()
     sids: set[int] = set()
     with MERGE_YML.open(encoding="utf-8") as f:
-        for entry in (yaml.safe_load(f) or []):
+        for entry in (_yload(f) or []):
             if entry.get("merge_edition_types"):
                 for sid in (entry.get("merge_sids") or []):
                     sids.add(int(sid))
@@ -88,7 +108,7 @@ def load_volumes_supplement(con: sqlite3.Connection) -> dict[int, list[dict]]:
     cur = con.cursor()
     out: dict[int, list[dict]] = {}
     with SUPP_YML.open(encoding="utf-8") as f:
-        data = yaml.safe_load(f) or {}
+        data = _yload(f) or {}
     for entry in (data.get("volumes") or []):
         # 紐付き sid 解決
         sids: set[int] = set()
@@ -257,11 +277,30 @@ DROP_SUBTITLE_PATTERNS = [
 ]
 
 
+SEED3_CACHE = ROOT / ".cache" / "seed3-promote.pkl"
+
+
 def load_seed3() -> dict:
-    """series_key → seed3 entry の dict"""
+    """series_key → seed3 entry の dict。
+    SEED3 (= 33MB/92万行) の YAML パースは CSafeLoader でも 70秒級なので、
+    mtime 連動の pickle cache を使う (= 2回目以降 ~1秒)。"""
+    import pickle
+    if SEED3_CACHE.exists() and SEED3.exists() and SEED3_CACHE.stat().st_mtime >= SEED3.stat().st_mtime:
+        try:
+            with SEED3_CACHE.open("rb") as f:
+                return pickle.load(f)
+        except Exception:
+            pass  # cache 破損時は 再生成
     with SEED3.open("r", encoding="utf-8") as f:
-        d = yaml.safe_load(f)
-    return {e["key"]: e for e in d["series"]}
+        d = _yload(f)
+    out = {e["key"]: e for e in d["series"]}
+    SEED3_CACHE.parent.mkdir(parents=True, exist_ok=True)
+    try:
+        with SEED3_CACHE.open("wb") as f:
+            pickle.dump(out, f, protocol=pickle.HIGHEST_PROTOCOL)
+    except Exception:
+        pass
+    return out
 
 
 def normalize_title_for_prefix(t: str) -> str:
@@ -286,7 +325,17 @@ def build_parent_map(con: sqlite3.Connection) -> dict[int, int]:
       - 親 title が 子 title の prefix (= normalize 後)
       - 親 has MORE total ISBN volumes than 子
       - 親 自身 が 副題なし
+
+    全 series 走査で 重い (= ~70秒) ため、 DB mtime 連動 pickle cache を使う。
     """
+    import pickle
+    cache = ROOT / ".cache" / "parent-map.pkl"
+    if cache.exists() and DB.exists() and cache.stat().st_mtime >= DB.stat().st_mtime:
+        try:
+            with cache.open("rb") as f:
+                return pickle.load(f)
+        except Exception:
+            pass
     cur = con.cursor()
     cur.row_factory = sqlite3.Row
     cur.execute("""
@@ -326,6 +375,12 @@ def build_parent_map(con: sqlite3.Connection) -> dict[int, int]:
                     if parent["n_isbn"] > child["n_isbn"]:
                         parent_map[child["id"]] = parent["id"]
                         break
+    try:
+        cache.parent.mkdir(parents=True, exist_ok=True)
+        with cache.open("wb") as f:
+            pickle.dump(parent_map, f, protocol=pickle.HIGHEST_PROTOCOL)
+    except Exception:
+        pass
     return parent_map
 
 
@@ -1056,15 +1111,15 @@ def load_master_keys() -> tuple[set, set, set]:
     pubs, mags, gens = set(), set(), set()
     if pub_yml.exists():
         with pub_yml.open("r", encoding="utf-8") as f:
-            d = yaml.safe_load(f) or {}
+            d = _yload(f) or {}
         pubs = set(d.keys())
     if mag_yml.exists():
         with mag_yml.open("r", encoding="utf-8") as f:
-            d = yaml.safe_load(f) or {}
+            d = _yload(f) or {}
         mags = set(d.keys())
     if gen_yml.exists():
         with gen_yml.open("r", encoding="utf-8") as f:
-            d = yaml.safe_load(f) or {}
+            d = _yload(f) or {}
         gens = set(d.keys())
     return pubs, mags, gens
 
@@ -1083,9 +1138,12 @@ def main():
     con = sqlite3.connect(DB)
 
     OUT_DIR.mkdir(parents=True, exist_ok=True)
-    # 既存 v2 dir clean
-    for p in OUT_DIR.glob("*.yml"):
-        p.unlink()
+    # 既存 v2 dir clean (= --only 時は 全削除せず 該当ページのみ後で上書き)
+    if not ONLY_SLUGS:
+        for p in OUT_DIR.glob("*.yml"):
+            p.unlink()
+    else:
+        print(f"[--only] 対象 slug: {sorted(ONLY_SLUGS)} (= 他ページ温存)", file=sys.stderr)
 
     # step A: 親 series 検出 map
     print("[step A] 親 series 検出 中 ...", file=sys.stderr)
@@ -1100,9 +1158,11 @@ def main():
     dropped_non_manga = []
 
     for ypath in sorted(SRC_DIR.glob("*.yml")):
+        if ONLY_SLUGS and ypath.stem not in ONLY_SLUGS:
+            continue
         stats["total"] += 1
         with ypath.open("r", encoding="utf-8") as f:
-            src = yaml.safe_load(f)
+            src = _yload(f)
         slug = src["slug"]
         title = src["title"]
         qid = src.get("wikidata_qid")

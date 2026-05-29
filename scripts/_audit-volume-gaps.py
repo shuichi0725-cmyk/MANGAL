@@ -40,6 +40,7 @@ except ImportError:
 
 DB = Path(".cache/db-v2.sqlite")
 MERGE_YML = Path("data/seeds/series-merge.yml")
+AUTO_MERGE_JSON = Path("data/seeds/series-merge-auto.json")  # 案A 著者集合 merge (= _promote と同じ)
 SEED3_YML = Path("data/seeds/series-supplement-v2.yml")
 SEED3_CACHE = Path(".cache/seed3-keys.pkl")
 SUPP_YML = Path("data/seeds/volumes-supplement.yml")
@@ -227,6 +228,21 @@ def main() -> None:
     alias_to_main: dict[str, str] = {}
     sid_to_forced_cluster: dict[int, str] = {}  # sid → forced cluster_key (= merge_sids 由来)
     cluster_merge_editions: set[str] = set()    # cluster_key (forced) で edition.type 区別 無効
+
+    # ---- auto merge (= 案A 著者集合 merge、 JSON) を先に load → hand で上書き (= 手動優先) ----
+    n_auto = 0
+    if AUTO_MERGE_JSON.exists():
+        import json as _json
+        with AUTO_MERGE_JSON.open("r", encoding="utf-8") as f:
+            for entry in (_json.load(f).get("merges") or []):
+                forced_sids = entry.get("merge_sids") or []
+                if not forced_sids:
+                    continue
+                forced_ckey = f"merge:{entry.get('main')}"
+                for sid in forced_sids:
+                    sid_to_forced_cluster[int(sid)] = forced_ckey
+                n_auto += 1
+
     if MERGE_YML.exists() and yaml is not None:
         with MERGE_YML.open("r", encoding="utf-8") as f:
             merge_data = yaml.safe_load(f) or []
@@ -234,7 +250,7 @@ def main() -> None:
             main = entry.get("main")
             for alias in entry.get("aliases", []) or []:
                 alias_to_main[alias] = main
-            # merge_sids = 個別判断 sid 直接マージ (= 表記揺れ救済等)
+            # merge_sids = 個別判断 sid 直接マージ (= 表記揺れ救済等)。 hand が auto を上書き。
             forced_sids = entry.get("merge_sids") or []
             if forced_sids:
                 forced_ckey = f"merge:{main}"
@@ -242,9 +258,9 @@ def main() -> None:
                     sid_to_forced_cluster[int(sid)] = forced_ckey
                 if entry.get("merge_edition_types"):
                     cluster_merge_editions.add(forced_ckey)
-        print(f"[info] series-merge.yml loaded: {len(alias_to_main)} aliases, "
-              f"{len(sid_to_forced_cluster)} forced sids, "
-              f"{len(cluster_merge_editions)} edition-merged clusters → main")
+        print(f"[info] series-merge loaded: {len(alias_to_main)} aliases, "
+              f"{len(sid_to_forced_cluster)} forced sids ({n_auto} auto groups + hand), "
+              f"{len(cluster_merge_editions)} edition-merged clusters")
 
     # ---- 種3 yml load (= 紐付き scope filter) ----
     seed3_sids: set[int] = set()
