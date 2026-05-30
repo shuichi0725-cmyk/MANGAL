@@ -61,40 +61,53 @@ for _i, _a in enumerate(sys.argv):
         ONLY_SLUGS = {s.strip() for s in sys.argv[_i + 1].split(",") if s.strip()}
 
 
-def load_merge_sids() -> dict[int, list[int]]:
-    """merge_sids → {sid: [all_sids_in_group]} dict 構築。
-    auto (JSON) を先に load → hand (YAML) で上書き (= 同 sid は手動版優先)。"""
+def _entry_sids(entry: dict, key_to_sid: dict) -> list[int]:
+    """★STEP6: entry の merge_keys (= series_key、 安定) を 現 sid に解決。
+    legacy の merge_sids (= raw sid) も後方互換で対応。"""
+    out: list[int] = []
+    for sk in (entry.get("merge_keys") or []):
+        sid = key_to_sid.get(sk)
+        if sid is not None:
+            out.append(sid)
+    for s in (entry.get("merge_sids") or []):  # legacy
+        out.append(int(s))
+    return out
+
+
+def load_merge_sids(con: sqlite3.Connection) -> dict[int, list[int]]:
+    """merge group → {sid: [all_sids_in_group]} dict 構築。
+    auto (JSON, merge_keys) を先に load → hand (YAML) で上書き (= 同 sid は手動版優先)。
+    ★STEP6: series_key で持つので db 再build しても解決できる (sid非依存)。"""
+    key_to_sid = {sk: sid for sid, sk in con.execute("SELECT id, series_key FROM series")}
     sid_to_group: dict[int, list[int]] = {}
-    # auto 版 (= 自動生成 JSON、 高速)
     if AUTO_MERGE_JSON.exists():
         with AUTO_MERGE_JSON.open(encoding="utf-8") as f:
             for entry in (json.load(f).get("merges") or []):
-                sids = entry.get("merge_sids") or []
+                sids = _entry_sids(entry, key_to_sid)
                 for sid in sids:
-                    sid_to_group[int(sid)] = [int(s) for s in sids]
-    # hand 版 (= 手動キュレーション YAML、 後勝ち)
+                    sid_to_group[sid] = sids
     if MERGE_YML.exists():
         with MERGE_YML.open(encoding="utf-8") as f:
             for entry in (_yload(f) or []):
-                sids = entry.get("merge_sids") or []
+                sids = _entry_sids(entry, key_to_sid)
                 if not sids:
                     continue
                 for sid in sids:
-                    sid_to_group[int(sid)] = [int(s) for s in sids]
+                    sid_to_group[sid] = sids
     return sid_to_group
 
 
-def load_merge_edition_types() -> set[int]:
+def load_merge_edition_types(con: sqlite3.Connection) -> set[int]:
     """merge_edition_types: true の cluster の 全 sid set を 返す (= shinsoban→standard 統合対象)。
-    edition-type 統合は hand 版のみ (auto 版は通常巻の表記揺れ統合 = edition 区別は保持)。"""
+    edition-type 統合は hand 版のみ。 ★STEP6: merge_keys/merge_sids 両対応。"""
     if not MERGE_YML.exists():
         return set()
+    key_to_sid = {sk: sid for sid, sk in con.execute("SELECT id, series_key FROM series")}
     sids: set[int] = set()
     with MERGE_YML.open(encoding="utf-8") as f:
         for entry in (_yload(f) or []):
             if entry.get("merge_edition_types"):
-                for sid in (entry.get("merge_sids") or []):
-                    sids.add(int(sid))
+                sids.update(_entry_sids(entry, key_to_sid))
     return sids
 
 
@@ -143,16 +156,16 @@ def load_volumes_supplement(con: sqlite3.Connection) -> dict[int, list[dict]]:
 _MERGE_SIDS = None
 _MERGE_EDT = None
 _SUPP_VOLS = None
-def get_merge_sids() -> dict[int, list[int]]:
+def get_merge_sids(con) -> dict[int, list[int]]:
     global _MERGE_SIDS
     if _MERGE_SIDS is None:
-        _MERGE_SIDS = load_merge_sids()
+        _MERGE_SIDS = load_merge_sids(con)
     return _MERGE_SIDS
 
-def get_merge_edition_types() -> set[int]:
+def get_merge_edition_types(con) -> set[int]:
     global _MERGE_EDT
     if _MERGE_EDT is None:
-        _MERGE_EDT = load_merge_edition_types()
+        _MERGE_EDT = load_merge_edition_types(con)
     return _MERGE_EDT
 
 def get_supplement_vols(con) -> dict[int, list[dict]]:
@@ -698,7 +711,7 @@ def find_related_series_ids(con: sqlite3.Connection, main: dict) -> list[int]:
                 ids.add(r[0])
     # ★ merge.yml の merge_sids 強制統合 (= 個別判断、 既存 logic で 漏れる
     # 表記揺れ / 著者振り分け差異 等 を ユーザ明示で 統合)
-    merge_sids_map = get_merge_sids()
+    merge_sids_map = get_merge_sids(con)
     for sid in list(ids):
         if sid in merge_sids_map:
             ids.update(merge_sids_map[sid])
@@ -759,7 +772,7 @@ def get_editions_with_volumes(con: sqlite3.Connection, series_ids: list[int] | i
         f"SELECT * FROM editions WHERE series_id IN ({placeholders})", series_ids
     ).fetchall()
     # merge_edition_types: true の sid なら shinsoban/aizoban 等 → standard 統合
-    merge_edt_sids = get_merge_edition_types()
+    merge_edt_sids = get_merge_edition_types(con)
     apply_edt_merge = any(sid in merge_edt_sids for sid in series_ids)
     # type → [edition+volumes] list
     by_type: dict[str, list[dict]] = defaultdict(list)

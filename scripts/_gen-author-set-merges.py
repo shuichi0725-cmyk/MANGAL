@@ -111,6 +111,8 @@ def main() -> None:
     con = sqlite3.connect(DB)
     c = con.cursor()
     aname = {mid: nm for mid, nm in c.execute("SELECT id, name FROM mangaka")}
+    # ★STEP6: sid→series_key (= 安定キー、 sid非依存)。 merge は series_key で持つ。
+    sid_key = {sid: sk for sid, sk in c.execute("SELECT id, series_key FROM series")}
 
     def is_nonperson(mid: int) -> bool:
         nm = aname.get(mid, "")
@@ -221,33 +223,35 @@ def main() -> None:
             skipped_hand += 1
             continue
         comp.sort(key=lambda m: -m["vols"])
+        keys = sorted(sid_key[s] for s in sids)
         entries.append({
             "main": comp[0]["title"],
-            "merge_sids": sorted(sids),
+            "merge_keys": keys,  # ★STEP6: series_key 参照 (sid非依存=再build耐性)
             "note": "auto: subset-author + (clean-title|kana) (_gen-author-set-merges.py)",
         })
 
-    entries.sort(key=lambda e: e["merge_sids"][0])
+    entries.sort(key=lambda e: e["merge_keys"][0])
 
     doc = {
         "_README": (
             "自動生成 — 手で編集しない。生成元: scripts/_gen-author-set-merges.py / "
-            "詳細: docs/series-fragmentation-analysis.md。種2 sqlite 不変・種3 不変・"
-            "series_key 不変。手動版 data/seeds/series-merge.yml と重複する group は skip 済"
-            "(= 手動優先)。★ db-v2 再 build 後は sid が変わるため必ず再生成すること。"
+            "詳細: docs/series-fragmentation-analysis.md。種2 sqlite 不変・種3 不変。"
+            "★STEP6: merge は merge_keys (= series_key、 sid非依存=再build耐性)。 手動版 "
+            "data/seeds/series-merge.yml と重複する group は skip 済 (= 手動優先)。 db-v2 "
+            "再build後も series_key は安定だが、 新規 work 反映のため再生成推奨。"
         ),
         "merges": entries,
     }
     with OUT.open("w", encoding="utf-8") as f:
         json.dump(doc, f, ensure_ascii=False, indent=0)
 
-    print(f"=== series-merge-auto.json 生成 ===", file=sys.stderr)
+    print(f"=== series-merge-auto.json 生成 (merge_keys=series_key) ===", file=sys.stderr)
     print(f"  auto 統合 group     : {len(entries):,}", file=sys.stderr)
     print(f"  hand 重複 skip      : {skipped_hand}", file=sys.stderr)
     print(f"  semantic/共通著者なし保留: {held}", file=sys.stderr)
     print(f"  アンソロジー題 除外 : {n_anthology}", file=sys.stderr)
     print(f"  qid種類過多 除外    : {n_qidcap}", file=sys.stderr)
-    print(f"  統合される series   : {sum(len(e['merge_sids']) for e in entries):,}", file=sys.stderr)
+    print(f"  統合される series   : {sum(len(e['merge_keys']) for e in entries):,}", file=sys.stderr)
     print(f"  wrote {OUT}", file=sys.stderr)
 
 

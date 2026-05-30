@@ -230,18 +230,26 @@ def main() -> None:
     sid_to_forced_cluster: dict[int, str] = {}  # sid → forced cluster_key (= merge_sids 由来)
     cluster_merge_editions: set[str] = set()    # cluster_key (forced) で edition.type 区別 無効
 
+    # ★STEP6: merge_keys (= series_key、 sid非依存) を 現 sid に解決。 legacy merge_sids も対応。
+    _key_to_sid = {sk: sid for sid, sk in con.execute("SELECT id, series_key FROM series")}
+
+    def _forced_sids(entry):
+        out = [_key_to_sid[k] for k in (entry.get("merge_keys") or []) if k in _key_to_sid]
+        out += [int(s) for s in (entry.get("merge_sids") or [])]
+        return out
+
     # ---- auto merge (= 案A 著者集合 merge、 JSON) を先に load → hand で上書き (= 手動優先) ----
     n_auto = 0
     if AUTO_MERGE_JSON.exists():
         import json as _json
         with AUTO_MERGE_JSON.open("r", encoding="utf-8") as f:
             for entry in (_json.load(f).get("merges") or []):
-                forced_sids = entry.get("merge_sids") or []
+                forced_sids = _forced_sids(entry)
                 if not forced_sids:
                     continue
                 forced_ckey = f"merge:{entry.get('main')}"
                 for sid in forced_sids:
-                    sid_to_forced_cluster[int(sid)] = forced_ckey
+                    sid_to_forced_cluster[sid] = forced_ckey
                 n_auto += 1
 
     if MERGE_YML.exists() and yaml is not None:
@@ -251,12 +259,12 @@ def main() -> None:
             main = entry.get("main")
             for alias in entry.get("aliases", []) or []:
                 alias_to_main[alias] = main
-            # merge_sids = 個別判断 sid 直接マージ (= 表記揺れ救済等)。 hand が auto を上書き。
-            forced_sids = entry.get("merge_sids") or []
+            # merge_keys/merge_sids = 個別判断 直接マージ。 hand が auto を上書き。
+            forced_sids = _forced_sids(entry)
             if forced_sids:
                 forced_ckey = f"merge:{main}"
                 for sid in forced_sids:
-                    sid_to_forced_cluster[int(sid)] = forced_ckey
+                    sid_to_forced_cluster[sid] = forced_ckey
                 if entry.get("merge_edition_types"):
                     cluster_merge_editions.add(forced_ckey)
         print(f"[info] series-merge loaded: {len(alias_to_main)} aliases, "
