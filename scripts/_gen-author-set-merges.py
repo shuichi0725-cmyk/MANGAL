@@ -46,20 +46,53 @@ NONPERSON = ["社", "プロ", "スタジオ", "編集", "製作", "株式", "wor
              "出版", "書房", "書店", "コミック", "編集部"]
 
 
+import re
+# 括弧内 (= subtitle/別名) を除去: 〜…〜 / (…) / （…） / […] / 【…】
+_PAREN = re.compile(r"〜[^〜]*〜|～[^～]*～|\([^)]*\)|（[^）]*）|\[[^\]]*\]|【[^】]*】")
+
+
 def clean(s: str) -> str:
-    """audit (_audit-volume-gaps._clean) と同一の正規化 = 句読点/空白/横棒除去+lower。"""
+    """正規化 = 括弧内除去 + 句読点/空白/横棒/記号(S)除去 + lower。
+    記号 S 追加で ❤☆× 等の表記揺れ(たとえばラヴ❤ソング↔ラヴ・ソング、 ハンター×ハンター)を吸収。"""
     if not s:
         return ""
+    s = _PAREN.sub("", s)
     out = []
     for ch in s:
-        if unicodedata.category(ch)[0] in ("P", "Z") or ch in "ー―~〜":
+        if unicodedata.category(ch)[0] in ("P", "Z", "S") or ch in "ー―~〜":
             continue
         out.append(ch.lower())
     return "".join(out)
 
 
+def _hira2kata(s: str) -> str:
+    return "".join(chr(ord(ch) + 0x60) if "ぁ" <= ch <= "ゖ" else ch for ch in s)
+
+
+def kana_norm(s: str) -> str:
+    """title_kana 正規化 = ひらがな→カタカナ + カナ/漢字/英数のみ残す + upper。
+    ローマ字題↔カナ題(グラゼニ↔Gurazeni の kana=グラゼニ)の橋渡し用。"""
+    if not s:
+        return ""
+    return re.sub(r"[^ァ-ヶ一-龯0-9A-Za-z]", "", _hira2kata(s)).upper()
+
+
 def is_semantic_sub(s: str | None) -> bool:
     return bool(s) and any(m in s for m in SEMANTIC)
+
+
+# title 内の 続編/外伝マーカー (= kana統合が base読み一致で続編を誤統合するのを防ぐ)。
+_SEQ = re.compile(
+    r"ACT\s*([0-9]+)|異聞|外伝|第\s*([0-9一二三四五六七八九十]+)\s*[部編章]|続編?|シーズン\s*([0-9]+)?|season\s*([0-9]+)?|[ⅡⅢⅣⅤ]|([0-9]+)(?:st|nd|rd|th)",
+    re.I)
+
+
+def seq_marker(t: str) -> str:
+    """title から 続編/外伝シグネチャを抽出 (無ければ '')。 component 内で食い違えば別作品。
+    finditer で 全マッチ文字列を採る (= 非グループ alt 異聞/Ⅱ も拾う)。"""
+    if not t:
+        return ""
+    return "|".join(sorted(m.group(0).lower().replace(" ", "") for m in _SEQ.finditer(t)))
 
 
 def load_hand_merge_sids() -> set[int]:
@@ -93,85 +126,97 @@ def main() -> None:
         "JOIN volumes v ON v.edition_id=e.id GROUP BY e.series_id"
     ):
         volc[sid] = n
-    rows = c.execute("SELECT id, title, subtitle, qid FROM series").fetchall()
+    rows = c.execute("SELECT id, title, subtitle, qid, title_kana FROM series").fetchall()
 
-    # 正規化 title (= clean) で 一次グループ化。 著者集合を持つ series のみ。
-    bytitle: dict[str, list[dict]] = defaultdict(list)
-    for sid, t, s, q in rows:
+    # 各 series → 正規化キー集合 (clean title + kana)。 著者集合を持つ series のみ。
+    # kana 軸でローマ字↔カナ題(グラゼニ↔Gurazeni)を橋渡し。
+    KEYPOOL_CAP = 40  # キーpool が大きすぎ(汎用題/汎用kana) は連結対象外 (over-merge/O(n^2)回避)
+    smeta: dict[int, dict] = {}
+    key_sids: dict[str, list[int]] = defaultdict(list)
+    for sid, t, s, q, tk in rows:
         a = frozenset(auth.get(sid, ()))
         if not a:
             continue  # 著者ゼロ (= 非人物のみ含む series も除外)
-        bytitle[clean(t)].append(
-            {"sid": sid, "title": t, "sub": s, "qid": q, "vols": volc[sid], "aset": a}
-        )
+        keys = {"t:" + clean(t)}
+        kk = kana_norm(tk)
+        if kk:
+            keys.add("k:" + kk)
+        smeta[sid] = {"sid": sid, "title": t, "sub": s, "qid": q, "vols": volc[sid],
+                      "aset": a, "keys": keys}
+        for k in keys:
+            key_sids[k].append(sid)
 
     hand_sids = load_hand_merge_sids()
     print(f"hand merge_sids 既存: {len(hand_sids)} 個 (重複 skip)", file=sys.stderr)
 
-    # 各 title グループ内で union-find: 著者集合が 包含関係 (subset/superset) なら連結。
-    #   = 入れ子 (記録ムラ・片側欠け・同一集合) を統合、
-    #     disjoint / 部分重複のみ (原作共通-作画別 等) は連結せず別ページ維持。
-    def find(p, x):
-        while p[x] != x:
-            p[x] = p[p[x]]
-            x = p[x]
+    # global union-find: 同一キー(title or kana)を共有 かつ 著者集合が包含関係 の sid を連結。
+    #   = 入れ子(記録ムラ・片欠け)+ 表記揺れ(kana/記号/括弧)を統合、 disjoint は別ページ維持。
+    parent = {sid: sid for sid in smeta}
+
+    def find(x):
+        while parent[x] != x:
+            parent[x] = parent[parent[x]]
+            x = parent[x]
         return x
+
+    for k, sids in key_sids.items():
+        if len(sids) < 2 or len(sids) > KEYPOOL_CAP:
+            continue
+        for i in range(len(sids)):
+            ai = smeta[sids[i]]["aset"]
+            for j in range(i + 1, len(sids)):
+                aj = smeta[sids[j]]["aset"]
+                if ai <= aj or aj <= ai:  # 包含関係 (どちらか subset)
+                    ra, rb = find(sids[i]), find(sids[j])
+                    if ra != rb:
+                        parent[ra] = rb
+
+    comps: dict[int, list[dict]] = defaultdict(list)
+    for sid in smeta:
+        comps[find(sid)].append(smeta[sid])
 
     entries = []
     skipped_hand = 0
     held = 0
     n_anthology = 0
     n_qidcap = 0
-    for nt, members in bytitle.items():
-        if len(members) < 2:
+    for comp in comps.values():
+        sids = {m["sid"] for m in comp}
+        if len(sids) < 2:
             continue
         # アンソロジー/汎用題 = 別作品同題 → 統合対象外
-        if any(p in m["title"] for m in members for p in ANTHOLOGY):
+        if any(p in m["title"] for m in comp for p in ANTHOLOGY):
             n_anthology += 1
             continue
-        parent = {m["sid"]: m["sid"] for m in members}
-        for i in range(len(members)):
-            ai = members[i]["aset"]
-            for j in range(i + 1, len(members)):
-                aj = members[j]["aset"]
-                if ai <= aj or aj <= ai:  # 包含関係 (どちらか subset)
-                    ra, rb = find(parent, members[i]["sid"]), find(parent, members[j]["sid"])
-                    if ra != rb:
-                        parent[ra] = rb
-        comps: dict[int, list[dict]] = defaultdict(list)
-        for m in members:
-            comps[find(parent, m["sid"])].append(m)
-        for comp in comps.values():
-            sids = {m["sid"] for m in comp}
-            if len(sids) < 2:
-                continue
-            # ★ 共通著者ガード: component 全員が共有する著者が居ないと統合しない
-            #   (= subset の連鎖で A⊆B,C⊆B 間接連結された「日本の歴史」等の汎用題
-            #    over-merge を排除。 入れ子は最小集合が共通なので非空で通る)
-            common = set.intersection(*[set(m["aset"]) for m in comp])
-            if not common:
-                held += 1
-                continue
-            # primary qid 種類が多すぎ = アンソロジー的 over-merge → 弾く
-            distinct_qids = {m["qid"] for m in comp if m["qid"]}
-            if len(distinct_qids) > MAX_DISTINCT_QID:
-                n_qidcap += 1
-                continue
-            # semantic subtitle 混在 = 保留 (別ページ維持)
-            nonsem = {m["sid"] for m in comp if not is_semantic_sub(m["sub"])}
-            if any(is_semantic_sub(m["sub"]) for m in comp) and len(nonsem) < len(sids):
-                held += 1
-                continue
-            # hand 版と重複 = skip (手動優先)
-            if sids & hand_sids:
-                skipped_hand += 1
-                continue
-            comp.sort(key=lambda m: -m["vols"])
-            entries.append({
-                "main": comp[0]["title"],
-                "merge_sids": sorted(sids),
-                "note": "auto: subset-author-set + clean-title (_gen-author-set-merges.py)",
-            })
+        # ★ 共通著者ガード: component 全員が共有する著者が居ないと統合しない
+        common = set.intersection(*[set(m["aset"]) for m in comp])
+        if not common:
+            held += 1
+            continue
+        # primary qid 種類が多すぎ = アンソロジー的 over-merge → 弾く
+        distinct_qids = {m["qid"] for m in comp if m["qid"]}
+        if len(distinct_qids) > MAX_DISTINCT_QID:
+            n_qidcap += 1
+            continue
+        # semantic subtitle 混在 = 保留 (別ページ維持)
+        nonsem = {m["sid"] for m in comp if not is_semantic_sub(m["sub"])}
+        if any(is_semantic_sub(m["sub"]) for m in comp) and len(nonsem) < len(sids):
+            held += 1
+            continue
+        # ★ 続編/外伝マーカー食い違い = 別作品 (= DEAR BOYS↔ACT3 / ○○↔○○異聞) → 保留
+        if len({seq_marker(m["title"]) for m in comp}) > 1:
+            held += 1
+            continue
+        # hand 版と重複 = skip (手動優先)
+        if sids & hand_sids:
+            skipped_hand += 1
+            continue
+        comp.sort(key=lambda m: -m["vols"])
+        entries.append({
+            "main": comp[0]["title"],
+            "merge_sids": sorted(sids),
+            "note": "auto: subset-author + (clean-title|kana) (_gen-author-set-merges.py)",
+        })
 
     entries.sort(key=lambda e: e["merge_sids"][0])
 
