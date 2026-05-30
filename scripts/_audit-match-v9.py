@@ -14,7 +14,7 @@ v8 比 強化点:
 v8 までの signal (= title 4ch / 種2 author / 姓名順 / year / vol) は継承。
 threshold: 130 / 150 / 180。 全 TSV: .cache/match-v9-all.tsv
 """
-import sys, gzip, json, yaml, re, sqlite3
+import sys, gzip, json, yaml, re, sqlite3, unicodedata
 sys.stdout.reconfigure(encoding='utf-8')
 from collections import defaultdict
 
@@ -57,6 +57,11 @@ def hepburn_to_kata(s):
 PAREN_PATTERNS = [r'〜[^〜]*〜', r'～[^～]*～', r'\([^)]*\)', r'（[^）]*）', r'\[[^\]]*\]', r'【[^】]*】']
 SEPARATORS = ['・','·','·','⋅','•','∙']
 
+def strip_punct(s):
+    """Unicode 句読点 (P*) + 長音/波線変種 を全除去 (= ダッシュ '‐'/全角'！＠'/アポストロフィ
+    ''' 等の表記揺れを吸収。 2026-05-30 v9 取りこぼし 1,802件 対策)。"""
+    return ''.join(ch for ch in s if unicodedata.category(ch)[0] != 'P' and ch not in 'ー―~〜')
+
 def hira_to_kata(s):
     return ''.join(chr(ord(c)+0x60) if 'ぁ' <= c <= 'ゖ' else c for c in s)
 
@@ -65,6 +70,7 @@ def title_norm(s):
     for p in PAREN_PATTERNS: s = re.sub(p, '', s)
     s = re.sub(r'[:：].*$', '', s)
     for sep in SEPARATORS: s = s.replace(sep, '')
+    s = strip_punct(s)
     return re.sub(r'[\s　]+', '', s).strip().lower()
 
 def kata_norm(s):
@@ -72,6 +78,7 @@ def kata_norm(s):
     s = re.split(r'[:：]', s, 1)[0]
     for p in PAREN_PATTERNS: s = re.sub(p, '', s)
     for sep in SEPARATORS: s = s.replace(sep, '')
+    s = strip_punct(s)
     s = re.sub(r'[\s　ー]+', '', s)
     return s.lower()
 
