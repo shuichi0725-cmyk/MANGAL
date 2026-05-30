@@ -113,36 +113,40 @@ def main():
                 author_works[fm].append(rec)
     print(f"AniList works: {n_works:,}, 著者form index: {len(author_works):,}", flush=True)
 
-    # NO_MATCH 種3(著者有)を著者経由で照合
+    # 非Sマッチ(NO_MATCH/DISPLACED/REJECT)を著者経由で照合
+    from collections import Counter
     recovered = []
-    n_nomatch_auth = 0
+    n_auth = Counter(); n_rec = Counter()
+    TARGETS = {"NO_MATCH", "DISPLACED", "REJECT"}
     with TSV.open(encoding="utf-8") as f:
         for r in csv.DictReader(f, delimiter="\t"):
-            if r["verdict"] != "NO_MATCH": continue
+            v = r["verdict"]
+            if v not in TARGETS: continue
             s3auth = [a for a in (r["s3_authors"] or "").split("|") if a.strip()]
             if not s3auth: continue
-            n_nomatch_auth += 1
+            n_auth[v] += 1
             s3tk = title_key(r["s3_title"])
             if not s3tk: continue
-            # s3 著者の form 集合
             sforms = set()
             for a in s3auth: sforms |= author_forms(a)
-            # 同一著者の AniList 作品を集める
             cands = {}
             for fm in sforms:
                 for rec in author_works.get(fm, []):
                     cands[rec[0]] = rec
-            # 題一致(完全 or 一方が他方を包含)
             for aid, (aid2, native, romaji, year, atk) in cands.items():
                 if s3tk == atk or (len(s3tk) >= 4 and (s3tk in atk or atk in s3tk)):
-                    recovered.append((r["s3_title"], "|".join(s3auth), native, romaji, year))
+                    n_rec[v] += 1
+                    recovered.append((v, r["s3_title"], "|".join(s3auth), native, romaji, year))
                     break
 
-    print(f"\nNO_MATCH(著者有): {n_nomatch_auth:,}")
-    print(f"★著者経由で回収可能: {len(recovered):,} ({len(recovered)*100//max(n_nomatch_auth,1)}%)")
+    print()
+    for v in ["NO_MATCH", "DISPLACED", "REJECT"]:
+        a = n_auth[v]; rc = n_rec[v]
+        print(f"{v}(著者有 {a:,}) → 著者経由回収 {rc:,} ({rc*100//max(a,1)}%)")
+    print(f"★合計回収可能: {len(recovered):,}")
 
     with open(".cache/recall-authorroute.tsv", "w", encoding="utf-8") as f:
-        f.write("s3_title\ts3_authors\ta_native\ta_romaji\ta_year\n")
+        f.write("verdict\ts3_title\ts3_authors\ta_native\ta_romaji\ta_year\n")
         for row in recovered:
             f.write("\t".join(str(x) for x in row) + "\n")
     print("wrote .cache/recall-authorroute.tsv")
