@@ -132,7 +132,7 @@ def main() -> None:
         "JOIN volumes v ON v.edition_id=e.id GROUP BY e.series_id"
     ):
         volc[sid] = n
-    rows = c.execute("SELECT id, title, subtitle, qid, title_kana FROM series").fetchall()
+    rows = c.execute("SELECT id, title, subtitle, qid, title_kana FROM series ORDER BY id").fetchall()
 
     # 各 series → 正規化キー集合 (clean title + kana)。 著者集合を持つ series のみ。
     # kana 軸でローマ字↔カナ題(グラゼニ↔Gurazeni)を橋渡し。

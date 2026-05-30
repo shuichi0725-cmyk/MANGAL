@@ -64971,6 +64971,16 @@
 "note": "auto: subset-author + (clean-title|kana) (_gen-author-set-merges.py)"
 },
 {
+"main": "シャングリラフロンティア",
+"merge_keys": [
+"name:不二涼介|name:シャングリラフロンティア",
+"name:硬梨菜|name:シャングリラフロンティア|sub:クソゲーハンター、神ゲーに挑まんとす",
+"name:硬梨菜|name:シャングリラフロンティア|sub:クソゲーハンター、神ゲーに挑まんとす.",
+"name:硬梨菜|name:シャングリラ・フロンティア|sub:クソゲーハンター、神ゲーに挑まんとす"
+],
+"note": "auto: subset-author + (clean-title|kana) (_gen-author-set-merges.py)"
+},
+{
 "main": "UFOロボグレンダイザー",
 "merge_keys": [
 "name:不知火プロ|name:UFOロボグレンダイザー",
@@ -134671,6 +134681,14 @@
 "merge_keys": [
 "qid:Q2178375|name:執事★ゲーム",
 "qid:Q2178375|name:執事・ゲーム"
+],
+"note": "auto: subset-author + (clean-title|kana) (_gen-author-set-merges.py)"
+},
+{
+"main": "うる星やつら パーフェクト★カラーエディション",
+"merge_keys": [
+"qid:Q219948|name:うる星やつら パーフェクト★カラーエディション",
+"qid:Q219948|name:うる星やつらパーフェクト★カラーエディション"
 ],
 "note": "auto: subset-author + (clean-title|kana) (_gen-author-set-merges.py)"
 },
