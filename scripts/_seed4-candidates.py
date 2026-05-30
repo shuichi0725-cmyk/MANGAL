@@ -33,10 +33,12 @@ DB = ROOT / ".cache" / "db-v2.sqlite"
 CAND = ROOT / ".cache" / "seed4-candidates.csv"
 OUT_CLS = ROOT / ".cache" / "seed4-classified.csv"
 OUT_DRAFT = ROOT / ".cache" / "seed4-drafts.yml"
+PROGRESS = ROOT / ".cache" / "seed4-progress.jsonl"  # resumable 照会ログ (= 1行1候補)
 UA = "MANGAL-research/0.1 (mailto:shuichi0725@gmail.com)"
 
 DO_NDL = "--ndl" in sys.argv
-LIMIT = 30
+REBUILD = "--rebuild-drafts" in sys.argv  # 照会せず progress から drafts.yml を再生成
+LIMIT = 999999 if DO_NDL else 30  # --ndl 時は default 全件 (resumable なので安全)
 for i, a in enumerate(sys.argv):
     if a == "--limit" and i + 1 < len(sys.argv):
         LIMIT = int(sys.argv[i + 1])
@@ -53,6 +55,16 @@ def clean(s: str) -> str:
             continue
         out.append(ch.lower())
     return "".join(out)
+
+
+def build_title_to_keys(con) -> dict:
+    """正規化title → [series_key,...] (= 種4 bind 用、 同名クラスタの全 series_key)。"""
+    from collections import defaultdict
+    idx: dict[str, list] = defaultdict(list)
+    for title, sk in con.execute("SELECT title, series_key FROM series"):
+        if sk:
+            idx[clean(title)].append(sk)
+    return idx
 
 
 def build_volume_index(con) -> dict:
@@ -113,6 +125,12 @@ def ndl_lookup(title: str, vol: int) -> dict | None:
 
 
 def main():
+    if REBUILD:
+        done = load_progress()
+        write_drafts(done)
+        n_hit = sum(1 for r in done.values() if r.get("status") == "hit")
+        print(f"progress {len(done)} 件 (hit {n_hit}) → {OUT_DRAFT}", file=sys.stderr)
+        return
     con = sqlite3.connect(DB)
     rows = list(csv.DictReader(CAND.open(encoding="utf-8")))
     print(f"候補 (単一欠け): {len(rows):,}", file=sys.stderr)
@@ -159,38 +177,86 @@ def main():
         print("\n(NDL 照合は --ndl で実行)", file=sys.stderr)
         return
 
+    title_to_keys = build_title_to_keys(con)
     absent = [c for c in classified if c["kind"] == "absent"][:LIMIT]
-    print(f"\n=== NDL 照合 (absent 上位 {len(absent)}) ===", file=sys.stderr)
-    drafts = []
-    for i, c in enumerate(absent):
-        res = ndl_lookup(c["series_title"], c["missing"])
-        time.sleep(1.5)  # throttle
-        if not res:
-            print(f"  [{i+1}] {c['series_title']} {c['missing']}巻 → NDL 該当なし", file=sys.stderr)
-            continue
-        if "_error" in res:
-            print(f"  [{i+1}] {c['series_title']} → {res['_error']}", file=sys.stderr)
-            continue
-        pages = re.search(r"(\d+)\s*p", res.get("extent", ""))
-        drafts.append({
-            "series_title": c["series_title"],
-            "number": c["missing"],
-            "isbn13": res["isbn13"],
-            "issued": res["issued"],
-            "publisher": res["publisher"],
-            "pages": int(pages.group(1)) if pages else None,
-            "ndl_title": res["ndl_title"],
-        })
-        print(f"  [{i+1}] ✓ {c['series_title']} {c['missing']}巻 → ISBN {res['isbn13']} ({res['issued']})", file=sys.stderr)
 
+    # --- resumable: 既照会 (title|number) を progress.jsonl から復元 ---
+    import json
+    done = load_progress()
+    n_done = len(done)
+    todo = [c for c in absent if (c["series_title"], c["missing"]) not in done]
+    print(f"\n=== NDL 照合 (resumable) ===", file=sys.stderr)
+    print(f"  absent={len(absent)} / 既照会={n_done} / 今回 todo={len(todo)}", file=sys.stderr)
+
+    n_hit = sum(1 for r in done.values() if r.get("status") == "hit")
+    PROGRESS.parent.mkdir(parents=True, exist_ok=True)
+    # 1 件ごとに即 append + flush (= kill 安全)
+    with PROGRESS.open("a", encoding="utf-8") as pf:
+        for i, c in enumerate(todo):
+            res = ndl_lookup(c["series_title"], c["missing"])
+            time.sleep(1.5)  # throttle
+            rec = {"title": c["series_title"], "number": c["missing"]}
+            if not res:
+                rec["status"] = "miss"
+            elif "_error" in res:
+                rec["status"] = "error"
+                rec["error"] = res["_error"]
+            else:
+                pages = re.search(r"(\d+)\s*p", res.get("extent", ""))
+                rec.update({
+                    "status": "hit",
+                    "isbn13": res["isbn13"],
+                    "issued": res["issued"],
+                    "publisher": res["publisher"],
+                    "pages": int(pages.group(1)) if pages else None,
+                    "ndl_title": res["ndl_title"],
+                    "series_keys": title_to_keys.get(clean(c["series_title"]), []),
+                })
+                n_hit += 1
+            pf.write(json.dumps(rec, ensure_ascii=False) + "\n")
+            pf.flush()
+            done[(rec["title"], rec["number"])] = rec
+            if (i + 1) % 25 == 0:
+                print(f"  ...{i+1}/{len(todo)} 走査 (累計 hit {n_hit})", file=sys.stderr)
+
+    write_drafts(done)
+    remaining = len(absent) - len(done)
+    print(f"\n  累計: 照会済 {len(done)}/{len(absent)} (残 {remaining}), hit {n_hit}", file=sys.stderr)
+    print(f"  種4 ドラフト → {OUT_DRAFT}", file=sys.stderr)
+    if remaining > 0:
+        print(f"  ※未完。 同コマンド再実行で続きから再開。", file=sys.stderr)
+
+
+def write_drafts(done: dict) -> None:
+    """progress (done dict) の hit から 種4 ドラフト yml を 生成 (= いつでも再生成可)。"""
     import yaml
+    keys = ["title", "number", "isbn13", "issued", "publisher", "pages", "ndl_title", "series_keys"]
+    drafts = [{k: rec.get(k) for k in keys}
+              for rec in done.values() if rec.get("status") == "hit"]
+    drafts.sort(key=lambda d: (d.get("title") or ""))
     OUT_DRAFT.write_text(
-        "# NDL 確認済 種4 ドラフト (= 要レビュー、 自動適用しない)\n"
-        "# series_keys は手で確認して volumes-supplement.yml へ移すこと\n"
+        "# NDL 確認済 種4 ドラフト (= 要レビュー、 自動適用しない)。 生成元 .cache/seed4-progress.jsonl\n"
+        "# series_keys は確認して volumes-supplement.yml へ移すこと\n"
         + yaml.dump(drafts, allow_unicode=True, sort_keys=False),
         encoding="utf-8",
     )
-    print(f"\n  種4 ドラフト {len(drafts)} 件 → {OUT_DRAFT}", file=sys.stderr)
+
+
+def load_progress() -> dict:
+    import json
+    done: dict = {}
+    if PROGRESS.exists():
+        with PROGRESS.open(encoding="utf-8") as f:
+            for line in f:
+                line = line.strip()
+                if not line:
+                    continue
+                try:
+                    rec = json.loads(line)
+                    done[(rec["title"], rec["number"])] = rec
+                except Exception:
+                    pass
+    return done
 
 
 if __name__ == "__main__":
