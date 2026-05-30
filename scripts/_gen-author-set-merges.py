@@ -117,9 +117,13 @@ def main() -> None:
         return any(p in nm for p in NONPERSON)
 
     auth = defaultdict(set)
-    for sid, mid in c.execute("SELECT series_id, mangaka_id FROM series_authors"):
-        if not is_nonperson(mid):  # 非人物 (出版社/プロ等) を著者集合から除外
-            auth[sid].add(mid)
+    primary = defaultdict(set)  # sid → 作画/単独 (artist/writer_artist) の mangaka_id
+    for sid, mid, role in c.execute("SELECT series_id, mangaka_id, role FROM series_authors"):
+        if is_nonperson(mid):  # 非人物 (出版社/プロ等) は除外
+            continue
+        auth[sid].add(mid)
+        if role in ("artist", "writer_artist"):
+            primary[sid].add(mid)
     volc = defaultdict(int)
     for sid, n in c.execute(
         "SELECT e.series_id, COUNT(*) FROM editions e "
@@ -142,7 +146,7 @@ def main() -> None:
         if kk:
             keys.add("k:" + kk)
         smeta[sid] = {"sid": sid, "title": t, "sub": s, "qid": q, "vols": volc[sid],
-                      "aset": a, "keys": keys}
+                      "aset": a, "primary": frozenset(primary.get(sid, ())), "keys": keys}
         for k in keys:
             key_sids[k].append(sid)
 
@@ -164,9 +168,14 @@ def main() -> None:
             continue
         for i in range(len(sids)):
             ai = smeta[sids[i]]["aset"]
+            pi = smeta[sids[i]]["primary"]
             for j in range(i + 1, len(sids)):
                 aj = smeta[sids[j]]["aset"]
-                if ai <= aj or aj <= ai:  # 包含関係 (どちらか subset)
+                # 連結条件:
+                #   (1) 包含関係 (= 記録ムラ・片欠け)、 or
+                #   (2) ★作画/単独著者(primary)を共有 (= 部分重複でも同一作品。
+                #       「原作のみ共通」= 別作画の別adaptation は primary 非共有で弾く: 小公女/椿姫/IS)
+                if ai <= aj or aj <= ai or (pi & smeta[sids[j]]["primary"]):
                     ra, rb = find(sids[i]), find(sids[j])
                     if ra != rb:
                         parent[ra] = rb
