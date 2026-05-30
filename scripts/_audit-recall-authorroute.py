@@ -145,6 +145,23 @@ def main():
         print(f"{v}(著者有 {a:,}) → 著者経由回収 {rc:,} ({rc*100//max(a,1)}%)")
     print(f"★合計回収可能: {len(recovered):,}")
 
+    # 天井分析: NO_MATCH(著者有)未回収の内訳 = 著者がAniListに居るか
+    author_present = author_absent = 0
+    with TSV.open(encoding="utf-8") as f:
+        for r in csv.DictReader(f, delimiter="\t"):
+            if r["verdict"] != "NO_MATCH": continue
+            s3auth = [a for a in (r["s3_authors"] or "").split("|") if a.strip()]
+            if not s3auth: continue
+            sforms = set()
+            for a in s3auth: sforms |= author_forms(a)
+            if any(fm in author_works for fm in sforms):
+                author_present += 1
+            else:
+                author_absent += 1
+    print(f"\n=== 天井分析(NO_MATCH 著者有) ===")
+    print(f"  著者がAniListに実在: {author_present:,}  ← 題正規化改善で更に回収余地")
+    print(f"  著者もAniListに無い: {author_absent:,}  ← 真にAniList未収録(回収不可)")
+
     with open(".cache/recall-authorroute.tsv", "w", encoding="utf-8") as f:
         f.write("verdict\ts3_title\ts3_authors\ta_native\ta_romaji\ta_year\n")
         for row in recovered:
