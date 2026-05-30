@@ -13,7 +13,7 @@
 - [x] D. 種a データ拡充テスト(100件全項目)→ 再dump推奨フィールド確定
 - [~] D. 全件 re-dump(高価値項目)= 実行中(background)
 - [x] A. S180 誤マッチ率 実測 + 失敗パターン分類 → **FP率 0.1〜0.3%、 S180安全**
-- [ ] C. slug 正確性監査(種aマッチ×slugソース突合)
+- [x] C. slug 正確性監査 → **カタカナ英語綴り是正 5,299件 + 衝突4,523群 + 生成バグ**
 - [ ] B. recall(著者経由23,304 / DISPLACED3,298 / 正規化)
 - [ ] 今後の作業推奨テキスト
 
@@ -100,3 +100,44 @@ averageScore/favourites/chapters/isLicensed 追加、 出力 `anilist-manga-dump
    role に限定(Translator/Letterer 除外)。 翻訳者混入が偽MISMATCH源。
 3. **真FPガード**: 同題+著者が真に別(正規化後も)+巻数で確認できない → 保留/減点
    (パンドラ・ジュエルペット型)。
+
+---
+
+## C. slug(フォルダ名)正確性 監査
+
+ツール: `scripts/_slug-prototype-audit.py`(title_kana_segmented → pykakasi ヘボン slug を
+全76,435件で試作 → カバレッジ/衝突/種a romaji 突合)。
+
+### 前提の発見
+現 `makeSlug`(group-into-series.ts)= **display(漢字含む)を wanakana で romaji 化**。
+wanakana は漢字非対応 → 漢字題で破綻。 既存42 slug は旧「英語名優先」or 手動由来。
+**CLAUDE.md 新規則(title_kana 起点ヘボン + カタカナは元綴り)は未実装**。
+→ 全件 slug 生成器を新規則で作り直す必要(本番未着手の領域)。
+
+### 試作の結果
+- **カバレッジ: 76,417 / 76,435(99.98%)** が title_kana からヘボン slug 生成可(空18=外国残渣)。
+- **字種分布**: 漢字含む 66% / カタカナ主体 13% / ひらがな 9% / 英字のみ 5% / 数字 4%。
+- **種a romaji 突合: 一致44% / 不一致55%(18,965)**。 ★不一致の正体を精査 → **大半は読み崩れでなく系統差**:
+
+| 不一致の型 | 例 | 意味 |
+|---|---|---|
+| **カタカナ外来語の英語化** | アーマ `aama`→**Armor** / ベアー→**Bear** / サックス→**Sax** / ナイトブラッド→**Night Blood** | ★CLAUDE.md規則#4そのもの。 種aが正しい元綴りを示す = **slug是正の最大レバー** |
+| ヘボン表記の流儀差 | maou-sama↔maousama / を=wo↔o / nichijou-kei | 一貫方針を決めれば解消(崩れではない) |
+| 真の誤マッチ露見 | まんがサイエンス↔Wagahai wa Robot de Aru | A の FP と同根(少数) |
+
+### ★最大の slug 改善 = カタカナ外来語の英語綴り是正
+- **カタカナ主体 title 10,930件、 うち48%(5,299)が種aマッチ有** = 英語綴りを取得でき **slug を正しい元綴りに是正可能**(aama→armor, beruseruku→berserk 型)。
+- 残り52%は種a無し → ヘボン fallback(規則通り)。
+
+### slug 衝突 = 4,523群 / 10,648 entry(要対処)
+`.cache/slug-proto-collisions.tsv`。 内訳:
+- **真の同名異作品**(日本の歴史×31 / 三国志×10 / 源氏物語×13)→ CLAUDE.md の `-姓+年` suffix 規則が必要
+- **merge 候補**(まんがグリム童話×11 等の長期巻物)→ 本来 series-merge で統合されるべき分裂
+- **★生成バグ**: `daito-comics-tlshiriizu`×21 = imprint ラベル「ダイトーコミックスTLシリーズ」から slug 生成 = title でなく副題/レーベルを拾っている → 要修正
+- **誤併合**: `joker`×11 に 女〔女咼〕 等 別字が混入 = 別表記の取り違え
+
+### C から導かれる改善(※提案、 本番未適用)
+1. slug 生成を **title_kana_segmented 起点ヘボン**に作り直す(現 display 起点は漢字破綻)
+2. **カタカナ外来語は種a english/romaji の元綴りを採用**(5,299件是正可、 音写フィルタで判定)
+3. 衝突 4,523群に **`-姓+年` 自動 suffix**(主版=巻数多/古い を無印)
+4. 副題/imprint ラベルからの誤生成を除外(daito型バグ)
