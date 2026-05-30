@@ -99,40 +99,43 @@ def load_merge_edition_types() -> set[int]:
 
 
 SUPP_YML = ROOT / "data" / "seeds" / "volumes-supplement.yml"
+# NDL 自動登録分 (= 種4 auto、 scripts/_register-seed4-ndl.py)。 手動版と両方 load。
+SUPP_AUTO_YML = ROOT / "data" / "seeds" / "volumes-supplement-auto.yml"
 
 def load_volumes_supplement(con: sqlite3.Connection) -> dict[int, list[dict]]:
-    """volumes-supplement.yml → {sid: [補完 vol dict, ...]} dict 構築。
+    """volumes-supplement(.yml + -auto.yml) → {sid: [補完 vol dict, ...]} dict 構築。
     series_keys (= 種2 series.series_key) と qid で 該当 sid を 引く。"""
-    if not SUPP_YML.exists():
-        return {}
     cur = con.cursor()
     out: dict[int, list[dict]] = {}
-    with SUPP_YML.open(encoding="utf-8") as f:
-        data = _yload(f) or {}
-    for entry in (data.get("volumes") or []):
-        # 紐付き sid 解決
-        sids: set[int] = set()
-        for sk in (entry.get("series_keys") or []):
-            for r in cur.execute("SELECT id FROM series WHERE series_key=?", (sk,)).fetchall():
-                sids.add(r[0])
-        qid = entry.get("qid")
-        if qid:
-            for r in cur.execute("SELECT id FROM series WHERE qid=?", (qid,)).fetchall():
-                sids.add(r[0])
-        if not sids:
+    for path in (SUPP_YML, SUPP_AUTO_YML):
+        if not path.exists():
             continue
-        vol_dict = {
-            "number": entry["number"],
-            "volume_label": None,
-            "isbn13": entry.get("isbn13"),
-            "release_date": entry.get("release_date"),
-            "cover_url": None,
-            "asin": None,
-            "_edition_type": entry.get("edition_type") or "standard",
-            "_imprint": entry.get("publisher") or "",
-        }
-        for sid in sids:
-            out.setdefault(sid, []).append(vol_dict)
+        with path.open(encoding="utf-8") as f:
+            data = _yload(f) or {}
+        for entry in (data.get("volumes") or []):
+            # 紐付き sid 解決
+            sids: set[int] = set()
+            for sk in (entry.get("series_keys") or []):
+                for r in cur.execute("SELECT id FROM series WHERE series_key=?", (sk,)).fetchall():
+                    sids.add(r[0])
+            qid = entry.get("qid")
+            if qid:
+                for r in cur.execute("SELECT id FROM series WHERE qid=?", (qid,)).fetchall():
+                    sids.add(r[0])
+            if not sids:
+                continue
+            vol_dict = {
+                "number": entry["number"],
+                "volume_label": None,
+                "isbn13": entry.get("isbn13"),
+                "release_date": entry.get("release_date"),
+                "cover_url": None,
+                "asin": None,
+                "_edition_type": entry.get("edition_type") or "standard",
+                "_imprint": entry.get("publisher") or "",
+            }
+            for sid in sids:
+                out.setdefault(sid, []).append(vol_dict)
     return out
 
 

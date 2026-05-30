@@ -44,6 +44,7 @@ AUTO_MERGE_JSON = Path("data/seeds/series-merge-auto.json")  # 案A 著者集合
 SEED3_YML = Path("data/seeds/series-supplement-v2.yml")
 SEED3_CACHE = Path(".cache/seed3-keys.pkl")
 SUPP_YML = Path("data/seeds/volumes-supplement.yml")
+SUPP_AUTO_YML = Path("data/seeds/volumes-supplement-auto.yml")  # NDL自動登録分 (種4 auto)
 OUT_CSV = Path(".cache/volume-gaps.csv")
 OUT_TOP = Path(".cache/volume-gaps-top.txt")
 TOP_N = 100
@@ -441,10 +442,13 @@ def main() -> None:
     # ---- 種4 = volumes-supplement.yml load + 補完 ----
     n_supp_applied = 0
     n_supp_unmatched = 0
-    if SUPP_YML.exists() and yaml is not None:
-        with SUPP_YML.open("r", encoding="utf-8") as f:
-            supp_data = yaml.safe_load(f) or {}
-        supp_records = supp_data.get("volumes", []) or []
+    supp_records = []
+    if yaml is not None:
+        for _p in (SUPP_YML, SUPP_AUTO_YML):
+            if _p.exists():
+                with _p.open("r", encoding="utf-8") as f:
+                    supp_records += (yaml.safe_load(f) or {}).get("volumes", []) or []
+    if supp_records:
         # series_key → sid mapping
         sk_to_sids: dict[str, list[int]] = {}
         for sr in series_rows:
