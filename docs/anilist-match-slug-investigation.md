@@ -17,7 +17,8 @@
 
 ## 進捗サマリ(随時更新)
 - [x] D. 種a データ拡充テスト(100件全項目)→ 再dump推奨フィールド確定
-- [~] D. 全件 re-dump(高価値項目)= 実行中(background)
+- [x] D. 全件 re-dump 完了 = **104,887件**(popularity99%/description77%、 `anilist-manga-dump-v3.jsonl.gz` 32MB)
+- [x] popularity tie-break 実証(曖昧群74%が人気で裁定可)
 - [x] A. S180 誤マッチ率 実測 + 失敗パターン分類 → **FP率 0.1〜0.3%、 S180安全**
 - [x] C. slug 正確性監査 → **カタカナ英語綴り是正 5,299件 + 衝突4,523群 + 生成バグ**
 - [x] B. recall(著者経由)→ **+3,815件回収可(精度~80%)、 目標44.5%→~50-52%**
@@ -277,3 +278,28 @@ NO_MATCH(著者有 36,349)の内訳:
 → **マッチ率の天井 ≈ 52-55%**。 MADB の同人/超ニッチ/古書/4コマ劇場 等は AniList が
 そもそも収録していないため、 100%には原理的に届かない。 現実的目標は **~52%(+6,659回収)**、
 題正規化で +α。 「未マッチ=不良」ではなく「AniList 非収録」が相当数を占めると理解すべき。
+
+---
+
+# 夜間調査 完了サマリ(2026-05-31)
+
+全ストリーム調査完了。 **実データ(種2/種3/本番)は一切変更せず**、 matcher 実験・分析・
+新dataファイル取得のみ。 成果物:
+
+**新規ツール(scripts/)**: `_anilist-fulltest-100.py`(全項目テスト) / `_anilist-dump-v3.py`
+(再dump) / `_audit-s180-fp.py`(FP監査) / `_slug-prototype-audit.py`(slug試作) /
+`_audit-recall-authorroute.py`(著者経由recall)。
+
+**新規data(.cache/、 既存不変)**: `anilist-manga-dump-v3.jsonl.gz`(104,887件・popularity等付き) /
+各 audit TSV。
+
+**結論(優先順)**:
+1. **S180 は安全**(FP<0.3%)→ anilist_id 結線を即実行可(productionization 土台)。
+2. **マッチ +6,659 回収可**(★DISPLACED 81%)→ 44.5%→~52%(精度保持)。 著者正規化改良
+   (romaji↔カナ/翻訳者除外)+ DISPLACED 回収が最も確実。
+3. **slug は新規則で作り直し**が必要(現生成器は漢字破綻)。 カタカナ外来語の英語綴り是正
+   5,299件 + 衝突 4,523群の suffix。 ★slug 適用は要 GO(rename 困難)。
+4. **popularity tie-break 有効**(曖昧群74%判別可)→ 再dump 済データで実装可能。
+
+**これ以上の matcher 自動改善は、 v9 本体への適用(=結果が live に反映)を伴うため、
+朝のユーザ承認待ち**(調査フェーズの限界点)。 → 推奨セクションの「朝イチ判断3点」へ。
