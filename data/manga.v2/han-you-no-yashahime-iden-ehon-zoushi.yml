@@ -8,11 +8,11 @@ year_started: 2022
 year_ended: 2025
 status: completed
 authors:
-- name: 高橋留美子
-  role: writer_artist
 - name: 椎名高志
-  role: writer_artist
-original_authors: []
+  role: artist
+original_authors:
+- name: 高橋留美子
+  role: writer
 publisher: shogakukan
 magazine: null
 demographic: shounen
