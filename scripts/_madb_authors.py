@@ -52,14 +52,17 @@ def load_agent_master(path) -> dict:
 # ---------------------------------------------------------------------------
 # 役割タグ → role 分類
 # ---------------------------------------------------------------------------
+# キャラクター原案/デザイン (= 創作クレジット、 原作側扱い)。 editorial の「デザイン」
+# より先に判定して [キャラクターデザイン] が編集扱い除外されるのを防ぐ (= 半妖 高橋留美子)。
+_CHARDESIGN_RE = re.compile(r"キャラクター(デザイン|原案|設定)|キャラ原案|メインキャラクター")
 # 著者から除外する役割 (= 編集/制作/装丁/企画 等の非創作クレジット)
 _EDITORIAL_RE = re.compile(
     r"編|協力|企画|監修|装[丁画幀]|デザイン|制作|DTP|ブックデザイン|カバー|翻訳|構成・編|編著"
 )
-# 作画系 (= 企画 を誤検出しないよう 画 単独/作画/漫画 等を明示)
-_ARTIST_RE = re.compile(r"作画|漫画|まんが|マンガ|劇画|作・画|画$|^画$|・画")
+# 作画系 (= 企画 を誤検出しないよう 画 単独/作画/漫画 等を明示)。 絵/イラスト/アーティスト 追加。
+_ARTIST_RE = re.compile(r"作画|漫画|まんが|マンガ|劇画|作・画|画$|^画$|・画|^絵$|イラスト|アーティスト")
 # 原作系
-_STORY_ORIGINAL_RE = re.compile(r"原作|原案|ストーリー|脚本|シナリオ|^作$|^文$|構成")
+_STORY_ORIGINAL_RE = re.compile(r"原作|原案|ストーリー|脚本|脚色|シナリオ|^作$|^文$|構成|原著")
 
 
 def _norm_name(s: str) -> str:
@@ -70,6 +73,8 @@ def _classify_tag(tag: str) -> str:
     """役割タグ文字列 → 'editorial' / 'artist' / 'story' / 'plain'。"""
     if not tag:
         return "plain"
+    if _CHARDESIGN_RE.search(tag):
+        return "story"  # キャラ原案/デザイン = 創作 = 原作側 (editorial より優先)
     if _EDITORIAL_RE.search(tag):
         return "editorial"
     if _ARTIST_RE.search(tag):
@@ -228,10 +233,16 @@ def resolve_authors(record, agent, name_to_qid, fallback_names_fn=None) -> list:
 
 _ROLE_RANK = {"artist": 0, "writer_artist": 1, "original_author": 2}
 
+# union 時の role 統合専用 優先度。 ★ generic な writer_artist を最下位にして
+# specific (artist/original_author) を勝たせる (= 半妖: vols9-10 のタグ無し
+# writer_artist が vols1-7 の original_author を上書きする退行を防ぐ)。
+# _ROLE_RANK (pick_primary/series_key 用) は不変 = series_key への影響なし。
+_MERGE_PRI = {"artist": 0, "original_author": 1, "writer_artist": 2}
+
 
 def _merge_role(a: str, b: str) -> str:
-    """同一人物が複数役割タグを持つ場合の代表 role (= artist 優先)。"""
-    return a if _ROLE_RANK.get(a, 9) <= _ROLE_RANK.get(b, 9) else b
+    """同一人物が複数役割タグを持つ場合の代表 role。 artist > original_author > writer_artist。"""
+    return a if _MERGE_PRI.get(a, 9) <= _MERGE_PRI.get(b, 9) else b
 
 
 def union_authors(authors_iter) -> list:
