@@ -66,12 +66,27 @@ def main():
                 s.add(r[0])
         return s
 
+    def isbn_norm(s):
+        return re.sub(r"[^0-9X]", "", str(s or "").upper())
+
+    # ★ 種2(db)の全 ISBN (= 既存ISBN なら別クラスタに実在 = 取込もれでない、 除外)
+    db_isbns = {isbn_norm(r[0]) for r in
+                c.execute("SELECT isbn13 FROM volumes WHERE isbn13 IS NOT NULL")}
+
     entries = []
     pending = []
-    n_ok = n_bind = n_dup = 0
+    n_ok = n_bind = n_dup = n_exist = 0
     for d in drafts:
         keys = d.get("series_keys") or []
         num = d["number"]
+        ib = isbn13(d.get("isbn13"))
+        # ★ ISBN が既に種2にある = 別クラスタに実在(表記揺れ/未統合) → 取込もれでない
+        if isbn_norm(ib) in db_isbns:
+            n_exist += 1
+            pending.append({"title": d["title"], "number": num, "isbn13": ib,
+                            "reason": "種2に既存ISBN(別クラスタ=未統合/表記揺れ、 取込もれでない)",
+                            "source": "ndl"})
+            continue
         sids = sids_for(keys)
         if not sids:
             n_bind += 1
@@ -120,8 +135,8 @@ def main():
                                 "reason": "NDL未確認 (実在不明/取込もれ候補)", "source": "ndl-miss"})
 
     print(f"=== 種4 NDL登録 ===", file=sys.stderr)
-    print(f"  ドラフト {len(drafts)} / 登録OK {n_ok} / bind不可 {n_bind} / 重複 {n_dup}", file=sys.stderr)
-    print(f"  pending (未確認NDL miss {n_miss} + validate失敗 {n_bind + n_dup}) = {len(pending)}", file=sys.stderr)
+    print(f"  ドラフト {len(drafts)} / 登録OK {n_ok} / 種2に既存ISBN {n_exist} / bind不可 {n_bind} / 重複 {n_dup}", file=sys.stderr)
+    print(f"  pending (NDL miss {n_miss} + 種2既存 {n_exist} + bind/重複 {n_bind + n_dup}) = {len(pending)}", file=sys.stderr)
 
     if not APPLY:
         print("\n(--apply で書き込み)", file=sys.stderr)
