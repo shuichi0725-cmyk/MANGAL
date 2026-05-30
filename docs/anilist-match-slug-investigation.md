@@ -68,6 +68,14 @@ chapters / externalLinks / characters は費用対効果低く優先度下げ。
 → 既存 dump を保持したまま新ファイルへ再取得を実行(下記 B/C の照合に反映)。
 ツール: `scripts/_anilist-dump-v3.py`(v2 流用 + description/popularity/meanScore/
 averageScore/favourites/chapters/isLicensed 追加、 出力 `anilist-manga-dump-v3.jsonl.gz`)。
+※AniList 一時 HTTP 500 で中断 → retry に 500 追加(commit d2c4c5f)+ `--resume` で続行。
+
+### popularity tie-break の有効性(部分dump 15,631で実証)
+同名(title_key 一致)が2件以上の**曖昧マッチ群 273**:
+- **74%(204件)が「最人気が2位の2倍以上」= popularity で明確に裁定可能**。
+- 人気差(1位-2位)中央値 85。
+→ **popularity は同名曖昧・DISPLACED の tie-break に有効**(Tier3 推奨を裏付け)。
+全件 dump 完了後は同名群が ~6倍に増えるが、 74% の判別率はスケールしても保たれる見込み。
 
 ---
 
