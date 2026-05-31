@@ -44,8 +44,9 @@ export default function HomeClient({ data }: Props) {
           <h1 className="text-2xl md:text-3xl font-bold tracking-tight">
             日本の漫画から探す
           </h1>
-          <p className="text-sm text-black/60 mt-1">
-            年・著者・出版社・分野・ジャンルで絞り込めます。 全 {data.manga.length} 作品中 {filtered.length} 件表示。
+          <p className="text-sm text-ink/60 mt-1">
+            年・著者・出版社・分野・ジャンルで絞り込めます。 全 {data.manga.length} 作品中{" "}
+            <span className="font-semibold text-ink/80 tabular-nums">{filtered.length}</span> 件表示。
           </p>
         </div>
         <div className="md:w-96">
@@ -57,10 +58,10 @@ export default function HomeClient({ data }: Props) {
 
       <button
         type="button"
-        className="md:hidden mb-4 px-3 py-2 text-sm rounded border border-black/15 w-full"
+        className="tactile-chip md:hidden mb-4 px-3 py-2.5 text-sm font-medium rounded-card w-full active:scale-[0.99] transition"
         onClick={() => setOpen((v) => !v)}
       >
-        {open ? "フィルタを閉じる" : "フィルタを開く"}
+        {open ? "✕ フィルタを閉じる" : "⚙ フィルタで絞り込む"}
       </button>
 
       <div className="grid md:grid-cols-[240px_1fr] gap-6">

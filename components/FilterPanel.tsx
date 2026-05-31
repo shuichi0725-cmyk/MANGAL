@@ -79,7 +79,7 @@ export default function FilterPanel({
         <select
           value={state.sort}
           onChange={(e) => update({ sort: e.target.value as SortKey })}
-          className="w-full rounded border border-[var(--color-line)] px-2 py-1"
+          className="w-full rounded-card border border-[var(--color-line)] px-2.5 py-1.5 transition focus:outline-none focus:border-[var(--color-accent)]"
         >
           {SORT_OPTIONS.map((o) => (
             <option key={o.key} value={o.key}>
@@ -101,7 +101,7 @@ export default function FilterPanel({
             onChange={(e) =>
               update({ yearMin: e.target.value ? Number(e.target.value) : null })
             }
-            className="w-20 rounded border border-[var(--color-line)] px-2 py-1"
+            className="w-20 rounded-card border border-[var(--color-line)] px-2 py-1 transition focus:outline-none focus:border-[var(--color-accent)]"
           />
           <span className="text-ink/50">〜</span>
           <input
@@ -114,7 +114,7 @@ export default function FilterPanel({
             onChange={(e) =>
               update({ yearMax: e.target.value ? Number(e.target.value) : null })
             }
-            className="w-20 rounded border border-[var(--color-line)] px-2 py-1"
+            className="w-20 rounded-card border border-[var(--color-line)] px-2 py-1 transition focus:outline-none focus:border-[var(--color-accent)]"
           />
         </div>
         <input
@@ -216,7 +216,7 @@ export default function FilterPanel({
               authors: Array.from(e.target.selectedOptions, (o) => o.value),
             })
           }
-          className="w-full rounded border border-[var(--color-line)] px-2 py-1 h-32"
+          className="w-full rounded-card border border-[var(--color-line)] px-2.5 py-1.5 h-32 transition focus:outline-none focus:border-[var(--color-accent)]"
         >
           {authorOptions.map((a) => (
             <option key={a} value={a}>

@@ -46,6 +46,17 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+/* フォーム部品をブランド色に + 触感に馴染ませる */
+input[type="checkbox"],
+input[type="range"] {
+  accent-color: var(--color-accent);
+}
+select,
+input[type="number"],
+input[type="search"] {
+  background-color: var(--color-surface);
+}
+
 @layer utilities {
   /* 押せる感: 面 + 境界 + 柔らかい影 + hover浮き + press沈み */
   .tactile {
