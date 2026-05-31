@@ -48,6 +48,24 @@ MERGE_YML = ROOT / "data" / "seeds" / "series-merge.yml"
 # (= 約1万 group の PyYAML パースは遅い、 json.load は <1秒)。 hand yaml と両方 load し
 # 同 sid は hand 版優先。 docs/series-fragmentation-analysis.md。
 AUTO_MERGE_JSON = ROOT / "data" / "seeds" / "series-merge-auto.json"
+ADULT_OVERRIDES = ROOT / "data" / "seeds" / "adult-overrides.yml"
+
+
+def _load_adult_overrides() -> set[str]:
+    """成人判定 手動 override (= force 非adult の series_key 集合)。
+    作者signal単独の誤爆を種aで全年齢確認した分 (Phase A、 純粋追加・種2不変)。"""
+    if not ADULT_OVERRIDES.exists():
+        return set()
+    try:
+        with ADULT_OVERRIDES.open(encoding="utf-8") as f:
+            data = _yload(f) or {}
+    except Exception:
+        return set()
+    out = set()
+    for o in data.get("overrides", []) or []:
+        if isinstance(o, dict) and o.get("force_adult") is False and o.get("series_key"):
+            out.add(str(o["series_key"]))
+    return out
 
 # --dry-run = 別 dir に出力 (= 既存上書きしない、 diff 比較用)
 if "--dry-run" in sys.argv:
@@ -354,13 +372,27 @@ def build_parent_map(con: sqlite3.Connection) -> dict[int, int]:
             pass
     cur = con.cursor()
     cur.row_factory = sqlite3.Row
-    cur.execute("""
-        SELECT s.id, s.qid, s.title, s.subtitle,
-               (SELECT COUNT(*) FROM volumes v JOIN editions e ON e.id=v.edition_id
-                WHERE e.series_id=s.id AND v.isbn13 IS NOT NULL) AS n_isbn
-        FROM series s
-        WHERE s.adult_score < 3
-    """)
+    # 成人判定 手動 override (= adult_score>=3 でも force 非adult で本番採用)。
+    #   data/seeds/adult-overrides.yml = 作者signal単独誤爆を種aで全年齢確認した分 (Phase A)。
+    #   純粋追加 only / 種2 不変 / 再build耐性。
+    _ovr = _load_adult_overrides()
+    if _ovr:
+        ph = ",".join("?" * len(_ovr))
+        cur.execute(f"""
+            SELECT s.id, s.qid, s.title, s.subtitle,
+                   (SELECT COUNT(*) FROM volumes v JOIN editions e ON e.id=v.edition_id
+                    WHERE e.series_id=s.id AND v.isbn13 IS NOT NULL) AS n_isbn
+            FROM series s
+            WHERE s.adult_score < 3 OR s.series_key IN ({ph})
+        """, sorted(_ovr))
+    else:
+        cur.execute("""
+            SELECT s.id, s.qid, s.title, s.subtitle,
+                   (SELECT COUNT(*) FROM volumes v JOIN editions e ON e.id=v.edition_id
+                    WHERE e.series_id=s.id AND v.isbn13 IS NOT NULL) AS n_isbn
+            FROM series s
+            WHERE s.adult_score < 3
+        """)
     all_series = [dict(r) for r in cur.fetchall()]
     by_qid = defaultdict(list)
     for s in all_series:

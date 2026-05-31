@@ -1,0 +1,76 @@
+# 成人判定 手動 override (= force 非adult)。 promote が adult_score>=3 でも本番採用。
+# 由来: 作者signal(wikipedia_adult_mangaka_list)単独の誤爆を 種aで全年齢確認 (Phase A)。
+# 形式: series_key 単位。 純粋追加 only。 種2/adult_score は不変。
+overrides:
+  - series_key: 'name:KAY|name:Fate/stay night コミックアンソロジー'
+    force_adult: false
+    reason: author_signal_only_anilist_allages
+    evidence: "adult_score=4(作者signalのみ) / 種a id=40490 Fate/stay nightコミックアンソロジー = 全年齢"
+    title: 'Fate/stay night コミックアンソロジー'
+    added_at: "2026-05-31"
+  - series_key: 'name:ういんどみるOasis|name:祝福のカンパネラ'
+    force_adult: false
+    reason: author_signal_only_anilist_allages
+    evidence: "adult_score=3(作者signalのみ) / 種a id=46381 祝福のカンパネラ = 全年齢"
+    title: '祝福のカンパネラ'
+    added_at: "2026-05-31"
+  - series_key: 'name:のなかたま|name:多田依さんはホメられない!'
+    force_adult: false
+    reason: author_signal_only_anilist_allages
+    evidence: "adult_score=3(作者signalのみ) / 種a id=117635 多田依さんはホメられない! = 全年齢"
+    title: '多田依さんはホメられない!'
+    added_at: "2026-05-31"
+  - series_key: 'name:坂口安吾|name:桜の森の満開の下 夜長姫と耳男'
+    force_adult: false
+    reason: author_signal_only_anilist_allages
+    evidence: "adult_score=3(作者signalのみ) / 種a id=202443 夜長姫と耳男 = 全年齢"
+    title: '桜の森の満開の下 夜長姫と耳男'
+    added_at: "2026-05-31"
+  - series_key: 'qid:Q11270744|name:Change!'
+    force_adult: false
+    reason: author_signal_only_anilist_allages
+    evidence: "adult_score=4(作者signalのみ) / 種a id=34671 チェンジ! = 全年齢"
+    title: 'Change!'
+    added_at: "2026-05-31"
+  - series_key: 'qid:Q11364438|name:TANABOTA'
+    force_adult: false
+    reason: author_signal_only_anilist_allages
+    evidence: "adult_score=3(作者signalのみ) / 種a id=52079  = 全年齢"
+    title: 'TANABOTA'
+    added_at: "2026-05-31"
+  - series_key: 'qid:Q11369459|name:異世界ナンパ'
+    force_adult: false
+    reason: author_signal_only_anilist_allages
+    evidence: "adult_score=3(作者signalのみ) / 種a id=138167 異世界ナンパ〜無職ひきこもりのオレがスキルを駆使して猫人間や = 全年齢"
+    title: '異世界ナンパ'
+    added_at: "2026-05-31"
+  - series_key: 'qid:Q11504129|name:ヒメカに、僕は。-ヒメカニボクハ-'
+    force_adult: false
+    reason: author_signal_only_anilist_allages
+    evidence: "adult_score=3(作者signalのみ) / 種a id=126254 ヒメカに、僕は。 = 全年齢"
+    title: 'ヒメカに、僕は。-ヒメカニボクハ-'
+    added_at: "2026-05-31"
+  - series_key: 'qid:Q11516741|name:オトコの娘コミックアンソロジー'
+    force_adult: false
+    reason: author_signal_only_anilist_allages
+    evidence: "adult_score=4(作者signalのみ) / 種a id=94134 オトコの娘コミックアンソロジー ～小悪魔編～ = 全年齢"
+    title: 'オトコの娘コミックアンソロジー'
+    added_at: "2026-05-31"
+  - series_key: 'qid:Q11635996|name:ロビンソンレター'
+    force_adult: false
+    reason: author_signal_only_anilist_allages
+    evidence: "adult_score=3(作者signalのみ) / 種a id=55256 ロビンソンレター = 全年齢"
+    title: 'ロビンソンレター'
+    added_at: "2026-05-31"
+  - series_key: 'qid:Q3786775|name:クロとマルコ'
+    force_adult: false
+    reason: author_signal_only_anilist_allages
+    evidence: "adult_score=3(作者signalのみ) / 種a id=61691 クロとマルコ = 全年齢"
+    title: 'クロとマルコ'
+    added_at: "2026-05-31"
+  - series_key: 'qid:Q863653|name:生徒会の日常'
+    force_adult: false
+    reason: author_signal_only_anilist_allages
+    evidence: "adult_score=3(作者signalのみ) / 種a id=64289 生徒会の日常 = 全年齢"
+    title: '生徒会の日常'
+    added_at: "2026-05-31"
