@@ -45,9 +45,16 @@
 
 1. **種1 取込** (= cm101.csv 取得 → 新 ISBN のみ追記、 既存行不変)
 2. **種2 差分反映** (= fetch-madb incremental、 INSERT only、 削除禁止)
-3. **種3 diff 元生成** (= select-supplement-diff で未 fill key list 出力)
-4. **AI fill batch loop** = `MEMORY.md` 末尾 「種3 fill 作り方 (= 再利用 guide)」 セクションの protocol を厳密に踏襲 (= dict 形式 JSON、 100 entry/batch、 `_apply-fills.ts` 適用、 PUA 文字混入時は Python 経由で生キー書き出し、 JST 時刻付き block 単位報告、 commit + push)
-5. **最終 summary** (= 全件数 + 削除 0 確認 + 次月予測)
+3. **派生層 + matcher + 本番 再生成** = `python scripts/intake.py --run`
+   (= roles→merge→seed4→detect → **matcher v9→v13→v14** → **adult_us map** →
+    trailing → **promote(adult_us付与)**。 種2/種a 更新で全派生が古くならないよう一括再生成。
+    ※matcher は ~20分。 終了後 git diff で本番yml確認 → commit/push)
+4. **種a productionization の種3書込** (= deliberate、 match-v14 確定後):
+   - **en-fill** = `_apply-en-fills-surgical.py`(S180×種3_en空 の AniList英題を `alternative_titles.en` に純粋追加。 `.new`検証→置換)
+   - (将来) **anilist_id 結線** = 同手法で id/synonyms/genres_anilist を純粋追加
+5. **種3 diff 元生成** (= select-supplement-diff で未 fill key list 出力)
+6. **AI fill batch loop** = `MEMORY.md` 末尾 「種3 fill 作り方 (= 再利用 guide)」 セクションの protocol を厳密に踏襲 (= dict 形式 JSON、 100 entry/batch、 `_apply-fills.ts` 適用、 PUA 文字混入時は Python 経由で生キー書き出し、 JST 時刻付き block 単位報告、 commit + push)
+7. **最終 summary** (= 全件数 + 削除 0 確認 + 次月予測)
 
 ### 保護策 (= 5 層)
 
