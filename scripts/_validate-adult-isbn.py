@@ -62,8 +62,10 @@ def rakuten(isbn):
               "format": "json", "formatVersion": "2"}
     if RAKUTEN_ACCESS:
         params["accessKey"] = RAKUTEN_ACCESS
-    u = "https://app.rakuten.co.jp/services/api/BooksBook/Search/20170404?" + urllib.parse.urlencode(params)
-    d = _get(u, headers={"Referer": RAKUTEN_REFERER, "Origin": _origin(RAKUTEN_REFERER)})
+    # ★動作実績のあるホスト(fetch-rakuten.ts と同一)= openapi.rakuten.co.jp
+    u = "https://openapi.rakuten.co.jp/services/api/BooksBook/Search/20170404?" + urllib.parse.urlencode(params)
+    d = _get(u, headers={"Referer": RAKUTEN_REFERER, "Origin": _origin(RAKUTEN_REFERER),
+                         "Accept": "application/json"})
     if d.get("_err"):
         return (f"err:{d['_err']}", str(d.get("_body", ""))[:40])
     items = d.get("Items") or []
