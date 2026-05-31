@@ -11,12 +11,13 @@
      anilist_id 結線  (= 種3 純粋追加だが deliberate に実行。 match-v14 確定後)
    - NDL裏取りバッチ (_seed4-candidates --ndl)  (= 1時間級throttle、 別途)
 
-依存順序 (フル、 ★promote は adult_us map を読むので最後):
+依存順序 (フル、 ★promote は adult_us/enrich map を読むので最後):
    roles → merge → seed4 → detect
-   → match(v9) → match13 → merge14(=v14) → adultus → trailing
+   → match(v9) → match13 → merge14(=v14) → adultus → enrich → trailing
    → promote
    (★merge の partial-overlap統合が role を使うので role が先。
-    ★matcher v14 → adult_us map → promote が adult_us 付与。 ※matcher は遅い: ~20分)
+    ★matcher v14 → adult_us/enrich map → promote が adult_us + anilist_id/synonyms/
+    genres/tags 付与。 ※matcher は遅い: ~20分)
 
 安全策:
    - default = dry (計画表示のみ)。 --run で実行。
@@ -62,6 +63,8 @@ STAGES = [
         ["_merge-v14-best.py"], False),
     ("adultus", "anilist", "adult_us map 生成 (種a isAdult=米基準フラグ、 .cache/adult-us-map.json)",
         ["_build-adult-us-map.py"], False),
+    ("enrich",  "anilist", "AniList enrich map 生成 (anilist_id/synonyms/genres/tags、 本番埋込用)",
+        ["_build-anilist-enrich-map.py"], False),
     ("trailing","anilist", "末尾取込もれ再検出 (AniList総巻数 vs 種2max)",
         ["_audit-trailing-gaps.py"], False),
     # --- 本番再生成 (adult_us map を読むので ★最後) ---
