@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { yearStatusLabel } from "@/lib/format";
 import {
   primaryVolume,
@@ -7,7 +6,20 @@ import {
   type Manga,
   type Publisher,
 } from "@/lib/schema";
+import Card from "./ui/Card";
+import Badge from "./ui/Badge";
 import CoverImage from "./CoverImage";
+
+const STATUS_TONE: Record<string, "neutral" | "accent" | "warm"> = {
+  ongoing: "warm",
+  completed: "neutral",
+  hiatus: "neutral",
+};
+const STATUS_LABEL: Record<string, string> = {
+  ongoing: "連載中",
+  completed: "完結",
+  hiatus: "休載",
+};
 
 type Props = {
   manga: Manga;
@@ -39,24 +51,30 @@ export default function MangaCard({ manga, publishers, genres, demographics }: P
       : "");
 
   return (
-    <Link
-      href={`/manga/${manga.slug}`}
-      className="flex gap-3 px-4 py-3 hover:bg-black/[0.02] transition-colors"
-    >
-      {cover && (
-        <div className="relative w-16 aspect-[2/3] bg-black/5 rounded overflow-hidden shrink-0">
+    <Card href={`/manga/${manga.slug}`} className="flex gap-3 p-3">
+      <div className="relative w-16 aspect-[2/3] rounded-md overflow-hidden shrink-0 bg-[var(--color-surface-2)]">
+        {cover ? (
           <CoverImage src={cover} alt={`${manga.title} 1巻 表紙`} sizes="64px" />
-        </div>
-      )}
-      <div className="flex-1 min-w-0">
-        <p className="font-bold text-base leading-tight">{manga.title}</p>
-        {manga.subtitle && (
-          <p className="text-xs text-black/55 mt-0.5 line-clamp-1">{manga.subtitle}</p>
+        ) : (
+          <span className="flex h-full items-center justify-center text-xl text-ink/20" aria-hidden="true">
+            📖
+          </span>
         )}
-        <p className="text-xs text-black/65 mt-1.5 line-clamp-1">{authorLine}</p>
-        <p className="text-xs text-black/55 mt-0.5 line-clamp-1">{publisherName}</p>
-        <p className="text-xs text-black/45 mt-0.5">{yearStatusLabel(manga)}</p>
       </div>
-    </Link>
+      <div className="flex-1 min-w-0">
+        <div className="flex items-start gap-2">
+          <p className="font-bold text-base leading-tight flex-1 min-w-0">{manga.title}</p>
+          <Badge tone={STATUS_TONE[manga.status] ?? "neutral"} className="shrink-0 mt-0.5">
+            {STATUS_LABEL[manga.status] ?? manga.status}
+          </Badge>
+        </div>
+        {manga.subtitle && (
+          <p className="text-xs text-ink/55 mt-0.5 line-clamp-1">{manga.subtitle}</p>
+        )}
+        <p className="text-xs text-ink/65 mt-1.5 line-clamp-1">{authorLine}</p>
+        <p className="text-xs text-ink/55 mt-0.5 line-clamp-1">{publisherName}</p>
+        <p className="text-xs text-ink/45 mt-0.5">{yearStatusLabel(manga)}</p>
+      </div>
+    </Card>
   );
 }

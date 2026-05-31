@@ -2,6 +2,7 @@
 
 import { emptyFilterState, type FilterState, type SortKey } from "@/lib/filters";
 import type { DataBundle, StatusT } from "@/lib/schema";
+import { ChipButton } from "@/components/ui/Chip";
 
 type Props = {
   data: DataBundle;
@@ -61,7 +62,7 @@ export default function FilterPanel({
       <Section title="連載状態">
         <div className="flex flex-wrap gap-1.5">
           {(Object.keys(STATUS_LABELS) as StatusT[]).map((s) => (
-            <Chip
+            <ChipButton
               key={s}
               active={state.statuses.includes(s)}
               onClick={() =>
@@ -69,7 +70,7 @@ export default function FilterPanel({
               }
             >
               {STATUS_LABELS[s]}
-            </Chip>
+            </ChipButton>
           ))}
         </div>
       </Section>
@@ -78,7 +79,7 @@ export default function FilterPanel({
         <select
           value={state.sort}
           onChange={(e) => update({ sort: e.target.value as SortKey })}
-          className="w-full rounded border border-black/15 px-2 py-1"
+          className="w-full rounded border border-[var(--color-line)] px-2 py-1"
         >
           {SORT_OPTIONS.map((o) => (
             <option key={o.key} value={o.key}>
@@ -100,9 +101,9 @@ export default function FilterPanel({
             onChange={(e) =>
               update({ yearMin: e.target.value ? Number(e.target.value) : null })
             }
-            className="w-20 rounded border border-black/15 px-2 py-1"
+            className="w-20 rounded border border-[var(--color-line)] px-2 py-1"
           />
-          <span className="text-black/50">〜</span>
+          <span className="text-ink/50">〜</span>
           <input
             type="number"
             inputMode="numeric"
@@ -113,7 +114,7 @@ export default function FilterPanel({
             onChange={(e) =>
               update({ yearMax: e.target.value ? Number(e.target.value) : null })
             }
-            className="w-20 rounded border border-black/15 px-2 py-1"
+            className="w-20 rounded border border-[var(--color-line)] px-2 py-1"
           />
         </div>
         <input
@@ -137,13 +138,13 @@ export default function FilterPanel({
       <Section title="分野">
         <div className="flex flex-wrap gap-1.5">
           {data.demographics.map((d) => (
-            <Chip
+            <ChipButton
               key={d.key}
               active={state.demographics.includes(d.key)}
               onClick={() => update({ demographics: toggle(state.demographics, d.key) })}
             >
               {d.name}
-            </Chip>
+            </ChipButton>
           ))}
         </div>
       </Section>
@@ -153,7 +154,7 @@ export default function FilterPanel({
         right={
           <button
             type="button"
-            className="text-xs text-black/50 hover:text-black"
+            className="text-xs text-ink/50 hover:text-ink"
             onClick={() =>
               update({ genreMode: state.genreMode === "and" ? "or" : "and" })
             }
@@ -165,13 +166,13 @@ export default function FilterPanel({
       >
         <div className="flex flex-wrap gap-1.5">
           {data.genres.map((g) => (
-            <Chip
+            <ChipButton
               key={g.key}
               active={state.genres.includes(g.key)}
               onClick={() => update({ genres: toggle(state.genres, g.key) })}
             >
               {g.name}
-            </Chip>
+            </ChipButton>
           ))}
         </div>
       </Section>
@@ -215,7 +216,7 @@ export default function FilterPanel({
               authors: Array.from(e.target.selectedOptions, (o) => o.value),
             })
           }
-          className="w-full rounded border border-black/15 px-2 py-1 h-32"
+          className="w-full rounded border border-[var(--color-line)] px-2 py-1 h-32"
         >
           {authorOptions.map((a) => (
             <option key={a} value={a}>
@@ -223,13 +224,13 @@ export default function FilterPanel({
             </option>
           ))}
         </select>
-        <p className="text-[11px] text-black/45 mt-1">Ctrl/⌘ クリックで複数選択</p>
+        <p className="text-[11px] text-ink/45 mt-1">Ctrl/⌘ クリックで複数選択</p>
       </Section>
 
       <button
         type="button"
         onClick={() => setState({ ...emptyFilterState(), query: state.query })}
-        className="w-full text-xs px-3 py-2 rounded border border-black/15 hover:bg-black/5"
+        className="w-full text-xs px-3 py-2 rounded-card tactile-chip"
       >
         条件をリセット
       </button>
@@ -259,27 +260,3 @@ function Section({
   );
 }
 
-function Chip({
-  active,
-  onClick,
-  children,
-}: {
-  active: boolean;
-  onClick: () => void;
-  children: React.ReactNode;
-}) {
-  return (
-    <button
-      type="button"
-      onClick={onClick}
-      className={
-        "px-2.5 py-1 rounded-full text-xs border transition-colors " +
-        (active
-          ? "bg-[var(--color-accent)] text-white border-transparent"
-          : "border-black/15 hover:bg-black/5")
-      }
-    >
-      {children}
-    </button>
-  );
-}

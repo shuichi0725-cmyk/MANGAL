@@ -11,13 +11,13 @@ type Props = {
 export default function MangaGrid({ items, publishers, genres, demographics }: Props) {
   if (items.length === 0) {
     return (
-      <div className="py-20 text-center text-black/50">
+      <div className="py-20 text-center text-ink/50">
         条件に一致する作品がありません。
       </div>
     );
   }
   return (
-    <ul className="divide-y divide-black/10 border-y border-black/10">
+    <ul className="space-y-2">
       {items.map((m) => (
         <li key={m.slug}>
           <MangaCard

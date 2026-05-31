@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Card from "@/components/ui/Card";
 import type { DataBundle } from "@/lib/schema";
 
 type Props = { data: DataBundle };
@@ -118,25 +118,24 @@ export default function CategoryHub({ data }: Props) {
   if (categories.length === 0) return null;
 
   return (
-    <section className="mb-6">
-      <h2 className="text-xs font-semibold tracking-wider uppercase text-black/60 mb-2">
+    <section className="mb-7">
+      <h2 className="text-[11px] font-semibold tracking-[0.18em] uppercase text-ink/50 mb-3">
         カテゴリで探す
       </h2>
-      <ul className="grid grid-cols-4 gap-1.5">
+      <ul className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-6 gap-2.5">
         {categories.map((c) => (
           <li key={c.href}>
-            <Link
-              href={c.href}
-              className="flex flex-col items-center justify-center gap-0.5 rounded-md bg-black/[0.035] hover:bg-black/[0.08] px-1.5 py-2 transition-colors text-center"
-            >
-              <span className="text-sm leading-none">{c.icon}</span>
-              <span className="text-[11px] font-medium leading-tight mt-1">
-                {c.label}
+            <Card href={c.href} className="h-full px-2 py-3 text-center">
+              <span className="flex flex-col items-center justify-center gap-1.5">
+                <span className="text-xl leading-none" aria-hidden="true">
+                  {c.icon}
+                </span>
+                <span className="text-xs font-semibold leading-tight">{c.label}</span>
+                <span className="rounded-chip bg-[var(--color-surface-2)] px-1.5 py-0.5 text-[10px] font-medium leading-none text-ink/50">
+                  {c.count}
+                </span>
               </span>
-              <span className="text-[9px] text-black/45 leading-none mt-0.5">
-                {c.count}
-              </span>
-            </Link>
+            </Card>
           </li>
         ))}
       </ul>
