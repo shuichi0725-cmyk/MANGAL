@@ -2,6 +2,8 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import CoverImage from "@/components/CoverImage";
 import VolumeRow from "@/components/VolumeRow";
+import Badge from "@/components/ui/Badge";
+import { ChipLink } from "@/components/ui/Chip";
 import { yearStatusLabel } from "@/lib/format";
 import { loadAllManga } from "@/lib/loadData";
 import { primaryVolume } from "@/lib/schema";
@@ -49,12 +51,12 @@ export default async function MangaDetailPage({
 
   return (
     <div className="mx-auto max-w-4xl px-4 py-8">
-      <Link href="/" className="text-sm text-black/60 hover:text-black">
+      <Link href="/" className="text-sm text-ink/60 hover:text-ink">
         ← 一覧へ戻る
       </Link>
       <div className={`mt-6 grid gap-8 ${cover ? "md:grid-cols-[260px_1fr]" : ""}`}>
         {cover && (
-          <div className="relative aspect-[2/3] bg-black/5 rounded overflow-hidden">
+          <div className="relative aspect-[2/3] bg-[var(--color-surface-2)] rounded overflow-hidden">
             <CoverImage src={cover} alt={`${manga.title} 1巻 表紙`} sizes="260px" size="detail" />
           </div>
         )}
@@ -62,23 +64,25 @@ export default async function MangaDetailPage({
           <div className="flex items-start gap-3 flex-wrap">
             <h1 className="text-2xl md:text-3xl font-bold">{manga.title}</h1>
             {manga.anime_adapted && (
-              <span className="inline-block mt-2 px-2 py-0.5 text-[11px] font-semibold rounded bg-amber-100 text-amber-800 border border-amber-200">
-                アニメ化
-                {manga.anime_first_year ? ` ${manga.anime_first_year}` : ""}
+              <span className="mt-2">
+                <Badge tone="warm">
+                  アニメ化
+                  {manga.anime_first_year ? ` ${manga.anime_first_year}` : ""}
+                </Badge>
               </span>
             )}
           </div>
           {/* 副題 (= MADB の ` : ` 右側、 ない時は β 案で空白行を保持) */}
-          <p className="text-base text-black/75 mt-1 min-h-[1.5rem]">
+          <p className="text-base text-ink/75 mt-1 min-h-[1.5rem]">
             {manga.subtitle ?? " "}
           </p>
-          <p className="text-sm text-black/60 mt-1">
+          <p className="text-sm text-ink/60 mt-1">
             {manga.title_kana}
             {manga.subtitle_kana ? ` : ${manga.subtitle_kana}` : ""}
           </p>
 
           {manga.alternative_titles && (
-            <p className="text-xs text-black/55 mt-1.5">
+            <p className="text-xs text-ink/55 mt-1.5">
               {[
                 manga.alternative_titles.en,
                 manga.alternative_titles.fr,
@@ -91,13 +95,13 @@ export default async function MangaDetailPage({
             </p>
           )}
           {manga.synonyms && manga.synonyms.length > 0 && (
-            <p className="text-[11px] text-black/45 mt-1 leading-relaxed">
+            <p className="text-[11px] text-ink/45 mt-1 leading-relaxed">
               他言語・別名: {manga.synonyms.join(" / ")}
             </p>
           )}
 
           <dl className="mt-6 grid grid-cols-[6em_1fr] gap-y-1.5 text-sm">
-            <dt className="text-black/50">出版年</dt>
+            <dt className="text-ink/50">出版年</dt>
             <dd>
               <FilterLink
                 href={`/?yearMin=${manga.year_started}&yearMax=${manga.year_started}`}
@@ -105,7 +109,7 @@ export default async function MangaDetailPage({
                 {yearStatusLabel(manga)}
               </FilterLink>
             </dd>
-            <dt className="text-black/50">著者</dt>
+            <dt className="text-ink/50">著者</dt>
             <dd>
               {manga.authors.map((a, i) => (
                 <span key={a.name}>
@@ -118,7 +122,7 @@ export default async function MangaDetailPage({
             </dd>
             {manga.original_authors.length > 0 && (
               <>
-                <dt className="text-black/50">原作</dt>
+                <dt className="text-ink/50">原作</dt>
                 <dd>
                   {manga.original_authors.map((a, i) => (
                     <span key={a.name}>
@@ -133,7 +137,7 @@ export default async function MangaDetailPage({
                 </dd>
               </>
             )}
-            <dt className="text-black/50">出版社</dt>
+            <dt className="text-ink/50">出版社</dt>
             <dd>
               <FilterLink href={`/?publisher=${encodeURIComponent(manga.publisher)}`}>
                 {publisher?.name ?? manga.publisher}
@@ -141,7 +145,7 @@ export default async function MangaDetailPage({
             </dd>
             {magazine && (
               <>
-                <dt className="text-black/50">連載誌</dt>
+                <dt className="text-ink/50">連載誌</dt>
                 <dd>
                   <FilterLink href={`/?magazine=${encodeURIComponent(magazine.key)}`}>
                     {magazine.name}
@@ -149,14 +153,14 @@ export default async function MangaDetailPage({
                 </dd>
               </>
             )}
-            <dt className="text-black/50">分野</dt>
+            <dt className="text-ink/50">分野</dt>
             <dd>
               <FilterLink href={`/?demographic=${encodeURIComponent(manga.demographic)}`}>
                 {demographic?.name ?? manga.demographic}
               </FilterLink>
             </dd>
-            <dt className="text-black/50">ジャンル</dt>
-            <dd>
+            <dt className="text-ink/50 pt-1">ジャンル</dt>
+            <dd className="flex flex-wrap gap-1.5">
               {(() => {
                 // 種3 既存 ジャンル (= filter link 付き) + AniList 由来 (= filter なし) を 統合
                 const seenNames = new Set<string>();
@@ -196,34 +200,36 @@ export default async function MangaDetailPage({
                   seenNames.add(ja);
                   items.push({ name: ja, key: masterKey });
                 }
-                return items.map((it, i) => (
-                  <span key={it.name}>
-                    {i > 0 && " / "}
-                    {it.key ? (
-                      <FilterLink href={`/?genre=${encodeURIComponent(it.key)}`}>
-                        {it.name}
-                      </FilterLink>
-                    ) : (
-                      <span className="text-black/70">{it.name}</span>
-                    )}
-                  </span>
-                ));
+                return items.map((it) =>
+                  it.key ? (
+                    <ChipLink key={it.name} href={`/?genre=${encodeURIComponent(it.key)}`}>
+                      {it.name}
+                    </ChipLink>
+                  ) : (
+                    <span
+                      key={it.name}
+                      className="inline-flex items-center rounded-chip px-3 py-1.5 text-xs font-medium bg-[var(--color-surface-2)] border border-[var(--color-line)] text-ink/55"
+                    >
+                      {it.name}
+                    </span>
+                  ),
+                );
               })()}
             </dd>
           </dl>
 
           {manga.synopsis && (
-            <p className="mt-6 text-sm leading-relaxed text-black/80">{manga.synopsis}</p>
+            <p className="mt-6 text-sm leading-relaxed text-ink/80">{manga.synopsis}</p>
           )}
 
           {manga.anilist_id && (
-            <p className="mt-3 text-[11px] text-black/40">
+            <p className="mt-3 text-[11px] text-ink/40">
               ジャンル 補助データ:{" "}
               <a
                 href={`https://anilist.co/manga/${manga.anilist_id}`}
                 target="_blank"
                 rel="noopener nofollow"
-                className="underline decoration-dotted underline-offset-2 hover:text-black/60"
+                className="underline decoration-dotted underline-offset-2 hover:text-ink/60"
               >
                 AniList #{manga.anilist_id}
               </a>
@@ -232,7 +238,7 @@ export default async function MangaDetailPage({
 
           {manga.awards && manga.awards.length > 0 && (
             <div className="mt-6">
-              <p className="text-xs font-semibold text-black/70 mb-2">受賞歴</p>
+              <p className="text-xs font-semibold text-ink/70 mb-2">受賞歴</p>
               <ul className="flex flex-wrap gap-1.5">
                 {manga.awards.map((a) => (
                   <li
@@ -249,13 +255,13 @@ export default async function MangaDetailPage({
           <VolumeRow manga={manga} />
 
           {manga.wikidata_qid && (
-            <p className="mt-6 text-[11px] text-black/40">
+            <p className="mt-6 text-[11px] text-ink/40">
               データ参照:{" "}
               <a
                 href={`https://www.wikidata.org/wiki/${manga.wikidata_qid}`}
                 target="_blank"
                 rel="noopener nofollow"
-                className="underline decoration-dotted underline-offset-2 hover:text-black/60"
+                className="underline decoration-dotted underline-offset-2 hover:text-ink/60"
               >
                 Wikidata {manga.wikidata_qid}
               </a>

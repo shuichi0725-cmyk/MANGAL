@@ -26,7 +26,7 @@ export default function VolumeTile({ manga, volume, edition }: Props) {
   return (
     <div className="flex gap-3">
       {cover && (
-        <div className="relative w-20 aspect-[2/3] bg-black/5 rounded overflow-hidden shrink-0">
+        <div className="relative w-20 aspect-[2/3] bg-[var(--color-surface-2)] rounded overflow-hidden shrink-0">
           <CoverImage
             src={cover}
             alt={`${manga.title} ${label} 表紙`}
@@ -36,7 +36,7 @@ export default function VolumeTile({ manga, volume, edition }: Props) {
       )}
       <div className="flex-1 min-w-0">
         <p className="text-sm font-semibold leading-tight">{label}</p>
-        <p className="text-xs text-black/50 mt-0.5 leading-tight">
+        <p className="text-xs text-ink/50 mt-0.5 leading-tight">
           {date || "発売日未取得"}
         </p>
         {volume.asin && (
@@ -44,13 +44,13 @@ export default function VolumeTile({ manga, volume, edition }: Props) {
             manga={manga}
             volume={volume}
             ariaLabel={`${manga.title} ${editionLabel}${label} を Amazon で見る`}
-            className="inline-block mt-2 text-xs px-3 py-1 rounded bg-[var(--color-accent)] text-white hover:opacity-90"
+            className="inline-block mt-2 text-xs px-3 py-1.5 rounded-chip font-medium bg-[var(--color-accent)] text-white hover:opacity-90"
           >
             アマゾン
           </AffiliateLink>
         )}
         {volume.description && (
-          <p className="mt-2 text-xs text-black/70 leading-relaxed whitespace-pre-line">
+          <p className="mt-2 text-xs text-ink/70 leading-relaxed whitespace-pre-line">
             {volume.description}
           </p>
         )}
