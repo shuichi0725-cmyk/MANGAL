@@ -129,6 +129,7 @@ def surname_romaji(author):
 
 def main():
     d=pickle.load(PKL.open("rb"))
+    d_keys=set(e["key"] for e in d.values())
     # slug-gen-v1: key→(class, kana_seg, kana_slug, a_romaji_slug)
     v1={}
     with V1.open(encoding="utf-8") as f:
@@ -150,9 +151,23 @@ def main():
         meta[sk]=(vols or 0, fy or 9999)
     con.close()
 
-    ent=[]   # (key, title, base_slug, vols, year, author_surname)
+    # ★merge 適用: 1ページ1 slug。 merge group の代表 key(巻数最大)を rep に。
+    rep_of={}
+    mg=json.loads(Path("data/seeds/series-merge-auto.json").read_text(encoding="utf-8"))["merges"]
+    for g in mg:
+        keys=[k for k in g["merge_keys"] if k in d_keys]
+        if len(keys)<2: continue
+        rep=max(keys,key=lambda k:meta.get(k,(0,9999))[0])   # 巻数最大=代表
+        for k in keys: rep_of[k]=rep
+
+    ent=[]   # 代表 key のみ: (key, title, base_slug, vols, year, author_surname)
+    seen_rep=set()
     for e in d.values():
-        key=e["key"]; r=v1.get(key)
+        key=e["key"]
+        rep=rep_of.get(key,key)
+        if rep in seen_rep: continue          # 同一ページは1回だけ
+        seen_rep.add(rep)
+        r=v1.get(rep) or v1.get(key)
         if not r: continue
         cls=r["class"]; title=r["title"]; seg=r["kana_seg"]
         ks=r["kana_slug"]; ars=r["a_romaji_slug"]
@@ -163,9 +178,9 @@ def main():
         else:
             base = hybridize(ks,ars,title) or ks
         if not base: base=ks or phon(seg)
-        vols,year=meta.get(key,(0,9999))
-        sur=surname_romaji(a_auth.get(key,"")) or surname_romaji(author_of(key))
-        ent.append([key,title,base,vols,year,sur])
+        vols,year=meta.get(rep,(0,9999))
+        sur=surname_romaji(a_auth.get(rep,"")) or surname_romaji(author_of(rep))
+        ent.append([rep,title,base,vols,year,sur])
 
     # 衝突 suffix
     groups=defaultdict(list)
@@ -191,15 +206,20 @@ def main():
                 cand=f"{base}-{yr}-{k}"; k+=1
             final[row[0]]=cand; seen.add(cand); suffixed+=1
 
+    # 出力: 全 種3 key → そのページ(rep)の final slug
     with open(".cache/slug-final.tsv","w",encoding="utf-8") as f:
-        f.write("key\ttitle\tbase_slug\tfinal_slug\tvols\tyear\n")
-        for key,title,base,vols,year,sur in ent:
-            f.write(f"{key}\t{title}\t{base}\t{final[key]}\t{vols}\t{year if year!=9999 else ''}\n")
-    # stats
-    allslugs=list(final.values())
+        f.write("key\ttitle\trep\tbase_slug\tfinal_slug\tvols\tyear\n")
+        base_of={row[0]:row[2] for row in ent}
+        for e in d.values():
+            key=e["key"]; rep=rep_of.get(key,key)
+            if rep not in final: continue
+            title=base_title(key); vols,year=meta.get(key,(0,9999))
+            f.write(f"{key}\t{title}\t{rep}\t{base_of.get(rep,'')}\t{final[rep]}\t{vols}\t{year if year!=9999 else ''}\n")
+    pages=len(ent)
+    allslugs=[final[row[0]] for row in ent]
     dup=len(allslugs)-len(set(allslugs))
-    print(f"全 {len(ent):,} 件 → 最終 slug 生成")
-    print(f"  suffix 付与(従版): {suffixed:,}")
+    print(f"merge後の実ページ: {pages:,} → 最終 slug 生成")
+    print(f"  suffix 付与(別ページ衝突): {suffixed:,}")
     print(f"  残存衝突(本来0): {dup}")
     print("wrote .cache/slug-final.tsv")
     # サンプル: suffix された群
