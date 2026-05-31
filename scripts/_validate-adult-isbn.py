@@ -100,19 +100,26 @@ def main():
     for r in rows:
         isbns = [x for x in (r["isbns"] or "").split(",") if x][:2]
         rk = gb = "noisbn"; rk_raw = gb_raw = ""
+        if not GBOOKS_KEY:
+            gb = "skip(no_key)"   # 無認証 Google は CI で 429 多発 → キー無しなら叩かない
         for isbn in isbns:
             if RAKUTEN_APP:
                 v = rakuten(isbn)
                 if v:
                     rk, rk_raw = v[0], v[1]
                 time.sleep(0.4)
-            v = gbooks(isbn)
-            gb, gb_raw = v[0], v[1]
-            time.sleep(0.4)
+            if GBOOKS_KEY:
+                v = gbooks(isbn)
+                gb, gb_raw = v[0], v[1]
+                time.sleep(0.4)
             if rk == "ADULT" or gb == "ADULT":
                 break
-        verdict = "維持(adult)" if (rk == "ADULT" or gb == "ADULT") else (
-            "FP確定(全年齢)" if (rk in ("allages", "notfound", "noisbn") and gb in ("allages", "notfound")) else "不明")
+        if rk == "ADULT" or gb == "ADULT":
+            verdict = "維持(adult)"
+        elif rk == "allages" or gb == "allages":
+            verdict = "FP濃厚(全年齢)"   # 楽天/Googleで非adult genre = 全年齢
+        else:
+            verdict = "不明(要raw確認)"   # notfound/err 等 → 生値で個別判断
         out.append((r["title"], rk, gb, verdict, rk_raw, gb_raw))
         print(f"  {r['title'][:24]:<24} 楽天={rk:<8}({rk_raw}) google={gb:<8}({gb_raw}) → {verdict}")
     with open(".cache/adult-fp24-verdict.tsv", "w", encoding="utf-8") as f:
