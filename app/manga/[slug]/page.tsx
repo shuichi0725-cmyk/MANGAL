@@ -34,20 +34,16 @@ export default async function MangaDetailPage({
   const magazine = data.magazines.find((m) => m.key === manga.magazine);
   const demographic = data.demographics.find((d) => d.key === manga.demographic);
 
-  // 各メタ項目をクリックすると、フィルタ済みトップページへ飛ぶ
-  const interactive = true;
-
-  const FilterLink = ({ href, children }: { href: string; children: React.ReactNode }) =>
-    interactive ? (
-      <Link
-        href={href}
-        className="hover:text-[var(--color-accent)] underline decoration-dotted underline-offset-2"
-      >
-        {children}
-      </Link>
-    ) : (
-      <>{children}</>
-    );
+  // 各メタ項目をクリックすると、フィルタ済みトップページへ飛ぶ。
+  // 押せる値は「アウトライン枠タグ」(= ジャンルの淡塗りチップとは別系統、 hoverでaccent)。
+  const FilterLink = ({ href, children }: { href: string; children: React.ReactNode }) => (
+    <Link
+      href={href}
+      className="inline-flex items-center rounded-[var(--radius-tag)] border border-[var(--color-line)] bg-[var(--color-surface)] px-2.5 py-1 text-[13px] font-medium text-ink/85 transition-colors hover:border-[var(--color-accent)] hover:text-[var(--color-accent)]"
+    >
+      {children}
+    </Link>
+  );
 
   return (
     <div className="mx-auto max-w-4xl px-4 py-8">
@@ -100,20 +96,19 @@ export default async function MangaDetailPage({
             </p>
           )}
 
-          <dl className="mt-6 grid grid-cols-[6em_1fr] gap-y-1.5 text-sm">
-            <dt className="text-ink/50">出版年</dt>
-            <dd>
+          <dl className="mt-6 grid grid-cols-[5.5em_1fr] gap-y-2.5 items-start text-sm">
+            <dt className="font-semibold text-ink/65 pt-1">出版年</dt>
+            <dd className="flex flex-wrap gap-1.5">
               <FilterLink
                 href={`/?yearMin=${manga.year_started}&yearMax=${manga.year_started}`}
               >
                 {yearStatusLabel(manga)}
               </FilterLink>
             </dd>
-            <dt className="text-ink/50">著者</dt>
-            <dd>
-              {manga.authors.map((a, i) => (
+            <dt className="font-semibold text-ink/65 pt-1">著者</dt>
+            <dd className="flex flex-wrap gap-1.5">
+              {manga.authors.map((a) => (
                 <span key={a.name}>
-                  {i > 0 && " / "}
                   <FilterLink href={`/?author=${encodeURIComponent(a.name)}`}>
                     {a.name}
                   </FilterLink>
@@ -122,12 +117,11 @@ export default async function MangaDetailPage({
             </dd>
             {manga.original_authors.length > 0 && (
               <>
-                <dt className="text-ink/50">原作</dt>
-                <dd>
-                  {manga.original_authors.map((a, i) => (
+                <dt className="font-semibold text-ink/65 pt-1">原作</dt>
+                <dd className="flex flex-wrap gap-1.5">
+                  {manga.original_authors.map((a) => (
                     <span key={a.name}>
-                      {i > 0 && " / "}
-                      <FilterLink
+                          <FilterLink
                         href={`/?originalAuthor=${encodeURIComponent(a.name)}`}
                       >
                         {a.name}
@@ -137,29 +131,29 @@ export default async function MangaDetailPage({
                 </dd>
               </>
             )}
-            <dt className="text-ink/50">出版社</dt>
-            <dd>
+            <dt className="font-semibold text-ink/65 pt-1">出版社</dt>
+            <dd className="flex flex-wrap gap-1.5">
               <FilterLink href={`/?publisher=${encodeURIComponent(manga.publisher)}`}>
                 {publisher?.name ?? manga.publisher}
               </FilterLink>
             </dd>
             {magazine && (
               <>
-                <dt className="text-ink/50">連載誌</dt>
-                <dd>
+                <dt className="font-semibold text-ink/65 pt-1">連載誌</dt>
+                <dd className="flex flex-wrap gap-1.5">
                   <FilterLink href={`/?magazine=${encodeURIComponent(magazine.key)}`}>
                     {magazine.name}
                   </FilterLink>
                 </dd>
               </>
             )}
-            <dt className="text-ink/50">分野</dt>
-            <dd>
+            <dt className="font-semibold text-ink/65 pt-1">分野</dt>
+            <dd className="flex flex-wrap gap-1.5">
               <FilterLink href={`/?demographic=${encodeURIComponent(manga.demographic)}`}>
                 {demographic?.name ?? manga.demographic}
               </FilterLink>
             </dd>
-            <dt className="text-ink/50 pt-1">ジャンル</dt>
+            <dt className="font-semibold text-ink/65 pt-1">ジャンル</dt>
             <dd className="flex flex-wrap gap-1.5">
               {(() => {
                 // 種3 既存 ジャンル (= filter link 付き) + AniList 由来 (= filter なし) を 統合

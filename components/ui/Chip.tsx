@@ -45,3 +45,27 @@ export function ChipLink({
     </Link>
   );
 }
+
+/**
+ * アウトライン枠タグ (= メタ項目の押せる値: 著者/出版社/連載誌/分野/年)。
+ * チップ(淡塗り)とは別系統の「枠線のみ」で、 hover で accent に染まる。 角はわずか丸。
+ */
+export function TagLink({
+  href,
+  className = "",
+  children,
+}: { href: string; className?: string; children: React.ReactNode }) {
+  return (
+    <Link
+      href={href}
+      className={
+        "inline-flex items-center rounded-[var(--radius-tag)] border border-[var(--color-line)] " +
+        "bg-[var(--color-surface)] px-2.5 py-1 text-[13px] font-medium text-ink/85 " +
+        "transition-colors hover:border-[var(--color-accent)] hover:text-[var(--color-accent)] " +
+        className
+      }
+    >
+      {children}
+    </Link>
+  );
+}

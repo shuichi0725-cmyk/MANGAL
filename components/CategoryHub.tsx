@@ -122,16 +122,16 @@ export default function CategoryHub({ data }: Props) {
       <h2 className="text-[11px] font-semibold tracking-[0.18em] uppercase text-ink/50 mb-3">
         カテゴリで探す
       </h2>
-      <ul className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-6 gap-2.5">
+      <ul className="grid grid-cols-4 sm:grid-cols-5 lg:grid-cols-6 gap-2">
         {categories.map((c) => (
           <li key={c.href}>
-            <Card href={c.href} className="h-full px-2 py-3 text-center">
-              <span className="flex flex-col items-center justify-center gap-1.5">
-                <span className="text-xl leading-none" aria-hidden="true">
+            <Card href={c.href} className="h-full px-1 py-2.5 text-center">
+              <span className="flex flex-col items-center justify-center gap-1">
+                <span className="text-base leading-none" aria-hidden="true">
                   {c.icon}
                 </span>
-                <span className="text-xs font-semibold leading-tight">{c.label}</span>
-                <span className="rounded-chip bg-[var(--color-surface-2)] px-1.5 py-0.5 text-[10px] font-medium leading-none text-ink/50">
+                <span className="text-[11px] font-semibold leading-tight">{c.label}</span>
+                <span className="text-[10px] font-medium leading-none text-ink/40 tabular-nums">
                   {c.count}
                 </span>
               </span>
