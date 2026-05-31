@@ -145,3 +145,37 @@
 ## 結論
 adult判定は **思ったより健全**(95%一致 + レーベル捕捉が正当)。 改善は **surgical**
 (作者FP ~数十件の un-flag + 一般imprint 個別除去 + 本単位粒度)。 大改造は不要・危険。
+
+---
+
+# Phase A 結果: 誤爆の真因と surgical 修正(2026-05-31)
+
+★ユーザGo「Phase A 慎重に」。 prototype のみ・db 不変。
+
+## A-1: adult_publishers / adult_imprints 監査 → クリーン
+- **adult_publishers(21)= 全て本物の成人出版社**(エンジェル/コアマガジン/フランス書院/
+  ワニマガジン/茜新社 等)。 講談社/集英社/小学館/KADOKAWA の**誤混入は無し**。
+- **adult_imprints(235)も一般大手の混入無し**(電撃萌王増刊1件のみ、 flag=0で無害)。
+- → ★**「講談社が誤混入」の正体は出版社リストでなく `wikipedia_adult_mangaka_list`(作者signal)**。
+  講談社の全年齢作品が「その作者が成人作品も描く」だけで誤爆されていた。
+
+## A-2: 実誤爆から犯人特定
+v14マッチ × 種a明確全年齢 の adult判定 = **23件**。 signal内訳:
+- **作者signal単独 = 12件(52%)** ← 主犯
+- madb_content_rating 3件 = 種aのtag漏れ(MADB権威優先=誤爆でない)
+- imprint系 = 各1件(adult出版社、 系統的でない)
+
+## A-3: 安全な un-flag 候補 = 12件
+作者only × 種a全年齢(種aで全年齢確認済): 祝福のカンパネラ / 生徒会の日常 /
+Fate/stay nightアンソロジー / 多田依さんはホメられない! / クロとマルコ / Change! 等。
+リスト: `.cache/adult-unflag-candidates.tsv`。 ★種a裏取り済なので un-flag 安全。
+
+## 作者signal の扱い(policy 判断)
+- 作者only で adult判定 = **504件**(うち v14マッチ162 → 種a全年齢12 / adult系150)。
+- **保守案(安全)**: 種aで全年齢確認できた**12件のみ un-flag**。 残り492は維持(niche adult
+  =人妻戦士ケイコさん等を漏らさない)。 ← 推奨
+- **積極案(要判断)**: 作者signal を「裏取り必須」に降格 → 504全部 un-flag するが、
+  種aに無い niche adult が漏れるリスク。 → title keyword 等の救済が別途要。
+
+→ **推奨 = 保守案(12件 un-flag)+ 作者signal weight を将来 corroboration 必須化**。
+adult判定は元々健全(一致95%)なので、 大改造でなく**この12件 + 今後の作者sign999 降格**で十分。
