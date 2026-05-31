@@ -107,10 +107,29 @@ def load_hand_merge_sids() -> set[int]:
     return out
 
 
+def norm_author_name(nm: str) -> str:
+    """著者名正規化 = NFKC(全半角統一)+ P/Z/S・記号除去 + lower。
+    マスター重複(PEACH‐PIT 全角‐ ↔ Peach-Pit 半角-)を同一視。 ※修正1(2026-05-31)。"""
+    if not nm:
+        return ""
+    nm = unicodedata.normalize("NFKC", nm)
+    out = [ch.lower() for ch in nm
+           if unicodedata.category(ch)[0] not in ("P", "Z", "S") and ch not in "ー―~〜・"]
+    return "".join(out)
+
+
 def main() -> None:
     con = sqlite3.connect(DB)
     c = con.cursor()
     aname = {mid: nm for mid, nm in c.execute("SELECT id, name FROM mangaka")}
+    # ★修正1: 著者名正規化で漫画家マスター重複を同一視。 mid → canonical author token。
+    #   ★既定 OFF(opt-in --normalize)。 naive正規化は原作者名寄せで別翻案を
+    #   over-merge する(椿姫/ああ無情/十五少年漂流記=検証で確認 2026-05-31)。
+    #   有効化には別途ガード(common-primary 等)が必要。
+    USE_NORM = "--normalize" in sys.argv
+    acanon = {mid: (norm_author_name(nm) or f"id{mid}") for mid, nm in aname.items()}
+    def atok(mid):
+        return acanon[mid] if USE_NORM else mid
     # ★STEP6: sid→series_key (= 安定キー、 sid非依存)。 merge は series_key で持つ。
     sid_key = {sid: sk for sid, sk in c.execute("SELECT id, series_key FROM series")}
 
@@ -123,9 +142,9 @@ def main() -> None:
     for sid, mid, role in c.execute("SELECT series_id, mangaka_id, role FROM series_authors"):
         if is_nonperson(mid):  # 非人物 (出版社/プロ等) は除外
             continue
-        auth[sid].add(mid)
+        auth[sid].add(atok(mid))
         if role in ("artist", "writer_artist"):
-            primary[sid].add(mid)
+            primary[sid].add(atok(mid))
     volc = defaultdict(int)
     for sid, n in c.execute(
         "SELECT e.series_id, COUNT(*) FROM editions e "
@@ -232,6 +251,8 @@ def main() -> None:
 
     entries.sort(key=lambda e: e["merge_keys"][0])
 
+    out_path = (ROOT / ".cache" / "series-merge-auto-v2.json") if "--test" in sys.argv else OUT
+
     doc = {
         "_README": (
             "自動生成 — 手で編集しない。生成元: scripts/_gen-author-set-merges.py / "
@@ -242,7 +263,7 @@ def main() -> None:
         ),
         "merges": entries,
     }
-    with OUT.open("w", encoding="utf-8") as f:
+    with out_path.open("w", encoding="utf-8") as f:
         json.dump(doc, f, ensure_ascii=False, indent=0)
 
     print(f"=== series-merge-auto.json 生成 (merge_keys=series_key) ===", file=sys.stderr)
