@@ -179,3 +179,26 @@ Fate/stay nightアンソロジー / 多田依さんはホメられない! / ク�
 
 → **推奨 = 保守案(12件 un-flag)+ 作者signal weight を将来 corroboration 必須化**。
 adult判定は元々健全(一致95%)なので、 大改造でなく**この12件 + 今後の作者sign999 降格**で十分。
+
+---
+
+# Phase A 続: 作者only 492件のFP率推定 + ISBN裏取り準備
+
+## 492件(override外)のFP率推定
+作者signal単独 adult判定 492件を 題キーワード + 作者の成年作品率 で推定:
+- **adult濃厚(題KW or 作者成年率≥50%): 468(95%)** ← 作者signalは概ね正しい
+- **★FP濃厚(KW無 & 作者成年率<50%): 24(4%)**
+→ **option 2(作者signal一律降格)は割に合わない**(468の本物adultをriskに晒し24を救う)。
+  ★結論: **作者signal は維持**、 FP24件のみ個別裏取りで override 拡張が安全。
+
+## FP候補24件(ISBN裏取り対象)
+理想のヒモ生活(ISBN20)/ コープスパーティー / せっかくチート異世界 / 艦これアンソロジー /
+神ぷろ。 等 = 明確に全年齢の手応え。 リスト `.cache/adult-fp24-isbn.tsv`(5件はISBN無し)。
+
+## ISBN裏取り(楽天 / Google Books)— 認証待ち
+- **楽天ブックス API**: env `RAKUTEN_APP_ID`(+`RAKUTEN_ACCESS_KEY`)必要 = **未設定**。
+  https://webservice.rakuten.co.jp/ で無料発行。 booksGenreId / 成年系で判定。
+- **Google Books API**: `maturityRating`(MATURE/NOT_MATURE)。 無認証は **429**(IPクォータ)。
+  GCPで `GOOGLE_BOOKS_API_KEY` 無料発行推奨。
+- ツール `scripts/_validate-adult-isbn.py`(両API対応、 キー来たら1コマンド)= 準備済。
+  → 全年齢確定分を adult-overrides.yml に追加(option 1と同じ安全手法)。
