@@ -12,6 +12,8 @@ on:
 jobs:
   validate:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     env:
       RAKUTEN_APP_ID: ${{ secrets.RAKUTEN_APP_ID }}
       RAKUTEN_ACCESS_KEY: ${{ secrets.RAKUTEN_ACCESS_KEY }}
@@ -54,3 +56,13 @@ jobs:
           name: adult-fp24-verdict
           path: .cache/adult-fp24-verdict.tsv
           if-no-files-found: warn
+
+      - name: Commit verdict back (= 私が解釈できるよう repo に戻す)
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -f .cache/adult-fp24-verdict.tsv || true
+          git commit -m "adult ISBN validation 結果 (Actions)" || { echo "変更なし"; exit 0; }
+          git pull --rebase --autostash || true
+          git push || echo "::warning::push 失敗(手動で artifact を確認)"
