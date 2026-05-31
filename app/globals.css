@@ -63,8 +63,11 @@ body {
     transform: translateY(-1px);
   }
   .tactile:active {
-    transform: translateY(1px);
+    /* クリック感 = 即座に沈む(scale + inset影 + 地色)。 遷移前でも見えるよう速め */
+    transform: scale(0.97);
+    background-color: var(--color-surface-2);
     box-shadow: var(--shadow-press);
+    transition-duration: 0.04s;
   }
 
   /* チップ地 (= 淡い塗りのピル) */
@@ -83,6 +86,8 @@ body {
     transform: translateY(-1px);
   }
   .tactile-chip:active {
-    transform: translateY(1px);
+    transform: scale(0.94);
+    box-shadow: var(--shadow-press);
+    transition-duration: 0.04s;
   }
 }

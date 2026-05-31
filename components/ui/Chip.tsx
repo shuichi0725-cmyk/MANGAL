@@ -13,7 +13,8 @@ type BaseProps = {
  */
 function chipClass(active: boolean, className: string) {
   const base =
-    "inline-flex items-center gap-1 rounded-chip px-3 py-1.5 text-xs font-medium select-none";
+    "inline-flex items-center gap-1 rounded-chip px-3 py-1.5 text-xs font-medium select-none " +
+    "transition duration-100 active:scale-[0.94]";
   const skin = active
     ? "bg-[var(--color-accent)] text-white border border-transparent shadow-[var(--shadow-soft)]"
     : "tactile-chip text-ink/80";
@@ -61,7 +62,8 @@ export function TagLink({
       className={
         "inline-flex items-center rounded-[var(--radius-tag)] border border-[var(--color-line)] " +
         "bg-[var(--color-surface)] px-2.5 py-1 text-[13px] font-medium text-ink/85 " +
-        "transition-colors hover:border-[var(--color-accent)] hover:text-[var(--color-accent)] " +
+        "transition duration-100 hover:border-[var(--color-accent)] hover:text-[var(--color-accent)] " +
+        "active:scale-[0.94] active:bg-[var(--color-surface-2)] active:border-[var(--color-accent)] " +
         className
       }
     >
