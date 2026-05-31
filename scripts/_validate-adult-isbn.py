@@ -58,7 +58,9 @@ def rakuten(isbn):
     if not RAKUTEN_APP:
         return None
     # 2026 仕様: applicationId + accessKey(param) + Referer/Origin(header) + formatVersion=2
-    params = {"applicationId": RAKUTEN_APP, "isbn": isbn,
+    # availability=0 = 全件(在庫無し/絶版も返す。 ユーザ指摘「在庫無いと返さない」対策)。
+    # ★楽天Books(一般)に成人フラグは無い → 「一般カタログに在る = 全年齢」と解釈する。
+    params = {"applicationId": RAKUTEN_APP, "isbn": isbn, "availability": "0",
               "format": "json", "formatVersion": "2"}
     if RAKUTEN_ACCESS:
         params["accessKey"] = RAKUTEN_ACCESS
@@ -70,11 +72,15 @@ def rakuten(isbn):
         return (f"err:{d['_err']}", str(d.get("_body", ""))[:40])
     items = d.get("Items") or []
     if not items:
-        return ("notfound", "")
+        return ("notfound", "")   # 一般カタログに無い → 不明(成人で除外 or 単に未収録)
     it = items[0]  # formatVersion=2 は Item ラッパー無し
     gid = str(it.get("booksGenreId", ""))
-    adult = any(gid.startswith(p) for p in RAKUTEN_ADULT_GENRE) or "成年" in str(it.get("title", ""))
-    return ("ADULT" if adult else "allages", gid)
+    found_title = str(it.get("title", ""))
+    size = str(it.get("size", ""))
+    # 一般 Books に在る = 全年齢(成人コミックは一般APIに載らない)。 念のため題に成年表記があれば adult。
+    adult = "成年" in found_title or "アダルト" in found_title
+    raw = f"gid={gid},size={size},t={found_title[:18]}"
+    return ("ADULT" if adult else "allages", raw)
 
 
 def gbooks(isbn):
