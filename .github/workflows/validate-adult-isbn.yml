@@ -1,0 +1,56 @@
+# 成人FP候補24件を ISBN で楽天ブックス/Google Books に裏取り。
+# 既存の RAKUTEN_APP_ID / RAKUTEN_ACCESS_KEY secret を流用(再設定不要)。
+# 入力: .cache/adult-fp24-isbn.tsv(force-add 済) / 出力: artifact + ログ。
+# Python stdlib のみ(npm/pip 不要)。
+#
+# 実行: Actions タブ → validate-adult-isbn → Run workflow
+name: validate-adult-isbn
+
+on:
+  workflow_dispatch:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    env:
+      RAKUTEN_APP_ID: ${{ secrets.RAKUTEN_APP_ID }}
+      RAKUTEN_ACCESS_KEY: ${{ secrets.RAKUTEN_ACCESS_KEY }}
+      RAKUTEN_REFERER: ${{ secrets.RAKUTEN_REFERER }}
+      GOOGLE_BOOKS_API_KEY: ${{ secrets.GOOGLE_BOOKS_API_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check Rakuten secret
+        run: |
+          if [ -z "$RAKUTEN_APP_ID" ]; then
+            echo "::error::Repository Secret RAKUTEN_APP_ID が未設定。Settings → Secrets and variables → Actions で確認。"
+            exit 1
+          fi
+          if [ -z "$RAKUTEN_ACCESS_KEY" ]; then
+            echo "::warning::RAKUTEN_ACCESS_KEY 未設定。2026年2月仕様で必須のため 403 になる可能性。"
+          fi
+          if [ -z "$GOOGLE_BOOKS_API_KEY" ]; then
+            echo "::notice::GOOGLE_BOOKS_API_KEY 未設定 → Google は無認証試行(429 になりやすい)。楽天主体で判定。"
+          fi
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Validate adult ISBN (Rakuten / Google Books)
+        run: python scripts/_validate-adult-isbn.py
+
+      - name: Print verdict to log
+        if: always()
+        run: |
+          echo "=================== adult-fp24-verdict ==================="
+          cat .cache/adult-fp24-verdict.tsv || echo "(verdict なし)"
+          echo "========================================================="
+
+      - name: Upload verdict artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: adult-fp24-verdict
+          path: .cache/adult-fp24-verdict.tsv
+          if-no-files-found: warn
