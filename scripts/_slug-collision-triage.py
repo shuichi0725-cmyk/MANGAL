@@ -58,53 +58,53 @@ def main():
         base2reps[r["base_slug"]].add(r["rep"])
         rep_info[r["rep"]] = (r["title"], int(r["vols"] or 0), r["year"])
 
-    merge_miss = []; diff_works = []; ambiguous = []
+    merge_miss = []; year_suspect = []; diff_works = []
     for base, reps in base2reps.items():
         if len(reps) < 2:
             continue
-        # 各 rep の著者集合
-        ra = {}
+        ra = {}; ry = {}
         for rep in reps:
             mks = key2group.get(rep, [rep])
             ra[rep] = page_authors(mks, by_name)
+            ry[rep] = rep_info[rep][2]
         repl = list(reps)
-        # ペアで著者共有あれば merge漏れ
-        shares = False
+        shares = False; same_year = False
         for i in range(len(repl)):
             for j in range(i+1, len(repl)):
                 if ra[repl[i]] & ra[repl[j]]:
                     shares = True
+                yi, yj = ry[repl[i]], ry[repl[j]]
+                if yi and yj and abs(int(yi)-int(yj)) <= 1:   # 同年±1=同作の疑い
+                    same_year = True
         rec = (base, [(rep_info[r][0], rep_info[r][1], rep_info[r][2], "|".join(sorted(ra[r])[:2])) for r in repl])
         if shares:
             merge_miss.append(rec)
+        elif same_year:                  # ★著者非共有でも同年=同作疑い(表記揺れ等)
+            year_suspect.append(rec)
         else:
-            # 著者不明(空集合)が混じる=判定不能、 両方著者ありで非共有=別作品
-            if any(not ra[r] for r in repl):
-                ambiguous.append(rec)
-            else:
-                diff_works.append(rec)
+            diff_works.append(rec)
 
     print(f"=== merge後 残衝突 base: {sum(1 for b,rs in base2reps.items() if len(rs)>=2):,} ===")
-    print(f"  ★merge漏れ(著者共有=同作): {len(merge_miss):,}")
-    print(f"  真の別作品(著者非共有): {len(diff_works):,}")
-    print(f"  判定不能(著者欠落混在): {len(ambiguous):,}")
+    print(f"  ★merge漏れ(著者共有): {len(merge_miss):,}")
+    print(f"  ★同年衝突(著者非共有でも同作疑い): {len(year_suspect):,}")
+    print(f"  真の別作品(著者非共有・別年): {len(diff_works):,}")
 
     with open(".cache/slug-collision-triage.tsv", "w", encoding="utf-8") as f:
         f.write("category\tbase\tpages\n")
-        for cat, lst in (("merge_miss", merge_miss), ("diff_works", diff_works), ("ambiguous", ambiguous)):
+        for cat, lst in (("merge_miss", merge_miss), ("year_suspect", year_suspect), ("diff_works", diff_works)):
             for base, pages in lst:
                 det = " || ".join(f"{t[:16]}(v{v},{y},{a[:14]})" for t, v, y, a in pages)
                 f.write(f"{cat}\t{base}\t{det}\n")
     print("wrote .cache/slug-collision-triage.tsv")
 
-    print("\n=== ★merge漏れ サンプル12(著者共有なのに別ページ)===")
-    for base, pages in merge_miss[:12]:
-        det = " | ".join(f"{t[:14]}(v{v},{a[:10]})" for t, v, y, a in pages)
-        print(f"  {base[:22]:<22} {det}")
-    print("\n=== 真の別作品 サンプル8 ===")
+    print("\n=== ★同年衝突 サンプル18(別作品と思ったが同年=同作疑い)===")
+    for base, pages in year_suspect[:18]:
+        det = " | ".join(f"{t[:14]}(v{v},{y},{a[:8]})" for t, v, y, a in pages)
+        print(f"  {base[:20]:<20} {det}")
+    print("\n=== 真の別作品(別年)サンプル8 ===")
     for base, pages in diff_works[:8]:
-        det = " | ".join(f"{t[:14]}(v{v},{a[:10]})" for t, v, y, a in pages)
-        print(f"  {base[:22]:<22} {det}")
+        det = " | ".join(f"{t[:12]}(v{v},{y})" for t, v, y, a in pages)
+        print(f"  {base[:20]:<20} {det}")
 
 
 if __name__ == "__main__":
