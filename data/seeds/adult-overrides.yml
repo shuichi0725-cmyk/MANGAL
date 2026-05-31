@@ -92,3 +92,15 @@ overrides:
     evidence: "楽天Books一般コミックカタログに在 = 全年齢(成人は一般API非収録)"
     title: '理想のヒモ生活'
     added_at: "2026-05-31"
+  - series_key: 'name:祁答院慎|name:コープスパーティーcemetery 0'
+    force_adult: false
+    reason: manual_known_allages
+    evidence: 'Corpse Party=ホラーゲーム原作、18禁でない全年齢'
+    title: 'コープスパーティーcemetery 0'
+    added_at: "2026-05-31"
+  - series_key: 'name:そらったま|name:艦隊これくしょん-艦これ-アンソロジーコミック 横須賀鎮守府編'
+    force_adult: false
+    reason: manual_known_allages
+    evidence: '艦これゲーム由来アンソロジー=全年齢'
+    title: '艦隊これくしょん-艦これ-アンソロジーコミック 横須賀鎮守府編'
+    added_at: "2026-05-31"
