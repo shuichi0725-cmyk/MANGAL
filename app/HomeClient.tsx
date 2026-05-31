@@ -1,6 +1,6 @@
 "use client";
 
-import { useSearchParams } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useMemo, useRef, useState } from "react";
 import CategoryHub from "@/components/CategoryHub";
 import FilterPanel from "@/components/FilterPanel";
@@ -22,39 +22,47 @@ const PAGE_SIZE = 100;
 
 export default function HomeClient({ data }: Props) {
   const searchParams = useSearchParams();
+  const router = useRouter();
+  const pathname = usePathname();
   const [state, setState] = useState(emptyFilterState());
   const [open, setOpen] = useState(false);
-  const [page, setPage] = useState(1);
   const listTopRef = useRef<HTMLDivElement>(null);
 
+  // フィルタ系 URL params(?page を除く)の署名。 ページ送りでフィルタ effect が
+  // 再発火して手動フィルタを消さないよう、 page だけの変化では発火させない。
+  const filterKey = useMemo(() => {
+    const p = new URLSearchParams(searchParams.toString());
+    p.delete("page");
+    return p.toString();
+  }, [searchParams]);
+
   useEffect(() => {
-    // URL の検索 params が source of truth。 前 state を merge せず、
-    // emptyFilterState + URL params で毎回 fresh に組み直す。 これによって
-    // CategoryHub click や browser back/forward で前の filter が累積せず
-    // 「期待した内容だけ」 が反映される。 ユーザの FilterPanel 手動編集は
-    // URL を更新しないので state には残るが、 URL 経由の navigation で
-    // reset される (= 期待挙動)。
+    // URL の検索 params が source of truth。 emptyFilterState + URL params で
+    // 毎回 fresh に組み直す(CategoryHub click や back/forward で filter が累積しない)。
     const patch = filtersFromSearchParams(searchParams);
     setState({ ...emptyFilterState(), ...patch });
-  }, [searchParams]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [filterKey]);
 
   const bounds = useMemo(() => yearBounds(data.manga), [data.manga]);
   const authors = useMemo(() => uniqueAuthors(data.manga, true), [data.manga]);
   const filtered = useMemo(() => applyFilters(data.manga, state), [data.manga, state]);
 
-  // 絞り込み/検索が変わったらページを1に戻す
-  useEffect(() => {
-    setPage(1);
-  }, [state]);
-
+  // ページは URL(?page)から導出 = リロード/共有/戻るで復元。 フィルタURL変更
+  // (CategoryHub 等)は ?page を含まないので自然と1ページ目に戻る。
   const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
-  const curPage = Math.min(page, totalPages);
+  const urlPage = Math.max(1, Number(searchParams.get("page")) || 1);
+  const curPage = Math.min(urlPage, totalPages);
   const paged = filtered.slice((curPage - 1) * PAGE_SIZE, curPage * PAGE_SIZE);
   const rangeStart = filtered.length === 0 ? 0 : (curPage - 1) * PAGE_SIZE + 1;
   const rangeEnd = Math.min(curPage * PAGE_SIZE, filtered.length);
 
   const goPage = (p: number) => {
-    setPage(p);
+    const params = new URLSearchParams(searchParams.toString());
+    if (p <= 1) params.delete("page");
+    else params.set("page", String(p));
+    const qs = params.toString();
+    router.replace(qs ? `${pathname}?${qs}` : pathname, { scroll: false });
     listTopRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
   const scrollTop = () =>

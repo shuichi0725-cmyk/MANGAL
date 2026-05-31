@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import "./globals.css";
+import ScrollTopButton from "@/components/ScrollTopButton";
 
 export const metadata: Metadata = {
   title: "MANGAL — 日本の漫画データベース",
@@ -41,6 +42,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             当サイトは Amazon アソシエイト・プログラムの参加者です。
           </p>
         </footer>
+        <ScrollTopButton />
       </body>
     </html>
   );
