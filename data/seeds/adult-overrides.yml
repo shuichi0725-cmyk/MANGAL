@@ -74,3 +74,21 @@ overrides:
     evidence: "adult_score=3(作者signalのみ) / 種a id=64289 生徒会の日常 = 全年齢"
     title: '生徒会の日常'
     added_at: "2026-05-31"
+  - series_key: 'name:文倉十|name:理想のヒモ生活'
+    force_adult: false
+    reason: author_signal_only_rakuten_general_catalog
+    evidence: "楽天Books一般コミックカタログに在 = 全年齢(成人は一般API非収録)"
+    title: '理想のヒモ生活'
+    added_at: "2026-05-31"
+  - series_key: 'name:ブッチャーU|name:せっかくチートを貰って異世界に転移したんだから、好きなように生きてみたい'
+    force_adult: false
+    reason: author_signal_only_rakuten_general_catalog
+    evidence: "楽天Books一般コミックカタログに在 = 全年齢(成人は一般API非収録)"
+    title: 'せっかくチートを貰って異世界に転移したんだから、好きなように生きてみたい'
+    added_at: "2026-05-31"
+  - series_key: 'name:日月ネコ|name:理想のヒモ生活'
+    force_adult: false
+    reason: author_signal_only_rakuten_general_catalog
+    evidence: "楽天Books一般コミックカタログに在 = 全年齢(成人は一般API非収録)"
+    title: '理想のヒモ生活'
+    added_at: "2026-05-31"
