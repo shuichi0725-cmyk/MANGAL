@@ -263,6 +263,16 @@ export default async function MangaDetailPage({
           )}
         </div>
       </div>
+
+      {/* 巻リスト末尾の戻る導線(上部のリンクと同機能、 下までスクロールしても戻れる) */}
+      <div className="mt-10 border-t border-[var(--color-line)] pt-6 text-center">
+        <Link
+          href="/"
+          className="tactile-chip inline-flex items-center rounded-card px-4 py-2 text-sm font-medium active:scale-[0.96] transition"
+        >
+          ← 一覧へ戻る
+        </Link>
+      </div>
     </div>
   );
 }

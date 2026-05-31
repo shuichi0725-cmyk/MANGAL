@@ -25,15 +25,19 @@ export default function VolumeTile({ manga, volume, edition }: Props) {
 
   return (
     <div className="flex gap-3">
-      {cover && (
-        <div className="relative w-20 aspect-[2/3] bg-[var(--color-surface-2)] rounded overflow-hidden shrink-0">
-          <CoverImage
-            src={cover}
-            alt={`${manga.title} ${label} 表紙`}
-            sizes="80px"
-          />
-        </div>
-      )}
+      {/* 書影スロット = 常に枠表示。 cover_url があれば実画像、 無ければプレースホルダ */}
+      <div className="relative w-16 aspect-[2/3] bg-[var(--color-surface-2)] rounded-md overflow-hidden shrink-0">
+        {cover ? (
+          <CoverImage src={cover} alt={`${manga.title} ${label} 表紙`} sizes="64px" />
+        ) : (
+          <span className="flex h-full flex-col items-center justify-center gap-0.5 text-ink/25">
+            <span className="text-base leading-none" aria-hidden="true">
+              📖
+            </span>
+            <span className="text-[9px] font-medium leading-none">{label}</span>
+          </span>
+        )}
+      </div>
       <div className="flex-1 min-w-0">
         <p className="text-sm font-semibold leading-tight">{label}</p>
         <p className="text-xs text-ink/50 mt-0.5 leading-tight">
