@@ -202,3 +202,31 @@ adult判定は元々健全(一致95%)なので、 大改造でなく**この12�
   GCPで `GOOGLE_BOOKS_API_KEY` 無料発行推奨。
 - ツール `scripts/_validate-adult-isbn.py`(両API対応、 キー来たら1コマンド)= 準備済。
   → 全年齢確定分を adult-overrides.yml に追加(option 1と同じ安全手法)。
+
+---
+
+# Phase A 完了サマリ(2026-05-31)
+
+## ISBN裏取りインフラ(再利用可)
+- **GitHub Actions ワークフロー** `.github/workflows/validate-adult-isbn.yml`(既存 RAKUTEN secret 流用、 workflow_dispatch)
+- **検証script** `scripts/_validate-adult-isbn.py`(楽天 BooksBook + Google Books、 2026仕様対応)
+- ★楽天は **成人フラグ無し + 一般API非収録** → 「一般カタログ在=全年齢」で判定。 在庫制限は
+  availability=0 でも未収録は拾えず(ニッチ/古い成人作家タイトルは楽天に無い)。
+
+## override 確定 = 17件(`data/seeds/adult-overrides.yml`)
+| 裏取り | 件数 |
+|---|---|
+| 種a 全年齢確認 | 12 |
+| 楽天 一般カタログ確認 | 3(理想のヒモ生活×2 / せっかくチート異世界) |
+| 手動(既知) | 2(コープスパーティー / 艦これアンソロジー) |
+
+→ promote が override を読み、 adult_score≥3 でも本番採用。 種2/adult_score 不変・可逆。
+
+## 残り(保守的に維持)
+作者only FP候補のうち ~19件 = 楽天未収録 + 不明 + 成人寄り題(夜這い/リビドゥ)。
+→ 成人漏れ回避のため**維持**。 Google Books キー(Amazon と同時期)or 後日手動で追加検証可。
+
+## adult判定の総括
+- **健全**(種3↔種a 一致95%、 madb_content_rating 権威4,935は漏れ0、 作者signal 95%正しい)
+- Phase A = 作者signal単独誤爆の **surgical 修正17件**。 大改造不要だった。
+- 基準 = **日本(MADB成年)** 主軸、 種a(米)は参考。 adult出版社レーベルは正当な捕捉。
