@@ -13,7 +13,7 @@ type BaseProps = {
  */
 function chipClass(active: boolean, className: string) {
   const base =
-    "inline-flex items-center gap-1 rounded-chip px-3 py-1.5 text-xs font-medium select-none " +
+    "inline-flex items-center gap-1 rounded-[var(--radius-tag)] px-3 py-1.5 text-xs font-medium select-none " +
     "transition duration-100 active:scale-[0.94]";
   const skin = active
     ? "bg-[var(--color-accent)] text-white border border-transparent shadow-[var(--shadow-soft)]"

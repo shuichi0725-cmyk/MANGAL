@@ -202,7 +202,7 @@ export default async function MangaDetailPage({
                   ) : (
                     <span
                       key={it.name}
-                      className="inline-flex items-center rounded-chip px-3 py-1.5 text-xs font-medium bg-[var(--color-surface-2)] border border-[var(--color-line)] text-ink/55"
+                      className="inline-flex items-center rounded-[var(--radius-tag)] px-3 py-1.5 text-xs font-medium bg-[var(--color-surface-2)] border border-[var(--color-line)] text-ink/55"
                     >
                       {it.name}
                     </span>
