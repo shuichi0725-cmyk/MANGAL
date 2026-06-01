@@ -52,6 +52,16 @@ def main():
         for r in csv.DictReader(f, delimiter="\t"):
             if r["verdict"] in S and r["a_id"]:
                 sk_aid[r["s3_key"]] = int(r["a_id"])
+    base_n = len(sk_aid)
+    # ★recovery(強正規化×著者ゲート、 _match-recover-norm.py)を追加読み(既存優先)
+    rec = Path(".cache/match-recovery.tsv")
+    rec_added = 0
+    if rec.exists():
+        with rec.open(encoding="utf-8") as f:
+            for r in csv.DictReader(f, delimiter="\t"):
+                if r.get("a_id") and r["s3_key"] not in sk_aid:
+                    sk_aid[r["s3_key"]] = int(r["a_id"]); rec_added += 1
+    print(f"  base(v14 S-tier): {base_n:,} + recovery追加: {rec_added:,}", file=sys.stderr)
     # a_id → enrich
     need = set(sk_aid.values())
     aid_enrich = {}
