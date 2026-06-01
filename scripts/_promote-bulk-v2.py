@@ -815,6 +815,16 @@ def edition_passes_filter(ed_row: dict) -> bool:
     return True
 
 
+def _sanitize_volnum(number, release_date, volume_label):
+    """季刊/年刊 issue の『年』が巻番号に誤 parse されたもの (= 「2022 春」→ number 2022) を
+    0 (= 号扱い) に降格。 ★実漫画の巻番号は 1900 に到達しない (= こち亀 201 が最大級) ため
+    number≥1900 は無条件で年/誤値と判定。 release日null/ズレでも確実に捕捉。
+    → 既存 number=0 ロジックが、 混在 series は正規巻のみ残し、 全年番号は連番化する。"""
+    if number and number >= 1900:
+        return 0
+    return number
+
+
 def get_editions_with_volumes(con: sqlite3.Connection, series_ids: list[int] | int) -> list[dict]:
     """editions + volumes を まとめて取得し、 同 type editions を 1 つに merge。
 
@@ -867,20 +877,22 @@ def get_editions_with_volumes(con: sqlite3.Connection, series_ids: list[int] | i
         # number=0 (= 巻号 extract 失敗) 扱い:
         #   - edition 内に 1 つでも numbered vol あれば → number=0 は skip (= 偽 #1 dedup 弊害除去)
         #   - edition 内 全部 number=0 → release_date 昇順で #1, #2,... 連番付与 (= 短編集等)
-        nonzero_exists = any(v["number"] for v in vols)
+        # ★年番号サニタイズ(「2022春」= number 2022 を 0=号扱いに降格)
+        nonzero_exists = any(_sanitize_volnum(v["number"], v["release_date"], v["volume_label"]) for v in vols)
         # 同 number 内で 1 件採用 (= 初版 representative)。 ★STEP5: _dedup_key で
         #   決定的選択(最古日→支配ISBN線→最小ISBN)。 同 edition 内 dedup。
         primary_vols = []
         if nonzero_exists:
             by_n: dict[int, list] = defaultdict(list)
             for v in vols:
-                if v["number"]:
-                    by_n[v["number"]].append(v)
+                sn = _sanitize_volnum(v["number"], v["release_date"], v["volume_label"])
+                if sn:
+                    by_n[sn].append(v)
             for n in sorted(by_n):
                 v = min(by_n[n], key=lambda r: _dedup_key(r["isbn13"], r["release_date"]))
                 primary_vols.append(
                     {
-                        "number": v["number"],
+                        "number": n,
                         "volume_label": v["volume_label"],
                         "isbn13": v["isbn13"],
                         "release_date": v["release_date"],

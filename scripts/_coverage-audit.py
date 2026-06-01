@@ -36,8 +36,10 @@ con = sqlite3.connect(ROOT / ".cache/db-v2.sqlite"); con.text_factory = lambda b
 s_sub = {k: (sub or "") for k, sub in con.execute("SELECT series_key, subtitle FROM series")}
 # series_key → 最大巻番号(=シリーズ長の代理)
 maxvol = defaultdict(int)
+# ★年番号(≥1900=誤parse)を除外して真の最大巻を取る(promoteの_sanitize_volnum相当)
 for k, mx in con.execute("""SELECT s.series_key, MAX(v.number) FROM series s
-    JOIN editions e ON e.series_id=s.id JOIN volumes v ON v.edition_id=e.id GROUP BY s.series_key"""):
+    JOIN editions e ON e.series_id=s.id JOIN volumes v ON v.edition_id=e.id
+    WHERE v.number BETWEEN 1 AND 1899 GROUP BY s.series_key"""):
     maxvol[k] = mx or 0
 # series_key → 著者数
 nauth = defaultdict(int)
