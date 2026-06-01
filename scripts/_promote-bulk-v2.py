@@ -833,6 +833,21 @@ def get_editions_with_volumes(con: sqlite3.Connection, series_ids: list[int] | i
     eds = cur.execute(
         f"SELECT * FROM editions WHERE series_id IN ({placeholders})", series_ids
     ).fetchall()
+    # ★STEP5: 重複巻 dedup の決定的 tie-break。 同日 compete 時に「支配的 ISBN 線」
+    #   (= series内で巻数最多の出版線 = 通常版である可能性が高い)を優先、 最終は最小
+    #   ISBN で完全決定化(= rebuild で出力が flip しないよう固定)。
+    _pfreq: dict[str, int] = {}
+    for (_isbn,) in cur.execute(
+        f"SELECT v.isbn13 FROM volumes v JOIN editions e ON e.id=v.edition_id "
+        f"WHERE e.series_id IN ({placeholders}) AND v.isbn13 IS NOT NULL", series_ids
+    ):
+        _p = _isbn[:9]
+        _pfreq[_p] = _pfreq.get(_p, 0) + 1
+
+    def _dedup_key(isbn, rd):
+        isbn = isbn or ""
+        return (rd or "9999-99", -_pfreq.get(isbn[:9], 0), isbn)
+
     # merge_edition_types: true の sid なら shinsoban/aizoban 等 → standard 統合
     merge_edt_sids = get_merge_edition_types(con)
     apply_edt_merge = any(sid in merge_edt_sids for sid in series_ids)
@@ -853,16 +868,16 @@ def get_editions_with_volumes(con: sqlite3.Connection, series_ids: list[int] | i
         #   - edition 内に 1 つでも numbered vol あれば → number=0 は skip (= 偽 #1 dedup 弊害除去)
         #   - edition 内 全部 number=0 → release_date 昇順で #1, #2,... 連番付与 (= 短編集等)
         nonzero_exists = any(v["number"] for v in vols)
-        # 同 number 内で 一番古い 1 件のみ採用 (= 初版 representative、 同 edition 内 dedup)
-        seen = set()
+        # 同 number 内で 1 件採用 (= 初版 representative)。 ★STEP5: _dedup_key で
+        #   決定的選択(最古日→支配ISBN線→最小ISBN)。 同 edition 内 dedup。
         primary_vols = []
         if nonzero_exists:
+            by_n: dict[int, list] = defaultdict(list)
             for v in vols:
-                if not v["number"]:
-                    continue
-                if v["number"] in seen:
-                    continue
-                seen.add(v["number"])
+                if v["number"]:
+                    by_n[v["number"]].append(v)
+            for n in sorted(by_n):
+                v = min(by_n[n], key=lambda r: _dedup_key(r["isbn13"], r["release_date"]))
                 primary_vols.append(
                     {
                         "number": v["number"],
@@ -936,19 +951,14 @@ def get_editions_with_volumes(con: sqlite3.Connection, series_ids: list[int] | i
             out.append(ed_group[0])
             continue
         # 同 type で 複数 edition → merge
-        # 全 volumes を集めて number で dedup、 同 number は release_date 最古 entry 優先
+        # 全 volumes を集めて number で dedup。 ★STEP5: _dedup_key で決定的選択
+        #   (最古日→支配ISBN線→最小ISBN)。 同日competeの非決定を固定。
         by_num: dict[int, dict] = {}
         for ed in ed_group:
             for v in ed["volumes"]:
                 n = v["number"]
                 cur_v = by_num.get(n)
-                if cur_v is None:
-                    by_num[n] = v
-                    continue
-                # release_date 比較 (= None は 最後扱い)
-                cur_d = cur_v.get("release_date") or "9999-99"
-                new_d = v.get("release_date") or "9999-99"
-                if new_d < cur_d:
+                if cur_v is None or _dedup_key(v.get("isbn13"), v.get("release_date")) < _dedup_key(cur_v.get("isbn13"), cur_v.get("release_date")):
                     by_num[n] = v
         merged_vols = [by_num[n] for n in sorted(by_num.keys())]
         # 代表 imprint / label 選定:
