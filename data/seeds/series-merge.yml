@@ -311,3 +311,35 @@
   - 'qid:Q966701|name:「金田一少年の事件簿」短編集'
   - 'qid:Q966701|name:金田一少年の事件簿　短編集'
   note: 'frag-merge: 著者完全一致+無副題の版違い 2key'
+
+# ── edition-split: 同一imprint線がstandard/deluxe誤分類→merge_edition_typesで統合 (_edition-split-investigate.py) ──
+- main: 'アゲイン!!'
+  merge_keys:
+  - 'qid:Q11368952|name:アゲイン!!'
+  merge_edition_types: true
+  note: 'edition-split: deluxe/standard誤分類の単一版を統合(補完巻)'
+- main: 'パンプキン・シザーズ'
+  merge_keys:
+  - 'qid:Q11475248|name:パンプキン・シザーズ'
+  merge_edition_types: true
+  note: 'edition-split: deluxe/standard誤分類の単一版を統合(補完巻)'
+- main: 'RiN'
+  merge_keys:
+  - 'qid:Q302859|name:RiN'
+  merge_edition_types: true
+  note: 'edition-split: deluxe/standard誤分類の単一版を統合(補完巻)'
+- main: '野球狂の詩 愛蔵版'
+  merge_keys:
+  - 'qid:Q7497596|name:野球狂の詩 愛蔵版'
+  merge_edition_types: true
+  note: 'edition-split: deluxe/standard誤分類の単一版を統合(補完巻)'
+- main: '極妻デイズ'
+  merge_keys:
+  - 'name:長谷垣なるみ|name:極妻デイズ'
+  merge_edition_types: true
+  note: 'edition-split: deluxe/standard誤分類の単一版を統合(補完巻)'
+- main: 'ミキストリ 太陽の死神'
+  merge_keys:
+  - 'name:ホーム社|name:ミキストリ 太陽の死神'
+  merge_edition_types: true
+  note: 'edition-split: deluxe/standard誤分類の単一版を統合(補完巻)'

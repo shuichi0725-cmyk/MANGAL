@@ -891,7 +891,7 @@ def get_editions_with_volumes(con: sqlite3.Connection, series_ids: list[int] | i
             continue
         # merge_edition_types: true なら shinsoban/aizoban/kanzenban → standard 統合
         effective_type = ed["type"]
-        if apply_edt_merge and effective_type in ("shinsoban", "aizoban", "kanzenban"):
+        if apply_edt_merge and effective_type in ("shinsoban", "aizoban", "kanzenban", "deluxe"):
             effective_type = "standard"
         by_type[effective_type].append(
             {
@@ -908,7 +908,7 @@ def get_editions_with_volumes(con: sqlite3.Connection, series_ids: list[int] | i
     for sid in series_ids:
         for supp_vol in supp_map.get(sid, []):
             target_type = supp_vol["_edition_type"]
-            if apply_edt_merge and target_type in ("shinsoban", "aizoban", "kanzenban"):
+            if apply_edt_merge and target_type in ("shinsoban", "aizoban", "kanzenban", "deluxe"):
                 target_type = "standard"
             ed_group = by_type.get(target_type)
             if not ed_group:
