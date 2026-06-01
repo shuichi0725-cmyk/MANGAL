@@ -216,20 +216,6 @@ export default async function MangaDetailPage({
             <p className="mt-6 text-sm leading-relaxed text-ink/80">{manga.synopsis}</p>
           )}
 
-          {manga.anilist_id && (
-            <p className="mt-3 text-[11px] text-ink/40">
-              ジャンル 補助データ:{" "}
-              <a
-                href={`https://anilist.co/manga/${manga.anilist_id}`}
-                target="_blank"
-                rel="noopener nofollow"
-                className="underline decoration-dotted underline-offset-2 hover:text-ink/60"
-              >
-                AniList #{manga.anilist_id}
-              </a>
-            </p>
-          )}
-
           {manga.awards && manga.awards.length > 0 && (
             <div className="mt-6">
               <p className="text-xs font-semibold text-ink/70 mb-2">受賞歴</p>
@@ -248,18 +234,34 @@ export default async function MangaDetailPage({
 
           <VolumeRow manga={manga} />
 
-          {manga.wikidata_qid && (
-            <p className="mt-6 text-[11px] text-ink/40">
-              データ参照:{" "}
-              <a
-                href={`https://www.wikidata.org/wiki/${manga.wikidata_qid}`}
-                target="_blank"
-                rel="noopener nofollow"
-                className="underline decoration-dotted underline-offset-2 hover:text-ink/60"
-              >
-                Wikidata {manga.wikidata_qid}
-              </a>
-            </p>
+          {/* 外部リンク = 存在するものだけ作品/著者を明示して下部に集約。
+              ・作品 AniList = anilist_id(連携済み作品のみ)
+              ・著者 Wikidata = wikidata_qid(= series.qid は著者QIDなので「著者」と明示)
+              ・作品 Wikidata = 作品QID取得後に追加予定(現状データ無し=非表示) */}
+          {(manga.anilist_id || manga.wikidata_qid) && (
+            <div className="mt-8 flex flex-wrap items-center gap-x-4 gap-y-1.5 text-[11px] text-ink/45">
+              <span className="font-semibold text-ink/40">外部リンク</span>
+              {manga.anilist_id && (
+                <a
+                  href={`https://anilist.co/manga/${manga.anilist_id}`}
+                  target="_blank"
+                  rel="noopener nofollow"
+                  className="underline decoration-dotted underline-offset-2 hover:text-[var(--color-accent)]"
+                >
+                  作品: AniList #{manga.anilist_id}
+                </a>
+              )}
+              {manga.wikidata_qid && (
+                <a
+                  href={`https://www.wikidata.org/wiki/${manga.wikidata_qid}`}
+                  target="_blank"
+                  rel="noopener nofollow"
+                  className="underline decoration-dotted underline-offset-2 hover:text-[var(--color-accent)]"
+                >
+                  著者: Wikidata {manga.wikidata_qid}
+                </a>
+              )}
+            </div>
           )}
         </div>
       </div>
