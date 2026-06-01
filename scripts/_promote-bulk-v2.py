@@ -1413,7 +1413,10 @@ def main():
         if (not cur_au2) or (len(cur_au2) == 1 and cur_au2[0].get("name") == "(unknown)"):
             for k in [series["series_key"], *(page_keys or [])]:
                 if k and k in author_fill_madb:
-                    new_yml["authors"] = author_fill_madb[k]["authors"]
+                    e2 = author_fill_madb[k]
+                    new_yml["authors"] = e2["authors"]
+                    if e2.get("original_authors") and not new_yml.get("original_authors"):
+                        new_yml["original_authors"] = [{"name": n, "role": "writer"} for n in e2["original_authors"]]
                     author_fill_madb_pages += 1
                     break
         out_path = OUT_DIR / f"{slug}.yml"
