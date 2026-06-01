@@ -1245,6 +1245,15 @@ def main():
     synopsis_pages = 0
     print(f"  synopsis 和訳 map: {len(synopsis_ja):,} anilist_id", file=sys.stderr)
 
+    # 雑誌 drop(cm105 雑誌マスター準拠)= series_key 集合。 雑誌は作品でないため除外。
+    _mag_path = ROOT / "data" / "seeds" / "magazines-drop.yml"
+    mag_drop_keys = set()
+    if _mag_path.exists():
+        for e in (yaml.safe_load(_mag_path.read_text(encoding="utf-8")) or {}).get("magazines", []):
+            if e.get("series_key"):
+                mag_drop_keys.add(e["series_key"])
+    print(f"  雑誌drop(cm105): {len(mag_drop_keys):,} series_key", file=sys.stderr)
+
     stats = {"total": 0, "regenerated": 0, "not_found_in_db": 0,
              "no_editions": 0, "dropped_spinoff_old": 0,
              "dropped_non_manga": 0}
@@ -1275,6 +1284,11 @@ def main():
         if not series:
             stats["not_found_in_db"] += 1
             not_found.append(f"{ypath.name}  title={title}")
+            continue
+        # 雑誌(cm105マスター準拠)は作品でないため除外
+        if series.get("series_key") in mag_drop_keys:
+            stats["dropped_non_manga"] += 1
+            dropped_non_manga.append(f"{ypath.name}  title={title}  (= 雑誌cm105)")
             continue
         # 種2 subtitle に隠れた 抜粋本 (= title が本編名 + sub=「○○傑作集」 等) を drop
         sub = series.get("subtitle") or ""

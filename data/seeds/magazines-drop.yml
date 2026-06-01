@@ -1,242 +1,608 @@
-# 雑誌/アンソロ誌 drop リスト — 自動生成(_gen-magazine-drop.py)+ 手動確認。
-# MANGAL は単行本=漫画作品のDB。 雑誌(掲載媒体)・実話/怖い話mook・
-# トリビュートアンソロは作品でないため drop。 distinct著者≥20 が一次抽出。
-# ★promote は confirmed:true のみ drop。 false は目視確認待ち(誤検出疑い)。
-# 種2/種3 不変・表示制御のみ・可逆。
+# 雑誌 drop リスト(cm105 雑誌マスター準拠)— 自動生成 _gen-magazine-drop-cm105.py
+# MANGAL は単行本=作品のDB。 雑誌(mook含む)は cm105(MADBマンガ雑誌マスター)で
+# 確実に識別して drop。 ★ガード: cm105一致でも単一著者+巻番号=実漫画(ZERO/ARIA等)は保護。
+# 種2/種3 不変・promote の表示制御のみ・series_key 単位。
 magazines:
-- title: ヤバ盛!本当にあった〔○生〕ここだけの話極
-  confirmed: true
-  records: 13
-  authors: 144
-- title: スゴ盛!本当にあった〔○生〕ここだけの話極
-  confirmed: true
-  records: 11
-  authors: 129
-- title: 実録日本のタブー
-  confirmed: true
-  records: 9
-  authors: 106
-- title: 超盛!本当にあった〔○生〕ここだけの話〔○超 〕
-  confirmed: true
-  records: 7
-  authors: 106
-- title: 激盛!本当にあった〔○生〕ここだけの話 〔○超〕
-  confirmed: true
-  records: 7
-  authors: 99
-- title: めちゃ盛!本当にあった〔○生〕ここだけの話祭
-  confirmed: true
-  records: 7
-  authors: 81
-- title: ばく盛!本当にあった〔○生〕ここだけの話祭
-  confirmed: true
-  records: 6
-  authors: 79
-- title: 艦隊これくしょん -艦これ- アンソロジーコミック 横須賀鎮守府編
-  confirmed: true
-  records: 8
-  authors: 73
-- title: 本当にあった〔○生〕ここだけの話〔○超 〕
-  confirmed: true
-  records: 4
-  authors: 70
-- title: ひぐらしのなく頃にコミックアンソロジー
-  confirmed: true
-  records: 8
-  authors: 68
-- title: 実録裏稼業大事典
-  confirmed: true
-  records: 4
-  authors: 61
-- title: つぼみ
-  confirmed: true
-  records: 8
-  authors: 60
-- title: Fate/stay night コミックアンソロジー
-  confirmed: true
-  records: 5
-  authors: 60
-- title: いただき〔□／〕幸せごはんセレクション
-  confirmed: true
-  records: 4
-  authors: 58
-- title: Love ＆ Peace
-  confirmed: true
-  records: 6
-  authors: 54
-- title: 死ぬほど怖い話
-  confirmed: true
-  records: 4
-  authors: 50
-- title: 艦隊これくしょん-艦これ-コミックアラカルト 舞鶴鎮守府編
-  confirmed: true
-  records: 6
-  authors: 49
-- title: コミティア30thクロニクル
-  confirmed: true
-  records: 3
-  authors: 48
-- title: 獄中大全
-  confirmed: true
-  records: 3
-  authors: 48
-- title: on BLUE
-  confirmed: true
-  records: 18
-  authors: 47
-- title: 実録裏ワザファイル
-  confirmed: true
-  records: 3
-  authors: 45
-- title: 実話マジで怖ーい話
-  confirmed: true
-  records: 5
-  authors: 43
-- title: 稲川淳二の超こわい話
-  confirmed: true
-  records: 6
-  authors: 43
-- title: 地獄少女閻魔あいセレクション激こわストーリー
-  confirmed: true
-  records: 9
-  authors: 42
-- title: 実話ワルの金脈
-  confirmed: true
-  records: 3
-  authors: 42
-- title: 警察の正体
-  confirmed: true
-  records: 4
-  authors: 42
-- title: アックス
-  confirmed: true
-  records: 4
-  authors: 40
-- title: 猫本
-  confirmed: true
-  records: 5
-  authors: 38
-- title: ルチル
-  confirmed: true
-  records: 5
-  authors: 38
-- title: まんがタイムきららカリノ
-  confirmed: false
-  records: 4
-  authors: 37
-- title: 刑務所のすべて
-  confirmed: true
-  records: 3
-  authors: 37
-- title: 好きです、この少女まんが。
-  confirmed: true
-  records: 5
-  authors: 35
-- title: ブラック・ジャックALIVE
-  confirmed: false
-  records: 6
-  authors: 34
-- title: GUSH maniaEX
-  confirmed: true
-  records: 35
-  authors: 33
-- title: 8人の名探偵犯罪調査
-  confirmed: true
-  records: 3
-  authors: 32
-- title: Fate/hollow ataraxia コミックアンソロジー
-  confirmed: true
-  records: 3
-  authors: 32
-- title: Fate/hollow ataraxia
-  confirmed: true
-  records: 3
-  authors: 31
-- title: まんが知ってはいけない消えた有名人の謎
-  confirmed: true
-  records: 4
-  authors: 31
-- title: コミック乱TWINSセレクション
-  confirmed: true
-  records: 6
-  authors: 31
-- title: 漫画版世界の歴史
-  confirmed: false
-  records: 9
-  authors: 30
-- title: コミック☆星新一
-  confirmed: true
-  records: 5
-  authors: 28
-- title: 怪談
-  confirmed: false
-  records: 17
-  authors: 26
-- title: テレビが封印する芸能人のヤバい事件史
-  confirmed: true
-  records: 3
-  authors: 26
-- title: 裏ワザDX
-  confirmed: true
-  records: 3
-  authors: 26
-- title: 号外On BLUE 2nd SEASON
-  confirmed: true
-  records: 5
-  authors: 26
-- title: コミックFantasy
-  confirmed: true
-  records: 6
-  authors: 24
-- title: 浅見光彦ミステリー＆旅情サスペンス
-  confirmed: true
-  records: 12
-  authors: 24
-- title: 霊感者の事件簿
-  confirmed: true
-  records: 3
-  authors: 24
-- title: 誰にも言えない(秘)
-  confirmed: false
-  records: 9
-  authors: 24
-- title: ロミオ
-  confirmed: false
-  records: 4
-  authors: 24
-- title: pure love seasons
-  confirmed: true
-  records: 4
-  authors: 23
-- title: とある科学の超電磁砲×とある魔術の禁書目録 4コマ公式アンソロジー
-  confirmed: true
-  records: 3
-  authors: 23
-- title: Api
-  confirmed: true
-  records: 7
-  authors: 23
-- title: オトコの娘コミックアンソロジー
-  confirmed: true
-  records: 5
-  authors: 22
-- title: 潜入せよ!!日本裏現場
-  confirmed: true
-  records: 3
-  authors: 22
-- title: 女装少年アンソロジーコミック
-  confirmed: true
-  records: 3
-  authors: 22
-- title: ルチル SWEET
-  confirmed: true
-  records: 4
-  authors: 21
-- title: ソニック・ザ・ヘッジホッグ
-  confirmed: false
-  records: 4
-  authors: 20
-- title: 原水爆漫画コレクション
-  confirmed: false
-  records: 5
-  authors: 20
+- series_key: name:Abouet|name:Aya
+  title: Aya
+  source: cm105
+- series_key: name:アゴーン事務局|name:Cartoon network agon
+  title: Cartoon network agon
+  source: cm105
+- series_key: name:End「R」o|name:Eden|sub:it's an endless world! Endo Hiroki.
+  title: Eden
+  source: cm105
+- series_key: qid:Q106479058|name:Fellows!
+  title: Fellows!
+  source: cm105
+- series_key: qid:Q11274092|name:Fellows!
+  title: Fellows!
+  source: cm105
+- series_key: qid:Q11369327|name:Fellows!
+  title: Fellows!
+  source: cm105
+- series_key: qid:Q11370008|name:Fellows!
+  title: Fellows!
+  source: cm105
+- series_key: qid:Q11388934|name:Fellows!
+  title: Fellows!
+  source: cm105
+- series_key: qid:Q11452968|name:Fellows!
+  title: Fellows!
+  source: cm105
+- series_key: qid:Q17210567|name:Fellows!
+  title: Fellows!
+  source: cm105
+- series_key: qid:Q24083977|name:Fellows!
+  title: Fellows!
+  source: cm105
+- series_key: qid:Q55536130|name:Fellows!
+  title: Fellows!
+  source: cm105
+- series_key: qid:Q61057844|name:Fellows!
+  title: Fellows!
+  source: cm105
+- series_key: name:佐野絵里子|name:Fellows!
+  title: Fellows!
+  source: cm105
+- series_key: name:しおやてるこ|name:Fellows!
+  title: Fellows!
+  source: cm105
+- series_key: name:吉本ますめ|name:Fellows!
+  title: Fellows!
+  source: cm105
+- series_key: qid:Q106479058|name:Fellows!（Q）
+  title: Fellows!（Q）
+  source: cm105
+- series_key: qid:Q11365437|name:Fellows!（Q）
+  title: Fellows!（Q）
+  source: cm105
+- series_key: name:かゆまみむ|name:GUS HmaniaEX
+  title: GUS HmaniaEX
+  source: cm105-curated
+- series_key: qid:Q11405623|name:GUSH maniaEX
+  title: GUSH maniaEX
+  source: cm105-curated
+- series_key: qid:Q17129811|name:GUSH maniaEX
+  title: GUSH maniaEX
+  source: cm105-curated
+- series_key: qid:Q4701143|name:GUSH maniaEX
+  title: GUSH maniaEX
+  source: cm105-curated
+- series_key: name:文月あつよ|name:GUSH maniaEX
+  title: GUSH maniaEX
+  source: cm105-curated
+- series_key: name:霧嶋珠生|name:GUSH maniaEX
+  title: GUSH maniaEX
+  source: cm105-curated
+- series_key: name:二条クロ|name:GUSH maniaEX
+  title: GUSH maniaEX
+  source: cm105-curated
+- series_key: name:東野海|name:GUSH maniaEX
+  title: GUSH maniaEX
+  source: cm105-curated
+- series_key: name:かゆまみむ|name:GUSH maniaEX
+  title: GUSH maniaEX
+  source: cm105-curated
+- series_key: name:藤本ハルキ|name:GUSH maniaEX
+  title: GUSH maniaEX
+  source: cm105-curated
+- series_key: name:楢崎ねねこ|name:GUSH maniaEX
+  title: GUSH maniaEX
+  source: cm105-curated
+- series_key: name:緑山ヨウコ|name:GUSH maniaEX
+  title: GUSH maniaEX
+  source: cm105-curated
+- series_key: name:梅松町江|name:GUSH maniaEX
+  title: GUSH maniaEX
+  source: cm105-curated
+- series_key: name:みやもと水風|name:GUSH maniaEX
+  title: GUSH maniaEX
+  source: cm105-curated
+- series_key: name:藤河るり|name:GUSH maniaEX
+  title: GUSH maniaEX
+  source: cm105-curated
+- series_key: name:加東セッコ|name:GUSH maniaEX
+  title: GUSH maniaEX
+  source: cm105-curated
+- series_key: name:みろくことこ|name:GUSH maniaEX
+  title: GUSH maniaEX
+  source: cm105-curated
+- series_key: name:タクミユウ|name:GUSH maniaEX
+  title: GUSH maniaEX
+  source: cm105-curated
+- series_key: name:西原ケイタ|name:GUSH maniaEX
+  title: GUSH maniaEX
+  source: cm105-curated
+- series_key: name:柊のぞむ|name:GUSH maniaEX
+  title: GUSH maniaEX
+  source: cm105-curated
+- series_key: name:すがはら竜|name:GUSH maniaEX
+  title: GUSH maniaEX
+  source: cm105-curated
+- series_key: name:天城れの|name:GUSH maniaEX
+  title: GUSH maniaEX
+  source: cm105-curated
+- series_key: name:徳丸佳貴,霧嶋珠生|name:GUSH maniaEX
+  title: GUSH maniaEX
+  source: cm105-curated
+- series_key: name:琥狗ハヤテ|name:GUSH maniaEX
+  title: GUSH maniaEX
+  source: cm105-curated
+- series_key: name:あきばじろぉ|name:GUSH maniaEX
+  title: GUSH maniaEX
+  source: cm105-curated
+- series_key: qid:Q11648467|name:GUSH maniaEX
+  title: GUSH maniaEX
+  source: cm105-curated
+- series_key: name:加東セツコ|name:GUSH maniaEX
+  title: GUSH maniaEX
+  source: cm105-curated
+- series_key: name:腰乃|name:GUSH maniaEX
+  title: GUSH maniaEX
+  source: cm105-curated
+- series_key: name:天王寺ミオ|name:GUSH maniaEX
+  title: GUSH maniaEX
+  source: cm105-curated
+- series_key: name:藤成ゆうき|name:GUSH maniaEX
+  title: GUSH maniaEX
+  source: cm105-curated
+- series_key: name:東野裕|name:GUSH maniaEX
+  title: GUSH maniaEX
+  source: cm105-curated
+- series_key: name:宮下キツネ|name:GUSH maniaEX
+  title: GUSH maniaEX
+  source: cm105-curated
+- series_key: name:徳丸佳貴|name:GUSH maniaEX
+  title: GUSH maniaEX
+  source: cm105-curated
+- series_key: name:嶋田尚未|name:GUSH maniaEX
+  title: GUSH maniaEX
+  source: cm105-curated
+- series_key: name:北別府ニカ|name:GUSH maniaEX
+  title: GUSH maniaEX
+  source: cm105-curated
+- series_key: qid:Q3337063|name:I LOVE YOU
+  title: I LOVE YOU
+  source: cm105
+- series_key: name:創美社|name:I LOVE YOU
+  title: I LOVE YOU
+  source: cm105
+- series_key: name:七瀬かい|name:J-kiss
+  title: J-kiss
+  source: cm105
+- series_key: name:Meimu|name:KISS.
+  title: KISS.
+  source: cm105
+- series_key: qid:Q11263851|name:Kiss in the dark
+  title: Kiss in the dark
+  source: cm105
+- series_key: qid:Q11477920|name:Kiss in the dark
+  title: Kiss in the dark
+  source: cm105
+- series_key: name:Meimu|name:Kiss.
+  title: Kiss.
+  source: cm105
+- series_key: name:奥田鉄人|name:MIMI
+  title: MIMI
+  source: cm105
+- series_key: name:ルシール・アザリロヴィック|name:Mimi
+  title: Mimi
+  source: cm105
+- series_key: name:平野侑貴|name:Narcis
+  title: Narcis
+  source: cm105
+- series_key: qid:Q11345139|name:On blue
+  title: On blue
+  source: cm105-curated
+- series_key: qid:Q11659171|name:On blue
+  title: On blue
+  source: cm105-curated
+- series_key: qid:Q17220907|name:On blue
+  title: On blue
+  source: cm105-curated
+- series_key: qid:Q5399979|name:On blue
+  title: On blue
+  source: cm105-curated
+- series_key: name:たなと|name:On blue
+  title: On blue
+  source: cm105-curated
+- series_key: qid:Q11190769|name:Sakura
+  title: Sakura
+  source: cm105
+- series_key: qid:Q17572|name:UTOPIA
+  title: UTOPIA
+  source: cm105
+- series_key: qid:Q11274092|name:fellows
+  title: fellows
+  source: cm105
+- series_key: qid:Q11388934|name:fellows
+  title: fellows
+  source: cm105
+- series_key: name:KEN川崎|name:milky comic
+  title: milky comic
+  source: cm105
+- series_key: qid:Q106478436|name:on BLUE
+  title: on BLUE
+  source: cm105-curated
+- series_key: qid:Q11530825|name:on BLUE
+  title: on BLUE
+  source: cm105-curated
+- series_key: name:SHOOWA|name:on BLUE
+  title: on BLUE
+  source: cm105-curated
+- series_key: name:秀良子|name:on BLUE
+  title: on BLUE
+  source: cm105-curated
+- series_key: name:たなと|name:on BLUE
+  title: on BLUE
+  source: cm105-curated
+- series_key: name:新井煮干し子|name:on BLUE
+  title: on BLUE
+  source: cm105-curated
+- series_key: name:阿弥陀しずく|name:on BLUE
+  title: on BLUE
+  source: cm105-curated
+- series_key: name:のばらあいこ|name:on BLUE
+  title: on BLUE
+  source: cm105-curated
+- series_key: name:akabeko|name:on BLUE
+  title: on BLUE
+  source: cm105-curated
+- series_key: name:Akabeko|name:on BLUE
+  title: on BLUE
+  source: cm105-curated
+- series_key: qid:Q11345139|name:on blue
+  title: on blue
+  source: cm105-curated
+- series_key: qid:Q22127383|name:on blue
+  title: on blue
+  source: cm105-curated
+- series_key: name:SHOOWA|name:on blue
+  title: on blue
+  source: cm105-curated
+- series_key: name:浅野まいこ|name:あなたが体験した怖い話
+  title: あなたが体験した怖い話
+  source: cm105
+- series_key: name:若木書房「こだま」編集部|name:こだま
+  title: こだま
+  source: cm105
+- series_key: name:金園社|name:すみれ
+  title: すみれ
+  source: cm105
+- series_key: name:金竜出版社|name:すみれ
+  title: すみれ
+  source: cm105
+- series_key: qid:Q6102301|name:つぼみ
+  title: つぼみ
+  source: cm105
+- series_key: name:きだたつみ|name:つぼみ
+  title: つぼみ
+  source: cm105
+- series_key: name:きづきあきら+サトウナンキ|name:つぼみ
+  title: つぼみ
+  source: cm105
+- series_key: name:きぎたつみ|name:つぼみ
+  title: つぼみ
+  source: cm105
+- series_key: name:かがみふみお|name:つぼみ
+  title: つぼみ
+  source: cm105
+- series_key: name:たいしょう田中|name:つぼみ
+  title: つぼみ
+  source: cm105
+- series_key: name:ごぉ|name:ひまわり
+  title: ひまわり
+  source: cm105
+- series_key: qid:Q11225662|name:ほんとにあった怖い話
+  title: ほんとにあった怖い話
+  source: cm105
+- series_key: name:みつきけい|name:ほんとにあった怖い話
+  title: ほんとにあった怖い話
+  source: cm105
+- series_key: name:Tono|name:ほんとにあった笑っちゃう話
+  title: ほんとにあった笑っちゃう話
+  source: cm105
+- series_key: qid:Q11542157|name:まんがグリム童話
+  title: まんがグリム童話
+  source: cm105
+- series_key: name:一川未宇|name:まんがグリム童話
+  title: まんがグリム童話
+  source: cm105
+- series_key: name:つか絵夢子|name:まんがグリム童話
+  title: まんがグリム童話
+  source: cm105
+- series_key: name:もろおか紀美子|name:まんがグリム童話
+  title: まんがグリム童話
+  source: cm105
+- series_key: name:かずはしとも,つか絵夢子,藤田素子,さとう智子,吉村菜由,逢坂みや,比古地朔弥|name:まんがグリム童話
+  title: まんがグリム童話
+  source: cm105
+- series_key: name:つか絵夢子,板東いるか,天ヶ江ルチカ,もろおか紀美子,葉月暘子,はやさかあみい|name:まんがグリム童話
+  title: まんがグリム童話
+  source: cm105
+- series_key: name:まつざきあけみ,天ヶ江ルチカ,岡田純子,もろおか紀美子,遠野麻紀,北川玲子,葉月暘子|name:まんがグリム童話
+  title: まんがグリム童話
+  source: cm105
+- series_key: name:天ヶ江ルチカ,かずはしとも,一川未宇,空路,北川玲子,白井幸子,もろおか紀美子|name:まんがグリム童話
+  title: まんがグリム童話
+  source: cm105
+- series_key: name:一川未宇,真崎春望,板東いるか,天ケ江ルチカ,もろおか紀美子,小山田いく,吉村菜由|name:まんがグリム童話
+  title: まんがグリム童話
+  source: cm105
+- series_key: name:天ケ江ルチカ,一川未宇,藤田あつ子,小山田いく,藤田素子,北川玲子,つるたえみこ,空路,吉村菜由,つるま里子,呪みちる|name:まんがグリム童話
+  title: まんがグリム童話
+  source: cm105
+- series_key: name:天ケ江ルチカ,藤田あつ子,つか絵夢子,藤田素子,もろおか紀美子,近藤厚子,つるたえみこ|name:まんがグリム童話
+  title: まんがグリム童話
+  source: cm105
+- series_key: name:天ヶ江ルチカ,花小路ゆみ,真崎春望,つか絵夢子,愛田真夕美,浅野まいこ,吉村菜由,高木裕里|name:まんがグリム童話
+  title: まんがグリム童話
+  source: cm105
+- series_key: name:岡田純子,天ヶ江ルチカ,つか絵夢子,藤田素子,安藤なつ,三木内麻耶|name:まんがグリム童話
+  title: まんがグリム童話
+  source: cm105
+- series_key: name:板東いるか,かずはしとも,竹崎真実,天ヶ江ルチカ,岡田純子,伊藤結花理|name:まんがグリム童話
+  title: まんがグリム童話
+  source: cm105
+- series_key: name:板東いるか,竹崎真実,一川未宇,つか絵夢子,原ちえこ,藤田素子|name:まんがグリム童話
+  title: まんがグリム童話
+  source: cm105
+- series_key: name:浅野まいこ,天ケ江ルチカ,伊藤結花理,空路,吉村菜由|name:まんがグリム童話
+  title: まんがグリム童話
+  source: cm105
+- series_key: name:竹崎真実,天ケ江ルチカ,藤田素子,高瀬志帆,森みずほ,小山田いく,佐々木彩乃,藤崎晶子,穂実あゆこ,月森雅子|name:まんがグリム童話
+  title: まんがグリム童話
+  source: cm105
+- series_key: name:竹崎真実,板東いるか,つか絵夢子,イケスミチエコ,小山田いく,岡田純子,もろおか紀美子|name:まんがグリム童話
+  title: まんがグリム童話
+  source: cm105
+- series_key: name:魔木子,岡田純子,天ヶ江ルチカ,かずはしとも,麻実美里,小野双葉,もろおか紀美子|name:まんがグリム童話
+  title: まんがグリム童話
+  source: cm105
+- series_key: name:魔木子,花小路ゆみ,天ケ江ルチカ,橘花夜,麻実美里,菜々香,藤田素子,三木内麻耶,つるたえみこ|name:まんがグリム童話
+  title: まんがグリム童話
+  source: cm105
+- series_key: name:魔木子,板東いるか,花小路ゆみ,比古地朔弥|name:まんがグリム童話
+  title: まんがグリム童話
+  source: cm105
+- series_key: qid:Q11278399|name:まんがグリム童話
+  title: まんがグリム童話
+  source: cm105
+- series_key: qid:Q11473666|name:まんがグリム童話
+  title: まんがグリム童話
+  source: cm105
+- series_key: name:天ヶ江ルチカ|name:まんがグリム童話
+  title: まんがグリム童話
+  source: cm105
+- series_key: name:かずはしとも|name:まんがグリム童話
+  title: まんがグリム童話
+  source: cm105
+- series_key: name:天ケ江ルチカ|name:まんがグリム童話
+  title: まんがグリム童話
+  source: cm105
+- series_key: name:浅野まいこ|name:まんがグリム童話
+  title: まんがグリム童話
+  source: cm105
+- series_key: qid:Q328572|name:アックス
+  title: アックス
+  source: cm105
+- series_key: name:C.S.P.|name:アックス
+  title: アックス
+  source: cm105
+- series_key: name:S・O改メ赤塚フジヨ|name:アックス
+  title: アックス
+  source: cm105
+- series_key: name:はなわかずいち|name:アックス
+  title: アックス
+  source: cm105
+- series_key: name:MARIKO|name:アニパロコミックス
+  title: アニパロコミックス
+  source: cm105
+- series_key: name:マイク・デオダート|name:インフィニティ
+  title: インフィニティ
+  source: cm105
+- series_key: qid:Q8955845|name:コミックFantasy
+  title: コミックFantasy
+  source: cm105
+- series_key: qid:Q3076805|name:コミックFantasy
+  title: コミックFantasy
+  source: cm105
+- series_key: qid:Q4531338|name:コミックFantasy
+  title: コミックFantasy
+  source: cm105
+- series_key: name:著]坂田靖子|name:コミックFantasy
+  title: コミックFantasy
+  source: cm105
+- series_key: name:著]ますむらひろし|name:コミックFantasy
+  title: コミックFantasy
+  source: cm105
+- series_key: name:あびぃ|name:コミックおきなわ
+  title: コミックおきなわ
+  source: cm105
+- series_key: qid:Q11501241|name:コミックバーニー
+  title: コミックバーニー
+  source: cm105
+- series_key: name:MEE＆サンダルマン|name:コミック・ラム
+  title: コミック・ラム
+  source: cm105
+- series_key: name:MEE&サンダルマン|name:コミック・ラム
+  title: コミック・ラム
+  source: cm105
+- series_key: qid:Q107554737|name:コミック格闘王
+  title: コミック格闘王
+  source: cm105
+- series_key: name:梶研吾|name:コミック格闘王
+  title: コミック格闘王
+  source: cm105
+- series_key: qid:Q193300|name:ジュンマンガ
+  title: ジュンマンガ
+  source: cm105
+- series_key: name:ブライアン・アザレロ|name:ジョーカー
+  title: ジョーカー
+  source: cm105
+- series_key: name:スコット・ロブデル|name:ジョーカー
+  title: ジョーカー
+  source: cm105
+- series_key: name:女性セブン|name:セブンコミック
+  title: セブンコミック
+  source: cm105
+- series_key: name:週刊・月刊セブンティーン|name:セブンティーンspecial
+  title: セブンティーンspecial
+  source: cm105
+- series_key: name:小野寺ケン|name:タイガーマスク
+  title: タイガーマスク
+  source: cm105
+- series_key: qid:Q11455165|name:タイガー・マスク
+  title: タイガー・マスク
+  source: cm105
+- series_key: qid:Q48762211|name:ダリア
+  title: ダリア
+  source: cm105
+- series_key: name:+画人|name:ティーン・エージャー
+  title: ティーン・エージャー
+  source: cm105
+- series_key: name:D.オニール|name:バットマン
+  title: バットマン
+  source: cm105
+- series_key: name:岩尾収蔵|name:フェスタ
+  title: フェスタ
+  source: cm105
+- series_key: name:からすだとおる|name:ポテポテト
+  title: ポテポテト
+  source: cm105
+- series_key: name:「ガロ」元編集部|name:マンガの鬼
+  title: マンガの鬼
+  source: cm105
+- series_key: qid:Q11272358|name:ルチル
+  title: ルチル
+  source: cm105
+- series_key: qid:Q11319186|name:ルチル
+  title: ルチル
+  source: cm105
+- series_key: name:やしきゆかり|name:ルチル
+  title: ルチル
+  source: cm105
+- series_key: name:あきよし奈魚|name:ルチル
+  title: ルチル
+  source: cm105
+- series_key: name:さわらぎ楓|name:ルチル
+  title: ルチル
+  source: cm105
+- series_key: qid:Q11319186|name:ルチル SWEET
+  title: ルチル SWEET
+  source: cm105-curated
+- series_key: name:宏橋昌水|name:ルチル SWEET
+  title: ルチル SWEET
+  source: cm105-curated
+- series_key: name:二宮悦巳|name:ルチル SWEET
+  title: ルチル SWEET
+  source: cm105-curated
+- series_key: name:やしきゆかり|name:ルチル SWEET
+  title: ルチル SWEET
+  source: cm105-curated
+- series_key: name:ささだ泉|name:ロミオ
+  title: ロミオ
+  source: cm105
+- series_key: name:枯沢北|name:ロミオ
+  title: ロミオ
+  source: cm105
+- series_key: name:朝比奈まり|name:ロミオ
+  title: ロミオ
+  source: cm105
+- series_key: name:大阪ぴえ郎|name:ロミオ
+  title: ロミオ
+  source: cm105
+- series_key: name:河出書房新社|name:九龍
+  title: 九龍
+  source: cm105
+- series_key: qid:Q3100347|name:人形の家
+  title: 人形の家
+  source: cm105
+- series_key: name:阿島俊|name:同人誌ハンドブック
+  title: 同人誌ハンドブック
+  source: cm105
+- series_key: name:ファンロード編集部|name:同人誌ハンドブック
+  title: 同人誌ハンドブック
+  source: cm105
+- series_key: name:天樹征丸,金成陽三郎|name:名探偵コナン＆金田一少年の事件簿
+  title: 名探偵コナン＆金田一少年の事件簿
+  source: cm105
+- series_key: qid:Q966701|name:名探偵コナン＆金田一少年の事件簿
+  title: 名探偵コナン＆金田一少年の事件簿
+  source: cm105
+- series_key: name:紫垣まゆみ|name:大恐怖
+  title: 大恐怖
+  source: cm105
+- series_key: name:スチーブンソン|name:宝島
+  title: 宝島
+  source: cm105
+- series_key: name:新山竜三|name:少女ロマンス
+  title: 少女ロマンス
+  source: cm105
+- series_key: qid:Q11465222|name:幸せな結婚
+  title: 幸せな結婚
+  source: cm105
+- series_key: name:しのざき薫|name:幸せな結婚
+  title: 幸せな結婚
+  source: cm105
+- series_key: qid:Q3136353|name:斬鬼
+  title: 斬鬼
+  source: cm105
+- series_key: name:週刊少年ジャンプ|name:最強ジャンプ
+  title: 最強ジャンプ
+  source: cm105
+- series_key: qid:Q17349658|name:本当にあった〔○生〕ここだけの話
+  title: 本当にあった〔○生〕ここだけの話
+  source: cm105
+- series_key: qid:Q109596251|name:本当にあった笑える話
+  title: 本当にあった笑える話
+  source: cm105
+- series_key: qid:Q11538067|name:本当にあった笑える話
+  title: 本当にあった笑える話
+  source: cm105
+- series_key: name:イシモリショウタロウ|name:現代コミック
+  title: 現代コミック
+  source: cm105
+- series_key: qid:Q11383543|name:現代コミック
+  title: 現代コミック
+  source: cm105
+- series_key: qid:Q1141948|name:現代コミック
+  title: 現代コミック
+  source: cm105
+- series_key: qid:Q11538995|name:現代コミック
+  title: 現代コミック
+  source: cm105
+- series_key: qid:Q1358489|name:現代コミック
+  title: 現代コミック
+  source: cm105
+- series_key: qid:Q2661273|name:現代コミック
+  title: 現代コミック
+  source: cm105
+- series_key: qid:Q3136353|name:現代コミック
+  title: 現代コミック
+  source: cm105
+- series_key: qid:Q614514|name:現代コミック
+  title: 現代コミック
+  source: cm105
+- series_key: qid:Q717936|name:現代コミック
+  title: 現代コミック
+  source: cm105
+- series_key: name:尾崎秀樹|name:現代コミック
+  title: 現代コミック
+  source: cm105
+- series_key: name:BUNNY MAN|name:現代猟奇伝
+  title: 現代猟奇伝
+  source: cm105
+- series_key: name:西山アラタ|name:結婚しようよ!|sub:幼馴染はネコ科獣人
+  title: 結婚しようよ!
+  source: cm105
+- series_key: qid:Q1040261|name:花とゆめプラチナ
+  title: 花とゆめプラチナ
+  source: cm105
+- series_key: name:柴田昌房|name:花とゆめプラチナ
+  title: 花とゆめプラチナ
+  source: cm105
+- series_key: name:東大助|name:蜘蛛
+  title: 蜘蛛
+  source: cm105
