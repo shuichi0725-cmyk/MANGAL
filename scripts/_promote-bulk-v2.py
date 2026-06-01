@@ -815,6 +815,17 @@ def edition_passes_filter(ed_row: dict) -> bool:
     return True
 
 
+# AniList genre → master key 対応(種a/種3 カテゴリ統合。 Hentai は除外=成年フラグで処理)
+ANILIST_GENRE_TO_MASTER = {
+    "Romance": "romance", "Comedy": "comedy", "Drama": "drama", "Action": "action",
+    "Fantasy": "fantasy", "Slice of Life": "slice-of-life", "Adventure": "adventure",
+    "Sci-Fi": "sci-fi", "Mystery": "mystery", "Horror": "horror", "Sports": "sports",
+    "Mecha": "mecha", "Music": "music", "Thriller": "suspense",
+    "Supernatural": "supernatural", "Ecchi": "ecchi", "Psychological": "mind-game",
+    "Mahou Shoujo": "mahou-shoujo",
+}
+
+
 def _sanitize_volnum(number, release_date, volume_label):
     """季刊/年刊 issue の『年』が巻番号に誤 parse されたもの (= 「2022 春」→ number 2022) を
     0 (= 号扱い) に降格。 ★実漫画の巻番号は 1900 に到達しない (= こち亀 201 が最大級) ため
@@ -1387,6 +1398,14 @@ def main():
                     new_yml["synonyms"] = en["synonyms"]
                 if en.get("genres_anilist"):
                     new_yml["genres_anilist"] = en["genres_anilist"]
+                    # ★種a genres を master key にマップして 種3 genres に純粋追加(検索可能化)。
+                    #   「あるものはそのまま」= 既存 genres は不変、 重複しない master key のみ追加。
+                    cur_g = new_yml.get("genres") or []
+                    for g in en["genres_anilist"]:
+                        mk = ANILIST_GENRE_TO_MASTER.get(g)
+                        if mk and mk in valid_gens and mk not in cur_g:
+                            cur_g.append(mk)
+                    new_yml["genres"] = cur_g
                 if en.get("tags"):
                     new_yml["tags"] = en["tags"]
                 enrich_pages += 1
