@@ -39,7 +39,7 @@ export default async function MangaDetailPage({
   const FilterLink = ({ href, children }: { href: string; children: React.ReactNode }) => (
     <Link
       href={href}
-      className="inline-flex items-center rounded-[var(--radius-tag)] border border-[var(--color-line)] bg-[var(--color-surface)] px-2.5 py-1 text-[13px] font-medium text-ink/85 transition-colors hover:border-[var(--color-accent)] hover:text-[var(--color-accent)]"
+      className="inline-flex items-center rounded-[var(--radius-tag)] border border-[var(--color-line)] bg-[var(--color-surface)] px-2.5 py-1 text-[13px] font-medium text-ink/85 transition duration-100 hover:border-[var(--color-accent)] hover:text-[var(--color-accent)] active:scale-[0.94] active:bg-[var(--color-surface-2)] active:border-[var(--color-accent)]"
     >
       {children}
     </Link>
