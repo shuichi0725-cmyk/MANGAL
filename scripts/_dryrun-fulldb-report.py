@@ -21,16 +21,24 @@ PRE = pm.DROP_TITLE_PREFIX_PATTERNS
 CON = pm.DROP_TITLE_CONTAINS_PATTERNS
 SUBP = pm.DROP_SUBTITLE_PATTERNS
 
-# === promote の auto-merge(17,688群)を key→page-canonical に展開 ===
+# === promote の merge(auto json → hand yml 上書き)を key→page-canonical に展開 ===
+import yaml
 key2page = {}
 merges = json.load((ROOT / "data/seeds/series-merge-auto.json").open(encoding="utf-8"))["merges"]
 for g in merges:
     mk = g.get("merge_keys") or []
     if not mk: continue
-    canon = mk[0]  # 群の代表(安定なら何でも可)
-    for k in mk:
-        key2page[k] = canon
-print(f"auto-merge 群: {len(merges):,}  / 統合される series_key: {len(key2page):,}")
+    for k in mk: key2page[k] = mk[0]
+n_auto = len(key2page)
+# hand merge(series-merge.yml)= promote と同じく後勝ちで上書き
+hand = yaml.safe_load((ROOT / "data/seeds/series-merge.yml").read_text(encoding="utf-8")) or []
+n_hand = 0
+for e in hand:
+    mk = e.get("merge_keys") or []
+    if len(mk) < 2: continue
+    for k in mk: key2page[k] = mk[0]
+    n_hand += 1
+print(f"auto-merge 群統合key: {n_auto:,}  + hand(merge_keys)群: {n_hand:,}")
 
 # === slug-final 全行を ★auto-merge canonical でページ集約 ===
 pages = defaultdict(lambda: {"members": [], "title": None, "vols": 0, "slug": None})

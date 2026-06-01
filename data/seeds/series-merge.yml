@@ -80,3 +80,234 @@
     振り分けたが、 実態は 連続通常巻 = merge_edition_types: true で standard と
     shinsoban を 同 bucket 集計。
     cluster 統合により audit 偽陽性 解消。 ユーザ判断 = 2026-05-25。
+
+# ── frag-merge: 同題+著者完全一致+無副題の版違い統合 (_merge-frag-build.py) ──
+- main: '新世紀エヴァンゲリオン'
+  merge_keys:
+  - 'name:GAINAX|name:新世紀エヴァンゲリオン'
+  - 'name:カラー|name:新世紀エヴァンゲリオン'
+  - 'qid:Q282121|name:新世紀エヴァンゲリオン'
+  note: 'frag-merge: 著者完全一致+無副題の版違い 3key'
+- main: 'しゅごキャラ!'
+  merge_keys:
+  - 'name:PEACH-PIT|name:しゅごキャラ!'
+  - 'name:Peach-Pit|name:しゅごキャラ!'
+  - 'name:Peach-pit|name:しゅごキャラ!'
+  note: 'frag-merge: 著者完全一致+無副題の版違い 3key'
+- main: '新上ってなンボ!!太一よ泣くな'
+  merge_keys:
+  - 'qid:Q11412214|name:(新)上ってなンボ!!太一よ泣くな'
+  - 'qid:Q11412214|name:新々上ってなンボ!!太一よ泣くな'
+  - 'qid:Q11412214|name:新上ってなンボ!!太一よ泣くな'
+  - 'qid:Q967455|name:新々上ってなンボ!!太一よ泣くな'
+  - 'qid:Q967455|name:新上ってなンボ!!太一よ泣くな'
+  - 'qid:Q967455|name:新上ってなンボ太一よ泣くな'
+  note: 'frag-merge: 著者完全一致+無副題の版違い 6key'
+- main: 'カードキャプターさくら'
+  merge_keys:
+  - 'name:Clamp|name:カードキャプターさくら'
+  - 'name:ショート・みちる|name:カードキャプターさくら'
+  note: 'frag-merge: 著者完全一致+無副題の版違い 2key'
+- main: 'パンプキン'
+  merge_keys:
+  - 'name:L・LIME|name:パンプキン'
+  - 'name:オーエスビー出版|name:パンプキン'
+  note: 'frag-merge: 著者完全一致+無副題の版違い 2key'
+- main: 'パンプキン'
+  merge_keys:
+  - 'name:L・ライム|name:パンプキン'
+  - 'name:YUMI|name:パンプキン'
+  note: 'frag-merge: 著者完全一致+無副題の版違い 2key'
+- main: 'パンプキン'
+  merge_keys:
+  - 'name:MASAO|name:パンプキン'
+  - 'name:スタジオバトル|name:パンプキン'
+  note: 'frag-merge: 著者完全一致+無副題の版違い 2key'
+- main: 'BOYS BE…'
+  merge_keys:
+  - 'name:イタバシマサヒロ|name:BOYS BE…'
+  - 'name:イタバシマサヒロ|name:Boys be…'
+  note: 'frag-merge: 著者完全一致+無副題の版違い 2key'
+- main: 'ナカノヒトゲノム【実況中】'
+  merge_keys:
+  - 'name:おそら|name:ナカノヒトゲノム〈実況中〉'
+  - 'name:おそら|name:ナカノヒトゲノム【実況中】'
+  note: 'frag-merge: 著者完全一致+無副題の版違い 2key'
+- main: 'ちび本当にあった笑える話'
+  merge_keys:
+  - 'qid:Q109596251|name:ちび本当にあった笑える話'
+  - 'qid:Q11538067|name:ちび本当にあった笑える話'
+  note: 'frag-merge: 著者完全一致+無副題の版違い 2key'
+- main: 'とある科学の超電磁砲'
+  merge_keys:
+  - 'name:灰村キヨタカ|name:とある科学の超電磁砲'
+  - 'qid:Q11330038|name:とある科学の超電磁砲'
+  note: 'frag-merge: 著者完全一致+無副題の版違い 2key'
+- main: 'Barレモン・ハート'
+  merge_keys:
+  - 'name:ファミリー企画|name:BARレモン・ハート'
+  - 'qid:Q3776937|name:Barレモン・ハート'
+  note: 'frag-merge: 著者完全一致+無副題の版違い 2key'
+- main: 'ホップ☆ステップ賞SELECTION'
+  merge_keys:
+  - 'name:ホーム社|name:ホップ☆ステップ賞 SELECTION'
+  - 'name:ホーム社|name:ホップ☆ステップ賞SELECTION'
+  note: 'frag-merge: 著者完全一致+無副題の版違い 2key'
+- main: '冥王計画ゼオライマーΩ'
+  merge_keys:
+  - 'name:ワタリユウ|name:冥王計画 (プロジェクト) ゼオライマーΩ'
+  - 'name:ワタリユウ|name:冥王計画ゼオライマーΩ'
+  - 'qid:Q1079837|name:冥王計画ゼオライマー'
+  note: 'frag-merge: 著者完全一致+無副題の版違い 3key'
+- main: '名探偵コナン特別編'
+  merge_keys:
+  - 'name:丸伝次郎|name:名探偵コナン特別編'
+  - 'qid:Q11657721|name:名探偵コナン特別編'
+  note: 'frag-merge: 著者完全一致+無副題の版違い 2key'
+- main: '名探偵コナン特別編'
+  merge_keys:
+  - 'name:山【きし】栄一|name:名探偵コナン特別編'
+  - 'name:山【ぎし】栄一|name:名探偵コナン特別編'
+  note: 'frag-merge: 著者完全一致+無副題の版違い 2key'
+- main: 'GIANT KILLING extra ジャイアントキリング発サッカーエンターテインメントマガジン'
+  merge_keys:
+  - 'name:講談社|name:GIANT KILLING extra ジャイアントキリング発サッカーエンターテインメントマガジン'
+  - 'name:講談社|name:Giant killing extra ジャイアントキリング発サッカーエンターテインメントマガジン'
+  note: 'frag-merge: 著者完全一致+無副題の版違い 2key'
+- main: 'マンガ日本の歴史'
+  merge_keys:
+  - 'qid:Q471103|name:マンガ 日本の歴史'
+  - 'qid:Q471103|name:マンガ日本の歴史'
+  note: 'frag-merge: 著者完全一致+無副題の版違い 2key'
+- main: 'Re:ゼロから始める異世界生活'
+  merge_keys:
+  - 'name:大塚真一郎|name:Re:ゼロから始める異世界生活'
+  - 'qid:Q16138206|name:Re:ゼロから始める異世界生活'
+  note: 'frag-merge: 著者完全一致+無副題の版違い 2key'
+- main: 'ラブライブ!スーパースター!!liella! kila² life comic'
+  merge_keys:
+  - 'name:矢立肇|name:ラブライブ!スーパースター!!Liella!Kila[2] Life Comic'
+  - 'name:矢立肇|name:ラブライブ!スーパースター!!liella! kila² life comic'
+  note: 'frag-merge: 著者完全一致+無副題の版違い 2key'
+- main: 'Dear boys'
+  merge_keys:
+  - 'qid:Q1015799|name:DEAR BOYS'
+  - 'qid:Q1015799|name:Dear boys'
+  note: 'frag-merge: 著者完全一致+無副題の版違い 2key'
+- main: 'ファイアーエムブレム聖戦の系譜'
+  merge_keys:
+  - 'qid:Q11260369|name:ファイアーエムブレム 聖戦の系譜'
+  - 'qid:Q11260369|name:ファイアーエムブレム聖戦の系譜'
+  note: 'frag-merge: 著者完全一致+無副題の版違い 2key'
+- main: '宇宙戦艦ヤマト 完結編'
+  merge_keys:
+  - 'qid:Q11276108|name:宇宙戦艦ヤマト 完結編'
+  - 'qid:Q431443|name:宇宙戦艦ヤマト 完結編'
+  note: 'frag-merge: 著者完全一致+無副題の版違い 2key'
+- main: 'カスミ伝（全）'
+  merge_keys:
+  - 'qid:Q11418590|name:カスミ伝'
+  - 'qid:Q11418590|name:カスミ伝 〔○全〕'
+  - 'qid:Q11418590|name:カスミ伝△'
+  - 'qid:Q11418590|name:カスミ伝（全）'
+  note: 'frag-merge: 著者完全一致+無副題の版違い 4key'
+- main: 'ドラゴンクエスト～プリンセスアリーナ～'
+  merge_keys:
+  - 'qid:Q11443794|name:ドラゴンクエスト プリンセスアリーナ'
+  - 'qid:Q11443794|name:ドラゴンクエスト～プリンセスアリーナ～'
+  note: 'frag-merge: 著者完全一致+無副題の版違い 2key'
+- main: '今日から俺は!!'
+  merge_keys:
+  - 'qid:Q1153258|name:今日から俺は'
+  - 'qid:Q1153258|name:今日から俺は!!'
+  note: 'frag-merge: 著者完全一致+無副題の版違い 2key'
+- main: 'ハッピー!ハッピー♪'
+  merge_keys:
+  - 'qid:Q11555608|name:ハッピー!ハッピー'
+  - 'qid:Q11555608|name:ハッピー!ハッピー♪'
+  note: 'frag-merge: 著者完全一致+無副題の版違い 2key'
+- main: 'ジンキ・エクステンド リレイション'
+  merge_keys:
+  - 'qid:Q11607132|name:ジンキ・エクステンド リレイション'
+  - 'qid:Q11607132|name:ジンキ・エクステンド～リレイション～'
+  note: 'frag-merge: 著者完全一致+無副題の版違い 2key'
+- main: 'その男、ワガママにつき'
+  merge_keys:
+  - 'qid:Q11644242|name:その男、ワガママにつき'
+  - 'qid:Q11644242|name:その男、ワガママにつき+'
+  - 'qid:Q11644242|name:その男、ワガママにつき+α'
+  - 'qid:Q11644242|name:その男、ワガママにつき∞'
+  note: 'frag-merge: 著者完全一致+無副題の版違い 4key'
+- main: 'じゃじゃ馬グルーミン★ＵＰ!'
+  merge_keys:
+  - 'qid:Q1207548|name:じゃじゃ馬グルーミン★UP!'
+  - 'qid:Q1207548|name:じゃじゃ馬グルーミン★ＵＰ!'
+  note: 'frag-merge: 著者完全一致+無副題の版違い 2key'
+- main: '少女「菜美」'
+  merge_keys:
+  - 'qid:Q17159240|name:少女「菜美」'
+  - 'qid:Q17159240|name:少女菜美'
+  note: 'frag-merge: 著者完全一致+無副題の版違い 2key'
+- main: 'からかい上手の〈元〉高木さん'
+  merge_keys:
+  - 'qid:Q17230626|name:からかい上手の〈元〉高木さん'
+  - 'qid:Q17230626|name:からかい上手の〈元〉高木さん.'
+  - 'qid:Q17230626|name:からかい上手の（元）高木さん'
+  note: 'frag-merge: 著者完全一致+無副題の版違い 3key'
+- main: '藤子・F・不二雄 異色短編集'
+  merge_keys:
+  - 'qid:Q17572|name:藤子・F・不二雄 異色短編集'
+  - 'qid:Q17572|name:藤子・F・不二雄異色短編集'
+  note: 'frag-merge: 著者完全一致+無副題の版違い 2key'
+- main: 'さいとう・たかを池波正太郎時代劇画ワイドセレクション'
+  merge_keys:
+  - 'qid:Q2661273|name:さいとう・たかを/池波正太郎時代劇画ワイドセレクション'
+  - 'qid:Q2661273|name:さいとう・たかを池波正太郎時代劇画ワイドセレクション'
+  note: 'frag-merge: 著者完全一致+無副題の版違い 2key'
+- main: '雲盗り暫平'
+  merge_keys:
+  - 'qid:Q2661273|name:雲盗り暫平'
+  - 'qid:Q2661273|name:雲盗り暫平.'
+  note: 'frag-merge: 著者完全一致+無副題の版違い 2key'
+- main: '暁のARIA'
+  merge_keys:
+  - 'qid:Q2880551|name:暁のARIA'
+  - 'qid:Q2880551|name:暁のaria'
+  - 'qid:Q2880551|name:暁のＡＲＩＡ'
+  note: 'frag-merge: 著者完全一致+無副題の版違い 3key'
+- main: 'D・N・A²'
+  merge_keys:
+  - 'qid:Q452246|name:D・N・A²'
+  - 'qid:Q452246|name:D・N・〔A^2〕'
+  note: 'frag-merge: 著者完全一致+無副題の版違い 2key'
+- main: '3 THREE'
+  merge_keys:
+  - 'qid:Q469923|name:3 THREE'
+  - 'qid:Q469923|name:3 three'
+  note: 'frag-merge: 著者完全一致+無副題の版違い 2key'
+- main: '生徒諸君!教師編'
+  merge_keys:
+  - 'qid:Q5398742|name:生徒諸君! 教師編'
+  - 'qid:Q5398742|name:生徒諸君!教師編'
+  note: 'frag-merge: 著者完全一致+無副題の版違い 2key'
+- main: '生徒諸君!最終章・旅立ち'
+  merge_keys:
+  - 'qid:Q5398742|name:生徒諸君! 最終章・旅立ち'
+  - 'qid:Q5398742|name:生徒諸君!最終章・旅立ち'
+  note: 'frag-merge: 著者完全一致+無副題の版違い 2key'
+- main: '太陽が見ている（かもしれないから）'
+  merge_keys:
+  - 'qid:Q7385253|name:太陽が見ている かもしれないから'
+  - 'qid:Q7385253|name:太陽が見ている〈かもしれないから〉'
+  - 'qid:Q7385253|name:太陽が見ている（かもしれないから）'
+  note: 'frag-merge: 著者完全一致+無副題の版違い 3key'
+- main: 'クッキングパパセレクション'
+  merge_keys:
+  - 'qid:Q9187051|name:クッキングパパ セレクション'
+  - 'qid:Q9187051|name:クッキングパパセレクション'
+  note: 'frag-merge: 著者完全一致+無副題の版違い 2key'
+- main: '金田一少年の事件簿　短編集'
+  merge_keys:
+  - 'qid:Q966701|name:「金田一少年の事件簿」短編集'
+  - 'qid:Q966701|name:金田一少年の事件簿　短編集'
+  note: 'frag-merge: 著者完全一致+無副題の版違い 2key'
