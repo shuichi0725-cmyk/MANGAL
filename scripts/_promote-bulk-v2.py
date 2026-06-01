@@ -947,9 +947,13 @@ def get_editions_with_volumes(con: sqlite3.Connection, series_ids: list[int] | i
                     "volumes": [],
                 }]
                 by_type[target_type] = ed_group
-            # 既存 ed_group の volumes に追加 (= dedup は merge 段階)
+            # 既存 ed_group の volumes に追加。 ★同 number が既に在れば skip
+            #   (= MADBが後の更新で追いついた巻を 種4 と二重表示しない = 種2優先・自己retire)。
+            #   単一edition は後段 by_num dedup が効かないため、 ここで番号重複を防ぐ。
             clean_vol = {k: v for k, v in supp_vol.items() if not k.startswith("_")}
-            ed_group[0]["volumes"].append(clean_vol)
+            existing_nums = {v.get("number") for v in ed_group[0]["volumes"]}
+            if clean_vol.get("number") not in existing_nums:
+                ed_group[0]["volumes"].append(clean_vol)
     # 全 edition_group の volumes を number 順 sort (= 単一 edition + 補完追加 で 順序崩れ防止)
     def _vol_sort_key(v):
         try: return (0, int(v.get("number") or 0))
