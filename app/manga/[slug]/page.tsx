@@ -236,9 +236,9 @@ export default async function MangaDetailPage({
 
           {/* 外部リンク = 存在するものだけ作品/著者を明示して下部に集約。
               ・作品 AniList = anilist_id(連携済み作品のみ)
-              ・著者 Wikidata = wikidata_qid(= series.qid は著者QIDなので「著者」と明示)
-              ・作品 Wikidata = 作品QID取得後に追加予定(現状データ無し=非表示) */}
-          {(manga.anilist_id || manga.wikidata_qid) && (
+              ・作品 Wikidata = work_wikidata_qid(AniList漫画ID経由で一意取得)
+              ・著者 Wikidata = wikidata_qid(= series.qid は著者QIDなので「著者」と明示) */}
+          {(manga.anilist_id || manga.work_wikidata_qid || manga.wikidata_qid) && (
             <div className="mt-8 flex flex-wrap items-center gap-x-4 gap-y-1.5 text-[11px] text-ink/45">
               <span className="font-semibold text-ink/40">外部リンク</span>
               {manga.anilist_id && (
@@ -249,6 +249,16 @@ export default async function MangaDetailPage({
                   className="underline decoration-dotted underline-offset-2 hover:text-[var(--color-accent)]"
                 >
                   作品: AniList #{manga.anilist_id}
+                </a>
+              )}
+              {manga.work_wikidata_qid && (
+                <a
+                  href={`https://www.wikidata.org/wiki/${manga.work_wikidata_qid}`}
+                  target="_blank"
+                  rel="noopener nofollow"
+                  className="underline decoration-dotted underline-offset-2 hover:text-[var(--color-accent)]"
+                >
+                  作品: Wikidata {manga.work_wikidata_qid}
                 </a>
               )}
               {manga.wikidata_qid && (

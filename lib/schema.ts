@@ -99,8 +99,10 @@ export const MangaSchema = z.object({
   alternative_titles: AlternativeTitlesSchema.optional(),
   /** 受賞歴。 自由記述 (例: "講談社漫画賞 少年部門 1985") */
   awards: z.array(z.string()).optional(),
-  /** Wikidata の QID (例: "Q282470")、 cross-reference / debug 用 */
+  /** Wikidata の QID (例: "Q282470")、 cross-reference / debug 用。 ★series.qid=著者QID */
   wikidata_qid: z.string().regex(/^Q\d+$/).optional(),
+  /** 作品(work)の Wikidata QID。 AniList漫画ID(P8731)経由で一意取得。 著者QIDとは別 */
+  work_wikidata_qid: z.string().regex(/^Q\d+$/).optional(),
   /** 日本語 Wikipedia 記事 URL (= fetch:wikipedia で発見した canonical link) */
   wikipedia_url: z.string().url().optional(),
   /** AniList 由来 genres (= 種3 genres と並列保持、 上書きしない、 比較用) */
