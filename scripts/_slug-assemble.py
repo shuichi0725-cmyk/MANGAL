@@ -114,6 +114,15 @@ def base_title(key):
 def author_of(key):
     ns=[p[5:] for p in key.split("|") if p.startswith("name:")]
     return ns[0] if len(ns)>=2 else ""
+def sub_of(key):
+    s=[p[4:] for p in key.split("|") if p.startswith("sub:")]
+    return s[0] if s else ""
+def subtitle_slug(text):
+    """副題テキスト → ローマ字 slug(衝突を副題で自然に区別)。 長すぎは ~40字で切る。"""
+    if not text: return ""
+    r=drop_long(hep(text))
+    r=re.sub(r"[^a-z0-9]+","-",r).strip("-")
+    return r[:40].rstrip("-")
 SKIP_AUTHOR=re.compile(r"編集部|編集|アンソロジー|製作|スタジオ")
 def surname_romaji(author):
     """著者名→姓ローマ字(先頭token)。 編集部/数字主体は除外。"""
@@ -180,31 +189,41 @@ def main():
         if not base: base=ks or phon(seg)
         vols,year=meta.get(rep,(0,9999))
         sur=surname_romaji(a_auth.get(rep,"")) or surname_romaji(author_of(rep))
-        ent.append([rep,title,base,vols,year,sur])
+        ent.append([rep,title,base,vols,year,sur,sub_of(rep)])
 
     # 衝突 suffix
     groups=defaultdict(list)
     for row in ent: groups[row[2]].append(row)
     final={}
     suffixed=0
+    sub_used=0
+    seen=set()                                     # ★全件グローバル(group跨ぎの重複も防止)
+    def uniq(cand,fallback_base):
+        bcand=cand or fallback_base; cand=bcand; k=2
+        while cand in seen:
+            cand=f"{bcand}-{k}"; k+=1
+        seen.add(cand); return cand
+    # ① 単独群を先に確定(自然な base を優先確保)
     for base,members in groups.items():
         if len(members)==1:
-            final[members[0][0]]=base; continue
-        # 主版 = 巻数多い→古い、 無印。 従版= -発売年(主)、 同年衝突は -年-姓 / -年-index
+            final[members[0][0]]=uniq(base,base)
+    # ② 多member群を区別: 副題 → 発売年 → 姓/index
+    for base,members in groups.items():
+        if len(members)==1: continue
         ms=sorted(members,key=lambda x:(-x[3],x[4]))
-        seen=set()
         for i,row in enumerate(ms):
-            if i==0:
-                final[row[0]]=base; seen.add(base); continue
-            yr=row[4] if row[4]!=9999 else ""
-            cand=f"{base}-{yr}" if yr else base
-            if cand in seen:                       # 同年衝突 → 姓で tie-break
+            ssub=subtitle_slug(row[6]) if row[6] else ""
+            if ssub:                               # ★副題で区別(最も自然)
+                cand=f"{base}-{ssub}"; sub_used+=1
+            elif i==0 and base not in seen:        # 主版(副題無)= 無印
+                cand=base
+            else:
+                yr=row[4] if row[4]!=9999 else ""
                 sur=row[5]
-                cand=f"{base}-{yr}-{sur}" if sur else f"{base}-{yr}"
-            k=2
-            while cand in seen:
-                cand=f"{base}-{yr}-{k}"; k+=1
-            final[row[0]]=cand; seen.add(cand); suffixed+=1
+                cand=f"{base}-{yr}" if yr else (f"{base}-{sur}" if sur else base)
+            fin=uniq(cand,base)
+            final[row[0]]=fin
+            if fin!=base: suffixed+=1
 
     # 出力: 全 種3 key → そのページ(rep)の final slug
     with open(".cache/slug-final.tsv","w",encoding="utf-8") as f:
@@ -220,6 +239,7 @@ def main():
     dup=len(allslugs)-len(set(allslugs))
     print(f"merge後の実ページ: {pages:,} → 最終 slug 生成")
     print(f"  suffix 付与(別ページ衝突): {suffixed:,}")
+    print(f"  うち副題で区別: {sub_used:,}")
     print(f"  残存衝突(本来0): {dup}")
     print("wrote .cache/slug-final.tsv")
     # サンプル: suffix された群
