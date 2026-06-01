@@ -52,6 +52,10 @@ def main():
     rows = con.execute("SELECT id, series_key, title FROM series").fetchall()
     con.close()
 
+    # ★保守版(慎重): cm105一致 かつ 著者数ガード。
+    #   題単位の著者多様性は「同名異作の集合」(ZERO/EDEN/BODY=別著者の複数漫画)を
+    #   アンソロ誌と誤判定し実漫画ごと drop するため不採用。
+    #   drop は 著者0(無著者mook)or 3人以上(明確なアンソロ誌)のみ。 1-2著者=実漫画は保護。
     drops = []; protected = 0
     for sid, key, title in rows:
         n = norm(title)
@@ -59,8 +63,6 @@ def main():
         if not is_mag:
             continue
         na = len(sa.get(sid, set()))
-        # ★強ガード: cm105一致でも 著者1-2人 = 実漫画(原作+作画含む)の可能性 → 保護。
-        #   drop は 著者0(無著者mook)or 3人以上(明確なアンソロ誌)のみ。 curated は通す。
         if n not in CURATED_EXTRA and 1 <= na <= 2:
             protected += 1
             continue
