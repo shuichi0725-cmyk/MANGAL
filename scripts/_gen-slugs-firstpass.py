@@ -59,11 +59,24 @@ con=sqlite3.connect(".cache/db-v2.sqlite"); con.text_factory=lambda b:b.decode("
 title_of=dict(con.execute("SELECT series_key,title FROM series"))
 con.close()
 
+# ★promote の掲載対象外 title パターンを同期 import(映画/TVアニメ版/画集/総集編/ガイド本 等)。
+#   slug生成からも除外 = ページにならない物で衝突を水増ししない(promoteと同一基準)。
+import importlib.util
+_spec=importlib.util.spec_from_file_location("_promote_mod","scripts/_promote-bulk-v2.py")
+_pm=importlib.util.module_from_spec(_spec); _spec.loader.exec_module(_pm)
+DROP_PREFIX=_pm.DROP_TITLE_PREFIX_PATTERNS
+DROP_CONTAINS=_pm.DROP_TITLE_CONTAINS_PATTERNS
+def _is_non_manga(t):
+    if not t: return False
+    return any(t.startswith(p) for p in DROP_PREFIX) or any(c in t for c in DROP_CONTAINS)
+
 src_cnt=Counter()
 base_of={}; full_of={}; src_of={}
 for key,e in s3.items():
     if key in drop_keys:
         src_cnt["dropped"]+=1; continue   # 外国版=ページにならない=slug不要
+    if _is_non_manga(title_of.get(key)):
+        src_cnt["non_manga_title"]+=1; continue   # 映画/アニメ版/画集/総集編等=掲載対象外
     full=""
     if e.get("slug"):
         sl=e["slug"]; src="override"
