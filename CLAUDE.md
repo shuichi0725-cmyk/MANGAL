@@ -101,6 +101,20 @@
 - AniList 照合 → ★**著者補完** (原作/作画分離。 [[author-roles-state]]) / synopsis 和訳 / 作品 QID / 種4 trailing 補完。
 - ★凍結で新作 gap が累積 → **毎蒸留で再フェッチ** (= 一度きりでない)。
 
+#### ★synopsis 和訳 = git 追跡 seed (= 2026-06-02 確定、 永続化の正規ルート)
+
+- **何**: AniList の英語 description を **AI が 60-120字の日本語あらすじに要約**したもの (= 逐語訳でなく要約・言い換え。 著作権配慮)。 key = **anilist_id**(作品単位。 series_key でない)。
+- **どこ**: ★**`data/seeds/synopsis-ja.json`** (= git追跡 seed、 {anilist_id(str): ja} の単純 map)。 旧 `.cache/synopsis-ja-map.json` から移行済 (= .cache は gitignore で消える)。 `_apply-synopsis.py`(純粋追加) と promote(L1280 付近で join) の両方がこの seed を読む。
+- **なぜ seed 化**: ★**synopsis だけが「高価な AI 生成物」**なので種3と同格で git 永続化。 他の enrich (= synonyms/genres/tags/anilist_id/QID) は **dump + match から毎 promote タダで再 join** できるので **git に焼かない**(= 再生成可能なものは永続化しない原則)。 種3 本体には**焼き込まない**(key が series_key で match 変更時に別作品へ貼り付くため + 33MB 巨大編集の freeze 回避 + 種3不変原則)。
+- **蒸留での扱い** (= 純粋追加 only):
+  1. enrich (= match-v14) で新規 anilist_id が増える → `_build-anilist-enrich-map.py`
+  2. ★未訳 delta 抽出: enrich の aid のうち synopsis-ja.json に**未存在 かつ AniList desc 有**を todo 化 (= `.cache/syn-batches/batch-NNN.json` に 100件/batch 分割)
+  3. ★**分散 workflow** で各 batch を AI 要約 → `.cache/syn-out/batch-NNN.json` に書出 (= 中断耐性)
+  4. 全 syn-out を merge → `_apply-synopsis.py` で `data/seeds/synopsis-ja.json` へ**純粋追加**(新規 N / 上書き 0 を確認)
+  5. ★**commit + push**(= git 永続化。 これで別PC・モバイルでも消えない)
+  6. 本番反映は **全DB promote 時**に manga.v2 へ焼かれて確定 (= seed commit だけでは本番に出ない)
+- **成人 (isAdult)**: 露骨な性描写は要約に含めない/中立化。 成人作の synopsis も同じ seed に入れる (= 表示は adult_us/geo で出し分け)。 当初 deferred 分は別途追加。
+
 ### 種4 の自己 retire + 退役
 
 - ★render 時ガード (実装済): 同番号が種2 に在れば種4 を skip = MADB 追いつき時の **二重表示防止**・種2 優先。

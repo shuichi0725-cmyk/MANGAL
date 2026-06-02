@@ -1277,7 +1277,8 @@ def main():
     enrich_pages = 0
     print(f"  anilist enrich map: {len(enrich_map):,} series_key", file=sys.stderr)
     # synopsis 和訳 map = {anilist_id(str): ja}。 種a description の日本語要約。
-    _syn_path = ROOT / ".cache" / "synopsis-ja-map.json"
+    # ★git追跡 seed(高価なAI生成物=種3と同格で永続化。 旧.cache から移行 2026-06-02)。
+    _syn_path = ROOT / "data" / "seeds" / "synopsis-ja.json"
     synopsis_ja = json.loads(_syn_path.read_text(encoding="utf-8")) if _syn_path.exists() else {}
     synopsis_pages = 0
     print(f"  synopsis 和訳 map: {len(synopsis_ja):,} anilist_id", file=sys.stderr)
