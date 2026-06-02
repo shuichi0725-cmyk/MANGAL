@@ -46,9 +46,24 @@ for line in gzip.open(".cache/anilist-manga-dump-v3.jsonl.gz","rt",encoding="utf
     d=json.loads(line); t=d.get("title") or {}
     if t.get("romaji"): romaji[d["id"]]=t["romaji"]
 
+# 非漫画drop(外国版書誌)= slug生成からも除外
+import sqlite3
+drop_keys=set()
+try:
+    for e2 in (yaml.safe_load(open("data/seeds/non-manga-drop.yml",encoding="utf-8")) or {}).get("non_manga",[]):
+        if e2.get("series_key"): drop_keys.add(e2["series_key"])
+except FileNotFoundError:
+    pass
+# 種2 title(Latin題の直接slug化 fallback 用)
+con=sqlite3.connect(".cache/db-v2.sqlite"); con.text_factory=lambda b:b.decode("utf-8","replace")
+title_of=dict(con.execute("SELECT series_key,title FROM series"))
+con.close()
+
 src_cnt=Counter()
 rows=[]
 for key,e in s3.items():
+    if key in drop_keys:
+        src_cnt["dropped"]+=1; continue   # 外国版=ページにならない=slug不要
     if e.get("slug"):
         sl=e["slug"]; src="override"
     else:
@@ -58,7 +73,15 @@ for key,e in s3.items():
         if sl: src="anilist_romaji"
         else:
             sl=kana_slug(e.get("title_kana_segmented") or e.get("title_kana") or "")
-            src="kana_hepburn" if sl else "EMPTY"
+            if sl: src="kana_hepburn"
+            else:
+                t2=title_of.get(key) or ""
+                # ★Latin題の直接slug化は「日本語文字を含まない」題のみ(Page 1→page-1)。
+                #   日本語混在(復讐の毒鼓REWIND等)はLatin部だけ残す誤りになるのでkana補完に回す。
+                if t2 and not re.search(r"[ぁ-んァ-ヶ一-龯]", t2):
+                    sl=slugify(t2); src="title_latin" if sl else "EMPTY"
+                else:
+                    sl=""; src="EMPTY"
     rows.append((key,sl,src)); src_cnt[src]+=1
 
 with open(".cache/slug-firstpass.tsv","w",encoding="utf-8") as f:
