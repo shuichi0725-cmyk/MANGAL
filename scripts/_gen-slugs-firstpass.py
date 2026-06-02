@@ -60,43 +60,72 @@ title_of=dict(con.execute("SELECT series_key,title FROM series"))
 con.close()
 
 src_cnt=Counter()
-rows=[]
+base_of={}; full_of={}; src_of={}
 for key,e in s3.items():
     if key in drop_keys:
         src_cnt["dropped"]+=1; continue   # 外国版=ページにならない=slug不要
+    full=""
     if e.get("slug"):
         sl=e["slug"]; src="override"
     else:
         aid=key2aid.get(key)
         rj=romaji.get(int(aid)) if aid else None
-        sl=slugify(strip_subtitle(rj)) if rj else ""
-        if sl: src="anilist_romaji"
+        if rj:
+            sl=slugify(strip_subtitle(rj)); full=slugify(rj); src="anilist_romaji"
         else:
             sl=kana_slug(e.get("title_kana_segmented") or e.get("title_kana") or "")
             if sl: src="kana_hepburn"
             else:
                 t2=title_of.get(key) or ""
                 # ★Latin題の直接slug化は「日本語文字を含まない」題のみ(Page 1→page-1)。
-                #   日本語混在(復讐の毒鼓REWIND等)はLatin部だけ残す誤りになるのでkana補完に回す。
                 if t2 and not re.search(r"[ぁ-んァ-ヶ一-龯]", t2):
                     sl=slugify(t2); src="title_latin" if sl else "EMPTY"
                 else:
                     sl=""; src="EMPTY"
-    rows.append((key,sl,src)); src_cnt[src]+=1
+    base_of[key]=sl; full_of[key]=full or sl; src_of[key]=src; src_cnt[src]+=1
 
+# --- ★collision-aware 解決: page畳み → 衝突pageだけ full(副題込)へ昇格 ---
+#   short slug(shangri-la-frontier)は維持、 衝突するフランチャイズ(ガンダム)のみ
+#   副題を残して分離(kidou-senshi-gundam-the-origin 等)。 副題データ不要(romaji full利用)。
+key2page={}
+for g in json.load(open("data/seeds/series-merge-auto.json",encoding="utf-8"))["merges"]:
+    mk=g.get("merge_keys") or []
+    if len(mk)>=2:
+        for k in mk: key2page[k]=mk[0]
+for em in (yaml.safe_load(open("data/seeds/series-merge.yml",encoding="utf-8")) or []):
+    mk=em.get("merge_keys") or []
+    if len(mk)>=2:
+        for k in mk: key2page[k]=mk[0]
+page_members=defaultdict(list)
+for k in base_of: page_members[key2page.get(k,k)].append(k)
+def _pick(d,p,ms):
+    return d.get(p) or Counter(d[m] for m in ms).most_common(1)[0][0]
+page_b={p:_pick(base_of,p,ms) for p,ms in page_members.items()}
+colliding={s for s,n in Counter(s for s in page_b.values() if s).items() if n>1}
+page_final={}; upgraded=0
+for p,ms in page_members.items():
+    b=page_b[p]
+    if b in colliding:
+        f=_pick(full_of,p,ms)
+        if f and f!=b: page_final[p]=f; upgraded+=1
+        else: page_final[p]=b
+    else:
+        page_final[p]=b
+
+rows=[(k, page_final.get(key2page.get(k,k),""), src_of[k]) for k in base_of]
 with open(".cache/slug-firstpass.tsv","w",encoding="utf-8") as f:
     f.write("key\tslug\tsource\n")
     for k,s,src in rows: f.write(f"{k}\t{s}\t{src}\n")
 
-slugs=[s for _,s,_ in rows]
-c=Counter(slugs)
-dups={s:n for s,n in c.items() if n>1 and s}
-empty=sum(1 for s in slugs if not s)
-print("=== slug first pass ===")
-print(f"総数: {len(rows):,}")
+pc=Counter(s for s in page_final.values() if s)
+dups={s:n for s,n in pc.items() if n>1}
+empty=sum(1 for s in page_final.values() if not s)
+print("=== slug first pass (collision-aware) ===")
+print(f"entry総数: {len(rows):,} / page総数: {len(page_final):,}")
 print(f"source内訳: {dict(src_cnt)}")
-print(f"空/破綻(EMPTY slug): {empty:,}")
-print(f"★衝突 slug(同名フォルダ): {len(dups):,}種 / 該当entry {sum(dups.values()):,}件")
-print("=== 衝突トップ15(slug: 件数)===")
+print(f"★衝突pageをfull(副題込)へ昇格: {upgraded:,}")
+print(f"空/破綻(EMPTY page): {empty:,}")
+print(f"★残 page衝突(full後も同名): {len(dups):,}種 / 該当page {sum(dups.values()):,}件")
+print("=== 残衝突トップ15 ===")
 for s,n in sorted(dups.items(),key=lambda x:-x[1])[:15]:
     print(f"  {s}: {n}")
