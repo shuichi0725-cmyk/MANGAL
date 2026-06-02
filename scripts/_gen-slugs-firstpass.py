@@ -10,7 +10,15 @@ sys.stdout.reconfigure(encoding="utf-8")
 try: from yaml import CSafeLoader as L
 except ImportError: from yaml import SafeLoader as L
 kks = pykakasi.kakasi()
-SUBSEP = re.compile(r"\s*[:：〜～].*$")  # romaji の副題部を除去
+
+
+def strip_subtitle(rj):
+    """romaji の副題部のみ除去。 ★正規副題区切り = 「: 」(コロン+空白) と 「〜」波線。
+    Re:Zero / Re:CREATORS の ':'(直後非空白)や 時刻 5:00 は **除去しない**(本題の一部)。"""
+    s = re.sub(r"[〜～].*$", "", rj)        # 〜副題〜
+    s = re.sub(r"[:：]\s.*$", "", s)         # コロン+空白 以降(Re:Zero の : は非空白で残る)
+    return s.strip()
+
 
 def slugify(s):
     s = unicodedata.normalize("NFKD", s or "")
@@ -46,7 +54,7 @@ for key,e in s3.items():
     else:
         aid=key2aid.get(key)
         rj=romaji.get(int(aid)) if aid else None
-        sl=slugify(SUBSEP.sub("",rj)) if rj else ""
+        sl=slugify(strip_subtitle(rj)) if rj else ""
         if sl: src="anilist_romaji"
         else:
             sl=kana_slug(e.get("title_kana_segmented") or e.get("title_kana") or "")
