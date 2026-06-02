@@ -1048,6 +1048,41 @@ def clean_edition(ed: dict) -> dict:
     return out
 
 
+def _apply_cluster_best(con, row, related_ids):
+    """merge cluster 内の title variant から最良を row(merged_series)に反映。
+
+    ・中黒(・)是正のみ: 代表が・無で、 cluster に「・を入れただけ(=・除去で代表と一致)」の
+      variant が在れば採用 (= シャングリラフロンティア→シャングリラ・フロンティア)。
+      ★別 variant(綴り違い)へは変えない=保守的。
+    ・★副題の cluster 自動回収は **行わない**: cluster に画集/巻セット/映画等の非本編が
+      混じり、 その subtitle が漏れて誤付与される (= one-piece「尾田栄一郎画集」型)。
+      副題は seed3.subtitle(手動 curate)/ 種2 代表行 由来のみとする。 代表行自身の
+      末尾ゴミ(「.」等)だけは安全に除去。
+    ★seed3 override(seed3.title / seed3.subtitle)は build_yml 側で優先されるため、
+      ここは 種2 fallback 値の改善に限る (= 手動 curate を上書きしない)。
+    """
+    if not related_ids:
+        return
+    ph = ",".join("?" * len(related_ids))
+    members = con.execute(
+        f"SELECT title FROM series WHERE id IN ({ph})", list(related_ids)).fetchall()
+
+    # --- title: 中黒(・)是正のみ ---
+    at = row.get("title") or ""
+    if at and "・" not in at:
+        base = at.replace("・", "")
+        cands = [t for (t,) in members if t and "・" in t and t.replace("・", "") == base]
+        if cands:
+            row["title"] = min(cands, key=len)  # 最短の・形(余計な・装飾を避ける)
+
+    # --- subtitle: 代表行 自身の末尾ゴミ除去のみ(cluster 回収はしない) ---
+    cur = row.get("subtitle")
+    if cur:
+        cleaned = cur.strip().rstrip(".．。 　")
+        if cleaned and cleaned != cur:
+            row["subtitle"] = cleaned
+
+
 def build_yml(
     src_yml: dict,
     series_row: dict,
@@ -1067,7 +1102,8 @@ def build_yml(
     """
     o: dict = {}
     o["slug"] = src_yml["slug"]
-    o["title"] = series_row["title"]
+    # title: seed3.title(手動 override)優先 → series_row.title(cluster-best 反映済)。
+    o["title"] = (seed3 or {}).get("title") or series_row["title"]
     # title_kana は スペース削除 (= MANGAL protocol: ふりがな に空白 入れない)
     raw_kana = series_row["title_kana"] or src_yml.get("title_kana", "")
     o["title_kana"] = re.sub(r"[\s　]+", "", raw_kana) if raw_kana else ""
@@ -1377,9 +1413,12 @@ def main():
         if not editions:
             stats["no_editions"] += 1
             continue
+        # ★cluster-best: merge cluster の title/subtitle variant から最良を merged_series へ
+        #   反映(中黒是正 + 代表脱落副題の回収)。 seed3 override は build_yml で優先。
+        _apply_cluster_best(con, merged_series, related_ids)
         authors = get_authors(con, series["id"])
         seed_entry = seed3.get(series["series_key"])
-        new_yml = build_yml(src, series, authors, editions, seed_entry,
+        new_yml = build_yml(src, merged_series, authors, editions, seed_entry,
                             valid_pubs, valid_mags, valid_gens)
         # ★adult_us(米基準): ページの series_key(merge込)が種a isAdult なら付与。
         #   非日本geoで非表示用(日本は表示)。 採用作品集合は不変=表示制御のみ追加。
