@@ -1072,8 +1072,10 @@ def build_yml(
     raw_kana = series_row["title_kana"] or src_yml.get("title_kana", "")
     o["title_kana"] = re.sub(r"[\s　]+", "", raw_kana) if raw_kana else ""
     o["title_romaji"] = src_yml.get("title_romaji", "")
-    # subtitle が edition 名 (= '新装再編版' 等) なら strip (= 全 edition 含む page には不適)
-    sub = series_row["subtitle"]
+    # subtitle: ★種3 curate(seed3.subtitle)を最優先 → 種2(series_row.subtitle)fallback。
+    #   種3取込=merge時に副題を持たない代表行が選ばれて脱落する問題の是正(2026-06-02)。
+    #   edition 名 (= '新装再編版' 等) なら strip (= 全 edition 含む page には不適)。
+    sub = (seed3 or {}).get("subtitle") or series_row["subtitle"]
     EDITION_NAME_SUBTITLES = {"新装再編版", "新装版", "完全版", "愛蔵版", "文庫版",
                               "ワイド版", "デラックス", "新装新版", "リニューアル版",
                               "廉価版", "新装版コミックス", "新装版", "復刻版"}
@@ -1081,8 +1083,9 @@ def build_yml(
         sub = None
     if sub:
         o["subtitle"] = sub
-    if series_row["subtitle_kana"] and sub:
-        o["subtitle_kana"] = re.sub(r"[\s　]+", "", series_row["subtitle_kana"])
+    sub_kana = (seed3 or {}).get("subtitle_kana") or series_row["subtitle_kana"]
+    if sub_kana and sub:
+        o["subtitle_kana"] = re.sub(r"[\s　]+", "", sub_kana)
 
     # 年代: editions の volumes.release_date から 計算
     # year_started = 最も古い edition の 最初の volume year
