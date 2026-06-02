@@ -317,7 +317,10 @@ def infer_magazine_from_brand(editions: list[dict], valid_mags: set) -> str | No
                 return mag
     return None
 DROP_IMPRINT_PATTERNS = ["My first big", "コンビニ", "増刊", "同人", "ジャンプremix", "フィルムコミック",
-                         "カッパ・ノベル", "カッパノベル", "カッパ・ホーム", "カッパホーム"]
+                         "カッパ・ノベル", "カッパノベル", "カッパ・ホーム", "カッパホーム",
+                         # ★コンビニ向け廉価再録レーベル(既刊の抜粋/収録 = 本編でない。 2026-06)。
+                         #   KPC=講談社プラチナコミックス(頭文字D始動編 等)。 ★DX/デラックスは正規装丁で除外しない。
+                         "KPC", "プラチナコミックス"]
 # bilingual / 英訳版 imprint は drop (= 翻訳版 は 別 product)
 DROP_IMPRINT_LOWER_PATTERNS = ["bilingual", "english", "novel", "novels"]
 # 'complete works' は 英訳 全集 で 多用 (= 「TEZUKA OSAMU THE COMPLETE WORKS」、
