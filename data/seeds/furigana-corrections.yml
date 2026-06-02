@@ -1,8 +1,7 @@
 # フリガナ補正 seed (= 3ソースconsensus: NDL公式 / 種3-AI / 種2-MADB)
-# 種2(MADB)・種3(AI)とも誤り(副題/著者名/英字混入/誤読)だった key を補正。
-# promote が title_kana を ★最優先で読む(series_row[種2]/src_yml[種3]より先)。 blast radius=本file記載keyのみ。
-# source: ndl/manual=初回54件 / audit-ndl=NDL+種3独立合意 / audit-s3=種2ゴミ→種3採用。 種2種3不変・可逆。
-# 更新 2026-06-03 / 計194件。
+# 種2/種3とも誤りだった key を補正。 promoteがtitle_kanaを最優先で読む。 種2種3不変・可逆。
+# source: ndl/manual=初回54 / audit-ndl=NDL+種3独立合意 / audit-s3=種2ゴミ→種3 / audit-ndl-review,review-confident=per-case裁定。
+# 更新 2026-06-03 / 計226件。
 schema_version: 1
 corrections:
 - key: name:I・N・J・カルバード|name:クトゥルフ神話～ラヴクラフト傑作選
@@ -1363,3 +1362,227 @@ corrections:
   source: audit-s3
   old_seed2: ルパン 3セイ ワイ
   old_seed3: ルパンサンセイワイ
+- key: qid:Q11260310|name:おふとりさま猫日和
+  title: おふとりさま猫日和
+  title_kana: オフトリサマネコビヨリ
+  title_kana_segmented: オフトリサマ ネコビヨリ
+  source: audit-ndl-review
+  old_seed2: Daito comics PCシリーズ
+  old_seed3: オフトリサマネコヒヨリ
+- key: qid:Q11273389|name:従順ビッチlover
+  title: 従順ビッチlover
+  title_kana: ジュウジュンビッチラバー
+  title_kana_segmented: ジュウジュン ビッチ ラバー
+  source: audit-ndl-review
+  old_seed2: Daito comics BLシリーズ
+  old_seed3: ジュウジュンビッチlover
+- key: qid:Q11587362|name:君のすべてを記録したい
+  title: 君のすべてを記録したい
+  title_kana: キミノスベテオキロクシタイ
+  title_kana_segmented: キミ ノ スベテ オ キロク シタイ
+  source: audit-ndl-review
+  old_seed2: Daito comics BLシリーズ
+  old_seed3: クンノスベテヲキロクシタイ
+- key: qid:Q11587362|name:拾った猫は肉食でした
+  title: 拾った猫は肉食でした
+  title_kana: ヒロッタネコワニクショクデシタ
+  title_kana_segmented: ヒロッタ ネコ ワ ニクショク デシタ
+  source: audit-ndl-review
+  old_seed2: Daito comics BLシリーズ
+  old_seed3: ヒロッタネコハニクショクデシタ
+- key: qid:Q11599172|name:ある日とある日ととある日のクル
+  title: ある日とある日ととある日のクル
+  title_kana: アルヒトアルヒトトアルヒノクル
+  title_kana_segmented: アル ヒ ト アル ヒ ト トアル ヒ ノ クル
+  source: audit-ndl-review
+  old_seed2: Daito comics pet comicシリーズ
+  old_seed3: アルニチトアルニチトトアルニチノクル
+- key: qid:Q22128465|name:メチャイロちいき猫!|sub:ノラでも楽しく生きてます!!
+  title: メチャイロちいき猫!
+  title_kana: メチャイロチイキネコ!
+  title_kana_segmented: メチャイロ チイキ ネコ
+  source: audit-ndl-review
+  old_seed2: Daito comics PCシリーズ
+  old_seed3: メチャイロチイキネコ
+- key: qid:Q9297145|name:ざんねん!ねこ旅館
+  title: ざんねん!ねこ旅館
+  title_kana: ザンネン!ネコリョカン
+  title_kana_segmented: ザンネン ネコ リョカン
+  source: audit-ndl-review
+  old_seed2: Daito comics PCシリーズ
+  old_seed3: ザンネンネコリョカン
+- key: name:乙鳴アフロ|name:となりのセフレは溺愛系!?
+  title: となりのセフレは溺愛系!?
+  title_kana: トナリノセフレワデキアイケイ!?
+  title_kana_segmented: トナリ ノ セフレ ワ デキアイケイ
+  source: audit-ndl-review
+  old_seed2: Daito comics TLシリーズ
+  old_seed3: トナリノセフレハデキアイケイ
+- key: name:上松範康|name:まんがDE絶唱しんふぉぎあ
+  title: まんがDE絶唱しんふぉぎあ
+  title_kana: マンガデゼッショウシンフォギア
+  title_kana_segmented: マンガ デ ゼッショウ シンフォギア
+  source: audit-ndl-review
+  old_seed2: 「戦姫絶唱シンフォギアAXZ」アンソロジーコミック
+  old_seed3: マンガDEゼッショウシンフォギア
+- key: name:ハヅキ|name:むぎゅ…ハグだけでイキそう!?|sub:ぽちゃ女子と大きすぎる後輩
+  title: むぎゅ…ハグだけでイキそう!?
+  title_kana: ムギュ…ハグダケデイキソウ!?
+  title_kana_segmented: ムギュ ハグ ダケ デ イキソウ
+  source: audit-ndl-review
+  old_seed2: Shusui digital comics TLシリーズ
+  old_seed3: ムギュハグダケデイキソウ
+- key: name:あまね琥珀|name:ケダモノ極道と復讐の契
+  title: ケダモノ極道と復讐の契
+  title_kana: ケダモノゴクドウトフクシュウノチギリ
+  title_kana_segmented: ケダモノ ゴクドウ ト フクシュウ ノ チギリ
+  source: audit-ndl-review
+  old_seed2: Daito comics TLシリーズ
+  old_seed3: ケダモノゴクドウトフクシュウノケイ
+- key: name:ななみあいす|name:処女がヤクザに調教されてます!|sub:絶倫おじさまのソープ嬢レッスン
+  title: 処女がヤクザに調教されてます!
+  title_kana: ショジョガヤクザニチョウキョウサレテマス!
+  title_kana_segmented: ショジョ ガ ヤクザ ニ チョウキョウサレテマス
+  source: audit-ndl-review
+  old_seed2: Daito comics TLシリーズ
+  old_seed3: ショジョガヤクザニチョウキョウサレテマス
+- key: name:ざわっこ|name:婚約破棄された女は幼なじみにいただかれちゃいました。
+  title: 婚約破棄された女は幼なじみにいただかれちゃいました。
+  title_kana: コンヤクハキサレタオンナワオサナナジミニイタダカレチャイマシタ。
+  title_kana_segmented: コンヤク ハキ サレタ オンナ ワ オサナナジミ ニ イタダカレチャイマシタ
+  source: audit-ndl-review
+  old_seed2: Daito comics TLシリーズ
+  old_seed3: コンヤクハキサレタオンナハヨウナジミニイタダカレチャイマシタ
+- key: name:秕ユウジ|name:旦那さま (仮) は溺愛ヤクザ|sub:何度も突かれて声、止まらない…!
+  title: 旦那さま (仮) は溺愛ヤクザ
+  title_kana: ダンナサマ(カリ)ワデキアイヤクザ
+  title_kana_segmented: ダンナ サマ カリ ワ デキアイ ヤクザ
+  source: audit-ndl-review
+  old_seed2: Shusui digital comics TLシリーズ
+  old_seed3: ダンナサマカリハデキアイヤクザ
+- key: name:春野さく|name:朝になっても終わらないっ!|sub:絶倫エリート上司にハメられてます
+  title: 朝になっても終わらないっ!
+  title_kana: アサニナッテモオワラナイッ!
+  title_kana_segmented: アサ ニ ナッテモ オワラナイッ
+  source: audit-ndl-review
+  old_seed2: Daito comics TLシリーズ
+  old_seed3: アサニナッテモオワラナイッ
+- key: name:新薫|name:溺愛社長は元ヤンで絶倫|sub:これから処女を奪われます
+  title: 溺愛社長は元ヤンで絶倫
+  title_kana: デキアイシャチョウワモトヤンデゼツリン
+  title_kana_segmented: デキアイ シャチョウ ワ モトヤン デ ゼツリン
+  source: audit-ndl-review
+  old_seed2: Daito comics TLシリーズ
+  old_seed3: デキアイシャチョウハモトヤンデゼツリン
+- key: name:立花ビスコ|name:獣様は恩返しで孕ませたい
+  title: 獣様は恩返しで孕ませたい
+  title_kana: ケモノサマワオンガエシデハラマセタイ
+  title_kana_segmented: ケモノサマ ワ オンガエシ デ ハラマセタイ
+  source: audit-ndl-review
+  old_seed2: Daito comics BLシリーズ
+  old_seed3: ケモノサマハオンガエシデハラマセタイ
+- key: name:嶋永のの|name:脱いだら絶倫!?|sub:身体の相性で結ぶ契約婚
+  title: 脱いだら絶倫!?
+  title_kana: ヌイダラゼツリン!?
+  title_kana_segmented: ヌイダラ ゼツリン
+  source: audit-ndl-review
+  old_seed2: Daito comics TLシリーズ
+  old_seed3: ヌイダラゼツリン
+- key: name:さんかく|name:長谷川くんのが大きくて入りません!?|sub:身長差40センチの絶倫彼氏
+  title: 長谷川くんのが大きくて入りません!?
+  title_kana: ハセガワクンノガオオキクテハイリマセン!?
+  title_kana_segmented: ハセガワクン ノ ガ オオキクテ ハイリマセン
+  source: audit-ndl-review
+  old_seed2: Daito comics TLシリーズ
+  old_seed3: ハセガワクンノガオオキクテイリマセン
+- key: name:日野塔子|name:黒蝶の一族|sub:当主と執事の花嫁契約
+  title: 黒蝶の一族
+  title_kana: コクチョウノイチゾク
+  title_kana_segmented: コクチョウ ノ イチゾク
+  source: audit-ndl-review
+  old_seed2: Daito comics TLシリーズ
+  old_seed3: クロチョウノイチゾク
+- key: qid:Q11281112|name:馬なり1ハロン劇場
+  title: 馬なり1ハロン劇場
+  title_kana: ウマナリイチハロンシアター
+  title_kana_segmented: ウマナリイチハロンシアター
+  source: review-confident
+  old_seed2: ウマナリ 1ハロン ゲキジョウ
+  old_seed3: ウマナリイチハロンシアター
+- key: qid:Q11530748|name:幸福喫茶3丁目
+  title: 幸福喫茶3丁目
+  title_kana: シアワセキッササンチョウメ
+  title_kana_segmented: シアワセキッササンチョウメ
+  source: review-confident
+  old_seed2: コウフク キッサ 3チョウメ
+  old_seed3: シアワセキッササンチョウメ
+- key: qid:Q1319777|name:九龍で会いましょう
+  title: 九龍で会いましょう
+  title_kana: カオルーンデアイマショウ
+  title_kana_segmented: カオルーンデアイマショウ
+  source: review-confident
+  old_seed2: カオルーン デアイマショウ = キュウリュウ デ アイマショウ
+  old_seed3: カオルーンデアイマショウ
+- key: qid:Q431443|name:銀河鉄道999
+  title: 銀河鉄道999
+  title_kana: ギンガテツドウスリーナイン
+  title_kana_segmented: ギンガテツドウスリーナイン
+  source: review-confident
+  old_seed2: ギンガ テツドウ 999 = ギンガ テツドウ スリーナイン
+  old_seed3: ギンガテツドウスリーナイン
+- key: qid:Q11470637|name:へうげもの
+  title: へうげもの
+  title_kana: ヒョウゲモノ
+  title_kana_segmented: ヒョウゲモノ
+  source: review-confident
+  old_seed2: ヒョウゲモノ = ヘウゲモノ
+  old_seed3: ヒョウゲモノ
+- key: qid:Q1332841|name:星雲児
+  title: 星雲児
+  title_kana: セイウンジ
+  title_kana_segmented: セイウンジ
+  source: review-confident
+  old_seed2: セイ ショウネン センシデン セイウンジ
+  old_seed3: セイウンジセイショウネンセンシデン
+- key: qid:Q11541939|name:まみあな四重奏団
+  title: まみあな四重奏団
+  title_kana: マミアナシジュウソウダン
+  title_kana_segmented: マミアナシジュウソウダン
+  source: review-confident
+  old_seed2: カノン
+  old_seed3: マミアナシジュウソウダン
+- key: qid:Q11632868|name:きもち満月
+  title: きもち満月
+  title_kana: キモチマンゲツ
+  title_kana_segmented: キモチマンゲツ
+  source: review-confident
+  old_seed2: キモチ フルムーン
+  old_seed3: キモチマンゲツ
+- key: qid:Q535004|name:ぴっぴら帳
+  title: ぴっぴら帳
+  title_kana: ピッピラノート
+  title_kana_segmented: ピッピラノート
+  source: review-confident
+  old_seed2: ピッピラチョウ
+  old_seed3: ピッピラノート
+- key: qid:Q11366080|name:日本ふかし話
+  title: 日本ふかし話
+  title_kana: ニホンフカシバナシ
+  title_kana_segmented: ニホンフカシバナシ
+  source: review-confident
+  old_seed2: ニッポン フカシ バナシ
+  old_seed3: ニホンフカシバナシ
+- key: qid:Q11267967|name:俺たちに明日はないッス
+  title: 俺たちに明日はないッス
+  title_kana: オレタチニアスワナイッス
+  title_kana_segmented: オレタチニアスワナイッス
+  source: review-confident
+  old_seed2: オレタチ ニ アス ワ ナイッス
+  old_seed3: オレタチニアスハナイッス
+- key: qid:Q471133|name:鉄人28号 皇帝の紋章
+  title: 鉄人28号 皇帝の紋章
+  title_kana: テツジンニジュウハチゴウコウテイノモンショウ
+  title_kana_segmented: テツジンニジュウハチゴウコウテイノモンショウ
+  source: review-confident
+  old_seed2: テツジンニジュウハチゴウコウテイノモンショウ
+  old_seed3: テツジン28ゴウコウテイノモンショウ
