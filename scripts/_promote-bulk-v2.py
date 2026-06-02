@@ -1352,6 +1352,15 @@ def main():
                 mag_drop_keys.add(e["series_key"])
     print(f"  雑誌drop(cm105): {len(mag_drop_keys):,} series_key", file=sys.stderr)
 
+    # 非漫画 drop(= 外国語版/壊れ書誌。 series_key で除外。 種2/種3 不変。 2026-06-02)。
+    _nm_path = ROOT / "data" / "seeds" / "non-manga-drop.yml"
+    non_manga_keys = set()
+    if _nm_path.exists():
+        for e in (yaml.safe_load(_nm_path.read_text(encoding="utf-8")) or {}).get("non_manga", []):
+            if e.get("series_key"):
+                non_manga_keys.add(e["series_key"])
+    print(f"  非漫画drop(外国版/壊れ): {len(non_manga_keys):,} series_key", file=sys.stderr)
+
     stats = {"total": 0, "regenerated": 0, "not_found_in_db": 0,
              "no_editions": 0, "dropped_spinoff_old": 0,
              "dropped_non_manga": 0}
@@ -1387,6 +1396,11 @@ def main():
         if series.get("series_key") in mag_drop_keys:
             stats["dropped_non_manga"] += 1
             dropped_non_manga.append(f"{ypath.name}  title={title}  (= 雑誌cm105)")
+            continue
+        # 非漫画(外国語版/壊れ書誌)を series_key で除外
+        if series.get("series_key") in non_manga_keys:
+            stats["dropped_non_manga"] += 1
+            dropped_non_manga.append(f"{ypath.name}  title={title}  (= 非漫画/外国版)")
             continue
         # 種2 subtitle に隠れた 抜粋本 (= title が本編名 + sub=「○○傑作集」 等) を drop
         sub = series.get("subtitle") or ""

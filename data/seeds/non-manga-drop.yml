@@ -1,0 +1,45 @@
+# 非漫画 drop list(= 外国語版/壊れ書誌。 series_key で promote 除外。 種2/種3 不変)
+# 生成: _gen-slugs-firstpass.py の EMPTY + 外国記録スキャン(2026-06-02)。 日本語版は別entryで存続。
+non_manga:
+  - series_key: "name:Akamatu|name:Ken Akamatusu[i.e. Akamatsu] ; 「E」overs「E」attning Simon Lundstr「E」om."
+    reason: foreign_edition_or_broken
+    note: "Ken Akamatusu[i.e. Akamatsu] ; 「E」overs「E」attning Simon Lundstr「E」om."
+  - series_key: "name:Bergeron|name:Alain M. Bergeron, Michel Quintin, Sampar ; illustrations de Sampar."
+    reason: foreign_edition_or_broken
+    note: "Alain M. Bergeron, Michel Quintin, Sampar ; illustrations de Sampar."
+  - series_key: "name:Cannon|name:Jim Ottaviani ; [illustrated by] Zander Cannon, Kevin Cannon."
+    reason: foreign_edition_or_broken
+    note: "Jim Ottaviani ; [illustrated by] Zander Cannon, Kevin Cannon."
+  - series_key: "name:Ferri|name:Jean-Yves Ferri ＆ Manu Larcenet ; couleur, Brigitte Findakly."
+    reason: foreign_edition_or_broken
+    note: "Jean-Yves Ferri ＆ Manu Larcenet ; couleur, Brigitte Findakly."
+  - series_key: "name:Fogeli.|name:Puup「E」a「E」an parhaat"
+    reason: foreign_edition_or_broken
+    note: "Puup「E」a「E」an parhaat"
+  - series_key: "name:Franquin|name:Franquin ; avec la complicit「A」e de Jid「A」ehem ; et les rubriques de Delporte."
+    reason: foreign_edition_or_broken
+    note: "Franquin ; avec la complicit「A」e de Jid「A」ehem ; et les rubriques de Delporte."
+  - series_key: "name:Guibert|name:Joann Sfar ＆ Emmanuel Guibert ; translated by Alexis Siegel."
+    reason: foreign_edition_or_broken
+    note: "Joann Sfar ＆ Emmanuel Guibert ; translated by Alexis Siegel."
+  - series_key: "name:Herg「A」e|name:Herg「A」e [i.e. G. R「A」emy]."
+    reason: foreign_edition_or_broken
+    note: "Herg「A」e [i.e. G. R「A」emy]."
+  - series_key: "name:Herg「A」e|name:Herg「A」e."
+    reason: foreign_edition_or_broken
+    note: "Herg「A」e."
+  - series_key: "name:Huziwara|name:Ra「E」ika|sub:chroniques du Japon des temps anciens textes, Yu Terashima ; dessins, Kamui Fujiwara ; [traduction, Wako Miyamoto, Olivier Pr「A」ezeau]."
+    reason: foreign_edition_or_broken
+    note: "Ra「E」ika"
+  - series_key: "name:Maroulak「R」es|name:Phroutopia"
+    reason: foreign_edition_or_broken
+    note: "Phroutopia"
+  - series_key: "name:Nakazawa|name:Gen|sub:p「A」es descal「C」cos （Hadashi no Gen） Keiji Nakazawa."
+    reason: foreign_edition_or_broken
+    note: "Gen"
+  - series_key: "name:Oda|name:Eiichiro Oda ; [「E」overs「E」attning, Simon Lundstr「E」om]."
+    reason: foreign_edition_or_broken
+    note: "Eiichiro Oda ; [「E」overs「E」attning, Simon Lundstr「E」om]."
+  - series_key: "name:Takeuti|name:Hasl「/」o brzmi|sub:Sailor V Naoko Takeuchi."
+    reason: foreign_edition_or_broken
+    note: "Hasl「/」o brzmi"
