@@ -879,22 +879,22 @@ def get_editions_with_volumes(con: sqlite3.Connection, series_ids: list[int] | i
     if get_renumber_sids(con) & set(series_ids):
         from collections import Counter as _Counter
         _rows = cur.execute(
-            f"SELECT v.*, e.type AS _etype, e.imprint AS _eimprint "
+            f"SELECT v.*, e.type AS _etype, e.imprint AS _eimprint, e.series_id AS _sid "
             f"FROM volumes v JOIN editions e ON e.id=v.edition_id "
             f"WHERE e.series_id IN ({placeholders})", series_ids).fetchall()
         _passed = [r for r in _rows if edition_passes_filter(
             {"type": r["_etype"], "imprint": r["_eimprint"]})]
-        _passed.sort(key=lambda v: (v["release_date"] or "9999-99", v["isbn13"] or ""))
-        _seen: set = set(); _rvols: list = []
-        for v in _passed:
-            isbn = v["isbn13"]
-            if isbn and isbn in _seen:
-                continue
-            if isbn:
-                _seen.add(isbn)
-            _rvols.append({"number": len(_rvols) + 1, "volume_label": v["volume_label"],
-                           "isbn13": isbn, "release_date": v["release_date"],
-                           "cover_url": v["cover_url"], "asin": v["asin"]})
+        # ★1冊(= 1 source series_id)につき代表1巻(最古release→最小ISBN)。
+        #   同一書籍の別版ISBN(通常版/文庫版等)を別巻に数えない = 過剰巻数を防ぐ。
+        _by_sid: dict = defaultdict(list)
+        for r in _passed:
+            _by_sid[r["_sid"]].append(r)
+        _reps = [min(rs, key=lambda v: (v["release_date"] or "9999-99", v["isbn13"] or ""))
+                 for rs in _by_sid.values()]
+        _reps.sort(key=lambda v: (v["release_date"] or "9999-99", v["isbn13"] or ""))
+        _rvols = [{"number": i + 1, "volume_label": v["volume_label"], "isbn13": v["isbn13"],
+                   "release_date": v["release_date"], "cover_url": v["cover_url"], "asin": v["asin"]}
+                  for i, v in enumerate(_reps)]
         if not _rvols:
             return []
         _impc = _Counter(r["_eimprint"] for r in _passed if r["_eimprint"])
