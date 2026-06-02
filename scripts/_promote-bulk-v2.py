@@ -159,6 +159,21 @@ def load_merge_edition_types(con: sqlite3.Connection) -> set[int]:
     return sids
 
 
+def load_renumber_sids(con: sqlite3.Connection) -> set[int]:
+    """renumber: true の cluster の 全 sid set。 ★巻割れ統合(個別題の0巻/extra本が
+    1作の連番シリーズ)で、 merge した全巻を発売日順に 1..N 連番付与する対象。
+    cm104凍結でシリーズ構造が無い orphan を 著者+題で merge した群に使う。"""
+    if not MERGE_YML.exists():
+        return set()
+    key_to_sid = {sk: sid for sid, sk in con.execute("SELECT id, series_key FROM series")}
+    sids: set[int] = set()
+    with MERGE_YML.open(encoding="utf-8") as f:
+        for entry in (_yload(f) or []):
+            if entry.get("renumber"):
+                sids.update(_entry_sids(entry, key_to_sid))
+    return sids
+
+
 SUPP_YML = ROOT / "data" / "seeds" / "volumes-supplement.yml"
 # NDL 自動登録分 (= 種4 auto、 scripts/_register-seed4-ndl.py)。 手動版と両方 load。
 SUPP_AUTO_YML = ROOT / "data" / "seeds" / "volumes-supplement-auto.yml"
@@ -215,6 +230,13 @@ def get_merge_edition_types(con) -> set[int]:
     if _MERGE_EDT is None:
         _MERGE_EDT = load_merge_edition_types(con)
     return _MERGE_EDT
+
+_RENUMBER_SIDS = None
+def get_renumber_sids(con) -> set[int]:
+    global _RENUMBER_SIDS
+    if _RENUMBER_SIDS is None:
+        _RENUMBER_SIDS = load_renumber_sids(con)
+    return _RENUMBER_SIDS
 
 def get_supplement_vols(con) -> dict[int, list[dict]]:
     global _SUPP_VOLS
@@ -851,6 +873,34 @@ def get_editions_with_volumes(con: sqlite3.Connection, series_ids: list[int] | i
     if isinstance(series_ids, int):
         series_ids = [series_ids]
     placeholders = ",".join("?" for _ in series_ids)
+    # ★renumber(巻割れ統合): 全巻が個別題の0巻/extra本 → 全巻を発売日順に 1..N 連番付与。
+    #   cm104凍結のorphanを著者+題で merge した群(series-merge.yml の renumber:true)。
+    #   ISBN重複は除去。 1ページにN巻として正しく表示する(by_num collapse を回避)。
+    if get_renumber_sids(con) & set(series_ids):
+        from collections import Counter as _Counter
+        _rows = cur.execute(
+            f"SELECT v.*, e.type AS _etype, e.imprint AS _eimprint "
+            f"FROM volumes v JOIN editions e ON e.id=v.edition_id "
+            f"WHERE e.series_id IN ({placeholders})", series_ids).fetchall()
+        _passed = [r for r in _rows if edition_passes_filter(
+            {"type": r["_etype"], "imprint": r["_eimprint"]})]
+        _passed.sort(key=lambda v: (v["release_date"] or "9999-99", v["isbn13"] or ""))
+        _seen: set = set(); _rvols: list = []
+        for v in _passed:
+            isbn = v["isbn13"]
+            if isbn and isbn in _seen:
+                continue
+            if isbn:
+                _seen.add(isbn)
+            _rvols.append({"number": len(_rvols) + 1, "volume_label": v["volume_label"],
+                           "isbn13": isbn, "release_date": v["release_date"],
+                           "cover_url": v["cover_url"], "asin": v["asin"]})
+        if not _rvols:
+            return []
+        _impc = _Counter(r["_eimprint"] for r in _passed if r["_eimprint"])
+        return [{"type": "standard", "label": "通常版",
+                 "imprint": _impc.most_common(1)[0][0] if _impc else "",
+                 "year_started": None, "year_ended": None, "volumes": _rvols}]
     eds = cur.execute(
         f"SELECT * FROM editions WHERE series_id IN ({placeholders})", series_ids
     ).fetchall()
