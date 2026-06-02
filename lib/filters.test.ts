@@ -52,6 +52,17 @@ describe("matchText", () => {
   it("長音符の有無を吸収する", () => {
     expect(matchText("ワンピス", m({ title_kana: "ワンピース" }))).toBe(true);
   });
+
+  it("中黒(・)の有無を吸収する", () => {
+    const sla = m({ title: "シャングリラ・フロンティア", title_kana: "シャングリラフロンティア" });
+    expect(matchText("シャングリラフロンティア", sla)).toBe(true); // ・無で検索
+    expect(matchText("シャングリラ・フロンティア", sla)).toBe(true); // ・有で検索
+  });
+
+  it("中黒(・)の位置揺れも吸収する", () => {
+    const sla = m({ title: "シャングリラ・フロンティア", title_kana: "シャングリラフロンティア" });
+    expect(matchText("シャングリ・ラフロンティア", sla)).toBe(true); // ・誤位置でも当たる
+  });
 });
 
 describe("applyFilters", () => {
