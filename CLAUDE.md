@@ -297,6 +297,12 @@ baseball / soccer が現状唯一の例外。 他ジャンル (= romance、 fant
 
 MANGAL は **漫画作品** の database。 以下は **掲載対象外** (= 弾く):
 
+### ★掲載「対象」の scope (= 2026-06-02 確定)
+
+- ★**日本で出版された漫画** が対象 (= 日本原産に限らない)。 ★**韓国 manhwa / 中華 manhua の日本語版(正規出版)も掲載対象に含める** (= 例: 復讐の毒鼓[全6巻本編]+ 復讐の毒鼓REWIND[全8巻前日譚]、 KADOKAWA刊、 Meen X Baekdoo)。 manhwa を一律 drop しない。
+- ★**除外するのは「外国語版の書誌が紛れ込んだ記録」** (= translator credit 行が title になった orphan、 例: スウェーデン語版 ONE PIECE / タンタン / 仏BD。 `data/seeds/non-manga-drop.yml`)。 = 「日本で売られている manhwa(日本語)」と「日本作品の外国語版(非日本語)」は別物。
+- ★EMPTY slug は junk と即断しない: 真の作品でも title_kana 欠落(orphan101)で EMPTY になる (= 「上全」じょうぜん[黄助BL]/「Page 1」ぺーじわん[スタジオ・バトル] は実在)。 kana 補完で救済。
+
 ### series-level (= scripts/_promote-bulk-v2.py の DROP_TITLE_PREFIX_PATTERNS)
 
 - 「テレビアニメ版」「TVアニメ版」「アニメコミック」 = アニメコミカライズ
