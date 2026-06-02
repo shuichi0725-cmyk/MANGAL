@@ -1,7 +1,7 @@
 # フリガナ補正 seed (= 3ソースconsensus: NDL公式 / 種3-AI / 種2-MADB)
 # 種2/種3とも誤りだった key を補正。 promoteがtitle_kanaを最優先で読む。 種2種3不変・可逆。
-# source: ndl/manual=初回54 / audit-ndl=NDL+種3独立合意 / audit-s3=種2ゴミ→種3 / audit-ndl-review,review-confident=per-case裁定。
-# 更新 2026-06-03 / 計226件。
+# source: ndl/manual/audit-ndl(NDL+種3合意)/audit-s3(種2ゴミ→種3)/audit-ndl-romaji(NDLがLatin正ローマ字化・種3核⊆NDL)/review-confident。
+# 更新 2026-06-03 / 計371件。
 schema_version: 1
 corrections:
 - key: name:I・N・J・カルバード|name:クトゥルフ神話～ラヴクラフト傑作選
@@ -1586,3 +1586,1018 @@ corrections:
   source: review-confident
   old_seed2: テツジンニジュウハチゴウコウテイノモンショウ
   old_seed3: テツジン28ゴウコウテイノモンショウ
+- key: qid:Q1012736|name:PEACE MAKER鐵
+  title: PEACE MAKER鐵
+  title_kana: ピースメーカークロガネ
+  title_kana_segmented: ピース メーカー クロガネ
+  source: audit-ndl-romaji
+  old_seed2: Peace maker クロガネ
+  old_seed3: Peacemakerクロガネ
+- key: qid:Q10875442|name:Who is 風生!?
+  title: Who is 風生!?
+  title_kana: フーイズフオウ
+  title_kana_segmented: フー イズ フオウ
+  source: audit-ndl-romaji
+  old_seed2: WHO IS フオウ
+  old_seed3: WHOISフオウ
+- key: qid:Q109287462|name:SSディッガー
+  title: SSディッガー
+  title_kana: エスエスディッガー
+  title_kana_segmented: エスエス ディッガー
+  source: audit-ndl-romaji
+  old_seed2: SS ディッガー
+  old_seed3: SSディッガー
+- key: qid:Q10933287|name:HAUNTEDじゃんくしょん
+  title: HAUNTEDじゃんくしょん
+  title_kana: ホーンテッドジャンクション
+  title_kana_segmented: ホーンテッド ジャンクション
+  source: audit-ndl-romaji
+  old_seed2: HAUNTED ジャンクション
+  old_seed3: HAUNTEDジャンクション
+- key: qid:Q1096358|name:B.B.天国
+  title: B.B.天国
+  title_kana: ビービーパラダイス
+  title_kana_segmented: ビービー パラダイス
+  source: audit-ndl-romaji
+  old_seed2: BB パラダイス
+  old_seed3: BBパラダイス
+- key: qid:Q110403360|name:Aの悲劇
+  title: Aの悲劇
+  title_kana: エーノヒゲキ
+  title_kana_segmented: エーノヒゲキ
+  source: audit-ndl-romaji
+  old_seed2: A ノ ヒゲキ
+  old_seed3: Aノヒゲキ
+- key: qid:Q11049344|name:ロックマンX
+  title: ロックマンX
+  title_kana: ロックマンエックス
+  title_kana_segmented: ロックマン エックス
+  source: audit-ndl-romaji
+  old_seed2: ロックマン X
+  old_seed3: ロックマンX
+- key: qid:Q11264488|name:Milkyまじっく
+  title: Milkyまじっく
+  title_kana: ミルキーマジック
+  title_kana_segmented: ミルキー マジック
+  source: audit-ndl-romaji
+  old_seed2: Milky マジック
+  old_seed3: Milkyマジック
+- key: qid:Q11265076|name:パティスリーMON
+  title: パティスリーMON
+  title_kana: パティスリーモン
+  title_kana_segmented: パティスリー モン
+  source: audit-ndl-romaji
+  old_seed2: パティスリーMON
+  old_seed3: パティスリーMON
+- key: qid:Q11265637|name:ぷっちん❤Hi!School
+  title: ぷっちん❤Hi!School
+  title_kana: プッチンハイスクール
+  title_kana_segmented: プッチン ハイ スクール
+  source: audit-ndl-romaji
+  old_seed2: プッチン Hi Schooｌ
+  old_seed3: プッチンHiSchooｌ
+- key: qid:Q11266338|name:Ns'あおい
+  title: Ns'あおい
+  title_kana: ナースアオイ
+  title_kana_segmented: ナース アオイ
+  source: audit-ndl-romaji
+  old_seed2: Ns' アオイ
+  old_seed3: Ns'アオイ
+- key: qid:Q11266338|name:Ns'あおいthose days
+  title: Ns'あおいthose days
+  title_kana: ナースアオイゾーズデイズ
+  title_kana_segmented: ナース アオイ ゾーズ デイズ
+  source: audit-ndl-romaji
+  old_seed2: Ns' アオイ those days
+  old_seed3: Ns'アオイthosedays
+- key: qid:Q11276104|name:GO GO!ゴージャス
+  title: GO GO!ゴージャス
+  title_kana: ゴーゴーゴージャス
+  title_kana_segmented: ゴーゴー ゴージャス
+  source: audit-ndl-romaji
+  old_seed2: Go go ゴージャス
+  old_seed3: Gogoゴージャス
+- key: qid:Q11277326|name:図書館戦争 SPITFIRE!
+  title: 図書館戦争 SPITFIRE!
+  title_kana: トショカンセンソウ
+  title_kana_segmented: トショカン センソウ
+  source: audit-ndl-romaji
+  old_seed2: トショカンセンソウ SPITFIRE
+  old_seed3: トショカンセンソウSPITFIRE
+- key: qid:Q11278120|name:JS・JCモデル物語
+  title: JS・JCモデル物語
+  title_kana: ジェーエスジェーシーモデルモノガタリ
+  title_kana_segmented: ジェーエス ジェーシー モデル モノガタリ
+  source: audit-ndl-romaji
+  old_seed2: JS JC モデルモノガタリ
+  old_seed3: JSJCモデルモノガタリ
+- key: qid:Q11279292|name:HEAVY METAL甲子園
+  title: HEAVY METAL甲子園
+  title_kana: ヘビメタコウシエン
+  title_kana_segmented: ヘビメタ コウシエン
+  source: audit-ndl-romaji
+  old_seed2: HEAVY METAL コウシエン
+  old_seed3: HEAVYMETALコウシエン
+- key: qid:Q11280041|name:アンティークromantic
+  title: アンティークromantic
+  title_kana: アンティークロマンティック
+  title_kana_segmented: アンティーク ロマンティック
+  source: audit-ndl-romaji
+  old_seed2: アンティーク ROMANTIC
+  old_seed3: アンティークROMANTIC
+- key: qid:Q11280216|name:DNAは苦悩する
+  title: DNAは苦悩する
+  title_kana: ディーエヌエイワクノウスル
+  title_kana_segmented: ディーエヌエイ ワ クノウ スル
+  source: audit-ndl-romaji
+  old_seed2: DNA ワ クノウスル
+  old_seed3: DNAワクノウスル
+- key: qid:Q11281107|name:ぼく、オタリーマン。DX
+  title: ぼく、オタリーマン。DX
+  title_kana: ボクオタリーマン
+  title_kana_segmented: ボク オタリーマン
+  source: audit-ndl-romaji
+  old_seed2: ボク オタリーマン DX
+  old_seed3: ボクオタリーマンDX
+- key: qid:Q11352771|name:SF妖怪八拳伝
+  title: SF妖怪八拳伝
+  title_kana: エスエフヨウカイハッケンデン
+  title_kana_segmented: エスエフ ヨウカイ ハッケン デン
+  source: audit-ndl-romaji
+  old_seed2: SF ヨウカイ ハッケンデン
+  old_seed3: SFヨウカイハッケンデン
+- key: qid:Q11363488|name:ラディカルCC
+  title: ラディカルCC
+  title_kana: ラディカルカップルコップ
+  title_kana_segmented: ラディカル カップル コップ
+  source: audit-ndl-romaji
+  old_seed2: ラディカル CC
+  old_seed3: ラディカルCC
+- key: qid:Q11363888|name:プリンセスin Tokyo
+  title: プリンセスin Tokyo
+  title_kana: プリンセスイントウキョウ
+  title_kana_segmented: プリンセス イン トウキョウ
+  source: audit-ndl-romaji
+  old_seed2: プリンセス IN TOKYO
+  old_seed3: プリンセスINTOKYO
+- key: qid:Q11364649|name:問題サラリーMAN
+  title: 問題サラリーMAN
+  title_kana: モンダイサラリーマン
+  title_kana_segmented: モンダイ サラリーマン
+  source: audit-ndl-romaji
+  old_seed2: モンダイ サラリー MAN
+  old_seed3: モンダイサラリーMAN
+- key: qid:Q11407651|name:ReReハロ
+  title: ReReハロ
+  title_kana: リリハロ
+  title_kana_segmented: リリハロ
+  source: audit-ndl-romaji
+  old_seed2: ReReハロ
+  old_seed3: ReReハロ
+- key: qid:Q11412214|name:堕悪スペシャル
+  title: 堕悪スペシャル
+  title_kana: ダアクスペシャル
+  title_kana_segmented: ダアク スペシャル
+  source: audit-ndl-romaji
+  old_seed2: Dark スペシャル
+  old_seed3: Darkスペシャル
+- key: qid:Q11413522|name:Y氏の隣人
+  title: Y氏の隣人
+  title_kana: ワイシノリンジン
+  title_kana_segmented: ワイシノリンジン
+  source: audit-ndl-romaji
+  old_seed2: Yシ ノ リンジン
+  old_seed3: Yシノリンジン
+- key: qid:Q1142135|name:ABCアーバックス
+  title: ABCアーバックス
+  title_kana: エイビーシーアーバックス
+  title_kana_segmented: エイビーシー アーバックス
+  source: audit-ndl-romaji
+  old_seed2: ABCアーバックス
+  old_seed3: ABCアーバックス
+- key: qid:Q11425021|name:MS-DOSでいじめないで
+  title: MS-DOSでいじめないで
+  title_kana: エムエスドスデイジメナイデ
+  title_kana_segmented: エムエス ドス デ イジメナイデ
+  source: audit-ndl-romaji
+  old_seed2: MS-DOS デ イジメナイデ
+  old_seed3: MS-DOSデイジメナイデ
+- key: qid:Q11451835|name:ROSE GUNS DAYS Season 1
+  title: ROSE GUNS DAYS Season 1
+  title_kana: ローズガンズデイズ
+  title_kana_segmented: ローズ ガンズ デイズ
+  source: audit-ndl-romaji
+  old_seed2: ローズ ガンズ デイズ Season 1
+  old_seed3: ローズガンズデイズSeason1
+- key: qid:Q11457088|name:Hipにロリポップ
+  title: Hipにロリポップ
+  title_kana: ﾋｯﾌﾟﾆﾛﾘﾎﾟｯﾌﾟ
+  title_kana_segmented: ﾋｯﾌﾟﾆ ﾛﾘﾎﾟｯﾌﾟ
+  source: audit-ndl-romaji
+  old_seed2: HIP ニ ロリ ポップ
+  old_seed3: HIPニロリポップ
+- key: qid:Q11461450|name:キャッチ!愛
+  title: キャッチ!愛
+  title_kana: キャッチアイ
+  title_kana_segmented: キャッチ アイ
+  source: audit-ndl-romaji
+  old_seed2: キャッチ!愛（eye)
+  old_seed3: キャッチ!愛（eye)
+- key: qid:Q11469401|name:Losers
+  title: Losers
+  title_kana: ルーザーズ
+  title_kana_segmented: ルーザーズ
+  source: audit-ndl-romaji
+  old_seed2: rルーザーズ
+  old_seed3: rルーザーズ
+- key: qid:Q11469541|name:バード BLACK MARKET
+  title: バード BLACK MARKET
+  title_kana: バード
+  title_kana_segmented: バード
+  source: audit-ndl-romaji
+  old_seed2: バード black market
+  old_seed3: バードblackmarket
+- key: qid:Q11497672|name:ホラGUY
+  title: ホラGUY
+  title_kana: ホラガイ
+  title_kana_segmented: ホラ ガイ
+  source: audit-ndl-romaji
+  old_seed2: ホラ GUY
+  old_seed3: ホラGUY
+- key: qid:Q11517058|name:Superサブ
+  title: Superサブ
+  title_kana: スーパーサブ
+  title_kana_segmented: スーパー サブ
+  source: audit-ndl-romaji
+  old_seed2: SUPERサブ
+  old_seed3: SUPERサブ
+- key: qid:Q11530791|name:デュエル・マスターズSX
+  title: デュエル・マスターズSX
+  title_kana: デュエルマスターズスタークロス
+  title_kana_segmented: デュエル マスターズ スター クロス
+  source: audit-ndl-romaji
+  old_seed2: デュエル マスターズ SX
+  old_seed3: デュエルマスターズSX
+- key: qid:Q11532037|name:レタスバーガープリーズ.OK,OK!
+  title: レタスバーガープリーズ.OK,OK!
+  title_kana: レタスバーガープリーズオーケーオーケー
+  title_kana_segmented: レタス バーガー プリーズ オーケー オーケー
+  source: audit-ndl-romaji
+  old_seed2: レタス バーガー プリーズ . OK OK
+  old_seed3: レタスバーガープリーズ.OKOK
+- key: qid:Q11539587|name:KING OF ZIPANGU 信長
+  title: KING OF ZIPANGU 信長
+  title_kana: キングオブジパングノブナガ
+  title_kana_segmented: キング オブ ジパング ノブナガ
+  source: audit-ndl-romaji
+  old_seed2: KING OF ZIPANGU ノブナガ
+  old_seed3: KINGOFZIPANGUノブナガ
+- key: qid:Q11543605|name:恋は100kg
+  title: 恋は100kg
+  title_kana: コイワヒャッキロ
+  title_kana_segmented: コイ ワ ヒャッキロ
+  source: audit-ndl-romaji
+  old_seed2: コイ ワ 100 KG
+  old_seed3: コイワ100KG
+- key: qid:Q11553037|name:雨まじりRoman Holiday
+  title: 雨まじりRoman Holiday
+  title_kana: アメマジリロマンホリデイ
+  title_kana_segmented: アメマジリロマンホリデイ
+  source: audit-ndl-romaji
+  old_seed2: アメマジリROMANHOLIDAY
+  old_seed3: アメマジリROMANHOLIDAY
+- key: qid:Q11557254|name:A・Iレボリューション
+  title: A・Iレボリューション
+  title_kana: エイアイレボリューション
+  title_kana_segmented: エイ アイ レボリューション
+  source: audit-ndl-romaji
+  old_seed2: A I レボリューション
+  old_seed3: AIレボリューション
+- key: qid:Q11557657|name:浦安鉄筋家族special
+  title: 浦安鉄筋家族special
+  title_kana: ウラヤステッキンカゾク
+  title_kana_segmented: ウラヤス テッキン カゾク
+  source: audit-ndl-romaji
+  old_seed2: ウラヤス テッキン カゾクspecial
+  old_seed3: ウラヤステッキンカゾクspecial
+- key: qid:Q11558370|name:アタックNo.1
+  title: アタックNo.1
+  title_kana: アタックナンバーワン
+  title_kana_segmented: アタック ナンバー ワン
+  source: audit-ndl-romaji
+  old_seed2: アタック No 1
+  old_seed3: アタックNo1
+- key: qid:Q11595855|name:MADE inニッポン
+  title: MADE inニッポン
+  title_kana: メイドインニッポン
+  title_kana_segmented: メイド イン ニッポン
+  source: audit-ndl-romaji
+  old_seed2: MADE inニッポン
+  old_seed3: MADEinニッポン
+- key: qid:Q11603611|name:Don't cry 香港
+  title: Don't cry 香港
+  title_kana: ドントクライホンコン
+  title_kana_segmented: ドント クライ ホンコン
+  source: audit-ndl-romaji
+  old_seed2: DONT CRY ホンコン
+  old_seed3: DONTCRYホンコン
+- key: qid:Q11610714|name:はい Time
+  title: はい Time
+  title_kana: ハイタイム
+  title_kana_segmented: ハイ タイム
+  source: audit-ndl-romaji
+  old_seed2: ハイ Time
+  old_seed3: ハイTime
+- key: qid:Q11624937|name:UMA大戦ククルとナギ
+  title: UMA大戦ククルとナギ
+  title_kana: ユーマタイセンククルトナギ
+  title_kana_segmented: ユーマ タイセン ククル ト ナギ
+  source: audit-ndl-romaji
+  old_seed2: UMA タイセン ククル ト ナギ
+  old_seed3: UMAタイセンククルトナギ
+- key: qid:Q11628480|name:へなちょこ大作戦Z
+  title: へなちょこ大作戦Z
+  title_kana: ヘナチョコダイサクセンゼット
+  title_kana_segmented: ヘナチョコダイサクセンゼット
+  source: audit-ndl-romaji
+  old_seed2: ヘナチョコ ダイサクセン Z
+  old_seed3: ヘナチョコダイサクセンZ
+- key: qid:Q11640394|name:+ C sword and cornett
+  title: + C sword and cornett
+  title_kana: プラスシー
+  title_kana_segmented: プラス シー
+  source: audit-ndl-romaji
+  old_seed2: プラス シー sword and cornett
+  old_seed3: プラスシーswordandcornett
+- key: qid:Q11640394|name:+ C sword and cornett appendix
+  title: + C sword and cornett appendix
+  title_kana: プラスシー
+  title_kana_segmented: プラス シー
+  source: audit-ndl-romaji
+  old_seed2: プラス シー sword and cornett appendix
+  old_seed3: プラスシーswordandcornettappendix
+- key: qid:Q11644656|name:ないとバード
+  title: ないとバード
+  title_kana: ナイトバード
+  title_kana_segmented: ナイト バード
+  source: audit-ndl-romaji
+  old_seed2: NIGHTバード
+  old_seed3: NIGHTバード
+- key: qid:Q11653302|name:YOKOHAMAストーリー
+  title: YOKOHAMAストーリー
+  title_kana: ヨコハマストーリー
+  title_kana_segmented: ヨコハマ ストーリー
+  source: audit-ndl-romaji
+  old_seed2: YOKOHAMA ストーリー
+  old_seed3: YOKOHAMAストーリー
+- key: qid:Q11653884|name:DNAエンジェル
+  title: DNAエンジェル
+  title_kana: ディーエヌエイエンジェル
+  title_kana_segmented: ディーエヌエイ エンジェル
+  source: audit-ndl-romaji
+  old_seed2: DNA エンジェル
+  old_seed3: DNAエンジェル
+- key: qid:Q11672951|name:はぐれアイドル地獄変外伝V
+  title: はぐれアイドル地獄変外伝V
+  title_kana: ハグレアイドルジゴクヘンガイデンボイスザカ
+  title_kana_segmented: ハグレ アイドル ジゴクヘン ガイデン ボイスザカ
+  source: audit-ndl-romaji
+  old_seed2: ハグレ アイドル ジゴクヘン ガイデン V
+  old_seed3: ハグレアイドルジゴクヘンガイデンV
+- key: qid:Q1319777|name:P.S.元気です、俊平
+  title: P.S.元気です、俊平
+  title_kana: ﾋﾟｰｴｽｹﾞﾝｷﾃﾞｽｼｭﾝﾍﾟｲ
+  title_kana_segmented: ﾋﾟｰｴｽ ｹﾞﾝｷﾃﾞｽ ｼｭﾝﾍﾟｲ
+  source: audit-ndl-romaji
+  old_seed2: P.S. ゲンキ デス シュンペイ
+  old_seed3: P.S.ゲンキデスシュンペイ
+- key: qid:Q1335743|name:JUN-AI天使
+  title: JUN-AI天使
+  title_kana: ジュンアイテンシ
+  title_kana_segmented: ジュンアイ テンシ
+  source: audit-ndl-romaji
+  old_seed2: JUNAI テンシ
+  old_seed3: JUNAIテンシ
+- key: qid:Q1399083|name:ハートカクテルballad
+  title: ハートカクテルballad
+  title_kana: ハートカクテル
+  title_kana_segmented: ハート カクテル
+  source: audit-ndl-romaji
+  old_seed2: ハート カクテルballad
+  old_seed3: ハートカクテルballad
+- key: qid:Q1410685|name:HYPER☆ルン
+  title: HYPER☆ルン
+  title_kana: ハイパールン
+  title_kana_segmented: ハイパー ルン
+  source: audit-ndl-romaji
+  old_seed2: Hyper ルン
+  old_seed3: Hyperルン
+- key: qid:Q1626187|name:燃えるV
+  title: 燃えるV
+  title_kana: モエルブイ
+  title_kana_segmented: モエル ブイ
+  source: audit-ndl-romaji
+  old_seed2: モエル V
+  old_seed3: モエルV
+- key: qid:Q16263692|name:抱きしめたい Secret Love Romance
+  title: 抱きしめたい Secret Love Romance
+  title_kana: ダキシメタイ
+  title_kana_segmented: ダキシメタイ
+  source: audit-ndl-romaji
+  old_seed2: ダキシメタイ Secret Love Romance
+  old_seed3: ダキシメタイSecretLoveRomance
+- key: qid:Q16264862|name:機動戦士ガンダムNT(ナラティブ)
+  title: 機動戦士ガンダムNT(ナラティブ)
+  title_kana: キドウセンシガンダムナラティブ
+  title_kana_segmented: キドウ センシ ガンダム ナラティブ
+  source: audit-ndl-romaji
+  old_seed2: MOBILE SUIT GUNDAM NARRATIVE機動戦士ガンダムNT
+  old_seed3: MOBILESUITGUNDAMNARRATIVE機動戦士ガンダムNT
+- key: qid:Q17129610|name:コングルGood
+  title: コングルGood
+  title_kana: コングルグー
+  title_kana_segmented: コングル グー
+  source: audit-ndl-romaji
+  old_seed2: コングル good
+  old_seed3: コングルgood
+- key: qid:Q193300|name:SFミックス
+  title: SFミックス
+  title_kana: エスエフミックス
+  title_kana_segmented: エスエフ ミックス
+  source: audit-ndl-romaji
+  old_seed2: SF ミックス
+  old_seed3: SFミックス
+- key: qid:Q193300|name:SF・ファイブ
+  title: SF・ファイブ
+  title_kana: エスエフファイブ
+  title_kana_segmented: エスエフ ファイブ
+  source: audit-ndl-romaji
+  old_seed2: SF ファイブ
+  old_seed3: SFファイブ
+- key: qid:Q193300|name:SF三部作完全復刻版と創作ノート
+  title: SF三部作完全復刻版と創作ノート
+  title_kana: エスエフサンブサクカンゼンフッコクバントソウサクノート
+  title_kana_segmented: エスエフ サンブサク カンゼン フッコクバン ト ソウサク ノート
+  source: audit-ndl-romaji
+  old_seed2: SF サンブサク カンゼン フッコクバン ト ソウサク ノート
+  old_seed3: SFサンブサクカンゼンフッコクバントソウサクノート
+- key: qid:Q193300|name:旋風Z
+  title: 旋風Z
+  title_kana: センプウゼット
+  title_kana_segmented: センプウ ゼット
+  source: audit-ndl-romaji
+  old_seed2: センプウ Z
+  old_seed3: センプウZ
+- key: qid:Q193300|name:鉄腕アトム ORIGINAL
+  title: 鉄腕アトム ORIGINAL
+  title_kana: テツワンアトム
+  title_kana_segmented: テツワン アトム
+  source: audit-ndl-romaji
+  old_seed2: テツワン アトム ORIGINAL
+  old_seed3: テツワンアトムORIGINAL
+- key: qid:Q20041004|name:ネコたーぼ16V
+  title: ネコたーぼ16V
+  title_kana: ネコターボジュウロクヴイ
+  title_kana_segmented: ネコ ターボ ジュウロク ヴイ
+  source: audit-ndl-romaji
+  old_seed2: ネコ ターボ 16 V
+  old_seed3: ネコターボ16V
+- key: qid:Q208582|name:Dr.スランプ
+  title: Dr.スランプ
+  title_kana: ドクタースランプ
+  title_kana_segmented: ドクター スランプ
+  source: audit-ndl-romaji
+  old_seed2: DRスランプ
+  old_seed3: DRスランプ
+- key: qid:Q208582|name:ドラゴンボールZ
+  title: ドラゴンボールZ
+  title_kana: ドラゴンボールゼット
+  title_kana_segmented: ドラゴン ボール ゼット
+  source: audit-ndl-romaji
+  old_seed2: ドラゴン ボール Z
+  old_seed3: ドラゴンボールZ
+- key: qid:Q229724|name:コードネームはセーラーV
+  title: コードネームはセーラーV
+  title_kana: コードネームワセーラーブイ
+  title_kana_segmented: コードネーム ワ セーラー ブイ
+  source: audit-ndl-romaji
+  old_seed2: コード ネーム ワ セーラー V
+  old_seed3: コードネームワセーラーV
+- key: qid:Q23019118|name:Madamメイ
+  title: Madamメイ
+  title_kana: マダムメイ
+  title_kana_segmented: マダムメイ
+  source: audit-ndl-romaji
+  old_seed2: MADAMメイ
+  old_seed3: MADAMメイ
+- key: qid:Q2661273|name:ゴルゴ13 ALL TIME BEST
+  title: ゴルゴ13 ALL TIME BEST
+  title_kana: ゴルゴ13
+  title_kana_segmented: ゴルゴ 13
+  source: audit-ndl-romaji
+  old_seed2: ゴルゴ 13 ALL TIME BEST
+  old_seed3: ゴルゴ13ALLTIMEBEST
+- key: qid:Q269498|name:Make loveしよ!!
+  title: Make loveしよ!!
+  title_kana: メイクラブシヨ
+  title_kana_segmented: メイク ラブ シヨ
+  source: audit-ndl-romaji
+  old_seed2: Make love シヨ
+  old_seed3: Makeloveシヨ
+- key: qid:Q2738694|name:A列車でいこう
+  title: A列車でいこう
+  title_kana: エイレッシャデイコウ
+  title_kana_segmented: エイレッシャ デ イコウ
+  source: audit-ndl-romaji
+  old_seed2: A レッシャ デ イコウ
+  old_seed3: Aレッシャデイコウ
+- key: qid:Q2738694|name:ハイヒールCOP
+  title: ハイヒールCOP
+  title_kana: ハイヒールコツプ
+  title_kana_segmented: ハイヒール コツプ
+  source: audit-ndl-romaji
+  old_seed2: ハイヒール cop
+  old_seed3: ハイヒールcop
+- key: qid:Q313703|name:CYBORGじいちゃんG
+  title: CYBORGじいちゃんG
+  title_kana: サイボーグジイチャンジイ
+  title_kana_segmented: サイボーグ ジイチャン ジイ
+  source: audit-ndl-romaji
+  old_seed2: サイボーグ ジイチャン G
+  old_seed3: サイボーグジイチャンG
+- key: qid:Q313945|name:名探偵コナン SEASONAL SELECTION 冬の事件
+  title: 名探偵コナン SEASONAL SELECTION 冬の事件
+  title_kana: メイタンテイコナン
+  title_kana_segmented: メイタンテイ コナン
+  source: audit-ndl-romaji
+  old_seed2: メイタンテイ コナン seasonal selection
+  old_seed3: メイタンテイコナンseasonalselection
+- key: qid:Q313945|name:名探偵コナン SEASONAL SELECTION 夏の事件
+  title: 名探偵コナン SEASONAL SELECTION 夏の事件
+  title_kana: メイタンテイコナン
+  title_kana_segmented: メイタンテイ コナン
+  source: audit-ndl-romaji
+  old_seed2: メイタンテイ コナン seasonal selection
+  old_seed3: メイタンテイコナンseasonalselection
+- key: qid:Q313945|name:名探偵コナン SEASONAL SELECTION 春の事件
+  title: 名探偵コナン SEASONAL SELECTION 春の事件
+  title_kana: メイタンテイコナン
+  title_kana_segmented: メイタンテイ コナン
+  source: audit-ndl-romaji
+  old_seed2: メイタンテイ コナン seasonal selection
+  old_seed3: メイタンテイコナンseasonalselection
+- key: qid:Q313945|name:名探偵コナン SEASONAL SELECTION 秋の事件
+  title: 名探偵コナン SEASONAL SELECTION 秋の事件
+  title_kana: メイタンテイコナン
+  title_kana_segmented: メイタンテイ コナン
+  source: audit-ndl-romaji
+  old_seed2: メイタンテイ コナン seasonal selection
+  old_seed3: メイタンテイコナンseasonalselection
+- key: qid:Q3293468|name:Death/こみゅにけーしょん
+  title: Death/こみゅにけーしょん
+  title_kana: デスコミュニケーション
+  title_kana_segmented: デス コミュニケーション
+  source: audit-ndl-romaji
+  old_seed2: Death コミュニケーション
+  old_seed3: Deathコミュニケーション
+- key: qid:Q3514183|name:釣りキチ三平classic
+  title: 釣りキチ三平classic
+  title_kana: ツリキチサンペイクラシック
+  title_kana_segmented: ツリキチ サンペイ クラシック
+  source: audit-ndl-romaji
+  old_seed2: ツリキチ サンペイ classic
+  old_seed3: ツリキチサンペイclassic
+- key: qid:Q376174|name:What's Michael?の猫の本
+  title: What's Michael?の猫の本
+  title_kana: ホワッツマイケルノネコノホン
+  title_kana_segmented: ホワッツ マイケル ノ ネコ ノ ホン
+  source: audit-ndl-romaji
+  old_seed2: WHATS MICHAEL ノ ネコ ノ ホン
+  old_seed3: WHATSMICHAELノネコノホン
+- key: qid:Q3778019|name:SEX ドクター尖三郎
+  title: SEX ドクター尖三郎
+  title_kana: セックスドクタートンガリサブロウ
+  title_kana_segmented: セックス ドクター トンガリ サブロウ
+  source: audit-ndl-romaji
+  old_seed2: SEXドクター トンガリサブロウ
+  old_seed3: SEXドクタートンガリサブロウ
+- key: qid:Q3782468|name:巨人用 進撃の巨人
+  title: 巨人用 進撃の巨人
+  title_kana: キョジンヨウシンゲキノキョジン
+  title_kana_segmented: キョジンヨウ シンゲキ ノ キョジン
+  source: audit-ndl-romaji
+  old_seed2: キョジンヨウ シンゲキ ノ キョジン = attack on titan
+  old_seed3: キョジンヨウシンゲキノキョジン=attackontitan
+- key: qid:Q3814177|name:P.P.すくらんぶる
+  title: P.P.すくらんぶる
+  title_kana: ピーピースクランブル
+  title_kana_segmented: ピー ピー スクランブル
+  source: audit-ndl-romaji
+  old_seed2: PP スクランブル
+  old_seed3: PPスクランブル
+- key: qid:Q431443|name:V2パンツァー
+  title: V2パンツァー
+  title_kana: ヴイツインパンツァー
+  title_kana_segmented: ヴイ ツイン パンツァー
+  source: audit-ndl-romaji
+  old_seed2: V2 パンツァー
+  old_seed3: V2パンツァー
+- key: qid:Q443762|name:YASUJI東京
+  title: YASUJI東京
+  title_kana: ヤスジトウキョウ
+  title_kana_segmented: ヤスジ トウキョウ
+  source: audit-ndl-romaji
+  old_seed2: Yasuji トウキョウ
+  old_seed3: Yasujiトウキョウ
+- key: qid:Q445265|name:最遊記RELOAD
+  title: 最遊記RELOAD
+  title_kana: サイユウキリロード
+  title_kana_segmented: サイユウキ リロード
+  source: audit-ndl-romaji
+  old_seed2: サイユウキ RELOAD
+  old_seed3: サイユウキRELOAD
+- key: qid:Q446051|name:Oh!myダーリン❤
+  title: Oh!myダーリン❤
+  title_kana: オーマイダーリン
+  title_kana_segmented: オー マイ ダーリン
+  source: audit-ndl-romaji
+  old_seed2: OH MY ダーリン
+  old_seed3: OHMYダーリン
+- key: qid:Q457637|name:魔探偵ロキRAGNAROK
+  title: 魔探偵ロキRAGNAROK
+  title_kana: マタンテイロキラグナロク
+  title_kana_segmented: マタンテイ ロキ ラグナロク
+  source: audit-ndl-romaji
+  old_seed2: マタンテイ ロキ Ragnarok
+  old_seed3: マタンテイロキRagnarok
+- key: qid:Q468571|name:歌姫Fight!
+  title: 歌姫Fight!
+  title_kana: ウタヒメファイト
+  title_kana_segmented: ウタヒメ ファイト
+  source: audit-ndl-romaji
+  old_seed2: ウタヒメ FIGHT
+  old_seed3: ウタヒメFIGHT
+- key: qid:Q468761|name:BORDER境界線
+  title: BORDER境界線
+  title_kana: ボーダーキョウカイセン
+  title_kana_segmented: ボーダー キョウカイセン
+  source: audit-ndl-romaji
+  old_seed2: Border キョウカイセン
+  old_seed3: Borderキョウカイセン
+- key: qid:Q471103|name:仮面ライダーEX
+  title: 仮面ライダーEX
+  title_kana: カメンライダーイーエックス
+  title_kana_segmented: カメン ライダー イーエックス
+  source: audit-ndl-romaji
+  old_seed2: カメン ライダー ex
+  old_seed3: カメンライダーex
+- key: qid:Q4811878|name:Jの総て
+  title: Jの総て
+  title_kana: ジェーノスベテ
+  title_kana_segmented: ジェー ノ スベテ
+  source: audit-ndl-romaji
+  old_seed2: J ノ スベテ
+  old_seed3: Jノスベテ
+- key: qid:Q4888069|name:小梅ちゃんが行く!R
+  title: 小梅ちゃんが行く!R
+  title_kana: コウメチャンガユクリターンズ
+  title_kana_segmented: コウメ チャン ガ ユク リターンズ
+  source: audit-ndl-romaji
+  old_seed2: コウメ チャン ガ ユク R
+  old_seed3: コウメチャンガユクR
+- key: qid:Q533664|name:Marieの奏でる音楽
+  title: Marieの奏でる音楽
+  title_kana: マリィノカナデルオンガク
+  title_kana_segmented: マリィ ノ カナデル オンガク
+  source: audit-ndl-romaji
+  old_seed2: Marie ノ カナデル オンガク
+  old_seed3: Marieノカナデルオンガク
+- key: qid:Q544257|name:Kの葬列
+  title: Kの葬列
+  title_kana: ケーノソウレツ
+  title_kana_segmented: ケー ノ ソウレツ
+  source: audit-ndl-romaji
+  old_seed2: K ノ ソウレツ
+  old_seed3: Kノソウレツ
+- key: qid:Q551359|name:マジンガーZ
+  title: マジンガーZ
+  title_kana: マジンガーゼット
+  title_kana_segmented: マジンガー ゼット
+  source: audit-ndl-romaji
+  old_seed2: マジンガーZ
+  old_seed3: マジンガーZ
+- key: qid:Q6455159|name:忍空 零
+  title: 忍空 零
+  title_kana: ニンクウゼロ
+  title_kana_segmented: ニンクウ ゼロ
+  source: audit-ndl-romaji
+  old_seed2: ニンクウ ZERO
+  old_seed3: ニンクウZERO
+- key: qid:Q65268522|name:桃色兄妹
+  title: 桃色兄妹
+  title_kana: モモイロアニト
+  title_kana_segmented: モモイロ アニト
+  source: audit-ndl-romaji
+  old_seed2: モモイロ anito
+  old_seed3: モモイロanito
+- key: qid:Q8060533|name:ダイヤのA
+  title: ダイヤのA
+  title_kana: ダイヤノエース
+  title_kana_segmented: ダイヤ ノ エース
+  source: audit-ndl-romaji
+  old_seed2: ダイヤ ノ A
+  old_seed3: ダイヤノA
+- key: qid:Q8193642|name:GS美神
+  title: GS美神
+  title_kana: ゴーストスイーパーミカミ
+  title_kana_segmented: ゴースト スイーパー ミカミ
+  source: audit-ndl-romaji
+  old_seed2: GSミカミ
+  old_seed3: GSミカミ
+- key: qid:Q8979434|name:Gの影忍
+  title: Gの影忍
+  title_kana: ジーノカゲニン
+  title_kana_segmented: ジー ノ カゲニン
+  source: audit-ndl-romaji
+  old_seed2: G ノ カゲニン
+  old_seed3: Gノカゲニン
+- key: qid:Q9016503|name:パズルゲーム☆はいすくーるX
+  title: パズルゲーム☆はいすくーるX
+  title_kana: パズルゲーム☆ハイスクールキッス
+  title_kana_segmented: パズル ゲーム ☆ ハイスクール キッス
+  source: audit-ndl-romaji
+  old_seed2: パズル ゲーム ハイスクール X
+  old_seed3: パズルゲームハイスクールX
+- key: qid:Q9079675|name:菜々子さん的な日常DASH!!
+  title: 菜々子さん的な日常DASH!!
+  title_kana: ナナコサンテキナニチジョウダッシュ
+  title_kana_segmented: ナナコ サンテキ ナ ニチジョウ ダッシュ
+  source: audit-ndl-romaji
+  old_seed2: ナナコサンテキナ ニチジョウ dash
+  old_seed3: ナナコサンテキナニチジョウdash
+- key: qid:Q9109509|name:空から!マイ☆nanny
+  title: 空から!マイ☆nanny
+  title_kana: ソラカラ!マイ☆ナニー
+  title_kana_segmented: ソラ カラ マイ ☆ ナニー
+  source: audit-ndl-romaji
+  old_seed2: ソラ カラ マイ nanny
+  old_seed3: ソラカラマイnanny
+- key: qid:Q9307321|name:Choko・ビースト!!
+  title: Choko・ビースト!!
+  title_kana: チョーコビースト
+  title_kana_segmented: チョーコ ビースト
+  source: audit-ndl-romaji
+  old_seed2: CHOKO ビースト
+  old_seed3: CHOKOビースト
+- key: qid:Q958249|name:To loveる (とらぶる) ダークネス
+  title: To loveる (とらぶる) ダークネス
+  title_kana: トラブルダークネス
+  title_kana_segmented: トラブル ダークネス
+  source: audit-ndl-romaji
+  old_seed2: To loveるダークネス
+  old_seed3: Toloveるダークネス
+- key: qid:Q966701|name:金田一少年の事件簿　短編集
+  title: 金田一少年の事件簿　短編集
+  title_kana: キンダイチショウネンノジケンボ
+  title_kana_segmented: キンダイチ ショウネン ノ ジケンボ
+  source: audit-ndl-romaji
+  old_seed2: キンダイチ ショウネン ノ ジケンボ　短編集
+  old_seed3: キンダイチショウネンノジケンボ短編集
+- key: qid:Q999229|name:新機動戦記ガンダムW BLIND TARGET
+  title: 新機動戦記ガンダムW BLIND TARGET
+  title_kana: シンキドウセンキガンダムウィングブラインドターゲット
+  title_kana_segmented: シン キドウ センキ ガンダム ウィング ブラインド ターゲット
+  source: audit-ndl-romaji
+  old_seed2: シン キドウ センキ ガンダム W blind target
+  old_seed3: シンキドウセンキガンダムWblindtarget
+- key: name:家田荘子|name:AB.フリャー
+  title: AB.フリャー
+  title_kana: エイビーフリャー
+  title_kana_segmented: エイビー フリャー
+  source: audit-ndl-romaji
+  old_seed2: AB フリャー
+  old_seed3: ABフリャー
+- key: name:木村謙午|name:BFボーイズ
+  title: BFボーイズ
+  title_kana: バトルフィッシュボーイズ
+  title_kana_segmented: バトル フィッシュ ボーイズ
+  source: audit-ndl-romaji
+  old_seed2: BF ボーイズ
+  old_seed3: BFボーイズ
+- key: name:地引かずや|name:B級どりいみんぐ
+  title: B級どりいみんぐ
+  title_kana: ビーキュウドリイミング
+  title_kana_segmented: ビーキュウ ドリイミング
+  source: audit-ndl-romaji
+  old_seed2: Bキュウ ドリイミング
+  old_seed3: Bキュウドリイミング
+- key: name:湯浅ひとし|name:B級探偵
+  title: B級探偵
+  title_kana: ビーキュウタンテイ
+  title_kana_segmented: ビーキュウ タンテイ
+  source: audit-ndl-romaji
+  old_seed2: Bキュウ タンテイ
+  old_seed3: Bキュウタンテイ
+- key: name:中瀬理香|name:Dance with DEVILS-Blight-
+  title: Dance with DEVILS-Blight-
+  title_kana: ダンスウィズデビルス
+  title_kana_segmented: ダンス ウィズ デビルス
+  source: audit-ndl-romaji
+  old_seed2: ダンス ウィズ デビルス blight
+  old_seed3: ダンスウィズデビルスblight
+- key: name:音木ひろし|name:DeスポファイターZ(ズ)
+  title: DeスポファイターZ(ズ)
+  title_kana: ディースポファイターズ
+  title_kana_segmented: ディースポ ファイターズ
+  source: audit-ndl-romaji
+  old_seed2: DeスポファイターZ
+  old_seed3: DeスポファイターZ
+- key: name:高橋三千綱|name:Dr.タイフーンJR
+  title: Dr.タイフーンJR
+  title_kana: ドクタイフーンジュニア
+  title_kana_segmented: ドク タイフーン ジュニア
+  source: audit-ndl-romaji
+  old_seed2: ドク タイフーン Jr
+  old_seed3: ドクタイフーンJr
+- key: name:柴日和|name:I (アイドル) 生徒と担任P
+  title: I (アイドル) 生徒と担任P
+  title_kana: アイドルセイトトタンニンピー
+  title_kana_segmented: アイドル セイト ト タンニン ピー
+  source: audit-ndl-romaji
+  old_seed2: アイドル セイト ト タンニン P
+  old_seed3: アイドルセイトトタンニンP
+- key: name:NHK取材班|name:NHKその時歴史が動いた
+  title: NHKその時歴史が動いた
+  title_kana: ソノトキレキシガウゴイタ
+  title_kana_segmented: ソノ トキ レキシ ガ ウゴイタ
+  source: audit-ndl-romaji
+  old_seed2: NHK ソノ トキ レキシ ガ ウゴイタ
+  old_seed3: NHKソノトキレキシガウゴイタ
+- key: name:かたせ湘|name:Pureしてるネ!
+  title: Pureしてるネ!
+  title_kana: ピュアシテルネ
+  title_kana_segmented: ピュア シテルネ
+  source: audit-ndl-romaji
+  old_seed2: Pure シテルネ
+  old_seed3: Pureシテルネ
+- key: name:座紀光倫|name:ROSE GUNS DAYS Last Season
+  title: ROSE GUNS DAYS Last Season
+  title_kana: ローズガンズデイズ
+  title_kana_segmented: ローズ ガンズ デイズ
+  source: audit-ndl-romaji
+  old_seed2: ローズ ガンズ デイズ last season
+  old_seed3: ローズガンズデイズlastseason
+- key: 'name:川上修一|name:Rewrite: SIDE-R'
+  title: 'Rewrite: SIDE-R'
+  title_kana: リライト
+  title_kana_segmented: リライト
+  source: audit-ndl-romaji
+  old_seed2: リライト side R
+  old_seed3: リライトsideR
+- key: name:東条さかな|name:Rewrite:SIDE-B
+  title: Rewrite:SIDE-B
+  title_kana: リライト
+  title_kana_segmented: リライト
+  source: audit-ndl-romaji
+  old_seed2: リライト SIDE B
+  old_seed3: リライトSIDEB
+- key: name:バンダイナムコエンターテインメント|name:THE IDOLM@STER CINDERELLA GIRLS U149
+  title: THE IDOLM@STER CINDERELLA GIRLS U149
+  title_kana: ジアイドルマスターシンデレラガールズユーイチヨンキュウ
+  title_kana_segmented: ジ アイドル マスター シンデレラ ガールズ ユー イチヨンキュウ
+  source: audit-ndl-romaji
+  old_seed2: The アイドル マスター シンデレラ ガールズ ユー149
+  old_seed3: Theアイドルマスターシンデレラガールズユー149
+- key: name:鮭乃らるかん|name:◯◯なメイドさん
+  title: ◯◯なメイドさん
+  title_kana: マルマルナメイドサン
+  title_kana_segmented: マルマルナ メイドサン
+  source: audit-ndl-romaji
+  old_seed2: ◯◯ (まるまる) なメイドさん
+  old_seed3: ◯◯(まるまる)なメイドさん
+- key: name:竜騎士07|name:うみねこのなく宴に Tea party of the witches
+  title: うみねこのなく宴に Tea party of the witches
+  title_kana: ウミネコノナクパーティーニ
+  title_kana_segmented: ウミネコ ノ ナク パーティー ニ
+  source: audit-ndl-romaji
+  old_seed2: ウミネコ ノ ナク パーティー ニ tea party of the witches
+  old_seed3: ウミネコノナクパーティーニteapartyofthewitches
+- key: name:渋染かずき|name:こちら新宿FIPPERS
+  title: こちら新宿FIPPERS
+  title_kana: コチラシンジュクフリッパーズ
+  title_kana_segmented: コチラ シンジュク フリッパーズ
+  source: audit-ndl-romaji
+  old_seed2: コチラ シンジュク FRIPPERS
+  old_seed3: コチラシンジュクFRIPPERS
+- key: name:momo|name:たまゆら hitotose
+  title: たまゆら hitotose
+  title_kana: タマユラ
+  title_kana_segmented: タマユラ
+  source: audit-ndl-romaji
+  old_seed2: タマユラ hitotose
+  old_seed3: タマユラhitotose
+- key: name:竜騎士07|name:ひぐらしのなく恋に All you need is love
+  title: ひぐらしのなく恋に All you need is love
+  title_kana: ヒグラシノナクコイニ
+  title_kana_segmented: ヒグラシ ノ ナク コイ ニ
+  source: audit-ndl-romaji
+  old_seed2: ヒグラシ ノ ナク コイ ニ all you need is love
+  old_seed3: ヒグラシノナクコイニallyouneedislove
+- key: name:S-nery Angel|name:イイナ～Feel for Love～
+  title: イイナ～Feel for Love～
+  title_kana: イイナ
+  title_kana_segmented: イイナ
+  source: audit-ndl-romaji
+  old_seed2: イイナ FEEL FOR LOVE
+  old_seed3: イイナFEELFORLOVE
+- key: name:祁答院慎|name:コープスパーティーanother child
+  title: コープスパーティーanother child
+  title_kana: コープスパーティー
+  title_kana_segmented: コープス パーティー
+  source: audit-ndl-romaji
+  old_seed2: コープス パーティーanother child
+  old_seed3: コープスパーティーanotherchild
+- key: name:ATLUS|name:デビル サバイバー2 THE ANIMATION
+  title: デビル サバイバー2 THE ANIMATION
+  title_kana: デビルサバイバー2
+  title_kana_segmented: デビル サバイバー 2
+  source: audit-ndl-romaji
+  old_seed2: デビル サバイバー 2 the animation
+  old_seed3: デビルサバイバー2theanimation
+- key: name:ゆでたまご|name:トータルファイターK
+  title: トータルファイターK
+  title_kana: トータルファイターカオ
+  title_kana_segmented: トータル ファイター カオ
+  source: audit-ndl-romaji
+  old_seed2: トータル ファイター K
+  old_seed3: トータルファイターK
+- key: name:篠月あうる|name:ハートの国のアリス-My Fanatic Rabbit-
+  title: ハートの国のアリス-My Fanatic Rabbit-
+  title_kana: ハートノクニノアリス
+  title_kana_segmented: ハート ノ クニ ノ アリス
+  source: audit-ndl-romaji
+  old_seed2: ハート ノ クニ ノ アリス my fanatic rabbit
+  old_seed3: ハートノクニノアリスmyfanaticrabbit
+- key: name:街田チカ|name:ユリ・STYLE
+  title: ユリ・STYLE
+  title_kana: ユリスタイル
+  title_kana_segmented: ユリ スタイル
+  source: audit-ndl-romaji
+  old_seed2: ユリ STYLE
+  old_seed3: ユリSTYLE
+- key: name:深山雪男|name:ルパン三世M
+  title: ルパン三世M
+  title_kana: ルパンサンセイエム
+  title_kana_segmented: ルパン サンセイ エム
+  source: audit-ndl-romaji
+  old_seed2: ルパン サンセイ M
+  old_seed3: ルパンサンセイM
+- key: name:彩景でりこ|name:傷だらけの愛羅武勇
+  title: 傷だらけの愛羅武勇
+  title_kana: キズダラケノアイラヴユー
+  title_kana_segmented: キズダラケ ノ アイラヴユー
+  source: audit-ndl-romaji
+  old_seed2: キズダラケ ノ I love you
+  old_seed3: キズダラケノIloveyou
+- key: name:オーガスト|name:大図書館の羊飼い Library 4 you
+  title: 大図書館の羊飼い Library 4 you
+  title_kana: ダイトショカンノヒツジカイ
+  title_kana_segmented: ダイトショカン ノ ヒツジカイ
+  source: audit-ndl-romaji
+  old_seed2: ダイトショカン ノ ヒツジカイ library 4 you
+  old_seed3: ダイトショカンノヒツジカイlibrary4you
+- key: name:屋久ユウキ|name:弱キャラ友崎くん-comic
+  title: 弱キャラ友崎くん-comic
+  title_kana: ジャクキャラトモザキクンコミック
+  title_kana_segmented: ジャクキャラ トモザキクン コミック
+  source: audit-ndl-romaji
+  old_seed2: ジャクキャラ トモザキクン - comic
+  old_seed3: ジャクキャラトモザキクン-comic
+- key: name:水星茗|name:星のAngel・ring
+  title: 星のAngel・ring
+  title_kana: ホシノエンジェルリング
+  title_kana_segmented: ホシ ノ エンジェル リング
+  source: audit-ndl-romaji
+  old_seed2: ホシ ノ Angel ring
+  old_seed3: ホシノAngelring
+- key: name:千葉智宏|name:機動戦士ガンダム00F
+  title: 機動戦士ガンダム00F
+  title_kana: キドウセンシガンダムダブルオーエフ
+  title_kana_segmented: キドウ センシ ガンダム ダブルオーエフ
+  source: audit-ndl-romaji
+  old_seed2: キドウ センシ ガンダム 00F
+  old_seed3: キドウセンシガンダム00F
+- key: name:千葉智宏|name:機動戦士ガンダムSEED ASTRAY
+  title: 機動戦士ガンダムSEED ASTRAY
+  title_kana: キドウセンシガンダムシードアストレイ
+  title_kana_segmented: キドウ センシ ガンダム シード アストレイ
+  source: audit-ndl-romaji
+  old_seed2: キドウ センシ ガンダム seed astray
+  old_seed3: キドウセンシガンダムseedastray
+- key: name:千葉智宏|name:機動戦士ガンダムSEED DESTINY ASTRAY
+  title: 機動戦士ガンダムSEED DESTINY ASTRAY
+  title_kana: キドウセンシガンダムシードデスティニーアストレイ
+  title_kana_segmented: キドウ センシ ガンダム シード デスティニー アストレイ
+  source: audit-ndl-romaji
+  old_seed2: キドウ センシ ガンダム SEED DESTINY ASTRAY
+  old_seed3: キドウセンシガンダムSEEDDESTINYASTRAY
