@@ -1,8 +1,7 @@
 # フリガナ補正 seed (= 3ソースconsensus: NDL公式 / 種3-AI / 種2-MADB)
 # 種2/種3とも誤りだった key を補正。 promoteがtitle_kanaを最優先で読む。 種2種3不変・可逆。
-# source: ndl/manual/audit-ndl/audit-s3/audit-ndl-romaji/review-confident/user-verified(ユーザ実物確認)。
-# 一部entryに slug/alternative_titles_en の特例メタ(将来のslug生成・en-fillが消費)。
-# 更新 2026-06-03 / 計376件。
+# source: ndl/manual/audit-*/review-confident/user-verified/manual-adult。 一部entryにslug/en特例メタ。
+# 更新 2026-06-03 / 計446件。
 schema_version: 1
 corrections:
 - key: name:I・N・J・カルバード|name:クトゥルフ神話～ラヴクラフト傑作選
@@ -2640,3 +2639,493 @@ corrections:
   source: user-verified
   old_seed2: ナナカ ジュウシチブンノロク
   old_seed3: ナナカジュウナナブンノロク
+- key: qid:Q108415280|name:天使のたまごin東京
+  title: 天使のたまごin東京
+  title_kana: テンシノタマゴイントウキョウ
+  title_kana_segmented: テンシ ノ タマゴ イン トウキョウ
+  source: audit-ndl-hold
+  old_seed2: テンシ ノ タマゴ in トウキョウ
+  old_seed3: テンシノタマゴinトウキョウ
+- key: qid:Q11279292|name:やるっきゃ騎士ベストセレクション
+  title: やるっきゃ騎士ベストセレクション
+  title_kana: ヤルッキャナイトベストセレクション
+  title_kana_segmented: ヤルッキャ ナイト ベスト セレクション
+  source: audit-ndl-hold
+  old_seed2: やるっきゃ騎士ベストセレクション
+  old_seed3: やるっきゃ騎士ベストセレクション
+- key: qid:Q11344586|name:池袋13
+  title: 池袋13
+  title_kana: イケブクロ13
+  title_kana_segmented: イケブクロ 13
+  source: audit-ndl-hold
+  old_seed2: IKB サーティーン
+  old_seed3: IKBサーティーン
+- key: qid:Q11385040|name:わたしの家(うち)はフツー
+  title: わたしの家(うち)はフツー
+  title_kana: ワタシノウチワフツー
+  title_kana_segmented: ワタシ ノ ウチ ワ フツー
+  source: audit-ndl-hold
+  old_seed2: わたしの家はフツー
+  old_seed3: わたしの家はフツー
+- key: qid:Q11462004|name:めちゃめちゃ!ブサイくん
+  title: めちゃめちゃ!ブサイくん
+  title_kana: メチャメチャブサイクン
+  title_kana_segmented: メチャメチャ ブサイクン
+  source: audit-ndl-hold
+  old_seed2: ブサブサ国からブサヨロ!の巻
+  old_seed3: ブサブサ国からブサヨロ!の巻
+- key: qid:Q11462004|name:れいぞうこのつけのすけ!
+  title: れいぞうこのつけのすけ!
+  title_kana: レイゾウコノツケノスケ
+  title_kana_segmented: レイゾウコ ノ ツケノスケ
+  source: audit-ndl-hold
+  old_seed2: おかずスターにボクはなる!!!
+  old_seed3: おかずスターにボクはなる!!!
+- key: qid:Q11517039|name:サインはV!
+  title: サインはV!
+  title_kana: サインワヴイ
+  title_kana_segmented: サイン ワ ヴイ
+  source: audit-ndl-hold
+  old_seed2: サインハV
+  old_seed3: サインハV
+- key: qid:Q11537576|name:黄色い手袋X 外伝
+  title: 黄色い手袋X 外伝
+  title_kana: キイロイテブクロエックスガイデン
+  title_kana_segmented: キイロイ テブクロ エックス ガイデン
+  source: audit-ndl-hold
+  old_seed2: キイロイ テブクロ X ガイデン
+  old_seed3: キイロイテブクロXガイデン
+- key: qid:Q11548854|name:ヤコとポコ
+  title: ヤコとポコ
+  title_kana: ヤコトポコ
+  title_kana_segmented: ヤコ ト ポコ
+  source: audit-ndl-hold
+  old_seed2: yako アンド poko
+  old_seed3: yakoアンドpoko
+- key: qid:Q11575427|name:サラリーマン田中K一がゆく!
+  title: サラリーマン田中K一がゆく!
+  title_kana: サラリーマンタナカケイイチガユク
+  title_kana_segmented: サラリーマン タナカ ケイイチ ガ ユク
+  source: audit-ndl-hold
+  old_seed2: サラリーマン タナカ Kイチ ガ ユク
+  old_seed3: サラリーマンタナカKイチガユク
+- key: qid:Q11575427|name:マンガ家田中K一がゆく!
+  title: マンガ家田中K一がゆく!
+  title_kana: マンガカタナカケイイチガユク
+  title_kana_segmented: マンガカ タナカ ケイイチ ガ ユク
+  source: audit-ndl-hold
+  old_seed2: マンガカ タナカ Kイチ ガ ユク
+  old_seed3: マンガカタナカKイチガユク
+- key: qid:Q11590692|name:タマロイド超Cガンダム
+  title: タマロイド超Cガンダム
+  title_kana: タマロイドチヨウシーガンダム
+  title_kana_segmented: タマロイド チヨウシー ガンダム
+  source: audit-ndl-hold
+  old_seed2: タマロイド チョウcガンダム
+  old_seed3: タマロイドチョウcガンダム
+- key: qid:Q11594871|name:まんが無防備マンが行く!
+  title: まんが無防備マンが行く!
+  title_kana: ムボウビマンガユク
+  title_kana_segmented: ムボウビマン ガ ユク
+  source: audit-ndl-hold
+  old_seed2: まんがムボウビマン ガ ユク
+  old_seed3: まんがムボウビマンガユク
+- key: qid:Q11597196|name:ポケットモンスター D・P編
+  title: ポケットモンスター D・P編
+  title_kana: ポケットモンスター
+  title_kana_segmented: ポケット モンスター
+  source: audit-ndl-hold
+  old_seed2: ポケット モンスター DPヘン
+  old_seed3: ポケットモンスターDPヘン
+- key: qid:Q11598960|name:ST＆RS
+  title: ST＆RS
+  title_kana: スターズ
+  title_kana_segmented: スターズ
+  source: audit-ndl-hold
+  old_seed2: STアンドRS
+  old_seed3: STアンドRS
+- key: qid:Q11599302|name:私立T女子学園
+  title: 私立T女子学園
+  title_kana: シリツティージョシガクエン
+  title_kana_segmented: シリツ ティー ジョシ ガクエン
+  source: audit-ndl-hold
+  old_seed2: シリツ T ジョシ ガクエン
+  old_seed3: シリツTジョシガクエン
+- key: qid:Q11618228|name:何様のつもりダ!! sweet♡新婚編
+  title: 何様のつもりダ!! sweet♡新婚編
+  title_kana: ナニサマノツモリダ!!
+  title_kana_segmented: ナニサマ ノ ツモリ ダ
+  source: audit-ndl-hold
+  old_seed2: ナニサマ ノ ツモリ ダ sweet シンコン ヘン
+  old_seed3: ナニサマノツモリダsweetシンコンヘン
+- key: qid:Q11624957|name:人生とはなんだEX
+  title: 人生とはなんだEX
+  title_kana: ジンセイトワナンダ
+  title_kana_segmented: ジンセイ トワ ナンダ
+  source: audit-ndl-hold
+  old_seed2: ジンセイ ト ハ ナンダ EX
+  old_seed3: ジンセイトハナンダEX
+- key: qid:Q11644242|name:恋は危険なプリンスとSPはプリティウーマン
+  title: 恋は危険なプリンスとSPはプリティウーマン
+  title_kana: コイワキケンナプリンスト
+  title_kana_segmented: コイ ワ キケンナ プリンス ト
+  source: audit-ndl-hold
+  old_seed2: コイ ワ キケンナ プリンス トSP ワ プリティ ウーマン
+  old_seed3: コイワキケンナプリンストSPワプリティウーマン
+- key: qid:Q11678103|name:変幻戦忍アスカ❤
+  title: 変幻戦忍アスカ❤
+  title_kana: ヘンゲンセンシノブアスカ
+  title_kana_segmented: ヘンゲンセンシノブアスカ
+  source: audit-ndl-hold
+  old_seed2: ヘンゲン センニン Asuka
+  old_seed3: ヘンゲンセンニンAsuka
+- key: qid:Q17572|name:てぶくろてっちゃん
+  title: てぶくろてっちゃん
+  title_kana: テブクロテッチャン
+  title_kana_segmented: テブクロ テッチャン
+  source: audit-ndl-hold
+  old_seed2: The Complete Works of Fujiko・F・Fujio
+  old_seed3: TheCompleteWorksofFujiko・F・Fujio
+- key: qid:Q17572|name:オバケのQ太郎
+  title: オバケのQ太郎
+  title_kana: オバケノキュータロウ
+  title_kana_segmented: オバケ ノ キュータロウ
+  source: audit-ndl-hold
+  old_seed2: オバケ ノ Qタロウ
+  old_seed3: オバケノQタロウ
+- key: qid:Q17572|name:新オバケのQ太郎
+  title: 新オバケのQ太郎
+  title_kana: シンオバケノキュータロウ
+  title_kana_segmented: シン オバケ ノ キュータロウ
+  source: audit-ndl-hold
+  old_seed2: シン オバケ ノ Qタロウ
+  old_seed3: シンオバケノQタロウ
+- key: qid:Q17572|name:藤子・F・不二雄異色短編集
+  title: 藤子・F・不二雄異色短編集
+  title_kana: ハコブネワイッパイ
+  title_kana_segmented: ハコブネ ワ イッパイ
+  source: audit-ndl-hold
+  old_seed2: フジコ F フジオ イショク タンペンシュウ
+  old_seed3: フジコFフジオイショクタンペンシュウ
+- key: qid:Q193300|name:初期名作完全復刻版BOX
+  title: 初期名作完全復刻版BOX
+  title_kana: カイジンコロンコハカセ
+  title_kana_segmented: カイジン コロンコ ハカセ
+  source: audit-ndl-hold
+  old_seed2: ショキ メイサク カンゼン フッコクバン BOX
+  old_seed3: ショキメイサクカンゼンフッコクバンBOX
+- key: qid:Q193300|name:太平洋Xポイント
+  title: 太平洋Xポイント
+  title_kana: タイヘイヨウエックスポイント
+  title_kana_segmented: タイヘイヨウ エックス ポイント
+  source: audit-ndl-hold
+  old_seed2: タイヘイヨウ X ポイント
+  old_seed3: タイヘイヨウXポイント
+- key: qid:Q193300|name:手塚治虫SFヒーロー画集
+  title: 手塚治虫SFヒーロー画集
+  title_kana: テズカオサムエスエフヒーローガシュウ
+  title_kana_segmented: テズカ オサム エスエフ ヒーロー ガシュウ
+  source: audit-ndl-hold
+  old_seed2: テズカ オサム SF ヒーロー ガシュウ
+  old_seed3: テズカオサムSFヒーローガシュウ
+- key: qid:Q1993|name:BORUTO-ボルト-SAIKYO DASH GENERATIONS
+  title: BORUTO-ボルト-SAIKYO DASH GENERATIONS
+  title_kana: ボルトサイキョウダッシュジェネレーションズ
+  title_kana_segmented: ボルト サイキョウ ダッシュ ジェネレーションズ
+  source: audit-ndl-hold
+  old_seed2: うずまきボルト!!
+  old_seed3: うずまきボルト!!
+- key: qid:Q2279877|name:Worst|sub:アンコール出版
+  title: Worst
+  title_kana: ワースト
+  title_kana_segmented: ワースト
+  source: audit-ndl-hold
+  old_seed2: Worst
+  old_seed3: Worst
+- key: qid:Q2280124|name:バリバリ伝説　WGPワークスライダー編
+  title: バリバリ伝説　WGPワークスライダー編
+  title_kana: バリバリデンセツ
+  title_kana_segmented: バリバリ デンセツ
+  source: audit-ndl-hold
+  old_seed2: バリバリ デンセツ　WGPワークスライダー編
+  old_seed3: バリバリデンセツWGPワークスライダー編
+- key: qid:Q24870802|name:世界を救うために亜人(わたし)と朝チュンできますか?
+  title: 世界を救うために亜人(わたし)と朝チュンできますか?
+  title_kana: セカイオスクウタメニワタシトアサチュンデキマスカ
+  title_kana_segmented: セカイ オ スクウ タメ ニ ワタシ ト アサチュン デキマスカ
+  source: audit-ndl-hold
+  old_seed2: CAN YOU DO ASA-CHUN WITH ME FOR SAVE THE WORLD?世界を救うために亜人と朝チュンできますか?
+  old_seed3: CANYOUDOASA-CHUNWITHMEFORSAVETHEWORLD?世界を救うために亜人と朝チュンできますか?
+- key: qid:Q3100347|name:爆笑戦士!SDガンダム
+  title: 爆笑戦士!SDガンダム
+  title_kana: バクショウセンシエスディーガンダム
+  title_kana_segmented: バクショウ センシ エスディー ガンダム
+  source: audit-ndl-hold
+  old_seed2: バクショウ センシ SD ガンダム
+  old_seed3: バクショウセンシSDガンダム
+- key: qid:Q3181532|name:テニスの王子様 完全版 season 1
+  title: テニスの王子様 完全版 season 1
+  title_kana: テニスノオウジサマ
+  title_kana_segmented: テニス ノ オウジサマ
+  source: audit-ndl-hold
+  old_seed2: テニス ノ オウジサマ カンゼンバン season 1
+  old_seed3: テニスノオウジサマカンゼンバンseason1
+- key: qid:Q3181532|name:テニスの王子様 完全版 season 2
+  title: テニスの王子様 完全版 season 2
+  title_kana: テニスノオウジサマ
+  title_kana_segmented: テニス ノ オウジサマ
+  source: audit-ndl-hold
+  old_seed2: テニス ノ オウジサマ カンゼンバン season 2
+  old_seed3: テニスノオウジサマカンゼンバンseason2
+- key: qid:Q3181532|name:テニスの王子様 完全版 season 3
+  title: テニスの王子様 完全版 season 3
+  title_kana: テニスノオウジサマ
+  title_kana_segmented: テニス ノ オウジサマ
+  source: audit-ndl-hold
+  old_seed2: テニス ノ オウジサマ カンゼンバン season 3
+  old_seed3: テニスノオウジサマカンゼンバンseason3
+- key: qid:Q3514183|name:釣りキチ三平　海釣りselection
+  title: 釣りキチ三平　海釣りselection
+  title_kana: ツリキチサンペイ
+  title_kana_segmented: ツリキチ サンペイ
+  source: audit-ndl-hold
+  old_seed2: ツリキチ サンペイ　ウミズリ selection
+  old_seed3: ツリキチサンペイウミズリselection
+- key: qid:Q3514183|name:釣りキチ三平　湖沼釣りselection
+  title: 釣りキチ三平　湖沼釣りselection
+  title_kana: ツリキチサンペイ
+  title_kana_segmented: ツリキチ サンペイ
+  source: audit-ndl-hold
+  old_seed2: ツリキチ サンペイ　コショウズリ selection
+  old_seed3: ツリキチサンペイコショウズリselection
+- key: qid:Q3515914|name:Sランクモンスターの《ベヒーモス》だけど、猫と間違われてエルフ娘の騎士(ペット)として暮らしてます
+  title: Sランクモンスターの《ベヒーモス》だけど、猫と間違われてエルフ娘の騎士(ペット)として暮らしてます
+  title_kana: エスランクモンスターノベヒーモスダケドネコトマチガワレテエルフムスメノペットトシテクラシテマス
+  title_kana_segmented: エスランク モンスター ノ ベヒーモス ダケド ネコ ト マチガワレテ エルフムスメ ノ ペット ト シテ クラシテマス
+  source: audit-ndl-hold
+  old_seed2: I AM BEHEMOTH OF THE S RANK MONSTER.BUT I AM MISTAKEN AS A CAT AND I LIVE AS A PET OF ELF GIRLSランクモンスターの《ベヒーモス》だけど、猫と間違われてエルフ娘の騎士として暮らしてます
+  old_seed3: IAMBEHEMOTHOFTHESRANKMONSTER.BUTIAMMISTAKENASACATANDILIVEASAPETOFELFGIRLSランクモンスターの《ベヒーモス》だけど、猫と間違われてエルフ娘の騎士として暮らしてます
+- key: qid:Q3825082|name:ジョーン・Bの夏
+  title: ジョーン・Bの夏
+  title_kana: ジョーンビーノナツ
+  title_kana_segmented: ジョーン ビー ノ ナツ
+  source: audit-ndl-hold
+  old_seed2: ジョーン B ノ ナツ
+  old_seed3: ジョーンBノナツ
+- key: qid:Q431443|name:未復刻SF作品集
+  title: 未復刻SF作品集
+  title_kana: デンコウオズマ
+  title_kana_segmented: デンコウ オズマ
+  source: audit-ndl-hold
+  old_seed2: ミフッコク SF サクヒンシュウ
+  old_seed3: ミフッコクSFサクヒンシュウ
+- key: qid:Q452246|name:桂正和×TIGER＆BUNNY 原画＆ラフ画集成
+  title: 桂正和×TIGER＆BUNNY 原画＆ラフ画集成
+  title_kana: カツラマサカズタイガーアンドバニーゲンガアンドラフガシュウセイ
+  title_kana_segmented: カツラ マサカズ タイガー アンド バニー ゲンガ アンド ラフガ シュウセイ
+  source: audit-ndl-hold
+  old_seed2: カツラ マサカズ Tiger アンド Bunny ゲンガ アンド ラフガ シュウセイ
+  old_seed3: カツラマサカズTigerアンドBunnyゲンガアンドラフガシュウセイ
+- key: qid:Q467415|name:エンジェル・ハート 2ndシーズン
+  title: エンジェル・ハート 2ndシーズン
+  title_kana: エンジェルハート
+  title_kana_segmented: エンジェル ハート
+  source: audit-ndl-hold
+  old_seed2: エンジェル ハート 2nd シーズン
+  old_seed3: エンジェルハート2ndシーズン
+- key: qid:Q60229967|name:ジモトがジャパン
+  title: ジモトがジャパン
+  title_kana: ジモトガジャパン
+  title_kana_segmented: ジモト ガ ジャパン
+  source: audit-ndl-hold
+  old_seed2: 「ジモトがジャパン」の巻
+  old_seed3: 「ジモトがジャパン」の巻
+- key: qid:Q6359803|name:ロトの紋章 紋章を継ぐ者達へ
+  title: ロトの紋章 紋章を継ぐ者達へ
+  title_kana: ロトノモンショウ
+  title_kana_segmented: ロト ノ モンショウ
+  source: audit-ndl-hold
+  old_seed2: ロト ノ モンショウ モンショウ ヲ ツグ モノタチ へ
+  old_seed3: ロトノモンショウモンショウヲツグモノタチへ
+- key: qid:Q8193642|name:絶対可憐チルドレン THE UNLIMITED兵部京介ベストセレクション
+  title: 絶対可憐チルドレン THE UNLIMITED兵部京介ベストセレクション
+  title_kana: ゼッタイカレンチルドレン
+  title_kana_segmented: ゼッタイ カレン チルドレン
+  source: audit-ndl-hold
+  old_seed2: ゼッタイ カレン チルドレン THE UNLIMITED ヒョウブ キョウスケ ベスト セレクション
+  old_seed3: ゼッタイカレンチルドレンTHEUNLIMITEDヒョウブキョウスケベストセレクション
+- key: qid:Q9013687|name:閑古鳥の巣
+  title: 閑古鳥の巣
+  title_kana: カッコウノス
+  title_kana_segmented: カッコウ ノ ス
+  source: audit-ndl-hold
+  old_seed2: Best of ナカ トモコ
+  old_seed3: Bestofナカトモコ
+- key: qid:Q9130359|name:四ノ宮くんには理由(ワケ)がある
+  title: 四ノ宮くんには理由(ワケ)がある
+  title_kana: シノミヤクンニワワケガアル
+  title_kana_segmented: シノミヤ クン ニワ ワケ ガ アル
+  source: audit-ndl-hold
+  old_seed2: Shinomiya brothers have a SECRET四ノ宮くんには理由がある
+  old_seed3: ShinomiyabrothershaveaSECRET四ノ宮くんには理由がある
+- key: qid:Q9333909|name:妖界ナビ・ルナ
+  title: 妖界ナビ・ルナ
+  title_kana: ヨウカイナビルナ
+  title_kana_segmented: ヨウカイ ナビ ルナ
+  source: audit-ndl-hold
+  old_seed2: Youkai Navi・Runa
+  old_seed3: YoukaiNavi・Runa
+- key: name:梁慶一|name:Area d 異能領域
+  title: Area d 異能領域
+  title_kana: エリアディー
+  title_kana_segmented: エリア ディー
+  source: audit-ndl-hold
+  old_seed2: AREA D イノウ リョウイキ
+  old_seed3: AREADイノウリョウイキ
+- key: name:たべ・こーじ|name:GALS POLICE24時
+  title: GALS POLICE24時
+  title_kana: ギャルズポリス24ジ
+  title_kana_segmented: ギャルズ ポリス 24ジ
+  source: audit-ndl-hold
+  old_seed2: GALS POLICE24ジ
+  old_seed3: GALSPOLICE24ジ
+- key: name:コテリ|name:Veil
+  title: Veil
+  title_kana: ヴェール
+  title_kana_segmented: ヴェール
+  source: audit-ndl-hold
+  old_seed2: オレンジの体温
+  old_seed3: オレンジの体温
+- key: name:のの子|name:※キスは20歳(はたち)になってから
+  title: ※キスは20歳(はたち)になってから
+  title_kana: キスワハタチニナッテカラ
+  title_kana_segmented: キス ワ ハタチ ニ ナッテ カラ
+  source: audit-ndl-hold
+  old_seed2: ※キスは20歳になってから
+  old_seed3: ※キスは20歳になってから
+- key: name:松本陽介|name:その淑女は偶像となる
+  title: その淑女は偶像となる
+  title_kana: ソノシュクジョワグウゾウトナル
+  title_kana_segmented: ソノ シュクジョ ワ グウゾウ ト ナル
+  source: audit-ndl-hold
+  old_seed2: アイドル姫宮桜子
+  old_seed3: アイドル姫宮桜子
+- key: name:北芝健|name:まるごし刑事 (デカ) スーパーコレクション
+  title: まるごし刑事 (デカ) スーパーコレクション
+  title_kana: マルゴシデカスーパーコレクション
+  title_kana_segmented: マルゴシ デカ スーパー コレクション
+  source: audit-ndl-hold
+  old_seed2: まるごし刑事スーパーコレクション
+  old_seed3: まるごし刑事スーパーコレクション
+- key: name:旅井とり|name:めしばな刑事タチバナ
+  title: めしばな刑事タチバナ
+  title_kana: メシバナデカタチバナ
+  title_kana_segmented: メシバナ デカ タチバナ
+  source: audit-ndl-hold
+  old_seed2: めしばな刑事タチバナ
+  old_seed3: めしばな刑事タチバナ
+- key: name:藤子不二雄|name:オバケのQ太郎
+  title: オバケのQ太郎
+  title_kana: シンヘンシュウオバケノキュータロウ
+  title_kana_segmented: シン ヘンシュウ オバケ ノ キュータロウ
+  source: audit-ndl-hold
+  old_seed2: オバケ ノ Qタロウ
+  old_seed3: オバケノQタロウ
+- key: name:江戸川乱歩|name:ドクターGの島
+  title: ドクターGの島
+  title_kana: ドクタージーノシマ
+  title_kana_segmented: ドクタージーノシマ
+  source: audit-ndl-hold
+  old_seed2: ドクター G ノ シマ
+  old_seed3: ドクターGノシマ
+- key: name:広末有行|name:ドライブご飯 SAグルメ日記
+  title: ドライブご飯 SAグルメ日記
+  title_kana: ドライブゴハン
+  title_kana_segmented: ドライブ ゴハン
+  source: audit-ndl-hold
+  old_seed2: ドライブ ゴハン SA グルメ ニッキ
+  old_seed3: ドライブゴハンSAグルメニッキ
+- key: name:宇田川どごら|name:ユーマA.D.零
+  title: ユーマA.D.零
+  title_kana: ユーマエイディーゼロ
+  title_kana_segmented: ユーマ エイ ディー ゼロ
+  source: audit-ndl-hold
+  old_seed2: ユーマ AD ゼロ
+  old_seed3: ユーマADゼロ
+- key: name:麻美理乃|name:光GENJIに夢中
+  title: 光GENJIに夢中
+  title_kana: ヒカルゲンジニムチュウ
+  title_kana_segmented: ヒカル ゲンジ ニ ムチュウ
+  source: audit-ndl-hold
+  old_seed2: ヒカル Genji ニ ムチュウ
+  old_seed3: ヒカルGenjiニムチュウ
+- key: name:富野由悠季|name:機動戦士ガンダムMSV戦記ジョニー・ライデン
+  title: 機動戦士ガンダムMSV戦記ジョニー・ライデン
+  title_kana: キドウセンシガンダムエムエスヴイセンキジョニーライデン
+  title_kana_segmented: キドウ センシ ガンダム エムエスヴイ センキ ジョニー ライデン
+  source: audit-ndl-hold
+  old_seed2: キドウ センシ ガンダム MSV センキ ジョニー ライデン
+  old_seed3: キドウセンシガンダムMSVセンキジョニーライデン
+- key: name:藤子不二雄|name:藤子不二雄 少年SF短編集
+  title: 藤子不二雄 少年SF短編集
+  title_kana: ヒトリボッチノウチュウセンソウ
+  title_kana_segmented: ヒトリボッチ ノ ウチュウ センソウ
+  source: audit-ndl-hold
+  old_seed2: フジコ フジ ユウショウネン SF タンペンシュウ
+  old_seed3: フジコフジユウショウネンSFタンペンシュウ
+- key: name:彦久保雅博|name:遊☆戯☆王SEVENSルーク!爆裂覇道伝!!
+  title: 遊☆戯☆王SEVENSルーク!爆裂覇道伝!!
+  title_kana: ユウギオウセブンスルークバクレツハドウデン
+  title_kana_segmented: ユウギオウ セブンス ルーク バクレツ ハドウデン
+  source: audit-ndl-hold
+  old_seed2: デュエルの王になる男
+  old_seed3: デュエルの王になる男
+- key: name:やまさき十三|name:釣りバカ日誌 TV編
+  title: 釣りバカ日誌 TV編
+  title_kana: ツリバカニッシ
+  title_kana_segmented: ツリバカ ニッシ
+  source: audit-ndl-hold
+  old_seed2: ツリバカ ニッシ TVヘン
+  old_seed3: ツリバカニッシTVヘン
+- key: qid:Q1993|name:劇場版 NARUTO 疾風伝
+  title: 劇場版 NARUTO 疾風伝
+  title_kana: ゲキジョウバンナルトシップウデン
+  title_kana_segmented: ゲキジョウバン ナルト シップウデン
+  source: manual-adult
+  old_seed2: ゲキジョウバン Naruto シップウデン アニメ コミックス
+  old_seed3: ゲキジョウバン NARUTO ハヤテデン
+- key: name:知葉サナガ|name:ガテン農家と朝まで絶倫H
+  title: ガテン農家と朝まで絶倫H
+  title_kana: ガテンノウカトアサマデゼツリンエッチ
+  title_kana_segmented: ガテン ノウカ ト アサ マデ ゼツリン エッチ
+  source: manual-adult
+  old_seed2: Daito comics TLシリーズ
+  old_seed3: ガテンノウカトアサマデゼツリンH
+- key: name:黒岬光|name:冷酷課長の脳内はHな妄想ばかり。
+  title: 冷酷課長の脳内はHな妄想ばかり。
+  title_kana: レイコクカチョウノノウナイワエッチナモウソウバカリ
+  title_kana_segmented: レイコク カチョウ ノ ノウナイ ワ エッチナ モウソウ バカリ
+  source: manual-adult
+  old_seed2: Daito comics TL シリーズ
+  old_seed3: レイコクカチョウノノウナイハHナモウソウバカリ
+- key: name:坂崎未侑|name:社長、Hなご奉仕は業務外です!
+  title: 社長、Hなご奉仕は業務外です!
+  title_kana: シャチョウエッチナゴホウシワギョウムガイデス
+  title_kana_segmented: シャチョウ エッチナ ゴホウシ ワ ギョウムガイ デス
+  source: manual-adult
+  old_seed2: Daito comics TLシリーズ
+  old_seed3: シャチョウHナゴホウシハギョウムソトデス
+- key: name:ざわっこ|name:絶倫ドS魔術師アークと私の専属契約書
+  title: 絶倫ドS魔術師アークと私の専属契約書
+  title_kana: ゼツリンドエスマジュツシアークトワタシノセンゾクケイヤクショ
+  title_kana_segmented: ゼツリン ドエス マジュツシ アーク ト ワタシ ノ センゾク ケイヤクショ
+  source: manual-adult
+  old_seed2: Daito comics TLシリーズ
+  old_seed3: ゼツリンドSマジュツシアークトワタシノセンゾクケイヤクショ
+- key: name:蒼田カヤ|name:転生エロエルフの中の人は29歳処女OLです。
+  title: 転生エロエルフの中の人は29歳処女OLです。
+  title_kana: テンセイエロエルフノナカノヒトワニジュウキュウサイショジョオーエルデス
+  title_kana_segmented: テンセイ エロ エルフ ノ ナカ ノ ヒト ワ ニジュウキュウサイ ショジョ オーエル デス
+  source: manual-adult
+  old_seed2: Daito comics TLシリーズ
+  old_seed3: テンショウエロエルフノナカノニンハ29トシショジョOLデス
