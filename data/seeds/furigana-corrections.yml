@@ -1,0 +1,384 @@
+# フリガナ補正 seed (= 3ソースconsensus: NDL公式 / 種3-AI / 種2-MADB)
+# 種2(MADB)・種3(AI)とも誤り(副題/著者名/英字混入)だった key を、 NDL ground-truth等で補正。
+# promote が title_kana を ★最優先で読む(series_row[種2]/src_yml[種3]より先)。 blast radius=本file記載keyのみ。
+# 生成 2026-06-03 / 54件 / 種2種3不変・可逆。
+schema_version: 1
+corrections:
+- key: name:I・N・J・カルバード|name:クトゥルフ神話～ラヴクラフト傑作選
+  title: クトゥルフ神話～ラヴクラフト傑作選
+  title_kana: クトゥルフシンワラヴクラフトケッサクセン
+  title_kana_segmented: クトゥルフ シンワ ラヴクラフト ケッサクセン
+  source: ndl
+  old_seed2: まだ見ぬカダスを夢に探して
+  old_seed3: まだ見ぬカダスを夢に探して
+- key: name:Nardack|name:それゆけ!異世界チート魔術師(マジシャン)
+  title: それゆけ!異世界チート魔術師(マジシャン)
+  title_kana: ソレユケイセカイチートマジシャン
+  title_kana_segmented: ソレ ユケ イセカイ チート マジシャン
+  source: ndl
+  old_seed2: それゆけ!異世界チート魔術師
+  old_seed3: ソレユケ!イセカイチートマジュツシ(マジシャン)
+- key: name:エニックス出版局|name:テイルズオブデスティニー　4コママンガ劇場
+  title: テイルズオブデスティニー　4コママンガ劇場
+  title_kana: テイルズオブデスティニー4コママンガゲキジョウ
+  title_kana_segmented: テイルズ オブ デスティニー 4コマ マンガ ゲキジョウ
+  source: ndl
+  old_seed2: テイルズ オブ ディスティニー ヨンコマ マンガ ゲキジョウ
+  old_seed3: テイルズオブディスティニーヨンコママンガゲキジョウ
+- key: name:ちーにょ|name:リベンジ・ラブ
+  title: リベンジ・ラブ
+  title_kana: リベンジラブ
+  title_kana_segmented: リベンジ ラブ
+  source: ndl
+  old_seed2: Revenge・LOVE
+  old_seed3: リベンジ・ラブ
+- key: name:ツルモトルーム|name:SF新世紀レンズマン
+  title: SF新世紀レンズマン
+  title_kana: エスエフシンセイキレンズマン
+  title_kana_segmented: エスエフ シンセイキ レンズマン
+  source: manual
+  old_seed2: SF シンセイキ LENSMAN
+  old_seed3: SFシンセイキLENSMAN
+- key: name:トレイシー・ヤードリー|name:ソニック・ザ・ヘッジホッグ
+  title: ソニック・ザ・ヘッジホッグ
+  title_kana: ソニックザヘッジホッグ
+  title_kana_segmented: ソニック ザ ヘッジホッグ
+  source: ndl
+  old_seed2: Dr.エッグマンの運命
+  old_seed3: ソニック・ザ・ヘッジホッグ
+- key: name:とんぼはうす|name:ようこそ甲州プリズンへ
+  title: ようこそ甲州プリズンへ
+  title_kana: ヨウコソコウシュウプリズンケイムショエ
+  title_kana_segmented: ヨウコソ コウシュウ プリズン ケイムショ エ
+  source: ndl
+  old_seed2: ヨウコソ コウシュウ ケイムショ エ
+  old_seed3: ヨウコソコウシュウケイムショエ
+- key: name:ノアール出版|name:BLACK NOTE セカンドシーズン
+  title: BLACK NOTE セカンドシーズン
+  title_kana: ブラックノートセカンドシーズン
+  title_kana_segmented: ブラックノート セカンドシーズン
+  source: manual
+  old_seed2: ブラック ノート
+  old_seed3: ブラックノート
+- key: name:ブシロード|name:BanG Dream(バンドリ)!ガルパ☆ピココミックアンソロジー
+  title: BanG Dream(バンドリ)!ガルパ☆ピココミックアンソロジー
+  title_kana: バンドリガルパピココミックアンソロジー
+  title_kana_segmented: バンドリ ガルパ ピコ コミック アンソロジー
+  source: ndl
+  old_seed2: BanG Dream!Girls Band Party!★PICO COMIC ANTHOLOGYBanG Dream!ガルパ☆ピココミックアンソロジー
+  old_seed3: BanGDream!GirlsBandParty!★PICOCOMICANTHOLOGYBanGDream!ガルパ☆ピココミックアンソロジー
+- key: name:外岡馬骨|name:ローゼンガーテン・サーガ
+  title: ローゼンガーテン・サーガ
+  title_kana: ローゼンガーテンサーガ
+  title_kana_segmented: ローゼン ガーテン サーガ
+  source: ndl
+  old_seed2: Rosen Garten・Saga
+  old_seed3: ローゼンガーテン・サーガ
+- key: name:吉田伸|name:遊☆戯☆王OCG(オフィシャルカードゲーム)STORIES
+  title: 遊☆戯☆王OCG(オフィシャルカードゲーム)STORIES
+  title_kana: ユウギオウオフィシャルカードゲームストーリーズ
+  title_kana_segmented: ユウギオウ オフィシャル カード ゲーム ストーリーズ
+  source: ndl
+  old_seed2: ''
+  old_seed3: ユウギオウオーシージーストーリーズ
+- key: name:駒魔子|name:マンガカカクカクシカジカ.
+  title: マンガカカクカクシカジカ.
+  title_kana: マンガカカクカクシカジカ
+  title_kana_segmented: マンガカ カクカク シカジカ
+  source: ndl
+  old_seed2: ''
+  old_seed3: マンガカクカクシカジカ
+- key: name:講談社|name:ジェリー・アンダーソンコミカライズ大全
+  title: ジェリー・アンダーソンコミカライズ大全
+  title_kana: ジェリーアンダーソンコミカライズタイゼン
+  title_kana_segmented: ジェリー アンダーソン コミカライズ タイゼン
+  source: ndl
+  old_seed2: サンダーバード ジョー90 なぞのえんばんUFO
+  old_seed3: ジェリー・アンダーソンコミカライズタイゼン
+- key: name:上北ふたご|name:映画ふたりはプリキュアマックスハート
+  title: 映画ふたりはプリキュアマックスハート
+  title_kana: エイガフタリワプリキュアマックスハート
+  title_kana_segmented: エイガ フタリ ワ プリキュア マックス ハート
+  source: ndl
+  old_seed2: エイガ フタリ ワ プリキュア Max Heart
+  old_seed3: エイガフタリワプリキュアMaxHeart
+- key: name:赤瀬新一|name:コークス・コード
+  title: コークス・コード
+  title_kana: コークスコード
+  title_kana_segmented: コークス コード
+  source: ndl
+  old_seed2: COKE・CODE
+  old_seed3: コークス・コード
+- key: name:中村ユキチ|name:ホームメイド・スイートホーム
+  title: ホームメイド・スイートホーム
+  title_kana: ホームメイドスイートホーム
+  title_kana_segmented: ホームメイド スイート ホーム
+  source: ndl
+  old_seed2: Homemade・Sweet home
+  old_seed3: ホームメイド・スイートホーム
+- key: name:白狼|name:ルパン三世 異世界の姫君(ネイバーワールドプリンセス)
+  title: ルパン三世 異世界の姫君(ネイバーワールドプリンセス)
+  title_kana: ルパンサンセイネイバーワールドプリンセス
+  title_kana_segmented: ルパン サンセイ ネイバーワールドプリンセス
+  source: ndl
+  old_seed2: ''
+  old_seed3: ルパンサンセイイセカイノヒメギミ
+- key: name:濱原蓮|name:シャトルアイズ
+  title: シャトルアイズ
+  title_kana: シャトルアイズ
+  title_kana_segmented: シャトル アイズ
+  source: ndl
+  old_seed2: その目に映るモノ
+  old_seed3: シャトルアイズ
+- key: qid:Q10885113|name:大江戸シャバドゥビ日記
+  title: 大江戸シャバドゥビ日記
+  title_kana: オオエドシャバドゥビニッキ
+  title_kana_segmented: オオエド シャバドゥビ ニッキ
+  source: ndl
+  old_seed2: オオエド シャバドゥ ニッキ
+  old_seed3: オオエドシャバドゥニッキ
+- key: qid:Q11264441|name:ソード・ワールド ぺらぺらーず
+  title: ソード・ワールド ぺらぺらーず
+  title_kana: ソードワールドペラペラーズ
+  title_kana_segmented: ソード ワールド ペラペラーズ
+  source: ndl
+  old_seed2: SWORD WORLD ぺらぺらーず
+  old_seed3: ソード・ワールド ペラペラーズ
+- key: qid:Q1138133|name:魔ジョニア❤いぶ
+  title: 魔ジョニア❤いぶ
+  title_kana: マジョニアイブ
+  title_kana_segmented: マジョニア イブ
+  source: ndl
+  old_seed2: マジュニアイブ
+  old_seed3: マジュニアイブ
+- key: qid:Q11446129|name:時空ウォーズ
+  title: 時空ウォーズ
+  title_kana: ジクウウォーズ
+  title_kana_segmented: ジクウ ウォーズ
+  source: ndl
+  old_seed2: オクタニ ミチノリ タンペンシュウ
+  old_seed3: オクタニミチノリタンペンシュウ
+- key: qid:Q11462499|name:リュウノスケ
+  title: リュウノスケ
+  title_kana: リュウノスケ
+  title_kana_segmented: リュウノスケ
+  source: ndl
+  old_seed2: リュウスケ
+  old_seed3: リュウスケ
+- key: qid:Q11463219|name:小畑しゅんじ短編集エスパー大旋風
+  title: 小畑しゅんじ短編集エスパー大旋風
+  title_kana: エスパーダイセンプウ
+  title_kana_segmented: エスパー ダイセンプウ
+  source: ndl
+  old_seed2: アンコク ノ ヤジュウ
+  old_seed3: アンコクノヤジュウ
+- key: qid:Q11513771|name:パパとあたしのヴァーサスな日常
+  title: パパとあたしのヴァーサスな日常
+  title_kana: パパトアタシノヴァーサスナニチジョウ
+  title_kana_segmented: パパ ト アタシ ノ ヴァーサスナ ニチジョウ
+  source: ndl
+  old_seed2: パパ ト アタシ ノ バーサス ナ ニチジョウ
+  old_seed3: パパトアタシノバーサスナニチジョウ
+- key: qid:Q11540317|name:タイムコードプラス
+  title: タイムコードプラス
+  title_kana: タイムコードプラス
+  title_kana_segmented: タイムコードプラス
+  source: ndl
+  old_seed2: タイムコード+
+  old_seed3: タイムコード+
+- key: qid:Q11585349|name:パパイラズ|sub:MEN′s子育て記
+  title: パパイラズ
+  title_kana: パパイラズ
+  title_kana_segmented: パパイラズ
+  source: ndl
+  old_seed2: Men ' s コソダテキ
+  old_seed3: パパイラズ
+- key: qid:Q11585907|name:ザ・パラノイド 巨人獣
+  title: ザ・パラノイド 巨人獣
+  title_kana: ザパラノイド
+  title_kana_segmented: ザ パラノイド
+  source: ndl
+  old_seed2: キョジンジュウ
+  old_seed3: キョジンジュウ
+- key: qid:Q11604136|name:ブラッディ・クロス
+  title: ブラッディ・クロス
+  title_kana: ブラッディクロス
+  title_kana_segmented: ブラッディ クロス
+  source: ndl
+  old_seed2: BLOOD・CROSS
+  old_seed3: ブラッディ・クロス
+- key: qid:Q11609056|name:真・女神転生コミックアンソロジー
+  title: 真・女神転生コミックアンソロジー
+  title_kana: シンメガミテンセイコミックアンソロジー
+  title_kana_segmented: シン メガミ テンセイ コミック アンソロジー
+  source: ndl
+  old_seed2: SHIN・DEGITAL DEVIL STORY
+  old_seed3: SHIN・DEGITALDEVILSTORY
+- key: qid:Q11622621|name:流星と真夏のクリスマス 桜並木袋小路
+  title: 流星と真夏のクリスマス 桜並木袋小路
+  title_kana: リュウセイトマナツノクリスマス
+  title_kana_segmented: リュウセイ ト マナツ ノ クリスマス
+  source: ndl
+  old_seed2: サクラ ナミキ フクロコウジ
+  old_seed3: サクラナミキフクロコウジ
+- key: qid:Q11644242|name:彼と彼女のイエイエ カフェ・ド・きまぐれビーチ
+  title: 彼と彼女のイエイエ カフェ・ド・きまぐれビーチ
+  title_kana: カレトカノジョノイエイエ
+  title_kana_segmented: カレ ト カノジョ ノ イエイエ
+  source: ndl
+  old_seed2: カフェ ド キマグレ ビーチ
+  old_seed3: カフェドキマグレビーチ
+- key: qid:Q11671970|name:ファーブル
+  title: ファーブル
+  title_kana: ファーブル
+  title_kana_segmented: ファーブル
+  source: ndl
+  old_seed2: ファ-ブル
+  old_seed3: ファ-ブル
+- key: qid:Q1377779|name:イワン・デジャビュの一日
+  title: イワン・デジャビュの一日
+  title_kana: イワンデジャビュノイチニチ
+  title_kana_segmented: イワン デジャビュ ノ イチニチ
+  source: ndl
+  old_seed2: イワン デジブヤビユ ノ イチニチ
+  old_seed3: イワンデジブヤビユノイチニチ
+- key: qid:Q17572|name:ビッグコミック×藤子・F・不二雄SF短編集
+  title: ビッグコミック×藤子・F・不二雄SF短編集
+  title_kana: ビッグコミックフジコエフフジオエスエフタンペンシュウ
+  title_kana_segmented: ビッグコミック フジコエフフジオ エスエフ タンペンシュウ
+  source: manual
+  old_seed2: SF short storys of Bigcomic×Fujiko・F・Fujio
+  old_seed3: SFshortstorysofBigcomic×Fujiko・F・Fujio
+- key: qid:Q1906779|name:かりあげクンDX (デラックス)
+  title: かりあげクンDX (デラックス)
+  title_kana: カリアゲクンデラックス
+  title_kana_segmented: カリアゲクン デラックス
+  source: ndl
+  old_seed2: かりあげクンDX
+  old_seed3: かりあげクンDX
+- key: qid:Q193300|name:ロストワールド メトロポリス
+  title: ロストワールド メトロポリス
+  title_kana: ロストワールド
+  title_kana_segmented: ロスト ワールド
+  source: ndl
+  old_seed2: メトロポリス
+  old_seed3: メトロポリス
+- key: qid:Q23901397|name:ダブル・ジャンクション
+  title: ダブル・ジャンクション
+  title_kana: ダブルジャンクション
+  title_kana_segmented: ダブル ジャンクション
+  source: ndl
+  old_seed2: カガミ ノ ナカ ノ アイツ
+  old_seed3: カガミノナカノアイツ
+- key: qid:Q24864023|name:チェンソーマン
+  title: チェンソーマン
+  title_kana: チェンソーマン
+  title_kana_segmented: チェンソーマン
+  source: ndl
+  old_seed2: Chain saw man犬とチェンソー
+  old_seed3: チェンソーマン
+- key: qid:Q265061|name:青い鳥-ブルーバード-
+  title: 青い鳥-ブルーバード-
+  title_kana: ブルーバード
+  title_kana_segmented: ブルーバード
+  source: ndl
+  old_seed2: アオイトリ
+  old_seed3: アオイトリ
+- key: qid:Q2758927|name:灼熱のニライカナイ|sub:HARDBOILED AND DOLPHIN
+  title: 灼熱のニライカナイ
+  title_kana: シャクネツノニライカナイ
+  title_kana_segmented: シャクネツ ノ ニライカナイ
+  source: ndl
+  old_seed2: イルカとサメ
+  old_seed3: イルカとサメ
+- key: qid:Q276378|name:ハッピィ・ボーイズ
+  title: ハッピィ・ボーイズ
+  title_kana: ハッピィボーイズ
+  title_kana_segmented: ハッピィ ボーイズ
+  source: ndl
+  old_seed2: ''
+  old_seed3: ハッピーボーイズ
+- key: qid:Q3082793|name:サイドボーン
+  title: サイドボーン
+  title_kana: サイドボーン
+  title_kana_segmented: サイド ボーン
+  source: ndl
+  old_seed2: SIDE・BORN'E
+  old_seed3: サイドボーン
+- key: qid:Q3136470|name:わしらのベースボール
+  title: わしらのベースボール
+  title_kana: ワシラノベースボール
+  title_kana_segmented: ワシラ ノ ベースボール
+  source: ndl
+  old_seed2: タブチクン
+  old_seed3: タブチクン
+- key: qid:Q313945|name:ニュース探偵コナン
+  title: ニュース探偵コナン
+  title_kana: ニュースタンテイコナン
+  title_kana_segmented: ニュース タンテイ コナン
+  source: ndl
+  old_seed2: vsニセ札犯 vs電磁波ほか
+  old_seed3: ニュースタンテイコナン
+- key: qid:Q434041|name:ダメな私に恋してくださいR(リターンズ)
+  title: ダメな私に恋してくださいR(リターンズ)
+  title_kana: ダメナワタシニコイシテクダサイリターンズ
+  title_kana_segmented: ダメ ナ ワタシ ニ コイシテ クダサイ リターンズ
+  source: ndl
+  old_seed2: ''
+  old_seed3: ダメナワタシニコイシテクダサイアール
+- key: qid:Q445827|name:レフトアンドライト
+  title: レフトアンドライト
+  title_kana: レフトアンドライト
+  title_kana_segmented: レフト アンド ライト
+  source: ndl
+  old_seed2: ショキ サクヒン シュウ
+  old_seed3: ショキサクヒンシュウ
+- key: qid:Q445875|name:ジョカヘ
+  title: ジョカヘ
+  title_kana: ジョカエ
+  title_kana_segmented: ジョカエ
+  source: manual
+  old_seed2: ''
+  old_seed3: ジョカエ
+- key: qid:Q52376813|name:ミタマセキュ霊ティ
+  title: ミタマセキュ霊ティ
+  title_kana: ミタマセキュレティ
+  title_kana_segmented: ミタマ セキュレティ
+  source: ndl
+  old_seed2: その男、ミタマジョー
+  old_seed3: ミタマセキュレイティ
+- key: qid:Q5367543|name:ミステリー劇場
+  title: ミステリー劇場
+  title_kana: ミステリーゾーン
+  title_kana_segmented: ミステリー ゾーン
+  source: ndl
+  old_seed2: カガミ ヨ カガミ
+  old_seed3: カガミヨカガミ
+- key: qid:Q6359803|name:デジャヴ
+  title: デジャヴ
+  title_kana: デジャヴ
+  title_kana_segmented: デジャヴ
+  source: ndl
+  old_seed2: デジャブ
+  old_seed3: デジャブ
+- key: qid:Q7333057|name:トップレディーを目指せ!
+  title: トップレディーを目指せ!
+  title_kana: トップレディーオメザセ
+  title_kana_segmented: トップ レディー オ メザセ
+  source: ndl
+  old_seed2: タカダ リエ ケッサク シュウ 1
+  old_seed3: タカダリエケッサクシュウ1
+- key: qid:Q85879836|name:テレワァク与太話
+  title: テレワァク与太話
+  title_kana: テレワァクヨタバナシ
+  title_kana_segmented: テレワァク ヨタバナシ
+  source: ndl
+  old_seed2: ''
+  old_seed3: テレワークヨタバナシ
+- key: qid:Q9013687|name:レディ・ギネヴィア
+  title: レディ・ギネヴィア
+  title_kana: レディ
+  title_kana_segmented: レディ
+  source: ndl
+  old_seed2: レディ ギネビア
+  old_seed3: レディギネビア

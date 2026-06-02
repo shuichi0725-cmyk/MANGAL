@@ -41,6 +41,10 @@ def _yload(f):
 ROOT = Path(__file__).resolve().parent.parent
 DB = ROOT / ".cache" / "db-v2.sqlite"
 SEED3 = ROOT / "data" / "seeds" / "series-supplement-v2.yml"
+# ★フリガナ補正 seed (= 3ソースconsensus: NDL公式 / 種3-AI / 種2-MADB)。 種2/種3とも
+# 誤り(副題/著者名/英字混入)だった key を NDL ground-truth 等で補正。 title_kana を
+# ★最優先(series_row[種2]/src_yml[種3]より先)で読む。 blast radius=本file記載keyのみ。
+FURIGANA_CORR = ROOT / "data" / "seeds" / "furigana-corrections.yml"
 SRC_DIR = ROOT / "data" / "manga"
 OUT_DIR = ROOT / "data" / "manga.v2"
 MERGE_YML = ROOT / "data" / "seeds" / "series-merge.yml"
@@ -367,6 +371,29 @@ DROP_SUBTITLE_PATTERNS = [
 
 
 SEED3_CACHE = ROOT / ".cache" / "seed3-promote.pkl"
+
+_FURIGANA_CORR: dict | None = None
+
+
+def load_furigana_corrections() -> dict:
+    """series_key → {title_kana, title_kana_segmented} の補正 map。
+    ★種2(MADB)も種3(AI)も誤っていた key を NDL ground-truth 等で正した小 seed。
+    build_yml が title_kana を ★最優先で読む。 file 不在なら空(=従来動作)。"""
+    global _FURIGANA_CORR
+    if _FURIGANA_CORR is not None:
+        return _FURIGANA_CORR
+    _FURIGANA_CORR = {}
+    if FURIGANA_CORR.exists():
+        with FURIGANA_CORR.open(encoding="utf-8") as f:
+            doc = yaml.safe_load(f) or {}
+        for e in (doc.get("corrections") or []):
+            k = e.get("key")
+            if k and e.get("title_kana"):
+                _FURIGANA_CORR[k] = {
+                    "title_kana": e["title_kana"],
+                    "title_kana_segmented": e.get("title_kana_segmented", ""),
+                }
+    return _FURIGANA_CORR
 
 
 def load_seed3() -> dict:
@@ -1158,7 +1185,9 @@ def build_yml(
     # title: seed3.title(手動 override)優先 → series_row.title(cluster-best 反映済)。
     o["title"] = (seed3 or {}).get("title") or series_row["title"]
     # title_kana は スペース削除 (= MANGAL protocol: ふりがな に空白 入れない)
-    raw_kana = series_row["title_kana"] or src_yml.get("title_kana", "")
+    # ★フリガナ補正 seed を最優先(種2[series_row]も種3[src_yml]も誤っていた key)。
+    corr = load_furigana_corrections().get(series_row["series_key"])
+    raw_kana = (corr or {}).get("title_kana") or series_row["title_kana"] or src_yml.get("title_kana", "")
     o["title_kana"] = re.sub(r"[\s　]+", "", raw_kana) if raw_kana else ""
     o["title_romaji"] = src_yml.get("title_romaji", "")
     # subtitle: ★種3 curate(seed3.subtitle)を最優先 → 種2(series_row.subtitle)fallback。
