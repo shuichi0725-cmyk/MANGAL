@@ -1,7 +1,8 @@
 # フリガナ補正 seed (= 3ソースconsensus: NDL公式 / 種3-AI / 種2-MADB)
 # 種2/種3とも誤りだった key を補正。 promoteがtitle_kanaを最優先で読む。 種2種3不変・可逆。
-# source: ndl/manual/audit-ndl(NDL+種3合意)/audit-s3(種2ゴミ→種3)/audit-ndl-romaji(NDLがLatin正ローマ字化・種3核⊆NDL)/review-confident。
-# 更新 2026-06-03 / 計371件。
+# source: ndl/manual/audit-ndl/audit-s3/audit-ndl-romaji/review-confident/user-verified(ユーザ実物確認)。
+# 一部entryに slug/alternative_titles_en の特例メタ(将来のslug生成・en-fillが消費)。
+# 更新 2026-06-03 / 計376件。
 schema_version: 1
 corrections:
 - key: name:I・N・J・カルバード|name:クトゥルフ神話～ラヴクラフト傑作選
@@ -344,9 +345,12 @@ corrections:
   title: ミタマセキュ霊ティ
   title_kana: ミタマセキュレティ
   title_kana_segmented: ミタマ セキュレティ
-  source: ndl
+  source: user-verified
   old_seed2: その男、ミタマジョー
   old_seed3: ミタマセキュレイティ
+  note: '特例: 英題=Mitama Security: Spirit Busters(alternative_titles.enへ) / slug=mitama-security / セキュレティ=Security。書影にMITAMA SECURITY。Spirit Busters=英語サブ題'
+  slug: mitama-security
+  alternative_titles_en: 'Mitama Security: Spirit Busters'
 - key: qid:Q5367543|name:ミステリー劇場
   title: ミステリー劇場
   title_kana: ミステリーゾーン
@@ -2601,3 +2605,38 @@ corrections:
   source: audit-ndl-romaji
   old_seed2: キドウ センシ ガンダム SEED DESTINY ASTRAY
   old_seed3: キドウセンシガンダムSEEDDESTINYASTRAY
+- key: qid:Q11470637|name:度胸星
+  title: 度胸星
+  title_kana: ドキョウボシ
+  title_kana_segmented: ドキョウボシ
+  source: user-verified
+  old_seed2: ドキョウセイ
+  old_seed3: ドキョウボシ
+- key: qid:Q11648445|name:限界集落温泉
+  title: 限界集落温泉
+  title_kana: ギリギリオンセン
+  title_kana_segmented: ギリギリ オンセン
+  source: user-verified
+  old_seed2: ゲンカイ ギリギリ オンセン
+  old_seed3: ギリギリオンセン
+- key: qid:Q193300|name:のろわれた手術|sub:手塚治虫恐怖アンソロジー
+  title: のろわれた手術
+  title_kana: ノロワレタオペ
+  title_kana_segmented: ノロワレタ オペ
+  source: user-verified
+  old_seed2: テズカ オサム キョウフ アンソロジー
+  old_seed3: ノロワレタシュジュツ
+- key: qid:Q2738694|name:アラミス'78
+  title: アラミス'78
+  title_kana: アラミスナナジュウハチ
+  title_kana_segmented: アラミス ナナジュウハチ
+  source: user-verified
+  old_seed2: アラミス 78
+  old_seed3: アラミスナナジュウハチ
+- key: qid:Q6388734|name:ななか6/17
+  title: ななか6/17
+  title_kana: ナナカジュウナナブンノロク
+  title_kana_segmented: ナナカ ジュウナナブンノロク
+  source: user-verified
+  old_seed2: ナナカ ジュウシチブンノロク
+  old_seed3: ナナカジュウナナブンノロク
