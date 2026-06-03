@@ -22,6 +22,13 @@
 | akujo-series | 5 | **SEPARATE** | わたなべまさこ名作集の別作5つ(ある愛の終わりに/蜜の味…)を誤束 |
 | hi-no-tori | 4 | **SEPARATE** | 火の鳥2772(御厨)/和田ラヂヲの火の鳥(パロディ)/少女クラブ版(別版) |
 | gegege-no-kitarou | 10 | **SEPARATE** | ★Wikipedia: スポーツ狂時代/死神大戦記/その後/ねずみ男と/雪姫ちゃんと=別雑誌別年の別作 |
+| kenkaku-shoubai | 5 | **MERGE**(既存) | 剣客商売 リイド社 大島やすいち画(巻断片)。 前セッション merge 済 |
+| onihei-hankachou | 4 | **MERGE** | 鬼平犯科帳 リイド社SP(巻1-122本編 + 断片)同一作 |
+| takumi-kun-series | 4 | **MERGE** | タクミくんシリーズ(ごとうしのぶ/おおや和美 あすかCL-DX aid31770 同一BL連続) |
+| minami-no-teiou | 4→3 | **MERGE**(ヤング編) | ヤング編3断片を統合、 本編187巻は別ページ保持 |
+| kamen-rider | 4 | **SEPARATE** | 別作者の別漫画(913=井上/山田ゴロ版/石川版/アマゾン1974) |
+| ginga-tetsudou-no-yoru | 4 | **SEPARATE** | 4つの別漫画化(まんがで読破/永島慎二/松田一輝/ますむらひろし) |
+| jigoku-shoujo | 4 | **SEPARATE** | 本編(永遠幸9巻)keep + 閻魔あいセレクション3冊=別作者アンソロジー |
 
 注: SEPARATE = merge せず各作品に固有slug(別ページ)。 DEFER = 確証不足で保留(分離のまま)。
 適用: `_apply-merge-A.py` / `_apply-merge-A2.py`。
