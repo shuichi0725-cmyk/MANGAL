@@ -83,18 +83,18 @@ for key,e in s3.items():
     else:
         aid=key2aid.get(key)
         rj=romaji.get(int(aid)) if aid else None
+        sl=""; src="EMPTY"
         if rj:
-            sl=slugify(strip_subtitle(rj)); full=slugify(rj); src="anilist_romaji"
-        else:
+            sl=slugify(strip_subtitle(rj))
+            if sl: full=slugify(rj); src="anilist_romaji"
+        if not sl:   # ★romaji無 or romaji slugが空(γ/π/＆=記号題のromaji→ASCII除去で空)→ kana_hepburnへfallback
             sl=kana_slug(e.get("title_kana_segmented") or e.get("title_kana") or "")
             if sl: src="kana_hepburn"
-            else:
-                t2=title_of.get(key) or ""
-                # ★Latin題の直接slug化は「日本語文字を含まない」題のみ(Page 1→page-1)。
-                if t2 and not re.search(r"[ぁ-んァ-ヶ一-龯]", t2):
-                    sl=slugify(t2); src="title_latin" if sl else "EMPTY"
-                else:
-                    sl=""; src="EMPTY"
+        if not sl:   # ★kanaも空 → Latin題直接(日本語文字を含まない題のみ。 Page 1→page-1)
+            t2=title_of.get(key) or ""
+            if t2 and not re.search(r"[ぁ-んァ-ヶ一-龯]", t2):
+                sl=slugify(t2)
+                if sl: src="title_latin"
     base_of[key]=sl; full_of[key]=full or sl; src_of[key]=src; src_cnt[src]+=1
 
 # --- ★collision-aware 解決: page畳み → 衝突pageだけ full(副題込)へ昇格 ---
