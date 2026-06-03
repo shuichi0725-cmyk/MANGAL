@@ -47,7 +47,7 @@
 2. **種2 差分反映** (= fetch-madb incremental、 INSERT only、 削除禁止)
 3. **派生層 + matcher + 本番 再生成** = `python scripts/intake.py --run`
    (= roles→merge→seed4→detect → **matcher v9→v13→v14** → **adult_us map** →
-    trailing → **promote(adult_us付与)**。 種2/種a 更新で全派生が古くならないよう一括再生成。
+    trailing → **foreigndrop(外国版自動drop)** → **promote(adult_us付与)**。 種2/種a 更新で全派生が古くならないよう一括再生成。
     ※matcher は ~20分。 終了後 git diff で本番yml確認 → commit/push)
 4. **種a productionization の種3書込** (= deliberate、 match-v14 確定後):
    - **en-fill** = `_apply-en-fills-surgical.py`(S180×種3_en空 の AniList英題を `alternative_titles.en` に純粋追加。 `.new`検証→置換)
@@ -123,10 +123,11 @@
 ### ★月次サニティ監査 (= silent 例外の安全網)
 
 個別例外を全部予見できない前提で、 ★**取込後に前月差分で異常を機械 flag** する:
-- 巻番号の外れ値 (= 年誤 parse「2022巻」型) / 著者ゼロ急増 / 重複ページ / **新レーベルの成年カバー率** / 新雑誌候補 / 文字化け PUA / 分裂スパイク。
+- 巻番号の外れ値 (= 年誤 parse「2022巻」型) / 著者ゼロ急増 / 重複ページ / **新レーベルの成年カバー率** / 新雑誌候補 / 文字化け PUA / 分裂スパイク / **外国版流入 (= ISBN国コード非9784)**。
 - 土台 = `scripts/_coverage-audit.py` (= 真の公開数・被覆・品質 flag)。 ★**前月との差分**で「今月だけ急増した異常」を浮かせる。
 - ★巻番号層 = `scripts/_audit-volume-numbering.py` (= merge解決後 page×edition で巻番号異常を3分類): **AUTO_FIXED**(上下完全揃い+gap=下=3型水増し、 promoteの`_fix_complete_sequence_numbers`が自動是正済=件数監視。 ~1,677件) / **MISSING_HALF**(片側欠落=取りこぼし=種4領域) / **GAP_OTHER**(真の欠番・外れ値1000等)。 ★AUTO_FIXEDが急増したら新たな誤番号型のsignal。
 - ★フリガナ層 = `scripts/_furigana-audit.py` (= NDL公式読みground-truthで誤フリガナ検出。 [[furigana-ndl-audit]])。
+- ★外国版層 = `scripts/_audit-foreign-editions.py` (= ★**複数証拠**で scope外の外国語版を検出: ①latin題 ②シリーズ全ISBN非9784[978-4=日本] ③複数巻[typo説明不可]。 intakeの`foreigndrop`stageで`--apply`=純粋追加。 ★単巻のみ非9784はtypo懸念で報告のみ。 旧filterの穴=クリーンlatin題[Akira/Naruto外国版]がEMPTYslug/credit文字列依存をすり抜けていた、 を ISBN国コードで恒久封鎖)。
 - 既知の例外型: 再登録の別 ID 二重化 / MADB 形式変更 (= タグ消失・年→巻番号) / 成年誤 flag (= 新レーベル未カバー) / 雑誌漏れ (= cm105 凍結) / 巻番号水増し (= 下=3型)。
 
 ---

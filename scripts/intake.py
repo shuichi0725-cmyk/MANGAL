@@ -69,6 +69,9 @@ STAGES = [
         ["_build-anilist-enrich-map.py"], False),
     ("trailing","anilist", "末尾取込もれ再検出 (AniList総巻数 vs 種2max)",
         ["_audit-trailing-gaps.py"], False),
+    # --- 外国版drop (promote が non-manga-drop を読むので ★promote前) ---
+    ("foreigndrop", "madb", "外国語版drop (複数証拠=latin題∧全巻非9784∧複数巻、 ISBN国コードでscope外検出 → non-manga-drop純粋追加。 単巻typo懸念は報告のみ)",
+        ["_audit-foreign-editions.py", "--apply"], False),
     # --- 本番再生成 (adult_us map を読むので ★最後) ---
     ("promote", "madb", "本番 yml 再生成 (data/manga.v2、 adult_us 付与)",
         ["_promote-bulk-v2.py"], False),
