@@ -74,3 +74,18 @@
 | 任意 | slug_toolong 短縮 | 1,609 | 大半正当 |
 
 ★= ★**最優先は slug衝突の解消(slug生成器改修)**。 他は小規模の個別候補。 ★全て**未適用**、 GOサインで着手。
+
+---
+
+## ✅ 2026-06-04 対応完了(本番前最終クリーンアップ)
+
+| 項目 | 対応 |
+|---|---|
+| **外国版** | ✅ 375件drop(67複数巻+308単巻、 ISBN検算でtypo-proof)。 恒久対策=`_audit-foreign-editions.py`を蒸留intakeに組込 |
+| **①title_pua** 13 | ✅ promote `_strip_pua`で不可視PUA(❤/é化け)を除去(title/kana/subtitle、 本番出力で消える)|
+| **②sub_publisher** | ✅ promote `_SUBTITLE_NOISE_RE`でレーベル/形式漏れ除去(13件、 誤爆0)。「X : アンコール出版」型はXを保持。 劇場版アニメコミック4(ONE PIECE FILM RED等)はdrop |
+| **③kana_space** 4 | ✅ 既存のpromote空白除去で対応済(本番では消える)|
+| **④外国孤児** 3 | ✅ drop(Smile Telgemeier/HxH仏/DB瑞典=ISBN無or「A」化けでscanすり抜け→手動drop)|
+| **⑤崩れ字** 1 | ★**false alarm判明**: `囿者は懼れず`は正式タイトル(Square Enix/NDL確認)。 ★直さず**furigana補完のみ**(ユウシャワオソレズ、 NDL確証)。 だろう運転回避の好例 |
+
+★= ★**5カテゴリ全て対応 or 正しく不対応(⑤)**。 promote汎用sanitizeは将来の同型も自動で捕捉。 ★残る本番ブロッカーは ★**slug衝突1,794**(de-collapse+姓年suffix)= slug生成器改修が次の必須作業。
