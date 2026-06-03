@@ -19,7 +19,7 @@
 ※学習漫画の超common題(日本の歴史/三国志/世界の歴史)は ★suffixでなく**出版社別ページ or drop**の方針判断も要検討。
 
 ### slug その他
-- **slug_empty 4**: `γ`(ガンマ)/ `π`(パイ)/ `＆`(アンド)/ `クラスめいと`(クラスメイト)= ★記号・短title でslug生成が空。 個別マップ要(γ→gamma/π→pi/＆→and)。
+- **slug_empty 4** = ✅**解決済**(2026-06-04)。 ★原因=記号題(γ/π/＆)のAniList romajiが記号自体→ASCII除去で空slug、 かつkanaへfallbackしないバグ。 ★`_gen-slugs-firstpass.py`に「空romaji→kana_hepburn fallback」追加 → γ→ganma/π→pai/＆→ando/クラスめいと→kurasu-meito。 ★再生成で **EMPTY 4→0**。
 - **slug_toolong 1,609**(>60字): 大半は ★**正当な長文LN題**(「不死の軍勢を率いるぼっち死霊術師…」等)。 問題ではないが、 美観で80字超は短縮候補。 `.cache/preprod/slug_toolong.tsv`。
 
 ---
@@ -64,7 +64,7 @@
 | 優先 | 項目 | 規模 | 性質 |
 |---|---|---|---|
 | ★必須 | slug衝突 de-collapse + 姓年suffix | 1,794群 | 別作同URL=本番ブロッカー |
-| ★必須 | slug_empty 個別マップ | 4 | γ/π/＆/クラスめいと |
+| ✅済 | slug_empty(空romaji→kana fallback) | 4→0 | γ→ganma/π→pai/＆→ando/クラスめいと |
 | 推奨 | title_pua 復元/除去 | 13 | 不可視❤/é |
 | 推奨 | 外国孤児 drop | 3 | 翻訳credit題 |
 | 推奨 | sub_publisher クリア | ~8 | レーベル漏れ |
