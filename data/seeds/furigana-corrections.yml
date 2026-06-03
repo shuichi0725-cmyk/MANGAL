@@ -1,7 +1,7 @@
 # フリガナ補正 seed (= 3ソースconsensus: NDL公式 / 種3-AI / 種2-MADB)
 # 種2/種3とも誤りだった key を補正。 promoteがtitle_kanaを最優先で読む。 種2種3不変・可逆。
 # source: ndl/manual/audit-*/review-confident/user-verified/manual-adult。 一部entryにslug/en特例メタ。
-# 更新 2026-06-03 / 計448件。
+# 更新 2026-06-03 / 計450件。
 schema_version: 1
 corrections:
 - key: name:I・N・J・カルバード|name:クトゥルフ神話～ラヴクラフト傑作選
@@ -3143,3 +3143,17 @@ corrections:
   source: user-verified
   old_seed2: ショセンタニンゴトデスカラ
   old_seed3: ショセンタニンゴトデスカラ
+- key: qid:Q11530817|name:囿者は懼れず
+  title: 囿者は懼れず
+  title_kana: ユウシャワオソレズ
+  title_kana_segmented: ユウシャ ワ オソレズ
+  source: ndl
+  old_seed2: ""
+  old_seed3: ""
+- key: name:LOSA|name:囿者は懼れず
+  title: 囿者は懼れず
+  title_kana: ユウシャワオソレズ
+  title_kana_segmented: ユウシャ ワ オソレズ
+  source: ndl
+  old_seed2: ""
+  old_seed3: ""
