@@ -29,6 +29,20 @@
 | kamen-rider | 4 | **SEPARATE** | 別作者の別漫画(913=井上/山田ゴロ版/石川版/アマゾン1974) |
 | ginga-tetsudou-no-yoru | 4 | **SEPARATE** | 4つの別漫画化(まんがで読破/永島慎二/松田一輝/ますむらひろし) |
 | jigoku-shoujo | 4 | **SEPARATE** | 本編(永遠幸9巻)keep + 閻魔あいセレクション3冊=別作者アンソロジー |
+| watashitachi-wa-hanshokushiteiru | 4 | **MERGE** | 内田春菊 私たちは繁殖している(本編24巻 + 角川文庫オレンジ/ソーダ/トラベラー=文庫版) |
+| shiori-to-shimiko | 4 | **MERGE** | 諸星大二郎 栞と紙魚子(本編 + 青い馬/生首事件/殺戮詩集=同一連作各巻) |
+| papa-told-me | 4 | **MERGE** | 榛野なな恵 Papa told me(本編27巻 + 夏/秋/春=特別企画文庫選集) |
+| kouun-ryuusui | 4 | **MERGE** | 本宮ひろ志 こううんりゅうすい(徐福/信長=連続巻4-8) |
+| hakushaku-cain-series | 4 | **DEFER** | カフカ/忘れられたジュリエットが伯爵カイン本編か別短編か未確証 |
+| jashin-densetsu | 4 | **DEFER** | 矢野健太郎 コンフュージョン/ラミア等=共通base無・邪神伝説への帰属未確証 |
+| cardcaptor-sakura | 3 | **DEFER** | CLAMP本編+さくらカード編=merge候補だが、 ショート・ケビン版=アニメコミック混在で要精査 |
+
+## まとめ(2026-06-03 (A)セッション)
+- **MERGE適用**: 水惑星年代記/こわい本/みこすり半劇場/とっとこハム太郎/ケロロ軍曹/鬼平犯科帳/タクミくんシリーズ/ミナミの帝王ヤング編/私たちは繁殖している/栞と紙魚子/Papa told me/こううんりゅうすい = **12件**(+既存 剣客商売/BARレモンハート)
+- **DROP**: アニメ版ハムージャ/スウェーデン版Keroro/ONE PIECE COLOR WALK・RED・SJR
+- **SEPARATE(誤束=固有slug)**: ゲゲゲ/仮面ライダー/銀河鉄道の夜/火の鳥/RE:BORN群/悪女シリーズ群/地獄少女セレクション
+- **DEFER(確証不足→分離保持)**: テニス王子様/マンガギリシア神話/コハエース/コナン劇場版/伯爵カイン/邪神伝説/CCS
+- **残**: WIKI_NEEDED ×3=残約50 / ×2=677(=安全デフォルト分離でlaunch可)/ AUTO_SEPARATE 1,283(証拠不要・固有slug)
 
 注: SEPARATE = merge せず各作品に固有slug(別ページ)。 DEFER = 確証不足で保留(分離のまま)。
 適用: `_apply-merge-A.py` / `_apply-merge-A2.py`。
