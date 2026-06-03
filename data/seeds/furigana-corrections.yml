@@ -1,7 +1,7 @@
 # フリガナ補正 seed (= 3ソースconsensus: NDL公式 / 種3-AI / 種2-MADB)
 # 種2/種3とも誤りだった key を補正。 promoteがtitle_kanaを最優先で読む。 種2種3不変・可逆。
 # source: ndl/manual/audit-*/review-confident/user-verified/manual-adult。 一部entryにslug/en特例メタ。
-# 更新 2026-06-03 / 計446件。
+# 更新 2026-06-03 / 計448件。
 schema_version: 1
 corrections:
 - key: name:I・N・J・カルバード|name:クトゥルフ神話～ラヴクラフト傑作選
@@ -3129,3 +3129,17 @@ corrections:
   source: manual-adult
   old_seed2: Daito comics TLシリーズ
   old_seed3: テンショウエロエルフノナカノニンハ29トシショジョOLデス
+- key: name:富士屋カツヒト|name:しょせん他人事ですから
+  title: しょせん他人事ですから
+  title_kana: ショセンヒトゴトデスカラ
+  title_kana_segmented: ショセン ヒトゴト デスカラ
+  source: user-verified
+  old_seed2: ショセンタニンゴトデスカラ
+  old_seed3: ショセンタニンゴトデスカラ
+- key: name:富士屋カツヒト|name:しょせん他人事ですから|sub:とある弁護士の本音の仕事
+  title: しょせん他人事ですから
+  title_kana: ショセンヒトゴトデスカラ
+  title_kana_segmented: ショセン ヒトゴト デスカラ
+  source: user-verified
+  old_seed2: ショセンタニンゴトデスカラ
+  old_seed3: ショセンタニンゴトデスカラ
