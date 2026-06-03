@@ -1180,3 +1180,12 @@ non_manga:
   - series_key: "name:Yosizaki|name:Keroro|sub:grodan fr「゜」an rymden [Mine Yoshizaki]."
     reason: foreign_or_anime_edition
     note: "(A)merge検証で除外: Keroro"
+  - series_key: "qid:Q2010|name:ONE PIECE COLOR WALK"
+    reason: satellite_or_databook
+    note: "(A)merge検証: ONE PIECE COLOR WALK=画集"
+  - series_key: "qid:Q2010|name:ONE PIECE RED"
+    reason: satellite_or_databook
+    note: "(A)merge検証: ONE PIECE RED=キャラクター設定資料databook(2002)"
+  - series_key: "qid:Q2010|name:ワンピース"
+    reason: satellite_or_databook
+    note: "(A)merge検証: ワンピース=SJR集英社ジャンプリミックス(コンビニ廉価版)"
