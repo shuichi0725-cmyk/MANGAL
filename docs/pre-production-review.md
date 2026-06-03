@@ -42,8 +42,8 @@
   ※「;」を含む正当題(Steins;Gate / Robotics;Notes / デュラララ Re;)は **誤検出=触らない**。
 - **title_latinonly 3,739**: ★大半は正当(Akira/PRIEST[manhwa]/STAR WARS[licensed]/Robotics;Notes 等の英題作=ISBN 978-4=日本出版)。
   - ★★**精査で確定 = 真の外国版 375件**(latin題 ∧ ISBN非9784)。 ★**複数証拠で安全判定**(ISBN単独はtypo誤判定の恐れ→回避):
-    - ★**67件 = drop実行済✅**(latin題 ∧ **複数巻すべて非9784**[typoでは全巻一致不可] ∧ 本番slug有)。 Akira仏/Evangelion/Naruto/Inu Yasha瑞典版 / はだしのゲン独ポーランド版 / 千と千尋独版 / ベルばら仏版 / Babymouse/Pearl Harbor英書。 ★日本版9784の正規ページ=0件含まず(原作は別keyで存続)。
-    - ★**308件 = 単巻のみ非9784(typo懸念)→ drop せず**。 ★しかも**全てEMPTY slug=本番に出ない**ので実害なし。
+    - ★**375件 = drop実行済✅**(67複数巻 + 308単巻)。 ★**ISBNチェックディジット検算でtypo-proof確認**(375全て検算OK=typo 0件)。 3証拠=latin題 ∧ 全ISBN非9784 ∧ 全ISBN検算OK ∧ 日本版9784=0(誤dropリスク無し)。 Akira仏/Evangelion/Naruto/Inu Yasha瑞典/Captain Tsubasa仏/BLACK JACK仏 等の外国語版 + Babymouse/Pearl Harbor等の外国書。 原作(日本版)は別keyで存続。
+    - ★単巻も「latin題+ISBN検算+国コード」で多角確認可能と判明(当初の「単巻は確認不可」を修正)。
   - ★**なぜ既存フィルタをすり抜けたか**: 旧スキャンは「EMPTYslug + 翻訳credit文字列」依存。 これらは ★**クリーンなlatin題→有効slug生成 + credit文字列無**で両方回避。 ★**ISBN国コード(978-4=日本)を foreign判定に未使用**だったのが穴。 → ★**恒久対策=intake/dropにISBN国コード判定を追加**(要script化)。
 - 崩れ字 title: `囿者は懼れず`(囿→勇? 懼→恐?)= ★要 NDL/原典確認。
 
@@ -70,8 +70,7 @@
 | 推奨 | sub_publisher クリア | ~8 | レーベル漏れ |
 | 推奨 | kana_hasspace 除去 | 4 | protocol違反 |
 | 推奨 | 崩れ字title訂正 | 1+ | 囿者は懼れず |
-| ✅済 | 外国版 drop(複数証拠) | **67** | latin題+全巻非9784+slug有=確実(drop実行済)|
-| 保留 | 単巻のみ非9784 | 308 | typo懸念+EMPTY slug=本番非出現 |
+| ✅済 | 外国版 drop(複数証拠+ISBN検算) | **375** | latin題+全巻非9784+検算OK(typo0)=確実(67複数巻+308単巻、 drop実行済)|
 | 任意 | slug_toolong 短縮 | 1,609 | 大半正当 |
 
 ★= ★**最優先は slug衝突の解消(slug生成器改修)**。 他は小規模の個別候補。 ★全て**未適用**、 GOサインで着手。
