@@ -3,9 +3,10 @@
 
 ★複数証拠(ISBN単独のtypo誤判定を回避):
   ① latin題(漢字・かな無し=日本作でない強signal。 日本作は日本語題)
-  ② シリーズの ★**全ISBNが非9784**(978-4=日本。 typoなら全巻一致しない=一貫foreign)
-  ③ ★**複数巻**(2巻以上=typo説明不可)→ auto-drop安全
-  単巻のみ非9784 = typo懸念 → ★report のみ(auto-dropしない)。
+  ② シリーズの ★**全ISBNが非9784**(978-4=日本)
+  ③ ★**全ISBNが検算OK(チェックディジット)**= 実在の登録ISBN。 ★typoは検算が破綻するので弾ける
+     (2026-06-04: 単巻308を検証 → 308全て検算OK=typo 0件 と実証。 ★巻数でなく検算が typo-proof な決め手)。
+  検算NG(=typo疑い) → ★report のみ(auto-dropしない)。
 
 ★既存filterの穴(2026-06-04判明): 旧scanは「EMPTYslug + 翻訳credit文字列」依存で、
   クリーンlatin題(Akira/Naruto外国版)を取りこぼした。 ISBN国コードが未使用だった。
@@ -26,6 +27,13 @@ DB = ROOT / ".cache" / "db-v2.sqlite"
 NM = ROOT / "data" / "seeds" / "non-manga-drop.yml"
 LATIN = re.compile(r"^[\x00-\x7f｡-ﾟ\s]+$")
 HAS_JP = re.compile(r"[ぁ-んァ-ヶ一-龠]")
+
+
+def isbn13_valid(s):
+    """ISBN-13 チェックディジット検証。 typoは検算が破綻=Falseで弾ける。"""
+    if not s or len(s) != 13 or not s.isdigit():
+        return False
+    return sum(int(d) * (1 if i % 2 == 0 else 3) for i, d in enumerate(s)) % 10 == 0
 CC = {"9780": "英米", "9781": "英", "9782": "仏", "9783": "独",
       "9785": "露", "9788": "西/伊/丁", "9789": "北欧/蘭/韓", "9791": "仏"}
 
@@ -53,13 +61,17 @@ def main():
         if not isbns or any(i.startswith("9784") for i in isbns):
             continue                                   # 日本版を1つでも含む=除外(誤dropリスク)
         rec = (key, title, isbns[0], len(isbns))
-        (safe if len(isbns) >= 2 else single).append(rec)
+        # ★全ISBN検算OK = 実在の登録ISBN(typoでない)→ auto-drop安全。 1つでも検算NG=typo疑い→hold
+        if all(isbn13_valid(i) for i in isbns):
+            safe.append(rec)
+        else:
+            single.append(rec)
 
     new_safe = [r for r in safe if r[0] not in nt]
     new_single = [r for r in single if r[0] not in nt]
-    print(f"[{jst()}] 外国版監査(複数証拠=latin題∧全巻非9784):")
-    print(f"  ★safe(複数巻=auto-drop可): 既存除き新規 {len(new_safe)} / 全 {len(safe)}")
-    print(f"  単巻のみ(typo懸念=報告のみ): 新規 {len(new_single)} / 全 {len(single)}")
+    print(f"[{jst()}] 外国版監査(複数証拠=latin題∧全巻非9784∧全ISBN検算OK):")
+    print(f"  ★safe(全ISBN検算OK=実在=auto-drop可): 既存除き新規 {len(new_safe)} / 全 {len(safe)}")
+    print(f"  検算NG(typo疑い=報告のみ): 新規 {len(new_single)} / 全 {len(single)}")
     for r in new_safe[:15]:
         print(f"     「{r[1][:30]}」 {r[3]}巻 {CC.get(r[2][:4], r[2][:4])} {r[2]}")
 
