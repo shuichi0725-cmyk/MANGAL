@@ -37,7 +37,8 @@
 - **title_pua 13**: ★**不可視PUA文字混入**。 `❤/★`(U+E2BB等)や `é/à`(Atta2=Attaché?/Dj vu=Déjà vu、 U+E310等)が PUA に化けている。 ★表示title に不可視ゴミ → 復元(❤/é)or 除去候補。 `.cache/preprod/title_pua.tsv`。
 - **外国孤児 3**(drop候補): `Raina Telgemeier ; with color by…` / `Yoshihiro Togashi ; [traduit…français]` / `Akira Toriyama ; [Svensk text…]` = ★翻訳credit が title になった外国版 → non-manga-drop 追加候補。
   ※「;」を含む正当題(Steins;Gate / Robotics;Notes / デュラララ Re;)は **誤検出=触らない**。
-- **title_latinonly 3,739**: ★**大半は正当**(Akira/PRIEST[manhwa]/STAR WARS[licensed]/Robotics;Notes 等の英題作)。 ★低優先。 但し**foreign版の紛れ込み**が残る可能性 → 別途「latin題 ∧ kana無 ∧ 外国ISBN」で絞った spot-check 推奨。
+- **title_latinonly 3,739**: ★大半は正当(Akira/PRIEST[manhwa]/STAR WARS[licensed]/Robotics;Notes 等の英題作=ISBN 978-4=日本出版)。
+  - ★★**精査で確定 = 真の外国版 375件**(latin題 ∧ ISBN非9784 = 英/仏/独/北欧)→ ★**drop候補**(scope外=日本出版でない)。 例: Peanuts at school/Peanuts 2000 / Biggles各巻 / Asterix and Son / Babymouse / Pokemon(英版) / Raymond Briggs/Marjane Satrapi(作者名孤児) / Heinrich Kley画集。 リスト=`.cache/preprod/foreign_editions.tsv`。 既drop14除く。
 - 崩れ字 title: `囿者は懼れず`(囿→勇? 懼→恐?)= ★要 NDL/原典確認。
 
 ---
@@ -63,7 +64,7 @@
 | 推奨 | sub_publisher クリア | ~8 | レーベル漏れ |
 | 推奨 | kana_hasspace 除去 | 4 | protocol違反 |
 | 推奨 | 崩れ字title訂正 | 1+ | 囿者は懼れず |
+| 推奨 | 外国版 drop(非9784 ISBN) | **375** | Peanuts/Biggles/Asterix英版等=scope外 |
 | 任意 | slug_toolong 短縮 | 1,609 | 大半正当 |
-| 別途 | latinonly foreign精査 | 3,739中の少数 | 大半正当 |
 
 ★= ★**最優先は slug衝突の解消(slug生成器改修)**。 他は小規模の個別候補。 ★全て**未適用**、 GOサインで着手。
