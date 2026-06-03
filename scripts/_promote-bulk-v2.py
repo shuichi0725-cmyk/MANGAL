@@ -1087,12 +1087,57 @@ def get_editions_with_volumes(con: sqlite3.Connection, series_ids: list[int] | i
                 "volumes": merged_vols,
             }
         )
+    # ★MADB誤番号是正: 上下/上中下/前後 が完全に揃っているのに番号が連番でない
+    #   (= 「下」を上中下の3番目として number=3 にする系統的バグ。 上下2冊が[1,3]に水増し)
+    #   → ラベル順(上<中<下)で 1..N に振り直す。 全DB ~1,677件 + カラーED型。
+    #   ★完全な sequence のみ対象 (= 片側欠落の取りこぼしは触らない)。
+    for ed_dict in out:
+        _fix_complete_sequence_numbers(ed_dict["volumes"])
     # editions を 第1巻 (= 最古 volume) の release_date 昇順 で sort
     def first_vol_date(ed_dict):
         dates = [v["release_date"] for v in ed_dict["volumes"] if v["release_date"]]
         return min(dates) if dates else "9999-99"
     out.sort(key=first_vol_date)
     return out
+
+
+# 上下/前後 ラベルの順位 (= 振り直し時の並び)。 上=前=先頭、 下=後=末尾。
+_SEQ_RANK = {"上": 0, "前": 0, "中": 1, "下": 2, "後": 2}
+# 認識する完全 sequence (= ラベル集合 → 期待巻数)
+_COMPLETE_SEQS = {
+    frozenset({"上", "下"}): 2, frozenset({"上", "中", "下"}): 3,
+    frozenset({"前", "後"}): 2, frozenset({"前", "中", "後"}): 3,
+}
+
+
+def _fix_complete_sequence_numbers(volumes: list[dict]) -> None:
+    """上下/上中下/前後 が完全に揃うのに番号が 1..N でない edition を in-place 振り直し。
+
+    ★MADB系統バグ是正: 「下」が number=3 (上中下の3番目扱い) になり 上下2冊が [1,3] と
+    水増し表示される。 ★片側欠落 (= 上 or 下 のみ) は対象外 (= 取りこぼし、 別処理)。
+    """
+    if not volumes:
+        return
+    norm = []
+    for v in volumes:
+        lab = (v.get("volume_label") or "").replace("巻", "").strip()
+        norm.append(lab if lab in _SEQ_RANK else None)
+    labset = {x for x in norm if x}
+    expected = _COMPLETE_SEQS.get(frozenset(labset))
+    # 全 volume が sequence ラベル付き かつ 完全集合 かつ 巻数一致
+    if expected is None or None in norm or len(volumes) != expected:
+        return
+    cur_nums = [v.get("number") for v in volumes]
+    if cur_nums == list(range(1, expected + 1)):
+        return  # 既に正しい連番
+    order = sorted(
+        range(len(volumes)),
+        key=lambda i: (_SEQ_RANK[norm[i]], volumes[i].get("release_date") or "9999-99",
+                       volumes[i].get("isbn13") or ""),
+    )
+    for new_num, idx in enumerate(order, start=1):
+        volumes[idx]["number"] = new_num
+    volumes.sort(key=lambda v: v["number"])
 
 
 def clean_vol(v: dict) -> dict:
