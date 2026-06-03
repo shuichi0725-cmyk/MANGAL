@@ -369,6 +369,22 @@ DROP_SUBTITLE_PATTERNS = [
     "傑作集", "傑作選", "ベストセレクション", "名作集", "名作選", "自選", "総集編",
 ]
 
+# ★本番前sanitize(2026-06-04): 不可視PUA文字(❤/é等が私用領域に化けた物)を title/kana/subtitle から除去。
+_PUA_RE = re.compile(r"[-�]")
+
+
+def _strip_pua(s):
+    return _PUA_RE.sub("", s) if s else s
+
+
+# ★副題noise除去: 出版社/レーベル/形式が副題欄に漏れた物(merge sub-key encoding由来)。
+#   real副題はこれらで終わらないので安全。 末尾label or 純label形のみ。
+_SUBTITLE_NOISE_RE = re.compile(
+    r"^(レディース|ホラー|アニメ|ヤング|プリンセス)?コミックス?$"
+    r"|^コミック$|アンコール出版$"                       # 復刻imprint(: アンコール出版 suffix含む)
+    r"|新聞漫画集成$|漫画集成$|特別編集コミックス$"      # 集成/形式
+    r"|Nazomizu|Comics$")
+
 
 SEED3_CACHE = ROOT / ".cache" / "seed3-promote.pkl"
 
@@ -1231,24 +1247,28 @@ def build_yml(
     o: dict = {}
     o["slug"] = src_yml["slug"]
     # title: seed3.title(手動 override)優先 → series_row.title(cluster-best 反映済)。
-    o["title"] = (seed3 or {}).get("title") or series_row["title"]
+    o["title"] = _strip_pua((seed3 or {}).get("title") or series_row["title"])
     # title_kana は スペース削除 (= MANGAL protocol: ふりがな に空白 入れない)
     # ★フリガナ補正 seed を最優先(種2[series_row]も種3[src_yml]も誤っていた key)。
     corr = load_furigana_corrections().get(series_row["series_key"])
     raw_kana = (corr or {}).get("title_kana") or series_row["title_kana"] or src_yml.get("title_kana", "")
-    o["title_kana"] = re.sub(r"[\s　]+", "", raw_kana) if raw_kana else ""
+    o["title_kana"] = _strip_pua(re.sub(r"[\s　]+", "", raw_kana)) if raw_kana else ""
     o["title_romaji"] = src_yml.get("title_romaji", "")
     # subtitle: ★種3 curate(seed3.subtitle)を最優先 → 種2(series_row.subtitle)fallback。
     #   種3取込=merge時に副題を持たない代表行が選ばれて脱落する問題の是正(2026-06-02)。
     #   edition 名 (= '新装再編版' 等) なら strip (= 全 edition 含む page には不適)。
     sub = (seed3 or {}).get("subtitle") or series_row["subtitle"]
+    if sub:    # ★「X : アンコール出版」型は imprint suffix のみ剥がし本文Xは残す
+        sub = re.sub(r"\s*[:：]\s*(アンコール出版|Nazomizu Comics?)\s*$", "", sub).strip() or None
     EDITION_NAME_SUBTITLES = {"新装再編版", "新装版", "完全版", "愛蔵版", "文庫版",
                               "ワイド版", "デラックス", "新装新版", "リニューアル版",
                               "廉価版", "新装版コミックス", "新装版", "復刻版"}
     if sub and sub in EDITION_NAME_SUBTITLES:
         sub = None
+    if sub and _SUBTITLE_NOISE_RE.search(sub):    # ★出版社/レーベル/形式が副題欄に漏れた物を除去
+        sub = None
     if sub:
-        o["subtitle"] = sub
+        o["subtitle"] = _strip_pua(sub)
     sub_kana = (seed3 or {}).get("subtitle_kana") or series_row["subtitle_kana"]
     if sub_kana and sub:
         o["subtitle_kana"] = re.sub(r"[\s　]+", "", sub_kana)
