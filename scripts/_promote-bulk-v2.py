@@ -879,11 +879,14 @@ ANILIST_GENRE_TO_MASTER = {
 
 
 def _sanitize_volnum(number, release_date, volume_label):
-    """季刊/年刊 issue の『年』が巻番号に誤 parse されたもの (= 「2022 春」→ number 2022) を
-    0 (= 号扱い) に降格。 ★実漫画の巻番号は 1900 に到達しない (= こち亀 201 が最大級) ため
-    number≥1900 は無条件で年/誤値と判定。 release日null/ズレでも確実に捕捉。
-    → 既存 number=0 ロジックが、 混在 series は正規巻のみ残し、 全年番号は連番化する。"""
-    if number and number >= 1900:
+    """誤 parse された巻番号を 0 (= 号扱い) に降格:
+      - 季刊/年刊 issue の『年』 (= 「2022 春」→ number 2022)
+      - ★タイトルの漢数字混入 (= 「千」→1000 / 「人間噂八百」→800 / 「一騎当千」→1000)
+    ★実漫画の最大巻数は ちび本当にあった笑える話 236 が最大級、 [237,1899] に正規番号は
+    存在しない (= 609/800/999/1000 は全て誤値) ため number≥400 を無条件で誤値判定
+    (= ちびの成長余地も確保しつつ外れ値を捕捉)。 release日null/ズレでも確実に捕捉。
+    → 既存 number=0 ロジックが、 混在 series は正規巻のみ残し、 号番号は連番化する。"""
+    if number and number >= 400:
         return 0
     return number
 
