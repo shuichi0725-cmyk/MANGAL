@@ -71,7 +71,7 @@ def _is_non_manga(t):
     return any(t.startswith(p) for p in DROP_PREFIX) or any(c in t for c in DROP_CONTAINS)
 
 src_cnt=Counter()
-base_of={}; full_of={}; src_of={}
+base_of={}; full_of={}; src_of={}; title_full_of={}
 for key,e in s3.items():
     if key in drop_keys:
         src_cnt["dropped"]+=1; continue   # 外国版=ページにならない=slug不要
@@ -96,6 +96,8 @@ for key,e in s3.items():
                 sl=slugify(t2)
                 if sl: src="title_latin"
     base_of[key]=sl; full_of[key]=full or sl; src_of[key]=src; src_cnt[src]+=1
+    # ★衝突de-collapse用: 実タイトル(種3 kana)の完全slug(AniList romaji共有を回避=ゲゲゲ各編を分離)
+    title_full_of[key]=kana_slug(e.get("title_kana_segmented") or e.get("title_kana") or "")
 
 # --- ★collision-aware 解決: page畳み → 衝突pageだけ full(副題込)へ昇格 ---
 #   short slug(shangri-la-frontier)は維持、 衝突するフランチャイズ(ガンダム)のみ
@@ -119,7 +121,8 @@ page_final={}; upgraded=0
 for p,ms in page_members.items():
     b=page_b[p]
     if b in colliding:
-        f=_pick(full_of,p,ms)
+        # ★title-kana由来の固有slug優先(over-collapse=同aid同romajiでも実題で分離)→ romaji full fallback
+        f=_pick(title_full_of,p,ms) or _pick(full_of,p,ms)
         if f and f!=b: page_final[p]=f; upgraded+=1
         else: page_final[p]=b
     else:
