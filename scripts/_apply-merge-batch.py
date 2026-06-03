@@ -32,7 +32,7 @@ def main():
         slug = item["slug"]
         excl = set(item.get("exclude") or [])
         dset = set(item.get("drop") or [])
-        note = item["note"]
+        note = item["note"].replace(": ", "=")  # YAML安全(コロン+空白はmapping扱いで破損)
         pages = col.get(slug, {}).get("pages", [])
         mk = [k for k in pages if title_of(k).strip() not in excl and title_of(k).strip() not in dset]
         dk = [k for k in pages if title_of(k).strip() in dset]
