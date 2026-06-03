@@ -46,6 +46,8 @@ PY = sys.executable
 # stage 定義: (name, group, 説明, コマンド(scriptからの相対), mutates_db)
 STAGES = [
     # --- 種2 (MADB) 派生層 ---
+    ("volnum",  "madb", "巻番号復元 (cm101 schema:position から number=0 を正す、 1冊目消失防止)",
+        ["_patch-volnum-from-cm101.py"], True),
     ("roles",   "madb", "series_authors.role 再導出 (raw101+汚染フィルタ)",
         ["_apply-roles-rawfiltered.py", "--apply"], True),
     ("merge",   "madb", "series-merge-auto.json 再生成 (著者集合+kana+partial、 role使用)",
