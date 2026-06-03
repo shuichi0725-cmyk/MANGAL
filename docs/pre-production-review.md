@@ -28,7 +28,10 @@
 
 - **kana_empty 1**: `囿者は懼れず` = ★**title が崩れ字**(囿=勇の誤字?/懼=恐?)→ title 訂正候補(下記 title 欄参照)。 kana 空。
 - **kana_hasspace 4**: `ソード・ワールド ぺらぺらーず` / `FLORA ComiX` / `コロッケ!BLACK LABEL` / `ポケモンHGSS`(ソウシルバー間にスペース)= ★protocol違反(スペース除去要)。 `.cache/preprod/kana_hasspace.tsv`。
-- kana_pua 0(良好)。 ★既存の NDL furigana 監査([[furigana-ndl-audit]])で大半是正済。 ★**最終 NDL spot-check を推奨**(残差確認)。
+- kana_pua 0(良好)。 ★既存の NDL furigana 監査([[furigana-ndl-audit]])で大半是正済。
+- ★**かな主体title 内部整合チェック(新規)= 16,372件照合**: 文字列不一致1,246 → 説明可能除外後317 → ★**その大半も正当**(づ/ぢ→ズ/ジ表記、 Δ→デルタ、 Ⅱ→ツー、 おもひで→オモイデ[歴史的仮名]、 ♀→オンナ)。 ★= **フリガナ品質は高い**と確認。
+- ★**真の候補=kana内容ズレ 数件のみ**(actionable): `クロサギ`→kanaに「公式ガイドブック」残 / `ルミナス`→kanaに「ブルー」余分 / `ブレイブルー リミックスハート`→kanaが「ブレイブルー」のみで副題欠落 / `わがままファッション`→kanaに「ルイスタイル」余分。 = ★**別entryのkanaが紛れた疑い**。 `.cache/preprod/kana_mismatch_real.json`。
+- ★最終 NDL spot-check を推奨(漢字title の残差は別途)。
 
 ---
 
