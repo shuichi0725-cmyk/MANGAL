@@ -41,7 +41,10 @@
 - **外国孤児 3**(drop候補): `Raina Telgemeier ; with color by…` / `Yoshihiro Togashi ; [traduit…français]` / `Akira Toriyama ; [Svensk text…]` = ★翻訳credit が title になった外国版 → non-manga-drop 追加候補。
   ※「;」を含む正当題(Steins;Gate / Robotics;Notes / デュラララ Re;)は **誤検出=触らない**。
 - **title_latinonly 3,739**: ★大半は正当(Akira/PRIEST[manhwa]/STAR WARS[licensed]/Robotics;Notes 等の英題作=ISBN 978-4=日本出版)。
-  - ★★**精査で確定 = 真の外国版 375件**(latin題 ∧ ISBN非9784 = 英/仏/独/北欧)→ ★**drop候補**(scope外=日本出版でない)。 例: Peanuts at school/Peanuts 2000 / Biggles各巻 / Asterix and Son / Babymouse / Pokemon(英版) / Raymond Briggs/Marjane Satrapi(作者名孤児) / Heinrich Kley画集。 リスト=`.cache/preprod/foreign_editions.tsv`。 既drop14除く。
+  - ★★**精査で確定 = 真の外国版 375件**(latin題 ∧ ISBN非9784)。 ★**複数証拠で安全判定**(ISBN単独はtypo誤判定の恐れ→回避):
+    - ★**67件 = drop実行済✅**(latin題 ∧ **複数巻すべて非9784**[typoでは全巻一致不可] ∧ 本番slug有)。 Akira仏/Evangelion/Naruto/Inu Yasha瑞典版 / はだしのゲン独ポーランド版 / 千と千尋独版 / ベルばら仏版 / Babymouse/Pearl Harbor英書。 ★日本版9784の正規ページ=0件含まず(原作は別keyで存続)。
+    - ★**308件 = 単巻のみ非9784(typo懸念)→ drop せず**。 ★しかも**全てEMPTY slug=本番に出ない**ので実害なし。
+  - ★**なぜ既存フィルタをすり抜けたか**: 旧スキャンは「EMPTYslug + 翻訳credit文字列」依存。 これらは ★**クリーンなlatin題→有効slug生成 + credit文字列無**で両方回避。 ★**ISBN国コード(978-4=日本)を foreign判定に未使用**だったのが穴。 → ★**恒久対策=intake/dropにISBN国コード判定を追加**(要script化)。
 - 崩れ字 title: `囿者は懼れず`(囿→勇? 懼→恐?)= ★要 NDL/原典確認。
 
 ---
@@ -67,7 +70,8 @@
 | 推奨 | sub_publisher クリア | ~8 | レーベル漏れ |
 | 推奨 | kana_hasspace 除去 | 4 | protocol違反 |
 | 推奨 | 崩れ字title訂正 | 1+ | 囿者は懼れず |
-| 推奨 | 外国版 drop(非9784 ISBN) | **375** | Peanuts/Biggles/Asterix英版等=scope外 |
+| ✅済 | 外国版 drop(複数証拠) | **67** | latin題+全巻非9784+slug有=確実(drop実行済)|
+| 保留 | 単巻のみ非9784 | 308 | typo懸念+EMPTY slug=本番非出現 |
 | 任意 | slug_toolong 短縮 | 1,609 | 大半正当 |
 
 ★= ★**最優先は slug衝突の解消(slug生成器改修)**。 他は小規模の個別候補。 ★全て**未適用**、 GOサインで着手。
