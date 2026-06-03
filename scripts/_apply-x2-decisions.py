@@ -38,7 +38,8 @@ def main():
         if action == "merge":
             if pair["pages"][0] in ms:
                 print(f"  - '{match}': merge既存skip"); continue
-            b = ["- merge_keys:"] + [f'  - "{k}"' for k in pair["pages"]] + [f"  note: {note.replace(': ','=')}"]
+            safe_note = note.replace(": ", "=").lstrip("@`!&*?|>%#~ ")  # YAML予約文字ガード
+            b = ["- merge_keys:"] + [f'  - "{k}"' for k in pair["pages"]] + [f"  note: {safe_note}"]
             blocks.append("\n".join(b))
             print(f"  ✓ merge '{match}'")
         elif action == "drop":
