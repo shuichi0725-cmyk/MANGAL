@@ -407,9 +407,6 @@ art_books:
     source: ndl-marker-less
     # adult確定: 笠間しろう=成人劇画家(known) AND 題「艶」marker。 設計§4の既知漏れ (2026-06-05 確認)
     adult: true
-  - series_key: "name:Takeuti|name:Le grand livre de sailor moon"
-    artist: null
-    source: ndl-marker-less
   - series_key: "qid:Q38842|name:安野モヨコSTRIP!"
     artist: "安野モヨコ"
     source: ndl-marker-less
