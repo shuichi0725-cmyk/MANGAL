@@ -140,9 +140,12 @@ export type ArtBookLink = z.infer<typeof ArtBookLinkSchema>;
 
 export const ArtBookSchema = z.object({
   slug: z.string().regex(/^[a-z0-9-]+$/, "slug は小文字英数字とハイフンのみ"),
+  /** ★カテゴリ = 常に「画集」(漫画と別カテゴリで識別・フィルタ用) */
+  category: z.string().default("画集"),
   title: z.string().min(1),
   title_kana: z.string().min(1),
-  title_romaji: z.string().min(1),
+  /** ローマ字。 ★ローマ字化生成器が未実装(GO待ち)のため任意。 暫定は空 */
+  title_romaji: z.string().default(""),
   /** ★作画家 (artist role)。 原作者は入れない (ラノベ等) */
   artist: z.string().min(1),
   /** トリビュート/複数作画家の合同画集 (= 代表 artist に紐付けつつ印を残す) */

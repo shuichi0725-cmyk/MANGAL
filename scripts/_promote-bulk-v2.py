@@ -53,6 +53,50 @@ MERGE_YML = ROOT / "data" / "seeds" / "series-merge.yml"
 # 同 sid は hand 版優先。 docs/series-fragmentation-analysis.md。
 AUTO_MERGE_JSON = ROOT / "data" / "seeds" / "series-merge-auto.json"
 ADULT_OVERRIDES = ROOT / "data" / "seeds" / "adult-overrides.yml"
+# ★画集 = 漫画と別カテゴリ・別ストリーム (art-books.v2)。 設計 docs/art-book-display-design.md。
+ART_BOOKS_YML = ROOT / "data" / "seeds" / "art-books.yml"
+ART_BOOK_EXCLUDE_YML = ROOT / "data" / "seeds" / "art-book-exclude-isbn.yml"
+
+
+def _norm_isbn(s) -> str:
+    """ISBN13 を数字のみに正規化 (= ハイフン/型ゆれ吸収、 set 突合用)。"""
+    return re.sub(r"[^0-9]", "", str(s if s is not None else ""))
+
+
+def load_art_books() -> dict[str, dict]:
+    """series_key -> {artist, adult, multi_artist}。 画集 (= 漫画とは別カテゴリ)。"""
+    if not ART_BOOKS_YML.exists():
+        return {}
+    data = yaml.safe_load(ART_BOOKS_YML.read_text(encoding="utf-8")) or {}
+    out: dict[str, dict] = {}
+    for e in data.get("art_books", []) or []:
+        sk = e.get("series_key")
+        if not sk:
+            continue
+        out[sk] = {
+            "artist": e.get("artist") or "",
+            "adult": bool(e.get("adult")),
+            "multi_artist": bool(e.get("multi_artist")),
+        }
+    return out
+
+
+def load_art_book_exclude_isbn() -> set[str]:
+    """漫画 series に混在した画集巻の ISBN13 集合 (= 漫画の巻列から除外)。"""
+    if not ART_BOOK_EXCLUDE_YML.exists():
+        return set()
+    data = yaml.safe_load(ART_BOOK_EXCLUDE_YML.read_text(encoding="utf-8")) or {}
+    return {_norm_isbn(e.get("isbn13")) for e in data.get("exclude_isbn", []) or [] if e.get("isbn13")}
+
+
+_ART_BOOK_EXCLUDE_ISBN: set[str] | None = None
+
+
+def get_art_book_exclude_isbn() -> set[str]:
+    global _ART_BOOK_EXCLUDE_ISBN
+    if _ART_BOOK_EXCLUDE_ISBN is None:
+        _ART_BOOK_EXCLUDE_ISBN = load_art_book_exclude_isbn()
+    return _ART_BOOK_EXCLUDE_ISBN
 
 
 def _load_adult_overrides() -> set[str]:
@@ -984,8 +1028,10 @@ def get_editions_with_volumes(con: sqlite3.Connection, series_ids: list[int] | i
             f"SELECT v.*, e.type AS _etype, e.imprint AS _eimprint, e.series_id AS _sid "
             f"FROM volumes v JOIN editions e ON e.id=v.edition_id "
             f"WHERE e.series_id IN ({placeholders})", series_ids).fetchall()
+        _excl_isbn = get_art_book_exclude_isbn()
         _passed = [r for r in _rows if edition_passes_filter(
-            {"type": r["_etype"], "imprint": r["_eimprint"]})]
+            {"type": r["_etype"], "imprint": r["_eimprint"]})
+            and _norm_isbn(r["isbn13"]) not in _excl_isbn]
         # ★1冊(= 1 source series_id)につき代表1巻(最古release→最小ISBN)。
         #   同一書籍の別版ISBN(通常版/文庫版等)を別巻に数えない = 過剰巻数を防ぐ。
         _by_sid: dict = defaultdict(list)
@@ -1038,6 +1084,10 @@ def get_editions_with_volumes(con: sqlite3.Connection, series_ids: list[int] | i
                ORDER BY number, (release_date IS NULL), release_date""",
             (ed["id"],),
         ).fetchall()
+        # ★画集混在巻を漫画の巻列から除外 (= うる星等に紛れた原画集1巻。 art-book-exclude-isbn.yml)
+        _excl_isbn = get_art_book_exclude_isbn()
+        if _excl_isbn:
+            vols = [v for v in vols if _norm_isbn(v["isbn13"]) not in _excl_isbn]
         if not vols:
             continue
         # number=0 (= 巻号 extract 失敗) 扱い:
@@ -1493,6 +1543,79 @@ def build_yml(
     return o
 
 
+def build_artbook(
+    con: sqlite3.Connection,
+    series_key: str,
+    meta: dict,
+    sid: int,
+    group_sids: list[int],
+    seed3: dict,
+) -> dict | None:
+    """画集 (ArtBook) dict を build (= 設計 §1-3)。 漫画と別軽量型: editions を持たず
+    volumes 直下。 volumes は通常 Volume と同形 = 書影・アフィリンクが同じ仕組みで効く。
+
+    ★slug は暫定 `artbook-<sid>` (= 一意・決定的)。 ローマ字 slug 生成器が未実装(GO待ち=
+      pending_slug_generator)なため。 art-books.v2 は再生成中間物で production を固定しない。
+    ★linked_works は build/表示段 (step5) で計算 (= 作画家→漫画 slug 群)。 ここでは空。
+    """
+    editions = get_editions_with_volumes(con, group_sids)
+    if not editions:
+        return None
+    # 全 edition の volumes を集約 → ISBN dedup → 発売日順 → 1..N 連番 (画集は版分岐が薄い)
+    seen_isbn: set[str] = set()
+    flat: list[dict] = []
+    for ed in editions:
+        for v in ed["volumes"]:
+            isbn = _norm_isbn(v.get("isbn13"))
+            if isbn and isbn in seen_isbn:
+                continue
+            if isbn:
+                seen_isbn.add(isbn)
+            flat.append(v)
+    if not flat:
+        return None
+    flat.sort(key=lambda v: (v.get("release_date") or "9999-99", v.get("number") or 0,
+                             _norm_isbn(v.get("isbn13"))))
+    volumes = []
+    for i, v in enumerate(flat, start=1):
+        cv = clean_vol(v)
+        cv["number"] = i
+        volumes.append(cv)
+
+    row = con.execute("SELECT * FROM series WHERE id=?", (sid,)).fetchone()
+    cols = [d[0] for d in con.execute("SELECT * FROM series WHERE id=?", (sid,)).description]
+    series_row = dict(zip(cols, row)) if row else {}
+
+    s3 = seed3.get(series_key) or {}
+    title = _strip_pua((s3.get("title") or series_row.get("title") or "").strip())
+    corr = load_furigana_corrections().get(series_key) or {}
+    raw_kana = corr.get("title_kana") or series_row.get("title_kana") or ""
+    title_kana = _strip_pua(re.sub(r"[\s　]+", "", raw_kana)) if raw_kana else ""
+
+    years = [int(v["release_date"][:4]) for v in volumes
+             if v.get("release_date") and len(v["release_date"]) >= 4 and v["release_date"][:4].isdigit()]
+    qid = series_row.get("qid")
+
+    o: dict = {
+        "slug": f"artbook-{sid}",   # ★暫定 (= 一意決定的、 最終 slug 規則は §6 未決)
+        "category": "画集",
+        "title": title,
+        "title_kana": title_kana,
+        "title_romaji": "",          # ★ローマ字化生成器 未実装 (GO待ち)
+        "artist": meta.get("artist") or "",
+        "adult": bool(meta.get("adult")),
+        "linked_works": [],          # ★step5 で計算
+        "publisher": series_row.get("publisher_key") or None,
+        "year": min(years) if years else None,
+        "volumes": volumes,
+    }
+    if meta.get("multi_artist"):
+        o["multi_artist"] = True
+    if qid and re.fullmatch(r"Q\d+", str(qid)):
+        o["wikidata_qid"] = str(qid)
+    return o
+
+
 def load_master_keys() -> tuple[set, set, set]:
     """data/magazines.yml + publishers.yml + genres.yml の 有効 key set を返す。"""
     pub_yml = ROOT / "data" / "publishers.yml"
@@ -1595,9 +1718,14 @@ def main():
                 non_manga_keys.add(e["series_key"])
     print(f"  非漫画drop(外国版/壊れ): {len(non_manga_keys):,} series_key", file=sys.stderr)
 
+    # ★画集 = 漫画と別カテゴリ・別ストリーム。 manga.v2 から除外し art-books.v2 へ別出力。
+    art_books = load_art_books()
+    art_book_keys = set(art_books.keys())
+    print(f"  画集(別ストリーム): {len(art_book_keys):,} series_key / 混在ISBN除外 {len(get_art_book_exclude_isbn())} 件", file=sys.stderr)
+
     stats = {"total": 0, "regenerated": 0, "not_found_in_db": 0,
              "no_editions": 0, "dropped_spinoff_old": 0,
-             "dropped_non_manga": 0}
+             "dropped_non_manga": 0, "dropped_art_book": 0}
     not_found = []
     dropped = []
     dropped_non_manga = []
@@ -1635,6 +1763,11 @@ def main():
         if series.get("series_key") in non_manga_keys:
             stats["dropped_non_manga"] += 1
             dropped_non_manga.append(f"{ypath.name}  title={title}  (= 非漫画/外国版)")
+            continue
+        # ★画集 = 漫画と別カテゴリ。 manga.v2 には絶対出さない (= 別ストリーム art-books.v2 へ)。
+        if series.get("series_key") in art_book_keys:
+            stats["dropped_art_book"] += 1
+            dropped_non_manga.append(f"{ypath.name}  title={title}  (= 画集→art-books.v2)")
             continue
         # 種2 subtitle に隠れた 抜粋本 (= title が本編名 + sub=「○○傑作集」 等) を drop
         sub = series.get("subtitle") or ""
@@ -1738,6 +1871,64 @@ def main():
             f.write("# Regenerated by scripts/_promote-bulk-v2.py (= path B' step G)\n")
             yaml.dump(new_yml, f, allow_unicode=True, sort_keys=False, default_flow_style=False)
         stats["regenerated"] += 1
+
+    # ===== 画集 = 別ストリーム (art-books.v2)。 ★manga.v2 とは別出力 = 構造的に混ざらない =====
+    art_stats = {"written": 0, "adult_held": 0, "no_editions": 0, "not_in_db": 0, "dup_group": 0}
+    if not ONLY_SLUGS:
+        ART_OUT_DIR = ROOT / "data" / ("art-books.dryrun" if "--dry-run" in sys.argv else "art-books.v2")
+        ART_OUT_DIR.mkdir(parents=True, exist_ok=True)
+        for p in ART_OUT_DIR.glob("*.yml"):
+            p.unlink()
+        for p in ART_OUT_DIR.glob("*.yml.adult"):
+            p.unlink()
+        key2sid = {v: k for k, v in sid2key.items()}
+        merge_groups = get_merge_sids(con)
+        seen_groups: set[frozenset] = set()
+        for sk, meta in sorted(art_books.items()):
+            sid = key2sid.get(sk)
+            if sid is None:
+                art_stats["not_in_db"] += 1
+                continue
+            group = merge_groups.get(sid, [sid])
+            gkey = frozenset(group)
+            if gkey in seen_groups:
+                art_stats["dup_group"] += 1
+                continue
+            seen_groups.add(gkey)
+            ab = build_artbook(con, sk, meta, sid, group, seed3)
+            if ab is None:
+                art_stats["no_editions"] += 1
+                continue
+            # ★成人画集: データは保持しつつ本番カタログには出さない (= .adult 退避、 loader 非読込)。
+            if ab["adult"]:
+                art_stats["adult_held"] += 1
+                ap = ART_OUT_DIR / f"{ab['slug']}.yml.adult"
+            else:
+                art_stats["written"] += 1
+                ap = ART_OUT_DIR / f"{ab['slug']}.yml"
+            with ap.open("w", encoding="utf-8") as f:
+                f.write("# Regenerated by scripts/_promote-bulk-v2.py (= art book stream)\n")
+                yaml.dump(ab, f, allow_unicode=True, sort_keys=False, default_flow_style=False)
+        print(f"\n=== art-books (別ストリーム) ===", file=sys.stderr)
+        for k, v in art_stats.items():
+            print(f"  {k}: {v}", file=sys.stderr)
+        print(f"  → {ART_OUT_DIR}", file=sys.stderr)
+
+        # ★「漫画一覧に画集が1件も無い」機械検査 (= 混ざらない保証の最終確認、 設計 §5-3)
+        excl_isbn = get_art_book_exclude_isbn()
+        leaks = []
+        for p in OUT_DIR.glob("*.yml"):
+            d = yaml.safe_load(p.read_text(encoding="utf-8")) or {}
+            for ed in d.get("editions", []) or []:
+                for v in ed.get("volumes", []) or []:
+                    if _norm_isbn(v.get("isbn13")) in excl_isbn:
+                        leaks.append(f"{p.name}: {v.get('isbn13')}")
+        if leaks:
+            print(f"  ❌ 混在検査 FAIL: 漫画.v2 に画集ISBN {len(leaks)} 件残存", file=sys.stderr)
+            for lk in leaks:
+                print(f"     {lk}", file=sys.stderr)
+        else:
+            print(f"  ✅ 混在検査 PASS: 漫画.v2 に画集混在ISBN 0 件", file=sys.stderr)
 
     print(f"\n=== stats ===", file=sys.stderr)
     for k, v in stats.items():
