@@ -2355,3 +2355,52 @@
   - "name:今泉吉晴|name:シートン|sub:旅するナチュラリスト"
   separate_editions: true
   note: 版統合(谷口ジロー シートン旅するナチュラリスト)=ACTION COMICS原版(2005-08)+谷口ジローコレクション(2023再刊)を1ページ2版で並べる。両type=standardだがimprint分離(opt-in) 2026-06
+- merge_keys:
+  - "name:CLAMP|name:CLAMP PREMIUM COLLECTION魔法騎士(マジックナイト)レイアース"
+  - "name:CLAMP|name:魔法騎士レイアース"
+  - "name:Clamp|name:魔法騎士レイアース"
+  separate_editions: true
+  note: 版統合B(CLAMP 魔法騎士レイアース)=CLAMP PREMIUM COLLECTION新装版+原作各版を1ページ別版併置。旧ペアentry上書き 2026-06
+- merge_keys:
+  - "name:CLAMP|name:CLAMP PREMIUM COLLECTION魔法騎士(マジックナイト)レイアース2"
+  - "name:CLAMP|name:魔法騎士レイアース2"
+  - "name:Clamp|name:魔法騎士レイアース2"
+  separate_editions: true
+  note: 版統合B(CLAMP 魔法騎士レイアース2)=CLAMP PREMIUM COLLECTION新装版+原作各版を1ページ別版併置。旧ペアentry上書き 2026-06
+- merge_keys:
+  - "name:CLAMP|name:CLAMP PREMIUM COLLECTION CLOVER"
+  - "name:CLAMP|name:Clover"
+  - "name:Clamp|name:Clover"
+  separate_editions: true
+  note: 版統合B(CLAMP CLOVER)=CLAMP PREMIUM COLLECTION新装版+原作各版を1ページ別版併置。旧ペアentry上書き 2026-06
+- merge_keys:
+  - "name:CLAMP|name:CLAMP PREMIUM COLLECTION X"
+  - "name:CLAMP|name:X"
+  separate_editions: true
+  note: 版統合B(CLAMP X)=CLAMP PREMIUM COLLECTION新装版+原作各版を1ページ別版併置。旧ペアentry上書き 2026-06
+- merge_keys:
+  - "name:CLAMP|name:CLAMP PREMIUM COLLECTION東京BABYLON"
+  - "name:Clamp|name:東京BABYLON"
+  - "name:CLAMP|name:東京babylon"
+  - "name:CLAMP|name:東京BABYLON"
+  separate_editions: true
+  note: 版統合B(CLAMP 東京BABYLON)=CLAMP PREMIUM COLLECTION新装版+原作各版を1ページ別版併置。旧ペアentry上書き 2026-06
+- merge_keys:
+  - "name:CLAMP|name:CLAMP PREMIUM COLLECTION CLAMP学園探偵団"
+  - "name:Clamp|name:CLAMP学園探偵団"
+  - "name:CLAMP|name:CLAMP学園探偵団"
+  - "name:CLAMP|name:Clamp学園探偵団"
+  - "name:Clamp|name:Clamp学園探偵団"
+  separate_editions: true
+  note: 版統合B(CLAMP CLAMP学園探偵団)=CLAMP PREMIUM COLLECTION新装版+原作各版を1ページ別版併置。旧ペアentry上書き 2026-06
+- merge_keys:
+  - "name:CLAMP|name:CLAMP PREMIUM COLLECTIONちょびっツ"
+  - "name:Clamp|name:ちょびっツ"
+  separate_editions: true
+  note: 版統合B(CLAMP ちょびッツ)=CLAMP PREMIUM COLLECTION新装版+原作各版を1ページ別版併置。旧ペアentry上書き 2026-06
+- merge_keys:
+  - "name:CLAMP|name:CLAMP PREMIUM COLLECTION ×××HOLiC"
+  - "name:CLAMP|name:xxxHOLiC"
+  - "name:CLAMP|name:xxxHolic"
+  separate_editions: true
+  note: 版統合B(CLAMP ×××HOLiC本編)=CLAMP PREMIUM COLLECTION新装版+原作各版を1ページ別版併置。旧ペアentry上書き 2026-06
