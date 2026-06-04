@@ -185,3 +185,40 @@ volumes:
       振り分け、 種2 内 sid=126415 (vols1-7, 高橋qid+subtitle) と sid=129242
       (vols9-10, 椎名qid+subtitleなし) に分散。 著者集合 merge (series-merge-auto)
       で 1 ページに統合済、 双方の series_key に紐付け。
+
+  - series_keys:
+      - 'qid:Q723853|name:シートン'
+    qid: null  # ★ qid指定回避: ACTION版sid50926限定(コレクション2023版は別key/別ISBNで別並置)
+    number: 3
+    isbn13: '9784575940251'
+    release_date: '2006-09'
+    publisher: 双葉社
+    imprint: ACTION COMICS
+    edition_type: standard
+    title_display: 'シートン 第3章 サンドヒル・スタッグ'
+    source: wikipedia
+    added_at: '2026-06-04'
+    note: |
+      MADB取込もれ。 谷口ジロー「シートン 旅するナチュラリスト」ACTION COMICS版(双葉社)全4巻中
+      第3章。 当DB(sid50926)は巻1(9784575939392)・巻2(9784575939798)のみ保持、 巻3・4が欠落。
+      ★ISBN確証: Wikipedia書誌(ja.wikipedia.org/wiki/シートン_旅するナチュラリスト)= ISBN-10
+      4-575-94025-9 → ISBN-13 9784575940251(検算OK)。 連番…939798(巻2)→940251(巻3)→941517(巻4)
+      が刊行順(2006.1→2006.9→2008.3)と整合。 ★separate_editions群=imprint:ACTION COMICSで
+      ACTION版セクションに合流(コレクション2023版とは別並置)。
+
+  - series_keys:
+      - 'qid:Q723853|name:シートン'
+    qid: null
+    number: 4
+    isbn13: '9784575941517'
+    release_date: '2008-03'
+    publisher: 双葉社
+    imprint: ACTION COMICS
+    edition_type: standard
+    title_display: 'シートン 第4章 タラク山の熊王'
+    source: ndl
+    added_at: '2026-06-04'
+    note: |
+      MADB取込もれ。 ACTION COMICS版第4章(最終巻)。 ★ISBN確証: NDL(978-4-575-94151-7 =
+      9784575941517、 2008.3)+Wikipedia一致、 検算OK。 巻3と同じく imprint:ACTION COMICS で
+      ACTION版セクションに合流。

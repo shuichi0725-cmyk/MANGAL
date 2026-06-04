@@ -228,7 +228,8 @@ def load_volumes_supplement(con: sqlite3.Connection) -> dict[int, list[dict]]:
                 "cover_url": None,
                 "asin": None,
                 "_edition_type": entry.get("edition_type") or "standard",
-                "_imprint": entry.get("publisher") or "",
+                # ★_imprint = imprint(任意・separate_editions合流用) → 無ければ publisher fallback(後方互換)
+                "_imprint": entry.get("imprint") or entry.get("publisher") or "",
             }
             for sid in sids:
                 out.setdefault(sid, []).append(vol_dict)
@@ -1078,7 +1079,12 @@ def get_editions_with_volumes(con: sqlite3.Connection, series_ids: list[int] | i
             target_type = supp_vol["_edition_type"]
             if apply_edt_merge and target_type in ("shinsoban", "aizoban", "kanzenban", "deluxe"):
                 target_type = "standard"
-            ed_group = by_type.get(target_type)
+            # ★separate_editions群は補完巻も (type×imprint) composite key で該当版へ合流。
+            #   = 種4 entry の publisher(=_imprint) を 該当 edition の imprint と一致させること。
+            target_key = target_type
+            if sep_editions:
+                target_key = f"{target_type}\x00{supp_vol['_imprint'] or ''}"
+            ed_group = by_type.get(target_key)
             if not ed_group:
                 # 新 edition group 作成 (= 補完巻 1 巻のみ)
                 ed_group = [{
@@ -1087,7 +1093,7 @@ def get_editions_with_volumes(con: sqlite3.Connection, series_ids: list[int] | i
                     "year_started": None, "year_ended": None,
                     "volumes": [],
                 }]
-                by_type[target_type] = ed_group
+                by_type[target_key] = ed_group
             # 既存 ed_group の volumes に追加。 ★同 number が既に在れば skip
             #   (= MADBが後の更新で追いついた巻を 種4 と二重表示しない = 種2優先・自己retire)。
             #   単一edition は後段 by_num dedup が効かないため、 ここで番号重複を防ぐ。
