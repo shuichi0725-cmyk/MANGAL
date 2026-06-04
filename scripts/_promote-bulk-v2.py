@@ -931,6 +931,35 @@ def _sanitize_volnum(number, release_date, volume_label):
     return number
 
 
+_EDITION_TYPE_JP = {
+    "standard": "通常版", "wideban": "ワイド版", "bunkobon": "文庫版",
+    "kanzenban": "完全版", "shinsoban": "新装版", "aizoban": "愛蔵版", "deluxe": "デラックス版",
+}
+# ★版ブランドの title 内マーカー(優先抽出。 imprint より作品横断ブランドを優先)。
+_EDITION_TITLE_MARKERS = [
+    "CLAMP PREMIUM COLLECTION", "CLAMP CLASSIC COLLECTION",
+    "完全版", "新装版", "愛蔵版", "復刻版", "オールカラー", "カラー版",
+]
+
+
+def _sep_edition_label(src_title: str, imprint: str | None, etype: str, volumes: list[dict]) -> str:
+    """separate_editions 版の人間可読ラベル。 = 版名 +（年範囲）。
+    版名 = ①title内ブランドマーカー(CLAMP PREMIUM等) ②imprint ③type日本語名 の順。
+    同 imprint 別年(KCデラックス 1994/2002/2022)も 年で 区別できる。"""
+    name = None
+    for m in _EDITION_TITLE_MARKERS:
+        if m in (src_title or ""):
+            name = m
+            break
+    if not name:
+        name = (imprint or "").strip() or _EDITION_TYPE_JP.get(etype, etype) or "通常版"
+    yrs = sorted((v.get("release_date") or "")[:4] for v in volumes if v.get("release_date"))
+    if yrs:
+        y0, y1 = yrs[0], yrs[-1]
+        name += f"（{y0}）" if y0 == y1 else f"（{y0}–{y1}）"
+    return name
+
+
 def get_editions_with_volumes(con: sqlite3.Connection, series_ids: list[int] | int) -> list[dict]:
     """editions + volumes を まとめて取得し、 同 type editions を 1 つに merge。
 
@@ -1072,6 +1101,7 @@ def get_editions_with_volumes(con: sqlite3.Connection, series_ids: list[int] | i
                 "year_started": ed["year_started"],
                 "year_ended": ed["year_ended"],
                 "volumes": primary_vols,
+                "_src_sid": ed["series_id"],  # ★sep版ラベル生成用(出力前にpop)
             }
         )
     # ★ 種4 補完 = volumes-supplement.yml from 該当 sid の vol を 該当 edition_type に 追加
@@ -1143,6 +1173,7 @@ def get_editions_with_volumes(con: sqlite3.Connection, series_ids: list[int] | i
                 "year_started": primary_ed["year_started"],
                 "year_ended": primary_ed["year_ended"],
                 "volumes": merged_vols,
+                "_src_sid": primary_ed.get("_src_sid"),
             }
         )
     # ★MADB誤番号是正: 上下/上中下/前後 が完全に揃っているのに番号が連番でない
@@ -1156,6 +1187,20 @@ def get_editions_with_volumes(con: sqlite3.Connection, series_ids: list[int] | i
         dates = [v["release_date"] for v in ed_dict["volumes"] if v["release_date"]]
         return min(dates) if dates else "9999-99"
     out.sort(key=first_vol_date)
+    # ★separate_editions: 版ラベルを「版名（年範囲）」へ再構成(同imprint別年も区別可能に)。
+    #   無印ページは従来 label("通常版"等)維持 = sep群のみ。 元title は _src_sid から引く。
+    if sep_editions:
+        src_sids = [e["_src_sid"] for e in out if e.get("_src_sid")]
+        title_of: dict[int, str] = {}
+        if src_sids:
+            ph = ",".join("?" * len(src_sids))
+            title_of = {r[0]: r[1] for r in con.execute(
+                f"SELECT id, title FROM series WHERE id IN ({ph})", src_sids)}
+        for e in out:
+            e["label"] = _sep_edition_label(
+                title_of.get(e.get("_src_sid"), ""), e.get("imprint"), e["type"], e["volumes"])
+    for e in out:
+        e.pop("_src_sid", None)  # ★schema外の内部キーは出力前に除去
     return out
 
 
