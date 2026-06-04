@@ -1,0 +1,110 @@
+# 電子書籍・書籍ストア レジストリ(= 作品→読めるストア 連動の設定源)。
+# 設計: docs/store-affiliate-architecture.md
+#
+# 各ストア:
+#   key            : 内部ID
+#   name           : 表示名
+#   asp            : 成果報酬の経路(rakuten/dmm/amazon/valuecommerce/a8/moshimo)
+#   affiliate_id_env: アフィID を入れる環境変数名(コードはここから読む。 ID自体はrepoに置かない)
+#   api            : 商品APIの有無(none/rakuten/dmm/amazon)
+#   key_type       : マッチ鍵(isbn=物理exact / keyword=文言検索)
+#   deep_link      : 任意URLのdeep-link可否(true=検索リンク生成可 / false=固定リンクのみ)
+#   search_url     : ストア内検索URLテンプレ({q}=URLエンコード済クエリ)。 ★要実機確認(暫定)
+#   bounty         : 成果型(purchase=初回購入 / registration=無料登録)
+#   coupon_note    : 初回特典(正確に。 景表法・ステマ規制で表示する文言の根拠)
+#   priority       : 着手優先(1=最優先)
+#   enabled        : 本番出力する(affiliate契約+ID設定後にtrue)
+#
+# ★現状は全て enabled:false(契約・ID未設定)。 楽天から有効化する想定。
+
+stores:
+  - key: rakuten_books
+    name: 楽天ブックス
+    asp: rakuten
+    affiliate_id_env: RAKUTEN_AFFILIATE_ID
+    api: rakuten            # ★無料・売上gate無・ISBN/書影/リンク取得可(fetch-rakuten.ts既存)
+    key_type: isbn
+    deep_link: true
+    search_url: 'https://books.rakuten.co.jp/search?sitem={q}'
+    bounty: purchase
+    coupon_note: ''
+    priority: 1
+    enabled: false
+
+  - key: rakuten_kobo
+    name: 楽天Kobo
+    asp: rakuten
+    affiliate_id_env: RAKUTEN_AFFILIATE_ID
+    api: rakuten
+    key_type: keyword
+    deep_link: true
+    search_url: 'https://books.rakuten.co.jp/search/dt?sitem={q}&g=101'
+    bounty: purchase
+    coupon_note: ''
+    priority: 1
+    enabled: false
+
+  - key: dmm_books
+    name: DMMブックス
+    asp: dmm
+    affiliate_id_env: DMM_AFFILIATE_ID
+    api: dmm                # DMM Affiliate API(文言検索→affiliateURL)
+    key_type: keyword
+    deep_link: true
+    search_url: 'https://book.dmm.com/search/?floor=digital_book&keyword={q}'
+    bounty: purchase
+    coupon_note: '初回90%OFFクーポン(上限あり) ※条件は要最新確認'
+    priority: 2
+    enabled: false
+
+  - key: ebookjapan
+    name: ebookjapan
+    asp: valuecommerce      # ValueCommerce MyLink で検索URLをdeep-link
+    affiliate_id_env: VC_EBJ_SID
+    api: none
+    key_type: keyword
+    deep_link: true
+    search_url: 'https://ebookjapan.yahoo.co.jp/search/?keyword={q}'
+    bounty: purchase
+    coupon_note: '初回70%OFFクーポンを6回まで ※条件は要最新確認'
+    priority: 2
+    enabled: false
+
+  - key: cmoa
+    name: コミックシーモア
+    asp: moshimo
+    affiliate_id_env: MOSHIMO_CMOA_ID
+    api: none
+    key_type: keyword
+    deep_link: true
+    search_url: 'https://www.cmoa.jp/search/result/?header_word={q}'
+    bounty: registration
+    coupon_note: '初回70%OFFクーポン/無料会員登録 ※条件は要最新確認'
+    priority: 3
+    enabled: false
+
+  - key: booklive
+    name: BookLive
+    asp: a8
+    affiliate_id_env: A8_BOOKLIVE_ID
+    api: none
+    key_type: keyword
+    deep_link: false        # ★A8は固定リンクの場合あり=要確認
+    search_url: 'https://booklive.jp/search/keyword?keyword={q}'
+    bounty: registration
+    coupon_note: ''
+    priority: 3
+    enabled: false
+
+  - key: amazon
+    name: Amazon(Kindle/紙)
+    asp: amazon
+    affiliate_id_env: AMAZON_ASSOCIATE_TAG
+    api: amazon             # PA-API(ISBN→ASIN)。 ★3件/180日の売上gate=Phase 2
+    key_type: isbn
+    deep_link: true
+    search_url: 'https://www.amazon.co.jp/s?k={q}&i=stripbooks'
+    bounty: purchase
+    coupon_note: ''
+    priority: 9
+    enabled: false
