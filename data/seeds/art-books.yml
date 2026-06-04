@@ -9,7 +9,8 @@ art_books:
     artist: "うさ銀太郎"
   - series_key: "qid:Q11283231|name:アシオART WORKS"
     artist: "アシオ"
-    adult: true
+    # adult除去: 作家signal単独の誤爆。 実体=「千の魔剣と盾の乙女画集」(一迅社文庫)
+    # =全年齢LNイラスト集。 作画家は成年誌でも描くが本画集は全年齢 (2026-06-05 確認)
   - series_key: "qid:Q11294123|name:ぱらみった★ カスカベアキラ画集"
     artist: "カスカベアキラ"
   - series_key: "qid:Q11294123|name:カスカベアキラARTWORKS"
@@ -407,6 +408,8 @@ art_books:
   - series_key: "qid:Q11599978|name:艶夢"
     artist: "笠間しろう"
     source: ndl-marker-less
+    # adult確定: 笠間しろう=成人劇画家(known) AND 題「艶」marker。 設計§4の既知漏れ (2026-06-05 確認)
+    adult: true
   - series_key: "name:Takeuti|name:Le grand livre de sailor moon"
     artist: null
     source: ndl-marker-less
