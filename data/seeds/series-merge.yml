@@ -2350,3 +2350,8 @@
   - "name:鈴木敬信|name:鳥の博物館"
   renumber: true
   note: NDL確定=なぜなぜ理科学習漫画 全12巻(集英社1963/1976)・各テーマ=巻・テーマ別sid+監修別二重登録を全統合 2026-06
+- merge_keys:
+  - "qid:Q723853|name:シートン"
+  - "name:今泉吉晴|name:シートン|sub:旅するナチュラリスト"
+  separate_editions: true
+  note: 版統合(谷口ジロー シートン旅するナチュラリスト)=ACTION COMICS原版(2005-08)+谷口ジローコレクション(2023再刊)を1ページ2版で並べる。両type=standardだがimprint分離(opt-in) 2026-06

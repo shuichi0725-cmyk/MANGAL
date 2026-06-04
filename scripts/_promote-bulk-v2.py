@@ -178,6 +178,22 @@ def load_renumber_sids(con: sqlite3.Connection) -> set[int]:
     return sids
 
 
+def load_separate_edition_sids(con: sqlite3.Connection) -> set[int]:
+    """separate_editions: true の cluster の 全 sid set。 ★版統合(opt-in):
+    通常は 同 type editions を imprint 跨ぎで 1 つに畳む(最古正典表示)が、 この flag を
+    付けた群だけ (type × imprint) で 分離 = 別版を 別セクションで並べる(うる星/シートン型)。
+    ★blanket化は古典の重版(鉄腕アトム=Akita/KCDX/KPC…)を爆発させるため opt-in 限定。"""
+    if not MERGE_YML.exists():
+        return set()
+    key_to_sid = {sk: sid for sid, sk in con.execute("SELECT id, series_key FROM series")}
+    sids: set[int] = set()
+    with MERGE_YML.open(encoding="utf-8") as f:
+        for entry in (_yload(f) or []):
+            if entry.get("separate_editions"):
+                sids.update(_entry_sids(entry, key_to_sid))
+    return sids
+
+
 SUPP_YML = ROOT / "data" / "seeds" / "volumes-supplement.yml"
 # NDL 自動登録分 (= 種4 auto、 scripts/_register-seed4-ndl.py)。 手動版と両方 load。
 SUPP_AUTO_YML = ROOT / "data" / "seeds" / "volumes-supplement-auto.yml"
@@ -241,6 +257,13 @@ def get_renumber_sids(con) -> set[int]:
     if _RENUMBER_SIDS is None:
         _RENUMBER_SIDS = load_renumber_sids(con)
     return _RENUMBER_SIDS
+
+_SEP_EDITION_SIDS = None
+def get_separate_edition_sids(con) -> set[int]:
+    global _SEP_EDITION_SIDS
+    if _SEP_EDITION_SIDS is None:
+        _SEP_EDITION_SIDS = load_separate_edition_sids(con)
+    return _SEP_EDITION_SIDS
 
 def get_supplement_vols(con) -> dict[int, list[dict]]:
     global _SUPP_VOLS
@@ -971,6 +994,9 @@ def get_editions_with_volumes(con: sqlite3.Connection, series_ids: list[int] | i
     # merge_edition_types: true の sid なら shinsoban/aizoban 等 → standard 統合
     merge_edt_sids = get_merge_edition_types(con)
     apply_edt_merge = any(sid in merge_edt_sids for sid in series_ids)
+    # ★版統合(opt-in): separate_editions 群は (type × imprint) で別版を分離(畳まない)。
+    #   無印は従来通り type 単位で畳む(最古正典)。 blanket化=古典重版爆発のため opt-in 限定。
+    sep_editions = bool(get_separate_edition_sids(con) & set(series_ids))
     # type → [edition+volumes] list
     by_type: dict[str, list[dict]] = defaultdict(list)
     for ed in eds:
@@ -1030,7 +1056,12 @@ def get_editions_with_volumes(con: sqlite3.Connection, series_ids: list[int] | i
         effective_type = ed["type"]
         if apply_edt_merge and effective_type in ("shinsoban", "aizoban", "kanzenban", "deluxe"):
             effective_type = "standard"
-        by_type[effective_type].append(
+        # ★版統合 opt-in: separate_editions 群は imprint をキーに含め別版を畳まない。
+        #   ("type" フィールドは実 edition type を保持 = 後段 output で primary_ed["type"] 採用)
+        group_key = effective_type
+        if sep_editions:
+            group_key = f"{effective_type}\x00{ed['imprint'] or ''}"
+        by_type[group_key].append(
             {
                 "type": effective_type,
                 "label": ed["label"],
@@ -1098,7 +1129,7 @@ def get_editions_with_volumes(con: sqlite3.Connection, series_ids: list[int] | i
         primary_ed = sorted(ed_group, key=_ed_priority)[0]
         out.append(
             {
-                "type": type_key,
+                "type": primary_ed["type"],  # ★composite group_key でなく実 edition type
                 "label": primary_ed["label"],
                 "imprint": primary_ed["imprint"],
                 "year_started": primary_ed["year_started"],
