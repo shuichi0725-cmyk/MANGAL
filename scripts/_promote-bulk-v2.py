@@ -1057,11 +1057,13 @@ def get_editions_with_volumes(con: sqlite3.Connection, series_ids: list[int] | i
         effective_type = ed["type"]
         if apply_edt_merge and effective_type in ("shinsoban", "aizoban", "kanzenban", "deluxe"):
             effective_type = "standard"
-        # ★版統合 opt-in: separate_editions 群は imprint をキーに含め別版を畳まない。
+        # ★版統合 opt-in: separate_editions 群は source sid 単位で別版を畳まない。
         #   ("type" フィールドは実 edition type を保持 = 後段 output で primary_ed["type"] 採用)
+        #   ★sid単位 = imprint共有(KCデラックス通常版/新装版/premium 全部同imprint)でも分離可。
+        #    各 source series_id = 1 版 (= MADB の登録単位 = 版違いの単位) という前提。
         group_key = effective_type
         if sep_editions:
-            group_key = f"{effective_type}\x00{ed['imprint'] or ''}"
+            group_key = f"{effective_type}\x00sid{ed['series_id']}"
         by_type[group_key].append(
             {
                 "type": effective_type,
@@ -1079,11 +1081,11 @@ def get_editions_with_volumes(con: sqlite3.Connection, series_ids: list[int] | i
             target_type = supp_vol["_edition_type"]
             if apply_edt_merge and target_type in ("shinsoban", "aizoban", "kanzenban", "deluxe"):
                 target_type = "standard"
-            # ★separate_editions群は補完巻も (type×imprint) composite key で該当版へ合流。
-            #   = 種4 entry の publisher(=_imprint) を 該当 edition の imprint と一致させること。
+            # ★separate_editions群は補完巻も source sid 単位で該当版へ合流(sid=版単位)。
+            #   種4 は supp_map[sid] 由来=紐付き sid が分かるので imprint一致不要・確実。
             target_key = target_type
             if sep_editions:
-                target_key = f"{target_type}\x00{supp_vol['_imprint'] or ''}"
+                target_key = f"{target_type}\x00sid{sid}"
             ed_group = by_type.get(target_key)
             if not ed_group:
                 # 新 edition group 作成 (= 補完巻 1 巻のみ)
