@@ -5,6 +5,8 @@ import {
   type DataBundle,
   type Manga,
   MangaSchema,
+  type ArtBook,
+  ArtBookSchema,
   type Publisher,
   PublisherSchema,
   type Magazine,
@@ -104,6 +106,20 @@ export function loadAllManga(): DataBundle {
 
   manga.sort((a, b) => a.year_started - b.year_started || a.title.localeCompare(b.title, "ja"));
 
-  cached = { manga, publishers, magazines, genres, demographics };
+  // ★画集 = 別ストリーム (data/art-books/)。 manga と混ぜない。 promote が
+  // 別出力した yml を同期する運用。 ディレクトリ不在時は空配列で build を通す。
+  const artBooksDir = path.join(DATA_DIR, "art-books");
+  const artBookFiles = fs.existsSync(artBooksDir)
+    ? fs
+        .readdirSync(artBooksDir)
+        .filter((f) => f.endsWith(".yml") || f.endsWith(".yaml"))
+    : [];
+  const artBooks: ArtBook[] = artBookFiles
+    .map((f) => readYaml(path.join(artBooksDir, f), ArtBookSchema))
+    // 既定: adult 画集は本番に出さない (確実側)
+    .filter((a) => !a.adult);
+  artBooks.sort((a, b) => a.artist.localeCompare(b.artist, "ja") || a.title.localeCompare(b.title, "ja"));
+
+  cached = { manga, artBooks, publishers, magazines, genres, demographics };
   return cached;
 }

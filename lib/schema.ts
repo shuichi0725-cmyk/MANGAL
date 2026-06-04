@@ -125,6 +125,40 @@ export const MangaSchema = z.object({
 });
 export type Manga = z.infer<typeof MangaSchema>;
 
+/**
+ * 画集 (= 漫画家の画集/原画集/イラスト集)。 ★漫画とは別カテゴリ・別ストリーム。
+ * Manga と別の軽量型 = `editions` を持たず `volumes` 直下 (画集は版分岐が薄い)。
+ * volumes は通常の Volume と同形 = 書影・アフィリンクが同じ仕組みで効く。
+ */
+export const ArtBookLinkSchema = z.object({
+  /** 紐付け先の漫画 slug */
+  slug: z.string(),
+  /** 画集 title が作品名を含む = その作品ページに優先表示 (§3-2 段階1) */
+  title_match: z.boolean().default(false),
+});
+export type ArtBookLink = z.infer<typeof ArtBookLinkSchema>;
+
+export const ArtBookSchema = z.object({
+  slug: z.string().regex(/^[a-z0-9-]+$/, "slug は小文字英数字とハイフンのみ"),
+  title: z.string().min(1),
+  title_kana: z.string().min(1),
+  title_romaji: z.string().min(1),
+  /** ★作画家 (artist role)。 原作者は入れない (ラノベ等) */
+  artist: z.string().min(1),
+  /** トリビュート/複数作画家の合同画集 (= 代表 artist に紐付けつつ印を残す) */
+  multi_artist: z.boolean().optional(),
+  /** true は表示除外 (= 既定で build 時に出力しない)。 データは保持 */
+  adult: z.boolean().default(false),
+  /** 紐付け漫画 (= build/promote 時に計算。 作画家一致 + title 一致は優先) */
+  linked_works: z.array(ArtBookLinkSchema).default([]),
+  publisher: z.string().min(1).nullable().optional(),
+  year: z.number().int().min(1900).max(2100).nullable().optional(),
+  /** series.qid (= 著者QID)、 cross-reference / debug 用 */
+  wikidata_qid: z.string().regex(/^Q\d+$/).optional(),
+  volumes: z.array(VolumeSchema).min(1),
+});
+export type ArtBook = z.infer<typeof ArtBookSchema>;
+
 export function primaryEdition(manga: Manga): Edition {
   return manga.editions[0];
 }
@@ -165,6 +199,8 @@ export type DemographicLabel = z.infer<typeof DemographicLabelSchema>;
 
 export type DataBundle = {
   manga: Manga[];
+  /** ★画集 = manga[] とは別配列 (構造的に混ざらない保証) */
+  artBooks: ArtBook[];
   publishers: Publisher[];
   magazines: Magazine[];
   genres: Genre[];
