@@ -27,7 +27,7 @@ import yaml
 ROOT = Path(__file__).resolve().parent.parent
 ART_BOOKS = ROOT / "data" / "seeds" / "art-books.yml"
 ADULT_CACHE = ROOT / "data" / "seeds" / "adult-wikipedia-cache.yml"
-DB = ROOT / ".cache" / "db.sqlite"
+DB = ROOT / ".cache" / "db-v2.sqlite"  # ★派生DB (= adult_score 有。 旧db.sqliteは空)
 OUT = ROOT / ".cache" / "artbook-adult-review.tsv"
 
 # 成人 title marker (= 設計 §4-2)。 「艶」等は一般題にもあるので marker 単独は weak tier。
