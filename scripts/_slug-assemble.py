@@ -125,9 +125,17 @@ def subtitle_slug(text):
     return r[:40].rstrip("-")
 SKIP_AUTHOR=re.compile(r"編集部|編集|アンソロジー|製作|スタジオ")
 def surname_romaji(author):
-    """著者名→姓ローマ字(先頭token)。 編集部/数字主体は除外。"""
+    """著者名→姓ローマ字。 ★和名(姓名連結)=先頭token / ★ラテン名(名 姓 順)=末尾語が姓
+    (CLAUDE.md slug規則「姓は最後の語」)。 編集部/数字主体は除外。"""
     if not author or SKIP_AUTHOR.search(author): return ""
-    # 記号・数字を除いた本体
+    # ラテン名(日本語文字を含まない)= 「名 姓」順 → 最後の語が姓
+    if re.search(r"[A-Za-z]", author) and not re.search(r"[ぁ-んァ-ヴ一-鿿]", author):
+        toks=re.findall(r"[A-Za-z]+", author)
+        if toks:
+            r=re.sub(r"[^a-z]","",drop_long(toks[-1].lower()))
+            if len(r)>=2: return r
+        return ""
+    # 和名(姓名連結)= 先頭 token が姓
     core=re.sub(r"[0-9０-９「」『』・,，\s]","",author)
     if not core: return ""
     for it in _kks.convert(core):
