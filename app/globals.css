@@ -102,3 +102,77 @@ input[type="search"] {
     transition-duration: 0.04s;
   }
 }
+
+/* ============================================================
+   購入モード = 電子書籍 (ebook) のとき 全体を寒色テーマへ。
+   html[data-purchase-mode="ebook"] を Provider が付与し、 CSS変数を上書き。
+   var(--color-accent) 等を参照する全要素が連動して再着色する。
+   ============================================================ */
+html[data-purchase-mode="ebook"] {
+  --color-accent: #2f74d0; /* 赤→青 = 電子(デジタル)の手触り */
+  --color-accent-warm: #3b82f6;
+  --color-paper: #eef2f8; /* 温白→寒白 */
+  --color-surface-2: #e6ecf5;
+  --color-line: rgba(20, 32, 60, 0.13);
+}
+
+/* 色の切替を 0.4s で滑らかに (パッと変わると味気ないため)。
+   背景/文字/枠/影に色トランジションを付与。 動きは控えめ。 */
+html,
+body {
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+.mode-recolor {
+  transition: background-color 0.4s ease, border-color 0.4s ease,
+    color 0.4s ease;
+}
+
+/* ============================================================
+   購入モード トグル = 舞台セットの表裏 (180度フリップ)。
+   面=書籍 / 裏=電子書籍。 0.4s かけて rotateY で入れ替わる。
+   ============================================================ */
+.flip-toggle {
+  perspective: 600px;
+}
+.flip-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.flip-inner.is-ebook {
+  transform: rotateY(180deg);
+}
+.flip-face {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.375rem;
+  border-radius: 9999px;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  border: 1px solid var(--color-line);
+  background-color: var(--color-surface-2);
+  font-weight: 500;
+  white-space: nowrap;
+}
+.flip-face.flip-back {
+  transform: rotateY(180deg);
+  /* 裏面 = 電子: 寒色アクセントで面と区別 */
+  background-color: #dbe6f7;
+  color: #1f4e91;
+  border-color: rgba(31, 78, 145, 0.25);
+}
+
+/* モーション控えめ設定の人にはフリップを無効化 (瞬時切替) */
+@media (prefers-reduced-motion: reduce) {
+  .flip-inner,
+  html,
+  body,
+  .tactile-chip {
+    transition: none;
+  }
+}

@@ -17,10 +17,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <PurchaseModeProvider>
         <header className="border-b border-[var(--color-line)] bg-[var(--color-surface)]/80 backdrop-blur sticky top-0 z-20">
           <div className="mx-auto max-w-6xl px-4 py-3 flex items-center justify-between gap-3">
-            <Link href="/" className="font-bold text-lg tracking-tight shrink-0">
-              MANGAL<span className="text-[var(--color-accent)]">.</span>
-            </Link>
-            {/* 右上 = 購入モードのトグル 1 個 (タップで 紙 ⇄ 電子)。 旧「日本の漫画データベース」表記は撤去。 */}
+            {/* 左 = ロゴ + 「日本の漫画データベース」。 ロゴ寄りに少し左へ。 */}
+            <div className="flex items-baseline gap-2 min-w-0">
+              <Link href="/" className="font-bold text-lg tracking-tight shrink-0">
+                MANGAL<span className="text-[var(--color-accent)]">.</span>
+              </Link>
+              <span className="text-xs sm:text-sm text-ink/55 truncate">日本の漫画データベース</span>
+            </div>
+            {/* 右上 = 購入モードのトグル 1 個 (タップで 紙 ⇄ 電子 を 180度フリップ)。 */}
             <PurchaseModeToggle />
           </div>
         </header>

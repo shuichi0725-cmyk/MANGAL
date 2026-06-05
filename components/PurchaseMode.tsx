@@ -33,6 +33,8 @@ export function PurchaseModeProvider({ children }: { children: React.ReactNode }
 
   useEffect(() => {
     window.localStorage.setItem(STORAGE_KEY, mode);
+    // ★html に属性付与 = globals.css が寒色テーマへ全体再着色 (0.4s遷移)
+    document.documentElement.setAttribute("data-purchase-mode", mode);
   }, [mode]);
 
   const toggle = () => setMode((m) => (m === "print" ? "ebook" : "print"));
@@ -47,24 +49,35 @@ export function usePurchaseMode(): PurchaseModeCtx {
 }
 
 /**
- * ヘッダー右上のトグル 1 個。 タップで 紙 ⇄ 電子 が入れ替わる。
- * ラベル = 現在のモード。 ⇄ アイコンで「切り替わる」ことを示す。
+ * ヘッダー右上のトグル 1 個。 ★舞台セットの表裏のように 180度フリップして
+ * 紙 ⇄ 電子 が入れ替わる (0.4s)。 面=書籍 / 裏=電子書籍。
  */
 export function PurchaseModeToggle() {
   const { mode, toggle } = usePurchaseMode();
-  const isPrint = mode === "print";
-  const next = isPrint ? "電子書籍" : "書籍(紙)";
+  const isEbook = mode === "ebook";
+  const next = isEbook ? "書籍(紙)" : "電子書籍";
   return (
     <button
       type="button"
       onClick={toggle}
-      aria-label={`購入モード: 現在は${isPrint ? "書籍(紙)" : "電子書籍"}。 タップで${next}に切替`}
+      aria-label={`購入モード: 現在は${isEbook ? "電子書籍" : "書籍(紙)"}。 タップで${next}に切替`}
       title={`タップで${next}モードに切替`}
-      className="tactile-chip inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-sm font-medium active:scale-95 transition"
+      className="flip-toggle relative h-9 w-32 shrink-0 text-sm active:scale-95 transition-transform"
     >
-      <span aria-hidden className="text-xs text-ink/40">⇄</span>
-      <span aria-hidden>{isPrint ? "📖" : "📱"}</span>
-      <span className="whitespace-nowrap">{isPrint ? "書籍" : "電子書籍"}</span>
+      <span className={`flip-inner block ${isEbook ? "is-ebook" : ""}`}>
+        {/* 面 = 書籍 */}
+        <span className="flip-face flip-front">
+          <span aria-hidden className="text-xs text-ink/40">⇄</span>
+          <span aria-hidden>📖</span>
+          <span>書籍</span>
+        </span>
+        {/* 裏 = 電子書籍 */}
+        <span className="flip-face flip-back">
+          <span aria-hidden className="text-xs opacity-50">⇄</span>
+          <span aria-hidden>📱</span>
+          <span>電子書籍</span>
+        </span>
+      </span>
     </button>
   );
 }

@@ -48,7 +48,7 @@ export default function VolumeTile({ manga, volume, edition }: Props) {
             manga={manga}
             volume={volume}
             labelPrefix={`${manga.title} ${editionLabel}${label}`}
-            className="inline-flex items-center mt-2 text-xs px-3 py-1.5 rounded-chip font-medium bg-[var(--color-accent)] text-white hover:opacity-90"
+            className="mode-recolor inline-flex items-center mt-2 text-xs px-3 py-1.5 rounded-chip font-medium bg-[var(--color-accent)] text-white hover:opacity-90"
           />
         )}
         {volume.description && (
