@@ -8,6 +8,7 @@ option1 = 主版を無印、 従版に `-作画家姓-初出年`。 主版選定
 """
 import csv
 import importlib.util
+import json
 import re
 import sqlite3
 import sys
@@ -52,6 +53,25 @@ def load_assemble():
 def main():
     asm = load_assemble()
 
+    # ★姓ローマ字の正規ソース = AniList staff.full (native→姓、 Art役割優先)。
+    #   長音は drop_long で落とす(Ootomo→otomo)= slug規則準拠。 pykakasi は fallback。
+    nat2sur = json.loads((ROOT / ".cache" / "anilist-author-surname.json").read_text(encoding="utf-8"))
+
+    def anilist_sur(name):
+        s = nat2sur.get((name or "").strip())
+        return re.sub(r"[^a-z]", "", asm.drop_long(s)) if s else ""
+
+    def resolve_surname(rep):
+        a0 = (a_auth.get(rep, "") or "").strip()
+        ao = asm.author_of(rep)
+        for nm in (a0, ao):
+            s = anilist_sur(nm)
+            if s:
+                return s, "anilist"
+        # fallback = pykakasi (誤読あり=要確認)
+        s = asm.surname_romaji(a0) or asm.surname_romaji(ao)
+        return (s, "pykakasi") if s else ("", "none")
+
     # match-v14: series_key → a_authors[0] (作画家姓の優先ソース)
     a_auth = {}
     with MATCH.open(encoding="utf-8") as f:
@@ -78,10 +98,11 @@ def main():
             seen.add(r["rep"])
             if r["base_slug"] not in diff:
                 continue
-            sur = asm.surname_romaji(a_auth.get(r["rep"], "")) or asm.surname_romaji(asm.author_of(r["rep"]))
+            sur, sur_src = resolve_surname(r["rep"])
             groups[r["base_slug"]].append(
                 {"rep": r["rep"], "title": r["title"], "vols": int(r["vols"] or 0),
-                 "year": r["year"], "sur": sur, "foreign": foreign.get(r["rep"]) is True}
+                 "year": r["year"], "sur": sur, "sur_src": sur_src,
+                 "foreign": foreign.get(r["rep"]) is True}
             )
 
     out = []
@@ -95,12 +116,13 @@ def main():
         real = [p for p in pages if not p["foreign"]]
         for p in fore:
             drop_fore += 1
-            out.append((base, "drop-foreign", "", p["title"], p["vols"], p["year"], p["sur"], "FOREIGN_DROP"))
+            out.append((base, "drop-foreign", "", p["title"], p["vols"], p["year"], p["sur"], p["sur_src"], "FOREIGN_DROP"))
         if len(real) < 2:
             # 外国版を抜くと衝突解消 = 残り1件は無印のまま(suffix不要)
             if len(real) == 1 and fore:
                 resolved_by_drop += 1
-                out.append((base, "main", base, real[0]["title"], real[0]["vols"], real[0]["year"], real[0]["sur"], "RESOLVED_BY_FOREIGN_DROP"))
+                p = real[0]
+                out.append((base, "main", base, p["title"], p["vols"], p["year"], p["sur"], p["sur_src"], "RESOLVED_BY_FOREIGN_DROP"))
             continue
         # 決定的 tie-break: 巻数多 desc, 年古 asc, 姓 asc, rep asc(最終保険)
         ps = sorted(real, key=lambda p: (-p["vols"], int(p["year"] or 9999), p["sur"] or "zzzz", p["rep"]))
@@ -125,11 +147,18 @@ def main():
                 cand = f"{slug}-{k}"
                 k += 1
             used.add(cand)
-            flag = "" if (role == "main" or p["sur"]) else "NO_SURNAME"
-            out.append((base, role, cand, p["title"], p["vols"], p["year"], p["sur"], flag))
+            if role == "main":
+                flag = ""
+            elif p["sur_src"] == "anilist":
+                flag = ""
+            elif p["sur_src"] == "pykakasi":
+                flag = "SUR_PYKAKASI"      # 姓がpykakasi由来=誤読懸念→要確認
+            else:
+                flag = "SUR_NONE"          # 姓取得不可→年のみ・要手当
+            out.append((base, role, cand, p["title"], p["vols"], p["year"], p["sur"], p["sur_src"], flag))
 
     with OUT.open("w", encoding="utf-8") as f:
-        f.write("base\trole\tnew_slug\ttitle\tvols\tyear\tsurname\tflag\n")
+        f.write("base\trole\tnew_slug\ttitle\tvols\tyear\tsurname\tsur_src\tflag\n")
         for x in out:
             f.write("\t".join(str(v).replace("\t", " ") for v in x) + "\n")
 
@@ -139,7 +168,10 @@ def main():
     print(f"  従版(接尾辞): {sum(1 for x in out if x[1]=='sub'):,}")
     print(f"  ★外国版→drop(非9784・別工程): {drop_fore:,}")
     print(f"  ★外国版dropで衝突解消(残1=無印): {resolved_by_drop:,}")
-    print(f"  ★姓ローマ字なし(年のみ or 要手当): {no_sur:,}")
+    subs = [x for x in out if x[1] == "sub"]
+    from collections import Counter as _C
+    sc = _C(x[7] for x in subs)
+    print(f"  従版の姓ソース: AniList={sc.get('anilist',0):,} / pykakasi={sc.get('pykakasi',0):,}(要確認) / なし={sc.get('none',0):,}")
     print("\n=== サンプル12群 ===")
     shown = 0
     cur = None
