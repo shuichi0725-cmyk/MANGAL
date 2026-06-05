@@ -77,6 +77,10 @@ def load_art_books() -> dict[str, dict]:
             "artist": e.get("artist") or "",
             "adult": bool(e.get("adult")),
             "multi_artist": bool(e.get("multi_artist")),
+            # ★任意 override: MADB が NDL 題を誤 parse した画集の是正用 (種2/種3不変)。
+            #   例: 「S : 高橋ツトム画集」→ MADB title「S」→ ここで正題に上書き。
+            "title": e.get("title"),
+            "title_kana": e.get("title_kana"),
         }
     return out
 
@@ -1587,9 +1591,10 @@ def build_artbook(
     series_row = dict(zip(cols, row)) if row else {}
 
     s3 = seed3.get(series_key) or {}
-    title = _strip_pua((s3.get("title") or series_row.get("title") or "").strip())
+    # ★art-books.yml の title 上書き(MADB誤parse是正)を最優先 → seed3 → 種2。
+    title = _strip_pua((meta.get("title") or s3.get("title") or series_row.get("title") or "").strip())
     corr = load_furigana_corrections().get(series_key) or {}
-    raw_kana = corr.get("title_kana") or series_row.get("title_kana") or ""
+    raw_kana = meta.get("title_kana") or corr.get("title_kana") or series_row.get("title_kana") or ""
     title_kana = _strip_pua(re.sub(r"[\s　]+", "", raw_kana)) if raw_kana else ""
 
     years = [int(v["release_date"][:4]) for v in volumes

@@ -319,8 +319,19 @@ art_books:
     artist: "鈴木雅久"
   - series_key: "name:深遊|name:鋼殻のレギオス画集"
     artist: "雨木シュウスケ"
-  - series_key: "name:高橋ツトム|name:高橋ツトム画集"
+  # 高橋ツトム画集 = 講談社×集英社 2社同時発売(2009-12, デビュー20周年初画集)。
+  # ★MADBがNDL題「S : / K : 高橋ツトム画集」をtitle「S」「K」と誤parse → title上書きで是正。
+  # 空の重複series(name:高橋ツトム画集)は廃し、実体(巻ISBN有)のS/Kを登録。
+  - series_key: "name:高橋ツトム|name:S"
     artist: "高橋ツトム"
+    title: "高橋ツトム画集 S"
+    title_kana: "タカハシツトムガシュウエス"
+    source: ndl-split-shueisha
+  - series_key: "name:高橋ツトム|name:K"
+    artist: "高橋ツトム"
+    title: "高橋ツトム画集 K"
+    title_kana: "タカハシツトムガシュウケー"
+    source: ndl-split-kodansha
   - series_key: "name:晴智|name:魔女の怪画集"
     artist: "晴智"
   - series_key: "qid:Q11638680|name:[近藤るるる画集L・Rプレミアムbox]|sub:初回限定版"
