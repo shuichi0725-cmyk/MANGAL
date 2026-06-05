@@ -55,11 +55,11 @@ _O1_STRICT = {0: ["ゼロ", "レイ"], 1: ["イチ"], 2: ["ニ"], 3: ["サン"],
 
 
 def sino_candidates(n):
-    """n の 音読み数詞 候補(カタカナ)集合。 1-9999(超は非対応=空)。"""
+    """n の 数詞読み候補(カタカナ)集合。 1-9999(超は非対応=空)。
+    ★ヨン/ナナ(4/7 native)も含める=4部→4-bu/4コマ→4-koma で数字keep(ユーザ確定)。
+    訓読み助数詞つ(4つ=ヨッツ)は ヨン≠ヨッツ で先頭一致せず自然にヘボン(守られる)。"""
     if n < 0 or n > 9999:
         return set()
-    if n < 10:
-        return set(_O1_STRICT[n])
     if n == 0:
         return set(_O1[0])
     out = []
@@ -188,7 +188,10 @@ def classify_and_fix(title, seg, slug):
             sino_pref = sorted({sv for s in sino for sv in sandhi_variants(s)}, key=len, reverse=True)
             for V in sino_pref:
                 if tokens[i].startswith(V) and len(tokens[i]) > len(V):
-                    out_tokens.append(str(n)); out_tokens.append(hslug(tokens[i][len(V):]))
+                    rest = tokens[i][len(V):]
+                    if rest.startswith("ツ"):  # 訓読み助数詞つ(7つ=ナナツ等)→分割せずヘボン
+                        continue
+                    out_tokens.append(str(n)); out_tokens.append(hslug(rest))
                     types.append("音読み→数字(先頭分割)"); used.add(n); i += 1; matched = True; break
             if not matched and ek and tokens[i].startswith(ek) and len(tokens[i]) > len(ek):
                 out_tokens.append(str(n) if len(rest_nondigit) > 1 else (eng_word(n) or str(n)))
