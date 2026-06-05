@@ -1,4 +1,4 @@
-import { primaryVolume, type Manga, type Volume } from "./schema";
+import { primaryVolume, type ArtBook, type Manga, type Volume } from "./schema";
 
 const DEFAULT_LOCALE = "jp";
 
@@ -50,4 +50,30 @@ export function buildAmazonUrlForVolume(
 /** 主エディション 1 巻への Amazon URL。 */
 export function buildAmazonUrl(manga: Manga, opts: AmazonLinkOptions = {}): string {
   return buildAmazonUrlForVolume(primaryVolume(manga), manga, opts);
+}
+
+/**
+ * 画集の Amazon URL。 ASIN > ISBN13 > タイトル+作画家 検索の優先順位。
+ * ArtBook は editions を持たず volumes 直下なので Manga 用とは別関数。
+ */
+export function buildAmazonUrlForArtBook(
+  artBook: ArtBook,
+  opts: AmazonLinkOptions = {},
+): string {
+  const tag = opts.associateTag ?? "";
+  const host = domain(opts.locale);
+  const v = artBook.volumes[0];
+  const asin = v?.asin?.toString().trim();
+  const isbn = v?.isbn13?.toString().trim();
+
+  if (asin) {
+    const url = new URL(`https://www.${host}/dp/${encodeURIComponent(asin)}`);
+    if (tag) url.searchParams.set("tag", tag);
+    return url.toString();
+  }
+  const url = new URL(`https://www.${host}/s`);
+  url.searchParams.set("k", isbn || `${artBook.title} ${artBook.artist}`);
+  url.searchParams.set("i", "stripbooks");
+  if (tag) url.searchParams.set("tag", tag);
+  return url.toString();
 }

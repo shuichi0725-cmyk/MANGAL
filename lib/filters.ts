@@ -1,4 +1,4 @@
-import type { Manga, StatusT } from "./schema";
+import type { ArtBook, Manga, StatusT } from "./schema";
 import { kanaToRomaji, normalizeForSearch, romajiToHiragana } from "./romaji";
 
 export type SortKey =
@@ -24,6 +24,9 @@ export type FilterState = {
   hasAwards: boolean;            // true = 受賞作品のみ
   statuses: StatusT[];           // 空配列 = 全て、 完結/連載中/休載 のサブセット
   sort: SortKey;                 // ソートキー
+  // ★画集モード: true = 一覧を漫画でなく画集(別カテゴリ)に切替。 ジャンル欄の
+  //   「画集」チップで toggle。 他の漫画用フィルタは画集には適用しない(query/年のみ)。
+  artBooks: boolean;
 };
 
 export const emptyFilterState = (): FilterState => ({
@@ -41,6 +44,7 @@ export const emptyFilterState = (): FilterState => ({
   hasAwards: false,
   statuses: [],
   sort: "default",
+  artBooks: false,
 });
 
 /**
@@ -157,6 +161,36 @@ export function applyFilters(items: Manga[], state: FilterState): Manga[] {
   return sortItems(filtered, state.sort);
 }
 
+/**
+ * 画集フィルタ (= 画集モード時の一覧)。 漫画用 filter は適用せず、 query(題/よみ/作画家)
+ * と出版年、 sort のみ効かせる。 既定は loader の作画家50音順。
+ */
+export function applyArtBookFilters(items: ArtBook[], state: FilterState): ArtBook[] {
+  let out = items;
+  const q = normalizeForSearch(state.query);
+  if (q) {
+    out = out.filter((a) => {
+      const hay = [a.title, a.title_kana, a.title_romaji, a.artist].map(normalizeForSearch);
+      return hay.some((h) => h && h.includes(q));
+    });
+  }
+  if (state.yearMin !== null || state.yearMax !== null) {
+    out = out.filter((a) => a.year != null && inRange(a.year, state.yearMin, state.yearMax));
+  }
+  switch (state.sort) {
+    case "year-desc":
+      return [...out].sort((a, b) => (b.year ?? 0) - (a.year ?? 0));
+    case "year-asc":
+      return [...out].sort((a, b) => (a.year ?? 0) - (b.year ?? 0));
+    case "title":
+      return [...out].sort((a, b) => a.title_kana.localeCompare(b.title_kana, "ja"));
+    case "volumes":
+      return [...out].sort((a, b) => b.volumes.length - a.volumes.length);
+    default:
+      return out;
+  }
+}
+
 export function uniqueAuthors(items: Manga[], includeOriginal = false): string[] {
   const set = new Set<string>();
   for (const m of items) {
@@ -214,6 +248,8 @@ export function filtersFromSearchParams(p: ParamsLike | null | undefined): Parti
   // 新規 params (2026-05-07)
   const anime = p.get("anime");
   if (anime === "true") out.anime = true;
+  const artBooks = p.get("artBooks");
+  if (artBooks === "true") out.artBooks = true;
   const hasAwards = p.get("hasAwards");
   if (hasAwards === "true") out.hasAwards = true;
   const statuses = pickList("status");

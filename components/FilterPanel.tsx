@@ -174,6 +174,13 @@ export default function FilterPanel({
               {g.name}
             </ChipButton>
           ))}
+          {/* ★画集 = ジャンルでなく別カテゴリだが、 ここで選ぶと一覧を全画集に切替 */}
+          <ChipButton
+            active={state.artBooks}
+            onClick={() => update({ artBooks: !state.artBooks })}
+          >
+            🎨 画集（{data.artBooks.length}）
+          </ChipButton>
         </div>
       </Section>
 
