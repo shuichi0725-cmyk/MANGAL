@@ -144,9 +144,14 @@ def main():
                 parts.append(yr)
             slug = "-".join(parts)
             if slug in used or not yr:
-                # -年(姓なし)で区別不能 = ★Web検証で作画家姓が要る (or 年欠落)
+                # -年/姓で区別不能 → 本番化前の最終掃除へ繰越(精査で姓web検証=0と確定)
                 no_sur += 1
-                flag = "NEED_SURNAME_VERIFY"
+                if p["vols"] == 0:
+                    flag = "DEFER_V0_STUB"          # 0巻=断片récord → merge/drop
+                elif not yr:
+                    flag = "DEFER_YEAR_MISSING"     # 年欠落 → 年補完で -年 に揃う
+                else:
+                    flag = "DEFER_NEED_SURNAME"     # 真の同年衝突(現状0)
                 cand = slug if slug else base
                 k = 2
                 while cand in used:
