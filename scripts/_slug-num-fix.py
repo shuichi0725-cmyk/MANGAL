@@ -49,10 +49,17 @@ def _join(parts):
     return res
 
 
+# 単独単桁の厳格ON読み(ヨン/ナナ等の訓読み native を除外。 4コマ=ヨンコマ→yonkoma を守る)
+_O1_STRICT = {0: ["ゼロ", "レイ"], 1: ["イチ"], 2: ["ニ"], 3: ["サン"], 4: ["シ"],
+              5: ["ゴ"], 6: ["ロク"], 7: ["シチ"], 8: ["ハチ"], 9: ["キュウ", "ク"]}
+
+
 def sino_candidates(n):
     """n の 音読み数詞 候補(カタカナ)集合。 1-9999(超は非対応=空)。"""
     if n < 0 or n > 9999:
         return set()
+    if n < 10:
+        return set(_O1_STRICT[n])
     if n == 0:
         return set(_O1[0])
     out = []
@@ -110,6 +117,17 @@ def _norm_n(ds):
     return int(ds.translate(str.maketrans("０１２３４５６７８９", "0123456789")))
 
 
+def sandhi_variants(r):
+    """音便変化形(数字+助数詞で先頭が変化): ヒャク→ヒャッ, イチ→イッ, ロク→ロッ, ジュウ→ジッ/ジュッ 等。"""
+    out = {r}
+    if r and r[-1] in "クチツ":
+        out.add(r[:-1] + "ッ")
+    if r.endswith("ジュウ"):
+        out.add(r[:-3] + "ジッ")
+        out.add(r[:-3] + "ジュッ")
+    return out
+
+
 def _nk(s):
     """カタカナ正規化(ヴ→ブ系・長音/中黒除去)で照合のゆれを吸収。"""
     s = (s or "")
@@ -152,6 +170,7 @@ def classify_and_fix(title, seg, slug):
             # token 列(1〜4連結)が読み候補に一致するか
             sino_n = {_nk(s) for s in sino}
             ek_n = _nk(ek) if ek else None
+            # (a) 完全一致(token列 == 読み)
             for span in range(1, min(4, len(tokens) - i) + 1):
                 joined = _nk("".join(tokens[i:i + span]))
                 if joined in sino_n:
@@ -163,6 +182,18 @@ def classify_and_fix(title, seg, slug):
                     else:
                         out_tokens.append(str(n)); types.append("英語読み付随→数字")
                     used.add(n); i += span; matched = True; break
+            if matched:
+                break
+            # (b) ★先頭一致(合体token: 数字読み+助数詞)= sandhi変化形で分割
+            sino_pref = sorted({sv for s in sino for sv in sandhi_variants(s)}, key=len, reverse=True)
+            for V in sino_pref:
+                if tokens[i].startswith(V) and len(tokens[i]) > len(V):
+                    out_tokens.append(str(n)); out_tokens.append(hslug(tokens[i][len(V):]))
+                    types.append("音読み→数字(先頭分割)"); used.add(n); i += 1; matched = True; break
+            if not matched and ek and tokens[i].startswith(ek) and len(tokens[i]) > len(ek):
+                out_tokens.append(str(n) if len(rest_nondigit) > 1 else (eng_word(n) or str(n)))
+                out_tokens.append(hslug(tokens[i][len(ek):]))
+                types.append("英語読み(先頭分割)"); used.add(n); i += 1; matched = True
             if matched:
                 break
         if not matched:
