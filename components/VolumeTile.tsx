@@ -43,15 +43,13 @@ export default function VolumeTile({ manga, volume, edition }: Props) {
         <p className="text-xs text-ink/50 mt-0.5 leading-tight">
           {date || "発売日未取得"}
         </p>
-        {volume.asin && (
+        {(volume.asin || volume.kindle_asin || volume.isbn13) && (
           <AffiliateLink
             manga={manga}
             volume={volume}
-            ariaLabel={`${manga.title} ${editionLabel}${label} を Amazon で見る`}
-            className="inline-block mt-2 text-xs px-3 py-1.5 rounded-chip font-medium bg-[var(--color-accent)] text-white hover:opacity-90"
-          >
-            アマゾン
-          </AffiliateLink>
+            labelPrefix={`${manga.title} ${editionLabel}${label}`}
+            className="inline-flex items-center mt-2 text-xs px-3 py-1.5 rounded-chip font-medium bg-[var(--color-accent)] text-white hover:opacity-90"
+          />
         )}
         {volume.description && (
           <p className="mt-2 text-xs text-ink/70 leading-relaxed whitespace-pre-line">

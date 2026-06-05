@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import "./globals.css";
 import ScrollTopButton from "@/components/ScrollTopButton";
+import { PurchaseModeProvider, PurchaseModeToggle } from "@/components/PurchaseMode";
 
 export const metadata: Metadata = {
   title: "MANGAL — 日本の漫画データベース",
@@ -13,14 +14,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="ja">
       <body className="min-h-screen flex flex-col">
+        <PurchaseModeProvider>
         <header className="border-b border-[var(--color-line)] bg-[var(--color-surface)]/80 backdrop-blur sticky top-0 z-20">
-          <div className="mx-auto max-w-6xl px-4 py-3 flex items-center justify-between">
-            <Link href="/" className="font-bold text-lg tracking-tight">
+          <div className="mx-auto max-w-6xl px-4 py-3 flex items-center justify-between gap-3">
+            <Link href="/" className="font-bold text-lg tracking-tight shrink-0">
               MANGAL<span className="text-[var(--color-accent)]">.</span>
             </Link>
-            <nav className="text-sm text-ink/55">
-              <span>日本の漫画データベース</span>
-            </nav>
+            {/* 右上 = 購入モードのトグル 1 個 (タップで 紙 ⇄ 電子)。 旧「日本の漫画データベース」表記は撤去。 */}
+            <PurchaseModeToggle />
           </div>
         </header>
         <main className="flex-1">{children}</main>
@@ -43,6 +44,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           </p>
         </footer>
         <ScrollTopButton />
+        </PurchaseModeProvider>
       </body>
     </html>
   );

@@ -53,6 +53,37 @@ export function buildAmazonUrl(manga: Manga, opts: AmazonLinkOptions = {}): stri
 }
 
 /**
+ * 任意の巻について **電子書籍 (Kindle)** の URL を返す。
+ * kindle_asin > Kindleストア検索 (i=digital-text) の優先順位。
+ * ★紙の asin/isbn13 は Kindle 商品に紐付かないので、 kindle_asin が無ければ
+ *   タイトル+著者で Kindle ストア検索にフォールバックする。
+ */
+export function buildKindleUrlForVolume(
+  volume: Volume | undefined,
+  manga: Manga,
+  opts: AmazonLinkOptions = {},
+): string {
+  const tag = opts.associateTag ?? "";
+  const host = domain(opts.locale);
+  const kindle = volume?.kindle_asin?.toString().trim();
+
+  if (kindle) {
+    const url = new URL(`https://www.${host}/dp/${encodeURIComponent(kindle)}`);
+    if (tag) url.searchParams.set("tag", tag);
+    return url.toString();
+  }
+
+  const url = new URL(`https://www.${host}/s`);
+  const titleQuery = volume?.number && volume.number > 1
+    ? `${manga.title} ${volume.number}`
+    : manga.title;
+  url.searchParams.set("k", `${titleQuery} ${manga.authors[0]?.name ?? ""}`);
+  url.searchParams.set("i", "digital-text");
+  if (tag) url.searchParams.set("tag", tag);
+  return url.toString();
+}
+
+/**
  * 画集の Amazon URL。 ASIN > ISBN13 > タイトル+作画家 検索の優先順位。
  * ArtBook は editions を持たず volumes 直下なので Manga 用とは別関数。
  */
