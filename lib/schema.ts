@@ -144,6 +144,8 @@ export const ArtBookSchema = z.object({
   category: z.string().default("画集"),
   title: z.string().min(1),
   title_kana: z.string().min(1),
+  /** 分かち書きフリガナ (= slug生成用、 語境界スペース有)。 NDL spaced 由来。 任意 */
+  title_kana_segmented: z.string().optional(),
   /** ローマ字。 ★ローマ字化生成器が未実装(GO待ち)のため任意。 暫定は空 */
   title_romaji: z.string().default(""),
   /** ★作画家 (artist role)。 原作者は入れない (ラノベ等) */

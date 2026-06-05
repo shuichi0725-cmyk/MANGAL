@@ -56,6 +56,21 @@ ADULT_OVERRIDES = ROOT / "data" / "seeds" / "adult-overrides.yml"
 # ★画集 = 漫画と別カテゴリ・別ストリーム (art-books.v2)。 設計 docs/art-book-display-design.md。
 ART_BOOKS_YML = ROOT / "data" / "seeds" / "art-books.yml"
 ART_BOOK_EXCLUDE_YML = ROOT / "data" / "seeds" / "art-book-exclude-isbn.yml"
+ART_BOOK_SEGMENTED_YML = ROOT / "data" / "seeds" / "art-book-furigana-segmented.yml"
+
+_ART_BOOK_SEGMENTED: dict | None = None
+
+
+def get_art_book_segmented() -> dict:
+    """series_key -> 分かち書きフリガナ (= slug生成用)。 NDL spaced 由来 (純粋追加・任意)。"""
+    global _ART_BOOK_SEGMENTED
+    if _ART_BOOK_SEGMENTED is None:
+        if ART_BOOK_SEGMENTED_YML.exists():
+            d = yaml.safe_load(ART_BOOK_SEGMENTED_YML.read_text(encoding="utf-8")) or {}
+            _ART_BOOK_SEGMENTED = d.get("segmented", {}) or {}
+        else:
+            _ART_BOOK_SEGMENTED = {}
+    return _ART_BOOK_SEGMENTED
 
 
 def _norm_isbn(s) -> str:
@@ -1601,6 +1616,8 @@ def build_artbook(
              if v.get("release_date") and len(v["release_date"]) >= 4 and v["release_date"][:4].isdigit()]
     qid = series_row.get("qid")
 
+    # 分かち書きフリガナ (= slug生成用)。 NDL spaced 由来 seed。 整合性(nospace==title_kana)確認済。
+    seg = get_art_book_segmented().get(series_key)
     o: dict = {
         "slug": f"artbook-{sid}",   # ★暫定 (= 一意決定的、 最終 slug 規則は §6 未決)
         "category": "画集",
@@ -1614,6 +1631,8 @@ def build_artbook(
         "year": min(years) if years else None,
         "volumes": volumes,
     }
+    if seg:
+        o["title_kana_segmented"] = seg
     if meta.get("multi_artist"):
         o["multi_artist"] = True
     if qid and re.fullmatch(r"Q\d+", str(qid)):
