@@ -2,6 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import CoverImage from "@/components/CoverImage";
 import VolumeRow from "@/components/VolumeRow";
+import ArtBookCard from "@/components/ArtBookCard";
 import Badge from "@/components/ui/Badge";
 import { ChipLink } from "@/components/ui/Chip";
 import { yearStatusLabel } from "@/lib/format";
@@ -33,6 +34,11 @@ export default async function MangaDetailPage({
   const publisher = data.publishers.find((p) => p.key === manga.publisher);
   const magazine = data.magazines.find((m) => m.key === manga.magazine);
   const demographic = data.demographics.find((d) => d.key === manga.demographic);
+
+  // ★この作家の画集 = 作者名(作画家)一致のみ。 特定漫画への作品名一致紐付けはしない
+  //   (特定漫画に紐付かない一般イラスト集も多く誤紐付けになるため)。 原作者には紐付けない。
+  const authorNames = new Set(manga.authors.map((a) => a.name));
+  const artistArtBooks = data.artBooks.filter((ab) => authorNames.has(ab.artist));
 
   // 各メタ項目をクリックすると、フィルタ済みトップページへ飛ぶ。
   // 押せる値は「アウトライン枠タグ」(= ジャンルの淡塗りチップとは別系統、 hoverでaccent)。
@@ -275,6 +281,20 @@ export default async function MangaDetailPage({
           )}
         </div>
       </div>
+
+      {/* この作家の画集 (= 作画家一致のみ。 作品単位でなく作家単位で出す) */}
+      {artistArtBooks.length > 0 && (
+        <section className="mt-12 border-t border-[var(--color-line)] pt-8">
+          <h2 className="text-base font-semibold text-ink mb-3">この作家の画集</h2>
+          <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+            {artistArtBooks.map((ab) => (
+              <li key={ab.slug}>
+                <ArtBookCard artBook={ab} />
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
 
       {/* 巻リスト末尾の戻る導線(上部のリンクと同機能、 下までスクロールしても戻れる) */}
       <div className="mt-10 border-t border-[var(--color-line)] pt-6 text-center">
