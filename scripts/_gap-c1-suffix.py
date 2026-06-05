@@ -124,38 +124,39 @@ def main():
                 p = real[0]
                 out.append((base, "main", base, p["title"], p["vols"], p["year"], p["sur"], p["sur_src"], "RESOLVED_BY_FOREIGN_DROP"))
             continue
-        # 決定的 tie-break: 巻数多 desc, 年古 asc, 姓 asc, rep asc(最終保険)
-        ps = sorted(real, key=lambda p: (-p["vols"], int(p["year"] or 9999), p["sur"] or "zzzz", p["rep"]))
+        # 決定的 tie-break: 巻数多 desc, 年古 asc, 姓(anilistのみ) asc, rep asc
+        def sortkey(p):
+            s = p["sur"] if p["sur_src"] == "anilist" else ""
+            return (-p["vols"], int(p["year"] or 9999), s or "zzzz", p["rep"])
+        ps = sorted(real, key=sortkey)
         for i, p in enumerate(ps):
             if i == 0:
-                slug = base                       # 主版 = 無印
-                role = "main"
+                used.add(base)
+                out.append((base, "main", base, p["title"], p["vols"], p["year"],
+                            p["sur"] if p["sur_src"] == "anilist" else "", p["sur_src"], ""))
+                continue
+            yr = p["year"] if (p["year"] and p["year"] != "9999") else ""
+            use_sur = p["sur"] if p["sur_src"] == "anilist" else ""   # ★AniList姓のみ採用
+            parts = [base]
+            if use_sur:
+                parts.append(use_sur)
+            if yr:
+                parts.append(yr)
+            slug = "-".join(parts)
+            if slug in used or not yr:
+                # -年(姓なし)で区別不能 = ★Web検証で作画家姓が要る (or 年欠落)
+                no_sur += 1
+                flag = "NEED_SURNAME_VERIFY"
+                cand = slug if slug else base
+                k = 2
+                while cand in used:
+                    cand = f"{(slug or base)}-{k}"
+                    k += 1
             else:
-                parts = [base]
-                if p["sur"]:
-                    parts.append(p["sur"])
-                else:
-                    no_sur += 1
-                if p["year"] and p["year"] != "9999":
-                    parts.append(p["year"])
-                slug = "-".join(parts)
-                role = "sub"
-            # 一意化(同姓同年の二重衝突等)
-            cand = slug
-            k = 2
-            while cand in used:
-                cand = f"{slug}-{k}"
-                k += 1
+                flag = ""
+                cand = slug
             used.add(cand)
-            if role == "main":
-                flag = ""
-            elif p["sur_src"] == "anilist":
-                flag = ""
-            elif p["sur_src"] == "pykakasi":
-                flag = "SUR_PYKAKASI"      # 姓がpykakasi由来=誤読懸念→要確認
-            else:
-                flag = "SUR_NONE"          # 姓取得不可→年のみ・要手当
-            out.append((base, role, cand, p["title"], p["vols"], p["year"], p["sur"], p["sur_src"], flag))
+            out.append((base, "sub", cand, p["title"], p["vols"], p["year"], use_sur, p["sur_src"], flag))
 
     with OUT.open("w", encoding="utf-8") as f:
         f.write("base\trole\tnew_slug\ttitle\tvols\tyear\tsurname\tsur_src\tflag\n")
@@ -169,9 +170,9 @@ def main():
     print(f"  ★外国版→drop(非9784・別工程): {drop_fore:,}")
     print(f"  ★外国版dropで衝突解消(残1=無印): {resolved_by_drop:,}")
     subs = [x for x in out if x[1] == "sub"]
-    from collections import Counter as _C
-    sc = _C(x[7] for x in subs)
-    print(f"  従版の姓ソース: AniList={sc.get('anilist',0):,} / pykakasi={sc.get('pykakasi',0):,}(要確認) / なし={sc.get('none',0):,}")
+    with_sur = sum(1 for x in subs if x[6])
+    need_verify = sum(1 for x in subs if x[8] == "NEED_SURNAME_VERIFY")
+    print(f"  従版 {len(subs):,}: AniList姓で -姓-年 = {with_sur:,} / -年のみ = {len(subs)-with_sur-need_verify:,} / ★Web検証要(同年衝突/年欠落) = {need_verify:,}")
     print("\n=== サンプル12群 ===")
     shown = 0
     cur = None
