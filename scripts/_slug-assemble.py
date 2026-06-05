@@ -144,6 +144,14 @@ def main():
     with V1.open(encoding="utf-8") as f:
         for r in csv.DictReader(f,delimiter="\t"):
             v1[r["key"]]=r
+    # ★gap a/b 統合: key→確定base_slug の override (= slug-katakana-en / num / latin-mixed)。
+    #   v1+内蔵ロジックより優先。 _build (slug-override.tsv) は key で安全 join。
+    OVERRIDE={}
+    ovp=Path(".cache/slug-override.tsv")
+    if ovp.exists():
+        with ovp.open(encoding="utf-8") as f:
+            for r in csv.DictReader(f,delimiter="\t"):
+                OVERRIDE[r["key"]]=r["base_slug"]
     # match-v14: series_key→a_authors(姓 tiebreak 用)
     a_auth={}
     with open(".cache/match-v14-all.tsv",encoding="utf-8") as f:
@@ -180,7 +188,10 @@ def main():
         if not r: continue
         cls=r["class"]; title=r["title"]; seg=r["kana_seg"]
         ks=r["kana_slug"]; ars=r["a_romaji_slug"]
-        if cls=="num":
+        ov = OVERRIDE.get(rep) or OVERRIDE.get(key)
+        if ov:
+            base = ov                         # ★gap a/b 統合の確定slugを最優先
+        elif cls=="num":
             base=number_slug(title,seg)
         elif cls in ("kata","latin"):
             base = ars if ars else (kata_dict_slug(seg) if seg else ks)
