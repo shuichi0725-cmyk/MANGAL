@@ -27,8 +27,7 @@ export default function PrivacyPage() {
       <section className="mt-8 space-y-3 text-sm leading-relaxed text-ink/80">
         <h2 className="text-base font-semibold text-ink">2. Cookie の利用</h2>
         <p>
-          本サイトはアフィリエイトリンクの計測のために、リンク先の事業者（Amazon.co.jp 等）が
-          Cookie を発行することがあります。これらの Cookie は本サイトが直接管理するものではなく、各事業者のプライバシーポリシーに従って取り扱われます。
+          リンク先の事業者（Amazon.co.jp 等）が、遷移時に Cookie を発行することがあります。これらの Cookie は本サイトが直接管理するものではなく、各事業者のプライバシーポリシーに従って取り扱われます。将来的にアフィリエイト計測を導入する場合も同様です。
         </p>
         <p>
           Cookie の受け入れを希望されない場合は、お使いのブラウザの設定で Cookie を無効化することで拒否できます。Cookie を無効化しても本サイトの閲覧に支障はありません。
@@ -45,7 +44,7 @@ export default function PrivacyPage() {
       <section className="mt-8 space-y-3 text-sm leading-relaxed text-ink/80">
         <h2 className="text-base font-semibold text-ink">4. アフィリエイトプログラムについて</h2>
         <p>
-          <strong>当サイトは、Amazon.co.jp を宣伝しリンクすることによってサイトが紹介料を獲得できる手段を提供することを目的に設定されたアフィリエイトプログラムである、Amazon アソシエイト・プログラムの参加者です。</strong>
+          当サイトは将来的に、Amazon アソシエイト・プログラム等のアフィリエイトプログラムを利用する場合があります。利用を開始した際は、運営規約所定の開示文を本ページに掲載します。現時点では、商品リンクは外部サイトの該当ページへ遷移するのみです。
         </p>
         <p>
           各作品の購入ボタンをクリックすると Amazon.co.jp の商品ページに遷移し、その後の購入に応じて運営者に紹介料が支払われる場合があります。リンクのクリックによって読者が追加の費用を負担することはありません。

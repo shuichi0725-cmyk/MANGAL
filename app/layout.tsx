@@ -39,7 +39,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             </Link>
           </nav>
           <p>
-            当サイトは Amazon アソシエイト・プログラムの参加者です。
+            当サイトの商品リンクは Amazon.co.jp 等の外部サイトへ遷移します。
           </p>
         </footer>
         <ScrollTopButton />
