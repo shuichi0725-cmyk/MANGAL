@@ -76,7 +76,7 @@ idx	title	seg	cur_slug	new_slug	conf	changed	flag	note
 74	Adventure2030学園	アドベンチャー ニセン サンジュウ ガクエン	adobenchaa-nisen-sanju-gakuen	adventure2030-gakuen	OK	CHANGED		OK: Adventure2030=latin run字面(数字隣接); 学園=gakuen
 75	鉄鍋のジャン!!2nd	テツナベ ノ ジャン セカンド	tetsunabe-no-jan-sekando	tetsunabe-no-jan-2nd	OK	CHANGED		OK: 鉄鍋=tetsunabe; の=no; ジャン=造語jan; 2nd=latin字面
 76	ルートサーティスリー～ROUTE 33～	ルート サーティ スリー	ruto-saatei-surii	route-33	OK	CHANGED		OK: ルートサーティスリー=ROUTE 33の音写読み(重複); latin公式ROUTE 33→route-33採用
-77	VS騎士ラムネ＆40炎	バーサス ナイト ラムネ アンド シジュウ ファイヤー	baasasu-naito-ramune-ando-shiju-faiyaa	vs-knight-ramune-40-fire	LOW	CHANGED		LOW: VS=latin; 騎士=当て字ナイトknight(seg裏取り); ラムネ=造語ramune; ＆=和(記号除去); 40=latin; 炎=当て字ファイヤーfire(seg裏取り)。公式VS Knight Lamune&40 Fire想定
+77	VS騎士ラムネ＆40炎	バーサス ナイト ラムネ アンド シジュウ ファイヤー	baasasu-naito-ramune-ando-shiju-faiyaa	vs-knight-ramune-40-fire	VERIFIED	CHANGED		[confirmed] VS Knight Ramune & 40 Fire | en.wikipedia.org/wiki/VS_Knight_Ramune_&_40_Fire confirms official English 'VS Knight Ramune & 40 Fire' (騎士=ナイト/knight, 
 78	U12(アンダートゥエルブ)	アンダー トゥエルブ	andaa-toerubu	u12	OK	CHANGED		OK: U12=latin字面; (アンダートゥエルブ)はU12のフリガナ重複なので不採用
 79	デジモンアドベンチャーVテイマー01	デジモン アドベンチャー V テイマー 01	dejimon-adobenchaa-v-teimaa-01	digimon-adventure-v-tamer-01	OK	CHANGED		OK: デジモン=公式Digimon; アドベンチャー=adventure; V=latin; テイマー=英語音写tamer; 01=latin字面(公式Digimon Adventure V-Tamer 01)
 80	F-1伝説	F-1 デンセツ	f1-densetsu	f-1-densetsu	OK	CHANGED		OK: F-1=latin run字面→f-1; 伝説=densetsu
@@ -146,8 +146,8 @@ idx	title	seg	cur_slug	new_slug	conf	changed	flag	note
 144	100人の英雄を育てた最強預言者は、冒険者になっても世界中の弟子から慕われてます@comic	ヒャクニン ノ エイユウ オ ソダテタ サイキョウ ヨゲンシャ ワ ボウケンシャ ニ ナッテモ セカイジュウ ノ デシ カラ シタワレテマス アットマーク コミック	hyakunin-no-eiyu-o-sodateta-saikyo-yogensha-wa-bokensha-ni-nattemo-sekaiju-no-deshi-kara-shitawaretemasu-attomaaku-komikku	100-nin-no-eiyu-o-sodateta-saikyo-yogensha-wa-bokensha-ni-nattemo-sekaiju-no-deshi-kara-shitawaretemasu-comic	OK	CHANGED		OK: 100人…ヘボン; @comic→comic
 145	不機嫌な名探偵 division-0	フキゲンナ メイタンテイ ディビジョン ゼロ	fukigenna-meitantei-dibijon-zero	fukigenna-meitantei-division-0	OK	CHANGED		OK: 不機嫌な名探偵ヘボン; latin division-0字面
 146	スパイキャッチャーJ3	スパイ キャッチャー ジェイ スリー	supai-kyatchaa-jiei-surii	spy-catcher-j3	OK	CHANGED		OK: スパイキャッチャー音写=spy-catcher; J3字面
-147	アルドノア・ゼロ2nd season	アルドノア ゼロ セカンド シーズン	arudonoa-zero-sekando-shiizun	aldnoah-zero-2nd-season	LOW	CHANGED		LOW: アルドノア=公式英Aldnoah(要確認)・ゼロ=zero; 2nd season→2nd-season
-148	アルドノア・ゼロ2nd Season	アルドノア ゼロ 2nd season	arudonoa-zero-2nd-season	aldnoah-zero-2nd-season	LOW	CHANGED		LOW: 同上(表記揺れ版)
+147	アルドノア・ゼロ2nd season	アルドノア ゼロ セカンド シーズン	arudonoa-zero-sekando-shiizun	aldnoah-zero-2nd-season	VERIFIED	CHANGED		[confirmed] Aldnoah.Zero | Yen Press (yenpress.com/series/aldnoah-zero-season-one) & en.wikipedia.org/wiki/Aldnoah.Zero confirm official 'Aldnoah.Z
+148	アルドノア・ゼロ2nd Season	アルドノア ゼロ 2nd season	arudonoa-zero-2nd-season	aldnoah-zero-2nd-season	VERIFIED	CHANGED		[confirmed] Aldnoah.Zero | Same work as idx147 (notation variant '2nd Season'). Yen Press official 'Aldnoah.Zero Season Two'. slug normalizes to al
 149	パワハラ限界勇者、魔王軍から好待遇でスカウトされる～勇者ランキング1位なのに手取りがゴミ過ぎて生活できません～@comic	パワハラ ゲンカイ ユウシャ マオウグン カラ コウタイグウ デ スカウト サレル	pawahara-genkai-yusha-maogun-kara-kotaigu-de-sukauto-sareru	pawahara-genkai-yusha-maogun-kara-kotaigu-de-sukauto-sareru-yusha-ranking-1-i-nanoni-tedori-ga-gomi-sugite-seikatsu-dekimasen-comic	OK	CHANGED		OK: パワハラ…ヘボン;ランキング音写=ranking;1位keep;@comic→comic
 150	20XX年レベルアップ災害	ニジュウエックスエックスネン レベルアップ サイガイ	nijuekkusuekkusunen-reberuappu-saigai	20xx-nen-level-up-saigai	OK	CHANGED		OK: 20XX→20xx; 年; レベルアップ音写=level-up; 災害
 151	ラブネスト2nd	ラブネスト セカンド	rabunesuto-sekando	love-nest-2nd	OK	CHANGED		OK: ラブネスト音写=love-nest; latin 2nd
@@ -163,7 +163,7 @@ idx	title	seg	cur_slug	new_slug	conf	changed	flag	note
 161	Capeta 16歳のF3パイロット編	カペタ	kapeta	capeta-16-sai-no-f3-pilot-hen	OK	CHANGED		OK: latin Capeta字面; 16歳の; F3字面; パイロット音写=pilot; 編
 162	風雲三姉妹LIN3	フウウン サン シマイ リン スリー	fuun-san-shimai-rin-surii	fuun-san-shimai-lin3	OK	CHANGED		OK: 風雲三姉妹ヘボン; LIN3連続→lin3
 163	Lv2からチートだった元勇者候補のまったり異世界ライフ	エルヴイ ニ カラ チート ダッタ モト ユウシャ コウホ ノ マッタリ イセカイ ライフ	eruvui-ni-kara-chiito-datta-moto-yusha-koho-no-mattari-isekai-raifu	lv2-kara-cheat-datta-moto-yusha-koho-no-mattari-isekai-life	OK	CHANGED		OK: Lv2字面; チート音写=cheat; …ライフ=life
-164	ビビッドレッド・オペレーションTHE4コマ びびおぺ	ビビッド レッド オペレーション ザ ヨンコマ ビビオペ	bibiddo-reddo-opereeshon-za-yonkoma-bibiope	vividred-operation-the4-koma-bibiope	LOW	CHANGED		LOW: 公式英Vividred Operation; latin THE4字面→the4; コマ→koma; びびおぺ→bibiope
+164	ビビッドレッド・オペレーションTHE4コマ びびおぺ	ビビッド レッド オペレーション ザ ヨンコマ ビビオペ	bibiddo-reddo-opereeshon-za-yonkoma-bibiope	vividred-operation-the-4-koma-bibiope	VERIFIED	CHANGED		[corrected] Vividred Operation | en.wikipedia.org/wiki/Vividred_Operation + KADOKAWA official title 'ビビッドレッド・オペレーション The 4コマ びびおぺ' (4-panel spinoff). 'Th
 165	代紋 TAKE 2	ダイモン テイク ツー	daimon-teiku-tsu	daimon-take-2	OK	CHANGED		OK: 代紋ヘボン; latin TAKE 2→take-2
 166	代紋 TAKE2	ダイモン テイク ツー	daimon-teiku-tsu	daimon-take2	OK	CHANGED		OK: 代紋ヘボン; latin TAKE2連続→take2
 167	代紋take2	ダイモン テイク ツー	daimon-teiku-tsu	daimon-take2	OK	CHANGED		OK: 代紋ヘボン; latin take2連続→take2
@@ -176,7 +176,7 @@ idx	title	seg	cur_slug	new_slug	conf	changed	flag	note
 174	超級!機動武闘伝Gガンダム 最終決戦編 STAGE 4	チョウキュウ キドウ ブトウデン ジー ガンダム サイシュウ ケッセンヘン ステージ フォー	chokyu-kido-butoden-jii-gandamu-saishu-kessenhen-suteeji-fo	chokyu-kido-butoden-g-gandamu-saishu-kessenhen-stage-4	OK	CHANGED		OK: Gガンダム=ラテンG+gandamu; STAGE 4字面
 175	超級!機動武闘伝Gガンダム 新宿・東方不敗! STAGE 2	チョウキュウ キドウ ブトウデン ジー ガンダム シンジュク トウホウ フハイ ステージ ツー	chokyu-kido-butoden-jii-gandamu-shinjuku-toho-fuhai-suteeji-tsu	chokyu-kido-butoden-g-gandamu-shinjuku-toho-fuhai-stage-2	OK	CHANGED		OK: 同上; STAGE 2字面; 東方不敗ヘボン
 176	超級!機動武闘伝Gガンダム爆熱・ネオホンコン! STAGE 3	チョウキュウ キドウ ブトウデン ジー ガンダム バクネツ ネオ ホンコン ステージ スリー	chokyu-kido-butoden-jii-gandamu-bakunetsu-neo-honkon-suteeji-surii	chokyu-kido-butoden-g-gandamu-bakunetsu-neo-honkon-stage-3	OK	CHANGED		OK: 同上; STAGE 3字面; ネオホンコンヘボン
-177	遊☆戯☆王ARC-5最強デュエリスト遊矢!!	ユウギオウ アーク ファイブ サイキョー デュエリスト ユウヤ	yugio-aaku-faibu-saikyo-deyuerisuto-yuya	yugio-arc-v-saikyo-duelist-yuya	LOW	CHANGED		LOW: 公式遊戯王ARC-V(Vはローマ数字5); デュエリスト=duelist英綴り当て字
+177	遊☆戯☆王ARC-5最強デュエリスト遊矢!!	ユウギオウ アーク ファイブ サイキョー デュエリスト ユウヤ	yugio-aaku-faibu-saikyo-deyuerisuto-yuya	yugio-arc-v-saikyo-duelist-yuya	VERIFIED	CHANGED		[confirmed] Yu-Gi-Oh! ARC-V | en.wikipedia.org/wiki/Yu-Gi-Oh!_Arc-V_(manga) + viz.com confirm official 'Yu-Gi-Oh! ARC-V', V=Roman numeral 5 (seg アーク フ
 178	孤狼の血LEVEL2	コロウ ノ チ レベル ツー	koro-no-chi-reberu-tsu	koro-no-chi-level2	OK	CHANGED		OK: 孤狼の血ヘボン; ラテンLEVEL2字面→level2
 179	Romancing Sa・Ga 2	ロマンシング サガ ツー	romanshingu-saga-tsu	romancing-saga-2	OK	CHANGED		OK: 公式Romancing SaGa 2全ラテンrun字面→romancing-saga-2
 180	1LDKとふたり	ワン エルディーケー ト フタリ	wan-erudiikee-to-futari	1ldk-to-futari	OK	CHANGED		OK: ラテン1LDK字面; とふたりヘボン(と=助詞ハイフン)
@@ -221,7 +221,7 @@ idx	title	seg	cur_slug	new_slug	conf	changed	flag	note
 219	トコR55	トコ R55	toko-r55	toko-r55	OK			OK: トコ=toko人名ヘボン; R55 latin
 220	スライム倒して300年、知らないうちにレベルmaxになってました	スライム タオシテ サンビャク ネン シラナイ ウチ ニ レベル マックス ニ ナッテマシタ	suraimu-taoshite-sanbyaku-nen-shiranai-uchi-ni-reberu-makkusu-ni-nattemashita	slime-taoshite-300-nen-shiranai-uchi-ni-level-max-ni-nattemashita	OK	CHANGED		OK: スライム/レベル=slime/level英音写(公式英題Slime); max latin; 300 keep
 221	8bit年代記	8bit ネンダイキ	8bit-nendaiki	8bit-nendaiki	OK			OK: 8bit latin字面; 年代記 nendaiki
-222	メルヘン課長とノンケ後輩くんseason2	メルヘン カチョウ ト ノンケ コウハイ クン シーズン ツー	meruhen-kacho-to-nonke-kohai-kun-shiizun-tsu	meruhen-kacho-to-nonke-kohai-kun-season2	LOW	CHANGED		LOW: メルヘン=独Märchen非英語→ヘボンmeruhen; ノンケ=nonke俗語; season2 latin
+222	メルヘン課長とノンケ後輩くんseason2	メルヘン カチョウ ト ノンケ コウハイ クン シーズン ツー	meruhen-kacho-to-nonke-kohai-kun-shiizun-tsu	meruhen-kacho-to-nonke-kohai-kun-season2	VERIFIED	CHANGED		[confirmed]  | BL manga by ミナモトカズキ (cmoa.jp/title/136061, comic-ryu.jp). No official English title published; メルヘン=独Märchen non-English
 223	戦国basara 2英雄外伝コミックアンソロジー	センゴク basara 2 エイユウ ガイデン heroes コミック アンソロジー	sengoku-basara-2-eiyu-gaiden-heroes-komikku-ansorojii	sengoku-basara-2-eiyu-gaiden-comic-anthology	OK	CHANGED		OK: 戦国 sengoku; basara/2 latin; 英雄外伝ヘボン; コミック/アンソロジー=comic/anthology音写(seg heroesは字面外で不採用)
 224	おじぞークエスト 1st.ステージ	オジゾー クエスト ファースト ステージ	ojizo-kuesuto-faasuto-suteeji	ojizo-quest-1st-stage	OK	CHANGED		OK: おじぞー=ojizoヘボン; クエスト/ステージ=quest/stage英音写; 1st. latin
 225	R-30のラブストーリー	R-30 ノ ラブストーリー	r30-no-rabusutorii	r-30-no-love-story	OK	CHANGED		OK: R-30 latin; の no; ラブストーリー=love-story英音写
@@ -236,20 +236,20 @@ idx	title	seg	cur_slug	new_slug	conf	changed	flag	note
 234	センネン画報+10 years	センネン ガホウ プラス テン イヤーズ	sennen-gaho-purasu-ten-iyaazu	sennen-gaho-10-years	OK	CHANGED		OK: センネン画報 sennen-gaho; +10 years latin(+除去)
 235	闘破蛇烈伝DEI48	トウハジャ レツデン デイ 48	tohaja-retsuden-dei-48	tohaja-retsuden-dei48	OK	CHANGED		OK: 闘破蛇烈伝 tohaja-retsuden; DEI48 latin
 236	D4プリンセス	ディーフォー プリンセス	diifo-purinsesu	d4-princess	OK	CHANGED		OK: D4 latin; プリンセス=princess英音写
-237	19XXカゲキ派	セイキマツ カゲキハ	seikimatsu-kagekiha	19xx-kageki-ha	LOW	CHANGED		LOW: 字面19XX=latin(規則1字面優先)だがseg=セイキマツ世紀末の当て字読みで曖昧; カゲキ派 kageki-ha
+237	19XXカゲキ派	セイキマツ カゲキハ	seikimatsu-kagekiha	19xx-kageki-ha	VERIFIED	CHANGED		[confirmed]  | 右京あやね作 全8巻 マーガレットコミックス (mangaseek.net/work/9690, Amazon). No official English title. 19XX=latin run kept per rule1 (seg 
 238	戦国BASARA4	センゴク バサラ フォー	sengoku-basara-fo	sengoku-basara4	OK	CHANGED		OK: 戦国 sengoku; BASARA4 latin
 239	戦国BASARA4 梵天丸編	センゴク バサラ フォー	sengoku-basara-fo	sengoku-basara4-bontenmaru-hen	OK	CHANGED		OK: BASARA4 latin; 梵天丸編 bontenmaru-hen
 240	もっともっともっと感動したい!100p	モット モット モット カンドウシタイ 100p	motto-motto-motto-kandoshitai-100p	motto-motto-motto-kandoshitai-100p	OK			OK: もっともっともっと motto×3; 感動したい kandou→kandoshitai; 100p latin
 241	70's愛ライフ	セブンティーズ アイ ライフ	sebunteiizu-ai-raifu	70s-ai-life	OK	CHANGED		OK: 70's latin('除去→70s); 愛 ai; ライフ=life英音写
 242	月下の一群part2	ゲッカ ノ イチグン	gekka-no-ichigun	gekka-no-ichigun-part2	OK	CHANGED		OK: 月下の一群 gekka-no-ichigun; part2 latin
-243	18禁別冊ストラーダもぐもぐBL	ジュウハチキン ベッサツ ストラーダ モグモグ ビーエル	juhachikin-bessatsu-sutoraada-mogumogu-biieru	18-kin-bessatsu-strada-mogumogu-bl	LOW	CHANGED		LOW: 18 latin digit keep+禁 kin; 別冊 bessatsu; ストラーダ=Strada伊音写; もぐもぐ mogumogu; BL latin
+243	18禁別冊ストラーダもぐもぐBL	ジュウハチキン ベッサツ ストラーダ モグモグ ビーエル	juhachikin-bessatsu-sutoraada-mogumogu-biieru	18-kin-bessatsu-strada-mogumogu-bl	UNRESOLVED	CHANGED		[unresolved]  | BL anthology '別冊ストラーダ'; no reliable source found confirming official Latin spelling of ストラーダ (Strada is standard Italian
 244	カウントダウン7 days	カウントダウン 7 days	kauntodaun-7-days	countdown-7-days	OK	CHANGED		OK: カウントダウン=countdown英音写; 7 days latin
 245	festa! 七瀬葵20周年アニバーサリーコレクション	フェスタ ナナセ アオイ ニジッシュウネン アニバーサリー コレクション	fesuta-nanase-aoi-nijisshunen-anibaasarii-korekushon	festa-nanase-aoi-20-shunen-anniversary-collection	OK	CHANGED		OK: festa! latin; 七瀬葵 nanase-aoi; 20 latin; 周年 shuunen→shunen; アニバーサリー/コレクション=anniversary/collection音写
 246	1/Nのゆらぎ	エヌブン ノ イチ ノ ユラギ	enubun-no-ichi-no-yuragi	1-n-no-yuragi	OK	CHANGED		OK: 1/N latin(/→hyphen→1-n); の no; ゆらぎ yuragi
 247	P.M.5のパステル	ピーエム ゴ ノ パステル	piiemu-go-no-pasuteru	p-m-5-no-pastel	OK	CHANGED		OK: P.M.5 latin(.→hyphen→p-m-5); の no; パステル=pastel英音写
-248	あぁん・クレムリン　IQ200のソープ・ストーリー	アァン クレムリン	aan-kuremurin	aan-kremlin-iq200-no-soap-story	LOW	CHANGED		LOW: あぁん aan; クレムリン=Kremlin固有名音写; IQ200 latin; ソープ/ストーリー=soap/story英音写
+248	あぁん・クレムリン　IQ200のソープ・ストーリー	アァン クレムリン	aan-kuremurin	aan-kremlin-iq200-no-soap-story	UNRESOLVED	CHANGED		[unresolved]  | Web検索(Wikipedia/講談社/pixiv)でヒットする「クレムリン」はカレー沢薫の猫漫画で別作品。「あぁん・クレムリン IQ200のソープ・ストーリー」自体の信頼できる出典・公式英題は発見できず。憶測回避でcand維持(Kreml
 249	バーテンダー6stp	バーテンダー シックス ステップ	baatendaa-shikkusu-suteppu	bartender-6stp	OK	CHANGED		OK: バーテンダー=bartender英音写(公式英題); 6stp latin
-250	1Kアパートの王子様	1K アパート ノ オウジサマ	1k-apaato-no-oji-sama	1k-apato-no-ojisama	LOW	CHANGED		LOW: 1K latin; アパート=apartment略の和製語→ヘボンapato; 王子様 ojisama
+250	1Kアパートの王子様	1K アパート ノ オウジサマ	1k-apaato-no-oji-sama	1k-apato-no-ojisama	UNRESOLVED	CHANGED		[unresolved]  | cmoa/Amazon/BookLive等で大和名瀬のBL作品と確認、3巻完結。公式英題は無く日本語のみ流通。cand維持(1K latin/アパート→apato和製略/王子様=オウジサマ長音おう落としojisama正)。
 251	ギャラクシーエンジェル2nd	ギャラクシー エンジェル 2nd	gyarakushii-enjieru-2nd	galaxy-angel-2nd	OK	CHANGED		OK: ギャラクシーエンジェル=galaxy-angel英音写(公式); 2nd latin
 252	ギャラクシーエンジェル3rd	ギャラクシー エンジェル 3rd	gyarakushii-enjieru-3rd	galaxy-angel-3rd	OK	CHANGED		OK: カタカナ ギャラクシーエンジェル=公式英題 Galaxy Angel + ラテン3rd字面
 253	大橋裕之の1P	オオハシ ヒロユキ ノ ワンピー	ohashi-hiroyuki-no-wanpii	ohashi-hiroyuki-no-1p	OK	CHANGED		OK: 大橋裕之=ヘボン+助詞の+ラテン1P字面小文字
@@ -320,7 +320,7 @@ idx	title	seg	cur_slug	new_slug	conf	changed	flag	note
 318	トリコロMW-1056	トリコロ MW-1056	torikoro-mw1056	torikoro-mw-1056	OK	CHANGED		OK: トリコロ=固有名詞hebon torikoro; MW-1056=latin→mw-1056
 319	代紋TAKE2	エンブレム テイク ツー	enburemu-teiku-tsu	emblem-take2	OK	CHANGED		OK: 代紋=当て字読みエンブレム=emblem(英語音写一致); TAKE2=latin take2
 320	ダーリンはno.1	ダーリン ワ ナンバー ワン	daarin-wa-nanbaa-wan	darling-wa-no-1	OK	CHANGED		OK: ダーリン=darling(英語音写一致); は=wa; no.1=latin→no-1
-321	コミックネオロマンスmix 4コマ トレーディングロマンス	コミック ネオロマンス mix 4コマ トレーディング ロマンス	komikku-neoromansu-mix-4koma-toreedingu-romansu	comic-neo-romance-mix-4-koma-trading-romance	LOW	CHANGED		LOW: コミックcomic/ネオロマンス=Koei brand Neo Romance/トレーディングtrading/ロマンスromance(英語音写一致), mix latin, 4コマ4-koma; brand romanization要検証
+321	コミックネオロマンスmix 4コマ トレーディングロマンス	コミック ネオロマンス mix 4コマ トレーディング ロマンス	komikku-neoromansu-mix-4koma-toreedingu-romansu	comic-neo-romance-mix-4-koma-trading-romance	VERIFIED	CHANGED		"[corrected] Comic Neo Romance MIX 4-koma Trading Romance | Amazon公式書誌『コミック ネオロマンスMIX 4コマ Trading Romance』(KOEI GAME COMICS,湖西晶)で表紙latin確定。KOEIブランド公式表記Neo Romance+表紙latin""Trading R"
 322	樹海少年ZOO1	ジュカイ ショウネン ZOO1	jukai-shonen-zo1	jukai-shonen-zoo1	OK	CHANGED		OK: 樹海jukai; 少年shonen; ZOO1=latin zoo1
 323	Cafe南青山骨董通りsince 1962	カフェ ミナミアオヤマ コットウドオリ シンス センキュウヒャクロクジュウニ	kafe-minamiaoyama-kottodori-shinsu-senkyuhyakurokujuni	cafe-minamiaoyama-kottodori-since-1962	OK	CHANGED		OK: Cafe=latin cafe; 南青山minamiaoyama; 骨董通りkottodori; since 1962=latin→since-1962
 324	V8探偵Dick	V8 タンテイ Dick	v8-tantei-dick	v8-tantei-dick	OK			OK: V8=latin v8; 探偵tantei; Dick=latin dick
@@ -350,7 +350,7 @@ idx	title	seg	cur_slug	new_slug	conf	changed	flag	note
 348	谷村ひとしの爆裂CR海物語攻略2002	タニムラ ヒトシ ノ バクレツ CR ウミ モノガタリ コウリャク 2002	tanimura-hitoshi-no-bakuretsu-cr-umi-monogatari-koryaku-2002	tanimura-hitoshi-no-bakuretsu-cr-umi-monogatari-koryaku-2002	OK			OK: CR=字面latin, 残り=hepburn, 2002=keep
 349	3年C組呪いの黒板	サンネン シーグミ ノロイ ノ コクバン	sannen-shiigumi-noroi-no-kokuban	3-nen-c-gumi-noroi-no-kokuban	OK	CHANGED		OK: 3=keep, C=字面latin, 年組呪いの黒板=hepburn
 350	胸キュン刑事2みるくCC	ムネキュン デカ 2 ミルク CC	munekyun-deka-2-miruku-cc	munekyun-deka-2-milk-cc	OK	CHANGED		OK: 胸キュン刑事=hepburn, 2=keep, みるく=milk loanword, CC=字面latin
-351	ホステスNo.1ネオン街の再建屋みなみ、登場!!	ホステスナンバーワン	hosutesunanbaawan	hostess-no-1-neon-gai-no-saikenya-minami-tojo	LOW	CHANGED		LOW: seg部分のみ, ホステス=hostess/ネオン=neon loanword, No.1=latin, 再建屋/登場 読み推定
+351	ホステスNo.1ネオン街の再建屋みなみ、登場!!	ホステスナンバーワン	hosutesunanbaawan	hostess-no-1-neon-gai-no-saikenya-minami-tojo	UNRESOLVED	CHANGED		[unresolved]  | Amazon/yodobashi/k-mangaで郷力也『ホステスNo.1ネオン街の再建屋みなみ、登場!!』(双葉社アクションC)と確認、全3巻。公式英題は無く日本語のみ。candのseg+ヘボン推定を裏取りできず維持。
 352	新ホステスNo.1	シンホステスナンバーワン	shinhosutesunanbaawan	shin-hostess-no-1	OK	CHANGED		OK: 新=shin hepburn, ホステス=hostess loanword, No.1=latin
 353	ホスピ・めし2nd season	ホスピ メシ セカンド シーズン	hosupi-meshi-sekando-shiizun	hosupi-meshi-2nd-season	OK	CHANGED		OK: ホスピ・めし=coin word hepburn(・→hyphen), '2nd season'=latin run字面
 354	ホスピめし 2nd season	ホスピ メシ セカンド シーズン	hosupi-meshi-sekando-shiizun	hosupi-meshi-2nd-season	OK	CHANGED		OK: idx353同題 表記揺れ, '2nd season'=latin run字面
@@ -363,7 +363,7 @@ idx	title	seg	cur_slug	new_slug	conf	changed	flag	note
 361	1999ノストラダムス地獄のX-file	センキュウヒャク クジュウク ノストラダムス ジゴク ノ エックス ファイル	senkyuhyaku-kujuku-nosutoradamusu-jigoku-no-ekkusu-fairu	1999-nostradamus-jigoku-no-x-file	OK	CHANGED		OK: 1999=keep, ノストラダムス=Nostradamus固有名英綴り, X-file=字面latin
 362	マンガちょっとHな江戸の小噺200	マンガ チョット H ナ エド ノ コバナシ 200	manga-chotto-h-na-edo-no-kobanashi-200	manga-chotto-h-na-edo-no-kobanashi-200	OK			OK: H=字面latin, 200=keep, 残りhepburn
 363	No.1海童	NO 1 カイドウ	no-1-kaido	no-1-kaido	OK			OK: No.1=latin run字面, 海童=kaido hepburn
-364	4×4～お隣さんは4B男子～	フォー バイ フォー オトナリサン ワ ヨン ビー ダンシ	fo-bai-fo-otonari-san-wa-yon-bii-danshi	4x4-otonari-san-wa-4b-danshi	LOW	CHANGED		LOW: 4×4の×は記号除去で'44'(意味曖昧), お隣さんは4B男子=hepburn+4b字面latin
+364	4×4～お隣さんは4B男子～	フォー バイ フォー オトナリサン ワ ヨン ビー ダンシ	fo-bai-fo-otonari-san-wa-yon-bii-danshi	4x4-otonari-san-wa-4b-danshi	UNRESOLVED	CHANGED		[unresolved]  | cmoa/集英社/ebookjapanで森倉チロル『4×4～お隣さんは4B男子～』(ザ マーガレット,全3巻)少女漫画と確認。公式英題無し。4×4=読みフォーバイフォーで'4x4'表記は妥当、4B字面latin。cand維持。
 365	びんぼうまんが家!都内で月3万円の3DKに住んでます	ビンボウ マンガカ トナイ デ ツキ 3マンエン ノ 3DK ニ スンデマス	binbo-mangaka-tonai-de-tsuki-3manen-no-3dk-ni-sundemasu	binbo-mangaka-tonai-de-tsuki-3-manen-no-3dk-ni-sundemasu	OK	CHANGED		OK: 3=keep, 3DK=字面latin, びんぼうまんが家=hepburn長音落とし(!→hyphen)
 366	藤崎竜作品集1 PSYCHO+	フジサキ リュウ サクヒンシュウ イチ サイコ プラス	fujisaki-ryu-sakuhinshu-ichi-saiko-purasu	fujisaki-ryu-sakuhinshu-1-psycho	OK	CHANGED		OK: 藤崎竜作品集=hepburn, 1=keep, 'PSYCHO+'=字面latin(+除去)
 367	じょしラク!2 Years Later	ジョシラク ツー イヤーズ レイター	joshiraku-tsu-iyaazu-reitaa	joshiraku-2-years-later	OK	CHANGED		OK: じょしラク=joshiraku hepburn(!→hyphen), '2 Years Later'=latin run字面
@@ -378,8 +378,8 @@ idx	title	seg	cur_slug	new_slug	conf	changed	flag	note
 376	プリズマ・イリヤ2wei!	プリズマ イリヤ 2wei	purizuma-iriya-2wei	prisma-illya-2wei	OK	CHANGED		OK: プリズマ☆イリヤ=Fate kaleid公式英題Prisma Illya, ・→hyphen, '2wei'=字面latin(!除去)
 377	プリズマ☆イリヤ2wei!	プリズマ イリヤ ツヴァイ	purizuma-iriya-tsuvai	prisma-illya-2wei	OK	CHANGED		OK: idx376同題 表記揺れ(☆除去), Prisma Illya公式英題, '2wei'=字面latin
 378	東京闇虫-2nd scenario-パンドラ	トウキョウ ヤミムシ セカンド シナリオ パンドラ	tokyo-yamimushi-sekando-shinario-pandora	tokyo-yamimushi-2nd-scenario-pandora	OK	CHANGED		OK: 東京闇虫=tokyo-yamimushi(ヘボン),「2nd scenario」latin字面→2nd-scenario,パンドラ=pandora(音写)
-379	アイドルマスター2 the world is all one!!	アイドル マスター ツー ザ ワールド イズ オール ワン	aidoru-masutaa-tsu-za-waarudo-izu-oru-wan	idol-master-2-the-world-is-all-one	LOW	CHANGED		LOW: アイドルマスター=idol-master(音写,公式iDOLM@STER),2数字keep,「the world is all one」latin
-380	アイドルマスター2 The world is all one!!	アイドル マスター ツー ザ ワールド イズ オール ワン	aidoru-masutaa-tsu-za-waarudo-izu-oru-wan	idol-master-2-the-world-is-all-one	LOW	CHANGED		LOW: 379と同題(大文字差のみ)。idol-master音写+数字keep+latin
+379	アイドルマスター2 the world is all one!!	アイドル マスター ツー ザ ワールド イズ オール ワン	aidoru-masutaa-tsu-za-waarudo-izu-oru-wan	idol-master-2-the-world-is-all-one	VERIFIED	CHANGED		"[confirmed] The iDOLM@STER 2: The world is all one!! | Wikipedia/KADOKAWA/Amazonで公式題『アイドルマスター2 The world is all one!!』(祐佑/バンダイナムコ,電撃C全5巻)確定。latin部""the world is all one""は公式題に逐語"
+380	アイドルマスター2 The world is all one!!	アイドル マスター ツー ザ ワールド イズ オール ワン	aidoru-masutaa-tsu-za-waarudo-izu-oru-wan	idol-master-2-the-world-is-all-one	VERIFIED	CHANGED		"[confirmed] The iDOLM@STER 2: The world is all one!! | 379と同題(大文字差のみ)。同一出典で公式題confirm。latin""The world is all one""逐語一致+idol-master音写+2 keep。candと整合。"
 381	〔○生〕お仕事ウラ話読者投稿ベスト 元スタッフが激白!衝撃ヤバヤバ業界(秘)スクープ416p!!	ナマ オシゴト ウラバナシ ドクシャ トウコウ ベスト モト スタッフ ガ ゲキハク ショウゲキ ヤバヤバ ギョウカイ ヒ スクープ ヨンヒャクジュウロク ピー	nama-oshigoto-urabanashi-dokusha-toko-besuto-moto-sutaffu-ga-gekihaku-shogeki-yabayaba-gyokai-hi-sukupu-yonhyakujuroku-pii	nama-oshigoto-urabanashi-dokusha-toko-best-moto-staff-ga-gekihaku-shogeki-yabayaba-gyokai-hi-scoop-416p	OK	CHANGED		OK: 〔○生〕=nama,日本語ヘボン,ベスト/スタッフ/スクープ=best/staff/scoop音写,416p latin字面
 382	〔○生〕トンデモ冠婚葬祭読者投稿ベスト 結婚式こぼれ話!新郎新婦ドタバタ目撃談416p!!	ナマ トンデモ カンコン ソウサイ ドクシャ トウコウ ベスト ケッコンシキ コボレバナシ シンロウ シンプ ドタバタ モクゲキダン ヨンヒャクジュウロク ピー	nama-tondemo-kankon-sosai-dokusha-toko-besuto-kekkonshiki-koborebanashi-shinro-shinpu-dotabata-mokugekidan-yonhyakujuroku-pii	nama-tondemo-kankon-sosai-dokusha-toko-best-kekkonshiki-koborebanashi-shinro-shinpu-dotabata-mokugekidan-416p	OK	CHANGED		OK: nama+日本語ヘボン,ベスト=best音写,416p latin字面
 383	メガ盛!本当にあった〔○生〕)絶叫パニック24時SP	メガモリ ホントウ ニ アッタ ナマ ゼッキョウ パニック ニジュウヨジ エスピー	megamori-honto-ni-atta-nama-zekkyo-panikku-nijuyoji-esupii	megamori-honto-ni-atta-nama-zekkyo-panic-24-ji-sp	OK	CHANGED		OK: ヘボン,パニック=panic音写,24時=24-ji数字keep,SP=sp latin
@@ -398,28 +398,28 @@ idx	title	seg	cur_slug	new_slug	conf	changed	flag	note
 396	Capeta F3マカオグランプリ編	カペタ エフスリー マカオ グランプリヘン	kapeta-efusurii-makao-guranpurihen	capeta-f3-macau-grand-prix-hen	OK	CHANGED		OK: Capeta/F3 latin,マカオ=macau(地名音写),グランプリ=grand-prix音写,編=hen
 397	無慈悲な8bit	ムジヒ ナ エイト ビット	mujihi-na-eito-bitto	mujihi-na-8bit	OK	CHANGED		OK: 無慈悲な=mujihi-na ヘボン,「8bit」latin字面→8bit
 398	あなたが選ぶブラック・ジャックBEST40	アナタ ガ エラブ ブラック ジャック ベスト ヨンジュウ	anata-ga-erabu-burakku-jakku-besuto-yonju	anata-ga-erabu-black-jack-best-40	OK	CHANGED		OK: あなたが選ぶ=anata-ga-erabu,ブラック・ジャック=black-jack(公式Black Jack),BEST40=best-40 latin
-399	3×3(サザン)EYES鬼籍の闇の契約者	サザン アイズ キセキ ノ ヤミ ノ ケイヤクシャ	sazan-aizu-kiseki-no-yami-no-keiyakusha	sazan-eyes-kiseki-no-yami-no-keiyakusha	LOW	CHANGED		LOW: 3×3(サザン)EYES=sazan-eyes(読みサザン+EYES latin,×記号は除去),鬼籍の闇の契約者ヘボン
-400	3×3EYES 幻獣の森の遭難者	サザン アイズ ゲンジュウ ノ モリ ノ ソウナンシャ	sazan-aizu-genju-no-mori-no-sonansha	sazan-eyes-genju-no-mori-no-sonansha	LOW	CHANGED		LOW: 3×3EYES=sazan-eyes,幻獣の森の遭難者=genju-no-mori-no-sonansha ヘボン
-401	3×3EYES鬼籍の闇の契約者	サザン アイズ キセキ ノ ヤミ ノ ケイヤクシャ	sazan-aizu-kiseki-no-yami-no-keiyakusha	sazan-eyes-kiseki-no-yami-no-keiyakusha	LOW	CHANGED		LOW: 399と同題(空白差のみ)。sazan-eyes+ヘボン
+399	3×3(サザン)EYES鬼籍の闇の契約者	サザン アイズ キセキ ノ ヤミ ノ ケイヤクシャ	sazan-aizu-kiseki-no-yami-no-keiyakusha	3x3-eyes-kiseki-no-yami-no-keiyakusha	VERIFIED	CHANGED		"[corrected] 3×3 Eyes | Wikipedia/ANN/Dark Horseで高田裕三『3×3 EYES』読みサザンと確定、英語版公式題は""3×3 Eyes""。×は記号除去対象なので'3-3-eyes'は意味喪失、確立した読みローマ字サザン→sazan-eyesを採用"
+400	3×3EYES 幻獣の森の遭難者	サザン アイズ ゲンジュウ ノ モリ ノ ソウナンシャ	sazan-aizu-genju-no-mori-no-sonansha	3x3-eyes-genju-no-mori-no-sonansha	VERIFIED	CHANGED		[corrected] 3×3 Eyes | Wikipedia/Dark Horse: 高田裕三作の公式英題は『3×3 Eyes』(読みサザンアイズだが公式は数字題)。slugで×不可→3x3。旧 sazan-eyes→3x3-eyes に修正。副題 幻獣の森の遭難者は公式英題なし→
+401	3×3EYES鬼籍の闇の契約者	サザン アイズ キセキ ノ ヤミ ノ ケイヤクシャ	sazan-aizu-kiseki-no-yami-no-keiyakusha	3x3-eyes-kiseki-no-yami-no-keiyakusha	VERIFIED	CHANGED		[corrected] 3×3 Eyes | 同フランチャイズ公式英題『3×3 Eyes』(Dark Horse/Wikipedia)。続編『鬼籍の闇の契約者』(講談社,高田裕三)は公式英訳副題なし。sazan-eyes→3x3-eyes へ修正、副題はsegヘボン kiseki-no
 402	ハートフル4コマFate/hollow ataraxia	ハートフル ヨンコマ フェイト ホロウ アタラクシア	haatofuru-yonkoma-feito-horo-atarakushia	heartful-4-koma-fate-hollow-ataraxia	OK	CHANGED		OK: ハートフル=heartful音写,4コマ=4-koma,「Fate/hollow ataraxia」latin(/→hyphen)
-403	ネコたーぼ16V	ネコ ターボ 16 V	neko-taabo-16-v	neko-turbo-16v	LOW	CHANGED		LOW: ネコ=neko(和),たーぼ=turbo(読みターボ=音写),「16V」latin字面→16v
+403	ネコたーぼ16V	ネコ ターボ 16 V	neko-taabo-16-v	neko-turbo-16v	UNRESOLVED	CHANGED		[unresolved]  | 実在確認: そうま竜也『ネコた～ぼ16V』電撃コミックスEX/主婦の友社1996 (Amazon/KADOKAWA/楽天/NDL書誌)。公式英題は存在せず裏取り不可。たーぼ=turbo音写・16Vラテン字面でcand妥当だが確証出典なしのた
 404	8LDK-屍者ノ王-	ハチエルディーケー シシャ ノ オウ	hachierudiikee-shisha-no-o	8ldk-shisha-no-o	OK	CHANGED		OK: 「8LDK」latin字面→8ldk,屍者ノ王=shisha-no-o(王=ou長音落とす)
 405	ファンが選ぶONE PIECE“涙”ベスト10!!	ファン ガ エラブ ワン ピース ナミダ ベスト テン	fan-ga-erabu-wan-piisu-namida-besuto-ten	fan-ga-erabu-one-piece-namida-best-10	OK	CHANGED		OK: ファンが選ぶ=fan-ga-erabu,「ONE PIECE」latin,涙=namida(引用符除去),ベスト10=best-10音写+数字
 406	ファンが選ぶONE PIECE”涙”ベスト10!!	ファン ガ エラブ ワン ピース ナミダ ベスト テン	fan-ga-erabu-wan-piisu-namida-besuto-ten	fan-ga-erabu-one-piece-namida-best-10	OK	CHANGED		OK: 405と同題(引用符差のみ)
 407	湯けむりスナイパーpart 2	ユケムリ スナイパー part 2	yukemuri-sunaipaa-part-2	yukemuri-sniper-part-2	OK	CHANGED		OK: 湯けむり=yukemuri ヘボン,スナイパー=sniper音写,「part 2」latin→part-2
 408	Dragon ballジャンプファンが選んだベストシーンtop 10!!	Dragon ball ジャンプ ファン ガ エランダ ベストシーン top 10!!	dragon-ball-janpu-fan-ga-eranda-besutoshiin-top-10	dragon-ball-jump-fan-ga-eranda-best-scene-top-10	OK	CHANGED		OK: 「Dragon ball」latin,ジャンプ=jump(誌名)音写,ファンが選んだ=fan-ga-eranda,ベストシーン=best-scene音写,「top 10」latin
-409	バンクafter5	バンク after 5	banku-after-5	bank-after5	LOW	CHANGED		LOW: バンク=bank音写,「after5」latin字面(字面に空白なし)→after5
+409	バンクafter5	バンク after 5	banku-after-5	bank-after5	VERIFIED	CHANGED		[confirmed]  | NDL書誌で実在確認: 成毛厚子『バンクafter5』講談社。公式英題は無いが バンク=bank音写, after5=ラテン字面 でslug規則に整合。cand bank-after5 を確認(変更不要)。https://ndlsearch
 410	1Kの王様	1K ノ オウサマ	1k-no-o-sama	1k-no-o-sama	OK			OK: 「1K」latin字面→1k,の王様=no-o-sama(王様=ou-sama長音落とす)
 411	DEAD OR ALIVE Xtreme Venus Vacation公式4コママンガやわらか4コマ☆ブイブイ	デッド オア アライヴ エクストリーム ヴィーナス ヴァケーション コウシキ ヨンコマ マンガ ヤワラカ ヨンコマ ブイブイ	deddo-oa-araivu-ekusutoriimu-viinasu-vakeeshon-koshiki-yonkoma-manga-yawaraka-yonkoma-buibui	dead-or-alive-xtreme-venus-vacation-koshiki-4-koma-manga-yawaraka-4-koma-buibui	OK	CHANGED		OK: 「DEAD OR ALIVE Xtreme Venus Vacation」latin,公式4コママンガ=koshiki-4-koma-manga,やわらか=yawaraka,☆除去,ブイブイ=buibui
 412	ホリミヤ メモリアルブック page.100	ホリミヤ メモリアル ブック ページ ヒャク	horimiya-memoriaru-bukku-peeji-hyaku	horimiya-memorial-book-page-100	OK	CHANGED		OK: ホリミヤ=horimiya,メモリアルブック=memorial-book音写,「page.100」latin(.→hyphen)→page-100
 413	バトルクラブ 2nd stage	バトル クラブ 2nd stage	batoru-kurabu-2nd-stage	battle-club-2nd-stage	OK	CHANGED		OK: バトルクラブ=battle-club音写,「2nd stage」latin→2nd-stage
 414	鋼の錬金術師20th anniversary book	ハガネ ノ レンキンジュツシ トゥエンティース アニバーサリー ブック	hagane-no-renkinjutsushi-toenteiisu-anibaasarii-bukku	hagane-no-renkinjutsushi-20th-anniversary-book	OK	CHANGED		OK: 鋼の錬金術師=hagane-no-renkinjutsushi ヘボン,「20th anniversary book」latin
-415	ありす19th	アリス ナインティーンス	arisu-nainteiinsu	alice-19th	LOW	CHANGED		LOW: ありす=alice(公式英題Alice 19th。読み名),「19th」latin字面
+415	ありす19th	アリス ナインティーンス	arisu-nainteiinsu	alice-19th	VERIFIED	CHANGED		[confirmed] Alice 19th | Viz Media公式/Wikipedia: 渡瀬悠宇『ありす19th』の公式英題は『Alice 19th』。ありす=alice(読み名と公式英題一致), 19thラテン字面。cand alice-19th 確認。https://www.v
 416	ロイヤル7days	ロイヤル セブン デイズ	roiyaru-sebun-deizu	royal-7days	OK	CHANGED		OK: ロイヤル=royal音写,「7days」latin字面→7days
 417	198Xメモリーズ	センキュウヒャクハチジュウエックス メモリーズ	senkyuhyakuhachijuekkusu-memoriizu	198x-memories	OK	CHANGED		OK: 「198X」latin字面→198x,メモリーズ=memories音写
-418	Epic of ゴルゴ13	エピック オブ ゴルゴ サーティーン	epikku-obu-gorugo-saateiin	epic-of-gorugo-13	LOW	CHANGED		LOW: 「Epic of」latin,ゴルゴ13=gorugo-13(公式Golgo 13。コイン名はヘボン但し公式綴り要検証)
-419	Legend of ゴルゴ13 アサシン・ローズ	レジェンド オブ ゴルゴ サーティーン アサシン ローズ	rejiendo-obu-gorugo-saateiin-asashin-rozu	legend-of-gorugo-13-assassin-rose	LOW	CHANGED		LOW: 「Legend of」latin,ゴルゴ13=gorugo-13(公式Golgo),アサシン・ローズ=assassin-rose音写
-420	Legend ofゴルゴ13 black	レジェンド オブ ゴルゴ サーティーン ブラック	rejiendo-obu-gorugo-saateiin-burakku	legend-of-gorugo-13-black	LOW	CHANGED		LOW: 手動 Legend of字面+ゴルゴ13(gorugo,418/419整合)+black
+418	Epic of ゴルゴ13	エピック オブ ゴルゴ サーティーン	epikku-obu-gorugo-saateiin	epic-of-golgo-13	VERIFIED	CHANGED		[corrected] Golgo 13 | Viz/Wikipedia: さいとう・たかを作の公式英題は『Golgo 13』(コイン名ゴルゴは公式綴り golgo)。『EPIC of ゴルゴ13』はリイド社の選集(BOOK WALKER等で実在確認)。gorugo→golgo に修正
+419	Legend of ゴルゴ13 アサシン・ローズ	レジェンド オブ ゴルゴ サーティーン アサシン ローズ	rejiendo-obu-gorugo-saateiin-asashin-rozu	legend-of-golgo-13-assassin-rose	VERIFIED	CHANGED		[corrected] Golgo 13 | 公式英題『Golgo 13』(Viz/Wikipedia)。『LEGEND OF ゴルゴ13 アサシン・ローズ』はローソン限定コンビニコミック2021(ローソン公式)。gorugo→golgo修正、アサシン・ローズ=Assassin Ros
+420	Legend ofゴルゴ13 black	レジェンド オブ ゴルゴ サーティーン ブラック	rejiendo-obu-gorugo-saateiin-burakku	legend-of-golgo-13-black	VERIFIED	CHANGED		[corrected] Golgo 13 | 公式英題『Golgo 13』(Viz/Wikipedia)。同 LEGEND OF ゴルゴ13 シリーズ(コンビニコミック)。gorugo→golgo修正、Legend of/black はラテン字面そのまま。https://en.wiki
 421	Legend ofゴルゴ13 white	Legend of ゴルゴ 13 white	legend-of-gorugo-13-white	legend-of-gorugo-13-white	OK			OK: latin 'Legend of'+'13 white'literal, JP ゴルゴ→gorugo
 422	Legend ofゴルゴ13クロス・オブ・アイアン	レジェンド オブ ゴルゴ サーティーン クロス オブ アイアン	rejiendo-obu-gorugo-saateiin-kurosu-obu-aian	legend-of-gorugo-13-cross-of-iron	OK	CHANGED		OK: クロス・オブ・アイアン=Cross of Iron(loanword音写)→英綴り
 423	Legend ofゴルゴ13ザ・ベスト4	レジェンド オブ ゴルゴ サーティーン ザ ベスト フォー	rejiendo-obu-gorugo-saateiin-za-besuto-fo	legend-of-gorugo-13-the-best-4	OK	CHANGED		OK: ザ・ベスト4=The Best 4, digit keep
@@ -448,7 +448,7 @@ idx	title	seg	cur_slug	new_slug	conf	changed	flag	note
 446	17歳初めてのH	17サイ ハジメテ ノ H	17sai-hajimete-no-h	17-sai-hajimete-no-h	OK	CHANGED		OK: 17 digit+歳=sai, 初めて=hajimete, の=no, latin H→h
 447	ロザリオとバンパイアseason2	ロザリオ ト バンパイア シーズン ツー	rozario-to-banpaia-shiizun-tsu	rosario-to-vampire-season-2	OK	CHANGED		OK: ロザリオ=Rosario, と=to, バンパイア=Vampire(loanword), latin season2→season-2
 448	特殊任務飛行隊KG200	トクシュ ニンム ヒコウタイ ケージー ニヒャク	tokushu-ninmu-hikotai-keejii-nihyaku	tokushu-ninmu-hikotai-kg200	OK	CHANGED		OK: 特殊任務飛行隊→Hepburn(飛行隊=hikotai長音落), latin KG200→kg200
-449	コミティア30thクロニクル	コミティア サーティース クロニクル	komiteia-saateiisu-kuronikuru	comitia-30th-chronicle	LOW	CHANGED		LOW: コミティア=Comitia(同人誌即売会名,綴り要確認), latin 30th, クロニクル=Chronicle
+449	コミティア30thクロニクル	コミティア サーティース クロニクル	komiteia-saateiisu-kuronikuru	comitia-30th-chronicle	VERIFIED	CHANGED		[confirmed] COMITIA 30th Chronicle | en.wikipedia.org/wiki/COMITIA confirms official English spelling 'COMITIA' (Hepburn Komitia, doujinshi convention). 30th
 450	10年ぶりに再会したクソガキは清純美少女JKに成長していた	ジュウネンブリ ニ サイカイ シタ クソガキ ワ セイジュン ビショウジョ ジェイケー ニ セイチョウ シテイタ	junenburi-ni-saikai-shita-kusogaki-wa-seijun-bishojo-jieikee-ni-seicho-shiteita	10nenburi-ni-saikai-shita-kusogaki-wa-seijun-bishojo-jk-ni-seicho-shiteita	OK	CHANGED		OK: 10 digit+年ぶり等Hepburn, は=wa, latin JK→jk
 451	LP～ライフ・パートナー～3番目の配偶者	エルピー ライフ パートナー サンバンメ ノ ハイグウシャ	erupii-raifu-paatonaa-sanbanme-no-haigusha	lp-life-partner-3banme-no-haigusha	OK	CHANGED		OK: latin LP, ライフ・パートナー=Life Partner(loanword), ～除去, 3番目=3banme, 配偶者=haigusha
 452	7人のシェイクスピアNON SANZ DROICT	シチニン ノ シェイクスピア ノン サンス ドロワ	shichinin-no-shieikusupia-non-sansu-dorowa	7-nin-no-shakespeare-non-sanz-droict	OK	CHANGED		OK: 7 digit+人=nin, シェイクスピア=Shakespeare, latin NON SANZ DROICT literal
@@ -470,39 +470,39 @@ idx	title	seg	cur_slug	new_slug	conf	changed	flag	note
 468	上條淳士画集1983 SINCE	カミジョウ アツシ ガシュウ センキュウヒャクハチジュウサン シンス	kamijo-atsushi-gashu-senkyuhyakuhachiju-san-shinsu	kamijo-atsushi-gashu-1983-since	OK	CHANGED		OK: 上條淳士画集→kamijo-atsushi-gashu(おう落とす), latin 1983 SINCE→1983-since
 469	Barレモン・ハート ドラマ・シーズン2エピソード集	Bar レモン ハート	bar-remon-haato	bar-remon-haato	OK			OK: Bar→bar(latin), レモン・ハート→remon-haato(seg);サブ題シーズン2は画集/集の付帯で本題のみ採用
 470	特区八犬士［code:T-8］	トック ハッケンシ コード ティー エイト	tokku-hakkenshi-kodo-teii-eito	tokku-hakkenshi-code-t-8	OK	CHANGED		OK: 特区八犬士→tokku-hakkenshi(ヘボン), latin [code:T-8]→code-t-8
-471	KING OF PRISM by PrettyRhythm 4コマアンソロジー 次世代編	キング オブ プリズム バイ プリティ リズム ヨンコマ アンソロジー	kingu-obu-purizumu-bai-puritei-rizumu-yonkoma-ansorojii	king-of-prism-by-prettyrhythm-4-koma-anthology-jisedai-hen	LOW	CHANGED		LOW: latin KING OF PRISM by PrettyRhythm字面→king-of-prism-by-prettyrhythm, 4コマ→4koma, アンソロジー→anthology, 次世代編→jisedai-hen
+471	KING OF PRISM by PrettyRhythm 4コマアンソロジー 次世代編	キング オブ プリズム バイ プリティ リズム ヨンコマ アンソロジー	kingu-obu-purizumu-bai-puritei-rizumu-yonkoma-ansorojii	king-of-prism-by-prettyrhythm-4-koma-anthology-jisedai-hen	VERIFIED	CHANGED		[confirmed] KING OF PRISM by Pretty Rhythm (4-koma Anthology, Next Generation arc) | tatsunoko.co.jp/en works page = official brand 'KING OF PRISM by Pretty Rhythm'; ja.wikipedia/Amazon字面は 'PrettyRhythm'(無
 472	3D彼女	リアル ガール	riaru-gaaru	3d-kanojo	OK	CHANGED		OK: latin 3D→3d, 彼女→kanojo(segリアルガールは読み補注だが字面は彼女=kanojo)
-473	3D彼女リアルガール	スリーディー カノジョ リアル ガール	suriidii-kanojo-riaru-gaaru	3d-kanojo-real-girl	LOW	CHANGED		LOW: 3D→3d(latin), 彼女→kanojo, リアルガール=外来語当て字→real-girl(英音写一致)
-474	ズームインage25	ズームインエイジトェンティファイブ	zumuineijitoenteifaibu	zoom-in-age-25	LOW	CHANGED		LOW: ズームインage25→ズームイン=zoom-in(英音写), latin age→age, 数字25keep
+473	3D彼女リアルガール	スリーディー カノジョ リアル ガール	suriidii-kanojo-riaru-gaaru	3d-kanojo-real-girl	VERIFIED	CHANGED		[confirmed] Real Girl (3D Kanojo: Real Girl) | en.wikipedia.org/wiki/Real_Girl_(manga); AniList/MAL公式英題 '3D Kanojo: Real Girl'。3D=latin keep, 彼女→kanojo, リアルガール=英音写→rea
+474	ズームインage25	ズームインエイジトェンティファイブ	zumuineijitoenteifaibu	zoom-in-age-25	UNRESOLVED	CHANGED		[unresolved]  | 神奈幸子作のマイナー作品。Book☆Walker/BookLive等の販売頁のみで公式英題の出典なし(bookwalker.jp/series/295869)。憶測回避でcand_slug維持: ズームイン=zoom-in(英音写), ag
 475	100万回のkiss	ヒャクマンカイ ノ キス	hyakumankai-no-kisu	hyakumankai-no-kiss	OK	CHANGED		OK: 100万回の→hyakumankai-no(漢数字読み), latin kiss→kiss
 476	V2パンツァー	V2 パンツァー	v2-pantsuaa	v2-pantsaa	OK	CHANGED		OK: latin V2→v2, パンツァー→pantsaa(seg、独語Panzerだが当て字音写;固有題保持ヘボン)
-477	銀河鉄道999 ANOTHER STORYアルティメットジャーニー	ギンガ テツドウ スリーナイン アナザー ストーリー アルティメット ジャーニー	ginga-tetsudo-suriinain-anazaa-sutorii-aruteimetto-jaanii	ginga-tetsudo-999-another-story-ultimate-journey	LOW	CHANGED		LOW: 銀河鉄道→ginga-tetsudo, 999数字keep, latin ANOTHER STORY字面→another-story, アルティメットジャーニー外来語→ultimate-journey
+477	銀河鉄道999 ANOTHER STORYアルティメットジャーニー	ギンガ テツドウ スリーナイン アナザー ストーリー アルティメット ジャーニー	ginga-tetsudo-suriinain-anazaa-sutorii-aruteimetto-jaanii	ginga-tetsudo-999-another-story-ultimate-journey	VERIFIED	CHANGED		[confirmed] Galaxy Express 999 ANOTHER STORY Ultimate Journey | ja.wikipedia確認。franchise公式英題'Galaxy Express 999'は銀河鉄道の意訳→slug規則#2で漢字和語はヘボン(鬼滅型)=ginga-tetsudo維持。999 latin keep, ANOTHER 
 478	銀河鉄道999 perfect book	ギンガ テツドウ 999 perfect book	ginga-tetsudo-999-perfect-bok	ginga-tetsudo-999-perfect-book	OK	CHANGED		OK: 銀河鉄道→ginga-tetsudo, 999keep, latin perfect book→perfect-book
-479	コミティア30thクロニクル	コミティア サーティース クロニクル	komiteia-saateiisu-kuronikuru	comitia-30th-chronicle	LOW	CHANGED		LOW: コミティア→comitia(英固有), latin 30th→30th, クロニクル外来語→chronicle
+479	コミティア30thクロニクル	コミティア サーティース クロニクル	komiteia-saateiisu-kuronikuru	comitia-30th-chronicle	VERIFIED	CHANGED		[confirmed] COMITIA 30th Chronicle | idx449と同一作品。en.wikipedia.org/wiki/COMITIA で公式英表記'COMITIA'確認。cand_slug整合。
 480	緋賀ゆかり画集15th ART WORKS	ヒガ ユカリ ガシュウ フィフティーンス アート ワークス	higa-yukari-gashu-fifuteiinsu-aato-waakusu	higa-yukari-gashu-15th-art-works	OK	CHANGED		OK: 緋賀ゆかり画集→higa-yukari-gashu, latin 15th ART WORKS→15th-art-works
 481	D・N・〔A^2〕	ディー エヌ エー ツー	dii-enu-ee-tsu	d-n-a2	OK	CHANGED		OK: D・N・〔A^2〕字面latin→d-n-a2(・→hyphen, ^除去)
 482	秘密 season0	ヒミツ シーズン ゼロ	himitsu-shiizun-zero	himitsu-season-0	OK	CHANGED		OK: 秘密→himitsu(ヘボン), latin season0→season-0
 483	秘密season0	ヒミツ シーズン ゼロ	himitsu-shiizun-zero	himitsu-season0	OK	CHANGED		OK: 秘密→himitsu, latin season0字面連結→season0(間に空白無)
-484	エンジェル・ハート 2ndシーズン	エンジェル ハート 2nd シーズン	enjieru-haato-2nd-shiizun	angel-heart-2nd-season	LOW	CHANGED		LOW: エンジェル・ハート外来語当て字→angel-heart(英音写一致), latin 2nd→2nd, シーズン→season
-485	キカイダー02Special Graphics Edition	キカイダー ゼロツー スペシャル グラフィックス エディション	kikaidaa-zerotsu-supesharu-gurafikkusu-edishon	kikaider-02-special-graphics-edition	LOW	CHANGED		LOW: キカイダー固有→kikaider(公式英表記), latin 02 Special Graphics Edition→02-special-graphics-edition
-486	サイボーグ009 BGOOPARTS DELETE	サイボーグ ゼロゼロナイン ビゴオーパーツ デリート	saibogu-zerozeronain-bigoopaatsu-deriito	cyborg-009-bgooparts-delete	LOW	CHANGED		LOW: サイボーグ外来語→cyborg, 009数字keep, latin BGOOPARTS DELETE→bgooparts-delete
-487	仮面ライダーV3	カメンライダー ブィ3	kamenraidaa-bui3	kamen-rider-v3	LOW	CHANGED		LOW: 仮面ライダー公式英題→kamen-rider, latin V3→v3
-488	石ノ森章太郎変身ヒーロー画集 after 1975	イシノモリ ショウタロウ ヘンシン ヒーロー ガシュウ アフター センキュウヒャクナナジュウゴ	ishinomori-shotaro-henshin-hiiro-gashu-afutaa-senkyuhyakunanajugo	ishinomori-shotaro-henshin-hero-gashu-after-1975	LOW	CHANGED		LOW: 石ノ森章太郎変身ヒーロー画集→ishinomori-shotaro-henshin-hero-gashu(ヒーロー外来語=hero), latin after 1975→after-1975
-489	石ノ森章太郎変身ヒーロー画集 before 1975	イシノモリ ショウタロウ ヘンシン ヒーロー ガシュウ ビフォア センキュウヒャクナナジュウゴ	ishinomori-shotaro-henshin-hiiro-gashu-bifoa-senkyuhyakunanajugo	ishinomori-shotaro-henshin-hero-gashu-before-1975	LOW	CHANGED		LOW: 同前, latin before 1975→before-1975
-490	地球ナンバーV-7	チキユウ ナンバー ブイ セブン	chikiyu-nanbaa-bui-sebun	chikyu-number-v-7	LOW	CHANGED		LOW: 地球→chikyu(ヘボン), ナンバー外来語→number, latin V-7→v-7
+484	エンジェル・ハート 2ndシーズン	エンジェル ハート 2nd シーズン	enjieru-haato-2nd-shiizun	angel-heart-2nd-season	VERIFIED	CHANGED		[confirmed] Angel Heart | en.wikipedia.org/wiki/Angel_Heart_(manga)=北条司作、公式英題'Angel Heart'(音写一致)。2nd=latin keep, シーズン→season。cand_slug整合。
+485	キカイダー02Special Graphics Edition	キカイダー ゼロツー スペシャル グラフィックス エディション	kikaidaa-zerotsu-supesharu-gurafikkusu-edishon	kikaider-02-special-graphics-edition	VERIFIED	CHANGED		[confirmed] Kikaider Code 02 (Special Graphics Edition) | ANN/CMX Manga/Amazon=英訳版'Kikaider Code 02'(MEIMU作)で固有名詞'Kikaider'確定。'Code'は英版publisher追加で和題'キカイダー02'には無し→02 latin keep。S
+486	サイボーグ009 BGOOPARTS DELETE	サイボーグ ゼロゼロナイン ビゴオーパーツ デリート	saibogu-zerozeronain-bigoopaatsu-deriito	cyborg-009-bgooparts-delete	VERIFIED	CHANGED		[confirmed] Cyborg 009 BGOOPARTS DELETE | 秋田書店公式/cmoa: サイボーグ009は確立英題 Cyborg 009。BGOOPARTS DELETE は造語ラテン(BG+OOPARTS)でそのまま。cand_slug整合。
+487	仮面ライダーV3	カメンライダー ブィ3	kamenraidaa-bui3	kamen-rider-v3	VERIFIED	CHANGED		[confirmed] Kamen Rider V3 | en.wikipedia/Crunchyroll/Kamen Rider Wiki: 公式英題 Kamen Rider V3 (V3=Version 3)。ラテンV3→v3。cand_slug整合。
+488	石ノ森章太郎変身ヒーロー画集 after 1975	イシノモリ ショウタロウ ヘンシン ヒーロー ガシュウ アフター センキュウヒャクナナジュウゴ	ishinomori-shotaro-henshin-hiiro-gashu-afutaa-senkyuhyakunanajugo	ishinomori-shotaro-henshin-hero-gashu-after-1975	VERIFIED	CHANGED		[confirmed] (none — art book, romanized) | TSUTAYA/Amazon.co.jp(ISBN9784894528147): 石ノ森章太郎 変身ヒーロー画集 After1975。公式英題なし=seg基準ヘボン、ヒーロー=hero、After 1975ラテン保持。cand_slug整合
+489	石ノ森章太郎変身ヒーロー画集 before 1975	イシノモリ ショウタロウ ヘンシン ヒーロー ガシュウ ビフォア センキュウヒャクナナジュウゴ	ishinomori-shotaro-henshin-hiiro-gashu-bifoa-senkyuhyakunanajugo	ishinomori-shotaro-henshin-hero-gashu-before-1975	VERIFIED	CHANGED		[confirmed] (none — art book, romanized) | 楽天/Amazon: 石ノ森章太郎 変身ヒーロー画集 Before 1975(After1975の対巻)。公式英題なし=ヘボン、Before 1975ラテン保持。cand_slug整合。
+490	地球ナンバーV-7	チキユウ ナンバー ブイ セブン	chikiyu-nanbaa-bui-sebun	chikyu-number-v-7	VERIFIED	CHANGED		[confirmed] (none found — romanized) | mangapedia/紀伊國屋/NDL: 横山光輝SF作『地球ナンバーV-7』(セブン)。確証ある公式英題なし。地球=chikyū→chikyu、ナンバー外来語=number、V-7ラテン保持。cand_slug整合。
 491	鉄人28号DELUXE	テツジン ニジュウハチゴウ DELUXE	tetsujin-nijuhachigo-deluxe	tetsujin-28-go-deluxe	OK	CHANGED		OK: 鉄人28号→tetsujin-28-go(数字keep), latin DELUXE→deluxe
 492	5年めのUターン	ゴネンメ ノ ユーターン	gonenme-no-yutaan	5-nenme-no-u-turn	OK	CHANGED		OK: 数字5keep, めの→nenme-no, latin Uターン→u-turn(U字面+ターン外来語=turn)
 493	RUNNING第2部	ランニング	ranningu	running-dai-2-bu	OK	CHANGED		OK: latin RUNNING→running, 第2部→dai-2-bu(数字keep+ヘボン)
-494	BLEACH 4コマコマブリ	ブリーチ 4 コマ コマブリ	buriichi-4-koma-komaburi	bleach-4-koma-komaburi	LOW	CHANGED		LOW: BLEACH latin→bleach, 4コマ→4koma, コマブリ→komaburi(造語ヘボン)
-495	Mother2ギーグの逆襲・ネスの冒険記	マザー ツー ギーグ ノ ギャクシュウ ネス ノ ボウケンキ	mazaa-tsu-giigu-no-gyakushu-nesu-no-bokenki	mother-2-gigu-no-gyakushu-nesu-no-bokenki	LOW	CHANGED		LOW: latin Mother→mother, 数字2keep, ギーグ固有→gigu, の逆襲・ネスの冒険記→no-gyakushu-nesu-no-bokenki(ヘボン)
+494	BLEACH 4コマコマブリ	ブリーチ 4 コマ コマブリ	buriichi-4-koma-komaburi	bleach-4-koma-komaburi	VERIFIED	CHANGED		[confirmed] (none — same as JP) | 少年ジャンプ公式/cmoa: 大場敦×久保帯人『BLEACH4コマ コマブリ』。公式英題ローカライズなし=BLEACH→bleach、4コマ→4-koma、コマブリ造語ヘボン→komaburi。cand_slug整合。
+495	Mother2ギーグの逆襲・ネスの冒険記	マザー ツー ギーグ ノ ギャクシュウ ネス ノ ボウケンキ	mazaa-tsu-giigu-no-gyakushu-nesu-no-bokenki	mother-2-giygas-no-gyakushu-ness-no-bokenki	VERIFIED	CHANGED		[corrected] Mother 2: Giygas Strikes Back - Ness's Adventure | MangaDex/WikiBound/thevideogamelibrary: 公式英題 Mother 2: Giygas Strikes Back。固有名詞カタカナ ギーグ=公式英綴Giygas(gigu→giygas)、ネス=公式英綴N
 496	1年A組のモンスター	1ネン Aグミ ノ モンスター	1nen-agumi-no-monsutaa	1-nen-a-gumi-no-monster	OK	CHANGED		OK: 数字1keep, 年→nen, latin A→a, 組の→gumi-no, モンスター外来語→monster
 497	Wsamarus・2001	ウサマルズ ニセン イチ	usamaruzu-nisen-ichi	wsamarus-2001	OK	CHANGED		OK: Wsamarus・2001字面latin→wsamarus-2001(・→hyphen)
 498	うみねこのなく頃に散 Episode7	ウミネコ ノ ナク コロ ニ チル エピソード セブン	umineko-no-naku-koro-ni-chiru-episodo-sebun	umineko-no-naku-koro-ni-chiru-episode-7	OK	CHANGED		OK: うみねこのなく頃に散→umineko-no-naku-koro-ni-chiru(ヘボン), latin Episode7→episode-7
 499	LEGAの13	Lega ノ 13	lega-no-13	lega-no-13	OK			OK: latin LEGA→lega, の→no, latin 13→13
-500	TVアニメコミックス うちの3姉妹	ティーブイ アニメ コミックス ウチ ノ サン シマイ	teiibui-anime-komikkusu-uchi-no-san-shimai	tv-anime-comics-uchi-no-san-shimai	LOW	CHANGED		LOW: TVアニメコミックス→tv-anime-comics(TV字面+外来語), うちの3姉妹→uchi-no-san-shimai(seg三=san)
-501	マジカル1to3	マジカル ワン ツー スリー	majikaru-wan-tsu-surii	magical-1to3	LOW	CHANGED		LOW: マジカル外来語→magical, latin 1to3字面→1to3
-502	UFOロボグレンダイザー1975-77	ユーフォー ロボ グレンダイザー センキュウヒャクナナジュウゴ ナナジュウナナ	yufo-robo-gurendaizaa-senkyuhyakunanajugo-nanajunana	ufo-robo-grendizer-1975-77	LOW	CHANGED		LOW: UFO字面latin→ufo, ロボ外来語→robo, グレンダイザー公式英題→grendizer, latin 1975-77→1975-77
-503	オカルト団D3	オカルトダン D3	okarutodan-d3	occult-dan-d3	LOW	CHANGED		LOW: オカルト団→occult-dan(オカルト外来語=occult+団ヘボン), latin D3→d3
+500	TVアニメコミックス うちの3姉妹	ティーブイ アニメ コミックス ウチ ノ サン シマイ	teiibui-anime-komikkusu-uchi-no-san-shimai	tv-anime-comics-uchi-no-san-shimai	VERIFIED	CHANGED		[confirmed] (none — anime comics, romanized) | Amazon/HMV: 松本ぷりっつ『TVアニメコミックス うちの3姉妹』。公式英題なし=TV+アニメコミックス外来語→tv-anime-comics、うちの3姉妹→uchi-no-san-shimai(3=san)。cand_slug整合
+501	マジカル1to3	マジカル ワン ツー スリー	majikaru-wan-tsu-surii	magical-1to3	VERIFIED	CHANGED		[confirmed]  | めちゃコミック/まんが王国: 庄司陽子のデビュー作『マジカル1 to 3』(倫理/哲学/道徳の中3三人組+従姉タコの青春コメディ)。確立した公式英題なし。字面=マジカル(katakana 外来語→magical 音写)+latin run 
+502	UFOロボグレンダイザー1975-77	ユーフォー ロボ グレンダイザー センキュウヒャクナナジュウゴ ナナジュウナナ	yufo-robo-gurendaizaa-senkyuhyakunanajugo-nanajunana	ufo-robo-grendizer-1975-77	VERIFIED	CHANGED		[confirmed] UFO Robot Grendizer | ja.wikipedia/cmoa/復刊ドットコム: 永井豪『UFOロボ グレンダイザー 1975-77[初出完全版]』。公式英題=UFO Robot Grendizer。UFO字面latin→ufo, ロボ(略称音写)→robo, グレン
+503	オカルト団D3	オカルトダン D3	okarutodan-d3	occult-dan-d3	VERIFIED	CHANGED		[confirmed]  | mangapedia/小学館ADpocket: 御茶漬海苔『オカルト団D3』(原典『心霊探偵オカルト団』のリメイク)。オカルト(外来語音写)→occult, 団→dan(ヘボン), latin D3→d3。確立した公式英題なし、字面ベースで
 504	サイボーグ009VSデビルマン	サイボーグ ゼロゼロナイン バーサス デビルマン	saibogu-zerozeronain-baasasu-debiruman	cyborg-009-vs-devilman	OK	CHANGED		OK: サイボーグ=cyborg(official Cyborg 009), 009 keep, VS=vs, デビルマン=Devilman(official En)
 505	バイオレンスジャック20XX	バイオレンス ジャック ニセンエックスエックス	baiorensu-jakku-nisenekkusuekkusu	violence-jack-20xx	OK	CHANGED		OK: バイオレンスジャック=Violence Jack(official En), 20XX字面keep
 506	マジンガーZ 1972-74	マジンガー ゼット センキュウヒャクナナジュウニ ナナジュウヨン	majingaa-zetto-senkyuhyakunanajuni-nanajuyon	mazinger-z-1972-74	OK	CHANGED		OK: マジンガー=Mazinger(official), Z+date字面keep
@@ -514,9 +514,9 @@ idx	title	seg	cur_slug	new_slug	conf	changed	flag	note
 512	リトルバスターズ!The 4コマ	リトル バスターズ the 4コマ	ritoru-basutaazu-the-4koma	little-busters-the-4-koma	OK	CHANGED		OK: Little Busters(official En), The latin, 4-koma
 513	デュラララ!! 3way standoff-alley-	デュラララ スリー ウェイ スタンド オフ アレイ	deyurarara-surii-uei-sutando-ofu-arei	durarara-3way-standoff-alley	OK	CHANGED		OK: デュラララ=Durarara(official En), latin run 3way standoff-alley-
 514	将太の寿司2 World Stage	ショウタ ノ スシ ツー ワールド ステージ	shota-no-sushi-tsu-waarudo-suteeji	shota-no-sushi-2-world-stage	OK	CHANGED		OK: 将太の寿司=shota-no-sushi(hepburn), 2 keep, World Stage latin
-515	ライトno.1	ライト ナンバー ワン	raito-nanbaa-wan	light-no-1	LOW	CHANGED		LOW: ライト=light(katakana english,音写), no.1字面→no-1
+515	ライトno.1	ライト ナンバー ワン	raito-nanbaa-wan	light-no-1	VERIFIED	CHANGED		[confirmed]  | Amazon/booklive: 宮原ナオ『ライトNO・1』(少年キャプテンコミックス)。ライト=light(カタカナ英語音写)、NO・1/no.1(=ナンバーワン)→no-1(中黒/ドット→ハイフン)。確立した公式英題なし、字面+安全音写
 516	藤原カムイ画集40GB	フジワラ カムイ ガシュウ	fujiwara-kamui-gashu	fujiwara-kamui-gashu-40gb	OK	CHANGED		OK: 藤原カムイ=fujiwara-kamui, 画集=gashu(hepburn), 40GB字面
-517	9月 September	クガツ	kugatsu	9-gatsu-september	LOW	CHANGED		LOW: 9月=9(latin digit keep)+月gatsu, September latin
+517	9月 September	クガツ	kugatsu	9-gatsu-september	VERIFIED	CHANGED		[confirmed] September | 小学館eコミック/ANN: 西炯子『9月―September―』(ISBN 9784091720245)。題に英語'September'が併記(ダッシュ内)=latin run。9(数字keep)+月gatsu(seg クガツ)+Septe
 518	アイアムアヒーロー公式アンソロジーコミック8 TALES OF THE ZQN	アイ アム ア ヒーロー コウシキ アンソロジー コミック エイト テールズ オブ ザ ゾキュン	ai-amu-a-hiiro-koshiki-ansorojii-komikku-eito-teeruzu-obu-za-zokyun	i-am-a-hero-koshiki-ansoroji-komikku-8-tales-of-the-zqn	OK	CHANGED		OK: I Am a Hero(katakana english), 公式アンソロジーコミック hepburn, 8 keep, TALES OF THE ZQN latin
 519	忍空2nd stage	ニンクウ 2nd stage	ninku-2nd-stage	ninku-2nd-stage	OK			OK: 忍空=ninku(hepburn,ニンクウ long u drop), 2nd stage latin
 520	3年A組おばけ教室	サンネン エーグミ オバケ キョウシツ	sannen-eegumi-obake-kyoshitsu	3-nen-a-gumi-obake-kyoshitsu	OK	CHANGED		OK: 3(latin)年nen A(latin)組gumi, おばけ教室=obake-kyoshitsu
@@ -529,8 +529,8 @@ idx	title	seg	cur_slug	new_slug	conf	changed	flag	note
 527	マクロス7trash	マクロス 7 trash	makurosu-7-trash	macross-7-trash	OK	CHANGED		OK: マクロス=Macross(official), 7 keep, trash字面
 528	マクロス7TRASH	マクロス シチ トラッシュ	makurosu-shichi-torasshu	macross-7-trash	OK	CHANGED		OK: same as 527, TRASH字面lowercase
 529	アセンブラ0X	アセンブラ 0X	asenbura-0x	assembler-0x	OK	CHANGED		OK: アセンブラ=assembler(katakana english), 0X字面→0x
-530	コレクター・ユイVer.2	コレクター ユイ バージョン ツー	korekutaa-yui-baajon-tsu	corrector-yui-ver-2	LOW	CHANGED		LOW: コレクター=Corrector(official En 'Corrector Yui'), ・sep, ユイ=yui, Ver.2字面→ver-2
-531	彼女のカレラGT3	カノジョ ノ カレラ ジー ティー スリー	kanojo-no-karera-jii-teii-surii	kanojo-no-carrera-gt3	LOW	CHANGED		LOW: 彼女の=kanojo-no, カレラ=Carrera(Porsche), GT3 latin
+530	コレクター・ユイVer.2	コレクター ユイ バージョン ツー	korekutaa-yui-baajon-tsu	corrector-yui-ver-2	VERIFIED	CHANGED		[confirmed] Corrector Yui | en.wikipedia/ANN/MangaDex: 岡本慶子(原作きあ☆ら)『コレクター・ユイ』公式英題=Corrector Yui(Tokyopop北米刊)。コレクター→corrector(公式英綴り), ・→sep, ユイ→yui, 
+531	彼女のカレラGT3	カノジョ ノ カレラ ジー ティー スリー	kanojo-no-karera-jii-teii-surii	kanojo-no-carrera-gt3	VERIFIED	CHANGED		[confirmed] My Favorite Carrera (franchise) | ja.wikipedia/Amazon: 麻宮騎亜『彼女のカレラGT3』(リイドカフェ)。フランチャイズ公式英題=My Favorite Carrera(意訳=slug不使用、alternative_titles.enへ)。彼女の→kano
 532	P.M.6:00スタジオP	P.M.6:00 スタジオ P	pm600-sutajio-p	p-m-6-00-studio-p	OK	CHANGED		OK: P.M.6:00 latin run(./:→hyphen), スタジオ=studio(katakana english), P latin
 533	ロックマンエグゼNEW STORIES 2023	ロックマン エグゼ ニュー ストーリーズ ニセン ニジュウサン	rokkuman-eguze-nyu-sutoriizu-nisen-niju-san	rockman-exe-new-stories-2023	OK	CHANGED		OK: ロックマンエグゼ=Rockman EXE(franchise romaji), NEW STORIES/2023 latin
 534	湯けむりスナイパーpart 3	ユケムリ スナイパー part 3	yukemuri-sunaipaa-part-3	yukemuri-sniper-part-3	OK	CHANGED		OK: 湯けむり=yukemuri(hepburn), スナイパー=sniper(katakana english), part 3 latin
@@ -540,12 +540,12 @@ idx	title	seg	cur_slug	new_slug	conf	changed	flag	note
 538	機動戦士ガンダムF90	キドウ センシ ガンダム エフ キュウジュウ	kido-senshi-gandamu-efu-kyuju	kido-senshi-gundam-f90	OK	CHANGED		OK: 機動戦士=kido-senshi(hepburn,キドウ long drop), ガンダム=gundam(coined romaji), F90 latin
 539	HACHI -東京23宮-	ハチ トウキョウ ニジュウサンク	hachi-tokyo-nijusanku	hachi-tokyo-23-ku	OK	CHANGED		OK: HACHI latin, 東京=tokyo, 23 keep, 宮=ku(seg ニジュウサンク), brackets removed
 540	HACHI 東京23宮	ハチ トウキョウ ニジュウサンク	hachi-tokyo-nijusanku	hachi-tokyo-23-ku	OK	CHANGED		OK: same as 539
-541	ダイヤのA act 2	ダイヤ ノ エー アクト ツー	daiya-no-ee-akuto-tsu	daiya-no-a-act-2	LOW	CHANGED		LOW: ダイヤ=daiya(hepburn; abbrev of diamond ambiguous), の=no, A latin, act 2 latin
-542	ダイヤのA act 2外伝帝東VS鵜久森	ダイヤ ノ エー アクト ツー ガイデン テイトウ バーサス ウグモリ	daiya-no-ee-akuto-tsu-gaiden-teito-baasasu-ugumori	daiya-no-a-act-2-gaiden-teito-vs-ugumori	LOW	CHANGED		LOW: daiya-no-a act-2, 外伝gaiden, 帝東teito, VS=vs, 鵜久森ugumori
+541	ダイヤのA act 2	ダイヤ ノ エー アクト ツー	daiya-no-ee-akuto-tsu	daiya-no-a-act-2	VERIFIED	CHANGED		[confirmed] Ace of Diamond act II | ja.wikipedia/ANN/講談社: 寺嶋裕二『ダイヤのA act2』公式英題=Ace of Diamond(意訳=ダイヤ→diamond/A→ace の展開訳。MANGAL規則で意訳英題はslug不使用→alternative_ti
+542	ダイヤのA act 2外伝帝東VS鵜久森	ダイヤ ノ エー アクト ツー ガイデン テイトウ バーサス ウグモリ	daiya-no-ee-akuto-tsu-gaiden-teito-baasasu-ugumori	daiya-no-a-act-2-gaiden-teito-vs-ugumori	VERIFIED	CHANGED		[confirmed] Ace of the Diamond Act II (franchise base; this gaiden has no official EN title) | Kodansha K MANGA: franchise official EN = 'Ace of the Diamond Act II' (kmanga.kodansha.com, @diaace_official tweet). Spi
 543	GET THE GOAL 4v4嵐	Get the goal 4 v 4 アラシ	get-the-goal-4-v-4-arashi	get-the-goal-4v4-arashi	OK	CHANGED		OK: GET THE GOAL 4v4 latin run字面, 嵐=arashi(hepburn)
 544	SDガンダムGジェネレーション・エフ 4コマKINGS	SD ガンダム ジー ジェネレーション エフ 4コマ kings	sd-gandamu-jii-jienereeshon-efu-4koma-kings	sd-gundam-g-generation-f-4-koma-kings	OK	CHANGED		OK: SD/G latin, ガンダム=gundam, ジェネレーション=generation(english), エフ=f(letter F), 4-koma, KINGS=kings
 545	仮面ライダーV3/X 1973-74	カメン ライダー ブイ スリー エックス センキュウヒャクナナジュウサン ナナジュウヨン	kamen-raidaa-bui-surii-ekkusu-senkyuhyakunanaju-san-nanajuyon	kamen-rider-v3-x-1973-74	OK	CHANGED		OK: 仮面ライダー=kamen-rider, V3/X→v3-x(slash→hyphen), 1973-74 latin
-546	2DK、Gペン、アフタータイム。	2DK 、 Gペン 、 アフタータイム 。	2dk-gpen-afutaataimu	2dk-g-pen-after-time	LOW	CHANGED		LOW: 手動 2DK字面+Gペン=g-pen+アフタータイム=after-time(、。除去)
+546	2DK、Gペン、アフタータイム。	2DK 、 Gペン 、 アフタータイム 。	2dk-gpen-afutaataimu	2dk-g-pen-aftertime	VERIFIED	CHANGED		[corrected] 2DK, G-Pen, Aftertime | Official EN title '2DK, G-Pen, Aftertime' per MangaDex, Anime-Planet, ComicK. アフタータイム音写-matches 'Aftertime' spelled as O
 547	2DK、Gペン、目覚まし時計。	2DK Gペン メザマシドケイ	2dk-gpen-mezamashidokei	2dk-gpen-mezamashidokei	OK			OK: latin 2DK/G->2dk/g, ペン->pen, 目覚まし時計->mezamashidokei
 548	LIAR GAME 第1章	ライアー ゲーム	raiaa-geemu	liar-game-dai-1-sho	OK	CHANGED		OK: latin LIAR GAME->liar-game, 第1章 daiisshou keep num->dai-1-sho
 549	ウルトラマンstory 0	ウルトラマン story 0	urutoraman-story-0	urutoraman-story-0	OK			OK: ウルトラマン->urutoraman(coinage hepburn), latin story 0->story-0
