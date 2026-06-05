@@ -59,10 +59,11 @@ export function buildAmazonUrl(manga: Manga, opts: AmazonLinkOptions = {}): stri
 export function buildAmazonUrlForArtBook(
   artBook: ArtBook,
   opts: AmazonLinkOptions = {},
+  volume?: Volume,
 ): string {
   const tag = opts.associateTag ?? "";
   const host = domain(opts.locale);
-  const v = artBook.volumes[0];
+  const v = volume ?? artBook.volumes[0];
   const asin = v?.asin?.toString().trim();
   const isbn = v?.isbn13?.toString().trim();
 
