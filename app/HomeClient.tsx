@@ -46,6 +46,16 @@ export default function HomeClient({ data }: Props) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filterKey]);
 
+  // ★フィルターオーバーレイ表示中は背景スクロールを止める(モバイル)
+  useEffect(() => {
+    if (!open) return;
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = prev;
+    };
+  }, [open]);
+
   const bounds = useMemo(() => yearBounds(data.manga), [data.manga]);
   const authors = useMemo(() => uniqueAuthors(data.manga, true), [data.manga]);
   // ★画集モード = 一覧を画集に切替(ジャンル欄「画集」チップ)。 漫画用フィルタは非適用。
@@ -101,16 +111,18 @@ export default function HomeClient({ data }: Props) {
 
       <CategoryHub data={data} />
 
+      {/* モバイル: フィルター起動(全画面オーバーレイを開く)。 PC版は右サイドバー常時表示 */}
       <button
         type="button"
         className="tactile-chip md:hidden mb-4 px-3 py-2.5 text-sm font-medium rounded-card w-full active:scale-[0.99] transition"
-        onClick={() => setOpen((v) => !v)}
+        onClick={() => setOpen(true)}
       >
-        {open ? "✕ フィルタを閉じる" : "⚙ フィルタで絞り込む"}
+        ⚙ フィルターで絞り込む
       </button>
 
       <div className="grid md:grid-cols-[240px_1fr] gap-6">
-        <div className={(open ? "block" : "hidden") + " md:block"}>
+        {/* デスクトップ: 常時サイドバー(PC版は不変) */}
+        <div className="hidden md:block">
           <FilterPanel
             data={data}
             state={state}
@@ -149,6 +161,54 @@ export default function HomeClient({ data }: Props) {
               </button>
             </div>
           )}
+        </div>
+      </div>
+
+      {/* ★モバイル: 全画面オーバーレイ フィルター。 ボタンで徐々に拡大、 ×で徐々に畳む。
+          背景は blur+暗転(背後の文脈は見えるが文字は読める)。 PC版(md:)は出さない。 */}
+      <div
+        className={`md:hidden fixed inset-0 z-50 transition-[opacity,visibility] duration-300 ${
+          open ? "visible opacity-100" : "invisible opacity-0 pointer-events-none"
+        }`}
+        aria-hidden={!open}
+      >
+        {/* パネル: 下(ボタン側)から徐々に全画面へ拡大。 ★半透過(frosted glass)で
+            背後の漫画リストがうっすら透ける。 backdrop-blur で文字も読める。 */}
+        <div
+          className={`absolute inset-3 flex flex-col overflow-hidden rounded-[26px] border-4 border-white ring-1 ring-black/30 shadow-2xl backdrop-blur-sm origin-bottom transition-[transform,opacity] duration-300 ease-out ${
+            open ? "scale-100 opacity-100" : "scale-90 opacity-0"
+          }`}
+          style={{ background: "color-mix(in srgb, var(--color-surface) 28%, transparent)" }}
+        >
+          <header className="flex items-center justify-between px-4 py-3 border-b border-[var(--color-line)] shrink-0">
+            <h2 className="font-bold text-base">フィルター</h2>
+            <button
+              type="button"
+              aria-label="閉じる"
+              onClick={() => setOpen(false)}
+              className="tactile-chip rounded-full w-9 h-9 flex items-center justify-center text-lg leading-none active:scale-90 transition"
+            >
+              ✕
+            </button>
+          </header>
+          <div className="flex-1 overflow-y-auto px-4 py-4 overscroll-contain">
+            <FilterPanel
+              data={data}
+              state={state}
+              setState={setState}
+              yearBounds={bounds}
+              authorOptions={authors}
+            />
+          </div>
+          <div className="shrink-0 border-t border-[var(--color-line)] p-3">
+            <button
+              type="button"
+              onClick={() => setOpen(false)}
+              className="w-full rounded-card bg-[var(--color-accent)] text-white font-semibold py-2.5 active:scale-[0.98] transition"
+            >
+              結果を見る（{filtered.length}）
+            </button>
+          </div>
         </div>
       </div>
     </div>
