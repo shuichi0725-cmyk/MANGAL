@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import "./globals.css";
 import ScrollTopButton from "@/components/ScrollTopButton";
-import { PurchaseModeProvider, PurchaseModeToggle, ScreenFlip } from "@/components/PurchaseMode";
+import { PurchaseModeProvider, PurchaseModeToggle } from "@/components/PurchaseMode";
 
 export const metadata: Metadata = {
   title: "MANGAL — 日本の漫画データベース",
@@ -28,9 +28,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <PurchaseModeToggle />
           </div>
         </header>
-        <ScreenFlip>
-          <main className="flex-1">{children}</main>
-        </ScreenFlip>
+        <main className="flex-1">{children}</main>
         <footer className="border-t border-[var(--color-line)] mt-12 py-8 text-center text-xs text-ink/50 space-y-3">
           <nav className="flex justify-center gap-4">
             <Link href="/about" className="hover:text-ink">
