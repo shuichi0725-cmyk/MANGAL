@@ -716,6 +716,8 @@ def _strip_trailing_punct(title: str | None) -> str:
 _PUB_CACHE: dict | None = None
 _MAJOR_CACHE: dict | None = None
 _KANA_INDEX: dict | None = None  # normalized_kana → list of (series_id, title, title_kana)
+_TITLE_STRIP_INDEX: dict | None = None  # qid-null series: title_strip → [series_id]
+_TITLE_LOWER_NULL_INDEX: dict | None = None  # qid-null series: lower(title) → [series_id]
 
 
 def _build_kana_index(con: sqlite3.Connection) -> None:
@@ -733,6 +735,24 @@ def _build_kana_index(con: sqlite3.Connection) -> None:
         k_norm = _normalize_kana(kana)
         if k_norm:
             _KANA_INDEX[k_norm].append((sid, title, kana))
+
+
+def _build_title_strip_index(con: sqlite3.Connection) -> None:
+    """qid IS NULL の series を title_strip → [id] で索引化(= per-page の全表scan回避)。
+    起動時 1 回 build、 find_related_series_ids の orphan title 一致を O(1) に。"""
+    global _TITLE_STRIP_INDEX, _TITLE_LOWER_NULL_INDEX
+    if _TITLE_STRIP_INDEX is not None:
+        return
+    from collections import defaultdict
+    _TITLE_STRIP_INDEX = defaultdict(list)
+    _TITLE_LOWER_NULL_INDEX = defaultdict(list)
+    cur = con.cursor()
+    for sid, title in cur.execute(
+        "SELECT id, title FROM series WHERE qid IS NULL"
+    ).fetchall():
+        _TITLE_STRIP_INDEX[_strip_trailing_punct(title)].append(sid)
+        if title:
+            _TITLE_LOWER_NULL_INDEX[title.lower()].append(sid)
 
 
 def _build_publisher_cache(con: sqlite3.Connection) -> None:
@@ -883,12 +903,11 @@ def find_related_series_ids(con: sqlite3.Connection, main: dict) -> list[int]:
         ).fetchall():
             if (r[1] or "").lower() == main_title_lower and pub_compatible(r[0]):
                 ids.add(r[0])
-    # 同 title (= 末尾 punct strip 後) で qid 無し orphan
-    for r in cur.execute(
-        "SELECT id, title FROM series WHERE qid IS NULL"
-    ).fetchall():
-        if _strip_trailing_punct(r[1]) == main_title_strip and pub_compatible(r[0]):
-            ids.add(r[0])
+    # 同 title (= 末尾 punct strip 後) で qid 無し orphan (= ★索引で O(1)、 全表scan回避)
+    _build_title_strip_index(con)
+    for sid in _TITLE_STRIP_INDEX.get(main_title_strip, []):
+        if pub_compatible(sid):
+            ids.add(sid)
     # title_kana + punct suffix 一致 (= romaji/katakana 表記揺れ cluster)
     # 安全策: 片方が ASCII (= ローマ字表記、 e.g. 'BAKUMAN。', 'Hunter×hunter') の cases のみ。
     # でないと 'テレビアニメ版 犬夜叉' と '犬夜叉' (= 両方 kana='イヌヤシャ') が
@@ -929,13 +948,10 @@ def find_related_series_ids(con: sqlite3.Connection, main: dict) -> list[int]:
             ).fetchall():
                 if (r[1] or "").lower() == t_lower and pub_compatible(r[0]):
                     ids.add(r[0])
-        # qid 無し orphan で title case-insensitive 一致
-        for r in cur.execute(
-            "SELECT id FROM series WHERE LOWER(title)=? AND qid IS NULL",
-            (t_lower,),
-        ).fetchall():
-            if pub_compatible(r[0]):
-                ids.add(r[0])
+        # qid 無し orphan で title case-insensitive 一致 (= ★索引で O(1)、 LOWER()全表scan回避)
+        for sid in _TITLE_LOWER_NULL_INDEX.get(t_lower, []):
+            if pub_compatible(sid):
+                ids.add(sid)
     # ★ merge.yml の merge_sids 強制統合 (= 個別判断、 既存 logic で 漏れる
     # 表記揺れ / 著者振り分け差異 等 を ユーザ明示で 統合)
     merge_sids_map = get_merge_sids(con)
