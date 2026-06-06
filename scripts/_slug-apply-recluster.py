@@ -186,6 +186,9 @@ for r in rows:
     slug, base, sakuga = r["slug"], r["base"], (r["sakuga"] or "").strip()
     # --- オーバーライド適用(ユーザ裁定ページ) ---
     if slug in OVERRIDES:
+        # _suppress = この候補slugは出力しない(別slugで作り直す等)
+        if OVERRIDES[slug].get("_suppress"):
+            continue
         doc = build_override(slug, OVERRIDES[slug])
         with open(os.path.join(OUTDIR, slug + ".yml"), "w", encoding="utf-8") as f:
             f.write("# Stage D: NDL option2 recluster + user override (recluster-overrides.yml)\n")

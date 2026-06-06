@@ -144,3 +144,101 @@ mangaban-sekai-no-rekishi:
         - {number: 8,  isbn13: '9784087463323', release_date: '2009-04', artists: [中村結香, たかや健二],     supervisors: [石井規衛, 柴宜弘]}
         - {number: 9,  isbn13: '9784087463330', release_date: '2009-05', artists: [あや秀夫, 郡山誉世夫],     supervisors: [石井規衛, 相良匡俊]}
         - {number: 10, isbn13: '9784087463347', release_date: '2009-05', artists: [南舘千晶, 竹坂香利],       supervisors: [相良匡俊]}
+
+# 仕掛人藤枝梅安(ユーザ裁定 2026-06-06): SP pocket wide=コンビニ廉価/名作選=抜粋 を全drop。
+# さいとう・たかを版(SPコミックス全35巻)を主版(無印)、武村勇治版(同全10巻)を別ページ。
+# 候補 -saito-2016 は混在スラッグなので抑制し、無印で作り直す。
+shikakenin-fujieda-baian-saito-2016:
+  _suppress: true
+
+shikakenin-fujieda-baian:
+  title: 仕掛人藤枝梅安
+  title_kana: シカケニンフジエダバイアン
+  authors:
+    - さいとう・たかを
+  original_authors:
+    - 池波正太郎
+  publisher: leed
+  demographic: seinen
+  genres:
+    - historical
+    - suspense
+  year_started: 2002
+  year_ended: 2015
+  status: completed
+  note: |
+    さいとう・たかを(さいとう・プロ)による劇画版。リイド社SPコミックス全35巻(2002-2015の再編集版)。
+    SP pocket wide(時代劇画選集8/テーマ別6)・劇画名作選3はコンビニ廉価/抜粋のためdrop。
+  editions:
+    - type: standard
+      label: SPコミックス版（全35巻）
+      volumes:
+        - {number: 1, isbn13: '9784845823260', release_date: '2002-07'}
+        - {number: 2, isbn13: '9784845823277', release_date: '2002-08'}
+        - {number: 3, isbn13: '9784845823284', release_date: '2002-12'}
+        - {number: 4, isbn13: '9784845823291', release_date: '2002-12'}
+        - {number: 5, isbn13: '9784845823307', release_date: '2003-02'}
+        - {number: 6, isbn13: '9784845823314', release_date: '2003-04'}
+        - {number: 7, isbn13: '9784845823321', release_date: '2003-07'}
+        - {number: 8, isbn13: '9784845823338', release_date: '2003-10'}
+        - {number: 9, isbn13: '9784845823345', release_date: '2003-12'}
+        - {number: 10, isbn13: '9784845823352', release_date: '2004-03'}
+        - {number: 11, isbn13: '9784845823369', release_date: '2004-07'}
+        - {number: 12, isbn13: '9784845823376', release_date: '2004-12'}
+        - {number: 13, isbn13: '9784845823383', release_date: '2005-03'}
+        - {number: 14, isbn13: '9784845823390', release_date: '2005-05'}
+        - {number: 15, isbn13: '9784845823406', release_date: '2005-07'}
+        - {number: 16, isbn13: '9784845823413', release_date: '2005-10'}
+        - {number: 17, isbn13: '9784845824236', release_date: '2006-02'}
+        - {number: 18, isbn13: '9784845824243', release_date: '2006-04'}
+        - {number: 19, isbn13: '9784845832842', release_date: '2007-02'}
+        - {number: 20, isbn13: '9784845832859', release_date: '2007-09'}
+        - {number: 21, isbn13: '9784845832866', release_date: '2008-02'}
+        - {number: 22, isbn13: '9784845832873', release_date: '2008-05'}
+        - {number: 23, isbn13: '9784845832880', release_date: '2008-11'}
+        - {number: 24, isbn13: '9784845832897', release_date: '2009-04'}
+        - {number: 25, isbn13: '9784845832903', release_date: '2009-11'}
+        - {number: 26, isbn13: '9784845832910', release_date: '2010-08'}
+        - {number: 27, isbn13: '9784845840687', release_date: '2010-11'}
+        - {number: 28, isbn13: '9784845840694', release_date: '2011-06'}
+        - {number: 29, isbn13: '9784845840700', release_date: '2011-11'}
+        - {number: 30, isbn13: '9784845840717', release_date: '2012-09'}
+        - {number: 31, isbn13: '9784845840724', release_date: '2013-01'}
+        - {number: 32, isbn13: '9784845840731', release_date: '2013-05'}
+        - {number: 33, isbn13: '9784845840748', release_date: '2013-11'}
+        - {number: 34, isbn13: '9784845840755', release_date: '2014-07'}
+        - {number: 35, isbn13: '9784845840762', release_date: '2015-01'}
+
+shikakenin-fujieda-baian-takemura-2019:
+  title: 仕掛人藤枝梅安
+  title_kana: シカケニンフジエダバイアン
+  authors:
+    - 武村勇治
+  original_authors:
+    - 池波正太郎
+  publisher: leed
+  demographic: seinen
+  genres:
+    - historical
+    - suspense
+  year_started: 2017
+  year_ended: 2022
+  status: completed
+  note: |
+    武村勇治による劇画版(リイド社SPコミックス全10巻、2017-2022)。さいとう版とは別作画→別ページ。
+    旧candidatesはこの10巻をさいとう側に誤混入させていた。テーマ別wide(おんなごろし等4冊)はコンビニ廉価でdrop。
+    ※梅安初時雨(9784845857418, 通常SPコミックス406pの特別編)はユーザ裁定でdrop=未収録。
+  editions:
+    - type: standard
+      label: SPコミックス版（全10巻）
+      volumes:
+        - {number: 1, isbn13: '9784845851461', release_date: '2017-10'}
+        - {number: 2, isbn13: '9784845851478', release_date: '2017-10'}
+        - {number: 3, isbn13: '9784845851485', release_date: '2018-02'}
+        - {number: 4, isbn13: '9784845851492', release_date: '2018-10'}
+        - {number: 5, isbn13: '9784845851508', release_date: '2019-05'}
+        - {number: 6, isbn13: '9784845851515', release_date: '2019-11'}
+        - {number: 7, isbn13: '9784845856022', release_date: '2020-05'}
+        - {number: 8, isbn13: '9784845851522', release_date: '2020-12'}
+        - {number: 9, isbn13: '9784845857609', release_date: '2021-07'}
+        - {number: 10, isbn13: '9784845858606', release_date: '2022-03'}
