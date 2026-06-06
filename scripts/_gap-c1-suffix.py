@@ -116,13 +116,13 @@ def main():
         real = [p for p in pages if not p["foreign"]]
         for p in fore:
             drop_fore += 1
-            out.append((base, "drop-foreign", "", p["title"], p["vols"], p["year"], p["sur"], p["sur_src"], "FOREIGN_DROP"))
+            out.append((p["rep"], base, "drop-foreign", "", p["title"], p["vols"], p["year"], p["sur"], p["sur_src"], "FOREIGN_DROP"))
         if len(real) < 2:
             # 外国版を抜くと衝突解消 = 残り1件は無印のまま(suffix不要)
             if len(real) == 1 and fore:
                 resolved_by_drop += 1
                 p = real[0]
-                out.append((base, "main", base, p["title"], p["vols"], p["year"], p["sur"], p["sur_src"], "RESOLVED_BY_FOREIGN_DROP"))
+                out.append((p["rep"], base, "main", base, p["title"], p["vols"], p["year"], p["sur"], p["sur_src"], "RESOLVED_BY_FOREIGN_DROP"))
             continue
         # 決定的 tie-break: 巻数多 desc, 年古 asc, 姓(anilistのみ) asc, rep asc
         def sortkey(p):
@@ -132,7 +132,7 @@ def main():
         for i, p in enumerate(ps):
             if i == 0:
                 used.add(base)
-                out.append((base, "main", base, p["title"], p["vols"], p["year"],
+                out.append((p["rep"], base, "main", base, p["title"], p["vols"], p["year"],
                             p["sur"] if p["sur_src"] == "anilist" else "", p["sur_src"], ""))
                 continue
             yr = p["year"] if (p["year"] and p["year"] != "9999") else ""
@@ -161,22 +161,22 @@ def main():
                 flag = ""
                 cand = slug
             used.add(cand)
-            out.append((base, "sub", cand, p["title"], p["vols"], p["year"], use_sur, p["sur_src"], flag))
+            out.append((p["rep"], base, "sub", cand, p["title"], p["vols"], p["year"], use_sur, p["sur_src"], flag))
 
     with OUT.open("w", encoding="utf-8") as f:
-        f.write("base\trole\tnew_slug\ttitle\tvols\tyear\tsurname\tsur_src\tflag\n")
+        f.write("key\tbase\trole\tnew_slug\ttitle\tvols\tyear\tsurname\tsur_src\tflag\n")
         for x in out:
             f.write("\t".join(str(v).replace("\t", " ") for v in x) + "\n")
 
     grp = len([b for b, p in groups.items() if len(p) >= 2])
     print(f"=== gap c-1 option1 候補: {grp:,} 群 / {len(out):,} 行 ({OUT.name}) ===")
-    print(f"  主版(無印): {sum(1 for x in out if x[1]=='main'):,}")
-    print(f"  従版(接尾辞): {sum(1 for x in out if x[1]=='sub'):,}")
+    print(f"  主版(無印): {sum(1 for x in out if x[2]=='main'):,}")
+    print(f"  従版(接尾辞): {sum(1 for x in out if x[2]=='sub'):,}")
     print(f"  ★外国版→drop(非9784・別工程): {drop_fore:,}")
     print(f"  ★外国版dropで衝突解消(残1=無印): {resolved_by_drop:,}")
-    subs = [x for x in out if x[1] == "sub"]
-    with_sur = sum(1 for x in subs if x[6])
-    need_verify = sum(1 for x in subs if x[8] == "NEED_SURNAME_VERIFY")
+    subs = [x for x in out if x[2] == "sub"]
+    with_sur = sum(1 for x in subs if x[7])
+    need_verify = sum(1 for x in subs if x[9] == "NEED_SURNAME_VERIFY")
     print(f"  従版 {len(subs):,}: AniList姓で -姓-年 = {with_sur:,} / -年のみ = {len(subs)-with_sur-need_verify:,} / ★Web検証要(同年衝突/年欠落) = {need_verify:,}")
     print("\n=== サンプル12群 ===")
     shown = 0
