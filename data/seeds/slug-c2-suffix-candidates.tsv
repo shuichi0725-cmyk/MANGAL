@@ -4,8 +4,8 @@ name:DECO*27|name:ヴァンパイア	vampire	different_works	sub	vampire-2025	�
 qid:Q11616270|name:ヴァンパイア	vampire	different_works	sub	vampire-1996	ヴァンパイア		YEAR_ONLY
 name:高橋ユキ|name:ヴァンパイア	vampire	different_works	sub	vampire-2004	ヴァンパイア		YEAR_ONLY
 qid:Q10933287|name:ヴァンパイア	vampire	different_works	sub	vampire-1997	ヴァンパイア		YEAR_ONLY
-name:HIMA|name:あくちぇる・わーるど。	accel-world	subseries	main	accel-world	あくちぇる・わーるど。	hima	SUBSERIES_NO_PREFIX
-name:HIMA|name:アクセル・ワールド	accel-world	subseries	sub	accel-world-hima-2014	アクセル・ワールド	hima	SUBSERIES_NO_PREFIX
+name:HIMA|name:あくちぇる・わーるど。	accel-world	subseries	main	akucheru-warudo	あくちぇる・わーるど。	hima	FIXED(別pun題)
+name:HIMA|name:アクセル・ワールド	accel-world	subseries	main	accel-world	アクセル・ワールド	hima	FIXED
 name:飛永宏之|name:RefleX	rifurekkusu	different_works	main	rifurekkusu	RefleX		
 name:Ken-G|name:Reflex	rifurekkusu	different_works	sub	rifurekkusu-1987	Reflex		YEAR_ONLY
 name:ミディ企画|name:Reflex	rifurekkusu	different_works	sub	rifurekkusu-1987-2	Reflex		YEAR_ONLY
@@ -693,8 +693,8 @@ qid:Q3776937|name:Barレモン・ハート ドラマ・シーズン2エピソー
 qid:Q3776937|name:BARレモン・ハート ドラマエピソード集	bar-remon-haato	no_merge	sub	bar-remon-haato-2015	BARレモン・ハート ドラマエピソード集		YEAR_ONLY
 qid:Q41698730|name:Darkness	darkness	different_works	main	darkness	Darkness		
 qid:Q41698730|name:ダークネス	darkness	different_works	sub	darkness-2006	ダークネス		YEAR_ONLY
-qid:Q445827|name:アラベスク第1部	arabesuku	subseries	sub	arabesuku-1bu	アラベスク第1部		SUBTITLE_REVIEW
-qid:Q445827|name:アラベスク第2部	arabesuku	subseries	sub	arabesuku-2bu	アラベスク第2部		SUBTITLE_REVIEW
+qid:Q445827|name:アラベスク第1部	arabesuku	subseries	sub	arabesuku-dai-1-bu	アラベスク第1部		FIXED
+qid:Q445827|name:アラベスク第2部	arabesuku	subseries	sub	arabesuku-dai-2-bu	アラベスク第2部		FIXED
 qid:Q965600|name:PEACH!	peach	different_works	main	peach	Peach!		
 qid:Q446051|name:PEACH	peach	different_works	sub	peach-2000	PEACH		YEAR_ONLY
 qid:Q465645|name:TAKE IT EASY	take-it-easy	different_works	main	take-it-easy	TAKE IT EASY	okazaki	
@@ -709,8 +709,8 @@ qid:Q967455|name:激突	gekitotsu	different_works	main	gekitotsu	激突	sadao
 qid:Q6918002|name:激突	gekitotsu	different_works	sub	gekitotsu-1990	激突		YEAR_ONLY
 qid:Q731579|name:Compiler	compiler	subseries	main	compiler	Compiler	asamiya	SUBSERIES_NO_PREFIX
 qid:Q731579|name:コンパイラフェスタ	compiler	subseries	sub	compiler-1996	コンパイラフェスタ		SUBSERIES_NO_PREFIX
-qid:Q757810|name:ソウルイーター|sub:完全版	soul-eater-not	subseries	main	soul-eater-not	SOUL EATER		SUBSERIES_NO_PREFIX
-qid:Q757810|name:ソウルイーターノット!	soul-eater-not	subseries	sub	soul-eater-not-okubo-2011	ソウルイーターノット!	okubo	SUBSERIES_NO_PREFIX
+qid:Q757810|name:ソウルイーター|sub:完全版	soul-eater-not	subseries	main	soul-eater	SOUL EATER		FIXED(base是正)
+qid:Q757810|name:ソウルイーターノット!	soul-eater-not	subseries	main	soul-eater-not	ソウルイーターノット!	okubo	FIXED
 qid:Q7862713|name:ワニ分署	wani-bunsho	no_merge	main	wani-bunsho	ワニ分署	shinohara	
 qid:Q7862713|name:82分署	wani-bunsho	no_merge	sub	wani-bunsho-2010	82分署		YEAR_ONLY
 qid:Q9307321|name:Pangaea ezel	pangaea-ezel	no_merge	main	pangaea-ezel	Pangaea ezel	asano	
