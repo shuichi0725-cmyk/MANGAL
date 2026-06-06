@@ -633,16 +633,26 @@ def get_max_release_year(con: sqlite3.Connection, series_id: int) -> int | None:
     return None
 
 
-def find_series(con: sqlite3.Connection, slug: str, title: str, qid: str | None) -> dict | None:
+def find_series(con: sqlite3.Connection, slug: str, title: str, qid: str | None,
+                series_key: str | None = None) -> dict | None:
     """旧 yml の (slug, title, qid) から db-v2 で series 探す。
 
-    優先順:
+    ★series_key が渡されたら **series_key で直接照合**(slug-final駆動の確実join。
+      homophone接尾辞で title照合が曖昧になるのを回避)。
+    優先順(series_key 無し時):
       1. qid + title 完全一致
       2. title 完全一致 (= qid なし時)
       3. title 部分一致
     """
     cur = con.cursor()
     cur.row_factory = sqlite3.Row
+    if series_key:
+        rows = cur.execute(
+            "SELECT * FROM series WHERE series_key=? LIMIT 1", (series_key,)
+        ).fetchall()
+        if rows:
+            return dict(rows[0])
+        return None
     if qid:
         rows = cur.execute(
             "SELECT * FROM series WHERE qid=? AND title=? ORDER BY adult_score LIMIT 1",
@@ -1773,7 +1783,7 @@ def main():
             stats["dropped_non_manga"] += 1
             dropped_non_manga.append(f"{ypath.name}  title={title}  (= 関連書)")
             continue
-        series = find_series(con, slug, title, qid)
+        series = find_series(con, slug, title, qid, src.get("_skey"))
         if not series:
             stats["not_found_in_db"] += 1
             not_found.append(f"{ypath.name}  title={title}")
