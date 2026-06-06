@@ -8,9 +8,12 @@ manga-hyakunin-isshu-monogatari:
   title_kana: マンガヒャクニンイッシュモノガタリ
   authors:
     - 学研編集部
+  author_role: editor
   original_authors: []
-  publisher: 学研教育出版
-  demographic: childrens
+  publisher: gakken
+  demographic: kodomo
+  genres:
+    - historical
   year_started: 2014
   year_ended: 2017
   status: completed
@@ -53,7 +56,11 @@ turn-a-gundam:
   original_authors:
     - 矢立肇
     - 富野由悠季
-  publisher: 講談社
+  publisher: kodansha
+  demographic: seinen
+  genres:
+    - mecha
+    - action
   year_started: 1999
   year_ended: 2002
   status: completed
@@ -78,7 +85,11 @@ turn-a-gundam-tokita-1999:
   original_authors:
     - 矢立肇
     - 富野由悠季
-  publisher: 講談社
+  publisher: kodansha
+  demographic: shounen
+  genres:
+    - mecha
+    - action
   year_started: 1999
   year_ended: 2005
   status: completed
@@ -98,3 +109,38 @@ turn-a-gundam-tokita-1999:
       label: Gレジェンドコミックス版（再版）
       volumes:
         - {number: 2, isbn13: '9784063721140', release_date: '2005-12'}
+
+# 集英社文庫「世界の歴史 漫画版」全10巻(2009.1-5)。学習まんが=各巻ちがう作画2名+監修。
+# ユーザ裁定(2026-06-06): ページ著者=集英社編集部、巻ごとに作画・監修を保持(C: db欠落の特16-2,4,8,10をNDL補完)。
+mangaban-sekai-no-rekishi:
+  title: 世界の歴史 漫画版
+  title_kana: セカイノレキシマンガバン
+  authors:
+    - 集英社編集部
+  author_role: editor
+  original_authors: []
+  publisher: shueisha
+  demographic: kodomo
+  genres:
+    - historical
+  year_started: 2009
+  year_ended: 2009
+  status: completed
+  note: |
+    集英社文庫 特16-1〜10。文庫サイズ学習まんが(NDC 209世界史+726.1漫画)。
+    巻ごとに作画コンビ(2名)+監修歴史学者が異なる=単一著者なし→ページ著者は集英社編集部、
+    実クレジットは巻単位に格納。db-v2欠落の特16-2/4/8/10をNDLで補完(全10巻)。
+  editions:
+    - type: bunkobon
+      label: 集英社文庫版（全10巻）
+      volumes:
+        - {number: 1,  isbn13: '9784087463255', release_date: '2009-01', artists: [茶留たかふみ, 井上大助],   supervisors: [本村凌二]}
+        - {number: 2,  isbn13: '9784087463262', release_date: '2009-01', artists: [野澤真美, 小井土繁],       supervisors: [平勢隆郎]}
+        - {number: 3,  isbn13: '9784087463279', release_date: '2009-02', artists: [茶留たかふみ, 芳村梨絵],   supervisors: [河原温, 後藤明]}
+        - {number: 4,  isbn13: '9784087463286', release_date: '2009-02', artists: [人見倫平, アンベ久子],     supervisors: [斯波義信, 鈴木恒之]}
+        - {number: 5,  isbn13: '9784087463293', release_date: '2009-03', artists: [岩井渓, 長谷川幸恵],       supervisors: [近藤和彦, 河原温]}
+        - {number: 6,  isbn13: '9784087463309', release_date: '2009-03', artists: [笈川かおる, あずみ椋],     supervisors: [近藤和彦]}
+        - {number: 7,  isbn13: '9784087463316', release_date: '2009-04', artists: [井上大助, 青木庸],         supervisors: [遠藤泰生, 並木頼寿]}
+        - {number: 8,  isbn13: '9784087463323', release_date: '2009-04', artists: [中村結香, たかや健二],     supervisors: [石井規衛, 柴宜弘]}
+        - {number: 9,  isbn13: '9784087463330', release_date: '2009-05', artists: [あや秀夫, 郡山誉世夫],     supervisors: [石井規衛, 相良匡俊]}
+        - {number: 10, isbn13: '9784087463347', release_date: '2009-05', artists: [南舘千晶, 竹坂香利],       supervisors: [相良匡俊]}

@@ -125,7 +125,8 @@ if os.path.exists(OVR_PATH):
 
 
 def build_override(slug, ov):
-    """override 定義から直接ページ doc を構築。volumes は ISBN明示、cover/asin は db-v2 補完。"""
+    """override 定義から直接ページ doc を構築。volumes は ISBN明示、cover/asin は db-v2 補完。
+    ★schema 準拠: original_authors は {name,role} オブジェクト、demographic は enum、genres は ≥1。"""
     eds = []
     all_dates = []
     for e in ov.get("editions", []):
@@ -135,29 +136,48 @@ def build_override(slug, ov):
             rd = v.get("release_date") or (m["release_date"] if m else None)
             if rd:
                 all_dates.append(str(rd)[:4])
-            vols.append({"number": v["number"], "asin": (m["asin"] if m else None),
-                         "isbn13": v["isbn13"], "cover_url": (m["cover_url"] if m else None),
-                         "release_date": rd})
+            vd = {"number": v["number"], "asin": (m["asin"] if m else None),
+                  "isbn13": v["isbn13"], "cover_url": (m["cover_url"] if m else None),
+                  "release_date": rd}
+            if v.get("artists"):       # 巻別 作画
+                vd["artists"] = v["artists"]
+            if v.get("supervisors"):   # 巻別 監修
+                vd["supervisors"] = v["supervisors"]
+            vols.append(vd)
         eds.append({"type": e.get("type", "standard"), "label": e.get("label", ""),
                     "imprint": e.get("imprint", ""), "volumes": vols})
     years = [int(y) for y in all_dates if y.isdigit()]
-    # 原作が別に居れば authors は作画(artist)、 居なければ writer_artist
-    arole = "artist" if ov.get("original_authors") else "writer_artist"
+    # author role: override 明示 > 原作別居なら artist > writer_artist
+    arole = ov.get("author_role") or ("artist" if ov.get("original_authors") else "writer_artist")
     doc = {
         "slug": slug, "title": ov["title"], "title_kana": ov.get("title_kana", ""),
-        "title_romaji": "", "year_started": ov.get("year_started") or (min(years) if years else None),
+        "title_romaji": _romaji(ov.get("title_kana", "")) or ov["title"],
+        "year_started": ov.get("year_started") or (min(years) if years else None),
         "year_ended": ov.get("year_ended") or (max(years) if years else None),
         "status": ov.get("status", "completed"),
         "authors": [{"name": nm, "role": arole} for nm in ov.get("authors", [])],
-        "original_authors": ov.get("original_authors", []),
+        "original_authors": [{"name": nm, "role": "writer"} for nm in ov.get("original_authors", [])],
         "publisher": ov.get("publisher", "(unknown)"), "magazine": None,
-        "demographic": ov.get("demographic"), "genres": ov.get("genres", []),
-        "synopsis": ov.get("synopsis"), "anime_adapted": False,
-        "alternative_titles": {}, "wikidata_qid": None,
+        "demographic": ov.get("demographic") or "other",
+        "genres": ov.get("genres") or ["adventure"],
+        "synopsis": ov.get("synopsis") or "", "anime_adapted": False,
+        "alternative_titles": {},
         "editions": eds, "_source": "ndl-option2-recluster+override",
     }
     return doc
 
+
+# 自動ページ(override無し)の base別 genre/demographic(schema必須・有効キー)。
+# 不明 base は ("adventure","other") にフォールバック。 ユーザは後で個別調整可。
+GENRE_DEMO = {
+    "zeruda-no-densetsu": (["fantasy", "adventure"], "shounen"),
+    "little-busters": (["drama", "romance"], "seinen"),
+    "makai-tensho": (["historical", "horror"], "seinen"),
+    "dai-toshokan-no-hitsujikai": (["romance", "school"], "seinen"),
+    "metroid": (["action", "adventure"], "shounen"),
+    "aidoru-densetsu-eriko": (["music", "drama"], "shoujo"),
+    "shikakenin-fujieda-baian": (["historical", "samurai"], "seinen"),
+}
 
 review = []
 written = 0
@@ -173,7 +193,7 @@ for r in rows:
         written += 1
         nv = sum(len(e["volumes"]) for e in doc["editions"])
         review.append((slug, doc["title"], "/".join(a["name"] for a in doc["authors"]),
-                       "/".join(doc["original_authors"]), "", nv, "OVERRIDE"))
+                       "/".join(a["name"] for a in doc["original_authors"]), "", nv, "OVERRIDE"))
         continue
     isbns = [x for x in r["isbns"].split(",") if x]
     n_slugs_in_base = len({rr["slug"] for rr in rows if rr["base"] == base})
@@ -282,15 +302,17 @@ for r in rows:
     y0 = int(min(years)) if years else None
     y1 = int(max(years)) if years else None
 
+    gd_genres, gd_demo = GENRE_DEMO.get(base, (["adventure"], "other"))
     doc = {
-        "slug": slug, "title": title, "title_kana": tkana, "title_romaji": "",
+        "slug": slug, "title": title, "title_kana": tkana or title,
+        "title_romaji": _romaji(tkana) or title,
         "year_started": y0, "year_ended": y1, "status": "completed",
-        "authors": [{"name": nm, "role": "artist"} for nm in artists],
-        "original_authors": originals,
+        "authors": [{"name": nm, "role": "artist"} for nm in artists] or [{"name": "(不明)", "role": "artist"}],
+        "original_authors": [{"name": nm, "role": "writer"} for nm in originals],
         "supervisors": supervisors or None,
-        "publisher": "(unknown)", "magazine": None, "demographic": None,
-        "genres": [], "synopsis": None, "anime_adapted": False,
-        "alternative_titles": {}, "wikidata_qid": None,
+        "publisher": "(unknown)", "magazine": None, "demographic": gd_demo,
+        "genres": gd_genres, "synopsis": "", "anime_adapted": False,
+        "alternative_titles": {},
         "editions": [{"type": "standard", "label": "通常版", "imprint": "",
                       "volumes": [{"number": v["number"], "asin": v["asin"], "isbn13": v["isbn13"],
                                    "cover_url": v["cover_url"], "release_date": v["release_date"]}
@@ -318,7 +340,7 @@ for slug, ov in OVERRIDES.items():
     written += 1
     nv = sum(len(e["volumes"]) for e in doc["editions"])
     review.append((slug, doc["title"], "/".join(a["name"] for a in doc["authors"]),
-                   "/".join(doc["original_authors"]), "", nv, "OVERRIDE+NEW"))
+                   "/".join(a["name"] for a in doc["original_authors"]), "", nv, "OVERRIDE+NEW"))
 
 with open(os.path.join(ROOT, ".cache", "recluster-authors-review.tsv"), "w", encoding="utf-8") as f:
     f.write("slug\ttitle\t作画\t原作\t脚色等\tn_vol\tFLAG\n")

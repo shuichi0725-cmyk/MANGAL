@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const AuthorRole = z.enum(["writer", "artist", "writer_artist"]);
+export const AuthorRole = z.enum(["writer", "artist", "writer_artist", "editor"]);
 export type AuthorRoleT = z.infer<typeof AuthorRole>;
 
 export const Status = z.enum(["ongoing", "completed", "hiatus"]);
@@ -36,6 +36,10 @@ export const VolumeSchema = z.object({
     .nullable()
     .optional(),
   description: z.string().optional(),
+  /** 巻ごとの作画者 (= 学習まんが等、 巻によって作画が異なる作品。 省略時はページ著者を使う) */
+  artists: z.array(z.string().min(1)).optional(),
+  /** 巻ごとの監修者 (= 学習まんが等の歴史学者監修。 省略可) */
+  supervisors: z.array(z.string().min(1)).optional(),
 });
 export type Volume = z.infer<typeof VolumeSchema>;
 

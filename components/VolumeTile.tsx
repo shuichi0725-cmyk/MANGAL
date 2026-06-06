@@ -43,6 +43,16 @@ export default function VolumeTile({ manga, volume, edition }: Props) {
         <p className="text-xs text-ink/50 mt-0.5 leading-tight">
           {date || "発売日未取得"}
         </p>
+        {/* 巻ごとの作画・監修 (= 学習まんが等、 巻で担当が異なる作品。 データがある時だけ表示) */}
+        {(volume.artists?.length || volume.supervisors?.length) && (
+          <p className="text-xs text-ink/55 mt-0.5 leading-tight">
+            {volume.artists?.length ? <span>作画: {volume.artists.join("・")}</span> : null}
+            {volume.artists?.length && volume.supervisors?.length ? (
+              <span className="text-ink/30"> ／ </span>
+            ) : null}
+            {volume.supervisors?.length ? <span>監修: {volume.supervisors.join("・")}</span> : null}
+          </p>
+        )}
         {(volume.asin || volume.kindle_asin || volume.isbn13) && (
           <AffiliateLink
             manga={manga}
