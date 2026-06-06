@@ -141,12 +141,14 @@ def build_override(slug, ov):
         eds.append({"type": e.get("type", "standard"), "label": e.get("label", ""),
                     "imprint": e.get("imprint", ""), "volumes": vols})
     years = [int(y) for y in all_dates if y.isdigit()]
+    # 原作が別に居れば authors は作画(artist)、 居なければ writer_artist
+    arole = "artist" if ov.get("original_authors") else "writer_artist"
     doc = {
         "slug": slug, "title": ov["title"], "title_kana": ov.get("title_kana", ""),
         "title_romaji": "", "year_started": ov.get("year_started") or (min(years) if years else None),
         "year_ended": ov.get("year_ended") or (max(years) if years else None),
         "status": ov.get("status", "completed"),
-        "authors": [{"name": nm, "role": "writer_artist"} for nm in ov.get("authors", [])],
+        "authors": [{"name": nm, "role": arole} for nm in ov.get("authors", [])],
         "original_authors": ov.get("original_authors", []),
         "publisher": ov.get("publisher", "(unknown)"), "magazine": None,
         "demographic": ov.get("demographic"), "genres": ov.get("genres", []),
@@ -303,6 +305,20 @@ for r in rows:
     written += 1
     review.append((slug, title, "/".join(artists), "/".join(originals),
                    "/".join(supervisors), len(vols), flag))
+
+# candidates に無い新規 override slug(版分割で新設したページ)を構築
+cand_slugs = {r["slug"] for r in rows}
+for slug, ov in OVERRIDES.items():
+    if slug in cand_slugs:
+        continue
+    doc = build_override(slug, ov)
+    with open(os.path.join(OUTDIR, slug + ".yml"), "w", encoding="utf-8") as f:
+        f.write("# Stage D: NDL option2 recluster + user override (recluster-overrides.yml)\n")
+        yaml.safe_dump(doc, f, allow_unicode=True, sort_keys=False, default_flow_style=False)
+    written += 1
+    nv = sum(len(e["volumes"]) for e in doc["editions"])
+    review.append((slug, doc["title"], "/".join(a["name"] for a in doc["authors"]),
+                   "/".join(doc["original_authors"]), "", nv, "OVERRIDE+NEW"))
 
 with open(os.path.join(ROOT, ".cache", "recluster-authors-review.tsv"), "w", encoding="utf-8") as f:
     f.write("slug\ttitle\t作画\t原作\t脚色等\tn_vol\tFLAG\n")

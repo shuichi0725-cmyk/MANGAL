@@ -1,0 +1,7 @@
+# Stage D recluster で別ページに正しく作り直したため、メインビルドから除外する源 series_key。
+# (旧クラスタリングが巻を混在させた重複ゴミページの元。内容はStage Dページが全カバー)
+# _slug-apply-build.py がこれを drop に併合する。
+name:富野由悠季|name:∀ガンダム
+name:矢立肇|name:∀ガンダム
+# Tarkus監修アニメコミック版(9784063101102/119、英語題∀Gundam、作画無し)=ユーザ裁定で排除
+name:富野喜幸|name:∀Gundam

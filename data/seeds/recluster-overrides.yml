@@ -41,3 +41,60 @@ manga-hyakunin-isshu-monogatari:
       label: 全首収録版
       volumes:
         - {number: 1, isbn13: '9784052047152', release_date: '2017-11'}
+
+# ∀ガンダム = 3作混在を分離(ユーザ裁定 2026-06-06)。
+#   ① 曽我篤士版 全5巻 = 主版(無印)  ② ときた洸一版 1巻 = 別ページ
+#   ③「[ターンエー]Gundam」2巻(英語題/監修Tarkusのみ/作画無し)= アニメコミック版 → ドロップ
+turn-a-gundam:
+  title: ∀ガンダム
+  title_kana: ターンエーガンダム
+  authors:
+    - 曽我篤士
+  original_authors:
+    - 矢立肇
+    - 富野由悠季
+  publisher: 講談社
+  year_started: 1999
+  year_ended: 2002
+  status: completed
+  note: |
+    曽我篤士による∀ガンダム漫画版(全5巻)。同スラッグに混在していた
+    ときた洸一版(→turn-a-gundam-tokita-1999)とアニメコミック版(Tarkus監修2巻=排除)を分離。
+  editions:
+    - type: standard
+      label: 通常版
+      volumes:
+        - {number: 1, isbn13: '9784063490022', release_date: '1999-12'}
+        - {number: 2, isbn13: '9784063490220', release_date: '2000-06-22'}
+        - {number: 3, isbn13: '9784063490459', release_date: '2001-01-23'}
+        - {number: 4, isbn13: '9784063490671', release_date: '2001-08-23'}
+        - {number: 5, isbn13: '9784063490930', release_date: '2002-05-23'}
+
+turn-a-gundam-tokita-1999:
+  title: ∀ガンダム
+  title_kana: ターンエーガンダム
+  authors:
+    - ときた洸一
+  original_authors:
+    - 矢立肇
+    - 富野由悠季
+  publisher: 講談社
+  year_started: 1999
+  year_ended: 2005
+  status: completed
+  note: |
+    ときた洸一による∀ガンダム漫画版(全2巻、講談社コミックスボンボン)。曽我篤士版とは別作画 → 別ページ。
+    原版: vol1=9784063238822(1999.10) / vol2=9784063238969(2000.4)。
+    vol2は2005.12にKCDX Gレジェンドコミックスで再版(9784063721140)もあり=別版扱い。
+    旧メインビルドはこの2巻と曽我版v3-5を混ぜた重複ゴミpage(tomino-1999/tsuki-no-kaze)を生成
+    していた → 源キーをdrop(recluster-drop-source-keys.txt)。
+  editions:
+    - type: standard
+      label: 通常版（全2巻・ボンボン）
+      volumes:
+        - {number: 1, isbn13: '9784063238822', release_date: '1999-10-06'}
+        - {number: 2, isbn13: '9784063238969', release_date: '2000-04-06'}
+    - type: other
+      label: Gレジェンドコミックス版（再版）
+      volumes:
+        - {number: 2, isbn13: '9784063721140', release_date: '2005-12'}
