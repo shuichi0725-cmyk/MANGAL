@@ -35,14 +35,7 @@ export default function PrivacyPage() {
       </section>
 
       <section className="mt-8 space-y-3 text-sm leading-relaxed text-ink/80">
-        <h2 className="text-base font-semibold text-ink">3. アクセス解析ツール</h2>
-        <p>
-          本サイトは現在、アクセス解析ツール（Google Analytics 等）を利用していません。将来的に導入する場合は、本ページに追記したうえで運用します。
-        </p>
-      </section>
-
-      <section className="mt-8 space-y-3 text-sm leading-relaxed text-ink/80">
-        <h2 className="text-base font-semibold text-ink">4. アフィリエイトプログラムについて</h2>
+        <h2 className="text-base font-semibold text-ink">3. アフィリエイトプログラムについて</h2>
         <p>
           当サイトは将来的に、Amazon アソシエイト・プログラム等のアフィリエイトプログラムを利用する場合があります。利用を開始した際は、運営規約所定の開示文を本ページに掲載します。現時点では、商品リンクは外部サイトの該当ページへ遷移するのみです。
         </p>
@@ -52,21 +45,21 @@ export default function PrivacyPage() {
       </section>
 
       <section className="mt-8 space-y-3 text-sm leading-relaxed text-ink/80">
-        <h2 className="text-base font-semibold text-ink">5. 第三者への開示</h2>
+        <h2 className="text-base font-semibold text-ink">4. 第三者への開示</h2>
         <p>
           本サイトはユーザに関する情報を第三者へ開示・販売することはありません。法令に基づく開示請求等があった場合に限り、必要な範囲で対応する場合があります。
         </p>
       </section>
 
       <section className="mt-8 space-y-3 text-sm leading-relaxed text-ink/80">
-        <h2 className="text-base font-semibold text-ink">6. プライバシーポリシーの変更</h2>
+        <h2 className="text-base font-semibold text-ink">5. プライバシーポリシーの変更</h2>
         <p>
           本ポリシーの内容は、必要に応じて変更することがあります。変更があった場合は、本ページにて告知します。
         </p>
       </section>
 
       <section className="mt-8 space-y-3 text-sm leading-relaxed text-ink/80">
-        <h2 className="text-base font-semibold text-ink">7. お問い合わせ</h2>
+        <h2 className="text-base font-semibold text-ink">6. お問い合わせ</h2>
         <p>
           本ポリシーに関するご質問は、（連絡先メールアドレス）までご連絡ください。
         </p>
