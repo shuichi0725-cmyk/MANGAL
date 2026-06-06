@@ -1,0 +1,43 @@
+# Stage D recluster の per-slug 手動オーバーライド(ユーザ裁定)。
+# builder(_slug-apply-recluster.py)が slug 一致時にこの定義でページを構築する
+# (自動NDL判定を上書き)。volumes は ISBN 明示、cover/asin は db-v2 から補完。
+# 各 edition: type/label/volumes[{number,isbn13,release_date}]
+
+manga-hyakunin-isshu-monogatari:
+  title: マンガ百人一首物語
+  title_kana: マンガヒャクニンイッシュモノガタリ
+  authors:
+    - 学研編集部
+  original_authors: []
+  publisher: 学研教育出版
+  demographic: childrens
+  year_started: 2014
+  year_ended: 2017
+  status: completed
+  note: |
+    学研の学習まんが「百人一首」。同一内容を3形態で刊行した版違い統合(ユーザ裁定 2026-06-06)。
+    NDL責任表示は3版とも空=個人作家なし=学研編集部制作。総ページ約700pで3版一致。
+  editions:
+    # 通常版 = 箱入り全8巻 (2014.2)。db-v2に vol3/vol8 欠落 → NDLで補完(C)
+    - type: standard
+      label: 通常版（全8巻）
+      volumes:
+        - {number: 1, isbn13: '9784055010450', release_date: '2014-02'}
+        - {number: 2, isbn13: '9784055010467', release_date: '2014-02'}
+        - {number: 3, isbn13: '9784055010474', release_date: '2014-02'}  # NDL補完
+        - {number: 4, isbn13: '9784055010481', release_date: '2014-02'}
+        - {number: 5, isbn13: '9784055010498', release_date: '2014-02'}
+        - {number: 6, isbn13: '9784055010504', release_date: '2014-02'}
+        - {number: 7, isbn13: '9784055010511', release_date: '2014-02'}
+        - {number: 8, isbn13: '9784055010528', release_date: '2014-02'}  # NDL補完
+    # 超訳マンガ版 = 2分冊 (2014.11、NDC726.1=漫画)
+    - type: other
+      label: 超訳マンガ版（全2巻）
+      volumes:
+        - {number: 1, isbn13: '9784054061750', release_date: '2014-11'}  # 花の色の巻
+        - {number: 2, isbn13: '9784054061767', release_date: '2014-11'}  # 秋の夕暮の巻
+    # 全首収録版 = 1冊完全収録 (2017.11)
+    - type: kanzenban
+      label: 全首収録版
+      volumes:
+        - {number: 1, isbn13: '9784052047152', release_date: '2017-11'}

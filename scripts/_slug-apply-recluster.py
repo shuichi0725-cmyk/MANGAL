@@ -117,11 +117,62 @@ for r in rows:
         for nm, _ in creators_of(i):
             base_cre_slug[r["base"]][nm].add(r["slug"])
 
+# ユーザ裁定の per-slug オーバーライド(版違い統合・作者確定・巻補完)
+OVR_PATH = os.path.join(ROOT, "data", "seeds", "recluster-overrides.yml")
+OVERRIDES = {}
+if os.path.exists(OVR_PATH):
+    OVERRIDES = yaml.safe_load(open(OVR_PATH, encoding="utf-8")) or {}
+
+
+def build_override(slug, ov):
+    """override 定義から直接ページ doc を構築。volumes は ISBN明示、cover/asin は db-v2 補完。"""
+    eds = []
+    all_dates = []
+    for e in ov.get("editions", []):
+        vols = []
+        for v in e.get("volumes", []):
+            m = db_meta(v["isbn13"])
+            rd = v.get("release_date") or (m["release_date"] if m else None)
+            if rd:
+                all_dates.append(str(rd)[:4])
+            vols.append({"number": v["number"], "asin": (m["asin"] if m else None),
+                         "isbn13": v["isbn13"], "cover_url": (m["cover_url"] if m else None),
+                         "release_date": rd})
+        eds.append({"type": e.get("type", "standard"), "label": e.get("label", ""),
+                    "imprint": e.get("imprint", ""), "volumes": vols})
+    years = [int(y) for y in all_dates if y.isdigit()]
+    doc = {
+        "slug": slug, "title": ov["title"], "title_kana": ov.get("title_kana", ""),
+        "title_romaji": "", "year_started": ov.get("year_started") or (min(years) if years else None),
+        "year_ended": ov.get("year_ended") or (max(years) if years else None),
+        "status": ov.get("status", "completed"),
+        "authors": [{"name": nm, "role": "writer_artist"} for nm in ov.get("authors", [])],
+        "original_authors": ov.get("original_authors", []),
+        "publisher": ov.get("publisher", "(unknown)"), "magazine": None,
+        "demographic": ov.get("demographic"), "genres": ov.get("genres", []),
+        "synopsis": ov.get("synopsis"), "anime_adapted": False,
+        "alternative_titles": {}, "wikidata_qid": None,
+        "editions": eds, "_source": "ndl-option2-recluster+override",
+    }
+    return doc
+
+
 review = []
 written = 0
 
 for r in rows:
     slug, base, sakuga = r["slug"], r["base"], (r["sakuga"] or "").strip()
+    # --- オーバーライド適用(ユーザ裁定ページ) ---
+    if slug in OVERRIDES:
+        doc = build_override(slug, OVERRIDES[slug])
+        with open(os.path.join(OUTDIR, slug + ".yml"), "w", encoding="utf-8") as f:
+            f.write("# Stage D: NDL option2 recluster + user override (recluster-overrides.yml)\n")
+            yaml.safe_dump(doc, f, allow_unicode=True, sort_keys=False, default_flow_style=False)
+        written += 1
+        nv = sum(len(e["volumes"]) for e in doc["editions"])
+        review.append((slug, doc["title"], "/".join(a["name"] for a in doc["authors"]),
+                       "/".join(doc["original_authors"]), "", nv, "OVERRIDE"))
+        continue
     isbns = [x for x in r["isbns"].split(",") if x]
     n_slugs_in_base = len({rr["slug"] for rr in rows if rr["base"] == base})
 
