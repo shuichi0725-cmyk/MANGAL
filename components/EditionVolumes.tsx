@@ -40,7 +40,8 @@ export default function EditionVolumes({ manga, edition }: { manga: Manga; editi
       </h2>
       {hasTabs && (
         // ★3列均等グリッド = 下の巻タイル幅に揃う。 4つ目以降は左下に折り返す。
-        <div className="mb-3 grid grid-cols-3 gap-2" role="tablist" aria-label="刷の切替">
+        // 各タブは2行(上=版名 / 下=時期)で高さを揃える。
+        <div className="mb-3 grid grid-cols-3 gap-2 items-stretch" role="tablist" aria-label="刷の切替">
           {versions!.map((v, i) => {
             const active = i === sel;
             const full = fullStock(v.volumes);
@@ -50,16 +51,21 @@ export default function EditionVolumes({ manga, edition }: { manga: Manga; editi
                 role="tab"
                 aria-selected={active}
                 onClick={() => setSel(i)}
-                // 角丸はジャンルタグ並み (radius-tag)。 選択中はアニメ化オレンジ (accent-warm) で明示。
-                className={`w-full rounded-[var(--radius-tag)] border px-2 py-1.5 text-xs font-medium leading-tight transition active:scale-[0.97] ${
+                // 角丸はジャンルタグ並み (radius-tag)。 選択中はアニメ化オレンジ (accent-warm)。
+                className={`flex w-full flex-col items-center justify-center rounded-[var(--radius-tag)] border px-2 py-1.5 transition active:scale-[0.97] ${
                   active
-                    ? "bg-[var(--color-accent-warm)] text-white border-[var(--color-accent-warm)]"
-                    : "bg-[var(--color-surface-2)] border-[var(--color-line)] text-ink/70"
+                    ? "bg-[var(--color-accent-warm)] text-white border-[var(--color-accent-warm)] shadow-soft"
+                    : "bg-[var(--color-surface-2)] border-[var(--color-line)] text-ink/75 hover:border-[var(--color-accent-warm)]/50"
                 }`}
                 title={full ? "全巻そろい" : "一部欠け"}
               >
-                {v.label}
-                {!full && <span className="ml-1 opacity-70">(一部)</span>}
+                <span className="text-[13px] font-semibold leading-tight">{v.label}</span>
+                <span
+                  className={`mt-0.5 text-[10px] leading-tight ${active ? "text-white/80" : "text-ink/45"}`}
+                >
+                  {v.year_started ?? ""}
+                  {!full && " ·一部"}
+                </span>
               </button>
             );
           })}

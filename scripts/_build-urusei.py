@@ -60,7 +60,7 @@ def full_isbn(vols):
 
 # 通常版 versions(古い順) + 既定=全巻ISBN有りの最古
 versions = []
-for lbl, yr, vs in [("初版（1980-）", 1980, v_shohan), ("新装版（2006-）", 2006, v_shinso), ("復刻BOX（2022）", 2022, v_fukkoku)]:
+for lbl, yr, vs in [("初版", 1980, v_shohan), ("新装版", 2006, v_shinso), ("復刻BOX", 2022, v_fukkoku)]:
     if vs:
         versions.append({"label": lbl, "year_started": yr, "volumes": vs, "_full": full_isbn(vs)})
 versions.sort(key=lambda x: x["year_started"])
