@@ -1503,9 +1503,13 @@ def build_yml(
     raw_kana = ((corr or {}).get("title_kana") or series_row["title_kana"]
                 or fill or src_yml.get("title_kana", ""))
     o["title_kana"] = _strip_pua(re.sub(r"[\s　]+", "", raw_kana)) if raw_kana else ""
-    # title_romaji = 分かち書きかな(corr_segmented優先)からヘボン式生成。 src既存値はfallback。
+    # title_romaji = 分かち書きかな(corr_segmented優先)からヘボン式生成。
     seg_kana = (corr or {}).get("title_kana_segmented") or raw_kana
-    o["title_romaji"] = romanize_kana(_strip_pua(seg_kana)) or src_yml.get("title_romaji", "")
+    _rom = romanize_kana(_strip_pua(seg_kana))
+    if not _rom and o["title"] and not re.search(r"[一-龠ぁ-んァ-ヶ]", o["title"]):
+        # 漢字/かな を含まない=ラテン題(ZERO HOUR等)→ 題名小文字をromajiに
+        _rom = o["title"].lower()
+    o["title_romaji"] = _rom or src_yml.get("title_romaji", "")
     # subtitle: ★種3 curate(seed3.subtitle)を最優先 → 種2(series_row.subtitle)fallback。
     #   種3取込=merge時に副題を持たない代表行が選ばれて脱落する問題の是正(2026-06-02)。
     #   edition 名 (= '新装再編版' 等) なら strip (= 全 edition 含む page には不適)。
