@@ -518,6 +518,55 @@ def load_kana_fill() -> dict:
     return _FURIGANA_FILL
 
 
+# かな(ひら/カタ)→ ヘボン式ローマ字。 title_romaji 用(検索フィールド・全小文字・空白で分かち)。
+_HEP = {
+    "きゃ": "kya", "きゅ": "kyu", "きょ": "kyo", "しゃ": "sha", "しゅ": "shu", "しょ": "sho",
+    "ちゃ": "cha", "ちゅ": "chu", "ちょ": "cho", "にゃ": "nya", "にゅ": "nyu", "にょ": "nyo",
+    "ひゃ": "hya", "ひゅ": "hyu", "ひょ": "hyo", "みゃ": "mya", "みゅ": "myu", "みょ": "myo",
+    "りゃ": "rya", "りゅ": "ryu", "りょ": "ryo", "ぎゃ": "gya", "ぎゅ": "gyu", "ぎょ": "gyo",
+    "じゃ": "ja", "じゅ": "ju", "じょ": "jo", "びゃ": "bya", "びゅ": "byu", "びょ": "byo",
+    "ぴゃ": "pya", "ぴゅ": "pyu", "ぴょ": "pyo", "ふぁ": "fa", "ふぃ": "fi", "ふぇ": "fe", "ふぉ": "fo",
+    "うぃ": "wi", "うぇ": "we", "ゔぁ": "va", "ゔぃ": "vi", "ゔぇ": "ve", "ゔぉ": "vo",
+    "あ": "a", "い": "i", "う": "u", "え": "e", "お": "o", "か": "ka", "き": "ki", "く": "ku", "け": "ke", "こ": "ko",
+    "さ": "sa", "し": "shi", "す": "su", "せ": "se", "そ": "so", "た": "ta", "ち": "chi", "つ": "tsu", "て": "te", "と": "to",
+    "な": "na", "に": "ni", "ぬ": "nu", "ね": "ne", "の": "no", "は": "ha", "ひ": "hi", "ふ": "fu", "へ": "he", "ほ": "ho",
+    "ま": "ma", "み": "mi", "む": "mu", "め": "me", "も": "mo", "や": "ya", "ゆ": "yu", "よ": "yo",
+    "ら": "ra", "り": "ri", "る": "ru", "れ": "re", "ろ": "ro", "わ": "wa", "を": "o", "ん": "n",
+    "が": "ga", "ぎ": "gi", "ぐ": "gu", "げ": "ge", "ご": "go", "ざ": "za", "じ": "ji", "ず": "zu", "ぜ": "ze", "ぞ": "zo",
+    "だ": "da", "ぢ": "ji", "づ": "zu", "で": "de", "ど": "do", "ば": "ba", "び": "bi", "ぶ": "bu", "べ": "be", "ぼ": "bo",
+    "ぱ": "pa", "ぴ": "pi", "ぷ": "pu", "ぺ": "pe", "ぽ": "po", "ゔ": "vu",
+    "ぁ": "a", "ぃ": "i", "ぅ": "u", "ぇ": "e", "ぉ": "o", "ゃ": "ya", "ゅ": "yu", "ょ": "yo",
+}
+def romanize_kana(s: str) -> str:
+    """かな(空白で分かち書き)→ ヘボン式ローマ字(全小文字)。 長音ー省略・促音っ重子音。"""
+    if not s:
+        return ""
+    # カタカナ→ひらがな
+    s = "".join(chr(ord(c) - 0x60) if "ァ" <= c <= "ヴ" else c for c in s)
+    s = re.sub(r"[\s　]+", " ", s).strip()
+    out, i = [], 0
+    while i < len(s):
+        c = s[i]
+        if c == " ":
+            out.append(" "); i += 1; continue
+        if c == "ー":  # 長音は省略
+            i += 1; continue
+        if c == "っ":  # 促音 = 次の子音を重ねる
+            nxt = _HEP.get(s[i+1:i+3]) or _HEP.get(s[i+1:i+2], "") if i + 1 < len(s) else ""
+            if nxt and nxt[0] not in "aiueo":
+                out.append(nxt[0])
+            i += 1; continue
+        two = s[i:i+2]
+        if two in _HEP:
+            out.append(_HEP[two]); i += 2; continue
+        r = _HEP.get(c)
+        if r is not None:
+            out.append(r)
+        # 未知文字(漢字混じり等)は捨てる
+        i += 1
+    return re.sub(r"\s+", " ", "".join(out)).strip().lower()
+
+
 def load_seed3() -> dict:
     """series_key → seed3 entry の dict。
     SEED3 (= 33MB/92万行) の YAML パースは CSafeLoader でも 70秒級なので、
@@ -1454,7 +1503,9 @@ def build_yml(
     raw_kana = ((corr or {}).get("title_kana") or series_row["title_kana"]
                 or fill or src_yml.get("title_kana", ""))
     o["title_kana"] = _strip_pua(re.sub(r"[\s　]+", "", raw_kana)) if raw_kana else ""
-    o["title_romaji"] = src_yml.get("title_romaji", "")
+    # title_romaji = 分かち書きかな(corr_segmented優先)からヘボン式生成。 src既存値はfallback。
+    seg_kana = (corr or {}).get("title_kana_segmented") or raw_kana
+    o["title_romaji"] = romanize_kana(_strip_pua(seg_kana)) or src_yml.get("title_romaji", "")
     # subtitle: ★種3 curate(seed3.subtitle)を最優先 → 種2(series_row.subtitle)fallback。
     #   種3取込=merge時に副題を持たない代表行が選ばれて脱落する問題の是正(2026-06-02)。
     #   edition 名 (= '新装再編版' 等) なら strip (= 全 edition 含む page には不適)。
