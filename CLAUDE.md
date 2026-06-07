@@ -128,6 +128,7 @@
 - ★巻番号層 = `scripts/_audit-volume-numbering.py` (= merge解決後 page×edition で巻番号異常を3分類): **AUTO_FIXED**(上下完全揃い+gap=下=3型水増し、 promoteの`_fix_complete_sequence_numbers`が自動是正済=件数監視。 ~1,677件) / **MISSING_HALF**(片側欠落=取りこぼし=種4領域) / **GAP_OTHER**(真の欠番・外れ値1000等)。 ★AUTO_FIXEDが急増したら新たな誤番号型のsignal。
 - ★フリガナ層 = `scripts/_furigana-audit.py` (= NDL公式読みground-truthで誤フリガナ検出。 [[furigana-ndl-audit]])。
 - ★外国版層 = `scripts/_audit-foreign-editions.py` (= ★**複数証拠**で scope外の外国語版を検出: ①latin題 ②シリーズ全ISBN非9784[978-4=日本] ③複数巻[typo説明不可]。 intakeの`foreigndrop`stageで`--apply`=純粋追加。 ★単巻のみ非9784はtypo懸念で報告のみ。 旧filterの穴=クリーンlatin題[Akira/Naruto外国版]がEMPTYslug/credit文字列依存をすり抜けていた、 を ISBN国コードで恒久封鎖)。
+- ★publisher層 = 各版の出版社は **種2 ISBN→metadata101 schema:publisher** から promote が自動導出 (= edition.publisher=当時社名、 work.publishers[]=社キー集合。 [[publisher_model_edition_level]])。 ★月次=**新規の未キー社名**(norm未解決)を巻数順に flag → 主要なら `data/publishers.yml` にキー追加。 alias追加は **ISBN出版者記号(帯)一致で同一実体を確認した時のみ**(だろう運転禁止)。 families/企業グループ畳みは**不採用**(実体=ISBN帯=統廃合に不変)。 生成器 `scripts/_gen-publisher-keys.py`。 ★ISBN-10/13混在を `_to_isbn13` で正規化必須。
 - 既知の例外型: 再登録の別 ID 二重化 / MADB 形式変更 (= タグ消失・年→巻番号) / 成年誤 flag (= 新レーベル未カバー) / 雑誌漏れ (= cm105 凍結) / 巻番号水増し (= 下=3型)。
 
 ---
