@@ -19,6 +19,10 @@ export type DemographicT = z.infer<typeof Demographic>;
 export const AuthorSchema = z.object({
   name: z.string().min(1),
   role: AuthorRole,
+  /** 著者読み(カタカナ)= 50音索引用。 MADB metadata504(作者master)公式ヨミ由来。 無ければ省略 */
+  kana: z.string().optional(),
+  /** 著者ローマ字(ヘボン、kana由来)= 検索補助。 無ければ省略 */
+  romaji: z.string().optional(),
 });
 export type Author = z.infer<typeof AuthorSchema>;
 

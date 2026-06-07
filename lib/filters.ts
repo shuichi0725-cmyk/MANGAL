@@ -204,6 +204,25 @@ export function uniqueAuthors(items: Manga[], includeOriginal = false): string[]
   return Array.from(set).sort((a, b) => a.localeCompare(b, "ja"));
 }
 
+/** 著者名 → 読み(カタカナ)の一覧 (= 50音索引用)。 重複排除、 kana有る方を優先採用。 */
+export function authorsWithKana(
+  items: Manga[],
+  includeOriginal = false,
+): { name: string; kana: string }[] {
+  const map = new Map<string, string>();
+  const add = (name: string, kana?: string) => {
+    const prev = map.get(name);
+    if (prev === undefined || (!prev && kana)) map.set(name, kana ?? "");
+  };
+  for (const m of items) {
+    for (const a of m.authors) add(a.name, a.kana);
+    if (includeOriginal) for (const a of m.original_authors) add(a.name, a.kana);
+  }
+  return Array.from(map, ([name, kana]) => ({ name, kana })).sort((a, b) =>
+    (a.kana || a.name).localeCompare(b.kana || b.name, "ja"),
+  );
+}
+
 export function yearBounds(items: Manga[]): [number, number] {
   if (items.length === 0) return [1950, new Date().getFullYear()];
   let min = items[0].year_started;

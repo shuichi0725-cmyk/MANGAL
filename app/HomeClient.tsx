@@ -13,7 +13,7 @@ import {
   applyFilters,
   emptyFilterState,
   filtersFromSearchParams,
-  uniqueAuthors,
+  authorsWithKana,
   yearBounds,
 } from "@/lib/filters";
 import type { ArtBook, DataBundle, Manga } from "@/lib/schema";
@@ -57,7 +57,7 @@ export default function HomeClient({ data }: Props) {
   }, [open]);
 
   const bounds = useMemo(() => yearBounds(data.manga), [data.manga]);
-  const authors = useMemo(() => uniqueAuthors(data.manga, true), [data.manga]);
+  const authors = useMemo(() => authorsWithKana(data.manga, true), [data.manga]);
   // ★画集モード = 一覧を画集に切替(ジャンル欄「画集」チップ)。 漫画用フィルタは非適用。
   const showArt = state.artBooks;
   const filteredManga = useMemo(() => applyFilters(data.manga, state), [data.manga, state]);
@@ -128,7 +128,7 @@ export default function HomeClient({ data }: Props) {
             state={state}
             setState={setState}
             yearBounds={bounds}
-            authorOptions={authors}
+            authorEntries={authors}
           />
         </div>
         <div>
@@ -197,7 +197,7 @@ export default function HomeClient({ data }: Props) {
               state={state}
               setState={setState}
               yearBounds={bounds}
-              authorOptions={authors}
+              authorEntries={authors}
             />
           </div>
           <div className="shrink-0 border-t border-[var(--color-line)] p-3">

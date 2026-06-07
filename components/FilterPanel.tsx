@@ -3,13 +3,14 @@
 import { emptyFilterState, type FilterState, type SortKey } from "@/lib/filters";
 import type { DataBundle, StatusT } from "@/lib/schema";
 import { ChipButton } from "@/components/ui/Chip";
+import AuthorKanaIndex from "@/components/AuthorKanaIndex";
 
 type Props = {
   data: DataBundle;
   state: FilterState;
   setState: (next: FilterState) => void;
   yearBounds: [number, number];
-  authorOptions: string[];
+  authorEntries: { name: string; kana: string }[];
 };
 
 function toggle<T>(arr: T[], v: T): T[] {
@@ -21,7 +22,7 @@ export default function FilterPanel({
   state,
   setState,
   yearBounds,
-  authorOptions,
+  authorEntries,
 }: Props) {
   const update = (patch: Partial<FilterState>) => setState({ ...state, ...patch });
 
@@ -214,24 +215,12 @@ export default function FilterPanel({
         </div>
       </Section>
 
-      <Section title="著者">
-        <select
-          multiple
-          value={state.authors}
-          onChange={(e) =>
-            update({
-              authors: Array.from(e.target.selectedOptions, (o) => o.value),
-            })
-          }
-          className="w-full rounded-card border border-[var(--color-line)] px-2.5 py-1.5 h-32 transition focus:outline-none focus:border-[var(--color-accent)]"
-        >
-          {authorOptions.map((a) => (
-            <option key={a} value={a}>
-              {a}
-            </option>
-          ))}
-        </select>
-        <p className="text-[11px] text-ink/45 mt-1">Ctrl/⌘ クリックで複数選択</p>
+      <Section title="著者(五十音)">
+        <AuthorKanaIndex
+          authors={authorEntries}
+          selected={state.authors}
+          onToggle={(name) => update({ authors: toggle(state.authors, name) })}
+        />
       </Section>
 
       <button

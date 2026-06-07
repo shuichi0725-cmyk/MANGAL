@@ -948,6 +948,30 @@ def pub_key_of(name: str | None) -> str | None:
     return _PUBKEY.get(_norm_pub(name))
 
 
+# === 著者ヨミ (50音索引用、 MADB metadata504 公式ヨミ由来) ===
+_AUTHOR_YOMI: dict | None = None
+
+
+def _load_author_yomi() -> None:
+    global _AUTHOR_YOMI
+    if _AUTHOR_YOMI is not None:
+        return
+    p = ROOT / "data" / "seeds" / "author-yomi.yml"
+    _AUTHOR_YOMI = (yaml.safe_load(open(p, encoding="utf-8")) or {}).get("yomi", {}) if p.exists() else {}
+
+
+def enrich_author(a: dict) -> dict:
+    """著者dictに kana(504由来カタカナ)+ romaji(kana→ヘボン)を付与。 無ければ素のまま。"""
+    _load_author_yomi()
+    kana = _AUTHOR_YOMI.get(a.get("name"))
+    if kana:
+        a["kana"] = kana
+        rom = romanize_kana(kana)
+        if rom:
+            a["romaji"] = rom
+    return a
+
+
 def _get_major_publisher_prefix_legacy(con: sqlite3.Connection, series_id: int) -> str | None:
     """旧 (= cache 不使用) 実装、 比較 / 確認 用。"""
     from collections import Counter
@@ -1674,8 +1698,9 @@ def build_yml(
             writers.append({"name": a["name"], "role": a["role"]})
     if not writers:
         writers = src_yml.get("authors") or [{"name": "(unknown)", "role": "writer_artist"}]
-    o["authors"] = writers
-    o["original_authors"] = originals
+    # 著者ヨミ(50音索引用)+ romaji を付与 (= MADB 504 公式ヨミ。 無い著者は素のまま)
+    o["authors"] = [enrich_author(w) for w in writers]
+    o["original_authors"] = [enrich_author(x) for x in originals]
 
     # publisher: 種3 → 旧 yml の 優先で 取得、 master 未定義なら 旧 yml に fallback
     pub_cand = (seed3 or {}).get("publisher") or src_yml.get("publisher")
