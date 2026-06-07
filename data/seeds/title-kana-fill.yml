@@ -1,5 +1,4 @@
-# title_kana 欠落 series を MADB巻ISBN読み + NDL by-ISBN読み から補完。
-# kana_segmented=空白区切り(表示は空白除去/slug生成は空白保持)。promoteが corr の次に読む。
+# title_kana 補完(MADB + NDL + カタカナ題)
 fills:
 - key: name:(11)|name:異世界でカフェを開店しました。
   kana_segmented: イセカイ デ カフェ オ カイテン シマシタ
@@ -104,6 +103,9 @@ fills:
   kana_segmented: イセカイ ショウカン ワ ニドメ デス.
 - key: name:41|name:状態変禍|sub:改造アプリで逆襲エッチ
   kana_segmented: ジョウタイ ヘンカ
+- key: name:44626|name:ティータイム
+  kana_segmented: ティータイム
+  src: katakana-title
 - key: name:46|name:センシティブ・ボーイ
   kana_segmented: センシティブ ボーイ
 - key: name:4U|name:アダムの花婿
@@ -401,6 +403,9 @@ fills:
   kana_segmented: ジツロク ウラワザ ファイル
 - key: name:Aやん|name:ポンコツ3人家族こんな日常でもええやん!
   kana_segmented: ポンコツ サンニン カゾク コンナ ニチジョウ デモ エエヤン
+- key: name:A・ゴロン|name:アンジェリク
+  kana_segmented: アンジェリク
+  src: katakana-title
 - key: name:B-RIVER|name:クイーンズブレイドアンソロジーコミック
   kana_segmented: クイーンズ ブレイド アンソロジー コミック
 - key: name:B.|name:全てのネガティブをプラスに変える夫髭
@@ -14006,6 +14011,9 @@ fills:
   kana_segmented: カンタイ コレクション カンコレ デンゲキ コミック アンソロジー
 - key: name:もりのもみじ|name:隠れ星は心を繋いで
   kana_segmented: カクレボシ ワ ココロ オ ツナイデ
+- key: name:もりひのと|name:カミング・ホーム
+  kana_segmented: カミングホーム
+  src: katakana-title
 - key: name:もりまりも|name:理想の彼女
   kana_segmented: リソウ ノ カノジョ
 - key: name:もりもより|name:君の夜に触れる
@@ -28182,6 +28190,9 @@ fills:
   kana_segmented: ヤマガミサマ ト オキニイリ
 - key: name:七瀬おむ|name:転生した脇役平凡な僕は、美形第二王子をヤンデレにしてしまった
   kana_segmented: テンセイ シタ ワキヤク ヘイボン ナ ボク ワ ビケイ ダイニ オウジ オ ヤンデレ ニ シテ シマッタ
+- key: name:七瀬かい|name:セブンティーンマーダー
+  kana_segmented: セブンティーンマーダー
+  src: katakana-title
 - key: name:七瀬なつ|name:鴉天狗様と最愛の契り
   kana_segmented: カラステングサマ ト サイアイ ノ チギリ
 - key: name:七瀬八|name:おやすみストレイシープ
@@ -50541,6 +50552,9 @@ fills:
 - key: name:白泉社|name:ウエイティング・ベル
   kana_segmented: ウエイティング ベル
   src: ndl
+- key: name:白泉社|name:ブラッディ・マリィ
+  kana_segmented: ブラッディマリィ
+  src: katakana-title
 - key: name:白泉社|name:プラスティック・ドール
   kana_segmented: プラスティック ドール
   src: ndl
@@ -60295,6 +60309,9 @@ fills:
   kana_segmented: ヨル ガ オワル マデ
 - key: qid:Q1036246|name:JIN
   kana_segmented: ジン
+- key: qid:Q1036246|name:ザイル
+  kana_segmented: ザイル
+  src: katakana-title
 - key: qid:Q1036246|name:フイチン再見
   kana_segmented: フイチン ツァイチェン
 - key: qid:Q1036246|name:日本の歴史
@@ -64328,6 +64345,9 @@ fills:
 - key: qid:Q11384930|name:トラブル☆チェリー
   kana_segmented: トラブル チェリー
   src: ndl
+- key: qid:Q11384930|name:ラヴ・ソール
+  kana_segmented: ラヴソール
+  src: katakana-title
 - key: qid:Q11384930|name:妻は夜鷹か夜雀か
   kana_segmented: ツマ ワ ヨタカ カ ヨスズメ カ
 - key: qid:Q11384930|name:蒼の不倫.
@@ -65028,6 +65048,9 @@ fills:
     オモテブタイ エ タタサレル
 - key: qid:Q11425578|name:アイトアイ
   kana_segmented: アイ ト アイ
+- key: qid:Q11425578|name:ドメスティック
+  kana_segmented: ドメスティック
+  src: katakana-title
 - key: qid:Q11425578|name:蜜葬
   kana_segmented: ミツソウ
 - key: qid:Q11425602|name:「ククク……。奴は四天王の中でも最弱」と解雇された俺、なぜか勇者と聖女の師匠になる.
@@ -65851,6 +65874,9 @@ fills:
   kana_segmented: ゴールド
 - key: qid:Q11469401|name:Gold|sub:大阪青春夏の陣
   kana_segmented: ゴールド
+- key: qid:Q11469401|name:ゴールド
+  kana_segmented: ゴールド
+  src: katakana-title
 - key: qid:Q11469401|name:半グレ
   kana_segmented: ハングレ
 - key: qid:Q11469401|name:最後の不良
@@ -66213,6 +66239,9 @@ fills:
 - key: qid:Q11489255|name:Eva lady
   kana_segmented: Eva lady
   src: ndl
+- key: qid:Q11489255|name:エヴァ・レディ
+  kana_segmented: エヴァレディ
+  src: katakana-title
 - key: qid:Q11489301|name:Crew 1994
   kana_segmented: クルー1994
   src: ndl
@@ -66670,6 +66699,9 @@ fills:
   kana_segmented: シン ・ ソウタ ノ ホウチョウ
 - key: qid:Q11520276|name:羆撃ちのサムライ
   kana_segmented: クマウチ ノ サムライ|羆 (クマ) 撃ちのサムライ
+- key: qid:Q11520602|name:サニー・サイド・アップ
+  kana_segmented: サニーサイドアップ
+  src: katakana-title
 - key: qid:Q11520602|name:ザ★デビュー
   kana_segmented: ザ デビュー
   src: ndl
@@ -66734,6 +66766,9 @@ fills:
   kana_segmented: ホウカゴ ファンタジー
 - key: qid:Q11523383|name:よりぬきケシカスくん
   kana_segmented: ケシカスクン ケッサクセン|ヨリヌキ ケシカスクン
+- key: qid:Q11523385|name:モノクロームレター
+  kana_segmented: モノクロームレター
+  src: katakana-title
 - key: qid:Q11523385|name:赤い恍惚 (エクスタンス)|sub:村生ミオ自選短編集
   kana_segmented: アカイ エクスタンス
 - key: qid:Q11523385|name:黒い浪漫 (ロマンス)|sub:村生ミオ自選短編集
@@ -69527,6 +69562,9 @@ fills:
 - key: qid:Q11625662|name:Comic HERO
   kana_segmented: コミックヒーロー
   src: ndl
+- key: qid:Q11625662|name:ティータイム
+  kana_segmented: ティータイム
+  src: katakana-title
 - key: qid:Q11625662|name:ワールドヒーローズ光龍伝
   kana_segmented: ワールド ヒーローズ コウリュウデン
   src: ndl
@@ -70163,6 +70201,9 @@ fills:
   kana_segmented: カノン
 - key: qid:Q11660784|name:こじらせboy meets girl!
   kana_segmented: コジラセ boy meets girl
+- key: qid:Q11661265|name:トーキョーゲーム
+  kana_segmented: トーキョーゲーム
+  src: katakana-title
 - key: qid:Q11661265|name:ラスベガスキング
   kana_segmented: ラスベガス キング
 - key: qid:Q11661464|name:永久機関シマエナガ
@@ -70404,6 +70445,9 @@ fills:
 - key: qid:Q11673673|name:アスタロト
   kana_segmented: アスタロト
   src: ndl
+- key: qid:Q11673673|name:サプライズホテル
+  kana_segmented: サプライズホテル
+  src: katakana-title
 - key: qid:Q11673673|name:パタリロ! 選集
   kana_segmented: パタリロ センシュウ
 - key: qid:Q11673673|name:パタリロ!選集
@@ -70655,6 +70699,9 @@ fills:
   kana_segmented: ニンゲン ペアリング
 - key: qid:Q118727268|name:異種族追放コンカフェ
   kana_segmented: イシュゾク ツイホウ コンカフェ
+- key: qid:Q118746902|name:ダークホース・カフェ
+  kana_segmented: ダークホースカフェ
+  src: katakana-title
 - key: qid:Q1188433|name:とらドラ!
   kana_segmented: トラドラ
 - key: qid:Q1188433|name:まんがーる!
@@ -72506,6 +72553,9 @@ fills:
   kana_segmented: ミズポロ
 - key: qid:Q18054718|name:愛しあう獣たち
   kana_segmented: アイシアウ ケモノタチ
+- key: qid:Q18054848|name:スキャンダル・ハンター
+  kana_segmented: スキャンダルハンター
+  src: katakana-title
 - key: qid:Q181569|name:ひぐらしのなく頃に 語咄し編
   kana_segmented: ヒグラシ ノ ナク コロ ニ カタリ バナシ ヘン
 - key: qid:Q181569|name:ひぐらしのなく頃に 鬼隠し編
@@ -73552,6 +73602,9 @@ fills:
   kana_segmented: フタリ デ オカシナ キュウジツ オ
 - key: qid:Q24041685|name:ふたりでおかしな休日を.
   kana_segmented: フタリ デ オカシナ キュウジツ オ.
+- key: qid:Q24045825|name:ラブ・フォーカス
+  kana_segmented: ラブフォーカス
+  src: katakana-title
 - key: qid:Q24045825|name:黒のミラージユ
   kana_segmented: クロ ノ ミラージユ
   src: ndl
@@ -73705,6 +73758,9 @@ fills:
 - key: qid:Q2517702|name:アドベンチャーkid
   kana_segmented: アドベンチャー Kid
   src: ndl
+- key: qid:Q2517702|name:ラ・ブルー・ガール
+  kana_segmented: ラブルーガール
+  src: katakana-title
 - key: qid:Q2526458|name:キューピッドの卵
   kana_segmented: キューピッド ノ タマゴ
   src: ndl
@@ -74906,6 +74962,12 @@ fills:
 - key: qid:Q3194504|name:パイナップルARMY
   kana_segmented: パイナップル army
   src: ndl
+- key: qid:Q3194504|name:パイナップルアーミー/キングオブザ・ロード
+  kana_segmented: パイナップルアーミーキングオブザロード
+  src: katakana-title
+- key: qid:Q3194504|name:ボン
+  kana_segmented: ボン
+  src: katakana-title
 - key: qid:Q3194504|name:自選刺客怨み葵|sub:柳生死天王
   kana_segmented: ジセン シカク ウラミ アオイ
 - key: qid:Q3194504|name:自選刺客怨み葵|sub:独眼竜の夢
@@ -75225,6 +75287,9 @@ fills:
   kana_segmented: ザンゲ
 - key: qid:Q3478624|name:おかあさんの扉
   kana_segmented: オカアサン ノ トビラ
+- key: qid:Q3478624|name:ゴッドボンボン
+  kana_segmented: ゴッドボンボン
+  src: katakana-title
 - key: qid:Q3478624|name:スポーツポン
   kana_segmented: スポーツポン
   src: ndl
@@ -75709,6 +75774,9 @@ fills:
 - key: qid:Q41698730|name:ダークネス
   kana_segmented: ダークネス
   src: ndl
+- key: qid:Q41698730|name:ブルームーン
+  kana_segmented: ブルームーン
+  src: katakana-title
 - key: qid:Q41698730|name:夢魔
   kana_segmented: シュフトセイカツシャ
   src: ndl
@@ -76037,6 +76105,9 @@ fills:
 - key: qid:Q445875|name:ジョカヘ
   kana_segmented: オオシマ ユミコ センシュウ
   src: ndl
+- key: qid:Q445875|name:ラスコーリニコフ ロジオン ロマーヌィチ
+  kana_segmented: ラスコーリニコフロジオンロマーヌィチ
+  src: katakana-title
 - key: qid:Q445903|name:HELLSING
   kana_segmented: ヘルシング
 - key: qid:Q446051|name:ハッピーエンドな片想い
@@ -76497,6 +76568,9 @@ fills:
   src: ndl
 - key: qid:Q47582971|name:ねこぱんち
   kana_segmented: ネコ パンチ
+- key: qid:Q47582971|name:オーディション
+  kana_segmented: オーディション
+  src: katakana-title
 - key: qid:Q4811878|name:Home
   kana_segmented: Home
   src: ndl
@@ -77167,6 +77241,9 @@ fills:
 - key: qid:Q55177935|name:CAT WALK
   kana_segmented: キャット ウォーク
   src: ndl
+- key: qid:Q55177973|name:ビブラフォン
+  kana_segmented: ビブラフォン
+  src: katakana-title
 - key: qid:Q55177973|name:ベージュの月と浮気者
   kana_segmented: ベージュ ノ ツキ ト ウワキモノ
   src: ndl
@@ -77199,6 +77276,9 @@ fills:
   kana_segmented: ニチヨウビ ノ ハジメ チャン
 - key: qid:Q55522832|name:翠花は少子化担当
   kana_segmented: スイカ ワ ショウシカ タントウ
+- key: qid:Q55523051|name:クリスタル・ドール
+  kana_segmented: クリスタルドール
+  src: katakana-title
 - key: qid:Q55523051|name:ミステリー傑作選
   kana_segmented: ミステリーケッサクセン
   src: ndl
@@ -77945,6 +78025,9 @@ fills:
 - key: qid:Q6392014|name:ラスト・クリエイター
   kana_segmented: ラスト ・ クリエイター
   src: ndl
+- key: qid:Q6392014|name:ラミア
+  kana_segmented: ラミア
+  src: katakana-title
 - key: qid:Q6392014|name:リ・バース
   kana_segmented: リ ・ バース
   src: ndl
@@ -77969,6 +78052,9 @@ fills:
 - key: qid:Q6410148|name:Shop自分
   kana_segmented: Shop ジブン
   src: ndl
+- key: qid:Q6410148|name:ボーイ
+  kana_segmented: ボーイ
+  src: katakana-title
 - key: qid:Q6410148|name:マルチェロ
   kana_segmented: マルチェロ
   src: ndl
@@ -78283,6 +78369,9 @@ fills:
 - key: qid:Q6858005|name:フィータス
   kana_segmented: フィータス
   src: ndl
+- key: qid:Q6858005|name:プレッシャー・ゲーム
+  kana_segmented: プレッシャーゲーム
+  src: katakana-title
 - key: qid:Q6858005|name:ミルキィパニック
   kana_segmented: ミルキィ パニック
   src: ndl
@@ -78330,6 +78419,9 @@ fills:
   kana_segmented: フベン デ ステキナ エド ノ マチ
 - key: qid:Q6883357|name:TheかぼちゃワインFirst Look
   kana_segmented: ザ カボチャ ワイン ファースト ルック
+- key: qid:Q6883357|name:ピンクスパット
+  kana_segmented: ピンクスパット
+  src: katakana-title
 - key: qid:Q6883359|name:すがやみつるのマンガ一太郎入門
   kana_segmented: スガヤ ミツル ノ マンガ イチタロウ ニュウモン
   src: ndl
@@ -78602,6 +78694,9 @@ fills:
 - key: qid:Q7310129|name:Agapes
   kana_segmented: アガペイズ
   src: ndl
+- key: qid:Q7310148|name:タイタニックママ
+  kana_segmented: タイタニックママ
+  src: katakana-title
 - key: qid:Q7310148|name:今日は何曜日
   kana_segmented: ｷｮｳﾜﾅﾝﾖｳﾋﾞ
   src: ndl
@@ -78764,6 +78859,9 @@ fills:
   kana_segmented: GATO ゼロイチ ノ センジョウ
 - key: qid:Q7564122|name:GATOゼロイチの戦場|sub:餓島へ!!
   kana_segmented: GATO ゼロイチ ノ センジョウ
+- key: qid:Q7564122|name:ウァナビーズ
+  kana_segmented: ウァナビーズ
+  src: katakana-title
 - key: qid:Q757810|name:SOUL EATER SOUL ART
   kana_segmented: ソウル イーター ソウル アート
 - key: qid:Q759466|name:18階の男
@@ -79540,6 +79638,9 @@ fills:
   kana_segmented: キゾク カラ ショミン ニ ナッタ ノデ コンヤク オ カイショウ サレマシタ
 - key: qid:Q8979434|name:おざなりダンジョンTACTICS
   kana_segmented: オザナリ ダンジョン タクティクス
+- key: qid:Q8979434|name:アブラ・マンダラ
+  kana_segmented: アブラマンダラ
+  src: katakana-title
 - key: qid:Q8979434|name:エポキシ
   kana_segmented: エポキシ
   src: ndl
@@ -80739,9 +80840,18 @@ fills:
 - key: qid:Q965600|name:Shampoo colon
   kana_segmented: Shampoo colon
   src: ndl
+- key: qid:Q965600|name:TAXIドライバー
+  kana_segmented: ドライバー
+  src: katakana-title
 - key: qid:Q965600|name:Up-to date
   kana_segmented: Up tu date
   src: ndl
+- key: qid:Q965600|name:ウォーキングオン
+  kana_segmented: ウォーキングオン
+  src: katakana-title
+- key: qid:Q965600|name:スペルマン
+  kana_segmented: スペルマン
+  src: katakana-title
 - key: qid:Q965600|name:プレミア
   kana_segmented: プレミア
   src: ndl
