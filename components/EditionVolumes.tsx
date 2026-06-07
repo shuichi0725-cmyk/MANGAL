@@ -39,7 +39,8 @@ export default function EditionVolumes({ manga, edition }: { manga: Manga; editi
         )}
       </h2>
       {hasTabs && (
-        <div className="mb-3 flex flex-wrap gap-1.5" role="tablist" aria-label="刷の切替">
+        // ★3列均等グリッド = 下の巻タイル幅に揃う。 4つ目以降は左下に折り返す。
+        <div className="mb-3 grid grid-cols-3 gap-2" role="tablist" aria-label="刷の切替">
           {versions!.map((v, i) => {
             const active = i === sel;
             const full = fullStock(v.volumes);
@@ -49,13 +50,16 @@ export default function EditionVolumes({ manga, edition }: { manga: Manga; editi
                 role="tab"
                 aria-selected={active}
                 onClick={() => setSel(i)}
-                className={`tactile-chip text-xs px-3 py-1.5 rounded-chip ${
-                  active ? "bg-[var(--color-accent)] text-white" : "text-ink/70"
+                // 角丸はジャンルタグ並み (radius-tag)。 選択中はアニメ化オレンジ (accent-warm) で明示。
+                className={`w-full rounded-[var(--radius-tag)] border px-2 py-1.5 text-xs font-medium leading-tight transition active:scale-[0.97] ${
+                  active
+                    ? "bg-[var(--color-accent-warm)] text-white border-[var(--color-accent-warm)]"
+                    : "bg-[var(--color-surface-2)] border-[var(--color-line)] text-ink/70"
                 }`}
                 title={full ? "全巻そろい" : "一部欠け"}
               >
                 {v.label}
-                {!full && <span className="ml-1 opacity-60">(一部)</span>}
+                {!full && <span className="ml-1 opacity-70">(一部)</span>}
               </button>
             );
           })}
