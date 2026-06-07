@@ -39,9 +39,9 @@ export default function EditionVolumes({ manga, edition }: { manga: Manga; editi
         )}
       </h2>
       {hasTabs && (
-        // ★3列均等グリッド = 下の巻タイル幅に揃う。 4つ目以降は左下に折り返す。
-        // 各タブは2行(上=版名 / 下=時期)で高さを揃える。
-        <div className="mb-3 grid grid-cols-3 gap-2 items-stretch" role="tablist" aria-label="刷の切替">
+        // ★採用デザイン: 3列・間隔0.125rem(gap-0.5)・高さ2.1rem。
+        //   極太名を中央 + 年を右下隅。 選択中はアニメ化オレンジ塗り。 4つ目以降は左下に折返し。
+        <div className="mb-3 grid grid-cols-3 gap-0.5" role="tablist" aria-label="刷の切替">
           {versions!.map((v, i) => {
             const active = i === sel;
             const full = fullStock(v.volumes);
@@ -51,21 +51,37 @@ export default function EditionVolumes({ manga, edition }: { manga: Manga; editi
                 role="tab"
                 aria-selected={active}
                 onClick={() => setSel(i)}
-                // 角丸はジャンルタグ並み (radius-tag)。 選択中はアニメ化オレンジ (accent-warm)。
-                className={`flex w-full flex-col items-center justify-center rounded-[var(--radius-tag)] border px-2 py-1.5 transition active:scale-[0.97] ${
-                  active
-                    ? "bg-[var(--color-accent-warm)] text-white border-[var(--color-accent-warm)] shadow-soft"
-                    : "bg-[var(--color-surface-2)] border-[var(--color-line)] text-ink/75 hover:border-[var(--color-accent-warm)]/50"
+                className={`relative flex items-center justify-center overflow-hidden rounded-[var(--radius-tag)] border px-2 transition active:scale-[0.98] ${
+                  active ? "shadow-soft" : "border-[var(--color-line)] bg-[var(--color-surface-2)] text-ink/70"
                 }`}
+                style={
+                  active
+                    ? {
+                        minHeight: "2.1rem",
+                        paddingTop: "0.15rem",
+                        paddingBottom: "0.15rem",
+                        background: "var(--color-accent-warm)",
+                        borderColor: "var(--color-accent-warm)",
+                        color: "#fff",
+                      }
+                    : { minHeight: "2.1rem", paddingTop: "0.15rem", paddingBottom: "0.15rem" }
+                }
                 title={full ? "全巻そろい" : "一部欠け"}
               >
-                <span className="text-[13px] font-semibold leading-tight">{v.label}</span>
+                <span className="text-[18px] font-black leading-none">{v.label}</span>
                 <span
-                  className={`mt-0.5 text-[10px] leading-tight ${active ? "text-white/80" : "text-ink/45"}`}
+                  className={`absolute bottom-0.5 right-1.5 text-[7px] tabular-nums ${active ? "text-white/70" : "opacity-40"}`}
                 >
                   {v.year_started ?? ""}
-                  {!full && " ·一部"}
                 </span>
+                {!full && (
+                  <span
+                    className="absolute left-1 top-0.5 text-[7px]"
+                    style={{ color: active ? "rgba(255,255,255,0.85)" : "var(--color-accent)" }}
+                  >
+                    一部
+                  </span>
+                )}
               </button>
             );
           })}
