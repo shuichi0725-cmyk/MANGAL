@@ -3465,3 +3465,28 @@ non_manga:
   - series_key: "name:神山健治|name:東のエデン劇場版"
     reason: 非漫画(フィルムコミック/劇場版)
     note: NDL「フィルムコミック」検索でtitle markerヒット(ISBN突合)。映画/アニメのコマ割り絵本=非漫画。
+  # ★手塚治虫漫画全集 別巻=非漫画(エッセイ/対談/講演/技法/評論)。NDL RDF照合2026-06-08で確認
+  - series_key: "qid:Q193300|name:手塚治虫エッセイ集"
+    reason: non_manga_zenshu_bekan
+    note: "手塚治虫漫画全集 別巻=エッセイ集(文章)。NDL照合で非漫画と確認。巻2で表示されていた唯一の実drop"
+  - series_key: "qid:Q193300|name:手塚治虫エッセイ集成私的作家考"
+    reason: non_manga_zenshu_bekan
+    note: "全集別巻=エッセイ集成(文章)。巻0"
+  - series_key: "qid:Q193300|name:手塚治虫対談集"
+    reason: non_manga_zenshu_bekan
+    note: "全集別巻=対談集(文章)。巻0"
+  - series_key: "qid:Q193300|name:手塚治虫講演集"
+    reason: non_manga_zenshu_bekan
+    note: "全集別巻=講演集(文章)。巻0"
+  - series_key: "qid:Q193300|name:手塚治虫のまんが専科"
+    reason: non_manga_zenshu_bekan
+    note: "漫画技法書(描き方)。巻0"
+  - series_key: "qid:Q193300|name:手塚治虫漫画の奥義"
+    reason: non_manga_zenshu_bekan
+    note: "漫画技法/対談書。巻0"
+  - series_key: "name:手塚治虫,石子順|name:手塚治虫 漫画の奥義"
+    reason: non_manga_zenshu_bekan
+    note: "漫画の奥義(石子順との対談/技法)。巻0"
+  - series_key: "name:米沢嘉博|name:手塚治虫マンガ論"
+    reason: non_manga_zenshu_bekan
+    note: "米沢嘉博による手塚論=評論。巻0"
