@@ -865,6 +865,89 @@ def get_major_publisher_prefix(con: sqlite3.Connection, series_id: int) -> str |
     return _MAJOR_CACHE.get(series_id) if _MAJOR_CACHE else None
 
 
+# === publisher 解決 (設計b: 種2 ISBN→当時社名(版表示) → キー(work集合)) ===
+# edition.publisher = 当時の生社名(事実・表示)、 work.publishers = 全版の社キー distinct、
+# work.publisher = 代表(最多巻の社キー)。 名前→キーは publishers.yml(display名norm照合) +
+# publisher-aliases.yml(別名同一実体 merge、 ISBN帯確認済)。 long尾は key無し=生社名表示のみ。
+_PUBKEY: dict | None = None        # norm社名 → key
+_ISBN2PUB: dict | None = None      # isbn(digits) → 生社名
+
+
+def _to_isbn13(s) -> str | None:
+    """ISBN文字列(10/13、ハイフン有無)→ 13桁digits。 不正は None。"""
+    d = re.sub(r"[^0-9Xx]", "", str(s))
+    if len(d) == 13:
+        return d
+    if len(d) == 10:
+        core = "978" + d[:9]
+        c = sum((1 if i % 2 == 0 else 3) * int(x) for i, x in enumerate(core))
+        return core + str((10 - c % 10) % 10)
+    return None
+
+
+def _norm_pub(s: str) -> str:
+    import unicodedata
+    s = unicodedata.normalize("NFKC", s or "")
+    s = re.sub(r"[\(\[（【].{0,6}?(発売|発行|製作|配給).{0,2}?[\)\]）】]", "", s)
+    s = re.sub(r"(株式会社|有限会社|合同会社|\(株\)|\(有\)|㈱|㈲)", "", s)
+    s = re.sub(r"[\s・･,，\.\-—–]", "", s).strip()
+    return s
+
+
+def _load_pub_resolver() -> None:
+    global _PUBKEY, _ISBN2PUB
+    if _PUBKEY is not None:
+        return
+    pub = yaml.safe_load(open(ROOT / "data" / "publishers.yml", encoding="utf-8")) or {}
+    _PUBKEY = {_norm_pub(v["name"]): k for k, v in pub.items()}
+    ali = ROOT / "data" / "publisher-aliases.yml"
+    if ali.exists():
+        for nm, key in (yaml.safe_load(open(ali, encoding="utf-8")) or {}).items():
+            _PUBKEY[nm] = key   # alias key は norm社名 → 既存/新キー
+    _ISBN2PUB = {}
+    meta = ROOT / ".cache" / "madb" / "metadata101-clean.json"
+    if meta.exists():
+        g = json.load(open(meta, encoding="utf-8"))
+        rows = g.get("@graph", g) if isinstance(g, dict) else g
+        for r in rows:
+            p = r.get("schema:publisher") or r.get("publisher")
+            if isinstance(p, list):
+                p = p[0] if p else None
+            if isinstance(p, dict):
+                p = p.get("@value") or p.get("name")
+            i = r.get("schema:isbn") or r.get("isbn")
+            if isinstance(i, list):
+                i = i[0] if i else None
+            if not p or not i:
+                continue
+            k = _to_isbn13(i)   # ★metadata101はISBN-10混在 → 13に正規化してDB(isbn13)と突合
+            if k:
+                _ISBN2PUB[k] = p
+
+
+def edition_pub_name(ed: dict) -> str | None:
+    """版の当時社名 = 巻ISBN群から最多の生社名 (= 種2 ISBN→metadata101)。"""
+    from collections import Counter
+    _load_pub_resolver()
+    c = Counter()
+    for v in ed.get("volumes", []):
+        isbn = v.get("isbn13")
+        if not isbn:
+            continue
+        nm = _ISBN2PUB.get(_to_isbn13(isbn))
+        if nm:
+            c[nm] += 1
+    return c.most_common(1)[0][0] if c else None
+
+
+def pub_key_of(name: str | None) -> str | None:
+    """生社名 → publishers.yml キー (norm照合 + alias)。 未登録(long尾)は None。"""
+    if not name:
+        return None
+    _load_pub_resolver()
+    return _PUBKEY.get(_norm_pub(name))
+
+
 def _get_major_publisher_prefix_legacy(con: sqlite3.Connection, series_id: int) -> str | None:
     """旧 (= cache 不使用) 実装、 比較 / 確認 用。"""
     from collections import Counter
@@ -1429,6 +1512,10 @@ def clean_edition(ed: dict) -> dict:
         "type": ed["type"],
         "label": ed["label"],
     }
+    # publisher = 版の当時社名 (= 種2 ISBN由来、 事実・タブ表示)。 imprint(レーベル)とは別。
+    _pub = edition_pub_name(ed)
+    if _pub:
+        out["publisher"] = _pub
     if ed["imprint"]:
         out["imprint"] = ed["imprint"]
     if ed["year_started"]:
@@ -1662,6 +1749,20 @@ def build_yml(
         o["wikipedia_url"] = src_yml["wikipedia_url"]
 
     o["editions"] = [clean_edition(ed) for ed in editions]
+
+    # work-level publisher (設計b): 全版の社キー distinct + 代表(最多巻の社キー)。
+    # 種2 ISBN由来を最優先。 1社も解決できない時のみ L1597 の seed3/src fallback を残す。
+    from collections import Counter as _C
+    _pv = _C()
+    for ce in o["editions"]:
+        k = pub_key_of(ce.get("publisher"))
+        if k:
+            _pv[k] += len(ce.get("volumes", []))
+    if _pv:
+        o["publishers"] = sorted(_pv)
+        o["publisher"] = _pv.most_common(1)[0][0]  # 代表 = 最多巻のキー
+    else:
+        o["publishers"] = []
     return o
 
 

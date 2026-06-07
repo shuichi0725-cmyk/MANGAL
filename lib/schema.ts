@@ -105,7 +105,11 @@ export const MangaSchema = z.object({
   status: Status,
   authors: z.array(AuthorSchema).min(1),
   original_authors: z.array(AuthorSchema).default([]),
+  /** 代表出版社キー (= 最多巻の版。 ヘッダ表示用)。 全版が長尾社の時は "(unknown)" */
   publisher: z.string().min(1),
+  /** 全版の出版社キー (= distinct、 フィルタ用)。 1作が複数社から出た場合に全社を保持。
+   *  publisher は代表1社、 こちらは「どれかの版を出した社」全部 (= 集合フィルタ) */
+  publishers: z.array(z.string()).default([]),
   magazine: z.string().min(1).nullable().optional(),
   demographic: Demographic,
   genres: z.array(z.string().min(1)).min(1),

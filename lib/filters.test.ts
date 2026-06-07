@@ -19,6 +19,7 @@ const m = (over: Partial<Manga> = {}): Manga => ({
   authors: over.authors ?? [{ name: "尾田栄一郎", role: "writer_artist" }],
   original_authors: over.original_authors ?? [],
   publisher: over.publisher ?? "shueisha",
+  publishers: over.publishers ?? ["shueisha"],
   magazine: over.magazine ?? "weekly-shonen-jump",
   demographic: over.demographic ?? "shounen",
   genres: over.genres ?? ["action", "adventure"],

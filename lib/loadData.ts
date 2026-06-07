@@ -90,8 +90,14 @@ export function loadAllManga(): DataBundle {
 
   const manga: Manga[] = files.map((f) => {
     const m: Manga = readYaml(path.join(mangaDir, f), MangaSchema);
-    if (!publisherKeys.has(m.publisher)) {
+    // 代表 publisher は "(unknown)" (= 全版が長尾社) を許容、 それ以外はキー必須
+    if (m.publisher !== "(unknown)" && !publisherKeys.has(m.publisher)) {
       throw new Error(`未定義の publisher: ${m.publisher} (${f})`);
+    }
+    for (const pk of m.publishers) {
+      if (!publisherKeys.has(pk)) {
+        throw new Error(`未定義の publishers[]: ${pk} (${f})`);
+      }
     }
     if (m.magazine && !magazineKeys.has(m.magazine)) {
       throw new Error(`未定義の magazine: ${m.magazine} (${f})`);

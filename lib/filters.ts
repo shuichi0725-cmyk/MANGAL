@@ -137,7 +137,11 @@ export function applyFilters(items: Manga[], state: FilterState): Manga[] {
     if (!matchText(state.query, m)) return false;
     if (!inRange(m.year_started, state.yearMin, state.yearMax)) return false;
     if (state.demographics.length && !state.demographics.includes(m.demographic)) return false;
-    if (state.publishers.length && !state.publishers.includes(m.publisher)) return false;
+    // 複数社作品対応: 選択キーが「どれかの版の出版社」に一致すればヒット (m.publishers 集合)
+    if (state.publishers.length) {
+      const pubs = m.publishers.length ? m.publishers : [m.publisher];
+      if (!state.publishers.some((p) => pubs.includes(p))) return false;
+    }
     if (state.magazines.length) {
       if (!m.magazine || !state.magazines.includes(m.magazine)) return false;
     }

@@ -13,6 +13,7 @@ const base: Manga = {
   authors: [{ name: "A", role: "writer_artist" }],
   original_authors: [],
   publisher: "shueisha",
+  publishers: ["shueisha"],
   magazine: null,
   demographic: "shounen",
   genres: ["action"],
