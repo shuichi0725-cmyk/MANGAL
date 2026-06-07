@@ -1,4 +1,4 @@
-# 版/刷タブ regroup 済(同type同冊数を versions[]統合)
+# ANGEL: 成人版(宙出版/シュベール)除外プレビュー
 slug: angel-yujin
 title: ANGEL
 title_kana: エンジェル
@@ -81,49 +81,9 @@ editions:
     cover_url: null
     release_date: 2010-10
 - type: standard
-  label: 通常版（シュベール出版）
-  publisher: シュベール出版
-  imprint: ''
+  label: 通常版
+  publisher: 小学館
   volumes:
-  - number: 1
-    asin: null
-    isbn13: '4915858758'
-    cover_url: null
-    release_date: null
-  - number: 2
-    asin: null
-    isbn13: '4915858782'
-    cover_url: null
-    release_date: null
-  - number: 3
-    asin: null
-    isbn13: '4915858812'
-    cover_url: null
-    release_date: null
-  - number: 4
-    asin: null
-    isbn13: '4915858847'
-    cover_url: null
-    release_date: null
-  - number: 5
-    asin: null
-    isbn13: '4915858871'
-    cover_url: null
-    release_date: null
-  - number: 6
-    asin: null
-    isbn13: '4915858901'
-    cover_url: null
-    release_date: null
-  - number: 7
-    asin: null
-    isbn13: '4915858944'
-    cover_url: null
-    release_date: null
-- type: standard
-  label: 通常版（全3巻）
-  publisher: null
-  volumes: &id001
   - number: 1
     asin: null
     isbn13: '4091511414'
@@ -139,61 +99,4 @@ editions:
     isbn13: '4091511430'
     cover_url: null
     release_date: 1990-05
-  versions:
-  - label: 小学館
-    year_started: 1989
-    volumes: *id001
-  - label: 宙出版
-    year_started: 2007
-    volumes:
-    - number: 1
-      asin: null
-      isbn13: '9784776793946'
-      cover_url: null
-      release_date: 2007-11
-    - number: 2
-      asin: null
-      isbn13: '9784776793953'
-      cover_url: null
-      release_date: 2007-11
-    - number: 3
-      asin: null
-      isbn13: '9784776794127'
-      cover_url: null
-      release_date: 2007-12
-- type: bunkobon
-  label: 文庫版（シュベール出版）
-  publisher: シュベール出版
-  imprint: シュベール文庫
-  volumes:
-  - number: 1
-    asin: null
-    isbn13: 488332401X
-    cover_url: null
-    release_date: 1996-05
-  - number: 2
-    asin: null
-    isbn13: '4883324052'
-    cover_url: null
-    release_date: 1995-12
-  - number: 3
-    asin: null
-    isbn13: '4883324079'
-    cover_url: null
-    release_date: 1996-01
-  - number: 4
-    asin: null
-    isbn13: '4883324117'
-    cover_url: null
-    release_date: 1996-03
-  - number: 5
-    asin: null
-    isbn13: '4883324133'
-    cover_url: null
-    release_date: 1996-04
-  - number: 6
-    asin: null
-    isbn13: 488332415X
-    cover_url: null
-    release_date: 1996-05
 _source: demo-pubB
