@@ -1,4 +1,4 @@
-# B方式プレビュー
+# B方式プレビュー(巻番号順修正)
 slug: angel-yujin
 title: ANGEL
 title_kana: エンジェル
@@ -45,6 +45,11 @@ editions:
   publisher: シュベール出版
   imprint: シュベール文庫
   volumes:
+  - number: 1
+    asin: null
+    isbn13: 488332401X
+    cover_url: null
+    release_date: 1996-05
   - number: 2
     asin: null
     isbn13: '4883324052'
@@ -65,11 +70,6 @@ editions:
     isbn13: '4883324133'
     cover_url: null
     release_date: 1996-04
-  - number: 1
-    asin: null
-    isbn13: 488332401X
-    cover_url: null
-    release_date: 1996-05
   - number: 6
     asin: null
     isbn13: 488332415X
