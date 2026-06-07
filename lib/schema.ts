@@ -60,6 +60,9 @@ export type EditionTypeT = z.infer<typeof EditionType>;
 export const EditionSchema = z.object({
   type: EditionType,
   label: z.string().min(1),
+  /** 出版社 (= 版ごと。 再販・他社化で作品内に複数出版社が在る場合に版単位で保持。
+   *  単一出版社作品では作品 publisher と同じ。 省略時は作品 publisher を使う) */
+  publisher: z.string().nullable().optional(),
   imprint: z.string().nullable().optional(),
   year_started: z.number().int().nullable().optional(),
   year_ended: z.number().int().nullable().optional(),
