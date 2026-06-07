@@ -67,6 +67,18 @@ export const EditionSchema = z.object({
   year_started: z.number().int().nullable().optional(),
   year_ended: z.number().int().nullable().optional(),
   volumes: z.array(VolumeSchema).min(1),
+  /** 刷/バージョン (= 同一(出版社×type)で同巻数の別刷: 初版/新装版/復刻 等)。
+   *  複数刷がある時のみ。 frontend は古い順タブで表示し、 既定は「全巻ISBN有りの最古刷」。
+   *  edition.volumes は既定刷と同じ(版なし消費者の後方互換)。 */
+  versions: z
+    .array(
+      z.object({
+        label: z.string().min(1),
+        year_started: z.number().int().nullable().optional(),
+        volumes: z.array(VolumeSchema).min(1),
+      }),
+    )
+    .optional(),
 });
 export type Edition = z.infer<typeof EditionSchema>;
 

@@ -1,7 +1,5 @@
 import type { Manga } from "@/lib/schema";
-import VolumeTile from "./VolumeTile";
-import Card from "./ui/Card";
-import Badge from "./ui/Badge";
+import EditionVolumes from "./EditionVolumes";
 
 type Props = { manga: Manga };
 
@@ -16,23 +14,8 @@ export default function VolumeRow({ manga }: Props) {
           // 2つ目以降の版は中程度の区切り線で明確に分ける(太すぎず細すぎず)
           className={idx > 0 ? "mt-8 border-t-2 border-ink/15 pt-8" : ""}
         >
-          <h2 className="mb-3 flex flex-wrap items-center gap-2">
-            <span className="text-base font-bold">{ed.label}</span>
-            <Badge>全 {ed.volumes.length} 巻</Badge>
-            {/* 版ごとの出版社 (= 再販・他社化で作品内に複数出版社が在る場合に明示) */}
-            {ed.publisher && (
-              <span className="text-xs text-ink/55">出版社: {ed.publisher}</span>
-            )}
-          </h2>
-          <ul className="space-y-2">
-            {ed.volumes.map((v) => (
-              <li key={`${ed.type}-${v.number}`}>
-                <Card className="p-3">
-                  <VolumeTile manga={manga} volume={v} edition={ed} />
-                </Card>
-              </li>
-            ))}
-          </ul>
+          {/* 版本体 (= 複数刷がある場合は EditionVolumes 内で古い順タブ切替) */}
+          <EditionVolumes manga={manga} edition={ed} />
         </section>
       ))}
     </div>
