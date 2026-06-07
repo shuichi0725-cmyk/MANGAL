@@ -1,4 +1,4 @@
-# title_kana 補完(MADB + NDL by-ISBN + カタカナ題 + 残尾NDL by-title/抽出)
+# title_kana 補完(MADB + NDL by-ISBN + カタカナ題 + 残尾NDL by-title/抽出/AI読み)
 fills:
 - key: name:(11)|name:異世界でカフェを開店しました。
   kana_segmented: イセカイ デ カフェ オ カイテン シマシタ
@@ -11211,8 +11211,8 @@ fills:
 - key: name:なつめももこ|name:外食がこわい
   kana_segmented: ガイショク ガ コワイ
 - key: name:なつめ龍之介|name:静香は乙女座
-  kana_segmented: 静香は乙女座
-  src: tail
+  kana_segmented: シズカハオトメザ
+  src: ai
 - key: name:なとみみわ|name:介護わはは絵日記
   kana_segmented: カイゴ ワハハ エニッキ
 - key: name:なとみみわ|name:死ぬまでにやりたい!10のコト|sub:コミックエッセイ
@@ -14407,8 +14407,8 @@ fills:
 - key: name:ゆづか正成|name:騎士王の食卓
   kana_segmented: キシオウ ノ ショクタク
 - key: name:ゆづか正成|name:黒地旅記カオスアイル
-  kana_segmented: 黒地旅記カオスアイル
-  src: tail
+  kana_segmented: クロチタビキカオスアイル
+  src: ai
 - key: name:ゆづきち|name:転生聖女の異世界スローライフ|sub:奇跡の花を育てたら、魔法騎士に溺愛されました
   kana_segmented: テンセイ セイジョ ノ イセカイ スロー ライフ
 - key: name:ゆづましろ|name:善人おっさん、生まれ変わったらSSSランク人生が確定した
@@ -30457,8 +30457,8 @@ fills:
 - key: name:人見弓|name:人呼んで、イケメン令嬢。
   kana_segmented: ヒト ヨンデ イケメン レイジョウ
 - key: name:人見恵史|name:SHOPLEAD航太郎
-  kana_segmented: SHOPLEAD航太郎
-  src: tail
+  kana_segmented: ショップリードコウタロウ
+  src: ai
 - key: name:人間まお|name:手術室の中で働いています。|sub:オペ室看護師が見た生死の現場
   kana_segmented: シュジュツシツ ノ ナカ デ ハタライテ イマス
 - key: name:人間まお|name:義母との戦いで得たもの
@@ -37717,8 +37717,8 @@ fills:
   kana_segmented: Cafe キチジョウジ デ
   src: ndl
 - key: name:宮本達也|name:牙狼遊戯
-  kana_segmented: 牙狼遊戯
-  src: tail
+  kana_segmented: ガロユウギ
+  src: ai
 - key: name:宮村樹|name:鬼騎士団長様がキュートな乙女系カフェに毎朝コーヒーを飲みに来ます。
   kana_segmented: オニキシダンチョウサマ ガ キュート ナ オトメケイ カフェ ニ マイアサ コーヒー オ ノミニキマス 。
 - key: name:宮武一貴(スタジオぬえ)|name:聖剣王シグリード
@@ -40345,8 +40345,8 @@ fills:
 - key: name:平井ゆづき|name:お弁当売りは聖女様!|sub:異世界娘のあったかレシピ
   kana_segmented: オベントウウリ ワ セイジョサマ
 - key: name:平井りゅうじ|name:盗犯特捜第三課
-  kana_segmented: 盗犯特捜第三課
-  src: tail
+  kana_segmented: トウハントクソウダイサンカ
+  src: ai
 - key: name:平井和正|name:Wolf guy
   kana_segmented: ウルフ ガイ
   src: ndl
@@ -47978,8 +47978,8 @@ fills:
   kana_segmented: ハグハグ
   src: ndl
 - key: name:沼礼一|name:野望球場
-  kana_segmented: 野望球場
-  src: tail
+  kana_segmented: ヤボウキュウジョウ
+  src: ai
 - key: name:沼野あおい|name:ジラソウル
   kana_segmented: ジラソウル
 - key: name:沼野あおい|name:ジラソウル|sub:ゴッホの遥かなる道.
@@ -55899,14 +55899,14 @@ fills:
 - key: name:西田真基|name:実録!闇の支配者巨悪
   kana_segmented: ジツロク ヤミ ノ シハイシャ キョアク
 - key: name:西田陽子|name:80番地の犬
-  kana_segmented: 80番地の犬
-  src: tail
+  kana_segmented: ハチジュウバンチノイヌ
+  src: ai
 - key: name:西田陽子|name:81番地の犬
-  kana_segmented: 81番地の犬
-  src: tail
+  kana_segmented: ハチジュウイチバンチノイヌ
+  src: ai
 - key: name:西田陽子|name:82番地の犬
-  kana_segmented: 82番地の犬
-  src: tail
+  kana_segmented: ハチジュウニバンチノイヌ
+  src: ai
 - key: name:西畑けい|name:きもちわるいから君がすき
   kana_segmented: キモチワルイ カラ キミ ガ スキ
 - key: name:西畑けい|name:きもちわるいから君がすき.
@@ -60242,8 +60242,8 @@ fills:
 - key: name:黒田しのぶ|name:消せない「私」|sub:炎上しつづけるデジタルタトゥー.
   kana_segmented: ケセナイ 「 ワタクシ 」
 - key: name:黒田みのる|name:死者のくに
-  kana_segmented: 死者のくに
-  src: tail
+  kana_segmented: シシャノクニ
+  src: ai
 - key: name:黒田民子|name:自宅で手軽に♪燻製生活のススメ
   kana_segmented: ジタク デ テガル ニ クンセイ セイカツ ノ ススメ
 - key: name:黒田洋介|name:ココロ図書館
@@ -60350,8 +60350,8 @@ fills:
 - key: qid:Q100707364|name:たまに取り出せる褒め
   kana_segmented: タマニ トリダセル ホメ
 - key: qid:Q1010233|name:ドーラ 失われた世界
-  kana_segmented: ドーラ失われた世界
-  src: tail
+  kana_segmented: ドーラウシナワレタセカイ
+  src: ai
 - key: qid:Q1010233|name:ワイルド・キングダム
   kana_segmented: ワイルド キングダム
   src: ndl
@@ -61017,8 +61017,8 @@ fills:
   kana_segmented: キブン ワ ハードボイルド
   src: tail
 - key: qid:Q108777015|name:花のお江戸 幽玄捕り物帖
-  kana_segmented: 花のお江戸幽玄捕り物帖
-  src: tail
+  kana_segmented: ハナノオエドユウゲントリモノチョウ
+  src: ai
 - key: qid:Q108777018|name:にじいろキャンパスライフ〈仮〉
   kana_segmented: ニジイロ キャンパス ライフ カリ
 - key: qid:Q108777018|name:勇者のひざには猫がいる
@@ -61049,8 +61049,8 @@ fills:
   kana_segmented: Night jade
   src: ndl
 - key: qid:Q10885113|name:人斬り以蔵秘話
-  kana_segmented: 人斬り以蔵秘話
-  src: tail
+  kana_segmented: ヒトキリイゾウヒワ
+  src: ai
 - key: qid:Q10885953|name:神呪のネクタール
   kana_segmented: シンジュ ノ ネクタール
 - key: qid:Q10898950|name:あわいの森
@@ -61358,8 +61358,8 @@ fills:
   kana_segmented: ヨゲンシャ
   src: ndl
 - key: qid:Q11045602|name:高貴さまの憂鬱
-  kana_segmented: 高貴さまの憂鬱
-  src: tail
+  kana_segmented: コウキサマノユウウツ
+  src: ai
 - key: qid:Q11045602|name:鬼門上の亡者
   kana_segmented: キモンジョウ ノ モウジャ
 - key: qid:Q11045602|name:魔界の誘い
@@ -61624,8 +61624,8 @@ fills:
   kana_segmented: Yui shop mini
   src: ndl
 - key: qid:Q1121064|name:ただいまハート❤混線中
-  kana_segmented: ただいまハート❤混線中
-  src: tail
+  kana_segmented: タダイマハートコンセンチュウ
+  src: ai
 - key: qid:Q1121064|name:アトモスフィア
   kana_segmented: アトモスフィア
   src: ndl
@@ -62226,8 +62226,8 @@ fills:
   kana_segmented: ヒロ サチヤ ブッキョウ ホウワ ブッキョウ キョウイク ソザイシュウ
   src: tail
 - key: qid:Q11264572|name:未開封な彼女たち
-  kana_segmented: 未開封な彼女たち
-  src: tail
+  kana_segmented: ミカイフウナカノジョタチ
+  src: ai
 - key: qid:Q11264757|name:おせん 真っ当を受け継ぎ繋ぐ。
   kana_segmented: オセン マットウ オ ウケツギ ツナグ
 - key: qid:Q11264757|name:太夫
@@ -62247,8 +62247,8 @@ fills:
 - key: qid:Q11264875|name:極限夫婦
   kana_segmented: キョクゲン フウフ
 - key: qid:Q11264918|name:天然こすぷれっ娘
-  kana_segmented: 天然こすぷれっ娘
-  src: tail
+  kana_segmented: テンネンコスプレッコ
+  src: ai
 - key: qid:Q11264991|name:トンネル
   kana_segmented: トンネル
   src: ndl
@@ -62460,8 +62460,8 @@ fills:
   kana_segmented: キッス
   src: ndl
 - key: qid:Q11269186|name:さよならの森
-  kana_segmented: さよならの森
-  src: tail
+  kana_segmented: サヨナラノモリ
+  src: ai
 - key: qid:Q11269186|name:秋色すとおりい
   kana_segmented: アキイロストオリイ
   src: ndl
@@ -62579,14 +62579,14 @@ fills:
   kana_segmented: アウトロー
   src: ndl
 - key: qid:Q11270850|name:リストラマン太郎
-  kana_segmented: リストラマン太郎
-  src: tail
+  kana_segmented: リストラマンタロウ
+  src: ai
 - key: qid:Q11270850|name:吉田平八人中記 Let it be!
-  kana_segmented: 吉田平八人中記Letitbe!
-  src: tail
+  kana_segmented: ヨシダヘイハチニンチュウキレットイットビー
+  src: ai
 - key: qid:Q11270850|name:聖女ハリマオ
-  kana_segmented: 聖女ハリマオ
-  src: tail
+  kana_segmented: セイジョハリマオ
+  src: ai
 - key: qid:Q11270850|name:警察学校物語
   kana_segmented: ケイサツ ガッコウ モノガタリ
   src: ndl
@@ -62852,19 +62852,19 @@ fills:
   kana_segmented: ヒガミチャン ジャム
   src: ndl
 - key: qid:Q11274926|name:みかんホンカン夏蜜柑
-  kana_segmented: みかんホンカン夏蜜柑
-  src: tail
+  kana_segmented: ミカンホンカンナツミカン
+  src: ai
 - key: qid:Q11274926|name:バツッ!!|sub:待機妻物語
   kana_segmented: Batsu
   src: ndl
 - key: qid:Q11274926|name:晩ゴハン、食べる?
-  kana_segmented: 晩ゴハン、食べる?
-  src: tail
+  kana_segmented: バンゴハンタベル
+  src: ai
 - key: qid:Q11274926|name:殿さまとわたし
   kana_segmented: トノサマ ト ワタシ
 - key: qid:Q11274926|name:湯の華えれじぃ
-  kana_segmented: 湯の華えれじぃ
-  src: tail
+  kana_segmented: ユノハナエレジィ
+  src: ai
 - key: qid:Q11275004|name:ひぐらしのなく頃にコミックアンソロジー
   kana_segmented: ヒグラシ ノ ナク コロ ニ コミック アンソロジー
   src: ndl
@@ -62890,8 +62890,8 @@ fills:
   kana_segmented: キョウフガクエン
   src: ndl
 - key: qid:Q11275209|name:東京ゆうれいマップ
-  kana_segmented: 東京ゆうれいマップ
-  src: tail
+  kana_segmented: トウキョウユウレイマップ
+  src: ai
 - key: qid:Q11275248|name:恋は過激に
   kana_segmented: コイ ワ カゲキ ニ
   src: ndl
@@ -62921,11 +62921,11 @@ fills:
   kana_segmented: ソト エ デヨウヨ
   src: tail
 - key: qid:Q11275808|name:平成馬鹿名人録
-  kana_segmented: 平成馬鹿名人録
-  src: tail
+  kana_segmented: ヘイセイバカメイジンロク
+  src: ai
 - key: qid:Q11275808|name:純情橋交番日誌
-  kana_segmented: 純情橋交番日誌
-  src: tail
+  kana_segmented: ジュンジョウバシコウバンニッシ
+  src: ai
 - key: qid:Q11275929|name:アイドルビーバック!
   kana_segmented: アイドル ビー バック !
 - key: qid:Q11276101|name:イグナイト
@@ -62949,13 +62949,13 @@ fills:
   kana_segmented: イ チョウ ; カンゾウ
   src: ndl
 - key: qid:Q11276145|name:流れ犬かっちゃく物語
-  kana_segmented: 流れ犬かっちゃく物語
-  src: tail
+  kana_segmented: ナガレイヌカッチャクモノガタリ
+  src: ai
 - key: qid:Q11276145|name:華中華
   kana_segmented: ハナ チャイナ
 - key: qid:Q11276190|name:ひさうちみちお研究2 愛の多忙について スケベはつらいよっ!
-  kana_segmented: ひさうちみちお研究2愛の多忙についてスケベはつらいよっ!
-  src: tail
+  kana_segmented: ヒサウチミチオケンキュウアイノタボウニツイテスケベハツライヨ
+  src: ai
 - key: qid:Q11276199|name:カセキホリダー ラインの大冒険!!
   kana_segmented: カセキ ホリダー ライン ノ ダイボウケン
 - key: qid:Q11276270|name:クラスの陰キャお嬢様の執事になりました
@@ -63008,8 +63008,8 @@ fills:
 - key: qid:Q11277872|name:Bee-be-beat it!
   kana_segmented: ビー ビー ビート イット
 - key: qid:Q11277896|name:必殺雀鬼 修羅ボタル
-  kana_segmented: 必殺雀鬼修羅ボタル
-  src: tail
+  kana_segmented: ヒッサツジャンキシュラボタル
+  src: ai
 - key: qid:Q11277896|name:漱石事件簿
   kana_segmented: ソウセキ ジケンボ
   src: tail
@@ -63032,8 +63032,8 @@ fills:
 - key: qid:Q11278399|name:まんがグリム童話
   kana_segmented: マンガ グリム ドウワ
 - key: qid:Q11278399|name:まんが残酷日本むかしばなし
-  kana_segmented: まんが残酷日本むかしばなし
-  src: tail
+  kana_segmented: マンガザンコクニホンムカシバナシ
+  src: ai
 - key: qid:Q11278399|name:ミッドナイト ゲーム
   kana_segmented: ミッドナイト ゲーム
   src: ndl
@@ -63129,8 +63129,8 @@ fills:
 - key: qid:Q11279252|name:新・地獄堂霊界通信
   kana_segmented: シン ジゴクドウ レイカイ ツウシン
 - key: qid:Q11279252|name:白衣の戦士オペレンジャー
-  kana_segmented: 白衣の戦士オペレンジャー
-  src: tail
+  kana_segmented: ハクイノセンシオペレンジャー
+  src: ai
 - key: qid:Q11279278|name:もののけpresent
   kana_segmented: モノノケ present
   src: ndl
@@ -63304,19 +63304,19 @@ fills:
   kana_segmented: マチ ノ ワケアリ brothers
   src: ndl
 - key: qid:Q11280216|name:TAMIKOさんの恋人
-  kana_segmented: TAMIKOさんの恋人
-  src: tail
+  kana_segmented: タミコサンノコイビト
+  src: ai
 - key: qid:Q11280216|name:もっと愛のしわざ
   kana_segmented: モット アイ ノ シワザ
 - key: qid:Q11280216|name:パウダー・スノーの家
-  kana_segmented: パウダー・スノーの家
-  src: tail
+  kana_segmented: パウダースノーノイエ
+  src: ai
 - key: qid:Q11280216|name:幾春と別れて・・・
-  kana_segmented: 幾春と別れて・・・
-  src: tail
+  kana_segmented: イクハルトワカレテ
+  src: ai
 - key: qid:Q11280216|name:青春の絆創膏
-  kana_segmented: 青春の絆創膏
-  src: tail
+  kana_segmented: セイシュンノバンソウコウ
+  src: ai
 - key: qid:Q11280450|name:ガテン系社長は絶倫でした。
   kana_segmented: ガテンケイ シャチョウ ワ ゼツリン デシタ 。
 - key: qid:Q11280450|name:ワンダフルライフ
@@ -64067,20 +64067,20 @@ fills:
   kana_segmented: ネルソン サン アナタ ワ ヒト オ コロシマシタカ トウキョウ ダイクウシュウ
   src: ndl
 - key: qid:Q11356487|name:寛太2 君の天使によろしく
-  kana_segmented: 寛太2君の天使によろしく
-  src: tail
+  kana_segmented: カンタキミノテンシニヨロシク
+  src: ai
 - key: qid:Q11356487|name:死神可憐
-  kana_segmented: 死神可憐
-  src: tail
+  kana_segmented: シニガミカレン
+  src: ai
 - key: qid:Q11356487|name:真夏のクレセント
-  kana_segmented: 真夏のクレセント
-  src: tail
+  kana_segmented: マナツノクレセント
+  src: ai
 - key: qid:Q11356487|name:翡翠の涙
   kana_segmented: ヒスイ ノ ナミダ
   src: tail
 - key: qid:Q11356487|name:鬼姫塚
-  kana_segmented: 鬼姫塚
-  src: tail
+  kana_segmented: オニヒメヅカ
+  src: ai
 - key: qid:Q113565765|name:Now playing
   kana_segmented: ナウ プレイング
 - key: qid:Q113565781|name:もしもなんて来ないと思ってた猫
@@ -64299,8 +64299,8 @@ fills:
 - key: qid:Q11367700|name:ヘタコイ
   kana_segmented: ヘタコイ
 - key: qid:Q11367700|name:花さか荘で抱きしめて
-  kana_segmented: 花さか荘で抱きしめて
-  src: tail
+  kana_segmented: ハナサカソウデダキシメテ
+  src: ai
 - key: qid:Q11368431|name:いろどり高校合唱部より
   kana_segmented: イロドリ コウコウ ガッショウブ ヨリ
 - key: qid:Q11368431|name:クールな女神様と一緒に住んだら、甘やかしすぎてポンコツにしてしまった件について
@@ -65027,8 +65027,8 @@ fills:
   kana_segmented: Happy birthday
   src: ndl
 - key: qid:Q11409752|name:靖逆の犬
-  kana_segmented: 靖逆の犬
-  src: tail
+  kana_segmented: セイギャクノイヌ
+  src: ai
 - key: qid:Q11409802|name:夫をこの世から消そうと決めました
   kana_segmented: オット オ コノヨ カラ ケソウ ト キメマシタ
 - key: qid:Q11409873|name:Black!
@@ -65245,8 +65245,8 @@ fills:
   kana_segmented: ワンガン ドウロ
   src: ndl
 - key: qid:Q11417977|name:遠い街の星あかり
-  kana_segmented: 遠い街の星あかり
-  src: tail
+  kana_segmented: トオイマチノホシアカリ
+  src: ai
 - key: qid:Q11418498|name:蒼炎のスカベンジャー
   kana_segmented: ソウエン ノ スカベンジャー
 - key: qid:Q11418590|name:Buraiken
@@ -65380,8 +65380,8 @@ fills:
   kana_segmented: ドメスティック
   src: katakana-title
 - key: qid:Q11425578|name:曲がってそーろう
-  kana_segmented: 曲がってそーろう
-  src: tail
+  kana_segmented: マガッテソーロウ
+  src: ai
 - key: qid:Q11425578|name:蜜葬
   kana_segmented: ミツソウ
 - key: qid:Q11425602|name:「ククク……。奴は四天王の中でも最弱」と解雇された俺、なぜか勇者と聖女の師匠になる.
@@ -65490,8 +65490,8 @@ fills:
   kana_segmented: ダキシメテ
   src: tail
 - key: qid:Q11431719|name:赤いヒールの侵入者
-  kana_segmented: 赤いヒールの侵入者
-  src: tail
+  kana_segmented: アカイヒールノシンニュウシャ
+  src: ai
 - key: qid:Q11431902|name:職業:女|sub:元アイドル27歳、枕営業も限界なのでパパ婚活します
   kana_segmented: ショクギョウ オンナ
 - key: qid:Q11431904|name:KIG
@@ -65955,8 +65955,8 @@ fills:
 - key: qid:Q11460683|name:バダスbad ass
   kana_segmented: バダス
 - key: qid:Q11460683|name:花引き
-  kana_segmented: 花引き
-  src: tail
+  kana_segmented: ハナビキ
+  src: ai
 - key: qid:Q11460951|name:ボクの描くBLコミックはホモビッチな担当編集者がモデルです
   kana_segmented: ボク ノ エガク ビーエル コミック ワ ホモ ビッチ ナ タントウ ヘンシュウシャ ガ モデル デス
 - key: qid:Q11460951|name:ポンコツ悪役令嬢は腹黒ドS王子に愛される
@@ -65965,8 +65965,8 @@ fills:
   kana_segmented: ヴィーパラ
   src: ndl
 - key: qid:Q11460951|name:誘ってほしいよん
-  kana_segmented: 誘ってほしいよん
-  src: tail
+  kana_segmented: サソッテホシイヨン
+  src: ai
 - key: qid:Q11461215|name:イッテイ
   kana_segmented: イッテイ
   src: ndl
@@ -66188,8 +66188,8 @@ fills:
   kana_segmented: 'あい いくなつ : てんびょう かくのだて'
   src: tail
 - key: qid:Q11465222|name:陽だまりの憂鬱
-  kana_segmented: 陽だまりの憂鬱
-  src: tail
+  kana_segmented: ヒダマリノユウウツ
+  src: ai
 - key: qid:Q11465597|name:怒濤戦艦大和
   kana_segmented: ドトウ センカン ヤマト
   src: ndl
@@ -66413,8 +66413,8 @@ fills:
 - key: qid:Q114736248|name:魔法少女にあこがれて.
   kana_segmented: マホウ ショウジョ ニ アコガレテ.
 - key: qid:Q11473666|name:あなたには危険な香り
-  kana_segmented: あなたには危険な香り
-  src: tail
+  kana_segmented: アナタニハキケンナカオリ
+  src: ai
 - key: qid:Q11473666|name:まんがグリム童話
   kana_segmented: マンガ グリム ドウワ
 - key: qid:Q11473666|name:りりっく
@@ -66589,8 +66589,8 @@ fills:
   kana_segmented: TURUGI
   src: ndl
 - key: qid:Q11483613|name:新撰組風雲録 沖田総司
-  kana_segmented: 新撰組風雲録沖田総司
-  src: tail
+  kana_segmented: シンセングミフウウンロクオキタソウジ
+  src: ai
 - key: qid:Q11483972|name:スターオーシャン セカンドストーリー
   kana_segmented: スター オーシャン セカンド ストーリー
   src: ndl
@@ -66918,28 +66918,28 @@ fills:
   kana_segmented: ショウネンシコウ
   src: ndl
 - key: qid:Q11513052|name:My舞ダーリン
-  kana_segmented: My舞ダーリン
-  src: tail
+  kana_segmented: マイマイダーリン
+  src: ai
 - key: qid:Q11513052|name:メリーさんちのXmas
   kana_segmented: メリーサンチノ
   src: tail
 - key: qid:Q11513052|name:君に着せたいウエディングドレス
-  kana_segmented: 君に着せたいウエディングドレス
-  src: tail
+  kana_segmented: キミニキセタイウエディングドレス
+  src: ai
 - key: qid:Q11513052|name:夢子さんのカレーライス
-  kana_segmented: 夢子さんのカレーライス
-  src: tail
+  kana_segmented: ユメコサンノカレーライス
+  src: ai
 - key: qid:Q11513052|name:桜町4丁目ものがたり
-  kana_segmented: 桜町4丁目ものがたり
-  src: tail
+  kana_segmented: サクラマチヨンチョウメモノガタリ
+  src: ai
 - key: qid:Q11513052|name:聖パンプキン物語
-  kana_segmented: 聖パンプキン物語
-  src: tail
+  kana_segmented: セイパンプキンモノガタリ
+  src: ai
 - key: qid:Q11513052|name:花ざかり大黒屋本舗
   kana_segmented: ハナザカリ ダイコクヤ ホンポ
 - key: qid:Q11513052|name:野の花の花嫁
-  kana_segmented: 野の花の花嫁
-  src: tail
+  kana_segmented: ノノハナノハナヨメ
+  src: ai
 - key: qid:Q11513144|name:Psiクロン・シンドローム
   kana_segmented: サイクロン シンドローム
   src: ndl
@@ -67038,8 +67038,8 @@ fills:
   kana_segmented: ヒイロノマドモアゼル
   src: ndl
 - key: qid:Q11516289|name:雀荘に行こう
-  kana_segmented: 雀荘に行こう
-  src: tail
+  kana_segmented: ジャンソウニイコウ
+  src: ai
 - key: qid:Q11516343|name:ほんとにあった恐怖体験
   kana_segmented: ホント ニ アッタ キョウフ タイケン
   src: ndl
@@ -67082,8 +67082,8 @@ fills:
 - key: qid:Q11517058|name:女神イレブン
   kana_segmented: ヴィーナス イレブン
 - key: qid:Q11517058|name:蹴球七日
-  kana_segmented: 蹴球七日
-  src: tail
+  kana_segmented: シュウキュウナノカ
+  src: ai
 - key: qid:Q11517120|name:Love order 200X
   kana_segmented: モチズキ, レイコ
   src: ndl
@@ -67149,8 +67149,8 @@ fills:
 - key: qid:Q11520276|name:羆撃ちのサムライ
   kana_segmented: クマウチ ノ サムライ|羆 (クマ) 撃ちのサムライ
 - key: qid:Q11520602|name:13月の花束
-  kana_segmented: 13月の花束
-  src: tail
+  kana_segmented: ジュウサンガツノハナタバ
+  src: ai
 - key: qid:Q11520602|name:サニー・サイド・アップ
   kana_segmented: サニーサイドアップ
   src: katakana-title
@@ -67827,8 +67827,8 @@ fills:
   kana_segmented: Crack down on
   src: ndl
 - key: qid:Q11540194|name:聖職に死ね!
-  kana_segmented: 聖職に死ね!
-  src: tail
+  kana_segmented: セイショクニシネ
+  src: ai
 - key: qid:Q11540232|name:王が猫になった
   kana_segmented: オウ ガ ネコ ニ ナッタ
 - key: qid:Q11540237|name:八雲百怪
@@ -68130,25 +68130,25 @@ fills:
 - key: qid:Q11549850|name:魔王と勇者しかいない世界.
   kana_segmented: マオウ ト ユウシャ シカ イナイ セカイ.
 - key: qid:Q11550117|name:あした春から!
-  kana_segmented: あした春から!
-  src: tail
+  kana_segmented: アシタハルカラ
+  src: ai
 - key: qid:Q11550117|name:あなただけ今日は
-  kana_segmented: あなただけ今日は
-  src: tail
+  kana_segmented: アナタダケキョウハ
+  src: ai
 - key: qid:Q11550216|name:Young blood
   kana_segmented: Young blood
   src: ndl
 - key: qid:Q11550216|name:とまらない眠れない
-  kana_segmented: とまらない眠れない
-  src: tail
+  kana_segmented: トマラナイネムレナイ
+  src: ai
 - key: qid:Q11550216|name:カウチトマト族
-  kana_segmented: カウチトマト族
-  src: tail
+  kana_segmented: カウチトマトゾク
+  src: ai
 - key: qid:Q11550216|name:中年純愛シンドローム
   kana_segmented: チュウネン ジュンアイ シンドローム
 - key: qid:Q11550216|name:掌のYESTERDAY
-  kana_segmented: 掌のYESTERDAY
-  src: tail
+  kana_segmented: テノヒラノイエスタデイ
+  src: ai
 - key: qid:Q11550216|name:禁じられた男と女
   kana_segmented: キンジラレタ オトコ ト オンナ
 - key: qid:Q11550941|name:煌燿国後宮譚
@@ -68355,8 +68355,8 @@ fills:
   kana_segmented: アカネ コミックス
   src: ndl
 - key: qid:Q11555271|name:大南寮へいらっしゃい
-  kana_segmented: 大南寮へいらっしゃい
-  src: tail
+  kana_segmented: ダイナンリョウヘイラッシャイ
+  src: ai
 - key: qid:Q11555608|name:ハッピー!ハッピー♪
   kana_segmented: ハッピー ハッピー
 - key: qid:Q11555608|name:ハッピー!ハッピー♪|sub:波間信子短編集
@@ -68365,8 +68365,8 @@ fills:
   kana_segmented: ホットコミュニケーション
   src: ndl
 - key: qid:Q11555608|name:瞳とじればあいつ
-  kana_segmented: 瞳とじればあいつ
-  src: tail
+  kana_segmented: ヒトミトジレバアイツ
+  src: ai
 - key: qid:Q11555846|name:D
   kana_segmented: デイー
   src: ndl
@@ -68377,8 +68377,8 @@ fills:
   kana_segmented: SA07
   src: ndl
 - key: qid:Q11556468|name:蒼い家
-  kana_segmented: 蒼い家
-  src: tail
+  kana_segmented: アオイイエ
+  src: ai
 - key: qid:Q1155646|name:コジコジ
   kana_segmented: コジコジ
   src: ndl
@@ -68460,8 +68460,8 @@ fills:
 - key: qid:Q11559980|name:妖怪アパートの幽雅な日常
   kana_segmented: ヨウカイ アパート ノ ユウガ ナ ニチジョウ
 - key: qid:Q11560088|name:冬のオルゴール
-  kana_segmented: 冬のオルゴール
-  src: tail
+  kana_segmented: フユノオルゴール
+  src: ai
 - key: qid:Q11560088|name:十年目に乾杯
   kana_segmented: ジュウネンメ ニ カンパイ
   src: ndl
@@ -68483,14 +68483,14 @@ fills:
   kana_segmented: カナシイハコ
   src: tail
 - key: qid:Q11560265|name:アダムの葉っぱ
-  kana_segmented: アダムの葉っぱ
-  src: tail
+  kana_segmented: アダムノハッパ
+  src: ai
 - key: qid:Q11560265|name:ママときどき子ども
   kana_segmented: ママ トキドキ コドモ
   src: ndl
 - key: qid:Q11560265|name:哀しみひとつどうします?
-  kana_segmented: 哀しみひとつどうします?
-  src: tail
+  kana_segmented: カナシミヒトツドウシマス
+  src: ai
 - key: qid:Q11560265|name:深見じゅんTHE BEST
   kana_segmented: フカミ ジュン the best
   src: ndl
@@ -69127,8 +69127,8 @@ fills:
   kana_segmented: クロッキー
   src: ndl
 - key: qid:Q11583507|name:香港特捜Lady
-  kana_segmented: 香港特捜Lady
-  src: tail
+  kana_segmented: ホンコントクソウレディー
+  src: ai
 - key: qid:Q11583535|name:センチメンタル無反応
   kana_segmented: センチメンタル ムハンノウ
 - key: qid:Q11583542|name:ゆず文庫CLUB
@@ -69353,8 +69353,8 @@ fills:
 - key: qid:Q11590498|name:株式会社5年1組
   kana_segmented: カブシキ ガイシャ ゴネン イチクミ
 - key: qid:Q11590535|name:ブヤ 実録・安藤組
-  kana_segmented: ブヤ実録・安藤組
-  src: tail
+  kana_segmented: ブヤジツロクアンドウグミ
+  src: ai
 - key: qid:Q11590535|name:開化暗殺帳天保銭
   kana_segmented: カイカ アンサツチョウ テンポセン
   src: ndl
@@ -69452,8 +69452,8 @@ fills:
 - key: qid:Q11596460|name:性食鬼.
   kana_segmented: セイショクキ.
 - key: qid:Q11596472|name:まんが残酷日本むかしばなし
-  kana_segmented: まんが残酷日本むかしばなし
-  src: tail
+  kana_segmented: マンガザンコクニホンムカシバナシ
+  src: ai
 - key: qid:Q11596472|name:オウマガトキFILM視えないものが視える刻
   kana_segmented: オウマガトキ フィルム ミエナイ モノ ガ ミエル トキ
 - key: qid:Q11596578|name:轟大丸の奇怪体験談
@@ -69822,8 +69822,8 @@ fills:
 - key: qid:Q11616290|name:ねこまりょく|sub:ねこ様の可愛い魔法にかかりました
   kana_segmented: ネコ マリョク
 - key: qid:Q11616465|name:ザ・水道マン
-  kana_segmented: ザ・水道マン
-  src: tail
+  kana_segmented: ザスイドウマン
+  src: ai
 - key: qid:Q11616515|name:ぱちん娘。
   kana_segmented: パチンコ
 - key: qid:Q11616936|name:虚空の月
@@ -69891,8 +69891,8 @@ fills:
 - key: qid:Q11619436|name:ぱいぱこ・ぱらだいす
   kana_segmented: パイパコ パラダイス
 - key: qid:Q11619664|name:悪霊さまお手やわらかに
-  kana_segmented: 悪霊さまお手やわらかに
-  src: tail
+  kana_segmented: アクリョウサマオテヤワラカニ
+  src: ai
 - key: qid:Q11619664|name:悪魔は眠らず
   kana_segmented: アクマハネムラズ
   src: ndl
@@ -70478,8 +70478,8 @@ fills:
 - key: qid:Q11645281|name:MIXIM☆11
   kana_segmented: ミクシム イレブン
 - key: qid:Q11645305|name:深町医院物語
-  kana_segmented: 深町医院物語
-  src: tail
+  kana_segmented: フカマチイインモノガタリ
+  src: ai
 - key: qid:Q11645305|name:羽根くんの10年ロマンス
   kana_segmented: ハネクン ノ 10ネン ロマンス
   src: ndl
@@ -70757,8 +70757,8 @@ fills:
 - key: qid:Q11659171|name:毎分毎秒
   kana_segmented: マイフン マイビョウ
 - key: qid:Q11659258|name:君とした愛
-  kana_segmented: 君とした愛
-  src: tail
+  kana_segmented: キミトシタアイ
+  src: ai
 - key: qid:Q11659258|name:碧の季節
   kana_segmented: ミドリ ノ キセツ
 - key: qid:Q11659258|name:紅い季節
@@ -71368,8 +71368,8 @@ fills:
 - key: qid:Q1195859|name:二階堂地獄ゴルフ
   kana_segmented: ニカイドウ ジゴク ゴルフ
 - key: qid:Q1195859|name:熱いぜ天馬!
-  kana_segmented: 熱いぜ天馬!
-  src: tail
+  kana_segmented: アツイゼテンマ
+  src: ai
 - key: qid:Q1195859|name:賭博堕天録カイジ 地雷ゲーム「17歩」
   kana_segmented: トバク ダテンロク カイジ ジライ ゲーム 17ホ
 - key: qid:Q1195859|name:賭博堕天録カイジ.
@@ -72146,8 +72146,8 @@ fills:
 - key: qid:Q15782267|name:累(かさね)
   kana_segmented: カサネ
 - key: qid:Q15893843|name:遊侠武蔵
-  kana_segmented: 遊侠武蔵
-  src: tail
+  kana_segmented: ユウキョウムサシ
+  src: ai
 - key: qid:Q15914656|name:犬山たまきちゃんねる!|sub:ボクたちのナイショの話
   kana_segmented: イヌヤマ タマキ チャンネル
 - key: qid:Q15930238|name:桜trick
@@ -72635,25 +72635,25 @@ fills:
 - key: qid:Q17215733|name:羽鳥と古田の非日常茶飯事
   kana_segmented: ハトリ ト フルタ ノ ヒニチジョウ サハンジ
 - key: qid:Q17217426|name:摸細工
-  kana_segmented: 摸細工
-  src: tail
+  kana_segmented: モザイク
+  src: ai
 - key: qid:Q17217426|name:暗闇に猫が鳴く
-  kana_segmented: 暗闇に猫が鳴く
-  src: tail
+  kana_segmented: クラヤミニネコガナク
+  src: ai
 - key: qid:Q17217426|name:獣医師の事件簿
   kana_segmented: ジュウイシ ノ ジケンボ
 - key: qid:Q17217426|name:蜉蝣の森
-  kana_segmented: 蜉蝣の森
-  src: tail
+  kana_segmented: カゲロウノモリ
+  src: ai
 - key: qid:Q17217426|name:通り魔
   kana_segmented: アイ ノ トオリマ
   src: tail
 - key: qid:Q17217426|name:野々村リリ子23才
-  kana_segmented: 野々村リリ子23才
-  src: tail
+  kana_segmented: ノノムラリリコニジュウサンサイ
+  src: ai
 - key: qid:Q17217426|name:闇の招待状
-  kana_segmented: 闇の招待状
-  src: tail
+  kana_segmented: ヤミノショウタイジョウ
+  src: ai
 - key: qid:Q17219143|name:スノードームタウン
   kana_segmented: スノードーム タウン
 - key: qid:Q17219143|name:裸の肖像
@@ -72678,8 +72678,8 @@ fills:
 - key: qid:Q17219911|name:境界迷宮と異界の魔術師
   kana_segmented: キョウカイ メイキュウ ト イカイ ノ マジュツシ
 - key: qid:Q17219945|name:御曹司の掟
-  kana_segmented: 御曹司の掟
-  src: tail
+  kana_segmented: オンゾウシノオキテ
+  src: ai
 - key: qid:Q17219985|name:My pure lady
   kana_segmented: マイ ピュア レディー
 - key: qid:Q17219985|name:くノ一忍法帖
@@ -72703,8 +72703,8 @@ fills:
 - key: qid:Q17219985|name:大人たちのムンとくる聖体験、お話します
   kana_segmented: オトナタチ ノ ムン ト クル セイタイケン 、 オハナシシマス
 - key: qid:Q17219985|name:拝啓!ロンリーマダム
-  kana_segmented: 拝啓!ロンリーマダム
-  src: tail
+  kana_segmented: ハイケイロンリーマダム
+  src: ai
 - key: qid:Q17219985|name:東大受験専門寮ああつばめ荘
   kana_segmented: トウダイ ジュケン センモンリョウ アア ツバメソウ
 - key: qid:Q17220038|name:キャッ党忍伝てやんでえ
@@ -73040,8 +73040,8 @@ fills:
 - key: qid:Q17350151|name:異世界美少女受肉おじさんと
   kana_segmented: ファンタジー ビショウジョ ジュニク オジサン ト
 - key: qid:Q17350153|name:おねーさん巨乳艶技
-  kana_segmented: おねーさん巨乳艶技
-  src: tail
+  kana_segmented: オネーサンキョニュウエンギ
+  src: ai
 - key: qid:Q17350320|name:ハト部
   kana_segmented: ハトブ
 - key: qid:Q17361555|name:J.P.S
@@ -73656,8 +73656,8 @@ fills:
 - key: qid:Q20042061|name:うちの猫は転生しているにちがいない
   kana_segmented: ウチ ノ ネコ ワ テンセイ シテ イル ニ チガイナイ
 - key: qid:Q20042291|name:女が揺れる
-  kana_segmented: 女が揺れる
-  src: tail
+  kana_segmented: オンナガユレル
+  src: ai
 - key: qid:Q20042398|name:文豪ストレイドッグス
   kana_segmented: ブンゴウ ストレイ ドッグス
 - key: qid:Q20042398|name:文豪ストレイドッグス 楽描手帖
@@ -73787,11 +73787,11 @@ fills:
   kana_segmented: モーツァルト
   src: ndl
 - key: qid:Q21019283|name:北の封印
-  kana_segmented: 北の封印
-  src: tail
+  kana_segmented: キタノフウイン
+  src: ai
 - key: qid:Q21019283|name:山猫たちの夜
-  kana_segmented: 山猫たちの夜
-  src: tail
+  kana_segmented: ヤマネコタチノヨル
+  src: ai
 - key: qid:Q21019283|name:怪　霊体験日記
   kana_segmented: カイ レイ タイケン ニッキ
   src: ndl
@@ -73802,8 +73802,8 @@ fills:
   kana_segmented: エイガ ジョユウ
   src: tail
 - key: qid:Q21019283|name:血流坂にて
-  kana_segmented: 血流坂にて
-  src: tail
+  kana_segmented: チナガレザカニテ
+  src: ai
 - key: qid:Q210767|name:星恋*ティンクル～BROTHER COMPLEX～
   kana_segmented: ホシコイ ティンクル ブラザー コンプレックス
 - key: qid:Q211099|name:〔○秘〕恋愛調教 ホスト遊戯
@@ -74181,8 +74181,8 @@ fills:
   kana_segmented: ザチェリープロジェクト
   src: ndl
 - key: qid:Q2305070|name:愛の黄金率
-  kana_segmented: 愛の黄金率
-  src: tail
+  kana_segmented: アイノオウゴンリツ
+  src: ai
 - key: qid:Q230962|name:Fullmetal alchemist
   kana_segmented: アラカワ, ヒロム, 1973-
   src: ndl
@@ -74295,8 +74295,8 @@ fills:
   kana_segmented: ラブフォーカス
   src: katakana-title
 - key: qid:Q24045825|name:闇に影ぼうし
-  kana_segmented: 闇に影ぼうし
-  src: tail
+  kana_segmented: ヤミニカゲボウシ
+  src: ai
 - key: qid:Q24045825|name:黒のミラージユ
   kana_segmented: クロ ノ ミラージユ
   src: ndl
@@ -74426,8 +74426,8 @@ fills:
   kana_segmented: ビート イット
   src: ndl
 - key: qid:Q24899966|name:お土産はなあに?
-  kana_segmented: お土産はなあに?
-  src: tail
+  kana_segmented: オミヤゲハナアニ
+  src: ai
 - key: qid:Q24899966|name:さくらよろしく
   kana_segmented: サクラ ヨロシク
   src: ndl
@@ -74620,8 +74620,8 @@ fills:
 - key: qid:Q2661273|name:The word ofゴルゴ13|sub:残る40%は運だろうな…
   kana_segmented: The word of ゴルゴ 13
 - key: qid:Q2661273|name:The忍者
-  kana_segmented: The忍者
-  src: tail
+  kana_segmented: ザニンジャ
+  src: ai
 - key: qid:Q2661273|name:さいとう・たかを'S台風五郎|sub:新装版
   kana_segmented: サイトウ タカオズ タイフウ ゴロウ
 - key: qid:Q2661273|name:さいとう・たかを池波正太郎時代劇画ワイドセレクション
@@ -74852,8 +74852,8 @@ fills:
 - key: qid:Q27151040|name:想い出ください
   kana_segmented: オモイデ クダサイ
 - key: qid:Q27151082|name:ポパイたちの遺産
-  kana_segmented: ポパイたちの遺産
-  src: tail
+  kana_segmented: ポパイタチノイサン
+  src: ai
 - key: qid:Q27151082|name:栄光の戦艦大和
   kana_segmented: エイコウ ノ センカン ヤマト
 - key: qid:Q27151087|name:しよっか破滅SEX
@@ -76278,8 +76278,8 @@ fills:
   kana_segmented: ヒゲキ ノ オウ オイディプス
   src: ndl
 - key: qid:Q3776935|name:愛のミステリー 選集
-  kana_segmented: 愛のミステリー選集
-  src: tail
+  kana_segmented: アイノミステリーセンシュウ
+  src: ai
 - key: qid:Q3776935|name:激情の王女メディア
   kana_segmented: ゲキジョウ ノ オウジョ メディア
   src: ndl
@@ -76292,8 +76292,8 @@ fills:
 - key: qid:Q3776937|name:1936-2021古谷三敏メモリアルセレクション
   kana_segmented: センキュウヒャクサンジュウロク ニセンニジュウイチ フルヤ ミツトシ メモリアル セレクション
 - key: qid:Q3776937|name:タンポポ橋わたれ!
-  kana_segmented: タンポポ橋わたれ!
-  src: tail
+  kana_segmented: タンポポバシワタレ
+  src: ai
 - key: qid:Q3776937|name:戦場の現実と正体
   kana_segmented: センジョウ ノ ゲンジツ ト ショウタイ
 - key: qid:Q3778019|name:ジョージ秋山world
@@ -76307,8 +76307,8 @@ fills:
 - key: qid:Q3778019|name:浮浪(はぐれ)雲|sub:哀悼・ジョージ秋山
   kana_segmented: ハグレグモ
 - key: qid:Q3778019|name:通勤脳内覚醒電車
-  kana_segmented: 通勤脳内覚醒電車
-  src: tail
+  kana_segmented: ツウキンノウナイカクセイデンシャ
+  src: ai
 - key: qid:Q3778019|name:選・小沢一郎あちきの浮浪雲傑作十選
   kana_segmented: セン オザワ イチロウ アチキ ノ ハグレグモ ケッサク ジュッセン
 - key: qid:Q3778273|name:サイレン
@@ -76456,14 +76456,14 @@ fills:
   kana_segmented: シン キャンパス カレンダア
   src: ndl
 - key: qid:Q40039813|name:真夜中のディナー
-  kana_segmented: 真夜中のディナー
-  src: tail
+  kana_segmented: マヨナカノディナー
+  src: ai
 - key: qid:Q40039813|name:続キャンパスかれんだあ
   kana_segmented: ゾクキャンパスカレンダア
   src: ndl
 - key: qid:Q40039915|name:K氏の遺言
-  kana_segmented: K氏の遺言
-  src: tail
+  kana_segmented: ケーシノユイゴン
+  src: ai
 - key: qid:Q40039915|name:微笑みを返したら
   kana_segmented: ホホエミ オ カエシタラ
   src: ndl
@@ -76474,17 +76474,17 @@ fills:
   kana_segmented: ハナビ ガ アガッタラ
   src: ndl
 - key: qid:Q40039915|name:花野にて鬼伝承
-  kana_segmented: 花野にて鬼伝承
-  src: tail
+  kana_segmented: ハナノニテオニデンショウ
+  src: ai
 - key: qid:Q40039915|name:雪がとけたら
   kana_segmented: ユキ ガ トケタラ
   src: ndl
 - key: qid:Q40039915|name:雪の如く火の如く
-  kana_segmented: 雪の如く火の如く
-  src: tail
+  kana_segmented: ユキノゴトクヒノゴトク
+  src: ai
 - key: qid:Q40039941|name:シャボン玉の日々
-  kana_segmented: シャボン玉の日々
-  src: tail
+  kana_segmented: シャボンダマノヒビ
+  src: ai
 - key: qid:Q40040919|name:リョク
   kana_segmented: Ryoku
   src: ndl
@@ -76674,15 +76674,15 @@ fills:
 - key: qid:Q434041|name:狼に鈴
   kana_segmented: オオカミ ニ スズ
 - key: qid:Q43423991|name:にぎやか文庫3
-  kana_segmented: にぎやか文庫3
-  src: tail
+  kana_segmented: ニギヤカブンコ
+  src: ai
 - key: qid:Q43423991|name:ゴッドハンド輝
   kana_segmented: ゴッド ハンド テル
 - key: qid:Q43423991|name:夢幻アンソロジー
   kana_segmented: ムゲン アンソロジー
 - key: qid:Q43423991|name:座・西遊記
-  kana_segmented: 座・西遊記
-  src: tail
+  kana_segmented: ザサイユウキ
+  src: ai
 - key: qid:Q43424557|name:スマイルは遠すぎる
   kana_segmented: スマイル ワ トオスギル
   src: ndl
@@ -77226,8 +77226,8 @@ fills:
   kana_segmented: ニホン ノ ケイザイ
   src: ndl
 - key: qid:Q471103|name:武蔵伝説<石ノ森版立川文庫>
-  kana_segmented: 武蔵伝説<石ノ森版立川文庫>
-  src: tail
+  kana_segmented: ムサシデンセツイシノモリバンタチカワブンコ
+  src: ai
 - key: qid:Q471103|name:歯車
   kana_segmented: ハグルマ
   src: ndl
@@ -77440,17 +77440,17 @@ fills:
 - key: qid:Q48760993|name:鬼の花嫁.
   kana_segmented: オニ ノ ハナヨメ.
 - key: qid:Q48761038|name:5年めのUターン
-  kana_segmented: 5年めのUターン
-  src: tail
+  kana_segmented: ゴネンメノユーターン
+  src: ai
 - key: qid:Q48761038|name:お婿が欲しい!!
-  kana_segmented: お婿が欲しい!!
-  src: tail
+  kana_segmented: オムコガホシイ
+  src: ai
 - key: qid:Q48761038|name:地獄フーガ
-  kana_segmented: 地獄フーガ
-  src: tail
+  kana_segmented: ジゴクフーガ
+  src: ai
 - key: qid:Q48761038|name:夜叉の庭
-  kana_segmented: 夜叉の庭
-  src: tail
+  kana_segmented: ヤシャノニワ
+  src: ai
 - key: qid:Q48761038|name:太郎が街にやってきた
   kana_segmented: タロウガマチニヤッテキタ
   src: ndl
@@ -77461,8 +77461,8 @@ fills:
   kana_segmented: ネムレヌモリノ
   src: ndl
 - key: qid:Q48761038|name:砂のエンブレム
-  kana_segmented: 砂のエンブレム
-  src: tail
+  kana_segmented: スナノエンブレム
+  src: ai
 - key: qid:Q48761038|name:花の褥
   kana_segmented: 'アイ ミテ ノ : ラッカ ノ シトネ'
   src: tail
@@ -77487,8 +77487,8 @@ fills:
   kana_segmented: ドリーム オン
   src: ndl
 - key: qid:Q48762179|name:はるかなる地平線より
-  kana_segmented: はるかなる地平線より
-  src: tail
+  kana_segmented: ハルカナルチヘイセンヨリ
+  src: ai
 - key: qid:Q48762179|name:紀子と竜一
   kana_segmented: ノリコ ト リュウイチ
   src: tail
@@ -77651,14 +77651,14 @@ fills:
   kana_segmented: オセロ
   src: ndl
 - key: qid:Q52717668|name:ヒターノの娘
-  kana_segmented: ヒターノの娘
-  src: tail
+  kana_segmented: ヒターノノムスメ
+  src: ai
 - key: qid:Q52717668|name:壁に耳ありトイレに目あり
-  kana_segmented: 壁に耳ありトイレに目あり
-  src: tail
+  kana_segmented: カベニミミアリトイレニメアリ
+  src: ai
 - key: qid:Q52717668|name:夢の中 夢の外
-  kana_segmented: 夢の中夢の外
-  src: tail
+  kana_segmented: ユメノナカユメノソト
+  src: ai
 - key: qid:Q52717668|name:夢追人の群れ
   kana_segmented: ユメオイビトノムレ
 - key: qid:Q52717668|name:異邦人
@@ -78075,8 +78075,8 @@ fills:
   kana_segmented: キコウシ エンマ
   src: ndl
 - key: qid:Q551359|name:魔神サーガ
-  kana_segmented: 魔神サーガ
-  src: tail
+  kana_segmented: マジンサーガ
+  src: ai
 - key: qid:Q551551|name:『ああっ女神さまっ』公式アンソロジー
   kana_segmented: アアッ メガミサマッ コウシキ アンソロジー
 - key: qid:Q551551|name:サクラ大戦 第2部
@@ -78177,14 +78177,14 @@ fills:
   kana_segmented: スナ ノ ケン
   src: tail
 - key: qid:Q55533185|name:紅蓮曼荼羅
-  kana_segmented: 紅蓮曼荼羅
-  src: tail
+  kana_segmented: グレンマンダラ
+  src: ai
 - key: qid:Q55533185|name:美獣の館
-  kana_segmented: 美獣の館
-  src: tail
+  kana_segmented: ビジュウノヤカタ
+  src: ai
 - key: qid:Q55533185|name:美神の罠
-  kana_segmented: 美神の罠
-  src: tail
+  kana_segmented: ミカミノワナ
+  src: ai
 - key: qid:Q55534683|name:無防備都市
   kana_segmented: ムボウビ トシ
   src: ndl
@@ -78352,8 +78352,8 @@ fills:
 - key: qid:Q57902816|name:イエローフレイム
   kana_segmented: イエロー フレイム
 - key: qid:Q5790509|name:ギガンティスの刃
-  kana_segmented: ギガンティスの刃
-  src: tail
+  kana_segmented: ギガンティスノヤイバ
+  src: ai
 - key: qid:Q58139770|name:魔男のイチ
   kana_segmented: マダン ノ イチ
 - key: qid:Q58139778|name:おもしろがり屋でいきましょう
@@ -78447,8 +78447,8 @@ fills:
 - key: qid:Q600384|name:勝海舟
   kana_segmented: カツ カイシュウ
 - key: qid:Q600384|name:武蔵伝 異説剣豪伝奇
-  kana_segmented: 武蔵伝異説剣豪伝奇
-  src: tail
+  kana_segmented: ムサシデンイセツケンゴウデンキ
+  src: ai
 - key: qid:Q600384|name:真説魔獣戦線
   kana_segmented: シンセツ マジュウ センセン
 - key: qid:Q60081475|name:武蔵野
@@ -78958,8 +78958,8 @@ fills:
   kana_segmented: 'アヤシイ カフン : タンキ ミステリ'
   src: tail
 - key: qid:Q6410148|name:極棒兄弟
-  kana_segmented: 極棒兄弟
-  src: tail
+  kana_segmented: ゴクボウキョウダイ
+  src: ai
 - key: qid:Q6410148|name:特命係長只野仁.
   kana_segmented: トクメイ カカリチョウ タダノ ヒトシ.
 - key: qid:Q6410148|name:特命課長只野仁
@@ -79758,8 +79758,8 @@ fills:
 - key: qid:Q7497596|name:ドカベンドリーム トーナメント編
   kana_segmented: ドカベン ドリーム トーナメント ヘン
 - key: qid:Q7497596|name:草野球列伝
-  kana_segmented: 草野球列伝
-  src: tail
+  kana_segmented: クサヤキュウレツデン
+  src: ai
 - key: qid:Q7499514|name:Power!!
   kana_segmented: Power
   src: ndl
@@ -80027,8 +80027,8 @@ fills:
 - key: qid:Q8061567|name:少年魔法士フレアスタックス
   kana_segmented: ショウネン マホウシ フレア スタックス
 - key: qid:Q8062652|name:プリンセスと虹色の指輪
-  kana_segmented: プリンセスと虹色の指輪
-  src: tail
+  kana_segmented: プリンセストニジイロノユビワ
+  src: ai
 - key: qid:Q8062652|name:情熱のマスカレード
   kana_segmented: ジョウネツ ノ マスカレード
   src: tail
@@ -80781,8 +80781,8 @@ fills:
   kana_segmented: キミ ワ ルビー ノ ウソ オ ツク
   src: ndl
 - key: qid:Q9016503|name:天使の髪飾り
-  kana_segmented: 天使の髪飾り
-  src: tail
+  kana_segmented: テンシノカミカザリ
+  src: ai
 - key: qid:Q9016503|name:宝石の素顔
   kana_segmented: イシ ノ スガオ
   src: ndl
@@ -81829,8 +81829,8 @@ fills:
   kana_segmented: プレミア
   src: ndl
 - key: qid:Q965600|name:天高く豊かなり
-  kana_segmented: 天高く豊かなり
-  src: tail
+  kana_segmented: テンタカクユタカナリ
+  src: ai
 - key: qid:Q965600|name:校内写生＆フォビア
   kana_segmented: コウナイ シャセイ &amp; フォビア
   src: ndl
