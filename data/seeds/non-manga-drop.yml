@@ -3490,3 +3490,10 @@ non_manga:
   - series_key: "name:米沢嘉博|name:手塚治虫マンガ論"
     reason: non_manga_zenshu_bekan
     note: "米沢嘉博による手塚論=評論。巻0"
+  # ★押井守版 天使のたまご=アニメ映画本(非漫画)。岸香里版(Q108415280)は漫画でkeep。NDL/memory確認2026-06-08
+  - series_key: "qid:Q285084|name:天使のたまご"
+    reason: non_manga_anime_film_book
+    note: "押井守版 天使のたまご(アニメージュ文庫1985)=アニメ映画の小説/設定本=非漫画。巻1で表示されていた"
+  - series_key: "name:押井守,天野嘉孝|name:天使のたまご"
+    reason: non_manga_anime_film_book
+    note: "押井守・天野喜孝 天使のたまご=アニメ映画関連本=非漫画。巻0"
