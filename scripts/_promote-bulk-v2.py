@@ -950,6 +950,7 @@ def pub_key_of(name: str | None) -> str | None:
 
 # === 著者ヨミ (50音索引用、 MADB metadata504 公式ヨミ由来) ===
 _AUTHOR_YOMI: dict | None = None
+_AUTHOR_CORR: dict | None = None
 
 
 def _load_author_yomi() -> None:
@@ -958,6 +959,41 @@ def _load_author_yomi() -> None:
         return
     p = ROOT / "data" / "seeds" / "author-yomi.yml"
     _AUTHOR_YOMI = (yaml.safe_load(open(p, encoding="utf-8")) or {}).get("yomi", {}) if p.exists() else {}
+
+
+def _load_author_corr() -> None:
+    """著者補正seed (生MADB役割タグ由来) を series_key -> {drop:set, add:list} で読む。
+    drop=非著者role(編/解説/発売等)除去 / add=実在人物の取りこぼし著者(救済)。 種2不変overlay。"""
+    global _AUTHOR_CORR
+    if _AUTHOR_CORR is not None:
+        return
+    _AUTHOR_CORR = {}
+    p = ROOT / "data" / "seeds" / "author-role-corrections.yml"
+    if not p.exists():
+        return
+    doc = yaml.safe_load(open(p, encoding="utf-8")) or {}
+    for e in doc.get("corrections", []):
+        k = e.get("series_key")
+        if not k:
+            continue
+        _AUTHOR_CORR[k] = {"drop": set(e.get("drop") or []), "add": list(e.get("add") or [])}
+
+
+def apply_author_corrections(authors: list[dict], series_key: str) -> list[dict]:
+    """series_key の補正を適用: 非著者role を除去 + 取りこぼし著者を救済追加。
+    add は role 不明なので writer_artist(enrich_author で kana/romaji 付与)。"""
+    _load_author_corr()
+    corr = _AUTHOR_CORR.get(series_key)
+    if not corr:
+        return authors
+    drop = corr["drop"]
+    out = [a for a in authors if a.get("name") not in drop]
+    have = {a.get("name") for a in out}
+    for nm in corr["add"]:
+        if nm not in have:
+            out.append({"name": nm, "role": "writer_artist"})
+            have.add(nm)
+    return out
 
 
 def enrich_author(a: dict) -> dict:
@@ -2051,6 +2087,7 @@ def main():
         #   反映(中黒是正 + 代表脱落副題の回収)。 seed3 override は build_yml で優先。
         _apply_cluster_best(con, merged_series, related_ids)
         authors = get_authors(con, series["id"])
+        authors = apply_author_corrections(authors, series["series_key"])
         seed_entry = seed3.get(series["series_key"])
         new_yml = build_yml(src, merged_series, authors, editions, seed_entry,
                             valid_pubs, valid_mags, valid_gens)
