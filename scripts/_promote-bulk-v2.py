@@ -976,23 +976,38 @@ def _load_author_corr() -> None:
         k = e.get("series_key")
         if not k:
             continue
-        _AUTHOR_CORR[k] = {"drop": set(e.get("drop") or []), "add": list(e.get("add") or [])}
+        _AUTHOR_CORR[k] = {"drop": set(e.get("drop") or []),
+                           "original": set(e.get("original") or []),
+                           "add": list(e.get("add") or [])}
 
 
 def apply_author_corrections(authors: list[dict], series_key: str) -> list[dict]:
-    """series_key の補正を適用: 非著者role を除去 + 取りこぼし著者を救済追加。
-    add は role 不明なので writer_artist(enrich_author で kana/romaji 付与)。"""
+    """series_key の補正を適用(生MADB役割タグ由来):
+      drop     = 非著者role(編/監修/訳/装丁/協力/企画...)を除去
+      original = 原作系を role=original_author に(promoteが original_authors 欄へ振り分け)
+      add      = 取りこぼし著者の救済追加(writer_artist)
+    enrich_author で kana/romaji は後段付与。 種2不変。"""
     _load_author_corr()
     corr = _AUTHOR_CORR.get(series_key)
     if not corr:
         return authors
-    drop = corr["drop"]
-    out = [a for a in authors if a.get("name") not in drop]
+    drop, orig = corr["drop"], corr["original"]
+    out = []
+    for a in authors:
+        nm = a.get("name")
+        if nm in drop:
+            continue
+        if nm in orig and a.get("role") != "original_author":
+            a = {**a, "role": "original_author"}
+        out.append(a)
     have = {a.get("name") for a in out}
     for nm in corr["add"]:
         if nm not in have:
             out.append({"name": nm, "role": "writer_artist"})
             have.add(nm)
+    # ★最終安全網: 原作化で authors(非original)が0になったら、 我々が原作化した分を著者へ戻す
+    if out and not any(a.get("role") != "original_author" for a in out):
+        out = [{**a, "role": "writer_artist"} if a.get("name") in orig else a for a in out]
     return out
 
 
