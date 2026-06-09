@@ -26,6 +26,16 @@ export const AuthorSchema = z.object({
 });
 export type Author = z.infer<typeof AuthorSchema>;
 
+/** credits = 著作でない副次クレジット(編集/監修/訳/装丁/解説/企画/協力 等)。
+ *  生MADB役割タグ由来。 著者欄・50音索引・著者フィルターには入れない=フリガナ不要。
+ *  表示専用 + キーワード検索の対象には入れる。 */
+export const CreditSchema = z.object({
+  name: z.string().min(1),
+  /** 表示役割ラベル(例: 編集 / 監修 / 翻訳 / 装丁・デザイン / 解説 / 企画 / 協力) */
+  role: z.string().min(1),
+});
+export type Credit = z.infer<typeof CreditSchema>;
+
 export const VolumeSchema = z.object({
   number: z.number().int().min(1),
   /** 巻ラベル (= 「上」「下」「特装版」等、 数字以外の表示文字。 既定 `第${number}巻` を上書きする) */
@@ -109,6 +119,8 @@ export const MangaSchema = z.object({
   status: Status,
   authors: z.array(AuthorSchema).min(1),
   original_authors: z.array(AuthorSchema).default([]),
+  /** 副次クレジット(編集/監修/訳/装丁/解説/企画/協力 等)。 表示+キーワード検索のみ、 著者扱いしない */
+  credits: z.array(CreditSchema).default([]),
   /** 代表出版社キー (= 最多巻の版。 ヘッダ表示用)。 全版が長尾社の時は "(unknown)" */
   publisher: z.string().min(1),
   /** 全版の出版社キー (= distinct、 フィルタ用)。 1作が複数社から出た場合に全社を保持。

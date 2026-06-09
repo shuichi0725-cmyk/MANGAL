@@ -68,12 +68,21 @@ export function matchText(query: string, manga: Manga): boolean {
         .map((t) => normalizeForSearch(t))
     : [];
 
+  // 人物名(著者/原作/credits)も検索対象。 著者フィルター/50音索引は別(著者のみ)だが、
+  // キーワード検索は「打った名前で辿り着ける」ため credits(編集/監修/訳/解説等)も含める。
+  const people = [
+    ...manga.authors.map((a) => a.name),
+    ...manga.original_authors.map((a) => a.name),
+    ...(manga.credits ?? []).map((c) => c.name),
+  ].map((n) => normalizeForSearch(n));
+
   const haystacks = [
     normalizeForSearch(manga.title),
     normalizeForSearch(manga.title_kana),
     normalizeForSearch(manga.title_romaji),
     normalizeForSearch(kanaToRomaji(manga.title_kana)),
     ...altTitles,
+    ...people,
   ];
   if (haystacks.some((h) => h && h.includes(q))) return true;
 

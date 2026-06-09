@@ -137,6 +137,24 @@ export default async function MangaDetailPage({
                 </dd>
               </>
             )}
+            {manga.credits.length > 0 && (
+              <>
+                <dt className="font-semibold text-ink/65 pt-1">その他</dt>
+                <dd className="flex flex-wrap gap-x-3 gap-y-1 text-sm text-ink/70">
+                  {Object.entries(
+                    manga.credits.reduce<Record<string, string[]>>((acc, c) => {
+                      (acc[c.role] = acc[c.role] || []).push(c.name);
+                      return acc;
+                    }, {}),
+                  ).map(([role, names]) => (
+                    <span key={role}>
+                      <span className="text-ink/50">{role}: </span>
+                      {names.join(" / ")}
+                    </span>
+                  ))}
+                </dd>
+              </>
+            )}
             <dt className="font-semibold text-ink/65 pt-1">出版社</dt>
             <dd className="flex flex-wrap gap-1.5">
               <FilterLink href={`/?publisher=${encodeURIComponent(manga.publisher)}`}>

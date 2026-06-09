@@ -12,6 +12,7 @@ const base: Manga = {
   status: "ongoing",
   authors: [{ name: "A", role: "writer_artist" }],
   original_authors: [],
+  credits: [],
   publisher: "shueisha",
   publishers: ["shueisha"],
   magazine: null,

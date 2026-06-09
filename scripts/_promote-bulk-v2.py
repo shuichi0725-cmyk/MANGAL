@@ -976,9 +976,18 @@ def _load_author_corr() -> None:
         k = e.get("series_key")
         if not k:
             continue
-        _AUTHOR_CORR[k] = {"drop": set(e.get("drop") or []),
+        creds = e.get("credits") or []
+        _AUTHOR_CORR[k] = {"drop": {cc["name"] for cc in creds if cc.get("name")},
+                           "credits": creds,
                            "original": set(e.get("original") or []),
                            "add": list(e.get("add") or [])}
+
+
+def get_author_credits(series_key: str) -> list[dict]:
+    """series_key の credits(副次クレジット name+role)。 表示用、 著者でない。"""
+    _load_author_corr()
+    corr = _AUTHOR_CORR.get(series_key)
+    return list(corr["credits"]) if corr else []
 
 
 def apply_author_corrections(authors: list[dict], series_key: str) -> list[dict]:
@@ -1752,6 +1761,10 @@ def build_yml(
     # 著者ヨミ(50音索引用)+ romaji を付与 (= MADB 504 公式ヨミ。 無い著者は素のまま)
     o["authors"] = [enrich_author(w) for w in writers]
     o["original_authors"] = [enrich_author(x) for x in originals]
+    # 副次クレジット(編集/監修/訳/装丁/解説/企画/協力 等)= 表示+検索用、 著者でない
+    creds = get_author_credits(series_row.get("series_key", ""))
+    if creds:
+        o["credits"] = creds
 
     # publisher: 種3 → 旧 yml の 優先で 取得、 master 未定義なら 旧 yml に fallback
     pub_cand = (seed3 or {}).get("publisher") or src_yml.get("publisher")

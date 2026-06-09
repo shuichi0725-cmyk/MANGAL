@@ -56,6 +56,26 @@ def classify(tag):
 def norm(s):
     return re.sub(r"[・･\s　,，.\-‐―]", "", s).lower()
 
+ROLE_LABEL = [
+    (("編集", "編纂", "責任編集", "共同編集", "編著", "編"), "編集"),
+    (("監修", "監督", "総監督", "演出", "指導", "アドバイザー"), "監修"),
+    (("翻訳", "監訳", "共訳", "訳"), "翻訳"),
+    (("装丁", "装幀", "装呟", "カバー", "ブックデザイン", "デザイン", "ロゴ", "レイアウト", "本文", "表紙", "DTP"), "装丁・デザイン"),
+    (("解説", "エッセイ", "語り", "述"), "解説"),
+    (("企画",), "企画"),
+    (("協力", "取材", "原案協力", "設定協力", "アシスタント"), "協力"),
+    (("写真", "彩色", "カラー"), "写真・彩色"),
+    (("制作", "製作", "プロデュース"), "制作"),
+]
+
+def display_role(tags):
+    """credit名の生タグ集合 → 表示役割ラベル。"""
+    joined = " ".join(tags)
+    for parts, label in ROLE_LABEL:
+        if any(p in joined for p in parts):
+            return label
+    return next((t for t in tags if t), "その他")
+
 ENTITY = re.compile(r"企画|プロ$|プロダクション|スタジオ|製作委員会|委員会|編集部|ルーム|新企画社|開発室"
                     r"|プロジェクト|PROJECT|社$|室$|出版部|出版局|出版社|編集局|刊行会|刊行委員会"
                     r"|基金|財団|協会|学会|研究所|研究会|事務局|連盟|機構|センター|資料館|博物館"
@@ -90,11 +110,13 @@ for sid, mids in ser_mids.items():
     if not madb:
         continue
     name_cls = collections.defaultdict(set)
+    name_tags = collections.defaultdict(set)
     name_raw = {}
     for mid in mids:
         for nm, tag, _ in roles.get(mid, []):
             k = norm(nm)
             name_cls[k].add(classify(tag))
+            name_tags[k].add(tag)
             name_raw.setdefault(k, nm)
     if not name_cls:
         continue
@@ -131,11 +153,13 @@ for sid, mids in ser_mids.items():
     if not keep_real and not add and drop:
         st["guard"] += 1
         drop = []
-    if not (drop or orig or add):
+    # credits = dropした非著者を役割付きで保持(著者欄から除外+表示用)
+    credits = [{"name": m, "role": display_role(name_tags[norm(m)])} for m in drop]
+    if not (credits or orig or add):
         continue
     e = {"series_key": skey}
-    if drop:
-        e["drop"] = drop; st["drop_series"] += 1; st["drops"] += len(drop)
+    if credits:
+        e["credits"] = credits; st["drop_series"] += 1; st["drops"] += len(credits)
     if orig:
         e["original"] = orig; st["orig_series"] += 1; st["origs"] += len(orig)
     if add:
@@ -146,11 +170,13 @@ OUT = ROOT + "/data/seeds/author-role-corrections.yml"
 with open(OUT, "w", encoding="utf-8") as f:
     f.write("schema_version: 2\n")
     f.write("generator: _gen-author-role-corrections.py 生MADB役割タグ分類 全series\n")
-    f.write("note: 種2不変overlay。 drop=非著者role除去 / original=原作系をoriginal_authorsへ / add=救済著者\n")
+    f.write("note: 種2不変overlay。 credits=非著者role(著者欄除外+表示用) / original=原作系をoriginal_authorsへ / add=救済著者\n")
     f.write("corrections:\n")
     for e in entries:
         f.write("  - series_key: %s\n" % json.dumps(e["series_key"], ensure_ascii=False))
-        for fld in ("drop", "original", "add"):
+        if "credits" in e:
+            f.write("    credits: [%s]\n" % ", ".join(json.dumps(cc, ensure_ascii=False) for cc in e["credits"]))
+        for fld in ("original", "add"):
             if fld in e:
                 f.write("    %s: [%s]\n" % (fld, ", ".join(json.dumps(x, ensure_ascii=False) for x in e[fld])))
 print("補正entry:", len(entries), dict(st))
