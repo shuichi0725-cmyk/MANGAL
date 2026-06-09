@@ -1969,9 +1969,20 @@ def main():
 
     OUT_DIR.mkdir(parents=True, exist_ok=True)
     # 既存 v2 dir clean (= --only 時は 全削除せず 該当ページのみ後で上書き)
+    # ★Windows: Defender 即時スキャン等で一時ロック(WinError 32)→ リトライ
     if not ONLY_SLUGS:
+        import time as _t
         for p in OUT_DIR.glob("*.yml"):
-            p.unlink()
+            for _attempt in range(5):
+                try:
+                    p.unlink()
+                    break
+                except FileNotFoundError:
+                    break          # 既に削除済 = OK
+                except PermissionError:
+                    _t.sleep(0.3)
+            else:
+                print(f"  [warn] unlink失敗(ロック継続) skip: {p.name}", file=sys.stderr)
     else:
         print(f"[--only] 対象 slug: {sorted(ONLY_SLUGS)} (= 他ページ温存)", file=sys.stderr)
 
@@ -2054,6 +2065,9 @@ def main():
         with ypath.open("r", encoding="utf-8") as f:
             src = _yload(f)
         slug = src["slug"]
+        if not slug or not str(slug).strip():
+            stats["empty_slug"] = stats.get("empty_slug", 0) + 1
+            continue                       # 空slug = 出力ファイル名不正(.yml) → skip
         title = src["title"]
         qid = src.get("wikidata_qid")
         # 漫画以外 (= テレビアニメ版 / 映画 / 劇場版 等) は MANGAL 対象外
