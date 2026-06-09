@@ -1,0 +1,757 @@
+schema_version: 1
+generator: _gen-author-role-corrections.py (raw MADB role tags)
+note: 種2不変。 promoteが series_key->sid 解決で適用。 drop=非著者role除去 / add=マスター実在の取りこぼし著者
+corrections:
+  - series_key: "qid:Q11368934|name:肉大好き!"
+    add: ["久住昌之", "寺門ジモン", "水沢悦子", "具光然", "うえやまとち", "ラズウェル細木", "刃森尊", "富沢順", "市川ヒロシ", "東村アキコ", "松井雪子", "迂闊", "野中英次"]
+  - series_key: "qid:Q11551540|name:プロゴルファー一条一也"
+    drop: ["Golfコミック編集部"]
+  - series_key: "qid:Q1358489|name:忍法秘話"
+    drop: ["小松和彦"]
+  - series_key: "qid:Q17572|name:ドラえもん"
+    drop: ["大山のぶ代"]
+  - series_key: "qid:Q431443|name:わが青春のアルカディア"
+    add: ["松本零士"]
+  - series_key: "qid:Q551359|name:813の謎"
+    drop: ["保篠龍緒"]
+  - series_key: "qid:Q551359|name:キッカイくん"
+    drop: ["小松左京"]
+  - series_key: "qid:Q551359|name:ルパン再現"
+    drop: ["保篠龍緒"]
+  - series_key: "qid:Q551359|name:三十棺桶島"
+    drop: ["保篠龍緒"]
+  - series_key: "qid:Q551359|name:八点鐘"
+    drop: ["保篠龍緒"]
+  - series_key: "qid:Q551359|name:虎の牙"
+    drop: ["保篠龍緒"]
+  - series_key: "qid:Q551359|name:金三角"
+    drop: ["保篠龍緒"]
+  - series_key: "name:ポール・ディニ|name:DCスーパーヒーローズ"
+    drop: ["石川裕人"]
+  - series_key: "name:エミル・シェーベ|name:Monster なまえのないかいぶつ"
+    drop: ["浦沢直樹", "スタジオ・ナッツ"]
+  - series_key: "name:ダイナミックプロ|name:UFOロボ グレンダイザー"
+    add: ["永井豪"]
+  - series_key: "name:スタジオDNA|name:VAMPIRE SAVIOR"
+    add: ["小林隆志"]
+  - series_key: "name:デジタルプレス|name:はじめよう!萌えキャラCG制作マニュアル|sub:可愛い女の子を描くためのテクニック集"
+    add: ["デジタルプレス"]
+  - series_key: "name:師岡秀治|name:ひとりぼっちのわたし"
+    drop: ["時裕志"]
+  - series_key: "name:手塚プロダクション|name:まんがで語りつぐ広島の復興"
+    add: ["青木健生", "田辺良平", "串田森"]
+  - series_key: "name:まんが博物館編集部|name:まんが動物百科"
+    add: ["高瀬洋平"]
+  - series_key: "name:編集部|name:まんが新・日本どうぶつ記"
+    add: ["つぼいこう", "大石一雄"]
+  - series_key: "name:クリストス・ゲージ|name:アイアンマン3:プレリュード"
+    drop: ["光岡三ツ子"]
+  - series_key: "name:クリストファー・ヨースト|name:アベンジャーズ"
+    drop: ["光岡三ツ子"]
+  - series_key: "name:イオン|name:ウルトラマンベストブック"
+    add: ["イオン"]
+  - series_key: "name:ジェラルド・サンドバル|name:エッジ・オブ・スパイダーゲドン"
+    drop: ["秋友克也"]
+  - series_key: "name:スタジオDNA|name:エリーのアトリエ～ザールブルグの錬金術士2～4コマギャグバトル"
+    add: ["佐々木よしの"]
+  - series_key: "name:フレッド・ヴァン・レンテ|name:カウボーイ＆エイリアン"
+    drop: ["柏木しょうこ"]
+  - series_key: "name:ガールズ＆パンツァー製作委員会|name:ガールズ＆パンツァープラウダ戦記"
+    add: ["吉田創"]
+  - series_key: "name:安達洋美|name:コミック版三国志英雄伝"
+    add: ["安達洋美", "加来耕三"]
+  - series_key: "name:ジェフ・ジョーンズ|name:ジャスティス・リーグ"
+    drop: ["高木亮"]
+  - series_key: "name:クレイトン・クライン|name:スパイダーゲドン"
+    drop: ["秋友克也"]
+  - series_key: "name:DAN SLOTT|name:スパイダーマン:ニューウェイズ・トゥ・ダイ"
+    drop: ["光岡三ツ子"]
+  - series_key: "name:ダン・スロット|name:スパイダーマン:ブランニュー・デイ"
+    drop: ["高木亮"]
+  - series_key: "name:アラン・ムーア|name:スワンプシング"
+    drop: ["石川裕人"]
+  - series_key: "name:グラント・モリソン|name:バットマン ブラックグローブ"
+    drop: ["高木亮"]
+  - series_key: "name:グラント・モリソン|name:バットマン ブルース・ウェインの帰還"
+    drop: ["高木亮"]
+  - series_key: "name:グラント・モリソン|name:バットマン ラーズ・アル・グールの復活"
+    drop: ["高木亮"]
+  - series_key: "name:D.オニール|name:バットマン リターンズ"
+    drop: ["土屋政雄"]
+  - series_key: "name:ジム・スターリン|name:バットマン:デス・イン・ザ・ファミリー"
+    drop: ["高木亮"]
+  - series_key: "name:スコット・スナイダー|name:バットマン:梟の夜"
+    drop: ["高木亮"]
+  - series_key: "name:J・M・デュマティス|name:ベスト・オブ・スパイダーマン"
+    drop: ["高木亮"]
+  - series_key: "name:イーサン・サックス|name:ホワット・イフ?"
+    drop: ["吉川悠"]
+  - series_key: "name:上総理佳|name:マジックカードファイル"
+    drop: ["新紀元社編集部"]
+  - series_key: "name:スタジオDNA|name:マリーのアトリエ～ザールブルグの錬金術士～ショートコミック天国"
+    add: ["小林隆志"]
+  - series_key: "name:白樺文学館多喜二ライブラリー|name:マンガ蟹工船"
+    drop: ["島村輝"]
+  - series_key: "name:漫画家集団「ぼむ」|name:ユーモア・ペンチ"
+    add: ["漫画家集団「ぼむ」"]
+  - series_key: "name:スコット・ビーティ|name:ロビン:イヤーワン"
+    drop: ["合田綾子"]
+  - series_key: "name:バラエティ・アートワークス|name:古事記/日本書紀"
+    add: ["バラエティ・アートワークス"]
+  - series_key: "name:ダイナミックプロダクション|name:夏目漱石"
+    add: ["小山田つとむ"]
+  - series_key: "name:アニメロDear|name:大和彼氏アンソロジー"
+    add: ["アニメロDear Girl"]
+  - series_key: "name:宮昌太朗|name:天元突破グレンラガン"
+    add: ["宮昌太朗"]
+  - series_key: "name:バラエティ・アートワークス|name:死者の書"
+    add: ["バラエティ・アートワークス"]
+  - series_key: "name:可知秀幸|name:異次元の世界エルハザード"
+    add: ["可知秀幸"]
+  - series_key: "name:カズキヨネ|name:神々の悪戯アンソロジー"
+    add: ["カズキヨネ"]
+  - series_key: "name:ライト・アップ|name:装鬼兵M.D.ガイスト記録全集"
+    add: ["ライト・アップ"]
+  - series_key: "name:イヒョンセ|name:逆境のリーダーシップ"
+    drop: ["清水博之"]
+  - series_key: "name:ヨランタ・トウビエレヴィチ|name:鶏のトサカはどこでも赤い"
+    add: ["ヨランタ・トウビエレヴィチ", "エンタプライズ"]
+  - series_key: "qid:Q10843732|name:艦隊これくしょん-艦これ-コミックアラカルト 舞鶴鎮守府編"
+    drop: ["コンプティーク編集部"]
+  - series_key: "qid:Q11227223|name:失楽園"
+    drop: ["J・さいろー"]
+  - series_key: "qid:Q11256217|name:ワープin"
+    drop: ["Mスタジオ"]
+  - series_key: "qid:Q11282004|name:2012年地球滅亡の危機!!"
+    drop: ["湯浅ひろゆき", "スパイスコミニケーションズ"]
+  - series_key: "qid:Q11282004|name:迫り来る!!!!!20XX年地球水没の危機!!"
+    drop: ["コミック・ムー編集部"]
+  - series_key: "qid:Q11282004|name:驚愕!!超常怪奇事件file"
+    drop: ["コミック・ムー編集部"]
+  - series_key: "qid:Q11342224|name:コミック探偵ミステリー傑作選"
+    drop: ["深町眞理子"]
+  - series_key: "qid:Q11372936|name:日本史サスペンス劇場"
+    drop: ["日本テレビ制作チーム"]
+  - series_key: "qid:Q11383543|name:モーゼル96"
+    drop: ["佐藤プロダクション"]
+  - series_key: "qid:Q11456975|name:ワープin"
+    drop: ["Mスタジオ"]
+  - series_key: "qid:Q11473329|name:猛爆大攻略旋風の用心棒・スーパービンゴ・アントニオ猪木という名のパチスロ機"
+    drop: ["爆スロコミック編集部"]
+  - series_key: "qid:Q11481143|name:NHKその時歴史が動いた"
+    drop: ["NHK「その時歴史が動いた」取材班"]
+  - series_key: "qid:Q11511206|name:アラジンA・サラリーマン金太郎・キングパルサー猛爆御三家大攻略"
+    drop: ["パチスロ王国編集部"]
+  - series_key: "qid:Q11511206|name:猛爆大攻略アントニオ猪木という名のパチスロ機"
+    drop: ["パチスロ王国編集部"]
+  - series_key: "qid:Q11511206|name:猛爆大攻略ミリオンゴッド"
+    drop: ["パチスロ王国編集部"]
+  - series_key: "qid:Q11548972|name:まおゆう魔王勇者コミックアラカルト"
+    drop: ["コンプエース編集部"]
+  - series_key: "qid:Q11561006|name:キミキスthe anthology"
+    drop: ["チャンピオンred編集部"]
+  - series_key: "qid:Q11562140|name:あはは、まんが"
+    drop: ["綺譚社"]
+  - series_key: "qid:Q11571159|name:おじゃる丸"
+    drop: ["アミューズメント書籍編集部", "エンタテインメント書籍編集部"]
+  - series_key: "qid:Q11578694|name:猛獣王S"
+    drop: ["スロッター王国編集部"]
+  - series_key: "qid:Q11657721|name:本当に怖い学校の怪談"
+    drop: ["LCミステリー編集部"]
+  - series_key: "qid:Q11665971|name:のび太とアニマル惑星"
+    drop: ["佐々木多利尓", "小学館児童学習編集局"]
+  - series_key: "qid:Q11665971|name:のび太とブリキの迷宮"
+    drop: ["佐々木多利尓", "小学館児童学習編集局"]
+  - series_key: "qid:Q11665971|name:のび太と雲の王国"
+    drop: ["佐々木多利尓", "小学館児童学習編集局"]
+  - series_key: "qid:Q11665971|name:のび太のドラビアンナイト"
+    drop: ["佐々木多利尓", "小学館児童学習編集局"]
+  - series_key: "qid:Q1372761|name:キョン＆古泉の災難"
+    drop: ["あすか編集部"]
+  - series_key: "qid:Q1372761|name:涼宮ハルヒの祝祭"
+    drop: ["少年エース編集部"]
+  - series_key: "qid:Q1372761|name:涼宮ハルヒの競演"
+    drop: ["少年エース編集部"]
+  - series_key: "qid:Q1372761|name:涼宮ハルヒの絢爛"
+    drop: ["少年エース編集部"]
+  - series_key: "qid:Q16770279|name:北斗の拳 イチゴ味"
+    drop: ["行徒"]
+  - series_key: "qid:Q193300|name:comic S"
+    drop: ["早川書房編集部"]
+    add: ["手塚治虫"]
+  - series_key: "qid:Q193300|name:日本漫画代表作選集"
+    drop: ["日本漫画家協会"]
+  - series_key: "qid:Q1993|name:NARUTO疾風伝"
+    drop: ["ジャンプ・コミック出版編集部"]
+  - series_key: "qid:Q22128546|name:メディウム"
+    drop: ["C・S・J.", "クリエイティヴ・SANO・ジャパン"]
+  - series_key: "qid:Q2339941|name:漫画が語る戦争"
+    drop: ["多田和博"]
+  - series_key: "qid:Q2364333|name:放課後ペダル 「弱虫ペダル」公式アンソロジー"
+    drop: ["プリンセス編集部"]
+  - series_key: "qid:Q3814171|name:機動戦士Zガンダム 2"
+    drop: ["水野プロダクション"]
+  - series_key: "qid:Q551359|name:ルパン対ホームズ"
+    drop: ["保篠龍緒"]
+  - series_key: "qid:Q551359|name:奇岩城"
+    drop: ["保篠龍緒"]
+  - series_key: "qid:Q551359|name:怪盗紳士"
+    drop: ["保篠龍緒"]
+  - series_key: "qid:Q55400|name:コクリコ坂から"
+    drop: ["アニメージュ編集部"]
+  - series_key: "qid:Q59552041|name:ANGELic IMPACT"
+    drop: ["こうのゆきよ", "姫様"]
+  - series_key: "qid:Q6343869|name:新世紀エヴァンゲリオン"
+    drop: ["少年エース編集部"]
+    add: ["吉川かば夫", "RYU-TMR", "SAA", "いわさきまさかず", "たくま朋正", "ゴツボ×リュウジ", "トニーたけざき", "乙一", "今ノ夜きよし", "伯林", "児玉樹", "別天荒人", "吉崎観音", "小畑健", "広瀬けいた", "林ふみの", "桂明日香", "沙村広明", "滝本竜彦", "玉置勉強", "矢吹豪", "竹内元紀", "鈴木雅久"]
+  - series_key: "qid:Q6370938|name:ひぐらしのなく頃に 恋映し編"
+    drop: ["スクウェア・エニックス"]
+  - series_key: "qid:Q717936|name:日本名作漫画館SF編"
+    drop: ["小野耕世"]
+  - series_key: "qid:Q717936|name:松本零士の大宇宙"
+    drop: ["桜井雄一郎", "鈴木一誌"]
+  - series_key: "qid:Q7426424|name:ポケットモンスターSPECIAL"
+    drop: ["川染博之"]
+  - series_key: "qid:Q8062691|name:comic M"
+    drop: ["早川書房編集部"]
+    add: ["高橋葉介"]
+  - series_key: "qid:Q9009404|name:ドラえもんのび太のひみつ道具博物館"
+    drop: ["辻本有博"]
+  - series_key: "qid:Q9009404|name:大長編ドラえもん"
+    drop: ["佐々木多利尓"]
+  - series_key: "qid:Q9099435|name:オレンジコレクション"
+    drop: ["アップルミステリー編集部"]
+  - series_key: "name:デザート編集部|name:10代の女の子の事件簿"
+    drop: ["デザート編集部"]
+  - series_key: "name:ベイブリッジ・スタジオ|name:12歳。"
+    drop: ["ベイブリッジ・スタジオ", "西野紗彩"]
+  - series_key: "name:石塚勝美|name:3×3 EYES Another World"
+    add: ["石塚勝美"]
+  - series_key: "name:天之ひるめ|name:AKB0048"
+    drop: ["秋元康"]
+  - series_key: "name:秋元康|name:AKB0048外伝 とびだせ!AKBぜろぜろ女学園"
+    drop: ["秋元康"]
+  - series_key: "name:秋元康|name:AKB0048外伝とびだせ!AKBぜろぜろ女学園"
+    drop: ["秋元康"]
+  - series_key: "name:PUNPEE|name:BATMAN LOBO"
+    drop: ["椎名ゆかり"]
+  - series_key: "name:手塚プロダクション|name:BRUTUS図書館 手塚治虫"
+    drop: ["手塚プロダクション"]
+  - series_key: "name:中条省平|name:COM傑作選"
+    drop: ["中条省平"]
+  - series_key: "name:レン・ウェイン|name:DC UNIVERSE LEGACIES"
+    drop: ["石川裕人"]
+  - series_key: "name:並木久美子|name:DRAGON BALL Z 復活の「F」"
+    drop: ["ジャンプ・コミック出版編集部"]
+  - series_key: "name:スティーブ・カース|name:DUNGEONS & DRAGONSドラゴンランス秋の黄昏の竜"
+    drop: ["安田均", "大島豊"]
+  - series_key: "name:フランク・ミラー|name:Dark knight"
+    drop: ["秋友克也", "石川裕人"]
+  - series_key: "name:ジョアンナ・ザ・マッド|name:FENCE"
+    drop: ["吉川悠"]
+  - series_key: "name:JoJo|name:HALLOWEEN SHOW"
+    drop: ["スタジオのんき"]
+    add: ["くり鋭斗", "ぴゅあ", "仁木ひろし", "吉富昭仁", "未将崎雄"]
+  - series_key: "name:創美社|name:HE LOVES YOU"
+    drop: ["創美社"]
+  - series_key: "name:創美社|name:I LOVE YOU"
+    drop: ["創美社"]
+  - series_key: "name:ピーター・デヴィッド|name:IRON MAN"
+    drop: ["光岡三ツ子", "石川裕人"]
+  - series_key: "name:カレラ|name:Jimmy Corrigan."
+    drop: ["伯井真紀", "山下奏平"]
+  - series_key: "name:いのまたのりこ|name:Kue (9)"
+    drop: ["フミオオバタ"]
+  - series_key: "name:ゲームアーツ|name:LUNAR"
+    drop: ["重馬敬"]
+  - series_key: "name:ツカモトルーム|name:Lady Love"
+    drop: ["ツカモトルーム"]
+  - series_key: "name:成冨英俊|name:MATSUMOTO"
+    drop: ["原正人"]
+  - series_key: "name:G・ウィロー・ウィルソン|name:Ms.マーベル"
+    drop: ["秋友克也"]
+  - series_key: "name:田中陽介|name:My sweet ウマドンナ 馬きゅ～ん☆"
+    drop: ["田中陽介"]
+  - series_key: "name:田中陽介|name:My sweetウマドンナ馬きゅーん☆"
+    drop: ["田中陽介"]
+  - series_key: "name:田中陽介|name:My sweetウマドンナ馬きゅ～ん☆"
+    drop: ["田中陽介"]
+  - series_key: "name:スコット・シュナイダー|name:NEW 52 バットマン"
+    drop: ["今井亮一", "秋友克也", "松澤慶香", "小池顕久"]
+  - series_key: "name:村上としや|name:NHKその時歴史が動いた"
+    drop: ["NHK「その時歴史が動いた」取材班"]
+  - series_key: "name:創美社|name:NOT FRIEND,BUT・・・"
+    drop: ["創美社"]
+  - series_key: "name:DONKEY|name:Page 1"
+    add: ["Donkey", "Tetsu", "水原マサキ", "河本ひろし", "田中雅人", "留萌純", "真幌木弘", "真鍋譲治", "このどんと", "沢田一", "あらいずみるい"]
+  - series_key: "name:SHARK|name:Page 1"
+    drop: ["スタジオ・バトル"]
+    add: ["Tetsu", "水原マサキ", "河本ひろし", "真幌木弘"]
+  - series_key: "name:電撃大王編集部|name:ROAD"
+    drop: ["電撃大王編集部"]
+  - series_key: "name:Ken-G|name:Reflex"
+    add: ["Ken-G", "あらきあきら", "フレッド・ケリー", "中山たろう"]
+  - series_key: "name:Gen小笠原|name:Reflex"
+    add: ["Ken-G", "フレッド・ケリー", "中山たろう"]
+  - series_key: "name:クリス・バチャロ|name:SANDMAN"
+    drop: ["柳下毅一郎"]
+  - series_key: "name:サム・キース|name:SANDMAN"
+    drop: ["海法紀光"]
+  - series_key: "name:不知火プロ|name:UFOロボグレンダイザー"
+    drop: ["不知火プロ"]
+  - series_key: "name:アラン・ムーア|name:Watchmen"
+    drop: ["沖恭一郎", "秋友克也", "石川裕人", "海法紀光"]
+  - series_key: "name:スタズ・ジョンソン|name:X-MENユニバース:シビル・ウォー"
+    drop: ["石川裕人", "御代しおり"]
+  - series_key: "name:グラント・モリソン|name:batman:arkham asylum"
+    drop: ["高木亮"]
+  - series_key: "name:スタジオディーン|name:うる星やつら"
+    drop: ["玉井ヒロテル"]
+  - series_key: "name:けものフレンズプロジェクト|name:けものフレンズ電撃コミックアンソロジー ジャパリバス編"
+    drop: ["電撃マオウ編集部"]
+  - series_key: "name:ベイブリッジ・スタジオ|name:ここが噂のエル・パラシオ"
+    drop: ["ベイブリッジ・スタジオ", "吉村勲"]
+  - series_key: "name:ホーム社|name:ごめんねダーリン"
+    drop: ["ホーム社"]
+  - series_key: "name:柴田元幸|name:さかさま世界"
+    drop: ["柴田元幸", "ピーター・マレスカ", "平塚隼介"]
+  - series_key: "name:こやのかずこ|name:さだまさし やさしさの風景"
+    drop: ["森田研作"]
+  - series_key: "name:スタジオびーはいぶ|name:さ～ふぃん・ばに～"
+    drop: ["スタジオびーはいぶ"]
+  - series_key: "name:はつはる|name:ちっちゃいときからキミが好き"
+    drop: ["関戸愛"]
+  - series_key: "name:秋元康|name:とびだせ!AKBぜろぜろ女学園"
+    drop: ["秋元康"]
+  - series_key: "name:秋野茸|name:にっぽん魔界村"
+    drop: ["日本の闇の歴史研究会"]
+  - series_key: "name:スタジオジブリ|name:ののちゃん"
+    drop: ["スタジオジブリ"]
+  - series_key: "name:スタジオジブリ|name:ののちゃん 全集"
+    drop: ["スタジオジブリ"]
+  - series_key: "name:きくの|name:ひぐらしのなく頃に4コマKINGDOM"
+    drop: ["G. G. C"]
+  - series_key: "name:みこすり半劇場編集部|name:ふたひねり半道場"
+    drop: ["みこすり半劇場編集部"]
+  - series_key: "name:ログイン編集部|name:べーしっ君"
+    drop: ["ログイン編集部"]
+  - series_key: "name:武石正道|name:ほえろ!闘志"
+    drop: ["水野プロダクション", "武石正道"]
+  - series_key: "name:Bubka編集部|name:まんがTV放送禁止＆放送事故"
+    drop: ["BUBKA編集部"]
+  - series_key: "name:「5年の科学」「6年の科学」編集部|name:まんがサイエンス"
+    drop: ["「5年の科学」「6年の科学」編集部"]
+  - series_key: "name:Bubka編集部|name:まんが知ってはいけない消えた有名人の謎"
+    drop: ["BUBKA編集部"]
+  - series_key: "name:コミック編集部|name:めんたるダイバー"
+    drop: ["コミック編集部"]
+  - series_key: "name:南出大介|name:わがままDIY"
+    drop: ["南出大介", "DOS V POWER REPORT編集部"]
+  - series_key: "name:師岡秀治|name:わたしだけの初恋"
+    drop: ["時裕志", "中島敏晴"]
+  - series_key: "name:鈴木光|name:アイアンマッスル"
+    drop: ["水野石文"]
+  - series_key: "name:アレックス・マリーヴ|name:アイアンマン:シビル・ウォー"
+    drop: ["石川裕人", "御代しおり"]
+  - series_key: "name:森英二郎|name:アキチ探偵事務所"
+    drop: ["チャンネルゼロ"]
+  - series_key: "name:スティーブ・オーランド|name:アクアマン:ディープ・ダイブス"
+    drop: ["吉川悠"]
+  - series_key: "name:H.ケヴィン・ミゼロッキ|name:アダムス・ファミリー全集"
+    drop: ["H.ケヴィン・ミゼロッキ", "安原和見"]
+  - series_key: "name:ペンデルトン・ウォード|name:アドベンチャー・タイム"
+    drop: ["伊藤里香"]
+  - series_key: "name:パチンカーワールド|name:アドリブ店長"
+    drop: ["パチンカーワールド"]
+  - series_key: "name:青山南|name:イルカをボコる5つの理由"
+    drop: ["樋口武志"]
+  - series_key: "name:テクノポリス編集部|name:インジュカーシス"
+    drop: ["テクノポリス編集部"]
+  - series_key: "name:ジョナサン・ヒックマン|name:インフェルノ"
+    drop: ["高木亮"]
+  - series_key: "name:ケリー・トンプソン|name:ウエスト・コースト・アベンジャーズ:怒りのサンダードーム"
+    drop: ["吉川悠"]
+  - series_key: "name:ブランドン・ピーターソン|name:エイジ・オブ・ウルトロン"
+    drop: ["秋友克也"]
+  - series_key: "name:小学館ドラえもんルーム|name:エスパー魔美"
+    drop: ["小学館ドラえもんルーム"]
+    add: ["藤子・F・不二雄"]
+  - series_key: "name:若木書房「エンゼル」編集部|name:エンゼル|sub:Angel 田中美智子マガジン"
+    drop: ["若木書房「エンゼル」編集部"]
+  - series_key: "name:ベイブリッジ・スタジオ|name:オオカミにくちづけ"
+    drop: ["ベイブリッジ・スタジオ", "馬場美由紀"]
+  - series_key: "name:ベイブリッジ・スタジオ|name:カヲルくんと花の森"
+    drop: ["ベイブリッジ・スタジオ", "佐藤千恵"]
+  - series_key: "name:柴田元幸|name:ガソリン・アレーのウォルトとスキージクス"
+    drop: ["柴田元幸", "ピーター・マレスカ", "小澤英実"]
+  - series_key: "name:都島京弥|name:ガン＆ガン"
+    drop: ["都島京弥プロ"]
+  - series_key: "name:ガールズ＆パンツァー製作委員会|name:ガールズ＆パンツァー4コマでパンツァー・フォー!"
+    add: ["祐馬"]
+  - series_key: "name:マーク・ミラー|name:キック・アス"
+    drop: ["光岡三ツ子"]
+  - series_key: "name:ステファノ・ガウディアーノ|name:キャプテン・アメリカ:シビル・ウォー"
+    drop: ["石川裕人", "御代しおり"]
+  - series_key: "name:前山滋|name:キングパルサー"
+    drop: ["パチスロ王国編集部"]
+  - series_key: "name:VisualArt's|name:クドわふたー・あんそろじーこみっく"
+    drop: ["ハーヴェストコミックス編集部"]
+  - series_key: "name:ジョージ・ペレス|name:クライシス・オン・インフィニット・アース"
+    drop: ["石川裕人"]
+  - series_key: "name:パトリック・マクドネル|name:クレイジー・キャット"
+    drop: ["パトリック・マクドネル", "ピーター・マレスカ"]
+  - series_key: "name:アーシュラ・K.|name:ゲド戦記"
+    drop: ["アニメージュ編集部"]
+  - series_key: "name:スタジオSFC|name:コミック・ベム"
+    drop: ["スタジオSFC"]
+  - series_key: "name:アダム・アーチャー|name:ゴッサム・アカデミー:イヤーブック"
+    drop: ["内藤真代"]
+  - series_key: "name:カール・カーシル|name:ゴッサム・アカデミー:カラミティ"
+    drop: ["内藤真代"]
+  - series_key: "name:マイケル・ラーク|name:ゴッサム・セントラル:狂気と哄笑と"
+    drop: ["高木亮"]
+  - series_key: "name:石村勇|name:ゴッドマジンガー"
+    drop: ["石村勇"]
+  - series_key: "name:フランチェスコ・マナ|name:ザ・トライアルズ・オブ・ウルトラマン"
+    drop: ["石川裕人"]
+  - series_key: "name:カイル・ヒギンズ|name:ザ・ミステリー・オブ・ウルトラセブン"
+    drop: ["石川裕人"]
+  - series_key: "name:スコット・スナイダー|name:ジャスティス・リーグ:破滅の凱歌"
+    drop: ["高木亮"]
+  - series_key: "name:ウルトラジャンプ編集部|name:ジョジョの奇妙な冒険 第2部戦闘潮流総集編"
+    drop: ["ウルトラジャンプ編集部"]
+  - series_key: "name:ウルトラジャンプ編集部|name:ジョジョの奇妙な冒険 第3部スターダストクルセイダース総集編"
+    drop: ["ウルトラジャンプ編集部"]
+  - series_key: "name:ウルトラジャンプ編集部|name:ジョジョの奇妙な冒険第1部ファントムブラッド総集編"
+    drop: ["ウルトラジャンプ編集部"]
+  - series_key: "name:ウルトラジャンプ編集部|name:ジョジョの奇妙な冒険第3部スターダストクルセイダース総集編"
+    drop: ["ウルトラジャンプ編集部"]
+  - series_key: "name:ウルトラジャンプ編集部|name:ジョジョの奇妙な冒険第4部ダイヤモンドは砕けない総集編"
+    drop: ["ウルトラジャンプ編集部"]
+  - series_key: "name:少年ビッグコミック編集部|name:スんゴイですねエ～"
+    drop: ["少年ビッグコミック編集部"]
+  - series_key: "name:上北ふたご|name:スイートプリキュア♪シール＆いろぬり＆まんがまるごと1冊ブック!"
+    drop: ["なかよし編集部"]
+  - series_key: "name:スタジオびーはいぶ|name:ステディ・スタディ"
+    drop: ["スタジオびーはいぶ"]
+  - series_key: "name:島田フミカネ|name:ストライクウィッチーズ 公式コミックアラカルト"
+    drop: ["コンプエース編集部"]
+  - series_key: "name:鈴木成一デザイン室|name:スヌーピーたちの心の相談室"
+    drop: ["鈴木成一デザイン室", "谷川俊太郎", "岩宮恵子"]
+  - series_key: "name:ブライアン・マイケル・ベンディス|name:スパイダーマン/スパイダーグウェン:シッティング・イン・ア・ツリー"
+    drop: ["光岡三ツ子"]
+  - series_key: "name:ボブ・ゲイル|name:スパイダーマン:ブランニュー・デイ"
+    drop: ["高木亮"]
+  - series_key: "name:なかよし編集部|name:スマイルプリキュア!おはなしブック!まるごとスマイル!"
+    drop: ["なかよし編集部"]
+  - series_key: "name:なかよし編集部|name:スマイルプリキュア!＆スイートプリキュア♪おはなしブック!"
+    drop: ["なかよし編集部"]
+  - series_key: "name:June-ne ne ne|name:セーラー服BOX'86"
+    drop: ["武蔵野エディションルーム"]
+    add: ["後藤寿庵", "桑隆", "渡辺健一", "砂倉そーいち", "緒方賢美"]
+  - series_key: "name:ベイブリッジ・スタジオ|name:タケヲちゃん物怪録"
+    drop: ["ベイブリッジ・スタジオ", "白山仁"]
+  - series_key: "name:クリス・バチャロ|name:ダークアベンジャーズ"
+    drop: ["御代しおり"]
+  - series_key: "name:44626|name:ティータイム"
+    drop: ["戸山優"]
+  - series_key: "name:サルバ・エスピン|name:デッドプール・キラストレイテッド/デッドプール・キルズ・デッドプール"
+    drop: ["石川裕人", "小池顕久"]
+  - series_key: "name:ブライアン・ハーバート|name:デューン砂の惑星|sub:フランク・ハーバート"
+    drop: ["細美遥子"]
+  - series_key: "name:ブライアン・ハーバート|name:デューン砂の惑星|sub:フランク・ハーバート."
+    drop: ["細美遥子"]
+  - series_key: "name:KEN-G|name:トラッド"
+    drop: ["スタジオバトル"]
+    add: ["Ken-G", "ふなとひとし", "よりちかびびる", "中山たろう"]
+  - series_key: "name:ジェームズ・ライズ|name:トランスフォーマー:ダーク・サイバートロン"
+    drop: ["小池顕久"]
+  - series_key: "name:ブレンダン・ケイヒル|name:トランスフォーマー:ダーク・サイバートロン"
+    drop: ["小池顕久"]
+  - series_key: "name:ボブ・バディアンスキー|name:トランスフォーマークラシックス"
+    drop: ["石川陽介"]
+  - series_key: "name:たてかべ和也|name:ドラえもん"
+    drop: ["たてかべ和也", "肝付兼太", "小学館第九編集部企画開発室"]
+    add: ["藤子・F・不二雄"]
+  - series_key: "name:小学館ドラえもんルーム|name:ドラえもん"
+    drop: ["たてかべ和也", "よこざわけい子", "肝付兼太", "高見沢俊彦", "川本三郎", "朝松健", "野村道子", "立川談之助", "副田義也", "武田鉄矢", "矢野徹", "吉本ばなな", "小学館ドラえもんルーム", "新企画社"]
+    add: ["藤子・F・不二雄"]
+  - series_key: "name:勝又日子|name:ドラえもん〔ドキドキ冒険編〕"
+    drop: ["小学館第九編集部企画開発室"]
+  - series_key: "name:中鶴勝祥|name:ドラゴンボールZ"
+    drop: ["ジャンプ・コミック出版編集部"]
+  - series_key: "name:DOMDOM|name:ドラベース ドラえもん超野球外伝"
+    drop: ["DOMDOM"]
+  - series_key: "name:マイケル・ゲイドス|name:ニューアベンジャーズ シークレット・インベージョン"
+    drop: ["今井亮一", "秋友克也"]
+  - series_key: "name:ブライアン・マイケル・ベンディス|name:ニューアベンジャーズ:トラスト"
+    drop: ["石川裕人", "松澤慶香", "坪野圭介"]
+  - series_key: "name:ブライアン・マイケル・ベンディス|name:ニューアベンジャーズ:レボリューション"
+    drop: ["石川裕人", "松澤慶香"]
+  - series_key: "name:チャド・ハーディン|name:ハーレイ・クイン パワー・アウテイジ"
+    drop: ["高木亮"]
+  - series_key: "name:チャド・ハーディン|name:ハーレイ・クイン:キス・キス・バン・スタブ"
+    drop: ["高木亮"]
+  - series_key: "name:チャド・ハーディン|name:ハーレイ・クイン:コール・トゥ・アームズ"
+    drop: ["高木亮"]
+  - series_key: "name:チャド・ハーディン|name:ハーレイ・クイン:ジョーカーズ・ラスト・ラフ"
+    drop: ["高木亮"]
+  - series_key: "name:川島健三|name:バイオレンスジャック"
+    drop: ["川島健三", "コミックス"]
+  - series_key: "name:コミックス|name:バイオレンスジャック"
+    drop: ["コミックス"]
+  - series_key: "name:ジェームズ・タイノンIV|name:バットマン 真夜中の事件簿"
+    drop: ["高木亮"]
+  - series_key: "name:パニック7編集部|name:パチスロであった全部旨い話"
+    drop: ["パニック7編集部"]
+  - series_key: "name:スタジオバトル|name:パワフル☆まぜごはん"
+    drop: ["スタジオバトル"]
+  - series_key: "name:YUMI|name:パンプキン"
+    drop: ["オーエスビー出版", "スタジオバトル"]
+    add: ["Yumi", "あらいずみるい", "みづの剣士", "わたなべわたる", "亜麻木硅", "北御牧慶", "池田秀一", "戯遊群", "東・京都", "水原マサキ"]
+  - series_key: "name:L・ライム|name:パンプキン"
+    drop: ["オーエスビー出版", "スタジオバトル"]
+    add: ["Yumi", "あらいずみるい", "わたなべわたる", "東・京都", "池田秀一", "きお誠児", "中山たろう", "影次ケイ", "番外地貢", "戯遊群", "阿乱霊"]
+  - series_key: "name:スタジオバトル|name:パンプキン"
+    drop: ["スタジオバトル"]
+    add: ["あらいずみるい", "きお誠児", "しのざき嶺", "つくしの真琴", "わたなべわたる", "中山たろう"]
+  - series_key: "name:KINTA|name:パンプキン"
+    drop: ["スタジオバトル"]
+    add: ["あらいずみるい", "きお誠児", "わたなべわたる", "戯遊群"]
+  - series_key: "name:MASAO|name:パンプキン"
+    drop: ["スタジオバトル"]
+    add: ["あらいずみるい", "わたなべわたる", "中山たろう", "影次ケイ", "戯遊群", "緑沢みゆき", "番外地貢", "阿乱霊"]
+  - series_key: "name:J・G・ジョーンズ|name:ビフォア・ウォッチメン:コメディアン/ロールシャッハ"
+    drop: ["秋友克也", "石川裕人"]
+  - series_key: "name:スタジオDNA|name:ファイアーエムブレム聖戦の系譜　4コマギャグバトル"
+    add: ["神谷順"]
+  - series_key: "name:ディディエ・ルフェーヴル|name:フォトグラフ"
+    drop: ["大西愛子"]
+  - series_key: "name:ジェフ・ジョーンズ|name:フラッシュポイント・ビヨンド"
+    drop: ["秋友克也"]
+  - series_key: "name:十川俊一郎|name:プラモ天才エスパー太郎"
+    drop: ["佐々木多利尓"]
+  - series_key: "name:ジェリー・コンウェイ|name:ホワット・イフ?"
+    drop: ["吉川悠"]
+  - series_key: "name:スタジオジブリ|name:ホン!"
+    drop: ["スタジオジブリ"]
+  - series_key: "name:アレックス・マリーヴ|name:マイティ・アベンジャーズ:シークレット・インベージョン"
+    drop: ["秋友克也"]
+  - series_key: "name:マジキューコミックス編集部|name:マジキュー4コマ Fate/Zero四コマ聖杯戦争"
+    drop: ["マジキューコミックス編集部"]
+  - series_key: "name:マジキューコミックス編集部|name:マジキュー4コマ STEINS;GATE"
+    drop: ["マジキューコミックス編集部"]
+  - series_key: "name:マジキューコミックス編集部|name:マジキュー4コマ真・恋姫✝無双 萌将伝"
+    drop: ["マジキューコミックス編集部"]
+  - series_key: "name:マジキューコミックス編集部|name:マジキュー4コマ真剣で私に恋しなさい!S"
+    drop: ["マジキューコミックス編集部"]
+  - series_key: "name:マジキューコミックス編集部|name:マジキュー4コマ閃乱カグラBurst"
+    drop: ["マジキューコミックス編集部"]
+  - series_key: "name:マジキューコミックス編集部|name:マジキュー4コマ魔法使いの夜"
+    drop: ["マジキューコミックス編集部"]
+  - series_key: "name:ダイナミックプロ|name:マジンサーガ"
+    drop: ["瀬名秀明"]
+  - series_key: "name:篁光太郎|name:マンガ暴力団 対暴力団の危機管理マニュアル"
+    drop: ["スパイスコミニケーションズ"]
+  - series_key: "name:ショーン・フィリップス|name:マーベルゾンビーズ"
+    drop: ["秋友克也"]
+  - series_key: "name:Mスタジオ|name:ミッドナイトファイル"
+    drop: ["Mスタジオ"]
+  - series_key: "name:ゲイリー・リーチ|name:ミラクルマン"
+    drop: ["市川裕文"]
+  - series_key: "name:エヴァン・ナーシス|name:ライズ・オブ・ザ・ブラックパンサー"
+    drop: ["秋友克也"]
+  - series_key: "name:MEGU'S|name:ラストイン"
+    add: ["沢田一", "河本ひろし", "真幌木弘"]
+  - series_key: "name:VisualArt's|name:リトルバスターズ!エクスタシーhalf ＆ halfコミカライズセレクション"
+    drop: ["ハーヴェストコミックス編集部"]
+  - series_key: "name:VisualArt's|name:リトルバスターズ!エクスタシーhalf ＆ halfコミカライズセレクションおかわり"
+    drop: ["ハーヴェストコミックス編集部"]
+  - series_key: "name:岩吉隆悠|name:ロドニーファンコミックコレクション"
+    drop: ["インターリンク・プランニング", "リトル・モア"]
+  - series_key: "name:藤島あずみ|name:ワープin"
+    drop: ["スタジオM"]
+  - series_key: "name:平野俊弘|name:ワープin"
+    drop: ["Mスタジオ"]
+  - series_key: "name:大峡和歌子|name:一騎当千"
+    drop: ["コミックガム編集部"]
+    add: ["あぼしまこ", "いみぎむる", "むっく", "アザミユウコ", "カワサキカオリ", "タカムラマサヤ", "八雲剣豪", "加藤礼次朗", "大山玲", "松山花子", "田中克樹", "鳴瀬ひろふみ"]
+  - series_key: "name:中国引揚げ漫画家の会|name:中国からの引揚げ 少年たちの記憶"
+    drop: ["中国引揚げ漫画家の会"]
+  - series_key: "name:伝記まんが「中江藤樹」制作委員会|name:中江藤樹"
+    drop: ["安曇川町教育委員会", "伝記まんが「中江藤樹」制作委員会"]
+  - series_key: "name:Asuka編集部|name:九楽あすか参る!"
+    drop: ["Asuka編集部"]
+  - series_key: "name:ベイブリッジ・スタジオ|name:亜子サマの忠犬"
+    drop: ["ベイブリッジ・スタジオ", "黒木香"]
+  - series_key: "name:ヤングマガジン編集部|name:信長伝"
+    drop: ["ヤングマガジン編集部"]
+  - series_key: "name:ヤングマガジン編集部|name:信長伝 センゴク特別総集編"
+    drop: ["ヤングマガジン編集部"]
+  - series_key: "name:説話社|name:僕と彼氏の恋の秘密"
+    drop: ["説話社"]
+  - series_key: "name:スタジオジブリ|name:出発点|sub:1979～1996"
+    drop: ["スタジオジブリ"]
+  - series_key: "name:海月姫製作委員会|name:別冊海月姫"
+    drop: ["Kiss編集部"]
+  - series_key: "name:ジャンプ・コミック出版編集部|name:劇場版Naruto大興奮!みかづき島のアニマル騒動だってばよ"
+    drop: ["ジャンプ・コミック出版編集部"]
+  - series_key: "name:SG企画|name:北欧伝説"
+    drop: ["SG企画"]
+  - series_key: "name:少年エース編集部|name:喰霊0+"
+    drop: ["少年エース編集部"]
+  - series_key: "name:SUNRISE BEYOND|name:境界戦機"
+    drop: ["不知火プロ", "矢口英貴"]
+  - series_key: "name:藤子・F・不二雄プロ|name:大長編ドラえもん"
+    add: ["藤子・F・不二雄"]
+  - series_key: "name:かくしなのぞみ|name:失楽園"
+    drop: ["米倉けんご", "かくしなのぞみ"]
+  - series_key: "name:梅玉奈部|name:失楽園"
+    drop: ["玉置勉強", "梅玉奈部"]
+  - series_key: "name:KINSAN|name:失楽園"
+    drop: ["深谷俊一", "KINSAN"]
+  - series_key: "name:コミックエッセイ編集部|name:女子校育ちはなおらない"
+    drop: ["コミックエッセイ編集部"]
+  - series_key: "name:ベイブリッジ・スタジオ|name:女子高生で、花嫁で。"
+    drop: ["ベイブリッジ・スタジオ", "西野紗彩"]
+  - series_key: "name:第一プロ|name:女学生自身"
+    drop: ["第一プロ"]
+  - series_key: "name:説話社|name:妖"
+    drop: ["説話社"]
+  - series_key: "name:マジキューコミックス編集部|name:婚プレ!"
+    drop: ["マジキューコミックス編集部"]
+  - series_key: "name:文部科学省科学技術・学術政策局調査調整課|name:子ども科学技術白書"
+    drop: ["子ども科学技術白書編集委員会"]
+  - series_key: "name:第一プロ|name:学園"
+    drop: ["第一プロ"]
+  - series_key: "name:東京太郎|name:実録体をいじった芸能人"
+    drop: ["阿蘭澄史事務所"]
+  - series_key: "name:有栖川礼音|name:実録怖い!日本の呪い"
+    drop: ["呪いの怪奇研究会"]
+  - series_key: "name:日の丸文庫|name:影"
+    drop: ["日の丸文庫"]
+  - series_key: "name:説話社|name:心に響くラブストーリー"
+    drop: ["説話社"]
+  - series_key: "name:説話社|name:心霊実況中継スペシャル"
+    drop: ["説話社"]
+  - series_key: "name:説話社|name:心霊実況中継スペシャル'15"
+    drop: ["説話社"]
+  - series_key: "name:エンタテインメント編集部|name:恋する焼ポテト"
+    drop: ["エンタテインメント編集部"]
+  - series_key: "name:説話社|name:恐怖夜話"
+    drop: ["説話社"]
+  - series_key: "name:説話社|name:愛と憎しみの事件簿"
+    drop: ["説話社"]
+  - series_key: "name:海野一雄|name:手塚治虫の描いた戦争"
+    drop: ["ベイブリッジ・スタジオ", "荘司哲郎"]
+  - series_key: "name:コミックス|name:手天童子"
+    drop: ["コミックス"]
+  - series_key: "name:illustration]小田すずか|name:放課後ペダル 「弱虫ペダル」公式アンソロジー"
+    drop: ["プリンセス編集部"]
+  - series_key: "name:GAINAX|name:新世紀エヴァンゲリオンコミックトリビュート"
+    drop: ["ヤングエース編集部"]
+  - series_key: "name:ファンロード編集部|name:新鮮絵草紙"
+    drop: ["ファンロード編集部"]
+  - series_key: "name:ホーム社|name:星あかりの聖子さん"
+    drop: ["ホーム社"]
+  - series_key: "name:ムン・インホ|name:最高の愛"
+    drop: ["「もっと知りたい!韓国TVドラマ」編集部", "倉本善子"]
+  - series_key: "name:トミー|name:月光条例"
+    drop: ["吉村勲"]
+  - series_key: "name:フジテレビ|name:月面兎兵器ミーナ okama ARTWORKS"
+    drop: ["電撃コミックガオ!編集部"]
+  - series_key: "name:ホーム社|name:有閑倶楽部"
+    drop: ["ホーム社"]
+  - series_key: "name:奥山修平|name:杉田玄白/平賀源内"
+    drop: ["インタラクティブ"]
+  - series_key: "name:凛々|name:松浦武四郎"
+    drop: ["松阪市教育委員会"]
+  - series_key: "name:京極夏彦|name:水木しげる漫画大全集"
+    drop: ["いしいひさいち", "かわぐちかいじ", "伊藤潤二", "永井豪", "花輪和一", "江口夏実", "高橋留美子", "諸星大二郎", "小池一夫", "松本ひで吉", "唐沢なをき", "南伸坊", "萩尾望都", "白土三平", "矢口高雄", "佐野史郎", "中沢新一", "梅田英俊", "一龍斎貞水", "鎌田東ニ", "玄侑宗久", "香川照之", "高山みなみ", "春風亭小朝", "小松エメル", "水木しげる漫画大全集編集委員会", "電気グルーヴ", "東雅夫", "美和明宏", "野沢雅子", "松下奈緒", "金子貴俊", "荒俣宏", "梅原猛", "小松和彦", "夢枕獏", "宮部みゆき", "武良布枝", "水木悦子"]
+  - series_key: "name:浜田廣介|name:水木しげる漫画大全集"
+    drop: ["魔夜峰央", "水木しげる漫画大全集編集委員会"]
+  - series_key: "name:坂野公一|name:水木しげる漫画大全集"
+    drop: ["香川雅伸", "坂野公一", "水木しげる漫画大全集編集委員会"]
+  - series_key: "name:小泉八雲|name:水木しげる漫画大全集"
+    drop: ["水木しげる漫画大全集編集委員会", "清水慎治"]
+  - series_key: "name:水木しげる画業四〇周年記念編集委員会|name:水木しげる画業四〇周年"
+    drop: ["水木しげる画業四〇周年記念編集委員会"]
+  - series_key: "name:説話社|name:涙あふれるミステリー"
+    drop: ["説話社"]
+  - series_key: "name:パチスロ7編集部|name:灼アツ必勝パチスロ7"
+    drop: ["パチスロ7編集部"]
+  - series_key: "name:雷門風太|name:灼眼のシャナ"
+    drop: ["朝倉哲也"]
+  - series_key: "name:雷門風太|name:灼眼のシャナX Eternal song―遥かなる歌―"
+    drop: ["朝倉哲也"]
+  - series_key: "name:中野晴行|name:熱狂短編マンガ傑作集'83"
+    drop: ["小学館クリエイティブ"]
+  - series_key: "name:Vジャンプ編集部|name:犬マユゲでいこう 旅マユどっちかというと福岡"
+    drop: ["Vジャンプ編集部"]
+  - series_key: "name:Vジャンプ編集部|name:犬マユゲでいこう 犬辞林"
+    drop: ["Vジャンプ編集部"]
+  - series_key: "name:Vジャンプ編集部|name:犬マユゲでいこうA・TiEMPO"
+    drop: ["Vジャンプ編集部"]
+  - series_key: "name:Vジャンプ編集部|name:犬マユゲでいこうSORPRESA"
+    drop: ["Vジャンプ編集部"]
+  - series_key: "name:Vジャンプ編集部|name:犬マユゲでいこうURGENTE"
+    drop: ["Vジャンプ編集部"]
+  - series_key: "name:Vジャンプ編集部|name:犬マユゲでいこう・熊田クリスピー"
+    drop: ["Vジャンプ編集部"]
+  - series_key: "name:なすのちぐさ|name:猛爆ミリオンゴッド実戦大攻略"
+    drop: ["パチスロ王国編集部"]
+  - series_key: "name:サクライマイコ|name:猛爆沖スロ・裏モノ・裏ワザ大攻略"
+    drop: ["パチスロ王国編集部"]
+  - series_key: "name:鶴見俊輔|name:現代漫画"
+    drop: ["北杜夫", "佐藤忠男", "鶴見俊輔"]
+  - series_key: "name:佐々木守|name:男どアホウ甲子園"
+    drop: ["ダンカン", "阿久悠", "永島敏行", "掛布雅之", "江本孟紀", "山田雅人", "松浪健四郎", "森川由加里", "村山実", "嶋大輔", "平松政次"]
+  - series_key: "name:電撃大王編集部|name:白〔コウ〕"
+    drop: ["松本みゆき", "電撃大王編集部"]
+  - series_key: "name:柴田元幸|name:眠りの国のリトル・ニモ"
+    drop: ["柴田元幸", "ピーター・マレスカ", "上田麻由子"]
+  - series_key: "name:コミック編集部|name:砂ぼうず"
+    drop: ["コミック編集部"]
+  - series_key: "name:不知火プロ|name:絢爛豪画"
+    drop: ["不知火プロ"]
+  - series_key: "name:説話社|name:絶対恋愛ミステリー"
+    drop: ["説話社"]
+  - series_key: "name:ケビン・オニール|name:続リーグ・オブ・エクストラオーディナリー・ジェントルメン"
+    drop: ["秋友克也"]
+  - series_key: "name:図書の家|name:耽美とヒロイン|sub:マンガ化!世界文学"
+    drop: ["図書の家", "山田英生"]
+  - series_key: "name:みゃま|name:艦隊これくしょん-艦これ-コミックアラカルト 舞鶴鎮守府編"
+    drop: ["コンプティーク編集部"]
+  - series_key: "name:ES|name:艦隊これくしょん-艦これ-コミックアラカルト 舞鶴鎮守府編"
+    drop: ["コンプティーク編集部"]
+  - series_key: "name:こるり|name:艦隊これくしょん-艦これ-コミックアラカルト 舞鶴鎮守府編"
+    drop: ["コンプティーク編集部"]
+  - series_key: "name:柴田昌房|name:花とゆめプラチナ"
+    drop: ["柴田昌房"]
+  - series_key: "name:佐々木多利尓|name:藤子・F・不二雄大全集"
+    drop: ["『藤子・F・不二雄大全集』編集部"]
+  - series_key: "name:小学館ドラえもんルーム|name:藤子・F・不二雄少年SF短編集"
+    drop: ["大林宣彦", "小学館ドラえもんルーム"]
+    add: ["藤子・F・不二雄"]
+  - series_key: "name:セントラル文庫|name:街"
+    drop: ["セントラル文庫"]
+  - series_key: "name:彦久保雅博|name:遊☆戯☆王ファイブディーズ"
+    drop: ["スタジオ・ダイス"]
+  - series_key: "name:フルール編集部|name:野獣BL"
+    drop: ["フルール編集部"]
+  - series_key: "name:小説宝石編集部|name:鉄人28号"
+    drop: ["小説宝石編集部"]
+  - series_key: "name:小説宝石編集部|name:鉄腕アトム"
+    drop: ["小説宝石編集部"]
+  - series_key: "name:コミック編集部|name:鉄鋼無敵科學大魔號"
+    drop: ["コミック編集部"]
+  - series_key: "name:ホーム社|name:銀河"
+    drop: ["ホーム社"]
+  - series_key: "name:心霊事件簿DX編集部|name:霊感者の事件簿"
+    drop: ["心霊事件簿DX編集部"]
+  - series_key: "name:説話社|name:霊感者の事件簿"
+    drop: ["説話社"]
+  - series_key: "name:東邦プロダクション|name:風の夜叉丸"
+    drop: ["東邦プロダクション"]
+  - series_key: "name:サンライズ|name:ＴＩＧＥＲ＆ＢＵＮＮＹ公式コミックアンソロジー"
+    drop: ["あすか編集部"]
