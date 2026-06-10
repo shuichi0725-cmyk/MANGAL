@@ -953,6 +953,18 @@ _AUTHOR_YOMI: dict | None = None
 _AUTHOR_CORR: dict | None = None
 
 
+def _load_page_dedup() -> set:
+    """page-dedup.yml の drop slug 集合(= 中身同一の二重出力ページ。 canonical 側だけ出力)。"""
+    p = ROOT / "data" / "seeds" / "page-dedup.yml"
+    if not p.exists():
+        return set()
+    doc = yaml.safe_load(open(p, encoding="utf-8")) or {}
+    return {e["drop"] for e in doc.get("dedup", []) if e.get("drop")}
+
+
+_PAGE_DEDUP_DROPS: set = _load_page_dedup()
+
+
 def _load_author_yomi() -> None:
     global _AUTHOR_YOMI
     if _AUTHOR_YOMI is not None:
@@ -2068,6 +2080,9 @@ def main():
         if not slug or not str(slug).strip():
             stats["empty_slug"] = stats.get("empty_slug", 0) + 1
             continue                       # 空slug = 出力ファイル名不正(.yml) → skip
+        if slug in _PAGE_DEDUP_DROPS:
+            stats["dedup_skip"] = stats.get("dedup_skip", 0) + 1
+            continue                       # 重複ページ(page-dedup.yml) = canonical 側だけ出力
         title = src["title"]
         qid = src.get("wikidata_qid")
         # 漫画以外 (= テレビアニメ版 / 映画 / 劇場版 等) は MANGAL 対象外
