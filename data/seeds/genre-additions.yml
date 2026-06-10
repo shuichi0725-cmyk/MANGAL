@@ -1,0 +1,659 @@
+# ジャンル純粋追加 seed (2026-06-10: 野球/サッカー サブタグ。CLAUDE.md「sports併記」原則)
+# 検出=AniList tag/title/synopsis 3シグナル+手動検品(誤爆24+15除外)。promoteが additive 適用
+additions:
+  - series_key: "name:Akatsuki|name:八月のシンデレラナインS"
+    add: ["baseball"]
+  - series_key: "name:DOMDOM|name:ドラベース ドラえもん超野球外伝"
+    add: ["baseball"]
+  - series_key: "name:GAINAX|name:天元突破グレンラガン 男どアホウ!編"
+    add: ["baseball"]
+  - series_key: "name:あじな優|name:ドラハチ"
+    add: ["baseball"]
+  - series_key: "name:いわさわ正泰|name:もっと野球しようぜ!"
+    add: ["baseball"]
+  - series_key: "name:いわさわ正泰|name:野球しようぜ!"
+    add: ["baseball"]
+  - series_key: "name:おおのたいじ|name:ぱろぱろプロ野球ニュース"
+    add: ["baseball"]
+  - series_key: "name:しいやみつのり|name:マンガ野球入門"
+    add: ["baseball"]
+  - series_key: "name:てらおかみちお|name:少年野球"
+    add: ["baseball"]
+  - series_key: "name:へじていと|name:野球・文明・エイリアン"
+    add: ["baseball"]
+  - series_key: "name:みのもけんじ|name:ぼくたちのプレイボール -野球部物語-"
+    add: ["baseball"]
+  - series_key: "name:ゆきひこ|name:CHANGE UP!!"
+    add: ["baseball"]
+  - series_key: "name:アベキヒロカズ|name:野球部に花束を"
+    add: ["baseball"]
+  - series_key: "name:キサラギリュウ|name:BLACK OUT"
+    add: ["baseball"]
+  - series_key: "name:コージィ★城倉|name:砂漠の野球部"
+    add: ["baseball"]
+  - series_key: "name:スズキイッセイ|name:強豪野球部新入部員のありがちな日常"
+    add: ["baseball"]
+  - series_key: "name:ドンドン|name:青と陽炎"
+    add: ["baseball"]
+  - series_key: "name:ヒロナカヤスシ|name:甲子園の詩Ⅱ"
+    add: ["baseball"]
+  - series_key: "name:ホーム社|name:Merry Wind"
+    add: ["baseball"]
+  - series_key: "name:マウンテンプクイチ|name:球詠"
+    add: ["baseball"]
+  - series_key: "name:七三太朗|name:Dreams"
+    add: ["baseball"]
+  - series_key: "name:七三太朗|name:Dreams"
+    add: ["baseball"]
+  - series_key: "name:七三太朗|name:風光る"
+    add: ["baseball"]
+  - series_key: "name:七三太朗|name:風光る～甲子園"
+    add: ["baseball"]
+  - series_key: "name:上野祥吾|name:長谷部さんのいる野球部"
+    add: ["baseball"]
+  - series_key: "name:中原裕|name:ぶっちぎり"
+    add: ["baseball"]
+  - series_key: "name:中村仁|name:プロ野球・名選手たちの甲子園"
+    add: ["baseball"]
+  - series_key: "name:会津泰成|name:ルーキー野球団"
+    add: ["baseball"]
+  - series_key: "name:住吉九|name:サンキューピッチ"
+    add: ["baseball"]
+  - series_key: "name:佐々木守|name:男どアホウ甲子園"
+    add: ["baseball"]
+  - series_key: "name:佐藤文彦|name:エース!!"
+    add: ["baseball"]
+  - series_key: "name:佐野隆|name:打撃王凛"
+    add: ["baseball"]
+  - series_key: "name:内崎まさとし|name:ほらふけ甲子園"
+    add: ["baseball"]
+  - series_key: "name:出内テツオ|name:野球場でいただきます"
+    add: ["baseball"]
+  - series_key: "name:創美社|name:君は青空の下にいる"
+    add: ["baseball"]
+  - series_key: "name:十川俊一郎|name:3D甲子園プラコン大作"
+    add: ["baseball"]
+  - series_key: "name:宮田大輔|name:8月アウトロー"
+    add: ["baseball"]
+  - series_key: "name:岩崎夏海|name:もし高校野球の女子マネージャーがドラッカーの『マネジメント』を読んだら"
+    add: ["baseball"]
+  - series_key: "name:平井大橋|name:ダイヤモンドの功罪"
+    add: ["baseball"]
+  - series_key: "name:平松真|name:最強野球部リベンジャーズ"
+    add: ["baseball"]
+  - series_key: "name:志村泰央|name:夏空エンドラン"
+    add: ["baseball"]
+  - series_key: "name:戸部良也|name:遥かなる甲子園"
+    add: ["baseball"]
+  - series_key: "name:日高りょう|name:俺が甲子園"
+    add: ["baseball"]
+  - series_key: "name:東京ヤクルトスワローズ|name:天に向かってつば九郎"
+    add: ["baseball"]
+  - series_key: "name:松井尚斗|name:だるい野球部はサボりたい|sub:背番号よりオフをくれ!"
+    add: ["baseball"]
+  - series_key: "name:松本直記|name:イレギュラーズ"
+    add: ["baseball"]
+  - series_key: "name:橋本スズヒラ|name:オーライ!"
+    add: ["baseball"]
+  - series_key: "name:橋本スズヒラ|name:ドクターゼロス"
+    add: ["baseball"]
+  - series_key: "name:永谷脩|name:プロ野球の名選手"
+    add: ["baseball"]
+  - series_key: "name:江田糸図|name:フロウ・ブルーで待ってる"
+    add: ["baseball"]
+  - series_key: "name:海空りく|name:野球で戦争する異世界で超高校級エースが弱小国家を救うようです。"
+    add: ["baseball"]
+  - series_key: "name:瀬名真紗也|name:ベスポジ!"
+    add: ["baseball"]
+  - series_key: "name:田中ドリル|name:スルガメテオ"
+    add: ["baseball"]
+  - series_key: "name:田丸鴇彦|name:矢野七菜子、白球を追う。"
+    add: ["baseball"]
+  - series_key: "name:神尾龍|name:ラストイニング"
+    add: ["baseball"]
+  - series_key: "name:秋好賢一|name:プロレス甲子園"
+    add: ["baseball"]
+  - series_key: "name:若槻ヒカル|name:エルフ甲子園"
+    add: ["baseball"]
+  - series_key: "name:茂木ヨモギ|name:タイフウリリーフ"
+    add: ["baseball"]
+  - series_key: "name:荒尾和彦|name:それぞれの甲子園"
+    add: ["baseball"]
+  - series_key: "name:藤子プロ|name:ドラベース"
+    add: ["baseball"]
+  - series_key: "name:軒上泊|name:甲子園ららばい"
+    add: ["baseball"]
+  - series_key: "name:進藤博子|name:めちゃんこ甲子園"
+    add: ["baseball"]
+  - series_key: "name:音羽さおり|name:コンサルナイン|sub:小夜子の逆転プロデュース"
+    add: ["baseball"]
+  - series_key: "name:高嶋栄充|name:クワトロバッテリー"
+    add: ["baseball"]
+  - series_key: "name:高橋ツトム|name:鉄腕ガール"
+    add: ["baseball"]
+  - series_key: "name:黒宮魚|name:球場のシャーロット"
+    add: ["baseball"]
+  - series_key: "qid:Q1048873|name:チェンジ"
+    add: ["baseball"]
+  - series_key: "qid:Q106478538|name:野球部のヒロコせんせい"
+    add: ["baseball"]
+  - series_key: "qid:Q108109948|name:ハルカゼマウンド"
+    add: ["baseball"]
+  - series_key: "qid:Q11045541|name:ラブアンドベースボール"
+    add: ["baseball"]
+  - series_key: "qid:Q112237861|name:バトルスタディーズ"
+    add: ["baseball"]
+  - series_key: "qid:Q11227444|name:バディストライク"
+    add: ["baseball"]
+  - series_key: "qid:Q11258512|name:ひつじケ丘高校野球部の奇跡"
+    add: ["baseball"]
+  - series_key: "qid:Q11260861|name:アマチュアスラッガー"
+    add: ["baseball"]
+  - series_key: "qid:Q11261304|name:ボクらの甲子園"
+    add: ["baseball"]
+  - series_key: "qid:Q11263734|name:俺の甲子園"
+    add: ["baseball"]
+  - series_key: "qid:Q11263734|name:我ら九人の甲子園"
+    add: ["baseball"]
+  - series_key: "qid:Q11266357|name:ぼくを野球に連れてって!"
+    add: ["baseball"]
+  - series_key: "qid:Q11266357|name:県立海空高校野球部員山下たろ～くん"
+    add: ["baseball"]
+  - series_key: "qid:Q11273723|name:なにわ爆裂野球団"
+    add: ["baseball"]
+  - series_key: "qid:Q11273723|name:南吹田大学野球部"
+    add: ["baseball"]
+  - series_key: "qid:Q11276677|name:プロ野球スーパースター名勝負スペシャル"
+    add: ["baseball"]
+  - series_key: "qid:Q11276677|name:プロ野球スーパースター名勝負ワイドSP"
+    add: ["baseball"]
+  - series_key: "qid:Q11276677|name:プロ野球入魂の名勝負スペシャル"
+    add: ["baseball"]
+  - series_key: "qid:Q11279292|name:HEAVY METAL甲子園"
+    add: ["baseball"]
+  - series_key: "qid:Q11279581|name:名門!第三野球部"
+    add: ["baseball"]
+  - series_key: "qid:Q11279581|name:復活!!第三野球部"
+    add: ["baseball"]
+  - series_key: "qid:Q11280264|name:パロ野球ニュース"
+    add: ["baseball"]
+  - series_key: "qid:Q11294502|name:熱闘!野球女子"
+    add: ["baseball"]
+  - series_key: "qid:Q11302059|name:プロ野球どんまいランド"
+    add: ["baseball"]
+  - series_key: "qid:Q11303326|name:グラゼニ"
+    add: ["baseball"]
+  - series_key: "qid:Q11324316|name:しこたま"
+    add: ["baseball"]
+  - series_key: "qid:Q11329679|name:ボブとゆかいな仲間たち"
+    add: ["baseball"]
+  - series_key: "qid:Q11355281|name:高校球児ザワさん"
+    add: ["baseball"]
+  - series_key: "qid:Q11374681|name:9～キミがいる街で恋をした～"
+    add: ["baseball"]
+  - series_key: "qid:Q11377235|name:チェンジUP!!"
+    add: ["baseball"]
+  - series_key: "qid:Q11393941|name:燃えよ甲子園!鷲と鷹"
+    add: ["baseball"]
+  - series_key: "qid:Q11404003|name:野球少年"
+    add: ["baseball"]
+  - series_key: "qid:Q11423339|name:大食い甲子園"
+    add: ["baseball"]
+  - series_key: "qid:Q11435253|name:爆笑!!野球ギャグまんが大行進"
+    add: ["baseball"]
+  - series_key: "qid:Q11438983|name:ぐっじょぶ!"
+    add: ["baseball"]
+  - series_key: "qid:Q11442210|name:サヨナラコウシエン"
+    add: ["baseball"]
+  - series_key: "qid:Q11450910|name:ZIG×ZAG"
+    add: ["baseball"]
+  - series_key: "qid:Q11457373|name:あの月に向かって打て!"
+    add: ["baseball"]
+  - series_key: "qid:Q11457957|name:背番号0 野球少年版"
+    add: ["baseball"]
+  - series_key: "qid:Q11457957|name:背番号0 野球少年版 前編"
+    add: ["baseball"]
+  - series_key: "qid:Q11459686|name:スモーキーB.B"
+    add: ["baseball"]
+  - series_key: "qid:Q11468124|name:白球少女"
+    add: ["baseball"]
+  - series_key: "qid:Q11477877|name:甲子園の空に笑え!"
+    add: ["baseball"]
+  - series_key: "qid:Q11478325|name:巨人の星"
+    add: ["baseball"]
+  - series_key: "qid:Q11478325|name:新巨人の星"
+    add: ["baseball"]
+  - series_key: "qid:Q11481143|name:ガンプラ甲子園"
+    add: ["baseball"]
+  - series_key: "qid:Q11488080|name:巨人のサムライ炎"
+    add: ["baseball"]
+  - series_key: "qid:Q11497672|name:プロ野球伝説の名勝負スペシャル"
+    add: ["baseball"]
+  - series_key: "qid:Q11497672|name:プロ野球剛球エース9番勝負!!"
+    add: ["baseball"]
+  - series_key: "qid:Q11497672|name:プロ野球日本シリーズ9番勝負!!"
+    add: ["baseball"]
+  - series_key: "qid:Q11522665|name:新約「巨人の星」 花形"
+    add: ["baseball"]
+  - series_key: "qid:Q11530823|name:勝利の女神だって野球したい!"
+    add: ["baseball"]
+  - series_key: "qid:Q11533547|name:東京野球小僧"
+    add: ["baseball"]
+  - series_key: "qid:Q11533982|name:バッテリー"
+    add: ["baseball"]
+  - series_key: "qid:Q11547516|name:豪快野球坊ベスボル"
+    add: ["baseball"]
+  - series_key: "qid:Q11553688|name:ベロベロベースボール"
+    add: ["baseball"]
+  - series_key: "qid:Q11553688|name:モリモリッ!ばんちょー!!キヨハラくん"
+    add: ["baseball"]
+  - series_key: "qid:Q11554204|name:GRAND SLAM"
+    add: ["baseball"]
+  - series_key: "qid:Q11565543|name:地獄大甲子園"
+    add: ["baseball"]
+  - series_key: "qid:Q11565543|name:地獄甲子園"
+    add: ["baseball"]
+  - series_key: "qid:Q11566927|name:はじめての甲子園"
+    add: ["baseball"]
+  - series_key: "qid:Q11572365|name:爆笑ベースボール!モーだメジャー!!"
+    add: ["baseball"]
+  - series_key: "qid:Q11579326|name:十五野球少年漂流記"
+    add: ["baseball"]
+  - series_key: "qid:Q11584823|name:ホームラン天使"
+    add: ["baseball"]
+  - series_key: "qid:Q11591228|name:アノナツ-1959-"
+    add: ["baseball"]
+  - series_key: "qid:Q11591228|name:クーロンズ・ボール・パレード"
+    add: ["baseball"]
+  - series_key: "qid:Q11598322|name:J・BOY"
+    add: ["baseball"]
+  - series_key: "qid:Q11598322|name:甲子園の狼"
+    add: ["baseball"]
+  - series_key: "qid:Q11629992|name:僕はまだ野球を知らない"
+    add: ["baseball"]
+  - series_key: "qid:Q11645305|name:おんな甲子園!"
+    add: ["baseball"]
+  - series_key: "qid:Q11645305|name:女たちのベースボール"
+    add: ["baseball"]
+  - series_key: "qid:Q11651898|name:バックホームブルース"
+    add: ["baseball"]
+  - series_key: "qid:Q11665552|name:GUT's"
+    add: ["baseball"]
+  - series_key: "qid:Q116936740|name:球神転生"
+    add: ["baseball"]
+  - series_key: "qid:Q118696802|name:ちょっとまて野球部!"
+    add: ["baseball"]
+  - series_key: "qid:Q1319237|name:侍ジャイアンツ"
+    add: ["baseball"]
+  - series_key: "qid:Q1504165|name:STRAIGHT"
+    add: ["baseball"]
+  - series_key: "qid:Q1504165|name:花男"
+    add: ["baseball"]
+  - series_key: "qid:Q15893843|name:なんと孫六"
+    add: ["baseball"]
+  - series_key: "qid:Q1626187|name:逆境ナイン"
+    add: ["baseball"]
+  - series_key: "qid:Q1721423|name:バッテリー"
+    add: ["baseball"]
+  - series_key: "qid:Q17220541|name:Death ball"
+    add: ["baseball"]
+  - series_key: "qid:Q20039845|name:野球無頼"
+    add: ["baseball"]
+  - series_key: "qid:Q20039859|name:ドラフトキング"
+    add: ["baseball"]
+  - series_key: "qid:Q20039859|name:山本昌はまだ野球を知らない"
+    add: ["baseball"]
+  - series_key: "qid:Q20040773|name:ボールパークでつかまえて!"
+    add: ["baseball"]
+  - series_key: "qid:Q20040773|name:マックミランの女子野球部"
+    add: ["baseball"]
+  - series_key: "qid:Q20040773|name:マックミラン高校女子硬式野球部"
+    add: ["baseball"]
+  - series_key: "qid:Q2280124|name:セーラーエース"
+    add: ["baseball"]
+  - series_key: "qid:Q2290191|name:Karen"
+    add: ["baseball"]
+  - series_key: "qid:Q234425|name:うすべにの嵐/エスケープ"
+    add: ["baseball"]
+  - series_key: "qid:Q256887|name:群青にサイレン"
+    add: ["baseball"]
+  - series_key: "qid:Q2661273|name:呂明賜がゆく"
+    add: ["baseball"]
+  - series_key: "qid:Q28688075|name:弟キャッチャー俺ピッチャーで!"
+    add: ["baseball"]
+  - series_key: "qid:Q302859|name:ストッパー毒島"
+    add: ["baseball"]
+  - series_key: "qid:Q3135260|name:たのしい甲子園"
+    add: ["baseball"]
+  - series_key: "qid:Q3136470|name:あんたのベースボール"
+    add: ["baseball"]
+  - series_key: "qid:Q3136470|name:がんばれ!!タブチくん!!"
+    add: ["baseball"]
+  - series_key: "qid:Q3136470|name:これがワシらのプロ野球"
+    add: ["baseball"]
+  - series_key: "qid:Q3136470|name:ワシらを野球に連れて行け"
+    add: ["baseball"]
+  - series_key: "qid:Q3136470|name:未曾有だよプロ野球"
+    add: ["baseball"]
+  - series_key: "qid:Q313945|name:4番サード"
+    add: ["baseball"]
+  - series_key: "qid:Q3293468|name:わいるど・ぴっち"
+    add: ["baseball"]
+  - series_key: "qid:Q351742|name:H2"
+    add: ["baseball"]
+  - series_key: "qid:Q351742|name:MIX"
+    add: ["baseball"]
+  - series_key: "qid:Q351742|name:ああ!青春の甲子園"
+    add: ["baseball"]
+  - series_key: "qid:Q351742|name:クロスゲーム"
+    add: ["baseball"]
+  - series_key: "qid:Q351742|name:ナイン"
+    add: ["baseball"]
+  - series_key: "qid:Q351742|name:初恋甲子園"
+    add: ["baseball"]
+  - series_key: "qid:Q351742|name:泣き虫甲子園"
+    add: ["baseball"]
+  - series_key: "qid:Q3776891|name:やったろうじゃん!!"
+    add: ["baseball"]
+  - series_key: "qid:Q3777311|name:神様がくれた夏"
+    add: ["baseball"]
+  - series_key: "qid:Q3978408|name:Mr.FULLSWING"
+    add: ["baseball"]
+  - series_key: "qid:Q40044123|name:BUNGO"
+    add: ["baseball"]
+  - series_key: "qid:Q4022589|name:バツ＆テリー"
+    add: ["baseball"]
+  - series_key: "qid:Q418575|name:キャプテン"
+    add: ["baseball"]
+  - series_key: "qid:Q418575|name:プレイボール"
+    add: ["baseball"]
+  - series_key: "qid:Q430784|name:おおきく振りかぶって"
+    add: ["baseball"]
+  - series_key: "qid:Q463346|name:WILD BASEBALLERS"
+    add: ["baseball"]
+  - series_key: "qid:Q58139838|name:私を球場に連れてって!"
+    add: ["baseball"]
+  - series_key: "qid:Q62601408|name:落合博満のオレ流転生"
+    add: ["baseball"]
+  - series_key: "qid:Q6383691|name:カモン・レッツゴー・ベースボール"
+    add: ["baseball"]
+  - series_key: "qid:Q63872059|name:忘却バッテリー"
+    add: ["baseball"]
+  - series_key: "qid:Q6455159|name:戦国甲子園"
+    add: ["baseball"]
+  - series_key: "qid:Q655871|name:OVER TIME"
+    add: ["baseball"]
+  - series_key: "qid:Q669049|name:おばけ野球チーム"
+    add: ["baseball"]
+  - series_key: "qid:Q7497035|name:大正野球娘。"
+    add: ["baseball"]
+  - series_key: "qid:Q7497596|name:あぶさん"
+    add: ["baseball"]
+  - series_key: "qid:Q7497596|name:おはようKジロー"
+    add: ["baseball"]
+  - series_key: "qid:Q7497596|name:ドカベン"
+    add: ["baseball"]
+  - series_key: "qid:Q7497596|name:大甲子園"
+    add: ["baseball"]
+  - series_key: "qid:Q7497596|name:平成野球草子"
+    add: ["baseball"]
+  - series_key: "qid:Q7497596|name:新・野球狂の詩"
+    add: ["baseball"]
+  - series_key: "qid:Q7497596|name:朝子の野球日記"
+    add: ["baseball"]
+  - series_key: "qid:Q7497596|name:草野球列伝"
+    add: ["baseball"]
+  - series_key: "qid:Q7497596|name:野球狂の詩"
+    add: ["baseball"]
+  - series_key: "qid:Q7678636|name:MAJOR"
+    add: ["baseball"]
+  - series_key: "qid:Q7678636|name:MAJOR 2nd"
+    add: ["baseball"]
+  - series_key: "qid:Q7828260|name:スコアブック"
+    add: ["baseball"]
+  - series_key: "qid:Q7850382|name:わたるがぴゅん!"
+    add: ["baseball"]
+  - series_key: "qid:Q8060533|name:ダイヤのA"
+    add: ["baseball"]
+  - series_key: "qid:Q8495163|name:野球+プラス!"
+    add: ["baseball"]
+  - series_key: "qid:Q871684|name:クロカン"
+    add: ["baseball"]
+  - series_key: "qid:Q871684|name:甲子園へ行こう!"
+    add: ["baseball"]
+  - series_key: "qid:Q871684|name:砂の栄冠"
+    add: ["baseball"]
+  - series_key: "qid:Q872923|name:ONE OUTS"
+    add: ["baseball"]
+  - series_key: "qid:Q8952511|name:ナツの甲子園"
+    add: ["baseball"]
+  - series_key: "qid:Q9003824|name:ベースボール"
+    add: ["baseball"]
+  - series_key: "qid:Q9009404|name:ワン!"
+    add: ["baseball"]
+  - series_key: "qid:Q9009404|name:野球の星メットマン"
+    add: ["baseball"]
+  - series_key: "qid:Q9014973|name:天使とダイヤモンド"
+    add: ["baseball"]
+  - series_key: "qid:Q9099435|name:ボンジュール・ベースボール"
+    add: ["baseball"]
+  - series_key: "qid:Q9317809|name:最強!都立あおい坂高校野球部"
+    add: ["baseball"]
+  - series_key: "name:100percent|name:イナズマイレブンgo"
+    add: ["soccer"]
+  - series_key: "name:いずみ誠|name:ベストイレブン"
+    add: ["soccer"]
+  - series_key: "name:ともながひでき|name:ストライカー!勇気"
+    add: ["soccer"]
+  - series_key: "name:ヒロナカヤスシ|name:Theストライカー"
+    add: ["soccer"]
+  - series_key: "name:ホーム社|name:フィールドの狼FW陣!|sub:蹴球伝"
+    add: ["soccer"]
+  - series_key: "name:モノノヴ|name:ドリブルヌッコあーしちゃん"
+    add: ["soccer"]
+  - series_key: "name:レベルファイブ|name:イナズマイレブン"
+    add: ["soccer"]
+  - series_key: "name:レベルファイブ|name:イナズマイレブンgo爆外伝集"
+    add: ["soccer"]
+  - series_key: "name:レベルファイブ|name:イナズマイレブンアレスの天秤"
+    add: ["soccer"]
+  - series_key: "name:レベルファイブ|name:イナズマイレブン爆外伝集"
+    add: ["soccer"]
+  - series_key: "name:レベルファイブ|name:イナズマイレブン～ペンギンを継ぐ者～"
+    add: ["soccer"]
+  - series_key: "name:七三太朗|name:イレブン"
+    add: ["soccer"]
+  - series_key: "name:上野直彦|name:アオアシ"
+    add: ["soccer"]
+  - series_key: "name:佐々木多利尓|name:がんばれ!キッカーズ"
+    add: ["soccer"]
+  - series_key: "name:山口了児|name:ファンタジスタステラ"
+    add: ["soccer"]
+  - series_key: "name:平野博寿|name:ガールガールボールシュートガール"
+    add: ["soccer"]
+  - series_key: "name:本橋馨子|name:あぶないストライカー"
+    add: ["soccer"]
+  - series_key: "name:桜井ミヤト|name:蒼く染めろ"
+    add: ["soccer"]
+  - series_key: "name:森本大輔|name:カテナチオ"
+    add: ["soccer"]
+  - series_key: "name:槌居|name:ハルのレジスタ"
+    add: ["soccer"]
+  - series_key: "name:横幕智裕|name:ゴールデンエッグ"
+    add: ["soccer"]
+  - series_key: "name:津島三十三|name:極楽イレブン"
+    add: ["soccer"]
+  - series_key: "name:清水海斗|name:ナリキンフットボール"
+    add: ["soccer"]
+  - series_key: "name:灰谷音屋|name:Diego!!|sub:神と呼ばれた男の新たなる挑戦"
+    add: ["soccer"]
+  - series_key: "name:灰谷音屋|name:ジュニオール"
+    add: ["soccer"]
+  - series_key: "name:田口孝敏|name:ばら色イレブン"
+    add: ["soccer"]
+  - series_key: "name:神崎あおい|name:ピンクのイレブン"
+    add: ["soccer"]
+  - series_key: "name:綱本将也|name:Giant killing"
+    add: ["soccer"]
+  - series_key: "name:綱本将也|name:Goal Den Age"
+    add: ["soccer"]
+  - series_key: "name:綱本将也|name:Mr.CB"
+    add: ["soccer"]
+  - series_key: "name:西井聡太郎|name:エンバーズ"
+    add: ["soccer"]
+  - series_key: "name:講談社|name:Giant killing extra ジャイアントキリング発サッカーエンターテインメントマガジン"
+    add: ["soccer"]
+  - series_key: "name:遠崎史郎|name:海峡イレブン"
+    add: ["soccer"]
+  - series_key: "name:遠藤察男|name:ようこそ!微笑寮へ"
+    add: ["soccer"]
+  - series_key: "name:野沢尚|name:龍時"
+    add: ["soccer"]
+  - series_key: "name:金城宗幸|name:ブルーロック"
+    add: ["soccer"]
+  - series_key: "name:飯野大祐|name:TIEMPO"
+    add: ["soccer"]
+  - series_key: "qid:Q10794853|name:かっとび一斗"
+    add: ["soccer"]
+  - series_key: "qid:Q10794853|name:風飛び一斗"
+    add: ["soccer"]
+  - series_key: "qid:Q10855533|name:LOST MAN"
+    add: ["soccer"]
+  - series_key: "qid:Q10855533|name:ファンタジスタ"
+    add: ["soccer"]
+  - series_key: "qid:Q112238926|name:ブクロキックス"
+    add: ["soccer"]
+  - series_key: "qid:Q11256832|name:ジョカトーレ"
+    add: ["soccer"]
+  - series_key: "qid:Q11257749|name:カルチョな執事"
+    add: ["soccer"]
+  - series_key: "qid:Q11259887|name:マイぼーる!"
+    add: ["soccer"]
+  - series_key: "qid:Q11271172|name:サッカー少年ムサシ"
+    add: ["soccer"]
+  - series_key: "qid:Q11271813|name:キックオフ"
+    add: ["soccer"]
+  - series_key: "qid:Q11274881|name:超機動暴発蹴球野郎リベロの武田"
+    add: ["soccer"]
+  - series_key: "qid:Q11279293|name:ストライカー列伝"
+    add: ["soccer"]
+  - series_key: "qid:Q11279293|name:風のフィールド"
+    add: ["soccer"]
+  - series_key: "qid:Q11294372|name:サッカーおばかさん"
+    add: ["soccer"]
+  - series_key: "qid:Q11303621|name:ササメケ"
+    add: ["soccer"]
+  - series_key: "qid:Q11361583|name:けったま!"
+    add: ["soccer"]
+  - series_key: "qid:Q11398562|name:マイスター"
+    add: ["soccer"]
+  - series_key: "qid:Q11411339|name:赤菱のイレブン"
+    add: ["soccer"]
+  - series_key: "qid:Q11411625|name:ANGEL VOICE"
+    add: ["soccer"]
+  - series_key: "qid:Q11414200|name:イナズマイレブン SPECIAL"
+    add: ["soccer"]
+  - series_key: "qid:Q11433443|name:T.R.A.P."
+    add: ["soccer"]
+  - series_key: "qid:Q11436655|name:ザ・サッカー"
+    add: ["soccer"]
+  - series_key: "qid:Q11457373|name:GOLDEN☆AGE"
+    add: ["soccer"]
+  - series_key: "qid:Q11476980|name:サッカーけるける団"
+    add: ["soccer"]
+  - series_key: "qid:Q11496927|name:ワイルド・フットボールサッカー界の暴れん坊たち"
+    add: ["soccer"]
+  - series_key: "qid:Q11502103|name:さよならフットボール"
+    add: ["soccer"]
+  - series_key: "qid:Q11502103|name:さよなら私のクラマー"
+    add: ["soccer"]
+  - series_key: "qid:Q11517058|name:女神イレブン"
+    add: ["soccer"]
+  - series_key: "qid:Q11522665|name:バルセロナの太陽"
+    add: ["soccer"]
+  - series_key: "qid:Q11523362|name:DOIS SOL"
+    add: ["soccer"]
+  - series_key: "qid:Q11534731|name:ブルーストライカー"
+    add: ["soccer"]
+  - series_key: "qid:Q11590498|name:LIGHT WING"
+    add: ["soccer"]
+  - series_key: "qid:Q11596460|name:イナズマイレブン誕生物語"
+    add: ["soccer"]
+  - series_key: "qid:Q11611999|name:サッカー魁"
+    add: ["soccer"]
+  - series_key: "qid:Q11616270|name:蹴球少女"
+    add: ["soccer"]
+  - series_key: "qid:Q16770297|name:シャンペン・シャワー"
+    add: ["soccer"]
+  - series_key: "qid:Q18236020|name:シューダン!"
+    add: ["soccer"]
+  - series_key: "qid:Q22127550|name:サッカー伝説!!DFK"
+    add: ["soccer"]
+  - series_key: "qid:Q24294702|name:1/11"
+    add: ["soccer"]
+  - series_key: "qid:Q24294702|name:蒼のアインツ"
+    add: ["soccer"]
+  - series_key: "qid:Q2606338|name:GET!"
+    add: ["soccer"]
+  - series_key: "qid:Q3135260|name:HEAVENイレブン"
+    add: ["soccer"]
+  - series_key: "qid:Q3234503|name:ホイッスル!"
+    add: ["soccer"]
+  - series_key: "qid:Q3234503|name:ホイッスル!W"
+    add: ["soccer"]
+  - series_key: "qid:Q40037531|name:潔癖男子!青山くん"
+    add: ["soccer"]
+  - series_key: "qid:Q418575|name:校舎うらのイレブン"
+    add: ["soccer"]
+  - series_key: "qid:Q443171|name:真珠の鎖"
+    add: ["soccer"]
+  - series_key: "qid:Q461138|name:うわさの翠くん!!"
+    add: ["soccer"]
+  - series_key: "qid:Q47465101|name:アオアシブラザーフット"
+    add: ["soccer"]
+  - series_key: "qid:Q55534683|name:サッカーボーイ"
+    add: ["soccer"]
+  - series_key: "qid:Q55534683|name:フットボールネーション"
+    add: ["soccer"]
+  - series_key: "qid:Q6389239|name:俺たちのフィールド"
+    add: ["soccer"]
+  - series_key: "qid:Q6883402|name:赤き血のイレブン"
+    add: ["soccer"]
+  - series_key: "qid:Q69635182|name:オレゴラッソ"
+    add: ["soccer"]
+  - series_key: "qid:Q7333057|name:トラぶる❤キック"
+    add: ["soccer"]
+  - series_key: "qid:Q8049952|name:DAYS"
+    add: ["soccer"]
+  - series_key: "qid:Q8049952|name:振り向くな君は"
+    add: ["soccer"]
+  - series_key: "qid:Q8060669|name:MA・MA・Match"
+    add: ["soccer"]
+  - series_key: "qid:Q8967173|name:Jドリーム"
+    add: ["soccer"]
+  - series_key: "qid:Q8967173|name:オフサイド"
+    add: ["soccer"]
+  - series_key: "qid:Q8967173|name:コラソン サッカー魂"
+    add: ["soccer"]
+  - series_key: "qid:Q9124928|name:シュート!"
+    add: ["soccer"]
+  - series_key: "qid:Q9317809|name:Be blues!"
+    add: ["soccer"]
+  - series_key: "qid:Q9330031|name:ORANGE"
+    add: ["soccer"]
+  - series_key: "qid:Q9330031|name:サッカーの憂鬱"
+    add: ["soccer"]
+  - series_key: "qid:Q958269|name:キャプテン翼"
+    add: ["soccer"]
+  - series_key: "qid:Q958269|name:キャプテン翼KIDS DREAM"
+    add: ["soccer"]
+  - series_key: "qid:Q958269|name:キャプテン翼ライジングサン"
+    add: ["soccer"]
+  - series_key: "qid:Q958269|name:ハングリーハート"
+    add: ["soccer"]
+  - series_key: "qid:Q958269|name:ブラサカブラボー!!"
+    add: ["soccer"]
+  - series_key: "qid:Q966701|name:iコンタクト"
+    add: ["soccer"]
+  - series_key: "qid:Q966701|name:エリアの騎士"
+    add: ["soccer"]

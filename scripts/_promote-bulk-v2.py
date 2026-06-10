@@ -965,6 +965,23 @@ def _load_page_dedup() -> set:
 _PAGE_DEDUP_DROPS: set = _load_page_dedup()
 
 
+def _load_genre_additions() -> dict:
+    """genre-additions.yml = series_key -> 追加ジャンルkey list(野球/サッカー等のサブタグ純粋追加)。"""
+    p = ROOT / "data" / "seeds" / "genre-additions.yml"
+    if not p.exists():
+        return {}
+    doc = yaml.safe_load(open(p, encoding="utf-8")) or {}
+    out: dict = {}
+    for e in doc.get("additions", []):
+        k = e.get("series_key")
+        if k:
+            out.setdefault(k, []).extend(e.get("add") or [])
+    return out
+
+
+_GENRE_ADDITIONS: dict = _load_genre_additions()
+
+
 def _load_author_yomi() -> None:
     global _AUTHOR_YOMI
     if _AUTHOR_YOMI is not None:
@@ -2148,6 +2165,12 @@ def main():
         seed_entry = seed3.get(series["series_key"])
         new_yml = build_yml(src, merged_series, authors, editions, seed_entry,
                             valid_pubs, valid_mags, valid_gens)
+        # ジャンル純粋追加(genre-additions.yml: baseball/soccer サブタグ等。 既存は不変)
+        _gadd = _GENRE_ADDITIONS.get(series["series_key"])
+        if _gadd:
+            for _g in _gadd:
+                if _g in valid_gens and _g not in new_yml.get("genres", []):
+                    new_yml.setdefault("genres", []).append(_g)
         # ★adult_us(米基準): ページの series_key(merge込)が種a isAdult なら付与。
         #   非日本geoで非表示用(日本は表示)。 採用作品集合は不変=表示制御のみ追加。
         page_keys = [sid2key.get(sid) for sid in related_ids]
