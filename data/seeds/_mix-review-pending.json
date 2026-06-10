@@ -1,0 +1,4531 @@
+[
+ {
+  "slugs": [
+   "change-hashiba-2000",
+   "chenji"
+  ],
+  "titles": [
+   "Change!",
+   "ちぇんじ!"
+  ],
+  "n_dup": 2,
+  "verdict": "A_subset",
+  "detail": "change-hashiba-2000⊆chenji→chenjiにmerge",
+  "sizes": [
+   2,
+   6
+  ],
+  "why": "title低類似(Change!/ちぇんじ!)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "cinderella",
+   "cinderella-sekaiichi-utsukushii-zankoku-douwa"
+  ],
+  "titles": [
+   "シンデレラ",
+   "シンデレラ"
+  ],
+  "n_dup": 1,
+  "verdict": "D_review",
+  "detail": "NDL判定不能 unknown=1/1",
+  "sizes": [
+   2,
+   2
+  ],
+  "why": "D_review"
+ },
+ {
+  "slugs": [
+   "aporon-no-kanashimi",
+   "eiyu-herakuresu",
+   "higeki-no-o-oidipusu",
+   "manga-girishia-shinwa",
+   "meikai-no-orufeusu",
+   "odeyusseusu-no-kokai",
+   "oryunposu-no-kamigami",
+   "toroi-no-mokuba"
+  ],
+  "titles": [
+   "アポロンの哀しみ",
+   "英雄ヘラクレス",
+   "悲劇の王オイディプス",
+   "マンガギリシア神話",
+   "冥界のオルフェウス",
+   "オデュッセウスの航海",
+   "オリュンポスの神々",
+   "トロイの木馬"
+  ],
+  "n_dup": 8,
+  "verdict": "D_review",
+  "detail": "NDL判定不能 unknown=4/8",
+  "sizes": [
+   8,
+   8,
+   8,
+   8,
+   8,
+   8,
+   8,
+   8
+  ],
+  "why": "D_review"
+ },
+ {
+  "slugs": [
+   "nihon-no-rekishi-3",
+   "nihonnorekishi"
+  ],
+  "titles": [
+   "日本の歴史",
+   "日本の歴史"
+  ],
+  "n_dup": 3,
+  "verdict": "A_subset",
+  "detail": "nihonnorekishi⊆nihon-no-rekishi-3→nihon-no-rekishi-3にmerge",
+  "sizes": [
+   12,
+   3
+  ],
+  "why": "subset側にISBN無し巻あり"
+ },
+ {
+  "slugs": [
+   "chrno-crusade",
+   "chrno-crusade-2"
+  ],
+  "titles": [
+   "CHRNO CRUSADE",
+   "クロノクルセイド"
+  ],
+  "n_dup": 8,
+  "verdict": "A_subset",
+  "detail": "chrno-crusade⊆chrno-crusade-2→chrno-crusade-2にmerge",
+  "sizes": [
+   8,
+   8
+  ],
+  "why": "title低類似(CHRNO CRUSADE/クロノクルセイド)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "engage-1994",
+   "engage-watanabe-2009"
+  ],
+  "titles": [
+   "Engage",
+   "エンゲージ"
+  ],
+  "n_dup": 2,
+  "verdict": "A_subset",
+  "detail": "engage-1994⊆engage-watanabe-2009→engage-watanabe-2009にmerge",
+  "sizes": [
+   2,
+   3
+  ],
+  "why": "title低類似(Engage/エンゲージ)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "natsu-no-omoide-1994",
+   "yoru-no-ryoiki"
+  ],
+  "titles": [
+   "夏の思い出",
+   "夜の領域"
+  ],
+  "n_dup": 1,
+  "verdict": "A_subset",
+  "detail": "natsu-no-omoide-1994⊆yoru-no-ryoiki→yoru-no-ryoikiにmerge",
+  "sizes": [
+   1,
+   1
+  ],
+  "why": "title低類似(夏の思い出/夜の領域)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "otome-wa-boku-ni-koishiteru",
+   "otome-wa-onee-sama-ni-koishiteru"
+  ],
+  "titles": [
+   "乙女はお姉さまに恋してる",
+   "乙女はお姉さまに恋してる"
+  ],
+  "n_dup": 1,
+  "verdict": "D_review",
+  "detail": "NDL判定不能 unknown=1/1",
+  "sizes": [
+   3,
+   3
+  ],
+  "why": "D_review"
+ },
+ {
+  "slugs": [
+   "lawman",
+   "lawman-2"
+  ],
+  "titles": [
+   "LAWMAN",
+   "ロウマンs"
+  ],
+  "n_dup": 1,
+  "verdict": "A_subset",
+  "detail": "lawman⊆lawman-2→lawman-2にmerge",
+  "sizes": [
+   1,
+   1
+  ],
+  "why": "title低類似(LAWMAN/ロウマンs)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "final-fantasy-lost-stranger",
+   "final-fantasy-lost-stranger-2"
+  ],
+  "titles": [
+   "ファイナルファンタジーロスト・ストレンジャー",
+   "Final fantasy lost stranger"
+  ],
+  "n_dup": 8,
+  "verdict": "A_subset",
+  "detail": "final-fantasy-lost-stranger-2⊆final-fantasy-lost-stranger→final-fantasy-lost-strangerにmerge",
+  "sizes": [
+   12,
+   8
+  ],
+  "why": "title低類似(Final fantasy /ファイナルファンタジーロスト)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "worst",
+   "worst-komuro-1970"
+  ],
+  "titles": [
+   "WORST",
+   "ワースト"
+  ],
+  "n_dup": 29,
+  "verdict": "A_subset",
+  "detail": "worst-komuro-1970⊆worst→worstにmerge",
+  "sizes": [
+   33,
+   29
+  ],
+  "why": "subset側にISBN無し巻あり"
+ },
+ {
+  "slugs": [
+   "bamboo-blade-b",
+   "bamboo-blade-b-2009"
+  ],
+  "titles": [
+   "バンブーブレードビー",
+   "BAMBOO BLADE B"
+  ],
+  "n_dup": 12,
+  "verdict": "A_subset",
+  "detail": "bamboo-blade-b⊆bamboo-blade-b-2009→bamboo-blade-b-2009にmerge",
+  "sizes": [
+   12,
+   12
+  ],
+  "why": "title低類似(バンブーブレードビー/BAMBOO BLADE B)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "complex",
+   "complex-kikuchi-2002"
+  ],
+  "titles": [
+   "コンプレックス",
+   "COMPLEX"
+  ],
+  "n_dup": 10,
+  "verdict": "A_subset",
+  "detail": "complex⊆complex-kikuchi-2002→complex-kikuchi-2002にmerge",
+  "sizes": [
+   10,
+   10
+  ],
+  "why": "title低類似(コンプレックス/COMPLEX)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "hai-time",
+   "high"
+  ],
+  "titles": [
+   "はい Time",
+   "High"
+  ],
+  "n_dup": 3,
+  "verdict": "A_subset",
+  "detail": "hai-time⊆high→highにmerge",
+  "sizes": [
+   3,
+   3
+  ],
+  "why": "title低類似(はい Time/High)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "castille-no-kifujin",
+   "nageki-no-torisu-tan"
+  ],
+  "titles": [
+   "カスティリアの貴婦人",
+   "嘆きのトリスタン"
+  ],
+  "n_dup": 2,
+  "verdict": "A_subset",
+  "detail": "castille-no-kifujin⊆nageki-no-torisu-tan→nageki-no-torisu-tanにmerge",
+  "sizes": [
+   2,
+   2
+  ],
+  "why": "title低類似(カスティリアの貴婦人/嘆きのトリスタン)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "fool-for-the-city",
+   "fool-for-the-city-2"
+  ],
+  "titles": [
+   "FOOL for THE CITY",
+   "フール・フォー・ザ・シティ"
+  ],
+  "n_dup": 1,
+  "verdict": "A_subset",
+  "detail": "fool-for-the-city⊆fool-for-the-city-2→fool-for-the-city-2にmerge",
+  "sizes": [
+   1,
+   1
+  ],
+  "why": "title低類似(FOOL for THE C/フール・フォー・ザ・シティ)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "untitled",
+   "untitled-2"
+  ],
+  "titles": [
+   "UNTITLED",
+   "アンタイトルド"
+  ],
+  "n_dup": 2,
+  "verdict": "A_subset",
+  "detail": "untitled⊆untitled-2→untitled-2にmerge",
+  "sizes": [
+   2,
+   2
+  ],
+  "why": "title低類似(UNTITLED/アンタイトルド)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "refrain-1988",
+   "refrain-1989"
+  ],
+  "titles": [
+   "リフレイン",
+   "Rifrein"
+  ],
+  "n_dup": 4,
+  "verdict": "A_subset",
+  "detail": "refrain-1988⊆refrain-1989→refrain-1989にmerge",
+  "sizes": [
+   4,
+   4
+  ],
+  "why": "title低類似(リフレイン/Rifrein)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "aidoru-sosei-densetsu-purinsesu",
+   "idol-sousei-densetsu"
+  ],
+  "titles": [
+   "美少女創世伝説プリンセス",
+   "Princess"
+  ],
+  "n_dup": 3,
+  "verdict": "A_subset",
+  "detail": "aidoru-sosei-densetsu-purinsesu⊆idol-sousei-densetsu→idol-sousei-densetsuにmerge",
+  "sizes": [
+   3,
+   3
+  ],
+  "why": "subset側にISBN無し巻あり"
+ },
+ {
+  "slugs": [
+   "purogorufaa-saru",
+   "purogorufaasaru"
+  ],
+  "titles": [
+   "プロゴルファー猿",
+   "プロゴルファー猿"
+  ],
+  "n_dup": 4,
+  "verdict": "A_subset",
+  "detail": "purogorufaasaru⊆purogorufaa-saru→purogorufaa-saruにmerge",
+  "sizes": [
+   17,
+   4
+  ],
+  "why": "subset側にISBN無し巻あり"
+ },
+ {
+  "slugs": [
+   "lesson",
+   "lesson-2000"
+  ],
+  "titles": [
+   "Lesson",
+   "レッスン"
+  ],
+  "n_dup": 2,
+  "verdict": "A_subset",
+  "detail": "lesson⊆lesson-2000→lesson-2000にmerge",
+  "sizes": [
+   2,
+   2
+  ],
+  "why": "title低類似(Lesson/レッスン)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "gym",
+   "jimu"
+  ],
+  "titles": [
+   "ジム",
+   "Gym"
+  ],
+  "n_dup": 2,
+  "verdict": "A_subset",
+  "detail": "gym⊆jimu→jimuにmerge",
+  "sizes": [
+   2,
+   2
+  ],
+  "why": "title低類似(ジム/Gym)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "happy-birthday",
+   "hard-acme"
+  ],
+  "titles": [
+   "ハッピーバースデー",
+   "HAPPY BIRTHDAY"
+  ],
+  "n_dup": 1,
+  "verdict": "A_subset",
+  "detail": "hard-acme⊆happy-birthday→happy-birthdayにmerge",
+  "sizes": [
+   2,
+   1
+  ],
+  "why": "title低類似(HAPPY BIRTHDAY/ハッピーバースデー)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "steins-gate",
+   "steins-geeto"
+  ],
+  "titles": [
+   "シュタインズ・ゲート",
+   "しゅたいんず・げーと!"
+  ],
+  "n_dup": 3,
+  "verdict": "A_subset",
+  "detail": "steins-gate⊆steins-geeto→steins-geetoにmerge",
+  "sizes": [
+   3,
+   3
+  ],
+  "why": "title低類似(シュタインズ・ゲート/しゅたいんず・げーと!)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "maya",
+   "maya-2"
+  ],
+  "titles": [
+   "マヤ",
+   "Maya"
+  ],
+  "n_dup": 1,
+  "verdict": "A_subset",
+  "detail": "maya⊆maya-2→maya-2にmerge",
+  "sizes": [
+   10,
+   10
+  ],
+  "why": "title低類似(マヤ/Maya)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "mangaban-sekai-no-rekishi-2009",
+   "mangaban-sekai-no-rekishi-2009-2",
+   "mangaban-sekai-no-rekishi-2009-3",
+   "mangaban-sekai-no-rekishi-2009-4",
+   "mangaban-sekai-no-rekishi-2009-5"
+  ],
+  "titles": [
+   "漫画版世界の歴史",
+   "漫画版世界の歴史",
+   "漫画版世界の歴史",
+   "漫画版世界の歴史",
+   "漫画版世界の歴史"
+  ],
+  "n_dup": 6,
+  "verdict": "D_review",
+  "detail": "NDL判定不能 unknown=6/6",
+  "sizes": [
+   6,
+   7,
+   7,
+   7,
+   7
+  ],
+  "why": "D_review"
+ },
+ {
+  "slugs": [
+   "home-sugihara-2010",
+   "home-ueda-2000"
+  ],
+  "titles": [
+   "HOME",
+   "ホーム"
+  ],
+  "n_dup": 1,
+  "verdict": "A_subset",
+  "detail": "home-sugihara-2010⊆home-ueda-2000→home-ueda-2000にmerge",
+  "sizes": [
+   2,
+   2
+  ],
+  "why": "title低類似(HOME/ホーム)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "kido-butoden-jii-gandamu",
+   "kido-butoden-jii-gandamu-2"
+  ],
+  "titles": [
+   "機動武道伝Gガンダム",
+   "機動武闘伝Gガンダム"
+  ],
+  "n_dup": 3,
+  "verdict": "A_subset",
+  "detail": "kido-butoden-jii-gandamu⊆kido-butoden-jii-gandamu-2→kido-butoden-jii-gandamu-2にmerge",
+  "sizes": [
+   3,
+   3
+  ],
+  "why": "title低類似(機動武道伝Gガンダム/機動武闘伝Gガンダム)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "spiral-suiri-no-kizuna",
+   "spiral-suiri-no-kizuna-2003"
+  ],
+  "titles": [
+   "スパイラル",
+   "SPIRAL"
+  ],
+  "n_dup": 15,
+  "verdict": "A_subset",
+  "detail": "spiral-suiri-no-kizuna⊆spiral-suiri-no-kizuna-2003→spiral-suiri-no-kizuna-2003にmerge",
+  "sizes": [
+   15,
+   15
+  ],
+  "why": "title低類似(スパイラル/SPIRAL)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "choryu-senki-zaurosu-naito",
+   "choryu-senki-zaurosu-naito-2"
+  ],
+  "titles": [
+   "超竜戦記ザウロスナイト",
+   "超龍戦記ザウロスナイト"
+  ],
+  "n_dup": 6,
+  "verdict": "A_subset",
+  "detail": "choryu-senki-zaurosu-naito⊆choryu-senki-zaurosu-naito-2→choryu-senki-zaurosu-naito-2にmerge",
+  "sizes": [
+   6,
+   6
+  ],
+  "why": "title低類似(超竜戦記ザウロスナイト/超龍戦記ザウロスナイト)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "natsu-no-guwa",
+   "tenjinkarakusa"
+  ],
+  "titles": [
+   "夏の寓話",
+   "天人唐草"
+  ],
+  "n_dup": 2,
+  "verdict": "A_subset",
+  "detail": "natsu-no-guwa⊆tenjinkarakusa→tenjinkarakusaにmerge",
+  "sizes": [
+   2,
+   2
+  ],
+  "why": "title低類似(夏の寓話/天人唐草)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "d-n-a2",
+   "dna2-dokoka-de-nakushita-aitsu-no-aitsu"
+  ],
+  "titles": [
+   "D・N・〔A^2〕",
+   "D・N・A²"
+  ],
+  "n_dup": 8,
+  "verdict": "A_subset",
+  "detail": "d-n-a2⊆dna2-dokoka-de-nakushita-aitsu-no-aitsu→dna2-dokoka-de-nakushita-aitsu-no-aitsuにmerge",
+  "sizes": [
+   8,
+   8
+  ],
+  "why": "title低類似(D・N・〔A^2〕/D・N・A²)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "kanon-2000",
+   "kanon-usami-2003"
+  ],
+  "titles": [
+   "Kanon",
+   "カノン"
+  ],
+  "n_dup": 1,
+  "verdict": "A_subset",
+  "detail": "kanon-usami-2003⊆kanon-2000→kanon-2000にmerge",
+  "sizes": [
+   2,
+   1
+  ],
+  "why": "subset側にISBN無し巻あり"
+ },
+ {
+  "slugs": [
+   "gringo",
+   "gringo-2"
+  ],
+  "titles": [
+   "GRINGO",
+   "グリンゴ"
+  ],
+  "n_dup": 5,
+  "verdict": "A_subset",
+  "detail": "gringo⊆gringo-2→gringo-2にmerge",
+  "sizes": [
+   5,
+   5
+  ],
+  "why": "title低類似(GRINGO/グリンゴ)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "hitorijime-my-hero",
+   "hitorijime-my-hiiro"
+  ],
+  "titles": [
+   "Hitorijime my hero",
+   "ひとりじめマイヒーロー"
+  ],
+  "n_dup": 15,
+  "verdict": "A_subset",
+  "detail": "hitorijime-my-hiiro⊆hitorijime-my-hero→hitorijime-my-heroにmerge",
+  "sizes": [
+   17,
+   15
+  ],
+  "why": "title低類似(ひとりじめマイヒーロー/Hitorijime my )=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "cat-uoku",
+   "catwalk"
+  ],
+  "titles": [
+   "CAT WALK",
+   "キャットウォーク"
+  ],
+  "n_dup": 1,
+  "verdict": "A_subset",
+  "detail": "cat-uoku⊆catwalk→catwalkにmerge",
+  "sizes": [
+   1,
+   1
+  ],
+  "why": "title低類似(CAT WALK/キャットウォーク)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "golden-lucky",
+   "golden-lucky-2"
+  ],
+  "titles": [
+   "Golden lucky",
+   "ゴールデンラッキー"
+  ],
+  "n_dup": 10,
+  "verdict": "A_subset",
+  "detail": "golden-lucky⊆golden-lucky-2→golden-lucky-2にmerge",
+  "sizes": [
+   10,
+   10
+  ],
+  "why": "title低類似(Golden lucky/ゴールデンラッキー)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "challengers",
+   "gokaku-kigan"
+  ],
+  "titles": [
+   "チャレンジャーズ",
+   "合格祈願"
+  ],
+  "n_dup": 3,
+  "verdict": "A_subset",
+  "detail": "challengers⊆gokaku-kigan→gokaku-kiganにmerge",
+  "sizes": [
+   3,
+   3
+  ],
+  "why": "title低類似(チャレンジャーズ/合格祈願)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "aaku-the-lad-2",
+   "arc-the-lad-2"
+  ],
+  "titles": [
+   "Arc The Lad Ⅱ",
+   "アークザラッドⅡ"
+  ],
+  "n_dup": 10,
+  "verdict": "A_subset",
+  "detail": "aaku-the-lad-2⊆arc-the-lad-2→arc-the-lad-2にmerge",
+  "sizes": [
+   10,
+   10
+  ],
+  "why": "title低類似(Arc The Lad Ⅱ/アークザラッドⅡ)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "hiyoko-brand-oku-sama-wa-joshi-kousei",
+   "oku-sama-wa-joshikosei"
+  ],
+  "titles": [
+   "Hiyoko brand",
+   "おくさまは女子高生"
+  ],
+  "n_dup": 13,
+  "verdict": "A_subset",
+  "detail": "hiyoko-brand-oku-sama-wa-joshi-kousei⊆oku-sama-wa-joshikosei→oku-sama-wa-joshikoseiにmerge",
+  "sizes": [
+   13,
+   13
+  ],
+  "why": "title低類似(Hiyoko brand/おくさまは女子高生)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "girl",
+   "girl-1990"
+  ],
+  "titles": [
+   "ガール",
+   "Girl"
+  ],
+  "n_dup": 2,
+  "verdict": "A_subset",
+  "detail": "girl⊆girl-1990→girl-1990にmerge",
+  "sizes": [
+   2,
+   2
+  ],
+  "why": "title低類似(ガール/Girl)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "oz-1992",
+   "oz-itsuki-2004"
+  ],
+  "titles": [
+   "オズマニュアル",
+   "OZ"
+  ],
+  "n_dup": 8,
+  "verdict": "A_subset",
+  "detail": "oz-1992⊆oz-itsuki-2004→oz-itsuki-2004にmerge",
+  "sizes": [
+   8,
+   10
+  ],
+  "why": "title低類似(オズマニュアル/OZ)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "amefuri-hime-to-sabaku-oji",
+   "ningyo-hime-to-hangyojin-oji"
+  ],
+  "titles": [
+   "雨降り姫と砂漠王子",
+   "人魚姫と半魚人王子"
+  ],
+  "n_dup": 1,
+  "verdict": "A_subset",
+  "detail": "amefuri-hime-to-sabaku-oji⊆ningyo-hime-to-hangyojin-oji→ningyo-hime-to-hangyojin-ojiにmerge",
+  "sizes": [
+   1,
+   1
+  ],
+  "why": "title低類似(雨降り姫と砂漠王子/人魚姫と半魚人王子)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "gogo-monster",
+   "monster"
+  ],
+  "titles": [
+   "GOGOモンスター",
+   "Monster"
+  ],
+  "n_dup": 18,
+  "verdict": "A_subset",
+  "detail": "gogo-monster⊆monster→monsterにmerge",
+  "sizes": [
+   18,
+   18
+  ],
+  "why": "title低類似(GOGOモンスター/Monster)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "minamo-no-sato-minasoko-no-mori",
+   "tatara-no-tsuji-ni"
+  ],
+  "titles": [
+   "水面の郷・水底の守",
+   "たたらの辻に…"
+  ],
+  "n_dup": 2,
+  "verdict": "A_subset",
+  "detail": "minamo-no-sato-minasoko-no-mori⊆tatara-no-tsuji-ni→tatara-no-tsuji-niにmerge",
+  "sizes": [
+   2,
+   2
+  ],
+  "why": "title低類似(水面の郷・水底の守/たたらの辻に…)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "jashin-densetsu",
+   "jashin-densetsu-2",
+   "jashin-densetsu-3",
+   "jashin-densetsu-4"
+  ],
+  "titles": [
+   "コンフュージョン",
+   "ダーク・マーメイド",
+   "ラスト・クリエイター",
+   "ラミア"
+  ],
+  "n_dup": 1,
+  "verdict": "D_review",
+  "detail": "NDL判定不能 unknown=1/1",
+  "sizes": [
+   1,
+   1,
+   1,
+   1
+  ],
+  "why": "D_review"
+ },
+ {
+  "slugs": [
+   "purple",
+   "purple-2"
+  ],
+  "titles": [
+   "パープル",
+   "Purple"
+  ],
+  "n_dup": 2,
+  "verdict": "A_subset",
+  "detail": "purple⊆purple-2→purple-2にmerge",
+  "sizes": [
+   2,
+   2
+  ],
+  "why": "title低類似(パープル/Purple)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "wilderness",
+   "wilderness-2"
+  ],
+  "titles": [
+   "Wilderness",
+   "ワイルダネス"
+  ],
+  "n_dup": 9,
+  "verdict": "A_subset",
+  "detail": "wilderness⊆wilderness-2→wilderness-2にmerge",
+  "sizes": [
+   9,
+   9
+  ],
+  "why": "title低類似(Wilderness/ワイルダネス)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "paakoreishon",
+   "percolation"
+  ],
+  "titles": [
+   "Percolation",
+   "パーコレイション"
+  ],
+  "n_dup": 1,
+  "verdict": "A_subset",
+  "detail": "paakoreishon⊆percolation→percolationにmerge",
+  "sizes": [
+   1,
+   1
+  ],
+  "why": "title低類似(Percolation/パーコレイション)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "noroi",
+   "urami"
+  ],
+  "titles": [
+   "呪",
+   "怨"
+  ],
+  "n_dup": 1,
+  "verdict": "A_subset",
+  "detail": "noroi⊆urami→uramiにmerge",
+  "sizes": [
+   1,
+   1
+  ],
+  "why": "title低類似(呪/怨)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "venus",
+   "venus-2015"
+  ],
+  "titles": [
+   "Venus",
+   "ヴィーナス"
+  ],
+  "n_dup": 2,
+  "verdict": "A_subset",
+  "detail": "venus⊆venus-2015→venus-2015にmerge",
+  "sizes": [
+   2,
+   2
+  ],
+  "why": "title低類似(Venus/ヴィーナス)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "god-mazinger",
+   "majindensetsu"
+  ],
+  "titles": [
+   "ゴッドマジンガー",
+   "魔神伝説"
+  ],
+  "n_dup": 4,
+  "verdict": "A_subset",
+  "detail": "god-mazinger⊆majindensetsu→majindensetsuにmerge",
+  "sizes": [
+   4,
+   4
+  ],
+  "why": "title低類似(ゴッドマジンガー/魔神伝説)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "last-man",
+   "lastman"
+  ],
+  "titles": [
+   "ラストマン",
+   "LASTMAN"
+  ],
+  "n_dup": 3,
+  "verdict": "A_subset",
+  "detail": "lastman⊆last-man→last-manにmerge",
+  "sizes": [
+   6,
+   3
+  ],
+  "why": "title低類似(LASTMAN/ラストマン)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "dreams",
+   "dreams-2"
+  ],
+  "titles": [
+   "Dreams",
+   "ドリームス"
+  ],
+  "n_dup": 82,
+  "verdict": "A_subset",
+  "detail": "dreams⊆dreams-2→dreams-2にmerge",
+  "sizes": [
+   82,
+   82
+  ],
+  "why": "title低類似(Dreams/ドリームス)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "rouge",
+   "rouge-2004"
+  ],
+  "titles": [
+   "ルージュ",
+   "Rouge"
+  ],
+  "n_dup": 2,
+  "verdict": "A_subset",
+  "detail": "rouge⊆rouge-2004→rouge-2004にmerge",
+  "sizes": [
+   2,
+   2
+  ],
+  "why": "title低類似(ルージュ/Rouge)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "bunbuku-tanuki-no-teii-paateii",
+   "bunbuku-teii-potto-purasu"
+  ],
+  "titles": [
+   "ぶんぶくたぬきのティーパーティ",
+   "ぶんぶくティーポット+"
+  ],
+  "n_dup": 7,
+  "verdict": "A_subset",
+  "detail": "bunbuku-tanuki-no-teii-paateii⊆bunbuku-teii-potto-purasu→bunbuku-teii-potto-purasuにmerge",
+  "sizes": [
+   7,
+   7
+  ],
+  "why": "title低類似(ぶんぶくたぬきのティーパーテ/ぶんぶくティーポット+)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "violence-jack",
+   "violence-jack-2",
+   "violence-jack-3"
+  ],
+  "isbn": "9784537036015",
+  "why": "NDL無"
+ },
+ {
+  "slugs": [
+   "bakudan-1985",
+   "bakudan-miyashita-1995"
+  ],
+  "titles": [
+   "ばくだん",
+   "BAKUDAN"
+  ],
+  "n_dup": 5,
+  "verdict": "A_subset",
+  "detail": "bakudan-1985⊆bakudan-miyashita-1995→bakudan-miyashita-1995にmerge",
+  "sizes": [
+   5,
+   5
+  ],
+  "why": "title低類似(ばくだん/BAKUDAN)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "crows",
+   "crows-2"
+  ],
+  "titles": [
+   "CROWS",
+   "クローズ"
+  ],
+  "n_dup": 26,
+  "verdict": "A_subset",
+  "detail": "crows⊆crows-2→crows-2にmerge",
+  "sizes": [
+   26,
+   26
+  ],
+  "why": "title低類似(CROWS/クローズ)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "2-hearts",
+   "2-hearts-2"
+  ],
+  "titles": [
+   "Two Hearts",
+   "2 hearts"
+  ],
+  "n_dup": 4,
+  "verdict": "A_subset",
+  "detail": "2-hearts⊆2-hearts-2→2-hearts-2にmerge",
+  "sizes": [
+   4,
+   4
+  ],
+  "why": "title低類似(Two Hearts/2 hearts)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "kita-no-doryu",
+   "kita-no-mogura"
+  ],
+  "titles": [
+   "北の土龍",
+   "北の土竜"
+  ],
+  "n_dup": 20,
+  "verdict": "A_subset",
+  "detail": "kita-no-doryu⊆kita-no-mogura→kita-no-moguraにmerge",
+  "sizes": [
+   20,
+   20
+  ],
+  "why": "subset側にISBN無し巻あり"
+ },
+ {
+  "slugs": [
+   "ijiwaru",
+   "oh-my-darling"
+  ],
+  "titles": [
+   "Darling!",
+   "Oh!myダーリン"
+  ],
+  "n_dup": 13,
+  "verdict": "A_subset",
+  "detail": "ijiwaru⊆oh-my-darling→oh-my-darlingにmerge",
+  "sizes": [
+   13,
+   13
+  ],
+  "why": "title低類似(Darling!/Oh!myダーリン)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "angelic-conversation",
+   "angelic-conversation-2008"
+  ],
+  "titles": [
+   "Are you enemy?",
+   "エンジェリック・カンバセーション"
+  ],
+  "n_dup": 1,
+  "verdict": "A_subset",
+  "detail": "angelic-conversation⊆angelic-conversation-2008→angelic-conversation-2008にmerge",
+  "sizes": [
+   1,
+   1
+  ],
+  "why": "title低類似(Are you enemy?/エンジェリック・カンバセーシ)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "tea-time-1986",
+   "teiitaimu"
+  ],
+  "titles": [
+   "ティータイム",
+   "ティータイム"
+  ],
+  "n_dup": 3,
+  "verdict": "A_subset",
+  "detail": "tea-time-1986⊆teiitaimu→teiitaimuにmerge",
+  "sizes": [
+   3,
+   4
+  ],
+  "why": "subset側にISBN無し巻あり"
+ },
+ {
+  "slugs": [
+   "pyua",
+   "shiawase-ni-naritai"
+  ],
+  "titles": [
+   "純愛",
+   "Pure"
+  ],
+  "n_dup": 4,
+  "verdict": "A_subset",
+  "detail": "pyua⊆shiawase-ni-naritai→shiawase-ni-naritaiにmerge",
+  "sizes": [
+   4,
+   4
+  ],
+  "why": "title低類似(純愛/Pure)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "gon-2",
+   "gon-selection"
+  ],
+  "titles": [
+   "ゴン",
+   "GON SELECTION"
+  ],
+  "n_dup": 7,
+  "verdict": "A_subset",
+  "detail": "gon-2⊆gon-selection→gon-selectionにmerge",
+  "sizes": [
+   7,
+   7
+  ],
+  "why": "title低類似(ゴン/GON SELECTION)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "bar-lemon-heart",
+   "bar-lemon-heart-2"
+  ],
+  "titles": [
+   "BARレモン・ハート",
+   "BARレモン・ハート"
+  ],
+  "n_dup": 37,
+  "verdict": "A_subset",
+  "detail": "bar-lemon-heart⊆bar-lemon-heart-2→bar-lemon-heart-2にmerge",
+  "sizes": [
+   37,
+   62
+  ],
+  "why": "subset側にISBN無し巻あり"
+ },
+ {
+  "slugs": [
+   "kuranpu-puremiamu-korekushon-majikkunaito-reiaasu",
+   "magic-knight-rayearth"
+  ],
+  "titles": [
+   "CLAMP PREMIUM COLLECTION魔法騎士(マジックナイト)レイアース",
+   "魔法騎士レイアース"
+  ],
+  "n_dup": 10,
+  "verdict": "A_subset",
+  "detail": "kuranpu-puremiamu-korekushon-majikkunaito-reiaasu⊆magic-knight-rayearth→magic-knight-rayearthにmerge",
+  "sizes": [
+   10,
+   10
+  ],
+  "why": "title低類似(CLAMP PREMIUM /魔法騎士レイアース)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "crusader",
+   "kuruseidaa"
+  ],
+  "titles": [
+   "クルセイダー",
+   "Crusader"
+  ],
+  "n_dup": 2,
+  "verdict": "A_subset",
+  "detail": "crusader⊆kuruseidaa→kuruseidaaにmerge",
+  "sizes": [
+   2,
+   2
+  ],
+  "why": "title低類似(クルセイダー/Crusader)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "rising-sun",
+   "rising-sun-1998"
+  ],
+  "titles": [
+   "ライジングサン",
+   "Rising sun"
+  ],
+  "n_dup": 2,
+  "verdict": "A_subset",
+  "detail": "rising-sun-1998⊆rising-sun→rising-sunにmerge",
+  "sizes": [
+   15,
+   2
+  ],
+  "why": "title低類似(Rising sun/ライジングサン)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "angel-yujin",
+   "jump-up-angel"
+  ],
+  "titles": [
+   "ANGEL",
+   "Jump upエンジェル"
+  ],
+  "n_dup": 2,
+  "verdict": "A_subset",
+  "detail": "jump-up-angel⊆angel-yujin→angel-yujinにmerge",
+  "sizes": [
+   13,
+   2
+  ],
+  "why": "title低類似(Jump upエンジェル/ANGEL)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "gokudo-kun-manyuki",
+   "gokudo-kun-manyuki-2"
+  ],
+  "titles": [
+   "ゴクドーくん漫遊記",
+   "極道くん漫遊記"
+  ],
+  "n_dup": 3,
+  "verdict": "A_subset",
+  "detail": "gokudo-kun-manyuki⊆gokudo-kun-manyuki-2→gokudo-kun-manyuki-2にmerge",
+  "sizes": [
+   3,
+   3
+  ],
+  "why": "title低類似(ゴクドーくん漫遊記/極道くん漫遊記)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "darkness",
+   "darkness-2006"
+  ],
+  "titles": [
+   "Darkness",
+   "ダークネス"
+  ],
+  "n_dup": 6,
+  "verdict": "A_subset",
+  "detail": "darkness⊆darkness-2006→darkness-2006にmerge",
+  "sizes": [
+   6,
+   6
+  ],
+  "why": "title低類似(Darkness/ダークネス)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "akatsuki-otokojuku",
+   "akatsuki-otokojuku-2"
+  ],
+  "titles": [
+   "暁!!男塾",
+   "曉!!男塾"
+  ],
+  "n_dup": 25,
+  "verdict": "A_subset",
+  "detail": "akatsuki-otokojuku⊆akatsuki-otokojuku-2→akatsuki-otokojuku-2にmerge",
+  "sizes": [
+   25,
+   25
+  ],
+  "why": "title低類似(暁!!男塾/曉!!男塾)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "fushigi-toshokan",
+   "slope-manshon-ni-okaeri"
+  ],
+  "titles": [
+   "不思議図書館",
+   "スロップマンションにお帰り"
+  ],
+  "n_dup": 2,
+  "verdict": "A_subset",
+  "detail": "fushigi-toshokan⊆slope-manshon-ni-okaeri→slope-manshon-ni-okaeriにmerge",
+  "sizes": [
+   2,
+   2
+  ],
+  "why": "title低類似(不思議図書館/スロップマンションにお帰り)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "d-mons",
+   "d-mons-2"
+  ],
+  "titles": [
+   "Dämons",
+   "ダイモンズ"
+  ],
+  "n_dup": 13,
+  "verdict": "A_subset",
+  "detail": "d-mons⊆d-mons-2→d-mons-2にmerge",
+  "sizes": [
+   13,
+   13
+  ],
+  "why": "title低類似(Dämons/ダイモンズ)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "kowai-hon",
+   "umezu-kazuo-kowai-hon",
+   "zoku-kowai-hon"
+  ],
+  "isbn": "9784257904786",
+  "why": "類似不足 ndl=口が耳までさける時 ; ヘビおばさん ; 蛇娘と"
+ },
+ {
+  "slugs": [
+   "kowai-hon",
+   "umezu-kazuo-kowai-hon",
+   "zoku-kowai-hon"
+  ],
+  "isbn": "9784257904847",
+  "why": "類似不足 ndl=異形. 1"
+ },
+ {
+  "slugs": [
+   "kowai-hon",
+   "umezu-kazuo-kowai-hon",
+   "zoku-kowai-hon"
+  ],
+  "isbn": "9784257904854",
+  "why": "類似不足 ndl=異形. 2"
+ },
+ {
+  "slugs": [
+   "kowai-hon",
+   "umezu-kazuo-kowai-hon",
+   "zoku-kowai-hon"
+  ],
+  "isbn": "9784257904861",
+  "why": "類似不足 ndl=怪物"
+ },
+ {
+  "slugs": [
+   "kowai-hon",
+   "umezu-kazuo-kowai-hon",
+   "zoku-kowai-hon"
+  ],
+  "isbn": "9784257904878",
+  "why": "類似不足 ndl=呪縛"
+ },
+ {
+  "slugs": [
+   "joker-1998-3",
+   "joker-yamane-1997"
+  ],
+  "titles": [
+   "Joker",
+   "JOKER"
+  ],
+  "n_dup": 1,
+  "verdict": "D_review",
+  "detail": "NDL判定不能 unknown=1/1",
+  "sizes": [
+   3,
+   3
+  ],
+  "why": "D_review"
+ },
+ {
+  "slugs": [
+   "ziggurat",
+   "ziggurat-2"
+  ],
+  "titles": [
+   "Ziggurat",
+   "ジグラット"
+  ],
+  "n_dup": 9,
+  "verdict": "A_subset",
+  "detail": "ziggurat⊆ziggurat-2→ziggurat-2にmerge",
+  "sizes": [
+   9,
+   9
+  ],
+  "why": "title低類似(Ziggurat/ジグラット)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "ringo",
+   "ringo-takamochi"
+  ],
+  "titles": [
+   "Ringo",
+   "リンゴ"
+  ],
+  "n_dup": 3,
+  "verdict": "A_subset",
+  "detail": "ringo⊆ringo-takamochi→ringo-takamochiにmerge",
+  "sizes": [
+   3,
+   3
+  ],
+  "why": "title低類似(Ringo/リンゴ)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "kaito-lupin-den-aventurier",
+   "kaito-rupan-den-abanchurie-tojo-hen"
+  ],
+  "titles": [
+   "怪盗ルパン伝アバンチュリエ",
+   "怪盗ルパン伝アバンチュリエ 登場編"
+  ],
+  "n_dup": 1,
+  "verdict": "D_review",
+  "detail": "NDL判定不能 unknown=1/1",
+  "sizes": [
+   6,
+   3
+  ],
+  "why": "D_review"
+ },
+ {
+  "slugs": [
+   "ningyo-hime-wa-koi-wo-uranau",
+   "ningyo-hime-wa-koi-wo-uranau-2"
+  ],
+  "titles": [
+   "人形姫は恋を占う",
+   "人魚姫は恋を占う"
+  ],
+  "n_dup": 3,
+  "verdict": "A_subset",
+  "detail": "ningyo-hime-wa-koi-wo-uranau⊆ningyo-hime-wa-koi-wo-uranau-2→ningyo-hime-wa-koi-wo-uranau-2にmerge",
+  "sizes": [
+   3,
+   3
+  ],
+  "why": "title低類似(人形姫は恋を占う/人魚姫は恋を占う)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "shinpika-mizuki-shigeru-den",
+   "watashi-ha-gegege"
+  ],
+  "titles": [
+   "神秘家水木しげる伝",
+   "私はゲゲゲ"
+  ],
+  "n_dup": 2,
+  "verdict": "A_subset",
+  "detail": "shinpika-mizuki-shigeru-den⊆watashi-ha-gegege→watashi-ha-gegegeにmerge",
+  "sizes": [
+   2,
+   2
+  ],
+  "why": "title低類似(神秘家水木しげる伝/私はゲゲゲ)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "perman",
+   "perman-fujiko-1979"
+  ],
+  "titles": [
+   "パーマン",
+   "パーマン"
+  ],
+  "n_dup": 10,
+  "verdict": "A_subset",
+  "detail": "perman-fujiko-1979⊆perman→permanにmerge",
+  "sizes": [
+   16,
+   10
+  ],
+  "why": "subset側にISBN無し巻あり"
+ },
+ {
+  "slugs": [
+   "shimi",
+   "shimi-2"
+  ],
+  "titles": [
+   "Shimi",
+   "凍み"
+  ],
+  "n_dup": 1,
+  "verdict": "A_subset",
+  "detail": "shimi⊆shimi-2→shimi-2にmerge",
+  "sizes": [
+   1,
+   1
+  ],
+  "why": "title低類似(Shimi/凍み)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "kiss-2014",
+   "kiss-xxxx"
+  ],
+  "titles": [
+   "キス",
+   "Kissxxxx"
+  ],
+  "n_dup": 3,
+  "verdict": "A_subset",
+  "detail": "kiss-xxxx⊆kiss-2014→kiss-2014にmerge",
+  "sizes": [
+   4,
+   3
+  ],
+  "why": "title低類似(Kissxxxx/キス)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "tokyo-toyboxes",
+   "tokyo-toyboxes-2020"
+  ],
+  "titles": [
+   "Tokyo toyboxes",
+   "東京トイボクシーズ"
+  ],
+  "n_dup": 5,
+  "verdict": "A_subset",
+  "detail": "tokyo-toyboxes⊆tokyo-toyboxes-2020→tokyo-toyboxes-2020にmerge",
+  "sizes": [
+   5,
+   5
+  ],
+  "why": "title低類似(Tokyo toyboxes/東京トイボクシーズ)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "red-dragon",
+   "red-dragon-ikeno-2016"
+  ],
+  "titles": [
+   "Red dragon",
+   "レッドドラゴン"
+  ],
+  "n_dup": 4,
+  "verdict": "A_subset",
+  "detail": "red-dragon⊆red-dragon-ikeno-2016→red-dragon-ikeno-2016にmerge",
+  "sizes": [
+   4,
+   4
+  ],
+  "why": "subset側にISBN無し巻あり"
+ },
+ {
+  "slugs": [
+   "otona-no-honto-ni-atta-waraeru-hanashi",
+   "otona-no-honto-ni-atta-waraeru-hanashi-2"
+  ],
+  "titles": [
+   "オトナの本当にあった笑える話",
+   "大人の本当にあった笑える話"
+  ],
+  "n_dup": 1,
+  "verdict": "A_subset",
+  "detail": "otona-no-honto-ni-atta-waraeru-hanashi⊆otona-no-honto-ni-atta-waraeru-hanashi-2→otona-no-honto-ni-atta-waraeru-hanashi-2にmerge",
+  "sizes": [
+   1,
+   1
+  ],
+  "why": "title低類似(オトナの本当にあった笑える話/大人の本当にあった笑える話)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "yatsuhakamura",
+   "yatsuhakamura-1996"
+  ],
+  "titles": [
+   "八つ墓村",
+   "八つ墓村"
+  ],
+  "n_dup": 1,
+  "verdict": "A_subset",
+  "detail": "yatsuhakamura⊆yatsuhakamura-1996→yatsuhakamura-1996にmerge",
+  "sizes": [
+   1,
+   2
+  ],
+  "why": "subset側にISBN無し巻あり"
+ },
+ {
+  "slugs": [
+   "la-blue-girl",
+   "la-blue-girl-2"
+  ],
+  "titles": [
+   "La★Blue Girl",
+   "ラ・ブルー・ガール"
+  ],
+  "n_dup": 4,
+  "verdict": "A_subset",
+  "detail": "la-blue-girl⊆la-blue-girl-2→la-blue-girl-2にmerge",
+  "sizes": [
+   4,
+   4
+  ],
+  "why": "title低類似(La★Blue Girl/ラ・ブルー・ガール)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "amenohosoku",
+   "ragunasenki"
+  ],
+  "titles": [
+   "雨の法則",
+   "ラグナ戦記"
+  ],
+  "n_dup": 1,
+  "verdict": "A_subset",
+  "detail": "amenohosoku⊆ragunasenki→ragunasenkiにmerge",
+  "sizes": [
+   1,
+   1
+  ],
+  "why": "title低類似(雨の法則/ラグナ戦記)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "take-it-easy",
+   "take-it-easy-2000"
+  ],
+  "titles": [
+   "TAKE IT EASY",
+   "テイクイットイージー"
+  ],
+  "n_dup": 2,
+  "verdict": "A_subset",
+  "detail": "take-it-easy⊆take-it-easy-2000→take-it-easy-2000にmerge",
+  "sizes": [
+   2,
+   2
+  ],
+  "why": "title低類似(TAKE IT EASY/テイクイットイージー)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "akuma-no-mama",
+   "akuma-no-mama-2"
+  ],
+  "titles": [
+   "Akuma no mama",
+   "あくまのまま"
+  ],
+  "n_dup": 2,
+  "verdict": "A_subset",
+  "detail": "akuma-no-mama⊆akuma-no-mama-2→akuma-no-mama-2にmerge",
+  "sizes": [
+   2,
+   2
+  ],
+  "why": "title低類似(Akuma no mama/あくまのまま)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "ikeda-riyoko-zentanpen",
+   "shiroi-egumonto"
+  ],
+  "titles": [
+   "ウェディング・ドレス",
+   "白いエグモント"
+  ],
+  "n_dup": 1,
+  "verdict": "A_subset",
+  "detail": "ikeda-riyoko-zentanpen⊆shiroi-egumonto→shiroi-egumontoにmerge",
+  "sizes": [
+   1,
+   1
+  ],
+  "why": "title低類似(ウェディング・ドレス/白いエグモント)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "harikeen",
+   "hurricane"
+  ],
+  "titles": [
+   "Hurricane",
+   "ハリケーン"
+  ],
+  "n_dup": 1,
+  "verdict": "A_subset",
+  "detail": "hurricane⊆harikeen→harikeenにmerge",
+  "sizes": [
+   2,
+   1
+  ],
+  "why": "title低類似(ハリケーン/Hurricane)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "horizon-blue",
+   "horizon-blue-2"
+  ],
+  "titles": [
+   "Horizon blue",
+   "ホライズンブルー"
+  ],
+  "n_dup": 1,
+  "verdict": "A_subset",
+  "detail": "horizon-blue⊆horizon-blue-2→horizon-blue-2にmerge",
+  "sizes": [
+   1,
+   1
+  ],
+  "why": "title低類似(Horizon blue/ホライズンブルー)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "romancing-saga",
+   "romanshingu-saga"
+  ],
+  "titles": [
+   "Romancing sa・ga",
+   "ロマンシング サ・ガ2"
+  ],
+  "n_dup": 3,
+  "verdict": "A_subset",
+  "detail": "romancing-saga⊆romanshingu-saga→romanshingu-sagaにmerge",
+  "sizes": [
+   3,
+   3
+  ],
+  "why": "title低類似(Romancing sa・g/ロマンシング サ・ガ2)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "okinosawa-gurafitei",
+   "okinosawa-gurafitei-2"
+  ],
+  "titles": [
+   "沖の澤グラフィティ",
+   "沖ノ澤グラフィティ"
+  ],
+  "n_dup": 2,
+  "verdict": "A_subset",
+  "detail": "okinosawa-gurafitei⊆okinosawa-gurafitei-2→okinosawa-gurafitei-2にmerge",
+  "sizes": [
+   2,
+   2
+  ],
+  "why": "subset側にISBN無し巻あり"
+ },
+ {
+  "slugs": [
+   "botsu-chan-no-jidai",
+   "botsu-chan-no-jidai-2"
+  ],
+  "titles": [
+   "『坊っちゃん』の時代",
+   "坊ちゃんの時代"
+  ],
+  "n_dup": 2,
+  "verdict": "D_review",
+  "detail": "NDL判定不能 unknown=1/2",
+  "sizes": [
+   4,
+   3
+  ],
+  "why": "D_review"
+ },
+ {
+  "slugs": [
+   "shojo-nami",
+   "shojonami"
+  ],
+  "titles": [
+   "少女菜美",
+   "少女「菜美」"
+  ],
+  "n_dup": 1,
+  "verdict": "A_subset",
+  "detail": "shojo-nami⊆shojonami→shojonamiにmerge",
+  "sizes": [
+   1,
+   1
+  ],
+  "why": "subset側にISBN無し巻あり"
+ },
+ {
+  "slugs": [
+   "princess-lucia",
+   "princess-lucia-2"
+  ],
+  "titles": [
+   "Princess Lucia",
+   "プリンセスルシア"
+  ],
+  "n_dup": 5,
+  "verdict": "A_subset",
+  "detail": "princess-lucia⊆princess-lucia-2→princess-lucia-2にmerge",
+  "sizes": [
+   5,
+   5
+  ],
+  "why": "title低類似(Princess Lucia/プリンセスルシア)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "15sai",
+   "16-sai-kiss",
+   "17sai",
+   "19sai",
+   "27sai",
+   "sai",
+   "sai-1998",
+   "sai-2002"
+  ],
+  "titles": [
+   "15才",
+   "16歳KISS",
+   "17歳",
+   "19歳",
+   "27歳",
+   "菜",
+   "彩",
+   "彩"
+  ],
+  "n_dup": 1,
+  "verdict": "D_review",
+  "detail": "NDL判定不能 unknown=1/1",
+  "sizes": [
+   3,
+   1,
+   2,
+   1,
+   1,
+   12,
+   1,
+   1
+  ],
+  "why": "D_review"
+ },
+ {
+  "slugs": [
+   "yugio-zearu",
+   "yugio-zearu-2"
+  ],
+  "titles": [
+   "遊☆戯☆王ZEXAL",
+   "遊☆戯☆王ゼアル"
+  ],
+  "n_dup": 9,
+  "verdict": "A_subset",
+  "detail": "yugio-zearu⊆yugio-zearu-2→yugio-zearu-2にmerge",
+  "sizes": [
+   9,
+   9
+  ],
+  "why": "title低類似(遊☆戯☆王ZEXAL/遊☆戯☆王ゼアル)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "coji-coji",
+   "coji-coji-2"
+  ],
+  "titles": [
+   "COJI‐COJI",
+   "コジコジ"
+  ],
+  "n_dup": 4,
+  "verdict": "A_subset",
+  "detail": "coji-coji⊆coji-coji-2→coji-coji-2にmerge",
+  "sizes": [
+   4,
+   4
+  ],
+  "why": "title低類似(COJI‐COJI/コジコジ)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "makai-sangokushi-kimaira",
+   "makai-sangokushi-kimaira-2"
+  ],
+  "titles": [
+   "魔界三国志chimaera",
+   "魔界三国志キマイラ"
+  ],
+  "n_dup": 1,
+  "verdict": "A_subset",
+  "detail": "makai-sangokushi-kimaira-2⊆makai-sangokushi-kimaira→makai-sangokushi-kimairaにmerge",
+  "sizes": [
+   3,
+   1
+  ],
+  "why": "title低類似(魔界三国志キマイラ/魔界三国志chimaera)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "cool",
+   "cool-rental-body-guard"
+  ],
+  "titles": [
+   "COOL",
+   "COOL"
+  ],
+  "n_dup": 2,
+  "verdict": "A_subset",
+  "detail": "cool⊆cool-rental-body-guard→cool-rental-body-guardにmerge",
+  "sizes": [
+   2,
+   5
+  ],
+  "why": "subset側にISBN無し巻あり"
+ },
+ {
+  "slugs": [
+   "hal-ayase-2017",
+   "hal-makino-2010"
+  ],
+  "titles": [
+   "ハル",
+   "Hal"
+  ],
+  "n_dup": 1,
+  "verdict": "A_subset",
+  "detail": "hal-makino-2010⊆hal-ayase-2017→hal-ayase-2017にmerge",
+  "sizes": [
+   2,
+   1
+  ],
+  "why": "title低類似(Hal/ハル)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "kaidan-kyuden",
+   "tenkafun"
+  ],
+  "titles": [
+   "階段宮殿",
+   "天花粉"
+  ],
+  "n_dup": 1,
+  "verdict": "A_subset",
+  "detail": "kaidan-kyuden⊆tenkafun→tenkafunにmerge",
+  "sizes": [
+   1,
+   1
+  ],
+  "why": "subset側にISBN無し巻あり"
+ },
+ {
+  "slugs": [
+   "samurai-spirits",
+   "samurai-spirits-shimabara-amakusa-jashin-shiro-kouryaku-hen"
+  ],
+  "titles": [
+   "サムライスピリッツ",
+   "SAMURAI SPIRITS"
+  ],
+  "n_dup": 3,
+  "verdict": "A_subset",
+  "detail": "samurai-spirits⊆samurai-spirits-shimabara-amakusa-jashin-shiro-kouryaku-hen→samurai-spirits-shimabara-amakusa-jashin-shiro-kouryaku-henにmerge",
+  "sizes": [
+   3,
+   3
+  ],
+  "why": "title低類似(サムライスピリッツ/SAMURAI SPIRIT)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "clamp-premium-collection-magic-knight-rayearth-2",
+   "majikku-naito-reiaasu-2"
+  ],
+  "titles": [
+   "CLAMP PREMIUM COLLECTION魔法騎士(マジックナイト)レイアース2",
+   "魔法騎士レイアース2"
+  ],
+  "n_dup": 9,
+  "verdict": "A_subset",
+  "detail": "clamp-premium-collection-magic-knight-rayearth-2⊆majikku-naito-reiaasu-2→majikku-naito-reiaasu-2にmerge",
+  "sizes": [
+   9,
+   9
+  ],
+  "why": "title低類似(CLAMP PREMIUM /魔法騎士レイアース2)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "nee-piyo-chan",
+   "nee-piyo-chan-2"
+  ],
+  "titles": [
+   "ねぇ、ぴよちゃん",
+   "ねえ、ぴよちゃん"
+  ],
+  "n_dup": 12,
+  "verdict": "A_subset",
+  "detail": "nee-piyo-chan⊆nee-piyo-chan-2→nee-piyo-chan-2にmerge",
+  "sizes": [
+   12,
+   12
+  ],
+  "why": "title低類似(ねぇ、ぴよちゃん/ねえ、ぴよちゃん)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "kirara",
+   "kirara-hiramatsu-1987"
+  ],
+  "titles": [
+   "Kirara",
+   "キララ"
+  ],
+  "n_dup": 6,
+  "verdict": "A_subset",
+  "detail": "kirara⊆kirara-hiramatsu-1987→kirara-hiramatsu-1987にmerge",
+  "sizes": [
+   6,
+   7
+  ],
+  "why": "title低類似(Kirara/キララ)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "mina-sama-no-omocha-desu",
+   "mina-sama-no-omocha-desu-2"
+  ],
+  "titles": [
+   "皆様の玩具(オモチャ)です",
+   "皆様の玩具です"
+  ],
+  "n_dup": 9,
+  "verdict": "A_subset",
+  "detail": "mina-sama-no-omocha-desu⊆mina-sama-no-omocha-desu-2→mina-sama-no-omocha-desu-2にmerge",
+  "sizes": [
+   9,
+   9
+  ],
+  "why": "title低類似(皆様の玩具(オモチャ)です/皆様の玩具です)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "akihi",
+   "akihi-2"
+  ],
+  "titles": [
+   "〔アキ〕姫",
+   "燁姫"
+  ],
+  "n_dup": 28,
+  "verdict": "A_subset",
+  "detail": "akihi⊆akihi-2→akihi-2にmerge",
+  "sizes": [
+   28,
+   28
+  ],
+  "why": "title低類似(〔アキ〕姫/燁姫)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "heiwa-no-kane-series",
+   "nakazawa-keiji-heiwa-manga-sakuhinshu"
+  ],
+  "titles": [
+   "平和の鐘シリーズ",
+   "中沢啓治平和マンガ作品集"
+  ],
+  "n_dup": 20,
+  "verdict": "A_subset",
+  "detail": "heiwa-no-kane-series⊆nakazawa-keiji-heiwa-manga-sakuhinshu→nakazawa-keiji-heiwa-manga-sakuhinshuにmerge",
+  "sizes": [
+   20,
+   20
+  ],
+  "why": "title低類似(平和の鐘シリーズ/中沢啓治平和マンガ作品集)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "abekubo-kyoju-no-rifujin-na-kogi",
+   "abekubo-kyoju-no-rifujin-na-kogi-2"
+  ],
+  "titles": [
+   "安倍窪教授の理不尽な講義",
+   "安部窪教授の理不尽な講義"
+  ],
+  "n_dup": 2,
+  "verdict": "A_subset",
+  "detail": "abekubo-kyoju-no-rifujin-na-kogi⊆abekubo-kyoju-no-rifujin-na-kogi-2→abekubo-kyoju-no-rifujin-na-kogi-2にmerge",
+  "sizes": [
+   2,
+   2
+  ],
+  "why": "title低類似(安倍窪教授の理不尽な講義/安部窪教授の理不尽な講義)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "sakura-2020",
+   "sakura-mon"
+  ],
+  "titles": [
+   "さくら",
+   "桜moon"
+  ],
+  "n_dup": 1,
+  "verdict": "A_subset",
+  "detail": "sakura-2020⊆sakura-mon→sakura-monにmerge",
+  "sizes": [
+   1,
+   2
+  ],
+  "why": "title低類似(さくら/桜moon)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "mataro-ga-kuru",
+   "mataro-ga-kuru-2020"
+  ],
+  "titles": [
+   "魔太郎がくる!!",
+   "魔太郎がくる!!"
+  ],
+  "n_dup": 1,
+  "verdict": "A_subset",
+  "detail": "mataro-ga-kuru⊆mataro-ga-kuru-2020→mataro-ga-kuru-2020にmerge",
+  "sizes": [
+   1,
+   9
+  ],
+  "why": "subset側にISBN無し巻あり"
+ },
+ {
+  "slugs": [
+   "kashi-battle",
+   "kashi-battle-2"
+  ],
+  "titles": [
+   "KASHI BATTLE",
+   "カシバトル"
+  ],
+  "n_dup": 2,
+  "verdict": "A_subset",
+  "detail": "kashi-battle⊆kashi-battle-2→kashi-battle-2にmerge",
+  "sizes": [
+   2,
+   2
+  ],
+  "why": "title低類似(KASHI BATTLE/カシバトル)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "kame",
+   "kame-2"
+  ],
+  "titles": [
+   "かめ!",
+   "カメ"
+  ],
+  "n_dup": 5,
+  "verdict": "A_subset",
+  "detail": "kame⊆kame-2→kame-2にmerge",
+  "sizes": [
+   5,
+   5
+  ],
+  "why": "title低類似(かめ!/カメ)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "exhibition",
+   "exhibition-1996"
+  ],
+  "titles": [
+   "エキシビション",
+   "EXHIIBITION"
+  ],
+  "n_dup": 1,
+  "verdict": "A_subset",
+  "detail": "exhibition⊆exhibition-1996→exhibition-1996にmerge",
+  "sizes": [
+   1,
+   1
+  ],
+  "why": "title低類似(エキシビション/EXHIIBITION)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "joker-1998-2",
+   "joker-2000"
+  ],
+  "titles": [
+   "JOKER",
+   "ジョーカー"
+  ],
+  "n_dup": 3,
+  "verdict": "A_subset",
+  "detail": "joker-1998-2⊆joker-2000→joker-2000にmerge",
+  "sizes": [
+   3,
+   3
+  ],
+  "why": "title低類似(JOKER/ジョーカー)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "gurazeni-tokyo-dome-hen",
+   "gurazeni-tokyo-domuhen"
+  ],
+  "titles": [
+   "Gurazeni",
+   "グラゼニ ～東京ドーム編～"
+  ],
+  "n_dup": 5,
+  "verdict": "A_subset",
+  "detail": "gurazeni-tokyo-dome-hen⊆gurazeni-tokyo-domuhen→gurazeni-tokyo-domuhenにmerge",
+  "sizes": [
+   5,
+   5
+  ],
+  "why": "title低類似(Gurazeni/グラゼニ ～東京ドーム編～)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "tales-of-the-abyss",
+   "tales-of-the-abyss-2"
+  ],
+  "titles": [
+   "テイルズオブジアビス",
+   "TALES OF THE ABYSS"
+  ],
+  "n_dup": 2,
+  "verdict": "A_subset",
+  "detail": "tales-of-the-abyss⊆tales-of-the-abyss-2→tales-of-the-abyss-2にmerge",
+  "sizes": [
+   2,
+   2
+  ],
+  "why": "title低類似(テイルズオブジアビス/TALES OF THE A)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "ninja-hattori-kun",
+   "ninjahattori-kun"
+  ],
+  "titles": [
+   "忍者ハットリくん",
+   "忍者ハットリくん"
+  ],
+  "n_dup": 11,
+  "verdict": "A_subset",
+  "detail": "ninjahattori-kun⊆ninja-hattori-kun→ninja-hattori-kunにmerge",
+  "sizes": [
+   13,
+   11
+  ],
+  "why": "subset側にISBN無し巻あり"
+ },
+ {
+  "slugs": [
+   "ring",
+   "ring-inagaki-1999"
+  ],
+  "titles": [
+   "RiNG",
+   "リング"
+  ],
+  "n_dup": 7,
+  "verdict": "A_subset",
+  "detail": "ring⊆ring-inagaki-1999→ring-inagaki-1999にmerge",
+  "sizes": [
+   7,
+   7
+  ],
+  "why": "title低類似(RiNG/リング)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "ninku-2",
+   "ninku-zero"
+  ],
+  "titles": [
+   "Ninku",
+   "忍空 零"
+  ],
+  "n_dup": 1,
+  "verdict": "A_subset",
+  "detail": "ninku-zero⊆ninku-2→ninku-2にmerge",
+  "sizes": [
+   11,
+   7
+  ],
+  "why": "title低類似(忍空 零/Ninku)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "ninku-2",
+   "ninku-2nd-stage"
+  ],
+  "titles": [
+   "Ninku",
+   "忍空2nd stage"
+  ],
+  "n_dup": 1,
+  "verdict": "A_subset",
+  "detail": "ninku-2nd-stage⊆ninku-2→ninku-2にmerge",
+  "sizes": [
+   11,
+   7
+  ],
+  "why": "title低類似(忍空2nd stage/Ninku)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "capcom-selection-maleficarum",
+   "capcom-selection-maleficarum-2"
+  ],
+  "titles": [
+   "カプコン・セレクションマレフィカールム",
+   "マレフィカールムOps Villa"
+  ],
+  "n_dup": 1,
+  "verdict": "A_subset",
+  "detail": "capcom-selection-maleficarum⊆capcom-selection-maleficarum-2→capcom-selection-maleficarum-2にmerge",
+  "sizes": [
+   1,
+   1
+  ],
+  "why": "title低類似(カプコン・セレクションマレフ/マレフィカールムOps Vi)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "atashi-ni-yarasena",
+   "atashi-ni-yarasena-stj"
+  ],
+  "titles": [
+   "教師にやらせな!",
+   "教師にやらせな!S・T・J"
+  ],
+  "n_dup": 1,
+  "verdict": "D_review",
+  "detail": "NDL判定不能 unknown=1/1",
+  "sizes": [
+   2,
+   2
+  ],
+  "why": "D_review"
+ },
+ {
+  "slugs": [
+   "angel-dust-neo",
+   "angel-dust-neo-nanase-2003"
+  ],
+  "titles": [
+   "エンジェル/ダスト",
+   "ANGEL/DUST neo"
+  ],
+  "n_dup": 1,
+  "verdict": "A_subset",
+  "detail": "angel-dust-neo⊆angel-dust-neo-nanase-2003→angel-dust-neo-nanase-2003にmerge",
+  "sizes": [
+   1,
+   1
+  ],
+  "why": "title低類似(エンジェル/ダスト/ANGEL/DUST neo)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "adobenchaa-2030-gakuen",
+   "adventure2030-gakuen"
+  ],
+  "titles": [
+   "アドベンチャー2030学園",
+   "Adventure2030学園"
+  ],
+  "n_dup": 5,
+  "verdict": "A_subset",
+  "detail": "adobenchaa-2030-gakuen⊆adventure2030-gakuen→adventure2030-gakuenにmerge",
+  "sizes": [
+   5,
+   5
+  ],
+  "why": "title低類似(アドベンチャー2030学園/Adventure2030学)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "uchi-no-kore-ga-kore-na-monde",
+   "uchi-no-kore-ga-kore-na-monde-2"
+  ],
+  "titles": [
+   "うちの相方(コレ)が腐(コレ)なもんで。",
+   "うちの相方が腐なもんで。"
+  ],
+  "n_dup": 5,
+  "verdict": "A_subset",
+  "detail": "uchi-no-kore-ga-kore-na-monde⊆uchi-no-kore-ga-kore-na-monde-2→uchi-no-kore-ga-kore-na-monde-2にmerge",
+  "sizes": [
+   5,
+   5
+  ],
+  "why": "title低類似(うちの相方(コレ)が腐(コレ/うちの相方が腐なもんで。)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "uingusu",
+   "wings"
+  ],
+  "titles": [
+   "WINGS",
+   "ウイングス"
+  ],
+  "n_dup": 6,
+  "verdict": "A_subset",
+  "detail": "uingusu⊆wings→wingsにmerge",
+  "sizes": [
+   6,
+   6
+  ],
+  "why": "title低類似(WINGS/ウイングス)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "jo-o-aishita-ansatsusha",
+   "shiroki-oji-no-koimonogatari"
+  ],
+  "titles": [
+   "女王を愛した暗殺者",
+   "白き王子の恋物語"
+  ],
+  "n_dup": 1,
+  "verdict": "A_subset",
+  "detail": "jo-o-aishita-ansatsusha⊆shiroki-oji-no-koimonogatari→shiroki-oji-no-koimonogatariにmerge",
+  "sizes": [
+   1,
+   1
+  ],
+  "why": "title低類似(女王を愛した暗殺者/白き王子の恋物語)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "anisaki-yuna-kessakushuu",
+   "happy-no-recipe"
+  ],
+  "titles": [
+   "Check!!",
+   "HAPPYのRECIPE"
+  ],
+  "n_dup": 1,
+  "verdict": "A_subset",
+  "detail": "anisaki-yuna-kessakushuu⊆happy-no-recipe→happy-no-recipeにmerge",
+  "sizes": [
+   1,
+   1
+  ],
+  "why": "title低類似(Check!!/HAPPYのRECIPE)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "doto-no-shojo",
+   "doto-no-shojo-2"
+  ],
+  "titles": [
+   "怒涛の少女",
+   "怒濤の少女"
+  ],
+  "n_dup": 3,
+  "verdict": "A_subset",
+  "detail": "doto-no-shojo⊆doto-no-shojo-2→doto-no-shojo-2にmerge",
+  "sizes": [
+   3,
+   3
+  ],
+  "why": "title低類似(怒涛の少女/怒濤の少女)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "dangerous-share",
+   "share"
+  ],
+  "titles": [
+   "DANGEROUSシェア",
+   "share"
+  ],
+  "n_dup": 2,
+  "verdict": "A_subset",
+  "detail": "dangerous-share⊆share→shareにmerge",
+  "sizes": [
+   2,
+   3
+  ],
+  "why": "title低類似(DANGEROUSシェア/share)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "daburusu-1992",
+   "doubles-1987"
+  ],
+  "titles": [
+   "Doubles",
+   "ダブルス"
+  ],
+  "n_dup": 2,
+  "verdict": "A_subset",
+  "detail": "daburusu-1992⊆doubles-1987→doubles-1987にmerge",
+  "sizes": [
+   2,
+   2
+  ],
+  "why": "title低類似(Doubles/ダブルス)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "silver",
+   "silver-suetsugu-2005"
+  ],
+  "titles": [
+   "シルバー",
+   "Silver"
+  ],
+  "n_dup": 9,
+  "verdict": "A_subset",
+  "detail": "silver⊆silver-suetsugu-2005→silver-suetsugu-2005にmerge",
+  "sizes": [
+   9,
+   9
+  ],
+  "why": "title低類似(シルバー/Silver)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "bastard-ankoku-no-hakaishin",
+   "bastard-ankoku-no-hakaishin-kanzenban-02-expansion"
+  ],
+  "isbn": "9784088718323",
+  "why": "NDL無"
+ },
+ {
+  "slugs": [
+   "real-kiss",
+   "real-kiss-2014"
+  ],
+  "titles": [
+   "Real kiss",
+   "リアルキス"
+  ],
+  "n_dup": 1,
+  "verdict": "A_subset",
+  "detail": "real-kiss⊆real-kiss-2014→real-kiss-2014にmerge",
+  "sizes": [
+   1,
+   1
+  ],
+  "why": "title低類似(Real kiss/リアルキス)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "gigant",
+   "gigant-2"
+  ],
+  "titles": [
+   "Gigant",
+   "ギガント"
+  ],
+  "n_dup": 10,
+  "verdict": "A_subset",
+  "detail": "gigant⊆gigant-2→gigant-2にmerge",
+  "sizes": [
+   10,
+   10
+  ],
+  "why": "title低類似(Gigant/ギガント)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "nico-says",
+   "nico-says-onozuka-1999"
+  ],
+  "titles": [
+   "NICO SAYS",
+   "dessin"
+  ],
+  "n_dup": 1,
+  "verdict": "A_subset",
+  "detail": "nico-says⊆nico-says-onozuka-1999→nico-says-onozuka-1999にmerge",
+  "sizes": [
+   1,
+   1
+  ],
+  "why": "title低類似(NICO SAYS/dessin)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "watashi-no-1-kagetsu-1000-en-gohobi",
+   "watashi-no-1-kagetsu-1000-en-gohobi-2"
+  ],
+  "titles": [
+   "わたしの1ケ月1000円ごほうび",
+   "わたしの1ヶ月1000円ごほうび"
+  ],
+  "n_dup": 2,
+  "verdict": "A_subset",
+  "detail": "watashi-no-1-kagetsu-1000-en-gohobi⊆watashi-no-1-kagetsu-1000-en-gohobi-2→watashi-no-1-kagetsu-1000-en-gohobi-2にmerge",
+  "sizes": [
+   2,
+   2
+  ],
+  "why": "title低類似(わたしの1ケ月1000円ごほ/わたしの1ヶ月1000円ごほ)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "jinba",
+   "jinba-2"
+  ],
+  "titles": [
+   "人馬",
+   "Jinba"
+  ],
+  "n_dup": 6,
+  "verdict": "A_subset",
+  "detail": "jinba⊆jinba-2→jinba-2にmerge",
+  "sizes": [
+   6,
+   6
+  ],
+  "why": "title低類似(人馬/Jinba)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "kunisaki-izumo-no-jijo",
+   "kunisaki-izumo-no-jijo-2"
+  ],
+  "titles": [
+   "國崎出雲の事情",
+   "国崎出雲の事情"
+  ],
+  "n_dup": 16,
+  "verdict": "A_subset",
+  "detail": "kunisaki-izumo-no-jijo⊆kunisaki-izumo-no-jijo-2→kunisaki-izumo-no-jijo-2にmerge",
+  "sizes": [
+   16,
+   16
+  ],
+  "why": "title低類似(國崎出雲の事情/国崎出雲の事情)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "re-birth",
+   "re-birth-2"
+  ],
+  "titles": [
+   "RE-BIRTH",
+   "リ・バース"
+  ],
+  "n_dup": 3,
+  "verdict": "A_subset",
+  "detail": "re-birth⊆re-birth-2→re-birth-2にmerge",
+  "sizes": [
+   3,
+   3
+  ],
+  "why": "title低類似(RE-BIRTH/リ・バース)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "redeyes",
+   "redeyes-2"
+  ],
+  "titles": [
+   "red Eyes",
+   "レッドアイズ"
+  ],
+  "n_dup": 27,
+  "verdict": "A_subset",
+  "detail": "redeyes⊆redeyes-2→redeyes-2にmerge",
+  "sizes": [
+   27,
+   27
+  ],
+  "why": "title低類似(red Eyes/レッドアイズ)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "aya-1999",
+   "aya-2004"
+  ],
+  "titles": [
+   "Aya",
+   "絢"
+  ],
+  "n_dup": 1,
+  "verdict": "A_subset",
+  "detail": "aya-1999⊆aya-2004→aya-2004にmerge",
+  "sizes": [
+   2,
+   2
+  ],
+  "why": "title低類似(Aya/絢)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "samurai-nanbaa-11",
+   "samurai-nanbaa-11-2"
+  ],
+  "titles": [
+   "サムライナンバー11",
+   "サムラナンバー11"
+  ],
+  "n_dup": 2,
+  "verdict": "A_subset",
+  "detail": "samurai-nanbaa-11⊆samurai-nanbaa-11-2→samurai-nanbaa-11-2にmerge",
+  "sizes": [
+   2,
+   2
+  ],
+  "why": "title低類似(サムライナンバー11/サムラナンバー11)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "bukkira-ni-yoroshiku",
+   "kibando"
+  ],
+  "titles": [
+   "ブッキラによろしく!",
+   "牙人"
+  ],
+  "n_dup": 3,
+  "verdict": "A_subset",
+  "detail": "bukkira-ni-yoroshiku⊆kibando→kibandoにmerge",
+  "sizes": [
+   3,
+   3
+  ],
+  "why": "title低類似(ブッキラによろしく!/牙人)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "ryugetsusho",
+   "ryuugetsushou"
+  ],
+  "titles": [
+   "流月抄",
+   "ベスティア"
+  ],
+  "n_dup": 4,
+  "verdict": "A_subset",
+  "detail": "ryugetsusho⊆ryuugetsushou→ryuugetsushouにmerge",
+  "sizes": [
+   4,
+   4
+  ],
+  "why": "title低類似(流月抄/ベスティア)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "kanon-another-story-wonderthree",
+   "wonder-3"
+  ],
+  "titles": [
+   "WONDER THREE",
+   "W3"
+  ],
+  "n_dup": 3,
+  "verdict": "A_subset",
+  "detail": "kanon-another-story-wonderthree⊆wonder-3→wonder-3にmerge",
+  "sizes": [
+   3,
+   3
+  ],
+  "why": "subset側にISBN無し巻あり"
+ },
+ {
+  "slugs": [
+   "setsuna",
+   "setsuna-1997"
+  ],
+  "titles": [
+   "Setsuna",
+   "刹那"
+  ],
+  "n_dup": 1,
+  "verdict": "A_subset",
+  "detail": "setsuna⊆setsuna-1997→setsuna-1997にmerge",
+  "sizes": [
+   1,
+   1
+  ],
+  "why": "title低類似(Setsuna/刹那)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "golondrina",
+   "golondrina-2"
+  ],
+  "titles": [
+   "Golondrina",
+   "ゴロンドリーナ"
+  ],
+  "n_dup": 5,
+  "verdict": "A_subset",
+  "detail": "golondrina⊆golondrina-2→golondrina-2にmerge",
+  "sizes": [
+   5,
+   5
+  ],
+  "why": "title低類似(Golondrina/ゴロンドリーナ)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "kyubo-soncho-san",
+   "kyubo-soncho-san-2"
+  ],
+  "titles": [
+   "【急募】村長さん",
+   "〔○急募〕村長さん"
+  ],
+  "n_dup": 3,
+  "verdict": "A_subset",
+  "detail": "kyubo-soncho-san⊆kyubo-soncho-san-2→kyubo-soncho-san-2にmerge",
+  "sizes": [
+   3,
+   5
+  ],
+  "why": "title低類似(【急募】村長さん/〔○急募〕村長さん)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "cleopatra-d-c",
+   "cleopatra-d-c-2"
+  ],
+  "titles": [
+   "Cleopatra D.C.",
+   "クレオパトラD.C."
+  ],
+  "n_dup": 14,
+  "verdict": "A_subset",
+  "detail": "cleopatra-d-c⊆cleopatra-d-c-2→cleopatra-d-c-2にmerge",
+  "sizes": [
+   14,
+   14
+  ],
+  "why": "title低類似(Cleopatra D.C./クレオパトラD.C.)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "bukkomi-no-taku",
+   "kaze-densetsu-bukkomi-no-taku"
+  ],
+  "titles": [
+   "特攻の拓",
+   "疾風伝説特攻の拓"
+  ],
+  "n_dup": 20,
+  "verdict": "D_review",
+  "detail": "NDL判定不能 unknown=20/20",
+  "sizes": [
+   23,
+   54
+  ],
+  "why": "D_review"
+ },
+ {
+  "slugs": [
+   "aya",
+   "aya-2003"
+  ],
+  "titles": [
+   "AYA",
+   "亜弥"
+  ],
+  "n_dup": 2,
+  "verdict": "A_subset",
+  "detail": "aya⊆aya-2003→aya-2003にmerge",
+  "sizes": [
+   3,
+   3
+  ],
+  "why": "title低類似(AYA/亜弥)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "wolf-guy",
+   "wolf-guy-ookami-no-monshou"
+  ],
+  "titles": [
+   "Wolf guy",
+   "ウルフガイ"
+  ],
+  "n_dup": 4,
+  "verdict": "A_subset",
+  "detail": "wolf-guy⊆wolf-guy-ookami-no-monshou→wolf-guy-ookami-no-monshouにmerge",
+  "sizes": [
+   4,
+   12
+  ],
+  "why": "title低類似(Wolf guy/ウルフガイ)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "senki-senki-momotama",
+   "senki-senki-momotama-2"
+  ],
+  "titles": [
+   "殱鬼戦記ももたま",
+   "殲鬼戦記ももたま"
+  ],
+  "n_dup": 10,
+  "verdict": "A_subset",
+  "detail": "senki-senki-momotama⊆senki-senki-momotama-2→senki-senki-momotama-2にmerge",
+  "sizes": [
+   10,
+   10
+  ],
+  "why": "title低類似(殱鬼戦記ももたま/殲鬼戦記ももたま)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "tensai-chokoshi-hojo-mika",
+   "tensai-choukoushi-houjou-mika"
+  ],
+  "titles": [
+   "天才調香師宝条ミカ",
+   "レディーQ"
+  ],
+  "n_dup": 3,
+  "verdict": "A_subset",
+  "detail": "tensai-chokoshi-hojo-mika⊆tensai-choukoushi-houjou-mika→tensai-choukoushi-houjou-mikaにmerge",
+  "sizes": [
+   3,
+   3
+  ],
+  "why": "subset側にISBN無し巻あり"
+ },
+ {
+  "slugs": [
+   "azufareo-no-sobayonin",
+   "azufareo-no-sobayonin-2"
+  ],
+  "titles": [
+   "蒼竜(アズファレオ)の側用人",
+   "蒼竜の側用人"
+  ],
+  "n_dup": 9,
+  "verdict": "A_subset",
+  "detail": "azufareo-no-sobayonin⊆azufareo-no-sobayonin-2→azufareo-no-sobayonin-2にmerge",
+  "sizes": [
+   9,
+   9
+  ],
+  "why": "title低類似(蒼竜(アズファレオ)の側用人/蒼竜の側用人)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "saint",
+   "seinto-bladers"
+  ],
+  "titles": [
+   "SAINT",
+   "聖闘士BLADERS"
+  ],
+  "n_dup": 8,
+  "verdict": "A_subset",
+  "detail": "saint⊆seinto-bladers→seinto-bladersにmerge",
+  "sizes": [
+   8,
+   8
+  ],
+  "why": "title低類似(SAINT/聖闘士BLADERS)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "samurai-soldier",
+   "samurai-soldier-1999"
+  ],
+  "titles": [
+   "サムライソルジャー",
+   "Samurai soldier"
+  ],
+  "n_dup": 1,
+  "verdict": "A_subset",
+  "detail": "samurai-soldier-1999⊆samurai-soldier→samurai-soldierにmerge",
+  "sizes": [
+   27,
+   1
+  ],
+  "why": "title低類似(Samurai soldie/サムライソルジャー)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "kimi-no-tonari-yami-toshi-densetsu",
+   "yami-toshi-densetsu"
+  ],
+  "titles": [
+   "キミノトナリ",
+   "闇都市伝説"
+  ],
+  "n_dup": 5,
+  "verdict": "A_subset",
+  "detail": "kimi-no-tonari-yami-toshi-densetsu⊆yami-toshi-densetsu→yami-toshi-densetsuにmerge",
+  "sizes": [
+   5,
+   5
+  ],
+  "why": "title低類似(キミノトナリ/闇都市伝説)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "pineapple-army",
+   "pineapple-army-2"
+  ],
+  "titles": [
+   "Pineapple army",
+   "パイナップルARMY"
+  ],
+  "n_dup": 14,
+  "verdict": "A_subset",
+  "detail": "pineapple-army⊆pineapple-army-2→pineapple-army-2にmerge",
+  "sizes": [
+   14,
+   14
+  ],
+  "why": "title低類似(Pineapple army/パイナップルARMY)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "himegasaki-sakurako-wa-kyo-mo-fubin-kawaii",
+   "himegasaki-sakurako-wa-kyo-mo-fubin-kawaii-2"
+  ],
+  "titles": [
+   "姫ケ崎櫻子は今日も不憫可愛い",
+   "姫ヶ崎櫻子は今日も不憫可愛い"
+  ],
+  "n_dup": 7,
+  "verdict": "A_subset",
+  "detail": "himegasaki-sakurako-wa-kyo-mo-fubin-kawaii⊆himegasaki-sakurako-wa-kyo-mo-fubin-kawaii-2→himegasaki-sakurako-wa-kyo-mo-fubin-kawaii-2にmerge",
+  "sizes": [
+   7,
+   7
+  ],
+  "why": "title低類似(姫ケ崎櫻子は今日も不憫可愛い/姫ヶ崎櫻子は今日も不憫可愛い)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "es-eternal-sabbath",
+   "s-1999",
+   "s-saigo-no-keikan"
+  ],
+  "titles": [
+   "ES",
+   "エス",
+   "S"
+  ],
+  "n_dup": 1,
+  "verdict": "D_review",
+  "detail": "NDL判定不能 unknown=1/1",
+  "sizes": [
+   13,
+   1,
+   19
+  ],
+  "why": "D_review"
+ },
+ {
+  "slugs": [
+   "boku-no-chi-sutte-kuremasen-ka",
+   "boku-no-chi-sutte-kuremasenka"
+  ],
+  "titles": [
+   "Would you suck my blood?",
+   "僕の血吸ってくれませんか"
+  ],
+  "n_dup": 4,
+  "verdict": "A_subset",
+  "detail": "boku-no-chi-sutte-kuremasen-ka⊆boku-no-chi-sutte-kuremasenka→boku-no-chi-sutte-kuremasenkaにmerge",
+  "sizes": [
+   4,
+   4
+  ],
+  "why": "title低類似(Would you suck/僕の血吸ってくれませんか)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "metroid-2003",
+   "metroid-nintendo-2003"
+  ],
+  "titles": [
+   "メトロイド",
+   "METROID"
+  ],
+  "n_dup": 3,
+  "verdict": "A_subset",
+  "detail": "metroid-2003⊆metroid-nintendo-2003→metroid-nintendo-2003にmerge",
+  "sizes": [
+   3,
+   3
+  ],
+  "why": "title低類似(メトロイド/METROID)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "snow",
+   "snow-2006"
+  ],
+  "titles": [
+   "スノウ",
+   "SNOW"
+  ],
+  "n_dup": 1,
+  "verdict": "A_subset",
+  "detail": "snow-2006⊆snow→snowにmerge",
+  "sizes": [
+   2,
+   1
+  ],
+  "why": "title低類似(SNOW/スノウ)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "akai-kami-no-shounen",
+   "akaikaminoshonen"
+  ],
+  "titles": [
+   "クリスマス",
+   "赤い髪の少年"
+  ],
+  "n_dup": 1,
+  "verdict": "A_subset",
+  "detail": "akai-kami-no-shounen⊆akaikaminoshonen→akaikaminoshonenにmerge",
+  "sizes": [
+   1,
+   1
+  ],
+  "why": "title低類似(クリスマス/赤い髪の少年)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "meiokeikakuzeoraimaa",
+   "purojiekuto-zeoraimaa-omega"
+  ],
+  "titles": [
+   "冥王計画ゼオライマー",
+   "冥王計画ゼオライマーΩ"
+  ],
+  "n_dup": 12,
+  "verdict": "A_subset",
+  "detail": "meiokeikakuzeoraimaa⊆purojiekuto-zeoraimaa-omega→purojiekuto-zeoraimaa-omegaにmerge",
+  "sizes": [
+   12,
+   12
+  ],
+  "why": "subset側にISBN無し巻あり"
+ },
+ {
+  "slugs": [
+   "14",
+   "4teen"
+  ],
+  "titles": [
+   "14歳",
+   "4TEEN"
+  ],
+  "n_dup": 33,
+  "verdict": "A_subset",
+  "detail": "14⊆4teen→4teenにmerge",
+  "sizes": [
+   33,
+   33
+  ],
+  "why": "title低類似(14歳/4TEEN)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "rokunin-no-usotsuki-na-daigakusei-purasu-1",
+   "rokunin-no-usotsuki-na-daigakusei-purasu-1-2"
+  ],
+  "titles": [
+   "六人の嘘つきな大学生〈プラス1〉",
+   "六人の噓つきな大学生〈プラス1〉"
+  ],
+  "n_dup": 2,
+  "verdict": "A_subset",
+  "detail": "rokunin-no-usotsuki-na-daigakusei-purasu-1⊆rokunin-no-usotsuki-na-daigakusei-purasu-1-2→rokunin-no-usotsuki-na-daigakusei-purasu-1-2にmerge",
+  "sizes": [
+   2,
+   2
+  ],
+  "why": "title低類似(六人の嘘つきな大学生〈プラス/六人の噓つきな大学生〈プラス)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "ichigo-nito-monogatari",
+   "nito-monogatari"
+  ],
+  "titles": [
+   "Ichigo",
+   "二兎物語"
+  ],
+  "n_dup": 10,
+  "verdict": "A_subset",
+  "detail": "ichigo-nito-monogatari⊆nito-monogatari→nito-monogatariにmerge",
+  "sizes": [
+   10,
+   10
+  ],
+  "why": "title低類似(Ichigo/二兎物語)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "ansaa",
+   "answer"
+  ],
+  "titles": [
+   "Answer",
+   "アンサー"
+  ],
+  "n_dup": 2,
+  "verdict": "A_subset",
+  "detail": "ansaa⊆answer→answerにmerge",
+  "sizes": [
+   2,
+   11
+  ],
+  "why": "title低類似(Answer/アンサー)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "yo-1993",
+   "yo-2003"
+  ],
+  "titles": [
+   "YOH",
+   "陽"
+  ],
+  "n_dup": 2,
+  "verdict": "A_subset",
+  "detail": "yo-1993⊆yo-2003→yo-2003にmerge",
+  "sizes": [
+   2,
+   2
+  ],
+  "why": "title低類似(YOH/陽)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "valkyrie-profile-2001",
+   "valkyrie-profile-2001-2"
+  ],
+  "titles": [
+   "VALKYRIE PROFILE",
+   "VALKYRIE PROFILE"
+  ],
+  "n_dup": 1,
+  "verdict": "D_review",
+  "detail": "NDL判定不能 unknown=1/1",
+  "sizes": [
+   5,
+   5
+  ],
+  "why": "D_review"
+ },
+ {
+  "slugs": [
+   "valkyrie-profile-2000",
+   "valkyrie-profile-2001",
+   "valkyrie-profile-2001-2"
+  ],
+  "titles": [
+   "VALKYRIE PROFILE",
+   "VALKYRIE PROFILE",
+   "VALKYRIE PROFILE"
+  ],
+  "n_dup": 1,
+  "verdict": "D_review",
+  "detail": "NDL判定不能 unknown=1/1",
+  "sizes": [
+   4,
+   5,
+   5
+  ],
+  "why": "D_review"
+ },
+ {
+  "slugs": [
+   "valkyrie-profile",
+   "valkyrie-profile-2000",
+   "valkyrie-profile-2001",
+   "valkyrie-profile-2001-2"
+  ],
+  "titles": [
+   "VALKYRIE PROFILE",
+   "VALKYRIE PROFILE",
+   "VALKYRIE PROFILE",
+   "VALKYRIE PROFILE"
+  ],
+  "n_dup": 2,
+  "verdict": "D_review",
+  "detail": "NDL判定不能 unknown=2/2",
+  "sizes": [
+   5,
+   4,
+   5,
+   5
+  ],
+  "why": "D_review"
+ },
+ {
+  "slugs": [
+   "sick",
+   "sick-2"
+  ],
+  "titles": [
+   "CHIC",
+   "CICK"
+  ],
+  "n_dup": 2,
+  "verdict": "A_subset",
+  "detail": "sick⊆sick-2→sick-2にmerge",
+  "sizes": [
+   2,
+   2
+  ],
+  "why": "title低類似(CHIC/CICK)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "yoseio",
+   "youseiou"
+  ],
+  "titles": [
+   "妖精王",
+   "ドリーム"
+  ],
+  "n_dup": 3,
+  "verdict": "A_subset",
+  "detail": "yoseio⊆youseiou→youseiouにmerge",
+  "sizes": [
+   3,
+   3
+  ],
+  "why": "subset側にISBN無し巻あり"
+ },
+ {
+  "slugs": [
+   "gurazeni-pa-riiguhen",
+   "gurazeni-tokyo-domuhen-2"
+  ],
+  "titles": [
+   "グラゼニ～パ・リーグ編～",
+   "グラゼニ～東京ドーム編～"
+  ],
+  "n_dup": 13,
+  "verdict": "A_subset",
+  "detail": "gurazeni-pa-riiguhen⊆gurazeni-tokyo-domuhen-2→gurazeni-tokyo-domuhen-2にmerge",
+  "sizes": [
+   13,
+   15
+  ],
+  "why": "title低類似(グラゼニ～パ・リーグ編～/グラゼニ～東京ドーム編～)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "kido-hazure-no-meiwakusei",
+   "onegai-maruchi-kun"
+  ],
+  "titles": [
+   "軌道はずれの迷惑星",
+   "おねがい!マルチくん"
+  ],
+  "n_dup": 1,
+  "verdict": "A_subset",
+  "detail": "kido-hazure-no-meiwakusei⊆onegai-maruchi-kun→onegai-maruchi-kunにmerge",
+  "sizes": [
+   1,
+   1
+  ],
+  "why": "title低類似(軌道はずれの迷惑星/おねがい!マルチくん)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "cyber-comics",
+   "saibaa-comics"
+  ],
+  "titles": [
+   "サイバーコミックス",
+   "サイバーコミックス"
+  ],
+  "n_dup": 1,
+  "verdict": "A_subset",
+  "detail": "saibaa-comics⊆cyber-comics→cyber-comicsにmerge",
+  "sizes": [
+   2,
+   1
+  ],
+  "why": "subset側にISBN無し巻あり"
+ },
+ {
+  "slugs": [
+   "ultraman-2012",
+   "ultraman-g"
+  ],
+  "titles": [
+   "ULTRAMAN",
+   "ウルトラマンG"
+  ],
+  "n_dup": 20,
+  "verdict": "A_subset",
+  "detail": "ultraman-g⊆ultraman-2012→ultraman-2012にmerge",
+  "sizes": [
+   21,
+   20
+  ],
+  "why": "subset側にISBN無し巻あり"
+ },
+ {
+  "slugs": [
+   "hole-in-one",
+   "hole-in-one-2"
+  ],
+  "titles": [
+   "HOLEIN ONE",
+   "ホールインワン"
+  ],
+  "n_dup": 2,
+  "verdict": "A_subset",
+  "detail": "hole-in-one⊆hole-in-one-2→hole-in-one-2にmerge",
+  "sizes": [
+   2,
+   8
+  ],
+  "why": "subset側にISBN無し巻あり"
+ },
+ {
+  "slugs": [
+   "ginneko-minmin",
+   "usaneko-chan"
+  ],
+  "titles": [
+   "ぎんねこMINMIN",
+   "うさねこちゃん"
+  ],
+  "n_dup": 2,
+  "verdict": "A_subset",
+  "detail": "ginneko-minmin⊆usaneko-chan→usaneko-chanにmerge",
+  "sizes": [
+   2,
+   2
+  ],
+  "why": "title低類似(ぎんねこMINMIN/うさねこちゃん)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "jun-1983",
+   "jun-2012"
+  ],
+  "titles": [
+   "Jun",
+   "純"
+  ],
+  "n_dup": 1,
+  "verdict": "A_subset",
+  "detail": "jun-1983⊆jun-2012→jun-2012にmerge",
+  "sizes": [
+   4,
+   4
+  ],
+  "why": "subset側にISBN無し巻あり"
+ },
+ {
+  "slugs": [
+   "stressers",
+   "stressers-2"
+  ],
+  "titles": [
+   "Stressers",
+   "ストレッサーズ"
+  ],
+  "n_dup": 2,
+  "verdict": "A_subset",
+  "detail": "stressers⊆stressers-2→stressers-2にmerge",
+  "sizes": [
+   2,
+   2
+  ],
+  "why": "subset側にISBN無し巻あり"
+ },
+ {
+  "slugs": [
+   "bara-no-kabin",
+   "bara-no-kabin-hagio-1985"
+  ],
+  "titles": [
+   "ゴールデンライラック",
+   "ばらの花びん"
+  ],
+  "n_dup": 1,
+  "verdict": "A_subset",
+  "detail": "bara-no-kabin⊆bara-no-kabin-hagio-1985→bara-no-kabin-hagio-1985にmerge",
+  "sizes": [
+   1,
+   1
+  ],
+  "why": "subset側にISBN無し巻あり"
+ },
+ {
+  "slugs": [
+   "eiko-no-naporeon",
+   "eikou-no-napoleon-eroica"
+  ],
+  "titles": [
+   "栄光のナポレオン",
+   "エロイカ"
+  ],
+  "n_dup": 26,
+  "verdict": "A_subset",
+  "detail": "eiko-no-naporeon⊆eikou-no-napoleon-eroica→eikou-no-napoleon-eroicaにmerge",
+  "sizes": [
+   26,
+   26
+  ],
+  "why": "title低類似(栄光のナポレオン/エロイカ)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "season",
+   "season-1997"
+  ],
+  "titles": [
+   "SEASON",
+   "SEASON"
+  ],
+  "n_dup": 1,
+  "verdict": "D_review",
+  "detail": "NDL判定不能 unknown=1/1",
+  "sizes": [
+   3,
+   2
+  ],
+  "why": "D_review"
+ },
+ {
+  "slugs": [
+   "watashi-ni-shinasai",
+   "watashi-ni-shinasai-2"
+  ],
+  "titles": [
+   "わたしにXXしなさい!",
+   "わたしに××しなさい!"
+  ],
+  "n_dup": 19,
+  "verdict": "A_subset",
+  "detail": "watashi-ni-shinasai⊆watashi-ni-shinasai-2→watashi-ni-shinasai-2にmerge",
+  "sizes": [
+   19,
+   19
+  ],
+  "why": "title低類似(わたしにXXしなさい!/わたしに××しなさい!)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "himawari-2011",
+   "ohi-sama-egao"
+  ],
+  "titles": [
+   "向日葵",
+   "おひさま笑顔"
+  ],
+  "n_dup": 1,
+  "verdict": "A_subset",
+  "detail": "himawari-2011⊆ohi-sama-egao→ohi-sama-egaoにmerge",
+  "sizes": [
+   1,
+   1
+  ],
+  "why": "title低類似(向日葵/おひさま笑顔)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "duel-masters",
+   "duel-masters-2"
+  ],
+  "titles": [
+   "DUEL MASTERS",
+   "デュエル・マスターズ"
+  ],
+  "n_dup": 16,
+  "verdict": "A_subset",
+  "detail": "duel-masters⊆duel-masters-2→duel-masters-2にmerge",
+  "sizes": [
+   16,
+   17
+  ],
+  "why": "title低類似(DUEL MASTERS/デュエル・マスターズ)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "byon-yokai-gakkyu",
+   "byon-yokai-gakkyu-2"
+  ],
+  "titles": [
+   "びょ～ん!!陽快学級",
+   "びよーん!!陽快学級"
+  ],
+  "n_dup": 3,
+  "verdict": "A_subset",
+  "detail": "byon-yokai-gakkyu⊆byon-yokai-gakkyu-2→byon-yokai-gakkyu-2にmerge",
+  "sizes": [
+   3,
+   3
+  ],
+  "why": "title低類似(びょ～ん!!陽快学級/びよーん!!陽快学級)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "chocolat-no-maho-memorial-collection",
+   "chocolat-no-maho-memorial-collection-2018"
+  ],
+  "titles": [
+   "ショコラの魔法 パーフェクトコレクション",
+   "ショコラの魔法 ティアーズコレクション"
+  ],
+  "n_dup": 1,
+  "verdict": "A_subset",
+  "detail": "chocolat-no-maho-memorial-collection⊆chocolat-no-maho-memorial-collection-2018→chocolat-no-maho-memorial-collection-2018にmerge",
+  "sizes": [
+   1,
+   1
+  ],
+  "why": "title低類似(ショコラの魔法 パーフェクト/ショコラの魔法 ティアーズコ)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "obotchama-naisu-desune",
+   "obotchama-naisu-desune-2"
+  ],
+  "titles": [
+   "お坊ちゃまナイスですね",
+   "お坊っちゃまナイスですね"
+  ],
+  "n_dup": 2,
+  "verdict": "A_subset",
+  "detail": "obotchama-naisu-desune⊆obotchama-naisu-desune-2→obotchama-naisu-desune-2にmerge",
+  "sizes": [
+   2,
+   2
+  ],
+  "why": "title低類似(お坊ちゃまナイスですね/お坊っちゃまナイスですね)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "tsuyudaku-otome",
+   "tsuyudaku-otome-2"
+  ],
+  "titles": [
+   "ツユだくおとめ",
+   "つゆだくおとめ"
+  ],
+  "n_dup": 1,
+  "verdict": "A_subset",
+  "detail": "tsuyudaku-otome⊆tsuyudaku-otome-2→tsuyudaku-otome-2にmerge",
+  "sizes": [
+   1,
+   1
+  ],
+  "why": "title低類似(ツユだくおとめ/つゆだくおとめ)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "brain-powerd",
+   "brain-powerd-2"
+  ],
+  "titles": [
+   "BRAIN POWERD",
+   "ブレンパワード"
+  ],
+  "n_dup": 4,
+  "verdict": "A_subset",
+  "detail": "brain-powerd⊆brain-powerd-2→brain-powerd-2にmerge",
+  "sizes": [
+   4,
+   4
+  ],
+  "why": "title低類似(BRAIN POWERD/ブレンパワード)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "bloody-monday",
+   "bloody-monday-2"
+  ],
+  "titles": [
+   "BLOODY MONDAY",
+   "ブラッディ・マンディ"
+  ],
+  "n_dup": 11,
+  "verdict": "A_subset",
+  "detail": "bloody-monday⊆bloody-monday-2→bloody-monday-2にmerge",
+  "sizes": [
+   11,
+   11
+  ],
+  "why": "title低類似(BLOODY MONDAY/ブラッディ・マンディ)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "mint",
+   "minto"
+  ],
+  "titles": [
+   "MINT",
+   "眠兎"
+  ],
+  "n_dup": 3,
+  "verdict": "A_subset",
+  "detail": "mint⊆minto→mintoにmerge",
+  "sizes": [
+   3,
+   3
+  ],
+  "why": "title低類似(MINT/眠兎)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "kaleidoscope",
+   "kareidosukopu-1994"
+  ],
+  "titles": [
+   "カレイドスコープ",
+   "Kaleidoscope"
+  ],
+  "n_dup": 1,
+  "verdict": "A_subset",
+  "detail": "kareidosukopu-1994⊆kaleidoscope→kaleidoscopeにmerge",
+  "sizes": [
+   2,
+   1
+  ],
+  "why": "title低類似(Kaleidoscope/カレイドスコープ)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "dai-honya",
+   "dai-honya-2"
+  ],
+  "titles": [
+   "DAI-HONYA",
+   "ダイホンヤ"
+  ],
+  "n_dup": 1,
+  "verdict": "A_subset",
+  "detail": "dai-honya⊆dai-honya-2→dai-honya-2にmerge",
+  "sizes": [
+   1,
+   1
+  ],
+  "why": "title低類似(DAI-HONYA/ダイホンヤ)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "iyahaya-nantomo",
+   "iyahayanantomo"
+  ],
+  "titles": [
+   "イヤハヤ南友",
+   "イヤハヤ南友"
+  ],
+  "n_dup": 1,
+  "verdict": "A_subset",
+  "detail": "iyahayanantomo⊆iyahaya-nantomo→iyahaya-nantomoにmerge",
+  "sizes": [
+   5,
+   1
+  ],
+  "why": "subset側にISBN無し巻あり"
+ },
+ {
+  "slugs": [
+   "mamiana-shijusodan",
+   "mamiana-shijusodan-2"
+  ],
+  "titles": [
+   "まみあな四重奏団",
+   "まみなあ四重奏団"
+  ],
+  "n_dup": 3,
+  "verdict": "A_subset",
+  "detail": "mamiana-shijusodan⊆mamiana-shijusodan-2→mamiana-shijusodan-2にmerge",
+  "sizes": [
+   3,
+   3
+  ],
+  "why": "title低類似(まみあな四重奏団/まみなあ四重奏団)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "tales-of-destiny",
+   "tales-of-destiny-2",
+   "tales-of-destiny-kami-no-me-wo-meguru-yabou"
+  ],
+  "isbn": "9784757702585",
+  "why": "類似不足 ndl=アストロノミコン. 1"
+ },
+ {
+  "slugs": [
+   "keetai-ga-ochiteita",
+   "keitai-ga-ochiteita"
+  ],
+  "titles": [
+   "ケータイが落ちていた。",
+   "セブンピース"
+  ],
+  "n_dup": 2,
+  "verdict": "A_subset",
+  "detail": "keetai-ga-ochiteita⊆keitai-ga-ochiteita→keitai-ga-ochiteitaにmerge",
+  "sizes": [
+   2,
+   2
+  ],
+  "why": "title低類似(ケータイが落ちていた。/セブンピース)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "pangaea-ezel",
+   "pangaea-ezel-2010"
+  ],
+  "titles": [
+   "Pangaea ezel",
+   "パンゲア・エゼル"
+  ],
+  "n_dup": 7,
+  "verdict": "A_subset",
+  "detail": "pangaea-ezel⊆pangaea-ezel-2010→pangaea-ezel-2010にmerge",
+  "sizes": [
+   7,
+   7
+  ],
+  "why": "title低類似(Pangaea ezel/パンゲア・エゼル)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "junk-1994",
+   "junk-2005"
+  ],
+  "titles": [
+   "JUNK",
+   "ジャンク"
+  ],
+  "n_dup": 2,
+  "verdict": "A_subset",
+  "detail": "junk-1994⊆junk-2005→junk-2005にmerge",
+  "sizes": [
+   2,
+   2
+  ],
+  "why": "title低類似(JUNK/ジャンク)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "blazblue-remix-heart",
+   "blazblue-variable-heart-2013"
+  ],
+  "titles": [
+   "ブレイブルー リミックスハート",
+   "BLAZBLUE"
+  ],
+  "n_dup": 4,
+  "verdict": "A_subset",
+  "detail": "blazblue-remix-heart⊆blazblue-variable-heart-2013→blazblue-variable-heart-2013にmerge",
+  "sizes": [
+   4,
+   4
+  ],
+  "why": "title低類似(ブレイブルー リミックスハー/BLAZBLUE)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "hihon-gikeiki",
+   "masurao"
+  ],
+  "titles": [
+   "秘本義経記",
+   "ますらお"
+  ],
+  "n_dup": 13,
+  "verdict": "A_subset",
+  "detail": "hihon-gikeiki⊆masurao→masuraoにmerge",
+  "sizes": [
+   13,
+   13
+  ],
+  "why": "title低類似(秘本義経記/ますらお)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "happy-mari-chan",
+   "happy-mari-chan-2"
+  ],
+  "titles": [
+   "Happyまりちゃん",
+   "ハッピーまりちゃん"
+  ],
+  "n_dup": 10,
+  "verdict": "A_subset",
+  "detail": "happy-mari-chan⊆happy-mari-chan-2→happy-mari-chan-2にmerge",
+  "sizes": [
+   10,
+   10
+  ],
+  "why": "subset側にISBN無し巻あり"
+ },
+ {
+  "slugs": [
+   "oji-sama-to-issho",
+   "oji-sama-to-issho-2"
+  ],
+  "titles": [
+   "王子様といっしょ!",
+   "王子さまといっしょ"
+  ],
+  "n_dup": 1,
+  "verdict": "A_subset",
+  "detail": "oji-sama-to-issho⊆oji-sama-to-issho-2→oji-sama-to-issho-2にmerge",
+  "sizes": [
+   1,
+   1
+  ],
+  "why": "title低類似(王子様といっしょ!/王子さまといっしょ)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "shaarokku-berugureebia-no-shubun",
+   "shaarokku-oinaru-geemu"
+  ],
+  "titles": [
+   "SHERLOCKベルグレービアの醜聞",
+   "SHERLOCK大いなるゲーム"
+  ],
+  "n_dup": 2,
+  "verdict": "A_subset",
+  "detail": "shaarokku-berugureebia-no-shubun⊆shaarokku-oinaru-geemu→shaarokku-oinaru-geemuにmerge",
+  "sizes": [
+   2,
+   2
+  ],
+  "why": "title低類似(SHERLOCKベルグレービ/SHERLOCK大いなるゲー)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "garakutamachi-ki-tan",
+   "kamen-shonen"
+  ],
+  "titles": [
+   "我楽多街奇譚",
+   "仮面少年"
+  ],
+  "n_dup": 1,
+  "verdict": "A_subset",
+  "detail": "garakutamachi-ki-tan⊆kamen-shonen→kamen-shonenにmerge",
+  "sizes": [
+   1,
+   1
+  ],
+  "why": "subset側にISBN無し巻あり"
+ },
+ {
+  "slugs": [
+   "shin-megami-tensei-ifu",
+   "shin-megami-tensei-kaan"
+  ],
+  "titles": [
+   "真・女神転生if…",
+   "真・女神転生〔カーン〕"
+  ],
+  "n_dup": 8,
+  "verdict": "D_review",
+  "detail": "NDL判定不能 unknown=8/8",
+  "sizes": [
+   9,
+   9
+  ],
+  "why": "D_review"
+ },
+ {
+  "slugs": [
+   "boku-to-ohiru-o",
+   "inasaku"
+  ],
+  "titles": [
+   "僕とお昼を",
+   "稲作"
+  ],
+  "n_dup": 2,
+  "verdict": "A_subset",
+  "detail": "boku-to-ohiru-o⊆inasaku→inasakuにmerge",
+  "sizes": [
+   2,
+   2
+  ],
+  "why": "title低類似(僕とお昼を/稲作)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "esper-mami",
+   "esupaa-mami"
+  ],
+  "titles": [
+   "エスパー魔美",
+   "エスパー魔美"
+  ],
+  "n_dup": 3,
+  "verdict": "A_subset",
+  "detail": "esupaa-mami⊆esper-mami→esper-mamiにmerge",
+  "sizes": [
+   7,
+   4
+  ],
+  "why": "subset側にISBN無し巻あり"
+ },
+ {
+  "slugs": [
+   "high-score",
+   "high-score-aruko-2002"
+  ],
+  "titles": [
+   "HIGH SCORE",
+   "ハイスコア"
+  ],
+  "n_dup": 24,
+  "verdict": "A_subset",
+  "detail": "high-score⊆high-score-aruko-2002→high-score-aruko-2002にmerge",
+  "sizes": [
+   24,
+   24
+  ],
+  "why": "title低類似(HIGH SCORE/ハイスコア)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "kuro-tokage",
+   "kurotokage-2019"
+  ],
+  "titles": [
+   "黒とかげ",
+   "黒トカゲ"
+  ],
+  "n_dup": 2,
+  "verdict": "A_subset",
+  "detail": "kuro-tokage⊆kurotokage-2019→kurotokage-2019にmerge",
+  "sizes": [
+   2,
+   2
+  ],
+  "why": "title低類似(黒とかげ/黒トカゲ)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "crows-gaiden",
+   "crows-gaiden-2"
+  ],
+  "titles": [
+   "Crows外伝",
+   "クローズ外伝"
+  ],
+  "n_dup": 2,
+  "verdict": "A_subset",
+  "detail": "crows-gaiden⊆crows-gaiden-2→crows-gaiden-2にmerge",
+  "sizes": [
+   2,
+   2
+  ],
+  "why": "title低類似(Crows外伝/クローズ外伝)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "made-in-abyss",
+   "made-in-abyss-2"
+  ],
+  "titles": [
+   "Made in Abyss",
+   "メイドインアビス"
+  ],
+  "n_dup": 14,
+  "verdict": "A_subset",
+  "detail": "made-in-abyss⊆made-in-abyss-2→made-in-abyss-2にmerge",
+  "sizes": [
+   14,
+   14
+  ],
+  "why": "title低類似(Made in Abyss/メイドインアビス)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "akuariumu",
+   "aquarium"
+  ],
+  "titles": [
+   "Aquarium",
+   "アクアリウム"
+  ],
+  "n_dup": 1,
+  "verdict": "A_subset",
+  "detail": "akuariumu⊆aquarium→aquariumにmerge",
+  "sizes": [
+   1,
+   1
+  ],
+  "why": "title低類似(Aquarium/アクアリウム)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "i-m-home",
+   "i-m-home-2"
+  ],
+  "titles": [
+   "I'm home",
+   "アイムホーム"
+  ],
+  "n_dup": 2,
+  "verdict": "A_subset",
+  "detail": "i-m-home⊆i-m-home-2→i-m-home-2にmerge",
+  "sizes": [
+   2,
+   2
+  ],
+  "why": "title低類似(I'm home/アイムホーム)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "hey-bluesman",
+   "hey-bluesman-2"
+  ],
+  "titles": [
+   "Hey!!ブルースマン",
+   "ヘイ!!ブルースマン"
+  ],
+  "n_dup": 3,
+  "verdict": "A_subset",
+  "detail": "hey-bluesman⊆hey-bluesman-2→hey-bluesman-2にmerge",
+  "sizes": [
+   3,
+   3
+  ],
+  "why": "title低類似(Hey!!ブルースマン/ヘイ!!ブルースマン)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "keishicho-totsugawa-keibu-no-jikenbo-ando-tetsudo-misuterii-besuto-komikku",
+   "keishicho-totsugawa-keibu-no-jikenbo-tetsudo-misuterii-besuto-komikku"
+  ],
+  "titles": [
+   "警視庁十津川警部の事件簿&鉄道ミステリーベストコミック",
+   "警視庁十津川警部の事件簿＆鉄道ミステリーベストコミック"
+  ],
+  "n_dup": 10,
+  "verdict": "D_review",
+  "detail": "NDL判定不能 unknown=10/10",
+  "sizes": [
+   11,
+   15
+  ],
+  "why": "D_review"
+ },
+ {
+  "slugs": [
+   "joshi-kosei-gaaruzu-hai",
+   "joshikosei"
+  ],
+  "titles": [
+   "女子高生Girls-High",
+   "女子高生"
+  ],
+  "n_dup": 14,
+  "verdict": "A_subset",
+  "detail": "joshi-kosei-gaaruzu-hai⊆joshikosei→joshikoseiにmerge",
+  "sizes": [
+   14,
+   14
+  ],
+  "why": "subset側にISBN無し巻あり"
+ },
+ {
+  "slugs": [
+   "karen",
+   "karen-osakabe-2011"
+  ],
+  "titles": [
+   "Karen",
+   "花恋"
+  ],
+  "n_dup": 9,
+  "verdict": "A_subset",
+  "detail": "karen⊆karen-osakabe-2011→karen-osakabe-2011にmerge",
+  "sizes": [
+   9,
+   9
+  ],
+  "why": "title低類似(Karen/花恋)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "pretty-tough",
+   "pretty-tough-2"
+  ],
+  "titles": [
+   "PRETTY TOUGH",
+   "プリティ・タフ"
+  ],
+  "n_dup": 2,
+  "verdict": "A_subset",
+  "detail": "pretty-tough⊆pretty-tough-2→pretty-tough-2にmerge",
+  "sizes": [
+   2,
+   2
+  ],
+  "why": "title低類似(PRETTY TOUGH/プリティ・タフ)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "clamp-premium-collection-holic",
+   "xxxholic"
+  ],
+  "titles": [
+   "CLAMP PREMIUM COLLECTION ×××HOLiC",
+   "xxxHOLiC"
+  ],
+  "n_dup": 38,
+  "verdict": "A_subset",
+  "detail": "clamp-premium-collection-holic⊆xxxholic→xxxholicにmerge",
+  "sizes": [
+   38,
+   38
+  ],
+  "why": "subset側にISBN無し巻あり"
+ },
+ {
+  "slugs": [
+   "doraemon-4",
+   "doraemon-5"
+  ],
+  "titles": [
+   "DORAEMON",
+   "ドラえもん"
+  ],
+  "n_dup": 9,
+  "verdict": "A_subset",
+  "detail": "doraemon-4⊆doraemon-5→doraemon-5にmerge",
+  "sizes": [
+   39,
+   39
+  ],
+  "why": "subset側にISBN無し巻あり"
+ },
+ {
+  "slugs": [
+   "sexaroid",
+   "sexaroid-2"
+  ],
+  "titles": [
+   "SEXAROID",
+   "セクサロイド"
+  ],
+  "n_dup": 1,
+  "verdict": "A_subset",
+  "detail": "sexaroid⊆sexaroid-2→sexaroid-2にmerge",
+  "sizes": [
+   1,
+   1
+  ],
+  "why": "subset側にISBN無し巻あり"
+ },
+ {
+  "slugs": [
+   "x-men",
+   "x-men-5",
+   "x-men-6"
+  ],
+  "titles": [
+   "X-MEN",
+   "X-MEN",
+   "X-MEN"
+  ],
+  "n_dup": 8,
+  "verdict": "D_review",
+  "detail": "NDL判定不能 unknown=8/8",
+  "sizes": [
+   10,
+   11,
+   11
+  ],
+  "why": "D_review"
+ },
+ {
+  "slugs": [
+   "honnyaragokko-kariage-kun",
+   "kariage-kun"
+  ],
+  "titles": [
+   "ほんにゃらゴッコ かりあげクン",
+   "かりあげクン"
+  ],
+  "n_dup": 47,
+  "verdict": "A_subset",
+  "detail": "honnyaragokko-kariage-kun⊆kariage-kun→kariage-kunにmerge",
+  "sizes": [
+   47,
+   47
+  ],
+  "why": "subset側にISBN無し巻あり"
+ },
+ {
+  "slugs": [
+   "gataro-sensei-arigato",
+   "warattegoran"
+  ],
+  "titles": [
+   "画太郎先生ありがとう",
+   "わらってごらん"
+  ],
+  "n_dup": 1,
+  "verdict": "A_subset",
+  "detail": "gataro-sensei-arigato⊆warattegoran→warattegoranにmerge",
+  "sizes": [
+   1,
+   1
+  ],
+  "why": "title低類似(画太郎先生ありがとう/わらってごらん)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "faiaa-emuburemu-torakia-776",
+   "fire-emblem-thracia-776"
+  ],
+  "titles": [
+   "ファイアーエムブレム トラキア776",
+   "FIRE EMBLEM THRACIA 776"
+  ],
+  "n_dup": 3,
+  "verdict": "A_subset",
+  "detail": "faiaa-emuburemu-torakia-776⊆fire-emblem-thracia-776→fire-emblem-thracia-776にmerge",
+  "sizes": [
+   3,
+   3
+  ],
+  "why": "title低類似(ファイアーエムブレム トラキ/FIRE EMBLEM TH)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "pet",
+   "pet-2"
+  ],
+  "titles": [
+   "ペット",
+   "PET"
+  ],
+  "n_dup": 5,
+  "verdict": "A_subset",
+  "detail": "pet⊆pet-2→pet-2にmerge",
+  "sizes": [
+   5,
+   5
+  ],
+  "why": "title低類似(ペット/PET)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "manga-nihon-no-rekishi-3",
+   "nihon-no-rekishi-24"
+  ],
+  "titles": [
+   "マンガ日本の歴史",
+   "マンガ 日本の歴史"
+  ],
+  "n_dup": 101,
+  "verdict": "A_subset",
+  "detail": "nihon-no-rekishi-24⊆manga-nihon-no-rekishi-3→manga-nihon-no-rekishi-3にmerge",
+  "sizes": [
+   103,
+   101
+  ],
+  "why": "subset側にISBN無し巻あり"
+ },
+ {
+  "slugs": [
+   "fukkokuban-shonen-magajin-dai-zenshu",
+   "fukkokuban-shonen-magajin-daizenshu"
+  ],
+  "titles": [
+   "復刻版少年マガジン大全集",
+   "復刻版少年マガジン大全集"
+  ],
+  "n_dup": 1,
+  "verdict": "D_review",
+  "detail": "NDL判定不能 unknown=1/1",
+  "sizes": [
+   2,
+   2
+  ],
+  "why": "D_review"
+ },
+ {
+  "slugs": [
+   "happy",
+   "happy-2"
+  ],
+  "titles": [
+   "ハッピー!",
+   "Happy!"
+  ],
+  "n_dup": 43,
+  "verdict": "A_subset",
+  "detail": "happy⊆happy-2→happy-2にmerge",
+  "sizes": [
+   43,
+   43
+  ],
+  "why": "title低類似(ハッピー!/Happy!)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "gadget",
+   "gajietto"
+  ],
+  "titles": [
+   "Gadget",
+   "がじぇっと"
+  ],
+  "n_dup": 2,
+  "verdict": "A_subset",
+  "detail": "gadget⊆gajietto→gajiettoにmerge",
+  "sizes": [
+   2,
+   3
+  ],
+  "why": "title低類似(Gadget/がじぇっと)=別作品がsubsetの疑い"
+ },
+ {
+  "slugs": [
+   "imagine",
+   "imagine-29"
+  ],
+  "titles": [
+   "イマジン",
+   "Imagine 29"
+  ],
+  "n_dup": 18,
+  "verdict": "A_subset",
+  "detail": "imagine⊆imagine-29→imagine-29にmerge",
+  "sizes": [
+   18,
+   18
+  ],
+  "why": "title低類似(イマジン/Imagine 29)=別作品がsubsetの疑い"
+ }
+]

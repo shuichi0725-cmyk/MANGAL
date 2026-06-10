@@ -1629,3 +1629,668 @@ dedup:
     canonical: "void"
     title: "VOID"
     isbns: 1
+  # --- ISBN混線解消: subset統合(2026-06-10。NDL照合+三重検証=完全包含/title類似/ISBN無し巻ロスなし) ---
+  - drop: "aa-megami-sama"
+    canonical: "shinsoban-aatsu-megamisamatsu"
+    title: "新装版ああっ女神さまっ"
+    isbns: 48
+  - drop: "akanbo-shojo"
+    canonical: "akanbo-shojo-2"
+    title: "赤んぼ少女"
+    isbns: 2
+  - drop: "aozora-furoppii"
+    canonical: "aozora-furoppii-2"
+    title: "青空ふろっぴい"
+    isbns: 6
+  - drop: "ar-tonelico"
+    canonical: "ar-tonelico-ii"
+    title: "Ar tonelico 2"
+    isbns: 3
+  - drop: "arabian-majin-boken-tan-ranpu-ranpu"
+    canonical: "arabian-ranpu-ranpu"
+    title: "魔神冒険譚 ランプ・ランプ"
+    isbns: 3
+  - drop: "arms"
+    canonical: "arms-2"
+    title: "PROJECT ARMS"
+    isbns: 45
+  - drop: "ashita-kare-no-bed-de"
+    canonical: "tomorrow"
+    title: "TOMORROW"
+    isbns: 1
+  - drop: "ashita-mo-genki"
+    canonical: "ashita-mo-genki-2001"
+    title: "あしたもゲンキ!"
+    isbns: 3
+  - drop: "asutarotte-no-omocha"
+    canonical: "rotte-no-omocha"
+    title: "ロッテのおもちゃ!"
+    isbns: 9
+  - drop: "bakuon-retto"
+    canonical: "bakuon-retto-2012"
+    title: "爆音列島"
+    isbns: 15
+  - drop: "banana-hakusho-sanzemari"
+    canonical: "banana-hakusho"
+    title: "バナナ白書"
+    isbns: 2
+  - drop: "black-kigyo-no-shain-ga-neko-ni-natte-jinsei-ga-kawatta-hanashi"
+    canonical: "burakku-kigyo-no-shain-ga-neko-ni-natte-jinsei-ga-kawatta-hanashi-mofuta-kun-no-baai"
+    title: "ブラック企業の社員が猫になって人生が変わった話〈モフ田くんの場合〉"
+    isbns: 8
+  - drop: "black-knight-bat"
+    canonical: "black-knight-bat-2"
+    title: "Black knight bat"
+    isbns: 1
+  - drop: "blizzard-axel"
+    canonical: "shinsoban-burizaado-akuseru"
+    title: "新装版ブリザードアクセル"
+    isbns: 11
+  - drop: "botsuraku-yotei-no-kizoku-dakedo-hima-datta-kara-maho-o-kiwamete-mita"
+    canonical: "botsuraku-yotei-no-kizoku-dakedo-hima-datta-kara-maho-wo-kiwamete-mita-comic"
+    title: "没落予定の貴族だけど、暇だったから魔法を極めてみた@COMIC"
+    isbns: 11
+  - drop: "chi-o-hau-sakana"
+    canonical: "chiwohausakanahideonoseishunnikki"
+    title: "地を這う魚 ひでおの青春日記"
+    isbns: 2
+  - drop: "cho-gakko-hojin-sutaa-gakuen"
+    canonical: "cho-gakko-hojin-sutaa-gakuen-2"
+    title: "超・学校法人スタア學園"
+    isbns: 21
+  - drop: "chobits"
+    canonical: "kuranpu-puremiamu-korekushon-chobittsu"
+    title: "CLAMP PREMIUM COLLECTIONちょびっツ"
+    isbns: 21
+  - drop: "chugakusei-nikki-1998"
+    canonical: "chugakusei-nikki-2002"
+    title: "中学生日記"
+    isbns: 1
+  - drop: "clamp-gakuen-tanteidan"
+    canonical: "kuranpu-puremiamu-korekushon-kuranpu-gakuen-tanteidan"
+    title: "CLAMP PREMIUM COLLECTION CLAMP学園探偵団"
+    isbns: 14
+  - drop: "clamp-premium-collection-x"
+    canonical: "x"
+    title: "X"
+    isbns: 36
+  - drop: "clover"
+    canonical: "clover-2"
+    title: "Clover"
+    isbns: 8
+  - drop: "clover-tr-fle-2"
+    canonical: "clover-tr-fle"
+    title: "クローバーtrefle"
+    isbns: 2
+  - drop: "crescent"
+    canonical: "crescent-93"
+    title: "CRESCENT"
+    isbns: 19
+  - drop: "dai-chohen-doraemon"
+    canonical: "daichohen-doraemon"
+    title: "大長編ドラえもん"
+    isbns: 4
+  - drop: "dai-kaiju-gamera"
+    canonical: "daikaiju-gamera"
+    title: "大怪獣ガメラ"
+    isbns: 2
+  - drop: "desire"
+    canonical: "desire-2nd-season"
+    title: "DESIRE 2nd season"
+    isbns: 27
+  - drop: "diner"
+    canonical: "diner-2"
+    title: "DINER ダイナー"
+    isbns: 19
+  - drop: "dogman-scrap"
+    canonical: "dogman-scrap-2"
+    title: "Dogman scrap"
+    isbns: 1
+  - drop: "dora-ushinawareta-sekai"
+    canonical: "dora-ushinawareta-sekai-2"
+    title: "ドーラ 失われた世界"
+    isbns: 1
+  - drop: "doragon-kuesuto-4-koma-manga-gekijo"
+    canonical: "doragonkuesuto-4-koma-manga-gekijo"
+    title: "ドラゴンクエスト4コママンガ劇場"
+    isbns: 21
+  - drop: "doubt-2002"
+    canonical: "doubt-amano-2012"
+    title: "Doubt!"
+    isbns: 2
+  - drop: "dr-moro-no-ritchina-seikatsu"
+    canonical: "dokutaa-moro-no-ritchi-na-seikatsu"
+    title: "Dr.モローのリッチな生活"
+    isbns: 2
+  - drop: "dr-moro-no-ritchina-seikatsu-g"
+    canonical: "dokutaa-moro-no-ritchi-na-seikatsu-jii"
+    title: "Dr.モローのリッチな生活G"
+    isbns: 2
+  - drop: "elisabeth-mizuno-1996"
+    canonical: "elisabeth"
+    title: "エリザベート"
+    isbns: 2
+  - drop: "fancy-dance"
+    canonical: "fancy-dance-2"
+    title: "ファンシイダンス"
+    isbns: 14
+  - drop: "feauei-no-samurai"
+    canonical: "feauei-no-samurai-2"
+    title: "フェアウエイの侍"
+    isbns: 2
+  - drop: "front-mission-dog-life-dog-style"
+    canonical: "front-mission-dog-life-dog-style-2011"
+    title: "FRONT MISSION DOG LIFE ＆ DOG STILE"
+    isbns: 10
+  - drop: "fukujincho-ki-tan"
+    canonical: "fukujincho-ki-tan-2"
+    title: "福神町綺譚"
+    isbns: 3
+  - drop: "game-1992"
+    canonical: "game"
+    title: "Game"
+    isbns: 1
+  - drop: "gifu-dodo-naoe-kanetsugu-maeda-keiji-hanagatari"
+    canonical: "gifu-dodo-naoe-kanetsugu-maeda-keiji-hanagatari-2"
+    title: "義風堂々!!直江兼続～前田慶次花語り～"
+    isbns: 2
+  - drop: "ginga-densetsu-weed"
+    canonical: "ginga-densetsu-weed-2"
+    title: "銀牙伝説ウィード"
+    isbns: 80
+  - drop: "go-da-gan"
+    canonical: "go-da-gun"
+    title: "Go da gun"
+    isbns: 16
+  - drop: "goda-tetsugakudo"
+    canonical: "goda-tetsugakudo-kuki-ningyo"
+    title: "ゴーダ哲学堂空気人形"
+    isbns: 2
+  - drop: "gogai-on-blue"
+    canonical: "gogai-on-buru"
+    title: "号外 on BLUE"
+    isbns: 2
+  - drop: "golden-ball-joshikosei-gm-yamagishi-shiki-no-chosen"
+    canonical: "golden-ball-joshikousei-gm-yamagishi-shiki-no-chousen"
+    title: "Golden ball"
+    isbns: 2
+  - drop: "goseiken-dai-sword"
+    canonical: "gouseiken-dai-sword"
+    title: "ダイ・ソード"
+    isbns: 11
+  - drop: "gosuto-suiipaa-mikami-gokuraku-daisakusen"
+    canonical: "gsmikami"
+    title: "GS美神"
+    isbns: 82
+  - drop: "haipaaporisu"
+    canonical: "hyper-police"
+    title: "はいぱーぽりす"
+    isbns: 4
+  - drop: "hakkenden-1995"
+    canonical: "hakkenden"
+    title: "八犬伝"
+    isbns: 15
+  - drop: "hao-taikei-ryunaito"
+    canonical: "hao-taikei-ryunaito-collectors-edition"
+    title: "覇王大系リューナイトcollector's edition"
+    isbns: 3
+  - drop: "hatago"
+    canonical: "hatago-2"
+    title: "HATAGO 旅籠"
+    isbns: 2
+  - drop: "hazukashi-so-na-kao-de-oppai-misete-moraitai"
+    canonical: "hazukashiso-na-kao-de-oppai-misete-moraitai"
+    title: "恥ずかしそうな顔でおっぱい見せてもらいたい"
+    isbns: 9
+  - drop: "heaven-2000"
+    canonical: "heaven-2001"
+    title: "HEAVEN"
+    isbns: 2
+  - drop: "hebi-shojo"
+    canonical: "hebionna"
+    title: "へび女"
+    isbns: 2
+  - drop: "hellboy"
+    canonical: "heruboi-2010"
+    title: "ヘルボーイ"
+    isbns: 1
+  - drop: "help"
+    canonical: "help-1988"
+    title: "HELP"
+    isbns: 2
+  - drop: "hokago-sekigahara"
+    canonical: "hokago-sekigahara-2"
+    title: "放課後関ヶ原"
+    isbns: 4
+  - drop: "hoppu-suteppu-sho-serekushon"
+    canonical: "hoppu-suteppusho-serekushon"
+    title: "ホップ☆ステップ賞SELECTION"
+    isbns: 12
+  - drop: "hoshi-no-kirby"
+    canonical: "hoshi-no-kaabii-takeuchi-2025"
+    title: "星のカービィ"
+    isbns: 12
+  - drop: "hyakka-ryoran"
+    canonical: "hyakka-ryoran-samurai-girls"
+    title: "百花繚乱サムライガールズ"
+    isbns: 2
+  - drop: "ilegenes-giyoku-no-kokyokyoku"
+    canonical: "ilegenes-giyoku-no-koukyoukyoku"
+    title: "イルゲネス"
+    isbns: 3
+  - drop: "isekai-de-sukiru-o-kaitai-shitara-chiito-na-yome-ga-zoshoku-shimashita"
+    canonical: "isekai-de-sukiru-wo-kaitai-shitara-chiito-na-yome-ga-zoshoku-shimashita"
+    title: "異世界でスキルを解体したらチートな嫁が増殖しました"
+    isbns: 13
+  - drop: "jin"
+    canonical: "jin-2"
+    title: "JIN"
+    isbns: 22
+  - drop: "jiraishin-diablo"
+    canonical: "jiraishin-diaburo"
+    title: "地雷震ディアブロ"
+    isbns: 2
+  - drop: "junketsu-no-maria"
+    canonical: "shinsoban-junketsu-no-maria"
+    title: "新装版純潔のマリア"
+    isbns: 3
+  - drop: "juon"
+    canonical: "juon-juon"
+    title: "呪怨/juon"
+    isbns: 2
+  - drop: "kafun-shojo"
+    canonical: "kafun-shojo-chuiho"
+    title: "花粉少女注意報!"
+    isbns: 2
+  - drop: "kagakuteki-ni-sonzai-shiuru-kuriichaa-musume-no-kansatsu-nisshi"
+    canonical: "kagakuteki-ni-sonzai-shiuru-kuriichaamusume-no-kansatsu-nisshi"
+    title: "科学的に存在しうるクリーチャー娘の観察日誌"
+    isbns: 3
+  - drop: "kagami-no-miko-ayaka"
+    canonical: "kagami-no-miko-ayaka-kuroi-bara-juji"
+    title: "鏡の巫女アヤカ黒い薔薇十字"
+    isbns: 5
+  - drop: "kanojo-no-hitorigurashi"
+    canonical: "kanojo-no-hitorigurashi-tsu-auto-manrui"
+    title: "彼女のひとりぐらしツーアウト満塁"
+    isbns: 2
+  - drop: "karakai-jozu-no-moto-takagi-san"
+    canonical: "karakai-jozu-no-moto-takagi-san-2"
+    title: "からかい上手の（元）高木さん"
+    isbns: 22
+  - drop: "karakai-jozu-no-takagi-san"
+    canonical: "karakaijozu-no-takagi-san"
+    title: "からかい上手の高木さん"
+    isbns: 2
+  - drop: "kasumi-den-sankaku"
+    canonical: "kasumi-den-zen"
+    title: "カスミ伝 〔○全〕"
+    isbns: 3
+  - drop: "kemono-no-sosha"
+    canonical: "komikku-kemono-no-soja"
+    title: "コミック獣の奏者"
+    isbns: 11
+  - drop: "kenja-no-deshi-o-nanoru-kenja"
+    canonical: "kenja-no-deshi-wo-nanoru-kenja-2025"
+    title: "賢者の弟子を名乗る賢者"
+    isbns: 13
+  - drop: "kido-senshi-gandamu-kuraimakkusu-uc"
+    canonical: "kido-senshi-gandamu-kuraimakkusu-yushii-tsumugareshi-ketto"
+    title: "機動戦士ガンダムクライマックスU.C.-紡がれし血統-"
+    isbns: 2
+  - drop: "kido-shinseiki-gandamu-ekkusu-2005"
+    canonical: "kido-shinseiki-gandamu-ekkusu"
+    title: "機動新世紀ガンダムX"
+    isbns: 4
+  - drop: "kohiiten-tareeran-no-jikenbo"
+    canonical: "kohiiten-tareeran-no-jikenbo-kanojo-wa-kafeore-no-yume-o-miru"
+    title: "珈琲店タレーランの事件簿 彼女はカフェオレの夢を見る"
+    isbns: 2
+  - drop: "komikku-tsumetai-kosha-no-toki-wa-tomaru"
+    canonical: "tsumetai-kosha-no-toki-wa-tomaru"
+    title: "冷たい校舎の時は止まる"
+    isbns: 6
+  - drop: "kumo-desuga-nanika"
+    canonical: "kumo-desuga-nanika-kakashi-2020"
+    title: "蜘蛛ですが、なにか?"
+    isbns: 14
+  - drop: "kunihachibu"
+    canonical: "kunihachibu-2"
+    title: "くにはちぶ-国八分-"
+    isbns: 12
+  - drop: "kunshu-sama-no-koi-no-oaite"
+    canonical: "kunshu-sama-no-koi-wa-katte"
+    title: "君主サマの恋は勝手!"
+    isbns: 1
+  - drop: "kuranpu-puremiamu-korekushon-tokyo-babiron"
+    canonical: "tokyo-babylon"
+    title: "東京BABYLON"
+    isbns: 22
+  - drop: "kuriimu-remon"
+    canonical: "kuriimu-remon-1986"
+    title: "くりいむレモン"
+    isbns: 13
+  - drop: "kuro-no-miraaju"
+    canonical: "kuro-no-miraaju-2"
+    title: "黒のミラージユ"
+    isbns: 3
+  - drop: "kyo-kara-omega-ni-narimashita"
+    canonical: "kyo-kara-omega-ni-narimashita-asato-to-hatano"
+    title: "今日からΩになりました。安里と波多野"
+    isbns: 3
+  - drop: "kyomu-senki-2002"
+    canonical: "kyomu-senki"
+    title: "虚無戦記"
+    isbns: 5
+  - drop: "love-live-superstar-liella-kila-2-life-comic"
+    canonical: "love-live-superstar-liella-kirakira-life-comic"
+    title: "ラブライブ!スーパースター!!liella! kila² life comic"
+    isbns: 4
+  - drop: "lovesick"
+    canonical: "love"
+    title: "LOVE"
+    isbns: 1
+  - drop: "lucky-strike"
+    canonical: "oppai-carnival"
+    title: "LUCKY STRIKE"
+    isbns: 2
+  - drop: "madara-rasa"
+    canonical: "moryo-senki-madara-lasa"
+    title: "魍魎戦記Madara赤"
+    isbns: 2
+  - drop: "mahoromi-jiku-kenchiku-genshi-tan"
+    canonical: "mahoromi-jikuu-kenchiku-genshitan"
+    title: "マホロミ"
+    isbns: 4
+  - drop: "majima-hazeru-2"
+    canonical: "majima-hazeru"
+    title: "真島、爆ぜる!!"
+    isbns: 20
+  - drop: "manga-nihon-no-rekishi-2"
+    canonical: "manga-nihon-no-rekishi-3"
+    title: "マンガ日本の歴史"
+    isbns: 2
+  - drop: "manga-sensomeshi"
+    canonical: "sensomeshi"
+    title: "戦争めし"
+    isbns: 11
+  - drop: "mangaban-samaa-uozu"
+    canonical: "summer-wars"
+    title: "サマーウォーズ"
+    isbns: 5
+  - drop: "meitantei-hokenshitsu-no-oba-san-2"
+    canonical: "meitantei-hokenshitsu-no-oba-san"
+    title: "名探偵保健室のオバさん"
+    isbns: 2
+  - drop: "mitsubara-no-kekkon"
+    canonical: "mitsubara-no-kekkon-diipu-rabu"
+    title: "蜜薔薇の結婚ディープラブ"
+    isbns: 6
+  - drop: "mo-daremo-aisenai-rimikkusu"
+    canonical: "modaremoaisenai"
+    title: "もう誰も愛せない"
+    isbns: 1
+  - drop: "mofu-mofu-ichigo-aji"
+    canonical: "mofu-mofu-ichigoaji"
+    title: "モフ・モフいちごあじ"
+    isbns: 1
+  - drop: "moment-eien-no-isshun"
+    canonical: "moment-eien-no-isshun-2"
+    title: "モーメント"
+    isbns: 8
+  - drop: "moon-subaru-solitude-standing"
+    canonical: "mun-subaru-solitude-standing"
+    title: "MOON 昴ソリチュードスタンディング"
+    isbns: 8
+  - drop: "moto-saikyo-no-kenshi-wa-isekai-maho-ni-akogareru"
+    canonical: "moto-saikyo-no-kenshi-wa-isekai-maho-ni-akogareru-2"
+    title: "元最強の剣士は、異世界魔法に憧れる"
+    isbns: 10
+  - drop: "mujin"
+    canonical: "mujin-2"
+    title: "無尽"
+    isbns: 13
+  - drop: "murci-lago-2"
+    canonical: "murci-lago"
+    title: "MURCIELAGO"
+    isbns: 25
+  - drop: "naka-no-hito-genomu-jikkyochu"
+    canonical: "nakanohitogenomu-jikkyochu"
+    title: "ナカノヒトゲノム〈実況中〉"
+    isbns: 10
+  - drop: "nangoku-shonen-papuwa-kun-paafekuto"
+    canonical: "nangoku-shonen-papuwa-kun"
+    title: "南国少年パプワくん"
+    isbns: 2
+  - drop: "natsu-chan"
+    canonical: "shitamachi-tekkojo-funtoki-natsu-chan-tokyohen"
+    title: "下町鉄工所奮闘記ナッちゃん東京編"
+    isbns: 22
+  - drop: "ningen-shikkaku-2011"
+    canonical: "ningen-shikkaku-ito-2010"
+    title: "人間失格"
+    isbns: 2
+  - drop: "nudo-faitaa-yuzuki"
+    canonical: "nudo-fighter-yuzuki"
+    title: "ヌードファイター柚希"
+    isbns: 3
+  - drop: "oedo-kunoichi-henge-no-onagi-jikencho"
+    canonical: "oedo-kunoichi-henge-no-onagi-jikencho-2"
+    title: "お江戸くノ一変化のお椰事件帖"
+    isbns: 3
+  - drop: "okojo-san"
+    canonical: "shiawaseso-no-okojo-san"
+    title: "しあわせソウのオコジョさん"
+    isbns: 8
+  - drop: "old-boy"
+    canonical: "orudo-boi-ruzu-senki"
+    title: "オールド・ボーイ ルーズ戦記"
+    isbns: 13
+  - drop: "omega-poruno-case-tatsuru"
+    canonical: "omega-poruno-keesu-chiaki"
+    title: "オメガポルノcase. 千昭"
+    isbns: 2
+  - drop: "ore-wa-mada-honki-o-dashite-inai"
+    canonical: "ore-wa-mada-honki-wo-dashite-inai-dx"
+    title: "俺はまだ、本気を出していないDX"
+    isbns: 9
+  - drop: "pierce-club"
+    canonical: "piasu-club"
+    title: "ピアスクラブ"
+    isbns: 3
+  - drop: "pocket-monsters-special-ruby-sapphire"
+    canonical: "pocket-monsters-special"
+    title: "ポケットモンスターSPECIAL"
+    isbns: 3
+  - drop: "pumpkin-1986-4"
+    canonical: "pumpkin"
+    title: "パンプキン"
+    isbns: 6
+  - drop: "ranningu"
+    canonical: "running-dai-2-bu"
+    title: "RUNNING第2部"
+    isbns: 2
+  - drop: "reverse-uchiyama-1983"
+    canonical: "reverse"
+    title: "リバース"
+    isbns: 3
+  - drop: "rewrite-side-b"
+    canonical: "rewrite-side-r"
+    title: "Rewrite: SIDE-R"
+    isbns: 8
+  - drop: "ribon-shinjin-mangaka-debyu-sakushu"
+    canonical: "ribon-shinjin-mangaka-debyusakushu"
+    title: "りぼん新人まんが家デビュー作集"
+    isbns: 6
+  - drop: "rose-guns-days-last-season"
+    canonical: "rose-guns-days-season-1"
+    title: "ROSE GUNS DAYS Season 1"
+    isbns: 4
+  - drop: "rush-1991"
+    canonical: "rash-hojo-1992"
+    title: "RUSH!"
+    isbns: 1
+  - drop: "ryojo-misuterii-supesharu"
+    canonical: "ryojo-misuterii-supesharu-2020"
+    title: "旅情ミステリースペシャル"
+    isbns: 9
+  - drop: "s-2004"
+    canonical: "s-2005"
+    title: "S+エスプラス"
+    isbns: 2
+  - drop: "samurai-ragattsui-sengoku-shonen-seiho-kenbunroku"
+    canonical: "samurai-ragazzi"
+    title: "サムライ・ラガッツィ"
+    isbns: 10
+  - drop: "sekai-no-owari-no-mahotsukai"
+    canonical: "sekai-no-owari-no-mahotsukai-kanzenban"
+    title: "世界の終わりの魔法使い完全版"
+    isbns: 6
+  - drop: "sekkaku-chiito-wo-moratte-isekai-ni-teni-shitandakara-suki-na-yo-ni-ikite-mitai"
+    canonical: "sekkaku-chiito-o-moratte-isekai-ni-teni-shitandakara-suki-na-yoni-ikite-mitai"
+    title: "せっかくチートを貰って異世界に転移したんだから、好きなように生きてみたい"
+    isbns: 2
+  - drop: "sensei-no-shiroi-uso"
+    canonical: "sensei-no-shiroi-uso-2"
+    title: "先生の白い噓"
+    isbns: 8
+  - drop: "sex-1989"
+    canonical: "sex"
+    title: "SEX"
+    isbns: 2
+  - drop: "shabake"
+    canonical: "shabake-manga"
+    title: "しゃばけ漫画"
+    isbns: 4
+  - drop: "sheryl-kiss-in-the-galaxy"
+    canonical: "sheryl-kiss-in-the-galaxy-2"
+    title: "シェリル キス・イン・ザ・ギャラクシー"
+    isbns: 4
+  - drop: "shin-obake-no-kyutaro"
+    canonical: "shin-obake-no-qtaro"
+    title: "新オバケのQ太郎"
+    isbns: 4
+  - drop: "skyhigh"
+    canonical: "sky-high"
+    title: "スカイハイ"
+    isbns: 3
+  - drop: "slam-dunk-are-kara-10-ka-go"
+    canonical: "slam-dunk"
+    title: "SLAM DUNK"
+    isbns: 7
+  - drop: "sore-yuke-uchu-senkan-yamamoto-yoko"
+    canonical: "soreyuke-uchu-senkan-yamamoto-yoko-rimikkusu"
+    title: "それゆけ!宇宙戦艦ヤマモト・ヨーコRemix"
+    isbns: 8
+  - drop: "strawberry-chan-no-cho-kareina-seikatsu"
+    canonical: "sutoroberii-chan-no-kareina-seikatsu"
+    title: "ストロベリーちゃんの華麗な生活"
+    isbns: 1
+  - drop: "sugao-no-mama-de"
+    canonical: "sugao-no-mamade-1985"
+    title: "素顔のままで"
+    isbns: 2
+  - drop: "taiyo-ga-mite-iru"
+    canonical: "taiyo-ga-miteiru-kamoshirenai-kara"
+    title: "太陽が見ている（かもしれないから）"
+    isbns: 8
+  - drop: "takeki-ogon-no-kuni"
+    canonical: "takeki-ogon-no-kuni-saito-do-san"
+    title: "猛き黄金の国斎藤道三"
+    isbns: 8
+  - drop: "takeki-ryusei"
+    canonical: "takeki-ryusei-2"
+    title: "猛き龍星"
+    isbns: 2
+  - drop: "takeru-1997"
+    canonical: "takeru-1997-2"
+    title: "タケル"
+    isbns: 5
+  - drop: "tantei-chiimu-kazzu-jiken-noto-kieta-jitensha-wa-shitte-iru"
+    canonical: "tantei-chiimu-kazzu-jiken-noto-kiihorudaa-wa-shitte-iru"
+    title: "探偵チームKZ事件ノートキーホルダーは知っている"
+    isbns: 1
+  - drop: "tantei-opera-milky-holmes-hajimemashite"
+    canonical: "tantei-opera-mirukii-homuzu"
+    title: "探偵オペラミルキィホームズ"
+    isbns: 2
+  - drop: "tensei-shichattayo-iya-gomen"
+    canonical: "tensei-shichatta-yo-iya-gomen"
+    title: "転生しちゃったよ〈いや、ごめん〉"
+    isbns: 9
+  - drop: "to-heart"
+    canonical: "toheart2"
+    title: "To heart 2"
+    isbns: 3
+  - drop: "to-love-ru"
+    canonical: "toraburu"
+    title: "To LOVEる-とらぶる-"
+    isbns: 28
+  - drop: "to-y"
+    canonical: "toi"
+    title: "TO-Y"
+    isbns: 19
+  - drop: "toaru-kagaku-no-accelerator"
+    canonical: "toaru-kagaku-no-akuserareeta"
+    title: "とある科学の一方通行"
+    isbns: 11
+  - drop: "toaru-kagaku-no-mentaru-auto"
+    canonical: "toaru-kagaku-no-mental-out"
+    title: "とある科学の心理掌握(メンタルアウト)"
+    isbns: 4
+  - drop: "toaru-kagaku-no-reerugan"
+    canonical: "toaru-kagaku-no-reerugan-4"
+    title: "とある科学の超電磁砲"
+    isbns: 13
+  - drop: "tokyo-camouflage-hour"
+    canonical: "tokyo-camouflage-hour-2"
+    title: "ニュートーキョーカモフラージュアワー"
+    isbns: 9
+  - drop: "tonde-burin"
+    canonical: "tonde-burin-2"
+    title: "とんでぶーりん❤"
+    isbns: 3
+  - drop: "trail-nisekai-teki-nichijou-to-senmetsu-element"
+    canonical: "trail-nisekai-teki-nichijou-to-senmetsu-element-2"
+    title: "ATRAIL"
+    isbns: 6
+  - drop: "tsui-no-taimashi"
+    canonical: "tsui-no-taimashi-endaagaisutaa"
+    title: "終の退魔師-エンダーガイスター-"
+    isbns: 22
+  - drop: "ultra-b"
+    canonical: "ultra-b-1988"
+    title: "ウルトラB"
+    isbns: 8
+  - drop: "w-juliet-2"
+    canonical: "w-juliet-2-2"
+    title: "WジュリエットⅡ"
+    isbns: 15
+  - drop: "waarudo-hiirozu-koryuden"
+    canonical: "waarudo-hiirozu-koryuden-2"
+    title: "ワールドヒーローズ光龍伝"
+    isbns: 3
+  - drop: "yakushiji-ryoko-no-kaiki-jikenbo"
+    canonical: "yakushiji-ryoko-no-kaiki-jikenbo-kiri-no-homonsha"
+    title: "薬師寺涼子の怪奇事件簿 霧の訪問者"
+    isbns: 11
+  - drop: "yamato-takeru-yamagishi-1988"
+    canonical: "yamato-takeru"
+    title: "ヤマトタケル"
+    isbns: 2
+  - drop: "yume-de-aetara"
+    canonical: "yume-de-aetara-2000"
+    title: "夢で逢えたら"
+    isbns: 1
+  - drop: "ze"
+    canonical: "ze-2"
+    title: "是-ze"
+    isbns: 2
+  - drop: "zettai-reido"
+    canonical: "zettai-reido-3"
+    title: "絶対麗奴"
+    isbns: 2
+  - drop: "zettai-reido-2"
+    canonical: "zettai-reido-3"
+    title: "絶対麗奴"
+    isbns: 24
