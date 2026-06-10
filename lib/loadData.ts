@@ -18,7 +18,10 @@ import {
 } from "./schema";
 import { z } from "zod";
 
-const DATA_DIR = path.join(process.cwd(), "data");
+// MANGAL_DATA_DIR でデータルートを差し替え可(= サンプル/プレビュー build 用)。 既定 = ./data
+const DATA_DIR = process.env.MANGAL_DATA_DIR
+  ? path.resolve(process.env.MANGAL_DATA_DIR)
+  : path.join(process.cwd(), "data");
 
 function readYaml<S extends z.ZodTypeAny>(file: string, schema: S): z.infer<S> {
   const raw = fs.readFileSync(file, "utf8");
