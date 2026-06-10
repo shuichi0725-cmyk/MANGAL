@@ -1343,3 +1343,289 @@ dedup:
     canonical: "zutaboro-reijo-wa-ane-no-motokonyakusha-ni-dekiai-sareru"
     title: "ずたぼろ令嬢は姉の元婚約者に溺愛される"
     isbns: 10
+  - drop: "honto-ni-atta-kowai-hanashi-1991"
+    canonical: "hontoni-atta-kowai-hanashi"
+    title: "ほんとにあった怖い話"
+    isbns: 26
+    note: 27巻側が完全上位集合(+ISBN無しvol21 1993-02-20)。部分集合関係を機械確認の上で統合
+  # --- FLAG表記揺れ分(2026-06-10: title正規化一致+ISBN集合一致+vol数一致を再検証済) ---
+  - drop: "aishiteru-orihara-2005"
+    canonical: "aishiteru-morita-1997"
+    title: "愛してる"
+    isbns: 9
+  - drop: "akatsuki-no-aria-2"
+    canonical: "akatsuki-no-aria"
+    title: "暁のARIA"
+    isbns: 21
+  - drop: "aldnoah-zero-2nd-season-2"
+    canonical: "aldnoah-zero-2nd-season"
+    title: "アルドノア・ゼロ2nd Season"
+    isbns: 5
+  - drop: "angel-season-ii"
+    canonical: "angel-yujin"
+    title: "ANGEL"
+    isbns: 13
+  - drop: "bar-lemon-heart-6"
+    canonical: "bar-lemon-heart-2"
+    title: "BARレモン・ハート"
+    isbns: 62
+  - drop: "bingo-2"
+    canonical: "bingo"
+    title: "BINGO!"
+    isbns: 26
+  - drop: "dear-boys-2"
+    canonical: "dear-boys-act-ii"
+    title: "DEAR BOYS"
+    isbns: 47
+  - drop: "dear-boys-act-3-2"
+    canonical: "dear-boys-act-3"
+    title: "DEAR BOYS ACT 3"
+    isbns: 21
+  - drop: "devil-summoner-soul-hackers-2"
+    canonical: "devil-summoner-soul-hackers"
+    title: "デビルサマナーソウルハッカーズ"
+    isbns: 2
+  - drop: "doraemon-3"
+    canonical: "doraemon-2"
+    title: "ドラえもん"
+    isbns: 34
+  - drop: "doraemon-6"
+    canonical: "doraemon-2"
+    title: "ドラえもん"
+    isbns: 34
+  - drop: "dragon-quest-princess-aleana-2"
+    canonical: "dragon-quest-princess-aleana"
+    title: "ドラゴンクエスト プリンセスアリーナ"
+    isbns: 5
+  - drop: "faiaa-emuburemu-seisen-no-keifu"
+    canonical: "faiaa-emuburemu"
+    title: "ファイアーエムブレム 聖戦の系譜"
+    isbns: 19
+  - drop: "gakuen-mokushiroku-highschol-of-the-dead-2"
+    canonical: "gakuen-mokushiroku-highschol-of-the-dead"
+    title: "学園黙示録HIGHSCHOOL OF THE DEAD"
+    isbns: 6
+  - drop: "game-2014"
+    canonical: "game-1992"
+    title: "Game"
+    isbns: 1
+  - drop: "game-ima-2006"
+    canonical: "game-1992"
+    title: "Game"
+    isbns: 1
+  - drop: "gekiga-kachikujin-yapu-2"
+    canonical: "gekiga-kachikujin-yapu"
+    title: "劇画 家畜人ヤプー"
+    isbns: 4
+  - drop: "gekiga-kachikujin-yapu-3"
+    canonical: "gekiga-kachikujin-yapu"
+    title: "劇画 家畜人ヤプー"
+    isbns: 4
+  - drop: "hajirai-break"
+    canonical: "fake"
+    title: "Fake"
+    isbns: 12
+  - drop: "heat-unmei-no-wa"
+    canonical: "heat"
+    title: "HEAT"
+    isbns: 17
+  - drop: "heaven-2007"
+    canonical: "heaven-2000"
+    title: "Heaven"
+    isbns: 2
+  - drop: "heaven-takamure-1993"
+    canonical: "heaven-2000"
+    title: "Heaven"
+    isbns: 2
+  - drop: "hitokui-origin-2"
+    canonical: "hitokui-origin"
+    title: "ヒトクイ origin"
+    isbns: 10
+  - drop: "hoppu-suteppu-sho-serekushon-2"
+    canonical: "hoppu-suteppu-sho-serekushon"
+    title: "ホップ☆ステップ賞 SELECTION"
+    isbns: 12
+  - drop: "hot-milk-komura-2009"
+    canonical: "hot-milk"
+    title: "HOT MILK"
+    isbns: 2
+  - drop: "in-the-room-2014"
+    canonical: "in-the-room"
+    title: "In the room"
+    isbns: 1
+  - drop: "jaianto-kiringu-ekusutora-jaianto-kiringu-hatsu-sakkaa-entaateinmento-magajin-2"
+    canonical: "jaianto-kiringu-ekusutora-jaianto-kiringu-hatsu-sakkaa-entaateinmento-magajin"
+    title: "GIANT KILLING extra ジャイアントキリング発サッカーエンターテインメントマガジン"
+    isbns: 8
+  - drop: "jajauma-gurumin-appu-2"
+    canonical: "jajauma-gurumin-appu"
+    title: "じゃじゃ馬グルーミン★UP!"
+    isbns: 40
+  - drop: "jigoku-shojo-enma-ai-serekushon-geki-kowa-sutorii-2"
+    canonical: "jigoku-shojo-enma-ai-serekushon-geki-kowa-sutorii"
+    title: "地獄少女閻魔あいセレクション激こわストーリー"
+    isbns: 1
+  - drop: "jigoku-shojo-enma-ai-serekushon-geki-kowa-sutorii-3"
+    canonical: "jigoku-shojo-enma-ai-serekushon-geki-kowa-sutorii"
+    title: "地獄少女閻魔あいセレクション激こわストーリー"
+    isbns: 1
+  - drop: "joker-honda-2025"
+    canonical: "joker-1998"
+    title: "Joker"
+    isbns: 2
+  - drop: "joy"
+    canonical: "joi"
+    title: "Joy"
+    isbns: 2
+  - drop: "kenkaku-shobai-2"
+    canonical: "kenkaku-shobai"
+    title: "剣客商売"
+    isbns: 56
+  - drop: "kenkaku-shobai-3"
+    canonical: "kenkaku-shobai"
+    title: "剣客商売"
+    isbns: 56
+  - drop: "kenkaku-shobai-4"
+    canonical: "kenkaku-shobai"
+    title: "剣客商売"
+    isbns: 56
+  - drop: "kenkaku-shobai-5"
+    canonical: "kenkaku-shobai"
+    title: "剣客商売"
+    isbns: 56
+  - drop: "kirara-2005"
+    canonical: "kirara"
+    title: "Kirara"
+    isbns: 6
+  - drop: "kumohachi-2025"
+    canonical: "kumohachi"
+    title: "くもはち"
+    isbns: 1
+  - drop: "kumotori-zanpei-3"
+    canonical: "kumotori-zanpei-2"
+    title: "雲盗り暫平"
+    isbns: 18
+  - drop: "kyo-kara-ore-wa-2"
+    canonical: "kyo-kara-ore-wa"
+    title: "今日から俺は"
+    isbns: 68
+  - drop: "love-okina-1998"
+    canonical: "lovesick"
+    title: "Love"
+    isbns: 1
+  - drop: "love-song-nishi-1993"
+    canonical: "love-song"
+    title: "Love song"
+    isbns: 1
+  - drop: "loveless-2"
+    canonical: "loveless"
+    title: "Loveless"
+    isbns: 13
+  - drop: "manga-horitsu-no-nukeana-2"
+    canonical: "manga-horitsu-no-nukeana"
+    title: "マンガ法律の抜け穴"
+    isbns: 4
+  - drop: "manga-horitsu-no-nukeana-3"
+    canonical: "manga-horitsu-no-nukeana"
+    title: "マンガ法律の抜け穴"
+    isbns: 4
+  - drop: "megami-ibunroku-perusona-2"
+    canonical: "megami-ibunroku-perusona"
+    title: "女神異聞録ペルソナ"
+    isbns: 8
+  - drop: "nude-2000"
+    canonical: "nude"
+    title: "Nude"
+    isbns: 3
+  - drop: "odayaka-kizoku-no-kyuka-no-susume-2"
+    canonical: "odayaka-kizoku-no-kyuka-no-susume"
+    title: "穏やか貴族の休暇のすすめ。@COMIC"
+    isbns: 15
+  - drop: "odayaka-kizoku-no-kyuka-no-susume-attomaaku-komikku"
+    canonical: "odayaka-kizoku-no-kyuka-no-susume"
+    title: "穏やか貴族の休暇のすすめ。@COMIC"
+    isbns: 15
+  - drop: "one-1989"
+    canonical: "one"
+    title: "One"
+    isbns: 11
+  - drop: "onihei-hankacho-2"
+    canonical: "onihei-hankacho"
+    title: "鬼平犯科帳"
+    isbns: 122
+  - drop: "onihei-hankacho-3"
+    canonical: "onihei-hankacho"
+    title: "鬼平犯科帳"
+    isbns: 122
+  - drop: "ontama-2"
+    canonical: "ontama"
+    title: "おんたま!"
+    isbns: 2
+  - drop: "perusona-4-4-komakingusu"
+    canonical: "perusona-4-4-koma-kings"
+    title: "ペルソナ4 4コマKINGS"
+    isbns: 4
+  - drop: "point-d-2"
+    canonical: "point-d"
+    title: "Point D"
+    isbns: 10
+  - drop: "purojiekuto-ekkusu-chosenshatachi-2"
+    canonical: "purojiekuto-ekkusu-chosenshatachi"
+    title: "プロジェクトX挑戦者たち"
+    isbns: 2
+  - drop: "purojiekuto-ekkusu-chosenshatachi-3"
+    canonical: "purojiekuto-ekkusu-chosenshatachi"
+    title: "プロジェクトX挑戦者たち"
+    isbns: 2
+  - drop: "q-2004"
+    canonical: "q-2"
+    title: "Cue"
+    isbns: 4
+  - drop: "q-2016"
+    canonical: "q-2"
+    title: "Cue"
+    isbns: 4
+  - drop: "rin-to-shite-shabure"
+    canonical: "rin"
+    title: "RIN"
+    isbns: 14
+  - drop: "saito-takawo-ikenami-shotaro-jidai-gekiga-waido-serekushon"
+    canonical: "saito-takao-ikenami-shotaro-jidai-gekiga-waido-serekushon"
+    title: "さいとう・たかを/池波正太郎時代劇画ワイドセレクション"
+    isbns: 11
+  - drop: "seed-2009"
+    canonical: "seed"
+    title: "Seed"
+    isbns: 10
+  - drop: "seito-sho-kun-saishusho-tabidachi-2"
+    canonical: "seito-sho-kun-saishusho-tabidachi"
+    title: "生徒諸君! 最終章・旅立ち"
+    isbns: 30
+  - drop: "sensei-no-okiniiri-2"
+    canonical: "sensei-no-okiniiri"
+    title: "先生のお気に入り"
+    isbns: 1
+  - drop: "seven-ghost"
+    canonical: "07-ghost"
+    title: "07-GHOST"
+    isbns: 17
+  - drop: "stitch-2"
+    canonical: "stitch"
+    title: "スティッチ"
+    isbns: 2
+  - drop: "three-2"
+    canonical: "three"
+    title: "3 THREE"
+    isbns: 18
+  - drop: "tomorrow-orihara-1999"
+    canonical: "tomorrow"
+    title: "TOMORROW"
+    isbns: 2
+  - drop: "trash-mato-2004"
+    canonical: "m-e-no-kumotsu"
+    title: "TRASH"
+    isbns: 1
+  - drop: "voido"
+    canonical: "void"
+    title: "VOID"
+    isbns: 1
