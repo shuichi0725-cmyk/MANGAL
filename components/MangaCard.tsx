@@ -71,12 +71,12 @@ export default function MangaCard({ manga, publishers, genres, demographics }: P
         {manga.subtitle && (
           <p className="text-xs text-ink/55 mt-0.5 line-clamp-1">{manga.subtitle}</p>
         )}
-        <p className="text-xs text-ink/65 mt-1.5 line-clamp-1">
+        <p className="text-xs text-ink/65 mt-1 line-clamp-1">
           {authorLine}
           <span className="text-ink/45">　{yearStatusLabel(manga)}</span>
         </p>
         {manga.catch ? (
-          <p className="text-xs text-ink/55 mt-0.5 line-clamp-2">{manga.catch}</p>
+          <p className="text-xs text-ink/55 mt-0.5 line-clamp-3">{manga.catch}</p>
         ) : (
           <p className="text-xs text-ink/55 mt-0.5 line-clamp-1">{publisherName}</p>
         )}
