@@ -76,7 +76,9 @@ export default function MangaCard({ manga, publishers, genres, demographics }: P
           <span className="text-ink/45">　{yearStatusLabel(manga)}</span>
         </p>
         {manga.catch ? (
-          <p className="text-xs text-ink/55 mt-0.5 line-clamp-3">{manga.catch}</p>
+          <p className="text-xs text-ink/75 font-medium leading-snug mt-1 line-clamp-3 border-l-2 border-[var(--color-accent)] bg-[var(--color-surface-2)] rounded-r-md px-2 py-1">
+            {manga.catch}
+          </p>
         ) : (
           <p className="text-xs text-ink/55 mt-0.5 line-clamp-1">{publisherName}</p>
         )}
