@@ -33,10 +33,13 @@ def drop_long(r):
 def phon(tok): return SR.token_roman(tok)
 def canon(s): return drop_long(s.replace("wo","o"))
 def _onsha(latin_slug, kana):
-    """latin が kana の音写か = 子音骨格類似度(v2 is_onsha と同基準)。"""
+    """latin が kana の音写か = 子音骨格類似度(v2 is_onsha と同基準)。
+    ★長さガード: romaji が読みより大幅に長い=「正しい題+余計な副題」の過剰マッチ
+    (Dragon Ball: Episode of Bardock 型)→ 音写不成立扱い(2026-06-11)。"""
     a = re.sub(r"[aeiou\W_]", "", (latin_slug or "").lower())
     b = re.sub(r"[aeiou\W_]", "", drop_long(hep(re.sub(r"[\s　]+","",kana or ""))))
     if not a or not b: return 0.0
+    if len(a) > 1.5 * len(b) + 2: return 0.0
     return difflib.SequenceMatcher(None, a, b).ratio()
 def english_like(t):
     if not t: return False

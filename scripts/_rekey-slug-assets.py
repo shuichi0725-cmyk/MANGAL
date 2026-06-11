@@ -68,7 +68,14 @@ def main():
     stats = Counter()
     for r in rows:
         ob = r["base"]
-        reps = [x for x in oldbase2reps.get(ob, []) if x in new_r2b]
+        # ★reps列が既に在る行=裁定済みページ集合として凍結(再導出しない)。
+        #   base同居から再導出すると、規則改訂で新たに同居した「未裁定ページ」が
+        #   merge対象に紛れ込む(2026-06-11 ドリフト実害で確認)。
+        frozen = [x for x in (r.get("reps") or "").split("\x1f") if x]
+        if frozen:
+            reps = [x for x in frozen if x in new_r2b]
+        else:
+            reps = [x for x in oldbase2reps.get(ob, []) if x in new_r2b]
         if not reps:
             stats["c2_lost"] += 1
             out.append({**r, "reps": "", "rekey": "LOST_NO_REPS"})
