@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import CoverImage from "@/components/CoverImage";
+import RelatedWorks, { computeRelated } from "@/components/RelatedWorks";
 import VolumeRow from "@/components/VolumeRow";
 import ArtBookCard from "@/components/ArtBookCard";
 import Badge from "@/components/ui/Badge";
@@ -39,6 +40,9 @@ export default async function MangaDetailPage({
   //   (特定漫画に紐付かない一般イラスト集も多く誤紐付けになるため)。 原作者には紐付けない。
   const authorNames = new Set(manga.authors.map((a) => a.name));
   const artistArtBooks = data.artBooks.filter((ab) => authorNames.has(ab.artist));
+
+  // 関連作品 = シリーズ(題名前方一致) + 同作者。 説明と版リストの間(2026-06-12 ユーザ指定位置)
+  const related = computeRelated(manga, data.manga);
 
   // 各メタ項目をクリックすると、フィルタ済みトップページへ飛ぶ。
   // 押せる値は「アウトライン枠タグ」(= ジャンルの淡塗りチップとは別系統、 hoverでaccent)。
@@ -255,6 +259,8 @@ export default async function MangaDetailPage({
               </ul>
             </div>
           )}
+
+          <RelatedWorks items={related} />
 
           <VolumeRow manga={manga} />
 
