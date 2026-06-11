@@ -13,9 +13,10 @@ export default function ScrollShortcutsMock() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
   return (
+    // 見本市バー(高さ~37px)の下から出てくる。 本実装ではサイトヘッダー直下に差し替え
     <div
-      className={`fixed inset-x-0 top-0 z-50 transition-transform duration-200 ease-out ${
-        show ? "translate-y-0" : "-translate-y-full"
+      className={`fixed inset-x-0 top-[37px] z-40 transition-transform duration-200 ease-out ${
+        show ? "translate-y-0" : "-translate-y-[150%]"
       }`}
     >
       <div className="flex items-center justify-end gap-5 border-b border-[var(--color-line)] bg-[var(--color-surface)]/95 px-5 pb-2 pt-2.5 shadow-sm backdrop-blur">
