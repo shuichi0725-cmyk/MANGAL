@@ -1,4 +1,5 @@
 import Link from "next/link";
+import LikeButtonMock from "@/components/LikeButtonMock";
 import { bundle, DesignNav, seeded, volCount, Cover, CoverTile } from "@/lib/homeDesign";
 
 /** 案8: 7のコーナー編成 × 5のコックピット質感 + ヘッダーショートカット(確定済ヘッダーUI設計を反映)。
@@ -145,12 +146,16 @@ export default function Design08() {
                     <p className="text-[10px] font-bold text-[var(--color-accent)]">{p.persona}</p>
                     <p className="text-[13px] font-bold leading-snug">{m.title}</p>
                     <p className={`mt-1 leading-relaxed text-ink/75 ${p.tone}`}>{p.copy}</p>
+                    <div className="mt-1.5"><LikeButtonMock id={`today:${p.slug}`} base={97} /></div>
                   </div>
                 </Link>
               );
             })}
           </div>
-          <p className="mt-2.5 text-right text-[10px] text-ink/45">コピーはAI生成をseedに貯めて日替わり(ランタイムコスト0)</p>
+          <div className="mt-2.5 flex items-center justify-between">
+            <span className="text-[10px] text-ink/45">♥はこのコーナーだけの機能(匿名集計)</span>
+            <Link href="/sansedai-archive" className="text-[11px] font-semibold text-[var(--color-accent)]">過去の推薦を読む →</Link>
+          </div>
         </Tile>
       </section>
 
