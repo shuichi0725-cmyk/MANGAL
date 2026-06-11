@@ -75,21 +75,22 @@ def main():
         by_nb = defaultdict(list)
         for x in reps:
             by_nb[new_r2b[x]].append(x)
+        # ★key 自体が「|」を含むため、 reps の区切りは \x1f (unit separator) を使う
         if len(by_nb) == 1:
             nb = next(iter(by_nb))
             tag = "" if nb == ob else "REKEYED"
             stats["c2_same" if nb == ob else "c2_rekeyed"] += 1
-            out.append({**r, "base": nb, "reps": "|".join(reps), "rekey": tag})
+            out.append({**r, "base": nb, "reps": "\x1f".join(reps), "rekey": tag})
         elif r["verdict"] == "merge_all":
             # ★同一作の群が長音で base 分裂 → 衝突は解けても merge 意図は維持(全reps保持)
             nb = max(by_nb, key=lambda k: len(by_nb[k]))
             stats["c2_split_mergeall"] += 1
-            out.append({**r, "base": nb, "reps": "|".join(reps), "rekey": "SPLIT_KEEP_ALL_REPS"})
+            out.append({**r, "base": nb, "reps": "\x1f".join(reps), "rekey": "SPLIT_KEEP_ALL_REPS"})
         else:
             # suffix系は「まだ衝突している部分」のみ意味を持つ → 新baseごとに行を分ける
             stats["c2_split_other"] += 1
             for nb, sub in sorted(by_nb.items()):
-                out.append({**r, "base": nb, "reps": "|".join(sub), "rekey": "SPLIT_SUBSET"})
+                out.append({**r, "base": nb, "reps": "\x1f".join(sub), "rekey": "SPLIT_SUBSET"})
     fields = [c for c in rows[0].keys() if c not in ("reps", "rekey")] + ["reps", "rekey"]
     with p.open("w", encoding="utf-8", newline="") as f:
         w = csv.DictWriter(f, fieldnames=fields, delimiter="\t")
