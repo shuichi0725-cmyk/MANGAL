@@ -110,6 +110,50 @@ export default function Design08() {
         </Tile>
       </section>
 
+      {/* ── コーナー3.5: 三世代の今日の一冊(ペルソナ別AIコピー=seed焼き込み想定のモック) ── */}
+      <section className="mt-5 px-4">
+        <Tile className="p-3.5">
+          <h2 className="text-[14px] font-extrabold">👥 三世代、今日の一冊</h2>
+          <p className="mt-0.5 text-[10.5px] text-ink/50">世代別の案内人が毎日1冊ずつ。口調も長さも三者三様。</p>
+          <div className="mt-3 space-y-3">
+            {[
+              {
+                slug: "kimetsu-no-yaiba",
+                persona: "ミナト(10代・20代担当)",
+                tone: "text-[12.5px]",
+                copy: "今さら?って言われても推す。鬼滅はマジで1巻の絶望から全部が伏線。アニメ勢こそ原作の「間」を見てほしい、全23巻だから週末で完走できるよ🔥",
+              },
+              {
+                slug: "slam-dunk",
+                persona: "サオリ(30代・40代担当)",
+                tone: "text-[12.5px]",
+                copy: "「左手はそえるだけ」を超える最終話を、私はまだ知りません。あの頃ジャンプで読んだ人も、新装再編版で読み返すと桜木の成長線の引き方に唸るはず。バスケ漫画ではなく、青春の総量を描いた漫画です。",
+              },
+              {
+                slug: "hokuto-no-ken",
+                persona: "圭三(50代以上担当・古書店主)",
+                tone: "text-[12.5px]",
+                copy: "昭和五十八年、週刊少年ジャンプにこれが載った日のことを覚えております。世紀末という言葉がまだ遠い未来だった時代に、原哲夫の筆は荒野の風の匂いまで描いておりました。ラオウ昇天の回を店先で立ち読みして泣いた高校生も、いまや良い歳でしょう。読み返すなら、ぜひ通しで。北斗は「強さ」ではなく「哀しみ」の漫画だと、歳を重ねるほどに分かります。",
+              },
+            ].map((p) => {
+              const m = manga.find((x) => x.slug === p.slug);
+              if (!m) return null;
+              return (
+                <Link key={p.slug} href={`/manga/${m.slug}`} className="flex gap-3 rounded-lg border border-[var(--color-line)]/70 bg-[var(--color-bg)]/50 p-2.5">
+                  <div className="w-14 shrink-0 self-start"><Cover m={m} sizes="56px" /></div>
+                  <div className="min-w-0">
+                    <p className="text-[10px] font-bold text-[var(--color-accent)]">{p.persona}</p>
+                    <p className="text-[13px] font-bold leading-snug">{m.title}</p>
+                    <p className={`mt-1 leading-relaxed text-ink/75 ${p.tone}`}>{p.copy}</p>
+                  </div>
+                </Link>
+              );
+            })}
+          </div>
+          <p className="mt-2.5 text-right text-[10px] text-ink/45">コピーはAI生成をseedに貯めて日替わり(ランタイムコスト0)</p>
+        </Tile>
+      </section>
+
       {/* ── コーナー4: 運命の一冊 ── */}
       {random1 && (
         <section className="mt-5 px-4">
