@@ -180,7 +180,10 @@ export default function Design08() {
                     <div className="w-10 shrink-0"><Cover m={m} sizes="40px" /></div>
                     <div className="min-w-0">
                       <p className="truncate text-[13px] font-bold">{m.title}</p>
-                      <p className="text-[11px] text-ink/55">{d.slice(0, 4)}年{Number(d.slice(5, 7))}月{Number(d.slice(8, 10))}日に1巻発売 — {new Date().getFullYear() - Number(d.slice(0, 4))}年前の今月</p>
+                      <p className="text-[11px] text-ink/55">
+                        {/* MADB由来の発売日は月精度の記録がある(= 日欠落で0日になるのを防ぐ) */}
+                        {d.slice(0, 4)}年{Number(d.slice(5, 7))}月{Number(d.slice(8, 10)) > 0 ? `${Number(d.slice(8, 10))}日` : ""}に1巻発売 — {new Date().getFullYear() - Number(d.slice(0, 4))}年前の今月
+                      </p>
                     </div>
                   </Link>
                 ))}
