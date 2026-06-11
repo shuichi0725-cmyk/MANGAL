@@ -14,20 +14,23 @@ from pathlib import Path
 sys.stdout.reconfigure(encoding="utf-8")
 import pykakasi
 _kks = pykakasi.kakasi()
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import _slug_rules as SR
 PKL = Path(".cache/seed3-promote.pkl")
 V1 = Path(".cache/slug-gen-v1.tsv")
 DICT = json.loads(Path(".cache/kata-dict.json").read_text(encoding="utf-8"))
 DB = Path(".cache/db-v2.sqlite")
 VOWEL = "aeiou"
 
-# ---- 共通ローマ字 ----
+# ---- 共通ローマ字 (★2026-06-10 規則: 長音保持/ヲ=o = SR.token_roman) ----
 def hep(kana): return "".join(it["hepburn"] for it in _kks.convert(kana)).lower()
 def drop_long(r):
+    # 旧規則(廃止)。 ★比較正規化(canon)と姓ローマ字(AniList慣行=長音落ち)でのみ使用
     while True:
         n = re.sub(r"ou","o",r); n=re.sub(r"oo","o",n); n=re.sub(r"uu","u",n)
         if n==r: return r
         r=n
-def phon(tok): return re.sub(r"[^a-z0-9]+","",drop_long(hep(tok)))
+def phon(tok): return SR.token_roman(tok)
 def canon(s): return drop_long(s.replace("wo","o"))
 def english_like(t):
     if not t: return False
@@ -118,9 +121,10 @@ def sub_of(key):
     s=[p[4:] for p in key.split("|") if p.startswith("sub:")]
     return s[0] if s else ""
 def subtitle_slug(text):
-    """副題テキスト → ローマ字 slug(衝突を副題で自然に区別)。 長すぎは ~40字で切る。"""
+    """副題テキスト → ローマ字 slug(衝突を副題で自然に区別)。 長すぎは ~40字で切る。
+    ★2026-06-10 規則: 長音保持(未分かちのため ヲ=wo は残る=許容)。"""
     if not text: return ""
-    r=drop_long(hep(text))
+    r=hep(text)
     r=re.sub(r"[^a-z0-9]+","-",r).strip("-")
     return r[:40].rstrip("-")
 SKIP_AUTHOR=re.compile(r"編集部|編集|アンソロジー|製作|スタジオ")

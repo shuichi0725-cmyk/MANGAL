@@ -15,6 +15,7 @@ _slug-assemble.py がこれを読んで base_slug に最優先で適用する。
 import csv
 import importlib.util
 import pickle
+import re
 import sys
 from pathlib import Path
 
@@ -36,6 +37,34 @@ def _load_numfix():
     nf = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(nf)
     return nf
+
+
+def relong_japanese_runs(slug, seg, nf):
+    """★latinmix候補(6/05生成=旧規則の長音落ち)の日本語runトークンを新規則(2026-06-10:
+    長音保持/ヲ=o)で再レンダ。 token が旧render(drop_long)と完全一致した場合のみ置換 →
+    英綴り/字面latin/数字トークンは一致しないので不変(= AI/Web検証済み資産を保全)。"""
+    if not slug or not seg:
+        return slug, 0
+    m = {}
+    ambiguous = set()
+    for tok in seg.split():
+        old = re.sub(r"[^a-z0-9]+", "", nf.drop_long(nf.hep(tok)))
+        new = nf.hslug(tok)
+        if not old or old == new:
+            continue
+        if old in m and m[old] != new:
+            ambiguous.add(old)
+            continue
+        m[old] = new
+    n = 0
+    parts = []
+    for t in slug.split("-"):
+        if t in m and t not in ambiguous:
+            parts.append(m[t])
+            n += 1
+        else:
+            parts.append(t)
+    return "-".join(parts), n
 
 
 def main():
@@ -78,12 +107,16 @@ def main():
             put(r["key"], new, "gapB-num")
             nb_num += 1
 
-    # latin-mixed: idx ↔ key (出現順)
+    # latin-mixed: idx ↔ key (出現順)。 ★日本語runは新規則(長音保持)で再レンダ
     lm_cand = {int(r["idx"]): r["new_slug"] for r in csv.DictReader(GAPB_LATIN.open(encoding="utf-8"), delimiter="\t")}
     nb_lm = 0
+    nb_relong = 0
     for i, key in enumerate(lm_keys):
         if i in lm_cand:
-            put(key, lm_cand[i], "gapB-latin")
+            slug, nrep = relong_japanese_runs(lm_cand[i], key2seg.get(key, ""), nf)
+            if nrep:
+                nb_relong += 1
+            put(key, slug, "gapB-latin")
             nb_lm += 1
 
     with OUT.open("w", encoding="utf-8") as f:
@@ -91,7 +124,7 @@ def main():
         for k, (s, src) in override.items():
             f.write(f"{k}\t{s}\t{src}\n")
 
-    print(f"override 計 {len(override)}: gapA={na} gapB-num={nb_num} gapB-latin={nb_lm} (conflict={conflicts})")
+    print(f"override 計 {len(override)}: gapA={na} gapB-num={nb_num} gapB-latin={nb_lm} (うち長音再レンダ={nb_relong}, conflict={conflicts})")
     print(f"→ {OUT}")
 
 

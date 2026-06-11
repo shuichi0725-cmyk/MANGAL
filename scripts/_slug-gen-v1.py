@@ -1,8 +1,8 @@
-"""slug 生成器 v1 = title_kana_segmented 起点ヘボン + 確定3ルール + 種a候補並記。
+"""slug 生成器 v1 = title_kana_segmented 起点ヘボン + 確定4ルール + 種a候補並記。
 
-確定ルール(2026-05-31):
-  ① 長音落とし: ou→o, oo→o, uu→u(ei/ii/ai は保持)
-  ② 助詞「を」= wo(pykakasi 既定で wo)
+確定ルール(★2026-06-10 ユーザ裁定 = 5/31裁定を上書き。 _slug_rules.py 共用):
+  ① 長音保持: おう→ou / うう→uu 逐字(mahouka-koukou)。 定着固有名詞(tokyo等)は定着綴り
+  ② 助詞「を」= o(ヘボン標準。 旧 wo を反転)
   ③ 敬称ハイフン: サマ/サン/チャン/クン/ドノ/センパイ を独立 hyphen part に
   ④ カタカナ外来語: 種a romaji/english の元綴り(本スクリプトは候補並記、 採否は分岐で)
 
@@ -15,6 +15,9 @@ from pathlib import Path
 
 sys.stdout.reconfigure(encoding="utf-8")
 import pykakasi
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import _slug_rules as SR
 
 PKL = Path(".cache/seed3-promote.pkl")
 MATCH = Path(".cache/match-v14-all.tsv")
@@ -34,7 +37,8 @@ def hep(kana):
 
 
 def drop_long(r):
-    """確定① 長音落とし。 ei/ii/ai は保持、 ou/oo/uu のみ畳む。"""
+    """旧①長音落とし(5/31裁定=廃止)。 ★slug生成では使わない。
+    音写骨格比較(v2 is_onsha)等の正規化用途でのみ残存。"""
     r = re.sub(r"ou", "o", r)
     r = re.sub(r"oo", "o", r)
     r = re.sub(r"uu", "u", r)
@@ -50,12 +54,11 @@ def split_honorific(word):
 
 
 def kana_slug(seg):
-    """segmented kana → ヘボン hyphen slug(確定ルール適用)。"""
+    """segmented kana → ヘボン hyphen slug(★2026-06-10 規則: 長音保持/ヲ=o)。"""
     parts = []
     for w in seg.split():
         for sub in split_honorific(w):
-            r = drop_long(hep(sub))
-            r = re.sub(r"[^a-z0-9]+", "", r)
+            r = SR.token_roman(sub)
             if r:
                 parts.append(r)
     return "-".join(parts)

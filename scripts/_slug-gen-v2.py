@@ -3,7 +3,7 @@
 
 ★適用しない。 確定slug候補を TSV 出力 → 人がレビュー → GO で別途適用。
 v1 (_slug-gen-v1.py) の helper を再利用。 規則裁定: docs/anilist-match-slug-investigation.md C節、
-CLAUDE.md slug判定フロー、 memory pending-slug-generator(長音落/wo/敬称ハイフン/カタカナ=英綴り)。
+CLAUDE.md「ローマ字化4規則」(★2026-06-10: 長音保持/を=o/敬称ハイフン/カタカナ=英綴り)。
 
 決定 (class 別分岐):
   latin (題がほぼASCII)         → 題を直接 slug 化 (ONE PIECE→one-piece)         conf=high
@@ -57,7 +57,7 @@ def is_onsha(latin_slug, title_kana):
 def decide(title, seg, title_kana, a_rom_slug, a_eng_slug):
     """→ (slug, source, conf, onsha_ratio)。"""
     cls = v1.classify(title)
-    ks = v1.kana_slug(seg) if seg else v1.slugify_latin(v1.drop_long(v1.hep(title_kana)))
+    ks = v1.kana_slug(seg) if seg else v1.slugify_latin(v1.hep(title_kana))
 
     if cls == "latin":
         return v1.slugify_latin(title), "latin-title", "high", ""

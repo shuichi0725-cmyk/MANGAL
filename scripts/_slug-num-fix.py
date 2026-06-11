@@ -24,16 +24,22 @@ sys.stdout.reconfigure(encoding="utf-8")
 _kks = pykakasi.kakasi()
 
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import _slug_rules as SR
+
+
 def hep(kana):
     return "".join(it["hepburn"] for it in _kks.convert(kana)).lower()
 
 
 def drop_long(r):
+    # 旧規則(廃止)。 ★latinmix再レンダ(_build-slug-override)の旧render照合用にのみ残存
     return re.sub(r"uu", "u", re.sub(r"oo", "o", re.sub(r"ou", "o", r)))
 
 
 def hslug(kana):
-    return re.sub(r"[^a-z0-9]+", "", drop_long(hep(kana)))
+    # ★2026-06-10 規則: 長音保持/ヲ=o
+    return SR.token_roman(kana)
 
 
 # --- 音読みON 候補(4=シ/ヨン, 7=シチ/ナナ, 9=キュウ/ク を両方) ---
