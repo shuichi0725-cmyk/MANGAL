@@ -85,14 +85,21 @@ def main():
     verdict = {r["base"]: r["verdict"] for r in csv.DictReader(C2.open(encoding="utf-8"), delimiter="\t")}
     targets = {b for b, v in verdict.items() if v in SUFFIX_V or v in ("option2", "subseries")}
 
-    # 群外の確定slug(交差衝突チェック用)= 統合TSVの proposed で対象群以外
+    # 群外の確定slug(交差衝突チェック用)= ★slug-final の final + c-1 候補(対象群以外)。
+    # 旧実装の統合TSV(INTEG)参照は規則改訂で stale になるため廃止(2026-06-11)。
     taken = set()
-    for r in csv.DictReader(INTEG.open(encoding="utf-8"), delimiter="\t"):
-        if r["base_slug"] in targets:
-            continue
-        s = r["proposed_slug"]
-        if s and s != "(DROP)":
-            taken.add(s)
+    _seen_rep = set()
+    with FINAL.open(encoding="utf-8") as f:
+        for r in csv.DictReader(f, delimiter="\t"):
+            if r["rep"] in _seen_rep:
+                continue
+            _seen_rep.add(r["rep"])
+            if r["base_slug"] not in targets and r["final_slug"]:
+                taken.add(r["final_slug"])
+    _c1 = ROOT / "data" / "seeds" / "slug-collision-option1-candidates.tsv"
+    for r in csv.DictReader(_c1.open(encoding="utf-8"), delimiter="\t"):
+        if r["new_slug"] and r["base"] not in targets:
+            taken.add(r["new_slug"])
 
     # 群集約(rep dedup, 外国版除外)
     groups = defaultdict(list)
