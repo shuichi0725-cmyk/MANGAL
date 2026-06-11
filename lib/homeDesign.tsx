@@ -71,7 +71,7 @@ export function DesignNav({ current }: { current: number }) {
   return (
     <div className="sticky top-0 z-50 flex items-center gap-1.5 border-b border-[var(--color-line)] bg-[var(--color-surface)]/95 px-3 py-2 text-xs backdrop-blur">
       <span className="font-bold text-ink/60 mr-1">見本市</span>
-      {[1, 2, 3, 4, 5, 6, 7].map((n) => (
+      {[1, 2, 3, 4, 5, 6, 7, 8].map((n) => (
         <Link
           key={n}
           href={`/home-design-0${n}`}
