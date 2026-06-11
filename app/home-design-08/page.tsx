@@ -176,6 +176,107 @@ export default function Design08() {
         </section>
       )}
 
+      {/* ── コーナー5: 今日は何の日(1巻発売日アニバーサリー=データだけで毎日変わる) ── */}
+      {(() => {
+        const anniv = manga
+          .map((m) => {
+            const d = m.editions.flatMap((e) => e.volumes).find((v) => v.number === 1)?.release_date;
+            return d ? { m, d } : null;
+          })
+          .filter((x): x is { m: (typeof manga)[number]; d: string } => !!x)
+          .filter((x) => x.d.slice(5, 7) === "06")
+          .slice(0, 3);
+        if (anniv.length === 0) return null;
+        return (
+          <section className="mt-5 px-4">
+            <Tile className="p-3.5">
+              <h2 className="text-[14px] font-extrabold">📅 今月が「1巻記念日」の名作</h2>
+              <div className="mt-2.5 space-y-2">
+                {anniv.map(({ m, d }) => (
+                  <Link key={m.slug} href={`/manga/${m.slug}`} className="flex items-center gap-3">
+                    <div className="w-10 shrink-0"><Cover m={m} sizes="40px" /></div>
+                    <div className="min-w-0">
+                      <p className="truncate text-[13px] font-bold">{m.title}</p>
+                      <p className="text-[11px] text-ink/55">{d.slice(0, 4)}年{Number(d.slice(5, 7))}月{Number(d.slice(8, 10))}日に1巻発売 — {new Date().getFullYear() - Number(d.slice(0, 4))}年前の今月</p>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            </Tile>
+          </section>
+        );
+      })()}
+
+      {/* ── コーナー6: タイムマシン棚(年代別) ── */}
+      <section className="mt-5 px-4">
+        <Tile className="p-3.5">
+          <div className="flex items-baseline justify-between">
+            <h2 className="text-[14px] font-extrabold">⏳ タイムマシン棚</h2>
+            <span className="flex gap-1 text-[10px]">
+              {["70s", "80s", "90s", "00s", "10s"].map((d, i) => (
+                <span key={d} className={`rounded px-1.5 py-0.5 font-bold ${i === 1 ? "bg-ink text-white" : "bg-[var(--color-surface-2)] text-ink/55"}`}>{d}</span>
+              ))}
+            </span>
+          </div>
+          <ul className="mt-2.5 grid grid-cols-3 gap-3">
+            {manga.filter((m) => (m.year_started ?? 0) >= 1980 && (m.year_started ?? 0) < 1990).slice(0, 6).map((m) => (
+              <li key={m.slug}><CoverTile m={m} sizes="104px" /></li>
+            ))}
+          </ul>
+        </Tile>
+      </section>
+
+      {/* ── コーナー7: アニメ化作品 ── */}
+      {(() => {
+        const animated = manga.filter((m) => m.anime_adapted).slice(0, 6);
+        if (animated.length === 0) return null;
+        return (
+          <section className="mt-5 px-4">
+            <Tile className="p-3.5">
+              <div className="flex items-baseline justify-between">
+                <h2 className="text-[14px] font-extrabold">🎬 アニメで知ったら、原作へ</h2>
+                <span className="text-[11px] text-ink/50">アニメ化作品 →</span>
+              </div>
+              <ul className="-mx-3.5 mt-2.5 flex gap-3 overflow-x-auto px-3.5 pb-1 snap-x">
+                {animated.map((m) => (
+                  <li key={m.slug} className="w-[96px] shrink-0 snap-start"><CoverTile m={m} sizes="96px" /></li>
+                ))}
+              </ul>
+            </Tile>
+          </section>
+        );
+      })()}
+
+      {/* ── コーナー8: ♥ランキング(いいね集計の出口=モック) ── */}
+      <section className="mt-5 px-4">
+        <Tile className="p-3.5">
+          <h2 className="text-[14px] font-extrabold">🏆 今週の♥ランキング</h2>
+          <p className="mt-0.5 text-[10.5px] text-ink/50">「三世代、今日の一冊」への♥を週間集計(モック)</p>
+          <ol className="mt-2.5 space-y-1.5">
+            {[
+              ["slam-dunk", "サオリ", 211],
+              ["berserk", "サオリ", 188],
+              ["yu-yu-hakusho", "サオリ", 154],
+              ["one-piece", "ミナト", 142],
+              ["kimetsu-no-yaiba", "ミナト", 128],
+            ].map(([slug, who, n], i) => {
+              const m = manga.find((x) => x.slug === slug);
+              if (!m) return null;
+              return (
+                <li key={String(slug)}>
+                  <Link href={`/manga/${m.slug}`} className="flex items-baseline gap-2.5">
+                    <span className={`w-5 shrink-0 text-center text-[13px] font-black ${i < 3 ? "text-[var(--color-accent)]" : "text-ink/40"}`}>{i + 1}</span>
+                    <span className="min-w-0 flex-1 truncate text-[13px] font-medium">{m.title}</span>
+                    <span className="text-[10px] text-ink/45">{who}推薦</span>
+                    <span className="text-[11px] font-bold text-rose-500">♥{String(n)}</span>
+                  </Link>
+                </li>
+              );
+            })}
+          </ol>
+        </Tile>
+      </section>
+
       {/* ── コーナー5: 入口タイル群 ── */}
       <section className="mt-5 px-4">
         <div className="grid grid-cols-2 gap-2.5">
