@@ -20,7 +20,8 @@ from pathlib import Path
 sys.stdout.reconfigure(encoding="utf-8")
 csv.field_size_limit(10**7)
 ROOT = Path(__file__).resolve().parent.parent
-OLD = ROOT / ".cache" / "slug-final.tsv.bak-oldrules-20260611"
+# 引数で「資産が現在キーされている世代の slug-final backup」を指定可(規則を重ねて改訂する時)
+OLD = Path(sys.argv[1]) if len(sys.argv) > 1 else ROOT / ".cache" / "slug-final.tsv.bak-oldrules-20260611"
 NEW = ROOT / ".cache" / "slug-final.tsv"
 SEEDS = ROOT / "data" / "seeds"
 

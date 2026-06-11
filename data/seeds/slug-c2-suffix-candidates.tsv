@@ -24,6 +24,7 @@ qid:Q11605805|name:餓狼伝説2	garou-densetsu-2	different_works	main	garou-den
 name:Mondo・恵|name:餓狼伝説2	garou-densetsu-2	different_works	sub	garou-densetsu-2-1995	餓狼伝説2		YEAR_ONLY
 qid:Q11274171|name:ギフト±	gift	different_works	main	gift	ギフト±	nagate	
 name:Moonstone|name:Gift	gift	different_works	sub	gift-2006	Gift		YEAR_ONLY
+qid:Q6103854|name:ぎふと	gift	different_works	sub	gift-2009	ぎふと		YEAR_ONLY
 name:一ノ瀬ゆま|name:gift	gift	different_works	sub	gift-ichinose-2015	gift	ichinose	
 qid:Q11365176|name:ギフト	gift	different_works	sub	gift-2002	ギフト		YEAR_ONLY
 qid:Q11428743|name:gift	gift	different_works	sub	gift-2012	gift		YEAR_ONLY
@@ -68,8 +69,8 @@ name:あいかわ菜都|name:ハッピーエンド	happy-end	different_works	sub
 qid:Q3101401|name:ハッピーエンド	happy-end	different_works	sub	happy-end-2002	ハッピーエンド		YEAR_ONLY
 name:イタバシマサヒロ|name:BOYS BE…	boys-be	no_merge	main	boys-be	BOYS BE…	itabashi	
 name:イタバシマサヒロ|name:Boys be…	boys-be	no_merge	sub	boys-be-itabashi-2010	Boys be…	itabashi	
-qid:Q88724271|name:月が綺麗ですね	tsuki-ga-kirei-desune	different_works	main	tsuki-ga-kirei-desune	月が綺麗ですね	ito	
-name:えだお|name:つきがきれいですね★	tsuki-ga-kirei-desune	different_works	sub	tsuki-ga-kirei-desune-suzuyuki-2015	つきがきれいですね★	suzuyuki	
+qid:Q88724271|name:月が綺麗ですね	kusunoki-ga-kirei-desune	different_works	main	kusunoki-ga-kirei-desune	月が綺麗ですね	ito	
+name:えだお|name:つきがきれいですね★	kusunoki-ga-kirei-desune	different_works	sub	kusunoki-ga-kirei-desune-suzuyuki-2015	つきがきれいですね★	suzuyuki	
 qid:Q6389239|name:RED	red	different_works	main	red	RED	muraeda	
 name:エリカ・スピンドラー|name:レッド	red	different_works	sub	red-1999	レッド		YEAR_ONLY
 qid:Q324980|name:レッド	red	different_works	sub	red-yamamoto-2007	レッド	yamamoto	
@@ -96,26 +97,36 @@ name:こおはらしおみ|name:サークルゲーム	circle-game	different_work
 name:しもがやぴくす|name:徒然草	tsurezuregusa	different_works	main	tsurezuregusa	徒然草		
 qid:Q11328345|name:徒然草	tsurezuregusa	different_works	sub	tsurezuregusa-1996	徒然草		YEAR_ONLY
 qid:Q11653884|name:徒然草	tsurezuregusa	different_works	sub	tsurezuregusa-2014	徒然草		YEAR_ONLY
-name:竹崎真実|name:まんがグリム童話	manga-gurimu-douwa	different_works	main	manga-gurimu-douwa	まんがグリム童話	takezaki	
-qid:Q11542157|name:まんがグリム童話	manga-gurimu-douwa	different_works	sub	manga-gurimu-douwa-2002	まんがグリム童話		YEAR_ONLY
-qid:Q41698730|name:まんがグリム童話	manga-gurimu-douwa	different_works	sub	manga-gurimu-douwa-2003	まんがグリム童話		YEAR_ONLY
-qid:Q11532611|name:まんがグリム童話	manga-gurimu-douwa	different_works	sub	manga-gurimu-douwa-2003-2	まんがグリム童話		YEAR_ONLY
-name:天ヶ江ルチカ|name:まんがグリム童話	manga-gurimu-douwa	different_works	sub	manga-gurimu-douwa-luccica-2007	まんがグリム童話	luccica	
-name:つか絵夢子|name:まんがグリム童話	manga-gurimu-douwa	different_works	sub	manga-gurimu-douwa-tsuka-2007	まんがグリム童話	tsuka	
-name:天ケ江ルチカ|name:まんがグリム童話	manga-gurimu-douwa	different_works	sub	manga-gurimu-douwa-2009	まんがグリム童話		YEAR_ONLY
-name:一川未宇|name:まんがグリム童話	manga-gurimu-douwa	different_works	sub	manga-gurimu-douwa-ichikawa-2010	まんがグリム童話	ichikawa	
-qid:Q11278399|name:まんがグリム童話	manga-gurimu-douwa	different_works	sub	manga-gurimu-douwa-2007	まんがグリム童話		YEAR_ONLY
-qid:Q11473666|name:まんがグリム童話	manga-gurimu-douwa	different_works	sub	manga-gurimu-douwa-2008	まんがグリム童話		YEAR_ONLY
-qid:Q9019518|name:まんがグリム童話	manga-gurimu-douwa	different_works	sub	manga-gurimu-douwa-2018	まんがグリム童話		YEAR_ONLY
-qid:Q11261262|name:甲虫王者ムシキング	kouchuu-ouja-mushikingu	different_works	main	kouchuu-ouja-mushikingu	甲虫王者ムシキング		
-name:トムス・エンタテイメント|name:甲虫王者ムシキング	kouchuu-ouja-mushikingu	different_works	sub	kouchuu-ouja-mushikingu-2006	甲虫王者ムシキング		YEAR_ONLY
+name:竹崎真実|name:まんがグリム童話	manga-grimm-douwa	different_works	main	manga-grimm-douwa	まんがグリム童話	takezaki	
+qid:Q11542157|name:まんがグリム童話	manga-grimm-douwa	different_works	sub	manga-grimm-douwa-2002	まんがグリム童話		YEAR_ONLY
+qid:Q41698730|name:まんがグリム童話	manga-grimm-douwa	different_works	sub	manga-grimm-douwa-2003	まんがグリム童話		YEAR_ONLY
+qid:Q11532611|name:まんがグリム童話	manga-grimm-douwa	different_works	sub	manga-grimm-douwa-2003-2	まんがグリム童話		YEAR_ONLY
+name:天ヶ江ルチカ|name:まんがグリム童話	manga-grimm-douwa	different_works	sub	manga-grimm-douwa-luccica-2007	まんがグリム童話	luccica	
+name:つか絵夢子|name:まんがグリム童話	manga-grimm-douwa	different_works	sub	manga-grimm-douwa-tsuka-2007	まんがグリム童話	tsuka	
+name:天ケ江ルチカ|name:まんがグリム童話	manga-grimm-douwa	different_works	sub	manga-grimm-douwa-2009	まんがグリム童話		YEAR_ONLY
+name:一川未宇|name:まんがグリム童話	manga-grimm-douwa	different_works	sub	manga-grimm-douwa-ichikawa-2010	まんがグリム童話	ichikawa	
+qid:Q11278399|name:まんがグリム童話	manga-grimm-douwa	different_works	sub	manga-grimm-douwa-2007	まんがグリム童話		YEAR_ONLY
+qid:Q11473666|name:まんがグリム童話	manga-grimm-douwa	different_works	sub	manga-grimm-douwa-2008	まんがグリム童話		YEAR_ONLY
+qid:Q9019518|name:まんがグリム童話	manga-grimm-douwa	different_works	sub	manga-grimm-douwa-2018	まんがグリム童話		YEAR_ONLY
+qid:Q11261262|name:甲虫王者ムシキング	kouchuu-tar-mushikingu	different_works	main	kouchuu-tar-mushikingu	甲虫王者ムシキング		
+name:トムス・エンタテイメント|name:甲虫王者ムシキング	kouchuu-tar-mushikingu	different_works	sub	kouchuu-tar-mushikingu-2006	甲虫王者ムシキング		YEAR_ONLY
 qid:Q469923|name:MARS	mars	different_works	main	mars	MARS	soryo	
 qid:Q471133|name:マーズ	mars	different_works	sub	mars-yokoyama-1976	マーズ	yokoyama	
 name:はしもとさかき|name:マルス	mars	different_works	sub	mars-hashimoto-1996	マルス	hashimoto	
+qid:Q41698614|name:ファイナルファンタジー11	final-fantasy-11	different_works	main	final-fantasy-11	ファイナルファンタジー11		
+qid:Q11260418|name:ファイナルファンタジー11	final-fantasy-11	different_works	sub	final-fantasy-11-2006	ファイナルファンタジー11		YEAR_ONLY
+name:はせがわみやび|name:ファイナルファンタジーⅪ	final-fantasy-11	different_works	sub	final-fantasy-11-2010	ファイナルファンタジーⅪ		YEAR_ONLY
+qid:Q11561327|name:ファイナルファンタジー11	final-fantasy-11	different_works	sub	final-fantasy-11-2005	ファイナルファンタジー11		YEAR_ONLY
 name:バラエティ・アートワークス|name:資本論	shihonron	subseries	main	shihonron	資本論		
 name:マルクス|name:資本論	shihonron	subseries	main	shihonron-2	資本論		
-name:フェアリーダスト|name:くりいむレモン	kuriimu-remon	different_works	main	kuriimu-remon	くりいむレモン		
-name:みばし・あやこ|name:くりいむレモン	kuriimu-remon	different_works	sub	kuriimu-remon-1986	くりいむレモン		YEAR_ONLY
+qid:Q3776937|name:Barレモン・ハート	bar-lemon-heart	no_merge	main	bar-lemon-heart	Barレモン・ハート		
+qid:Q3776937|name:BARレモン・ハート	bar-lemon-heart	no_merge	sub	bar-lemon-heart-furuya-1986	BARレモン・ハート	furuya	
+name:ファミリー企画|name:BARレモン・ハート	bar-lemon-heart	no_merge	sub	bar-lemon-heart-2014	BARレモン・ハート		YEAR_ONLY
+qid:Q3776937|name:Barレモン・ハート ドラマ・シーズン2エピソード集	bar-lemon-heart	no_merge	sub	bar-lemon-heart-2016	Barレモン・ハート ドラマ・シーズン2エピソード集		YEAR_ONLY
+qid:Q3776937|name:BARレモン・ハート ドラマエピソード集	bar-lemon-heart	no_merge	sub	bar-lemon-heart-2015	BARレモン・ハート ドラマエピソード集		YEAR_ONLY
+qid:Q3776937|name:BARレモン・ハート 恋を彩る煌くお酒の巻	bar-lemon-heart	no_merge	sub	bar-lemon-heart-2015-2	BARレモン・ハート 恋を彩る煌くお酒の巻		YEAR_ONLY
+qid:Q3776937|name:BARレモン・ハート 夫婦愛結びのお酒の巻	bar-lemon-heart	no_merge	sub	bar-lemon-heart-2016-2	BARレモン・ハート 夫婦愛結びのお酒の巻		YEAR_ONLY
+qid:Q3776937|name:BARレモン・ハート 想いの色を纏うカクテルの巻	bar-lemon-heart	no_merge	sub	bar-lemon-heart-2016-3	BARレモン・ハート 想いの色を纏うカクテルの巻		YEAR_ONLY
 name:栗栖ひとみ|name:GENEROUS	jienerasu	different_works	main	jienerasu	GENEROUS		
 qid:Q11622621|name:GENEROUS	jienerasu	different_works	sub	jienerasu-1994	GENEROUS		YEAR_ONLY
 name:ふじしんいち|name:GENEROUS	jienerasu	different_works	sub	jienerasu-1995	GENEROUS		YEAR_ONLY
@@ -123,7 +134,8 @@ qid:Q11442455|name:GENEROUS	jienerasu	different_works	sub	jienerasu-1996	GENEROU
 qid:Q11278712|name:GENEROUS	jienerasu	different_works	sub	jienerasu-1997	GENEROUS		YEAR_ONLY
 qid:Q974911|name:GENEROUS	jienerasu	different_works	sub	jienerasu-2	GENEROUS		NEED_TIEBREAK
 qid:Q11677457|name:JOKER	joker	different_works	main	joker	JOKER	michihara	
-qid:Q24045825|name:ジョーカー	joker	different_works	sub	joker-2000	ジョーカー		YEAR_ONLY
+qid:Q11438857|name:女〔女咼〕	joker	different_works	sub	joker-2000	女〔女咼〕		YEAR_ONLY
+qid:Q24045825|name:ジョーカー	joker	different_works	sub	joker-2000-2	ジョーカー		YEAR_ONLY
 qid:Q11469541|name:JOKER	joker	different_works	sub	joker-yamane-1997	JOKER	yamane	
 name:河奈マリオ|name:Joker	joker	different_works	sub	joker-1998	Joker		YEAR_ONLY
 name:ブライアン・アザレロ|name:ジョーカー	joker	different_works	sub	joker-2011	ジョーカー		YEAR_ONLY
@@ -131,8 +143,8 @@ name:斎田晴子|name:JOKER	joker	different_works	sub	joker-2012	JOKER		YEAR_ON
 qid:Q11645526|name:JOKER	joker	different_works	sub	joker-1998-2	JOKER		YEAR_ONLY
 qid:Q9016503|name:Joker	joker	different_works	sub	joker-1998-3	Joker		YEAR_ONLY
 qid:Q17220347|name:JOKER	joker	different_works	sub	joker-honda-2025	JOKER	honda	
-name:ぶらざあのっぽ|name:アイドル伝説えり子	aidoru-densetsu-eriko	option2	sub	aidoru-densetsu-eriko-1989	アイドル伝説えり子		YEAR_ONLY
-qid:Q108776608|name:アイドル伝説えり子	aidoru-densetsu-eriko	option2	sub	aidoru-densetsu-eriko-1990	アイドル伝説えり子		YEAR_ONLY
+name:ぶらざあのっぽ|name:アイドル伝説えり子	idol-densetsu-eriko	option2	sub	idol-densetsu-eriko-1989	アイドル伝説えり子		YEAR_ONLY
+qid:Q108776608|name:アイドル伝説えり子	idol-densetsu-eriko	option2	sub	idol-densetsu-eriko-1990	アイドル伝説えり子		YEAR_ONLY
 qid:Q958269|name:エース!-ACE-	ace	different_works	main	ace	エース-ACE-		
 qid:Q11382324|name:エース!	ace	different_works	sub	ace-1985	エース!		YEAR_ONLY
 name:佐藤文彦|name:エース!!	ace	different_works	sub	ace-umino-1990	エース!!	umino	
@@ -152,9 +164,9 @@ qid:Q1096358|name:夢であえたら	yume-de-aetara	different_works	sub	yume-de-
 qid:Q11462110|name:夢で逢えたら	yume-de-aetara	different_works	sub	yume-de-aetara-1985	夢で逢えたら		YEAR_ONLY
 qid:Q24896917|name:薔薇とオオカミ	bara-to-ookami	different_works	main	bara-to-ookami	薔薇とオオカミ	yuzuki	
 name:マーゴ・マグワイア|name:薔薇と狼	bara-to-ookami	different_works	sub	bara-to-ookami-2011	薔薇と狼		YEAR_ONLY
-name:みきもと凛|name:近キョリ恋愛	kinkyori-renai	different_works	main	kinkyori-renai	近キョリ恋愛	mikimoto	
-qid:Q11552274|name:近距離恋愛	kinkyori-renai	different_works	sub	kinkyori-renai-2000	近距離恋愛		YEAR_ONLY
-qid:Q3274618|name:近距離恋愛	kinkyori-renai	different_works	sub	kinkyori-renai-2001	近距離恋愛		YEAR_ONLY
+name:みきもと凛|name:近キョリ恋愛	kinkyori-love	different_works	main	kinkyori-love	近キョリ恋愛	mikimoto	
+qid:Q11552274|name:近距離恋愛	kinkyori-love	different_works	sub	kinkyori-love-2000	近距離恋愛		YEAR_ONLY
+qid:Q3274618|name:近距離恋愛	kinkyori-love	different_works	sub	kinkyori-love-2001	近距離恋愛		YEAR_ONLY
 name:ミヒャエル・クンツェ|name:エリザベート	elisabeth	different_works	main	elisabeth	エリザベート	koike	
 name:塚本哲也|name:エリザベート	elisabeth	different_works	sub	elisabeth-mizuno-1996	エリザベート	mizuno	
 name:ミユキルリア|name:劣等眼の転生魔術師	rettougan-no-tensei-majutsushi	no_merge	main	rettougan-no-tensei-majutsushi	劣等眼の転生魔術師	miyuki	
@@ -183,9 +195,12 @@ name:わたなべえみ|name:パズル	puzzle	different_works	main	puzzle	パズ
 qid:Q11619414|name:Puzzle+	puzzle	different_works	sub	puzzle-sugano-2006	Puzzle+	sugano	
 name:山田悠介|name:パズル	puzzle	different_works	sub	puzzle-sanbe-2007	パズル	sanbe	
 name:任天堂|name:ファイアーエムブレム|sub:聖戦の系譜	fire-emblem	different_works	main	fire-emblem	ファイアーエムブレム	nintendo	
+qid:Q11260369|name:ファイアーエムブレム 聖戦の系譜	fire-emblem	different_works	sub	fire-emblem-usamiya-1999	ファイアーエムブレム 聖戦の系譜	usamiya	
 name:わたなべ京|name:ファイアーエムブレム	fire-emblem	different_works	sub	fire-emblem-watanabe-1992	ファイアーエムブレム	watanabe	
 qid:Q11260369|name:ファイアーエムブレム|sub:聖戦の系譜	fire-emblem	different_works	sub	fire-emblem-1997	ファイアーエムブレム		YEAR_ONLY
 qid:Q11476838|name:ファイアーエムブレム	fire-emblem	different_works	sub	fire-emblem-1993	ファイアーエムブレム		YEAR_ONLY
+qid:Q11516343|name:ファイアーエムブレム 聖戦の系譜	fire-emblem	different_works	sub	fire-emblem-1997-2	ファイアーエムブレム 聖戦の系譜		YEAR_ONLY
+qid:Q11359703|name:ファイアーエムブレム 風の魔道士	fire-emblem	different_works	sub	fire-emblem-1998	ファイアーエムブレム 風の魔道士		YEAR_ONLY
 name:愛英史|name:ゼロ	zero	different_works	main	zero	ゼロ		
 qid:Q5362768|name:ZERO	zero	different_works	sub	zero-yamazaki-2009	Zero	yamazaki	
 qid:Q1504165|name:ZERO	zero	different_works	sub	zero-matsumoto	Zero	matsumoto	
@@ -319,15 +334,15 @@ qid:Q11388964|name:星に願いを	hoshi-ni-negai-o	different_works	sub	hoshi-ni
 qid:Q11278120|name:星にねがいを	hoshi-ni-negai-o	different_works	sub	hoshi-ni-negai-o-maita-2016	星にねがいを	maita	
 name:瀬名真紗也|name:King	king	different_works	main	king	King		
 qid:Q11269330|name:King	king	different_works	sub	king-shinmura-2002	King	shinmura	
-name:池波正太郎|name:コミック乱セレクション	komikku-ran-serekushon	different_works	main	komikku-ran-serekushon	コミック乱セレクション		
-qid:Q2661273|name:コミック乱セレクション	komikku-ran-serekushon	different_works	sub	komikku-ran-serekushon-2016	コミック乱セレクション		YEAR_ONLY
-name:青木健生|name:コミック乱セレクション	komikku-ran-serekushon	different_works	sub	komikku-ran-serekushon-aoki-2017	コミック乱セレクション	aoki	
-name:中邑冴|name:浅見光彦ミステリースペシャル傑作選	asami-mitsuhiko-misuterii-supesharu-kessakusen	different_works	main	asami-mitsuhiko-misuterii-supesharu-kessakusen	浅見光彦ミステリースペシャル傑作選	nakamura	
-name:千村青|name:浅見光彦ミステリースペシャル傑作選	asami-mitsuhiko-misuterii-supesharu-kessakusen	different_works	sub	asami-mitsuhiko-misuterii-supesharu-kessakusen-chimura-2012	浅見光彦ミステリースペシャル傑作選	chimura	
-qid:Q17161092|name:浅見光彦ミステリースペシャル傑作選	asami-mitsuhiko-misuterii-supesharu-kessakusen	different_works	sub	asami-mitsuhiko-misuterii-supesharu-kessakusen-2016	浅見光彦ミステリースペシャル傑作選		YEAR_ONLY
-name:中西ゆか|name:浅見光彦ミステリースペシャル傑作選	asami-mitsuhiko-misuterii-supesharu-kessakusen	different_works	sub	asami-mitsuhiko-misuterii-supesharu-kessakusen-2017	浅見光彦ミステリースペシャル傑作選		YEAR_ONLY
-qid:Q22127111|name:浅見光彦ミステリースペシャル傑作選	asami-mitsuhiko-misuterii-supesharu-kessakusen	different_works	sub	asami-mitsuhiko-misuterii-supesharu-kessakusen-2018	浅見光彦ミステリースペシャル傑作選		YEAR_ONLY
-qid:Q47580510|name:浅見光彦ミステリースペシャル傑作選	asami-mitsuhiko-misuterii-supesharu-kessakusen	different_works	sub	asami-mitsuhiko-misuterii-supesharu-kessakusen-2011	浅見光彦ミステリースペシャル傑作選		YEAR_ONLY
+name:池波正太郎|name:コミック乱セレクション	comic-run-selection	different_works	main	comic-run-selection	コミック乱セレクション		
+qid:Q2661273|name:コミック乱セレクション	comic-run-selection	different_works	sub	comic-run-selection-2016	コミック乱セレクション		YEAR_ONLY
+name:青木健生|name:コミック乱セレクション	comic-run-selection	different_works	sub	comic-run-selection-aoki-2017	コミック乱セレクション	aoki	
+name:中邑冴|name:浅見光彦ミステリースペシャル傑作選	asami-mitsuhiko-mystery-special-kessakusen	different_works	main	asami-mitsuhiko-mystery-special-kessakusen	浅見光彦ミステリースペシャル傑作選	nakamura	
+name:千村青|name:浅見光彦ミステリースペシャル傑作選	asami-mitsuhiko-mystery-special-kessakusen	different_works	sub	asami-mitsuhiko-mystery-special-kessakusen-chimura-2012	浅見光彦ミステリースペシャル傑作選	chimura	
+qid:Q17161092|name:浅見光彦ミステリースペシャル傑作選	asami-mitsuhiko-mystery-special-kessakusen	different_works	sub	asami-mitsuhiko-mystery-special-kessakusen-2016	浅見光彦ミステリースペシャル傑作選		YEAR_ONLY
+name:中西ゆか|name:浅見光彦ミステリースペシャル傑作選	asami-mitsuhiko-mystery-special-kessakusen	different_works	sub	asami-mitsuhiko-mystery-special-kessakusen-2017	浅見光彦ミステリースペシャル傑作選		YEAR_ONLY
+qid:Q22127111|name:浅見光彦ミステリースペシャル傑作選	asami-mitsuhiko-mystery-special-kessakusen	different_works	sub	asami-mitsuhiko-mystery-special-kessakusen-2018	浅見光彦ミステリースペシャル傑作選		YEAR_ONLY
+qid:Q47580510|name:浅見光彦ミステリースペシャル傑作選	asami-mitsuhiko-mystery-special-kessakusen	different_works	sub	asami-mitsuhiko-mystery-special-kessakusen-2011	浅見光彦ミステリースペシャル傑作選		YEAR_ONLY
 qid:Q11532582|name:STAND UP!	stand-up	different_works	main	stand-up	STAND UP!	itagaki	
 name:川谷康久|name:Stand Up!	stand-up	different_works	sub	stand-up-yamakawa-2013	Stand Up!	yamakawa	
 qid:Q11265507|name:Stand UP!!!!	stand-up	different_works	sub	stand-up-kumagai-2010	Stand UP!!!!	kumagai	
@@ -349,8 +364,9 @@ qid:Q11381510|name:手塚治虫	tezuka-osamu	different_works	sub	tezuka-osamu-19
 name:大崎亮平|name:とびだせどうぶつの森|sub:はりきり村長イッペー!	tobidase-doubutsu-no-mori	different_works	main	tobidase-doubutsu-no-mori	とびだせどうぶつの森		
 qid:Q11522664|name:とびだせどうぶつの森	tobidase-doubutsu-no-mori	different_works	sub	tobidase-doubutsu-no-mori-2014	とびだせどうぶつの森		YEAR_ONLY
 qid:Q11303436|name:とびだせどうぶつの森	tobidase-doubutsu-no-mori	different_works	sub	tobidase-doubutsu-no-mori-2015	とびだせどうぶつの森		YEAR_ONLY
-name:知原朱美|name:恋愛ジャンキー	renai-jankii	different_works	main	renai-jankii	恋愛ジャンキー		
-qid:Q11103202|name:恋愛ジャンキー	renai-jankii	different_works	sub	renai-jankii-tohjoh-2001	恋愛ジャンキー	tohjoh	
+name:知原朱美|name:恋愛ジャンキー	love-junkie	different_works	main	love-junkie	恋愛ジャンキー		
+qid:Q11153241|name:恋愛中毒症	love-junkie	different_works	sub	love-junkie-1999	恋愛中毒症		YEAR_ONLY
+qid:Q11103202|name:恋愛ジャンキー	love-junkie	different_works	sub	love-junkie-tohjoh-2001	恋愛ジャンキー	tohjoh	
 name:池波正太郎|name:仕掛人藤枝梅安	shikakenin-fujieda-baian	option2	sub	shikakenin-fujieda-baian-2002	仕掛人藤枝梅安		YEAR_ONLY
 qid:Q2661273|name:仕掛人藤枝梅安	shikakenin-fujieda-baian	option2	sub	shikakenin-fujieda-baian-ikenami-2025	仕掛人藤枝梅安	ikenami	
 name:茶留たかふみ|name:漫画版世界の歴史	mangaban-sekai-no-rekishi	option2	sub	mangaban-sekai-no-rekishi-2009	漫画版世界の歴史		YEAR_ONLY
@@ -395,11 +411,14 @@ name:百瀬祐一郎|name:ヒプノシスマイク|sub:division rap battle-side 
 name:百瀬祐一郎|name:ヒプノシスマイク|sub:division rap battle-side D.H & B.A.T	hypnosis-mic-division-rap-battle-side-d-h-b-a-t	different_works	sub	hypnosis-mic-division-rap-battle-side-d-h-b-a-t-momose-2020	ヒプノシスマイク	momose	
 name:富野由悠季|name:∀ガンダム	turn-a-gundam	option2	sub	turn-a-gundam-tomino-1999	∀ガンダム	tomino	
 name:富野喜幸|name:∀Gundam	turn-a-gundam	option2	sub	turn-a-gundam-tokita-1999	∀Gundam	tokita	
-name:富野由悠季|name:新機動戦記ガンダムW	shin-kidou-senki-gandamu-uingu	different_works	main	shin-kidou-senki-gandamu-uingu	新機動戦記ガンダムW	tokita	
-qid:Q9046266|name:新機動戦記ガンダムW	shin-kidou-senki-gandamu-uingu	different_works	sub	shin-kidou-senki-gandamu-uingu-1995	新機動戦記ガンダムW		YEAR_ONLY
-qid:Q110403049|name:新機動戦記ガンダムW	shin-kidou-senki-gandamu-uingu	different_works	sub	shin-kidou-senki-gandamu-uingu-1996	新機動戦記ガンダムW		YEAR_ONLY
-qid:Q11279570|name:新機動戦記ガンダムW	shin-kidou-senki-gandamu-uingu	different_works	sub	shin-kidou-senki-gandamu-uingu-1996-2	新機動戦記ガンダムW		YEAR_ONLY
-qid:Q11543616|name:新機動戦記ガンダムW	shin-kidou-senki-gandamu-uingu	different_works	sub	shin-kidou-senki-gandamu-uingu-1996-3	新機動戦記ガンダムW		YEAR_ONLY
+name:富野由悠季|name:新機動戦記ガンダムW	shin-mobile-senki-gundam-wing	different_works	main	shin-mobile-senki-gundam-wing	新機動戦記ガンダムW	tokita	
+qid:Q9046266|name:新機動戦記ガンダムW	shin-mobile-senki-gundam-wing	different_works	sub	shin-mobile-senki-gundam-wing-1995	新機動戦記ガンダムW		YEAR_ONLY
+qid:Q110403049|name:新機動戦記ガンダムW	shin-mobile-senki-gundam-wing	different_works	sub	shin-mobile-senki-gundam-wing-1996	新機動戦記ガンダムW		YEAR_ONLY
+qid:Q11279570|name:新機動戦記ガンダムW	shin-mobile-senki-gundam-wing	different_works	sub	shin-mobile-senki-gundam-wing-1996-2	新機動戦記ガンダムW		YEAR_ONLY
+qid:Q11543616|name:新機動戦記ガンダムW	shin-mobile-senki-gundam-wing	different_works	sub	shin-mobile-senki-gundam-wing-1996-3	新機動戦記ガンダムW		YEAR_ONLY
+name:芳村杏|name:うぇるかむ!	welcome	different_works	main	welcome	うぇるかむ!	ayumi	
+qid:Q9014832|name:ウェルカム	welcome	different_works	sub	welcome-narita-1978	ウェルカム	narita	
+qid:Q6410148|name:ウェルカム	welcome	different_works	sub	welcome-1979	ウェルカム		YEAR_ONLY
 name:萌木ゆう|name:カテキョ!	katekyo	different_works	main	katekyo	カテキョ!	moegi	
 qid:Q11384930|name:かてきょ!	katekyo	different_works	sub	katekyo-2009	かてきょ!		YEAR_ONLY
 qid:Q2630137|name:武	takeru	different_works	main	takeru	武	terasawa	
@@ -410,8 +429,8 @@ name:矢島正雄|name:SORA!	sora	different_works	main	sora	SORA!	yajima
 qid:Q725387|name:宙	sora	different_works	sub	sora-2004	宙		YEAR_ONLY
 qid:Q11549176|name:空	sora	different_works	sub	sora-2007	空		YEAR_ONLY
 qid:Q9318872|name:そら	sora	different_works	sub	sora-2008	そら		YEAR_ONLY
-qid:Q1049526|name:機動戦士ガンダム	kidou-senshi-gandamu	different_works	main	kidou-senshi-gandamu	機動戦士ガンダム		
-name:矢立肇|name:機動戦士ガンダム	kidou-senshi-gandamu	different_works	sub	kidou-senshi-gandamu-yatate-1998	機動戦士ガンダム	yatate	
+qid:Q1049526|name:機動戦士ガンダム	mobile-suit-gundam	different_works	main	mobile-suit-gundam	機動戦士ガンダム		
+name:矢立肇|name:機動戦士ガンダム	mobile-suit-gundam	different_works	sub	mobile-suit-gundam-yatate-1998	機動戦士ガンダム	yatate	
 qid:Q11386858|name:純!!	jun	different_works	main	jun	純!!		
 name:友川丈之|name:純	jun	different_works	sub	jun-1997	純		YEAR_ONLY
 qid:Q11539225|name:Jun	jun	different_works	sub	jun-1983	Jun		YEAR_ONLY
@@ -443,7 +462,6 @@ qid:Q11457873|name:UNDEAD	undead	different_works	main	undead	UNDEAD
 name:露久ふみ|name:UNDEAD-アンデッド-	undead	different_works	sub	undead-tsuyuhisa-2021	UNDEAD-アンデッド-	tsuyuhisa	
 qid:Q2599283|name:アンデッド	undead	different_works	sub	undead-inoe-2008	アンデッド	inoe	
 name:筧一成|name:NORA	nora	different_works	main	nora	NORA	kakei	
-qid:Q11388964|name:のら	nora	different_works	sub	nora-1993	のら		YEAR_ONLY
 qid:Q11488834|name:トゥィンクル・ノーラ	nora	different_works	sub	nora-1984	トゥィンクル・ノーラ		YEAR_ONLY
 qid:Q11488834|name:ノーラ	nora	different_works	sub	nora-mikuriya-2000	Nora	mikuriya	
 name:鵤いるか|name:smile	smile	different_works	main	smile	smile		
@@ -470,6 +488,9 @@ qid:Q11628495|name:Voice	voice	different_works	sub	voice-1991	Voice		YEAR_ONLY
 qid:Q11430528|name:V・O・I・C・E	voice	different_works	sub	voice-1986	V・O・I・C・E		YEAR_ONLY
 qid:Q11405166|name:VOICE	voice	different_works	sub	voice-jubaori-1996	VOICE	jubaori	
 qid:Q1319777|name:ヴォイス	voice	different_works	sub	voice-2004	ヴォイス		YEAR_ONLY
+qid:Q48760993|name:KIMERA	chimera	different_works	main	chimera	KIMERA		
+qid:Q11103202|name:キメイラ	chimera	different_works	sub	chimera-1994	キメイラ		YEAR_ONLY
+qid:Q64784524|name:鬼面羅	chimera	different_works	sub	chimera-2002	鬼面羅		YEAR_ONLY
 qid:Q11417977|name:Flower	flower	different_works	main	flower	Flower	wada	
 qid:Q112238233|name:フラワー	flower	different_works	sub	flower-2012	フラワー		YEAR_ONLY
 qid:Q441692|name:FLOWER	flower	different_works	sub	flower-higuri-2001	FLOWER	higuri	
@@ -477,12 +498,8 @@ qid:Q11242326|name:天下無双	tenka-musou	different_works	main	tenka-musou	天
 qid:Q11382028|name:天下☆無双	tenka-musou	different_works	sub	tenka-musou-2002	天下☆無双		YEAR_ONLY
 qid:Q11254723|name:FULL MOON	full-moon	different_works	main	full-moon	FULL MOON	shiozawa	
 qid:Q597117|name:@full moon	full-moon	different_works	sub	full-moon-mato-2008	@full moon	mato	
-qid:Q41698614|name:ファイナルファンタジー11	fainaru-fantajii-11	different_works	main	fainaru-fantajii-11	ファイナルファンタジー11		
-qid:Q11260418|name:ファイナルファンタジー11	fainaru-fantajii-11	different_works	sub	fainaru-fantajii-11-2006	ファイナルファンタジー11		YEAR_ONLY
-qid:Q11561327|name:ファイナルファンタジー11	fainaru-fantajii-11	different_works	sub	fainaru-fantajii-11-2005	ファイナルファンタジー11		YEAR_ONLY
 qid:Q11260861|name:キメラ	kimera	different_works	main	kimera	キメラ	ogata	
 qid:Q468761|name:Ki・me・ra	kimera	different_works	sub	kimera-kodaka-1995	Ki・me・ra	kodaka	
-qid:Q64784524|name:鬼面羅	kimera	different_works	sub	kimera-2002	鬼面羅		YEAR_ONLY
 qid:Q3272992|name:だいすき!!	daisuki	different_works	main	daisuki	だいすき!!	aimoto	
 qid:Q11273389|name:だいすき!	daisuki	different_works	sub	daisuki-1993	だいすき!		YEAR_ONLY
 qid:Q43424557|name:だいすき	daisuki	different_works	sub	daisuki-kikuchi-1992	だいすき	kikuchi	
@@ -518,8 +535,6 @@ qid:Q11277050|name:Cherry	cherry	different_works	sub	cherry-2004-2	Cherry		YEAR_
 qid:Q11278817|name:幼なじみ	osananajimi	different_works	main	osananajimi	幼なじみ	mikokuno	
 qid:Q11438983|name:おさななじみ	osananajimi	different_works	sub	osananajimi-otani-2010	おさななじみ	otani	
 qid:Q11364664|name:おさななじみ|sub:きみと私のヒミツ	osananajimi	different_works	sub	osananajimi-oritoka-2019	おさななじみ	oritoka	
-qid:Q11279038|name:ショコラの魔法 パーフェクトコレクション	chocolat-no-mahou-memorial-collection	different_works	main	chocolat-no-mahou-memorial-collection	ショコラの魔法 パーフェクトコレクション		
-qid:Q11279038|name:ショコラの魔法 ティアーズコレクション	chocolat-no-mahou-memorial-collection	different_works	sub	chocolat-no-mahou-memorial-collection-2018	ショコラの魔法 ティアーズコレクション		YEAR_ONLY
 qid:Q5872362|name:天地無用!魎皇鬼	tenchi-muyou-ryououki	different_works	main	tenchi-muyou-ryououki	天地無用!魎皇鬼		
 qid:Q11279278|name:天地無用!魎皇鬼	tenchi-muyou-ryououki	different_works	sub	tenchi-muyou-ryououki-1994	天地無用!魎皇鬼		YEAR_ONLY
 qid:Q8017002|name:かわいいひと	kawaii-hito	different_works	main	kawaii-hito	かわいいひと	saito	
@@ -539,15 +554,21 @@ qid:Q11678043|name:歪	ibitsu	different_works	sub	ibitsu-2020	歪		YEAR_ONLY
 qid:Q3135258|name:キッズ	kids	different_works	main	kids	キッズ		
 qid:Q9321501|name:Kids	kids	different_works	sub	kids-1987	Kids		YEAR_ONLY
 qid:Q11372142|name:Kids!	kids	different_works	sub	kids-1998	Kids!		YEAR_ONLY
-qid:Q11373070|name:劇場版ポケットモンスターダイヤモンド・パールスペシャルコミック	gekijouban-poketto-monsutaa-daiyamondo-paaru-supesharu-komikku	subseries	main	gekijouban-poketto-monsutaa-daiyamondo-paaru-supesharu-komikku	劇場版ポケットモンスターダイヤモンド・パールスペシャルコミック		
-qid:Q11564503|name:劇場版ポケットモンスターダイヤモンド・パールスペシャルコミック	gekijouban-poketto-monsutaa-daiyamondo-paaru-supesharu-komikku	subseries	main	gekijouban-poketto-monsutaa-daiyamondo-paaru-supesharu-komikku-2	劇場版ポケットモンスターダイヤモンド・パールスペシャルコミック		
-qid:Q7385272|name:劇場版ポケットモンスターダイヤモンド・パールスペシャルコミック	gekijouban-poketto-monsutaa-daiyamondo-paaru-supesharu-komikku	subseries	main	gekijouban-poketto-monsutaa-daiyamondo-paaru-supesharu-komikku-3	劇場版ポケットモンスターダイヤモンド・パールスペシャルコミック		
+qid:Q11373070|name:劇場版ポケットモンスターダイヤモンド・パールスペシャルコミック	gekijouban-pocket-monster-diamond-pearl-special-comic	subseries	main	gekijouban-pocket-monster-diamond-pearl-special-comic	劇場版ポケットモンスターダイヤモンド・パールスペシャルコミック		
+qid:Q11564503|name:劇場版ポケットモンスターダイヤモンド・パールスペシャルコミック	gekijouban-pocket-monster-diamond-pearl-special-comic	subseries	main	gekijouban-pocket-monster-diamond-pearl-special-comic-2	劇場版ポケットモンスターダイヤモンド・パールスペシャルコミック		
+qid:Q7385272|name:劇場版ポケットモンスターダイヤモンド・パールスペシャルコミック	gekijouban-pocket-monster-diamond-pearl-special-comic	subseries	main	gekijouban-pocket-monster-diamond-pearl-special-comic-3	劇場版ポケットモンスターダイヤモンド・パールスペシャルコミック		
 qid:Q11373354|name:稲川怪談	inagawa-kaidan	subseries	main	inagawa-kaidan	稲川怪談		
 qid:Q11549680|name:稲川怪談	inagawa-kaidan	subseries	main	inagawa-kaidan-2	稲川怪談		
-qid:Q11379164|name:劇場版ポケットモンスターAGスペシャルコミック	gekijouban-poketto-monsutaa-ag-supesharu-komikku	subseries	main	gekijouban-poketto-monsutaa-ag-supesharu-komikku	劇場版ポケットモンスターAGスペシャルコミック		
-qid:Q11564503|name:劇場版ポケットモンスターAGスペシャルコミック	gekijouban-poketto-monsutaa-ag-supesharu-komikku	subseries	main	gekijouban-poketto-monsutaa-ag-supesharu-komikku-2	劇場版ポケットモンスターAGスペシャルコミック		
+qid:Q11379164|name:劇場版ポケットモンスターAGスペシャルコミック	gekijouban-pocket-monster-ag-special-comic	subseries	main	gekijouban-pocket-monster-ag-special-comic	劇場版ポケットモンスターAGスペシャルコミック		
+qid:Q11564503|name:劇場版ポケットモンスターAGスペシャルコミック	gekijouban-pocket-monster-ag-special-comic	subseries	main	gekijouban-pocket-monster-ag-special-comic-2	劇場版ポケットモンスターAGスペシャルコミック		
 qid:Q1138133|name:アズマニア	azumania	subseries	main	azumania	アズマニア	azuma	SUBSERIES_NO_PREFIX
 qid:Q1138133|name:ネオ・アズマニア	azumania	subseries	sub	azumania-2006	ネオ・アズマニア		SUBSERIES_NO_PREFIX
+qid:Q11458108|name:サイコ	psycho	different_works	main	psycho	サイコ		
+qid:Q1191493|name:PSYCHO+	psycho	different_works	sub	psycho-fujisaki-1993	PSYCHO+	fujisaki	
+qid:Q11576031|name:サイコ	psycho	different_works	sub	psycho-1993	サイコ		YEAR_ONLY
+qid:Q11382767|name:彩子	psycho	different_works	sub	psycho-1984	彩子		YEAR_ONLY
+qid:Q11388964|name:のら	tou	different_works	main	tou	のら		
+qid:Q11384930|name:蕩 tou|sub:若美肉嗜虐浪漫	tou	different_works	sub	tou-2020	蕩 tou		YEAR_ONLY
 qid:Q11396374|name:少女まんが家の恋	shoujo-mangaka-no-koi	different_works	main	shoujo-mangaka-no-koi	少女まんが家の恋	osakabe	
 qid:Q11606236|name:少女漫画家の恋	shoujo-mangaka-no-koi	different_works	sub	shoujo-mangaka-no-koi-konno-2007	少女漫画家の恋	konno	
 qid:Q11399093|name:シャチ	shachi	different_works	main	shachi	シャチ		
@@ -584,9 +605,6 @@ qid:Q1335743|name:ラブラボ	love-lab	different_works	sub	love-lab-2004	ラブ
 qid:Q9008430|name:ラブラボ	love-lab	different_works	sub	love-lab-momoyuki-2005	ラブラボ	momoyuki	
 qid:Q11454794|name:Are you enemy?	angelic-conversation	different_works	main	angelic-conversation	Are you enemy?	miyamoto	
 qid:Q11454794|name:エンジェリック・カンバセーション	angelic-conversation	different_works	sub	angelic-conversation-2008	エンジェリック・カンバセーション		YEAR_ONLY
-qid:Q11458108|name:サイコ	psycho	different_works	main	psycho	サイコ		
-qid:Q1191493|name:PSYCHO+	psycho	different_works	sub	psycho-fujisaki-1993	PSYCHO+	fujisaki	
-qid:Q11576031|name:サイコ	psycho	different_works	sub	psycho-1993	サイコ		YEAR_ONLY
 qid:Q11500157|name:ヴァンプ	vamp	different_works	main	vamp	ヴァンプ		
 qid:Q11459435|name:VAMP!?	vamp	different_works	sub	vamp-2001	VAMP!?		YEAR_ONLY
 qid:Q460877|name:WILD CATS	wild-cats	different_works	main	wild-cats	WILD CATS	shimizu	
@@ -595,8 +613,8 @@ qid:Q11462329|name:Tales of Eternia	tales-of-eternia	different_works	main	tales-
 qid:Q11462329|name:テイルズオブエターニア プレミアムストーリーズ	tales-of-eternia	different_works	sub	tales-of-eternia-2002	テイルズオブエターニア プレミアムストーリーズ		YEAR_ONLY
 qid:Q11463964|name:NICO SAYS	nico-says	different_works	main	nico-says	NICO SAYS		
 qid:Q11463964|name:dessin	nico-says	different_works	sub	nico-says-onozuka-1999	dessin	onozuka	
-qid:Q11468186|name:レンアイ漫画家	renai-mangaka	different_works	main	renai-mangaka	レンアイ漫画家		
-qid:Q11538067|name:恋愛漫画家	renai-mangaka	different_works	sub	renai-mangaka-2010	恋愛漫画家		YEAR_ONLY
+qid:Q11468186|name:レンアイ漫画家	love-mangaka	different_works	main	love-mangaka	レンアイ漫画家		
+qid:Q11538067|name:恋愛漫画家	love-mangaka	different_works	sub	love-mangaka-2010	恋愛漫画家		YEAR_ONLY
 qid:Q11469496|name:ヒミツの保健室	himitsu-no-hokenshitsu	different_works	main	himitsu-no-hokenshitsu	ヒミツの保健室		
 qid:Q11642002|name:ひ・み・つの保健室	himitsu-no-hokenshitsu	different_works	sub	himitsu-no-hokenshitsu-2003	ひ・み・つの保健室		YEAR_ONLY
 qid:Q11658055|name:紅	kurenai	different_works	main	kurenai	紅	yamamoto	
@@ -619,8 +637,12 @@ qid:Q11614004|name:刹那	setsuna	different_works	sub	setsuna-1997	刹那		YEAR_
 qid:Q1377779|name:刹那	setsuna	different_works	sub	setsuna-2025	刹那		YEAR_ONLY
 qid:Q11519017|name:ダンデ・ライオン	dandelion	different_works	main	dandelion	ダンデ・ライオン	sorachi	
 qid:Q11620583|name:ダンデライオン	dandelion	different_works	sub	dandelion-2001	ダンデライオン		YEAR_ONLY
-qid:Q11620400|name:結婚×レンアイ。	kekkon-renai	different_works	main	kekkon-renai	結婚×レンアイ。	hagio	
-qid:Q11557567|name:結婚恋愛	kekkon-renai	different_works	sub	kekkon-renai-2016	結婚恋愛		YEAR_ONLY
+qid:Q11620400|name:結婚×レンアイ。	kekkon-love	different_works	main	kekkon-love	結婚×レンアイ。	hagio	
+qid:Q11557567|name:結婚恋愛	kekkon-love	different_works	sub	kekkon-love-2016	結婚恋愛		YEAR_ONLY
+qid:Q7105688|name:LOVE	love	different_works	main	love	LOVE	ishiwata	
+qid:Q438220|name:REN-AI	love	different_works	sub	love-2015	REN-AI		YEAR_ONLY
+qid:Q11563128|name:蓮愛	love	different_works	sub	love-2005	蓮愛		YEAR_ONLY
+qid:Q3482402|name:LOVE	love	different_works	sub	love-okina-1998	LOVE	okina	
 qid:Q11577130|name:林檎ものがたり	ringo-monogatari	different_works	main	ringo-monogatari	林檎ものがたり	tabuchi	
 qid:Q2875041|name:林檎物語	ringo-monogatari	different_works	sub	ringo-monogatari-1978	林檎物語		YEAR_ONLY
 qid:Q11581218|name:僕の姉ちゃん	boku-no-nee-chan	no_merge	main	boku-no-nee-chan	僕の姉ちゃん		
@@ -648,6 +670,7 @@ qid:Q11668719|name:続横浜百年食堂	yokohama-hyakunen-shokudou	no_merge	sub
 qid:Q11671440|name:Lesson	lesson	different_works	main	lesson	Lesson		
 qid:Q11671440|name:レッスン	lesson	different_works	sub	lesson-2000	レッスン		YEAR_ONLY
 qid:Q11671965|name:エンジェル	angel	different_works	main	angel	エンジェル		
+qid:Q3039846|name:えんじぇる	angel	different_works	sub	angel-iwadate-1983	えんじぇる	iwadate	
 qid:Q6782739|name:エンジェル	angel	different_works	sub	angel-1988	エンジェル		YEAR_ONLY
 qid:Q9330031|name:ORANGE	orange	different_works	main	orange	ORANGE	noda	
 qid:Q11673144|name:orange	orange	different_works	sub	orange-2012	orange		YEAR_ONLY
@@ -658,8 +681,8 @@ qid:Q3573155|name:愛人	aijin	different_works	sub	aijin-yoshihara-2002	愛人	y
 qid:Q41698730|name:愛人	aijin	different_works	sub	aijin-1993	愛人		YEAR_ONLY
 qid:Q2601844|name:A・i・ji・n	aijin	different_works	sub	aijin-2001	A・i・ji・n		YEAR_ONLY
 qid:Q211099|name:愛人	aijin	different_works	sub	aijin-watanabe-2008	愛人	watanabe	
-qid:Q4889571|name:となりのお姉さん	tonari-no-onee-san	different_works	main	tonari-no-onee-san	となりのお姉さん	tamaoki	
-qid:Q17212046|name:隣のお姉さん	tonari-no-onee-san	different_works	sub	tonari-no-onee-san-2005	隣のお姉さん		YEAR_ONLY
+qid:Q4889571|name:となりのお姉さん	tonari-no-onee-sun	different_works	main	tonari-no-onee-sun	となりのお姉さん	tamaoki	
+qid:Q17212046|name:隣のお姉さん	tonari-no-onee-sun	different_works	sub	tonari-no-onee-sun-2005	隣のお姉さん		YEAR_ONLY
 qid:Q276378|name:Yellow	yellow	different_works	main	yellow	Yellow	tateno	
 qid:Q1721423|name:Yellow	yellow	different_works	sub	yellow-kawaguchi-1996	Yellow	kawaguchi	
 qid:Q468761|name:KIZUNA	kizuna	different_works	main	kizuna	KIZUNA	kodaka	
@@ -667,6 +690,7 @@ qid:Q9332488|name:きずな	kizuna	different_works	sub	kizuna-momochi-2004	き�
 qid:Q17225147|name:キズナ	kizuna	different_works	sub	kizuna-yuki-2007	キズナ	yuki	
 qid:Q3113855|name:プライド	pride	different_works	main	pride	プライド	ichijo	
 qid:Q24045825|name:プライド	pride	different_works	sub	pride-1989	プライド		YEAR_ONLY
+qid:Q958269|name:誇り	pride	different_works	sub	pride-2012	誇り		YEAR_ONLY
 qid:Q2483662|name:PRIDE	pride	different_works	sub	pride-tagame-2004	PRIDE	tagame	
 qid:Q265061|name:ゴールデンライラック	bara-no-kabin	different_works	main	bara-no-kabin	ゴールデンライラック		
 qid:Q265061|name:ばらの花びん	bara-no-kabin	different_works	sub	bara-no-kabin-hagio-1985	ばらの花びん	hagio	
@@ -686,15 +710,10 @@ qid:Q6364240|name:楽園	rakuen	different_works	sub	rakuen-sakurakoji-2004	楽�
 qid:Q9013687|name:楽園	rakuen	different_works	sub	rakuen-rca-2006	楽園	rca	
 qid:Q3201020|name:アプローズ	bruges-applause	subseries	main	bruges-applause	アプローズ		SUBSERIES_NO_PREFIX
 qid:Q3201020|name:ブルージュ	bruges-applause	subseries	sub	bruges-applause-1992	ブルージュ		SUBSERIES_NO_PREFIX
-qid:Q7105688|name:LOVE	love	different_works	main	love	LOVE	ishiwata	
-qid:Q438220|name:REN-AI	love	different_works	sub	love-2015	REN-AI		YEAR_ONLY
-qid:Q3482402|name:LOVE	love	different_works	sub	love-okina-1998	LOVE	okina	
-qid:Q3776937|name:Barレモン・ハート ドラマ・シーズン2エピソード集	bar-remon-haato	no_merge	main	bar-remon-haato	Barレモン・ハート ドラマ・シーズン2エピソード集		
-qid:Q3776937|name:BARレモン・ハート ドラマエピソード集	bar-remon-haato	no_merge	sub	bar-remon-haato-2015	BARレモン・ハート ドラマエピソード集		YEAR_ONLY
 qid:Q41698730|name:Darkness	darkness	different_works	main	darkness	Darkness		
 qid:Q41698730|name:ダークネス	darkness	different_works	sub	darkness-2006	ダークネス		YEAR_ONLY
-qid:Q445827|name:アラベスク第1部	arabesuku	subseries	sub	arabesuku-1bu	アラベスク第1部		SUBTITLE_REVIEW
-qid:Q445827|name:アラベスク第2部	arabesuku	subseries	sub	arabesuku-2bu	アラベスク第2部		SUBTITLE_REVIEW
+qid:Q445827|name:アラベスク	arabesque	subseries	main	arabesque	アラベスク		
+qid:Q445827|name:アラベスク第1部	arabesque	subseries	sub	arabesque-dai1bu	アラベスク第1部		SUBTITLE_REVIEW
 qid:Q965600|name:PEACH!	peach	different_works	main	peach	Peach!		
 qid:Q446051|name:PEACH	peach	different_works	sub	peach-2000	PEACH		YEAR_ONLY
 qid:Q465645|name:TAKE IT EASY	take-it-easy	different_works	main	take-it-easy	TAKE IT EASY	okazaki	
@@ -703,8 +722,6 @@ qid:Q6139039|name:Pure Love Seasons2	pure-love-shiizunzu-2	subseries	main	pure-l
 qid:Q6164134|name:Pure Love Seasons2	pure-love-shiizunzu-2	subseries	main	pure-love-shiizunzu-2-2	Pure Love Seasons2		
 qid:Q614514|name:貸本怪談まんが傑作選	kashihon-kaidan-manga-kessakusen	subseries	main	kashihon-kaidan-manga-kessakusen	貸本怪談まんが傑作選		
 qid:Q669049|name:貸本怪談まんが傑作選	kashihon-kaidan-manga-kessakusen	subseries	main	kashihon-kaidan-manga-kessakusen-2	貸本怪談まんが傑作選		
-qid:Q9014832|name:ウェルカム	welcome	different_works	main	welcome	ウェルカム	narita	
-qid:Q6410148|name:ウェルカム	welcome	different_works	sub	welcome-1979	ウェルカム		YEAR_ONLY
 qid:Q967455|name:激突	gekitotsu	different_works	main	gekitotsu	激突	sadao	
 qid:Q6918002|name:激突	gekitotsu	different_works	sub	gekitotsu-1990	激突		YEAR_ONLY
 qid:Q731579|name:Compiler	compiler	subseries	main	compiler	Compiler	asamiya	SUBSERIES_NO_PREFIX
