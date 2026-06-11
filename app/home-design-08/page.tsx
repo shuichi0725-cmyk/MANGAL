@@ -10,7 +10,9 @@ export default function Design08() {
   const hero = completedClassics[0];
   const newShelf = byNew.slice(0, 12);
   const fiveVols = manga.filter((m) => m.status === "completed" && volCount(m) >= 3 && volCount(m) <= 5).slice(0, 6);
-  const random1 = seeded(manga, (m) => m.slug, 1, 23)[0];
+  // ★日付シード: 「今日」で決定的に選ぶ(= 全員同じ今日の1冊、 再ビルド不要で毎日変わる)
+  const daySalt = Number(new Date().toISOString().slice(0, 10).replace(/-/g, ""));
+  const random1 = seeded(manga, (m) => m.slug, 1, daySalt)[0];
   const serializing = manga.filter((m) => m.status !== "completed").length;
 
   const Tile = ({ children, className = "" }: { children: React.ReactNode; className?: string }) => (
