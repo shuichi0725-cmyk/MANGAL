@@ -2,8 +2,8 @@
 
 import { useEffect, useState } from "react";
 
-/** スクロールすると現れるショートカットバー(アイコンのみ・ロゴなし)。
- *  ページ最上部では隠れる(= サイトヘッダーが見えている時は不要、 動き出したら出る)。 */
+/** ショートカットバー: 見た目はヘッダーと同じ全幅バー。 最上部では隠れていて、
+ *  スクロールすると上からしまわれていたものが出てくる(戻るとまたしまわれる)。 */
 export default function ScrollShortcutsMock() {
   const [show, setShow] = useState(false);
   useEffect(() => {
@@ -14,11 +14,11 @@ export default function ScrollShortcutsMock() {
   }, []);
   return (
     <div
-      className={`fixed inset-x-0 top-0 z-50 flex justify-center transition-transform duration-200 ${
+      className={`fixed inset-x-0 top-0 z-50 transition-transform duration-200 ease-out ${
         show ? "translate-y-0" : "-translate-y-full"
       }`}
     >
-      <div className="mt-1.5 flex items-center gap-5 rounded-full border border-[var(--color-line)] bg-[var(--color-surface)]/95 px-5 py-2 shadow-md backdrop-blur">
+      <div className="flex items-center justify-end gap-5 border-b border-[var(--color-line)] bg-[var(--color-surface)]/95 px-5 pb-2 pt-2.5 shadow-sm backdrop-blur">
         {[
           ["📋", "一覧"],
           ["📚", "書庫"],
@@ -26,8 +26,9 @@ export default function ScrollShortcutsMock() {
           ["🔍", "検索"],
           ["≡", "メニュー"],
         ].map(([icon, label]) => (
-          <button key={label} aria-label={label} className="text-[20px] leading-none active:scale-90">
-            {icon}
+          <button key={label} aria-label={label} className="flex flex-col items-center gap-0.5 active:scale-90">
+            <span className="text-[19px] leading-none">{icon}</span>
+            <span className="text-[9px] text-ink/50">{label}</span>
           </button>
         ))}
       </div>
