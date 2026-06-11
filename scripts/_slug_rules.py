@@ -56,9 +56,13 @@ def hep(kana):
     return "".join(it["hepburn"] for it in _kks.convert(kana)).lower()
 
 
+# ★2-3カナの和語/敬称と英単語の同音衝突を防ぐ(サン→sun/ジン→jing/ユウ→iu の実害を確認済)
+_DICT_BLACKLIST = {"サン", "クン", "チャン", "サマ", "ドノ", "センパイ", "タン"}
+
+
 def _dict_value(tok):
     """埋込カタカナ外来語の英綴り (ガード通過時のみ)。 不採用なら None。"""
-    if len(tok) < 2 or not _KATA_RE.match(tok):
+    if len(tok) < 3 or not _KATA_RE.match(tok) or tok in _DICT_BLACKLIST:
         return None
     v = KATA_DICT.get(tok)
     if not v or not _VAL_RE.match(v):

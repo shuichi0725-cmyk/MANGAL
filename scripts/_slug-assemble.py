@@ -7,7 +7,7 @@ base slug 分岐:
 衝突 suffix(CLAUDE.md): 主版(巻数多→古い)=無印、 従版= -姓ローマ字+発売年。
   二重衝突は -姓年-2… の index。 出力 .cache/slug-final.tsv。
 """
-import pickle, csv, json, re, sqlite3, sys
+import difflib, pickle, csv, json, re, sqlite3, sys, unicodedata
 from collections import defaultdict
 from pathlib import Path
 
@@ -32,6 +32,12 @@ def drop_long(r):
         r=n
 def phon(tok): return SR.token_roman(tok)
 def canon(s): return drop_long(s.replace("wo","o"))
+def _onsha(latin_slug, kana):
+    """latin が kana の音写か = 子音骨格類似度(v2 is_onsha と同基準)。"""
+    a = re.sub(r"[aeiou\W_]", "", (latin_slug or "").lower())
+    b = re.sub(r"[aeiou\W_]", "", drop_long(hep(re.sub(r"[\s　]+","",kana or ""))))
+    if not a or not b: return 0.0
+    return difflib.SequenceMatcher(None, a, b).ratio()
 def english_like(t):
     if not t: return False
     if "l" in t or "x" in t or "q" in t: return True
@@ -205,8 +211,18 @@ def main():
             base = ov                         # ★gap a/b 統合の確定slugを最優先
         elif cls=="num":
             base=number_slug(title,seg)
-        elif cls in ("kata","latin"):
-            base = ars if ars else (kata_dict_slug(seg) if seg else ks)
+        elif cls=="latin":
+            # ★題そのものがラテン=公式綴り。 AniList romaji は誤マッチ(ONE PIECE→読切romaji
+            #   採用で本編ページ消失の実害)があるため title 優先、 空時のみ fallback(2026-06-11)
+            t = unicodedata.normalize("NFKC", title).lower()
+            t = re.sub(r"[^a-z0-9]+","-",t).strip("-")
+            base = t or ars or (kata_dict_slug(seg) if seg else ks)
+        elif cls=="kata":
+            # ★音写ガード(v2 と同基準): ars が読みの音写でなければ誤マッチとして不採用
+            if ars and _onsha(ars, seg or title) >= 0.45:
+                base = ars
+            else:
+                base = (kata_dict_slug(seg) if seg else "") or ks or ars
         else:
             base = hybridize(ks,ars,title) or ks
         if not base: base=ks or phon(seg)

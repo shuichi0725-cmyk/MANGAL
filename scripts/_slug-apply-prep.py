@@ -22,17 +22,20 @@ def dr(fn):
 
 integ = dr("data/seeds/slug-final-integrated.tsv")
 
+# ★rep(=ページ代表key)単位で 1ページ=1行。 全key出しにすると merge群の同slug共有を
+#   apply-build が cap衝突と誤認して "-2" 偽ページを量産する(2026-06-11 修正)。
 key2slug = {}
 drop_keys = set()
 split_reps = set()
 for r in integ:
+    rep = r["rep"]
     s = r["proposed_slug"]
     if s == "(DROP)":
-        drop_keys.add(r["rep"])
+        drop_keys.add(rep)
     elif s.startswith("(SPLIT"):
-        split_reps.add(r["rep"])
-    elif s:
-        key2slug[r["key"]] = s
+        split_reps.add(rep)
+    elif s and rep not in key2slug:
+        key2slug[rep] = s
 
 # c2 merge_all: Stage A-3 で series-merge-auto 適用済のため、 未吸収(reps≥2が現存)のみ拾う(通常0)
 reps_alive = {r["rep"] for r in integ}
