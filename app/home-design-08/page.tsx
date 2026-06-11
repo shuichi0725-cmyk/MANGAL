@@ -1,5 +1,6 @@
 import Link from "next/link";
 import LikeButtonMock from "@/components/LikeButtonMock";
+import ScrollShortcutsMock from "@/components/ScrollShortcutsMock";
 import { bundle, DesignNav, seeded, volCount, Cover, CoverTile } from "@/lib/homeDesign";
 
 /** 案8: 7のコーナー編成 × 5のコックピット質感 + ヘッダーショートカット(確定済ヘッダーUI設計を反映)。
@@ -20,28 +21,8 @@ export default function Design08() {
     <div className="min-h-screen bg-[var(--color-bg)] pb-12">
       <DesignNav current={8} />
 
-      {/* ── ヘッダー: ロゴ + ショートカットアイコン群(一覧/書庫/使い方/検索 + ≡) ── */}
-      <header className="sticky top-[37px] z-40 border-b border-[var(--color-line)] bg-[var(--color-surface)]/95 px-4 pb-2.5 pt-3.5 backdrop-blur">
-        <div className="flex items-center justify-between">
-          <h1 className="text-lg font-extrabold tracking-tight">
-            MANGAL<span className="text-[var(--color-accent)]">.</span>
-          </h1>
-          <div className="flex items-start gap-4">
-            {[
-              ["📋", "一覧"],
-              ["📚", "書庫"],
-              ["🔰", "使い方"],
-              ["🔍", "検索"],
-              ["≡", "メニュー"],
-            ].map(([icon, label]) => (
-              <button key={label} className="flex flex-col items-center gap-0.5">
-                <span className="text-[19px] leading-none">{icon}</span>
-                <span className="text-[9px] text-ink/50">{label}</span>
-              </button>
-            ))}
-          </div>
-        </div>
-      </header>
+      {/* ── ショートカット: 最上部では隠れ、スクロールで上から現れる浮遊バー(アイコンのみ) ── */}
+      <ScrollShortcutsMock />
 
       {/* ── 計器盤: 数字タイル(案5) ── */}
       <div className="mt-4 grid grid-cols-3 gap-2.5 px-4">
