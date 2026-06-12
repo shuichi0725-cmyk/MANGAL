@@ -22,20 +22,45 @@ def dr(fn):
 
 integ = dr("data/seeds/slug-final-integrated.tsv")
 
+# ★成年ゲート(2026-06-13 追加): adult_score>=3 の series は本番ページにしない。
+#   発端 = あまとりあ社41頁(貧乳日記)露出 → 全数調査で2,233頁が無ガード公開と判明
+#   (従来パイプラインは成年フィルタがどこにも配線されていなかった=5月の本番化から)。
+#   例外 = data/seeds/adult-overrides.yml の force_adult:False(種aで全年齢確認済み)。
+#   将来 = 成年3分けレビューUI([[adult_triage_review_pending]])で人が確定後に解放。
+import sqlite3
+import yaml as _yaml
+_con = sqlite3.connect(ROOT / ".cache" / "db-v2.sqlite")
+_con.text_factory = lambda b: b.decode("utf-8", "replace")
+adult_keys = {r[0] for r in _con.execute("SELECT series_key FROM series WHERE adult_score>=3")}
+_con.close()
+_ovr_doc = _yaml.safe_load((ROOT / "data" / "seeds" / "adult-overrides.yml").read_text(encoding="utf-8")) or {}
+_ovr = {
+    o["series_key"]
+    for o in (_ovr_doc.get("overrides") or [])
+    if isinstance(o, dict) and o.get("force_adult") is False and o.get("series_key")
+}
+adult_keys -= _ovr
+
 # ★rep(=ページ代表key)単位で 1ページ=1行。 全key出しにすると merge群の同slug共有を
 #   apply-build が cap衝突と誤認して "-2" 偽ページを量産する(2026-06-11 修正)。
 key2slug = {}
 drop_keys = set()
 split_reps = set()
+adult_held = set()
 for r in integ:
     rep = r["rep"]
     s = r["proposed_slug"]
+    if rep in adult_keys or r["key"] in adult_keys:
+        adult_held.add(rep)
+        key2slug.pop(rep, None)
+        continue
     if s == "(DROP)":
         drop_keys.add(rep)
     elif s.startswith("(SPLIT"):
         split_reps.add(rep)
     elif s and rep not in key2slug:
         key2slug[rep] = s
+drop_keys |= adult_held
 
 # c2 merge_all: Stage A-3 で series-merge-auto 適用済のため、 未吸収(reps≥2が現存)のみ拾う(通常0)
 reps_alive = {r["rep"] for r in integ}
@@ -57,4 +82,4 @@ json.dump(merges, (A/"merges-c2.json").open("w",encoding="utf-8"), ensure_ascii=
 with (A/"recluster-vol.tsv").open("w",encoding="utf-8") as f:
     f.write("isbn13\tslug\n")
     for i,s in recl.items(): f.write(f"{i}\t{s}\n")
-print(f"key2slug:{len(key2slug):,} / 残merge群:{len(merges)}(Stage A-3適用済なら0) / drop:{len(drop_keys)} / split(recluster)rep:{len(split_reps)} / recluster ISBN:{len(recl)}")
+print(f"key2slug:{len(key2slug):,} / 残merge群:{len(merges)}(Stage A-3適用済なら0) / drop:{len(drop_keys)}(うち★成年hold:{len(adult_held):,}) / split(recluster)rep:{len(split_reps)} / recluster ISBN:{len(recl)}")
