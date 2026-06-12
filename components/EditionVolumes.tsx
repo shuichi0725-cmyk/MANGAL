@@ -50,7 +50,7 @@ export default function EditionVolumes({
   //   読み込み感のある「にゅっ」とした展開/畳み。 開閉どちらも適用。
   const Grow = ({ open, children }: { open: boolean; children: React.ReactNode }) => (
     <div
-      className="grid transition-[grid-template-rows,opacity] duration-300 ease-out"
+      className="grid transition-[grid-template-rows,opacity] duration-[550ms] ease-[cubic-bezier(0.22,1,0.36,1)]"
       style={{ gridTemplateRows: open ? "1fr" : "0fr", opacity: open ? 1 : 0 }}
     >
       <div className="min-h-0 overflow-hidden">{children}</div>
@@ -70,7 +70,7 @@ export default function EditionVolumes({
             collapsed ? "tactile rounded-card px-3.5 py-3" : "mb-3 px-0"
           }`}
         >
-          <span className={`inline-block text-ink/40 transition-transform duration-300 ${collapsed ? "" : "rotate-90"}`}>▸</span>
+          <span className={`inline-block text-ink/40 transition-transform duration-[550ms] ${collapsed ? "" : "rotate-90"}`}>▸</span>
           <span className={`font-bold ${collapsed ? "text-[15px]" : "text-base"}`}>{edition.label}</span>
           <Badge>全 {vols.length} 巻</Badge>
           {edition.publisher && (
