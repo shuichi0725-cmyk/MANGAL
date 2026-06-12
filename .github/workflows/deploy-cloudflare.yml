@@ -13,11 +13,12 @@ name: Deploy to Cloudflare
 # assets.directory が ./out で、 Next.js の `output: "export"` 出力をそのまま
 # CDN にアップロードする構成。
 
+# 2026-06-12: WIPブランチを trigger から除外(プレビュー開発中の push 毎に失敗メールが
+# 飛んでいたため)。デプロイ再開時は workflow_dispatch か main への merge で。
 on:
   push:
     branches:
       - main
-      - claude/manga-database-affiliate-3x0ms
     paths:
       - "data/manga/**"
       - "data/*.yml"
