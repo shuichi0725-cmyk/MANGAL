@@ -119,9 +119,9 @@ export default function Design11() {
 
       {/* 6.【小・新】ジャンルルーレット */}
       <section className="mt-4 px-4">
-        <Link href={`/?genre=${todayGenre}`} className="flex items-center justify-between rounded-xl bg-gradient-to-r from-[var(--color-accent)] to-[var(--color-accent)]/80 px-4 py-3.5 text-white shadow-md">
-          <p className="text-[13px] font-bold">🎡 今日のジャンルルーレット: <span className="text-[16px]">{todayGenre}</span></p>
-          <span className="text-[11px] opacity-85">回ったジャンルの棚へ →</span>
+        <Link href={`/?genre=${todayGenre}`} className="block rounded-xl bg-gradient-to-r from-[var(--color-accent)] to-[var(--color-accent)]/80 px-4 py-3.5 text-white shadow-md">
+          <p className="text-[13px] font-bold leading-snug">🎡 今日のジャンルルーレット: <span className="text-[16px] whitespace-nowrap">{todayGenre}</span></p>
+          <p className="mt-0.5 text-right text-[11px] opacity-85">回ったジャンルの棚へ →</p>
         </Link>
       </section>
 

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import CoverImage from "@/components/CoverImage";
+import MarqueeTitle from "@/components/MarqueeTitle";
 import { primaryVolume, type Manga } from "@/lib/schema";
 
 /** 関連作品 = ①シリーズ/フランチャイズ(題名の前方一致) ②同作者(作画/原作の名前共有)。
@@ -59,12 +60,14 @@ export default function RelatedWorks({
                     {why}
                   </span>
                 </div>
-                <p className="mt-1 text-[11px] leading-snug text-ink/80 line-clamp-2 group-hover:text-[var(--color-accent)]">
-                  {m.title}
+                <MarqueeTitle
+                  text={m.title}
+                  className="mt-1 text-[11px] leading-snug text-ink/80 group-hover:text-[var(--color-accent)]"
+                />
+                <p className="truncate text-[10px] text-ink/45">
+                  {m.authors.map((a) => a.name).join("・")}
+                  {m.year_started ? ` ・ ${m.year_started}` : ""}
                 </p>
-                {m.year_started && (
-                  <p className="text-[10px] text-ink/45">{m.year_started}年</p>
-                )}
               </Link>
             </li>
           );

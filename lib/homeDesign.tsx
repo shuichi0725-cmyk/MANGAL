@@ -1,5 +1,6 @@
 import Link from "next/link";
 import CoverImage from "@/components/CoverImage";
+import MarqueeTitle from "@/components/MarqueeTitle";
 import { loadAllManga } from "@/lib/loadData";
 import { primaryVolume, type Manga } from "@/lib/schema";
 
@@ -57,11 +58,16 @@ export function Cover({ m, sizes = "120px" }: { m: Manga; sizes?: string }) {
 }
 
 export function CoverTile({ m, sizes }: { m: Manga; sizes?: string }) {
+  // ★題=1行オートスクロール(はみ出し時のみ)+作者行 で全コーナー統一(2026-06-12 ユーザ裁定)
   return (
     <Link href={`/manga/${m.slug}`} className="block group">
       <Cover m={m} sizes={sizes} />
-      <p className="mt-1 text-[12px] leading-snug text-ink/85 line-clamp-2 group-hover:text-[var(--color-accent)]">
-        {m.title}
+      <MarqueeTitle
+        text={m.title}
+        className="mt-1 text-[12px] leading-snug text-ink/85 group-hover:text-[var(--color-accent)]"
+      />
+      <p className="truncate text-[10px] text-ink/50">
+        {m.authors.map((a) => a.name).join("・")}
       </p>
     </Link>
   );
