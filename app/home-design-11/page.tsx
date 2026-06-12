@@ -22,6 +22,18 @@ export default function Design11() {
   // 新パーツ: 数字トリビア
   const longest = [...manga].sort((a, b) => volCount(b) - volCount(a))[0];
 
+  // 三世代: 日替わり編成(0=そろい踏み/1=当番1人/2=ペア)。残りは下層「非番」枠へ
+  const SANSEDAI_POOL = [
+    { slug: "kimetsu-no-yaiba", persona: "ミナト(10-20代)", copy: "今さら?って言われても推す。1巻の絶望から全部が伏線🔥", likes: 128 },
+    { slug: "slam-dunk", persona: "サオリ(30-40代)", copy: "「左手はそえるだけ」を超える最終話を、私はまだ知りません。青春の総量を描いた漫画です。", likes: 211 },
+    { slug: "hokuto-no-ken", persona: "圭三(50代以上・古書店主)", copy: "昭和五十八年、ジャンプにこれが載った日のことを覚えております。北斗は「強さ」ではなく「哀しみ」の漫画だと、歳を重ねるほどに分かります。", likes: 96 },
+  ];
+  const sansedaiMode = daySalt % 3;
+  const sansedaiPick = daySalt % SANSEDAI_POOL.length;
+  const sansedaiToday =
+    sansedaiMode === 0 ? SANSEDAI_POOL : sansedaiMode === 1 ? [SANSEDAI_POOL[sansedaiPick]] : SANSEDAI_POOL.filter((_, i) => i !== sansedaiPick);
+  const sansedaiRest = SANSEDAI_POOL.filter((p) => !sansedaiToday.includes(p));
+
   const Tile = ({ children, className = "" }: { children: React.ReactNode; className?: string }) => (
     <div className={`rounded-xl border border-[var(--color-line)] bg-[var(--color-surface)] shadow-sm ${className}`}>{children}</div>
   );
@@ -137,15 +149,8 @@ export default function Design11() {
       <section className="mt-4 px-4">
         <Tile className="p-3.5">
           {(() => {
-            const POOL = [
-              { slug: "kimetsu-no-yaiba", persona: "ミナト(10-20代)", copy: "今さら?って言われても推す。1巻の絶望から全部が伏線🔥", likes: 128 },
-              { slug: "slam-dunk", persona: "サオリ(30-40代)", copy: "「左手はそえるだけ」を超える最終話を、私はまだ知りません。青春の総量を描いた漫画です。", likes: 211 },
-              { slug: "hokuto-no-ken", persona: "圭三(50代以上・古書店主)", copy: "昭和五十八年、ジャンプにこれが載った日のことを覚えております。北斗は「強さ」ではなく「哀しみ」の漫画だと、歳を重ねるほどに分かります。", likes: 96 },
-            ];
-            const mode = daySalt % 3; // 0=そろい踏み / 1=1人当番 / 2=ペア
-            const pick = daySalt % POOL.length;
-            const today = mode === 0 ? POOL : mode === 1 ? [POOL[pick]] : POOL.filter((_, i) => i !== pick);
-            const label = mode === 0 ? "今日は3人そろい踏み" : mode === 1 ? "今日の当番" : "今日はペアでお届け";
+            const today = sansedaiToday;
+            const label = sansedaiMode === 0 ? "今日は3人そろい踏み" : sansedaiMode === 1 ? "今日の当番" : "今日はペアでお届け";
             return (
               <>
                 <div className="flex items-baseline justify-between">
@@ -194,6 +199,28 @@ export default function Design11() {
           </ul>
         </Tile>
       </section>
+
+      {/* 7.5【小】非番の案内人(三世代のメイン枠に出ていない人。そろい踏みの日は消える) */}
+      {sansedaiRest.length > 0 && (
+        <section className="mt-4 px-4">
+          <Tile className="p-3">
+            <p className="text-[11px] font-bold text-ink/55">☕ 非番の案内人からひとこと</p>
+            <div className="mt-1.5 space-y-1.5">
+              {sansedaiRest.map((p) => {
+                const m = manga.find((x) => x.slug === p.slug);
+                if (!m) return null;
+                return (
+                  <Link key={p.slug} href={`/manga/${m.slug}`} className="spring-press flex items-baseline gap-2">
+                    <span className="shrink-0 text-[10px] font-bold text-[var(--color-accent)]">{p.persona.split("(")[0]}</span>
+                    <span className="min-w-0 flex-1 truncate text-[12px] text-ink/80">『{m.title}』{p.copy}</span>
+                  </Link>
+                );
+              })}
+            </div>
+            <p className="mt-1.5 text-right text-[10px] text-ink/40"><Link href="/sansedai-archive" className="spring-press">全文と過去の推薦 →</Link></p>
+          </Tile>
+        </section>
+      )}
 
       {/* 8.【小】運命の一冊(★ガチャ化: ↻で再抽選・確率演出。候補プール埋込=通信ゼロ) */}
       <section className="mt-4 px-4">
