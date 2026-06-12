@@ -90,6 +90,31 @@ export default function Design11() {
       <DesignNav current={11} />
       <ScrollShortcutsMock />
 
+      {/* 0.【極小】統計ストリップ: 場所を取らない1行、各数字タップでフィルター絞り込みへ */}
+      {(() => {
+        const books = manga.reduce((s, m) => s + m.editions.reduce((x, e) => x + e.volumes.length, 0), 0);
+        const ongoing = manga.filter((m) => m.status !== "completed").length;
+        const done = manga.length - ongoing;
+        const S = ({ href, label, n }: { href: string; label: string; n: number }) => (
+          <Link href={href} className="spring-press whitespace-nowrap">
+            <span className="text-ink/50">{label}</span>{" "}
+            <b className="tabular-nums text-ink/85">{n.toLocaleString()}</b>
+          </Link>
+        );
+        return (
+          <div className="flex items-center gap-x-3 overflow-x-auto px-4 pt-3 text-[11px]">
+            <S href="/" label="作品" n={manga.length} />
+            <span className="text-ink/25">|</span>
+            <S href="/" label="漫画本" n={books} />
+            <span className="text-ink/25">|</span>
+            <S href="/?status=ongoing" label="連載中" n={ongoing} />
+            <span className="text-ink/25">|</span>
+            <S href="/?status=completed" label="完結" n={done} />
+            <span className="ml-auto shrink-0 text-[10px] text-ink/40">タップで絞り込み</span>
+          </div>
+        );
+      })()}
+
       {/* 1.【大】今週の一冊 */}
       {hero && (
         <section className="mt-4 px-4">
