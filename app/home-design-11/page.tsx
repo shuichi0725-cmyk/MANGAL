@@ -243,6 +243,26 @@ export default function Design11() {
         </Tile>
       </section>
 
+      {/* 7.3【深・新】週刊コラム(完結作だけ・ネタバレなし・長文) */}
+      <section className="mt-4 px-4">
+        <Link href="/column-sample" className="spring-press block">
+          <Tile className="overflow-hidden">
+            <div className="border-b-2 border-ink/75 px-4 pb-2 pt-3">
+              <p className="text-[9px] font-bold tracking-[0.25em] text-[var(--color-accent)]">週刊コラム ・ 完結作だけ、ネタバレなし</p>
+              <h2 className="mt-1 text-[16px] font-black leading-snug">
+                「強さ」を測る漫画が、「正しさ」を疑い始めるまで——『幽☆遊☆白書』を今読む理由
+              </h2>
+            </div>
+            <div className="px-4 py-3">
+              <p className="text-[12px] leading-relaxed text-ink/75 line-clamp-3">
+                主人公が冒頭で死ぬ少年漫画は、当時ほとんど存在しなかった。1990年にジャンプで始まった本作は、不良少年・浦飯幽助が子どもを庇って車にはねられるところから始まる。しかも霊界の側が「手違いだ」と告げる——。
+              </p>
+              <p className="mt-2 text-right text-[11px] font-semibold text-[var(--color-accent)]">続きを読む(約5分) →</p>
+            </div>
+          </Tile>
+        </Link>
+      </section>
+
       {/* 7.5【三世代 slot C】ペア or 散開時の3人目 */}
       <SansedaiSlot group={slotC} />
 
