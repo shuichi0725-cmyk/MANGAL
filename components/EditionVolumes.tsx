@@ -24,6 +24,24 @@ function fullStock(vols: Volume[]): boolean {
 //   ・展開中も最初は6巻まで+「全N巻を見る」
 const PREVIEW_COUNT = 6;
 
+// ★伸縮アニメ: grid-rows 0fr⇄1fr。 ※renderの外で定義必須(内側に書くと毎renderで別
+//   コンポーネント扱い=remountされ、遷移が一切走らないバグになる。2026-06-13実害)
+function Grow({ open, children }: { open: boolean; children: React.ReactNode }) {
+  return (
+    <div
+      className="grid"
+      style={{
+        gridTemplateRows: open ? "1fr" : "0fr",
+        opacity: open ? 1 : 0,
+        transition:
+          "grid-template-rows 550ms cubic-bezier(0.22, 1, 0.36, 1), opacity 450ms ease",
+      }}
+    >
+      <div className="min-h-0 overflow-hidden">{children}</div>
+    </div>
+  );
+}
+
 export default function EditionVolumes({
   manga,
   edition,
@@ -45,17 +63,6 @@ export default function EditionVolumes({
   const vols = hasTabs ? versions![sel].volumes : edition.volumes;
   const preview = vols.slice(0, PREVIEW_COUNT);
   const rest = vols.slice(PREVIEW_COUNT);
-
-  // ★伸縮アニメ(2026-06-13 ユーザ裁定): grid-rows 0fr⇄1fr トリックで高さを滑らかに伸ばす。
-  //   読み込み感のある「にゅっ」とした展開/畳み。 開閉どちらも適用。
-  const Grow = ({ open, children }: { open: boolean; children: React.ReactNode }) => (
-    <div
-      className="grid transition-[grid-template-rows,opacity] duration-[550ms] ease-[cubic-bezier(0.22,1,0.36,1)]"
-      style={{ gridTemplateRows: open ? "1fr" : "0fr", opacity: open ? 1 : 0 }}
-    >
-      <div className="min-h-0 overflow-hidden">{children}</div>
-    </div>
-  );
 
   return (
     <div>
