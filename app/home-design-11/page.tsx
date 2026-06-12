@@ -1,5 +1,6 @@
 import Link from "next/link";
 import LikeButtonMock from "@/components/LikeButtonMock";
+import DestinyPickMock from "@/components/DestinyPickMock";
 import MarqueeTitle from "@/components/MarqueeTitle";
 import ReleaseCalendarMock from "@/components/ReleaseCalendarMock";
 import ScrollShortcutsMock from "@/components/ScrollShortcutsMock";
@@ -194,24 +195,21 @@ export default function Design11() {
         </Tile>
       </section>
 
-      {/* 8.【小】運命の一冊 → 9.【深】入口群 */}
-      {(() => {
-        const r = seeded(manga, (m) => m.slug, 1, daySalt)[0];
-        return r ? (
-          <section className="mt-4 px-4">
-            <Link href={`/manga/${r.slug}`} className="block spring-press">
-              <Tile className="flex gap-3 p-3.5">
-                <div className="w-14 shrink-0"><Cover m={r} sizes="56px" /></div>
-                <div className="min-w-0 self-center">
-                  <p className="text-[10px] font-bold tracking-widest text-[var(--color-accent)]">🎲 運命の一冊</p>
-                  <p className="text-[13px] font-bold leading-snug line-clamp-2">{r.title}</p>
-                </div>
-                <span className="ml-auto self-center text-ink/30">↻</span>
-              </Tile>
-            </Link>
-          </section>
-        ) : null;
-      })()}
+      {/* 8.【小】運命の一冊(★ガチャ化: ↻で再抽選・確率演出。候補プール埋込=通信ゼロ) */}
+      <section className="mt-4 px-4">
+        <Tile>
+          <DestinyPickMock
+            items={seeded(manga, (m) => m.slug, 60, daySalt).map((m) => ({
+              slug: m.slug,
+              title: m.title,
+              authors: m.authors.map((a) => a.name).join("・"),
+              vols: volCount(m),
+            }))}
+            initialIndex={daySalt % 60}
+            total={manga.length}
+          />
+        </Tile>
+      </section>
       <section className="mt-5 px-4">
         <div className="grid grid-cols-2 gap-2.5">
           {[
