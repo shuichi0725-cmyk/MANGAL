@@ -1,6 +1,7 @@
 import Link from "next/link";
 import LikeButtonMock from "@/components/LikeButtonMock";
 import MarqueeTitle from "@/components/MarqueeTitle";
+import ReleaseCalendarMock from "@/components/ReleaseCalendarMock";
 import ScrollShortcutsMock from "@/components/ScrollShortcutsMock";
 import { bundle, DesignNav, seeded, volCount, Cover, CoverTile } from "@/lib/homeDesign";
 
@@ -80,9 +81,9 @@ export default function Design11() {
         </Tile>
       </section>
 
-      {/* 3.5【中・新】発売カレンダー(実データの日付から自動生成。本番=蒸留毎日運転で当月化) */}
+      {/* 3.5【中・新】発売カレンダー(日付タップ→直下に一覧展開。月データ埋込=完全静的) */}
       {(() => {
-        const byDay = new Map<string, Map<number, number>>();
+        const byDay = new Map<string, Map<number, Array<{ slug: string; title: string; authors: string }>>>();
         for (const m of manga) {
           for (const ed of m.editions) {
             for (const v of ed.volumes) {
@@ -92,50 +93,28 @@ export default function Design11() {
                 const day = Number(d.slice(8, 10));
                 if (!byDay.has(ym)) byDay.set(ym, new Map());
                 const mm = byDay.get(ym)!;
-                mm.set(day, (mm.get(day) ?? 0) + 1);
+                if (!mm.has(day)) mm.set(day, []);
+                mm.get(day)!.push({ slug: m.slug, title: m.title, authors: m.authors.map((a) => a.name).join("・") });
               }
             }
           }
         }
         const best = [...byDay.entries()].sort((a, b) => {
-          const ca = [...a[1].values()].reduce((x, y) => x + y, 0);
-          const cb = [...b[1].values()].reduce((x, y) => x + y, 0);
+          const ca = [...a[1].values()].reduce((x, y) => x + y.length, 0);
+          const cb = [...b[1].values()].reduce((x, y) => x + y.length, 0);
           return cb - ca || b[0].localeCompare(a[0]);
         })[0];
         if (!best) return null;
-        const [ym, days] = best;
-        const maxN = Math.max(...days.values());
+        const [ym, dmap] = best;
+        const days = [...dmap.entries()].map(([d, items]) => ({ d, items }));
         return (
           <section className="mt-4 px-4">
             <Tile className="p-3.5">
               <div className="flex items-baseline justify-between">
-                <h2 className="text-[14px] font-extrabold">📅 発売カレンダー <span className="text-[11px] font-semibold text-ink/50">{ym.replace("-", "年")}月</span></h2>
-                <span className="text-[10px] text-ink/45">●=発売あり(濃いほど多い)</span>
+                <h2 className="text-[14px] font-extrabold">📅 発売カレンダー <span className="spring-press text-[11px] font-semibold text-[var(--color-accent)]">{ym.replace("-", "年")}月 →</span></h2>
+                <span className="text-[10px] text-ink/45">日付タップで一覧</span>
               </div>
-              <div className="mt-2.5 grid grid-cols-7 gap-1 text-center">
-                {["日", "月", "火", "水", "木", "金", "土"].map((w) => (
-                  <span key={w} className="text-[9px] font-semibold text-ink/40">{w}</span>
-                ))}
-                {(() => {
-                  const first = new Date(`${ym}-01T00:00:00`);
-                  const pad = first.getDay();
-                  const last = new Date(Number(ym.slice(0, 4)), Number(ym.slice(5, 7)), 0).getDate();
-                  const cells = [];
-                  for (let i = 0; i < pad; i++) cells.push(<span key={`p${i}`} />);
-                  for (let d = 1; d <= last; d++) {
-                    const n = days.get(d) ?? 0;
-                    const op = n === 0 ? 0 : 0.25 + 0.75 * (n / maxN);
-                    cells.push(
-                      <span key={d} className="spring-press relative flex h-8 flex-col items-center justify-center rounded text-[10px] text-ink/70" style={n ? { backgroundColor: `color-mix(in srgb, var(--color-accent) ${Math.round(op * 28)}%, transparent)` } : undefined}>
-                        {d}
-                        {n > 0 && <span className="text-[8px] font-bold text-[var(--color-accent)]">{n}</span>}
-                      </span>,
-                    );
-                  }
-                  return cells;
-                })()}
-              </div>
-              <p className="mt-2 text-[10px] text-ink/45">タップでその日の発売一覧へ(本番) ・ 蒸留を毎日運転すれば当月+来月の予約も載る</p>
+              <ReleaseCalendarMock ym={ym} days={days} />
             </Tile>
           </section>
         );
