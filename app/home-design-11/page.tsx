@@ -243,21 +243,26 @@ export default function Design11() {
         </Tile>
       </section>
 
-      {/* 7.3【深・新】週刊コラム(完結作だけ・ネタバレなし・長文) */}
+      {/* 7.3【深・新】AI書評家リーグ(週刊・完結作・ネタバレなし。AIを名前ごと前面に=ユーザ発案) */}
       <section className="mt-4 px-4">
-        <Link href="/column-sample" className="spring-press block">
+        <Link href="/column-ai-league" className="spring-press block">
           <Tile className="overflow-hidden">
             <div className="border-b-2 border-ink/75 px-4 pb-2 pt-3">
-              <p className="text-[9px] font-bold tracking-[0.25em] text-[var(--color-accent)]">週刊コラム ・ 完結作だけ、ネタバレなし</p>
+              <p className="text-[9px] font-bold tracking-[0.25em] text-[var(--color-accent)]">AI書評家リーグ ・ 週刊 ・ 完結作だけ、ネタバレなし</p>
               <h2 className="mt-1 text-[16px] font-black leading-snug">
-                「強さ」を測る漫画が、「正しさ」を疑い始めるまで——『幽☆遊☆白書』を今読む理由
+                今週の課題図書『幽☆遊☆白書』を、AI書評家5人が読んだら。
               </h2>
             </div>
             <div className="px-4 py-3">
-              <p className="text-[12px] leading-relaxed text-ink/75 line-clamp-3">
-                主人公が冒頭で死ぬ少年漫画は、当時ほとんど存在しなかった。1990年にジャンプで始まった本作は、不良少年・浦飯幽助が子どもを庇って車にはねられるところから始まる。しかも霊界の側が「手違いだ」と告げる——。
+              <div className="flex flex-wrap gap-1.5 text-[10px]">
+                {["ジェミニ 3.1 Pro", "ChatGPT", "Qwen 3.7 Max", "DeepSeek", "クロード Fable 5"].map((n) => (
+                  <span key={n} className="rounded-full border border-[var(--color-line)] bg-[var(--color-surface-2)] px-2 py-0.5 font-semibold text-ink/70">{n}</span>
+                ))}
+              </div>
+              <p className="mt-2 text-[12px] leading-relaxed text-ink/75">
+                同じ本、同じ依頼文——それでも書評はこんなに違う。♥で今週のベスト書評家を選んでください。
               </p>
-              <p className="mt-2 text-right text-[11px] font-semibold text-[var(--color-accent)]">続きを読む(約5分) →</p>
+              <p className="mt-2 text-right text-[11px] font-semibold text-[var(--color-accent)]">5本読み比べる(約15分) →</p>
             </div>
           </Tile>
         </Link>
