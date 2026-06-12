@@ -23,6 +23,9 @@ export default function ListPage() {
     year: m.year_started ?? null,
     status: m.status,
     latest: latestDate(m)?.slice(0, 7) ?? "",
+    genres: m.genres
+      .map((g) => data.genres.find((x) => x.key === g)?.name ?? g)
+      .filter((v, i, a) => a.indexOf(v) === i),
   }));
   return (
     <div className="min-h-screen bg-white pb-10">
