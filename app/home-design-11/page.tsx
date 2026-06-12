@@ -1,5 +1,6 @@
 import Link from "next/link";
 import LikeButtonMock from "@/components/LikeButtonMock";
+import MarqueeTitle from "@/components/MarqueeTitle";
 import ScrollShortcutsMock from "@/components/ScrollShortcutsMock";
 import { bundle, DesignNav, seeded, volCount, Cover, CoverTile } from "@/lib/homeDesign";
 
@@ -58,7 +59,7 @@ export default function Design11() {
         </section>
       )}
 
-      {/* 3.【中】新刊棚 */}
+      {/* 3.【中】新刊棚(★題=1行オートスクロール+下に作者。はみ出す題だけ動く) */}
       <section className="mt-4 px-4">
         <Tile className="p-3.5">
           <div className="flex items-baseline justify-between">
@@ -67,7 +68,13 @@ export default function Design11() {
           </div>
           <ul className="-mx-3.5 mt-2.5 flex gap-3 overflow-x-auto px-3.5 pb-1 snap-x">
             {byNew.slice(0, 12).map((m) => (
-              <li key={m.slug} className="w-[96px] shrink-0 snap-start"><CoverTile m={m} sizes="96px" /></li>
+              <li key={m.slug} className="w-[96px] shrink-0 snap-start">
+                <Link href={`/manga/${m.slug}`} className="block group">
+                  <Cover m={m} sizes="96px" />
+                  <MarqueeTitle text={m.title} className="mt-1 text-[12px] leading-snug text-ink/85 group-hover:text-[var(--color-accent)]" />
+                  <p className="truncate text-[10px] text-ink/50">{m.authors.map((a) => a.name).join("・")}</p>
+                </Link>
+              </li>
             ))}
           </ul>
         </Tile>
