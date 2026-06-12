@@ -288,14 +288,20 @@ export default function Design11() {
       </section>
       <section className="mt-5 px-4">
         <div className="grid grid-cols-2 gap-2.5">
-          {[
-            ["📋 一覧表で探す", "全作品をソート・フィルター"],
-            ["🏷️ ジャンルから", "スポーツ/SF/恋愛/ホラー…"],
-            ["あ 50音さくいん", "題名・著者名から"],
-            ["📚 あなたの本棚", "所持巻を記録(登録不要)"],
-          ].map(([t, d]) => (
-            <Tile key={t} className="p-3 spring-press"><p className="text-[13px] font-bold text-ink/85">{t}</p><p className="mt-0.5 text-[10.5px] text-ink/50">{d}</p></Tile>
-          ))}
+          {([
+            ["📋 一覧表で探す", "全作品をソート・絞り込み", "/list"],
+            ["🏷️ ジャンルから", "フィルター付きトップへ", "/"],
+            ["あ 50音さくいん", "題名・著者名から", "/"],
+            ["📚 あなたの本棚", "所持巻を記録(準備中)", null],
+          ] as const).map(([t, d, href]) =>
+            href ? (
+              <Link key={t} href={href} className="spring-press block">
+                <Tile className="p-3"><p className="text-[13px] font-bold text-ink/85">{t}</p><p className="mt-0.5 text-[10.5px] text-ink/50">{d}</p></Tile>
+              </Link>
+            ) : (
+              <Tile key={t} className="p-3 opacity-70"><p className="text-[13px] font-bold text-ink/85">{t}</p><p className="mt-0.5 text-[10.5px] text-ink/50">{d}</p></Tile>
+            ),
+          )}
         </div>
       </section>
     </div>

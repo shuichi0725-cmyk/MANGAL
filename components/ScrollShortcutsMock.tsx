@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useState } from "react";
 
 /** ショートカットバー: 見た目はヘッダーと同じ全幅バー。 最上部では隠れていて、
@@ -20,18 +21,25 @@ export default function ScrollShortcutsMock() {
       }`}
     >
       <div className="flex items-center justify-end gap-5 border-b border-[var(--color-line)] bg-[var(--color-surface)]/95 px-5 pb-2 pt-2.5 shadow-sm backdrop-blur">
-        {[
-          ["📋", "一覧"],
-          ["📚", "書庫"],
-          ["🔰", "使い方"],
-          ["🔍", "検索"],
-          ["≡", "メニュー"],
-        ].map(([icon, label]) => (
-          <button key={label} aria-label={label} className="spring-press flex flex-col items-center gap-0.5 active:scale-90">
-            <span className="text-[19px] leading-none">{icon}</span>
-            <span className="text-[9px] text-ink/50">{label}</span>
-          </button>
-        ))}
+        {([
+          ["📋", "一覧", "/list"],
+          ["📚", "書庫", null],
+          ["🔰", "使い方", "/about"],
+          ["🔍", "検索", "/"],
+          ["≡", "メニュー", null],
+        ] as const).map(([icon, label, href]) =>
+          href ? (
+            <Link key={label} href={href} aria-label={label} className="spring-press flex flex-col items-center gap-0.5 active:scale-90">
+              <span className="text-[19px] leading-none">{icon}</span>
+              <span className="text-[9px] text-ink/50">{label}</span>
+            </Link>
+          ) : (
+            <button key={label} aria-label={label} className="spring-press flex flex-col items-center gap-0.5 active:scale-90 opacity-70">
+              <span className="text-[19px] leading-none">{icon}</span>
+              <span className="text-[9px] text-ink/50">{label}</span>
+            </button>
+          ),
+        )}
       </div>
     </div>
   );
