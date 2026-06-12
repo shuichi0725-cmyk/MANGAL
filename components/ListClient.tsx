@@ -176,8 +176,9 @@ export default function ListClient({ data }: { data: DataBundle }) {
       {/* ── フィルターオーバーレイ(トップと同じFilterPanelを再利用) ── */}
       {open && (
         <div className="fixed inset-0 z-50">
-          <div className="absolute inset-0 bg-black/35" onClick={() => setOpen(false)} />
-          <div className="absolute inset-y-0 right-0 w-[86%] max-w-sm overflow-y-auto bg-[var(--color-surface)] p-4 shadow-2xl">
+          {/* ★透過オーバーレイ(ユーザ裁定): 背景の一覧がうっすら見える=どこに居るか分かる */}
+          <div className="absolute inset-0 bg-black/15" onClick={() => setOpen(false)} />
+          <div className="absolute inset-y-0 right-0 w-[86%] max-w-sm overflow-y-auto border-l border-[var(--color-line)] bg-[var(--color-surface)]/80 p-4 shadow-2xl backdrop-blur-md">
             <div className="mb-3 flex items-center justify-between">
               <p className="text-sm font-bold">フィルター</p>
               <div className="flex gap-2">

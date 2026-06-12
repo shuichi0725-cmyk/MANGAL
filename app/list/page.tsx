@@ -1,4 +1,5 @@
 import ListClient from "@/components/ListClient";
+import ScrollShortcutsMock from "@/components/ScrollShortcutsMock";
 import { DesignNav } from "@/lib/homeDesign";
 import { loadAllManga } from "@/lib/loadData";
 
@@ -17,6 +18,7 @@ export default function ListPage() {
   return (
     <div className="min-h-screen bg-white pb-10">
       <DesignNav current={11} />
+      <ScrollShortcutsMock />
       <header className="flex items-baseline justify-between border-b-2 border-ink px-3 py-3">
         <h1 className="text-base font-extrabold">📋 一覧表</h1>
         <span className="text-[11px] text-ink/55">フィルター×並び順は自由に掛け算</span>
