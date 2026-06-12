@@ -61,7 +61,7 @@ export default function SansedaiArchive() {
               if (!m || !p) return null;
               return (
                 <div key={l.persona + l.slug} className="rounded-xl border border-[var(--color-line)] bg-[var(--color-surface)] p-3 shadow-sm">
-                  <Link href={`/manga/${m.slug}`} className="flex gap-3">
+                  <Link href={`/manga/${m.slug}`} className="flex gap-3 spring-press">
                     <div className="w-12 shrink-0 self-start"><Cover m={m} sizes="48px" /></div>
                     <div className="min-w-0">
                       <p className="text-[10px] font-bold text-[var(--color-accent)]">{p.name}({p.target})</p>

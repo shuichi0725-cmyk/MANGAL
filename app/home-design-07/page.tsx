@@ -30,7 +30,7 @@ export default function Design07() {
       {/* ── コーナー1: 今週の一冊(案3のヒーロー) ── */}
       {hero && (
         <section className="mt-2 border-y border-[var(--color-line)] bg-[var(--color-surface)] px-4 py-5">
-          <Link href={`/manga/${hero.slug}`} className="flex gap-4">
+          <Link href={`/manga/${hero.slug}`} className="flex gap-4 spring-press">
             <div className="w-28 shrink-0 rotate-[-2deg] shadow-xl">
               <Cover m={hero} sizes="112px" />
             </div>

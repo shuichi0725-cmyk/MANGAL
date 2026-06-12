@@ -81,7 +81,7 @@ export function DesignNav({ current }: { current: number }) {
         <Link
           key={n}
           href={`/home-design-${String(n).padStart(2, "0")}`}
-          className={`rounded px-2 py-1 font-semibold ${
+          className={`spring-press rounded px-2 py-1 font-semibold ${
             n === current
               ? "bg-[var(--color-accent)] text-white"
               : "border border-[var(--color-line)] text-ink/70"

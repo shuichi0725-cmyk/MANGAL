@@ -72,7 +72,7 @@ export default function Design10() {
       {hero && (
         <section className="mt-4 px-4">
           <Tile className="overflow-hidden">
-            <Link href={`/manga/${hero.slug}`} className="flex gap-4 p-4">
+            <Link href={`/manga/${hero.slug}`} className="flex gap-4 p-4 spring-press">
               <div className="w-28 shrink-0 rotate-[-2deg] shadow-xl"><Cover m={hero} sizes="112px" /></div>
               <div className="min-w-0 self-center">
                 <p className="inline-block rounded bg-ink px-2 py-0.5 text-[10px] font-bold tracking-widest text-white">今週の一冊</p>
@@ -102,7 +102,7 @@ export default function Design10() {
               const m = manga.find((x) => x.slug === p.slug);
               if (!m) return null;
               return (
-                <Link key={p.slug} href={`/manga/${m.slug}`} className="flex gap-3 rounded-lg border border-[var(--color-line)]/70 bg-[var(--color-bg)]/50 p-2.5">
+                <Link key={p.slug} href={`/manga/${m.slug}`} className="spring-press flex gap-3 rounded-lg border border-[var(--color-line)]/70 bg-[var(--color-bg)]/50 p-2.5">
                   <div className="w-12 shrink-0 self-start"><Cover m={m} sizes="48px" /></div>
                   <div className="min-w-0">
                     <p className="text-[10px] font-bold text-[var(--color-accent)]">{p.persona}</p>
@@ -161,7 +161,7 @@ export default function Design10() {
             ["あ 50音さくいん", "題名・著者名から"],
             ["📚 あなたの本棚", "所持巻を記録(登録不要)"],
           ].map(([t, d]) => (
-            <Tile key={t} className="p-3"><p className="text-[13px] font-bold text-ink/85">{t}</p><p className="mt-0.5 text-[10.5px] text-ink/50">{d}</p></Tile>
+            <Tile key={t} className="p-3 spring-press"><p className="text-[13px] font-bold text-ink/85">{t}</p><p className="mt-0.5 text-[10.5px] text-ink/50">{d}</p></Tile>
           ))}
         </div>
       </section>

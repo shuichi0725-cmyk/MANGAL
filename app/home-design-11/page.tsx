@@ -80,6 +80,67 @@ export default function Design11() {
         </Tile>
       </section>
 
+      {/* 3.5【中・新】発売カレンダー(実データの日付から自動生成。本番=蒸留毎日運転で当月化) */}
+      {(() => {
+        const byDay = new Map<string, Map<number, number>>();
+        for (const m of manga) {
+          for (const ed of m.editions) {
+            for (const v of ed.volumes) {
+              const d = v.release_date || "";
+              if (/^\d{4}-\d{2}-\d{2}$/.test(d) && d >= "2025-01") {
+                const ym = d.slice(0, 7);
+                const day = Number(d.slice(8, 10));
+                if (!byDay.has(ym)) byDay.set(ym, new Map());
+                const mm = byDay.get(ym)!;
+                mm.set(day, (mm.get(day) ?? 0) + 1);
+              }
+            }
+          }
+        }
+        const best = [...byDay.entries()].sort((a, b) => {
+          const ca = [...a[1].values()].reduce((x, y) => x + y, 0);
+          const cb = [...b[1].values()].reduce((x, y) => x + y, 0);
+          return cb - ca || b[0].localeCompare(a[0]);
+        })[0];
+        if (!best) return null;
+        const [ym, days] = best;
+        const maxN = Math.max(...days.values());
+        return (
+          <section className="mt-4 px-4">
+            <Tile className="p-3.5">
+              <div className="flex items-baseline justify-between">
+                <h2 className="text-[14px] font-extrabold">📅 発売カレンダー <span className="text-[11px] font-semibold text-ink/50">{ym.replace("-", "年")}月</span></h2>
+                <span className="text-[10px] text-ink/45">●=発売あり(濃いほど多い)</span>
+              </div>
+              <div className="mt-2.5 grid grid-cols-7 gap-1 text-center">
+                {["日", "月", "火", "水", "木", "金", "土"].map((w) => (
+                  <span key={w} className="text-[9px] font-semibold text-ink/40">{w}</span>
+                ))}
+                {(() => {
+                  const first = new Date(`${ym}-01T00:00:00`);
+                  const pad = first.getDay();
+                  const last = new Date(Number(ym.slice(0, 4)), Number(ym.slice(5, 7)), 0).getDate();
+                  const cells = [];
+                  for (let i = 0; i < pad; i++) cells.push(<span key={`p${i}`} />);
+                  for (let d = 1; d <= last; d++) {
+                    const n = days.get(d) ?? 0;
+                    const op = n === 0 ? 0 : 0.25 + 0.75 * (n / maxN);
+                    cells.push(
+                      <span key={d} className="spring-press relative flex h-8 flex-col items-center justify-center rounded text-[10px] text-ink/70" style={n ? { backgroundColor: `color-mix(in srgb, var(--color-accent) ${Math.round(op * 28)}%, transparent)` } : undefined}>
+                        {d}
+                        {n > 0 && <span className="text-[8px] font-bold text-[var(--color-accent)]">{n}</span>}
+                      </span>,
+                    );
+                  }
+                  return cells;
+                })()}
+              </div>
+              <p className="mt-2 text-[10px] text-ink/45">タップでその日の発売一覧へ(本番) ・ 蒸留を毎日運転すれば当月+来月の予約も載る</p>
+            </Tile>
+          </section>
+        );
+      })()}
+
       {/* 4.【小・新】数字トリビア */}
       {longest && (
         <section className="mt-4 px-4">
@@ -92,26 +153,43 @@ export default function Design11() {
         </section>
       )}
 
-      {/* 5.【中】三世代(1人交代制) */}
+      {/* 5.【中】三世代(★日替わり編成: 3人そろい/1人当番/2人ペア をローテーション) */}
       <section className="mt-4 px-4">
         <Tile className="p-3.5">
-          <div className="flex items-baseline justify-between">
-            <h2 className="text-[14px] font-extrabold">👥 三世代、今日の一冊</h2>
-            <Link href="/sansedai-archive" className="text-[11px] font-semibold text-[var(--color-accent)]">過去ログ →</Link>
-          </div>
           {(() => {
-            const m = manga.find((x) => x.slug === "hokuto-no-ken");
-            if (!m) return null;
+            const POOL = [
+              { slug: "kimetsu-no-yaiba", persona: "ミナト(10-20代)", copy: "今さら?って言われても推す。1巻の絶望から全部が伏線🔥", likes: 128 },
+              { slug: "slam-dunk", persona: "サオリ(30-40代)", copy: "「左手はそえるだけ」を超える最終話を、私はまだ知りません。青春の総量を描いた漫画です。", likes: 211 },
+              { slug: "hokuto-no-ken", persona: "圭三(50代以上・古書店主)", copy: "昭和五十八年、ジャンプにこれが載った日のことを覚えております。北斗は「強さ」ではなく「哀しみ」の漫画だと、歳を重ねるほどに分かります。", likes: 96 },
+            ];
+            const mode = daySalt % 3; // 0=そろい踏み / 1=1人当番 / 2=ペア
+            const pick = daySalt % POOL.length;
+            const today = mode === 0 ? POOL : mode === 1 ? [POOL[pick]] : POOL.filter((_, i) => i !== pick);
+            const label = mode === 0 ? "今日は3人そろい踏み" : mode === 1 ? "今日の当番" : "今日はペアでお届け";
             return (
-              <Link href={`/manga/${m.slug}`} className="mt-2.5 flex gap-3 spring-press">
-                <div className="w-14 shrink-0"><Cover m={m} sizes="56px" /></div>
-                <div className="min-w-0">
-                  <p className="text-[10px] font-bold text-[var(--color-accent)]">圭三(50代以上担当・古書店主)</p>
-                  <p className="text-[13px] font-bold">{m.title}</p>
-                  <p className="mt-0.5 text-[12px] leading-relaxed text-ink/75 line-clamp-3">昭和五十八年、ジャンプにこれが載った日のことを覚えております。北斗は「強さ」ではなく「哀しみ」の漫画だと、歳を重ねるほどに分かります。</p>
-                  <div className="mt-1"><LikeButtonMock id="d11:hokuto" base={96} /></div>
+              <>
+                <div className="flex items-baseline justify-between">
+                  <h2 className="text-[14px] font-extrabold">👥 三世代、今日の一冊 <span className="ml-1 text-[10px] font-semibold text-ink/45">{label}</span></h2>
+                  <Link href="/sansedai-archive" className="text-[11px] font-semibold text-[var(--color-accent)]">過去ログ →</Link>
                 </div>
-              </Link>
+                <div className="mt-2.5 space-y-2.5">
+                  {today.map((p) => {
+                    const m = manga.find((x) => x.slug === p.slug);
+                    if (!m) return null;
+                    return (
+                      <Link key={p.slug} href={`/manga/${m.slug}`} className={`spring-press flex gap-3 ${today.length > 1 ? "rounded-lg border border-[var(--color-line)]/70 bg-[var(--color-bg)]/50 p-2.5" : "mt-1"}`}>
+                        <div className="w-14 shrink-0 self-start"><Cover m={m} sizes="56px" /></div>
+                        <div className="min-w-0">
+                          <p className="text-[10px] font-bold text-[var(--color-accent)]">{p.persona}</p>
+                          <p className="text-[13px] font-bold">{m.title}</p>
+                          <p className={`mt-0.5 text-[12px] leading-relaxed text-ink/75 ${today.length === 1 ? "" : "line-clamp-2"}`}>{p.copy}</p>
+                          <div className="mt-1"><LikeButtonMock id={`d11:${p.slug}`} base={p.likes} /></div>
+                        </div>
+                      </Link>
+                    );
+                  })}
+                </div>
+              </>
             );
           })()}
         </Tile>
@@ -163,7 +241,7 @@ export default function Design11() {
             ["あ 50音さくいん", "題名・著者名から"],
             ["📚 あなたの本棚", "所持巻を記録(登録不要)"],
           ].map(([t, d]) => (
-            <Tile key={t} className="p-3"><p className="text-[13px] font-bold text-ink/85">{t}</p><p className="mt-0.5 text-[10.5px] text-ink/50">{d}</p></Tile>
+            <Tile key={t} className="p-3 spring-press"><p className="text-[13px] font-bold text-ink/85">{t}</p><p className="mt-0.5 text-[10.5px] text-ink/50">{d}</p></Tile>
           ))}
         </div>
       </section>

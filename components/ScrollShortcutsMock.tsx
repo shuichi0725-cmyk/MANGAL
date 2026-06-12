@@ -27,7 +27,7 @@ export default function ScrollShortcutsMock() {
           ["🔍", "検索"],
           ["≡", "メニュー"],
         ].map(([icon, label]) => (
-          <button key={label} aria-label={label} className="flex flex-col items-center gap-0.5 active:scale-90">
+          <button key={label} aria-label={label} className="spring-press flex flex-col items-center gap-0.5 active:scale-90">
             <span className="text-[19px] leading-none">{icon}</span>
             <span className="text-[9px] text-ink/50">{label}</span>
           </button>

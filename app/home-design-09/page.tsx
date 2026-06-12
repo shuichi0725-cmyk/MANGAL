@@ -41,7 +41,7 @@ export default function Design09() {
       {hero && (
         <section className="mt-4 px-4">
           <Tile className="overflow-hidden">
-            <Link href={`/manga/${hero.slug}`} className="flex gap-4 p-4">
+            <Link href={`/manga/${hero.slug}`} className="flex gap-4 p-4 spring-press">
               <div className="w-28 shrink-0 rotate-[-2deg] shadow-xl"><Cover m={hero} sizes="112px" /></div>
               <div className="min-w-0 self-center">
                 <p className="inline-block rounded bg-ink px-2 py-0.5 text-[10px] font-bold tracking-widest text-white">今週の一冊</p>
@@ -66,7 +66,7 @@ export default function Design09() {
             const m = manga.find((x) => x.slug === "slam-dunk");
             if (!m) return null;
             return (
-              <Link href={`/manga/${m.slug}`} className="mt-2.5 flex gap-3">
+              <Link href={`/manga/${m.slug}`} className="mt-2.5 flex gap-3 spring-press">
                 <div className="w-14 shrink-0"><Cover m={m} sizes="56px" /></div>
                 <div className="min-w-0">
                   <p className="text-[10px] font-bold text-[var(--color-accent)]">サオリ(30代・40代担当)</p>
@@ -145,7 +145,7 @@ export default function Design09() {
             ["あ 50音さくいん", "題名・著者名から"],
             ["📚 あなたの本棚", "所持巻を記録(登録不要)"],
           ].map(([t, d]) => (
-            <Tile key={t} className="p-3"><p className="text-[13px] font-bold text-ink/85">{t}</p><p className="mt-0.5 text-[10.5px] text-ink/50">{d}</p></Tile>
+            <Tile key={t} className="p-3 spring-press"><p className="text-[13px] font-bold text-ink/85">{t}</p><p className="mt-0.5 text-[10.5px] text-ink/50">{d}</p></Tile>
           ))}
         </div>
       </section>

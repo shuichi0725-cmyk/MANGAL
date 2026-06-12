@@ -46,7 +46,7 @@ export default function Design08() {
       {hero && (
         <section className="mt-4 px-4">
           <Tile className="overflow-hidden">
-            <Link href={`/manga/${hero.slug}`} className="flex gap-4 p-4">
+            <Link href={`/manga/${hero.slug}`} className="flex gap-4 p-4 spring-press">
               <div className="w-28 shrink-0 rotate-[-2deg] shadow-xl">
                 <Cover m={hero} sizes="112px" />
               </div>
@@ -123,7 +123,7 @@ export default function Design08() {
               const m = manga.find((x) => x.slug === p.slug);
               if (!m) return null;
               return (
-                <Link key={p.slug} href={`/manga/${m.slug}`} className="flex gap-3 rounded-lg border border-[var(--color-line)]/70 bg-[var(--color-bg)]/50 p-2.5">
+                <Link key={p.slug} href={`/manga/${m.slug}`} className="spring-press flex gap-3 rounded-lg border border-[var(--color-line)]/70 bg-[var(--color-bg)]/50 p-2.5">
                   <div className="w-14 shrink-0 self-start"><Cover m={m} sizes="56px" /></div>
                   <div className="min-w-0">
                     <p className="text-[10px] font-bold text-[var(--color-accent)]">{p.persona}</p>
