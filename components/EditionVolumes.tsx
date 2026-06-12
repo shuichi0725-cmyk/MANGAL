@@ -43,47 +43,53 @@ export default function EditionVolumes({
   const [collapsed, setCollapsed] = useState(defaultCollapsed);
   const [showAll, setShowAll] = useState(false);
   const vols = hasTabs ? versions![sel].volumes : edition.volumes;
+  const preview = vols.slice(0, PREVIEW_COUNT);
+  const rest = vols.slice(PREVIEW_COUNT);
 
-  // ── 畳み状態: 見出しバーだけ表示(タップで展開) ──
-  if (collapsed) {
-    return (
-      <button
-        onClick={() => setCollapsed(false)}
-        className="spring-press tactile flex w-full items-center gap-2 rounded-card px-3.5 py-3 text-left"
-      >
-        <span className="text-ink/40">▸</span>
-        <span className="text-[15px] font-bold">{edition.label}</span>
-        <Badge>全 {vols.length} 巻</Badge>
-        {edition.publisher && (
-          <span className="text-xs text-ink/55">出版社: {edition.publisher}</span>
-        )}
-        <span className="ml-auto text-[11px] text-ink/45">ひらく</span>
-      </button>
-    );
-  }
-
-  const shown = showAll ? vols : vols.slice(0, PREVIEW_COUNT);
+  // ★伸縮アニメ(2026-06-13 ユーザ裁定): grid-rows 0fr⇄1fr トリックで高さを滑らかに伸ばす。
+  //   読み込み感のある「にゅっ」とした展開/畳み。 開閉どちらも適用。
+  const Grow = ({ open, children }: { open: boolean; children: React.ReactNode }) => (
+    <div
+      className="grid transition-[grid-template-rows,opacity] duration-300 ease-out"
+      style={{ gridTemplateRows: open ? "1fr" : "0fr", opacity: open ? 1 : 0 }}
+    >
+      <div className="min-h-0 overflow-hidden">{children}</div>
+    </div>
+  );
 
   return (
     <div>
-      <h2 className="mb-3 flex flex-wrap items-center gap-2">
-        <span className="text-base font-bold">{edition.label}</span>
-        <Badge>全 {vols.length} 巻</Badge>
-        {edition.publisher && (
-          <span className="text-xs text-ink/55">出版社: {edition.publisher}</span>
-        )}
-        {defaultCollapsed && (
-          <button
-            onClick={() => {
-              setCollapsed(true);
-              setShowAll(false);
-            }}
-            className="spring-press ml-auto text-[11px] text-ink/45"
-          >
-            たたむ ▴
-          </button>
-        )}
-      </h2>
+      {/* 見出し: 畳める版(2版目以降)は見出し自体がトグル */}
+      {defaultCollapsed ? (
+        <button
+          onClick={() => {
+            setCollapsed((c) => !c);
+            if (!collapsed) setShowAll(false);
+          }}
+          className={`spring-press flex w-full items-center gap-2 text-left ${
+            collapsed ? "tactile rounded-card px-3.5 py-3" : "mb-3 px-0"
+          }`}
+        >
+          <span className={`inline-block text-ink/40 transition-transform duration-300 ${collapsed ? "" : "rotate-90"}`}>▸</span>
+          <span className={`font-bold ${collapsed ? "text-[15px]" : "text-base"}`}>{edition.label}</span>
+          <Badge>全 {vols.length} 巻</Badge>
+          {edition.publisher && (
+            <span className="text-xs text-ink/55">出版社: {edition.publisher}</span>
+          )}
+          <span className="ml-auto text-[11px] text-ink/45">{collapsed ? "ひらく" : "たたむ ▴"}</span>
+        </button>
+      ) : (
+        <h2 className="mb-3 flex flex-wrap items-center gap-2">
+          <span className="text-base font-bold">{edition.label}</span>
+          <Badge>全 {vols.length} 巻</Badge>
+          {edition.publisher && (
+            <span className="text-xs text-ink/55">出版社: {edition.publisher}</span>
+          )}
+        </h2>
+      )}
+
+      <Grow open={!collapsed}>
+      <div>
       {hasTabs && (
         // ★採用デザイン: 3列・間隔0.125rem(gap-0.5)・高さ2.1rem。
         //   極太名を中央 + 年を右下隅。 選択中はアニメ化オレンジ塗り。 4つ目以降は左下に折返し。
@@ -134,7 +140,7 @@ export default function EditionVolumes({
         </div>
       )}
       <ul className="space-y-2">
-        {shown.map((v) => (
+        {preview.map((v) => (
           <li key={`${edition.type}-${v.number}`}>
             <Card className="p-3">
               <VolumeTile manga={manga} volume={v} edition={edition} />
@@ -142,16 +148,32 @@ export default function EditionVolumes({
           </li>
         ))}
       </ul>
-      {vols.length > PREVIEW_COUNT && (
-        <div className="mt-2.5 text-center">
-          <button
-            onClick={() => setShowAll((s) => !s)}
-            className="spring-press tactile-chip inline-flex items-center rounded-full px-4 py-1.5 text-[12px] font-semibold text-ink/75"
-          >
-            {showAll ? "先頭6巻だけにする ▴" : `全${vols.length}巻を見る ▾(あと${vols.length - PREVIEW_COUNT}巻)`}
-          </button>
-        </div>
+      {rest.length > 0 && (
+        <>
+          {/* 7巻目以降も伸縮アニメで出し入れ */}
+          <Grow open={showAll}>
+            <ul className="mt-2 space-y-2 pb-0.5">
+              {rest.map((v) => (
+                <li key={`${edition.type}-${v.number}`}>
+                  <Card className="p-3">
+                    <VolumeTile manga={manga} volume={v} edition={edition} />
+                  </Card>
+                </li>
+              ))}
+            </ul>
+          </Grow>
+          <div className="mt-2.5 text-center">
+            <button
+              onClick={() => setShowAll((s) => !s)}
+              className="spring-press tactile-chip inline-flex items-center rounded-full px-4 py-1.5 text-[12px] font-semibold text-ink/75"
+            >
+              {showAll ? "先頭6巻だけにする ▴" : `全${vols.length}巻を見る ▾(あと${rest.length}巻)`}
+            </button>
+          </div>
+        </>
       )}
+      </div>
+      </Grow>
     </div>
   );
 }
