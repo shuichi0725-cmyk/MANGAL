@@ -60,7 +60,7 @@ export function Cover({ m, sizes = "120px" }: { m: Manga; sizes?: string }) {
 export function CoverTile({ m, sizes }: { m: Manga; sizes?: string }) {
   // ★題=1行オートスクロール(はみ出し時のみ)+作者行 で全コーナー統一(2026-06-12 ユーザ裁定)
   return (
-    <Link href={`/manga/${m.slug}`} className="block group">
+    <Link href={`/manga/${m.slug}`} className="block group spring-press">
       <Cover m={m} sizes={sizes} />
       <MarqueeTitle
         text={m.title}

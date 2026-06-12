@@ -101,6 +101,27 @@ input[type="search"] {
     box-shadow: var(--shadow-press);
     transition-duration: 0.04s;
   }
+
+  /* ★スプリング押下感(2026-06-12): CSS linear() スプリングイージング(2023年仕様・採用例少)。
+     押す=即沈み(0.05s)、離す=減衰バネで跳ね返る(オーバーシュート1.04→0.99→1)。
+     JSゼロ・GPU合成のみ。reduced-motion では従来の単純遷移へ。 */
+  .spring-press {
+    transition: transform 0.5s
+      linear(
+        0, 0.32 5%, 0.72 10%, 1.03 16%, 1.18 22%, 1.12 29%, 1.02 36%,
+        0.96 43%, 0.985 55%, 1.005 70%, 1 100%
+      );
+    will-change: transform;
+  }
+  .spring-press:active {
+    transform: scale(0.94);
+    transition: transform 0.05s ease-out;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .spring-press {
+      transition: transform 0.12s ease;
+    }
+  }
 }
 
 /* ============================================================

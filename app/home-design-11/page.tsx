@@ -33,7 +33,7 @@ export default function Design11() {
       {hero && (
         <section className="mt-4 px-4">
           <Tile className="overflow-hidden">
-            <Link href={`/manga/${hero.slug}`} className="flex gap-4 p-4">
+            <Link href={`/manga/${hero.slug}`} className="flex gap-4 p-4 spring-press">
               <div className="w-28 shrink-0 rotate-[-2deg] shadow-xl"><Cover m={hero} sizes="112px" /></div>
               <div className="min-w-0 self-center">
                 <p className="inline-block rounded bg-ink px-2 py-0.5 text-[10px] font-bold tracking-widest text-white">今週の一冊</p>
@@ -50,7 +50,7 @@ export default function Design11() {
       {/* 2.【小・新】ことばカード = あらすじの一文だけ大きく(縦読みの「息継ぎ」) */}
       {kotoba && (
         <section className="mt-4 px-4">
-          <Link href={`/manga/${kotoba.slug}`} className="block rounded-xl bg-ink px-5 py-6 text-center shadow-md">
+          <Link href={`/manga/${kotoba.slug}`} className="block rounded-xl bg-ink px-5 py-6 text-center shadow-md spring-press">
             <p className="text-[15px] font-bold leading-relaxed text-white">
               「{kotoba.synopsis!.split("。")[0]}。」
             </p>
@@ -69,7 +69,7 @@ export default function Design11() {
           <ul className="-mx-3.5 mt-2.5 flex gap-3 overflow-x-auto px-3.5 pb-1 snap-x">
             {byNew.slice(0, 12).map((m) => (
               <li key={m.slug} className="w-[96px] shrink-0 snap-start">
-                <Link href={`/manga/${m.slug}`} className="block group">
+                <Link href={`/manga/${m.slug}`} className="block group spring-press">
                   <Cover m={m} sizes="96px" />
                   <MarqueeTitle text={m.title} className="mt-1 text-[12px] leading-snug text-ink/85 group-hover:text-[var(--color-accent)]" />
                   <p className="truncate text-[10px] text-ink/50">{m.authors.map((a) => a.name).join("・")}</p>
@@ -103,7 +103,7 @@ export default function Design11() {
             const m = manga.find((x) => x.slug === "hokuto-no-ken");
             if (!m) return null;
             return (
-              <Link href={`/manga/${m.slug}`} className="mt-2.5 flex gap-3">
+              <Link href={`/manga/${m.slug}`} className="mt-2.5 flex gap-3 spring-press">
                 <div className="w-14 shrink-0"><Cover m={m} sizes="56px" /></div>
                 <div className="min-w-0">
                   <p className="text-[10px] font-bold text-[var(--color-accent)]">圭三(50代以上担当・古書店主)</p>
@@ -119,7 +119,7 @@ export default function Design11() {
 
       {/* 6.【小・新】ジャンルルーレット */}
       <section className="mt-4 px-4">
-        <Link href={`/?genre=${todayGenre}`} className="block rounded-xl bg-gradient-to-r from-[var(--color-accent)] to-[var(--color-accent)]/80 px-4 py-3.5 text-white shadow-md">
+        <Link href={`/?genre=${todayGenre}`} className="block rounded-xl bg-gradient-to-r from-[var(--color-accent)] to-[var(--color-accent)]/80 px-4 py-3.5 text-white shadow-md spring-press">
           <p className="text-[13px] font-bold leading-snug">🎡 今日のジャンルルーレット: <span className="text-[16px] whitespace-nowrap">{todayGenre}</span></p>
           <p className="mt-0.5 text-right text-[11px] opacity-85">回ったジャンルの棚へ →</p>
         </Link>
@@ -142,7 +142,7 @@ export default function Design11() {
         const r = seeded(manga, (m) => m.slug, 1, daySalt)[0];
         return r ? (
           <section className="mt-4 px-4">
-            <Link href={`/manga/${r.slug}`}>
+            <Link href={`/manga/${r.slug}`} className="block spring-press">
               <Tile className="flex gap-3 p-3.5">
                 <div className="w-14 shrink-0"><Cover m={r} sizes="56px" /></div>
                 <div className="min-w-0 self-center">
