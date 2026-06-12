@@ -58,7 +58,7 @@ export default async function MangaDetailPage({
   return (
     <div className="mx-auto max-w-4xl px-4 py-8">
       <Link href="/" className="text-sm text-ink/60 hover:text-ink">
-        ← 一覧へ戻る
+        ← ホームへ戻る
       </Link>
       <div className={`mt-6 grid gap-8 ${cover ? "md:grid-cols-[260px_1fr]" : ""}`}>
         {cover && (
@@ -110,7 +110,7 @@ export default async function MangaDetailPage({
             <dt className="font-semibold text-ink/65 pt-1">出版年</dt>
             <dd className="flex flex-wrap gap-1.5">
               <FilterLink
-                href={`/?yearMin=${manga.year_started}&yearMax=${manga.year_started}`}
+                href={`/browse?yearMin=${manga.year_started}&yearMax=${manga.year_started}`}
               >
                 {yearStatusLabel(manga)}
               </FilterLink>
@@ -119,7 +119,7 @@ export default async function MangaDetailPage({
             <dd className="flex flex-wrap gap-1.5">
               {manga.authors.map((a) => (
                 <span key={a.name}>
-                  <FilterLink href={`/?author=${encodeURIComponent(a.name)}`}>
+                  <FilterLink href={`/browse?author=${encodeURIComponent(a.name)}`}>
                     {a.name}
                   </FilterLink>
                 </span>
@@ -132,7 +132,7 @@ export default async function MangaDetailPage({
                   {manga.original_authors.map((a) => (
                     <span key={a.name}>
                           <FilterLink
-                        href={`/?originalAuthor=${encodeURIComponent(a.name)}`}
+                        href={`/browse?originalAuthor=${encodeURIComponent(a.name)}`}
                       >
                         {a.name}
                       </FilterLink>
@@ -161,7 +161,7 @@ export default async function MangaDetailPage({
             )}
             <dt className="font-semibold text-ink/65 pt-1">出版社</dt>
             <dd className="flex flex-wrap gap-1.5">
-              <FilterLink href={`/?publisher=${encodeURIComponent(manga.publisher)}`}>
+              <FilterLink href={`/browse?publisher=${encodeURIComponent(manga.publisher)}`}>
                 {publisher?.name ?? manga.publisher}
               </FilterLink>
             </dd>
@@ -169,7 +169,7 @@ export default async function MangaDetailPage({
               <>
                 <dt className="font-semibold text-ink/65 pt-1">連載誌</dt>
                 <dd className="flex flex-wrap gap-1.5">
-                  <FilterLink href={`/?magazine=${encodeURIComponent(magazine.key)}`}>
+                  <FilterLink href={`/browse?magazine=${encodeURIComponent(magazine.key)}`}>
                     {magazine.name}
                   </FilterLink>
                 </dd>
@@ -177,7 +177,7 @@ export default async function MangaDetailPage({
             )}
             <dt className="font-semibold text-ink/65 pt-1">分野</dt>
             <dd className="flex flex-wrap gap-1.5">
-              <FilterLink href={`/?demographic=${encodeURIComponent(manga.demographic)}`}>
+              <FilterLink href={`/browse?demographic=${encodeURIComponent(manga.demographic)}`}>
                 {demographic?.name ?? manga.demographic}
               </FilterLink>
             </dd>
@@ -224,7 +224,7 @@ export default async function MangaDetailPage({
                 }
                 return items.map((it) =>
                   it.key ? (
-                    <ChipLink key={it.name} href={`/?genre=${encodeURIComponent(it.key)}`}>
+                    <ChipLink key={it.name} href={`/browse?genre=${encodeURIComponent(it.key)}`}>
                       {it.name}
                     </ChipLink>
                   ) : (
@@ -326,7 +326,7 @@ export default async function MangaDetailPage({
           href="/"
           className="tactile-chip inline-flex items-center rounded-card px-4 py-2 text-sm font-medium active:scale-[0.96] transition"
         >
-          ← 一覧へ戻る
+          ← ホームへ戻る
         </Link>
       </div>
     </div>

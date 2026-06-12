@@ -58,7 +58,7 @@ export default async function ArtBookDetailPage({
             <dt className="font-semibold text-ink/65 pt-1">作画家</dt>
             <dd className="flex flex-wrap gap-1.5">
               <Link
-                href={`/?artBooks=true&q=${encodeURIComponent(ab.artist)}`}
+                href={`/browse?artBooks=true&q=${encodeURIComponent(ab.artist)}`}
                 className="inline-flex items-center rounded-[var(--radius-tag)] border border-[var(--color-line)] bg-[var(--color-surface)] px-2.5 py-1 text-[13px] font-medium text-ink/85 transition duration-100 hover:border-[var(--color-accent)] hover:text-[var(--color-accent)] active:scale-[0.94]"
               >
                 {ab.artist}

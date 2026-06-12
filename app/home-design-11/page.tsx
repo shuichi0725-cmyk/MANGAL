@@ -103,13 +103,13 @@ export default function Design11() {
         );
         return (
           <div className="flex items-center gap-x-3 overflow-x-auto px-4 pt-3 text-[11px]">
-            <S href="/" label="作品" n={manga.length} />
+            <S href="/browse" label="作品" n={manga.length} />
             <span className="text-ink/25">|</span>
-            <S href="/" label="漫画本" n={books} />
+            <S href="/browse" label="漫画本" n={books} />
             <span className="text-ink/25">|</span>
-            <S href="/?status=ongoing" label="連載中" n={ongoing} />
+            <S href="/browse?status=ongoing" label="連載中" n={ongoing} />
             <span className="text-ink/25">|</span>
-            <S href="/?status=completed" label="完結" n={done} />
+            <S href="/browse?status=completed" label="完結" n={done} />
             <span className="ml-auto shrink-0 text-[10px] text-ink/40">タップで絞り込み</span>
           </div>
         );
@@ -225,7 +225,7 @@ export default function Design11() {
 
       {/* 6.【小・新】ジャンルルーレット */}
       <section className="mt-4 px-4">
-        <Link href={`/?genre=${todayGenre}`} className="block rounded-xl bg-gradient-to-r from-[var(--color-accent)] to-[var(--color-accent)]/80 px-4 py-3.5 text-white shadow-md spring-press">
+        <Link href={`/browse?genre=${encodeURIComponent(todayGenre)}`} className="block rounded-xl bg-gradient-to-r from-[var(--color-accent)] to-[var(--color-accent)]/80 px-4 py-3.5 text-white shadow-md spring-press">
           <p className="text-[13px] font-bold leading-snug">🎡 今日のジャンルルーレット: <span className="text-[16px] whitespace-nowrap">{todayGenre}</span></p>
           <p className="mt-0.5 text-right text-[11px] opacity-85">回ったジャンルの棚へ →</p>
         </Link>
@@ -290,8 +290,8 @@ export default function Design11() {
         <div className="grid grid-cols-2 gap-2.5">
           {([
             ["📋 一覧表で探す", "全作品をソート・絞り込み", "/list"],
-            ["🏷️ ジャンルから", "フィルター付きトップへ", "/"],
-            ["あ 50音さくいん", "題名・著者名から", "/"],
+            ["🏷️ ジャンルから", "グリッド検索へ", "/browse"],
+            ["あ 50音さくいん", "題名・著者名から", "/browse"],
             ["📚 あなたの本棚", "所持巻を記録(準備中)", null],
           ] as const).map(([t, d, href]) =>
             href ? (

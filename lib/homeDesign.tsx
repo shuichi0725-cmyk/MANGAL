@@ -77,14 +77,14 @@ export function DesignNav({ current: _current }: { current?: number }) {
   // ★2026-06-13: 案11採用につき見本市ナビは畳む(1-10はURL直打ちでのみ残存)
   return (
     <div className="sticky top-0 z-50 flex items-center gap-2 border-b border-[var(--color-line)] bg-[var(--color-surface)]/95 px-3 py-1.5 text-[11px] backdrop-blur">
-      <Link href="/home-design-11" className="spring-press font-bold text-[var(--color-accent)]">
-        🧪 試作ホーム
+      <Link href="/" className="spring-press font-bold text-[var(--color-accent)]">
+        🏠 ホーム
       </Link>
       <Link href="/list" className="spring-press text-ink/60">一覧表</Link>
       <Link href="/column-ai-league" className="spring-press text-ink/60">AI書評</Link>
       <Link href="/sansedai-archive" className="spring-press text-ink/60">過去ログ</Link>
-      <Link href="/" className="ml-auto spring-press text-ink/50 underline decoration-dotted">
-        現行トップ
+      <Link href="/browse" className="ml-auto spring-press text-ink/50 underline decoration-dotted">
+        グリッド検索
       </Link>
     </div>
   );
