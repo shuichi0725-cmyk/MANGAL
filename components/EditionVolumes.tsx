@@ -19,7 +19,20 @@ function fullStock(vols: Volume[]): boolean {
   return vols.length > 0 && vols.every(buyable);
 }
 
-export default function EditionVolumes({ manga, edition }: { manga: Manga; edition: Edition }) {
+// ★巻リストの密度制御(2026-06-13 ユーザ裁定):
+//   ・先頭の版(通常版)以外は畳んで見出しだけ(タップで展開) = うる星型の多版でも縦に伸びない
+//   ・展開中も最初は6巻まで+「全N巻を見る」
+const PREVIEW_COUNT = 6;
+
+export default function EditionVolumes({
+  manga,
+  edition,
+  defaultCollapsed = false,
+}: {
+  manga: Manga;
+  edition: Edition;
+  defaultCollapsed?: boolean;
+}) {
   const versions = edition.versions;
   const hasTabs = !!versions && versions.length > 1;
   // 既定 = 全巻購入可の最古刷 (versions は古い順)。 無ければ先頭。
@@ -27,7 +40,29 @@ export default function EditionVolumes({ manga, edition }: { manga: Manga; editi
     ? Math.max(0, versions!.findIndex((v) => fullStock(v.volumes)))
     : 0;
   const [sel, setSel] = useState(defaultIdx);
+  const [collapsed, setCollapsed] = useState(defaultCollapsed);
+  const [showAll, setShowAll] = useState(false);
   const vols = hasTabs ? versions![sel].volumes : edition.volumes;
+
+  // ── 畳み状態: 見出しバーだけ表示(タップで展開) ──
+  if (collapsed) {
+    return (
+      <button
+        onClick={() => setCollapsed(false)}
+        className="spring-press tactile flex w-full items-center gap-2 rounded-card px-3.5 py-3 text-left"
+      >
+        <span className="text-ink/40">▸</span>
+        <span className="text-[15px] font-bold">{edition.label}</span>
+        <Badge>全 {vols.length} 巻</Badge>
+        {edition.publisher && (
+          <span className="text-xs text-ink/55">出版社: {edition.publisher}</span>
+        )}
+        <span className="ml-auto text-[11px] text-ink/45">ひらく</span>
+      </button>
+    );
+  }
+
+  const shown = showAll ? vols : vols.slice(0, PREVIEW_COUNT);
 
   return (
     <div>
@@ -36,6 +71,17 @@ export default function EditionVolumes({ manga, edition }: { manga: Manga; editi
         <Badge>全 {vols.length} 巻</Badge>
         {edition.publisher && (
           <span className="text-xs text-ink/55">出版社: {edition.publisher}</span>
+        )}
+        {defaultCollapsed && (
+          <button
+            onClick={() => {
+              setCollapsed(true);
+              setShowAll(false);
+            }}
+            className="spring-press ml-auto text-[11px] text-ink/45"
+          >
+            たたむ ▴
+          </button>
         )}
       </h2>
       {hasTabs && (
@@ -88,7 +134,7 @@ export default function EditionVolumes({ manga, edition }: { manga: Manga; editi
         </div>
       )}
       <ul className="space-y-2">
-        {vols.map((v) => (
+        {shown.map((v) => (
           <li key={`${edition.type}-${v.number}`}>
             <Card className="p-3">
               <VolumeTile manga={manga} volume={v} edition={edition} />
@@ -96,6 +142,16 @@ export default function EditionVolumes({ manga, edition }: { manga: Manga; editi
           </li>
         ))}
       </ul>
+      {vols.length > PREVIEW_COUNT && (
+        <div className="mt-2.5 text-center">
+          <button
+            onClick={() => setShowAll((s) => !s)}
+            className="spring-press tactile-chip inline-flex items-center rounded-full px-4 py-1.5 text-[12px] font-semibold text-ink/75"
+          >
+            {showAll ? "先頭6巻だけにする ▴" : `全${vols.length}巻を見る ▾(あと${vols.length - PREVIEW_COUNT}巻)`}
+          </button>
+        </div>
+      )}
     </div>
   );
 }

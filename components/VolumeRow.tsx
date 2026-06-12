@@ -11,11 +11,11 @@ export default function VolumeRow({ manga }: Props) {
       {manga.editions.map((ed, idx) => (
         <section
           key={`${ed.type}-${ed.label}`}
-          // 2つ目以降の版は中程度の区切り線で明確に分ける(太すぎず細すぎず)
-          className={idx > 0 ? "mt-8 border-t-2 border-ink/15 pt-8" : ""}
+          // ★2つ目以降の版は畳み表示(見出しバーのみ・タップで展開 = うる星型でも縦に伸びない)
+          className={idx > 0 ? "mt-3" : ""}
         >
           {/* 版本体 (= 複数刷がある場合は EditionVolumes 内で古い順タブ切替) */}
-          <EditionVolumes manga={manga} edition={ed} />
+          <EditionVolumes manga={manga} edition={ed} defaultCollapsed={idx > 0} />
         </section>
       ))}
     </div>
