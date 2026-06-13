@@ -86,7 +86,7 @@ export function DesignNav({ current: _current }: { current?: number }) {
     ["🔰", "使い方", "/about"],
   ] as const;
   return (
-    <div className="sticky top-0 z-50 flex items-center border-b border-[var(--color-line)] bg-[var(--color-surface)]/95 px-3 py-1.5 backdrop-blur">
+    <div className="flex items-center border-b border-[var(--color-line)] bg-[var(--color-surface)] px-3 py-1.5">
       {/* 左固定 = ホーム */}
       <Link href="/" aria-label="ホーム" className={cell}>
         <span className="text-[18px] leading-none">🏠</span>
