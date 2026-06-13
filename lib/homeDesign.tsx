@@ -74,10 +74,11 @@ export function CoverTile({ m, sizes }: { m: Manga; sizes?: string }) {
 }
 
 export function DesignNav({ current: _current }: { current?: number }) {
-  // ★2026-06-14: アイコン式の単一ナビに集約(旧テキスト行は廃止、見づらさ解消)。
-  //   全ページ共通。 旧 ScrollShortcutsMock(スクロール出現アイコン)とも統合済。
-  const items = [
-    ["🏠", "ホーム", "/"],
+  // ★2026-06-14: アイコン式の単一ナビ。 🏠ホームは左固定、 残りは右寄せクラスタ(≡メニュー含む)。
+  //   全ページ共通。 旧テキスト行 + 旧 ScrollShortcutsMock を統合・廃止。
+  const cell =
+    "spring-press flex flex-col items-center gap-0.5 active:scale-90";
+  const right = [
     ["📋", "一覧", "/list"],
     ["🔍", "検索", "/browse"],
     ["📝", "AI書評", "/column-ai-league"],
@@ -85,18 +86,26 @@ export function DesignNav({ current: _current }: { current?: number }) {
     ["🔰", "使い方", "/about"],
   ] as const;
   return (
-    <div className="sticky top-0 z-50 flex items-center justify-around gap-1 border-b border-[var(--color-line)] bg-[var(--color-surface)]/95 px-2 py-1.5 backdrop-blur">
-      {items.map(([icon, label, href]) => (
-        <Link
-          key={label}
-          href={href}
-          aria-label={label}
-          className="spring-press flex flex-col items-center gap-0.5 active:scale-90"
-        >
-          <span className="text-[18px] leading-none">{icon}</span>
-          <span className="text-[9px] text-ink/55">{label}</span>
-        </Link>
-      ))}
+    <div className="sticky top-0 z-50 flex items-center border-b border-[var(--color-line)] bg-[var(--color-surface)]/95 px-3 py-1.5 backdrop-blur">
+      {/* 左固定 = ホーム */}
+      <Link href="/" aria-label="ホーム" className={cell}>
+        <span className="text-[18px] leading-none">🏠</span>
+        <span className="text-[9px] text-ink/55">ホーム</span>
+      </Link>
+      {/* 右寄せクラスタ */}
+      <div className="ml-auto flex items-center gap-3.5">
+        {right.map(([icon, label, href]) => (
+          <Link key={label} href={href} aria-label={label} className={cell}>
+            <span className="text-[18px] leading-none">{icon}</span>
+            <span className="text-[9px] text-ink/55">{label}</span>
+          </Link>
+        ))}
+        {/* 三本線(メニュー) = 復活。 メニュー実装は将来、 今は枠のみ */}
+        <button type="button" aria-label="メニュー" className={`${cell} opacity-70`}>
+          <span className="text-[18px] leading-none">≡</span>
+          <span className="text-[9px] text-ink/55">メニュー</span>
+        </button>
+      </div>
     </div>
   );
 }
