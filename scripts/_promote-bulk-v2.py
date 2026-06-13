@@ -966,16 +966,18 @@ _PAGE_DEDUP_DROPS: set = _load_page_dedup()
 
 
 def _load_genre_additions() -> dict:
-    """genre-additions.yml = series_key -> 追加ジャンルkey list(野球/サッカー等のサブタグ純粋追加)。"""
-    p = ROOT / "data" / "seeds" / "genre-additions.yml"
-    if not p.exists():
-        return {}
-    doc = yaml.safe_load(open(p, encoding="utf-8")) or {}
+    """genre-additions.yml(野球/サッカー手動)+ genre-wiki.yml(Wikipediaカテゴリ突合)。
+    どちらも信頼源の純粋追加 = series_key -> 追加ジャンルkey list。"""
     out: dict = {}
-    for e in doc.get("additions", []):
-        k = e.get("series_key")
-        if k:
-            out.setdefault(k, []).extend(e.get("add") or [])
+    for fn in ("genre-additions.yml", "genre-wiki.yml"):
+        p = ROOT / "data" / "seeds" / fn
+        if not p.exists():
+            continue
+        doc = yaml.safe_load(open(p, encoding="utf-8")) or {}
+        for e in doc.get("additions", []):
+            k = e.get("series_key")
+            if k:
+                out.setdefault(k, []).extend(e.get("add") or [])
     return out
 
 
@@ -2190,12 +2192,7 @@ def main():
         seed_entry = seed3.get(series["series_key"])
         new_yml = build_yml(src, merged_series, authors, editions, seed_entry,
                             valid_pubs, valid_mags, valid_gens)
-        # ジャンル純粋追加(genre-additions.yml: baseball/soccer サブタグ等。 既存は不変)
-        _gadd = _GENRE_ADDITIONS.get(series["series_key"])
-        if _gadd:
-            for _g in _gadd:
-                if _g in valid_gens and _g not in new_yml.get("genres", []):
-                    new_yml.setdefault("genres", []).append(_g)
+        # (ジャンルは下の trusted優先マージで確定 = AniList+Wiki+手動を採用、 AIはfallback)
         # ★adult_us(米基準): ページの series_key(merge込)が種a isAdult なら付与。
         #   非日本geoで非表示用(日本は表示)。 採用作品集合は不変=表示制御のみ追加。
         page_keys = [sid2key.get(sid) for sid in related_ids]
@@ -2205,6 +2202,7 @@ def main():
             adult_us_pages += 1
         # ★AniList enrich(productionization): main series_key 優先で anilist_id/synonyms/
         #   genres_anilist/tags を本番に付与(箱を埋める)。 種3不変・match-v14 由来。
+        en = None
         if enrich_map:
             en = enrich_map.get(series["series_key"])
             if not en:  # main 未マッチなら merge 内の他 series_key から
@@ -2216,15 +2214,7 @@ def main():
                 if en.get("synonyms"):
                     new_yml["synonyms"] = en["synonyms"]
                 if en.get("genres_anilist"):
-                    new_yml["genres_anilist"] = en["genres_anilist"]
-                    # ★種a genres を master key にマップして 種3 genres に純粋追加(検索可能化)。
-                    #   「あるものはそのまま」= 既存 genres は不変、 重複しない master key のみ追加。
-                    cur_g = new_yml.get("genres") or []
-                    for g in en["genres_anilist"]:
-                        mk = ANILIST_GENRE_TO_MASTER.get(g)
-                        if mk and mk in valid_gens and mk not in cur_g:
-                            cur_g.append(mk)
-                    new_yml["genres"] = cur_g
+                    new_yml["genres_anilist"] = en["genres_anilist"]  # 表示/比較用(genres本体は下のtrusted優先)
                 if en.get("tags"):
                     new_yml["tags"] = en["tags"]
                 enrich_pages += 1
@@ -2249,6 +2239,27 @@ def main():
                     if af.get("original_authors") and not new_yml.get("original_authors"):
                         new_yml["original_authors"] = [{"name": n, "role": "writer"} for n in af["original_authors"]]
                     author_fill_pages += 1
+        # ★ジャンル trusted優先マージ(2026-06-13、 [[genre_quality_improvement]]):
+        #   trusted = AniList(genres+themes=genres_trusted) ∪ Wiki/手動(genre-additions+genre-wiki)。
+        #   trusted有→それを採用(AIノイズ=drama乱発を落とす)。 trusted空→AI fallback+provisional印。
+        trusted = set(en["genres_trusted"]) if (en and en.get("genres_trusted")) else set()
+        for k in [series["series_key"], *page_keys]:
+            if not k:
+                continue
+            e2 = enrich_map.get(k) if enrich_map else None
+            if e2 and e2.get("genres_trusted"):
+                trusted |= set(e2["genres_trusted"])
+            trusted |= set(_GENRE_ADDITIONS.get(k, []))
+        trusted = {g for g in trusted if g in valid_gens}
+        if trusted & {"baseball", "soccer"}:
+            trusted.add("sports")  # 階層検索: 野球/サッカーは sports 併記(CLAUDE.md)
+        if trusted:
+            new_yml["genres"] = sorted(trusted)
+            new_yml.pop("genres_provisional", None)
+        else:
+            ai_g = [g for g in (new_yml.get("genres") or []) if g in valid_gens and g != "other"]
+            new_yml["genres"] = ai_g or (new_yml.get("genres") or ["other"])
+            new_yml["genres_provisional"] = True  # 信頼源ゼロ=AI暫定(信頼源が来たら上書き)
         # ★MADB安全fallback: AniListで埋まらなかった著者ゼロを series_key で補完
         #   (外国名除去後の単独日本語著者のみ=原作者誤主著/汚染を回避)。
         cur_au2 = new_yml.get("authors") or []

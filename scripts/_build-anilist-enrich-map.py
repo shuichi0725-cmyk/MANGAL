@@ -14,10 +14,25 @@ from pathlib import Path
 
 sys.stdout.reconfigure(encoding="utf-8")
 MATCH = Path(".cache/match-v14-all.tsv")
-DUMP = Path(".cache/anilist-manga-dump.jsonl.gz")
+DUMP = Path(".cache/anilist-manga-dump-v3.jsonl.gz")  # ★v3=themeタグ完全保有(2026-06-13)
 OUT = Path(".cache/anilist-enrich-map.json")
 OVERRIDES = Path("data/seeds/anilist-link-overrides.yml")  # ★誤リンク剥がし(純粋追加seed)
 S = {"S180", "S150", "S130", "S100"}
+
+# ★ジャンル信頼源マップ([[genre_quality_improvement]])。 AniList genres(広い)+ theme tags(細かい)→ master。
+A2M = {"Romance":"romance","Comedy":"comedy","Drama":"drama","Action":"action","Fantasy":"fantasy",
+ "Slice of Life":"slice-of-life","Adventure":"adventure","Sci-Fi":"sci-fi","Mystery":"mystery",
+ "Horror":"horror","Sports":"sports","Mecha":"mecha","Music":"music","Thriller":"suspense",
+ "Supernatural":"supernatural","Ecchi":"ecchi","Psychological":"mind-game","Mahou Shoujo":"mahou-shoujo"}
+# theme tag名→master(明白のみ。 曖昧 Super Power/Swordplay/Reincarnation/Yuri は除外)
+T2M = {"Boys' Love":"bl","School":"school","School Club":"school","Teacher":"school",
+ "Historical":"historical","Isekai":"isekai","Food":"gourmet","Youkai":"yokai",
+ "Idol":"music","Detective":"mystery","Iyashikei":"slice-of-life","Magic":"fantasy",
+ "Urban Fantasy":"fantasy","Magical Girl":"mahou-shoujo","Mahou Shoujo":"mahou-shoujo",
+ "Vampire":"supernatural","Ghost":"supernatural","Gods":"supernatural"}
+# ★"War"/"Military" theme は除外: 戦争アークある action作品に広く付き過剰(ONE PIECE型)。
+#   warは Wikipedia 戦争漫画カテゴリ(精密)だけを源にする(ユーザ裁定 2026-06-13)。
+THEME_RANK = 70
 
 
 def load_link_overrides():
@@ -57,7 +72,7 @@ def tag_keep(t):
         return False
     if "Demographic" in cat:
         return True
-    if cat == "Theme" and rank >= 60:
+    if cat.startswith("Theme") and rank >= 60:  # ★v3はTheme-Action等のサブ分類(2026-06-13)
         return True
     if cat in ("Cast", "Setting") and rank >= 70:
         return True
@@ -113,11 +128,18 @@ def main():
                 continue
             syns = [s for s in (e.get("synonyms") or []) if syn_ok(s)][:8]
             genres = e.get("genres") or []
+            raw_tags = [t for t in (e.get("tags") or []) if isinstance(t, dict)]
             tags = [{"name": t.get("name"), "category": t.get("category"), "rank": t.get("rank") or 0}
-                    for t in (e.get("tags") or []) if isinstance(t, dict) and tag_keep(t)]
+                    for t in raw_tags if tag_keep(t)]
             tags = sorted(tags, key=lambda x: -x["rank"])[:12]
+            # ★ジャンル信頼源 = AniList genres(A2M) ∪ 高rank theme tags(T2M)
+            gt = {A2M[g] for g in genres if g in A2M}
+            for t in raw_tags:
+                if (t.get("rank") or 0) >= THEME_RANK and t.get("name") in T2M and not t.get("isAdult"):
+                    gt.add(T2M[t["name"]])
             aid_enrich[i] = {"anilist_id": i, "synonyms": syns,
-                             "genres_anilist": genres, "tags": tags}
+                             "genres_anilist": genres, "tags": tags,
+                             "genres_trusted": sorted(gt)}
     out = {sk: aid_enrich[aid] for sk, aid in sk_aid.items() if aid in aid_enrich}
     OUT.write_text(json.dumps(out, ensure_ascii=False), encoding="utf-8")
     # stats
