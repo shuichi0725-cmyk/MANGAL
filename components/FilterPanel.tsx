@@ -1,7 +1,8 @@
 "use client";
 
-import { emptyFilterState, type FilterState, type SortKey } from "@/lib/filters";
-import type { DataBundle, StatusT } from "@/lib/schema";
+import { useMemo } from "react";
+import { applyFilters, emptyFilterState, type FilterState, type SortKey } from "@/lib/filters";
+import type { DataBundle, Manga, StatusT } from "@/lib/schema";
 import { ChipButton } from "@/components/ui/Chip";
 import AuthorKanaIndex from "@/components/AuthorKanaIndex";
 
@@ -25,6 +26,31 @@ export default function FilterPanel({
   authorEntries,
 }: Props) {
   const update = (patch: Partial<FilterState>) => setState({ ...state, ...patch });
+
+  // ★動的件数(2026-06-13): 各facetの値ごとに「その値を選んだら何件」を表示。
+  //   faceted-search の定石 = 当該facetだけ解除した state で絞り、 残った作品を値で集計。
+  //   静的(R2)のままブラウザJSで計算 = サーバ化しない([[hosting_worker_r2_architecture]])。
+  const counts = useMemo(() => {
+    const tally = (clear: Partial<FilterState>, values: (m: Manga) => string[]) => {
+      const base = applyFilters(data.manga, { ...state, ...clear });
+      const map = new Map<string, number>();
+      for (const m of base) for (const v of values(m)) map.set(v, (map.get(v) ?? 0) + 1);
+      return map;
+    };
+    return {
+      status: tally({ statuses: [] }, (m) => [m.status]),
+      demographic: tally({ demographics: [] }, (m) => [m.demographic]),
+      genre: tally({ genres: [] }, (m) => m.genres ?? []),
+      publisher: tally({ publishers: [] }, (m) => m.publishers ?? []),
+      magazine: tally({ magazines: [] }, (m) => (m.magazine ? [m.magazine] : [])),
+    };
+  }, [data.manga, state]);
+  // 件数バッジ(0は淡色)
+  const Cnt = ({ n }: { n: number }) => (
+    <span className={`ml-1 tabular-nums text-[10px] ${n ? "text-ink/40" : "text-ink/20"}`}>
+      {n.toLocaleString()}
+    </span>
+  );
 
   const STATUS_LABELS: Record<StatusT, string> = {
     completed: "完結",
@@ -70,7 +96,7 @@ export default function FilterPanel({
                 update({ statuses: toggle(state.statuses, s) as StatusT[] })
               }
             >
-              {STATUS_LABELS[s]}
+              {STATUS_LABELS[s]}<Cnt n={counts.status.get(s) ?? 0} />
             </ChipButton>
           ))}
         </div>
@@ -144,7 +170,7 @@ export default function FilterPanel({
               active={state.demographics.includes(d.key)}
               onClick={() => update({ demographics: toggle(state.demographics, d.key) })}
             >
-              {d.name}
+              {d.name}<Cnt n={counts.demographic.get(d.key) ?? 0} />
             </ChipButton>
           ))}
         </div>
@@ -172,7 +198,7 @@ export default function FilterPanel({
               active={state.genres.includes(g.key)}
               onClick={() => update({ genres: toggle(state.genres, g.key) })}
             >
-              {g.name}
+              {g.name}<Cnt n={counts.genre.get(g.key) ?? 0} />
             </ChipButton>
           ))}
           {/* ★画集 = ジャンルでなく別カテゴリだが、 ここで選ぶと一覧を全画集に切替 */}
@@ -194,7 +220,7 @@ export default function FilterPanel({
                 checked={state.publishers.includes(p.key)}
                 onChange={() => update({ publishers: toggle(state.publishers, p.key) })}
               />
-              <span>{p.name}</span>
+              <span>{p.name}</span><Cnt n={counts.publisher.get(p.key) ?? 0} />
             </label>
           ))}
         </div>
@@ -209,7 +235,7 @@ export default function FilterPanel({
                 checked={state.magazines.includes(m.key)}
                 onChange={() => update({ magazines: toggle(state.magazines, m.key) })}
               />
-              <span>{m.name}</span>
+              <span>{m.name}</span><Cnt n={counts.magazine.get(m.key) ?? 0} />
             </label>
           ))}
         </div>

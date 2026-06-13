@@ -1709,7 +1709,9 @@ def build_yml(
     if not _rom and o["title"] and not re.search(r"[一-龠ぁ-んァ-ヶ]", o["title"]):
         # 漢字/かな を含まない=ラテン題(ZERO HOUR等)→ 題名小文字をromajiに
         _rom = o["title"].lower()
-    o["title_romaji"] = _rom or src_yml.get("title_romaji", "")
+    # ★最終fallback: slug(常に存在・小文字romaji形)→ title_romaji を空にしない
+    #   (kana末尾の小書き/kana内latin混入で romanize_kana が空を返す35件の床違反是正)
+    o["title_romaji"] = _rom or src_yml.get("title_romaji", "") or o["slug"].replace("-", " ")
     # subtitle: ★種3 curate(seed3.subtitle)を最優先 → 種2(series_row.subtitle)fallback。
     #   種3取込=merge時に副題を持たない代表行が選ばれて脱落する問題の是正(2026-06-02)。
     #   edition 名 (= '新装再編版' 等) なら strip (= 全 edition 含む page には不適)。
@@ -1787,6 +1789,17 @@ def build_yml(
             writers.append({"name": a["name"], "role": a["role"]})
     if not writers:
         writers = src_yml.get("authors") or [{"name": "(unknown)", "role": "writer_artist"}]
+    # ★正規化重複の除去(空白/中黒/ピリオド除去で同一なら先勝ち=「J.P.ホーガン」vs「J.P. ホーガン」)
+    def _dedup_authors(lst):
+        seen, out = set(), []
+        for a in lst:
+            nk = re.sub(r"[\s　・.,]", "", a.get("name") or "").lower()
+            if nk in seen:
+                continue
+            seen.add(nk); out.append(a)
+        return out
+    writers = _dedup_authors(writers)
+    originals = _dedup_authors(originals)
     # 著者ヨミ(50音索引用)+ romaji を付与 (= MADB 504 公式ヨミ。 無い著者は素のまま)
     o["authors"] = [enrich_author(w) for w in writers]
     o["original_authors"] = [enrich_author(x) for x in originals]
@@ -2080,6 +2093,13 @@ def main():
     art_book_keys = set(art_books.keys())
     print(f"  画集(別ストリーム): {len(art_book_keys):,} series_key / 混在ISBN除外 {len(get_art_book_exclude_isbn())} 件", file=sys.stderr)
 
+    # ★成年ネット(defense-in-depth、 2026-06-13)。 成年判定は slug-apply-prep の
+    #   ゲートが第一線だが、 promote は data/manga を信頼して emit するだけで独立チェックが
+    #   無かった = 5月の漏れ(2,233頁)の構造的根因。 data/manga がゲート未通過で再生成
+    #   されたり promote 単体実行でも漏れないよう、 ここでも adult_score>=3 を弾く
+    #   (override force非adult は除外)。 現データはクリーンなので実質no-op = 安全網。
+    _adult_net_ovr = _load_adult_overrides()
+
     stats = {"total": 0, "regenerated": 0, "not_found_in_db": 0,
              "no_editions": 0, "dropped_spinoff_old": 0,
              "dropped_non_manga": 0, "dropped_art_book": 0}
@@ -2116,6 +2136,11 @@ def main():
         if not series:
             stats["not_found_in_db"] += 1
             not_found.append(f"{ypath.name}  title={title}")
+            continue
+        # ★成年ネット(defense-in-depth): 成年(adult_score>=3)は本番に出さない。
+        #   slug-apply-prep ゲートの第二線(data/manga 汚染・promote単体実行でも漏らさない)。
+        if (series.get("adult_score") or 0) >= 3 and series.get("series_key") not in _adult_net_ovr:
+            stats["dropped_adult"] = stats.get("dropped_adult", 0) + 1
             continue
         # 雑誌(cm105マスター準拠)は作品でないため除外
         if series.get("series_key") in mag_drop_keys:

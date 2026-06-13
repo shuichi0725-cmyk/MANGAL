@@ -100,11 +100,35 @@ export default async function MangaDetailPage({
                 .join(" / ")}
             </p>
           )}
-          {manga.synonyms && manga.synonyms.length > 0 && (
-            <p className="text-[11px] text-ink/45 mt-1 leading-relaxed">
-              他言語・別名: {manga.synonyms.join(" / ")}
-            </p>
-          )}
+          {manga.synonyms &&
+            manga.synonyms.length > 0 &&
+            (() => {
+              // ★日本語別名と他言語を分離(2026-06-13)。 題名と同一の synonym は除外。
+              const isJa = (s: string) => /[぀-ヿ㐀-鿿]/.test(s);
+              const norm = (s: string) => s.replace(/\s+/g, "").toLowerCase();
+              const titles = new Set(
+                [manga.title, manga.title_kana, manga.alternative_titles?.en]
+                  .filter(Boolean)
+                  .map((s) => norm(s as string)),
+              );
+              const uniq = manga.synonyms.filter((s) => !titles.has(norm(s)));
+              const ja = uniq.filter(isJa);
+              const other = uniq.filter((s) => !isJa(s));
+              return (
+                <>
+                  {ja.length > 0 && (
+                    <p className="text-[11px] text-ink/45 mt-1 leading-relaxed">
+                      別名: {ja.join(" / ")}
+                    </p>
+                  )}
+                  {other.length > 0 && (
+                    <p className="text-[11px] text-ink/45 mt-1 leading-relaxed">
+                      他言語: {other.join(" / ")}
+                    </p>
+                  )}
+                </>
+              );
+            })()}
 
           <dl className="mt-6 grid grid-cols-[5.5em_1fr] gap-y-2.5 items-start text-sm">
             <dt className="font-semibold text-ink/65 pt-1">出版年</dt>

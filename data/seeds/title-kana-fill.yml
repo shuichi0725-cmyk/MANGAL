@@ -1,5 +1,7 @@
 # title_kana 補完(MADB + NDL by-ISBN + カタカナ題 + 残尾NDL by-title/抽出/AI読み)
 fills:
+- key: name:DONKEY|name:Page 1
+  kana_segmented: ページ ワン
 - key: name:(11)|name:異世界でカフェを開店しました。
   kana_segmented: イセカイ デ カフェ オ カイテン シマシタ
 - key: name:(4)|name:相棒に毒がありまして!

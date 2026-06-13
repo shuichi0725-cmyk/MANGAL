@@ -1,0 +1,947 @@
+# AniList誤リンク override(自動生成 _gen-anilist-link-overrides.py)。
+# relink: franchise本編へ a_id 付け替え(native完全一致で確証)。
+# drop:   高確信誤り(S1/S2/S4 or 複数シグネチャ)で relink先無し → enrich除外。
+# ★S3単独の曖昧分は触らない(stripはラテンvsカナ誤判定が多いため不採用)。
+overrides:
+  - {key: "name:4U|name:追放された公爵令嬢、ヴィルヘルミーナが幸せになるまで。", action: relink, to_id: 208096}
+  - {key: "name:5pb.|name:Robotics;Notes", action: relink, to_id: 65063}
+  - {key: "name:Ark performance|name:蒼き鋼のアルペジオ", action: relink, to_id: 55861}
+  - {key: "name:B-銀河|name:エロいスキルで異世界無双|sub:THE COMIC", action: relink, to_id: 134541}
+  - {key: "name:BondBradley|name:ニンジャスレイヤー", action: relink, to_id: 87173}
+  - {key: "name:CK|name:国に最強のバリアを張ったら平和になりすぎて追放されました。", action: relink, to_id: 176500}
+  - {key: "name:Clamp|name:魔法騎士レイアース", action: relink, to_id: 30119}
+  - {key: "name:Dr. Poro|name:朱色の仮面", action: relink, to_id: 130729}
+  - {key: "name:Hirano|name:Hellsing", action: relink, to_id: 30267}
+  - {key: "name:Inouesatoh|name:10 dance", action: relink, to_id: 67565}
+  - {key: "name:Izumi|name:茉莉花官吏伝|sub:後宮女官、気まぐれ皇帝に見初められ", action: relink, to_id: 123166}
+  - {key: "name:KeG|name:治癒魔法の間違った使い方", action: relink, to_id: 96942}
+  - {key: "name:Key|name:Clannad", action: relink, to_id: 149957}
+  - {key: "name:Laruha|name:かくりよの宿飯|sub:あやかしお宿に嫁入りします。", action: relink, to_id: 116778}
+  - {key: "name:Namie|name:鏡のむこうの最果て図書館|sub:光の勇者と偽りの魔王", action: relink, to_id: 117813}
+  - {key: "name:Naoe|name:青春×機関銃", action: relink, to_id: 86229}
+  - {key: "name:Nardack|name:異世界チート魔術師(マジシャン)", action: relink, to_id: 88505}
+  - {key: "name:Nikki Inc.|name:ミラクルニキ", action: relink, to_id: 110519}
+  - {key: "name:Osamu Tezuka|name:ブラックジャック[韓国語]", action: relink, to_id: 31600}
+  - {key: "name:PEACH-PIT|name:ローゼンメイデン", action: relink, to_id: 30098}
+  - {key: "name:Peach-Pit|name:ローゼンメイデン", action: relink, to_id: 30098}
+  - {key: "name:Quily|name:みにヴぁん", action: relink, to_id: 74097}
+  - {key: "name:Riv|name:異世界の貧乏農家に転生したので、レンガを作って城を建てることにしました|sub:@COMIC", action: relink, to_id: 195655}
+  - {key: "name:SASAYUKi|name:ご主人様とゆく異世界サバイバル!", action: relink, to_id: 124758}
+  - {key: "name:TATE|name:魔物喰らいの冒険者", action: relink, to_id: 199879}
+  - {key: "name:TATSUBON|name:田所さん", action: relink, to_id: 106890}
+  - {key: "name:TYPE-MOON|name:Fate/stay night〈Heaven's Feel〉", action: relink, to_id: 30715}
+  - {key: "name:TYPE-MOON|name:Fate/stay night〈Unlimited Blade Works〉", action: relink, to_id: 30715}
+  - {key: "name:Tagro|name:宇宙賃貸サルガッ荘", action: relink, to_id: 51152}
+  - {key: "name:Y. A|name:八男って、それはないでしょう!", action: relink, to_id: 86470}
+  - {key: "name:mothy_悪ノP|name:悪ノ召使", action: relink, to_id: 56196}
+  - {key: "name:naked ape|name:switch", action: relink, to_id: 31351}
+  - {key: "name:nishi|name:乙女ゲームの破滅フラグしかない悪役令嬢に転生してしまった…|sub:絶体絶命! 破滅寸前編", action: relink, to_id: 100560}
+  - {key: "name:nyanya|name:転生七女ではじめる異世界ライフ|sub:万能魔力があれば貴族社会も余裕で生きられると聞いたのですが?!", action: relink, to_id: 142736}
+  - {key: "name:pako|name:オカルティック・ナイン", action: relink, to_id: 77048}
+  - {key: "name:sanorin|name:僕の彼女はデッカワイイ", action: relink, to_id: 177188}
+  - {key: "name:shiryu|name:願いを叶えてもらおうと悪魔を召喚したけど、可愛かったので結婚しました|sub:悪魔の新妻", action: relink, to_id: 156748}
+  - {key: "name:あずさきな|name:友達の姉ちゃんに恋した話", action: relink, to_id: 155531}
+  - {key: "name:あまねかむらぎ|name:ネタキャラ転生とかあんまりだ!", action: relink, to_id: 127444}
+  - {key: "name:あやとき|name:浅草鬼嫁日記|sub:天酒馨は前世の嫁と平穏に暮らしたい。", action: relink, to_id: 116777}
+  - {key: "name:いぬころすけ|name:アルティメットジャンケン", action: relink, to_id: 109679}
+  - {key: "name:いのり|name:私の推しは悪役令嬢。", action: relink, to_id: 109206}
+  - {key: "name:えびすし|name:断罪された悪役令嬢は、逆行して完璧な悪女を目指す|sub:@COMIC", action: relink, to_id: 154827}
+  - {key: "name:お米軒|name:変態王子と笑わない猫。", action: relink, to_id: 55679}
+  - {key: "name:かぱたろー|name:隣人さんはおせっかいお姉さん", action: relink, to_id: 142138}
+  - {key: "name:かわのあきこ|name:悲劇の元凶となる最強外道ラスボス女王は民の為に尽くします。", action: relink, to_id: 125554}
+  - {key: "name:くぼたふみお|name:チンチンデビルを追え!", action: relink, to_id: 180840}
+  - {key: "name:くろかた|name:治癒魔法の間違った使い方", action: relink, to_id: 96942}
+  - {key: "name:さいとう・プロ|name:サバイバル", action: relink, to_id: 47927}
+  - {key: "name:さいとう・プロ|name:日本沈没", action: relink, to_id: 57015}
+  - {key: "name:さかき傘|name:思春期なアダム", action: relink, to_id: 88639}
+  - {key: "name:さかもとびん|name:逆行した悪役令嬢は、なぜか魔力を失ったので深窓の令嬢になります", action: relink, to_id: 129504}
+  - {key: "name:さらさみさ|name:無能は不要と言われ『時計使い』の僕は職人ギルドから追い出されるも、ダンジョンの深部で真の力に覚醒する", action: relink, to_id: 154694}
+  - {key: "name:しのとうこ|name:ぼんくら陰陽師の鬼嫁", action: relink, to_id: 164705}
+  - {key: "name:しのとうこ|name:薬屋のひとりごと", action: relink, to_id: 99022}
+  - {key: "name:しまねこ|name:もふもふとむくむくと異世界漂流生活", action: relink, to_id: 162862}
+  - {key: "name:しりー|name:人食いダンジョンへようこそ!", action: relink, to_id: 105465}
+  - {key: "name:すずの木くろ|name:宝くじで40億当たったんだけど異世界に移住する", action: relink, to_id: 98226}
+  - {key: "name:たなと|name:あちらこちらぼくら〈の、あれからとこれから〉", action: relink, to_id: 113921}
+  - {key: "name:てぃんくる|name:ロウきゅーぶ!", action: relink, to_id: 53630}
+  - {key: "name:でむにゃん|name:FX戦士くるみちゃん", action: relink, to_id: 128364}
+  - {key: "name:どまどま|name:おい、外れスキルだと思われていた《チートコード操作》が化け物すぎるんだが。", action: relink, to_id: 199730}
+  - {key: "name:なま|name:最弱テイマーはゴミ拾いの旅を始めました。|sub:@COMIC", action: relink, to_id: 118986}
+  - {key: "name:にじまあるく|name:フェンリルに転生したはずがどう見ても柴犬|sub:柴犬(最強)になった俺、もふもふされながら神へと成り上がる", action: relink, to_id: 156426}
+  - {key: "name:のり伍郎|name:今泉ん家はどうやらギャルの溜まり場になってるらしい|sub:deep", action: relink, to_id: 123760}
+  - {key: "name:はいいろ|name:魔法使いの婚約者|sub:eternally yours", action: relink, to_id: 101668}
+  - {key: "name:はいむらきよたか|name:とある科学の超電磁砲(レールガン)|sub:とある魔術の禁書目録外伝", action: relink, to_id: 37776}
+  - {key: "name:ひじき漫画家|name:嫌いでいさせて", action: relink, to_id: 111044}
+  - {key: "name:ひらく椥|name:薄桜鬼", action: relink, to_id: 53352}
+  - {key: "name:へいろー|name:異世界帰りのアラフォーリーマン、17歳の頃に戻って無双する|sub:90's Report", action: relink, to_id: 151668}
+  - {key: "name:ほのぼのる500|name:最弱テイマーはゴミ拾いの旅を始めました。", action: relink, to_id: 118986}
+  - {key: "name:ぽんこつわーくす|name:超昂閃忍ハルカ", action: relink, to_id: 86743}
+  - {key: "name:まえばる蒔乃|name:婚約破棄された『空気』な私、成り上がりの旦那様に嫁ぎました。|sub:the comic", action: relink, to_id: 170606}
+  - {key: "name:まに|name:安達としまむら", action: relink, to_id: 109302}
+  - {key: "name:まろ|name:百魔の主|sub:異世界で魔王チートは最強かもしれません", action: relink, to_id: 95141}
+  - {key: "name:みずたまこと|name:OUT", action: relink, to_id: 169335}
+  - {key: "name:みやま零|name:大奥のサクラ", action: relink, to_id: 84125}
+  - {key: "name:もりぐちあきら|name:やめろ好きになってしまう", action: relink, to_id: 198359}
+  - {key: "name:もりこっこ|name:目々盛くんには敵わない", action: relink, to_id: 125400}
+  - {key: "name:よねやませつこ|name:ロードス島戦記", action: relink, to_id: 92655}
+  - {key: "name:りょう@涼|name:ゲーマーが異世界魂転してハーレム人生へコンティニューするそうです|sub:THE COMIC", action: relink, to_id: 160141}
+  - {key: "name:わたなべ京|name:ファイアーエムブレム", action: relink, to_id: 94287}
+  - {key: "name:わるいおとこ|name:俺の現実は恋愛ゲーム??-かと思ったら命がけのゲームだった", action: relink, to_id: 102548}
+  - {key: "name:わるいおとこ|name:俺の現実は恋愛ゲーム??かと思ったら命がけのゲームだった", action: relink, to_id: 102548}
+  - {key: "name:アジシオ|name:常勝魔王のやりなおし|sub:俺はまだ一割も本気を出していないんだが", action: relink, to_id: 124991}
+  - {key: "name:アネコユサギ|name:盾の勇者の成り上がり", action: relink, to_id: 85442}
+  - {key: "name:アルデヒド|name:奴隷を調教してハーレム作る", action: relink, to_id: 149329}
+  - {key: "name:イズシロ|name:最強魔法師の隠遁計画|sub:ジ・オルターネイティブ", action: relink, to_id: 99759}
+  - {key: "name:イット|name:口止めのご褒美は男装乙女とイチャエロです!|sub:THE COMIC", action: relink, to_id: 123475}
+  - {key: "name:ウィザーズオブザコースト|name:すべての人類を破壊する。それらは再生できない。", action: relink, to_id: 105790}
+  - {key: "name:エノキスルメ|name:ひねくれ領主の幸福譚", action: relink, to_id: 147021}
+  - {key: "name:カヅチ|name:田舎の黒ギャルJKと結婚しました", action: relink, to_id: 153577}
+  - {key: "name:カンチェラーラ|name:異世界の貧乏農家に転生したので、レンガを作って城を建てることにしました", action: relink, to_id: 195655}
+  - {key: "name:キョクイチ東京ムービー|name:ベルサイユのばら", action: relink, to_id: 30660}
+  - {key: "name:キョクイチ東京ムービー|name:名探偵コナン 時計じかけの摩天楼", action: relink, to_id: 163552}
+  - {key: "name:クレタ|name:異修羅|sub:新魔王戦争", action: relink, to_id: 131745}
+  - {key: "name:コヤマナユ|name:嫌われ妻は、英雄将軍と離婚したい!", action: relink, to_id: 210045}
+  - {key: "name:コレフジ|name:ある魔女が死ぬまで|sub:終わりの言葉と始まりの涙", action: relink, to_id: 170167}
+  - {key: "name:サクマ伺貴|name:惚れ症のハーフエルフさん|sub:THE COMIC", action: relink, to_id: 110821}
+  - {key: "name:シソ|name:ステータス・オール∞(インフィニティ)", action: relink, to_id: 159857}
+  - {key: "name:ジョンディー|name:最凶魔術師の異常なる逃亡生活|sub:THE COMIC", action: relink, to_id: 121371}
+  - {key: "name:スズム|name:終焉ノ栞", action: relink, to_id: 79675}
+  - {key: "name:ツナマサ|name:DOG MATIC", action: relink, to_id: 195409}
+  - {key: "name:バンダイナムコエンターテインメント|name:アイドルマスターミリオンライブ!Blooming Clover〈encore〉", action: relink, to_id: 116632}
+  - {key: "name:ビーパパス|name:少女革命ウテナ", action: relink, to_id: 30772}
+  - {key: "name:フィールズ|name:マジェスティックプリンス", action: relink, to_id: 73371}
+  - {key: "name:ブッチャーU|name:せっかくチートを貰って異世界に転移したんだから、好きなように生きてみたい", action: relink, to_id: 101284}
+  - {key: "name:ホームラン・拳|name:仲神家の一族", action: relink, to_id: 30233}
+  - {key: "name:ホーム社|name:HUNTER×HUNTER", action: relink, to_id: 30026}
+  - {key: "name:ホーム社|name:I''s", action: relink, to_id: 184031}
+  - {key: "name:ホーム社|name:SLAM DUNK", action: relink, to_id: 30051}
+  - {key: "name:ホーム社|name:こちら葛飾区亀有公園前派出所", action: relink, to_id: 30733}
+  - {key: "name:ホーム社|name:ときめきトゥナイト", action: relink, to_id: 31748}
+  - {key: "name:ホーム社|name:キン肉マンⅡ世", action: relink, to_id: 35451}
+  - {key: "name:ホーム社|name:究極!!変態仮面", action: relink, to_id: 32334}
+  - {key: "name:ホーム社|name:聖闘士星矢", action: relink, to_id: 31045}
+  - {key: "name:マジコ!|name:魔法科高校の劣等生", action: relink, to_id: 64127}
+  - {key: "name:マミタ|name:40までにしたい10のこと", action: relink, to_id: 161929}
+  - {key: "name:マルクス|name:資本論", action: relink, to_id: 199335}
+  - {key: "name:ミミダ|name:異世界帰りのアラフォーリーマン、17歳の頃に戻って無双する", action: relink, to_id: 151668}
+  - {key: "name:メアリー|name:悪役令嬢の矜持", action: relink, to_id: 183771}
+  - {key: "name:ヤッペン|name:ご主人様とゆく異世界サバイバル!|sub:THE COMIC", action: relink, to_id: 124758}
+  - {key: "name:ユイザキカズヤ|name:おんなのこのまゆ|sub:昭和式メイド閑話抄", action: relink, to_id: 121100}
+  - {key: "name:ユノイチカ|name:夜明けの唄", action: relink, to_id: 127217}
+  - {key: "name:ラズウェル細木1956-|name:酒のほそ道", action: relink, to_id: 210233}
+  - {key: "name:ルビー・パーティー|name:遙かなる時空の中で", action: relink, to_id: 31146}
+  - {key: "name:ルビー・パーティー|name:金色のコルダ", action: relink, to_id: 31051}
+  - {key: "name:ヴァージニア二等兵|name:異世界居酒屋「のぶ」", action: relink, to_id: 98975}
+  - {key: "name:七津角建介|name:託児城のオルベイル", action: relink, to_id: 138537}
+  - {key: "name:三上延|name:ビブリア古書堂の事件手帖", action: relink, to_id: 67977}
+  - {key: "name:三本阪奈|name:マイペースと歩く", action: relink, to_id: 171106}
+  - {key: "name:三河ごーすと|name:友達の妹が俺にだけウザい", action: relink, to_id: 109253}
+  - {key: "name:中野晴行|name:ブラック・ジャック|sub:ザ・ピース＆アース : アンコール出版", action: relink, to_id: 31600}
+  - {key: "name:乙一|name:きみにしか聞こえない", action: relink, to_id: 41438}
+  - {key: "name:二階堂幸|name:雨と君と", action: relink, to_id: 123004}
+  - {key: "name:井上みつる|name:異世界転移して教師になったが、魔女と恐れられている件", action: relink, to_id: 180910}
+  - {key: "name:井上佐藤|name:10 dance", action: relink, to_id: 67565}
+  - {key: "name:井上佐藤|name:10DANCE", action: relink, to_id: 67565}
+  - {key: "name:井上堅二|name:バカとテストと召喚獣", action: relink, to_id: 43872}
+  - {key: "name:伊藤寿規|name:王国へ続く道", action: relink, to_id: 86443}
+  - {key: "name:伏瀬|name:転生したらスライムだった件", action: relink, to_id: 86355}
+  - {key: "name:佐々木ラスト|name:迷宮メトロ|sub:目覚めたら最強職だったのでシマリスを連れて新世界を歩く", action: relink, to_id: 125194}
+  - {key: "name:佐々木多利爾|name:スーパーマリオくん", action: relink, to_id: 40314}
+  - {key: "name:佐伯さん|name:お隣の天使様にいつの間にか駄目人間にされていた件", action: relink, to_id: 122337}
+  - {key: "name:佐伯庸介|name:昔勇者で今は骨", action: relink, to_id: 125906}
+  - {key: "name:佐藤りここ|name:やり直し辺境伯夫人の幸福な誤算", action: relink, to_id: 203370}
+  - {key: "name:佐藤千恵|name:オレ様キングダム", action: relink, to_id: 46583}
+  - {key: "name:佐藤順一|name:魔法使いTai!", action: relink, to_id: 39806}
+  - {key: "name:円谷プロダクション|name:ウルトラマン", action: relink, to_id: 116352}
+  - {key: "name:冬葉つがる|name:かくりよの宿飯", action: relink, to_id: 116778}
+  - {key: "name:創美社|name:ときめきトゥナイト", action: relink, to_id: 31748}
+  - {key: "name:加藤いつわ|name:セーブ&ロードのできる宿屋さん|sub:カンスト転生者が宿屋で新人育成を始めたようです", action: relink, to_id: 110945}
+  - {key: "name:北国良人|name:断罪された悪役令嬢は、逆行して完璧な悪女を目指す", action: relink, to_id: 154827}
+  - {key: "name:北方謙三|name:水滸伝", action: relink, to_id: 66097}
+  - {key: "name:十夜|name:転生した大聖女は、聖女であることをひた隠す|sub:A Tale of The Great Saint", action: relink, to_id: 128053}
+  - {key: "name:千世トケイ|name:死神の初恋", action: relink, to_id: 209878}
+  - {key: "name:千歳四季|name:神の子らの懺悔(リグレット)", action: relink, to_id: 111769}
+  - {key: "name:千歳四季|name:蒼竜の側用人", action: relink, to_id: 99617}
+  - {key: "name:南野海風|name:凶乱令嬢ニア・リストン", action: relink, to_id: 154010}
+  - {key: "name:南野海風|name:凶乱令嬢ニア・リストン|sub:病弱令嬢に転生した神殺しの武人の華麗なる無双録", action: relink, to_id: 154010}
+  - {key: "name:古流望|name:おかしな転生", action: relink, to_id: 123847}
+  - {key: "name:古矢渚|name:君と夏のなか", action: relink, to_id: 104203}
+  - {key: "name:吉岡剛|name:賢者の孫", action: relink, to_id: 87293}
+  - {key: "name:壁井ユカコ|name:キーリ", action: relink, to_id: 43238}
+  - {key: "name:夏原武|name:クロサギ", action: relink, to_id: 35630}
+  - {key: "name:夏原武|name:新クロサギ", action: relink, to_id: 45380}
+  - {key: "name:夏村げっし|name:この恋はきっと、甘すぎる", action: relink, to_id: 189387}
+  - {key: "name:大場つぐみ|name:バクマン。", action: relink, to_id: 39711}
+  - {key: "name:大塚真一郎|name:Re:ゼロから始める異世界生活", action: relink, to_id: 85737}
+  - {key: "name:天沢彰|name:剣客商売", action: relink, to_id: 72221}
+  - {key: "name:天野こひつじ|name:異世界に来たみたいだけど如何すれば良いのだろう|sub:社畜SEのマイペース冒険記", action: relink, to_id: 100838}
+  - {key: "name:太田勝|name:名探偵コナン", action: relink, to_id: 31061}
+  - {key: "name:太田勝|name:名探偵コナン|sub:特別編", action: relink, to_id: 31061}
+  - {key: "name:夾竹桃|name:戦国小町苦労譚", action: relink, to_id: 101334}
+  - {key: "name:奥たまむし|name:百合ドリル", action: relink, to_id: 115010}
+  - {key: "name:安斉秀|name:神のみぞ知るセカイ", action: relink, to_id: 37519}
+  - {key: "name:安斎秀|name:神のみぞ知るセカイ", action: relink, to_id: 37519}
+  - {key: "name:実弥島巧|name:テイルズオブジアビス", action: relink, to_id: 31756}
+  - {key: "name:富野由悠季|name:重戦機エルガイム", action: relink, to_id: 149793}
+  - {key: "name:寺澤広蔵|name:（新）ブラックジャックによろしく", action: relink, to_id: 31668}
+  - {key: "name:小学館ドラえもんルーム|name:ドラえもん", action: relink, to_id: 31032}
+  - {key: "name:小林博明|name:サイボーグ009", action: relink, to_id: 31639}
+  - {key: "name:小湊悠貴|name:ゆきうさぎのお品書き", action: relink, to_id: 105510}
+  - {key: "name:山口了児|name:ファンタジスタ", action: relink, to_id: 40259}
+  - {key: "name:山田モジ美|name:我にチートを", action: relink, to_id: 120458}
+  - {key: "name:嶋|name:逆行した悪役令嬢は、なぜか魔力を失ったので深窓の令嬢になります", action: relink, to_id: 129504}
+  - {key: "name:川上亮|name:人狼ゲーム|sub:ロスト・エデン", action: relink, to_id: 85598}
+  - {key: "name:川内康範|name:月光仮面", action: relink, to_id: 156941}
+  - {key: "name:川島健三|name:はいからさんが通る", action: relink, to_id: 31567}
+  - {key: "name:川島健三|name:バイオレンスジャック", action: relink, to_id: 31442}
+  - {key: "name:川獺右端|name:大相撲令嬢|sub:前世に相撲部だった私が捨て猫王子とはぁどすこいどすこい", action: relink, to_id: 164444}
+  - {key: "name:川谷康久|name:ひるなかの流星", action: relink, to_id: 57231}
+  - {key: "name:川谷康久|name:アオハライド", action: relink, to_id: 54294}
+  - {key: "name:川谷康久|name:青空エール", action: relink, to_id: 40868}
+  - {key: "name:左リュウ|name:人間だけど魔王軍四天王に育てられた俺は、魔王の娘に愛され支配属性の権能を与えられました。|sub:The guardian of princess", action: relink, to_id: 125301}
+  - {key: "name:平坂読|name:僕は友達が少ない", action: relink, to_id: 51621}
+  - {key: "name:平野俊貴|name:吸血姫美夕", action: relink, to_id: 31223}
+  - {key: "name:広瀬べろせ|name:たたセン|sub:からめる先生の奇妙な課外授業", action: relink, to_id: 131349}
+  - {key: "name:待緒イサミ|name:十二支色恋草子", action: relink, to_id: 100594}
+  - {key: "name:後藤なお|name:ザ・サード", action: relink, to_id: 77675}
+  - {key: "name:志村泰央|name:史上最強の弟子ケンイチ", action: relink, to_id: 30988}
+  - {key: "name:悠理なゆた|name:このあと滅茶苦茶ラブコメした", action: relink, to_id: 116240}
+  - {key: "name:手塚企画|name:鉄腕アトム", action: relink, to_id: 30728}
+  - {key: "name:招来|name:アラフォー賢者の異世界生活日記|sub:気ままな異世界教師ライフ", action: relink, to_id: 103554}
+  - {key: "name:斎藤亜弓|name:ロードス島戦記", action: relink, to_id: 92655}
+  - {key: "name:新堂アラタ|name:魔王の始め方", action: relink, to_id: 86431}
+  - {key: "name:日陰影次|name:王国へ続く道|sub:奴隷剣士の成り上がり英雄譚", action: relink, to_id: 86443}
+  - {key: "name:有藤せな|name:池袋ウエストゲートパーク", action: relink, to_id: 30258}
+  - {key: "name:朝比奈和|name:転生王子は〈学園でも〉ダラけたい", action: relink, to_id: 101870}
+  - {key: "name:末沢瑛一|name:花咲ける青少年", action: relink, to_id: 35854}
+  - {key: "name:杜乃ミズ|name:ティアムーン帝国物語～断頭台から始まる、姫の転生逆転ストーリー～@COMIC", action: relink, to_id: 112830}
+  - {key: "name:東郷源|name:ボドカン!", action: relink, to_id: 159151}
+  - {key: "name:柚希きひろ|name:転生王子は〈学園でも〉ダラけたい", action: relink, to_id: 101870}
+  - {key: "name:柳実冬貴|name:対魔導学園35試験小隊", action: relink, to_id: 78635}
+  - {key: "name:柳矢真呂|name:追放された聖女ですが、実は国中から愛されすぎてて怖いんですけど!?", action: relink, to_id: 200567}
+  - {key: "name:桂あいり|name:カラミざかり|sub:ボクのほんとと君の嘘", action: relink, to_id: 112940}
+  - {key: "name:桐矢隆|name:紅霞後宮物語|sub:小玉伝", action: relink, to_id: 209740}
+  - {key: "name:桜井竜矢|name:私、能力は平均値でって言ったよね!|sub:god bless me?", action: relink, to_id: 99103}
+  - {key: "name:桜庭一樹|name:砂糖菓子の弾丸は撃ちぬけない", action: relink, to_id: 50577}
+  - {key: "name:森下suu|name:日々蝶々", action: relink, to_id: 65719}
+  - {key: "name:森博嗣|name:すべてがFになる", action: relink, to_id: 121090}
+  - {key: "name:植田リョウ|name:我にチートを|sub:ハズレチートの召喚勇者は異世界でゆっくり暮らしたい", action: relink, to_id: 120458}
+  - {key: "name:榊原宗々|name:じゃあ、君の代わりに殺そうか?", action: relink, to_id: 105169}
+  - {key: "name:榊空也|name:死神の初恋", action: relink, to_id: 209878}
+  - {key: "name:榎本快晴|name:齢5000年の草食ドラゴン、いわれなき邪竜認定|sub:やだこの生贄、人の話を聞いてくれない", action: relink, to_id: 115165}
+  - {key: "name:横田守|name:魔法戦士リウイ", action: relink, to_id: 91383}
+  - {key: "name:橋本悠|name:2.5次元の誘惑", action: relink, to_id: 110785}
+  - {key: "name:橘由華|name:聖女の魔力は万能です", action: relink, to_id: 101503}
+  - {key: "name:橙乃ままれ|name:まおゆう魔王勇者", action: relink, to_id: 56441}
+  - {key: "name:池波正太郎|name:剣客商売", action: relink, to_id: 72221}
+  - {key: "name:河野裕|name:サクラダリセット", action: relink, to_id: 89234}
+  - {key: "name:泉彩|name:人外教室の人間嫌い教師|sub:ヒトマ先生、私たちに人間を教えてくれますか……?", action: relink, to_id: 143135}
+  - {key: "name:泉谷あゆみ|name:ウルフガイ", action: relink, to_id: 54058}
+  - {key: "name:浦畑達彦|name:ボンバーマン・ビーダマン爆外伝", action: relink, to_id: 51671}
+  - {key: "name:海野一雄|name:ドラえもん", action: relink, to_id: 31032}
+  - {key: "name:渡航|name:やはり俺の青春ラブコメはまちがっている。", action: relink, to_id: 70171}
+  - {key: "name:渡里|name:鋼殻のレギオス", action: relink, to_id: 37416}
+  - {key: "name:満月シオン|name:英雄教室|sub:ガールズミッション", action: relink, to_id: 86081}
+  - {key: "name:溝口隆一郎|name:反逆のソウルイーター", action: relink, to_id: 119580}
+  - {key: "name:漂月|name:人狼への転生、魔王の副官|sub:はじまりの章", action: relink, to_id: 98368}
+  - {key: "name:玉手峰人|name:エア・ギア", action: relink, to_id: 30074}
+  - {key: "name:珠梨やすゆき|name:おかしな転生", action: relink, to_id: 123847}
+  - {key: "name:珪素|name:超世界転生エグゾドライブ", action: relink, to_id: 132037}
+  - {key: "name:琥狗ハヤテ|name:もののふっ!!", action: relink, to_id: 109015}
+  - {key: "name:田中ロミオ|name:人類は衰退しました", action: relink, to_id: 54562}
+  - {key: "name:田中憲|name:妖怪人間ベム", action: relink, to_id: 148318}
+  - {key: "name:田中芳樹|name:アルスラーン戦記", action: relink, to_id: 81233}
+  - {key: "name:田中芳樹|name:銀河英雄伝説", action: relink, to_id: 87134}
+  - {key: "name:田中貴大|name:剣客商売", action: relink, to_id: 72221}
+  - {key: "name:田中鈴木|name:愛しあってる2人", action: relink, to_id: 206148}
+  - {key: "name:田倉トヲル|name:首の姫と首なし騎士", action: relink, to_id: 183077}
+  - {key: "name:田口孝敏|name:からかい上手の高木さん", action: relink, to_id: 85533}
+  - {key: "name:田口孝敏|name:犬夜叉", action: relink, to_id: 30676}
+  - {key: "name:睦月れい|name:Missing", action: relink, to_id: 168180}
+  - {key: "name:矢立肇|name:機動戦士ガンダムF91", action: relink, to_id: 46456}
+  - {key: "name:石沢将人|name:史上最強の弟子ケンイチ", action: relink, to_id: 30988}
+  - {key: "name:石田リンネ|name:茉莉花官吏伝", action: relink, to_id: 123166}
+  - {key: "name:石田可奈|name:魔法科高校の劣等生", action: relink, to_id: 64127}
+  - {key: "name:碓井ツカサ|name:異世界居酒屋「げん」", action: relink, to_id: 95229}
+  - {key: "name:碧門たかね|name:しろがねの王", action: relink, to_id: 44858}
+  - {key: "name:神奈月昇|name:ゴブリンスレイヤー", action: relink, to_id: 87321}
+  - {key: "name:神永学|name:心霊探偵八雲", action: relink, to_id: 47541}
+  - {key: "name:秀良子|name:Staygold", action: relink, to_id: 77537}
+  - {key: "name:秀良子|name:Staygold|sub:それから。", action: relink, to_id: 77537}
+  - {key: "name:稲富健|name:エリアの騎士", action: relink, to_id: 38795}
+  - {key: "name:竹田羽角|name:魔法科高校の劣等生", action: relink, to_id: 64127}
+  - {key: "name:筏田かつら|name:君に恋をするなんて、ありえないはずだった", action: relink, to_id: 162180}
+  - {key: "name:築地俊彦|name:ブレイブウィッチーズPrequel", action: relink, to_id: 129510}
+  - {key: "name:紫式部|name:源氏物語", action: relink, to_id: 174423}
+  - {key: "name:紫真依|name:悪役令嬢の中の人", action: relink, to_id: 150764}
+  - {key: "name:結城光流|name:少年陰陽師", action: relink, to_id: 159785}
+  - {key: "name:綾月ツナ|name:ゆるふわ農家の文字化けスキル|sub:異世界でカタログ通販やってます", action: relink, to_id: 160106}
+  - {key: "name:菅正太郎|name:輪廻のラグランジェ", action: relink, to_id: 66341}
+  - {key: "name:蔦森えん|name:隅でいいです。構わないでくださいよ。", action: relink, to_id: 121698}
+  - {key: "name:藤ちょこ|name:賢者の弟子を名乗る賢者", action: relink, to_id: 91885}
+  - {key: "name:藤想|name:ケモ夫人", action: relink, to_id: 146154}
+  - {key: "name:藤木わしろ|name:英雄と賢者の転生婚", action: relink, to_id: 146826}
+  - {key: "name:藤木わしろ|name:英雄と賢者の転生婚|sub:かつての好敵手と婚約して最強夫婦になりました", action: relink, to_id: 146826}
+  - {key: "name:虚淵玄|name:アイゼンフリューゲル", action: relink, to_id: 73805}
+  - {key: "name:蝉川夏哉|name:異世界居酒屋「げん」", action: relink, to_id: 95229}
+  - {key: "name:西尾維新|name:新本格魔法少女りすか", action: relink, to_id: 126755}
+  - {key: "name:谷川流|name:涼宮ハルヒちゃんの憂鬱", action: relink, to_id: 40809}
+  - {key: "name:谷瑞恵|name:伯爵と妖精", action: relink, to_id: 38418}
+  - {key: "name:辻本有博|name:ハヤテのごとく!", action: relink, to_id: 30696}
+  - {key: "name:那珂山みちる|name:はぐれ勇者の異世界バイブル", action: relink, to_id: 126922}
+  - {key: "name:野崎つばた|name:復讐完遂者の人生二周目異世界譚|sub:THE COMIC", action: relink, to_id: 117084}
+  - {key: "name:長月達平|name:Re: ゼロから始める異世界生活|sub:氷結の絆", action: relink, to_id: 85737}
+  - {key: "name:長野文三郎|name:駄菓子屋ヤハギ異世界に出店します|sub:転移先で大繁盛", action: relink, to_id: 182930}
+  - {key: "name:関川夏央|name:事件屋稼業", action: relink, to_id: 93212}
+  - {key: "name:雪村花菜|name:紅霞後宮物語", action: relink, to_id: 209740}
+  - {key: "name:雷門風太|name:狼と香辛料", action: relink, to_id: 33299}
+  - {key: "name:青木雄二プロダクション|name:新ナニワ金融道", action: relink, to_id: 112421}
+  - {key: "name:音無奏|name:ネタキャラ転生とかあんまりだ!|sub:the comic", action: relink, to_id: 127444}
+  - {key: "name:饅頭屋餡子|name:春期限定いちごタルト事件", action: relink, to_id: 198392}
+  - {key: "name:馬克杯|name:ダンジョン暮らしの元勇者|sub:THE COMIC", action: relink, to_id: 108048}
+  - {key: "name:高久尚子|name:僕はすべてを知っている", action: relink, to_id: 45762}
+  - {key: "name:高嶋しょあ|name:ひねくれ領主の幸福譚", action: relink, to_id: 147021}
+  - {key: "name:黄金バット企画|name:黄金バット|sub:大正髑髏奇譚", action: relink, to_id: 138189}
+  - {key: "name:黒埼|name:お菓子な悪役令嬢は没落後に甘党の王子に絡まれるようになりました", action: relink, to_id: 211292}
+  - {key: "qid:Q1016880|name:北斗の拳.", action: relink, to_id: 31149}
+  - {key: "qid:Q104012787|name:にくひつ", action: relink, to_id: 95499}
+  - {key: "qid:Q1040463|name:BUILD KING", action: relink, to_id: 105450}
+  - {key: "qid:Q1049526|name:機動戦士ガンダムthe origin", action: relink, to_id: 30214}
+  - {key: "qid:Q1050794|name:カメリア館", action: relink, to_id: 173065}
+  - {key: "qid:Q105703956|name:左ききのエレン", action: relink, to_id: 109228}
+  - {key: "qid:Q108110337|name:胸が鳴るのは君のせい", action: relink, to_id: 85625}
+  - {key: "qid:Q10843732|name:生徒会の一存", action: relink, to_id: 42243}
+  - {key: "qid:Q108777024|name:現代魔法使いのお気に入り", action: relink, to_id: 112847}
+  - {key: "qid:Q109606277|name:桃源暗鬼.", action: relink, to_id: 119968}
+  - {key: "qid:Q110623764|name:浅春観測", action: relink, to_id: 129885}
+  - {key: "qid:Q11198790|name:パパのいうことを聞きなさい!", action: relink, to_id: 52634}
+  - {key: "qid:Q112237875|name:星のカービィ|sub:まんぷくプププファンタジー", action: relink, to_id: 50253}
+  - {key: "qid:Q11256762|name:女神の降る里", action: relink, to_id: 54140}
+  - {key: "qid:Q11257396|name:悪魔の花嫁", action: relink, to_id: 31464}
+  - {key: "qid:Q11258510|name:ナルミさん愛してる", action: relink, to_id: 105499}
+  - {key: "qid:Q11261330|name:キャンディとチョコボンボン", action: relink, to_id: 92925}
+  - {key: "qid:Q11261772|name:ロードス島戦記", action: relink, to_id: 92655}
+  - {key: "qid:Q11263580|name:蜘蛛ですが、なにか?|sub:蜘蛛子四姉妹の日常", action: relink, to_id: 86952}
+  - {key: "qid:Q11263853|name:うちタマ?!うちのタマ知りませんか?", action: relink, to_id: 124909}
+  - {key: "qid:Q11264134|name:没落予定の貴族だけど、暇だったから魔法を極めてみた", action: relink, to_id: 138706}
+  - {key: "qid:Q11264195|name:OH!MY コンブ", action: relink, to_id: 92200}
+  - {key: "qid:Q11264824|name:ToHeart2", action: relink, to_id: 39990}
+  - {key: "qid:Q11264824|name:魔法科高校の劣等生", action: relink, to_id: 64127}
+  - {key: "qid:Q11266902|name:緋弾のアリア", action: relink, to_id: 47536}
+  - {key: "qid:Q11269548|name:賢者の弟子を名乗る賢者", action: relink, to_id: 91885}
+  - {key: "qid:Q11270793|name:きれいな黒髪の高階さん (無職) と付き合うことになった", action: relink, to_id: 108569}
+  - {key: "qid:Q11274881|name:リベロの武田", action: relink, to_id: 31664}
+  - {key: "qid:Q11275100|name:鋭意執筆中につき|sub:ねむようこよみきり集", action: relink, to_id: 150054}
+  - {key: "qid:Q11276127|name:星のカービィ", action: relink, to_id: 50253}
+  - {key: "qid:Q11277806|name:堕ちた黒い勇者の伝説", action: relink, to_id: 53671}
+  - {key: "qid:Q11278848|name:ハイスクールD×D", action: relink, to_id: 55409}
+  - {key: "qid:Q11279130|name:精霊幻想記", action: relink, to_id: 99587}
+  - {key: "qid:Q11280042|name:レディース!!!", action: relink, to_id: 157545}
+  - {key: "qid:Q11303326|name:グラゼニ～東京ドーム編～", action: relink, to_id: 92960}
+  - {key: "qid:Q11303326|name:グラゼニ～東京ドーム編～|sub:HELL OR HEAVEN", action: relink, to_id: 92960}
+  - {key: "qid:Q11305485|name:干物妹 (ひもうと) !うまるちゃん", action: relink, to_id: 80133}
+  - {key: "qid:Q11319186|name:こぎつね、わらわら稲荷神のまかない飯", action: relink, to_id: 127727}
+  - {key: "qid:Q11326896|name:カノン", action: relink, to_id: 151730}
+  - {key: "qid:Q11330038|name:とある科学の超電磁砲", action: relink, to_id: 37776}
+  - {key: "qid:Q11352332|name:らんぷの下", action: relink, to_id: 135246}
+  - {key: "qid:Q11352718|name:千本桜", action: relink, to_id: 94199}
+  - {key: "qid:Q11354950|name:憂国のモリアーティ", action: relink, to_id: 98544}
+  - {key: "qid:Q11364188|name:不安の種*", action: relink, to_id: 33256}
+  - {key: "qid:Q11364516|name:たけくらべ", action: relink, to_id: 177417}
+  - {key: "qid:Q11383812|name:死せる王女のための孔雀舞", action: relink, to_id: 139429}
+  - {key: "qid:Q1141948|name:ウルトラマン", action: relink, to_id: 116352}
+  - {key: "qid:Q11425602|name:陰の実力者になりたくて!", action: relink, to_id: 108428}
+  - {key: "qid:Q11432296|name:聲の形", action: relink, to_id: 85135}
+  - {key: "qid:Q11433421|name:溺愛イトコン!", action: relink, to_id: 110677}
+  - {key: "qid:Q11437503|name:Twin signal", action: relink, to_id: 31035}
+  - {key: "qid:Q11451126|name:鋼鉄ジーグ", action: relink, to_id: 60723}
+  - {key: "qid:Q11453576|name:はる、鳩恋荘", action: relink, to_id: 86923}
+  - {key: "qid:Q11462004|name:アンラッキー不幸田先生", action: relink, to_id: 147028}
+  - {key: "qid:Q11468731|name:しあわせ", action: relink, to_id: 82935}
+  - {key: "qid:Q11473128|name:コレクター・ユイ", action: relink, to_id: 30172}
+  - {key: "qid:Q11478328|name:猟奇王国", action: relink, to_id: 207137}
+  - {key: "qid:Q11483972|name:スターオーシャン セカンドストーリー", action: relink, to_id: 31053}
+  - {key: "qid:Q11495756|name:9時から5時までの恋人", action: relink, to_id: 89454}
+  - {key: "qid:Q11500157|name:かげきしょうじょ!!", action: relink, to_id: 93901}
+  - {key: "qid:Q11510591|name:ファイアーエムブレム トラキア776", action: relink, to_id: 35619}
+  - {key: "qid:Q11530842|name:闘神伝|sub:エイジの章", action: relink, to_id: 50534}
+  - {key: "qid:Q11530895|name:彼、岸島", action: relink, to_id: 35227}
+  - {key: "qid:Q11534451|name:グイン・サーガ", action: relink, to_id: 45150}
+  - {key: "qid:Q11534451|name:真・女神転生", action: relink, to_id: 35052}
+  - {key: "qid:Q11539498|name:この愛は、異端。: ベリアル文書", action: relink, to_id: 109757}
+  - {key: "qid:Q11547408|name:人間失格", action: relink, to_id: 43290}
+  - {key: "qid:Q11548972|name:まおゆう魔王勇者", action: relink, to_id: 56441}
+  - {key: "qid:Q11550941|name:煌燿国後宮譚", action: relink, to_id: 151901}
+  - {key: "qid:Q11552301|name:ゴブリンスレイヤー|sub:ブランニュー・デイ", action: relink, to_id: 87321}
+  - {key: "qid:Q11558370|name:アタックno.1", action: relink, to_id: 40199}
+  - {key: "qid:Q11559980|name:妖怪アパートの幽雅な日常", action: relink, to_id: 78271}
+  - {key: "qid:Q11565267|name:寺島町奇譚", action: relink, to_id: 141169}
+  - {key: "qid:Q11575458|name:Bad boys", action: relink, to_id: 59911}
+  - {key: "qid:Q11586892|name:東京喰種 (トーキョーグール)|sub:re", action: relink, to_id: 136489}
+  - {key: "qid:Q11590453|name:弐十手物語", action: relink, to_id: 112385}
+  - {key: "qid:Q11599172|name:ねこめ〈～わく〉", action: relink, to_id: 106868}
+  - {key: "qid:Q11603403|name:ファイアーエムブレム", action: relink, to_id: 94287}
+  - {key: "qid:Q11606185|name:魔法戦士リウイ", action: relink, to_id: 91383}
+  - {key: "qid:Q11606235|name:こえでおしごと!!|sub:EROTIC GAME VOICE ACTRESS", action: relink, to_id: 40837}
+  - {key: "qid:Q11606613|name:IS〈インフィニット・ストラトス〉", action: relink, to_id: 53881}
+  - {key: "qid:Q11610262|name:戦慄怪奇ファイルコワすぎ!", action: relink, to_id: 187278}
+  - {key: "qid:Q11613962|name:仰天人間バトシーラー", action: relink, to_id: 159263}
+  - {key: "qid:Q11618161|name:ホームステイ", action: relink, to_id: 142855}
+  - {key: "qid:Q11620792|name:CRESCENT", action: relink, to_id: 172897}
+  - {key: "qid:Q11622587|name:怪物(けもの)事変", action: relink, to_id: 98466}
+  - {key: "qid:Q11624410|name:ファイアーエムブレム 聖戦の系譜", action: relink, to_id: 35618}
+  - {key: "qid:Q11625592|name:美しき死体", action: relink, to_id: 157233}
+  - {key: "qid:Q11626493|name:ちづかマップ", action: relink, to_id: 92433}
+  - {key: "qid:Q11626512|name:エルフの嫁入り", action: relink, to_id: 89894}
+  - {key: "qid:Q11658055|name:紅", action: relink, to_id: 47824}
+  - {key: "qid:Q11660784|name:Kanon", action: relink, to_id: 31822}
+  - {key: "qid:Q11671779|name:Working!!", action: relink, to_id: 33044}
+  - {key: "qid:Q11673127|name:クロノスヘイズ", action: relink, to_id: 92645}
+  - {key: "qid:Q11673144|name:Orange", action: relink, to_id: 65573}
+  - {key: "qid:Q11673225|name:昆虫の家", action: relink, to_id: 155582}
+  - {key: "qid:Q11673888|name:ファイアーエムブレム4コママンガ劇場", action: relink, to_id: 136694}
+  - {key: "qid:Q118697137|name:賭ケグルイ (仮)", action: relink, to_id: 85793}
+  - {key: "qid:Q1207548|name:鉄腕バーディー", action: relink, to_id: 33254}
+  - {key: "qid:Q1229355|name:じょしラク!", action: relink, to_id: 84505}
+  - {key: "qid:Q128840997|name:KOBAN", action: relink, to_id: 71457}
+  - {key: "qid:Q1319237|name:白鯨", action: relink, to_id: 91160}
+  - {key: "qid:Q1324685|name:GALS!!", action: relink, to_id: 30089}
+  - {key: "qid:Q1335515|name:TRIGUN", action: relink, to_id: 151099}
+  - {key: "qid:Q1335558|name:凸凹ニンフォマニア", action: relink, to_id: 64031}
+  - {key: "qid:Q1353888|name:ねじ式", action: relink, to_id: 40521}
+  - {key: "qid:Q1353888|name:ねじ式紅い花|sub:漫画アクション版 : つげ義春カラー作品集", action: relink, to_id: 123255}
+  - {key: "qid:Q1353888|name:紅い花", action: relink, to_id: 71501}
+  - {key: "qid:Q1353888|name:隣りの女", action: relink, to_id: 98756}
+  - {key: "qid:Q1370780|name:ルパン三世", action: relink, to_id: 30438}
+  - {key: "qid:Q1390701|name:Re:CREATORS", action: relink, to_id: 99260}
+  - {key: "qid:Q15914656|name:ひめゴト", action: relink, to_id: 62833}
+  - {key: "qid:Q15930238|name:桜trick", action: relink, to_id: 82257}
+  - {key: "qid:Q16138206|name:Re:ゼロから始める異世界生活", action: relink, to_id: 85737}
+  - {key: "qid:Q1626187|name:スカルマン", action: relink, to_id: 34617}
+  - {key: "qid:Q16482060|name:電人ザボーガー", action: relink, to_id: 135718}
+  - {key: "qid:Q1658164|name:スパングル", action: relink, to_id: 162638}
+  - {key: "qid:Q16770279|name:北斗の拳|sub:イチゴ味", action: relink, to_id: 31149}
+  - {key: "qid:Q17130418|name:悲劇の元凶となる最強外道ラスボス女王は民の為に尽くします。|sub:to the savior", action: relink, to_id: 117207}
+  - {key: "qid:Q17160912|name:インゴシマ", action: relink, to_id: 109018}
+  - {key: "qid:Q17219985|name:新ホントにあったHな体験", action: relink, to_id: 51769}
+  - {key: "qid:Q17230626|name:からかい上手の（元）高木さん", action: relink, to_id: 85533}
+  - {key: "qid:Q17572|name:ドラえもん.", action: relink, to_id: 31032}
+  - {key: "qid:Q193300|name:ブラックジャック", action: relink, to_id: 31600}
+  - {key: "qid:Q193300|name:リボンの騎士", action: relink, to_id: 31676}
+  - {key: "qid:Q193300|name:ロストワールド", action: relink, to_id: 31689}
+  - {key: "qid:Q193300|name:ロストワールド 私家版", action: relink, to_id: 180281}
+  - {key: "qid:Q193300|name:新宝島", action: relink, to_id: 41273}
+  - {key: "qid:Q193300|name:紙の砦", action: relink, to_id: 123453}
+  - {key: "qid:Q1993|name:NARUTO", action: relink, to_id: 36444}
+  - {key: "qid:Q2010|name:ONE PIECE", action: relink, to_id: 30013}
+  - {key: "qid:Q2010|name:One piece", action: relink, to_id: 30013}
+  - {key: "qid:Q208582|name:ドラゴンボール", action: relink, to_id: 30042}
+  - {key: "qid:Q208582|name:貯金戦士キャッシュマン", action: relink, to_id: 134352}
+  - {key: "qid:Q2233404|name:はやて× ブレード", action: relink, to_id: 34145}
+  - {key: "qid:Q2265036|name:ロードス島戦記 灰色の魔女", action: relink, to_id: 31618}
+  - {key: "qid:Q2279877|name:クローズzero", action: relink, to_id: 48276}
+  - {key: "qid:Q2339941|name:風のように", action: relink, to_id: 152075}
+  - {key: "qid:Q242774|name:Aria", action: relink, to_id: 30081}
+  - {key: "qid:Q2448778|name:カッコウの許嫁.", action: relink, to_id: 114383}
+  - {key: "qid:Q2448778|name:柊さんちの吸血事情", action: relink, to_id: 137042}
+  - {key: "qid:Q24865213|name:鬼滅の刃〈外伝〉", action: relink, to_id: 87216}
+  - {key: "qid:Q2608397|name:愛気", action: relink, to_id: 33033}
+  - {key: "qid:Q265061|name:とってもしあわせモトちゃん", action: relink, to_id: 110537}
+  - {key: "qid:Q265061|name:エッグ・スタンド", action: relink, to_id: 110890}
+  - {key: "qid:Q265061|name:ゴールデンライラック", action: relink, to_id: 39179}
+  - {key: "qid:Q265061|name:ポーの一族|sub:プレミアムエディション", action: relink, to_id: 34305}
+  - {key: "qid:Q265061|name:半神", action: relink, to_id: 35943}
+  - {key: "qid:Q265061|name:訪問者", action: relink, to_id: 39178}
+  - {key: "qid:Q2661273|name:ゴルゴ13|sub:special choice", action: relink, to_id: 31298}
+  - {key: "qid:Q2661273|name:ゴルゴ13|sub:フォアレディーズ", action: relink, to_id: 31298}
+  - {key: "qid:Q2661273|name:武田信玄", action: relink, to_id: 80061}
+  - {key: "qid:Q2661273|name:水滸伝", action: relink, to_id: 66097}
+  - {key: "qid:Q272314|name:さびしがりやのデボラ", action: relink, to_id: 37995}
+  - {key: "qid:Q272314|name:デボラがライバル", action: relink, to_id: 37996}
+  - {key: "qid:Q2829038|name:ロードス島戦記", action: relink, to_id: 92655}
+  - {key: "qid:Q2869849|name:BAMBi", action: relink, to_id: 35710}
+  - {key: "qid:Q295073|name:BLEACH", action: relink, to_id: 30012}
+  - {key: "qid:Q3045424|name:グラップラー刃牙|sub:アンコール出版", action: relink, to_id: 41425}
+  - {key: "qid:Q3045424|name:範馬刃牙|sub:アンコール出版", action: relink, to_id: 37760}
+  - {key: "qid:Q3089616|name:プリンセスルシア", action: relink, to_id: 42985}
+  - {key: "qid:Q3111408|name:グレートマジンガー", action: relink, to_id: 46943}
+  - {key: "qid:Q3113855|name:日曜日は一緒に", action: relink, to_id: 68713}
+  - {key: "qid:Q3135260|name:超大魔法峠", action: relink, to_id: 42404}
+  - {key: "qid:Q3201020|name:SWAN", action: relink, to_id: 31332}
+  - {key: "qid:Q3482066|name:猿飛佐助", action: relink, to_id: 184753}
+  - {key: "qid:Q3514203|name:20世紀少年", action: relink, to_id: 30003}
+  - {key: "qid:Q355103|name:星界の紋章", action: relink, to_id: 91126}
+  - {key: "qid:Q3566599|name:L♥DK", action: relink, to_id: 46794}
+  - {key: "qid:Q378710|name:ハイウェイスター", action: relink, to_id: 172522}
+  - {key: "qid:Q378710|name:気分はもう戦争", action: relink, to_id: 133026}
+  - {key: "qid:Q38842|name:(後)ハッピーマニア", action: relink, to_id: 30354}
+  - {key: "qid:Q38842|name:(後)ハッピー・マニア", action: relink, to_id: 30354}
+  - {key: "qid:Q4022589|name:こちら大阪社会部", action: relink, to_id: 210360}
+  - {key: "qid:Q4022589|name:剣客商売", action: relink, to_id: 72221}
+  - {key: "qid:Q43423991|name:ゴッドハンド輝", action: relink, to_id: 34269}
+  - {key: "qid:Q438220|name:Loveless", action: relink, to_id: 30090}
+  - {key: "qid:Q442602|name:攻殻機動隊", action: relink, to_id: 31023}
+  - {key: "qid:Q445827|name:メデュウサ", action: relink, to_id: 110903}
+  - {key: "qid:Q445827|name:夜叉御前", action: relink, to_id: 106574}
+  - {key: "qid:Q445827|name:鬼来迎", action: relink, to_id: 110557}
+  - {key: "qid:Q445875|name:つるばらつるばら", action: relink, to_id: 43209}
+  - {key: "qid:Q445875|name:四月怪談", action: relink, to_id: 135633}
+  - {key: "qid:Q452246|name:I''s", action: relink, to_id: 184031}
+  - {key: "qid:Q452246|name:SHADOW LADY", action: relink, to_id: 187164}
+  - {key: "qid:Q457637|name:魔探偵ロキ RAGNAROK", action: relink, to_id: 38442}
+  - {key: "qid:Q45819634|name:Re:Monster", action: relink, to_id: 85494}
+  - {key: "qid:Q463346|name:ソウルリヴァイヴァーSOUTH", action: relink, to_id: 93677}
+  - {key: "qid:Q471103|name:サイボーグ009|sub:best selection", action: relink, to_id: 31639}
+  - {key: "qid:Q471103|name:ミュータント・サブ", action: relink, to_id: 92897}
+  - {key: "qid:Q471103|name:変身忍者嵐", action: relink, to_id: 74369}
+  - {key: "qid:Q471103|name:買厄懸場帖九頭竜", action: relink, to_id: 66357}
+  - {key: "qid:Q471137|name:Fairy tail", action: relink, to_id: 30598}
+  - {key: "qid:Q4721168|name:Petshop of horrors", action: relink, to_id: 30128}
+  - {key: "qid:Q47465101|name:アオアシ.", action: relink, to_id: 107279}
+  - {key: "qid:Q48757687|name:君のことが大大大大大好きな100人の彼女", action: relink, to_id: 114416}
+  - {key: "qid:Q504482|name:BLAME!", action: relink, to_id: 30149}
+  - {key: "qid:Q504482|name:人形の国", action: relink, to_id: 98354}
+  - {key: "qid:Q5209147|name:西遊妖猿伝 大唐篇", action: relink, to_id: 177519}
+  - {key: "qid:Q533664|name:人間失格", action: relink, to_id: 43290}
+  - {key: "qid:Q534001|name:SHAMAN KING FAUST 8|sub:永遠のエリザ", action: relink, to_id: 130523}
+  - {key: "qid:Q535183|name:源氏物語", action: relink, to_id: 174423}
+  - {key: "qid:Q5364998|name:超人類6|sub:re-animator", action: relink, to_id: 124081}
+  - {key: "qid:Q550311|name:Hunter×hunter", action: relink, to_id: 30026}
+  - {key: "qid:Q550311|name:幽☆遊☆白書", action: relink, to_id: 30053}
+  - {key: "qid:Q551359|name:ゲッターロボ", action: relink, to_id: 31551}
+  - {key: "qid:Q551359|name:ハレンチ学園|sub:50周年記念愛蔵版", action: relink, to_id: 42808}
+  - {key: "qid:Q551359|name:バイオレンスジャック|sub:連載再現版 : 1973-1978", action: relink, to_id: 31442}
+  - {key: "qid:Q551359|name:マジンガーZ", action: relink, to_id: 38773}
+  - {key: "qid:Q551359|name:魔王ダンテ", action: relink, to_id: 37666}
+  - {key: "qid:Q55400|name:耳をすませば", action: relink, to_id: 35228}
+  - {key: "qid:Q55539910|name:風の聖痕", action: relink, to_id: 40312}
+  - {key: "qid:Q55541922|name:おうまがとき|sub:異種婚姻浪漫譚", action: relink, to_id: 149129}
+  - {key: "qid:Q5973592|name:マギシンドバッドの冒険", action: relink, to_id: 78025}
+  - {key: "qid:Q6139039|name:メンズ校", action: relink, to_id: 33418}
+  - {key: "qid:Q618883|name:将太の寿司|sub:全国大会編", action: relink, to_id: 44775}
+  - {key: "qid:Q619015|name:ぼのちゃんアライグマちゃんがいなくなった", action: relink, to_id: 139254}
+  - {key: "qid:Q619015|name:ぼのちゃんボクに兄弟ができたよ", action: relink, to_id: 139256}
+  - {key: "qid:Q622057|name:Claymore", action: relink, to_id: 30583}
+  - {key: "qid:Q6359803|name:気分はもう戦争", action: relink, to_id: 133026}
+  - {key: "qid:Q6381494|name:もっと土下座で頼んでみた", action: relink, to_id: 202563}
+  - {key: "qid:Q6455142|name:∀ガンダム", action: relink, to_id: 34186}
+  - {key: "qid:Q65239262|name:Citrus", action: relink, to_id: 80145}
+  - {key: "qid:Q669049|name:悪魔くん", action: relink, to_id: 53187}
+  - {key: "qid:Q669049|name:悪魔くん（全）", action: relink, to_id: 53187}
+  - {key: "qid:Q669049|name:河童の三平", action: relink, to_id: 52790}
+  - {key: "qid:Q6883357|name:The・かぼちゃワイン|sub:番外編", action: relink, to_id: 49545}
+  - {key: "qid:Q6918002|name:Cat shit one", action: relink, to_id: 30299}
+  - {key: "qid:Q719354|name:ジョジョの奇妙な冒険", action: relink, to_id: 88339}
+  - {key: "qid:Q723853|name:新事件屋稼業", action: relink, to_id: 93945}
+  - {key: "qid:Q723853|name:餓狼伝", action: relink, to_id: 37921}
+  - {key: "qid:Q725387|name:リングにかけろ", action: relink, to_id: 44231}
+  - {key: "qid:Q725387|name:聖闘士(セイント)星矢セインティア翔", action: relink, to_id: 84761}
+  - {key: "qid:Q725387|name:聖闘士星矢the lost canvas冥王神話", action: relink, to_id: 31047}
+  - {key: "qid:Q725387|name:風魔の小次郎", action: relink, to_id: 44230}
+  - {key: "qid:Q725387|name:風魔の小次郎|sub:究極最終版", action: relink, to_id: 44230}
+  - {key: "qid:Q73111970|name:ポーカーフェイス女装男子と。", action: relink, to_id: 128147}
+  - {key: "qid:Q7334539|name:Juicy", action: relink, to_id: 68551}
+  - {key: "qid:Q739836|name:源氏物語～愛と罪と～", action: relink, to_id: 106096}
+  - {key: "qid:Q7426424|name:ポケットモンスターSPECIAL", action: relink, to_id: 30928}
+  - {key: "qid:Q7426424|name:ポケットモンスターspecial", action: relink, to_id: 30928}
+  - {key: "qid:Q7506271|name:ブラックジャックによろしく", action: relink, to_id: 31668}
+  - {key: "qid:Q757810|name:ソウルイーター|sub:完全版", action: relink, to_id: 30908}
+  - {key: "qid:Q7827649|name:花の名の姫君", action: relink, to_id: 167490}
+  - {key: "qid:Q8017002|name:ねじまき真野さん", action: relink, to_id: 61585}
+  - {key: "qid:Q8049952|name:Days", action: relink, to_id: 86600}
+  - {key: "qid:Q8062691|name:夢幻紳士 怪奇篇", action: relink, to_id: 172821}
+  - {key: "qid:Q8062691|name:帝都物語", action: relink, to_id: 90615}
+  - {key: "qid:Q8062700|name:Dogスタイル", action: relink, to_id: 40268}
+  - {key: "qid:Q83680573|name:薬屋のひとりごと", action: relink, to_id: 99026}
+  - {key: "qid:Q849446|name:ニセコイ.", action: relink, to_id: 61499}
+  - {key: "qid:Q8918202|name:スレイヤーズ", action: relink, to_id: 38876}
+  - {key: "qid:Q8972749|name:鏡花あやかし秘帖|sub:完全版", action: relink, to_id: 152843}
+  - {key: "qid:Q9008399|name:エリスの聖杯", action: relink, to_id: 113075}
+  - {key: "qid:Q9099435|name:妖精国(アルフヘイム)の騎士Ballad|sub:金緑の谷に眠る竜", action: relink, to_id: 112883}
+  - {key: "qid:Q9099435|name:妖精国(アルフヘイム)の騎士Ballad～継ぐ視の守護者(もり)～", action: relink, to_id: 136108}
+  - {key: "qid:Q9122912|name:テイルズオブデスティニー", action: relink, to_id: 31241}
+  - {key: "qid:Q912386|name:わたしに××しなさい!", action: relink, to_id: 43463}
+  - {key: "qid:Q9124559|name:ハウスバッカー", action: relink, to_id: 76564}
+  - {key: "qid:Q958249|name:Black cat", action: relink, to_id: 186853}
+  - {key: "qid:Q958249|name:To LOVEる-とらぶる-ダークネス", action: relink, to_id: 52519}
+  - {key: "qid:Q966701|name:サイコメトラーEIJI", action: relink, to_id: 30732}
+  - {key: "qid:Q966701|name:金田一少年の事件簿", action: relink, to_id: 30393}
+  - {key: "qid:Q966701|name:金田一少年の事件簿　短編集", action: relink, to_id: 47111}
+  - {key: "qid:Q97237344|name:All free!|sub:絶対!無差別級挑戦女子伝", action: relink, to_id: 133913}
+  - {key: "qid:Q972529|name:金色のガッシュ!!|sub:完全版", action: relink, to_id: 30869}
+  - {key: "qid:Q98399901|name:白妙様、秘密ですよ", action: relink, to_id: 197738}
+  - {key: "qid:Q98709478|name:不揃いの連理", action: relink, to_id: 108070}
+  - {key: "qid:Q987957|name:スケバン刑事(デカ)", action: relink, to_id: 45892}
+  - {key: "name:5pb.|name:Steins;Gate", action: drop, a_id: 85548, signals: "S3_romaji_tail|S4_few_chaps", title: "Steins;Gate"}
+  - {key: "name:CLAMP|name:ツバサ", action: drop, a_id: 93916, signals: "S3_romaji_tail|S4_few_chaps", title: "ツバサ"}
+  - {key: "name:Clamp|name:カードキャプターさくらイラスト集", action: drop, a_id: 55902, signals: "S4_few_chaps", title: "カードキャプターさくらイラスト集"}
+  - {key: "name:Kei1961-|name:チカーノKEI", action: drop, a_id: 182463, signals: "S3_romaji_tail|S4_few_chaps", title: "チカーノKEI"}
+  - {key: "name:Spray|name:学園ヘヴン", action: drop, a_id: 30666, signals: "S2_vols_gap|S4_few_chaps", title: "学園ヘヴン"}
+  - {key: "name:Spray|name:鬼畜眼鏡", action: drop, a_id: 136832, signals: "S3_romaji_tail|S4_few_chaps", title: "鬼畜眼鏡"}
+  - {key: "name:TETSUO|name:髑髏は闇夜に動き出す", action: drop, a_id: 180127, signals: "S2_vols_gap", title: "髑髏は闇夜に動き出す"}
+  - {key: "name:Teamバンミカス|name:源氏物語", action: drop, a_id: 106096, signals: "S1_one_shot", title: "源氏物語"}
+  - {key: "name:Trump|name:Charm the cat", action: drop, a_id: 159219, signals: "S1_one_shot", title: "Charm the cat"}
+  - {key: "name:Usi|name:デリバリー", action: drop, a_id: 168213, signals: "S1_one_shot", title: "デリバリー"}
+  - {key: "name:yoha|name:さよなら恋人、またきて友だち|sub:ロスト・チャイルド", action: drop, a_id: 96466, signals: "S4_few_chaps", title: "さよなら恋人、またきて友だち"}
+  - {key: "name:かむ|name:息をひそめて、恋を", action: drop, a_id: 104259, signals: "S4_few_chaps", title: "息をひそめて、恋を"}
+  - {key: "name:ごぉ|name:ひまわり", action: drop, a_id: 59293, signals: "S1_one_shot", title: "ひまわり"}
+  - {key: "name:さとうpub.|name:冥婚", action: drop, a_id: 191301, signals: "S1_one_shot", title: "冥婚"}
+  - {key: "name:じんのひろあき|name:ラブレター", action: drop, a_id: 38831, signals: "S3_romaji_tail|S4_few_chaps", title: "ラブレター"}
+  - {key: "name:ひぐちにちほ|name:小春びより", action: drop, a_id: 165134, signals: "S2_vols_gap|S3_romaji_tail", title: "小春びより"}
+  - {key: "name:ふくたいさお|name:りもで・りんぐ", action: drop, a_id: 118327, signals: "S1_one_shot", title: "りもで・りんぐ"}
+  - {key: "name:もりたゆうこ|name:Shine", action: drop, a_id: 35298, signals: "S4_few_chaps", title: "Shine"}
+  - {key: "name:ゆでたまご|name:キン肉マンジャンプ", action: drop, a_id: 91466, signals: "S1_one_shot|S3_romaji_tail", title: "キン肉マンジャンプ"}
+  - {key: "name:アサナエアラタ|name:僕の番は猫紳士", action: drop, a_id: 151132, signals: "S4_few_chaps", title: "僕の番は猫紳士"}
+  - {key: "name:カプコン|name:ロックマンギガミックス", action: drop, a_id: 54302, signals: "S4_few_chaps", title: "ロックマンギガミックス"}
+  - {key: "name:コミックス|name:デビルマン", action: drop, a_id: 50581, signals: "S2_vols_gap|S3_romaji_tail|S4_few_chaps", title: "デビルマン"}
+  - {key: "name:コミックス|name:バイオレンスジャック", action: drop, a_id: 74021, signals: "S1_one_shot|S3_romaji_tail", title: "バイオレンスジャック"}
+  - {key: "name:シマダヒデアキ|name:エンバーミング", action: drop, a_id: 35596, signals: "S1_one_shot|S3_romaji_tail", title: "エンバーミング"}
+  - {key: "name:ジェリー・ダガン|name:デッドプール", action: drop, a_id: 111722, signals: "S1_one_shot", title: "デッドプール"}
+  - {key: "name:トルストイ|name:アンナ・カレーニナ", action: drop, a_id: 198968, signals: "S4_few_chaps", title: "アンナ・カレーニナ"}
+  - {key: "name:トーリ・フィリップス|name:道化師は恋の語りべ", action: drop, a_id: 91706, signals: "S4_few_chaps", title: "道化師は恋の語りべ"}
+  - {key: "name:ナツミチハル|name:誰にも言えない(秘)", action: drop, a_id: 149615, signals: "S1_one_shot", title: "誰にも言えない(秘)"}
+  - {key: "name:ハヤトコウジ|name:YAKSA", action: drop, a_id: 54005, signals: "S2_vols_gap|S4_few_chaps", title: "YAKSA"}
+  - {key: "name:フジカワユカ|name:無職転生", action: drop, a_id: 146378, signals: "S3_romaji_tail|S4_few_chaps", title: "無職転生"}
+  - {key: "name:ホーム社|name:NARUTO", action: drop, a_id: 36444, signals: "S1_one_shot", title: "NARUTO"}
+  - {key: "name:ホーム社|name:ジョジョの奇妙な冒険", action: drop, a_id: 31630, signals: "S2_vols_gap", title: "ジョジョの奇妙な冒険"}
+  - {key: "name:マーク・ミラー|name:キック・アス", action: drop, a_id: 60347, signals: "S1_one_shot", title: "キック・アス"}
+  - {key: "name:メイ|name:赤い糸", action: drop, a_id: 135383, signals: "S1_one_shot", title: "赤い糸"}
+  - {key: "name:三原千恵利|name:アブラカダブラ", action: drop, a_id: 56113, signals: "S4_few_chaps", title: "アブラカダブラ"}
+  - {key: "name:三浦実子|name:DOUBLE", action: drop, a_id: 211667, signals: "S3_romaji_tail|S4_few_chaps", title: "DOUBLE"}
+  - {key: "name:上北ふたご|name:ふたりはプリキュア", action: drop, a_id: 55923, signals: "S4_few_chaps", title: "ふたりはプリキュア"}
+  - {key: "name:中野独人|name:電車男", action: drop, a_id: 30431, signals: "S2_vols_gap|S3_romaji_tail|S4_few_chaps", title: "電車男"}
+  - {key: "name:井深英記|name:ランナーズ・ハイ!", action: drop, a_id: 95340, signals: "S1_one_shot", title: "ランナーズ・ハイ!"}
+  - {key: "name:今野緒雪|name:マリア様がみてる", action: drop, a_id: 48784, signals: "S2_vols_gap|S4_few_chaps", title: "マリア様がみてる"}
+  - {key: "name:伊藤左千夫|name:野菊の墓", action: drop, a_id: 198864, signals: "S2_vols_gap", title: "野菊の墓"}
+  - {key: "name:伏瀬1975-|name:転生したらスライムだった件", action: drop, a_id: 176083, signals: "S2_vols_gap|S4_few_chaps", title: "転生したらスライムだった件"}
+  - {key: "name:佐世保太郎|name:大門寺と問題児", action: drop, a_id: 147088, signals: "S1_one_shot", title: "大門寺と問題児"}
+  - {key: "name:佐久本あゆ|name:転生アイドルとドルオタの騎士", action: drop, a_id: 163576, signals: "S4_few_chaps", title: "転生アイドルとドルオタの騎士"}
+  - {key: "name:兎月あい|name:いなくなれ、群青|sub:fragile light of pistol star", action: drop, a_id: 110310, signals: "S4_few_chaps", title: "いなくなれ、群青"}
+  - {key: "name:冲方丁|name:オイレンシュピーゲル", action: drop, a_id: 51369, signals: "S2_vols_gap", title: "オイレンシュピーゲル"}
+  - {key: "name:前田治郎|name:Hero (ひろ)|sub:アカギの遺志を継ぐ男", action: drop, a_id: 112590, signals: "S2_vols_gap|S3_romaji_tail", title: "Hero (ひろ)"}
+  - {key: "name:剣名舞|name:ザ・シェフ", action: drop, a_id: 128140, signals: "S2_vols_gap", title: "ザ・シェフ"}
+  - {key: "name:剣名舞|name:ザ・シェフワイドSP", action: drop, a_id: 128140, signals: "S2_vols_gap", title: "ザ・シェフワイドSP"}
+  - {key: "name:半村良|name:戦国自衛隊", action: drop, a_id: 170529, signals: "S2_vols_gap", title: "戦国自衛隊"}
+  - {key: "name:吉田伸|name:遊☆戯☆王アーク・ファイブ", action: drop, a_id: 91641, signals: "S1_one_shot", title: "遊☆戯☆王アーク・ファイブ"}
+  - {key: "name:吉田小梅|name:奇跡の勝ちは", action: drop, a_id: 171652, signals: "S2_vols_gap", title: "奇跡の勝ちは"}
+  - {key: "name:唯乃アキラ|name:ルームシェア", action: drop, a_id: 211238, signals: "S1_one_shot", title: "ルームシェア"}
+  - {key: "name:夏目漱石|name:こころ", action: drop, a_id: 104787, signals: "S4_few_chaps", title: "こころ"}
+  - {key: "name:夏目漱石|name:坊っちゃん", action: drop, a_id: 195289, signals: "S2_vols_gap", title: "坊っちゃん"}
+  - {key: "name:姫川明|name:ゼルダの伝説", action: drop, a_id: 30726, signals: "S2_vols_gap", title: "ゼルダの伝説"}
+  - {key: "name:嬉野君|name:熱帯デラシネ宝飾店", action: drop, a_id: 122067, signals: "S1_one_shot|S3_romaji_tail", title: "熱帯デラシネ宝飾店"}
+  - {key: "name:子子子子子子子|name:魔術破りのリベンジ・マギア", action: drop, a_id: 197601, signals: "S4_few_chaps", title: "魔術破りのリベンジ・マギア"}
+  - {key: "name:宮沢賢治|name:銀河鉄道の夜", action: drop, a_id: 71209, signals: "S2_vols_gap|S4_few_chaps", title: "銀河鉄道の夜"}
+  - {key: "name:宮沢賢治|name:風の又三郎", action: drop, a_id: 198869, signals: "S2_vols_gap", title: "風の又三郎"}
+  - {key: "name:富野由悠季|name:新機動戦記ガンダムW", action: drop, a_id: 31936, signals: "S2_vols_gap|S3_romaji_tail|S4_few_chaps", title: "新機動戦記ガンダムW"}
+  - {key: "name:富野由悠季|name:機動戦士ガンダム00", action: drop, a_id: 36732, signals: "S2_vols_gap", title: "機動戦士ガンダム00"}
+  - {key: "name:山田風太郎|name:魔界転生", action: drop, a_id: 95124, signals: "S2_vols_gap", title: "魔界転生"}
+  - {key: "name:岡本蛍|name:おもひでぽろぽろ", action: drop, a_id: 48010, signals: "S2_vols_gap", title: "おもひでぽろぽろ"}
+  - {key: "name:川内康範|name:月光仮面 慈愛の章", action: drop, a_id: 173261, signals: "S4_few_chaps", title: "月光仮面 慈愛の章"}
+  - {key: "name:川島のりかず|name:フランケンシュタインの男", action: drop, a_id: 181272, signals: "S4_few_chaps", title: "フランケンシュタインの男"}
+  - {key: "name:川島健三（水野プロ）|name:河童の三平", action: drop, a_id: 56299, signals: "S1_one_shot|S3_romaji_tail", title: "河童の三平"}
+  - {key: "name:御景椿|name:できちゃった男子", action: drop, a_id: 52365, signals: "S2_vols_gap|S4_few_chaps", title: "できちゃった男子"}
+  - {key: "name:慧|name:ホテル王はそれを我慢しない", action: drop, a_id: 107240, signals: "S4_few_chaps", title: "ホテル王はそれを我慢しない"}
+  - {key: "name:有田ケイ|name:LoVE GAME", action: drop, a_id: 113797, signals: "S1_one_shot", title: "LoVE GAME"}
+  - {key: "name:村崎百郎|name:クレオパトラ氷の微笑", action: drop, a_id: 115182, signals: "S2_vols_gap|S3_romaji_tail", title: "クレオパトラ氷の微笑"}
+  - {key: "name:栗橋伸祐|name:Nocturne", action: drop, a_id: 32741, signals: "S4_few_chaps", title: "Nocturne"}
+  - {key: "name:梅太郎|name:愛人は殺される", action: drop, a_id: 32349, signals: "S4_few_chaps", title: "愛人は殺される"}
+  - {key: "name:横溝正史|name:獄門島", action: drop, a_id: 175231, signals: "S4_few_chaps", title: "獄門島"}
+  - {key: "name:永田まりあ|name:とつおん!", action: drop, a_id: 91890, signals: "S2_vols_gap|S3_romaji_tail", title: "とつおん!"}
+  - {key: "name:渡部美朋|name:交際0日婚", action: drop, a_id: 181267, signals: "S4_few_chaps", title: "交際0日婚"}
+  - {key: "name:滝端|name:ネオン街の蜘蛛と蝶", action: drop, a_id: 133191, signals: "S4_few_chaps", title: "ネオン街の蜘蛛と蝶"}
+  - {key: "name:田中花壇|name:初恋", action: drop, a_id: 74697, signals: "S1_one_shot", title: "初恋"}
+  - {key: "name:白山仁|name:MIX", action: drop, a_id: 96601, signals: "S4_few_chaps", title: "MIX"}
+  - {key: "name:白山仁|name:くちびるに歌を", action: drop, a_id: 94382, signals: "S1_one_shot|S3_romaji_tail", title: "くちびるに歌を"}
+  - {key: "name:百瀬祐一郎|name:ヒプノシスマイク|sub:division rap battle-side F.P & ", action: drop, a_id: 155212, signals: "S2_vols_gap|S3_romaji_tail", title: "ヒプノシスマイク"}
+  - {key: "name:矢立肇|name:機動戦士ガンダム", action: drop, a_id: 90921, signals: "S3_romaji_tail|S4_few_chaps", title: "機動戦士ガンダム"}
+  - {key: "name:矢立肇|name:機動武闘伝Gガンダム", action: drop, a_id: 166592, signals: "S1_one_shot|S3_romaji_tail", title: "機動武闘伝Gガンダム"}
+  - {key: "name:砂阿久雁|name:進撃の巨人 悔いなき選択", action: drop, a_id: 91593, signals: "S1_one_shot|S3_romaji_tail", title: "進撃の巨人 悔いなき選択"}
+  - {key: "name:穂実あゆこ|name:荼吉尼", action: drop, a_id: 120589, signals: "S4_few_chaps", title: "荼吉尼"}
+  - {key: "name:竹崎真実|name:まんがグリム童話", action: drop, a_id: 203954, signals: "S2_vols_gap|S3_romaji_tail", title: "まんがグリム童話"}
+  - {key: "name:緒崎カホ|name:美しビルの解かない探偵", action: drop, a_id: 186066, signals: "S4_few_chaps", title: "美しビルの解かない探偵"}
+  - {key: "name:美桜せりな|name:わたしの先生", action: drop, a_id: 167639, signals: "S1_one_shot", title: "わたしの先生"}
+  - {key: "name:舞木サチ|name:今日からΩになりました。安里と波多野", action: drop, a_id: 107276, signals: "S4_few_chaps", title: "今日からΩになりました。安里と波多野"}
+  - {key: "name:菊地秀行|name:ダークサイド・ブルース", action: drop, a_id: 30340, signals: "S4_few_chaps", title: "ダークサイド・ブルース"}
+  - {key: "name:蒼空チョコ|name:はたらく細胞猫", action: drop, a_id: 112849, signals: "S1_one_shot", title: "はたらく細胞猫"}
+  - {key: "name:藤子不二雄|name:21エモン", action: drop, a_id: 142315, signals: "S2_vols_gap", title: "21エモン"}
+  - {key: "name:藤子不二雄|name:オバケのQ太郎", action: drop, a_id: 55187, signals: "S2_vols_gap", title: "オバケのQ太郎"}
+  - {key: "name:衣田ぬぬ|name:好きにさせてみせるから!", action: drop, a_id: 118650, signals: "S4_few_chaps", title: "好きにさせてみせるから!"}
+  - {key: "name:西村ミツル|name:星に願いを", action: drop, a_id: 39367, signals: "S1_one_shot", title: "星に願いを"}
+  - {key: "name:西田番|name:むかしのはなし", action: drop, a_id: 92517, signals: "S1_one_shot", title: "むかしのはなし"}
+  - {key: "name:赤羽チカ|name:妖狐Wedding!", action: drop, a_id: 115621, signals: "S4_few_chaps", title: "妖狐Wedding!"}
+  - {key: "name:近田火日輝|name:國崎出雲の事情", action: drop, a_id: 43406, signals: "S1_one_shot", title: "國崎出雲の事情"}
+  - {key: "name:追本|name:花は口ほどにモノを言う", action: drop, a_id: 127882, signals: "S4_few_chaps", title: "花は口ほどにモノを言う"}
+  - {key: "name:速水時貞|name:キャタピラー", action: drop, a_id: 94232, signals: "S1_one_shot|S3_romaji_tail", title: "キャタピラー"}
+  - {key: "name:遠藤さや|name:プロポーズ大作戦", action: drop, a_id: 75141, signals: "S1_one_shot", title: "プロポーズ大作戦"}
+  - {key: "name:重い実|name:アホエロ", action: drop, a_id: 121554, signals: "S4_few_chaps", title: "アホエロ"}
+  - {key: "name:重い実|name:愛しのXLサイズ", action: drop, a_id: 105589, signals: "S4_few_chaps", title: "愛しのXLサイズ"}
+  - {key: "name:青乃多万実|name:快感職人G", action: drop, a_id: 36082, signals: "S4_few_chaps", title: "快感職人G"}
+  - {key: "name:高比良りと|name:不機嫌イトコがかわい過ぎて仕方ないside直樹", action: drop, a_id: 141506, signals: "S4_few_chaps", title: "不機嫌イトコがかわい過ぎて仕方ないside直樹"}
+  - {key: "name:麓川智之|name:アオイシロ", action: drop, a_id: 42559, signals: "S3_romaji_tail|S4_few_chaps", title: "アオイシロ"}
+  - {key: "name:黒井モリー|name:ケダモノアラシ|sub:kiss me baby!", action: drop, a_id: 123368, signals: "S2_vols_gap|S3_romaji_tail|S4_few_chaps", title: "ケダモノアラシ"}
+  - {key: "name:黒木香|name:ノゾ×キミ", action: drop, a_id: 146981, signals: "S1_one_shot", title: "ノゾ×キミ"}
+  - {key: "qid:Q1010233|name:ドラクゥーン", action: drop, a_id: 34971, signals: "S3_romaji_tail|S4_few_chaps", title: "ドラクゥーン"}
+  - {key: "qid:Q1016880|name:北斗の拳", action: drop, a_id: 53629, signals: "S3_romaji_tail|S4_few_chaps", title: "北斗の拳"}
+  - {key: "qid:Q1042100|name:DOGS", action: drop, a_id: 31376, signals: "S2_vols_gap|S4_few_chaps", title: "DOGS"}
+  - {key: "qid:Q1050794|name:亜紀子", action: drop, a_id: 154957, signals: "S4_few_chaps", title: "亜紀子"}
+  - {key: "qid:Q108777015|name:Voice!!", action: drop, a_id: 191934, signals: "S4_few_chaps", title: "Voice!!"}
+  - {key: "qid:Q10959156|name:咲", action: drop, a_id: 57753, signals: "S2_vols_gap|S3_romaji_tail", title: "咲"}
+  - {key: "qid:Q11232766|name:ほしいのはあなただけ。", action: drop, a_id: 52308, signals: "S2_vols_gap", title: "ほしいのはあなただけ。"}
+  - {key: "qid:Q11254723|name:ファイナルファンタジー零式外伝氷剣の死神", action: drop, a_id: 62955, signals: "S2_vols_gap|S4_few_chaps", title: "ファイナルファンタジー零式外伝氷剣の死神"}
+  - {key: "qid:Q11257396|name:風の呪歌", action: drop, a_id: 47493, signals: "S4_few_chaps", title: "風の呪歌"}
+  - {key: "qid:Q11262649|name:ばくおん!!～天野恩紗のニコイチ繁盛記～", action: drop, a_id: 144286, signals: "S4_few_chaps", title: "ばくおん!!～天野恩紗のニコイチ繁盛記～"}
+  - {key: "qid:Q11264440|name:パリの鈴木家", action: drop, a_id: 51466, signals: "S4_few_chaps", title: "パリの鈴木家"}
+  - {key: "qid:Q11264488|name:初めてママになるあなたへ", action: drop, a_id: 209582, signals: "S4_few_chaps", title: "初めてママになるあなたへ"}
+  - {key: "qid:Q11265637|name:いただきます", action: drop, a_id: 95485, signals: "S1_one_shot", title: "いただきます"}
+  - {key: "qid:Q11272388|name:亡霊学級", action: drop, a_id: 153331, signals: "S4_few_chaps", title: "亡霊学級"}
+  - {key: "qid:Q11273362|name:魔界転生", action: drop, a_id: 95124, signals: "S2_vols_gap", title: "魔界転生"}
+  - {key: "qid:Q11276986|name:聖マッスル", action: drop, a_id: 97441, signals: "S4_few_chaps", title: "聖マッスル"}
+  - {key: "qid:Q11280450|name:たからもの", action: drop, a_id: 137751, signals: "S4_few_chaps", title: "たからもの"}
+  - {key: "qid:Q11372069|name:06:04～ロクヨン～", action: drop, a_id: 167640, signals: "S1_one_shot", title: "06:04～ロクヨン～"}
+  - {key: "qid:Q11373172|name:クロス", action: drop, a_id: 89746, signals: "S2_vols_gap|S4_few_chaps", title: "クロス"}
+  - {key: "qid:Q11373668|name:スティグマ", action: drop, a_id: 200143, signals: "S1_one_shot", title: "スティグマ"}
+  - {key: "qid:Q1138133|name:贋作ひでお八犬伝", action: drop, a_id: 156520, signals: "S4_few_chaps", title: "贋作ひでお八犬伝"}
+  - {key: "qid:Q11383812|name:春を夢見し", action: drop, a_id: 153525, signals: "S4_few_chaps", title: "春を夢見し"}
+  - {key: "qid:Q11383812|name:金星樹", action: drop, a_id: 147350, signals: "S4_few_chaps", title: "金星樹"}
+  - {key: "qid:Q11386976|name:あんみつ姫", action: drop, a_id: 150455, signals: "S2_vols_gap", title: "あんみつ姫"}
+  - {key: "qid:Q11388934|name:Fellows!", action: drop, a_id: 193074, signals: "S2_vols_gap|S3_romaji_tail", title: "Fellows!"}
+  - {key: "qid:Q11396374|name:禁断", action: drop, a_id: 35883, signals: "S3_romaji_tail|S4_few_chaps", title: "禁断"}
+  - {key: "qid:Q11409752|name:プロレススーパースター列伝", action: drop, a_id: 34431, signals: "S2_vols_gap|S3_romaji_tail", title: "プロレススーパースター列伝"}
+  - {key: "qid:Q11409959|name:魔嬢っ子リーナの不思議大作戦", action: drop, a_id: 51924, signals: "S4_few_chaps", title: "魔嬢っ子リーナの不思議大作戦"}
+  - {key: "qid:Q11413524|name:すずめとどんぐり", action: drop, a_id: 195795, signals: "S4_few_chaps", title: "すずめとどんぐり"}
+  - {key: "qid:Q11413524|name:セシール気分", action: drop, a_id: 195798, signals: "S4_few_chaps", title: "セシール気分"}
+  - {key: "qid:Q11413524|name:年下のあンちくしょう", action: drop, a_id: 196339, signals: "S4_few_chaps", title: "年下のあンちくしょう"}
+  - {key: "qid:Q11413524|name:続 年下のあンちくしょう", action: drop, a_id: 196340, signals: "S4_few_chaps", title: "続 年下のあンちくしょう"}
+  - {key: "qid:Q11413524|name:雨にぬれてホットミルク", action: drop, a_id: 195788, signals: "S4_few_chaps", title: "雨にぬれてホットミルク"}
+  - {key: "qid:Q11418276|name:ラブリー・レッスン", action: drop, a_id: 39839, signals: "S4_few_chaps", title: "ラブリー・レッスン"}
+  - {key: "qid:Q1141948|name:半魚人", action: drop, a_id: 73339, signals: "S4_few_chaps", title: "半魚人"}
+  - {key: "qid:Q1143876|name:それが声優!", action: drop, a_id: 63143, signals: "S4_few_chaps", title: "それが声優!"}
+  - {key: "qid:Q11438857|name:乙女戦争外伝", action: drop, a_id: 116837, signals: "S3_romaji_tail|S4_few_chaps", title: "乙女戦争外伝"}
+  - {key: "qid:Q11444957|name:トリニティセブン|sub:7人の魔書使い", action: drop, a_id: 139470, signals: "S2_vols_gap|S3_romaji_tail", title: "トリニティセブン"}
+  - {key: "qid:Q11455984|name:伝えていいの", action: drop, a_id: 47662, signals: "S1_one_shot", title: "伝えていいの"}
+  - {key: "qid:Q11462709|name:青の6号", action: drop, a_id: 73515, signals: "S2_vols_gap|S4_few_chaps", title: "青の6号"}
+  - {key: "qid:Q11469401|name:Gold", action: drop, a_id: 198623, signals: "S1_one_shot", title: "Gold"}
+  - {key: "qid:Q11470122|name:最終戦争伝説", action: drop, a_id: 134173, signals: "S2_vols_gap", title: "最終戦争伝説"}
+  - {key: "qid:Q11478325|name:新巨人の星", action: drop, a_id: 45315, signals: "S2_vols_gap", title: "新巨人の星"}
+  - {key: "qid:Q11497486|name:アナトゥール星伝", action: drop, a_id: 115384, signals: "S4_few_chaps", title: "アナトゥール星伝"}
+  - {key: "qid:Q11499084|name:ダボシャツの天", action: drop, a_id: 180506, signals: "S2_vols_gap", title: "ダボシャツの天"}
+  - {key: "qid:Q11512253|name:パンドラ", action: drop, a_id: 198364, signals: "S1_one_shot", title: "パンドラ"}
+  - {key: "qid:Q11515375|name:わたしが死んだ夜", action: drop, a_id: 131496, signals: "S4_few_chaps", title: "わたしが死んだ夜"}
+  - {key: "qid:Q11519017|name:ダンデ・ライオン", action: drop, a_id: 189873, signals: "S1_one_shot", title: "ダンデ・ライオン"}
+  - {key: "qid:Q11522045|name:ANIMAL X", action: drop, a_id: 31150, signals: "S2_vols_gap|S3_romaji_tail", title: "ANIMAL X"}
+  - {key: "qid:Q11523385|name:ルームシェア", action: drop, a_id: 46298, signals: "S4_few_chaps", title: "ルームシェア"}
+  - {key: "qid:Q11530825|name:ボーイズラブ!", action: drop, a_id: 93334, signals: "S1_one_shot", title: "ボーイズラブ!"}
+  - {key: "qid:Q11532611|name:まんがグリム童話", action: drop, a_id: 205723, signals: "S3_romaji_tail|S4_few_chaps", title: "まんがグリム童話"}
+  - {key: "qid:Q11539587|name:ヴェネチア風琴", action: drop, a_id: 161822, signals: "S4_few_chaps", title: "ヴェネチア風琴"}
+  - {key: "qid:Q11539587|name:蘇州夜曲", action: drop, a_id: 161827, signals: "S4_few_chaps", title: "蘇州夜曲"}
+  - {key: "qid:Q11544888|name:Road runner", action: drop, a_id: 144753, signals: "S2_vols_gap|S3_romaji_tail|S4_few_chaps", title: "Road runner"}
+  - {key: "qid:Q11549176|name:先生と一緒に寝て?", action: drop, a_id: 57657, signals: "S4_few_chaps", title: "先生と一緒に寝て?"}
+  - {key: "qid:Q11551540|name:ロックマン", action: drop, a_id: 157634, signals: "S4_few_chaps", title: "ロックマン"}
+  - {key: "qid:Q11551540|name:ロックマン6", action: drop, a_id: 157634, signals: "S4_few_chaps", title: "ロックマン6"}
+  - {key: "qid:Q11551540|name:ロックマン7", action: drop, a_id: 157634, signals: "S4_few_chaps", title: "ロックマン7"}
+  - {key: "qid:Q11556738|name:GE", action: drop, a_id: 49885, signals: "S1_one_shot|S3_romaji_tail", title: "GE"}
+  - {key: "qid:Q11565237|name:飛燕独立戦闘隊", action: drop, a_id: 196386, signals: "S1_one_shot", title: "飛燕独立戦闘隊"}
+  - {key: "qid:Q11574300|name:チェンジH", action: drop, a_id: 47123, signals: "S2_vols_gap", title: "チェンジH"}
+  - {key: "qid:Q11583610|name:スマグラー", action: drop, a_id: 30529, signals: "S4_few_chaps", title: "スマグラー"}
+  - {key: "qid:Q11585198|name:コーセルテルの竜術士", action: drop, a_id: 37844, signals: "S2_vols_gap", title: "コーセルテルの竜術士"}
+  - {key: "qid:Q11586892|name:東京喰種 (トーキョーグール)", action: drop, a_id: 136489, signals: "S1_one_shot", title: "東京喰種 (トーキョーグール)"}
+  - {key: "qid:Q11586892|name:東京喰種:re", action: drop, a_id: 85522, signals: "S2_vols_gap", title: "東京喰種:re"}
+  - {key: "qid:Q11622572|name:ケダモノ彼氏", action: drop, a_id: 91797, signals: "S2_vols_gap|S4_few_chaps", title: "ケダモノ彼氏"}
+  - {key: "qid:Q11622982|name:キス、絶交、キス", action: drop, a_id: 34154, signals: "S2_vols_gap|S4_few_chaps", title: "キス、絶交、キス"}
+  - {key: "qid:Q11625738|name:モノノ怪", action: drop, a_id: 35158, signals: "S2_vols_gap", title: "モノノ怪"}
+  - {key: "qid:Q11648445|name:オールナイトライブ", action: drop, a_id: 191970, signals: "S2_vols_gap", title: "オールナイトライブ"}
+  - {key: "qid:Q11648718|name:新装版ブリザードアクセル", action: drop, a_id: 160943, signals: "S1_one_shot", title: "新装版ブリザードアクセル"}
+  - {key: "qid:Q11668751|name:ハゲしいな!桜井くん|sub:新婚編", action: drop, a_id: 128320, signals: "S1_one_shot|S3_romaji_tail", title: "ハゲしいな!桜井くん"}
+  - {key: "qid:Q11673381|name:一級建築士矩子の設計思考", action: drop, a_id: 130034, signals: "S2_vols_gap", title: "一級建築士矩子の設計思考"}
+  - {key: "qid:Q116937197|name:はじまりのはる", action: drop, a_id: 85087, signals: "S1_one_shot", title: "はじまりのはる"}
+  - {key: "qid:Q1229355|name:じょしラク!2 Years Later", action: drop, a_id: 151446, signals: "S1_one_shot|S3_romaji_tail", title: "じょしラク!2 Years Later"}
+  - {key: "qid:Q124096967|name:ひだまりが聴こえる", action: drop, a_id: 85922, signals: "S4_few_chaps", title: "ひだまりが聴こえる"}
+  - {key: "qid:Q131802290|name:時々ボソッとロシア語でデレる隣のアーリャさん", action: drop, a_id: 130859, signals: "S1_one_shot", title: "時々ボソッとロシア語でデレる隣のアーリャさん"}
+  - {key: "qid:Q1343976|name:BASTARD!!", action: drop, a_id: 131084, signals: "S3_romaji_tail|S4_few_chaps", title: "BASTARD!!"}
+  - {key: "qid:Q1343976|name:Bastard!!", action: drop, a_id: 131686, signals: "S3_romaji_tail|S4_few_chaps", title: "Bastard!!"}
+  - {key: "qid:Q1353888|name:ゲンセンカン主人", action: drop, a_id: 80771, signals: "S1_one_shot", title: "ゲンセンカン主人"}
+  - {key: "qid:Q1353888|name:夢の散歩", action: drop, a_id: 142952, signals: "S1_one_shot", title: "夢の散歩"}
+  - {key: "qid:Q1355245|name:おともだち", action: drop, a_id: 113882, signals: "S4_few_chaps", title: "おともだち"}
+  - {key: "qid:Q1358489|name:カムイ外伝", action: drop, a_id: 41749, signals: "S2_vols_gap", title: "カムイ外伝"}
+  - {key: "qid:Q1358489|name:忍法秘話", action: drop, a_id: 144326, signals: "S2_vols_gap", title: "忍法秘話"}
+  - {key: "qid:Q1377779|name:妖女伝説", action: drop, a_id: 196762, signals: "S2_vols_gap", title: "妖女伝説"}
+  - {key: "qid:Q1377779|name:巨人たちの伝説", action: drop, a_id: 115673, signals: "S4_few_chaps", title: "巨人たちの伝説"}
+  - {key: "qid:Q1390701|name:Black lagoon", action: drop, a_id: 87131, signals: "S4_few_chaps", title: "Black lagoon"}
+  - {key: "qid:Q1617383|name:地獄変", action: drop, a_id: 37404, signals: "S2_vols_gap", title: "地獄変"}
+  - {key: "qid:Q1617383|name:蔵六の奇病", action: drop, a_id: 89685, signals: "S2_vols_gap|S4_few_chaps", title: "蔵六の奇病"}
+  - {key: "qid:Q1617383|name:赤い蛇", action: drop, a_id: 43546, signals: "S4_few_chaps", title: "赤い蛇"}
+  - {key: "qid:Q17158819|name:ラブカレ", action: drop, a_id: 198500, signals: "S3_romaji_tail|S4_few_chaps", title: "ラブカレ"}
+  - {key: "qid:Q17219985|name:本当にあったHな体験教えます", action: drop, a_id: 49756, signals: "S2_vols_gap|S3_romaji_tail", title: "本当にあったHな体験教えます"}
+  - {key: "qid:Q17221115|name:極彩色東京卍リベンジャーズ", action: drop, a_id: 151997, signals: "S2_vols_gap", title: "極彩色東京卍リベンジャーズ"}
+  - {key: "qid:Q17572|name:ドラえもん", action: drop, a_id: 31032, signals: "S2_vols_gap", title: "ドラえもん"}
+  - {key: "qid:Q17572|name:パーマン", action: drop, a_id: 142779, signals: "S2_vols_gap", title: "パーマン"}
+  - {key: "qid:Q17572|name:ポコニャン", action: drop, a_id: 142903, signals: "S2_vols_gap", title: "ポコニャン"}
+  - {key: "qid:Q193300|name:きりひと讃歌", action: drop, a_id: 31344, signals: "S2_vols_gap", title: "きりひと讃歌"}
+  - {key: "qid:Q193300|name:どろろ", action: drop, a_id: 31658, signals: "S2_vols_gap", title: "どろろ"}
+  - {key: "qid:Q193300|name:ばるぼら", action: drop, a_id: 35402, signals: "S2_vols_gap", title: "ばるぼら"}
+  - {key: "qid:Q193300|name:ふしぎなメルモ", action: drop, a_id: 39275, signals: "S2_vols_gap", title: "ふしぎなメルモ"}
+  - {key: "qid:Q193300|name:アドルフに告ぐ", action: drop, a_id: 31695, signals: "S2_vols_gap", title: "アドルフに告ぐ"}
+  - {key: "qid:Q193300|name:アポロの歌", action: drop, a_id: 31410, signals: "S4_few_chaps", title: "アポロの歌"}
+  - {key: "qid:Q193300|name:エンゼルの丘", action: drop, a_id: 52195, signals: "S2_vols_gap", title: "エンゼルの丘"}
+  - {key: "qid:Q193300|name:ガムガムパンチ", action: drop, a_id: 52249, signals: "S2_vols_gap", title: "ガムガムパンチ"}
+  - {key: "qid:Q193300|name:キャプテンKen", action: drop, a_id: 51405, signals: "S2_vols_gap", title: "キャプテンKen"}
+  - {key: "qid:Q193300|name:ザ・クレーター", action: drop, a_id: 45516, signals: "S2_vols_gap", title: "ザ・クレーター"}
+  - {key: "qid:Q193300|name:シュマリ", action: drop, a_id: 52273, signals: "S2_vols_gap", title: "シュマリ"}
+  - {key: "qid:Q193300|name:ジャングル大帝", action: drop, a_id: 31771, signals: "S2_vols_gap", title: "ジャングル大帝"}
+  - {key: "qid:Q193300|name:ジャングル大帝レオ", action: drop, a_id: 146952, signals: "S2_vols_gap|S4_few_chaps", title: "ジャングル大帝レオ"}
+  - {key: "qid:Q193300|name:ジャングル魔境", action: drop, a_id: 151341, signals: "S4_few_chaps", title: "ジャングル魔境"}
+  - {key: "qid:Q193300|name:ネオ・ファウスト", action: drop, a_id: 131322, signals: "S2_vols_gap|S4_few_chaps", title: "ネオ・ファウスト"}
+  - {key: "qid:Q193300|name:ノーマン", action: drop, a_id: 94706, signals: "S2_vols_gap", title: "ノーマン"}
+  - {key: "qid:Q193300|name:バンパイヤ", action: drop, a_id: 44304, signals: "S2_vols_gap", title: "バンパイヤ"}
+  - {key: "qid:Q193300|name:ブッダ", action: drop, a_id: 31111, signals: "S2_vols_gap", title: "ブッダ"}
+  - {key: "qid:Q193300|name:ブラック・ジャック", action: drop, a_id: 31600, signals: "S2_vols_gap", title: "ブラック・ジャック"}
+  - {key: "qid:Q193300|name:ブルンガ1世", action: drop, a_id: 123653, signals: "S2_vols_gap", title: "ブルンガ1世"}
+  - {key: "qid:Q193300|name:メトロポリス", action: drop, a_id: 31436, signals: "S4_few_chaps", title: "メトロポリス"}
+  - {key: "qid:Q193300|name:ユニコ", action: drop, a_id: 47240, signals: "S2_vols_gap", title: "ユニコ"}
+  - {key: "qid:Q193300|name:ロック冒険記", action: drop, a_id: 52267, signals: "S2_vols_gap", title: "ロック冒険記"}
+  - {key: "qid:Q193300|name:一輝まんだら", action: drop, a_id: 94712, signals: "S2_vols_gap", title: "一輝まんだら"}
+  - {key: "qid:Q193300|name:七色いんこ", action: drop, a_id: 37080, signals: "S2_vols_gap", title: "七色いんこ"}
+  - {key: "qid:Q193300|name:三つ目がとおる", action: drop, a_id: 40798, signals: "S2_vols_gap", title: "三つ目がとおる"}
+  - {key: "qid:Q193300|name:人間昆虫記", action: drop, a_id: 52305, signals: "S2_vols_gap|S4_few_chaps", title: "人間昆虫記"}
+  - {key: "qid:Q193300|name:化石島", action: drop, a_id: 52251, signals: "S4_few_chaps", title: "化石島"}
+  - {key: "qid:Q193300|name:地球を呑む", action: drop, a_id: 43605, signals: "S2_vols_gap", title: "地球を呑む"}
+  - {key: "qid:Q193300|name:夜明け城", action: drop, a_id: 39856, signals: "S4_few_chaps", title: "夜明け城"}
+  - {key: "qid:Q193300|name:奇子", action: drop, a_id: 35401, signals: "S2_vols_gap", title: "奇子"}
+  - {key: "qid:Q193300|name:新選組", action: drop, a_id: 55665, signals: "S4_few_chaps", title: "新選組"}
+  - {key: "qid:Q193300|name:日本発狂", action: drop, a_id: 111584, signals: "S4_few_chaps", title: "日本発狂"}
+  - {key: "qid:Q193300|name:漫画大学", action: drop, a_id: 109059, signals: "S4_few_chaps", title: "漫画大学"}
+  - {key: "qid:Q193300|name:火の鳥", action: drop, a_id: 31325, signals: "S2_vols_gap", title: "火の鳥"}
+  - {key: "qid:Q193300|name:白いパイロット", action: drop, a_id: 113423, signals: "S2_vols_gap", title: "白いパイロット"}
+  - {key: "qid:Q193300|name:空気の底", action: drop, a_id: 37185, signals: "S2_vols_gap", title: "空気の底"}
+  - {key: "qid:Q193300|name:罪と罰", action: drop, a_id: 46754, signals: "S4_few_chaps", title: "罪と罰"}
+  - {key: "qid:Q193300|name:鉄腕アトム", action: drop, a_id: 30728, signals: "S2_vols_gap", title: "鉄腕アトム"}
+  - {key: "qid:Q193300|name:陽だまりの樹", action: drop, a_id: 44689, signals: "S2_vols_gap", title: "陽だまりの樹"}
+  - {key: "qid:Q1937859|name:ぼくらの|sub:完全版", action: drop, a_id: 125064, signals: "S1_one_shot", title: "ぼくらの"}
+  - {key: "qid:Q202229|name:Derby Queen", action: drop, a_id: 40501, signals: "S4_few_chaps", title: "Derby Queen"}
+  - {key: "qid:Q208582|name:Dr.スランプ", action: drop, a_id: 94626, signals: "S2_vols_gap|S3_romaji_tail", title: "Dr.スランプ"}
+  - {key: "qid:Q22124346|name:ポケモンカードゲームやろうぜ～っ!", action: drop, a_id: 142659, signals: "S2_vols_gap|S3_romaji_tail", title: "ポケモンカードゲームやろうぜ～っ!"}
+  - {key: "qid:Q2256767|name:SHADOW SKILL", action: drop, a_id: 90884, signals: "S2_vols_gap|S3_romaji_tail", title: "SHADOW SKILL"}
+  - {key: "qid:Q2279877|name:WORST外伝", action: drop, a_id: 46330, signals: "S4_few_chaps", title: "WORST外伝"}
+  - {key: "qid:Q2279877|name:Worst|sub:アンコール出版", action: drop, a_id: 95897, signals: "S4_few_chaps", title: "Worst"}
+  - {key: "qid:Q2279877|name:クローズ外伝", action: drop, a_id: 56203, signals: "S4_few_chaps", title: "クローズ外伝"}
+  - {key: "qid:Q230962|name:Fullmetal alchemist", action: drop, a_id: 62409, signals: "S1_one_shot|S3_romaji_tail", title: "Fullmetal alchemist"}
+  - {key: "qid:Q2339941|name:1・2・3と4・5・ロク", action: drop, a_id: 139928, signals: "S2_vols_gap", title: "1・2・3と4・5・ロク"}
+  - {key: "qid:Q2339941|name:少年ジャイアンツ", action: drop, a_id: 139730, signals: "S2_vols_gap", title: "少年ジャイアンツ"}
+  - {key: "qid:Q2339941|name:島っ子", action: drop, a_id: 139731, signals: "S2_vols_gap", title: "島っ子"}
+  - {key: "qid:Q2339941|name:紫電改のタカ", action: drop, a_id: 139687, signals: "S2_vols_gap", title: "紫電改のタカ"}
+  - {key: "qid:Q24036704|name:ブルーロック", action: drop, a_id: 196690, signals: "S3_romaji_tail|S4_few_chaps", title: "ブルーロック"}
+  - {key: "qid:Q247028|name:Bronze", action: drop, a_id: 63765, signals: "S3_romaji_tail|S4_few_chaps", title: "Bronze"}
+  - {key: "qid:Q2526458|name:SとMの世界", action: drop, a_id: 30505, signals: "S4_few_chaps", title: "SとMの世界"}
+  - {key: "qid:Q2608898|name:GANTZ:E", action: drop, a_id: 54530, signals: "S1_one_shot|S3_romaji_tail", title: "GANTZ:E"}
+  - {key: "qid:Q265061|name:11人いる!", action: drop, a_id: 48752, signals: "S4_few_chaps", title: "11人いる!"}
+  - {key: "qid:Q265061|name:ポーの一族", action: drop, a_id: 34305, signals: "S2_vols_gap", title: "ポーの一族"}
+  - {key: "qid:Q265061|name:モザイク・ラセン", action: drop, a_id: 39172, signals: "S4_few_chaps", title: "モザイク・ラセン"}
+  - {key: "qid:Q268789|name:夏への扉", action: drop, a_id: 34056, signals: "S4_few_chaps", title: "夏への扉"}
+  - {key: "qid:Q2715658|name:課長島耕作", action: drop, a_id: 47204, signals: "S2_vols_gap", title: "課長島耕作"}
+  - {key: "qid:Q2738694|name:はいからさんが通る", action: drop, a_id: 31567, signals: "S2_vols_gap", title: "はいからさんが通る"}
+  - {key: "qid:Q275108|name:遙かなる時空の中で", action: drop, a_id: 123880, signals: "S2_vols_gap", title: "遙かなる時空の中で"}
+  - {key: "qid:Q277940|name:Switch", action: drop, a_id: 83675, signals: "S2_vols_gap", title: "Switch"}
+  - {key: "qid:Q2829038|name:ラストコンチネント", action: drop, a_id: 151453, signals: "S4_few_chaps", title: "ラストコンチネント"}
+  - {key: "qid:Q290896|name:Pandora Hearts", action: drop, a_id: 54518, signals: "S1_one_shot|S3_romaji_tail", title: "Pandora Hearts"}
+  - {key: "qid:Q295073|name:劇場版 BLEACH", action: drop, a_id: 41330, signals: "S1_one_shot", title: "劇場版 BLEACH"}
+  - {key: "qid:Q302859|name:RiN", action: drop, a_id: 89191, signals: "S1_one_shot|S3_romaji_tail", title: "RiN"}
+  - {key: "qid:Q302859|name:ゴリラーマン40", action: drop, a_id: 124890, signals: "S4_few_chaps", title: "ゴリラーマン40"}
+  - {key: "qid:Q3045424|name:グラップラー刃牙 幼年編", action: drop, a_id: 154358, signals: "S4_few_chaps", title: "グラップラー刃牙 幼年編"}
+  - {key: "qid:Q3045424|name:グラップラー刃牙 最大トーナメント編", action: drop, a_id: 154358, signals: "S4_few_chaps", title: "グラップラー刃牙 最大トーナメント編"}
+  - {key: "qid:Q3081347|name:呪いのワンピース", action: drop, a_id: 183896, signals: "S4_few_chaps", title: "呪いのワンピース"}
+  - {key: "qid:Q311589|name:魔法先生ネギま!", action: drop, a_id: 65609, signals: "S2_vols_gap|S4_few_chaps", title: "魔法先生ネギま!"}
+  - {key: "qid:Q3136353|name:平田弘史傑作集", action: drop, a_id: 150432, signals: "S2_vols_gap|S4_few_chaps", title: "平田弘史傑作集"}
+  - {key: "qid:Q316970|name:るろうに剣心", action: drop, a_id: 67303, signals: "S2_vols_gap|S3_romaji_tail", title: "るろうに剣心"}
+  - {key: "qid:Q3201020|name:アプローズ", action: drop, a_id: 41863, signals: "S2_vols_gap", title: "アプローズ"}
+  - {key: "qid:Q3272992|name:ひまわり!!", action: drop, a_id: 194948, signals: "S2_vols_gap|S3_romaji_tail|S4_few_chaps", title: "ひまわり!!"}
+  - {key: "qid:Q3290846|name:渋谷区円山町", action: drop, a_id: 35589, signals: "S4_few_chaps", title: "渋谷区円山町"}
+  - {key: "qid:Q3297171|name:Rookies", action: drop, a_id: 106007, signals: "S1_one_shot|S3_romaji_tail", title: "Rookies"}
+  - {key: "qid:Q3515914|name:アマガミ", action: drop, a_id: 58115, signals: "S2_vols_gap|S3_romaji_tail|S4_few_chaps", title: "アマガミ"}
+  - {key: "qid:Q3516091|name:光る風", action: drop, a_id: 108600, signals: "S2_vols_gap", title: "光る風"}
+  - {key: "qid:Q3519218|name:Runin", action: drop, a_id: 91387, signals: "S1_one_shot|S3_romaji_tail", title: "Runin"}
+  - {key: "qid:Q3776935|name:まちこの千夜一夜", action: drop, a_id: 111745, signals: "S2_vols_gap", title: "まちこの千夜一夜"}
+  - {key: "qid:Q40039813|name:ロスマリンの伝説", action: drop, a_id: 133601, signals: "S4_few_chaps", title: "ロスマリンの伝説"}
+  - {key: "qid:Q41698730|name:まんがグリム童話", action: drop, a_id: 206426, signals: "S3_romaji_tail|S4_few_chaps", title: "まんがグリム童話"}
+  - {key: "qid:Q418449|name:ラヴァーズ・キス", action: drop, a_id: 71753, signals: "S4_few_chaps", title: "ラヴァーズ・キス"}
+  - {key: "qid:Q431443|name:トラジマのミーめ", action: drop, a_id: 65177, signals: "S2_vols_gap", title: "トラジマのミーめ"}
+  - {key: "qid:Q431443|name:宇宙戦艦ヤマト", action: drop, a_id: 63333, signals: "S2_vols_gap", title: "宇宙戦艦ヤマト"}
+  - {key: "qid:Q431443|name:宇宙海賊キャプテンハーロック", action: drop, a_id: 35115, signals: "S2_vols_gap", title: "宇宙海賊キャプテンハーロック"}
+  - {key: "qid:Q431443|name:惑星ロボダンガードA", action: drop, a_id: 64023, signals: "S4_few_chaps", title: "惑星ロボダンガードA"}
+  - {key: "qid:Q431443|name:漂流幹線000", action: drop, a_id: 50110, signals: "S2_vols_gap", title: "漂流幹線000"}
+  - {key: "qid:Q431443|name:蜜蜂の冒険", action: drop, a_id: 135813, signals: "S1_one_shot", title: "蜜蜂の冒険"}
+  - {key: "qid:Q437849|name:薔薇のジョゼフィーヌ", action: drop, a_id: 70311, signals: "S4_few_chaps", title: "薔薇のジョゼフィーヌ"}
+  - {key: "qid:Q438368|name:世界の終わりには君と一緒に", action: drop, a_id: 152053, signals: "S2_vols_gap", title: "世界の終わりには君と一緒に"}
+  - {key: "qid:Q438554|name:まんがみたいな恋したいっ!", action: drop, a_id: 31202, signals: "S4_few_chaps", title: "まんがみたいな恋したいっ!"}
+  - {key: "qid:Q445827|name:天人唐草", action: drop, a_id: 42979, signals: "S4_few_chaps", title: "天人唐草"}
+  - {key: "qid:Q445827|name:汐の声", action: drop, a_id: 139450, signals: "S4_few_chaps", title: "汐の声"}
+  - {key: "qid:Q445827|name:牧神の午後", action: drop, a_id: 137779, signals: "S4_few_chaps", title: "牧神の午後"}
+  - {key: "qid:Q457637|name:Tactics", action: drop, a_id: 49638, signals: "S4_few_chaps", title: "Tactics"}
+  - {key: "qid:Q464351|name:D. Gray-man", action: drop, a_id: 35147, signals: "S1_one_shot", title: "D. Gray-man"}
+  - {key: "qid:Q465645|name:チワワちゃん", action: drop, a_id: 112549, signals: "S4_few_chaps", title: "チワワちゃん"}
+  - {key: "qid:Q4700602|name:HUSH!", action: drop, a_id: 167770, signals: "S4_few_chaps", title: "HUSH!"}
+  - {key: "qid:Q4700966|name:牡丹灯籠", action: drop, a_id: 116029, signals: "S4_few_chaps", title: "牡丹灯籠"}
+  - {key: "qid:Q471103|name:くノ一捕物帖", action: drop, a_id: 178276, signals: "S2_vols_gap|S3_romaji_tail", title: "くノ一捕物帖"}
+  - {key: "qid:Q471103|name:サイボーグ009", action: drop, a_id: 31639, signals: "S2_vols_gap", title: "サイボーグ009"}
+  - {key: "qid:Q471103|name:ジュン", action: drop, a_id: 82343, signals: "S2_vols_gap|S3_romaji_tail", title: "ジュン"}
+  - {key: "qid:Q471103|name:スカルマン", action: drop, a_id: 34617, signals: "S1_one_shot|S2_vols_gap", title: "スカルマン"}
+  - {key: "qid:Q471103|name:ロボット刑事1973", action: drop, a_id: 193814, signals: "S4_few_chaps", title: "ロボット刑事1973"}
+  - {key: "qid:Q471103|name:仮面ライダー", action: drop, a_id: 34751, signals: "S2_vols_gap", title: "仮面ライダー"}
+  - {key: "qid:Q471103|name:宮本武蔵", action: drop, a_id: 47718, signals: "S2_vols_gap", title: "宮本武蔵"}
+  - {key: "qid:Q471103|name:幻魔大戦", action: drop, a_id: 131550, signals: "S2_vols_gap", title: "幻魔大戦"}
+  - {key: "qid:Q471103|name:幽霊船", action: drop, a_id: 113015, signals: "S2_vols_gap", title: "幽霊船"}
+  - {key: "qid:Q471103|name:龍神沼", action: drop, a_id: 200774, signals: "S1_one_shot", title: "龍神沼"}
+  - {key: "qid:Q471133|name:ジャイアントロボ", action: drop, a_id: 150265, signals: "S2_vols_gap", title: "ジャイアントロボ"}
+  - {key: "qid:Q471133|name:仮面の忍者赤影", action: drop, a_id: 138281, signals: "S2_vols_gap", title: "仮面の忍者赤影"}
+  - {key: "qid:Q471133|name:伊賀の影丸", action: drop, a_id: 109879, signals: "S2_vols_gap", title: "伊賀の影丸"}
+  - {key: "qid:Q471133|name:魔法使いサリー", action: drop, a_id: 42461, signals: "S2_vols_gap", title: "魔法使いサリー"}
+  - {key: "qid:Q534490|name:フイチンさん", action: drop, a_id: 113366, signals: "S2_vols_gap", title: "フイチンさん"}
+  - {key: "qid:Q551359|name:キューティーハニー", action: drop, a_id: 86168, signals: "S2_vols_gap", title: "キューティーハニー"}
+  - {key: "qid:Q551359|name:デビルマン", action: drop, a_id: 151564, signals: "S2_vols_gap", title: "デビルマン"}
+  - {key: "qid:Q551359|name:バイオレンスジャック", action: drop, a_id: 31442, signals: "S2_vols_gap", title: "バイオレンスジャック"}
+  - {key: "qid:Q551359|name:新デビルマン", action: drop, a_id: 43753, signals: "S4_few_chaps", title: "新デビルマン"}
+  - {key: "qid:Q5872362|name:陰陽探偵少女遊RANTO☆魔承録", action: drop, a_id: 49079, signals: "S4_few_chaps", title: "陰陽探偵少女遊RANTO☆魔承録"}
+  - {key: "qid:Q600384|name:ゲッターロボG", action: drop, a_id: 37759, signals: "S4_few_chaps", title: "ゲッターロボG"}
+  - {key: "qid:Q605735|name:のぞき屋", action: drop, a_id: 31514, signals: "S2_vols_gap|S4_few_chaps", title: "のぞき屋"}
+  - {key: "qid:Q608701|name:旅人くん", action: drop, a_id: 165728, signals: "S4_few_chaps", title: "旅人くん"}
+  - {key: "qid:Q618883|name:ミスター味っ子", action: drop, a_id: 39797, signals: "S2_vols_gap", title: "ミスター味っ子"}
+  - {key: "qid:Q618883|name:将太の寿司", action: drop, a_id: 44775, signals: "S2_vols_gap", title: "将太の寿司"}
+  - {key: "qid:Q6378134|name:黄金の翼", action: drop, a_id: 43633, signals: "S3_romaji_tail|S4_few_chaps", title: "黄金の翼"}
+  - {key: "qid:Q6383691|name:ちはるさんの娘", action: drop, a_id: 61623, signals: "S4_few_chaps", title: "ちはるさんの娘"}
+  - {key: "qid:Q6455142|name:新機動戦記ガンダムW", action: drop, a_id: 31936, signals: "S2_vols_gap|S3_romaji_tail|S4_few_chaps", title: "新機動戦記ガンダムW"}
+  - {key: "qid:Q669049|name:ゲゲゲの鬼太郎", action: drop, a_id: 40499, signals: "S2_vols_gap", title: "ゲゲゲの鬼太郎"}
+  - {key: "qid:Q669049|name:水木しげる", action: drop, a_id: 105488, signals: "S3_romaji_tail|S4_few_chaps", title: "水木しげる"}
+  - {key: "qid:Q669049|name:漫画で知る戦争と日本", action: drop, a_id: 201235, signals: "S1_one_shot", title: "漫画で知る戦争と日本"}
+  - {key: "qid:Q7046075|name:F", action: drop, a_id: 173558, signals: "S2_vols_gap|S3_romaji_tail", title: "F"}
+  - {key: "qid:Q70544719|name:姫様拷問の時間です", action: drop, a_id: 187521, signals: "S1_one_shot", title: "姫様拷問の時間です"}
+  - {key: "qid:Q707783|name:ゴーマニズム宣言", action: drop, a_id: 42366, signals: "S2_vols_gap|S3_romaji_tail", title: "ゴーマニズム宣言"}
+  - {key: "qid:Q707783|name:新・ゴーマニズム宣言", action: drop, a_id: 42364, signals: "S2_vols_gap|S3_romaji_tail", title: "新・ゴーマニズム宣言"}
+  - {key: "qid:Q723853|name:ブランカ", action: drop, a_id: 56132, signals: "S2_vols_gap", title: "ブランカ"}
+  - {key: "qid:Q725387|name:聖闘士星矢EPISODE.G", action: drop, a_id: 142280, signals: "S2_vols_gap|S4_few_chaps", title: "聖闘士星矢EPISODE.G"}
+  - {key: "qid:Q731579|name:JUNK", action: drop, a_id: 32291, signals: "S4_few_chaps", title: "JUNK"}
+  - {key: "qid:Q731579|name:サイレントメビウス", action: drop, a_id: 30228, signals: "S2_vols_gap", title: "サイレントメビウス"}
+  - {key: "qid:Q744237|name:富江", action: drop, a_id: 30912, signals: "S2_vols_gap", title: "富江"}
+  - {key: "qid:Q744237|name:死びとの恋わずらい", action: drop, a_id: 145265, signals: "S2_vols_gap|S4_few_chaps", title: "死びとの恋わずらい"}
+  - {key: "qid:Q7446825|name:Sleeping beauty", action: drop, a_id: 83959, signals: "S4_few_chaps", title: "Sleeping beauty"}
+  - {key: "qid:Q7494264|name:花田少年史", action: drop, a_id: 35505, signals: "S2_vols_gap", title: "花田少年史"}
+  - {key: "qid:Q7500116|name:SS", action: drop, a_id: 92360, signals: "S4_few_chaps", title: "SS"}
+  - {key: "qid:Q7784543|name:笑ゥせぇるすまん", action: drop, a_id: 93662, signals: "S2_vols_gap", title: "笑ゥせぇるすまん"}
+  - {key: "qid:Q7827649|name:銀晶水", action: drop, a_id: 42972, signals: "S4_few_chaps", title: "銀晶水"}
+  - {key: "qid:Q8060533|name:ダイヤのA act Ⅱ", action: drop, a_id: 185488, signals: "S2_vols_gap|S3_romaji_tail", title: "ダイヤのA act Ⅱ"}
+  - {key: "qid:Q8062691|name:クレイジーピエロ", action: drop, a_id: 184897, signals: "S4_few_chaps", title: "クレイジーピエロ"}
+  - {key: "qid:Q8062691|name:宵闇通りのブン", action: drop, a_id: 184782, signals: "S2_vols_gap", title: "宵闇通りのブン"}
+  - {key: "qid:Q8062691|name:海から来たドール", action: drop, a_id: 185677, signals: "S4_few_chaps", title: "海から来たドール"}
+  - {key: "qid:Q872923|name:カモのネギには毒がある", action: drop, a_id: 137874, signals: "S1_one_shot|S3_romaji_tail", title: "カモのネギには毒がある"}
+  - {key: "qid:Q873283|name:Dear", action: drop, a_id: 92599, signals: "S2_vols_gap|S3_romaji_tail", title: "Dear"}
+  - {key: "qid:Q8966796|name:おもいで金平糖", action: drop, a_id: 62813, signals: "S2_vols_gap|S4_few_chaps", title: "おもいで金平糖"}
+  - {key: "qid:Q8972749|name:岸辺の唄", action: drop, a_id: 73357, signals: "S4_few_chaps", title: "岸辺の唄"}
+  - {key: "qid:Q8979728|name:少年進化論", action: drop, a_id: 32963, signals: "S2_vols_gap", title: "少年進化論"}
+  - {key: "qid:Q9013687|name:オレンジ・シティ", action: drop, a_id: 114285, signals: "S4_few_chaps", title: "オレンジ・シティ"}
+  - {key: "qid:Q9013687|name:パール・パーティー", action: drop, a_id: 114269, signals: "S4_few_chaps", title: "パール・パーティー"}
+  - {key: "qid:Q9036516|name:魔睡宮", action: drop, a_id: 144105, signals: "S4_few_chaps", title: "魔睡宮"}
+  - {key: "qid:Q9099435|name:妖精国の騎士Ballad～継ぐ視の守護者～", action: drop, a_id: 112883, signals: "S4_few_chaps", title: "妖精国の騎士Ballad～継ぐ視の守護者～"}
+  - {key: "qid:Q9330089|name:カノジョも彼女", action: drop, a_id: 168939, signals: "S3_romaji_tail|S4_few_chaps", title: "カノジョも彼女"}
+  - {key: "qid:Q958256|name:ひみつのアッコちゃん", action: drop, a_id: 51406, signals: "S2_vols_gap", title: "ひみつのアッコちゃん"}
+  - {key: "qid:Q959193|name:中沢啓治平和マンガ作品集", action: drop, a_id: 90980, signals: "S2_vols_gap|S4_few_chaps", title: "中沢啓治平和マンガ作品集"}
+  - {key: "qid:Q959193|name:黒い雨にうたれて", action: drop, a_id: 60239, signals: "S2_vols_gap", title: "黒い雨にうたれて"}
+  - {key: "qid:Q967455|name:I・餓男", action: drop, a_id: 89367, signals: "S2_vols_gap", title: "I・餓男"}
+  - {key: "qid:Q987957|name:超少女明日香", action: drop, a_id: 166600, signals: "S2_vols_gap|S4_few_chaps", title: "超少女明日香"}
+  - {key: "qid:Q987957|name:銀色の髪の亜里沙", action: drop, a_id: 47251, signals: "S4_few_chaps", title: "銀色の髪の亜里沙"}

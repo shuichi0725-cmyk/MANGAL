@@ -179,6 +179,39 @@ ship: true                        # ゲートの判定
 
 ---
 
+## 7.5 現状の配線監査(2026-06-13 コードレビュー = Phase1の素地)
+
+成年漏れ(2,233頁)の構造を解明し、 全フィルタの「配線済み/未配線」を実測。
+
+**本番ページ集合の決まり方**: `data/manga`(SRC_DIR)が本番集合を決め、 それを作るのは
+`_slug-apply-prep.py`→`_slug-apply-build.py` **のみ**。 promote は data/manga を信頼して
+emit するだけ。 = **除外は2層**:
+- 層1(slug-apply-prep/build): 成年ゲート(2026-06-13追加) / drop-keys(c3外国孤児/partial外れ値/NDL junk/c1外国版) / recluster元 / c2-merge。
+- 層2(promote main loop): title-prefix/contains drop / subtitle drop / 雑誌(cm105) / 非漫画(外国版) / 画集 / spinoff-old / **成年ネット(2026-06-13追加)**。
+
+**配線監査の結論**:
+| フィルタ/監査 | 出力 | 本番経路に配線? |
+|---|---|---|
+| 成年(adult_score) | db series列 | ✅ 層1ゲート + ✅ 層2ネット(2026-06-13に二重化。 以前は**どちらにも無く漏れた**) |
+| 外国版(foreign-editions) | non-manga-drop.yml | ✅ promote |
+| 非漫画/雑誌/画集 | seed各種 | ✅ promote |
+| page-dedup | page-dedup.yml | ✅ promote |
+| フリガナ補正(NDL) | furigana-corrections.yml | ✅ promote |
+| 巻番号水増し是正 | (promote内) | ✅ promote `_fix_complete_sequence_numbers` |
+| AniList誤リンク | anilist-link-overrides.yml | ✅ enrich builder(2026-06-13追加) |
+| coverage / 巻番号異常検出 / trailing-gaps | report | ⚪ 監視のみ(設計通り。 種4は手動領域) |
+
+**残る本質的リスク = 「配線」でなく「シグナル」**:
+- ★ゲートは `adult_score` の精度どまり。 **IDコミックス Lake/Rex 等のサブレーベルが
+  adult-imprints.yml に無い**=score が立たない=二重ゲートをすり抜ける。 → 修正は**ゲート
+  でなく adult_score を作る側**([[adult-judgment-architecture]] v3: 楽天不在/作者伝播/
+  サブレーベル粒度)。 配線は塞いだ、 次は信号源。
+- ★蒸留差分基盤(`_diff-madb.ts` 等)未実装(§5)。 = 月次蒸留の入口がまだ手動。
+
+**Phase1 の必須チェック(この監査から確定)**: 出荷ゲートは最低限 ①adult_score>=3 ②クラスタ
+整合 ③巻番号連続性 ④slug一意 ⑤T0スキーマ床 を全emission経路で検証。 今回 promote に成年
+ネットを足したのは、 この「全emission経路で検証」の第一歩。
+
 ## 8. 未決(ユーザ裁定 or 月曜議論)
 - マニフェストの粒度: ページ単位 vs クラスタ単位 vs 1集約ファイル(33MB freeze 回避との兼ね合い)。
 - Phase 0 をいつ着手するか(楽天収穫完走後が adult/cover/release_date の素材が揃って得)。

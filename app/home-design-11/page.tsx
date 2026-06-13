@@ -9,18 +9,29 @@ import { bundle, DesignNav, seeded, volCount, Cover, CoverTile } from "@/lib/hom
 /** 案11: 編成C「リズム重視」 — 大(ヒーロー)→小(ことば)→中(棚)→小(豆知識)→… と
  *  コーナーの大小を交互に置いて縦読みのテンポを作る。 新パーツ: ことばカード/ジャンルルーレット/数字トリビア */
 export default function Design11() {
-  const { manga, byNew, completedClassics } = bundle();
+  const { data, manga, byNew, completedClassics } = bundle();
   const daySalt = Number(new Date().toISOString().slice(0, 10).replace(/-/g, ""));
-  const hero = completedClassics[2] ?? completedClassics[0];
+  // ★今週の一冊 = 完結の名作上位から週(=ビルド)替わり(固定だった bug 修正)
+  const hero = seeded(completedClassics.slice(0, 40), (m) => m.slug, 1, daySalt + 70)[0] ?? completedClassics[0];
 
   // 新パーツ: ことばカード = あらすじから今日の一文(synopsis 冒頭文を日替わり)
   const withSyn = manga.filter((m) => m.synopsis && m.synopsis.length > 40);
   const kotoba = seeded(withSyn, (m) => m.slug, 1, daySalt + 11)[0];
-  // 新パーツ: ジャンルルーレット(日替わり1ジャンル)
-  const genrePool = ["SF", "ミステリー", "スポーツ", "ファンタジー", "ホラー", "ドラマ"];
-  const todayGenre = genrePool[daySalt % genrePool.length];
-  // 新パーツ: 数字トリビア
+  // ジャンルルーレット: ★master(data.genres)から選び key でリンク(旧=日本語ラベルを
+  //   ?genre= に投げて 0件 になる bug を修正)。 表示は name、 リンクは key。
+  const todayGenreObj = data.genres.length
+    ? data.genres[daySalt % data.genres.length]
+    : { key: "action", name: "アクション" };
+  // 数字トリビア: ★日替わり(固定だった bug 修正。 複数 fact を daySalt で回す)
   const longest = [...manga].sort((a, b) => volCount(b) - volCount(a))[0];
+  const totalBooks = manga.reduce((s, m) => s + m.editions.reduce((x, e) => x + e.volumes.length, 0), 0);
+  const oldest = [...manga].filter((m) => m.year_started).sort((a, b) => a.year_started - b.year_started)[0];
+  const trivia = [
+    longest && `収録最長は『${longest.title}』の 全${volCount(longest)}巻。1日1冊でも読破に${Math.ceil(volCount(longest) / 30)}ヶ月。`,
+    `登録は ${manga.length.toLocaleString()} 作品、漫画本は合計 ${totalBooks.toLocaleString()} 冊。`,
+    oldest && `最も古い収録作は『${oldest.title}』(${oldest.year_started}年〜)。`,
+  ].filter(Boolean) as string[];
+  const todayTrivia = trivia[daySalt % trivia.length];
 
   // ★三世代 v2(ユーザ設計 2026-06-12): ライター名簿=三世代×各2人(増員可・3の倍数)。
   //   毎日「各世代から1人ずつ」の3人が掲載。載り方が日替わり(0=3人一緒/1=ソロ+ペア/2=3ヶ所ソロ)。
@@ -209,12 +220,12 @@ export default function Design11() {
       })()}
 
       {/* 4.【小・新】数字トリビア */}
-      {longest && (
+      {todayTrivia && (
         <section className="mt-4 px-4">
           <div className="flex items-center gap-3 rounded-xl border border-dashed border-[var(--color-line)] bg-[var(--color-surface-2)]/60 px-4 py-3">
             <span className="text-2xl">🔢</span>
             <p className="text-[12px] leading-relaxed text-ink/75">
-              <b>きょうの数字:</b> 収録最長は『{longest.title}』の<b className="text-[var(--color-accent)]"> 全{volCount(longest)}巻</b>。1日1冊でも読破に{Math.ceil(volCount(longest) / 30)}ヶ月。
+              <b>きょうの数字:</b> {todayTrivia}
             </p>
           </div>
         </section>
@@ -225,8 +236,8 @@ export default function Design11() {
 
       {/* 6.【小・新】ジャンルルーレット */}
       <section className="mt-4 px-4">
-        <Link href={`/browse?genre=${encodeURIComponent(todayGenre)}`} className="block rounded-xl bg-gradient-to-r from-[var(--color-accent)] to-[var(--color-accent)]/80 px-4 py-3.5 text-white shadow-md spring-press">
-          <p className="text-[13px] font-bold leading-snug">🎡 今日のジャンルルーレット: <span className="text-[16px] whitespace-nowrap">{todayGenre}</span></p>
+        <Link href={`/browse?genre=${encodeURIComponent(todayGenreObj.key)}`} className="block rounded-xl bg-gradient-to-r from-[var(--color-accent)] to-[var(--color-accent)]/80 px-4 py-3.5 text-white shadow-md spring-press">
+          <p className="text-[13px] font-bold leading-snug">🎡 今日のジャンルルーレット: <span className="text-[16px] whitespace-nowrap">{todayGenreObj.name}</span></p>
           <p className="mt-0.5 text-right text-[11px] opacity-85">回ったジャンルの棚へ →</p>
         </Link>
       </section>
