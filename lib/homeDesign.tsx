@@ -74,18 +74,29 @@ export function CoverTile({ m, sizes }: { m: Manga; sizes?: string }) {
 }
 
 export function DesignNav({ current: _current }: { current?: number }) {
-  // ★2026-06-13: 案11採用につき見本市ナビは畳む(1-10はURL直打ちでのみ残存)
+  // ★2026-06-14: アイコン式の単一ナビに集約(旧テキスト行は廃止、見づらさ解消)。
+  //   全ページ共通。 旧 ScrollShortcutsMock(スクロール出現アイコン)とも統合済。
+  const items = [
+    ["🏠", "ホーム", "/"],
+    ["📋", "一覧", "/list"],
+    ["🔍", "検索", "/browse"],
+    ["📝", "AI書評", "/column-ai-league"],
+    ["🕘", "過去ログ", "/sansedai-archive"],
+    ["🔰", "使い方", "/about"],
+  ] as const;
   return (
-    <div className="sticky top-0 z-50 flex items-center gap-2 border-b border-[var(--color-line)] bg-[var(--color-surface)]/95 px-3 py-1.5 text-[11px] backdrop-blur">
-      <Link href="/" className="spring-press font-bold text-[var(--color-accent)]">
-        🏠 ホーム
-      </Link>
-      <Link href="/list" className="spring-press text-ink/60">一覧表</Link>
-      <Link href="/column-ai-league" className="spring-press text-ink/60">AI書評</Link>
-      <Link href="/sansedai-archive" className="spring-press text-ink/60">過去ログ</Link>
-      <Link href="/browse" className="ml-auto spring-press text-ink/50 underline decoration-dotted">
-        グリッド検索
-      </Link>
+    <div className="sticky top-0 z-50 flex items-center justify-around gap-1 border-b border-[var(--color-line)] bg-[var(--color-surface)]/95 px-2 py-1.5 backdrop-blur">
+      {items.map(([icon, label, href]) => (
+        <Link
+          key={label}
+          href={href}
+          aria-label={label}
+          className="spring-press flex flex-col items-center gap-0.5 active:scale-90"
+        >
+          <span className="text-[18px] leading-none">{icon}</span>
+          <span className="text-[9px] text-ink/55">{label}</span>
+        </Link>
+      ))}
     </div>
   );
 }

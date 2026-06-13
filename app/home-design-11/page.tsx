@@ -3,7 +3,6 @@ import LikeButtonMock from "@/components/LikeButtonMock";
 import DestinyPickMock from "@/components/DestinyPickMock";
 import MarqueeTitle from "@/components/MarqueeTitle";
 import ReleaseCalendarMock from "@/components/ReleaseCalendarMock";
-import ScrollShortcutsMock from "@/components/ScrollShortcutsMock";
 import { bundle, DesignNav, seeded, volCount, Cover, CoverTile } from "@/lib/homeDesign";
 
 /** 案11: 編成C「リズム重視」 — 大(ヒーロー)→小(ことば)→中(棚)→小(豆知識)→… と
@@ -99,7 +98,6 @@ export default function Design11() {
   return (
     <div className="min-h-screen bg-[var(--color-bg)] pb-12">
       <DesignNav current={11} />
-      <ScrollShortcutsMock />
 
       {/* 0.【極小】統計ストリップ: 場所を取らない1行、各数字タップでフィルター絞り込みへ */}
       {(() => {
