@@ -6,7 +6,8 @@ export type SortKey =
   | "year-desc"
   | "year-asc"
   | "title"
-  | "volumes";
+  | "volumes"
+  | "popularity";
 
 export type FilterState = {
   query: string;
@@ -135,6 +136,14 @@ function sortItems(items: Manga[], sort: SortKey): Manga[] {
       );
     case "volumes":
       return [...items].sort((a, b) => totalVolumes(b) - totalVolumes(a));
+    case "popularity":
+      // AniList人気度の降順。 同値はスコア降順 → 年降順でタイブレーク。
+      return [...items].sort(
+        (a, b) =>
+          (b.popularity ?? 0) - (a.popularity ?? 0) ||
+          (b.score ?? 0) - (a.score ?? 0) ||
+          b.year_started - a.year_started,
+      );
     case "default":
     default:
       return items;
@@ -297,6 +306,7 @@ export function filtersFromSearchParams(p: ParamsLike | null | undefined): Parti
     sort === "year-asc" ||
     sort === "title" ||
     sort === "volumes" ||
+    sort === "popularity" ||
     sort === "default"
   ) {
     out.sort = sort;

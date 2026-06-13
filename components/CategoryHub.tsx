@@ -90,6 +90,12 @@ export default function CategoryHub({ data }: Props) {
     },
     // 並び順 (= filter ではなく sort、 全件対象なので count = total)
     {
+      href: "/browse?sort=popularity",
+      label: "人気順",
+      count: total,
+      icon: "🔥",
+    },
+    {
       href: "/browse?sort=year-desc",
       label: "新しい順",
       count: total,
