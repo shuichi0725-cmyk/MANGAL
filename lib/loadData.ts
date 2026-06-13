@@ -69,6 +69,23 @@ export function loadGenreIntros(): Record<string, string> {
   return _genreIntros;
 }
 
+let _tagI18n: Record<string, { ja: string; genre: string }> | null = null;
+/** AniListタグ → {ja 和訳, genre 近いmasterキー}(data/seeds/tag-i18n.yml)。
+ *  詳細ページの「要素」欄表示用。 無ければ空。 */
+export function loadTagI18n(): Record<string, { ja: string; genre: string }> {
+  if (_tagI18n) return _tagI18n;
+  try {
+    const p = path.join(DATA_DIR, "seeds", "tag-i18n.yml");
+    const parsed = YAML.parse(fs.readFileSync(p, "utf8")) as {
+      tags?: Record<string, { ja: string; genre: string }>;
+    };
+    _tagI18n = parsed?.tags ?? {};
+  } catch {
+    _tagI18n = {};
+  }
+  return _tagI18n;
+}
+
 let cached: DataBundle | null = null;
 
 export function loadAllManga(): DataBundle {
@@ -105,27 +122,36 @@ export function loadAllManga(): DataBundle {
         .filter((f) => f.endsWith(".yml") || f.endsWith(".yaml"))
     : [];
 
-  const manga: Manga[] = files.map((f) => {
-    const m: Manga = readYaml(path.join(mangaDir, f), MangaSchema);
-    // 代表 publisher は "(unknown)" (= 全版が長尾社) を許容、 それ以外はキー必須
-    if (m.publisher !== "(unknown)" && !publisherKeys.has(m.publisher)) {
-      throw new Error(`未定義の publisher: ${m.publisher} (${f})`);
-    }
-    for (const pk of m.publishers) {
-      if (!publisherKeys.has(pk)) {
-        throw new Error(`未定義の publishers[]: ${pk} (${f})`);
+  // ★堅牢化(2026-06-13): 1ページの不良(schema違反/未定義キー)で全体を落とさない。
+  //   不良は skip + 警告(本番でも1頁が全サイトを500にしない安全網)。 schema検証自体は維持。
+  //   既知の根因: ①著者名 "029" 等の数値見え文字列を PyYAML が無quote出力→JS yaml が数値解釈
+  //   ②genre 'other'(master外)。 どちらも promote側で恒久修正予定。
+  let _skipped = 0;
+  const manga: Manga[] = [];
+  for (const f of files) {
+    try {
+      const m: Manga = readYaml(path.join(mangaDir, f), MangaSchema);
+      if (m.publisher !== "(unknown)" && !publisherKeys.has(m.publisher)) {
+        throw new Error(`未定義の publisher: ${m.publisher}`);
+      }
+      for (const pk of m.publishers) {
+        if (!publisherKeys.has(pk)) throw new Error(`未定義の publishers[]: ${pk}`);
+      }
+      if (m.magazine && !magazineKeys.has(m.magazine)) {
+        throw new Error(`未定義の magazine: ${m.magazine}`);
+      }
+      for (const g of m.genres) {
+        if (!genreKeys.has(g)) throw new Error(`未定義の genre: ${g}`);
+      }
+      manga.push(m);
+    } catch (e) {
+      _skipped += 1;
+      if (_skipped <= 30) {
+        console.warn(`[loadData] skip ${f}: ${String((e as Error).message).split("\n")[0]}`);
       }
     }
-    if (m.magazine && !magazineKeys.has(m.magazine)) {
-      throw new Error(`未定義の magazine: ${m.magazine} (${f})`);
-    }
-    for (const g of m.genres) {
-      if (!genreKeys.has(g)) {
-        throw new Error(`未定義の genre: ${g} (${f})`);
-      }
-    }
-    return m;
-  });
+  }
+  if (_skipped > 0) console.warn(`[loadData] ★${_skipped} ページを skip(schema/キー不良)`);
 
   manga.sort((a, b) => a.year_started - b.year_started || a.title.localeCompare(b.title, "ja"));
 

@@ -1,0 +1,219 @@
+# AniListタグ → 和訳 + 近いmasterジャンル(Claude生成 2026-06-13)。
+# 用途: 詳細ページのジャンル/テーマ表示を直す土台。
+#   genre: <masterキー> = そのジャンルとほぼ同義 → ページgenresに既出なら畳む(重複回避)
+#   genre: "" = 近いmasterが無い細テーマ → 「テーマ」として和訳表示(任意)
+#   genre: "(分野)" = Demographic = 分野欄と重複 → ジャンル/タグ欄から除外
+# ※countは現データの出現頻度(多い順)。
+tags:
+  Seinen:                       {ja: 青年,             genre: "(分野)"}
+  Shoujo:                       {ja: 少女,             genre: "(分野)"}
+  Shounen:                      {ja: 少年,             genre: "(分野)"}
+  Josei:                        {ja: 女性,             genre: "(分野)"}
+  Kids:                         {ja: 児童,             genre: "(分野)"}
+  "Boys' Love":                 {ja: ボーイズラブ,     genre: bl}
+  Heterosexual:                 {ja: 異性愛,           genre: ""}
+  Tragedy:                      {ja: 悲劇,             genre: drama}
+  Magic:                        {ja: 魔法,             genre: fantasy}
+  Yuri:                         {ja: 百合,             genre: ""}
+  Isekai:                       {ja: 異世界,           genre: isekai}
+  "Age Gap":                    {ja: 年の差,           genre: ""}
+  "Love Triangle":              {ja: 三角関係,         genre: romance}
+  "LGBTQ+ Themes":              {ja: LGBTQ+,           genre: ""}
+  "Coming of Age":              {ja: 成長物語,         genre: drama}
+  "Female Harem":               {ja: 逆ハーレム,       genre: ""}
+  Animals:                      {ja: 動物,             genre: ""}
+  Gore:                         {ja: 残酷描写,         genre: horror}
+  "Super Power":                {ja: 超能力,           genre: supernatural}
+  "Family Life":                {ja: 家族,             genre: slice-of-life}
+  Food:                         {ja: 料理,             genre: gourmet}
+  Crime:                        {ja: 犯罪,             genre: suspense}
+  Reincarnation:                {ja: 転生,             genre: isekai}
+  Philosophy:                   {ja: 哲学,             genre: ""}
+  War:                          {ja: 戦争,             genre: war}
+  Revenge:                      {ja: 復讐,             genre: drama}
+  Swordplay:                    {ja: 剣劇,             genre: action}
+  Iyashikei:                    {ja: 癒し系,           genre: slice-of-life}
+  "Surreal Comedy":             {ja: シュール,         genre: gag}
+  Slapstick:                    {ja: ドタバタ,         genre: gag}
+  "Time Manipulation":          {ja: 時間操作,         genre: sci-fi}
+  Military:                     {ja: ミリタリー,       genre: war}
+  Youkai:                       {ja: 妖怪,             genre: yokai}
+  "Gender Bending":             {ja: 性別変化,         genre: ""}
+  "Cute Girls Doing Cute Things": {ja: 美少女日常,     genre: slice-of-life}
+  Politics:                     {ja: 政治,             genre: ""}
+  "Body Horror":                {ja: ボディホラー,     genre: horror}
+  Parody:                       {ja: パロディ,         genre: gag}
+  Bullying:                     {ja: いじめ,           genre: drama}
+  Guns:                         {ja: 銃,               genre: action}
+  Survival:                     {ja: サバイバル,       genre: ""}
+  Conspiracy:                   {ja: 陰謀,             genre: suspense}
+  Police:                       {ja: 警察,             genre: ""}
+  Drawing:                      {ja: 絵・漫画,         genre: ""}
+  Henshin:                      {ja: 変身,             genre: ""}
+  "Martial Arts":               {ja: 格闘技,           genre: action}
+  Mythology:                    {ja: 神話,             genre: fantasy}
+  "Otaku Culture":              {ja: オタク文化,       genre: ""}
+  Travel:                       {ja: 旅,               genre: adventure}
+  Assassins:                    {ja: 暗殺者,           genre: action}
+  "Unrequited Love":            {ja: 片思い,           genre: romance}
+  "Found Family":               {ja: 疑似家族,         genre: ""}
+  Yakuza:                       {ja: ヤクザ,           genre: ""}
+  Suicide:                      {ja: 自殺,             genre: ""}
+  Autobiographical:             {ja: 自伝,             genre: essay}
+  Meta:                         {ja: メタ,             genre: ""}
+  "Teens' Love":                {ja: ティーンズラブ,   genre: romance}
+  Shapeshifting:                {ja: 変身・変化,       genre: fantasy}
+  Acting:                       {ja: 演劇,             genre: ""}
+  Educational:                  {ja: 学習,             genre: ""}
+  Medicine:                     {ja: 医療,             genre: ""}
+  "Royal Affairs":              {ja: 宮廷,             genre: historical}
+  "Male Harem":                 {ja: 男性ハーレム,     genre: ""}
+  "Memory Manipulation":        {ja: 記憶操作,         genre: ""}
+  "Video Games":                {ja: ゲーム,           genre: ""}
+  Adoption:                     {ja: 養子,             genre: ""}
+  Rehabilitation:               {ja: 更生,             genre: drama}
+  Fugitive:                     {ja: 逃亡,             genre: ""}
+  Religion:                     {ja: 宗教,             genre: ""}
+  Cohabitation:                 {ja: 同棲,             genre: romance}
+  Baseball:                     {ja: 野球,             genre: baseball}
+  Gangs:                        {ja: 不良・暴走族,     genre: ""}
+  Chibi:                        {ja: ちび,             genre: ""}
+  Marriage:                     {ja: 結婚,             genre: romance}
+  "Death Game":                 {ja: デスゲーム,       genre: suspense}
+  "Classic Literature":         {ja: 古典文学,         genre: ""}
+  Band:                         {ja: バンド,           genre: music}
+  "Cosmic Horror":              {ja: 宇宙的恐怖,       genre: horror}
+  Tokusatsu:                    {ja: 特撮,             genre: ""}
+  Denpa:                        {ja: 電波系,           genre: ""}
+  Writing:                      {ja: 執筆,             genre: ""}
+  Slavery:                      {ja: 奴隷,             genre: ""}
+  Fashion:                      {ja: ファッション,     genre: ""}
+  Superhero:                    {ja: ヒーロー,         genre: action}
+  Drugs:                        {ja: 麻薬,             genre: ""}
+  Terrorism:                    {ja: テロ,             genre: suspense}
+  "Battle Royale":              {ja: バトルロイヤル,   genre: action}
+  "Fairy Tale":                 {ja: おとぎ話,         genre: fantasy}
+  "Body Swapping":              {ja: 入れ替わり,       genre: ""}
+  Cult:                         {ja: カルト,           genre: ""}
+  Dancing:                      {ja: ダンス,           genre: ""}
+  Football:                     {ja: サッカー,         genre: soccer}
+  "Real Robot":                 {ja: リアルロボット,   genre: mecha}
+  Kaiju:                        {ja: 怪獣,             genre: ""}
+  Torture:                      {ja: 拷問,             genre: ""}
+  "Lost Civilization":          {ja: 失われた文明,     genre: adventure}
+  Parenthood:                   {ja: 子育て,           genre: slice-of-life}
+  Boxing:                       {ja: ボクシング,       genre: sports}
+  Biographical:                 {ja: 伝記,             genre: ""}
+  Cyberpunk:                    {ja: サイバーパンク,   genre: sci-fi}
+  Gambling:                     {ja: ギャンブル,       genre: ""}
+  "Cute Boys Doing Cute Things": {ja: 美男子日常,      genre: slice-of-life}
+  Photography:                  {ja: 写真,             genre: ""}
+  Mafia:                        {ja: マフィア,         genre: ""}
+  Mahjong:                      {ja: 麻雀,             genre: ""}
+  Economics:                    {ja: 経済,             genre: ""}
+  Cars:                         {ja: 車,               genre: ""}
+  "Super Robot":                {ja: スーパーロボット, genre: mecha}
+  Environmental:                {ja: 環境,             genre: ""}
+  Psychosexual:                 {ja: 心理性愛,         genre: ""}
+  "Class Struggle":             {ja: 階級闘争,         genre: drama}
+  Basketball:                   {ja: バスケ,           genre: sports}
+  Espionage:                    {ja: スパイ,           genre: suspense}
+  Satire:                       {ja: 風刺,             genre: gag}
+  Curses:                       {ja: 呪い,             genre: supernatural}
+  "Criminal Organization":      {ja: 犯罪組織,         genre: ""}
+  "Space Opera":                {ja: スペースオペラ,   genre: sci-fi}
+  Motorcycles:                  {ja: バイク,           genre: ""}
+  "Language Barrier":           {ja: 言葉の壁,         genre: ""}
+  Crossover:                    {ja: クロスオーバー,   genre: ""}
+  Athletics:                    {ja: 陸上,             genre: sports}
+  Ships:                        {ja: 船,               genre: ""}
+  Exorcism:                     {ja: 除霊,             genre: supernatural}
+  "Card Battle":                {ja: カードバトル,     genre: ""}
+  Polyamorous:                  {ja: 複数恋愛,         genre: ""}
+  "Ice Skating":                {ja: スケート,         genre: sports}
+  "Ero Guro":                   {ja: エログロ,         genre: ""}
+  Pandemic:                     {ja: パンデミック,     genre: ""}
+  Aviation:                     {ja: 航空,             genre: ""}
+  "Kingdom Management":         {ja: 国家経営,         genre: ""}
+  Cannibalism:                  {ja: 人肉食,           genre: horror}
+  Agriculture:                  {ja: 農業,             genre: ""}
+  Spearplay:                    {ja: 槍術,             genre: action}
+  "Time Loop":                  {ja: タイムループ,     genre: sci-fi}
+  Steampunk:                    {ja: スチームパンク,   genre: fantasy}
+  Astronomy:                    {ja: 天文,             genre: ""}
+  "Musical Theater":            {ja: ミュージカル,     genre: music}
+  Blackmail:                    {ja: 脅迫,             genre: suspense}
+  Swimming:                     {ja: 水泳,             genre: sports}
+  Tennis:                       {ja: テニス,           genre: sports}
+  "Fake Relationship":          {ja: 偽装恋愛,         genre: romance}
+  Volleyball:                   {ja: バレーボール,     genre: sports}
+  Pregnancy:                    {ja: 妊娠,             genre: ""}
+  Fishing:                      {ja: 釣り,             genre: ""}
+  Cultivation:                  {ja: 修行・仙術,       genre: fantasy}
+  Wrestling:                    {ja: プロレス,         genre: sports}
+  Archery:                      {ja: 弓道,             genre: sports}
+  Noir:                         {ja: ノワール,         genre: suspense}
+  Necromancy:                   {ja: 死霊術,           genre: fantasy}
+  Golf:                         {ja: ゴルフ,           genre: sports}
+  Makeup:                       {ja: メイク,           genre: ""}
+  Fitness:                      {ja: フィットネス,     genre: sports}
+  Trains:                       {ja: 鉄道,             genre: ""}
+  Alchemy:                      {ja: 錬金術,           genre: fantasy}
+  "Software Development":       {ja: ソフト開発,       genre: ""}
+  "Body Image":                 {ja: ボディイメージ,   genre: ""}
+  Ballet:                       {ja: バレエ,           genre: ""}
+  Shogi:                        {ja: 将棋,             genre: ""}
+  "Rock Music":                 {ja: ロック,           genre: music}
+  "Vocal Synth":                {ja: ボーカロイド,     genre: music}
+  Mountaineering:               {ja: 登山,             genre: sports}
+  "Classical Music":            {ja: クラシック音楽,   genre: music}
+  "Mixed Gender Harem":         {ja: 男女ハーレム,     genre: ""}
+  Cycling:                      {ja: 自転車,           genre: sports}
+  "Reverse Isekai":             {ja: 逆異世界,         genre: isekai}
+  Matriarchy:                   {ja: 母系社会,         genre: ""}
+  Tanks:                        {ja: 戦車,             genre: war}
+  Judo:                         {ja: 柔道,             genre: sports}
+  "Proxy Battle":               {ja: 代理戦闘,         genre: ""}
+  "Table Tennis":               {ja: 卓球,             genre: sports}
+  "Indigenous Cultures":        {ja: 先住民文化,       genre: ""}
+  Filmmaking:                   {ja: 映画制作,         genre: ""}
+  Manzai:                       {ja: 漫才,             genre: ""}
+  "Hip-hop Music":              {ja: ヒップホップ,     genre: music}
+  Cheerleading:                 {ja: チア,             genre: sports}
+  Modeling:                     {ja: モデル,           genre: ""}
+  Badminton:                    {ja: バドミントン,     genre: sports}
+  Triads:                       {ja: 三合会,           genre: ""}
+  "Eco-Horror":                 {ja: エコホラー,       genre: horror}
+  "Scuba Diving":               {ja: ダイビング,       genre: sports}
+  Rakugo:                       {ja: 落語,             genre: ""}
+  Calligraphy:                  {ja: 書道,             genre: ""}
+  "Creature Taming":            {ja: モンスターテイム, genre: fantasy}
+  Rugby:                        {ja: ラグビー,         genre: sports}
+  Firefighters:                 {ja: 消防士,           genre: ""}
+  Matchmaking:                  {ja: お見合い,         genre: romance}
+  Rescue:                       {ja: 救助,             genre: ""}
+  Surfing:                      {ja: サーフィン,       genre: sports}
+  Horticulture:                 {ja: 園芸,             genre: ""}
+  "Board Game":                 {ja: ボードゲーム,     genre: ""}
+  Poker:                        {ja: ポーカー,         genre: ""}
+  "Jazz Music":                 {ja: ジャズ,           genre: music}
+  "American Football":          {ja: アメフト,         genre: sports}
+  "E-Sports":                   {ja: eスポーツ,        genre: ""}
+  "Metal Music":                {ja: メタル,           genre: music}
+  Sumo:                         {ja: 相撲,             genre: sports}
+  Go:                           {ja: 囲碁,             genre: ""}
+  Skateboarding:                {ja: スケボー,         genre: sports}
+  Karuta:                       {ja: かるた,           genre: ""}
+  Mopeds:                       {ja: 原付,             genre: ""}
+  Airsoft:                      {ja: サバゲー,         genre: ""}
+  Interspecies:                 {ja: 異種族,           genre: ""}
+  Acrobatics:                   {ja: アクロバット,     genre: ""}
+  Wuxia:                        {ja: 武侠,             genre: action}
+  Kabuki:                       {ja: 歌舞伎,           genre: ""}
+  "Human Experimentation":      {ja: 人体実験,         genre: ""}
+  Parkour:                      {ja: パルクール,       genre: ""}
+  Lacrosse:                     {ja: ラクロス,         genre: sports}
+  Brainwashing:                 {ja: 洗脳,             genre: ""}
+  Handball:                     {ja: ハンドボール,     genre: sports}
+  Fencing:                      {ja: フェンシング,     genre: sports}
+  Bowling:                      {ja: ボウリング,       genre: sports}

@@ -7,9 +7,9 @@ import ArtBookCard from "@/components/ArtBookCard";
 import Badge from "@/components/ui/Badge";
 import { ChipLink } from "@/components/ui/Chip";
 import { yearStatusLabel } from "@/lib/format";
-import { loadAllManga } from "@/lib/loadData";
+import { loadAllManga, loadTagI18n } from "@/lib/loadData";
 import { primaryVolume } from "@/lib/schema";
-import { jaCategory, jaGenre, jaTag } from "@/lib/anilist-i18n";
+import { jaGenre, jaTag } from "@/lib/anilist-i18n";
 
 export function generateStaticParams() {
   const slugs = loadAllManga().manga.map((m) => ({ slug: m.slug }));
@@ -34,6 +34,7 @@ export default async function MangaDetailPage({
 
   const publisher = data.publishers.find((p) => p.key === manga.publisher);
   const magazine = data.magazines.find((m) => m.key === manga.magazine);
+  const tagI18n = loadTagI18n();
   const demographic = data.demographics.find((d) => d.key === manga.demographic);
 
   // ★この作家の画集 = 作者名(作画家)一致のみ。 特定漫画への作品名一致紐付けはしない
@@ -205,63 +206,90 @@ export default async function MangaDetailPage({
                 {demographic?.name ?? manga.demographic}
               </FilterLink>
             </dd>
-            <dt className="font-semibold text-ink/65 pt-1">ジャンル</dt>
-            <dd className="flex flex-wrap gap-1.5">
-              {(() => {
-                // 種3 既存 ジャンル (= filter link 付き) + AniList 由来 (= filter なし) を 統合
-                const seenNames = new Set<string>();
-                const items: Array<{ name: string; key?: string }> = [];
-                for (const g of manga.genres) {
-                  const name = data.genres.find((x) => x.key === g)?.name ?? g;
-                  if (seenNames.has(name)) continue;
-                  seenNames.add(name);
-                  items.push({ name, key: g });
-                }
-                // AniList genres (= 19 種類)
-                for (const g of manga.genres_anilist ?? []) {
-                  const ja = jaGenre(g);
-                  if (seenNames.has(ja)) continue;
-                  // 種3 マスター に 同名 key があれば filter 付ける
-                  const masterKey = data.genres.find((x) => x.name === ja)?.key;
-                  seenNames.add(ja);
-                  items.push({ name: ja, key: masterKey });
-                }
-                // AniList tags (= 案2 filter 後)
-                // mainstream で 情報価値の低い tag は 除外
-                const NOISE_TAGS = new Set([
-                  "Heterosexual", // mainstream default
-                  "Male Protagonist", // 当然
-                  "Female Protagonist",
-                  "Primarily Adult Cast",
-                  "Primarily Child Cast",
-                  "Primarily Teen Cast",
-                ]);
-                for (const t of manga.tags ?? []) {
-                  // 読者層 (= Demographic) は 「分野」 行で 既出のため 除外
-                  if (t.category === "Demographic") continue;
-                  if (NOISE_TAGS.has(t.name)) continue;
-                  const ja = jaTag(t.name);
-                  if (seenNames.has(ja)) continue;
-                  const masterKey = data.genres.find((x) => x.name === ja)?.key;
-                  seenNames.add(ja);
-                  items.push({ name: ja, key: masterKey });
-                }
-                return items.map((it) =>
-                  it.key ? (
-                    <ChipLink key={it.name} href={`/browse?genre=${encodeURIComponent(it.key)}`}>
-                      {it.name}
-                    </ChipLink>
-                  ) : (
-                    <span
-                      key={it.name}
-                      className="inline-flex items-center rounded-[var(--radius-tag)] px-3 py-1.5 text-xs font-medium bg-[var(--color-surface-2)] border border-[var(--color-line)] text-ink/55"
-                    >
-                      {it.name}
-                    </span>
-                  ),
-                );
-              })()}
-            </dd>
+            {(() => {
+              // ★ジャンル(= masterジャンル + Wiki/AniList/AI 由来。 filter link 付き)と
+              //   要素(= AniListタグの和訳。 filter 無しの素チップ)を分離。
+              //   ・ジャンル欄 = master genres ∪ genres_anilist(jaGenre)
+              //   ・要素欄    = tags の和訳。 除外= ①Demographic(分野欄に既出) ②スポーツ競技
+              //                (野球/サッカー以外は不採用) ③ジャンル名と完全一致(畳む) ④ノイズtag
+              const genreNames = new Set<string>();
+              const genreItems: Array<{ name: string; key?: string }> = [];
+              for (const g of manga.genres) {
+                const name = data.genres.find((x) => x.key === g)?.name ?? g;
+                if (genreNames.has(name)) continue;
+                genreNames.add(name);
+                genreItems.push({ name, key: g });
+              }
+              for (const g of manga.genres_anilist ?? []) {
+                const ja = jaGenre(g);
+                if (genreNames.has(ja)) continue;
+                const masterKey = data.genres.find((x) => x.name === ja)?.key;
+                genreNames.add(ja);
+                genreItems.push({ name: ja, key: masterKey });
+              }
+
+              const NOISE_TAGS = new Set([
+                "Heterosexual",
+                "Male Protagonist",
+                "Female Protagonist",
+                "Primarily Adult Cast",
+                "Primarily Child Cast",
+                "Primarily Teen Cast",
+              ]);
+              const elemNames = new Set<string>();
+              const elemItems: string[] = [];
+              for (const t of manga.tags ?? []) {
+                if (t.category === "Demographic") continue; // 分野欄に既出
+                if (t.category.startsWith("Theme-Game-Sport")) continue; // スポーツ競技は不採用
+                if (NOISE_TAGS.has(t.name)) continue;
+                // 和訳がある tag のみ採用(英語のまま出さない)。 tag-i18n.yml 優先、 旧辞書 fallback。
+                const fromYml = tagI18n[t.name]?.ja;
+                const fromDict = jaTag(t.name);
+                const ja = fromYml ?? (fromDict !== t.name ? fromDict : undefined);
+                if (!ja) continue;
+                if (genreNames.has(ja)) continue; // ジャンル名と完全一致 → 畳む
+                if (elemNames.has(ja)) continue;
+                elemNames.add(ja);
+                elemItems.push(ja);
+              }
+
+              return (
+                <>
+                  <dt className="font-semibold text-ink/65 pt-1">ジャンル</dt>
+                  <dd className="flex flex-wrap gap-1.5">
+                    {genreItems.map((it) =>
+                      it.key ? (
+                        <ChipLink key={it.name} href={`/browse?genre=${encodeURIComponent(it.key)}`}>
+                          {it.name}
+                        </ChipLink>
+                      ) : (
+                        <span
+                          key={it.name}
+                          className="inline-flex items-center rounded-[var(--radius-tag)] px-3 py-1.5 text-xs font-medium bg-[var(--color-surface-2)] border border-[var(--color-line)] text-ink/55"
+                        >
+                          {it.name}
+                        </span>
+                      ),
+                    )}
+                  </dd>
+                  {elemItems.length > 0 && (
+                    <>
+                      <dt className="font-semibold text-ink/65 pt-1">要素</dt>
+                      <dd className="flex flex-wrap gap-1.5">
+                        {elemItems.map((name) => (
+                          <span
+                            key={name}
+                            className="inline-flex items-center rounded-[var(--radius-tag)] px-2.5 py-1 text-[11px] font-medium bg-[var(--color-surface-2)]/60 border border-[var(--color-line)] text-ink/50"
+                          >
+                            {name}
+                          </span>
+                        ))}
+                      </dd>
+                    </>
+                  )}
+                </>
+              );
+            })()}
           </dl>
 
           {manga.synopsis && (
