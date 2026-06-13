@@ -283,9 +283,36 @@ slug = ローマ字 hyphen 区切り。 **公式英題 (= Demon Slayer 等の �
 
 #### タグ運用ルール
 
-- master keys は `data/genres.yml` で管理 (= 25 種類前後)
+- master keys は `data/genres.yml` で管理 (= 32 種類、 下の closed vocabulary を参照)
 - 1 entry に 1-4 tag 付与
 - 包括タグ + サブタグの **併用方式** (= 階層検索可能化)
+
+#### ★AIジャンル付与の closed vocabulary (= 2026-06-13 ユーザ裁定、 厳守)
+
+蒸留で **AI がジャンルを付与する時は、 下の master 32 キーの中から「文言を持ってくる」だけ**。
+新語の創作・英語混入・表記揺れは禁止 (= 例「バトル」「日常系」等の独自語を作らない。
+近いのは `action`/`slice-of-life`)。 該当が無ければ無理に付けず空でよい (= `other` 行きより未付与)。
+
+- **低信頼マーク必須**: AI 由来ジャンルは `genres_provisional: true` を立て、 後から
+  「これは AI 推定」と判別できるようにする (= trusted = AniList genres+themes ∪ Wikipedia ∪ 手動。
+  trusted が空の時だけ AI fallback、 その時 provisional=true)。 [[genre_quality_improvement]]
+- **backstop**: `lib/loadData.ts` が master 外 genre キーを reject (= 万一の混入は build で弾く)。
+
+★master 32 キー (= `data/genres.yml` が正本。 変更時はこちらも更新):
+
+| key | 表示名 | key | 表示名 | key | 表示名 | key | 表示名 |
+|---|---|---|---|---|---|---|---|
+| action | アクション | adventure | 冒険 | fantasy | ファンタジー | sci-fi | SF |
+| mystery | ミステリー | horror | ホラー | gag | ギャグ | comedy | コメディ |
+| romcom | ラブコメ | romance | 恋愛 | drama | ドラマ | slice-of-life | 日常 |
+| school | 学園 | sports | スポーツ | baseball | 野球 | soccer | サッカー |
+| historical | 歴史 | samurai | 時代劇 | mecha | メカ | yokai | 妖怪 |
+| gourmet | グルメ | 4-koma | 4コマ漫画 | essay | エッセイ漫画 | isekai | 異世界 |
+| bl | ボーイズラブ | suspense | サスペンス | music | 音楽 | supernatural | 超常 |
+| ecchi | お色気 | mind-game | 頭脳戦 | mahou-shoujo | 魔法少女 | war | 戦争 |
+
+- ★**スポーツは増やさない** (= 野球/サッカー以外の競技は `sports` のみ。 ユーザ方針)。
+- ★**タクソノミー自体は増やさない** (= 新ジャンルキー追加はユーザ裁定マター。 AI は既存から選ぶだけ)。
 
 #### スポーツ系の例外的サブタグ
 
