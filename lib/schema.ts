@@ -163,6 +163,10 @@ export const MangaSchema = z.object({
     .optional(),
   /** AniList entry ID (= source 追跡、 後の更新差分取得用) */
   anilist_id: z.number().int().positive().optional(),
+  /** AniList 人気度(= リストに入れたユーザ数。 「人気順」discovery用。 コミュニティ不要で人気が出せる) */
+  popularity: z.number().int().nonnegative().optional(),
+  /** AniList 平均スコア(0-100)。 「高評価順」discovery用 */
+  score: z.number().int().min(0).max(100).optional(),
   /** 他言語タイトル / 別名 (= AniList synonyms 由来、 alternative_titles.en 補助) */
   synonyms: z.array(z.string().min(1)).optional(),
   editions: z.array(EditionSchema).min(1),

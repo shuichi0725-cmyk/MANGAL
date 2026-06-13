@@ -137,9 +137,15 @@ def main():
             for t in raw_tags:
                 if (t.get("rank") or 0) >= THEME_RANK and t.get("name") in T2M and not t.get("isAdult"):
                     gt.add(T2M[t["name"]])
-            aid_enrich[i] = {"anilist_id": i, "synonyms": syns,
-                             "genres_anilist": genres, "tags": tags,
-                             "genres_trusted": sorted(gt)}
+            ent = {"anilist_id": i, "synonyms": syns,
+                   "genres_anilist": genres, "tags": tags,
+                   "genres_trusted": sorted(gt)}
+            # ★人気/評価(discovery用、 コミュニティ不要)。 popularity=リスト登録ユーザ数 / averageScore=0-100
+            if e.get("popularity"):
+                ent["popularity"] = int(e["popularity"])
+            if e.get("averageScore"):
+                ent["score"] = int(e["averageScore"])
+            aid_enrich[i] = ent
     out = {sk: aid_enrich[aid] for sk, aid in sk_aid.items() if aid in aid_enrich}
     OUT.write_text(json.dumps(out, ensure_ascii=False), encoding="utf-8")
     # stats

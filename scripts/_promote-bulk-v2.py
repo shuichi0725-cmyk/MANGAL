@@ -2217,6 +2217,11 @@ def main():
                     new_yml["genres_anilist"] = en["genres_anilist"]  # 表示/比較用(genres本体は下のtrusted優先)
                 if en.get("tags"):
                     new_yml["tags"] = en["tags"]
+                # ★人気/評価(discovery用・コミュニティ不要)
+                if en.get("popularity"):
+                    new_yml["popularity"] = en["popularity"]
+                if en.get("score"):
+                    new_yml["score"] = en["score"]
                 enrich_pages += 1
                 # ★種a和訳 synopsis を anilist_id 経由で join(無ければ空のまま)
                 ja = synopsis_ja.get(str(en["anilist_id"]))

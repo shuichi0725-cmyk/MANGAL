@@ -1,0 +1,19 @@
+// ★R2配信 Worker 用 wrangler 設定(ドラフト・未デプロイ)。
+// 現行 wrangler.jsonc(Workers Static Assets= ./out 同梱)は壊さず、 R2移行時にこちらへ切替。
+// デプロイ: wrangler deploy -c wrangler-r2.jsonc  (要: R2バケット作成 + アカウント)
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "mangal",
+  "main": "workers/r2-serve.js",
+  "compatibility_date": "2026-04-27",
+  // ★R2バケット(要作成: wrangler r2 bucket create mangal-site)
+  "r2_buckets": [
+    { "binding": "BUCKET", "bucket_name": "mangal-site" }
+  ],
+  // ★任意: alias 301 と adult_us geo 用 KV(使うなら id を埋める)
+  // "kv_namespaces": [
+  //   { "binding": "REDIRECTS", "id": "<kv-id>" },
+  //   { "binding": "ADULT_US_SLUGS", "id": "<kv-id>" }
+  // ],
+  "observability": { "enabled": true }
+}
