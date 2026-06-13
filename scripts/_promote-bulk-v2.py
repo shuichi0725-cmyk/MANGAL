@@ -2050,6 +2050,12 @@ def main():
     synopsis_ja = json.loads(_syn_path.read_text(encoding="utf-8")) if _syn_path.exists() else {}
     synopsis_pages = 0
     print(f"  synopsis 和訳 map: {len(synopsis_ja):,} anilist_id", file=sys.stderr)
+    # ★キャッチコピー map = {slug: copy}。 高価なAI生成物(別案トーン)=種3同格でgit永続化。
+    #   slug キー(=作品ページ単位)。 あらすじ素材から生成、 「わからないものは埋めない」。
+    _catch_path = ROOT / "data" / "seeds" / "catch-ja.json"
+    catch_map = json.loads(_catch_path.read_text(encoding="utf-8")) if _catch_path.exists() else {}
+    catch_pages = 0
+    print(f"  catch コピー map: {len(catch_map):,} slug", file=sys.stderr)
 
     # 作品(work)Wikidata QID map = {anilist_id(str): {"qid","label"}}。
     #   ★AniList漫画ID(P8731)経由で一意取得=誤joinゼロ。 著者QID(series.qid)とは別物。
@@ -2192,6 +2198,10 @@ def main():
         seed_entry = seed3.get(series["series_key"])
         new_yml = build_yml(src, merged_series, authors, editions, seed_entry,
                             valid_pubs, valid_mags, valid_gens)
+        # ★キャッチコピーを slug 経由で join(無ければ未設定=カードは出版社表示にfallback)
+        if slug in catch_map and catch_map[slug]:
+            new_yml["catch"] = catch_map[slug]
+            catch_pages += 1
         # (ジャンルは下の trusted優先マージで確定 = AniList+Wiki+手動を採用、 AIはfallback)
         # ★adult_us(米基準): ページの series_key(merge込)が種a isAdult なら付与。
         #   非日本geoで非表示用(日本は表示)。 採用作品集合は不変=表示制御のみ追加。
@@ -2347,6 +2357,7 @@ def main():
     print(f"  adult_us(米基準=非日本geoで非表示): {adult_us_pages}", file=sys.stderr)
     print(f"  anilist enrich(id/synonyms/genres/tags 付与): {enrich_pages}", file=sys.stderr)
     print(f"  synopsis 種a和訳 付与: {synopsis_pages}(残りは空=種3 AI文不使用)", file=sys.stderr)
+    print(f"  catch コピー付与: {catch_pages}", file=sys.stderr)
     print(f"  作品Wikidata QID 付与: {work_qid_pages}", file=sys.stderr)
     print(f"  著者ゼロ→AniList補完: {author_fill_pages}", file=sys.stderr)
     print(f"  著者ゼロ→MADB安全補完: {author_fill_madb_pages}", file=sys.stderr)
