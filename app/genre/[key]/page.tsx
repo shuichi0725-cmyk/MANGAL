@@ -2,7 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import CoverImage from "@/components/CoverImage";
 import MarqueeTitle from "@/components/MarqueeTitle";
-import { loadAllManga } from "@/lib/loadData";
+import { loadAllManga, loadGenreIntros } from "@/lib/loadData";
 import { primaryVolume, type Manga } from "@/lib/schema";
 
 /** ジャンル別ランディング = 「自動生成まとめ記事」の土台(discovery + SEO + アフィの集約)。
@@ -29,18 +29,24 @@ export default async function GenrePage({ params }: { params: Promise<{ key: str
     .sort((a, b) => pop(b) - pop(a) || (b.score ?? 0) - (a.score ?? 0));
   const completed = items.filter((m) => m.status === "completed").length;
   const top = items.filter((m) => pop(m) > 0).slice(0, 3);
+  const intro = loadGenreIntros()[key]; // ★AIキュレーション文(無ければデータ駆動暫定)
 
   return (
     <div className="min-h-screen bg-[var(--color-bg)] px-4 py-6 pb-16">
       <div className="mx-auto max-w-3xl">
         <Link href="/" className="spring-press text-[12px] text-[var(--color-accent)]">← ホーム</Link>
         <h1 className="mt-2 text-[22px] font-black">「{genre.name}」の漫画</h1>
-        {/* ★AI解説スロット: 今はデータ駆動の暫定文。 将来 per-genre のAIキュレーション文を差し込む */}
-        <p className="mt-1.5 text-[13px] leading-relaxed text-ink/70">
-          {genre.name}ジャンルの漫画 <b>{items.length.toLocaleString()}</b> 作品（完結 {completed.toLocaleString()}）。人気順で並んでいます。
-          {top.length > 0 && (
-            <>注目は『{top.map((m) => m.title).join("』『")}』など。</>
-          )}
+        {/* ★AIキュレーション文(genre-intros.yml)。 無ければデータ駆動の暫定文 */}
+        {intro ? (
+          <p className="mt-2 text-[13.5px] leading-relaxed text-ink/80">{intro}</p>
+        ) : (
+          <p className="mt-2 text-[13px] leading-relaxed text-ink/70">
+            {genre.name}ジャンルの漫画。人気順で並んでいます。
+            {top.length > 0 && <>注目は『{top.map((m) => m.title).join("』『")}』など。</>}
+          </p>
+        )}
+        <p className="mt-1 text-[11px] text-ink/45">
+          全 <b className="tabular-nums">{items.length.toLocaleString()}</b> 作品（完結 {completed.toLocaleString()}）・人気順
         </p>
 
         <ul className="mt-5 grid grid-cols-3 gap-x-3 gap-y-5 sm:grid-cols-4">

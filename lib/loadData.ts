@@ -55,6 +55,20 @@ function readMasterRecord<S extends z.ZodTypeAny>(
   return items;
 }
 
+let _genreIntros: Record<string, string> | null = null;
+/** ジャンル別ランディングの AIキュレーション導入文(data/seeds/genre-intros.yml)。 無ければ空。 */
+export function loadGenreIntros(): Record<string, string> {
+  if (_genreIntros) return _genreIntros;
+  try {
+    const p = path.join(DATA_DIR, "seeds", "genre-intros.yml");
+    const parsed = YAML.parse(fs.readFileSync(p, "utf8")) as { intros?: Record<string, string> };
+    _genreIntros = parsed?.intros ?? {};
+  } catch {
+    _genreIntros = {};
+  }
+  return _genreIntros;
+}
+
 let cached: DataBundle | null = null;
 
 export function loadAllManga(): DataBundle {
