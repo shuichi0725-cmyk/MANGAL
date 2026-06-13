@@ -1,0 +1,35 @@
+# MADB 取込ベースライン状態(git追跡=永続。 .cache は消えるので真実の source はこちら)
+# 月次蒸留 protocol(CLAUDE.md)の前提 `.cache/madb-last-release.txt` の永続バックアップ。
+# 確立 2026-06-13(read-only 調査で実態を特定。 docs 経緯は下記 note)。
+
+# 現DBが取込んだ MADB GitHub release(mediaarts-db/dataset)
+last_intake:
+  source_repo: mediaarts-db/dataset          # fetch-madb.ts が読む公式 JSON-LD release
+  release_tag: "1.2.16"                       # ← madb-last-release.txt に書く値
+  release_published: "2026-05-22"             # GitHub published_at
+  release_name: "2026/05/22"
+  db_built_at: "2026-05-29"                   # db-v2 series.created_at(単一バッチ)
+  asset: metadata101_json.zip                 # 展開後 metadata101.json(~390k records)
+
+# ★重要な実態(2026-06-13 確認)
+notes: |
+  - 2026-06-13 時点で 1.2.16 が **最新リリースのまま**(1.2.17 未公開)。
+    = 現DBは最新MADBと同期済み。 「取込の遅れ」ではない。
+  - 本番の月別新刊ISBNの崖(2026-04=785 / 05=153 / 06=1)は、
+    MADB自体の**登録ラグ**(発売後に登録される)。 1.2.16(2026-05-22スナップ)時点で
+    5〜6月の新刊が未登録なだけ。 蒸留しても取れない(MADBが登録するまで待ち)。
+  - リリースは**月次**(毎月17〜22日頃)。 → GitHub release 経路の蒸留は月次で十分。
+    日次が意味を持つのは artmuseums.go.jp サイトCSV経路(予約含む高頻度・別実装)。
+  - ★未検証: 2026-05-29 の build が 1.2.16 を完全取込したかは record単位で未照合。
+    次回蒸留(1.2.17公開時)は MADB-ID upsert が冪等なので、 1.2.16 分の重複再取込は安全。
+  - ★protocol基盤の未実装: CLAUDE.md が前提に挙げる差分スクリプト
+    `_diff-madb.ts` / `_diff-series.ts` / `_select-supplement-diff.ts` は**未作成**。
+    正規の月次蒸留を回すにはこれらの実装が先(= マニフェスト+ゲート設計と統合する好機)。
+
+# 次の蒸留トリガー
+next:
+  watch: "mediaarts-db/dataset の 1.2.17 公開(GitHub API releases で検知)"
+  expected: "2026-06 中旬以降(月次パターン)"
+  precondition_gaps:                          # 蒸留前に埋める必要(CLAUDE.md Phase0)
+    - "_diff-madb.ts / _diff-series.ts / _select-supplement-diff.ts 未実装"
+    - "種1 raw(metadata101.json)は再 fetch 必要(.cache に現存しない)"
