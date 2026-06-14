@@ -4,11 +4,13 @@ import DestinyPickMock from "@/components/DestinyPickMock";
 import MarqueeTitle from "@/components/MarqueeTitle";
 import ReleaseCalendarMock from "@/components/ReleaseCalendarMock";
 import { bundle, DesignNav, seeded, volCount, Cover, CoverTile } from "@/lib/homeDesign";
+import { loadAiReviews } from "@/lib/loadData";
 
 /** 案11: 編成C「リズム重視」 — 大(ヒーロー)→小(ことば)→中(棚)→小(豆知識)→… と
  *  コーナーの大小を交互に置いて縦読みのテンポを作る。 新パーツ: ことばカード/ジャンルルーレット/数字トリビア */
 export default function Design11() {
   const { data, manga, byNew, completedClassics } = bundle();
+  const aiLatest = loadAiReviews()[0]; // AI書評家リーグ 最新節(corner9)
   const daySalt = Number(new Date().toISOString().slice(0, 10).replace(/-/g, ""));
   // ★今週の一冊 = 完結の名作上位から週(=ビルド)替わり(固定だった bug 修正)
   const hero = seeded(completedClassics.slice(0, 40), (m) => m.slug, 1, daySalt + 70)[0] ?? completedClassics[0];
@@ -259,19 +261,19 @@ export default function Design11() {
             <div className="border-b-2 border-ink/75 px-4 pb-2 pt-3">
               <p className="text-[9px] font-bold tracking-[0.25em] text-[var(--color-accent)]">AI書評家リーグ ・ 週刊 ・ 完結作だけ、ネタバレなし</p>
               <h2 className="mt-1 text-[16px] font-black leading-snug">
-                今週の課題図書『幽☆遊☆白書』を、AI書評家5人が読んだら。
+                今週の課題図書『{aiLatest?.title ?? "幽☆遊☆白書"}』を、AI書評家{aiLatest?.reviews.length ?? 5}人が読んだら。
               </h2>
             </div>
             <div className="px-4 py-3">
               <div className="flex flex-wrap gap-1.5 text-[10px]">
-                {["ジェミニ 3.1 Pro", "ChatGPT", "Qwen 3.7 Max", "DeepSeek", "クロード Fable 5"].map((n) => (
+                {(aiLatest?.reviews.map((r) => r.model) ?? ["Gemini 3.1 Pro", "ChatGPT", "Qwen 3.7 MAX", "DeepSeek", "Claude Opus 4.8 (1M)"]).map((n) => (
                   <span key={n} className="rounded-full border border-[var(--color-line)] bg-[var(--color-surface-2)] px-2 py-0.5 font-semibold text-ink/70">{n}</span>
                 ))}
               </div>
               <p className="mt-2 text-[12px] leading-relaxed text-ink/75">
-                同じ本、同じ依頼文——それでも書評はこんなに違う。♥で今週のベスト書評家を選んでください。
+                同じ本、同じ依頼文——それでも書評はこんなに違う。実在の各社AIに同じお題を渡して読み比べ。
               </p>
-              <p className="mt-2 text-right text-[11px] font-semibold text-[var(--color-accent)]">5本読み比べる(約15分) →</p>
+              <p className="mt-2 text-right text-[11px] font-semibold text-[var(--color-accent)]">{aiLatest?.reviews.length ?? 5}本読み比べる →</p>
             </div>
           </Tile>
         </Link>

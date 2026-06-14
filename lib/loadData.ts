@@ -86,6 +86,32 @@ export function loadTagI18n(): Record<string, { ja: string; genre: string }> {
   return _tagI18n;
 }
 
+export type AiReview = { vendor: string; model: string; text: string };
+export type AiReviewSection = {
+  setsu: number;
+  slug: string;
+  title: string;
+  author: string;
+  prompt: string;
+  reviews: AiReview[];
+};
+let _aiReviews: AiReviewSection[] | null = null;
+/** AI書評家リーグ(corner9): data/seeds/ai-reviews.yml。 節(setsu)降順=最新が先頭。 [[ai_review_league_operation]] */
+export function loadAiReviews(): AiReviewSection[] {
+  if (_aiReviews) return _aiReviews;
+  try {
+    const p = path.join(DATA_DIR, "seeds", "ai-reviews.yml");
+    const parsed = YAML.parse(fs.readFileSync(p, "utf8")) as { sections?: AiReviewSection[] };
+    _aiReviews = (parsed?.sections ?? [])
+      .filter((s) => s && s.reviews && s.reviews.length > 0)
+      .slice()
+      .sort((a, b) => b.setsu - a.setsu);
+  } catch {
+    _aiReviews = [];
+  }
+  return _aiReviews;
+}
+
 let cached: DataBundle | null = null;
 
 export function loadAllManga(): DataBundle {
