@@ -1,0 +1,207 @@
+weekly-shonen-jump:
+  name: 週刊少年ジャンプ
+  publisher: shueisha
+  demographic: shounen
+weekly-shonen-magazine:
+  name: 週刊少年マガジン
+  publisher: kodansha
+  demographic: shounen
+weekly-shonen-sunday:
+  name: 週刊少年サンデー
+  publisher: shogakukan
+  demographic: shounen
+weekly-young-jump:
+  name: 週刊ヤングジャンプ
+  publisher: shueisha
+  demographic: seinen
+big-comic-spirits:
+  name: ビッグコミックスピリッツ
+  publisher: shogakukan
+  demographic: seinen
+morning:
+  name: モーニング
+  publisher: kodansha
+  demographic: seinen
+afternoon:
+  name: アフタヌーン
+  publisher: kodansha
+  demographic: seinen
+ribon:
+  name: りぼん
+  publisher: shueisha
+  demographic: shoujo
+nakayoshi:
+  name: なかよし
+  publisher: kodansha
+  demographic: shoujo
+hana-to-yume:
+  name: 花とゆめ
+  publisher: hakusensha
+  demographic: shoujo
+champion:
+  name: 週刊少年チャンピオン
+  publisher: akita
+  demographic: shounen
+gangan:
+  name: 月刊少年ガンガン
+  publisher: square-enix
+  demographic: shounen
+ultra-jump:
+  name: ウルトラジャンプ
+  publisher: shueisha
+  demographic: seinen
+weekly-young-sunday:
+  name: 週刊ヤングサンデー
+  publisher: shogakukan
+  demographic: seinen
+big-comic-original:
+  name: ビッグコミックオリジナル
+  publisher: shogakukan
+  demographic: seinen
+big-comic:
+  name: ビッグコミック
+  publisher: shogakukan
+  demographic: seinen
+shonen-sunday-super:
+  name: 少年サンデーS
+  publisher: shogakukan
+  demographic: shounen
+weekly-young-magazine:
+  name: 週刊ヤングマガジン
+  publisher: kodansha
+  demographic: seinen
+monthly-shonen-magazine:
+  name: 月刊少年マガジン
+  publisher: kodansha
+  demographic: shounen
+bessatsu-shonen-magazine:
+  name: 別冊少年マガジン
+  publisher: kodansha
+  demographic: shounen
+margaret:
+  name: マーガレット
+  publisher: shueisha
+  demographic: shoujo
+betsuma:
+  name: 別冊マーガレット
+  publisher: shueisha
+  demographic: shoujo
+ciao:
+  name: ちゃお
+  publisher: shogakukan
+  demographic: shoujo
+shojo-comic:
+  name: Sho-Comi
+  publisher: shogakukan
+  demographic: shoujo
+be-love:
+  name: BE・LOVE
+  publisher: kodansha
+  demographic: josei
+shonen-ace:
+  name: 月刊少年エース
+  publisher: kadokawa
+  demographic: shounen
+young-ace:
+  name: ヤングエース
+  publisher: kadokawa
+  demographic: seinen
+gfantasy:
+  name: 月刊Gファンタジー
+  publisher: square-enix
+  demographic: shounen
+# B-1 (2026-05-06): unresolved raw values from fetch:wikipedia diagnostic.
+# 既存 28 件 + 以下を追加して magazine resolve 率 (15% → 想定 60%+) を改善。
+# substring match で migration 表記 ("LaLa→LaLaDX" 等) も拾えるよう base 名で登録。
+shonen-magazine-edge:
+  name: 少年マガジンエッジ
+  publisher: kodansha
+  demographic: shounen
+monthly-young-magazine:
+  name: 月刊ヤングマガジン
+  publisher: kodansha
+  demographic: seinen
+manga-pocket:
+  name: マガジンポケット
+  publisher: kodansha
+  demographic: shounen
+comic-bonbon:
+  name: コミックボンボン
+  publisher: kodansha
+  demographic: shounen
+aria:
+  name: ARIA
+  publisher: kodansha
+  demographic: josei
+palcy:
+  name: Palcy
+  publisher: kodansha
+  demographic: josei
+lala:
+  name: LaLa
+  publisher: hakusensha
+  demographic: shoujo
+young-animal:
+  name: ヤングアニマル
+  publisher: hakusensha
+  demographic: seinen
+shojo-comic-legacy:
+  name: 少女コミック
+  publisher: shogakukan
+  demographic: shoujo
+comic-walker:
+  name: ComicWalker
+  publisher: kadokawa
+  demographic: seinen
+dengeki-daioh:
+  name: 月刊コミック電撃大王
+  publisher: kadokawa
+  demographic: seinen
+comp-ace:
+  name: 月刊コンプエース
+  publisher: kadokawa
+  demographic: seinen
+manga-time-kirara:
+  name: まんがタイムきらら
+  publisher: houbunsha
+  demographic: seinen
+weekly-manga-goraku:
+  name: 週刊漫画ゴラク
+  publisher: nihon-bungeisha
+  demographic: seinen
+manga-action:
+  name: 漫画アクション
+  publisher: futabasha
+  demographic: seinen
+comic-blade:
+  name: 月刊コミックブレイド
+  publisher: mag-garden
+  demographic: seinen
+young-king-ours:
+  name: ヤングキングアワーズ
+  publisher: shonen-gahosha
+  demographic: seinen
+comic-rex:
+  name: 月刊ComicREX
+  publisher: ichijinsha
+  demographic: seinen
+monthly-hobby-japan:
+  name: 月刊ホビージャパン
+  publisher: hobby-japan
+  demographic: seinen
+on-blue:
+  name: on Blue
+  publisher: shodensha
+  demographic: josei
+line-manga:
+  name: LINEマンガ
+  publisher: line-digital-frontier
+  demographic: seinen
+ax:
+  name: アックス
+  publisher: seirinkogeisha
+  demographic: seinen
+comic-gardo:
+  name: コミックガルド
+  publisher: overlap
+  demographic: seinen

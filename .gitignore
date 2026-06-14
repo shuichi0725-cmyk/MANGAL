@@ -50,3 +50,6 @@ data/manga.draft-2000.bak-*
 /data/manga.v2/
 /data/manga.bak42/
 /data/art-books.v2/
+
+# プレビューの画集シンボリックリンク(CIで壊れる)は追跡しない
+.preview-data/art-books

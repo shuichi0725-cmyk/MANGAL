@@ -1,0 +1,61 @@
+name: Deploy Preview to Cloudflare
+
+# テストプレビュー(=ローカルのトンネルで見せている 600件サブセット)を
+# Cloudflare Workers(name: "mangal")に常設デプロイする。
+# 認証は既存の GitHub Secrets(CLOUDFLARE_API_TOKEN / CLOUDFLARE_ACCOUNT_ID)を流用。
+#
+# なぜ別workflow:
+#   - 本番 deploy-cloudflare.yml はフル66kをビルド → Workers静的アセットの
+#     2万ファイル上限を超えて失敗する(=R2待ち)。
+#   - こちらは .preview-data(リポジトリに同梱した600件)だけをビルド → 上限内で成功。
+#
+# トリガー: 手動(workflow_dispatch) + このブランチで .preview-data 等を更新した push。
+#   (失敗メール乱発を避けるため paths を絞る)
+on:
+  workflow_dispatch: {}
+  push:
+    branches:
+      - claude/manga-database-affiliate-3x0ms
+    paths:
+      - ".preview-data/**"
+      - ".github/workflows/deploy-preview.yml"
+
+jobs:
+  deploy-preview:
+    name: Build subset + Deploy to Cloudflare
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      deployments: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Type check (sanity)
+        run: npx tsc --noEmit
+
+      - name: Build Next.js (preview subset → out/)
+        env:
+          MANGAL_DATA_DIR: .preview-data
+          NEXT_TELEMETRY_DISABLED: "1"
+        run: npm run build
+
+      - name: Verify build output
+        run: |
+          COUNT=$(ls out/manga/*.html 2>/dev/null | wc -l)
+          echo "preview manga pages built: $COUNT"
+          ls out/index.html
+
+      - name: Deploy to Cloudflare (Workers + assets)
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: deploy
