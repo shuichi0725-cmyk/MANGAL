@@ -50,6 +50,15 @@ jobs:
           echo "preview manga pages built: $COUNT"
           ls out/index.html
 
+      - name: Trim RSC payloads (.txt) to shrink assets manifest (<1MiB metadata)
+        # Workers Assets は登録メタデータ(=アセット一覧)が1MiB未満必須(code:100145)。
+        # Next の per-route .txt(クライアント遷移用RSC、HTML表示には不要)を削ってファイル数を半減。
+        run: |
+          BEFORE=$(find out -type f | wc -l)
+          find out -name '*.txt' ! -name 'robots.txt' -delete
+          AFTER=$(find out -type f | wc -l)
+          echo "files: $BEFORE -> $AFTER"
+
       - name: Deploy to Cloudflare (separate worker = mangal-preview)
         uses: cloudflare/wrangler-action@v3
         with:
