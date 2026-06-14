@@ -60,6 +60,10 @@ jobs:
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         run: |
           mv wrangler.jsonc wrangler.jsonc.bak 2>/dev/null || true
+          # 初回はプロジェクトが無いと pages deploy が "Project not found" (code:8000007)。
+          # 先に作成(既存なら無害にスキップ)。
+          npx -y wrangler@4.100.0 pages project create mangal-preview \
+            --production-branch=main || echo "(project already exists; continue)"
           npx -y wrangler@4.100.0 pages deploy out \
             --project-name=mangal-preview \
             --branch=main \
