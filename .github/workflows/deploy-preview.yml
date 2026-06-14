@@ -62,6 +62,9 @@ jobs:
       - name: Deploy to Cloudflare (separate worker = mangal-preview)
         uses: cloudflare/wrangler-action@v3
         with:
+          # ★最新wrangler = アセットをJWT方式で参照しメタデータを小さく保つ
+          #   (4.85はマニフェスト同梱で 1MiB超 code:100145 になった)
+          wranglerVersion: "4.100.0"
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           command: deploy --name mangal-preview
