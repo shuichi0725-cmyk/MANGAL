@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import CoverImage from "@/components/CoverImage";
 import MarqueeTitle from "@/components/MarqueeTitle";
 import { loadAllManga, loadGenreIntros } from "@/lib/loadData";
+import { DesignNav } from "@/lib/homeDesign";
 import { primaryVolume, type Manga } from "@/lib/schema";
 
 /** ジャンル別ランディング = 「自動生成まとめ記事」の土台(discovery + SEO + アフィの集約)。
@@ -32,7 +33,9 @@ export default async function GenrePage({ params }: { params: Promise<{ key: str
   const intro = loadGenreIntros()[key]; // ★AIキュレーション文(無ければデータ駆動暫定)
 
   return (
-    <div className="min-h-screen bg-[var(--color-bg)] px-4 py-6 pb-16">
+    <>
+      <DesignNav />
+      <div className="min-h-screen bg-[var(--color-bg)] px-4 py-6 pb-16">
       <div className="mx-auto max-w-3xl">
         <Link href="/" className="spring-press text-[12px] text-[var(--color-accent)]">← ホーム</Link>
         <h1 className="mt-2 text-[22px] font-black">「{genre.name}」の漫画</h1>
@@ -83,6 +86,7 @@ export default async function GenrePage({ params }: { params: Promise<{ key: str
           </p>
         )}
       </div>
-    </div>
+      </div>
+    </>
   );
 }

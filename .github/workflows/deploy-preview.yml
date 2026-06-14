@@ -18,6 +18,13 @@ on:
       - ".github/workflows/deploy-preview.yml"
       - "wrangler.jsonc"
       - "worker.js"
+      - "app/**"
+      - "components/**"
+      - "lib/**"
+      - "public/**"
+      - "next.config.ts"
+      - "package.json"
+      - "package-lock.json"
 
 jobs:
   deploy-preview:
