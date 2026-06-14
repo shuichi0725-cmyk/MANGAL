@@ -1,0 +1,58 @@
+name: Deploy Preview to Cloudflare
+
+# テストプレビュー(=トンネルで見せている600件サブセット)を、
+# Git連携(Workers Builds)済みの "mangal" とは別の新ワーカー "mangal-preview" に
+# GitHub Actions からデプロイする。 別名なので Git連携ワーカーのデプロイ拒否と競合しない。
+# 認証は既存 GitHub Secrets(CLOUDFLARE_API_TOKEN / CLOUDFLARE_ACCOUNT_ID)を流用。
+#
+# 経緯: "mangal" へ直接 wrangler deploy すると Cloudflare API
+#   /workers/scripts/mangal/versions が拒否(Git連携ロック)。 アセットUP自体は成功
+#   (1,325/1,404 files)= 容量/認証はOK。 よって別名ワーカーに出す。
+on:
+  workflow_dispatch: {}
+  push:
+    branches:
+      - claude/manga-database-affiliate-3x0ms
+    paths:
+      - ".preview-data/**"
+      - ".github/workflows/deploy-preview.yml"
+
+jobs:
+  deploy-preview:
+    name: Build subset + Deploy to mangal-preview
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      deployments: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Type check (sanity)
+        run: npx tsc --noEmit
+
+      - name: Build Next.js (preview subset → out/)
+        env:
+          MANGAL_DATA_DIR: .preview-data
+          NEXT_TELEMETRY_DISABLED: "1"
+        run: npm run build
+
+      - name: Verify build output
+        run: |
+          COUNT=$(ls out/manga/*.html 2>/dev/null | wc -l)
+          echo "preview manga pages built: $COUNT"
+          ls out/index.html
+
+      - name: Deploy to Cloudflare (separate worker = mangal-preview)
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: deploy --name mangal-preview
