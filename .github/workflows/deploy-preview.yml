@@ -52,21 +52,15 @@ jobs:
           echo "preview manga pages built: $COUNT"
           ls out/index.html
 
-      - name: Trim RSC payloads (.txt) to shrink assets manifest (<1MiB metadata)
-        # Workers Assets は登録メタデータ(=アセット一覧)が1MiB未満必須(code:100145)。
-        # Next の per-route .txt(クライアント遷移用RSC、HTML表示には不要)を削ってファイル数を半減。
+      - name: Deploy to Cloudflare Pages (mangal-preview)
+        # ★Pages = 多数の静的ファイル向けで Workers の metadata 1MiB 制約が無い。
+        #   Workers用 wrangler.jsonc は pages deploy と混線するので一時退避してから実行。
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         run: |
-          BEFORE=$(find out -type f | wc -l)
-          find out -name '*.txt' ! -name 'robots.txt' -delete
-          AFTER=$(find out -type f | wc -l)
-          echo "files: $BEFORE -> $AFTER"
-
-      - name: Deploy to Cloudflare (separate worker = mangal-preview)
-        uses: cloudflare/wrangler-action@v3
-        with:
-          # ★最新wrangler = アセットをJWT方式で参照しメタデータを小さく保つ
-          #   (4.85はマニフェスト同梱で 1MiB超 code:100145 になった)
-          wranglerVersion: "4.100.0"
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: deploy --name mangal-preview
+          mv wrangler.jsonc wrangler.jsonc.bak 2>/dev/null || true
+          npx -y wrangler@4.100.0 pages deploy out \
+            --project-name=mangal-preview \
+            --branch=main \
+            --commit-dirty=true
