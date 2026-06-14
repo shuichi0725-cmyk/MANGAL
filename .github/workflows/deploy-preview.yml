@@ -16,6 +16,8 @@ on:
     paths:
       - ".preview-data/**"
       - ".github/workflows/deploy-preview.yml"
+      - "wrangler.jsonc"
+      - "worker.js"
 
 jobs:
   deploy-preview:

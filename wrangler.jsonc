@@ -1,9 +1,11 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "mangal",
+  "main": "worker.js",
   "compatibility_date": "2026-04-27",
   "assets": {
     "directory": "./out",
+    "binding": "ASSETS",
     "not_found_handling": "404-page"
   },
   "observability": {
