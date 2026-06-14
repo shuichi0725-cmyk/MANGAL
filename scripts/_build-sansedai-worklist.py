@@ -5,7 +5,7 @@ import os, glob, re, yaml
 
 SRC = "data/manga.v2"
 OUT = ".cache/sansedai-worklist.tsv"
-TOP = 1200
+TOP = 1800
 os.makedirs(".cache", exist_ok=True)
 
 # popularity 行を持つファイルだけ先に粗フィルタ(全66k件パースは遅いため)
