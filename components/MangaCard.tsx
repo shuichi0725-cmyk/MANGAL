@@ -1,6 +1,6 @@
 import { yearStatusLabel } from "@/lib/format";
 import {
-  primaryVolume,
+  coverUrl,
   type DemographicLabel,
   type Genre,
   type Manga,
@@ -38,8 +38,7 @@ type Props = {
  */
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export default function MangaCard({ manga, publishers, genres, demographics }: Props) {
-  const v1 = primaryVolume(manga);
-  const cover = v1?.cover_url ?? null;
+  const cover = coverUrl(manga);
 
   const publisherName =
     publishers.find((p) => p.key === manga.publisher)?.name ?? manga.publisher;

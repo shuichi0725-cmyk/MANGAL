@@ -8,7 +8,7 @@ import Badge from "@/components/ui/Badge";
 import { ChipLink } from "@/components/ui/Chip";
 import { yearStatusLabel } from "@/lib/format";
 import { loadAllManga, loadTagI18n } from "@/lib/loadData";
-import { primaryVolume } from "@/lib/schema";
+import { coverUrl } from "@/lib/schema";
 import { jaGenre, jaTag } from "@/lib/anilist-i18n";
 
 export function generateStaticParams() {
@@ -28,9 +28,9 @@ export default async function MangaDetailPage({
   const manga = data.manga.find((m) => m.slug === slug);
   if (!manga) notFound();
 
-  const v1 = primaryVolume(manga);
   // 表紙は volume.cover_url のみ。openBD/NDL fallback は使わない方針。
-  const cover = v1?.cover_url ?? null;
+  // 1巻に無ければ表紙のある巻にフォールバック。
+  const cover = coverUrl(manga);
 
   const publisher = data.publishers.find((p) => p.key === manga.publisher);
   const magazine = data.magazines.find((m) => m.key === manga.magazine);

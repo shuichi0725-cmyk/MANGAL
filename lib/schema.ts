@@ -224,6 +224,19 @@ export function allVolumes(manga: Manga): Volume[] {
   return manga.editions.flatMap((e) => e.volumes);
 }
 
+/**
+ * 作品の代表表紙。 第1巻の cover_url を優先し、 無ければ表紙のある最初の巻に
+ * フォールバック (= 旧版の1巻が書影未取得でも、 別巻の表紙でカードを埋める)。
+ */
+export function coverUrl(manga: Manga): string | null {
+  const v1 = primaryVolume(manga);
+  if (v1?.cover_url) return v1.cover_url;
+  for (const v of allVolumes(manga)) {
+    if (v.cover_url) return v.cover_url;
+  }
+  return null;
+}
+
 export const PublisherSchema = z.object({
   key: z.string(),
   name: z.string(),
