@@ -8,7 +8,7 @@ before = len(existing)
 
 added = skipped_dup = skipped_bad = 0
 samples = []
-for bf in sorted(glob.glob(".cache/catch-out/batch-*.json")):
+for bf in sorted(glob.glob(".cache/catch-out/b-*.json")):
     try:
         d = json.load(open(bf, encoding="utf-8"))
     except Exception as e:
