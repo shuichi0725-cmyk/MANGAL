@@ -1,0 +1,8 @@
+# promote が「どの db-v2 series に join するか」を恒久是正(git追跡)。
+# 誤クラスタjoin(本編が汚染fragmentに繋がる等)の恒久fix。slug → 正しい series_key。
+# data/manga(gitignore)の _skey が再生成で消えても、ここが恒久指示として優先される。
+overrides:
+  meitantei-conan:
+    skey: "qid:Q313945|name:名探偵コナン"
+    reason: 本編が汚染fragment(name:太田勝|name:名探偵コナン/2巻/太田勝)にjoinしていたのを、綺麗な本編series(sid40529/175巻/青山剛昌)へ恒久是正
+    at: "2026-06-16"

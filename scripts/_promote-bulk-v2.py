@@ -1066,6 +1066,21 @@ def _slug_override(slug: str) -> str:
     return _SLUG_OVR.get(slug, slug)
 
 
+_SKEY_OVR = None
+def _skey_override(slug: str, fallback):
+    """skey-overrides.yml (どのdb-v2 seriesに繋ぐかの恒久是正・git追跡)。誤クラスタjoinの恒久fix。"""
+    global _SKEY_OVR
+    if _SKEY_OVR is None:
+        _SKEY_OVR = {}
+        p = ROOT / "data" / "seeds" / "skey-overrides.yml"
+        if p.exists():
+            doc = yaml.safe_load(open(p, encoding="utf-8")) or {}
+            for s, v in (doc.get("overrides") or {}).items():
+                if isinstance(v, dict) and v.get("skey"):
+                    _SKEY_OVR[s] = v["skey"]
+    return _SKEY_OVR.get(slug, fallback)
+
+
 def enrich_author(a: dict) -> dict:
     """著者dictに kana(504由来カタカナ)+ romaji(kana→ヘボン)を付与。 無ければ素のまま。"""
     _load_author_yomi()
@@ -2155,7 +2170,7 @@ def main():
             stats["dropped_non_manga"] += 1
             dropped_non_manga.append(f"{ypath.name}  title={title}  (= 関連書)")
             continue
-        series = find_series(con, slug, title, qid, src.get("_skey"))
+        series = find_series(con, slug, title, qid, _skey_override(slug, src.get("_skey")))
         if not series:
             stats["not_found_in_db"] += 1
             not_found.append(f"{ypath.name}  title={title}")
