@@ -2,7 +2,7 @@ import Link from "next/link";
 import CoverImage from "@/components/CoverImage";
 import MarqueeTitle from "@/components/MarqueeTitle";
 import { loadAllManga } from "@/lib/loadData";
-import { primaryVolume, type Manga } from "@/lib/schema";
+import { coverUrl, type Manga } from "@/lib/schema";
 
 /** 見本市(/home-design-0X)用の共有部品。 本番には使わない試作層。 */
 
@@ -43,7 +43,7 @@ export function seeded<T>(arr: T[], key: (t: T) => string, n: number, salt = 7):
 }
 
 export function Cover({ m, sizes = "120px" }: { m: Manga; sizes?: string }) {
-  const c = primaryVolume(m)?.cover_url ?? null;
+  const c = coverUrl(m);
   return (
     <div className="relative aspect-[2/3] w-full overflow-hidden rounded bg-[var(--color-surface-2)] border border-[var(--color-line)]">
       {c ? (

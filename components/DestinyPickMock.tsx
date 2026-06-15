@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import CoverImage from "./CoverImage";
 
 export type DestinyItem = { slug: string; title: string; authors: string; vols: number; cover?: string | null };
 
@@ -25,7 +26,8 @@ export default function DestinyPickMock({
     <div className="flex gap-3 p-3.5">
       <Link href={`/manga/${m.slug}`} className="spring-press block w-16 shrink-0">
         <div className="relative flex aspect-[2/3] items-center justify-center overflow-hidden rounded border border-[var(--color-line)] bg-[var(--color-surface-2)] p-1 text-center text-[9px] leading-tight text-ink/45">
-          {m.title.slice(0, 22)}
+          <span className="line-clamp-4">{m.title.slice(0, 22)}</span>
+          {m.cover ? <CoverImage src={m.cover} alt={m.title} sizes="64px" /> : null}
         </div>
       </Link>
       <div className="min-w-0 flex-1 self-center">

@@ -4,6 +4,7 @@ import DestinyPickMock from "@/components/DestinyPickMock";
 import MarqueeTitle from "@/components/MarqueeTitle";
 import ReleaseCalendarMock from "@/components/ReleaseCalendarMock";
 import { bundle, DesignNav, seeded, volCount, Cover, CoverTile } from "@/lib/homeDesign";
+import { coverUrl } from "@/lib/schema";
 import { loadAiReviews } from "@/lib/loadData";
 
 /** 案11: 編成C「リズム重視」 — 大(ヒーロー)→小(ことば)→中(棚)→小(豆知識)→… と
@@ -291,6 +292,7 @@ export default function Design11() {
               title: m.title,
               authors: m.authors.map((a) => a.name).join("・"),
               vols: volCount(m),
+              cover: coverUrl(m),
             }))}
             initialIndex={daySalt % 60}
             total={manga.length}
