@@ -14,8 +14,9 @@ export default function VolumeRow({ manga }: Props) {
           // ★2つ目以降の版は畳み表示+上に太線(版の境界を明示=ユーザ裁定 2026-06-13)
           className={idx > 0 ? "mt-5 border-t-2 border-ink/20 pt-4" : ""}
         >
-          {/* 版本体 (= 複数刷がある場合は EditionVolumes 内で古い順タブ切替) */}
-          <EditionVolumes manga={manga} edition={ed} defaultCollapsed={idx > 0} />
+          {/* 版本体 (= 複数刷がある場合は EditionVolumes 内で古い順タブ切替)。
+              ★コーフロー化で省スペースになったので全版を開いて表示。 */}
+          <EditionVolumes manga={manga} edition={ed} defaultCollapsed={false} />
         </section>
       ))}
     </div>

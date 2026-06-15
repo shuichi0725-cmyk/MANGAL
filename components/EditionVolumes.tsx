@@ -2,8 +2,7 @@
 
 import { useState } from "react";
 import type { Edition, Manga, Volume } from "@/lib/schema";
-import VolumeTile from "./VolumeTile";
-import Card from "./ui/Card";
+import VolumeCoverflow from "./VolumeCoverflow";
 import Badge from "./ui/Badge";
 
 /**
@@ -18,11 +17,6 @@ function buyable(v: Volume): boolean {
 function fullStock(vols: Volume[]): boolean {
   return vols.length > 0 && vols.every(buyable);
 }
-
-// ★巻リストの密度制御(2026-06-13 ユーザ裁定):
-//   ・先頭の版(通常版)以外は畳んで見出しだけ(タップで展開) = うる星型の多版でも縦に伸びない
-//   ・展開中も最初は6巻まで+「全N巻を見る」
-const PREVIEW_COUNT = 6;
 
 // ★伸縮アニメ: grid-rows 0fr⇄1fr。 ※renderの外で定義必須(内側に書くと毎renderで別
 //   コンポーネント扱い=remountされ、遷移が一切走らないバグになる。2026-06-13実害)
@@ -59,20 +53,14 @@ export default function EditionVolumes({
     : 0;
   const [sel, setSel] = useState(defaultIdx);
   const [collapsed, setCollapsed] = useState(defaultCollapsed);
-  const [showAll, setShowAll] = useState(false);
   const vols = hasTabs ? versions![sel].volumes : edition.volumes;
-  const preview = vols.slice(0, PREVIEW_COUNT);
-  const rest = vols.slice(PREVIEW_COUNT);
 
   return (
     <div>
       {/* 見出し: 畳める版(2版目以降)は見出し自体がトグル */}
       {defaultCollapsed ? (
         <button
-          onClick={() => {
-            setCollapsed((c) => !c);
-            if (!collapsed) setShowAll(false);
-          }}
+          onClick={() => setCollapsed((c) => !c)}
           className={`spring-press flex w-full items-center gap-2 text-left ${
             collapsed ? "tactile rounded-card px-3.5 py-3" : "mb-3 px-0"
           }`}
@@ -146,39 +134,8 @@ export default function EditionVolumes({
           })}
         </div>
       )}
-      <ul className="space-y-2">
-        {preview.map((v) => (
-          <li key={`${edition.type}-${v.number}`}>
-            <Card className="p-3">
-              <VolumeTile manga={manga} volume={v} edition={edition} />
-            </Card>
-          </li>
-        ))}
-      </ul>
-      {rest.length > 0 && (
-        <>
-          {/* 7巻目以降も伸縮アニメで出し入れ */}
-          <Grow open={showAll}>
-            <ul className="mt-2 space-y-2 pb-0.5">
-              {rest.map((v) => (
-                <li key={`${edition.type}-${v.number}`}>
-                  <Card className="p-3">
-                    <VolumeTile manga={manga} volume={v} edition={edition} />
-                  </Card>
-                </li>
-              ))}
-            </ul>
-          </Grow>
-          <div className="mt-2.5 text-center">
-            <button
-              onClick={() => setShowAll((s) => !s)}
-              className="spring-press tactile-chip inline-flex items-center rounded-full px-4 py-1.5 text-[12px] font-semibold text-ink/75"
-            >
-              {showAll ? "先頭6巻だけにする ▴" : `全${vols.length}巻を見る ▾(あと${rest.length}巻)`}
-            </button>
-          </div>
-        </>
-      )}
+      {/* ★巻リスト = コーフロー(案A: 中央フォーカス・両側暗・ループ・初期1巻) */}
+      <VolumeCoverflow title={manga.title} volumes={vols} />
       </div>
       </Grow>
     </div>
