@@ -1051,6 +1051,21 @@ def apply_author_corrections(authors: list[dict], series_key: str) -> list[dict]
     return out
 
 
+_SLUG_OVR = None
+def _slug_override(slug: str) -> str:
+    """slug-overrides.yml (主版slug是正の恒久指示) を適用。 旧slug→無印 等。 再promoteでも保持。"""
+    global _SLUG_OVR
+    if _SLUG_OVR is None:
+        _SLUG_OVR = {}
+        p = ROOT / "data" / "seeds" / "slug-overrides.yml"
+        if p.exists():
+            doc = yaml.safe_load(open(p, encoding="utf-8")) or {}
+            for old, v in (doc.get("overrides") or {}).items():
+                if isinstance(v, dict) and v.get("slug"):
+                    _SLUG_OVR[old] = v["slug"]
+    return _SLUG_OVR.get(slug, slug)
+
+
 def enrich_author(a: dict) -> dict:
     """著者dictに kana(504由来カタカナ)+ romaji(kana→ヘボン)を付与。 無ければ素のまま。"""
     _load_author_yomi()
@@ -1694,7 +1709,7 @@ def build_yml(
       - anime_first_year / awards / wikipedia_url 等 既存補強
     """
     o: dict = {}
-    o["slug"] = src_yml["slug"]
+    o["slug"] = _slug_override(src_yml["slug"])
     # title: seed3.title(手動 override)優先 → series_row.title(cluster-best 反映済)。
     o["title"] = _strip_pua((seed3 or {}).get("title") or series_row["title"])
     # title_kana は スペース削除 (= MANGAL protocol: ふりがな に空白 入れない)
