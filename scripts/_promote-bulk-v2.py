@@ -999,6 +999,28 @@ def _load_genre_additions() -> dict:
 _GENRE_ADDITIONS: dict = _load_genre_additions()
 
 
+def _load_rakuten_labels() -> tuple[dict, dict]:
+    """楽天あらすじ由来ラベル(Phase③、 slug単位の純粋追加。 [[genre_from_rakuten_story_plan]])。
+    genre-rakuten.yml = provisional work(trusted空)へ振るジャンル。
+    tag-rakuten.yml   = theme tag未保有 work へ足す要素タグ。
+    どちらも較正(信頼度閾値)済の高精度ラベルのみ。 trusted/手動は不変。"""
+    g: dict = {}; t: dict = {}
+    pg = ROOT / "data" / "seeds" / "genre-rakuten.yml"
+    if pg.exists():
+        for e in (yaml.safe_load(open(pg, encoding="utf-8")) or {}).get("additions", []):
+            if e.get("slug"):
+                g[e["slug"]] = e.get("genres") or []
+    pt = ROOT / "data" / "seeds" / "tag-rakuten.yml"
+    if pt.exists():
+        for e in (yaml.safe_load(open(pt, encoding="utf-8")) or {}).get("additions", []):
+            if e.get("slug"):
+                t[e["slug"]] = e.get("tags") or []
+    return g, t
+
+
+_RAKUTEN_GENRES, _RAKUTEN_TAGS = _load_rakuten_labels()
+
+
 def _load_author_yomi() -> None:
     global _AUTHOR_YOMI
     if _AUTHOR_YOMI is not None:
@@ -2329,9 +2351,29 @@ def main():
             new_yml["genres"] = sorted(trusted)
             new_yml.pop("genres_provisional", None)
         else:
-            ai_g = [g for g in (new_yml.get("genres") or []) if g in valid_gens and g != "other"]
-            new_yml["genres"] = ai_g or (new_yml.get("genres") or ["other"])
-            new_yml["genres_provisional"] = True  # 信頼源ゼロ=AI暫定(信頼源が来たら上書き)
+            # ★楽天あらすじ由来ジャンル(Phase③) = trusted空(=provisional/未ラベル)のみ採用。
+            #   較正済の高精度ラベル。 trusted があれば上で確定済なので ここには来ない=trusted不変。
+            rk = [g for g in _RAKUTEN_GENRES.get(slug, []) if g in valid_gens]
+            if rk:
+                rks = set(rk)
+                if rks & {"baseball", "soccer"}:
+                    rks.add("sports")
+                new_yml["genres"] = sorted(rks)
+                new_yml["genres_rakuten"] = True
+                new_yml.pop("genres_provisional", None)
+            else:
+                ai_g = [g for g in (new_yml.get("genres") or []) if g in valid_gens and g != "other"]
+                new_yml["genres"] = ai_g or (new_yml.get("genres") or ["other"])
+                new_yml["genres_provisional"] = True  # 信頼源ゼロ=AI暫定(信頼源が来たら上書き)
+        # ★楽天あらすじ由来 要素タグ(Phase③) = theme tag未保有 work へ追加(category=Rakuten)。
+        #   既存 tag 名は dedup。 表示は要素欄(tag-i18n 和訳)。
+        rkt = _RAKUTEN_TAGS.get(slug)
+        if rkt:
+            existing = {t.get("name") for t in (new_yml.get("tags") or [])}
+            add = [{"name": n, "category": "Rakuten", "rank": 60}
+                   for n in rkt if n not in existing]
+            if add:
+                new_yml["tags"] = (new_yml.get("tags") or []) + add
         # ★MADB安全fallback: AniListで埋まらなかった著者ゼロを series_key で補完
         #   (外国名除去後の単独日本語著者のみ=原作者誤主著/汚染を回避)。
         cur_au2 = new_yml.get("authors") or []
