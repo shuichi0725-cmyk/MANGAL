@@ -164,7 +164,48 @@ FP(LLM予測したが truth に無い)を本文サンプリングしたところ
 - **Tier3 = 実精度は高い疑い(truth-gap)= 本文再判定で救済してから適用**: gourmet / isekai / school
 - **Tier4 = 適用しない**(過付与 or 検出不能): war / historical / suspense / yokai / mind-game / essay
 
-## step3: 適用(高精度ジャンルだけ provisional に振る)⬜ — ユーザGO待ち
+---
 
-対象 = provisional ∩ caption = **8,793 work**。Tier1(+Tier2)を `genres_rakuten` 印で付与、
-trusted/手動は上書きしない。GO後に実施。
+## タグ(要素)検証 ✅ (2026-06-16)
+
+ジャンルと**同一の held-out 3,000 work・同一あらすじ**で実施(同一作で突合可)。
+- 教師 = AniList theme tags(Demographic 除外)。closed vocab = support≥50 の **85種**(和訳=tag-i18n.yml)。
+- スクリプト: `_genre_rakuten_tag_step1.py` / 分類=workflow `tag-rakuten-heldout`(75agent) / 評価=`_genre_rakuten_tag_step2_eval.py`。
+- 評価母数 = held-out のうち trusted theme tag を持つ **1,127 work**。
+- **全体**: micro P/R/F1 = **0.556 / 0.398 / 0.464**(ジャンルより低い=語彙大・希少・truth-gap大)。
+
+### ★タグの教訓 = 「具体タグは当たる/抽象タグは無理」
+
+具体的・lexicalなタグは高精度。抽象的・主観的タグは壊滅。仮説どおり。
+
+- **適用OK(P≥0.70 & R実用)**: Boys'Love(0.95) / Yuri(0.88) / Animals動物(0.84) / Martial Arts格闘技(0.80) /
+  Henshin変身(0.80) / Food料理(0.78) / Autobiographical自伝(0.77) / Drawing絵漫画(0.72) / Youkai妖怪(0.72) /
+  Isekai異世界(0.71/R0.82) / Band(0.70) / Baseball(1.00) / Yakuza(0.65/R0.73)
+- **高P・低R(付ければ正しいが取りこぼし多=安全に適用可)**: Guns銃(1.00/R0.18) / Gore残酷(0.77/R0.20) /
+  Cute Girls美少女日常(1.00/R0.12) / Meta(0.75) / Educational学習(0.71) / Writing執筆(0.75)
+- **中(P0.5-0.7・truth-gap疑い)**: Reincarnation転生(0.52/R0.77) / Revenge復讐(0.65) / Death Gameデスゲーム(0.64) /
+  Police警察(0.59) / Acting演劇(0.62) / Medicine医療(0.52) / Survival(0.48/R0.68)
+- **不可(抽象/主観=壊滅)**: Philosophy哲学(0.00) / Tragedy悲劇(0.09) / Coming of Age成長(0.26) /
+  Iyashikei癒し系(0.29) / Surreal Comedy(0.10) / Unrequited Love片思い(0.04) / Found Family疑似家族(0.14) /
+  Slapstick(0.00) / Cohabitation同棲(0.13) / LGBTQ+(0.24)
+- 全85行は `.cache/genre-rakuten/tag-step2-metrics.json`。
+
+### ★ジャンル⇄タグ クロス確証(同一作で突合)
+
+タグ結果がジャンルの **Tier3 truth-gap 仮説を裏付け**:
+- **Food料理 P0.78** → ジャンル gourmet(measured P0.23)の低さは truth-gap で、実精度は高い、を独立に確証。
+- **Isekai異世界 P0.71/R0.82** → ジャンル isekai(P0.21)も同様に truth-gap。実は高精度。
+- → gourmet / isekai は **Tier3救済の必要なし=Tier1相当で適用可**と判断できる(タグ側が真値の代理検証になった)。
+
+## step3: 適用(高精度ラベルだけ振る)⬜ — ユーザGO待ち
+
+### ジャンル(対象 = provisional ∩ caption = 8,793 work)
+- 適用 = Tier1 + Tier2 + **gourmet/isekai(タグで確証)**。`genres_rakuten` 印、trusted/手動は上書きしない。
+- school は要素タグに直接対応なし→保留(genre school は付与過剰気味なので慎重)。
+- 不適用 = war / historical / suspense / yokai / mind-game / essay。
+
+### タグ(要素・additive。対象 = caption有り work でタグ未保有 or 補完)
+- 適用 = 上記「適用OK」+「高P低R」群の約20タグのみ。中・不可群は振らない。
+- 表示 = 要素欄(tag-i18n 和訳)。
+
+GO後、同分類器を本番対象に流して高精度ラベルのみ純粋追加 → promote で焼込。
