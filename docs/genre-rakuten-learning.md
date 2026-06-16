@@ -197,15 +197,36 @@ FP(LLM予測したが truth に無い)を本文サンプリングしたところ
 - **Isekai異世界 P0.71/R0.82** → ジャンル isekai(P0.21)も同様に truth-gap。実は高精度。
 - → gourmet / isekai は **Tier3救済の必要なし=Tier1相当で適用可**と判断できる(タグ側が真値の代理検証になった)。
 
-## step3: 適用(高精度ラベルだけ振る)⬜ — ユーザGO待ち
+---
 
-### ジャンル(対象 = provisional ∩ caption = 8,793 work)
-- 適用 = Tier1 + Tier2 + **gourmet/isekai(タグで確証)**。`genres_rakuten` 印、trusted/手動は上書きしない。
-- school は要素タグに直接対応なし→保留(genre school は付与過剰気味なので慎重)。
-- 不適用 = war / historical / suspense / yokai / mind-game / essay。
+## 品質最大化パイプライン(①→④。ユーザGO 2026-06-16「4まで慎重に」)
 
-### タグ(要素・additive。対象 = caption有り work でタグ未保有 or 補完)
-- 適用 = 上記「適用OK」+「高P低R」群の約20タグのみ。中・不可群は振らない。
-- 表示 = 要素欄(tag-i18n 和訳)。
+スコープ = **ジャンル/要素タグの品質のみ**。書込は `genres`(provisional側)と `tags`(要素)だけ、純粋追加。
 
-GO後、同分類器を本番対象に流して高精度ラベルのみ純粋追加 → promote で焼込。
+### Phase① caption強化 ✅
+`_genre_rakuten_caption_v2.py` → `corpus-v2.jsonl`。巻番号順に複数巻あらすじを連結(1巻=導入を先頭・重複除去・600字)。
+caption有り 28,809 work(複数巻連結 63%)。適用対象 = genre(provisional)8,793 / tag(theme tag未保有)20,660。
+
+### Phase② 信頼度較正 ✅
+`genretag-calib-heldout` workflow(v2caption+信頼度) → `_genre_rakuten_phase2_calib.py` → `phase2-calibration.json`。
+信頼度(high/medium/low)で適合率が単調上昇=**閾値運用が有効**(例 drama 0.58→0.73@high, sci-fi 0.69→0.90@high, Video Games 0.31→0.79@high)。
+
+**採用ジャンル(13)** = romance/fantasy/sports/mecha/baseball/mahou-shoujo(全confで P≥0.8)
++ comedy/slice-of-life/action/supernatural/sci-fi/horror/soccer(**high限定**で P≥0.8)。
+
+**採用タグ(26)** = Boys'Love/Isekai/Yuri/Animals/Food/Baseball/Fashion/Band/Autobiographical/Martial Arts(全conf)
++ Magic/Love Triangle/Age Gap/Female Harem/Family Life/Revenge/Youkai/Video Games/Police/Acting/Yakuza/Slavery/Death Game/Assassins(high)
++ Drawing/Cute Girls(medium)。
+
+**較正の確認**: isekai/gourmet ジャンルは truth-gap で不採用(P0.25/0.27)だが、対応タグ Food(0.81@high)/Isekai(0.84@high)は採用
+→ 内容は検出できている=**ジャンル側は Phase④ で救済**(2パスで本文再判定)。school は不採用(過付与)。
+
+### Phase③ 本番分類 pass1 ⬜(実行中→)
+適用対象(provisional ∪ theme tag未保有 ≈ union)を v2caption+信頼度で分類 → **採用ラベル×閾値超のみ純粋追加**。
+- ジャンル: provisional work(trusted空)に `genres` 上書き(`genres_rakuten:true`、trusted/手動は不変)。
+- タグ: theme tag未保有 work の `tags` に `category:"Rakuten"` で追加(既存tag名はdedup)。
+- 閾値未達・gourmet/isekai等のグレーは Phase④ 送り。
+
+### Phase④ 2パス救済 ⬜
+グレー帯ラベルを別エージェントが本文で再判定 → 確証分のみ追加・過付与は破棄。
+確認後に promote で本番 manga.v2 へ焼込(promoteはGO別途)。
