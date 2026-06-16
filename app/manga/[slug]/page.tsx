@@ -62,8 +62,10 @@ export default async function MangaDetailPage({
         ← ホームへ戻る
       </Link>
       <div className={`mt-6 grid gap-8 ${cover ? "md:grid-cols-[260px_1fr]" : ""}`}>
+        {/* ヒーロー表紙: モバイルでは巻コーフロー(下の VolumeRow)が表紙を見せるため非表示
+            (= タイトル上に全幅の巨大画像が出るのを抑止)。 デスクトップのみ 260px サイドバー表示。 */}
         {cover && (
-          <div className="relative aspect-[2/3] bg-[var(--color-surface-2)] rounded overflow-hidden">
+          <div className="relative aspect-[2/3] bg-[var(--color-surface-2)] rounded overflow-hidden hidden md:block">
             <CoverImage src={cover} alt={`${manga.title} 1巻 表紙`} sizes="260px" size="detail" />
           </div>
         )}

@@ -32,6 +32,10 @@ export default function VolumeCoverflow({ title, volumes }: { title: string; vol
   const init = Math.max(0, vols.findIndex((v) => v.number === 1));
   const [focus, setFocus] = useState(init < 0 ? 0 : init);
   const touch = useRef<number | null>(null);
+  // スワイプ中の指追従(translateX)+ 離した時のスライドアニメ用。
+  const [dragX, setDragX] = useState(0);
+  const [anim, setAnim] = useState(false); // true=transition有効(離した直後のスライド/スナップ)
+  const STEP = 104; // 1スロット送り幅 = タイル96 + gap8
 
   if (n === 0) return null;
 
@@ -48,17 +52,47 @@ export default function VolumeCoverflow({ title, volumes }: { title: string; vol
   const move = (d: number) => setFocus((f) => ((f + d) % n + n) % n);
   const bulk = `https://www.amazon.co.jp/s?k=${encodeURIComponent(`${title} 全巻 コミック セット`)}`;
 
+  const endSwipe = (endX: number) => {
+    if (touch.current == null) return;
+    const dx = endX - touch.current;
+    touch.current = null;
+    if (Math.abs(dx) > 40) {
+      // 送る方向に1スロット分スライドさせてから focus を確定(窓が1つずれて見た目連続)。
+      const dir = dx < 0 ? 1 : -1; // 左スワイプ=次へ
+      setAnim(true);
+      setDragX(-dir * STEP);
+      window.setTimeout(() => {
+        setAnim(false);
+        setDragX(0);
+        move(dir);
+      }, 220);
+    } else {
+      // しきい値未満 = 元位置へスナップバック。
+      setAnim(true);
+      setDragX(0);
+      window.setTimeout(() => setAnim(false), 180);
+    }
+  };
+
   return (
     <div>
+      {/* 外側=クリップ + タッチ受け / 内側=指追従で translateX するトラック */}
       <div
-        className="relative flex select-none items-center justify-center gap-2 overflow-hidden py-3"
-        onTouchStart={(e) => { touch.current = e.touches[0].clientX; }}
-        onTouchEnd={(e) => {
+        className="relative select-none overflow-hidden py-3"
+        onTouchStart={(e) => { touch.current = e.touches[0].clientX; setAnim(false); setDragX(0); }}
+        onTouchMove={(e) => {
           if (touch.current == null) return;
-          const dx = e.changedTouches[0].clientX - touch.current;
-          if (dx > 40) move(-1);
-          else if (dx < -40) move(1);
-          touch.current = null;
+          const raw = e.touches[0].clientX - touch.current;
+          const lim = STEP + 40; // ±2スロットしか描画しないので窓外(空白)まで引っ張らせない
+          setDragX(Math.max(-lim, Math.min(lim, raw)));
+        }}
+        onTouchEnd={(e) => endSwipe(e.changedTouches[0].clientX)}
+      >
+      <div
+        className="flex items-center justify-center gap-2"
+        style={{
+          transform: `translateX(${dragX}px)`,
+          transition: anim ? "transform 220ms ease-out" : "none",
         }}
       >
         {slots.map(({ off, idx }) => {
@@ -95,6 +129,7 @@ export default function VolumeCoverflow({ title, volumes }: { title: string; vol
             </button>
           );
         })}
+      </div>
       </div>
 
       {/* フォーカス巻の情報 + カート */}
