@@ -965,6 +965,21 @@ def _load_page_dedup() -> set:
 _PAGE_DEDUP_DROPS: set = _load_page_dedup()
 
 
+def _load_drop_series_keys() -> set:
+    """非掲載 series_key 集合(non-manga-drop.yml)。 ★merge除外用: drop済series(外国版/
+    フィルムコミック等)が find_related_series_ids で他ページに混入するのを防ぐ。
+    drop は「単独ページ化を止める」だけだったため、同題merge経由で巻が漏れ込んでいた
+    (= コナン映画フィルムコミックが同題コミカライズページに混入)。"""
+    p = ROOT / "data" / "seeds" / "non-manga-drop.yml"
+    if not p.exists():
+        return set()
+    doc = yaml.safe_load(open(p, encoding="utf-8")) or {}
+    return {e["series_key"] for e in doc.get("non_manga", []) if e.get("series_key")}
+
+
+_DROP_SERIES_KEYS: set = _load_drop_series_keys()
+
+
 def _load_genre_additions() -> dict:
     """genre-additions.yml(野球/サッカー手動)+ genre-wiki.yml(Wikipediaカテゴリ突合)。
     どちらも信頼源の純粋追加 = series_key -> 追加ジャンルkey list。"""
@@ -1254,6 +1269,18 @@ def find_related_series_ids(con: sqlite3.Connection, main: dict) -> list[int]:
     for sid in list(ids):
         if sid in merge_sids_map:
             ids.update(merge_sids_map[sid])
+    # ★ drop済(非掲載)series を merge cluster から除外。
+    #   同題auto-mergeで フィルムコミック等(non-manga-drop登録済)が 実ページ(コミカライズ
+    #   /本編)に巻として混入するのを防ぐ。 main自身はmain loopでdrop判定通過済なので必ず保持。
+    if _DROP_SERIES_KEYS and len(ids) > 1:
+        keep = {main["id"]}
+        ph = ",".join("?" for _ in ids)
+        for r in cur.execute(
+            f"SELECT id, series_key FROM series WHERE id IN ({ph})", list(ids)
+        ).fetchall():
+            if r[1] not in _DROP_SERIES_KEYS:
+                keep.add(r[0])
+        ids = keep
     return list(ids)
 
 
