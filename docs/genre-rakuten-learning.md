@@ -86,12 +86,85 @@
 
 ---
 
-## step1: train/held-out 分割 + 手法決定 ⬜ (進行中)
+## step1: train/held-out 分割 + 手法決定 ✅ (2026-06-16)
 
-(環境: sklearn/numpy/tokenizer 無し = pure Python or LLM。決定待ち → 下に追記)
+スクリプト: `scripts/_genre_rakuten_step1.py`
+- 手法 = **LLM分類(option1)**。ユーザ裁定: 意味的ジャンルに強く、本番step3の適用方式と同一なので検証が本物。
+- 分割: 教師20,016 を seed固定(20260616)シャッフル → **held-out 3,000 / train 17,016**。
+- **学習可能28キー** = master32 − {gag, romcom, samurai, 4-koma}(step0で教師ゼロ判明)。
+- **データ由来の学習**(`genre-cues.json` / `rubric.md`): train17,016 から **ジャンル別 distinctive keyword**
+  を log-odds で採掘(可読・監査可)。例:
+  - baseball = 野球漫画 / 甲子園 / 投手 / 球界
+  - isekai = 異世界召喚 / ドワーフ / ティア
+  - war = 太平洋 / 戦争 / 戦場 / 昭和
+  - gourmet = レシピ / 胃袋 / 賞味 / グルメコメディ
+  - bl = ノンケ / オメガバース / 発情期 / アルファ
+  - 全28キーは `.cache/genre-rakuten/rubric.md`。
 
-## step2: held-out 検証(ジャンル別 適合率/再現率)⬜
+## step2: held-out 検証(ジャンル別 適合率/再現率)✅ (2026-06-16)
 
-(ここに per-genre precision/recall/F1 表を入れる = 「学習の中身」の本体)
+スクリプト: 分類=workflow `genre-rakuten-heldout`(75エージェント並列, caption-onlyで28キー分類)/
+評価=`scripts/_genre_rakuten_step2_eval.py`。成果物 `.cache/genre-rakuten/step2-metrics.json`。
+
+- 突合 2,999 work / 欠損1。LLMが禁止キーを使った回数(=直感的に有意なジャンル): romcom 84 / 4-koma 24 / samurai 17 / gag 13。
+- **全体**: micro P/R/F1 = **0.649 / 0.598 / 0.623**、 macro-F1 = 0.560。
+
+### ★ジャンル別 P/R/F1(support=truth正例数, pred=LLM予測数)
+
+| genre | 名称 | support | pred | P | R | F1 | 判定 |
+|---|---|---:|---:|---:|---:|---:|---|
+| romance | 恋愛 | 1288 | 988 | **0.91** | 0.70 | 0.79 | ◎Tier1 |
+| comedy | コメディ | 1155 | 902 | 0.77 | 0.60 | 0.68 | ○Tier2 |
+| drama | ドラマ | 934 | 851 | 0.60 | 0.55 | 0.57 | △Tier2 |
+| fantasy | ファンタジー | 772 | 694 | **0.87** | 0.78 | 0.82 | ◎Tier1 |
+| slice-of-life | 日常 | 744 | 419 | 0.71 | 0.40 | 0.51 | ○Tier2 |
+| action | アクション | 594 | 537 | 0.74 | 0.67 | 0.71 | ○Tier2 |
+| supernatural | 超常 | 405 | 306 | 0.69 | 0.52 | 0.59 | ○Tier2 |
+| adventure | 冒険 | 334 | 206 | 0.65 | 0.40 | 0.49 | ○Tier2 |
+| ecchi | お色気 | 287 | 213 | 0.62 | 0.46 | 0.53 | ○Tier2 |
+| mystery | ミステリー | 215 | 146 | 0.63 | 0.43 | 0.51 | ○Tier2 |
+| sci-fi | SF | 189 | 169 | 0.73 | 0.65 | 0.69 | ○Tier2 |
+| school | 学園 | 179 | 607 | 0.20 | 0.69 | 0.32 | ⚠Tier3(truth-gap) |
+| mind-game | 頭脳戦 | 147 | 29 | 0.45 | 0.09 | 0.15 | ✕Tier4(LLM検出不足) |
+| sports | スポーツ | 135 | 117 | **0.89** | 0.77 | 0.82 | ◎Tier1 |
+| horror | ホラー | 134 | 127 | 0.70 | 0.66 | 0.68 | ○Tier2 |
+| bl | ボーイズラブ | 102 | 134 | 0.57 | 0.74 | 0.64 | ○Tier2(lexical堅) |
+| suspense | サスペンス | 64 | 164 | 0.26 | 0.66 | 0.37 | ✕Tier4(過付与) |
+| isekai | 異世界 | 63 | 243 | 0.21 | 0.82 | 0.34 | ⚠Tier3(truth-gap) |
+| historical | 歴史 | 57 | 157 | 0.24 | 0.65 | 0.35 | ✕Tier4(過付与) |
+| music | 音楽 | 54 | 67 | 0.63 | 0.78 | 0.69 | ○Tier2(lexical堅) |
+| gourmet | グルメ | 32 | 91 | 0.23 | 0.66 | 0.34 | ⚠Tier3(truth-gap) |
+| mecha | メカ | 29 | 22 | **0.91** | 0.69 | 0.78 | ◎Tier1 |
+| yokai | 妖怪 | 19 | 36 | 0.19 | 0.37 | 0.26 | ✕Tier4 |
+| mahou-shoujo | 魔法少女 | 18 | 17 | **0.82** | 0.78 | 0.80 | ◎Tier1(支持薄) |
+| baseball | 野球 | 18 | 19 | **0.90** | 0.94 | 0.92 | ◎Tier1(支持薄) |
+| essay | エッセイ漫画 | 13 | 47 | 0.21 | 0.77 | 0.33 | ⚠支持薄 |
+| soccer | サッカー | 11 | 14 | **0.79** | 1.00 | 0.88 | ◎Tier1(支持薄) |
+| war | 戦争 | 4 | 49 | 0.06 | 0.75 | 0.11 | ✕Tier4(過付与/支持極薄) |
+
+### ★最重要の発見 = 測定精度は「下限値」(truth が不完全)
+
+FP(LLM予測したが truth に無い)を本文サンプリングしたところ、**多くが LLM 正解で truth 側の取りこぼし**だった:
+- **gourmet**: 「中華料理に大革命」「夜食レシピ」「らーめんガール」= 料理漫画。truth(AniList)が未ラベル → P0.23 は大幅過小評価。
+- **isekai**: 「乙女ゲーム世界に転生」「クズ男に転生」= 教科書的転生もの。truth が保守的 → P0.21 は過小評価。
+- **school**: 「転校生」「学園内」「高校生」= 明確に学園。AniList が school を genre 化しない方針 → P0.20 は過小評価。
+- 対して **war / historical / suspense** は「戦・軍」「昭和・戦国」「デスゲーム」への**真の過反応**(LLMが誤って広く付ける)。
+  ※ war は AniList が "War" theme を意図的に除外([[genre_quality_improvement]])する設計と整合 = truth/LLM 双方が信用できない。
+
+帰結:
+1. **lexicalに根拠が明確なジャンル(gourmet/isekai/school/baseball/sports/music/mecha/bl)は、測定Pが低くても実精度は高い**。truthの欠落が見かけのPを下げているだけ。
+2. **真の過付与ジャンル(war/historical/suspense/yokai)は適用しない**。
+3. mind-game は LLM が検出不足(R0.09)=この源では拾えない。
+4. → 適用可否は「測定P閾値」だけで決めず、**truth-gap型 と 過付与型 を区別**する必要がある(下記Tier)。
+
+### 適用Tier(step3の振り分け案)
+
+- **Tier1 = そのまま適用OK**(測定P≥0.80, lexical堅牢): romance / fantasy / sports / baseball / soccer / mecha / mahou-shoujo
+- **Tier2 = 適用可(中精度)**: comedy / action / sci-fi / horror / supernatural / mystery / music / ecchi / bl / slice-of-life / adventure / drama
+- **Tier3 = 実精度は高い疑い(truth-gap)= 本文再判定で救済してから適用**: gourmet / isekai / school
+- **Tier4 = 適用しない**(過付与 or 検出不能): war / historical / suspense / yokai / mind-game / essay
 
 ## step3: 適用(高精度ジャンルだけ provisional に振る)⬜ — ユーザGO待ち
+
+対象 = provisional ∩ caption = **8,793 work**。Tier1(+Tier2)を `genres_rakuten` 印で付与、
+trusted/手動は上書きしない。GO後に実施。
