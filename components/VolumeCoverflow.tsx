@@ -31,25 +31,28 @@ export default function VolumeCoverflow({ title, volumes }: { title: string; vol
   const n = vols.length;
   const init = Math.max(0, vols.findIndex((v) => v.number === 1));
   const [focus, setFocus] = useState(init < 0 ? 0 : init);
-  const touch = useRef<number | null>(null);
+  const touch = useRef<{ x: number; t: number } | null>(null);
   // スワイプ中の指追従(translateX)+ 離した時のスライドアニメ用。
   const [dragX, setDragX] = useState(0);
   const [anim, setAnim] = useState(false); // true=transition有効(離した直後のスライド/スナップ)
+  const [flight, setFlight] = useState(0); // フリック多段移動のアニメ中ステップ数(0=なし)
   const STEP = 104; // 1スロット送り幅 = タイル96 + gap8
 
   if (n === 0) return null;
 
   // 表示スロット(±3)。 両端を見せてスワイプ時に「次に来る巻」が視認できるように。
-  // 7巻以下はループせず全部並べる。
+  // 7巻以下はループせず全部並べる。 多段フリック中(flight≠0)は移動経路の巻も描画して滑らせる。
   let slots: { off: number; idx: number }[];
-  if (n <= 7) {
+  if (n <= 7 && flight === 0) {
     slots = vols.map((_, idx) => ({ idx, off: idx - focus }));
   } else {
+    const lo = Math.min(-3, flight - 1);
+    const hi = Math.max(3, flight + 1);
     slots = [];
-    for (let off = -3; off <= 3; off++) slots.push({ off, idx: ((focus + off) % n + n) % n });
+    for (let off = lo; off <= hi; off++) slots.push({ off, idx: ((focus + off) % n + n) % n });
   }
   // スワイプ中、track が dragX ずれた時に「いま中心に最も近い=離せば選ばれる」スロットの off。
-  const dragging = dragX !== 0;
+  const dragging = dragX !== 0 && flight === 0;
   const liveOff = dragging
     ? Math.max(-3, Math.min(3, Math.round(-dragX / STEP)))
     : 0;
@@ -60,25 +63,34 @@ export default function VolumeCoverflow({ title, volumes }: { title: string; vol
 
   const endSwipe = (endX: number) => {
     if (touch.current == null) return;
-    const dx = endX - touch.current;
+    const { x: sx, t: st } = touch.current;
     touch.current = null;
-    // ★スワイプ中の中心ハイライト(liveOff=round(-dragX/STEP))と完全一致させる。
-    //   = 「離せば中心になる」と見えていた巻が、必ずそのまま中心に来る。
-    const steps = Math.max(-1, Math.min(1, Math.round(-dx / STEP)));
-    if (steps !== 0) {
-      setAnim(true);
-      setDragX(-steps * STEP); // ハイライト巻を中心位置までスライド
-      window.setTimeout(() => {
-        setAnim(false);
-        setDragX(0);
-        move(steps);
-      }, 220);
-    } else {
-      // 半スロット未満 = 元位置へスナップバック。
+    const dx = endX - sx;
+    const dt = Math.max(1, Date.now() - st);
+    const v = Math.abs(dx) / dt; // 指の速度(px/ms)= フリックの強さ
+    // 微動/タップ = スナップバック(選択はonClickが担当)。
+    if (Math.abs(dx) < 30 && v < 0.25) {
       setAnim(true);
       setDragX(0);
-      window.setTimeout(() => setAnim(false), 180);
+      window.setTimeout(() => setAnim(false), 200);
+      return;
     }
+    const dir = dx < 0 ? 1 : -1; // 左スワイプ=次へ
+    // ★移動量・速度で歩数を変える: ゆっくり小さく=1冊(精密)、速いフリック/大きく振る=複数冊(遠くへ届く)。
+    const maxJump = n > 7 ? 15 : 1; // ループ表示(n>7)の時だけ多段。 全表示(小n)は1冊ずつ。
+    let mag = Math.round(Math.abs(dx) / STEP) + Math.floor(v * 3.2);
+    mag = Math.max(1, Math.min(maxJump, mag));
+    const steps = mag * dir;
+    const dur = Math.min(620, 230 + (mag - 1) * 42); // 遠いほど少し長く滑らせる
+    setAnim(true);
+    if (mag > 1) setFlight(steps); // 移動経路の巻を描画(window拡張)
+    setDragX(-steps * STEP); // 選ばれる巻が中心に来るまでスライド
+    window.setTimeout(() => {
+      setAnim(false);
+      setDragX(0);
+      setFlight(0);
+      move(steps);
+    }, dur);
   };
 
   return (
@@ -86,10 +98,10 @@ export default function VolumeCoverflow({ title, volumes }: { title: string; vol
       {/* 外側=クリップ + タッチ受け / 内側=指追従で translateX するトラック */}
       <div
         className="relative select-none overflow-hidden py-3"
-        onTouchStart={(e) => { touch.current = e.touches[0].clientX; setAnim(false); setDragX(0); }}
+        onTouchStart={(e) => { touch.current = { x: e.touches[0].clientX, t: Date.now() }; setAnim(false); setDragX(0); setFlight(0); }}
         onTouchMove={(e) => {
           if (touch.current == null) return;
-          const raw = e.touches[0].clientX - touch.current;
+          const raw = e.touches[0].clientX - touch.current.x;
           const lim = STEP + 40; // 窓外(空白)まで引っ張らせない上限(±3描画なので1巻分強の追従で十分)
           setDragX(Math.max(-lim, Math.min(lim, raw)));
         }}
@@ -99,7 +111,10 @@ export default function VolumeCoverflow({ title, volumes }: { title: string; vol
         className="flex items-center justify-center gap-2"
         style={{
           transform: `translateX(${dragX}px)`,
-          transition: anim ? "transform 220ms ease-out" : "none",
+          // 多段フリック(flight)は歩数に応じて少し長く、 通常スライドは230ms。
+          transition: anim
+            ? `transform ${Math.min(620, 230 + Math.max(0, Math.abs(flight) - 1) * 42)}ms ease-out`
+            : "none",
         }}
       >
         {slots.map(({ off, idx }) => {
