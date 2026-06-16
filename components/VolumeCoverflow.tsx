@@ -39,14 +39,20 @@ export default function VolumeCoverflow({ title, volumes }: { title: string; vol
 
   if (n === 0) return null;
 
-  // 表示スロット(±2)。 5巻以下はループせず全部並べる。
+  // 表示スロット(±3)。 両端を見せてスワイプ時に「次に来る巻」が視認できるように。
+  // 7巻以下はループせず全部並べる。
   let slots: { off: number; idx: number }[];
-  if (n <= 5) {
+  if (n <= 7) {
     slots = vols.map((_, idx) => ({ idx, off: idx - focus }));
   } else {
     slots = [];
-    for (let off = -2; off <= 2; off++) slots.push({ off, idx: ((focus + off) % n + n) % n });
+    for (let off = -3; off <= 3; off++) slots.push({ off, idx: ((focus + off) % n + n) % n });
   }
+  // スワイプ中、track が dragX ずれた時に「いま中心に最も近い=離せば選ばれる」スロットの off。
+  const dragging = dragX !== 0;
+  const liveOff = dragging
+    ? Math.max(-3, Math.min(3, Math.round(-dragX / STEP)))
+    : 0;
   const cur = vols[focus];
   const links = searchLinks(title, cur);
   const move = (d: number) => setFocus((f) => ((f + d) % n + n) % n);
@@ -56,18 +62,19 @@ export default function VolumeCoverflow({ title, volumes }: { title: string; vol
     if (touch.current == null) return;
     const dx = endX - touch.current;
     touch.current = null;
-    if (Math.abs(dx) > 40) {
-      // 送る方向に1スロット分スライドさせてから focus を確定(窓が1つずれて見た目連続)。
-      const dir = dx < 0 ? 1 : -1; // 左スワイプ=次へ
+    // ★スワイプ中の中心ハイライト(liveOff=round(-dragX/STEP))と完全一致させる。
+    //   = 「離せば中心になる」と見えていた巻が、必ずそのまま中心に来る。
+    const steps = Math.max(-1, Math.min(1, Math.round(-dx / STEP)));
+    if (steps !== 0) {
       setAnim(true);
-      setDragX(-dir * STEP);
+      setDragX(-steps * STEP); // ハイライト巻を中心位置までスライド
       window.setTimeout(() => {
         setAnim(false);
         setDragX(0);
-        move(dir);
+        move(steps);
       }, 220);
     } else {
-      // しきい値未満 = 元位置へスナップバック。
+      // 半スロット未満 = 元位置へスナップバック。
       setAnim(true);
       setDragX(0);
       window.setTimeout(() => setAnim(false), 180);
@@ -83,7 +90,7 @@ export default function VolumeCoverflow({ title, volumes }: { title: string; vol
         onTouchMove={(e) => {
           if (touch.current == null) return;
           const raw = e.touches[0].clientX - touch.current;
-          const lim = STEP + 40; // ±2スロットしか描画しないので窓外(空白)まで引っ張らせない
+          const lim = STEP + 40; // 窓外(空白)まで引っ張らせない上限(±3描画なので1巻分強の追従で十分)
           setDragX(Math.max(-lim, Math.min(lim, raw)));
         }}
         onTouchEnd={(e) => endSwipe(e.changedTouches[0].clientX)}
@@ -97,13 +104,15 @@ export default function VolumeCoverflow({ title, volumes }: { title: string; vol
       >
         {slots.map(({ off, idx }) => {
           const v = vols[idx];
-          const dist = Math.abs(off);
+          // 中心 = スワイプ中は「離せば選ばれる」live中心、 静止時は focus(off=0)。
+          const dist = Math.abs(off - liveOff);
           const center = dist === 0;
-          const bright = center ? 1 : dist === 1 ? 0.72 : 0.5;
+          // スワイプ中は中心以外をより暗く(=どれが選ばれるか一目で分かる)。
+          const bright = center ? 1 : dragging ? (dist === 1 ? 0.45 : 0.28) : dist === 1 ? 0.72 : 0.5;
           return (
             <button
               key={`${off}-${idx}`}
-              onClick={() => !center && setFocus(idx)}
+              onClick={() => off !== 0 && setFocus(idx)}
               aria-label={`第${v.number}巻`}
               className="relative shrink-0 overflow-hidden rounded-md bg-[var(--color-surface-2)]"
               style={{
@@ -113,7 +122,7 @@ export default function VolumeCoverflow({ title, volumes }: { title: string; vol
                 outline: center ? "3px solid var(--color-accent)" : "none",
                 outlineOffset: center ? "-1px" : 0,
                 zIndex: center ? 2 : 1,
-                transition: "filter 220ms ease",
+                transition: dragging ? "filter 80ms linear" : "filter 220ms ease",
               }}
             >
               {v.cover_url ? (
@@ -135,13 +144,15 @@ export default function VolumeCoverflow({ title, volumes }: { title: string; vol
       {/* フォーカス巻の情報 + カート */}
       <div className="px-1">
         <div className="flex items-baseline gap-2">
-          <span className="text-lg font-bold">第{cur.number}巻</span>
+          <span className="text-lg font-bold">
+            {cur.volume_label ?? `第${cur.number}巻`}
+          </span>
           {fmtDate(cur.release_date) && (
             <span className="text-xs text-ink/55">・ {fmtDate(cur.release_date)}</span>
           )}
           <span className="ml-auto text-[10px] text-ink/40">← スワイプ / タップで選択 →</span>
         </div>
-        <div className="mt-2 grid grid-cols-3 gap-2">
+        <div className="mt-5 grid grid-cols-3 gap-2">
           <a href={links.rakuten} target="_blank" rel="noopener noreferrer"
              className="spring-press rounded-full bg-[#bf0000] py-2 text-center text-sm font-bold text-white">楽天</a>
           <a href={links.yahoo} target="_blank" rel="noopener noreferrer"
