@@ -389,13 +389,10 @@ dedup:
   title: めちゃ盛!本当にあった〔○生〕ここだけの話祭
   isbns: 7
 - drop: meitantei-conan-tokubetsuhen
-  canonical: meitantei-conan-2011
-  title: 名探偵コナン
-  isbns: 107
-- drop: meitantei-conan
-  canonical: meitantei-conan-2011
-  title: 名探偵コナン
-  isbns: 107
+  canonical: meitantei-conan-2005
+  title: 名探偵コナン特別編
+  isbns: 38
+  note: '[2026-06-16修正] 旧canonical meitantei-conan-2011 はslug-overrideで消滅。特別編は meitantei-conan-2005 が出力するためそちらへ付替(redirect 404防止)'
 - drop: meitantei-conan-tokubetsuhen-2002
   canonical: meitantei-conan-2005
   title: 名探偵コナン特別編
