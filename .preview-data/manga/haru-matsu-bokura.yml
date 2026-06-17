@@ -91,9 +91,14 @@ editions:
     release_date: 2018-12
   - number: 12
     asin: null
-    isbn13: '9784065156001'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/6001/9784065156001.jpg?_ex=200x200
+    isbn13: '9784065162569'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/2569/9784065162569.jpg?_ex=200x200
     release_date: 2019-06
+    variants:
+    - label: 特装版
+      isbn13: '9784065156001'
+      cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/6001/9784065156001.jpg?_ex=200x200
+      price: 1595
   - number: 13
     asin: null
     isbn13: '9784065180617'
@@ -101,9 +106,14 @@ editions:
     release_date: 2019-12
   - number: 14
     asin: null
-    isbn13: '9784065195000'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/5000/9784065195000.jpg?_ex=200x200
+    isbn13: '9784065194997'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/4997/9784065194997.jpg?_ex=200x200
     release_date: 2020-05
+    variants:
+    - label: 特装版
+      isbn13: '9784065195000'
+      cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/5000/9784065195000.jpg?_ex=200x200
+      price: 1100
 publishers:
 - kodansha
 anilist_id: 85624

@@ -59,9 +59,14 @@ editions:
     release_date: '2015-11-12'
   - number: 6
     asin: null
-    isbn13: '9784575849882'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/9882/9784575849882.jpg?_ex=200x200
+    isbn13: '9784575849875'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/9875/9784575849875.jpg?_ex=200x200
     release_date: 2017-05
+    variants:
+    - label: DVD付き限定版
+      isbn13: '9784575849882'
+      cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/9882/9784575849882.jpg?_ex=200x200
+      price: 1650
   - number: 7
     asin: null
     isbn13: '9784575857054'

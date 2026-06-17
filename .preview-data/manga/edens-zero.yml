@@ -34,9 +34,14 @@ editions:
   volumes:
   - number: 1
     asin: null
-    isbn13: '9784065132357'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/2357/9784065132357.jpg?_ex=200x200
+    isbn13: '9784065132340'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/2340/9784065132340_1_7.jpg?_ex=200x200
     release_date: 2018-09
+    variants:
+    - label: 特装版
+      isbn13: '9784065132357'
+      cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/2357/9784065132357.jpg?_ex=200x200
+      price: 1100
   - number: 2
     asin: null
     isbn13: '9784065132494'

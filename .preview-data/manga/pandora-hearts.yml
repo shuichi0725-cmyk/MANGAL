@@ -140,9 +140,14 @@ editions:
     release_date: 2013-11
   - number: 22
     asin: null
-    isbn13: '9784757541962'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/1962/9784757541962.jpg?_ex=200x200
+    isbn13: '9784757541979'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/1979/9784757541979.jpg?_ex=200x200
     release_date: 2014-04
+    variants:
+    - label: 初回限定特装版
+      isbn13: '9784757541962'
+      cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/1962/9784757541962.jpg?_ex=200x200
+      price: 1272
   - number: 23
     asin: null
     isbn13: '9784757545281'

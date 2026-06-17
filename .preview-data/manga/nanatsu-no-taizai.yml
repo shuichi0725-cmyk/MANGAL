@@ -242,9 +242,14 @@ editions:
     release_date: 2018-08
   - number: 34
     asin: null
-    isbn13: '9784065128473'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/8473/9784065128473.jpg?_ex=200x200
+    isbn13: '9784065129913'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/9913/9784065129913_1_3.jpg?_ex=200x200
     release_date: 2018-11
+    variants:
+    - label: 限定版
+      isbn13: '9784065128473'
+      cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/8473/9784065128473.jpg?_ex=200x200
+      price: 3564
   - number: 35
     asin: null
     isbn13: '9784065138779'
@@ -272,9 +277,14 @@ editions:
     release_date: 2019-11
   - number: 40
     asin: null
-    isbn13: '9784065182727'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/2727/9784065182727.jpg?_ex=200x200
+    isbn13: '9784065182710'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/2710/9784065182710_1_3.jpg?_ex=200x200
     release_date: 2020-02
+    variants:
+    - label: 特装版
+      isbn13: '9784065182727'
+      cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/2727/9784065182727.jpg?_ex=200x200
+      price: 1815
   - number: 41
     asin: null
     isbn13: '9784065186855'

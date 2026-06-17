@@ -65,24 +65,44 @@ editions:
     release_date: 2018-04
   - number: 8
     asin: null
-    isbn13: '9784063970371'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0371/9784063970371.jpg?_ex=200x200
+    isbn13: '9784065132463'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/2463/9784065132463_1_5.jpg?_ex=200x200
     release_date: 2018-11
+    variants:
+    - label: 限定版
+      isbn13: '9784063970371'
+      cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0371/9784063970371.jpg?_ex=200x200
+      price: 3666
   - number: 9
     asin: null
-    isbn13: '9784065170359'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0359/9784065170359.jpg?_ex=200x200
+    isbn13: '9784065154977'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/4977/9784065154977_1_5.jpg?_ex=200x200
     release_date: 2019-07
+    variants:
+    - label: 特装版
+      isbn13: '9784065170359'
+      cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0359/9784065170359.jpg?_ex=200x200
+      price: 1012
   - number: 10
     asin: null
-    isbn13: '9784065188804'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/8804/9784065188804.jpg?_ex=200x200
+    isbn13: '9784065187197'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/7197/9784065187197.jpg?_ex=200x200
     release_date: 2020-03
+    variants:
+    - label: 特装版
+      isbn13: '9784065188804'
+      cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/8804/9784065188804.jpg?_ex=200x200
+      price: 1320
   - number: 11
     asin: null
-    isbn13: '9784065216705'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/6705/9784065216705.jpg?_ex=200x200
+    isbn13: '9784065216699'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/6699/9784065216699.jpg?_ex=200x200
     release_date: 2020-12
+    variants:
+    - label: 特装版
+      isbn13: '9784065216705'
+      cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/6705/9784065216705.jpg?_ex=200x200
+      price: 1012
   - number: 12
     asin: null
     isbn13: '9784065263945'
