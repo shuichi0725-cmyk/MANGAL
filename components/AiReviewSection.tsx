@@ -1,9 +1,37 @@
 import Link from "next/link";
 import type { AiReviewSection } from "@/lib/loadData";
+import { characterFor, type AiCharacter } from "@/lib/aiCharacters";
+
+/** AIキャラのアバター(飾り)。 スプライト(img)があれば絵、 無ければ emoji フォールバック。
+ *  ★ブランド名は名乗らせない=飾りのみ。 実名は別途テキストで表示([[ai_review_league_operation]])。 */
+function Avatar({ c, size = 40 }: { c: AiCharacter; size?: number }) {
+  return (
+    <span
+      aria-hidden
+      className="inline-flex shrink-0 items-center justify-center rounded-xl border shadow-sm"
+      style={{
+        width: size,
+        height: size,
+        backgroundColor: c.tint,
+        borderColor: c.color,
+        fontSize: Math.round(size * 0.52),
+        lineHeight: 1,
+      }}
+    >
+      {c.img ? (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img src={c.img} alt="" width={size} height={size} style={{ imageRendering: "pixelated" }} />
+      ) : (
+        c.face
+      )}
+    </span>
+  );
+}
 
 /** AI書評家リーグの1節を描画(課題図書+共通プロンプト+各社AIの書評を並べる)。
  *  /column-ai-league(最新節) と /column-ai-league/[setsu](過去ログ) で共用。 */
 export default function AiReviewSectionView({ section }: { section: AiReviewSection }) {
+  const chars = section.reviews.map((r) => characterFor(r.vendor));
   return (
     <div>
       <p className="text-[10px] font-bold tracking-[0.25em] text-[var(--color-accent)]">
@@ -15,6 +43,15 @@ export default function AiReviewSectionView({ section }: { section: AiReviewSect
       <p className="mt-3 text-[12.5px] leading-relaxed text-ink/70">
         同じ本、同じ依頼文。それでも書評はこんなに違う——複数のAIに全く同じお題を渡し、出てきた紹介文をそのまま並べました（ネタバレなし・完結作限定）。
       </p>
+
+      {/* 出演AI = キャラのラインナップ(飾り。 顔で誰の評か掴みやすく) */}
+      <div className="mt-4 flex items-center gap-2 overflow-x-auto rounded-xl border border-[var(--color-line)] bg-[var(--color-surface)] px-3 py-2.5">
+        <span className="shrink-0 text-[10px] font-bold text-ink/45">出演</span>
+        {chars.map((c, i) => (
+          <Avatar key={i} c={c} size={34} />
+        ))}
+      </div>
+
       <details className="mt-3 rounded-lg border border-dashed border-[var(--color-line)] p-3 text-[11px] text-ink/60">
         <summary className="spring-press cursor-pointer font-semibold">全員に渡した依頼文（共通）</summary>
         <p className="mt-2 leading-relaxed">{section.prompt}</p>
@@ -26,7 +63,8 @@ export default function AiReviewSectionView({ section }: { section: AiReviewSect
             key={`${r.vendor}-${r.model}-${i}`}
             className="rounded-xl border border-[var(--color-line)] bg-[var(--color-surface)] p-4 shadow-sm"
           >
-            <div className="border-b border-[var(--color-line)] pb-2.5">
+            <div className="flex items-center gap-3 border-b border-[var(--color-line)] pb-2.5">
+              <Avatar c={chars[i]} size={40} />
               <p className="text-[15px] font-extrabold">
                 {r.model} <span className="text-[10px] font-semibold text-ink/45">（{r.vendor}）</span>
               </p>
@@ -50,7 +88,8 @@ export default function AiReviewSectionView({ section }: { section: AiReviewSect
         </Link>
       </div>
       <p className="mt-4 text-center text-[10px] leading-relaxed text-ink/40">
-        各書評は各AIサービスの出力をそのまま掲載（生成AI明記・無加工）
+        各書評は各AIサービスの出力をそのまま掲載（生成AI明記・無加工）。<br />
+        キャラクターはイメージです。各AI企業・公式とは一切関係ありません。
       </p>
     </div>
   );
