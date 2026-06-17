@@ -242,7 +242,14 @@ gray のうち救済対象ジャンル{isekai,gourmet,drama,adventure,ecchi,myst
 - **要素タグ追加 7,399 work**(theme tag 未保有作へ、較正済26タグ)。
 - 残り provisional ~2,149 work = 高精度ラベルが取れず AI暫定のまま(楽天あらすじが弱い/該当なし)。
 
-### promote(⑤本番焼込)⬜ — GO待ち
-`python scripts/intake.py --run`(または promote 単体)で manga.v2 に焼込。promote は seed を slug で読み、
-trusted空の work にのみ genres(`genres_rakuten:true`)を、theme tag未保有 work に tags(`category:Rakuten`)を純粋追加。
-所要 ~20分。GO で実行。
+### ⑤本番反映 ✅(方法D=直接パッチ。 2026-06-17)
+ユーザ選択=方法D(promoteを通さず surgical 反映)。`_genre_rakuten_apply_inplace.py` が seed を
+本番 manga.v2 の該当作の genres/tags 欄だけに純粋追加(他フィールド・他作は不変)。
+- **genres 上書き 6,638作**(trusted空のみ=trusted化skip 0=drift無し。 `genres_rakuten:true`/`genres_provisional`除去)
+- **tags 追加 7,395作**(`category:Rakuten` rank60、 dedup)
+- 触る前に該当ファイルを `.cache/manga.v2.bak-genre-rakuten-<ts>` にバックアップ(manga.v2はgit非追跡)。
+- 検証: round-trip忠実(他フィールド不変)/ typecheck緑 / vitest 211 緑。
+- seedはpromoteにも結線済(loader)なので、将来の全promoteでも同結果に収束=恒久整合。
+
+※ manga.v2 は git非追跡(=ローカル生成物)。永続化されるのは **seed 2本(git追跡)+ スクリプト**。
+   別PCや再生成時は seed から promote(または本スクリプト)で再反映できる。
