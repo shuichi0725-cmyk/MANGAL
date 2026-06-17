@@ -115,9 +115,14 @@ editions:
     release_date: '2009-05-15'
   - number: 18
     asin: null
-    isbn13: '9784063583021'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/3021/9784063583021.jpg?_ex=200x200
+    isbn13: '9784063841701'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/1701/9784063841701.jpg?_ex=200x200
     release_date: 2009-08
+    variants:
+    - label: 限定版
+      isbn13: '9784063583021'
+      cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/3021/9784063583021.jpg?_ex=200x200
+      price: 1340
   - number: 19
     asin: null
     isbn13: '9784063842081'

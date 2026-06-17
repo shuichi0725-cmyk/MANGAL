@@ -106,7 +106,11 @@ def main():
             review.append((tv['title'],vn,tv['version'],si,'','no-title')); continue
         items=series_items(sname)
         score=norm_t(sname)
-        cands=[it for it in items if it['isbn'] and it['isbn']!=si and not is_sp(it['title']) and vnum(it['title'])==vn and (score[:6] in norm_t(it['title']) or norm_t(it['title'])[:6] in score)]
+        # ★巻番号は“パース”でなく“既知の目的巻番号を独立数字として探す”(レーベル併記等の全形式に強い)
+        vnpat=re.compile(r'(?<![0-9])'+str(vn)+r'(?![0-9])') if vn is not None else None
+        cands=[it for it in items if it['isbn'] and it['isbn']!=si and not is_sp(it['title'])
+               and vnpat and vnpat.search(zen(it['title']))
+               and (score[:6] in norm_t(it['title']) or norm_t(it['title'])[:6] in score)]
         if not cands:
             review.append((tv['title'],vn,tv['version'],si,'',f'series={sname[:16]}/none')); continue
         def near(x): return abs(int(si[3:])-int(x['isbn'][3:])) if si[3:].isdigit() and x['isbn'][3:].isdigit() else 9999
