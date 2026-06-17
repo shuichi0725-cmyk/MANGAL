@@ -52,9 +52,14 @@ editions:
     release_date: 2019-04
   - number: 5
     asin: null
-    isbn13: '9784041087824'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/7824/9784041087824.jpg?_ex=200x200
+    isbn13: '9784041081099'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/1099/9784041081099.jpg?_ex=200x200
     release_date: 2019-10
+    variants:
+    - label: 「お世話シチュエーション」CD付き特装版
+      isbn13: '9784041087824'
+      cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/7824/9784041087824.jpg?_ex=200x200
+      price: null
   - number: 6
     asin: null
     isbn13: '9784041092163'
@@ -87,9 +92,14 @@ editions:
     release_date: 2022-06
   - number: 12
     asin: null
-    isbn13: '9784041134337'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/4337/9784041134337_1_4.jpg?_ex=200x200
+    isbn13: '9784041131527'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/1527/9784041131527_1_2.jpg?_ex=200x200
     release_date: 2023-02
+    variants:
+    - label: 小冊子付き特装版
+      isbn13: '9784041134337'
+      cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/4337/9784041134337_1_2.jpg?_ex=200x200
+      price: null
 publishers:
 - kadokawa
 anilist_id: 100584

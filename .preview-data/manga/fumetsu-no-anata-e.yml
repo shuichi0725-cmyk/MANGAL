@@ -94,9 +94,14 @@ editions:
     release_date: 2020-01
   - number: 13
     asin: null
-    isbn13: '9784065206485'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/6485/9784065206485.jpg?_ex=200x200
+    isbn13: '9784065193082'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/3082/9784065193082.jpg?_ex=200x200
     release_date: null
+    variants:
+    - label: 特装版
+      isbn13: '9784065206485'
+      cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/6485/9784065206485.jpg?_ex=200x200
+      price: null
   - number: 14
     asin: null
     isbn13: '9784065214794'

@@ -79,9 +79,14 @@ editions:
       price: null
   - number: 8
     asin: null
-    isbn13: '9784800008510'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/8510/9784800008510.jpg?_ex=200x200
+    isbn13: '9784800008916'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/8916/9784800008916.jpg?_ex=200x200
     release_date: 2019-09
+    variants:
+    - label: 初回限定版
+      isbn13: '9784800008510'
+      cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/8510/9784800008510.jpg?_ex=200x200
+      price: null
   - number: 9
     asin: null
     isbn13: '9784800009463'

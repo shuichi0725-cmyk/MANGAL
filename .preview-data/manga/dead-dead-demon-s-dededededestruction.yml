@@ -97,19 +97,34 @@ editions:
       price: 3800
   - number: 10
     asin: null
-    isbn13: '9784099430771'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0771/9784099430771_1_5.jpg?_ex=200x200
+    isbn13: '9784098608348'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/8348/9784098608348.jpg?_ex=200x200
     release_date: 2020-12
+    variants:
+    - label: 限定版
+      isbn13: '9784099430771'
+      cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0771/9784099430771.jpg?_ex=200x200
+      price: null
   - number: 11
     asin: null
-    isbn13: '9784099430894'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0894/9784099430894_1_7.jpg?_ex=200x200
+    isbn13: '9784098611577'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/1577/9784098611577_1_2.jpg?_ex=200x200
     release_date: 2021-08
+    variants:
+    - label: 限定版
+      isbn13: '9784099430894'
+      cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0894/9784099430894_1_2.jpg?_ex=200x200
+      price: null
   - number: 12
     asin: null
-    isbn13: '9784099431020'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/1020/9784099431020_1_7.jpg?_ex=200x200
+    isbn13: '9784098612932'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/2932/9784098612932_1_2.jpg?_ex=200x200
     release_date: 2022-04
+    variants:
+    - label: 限定版
+      isbn13: '9784099431020'
+      cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/1020/9784099431020_1_2.jpg?_ex=200x200
+      price: null
 publishers:
 - shogakukan
 anilist_id: 85316

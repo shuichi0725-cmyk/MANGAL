@@ -55,9 +55,14 @@ editions:
     release_date: 2023-04
   - number: 6
     asin: null
-    isbn13: '9784758026604'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/6604/9784758026604_1_3.jpg?_ex=200x200
+    isbn13: '9784758028301'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/8301/9784758028301_1_2.jpg?_ex=200x200
     release_date: 2024-03
+    variants:
+    - label: 初回限定版
+      isbn13: '9784758026604'
+      cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/6604/9784758026604_1_2.jpg?_ex=200x200
+      price: null
 publishers:
 - kodansha
 anilist_id: 117620

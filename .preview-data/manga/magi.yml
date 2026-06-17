@@ -137,9 +137,14 @@ editions:
     release_date: '2014-04-23'
   - number: 22
     asin: null
-    isbn13: '9784091591920'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/1920/9784091591920.jpg?_ex=200x200
+    isbn13: '9784091246738'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/6738/9784091246738.jpg?_ex=200x200
     release_date: 2014-07
+    variants:
+    - label: 限定版
+      isbn13: '9784091591920'
+      cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/1920/9784091591920.jpg?_ex=200x200
+      price: null
   - number: 23
     asin: null
     isbn13: '9784091252784'

@@ -74,24 +74,44 @@ editions:
     release_date: 2017-11
   - number: 9
     asin: null
-    isbn13: '9784065131022'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/1022/9784065131022.jpg?_ex=200x200
+    isbn13: '9784065131015'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/1015/9784065131015.jpg?_ex=200x200
     release_date: 2018-10
+    variants:
+    - label: 特装版
+      isbn13: '9784065131022'
+      cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/1022/9784065131022.jpg?_ex=200x200
+      price: null
   - number: 10
     asin: null
-    isbn13: '9784065167397'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/7397/9784065167397.jpg?_ex=200x200
+    isbn13: '9784065167380'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/7380/9784065167380.jpg?_ex=200x200
     release_date: 2019-08
+    variants:
+    - label: 特装版
+      isbn13: '9784065167397'
+      cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/7397/9784065167397.jpg?_ex=200x200
+      price: null
   - number: 11
     asin: null
-    isbn13: '9784065202234'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/2234/9784065202234.jpg?_ex=200x200
+    isbn13: '9784065202241'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/2241/9784065202241.jpg?_ex=200x200
     release_date: null
+    variants:
+    - label: 特装版
+      isbn13: '9784065202234'
+      cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/2234/9784065202234.jpg?_ex=200x200
+      price: null
   - number: 12
     asin: null
-    isbn13: '9784065297339'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/7339/9784065297339_1_2.jpg?_ex=200x200
+    isbn13: '9784065297322'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/7322/9784065297322_1_2.jpg?_ex=200x200
     release_date: 2022-11
+    variants:
+    - label: 特装版
+      isbn13: '9784065297339'
+      cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/7339/9784065297339_1_2.jpg?_ex=200x200
+      price: null
 publishers:
 - kodansha
 anilist_id: 74489

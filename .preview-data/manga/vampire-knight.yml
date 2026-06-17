@@ -124,9 +124,14 @@ editions:
     release_date: '2013-05-10'
   - number: 19
     asin: null
-    isbn13: '9784592198758'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/8758/9784592198758.jpg?_ex=200x200
+    isbn13: '9784592191391'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/1391/9784592191391.jpg?_ex=200x200
     release_date: '2013-11-10'
+    variants:
+    - label: 画集付き限定版
+      isbn13: '9784592198758'
+      cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/8758/9784592198758.jpg?_ex=200x200
+      price: null
 - type: bunkobon
   label: 文庫版
   publisher: 白泉社

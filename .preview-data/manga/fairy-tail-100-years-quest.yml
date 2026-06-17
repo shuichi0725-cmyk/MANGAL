@@ -118,9 +118,14 @@ editions:
     release_date: 2024-04
   - number: 18
     asin: null
-    isbn13: '9784065366745'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/6745/9784065366745_1_2.jpg?_ex=200x200
+    isbn13: '9784065365069'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/5069/9784065365069_1_2.jpg?_ex=200x200
     release_date: 2024-08
+    variants:
+    - label: 特装版
+      isbn13: '9784065366745'
+      cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/6745/9784065366745_1_2.jpg?_ex=200x200
+      price: null
   - number: 19
     asin: null
     isbn13: '9784065377680'

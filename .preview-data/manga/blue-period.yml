@@ -65,9 +65,14 @@ editions:
     release_date: null
   - number: 8
     asin: null
-    isbn13: '9784065207253'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/7253/9784065207253.jpg?_ex=200x200
+    isbn13: '9784065207277'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/7277/9784065207277.jpg?_ex=200x200
     release_date: 2020-09
+    variants:
+    - label: 特装版
+      isbn13: '9784065207253'
+      cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/7253/9784065207253.jpg?_ex=200x200
+      price: null
   - number: 9
     asin: null
     isbn13: '9784065219942'
@@ -80,9 +85,14 @@ editions:
     release_date: 2021-05
   - number: 11
     asin: null
-    isbn13: '9784065249772'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/9772/9784065249772_1_2.jpg?_ex=200x200
+    isbn13: '9784065246696'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/6696/9784065246696_1_2.jpg?_ex=200x200
     release_date: 2021-09
+    variants:
+    - label: 特装版
+      isbn13: '9784065249772'
+      cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/9772/9784065249772_1_2.jpg?_ex=200x200
+      price: null
   - number: 12
     asin: null
     isbn13: '9784065274187'

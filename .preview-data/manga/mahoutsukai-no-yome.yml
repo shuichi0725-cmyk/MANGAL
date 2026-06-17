@@ -83,9 +83,14 @@ editions:
       price: 1852
   - number: 10
     asin: null
-    isbn13: '9784800007858'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/7858/9784800007858.jpg?_ex=200x200
+    isbn13: '9784800014290'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/4290/9784800014290.jpg?_ex=200x200
     release_date: 2018-09
+    variants:
+    - label: 初回限定版
+      isbn13: '9784800007858'
+      cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/7858/9784800007858.jpg?_ex=200x200
+      price: null
   - number: 11
     asin: null
     isbn13: '9784800008374'

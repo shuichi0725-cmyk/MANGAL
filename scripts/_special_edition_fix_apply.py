@@ -26,8 +26,14 @@ DRY='--dry-run' in sys.argv
 args=[a for a in sys.argv[1:] if not a.startswith('--')]
 MDIR=Path(args[0]) if args else ROOT/'data'/'manga.v2'
 
+def seed_path():
+    for i,a in enumerate(sys.argv):
+        if a=='--seed' and i+1<len(sys.argv):
+            return ROOT/sys.argv[i+1] if not Path(sys.argv[i+1]).is_absolute() else Path(sys.argv[i+1])
+    return ROOT/'data'/'seeds'/'special-edition-fix.yml'
+
 def main():
-    doc=yaml.safe_load((ROOT/'data'/'seeds'/'special-edition-fix.yml').read_text(encoding='utf-8'))
+    doc=yaml.safe_load(seed_path().read_text(encoding='utf-8'))
     bym={to13(x['special_isbn']):x for x in doc['corrections']}
     # special isbn 一覧で候補ファイルを rg 抽出(高速)
     tmp=ROOT/'.cache'/'sef-special-isbns.txt'

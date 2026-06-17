@@ -59,9 +59,14 @@ editions:
     release_date: 2022-03
   - number: 7
     asin: null
-    isbn13: '9784065290262'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0262/9784065290262_1_2.jpg?_ex=200x200
+    isbn13: '9784065291764'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/1764/9784065291764_1_2.jpg?_ex=200x200
     release_date: 2022-09
+    variants:
+    - label: 特装版
+      isbn13: '9784065290262'
+      cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0262/9784065290262_1_2.jpg?_ex=200x200
+      price: null
   - number: 8
     asin: null
     isbn13: '9784065307236'

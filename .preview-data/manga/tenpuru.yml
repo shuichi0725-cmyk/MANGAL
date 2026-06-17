@@ -55,9 +55,14 @@ editions:
     release_date: 2020-11
   - number: 5
     asin: null
-    isbn13: '9784065234280'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/4280/9784065234280.jpg?_ex=200x200
+    isbn13: '9784065231203'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/1203/9784065231203.jpg?_ex=200x200
     release_date: 2021-05
+    variants:
+    - label: 特装版
+      isbn13: '9784065234280'
+      cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/4280/9784065234280.jpg?_ex=200x200
+      price: null
   - number: 6
     asin: null
     isbn13: '9784065259146'

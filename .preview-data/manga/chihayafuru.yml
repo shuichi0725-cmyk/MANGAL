@@ -254,9 +254,14 @@ editions:
     release_date: 2019-07
   - number: 43
     asin: null
-    isbn13: '9784065179338'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/9338/9784065179338.jpg?_ex=200x200
+    isbn13: '9784065180358'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0358/9784065180358.jpg?_ex=200x200
     release_date: 2019-12
+    variants:
+    - label: 特装版
+      isbn13: '9784065179338'
+      cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/9338/9784065179338.jpg?_ex=200x200
+      price: null
   - number: 44
     asin: null
     isbn13: '9784065195222'
@@ -289,9 +294,14 @@ editions:
     release_date: 2022-07
   - number: 50
     asin: null
-    isbn13: '9784065307380'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/7380/9784065307380_1_6.jpg?_ex=200x200
+    isbn13: '9784065302064'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/2064/9784065302064_1_2.jpg?_ex=200x200
     release_date: 2022-12
+    variants:
+    - label: 特装版
+      isbn13: '9784065307380'
+      cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/7380/9784065307380_1_2.jpg?_ex=200x200
+      price: null
 publishers:
 - kodansha
 anilist_id: 43245
