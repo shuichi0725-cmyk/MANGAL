@@ -171,37 +171,46 @@ export default function VolumeCoverflow({
       {cur.variants && cur.variants.length > 0 && (
         <div className="mt-2 rounded-2xl border border-[var(--color-line)] bg-[var(--color-surface)] p-3">
           <div className="text-[11px] font-bold text-ink/55">この巻の特装版・限定版</div>
-          <div className="mt-2 space-y-2.5">
-            {cur.variants.map((vr, i) => (
-              <div key={i} className="flex items-center gap-3">
-                <div
-                  className="relative shrink-0 overflow-hidden rounded-md border border-[var(--color-line)] bg-[var(--color-surface-2)]"
-                  style={{ width: 46, aspectRatio: "2 / 3" }}
-                >
-                  {vr.cover_url ? (
-                    <CoverImage src={vr.cover_url} alt={vr.label} sizes="46px" />
-                  ) : (
-                    <span className="flex h-full w-full items-center justify-center text-[8px] text-ink/40">特装版</span>
-                  )}
+          <div className="mt-2 space-y-3">
+            {cur.variants.map((vr, i) => {
+              const q = vr.isbn13 ? String(vr.isbn13) : `${title} ${cur.number}`;
+              const e = encodeURIComponent(q);
+              const vl = {
+                rakuten: `https://books.rakuten.co.jp/search?sitem=${e}`,
+                yahoo: `https://shopping.yahoo.co.jp/search?p=${e}`,
+                amazon: `https://www.amazon.co.jp/s?k=${e}`,
+              };
+              return (
+                <div key={i} className="rounded-xl border border-[var(--color-line)] p-2.5">
+                  <div className="flex items-center gap-3">
+                    <div
+                      className="relative shrink-0 overflow-hidden rounded-md border border-[var(--color-line)] bg-[var(--color-surface-2)]"
+                      style={{ width: 46, aspectRatio: "2 / 3" }}
+                    >
+                      {vr.cover_url ? (
+                        <CoverImage src={vr.cover_url} alt={vr.label} sizes="46px" />
+                      ) : (
+                        <span className="flex h-full w-full items-center justify-center text-[8px] text-ink/40">特装版</span>
+                      )}
+                    </div>
+                    <div className="min-w-0 flex-1">
+                      <div className="text-[12px] font-semibold leading-snug">{vr.label}</div>
+                      {vr.price != null && (
+                        <div className="text-[11px] text-ink/55">¥{vr.price.toLocaleString()}</div>
+                      )}
+                    </div>
+                  </div>
+                  <div className="mt-2 grid grid-cols-3 gap-2">
+                    <a href={vl.rakuten} target="_blank" rel="noopener noreferrer"
+                       className="spring-press rounded-full bg-[#bf0000] py-1.5 text-center text-[12px] font-bold text-white">楽天</a>
+                    <a href={vl.yahoo} target="_blank" rel="noopener noreferrer"
+                       className="spring-press rounded-full bg-[#ff0033] py-1.5 text-center text-[12px] font-bold text-white">Yahoo!</a>
+                    <a href={vl.amazon} target="_blank" rel="noopener noreferrer"
+                       className="spring-press rounded-full bg-[#e69500] py-1.5 text-center text-[12px] font-bold text-white">Amazon</a>
+                  </div>
                 </div>
-                <div className="min-w-0 flex-1">
-                  <div className="text-[12px] font-semibold leading-snug">{vr.label}</div>
-                  {vr.price != null && (
-                    <div className="text-[11px] text-ink/55">¥{vr.price.toLocaleString()}</div>
-                  )}
-                </div>
-                <a
-                  href={`https://books.rakuten.co.jp/search?sitem=${encodeURIComponent(
-                    vr.isbn13 ? String(vr.isbn13) : `${title} ${cur.number}`,
-                  )}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="spring-press shrink-0 rounded-full bg-[#bf0000] px-3 py-1.5 text-[11px] font-bold text-white"
-                >
-                  楽天 ›
-                </a>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       )}
