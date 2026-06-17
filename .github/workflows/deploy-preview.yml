@@ -26,6 +26,11 @@ on:
       - "package.json"
       - "package-lock.json"
 
+# 同一ブランチの古いビルドはキャンセルし、 最新pushを優先(連投でのビルド渋滞を防ぐ)。
+concurrency:
+  group: deploy-preview-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   deploy-preview:
     name: Build subset + Deploy to mangal-preview
