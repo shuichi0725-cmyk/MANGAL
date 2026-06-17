@@ -55,21 +55,29 @@ export default function VolumeCoverflow({
   const loop = n > LOOP_MIN;
   const reps = loop ? [0, 1, 2] : [0];
 
-  // 無限ループ: 中央コピーへ初期位置 → 端に来たら1セット分シームレスに巻き戻す。
+  // 無限ループ(★指定挙動): 初期=1巻が左端で「左には進めない壁」。
+  //   右へ送って最終巻の先(1巻)へ一度ループしたら、 以降は左方向もシームレス(1巻の左=最終巻)。
   useEffect(() => {
     if (!loop) return;
     const el = scroller.current;
     if (!el) return;
     const set = () => el.scrollWidth / 3;
-    el.scrollLeft = set(); // 中央コピーの先頭(=1巻が左端)
+    el.scrollLeft = set(); // 中央コピー先頭=1巻が左端
     let ticking = false;
+    let looped = false; // 初回ループ済みか(以降は左ロック解除)
     const onScroll = () => {
       if (ticking) return;
       ticking = true;
       requestAnimationFrame(() => {
         const s = set();
-        if (el.scrollLeft < s * 0.5) el.scrollLeft += s;
-        else if (el.scrollLeft > s * 1.5) el.scrollLeft -= s;
+        if (el.scrollLeft > s * 1.5) {
+          el.scrollLeft -= s; // 右端→1巻へシームレス・ループ
+          looped = true; // 一度ループ=左方向を解放
+        } else if (!looped && el.scrollLeft < s) {
+          el.scrollLeft = s; // ★初回ループ前は1巻より左へ進ませない(壁)
+        } else if (looped && el.scrollLeft < s * 0.5) {
+          el.scrollLeft += s; // ループ後は左もシームレス(1巻の左=最終巻)
+        }
         ticking = false;
       });
     };
