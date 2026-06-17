@@ -54,6 +54,18 @@ export const VolumeSchema = z.object({
   artists: z.array(z.string().min(1)).optional(),
   /** 巻ごとの監修者 (= 学習まんが等の歴史学者監修。 省略可) */
   supervisors: z.array(z.string().min(1)).optional(),
+  /** この巻の特装版/限定版 (= 通常版に併存する別商品。 表紙・ISBN・価格が別)。
+   *  通常版を主に表示し、 詳細パネルに variant として併記する(捨てずに残す)。 */
+  variants: z
+    .array(
+      z.object({
+        label: z.string(),
+        isbn13: z.union([z.string(), z.number()]).nullable().optional(),
+        cover_url: z.string().url().nullable().optional(),
+        price: z.number().nullable().optional(),
+      }),
+    )
+    .optional(),
 });
 export type Volume = z.infer<typeof VolumeSchema>;
 
