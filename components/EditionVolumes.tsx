@@ -134,8 +134,13 @@ export default function EditionVolumes({
           })}
         </div>
       )}
-      {/* ★巻リスト = コーフロー(案A: 中央フォーカス・両側暗・ループ・初期1巻) */}
-      <VolumeCoverflow title={manga.title} volumes={vols} />
+      {/* ★巻リスト = フリースクロール小サムネ + ループ + 選択巻の詳細パネル(案D・試作) */}
+      <VolumeCoverflow
+        title={manga.title}
+        volumes={vols}
+        publisher={edition.publisher}
+        imprint={edition.imprint}
+      />
       </div>
       </Grow>
     </div>
