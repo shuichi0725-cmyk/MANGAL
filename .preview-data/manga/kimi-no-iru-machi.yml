@@ -112,14 +112,24 @@ editions:
     release_date: '2011-12-16'
   - number: 17
     asin: null
-    isbn13: '9784063583717'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/3717/9784063583717.jpg?_ex=200x200
+    isbn13: '9784063846447'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/6447/9784063846447.jpg?_ex=200x200
     release_date: 2012-03
+    variants:
+    - label: 限定版
+      isbn13: '9784063583717'
+      cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/3717/9784063583717.jpg?_ex=200x200
+      price: null
   - number: 18
     asin: null
-    isbn13: '9784063583724'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/3724/9784063583724.jpg?_ex=200x200
+    isbn13: '9784063846898'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/6898/9784063846898.jpg?_ex=200x200
     release_date: 2012-06
+    variants:
+    - label: 限定版
+      isbn13: '9784063583724'
+      cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/3724/9784063583724.jpg?_ex=200x200
+      price: null
   - number: 19
     asin: null
     isbn13: '9784063847208'
@@ -157,14 +167,24 @@ editions:
     release_date: '2013-11-15'
   - number: 26
     asin: null
-    isbn13: '9784063584813'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/4813/9784063584813.jpg?_ex=200x200
+    isbn13: '9784063949957'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/9957/9784063949957.jpg?_ex=200x200
     release_date: 2014-01
+    variants:
+    - label: 限定版
+      isbn13: '9784063584813'
+      cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/4813/9784063584813.jpg?_ex=200x200
+      price: null
   - number: 27
     asin: null
-    isbn13: '9784063584820'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/4820/9784063584820.jpg?_ex=200x200
+    isbn13: '9784063950298'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0298/9784063950298.jpg?_ex=200x200
     release_date: 2014-03
+    variants:
+    - label: 限定版
+      isbn13: '9784063584820'
+      cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/4820/9784063584820.jpg?_ex=200x200
+      price: null
 publishers:
 - kodansha
 anilist_id: 38483

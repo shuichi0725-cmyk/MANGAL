@@ -58,14 +58,24 @@ editions:
     release_date: 2012-02
   - number: 6
     asin: null
-    isbn13: '9784063583892'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/3892/9784063583892.jpg?_ex=200x200
+    isbn13: '9784063846829'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/6829/9784063846829.jpg?_ex=200x200
     release_date: 2012-06
+    variants:
+    - label: 限定版
+      isbn13: '9784063583892'
+      cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/3892/9784063583892.jpg?_ex=200x200
+      price: null
   - number: 7
     asin: null
-    isbn13: '9784063583908'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/3908/9784063583908.jpg?_ex=200x200
+    isbn13: '9784063847628'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/7628/9784063847628.jpg?_ex=200x200
     release_date: 2012-11
+    variants:
+    - label: 限定版
+      isbn13: '9784063583908'
+      cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/3908/9784063583908.jpg?_ex=200x200
+      price: null
   - number: 8
     asin: null
     isbn13: '9784063848731'

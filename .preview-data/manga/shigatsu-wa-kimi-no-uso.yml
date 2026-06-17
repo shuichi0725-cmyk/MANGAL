@@ -83,9 +83,14 @@ editions:
     release_date: 2014-10
   - number: 11
     asin: null
-    isbn13: '9784063587524'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/7524/9784063587524.jpg?_ex=200x200
+    isbn13: '9784063714678'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/4678/9784063714678.jpg?_ex=200x200
     release_date: 2015-05
+    variants:
+    - label: 限定版
+      isbn13: '9784063587524'
+      cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/7524/9784063587524.jpg?_ex=200x200
+      price: null
 - type: deluxe
   label: デラックス版
   publisher: 講談社

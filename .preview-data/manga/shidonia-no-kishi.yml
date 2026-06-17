@@ -103,9 +103,14 @@ editions:
     release_date: 2015-02
   - number: 15
     asin: null
-    isbn13: '9784063587913'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/7913/9784063587913.jpg?_ex=200x200
+    isbn13: '9784063881028'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/1028/9784063881028.jpg?_ex=200x200
     release_date: 2015-11
+    variants:
+    - label: 限定版
+      isbn13: '9784063587913'
+      cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/7913/9784063587913.jpg?_ex=200x200
+      price: null
 publishers:
 - kodansha
 anilist_id: 43723

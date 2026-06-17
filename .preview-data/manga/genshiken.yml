@@ -58,9 +58,14 @@ editions:
     release_date: '2004-11-22'
   - number: 6
     asin: null
-    isbn13: '9784063646399'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/6399/9784063646399.jpg?_ex=200x200
+    isbn13: '9784063211702'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/1702/9784063211702.jpg?_ex=200x200
     release_date: 2005-06
+    variants:
+    - label: 特装版
+      isbn13: '9784063646399'
+      cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/6399/9784063646399.jpg?_ex=200x200
+      price: null
   - number: 7
     asin: null
     isbn13: '9784063211740'
@@ -73,9 +78,14 @@ editions:
     release_date: '2006-08-23'
   - number: 9
     asin: null
-    isbn13: '9784063646740'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/6740/9784063646740.jpg?_ex=200x200
+    isbn13: '9784063211832'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/1832/9784063211832.jpg?_ex=200x200
     release_date: 2006-12
+    variants:
+    - label: 特装版
+      isbn13: '9784063646740'
+      cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/6740/9784063646740.jpg?_ex=200x200
+      price: null
   - number: 10
     asin: null
     isbn13: '9784063107524'

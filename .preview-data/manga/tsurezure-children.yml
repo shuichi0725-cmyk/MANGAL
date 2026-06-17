@@ -77,14 +77,24 @@ editions:
     release_date: 2017-10
   - number: 10
     asin: null
-    isbn13: '9784063970418'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0418/9784063970418.jpg?_ex=200x200
+    isbn13: '9784065103913'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/3913/9784065103913.jpg?_ex=200x200
     release_date: 2017-11
+    variants:
+    - label: 特装版
+      isbn13: '9784063970418'
+      cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0418/9784063970418.jpg?_ex=200x200
+      price: null
   - number: 11
     asin: null
-    isbn13: '9784063970425'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0425/9784063970425.jpg?_ex=200x200
+    isbn13: '9784065110645'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0645/9784065110645.jpg?_ex=200x200
     release_date: 2018-03
+    variants:
+    - label: 特装版
+      isbn13: '9784063970425'
+      cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0425/9784063970425.jpg?_ex=200x200
+      price: null
   - number: 12
     asin: null
     isbn13: '9784065117941'

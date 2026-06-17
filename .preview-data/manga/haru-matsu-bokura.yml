@@ -71,9 +71,14 @@ editions:
     release_date: 2017-10
   - number: 9
     asin: null
-    isbn13: '9784065108253'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/8253/9784065108253.jpg?_ex=200x200
+    isbn13: '9784065111178'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/1178/9784065111178.jpg?_ex=200x200
     release_date: 2018-03
+    variants:
+    - label: 特装版
+      isbn13: '9784065108253'
+      cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/8253/9784065108253.jpg?_ex=200x200
+      price: null
   - number: 10
     asin: null
     isbn13: '9784065125021'

@@ -104,9 +104,14 @@ editions:
     release_date: 2006-04
   - number: 15
     asin: null
-    isbn13: '9784063582307'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/2307/9784063582307.jpg?_ex=200x200
+    isbn13: '9784063636925'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/6925/9784063636925.jpg?_ex=200x200
     release_date: 2006-08
+    variants:
+    - label: 限定版
+      isbn13: '9784063582307'
+      cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/2307/9784063582307.jpg?_ex=200x200
+      price: null
   - number: 16
     asin: null
     isbn13: '9784063637328'
