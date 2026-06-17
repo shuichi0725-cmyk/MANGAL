@@ -221,12 +221,28 @@ caption有り 28,809 work(複数巻連結 63%)。適用対象 = genre(provisiona
 **較正の確認**: isekai/gourmet ジャンルは truth-gap で不採用(P0.25/0.27)だが、対応タグ Food(0.81@high)/Isekai(0.84@high)は採用
 → 内容は検出できている=**ジャンル側は Phase④ で救済**(2パスで本文再判定)。school は不採用(過付与)。
 
-### Phase③ 本番分類 pass1 ⬜(実行中→)
-適用対象(provisional ∪ theme tag未保有 ≈ union)を v2caption+信頼度で分類 → **採用ラベル×閾値超のみ純粋追加**。
-- ジャンル: provisional work(trusted空)に `genres` 上書き(`genres_rakuten:true`、trusted/手動は不変)。
-- タグ: theme tag未保有 work の `tags` に `category:"Rakuten"` で追加(既存tag名はdedup)。
-- 閾値未達・gourmet/isekai等のグレーは Phase④ 送り。
+### Phase③ 本番分類 pass1 ✅
+union 20,682 work(provisional 8,793 ∪ theme tag未保有 20,660)を v2caption+信頼度で分類(workflow `genretag-apply-classify`、518batch)
+→ `_genre_rakuten_phase3_apply.py` が採用ラベル×閾値超のみ seed 化:
+- **ジャンル付与 5,468 work** → `data/seeds/genre-rakuten.yml`(romance2244/comedy1397/fantasy1358/action570/slice-of-life502/horror231/sports221/sci-fi217/supernatural184/mecha63/baseball42/mahou-shoujo23/soccer7)
+- **タグ付与 7,399 work** → `data/seeds/tag-rakuten.yml`(Animals1033/Autobiographical941/Food905/Magic609/Drawing605/Family Life605/Isekai597/BL468/格闘技300/復讐282…)
+- gray候補 19,716 work を Phase④ 送り。
 
-### Phase④ 2パス救済 ⬜
-グレー帯ラベルを別エージェントが本文で再判定 → 確証分のみ追加・過付与は破棄。
-確認後に promote で本番 manga.v2 へ焼込(promoteはGO別途)。
+### Phase④ 2パス救済(ジャンル)✅
+gray のうち救済対象ジャンル{isekai,gourmet,drama,adventure,ecchi,mystery,music,bl}を conf≥medium で持つ provisional 4,092 work を、
+別エージェントが本文で**厳格再判定**(workflow `genre-rakuten-phase4-verify`、103batch)→ `_genre_rakuten_phase4_apply.py` で confirm分を seed に union。
+
+**結果(2パスの威力)**:
+- **isekai 345/359(96%)・gourmet 330/344(96%)confirm** = truth-gap 仮説を最終確証(実在を本文で裏取り)。
+- **drama 927/2,188(42%)confirm** = 過付与 58% を正しく棄却。ecchi 511(98%)/bl 263/adventure 430/mystery 242/music 90。
+- genre-rakuten.yml: 5,468 → **6,644 work**(provisional 8,793 の 76%)。
+
+### 最終成果(promote前)
+- **ジャンル改善 6,644 provisional work**(全 provisional 8,793 の 76%。trusted/手動は不変)。
+- **要素タグ追加 7,399 work**(theme tag 未保有作へ、較正済26タグ)。
+- 残り provisional ~2,149 work = 高精度ラベルが取れず AI暫定のまま(楽天あらすじが弱い/該当なし)。
+
+### promote(⑤本番焼込)⬜ — GO待ち
+`python scripts/intake.py --run`(または promote 単体)で manga.v2 に焼込。promote は seed を slug で読み、
+trusted空の work にのみ genres(`genres_rakuten:true`)を、theme tag未保有 work に tags(`category:Rakuten`)を純粋追加。
+所要 ~20分。GO で実行。
