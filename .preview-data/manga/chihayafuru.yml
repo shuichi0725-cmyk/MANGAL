@@ -144,9 +144,14 @@ editions:
     release_date: '2013-06-13'
   - number: 22
     asin: null
-    isbn13: '9784063584592'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/4592/9784063584592.jpg?_ex=200x200
+    isbn13: '9784063803976'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/3976/9784063803976_1_3.jpg?_ex=200x200
     release_date: 2013-09
+    variants:
+    - label: DVD付き限定版
+      isbn13: '9784063584592'
+      cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/4592/9784063584592.jpg?_ex=200x200
+      price: null
   - number: 23
     asin: null
     isbn13: '9784063804102'

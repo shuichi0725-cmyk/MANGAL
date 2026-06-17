@@ -44,14 +44,24 @@ editions:
     release_date: 2017-04
   - number: 4
     asin: null
-    isbn13: '9784800007124'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/7124/9784800007124.jpg?_ex=200x200
+    isbn13: '9784800007209'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/7209/9784800007209.jpg?_ex=200x200
     release_date: 2017-10
+    variants:
+    - label: 初回限定版
+      isbn13: '9784800007124'
+      cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/7124/9784800007124.jpg?_ex=200x200
+      price: null
   - number: 5
     asin: null
-    isbn13: '9784800007469'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/7469/9784800007469.jpg?_ex=200x200
+    isbn13: '9784800007575'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/7575/9784800007575.jpg?_ex=200x200
     release_date: 2018-04
+    variants:
+    - label: 初回限定版
+      isbn13: '9784800007469'
+      cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/7469/9784800007469.jpg?_ex=200x200
+      price: 1250
   - number: 6
     asin: null
     isbn13: '9784800008015'
@@ -59,9 +69,14 @@ editions:
     release_date: 2018-10
   - number: 7
     asin: null
-    isbn13: '9784800008114'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/8114/9784800008114.jpg?_ex=200x200
+    isbn13: '9784800008367'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/8367/9784800008367.jpg?_ex=200x200
     release_date: 2019-03
+    variants:
+    - label: 初回限定版
+      isbn13: '9784800008114'
+      cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/8114/9784800008114.jpg?_ex=200x200
+      price: null
   - number: 8
     asin: null
     isbn13: '9784800008510'

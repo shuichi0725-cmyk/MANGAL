@@ -157,9 +157,14 @@ editions:
     release_date: '2015-04-22'
   - number: 26
     asin: null
-    isbn13: '9784091592118'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/2118/9784091592118.jpg?_ex=200x200
+    isbn13: '9784091261885'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/1885/9784091261885.jpg?_ex=200x200
     release_date: 2015-07
+    variants:
+    - label: 限定版
+      isbn13: '9784091592118'
+      cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/2118/9784091592118.jpg?_ex=200x200
+      price: null
   - number: 27
     asin: null
     isbn13: '9784091264695'
@@ -172,9 +177,14 @@ editions:
     release_date: '2016-01-23'
   - number: 29
     asin: null
-    isbn13: '9784091592286'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/2286/9784091592286.jpg?_ex=200x200
+    isbn13: '9784091270887'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0887/9784091270887.jpg?_ex=200x200
     release_date: 2016-04
+    variants:
+    - label: 限定版
+      isbn13: '9784091592286'
+      cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/2286/9784091592286.jpg?_ex=200x200
+      price: null
   - number: 30
     asin: null
     isbn13: '9784091273185'

@@ -42,14 +42,24 @@ editions:
     release_date: '2016-04-28'
   - number: 3
     asin: null
-    isbn13: '9784063970203'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0203/9784063970203.jpg?_ex=200x200
+    isbn13: '9784063906660'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/6660/9784063906660.jpg?_ex=200x200
     release_date: 2016-11
+    variants:
+    - label: 特装版
+      isbn13: '9784063970203'
+      cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0203/9784063970203.jpg?_ex=200x200
+      price: null
   - number: 4
     asin: null
-    isbn13: '9784063970296'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0296/9784063970296.jpg?_ex=200x200
+    isbn13: '9784063906936'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/6936/9784063906936_1_13.jpg?_ex=200x200
     release_date: 2017-04
+    variants:
+    - label: 特装版
+      isbn13: '9784063970296'
+      cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0296/9784063970296.jpg?_ex=200x200
+      price: null
   - number: 5
     asin: null
     isbn13: '9784063907285'

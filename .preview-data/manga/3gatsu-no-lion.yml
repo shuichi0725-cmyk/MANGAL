@@ -68,14 +68,24 @@ editions:
     release_date: '2012-03-30'
   - number: 8
     asin: null
-    isbn13: '9784592147183'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/7183/9784592147183.jpg?_ex=200x200
+    isbn13: '9784592145189'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/5189/9784592145189.jpg?_ex=200x200
     release_date: 2012-12
+    variants:
+    - label: 限定版
+      isbn13: '9784592147183'
+      cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/7183/9784592147183.jpg?_ex=200x200
+      price: null
   - number: 9
     asin: null
-    isbn13: '9784592147190'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/7190/9784592147190.jpg?_ex=200x200
+    isbn13: '9784592145196'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/5196/9784592145196.jpg?_ex=200x200
     release_date: 2013-10
+    variants:
+    - label: おでかけニャーしょうぎ付き
+      isbn13: '9784592147190'
+      cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/7190/9784592147190.jpg?_ex=200x200
+      price: null
   - number: 10
     asin: null
     isbn13: '9784592147503'

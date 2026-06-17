@@ -145,9 +145,14 @@ editions:
     release_date: '2016-12-25'
   - number: 23
     asin: null
-    isbn13: '9784592105725'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/5725/9784592105725.jpg?_ex=200x200
+    isbn13: '9784592215134'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/5134/9784592215134.jpg?_ex=200x200
     release_date: 2017-04
+    variants:
+    - label: イラスト集付き限定版
+      isbn13: '9784592105725'
+      cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/5725/9784592105725.jpg?_ex=200x200
+      price: 1400
   - number: 24
     asin: null
     isbn13: '9784592215141'
