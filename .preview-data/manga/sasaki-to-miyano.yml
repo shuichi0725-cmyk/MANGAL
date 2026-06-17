@@ -73,14 +73,24 @@ editions:
     release_date: 2021-12
   - number: 9
     asin: null
-    isbn13: '9784046811400'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/1400/9784046811400_1_8.jpg?_ex=200x200
+    isbn13: '9784046811417'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/1417/9784046811417_1_12.jpg?_ex=200x200
     release_date: 2022-07
+    variants:
+    - label: アニメDVD付き特装版
+      isbn13: '9784046811400'
+      cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/1400/9784046811400_1_8.jpg?_ex=200x200
+      price: 4378
   - number: 10
     asin: null
-    isbn13: '9784046827579'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/7579/9784046827579_1_11.jpg?_ex=200x200
+    isbn13: '9784046827593'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/7593/9784046827593_1_13.jpg?_ex=200x200
     release_date: 2024-03
+    variants:
+    - label: 公式同人誌付き特装版
+      isbn13: '9784046827579'
+      cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/7579/9784046827579_1_11.jpg?_ex=200x200
+      price: 1650
   - number: 11
     asin: null
     isbn13: '9784046854377'

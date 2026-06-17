@@ -66,9 +66,14 @@ editions:
     release_date: 2021-03
   - number: 8
     asin: null
-    isbn13: '9784107724205'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/4205/9784107724205_1_2.jpg?_ex=200x200
+    isbn13: '9784107724199'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/4199/9784107724199_1_4.jpg?_ex=200x200
     release_date: 2021-09
+    variants:
+    - label: 小冊子付特装版
+      isbn13: '9784107724205'
+      cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/4205/9784107724205_1_2.jpg?_ex=200x200
+      price: 990
   - number: 9
     asin: null
     isbn13: '9784107724823'

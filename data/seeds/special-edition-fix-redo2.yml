@@ -1,0 +1,704 @@
+# 未マッチ201の取り直し(seriesName経由・outOfStockFlag=1)。 通常版主+特装variant(案B)。
+corrections:
+- special_isbn: '9784091592408'
+  normal_isbn: '9784091422705'
+  normal_cover: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/2705/9784091422705.jpg?_ex=200x200
+  normal_date: null
+  variant:
+    label: 完璧プレート付き限定版
+    isbn13: '9784091592408'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/2408/9784091592408.jpg?_ex=200x200
+    price: 570
+- special_isbn: '9784091592446'
+  normal_isbn: '9784091423887'
+  normal_cover: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/3887/9784091423887.jpg?_ex=200x200
+  normal_date: null
+  variant:
+    label: 限定版
+    isbn13: '9784091592446'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/2446/9784091592446.jpg?_ex=200x200
+    price: 570
+- special_isbn: '9784396785871'
+  normal_isbn: '9784396785864'
+  normal_cover: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/5864/9784396785864_1_5.jpg?_ex=200x200
+  normal_date: null
+  variant:
+    label: '[小冊子付き特装版]'
+    isbn13: '9784396785871'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/5871/9784396785871_1_8.jpg?_ex=200x200
+    price: 1144
+- special_isbn: '9784592218029'
+  normal_isbn: '9784592215103'
+  normal_cover: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/5103/9784592215103.jpg?_ex=200x200
+  normal_date: null
+  variant:
+    label: (秘)スケッチ集付き特装版
+    isbn13: '9784592218029'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/8029/9784592218029.jpg?_ex=200x200
+    price: 815
+- special_isbn: '9784047364615'
+  normal_isbn: '9784047364493'
+  normal_cover: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/4493/9784047364493_1_6.jpg?_ex=200x200
+  normal_date: null
+  variant:
+    label: ドラマCD付限定版
+    isbn13: '9784047364615'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/4615/9784047364615_1_2.jpg?_ex=200x200
+    price: 1980
+- special_isbn: '9784040656069'
+  normal_isbn: '9784040655598'
+  normal_cover: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/5598/9784040655598.jpg?_ex=200x200
+  normal_date: null
+  variant:
+    label: 特装版
+    isbn13: '9784040656069'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/6069/9784040656069.jpg?_ex=200x200
+    price: 1650
+- special_isbn: '9784785964870'
+  normal_isbn: '9784785964887'
+  normal_cover: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/4887/9784785964887.jpg?_ex=200x200
+  normal_date: null
+  variant:
+    label: 特装版
+    isbn13: '9784785964870'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/4870/9784785964870.gif?_ex=200x200
+    price: 2728
+- special_isbn: '9784107725103'
+  normal_isbn: '9784107725097'
+  normal_cover: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/5097/9784107725097_1_3.jpg?_ex=200x200
+  normal_date: null
+  variant:
+    label: 小冊子付き特装版
+    isbn13: '9784107725103'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/5103/9784107725103_1_3.jpg?_ex=200x200
+    price: 1100
+- special_isbn: '9784107726841'
+  normal_isbn: '9784107727220'
+  normal_cover: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/7220/9784107727220_1_2.jpg?_ex=200x200
+  normal_date: null
+  variant:
+    label: クロックムッシュのぬいぐるみキーホルダー付き限定版
+    isbn13: '9784107726841'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/6841/9784107726841.jpg?_ex=200x200
+    price: 2970
+- special_isbn: '9784040654355'
+  normal_isbn: '9784040654348'
+  normal_cover: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/4348/9784040654348_1_4.jpg?_ex=200x200
+  normal_date: null
+  variant:
+    label: ドラマCD付き特装版
+    isbn13: '9784040654355'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/4355/9784040654355_1_2.jpg?_ex=200x200
+    price: 2035
+- special_isbn: '9784592106357'
+  normal_isbn: '9784592166924'
+  normal_cover: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/6924/9784592166924_1_2.jpg?_ex=200x200
+  normal_date: null
+  variant:
+    label: ガッツ (狂戦士の甲冑) 胸像フィギュア付き特装版
+    isbn13: '9784592106357'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/6357/9784592106357.jpg?_ex=200x200
+    price: 7990
+- special_isbn: '9784099430870'
+  normal_isbn: '9784098713011'
+  normal_cover: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/3011/9784098713011_1_3.jpg?_ex=200x200
+  normal_date: null
+  variant:
+    label: 特装版
+    isbn13: '9784099430870'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0870/9784099430870.jpg?_ex=200x200
+    price: 899
+- special_isbn: '9784099431426'
+  normal_isbn: '9784091577900'
+  normal_cover: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/7900/9784091577900_1_15.jpg?_ex=200x200
+  normal_date: null
+  variant:
+    label: アクリルスタンド14種付き限定版
+    isbn13: '9784099431426'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/1426/9784099431426.jpg?_ex=200x200
+    price: 6930
+- special_isbn: '9784864423410'
+  normal_isbn: '9784864423403'
+  normal_cover: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/3403/9784864423403_1_5.jpg?_ex=200x200
+  normal_date: null
+  variant:
+    label: 初回限定小冊子付特装版
+    isbn13: '9784864423410'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/3410/9784864423410_1_5.jpg?_ex=200x200
+    price: 1049
+- special_isbn: '9784864423953'
+  normal_isbn: '9784864423946'
+  normal_cover: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/3946/9784864423946_1_6.jpg?_ex=200x200
+  normal_date: null
+  variant:
+    label: 初回限定特装版
+    isbn13: '9784864423953'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/3953/9784864423953_1_6.jpg?_ex=200x200
+    price: 1023
+- special_isbn: '9784864424226'
+  normal_isbn: '9784864424219'
+  normal_cover: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/4219/9784864424219_1_7.jpg?_ex=200x200
+  normal_date: null
+  variant:
+    label: 初回限定小冊子付特装版
+    isbn13: '9784864424226'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/4226/9784864424226_1_7.jpg?_ex=200x200
+    price: 1035
+- special_isbn: '9784089082911'
+  normal_isbn: '9784088811758'
+  normal_cover: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/1758/9784088811758.jpg?_ex=200x200
+  normal_date: null
+  variant:
+    label: アニメDVD同梱版
+    isbn13: '9784089082911'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/2911/9784089082911.jpg?_ex=200x200
+    price: 3740
+- special_isbn: '9784253226660'
+  normal_isbn: '9784253226677'
+  normal_cover: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/6677/9784253226677_1_10.jpg?_ex=200x200
+  normal_date: null
+  variant:
+    label: 特装版
+    isbn13: '9784253226660'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/6660/9784253226660_1_4.jpg?_ex=200x200
+    price: 990
+- special_isbn: '9784253229685'
+  normal_isbn: '9784253229692'
+  normal_cover: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/9692/9784253229692_1_7.jpg?_ex=200x200
+  normal_date: null
+  variant:
+    label: 特装版
+    isbn13: '9784253229685'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/9685/9784253229685_1_9.jpg?_ex=200x200
+    price: 2500
+- special_isbn: '9784253229708'
+  normal_isbn: '9784253284769'
+  normal_cover: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/4769/9784253284769_1_10.jpg?_ex=200x200
+  normal_date: null
+  variant:
+    label: 特装版
+    isbn13: '9784253229708'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/9708/9784253229708_1_4.jpg?_ex=200x200
+    price: 1100
+- special_isbn: '9784864421126'
+  normal_isbn: '9784864421447'
+  normal_cover: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/1447/9784864421447.jpg?_ex=200x200
+  normal_date: null
+  variant:
+    label: '[限定版]'
+    isbn13: '9784864421126'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/1126/9784864421126.jpg?_ex=200x200
+    price: 1037
+- special_isbn: '9784840138796'
+  normal_isbn: '9784840138789'
+  normal_cover: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/8789/9784840138789.jpg?_ex=200x200
+  normal_date: null
+  variant:
+    label: DVD付特装版
+    isbn13: '9784840138796'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/8796/9784840138796.jpg?_ex=200x200
+    price: 1430
+- special_isbn: '9784758076807'
+  normal_isbn: '9784758076739'
+  normal_cover: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/6739/9784758076739.jpg?_ex=200x200
+  normal_date: null
+  variant:
+    label: 特装版
+    isbn13: '9784758076807'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/6807/9784758076807.jpg?_ex=200x200
+    price: 1320
+- special_isbn: '9784758077439'
+  normal_isbn: '9784758077415'
+  normal_cover: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/7415/9784758077415.jpg?_ex=200x200
+  normal_date: null
+  variant:
+    label: 特装版
+    isbn13: '9784758077439'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/7439/9784758077439.jpg?_ex=200x200
+    price: 1485
+- special_isbn: '9784047128231'
+  normal_isbn: '9784047128668'
+  normal_cover: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/8668/9784047128668.jpg?_ex=200x200
+  normal_date: null
+  variant:
+    label: ブルーレイ付き限定版
+    isbn13: '9784047128231'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/8231/9784047128231_1_2.jpg?_ex=200x200
+    price: 2475
+- special_isbn: '9784088552248'
+  normal_isbn: '9784088552163'
+  normal_cover: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/2163/9784088552163_1_5.jpg?_ex=200x200
+  normal_date: null
+  variant:
+    label: 特装版
+    isbn13: '9784088552248'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/2248/9784088552248_1_5.jpg?_ex=200x200
+    price: 1430
+- special_isbn: '9784107726247'
+  normal_isbn: '9784107726704'
+  normal_cover: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/6704/9784107726704.jpg?_ex=200x200
+  normal_date: null
+  variant:
+    label: マサルお座りマスコット付き限定版
+    isbn13: '9784107726247'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/6247/9784107726247_1_4.jpg?_ex=200x200
+    price: 2970
+- special_isbn: '9784099418397'
+  normal_isbn: '9784091251039'
+  normal_cover: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/1039/9784091251039.jpg?_ex=200x200
+  normal_date: null
+  variant:
+    label: OVA付き限定版
+    isbn13: '9784099418397'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/8397/9784099418397.jpg?_ex=200x200
+    price: 3520
+- special_isbn: '9784099418458'
+  normal_isbn: '9784091255808'
+  normal_cover: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/5808/9784091255808.jpg?_ex=200x200
+  normal_date: null
+  variant:
+    label: 特装版
+    isbn13: '9784099418458'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/8458/9784099418458.jpg?_ex=200x200
+    price: 3520
+- special_isbn: '9784099430993'
+  normal_isbn: '9784098612338'
+  normal_cover: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/2338/9784098612338_1_7.jpg?_ex=200x200
+  normal_date: null
+  variant:
+    label: 限定版
+    isbn13: '9784099430993'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0993/9784099430993_1_7.jpg?_ex=200x200
+    price: 1200
+- special_isbn: '9784107724205'
+  normal_isbn: '9784107724199'
+  normal_cover: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/4199/9784107724199_1_4.jpg?_ex=200x200
+  normal_date: null
+  variant:
+    label: 小冊子付特装版
+    isbn13: '9784107724205'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/4205/9784107724205_1_2.jpg?_ex=200x200
+    price: 990
+- special_isbn: '9784048689380'
+  normal_isbn: '9784048689236'
+  normal_cover: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0486/04868923.jpg?_ex=200x200
+  normal_date: null
+  variant:
+    label: ドラマCDつき特装版
+    isbn13: '9784048689380'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0486/04868938.jpg?_ex=200x200
+    price: 1650
+- special_isbn: '9784107720528'
+  normal_isbn: '9784107720825'
+  normal_cover: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0825/9784107720825.jpg?_ex=200x200
+  normal_date: null
+  variant:
+    label: 限定版
+    isbn13: '9784107720528'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0528/9784107720528.jpg?_ex=200x200
+    price: 2090
+- special_isbn: '9784040656052'
+  normal_isbn: '9784040655642'
+  normal_cover: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/5642/9784040655642.jpg?_ex=200x200
+  normal_date: null
+  variant:
+    label: 阿部かなりイラスト集付き特装版
+    isbn13: '9784040656052'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/6052/9784040656052.jpg?_ex=200x200
+    price: 1222
+- special_isbn: '9784046818089'
+  normal_isbn: '9784046818072'
+  normal_cover: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/8072/9784046818072_1_5.jpg?_ex=200x200
+  normal_date: null
+  variant:
+    label: 阿部かなりイラスト集付き特装版
+    isbn13: '9784046818089'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/8089/9784046818089_1_6.jpg?_ex=200x200
+    price: 1320
+- special_isbn: '9784088552170'
+  normal_isbn: '9784088552149'
+  normal_cover: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/2149/9784088552149_1_4.jpg?_ex=200x200
+  normal_date: null
+  variant:
+    label: 特装版
+    isbn13: '9784088552170'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/2170/9784088552170_1_5.jpg?_ex=200x200
+    price: 1430
+- special_isbn: '9784049122503'
+  normal_isbn: '9784049120622'
+  normal_cover: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0622/9784049120622.jpg?_ex=200x200
+  normal_date: null
+  variant:
+    label: オリジナルCD付き特装版
+    isbn13: '9784049122503'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/2503/9784049122503.jpg?_ex=200x200
+    price: 2037
+- special_isbn: '9784040729749'
+  normal_isbn: '9784040729701'
+  normal_cover: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/9701/9784040729701_1_2.jpg?_ex=200x200
+  normal_date: null
+  variant:
+    label: 特装版
+    isbn13: '9784040729749'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/9749/9784040729749_1_2.jpg?_ex=200x200
+    price: 1100
+- special_isbn: '9784040652139'
+  normal_isbn: '9784040652122'
+  normal_cover: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/2122/9784040652122.jpg?_ex=200x200
+  normal_date: null
+  variant:
+    label: オーディオドラマダウンロードコード小冊子付き特装版
+    isbn13: '9784040652139'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/2139/9784040652139.jpg?_ex=200x200
+    price: 2035
+- special_isbn: '9784040750736'
+  normal_isbn: '9784040750484'
+  normal_cover: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0484/9784040750484_1_7.jpg?_ex=200x200
+  normal_date: null
+  variant:
+    label: 小冊子付き特装版
+    isbn13: '9784040750736'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0736/9784040750736_1_5.jpg?_ex=200x200
+    price: 1320
+- special_isbn: '9784867161661'
+  normal_isbn: '9784867161654'
+  normal_cover: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/1654/9784867161654_1_2.jpg?_ex=200x200
+  normal_date: null
+  variant:
+    label: イラストBOOK付限定版
+    isbn13: '9784867161661'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/1661/9784867161661_1_3.jpg?_ex=200x200
+    price: 1996
+- special_isbn: '9784867164440'
+  normal_isbn: '9784867164433'
+  normal_cover: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/4433/9784867164433_1_2.jpg?_ex=200x200
+  normal_date: null
+  variant:
+    label: 特製描きおろし小冊子&ブロマイドセット付限定版
+    isbn13: '9784867164440'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/4440/9784867164440_1_2.jpg?_ex=200x200
+    price: 1870
+- special_isbn: '9784867166031'
+  normal_isbn: '9784867166024'
+  normal_cover: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/6024/9784867166024_1_2.jpg?_ex=200x200
+  normal_date: null
+  variant:
+    label: 描き下ろし小冊子付限定版
+    isbn13: '9784867166031'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/6031/9784867166031_1_3.jpg?_ex=200x200
+    price: 1430
+- special_isbn: '9784099418359'
+  normal_isbn: '9784091252197'
+  normal_cover: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/2197/9784091252197.jpg?_ex=200x200
+  normal_date: null
+  variant:
+    label: OVA付き特別版
+    isbn13: '9784099418359'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/8359/9784099418359.jpg?_ex=200x200
+    price: 3278
+- special_isbn: '9784048996181'
+  normal_isbn: '9784048996174'
+  normal_cover: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/6174/9784048996174_1_7.jpg?_ex=200x200
+  normal_date: null
+  variant:
+    label: ドラマCD付き特装版
+    isbn13: '9784048996181'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/6181/9784048996181_1_7.jpg?_ex=200x200
+    price: 2750
+- special_isbn: '9784099418571'
+  normal_isbn: '9784091258175'
+  normal_cover: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/8175/9784091258175_1_9.jpg?_ex=200x200
+  normal_date: null
+  variant:
+    label: 限定版
+    isbn13: '9784099418571'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/8571/9784099418571.jpg?_ex=200x200
+    price: 3278
+- special_isbn: '9784099418892'
+  normal_isbn: '9784091275530'
+  normal_cover: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/5530/9784091275530_1_9.jpg?_ex=200x200
+  normal_date: null
+  variant:
+    label: DVD付き限定版
+    isbn13: '9784099418892'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/8892/9784099418892_1_9.jpg?_ex=200x200
+    price: 3278
+- special_isbn: '9784041142165'
+  normal_isbn: '9784041142158'
+  normal_cover: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/2158/9784041142158_1_9.jpg?_ex=200x200
+  normal_date: null
+  variant:
+    label: 特装版
+    isbn13: '9784041142165'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/2165/9784041142165_1_7.jpg?_ex=200x200
+    price: 1320
+- special_isbn: '9784099418854'
+  normal_isbn: '9784091894465'
+  normal_cover: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/4465/9784091894465_1_17.jpg?_ex=200x200
+  normal_date: null
+  variant:
+    label: 限定版
+    isbn13: '9784099418854'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/8854/9784099418854_1_25.jpg?_ex=200x200
+    price: 1425
+- special_isbn: '9784041141649'
+  normal_isbn: '9784041142141'
+  normal_cover: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/2141/9784041142141_1_7.jpg?_ex=200x200
+  normal_date: null
+  variant:
+    label: 特装版
+    isbn13: '9784041141649'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/1649/9784041141649_1_5.jpg?_ex=200x200
+    price: 1320
+- special_isbn: '9784041148433'
+  normal_isbn: '9784041148426'
+  normal_cover: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/8426/9784041148426_1_9.jpg?_ex=200x200
+  normal_date: null
+  variant:
+    label: 特装版
+    isbn13: '9784041148433'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/8433/9784041148433_1_9.jpg?_ex=200x200
+    price: 1320
+- special_isbn: '9784040642482'
+  normal_isbn: '9784040642475'
+  normal_cover: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/2475/9784040642475.jpg?_ex=200x200
+  normal_date: null
+  variant:
+    label: アニメDVD付き特装版
+    isbn13: '9784040642482'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/2482/9784040642482.jpg?_ex=200x200
+    price: 3721
+- special_isbn: '9784091591821'
+  normal_isbn: '9784091357199'
+  normal_cover: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/7199/9784091357199.jpg?_ex=200x200
+  normal_date: null
+  variant:
+    label: DVD付特装版
+    isbn13: '9784091591821'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/1821/9784091591821.jpg?_ex=200x200
+    price: 1089
+- special_isbn: '9784099431594'
+  normal_isbn: '9784091437181'
+  normal_cover: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/7181/9784091437181.jpg?_ex=200x200
+  normal_date: null
+  variant:
+    label: 豪華イラスト集付き特装版
+    isbn13: '9784099431594'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/1594/9784099431594_1_2.jpg?_ex=200x200
+    price: 1870
+- special_isbn: '9784099418403'
+  normal_isbn: '9784091251893'
+  normal_cover: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/1893/9784091251893.jpg?_ex=200x200
+  normal_date: null
+  variant:
+    label: ドラマＣＤ付き特別版
+    isbn13: '9784099418403'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/8403/9784099418403.jpg?_ex=200x200
+    price: 2138
+- special_isbn: '9784041072820'
+  normal_isbn: '9784041060056'
+  normal_cover: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0056/9784041060056_1_2.jpg?_ex=200x200
+  normal_date: null
+  variant:
+    label: 特装版
+    isbn13: '9784041072820'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/2820/9784041072820_1_2.jpg?_ex=200x200
+    price: 990
+- special_isbn: '9784041125137'
+  normal_isbn: '9784041125144'
+  normal_cover: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/5144/9784041125144_1_3.jpg?_ex=200x200
+  normal_date: null
+  variant:
+    label: 特装版
+    isbn13: '9784041125137'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/5137/9784041125137_1_4.jpg?_ex=200x200
+    price: 2420
+- special_isbn: '9784046811400'
+  normal_isbn: '9784046811417'
+  normal_cover: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/1417/9784046811417_1_12.jpg?_ex=200x200
+  normal_date: null
+  variant:
+    label: アニメDVD付き特装版
+    isbn13: '9784046811400'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/1400/9784046811400_1_8.jpg?_ex=200x200
+    price: 4378
+- special_isbn: '9784046827579'
+  normal_isbn: '9784046827593'
+  normal_cover: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/7593/9784046827593_1_13.jpg?_ex=200x200
+  normal_date: null
+  variant:
+    label: 公式同人誌付き特装版
+    isbn13: '9784046827579'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/7579/9784046827579_1_11.jpg?_ex=200x200
+    price: 1650
+- special_isbn: '9784099418182'
+  normal_isbn: '9784091244048'
+  normal_cover: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/4048/9784091244048.jpg?_ex=200x200
+  normal_date: null
+  variant:
+    label: OVA付き特別版
+    isbn13: '9784099418182'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/8182/9784099418182.jpg?_ex=200x200
+    price: 5217
+- special_isbn: '9784087821734'
+  normal_isbn: '9784088568126'
+  normal_cover: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0885/08856812.jpg?_ex=200x200
+  normal_date: null
+  variant:
+    label: 特装版
+    isbn13: '9784087821734'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0878/08782173.jpg?_ex=200x200
+    price: 1257
+- special_isbn: '9784087821925'
+  normal_isbn: '9784088568492'
+  normal_cover: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0885/08856849.jpg?_ex=200x200
+  normal_date: null
+  variant:
+    label: 特装版
+    isbn13: '9784087821925'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0878/08782192.jpg?_ex=200x200
+    price: 1257
+- special_isbn: '9784107720191'
+  normal_isbn: '9784107720603'
+  normal_cover: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0603/9784107720603.jpg?_ex=200x200
+  normal_date: null
+  variant:
+    label: 限定版
+    isbn13: '9784107720191'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0191/9784107720191.jpg?_ex=200x200
+    price: 1540
+- special_isbn: '9784758058520'
+  normal_isbn: '9784758058513'
+  normal_cover: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/8513/9784758058513.jpg?_ex=200x200
+  normal_date: null
+  variant:
+    label: 限定版
+    isbn13: '9784758058520'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/8520/9784758058520.jpg?_ex=200x200
+    price: 1257
+- special_isbn: '9784758075183'
+  normal_isbn: '9784758075152'
+  normal_cover: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/5152/9784758075152.jpg?_ex=200x200
+  normal_date: null
+  variant:
+    label: 特装版
+    isbn13: '9784758075183'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/5183/9784758075183.jpg?_ex=200x200
+    price: 2178
+- special_isbn: '9784048932660'
+  normal_isbn: '9784048933001'
+  normal_cover: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/3001/9784048933001_1_4.jpg?_ex=200x200
+  normal_date: null
+  variant:
+    label: オリジナルCD付き限定版
+    isbn13: '9784048932660'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/2660/9784048932660_1_2.jpg?_ex=200x200
+    price: 2037
+- special_isbn: '9784049121049'
+  normal_isbn: '9784049121056'
+  normal_cover: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/1056/9784049121056_1_2.jpg?_ex=200x200
+  normal_date: null
+  variant:
+    label: オリジナルCD付き限定版
+    isbn13: '9784049121049'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/1049/9784049121049_1_2.jpg?_ex=200x200
+    price: 2037
+- special_isbn: '9784049124668'
+  normal_isbn: '9784049124675'
+  normal_cover: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/4675/9784049124675_1_2.jpg?_ex=200x200
+  normal_date: null
+  variant:
+    label: オリジナルCD付き限定版
+    isbn13: '9784049124668'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/4668/9784049124668_1_2.jpg?_ex=200x200
+    price: 2037
+- special_isbn: '9784049137767'
+  normal_isbn: '9784049137774'
+  normal_cover: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/7774/9784049137774_1_3.jpg?_ex=200x200
+  normal_date: null
+  variant:
+    label: オリジナルCD付き限定版
+    isbn13: '9784049137767'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/7767/9784049137767_1_4.jpg?_ex=200x200
+    price: 2500
+- special_isbn: '9784049140095'
+  normal_isbn: '9784049140088'
+  normal_cover: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0088/9784049140088_1_5.jpg?_ex=200x200
+  normal_date: null
+  variant:
+    label: オリジナルCD付き限定版
+    isbn13: '9784049140095'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0095/9784049140095_1_6.jpg?_ex=200x200
+    price: 2600
+- special_isbn: '9784049143577'
+  normal_isbn: '9784049143584'
+  normal_cover: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/3584/9784049143584_1_6.jpg?_ex=200x200
+  normal_date: null
+  variant:
+    label: オリジナルCD付き限定版
+    isbn13: '9784049143577'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/3577/9784049143577_1_6.jpg?_ex=200x200
+    price: 2600
+- special_isbn: '9784049145953'
+  normal_isbn: '9784049145946'
+  normal_cover: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/5946/9784049145946_1_6.jpg?_ex=200x200
+  normal_date: null
+  variant:
+    label: オリジナルCD付き限定版
+    isbn13: '9784049145953'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/5953/9784049145953_1_6.jpg?_ex=200x200
+    price: 2799
+- special_isbn: '9784049147414'
+  normal_isbn: '9784049147421'
+  normal_cover: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/7421/9784049147421_1_5.jpg?_ex=200x200
+  normal_date: null
+  variant:
+    label: オリジナルCD付き限定版
+    isbn13: '9784049147414'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/7414/9784049147414_1_7.jpg?_ex=200x200
+    price: 2799
+- special_isbn: '9784049150032'
+  normal_isbn: '9784049150049'
+  normal_cover: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0049/9784049150049_1_6.jpg?_ex=200x200
+  normal_date: null
+  variant:
+    label: オリジナルCD付き限定版
+    isbn13: '9784049150032'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0032/9784049150032_1_5.jpg?_ex=200x200
+    price: 2799
+- special_isbn: '9784041147382'
+  normal_isbn: '9784041147375'
+  normal_cover: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/7375/9784041147375_1_11.jpg?_ex=200x200
+  normal_date: null
+  variant:
+    label: 鎌池和馬書き下ろし小説『じょおうのおしばい』付き特装版
+    isbn13: '9784041147382'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/7382/9784041147382_1_7.jpg?_ex=200x200
+    price: 1540
+- special_isbn: '9784047371224'
+  normal_isbn: '9784047371217'
+  normal_cover: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/1217/9784047371217_1_4.jpg?_ex=200x200
+  normal_date: null
+  variant:
+    label: ドラマCD付き特装版
+    isbn13: '9784047371224'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/1224/9784047371224_1_6.jpg?_ex=200x200
+    price: 1980
+- special_isbn: '9784107719348'
+  normal_isbn: '9784107719478'
+  normal_cover: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/9478/9784107719478.jpg?_ex=200x200
+  normal_date: null
+  variant:
+    label: 限定版
+    isbn13: '9784107719348'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/9348/9784107719348.jpg?_ex=200x200
+    price: 1870
+- special_isbn: '9784040658490'
+  normal_isbn: '9784040658483'
+  normal_cover: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/8483/9784040658483.jpg?_ex=200x200
+  normal_date: null
+  variant:
+    label: ドラマCD付き特装版
+    isbn13: '9784040658490'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/8490/9784040658490.jpg?_ex=200x200
+    price: 1980

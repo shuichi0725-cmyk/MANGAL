@@ -52,9 +52,14 @@ editions:
     release_date: 2021-02
   - number: 5
     asin: null
-    isbn13: '9784253226660'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/6660/9784253226660_1_4.jpg?_ex=200x200
+    isbn13: '9784253226677'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/6677/9784253226677_1_10.jpg?_ex=200x200
     release_date: 2021-07
+    variants:
+    - label: 特装版
+      isbn13: '9784253226660'
+      cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/6660/9784253226660_1_4.jpg?_ex=200x200
+      price: 990
   - number: 6
     asin: null
     isbn13: '9784253226691'
@@ -72,14 +77,24 @@ editions:
     release_date: 2023-03
   - number: 9
     asin: null
-    isbn13: '9784253229685'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/9685/9784253229685_1_9.jpg?_ex=200x200
+    isbn13: '9784253229692'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/9692/9784253229692_1_7.jpg?_ex=200x200
     release_date: 2023-11
+    variants:
+    - label: 特装版
+      isbn13: '9784253229685'
+      cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/9685/9784253229685_1_9.jpg?_ex=200x200
+      price: 2500
   - number: 10
     asin: null
-    isbn13: '9784253229708'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/9708/9784253229708_1_4.jpg?_ex=200x200
+    isbn13: '9784253284769'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/4769/9784253284769_1_10.jpg?_ex=200x200
     release_date: 2024-04
+    variants:
+    - label: 特装版
+      isbn13: '9784253229708'
+      cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/9708/9784253229708_1_4.jpg?_ex=200x200
+      price: 1100
   - number: 11
     asin: null
     isbn13: '9784253284776'

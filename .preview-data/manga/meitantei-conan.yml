@@ -462,9 +462,14 @@ editions:
     release_date: '2014-12-23'
   - number: 86
     asin: null
-    isbn13: '9784099418571'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/8571/9784099418571.jpg?_ex=200x200
+    isbn13: '9784091258175'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/8175/9784091258175_1_9.jpg?_ex=200x200
     release_date: 2015-04
+    variants:
+    - label: 限定版
+      isbn13: '9784099418571'
+      cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/8571/9784099418571.jpg?_ex=200x200
+      price: 3278
   - number: 87
     asin: null
     isbn13: '9784091262097'
@@ -492,9 +497,14 @@ editions:
     release_date: '2016-12-21'
   - number: 92
     asin: null
-    isbn13: '9784099418892'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/8892/9784099418892_1_9.jpg?_ex=200x200
+    isbn13: '9784091275530'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/5530/9784091275530_1_9.jpg?_ex=200x200
     release_date: 2017-04
+    variants:
+    - label: DVD付き限定版
+      isbn13: '9784099418892'
+      cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/8892/9784099418892_1_9.jpg?_ex=200x200
+      price: 3278
   - number: 93
     asin: null
     isbn13: '9784091276711'
