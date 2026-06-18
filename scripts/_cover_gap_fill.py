@@ -79,16 +79,24 @@ def main():
     gap_isbns=sorted({i for _,g in targets for i in g})
     print(f'歯抜け先頭{len(targets)}作 / 欠けISBN(ISBN有){len(gap_isbns)} [{time.time()-t0:.0f}s]',flush=True)
 
-    # 2) 書影取得(CDN先, ダメなら API)
-    cover={}; via_cdn=0; via_api=0
+    # 2) 書影取得(CDN先, ダメなら API)。 ISBN結果をキャッシュ=中断耐性・冪等。
+    CDNONLY='--cdn-only' in sys.argv
+    cachef=ROOT/'.cache'/'cover-fill-cache.json'
+    try: ccache=json.loads(cachef.read_text(encoding='utf-8')) if cachef.exists() else {}
+    except: ccache={}
+    cover={}; new=0
     for n,ib in enumerate(gap_isbns,1):
-        c=cover_cdn(ib)
-        if c: cover[ib]=c; via_cdn+=1
+        if ib in ccache:
+            c=ccache[ib]
         else:
-            c=cover_api(ib)
-            if c: cover[ib]=c; via_api+=1
-        if n%50==0: print(f'  {n}/{len(gap_isbns)} 取得{len(cover)}(cdn{via_cdn}/api{via_api}) [{time.time()-t0:.0f}s]',flush=True)
-    print(f'書影取得: {len(cover)}/{len(gap_isbns)} (CDN {via_cdn} / API {via_api})',flush=True)
+            c=cover_cdn(ib)
+            if not c and not CDNONLY: c=cover_api(ib)
+            ccache[ib]=c; new+=1
+            if new%200==0: cachef.write_text(json.dumps(ccache,ensure_ascii=False),encoding='utf-8')
+        if c: cover[ib]=c
+        if n%500==0: print(f'  {n}/{len(gap_isbns)} 取得{len(cover)} (新規照会{new}) [{time.time()-t0:.0f}s]',flush=True)
+    cachef.write_text(json.dumps(ccache,ensure_ascii=False),encoding='utf-8')
+    print(f'書影取得: {len(cover)}/{len(gap_isbns)} (新規照会{new}/キャッシュ{len(gap_isbns)-new})',flush=True)
     if DRY:
         print('[DRY] 適用せず終了'); return
 
