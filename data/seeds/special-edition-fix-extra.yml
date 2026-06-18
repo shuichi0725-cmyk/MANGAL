@@ -1,0 +1,38 @@
+# ユーザ確認4件(種1で通常版ISBN確定)。 通常版主+特装variant。
+corrections:
+- special_isbn: '9784862523709'
+  normal_isbn: '9784862528629'
+  normal_cover: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/8625/86252862.jpg?_ex=200x200
+  normal_date: null
+  variant:
+    label: 初回限定版
+    isbn13: '9784862523709'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/8625/86252370.jpg?_ex=200x200
+    price: 921
+- special_isbn: '9784840125949'
+  normal_isbn: '9784840125956'
+  normal_cover: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/8401/84012595.jpg?_ex=200x200
+  normal_date: null
+  variant:
+    label: ドラマCD付き限定版
+    isbn13: '9784840125949'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/8401/84012594.jpg?_ex=200x200
+    price: 1351
+- special_isbn: '9784862525826'
+  normal_isbn: '9784862529398'
+  normal_cover: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/8625/86252939.jpg?_ex=200x200
+  normal_date: null
+  variant:
+    label: 初回限定版
+    isbn13: '9784862525826'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/8625/86252582.jpg?_ex=200x200
+    price: 921
+- special_isbn: '9784862525611'
+  normal_isbn: '9784862529855'
+  normal_cover: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/8625/86252985.jpg?_ex=200x200
+  normal_date: null
+  variant:
+    label: 初回限定版
+    isbn13: '9784862525611'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/8625/86252561.jpg?_ex=200x200
+    price: 921
