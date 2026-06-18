@@ -70,9 +70,12 @@ def main():
         wrong_a=auth.get(wrong,set()); owner_a=auth.get(owner,set())
         wrong_vs_ndl = amatch(wrong_a,ndl_a)      # 誤付与作の著者がNDL著者と一致?
         owner_vs_ndl = amatch(owner_a,ndl_a)
+        wrong_vs_owner = amatch(wrong_a,owner_a)  # ★誤付与作と正所有者が同じ著者=同一作(分裂/重複)
         # 高信頼の誤付与 = NDL著者があり、誤付与作と不一致(=楽天題別作 と NDL著者不一致 の2ソース合致)
         conf='LOW'
-        if not ib.startswith('9784'):
+        if wrong_vs_owner is True:
+            conf='DUPLICATE'  # 同一作の重複/分裂 → 除去でなく統合案件(spiral型)
+        elif not ib.startswith('9784'):
             conf='FOREIGN'   # 978-3等=外国版ISBN→別問題(drop候補)
         elif ndl_a:
             if wrong_vs_ndl is False and (owner_vs_ndl is True or owner=='(所有者不明)'):
