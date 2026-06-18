@@ -46,11 +46,15 @@ def main():
         if not fp.exists(): continue
         try: d=yaml.load(fp.read_text(encoding='utf-8'),Loader=L)
         except: continue
-        allv=[to13(v.get('isbn13')) for e in (d.get('editions') or []) for v in (e.get('volumes') or [])]
-        allv=[x for x in allv if x]
-        remain=[x for x in allv if x not in rem]
-        if remain: safe[slug]=rem
-        else: deferred.append((slug,len(allv)))
+        # ★ISBN無し巻も含めて全巻で数える(ワースト=小室の本物vol1-4はISBN無し→残すべき)
+        total=0; removed=0
+        for e in (d.get('editions') or []):
+            for v in (e.get('volumes') or []):
+                total+=1
+                ib=to13(v.get('isbn13'))
+                if ib and ib in rem: removed+=1
+        if total>0 and removed<total: safe[slug]=rem   # 何か残る(ISBN無しの本物含む)=部分除去で安全
+        else: deferred.append((slug,total))             # 全巻が除去対象=真の空化
     with (ROOT/'data'/'seeds'/'t3-deferred-emptied.tsv').open('w',encoding='utf-8-sig',newline='') as f:
         w=csv.writer(f,delimiter='\t'); w.writerow(['slug','all_vols_are_otherworks'])
         for s,n in deferred: w.writerow([s,n])
