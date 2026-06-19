@@ -46,6 +46,10 @@ HEB=sorted(((hebon(k),e,k) for k,e in L.items()),key=lambda x:-len(x[0]))
 # 曖昧語OVERRIDE(私が題で判定。 slug→新slug直接指定)。未記載のナイト等は触らない
 OVERRIDE={
  'love-ando-fuaiyaa':'love-and-fire','ore-no-maibooru':'ore-no-my-ball','osananajimi-wa-faiaaman':'osananajimi-wa-fireman',
+ 'seijo-wa-naitotachi-ni-midasareru':'seijo-wa-knighttachi-ni-midasareru','vampire-naito-memories':'vampire-knight-memories',
+ 'princess-kun-to-naito-san':'princess-kun-to-knight-san','okubyou-hime-to-dekiai-naito':'okubyou-hime-to-dekiai-knight',
+ 'naito-no-musume':'knight-no-musume','aruhi-naito-ni-attanara':'aruhi-knight-ni-attanara','kukkoro-naito':'kukkoro-knight',
+ '100-mandoru-naito':'100-mandoru-night','mainichi-nekozanmai-dei-naito':'mainichi-nekozanmai-dei-night',
 }
 def main():
     rows=[x for x in csv.reader(open(ROOT/'data'/'seeds'/'slug-loanword-genuine.tsv',encoding='utf-8-sig'),delimiter='\t') if x[0]!='slug']
