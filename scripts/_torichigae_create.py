@@ -47,10 +47,11 @@ def romaji(kana):
         elif re.match(r'[a-zA-Z0-9]',ch): out.append(ch.lower())
         i+=1
     return re.sub(r'\s+',' ',''.join(out)).strip()
-def slugify(kana,title):
+def slugify(kana,title,isbn=""):
     base=romaji(kana) or romaji(title)
     s=re.sub(r'[^a-z0-9 ]','',base.lower()); s=re.sub(r'\s+','-',s.strip())
-    return s or 'work'
+    if len(s.replace('-',''))<3: s='r-'+(isbn[-7:] if isbn else 'x')   # 漢字等でromaji不能=有効placeholder(後でslugパイプライン整形)
+    return s
 # --- genre 暫定(楽天あらすじ keyword) ---
 GK=[('isekai',['異世界','転生','転移']),('romance',['恋','ラブ','結婚','婚約','溺愛']),('romcom',['ラブコメ']),('fantasy',['ファンタジー','魔法','魔王','勇者','ドラゴン']),('action',['バトル','戦い','格闘','アクション']),('sports',['スポーツ','部活','甲子園']),('baseball',['野球']),('soccer',['サッカー']),('horror',['ホラー','恐怖','怪談']),('mystery',['推理','謎','探偵','事件']),('comedy',['コメディ','ギャグ','笑']),('school',['学園','高校','生徒','クラス']),('historical',['歴史','戦国','幕末']),('sci-fi',['sf','宇宙','ロボット','未来']),('gourmet',['料理','グルメ','食']),('slice-of-life',['日常']),('drama',['ドラマ','人生','感動']),('bl',['ボーイズラブ','bl']),('supernatural',['妖怪','幽霊','超能力'])]
 def guess_genres(cap):
@@ -102,6 +103,20 @@ def ndl_isbn(isbn):
         break
     return res
 
+WESTERN_NAMES=['シュルツ','デーヴィス','デイビス','デービス','ヤンソン','エルジェ','ゴシニ','ユデルゾ','azzar','kennedy','ケネディ','schulz','davis','jansson','disney','ディズニー','ミシェルニー','ミッシェルニー']
+WESTERN_IP=['ガーフィールド','ピーナッツ','スヌーピー','ムーミン','タンタン','スーパーマン','バットマン','スパイダーマン','スターウォーズ','スター・ウォーズ','ダークエンパイア','ダーク・エンパイア','ピングー','ディズニー','マーベル','garfield','peanuts','snoopy','muumin','superman','batman','star wars','pingu']
+def is_western(author,title):
+    a=(author or '').lower(); t=re.sub(r'[\s　・]','',(title or '')).lower()
+    if any(w.lower() in a for w in WESTERN_NAMES): return True
+    if any(w.lower().replace(' ','') in t for w in WESTERN_IP): return True
+    return False
+def lcp_titles(ts):
+    ts=[t for t in ts if t]
+    if not ts: return ''
+    s1=min(ts); s2=max(ts); n=0
+    while n<len(s1) and n<len(s2) and s1[n]==s2[n]: n+=1
+    return s1[:n]
+
 def main():
     # CREATE_NEW 対象 (計画表)
     targets=[]
@@ -125,61 +140,81 @@ def main():
         except: continue
         if ib and o.get('item'): rk[ib]=o['item']
     existing=set(p.stem for p in (ROOT/'data'/'manga.v2').glob('*.yml'))
-    made=[]
+    made=[]; route_B=[]; route_C=[]
     for slug in targets:
-        d=yaml.load((ROOT/'data'/'manga.v2'/f'{slug}.yml').read_text(encoding='utf-8'),Loader=L)
-        # 誤ISBN巻を収集(number, isbn)
+        fp0=ROOT/'data'/'manga.v2'/f'{slug}.yml'
+        if not fp0.exists(): continue
+        d=yaml.load(fp0.read_text(encoding='utf-8'),Loader=L)
         vols=[]
         for e in (d.get('editions') or []):
             for v in (e.get('volumes') or []):
                 ib=to13(v.get('isbn13'))
                 if ib in wrong[slug]: vols.append((v.get('number') or 0, ib))
         if not vols: continue
-        vols=sorted(set(vols))
-        isbns=[ib for _,ib in vols]
-        nd=ndl_isbn(isbns[0]); time.sleep(0.8)
-        tt=stripvol(nd.get('title') or truen[isbns[0]][0]); ttk=stripvol(nd.get('yomi') or '')
-        au=nd.get('creator') or truen[isbns[0]][1].split(';')[0]
-        # 巻 build (楽天 cover/date)
+        vols=sorted(set(vols)); isbns=[ib for _,ib in vols]
+        # 楽天 巻題 → LCP=シリーズ題(NDL巻副題より堅牢)
+        rktitles=[stripvol(rk[ib].get('title')) for ib in isbns if ib in rk and rk[ib].get('title')]
+        stem=lcp_titles(rktitles)
+        src_t,src_a=truen[isbns[0]]
+        # 著者(楽天 author 優先=現役綴り、無ければsrc)
+        au=''
+        for ib in isbns:
+            if ib in rk and rk[ib].get('author'): au=rk[ib]['author']; break
+        au=au or src_a.split(';')[0]
+        title=stem or stripvol(src_t)
+        # --- scope: 欧米コミック → B(作らない) ---
+        if is_western(au,title) or is_western(src_a,src_t):
+            route_B.append((slug,title,au)); continue
+        # --- 一貫性: 題が機械生成不可 → C(退避) ---
+        if len(re.sub(r'[\s　]','',stem))<2:
+            route_C.append((slug,stripvol(src_t),au)); continue
+        # 巻 build
         nv=[]; years=[]; pubs=set(); caps=[]
         for num,ib in vols:
             it=rk.get(ib,{}); u=it.get('largeImageUrl') or ''
             cov=(u.split('?')[0]+'?_ex=200x200') if u and 'noimage' not in u else None
             sd=it.get('salesDate') or ''; m=re.search(r'(\d{4})\D+(\d{1,2})\D+(\d{1,2})',sd) or re.search(r'(\d{4})',sd)
-            rd=None
-            if m and m.lastindex>=3: rd=f'{m.group(1)}-{int(m.group(2)):02d}-{int(m.group(3)):02d}'
-            elif m: rd=m.group(1); years.append(int(m.group(1)))
-            if rd and len(rd)>=4: years.append(int(rd[:4]))
+            rdt=None
+            if m and m.lastindex and m.lastindex>=3: rdt=f'{m.group(1)}-{int(m.group(2)):02d}-{int(m.group(3)):02d}'
+            elif m: rdt=m.group(1)
+            if rdt and len(rdt)>=4: years.append(int(rdt[:4]))
             if it.get('publisherName'): pubs.add(it['publisherName'])
             if it.get('itemCaption'): caps.append(it['itemCaption'])
             vv={'number':int(num) if num else len(nv)+1,'isbn13':ib}
             if cov: vv['cover_url']=cov
-            if rd: vv['release_date']=rd
+            if rdt: vv['release_date']=rdt
             nv.append(vv)
-        if not ttk: ttk=tt   # ヨミ取れない時は題で代用(後段kana精緻化)
-        nslug=slugify(ttk,tt)
+        # kana = NDLヨミ(1冊) stripvol
+        nd=ndl_isbn(isbns[0]); time.sleep(0.8)
+        ttk=stripvol(nd.get('yomi') or '')
+        if nd.get('creator') and not is_western(nd['creator'],''): au=nd['creator'] or au
+        title=re.sub(r'[。.\s　]+$','',title)   # 末尾記号除去
+        if not ttk: ttk = title if re.search(r'[ぁ-んァ-ヶ]',title) else title  # ヨミ無=題で代用(後段精緻化)
+        nslug=slugify(ttk,title,isbns[0])
         if nslug in existing or nslug in [m['slug'] for m in made]: nslug=f'{nslug}-{isbns[0][-4:]}'
-        cap=' '.join(caps); genres=guess_genres(cap)
-        ystart=min(years) if years else 2000
+        cap=' '.join(caps); genres=guess_genres(cap); ystart=min(years) if years else 2000
         pk=pubkey(sorted(pubs)[0]) if pubs else '(unknown)'
-        work={'slug':nslug,'title':tt,'title_kana':hk(ttk),'title_romaji':romaji(ttk),
+        work={'slug':nslug,'title':title,'title_kana':hk(ttk),'title_romaji':romaji(ttk),
               'year_started':ystart,'year_ended':max(years) if years else None,
               'authors':[{'name':au,'role':'writer_artist'}],'original_authors':[],'credits':[],
               'publisher':pk,'publishers':[pk] if pk!='(unknown)' else [],
               'demographic':demo_from(genres,cap),'genres':genres,'genres_provisional':True,
               'synopsis':'','status':'completed',
               'editions':[{'type':'standard','label':'通常版','publisher':pk,'volumes':nv}],
-              'note_origin':f'取り違え救済: {slug} に誤格納されていた {au}「{tt}」を保全(CREATE_NEW)'}
+              'note_origin':f'取り違え救済: {slug} に誤格納されていた {au}「{title}」を保全(CREATE_NEW)'}
         made.append(work)
-        print(f'  {slug[:20]:20s} → 新作 {nslug[:24]:24s}「{tt[:12]}」by {au[:10]} {len(nv)}巻 g={genres}',flush=True)
-    # 書き出し
+        print(f'  {slug[:18]:18s} → {nslug[:22]:22s}「{title[:12]}」{au[:9]} {len(nv)}巻 g={genres}',flush=True)
     for w in made:
         y=yaml.dump(w,allow_unicode=True,sort_keys=False,default_flow_style=False)
         for base in ('data/manga.v2','.preview-data/manga'):
             (ROOT/base/f"{w['slug']}.yml").write_text(y,encoding='utf-8')
     with (ROOT/'data'/'seeds'/'torichigae-created.jsonl').open('a',encoding='utf-8') as f:
         st=time.strftime('%Y-%m-%dT%H:%M:%S')
-        for w in made: f.write(json.dumps({'new_slug':w['slug'],'title':w['title'],'author':w['authors'][0]['name'],'vols':len(w['editions'][0]['volumes']),'at':st},ensure_ascii=False)+'\n')
-    print(f'\n作成 {len(made)} 新作 (data/manga.v2 + preview)')
+        for w in made: f.write(json.dumps({'new_slug':w['slug'],'title':w['title'],'author':w['authors'][0]['name'],'vols':len(w['editions'][0]['volumes']),'src_label':w['note_origin'],'at':st},ensure_ascii=False)+'\n')
+    (ROOT/'data'/'seeds'/'torichigae-routeB.tsv').write_text('\n'.join('\t'.join(map(str,r)) for r in route_B),encoding='utf-8')
+    (ROOT/'data'/'seeds'/'torichigae-routeC.tsv').write_text('\n'.join('\t'.join(map(str,r)) for r in route_C),encoding='utf-8')
+    print(f'\n作成A {len(made)} / B(欧米scope外,作らず) {len(route_B)} / C(題不可,退避) {len(route_C)}')
+    print('B:', [r[0] for r in route_B][:20])
+    print('C:', [r[0] for r in route_C][:20])
 
 if __name__=='__main__': main()
