@@ -11,11 +11,16 @@ ROOT=Path(__file__).resolve().parent.parent
 import yaml
 try: from yaml import CSafeLoader as L
 except: from yaml import SafeLoader as L
-def kata(s):
+def _strip(s):
     s=unicodedata.normalize('NFKC',str(s or ''))
-    s=re.sub(r'[ぁ-ん]',lambda m:chr(ord(m.group())+0x60),s)
-    s=re.sub(r'[（(〈\[【].*?[）)〉\]】]','',s)
+    return re.sub(r'[（(〈\[【].*?[）)〉\]】]','',s)
+def kata(s):
+    s=_strip(s); s=re.sub(r'[ぁ-ん]',lambda m:chr(ord(m.group())+0x60),s)
     return re.sub(r'[\s　・:：，,。．\-ー~〜!！?？&＆/+♡♥△▲★☆〜]','',s).lower()
+def kanji(s):  # 漢字のみ抽出(列一致で同一作判定)
+    return ''.join(re.findall(r'[一-龯々〆ヶ]', _strip(s)))
+def alnum(s):  # 英数字のみ(I''s/COBRA/Mär等の同一作判定)
+    return ''.join(re.findall(r'[a-z0-9]', _strip(s).lower()))
 
 def main():
     rows=[]
@@ -28,15 +33,20 @@ def main():
         if not fp.exists(): continue
         try: d=yaml.load(fp.read_text(encoding='utf-8'),Loader=L)
         except: continue
-        meta[slug]={'kana':kata(d.get('title_kana')),'romaji':re.sub(r'[\s\-]','',str(d.get('title_romaji') or '')).lower(),
-                    'en':kata((d.get('alternative_titles') or {}).get('en',''))}
+        meta[slug]={'kana':kata(d.get('title_kana')),'title':d.get('title') or '',
+                    'kanji':kanji(d.get('title')),'alnum':alnum(d.get('title')),
+                    'en_alnum':alnum((d.get('alternative_titles') or {}).get('en','')),
+                    'en_kata':kata((d.get('alternative_titles') or {}).get('en',''))}
     real=[]; fp=[]
     for x in rows:
-        m=meta.get(x[0]); rk=kata(x[5])
+        m=meta.get(x[0]); rk_kata=kata(x[5]); rk_kanji=kanji(x[5]); rk_alnum=alnum(x[5])
         same=False
-        if m and rk:
-            if m['kana'] and m['kana']==rk: same=True            # フリガナ exact
-            elif m['en'] and m['en']==rk: same=True               # 英題カナ exact(稀)
+        if m:
+            if m['kana'] and rk_kata and m['kana']==rk_kata: same=True              # フリガナ一致
+            elif len(m['kanji'])>=2 and m['kanji']==rk_kanji: same=True               # 漢字列一致(2字以上。銀牙伝説Weed↔ウィード。1字共通[姫]の誤一致を回避)
+            elif m['alnum'] and rk_alnum and len(m['alnum'])>=2 and m['alnum']==rk_alnum: same=True  # 英数一致(I''s/COBRA/Mär)
+            elif m['en_kata'] and rk_kata and m['en_kata']==rk_kata: same=True        # 英題のカナ一致
+            elif m['en_alnum'] and rk_alnum and len(m['en_alnum'])>=2 and m['en_alnum']==rk_alnum: same=True
         (fp if same else real).append(x)
     for name,data in (('audit-T3-real',real),('audit-T3-falsepos-reading',fp)):
         with open(ROOT/'data'/'seeds'/f'{name}.tsv','w',encoding='utf-8-sig',newline='') as f:
