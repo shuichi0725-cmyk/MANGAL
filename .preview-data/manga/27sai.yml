@@ -20,7 +20,15 @@ genres:
 synopsis: ''
 anime_adapted: false
 wikidata_qid: Q211099
-editions: []
+editions:
+- type: standard
+  label: 通常版
+  publisher: futabasha
+  volumes:
+  - number: 1
+    isbn13: '9784091351104'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/1104/9784091351104.jpg?_ex=200x200
+    release_date: '2013-02-08'
 publishers:
 - futabasha
 genres_provisional: true
