@@ -15,6 +15,16 @@ ROOT=Path(__file__).resolve().parent.parent
 import yaml
 try: from yaml import CSafeLoader as L
 except: from yaml import SafeLoader as L
+def tcore(s):
+    s=str(s or ''); s=unicodedata.normalize('NFKC',s); s=re.sub(r'[（(〈\[【].*?[）)〉\]】]','',s)
+    s=re.sub(r'[．.]\s*\d+\s*$','',s); s=re.sub(r'[\s　・:：，,。．\-ー~〜!！?？&＆/+]','',s).lower()
+    return re.sub(r'[ぁ-ん]',lambda m:chr(ord(m.group())+0x60),s)
+def kanji(s): return ''.join(re.findall(r'[一-龯々]', str(s or '')))
+def same_title(a,b):
+    ca,cb=tcore(a),tcore(b)
+    if ca and cb and (ca==cb or ca in cb or cb in ca): return True
+    ka,kb=kanji(a),kanji(b)
+    return len(ka)>=2 and ka==kb
 def to13(s):
     s=str(s or '').replace('-','').strip(); return s if len(s)==13 and s.isdigit() else ''
 ROLE=re.compile(r'(著|作画|作|画|原作|漫画|編|原案|脚本|構成|協力|監修|訳|まんが|ストーリー|company)$')
@@ -75,20 +85,22 @@ def main():
                     st='DB_NO_AUTHOR'
                 elif wa & src_au:
                     st='AGREE'
+                elif same_title(src_t, wt):
+                    st='AUTHOR_DIFF'
                 else:
-                    st='CONFLICT'
+                    st='TORICHIGAE'
                 cnt[st]+=1
-                if st in ('CONFLICT',):
-                    rows.append([ib,slug,wt[:18],';'.join(sorted(wa))[:20],str(src_t)[:18],';'.join(sorted(src_au))[:20]])
+                if st in ('TORICHIGAE','AUTHOR_DIFF'):
+                    rows.append([ib,slug,wt[:20],';'.join(sorted(wa))[:18],str(src_t)[:20],';'.join(sorted(src_au))[:18],st])
     out=ROOT/'data'/'seeds'/'isbn-source-table.tsv'
     with open(out,'w',encoding='utf-8-sig',newline='') as f:
         w=csv.writer(f,delimiter='\t'); w.writerow(['isbn','db_slug','db_title','db_author','src_title(種1/楽天)','src_author'])
         for r in rows: w.writerow(r)
     print('\n=== ISBN×厳密著者照合(種1+楽天) ===')
-    for k in ('AGREE','CONFLICT','NO_SOURCE','DB_NO_AUTHOR'):
+    for k in ('AGREE','TORICHIGAE','AUTHOR_DIFF','NO_SOURCE','DB_NO_AUTHOR'):
         print(f'  {k}: {cnt[k]:,}')
-    print(f'  → CONFLICT(取り違え確定)を {out} に記録')
-    print('-- CONFLICT サンプル --')
+    print(f'  → TORICHIGAE/AUTHOR_DIFF を {out} に記録')
+    print('-- TORICHIGAE(本物の取り違え)サンプル --'); rows=[r for r in rows if r[6]=='TORICHIGAE']+[r for r in rows if r[6]=='AUTHOR_DIFF']
     for r in rows[:16]: print(f'  {r[0]} {r[1][:20]:20s}「{r[2][:12]}」DB著[{r[3][:14]}] ≠ 真著[{r[5][:14]}]「{r[4][:12]}」')
 
 if __name__=='__main__': main()
