@@ -147,6 +147,8 @@ export default function ListClient({ data }: { data: DataBundle }) {
             {rows.slice(0, limit).map((m, i) => (
               <tr key={m.slug} className={i % 2 ? "bg-[var(--color-surface)]/60" : ""}>
                 <td className="max-w-[200px] border-b border-[var(--color-line)]/60 px-2 py-1.5">
+                  {/* DEBUG: フォルダ名(slug)表示。 本番前に削除する */}
+                  <span className="block truncate font-mono text-[10px] text-rose-600/80">{m.slug}</span>
                   <Link href={`/manga/${m.slug}`} className="spring-press block truncate font-medium text-[#1f4e79] active:underline">
                     {m.title}
                   </Link>
