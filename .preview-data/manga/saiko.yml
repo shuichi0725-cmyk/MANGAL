@@ -24,16 +24,29 @@ alternative_titles:
 wikidata_qid: Q193300
 editions:
 - type: standard
-  label: 通常版
-  publisher: 講談社
-  imprint: Hard comics
+  label: ハードコミックス
+  publisher: 大都社
   volumes:
   - number: 1
+    asin: null
+    isbn13: null
+    cover_url: null
+    release_date: '1973-12-01'
+    volume_label: 上
+- type: aizoban
+  label: 手塚治虫漫画全集
+  publisher: 講談社
+  volumes:
+  - number: 1
+    isbn13: '9784061087972'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0610/06108797.jpg?_ex=200x200
+    release_date: '1981'
+  - number: 2
     asin: null
     isbn13: '9784061087989'
     cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0610/06108798.jpg?_ex=200x200
     release_date: '1981-09-20'
-  - number: 2
+  - number: 3
     asin: null
     isbn13: '9784061087996'
     cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0610/06108799.jpg?_ex=200x200
