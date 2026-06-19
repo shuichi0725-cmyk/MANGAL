@@ -33,15 +33,17 @@ def creator_str(v):  # cm104 schema:creator = str or list(str|{@value,@language}
     if isinstance(v,dict): return v.get('@value','') if v.get('@language')!='ja-hrkt' else ''
     return str(v or '')
 def hira2kata(s): return re.sub(r'[ぁ-ん]',lambda m:chr(ord(m.group())+0x60),s)
-def na(s):
+def names(s):  # 著者名集合(/、; のみで分割。 ・空白は姓名内なので割らない)
     s=creator_str(s)
     if not s: return set()
     s=unicodedata.normalize('NFKC',s); out=set()
-    for p in re.split(r'[／/、,;・\s]+',s):
-        p=re.sub(r'[\[【][^\]】]*[\]】]','',p.strip()); p=ROLE.sub('',p).strip()
-        p=re.sub(r'[。\.\s]','',p)
-        if len(p)>=2: out.add(hira2kata(p).lower())   # ひらがな→カナで読み揺れ吸収
+    for p in re.split(r'[／/、,;]+',s):
+        p=re.sub(r'[\[【][^\]】]*[\]】]','',p.strip()); p=ROLE.sub('',p)
+        p=re.sub(r'[\s　・。.]','',p)   # 名内の区切り除去=連結
+        if len(p)>=2: out.add(hira2kata(p).lower())
     return out
+def concat(s):  # 連結nodelim(部分一致用)
+    return ''.join(names(s))
 def first(v):
     if isinstance(v,list):
         for x in v:
@@ -58,7 +60,7 @@ def main():
         v=r.get('ma:seriesName') or r.get('schema:name'); return v[0] if isinstance(v,list) else v
     for r in g:
         c=tcore(cnm(r))
-        if c: idx[c]|=na(r.get('schema:creator'))
+        if c: idx[c]|=names(r.get('schema:creator'))
     print(f'cm104 題core {len(idx):,} [楽天種マージ中]',flush=True)
     seed=ROOT/'.cache'/'rakuten-isbn.jsonl'
     if seed.exists():
@@ -66,7 +68,7 @@ def main():
             try: it=json.loads(line).get('item') or {}
             except: continue
             c=tcore(it.get('title'))
-            if c: idx[c]|=na(it.get('author'))
+            if c: idx[c]|=names(it.get('author'))
     print(f'統合 題core {len(idx):,} [スキャン]',flush=True)
     rows=[]; from collections import Counter; cnt=Counter()
     for i,fp in enumerate(sorted((ROOT/'data'/'manga.v2').glob('*.yml'))):
@@ -77,10 +79,11 @@ def main():
         tc=tcore(d.get('title'))
         au=set()
         for k in ('authors','original_authors'):
-            for a in (d.get(k) or []): au|=na(a.get('name') if isinstance(a,dict) else a)
+            for a in (d.get(k) or []): au|=names(a.get('name') if isinstance(a,dict) else a)
         if tc in idx:
-            if not au or (idx[tc] & au): st='OK'
-            else: st='AUTHOR_MISMATCH'
+            src=idx[tc]; sc=''.join(src); oc=''.join(au)
+            hit = (au & src) or any(o in sc for o in au if len(o)>=2) or any(x in oc for x in src if len(x)>=2)
+            st='OK' if (not au or hit) else 'AUTHOR_MISMATCH'
         else: st='NOT_FOUND'
         cnt[st]+=1
         if st!='OK':
