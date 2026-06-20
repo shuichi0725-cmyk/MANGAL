@@ -174,3 +174,16 @@ strip 66(段1:34 / 段3:14 / 段5:18) + repoint 11(段2:5 / 段4:3 / 段4b:3) + 
 - REPOINT自前ISBN要web: refrain-1988/joker-1998-3/work-in/meiou/last-order-kazunari
 - CLEAN23(buyuden/worst/ringo/darker-than-black等)=無処理確定
 - nhk-sono-toki=多著者アンソロ→非掲載方針で保留
+
+#### 段8: de-interleaveクラスタ + 著者ラベル修正 (06-20、ユーザ「1と2」)
+
+**de-interleave 5**(canonicalは無変更、誤claim側から共有ISBN剥がし。bak `sharedisbn-strip-batch-bak-20260620-162738`):
+- `refrain-1988`(ささやななえこ): 岡田ユキオのリフレイン3冊除去→自前9784061754843(1988)残。canonical=`rifrein`(岡田ユキオ)
+- Gundam W 4(`shin-mobile-senki-gundam-wing-1996`/-2/-3/-daburyuu): ときた洸一の講談社4冊(9784063340020/217551/667/728)除去→各自前の学研版(9784056xxx)残。canonical=`shin-mobile-senki-gundam-wing`(ときた洸一)無変更
+  ※学研版Gundam W(みずき健/細雪純/むっちりむうにい)はアンソロ疑い→非掲載方針なら要再検討(flag)
+
+**著者ラベル修正 2**(作品・ISBN正、著者欄のみ誤。bak `authorfix-bak-20260620-162819`):
+- `final-fantasy-lost-stranger`: むつきらん誤→**亀屋樹**(全12巻NDL一致)
+- `meioukeikakuzeoraimaa`: 高屋良樹誤(ガイバー作者)→**ちみもりを/ワタリユウ**(徳間12巻NDL一致)
+
+**残**: STRIP_multied own0(kuro/charisma-2/jun-1983/FE pair/八つ墓村pair/日本の歴史/銀河鉄道) / mahouka×3 franchise / REPOINT要web(joker-1998-3/work-in/last-order-kazunari) / CLEAN23無処理確定。

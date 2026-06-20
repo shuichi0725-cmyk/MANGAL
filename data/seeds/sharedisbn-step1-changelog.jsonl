@@ -85,3 +85,10 @@
 {"slug": "konchi-koremata-eriaru", "op": "revert_remove", "note": "アンソロ非掲載方針=新規作成を取消", "at": "2026-06-20T16:07:24"}
 {"slug": "kaze-no-tani-no-naushika-1984", "op": "dedup_alias", "canon": "kaze-no-tani-no-naushika", "note": "宮崎駿ナウシカの重複(著者unknown部分ISBN)→canonicalへalias", "at": "2026-06-20T16:20:19"}
 {"slug": "the-boxer", "op": "author_fix", "note": "LEEHYE→JH(韓国manhwa THE BOXERの正著者。作品・ISBNは正)", "at": "2026-06-20T16:20:19"}
+{"slug": "refrain-1988", "op": "strip_wrong_author_isbn", "removed": ["9784061021594", "9784061022027", "9784061022249"], "at": "2026-06-20T16:27:38"}
+{"slug": "shin-mobile-senki-gundam-wing-1996", "op": "strip_wrong_author_isbn", "removed": ["9784063217551", "9784063217667", "9784063217728", "9784063340020"], "at": "2026-06-20T16:27:38"}
+{"slug": "shin-mobile-senki-gundam-wing-1996-2", "op": "strip_wrong_author_isbn", "removed": ["9784063217551", "9784063217667", "9784063217728", "9784063340020"], "at": "2026-06-20T16:27:38"}
+{"slug": "shin-mobile-senki-gundam-wing-1996-3", "op": "strip_wrong_author_isbn", "removed": ["9784063217551", "9784063217667", "9784063217728", "9784063340020"], "at": "2026-06-20T16:27:38"}
+{"slug": "shin-mobile-senki-gundam-daburyuu", "op": "strip_wrong_author_isbn", "removed": ["9784063217551", "9784063217667", "9784063217728", "9784063340020"], "at": "2026-06-20T16:27:38"}
+{"slug": "final-fantasy-lost-stranger", "op": "author_fix", "note": "むつきらん誤→亀屋樹(FFロストストレンジャー作画、全12巻NDL一致)", "at": "2026-06-20T16:28:19"}
+{"slug": "meioukeikakuzeoraimaa", "op": "author_fix", "note": "高屋良樹誤(ガイバー作者)→ちみもりを/ワタリユウ(冥王計画ゼオライマー、徳間12巻NDL一致)", "at": "2026-06-20T16:28:19"}
