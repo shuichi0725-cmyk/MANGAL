@@ -92,3 +92,13 @@
 **段1の保留**: reset(高橋ユキ標準+山本まゆり文庫の2著者混在+enrich疑義) / comic-higashino-keigo-mystery-2014(アンソロ) / tenyoritakaku(全巻別著者=要re-point) / koi-shita…(matcher誤判定=実は本人作) → 個別精査へ。
 **段1で既処理判明(台帳ガード)**: blazblue/box-1991/face/face-2019/kirara-hiramatsu-1987/nito-monogatari/samurai-soldier/work-in (= t3-fix/torichigae/special-edition で6/18-19に修正済)。
 **次**: 段1残(未スキャンの全REPOINT/STRIP母集団)は **resolve-master でなく台帳+実DB** で現状確認してから。
+
+#### 段1拡大: reconcile(218候補を現yml+種1/楽天で再判定) → 別著者単巻strip 30件 (06-20)
+
+`_sharedisbn_reconcile.py` で218候補の**現状**を判定: CLEAN_NOW91(既解決=stale確認) / SAFE_STRIP47 / REVIEW42(null・版混在) / REPOINT_full38(全巻別著者)。
+SAFE_STRIP47のうち **wrong==1(別著者の単巻混入)30件**を異体字正規化チェック後にstrip適用(bak `sharedisbn-strip-batch-bak-20260620-144553`):
+- blazblue/doll-1996/doll-2000/egao-no-yukue-2003/face-1992/get-azuma-1999/gifuu-doudou-naoe…/ginga-tetsudou…1992/gold-2004/hellhound-2018/in-hand/in-hand-2019/isekai…yoi-no-darou/joker-1998/joker-1998-2/joker-yamane-1997/koishita…aite-ga/koori-no-joou-2013/love-taishitsu/manga-grimm-douwa-2003/otome-wa-boku…/rinjou/s/samurai-7/shikei-shikkounin-mine-1984/step-mother/the-bokusaa/the-combat/the-konbatto/tsuukaa
+- 各「本人巻own≥1 + 別著者1冊」を除去(例 blazblue=吉岡榊なのにアクシステムワクスのブレイブルー1冊)。
+
+**★保留(wrong≥2のSAFE_STRIP17 = ペンネーム/異体字の誤判定リスク)**: pocket-monsters-special(真斗=山本サトシで55誤判定)/worst(髙橋ヒロシ vs 高橋ヒロシ異体字で27)/mahouka各/buyuden/sora-yori-takaku 等。**matcherの別名解決を入れるまで自動strip厳禁**。
+**残**: REVIEW42(null/版混在=reset型) / REPOINT_full38(全巻別著者=自前ISBNへ要差替)。個別精査へ。
