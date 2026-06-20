@@ -272,3 +272,13 @@ outlier37件(=[1,2,51]型 高1点浮き)を★楽天ISBN照合で原因確定。
 - 誤parse振り直し3(副題数字を巻番号化): chibikasu#50(50音)→3/honda-kanoko#46(46億年)→3/minami#24(タイムリミット24編)→4
 ★非処理(本物=除去禁止): フラグメント~18(red-eyes#27/夜行#17/グラゼニ#16等、楽天が実在確認=中間欠けは種4領域)/ISBN無~8(shadow通巻42/Zガンダム等=要NDL)/ruriiro#14(楽天は(2)=要精査)。
 ★durability: manga.v2直編集はpromoteで戻る。汚染=種2 repoint、誤parse=番号補正seedが本来必要(follow-up)。
+
+#### 段18: outlier残31の精査結果 (06-21)
+
+段17の確定6件に続き残31を精査。**追加で確定できたのはruriiro 1件のみ**:
+- ruriiro-princess: #14のISBN9784408430171=楽天「るり色プリンセス(2)」=vol2の誤番号(既存#2はISBN無)→#2へISBN移植し#14削除。[1,2,3,4]完成。
+★残30は安全に自動修正不可と判明:
+- フラグメント18(red-eyes#27等): 楽天で実在確認だが補完に★版の誤分類が絡む(red-eyes欠け8-26は通常版28巻の巻だがページ該当版はデラックス版7巻→混入させると版混合regression)。cache coverage疎(半数0巻)。ライブAPI+版判断要=per-work deliberate。
+- no-ISBN8(shadow通巻42/Zガンダム等): NDLが汎用題で無関係作にヒット=確証不能。touch不可。
+- jin: alias済で不在。
+★結論: 巻番号outlierは確定7件(段17:6+段18:1)を是正。残はregression risk高く、種4harvestは版整理込みのper-work作業。

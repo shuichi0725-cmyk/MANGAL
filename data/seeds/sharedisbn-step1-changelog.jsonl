@@ -135,3 +135,4 @@
 {"slug": "chibikasu-kun", "op": "volnum_outlier_fix", "action": "renumber", "detail": "誤parse:50音で大笑い編→#50は誤、年代順で#3", "bases": ["data/manga.v2"], "at": "2026-06-21T07:14:44"}
 {"slug": "honda-kanoko-no-hondana", "op": "volnum_outlier_fix", "action": "renumber", "detail": "誤parse:46億年寓話篇→#46は誤、年代順で#3", "bases": ["data/manga.v2"], "at": "2026-06-21T07:14:44"}
 {"slug": "minami-no-teiou-special", "op": "volnum_outlier_fix", "action": "renumber", "detail": "誤parse:タイムリミット24編→#24は誤、年代順で#4", "bases": ["data/manga.v2"], "at": "2026-06-21T07:14:44"}
+{"slug": "ruriiro-princess", "op": "volnum_misnumber_fix", "detail": "#14=楽天vol2の誤番号→ISBN9784408430171を#2へ移し#14削除。[1,2,3,4]完成", "at": "2026-06-21T07:24:34"}
