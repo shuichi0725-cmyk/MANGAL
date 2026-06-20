@@ -222,3 +222,21 @@ volumes:
       MADB取込もれ。 ACTION COMICS版第4章(最終巻)。 ★ISBN確証: NDL(978-4-575-94151-7 =
       9784575941517、 2008.3)+Wikipedia一致、 検算OK。 巻3と同じく imprint:ACTION COMICS で
       ACTION版セクションに合流。
+
+  - series_keys:
+      - 'name:手塚治虫|name:奇子'
+    qid: null
+    number: 2
+    isbn13: '9784886533111'
+    release_date: '1985-12-30'
+    publisher: 大都社
+    imprint: ハードコミックス
+    edition_type: standard
+    title_display: '奇子 下'
+    source: ndl
+    added_at: '2026-06-21'
+    note: |
+      MADB取込もれ。 大都社ハードコミックス 奇子は上下2巻構成だが本番は上巻のみ=下巻取りこぼし。
+      ★NDL確証: 大都社「奇子 上巻/下巻」1985.12.30、 上=ISBN-10 4886533108(→9784886533104)/
+      下=4886533116(→9784886533111、 検算OK)。 初版は1973-74(ISBN無)、 1985再版でISBN化。
+      下巻のみ補完(上は既存=1973初版)。 ★series_keyはbest-effort(種2 sqlite空のため未照合)、 次promote時に要確認。
