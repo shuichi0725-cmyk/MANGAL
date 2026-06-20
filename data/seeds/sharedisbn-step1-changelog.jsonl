@@ -116,3 +116,8 @@
 {"slug": "perman-fujiko-1979", "op": "dedup_alias", "canon": "perman", "note": "同題同著者のslug表記揺れ重複(部分集合=欠け巻)→巻数多いcanonicalへ", "at": "2026-06-20T17:21:55"}
 {"slug": "charisma-2", "op": "dedup_alias", "canon": "charisma", "note": "同題同著者の重複(別刷ISBN差)→canonicalへ", "at": "2026-06-20T17:25:26"}
 {"slug": "ninku-kazu-2006", "op": "dedup_alias", "canon": "ninkuu", "note": "同題同著者の重複(別刷ISBN差)→canonicalへ", "at": "2026-06-20T17:25:26"}
+{"slug": "taaheru-ana-tomiko", "op": "merge_split_volumes", "canon": "taaheruana-tomiko", "note": "ターヘルアナ富子の上下巻が別ページ分裂(750=v1/767=v2)→1ページ2巻に統合しalias", "at": "2026-06-20T19:31:21"}
+{"slug": "sky-high-karma", "op": "merge_edition", "canon": "skyhigh-karma", "note": "スカイハイ・カルマ2012再版(9784086193818集英社文庫)を別editionとして統合しalias", "at": "2026-06-20T19:31:21"}
+{"slug": "tezuka-osamu", "op": "drop_non_manga", "note": "大下英治「手塚治虫:ロマン大宇宙」上下=prose評伝(genre無/NDC非726)=漫画でない→drop", "at": "2026-06-20T19:32:54"}
+{"slug": "tezukaosamu", "op": "strip_non_manga", "removed": "9784494027361", "note": "石子順「未来からの使者」=児童図書(非漫画)除去、手塚「幻の名作集」(726.1)残す", "at": "2026-06-20T19:32:54"}
+{"slug": "uchuu-senkan-yamato-1993", "op": "dedup_alias", "canon": "uchuu-senkan-yamato", "note": "ひおあきら版宇宙戦艦ヤマトが2ページ重複(同6巻ISBN無)→統合。企画noise著者も除去。松本零士版/聖悠紀版は別作で残置", "flag": "slug衝突: uchuu-senkan-yamato(ひおあきら) vs uchuusenkanyamato(松本零士)=別作で要homonym suffix(別タスク)", "at": "2026-06-20T19:34:24"}
