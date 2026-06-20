@@ -14,10 +14,11 @@ import {
   emptyFilterState,
   filtersFromSearchParams,
   authorsWithKana,
+  searchMatches,
   yearBounds,
 } from "@/lib/filters";
 import type { ArtBook, ListBundle, MangaListItem } from "@/lib/schema";
-import { useMangaIndex } from "@/lib/useMangaIndex";
+import { useMangaIndex, useSearchIndex } from "@/lib/useMangaIndex";
 
 type Props = { data: ListBundle };
 
@@ -64,11 +65,20 @@ export default function HomeClient({ data }: Props) {
   const liveData = useMemo(() => ({ ...data, manga }), [data, manga]);
   const indexLoading = mangaIndex === null;
 
+  // ★検索は別索引(検索索引)を query 有の時だけ遅延ロード → matchedSlugs を一覧 filter と AND 合成。
+  const hasQuery = state.query.trim().length > 0;
+  const searchIndex = useSearchIndex(hasQuery);
+  const searchLoading = hasQuery && searchIndex === null;
+  const matchedSlugs = useMemo(
+    () => (hasQuery ? searchMatches(state.query, searchIndex ?? []) : null),
+    [hasQuery, state.query, searchIndex],
+  );
+
   const bounds = useMemo(() => yearBounds(manga), [manga]);
   const authors = useMemo(() => authorsWithKana(manga, true), [manga]);
   // ★画集モード = 一覧を画集に切替(ジャンル欄「画集」チップ)。 漫画用フィルタは非適用。
   const showArt = state.artBooks;
-  const filteredManga = useMemo(() => applyFilters(manga, state), [manga, state]);
+  const filteredManga = useMemo(() => applyFilters(manga, state, matchedSlugs), [manga, state, matchedSlugs]);
   const filteredArt = useMemo(() => applyArtBookFilters(data.artBooks, state), [data.artBooks, state]);
   const filtered: (MangaListItem | ArtBook)[] = showArt ? filteredArt : filteredManga;
 
@@ -149,10 +159,12 @@ export default function HomeClient({ data }: Props) {
                 </li>
               ))}
             </ul>
-          ) : indexLoading ? (
+          ) : indexLoading || searchLoading ? (
             <div className="tactile rounded-card py-16 text-center">
-              <p className="text-2xl animate-pulse" aria-hidden="true">📚</p>
-              <p className="mt-2 text-sm text-ink/55">作品データを読み込み中…</p>
+              <p className="text-2xl animate-pulse" aria-hidden="true">{searchLoading ? "🔍" : "📚"}</p>
+              <p className="mt-2 text-sm text-ink/55">
+                {searchLoading ? "検索しています…" : "作品データを読み込み中…"}
+              </p>
             </div>
           ) : (
             <MangaGrid

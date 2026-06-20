@@ -35,7 +35,7 @@ def cover_of(d):
 
 src = os.path.join(DATA, "manga.v2")
 if not os.path.isdir(src): src = "data/manga.v2"
-t0 = time.time(); idx = []; skipped = 0
+t0 = time.time(); idx = []; sidx = []; skipped = 0
 for f in glob.glob(os.path.join(src, "*.yml")):
     try: d = yaml.load(open(f, encoding="utf-8"), Loader=L)
     except: skipped += 1; continue
@@ -58,27 +58,42 @@ for f in glob.glob(os.path.join(src, "*.yml")):
         for v in (e.get("volumes") or []):
             rd = v.get("release_date")
             if rd and str(rd) > latest: latest = str(rd)
+    aus = d.get("authors") or []
+    oaus = d.get("original_authors") or []
+    # ① 一覧索引(表示用) = 検索専用フィールド(title_romaji/alternative_titles/credits)は持たない
     idx.append({
         "slug": d["slug"], "title": d["title"], "title_kana": d["title_kana"],
-        "title_romaji": d["title_romaji"], "subtitle": d.get("subtitle"),
+        "subtitle": d.get("subtitle"),
         "cover": cover_of(d),
         "year_started": d["year_started"], "year_ended": d.get("year_ended"),
         "status": d.get("status"), "catch": d.get("catch"),
-        "authors": [{"name": a.get("name"), "role": a.get("role"), "kana": a.get("kana") or ""} for a in (d.get("authors") or [])],
-        "original_authors": [{"name": a.get("name"), "kana": a.get("kana") or ""} for a in (d.get("original_authors") or [])],
+        "authors": [{"name": a.get("name"), "role": a.get("role"), "kana": a.get("kana") or ""} for a in aus],
+        "original_authors": [{"name": a.get("name"), "kana": a.get("kana") or ""} for a in oaus],
         "genres": gs, "demographic": d.get("demographic"),
         "publisher": pub, "publishers": d.get("publishers") or [],
         "magazine": d.get("magazine"), "awards": d.get("awards"),
         "anime_adapted": d.get("anime_adapted"),
         "total_volumes": tv, "max_edition_volumes": maxev,
         "latest_date": latest[:7] if latest else None,
-        # 検索(matchText)/並べ替え(popularity)パリティ用
-        "alternative_titles": d.get("alternative_titles"),
-        "credits": [{"name": c.get("name")} for c in (d.get("credits") or [])],
         "popularity": d.get("popularity"), "score": d.get("score"),
+    })
+    # ② 検索索引(検索専用) = matchText が必要とする text のみ (= 検索時だけ遅延ロード)
+    alt = d.get("alternative_titles") or {}
+    sidx.append({
+        "slug": d["slug"], "title": d["title"], "title_kana": d["title_kana"],
+        "title_romaji": d["title_romaji"],
+        "alt": [v for v in [alt.get("en"), alt.get("fr"), alt.get("de"), alt.get("it"), alt.get("pt")] if v],
+        "au": [a.get("name") for a in aus if a.get("name")]
+              + [a.get("name") for a in oaus if a.get("name")]
+              + [c.get("name") for c in (d.get("credits") or []) if c.get("name")],
     })
 idx.sort(key=lambda x: (x["year_started"], x["title"]))
 out = os.path.join(DATA, "manga-list-index.json")
 json.dump(idx, open(out, "w", encoding="utf-8"), ensure_ascii=False, separators=(",", ":"))
+sout = os.path.join(DATA, "manga-search-index.json")
+json.dump(sidx, open(sout, "w", encoding="utf-8"), ensure_ascii=False, separators=(",", ":"))
 mb = os.path.getsize(out) / 1e6
-print(f"一覧索引: {len(idx)}作品 (skip {skipped}) / {time.time()-t0:.1f}秒 / {mb:.1f}MB → {out}")
+smb = os.path.getsize(sout) / 1e6
+print(f"一覧索引: {len(idx)}作品 / {mb:.1f}MB → {out}")
+print(f"検索索引: {len(sidx)}作品 / {smb:.1f}MB → {sout}")
+print(f"(skip {skipped}) / {time.time()-t0:.1f}秒")

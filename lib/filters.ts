@@ -1,4 +1,4 @@
-import type { ArtBook, MangaListItem, StatusT } from "./schema";
+import type { ArtBook, MangaListItem, MangaSearchItem, StatusT } from "./schema";
 import { kanaToRomaji, normalizeForSearch, romajiToHiragana } from "./romaji";
 
 export type SortKey =
@@ -52,36 +52,20 @@ export const emptyFilterState = (): FilterState => ({
  * 検索クエリにマッチするか。タイトル・よみがな・ローマ字いずれかで部分一致。
  * かな⇄ローマ字の双方向変換も試す。
  */
-export function matchText(query: string, manga: MangaListItem): boolean {
+export function matchText(query: string, item: MangaSearchItem): boolean {
   if (!query) return true;
   const q = normalizeForSearch(query);
   if (!q) return true;
 
-  const altTitles = manga.alternative_titles
-    ? [
-        manga.alternative_titles.en,
-        manga.alternative_titles.fr,
-        manga.alternative_titles.de,
-        manga.alternative_titles.it,
-        manga.alternative_titles.pt,
-      ]
-        .filter((t): t is string => Boolean(t))
-        .map((t) => normalizeForSearch(t))
-    : [];
-
-  // 人物名(著者/原作/credits)も検索対象。 著者フィルター/50音索引は別(著者のみ)だが、
-  // キーワード検索は「打った名前で辿り着ける」ため credits(編集/監修/訳/解説等)も含める。
-  const people = [
-    ...manga.authors.map((a) => a.name),
-    ...manga.original_authors.map((a) => a.name),
-    ...(manga.credits ?? []).map((c) => c.name),
-  ].map((n) => normalizeForSearch(n));
+  const altTitles = item.alt.map((t) => normalizeForSearch(t));
+  // 人物名(著者/原作/credits)も検索対象 (= 検索索引で au[] に統合済)。
+  const people = item.au.map((n) => normalizeForSearch(n));
 
   const haystacks = [
-    normalizeForSearch(manga.title),
-    normalizeForSearch(manga.title_kana),
-    normalizeForSearch(manga.title_romaji),
-    normalizeForSearch(kanaToRomaji(manga.title_kana)),
+    normalizeForSearch(item.title),
+    normalizeForSearch(item.title_kana),
+    normalizeForSearch(item.title_romaji),
+    normalizeForSearch(kanaToRomaji(item.title_kana)),
     ...altTitles,
     ...people,
   ];
@@ -90,18 +74,26 @@ export function matchText(query: string, manga: MangaListItem): boolean {
   // クエリがローマ字 → かなに変換して title_kana と照合
   const asKana = normalizeForSearch(romajiToHiragana(q));
   if (asKana && asKana !== q) {
-    const kanaHay = normalizeForSearch(romajiToHiragana(kanaToRomaji(manga.title_kana)));
+    const kanaHay = normalizeForSearch(romajiToHiragana(kanaToRomaji(item.title_kana)));
     if (kanaHay.includes(asKana)) return true;
   }
 
   // クエリがかな → ローマ字に変換して title_romaji と照合
   const asRomaji = normalizeForSearch(kanaToRomaji(q));
   if (asRomaji && asRomaji !== q) {
-    const romajiHay = normalizeForSearch(manga.title_romaji);
+    const romajiHay = normalizeForSearch(item.title_romaji);
     if (romajiHay.includes(asRomaji)) return true;
   }
 
   return false;
+}
+
+/** 検索索引 全体から query にマッチする slug 集合を返す (= 一覧 filter と AND 合成して使う)。 */
+export function searchMatches(query: string, searchIndex: MangaSearchItem[]): Set<string> {
+  const set = new Set<string>();
+  if (!query) return set;
+  for (const it of searchIndex) if (matchText(query, it)) set.add(it.slug);
+  return set;
 }
 
 function inRange(value: number, min: number | null, max: number | null): boolean {
@@ -150,9 +142,18 @@ function sortItems(items: MangaListItem[], sort: SortKey): MangaListItem[] {
   }
 }
 
-export function applyFilters(items: MangaListItem[], state: FilterState): MangaListItem[] {
+/**
+ * 一覧フィルタ。 ★検索(query)は別索引(検索索引)で事前計算した matchedSlugs を渡す
+ *  (= 一覧索引は検索フィールドを持たない)。 query 有 + matchedSlugs 無(=検索索引未ロード)
+ *  の間は空 = 呼び出し側で loading 表示。
+ */
+export function applyFilters(
+  items: MangaListItem[],
+  state: FilterState,
+  matchedSlugs: Set<string> | null = null,
+): MangaListItem[] {
   const filtered = items.filter((m) => {
-    if (!matchText(state.query, m)) return false;
+    if (state.query && (!matchedSlugs || !matchedSlugs.has(m.slug))) return false;
     if (!inRange(m.year_started, state.yearMin, state.yearMax)) return false;
     if (state.demographics.length && !state.demographics.includes(m.demographic)) return false;
     // 複数社作品対応: 選択キーが「どれかの版の出版社」に一致すればヒット (m.publishers 集合)

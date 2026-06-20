@@ -199,7 +199,6 @@ export type MangaListItem = {
   slug: string;
   title: string;
   title_kana: string;
-  title_romaji: string;
   subtitle?: string | null;
   /** 事前計算済み表紙 URL (= coverUrl 相当)。 無ければ null */
   cover: string | null;
@@ -222,10 +221,24 @@ export type MangaListItem = {
   max_edition_volumes: number;
   /** 事前計算済み 最新刊の発売年月 "YYYY-MM" (= ListClient の最新刊順) */
   latest_date?: string | null;
-  alternative_titles?: Manga["alternative_titles"];
-  credits: { name: string }[];
   popularity?: number;
   score?: number;
+};
+
+/**
+ * 検索専用 索引アイテム (= data/manga-search-index.json の 1 要素)。
+ * ★一覧索引(MangaListItem)とは別ファイル = 検索時だけ遅延ロード (= 既定ブラウズでは読まない)。
+ * matchText が必要とする text(題/かな/romaji/別名/人物名)のみ持つ。 表示はしない。
+ */
+export type MangaSearchItem = {
+  slug: string;
+  title: string;
+  title_kana: string;
+  title_romaji: string;
+  /** alternative_titles の値配列 (en/fr/de/it/pt から非空のみ) */
+  alt: string[];
+  /** 検索対象の人物名 (= 著者 + 原作者 + credits をまとめた配列) */
+  au: string[];
 };
 
 /**

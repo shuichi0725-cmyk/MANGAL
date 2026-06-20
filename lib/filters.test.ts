@@ -6,20 +6,28 @@ import {
   uniqueAuthors,
   yearBounds,
 } from "./filters";
-import type { MangaListItem } from "./schema";
+import type { MangaListItem, MangaSearchItem } from "./schema";
+
+// 検索索引アイテムの mock (= matchText 用)
+const s = (over: Partial<MangaSearchItem> = {}): MangaSearchItem => ({
+  slug: over.slug ?? "x",
+  title: over.title ?? "ONE PIECE",
+  title_kana: over.title_kana ?? "ワンピース",
+  title_romaji: over.title_romaji ?? "one piece",
+  alt: over.alt ?? [],
+  au: over.au ?? ["尾田栄一郎"],
+});
 
 const m = (over: Partial<MangaListItem> = {}): MangaListItem => ({
   slug: over.slug ?? "x",
   title: over.title ?? "ONE PIECE",
   title_kana: over.title_kana ?? "ワンピース",
-  title_romaji: over.title_romaji ?? "one piece",
   cover: over.cover ?? null,
   year_started: over.year_started ?? 1997,
   year_ended: over.year_ended ?? null,
   status: over.status ?? "ongoing",
   authors: over.authors ?? [{ name: "尾田栄一郎", role: "writer_artist" }],
   original_authors: over.original_authors ?? [],
-  credits: over.credits ?? [],
   publisher: over.publisher ?? "shueisha",
   publishers: over.publishers ?? ["shueisha"],
   magazine: over.magazine ?? "weekly-shonen-jump",
@@ -30,7 +38,7 @@ const m = (over: Partial<MangaListItem> = {}): MangaListItem => ({
 });
 
 describe("matchText", () => {
-  const op = m();
+  const op = s();
 
   it("空クエリは常に true", () => {
     expect(matchText("", op)).toBe(true);
@@ -49,21 +57,21 @@ describe("matchText", () => {
   });
 
   it("カナタイトルをローマ字で検索しヒット", () => {
-    expect(matchText("wanpi", m({ title_kana: "ワンピース", title_romaji: "ZZZ" }))).toBe(true);
+    expect(matchText("wanpi", s({ title_kana: "ワンピース", title_romaji: "ZZZ" }))).toBe(true);
   });
 
   it("長音符の有無を吸収する", () => {
-    expect(matchText("ワンピス", m({ title_kana: "ワンピース" }))).toBe(true);
+    expect(matchText("ワンピス", s({ title_kana: "ワンピース" }))).toBe(true);
   });
 
   it("中黒(・)の有無を吸収する", () => {
-    const sla = m({ title: "シャングリラ・フロンティア", title_kana: "シャングリラフロンティア" });
+    const sla = s({ title: "シャングリラ・フロンティア", title_kana: "シャングリラフロンティア" });
     expect(matchText("シャングリラフロンティア", sla)).toBe(true); // ・無で検索
     expect(matchText("シャングリラ・フロンティア", sla)).toBe(true); // ・有で検索
   });
 
   it("中黒(・)の位置揺れも吸収する", () => {
-    const sla = m({ title: "シャングリラ・フロンティア", title_kana: "シャングリラフロンティア" });
+    const sla = s({ title: "シャングリラ・フロンティア", title_kana: "シャングリラフロンティア" });
     expect(matchText("シャングリ・ラフロンティア", sla)).toBe(true); // ・誤位置でも当たる
   });
 });
