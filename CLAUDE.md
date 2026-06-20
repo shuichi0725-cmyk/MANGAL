@@ -5,6 +5,23 @@
 
 ---
 
+## 統合台帳 (intake-manifest) = 全操作の記憶 (= 必ず使う、 忘れない)
+
+場所 = **`data/seeds/intake-manifest/`** (= 設計 `docs/intake-manifest-gate-design.md` の Phase0 実体)。
+散在していた18個の `*-changelog.jsonl` を1本に束ね、 全ページの「穴(holes)」を簿記する**単一の台帳**。
+★過去、 簿記監査は走ったのに出力が `.cache`(gitignore)に落ちて消え「あるはずなのに無い」事故が起きた。
+以後は**ここを一次ソースとして必ず使う**。
+
+### 厳守ルール
+
+1. **本番ページ (`data/manga.v2` / `.preview-data`) を触る cleanup/intake 操作は、 操作専用 `*-changelog.jsonl` に1行記録** (= 既存慣習。 slug / 操作 / before→after / at / 可逆backup 必須)。
+2. **節目で `python scripts/_manifest-consolidate-ops.py`** → `operations.jsonl` 更新 (= 統合台帳へ反映)。
+3. **大きめ作業後 `python scripts/_intake-manifest-audit.py`** → holes 取り直し、 `holes-snapshot.jsonl.gz` + `holes-summary.json` を git に**永続化** (= .cache 置きっぱで消さない)。
+4. **新しい cleanup を始める前に台帳を見る** (= `operations.jsonl` で既処理か / holes で穴か を確認。 grep 総当たりでなく**台帳で**確認)。
+5. 全操作は**可逆** (= `.cache/*-bak-*` に before 退避) かつ **種2 sqlite 不変**。 人手可読サマリ (例 `docs/isbn-unmerge-ledger.md`) は台帳の**ビュー**、 一次ソースは台帳。
+
+---
+
 ## 月次蒸留 protocol
 
 ユーザが `月次蒸留して` (= トリガー語、 完全一致) と発話したら、 以下を厳密に実行する。
