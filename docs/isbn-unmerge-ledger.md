@@ -204,3 +204,11 @@ NDLでフルネーム+ヨミ確認し著者ラベル修正(作品・ISBN正、�
 - jun-1983: 森下裕美誤→紡木たく(純、集英社1991)
 work-in re-point: 現9784757546752=高津カリノWORKING(special-edition-fixの誤変換)→鈴木ツタのWork in自前9784862527745(コアマガジン2010)。
 **残(絡まり深=要個別/方針)**: 八つ墓村pair(つのだ/影丸/Jet) / FE pair(大沢美月) / 日本の歴史(集英社学習漫画=多著者educational) / 銀河鉄道の夜(古城武司/Teamバンミカス/ますむら3版) / mahouka×3(編別アーク franchise) / REPOINT要web(joker-1998-3野間美由紀/last-order-kazunari).
+
+#### 段11: 重複ページdedup(同ISBN集合) — 確実8群9 slug alias (06-20、ユーザ依頼)
+
+`_dedup_finder.py`で66k走査→EXACT(同一ISBN集合)14群検出。実ISBN+NDL正題で「同一作品の表記/題揺れ重複」のみ確実判定しalias(bak `dedup-bak-20260620-171928`):
+- jun-2012→jun-1983(紡木たく純)/hihon-gikeiki→masurao(ますらお秘本義経記13ISBN一致)/akai-kami-no-shounen→akaikaminoshounen(山岸凉子赤い髪の少年)/eroika→eikou-no-naporeon(栄光のナポレオン エロイカ26ISBN)/majindensetsu→god-mazinger(NDL=ゴッドマジンガー)/akai-shundou・aoi-shundou→shundou(NDL=蠢動)/dessin→nico-says(NDL=Nico says)/chocolat memorial→perfect(NDL=パーフェクトコレクション)
+- jun-1983のtitleを純に是正(canonical正題)。
+**dedupでない(=別作品の誤ISBN共有=JOKER汚染、触らず)**: king/king-z(別著者)・tales-of-destiny(別著者)・bibou他4(おおや和美の別4作)・fuufu-partner他2(それでいいシリーズ)。
+残: OVERLAP(高重複=欠け巻/版違い)32対は要個別確認。

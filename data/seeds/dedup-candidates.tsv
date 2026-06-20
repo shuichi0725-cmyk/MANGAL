@@ -1,0 +1,43 @@
+# === EXACT (同一ISBN集合=確実重複) ===
+type	slugs	n_isbn	authors	titles
+EXACT	eikou-no-naporeon,eroika	26	池田理代子 || 池田理代子	栄光のナポレオン || エロイカ
+EXACT	hihon-gikeiki,masurao	13	北崎拓 || 北崎拓	秘本義経記 || ますらお
+EXACT	god-mazinger,majindensetsu	4	永井豪/ダイナミックプロダクション || 永井豪	ゴッドマジンガー || 魔神伝説
+EXACT	king,king-z	3	瀬名真紗也 || 一峰大二	King || キングZ
+EXACT	tales-of-destiny-inomata-2000,tales-of-destiny2	2	杉基イクラ || Makoto2号	Tales of Destiny || Tales of Destiny2
+EXACT	akai-kami-no-shounen,akaikaminoshounen	1	山岸凉子 || 山岸凉子	クリスマス || 赤い髪の少年
+EXACT	akai-shundou,aoi-shundou,shundou	1	園山二美 || 園山二美 || 園山二美	あかい蠢動 || あおい蠢動 || 蠢動
+EXACT	bibou-no-series,hana-chiru-yoru-ni-kimi-o-omoeba,june-pride,kisetsu-hazure-no-kaidan	1	おおや和美 || おおや和美 || おおや和美 || おおや和美	美貌のディテイル || 花散る夜にきみを想えば || June pride || 季節はずれのカイダン
+EXACT	bidan-no-dendou-dii-ekkusu,bidan-no-dendou-zetto,binan-no-dendou	1	神葉理世 || 神葉理世 || 神葉理世	美男の殿堂DX || 美男の殿堂Z || 美男の殿堂
+EXACT	chocolat-no-mahou-memorial-collection,chocolat-no-mahou-perfect-collection	1	みづほ梨乃 || みづほ梨乃	ショコラの魔法 ティアーズコレクション || ショコラの魔法 パーフェクトコレクション
+EXACT	dessin,nico-says	1	小野塚カホリ || 小野塚カホリ	dessin || NICO SAYS
+EXACT	fuufu-partner-kankei-mo-sore-de-ii,sore-de-ii,yappari-sore-de-ii	1	細川貂々/水島広子 || 細川貂々 || 細川貂々	夫婦・パートナー関係もそれでいい。 || それでいい。 || やっぱり、それでいい。
+EXACT	jun-1983,jun-2012	1	紡木たく || 紡木たく	Jun || 純
+EXACT	kyuuso-wa-cheese-no-yume-o-miru,kyuuso-wa-cheese-no-yume-o-miru-all-in-wan-edition,kyuuso-wa-cheese-no-yume-o-miru-reboot-edition	1	水城せとな || 水城せとな || 水城せとな	窮鼠はチーズの夢を見る || 窮鼠はチーズの夢を見るオールインワンエディション || 窮鼠はチーズの夢を見るリブートエディション
+# === OVERLAP (高重複=表記揺れ/欠け巻 重複候補、要確認) ===
+OVERLAP	ninja-hattori-kun,ninjahattori-kun	inter11/13/11	jac0.85/subset	['藤子不二雄Ⓐ']|['藤子不二雄']	忍者ハットリくん|忍者ハットリくん
+OVERLAP	comic-chuurippu-1988,comic-tulip	inter5/6/5	jac0.83/subset	['眠田直']|['おおや舞']	コミックチューリップ|コミックチューリップ
+OVERLAP	comic-chuurippu,comic-tulip	inter5/6/5	jac0.83/subset	['いまざきいつき']|['おおや舞']	コミックチューリップ|コミックチューリップ
+OVERLAP	shin-megami-tensei-ifu,shin-megami-tensei-kaan	inter8/9/9	jac0.8	['柳澤一明', 'ATLUS']|['柳澤一明']	真・女神転生if…|真・女神転生〔カーン〕
+OVERLAP	ninkuu-2nd-stage,ninkuu-zero	inter6/7/7	jac0.75	['桐山光侍']|['桐山光侍']	忍空2nd stage|忍空 零
+OVERLAP	charisma,charisma-2	inter5/6/6	jac0.71	['石原理']|['石原理']	カリスマ|カリスマ
+OVERLAP	comic-chuurippu,comic-chuurippu-1988	inter5/6/6	jac0.71	['いまざきいつき']|['眠田直']	コミックチューリップ|コミックチューリップ
+OVERLAP	ninku-kazu-2006,ninkuu	inter9/11/11	jac0.69	['桐山光侍']|['桐山光侍']	Ninku|忍空
+OVERLAP	steins-gate,steins-gate-2011	inter2/3/2	jac0.67/subset	['さらちよみ', 'ニトロプラス']|['nini']	シュタインズ・ゲート|しゅたいんず・げーと!
+OVERLAP	4-koma-kapibarasan,kuradashi-kapibara-san	inter4/5/5	jac0.67	['チダケイコ', 'TRYWORKS']|['チダケイコ', 'TRYWORKS']	4コマカピバラさん|くらだしカピバラさん
+OVERLAP	ninku-kazu-2006,ninkuu-2nd-stage	inter7/11/7	jac0.64/subset	['桐山光侍']|['桐山光侍']	Ninku|忍空2nd stage
+OVERLAP	ninku-kazu-2006,ninkuu-zero	inter7/11/7	jac0.64/subset	['桐山光侍']|['桐山光侍']	Ninku|忍空 零
+OVERLAP	gifuu-doudou,gifuu-doudou-naoe-kanetsugu-maeda-deka-hanagatari	inter9/12/11	jac0.64	['武村勇治']|['出口真人']	義風堂々!!|義風堂々!!直江兼続-前田慶次花語り
+OVERLAP	perman,perman-fujiko-1979	inter10/16/10	jac0.62/subset	['藤子・F・不二雄']|['藤子不二雄']	パーマン|パーマン
+OVERLAP	joker-1998-3,joker-2012	inter1/2/1	jac0.5/subset	['野間美由紀']|['上杉可南子']	Joker|JOKER
+OVERLAP	yatsuhakamura,yatsuhakamura-1996	inter1/1/2	jac0.5/subset	['影丸穣也']|['Jet']	八つ墓村|八つ墓村
+OVERLAP	joker-1998,joker-1998-3	inter1/1/2	jac0.5/subset	['河奈マリオ']|['野間美由紀']	Joker|Joker
+OVERLAP	comic-higashino-keigo-mystery,comic-higashino-keigo-mystery-2014	inter1/2/1	jac0.5/subset	['オキモト・シュウ']|['松枝尚嗣']	コミック東野圭吾ミステリー|コミック東野圭吾ミステリー
+OVERLAP	tales-of-destiny,tales-of-destiny-inomata-2000	inter2/5/2	jac0.4/subset	['啄木鳥しんき']|['杉基イクラ']	テイルズオブデスティニー|Tales of Destiny
+OVERLAP	tales-of-destiny,tales-of-destiny2	inter2/5/2	jac0.4/subset	['啄木鳥しんき']|['Makoto2号']	テイルズオブデスティニー|Tales of Destiny2
+OVERLAP	nihonnorekishi,nippon-no-rekishi-2007-2	inter3/3/12	jac0.25/subset	['笠原一男']|['井上大助']	日本の歴史|日本の歴史
+OVERLAP	purogorufaa-saru,purogorufaasaru	inter4/17/4	jac0.24/subset	['藤子不二雄Ⓐ']|['藤子不二雄']	プロゴルファー猿|プロゴルファー猿
+OVERLAP	majime-ni-danjo-kousai,yappari-majime-ni-danjo-kousai	inter3/14/3	jac0.21/subset	['桃伊いづみ']|['桃伊いづみ']	まじめに!男女交際|やっぱりまじめに!男女交際
+OVERLAP	iyahaya-nantomo,iyahayanantomo	inter1/5/1	jac0.2/subset	['永井豪＆ダイナミック・プロ']|['永井豪', 'ダイナミック・プロ']	イヤハヤ南友|イヤハヤ南友
+OVERLAP	matarou-ga-kuru,matarou-ga-kuru-2020	inter1/1/9	jac0.11/subset	['藤子不二雄']|['藤子不二雄Ⓐ']	魔太郎がくる!!|魔太郎がくる!!
+OVERLAP	peanuts-essence,peanuts-essence-1996	inter1/15/1	jac0.07/subset	['SchulzCharles Monroe']|['チャールズ・M.シュルツ']	ピーナッツエッセンス|ピーナッツ・エッセンス
