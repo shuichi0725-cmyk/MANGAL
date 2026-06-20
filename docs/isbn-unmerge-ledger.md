@@ -139,6 +139,12 @@ NDL自前ISBN vs 現ISBN突合で仕分け:
 - **保留5**(NDL著者照会不調=要web/深掘り): refrain-1988/joker-1998-3/work-in/meioukeikakuzeoraimaa/last-order-kazunari-2021
 - **保留2**: x-men(海外Marvelスコープ)/nhk-sono-toki(多著者アンソロ)
 
+#### 段5: STRIP_multied(版混在=reset型) own≥1の18件を版/巻単位strip (06-20)
+
+NDL ISBN別著者で各版の巻を own/wrong 判定→別著者の版・巻を除去(空edition自動drop+renumber)。bak `sharedisbn-strip-batch-bak-20260620-151910`。
+全18件AI確認で真の別著者混入: fire-emblem-1993(大沢美月のFE11除去・島田1残)/yume-de-aetara-2000(Hanako8除去・山花典之17残)/tempest-1993(阿仁谷ユイジ7除去・庄司1残)/kuro-1999(ソウマトウ5)/suikoden-2000(李志清5)/hayou-no-ken(松元陽3)/reset(山本まゆり3除去=段1保留分確定・高橋ユキ残)/joker(河野やす子/河奈マリオ2除去・道原かつみ10残)/k-shitsuki-1988(黒榮ゆい2)/sengoku-jieitai-2014(田辺節雄2)/aya(克亜樹)/cinderella-2004(森園みるく)/cool(桜沢エリカ)/ginga-tetsudou-no-yoru(古城武司版)/gold-1997(夢殿りさ)/kaleidoscope(米田仁士)/oz-itsuki-2004(刻夜セイゴ)/zero-yamazaki-2009(冬目景)。
+**残STRIP_multied**: own0の13件(charisma-2/kuro/fire-emblem-nintendo-1996/nihonnorekishi系/gundam-wing系/yatsuhakamura系等)=全版別著者=REPOINT/著者fill行き。
+
 #### A 累計(06-20時点)
-strip 48(段1:4+30 / 段3:14) + repoint 8(段2:5 / 段4:3) + CLEAN確認 多数(段2:6 / 段3:23 / 段4:2) + 既処理判明91。
-**残**: STRIP_multied31(版混在) / 著者ラベル誤り3(author-fix) / REPOINT保留7 / その他REVIEW群。
+strip 66(段1:34 / 段3:14 / 段5:18) + repoint 11(段2:5 / 段4:3 / 段4b:3) + CLEAN確認多数(段2:6 / 段3:23 / 段4:2) + 既処理判明91。
+**残**: STRIP_multied own0=13 / 著者ラベル誤り3(author-fix) / REPOINT保留7 / NO_OWN・REVIEW群。台帳operations.jsonl=3,799操作。
