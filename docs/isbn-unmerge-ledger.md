@@ -253,3 +253,12 @@ size2 SAME_AUTHOR未処理ペア314を監査。★**exact題一致はわずか5�
 - cyborg-009: シュガー佐藤/土山よしき→石ノ森章太郎
 - gegege-no-kitarou: 松本しげのぶ/ラルフ・マッカーシー→水木しげる
 228候補の残りは原作/作画false positiveが大半=無理に触らない(ユーザ方針「無い間違いを無理に探すな」)。
+
+#### 段16: slug衝突 — 06-11適用後の残c2-unverdicted精査 (06-20、ユーザ依頼)
+
+★slug新規則は2026-06-11本番適用済([[slug_apply_pipeline]]、69,004頁・alias30,533)=**衝突1,794は過去の数字で大半解消済**。
+残=`.cache/c2-unverdicted-new.tsv`(210群merge_miss)を現状照合: 同naz題+著者重なりの統合候補41のうち**36が日本の歴史(歴史系=まとめ不要のユーザ方針)**、残りはfranchise編別/続編の誤検出(mahouka/将太の寿司2/DEAR BOYS ACT3vs4/KH3)。
+真の修正2件のみ:
+- lemon-hakusho: れもん白書(吉田まゆみ)のvol2(089389)別ページ分裂→統合(089372=v1/089389=v2/089396=v3)
+- garfield: アメコミ(Jim Davis)→drop
+★結論: slug衝突は06-11で解消済。残c2は歴史系+franchise誤検出が大半=実害無し。
