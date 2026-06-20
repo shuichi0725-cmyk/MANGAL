@@ -148,3 +148,13 @@ NDL ISBN別著者で各版の巻を own/wrong 判定→別著者の版・巻を�
 #### A 累計(06-20時点)
 strip 66(段1:34 / 段3:14 / 段5:18) + repoint 11(段2:5 / 段4:3 / 段4b:3) + CLEAN確認多数(段2:6 / 段3:23 / 段4:2) + 既処理判明91。
 **残**: STRIP_multied own0=13 / 著者ラベル誤り3(author-fix) / REPOINT保留7 / NO_OWN・REVIEW群。台帳operations.jsonl=3,799操作。
+
+#### 段6: アメコミdrop + アンソロ分割(NDC726.1/genre=漫画 手法) (06-20)
+
+- **アメコミdrop 5**(ユーザ裁定): x-men(Marvel翻訳)+x-men-1994系4(竹書房和製X-MENアンソロ=Marvel IP)。american-comics-drop.tsv。
+- **★NDLで漫画を権威判定する手法を確立**: NDC **726.1**(dcterms:subject) または **dcndl:genre=漫画**(ndlgft典拠)。古いレコードはNDC無でもgenreで判定可。小説(913.6)/画集(726.5系)/雑誌を除外。
+- **エリアル(ARIEL)を3分割**(ユーザ裁定。同じ朝日ソノラマ内のシリーズ別。bak `ariel-split-bak-20260620-155833`):
+  1. `ariel-comic`=ARIEL COMIC本編adaptation(鈴木雅久作画/笹本祐一原作、act.1-5: 9784257901136/143/167/174/198)。※エリアルコミック アンソロ全14巻+番外編2巻のうち6-14は絶版でNDL ISBN無→要補完(マンガ図書館Z等)
+  2. `season-ariel-outer-story`=シーズン(西野司,1993-06,9784257901921)新規
+  3. `konchi-koremata-eriaru`=こんちこれまたえりある(Dr.モロー,1993-09,9784257901952)新規
+  → 小説エリアル全20巻(913.6)・鈴木雅久画集(画集stream)は除外。手法=[[ndl_manga_filter_ndc726]]。
