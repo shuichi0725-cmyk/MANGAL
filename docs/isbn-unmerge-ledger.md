@@ -120,3 +120,12 @@ NDL自前ISBN vs 現ISBN突合で仕分け:
 
 **段2保留**: nein(有坂あこ=vol2不確実のstrip混在) / mahouka×2(franchise過収集30) / nhk-sono-toki(多著者アンソロ6) / gifuu-doudou(MIXED一部正)。
 **未着手**: REPOINT_full の NO_OWN 22(NDLで自前無=ペンネーム未マッチ/著者unknown[ナウシカ宮崎駿・x-men]/外国[Vivés/LEEHYE manhwa]) + REVIEW42。
+
+#### 段3: NDL著者ヨミで異体字/かな漢字を根治 → 別著者単巻strip 14件 (06-20)
+
+未解決92slugの現ISBN579をNDL直引き(`_ndl_by_isbn.py`)し著者名+ヨミ取得→`_sharedisbn_ndl_classify.py`でヨミ照合再分類。
+- **CLEAN 23**(誤判定が解消=現ISBN正しい): ★worst(髙橋ヒロシ=高橋の異体字)own33/buyuden own13/gundam-thunderbolt own26/ringo(こいおみなと=恋緒ミナト)/gurazeni-tokyo(コージィ城倉=森高夕次)/darker-than-black(岩原裕二)/es/hitorijime-my-hero 等 → 無処理(NDLが正と確認)。**ヨミ照合が異体字/ペンネーム誤判定を根治**。
+- **STRIP適用14**(AI判断で真の別著者混入のみ。bak `sharedisbn-strip-batch-bak-20260620-151133`):
+  eden-2021/gakkou-no-kaidan-koga-1994/last-order-2000/red-dragon/stand-up-yamakawa-2013/sora-yori-takaku(石川天より高く1除去・宮下26残)/joker-2012/fight-2000/hataraku-onee-san/majuugari/yume-de-aetara-1985(Hanako15除去・小椋1残)/hakkou-1985/isekai…yoinodarou/sp-2000(灰原5除去・国友2残)
+- **★STRIP除外9(AI判断で保留)**: pocket-monsters-special(真斗=山本サトシのペンネーム→実CLEAN)/gifuu-doudou(原哲夫=正当原作)/mahouka×3(編別アーク=別作画)/x-men×3(海外Marvel+和訳翻案混在)/perman-fujiko-1979(藤子不二雄=藤子・F・不二雄)。ヨミでも解けない別名/共著/franchise=要個別。
+**残**: STRIP_multied31(版混在=reset型) / REPOINT_full15(全巻別著者) / NO_OWN・REVIEW群。
