@@ -155,3 +155,5 @@
 {"slug": "gurazeni-2014", "op": "fragment_fill", "vols": [5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15], "detail": "楽天harvestで欠け11巻補完(strict題一致+著者)", "at": "2026-06-21T08:39:30"}
 {"slug": "giant-killing-extra", "op": "drop_non_manga", "series_key": "name:講談社|name:GIANT KILLING extra", "detail": "GIANT KILLINGの非漫画(ガイド/ファンブック)=不掲載(ユーザ確認)。drop+page削除", "at": "2026-06-21T08:41:44"}
 {"slug": "meitantei-yumemizu-kiyoshirou-jiken-note", "op": "edition_merge_and_fill", "detail": "全13巻KCデラックス。版誤分割(通常版1-9/デラックス版1,2,11)統合+10,12,13補完(ユーザ提供10+NDL確証)", "at": "2026-06-21T08:49:19"}
+{"slug": "ef-a-fairy-tale-of-the-two", "op": "fragment_fill", "vols": [3, 4, 5, 6, 7, 8, 9], "detail": "楽天harvest(全角題parse改善)で補完", "at": "2026-06-21T08:51:16"}
+{"slug": "shin-ranchesutaa-senryaku", "op": "fragment_fill", "vols": [6, 7, 8, 9], "detail": "楽天harvest(全角題parse改善)で補完", "at": "2026-06-21T08:51:16"}
