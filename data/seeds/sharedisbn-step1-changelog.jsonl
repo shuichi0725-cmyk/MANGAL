@@ -123,3 +123,6 @@
 {"slug": "uchuu-senkan-yamato-1993", "op": "dedup_alias", "canon": "uchuu-senkan-yamato", "note": "ひおあきら版宇宙戦艦ヤマトが2ページ重複(同6巻ISBN無)→統合。企画noise著者も除去。松本零士版/聖悠紀版は別作で残置", "flag": "slug衝突: uchuu-senkan-yamato(ひおあきら) vs uchuusenkanyamato(松本零士)=別作で要homonym suffix(別タスク)", "at": "2026-06-20T19:34:24"}
 {"slug": "rakushou-hyper-doll-2002", "op": "merge_edition", "canon": "rakushou-hyper-doll", "note": "楽勝!ハイパードール=伊藤伸平の同作。徳間1995(3巻)+英知2002(2巻)を版統合", "at": "2026-06-20T19:37:42"}
 {"slug": "shinpi-no-sekai-eruhazaado-tsubura-1996", "op": "merge_edition", "canon": "shinpi-no-sekai-eruhazaado", "note": "神秘の世界エルハザード=つぶらひでともの同作。竹書房(3巻)+徳間(v1,v3)を版統合", "at": "2026-06-20T19:37:42"}
+{"slug": "black-jack", "op": "author_fix_misattr", "note": "誤帰属吉富昭仁→本編原作者手塚治虫(現ISBNのNDL真著者一致)", "at": "2026-06-20T20:12:50"}
+{"slug": "cyborg-009", "op": "author_fix_misattr", "note": "誤帰属シュガー佐藤/土山よしき→本編原作者石ノ森章太郎(現ISBNのNDL真著者一致)", "at": "2026-06-20T20:12:50"}
+{"slug": "gegege-no-kitarou", "op": "author_fix_misattr", "note": "誤帰属松本しげのぶ/ラルフ・マッカーシー→本編原作者水木しげる(現ISBNのNDL真著者一致)", "at": "2026-06-20T20:12:50"}
