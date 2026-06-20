@@ -158,3 +158,19 @@ strip 66(段1:34 / 段3:14 / 段5:18) + repoint 11(段2:5 / 段4:3 / 段4b:3) + 
   2. `season-ariel-outer-story`=シーズン(西野司,1993-06,9784257901921)新規
   3. `konchi-koremata-eriaru`=こんちこれまたえりある(Dr.モロー,1993-09,9784257901952)新規
   → 小説エリアル全20巻(913.6)・鈴木雅久画集(画集stream)は除外。手法=[[ndl_manga_filter_ndc726]]。
+  ※後にユーザ裁定で**アンソロは出さない方針**→ARIEL分割は巻き戻し(ariel-comic元に復元・新規2ページ削除)。手法とアメコミdropは保持。
+
+#### 段7: 残53件の精査 — 明確分のみ処理 (06-20)
+
+未処理53件をNDL ISBN別著者で再確認: CLEAN23(誤判定=無処理) / REPOINT_full11 / STRIP6 / STRIP_multied13。
+明確な2件を処理(bak `misc-fix-bak-20260620-162019`):
+- `kaze-no-tani-no-naushika-1984`(著者unknown・部分ISBN) → **dedup alias** → kaze-no-tani-no-naushika(宮崎駿・完全版canonical)
+- `the-boxer`(LEEHYE誤) → **著者修正** → JH(韓国manhwa THE BOXER。作品・ISBN正)
+
+**★残=絡まった群(高リスク・要個別de-interleave/方針)**:
+- Gundam Wクラスタ5(shin-mobile-senki-gundam-wing系): ときた洸一の講談社ISBN + 細雪純/みずき健の学研ISBN混在=**de-interleave要**(単純aliasでない)
+- FE(fire-emblem-nintendo-1996/fuyuki-1999=大沢美月) / 八つ墓村(yatsuhakamura系=つのだ/影丸) / 日本の歴史(nihonnorekishi系=学習漫画多著者) / mahouka×3(編別アーク franchise)
+- 著者ラベル誤り残: final-fantasy-lost-stranger(→亀屋樹/水瀬葉月)/kuro/charisma-2/jun-1983 = author-fill候補
+- REPOINT自前ISBN要web: refrain-1988/joker-1998-3/work-in/meiou/last-order-kazunari
+- CLEAN23(buyuden/worst/ringo/darker-than-black等)=無処理確定
+- nhk-sono-toki=多著者アンソロ→非掲載方針で保留
