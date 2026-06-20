@@ -144,3 +144,11 @@
 {"slug": "sora-ga-suki", "op": "volnum_remove_misnumber", "detail": "NDL確証: 竹宮惠子「空がすき!」=全2巻(小学館1974)。#18(1989-09-17)=角川書店1989再版の誤番号→除去(内容は[1,2]に存在)", "at": "2026-06-21T07:51:50"}
 {"slug": "manga-houritsu-no-nukeana", "op": "multi_author_series", "detail": "歴史/教育マンガ扱いでkeep。多著者シリーズ(自由国民社・各巻別篇)→複数著者設定: 飯野財(構成18回)+作画陣(沢本英二郎/峰岸とおる/福神伶/小野寺昭夫)+石原豊昭(法律監修=credits)。NDL全巻創作者集計", "at": "2026-06-21T08:01:01"}
 {"slug": "red-eyes", "op": "edition_merge_mis_split", "detail": "red Eyes(神堂潤)=全27巻(2000-2025,KCデラックス)。同一版が「デラックス版[1-7,27]」「通常版[8-26]」に誤分割→1版[1-27]に統合(中間欠けでなく版誤分割と判明、NDL確証)。year_ended2022→2025", "at": "2026-06-21T08:08:11"}
+{"slug": "dream-buster", "op": "fragment_fill", "vols": [3, 4, 5, 6], "detail": "楽天harvestで欠け4巻補完(著者一致確認)", "at": "2026-06-21T08:24:59"}
+{"slug": "yuu-gi-ou-5ds", "op": "fragment_fill", "vols": [3, 4, 5, 6, 7, 8], "detail": "楽天harvestで欠け6巻補完(著者一致確認)", "at": "2026-06-21T08:24:59"}
+{"slug": "asakaze-kun", "op": "fragment_fill", "vols": [3, 4, 5, 6, 7], "detail": "楽天harvestで欠け5巻補完(著者一致確認)", "at": "2026-06-21T08:24:59"}
+{"slug": "hata-manjirou-no-omoshiro-zukan", "op": "fragment_fill", "vols": [3, 4, 5, 6], "detail": "楽天harvestで欠け4巻補完(著者一致確認)", "at": "2026-06-21T08:24:59"}
+{"slug": "shinishukakutoutaisen", "op": "fragment_fill", "vols": [2, 4, 5, 6, 7, 8, 9], "detail": "楽天harvestで欠け7巻補完(著者一致確認)", "at": "2026-06-21T08:24:59"}
+{"slug": "shin-onnagui", "op": "fragment_fill", "vols": [3, 4, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17], "detail": "楽天harvestで欠け14巻補完(著者一致確認)", "at": "2026-06-21T08:24:59"}
+{"slug": "damenzu-walker", "op": "fragment_fill", "vols": [16, 17, 19], "detail": "楽天harvestで欠け3巻補完(著者一致確認)", "at": "2026-06-21T08:24:59"}
+{"slug": "taikaizoku-doumei", "op": "drop_anthology", "detail": "アンソロジー(ノアール出版・楽天著者アンソロジー)=不掲載方針。drop+page削除", "at": "2026-06-21T08:27:10"}
