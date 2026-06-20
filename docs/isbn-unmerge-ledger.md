@@ -212,3 +212,14 @@ work-in re-point: 現9784757546752=高津カリノWORKING(special-edition-fixの
 - jun-1983のtitleを純に是正(canonical正題)。
 **dedupでない(=別作品の誤ISBN共有=JOKER汚染、触らず)**: king/king-z(別著者)・tales-of-destiny(別著者)・bibou他4(おおや和美の別4作)・fuufu-partner他2(それでいいシリーズ)。
 残: OVERLAP(高重複=欠け巻/版違い)32対は要個別確認。
+
+#### 段12: 奇子型(同一著者の版混在) 手塚治虫5作を手作業で版分離 (06-20、ユーザ依頼)
+
+cm104(metadata104=版オーソリティ)で版構成を確認し、standardに別出版社/別imprintの巻が混在していたのを版分離(奇子と同手順、捨てず別editionへ)。bak `ayako-bak-*`/`ayako-fix-changelog.jsonl`:
+- **w3**: standard=サンデーコミックス(秋田)2巻に正常化、講談社全集vol3を別aizobanへ分離
+- **ludwig-b**: 潮出版社standard + 講談社全集を分離(aizoban)
+- **neo-faust**: 朝日新聞社standard + 講談社全集を分離(aizoban)
+- **fushigi-na-melmo**: 講談社全集standard + 小学館まんが絵本館を分離(other)
+- **barbara**: 4版混在(ハード・コミックス大都社/全集講談社/角川/文庫全集)を分離+出版社誤記(講談社→大都社)訂正
+※各全集の欠け巻(2巻中1巻等)はISBN未取得=種4候補としてchangelogに記録。
+★検出器(`_ayako_detect.py`)は広く誤検出(長期連載)するため、cm104裏付け+少巻数+ISBN記号混在の明白例のみ手作業。残候補は据え置き(実害小)。
