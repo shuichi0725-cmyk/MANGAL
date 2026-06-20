@@ -33,8 +33,11 @@ def cover_of(d):
                 return v["cover_url"]  # 最初に見つかった表紙(loadData coverUrlと同等の近似)
     return None
 
-src = os.path.join(DATA, "manga.v2")
+# 引数: [1]=src manga ディレクトリ (既定 data/manga.v2)、 [2]=出力ディレクトリ (既定 DATA)。
+#   プレビュー用: python _build-list-index.py .preview-data/manga public
+src = sys.argv[1] if len(sys.argv) > 1 else os.path.join(DATA, "manga.v2")
 if not os.path.isdir(src): src = "data/manga.v2"
+OUTDIR = sys.argv[2] if len(sys.argv) > 2 else DATA
 t0 = time.time(); idx = []; sidx = []; skipped = 0
 for f in glob.glob(os.path.join(src, "*.yml")):
     try: d = yaml.load(open(f, encoding="utf-8"), Loader=L)
@@ -88,9 +91,9 @@ for f in glob.glob(os.path.join(src, "*.yml")):
               + [c.get("name") for c in (d.get("credits") or []) if c.get("name")],
     })
 idx.sort(key=lambda x: (x["year_started"], x["title"]))
-out = os.path.join(DATA, "manga-list-index.json")
+out = os.path.join(OUTDIR, "manga-list-index.json")
 json.dump(idx, open(out, "w", encoding="utf-8"), ensure_ascii=False, separators=(",", ":"))
-sout = os.path.join(DATA, "manga-search-index.json")
+sout = os.path.join(OUTDIR, "manga-search-index.json")
 json.dump(sidx, open(sout, "w", encoding="utf-8"), ensure_ascii=False, separators=(",", ":"))
 mb = os.path.getsize(out) / 1e6
 smb = os.path.getsize(sout) / 1e6
