@@ -262,3 +262,13 @@ size2 SAME_AUTHOR未処理ペア314を監査。★**exact題一致はわずか5�
 - lemon-hakusho: れもん白書(吉田まゆみ)のvol2(089389)別ページ分裂→統合(089372=v1/089389=v2/089396=v3)
 - garfield: アメコミ(Jim Davis)→drop
 ★結論: slug衝突は06-11で解消済。残c2は歴史系+franchise誤検出が大半=実害無し。
+
+#### 段17: 巻番号outlier監査と是正 (06-21、ユーザ依頼)
+
+本番manga.v2直走査(`_audit-volnum-live.py`)で巻番号異常検出: GAP1,504/OFFSET767/DUP2。
+outlier37件(=[1,2,51]型 高1点浮き)を★楽天ISBN照合で原因確定。一様な除去は不可(本物の巻が多い)。
+**確定6件のみ是正**(bak volnum-bak-*):
+- 汚染除去3(浮き巻ISBNが別作): itadakimasu#51=給食のおじさん(三五十一→51誤parse)/kaitou登場編#11+アバンチュリエ#11=813編別アーク
+- 誤parse振り直し3(副題数字を巻番号化): chibikasu#50(50音)→3/honda-kanoko#46(46億年)→3/minami#24(タイムリミット24編)→4
+★非処理(本物=除去禁止): フラグメント~18(red-eyes#27/夜行#17/グラゼニ#16等、楽天が実在確認=中間欠けは種4領域)/ISBN無~8(shadow通巻42/Zガンダム等=要NDL)/ruriiro#14(楽天は(2)=要精査)。
+★durability: manga.v2直編集はpromoteで戻る。汚染=種2 repoint、誤parse=番号補正seedが本来必要(follow-up)。

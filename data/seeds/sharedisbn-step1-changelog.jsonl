@@ -129,3 +129,9 @@
 {"slug": "lemon-hakusho-1979", "op": "merge_split_volumes", "canon": "lemon-hakusho", "note": "れもん白書(吉田まゆみ)のvol2(089389)が別ページ分裂→統合(089372=v1/089389=v2/089396=v3)", "at": "2026-06-20T20:35:34"}
 {"slug": "garfield", "op": "drop_american_comic", "note": "アメコミ(Babymouse/Garfield=米国コミック)=掲載対象外", "at": "2026-06-20T20:35:34"}
 {"slug":"saiko","op":"add_volume_seed4","vol":"奇子 大都社ハードコミックス 下(9784886533111)","note":"上のみ→上下完成。NDL確証1985大都社再版。本番+preview直編集+種4記録","at":"2026-06-21T02:43:19"}
+{"slug": "itadakimasu-uekan-2015", "op": "volnum_outlier_fix", "action": "remove", "detail": "汚染除去:#51=給食のおじさん別作(三五十一→51誤parse)", "bases": ["data/manga.v2"], "at": "2026-06-21T07:14:44"}
+{"slug": "kaitou-lupin-den-abanchurie-toujou-hen", "op": "volnum_outlier_fix", "action": "remove", "detail": "汚染除去:#11=813編別アーク(本体は登場編上下)", "bases": ["data/manga.v2"], "at": "2026-06-21T07:14:44"}
+{"slug": "kaitou-lupin-den-aventurier", "op": "volnum_outlier_fix", "action": "remove", "detail": "汚染除去:#11=813編別アーク(本体はアバンチュリエ1-5)", "bases": ["data/manga.v2"], "at": "2026-06-21T07:14:44"}
+{"slug": "chibikasu-kun", "op": "volnum_outlier_fix", "action": "renumber", "detail": "誤parse:50音で大笑い編→#50は誤、年代順で#3", "bases": ["data/manga.v2"], "at": "2026-06-21T07:14:44"}
+{"slug": "honda-kanoko-no-hondana", "op": "volnum_outlier_fix", "action": "renumber", "detail": "誤parse:46億年寓話篇→#46は誤、年代順で#3", "bases": ["data/manga.v2"], "at": "2026-06-21T07:14:44"}
+{"slug": "minami-no-teiou-special", "op": "volnum_outlier_fix", "action": "renumber", "detail": "誤parse:タイムリミット24編→#24は誤、年代順で#4", "bases": ["data/manga.v2"], "at": "2026-06-21T07:14:44"}
