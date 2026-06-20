@@ -1,4 +1,4 @@
-slug	title	db_author	wrongly_held_isbn	true_owner	own_true_isbn_candidate	note
-colors-2001	Colors	啄木鳥しんき	9784408431109|9784408431284|9784408431451	colors-1992 麻生歩(COLORS カラーズ,説話社)	9784757711716(Colors 4巻,2002-11)	③で24colors除去後も残る共有。啄木鳥しんき版は4巻ISBNのみ自前=1〜3巻相当の真ISBN要調査(揃えてre-point)
-gift-ichinose-2015	gift	一ノ瀬ゆま	9784063191080|9784063191097	gift-hirose-2003 秋本尚美(Gift,講談社2003)	9784344843585(gift下巻,2018-12 幻冬舎)	③後も残る共有。一ノ瀬ゆま版は下巻ISBNのみ自前=上巻の真ISBN要調査(揃えてre-point)
-# 訂正: gift-2009(山田J太)/gift-2002(中村かなこ)は当初flagに入れたがlive再確認で自前正ISBNのみ=汚染なし。resolve-master.tsvが古いsnapshotだった。
+status	slug	title	db_author	old_wrong_isbn	new_true_isbn	true_owner_of_old	note
+RESOLVED	colors-2001	Colors	啄木鳥しんき	9784408431109|9784408431284|9784408431451	9784757705128|9784757707054|9784757708846|9784757711716	colors-1992 麻生歩	④で全4巻をエンターブレイン真ISBNに差替(2001-02)。vol4=楽天確認/vol1-3=ユーザ調査+ISBN連番一致。qid(麻生歩作疑い)clear。麻生歩ColorsのISBNは共有完全解消
+RESOLVED	gift-ichinose-2015	gift	一ノ瀬ゆま	9784063191080|9784063191097	9784344834798|9784344839205|9784344843585	gift-hirose-2003 秋本尚美	④で上中下3巻を幻冬舎コミックス真ISBNに差替(2015-18=種1で[著]一ノ瀬ゆま確認)。anilist 106164等enrichは一ノ瀬本人に正マッチ済=全保持。秋本尚美GiftのISBNは共有完全解消
+# 訂正記録: gift-2009(山田J太)/gift-2002(中村かなこ)は当初flag誤登録、live確認で自前正ISBNのみ=汚染なし(resolve-masterが古いsnapshot)。
