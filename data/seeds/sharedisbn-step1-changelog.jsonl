@@ -142,3 +142,4 @@
 {"slug": "shadow", "op": "volnum_decontaminate", "detail": "NDL確証: 山田ミネコ「影-シャドウ-」=徳間書店1982・パトロールシリーズ全2巻。#42「通巻42巻」1960=劇画アンソロ誌「影」混入(山田ミネコ1949生→1960出版不可)を除去。年1960/日付1966→1982是正。publisher徳間書店", "at": "2026-06-21T07:47:08"}
 {"slug": "cyber-comics", "op": "drop_anthology_magazine", "series_key": "qid:Q8193635|name:サイバーコミックス", "detail": "バンダイの漫画アンソロ雑誌(北崎拓は寄稿者1人の誤帰属)=不掲載方針。drop+page削除", "at": "2026-06-21T07:48:31"}
 {"slug": "sora-ga-suki", "op": "volnum_remove_misnumber", "detail": "NDL確証: 竹宮惠子「空がすき!」=全2巻(小学館1974)。#18(1989-09-17)=角川書店1989再版の誤番号→除去(内容は[1,2]に存在)", "at": "2026-06-21T07:51:50"}
+{"slug": "manga-houritsu-no-nukeana", "op": "multi_author_series", "detail": "歴史/教育マンガ扱いでkeep。多著者シリーズ(自由国民社・各巻別篇)→複数著者設定: 飯野財(構成18回)+作画陣(沢本英二郎/峰岸とおる/福神伶/小野寺昭夫)+石原豊昭(法律監修=credits)。NDL全巻創作者集計", "at": "2026-06-21T08:01:01"}
