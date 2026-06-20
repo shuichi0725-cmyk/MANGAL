@@ -136,3 +136,4 @@
 {"slug": "honda-kanoko-no-hondana", "op": "volnum_outlier_fix", "action": "renumber", "detail": "誤parse:46億年寓話篇→#46は誤、年代順で#3", "bases": ["data/manga.v2"], "at": "2026-06-21T07:14:44"}
 {"slug": "minami-no-teiou-special", "op": "volnum_outlier_fix", "action": "renumber", "detail": "誤parse:タイムリミット24編→#24は誤、年代順で#4", "bases": ["data/manga.v2"], "at": "2026-06-21T07:14:44"}
 {"slug": "ruriiro-princess", "op": "volnum_misnumber_fix", "detail": "#14=楽天vol2の誤番号→ISBN9784408430171を#2へ移し#14削除。[1,2,3,4]完成", "at": "2026-06-21T07:24:34"}
+{"slug": "mobile-suit-gundam-f90", "op": "volnum_rebuild_wikipedia", "detail": "Wikipedia+NDL確証: 中原れい版F90=全1巻(バンダイ1991-07 ISBN9784891891497)。誤[1,2,11](#11=別作ファステストフォーミュラ版今ノ夜きよし11巻の混入)→1巻に是正。年1980-86→1990-91、publisher講談社→バンダイ", "at": "2026-06-21T07:35:34"}
