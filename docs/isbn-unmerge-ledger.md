@@ -129,3 +129,16 @@ NDL自前ISBN vs 現ISBN突合で仕分け:
   eden-2021/gakkou-no-kaidan-koga-1994/last-order-2000/red-dragon/stand-up-yamakawa-2013/sora-yori-takaku(石川天より高く1除去・宮下26残)/joker-2012/fight-2000/hataraku-onee-san/majuugari/yume-de-aetara-1985(Hanako15除去・小椋1残)/hakkou-1985/isekai…yoinodarou/sp-2000(灰原5除去・国友2残)
 - **★STRIP除外9(AI判断で保留)**: pocket-monsters-special(真斗=山本サトシのペンネーム→実CLEAN)/gifuu-doudou(原哲夫=正当原作)/mahouka×3(編別アーク=別作画)/x-men×3(海外Marvel+和訳翻案混在)/perman-fujiko-1979(藤子不二雄=藤子・F・不二雄)。ヨミでも解けない別名/共著/franchise=要個別。
 **残**: STRIP_multied31(版混在=reset型) / REPOINT_full15(全巻別著者) / NO_OWN・REVIEW群。
+
+#### 段4: REPOINT_full 15をAI判断で仕分け → NDL確定3件差替 (06-20)
+
+- **CLEAN 2**(ペンネーム/romaji=実は正): gurazeni-pa-riiguhen(コージィ城倉=森高夕次)/hal-ayase-2017(hal=ハル) → 無処理
+- **著者ラベル誤り3**(作品は正・著者欄のみ誤、ISBN保持で著者修正案件=別途author-fixへ): final-fantasy-lost-stranger(→亀屋樹/水瀬葉月)/kaze-no-tani-no-naushika-1984(→宮崎駿)/the-boxer(→JH manhwa)
+- **REPOINT適用3**(NDL著者照会で自前ISBN確定・check-digit緑、bak `sharedisbn-repoint2-bak-20260620-151532`):
+  to-heart-2(御形屋はるか)→9784840227742/235334/239011(メディアワークス3巻)/engage-watanabe-2009(渡辺瑞樹)→9784063494228/494327(講談社2巻)/nein(有坂あこ)→9784041050514(KADOKAWA)
+- **保留5**(NDL著者照会不調=要web/深掘り): refrain-1988/joker-1998-3/work-in/meioukeikakuzeoraimaa/last-order-kazunari-2021
+- **保留2**: x-men(海外Marvelスコープ)/nhk-sono-toki(多著者アンソロ)
+
+#### A 累計(06-20時点)
+strip 48(段1:4+30 / 段3:14) + repoint 8(段2:5 / 段4:3) + CLEAN確認 多数(段2:6 / 段3:23 / 段4:2) + 既処理判明91。
+**残**: STRIP_multied31(版混在) / 著者ラベル誤り3(author-fix) / REPOINT保留7 / その他REVIEW群。
