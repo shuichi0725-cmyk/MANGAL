@@ -195,3 +195,12 @@ de-interleave後に残った4ページをNDL照会→**全て「新機動戦記�
 - スラッグ著者(みずき健/細雪純/むっちりむうにい/樹本祐季/氷栗優)=アンソロ寄稿者で別ページ分裂していたもの。
 - canonical shin-mobile-senki-gundam-wing(ときた洸一・講談社・単著)は残す。
 ★手法: NDL題に「アンソロジー」明記 or 著者無記名多著者 でアンソロ判定→非掲載。anthology-drop.tsv。
+
+#### 段10: 単著author-fix 3 + work-in re-point (06-20)
+
+NDLでフルネーム+ヨミ確認し著者ラベル修正(作品・ISBN正、著者欄のみ誤。bak `authorfix2-bak-20260620-165028`):
+- kuro: 青インク誤→ソウマトウ(黒、集英社2014)
+- charisma-2: 花小路ゆみ誤→石原理(カリスマ、青磁ビブロス1994)
+- jun-1983: 森下裕美誤→紡木たく(純、集英社1991)
+work-in re-point: 現9784757546752=高津カリノWORKING(special-edition-fixの誤変換)→鈴木ツタのWork in自前9784862527745(コアマガジン2010)。
+**残(絡まり深=要個別/方針)**: 八つ墓村pair(つのだ/影丸/Jet) / FE pair(大沢美月) / 日本の歴史(集英社学習漫画=多著者educational) / 銀河鉄道の夜(古城武司/Teamバンミカス/ますむら3版) / mahouka×3(編別アーク franchise) / REPOINT要web(joker-1998-3野間美由紀/last-order-kazunari).
