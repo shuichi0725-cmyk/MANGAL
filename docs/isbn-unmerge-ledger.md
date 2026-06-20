@@ -180,10 +180,18 @@ strip 66(段1:34 / 段3:14 / 段5:18) + repoint 11(段2:5 / 段4:3 / 段4b:3) + 
 **de-interleave 5**(canonicalは無変更、誤claim側から共有ISBN剥がし。bak `sharedisbn-strip-batch-bak-20260620-162738`):
 - `refrain-1988`(ささやななえこ): 岡田ユキオのリフレイン3冊除去→自前9784061754843(1988)残。canonical=`rifrein`(岡田ユキオ)
 - Gundam W 4(`shin-mobile-senki-gundam-wing-1996`/-2/-3/-daburyuu): ときた洸一の講談社4冊(9784063340020/217551/667/728)除去→各自前の学研版(9784056xxx)残。canonical=`shin-mobile-senki-gundam-wing`(ときた洸一)無変更
-  ※学研版Gundam W(みずき健/細雪純/むっちりむうにい)はアンソロ疑い→非掲載方針なら要再検討(flag)
+  ※学研版Gundam W(みずき健/細雪純/むっちりむうにい)はアンソロ確定→段9でdrop
 
 **著者ラベル修正 2**(作品・ISBN正、著者欄のみ誤。bak `authorfix-bak-20260620-162819`):
 - `final-fantasy-lost-stranger`: むつきらん誤→**亀屋樹**(全12巻NDL一致)
 - `meioukeikakuzeoraimaa`: 高屋良樹誤(ガイバー作者)→**ちみもりを/ワタリユウ**(徳間12巻NDL一致)
 
 **残**: STRIP_multied own0(kuro/charisma-2/jun-1983/FE pair/八つ墓村pair/日本の歴史/銀河鉄道) / mahouka×3 franchise / REPOINT要web(joker-1998-3/work-in/last-order-kazunari) / CLEAN23無処理確定。
+
+#### 段9: 学研版Gundam Wアンソロ drop (06-20)
+
+de-interleave後に残った4ページをNDL照会→**全て「新機動戦記ガンダムW・アンソロジー」**(学習研究社 ノーラコミックスdeluxe ぽっけシリーズ、2nd-6th、著者無記名=多著者アンソロ)と確定。アンソロ非掲載方針でdrop(bak `anthology-drop-bak-20260620-164646`、anthology-drop.tsv)。
+- shin-mobile-senki-gundam-wing-1996(2nd)/-1996-2(6th)/-1996-3(4th)/daburyuu(3rd,5th)
+- スラッグ著者(みずき健/細雪純/むっちりむうにい/樹本祐季/氷栗優)=アンソロ寄稿者で別ページ分裂していたもの。
+- canonical shin-mobile-senki-gundam-wing(ときた洸一・講談社・単著)は残す。
+★手法: NDL題に「アンソロジー」明記 or 著者無記名多著者 でアンソロ判定→非掲載。anthology-drop.tsv。
