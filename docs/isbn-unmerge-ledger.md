@@ -78,6 +78,17 @@
 
 ### A 適用ログ (= ここに段ごと追記していく)
 
-| 段 | 日付 | slug | 操作 | before→after | 根拠 | commit | bak |
-|---|---|---|---|---|---|---|---|
-| (未着手) | | | | | | | |
+**★重要(2026-06-20)**: resolve-master.tsv は **6/18-19 の t3-fix/torichigae/special-edition 修正より前の古snapshot**。
+統合台帳 operations.jsonl で「既処理か」を必ず確認 → 怪しければ実 yml を見る、で**済み作業の上書きを回避**。
+(例: samurai-soldier は台帳上 t3-fix 済=現在 山本隆一郎の正26巻。stale proposal の「26→1」を信じれば正巻を破壊していた)
+
+| 段 | 日付 | slug | 操作 | before→after | 根拠 | bak |
+|---|---|---|---|---|---|---|
+| 1 | 06-20 | eden-sakurazawa-2014 | strip誤著者巻 | 岡田俊平のエデン除去 → 桜沢エリカ1巻 | 種1著者照合 | sharedisbn-step1-bak-20260620-143120 |
+| 1 | 06-20 | snow | strip誤著者巻 | 藤谷コマキのスノウ除去 → 吉田優希1巻 | 種1著者照合 | 同上 |
+| 1 | 06-20 | stand-up | strip誤著者巻 | 白虎丸のSTAND UP!2除去 → 板垣雅也2巻 | 種1/楽天著者照合 | 同上 |
+| 1 | 06-20 | zero-matsumoto | strip誤著者巻 | 冬目景のZERO除去 → 松本大洋3巻 | 楽天著者照合 | 同上 |
+
+**段1の保留**: reset(高橋ユキ標準+山本まゆり文庫の2著者混在+enrich疑義) / comic-higashino-keigo-mystery-2014(アンソロ) / tenyoritakaku(全巻別著者=要re-point) / koi-shita…(matcher誤判定=実は本人作) → 個別精査へ。
+**段1で既処理判明(台帳ガード)**: blazblue/box-1991/face/face-2019/kirara-hiramatsu-1987/nito-monogatari/samurai-soldier/work-in (= t3-fix/torichigae/special-edition で6/18-19に修正済)。
+**次**: 段1残(未スキャンの全REPOINT/STRIP母集団)は **resolve-master でなく台帳+実DB** で現状確認してから。
