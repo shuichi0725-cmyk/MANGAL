@@ -102,3 +102,21 @@ SAFE_STRIP47のうち **wrong==1(別著者の単巻混入)30件**を異体字正
 
 **★保留(wrong≥2のSAFE_STRIP17 = ペンネーム/異体字の誤判定リスク)**: pocket-monsters-special(真斗=山本サトシで55誤判定)/worst(髙橋ヒロシ vs 高橋ヒロシ異体字で27)/mahouka各/buyuden/sora-yori-takaku 等。**matcherの別名解決を入れるまで自動strip厳禁**。
 **残**: REVIEW42(null/版混在=reset型) / REPOINT_full38(全巻別著者=自前ISBNへ要差替)。個別精査へ。
+
+#### 段2: REPOINT_full 38をNDL一次調査 → 確定5件差替 (06-20)
+
+`_repoint_ndl_investigate.py`(NDL SRU=絶版でも収録・著者ヨミでペンネーム裁定)で38件の自前ISBNを調査。
+NDL自前ISBN vs 現ISBN突合で仕分け:
+- **CLEAN_fp 6**(現ISBN=NDL自前=正しい、romaji/かな/ペンネーム誤判定): gurazeni-tokyo-doomuhen(森高夕次=コージィ城倉)/koi-shita/lastman/egao-no-yukue(SalaSharon=シャロンサラ)/koori-no-joou/ragunasenki → 無処理(一部NDL欠け巻=種4候補)
+- **REPOINT確定5**(NDL著者×題で全巻照会・check-digit緑、clean stub差替): bak `sharedisbn-repoint-bak-20260620-145821`
+
+| slug | 著者 | 誤(別著者) → 自前ISBN(NDL) |
+|---|---|---|
+| tenyoritakaku | 現津みかみ | 石川サブロウ天より高く → 9784832277687(芳文社2009) |
+| catwalk | けろりん | 佐多ミサキ → 9784757720527(エンターブレイン2004) |
+| comic-higashino-keigo-mystery-2014 | 松枝尚嗣 | 高柳衣良他 → 9784408174839(実業之日本社2014) |
+| rocketman | 水木しげる | 加藤元浩 → 9784778031541(小学館クリエイティブ2010、大全集ノイズ除外) |
+| crusader-kawaso-2002 | 河惣益巳 | 水縞トオル → 9784592172093(白泉社2002) |
+
+**段2保留**: nein(有坂あこ=vol2不確実のstrip混在) / mahouka×2(franchise過収集30) / nhk-sono-toki(多著者アンソロ6) / gifuu-doudou(MIXED一部正)。
+**未着手**: REPOINT_full の NO_OWN 22(NDLで自前無=ペンネーム未マッチ/著者unknown[ナウシカ宮崎駿・x-men]/外国[Vivés/LEEHYE manhwa]) + REVIEW42。
