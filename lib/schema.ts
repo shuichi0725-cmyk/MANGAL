@@ -189,6 +189,46 @@ export const MangaSchema = z.object({
 export type Manga = z.infer<typeof MangaSchema>;
 
 /**
+ * 一覧用 軽量索引アイテム (= data/manga-list-index.json の 1 要素)。
+ * トップ/一覧/フィルタ/カードが必要とする slim フィールドのみ。
+ * ★重い editions/volumes全体・synopsis・tags・wikidata 等は持たない (= props/転送を軽量化)。
+ * cover と total_volumes は build 時に事前計算 (= `scripts/_build-list-index.py`)。
+ * 詳細ページは従来通り full Manga (manga.v2 個別 yml) を読む。
+ */
+export type MangaListItem = {
+  slug: string;
+  title: string;
+  title_kana: string;
+  title_romaji: string;
+  subtitle?: string | null;
+  /** 事前計算済み表紙 URL (= coverUrl 相当)。 無ければ null */
+  cover: string | null;
+  year_started: number;
+  year_ended: number | null;
+  status: Manga["status"];
+  catch?: string;
+  authors: { name: string; role?: Manga["authors"][number]["role"]; kana?: string }[];
+  original_authors: { name: string; kana?: string }[];
+  genres: string[];
+  demographic: Manga["demographic"];
+  publisher: string;
+  publishers: string[];
+  magazine?: string | null;
+  awards?: string[];
+  anime_adapted?: boolean;
+  /** 事前計算済み 全版合計巻数 (= filters の巻数ソート用 = 旧 totalVolumes 同値) */
+  total_volumes: number;
+  /** 事前計算済み 最大単一版の巻数 (= ListClient の巻数表示/ソート用) */
+  max_edition_volumes: number;
+  /** 事前計算済み 最新刊の発売年月 "YYYY-MM" (= ListClient の最新刊順) */
+  latest_date?: string | null;
+  alternative_titles?: Manga["alternative_titles"];
+  credits: { name: string }[];
+  popularity?: number;
+  score?: number;
+};
+
+/**
  * 画集 (= 漫画家の画集/原画集/イラスト集)。 ★漫画とは別カテゴリ・別ストリーム。
  * Manga と別の軽量型 = `editions` を持たず `volumes` 直下 (画集は版分岐が薄い)。
  * volumes は通常の Volume と同形 = 書影・アフィリンクが同じ仕組みで効く。
@@ -281,6 +321,19 @@ export type DemographicLabel = z.infer<typeof DemographicLabelSchema>;
 export type DataBundle = {
   manga: Manga[];
   /** ★画集 = manga[] とは別配列 (構造的に混ざらない保証) */
+  artBooks: ArtBook[];
+  publishers: Publisher[];
+  magazines: Magazine[];
+  genres: Genre[];
+  demographics: DemographicLabel[];
+};
+
+/**
+ * 一覧表示用の軽量バンドル。 DataBundle と同形だが manga が slim な MangaListItem[]。
+ * トップ/一覧/フィルタは full manga を props で送らずこれを使う (= 数十MB → 数MB)。
+ */
+export type ListBundle = {
+  manga: MangaListItem[];
   artBooks: ArtBook[];
   publishers: Publisher[];
   magazines: Magazine[];

@@ -1,4 +1,4 @@
-import type { ArtBook, Manga, StatusT } from "./schema";
+import type { ArtBook, MangaListItem, StatusT } from "./schema";
 import { kanaToRomaji, normalizeForSearch, romajiToHiragana } from "./romaji";
 
 export type SortKey =
@@ -52,7 +52,7 @@ export const emptyFilterState = (): FilterState => ({
  * 検索クエリにマッチするか。タイトル・よみがな・ローマ字いずれかで部分一致。
  * かな⇄ローマ字の双方向変換も試す。
  */
-export function matchText(query: string, manga: Manga): boolean {
+export function matchText(query: string, manga: MangaListItem): boolean {
   if (!query) return true;
   const q = normalizeForSearch(query);
   if (!q) return true;
@@ -120,11 +120,11 @@ function containsAll<T>(needles: T[], haystack: T[]): boolean {
   return needles.every((n) => haystack.includes(n));
 }
 
-function totalVolumes(m: Manga): number {
-  return m.editions.reduce((s, e) => s + e.volumes.length, 0);
+function totalVolumes(m: MangaListItem): number {
+  return m.total_volumes;
 }
 
-function sortItems(items: Manga[], sort: SortKey): Manga[] {
+function sortItems(items: MangaListItem[], sort: SortKey): MangaListItem[] {
   switch (sort) {
     case "year-desc":
       return [...items].sort((a, b) => b.year_started - a.year_started);
@@ -150,7 +150,7 @@ function sortItems(items: Manga[], sort: SortKey): Manga[] {
   }
 }
 
-export function applyFilters(items: Manga[], state: FilterState): Manga[] {
+export function applyFilters(items: MangaListItem[], state: FilterState): MangaListItem[] {
   const filtered = items.filter((m) => {
     if (!matchText(state.query, m)) return false;
     if (!inRange(m.year_started, state.yearMin, state.yearMax)) return false;
@@ -213,7 +213,7 @@ export function applyArtBookFilters(items: ArtBook[], state: FilterState): ArtBo
   }
 }
 
-export function uniqueAuthors(items: Manga[], includeOriginal = false): string[] {
+export function uniqueAuthors(items: MangaListItem[], includeOriginal = false): string[] {
   const set = new Set<string>();
   for (const m of items) {
     for (const a of m.authors) set.add(a.name);
@@ -224,7 +224,7 @@ export function uniqueAuthors(items: Manga[], includeOriginal = false): string[]
 
 /** 著者名 → 読み(カタカナ)の一覧 (= 50音索引用)。 重複排除、 kana有る方を優先採用。 */
 export function authorsWithKana(
-  items: Manga[],
+  items: MangaListItem[],
   includeOriginal = false,
 ): { name: string; kana: string }[] {
   const map = new Map<string, string>();
@@ -241,7 +241,7 @@ export function authorsWithKana(
   );
 }
 
-export function yearBounds(items: Manga[]): [number, number] {
+export function yearBounds(items: MangaListItem[]): [number, number] {
   if (items.length === 0) return [1950, new Date().getFullYear()];
   let min = items[0].year_started;
   let max = items[0].year_started;

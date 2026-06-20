@@ -6,13 +6,14 @@ import {
   uniqueAuthors,
   yearBounds,
 } from "./filters";
-import type { Manga } from "./schema";
+import type { MangaListItem } from "./schema";
 
-const m = (over: Partial<Manga> = {}): Manga => ({
+const m = (over: Partial<MangaListItem> = {}): MangaListItem => ({
   slug: over.slug ?? "x",
   title: over.title ?? "ONE PIECE",
   title_kana: over.title_kana ?? "ワンピース",
   title_romaji: over.title_romaji ?? "one piece",
+  cover: over.cover ?? null,
   year_started: over.year_started ?? 1997,
   year_ended: over.year_ended ?? null,
   status: over.status ?? "ongoing",
@@ -24,8 +25,8 @@ const m = (over: Partial<Manga> = {}): Manga => ({
   magazine: over.magazine ?? "weekly-shonen-jump",
   demographic: over.demographic ?? "shounen",
   genres: over.genres ?? ["action", "adventure"],
-  synopsis: over.synopsis ?? "",
-  editions: over.editions ?? [{ type: "standard", label: "通常版", volumes: [{ number: 1 }] }],
+  total_volumes: over.total_volumes ?? 1,
+  max_edition_volumes: over.max_edition_volumes ?? 1,
 });
 
 describe("matchText", () => {
@@ -68,7 +69,7 @@ describe("matchText", () => {
 });
 
 describe("applyFilters", () => {
-  const items: Manga[] = [
+  const items: MangaListItem[] = [
     m({ slug: "a", year_started: 1990 }),
     m({ slug: "b", year_started: 2000, demographic: "seinen", genres: ["drama"] }),
     m({ slug: "c", year_started: 2015, genres: ["action", "drama"] }),
@@ -109,13 +110,13 @@ describe("applyFilters", () => {
 });
 
 describe("yearBounds と uniqueAuthors", () => {
-  const items: Manga[] = [
+  const items: MangaListItem[] = [
     m({ slug: "a", year_started: 1990, authors: [{ name: "A", role: "writer_artist" }] }),
     m({
       slug: "b",
       year_started: 2020,
       authors: [{ name: "B", role: "artist" }],
-      original_authors: [{ name: "C", role: "writer" }],
+      original_authors: [{ name: "C" }],
     }),
   ];
 

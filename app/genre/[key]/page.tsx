@@ -2,26 +2,26 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import CoverImage from "@/components/CoverImage";
 import MarqueeTitle from "@/components/MarqueeTitle";
-import { loadAllManga, loadGenreIntros } from "@/lib/loadData";
+import { loadListBundle, loadGenreIntros } from "@/lib/loadData";
 import { DesignNav } from "@/lib/homeDesign";
-import { primaryVolume, type Manga } from "@/lib/schema";
+import { type MangaListItem } from "@/lib/schema";
 
 /** ジャンル別ランディング = 「自動生成まとめ記事」の土台(discovery + SEO + アフィの集約)。
  *  全作品をジャンルで絞り、 ★AniList人気順(コミュニティ不要)で並べる。
  *  AI解説スロット(intro)は将来 per-genre のキュレーション文を差し込む(今はデータ駆動の暫定)。
  *  [[genre_quality_improvement]] [[anilist_link_quality]] / 設計 manba参考(まとめ記事の網羅・データ駆動版)。 */
 export function generateStaticParams() {
-  const keys = loadAllManga().genres.map((g) => ({ key: g.key }));
+  const keys = loadListBundle().genres.map((g) => ({ key: g.key }));
   return keys.length > 0 ? keys : [{ key: "_empty" }];
 }
 
-function pop(m: Manga) {
+function pop(m: MangaListItem) {
   return m.popularity ?? 0;
 }
 
 export default async function GenrePage({ params }: { params: Promise<{ key: string }> }) {
   const { key } = await params;
-  const data = loadAllManga();
+  const data = loadListBundle();
   const genre = data.genres.find((g) => g.key === key);
   if (!genre) notFound();
 
@@ -54,7 +54,7 @@ export default async function GenrePage({ params }: { params: Promise<{ key: str
 
         <ul className="mt-5 grid grid-cols-3 gap-x-3 gap-y-5 sm:grid-cols-4">
           {items.slice(0, 120).map((m) => {
-            const c = primaryVolume(m)?.cover_url ?? null;
+            const c = m.cover;
             return (
               <li key={m.slug}>
                 <Link href={`/manga/${m.slug}`} className="block group spring-press">

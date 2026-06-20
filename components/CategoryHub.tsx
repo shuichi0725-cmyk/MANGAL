@@ -1,7 +1,7 @@
 import Card from "@/components/ui/Card";
-import type { DataBundle } from "@/lib/schema";
+import type { ListBundle } from "@/lib/schema";
 
-type Props = { data: DataBundle };
+type Props = { data: ListBundle };
 
 type Category = {
   href: string;

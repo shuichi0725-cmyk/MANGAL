@@ -1,9 +1,8 @@
 import { yearStatusLabel } from "@/lib/format";
 import {
-  coverUrl,
   type DemographicLabel,
   type Genre,
-  type Manga,
+  type MangaListItem,
   type Publisher,
 } from "@/lib/schema";
 import Card from "./ui/Card";
@@ -22,7 +21,7 @@ const STATUS_LABEL: Record<string, string> = {
 };
 
 type Props = {
-  manga: Manga;
+  manga: MangaListItem;
   publishers: Publisher[];
   genres: Genre[];
   demographics: DemographicLabel[];
@@ -38,7 +37,7 @@ type Props = {
  */
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export default function MangaCard({ manga, publishers, genres, demographics }: Props) {
-  const cover = coverUrl(manga);
+  const cover = manga.cover;
 
   const publisherName =
     publishers.find((p) => p.key === manga.publisher)?.name ?? manga.publisher;

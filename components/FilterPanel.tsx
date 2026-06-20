@@ -2,12 +2,12 @@
 
 import { useMemo } from "react";
 import { applyFilters, emptyFilterState, type FilterState, type SortKey } from "@/lib/filters";
-import type { DataBundle, Manga, StatusT } from "@/lib/schema";
+import type { ListBundle, MangaListItem, StatusT } from "@/lib/schema";
 import { ChipButton } from "@/components/ui/Chip";
 import AuthorKanaIndex from "@/components/AuthorKanaIndex";
 
 type Props = {
-  data: DataBundle;
+  data: ListBundle;
   state: FilterState;
   setState: (next: FilterState) => void;
   yearBounds: [number, number];
@@ -31,7 +31,7 @@ export default function FilterPanel({
   //   faceted-search の定石 = 当該facetだけ解除した state で絞り、 残った作品を値で集計。
   //   静的(R2)のままブラウザJSで計算 = サーバ化しない([[hosting_worker_r2_architecture]])。
   const counts = useMemo(() => {
-    const tally = (clear: Partial<FilterState>, values: (m: Manga) => string[]) => {
+    const tally = (clear: Partial<FilterState>, values: (m: MangaListItem) => string[]) => {
       const base = applyFilters(data.manga, { ...state, ...clear });
       const map = new Map<string, number>();
       for (const m of base) for (const v of values(m)) map.set(v, (map.get(v) ?? 0) + 1);

@@ -1,7 +1,8 @@
 import ListClient from "@/components/ListClient";
 import ScrollShortcutsMock from "@/components/ScrollShortcutsMock";
 import { DesignNav } from "@/lib/homeDesign";
-import { loadAllManga } from "@/lib/loadData";
+import { loadMasters, loadArtBooks } from "@/lib/loadData";
+import type { ListBundle } from "@/lib/schema";
 
 /** 一覧表(案6の正式な行き先): 全作品のスプレッドシート型ビュー。
  *  列タップでソート・検索・状態絞り込み。
@@ -14,7 +15,8 @@ import { loadAllManga } from "@/lib/loadData";
  *    プレビュー(100件)は全量=初期量なので現実装のままでよい。 チャンク生成は
  *    本番ビルド(R2移行)時に実装。 */
 export default function ListPage() {
-  const data = loadAllManga();
+  const masters = loadMasters();
+  const data: ListBundle = { manga: [], artBooks: loadArtBooks(), ...masters };
   return (
     <div className="min-h-screen bg-white pb-10">
       <DesignNav current={11} />

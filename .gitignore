@@ -53,3 +53,5 @@ data/manga.draft-2000.bak-*
 
 # プレビューの画集シンボリックリンク(CIで壊れる)は追跡しない
 .preview-data/art-books
+data/manga-list-index.json
+public/manga-list-index.json

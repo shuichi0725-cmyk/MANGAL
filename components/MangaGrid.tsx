@@ -1,8 +1,8 @@
-import type { DemographicLabel, Genre, Manga, Publisher } from "@/lib/schema";
+import type { DemographicLabel, Genre, MangaListItem, Publisher } from "@/lib/schema";
 import MangaCard from "./MangaCard";
 
 type Props = {
-  items: Manga[];
+  items: MangaListItem[];
   publishers: Publisher[];
   genres: Genre[];
   demographics: DemographicLabel[];

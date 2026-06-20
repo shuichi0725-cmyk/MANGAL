@@ -16,9 +16,10 @@ import {
   authorsWithKana,
   yearBounds,
 } from "@/lib/filters";
-import type { ArtBook, DataBundle, Manga } from "@/lib/schema";
+import type { ArtBook, ListBundle, MangaListItem } from "@/lib/schema";
+import { useMangaIndex } from "@/lib/useMangaIndex";
 
-type Props = { data: DataBundle };
+type Props = { data: ListBundle };
 
 const PAGE_SIZE = 100;
 
@@ -56,13 +57,20 @@ export default function HomeClient({ data }: Props) {
     };
   }, [open]);
 
-  const bounds = useMemo(() => yearBounds(data.manga), [data.manga]);
-  const authors = useMemo(() => authorsWithKana(data.manga, true), [data.manga]);
+  // ★一覧 manga は軽量索引をクライアント遅延ロード (= SSR props で 65k を送らない)。
+  //   master/画集は props(軽量)。 索引到着までは loading。
+  const mangaIndex = useMangaIndex();
+  const manga = useMemo(() => mangaIndex ?? [], [mangaIndex]);
+  const liveData = useMemo(() => ({ ...data, manga }), [data, manga]);
+  const indexLoading = mangaIndex === null;
+
+  const bounds = useMemo(() => yearBounds(manga), [manga]);
+  const authors = useMemo(() => authorsWithKana(manga, true), [manga]);
   // ★画集モード = 一覧を画集に切替(ジャンル欄「画集」チップ)。 漫画用フィルタは非適用。
   const showArt = state.artBooks;
-  const filteredManga = useMemo(() => applyFilters(data.manga, state), [data.manga, state]);
+  const filteredManga = useMemo(() => applyFilters(manga, state), [manga, state]);
   const filteredArt = useMemo(() => applyArtBookFilters(data.artBooks, state), [data.artBooks, state]);
-  const filtered: (Manga | ArtBook)[] = showArt ? filteredArt : filteredManga;
+  const filtered: (MangaListItem | ArtBook)[] = showArt ? filteredArt : filteredManga;
 
   // ページは URL(?page)から導出 = リロード/共有/戻るで復元。 フィルタURL変更
   // (CategoryHub 等)は ?page を含まないので自然と1ページ目に戻る。
@@ -109,7 +117,7 @@ export default function HomeClient({ data }: Props) {
         </div>
       </section>
 
-      <CategoryHub data={data} />
+      <CategoryHub data={liveData} />
 
       {/* モバイル: フィルター起動(全画面オーバーレイを開く)。 PC版は右サイドバー常時表示 */}
       <button
@@ -124,7 +132,7 @@ export default function HomeClient({ data }: Props) {
         {/* デスクトップ: 常時サイドバー(PC版は不変) */}
         <div className="hidden md:block">
           <FilterPanel
-            data={data}
+            data={liveData}
             state={state}
             setState={setState}
             yearBounds={bounds}
@@ -141,9 +149,14 @@ export default function HomeClient({ data }: Props) {
                 </li>
               ))}
             </ul>
+          ) : indexLoading ? (
+            <div className="tactile rounded-card py-16 text-center">
+              <p className="text-2xl animate-pulse" aria-hidden="true">📚</p>
+              <p className="mt-2 text-sm text-ink/55">作品データを読み込み中…</p>
+            </div>
           ) : (
             <MangaGrid
-              items={paged as Manga[]}
+              items={paged as MangaListItem[]}
               publishers={data.publishers}
               genres={data.genres}
               demographics={data.demographics}

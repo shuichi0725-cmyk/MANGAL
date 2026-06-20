@@ -20,7 +20,8 @@ function activeCount(s: FilterState): number {
   }
   return n;
 }
-import type { DataBundle, Manga } from "@/lib/schema";
+import type { ListBundle, MangaListItem } from "@/lib/schema";
+import { useMangaIndex } from "@/lib/useMangaIndex";
 
 /** 一覧表クライアント: 絞り込み=既存の多窓フィルター(トップと同じ)、並び順=独立チップ。
  *  「完結×ジャンル×作者×開始が古い順」のような自由なAND合成が成立する。 */
@@ -34,16 +35,14 @@ const SORTS: Array<{ id: SortId; label: string }> = [
   { id: "latest-desc", label: "最新刊が新しい" },
 ];
 
-function volCount(m: Manga): number {
-  return Math.max(0, ...m.editions.map((e) => e.volumes.length));
+function volCount(m: MangaListItem): number {
+  return m.max_edition_volumes;
 }
-function latestDate(m: Manga): string {
-  let d = "";
-  for (const ed of m.editions) for (const v of ed.volumes) if (v.release_date && v.release_date > d) d = v.release_date;
-  return d.slice(0, 7);
+function latestDate(m: MangaListItem): string {
+  return m.latest_date ?? "";
 }
 
-export default function ListClient({ data }: { data: DataBundle }) {
+export default function ListClient({ data }: { data: ListBundle }) {
   const [state, setState] = useState<FilterState>(emptyFilterState());
   const [open, setOpen] = useState(false);
   const [q, setQ] = useState("");
@@ -59,12 +58,17 @@ export default function ListClient({ data }: { data: DataBundle }) {
     };
   }, [open]);
 
-  const bounds = useMemo(() => yearBounds(data.manga), [data.manga]);
-  const authors = useMemo(() => authorsWithKana(data.manga, true), [data.manga]);
+  // ★manga は軽量索引をクライアント遅延ロード (= SSR props で 65k を送らない)
+  const mangaIndex = useMangaIndex();
+  const manga = useMemo(() => mangaIndex ?? [], [mangaIndex]);
+  const indexLoading = mangaIndex === null;
+  const liveData = useMemo(() => ({ ...data, manga }), [data, manga]);
+  const bounds = useMemo(() => yearBounds(manga), [manga]);
+  const authors = useMemo(() => authorsWithKana(manga, true), [manga]);
   const nActive = activeCount(state);
 
   const rows = useMemo(() => {
-    let r = applyFilters(data.manga, state);
+    let r = applyFilters(manga, state);
     const needle = q.trim().toLowerCase();
     if (needle) {
       r = r.filter(
@@ -89,7 +93,7 @@ export default function ListClient({ data }: { data: DataBundle }) {
       }
     });
     return sorted;
-  }, [data.manga, state, q, sort]);
+  }, [manga, state, q, sort]);
 
   return (
     <div>
@@ -144,6 +148,13 @@ export default function ListClient({ data }: { data: DataBundle }) {
             </tr>
           </thead>
           <tbody>
+            {indexLoading && (
+              <tr>
+                <td colSpan={6} className="py-10 text-center text-sm text-ink/55">
+                  📚 作品データを読み込み中…
+                </td>
+              </tr>
+            )}
             {rows.slice(0, limit).map((m, i) => (
               <tr key={m.slug} className={i % 2 ? "bg-[var(--color-surface)]/60" : ""}>
                 <td className="max-w-[200px] border-b border-[var(--color-line)]/60 px-2 py-1.5">
@@ -192,7 +203,7 @@ export default function ListClient({ data }: { data: DataBundle }) {
                 </button>
               </div>
             </div>
-            <FilterPanel data={data} state={state} setState={setState} yearBounds={bounds} authorEntries={authors} />
+            <FilterPanel data={liveData} state={state} setState={setState} yearBounds={bounds} authorEntries={authors} />
           </div>
         </div>
       )}

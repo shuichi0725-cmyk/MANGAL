@@ -6,7 +6,11 @@ const STATUS_LABEL: Record<Manga["status"], string> = {
   hiatus: "休載中",
 };
 
-export function yearStatusLabel(m: Manga): string {
+export function yearStatusLabel(m: {
+  year_started: number;
+  year_ended: number | null;
+  status: Manga["status"];
+}): string {
   const start = m.year_started;
   const end = m.year_ended;
   const status = STATUS_LABEL[m.status];

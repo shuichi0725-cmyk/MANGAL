@@ -15,6 +15,8 @@ import {
   GenreSchema,
   type DemographicLabel,
   DemographicLabelSchema,
+  type MangaListItem,
+  type ListBundle,
 } from "./schema";
 import { z } from "zod";
 
@@ -22,6 +24,22 @@ import { z } from "zod";
 const DATA_DIR = process.env.MANGAL_DATA_DIR
   ? path.resolve(process.env.MANGAL_DATA_DIR)
   : path.join(process.cwd(), "data");
+
+// 一覧用 軽量索引 (= data/manga-list-index.json)。 トップ/一覧/フィルタ/カードはこれを使う
+// (= full manga.v2 を props で送らない = 数十MB → 数MB)。 build 時生成 (_build-list-index.py)。
+let _listIndex: MangaListItem[] | null = null;
+export function loadMangaListIndex(): MangaListItem[] {
+  if (_listIndex) return _listIndex;
+  const p = path.join(DATA_DIR, "manga-list-index.json");
+  // 索引が無い環境(= データ準備中/未生成)でも build を通すため空配列フォールバック。
+  if (!fs.existsSync(p)) {
+    console.warn(`[loadData] 一覧索引が無い (${p}) → 空一覧。 _build-list-index.py 要実行`);
+    _listIndex = [];
+    return _listIndex;
+  }
+  _listIndex = JSON.parse(fs.readFileSync(p, "utf8")) as MangaListItem[];
+  return _listIndex;
+}
 
 function readYaml<S extends z.ZodTypeAny>(file: string, schema: S): z.infer<S> {
   const raw = fs.readFileSync(file, "utf8");
@@ -112,27 +130,65 @@ export function loadAiReviews(): AiReviewSection[] {
   return _aiReviews;
 }
 
+// ★master (= publishers/magazines/genres/demographics) のみ読む軽量ローダ。
+//   一覧索引と組む時に manga 65k を読まずに済む (= loadListBundle 用)。
+type Masters = {
+  publishers: Publisher[];
+  magazines: Magazine[];
+  genres: Genre[];
+  demographics: DemographicLabel[];
+};
+let _masters: Masters | null = null;
+export function loadMasters(): Masters {
+  if (_masters) return _masters;
+  _masters = {
+    publishers: readMasterRecord(path.join(DATA_DIR, "publishers.yml"), PublisherSchema),
+    magazines: readMasterRecord(path.join(DATA_DIR, "magazines.yml"), MagazineSchema),
+    genres: readMasterRecord(path.join(DATA_DIR, "genres.yml"), GenreSchema),
+    demographics: readMasterRecord(path.join(DATA_DIR, "demographics.yml"), DemographicLabelSchema),
+  };
+  return _masters;
+}
+
+// 画集 (= data/art-books、 161件程度) のみ読む軽量ローダ。
+let _artBooks: ArtBook[] | null = null;
+export function loadArtBooks(): ArtBook[] {
+  if (_artBooks) return _artBooks;
+  const artBooksDir = path.join(DATA_DIR, "art-books");
+  const files = fs.existsSync(artBooksDir)
+    ? fs.readdirSync(artBooksDir).filter((f) => f.endsWith(".yml") || f.endsWith(".yaml"))
+    : [];
+  const arr = files
+    .map((f) => readYaml(path.join(artBooksDir, f), ArtBookSchema))
+    .filter((a) => !a.adult); // 既定: adult 画集は本番に出さない
+  arr.sort((a, b) => a.artist.localeCompare(b.artist, "ja") || a.title.localeCompare(b.title, "ja"));
+  _artBooks = arr;
+  return _artBooks;
+}
+
+// ★一覧表示用バンドル = 軽量索引 + master + 画集 (= full manga.v2 を読まない)。
+//   トップ/一覧/ジャンル/検索はこれを使う。 詳細ページのみ loadAllManga (full)。
+let _listBundle: ListBundle | null = null;
+export function loadListBundle(): ListBundle {
+  if (_listBundle) return _listBundle;
+  const m = loadMasters();
+  _listBundle = {
+    manga: loadMangaListIndex(),
+    artBooks: loadArtBooks(),
+    publishers: m.publishers,
+    magazines: m.magazines,
+    genres: m.genres,
+    demographics: m.demographics,
+  };
+  return _listBundle;
+}
+
 let cached: DataBundle | null = null;
 
 export function loadAllManga(): DataBundle {
   if (cached) return cached;
 
-  const publishers: Publisher[] = readMasterRecord(
-    path.join(DATA_DIR, "publishers.yml"),
-    PublisherSchema,
-  );
-  const magazines: Magazine[] = readMasterRecord(
-    path.join(DATA_DIR, "magazines.yml"),
-    MagazineSchema,
-  );
-  const genres: Genre[] = readMasterRecord(
-    path.join(DATA_DIR, "genres.yml"),
-    GenreSchema,
-  );
-  const demographics: DemographicLabel[] = readMasterRecord(
-    path.join(DATA_DIR, "demographics.yml"),
-    DemographicLabelSchema,
-  );
+  const { publishers, magazines, genres, demographics } = loadMasters();
 
   const publisherKeys = new Set(publishers.map((p) => p.key));
   const magazineKeys = new Set(magazines.map((m) => m.key));
@@ -181,19 +237,8 @@ export function loadAllManga(): DataBundle {
 
   manga.sort((a, b) => a.year_started - b.year_started || a.title.localeCompare(b.title, "ja"));
 
-  // ★画集 = 別ストリーム (data/art-books/)。 manga と混ぜない。 promote が
-  // 別出力した yml を同期する運用。 ディレクトリ不在時は空配列で build を通す。
-  const artBooksDir = path.join(DATA_DIR, "art-books");
-  const artBookFiles = fs.existsSync(artBooksDir)
-    ? fs
-        .readdirSync(artBooksDir)
-        .filter((f) => f.endsWith(".yml") || f.endsWith(".yaml"))
-    : [];
-  const artBooks: ArtBook[] = artBookFiles
-    .map((f) => readYaml(path.join(artBooksDir, f), ArtBookSchema))
-    // 既定: adult 画集は本番に出さない (確実側)
-    .filter((a) => !a.adult);
-  artBooks.sort((a, b) => a.artist.localeCompare(b.artist, "ja") || a.title.localeCompare(b.title, "ja"));
+  // ★画集 = 別ストリーム (data/art-books/)。 manga と混ぜない。 軽量ローダ経由。
+  const artBooks = loadArtBooks();
 
   cached = { manga, artBooks, publishers, magazines, genres, demographics };
   return cached;
