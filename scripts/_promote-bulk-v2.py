@@ -261,13 +261,15 @@ def load_separate_edition_sids(con: sqlite3.Connection) -> set[int]:
 SUPP_YML = ROOT / "data" / "seeds" / "volumes-supplement.yml"
 # NDL 自動登録分 (= 種4 auto、 scripts/_register-seed4-ndl.py)。 手動版と両方 load。
 SUPP_AUTO_YML = ROOT / "data" / "seeds" / "volumes-supplement-auto.yml"
+# OFFSET低巻補完 (= vol1取りこぼし[2,3]始まりを楽天harvestで補完、scripts/_offset_harvest.py)
+SUPP_OFFSET_YML = ROOT / "data" / "seeds" / "volumes-supplement-offset.yml"
 
 def load_volumes_supplement(con: sqlite3.Connection) -> dict[int, list[dict]]:
-    """volumes-supplement(.yml + -auto.yml) → {sid: [補完 vol dict, ...]} dict 構築。
+    """volumes-supplement(.yml + -auto.yml + -offset.yml) → {sid: [補完 vol dict, ...]} dict 構築。
     series_keys (= 種2 series.series_key) と qid で 該当 sid を 引く。"""
     cur = con.cursor()
     out: dict[int, list[dict]] = {}
-    for path in (SUPP_YML, SUPP_AUTO_YML):
+    for path in (SUPP_YML, SUPP_AUTO_YML, SUPP_OFFSET_YML):
         if not path.exists():
             continue
         with path.open(encoding="utf-8") as f:
