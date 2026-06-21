@@ -82,6 +82,9 @@ STAGES = [
     # 特装版 (= 巻の別商品) を volume.variants 併存 (既存・冪等。 special-edition-fix.yml)
     ("special", "madb", "特装版を volume.variants 併存 (ベルセルク方式、 冪等)",
         ["_special_edition_fix_apply.py", "data/manga.v2"], False),
+    # 巻番号 override (= A群単巻のレーベル位置誤番号を1へ。 番号は種2由来で再promoteで戻るので貼り直す)
+    ("volnumoverride", "madb", "巻番号 override 再適用 (volnum-override.yml、 単巻誤番号→1)",
+        ["_apply-volnum-override.py"], False),
     # 書影 (promote は cover_url=null で出す) を seed から貼り直す。 ★最後 = 新版/特装の ISBN も拾う
     ("coverfill", "madb", "書影を seed(covers.jsonl.gz=楽天紙+Kobo電子) から再適用 (再promoteで書影が消えない)",
         ["_apply-covers-stage.py"], False),

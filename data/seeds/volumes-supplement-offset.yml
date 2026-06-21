@@ -1,7 +1,5 @@
-# OFFSET/GAP 低巻・内部欠け補完(種4・楽天harvest)。promoteのload_volumes_supplementが読む。
+# OFFSET/GAP/A群-NDL 低巻・欠け補完(種4)。promoteのload_volumes_supplementが読む。
 schema_version: 1
-generated_at: '2026-06-21'
-generator: _offset_harvest.py
 volumes:
 - series_keys:
   - name:マツヤマユタカ|name:1×∞経験値1でレベルアップする俺は、最速で異世界最強になりました!
@@ -14520,3 +14518,903 @@ volumes:
   source: rakuten
   added_at: '2026-06-21'
   note: OFFSET/GAP低巻・内部欠け補完。zoo-keeper
+- series_keys:
+  - name:阿弥陀しずく|name:阿弥陀しずく
+  number: 1
+  isbn13: '9784864420044'
+  release_date: null
+  edition_type: standard
+  source: ndl
+  added_at: '2026-06-21'
+  note: A群MISSING補完(NDL著者一致)。amida-shizuku
+- series_keys:
+  - qid:Q11614596|name:あおぞら家族
+  number: 1
+  isbn13: '9784871221719'
+  release_date: null
+  edition_type: standard
+  source: ndl
+  added_at: '2026-06-21'
+  note: A群MISSING補完(NDL著者一致)。aozora-kazoku
+- series_keys:
+  - name:あおの晴|name:あらしといぶき
+  number: 1
+  isbn13: '9784046065032'
+  release_date: null
+  edition_type: standard
+  source: ndl
+  added_at: '2026-06-21'
+  note: A群MISSING補完(NDL著者一致)。arashi-to-ibuki
+- series_keys:
+  - name:山下街|name:あした愛かもしれない
+  number: 1
+  isbn13: '9784758024082'
+  release_date: null
+  edition_type: standard
+  source: ndl
+  added_at: '2026-06-21'
+  note: A群MISSING補完(NDL著者一致)。ashita-ai-kamoshirenai
+- series_keys:
+  - name:綾野六師|name:あやしい癒しの八雲さん
+  number: 1
+  isbn13: '9784046835925'
+  release_date: null
+  edition_type: standard
+  source: ndl
+  added_at: '2026-06-21'
+  note: A群MISSING補完(NDL著者一致)。ayashii-iyashi-no-yakumo-san
+- series_keys:
+  - name:ワタル|name:カードゲームうさぎ
+  number: 1
+  isbn13: '9784040758589'
+  release_date: null
+  edition_type: standard
+  source: ndl
+  added_at: '2026-06-21'
+  note: A群MISSING補完(NDL著者一致)。card-game-usagi
+- series_keys:
+  - name:あめきり|name:ちょっと待とうよ、春虎くん
+  number: 1
+  isbn13: '9784403668364'
+  release_date: null
+  edition_type: standard
+  source: ndl
+  added_at: '2026-06-21'
+  note: A群MISSING補完(NDL著者一致)。chotto-matou-yo-harutora-kun
+- series_keys:
+  - name:大島かもめ|name:コントラディクト
+  number: 1
+  isbn13: '9784866575735'
+  release_date: null
+  edition_type: standard
+  source: ndl
+  added_at: '2026-06-21'
+  note: A群MISSING補完(NDL著者一致)。contradict
+- series_keys:
+  - qid:Q11399941|name:だから勝手に勇者とか覇王に認定すんのやめろよ!
+  number: 1
+  isbn13: '9784434309526'
+  release_date: null
+  edition_type: standard
+  source: ndl
+  added_at: '2026-06-21'
+  note: A群MISSING補完(NDL著者一致)。dakara-katte-ni-yuusha-toka-haou-ni-nintei-sunno-yameroyo
+- series_keys:
+  - name:才手けい|name:抱けど暮らせど「好き」が言えない
+  number: 1
+  isbn13: '9784861239854'
+  release_date: null
+  edition_type: standard
+  source: ndl
+  added_at: '2026-06-21'
+  note: A群MISSING補完(NDL著者一致)。dakedo-kurasedo-suki-ga-ienai
+- series_keys:
+  - name:才手けい|name:抱けど暮らせど「好き」が言えない
+  number: 3
+  isbn13: '9784867871720'
+  release_date: null
+  edition_type: standard
+  source: ndl
+  added_at: '2026-06-21'
+  note: A群MISSING補完(NDL著者一致)。dakedo-kurasedo-suki-ga-ienai
+- series_keys:
+  - qid:Q1332841|name:ドラゴンエフェクト 坂本龍馬異聞
+  number: 1
+  isbn13: '9784864683098'
+  release_date: null
+  edition_type: standard
+  source: ndl
+  added_at: '2026-06-21'
+  note: A群MISSING補完(NDL著者一致)。dragon-efekuto-sakamoto-ryouma-ibun
+- series_keys:
+  - qid:Q1332841|name:ドラゴンエフェクト 坂本龍馬異聞
+  number: 2
+  isbn13: '9784864683180'
+  release_date: null
+  edition_type: standard
+  source: ndl
+  added_at: '2026-06-21'
+  note: A群MISSING補完(NDL著者一致)。dragon-efekuto-sakamoto-ryouma-ibun
+- series_keys:
+  - qid:Q29426118|name:双子菜園
+  number: 3
+  isbn13: '9784065372937'
+  release_date: null
+  edition_type: standard
+  source: ndl
+  added_at: '2026-06-21'
+  note: A群MISSING補完(NDL著者一致)。futago-saien
+- series_keys:
+  - qid:Q29426118|name:双子菜園
+  number: 4
+  isbn13: '9784065391235'
+  release_date: null
+  edition_type: standard
+  source: ndl
+  added_at: '2026-06-21'
+  note: A群MISSING補完(NDL著者一致)。futago-saien
+- series_keys:
+  - name:野宮ともか|name:ふたりじめアンダードッグ
+  number: 1
+  isbn13: '9784799760581'
+  release_date: null
+  edition_type: standard
+  source: ndl
+  added_at: '2026-06-21'
+  note: A群MISSING補完(NDL著者一致)。futarijime-under-dog
+- series_keys:
+  - name:拝|name:極道dom/sub|sub:正しい愚弟の躾け方
+  number: 1
+  isbn13: '9784867780459'
+  release_date: null
+  edition_type: standard
+  source: ndl
+  added_at: '2026-06-21'
+  note: A群MISSING補完(NDL著者一致)。gokudou-domu-sabu
+- series_keys:
+  - name:ゆうき莉子|name:傲慢シークのプロポーズ|sub:処女を捧げた彼は王子様でした
+  number: 1
+  isbn13: '9784776753735'
+  release_date: null
+  edition_type: standard
+  source: ndl
+  added_at: '2026-06-21'
+  note: A群MISSING補完(NDL著者一致)。gouman-sheikh-no-propose
+- series_keys:
+  - name:鮭田ねね|name:午前0時の甘い罠
+  number: 1
+  isbn13: '9784796415088'
+  release_date: null
+  edition_type: standard
+  source: ndl
+  added_at: '2026-06-21'
+  note: A群MISSING補完(NDL著者一致)。gozen-0-ji-no-amai-wana
+- series_keys:
+  - name:鮭田ねね|name:午前0時の甘い罠
+  number: 3
+  isbn13: '9784796418126'
+  release_date: null
+  edition_type: standard
+  source: ndl
+  added_at: '2026-06-21'
+  note: A群MISSING補完(NDL著者一致)。gozen-0-ji-no-amai-wana
+- series_keys:
+  - name:雲縞|name:破滅待ち悪役令嬢は絶倫貴公子に抱きつぶされる
+  number: 1
+  isbn13: '9784867870730'
+  release_date: null
+  edition_type: standard
+  source: ndl
+  added_at: '2026-06-21'
+  note: A群MISSING補完(NDL著者一致)。hametsu-machi-akuyaku-reijou-wa-zetsurin-kikoushi-ni-dakitsubusareru
+- series_keys:
+  - qid:Q1321466|name:平成こち亀13年
+  number: 1
+  isbn13: '9784081150038'
+  release_date: null
+  edition_type: standard
+  source: ndl
+  added_at: '2026-06-21'
+  note: A群MISSING補完(NDL著者一致)。heisei-kochikame-13-nen
+- series_keys:
+  - name:カトウロカ|name:遺産彼氏。|sub:今日からあなたは私のもの
+  number: 1
+  isbn13: '9784861237447'
+  release_date: null
+  edition_type: standard
+  source: ndl
+  added_at: '2026-06-21'
+  note: A群MISSING補完(NDL著者一致)。i-san-kareshi
+- series_keys:
+  - qid:Q5359621|name:とよ田みのる短編集
+  number: 1
+  isbn13: '9784091237354'
+  release_date: null
+  edition_type: standard
+  source: ndl
+  added_at: '2026-06-21'
+  note: A群MISSING補完(NDL著者一致)。imagine-2020
+- series_keys:
+  - name:転はくと|name:愛しのしっぽちゃん
+  number: 1
+  isbn13: '9784575381498'
+  release_date: null
+  edition_type: standard
+  source: ndl
+  added_at: '2026-06-21'
+  note: A群MISSING補完(NDL著者一致)。itoshi-no-shippo-chan
+- series_keys:
+  - name:ふに無9|name:怪異さんと俺
+  number: 1
+  isbn13: '9784046843654'
+  release_date: null
+  edition_type: standard
+  source: ndl
+  added_at: '2026-06-21'
+  note: A群MISSING補完(NDL著者一致)。kaii-san-to-ore
+- series_keys:
+  - name:千野ち|name:可哀想な君は僕だけの甘やかな傷
+  number: 0
+  isbn13: '9784403669903'
+  release_date: null
+  edition_type: standard
+  source: ndl
+  added_at: '2026-06-21'
+  note: A群MISSING補完(NDL著者一致)。kawaisou-na-kimi-wa-boku-dake-no-amayaka-na-kizu
+- series_keys:
+  - name:千野ち|name:可哀想な君は僕だけの甘やかな傷
+  number: 1
+  isbn13: '9784403668623'
+  release_date: null
+  edition_type: standard
+  source: ndl
+  added_at: '2026-06-21'
+  note: A群MISSING補完(NDL著者一致)。kawaisou-na-kimi-wa-boku-dake-no-amayaka-na-kizu
+- series_keys:
+  - qid:Q3412279|name:けろよい!新潟弁酒場
+  number: 1
+  isbn13: '9784785973582'
+  release_date: null
+  edition_type: standard
+  source: ndl
+  added_at: '2026-06-21'
+  note: A群MISSING補完(NDL著者一致)。keroyoi-niigataben-sakaba
+- series_keys:
+  - qid:Q1062844|name:KING OF POP
+  number: 1
+  isbn13: '9784791769582'
+  release_date: null
+  edition_type: standard
+  source: ndl
+  added_at: '2026-06-21'
+  note: A群MISSING補完(NDL著者一致)。king-of-pop
+- series_keys:
+  - name:サトウユカ|name:キッチンに住みたい
+  number: 1
+  isbn13: '9784824010483'
+  release_date: null
+  edition_type: standard
+  source: ndl
+  added_at: '2026-06-21'
+  note: A群MISSING補完(NDL著者一致)。kitchen-ni-sumitai
+- series_keys:
+  - qid:Q11562600|name:この彼女
+  number: 1
+  isbn13: '9784063845129'
+  release_date: null
+  edition_type: standard
+  source: ndl
+  added_at: '2026-06-21'
+  note: A群MISSING補完(NDL著者一致)。kono-kanojo
+- series_keys:
+  - qid:Q11562600|name:この彼女
+  number: 3
+  isbn13: '9784063845716'
+  release_date: null
+  edition_type: standard
+  source: ndl
+  added_at: '2026-06-21'
+  note: A群MISSING補完(NDL著者一致)。kono-kanojo
+- series_keys:
+  - qid:Q11562600|name:この彼女
+  number: 4
+  isbn13: '9784063845907'
+  release_date: null
+  edition_type: standard
+  source: ndl
+  added_at: '2026-06-21'
+  note: A群MISSING補完(NDL著者一致)。kono-kanojo
+- series_keys:
+  - name:夏村げっし|name:この恋はきっと、甘すぎる
+  number: 1
+  isbn13: '9784403668616'
+  release_date: null
+  edition_type: standard
+  source: ndl
+  added_at: '2026-06-21'
+  note: A群MISSING補完(NDL著者一致)。kono-koi-wa-kitto-amasugiru
+- series_keys:
+  - name:咲本﨑|name:この手を離さないで
+  number: 1
+  isbn13: '9784910526133'
+  release_date: null
+  edition_type: standard
+  source: ndl
+  added_at: '2026-06-21'
+  note: A群MISSING補完(NDL著者一致)。kono-te-o-hanasanaide
+- series_keys:
+  - name:咲本﨑|name:この手を離さないで
+  number: 3
+  isbn13: '9784910526690'
+  release_date: null
+  edition_type: standard
+  source: ndl
+  added_at: '2026-06-21'
+  note: A群MISSING補完(NDL著者一致)。kono-te-o-hanasanaide
+- series_keys:
+  - name:ぺこまる|name:これはきっと、運命の恋
+  number: 3
+  isbn13: '9784776755258'
+  release_date: null
+  edition_type: standard
+  source: ndl
+  added_at: '2026-06-21'
+  note: A群MISSING補完(NDL著者一致)。kore-wa-kitto-unmei-no-koi
+- series_keys:
+  - name:羽毛|name:口下手は恋に事故る
+  number: 1
+  isbn13: '9784799757673'
+  release_date: null
+  edition_type: standard
+  source: ndl
+  added_at: '2026-06-21'
+  note: A群MISSING補完(NDL著者一致)。kuchibeta-wa-koi-ni-jikoru
+- series_keys:
+  - qid:Q93928751|name:京都花街はこの世の地獄
+  number: 1
+  isbn13: '9784801943308'
+  release_date: null
+  edition_type: standard
+  source: ndl
+  added_at: '2026-06-21'
+  note: A群MISSING補完(NDL著者一致)。kyoto-kagai-ha-konoyo-no-jigoku
+- series_keys:
+  - name:うぐいす歌子|name:今日もネコ様の圧が強い
+  number: 1
+  isbn13: '9784046839879'
+  release_date: null
+  edition_type: standard
+  source: ndl
+  added_at: '2026-06-21'
+  note: A群MISSING補完(NDL著者一致)。kyou-mo-neko-sama-no-atsu-ga-tsuyoi
+- series_keys:
+  - name:村崎ユカリ|name:マダムと理想のアンドロイド
+  number: 1
+  isbn13: '9784046835765'
+  release_date: null
+  edition_type: standard
+  source: ndl
+  added_at: '2026-06-21'
+  note: A群MISSING補完(NDL著者一致)。madame-to-risou-no-android
+- series_keys:
+  - qid:Q11653740|name:Magical Girl Lyrical Nanoha movie 1st the comics
+  number: 1
+  isbn13: '9784056070712'
+  release_date: null
+  edition_type: standard
+  source: ndl
+  added_at: '2026-06-21'
+  note: A群MISSING補完(NDL著者一致)。magical-girl-lyrical-nanoha-movie-1st-the-comics
+- series_keys:
+  - name:カニトマト|name:ママ活はじめました
+  number: 1
+  isbn13: '9784434300288'
+  release_date: null
+  edition_type: standard
+  source: ndl
+  added_at: '2026-06-21'
+  note: A群MISSING補完(NDL著者一致)。mamakatsu-hajimemashita
+- series_keys:
+  - qid:Q11368934|name:漫画版野武士のグルメ
+  number: 2
+  isbn13: '9784344027398'
+  release_date: null
+  edition_type: standard
+  source: ndl
+  added_at: '2026-06-21'
+  note: A群MISSING補完(NDL著者一致)。mangaban-nobushi-no-gourmet
+- series_keys:
+  - name:ゆずしを|name:ミツキくんちょっと待って!
+  number: 1
+  isbn13: '9784758024396'
+  release_date: null
+  edition_type: standard
+  source: ndl
+  added_at: '2026-06-21'
+  note: A群MISSING補完(NDL著者一致)。mitsuki-kun-chotto-matte
+- series_keys:
+  - name:宮崎うの|name:瑞樹くんの愛が重すぎる
+  number: 1
+  isbn13: '9784867870082'
+  release_date: null
+  edition_type: standard
+  source: ndl
+  added_at: '2026-06-21'
+  note: A群MISSING補完(NDL著者一致)。mizuki-kun-no-ai-ga-omosugiru
+- series_keys:
+  - name:須坂紫那|name:水野忍の理想の恋愛
+  number: 1
+  isbn13: '9784403669354'
+  release_date: null
+  edition_type: standard
+  source: ndl
+  added_at: '2026-06-21'
+  note: A群MISSING補完(NDL著者一致)。mizuno-shinobu-no-risou-no-love
+- series_keys:
+  - name:藍沢ミキ|name:逃げんなよ、奥さん。|sub:カラダで繋がる、ウソ婚夫婦!?
+  number: 1
+  isbn13: '9784434303661'
+  release_date: null
+  edition_type: standard
+  source: ndl
+  added_at: '2026-06-21'
+  note: A群MISSING補完(NDL著者一致)。nigennayo-oku-san
+- series_keys:
+  - name:ミマ|name:お兄ちゃんから逃げられない!
+  number: 1
+  isbn13: '9784911186039'
+  release_date: null
+  edition_type: standard
+  source: ndl
+  added_at: '2026-06-21'
+  note: A群MISSING補完(NDL著者一致)。onii-chan-kara-nigerarenai
+- series_keys:
+  - name:尾崎七千夏|name:俺の前で濡れてろ|sub:アラサー女子と俺様俳優の秘密の情事
+  number: 1
+  isbn13: '9784821138135'
+  release_date: null
+  edition_type: standard
+  source: ndl
+  added_at: '2026-06-21'
+  note: A群MISSING補完(NDL著者一致)。ore-no-mae-de-nuretero
+- series_keys:
+  - name:あおの晴|name:幼馴染が好きかもしれない
+  number: 1
+  isbn13: '9784046068354'
+  release_date: null
+  edition_type: standard
+  source: ndl
+  added_at: '2026-06-21'
+  note: A群MISSING補完(NDL著者一致)。osananajimi-ga-suki-kamo-shirenai
+- series_keys:
+  - name:霧島珠樹|name:パパ (仮) はコマンドなんて欲しくない
+  number: 1
+  isbn13: '9784867781401'
+  release_date: null
+  edition_type: standard
+  source: ndl
+  added_at: '2026-06-21'
+  note: A群MISSING補完(NDL著者一致)。papa-kari-wa-komando-nante-hoshikunai
+- series_keys:
+  - qid:Q11539990|name:ラスボスたちの隠し仔
+  number: 2
+  isbn13: '9784049164398'
+  release_date: null
+  edition_type: standard
+  source: ndl
+  added_at: '2026-06-21'
+  note: A群MISSING補完(NDL著者一致)。rasubosu-tachi-no-kakushi-go
+- series_keys:
+  - name:かすがみずほ|name:理想の結婚
+  number: 1
+  isbn13: '9784867781524'
+  release_date: null
+  edition_type: standard
+  source: ndl
+  added_at: '2026-06-21'
+  note: A群MISSING補完(NDL著者一致)。risou-no-kekkon
+- series_keys:
+  - qid:Q106994593|name:理想郷女子図鑑
+  number: 1
+  isbn13: '9784088940427'
+  release_date: null
+  edition_type: standard
+  source: ndl
+  added_at: '2026-06-21'
+  note: A群MISSING補完(NDL著者一致)。risoukyou-joshi-zukan
+- series_keys:
+  - qid:Q106994593|name:理想郷女子図鑑
+  number: 3
+  isbn13: '9784088942216'
+  release_date: null
+  edition_type: standard
+  source: ndl
+  added_at: '2026-06-21'
+  note: A群MISSING補完(NDL著者一致)。risoukyou-joshi-zukan
+- series_keys:
+  - name:月島総記|name:ルートダブル
+  number: 1
+  isbn13: '9784757541740'
+  release_date: null
+  edition_type: standard
+  source: ndl
+  added_at: '2026-06-21'
+  note: A群MISSING補完(NDL著者一致)。route-double
+- series_keys:
+  - name:ほたてぃーの|name:竜騎士専門学校
+  number: 1
+  isbn13: '9784046835178'
+  release_date: null
+  edition_type: standard
+  source: ndl
+  added_at: '2026-06-21'
+  note: A群MISSING補完(NDL著者一致)。ryuukishi-senmon-gakkou
+- series_keys:
+  - name:草野來|name:サディスティックな社長とエレベーターに閉じ込められたら、なぜかご成婚にいたった件。
+  number: 1
+  isbn13: '9784776753872'
+  release_date: null
+  edition_type: standard
+  source: ndl
+  added_at: '2026-06-21'
+  note: A群MISSING補完(NDL著者一致)。sadistic-na-shachou-to-elevator-ni-tojikomeraretara-naze-goseikon-ni-itatta-ken
+- series_keys:
+  - name:VOFAN|name:青春奇人伝!240学園
+  number: 3
+  isbn13: '9784065134764'
+  release_date: null
+  edition_type: standard
+  source: ndl
+  added_at: '2026-06-21'
+  note: A群MISSING補完(NDL著者一致)。seishun-kijinden-240-o-gakuen
+- series_keys:
+  - name:出海うに|name:青春のぬかるみ
+  number: 1
+  isbn13: '9784434318078'
+  release_date: null
+  edition_type: standard
+  source: ndl
+  added_at: '2026-06-21'
+  note: A群MISSING補完(NDL著者一致)。seishun-no-nukarumi
+- series_keys:
+  - name:出海うに|name:青春のぬかるみ
+  number: 3
+  isbn13: '9784434352607'
+  release_date: null
+  edition_type: standard
+  source: ndl
+  added_at: '2026-06-21'
+  note: A群MISSING補完(NDL著者一致)。seishun-no-nukarumi
+- series_keys:
+  - name:出海うに|name:青春のぬかるみ
+  number: 4
+  isbn13: '9784434368561'
+  release_date: null
+  edition_type: standard
+  source: ndl
+  added_at: '2026-06-21'
+  note: A群MISSING補完(NDL著者一致)。seishun-no-nukarumi
+- series_keys:
+  - name:西臣匡子|name:セクシー〈元〉極道
+  number: 1
+  isbn13: '9784253137836'
+  release_date: null
+  edition_type: standard
+  source: ndl
+  added_at: '2026-06-21'
+  note: A群MISSING補完(NDL著者一致)。sexy-moto-gokudou
+- series_keys:
+  - name:オオゴシヤステル|name:しばんばん
+  number: 1
+  isbn13: '9784046045652'
+  release_date: null
+  edition_type: standard
+  source: ndl
+  added_at: '2026-06-21'
+  note: A群MISSING補完(NDL著者一致)。shibanban
+- series_keys:
+  - name:三日ミタ|name:しまちゃん家の番事情
+  number: 1
+  isbn13: '9784799755303'
+  release_date: null
+  edition_type: standard
+  source: ndl
+  added_at: '2026-06-21'
+  note: A群MISSING補完(NDL著者一致)。shima-chan-chi-no-tsugai-jijou
+- series_keys:
+  - name:青山冬兎|name:紫真くんにぜんぶあげる
+  number: 1
+  isbn13: '9784867870792'
+  release_date: null
+  edition_type: standard
+  source: ndl
+  added_at: '2026-06-21'
+  note: A群MISSING補完(NDL著者一致)。shima-kun-ni-zenbu-ageru
+- series_keys:
+  - name:OUMA|name:下心が読めるアプリ
+  number: 1
+  isbn13: '9784434347467'
+  release_date: null
+  edition_type: standard
+  source: ndl
+  added_at: '2026-06-21'
+  note: A群MISSING補完(NDL著者一致)。shitagokoro-ga-yomeru-app
+- series_keys:
+  - qid:Q11658030|name:食戟のソーマL'étoile
+  number: 1
+  isbn13: '9784088805344'
+  release_date: null
+  edition_type: standard
+  source: ndl
+  added_at: '2026-06-21'
+  note: A群MISSING補完(NDL著者一致)。shokugeki-no-sooma-retowaaru-2019
+- series_keys:
+  - qid:Q11658030|name:食戟のソーマL'étoile
+  number: 2
+  isbn13: '9784088806426'
+  release_date: null
+  edition_type: standard
+  source: ndl
+  added_at: '2026-06-21'
+  note: A群MISSING補完(NDL著者一致)。shokugeki-no-sooma-retowaaru-2019
+- series_keys:
+  - qid:Q11658030|name:食戟のソーマL'étoile
+  number: 3
+  isbn13: '9784088807362'
+  release_date: null
+  edition_type: standard
+  source: ndl
+  added_at: '2026-06-21'
+  note: A群MISSING補完(NDL著者一致)。shokugeki-no-sooma-retowaaru-2019
+- series_keys:
+  - qid:Q11658030|name:食戟のソーマL'étoile
+  number: 4
+  isbn13: '9784088810423'
+  release_date: null
+  edition_type: standard
+  source: ndl
+  added_at: '2026-06-21'
+  note: A群MISSING補完(NDL著者一致)。shokugeki-no-sooma-retowaaru-2019
+- series_keys:
+  - qid:Q11658030|name:食戟のソーマL'étoile
+  number: 5
+  isbn13: '9784088812502'
+  release_date: null
+  edition_type: standard
+  source: ndl
+  added_at: '2026-06-21'
+  note: A群MISSING補完(NDL著者一致)。shokugeki-no-sooma-retowaaru-2019
+- series_keys:
+  - qid:Q11658030|name:食戟のソーマL'étoile
+  number: 6
+  isbn13: '9784088813950'
+  release_date: null
+  edition_type: standard
+  source: ndl
+  added_at: '2026-06-21'
+  note: A群MISSING補完(NDL著者一致)。shokugeki-no-sooma-retowaaru-2019
+- series_keys:
+  - qid:Q11658030|name:食戟のソーマL'étoile
+  number: 7
+  isbn13: '9784088815794'
+  release_date: null
+  edition_type: standard
+  source: ndl
+  added_at: '2026-06-21'
+  note: A群MISSING補完(NDL著者一致)。shokugeki-no-sooma-retowaaru-2019
+- series_keys:
+  - qid:Q3135258|name:そして-子連れ狼刺客の子
+  number: 1
+  isbn13: '9784098035113'
+  release_date: null
+  edition_type: standard
+  source: ndl
+  added_at: '2026-06-21'
+  note: A群MISSING補完(NDL著者一致)。soshite-kozure-ookami-shikaku-no-ko
+- series_keys:
+  - qid:Q11379815|name:スピ☆散歩
+  number: 1
+  isbn13: '9784022758590'
+  release_date: null
+  edition_type: standard
+  source: ndl
+  added_at: '2026-06-21'
+  note: A群MISSING補完(NDL著者一致)。supi-sanpo
+- series_keys:
+  - qid:Q11379815|name:スピ☆散歩
+  number: 2
+  isbn13: '9784022758019'
+  release_date: null
+  edition_type: standard
+  source: ndl
+  added_at: '2026-06-21'
+  note: A群MISSING補完(NDL著者一致)。supi-sanpo
+- series_keys:
+  - qid:Q11379815|name:スピ☆散歩
+  number: 3
+  isbn13: '9784022758156'
+  release_date: null
+  edition_type: standard
+  source: ndl
+  added_at: '2026-06-21'
+  note: A群MISSING補完(NDL著者一致)。supi-sanpo
+- series_keys:
+  - qid:Q11379815|name:スピ☆散歩
+  number: 4
+  isbn13: '9784022758262'
+  release_date: null
+  edition_type: standard
+  source: ndl
+  added_at: '2026-06-21'
+  note: A群MISSING補完(NDL著者一致)。supi-sanpo
+- series_keys:
+  - qid:Q11379815|name:スピ☆散歩
+  number: 5
+  isbn13: '9784022758323'
+  release_date: null
+  edition_type: standard
+  source: ndl
+  added_at: '2026-06-21'
+  note: A群MISSING補完(NDL著者一致)。supi-sanpo
+- series_keys:
+  - name:もちの米|name:ススム×ミノル
+  number: 1
+  isbn13: '9784823604829'
+  release_date: null
+  edition_type: standard
+  source: ndl
+  added_at: '2026-06-21'
+  note: A群MISSING補完(NDL著者一致)。susumu-x-minoru
+- series_keys:
+  - name:tamtam|name:たまさんちのホゴイヌ
+  number: 1
+  isbn13: '9784418225064'
+  release_date: null
+  edition_type: standard
+  source: ndl
+  added_at: '2026-06-21'
+  note: A群MISSING補完(NDL著者一致)。tamasanchi-no-hogoinu
+- series_keys:
+  - name:tamtam|name:たまさんちのホゴネコ
+  number: 1
+  isbn13: '9784418234301'
+  release_date: null
+  edition_type: standard
+  source: ndl
+  added_at: '2026-06-21'
+  note: A群MISSING補完(NDL著者一致)。tamasanchi-no-hogoneko
+- series_keys:
+  - name:うにもし|name:たんぽぽちゃんはsubかもしれない
+  number: 1
+  isbn13: '9784799768419'
+  release_date: null
+  edition_type: standard
+  source: ndl
+  added_at: '2026-06-21'
+  note: A群MISSING補完(NDL著者一致)。tanpopo-chan-wa-sub-kamo-shirenai
+- series_keys:
+  - qid:Q11551656|name:太陽娘
+  number: 3
+  isbn13: '9784776741718'
+  release_date: null
+  edition_type: standard
+  source: ndl
+  added_at: '2026-06-21'
+  note: A群MISSING補完(NDL著者一致)。teida-neenee
+- series_keys:
+  - name:なすびたか|name:遠吠えに恋
+  number: 1
+  isbn13: '9784575381689'
+  release_date: null
+  edition_type: standard
+  source: ndl
+  added_at: '2026-06-21'
+  note: A群MISSING補完(NDL著者一致)。tooboe-ni-koi
+- series_keys:
+  - name:水玉ミズ|name:虎に四目屋
+  number: 1
+  isbn13: '9784864424929'
+  release_date: null
+  edition_type: standard
+  source: ndl
+  added_at: '2026-06-21'
+  note: A群MISSING補完(NDL著者一致)。tora-ni-yotsumeya
+- series_keys:
+  - name:高橋依摘|name:囚ワレ婚|sub:嘘から始まる溺愛生活
+  number: 1
+  isbn13: '9784396701017'
+  release_date: null
+  edition_type: standard
+  source: ndl
+  added_at: '2026-06-21'
+  note: A群MISSING補完(NDL著者一致)。torawarekon
+- series_keys:
+  - qid:Q6548497|name:都立魔法学園
+  number: 1
+  isbn13: '9784877245740'
+  release_date: null
+  edition_type: standard
+  source: ndl
+  added_at: '2026-06-21'
+  note: A群MISSING補完(NDL著者一致)。toritsu-mahou-gakuen
+- series_keys:
+  - qid:Q11433421|name:年下の隣人に世話されてます
+  number: 1
+  isbn13: '9784796415439'
+  release_date: null
+  edition_type: standard
+  source: ndl
+  added_at: '2026-06-21'
+  note: A群MISSING補完(NDL著者一致)。toshishita-no-rinjin-ni-sewa-dekiaisaretemasu
+- series_keys:
+  - qid:Q11535004|name:闘獣士|sub:ベスティアリウス
+  number: 1
+  isbn13: '9784091245410'
+  release_date: null
+  edition_type: standard
+  source: ndl
+  added_at: '2026-06-21'
+  note: A群MISSING補完(NDL著者一致)。toujuushi
+- series_keys:
+  - qid:Q11535004|name:闘獣士|sub:ベスティアリウス
+  number: 2
+  isbn13: '9784091255457'
+  release_date: null
+  edition_type: standard
+  source: ndl
+  added_at: '2026-06-21'
+  note: A群MISSING補完(NDL著者一致)。toujuushi
+- series_keys:
+  - qid:Q11535004|name:闘獣士|sub:ベスティアリウス
+  number: 3
+  isbn13: '9784091260765'
+  release_date: null
+  edition_type: standard
+  source: ndl
+  added_at: '2026-06-21'
+  note: A群MISSING補完(NDL著者一致)。toujuushi
+- series_keys:
+  - qid:Q11535004|name:闘獣士|sub:ベスティアリウス
+  number: 4
+  isbn13: '9784091274007'
+  release_date: null
+  edition_type: standard
+  source: ndl
+  added_at: '2026-06-21'
+  note: A群MISSING補完(NDL著者一致)。toujuushi
+- series_keys:
+  - qid:Q11535004|name:闘獣士|sub:ベスティアリウス
+  number: 5
+  isbn13: '9784091276490'
+  release_date: null
+  edition_type: standard
+  source: ndl
+  added_at: '2026-06-21'
+  note: A群MISSING補完(NDL著者一致)。toujuushi
+- series_keys:
+  - qid:Q11535004|name:闘獣士|sub:ベスティアリウス
+  number: 6
+  isbn13: '9784091282811'
+  release_date: null
+  edition_type: standard
+  source: ndl
+  added_at: '2026-06-21'
+  note: A群MISSING補完(NDL著者一致)。toujuushi
+- series_keys:
+  - qid:Q10855978|name:追放最凶クズ〈?〉賢者の辺境子育てスローライフ|sub:クズだと勘違いされがちな最強の善人は魔王の娘を超絶いい子に育て上げる
+  number: 1
+  isbn13: '9784299040008'
+  release_date: null
+  edition_type: standard
+  source: ndl
+  added_at: '2026-06-21'
+  note: A群MISSING補完(NDL著者一致)。tsuihousareta-saikyou-kuzu-kenja-no-henkyou-kosodate-surooraifu
+- series_keys:
+  - name:杞憂千|name:運命のカラダと別れたい。
+  number: 1
+  isbn13: '9784434345494'
+  release_date: null
+  edition_type: standard
+  source: ndl
+  added_at: '2026-06-21'
+  note: A群MISSING補完(NDL著者一致)。unmei-no-karada-to-wakaretai
