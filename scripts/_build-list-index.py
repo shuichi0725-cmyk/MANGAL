@@ -29,8 +29,10 @@ def cover_of(d):
     best = None
     for e in (d.get("editions") or []):
         for v in (e.get("volumes") or []):
-            if v.get("cover_url"):
-                return v["cover_url"]  # 最初に見つかった表紙(loadData coverUrlと同等の近似)
+            if v.get("cover_url"): return v["cover_url"]
+        for ver in (e.get("versions") or []):
+            for v in (ver.get("volumes") or []):
+                if v.get("cover_url"): return v["cover_url"]
     return None
 
 # 引数: [1]=src manga ディレクトリ (既定 data/manga.v2)、 [2]=出力ディレクトリ (既定 DATA)。
