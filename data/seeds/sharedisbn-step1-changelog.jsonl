@@ -730,3 +730,5 @@
 {"slug": "ooban-sangokushi", "op": "offset_fill", "vols": [1, 2, 3, 4, 5, 6, 8, 9, 10, 11, 12, 13, 14, 16, 17], "at": "2026-06-21T09:44:41"}
 {"slug": "shanaou-yoshitsune-genpei-no-kassen", "op": "offset_fill", "vols": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14], "at": "2026-06-21T09:44:41"}
 {"slug": "tokumorikobo-chan", "op": "offset_fill", "vols": [4, 5, 8, 9, 12, 13], "at": "2026-06-21T09:44:41"}
+{"slug": "kita-no-fuuin", "op": "dup_remove_contamination", "removed_isbn": "9784088621203", "detail": "同番号重複=別作ISBN混入除去: 小さじ一杯主婦の素(別作)混入", "at": "2026-06-21T10:11:05"}
+{"slug": "kootaroo-makaritooru", "op": "dup_remove_contamination", "removed_isbn": "9784063607628", "detail": "同番号重複=別作ISBN混入除去: シュート!蒼きめぐり逢い(大島司別作)混入", "at": "2026-06-21T10:11:05"}
