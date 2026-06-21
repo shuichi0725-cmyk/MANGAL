@@ -301,3 +301,12 @@ outlier37件(=[1,2,51]型 高1点浮き)を★楽天ISBN照合で原因確定。
 - **多著者化keep**: マンガ法律の抜け穴(教育シリーズ・5著者+監修)
 - **元々完備**: 男どアホウ甲子園/アタゴオル(浮きは部分収録の兄弟版)
 ★教訓: ①no-ISBN/0件の真因は在庫でなく全角題/長検索語/parse ②版誤分割(red Eyes型)は中間欠けでなく統合で解決 ③楽天著者『アンソロジー』『単独作者名』で性質判別 ④誤判定はdrop前に楽天検証で捕捉
+
+#### 段21: OFFSET低巻(vol1)取りこぼし 大量補完 (06-21)
+
+巻番号OFFSET(和集合min>1=1始まりでない)を全件精査=1,336件。★根本原因: vol1は題に「(1)」が付かない事が多く(無印題)、promote巻番号parseがvol1を取りこぼし→[2,3]始まりに。
+楽天harvest(_offset_harvest.py: 無印題=vol1/題完全一致+著者照合/dedup/resume)で:
+- **補完 570作/836巻**(E群544作+D群8作[C0DE:BREAKER[1-25]/万歳ハイウェイ[1-13]等多数欠け]+pilot)。vol1中心。
+- skip 699作(vol1絶版/別題/楽天非掲載) / A群39廉価版・C群9続編=正当据置 / B群6=続編season2連番・年別巻誤検出で補完不要。
+durability: volumes-supplement-offset.yml(種4)をpromote load_volumes_supplementに配線(SUPP_OFFSET_YML追加)→再promoteで恒久復旧。種4はchangelog+実ページから堅牢再構築。
+★教訓: 「全N巻で2,3始まり」の大半はvol1取りこぼし(分割/続編は少数)。vol1無印題のparse漏れが構造的原因。
