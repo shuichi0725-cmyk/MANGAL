@@ -60,7 +60,11 @@ def main():
         existing_isbn = set(to13(v.get("isbn13")) for e in d.get("editions", []) for v in e.get("volumes", []) if to13(v.get("isbn13")))
         nums = sorted(set(v.get("number") for e in d.get("editions", []) for v in e.get("volumes", []) if isinstance(v.get("number"), int)))
         if not nums: done.add(slug); continue
-        miss_low = [x for x in range(1, nums[0])]  # vol1..min-1
+        if listkey == "GAP":
+            _have = set(nums)
+            miss_low = [x for x in range(1, nums[-1] + 1) if x not in _have]  # 内部欠け含む全欠け
+        else:
+            miss_low = [x for x in range(1, nums[0])]  # offset = 低巻(1..min-1)
         found = {}
         try:
             for pg in (1, 2):
