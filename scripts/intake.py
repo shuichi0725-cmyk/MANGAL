@@ -75,7 +75,14 @@ STAGES = [
     # --- 本番再生成 (adult_us map を読むので ★最後) ---
     ("promote", "madb", "本番 yml 再生成 (data/manga.v2、 adult_us 付与)",
         ["_promote-bulk-v2.py"], False),
-    # --- 書影 durability (promote は cover_url=null で出すので ★promote後に seed から貼り直す) ---
+    # === durability stages (promote が直編集を出さないので ★promote後に seed から再適用) ===
+    # 版バリアント (新装版/復刻/完全版/愛蔵版/ワイド) を edition 再適用 → 同(type,巻数)を刷タブに畳む(regroup内蔵)
+    ("edisup", "madb", "版バリアントを edition 再適用+刷タブ畳み (editions-supplement.yml、 うる星方式)",
+        ["_apply-editions-supplement.py"], False),
+    # 特装版 (= 巻の別商品) を volume.variants 併存 (既存・冪等。 special-edition-fix.yml)
+    ("special", "madb", "特装版を volume.variants 併存 (ベルセルク方式、 冪等)",
+        ["_special_edition_fix_apply.py", "data/manga.v2"], False),
+    # 書影 (promote は cover_url=null で出す) を seed から貼り直す。 ★最後 = 新版/特装の ISBN も拾う
     ("coverfill", "madb", "書影を seed(covers.jsonl.gz=楽天紙+Kobo電子) から再適用 (再promoteで書影が消えない)",
         ["_apply-covers-stage.py"], False),
 ]

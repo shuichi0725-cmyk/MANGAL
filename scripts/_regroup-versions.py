@@ -29,9 +29,10 @@ def regroup(path):
             continue
         grp.sort(key=yr)  # 古い順
         default = next((e for e in grp if full(e)), grp[0])  # 完備の最古
+        # 刷タブのlabel = edition.label(初版/新装版等)優先 → 無ければ出版社 → 版N
         versions = [{
-            "label": e.get("publisher") or f"版{i+1}",
-            "year_started": int(yr(e)) if yr(e).isdigit() else None,
+            "label": e.get("label") or e.get("publisher") or f"版{i+1}",
+            "year_started": e.get("year_started") if e.get("year_started") else (int(yr(e)) if yr(e).isdigit() else None),
             "volumes": e["volumes"],
         } for i, e in enumerate(grp)]
         out.append({
