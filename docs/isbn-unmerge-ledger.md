@@ -310,3 +310,9 @@ outlier37件(=[1,2,51]型 高1点浮き)を★楽天ISBN照合で原因確定。
 - skip 699作(vol1絶版/別題/楽天非掲載) / A群39廉価版・C群9続編=正当据置 / B群6=続編season2連番・年別巻誤検出で補完不要。
 durability: volumes-supplement-offset.yml(種4)をpromote load_volumes_supplementに配線(SUPP_OFFSET_YML追加)→再promoteで恒久復旧。種4はchangelog+実ページから堅牢再構築。
 ★教訓: 「全N巻で2,3始まり」の大半はvol1取りこぼし(分割/続編は少数)。vol1無印題のparse漏れが構造的原因。
+
+#### 段22: GAP内部欠け+DUP 完了 (06-21)
+
+- **③DUP(同番号重複)2件**: 別作ISBN混入除去(北の封印=小さじ一杯主婦の素/コータローまかりとおる!=シュート!別作)。
+- **①GAP小gap(134型=内部欠け)1,265件**: harvester内部欠け対応拡張→楽天harvestで**637作/748巻補完**(595skip=絶版/別題)。題完全一致+著者+dedup。
+★巻番号タスク総決算: OFFSET 570作/836巻 + GAP 637作/748巻 = **1,189作/1,613巻補完**(vol1・内部欠け中心)。outlier37/fragment19/DUP2も完了。種4offset(1,613巻)はpromote配線済で恒久復旧。
