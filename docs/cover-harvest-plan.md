@@ -44,8 +44,14 @@
 
 ---
 
+## ★書影＋説明文を同じパスで取る（2026-06-21 ユーザ指示・時間ある時に実行）
+- ★**楽天API応答1件に largeImageUrl（書影）も itemCaption（説明文）も両方入る**。書影だけ保存すると説明を取りこぼす（実例: うる星新装版34巻＝各話タイトル付き説明を取り逃し→API再照会で回収）。
+- ★**書影harvestのAPI段で itemCaption も同時にキャッシュ保存**（rakuten-isbn.jsonl 相当に full item 追記）。一度のAPIで両方＝取りこぼし0・効率的。
+- 対象は同じ: OFFSET/GAP追加の1,613巻＋ISBN有書影無39千巻は説明文もキャッシュ未取得。
+- 説明文は楽天著作物→表示はそのまま不可・AI要約前提。ただし**▼各話タイトル列挙は「収録話」＝事実列挙として出せる可能性**（要確認）。
+
 ## 実装メモ
-- harvest機構は `_offset_harvest.py`（Referer+Origin必須・1s/件・全角題NFKC・著者照合・dedup・resume）を流用。
+- harvest機構は `_offset_harvest.py`（Referer+Origin必須・1s/件・全角題NFKC・著者照合・dedup・resume）を流用。★CDNミス→API段では largeImageUrl と itemCaption を両方保存。
 - cover専用に `_cover_harvest.py`（仮）: ①ISBN-CDN ②楽天API ③Kobo の順で試行、cover_url純粋追加。
 - 全て可逆（.cache/cover-bak）＋ cover-changelog ＋ typecheck。
 - バッチは ~39千巻 = 楽天API 1s/件で長時間 → CDN直叩き(API不要・並列可)を先に回し、CDNミス分だけAPI/Koboへ落とすのが効率的。
