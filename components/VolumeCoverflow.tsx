@@ -56,7 +56,8 @@ export default function VolumeCoverflow({
   const reps = loop ? [0, 1, 2] : [0];
 
   // 無限ループ(★指定挙動): 初期=1巻が左端で「左には進めない壁」。
-  //   右へ送って最終巻の先(1巻)へ一度ループしたら、 以降は左方向もシームレス(1巻の左=最終巻)。
+  //   右へ送って最終巻の先で1巻が再出現したら ★そこで一度だけ停止(壁) → 動きが止まったら
+  //   解放。 以降は左右ともシームレス・ループ(= 現状のフリー挙動)。
   useEffect(() => {
     if (!loop) return;
     const el = scroller.current;
@@ -64,25 +65,35 @@ export default function VolumeCoverflow({
     const set = () => el.scrollWidth / 3;
     el.scrollLeft = set(); // 中央コピー先頭=1巻が左端
     let ticking = false;
-    let looped = false; // 初回ループ済みか(以降は左ロック解除)
+    let looped = false; // 初回の「最終巻→1巻再出現」到達で解放(以降フリー)
+    let settle: ReturnType<typeof setTimeout> | undefined; // 停止保持→解放用
     const onScroll = () => {
       if (ticking) return;
       ticking = true;
       requestAnimationFrame(() => {
         const s = set();
-        if (el.scrollLeft > s * 1.5) {
-          el.scrollLeft -= s; // 右端→1巻へシームレス・ループ
-          looped = true; // 一度ループ=左方向を解放
-        } else if (!looped && el.scrollLeft < s) {
-          el.scrollLeft = s; // ★初回ループ前は1巻より左へ進ませない(壁)
-        } else if (looped && el.scrollLeft < s * 0.5) {
-          el.scrollLeft += s; // ループ後は左もシームレス(1巻の左=最終巻)
+        if (!looped) {
+          if (el.scrollLeft < s) {
+            el.scrollLeft = s; // 左壁(1巻より左へは進ませない)
+          } else if (el.scrollLeft >= s * 2) {
+            el.scrollLeft = s * 2; // ★最終巻の先=1巻再出現で一度だけ停止(壁で保持)
+            // 弾みが壁で止まる(=これ以上scrollイベントが来ない)まで待ってから解放。
+            clearTimeout(settle);
+            settle = setTimeout(() => { looped = true; }, 250);
+          }
+        } else {
+          // ループ後: 端付近でのみ巻き戻し = 左右シームレス(現状と同じフリー挙動)。
+          if (el.scrollLeft > s * 2.5) el.scrollLeft -= s;
+          else if (el.scrollLeft < s * 0.5) el.scrollLeft += s;
         }
         ticking = false;
       });
     };
     el.addEventListener("scroll", onScroll, { passive: true });
-    return () => el.removeEventListener("scroll", onScroll);
+    return () => {
+      el.removeEventListener("scroll", onScroll);
+      clearTimeout(settle);
+    };
   }, [loop, n]);
 
   if (n === 0) return null;
