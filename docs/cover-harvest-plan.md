@@ -44,6 +44,14 @@
 
 ---
 
+## ★まとめて1周回する対象（2026-06-21 ユーザ指示「選択肢3」）
+楽天起点の処理を**同じ周回に束ねる**（時間ある時に一括）:
+1. **書影**（楽天紙CDN→Kobo電子→ISBN無）
+2. **説明文 itemCaption**（同じAPI応答で同時保存・下記）
+3. **版バリアント追加**（愛蔵版/完全版/新装版/復刻/ワイド/カラー）= `data/seeds/edition-variant-candidates.tsv` の**1,119作**。書影/アフィ/発売日もキャッシュ済。
+   - 表示は **うる星やつら方式で完全に同じでOK**（ユーザ確認済）= 同巻数→刷タブ(`versions[]`)/別判型→別editionタブ。`_regroup-versions.py`→promote配線で恒久化。
+   - ★**特装版は別物**（巻単位の `volume.variants[]`＝ベルセルク/案B。通常版主＋特装を詳細併記。`special-edition-fix.yml`/`_special_edition_fix_apply.py`で別パイプライン済）。混同しない。
+
 ## ★書影＋説明文を同じパスで取る（2026-06-21 ユーザ指示・時間ある時に実行）
 - ★**楽天API応答1件に largeImageUrl（書影）も itemCaption（説明文）も両方入る**。書影だけ保存すると説明を取りこぼす（実例: うる星新装版34巻＝各話タイトル付き説明を取り逃し→API再照会で回収）。
 - ★**書影harvestのAPI段で itemCaption も同時にキャッシュ保存**（rakuten-isbn.jsonl 相当に full item 追記）。一度のAPIで両方＝取りこぼし0・効率的。
