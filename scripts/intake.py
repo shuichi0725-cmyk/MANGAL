@@ -75,6 +75,9 @@ STAGES = [
     # --- 本番再生成 (adult_us map を読むので ★最後) ---
     ("promote", "madb", "本番 yml 再生成 (data/manga.v2、 adult_us 付与)",
         ["_promote-bulk-v2.py"], False),
+    # --- 書影 durability (promote は cover_url=null で出すので ★promote後に seed から貼り直す) ---
+    ("coverfill", "madb", "書影を seed(covers.jsonl.gz=楽天紙+Kobo電子) から再適用 (再promoteで書影が消えない)",
+        ["_apply-covers-stage.py"], False),
 ]
 
 
