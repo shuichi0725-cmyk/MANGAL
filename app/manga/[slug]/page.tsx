@@ -279,12 +279,12 @@ export default async function MangaDetailPage({
                       <dt className="font-semibold text-ink/65 pt-1">要素</dt>
                       <dd className="flex flex-wrap gap-1.5">
                         {elemItems.map((name) => (
-                          <span
+                          <ChipLink
                             key={name}
-                            className="inline-flex items-center rounded-[var(--radius-tag)] px-2.5 py-1 text-[11px] font-medium bg-[var(--color-surface-2)]/60 border border-[var(--color-line)] text-ink/50"
+                            href={`/browse?theme=${encodeURIComponent(name)}`}
                           >
                             {name}
-                          </span>
+                          </ChipLink>
                         ))}
                       </dd>
                     </>

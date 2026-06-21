@@ -24,6 +24,76 @@ pubKeys = load_keys("publishers.yml")
 genreKeys = load_keys("genres.yml")
 magKeys = load_keys("magazines.yml")
 
+# ── 要素タグ(themes)算出 = app/manga/[slug]/page.tsx の elemItems と同じ規則 ──
+#   ・tags の和訳のみ採用(英語のまま出さない)。 tag-i18n.yml 優先、 lib/anilist-i18n.ts の旧辞書 fallback。
+#   ・除外: ①Demographic(分野欄に既出) ②Theme-Game-Sport*(競技は不採用) ③NOISE_TAGS ④ジャンル名と一致(畳む)
+def _load_genre_names():
+    p = os.path.join(DATA, "genres.yml")
+    if not os.path.exists(p): p = os.path.join("data", "genres.yml")
+    parsed = yaml.load(open(p, encoding="utf-8"), Loader=L) or {}
+    return {k: (v.get("name") if isinstance(v, dict) else v) for k, v in parsed.items()}
+GENRE_NAMES = _load_genre_names()  # key -> 表示名
+
+def _load_tag_i18n():
+    p = os.path.join(DATA, "seeds", "tag-i18n.yml")
+    if not os.path.exists(p): p = os.path.join("data", "seeds", "tag-i18n.yml")
+    parsed = yaml.load(open(p, encoding="utf-8"), Loader=L) or {}
+    # ★実体は最上位 `tags:` キーの下にネスト (= loadData.loadTagI18n と同じ unwrap)
+    table = parsed.get("tags", parsed) if isinstance(parsed, dict) else {}
+    out = {}
+    for name, v in table.items():
+        ja = v.get("ja") if isinstance(v, dict) else v
+        if ja: out[name] = ja
+    return out
+TAG_I18N = _load_tag_i18n()
+
+# lib/anilist-i18n.ts の旧辞書(fallback)。 tag-i18n.yml 未収録 tag 用。
+ANILIST_GENRE_JA = {
+    "Action": "アクション", "Adventure": "冒険", "Comedy": "コメディ", "Drama": "ドラマ",
+    "Ecchi": "エッチ", "Fantasy": "ファンタジー", "Hentai": "18禁", "Horror": "ホラー",
+    "Mahou Shoujo": "魔法少女", "Mecha": "メカ", "Music": "音楽", "Mystery": "ミステリー",
+    "Psychological": "心理", "Romance": "恋愛", "Sci-Fi": "SF", "Slice of Life": "日常",
+    "Sports": "スポーツ", "Supernatural": "超常", "Thriller": "スリラー",
+}
+ANILIST_TAG_JA = {
+    "Surreal Comedy": "シュールコメディ", "Slapstick": "スラップスティック", "Heterosexual": "異性愛",
+    "Female Harem": "女子ハーレム", "Youkai": "妖怪", "Aliens": "宇宙人", "Shounen": "少年",
+    "Shoujo": "少女", "Seinen": "青年", "Josei": "女性", "Kodomo": "児童", "School": "学園",
+    "School Club": "学園クラブ", "Magic": "魔法", "Military": "軍事", "Police": "警察",
+    "Yakuza": "ヤクザ", "Tsundere": "ツンデレ", "Yandere": "ヤンデレ", "Kuudere": "クーデレ",
+    "Dandere": "ダンデレ", "Male Protagonist": "男性主人公", "Female Protagonist": "女性主人公",
+    "Anti-Hero": "アンチヒーロー", "Love Triangle": "三角関係", "Animals": "動物",
+    "Shapeshifting": "変身", "Episodic": "エピソード形式", "Nudity": "ヌード", "Isekai": "異世界",
+    "Reincarnation": "転生", "Time Travel": "タイムトラベル", "Vampire": "吸血鬼", "Zombie": "ゾンビ",
+    "Ghost": "幽霊", "Demon": "悪魔", "Cyborg": "サイボーグ", "Robot": "ロボット",
+    "Samurai": "侍", "Ninja": "忍者",
+}
+NOISE_TAGS = {"Heterosexual", "Male Protagonist", "Female Protagonist",
+              "Primarily Adult Cast", "Primarily Child Cast", "Primarily Teen Cast"}
+
+def themes_of(d):
+    # このページのジャンル名集合(畳み用) = genres(master) + genres_anilist(jaGenre)
+    gnames = set()
+    for g in (d.get("genres") or []):
+        gnames.add(GENRE_NAMES.get(g, g))
+    for g in (d.get("genres_anilist") or []):
+        gnames.add(ANILIST_GENRE_JA.get(g, g))
+    seen = set(); out = []
+    for t in (d.get("tags") or []):
+        name = t.get("name"); cat = t.get("category") or ""
+        if not name: continue
+        if cat == "Demographic": continue
+        if cat.startswith("Theme-Game-Sport"): continue
+        if name in NOISE_TAGS: continue
+        from_yml = TAG_I18N.get(name)
+        from_dict = ANILIST_TAG_JA.get(name)
+        ja = from_yml or from_dict
+        if not ja: continue
+        if ja in gnames: continue
+        if ja in seen: continue
+        seen.add(ja); out.append(ja)
+    return out
+
 def cover_of(d):
     # primaryVolume相当: standard edition の number最小、無ければ全edition先頭の cover_url
     best = None
@@ -74,7 +144,7 @@ for f in glob.glob(os.path.join(src, "*.yml")):
         "status": d.get("status"), "catch": d.get("catch"),
         "authors": [{"name": a.get("name"), "role": a.get("role"), "kana": a.get("kana") or ""} for a in aus],
         "original_authors": [{"name": a.get("name"), "kana": a.get("kana") or ""} for a in oaus],
-        "genres": gs, "demographic": d.get("demographic"),
+        "genres": gs, "themes": themes_of(d), "demographic": d.get("demographic"),
         "publisher": pub, "publishers": d.get("publishers") or [],
         "magazine": d.get("magazine"), "awards": d.get("awards"),
         "anime_adapted": d.get("anime_adapted"),

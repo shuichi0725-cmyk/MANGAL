@@ -41,10 +41,19 @@ export default function FilterPanel({
       status: tally({ statuses: [] }, (m) => [m.status]),
       demographic: tally({ demographics: [] }, (m) => [m.demographic]),
       genre: tally({ genres: [] }, (m) => m.genres ?? []),
+      theme: tally({ themes: [] }, (m) => m.themes ?? []),
       publisher: tally({ publishers: [] }, (m) => m.publishers ?? []),
       magazine: tally({ magazines: [] }, (m) => (m.magazine ? [m.magazine] : [])),
     };
   }, [data.manga, state]);
+  // 要素タグの一覧 = 出現する全タグを件数降順(同数は名前順)で。 master が無いのでデータから導出。
+  const themeList = useMemo(
+    () =>
+      [...counts.theme.entries()]
+        .filter(([, n]) => n > 0)
+        .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0], "ja")),
+    [counts.theme],
+  );
   // 件数バッジ(0は淡色)
   const Cnt = ({ n }: { n: number }) => (
     <span className={`ml-1 tabular-nums text-[10px] ${n ? "text-ink/40" : "text-ink/20"}`}>
@@ -210,6 +219,36 @@ export default function FilterPanel({
           </ChipButton>
         </div>
       </Section>
+
+      {themeList.length > 0 && (
+        <Section
+          title="要素"
+          right={
+            <button
+              type="button"
+              className="text-xs text-ink/50 hover:text-ink"
+              onClick={() =>
+                update({ themeMode: state.themeMode === "and" ? "or" : "and" })
+              }
+              title="AND/OR を切り替え"
+            >
+              条件: {state.themeMode.toUpperCase()}
+            </button>
+          }
+        >
+          <div className="flex flex-wrap gap-1.5 max-h-60 overflow-y-auto">
+            {themeList.map(([name, n]) => (
+              <ChipButton
+                key={name}
+                active={state.themes.includes(name)}
+                onClick={() => update({ themes: toggle(state.themes, name) })}
+              >
+                {name}<Cnt n={n} />
+              </ChipButton>
+            ))}
+          </div>
+        </Section>
+      )}
 
       <Section title="出版社">
         <div className="space-y-1">

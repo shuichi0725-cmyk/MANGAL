@@ -20,6 +20,8 @@ export type FilterState = {
   originalAuthors: string[];
   genres: string[];
   genreMode: "and" | "or";
+  themes: string[];              // 要素タグ(表示文字列で比較)。 空配列 = 全て
+  themeMode: "and" | "or";
   // 新規 (2026-05-07): カテゴリハブ + 拡張フィルタ
   anime: boolean;                // true = アニメ化作品のみ
   hasAwards: boolean;            // true = 受賞作品のみ
@@ -41,6 +43,8 @@ export const emptyFilterState = (): FilterState => ({
   originalAuthors: [],
   genres: [],
   genreMode: "or",
+  themes: [],
+  themeMode: "or",
   anime: false,
   hasAwards: false,
   statuses: [],
@@ -176,6 +180,13 @@ export function applyFilters(
         : intersects(state.genres, m.genres);
       if (!ok) return false;
     }
+    if (state.themes.length) {
+      const ts = m.themes ?? [];
+      const ok = state.themeMode === "and"
+        ? containsAll(state.themes, ts)
+        : intersects(state.themes, ts);
+      if (!ok) return false;
+    }
     if (state.anime && !m.anime_adapted) return false;
     if (state.hasAwards && (!m.awards || m.awards.length === 0)) return false;
     if (state.statuses.length && !state.statuses.includes(m.status)) return false;
@@ -287,6 +298,10 @@ export function filtersFromSearchParams(p: ParamsLike | null | undefined): Parti
   if (genres) out.genres = genres;
   const genreMode = p.get("genreMode");
   if (genreMode === "and" || genreMode === "or") out.genreMode = genreMode;
+  const themes = pickList("theme");
+  if (themes) out.themes = themes;
+  const themeMode = p.get("themeMode");
+  if (themeMode === "and" || themeMode === "or") out.themeMode = themeMode;
   // 新規 params (2026-05-07)
   const anime = p.get("anime");
   if (anime === "true") out.anime = true;

@@ -218,7 +218,7 @@ export default function HomeClient({ data }: Props) {
           </header>
           <div className="flex-1 overflow-y-auto px-4 py-4 overscroll-contain">
             <FilterPanel
-              data={data}
+              data={liveData}
               state={state}
               setState={setState}
               yearBounds={bounds}

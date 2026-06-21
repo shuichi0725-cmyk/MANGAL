@@ -209,6 +209,8 @@ export type MangaListItem = {
   authors: { name: string; role?: Manga["authors"][number]["role"]; kana?: string }[];
   original_authors: { name: string; kana?: string }[];
   genres: string[];
+  /** 要素タグ(= AniListタグの和訳。 detail と同じ規則で算出済の表示文字列)。 フィルタ/件数用。 */
+  themes?: string[];
   demographic: Manga["demographic"];
   publisher: string;
   publishers: string[];
