@@ -55,37 +55,60 @@ export default function VolumeCoverflow({
   const loop = n > LOOP_MIN;
   const reps = loop ? [0, 1, 2] : [0];
 
-  // 無限ループ(★指定挙動): 初期=1巻が左端で「左には進めない壁」。
-  //   右へ送って最終巻の先で1巻が再出現したら ★そこで一度だけ停止(壁) → 動きが止まったら
-  //   解放。 以降は左右ともシームレス・ループ(= 現状のフリー挙動)。
+  // 無限ループ + ★継ぎ目 detent(指定挙動): 最終巻↔1巻の継ぎ目を ★進行方向に応じて一度止める。
+  //   ・左スワイプ(前進=scrollLeft増): 最終巻を超え 1巻が ★右端 に出た瞬間に停止 → 再スワイプでループ継続
+  //   ・右スワイプ(後退=scrollLeft減): 1巻の手前 最終巻が ★左端 に出た瞬間に停止 → 再スワイプでループ継続
+  //   3コピー描画で継ぎ目をシームレスに(detent解放後は逆コピーへ recenter = 巻き戻し無く連続)。
   useEffect(() => {
     if (!loop) return;
     const el = scroller.current;
     if (!el) return;
-    const set = () => el.scrollWidth / 3;
+    const set = () => el.scrollWidth / 3; // 1コピー幅
     el.scrollLeft = set(); // 中央コピー先頭=1巻が左端
     let ticking = false;
-    let looped = false; // 初回の「最終巻→1巻再出現」到達で解放(以降フリー)
-    let settle: ReturnType<typeof setTimeout> | undefined; // 停止保持→解放用
+    let lastL = el.scrollLeft;
+    let holding = false;
+    let holdTarget = 0;
+    let settle: ReturnType<typeof setTimeout> | undefined;
+    // 継ぎ目横断をモジュラ検知(周回・両方向で正しく効く)。
+    //   fwdIdx: 1巻が右端に来る境界 index(x+W-t が s の倍数) → 前進で増えたら横断。
+    //   backIdx: 最終巻が左端に来る境界 index(x+t が s の倍数) → 後退で減ったら横断。
     const onScroll = () => {
       if (ticking) return;
       ticking = true;
       requestAnimationFrame(() => {
         const s = set();
-        if (!looped) {
-          if (el.scrollLeft < s) {
-            el.scrollLeft = s; // 左壁(1巻より左へは進ませない)
-          } else if (el.scrollLeft >= s * 2) {
-            el.scrollLeft = s * 2; // ★最終巻の先=1巻再出現で一度だけ停止(壁で保持)
-            // 弾みが壁で止まる(=これ以上scrollイベントが来ない)まで待ってから解放。
-            clearTimeout(settle);
-            settle = setTimeout(() => { looped = true; }, 250);
-          }
-        } else {
-          // ループ後: 端付近でのみ巻き戻し = 左右シームレス(現状と同じフリー挙動)。
-          if (el.scrollLeft > s * 2.5) el.scrollLeft -= s;
-          else if (el.scrollLeft < s * 0.5) el.scrollLeft += s;
+        const t = s / n; // 1アイテム幅(gap込み近似)
+        const W = el.clientWidth;
+        const L = el.scrollLeft;
+        if (holding) {
+          // detent保持: 弾みを継ぎ目に固定し、 静止(イベント途切れ)後に解放。
+          el.scrollLeft = holdTarget;
+          clearTimeout(settle);
+          settle = setTimeout(() => { holding = false; lastL = el.scrollLeft; }, 200);
+          ticking = false;
+          return;
         }
+        // 3コピーの端に達したら中央へ巻き戻し(content周期=sなので継ぎ目位置は不変)。
+        if (L > 2.5 * s) { el.scrollLeft = L - s; lastL = el.scrollLeft; ticking = false; return; }
+        if (L < 0.5 * s) { el.scrollLeft = L + s; lastL = el.scrollLeft; ticking = false; return; }
+        const dir = L - lastL;
+        const fwdIdx = (x: number) => Math.floor((x + W - t) / s);
+        const backIdx = (x: number) => Math.floor((x + t) / s);
+        if (dir > 0 && fwdIdx(L) > fwdIdx(lastL)) {
+          // 前進: 最終巻を超え 1巻が右端に出た → 継ぎ目で停止
+          holdTarget = fwdIdx(L) * s + t - W;
+          holding = true; el.scrollLeft = holdTarget;
+          clearTimeout(settle);
+          settle = setTimeout(() => { holding = false; lastL = el.scrollLeft; }, 200);
+        } else if (dir < 0 && backIdx(L) < backIdx(lastL)) {
+          // 後退: 1巻の手前 最終巻が左端に出た → 継ぎ目で停止
+          holdTarget = backIdx(lastL) * s - t;
+          holding = true; el.scrollLeft = holdTarget;
+          clearTimeout(settle);
+          settle = setTimeout(() => { holding = false; lastL = el.scrollLeft; }, 200);
+        }
+        lastL = el.scrollLeft;
         ticking = false;
       });
     };
