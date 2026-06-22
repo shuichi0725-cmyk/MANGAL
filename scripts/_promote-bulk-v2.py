@@ -137,6 +137,26 @@ def get_art_book_exclude_isbn() -> set[str]:
     return _ART_BOOK_EXCLUDE_ISBN
 
 
+_REL_DATE_SUPP: dict | None = None
+def get_release_date_supplement() -> dict:
+    """ISBN13(数字) → 発売日(YYYY-MM/YYYY) の補完 map (= NDL由来、 release_date欠落巻用)。
+    ★種2のrelease_dateがNone/空の時だけこの seed で上書き(dedup日付tie-break+表示の正規化)。
+    data/seeds/release-date-supplement.jsonl (純粋追加・種2不変)。 date=null行はskip。"""
+    global _REL_DATE_SUPP
+    if _REL_DATE_SUPP is None:
+        _REL_DATE_SUPP = {}
+        p = ROOT / "data" / "seeds" / "release-date-supplement.jsonl"
+        if p.exists():
+            for line in p.open(encoding="utf-8"):
+                try:
+                    d = json.loads(line)
+                except Exception:
+                    continue
+                if d.get("date") and d.get("isbn13"):
+                    _REL_DATE_SUPP[_norm_isbn(d["isbn13"])] = d["date"]
+    return _REL_DATE_SUPP
+
+
 def _load_adult_overrides() -> set[str]:
     """成人判定 手動 override (= force 非adult の series_key 集合)。
     作者signal単独の誤爆を種aで全年齢確認した分 (Phase A、 純粋追加・種2不変)。"""
@@ -1476,10 +1496,16 @@ def get_editions_with_volumes(con: sqlite3.Connection, series_ids: list[int] | i
         _p = _jp_pub_prefix(_isbn)
         _pfreq[_p] = _pfreq.get(_p, 0) + 1
 
+    _rdsupp = get_release_date_supplement()  # release_date欠落巻のNDL補完日付(isbn→date)
+
+    def _eff_date(isbn, rd):
+        # 種2の発売日が無ければ NDL補完seed で補う(dedup tie-break + 表示の時系列化)。
+        return rd or _rdsupp.get(_norm_isbn(isbn))
+
     def _dedup_key(isbn, rd):
         isbn = isbn or ""
-        # 多数派出版者線を最優先(降順) → その中で最古日付 → 最小ISBN。
-        return (-_pfreq.get(_jp_pub_prefix(isbn), 0), rd or "9999-99", isbn)
+        # 多数派出版者線を最優先(降順) → その中で最古日付(NDL補完込み) → 最小ISBN。
+        return (-_pfreq.get(_jp_pub_prefix(isbn), 0), _eff_date(isbn, rd) or "9999-99", isbn)
 
     # merge_edition_types: true の sid なら shinsoban/aizoban 等 → standard 統合
     merge_edt_sids = get_merge_edition_types(con)
@@ -1525,21 +1551,21 @@ def get_editions_with_volumes(con: sqlite3.Connection, series_ids: list[int] | i
                         "number": n,
                         "volume_label": v["volume_label"],
                         "isbn13": v["isbn13"],
-                        "release_date": v["release_date"],
+                        "release_date": _eff_date(v["isbn13"], v["release_date"]),
                         "cover_url": v["cover_url"],
                         "asin": v["asin"],
                     }
                 )
         else:
-            # 全 vol が number=0 → release_date 順で連番
-            vols_sorted = sorted(vols, key=lambda x: x["release_date"] or "9999-99")
+            # 全 vol が number=0 → release_date 順で連番(NDL補完込み)
+            vols_sorted = sorted(vols, key=lambda x: _eff_date(x["isbn13"], x["release_date"]) or "9999-99")
             for idx, v in enumerate(vols_sorted, start=1):
                 primary_vols.append(
                     {
                         "number": idx,
                         "volume_label": v["volume_label"],
                         "isbn13": v["isbn13"],
-                        "release_date": v["release_date"],
+                        "release_date": _eff_date(v["isbn13"], v["release_date"]),
                         "cover_url": v["cover_url"],
                         "asin": v["asin"],
                     }
