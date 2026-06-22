@@ -79,6 +79,24 @@ def _norm_isbn(s) -> str:
     return re.sub(r"[^0-9]", "", str(s if s is not None else ""))
 
 
+def _jp_pub_prefix(s) -> str:
+    """日本(978-4)ISBN の ★出版者記号プレフィックスを登録グループ長ルールで正確に返す。
+    publisher コードは可変長(2-7桁)のため 固定長 slice では大手(講談社06等)を誤分割する。
+    978-4 群範囲: 0-1→2桁 / 2-6→3桁 / 70-84→4桁 / 85-89→5桁 / 900-949→6桁 / 950-999→7桁。
+    例: 講談社=978406 / リイド社系=97847683 / 双葉社=9784575。 dedup の出版者線判定に使う。"""
+    i = _norm_isbn(s)
+    if len(i) < 13 or not i.startswith("9784"):
+        return i[:7]
+    r = i[4:]
+    if r[0] in "01": ln = 2
+    elif r[0] in "23456": ln = 3
+    elif "70" <= r[:2] <= "84": ln = 4
+    elif "85" <= r[:2] <= "89": ln = 5
+    elif "900" <= r[:3] <= "949": ln = 6
+    else: ln = 7
+    return i[:4 + ln]
+
+
 def load_art_books() -> dict[str, dict]:
     """series_key -> {artist, adult, multi_artist}。 画集 (= 漫画とは別カテゴリ)。"""
     if not ART_BOOKS_YML.exists():
@@ -1444,20 +1462,24 @@ def get_editions_with_volumes(con: sqlite3.Connection, series_ids: list[int] | i
     eds = cur.execute(
         f"SELECT * FROM editions WHERE series_id IN ({placeholders})", series_ids
     ).fetchall()
-    # ★STEP5: 重複巻 dedup の決定的 tie-break。 同日 compete 時に「支配的 ISBN 線」
-    #   (= series内で巻数最多の出版線 = 通常版である可能性が高い)を優先、 最終は最小
-    #   ISBN で完全決定化(= rebuild で出力が flip しないよう固定)。
+    # ★STEP5: 重複巻 dedup の決定的 tie-break。 同 number に複数 ISBN が compete する時、
+    #   ★多数派出版者線(= series内で巻数最多の出版線 = 主たる版/通常版)を ★最優先 し、
+    #   その中で 最古 release_date、 最終は 最小 ISBN で完全決定化(= rebuild で flip しない)。
+    #   ★2026-06-22 是正: 旧実装は「日付優先」だったため、 本物巻が release_date 欠落(None)の時に
+    #   ★日付を持つ別社の混入巻に負けて化ける穴があった(菜 #4/#6型)。 多数派出版線を先に置いて封鎖。
+    #   出版者線キーは ★_jp_pub_prefix(可変長の出版者記号を正確抽出。 isbn[:9]固定長は大手を誤分割)。
     _pfreq: dict[str, int] = {}
     for (_isbn,) in cur.execute(
         f"SELECT v.isbn13 FROM volumes v JOIN editions e ON e.id=v.edition_id "
         f"WHERE e.series_id IN ({placeholders}) AND v.isbn13 IS NOT NULL", series_ids
     ):
-        _p = _isbn[:9]
+        _p = _jp_pub_prefix(_isbn)
         _pfreq[_p] = _pfreq.get(_p, 0) + 1
 
     def _dedup_key(isbn, rd):
         isbn = isbn or ""
-        return (rd or "9999-99", -_pfreq.get(isbn[:9], 0), isbn)
+        # 多数派出版者線を最優先(降順) → その中で最古日付 → 最小ISBN。
+        return (-_pfreq.get(_jp_pub_prefix(isbn), 0), rd or "9999-99", isbn)
 
     # merge_edition_types: true の sid なら shinsoban/aizoban 等 → standard 統合
     merge_edt_sids = get_merge_edition_types(con)
