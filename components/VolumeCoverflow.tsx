@@ -67,17 +67,29 @@ export default function VolumeCoverflow({
     el.scrollLeft = set(); // 中央コピー先頭=1巻が左端
     let ticking = false;
     let lastL = el.scrollLeft;
-    let cooling = false; // detent直後の再発火防止(この間は引き戻さない=固まらない)
+    let cooling = false; // detent直後の再発火防止(この間は触らない)
     let settle: ReturnType<typeof setTimeout> | undefined;
     // 継ぎ目横断をモジュラ検知(周回・両方向で正しく効く)。
     //   fwdIdx: 1巻が右端に来る境界 index(x+W-t が s の倍数) → 前進で増えたら横断。
     //   backIdx: 最終巻が左端に来る境界 index(x+t が s の倍数) → 後退で減ったら横断。
-    //   ★横断した瞬間に ★一度だけ scrollLeft をスナップ(=弾みを止める)。 以後は引き戻さず
-    //   cooling(350ms)中は再 detent しない → 「固まる」現象を回避し、 再スワイプで自由に動く。
+    //   ★横断した瞬間に overflow を一瞬切って ★慣性(弾み)を確実に殺す → ピタッと停止。
+    //   220ms後に overflow を戻して操作を受け付ける(= 止まった後は自由に動く)。
+    const snapStop = (target: number) => {
+      el.style.overflowX = "hidden"; // ★慣性スクロールを即停止(ピタッ)
+      el.scrollLeft = target;
+      cooling = true;
+      clearTimeout(settle);
+      settle = setTimeout(() => {
+        el.style.overflowX = ""; // 操作再開(class の overflow-x-auto に戻る)
+        cooling = false;
+        lastL = el.scrollLeft;
+      }, 220);
+    };
     const onScroll = () => {
       if (ticking) return;
       ticking = true;
       requestAnimationFrame(() => {
+        if (cooling) { ticking = false; return; } // 停止中は何もしない
         const s = set();
         const t = s / n; // 1アイテム幅(gap込み近似)
         const W = el.clientWidth;
@@ -85,20 +97,13 @@ export default function VolumeCoverflow({
         // 3コピーの端に達したら中央へ巻き戻し(content周期=sなので継ぎ目位置は不変)。
         if (L > 2.5 * s) { el.scrollLeft = L - s; lastL = el.scrollLeft; ticking = false; return; }
         if (L < 0.5 * s) { el.scrollLeft = L + s; lastL = el.scrollLeft; ticking = false; return; }
-        if (cooling) { lastL = L; ticking = false; return; } // detent直後は触らない
         const dir = L - lastL;
         const fwdIdx = (x: number) => Math.floor((x + W - t) / s);
         const backIdx = (x: number) => Math.floor((x + t) / s);
         if (dir > 0 && fwdIdx(L) > fwdIdx(lastL)) {
-          // 前進: 最終巻を超え 1巻が右端に出た → 一度だけスナップで停止
-          el.scrollLeft = fwdIdx(L) * s + t - W;
-          cooling = true; clearTimeout(settle);
-          settle = setTimeout(() => { cooling = false; }, 350);
+          snapStop(fwdIdx(L) * s + t - W); // 前進: 1巻が右端に出た → ピタッと停止
         } else if (dir < 0 && backIdx(L) < backIdx(lastL)) {
-          // 後退: 1巻の手前 最終巻が左端に出た → 一度だけスナップで停止
-          el.scrollLeft = backIdx(lastL) * s - t;
-          cooling = true; clearTimeout(settle);
-          settle = setTimeout(() => { cooling = false; }, 350);
+          snapStop(backIdx(lastL) * s - t); // 後退: 最終巻が左端に出た → ピタッと停止
         }
         lastL = el.scrollLeft;
         ticking = false;
