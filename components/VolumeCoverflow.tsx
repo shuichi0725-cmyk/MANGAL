@@ -67,6 +67,8 @@ export default function VolumeCoverflow({
     el.scrollLeft = set(); // 中央コピー先頭=1巻が左端
     let ticking = false;
     let lastL = el.scrollLeft;
+    const startPos = el.scrollLeft; // 起動位置(1巻が左端)
+    let looped = false; // 一度前進して1巻が右端に出るまでは後退(左)させない
     let cooling = false; // detent直後の再発火防止(この間は触らない)
     let settle: ReturnType<typeof setTimeout> | undefined;
     // 継ぎ目横断をモジュラ検知(周回・両方向で正しく効く)。
@@ -94,12 +96,26 @@ export default function VolumeCoverflow({
         const t = s / n; // 1アイテム幅(gap込み近似)
         const W = el.clientWidth;
         const L = el.scrollLeft;
+        const fwdIdx = (x: number) => Math.floor((x + W - t) / s);
+        const backIdx = (x: number) => Math.floor((x + t) / s);
+        if (!looped) {
+          // ★最初は左(後退)に行かせない: 一度前進して1巻が右端に出るまで開始位置が左壁。
+          if (L < startPos - 1) { el.scrollLeft = startPos; lastL = startPos; ticking = false; return; }
+          const dir = L - lastL;
+          if (dir > 0 && fwdIdx(L) > fwdIdx(lastL)) {
+            looped = true; // 一周した → 以降は後退も解禁
+            snapStop(fwdIdx(L) * s + t - W); // 1巻が右端に出た → ピタッと停止
+          } else {
+            lastL = L;
+          }
+          ticking = false;
+          return;
+        }
+        // 一周後: 左右ともループ + 継ぎ目で停止。
         // 3コピーの端に達したら中央へ巻き戻し(content周期=sなので継ぎ目位置は不変)。
         if (L > 2.5 * s) { el.scrollLeft = L - s; lastL = el.scrollLeft; ticking = false; return; }
         if (L < 0.5 * s) { el.scrollLeft = L + s; lastL = el.scrollLeft; ticking = false; return; }
         const dir = L - lastL;
-        const fwdIdx = (x: number) => Math.floor((x + W - t) / s);
-        const backIdx = (x: number) => Math.floor((x + t) / s);
         if (dir > 0 && fwdIdx(L) > fwdIdx(lastL)) {
           snapStop(fwdIdx(L) * s + t - W); // 前進: 1巻が右端に出た → ピタッと停止
         } else if (dir < 0 && backIdx(L) < backIdx(lastL)) {
