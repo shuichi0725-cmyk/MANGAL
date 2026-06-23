@@ -693,3 +693,33 @@ works:
     - number: 1
       isbn13: '9784778033255'
       release_date: 2019-11
+- slug: sai-futatabi
+  replace: true
+  magazine: morning
+  editions:
+  - type: standard
+    label: モーニングKC
+    publisher: 講談社
+    imprint: モーニングKC
+    year_started: 2008
+    volumes:
+    - number: 1
+      isbn13: '9784063754759'
+      release_date: 2008-04
+    - number: 2
+      isbn13: '9784063647341'
+      release_date: 2008-10
+    - number: 3
+      isbn13: '9784063647709'
+      release_date: 2009-05
+  - type: kanzenban
+    label: オリジナル版（玄光社）
+    publisher: 玄光社
+    year_started: 2026
+    volumes:
+    - number: 1
+      isbn13: '9784768330890'
+      release_date: 2026-02
+    - number: 2
+      isbn13: '9784768330906'
+      release_date: 2026-02
