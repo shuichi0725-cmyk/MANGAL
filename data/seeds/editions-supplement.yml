@@ -618,3 +618,77 @@ works:
     - number: 1
       isbn13: '9784063738988'
       release_date: 2012-04
+- slug: barbara
+  replace: true
+  editions:
+  - type: standard
+    label: ハードコミックス
+    publisher: 大都社
+    imprint: ハードコミックス
+    volumes:
+    - number: 0
+      isbn13: null
+      release_date: '1974-07-30'
+  - type: aizoban
+    label: 手塚治虫漫画全集
+    publisher: 講談社
+    imprint: 手塚治虫漫画全集
+    volumes:
+    - number: 1
+      isbn13: '9784061087453'
+      release_date: '1982-02-20'
+    - number: 2
+      isbn13: '9784061087460'
+      release_date: '1982-04-20'
+  - type: standard
+    label: KADOKAWA
+    publisher: KADOKAWA
+    volumes:
+    - number: 1
+      isbn13: '9784048523516'
+      release_date: 1992-07
+    - number: 3
+      isbn13: '9784048523523'
+      release_date: 1992-07
+  - type: standard
+    label: 手塚治虫作品集
+    publisher: KADOKAWA
+    imprint: 手塚治虫作品集
+    volumes:
+    - number: 1
+      isbn13: '9784041851326'
+      release_date: '1996-12-25'
+    - number: 3
+      isbn13: '9784041851333'
+      release_date: '1996-12-25'
+  - type: standard
+    label: Kadokawa絶品コミック
+    publisher: KADOKAWA
+    imprint: Kadokawa絶品コミック
+    volumes:
+    - number: 1
+      isbn13: '9784048539005'
+      release_date: 2005-07
+  - type: bunkobon
+    label: 手塚治虫文庫全集
+    publisher: 講談社
+    imprint: 手塚治虫文庫全集
+    volumes:
+    - number: 1
+      isbn13: '9784063738698'
+      release_date: 2011-10
+  - type: bunkobon
+    label: 角川文庫
+    publisher: KADOKAWA
+    imprint: 角川文庫
+    volumes:
+    - number: 0
+      isbn13: '9784041088814'
+      release_date: 2019-10
+  - type: standard
+    label: 小学館クリエイティブ
+    publisher: 小学館クリエイティブ
+    volumes:
+    - number: 0
+      isbn13: '9784778033255'
+      release_date: 2019-11
