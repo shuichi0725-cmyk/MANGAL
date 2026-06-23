@@ -32,15 +32,19 @@ def build():
             ib = to13(o.get("isbn") or it.get("isbn"))
             img = norm(it.get("largeImageUrl") or it.get("mediumImageUrl"))
             if ib and img and ib not in cov: cov[ib] = img
-    # Kobo電子
+    # Kobo電子 (= 大きいので .gz をコミット、 raw は gitignore。 .gz 優先で読む)
     kpath = os.path.join(ROOT, "data", "seeds", "kobo-harvest.jsonl")
+    kgz = kpath + ".gz"
     nk = 0
-    if os.path.exists(kpath):
-        for line in open(kpath, encoding="utf-8"):
+    kfh = gzip.open(kgz, "rt", encoding="utf-8") if os.path.exists(kgz) else (
+          open(kpath, encoding="utf-8") if os.path.exists(kpath) else None)
+    if kfh is not None:
+        for line in kfh:
             try: o = json.loads(line)
             except: continue
             ib = to13(o.get("isbn13")); img = norm(o.get("kobo_img"))
             if ib and img and ib not in cov: cov[ib] = img; nk += 1
+        kfh.close()
     with gzip.open(SEED, "wt", encoding="utf-8") as f:
         for ib, u in cov.items():
             f.write(json.dumps({"isbn13": ib, "cover_url": u}, ensure_ascii=False) + "\n")

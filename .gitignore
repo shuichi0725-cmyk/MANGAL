@@ -57,3 +57,6 @@ data/manga-list-index.json
 public/manga-list-index.json
 data/manga-search-index.json
 public/manga-search-index.json
+
+# Kobo harvest raw (= 100MB、 .gz をコミット。 raw は再生成可)
+/data/seeds/kobo-harvest.jsonl
