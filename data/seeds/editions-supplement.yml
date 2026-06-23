@@ -561,3 +561,60 @@ works:
     - number: 0
       isbn13: '9784835459585'
       release_date: '2025-06-13'
+- slug: fushigi-na-melmo
+  replace: true
+  editions:
+  - type: aizoban
+    label: 手塚治虫漫画全集
+    publisher: 講談社
+    imprint: 手塚治虫漫画全集
+    volumes:
+    - number: 1
+      isbn13: '9784061732803'
+      release_date: '1984-10-03'
+  - type: standard
+    label: 手塚治虫まんが絵本館
+    publisher: 小学館
+    imprint: 手塚治虫まんが絵本館
+    volumes:
+    - number: 1
+      isbn13: '9784097273318'
+      release_date: 1994-01
+    - number: 2
+      isbn13: '9784097273325'
+      release_date: 1994-05
+  - type: standard
+    label: サンデーコミックス
+    publisher: 秋田書店
+    imprint: サンデーコミックス
+    volumes:
+    - number: 1
+      isbn13: '9784253064545'
+      release_date: 2000-08
+  - type: bunkobon
+    label: 秋田文庫
+    publisher: 秋田書店
+    imprint: 秋田文庫
+    volumes:
+    - number: 1
+      isbn13: '9784253171496'
+      release_date: 2004-08
+  - type: standard
+    label: ぴっかぴかコミックス カラー版
+    publisher: 小学館
+    imprint: ぴっかぴかコミックス カラー版
+    volumes:
+    - number: 1
+      isbn13: '9784091480880'
+      release_date: '2005-12-05'
+    - number: 2
+      isbn13: '9784091480200'
+      release_date: '2006-02-05'
+  - type: bunkobon
+    label: 手塚治虫文庫全集
+    publisher: 講談社
+    imprint: 手塚治虫文庫全集
+    volumes:
+    - number: 1
+      isbn13: '9784063738988'
+      release_date: 2012-04
