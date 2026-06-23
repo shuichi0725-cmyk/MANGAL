@@ -417,3 +417,39 @@ works:
     - number: 6
       isbn13: '9784768330555'
       release_date: 2025-08
+- slug: w3
+  qid: Q193300
+  replace: true
+  editions:
+  - type: standard
+    label: 通常版
+    publisher: 秋田書店
+    imprint: SUNDAY COMICS
+    volumes:
+    - number: 1
+      isbn13: '9784253062039'
+      release_date: '1968-06-30'
+    - number: 2
+      isbn13: null
+      release_date: '1968-08-05'
+  - type: bunkobon
+    label: 文庫版
+    publisher: 秋田書店
+    imprint: 秋田漫画文庫
+    volumes:
+    - number: 1
+      isbn13: null
+      release_date: '1977-01-20'
+    - number: 2
+      isbn13: '9784253014748'
+      release_date: '1977-02-20'
+    - number: 3
+      isbn13: null
+      release_date: '1977-03-20'
+  - type: aizoban
+    label: 手塚治虫漫画全集
+    publisher: 講談社
+    volumes:
+    - number: 3
+      isbn13: '9784061087415'
+      release_date: '1981-03-20'
