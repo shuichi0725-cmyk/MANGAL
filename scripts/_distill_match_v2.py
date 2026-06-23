@@ -80,7 +80,7 @@ fo = open(LEDGER, "w", encoding="utf-8")
 fo.write("isbn\tmonth\ttitle\tauthor\tpublisher\ttype\tintegrate_to\tmethod\tholes\tverified\n")
 ndl_n = 0
 for r in rows:
-    isbn, title, pubn = r["isbn"], r["title"], r["publisher"]
+    isbn, title, pubn = r["isbn"], html.unescape(html.unescape(r["title"])), r["publisher"]  # 防御的デコード(&#39;等)
     cre = isbn2cre.get(isbn, ""); a0 = re.sub(r",.*$", "", cre.split("/")[0]).strip() if cre else ""
     gp = pref(isbn); vn = volnum(title)
     sid, info, method = match(title, gp)
