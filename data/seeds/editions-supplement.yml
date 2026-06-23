@@ -1,5 +1,3 @@
-# 版バリアントsupplement(durability): seeded作品のedition全体を権威化。
-# stage=_apply-editions-supplement.py がpromote後にreplace適用→regroupが刷タブに畳む。書影は(A)coverfillがISBNで付与。
 schema_version: 1
 works:
 - slug: urusei-yatsura
@@ -350,3 +348,49 @@ works:
       isbn13: '9784091793966'
       release_date: 2023-01
       volume_label: Vol.4
+- slug: sai
+  qid: Q1399083
+  replace: true
+  editions:
+  - type: standard
+    label: モーニングKC
+    publisher: 講談社
+    imprint: モーニングKC
+    year_started: 1993
+    volumes:
+    - number: 1
+      isbn13: '9784063193824'
+      release_date: 1993-04
+    - number: 2
+      isbn13: '9784063193916'
+      release_date: 1993-06
+    - number: 3
+      isbn13: '9784063194401'
+      release_date: 1993-12
+    - number: 4
+      isbn13: '9784063194883'
+      release_date: 1994-06
+    - number: 5
+      isbn13: '9784063195521'
+      release_date: 1994-12
+    - number: 6
+      isbn13: '9784063196030'
+      release_date: 1995-06
+    - number: 7
+      isbn13: '9784063196597'
+      release_date: 1995-12
+    - number: 8
+      isbn13: '9784063197259'
+      release_date: 1996-08
+    - number: 9
+      isbn13: '9784063197815'
+      release_date: 1997-02
+    - number: 10
+      isbn13: '9784063198560'
+      release_date: 1997-09
+    - number: 11
+      isbn13: '9784063199222'
+      release_date: 1998-03
+    - number: 12
+      isbn13: '9784063339789'
+      release_date: 1998-09
