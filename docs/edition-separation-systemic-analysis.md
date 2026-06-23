@@ -39,8 +39,23 @@
 promote の版構築変更は全69k頁の edition 構造に影響。**小サンプルで dry-run → diff 確認 → 段階ロールアウト**必須。
 後段 `_regroup-versions.py`（同type同巻数を刷タブに畳む）との相互作用も要検証。
 
+### ★確定アルゴリズム（シミュレータ検証済 2026-06-23）
+**`group_key = (type × ISBN出版社prefix)`、ただし群内で巻番号が衝突する場合のみ edition_id で再分割。**
+
+シミュレータ(scratchpad/sim_grouping.py)で検証:
+- **ルードウィヒ・B(sid35076)**: 6版・全OK = **editions-supplement手修正と完全一致**（潮出版社の3刷=各vol1も衝突検知でed_id分割）
+- **キャラバン・キッド(sid32)**: 2版(小学館978409 / 白泉社9784592)= 別社を正分離
+- **ぱすてる(sid7)**: 1版(44巻・講談社の3ラベル揺れを統合)= 過剰分割なし
+- **菜(sid31918)**: ed37638内で巻番号混在=なお衝突 → **mis-clustering型でこの手法では直らず editions-supplement 必須**（想定通り）
+
+ロジック:
+1. sidの全巻を `(edition.type, pubprefix(isbn))` でグループ化
+2. 各群で巻番号に重複が無ければ = 1版（同社ラベル揺れを吸収）
+3. 重複あれば = 同社複数刷 → その群だけ `edition_id` で再分割
+4. publisher 表示名は edition.imprint(あれば) or prefix→社名
+
 ### 推奨ステップ
-1. promote に `(type × pub_prefix)` グルーピングのオプション実装（既存 separate_editions の改良 or 新フラグ）
-2. 既知の手修正7作 + ayako サンプルで dry-run、editions-supplement 結果と一致するか検証
-3. 一致率・爆発作を確認後、default 化を判断
-4. editions-supplement は「注入/mis-cluster/手検証作」の例外ツールとして残す
+1. promote に上記を実装（既存 separate_editions の group_key を type→上記アルゴリズムへ。フラグ gate で安全に）
+2. 全DB dry-run(`--dry-run`)で旧出力と diff、爆発37作の中身確認、手修正7作と一致確認
+3. 一致率OKなら default 化
+4. editions-supplement は「注入(菜の玄光社巻)/mis-cluster(菜の続編混入)/手検証作」の例外ツールとして残す
