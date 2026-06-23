@@ -457,7 +457,7 @@ works:
   replace: true
   editions:
   - type: standard
-    label: 通常版
+    label: 潮出版社
     publisher: 潮出版社
     volumes:
     - number: 1
@@ -509,3 +509,55 @@ works:
     - number: 1
       isbn13: '9784063737868'
       release_date: 2010-10
+- slug: neo-faust
+  replace: true
+  editions:
+  - type: standard
+    label: 朝日新聞社
+    publisher: 朝日新聞社
+    volumes:
+    - number: 1
+      isbn13: '9784022559333'
+      release_date: '1989-04-25'
+  - type: bunkobon
+    label: 朝日文庫
+    publisher: 朝日新聞社
+    imprint: 朝日文庫
+    volumes:
+    - number: 1
+      isbn13: '9784022607270'
+      release_date: '1992-10-01'
+  - type: aizoban
+    label: 手塚治虫漫画全集
+    publisher: 講談社
+    imprint: 手塚治虫漫画全集
+    volumes:
+    - number: 1
+      isbn13: '9784061759688'
+      release_date: '1995-11-16'
+    - number: 2
+      isbn13: '9784061759695'
+      release_date: '1995-12-14'
+  - type: bunkobon
+    label: 手塚治虫文庫全集
+    publisher: 講談社
+    imprint: 手塚治虫文庫全集
+    volumes:
+    - number: 1
+      isbn13: '9784063738704'
+      release_date: 2011-10
+  - type: standard
+    label: サンエイムック
+    publisher: ホーム社
+    imprint: サンエイムック
+    volumes:
+    - number: 1
+      isbn13: '9784779628207'
+      release_date: 2016-05
+  - type: standard
+    label: 復刊ドットコム
+    publisher: 復刊ドットコム
+    volumes:
+    - number: 0
+      isbn13: '9784835459585'
+      release_date: '2025-06-13'
