@@ -52,6 +52,13 @@ def main():
             else:
                 exist = {e.get("label") for e in (doc.get("editions") or [])}
                 doc.setdefault("editions", []).extend(e for e in new_eds if e["label"] not in exist)
+            # ★work-level 上書き(durable): 版置換は promote後なので、promote中に raw版から導出された
+            #   magazine/year_started が誤ったまま残る(= 再promoteで戻る)。seed の権威版に揃える。
+            if w.get("magazine"): doc["magazine"] = w["magazine"]
+            _yrs = [v.get("release_date") for e in new_eds for v in (e.get("volumes") or []) if v.get("release_date")]
+            if _yrs:
+                try: doc["year_started"] = min(int(str(y)[:4]) for y in _yrs)
+                except (ValueError, TypeError): pass
             open(fp, "w", encoding="utf-8").write(yaml.dump(doc, allow_unicode=True, sort_keys=False, Dumper=Dp))
             # 同(type,巻数)を刷タブに畳む (= _regroup-versions.py をその場で実行)
             import subprocess
