@@ -83,8 +83,8 @@ isbn	month	title	author	publisher	type	integrate_to	method	holes	verified
 9784344857094	2026-2	青春ビターエンド		サイコロブックス	型2/3_新規	新規ページ	一致なし	slug,kana,genre/tag,cover,caption,synopsis	-
 9784434368561	2026-2	青春のぬかるみ. [4]		ブラスト出版	型2/3_新規	新規ページ	一致なし	slug,kana,genre/tag,cover,caption,synopsis	-
 9784801948174	2026-2	本当にあった愉快な話読者投稿プレミアム. 2026 		竹書房	型2/3_新規	新規ページ	一致なし	slug,kana,genre/tag,cover,caption,synopsis	-
-9784480440815	2026-2	ムーミン谷のひみつの言葉	富原	筑摩書房	型3_新規	新規ページ	題一致だが別社ガード	slug,kana,genre/tag,cover,caption,synopsis	-
-9784046077684	2026-3	阿Q正伝	シイザクヤ	KADOKAWA	型3_新規	新規ページ	題一致だが別社ガード	slug,kana,genre/tag,cover,caption,synopsis	-
+9784480440815	2026-2	ムーミン谷のひみつの言葉	富原	筑摩書房	型1_統合	sid85633:ムーミン谷のひみつの言葉(0巻)	完全題一致	cover,caption→genre/tag	-
+9784046077684	2026-3	阿Q正伝	シイザクヤ	KADOKAWA	型1_統合	sid117756:阿Q正伝(1巻)	完全題一致	cover,caption→genre/tag	-
 9784591189146	2026-3	アニメコミックおしりたんてい. 20		ポプラ社	型2/3_新規	新規ページ	一致なし	slug,kana,genre/tag,cover,caption,synopsis	vol1=9784591164259は種2外
 9784065429631	2026-3	アルスラーン戦記 24	荒川 弘	講談社	型1_統合	sid73131:アルスラーン戦記(39巻)	最長一致	cover,caption→genre/tag	-
 9784299076731	2026-3	暗鬼の日本史	滝音	宝島社	型3_新規	新規ページ	一致なし	slug,kana,genre/tag,cover,caption,synopsis	-
@@ -97,14 +97,14 @@ isbn	month	title	author	publisher	type	integrate_to	method	holes	verified
 9784098544837	2026-3	国境のエミーリャ = ПОГРАНИЧНИЦА ЗМ	池田	小学館	型3_新規	新規ページ	一致なし	slug,kana,genre/tag,cover,caption,synopsis	-
 9784041172957	2026-3	貞操逆転世界で頼めばヤれると噂の俺. 1	澄田	KADOKAWA	型3_新規	新規ページ	一致なし	slug,kana,genre/tag,cover,caption,synopsis	-
 9784046856531	2026-3	ドベとノラ. 4	ヨシ	KADOKAWA	型1_統合	sid142920:ドベとノラ(2巻)	完全題一致	cover,caption→genre/tag	-
-9784046077677	2026-3	門	鈴木	KADOKAWA	型3_新規	新規ページ	題一致だが別社ガード	slug,kana,genre/tag,cover,caption,synopsis	-
+9784046077677	2026-3	門	鈴木	KADOKAWA	型1_統合	sid117619:門(1巻)	完全題一致	cover,caption→genre/tag	-
 9784040763095	2026-3	路地裏で拾った女の子がバッドエンド後の乙女ゲームのヒ	カボチャマスク	KADOKAWA	型3_新規	新規ページ	一致なし	slug,kana,genre/tag,cover,caption,synopsis	-
 9784046844767	2026-3	わたしの1ヶ月1000円ごほうび. 3	おづ	KADOKAWA	型1_統合	sid127599:わたしの1ヶ月1000円ごほうび(1巻)	完全題一致	cover,caption→genre/tag	-
 9784821111527	2026-3	初恋狂い : 弟だと思ってた幼なじみに激重感情を (	夏生	ぶんか社	型3_新規	新規ページ	一致なし	slug,kana,genre/tag,cover,caption,synopsis	-
 9784867105948	2026-3	漫画パチンカースペシャル. カワサキカオリ×榊間おつ		ガイドワークス	型2/3_新規	新規ページ	一致なし	slug,kana,genre/tag,cover,caption,synopsis	-
 9784845871018	2026-3	時代劇ベスト. Vol. 31		リイド社	型2/3_新規	新規ページ	一致なし	slug,kana,genre/tag,cover,caption,synopsis	vol1=9784845852222は種2外
 9784120060090	2026-3	水野英子のすてきな冒険	水野	中央公論新社	型3_新規	新規ページ	一致なし	slug,kana,genre/tag,cover,caption,synopsis	-
-9784868051657	2026-3	とくにある日々. 8	中	ヒーローズ	型1_統合	sid120798:とくにある日々(3巻)	vol1-ISBN照合で発見	cover,caption→genre/tag	vol1=9784864688642
+9784868051657	2026-3	とくにある日々. 8	中	ヒーローズ	型1_統合	sid120798:とくにある日々(3巻)	完全題一致	cover,caption→genre/tag	-
 9784868051473	2026-3	ハナビちゃんは遅れがち. 10	白金	ヒーローズ	型1_統合	sid81573:ハナビちゃんは遅れがち(8巻)	完全題一致	cover,caption→genre/tag	-
 9784868051633	2026-3	水ムーちゃんねる隣の晩怖談. 7	水村	ヒーローズ	型1_統合	sid157883:水ムーちゃんねる隣の晩怖談(2巻)	完全題一致	cover,caption→genre/tag	-
 9784785981440	2026-3	撮るに足らない. 5	二駅	少年画報社	型1_統合	sid155606:撮るに足らない(3巻)	完全題一致	cover,caption→genre/tag	-
@@ -183,7 +183,7 @@ isbn	month	title	author	publisher	type	integrate_to	method	holes	verified
 9784403680526	2026-4	がっこうのふわもこ日誌. 3	松本	新書館	型1_統合	sid65298:がっこうのふわもこ日誌(2巻)	完全題一致	cover,caption→genre/tag	-
 9784801989382	2026-4	キスからはじまる異世界ハーレム : 一夫多妻の世界に	勇人	竹書房	型1_統合	sid122257:キスからはじまる異世界ハーレム(2巻)	最長一致	cover,caption→genre/tag	-
 9784253011907	2026-4	気絶勇者と暗殺姫. 15	のりしろちゃん	秋田書店	型1_統合	sid157867:気絶勇者と暗殺姫(7巻)	完全題一致	cover,caption→genre/tag	-
-9784868051732	2026-4	機動絶記ガンダムSEQUEL. 6	井上	ヒーローズ	型1_統合	sid157465:機動絶記ガンダムSEQUEL(3巻)	vol1-ISBN照合で発見	cover,caption→genre/tag	vol1=9784864688970
+9784868051732	2026-4	機動絶記ガンダムSEQUEL. 6	井上	ヒーローズ	型1_統合	sid157465:機動絶記ガンダムSEQUEL(3巻)	完全題一致	cover,caption→genre/tag	-
 9784048118613	2026-4	君との恋はガード不能. 1	西園寺	KADOKAWA	型3_新規	新規ページ	一致なし	slug,kana,genre/tag,cover,caption,synopsis	-
 9784796418119	2026-4	キミの撫で方躾け方. 7	かさい	海王社	型1_統合	sid75519:キミの撫で方躾け方(5巻)	完全題一致	cover,caption→genre/tag	-
 9784785981662	2026-4	鬼門街KARMA. 12	永田	少年画報社	型1_統合	sid119192:鬼門街KARMA(10巻)	完全題一致	cover,caption→genre/tag	-
@@ -208,7 +208,7 @@ isbn	month	title	author	publisher	type	integrate_to	method	holes	verified
 9784537173888	2026-4	ケガレタチ. 1	仁藤	日本文芸社	型3_新規	新規ページ	一致なし	slug,kana,genre/tag,cover,caption,synopsis	-
 9784344857322	2026-4	結界師への転生. 10	片岡	幻冬舎コミックス	型1_統合	sid112787:結界師への転生(8巻)	完全題一致	cover,caption→genre/tag	-
 9784088432458	2026-4	恋とシンクロニシティ. 1	ことのは	集英社	型3_新規	新規ページ	一致なし	slug,kana,genre/tag,cover,caption,synopsis	-
-9784041171561	2026-4	恋に至る病. 2	おーうち	KADOKAWA	型1_統合	sid153965:恋に至る病(1巻)	vol1-ISBN照合で発見	cover,caption→genre/tag	vol1=9784041165607
+9784041171561	2026-4	恋に至る病. 2	おーうち	KADOKAWA	型1_統合	sid100310:恋に至る病(1巻)	完全題一致	cover,caption→genre/tag	-
 9784403680519	2026-4	恋も愛も欲しくない	金井	新書館	型3_新規	新規ページ	一致なし	slug,kana,genre/tag,cover,caption,synopsis	-
 9784301004769	2026-4	高校生WEB作家のモテ生活 : 「あんたが神作家なわ	茨木野	スクウェア・エニックス	型3_新規	新規ページ	題一致だが別社ガード	slug,kana,genre/tag,cover,caption,synopsis	-
 9784301004622	2026-4	侯爵家のいたって平和ないつもの食卓 : 堅物侯爵は後	ももよ	スクウェア・エニックス	型3_新規	新規ページ	一致なし	slug,kana,genre/tag,cover,caption,synopsis	-
@@ -267,10 +267,10 @@ isbn	month	title	author	publisher	type	integrate_to	method	holes	verified
 9784046600417	2026-4	久々に健康診断を受けたら最強ステータスになっていた 	瀬田	KADOKAWA	型1_統合	sid147081:久々に健康診断を受けたら最強ステータ(1巻)	完全題一致	cover,caption→genre/tag	-
 9784045000232	2026-4	ひとごとごと. 1	オカヤ	KADOKAWA	型3_新規	新規ページ	一致なし	slug,kana,genre/tag,cover,caption,synopsis	-
 9784048118255	2026-4	Fate/strange Fake. 4	森井	KADOKAWA	型1_統合	sid131287:Fate/strange Fake(3巻)	完全題一致	cover,caption→genre/tag	-
-9784045000096	2026-4	本なら売るほど. 3	児島	KADOKAWA	型1_統合	sid156831:本なら売るほど(2巻)	vol1-ISBN照合で発見	cover,caption→genre/tag	vol1=9784047381070
+9784045000096	2026-4	本なら売るほど. 3	児島	KADOKAWA	型1_統合	sid156831:本なら売るほど(2巻)	完全題一致	cover,caption→genre/tag	-
 9784049521580	2026-4	冒険者酒場の料理人. 3	飴井	KADOKAWA	型1_統合	sid148818:冒険者酒場の料理人(1巻)	完全題一致	cover,caption→genre/tag	-
 9784049521986	2026-4	冒険者になれなかった俺、スキル「おっぱい矯正」で悩め	ぺい	KADOKAWA	型3_新規	新規ページ	一致なし	slug,kana,genre/tag,cover,caption,synopsis	-
-9784049026276	2026-4	毎日ほどほどにどうにか生きてるねこの日記. 2	ひよこ	KADOKAWA	型1_統合	sid157806:毎日ほどほどにどうにか生きてるねこの(1巻)	vol1-ISBN照合で発見	cover,caption→genre/tag	vol1=9784048978330
+9784049026276	2026-4	毎日ほどほどにどうにか生きてるねこの日記. 2	ひよこ	KADOKAWA	型1_統合	sid157806:毎日ほどほどにどうにか生きてるねこの(1巻)	完全題一致	cover,caption→genre/tag	-
 9784046852304	2026-4	魔技科の剣士と召喚魔王. 20	孟倫	KADOKAWA	型1_統合	sid165964:魔技科の剣士と召喚魔王(10巻)	完全題一致	cover,caption→genre/tag	-
 9784040763392	2026-4	魔石グルメ : 魔物の力を食べたオレは最強! 13	結城	KADOKAWA	型1_統合	sid1132:魔石グルメ(9巻)	最長一致	cover,caption→genre/tag	-
 9784045000218	2026-4	娘飼わんより犬の子飼え. 上	スズキ	KADOKAWA	型3_新規	新規ページ	一致なし	slug,kana,genre/tag,cover,caption,synopsis	-
@@ -289,14 +289,14 @@ isbn	month	title	author	publisher	type	integrate_to	method	holes	verified
 9784867105993	2026-4	漫画パチンカーsuper impact		ガイドワークス	型2/3_新規	新規ページ	一致なし	slug,kana,genre/tag,cover,caption,synopsis	-
 9784301004837	2026-4	四百四鬼. 10	もち	スクウェア・エニックス	型1_統合	sid121501:四百四鬼(8巻)	完全題一致	cover,caption→genre/tag	-
 9784301004295	2026-4	処刑された賢者はリッチに転生して侵略戦争を始める. 	結城	スクウェア・エニックス	型1_統合	sid91376:処刑された賢者はリッチに転生して侵略(10巻)	完全題一致	cover,caption→genre/tag	-
-9784301004639	2026-4	十戒. 1	夕木	スクウェア・エニックス	型3_新規	新規ページ	題一致だが別社ガード	slug,kana,genre/tag,cover,caption,synopsis	-
+9784301004639	2026-4	十戒. 1	夕木	スクウェア・エニックス	型1_統合	sid149474:十戒(2巻)	完全題一致	cover,caption→genre/tag	-
 9784301004714	2026-4	女性苦手なアラサーモブ社会人の俺にイケメンすぎる彼女	金井	スクウェア・エニックス	型3_新規	新規ページ	一致なし	slug,kana,genre/tag,cover,caption,synopsis	-
 9784301004349	2026-4	世界最強のデバフ請負人 : 仲間のデバフを肩代わりし	日之影	スクウェア・エニックス	型1_統合	sid147003:世界最強のデバフ請負人(1巻)	最長一致	cover,caption→genre/tag	-
-9784301004424	2026-4	ただ制服を着てるだけ. 4	神田	スクウェア・エニックス	型3_新規	新規ページ	題一致だが別社ガード	slug,kana,genre/tag,cover,caption,synopsis	vol1=9784815611774は種2外
+9784301004424	2026-4	ただ制服を着てるだけ. 4	神田	スクウェア・エニックス	型1_統合	sid136005:ただ制服を着てるだけ(1巻)	完全題一致	cover,caption→genre/tag	-
 9784301004721	2026-4	+ チック姉さん. 29	栗井茶	スクウェア・エニックス	型1_統合	sid123456:+ チック姉さん(16巻)	完全題一致	cover,caption→genre/tag	-
 9784301004325	2026-4	ちはるくんは女装をしたくない! 3	翁丸	スクウェア・エニックス	型1_統合	sid136139:ちはるくんは女装をしたくない!(1巻)	最長一致	cover,caption→genre/tag	-
 9784301004271	2026-4	適応障害で会社を辞めた新卒とぼっち配信者. 1	甘井	スクウェア・エニックス	型3_新規	新規ページ	一致なし	slug,kana,genre/tag,cover,caption,synopsis	-
-9784301004257	2026-4	転生勇者の気まま旅. 5	九頭	スクウェア・エニックス	型1_統合	sid164100:転生勇者の気まま旅(2巻)	vol1-ISBN照合で発見	cover,caption→genre/tag	vol1=9784757583795
+9784301004257	2026-4	転生勇者の気まま旅. 5	九頭	スクウェア・エニックス	型1_統合	sid164100:転生勇者の気まま旅(2巻)	完全題一致	cover,caption→genre/tag	-
 9784301004851	2026-4	ディズニーツイステッドワンダーランドザコミック : 	小田	スクウェア・エニックス	型1_統合	sid80067:ディズニーツイステッドワンダーランド(7巻)	最長一致	cover,caption→genre/tag	-
 9784301004875	2026-4	デッドマウント・デスプレイ外伝 怪人ソリティアの神仙	成田	スクウェア・エニックス	型1_統合	sid142682:デッドマウント・デスプレイ外伝 怪人(1巻)	完全題一致	cover,caption→genre/tag	-
 9784301004752	2026-4	デッドマウント・デスプレイ. 17	成田	スクウェア・エニックス	型1_統合	sid26743:デッドマウント・デスプレイ(15巻)	完全題一致	cover,caption→genre/tag	-
@@ -316,7 +316,7 @@ isbn	month	title	author	publisher	type	integrate_to	method	holes	verified
 9784301004707	2026-4	ボーイッシュ彼女が可愛すぎる. 5	牛乳麦ご飯	スクウェア・エニックス	型1_統合	sid144906:ボーイッシュ彼女が可愛すぎる(5巻)	完全題一致	cover,caption→genre/tag	-
 9784301004493	2026-4	僕の呪いの吸血姫. 9	金井	スクウェア・エニックス	型1_統合	sid148339:僕の呪いの吸血姫(8巻)	完全題一致	cover,caption→genre/tag	-
 9784301004288	2026-4	まきなさん、遊びましょう. 1	田花	スクウェア・エニックス	型3_新規	新規ページ	一致なし	slug,kana,genre/tag,cover,caption,synopsis	-
-9784301004417	2026-4	神殺しの魔王、最弱種族に転生し史上最強になる. 5	えぞぎんぎつね	スクウェア・エニックス	型3_新規	新規ページ	題一致だが別社ガード	slug,kana,genre/tag,cover,caption,synopsis	vol1=9784815609108は種2外
+9784301004417	2026-4	神殺しの魔王、最弱種族に転生し史上最強になる. 5	えぞぎんぎつね	スクウェア・エニックス	型1_統合	sid160908:神殺しの魔王、最弱種族に転生し史上最(3巻)	完全題一致	cover,caption→genre/tag	-
 9784301004356	2026-4	万年Fランク【通訳】スキル持ち底辺冒険者、異種族の最	夜分	スクウェア・エニックス	型3_新規	新規ページ	一致なし	slug,kana,genre/tag,cover,caption,synopsis	-
 9784301004318	2026-4	身代わりで嫁いだ冷酷国王は初恋相手でした. 3	あおい	スクウェア・エニックス	型1_統合	sid163899:身代わりで嫁いだ冷酷国王は初恋相手で(2巻)	完全題一致	cover,caption→genre/tag	-
 9784301004431	2026-4	滅亡国家のやり直し : 今日から始める軍師生活. 2	ひろした	スクウェア・エニックス	型1_統合	sid158543:滅亡国家のやり直し(1巻)	最長一致	cover,caption→genre/tag	-
@@ -463,7 +463,7 @@ isbn	month	title	author	publisher	type	integrate_to	method	holes	verified
 9784041174685	2026-5	アガリビトの後始末. 1	たもつ	KADOKAWA	型3_新規	新規ページ	一致なし	slug,kana,genre/tag,cover,caption,synopsis	-
 9784081153039	2026-5	秋本治のナイス!なチョイスこち亀50周年!! : こ	秋本	集英社	型1_統合	sid125385:秋本治のナイス!なチョイスこち亀50(5巻)	最長一致	cover,caption→genre/tag	-
 9784301005261	2026-5	悪の皇女はもう誰も殺さない. 2	やきいもほくほく	スクウェア・エニックス	型1_統合	sid154290:悪の皇女はもう誰も殺さない(1巻)	完全題一致	cover,caption→genre/tag	-
-9784041169599	2026-5	悪魔の剣で天使を喰らう. 2	大上	KADOKAWA	型1_統合	sid154554:悪魔の剣で天使を喰らう(1巻)	vol1-ISBN照合で発見	cover,caption→genre/tag	vol1=9784048116121
+9784041169599	2026-5	悪魔の剣で天使を喰らう. 2	大上	KADOKAWA	型1_統合	sid154554:悪魔の剣で天使を喰らう(1巻)	完全題一致	cover,caption→genre/tag	-
 9784301004981	2026-5	悪役貴族が開き直って破滅フラグを&quot;実力&q	楓原	スクウェア・エニックス	型3_新規	新規ページ	一致なし	slug,kana,genre/tag,cover,caption,synopsis	-
 9784866579191	2026-5	悪役令嬢後宮物語～王国激動編～. 7	鳥屋	フロンティアワークス	型1_統合	sid154486:悪役令嬢後宮物語～王国激動編～(1巻)	完全題一致	cover,caption→genre/tag	-
 9784785981921	2026-5	悪役令嬢転生おじさん. 10	上山	少年画報社	型1_統合	sid8037:悪役令嬢転生おじさん(8巻)	完全題一致	cover,caption→genre/tag	-
@@ -561,7 +561,7 @@ isbn	month	title	author	publisher	type	integrate_to	method	holes	verified
 9784592225812	2026-5	狼皇子と嘘つきな結婚. 5	音	白泉社	型1_統合	sid124928:狼皇子と嘘つきな結婚(3巻)	完全題一致	cover,caption→genre/tag	-
 9784800017581	2026-5	狼侯爵と愛の霊薬. 1	橘	マッグガーデン	型3_新規	新規ページ	一致なし	slug,kana,genre/tag,cover,caption,synopsis	-
 9784302119226	2026-5	狼大公は偽物花嫁を逃がさない	御上	ハーパーコリンズ・ジャパ	型3_新規	新規ページ	一致なし	slug,kana,genre/tag,cover,caption,synopsis	-
-9784845871681	2026-5	オークション・ハウス : 天目茶碗の底無き闇	叶	リイド社	型1_統合	sid56297:オークション・ハウス(53巻)	最長一致	cover,caption→genre/tag	-
+9784845871681	2026-5	オークション・ハウス : 天目茶碗の底無き闇	叶	リイド社	型3_新規	新規ページ	題一致だが別社ガード	slug,kana,genre/tag,cover,caption,synopsis	-
 9784046600615	2026-5	大崎さんと小森さん	犬山	KADOKAWA	型3_新規	新規ページ	一致なし	slug,kana,genre/tag,cover,caption,synopsis	-
 9784045000638	2026-5	お飾り姫の溺愛計画. 1	野澤	KADOKAWA	型3_新規	新規ページ	一致なし	slug,kana,genre/tag,cover,caption,synopsis	-
 9784065436349	2026-5	オカルトタイムズ. 2	いどんち	講談社	型1_統合	sid139456:オカルトタイムズ(1巻)	完全題一致	cover,caption→genre/tag	-
@@ -660,7 +660,7 @@ isbn	month	title	author	publisher	type	integrate_to	method	holes	verified
 9784087921052	2026-5	銀太郎さんお頼み申す. 10	東村	集英社	型1_統合	sid120328:銀太郎さんお頼み申す(6巻)	完全題一致	cover,caption→genre/tag	-
 9784866755069	2026-5	銀幕ロマンス : 虐げられ華族令嬢が冷酷旦那様の最愛	橘花	フレックスコミックス	型1_統合	sid164847:銀幕ロマンス(1巻)	最長一致	cover,caption→genre/tag	-
 9784800017475	2026-5	空賊ハックと蒸気の姫. 5	井上	マッグガーデン	型1_統合	sid125534:空賊ハックと蒸気の姫(3巻)	完全題一致	cover,caption→genre/tag	-
-9784301005353	2026-5	腐れ縁ほど切り難い. 2	陽	スクウェア・エニックス	型1_統合	sid162397:腐れ縁ほど切り難い(1巻)	vol1-ISBN照合で発見	cover,caption→genre/tag	vol1=9784757599086
+9784301005353	2026-5	腐れ縁ほど切り難い. 2	陽	スクウェア・エニックス	型1_統合	sid162397:腐れ縁ほど切り難い(1巻)	完全題一致	cover,caption→genre/tag	-
 9784040763958	2026-5	クセ強彼女は床にいざなう. 4	須河	KADOKAWA	型1_統合	sid124931:クセ強彼女は床にいざなう(2巻)	完全題一致	cover,caption→genre/tag	-
 9784065436523	2026-5	クッキングパパ. タンドリーチキン	うえやま	講談社	型3_新規	新規ページ	一致なし	slug,kana,genre/tag,cover,caption,synopsis	-
 9784065436530	2026-5	クッキングパパ. 鉄火丼	うえやま	講談社	型3_新規	新規ページ	一致なし	slug,kana,genre/tag,cover,caption,synopsis	-
@@ -712,7 +712,7 @@ isbn	month	title	author	publisher	type	integrate_to	method	holes	verified
 9784098638857	2026-5	国宝. 5	吉田	小学館	型1_統合	sid150433:国宝(3巻)	完全題一致	cover,caption→genre/tag	-
 9784575382464	2026-5	こっち見てよ、先生	あさ稲	双葉社	型3_新規	新規ページ	一致なし	slug,kana,genre/tag,cover,caption,synopsis	-
 9784594624897	2026-5	孤独のグルメ. 1	久住	扶桑社	型1_統合	sid50941:孤独のグルメ(7巻)	完全題一致	cover,caption→genre/tag	-
-9784065432709	2026-5	子供はわかってあげない	田島	講談社	型3_新規	新規ページ	題一致だが別社ガード	slug,kana,genre/tag,cover,caption,synopsis	-
+9784065432709	2026-5	子供はわかってあげない	田島	講談社	型1_統合	sid34451:子供はわかってあげない(2巻)	完全題一致	cover,caption→genre/tag	-
 9784048119412	2026-5	このキスは事故なのに色無しの私がなぜか最強の魔法使い	星見	KADOKAWA	型3_新規	新規ページ	一致なし	slug,kana,genre/tag,cover,caption,synopsis	-
 9784253013420	2026-5	この駄目ドルどもめ! : 地下アイドルを武道館に立た	新堂	秋田書店	型3_新規	新規ページ	一致なし	slug,kana,genre/tag,cover,caption,synopsis	-
 9784046601735	2026-5	琥珀色の騎士は聖女の左手に愛を誓う. 2	やまの	KADOKAWA	型1_統合	sid159522:琥珀色の騎士は聖女の左手に愛を誓う(1巻)	完全題一致	cover,caption→genre/tag	-
@@ -728,7 +728,7 @@ isbn	month	title	author	publisher	type	integrate_to	method	holes	verified
 9784800017543	2026-5	婚約者の浮気現場を見ちゃったので始まりの鐘が鳴りまし	えひと	マッグガーデン	型3_新規	新規ページ	一致なし	slug,kana,genre/tag,cover,caption,synopsis	-
 9784065435359	2026-5	ゴールデンマン. 9	ペトス	講談社	型1_統合	sid126450:ゴールデンマン(7巻)	完全題一致	cover,caption→genre/tag	-
 9784813765981	2026-5	ご懐妊!! 5	真條	スターツ出版	型1_統合	sid135472:ご懐妊!!(4巻)	最長一致	cover,caption→genre/tag	-
-9784301005407	2026-5	獄卒クラーケン. 7	タカヒロ	スクウェア・エニックス	型1_統合	sid159264:獄卒クラーケン(3巻)	vol1-ISBN照合で発見	cover,caption→genre/tag	vol1=9784757585379
+9784301005407	2026-5	獄卒クラーケン. 7	タカヒロ	スクウェア・エニックス	型1_統合	sid159264:獄卒クラーケン(3巻)	完全題一致	cover,caption→genre/tag	-
 9784253012645	2026-5	5600歳の不老不死インフルエンサーいわく。. 1	うえやま	秋田書店	型3_新規	新規ページ	一致なし	slug,kana,genre/tag,cover,caption,synopsis	-
 9784253013611	2026-5	午前2時のハートフィズ	家目	秋田書店	型3_新規	新規ページ	一致なし	slug,kana,genre/tag,cover,caption,synopsis	-
 9784781625584	2026-5	五龍国物語. 2	津寺	イースト・プレス	型3_新規	新規ページ	一致なし	slug,kana,genre/tag,cover,caption,synopsis	vol1=9784781624563は種2外
@@ -784,7 +784,7 @@ isbn	month	title	author	publisher	type	integrate_to	method	holes	verified
 9784041174371	2026-5	夏の終わりに君が死ねば完璧だったから. 2	斜線堂	KADOKAWA	型1_統合	sid150732:夏の終わりに君が死ねば完璧だったから(1巻)	完全題一致	cover,caption→genre/tag	-
 9784045000898	2026-5	偽令嬢の訳ありオークションカタログ : エメラルドは	りんこ	KADOKAWA	型3_新規	新規ページ	一致なし	slug,kana,genre/tag,cover,caption,synopsis	-
 9784046854056	2026-5	ひび猫にっき	ふじひと	KADOKAWA	型3_新規	新規ページ	一致なし	slug,kana,genre/tag,cover,caption,synopsis	-
-9784043300310	2026-5	ひまちゃんと天国の面接. 2	しらほし	KADOKAWA	型1_統合	sid137038:ひまちゃんと天国の面接(1巻)	vol1-ISBN照合で発見	cover,caption→genre/tag	vol1=9784046077141
+9784043300310	2026-5	ひまちゃんと天国の面接. 2	しらほし	KADOKAWA	型1_統合	sid137038:ひまちゃんと天国の面接(1巻)	完全題一致	cover,caption→genre/tag	-
 9784048118262	2026-5	Fate/strange Fake. 5	森井	KADOKAWA	型1_統合	sid131287:Fate/strange Fake(3巻)	完全題一致	cover,caption→genre/tag	-
 9784045000850	2026-5	ブチ切れた公爵令嬢、勢いで悪魔を召喚してしまう. 1	ななしののん	KADOKAWA	型3_新規	新規ページ	一致なし	slug,kana,genre/tag,cover,caption,synopsis	-
 9784046601063	2026-5	辺境ぐらしの魔王、転生して最強の魔術師になる. 14	村市	KADOKAWA	型1_統合	sid164216:辺境ぐらしの魔王、転生して最強の魔術(8巻)	完全題一致	cover,caption→genre/tag	-
@@ -823,7 +823,7 @@ isbn	month	title	author	publisher	type	integrate_to	method	holes	verified
 9784301005315	2026-5	女子高校生の日常. 1	山内	スクウェア・エニックス	型3_新規	新規ページ	一致なし	slug,kana,genre/tag,cover,caption,synopsis	-
 9784301005391	2026-5	千剣の魔術師と呼ばれた剣士. 10	高光	スクウェア・エニックス	型1_統合	sid92280:千剣の魔術師と呼ばれた剣士(6巻)	完全題一致	cover,caption→genre/tag	-
 9784301005063	2026-5	先生!僕たちが世界を滅ぼします。. 9	小林	スクウェア・エニックス	型1_統合	sid148568:先生!僕たちが世界を滅ぼします。(6巻)	完全題一致	cover,caption→genre/tag	-
-9784301005322	2026-5	転生賢者の異世界ライフ : 第二の職業を得て、世界最	進行諸島	スクウェア・エニックス	型1_統合	sid116521:転生賢者の異世界ライフ(24巻)	最長一致	cover,caption→genre/tag	-
+9784301005322	2026-5	転生賢者の異世界ライフ : 第二の職業を得て、世界最	進行諸島	スクウェア・エニックス	型3_新規	新規ページ	題一致だが別社ガード	slug,kana,genre/tag,cover,caption,synopsis	-
 9784301005308	2026-5	デート・オア・キル : 秘密のマッチング. 2	羊谷	スクウェア・エニックス	型1_統合	sid142750:デート・オア・キル(1巻)	最長一致	cover,caption→genre/tag	-
 9784301005292	2026-5	尊い5歳児たちが私に結婚相手を斡旋してきます : 捨	頼爾	スクウェア・エニックス	型1_統合	sid152597:尊い5歳児たちが私に結婚相手を斡旋し(1巻)	最長一致	cover,caption→genre/tag	-
 9784301005056	2026-5	友達の妹が俺にだけウザい. 11	三河	スクウェア・エニックス	型1_統合	sid92608:友達の妹が俺にだけウザい(10巻)	完全題一致	cover,caption→genre/tag	-
@@ -900,7 +900,7 @@ isbn	month	title	author	publisher	type	integrate_to	method	holes	verified
 9784334109592	2026-5	そばギャルとおじさん. 3	稲葉	光文社	型1_統合	sid135915:そばギャルとおじさん(2巻)	完全題一致	cover,caption→genre/tag	-
 9784575441178	2026-5	スマホで異世界の神になる方法 : 失業したら冷酷領主	まるかわ	双葉社	型1_統合	sid141929:スマホで異世界の神になる方法(1巻)	最長一致	cover,caption→genre/tag	-
 9784575424294	2026-5	世界最強の陰キャ、ダンジョン配信で億バズる : 配信	どまどま	双葉社	型1_統合	sid147011:世界最強の陰キャ、ダンジョン配信で億(3巻)	最長一致	cover,caption→genre/tag	-
-9784575862102	2026-5	セカイ魔王. 1	双見	双葉社	型3_新規	新規ページ	題一致だが別社ガード	slug,kana,genre/tag,cover,caption,synopsis	-
+9784575862102	2026-5	セカイ魔王. 1	双見	双葉社	型1_統合	sid11515:セカイ魔王(4巻)	完全題一致	cover,caption→genre/tag	-
 9784575423785	2026-5	ソロキャンパーのふらっと異世界気まま旅. 2	IK	双葉社	型1_統合	sid142164:ソロキャンパーのふらっと異世界気まま(1巻)	完全題一致	cover,caption→genre/tag	-
 9784575382471	2026-5	高嶺のSubは陰キャDomに躾けられたくないのに	rug	双葉社	型3_新規	新規ページ	一致なし	slug,kana,genre/tag,cover,caption,synopsis	-
 9784575424133	2026-5	ダンジョンで戦い続けて20年の童貞勇者、地上に戻った	アナジロ	双葉社	型3_新規	新規ページ	一致なし	slug,kana,genre/tag,cover,caption,synopsis	-
@@ -924,7 +924,7 @@ isbn	month	title	author	publisher	type	integrate_to	method	holes	verified
 9784408642130	2026-5	静かなるドン-もうひとつの最終章- : YAKUZA	新田	実業之日本社	型1_統合	sid123113:静かなるドン-もうひとつの最終章-(3巻)	最長一致	cover,caption→genre/tag	-
 9784408642376	2026-5	転生聖女は引きこもりスローライフを目指したい! 2	アトハ	実業之日本社	型1_統合	sid164169:転生聖女は引きこもりスローライフを目(1巻)	最長一致	cover,caption→genre/tag	-
 9784098053179	2026-5	三丁目の夕日 : 昭和歳時記. 六さんの青春	西岸	小学館	型1_統合	sid49639:三丁目の夕日(170巻)	最長一致	cover,caption→genre/tag	-
-9784091541826	2026-5	SHION. 2	ひなしょ	小学館	型1_統合	sid132443:SHION(1巻)	vol1-ISBN照合で発見	cover,caption→genre/tag	vol1=9784091541031
+9784091541826	2026-5	SHION. 2	ひなしょ	小学館	型1_統合	sid27001:Shion(3巻)	完全題一致	cover,caption→genre/tag	-
 9784098545308	2026-5	史上最強オークさんの楽しい異世界ハーレムづくり. 1	月夜	小学館	型1_統合	sid92775:史上最強オークさんの楽しい異世界ハー(12巻)	完全題一致	cover,caption→genre/tag	-
 9784098640225	2026-5	正直不動産. 24	大谷	小学館	型1_統合	sid157556:正直不動産(19巻)	完全題一致	cover,caption→genre/tag	-
 9784091542601	2026-5	呪ロ. 1	武井	小学館	型3_新規	新規ページ	一致なし	slug,kana,genre/tag,cover,caption,synopsis	-
@@ -1068,7 +1068,7 @@ isbn	month	title	author	publisher	type	integrate_to	method	holes	verified
 9784065434949	2026-5	彗星乙女後宮伝 : 男装の女騎士、異国であやしいお役	江本	講談社	型1_統合	sid153298:彗星乙女後宮伝(1巻)	最長一致	cover,caption→genre/tag	-
 9784065435908	2026-5	刷ったもんだ! 14	染谷	講談社	型1_統合	sid91744:刷ったもんだ!(13巻)	最長一致	cover,caption→genre/tag	-
 9784065435915	2026-5	棲ミタイ街. 3	廃屋丹	講談社	型1_統合	sid157130:棲ミタイ街(2巻)	完全題一致	cover,caption→genre/tag	-
-9784065438831	2026-5	Smoke	大	講談社	型3_新規	新規ページ	題一致だが別社ガード	slug,kana,genre/tag,cover,caption,synopsis	-
+9784065438831	2026-5	Smoke	大	講談社	型1_統合	sid60840:SMOKE(1巻)	完全題一致	cover,caption→genre/tag	-
 9784065433003	2026-5	聖女様をお探しでしたら妹で間違いありません。さあどう	伊賀海栗	講談社	型3_新規	新規ページ	一致なし	slug,kana,genre/tag,cover,caption,synopsis	-
 9784065433126	2026-5	戦隊大失格. 22	春場	講談社	型1_統合	sid36447:戦隊大失格(20巻)	完全題一致	cover,caption→genre/tag	-
 9784065431382	2026-5	千年の花嫁. 3	遠山	講談社	型1_統合	sid129619:千年の花嫁(2巻)	完全題一致	cover,caption→genre/tag	-
@@ -1213,8 +1213,8 @@ isbn	month	title	author	publisher	type	integrate_to	method	holes	verified
 9784785982041	2026-6	思い出食堂. No. 88 (昭和のナポリタン編)		少年画報社	型2/3_新規	新規ページ	一致なし	slug,kana,genre/tag,cover,caption,synopsis	-
 9784434378805	2026-6	俺のガチオタが攻めナンバーワンとか聞いてない	すぎちよ	MUGENUP	型3_新規	新規ページ	一致なし	slug,kana,genre/tag,cover,caption,synopsis	-
 9784065438336	2026-6	俺の声に堕ちてください. 3	ten	講談社	型1_統合	sid148056:俺の声に堕ちてください(2巻)	完全題一致	cover,caption→genre/tag	-
-9784575441192	2026-6	俺節. 第1巻	土田	双葉社	型1_統合	sid12444:俺節(9巻)	最長一致	cover,caption→genre/tag	-
-9784575441208	2026-6	俺節. 第2巻	土田	双葉社	型1_統合	sid12444:俺節(9巻)	最長一致	cover,caption→genre/tag	-
+9784575441192	2026-6	俺節. 第1巻	土田	双葉社	型3_新規	新規ページ	題一致だが別社ガード	slug,kana,genre/tag,cover,caption,synopsis	-
+9784575441208	2026-6	俺節. 第2巻	土田	双葉社	型3_新規	新規ページ	題一致だが別社ガード	slug,kana,genre/tag,cover,caption,synopsis	vol1=9784575441208は種2外
 9784575424324	2026-6	恩を仇で返された令嬢の家族が黙っている訳がない. 5	七ツ河	双葉社	型1_統合	sid154258:恩を仇で返された令嬢の家族が黙ってい(3巻)	完全題一致	cover,caption→genre/tag	-
 9784758098571	2026-6	怪異の掃除人・曽根崎慎司の事件ファイル. 2	八橋	一迅社	型1_統合	sid153807:怪異の掃除人・曽根崎慎司の事件ファイ(1巻)	完全題一致	cover,caption→genre/tag	-
 9784088850894	2026-6	回撃のキナト. 1	雨宮	集英社	型3_新規	新規ページ	一致なし	slug,kana,genre/tag,cover,caption,synopsis	-
@@ -1238,7 +1238,7 @@ isbn	month	title	author	publisher	type	integrate_to	method	holes	verified
 9784758098861	2026-6	君のせいなんだから、責任とってよね。. 1	当麻	一迅社	型3_新規	新規ページ	一致なし	slug,kana,genre/tag,cover,caption,synopsis	-
 9784801989771	2026-6	きみは最愛のステラ. 下	楢島	竹書房	型3_新規	新規ページ	一致なし	slug,kana,genre/tag,cover,caption,synopsis	-
 9784801989764	2026-6	きみは最愛のステラ. 上	楢島	竹書房	型3_新規	新規ページ	一致なし	slug,kana,genre/tag,cover,caption,synopsis	-
-9784911636046	2026-6	恐怖新聞 : オリジナル完全版. Vol.1	つのだ	かや書房	型1_統合	sid4493:恐怖新聞(26巻)	最長一致	cover,caption→genre/tag	-
+9784911636046	2026-6	恐怖新聞 : オリジナル完全版. Vol.1	つのだ	かや書房	型3_新規	新規ページ	題一致だが別社ガード	slug,kana,genre/tag,cover,caption,synopsis	-
 9784758029254	2026-6	気弱な令嬢と追放殿下のイチャイチャ領地経営! : 一	水野	一迅社	型1_統合	sid157863:気弱な令嬢と追放殿下のイチャイチャ領(1巻)	最長一致	cover,caption→genre/tag	-
 9784758099035	2026-6	気弱な令嬢と追放殿下のイチャイチャ領地経営! : 一	水野	一迅社	型1_統合	sid157863:気弱な令嬢と追放殿下のイチャイチャ領(1巻)	最長一致	cover,caption→genre/tag	-
 9784065437513	2026-6	キラキラの壊し方. 2	玖々嶌	講談社	型1_統合	sid140166:キラキラの壊し方(1巻)	完全題一致	cover,caption→genre/tag	-
@@ -1247,7 +1247,7 @@ isbn	month	title	author	publisher	type	integrate_to	method	holes	verified
 9784088851297	2026-6	銀魂3年Z組銀八先生. 1	青沼	集英社	型3_新規	新規ページ	一致なし	slug,kana,genre/tag,cover,caption,synopsis	-
 9784065438039	2026-6	空挺ドラゴンズ. 22	桑原	講談社	型1_統合	sid13:空挺ドラゴンズ(22巻)	完全題一致	cover,caption→genre/tag	-
 9784824016768	2026-6	九条さんは一晩中抱けるド絶倫 : 豹変男子のイキすぎ	星月	オーバーラップ	型1_統合	sid147137:九条さんは一晩中抱けるド絶倫(3巻)	最長一致	cover,caption→genre/tag	-
-9784868540076	2026-6	薬の魔物の解雇理由@COMIC. 4	真丸	TOブックス	型1_統合	sid162997:薬の魔物の解雇理由@COMIC(3巻)	vol1-ISBN照合で発見	cover,caption→genre/tag	vol1=9784866997919
+9784868540076	2026-6	薬の魔物の解雇理由@COMIC. 4	真丸	TOブックス	型1_統合	sid162997:薬の魔物の解雇理由@COMIC(3巻)	完全題一致	cover,caption→genre/tag	-
 9784537173987	2026-6	クソザコボウコウ押井さん. 3	つっつ	日本文芸社	型1_統合	sid140351:クソザコボウコウ押井さん(2巻)	完全題一致	cover,caption→genre/tag	-
 9784065439487	2026-6	クッキングパパ. カツオ飯	うえやま	講談社	型3_新規	新規ページ	一致なし	slug,kana,genre/tag,cover,caption,synopsis	-
 9784391167160	2026-6	くまクマ熊ベアー. 14	せるげい	主婦と生活社	型1_統合	sid65678:くまクマ熊ベアー(11巻)	完全題一致	cover,caption→genre/tag	-
@@ -1258,7 +1258,7 @@ isbn	month	title	author	publisher	type	integrate_to	method	holes	verified
 9784065443767	2026-6	グラぱらっ! 12	桂	講談社	型1_統合	sid140537:グラぱらっ!(10巻)	最長一致	cover,caption→genre/tag	-
 9784065439098	2026-6	K-9 : 警視庁公安部公安第9課異能対策係. 6	奧山	講談社	型1_統合	sid131679:K-9(5巻)	最長一致	cover,caption→genre/tag	-
 9784835459844	2026-6	けっこう仮面. 下	永井	復刊ドットコム	型3_新規	新規ページ	一致なし	slug,kana,genre/tag,cover,caption,synopsis	-
-9784056071498	2026-6	恋ひ恋ひて. 1	みずの	Gakken	型3_新規	新規ページ	題一致だが別社ガード	slug,kana,genre/tag,cover,caption,synopsis	-
+9784056071498	2026-6	恋ひ恋ひて. 1	みずの	Gakken	型1_統合	sid21841:恋ひ恋ひて(2巻)	完全題一致	cover,caption→genre/tag	-
 9784867871799	2026-6	恋してくれるな、マイバディ	日々	ブライト出版	型3_新規	新規ページ	一致なし	slug,kana,genre/tag,cover,caption,synopsis	-
 9784813034742	2026-6	恋人契約中につき : 更新!	まつだ	大洋図書	型1_統合	sid154138:恋人契約中につき(1巻)	最長一致	cover,caption→genre/tag	-
 9784091542724	2026-6	こい丸. 2	公	小学館	型1_統合	sid135141:こい丸(1巻)	完全題一致	cover,caption→genre/tag	-
@@ -1282,7 +1282,7 @@ isbn	month	title	author	publisher	type	integrate_to	method	holes	verified
 9784098640096	2026-6	ごくりっ. 7	前原	小学館	型1_統合	sid66300:ごくりっ(4巻)	完全題一致	cover,caption→genre/tag	-
 9784065438305	2026-6	伍と碁. 6	蓮尾	講談社	型1_統合	sid147675:伍と碁(5巻)	完全題一致	cover,caption→genre/tag	-
 9784098053193	2026-6	ゴルゴ13 : rolling China-転がる中	さいとう	小学館	型1_統合	sid38124:ゴルゴ13(706巻)	最長一致	cover,caption→genre/tag	-
-9784845871780	2026-6	ゴルゴ13 : special edition : 	さいとう	リイド社	型1_統合	sid126786:ゴルゴ13 SPECIAL EDIT(5巻)	最長一致	cover,caption→genre/tag	-
+9784845871780	2026-6	ゴルゴ13 : special edition : 	さいとう	リイド社	型3_新規	新規ページ	題一致だが別社ガード	slug,kana,genre/tag,cover,caption,synopsis	-
 9784867949986	2026-6	最終兵器勇者～異世界で魔王を倒した後も大人しくしてい	梅町	TOブックス	型3_新規	新規ページ	一致なし	slug,kana,genre/tag,cover,caption,synopsis	-
 9784065438947	2026-6	魁の花巫女. 8	きただ	講談社	型1_統合	sid125661:魁の花巫女(6巻)	完全題一致	cover,caption→genre/tag	-
 9784056071528	2026-6	さくらんぼダイアリー. 3	水沢	Gakken	型1_統合	sid127601:さくらんぼダイアリー(1巻)	完全題一致	cover,caption→genre/tag	-
@@ -1327,9 +1327,9 @@ isbn	month	title	author	publisher	type	integrate_to	method	holes	verified
 9784815551230	2026-6	焦れる胸先は眠れない	紅芋	英和出版社	型3_新規	新規ページ	一致なし	slug,kana,genre/tag,cover,caption,synopsis	-
 9784575340037	2026-6	人生どん底な私とオープンマリッジの王子様の契約純愛.	藤沢	双葉社	型3_新規	新規ページ	一致なし	slug,kana,genre/tag,cover,caption,synopsis	-
 9784253013680	2026-6	人狼機ウィンヴルガ-叛逆篇-. 5	綱島	秋田書店	型1_統合	sid124418:人狼機ウィンヴルガ-叛逆篇-(3巻)	完全題一致	cover,caption→genre/tag	-
-9784868540106	2026-6	聖女さまは取り替え子@COMIC. 2	日達	TOブックス	型1_統合	sid162224:聖女さまは取り替え子@COMIC(1巻)	vol1-ISBN照合で発見	cover,caption→genre/tag	vol1=9784867945537
-9784575862355	2026-6	セカイ魔王. 2	双見	双葉社	型3_新規	新規ページ	題一致だが別社ガード	slug,kana,genre/tag,cover,caption,synopsis	vol1=9784575862102は種2外
-9784575862362	2026-6	セカイ魔王. 3	双見	双葉社	型3_新規	新規ページ	題一致だが別社ガード	slug,kana,genre/tag,cover,caption,synopsis	vol1=9784575862102は種2外
+9784868540106	2026-6	聖女さまは取り替え子@COMIC. 2	日達	TOブックス	型1_統合	sid162224:聖女さまは取り替え子@COMIC(1巻)	完全題一致	cover,caption→genre/tag	-
+9784575862355	2026-6	セカイ魔王. 2	双見	双葉社	型1_統合	sid11515:セカイ魔王(4巻)	完全題一致	cover,caption→genre/tag	-
+9784575862362	2026-6	セカイ魔王. 3	双見	双葉社	型1_統合	sid11515:セカイ魔王(4巻)	完全題一致	cover,caption→genre/tag	-
 9784868540014	2026-6	隻眼・隻腕・隻脚の魔術師@COMIC : 森の小屋に	しばの	TOブックス	型3_新規	新規ページ	題一致だが別社ガード	slug,kana,genre/tag,cover,caption,synopsis	-
 9784803023206	2026-6	戦国小町苦労譚. 20	夾竹桃	アース・スターエンターテ	型1_統合	sid102116:戦国小町苦労譚(17巻)	完全題一致	cover,caption→genre/tag	-
 9784107729521	2026-6	絶対BLになる世界vs絶対BLになりたくない男. 6	紺吉	新潮社	型1_統合	sid161807:絶対BLになる世界vs絶対BLになり(6巻)	完全題一致	cover,caption→genre/tag	-
@@ -1421,7 +1421,7 @@ isbn	month	title	author	publisher	type	integrate_to	method	holes	verified
 9784107729446	2026-6	古葉くんは恋がワカらない. 1	正青	新潮社	型3_新規	新規ページ	一致なし	slug,kana,genre/tag,cover,caption,synopsis	-
 9784813034759	2026-6	ブルーエッジエンゲージ	井山	大洋図書	型3_新規	新規ページ	一致なし	slug,kana,genre/tag,cover,caption,synopsis	-
 9784592763932	2026-6	プロフェッショナルズ : プロフェッショナルで勝手に	田中	白泉社	型3_新規	新規ページ	一致なし	slug,kana,genre/tag,cover,caption,synopsis	-
-9784845871377	2026-6	BEM	斎藤	リイド社	型3_新規	新規ページ	題一致だが別社ガード	slug,kana,genre/tag,cover,caption,synopsis	-
+9784845871377	2026-6	BEM	斎藤	リイド社	型1_統合	sid31494:BEM(3巻)	完全題一致	cover,caption→genre/tag	-
 9784575862348	2026-6	放課後帰宅びより. 6	松田	双葉社	型1_統合	sid155676:放課後帰宅びより(3巻)	完全題一致	cover,caption→genre/tag	-
 9784253013772	2026-6	放課後ファンタジー. 3	村岡	秋田書店	型1_統合	sid123283:放課後ファンタジー(2巻)	完全題一致	cover,caption→genre/tag	-
 9784575340099	2026-6	保健師がきた. 3	埜納	双葉社	型1_統合	sid147894:保健師がきた(1巻)	完全題一致	cover,caption→genre/tag	-
@@ -1442,8 +1442,8 @@ isbn	month	title	author	publisher	type	integrate_to	method	holes	verified
 9784088851174	2026-6	魔都精兵のスレイブ. 21	タカヒロ	集英社	型1_統合	sid119711:魔都精兵のスレイブ(19巻)	完全題一致	cover,caption→genre/tag	-
 9784107729484	2026-6	三日月の国 : オスマン千夜一夜. 2	桃山	新潮社	型1_統合	sid146791:三日月の国(1巻)	最長一致	cover,caption→genre/tag	-
 9784575424317	2026-6	身代わりで縁談に参加した愚妹の私、隣国の王子様に見初	菊海	双葉社	型3_新規	新規ページ	一致なし	slug,kana,genre/tag,cover,caption,synopsis	-
-9784302121007	2026-6	身代わり姫は隣国の勇猛王に溺愛される. 3	鳴神	ハーパーコリンズ・ジャパ	型1_統合	sid163925:身代わり姫は隣国の勇猛王に溺愛される(2巻)	vol1-ISBN照合で発見	cover,caption→genre/tag	vol1=9784596713322
-9784868540007	2026-6	水属性の魔法使い第2部@COMIC. 2	大嶌	TOブックス	型1_統合	sid157889:水属性の魔法使い第2部@COMIC(1巻)	vol1-ISBN照合で発見	cover,caption→genre/tag	vol1=9784867946923
+9784302121007	2026-6	身代わり姫は隣国の勇猛王に溺愛される. 3	鳴神	ハーパーコリンズ・ジャパ	型1_統合	sid163925:身代わり姫は隣国の勇猛王に溺愛される(2巻)	完全題一致	cover,caption→genre/tag	-
+9784868540007	2026-6	水属性の魔法使い第2部@COMIC. 2	大嶌	TOブックス	型1_統合	sid157889:水属性の魔法使い第2部@COMIC(1巻)	完全題一致	cover,caption→genre/tag	-
 9784832206236	2026-6	ミズダコちゃんからは逃げられない! 5	眼亀	芳文社	型1_統合	sid145335:ミズダコちゃんからは逃げられない!(3巻)	最長一致	cover,caption→genre/tag	-
 9784391167603	2026-6	身に覚えのない溺愛ですがそこまで愛されたら仕方ない 	月森	主婦と生活社	型3_新規	新規ページ	一致なし	slug,kana,genre/tag,cover,caption,synopsis	-
 9784796874724	2026-6	蟲神器オフィシャルコミック	原	小学館集英社プロダクショ	型3_新規	新規ページ	一致なし	slug,kana,genre/tag,cover,caption,synopsis	-

@@ -43,15 +43,17 @@ print(f"種2: series {len(sid_info):,} / 題key {len(title2sids):,}", flush=True
 def best_sid(sids):  # 同題複数→最大巻
     return max(sids, key=lambda s: sid_info[s]["nvol"])
 def match(title, gap_pref):
-    """候補prefix(長→短)で種2題に最長一致。出版社ガードで別社選集を弾く。"""
+    """候補prefix(長→短)で種2題に最長一致。完全題一致=plain巻→受容、最長一致(副題付)+別社→ガード。"""
+    full = norm(re.sub(r"[\.．]\s*\d+\s*$", "", title))  # full題(巻番号のみ除去)
     for cp in cand_prefixes(title):  # 長い順
         if cp in title2sids:
             sid = best_sid(title2sids[cp]); info = sid_info[sid]
-            # 出版社ガード: gapのISBN社が統合先の社集合に在る(or統合先が単一巻=本体らしい)なら採用
-            if gap_pref in info["prefs"] or info["nvol"] >= 5:
-                return sid, info, "完全題一致" if cp == norm(re.sub(r"[\.．]\s*\d+\s*$","",title)) else f"最長一致"
+            is_exact = (cp == full)  # 完全題一致=本体のplain巻
+            # 完全題一致なら別社でも受容(本体の巻)。最長一致(副題=選集疑い)は同社のみ受容。
+            if is_exact or gap_pref in info["prefs"]:
+                return sid, info, "完全題一致" if is_exact else "最長一致"
             else:
-                return None, None, f"題一致だが別社ガード"  # 別社選集の疑い→統合せず
+                return None, None, "題一致だが別社ガード"  # 副題付+別社=選集の疑い→統合せず
     return None, None, "一致なし"
 
 def ndl_vol1_isbn(base, author):
