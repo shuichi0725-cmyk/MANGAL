@@ -453,3 +453,59 @@ works:
     - number: 3
       isbn13: '9784061087415'
       release_date: '1981-03-20'
+- slug: ludwig-b
+  replace: true
+  editions:
+  - type: standard
+    label: 通常版
+    publisher: 潮出版社
+    volumes:
+    - number: 1
+      isbn13: '9784267012105'
+      release_date: '1989-08-10'
+  - type: bunkobon
+    label: 潮ビジュアル文庫
+    publisher: 潮出版社
+    imprint: 潮ビジュアル文庫
+    volumes:
+    - number: 1
+      isbn13: '9784267013294'
+      release_date: 1993-04
+    - number: 2
+      isbn13: '9784267013300'
+      release_date: 1993-04
+  - type: aizoban
+    label: 手塚治虫漫画全集
+    publisher: 講談社
+    imprint: 手塚治虫漫画全集
+    volumes:
+    - number: 1
+      isbn13: '9784061759374'
+      release_date: '1994-10-17'
+    - number: 2
+      isbn13: '9784061759381'
+      release_date: '1994-11-17'
+  - type: standard
+    label: 潮ライブラリー
+    publisher: 潮出版社
+    imprint: 潮ライブラリー
+    volumes:
+    - number: 1
+      isbn13: '9784267015199'
+      release_date: 1998-12
+  - type: standard
+    label: 希望コミックス
+    publisher: 潮出版社
+    imprint: 希望コミックス
+    volumes:
+    - number: 1
+      isbn13: '9784267904080'
+      release_date: 2002-12
+  - type: bunkobon
+    label: 手塚治虫文庫全集
+    publisher: 講談社
+    imprint: 手塚治虫文庫全集
+    volumes:
+    - number: 1
+      isbn13: '9784063737868'
+      release_date: 2010-10
