@@ -1,4 +1,3 @@
-# 版/刷タブ regroup 済(同type同冊数を versions[]統合)
 slug: sai
 title: 菜
 title_kana: サイ
@@ -28,63 +27,97 @@ editions:
   - number: 1
     asin: null
     isbn13: '9784063193824'
-    cover_url: null
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/3824/9784063193824.jpg?_ex=200x200
     release_date: 1993-04
   - number: 2
     asin: null
     isbn13: '9784063193916'
-    cover_url: null
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/3916/9784063193916.jpg?_ex=200x200
     release_date: 1993-06
   - number: 3
     asin: null
     isbn13: '9784063194401'
-    cover_url: null
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/4401/9784063194401.jpg?_ex=200x200
     release_date: 1993-12
   - number: 4
     asin: null
     isbn13: '9784063194883'
-    cover_url: null
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/4883/9784063194883.jpg?_ex=200x200
     release_date: 1994-06
   - number: 5
     asin: null
     isbn13: '9784063195521'
-    cover_url: null
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/5521/9784063195521.jpg?_ex=200x200
     release_date: 1994-12
   - number: 6
     asin: null
     isbn13: '9784063196030'
-    cover_url: null
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/6030/9784063196030.jpg?_ex=200x200
     release_date: 1995-06
   - number: 7
     asin: null
     isbn13: '9784063196597'
-    cover_url: null
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/6597/9784063196597.jpg?_ex=200x200
     release_date: 1995-12
   - number: 8
     asin: null
     isbn13: '9784063197259'
-    cover_url: null
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/7259/9784063197259.jpg?_ex=200x200
     release_date: 1996-08
   - number: 9
     asin: null
     isbn13: '9784063197815'
-    cover_url: null
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/7815/9784063197815.jpg?_ex=200x200
     release_date: 1997-02
   - number: 10
     asin: null
     isbn13: '9784063198560'
-    cover_url: null
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/8560/9784063198560.jpg?_ex=200x200
     release_date: 1997-09
   - number: 11
     asin: null
     isbn13: '9784063199222'
-    cover_url: null
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/9222/9784063199222.jpg?_ex=200x200
     release_date: 1998-03
   - number: 12
     asin: null
     isbn13: '9784063339789'
-    cover_url: null
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/9789/9784063339789.jpg?_ex=200x200
     release_date: 1998-09
+- type: kanzenban
+  label: Complete Edition（完全版）
+  publisher: 玄光社
+  volumes:
+  - number: 1
+    asin: null
+    isbn13: '9784768330265'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0265/9784768330265.jpg?_ex=200x200
+    release_date: 2025-07
+  - number: 2
+    asin: null
+    isbn13: '9784768330272'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0272/9784768330272.jpg?_ex=200x200
+    release_date: 2025-07
+  - number: 3
+    asin: null
+    isbn13: '9784768330289'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0289/9784768330289.jpg?_ex=200x200
+    release_date: 2025-07
+  - number: 4
+    asin: null
+    isbn13: '9784768330531'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0531/9784768330531.jpg?_ex=200x200
+    release_date: 2025-08
+  - number: 5
+    asin: null
+    isbn13: '9784768330548'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0548/9784768330548.jpg?_ex=200x200
+    release_date: 2025-08
+  - number: 6
+    asin: null
+    isbn13: '9784768330555'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0555/9784768330555.jpg?_ex=200x200
+    release_date: 2025-08
 publishers:
 - kodansha
 anilist_id: 160535
