@@ -57,11 +57,18 @@ adult_isbns = {r["isbn13"] for r in csv.DictReader(open(f"{ROOT}/data/seeds/dist
 # ★非商業ドロップ(distill-drop-2026.tsv=学校PTA冊子等の手動ドロップ管理リスト) + 団体著者ヒューリスティック
 drop_isbns = {r["isbn13"] for r in csv.DictReader(open(f"{ROOT}/data/seeds/distill-drop-2026.tsv", encoding="utf-8"), delimiter="\t")}
 ORG_AUTHOR = re.compile(r"協議会|委員会|PTA|連盟|教育委員|学校長会|振興会|商工会")
-# 本番 title(norm)→slug(型1の既存ページ統合用)
-prod = {}
+# 本番 title(norm)→slug + title_kana(norm)→slug(型1統合の名寄せ。 ★kana照合でローマ字/カナ題不一致を吸収)
+prod = {}; prod_kana = {}
 for it in json.load(open(f"{ROOT}/data/manga-list-index.json", encoding="utf-8")):
     nt = norm(it["title"])
     if nt and nt not in prod: prod[nt] = it["slug"]
+    nk = norm(it.get("title_kana", ""))
+    if nk and nk not in prod_kana: prod_kana[nk] = it["slug"]
+def clean_author(a):
+    """NDL '姓, 名, 1936-2021' / 'バロン吉元, 1940-' → '姓名'(カンマ連結・生没年除去)。"""
+    a = re.sub(r"\s*,?\s*\d{4}\s*-\s*\d{0,4}", "", str(a or ""))  # 生没年
+    a = re.sub(r"\s*(著|原作|作画|漫画|編|画|∥.*|/.*)$", "", a)  # 役割語/区切り後
+    return re.sub(r"\s*,\s*", "", a).strip()  # "姓, 名"→"姓名"
 # ★出版社: NDL社名(norm)→publisherキー(publishers.yml)
 PUBMAP = {}
 for k, v in yaml.safe_load(open(f"{ROOT}/data/publishers.yml", encoding="utf-8")).items():
@@ -103,10 +110,12 @@ for wslug, isbns in works.items():
         cov = ei.get("cover") if (ei.get("cover") and "noimage" not in (ei.get("cover") or "")) else None
         new_vols.append({"number": vol_of(di), "isbn13": ib, "release_date": norm_date(di.get("date", "")), "cover_url": cov, "_new": True})
     # ★型1: 既存本番ページの全巻を取り込む(1巻問題解消)
-    slug = wslug; eds = None; existing = 0; t1_pub = None; t1_pubs = []
-    if is_t1:
+    slug = wslug; eds = None; existing = 0; t1_pub = None; t1_pubs = []; t1_year = None
+    # ★巻番≥2 = 既刊がある継続巻 → 型1でなくても既存ページへ統合を試みる(solo_nonfirst解消)
+    max_newvol = max((v["number"] for v in new_vols), default=1)
+    if is_t1 or max_newvol >= 2:
         m = re.search(r"sid\d+:(.+?)\(", lt0.get("integrate_to", "")); itt = m.group(1) if m else ""
-        psl = prod.get(norm(itt)) or prod.get(norm(title))
+        psl = prod.get(norm(itt)) or prod.get(norm(title)) or prod_kana.get(norm(kana))  # ★kana照合追加
         pf = f"{ROOT}/data/manga.v2/{psl}.yml" if psl else None
         if pf and os.path.exists(pf):
             pd = yaml.safe_load(open(pf, encoding="utf-8"))
@@ -120,15 +129,16 @@ for wslug, isbns in works.items():
                 main["volumes"].sort(key=lambda v: v.get("number") or 0)
             t1_merged += 1
             t1_pub = pd.get("publisher"); t1_pubs = pd.get("publishers", []) or []
+            t1_year = pd.get("year_started")  # ★既存ページの開始年を継承(出版年矛盾の解消)
             if pd.get("title"): title = pd["title"]
             if pd.get("title_kana"): kana = pd["title_kana"]
     if eds is None:
         eds = [{"type": "standard", "label": "通常版", "volumes": new_vols}]
     cap = next((enr.get(i, {}).get("caption", "") for i in isbns if enr.get(i, {}).get("caption")), "")
     cre = first.get("creators", "")
-    authors = [{"name": re.sub(r"\s*(著|原作|作画|漫画|∥.*|/.*)$", "", a).strip(), "role": "writer_artist"}
-               for a in cre.split("/")[:3] if a.strip()] or [{"name": "(unknown)", "role": "writer_artist"}]
-    yr = year_of(first.get("date", "2026"))
+    authors = [{"name": clean_author(a), "role": "writer_artist"}
+               for a in cre.split("/")[:3] if clean_author(a)] or [{"name": "(unknown)", "role": "writer_artist"}]
+    yr = t1_year or year_of(first.get("date", "2026"))
     genres = aigenre.get(wslug) or genres_fallback(title + " " + cap)
     # ★出版社: 型1=既存ページの社尊重 / 型3=NDL社→キー
     if is_t1 and t1_pub:

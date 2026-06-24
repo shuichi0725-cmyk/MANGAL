@@ -1,17 +1,18 @@
-slug: kokowawatashinoyashikidesusorosorodeteittekuremasu
-title: ここは私の邸です。そろそろ出て行ってくれます? 3
+slug: koko-wa-watashi-no-yashiki-desu-sorosoro-dete-itte-kuremasu
+title: ここは私の邸です。そろそろ出て行ってくれます?
 title_kana: ココワワタシノヤシキデスソロソロデテイッテクレマス
 title_romaji: kokowawatashinoyashikidesusorosorodeteittekuremasu
-year_started: 2026
+year_started: 2025
 year_ended: null
 status: ongoing
 authors:
-- name: 藍川, みいな
+- name: 藍川みいな
   role: writer_artist
 - name: ナツキシホ
   role: writer_artist
-publisher: (unknown)
-publishers: []
+publisher: seiunsha
+publishers:
+- seiunsha
 _publisher_raw: アルファポリス
 _imprint: Regina COMICS
 demographic: other
@@ -36,11 +37,23 @@ synopsis: '叔父一家から冷遇を受けるマリッサだったが
   それをきっかけに新たなトラブルも勃発してしまい…
 
   マリッサは邸'
-_distill: 2026新刊 型3新規 ISBN9784434364907
+_distill: 2026新刊 型1新刊巻(既存2巻+新刊) ISBN9784434364907
 editions:
 - type: standard
   label: 通常版
+  publisher: 星雲社
+  imprint: Regina COMICS
   volumes:
+  - number: 1
+    asin: null
+    isbn13: '9784434352669'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/2669/9784434352669_1_4.jpg?_ex=200x200
+    release_date: '2025-07-18'
+  - number: 2
+    asin: null
+    isbn13: '9784434356797'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/6797/9784434356797_1_2.jpg?_ex=200x200
+    release_date: '2025-12-22'
   - number: 3
     isbn13: '9784434364907'
     release_date: 2026-06
