@@ -128,6 +128,9 @@ for f in glob.glob(os.path.join(src, "*.yml")):
     eds = d.get("editions") or []
     tv = sum(len(e.get("volumes") or []) for e in eds)
     maxev = max((len(e.get("volumes") or []) for e in eds), default=0)
+    # ★1冊しか無いのに その巻が1巻でない(= 統合失敗/取りこぼしの signal。 おーばーふろぉ[8]型)
+    _nums = [v.get("number") for e in eds for v in (e.get("volumes") or []) if v.get("number")]
+    solo_nonfirst = tv == 1 and bool(_nums) and _nums[0] != 1
     latest = ""
     for e in eds:
         for v in (e.get("volumes") or []):
@@ -151,6 +154,7 @@ for f in glob.glob(os.path.join(src, "*.yml")):
         "total_volumes": tv, "max_edition_volumes": maxev,
         "latest_date": latest[:7] if latest else None,
         "popularity": d.get("popularity"), "score": d.get("score"),
+        **({"solo_nonfirst": True} if solo_nonfirst else {}),
     })
     # ② 検索索引(検索専用) = matchText が必要とする text のみ (= 検索時だけ遅延ロード)
     alt = d.get("alternative_titles") or {}

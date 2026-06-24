@@ -225,6 +225,8 @@ export type MangaListItem = {
   latest_date?: string | null;
   popularity?: number;
   score?: number;
+  /** 1冊のみ かつ その巻が1巻でない(= 統合失敗/取りこぼし signal。 テスト診断用) */
+  solo_nonfirst?: boolean;
 };
 
 /**

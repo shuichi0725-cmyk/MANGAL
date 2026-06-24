@@ -33,6 +33,7 @@ export default function HomeClient({ data }: Props) {
   const listTopRef = useRef<HTMLDivElement>(null);
   // ★テスト環境限定機能(画像なしフィルタ / 情報コピー)。 本番(workers.dev)では非表示。
   const [noCover, setNoCover] = useState(false);
+  const [soloNonfirst, setSoloNonfirst] = useState(false);
   const [copied, setCopied] = useState(false);
   const [isPreview, setIsPreview] = useState(false);
   useEffect(() => {
@@ -88,13 +89,21 @@ export default function HomeClient({ data }: Props) {
   const showArt = state.artBooks;
   const filteredManga = useMemo(() => applyFilters(manga, state, matchedSlugs), [manga, state, matchedSlugs]);
   const filteredArt = useMemo(() => applyArtBookFilters(data.artBooks, state), [data.artBooks, state]);
-  // ★画像なしフィルタ(テスト専用): cover=null だけに絞る。
+  // ★テスト専用フィルタ: 画像なし(cover=null) / 1冊≠1巻(solo_nonfirst=統合失敗signal)。
   const filtered: (MangaListItem | ArtBook)[] = useMemo(() => {
-    const base = showArt ? filteredArt : filteredManga;
-    return noCover && !showArt ? (base as MangaListItem[]).filter((m) => !m.cover) : base;
-  }, [showArt, filteredArt, filteredManga, noCover]);
+    let base = showArt ? filteredArt : filteredManga;
+    if (!showArt) {
+      if (noCover) base = (base as MangaListItem[]).filter((m) => !m.cover);
+      if (soloNonfirst) base = (base as MangaListItem[]).filter((m) => m.solo_nonfirst);
+    }
+    return base;
+  }, [showArt, filteredArt, filteredManga, noCover, soloNonfirst]);
   const noCoverCount = useMemo(
     () => (showArt ? 0 : filteredManga.filter((m) => !m.cover).length),
+    [showArt, filteredManga],
+  );
+  const soloNonfirstCount = useMemo(
+    () => (showArt ? 0 : filteredManga.filter((m) => m.solo_nonfirst).length),
     [showArt, filteredManga],
   );
   // ★表示中(フィルタ後)の情報をクリップボードへ(テスト専用・私への共有用)。
@@ -181,6 +190,16 @@ export default function HomeClient({ data }: Props) {
             }`}
           >
             画像なし{noCover ? " ✓" : ""}（{noCoverCount}）
+          </button>
+          <button
+            type="button"
+            onClick={() => setSoloNonfirst((v) => !v)}
+            className={`tactile-chip rounded-card px-3 py-1.5 font-medium transition active:scale-95 ${
+              soloNonfirst ? "bg-[var(--color-accent)] text-white" : ""
+            }`}
+            title="1冊しか無いのに その巻が1巻でない(統合失敗/取りこぼし)"
+          >
+            1冊≠1巻{soloNonfirst ? " ✓" : ""}（{soloNonfirstCount}）
           </button>
           <button
             type="button"
