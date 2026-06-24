@@ -16,10 +16,15 @@ def kana_slug(kana):
     return slugify("".join(x["hepburn"] for x in kks.convert(kana)))
 def base_title(t):
     t = re.sub(r"\s*=\s*[A-Za-z].*$", "", str(t or ""))
-    return re.sub(r"[\.．]\s*\d+\s*$", "", t).strip()
+    t = re.sub(r"[\.．]\s*\[?\d+\]?\s*$", "", t)  # ". 8" / ". [8]"
+    return re.sub(r"\s*\[\d+\]\s*$", "", t).strip()  # 末尾 "[8]"
 def volnum(t):
-    m = re.search(r"[\.．]\s*(\d+)\s*$", str(t or "")) or re.search(r"Vol(?:ume)?\.?\s*(\d+)", str(t or ""), re.I)
+    m = re.search(r"[\.．]\s*\[?(\d+)\]?\s*$", str(t or "")) or re.search(r"Vol(?:ume)?\.?\s*(\d+)", str(t or ""), re.I) or re.search(r"\[(\d+)\]\s*$", str(t or ""))
     return int(m.group(1)) if m else 1
+def vol_of(d):
+    """★巻番号は dcndl:volume(discovery volume列)を優先(題parseより信頼)。 '[8]'等のブラケットも数字抽出。"""
+    v = re.sub(r"\D", "", str(d.get("volume", "")))
+    return int(v) if v else volnum(d.get("title", ""))
 def norm_date(raw):
     """NDL '2026.4'/'2026'→schema形式 'YYYY-MM'/'YYYY'(release_date regex適合)。"""
     if not raw: return None
@@ -75,7 +80,7 @@ for r in manifest:
 for f in glob.glob(f"{PREV}/*.yml"): os.remove(f)
 n = skip_k = skip_a = t1_merged = 0
 for wslug, isbns in works.items():
-    isbns.sort(key=lambda i: volnum(disc.get(i, {}).get("title", "")))
+    isbns.sort(key=lambda i: vol_of(disc.get(i, {})))
     if any(i in adult_isbns for i in isbns): skip_a += 1; continue  # ★成年=preview非掲載(adult stream/geoで別扱い)
     first = disc.get(isbns[0], {}); lt0 = ledger.get(isbns[0], {})
     series = first.get("series", "")
@@ -87,7 +92,7 @@ for wslug, isbns in works.items():
     for ib in isbns:
         di = disc.get(ib, {}); ei = enr.get(ib, {})
         cov = ei.get("cover") if (ei.get("cover") and "noimage" not in (ei.get("cover") or "")) else None
-        new_vols.append({"number": volnum(di.get("title", "")), "isbn13": ib, "release_date": norm_date(di.get("date", "")), "cover_url": cov, "_new": True})
+        new_vols.append({"number": vol_of(di), "isbn13": ib, "release_date": norm_date(di.get("date", "")), "cover_url": cov, "_new": True})
     # ★型1: 既存本番ページの全巻を取り込む(1巻問題解消)
     slug = wslug; eds = None; existing = 0; t1_pub = None; t1_pubs = []
     if is_t1:
