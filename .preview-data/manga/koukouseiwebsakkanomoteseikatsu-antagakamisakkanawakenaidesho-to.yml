@@ -10,7 +10,9 @@ authors:
   role: writer_artist
 - name: 佐藤, 勇
   role: writer_artist
-publisher: (unknown)
+publisher: square-enix
+publishers:
+- square-enix
 _publisher_raw: スクウェア・エニックス
 _imprint: ヤングガンガンコミックス
 demographic: shounen
@@ -30,3 +32,4 @@ editions:
     release_date: 2026-04
     cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/4769/9784301004769_1_2.jpg
     _new: true
+  publisher: square-enix

@@ -48,6 +48,17 @@ prod = {}
 for it in json.load(open(f"{ROOT}/data/manga-list-index.json", encoding="utf-8")):
     nt = norm(it["title"])
     if nt and nt not in prod: prod[nt] = it["slug"]
+# ★出版社: NDL社名(norm)→publisherキー(publishers.yml)
+PUBMAP = {}
+for k, v in yaml.safe_load(open(f"{ROOT}/data/publishers.yml", encoding="utf-8")).items():
+    PUBMAP[norm(v.get("name", ""))] = k
+    for a in (v.get("aliases") or []): PUBMAP[norm(a)] = k
+def pub_key(name):
+    nm = norm(name)
+    if nm in PUBMAP: return PUBMAP[nm]
+    for pn, k in PUBMAP.items():  # 部分一致(NDL社名に支店/版表記が付く場合)
+        if pn and (pn in nm or nm in pn) and len(pn) >= 3: return k
+    return None
 
 GK = [("isekai", r"異世界|転生"), ("romance", r"恋|愛|令嬢"), ("fantasy", r"魔法|魔王|勇者|冒険"), ("action", r"バトル|戦|復讐"),
       ("comedy", r"ギャグ|コメディ|日常"), ("horror", r"ホラー|怪|恐怖|呪")]
@@ -75,7 +86,7 @@ for wslug, isbns in works.items():
         cov = ei.get("cover") if (ei.get("cover") and "noimage" not in (ei.get("cover") or "")) else None
         new_vols.append({"number": volnum(di.get("title", "")), "isbn13": ib, "release_date": norm_date(di.get("date", "")), "cover_url": cov, "_new": True})
     # ★型1: 既存本番ページの全巻を取り込む(1巻問題解消)
-    slug = wslug; eds = None; existing = 0
+    slug = wslug; eds = None; existing = 0; t1_pub = None; t1_pubs = []
     if is_t1:
         m = re.search(r"sid\d+:(.+?)\(", lt0.get("integrate_to", "")); itt = m.group(1) if m else ""
         psl = prod.get(norm(itt)) or prod.get(norm(title))
@@ -91,6 +102,7 @@ for wslug, isbns in works.items():
                     if nv["number"] not in have: main["volumes"].append(nv)
                 main["volumes"].sort(key=lambda v: v.get("number") or 0)
             t1_merged += 1
+            t1_pub = pd.get("publisher"); t1_pubs = pd.get("publishers", []) or []
             if pd.get("title"): title = pd["title"]
             if pd.get("title_kana"): kana = pd["title_kana"]
     if eds is None:
@@ -101,9 +113,16 @@ for wslug, isbns in works.items():
                for a in cre.split("/")[:3] if a.strip()] or [{"name": "(unknown)", "role": "writer_artist"}]
     yr = int(re.sub(r"\D", "", str(first.get("date", "2026"))[:4]) or 2026)
     genres = aigenre.get(wslug) or genres_fallback(title + " " + cap)
+    # ★出版社: 型1=既存ページの社尊重 / 型3=NDL社→キー
+    if is_t1 and t1_pub:
+        p_key, p_list = t1_pub, t1_pubs
+    else:
+        pk = pub_key(first.get("publisher", "")); p_key = pk or "(unknown)"; p_list = [pk] if pk else []
+    for e in (eds or []):  # edition単位の社も埋める(型3の新規edition)
+        if not e.get("publisher") and p_key != "(unknown)": e["publisher"] = p_key
     doc = {"slug": slug, "title": title, "title_kana": kana, "title_romaji": kana_slug(kana).replace("-", " ") or slug,
            "year_started": yr, "year_ended": None, "status": "ongoing",
-           "authors": authors, "publisher": "(unknown)", "_publisher_raw": first.get("publisher", ""), "_imprint": series,
+           "authors": authors, "publisher": p_key, "publishers": p_list, "_publisher_raw": first.get("publisher", ""), "_imprint": series,
            "demographic": demographic_of(series, first.get("publisher", "")),
            "genres": [g for g in genres if g][:4] or ["drama"], "genres_provisional": True,
            "first_volume_date": norm_date(first.get("date", "")), "synopsis": cap[:140],
