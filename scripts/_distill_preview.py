@@ -26,13 +26,17 @@ def vol_of(d):
     v = re.sub(r"\D", "", str(d.get("volume", "")))
     return int(v) if v else volnum(d.get("title", ""))
 def norm_date(raw):
-    """NDL '2026.4'/'2026'→schema形式 'YYYY-MM'/'YYYY'(release_date regex適合)。"""
+    """NDL '2026.4'/'2026'/'[2026.5]'(推定=ブラケット付)→schema形式 'YYYY-MM'/'YYYY'。"""
     if not raw: return None
-    s = str(raw).strip()
+    s = re.sub(r"[\[\]()]", "", str(raw)).strip()  # ★ブラケット除去([2026.5]→2026.5)
     m = re.match(r"(\d{4})[.\-/年]\s*(\d{1,2})", s)
     if m: return f"{m.group(1)}-{int(m.group(2)):02d}"
     m = re.match(r"(\d{4})", s)
     return m.group(1) if m else None
+def year_of(raw):
+    """★日付から開始年を堅牢に抽出(ブラケット/推定日付対応)。 '[2026.5]'→2026。"""
+    m = re.search(r"(\d{4})", str(raw or ""))
+    return int(m.group(1)) if m else 2026
 def norm(s): return re.sub(r"[\s・･:：]", "", unicodedata.normalize("NFKC", str(s or ""))).lower()
 def demographic_of(imprint, pub):
     b = (imprint or "") + (pub or "")
@@ -119,7 +123,7 @@ for wslug, isbns in works.items():
     cre = first.get("creators", "")
     authors = [{"name": re.sub(r"\s*(著|原作|作画|漫画|∥.*|/.*)$", "", a).strip(), "role": "writer_artist"}
                for a in cre.split("/")[:3] if a.strip()] or [{"name": "(unknown)", "role": "writer_artist"}]
-    yr = int(re.sub(r"\D", "", str(first.get("date", "2026"))[:4]) or 2026)
+    yr = year_of(first.get("date", "2026"))
     genres = aigenre.get(wslug) or genres_fallback(title + " " + cap)
     # ★出版社: 型1=既存ページの社尊重 / 型3=NDL社→キー
     if is_t1 and t1_pub:
