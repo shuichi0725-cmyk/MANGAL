@@ -22,7 +22,7 @@ DB = ROOT / ".cache" / "db-v2.sqlite"
 OUT = ROOT / "data" / "seeds" / "release-date-supplement.jsonl"
 KEEP = ("standard", "bunkobon", "wideban", "kanzenban", "shinsoban", "aizoban")
 SRU = "https://ndlsearch.ndl.go.jp/api/sru"
-SLEEP = 0.2  # 礼儀レート(秒)
+SLEEP = 1.2  # ★楽天Books API と同じ叩き速度(1.2秒/req=~0.83req/秒)。NDL遮断回避(旧0.2=5req/秒で429誘発)。
 
 
 def norm_date(raw: str) -> str | None:
