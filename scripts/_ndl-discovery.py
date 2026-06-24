@@ -45,18 +45,29 @@ def parse(xml):
         isbn = re.sub(r"\D", "", ib.group(1))
         if len(isbn) != 13: continue
         t = re.search(r"<dcterms:title>([^<]+)", rec) or re.search(r"<dc:title>([^<]+)", rec)
-        pub = re.search(r"<dcterms:publisher>([^<]+)", rec) or re.search(r"<dc:publisher>([^<]+)", rec)
+        # ★kana: dc:title>rdf:Description>dcndl:transcription(題読み)
+        km = re.search(r"<dc:title>.*?<dcndl:transcription>([^<]+)", rec, re.S)
+        # ★出版社: dcterms:publisher>foaf:Agent>foaf:name
+        pm = re.search(r"<dcterms:publisher>.*?<foaf:name>([^<]+)", rec, re.S) or re.search(r"<dcterms:publisher>([^<]+)", rec)
+        # ★レーベル(コンビニ判定用): dcndl:seriesTitle>rdf:value
+        sm = re.search(r"<dcndl:seriesTitle>.*?<rdf:value>([^<]+)", rec, re.S)
+        vm = re.search(r"<dcndl:volume>.*?<rdf:value>([^<]+)", rec, re.S)
         d = re.search(r"<dcterms:date>([^<]+)", rec) or re.search(r"<dcterms:issued[^>]*>([^<]+)", rec)
-        cre = re.findall(r"<dcterms:creator>([^<]+)", rec) or re.findall(r"<dc:creator>([^<]+)", rec)
-        out.append({"isbn": isbn, "title": (t.group(1) if t else "")[:80],
-                    "publisher": pub.group(1) if pub else "", "date": d.group(1) if d else "",
-                    "creators": "/".join(c[:30] for c in cre[:5])})
+        # 著者(著者読みも拾う: dcterms:creator>foaf:name + transcription)
+        cre = re.findall(r"<dcterms:creator>.*?<foaf:name>([^<]+)", rec, re.S) or re.findall(r"<dcterms:creator>([^<]+)", rec) or re.findall(r"<dc:creator>([^<]+)", rec)
+        out.append({"isbn": isbn, "title": (t.group(1) if t else "").strip()[:80],
+                    "kana": re.sub(r"\s+", "", km.group(1)).strip() if km else "",
+                    "publisher": (pm.group(1).strip() if pm else ""),
+                    "series": (sm.group(1).strip() if sm else ""),
+                    "volume": (vm.group(1).strip() if vm else ""),
+                    "date": d.group(1).strip() if d else "",
+                    "creators": "/".join(c.strip()[:30] for c in cre[:5])})
     total = re.search(r"<numberOfRecords>(\d+)", xml)
     return out, int(total.group(1)) if total else 0
 
 import datetime
 fo = open(OUT, "a", encoding="utf-8")
-if not seen: fo.write("isbn13\tdate\tpublisher\ttitle\tcreators\n")
+if not seen: fo.write("isbn13\tdate\tpublisher\tseries\tvolume\ttitle\tkana\tcreators\n")
 stat = {"new": 0, "req": 0}
 
 def harvest_range(frm: datetime.date, until: datetime.date, depth: int = 0):
@@ -77,7 +88,7 @@ def harvest_range(frm: datetime.date, until: datetime.date, depth: int = 0):
         for r in recs:
             if r["isbn"] in have or r["isbn"] in seen: continue
             seen.add(r["isbn"]); stat["new"] += 1
-            fo.write(f"{r['isbn']}\t{r['date']}\t{r['publisher'][:20]}\t{r['title'][:40]}\t{r['creators'][:40]}\n")
+            fo.write(f"{r['isbn']}\t{r['date']}\t{r['publisher'][:20]}\t{r['series'][:24]}\t{r['volume']}\t{r['title'][:40]}\t{r['kana'][:40]}\t{r['creators'][:40]}\n")
         fo.flush(); got += len(recs); start += len(recs)
         if got >= total or len(recs) < WINDOW: break
         recs, total = parse(sru(cql, start)); stat["req"] += 1
