@@ -3,17 +3,19 @@ title: クリスタはじめての漫画制作入門
 title_kana: クリスタハジメテノマンガセイサクニュウモン
 title_romaji: kurisutahajimetenomangaseisakunyuumon
 year_started: 2026
-subtitle: null
+year_ended: null
+status: ongoing
 authors:
 - name: まりむぅ
   role: writer_artist
 publisher: (unknown)
 _publisher_raw: ソーテック社
 _imprint: ''
+demographic: other
 genres:
 - essay
 genres_provisional: true
-first_volume_date: '2026.3'
+first_volume_date: 2026-03
 synopsis: '「デジタルで漫画、やってみよう。」
 
   そう思ったその瞬間が、はじめどき。
@@ -25,12 +27,13 @@ synopsis: '「デジタルで漫画、やってみよう。」
   この本は、CLIP STUDIO PAINT（PRO/EX対応） を使って、
 
   基本的なコマ割の方法やペン入'
-_distill: 2026新刊 ISBN9784800713568
+_distill: 2026新刊 型3新規 ISBN9784800713568
 editions:
 - type: standard
   label: 通常版
   volumes:
   - number: 1
     isbn13: '9784800713568'
-    release_date: '2026.3'
+    release_date: 2026-03
     cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/3568/9784800713568_1_2.jpg
+    _new: true

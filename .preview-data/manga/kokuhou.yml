@@ -3,7 +3,8 @@ title: 国宝
 title_kana: コクホウ
 title_romaji: kokuhou
 year_started: 2026
-subtitle: null
+year_ended: null
+status: ongoing
 authors:
 - name: 吉田, 修一, 1968-
   role: writer_artist
@@ -12,19 +13,43 @@ authors:
 publisher: (unknown)
 _publisher_raw: 小学館
 _imprint: ビッグコミックス
+demographic: seinen
 genres:
 - drama
 - historical
 genres_provisional: true
-first_volume_date: '2026.5'
+first_volume_date: 2026-05
 synopsis: "袂を分かつ宿命か、共に舞う運命か。 \n\n 出奔して家に迷惑をかけた負い目からか、\n芸を磨くことに余念がない俊介。\n丹波屋を離れた喜久雄は踊れる舞台がなくなり、\n\
   下げたくもない頭を下げて舞台を探す毎日を送る。\n二人の覚悟と執念が\n歌舞伎界に新しい風を吹き込んでいく！ \n\n 【編集担"
-_distill: 2026新刊 ISBN9784098638857
+_distill: 2026新刊 型1新刊巻(既存4巻+新刊) ISBN9784098638857
 editions:
 - type: standard
   label: 通常版
+  publisher: 小学館
+  imprint: ビッグコミックス
   volumes:
+  - number: 1
+    asin: null
+    isbn13: '9784098630783'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/rakutenkobo-ebooks/cabinet/2653/2000016042653.jpg?_ex=300x300
+    release_date: '2024-09-30'
+  - number: 2
+    asin: null
+    isbn13: '9784098632213'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/2213/9784098632213_1_32.jpg?_ex=200x200
+    release_date: '2025-04-14'
+  - number: 3
+    asin: null
+    isbn13: '9784098634200'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/4200/9784098634200_1_24.jpg?_ex=200x200
+    release_date: '2025-06-16'
+  - number: 4
+    asin: null
+    isbn13: '9784098636457'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/6457/9784098636457_1_2.jpg?_ex=200x200
+    release_date: '2025-12-22'
   - number: 5
     isbn13: '9784098638857'
-    release_date: '2026.5'
+    release_date: 2026-05
     cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/8857/9784098638857_1_29.jpg
+    _new: true
