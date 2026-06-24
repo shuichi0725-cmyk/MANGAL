@@ -6,10 +6,12 @@ year_started: 1985
 year_ended: null
 status: ongoing
 authors:
-- name: みずのまい
-  role: writer_artist
 - name: ito
-  role: writer_artist
+  role: artist
+original_authors:
+- name: みずのまい
+  role: writer
+credits: []
 publisher: shueisha
 publishers:
 - shueisha

@@ -6,12 +6,14 @@ year_started: 2026
 year_ended: null
 status: ongoing
 authors:
-- name: 大菊小菊
-  role: writer_artist
 - name: 近衛悠
-  role: writer_artist
+  role: artist
+original_authors:
+- name: 大菊小菊
+  role: writer
+credits:
 - name: 泉乃せん
-  role: writer_artist
+  role: 構成
 publisher: kodansha
 publishers:
 - kodansha

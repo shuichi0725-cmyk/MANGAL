@@ -6,10 +6,14 @@ year_started: 2026
 year_ended: null
 status: ongoing
 authors:
-- name: 明石六郎作家
-  role: writer_artist
 - name: 斯道歩
-  role: writer_artist
+  role: artist
+original_authors:
+- name: 明石六郎
+  role: writer
+credits:
+- name: ごろー*
+  role: キャラクター原案
 publisher: kodansha
 publishers:
 - kodansha

@@ -53,21 +53,29 @@ def parse(xml):
         sm = re.search(r"<dcndl:seriesTitle>.*?<rdf:value>([^<]+)", rec, re.S)
         vm = re.search(r"<dcndl:volume>.*?<rdf:value>([^<]+)", rec, re.S)
         d = re.search(r"<dcterms:date>([^<]+)", rec) or re.search(r"<dcterms:issued[^>]*>([^<]+)", rec)
-        # 著者(著者読みも拾う: dcterms:creator>foaf:name + transcription)
+        # 著者: dcterms:creator>foaf:name(典拠ID付・役割なし)
         cre = re.findall(r"<dcterms:creator>.*?<foaf:name>([^<]+)", rec, re.S) or re.findall(r"<dcterms:creator>([^<]+)", rec) or re.findall(r"<dc:creator>([^<]+)", rec)
+        # ★役割: dc:creator = "名前 役割"(役割=著/原作/作画/画/漫画/編 等) → 'name:role/...'
+        roled = []
+        for c in re.findall(r"<dc:creator>([^<]+)</dc:creator>", rec)[:6]:
+            c = c.strip()
+            # ★役割は末尾の役職語(長い順に照合: キャラクターデザイン原案 > 劇画 > 画 等)
+            mm = re.search(r"[\s　]+(キャラクターデザイン原案|キャラクター原案|キャラクターデザイン|キャラクター原案|劇画|原作|作画|漫画|構成|脚本|監修|企画|原案|ストーリー|著|画|編|訳|案|作|劇)$", c)
+            roled.append(f"{c[:mm.start()].strip()}:{mm.group(1)}" if mm else f"{c}:")
         out.append({"isbn": isbn, "title": (t.group(1) if t else "").strip()[:80],
                     "kana": re.sub(r"\s+", "", km.group(1)).strip() if km else "",
                     "publisher": (pm.group(1).strip() if pm else ""),
                     "series": (sm.group(1).strip() if sm else ""),
                     "volume": (vm.group(1).strip() if vm else ""),
                     "date": d.group(1).strip() if d else "",
-                    "creators": "/".join(c.strip()[:30] for c in cre[:5])})
+                    "creators": "/".join(c.strip()[:30] for c in cre[:5]),
+                    "creators_roled": "/".join(roled)[:120]})
     total = re.search(r"<numberOfRecords>(\d+)", xml)
     return out, int(total.group(1)) if total else 0
 
 import datetime
 fo = open(OUT, "a", encoding="utf-8")
-if not seen: fo.write("isbn13\tdate\tpublisher\tseries\tvolume\ttitle\tkana\tcreators\n")
+if not seen: fo.write("isbn13\tdate\tpublisher\tseries\tvolume\ttitle\tkana\tcreators\tcreators_roled\n")
 stat = {"new": 0, "req": 0}
 
 def harvest_range(frm: datetime.date, until: datetime.date, depth: int = 0):
@@ -88,7 +96,7 @@ def harvest_range(frm: datetime.date, until: datetime.date, depth: int = 0):
         for r in recs:
             if r["isbn"] in have or r["isbn"] in seen: continue
             seen.add(r["isbn"]); stat["new"] += 1
-            fo.write(f"{r['isbn']}\t{r['date']}\t{r['publisher'][:20]}\t{r['series'][:24]}\t{r['volume']}\t{r['title'][:40]}\t{r['kana'][:40]}\t{r['creators'][:40]}\n")
+            fo.write(f"{r['isbn']}\t{r['date']}\t{r['publisher'][:20]}\t{r['series'][:24]}\t{r['volume']}\t{r['title'][:40]}\t{r['kana'][:40]}\t{r['creators'][:40]}\t{r['creators_roled']}\n")
         fo.flush(); got += len(recs); start += len(recs)
         if got >= total or len(recs) < WINDOW: break
         recs, total = parse(sru(cql, start)); stat["req"] += 1

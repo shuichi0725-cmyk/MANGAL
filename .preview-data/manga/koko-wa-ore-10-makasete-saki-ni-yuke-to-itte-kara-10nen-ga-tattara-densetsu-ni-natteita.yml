@@ -6,12 +6,14 @@ year_started: 2019
 year_ended: null
 status: ongoing
 authors:
-- name: えぞぎんぎつね
-  role: writer_artist
 - name: 阿倍野ちゃこ
-  role: writer_artist
-- name: 天王寺きつね
-  role: writer_artist
+  role: artist
+- name: 天王寺きつね ネーム構成
+  role: artist
+original_authors:
+- name: えぞぎんぎつね
+  role: writer
+credits: []
 publisher: square-enix
 publishers:
 - square-enix

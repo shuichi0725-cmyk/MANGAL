@@ -6,12 +6,14 @@ year_started: 2024
 year_ended: null
 status: ongoing
 authors:
-- name: 荻原数馬
-  role: writer_artist
 - name: 慕潔
-  role: writer_artist
-- name: 桜井竜矢
-  role: writer_artist
+  role: artist
+- name: 桜井竜矢 ネーム構成
+  role: artist
+original_authors:
+- name: 荻原数馬
+  role: writer
+credits: []
 publisher: square-enix
 publishers:
 - square-enix

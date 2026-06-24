@@ -6,12 +6,14 @@ year_started: 2026
 year_ended: null
 status: ongoing
 authors:
-- name: 白沢戌亥
-  role: writer_artist
 - name: 小祭たまご
-  role: writer_artist
+  role: artist
+original_authors:
+- name: 白沢戌亥
+  role: writer
+credits:
 - name: 神田タイキ
-  role: writer_artist
+  role: 構成
 publisher: square-enix
 publishers:
 - square-enix

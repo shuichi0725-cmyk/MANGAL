@@ -69,6 +69,23 @@ def clean_author(a):
     a = re.sub(r"\s*,?\s*\d{4}\s*-\s*\d{0,4}", "", str(a or ""))  # 生没年
     a = re.sub(r"\s*(著|原作|作画|漫画|編|画|∥.*|/.*)$", "", a)  # 役割語/区切り後
     return re.sub(r"\s*,\s*", "", a).strip()  # "姓, 名"→"姓名"
+def parse_authors(roled):
+    """creators_roled 'name:role/...'(役割=原作/著/漫画/作画/画/構成等)→ authors/original_authors/credits分離。"""
+    orig, arts, creds = [], [], []
+    for c in (roled or "").split("/"):
+        name, _, role = c.partition(":")
+        name = clean_author(name)
+        if not name: continue
+        if role == "原作": orig.append(name)
+        elif role in ("漫画", "作画", "画", "著", "劇画", ""): arts.append(name)
+        else: creds.append({"name": name, "role": role})  # キャラクターデザイン/原案/構成/脚本/監修等
+    if orig:  # ★原作あり=作画者はartist / 原作なし=単独writer_artist
+        authors = [{"name": n, "role": "artist"} for n in arts] or [{"name": "(unknown)", "role": "artist"}]
+        original_authors = [{"name": n, "role": "writer"} for n in orig]
+    else:
+        authors = [{"name": n, "role": "writer_artist"} for n in arts] or [{"name": "(unknown)", "role": "writer_artist"}]
+        original_authors = []
+    return authors, original_authors, creds
 # ★出版社: NDL社名(norm)→publisherキー(publishers.yml)
 PUBMAP = {}
 for k, v in yaml.safe_load(open(f"{ROOT}/data/publishers.yml", encoding="utf-8")).items():
@@ -136,8 +153,7 @@ for wslug, isbns in works.items():
         eds = [{"type": "standard", "label": "通常版", "volumes": new_vols}]
     cap = next((enr.get(i, {}).get("caption", "") for i in isbns if enr.get(i, {}).get("caption")), "")
     cre = first.get("creators", "")
-    authors = [{"name": clean_author(a), "role": "writer_artist"}
-               for a in cre.split("/")[:3] if clean_author(a)] or [{"name": "(unknown)", "role": "writer_artist"}]
+    authors, original_authors, credits = parse_authors(first.get("creators_roled", "") or "/".join(f"{a}:" for a in cre.split("/")))
     yr = t1_year or year_of(first.get("date", "2026"))
     genres = aigenre.get(wslug) or genres_fallback(title + " " + cap)
     # ★出版社: 型1=既存ページの社尊重 / 型3=NDL社→キー
@@ -149,7 +165,8 @@ for wslug, isbns in works.items():
         if not e.get("publisher") and p_key != "(unknown)": e["publisher"] = p_key
     doc = {"slug": slug, "title": title, "title_kana": kana, "title_romaji": kana_slug(kana).replace("-", " ") or slug,
            "year_started": yr, "year_ended": None, "status": "ongoing",
-           "authors": authors, "publisher": p_key, "publishers": p_list, "_publisher_raw": first.get("publisher", ""), "_imprint": series,
+           "authors": authors, "original_authors": original_authors, "credits": credits,
+           "publisher": p_key, "publishers": p_list, "_publisher_raw": first.get("publisher", ""), "_imprint": series,
            "demographic": demographic_of(series, first.get("publisher", "")),
            "genres": [g for g in genres if g][:4] or ["drama"], "genres_provisional": True,
            "first_volume_date": norm_date(first.get("date", "")), "synopsis": cap[:140],

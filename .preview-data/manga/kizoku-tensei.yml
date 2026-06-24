@@ -6,12 +6,14 @@ year_started: 2020
 year_ended: null
 status: ongoing
 authors:
-- name: 三木なずな
-  role: writer_artist
 - name: 華嶋ひすい
-  role: writer_artist
+  role: artist
+original_authors:
+- name: 三木なずな
+  role: writer
+credits:
 - name: 栗元健太郎
-  role: writer_artist
+  role: 構成
 publisher: square-enix
 publishers:
 - square-enix
