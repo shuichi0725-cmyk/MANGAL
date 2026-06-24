@@ -31,6 +31,14 @@ export default function HomeClient({ data }: Props) {
   const [state, setState] = useState(emptyFilterState());
   const [open, setOpen] = useState(false);
   const listTopRef = useRef<HTMLDivElement>(null);
+  // ★テスト環境限定機能(画像なしフィルタ / 情報コピー)。 本番(workers.dev)では非表示。
+  const [noCover, setNoCover] = useState(false);
+  const [copied, setCopied] = useState(false);
+  const [isPreview, setIsPreview] = useState(false);
+  useEffect(() => {
+    const h = window.location.hostname;
+    setIsPreview(h.includes("preview") || h === "localhost" || h === "127.0.0.1");
+  }, []);
 
   // フィルタ系 URL params(?page を除く)の署名。 ページ送りでフィルタ effect が
   // 再発火して手動フィルタを消さないよう、 page だけの変化では発火させない。
@@ -80,7 +88,38 @@ export default function HomeClient({ data }: Props) {
   const showArt = state.artBooks;
   const filteredManga = useMemo(() => applyFilters(manga, state, matchedSlugs), [manga, state, matchedSlugs]);
   const filteredArt = useMemo(() => applyArtBookFilters(data.artBooks, state), [data.artBooks, state]);
-  const filtered: (MangaListItem | ArtBook)[] = showArt ? filteredArt : filteredManga;
+  // ★画像なしフィルタ(テスト専用): cover=null だけに絞る。
+  const filtered: (MangaListItem | ArtBook)[] = useMemo(() => {
+    const base = showArt ? filteredArt : filteredManga;
+    return noCover && !showArt ? (base as MangaListItem[]).filter((m) => !m.cover) : base;
+  }, [showArt, filteredArt, filteredManga, noCover]);
+  const noCoverCount = useMemo(
+    () => (showArt ? 0 : filteredManga.filter((m) => !m.cover).length),
+    [showArt, filteredManga],
+  );
+  // ★表示中(フィルタ後)の情報をクリップボードへ(テスト専用・私への共有用)。
+  const copyFiltered = async () => {
+    const items = filtered as MangaListItem[];
+    const header = "slug\ttitle\tauthors\tpublisher\tvols\tcover";
+    const lines = items.map((m) =>
+      [
+        m.slug,
+        m.title,
+        (m.authors || []).map((a) => a.name).join(",").slice(0, 50),
+        m.publisher || "",
+        m.total_volumes ?? "",
+        m.cover ? "有" : "無",
+      ].join("\t"),
+    );
+    const text = `# ${items.length}件${noCover ? " (画像なしのみ)" : ""}\n${header}\n${lines.join("\n")}`;
+    try {
+      await navigator.clipboard.writeText(text);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch {
+      alert("コピー失敗(クリップボード権限)");
+    }
+  };
 
   // ページは URL(?page)から導出 = リロード/共有/戻るで復元。 フィルタURL変更
   // (CategoryHub 等)は ?page を含まないので自然と1ページ目に戻る。
@@ -128,6 +167,30 @@ export default function HomeClient({ data }: Props) {
       </section>
 
       <CategoryHub data={liveData} />
+
+      {/* ★テスト環境限定ツールバー(本番=workers.dev では非表示)。
+          ①画像なし=cover無だけ表示 ②コピー=表示中の情報をクリップボードへ(私への共有用) */}
+      {isPreview && !showArt && (
+        <div className="mb-4 flex flex-wrap items-center gap-2 rounded-card border border-dashed border-[var(--color-accent)]/50 bg-[var(--color-accent)]/5 p-2 text-sm">
+          <span className="text-xs font-semibold text-[var(--color-accent)]">🧪 テスト専用</span>
+          <button
+            type="button"
+            onClick={() => setNoCover((v) => !v)}
+            className={`tactile-chip rounded-card px-3 py-1.5 font-medium transition active:scale-95 ${
+              noCover ? "bg-[var(--color-accent)] text-white" : ""
+            }`}
+          >
+            画像なし{noCover ? " ✓" : ""}（{noCoverCount}）
+          </button>
+          <button
+            type="button"
+            onClick={copyFiltered}
+            className="tactile-chip rounded-card px-3 py-1.5 font-medium transition active:scale-95"
+          >
+            {copied ? "✓ コピーした" : `コピー（${filtered.length}）`}
+          </button>
+        </div>
+      )}
 
       {/* モバイル: フィルター起動(全画面オーバーレイを開く)。 PC版は右サイドバー常時表示 */}
       <button
