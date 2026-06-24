@@ -1231,6 +1231,45 @@ def _get_publisher_prefixes_legacy(con: sqlite3.Connection, series_id: int) -> s
     return prefixes
 
 
+_SID_AUTH_IDX: dict | None = None
+_SID_VOLNUM_IDX: dict | None = None
+
+
+def _build_author_vol_index(con: sqlite3.Connection) -> None:
+    """homonym guard用: sid→正規化著者名集合 / sid→巻番号集合 を1回build。"""
+    global _SID_AUTH_IDX, _SID_VOLNUM_IDX
+    if _SID_AUTH_IDX is not None:
+        return
+    _SID_AUTH_IDX = {}
+    for sid, name in con.execute(
+        "SELECT sa.series_id, m.name FROM series_authors sa JOIN mangaka m ON m.id=sa.mangaka_id"
+    ):
+        _SID_AUTH_IDX.setdefault(sid, set()).add(re.sub(r"[\s　・･,，]", "", name or ""))
+    _SID_VOLNUM_IDX = {}
+    for sid, num in con.execute(
+        "SELECT e.series_id, v.number FROM volumes v JOIN editions e ON e.id=v.edition_id WHERE v.number IS NOT NULL"
+    ):
+        _SID_VOLNUM_IDX.setdefault(sid, set()).add(num)
+
+
+def _is_homonym(main_id: int, cand_id: int) -> bool:
+    """別作homonym判定: 共通著者が無く かつ 巻番号が重複(=各々独立した完結作)なら True。
+    ★FULL SWING型(同名別qid)は共通著者ありで False=merge維持。 原作/作画(相補巻)も重複無しで
+    False=merge維持。 JIPANG(速水翼)≠ジパング(かわぐち)等(別著者+巻重複)のみ True=分離。"""
+    au = _SID_AUTH_IDX or {}
+    vn = _SID_VOLNUM_IDX or {}
+    ma, ca = au.get(main_id, set()), au.get(cand_id, set())
+    if not ma or not ca or (ma & ca):
+        return False  # 著者不明 or 共通著者あり → homonym扱いしない(安全側=merge)
+    mv, cv = vn.get(main_id, set()), vn.get(cand_id, set())
+    if not mv or not cv:
+        return False
+    # ∩/min(=小さい方の何割が重複)。 JIPANG[1,2,3]⊂ジパング[1..46]=3/3=1.0=別作。
+    # 巻数差で薄まるJaccardでなくmin基準(片方が完全に他方の巻番号域に被る=独立した別作)。
+    overlap = len(mv & cv) / min(len(mv), len(cv))
+    return overlap >= 0.5  # 別著者 かつ 小さい方の半数以上が巻番号重複 = 別作
+
+
 def find_related_series_ids(con: sqlite3.Connection, main: dict) -> list[int]:
     """main series と 関連 series id を 返す。
 
@@ -1343,6 +1382,12 @@ def find_related_series_ids(con: sqlite3.Connection, main: dict) -> list[int]:
             if r[1] not in _DROP_SERIES_KEYS:
                 keep.add(r[0])
         ids = keep
+    # ★homonym guard(実行時): main と「共通著者なし＋巻番号重複」の候補をclusterから除外。
+    #   JIPANG(速水翼)≠ジパング(かわぐち)等の読み/題衝突mergeを構造的に阻止。
+    #   FULL SWING型(同名別qid)=共通著者ありでmerge維持(regression無し)。原作/作画=相補巻でmerge維持。
+    if len(ids) > 1:
+        _build_author_vol_index(con)
+        ids = {i for i in ids if i == main["id"] or not _is_homonym(main["id"], i)}
     return list(ids)
 
 
