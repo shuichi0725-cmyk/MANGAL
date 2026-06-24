@@ -43,6 +43,8 @@ disc = {r["isbn13"]: r for r in csv.DictReader(open(f"{ROOT}/data/seeds/ndl-disc
 ledger = {r["isbn"]: r for r in csv.DictReader(open(f"{ROOT}/data/seeds/distill-ledger-2026.tsv", encoding="utf-8"), delimiter="\t")}
 aigenre = json.load(open(f"{ROOT}/data/seeds/distill-genre-ai-2026.json", encoding="utf-8"))
 manifest = [r for r in csv.DictReader(open(f"{ROOT}/.cache/madb-distill/ndl-manifest.tsv", encoding="utf-8"), delimiter="\t") if r["scope"] == "in"]
+# ★成年除外(distill-adult-2026.tsv=成年publisher/title語で再判定した111冊。 publisher欠落時のscope分類漏れを補正)
+adult_isbns = {r["isbn13"] for r in csv.DictReader(open(f"{ROOT}/data/seeds/distill-adult-2026.tsv", encoding="utf-8"), delimiter="\t")}
 # 本番 title(norm)→slug(型1の既存ページ統合用)
 prod = {}
 for it in json.load(open(f"{ROOT}/data/manga-list-index.json", encoding="utf-8")):
@@ -71,9 +73,10 @@ for r in manifest:
     works[kana_slug(kana) or f"shinkan-{ib}"].append(ib)
 
 for f in glob.glob(f"{PREV}/*.yml"): os.remove(f)
-n = skip_k = t1_merged = 0
+n = skip_k = skip_a = t1_merged = 0
 for wslug, isbns in works.items():
     isbns.sort(key=lambda i: volnum(disc.get(i, {}).get("title", "")))
+    if any(i in adult_isbns for i in isbns): skip_a += 1; continue  # ★成年=preview非掲載(adult stream/geoで別扱い)
     first = disc.get(isbns[0], {}); lt0 = ledger.get(isbns[0], {})
     series = first.get("series", "")
     if KONBINI.search(series): skip_k += 1; continue
@@ -130,5 +133,5 @@ for wslug, isbns in works.items():
            "editions": eds}
     yaml.safe_dump(doc, open(f"{PREV}/{slug}.yml", "w", encoding="utf-8"), allow_unicode=True, sort_keys=False)
     n += 1
-print(f"完全版テストページ: {n}作品 (型1既存統合 {t1_merged} / コンビニ非掲載 {skip_k})")
+print(f"完全版テストページ: {n}作品 (型1既存統合 {t1_merged} / コンビニ非掲載 {skip_k} / 成年非掲載 {skip_a})")
 print("status/demographic追加(loadData通過)・型1=既存全巻+新刊・genre=AI/synopsis=楽天")
