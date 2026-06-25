@@ -71,6 +71,11 @@ _ff = f"{ROOT}/data/seeds/distill-fill-2026.jsonl"
 if _os.path.exists(_ff):
     for _l in open(_ff, encoding="utf-8"):
         _d = json.loads(_l); FILL[_d["slug"]] = _d
+# ★統合override(distill-integrate-override-2026.tsv=題trunc/著者役職で照合漏れた統合ミスを preview_slug→本番slug で繋ぐ。 続編は除外済)
+INTEGRATE_OVR = {}
+_iof = f"{ROOT}/data/seeds/distill-integrate-override-2026.tsv"
+if _os.path.exists(_iof):
+    INTEGRATE_OVR = {r["preview_slug"]: r["prod_slug"] for r in csv.DictReader(open(_iof, encoding="utf-8"), delimiter="\t")}
 ORG_AUTHOR = re.compile(r"協議会|委員会|PTA|連盟|教育委員|学校長会|振興会|商工会")
 # 本番 title(norm)→slug + title_kana(norm)→slug(型1統合の名寄せ。 ★kana照合でローマ字/カナ題不一致を吸収)
 prod = {}; prod_kana = {}
@@ -154,7 +159,7 @@ for wslug, isbns in works.items():
     max_newvol = max((v["number"] for v in new_vols), default=1)
     if is_t1 or max_newvol >= 2:
         m = re.search(r"sid\d+:(.+?)\(", lt0.get("integrate_to", "")); itt = m.group(1) if m else ""
-        psl = prod.get(norm(itt)) or prod.get(norm(title)) or prod_kana.get(norm(kana))  # ★kana照合追加
+        psl = INTEGRATE_OVR.get(wslug) or prod.get(norm(itt)) or prod.get(norm(title)) or prod_kana.get(norm(kana))  # ★override+kana照合
         pf = f"{ROOT}/data/manga.v2/{psl}.yml" if psl else None
         if pf and os.path.exists(pf):
             pd = yaml.safe_load(open(pf, encoding="utf-8"))
