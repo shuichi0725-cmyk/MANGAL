@@ -6,7 +6,7 @@ year_started: 1976
 year_ended: null
 status: ongoing
 authors:
-- name: さいとう・たかを
+- name: さいとうたかを
   role: writer_artist
 original_authors: []
 credits: []
@@ -14,15 +14,22 @@ publisher: leed
 publishers:
 - leed
 - shogakukan
-_publisher_raw: 小学館
-_imprint: My first big. &quot;Golg
+_publisher_raw: リイド社
+_imprint: SPコミックス
 demographic: other
 genres:
+- action
+- suspense
 - drama
 genres_provisional: true
-first_volume_date: 2026-06
-synopsis: ''
-_distill: 2026新刊 型1新刊巻(既存259巻+新刊) ISBN9784098053193
+first_volume_date: 2026-04
+synopsis: 'ゴルゴの虜！？　危険な想いの行方は？
+
+
+  米海軍に出向している最新型無人攻撃機の女性オペレーターが、ふとしたことでゴルゴと
+
+  接触、心を奪われてしまう。一夜を過ごし消えたゴルゴと再会を願う彼女はあらゆる手段を講じて誘い出そうとするのだが……表題作 『銀翼の花嫁』 及び『モルドバの咆哮'
+_distill: 2026新刊 型1新刊巻(既存259巻+新刊) ISBN9784845870905
 editions:
 - type: bunkobon
   label: 文庫版
@@ -1329,3 +1336,8 @@ editions:
     isbn13: '9784845870325'
     cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0325/9784845870325_1_2.jpg?_ex=200x200
     release_date: '2025-12-02'
+  - number: 220
+    isbn13: '9784845870905'
+    release_date: 2026-04
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0905/9784845870905_1_2.jpg
+    _new: true

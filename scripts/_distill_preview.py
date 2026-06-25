@@ -65,20 +65,21 @@ for it in json.load(open(f"{ROOT}/data/manga-list-index.json", encoding="utf-8")
     nk = norm(it.get("title_kana", ""))
     if nk and nk not in prod_kana: prod_kana[nk] = it["slug"]
 def clean_author(a):
-    """NDL '姓, 名, 1936-2021' / 'バロン吉元, 1940-' → '姓名'(カンマ連結・生没年除去)。"""
+    """NDL '姓, 名, 1936-2021' / '細川 智栄子' → '姓名'(空白・区切り・生没年除去)。"""
     a = re.sub(r"\s*,?\s*\d{4}\s*-\s*\d{0,4}", "", str(a or ""))  # 生没年
-    a = re.sub(r"\s*(著|原作|作画|漫画|編|画|∥.*|/.*)$", "", a)  # 役割語/区切り後
-    return re.sub(r"\s*,\s*", "", a).strip()  # "姓, 名"→"姓名"
+    a = re.sub(r"\s*(著|原作|作画|漫画|編|画|劇)\s*$", "", a)  # 末尾役割語
+    return re.sub(r"[\s　,、／/∥]", "", a).strip()  # 空白・カンマ・区切り 全除去
 def parse_authors(roled):
-    """creators_roled 'name:role/...'(役割=原作/著/漫画/作画/画/構成等)→ authors/original_authors/credits分離。"""
+    """creators_roled 'name:role/...'→ authors/original_authors/credits分離。★∥／で共著者分割。"""
     orig, arts, creds = [], [], []
     for c in (roled or "").split("/"):
-        name, _, role = c.partition(":")
-        name = clean_author(name)
-        if not name: continue
-        if role == "原作": orig.append(name)
-        elif role in ("漫画", "作画", "画", "著", "劇画", ""): arts.append(name)
-        else: creds.append({"name": name, "role": role})  # キャラクターデザイン/原案/構成/脚本/監修等
+        name_part, _, role = c.partition(":")
+        for nm in re.split(r"[∥／]", name_part):  # ★共著者(細川智栄子∥芙〜みん)を分割
+            name = clean_author(nm)
+            if not name: continue
+            if role == "原作": orig.append(name)
+            elif role in ("漫画", "作画", "画", "著", "劇画", ""): arts.append(name)
+            else: creds.append({"name": name, "role": role})  # キャラクターデザイン/原案/構成等
     if orig:  # ★原作あり=作画者はartist / 原作なし=単独writer_artist
         authors = [{"name": n, "role": "artist"} for n in arts] or [{"name": "(unknown)", "role": "artist"}]
         original_authors = [{"name": n, "role": "writer"} for n in orig]
@@ -109,7 +110,7 @@ for r in manifest:
     works[kana_slug(kana) or f"shinkan-{ib}"].append(ib)
 
 for f in glob.glob(f"{PREV}/*.yml"): os.remove(f)
-n = skip_k = skip_a = skip_d = t1_merged = 0
+n = skip_k = skip_a = skip_d = skip_sp = t1_merged = 0
 for wslug, isbns in works.items():
     isbns.sort(key=lambda i: vol_of(disc.get(i, {})))
     if any(i in adult_isbns for i in isbns): skip_a += 1; continue  # ★成年=preview非掲載(adult stream/geoで別扱い)
@@ -141,6 +142,9 @@ for wslug, isbns in works.items():
             main = max(eds, key=lambda e: len(e.get("volumes", [])), default=None)
             if main:
                 have = {v.get("number") for v in main["volumes"]}
+                added = sum(1 for nv in new_vols if nv["number"] not in have)
+                if added == 0:  # ★新巻ゼロ=reprint/重複が本編に誤マッチ(ドカベン文庫型)→非掲載
+                    skip_sp += 1; continue
                 for nv in new_vols:
                     if nv["number"] not in have: main["volumes"].append(nv)
                 main["volumes"].sort(key=lambda v: v.get("number") or 0)
@@ -153,7 +157,7 @@ for wslug, isbns in works.items():
         eds = [{"type": "standard", "label": "通常版", "volumes": new_vols}]
     cap = next((enr.get(i, {}).get("caption", "") for i in isbns if enr.get(i, {}).get("caption")), "")
     cre = first.get("creators", "")
-    authors, original_authors, credits = parse_authors(first.get("creators_roled", "") or "/".join(f"{a}:" for a in cre.split("/")))
+    authors, original_authors, credits = parse_authors(first.get("creators_roled", "") or "/".join(f"{a}:" for a in re.split(r"[/／]", cre)))
     yr = t1_year or year_of(first.get("date", "2026"))
     genres = aigenre.get(wslug) or genres_fallback(title + " " + cap)
     # ★出版社: 型1=既存ページの社尊重 / 型3=NDL社→キー
@@ -174,5 +178,5 @@ for wslug, isbns in works.items():
            "editions": eds}
     yaml.safe_dump(doc, open(f"{PREV}/{slug}.yml", "w", encoding="utf-8"), allow_unicode=True, sort_keys=False)
     n += 1
-print(f"完全版テストページ: {n}作品 (型1既存統合 {t1_merged} / コンビニ非掲載 {skip_k} / 成年非掲載 {skip_a} / 非商業ドロップ {skip_d})")
+print(f"完全版テストページ: {n}作品 (型1既存統合 {t1_merged} / コンビニ非掲載 {skip_k} / 成年非掲載 {skip_a} / 非商業 {skip_d} / reprint誤マッチ {skip_sp})")
 print("status/demographic追加(loadData通過)・型1=既存全巻+新刊・genre=AI/synopsis=楽天")
