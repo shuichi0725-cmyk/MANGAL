@@ -47,8 +47,9 @@ def demographic_of(imprint, pub):
     return "other"
 KONBINI = re.compile(r"My First BIG|コンビニ|廉価")
 # ★非漫画/アンソロ誌/雑誌mook(著者なし18件調査で確定): title/series で検出
-NONMANGA_TITLE = re.compile(r"アンソロ|アニメコミック|読者投稿|公式ファンブック|フィルムコミック")
-NONMANGA_SERIES = re.compile(r"ムック|[Mm][Oo][Oo][Kk]|ぐる漫|読者投稿|MAY'S")
+NONMANGA_TITLE = re.compile(r"アンソロ|アニメコミック|読者投稿|公式ファンブック|フィルムコミック|セレクション")
+# ★SJR=集英社ジャンプリミックス(コンビニ廉価) / リミックス/REMIX も同種
+NONMANGA_SERIES = re.compile(r"ムック|[Mm][Oo][Oo][Kk]|ぐる漫|読者投稿|MAY'S|SJR|リミックス|[Rr][Ee][Mm][Ii][Xx]")
 
 enr = {json.loads(l)["isbn"]: json.loads(l) for l in open(f"{ROOT}/data/seeds/distill-enrich-2026.jsonl", encoding="utf-8")}
 disc = {r["isbn13"]: r for r in csv.DictReader(open(f"{ROOT}/data/seeds/ndl-discovery-2026.tsv", encoding="utf-8"), delimiter="\t")}
