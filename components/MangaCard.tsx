@@ -61,21 +61,20 @@ export default function MangaCard({ manga, publishers, genres, demographics }: P
         )}
       </div>
       <div className="flex-1 min-w-0">
-        <div className="flex items-start gap-2">
-          <div className="flex-1 min-w-0">
-            <MarqueeTitle text={manga.title} className="font-bold text-base leading-tight" />
-          </div>
-          <Badge tone={STATUS_TONE[manga.status] ?? "neutral"} className="shrink-0 mt-0.5">
-            {STATUS_LABEL[manga.status] ?? manga.status}
-          </Badge>
-        </div>
+        {/* ★タイトルは全幅でmarquee。 連載中バッジは著者行へ移し、 タイトル/キャッチの右端を揃える */}
+        <MarqueeTitle text={manga.title} className="font-bold text-base leading-tight" />
         {manga.subtitle && (
           <p className="text-xs text-ink/55 mt-0.5 line-clamp-1">{manga.subtitle}</p>
         )}
-        <p className="text-xs text-ink/65 mt-1 line-clamp-1">
-          {authorLine}
-          <span className="text-ink/45">　{yearStatusLabel(manga)}</span>
-        </p>
+        <div className="flex items-center gap-2 mt-1">
+          <p className="flex-1 min-w-0 text-xs text-ink/65 line-clamp-1">
+            {authorLine}
+            <span className="text-ink/45">　{yearStatusLabel(manga)}</span>
+          </p>
+          <Badge tone={STATUS_TONE[manga.status] ?? "neutral"} className="shrink-0">
+            {STATUS_LABEL[manga.status] ?? manga.status}
+          </Badge>
+        </div>
         {manga.catch ? (
           <p className="catch-clamp text-xs text-ink/75 font-medium leading-tight mt-1 line-clamp-4 border-l-2 border-[var(--color-accent)] bg-[color-mix(in_srgb,var(--color-accent)_8%,transparent)] rounded-r-md px-2 py-0.5">
             {manga.catch}
