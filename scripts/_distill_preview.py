@@ -84,6 +84,10 @@ if _os.path.exists(_iof):
 CATCH_GEN = {}
 _cf = f"{ROOT}/data/seeds/distill-catch-2026.json"
 if _os.path.exists(_cf): CATCH_GEN = json.load(open(_cf, encoding="utf-8"))
+# ★synopsis: 元detail無(新作)のAI要約。 楽天caption丸写し撲滅(著作権)。 元detail有(型1)はpd.synopsis尊重
+SYNOPSIS_GEN = {}
+_sf = f"{ROOT}/data/seeds/distill-synopsis-2026.json"
+if _os.path.exists(_sf): SYNOPSIS_GEN = json.load(open(_sf, encoding="utf-8"))
 ORG_AUTHOR = re.compile(r"協議会|委員会|PTA|連盟|教育委員|学校長会|振興会|商工会")
 # 本番 title(norm)→slug + title_kana(norm)→slug(型1統合の名寄せ。 ★kana照合でローマ字/カナ題不一致を吸収)
 prod = {}; prod_kana = {}
@@ -163,7 +167,7 @@ for wslug, isbns in works.items():
         cov = ei.get("cover") if (ei.get("cover") and "noimage" not in (ei.get("cover") or "")) else None
         new_vols.append({"number": vol_of(di), "isbn13": ib, "release_date": norm_date(di.get("date", "")), "cover_url": cov, "_new": True})
     # ★型1: 既存本番ページの全巻を取り込む(1巻問題解消)
-    slug = wslug; eds = None; existing = 0; t1_pub = None; t1_pubs = []; t1_year = None; t1_catch = None
+    slug = wslug; eds = None; existing = 0; t1_pub = None; t1_pubs = []; t1_year = None; t1_catch = None; t1_synopsis = None
     # ★巻番≥2 = 既刊がある継続巻 → 型1でなくても既存ページへ統合を試みる(solo_nonfirst解消)
     max_newvol = max((v["number"] for v in new_vols), default=1)
     if is_t1 or max_newvol >= 2:
@@ -187,6 +191,7 @@ for wslug, isbns in works.items():
             t1_pub = pd.get("publisher"); t1_pubs = pd.get("publishers", []) or []
             t1_year = pd.get("year_started")  # ★既存ページの開始年を継承(出版年矛盾の解消)
             t1_catch = pd.get("catch")  # ★既存catch(ゴルゴ13等)を尊重=重複生成しない
+            t1_synopsis = pd.get("synopsis")  # ★元detail有=本番の正規synopsis(AI要約済)を尊重=丸写ししない
             if pd.get("title"): title = pd["title"]
             if pd.get("title_kana"): kana = pd["title_kana"]
     if eds is None:
@@ -230,7 +235,8 @@ for wslug, isbns in works.items():
            "publisher": p_key, "publishers": p_list, "_publisher_raw": first.get("publisher", ""), "_imprint": series,
            "demographic": demographic_of(series, first.get("publisher", "")),
            "genres": [g for g in genres if g][:4] or ["drama"], "genres_provisional": True,
-           "first_volume_date": norm_date(first.get("date", "")), "synopsis": cap[:140],
+           "first_volume_date": norm_date(first.get("date", "")),
+           "synopsis": (t1_synopsis or SYNOPSIS_GEN.get(slug) or None),  # ★型1=本番正規 / 新作=AI要約 / verbatim廃止
            "catch": (t1_catch or CATCH_GEN.get(slug) or None),
            "_distill": f"2026新刊 {'型1新刊巻(既存'+str(existing)+'巻+新刊)' if is_t1 and existing else '型3新規'} ISBN{isbns[0]}",
            "editions": eds}
