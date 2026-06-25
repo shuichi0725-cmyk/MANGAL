@@ -1,11 +1,12 @@
 """テストページ生成(完全版): 2026新刊を完成ページ化。NDL kana→正式slug / NDL出版社 /
 楽天caption→synopsis / AI genre / ★status・demographic(loadData必須) / ★型1は既存本番ページ統合(全巻表示)。
 種2/本番不変。usage: python _distill_preview.py"""
-import csv, json, os, re, glob, unicodedata, yaml, collections
+import csv, json, os, re, glob, unicodedata, yaml, collections, datetime
 import pykakasi
 ROOT = "C:/Users/shuic/code/MANGAL"
 PREV = f"{ROOT}/.preview-data/manga"
 kks = pykakasi.kakasi()
+TODAY = datetime.date.today().strftime("%Y-%m")  # ★未来発売(予約)判定の基準月
 
 def slugify(s):
     s = unicodedata.normalize("NFKD", s or "")
@@ -132,6 +133,7 @@ for r in manifest:
 
 for f in glob.glob(f"{PREV}/*.yml"): os.remove(f)
 n = skip_k = skip_a = skip_d = skip_sp = t1_merged = 0
+recheck = []  # ★書影チェック待ち(未来発売×書影無)= 月次で書影再取得する管理リスト
 for wslug, isbns in works.items():
     isbns.sort(key=lambda i: vol_of(disc.get(i, {})))
     if any(i in adult_isbns for i in isbns): skip_a += 1; continue  # ★成年=preview非掲載(adult stream/geoで別扱い)
@@ -216,7 +218,19 @@ for wslug, isbns in works.items():
            "first_volume_date": norm_date(first.get("date", "")), "synopsis": cap[:140],
            "_distill": f"2026新刊 {'型1新刊巻(既存'+str(existing)+'巻+新刊)' if is_t1 and existing else '型3新規'} ISBN{isbns[0]}",
            "editions": eds}
+    # ★書影チェック待ち: 未来発売(release_date>今月)= 予約で書影が後日確定 → 月次で再取得。 書影無は_cover_pending(近刊表示用)
+    for e in doc["editions"]:
+        for v in e["volumes"]:
+            rd = v.get("release_date")
+            if rd and str(rd)[:7] > TODAY:
+                if not v.get("cover_url"): v["_cover_pending"] = True
+                recheck.append((v.get("isbn13") or "", str(rd), title[:40], v.get("number"), "有" if v.get("cover_url") else "無"))
     yaml.safe_dump(doc, open(f"{PREV}/{slug}.yml", "w", encoding="utf-8"), allow_unicode=True, sort_keys=False)
     n += 1
+with open(f"{ROOT}/data/seeds/cover-recheck-2026.tsv", "w", encoding="utf-8", newline="") as _rf:
+    _w = csv.writer(_rf, delimiter="\t"); _w.writerow(["isbn13", "release_date", "title", "number", "cover"])
+    for r in sorted(set(recheck)): _w.writerow(r)
+_pend = sum(1 for r in set(recheck) if r[4] == "無")
 print(f"完全版テストページ: {n}作品 (型1既存統合 {t1_merged} / コンビニ非掲載 {skip_k} / 成年非掲載 {skip_a} / 非商業 {skip_d} / reprint誤マッチ {skip_sp})")
+print(f"★書影チェック待ち(未来発売): {len(set(recheck))}件(うち書影無={_pend}) → data/seeds/cover-recheck-2026.tsv (月次で書影再取得)")
 print("status/demographic追加(loadData通過)・型1=既存全巻+新刊・genre=AI/synopsis=楽天")
