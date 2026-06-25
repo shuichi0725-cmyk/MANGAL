@@ -62,7 +62,7 @@ def parse(xml):
             # ★役割は末尾の役職語(長い順に照合: キャラクターデザイン原案 > 劇画 > 画 等)
             mm = re.search(r"[\s　]+(キャラクターデザイン原案|キャラクター原案|キャラクターデザイン|キャラクター原案|劇画|原作|作画|漫画|構成|脚本|監修|企画|原案|ストーリー|著|画|編|訳|案|作|劇)$", c)
             roled.append(f"{c[:mm.start()].strip()}:{mm.group(1)}" if mm else f"{c}:")
-        out.append({"isbn": isbn, "title": (t.group(1) if t else "").strip()[:80],
+        out.append({"isbn": isbn, "title": (t.group(1) if t else "").strip()[:120],
                     "kana": re.sub(r"\s+", "", km.group(1)).strip() if km else "",
                     "publisher": (pm.group(1).strip() if pm else ""),
                     "series": (sm.group(1).strip() if sm else ""),
@@ -96,7 +96,7 @@ def harvest_range(frm: datetime.date, until: datetime.date, depth: int = 0):
         for r in recs:
             if r["isbn"] in have or r["isbn"] in seen: continue
             seen.add(r["isbn"]); stat["new"] += 1
-            fo.write(f"{r['isbn']}\t{r['date']}\t{r['publisher'][:20]}\t{r['series'][:24]}\t{r['volume']}\t{r['title'][:40]}\t{r['kana'][:40]}\t{r['creators'][:40]}\t{r['creators_roled']}\n")
+            fo.write(f"{r['isbn']}\t{r['date']}\t{r['publisher'][:20]}\t{r['series'][:24]}\t{r['volume']}\t{r['title'][:120]}\t{r['kana'][:40]}\t{r['creators'][:40]}\t{r['creators_roled']}\n")
         fo.flush(); got += len(recs); start += len(recs)
         if got >= total or len(recs) < WINDOW: break
         recs, total = parse(sru(cql, start)); stat["req"] += 1
