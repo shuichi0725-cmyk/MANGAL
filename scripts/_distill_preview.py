@@ -46,6 +46,9 @@ def demographic_of(imprint, pub):
     if re.search(r"女性|レディ|ハーレクイン|フラワー|プチ|ハーモニィ|デザート|Kiss", b): return "josei"
     return "other"
 KONBINI = re.compile(r"My First BIG|コンビニ|廉価")
+# ★非漫画/アンソロ誌/雑誌mook(著者なし18件調査で確定): title/series で検出
+NONMANGA_TITLE = re.compile(r"アンソロ|アニメコミック|読者投稿|公式ファンブック|フィルムコミック")
+NONMANGA_SERIES = re.compile(r"ムック|[Mm][Oo][Oo][Kk]|ぐる漫|読者投稿|MAY'S")
 
 enr = {json.loads(l)["isbn"]: json.loads(l) for l in open(f"{ROOT}/data/seeds/distill-enrich-2026.jsonl", encoding="utf-8")}
 disc = {r["isbn13"]: r for r in csv.DictReader(open(f"{ROOT}/data/seeds/ndl-discovery-2026.tsv", encoding="utf-8"), delimiter="\t")}
@@ -56,6 +59,12 @@ manifest = [r for r in csv.DictReader(open(f"{ROOT}/.cache/madb-distill/ndl-mani
 adult_isbns = {r["isbn13"] for r in csv.DictReader(open(f"{ROOT}/data/seeds/distill-adult-2026.tsv", encoding="utf-8"), delimiter="\t")}
 # ★非商業ドロップ(distill-drop-2026.tsv=学校PTA冊子等の手動ドロップ管理リスト) + 団体著者ヒューリスティック
 drop_isbns = {r["isbn13"] for r in csv.DictReader(open(f"{ROOT}/data/seeds/distill-drop-2026.tsv", encoding="utf-8"), delimiter="\t")}
+# ★著者補完(distill-author-supplement-2026.tsv=discovery取りこぼし著者をNDL per-ISBNで補完。 isbn→'name:role/...')
+import os as _os
+AUTHOR_SUP = {}
+_asf = f"{ROOT}/data/seeds/distill-author-supplement-2026.tsv"
+if _os.path.exists(_asf):
+    AUTHOR_SUP = {r["isbn13"]: r["creators_roled"] for r in csv.DictReader(open(_asf, encoding="utf-8"), delimiter="\t")}
 ORG_AUTHOR = re.compile(r"協議会|委員会|PTA|連盟|教育委員|学校長会|振興会|商工会")
 # 本番 title(norm)→slug + title_kana(norm)→slug(型1統合の名寄せ。 ★kana照合でローマ字/カナ題不一致を吸収)
 prod = {}; prod_kana = {}
@@ -78,7 +87,7 @@ def parse_authors(roled):
             name = clean_author(nm)
             if not name: continue
             if role == "原作": orig.append(name)
-            elif role in ("漫画", "作画", "画", "著", "劇画", ""): arts.append(name)
+            elif role in ("漫画", "作画", "画", "著", "劇画", "作", ""): arts.append(name)
             else: creds.append({"name": name, "role": role})  # キャラクターデザイン/原案/構成等
     if orig:  # ★原作あり=作画者はartist / 原作なし=単独writer_artist
         authors = [{"name": n, "role": "artist"} for n in arts] or [{"name": "(unknown)", "role": "artist"}]
@@ -119,6 +128,9 @@ for wslug, isbns in works.items():
         skip_d += 1; continue  # ★非商業(学校PTA冊子/団体著者)=ドロップ
     series = first.get("series", "")
     if KONBINI.search(series): skip_k += 1; continue
+    # ★非漫画/アンソロ誌/雑誌mook(著者なし18件調査): title「アンソロ/アニメコミック/読者投稿」or series「ムック/ぐる漫/MAY'S」→drop
+    if NONMANGA_TITLE.search(first.get("title", "")) or NONMANGA_SERIES.search(series):
+        skip_d += 1; continue
     # ★コンビニ廉価/特装の絶版reprint: leed/扶桑(reprint版元) かつ 楽天に無い(絶版=標準小売外)→非掲載
     if pub_key(first.get("publisher", "")) in ("leed", "fusosha") and not any(enr.get(i, {}).get("rk_title") for i in isbns):
         skip_k += 1; continue
@@ -160,7 +172,8 @@ for wslug, isbns in works.items():
         eds = [{"type": "standard", "label": "通常版", "volumes": new_vols}]
     cap = next((enr.get(i, {}).get("caption", "") for i in isbns if enr.get(i, {}).get("caption")), "")
     cre = first.get("creators", "")
-    authors, original_authors, credits = parse_authors(first.get("creators_roled", "") or "/".join(f"{a}:" for a in re.split(r"[/／]", cre)))
+    roled_src = AUTHOR_SUP.get(isbns[0]) or first.get("creators_roled", "") or "/".join(f"{a}:" for a in re.split(r"[/／]", cre))
+    authors, original_authors, credits = parse_authors(roled_src)
     yr = t1_year or year_of(first.get("date", "2026"))
     genres = aigenre.get(wslug) or genres_fallback(title + " " + cap)
     # ★出版社: 型1=既存ページの社尊重 / 型3=NDL社→キー
