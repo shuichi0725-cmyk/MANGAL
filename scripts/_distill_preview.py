@@ -119,6 +119,9 @@ for wslug, isbns in works.items():
         skip_d += 1; continue  # ★非商業(学校PTA冊子/団体著者)=ドロップ
     series = first.get("series", "")
     if KONBINI.search(series): skip_k += 1; continue
+    # ★コンビニ廉価/特装の絶版reprint: leed/扶桑(reprint版元) かつ 楽天に無い(絶版=標準小売外)→非掲載
+    if pub_key(first.get("publisher", "")) in ("leed", "fusosha") and not any(enr.get(i, {}).get("rk_title") for i in isbns):
+        skip_k += 1; continue
     title = base_title(first.get("title", "")); kana = first.get("kana", "")
     is_t1 = lt0.get("type", "").startswith("型1")
     # 新刊巻(discovery分)
