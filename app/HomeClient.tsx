@@ -298,7 +298,7 @@ export default function HomeClient({ data }: Props) {
             authorEntries={authors}
           />
         </div>
-        <div>
+        <div className="min-w-0">
           <div ref={listTopRef} className="scroll-mt-20" />
           {showArt ? (
             <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2">

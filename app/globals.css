@@ -44,6 +44,8 @@ body {
 body {
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
+  /* ★長題カード等の水平はみ出しで一覧だけ広がりヘッダーとズレるのを封鎖(stickyを壊さないclip) */
+  overflow-x: clip;
 }
 
 /* フォーム部品をブランド色に + 触感に馴染ませる */
