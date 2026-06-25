@@ -186,7 +186,15 @@ for wslug, isbns in works.items():
             if pd.get("title_kana"): kana = pd["title_kana"]
     if eds is None:
         eds = [{"type": "standard", "label": "通常版", "volumes": new_vols}]
-    cap = next((enr.get(i, {}).get("caption", "") for i in isbns if enr.get(i, {}).get("caption")), "")
+    # ★synopsis: 最古巻(vol1)のcaption優先(作品の導入=ジャンル判定に正確)。 無ければ新刊巻caption
+    cap = ""
+    _fb = FILL.get(slug)
+    if _fb and _fb.get("volumes"):
+        for _v in sorted(_fb["volumes"], key=lambda v: v.get("number") or 999):
+            _c = enr.get(_v["isbn13"], {}).get("caption")
+            if _c: cap = _c; break
+    if not cap:
+        cap = next((enr.get(i, {}).get("caption", "") for i in isbns if enr.get(i, {}).get("caption")), "")
     cre = first.get("creators", "")
     roled_src = AUTHOR_SUP.get(isbns[0]) or first.get("creators_roled", "") or "/".join(f"{a}:" for a in re.split(r"[/／]", cre))
     authors, original_authors, credits = parse_authors(roled_src)
