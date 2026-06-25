@@ -48,6 +48,7 @@ export default function ListClient({ data }: { data: ListBundle }) {
   const [q, setQ] = useState("");
   const [sort, setSort] = useState<SortId>("kana");
   const [limit, setLimit] = useState(200);
+  const [slugfixOnly, setSlugfixOnly] = useState(false);
 
   useEffect(() => {
     if (!open) return;
@@ -69,6 +70,7 @@ export default function ListClient({ data }: { data: ListBundle }) {
 
   const rows = useMemo(() => {
     let r = applyFilters(manga, state);
+    if (slugfixOnly) r = r.filter((m) => m._slugfix);
     const needle = q.trim().toLowerCase();
     if (needle) {
       r = r.filter(
@@ -93,7 +95,7 @@ export default function ListClient({ data }: { data: ListBundle }) {
       }
     });
     return sorted;
-  }, [manga, state, q, sort]);
+  }, [manga, state, q, sort, slugfixOnly]);
 
   return (
     <div>
@@ -128,6 +130,14 @@ export default function ListClient({ data }: { data: ListBundle }) {
               {s.label}
             </button>
           ))}
+          <button
+            onClick={() => setSlugfixOnly((v) => !v)}
+            className={`spring-press shrink-0 rounded-full px-2.5 py-1 text-[11px] font-bold ${
+              slugfixOnly ? "bg-[var(--color-accent)] text-white" : "border border-[var(--color-accent)]/40 bg-[var(--color-surface)] text-[var(--color-accent)]"
+            }`}
+          >
+            slug修正のみ
+          </button>
         </div>
       </div>
       <p className="px-3 pb-1 text-[11px] text-ink/50">
@@ -160,6 +170,9 @@ export default function ListClient({ data }: { data: ListBundle }) {
                 <td className="max-w-[200px] border-b border-[var(--color-line)]/60 px-2 py-1.5">
                   {/* DEBUG: フォルダ名(slug)表示。 本番前に削除する */}
                   <span className="block truncate font-mono text-[10px] text-rose-600/80">{m.slug}</span>
+                  {m._slugfix && m._slugfix_new && m._slugfix_new !== m.slug && (
+                    <span className="block truncate font-mono text-[10px] font-bold text-emerald-600">→ {m._slugfix_new}</span>
+                  )}
                   <Link href={`/manga/${m.slug}`} className="spring-press block truncate font-medium text-[#1f4e79] active:underline">
                     {m.title}
                   </Link>

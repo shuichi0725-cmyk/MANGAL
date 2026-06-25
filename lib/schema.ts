@@ -231,6 +231,9 @@ export type MangaListItem = {
   vol_gap?: boolean;
   /** アンソロジー統合ページ(= テスト点検用。 本番化前の確認) */
   _anthology?: boolean;
+  /** slug修正対象(= テスト点検用。 現slug→_slugfix_new の目視確認) */
+  _slugfix?: boolean;
+  _slugfix_new?: string;
 };
 
 /**
