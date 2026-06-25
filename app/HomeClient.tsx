@@ -35,7 +35,10 @@ export default function HomeClient({ data }: Props) {
   const [noCover, setNoCover] = useState(false);
   const [soloNonfirst, setSoloNonfirst] = useState(false);
   const [multiVol, setMultiVol] = useState(false);
+  const [noAuthor, setNoAuthor] = useState(false);
   const [copied, setCopied] = useState(false);
+  const isNoAuthor = (m: MangaListItem) =>
+    !m.authors?.length || m.authors.every((a) => !a.name || a.name === "(unknown)");
   const [isPreview, setIsPreview] = useState(false);
   useEffect(() => {
     const h = window.location.hostname;
@@ -97,9 +100,10 @@ export default function HomeClient({ data }: Props) {
       if (noCover) base = (base as MangaListItem[]).filter((m) => !m.cover);
       if (soloNonfirst) base = (base as MangaListItem[]).filter((m) => m.solo_nonfirst);
       if (multiVol) base = (base as MangaListItem[]).filter((m) => (m.total_volumes ?? 0) >= 2);
+      if (noAuthor) base = (base as MangaListItem[]).filter(isNoAuthor);
     }
     return base;
-  }, [showArt, filteredArt, filteredManga, noCover, soloNonfirst, multiVol]);
+  }, [showArt, filteredArt, filteredManga, noCover, soloNonfirst, multiVol, noAuthor]);
   const noCoverCount = useMemo(
     () => (showArt ? 0 : filteredManga.filter((m) => !m.cover).length),
     [showArt, filteredManga],
@@ -110,6 +114,10 @@ export default function HomeClient({ data }: Props) {
   );
   const multiVolCount = useMemo(
     () => (showArt ? 0 : filteredManga.filter((m) => (m.total_volumes ?? 0) >= 2).length),
+    [showArt, filteredManga],
+  );
+  const noAuthorCount = useMemo(
+    () => (showArt ? 0 : filteredManga.filter(isNoAuthor).length),
     [showArt, filteredManga],
   );
   // ★表示中(フィルタ後)の情報をクリップボードへ(テスト専用・私への共有用)。
@@ -216,6 +224,16 @@ export default function HomeClient({ data }: Props) {
             title="複数巻ある作品(今回統合した型1の検証用)"
           >
             複数巻{multiVol ? " ✓" : ""}（{multiVolCount}）
+          </button>
+          <button
+            type="button"
+            onClick={() => setNoAuthor((v) => !v)}
+            className={`tactile-chip rounded-card px-3 py-1.5 font-medium transition active:scale-95 ${
+              noAuthor ? "bg-[var(--color-accent)] text-white" : ""
+            }`}
+            title="著者が(unknown)/空(アンソロ/非漫画の疑い)"
+          >
+            著者なし{noAuthor ? " ✓" : ""}（{noAuthorCount}）
           </button>
           <button
             type="button"
