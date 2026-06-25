@@ -65,6 +65,12 @@ AUTHOR_SUP = {}
 _asf = f"{ROOT}/data/seeds/distill-author-supplement-2026.tsv"
 if _os.path.exists(_asf):
     AUTHOR_SUP = {r["isbn13"]: r["creators_roled"] for r in csv.DictReader(open(_asf, encoding="utf-8"), delimiter="\t")}
+# ★真の抜けfill(distill-fill-2026.jsonl=NDL題検索で著者一致取得した earlier volumes。 slug→全巻)
+FILL = {}
+_ff = f"{ROOT}/data/seeds/distill-fill-2026.jsonl"
+if _os.path.exists(_ff):
+    for _l in open(_ff, encoding="utf-8"):
+        _d = json.loads(_l); FILL[_d["slug"]] = _d
 ORG_AUTHOR = re.compile(r"協議会|委員会|PTA|連盟|教育委員|学校長会|振興会|商工会")
 # 本番 title(norm)→slug + title_kana(norm)→slug(型1統合の名寄せ。 ★kana照合でローマ字/カナ題不一致を吸収)
 prod = {}; prod_kana = {}
@@ -175,6 +181,18 @@ for wslug, isbns in works.items():
     roled_src = AUTHOR_SUP.get(isbns[0]) or first.get("creators_roled", "") or "/".join(f"{a}:" for a in re.split(r"[/／]", cre))
     authors, original_authors, credits = parse_authors(roled_src)
     yr = t1_year or year_of(first.get("date", "2026"))
+    # ★真の抜けfill: earlier volumes(著者一致取得済)を統合(書影=enrich)、開始年を最古巻へ繰り上げ
+    fb = FILL.get(slug)
+    if fb and fb.get("volumes"):
+        main = max(eds, key=lambda e: len(e.get("volumes", [])), default=eds[0])
+        have = {v.get("number") for v in main["volumes"]}
+        for fv in fb["volumes"]:
+            if fv["number"] not in have:
+                ei = enr.get(fv["isbn13"], {})
+                cov = ei.get("cover") if (ei.get("cover") and "noimage" not in (ei.get("cover") or "")) else None
+                main["volumes"].append({"number": fv["number"], "isbn13": fv["isbn13"], "release_date": fv.get("release_date"), "cover_url": cov})
+        main["volumes"].sort(key=lambda v: v.get("number") or 0)
+        if fb["volumes"][0].get("release_date"): yr = min(yr, year_of(fb["volumes"][0]["release_date"]))
     genres = aigenre.get(wslug) or genres_fallback(title + " " + cap)
     # ★出版社: 型1=既存ページの社尊重 / 型3=NDL社→キー
     if is_t1 and t1_pub:
