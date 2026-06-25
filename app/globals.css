@@ -199,3 +199,9 @@ body {
     transition: none;
   }
 }
+
+/* ★テスト環境(preview)のみ catchを5行表示(本番カードは4行のまま)。 isPreview→.preview-mode */
+.preview-mode .catch-clamp {
+  -webkit-line-clamp: 5;
+  line-clamp: 5;
+}
