@@ -162,6 +162,7 @@ for f in glob.glob(os.path.join(src, "*.yml")):
         "popularity": d.get("popularity"), "score": d.get("score"),
         **({"solo_nonfirst": True} if solo_nonfirst else {}),
         **({"vol_gap": True} if vol_gap else {}),
+        **({"_anthology": True} if d.get("_anthology") else {}),
     })
     # ② 検索索引(検索専用) = matchText が必要とする text のみ (= 検索時だけ遅延ロード)
     alt = d.get("alternative_titles") or {}
