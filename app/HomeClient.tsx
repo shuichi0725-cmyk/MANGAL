@@ -37,6 +37,7 @@ export default function HomeClient({ data }: Props) {
   const [multiVol, setMultiVol] = useState(false);
   const [noAuthor, setNoAuthor] = useState(false);
   const [mv2026, setMv2026] = useState(false);
+  const [volGap, setVolGap] = useState(false);
   const [copied, setCopied] = useState(false);
   const isNoAuthor = (m: MangaListItem) =>
     !m.authors?.length || m.authors.every((a) => !a.name || a.name === "(unknown)");
@@ -104,9 +105,10 @@ export default function HomeClient({ data }: Props) {
       if (multiVol) base = (base as MangaListItem[]).filter((m) => (m.total_volumes ?? 0) >= 2);
       if (noAuthor) base = (base as MangaListItem[]).filter(isNoAuthor);
       if (mv2026) base = (base as MangaListItem[]).filter(isMv2026);
+      if (volGap) base = (base as MangaListItem[]).filter((m) => m.vol_gap);
     }
     return base;
-  }, [showArt, filteredArt, filteredManga, noCover, soloNonfirst, multiVol, noAuthor, mv2026]);
+  }, [showArt, filteredArt, filteredManga, noCover, soloNonfirst, multiVol, noAuthor, mv2026, volGap]);
   const noCoverCount = useMemo(
     () => (showArt ? 0 : filteredManga.filter((m) => !m.cover).length),
     [showArt, filteredManga],
@@ -125,6 +127,10 @@ export default function HomeClient({ data }: Props) {
   );
   const mv2026Count = useMemo(
     () => (showArt ? 0 : filteredManga.filter(isMv2026).length),
+    [showArt, filteredManga],
+  );
+  const volGapCount = useMemo(
+    () => (showArt ? 0 : filteredManga.filter((m) => m.vol_gap).length),
     [showArt, filteredManga],
   );
   // ★表示中(フィルタ後)の情報をクリップボードへ(テスト専用・私への共有用)。
@@ -251,6 +257,16 @@ export default function HomeClient({ data }: Props) {
             title="複数巻あるのに開始年が2026(年繰上げ漏れ/巻誤統合の疑い・要確認)"
           >
             複数巻2026{mv2026 ? " ✓" : ""}（{mv2026Count}）
+          </button>
+          <button
+            type="button"
+            onClick={() => setVolGap((v) => !v)}
+            className={`tactile-chip rounded-card px-3 py-1.5 font-medium transition active:scale-95 ${
+              volGap ? "bg-[var(--color-accent)] text-white" : ""
+            }`}
+            title="複数巻あるのに途中の巻が抜けている(fill漏れ/欠番・要確認)"
+          >
+            巻抜け{volGap ? " ✓" : ""}（{volGapCount}）
           </button>
           <button
             type="button"

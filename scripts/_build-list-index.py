@@ -131,6 +131,12 @@ for f in glob.glob(os.path.join(src, "*.yml")):
     # ★1冊しか無いのに その巻が1巻でない(= 統合失敗/取りこぼしの signal。 おーばーふろぉ[8]型)
     _nums = [v.get("number") for e in eds for v in (e.get("volumes") or []) if v.get("number")]
     solo_nonfirst = tv == 1 and bool(_nums) and _nums[0] != 1
+    # ★複数巻あるのに途中の巻が抜けている(= fill漏れ/真の欠番。 vol 1,2,4 で 3 欠け)
+    vol_gap = False
+    for _e in eds:
+        _vn = sorted({v.get("number") for v in (_e.get("volumes") or []) if v.get("number")})
+        if len(_vn) >= 2 and _vn[-1] - _vn[0] + 1 > len(_vn):
+            vol_gap = True; break
     latest = ""
     for e in eds:
         for v in (e.get("volumes") or []):
@@ -155,6 +161,7 @@ for f in glob.glob(os.path.join(src, "*.yml")):
         "latest_date": latest[:7] if latest else None,
         "popularity": d.get("popularity"), "score": d.get("score"),
         **({"solo_nonfirst": True} if solo_nonfirst else {}),
+        **({"vol_gap": True} if vol_gap else {}),
     })
     # ② 検索索引(検索専用) = matchText が必要とする text のみ (= 検索時だけ遅延ロード)
     alt = d.get("alternative_titles") or {}
