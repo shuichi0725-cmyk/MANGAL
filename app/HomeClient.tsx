@@ -34,6 +34,7 @@ export default function HomeClient({ data }: Props) {
   // ★テスト環境限定機能(画像なしフィルタ / 情報コピー)。 本番(workers.dev)では非表示。
   const [noCover, setNoCover] = useState(false);
   const [soloNonfirst, setSoloNonfirst] = useState(false);
+  const [multiVol, setMultiVol] = useState(false);
   const [copied, setCopied] = useState(false);
   const [isPreview, setIsPreview] = useState(false);
   useEffect(() => {
@@ -95,15 +96,20 @@ export default function HomeClient({ data }: Props) {
     if (!showArt) {
       if (noCover) base = (base as MangaListItem[]).filter((m) => !m.cover);
       if (soloNonfirst) base = (base as MangaListItem[]).filter((m) => m.solo_nonfirst);
+      if (multiVol) base = (base as MangaListItem[]).filter((m) => (m.total_volumes ?? 0) >= 2);
     }
     return base;
-  }, [showArt, filteredArt, filteredManga, noCover, soloNonfirst]);
+  }, [showArt, filteredArt, filteredManga, noCover, soloNonfirst, multiVol]);
   const noCoverCount = useMemo(
     () => (showArt ? 0 : filteredManga.filter((m) => !m.cover).length),
     [showArt, filteredManga],
   );
   const soloNonfirstCount = useMemo(
     () => (showArt ? 0 : filteredManga.filter((m) => m.solo_nonfirst).length),
+    [showArt, filteredManga],
+  );
+  const multiVolCount = useMemo(
+    () => (showArt ? 0 : filteredManga.filter((m) => (m.total_volumes ?? 0) >= 2).length),
     [showArt, filteredManga],
   );
   // ★表示中(フィルタ後)の情報をクリップボードへ(テスト専用・私への共有用)。
@@ -200,6 +206,16 @@ export default function HomeClient({ data }: Props) {
             title="1冊しか無いのに その巻が1巻でない(統合失敗/取りこぼし)"
           >
             1冊≠1巻{soloNonfirst ? " ✓" : ""}（{soloNonfirstCount}）
+          </button>
+          <button
+            type="button"
+            onClick={() => setMultiVol((v) => !v)}
+            className={`tactile-chip rounded-card px-3 py-1.5 font-medium transition active:scale-95 ${
+              multiVol ? "bg-[var(--color-accent)] text-white" : ""
+            }`}
+            title="複数巻ある作品(今回統合した型1の検証用)"
+          >
+            複数巻{multiVol ? " ✓" : ""}（{multiVolCount}）
           </button>
           <button
             type="button"
