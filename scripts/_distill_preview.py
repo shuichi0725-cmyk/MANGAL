@@ -7,6 +7,13 @@ ROOT = "C:/Users/shuic/code/MANGAL"
 PREV = f"{ROOT}/.preview-data/manga"
 kks = pykakasi.kakasi()
 TODAY = datetime.date.today().strftime("%Y-%m")  # ★未来発売(予約)判定の基準月
+# ★数値/bool風の文字列(作画家名「029」等)を強制引用。 PyYAMLは無引用で出すがJS側yamlが数値誤読→schema違反(404)を封鎖
+_NUMLIKE = re.compile(r"^[-+]?(\d[\d_]*|\d*\.\d+([eE][-+]?\d+)?|0x[0-9a-fA-F]+|0o[0-7]+)$")
+def _str_rep(dumper, data):
+    if _NUMLIKE.match(data) or data.lower() in ("true", "false", "null", "yes", "no", "on", "off", "~"):
+        return dumper.represent_scalar("tag:yaml.org,2002:str", data, style="'")
+    return dumper.represent_scalar("tag:yaml.org,2002:str", data)
+yaml.add_representer(str, _str_rep, Dumper=yaml.SafeDumper)
 
 def slugify(s):
     s = unicodedata.normalize("NFKD", s or "")
@@ -236,8 +243,8 @@ for wslug, isbns in works.items():
            "demographic": demographic_of(series, first.get("publisher", "")),
            "genres": [g for g in genres if g][:4] or ["drama"], "genres_provisional": True,
            "first_volume_date": norm_date(first.get("date", "")),
-           "synopsis": (t1_synopsis or SYNOPSIS_GEN.get(slug) or None),  # ★型1=本番正規 / 新作=AI要約 / verbatim廃止
-           "catch": (t1_catch or CATCH_GEN.get(slug) or None),
+           "synopsis": (t1_synopsis or SYNOPSIS_GEN.get(slug) or ""),  # ★型1=本番正規 / 新作=AI要約 / verbatim廃止。 ★null不可(z.string)=""
+           "catch": (t1_catch or CATCH_GEN.get(slug) or None),  # Noneなら下でキー削除(z.string().optional()=null不可・undefined可)
            "_distill": f"2026新刊 {'型1新刊巻(既存'+str(existing)+'巻+新刊)' if is_t1 and existing else '型3新規'} ISBN{isbns[0]}",
            "editions": eds}
     # ★書影チェック待ち: 未来発売(release_date>今月)= 予約で書影が後日確定 → 月次で再取得。 書影無は_cover_pending(近刊表示用)
@@ -247,6 +254,7 @@ for wslug, isbns in works.items():
             if rd and str(rd)[:7] > TODAY:
                 if not v.get("cover_url"): v["_cover_pending"] = True
                 recheck.append((v.get("isbn13") or "", str(rd), title[:40], v.get("number"), "有" if v.get("cover_url") else "無"))
+    if doc.get("catch") is None: doc.pop("catch", None)  # ★null不可(safeParse落ち=404)→キー削除でundefined化
     yaml.safe_dump(doc, open(f"{PREV}/{slug}.yml", "w", encoding="utf-8"), allow_unicode=True, sort_keys=False)
     n += 1
 with open(f"{ROOT}/data/seeds/cover-recheck-2026.tsv", "w", encoding="utf-8", newline="") as _rf:
