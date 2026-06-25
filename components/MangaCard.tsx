@@ -62,7 +62,9 @@ export default function MangaCard({ manga, publishers, genres, demographics }: P
       </div>
       <div className="flex-1 min-w-0">
         <div className="flex items-start gap-2">
-          <MarqueeTitle text={manga.title} className="font-bold text-base leading-tight flex-1 min-w-0" />
+          <div className="flex-1 min-w-0">
+            <MarqueeTitle text={manga.title} className="font-bold text-base leading-tight" />
+          </div>
           <Badge tone={STATUS_TONE[manga.status] ?? "neutral"} className="shrink-0 mt-0.5">
             {STATUS_LABEL[manga.status] ?? manga.status}
           </Badge>
