@@ -18,7 +18,9 @@ def kana_slug(kana):
 def base_title(t):
     t = re.sub(r"\s*=\s*[A-Za-z].*$", "", str(t or ""))
     t = re.sub(r"[\.．]\s*\[?\d+\]?\s*$", "", t)  # ". 8" / ". [8]"
-    return re.sub(r"\s*\[\d+\]\s*$", "", t).strip()  # 末尾 "[8]"
+    t = re.sub(r"\s*\[\d+\]\s*$", "", t)  # 末尾 "[8]"
+    # ★空白区切りの末尾巻番号(「! 14」「… 3」型)を除去。 題に密着(ゴルゴ13/K-9/Season2)は空白無で守る
+    return re.sub(r"\s+\d{1,3}\s*$", "", t).strip()
 def volnum(t):
     m = re.search(r"[\.．]\s*\[?(\d+)\]?\s*$", str(t or "")) or re.search(r"Vol(?:ume)?\.?\s*(\d+)", str(t or ""), re.I) or re.search(r"\[(\d+)\]\s*$", str(t or ""))
     return int(m.group(1)) if m else 1
