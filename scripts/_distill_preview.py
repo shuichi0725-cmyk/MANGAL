@@ -193,7 +193,7 @@ for wslug, isbns in works.items():
         main = max(eds, key=lambda e: len(e.get("volumes", [])), default=eds[0])
         have = {v.get("number") for v in main["volumes"]}
         for fv in fb["volumes"]:
-            if fv["number"] not in have:
+            if fv["number"] not in have and 1 <= fv["number"] <= 500:  # ★年コード(2012等)除外
                 ei = enr.get(fv["isbn13"], {})
                 cov = ei.get("cover") if (ei.get("cover") and "noimage" not in (ei.get("cover") or "")) else None
                 main["volumes"].append({"number": fv["number"], "isbn13": fv["isbn13"], "release_date": fv.get("release_date"), "cover_url": cov})
