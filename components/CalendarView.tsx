@@ -17,12 +17,6 @@ type CalType = "release" | "launch";
 
 const WEEK = ["日", "月", "火", "水", "木", "金", "土"];
 
-function shift(ym: string, delta: number): string {
-  const [y, m] = ym.split("-").map(Number);
-  const d = new Date(y, m - 1 + delta, 1);
-  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}`;
-}
-
 /**
  * 2ビュー発売カレンダー(データ駆動)。
  *  ・発売(release) = 当月+未来の全巻発売 / 創刊(launch) = その月に始まった新連載(全期間)。
@@ -43,6 +37,17 @@ export default function CalendarView() {
     for (const it of index ?? []) m.set(it.slug, it);
     return m;
   }, [index]);
+
+  // ★データのある月の一覧(type別) → 年セレクタ + 前後ナビ(空月をスキップ)
+  const months = useMemo<string[]>(
+    () => (manifest ? (type === "release" ? manifest.release_months : manifest.launch_months) : []),
+    [manifest, type],
+  );
+  const years = useMemo(() => [...new Set(months.map((m) => m.slice(0, 4)))].sort().reverse(), [months]);
+  // type切替/初期で現ymがその種別に無ければ最新の在る月へ
+  useEffect(() => {
+    if (months.length && ym && !months.includes(ym)) setYm(months[months.length - 1]);
+  }, [months, ym]);
 
   useEffect(() => {
     fetch("/calendar/manifest.json")
@@ -75,6 +80,11 @@ export default function CalendarView() {
   if (!ym) return <div className="py-6 text-center text-[11px] text-ink/45">カレンダー読込中…</div>;
 
   const [yy, mm] = ym.split("-");
+  const idx = months.indexOf(ym);
+  const jumpYear = (y: string) => {
+    const m = months.find((mm2) => mm2.startsWith(y));
+    if (m) setYm(m);
+  };
   const first = new Date(`${ym}-01T00:00:00`);
   const pad = first.getDay();
   const last = new Date(Number(yy), Number(mm), 0).getDate();
@@ -134,10 +144,20 @@ export default function CalendarView() {
             </button>
           ))}
         </div>
-        <div className="flex items-center gap-1.5">
-          <button onClick={() => setYm(shift(ym, -1))} className="spring-press rounded px-1.5 text-ink/60" aria-label="前の月">‹</button>
-          <span className="min-w-[78px] text-center text-[12px] font-bold tabular-nums">{yy}年{Number(mm)}月</span>
-          <button onClick={() => setYm(shift(ym, 1))} className="spring-press rounded px-1.5 text-ink/60" aria-label="次の月">›</button>
+        <div className="flex items-center gap-1">
+          <button onClick={() => idx > 0 && setYm(months[idx - 1])} disabled={idx <= 0} className="spring-press rounded px-1 text-ink/60 disabled:opacity-25" aria-label="前の月">‹</button>
+          <select
+            value={yy}
+            onChange={(e) => jumpYear(e.target.value)}
+            className="rounded border border-[var(--color-line)] bg-[var(--color-surface)] px-1 py-0.5 text-[12px] font-bold tabular-nums"
+            aria-label="年"
+          >
+            {years.map((y) => (
+              <option key={y} value={y}>{y}年</option>
+            ))}
+          </select>
+          <span className="min-w-[26px] text-center text-[12px] font-bold tabular-nums">{Number(mm)}月</span>
+          <button onClick={() => idx >= 0 && idx < months.length - 1 && setYm(months[idx + 1])} disabled={idx < 0 || idx >= months.length - 1} className="spring-press rounded px-1 text-ink/60 disabled:opacity-25" aria-label="次の月">›</button>
         </div>
       </div>
 
