@@ -189,12 +189,27 @@ for f in glob.glob(os.path.join(src, "*.yml")):
               + [c.get("name") for c in (d.get("credits") or []) if c.get("name")],
     })
 idx.sort(key=lambda x: (x["year_started"], x["title"]))
+# ★軽量化: 配列化(キー名の65,980回重複を排除) + catch分離(別ファイル=カードは遅延ロード)。
+#   読込側 useMangaIndex が {f,d}→オブジェクトに復元するので、コンポーネントは無改修。
+LIST_FIELDS = [
+    "slug", "title", "title_kana", "subtitle", "cover", "year_started", "year_ended",
+    "status", "authors", "original_authors", "genres", "themes", "demographic",
+    "publisher", "publishers", "magazine", "awards", "anime_adapted", "total_volumes",
+    "max_edition_volumes", "latest_date", "first_volume_date", "popularity", "score",
+    "solo_nonfirst", "vol_gap", "_anthology", "_slugfix", "_slugfix_new",
+]
 out = os.path.join(OUTDIR, "manga-list-index.json")
-json.dump(idx, open(out, "w", encoding="utf-8"), ensure_ascii=False, separators=(",", ":"))
+json.dump({"f": LIST_FIELDS, "d": [[m.get(f) for f in LIST_FIELDS] for m in idx]},
+          open(out, "w", encoding="utf-8"), ensure_ascii=False, separators=(",", ":"))
+catch_out = os.path.join(OUTDIR, "manga-catch-index.json")
+catch_map = {m["slug"]: m["catch"] for m in idx if m.get("catch")}
+json.dump(catch_map, open(catch_out, "w", encoding="utf-8"), ensure_ascii=False, separators=(",", ":"))
 sout = os.path.join(OUTDIR, "manga-search-index.json")
 json.dump(sidx, open(sout, "w", encoding="utf-8"), ensure_ascii=False, separators=(",", ":"))
 mb = os.path.getsize(out) / 1e6
 smb = os.path.getsize(sout) / 1e6
-print(f"一覧索引: {len(idx)}作品 / {mb:.1f}MB → {out}")
+cmb = os.path.getsize(catch_out) / 1e6
+print(f"一覧索引: {len(idx)}作品 / {mb:.1f}MB → {out} (配列化)")
+print(f"catch索引: {len(catch_map)}件 / {cmb:.1f}MB → {catch_out} (遅延)")
 print(f"検索索引: {len(sidx)}作品 / {smb:.1f}MB → {sout}")
 print(f"(skip {skipped}) / {time.time()-t0:.1f}秒")
