@@ -1,0 +1,13 @@
+# ページ単位の巻ISBN除去 (= 過剰統合で別作の巻が混入したものを、そのページからのみ除去)。
+# ★グローバル除外(art-book-exclude-isbn.yml)と違い slug 単位 = 同じISBNが正しい別ページには残る。
+# 種2照合で真の所属を確定したものだけ登録 (= だろう運転禁止。 docs/overmerge-6-investigation.md)。
+# promote の _slug_override 後に build_yml 出力へ適用 → 再promoteでも恒久。
+excludes:
+  - slug: kibun-wa-mou-sensou-2002
+    isbn13: "9784047133877"
+    reason: 大友克洋版vol1(種2 sid127576=大友克洋・別作)の混入。藤原カムイ版ページから除去。正は大友版kibun-wa-mou-sensouに在る
+    at: "2026-06-26"
+  - slug: doraemon
+    isbn13: "9784091940018"
+    reason: 声優/著名人エッセイ文庫(種2 sid142928)の混入。非漫画。ドラえもん本編ページから除去
+    at: "2026-06-26"
