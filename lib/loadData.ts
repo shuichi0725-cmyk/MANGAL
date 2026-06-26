@@ -18,6 +18,7 @@ import {
   type MangaListItem,
   type ListBundle,
 } from "./schema";
+import { fullCover } from "./coverSlim";
 import { z } from "zod";
 
 // MANGAL_DATA_DIR でデータルートを差し替え可(= サンプル/プレビュー build 用)。 既定 = ./data
@@ -39,6 +40,7 @@ function decodeListIndex(raw: unknown): MangaListItem[] {
       const v = arr[i];
       if (v !== null && v !== undefined) o[f[i]] = v;
     }
+    if (o.cover) o.cover = fullCover(o.cover as string) as string; // cover は slim → full URL に復元
     return o as unknown as MangaListItem;
   });
 }

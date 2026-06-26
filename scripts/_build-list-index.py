@@ -105,6 +105,14 @@ def cover_of(d):
                 if v.get("cover_url"): return v["cover_url"]
     return None
 
+# ★cover軽量化: 楽天サムネの共通prefix/default suffixを剥がし可変部のみ保存(= lib/coverSlim.ts fullCover で復元)
+_RK_PRE = "https://thumbnail.image.rakuten.co.jp/@0_mall/"
+_RK_SUF = "?_ex=200x200"
+def slim_cover(c):
+    if c and c.startswith(_RK_PRE) and c.endswith(_RK_SUF):
+        return c[len(_RK_PRE):-len(_RK_SUF)]
+    return c
+
 # 引数: [1]=src manga ディレクトリ (既定 data/manga.v2)、 [2]=出力ディレクトリ (既定 DATA)。
 #   プレビュー用: python _build-list-index.py .preview-data/manga public
 src = sys.argv[1] if len(sys.argv) > 1 else os.path.join(DATA, "manga.v2")
@@ -160,7 +168,7 @@ for f in glob.glob(os.path.join(src, "*.yml")):
     idx.append({
         "slug": d["slug"], "title": d["title"], "title_kana": d["title_kana"],
         "subtitle": d.get("subtitle"),
-        "cover": cover_of(d),
+        "cover": slim_cover(cover_of(d)),
         "year_started": d["year_started"], "year_ended": d.get("year_ended"),
         "status": d.get("status"), "catch": d.get("catch"),
         "authors": [{"name": a.get("name"), "role": a.get("role"), "kana": a.get("kana") or ""} for a in aus],

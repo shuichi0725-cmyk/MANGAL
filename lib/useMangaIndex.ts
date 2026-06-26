@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import type { MangaListItem, MangaSearchItem } from "./schema";
+import { fullCover } from "./coverSlim";
 
 // ★一覧索引をクライアントで遅延ロード (= SSR props で 65k を送らない)。
 //   /manga-list-index.json を一度だけ fetch → module キャッシュで全ページ共有。
@@ -23,6 +24,7 @@ function decode(raw: RawIndex): MangaListItem[] {
       const v = arr[i];
       if (v !== null && v !== undefined) o[f[i]] = v; // null は欠落扱い(= 既存の任意フィールドと同じ)
     }
+    if (o.cover) o.cover = fullCover(o.cover as string) as string; // cover は slim → full URL に復元
     return o as unknown as MangaListItem;
   });
 }
