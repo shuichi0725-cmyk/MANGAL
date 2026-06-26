@@ -2,7 +2,7 @@ import Link from "next/link";
 import LikeButtonMock from "@/components/LikeButtonMock";
 import DestinyPickMock from "@/components/DestinyPickMock";
 import MarqueeTitle from "@/components/MarqueeTitle";
-import ReleaseCalendarMock from "@/components/ReleaseCalendarMock";
+import CalendarView from "@/components/CalendarView";
 import { bundle, DesignNav, seeded, volCount, Cover, CoverTile } from "@/lib/homeDesign";
 import { coverUrl } from "@/lib/schema";
 import { loadAiReviews } from "@/lib/loadData";
@@ -181,44 +181,16 @@ export default function Design11() {
         </Tile>
       </section>
 
-      {/* 3.5【中・新】発売カレンダー(日付タップ→直下に一覧展開。月データ埋込=完全静的) */}
-      {(() => {
-        const byDay = new Map<string, Map<number, Array<{ slug: string; title: string; authors: string }>>>();
-        for (const m of manga) {
-          for (const ed of m.editions) {
-            for (const v of ed.volumes) {
-              const d = v.release_date || "";
-              if (/^\d{4}-\d{2}-\d{2}$/.test(d) && d >= "2025-01") {
-                const ym = d.slice(0, 7);
-                const day = Number(d.slice(8, 10));
-                if (!byDay.has(ym)) byDay.set(ym, new Map());
-                const mm = byDay.get(ym)!;
-                if (!mm.has(day)) mm.set(day, []);
-                mm.get(day)!.push({ slug: m.slug, title: m.title, authors: m.authors.map((a) => a.name).join("・") });
-              }
-            }
-          }
-        }
-        const best = [...byDay.entries()].sort((a, b) => {
-          const ca = [...a[1].values()].reduce((x, y) => x + y.length, 0);
-          const cb = [...b[1].values()].reduce((x, y) => x + y.length, 0);
-          return cb - ca || b[0].localeCompare(a[0]);
-        })[0];
-        if (!best) return null;
-        const [ym, dmap] = best;
-        const days = [...dmap.entries()].map(([d, items]) => ({ d, items }));
-        return (
-          <section className="mt-4 px-4">
-            <Tile className="p-3.5">
-              <div className="flex items-baseline justify-between">
-                <h2 className="text-[14px] font-extrabold">📅 発売カレンダー <span className="spring-press text-[11px] font-semibold text-[var(--color-accent)]">{ym.replace("-", "年")}月 →</span></h2>
-                <span className="text-[10px] text-ink/45">日付タップで一覧</span>
-              </div>
-              <ReleaseCalendarMock ym={ym} days={days} />
-            </Tile>
-          </section>
-        );
-      })()}
+      {/* 3.5【中】発売/創刊カレンダー(2ビュー・データ駆動 = public/calendar を遅延fetch・index join) */}
+      <section className="mt-4 px-4">
+        <Tile className="p-3.5">
+          <div className="mb-1 flex items-baseline justify-between">
+            <h2 className="text-[14px] font-extrabold">📅 カレンダー</h2>
+            <span className="text-[10px] text-ink/45">発売日 / 創刊 切替</span>
+          </div>
+          <CalendarView />
+        </Tile>
+      </section>
 
       {/* 4.【小・新】数字トリビア */}
       {todayTrivia && (

@@ -142,6 +142,18 @@ for f in glob.glob(os.path.join(src, "*.yml")):
         for v in (e.get("volumes") or []):
             rd = v.get("release_date")
             if rd and str(rd) > latest: latest = str(rd)
+    # first_volume_date = standard版 number=1 の最小 release_date (= 創刊日・発売日昇順sort key・創刊カレンダー素)。
+    #   完全日/年月の精度はそのまま保持(= カレンダーが 日配置 vs 日未定 を派生判定)。無ければ全edition最古に fallback。
+    fvd = None
+    for e in eds:
+        if e.get("type") != "standard": continue
+        for v in (e.get("volumes") or []):
+            if v.get("number") == 1 and v.get("release_date"):
+                s = str(v["release_date"])
+                if fvd is None or s < fvd: fvd = s
+    if not fvd:
+        _alld = [str(v["release_date"]) for e in eds for v in (e.get("volumes") or []) if v.get("release_date")]
+        fvd = min(_alld) if _alld else None
     aus = d.get("authors") or []
     oaus = d.get("original_authors") or []
     # ① 一覧索引(表示用) = 検索専用フィールド(title_romaji/alternative_titles/credits)は持たない
@@ -159,6 +171,7 @@ for f in glob.glob(os.path.join(src, "*.yml")):
         "anime_adapted": d.get("anime_adapted"),
         "total_volumes": tv, "max_edition_volumes": maxev,
         "latest_date": latest[:7] if latest else None,
+        "first_volume_date": fvd,
         "popularity": d.get("popularity"), "score": d.get("score"),
         **({"solo_nonfirst": True} if solo_nonfirst else {}),
         **({"vol_gap": True} if vol_gap else {}),

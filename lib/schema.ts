@@ -223,6 +223,8 @@ export type MangaListItem = {
   max_edition_volumes: number;
   /** 事前計算済み 最新刊の発売年月 "YYYY-MM" (= ListClient の最新刊順) */
   latest_date?: string | null;
+  /** 事前計算済み 創刊日 (= standard版1巻の発売日。 精度はそのまま=完全日/年月。 発売日昇順sort+創刊カレンダーの素) */
+  first_volume_date?: string | null;
   popularity?: number;
   score?: number;
   /** 1冊のみ かつ その巻が1巻でない(= 統合失敗/取りこぼし signal。 テスト診断用) */
