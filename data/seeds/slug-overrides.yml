@@ -3331,6 +3331,102 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: kumo-no-ue-wa-itsumo-hare-anoyo-to-konoyo-no-aida-ni-aru-fushigi-na-sekai
+  akaichounoshoujo:
+    at: '2026-06-26'
+    reason: 'slug衝突suffix(同名異作/サブ): 同一著者(楳図かずお)だがISBN別(9784065434727 vs '
+    slug: akai-chou-no-shoujo-umezu
+  hoshinokaabiiyuruttopupupu:
+    at: '2026-06-26'
+    reason: 'slug衝突subtitle(同名異作/サブ): candidateは副題「きょろきょろ編」を持つサブシリーズ、incum'
+    slug: hoshi-no-kirby-yurutto-pupupu-kyorokyoro-hen
+  kamakuramonogatari:
+    at: '2026-06-26'
+    reason: 'slug衝突subtitle(同名異作/サブ): candidateは副題「魔界編」のサブシリーズ、incumbentが本'
+    slug: kamakura-monogatari-makai-hen
+  machigaeraretahanayome:
+    at: '2026-06-26'
+    reason: 'slug衝突suffix(同名異作/サブ): 別著者(篠崎佳久子 vs 文月今日子)・ISBN重なりなし=同名異作。c'
+    slug: machigaerareta-hanayome-shinozaki
+  akai-kami-no-shounen:
+    at: '2026-06-26'
+    reason: slug衝突edge:incumbent誤slug退避
+    slug: akai-kami-no-shounen-christmas
+  akaikaminoshounen:
+    at: '2026-06-26'
+    reason: slug衝突edge:candidateが正slug
+    slug: akai-kami-no-shounen
+  sukuranburueggu:
+    at: '2026-06-26'
+    reason: 'slug衝突suffix(同名異作/サブ): 別著者(柳沢きみお12巻 vs 臼井儀人2巻)・ISBN重なりなし=同名'
+    slug: scramble-egg-yanagisawa
+  yubiwamonogatari:
+    at: '2026-06-26'
+    reason: 'slug衝突suffix(同名異作/サブ): 別著者(小沢真理 vs 高杉菜穂子)・別題(環/輪)・ISBN重なりなし'
+    slug: yubiwa-monogatari-ozawa
+  shoujonokisetsu:
+    at: '2026-06-26'
+    reason: 'slug衝突suffix(同名異作/サブ): 同題だが別著者(羽中ルイ vs 咲香里)・ISBN重なりなし=同名異作。'
+    slug: shoujo-no-kisetsu-hanaka
+  itsumokokoronitaiyouwo:
+    at: '2026-06-26'
+    reason: 'slug衝突suffix(同名異作/サブ): 別著者(やまだ浩一 vs 三浦実子)・ISBN重なりなし=同名異作。ca'
+    slug: itsumo-kokoro-ni-taiyou-o-yamada
+  shounangurafutei:
+    at: '2026-06-26'
+    reason: 'slug衝突suffix(同名異作/サブ): 同一著者(吉田聡)だがISBN別(9784785910921 vs 97'
+    slug: shounan-graffiti-1989
+  uchuusenkanyamato:
+    at: '2026-06-26'
+    reason: 'slug衝突suffix(同名異作/サブ): 同題だが別作画(松本零士版 vs ひおあきら版)・ISBN重なりなし=別'
+    slug: uchuu-senkan-yamato-matsumoto
+  nijiironotorokkii:
+    at: '2026-06-26'
+    reason: 'slug衝突suffix(同名異作/サブ): 同一著者(安彦良和)・別題表記(ッ/ツ)・ISBN重なりなし=別版/別商'
+    slug: nijiiro-no-trotsky-1992
+  hijikatatoshizou:
+    at: '2026-06-26'
+    reason: 'slug衝突suffix(同名異作/サブ): 同題だが別著者(神田たけ志 vs 伊賀和洋/小池一夫原作)・ISBN重な'
+    slug: hijikata-toshizou-kanda
+  shin-shiawase-no-jikan:
+    at: '2026-06-26'
+    reason: slug衝突swap:incumbent退避(candidateが主版)
+    slug: shin-shiawase-no-jikan-2026
+  shinshiawasenojikan:
+    at: '2026-06-26'
+    reason: slug衝突swap:candidate無印化
+    slug: shin-shiawase-no-jikan
+  itsumokokoronitaiyouwo-1993:
+    at: '2026-06-26'
+    reason: 'slug衝突suffix(同名異作/サブ): 別著者(喜国雅彦1993 vs 三浦実子)・ISBN重なりなし=同名異作'
+    slug: itsumo-kokoro-ni-taiyou-o-kikuni
+  hoshi-no-kirby-manpukupupupufantajii:
+    at: '2026-06-26'
+    reason: 'slug衝突suffix(同名異作/サブ): 同題だが別著者(武内いぶき13巻 vs ひかわ博一25巻)・ISBN重な'
+    slug: hoshi-no-kirby-takeuchi
+  kouteiheikanoosewagakari-nyokangurashigashiawasesugitekoukyuukaraderare:
+    at: '2026-06-26'
+    reason: 重複dedup:incumbent⊂candidate(完全版採用)
+    slug: koutei-heika-no-osewagakari
+  iyahayaatamikun-nottoiijiideizuobuzapurinsu:
+    at: '2026-06-26'
+    reason: 重複dedup:incumbent⊂candidate(完全版採用)
+    slug: iyahaya-atami-kun
+  happy-family-fukushuunorentaruokaasan:
+    at: '2026-06-26'
+    reason: 'slug衝突suffix(同名異作/サブ): 別著者(坂崎未侑 vs 三原ミツカズ)・ISBN重なりなし=同名異作。c'
+    slug: happy-family-sakazaki
+  akuyakureijoutoakuyakureisokugadeattekoiniochitanara-nanashinoseirei:
+    at: '2026-06-26'
+    reason: 重複dedup:incumbent⊂candidate(完全版採用)
+    slug: akuyaku-reijou-to-akuyaku-reisoku-ga-deatte-koi-ni-ochita-nara
+  dekikon-dekiaisarerudekichattakon:
+    at: '2026-06-26'
+    reason: 重複dedup:incumbent⊂candidate(完全版採用)
+    slug: dekikon
+  iranaiakuyakureijou-wagakunidehikitorimasuwa-yuushuunagoreijouga:
+    at: '2026-06-26'
+    reason: 重複dedup:incumbent⊂candidate(完全版採用)
+    slug: iranai-akuyaku-reijou-wagakuni-de-hikitorimasu-wa
 100-mandoru-naito: 100-mandoru-night
 2-ma-no-hito-all-2shoku-karaaban: 2-ma-no-hito-all-2shoku-colorban
 7-nwairudo7: 7-nwild7

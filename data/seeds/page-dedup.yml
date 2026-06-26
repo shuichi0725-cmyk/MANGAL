@@ -1,4 +1,3 @@
-# 中身同一の二重出力ページの統合裁定(2026-06-10)。 ★slugは _rekey-page-dedup.py が新世界へ追従
 dedup:
 - drop: akage-no-an-2013
   canonical: akage-no-an-matsuzaki
@@ -392,7 +391,8 @@ dedup:
   canonical: meitantei-conan-2005
   title: 名探偵コナン特別編
   isbns: 38
-  note: '[2026-06-16修正] 旧canonical meitantei-conan-2011 はslug-overrideで消滅。特別編は meitantei-conan-2005 が出力するためそちらへ付替(redirect 404防止)'
+  note: '[2026-06-16修正] 旧canonical meitantei-conan-2011 はslug-overrideで消滅。特別編は meitantei-conan-2005
+    が出力するためそちらへ付替(redirect 404防止)'
 - drop: meitantei-conan-tokubetsuhen-2002
   canonical: meitantei-conan-2005
   title: 名探偵コナン特別編
@@ -1466,3 +1466,23 @@ dedup:
   canonical: zettai-reido
   title: 絶対麗奴
   isbns: 24
+- drop: koutei-heika-no-osewagakari
+  canonical: koutei-heika-no-osewagakari
+  title: 皇帝陛下のお世話係
+  isbns: subset(collision22)
+- drop: iyahaya-atami-kun
+  canonical: iyahaya-atami-kun
+  title: いやはや熱海くん
+  isbns: subset(collision22)
+- drop: akuyaku-reijou-to-akuyaku-reisoku-ga-deatte-koi-ni-ochita-nara
+  canonical: akuyaku-reijou-to-akuyaku-reisoku-ga-deatte-koi-ni-ochita-nara
+  title: 悪役令嬢と悪役令息が、出逢って恋に落ちたなら
+  isbns: subset(collision22)
+- drop: dekikon
+  canonical: dekikon
+  title: 溺婚
+  isbns: subset(collision22)
+- drop: iranai-akuyaku-reijou-wagakuni-de-hikitorimasu-wa
+  canonical: iranai-akuyaku-reijou-wagakuni-de-hikitorimasu-wa
+  title: 要らない悪役令嬢、我が国で引き取りますわ
+  isbns: subset(collision22)

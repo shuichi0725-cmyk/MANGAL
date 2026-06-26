@@ -1,0 +1,23 @@
+old_slug	incumbent_slug	action	proposed_candidate_slug	proposed_incumbent_slug	candidate_title	incumbent_title	reason
+akaichounoshoujo	akai-chou-no-shoujo	suffix	akai-chou-no-shoujo-umezu		赤いちょうの少女	赤い蝶の少女	同一著者(楳図かずお)だがISBN別(9784065434727 vs 9784778030308)で別商品。candidateに著者姓suffix付与しincumbent維持。
+hoshinokaabiiyuruttopupupu	hoshi-no-kirby-yurutto-pupupu	subtitle	hoshi-no-kirby-yurutto-pupupu-kyorokyoro-hen		星のカービィゆるっとプププ. きょろきょろ編	星のカービィゆるっとプププ	candidateは副題「きょろきょろ編」を持つサブシリーズ、incumbentが本編(2巻)。副題ヘボンでsuffix。
+kamakuramonogatari	kamakura-monogatari	subtitle	kamakura-monogatari-makai-hen		鎌倉ものがたり. 魔界編	鎌倉ものがたり	candidateは副題「魔界編」のサブシリーズ、incumbentが本編59巻。副題ヘボンでsuffix。
+machigaeraretahanayome	machigaerareta-hanayome	suffix	machigaerareta-hanayome-shinozaki		間違えられた花嫁	まちがえられた花嫁	別著者(篠崎佳久子 vs 文月今日子)・ISBN重なりなし=同名異作。candidateに著者姓shinozakiでsuffix。
+akaikaminoshounen	akai-kami-no-shounen	edge		akai-kami-no-shounen-christmas	赤い髪の少年	クリスマス	同一ISBN(9784257913887)=同一書誌だがincumbentのtitle「クリスマス」がslug(赤い髪の少年)と無関係=incumbentが誤slug。candidateが正しいslug保持者、incumbentを別slugへ退避。
+sukuranburueggu	scramble-egg	suffix	scramble-egg-yanagisawa		すくらんぶるエッグ	すくらんぶるえっぐ	別著者(柳沢きみお12巻 vs 臼井儀人2巻)・ISBN重なりなし=同名異作。candidate(巻数多いが意訳slug scramble-eggはincumbent占有)に著者姓suffix。
+yubiwamonogatari	yubiwa-monogatari	suffix	yubiwa-monogatari-ozawa		指環物語	指輪物語	別著者(小沢真理 vs 高杉菜穂子)・別題(環/輪)・ISBN重なりなし=同名異作。candidateに著者姓ozawaでsuffix。
+shoujonokisetsu	shoujo-no-kisetsu	suffix	shoujo-no-kisetsu-hanaka		少女の季節	少女の季節	同題だが別著者(羽中ルイ vs 咲香里)・ISBN重なりなし=同名異作。candidateに著者姓hanakaでsuffix、incumbent維持。
+itsumokokoronitaiyouwo	itsumo-kokoro-ni-taiyou-o	suffix	itsumo-kokoro-ni-taiyou-o-yamada		いつも心に太陽を!	いつも心に太陽を	別著者(やまだ浩一 vs 三浦実子)・ISBN重なりなし=同名異作。candidateに著者姓yamadaでsuffix。
+shounangurafutei	shounan-graffiti	suffix	shounan-graffiti-1989		湘南グラフティ	湘南グラフィティ	同一著者(吉田聡)だがISBN別(9784785910921 vs 9784886537010等)で別商品。同著者ゆえcandidate year(1989)でsuffix。
+uchuusenkanyamato	uchuu-senkan-yamato	suffix	uchuu-senkan-yamato-matsumoto		宇宙戦艦ヤマト	宇宙戦艦ヤマト	同題だが別作画(松本零士版 vs ひおあきら版)・ISBN重なりなし=別コミカライズ。candidateに著者姓matsumotoでsuffix。
+nijiironotorokkii	nijiiro-no-trotsky	suffix	nijiiro-no-trotsky-1992		虹色のトロッキー	虹色のトロツキー	同一著者(安彦良和)・別題表記(ッ/ツ)・ISBN重なりなし=別版/別商品。同著者ゆえcandidate year(1992)でsuffix、incumbent(16巻)維持。
+hijikatatoshizou	hijikata-toshizou	suffix	hijikata-toshizou-kanda		土方歳三	土方歳三	同題だが別著者(神田たけ志 vs 伊賀和洋/小池一夫原作)・ISBN重なりなし=同名異作。candidateに著者姓kandaでsuffix。
+shinshiawasenojikan	shin-shiawase-no-jikan	swap	shin-shiawase-no-jikan	shin-shiawase-no-jikan-2026	新・幸せの時間	シン幸せの時間	candidateが主版(国友やすゆき21巻2005)、incumbentが新しく小さい(十河コウ2巻2026)。candidateを無印にしincumbentをyear suffixへ退避。
+itsumokokoronitaiyouwo-1993	itsumo-kokoro-ni-taiyou-o	suffix	itsumo-kokoro-ni-taiyou-o-kikuni		いつも心に太陽を!	いつも心に太陽を	別著者(喜国雅彦1993 vs 三浦実子)・ISBN重なりなし=同名異作(3つ目の同名)。candidateに著者姓kikuniでsuffix。
+hoshi-no-kirby-manpukupupupufantajii	hoshi-no-kirby	suffix	hoshi-no-kirby-takeuchi		星のカービィ	星のカービィ	同題だが別著者(武内いぶき13巻 vs ひかわ博一25巻)・ISBN重なりなし=別シリーズ。incumbent(巻数多)維持、candidateに著者姓takeuchiでsuffix。
+kouteiheikanoosewagakari-nyokangurashigashiawasesugitekoukyuukaraderare	koutei-heika-no-osewagakari	dedup	koutei-heika-no-osewagakari		皇帝陛下のお世話係	皇帝陛下のお世話係	同題同著者、incumbent ISBN(7件)⊂candidate ISBN(8件)=incumbentが部分集合。大きいcandidateをbaseに残しincumbentをdrop、clean slug保持。
+iyahayaatamikun-nottoiijiideizuobuzapurinsu	iyahaya-atami-kun	dedup	iyahaya-atami-kun		いやはや熱海くん	いやはや熱海くん	同題同著者(田沼朝)、incumbent ISBN(4件)⊂candidate ISBN(5件)=部分集合。大きいcandidateをbaseに残しincumbent drop。
+happy-family-fukushuunorentaruokaasan	happy-family	suffix	happy-family-sakazaki		ハッピーファミリー	ハッピー・ファミリー	別著者(坂崎未侑 vs 三原ミツカズ)・ISBN重なりなし=同名異作。candidateに著者姓sakazakiでsuffix、incumbent維持。
+akuyakureijoutoakuyakureisokugadeattekoiniochitanara-nanashinoseirei	akuyaku-reijou-to-akuyaku-reisoku-ga-deatte-koi-ni-ochita-nara	dedup	akuyaku-reijou-to-akuyaku-reisoku-ga-deatte-koi-ni-ochita-nara		悪役令嬢と悪役令息が、出逢って恋に落ちたなら	悪役令嬢と悪役令息が、出逢って恋に落ちたなら	同題同著者(榛名丼/迂回チル)、incumbent ISBN(6件)⊂candidate ISBN(7件)=部分集合。大きいcandidateをbaseに残しincumbent drop。
+dekikon-dekiaisarerudekichattakon	dekikon	dedup	dekikon		溺婚	溺婚	同題同著者(斗田めぐみ)、incumbent ISBN(2件)⊂candidate ISBN(3件)=部分集合。大きいcandidateをbaseに残しincumbent drop。
+iranaiakuyakureijou-wagakunidehikitorimasuwa-yuushuunagoreijouga	iranai-akuyaku-reijou-wagakuni-de-hikitorimasu-wa	dedup	iranai-akuyaku-reijou-wagakuni-de-hikitorimasu-wa		要らない悪役令嬢、我が国で引き取りますわ	要らない悪役令嬢、我が国で引き取りますわ	同題同著者(昼間行燈/綾雅)、incumbent ISBN(3件)⊂candidate ISBN(4件)=部分集合。大きいcandidateをbaseに残しincumbent drop。
