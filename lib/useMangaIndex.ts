@@ -89,6 +89,18 @@ export function useMangaIndex(): MangaListItem[] | null {
 // ★検索索引 = 別ファイル。 検索ボックスに入力があった時だけ遅延ロード (= 既定ブラウズでは読まない)。
 let _scache: MangaSearchItem[] | null = null;
 let _sinflight: Promise<MangaSearchItem[]> | null = null;
+// 検索索引も {f,d} 配列形式 → デコード(cover無いので単純)。 client専用(server側ローダ無し)。
+function decodeSearch(raw: RawIndex): MangaSearchItem[] {
+  const { f, d } = raw;
+  return d.map((arr) => {
+    const o: Record<string, unknown> = {};
+    for (let i = 0; i < f.length; i++) {
+      const v = arr[i];
+      if (v !== null && v !== undefined) o[f[i]] = v;
+    }
+    return o as unknown as MangaSearchItem;
+  });
+}
 function fetchSearchIndex(): Promise<MangaSearchItem[]> {
   if (_scache) return Promise.resolve(_scache);
   if (_sinflight) return _sinflight;
@@ -97,9 +109,9 @@ function fetchSearchIndex(): Promise<MangaSearchItem[]> {
       if (!r.ok) throw new Error(`検索索引取得失敗 ${r.status}`);
       return r.json();
     })
-    .then((d: MangaSearchItem[]) => {
-      _scache = d;
-      return d;
+    .then((raw: RawIndex) => {
+      _scache = decodeSearch(raw);
+      return _scache;
     })
     .finally(() => {
       _sinflight = null;

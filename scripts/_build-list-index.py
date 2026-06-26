@@ -212,8 +212,10 @@ json.dump({"f": LIST_FIELDS, "d": [[m.get(f) for f in LIST_FIELDS] for m in idx]
 catch_out = os.path.join(OUTDIR, "manga-catch-index.json")
 catch_map = {m["slug"]: m["catch"] for m in idx if m.get("catch")}
 json.dump(catch_map, open(catch_out, "w", encoding="utf-8"), ensure_ascii=False, separators=(",", ":"))
+SEARCH_FIELDS = ["slug", "title", "title_kana", "title_romaji", "alt", "au"]
 sout = os.path.join(OUTDIR, "manga-search-index.json")
-json.dump(sidx, open(sout, "w", encoding="utf-8"), ensure_ascii=False, separators=(",", ":"))
+json.dump({"f": SEARCH_FIELDS, "d": [[m.get(f) for f in SEARCH_FIELDS] for m in sidx]},
+          open(sout, "w", encoding="utf-8"), ensure_ascii=False, separators=(",", ":"))
 mb = os.path.getsize(out) / 1e6
 smb = os.path.getsize(sout) / 1e6
 cmb = os.path.getsize(catch_out) / 1e6
