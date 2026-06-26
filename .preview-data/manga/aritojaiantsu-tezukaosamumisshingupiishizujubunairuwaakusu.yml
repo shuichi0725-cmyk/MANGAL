@@ -8,10 +8,14 @@ status: ongoing
 authors:
 - name: 手塚治虫
   role: writer_artist
-- name: 田中創石渡広隆下枝咲彩スーパーヴァイザー
-  role: writer_artist
 original_authors: []
-credits: []
+credits:
+- name: 田中創
+  role: スーパーヴァイザー
+- name: 石渡広隆
+  role: スーパーヴァイザー
+- name: 下枝咲彩
+  role: スーパーヴァイザー
 publisher: (unknown)
 publishers: []
 _publisher_raw: 立東舎
@@ -34,3 +38,4 @@ editions:
     release_date: 2026-06
     cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/4445/9784845644445.jpg
     _new: true
+_slugfix: true

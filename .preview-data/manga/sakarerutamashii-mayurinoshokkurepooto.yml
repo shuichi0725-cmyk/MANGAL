@@ -6,7 +6,9 @@ year_started: 2026
 year_ended: null
 status: ongoing
 authors:
-- name: 山本まゆり寺尾玲子
+- name: 山本まゆり
+  role: writer_artist
+- name: 寺尾玲子
   role: writer_artist
 original_authors: []
 credits: []
@@ -34,3 +36,4 @@ editions:
     cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/9047/9784022759047_1_2.jpg
     _new: true
   publisher: asahi-shimbun
+_slugfix: true
