@@ -2230,6 +2230,11 @@ def main():
     if "out" in synopsis_slug:
         synopsis_slug["out-mizutamakoto"] = synopsis_slug["out"]  # 同名別作の別slug
     print(f"  synopsis slug map(新刊): {len(synopsis_slug):,} slug", file=sys.stderr)
+    # ★新刊著者の統合修正 seed = 再パース済authors(連結著者の分割・役割分離・&デコード)で上書き(再promote durability。 種2不変のまま表示是正)
+    _arp_path = ROOT / "data" / "seeds" / "author-reparse-2026.json"
+    author_reparse = json.loads(_arp_path.read_text(encoding="utf-8")) if _arp_path.exists() else {}
+    author_reparse_pages = 0
+    print(f"  著者修正 map(新刊): {len(author_reparse):,} slug", file=sys.stderr)
     # ★数値/bool風の文字列(著者「029」等)を強制引用(JS yaml誤読=schema違反404を封鎖)
     import re as _re_q
     _NUMLIKE_Q = _re_q.compile(r"^[-+]?(\d[\d_]*|\d*\.\d+([eE][-+]?\d+)?|0x[0-9a-fA-F]+|0o[0-7]+)$")
@@ -2386,6 +2391,15 @@ def main():
         seed_entry = seed3.get(series["series_key"])
         new_yml = build_yml(src, merged_series, authors, editions, seed_entry,
                             valid_pubs, valid_mags, valid_gens)
+        # ★新刊著者の統合修正: 再パース済authorsで上書き(連結→分割・役割分離)。 enrich_authorでヨミ/romaji再付与。
+        if slug in author_reparse:
+            arp = author_reparse[slug]
+            if arp.get("authors"):  # 安全: 著者ゼロの seed は触らない
+                new_yml["authors"] = [enrich_author(a) for a in arp["authors"]]
+                new_yml["original_authors"] = [enrich_author(a) for a in (arp.get("original_authors") or [])]
+                if arp.get("credits"):
+                    new_yml["credits"] = arp["credits"]
+                author_reparse_pages += 1
         # ★キャッチコピーを slug 経由で join(無ければ未設定=カードは出版社表示にfallback)
         if slug in catch_map and catch_map[slug]:
             new_yml["catch"] = catch_map[slug]
@@ -2570,6 +2584,7 @@ def main():
     print(f"  anilist enrich(id/synonyms/genres/tags 付与): {enrich_pages}", file=sys.stderr)
     print(f"  synopsis 種a和訳 付与: {synopsis_pages}(残りは空=種3 AI文不使用)", file=sys.stderr)
     print(f"  catch コピー付与: {catch_pages}", file=sys.stderr)
+    print(f"  著者修正(新刊・連結是正): {author_reparse_pages}", file=sys.stderr)
     print(f"  作品Wikidata QID 付与: {work_qid_pages}", file=sys.stderr)
     print(f"  著者ゼロ→AniList補完: {author_fill_pages}", file=sys.stderr)
     print(f"  著者ゼロ→MADB安全補完: {author_fill_madb_pages}", file=sys.stderr)
