@@ -1,29 +1,3 @@
-# MADB 取込もれ巻 の 補完 yml (= 種4 = 別 source 由来 巻情報)。
-#
-# 用途: MADB に 入っていないが 実在する 巻 を 別 source (= Amazon / NDL Search /
-# 出版社公式) で 確認後、 ここに登録 → audit + 本番 yml 生成で 反映。
-#
-# 種2 sqlite は 不変 (= 月次蒸留 protocol 抵触なし)。 audit + 本番 yml 生成時に
-# lookup される 4 つ目の seed。
-#
-# 各 entry 仕様:
-#   series_keys: list  ← 紐付ける series_key (= 表記揺れ / 別著者で 種2 内 複数 sid に
-#                          分散している場合 全部 列挙)
-#   qid: optional      ← Wikidata Q-id (= qid 紐付き 種2 sid を 一括 cover する場合)
-#   number: int        ← 巻番号 (= MADB volumeNumber 相当)
-#   isbn13: string     ← 確定 ISBN (= 別 source から)
-#   release_date: string  ← YYYY-MM-DD or YYYY-MM
-#   pages: int (optional)
-#   publisher: string  ← 出版社
-#   edition_type: standard/bunkobon/wideban/kanzenban/shinsoban/aizoban
-#   title_display: string  ← 公式 商品名 (= Amazon 表記等)
-#   source: string     ← 確認 source (= amazon / ndl / publisher-official 等)
-#   added_at: YYYY-MM-DD
-#   note: |            ← 補完根拠 / 確認内容
-#
-# 命名理由: 種3 (= series-supplement) と 区別、 「volume 単位の補完」 という意味で
-# volumes-supplement。 種3 は シリーズマスター、 種4 は 巻補完。
-
 schema_version: 1
 generated_at: '2026-05-25'
 generator: user-manual-fill
@@ -50,32 +24,6 @@ volumes:
     MADB が 巻ごと creator 振り分け 差異で 種2 内 sid=141297 + sid=141298 に
 
     分散登録、 双方の series_key に 紐付け。
-
-    '
-- series_keys:
-  - qid:Q719354|name:岸辺露伴は動かない
-  qid: null
-  number: 1
-  isbn13: '9784088708720'
-  release_date: 2013-11
-  publisher: 集英社
-  edition_type: standard
-  title_display: 岸辺露伴は動かない (1)
-  source: madb-rescue
-  added_at: '2026-05-25'
-  note: 'MADB record は 存在する (= M406985) が、 number 表記なしのため 種2 build script が
-
-    「number=0 + is_extra=1 (= 番外編)」 と 判定 → audit から 二重弾きされていた。
-
-    実態は 「岸辺露伴は動かない」 シリーズの 1 巻目 (= 全 3 巻、 2 巻 M520911 = 2018-07、
-
-    3 巻 M1062734 = 2025-05)。 種4 で number=1 として 補完登録、 audit cluster に
-
-    1 巻 として 反映。
-
-    根本対策は 種2 build script 「number 不明 = extra 扱い」 logic の修正だが
-
-    全件影響 で 別議論。 短期は 種4 補完で 個別対処。
 
     '
 - series_keys:
@@ -170,12 +118,7 @@ volumes:
   title_display: ゼロ THE MAN OF THE CREATION 50
   source: amazon
   added_at: '2026-05-29'
-  note: "MADB 取込もれ。 Amazon 確認 (= ISBN 978-4-08-859449-1、 2004-12-03、 194p、\n4.4 /\
-    \ 12 レビュー)。 「ゼロ THE MAN OF THE CREATION」 全78巻中 第50巻、\n原作 愛英史 / 漫画 里見桂、 集英社ジャンプコミックスデラックス。\n\
-    audit --by-title で max=78 / present=77 / 欠番=50 として検出。\n★ build 修正済 (2026-05-29):\
-    \ 種2 の この series (= sid=79110) は\n(1) edition が「ジャンプ・コミックスデラックス」 = deluxe type\
-    \ に是正\n    (旧 shinsoban 誤分類)。 本 entry も edition_type: deluxe に揃え 78巻通しに合流。\n(2)\
-    \ 作者 = 里見桂(作画) を C-ID 解決で紐付け (愛英史=原作 は mangaka.csv 未登録で保留)。\n"
+  note: "MADB 取込もれ。 Amazon 確認 (= ISBN 978-4-08-859449-1、 2004-12-03、 194p、\n4.4 / 12 レビュー)。 「ゼロ THE MAN OF THE CREATION」 全78巻中 第50巻、\n原作 愛英史 / 漫画 里見桂、 集英社ジャンプコミックスデラックス。\naudit --by-title で max=78 / present=77 / 欠番=50 として検出。\n★ build 修正済 (2026-05-29): 種2 の この series (= sid=79110) は\n(1) edition が「ジャンプ・コミックスデラックス」 = deluxe type に是正\n    (旧 shinsoban 誤分類)。 本 entry も edition_type: deluxe に揃え 78巻通しに合流。\n(2) 作者 = 里見桂(作画) を C-ID 解決で紐付け (愛英史=原作 は mangaka.csv 未登録で保留)。\n"
 - series_keys:
   - qid:Q219948|name:半妖の夜叉姫|sub:異伝・絵本草子
   - qid:Q8193642|name:半妖の夜叉姫
@@ -255,27 +198,6 @@ volumes:
 
     '
 - series_keys:
-  - name:手塚治虫|name:奇子
-  qid: null
-  number: 2
-  isbn13: '9784886533111'
-  release_date: '1985-12-30'
-  publisher: 大都社
-  imprint: ハードコミックス
-  edition_type: standard
-  title_display: 奇子 下
-  source: ndl
-  added_at: '2026-06-21'
-  note: 'MADB取込もれ。 大都社ハードコミックス 奇子は上下2巻構成だが本番は上巻のみ=下巻取りこぼし。
-
-    ★NDL確証: 大都社「奇子 上巻/下巻」1985.12.30、 上=ISBN-10 4886533108(→9784886533104)/
-
-    下=4886533116(→9784886533111、 検算OK)。 初版は1973-74(ISBN無)、 1985再版でISBN化。
-
-    下巻のみ補完(上は既存=1973初版)。 ★series_keyはbest-effort(種2 sqlite空のため未照合)、 次promote時に要確認。
-
-    '
-- series_keys:
   - qid:Q6782352|name:ドリームバスター
   qid: null
   number: 3
@@ -319,72 +241,6 @@ volumes:
   source: rakuten
   added_at: '2026-06-21'
   note: フラグメント中間欠け補完(楽天harvest・題+著者照合)。dream-buster
-- series_keys:
-  - name:彦久保雅博|name:遊・戯・王5D's
-  qid: null
-  number: 3
-  isbn13: '9784088703237'
-  release_date: '2011-09-02'
-  edition_type: standard
-  title_display: 遊・戯・王5D's 3
-  source: rakuten
-  added_at: '2026-06-21'
-  note: フラグメント中間欠け補完(楽天harvest・題+著者照合)。yuu-gi-ou-5ds
-- series_keys:
-  - name:彦久保雅博|name:遊・戯・王5D's
-  qid: null
-  number: 4
-  isbn13: '9784088704388'
-  release_date: '2012-06-04'
-  edition_type: standard
-  title_display: 遊戯王5D’s（4）
-  source: rakuten
-  added_at: '2026-06-21'
-  note: フラグメント中間欠け補完(楽天harvest・題+著者照合)。yuu-gi-ou-5ds
-- series_keys:
-  - name:彦久保雅博|name:遊・戯・王5D's
-  qid: null
-  number: 5
-  isbn13: '9784088705644'
-  release_date: '2013-01-04'
-  edition_type: standard
-  title_display: 遊・戯・王5D's 5
-  source: rakuten
-  added_at: '2026-06-21'
-  note: フラグメント中間欠け補完(楽天harvest・題+著者照合)。yuu-gi-ou-5ds
-- series_keys:
-  - name:彦久保雅博|name:遊・戯・王5D's
-  qid: null
-  number: 6
-  isbn13: '9784088707938'
-  release_date: '2013-08-02'
-  edition_type: standard
-  title_display: 遊・戯・王5D's 6
-  source: rakuten
-  added_at: '2026-06-21'
-  note: フラグメント中間欠け補完(楽天harvest・題+著者照合)。yuu-gi-ou-5ds
-- series_keys:
-  - name:彦久保雅博|name:遊・戯・王5D's
-  qid: null
-  number: 7
-  isbn13: '9784088800394'
-  release_date: '2014-03-04'
-  edition_type: standard
-  title_display: 遊・戯・王5D's 7
-  source: rakuten
-  added_at: '2026-06-21'
-  note: フラグメント中間欠け補完(楽天harvest・題+著者照合)。yuu-gi-ou-5ds
-- series_keys:
-  - name:彦久保雅博|name:遊・戯・王5D's
-  qid: null
-  number: 8
-  isbn13: '9784088802053'
-  release_date: '2014-10-03'
-  edition_type: standard
-  title_display: 遊・戯・王5D's 8
-  source: rakuten
-  added_at: '2026-06-21'
-  note: フラグメント中間欠け補完(楽天harvest・題+著者照合)。yuu-gi-ou-5ds
 - series_keys:
   - qid:Q11575167|name:あさかぜ君
   qid: null
@@ -749,127 +605,6 @@ volumes:
   added_at: '2026-06-21'
   note: フラグメント中間欠け補完(楽天harvest・題+著者照合)。damenzu-walker
 - series_keys:
-  - qid:Q11303326|name:Gurazeni
-  qid: null
-  number: 5
-  isbn13: '9784063871210'
-  release_date: '2012-06-22'
-  edition_type: standard
-  title_display: グラゼニ（05）
-  source: rakuten
-  added_at: '2026-06-21'
-  note: フラグメント中間欠け補完(楽天harvest・題完全一致+著者照合)。gurazeni-2014
-- series_keys:
-  - qid:Q11303326|name:Gurazeni
-  qid: null
-  number: 6
-  isbn13: '9784063871319'
-  release_date: '2012-07-23'
-  edition_type: standard
-  title_display: グラゼニ 6
-  source: rakuten
-  added_at: '2026-06-21'
-  note: フラグメント中間欠け補完(楽天harvest・題完全一致+著者照合)。gurazeni-2014
-- series_keys:
-  - qid:Q11303326|name:Gurazeni
-  qid: null
-  number: 7
-  isbn13: '9784063871463'
-  release_date: '2012-09-21'
-  edition_type: standard
-  title_display: グラゼニ（7）
-  source: rakuten
-  added_at: '2026-06-21'
-  note: フラグメント中間欠け補完(楽天harvest・題完全一致+著者照合)。gurazeni-2014
-- series_keys:
-  - qid:Q11303326|name:Gurazeni
-  qid: null
-  number: 8
-  isbn13: '9784063871579'
-  release_date: '2012-11-22'
-  edition_type: standard
-  title_display: グラゼニ（8）
-  source: rakuten
-  added_at: '2026-06-21'
-  note: フラグメント中間欠け補完(楽天harvest・題完全一致+著者照合)。gurazeni-2014
-- series_keys:
-  - qid:Q11303326|name:Gurazeni
-  qid: null
-  number: 9
-  isbn13: '9784063871890'
-  release_date: '2013-02-22'
-  edition_type: standard
-  title_display: グラゼニ（9）
-  source: rakuten
-  added_at: '2026-06-21'
-  note: フラグメント中間欠け補完(楽天harvest・題完全一致+著者照合)。gurazeni-2014
-- series_keys:
-  - qid:Q11303326|name:Gurazeni
-  qid: null
-  number: 10
-  isbn13: '9784063872118'
-  release_date: '2013-05-23'
-  edition_type: standard
-  title_display: グラゼニ（10）
-  source: rakuten
-  added_at: '2026-06-21'
-  note: フラグメント中間欠け補完(楽天harvest・題完全一致+著者照合)。gurazeni-2014
-- series_keys:
-  - qid:Q11303326|name:Gurazeni
-  qid: null
-  number: 11
-  isbn13: '9784063872316'
-  release_date: '2013-07-23'
-  edition_type: standard
-  title_display: グラゼニ（11）
-  source: rakuten
-  added_at: '2026-06-21'
-  note: フラグメント中間欠け補完(楽天harvest・題完全一致+著者照合)。gurazeni-2014
-- series_keys:
-  - qid:Q11303326|name:Gurazeni
-  qid: null
-  number: 12
-  isbn13: '9784063872484'
-  release_date: '2013-10-23'
-  edition_type: standard
-  title_display: グラゼニ（12）
-  source: rakuten
-  added_at: '2026-06-21'
-  note: フラグメント中間欠け補完(楽天harvest・題完全一致+著者照合)。gurazeni-2014
-- series_keys:
-  - qid:Q11303326|name:Gurazeni
-  qid: null
-  number: 13
-  isbn13: '9784063872866'
-  release_date: '2014-01-23'
-  edition_type: standard
-  title_display: グラゼニ（13）
-  source: rakuten
-  added_at: '2026-06-21'
-  note: フラグメント中間欠け補完(楽天harvest・題完全一致+著者照合)。gurazeni-2014
-- series_keys:
-  - qid:Q11303326|name:Gurazeni
-  qid: null
-  number: 14
-  isbn13: '9784063883275'
-  release_date: 2014-04
-  edition_type: standard
-  title_display: グラゼニ（14）
-  source: rakuten
-  added_at: '2026-06-21'
-  note: フラグメント中間欠け補完(楽天harvest・題完全一致+著者照合)。gurazeni-2014
-- series_keys:
-  - qid:Q11303326|name:Gurazeni
-  qid: null
-  number: 15
-  isbn13: '9784063883527'
-  release_date: '2014-07-23'
-  edition_type: standard
-  title_display: グラゼニ（15）
-  source: rakuten
-  added_at: '2026-06-21'
-  note: フラグメント中間欠け補完(楽天harvest・題完全一致+著者照合)。gurazeni-2014
-- series_keys:
   - qid:Q3777311|name:名探偵夢水清志郎事件ノート
   qid: null
   number: 10
@@ -877,28 +612,6 @@ volumes:
   release_date: '2010-09-06'
   edition_type: standard
   title_display: 名探偵夢水清志郎事件ノート 10
-  source: rakuten+wikipedia
-  added_at: '2026-06-21'
-  note: 版誤分割統合(KCデラックス)+中間欠け補完。10=ハワイ幽霊城後編/12=ミステリーの館前編/13=後編(NDL確証)
-- series_keys:
-  - qid:Q3777311|name:名探偵夢水清志郎事件ノート
-  qid: null
-  number: 12
-  isbn13: '9784063767902'
-  release_date: '2013-03-06'
-  edition_type: standard
-  title_display: 名探偵夢水清志郎事件ノート 12
-  source: rakuten+wikipedia
-  added_at: '2026-06-21'
-  note: 版誤分割統合(KCデラックス)+中間欠け補完。10=ハワイ幽霊城後編/12=ミステリーの館前編/13=後編(NDL確証)
-- series_keys:
-  - qid:Q3777311|name:名探偵夢水清志郎事件ノート
-  qid: null
-  number: 13
-  isbn13: '9784063767919'
-  release_date: '2013-03-06'
-  edition_type: standard
-  title_display: 名探偵夢水清志郎事件ノート 13
   source: rakuten+wikipedia
   added_at: '2026-06-21'
   note: 版誤分割統合(KCデラックス)+中間欠け補完。10=ハワイ幽霊城後編/12=ミステリーの館前編/13=後編(NDL確証)
@@ -1026,17 +739,6 @@ volumes:
 - series_keys:
   - qid:Q11576599|name:本当にあった愉快な話
   qid: null
-  number: 2
-  isbn13: '9784884758233'
-  release_date: '1995-07-27'
-  edition_type: standard
-  title_display: 田島みるくの本当にあった愉快な話（2）
-  source: rakuten
-  added_at: '2026-06-21'
-  note: 田島みるく単独作・中間欠け補完(誤ってアンソロ判定→訂正)。hontou-ni-atta-yukai-na-hanashi
-- series_keys:
-  - qid:Q11576599|name:本当にあった愉快な話
-  qid: null
   number: 4
   isbn13: '9784812450963'
   release_date: '1996-10-28'
@@ -1101,51 +803,6 @@ volumes:
   added_at: '2026-06-21'
   note: 田島みるく単独作・#10補完。hontou-ni-atta-yukai-na-hanashi
 - series_keys:
-  - name:まに|name:安達としまむら
-  number: 8
-  isbn13: '9784049521603'
-  release_date: 2026-04
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
-  - qid:Q11464797|name:艶漢
-  number: 21
-  isbn13: '9784403624087'
-  release_date: 2026-06
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
-  - name:紘井ミチキ|name:愛だとか復讐だとか
-  number: 4
-  isbn13: '9784088942025'
-  release_date: 2026-05
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
-  - name:海原ゆた|name:愛が重い騎士公爵は、追放令嬢のすべてを奪い尽くしたい。
-  number: 5
-  isbn13: '9784758098625'
-  release_date: 2026-05
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
-  - name:(4)|name:相棒に毒がありまして!
-  number: 3
-  isbn13: '9784065424865'
-  release_date: 2026-05
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
   - name:多治見尚哉|name:茜部先生は照れ知らず
   number: 5
   isbn13: '9784088851167'
@@ -1164,37 +821,10 @@ volumes:
   added_at: '2026-06-25'
   note: 2026新刊蒸留 型1 promote --only 用
 - series_keys:
-  - qid:Q8964576|name:曙橋三叉路白鳳喫茶室にて
-  number: 5
-  isbn13: '9784592231288'
-  release_date: 2026-05
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
-  - name:たじまこと|name:アキはハルとごはんを食べたいおかわり!
-  number: 5
-  isbn13: '9784801989504'
-  release_date: 2026-04
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
   - name:六原ミツヂ|name:悪夢から目覚めた傲慢令嬢はやり直しを模索中
   number: 11
   isbn13: '9784575424348'
   release_date: 2026-06
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
-  - name:涼風|name:悪役令嬢後宮物語王国激動編
-  number: 7
-  isbn13: '9784866579191'
-  release_date: 2026-05
   edition_type: standard
   source: ndl-distill-2026
   added_at: '2026-06-25'
@@ -1212,123 +842,6 @@ volumes:
   - qid:Q11358889|name:悪役令嬢転生おじさん
   number: 10
   isbn13: '9784785981921'
-  release_date: 2026-05
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
-  - name:双葉はづき|name:アルバート家の令嬢は没落をご所望です
-  number: 8
-  isbn13: '9784045000881'
-  release_date: 2026-05
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
-  - qid:Q30930791|name:アルマーク
-  number: 7
-  isbn13: '9784046857675'
-  release_date: 2026-04
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
-  - name:琥珀よる|name:アメーリアの好奇的ロマンス
-  number: 3
-  isbn13: '9784065434826'
-  release_date: 2026-05
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
-  - name:青桐ナツ|name:あめつちだれかれそこかしこ
-  number: 11
-  isbn13: '9784800017611'
-  release_date: 2026-05
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
-  - qid:Q1093746|name:青の祓魔師
-  number: 34
-  isbn13: '9784088850054'
-  release_date: 2026-05
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
-  - qid:Q100454750|name:アオのハコ
-  number: 25
-  isbn13: '9784088850351'
-  release_date: 2026-05
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
-  - qid:Q8049952|name:青のミブロ-新選組編-
-  number: 10
-  isbn13: '9784065433232'
-  release_date: 2026-04
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
-  - qid:Q18545757|name:青のオーケストラ
-  number: 15
-  isbn13: '9784098545162'
-  release_date: 2026-04
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
-  - name:桜井ミヤト|name:蒼く染めろ
-  number: 20
-  isbn13: '9784065436325'
-  release_date: 2026-05
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
-  - qid:Q3201024|name:あらばけ!荒吐グングンパーク
-  number: 2
-  isbn13: '9784088848808'
-  release_date: 2026-05
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
-  - name:ox|name:アラフォー冒険者、伝説となる|sub:SSランクの娘に強化されたらSSSランクになりました
-  number: 11
-  isbn13: '9784866755052'
-  release_date: 2026-05
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
-  - name:鯛夢|name:ある設計士の忌録
-  number: 9
-  isbn13: '9784022759054'
-  release_date: 2026-05
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
-  - qid:Q11330302|name:アサギロ
-  number: 33
-  isbn13: '9784098545933'
   release_date: 2026-05
   edition_type: standard
   source: ndl-distill-2026
@@ -1357,42 +870,6 @@ volumes:
   number: 4
   isbn13: '9784088850542'
   release_date: 2026-06
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
-  - name:結城アオ|name:当て馬キャラのくせして、スパダリ王子に寵愛されています。
-  number: 5
-  isbn13: '9784434374111'
-  release_date: 2026-05
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
-  - name:ココナス☆ルンバ|name:あつまれどうぶつの森～無人島Diary～
-  number: 13
-  isbn13: '9784091541536'
-  release_date: 2026-05
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
-  - name:ツノニガウ|name:アザミヤコを好きになる
-  number: 3
-  isbn13: '9784046858191'
-  release_date: 2026-04
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
-  - name:原鉄平|name:あずさ荘の食卓
-  number: 3
-  isbn13: '9784065432884'
-  release_date: 2026-04
   edition_type: standard
   source: ndl-distill-2026
   added_at: '2026-06-25'
@@ -1443,15 +920,6 @@ volumes:
   added_at: '2026-06-25'
   note: 2026新刊蒸留 型1 promote --only 用
 - series_keys:
-  - name:しろ|name:カメラ、はじめてもいいですか?
-  number: 8
-  isbn13: '9784785981778'
-  release_date: 2026-05
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
   - name:京極夏彦|name:中禅寺先生物怪講義録|sub:先生が謎を解いてしまうから。
   number: 13
   isbn13: '9784065431245'
@@ -1470,15 +938,6 @@ volumes:
   added_at: '2026-06-25'
   note: 2026新刊蒸留 型1 promote --only 用
 - series_keys:
-  - name:天乃聖樹|name:クラスの大嫌いな女子と結婚することになった。
-  number: 9
-  isbn13: '9784041173848'
-  release_date: 2026-04
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
   - qid:Q11548217|name:クライマックスネクロマンス
   number: 4
   isbn13: '9784785981938'
@@ -1488,27 +947,9 @@ volumes:
   added_at: '2026-06-25'
   note: 2026新刊蒸留 型1 promote --only 用
 - series_keys:
-  - qid:Q6410148|name:大市民がん闘病記
-  number: 3
-  isbn13: '9784098640126'
-  release_date: 2026-06
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
   - name:ヤマダモカ|name:男装騎士は王太子のお気に入り
   number: 3
   isbn13: '9784434364846'
-  release_date: 2026-06
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
-  - 'name:大熊猫介|name:脱法テイマーの成り上がり冒険譚|sub:Sランク美少女冒険者が俺の獣魔になっテイマす : THE COMIC'
-  number: 8
-  isbn13: '9784867169698'
   release_date: 2026-06
   edition_type: standard
   source: ndl-distill-2026
@@ -1542,15 +983,6 @@ volumes:
   added_at: '2026-06-25'
   note: 2026新刊蒸留 型1 promote --only 用
 - series_keys:
-  - name:岸田こあら|name:英雄教室
-  number: 23
-  isbn13: '9784301005148'
-  release_date: 2026-05
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
   - name:さとう|name:S級冒険者が歩む道
   number: 3
   isbn13: '9784815631031'
@@ -1563,15 +995,6 @@ volumes:
   - name:待緒イサミ|name:十二支色恋草子
   number: 4
   isbn13: '9784403680540'
-  release_date: 2026-05
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
-  - name:臼井彰一|name:悪祓士のキヨシくん
-  number: 8
-  isbn13: '9784088850399'
   release_date: 2026-05
   edition_type: standard
   source: ndl-distill-2026
@@ -1614,15 +1037,6 @@ volumes:
   added_at: '2026-06-25'
   note: 2026新刊蒸留 型1 promote --only 用
 - series_keys:
-  - name:佐原実波|name:ガクサン
-  number: 15
-  isbn13: '9784065431580'
-  release_date: 2026-04
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
   - name:バンダイナムコエンターテインメント|name:学園アイドルマスターgold rush
   number: 6
   isbn13: '9784253013451'
@@ -1641,27 +1055,9 @@ volumes:
   added_at: '2026-06-25'
   note: 2026新刊蒸留 型1 promote --only 用
 - series_keys:
-  - qid:Q11639166|name:げにかすり
-  number: 4
-  isbn13: '9784088942315'
-  release_date: 2026-05
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
   - name:ネコ太郎|name:限界OLさんは悪役令嬢さまに仕えたい
   number: 6
   isbn13: '9784253013208'
-  release_date: 2026-05
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
-  - qid:Q1049596|name:銀太郎さんお頼み申す
-  number: 10
-  isbn13: '9784087921052'
   release_date: 2026-05
   edition_type: standard
   source: ndl-distill-2026
@@ -1677,27 +1073,9 @@ volumes:
   added_at: '2026-06-25'
   note: 2026新刊蒸留 型1 promote --only 用
 - series_keys:
-  - name:真條りの|name:ご懐妊!!
-  number: 5
-  isbn13: '9784813765981'
-  release_date: 2026-05
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
   - name:仲里はるな|name:伍と碁
   number: 6
   isbn13: '9784065438305'
-  release_date: 2026-06
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
-  - name:前原タケル|name:ごくりっ
-  number: 7
-  isbn13: '9784098640096'
   release_date: 2026-06
   edition_type: standard
   source: ndl-distill-2026
@@ -1708,60 +1086,6 @@ volumes:
   number: 17
   isbn13: '9784107729507'
   release_date: 2026-06
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
-  - name:戸流ケイ|name:獄卒クラーケン
-  number: 7
-  isbn13: '9784301005407'
-  release_date: 2026-05
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
-  - qid:Q11562404|name:ゴールデン・ガイ
-  number: 14
-  isbn13: '9784537173994'
-  release_date: 2026-06
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
-  - qid:Q22125577|name:ゴールデンマン
-  number: 9
-  isbn13: '9784065435359'
-  release_date: 2026-05
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
-  - qid:Q2661273|name:ゴルゴ13
-  number: 220
-  isbn13: '9784845870905'
-  release_date: 2026-04
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
-  - name:木南ユカ|name:五輪の女神さま|sub:なでしこ寮のメダルごはん
-  number: 13
-  isbn13: '9784065436233'
-  release_date: 2026-05
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
-  - name:蒼川なな|name:合コンに行ったら女がいなかった話
-  number: 11
-  isbn13: '9784301004561'
-  release_date: 2026-04
   edition_type: standard
   source: ndl-distill-2026
   added_at: '2026-06-25'
@@ -1779,15 +1103,6 @@ volumes:
   - qid:Q11530895|name:彼岸島48日後…
   number: 54
   isbn13: '9784065438268'
-  release_date: 2026-06
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
-  - name:大庭そと|name:引きこもり令嬢は話のわかる聖獣番
-  number: 9
-  isbn13: '9784758099158'
   release_date: 2026-06
   edition_type: standard
   source: ndl-distill-2026
@@ -1830,24 +1145,6 @@ volumes:
   added_at: '2026-06-25'
   note: 2026新刊蒸留 型1 promote --only 用
 - series_keys:
-  - name:会田小路ちょこぷでぃんぐ|name:泡沫のムジナ
-  number: 3
-  isbn13: '9784758099189'
-  release_date: 2026-06
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
-  - name:ひさまくまこ|name:一畳間まんきつ暮らし!
-  number: 5
-  isbn13: '9784832297227'
-  release_date: 2026-06
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
   - name:あぺこ|name:イケボ配信者は俺狙い!?
   number: 7
   isbn13: '9784592721864'
@@ -1857,54 +1154,9 @@ volumes:
   added_at: '2026-06-25'
   note: 2026新刊蒸留 型1 promote --only 用
 - series_keys:
-  - name:あさぎ龍|name:イケナイ菜々子さん
-  number: 12
-  isbn13: '9784785981754'
-  release_date: 2026-05
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
-  - name:杉野アキユキ|name:生贄家族
-  number: 7
-  isbn13: '9784537173949'
-  release_date: 2026-04
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
-  - name:澄谷ゼニコ|name:息できないのは君のせい
-  number: 7
-  isbn13: '9784799777374'
-  release_date: 2026-04
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
-  - name:大沼隆揮|name:INNU
-  number: 7
-  isbn13: '9784065435304'
-  release_date: 2026-05
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
   - qid:Q6410135|name:いのちの器
   number: 100
   isbn13: '9784253012843'
-  release_date: 2026-04
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
-  - name:塩井こぬ|name:犬窪ノアとなかよしするまで
-  number: 4
-  isbn13: '9784301004653'
   release_date: 2026-04
   edition_type: standard
   source: ndl-distill-2026
@@ -1938,36 +1190,9 @@ volumes:
   added_at: '2026-06-25'
   note: 2026新刊蒸留 型1 promote --only 用
 - series_keys:
-  - name:つな吉|name:異世界辺境メシ
-  number: 5
-  isbn13: '9784065436028'
-  release_date: 2026-05
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
-  - qid:Q56253654|name:異世界ホテルへようこそ
-  number: 5
-  isbn13: '9784785981785'
-  release_date: 2026-05
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
   - name:せらみかる+ユーザーのみなさん|name:異世界の主役は我々だ!
   number: 17
   isbn13: '9784046601094'
-  release_date: 2026-05
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
-  - qid:Q11539452|name:異世界召喚おじさんの銃無双ライフ
-  number: 10
-  isbn13: '9784832206175'
   release_date: 2026-05
   edition_type: standard
   source: ndl-distill-2026
@@ -1983,72 +1208,9 @@ volumes:
   added_at: '2026-06-25'
   note: 2026新刊蒸留 型1 promote --only 用
 - series_keys:
-  - qid:Q97706319|name:異世界転移、地雷付き。
-  number: 3
-  isbn13: '9784041123874'
-  release_date: 2026-04
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
-  - name:慕潔|name:異世界刀匠の魔剣製作ぐらし
-  number: 5
-  isbn13: '9784301005247'
-  release_date: 2026-05
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
-  - name:やまかわ|name:異世界ゆるり紀行|sub:子育てしながら冒険者します
-  number: 12
-  isbn13: '9784434378188'
-  release_date: 2026-05
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
-  - qid:Q11264875|name:慰謝料狩り
-  number: 5
-  isbn13: '9784088942094'
-  release_date: 2026-05
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
-  - qid:Q11411268|name:石神戦記
-  number: 7
-  isbn13: '9784575862225'
-  release_date: 2026-05
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
-  - qid:Q118727268|name:異種族追放コンカフェ
-  number: 3
-  isbn13: '9784048119535'
-  release_date: 2026-05
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
   - qid:Q16263825|name:一式さんは恋を知りたい。
   number: 10
   isbn13: '9784041174388'
-  release_date: 2026-05
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
-  - name:瀬戸めぐむ|name:いっそあなたがトドメを刺して
-  number: 6
-  isbn13: '9784065434987'
   release_date: 2026-05
   edition_type: standard
   source: ndl-distill-2026
@@ -2076,15 +1238,6 @@ volumes:
   - name:大橋盛平|name:JK Biker
   number: 3
   isbn13: '9784065438930'
-  release_date: 2026-06
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
-  - qid:Q1051001|name:JUMBO MAX
-  number: 16
-  isbn13: '9784098640171'
   release_date: 2026-06
   edition_type: standard
   source: ndl-distill-2026
@@ -2127,55 +1280,10 @@ volumes:
   added_at: '2026-06-25'
   note: 2026新刊蒸留 型1 promote --only 用
 - series_keys:
-  - name:片山陽介|name:株式会社神かくし
-  number: 11
-  isbn13: '9784785981679'
-  release_date: 2026-04
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
-  - qid:Q126006258|name:カグラバチ
-  number: 11
-  isbn13: '9784088851020'
-  release_date: 2026-05
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
-  - name:ましゅ太郎|name:カグライ
-  number: 4
-  isbn13: '9784098545360'
-  release_date: 2026-04
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
-  - name:さりいB|name:怪異部
-  number: 3
-  isbn13: '9784048119238'
-  release_date: 2026-05
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
   - qid:Q446051|name:海自とおかん
   number: 8
   isbn13: '9784065438589'
   release_date: 2026-06
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
-  - qid:Q553105|name:灰仭巫覡
-  number: 8
-  isbn13: '9784065436301'
-  release_date: 2026-05
   edition_type: standard
   source: ndl-distill-2026
   added_at: '2026-06-25'
@@ -2190,90 +1298,9 @@ volumes:
   added_at: '2026-06-25'
   note: 2026新刊蒸留 型1 promote --only 用
 - series_keys:
-  - qid:Q24264919|name:怪怪ギギギギギ
-  number: 2
-  isbn13: '9784575862195'
-  release_date: 2026-05
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
-  - qid:Q16265166|name:海賊×少女
-  number: 3
-  isbn13: '9784832206182'
-  release_date: 2026-05
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
-  - qid:Q2448778|name:カッコウの許嫁
-  number: 32
-  isbn13: '9784065430019'
-  release_date: 2026-04
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
-  - name:くさかべゆうへい|name:かくかまた
-  number: 4
-  isbn13: '9784098545858'
-  release_date: 2026-05
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
-  - qid:Q131225995|name:描くなるうえは
-  number: 7
-  isbn13: '9784592166979'
-  release_date: 2026-05
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
-  - name:豆腐ピザ丸|name:隠れてないで出ておいで
-  number: 5
-  isbn13: '9784867871713'
-  release_date: 2026-05
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
   - name:時宗孝輔|name:神アプリクリミナルハンター
   number: 3
   isbn13: '9784253013093'
-  release_date: 2026-05
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
-  - name:ヤマサキリョウ|name:カミキル-KAMI KILL-
-  number: 3
-  isbn13: '9784088941691'
-  release_date: 2026-05
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
-  - name:和宮玄|name:神の使いでのんびり異世界旅行
-  number: 3
-  isbn13: '9784815624507'
-  release_date: 2026-05
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
-  - qid:Q27917530|name:神さま学校の落ちこぼれ
-  number: 14
-  isbn13: '9784592225805'
   release_date: 2026-05
   edition_type: standard
   source: ndl-distill-2026
@@ -2307,24 +1334,6 @@ volumes:
   added_at: '2026-06-25'
   note: 2026新刊蒸留 型1 promote --only 用
 - series_keys:
-  - name:Roy|name:神達に拾われた男
-  number: 16
-  isbn13: '9784301005018'
-  release_date: 2026-05
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
-  - qid:Q11454125|name:彼女、お借りします
-  number: 45
-  isbn13: '9784065433287'
-  release_date: 2026-04
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
   - name:匈歌ハトリ|name:完全回避ヒーラーの軌跡
   number: 14
   isbn13: '9784046601087'
@@ -2343,64 +1352,10 @@ volumes:
   added_at: '2026-06-25'
   note: 2026新刊蒸留 型1 promote --only 用
 - series_keys:
-  - qid:Q11462894|name:かろりのつやごとSeason2
-  number: 3
-  isbn13: '9784420154994'
-  release_date: 2026-04
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
-  - qid:Q3482283|name:花燭の白
-  number: 11
-  isbn13: '9784758098526'
-  release_date: 2026-05
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
-  - qid:Q3482283|name:花燭の白
-  number: 11
-  isbn13: '9784758098519'
-  release_date: 2026-05
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
-  - name:高津ケイタ|name:かつては最強無敵の勇者様
-  number: 3
-  isbn13: '9784832210301'
-  release_date: 2026-05
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
-  - qid:Q3514203|name:警部補ダイマジン
-  number: 28
-  isbn13: '9784537173819'
-  release_date: 2026-05
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
   - name:はてな|name:契約結婚のその後
   number: 3
   isbn13: '9784065434970'
   release_date: 2026-05
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
-  - name:装一|name:結界師への転生
-  number: 10
-  isbn13: '9784344857322'
-  release_date: 2026-04
   edition_type: standard
   source: ndl-distill-2026
   added_at: '2026-06-25'
@@ -2433,24 +1388,6 @@ volumes:
   added_at: '2026-06-25'
   note: 2026新刊蒸留 型1 promote --only 用
 - series_keys:
-  - name:かさいちあき|name:キミの撫で方躾け方
-  number: 7
-  isbn13: '9784796418119'
-  release_date: 2026-04
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
-  - qid:Q116936941|name:君を忘れる恋がしたい
-  number: 8
-  isbn13: '9784088432625'
-  release_date: 2026-05
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
   - qid:Q128450270|name:君と宇宙を歩くために
   number: 6
   isbn13: '9784065433867'
@@ -2460,46 +1397,10 @@ volumes:
   added_at: '2026-06-25'
   note: 2026新刊蒸留 型1 promote --only 用
 - series_keys:
-  - name:永田晃一|name:鬼門街KARMA
-  number: 12
-  isbn13: '9784785981662'
-  release_date: 2026-04
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
-  - qid:Q11399941|name:キスからはじまる異世界ハーレム
-  number: 4
-  isbn13: '9784801989382'
-  release_date: 2026-04
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
   - name:のりしろちゃん|name:気絶勇者と暗殺姫
   number: 15
   isbn13: '9784253011907'
   release_date: 2026-04
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
-  - name:三木なずな|name:貴族転生|sub:恵まれた生まれから最強の力を得る
-  number: 11
-  isbn13: '9784301004950'
-  release_date: 2026-05
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
-  - name:友麻碧|name:傷モノの花嫁
-  number: 11
-  isbn13: '9784065436899'
-  release_date: 2026-05
   edition_type: standard
   source: ndl-distill-2026
   added_at: '2026-06-25'
@@ -2532,24 +1433,6 @@ volumes:
   added_at: '2026-06-25'
   note: 2026新刊蒸留 型1 promote --only 用
 - series_keys:
-  - name:三国史明|name:国宝
-  number: 5
-  isbn13: '9784098638857'
-  release_date: 2026-05
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
-  - name:はるかわ陽|name:今度は絶対に邪魔しませんっ!
-  number: 6
-  isbn13: '9784344857353'
-  release_date: 2026-04
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
   - name:和田フミエ|name:婚活とミシン
   number: 3
   isbn13: '9784253013505'
@@ -2563,15 +1446,6 @@ volumes:
   number: 34
   isbn13: '9784088850047'
   release_date: 2026-06
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
-  - name:ゆきの|name:今世は五縁がありますように!
-  number: 6
-  isbn13: '9784040763842'
-  release_date: 2026-05
   edition_type: standard
   source: ndl-distill-2026
   added_at: '2026-06-25'
@@ -2604,55 +1478,10 @@ volumes:
   added_at: '2026-06-25'
   note: 2026新刊蒸留 型1 promote --only 用
 - series_keys:
-  - name:櫻井みこと|name:婚約者が明日、結婚するそうです。
-  number: 5
-  isbn13: '9784575424218'
-  release_date: 2026-05
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
   - qid:Q5359621|name:これ描いて死ね
   number: 9
   isbn13: '9784098546466'
   release_date: 2026-06
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
-  - name:ゔぇじたぶる|name:今年注目のエースちゃん
-  number: 3
-  isbn13: '9784801989443'
-  release_date: 2026-04
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
-  - qid:Q97706270|name:こういうのがいい
-  number: 13
-  isbn13: '9784088941769'
-  release_date: 2026-05
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
-  - qid:Q116937131|name:好都合セミフレンド
-  number: 4
-  isbn13: '9784832297142'
-  release_date: 2026-05
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
-  - qid:Q11550941|name:煌燿国後宮譚黒衣の守護
-  number: 5
-  isbn13: '9784098734146'
-  release_date: 2026-05
   edition_type: standard
   source: ndl-distill-2026
   added_at: '2026-06-25'
@@ -2667,99 +1496,9 @@ volumes:
   added_at: '2026-06-25'
   note: 2026新刊蒸留 型1 promote --only 用
 - series_keys:
-  - qid:Q22126225|name:九龍ジェネリックロマンス
-  number: 12
-  isbn13: '9784088940649'
-  release_date: 2026-04
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
-  - qid:Q22123803|name:くびしょい勇者
-  number: 3
-  isbn13: '9784868051558'
-  release_date: 2026-02
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
-  - qid:Q11583610|name:九条の大罪
-  number: 16
-  isbn13: '9784098636549'
-  release_date: 2026-04
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
   - name:029|name:くまクマ熊ベアー
   number: 14
   isbn13: '9784391167160'
-  release_date: 2026-06
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
-  - name:若松卓宏|name:くまぐらし
-  number: 6
-  isbn13: '9784048119467'
-  release_date: 2026-05
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
-  - name:大宙晃|name:昏姫と恋烏
-  number: 3
-  isbn13: '9784592231257'
-  release_date: 2026-05
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
-  - qid:Q463309|name:黒薔薇アリスD.C.(ダカーポ)al fine
-  number: 6
-  isbn13: '9784098734160'
-  release_date: 2026-05
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
-  - qid:Q11611778|name:くるみっくす
-  number: 2
-  isbn13: '9784832210240'
-  release_date: 2026-04
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
-  - qid:Q11664602|name:クセ強彼女は床にいざなう
-  number: 4
-  isbn13: '9784040763958'
-  release_date: 2026-05
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
-  - name:つっつ|name:クソザコボウコウ押井さん
-  number: 3
-  isbn13: '9784537173987'
-  release_date: 2026-06
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
-  - name:桜瀬彩香|name:薬の魔物の解雇理由@COMIC
-  number: 4
-  isbn13: '9784868540076'
   release_date: 2026-06
   edition_type: standard
   source: ndl-distill-2026
@@ -2775,55 +1514,10 @@ volumes:
   added_at: '2026-06-25'
   note: 2026新刊蒸留 型1 promote --only 用
 - series_keys:
-  - qid:Q15614788|name:空賊ハックと蒸気の姫
-  number: 5
-  isbn13: '9784800017475'
-  release_date: 2026-05
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
-  - qid:Q11279601|name:今日からヒットマンRISING
-  number: 3
-  isbn13: '9784048119108'
-  release_date: 2026-04
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
   - name:転|name:今日も絵に描いた餅が美味い@COMIC
   number: 13
   isbn13: '9784868540120'
   release_date: 2026-07
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
-  - qid:Q11291860|name:今日はもう上がります
-  number: 2
-  isbn13: '9784785981761'
-  release_date: 2026-05
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
-  - qid:Q106479612|name:京兼家の花嫁
-  number: 5
-  isbn13: '9784301005346'
-  release_date: 2026-05
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
-  - name:森川侑|name:休日のわるものさん
-  number: 8
-  isbn13: '9784301004684'
-  release_date: 2026-04
   edition_type: standard
   source: ndl-distill-2026
   added_at: '2026-06-25'
@@ -2874,45 +1568,9 @@ volumes:
   added_at: '2026-06-25'
   note: 2026新刊蒸留 型1 promote --only 用
 - series_keys:
-  - qid:Q24273183|name:機動戦士ガンダムフラナガン・ブーン戦記
-  number: 6
-  isbn13: '9784868051718'
-  release_date: 2026-03
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
-  - name:矢立肇|name:機動絶記ガンダムSEQUEL
-  number: 6
-  isbn13: '9784868051732'
-  release_date: 2026-04
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
-  - name:佐藤洋寿|name:マザーパラサイト
-  number: 17
-  isbn13: '9784867208953'
-  release_date: 2026-06
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
   - qid:Q600217|name:MUJINA INTO THE DEEP
   number: 6
   isbn13: '9784098640195'
-  release_date: 2026-06
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
-  - name:森井暁正|name:ないしょの予習
-  number: 9
-  isbn13: '9784537174007'
   release_date: 2026-06
   edition_type: standard
   source: ndl-distill-2026
@@ -2955,15 +1613,6 @@ volumes:
   added_at: '2026-06-25'
   note: 2026新刊蒸留 型1 promote --only 用
 - series_keys:
-  - qid:Q85884671|name:オバイケ未来案内所
-  number: 3
-  isbn13: '9784301004677'
-  release_date: 2026-04
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
   - name:深澤ねじ|name:溺れる日々はきみのせい
   number: 5
   isbn13: '9784396751036'
@@ -2973,45 +1622,9 @@ volumes:
   added_at: '2026-06-25'
   note: 2026新刊蒸留 型1 promote --only 用
 - series_keys:
-  - qid:Q62601408|name:落合博満のオレ流転生
-  number: 4
-  isbn13: '9784065430521'
-  release_date: 2026-04
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
-  - name:千石かのん|name:落ちこぼれ白魔導士セシルは対象外のはずでした
-  number: 5
-  isbn13: '9784758099196'
-  release_date: 2026-06
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
   - name:常盤魚|name:織田ちゃんと明智くん
   number: 7
   isbn13: '9784065435939'
-  release_date: 2026-05
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
-  - name:ペンギンボックス|name:おでかけ子ザメ
-  number: 8
-  isbn13: '9784046079565'
-  release_date: 2026-03
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
-  - name:サザメ漬け|name:お針子令嬢と氷の伯爵の白い結婚
-  number: 4
-  isbn13: '9784098545285'
   release_date: 2026-05
   edition_type: standard
   source: ndl-distill-2026
@@ -3072,33 +1685,6 @@ volumes:
   added_at: '2026-06-25'
   note: 2026新刊蒸留 型1 promote --only 用
 - series_keys:
-  - name:ゆきさん|name:Only Sense Online
-  number: 23
-  isbn13: '9784040763910'
-  release_date: 2026-05
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
-  - name:たーぼえんじん|name:女騎士とケモミミの子
-  number: 7
-  isbn13: '9784107729392'
-  release_date: 2026-05
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
-  - qid:Q11664151|name:狼皇子と嘘つきな結婚
-  number: 5
-  isbn13: '9784592225812'
-  release_date: 2026-05
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
   - name:青井ぬゐ|name:狼少年真神くん
   number: 3
   isbn13: '9784867208472'
@@ -3112,24 +1698,6 @@ volumes:
   number: 7
   isbn13: '9784824017024'
   release_date: 2026-06
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
-  - name:すかいふぁーむ|name:俺だけ不遇スキルの異世界召喚叛逆記|sub:最弱スキル〈吸収〉が全てを飲み込むまで
-  number: 14
-  isbn13: '9784088941837'
-  release_date: 2026-04
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
-  - name:すかいふぁーむ|name:俺だけ不遇スキルの異世界召喚叛逆記|sub:最弱スキル〈吸収〉が全てを飲み込むまで
-  number: 15
-  isbn13: '9784088942148'
-  release_date: 2026-05
   edition_type: standard
   source: ndl-distill-2026
   added_at: '2026-06-25'
@@ -3153,42 +1721,6 @@ volumes:
   added_at: '2026-06-25'
   note: 2026新刊蒸留 型1 promote --only 用
 - series_keys:
-  - name:葵抄|name:オサナナジミとカノジョと
-  number: 3
-  isbn13: '9784575862218'
-  release_date: 2026-05
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
-  - qid:Q116699399|name:幼馴染とはラブコメにならない
-  number: 20
-  isbn13: '9784065435922'
-  release_date: 2026-05
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
-  - name:雨乃めこ|name:推しがとなりで寝てまして
-  number: 3
-  isbn13: '9784813765943'
-  release_date: 2026-05
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
-  - qid:Q108776348|name:押しかけギャルの中村さん
-  number: 8
-  isbn13: '9784575862232'
-  release_date: 2026-05
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
   - name:川原将裕|name:男の食談義
   number: 5
   isbn13: '9784785982058'
@@ -3198,46 +1730,10 @@ volumes:
   added_at: '2026-06-25'
   note: 2026新刊蒸留 型1 promote --only 用
 - series_keys:
-  - name:ひだかなみ|name:乙女ゲームの破滅フラグしかない悪役令嬢に転生してしまった…
-  number: 13
-  isbn13: '9784758099134'
-  release_date: 2026-06
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
-  - name:たまこpub.|name:おとなの恋は、やぶさかにつき。
-  number: 6
-  isbn13: '9784088432656'
-  release_date: 2026-05
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
-  - name:風来山|name:おっさん冒険者ケインの善行
-  number: 16
-  isbn13: '9784301005049'
-  release_date: 2026-05
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
   - qid:Q11540232|name:王が猫になった
   number: 2
   isbn13: '9784344857605'
   release_date: 2026-05
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
-  - name:漣ミサ|name:王妃様は離婚したい|sub:異世界から聖女様が来たので、もうお役御免ですわね?
-  number: 6
-  isbn13: '9784065432488'
-  release_date: 2026-04
   edition_type: standard
   source: ndl-distill-2026
   added_at: '2026-06-25'
@@ -3261,28 +1757,10 @@ volumes:
   added_at: '2026-06-25'
   note: 2026新刊蒸留 型1 promote --only 用
 - series_keys:
-  - qid:Q6918014|name:Q.E.D.UNIV
-  number: 3
-  isbn13: '9784065429815'
-  release_date: 2026-04
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
   - qid:Q11669298|name:さほこクエスト
   number: 3
   isbn13: '9784253013734'
   release_date: 2026-06
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
-  - name:大川哲|name:SAKAMOTO HOLIDAYS
-  number: 3
-  isbn13: '9784088848396'
-  release_date: 2026-05
   edition_type: standard
   source: ndl-distill-2026
   added_at: '2026-06-25'
@@ -3306,37 +1784,10 @@ volumes:
   added_at: '2026-06-25'
   note: 2026新刊蒸留 型1 promote --only 用
 - series_keys:
-  - name:コモンオム|name:作田刑事の張り込み弁当
-  number: 3
-  isbn13: '9784065432228'
-  release_date: 2026-04
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
   - name:住吉九|name:サンキューピッチ
   number: 6
   isbn13: '9784088850658'
   release_date: 2026-06
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
-  - name:みずうし|name:左遷でしたら喜んで!
-  number: 4
-  isbn13: '9784434378201'
-  release_date: 2026-05
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
-  - name:ハル犬|name:左遷された無能王子は実力を隠したい|sub:二度転生した最強賢者、今世では楽したいので手を抜いてたら、王家を追放された。今更帰ってこいと言われても遅い、領民に実力がバレて、実家に帰してくれないから……
-  number: 7
-  isbn13: '9784049521955'
-  release_date: 2026-04
   edition_type: standard
   source: ndl-distill-2026
   added_at: '2026-06-25'
@@ -3441,15 +1892,6 @@ volumes:
   added_at: '2026-06-25'
   note: 2026新刊蒸留 型1 promote --only 用
 - series_keys:
-  - name:中村淳彦|name:東京貧困女子。
-  number: 17
-  isbn13: '9784098640164'
-  release_date: 2026-06
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
   - qid:Q17685988|name:図書館の大魔術師
   number: 10
   isbn13: '9784065438992'
@@ -3463,33 +1905,6 @@ volumes:
   number: 5
   isbn13: '9784575441215'
   release_date: 2026-06
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
-  - name:やまさき十三|name:釣りバカ日誌番外編シャドーマン
-  number: 3
-  isbn13: '9784098640102'
-  release_date: 2026-06
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
-  - name:やまさき十三|name:釣りバカ日誌
-  number: 118
-  isbn13: '9784098640119'
-  release_date: 2026-06
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
-  - name:逆巻詩音|name:ウチに帰って婚活します
-  number: 4
-  isbn13: '9784098733835'
-  release_date: 2026-05
   edition_type: standard
   source: ndl-distill-2026
   added_at: '2026-06-25'
@@ -3549,27 +1964,9 @@ volumes:
   added_at: '2026-06-25'
   note: 2026新刊蒸留 型1 promote --only 用
 - series_keys:
-  - qid:Q9187051|name:クッキングパパ
-  number: 177
-  isbn13: '9784065432761'
-  release_date: 2026-04
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
   - name:双葉はづき|name:誰にも愛されないので床を磨いていたらそこが聖域化した令嬢の話
   number: 6
   isbn13: '9784575424331'
-  release_date: 2026-06
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
-  - name:紫藤むらさき|name:殿下、あなたが捨てた女が本物の聖女です
-  number: 5
-  isbn13: '9784758099028'
   release_date: 2026-06
   edition_type: standard
   source: ndl-distill-2026
@@ -3585,73 +1982,10 @@ volumes:
   added_at: '2026-06-25'
   note: 2026新刊蒸留 型1 promote --only 用
 - series_keys:
-  - name:もりこも|name:義姉の代わりに、余命一年と言われる侯爵子息様と婚約することになりました
-  number: 7
-  isbn13: '9784065431405'
-  release_date: 2026-04
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
-  - name:みまわがお|name:いじめの仕返しは先生にお任せ
-  number: 3
-  isbn13: '9784301005254'
-  release_date: 2026-05
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
-  - name:匈歌ハトリ|name:厳つい顔で凶悪騎士団長と恐れられる公爵様の最後の婚活相手は社交界の幻の花でした
-  number: 8
-  isbn13: '9784575424119'
-  release_date: 2026-05
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
-  - name:ひろのあきとみ|name:異世界クラス召喚されたらR1〇のスキルを獲得したので、〇りたい放題させてもらいます!
-  number: 5
-  isbn13: '9784537173826'
-  release_date: 2026-05
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
-  - name:みょん|name:異世界で配信活動をしたら大量のヤンデレ信者を生み出してしまった件
-  number: 7
-  isbn13: '9784041170588'
-  release_date: 2026-04
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
-  - name:止田卓史|name:異世界に召喚されたんだけど、なんでも斬れてしまう権能を手に入れたのでイージーモードでした。
-  number: 4
-  isbn13: '9784040763941'
-  release_date: 2026-05
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
   - name:マツモトケンゴ|name:地元のいじめっ子達に仕返ししようとしたら、別の戦いが始まった。
   number: 9
   isbn13: '9784065437469'
   release_date: 2026-06
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
-  - name:ぐんたお|name:「君を愛することはない」と言った氷の魔術師様の片思い相手が、変装した私だった
-  number: 3
-  isbn13: '9784301005186'
-  release_date: 2026-05
   edition_type: standard
   source: ndl-distill-2026
   added_at: '2026-06-25'
@@ -3670,33 +2004,6 @@ volumes:
   number: 16
   isbn13: '9784098545452'
   release_date: 2026-04
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
-  - name:えぞぎんぎつね|name:ここは俺に任せて先に行けと言ってから10年がたったら伝説になっていた。
-  number: 19
-  isbn13: '9784301004394'
-  release_date: 2026-04
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
-  - name:あおいれびん|name:婚約者が浮気相手と駆け落ちしました。王子殿下に溺愛されて幸せなので、今さら戻りたいと言われても困ります。
-  number: 5
-  isbn13: '9784434378324'
-  release_date: 2026-05
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
-  - name:えひと|name:婚約者の浮気現場を見ちゃったので始まりの鐘が鳴りましたthe comic
-  number: 5
-  isbn13: '9784800017543'
-  release_date: 2026-05
   edition_type: standard
   source: ndl-distill-2026
   added_at: '2026-06-25'
@@ -3738,15 +2045,6 @@ volumes:
   added_at: '2026-06-25'
   note: 2026新刊蒸留 型1 promote --only 用
 - series_keys:
-  - qid:Q130725708|name:幼馴染をえらべない!
-  number: 3
-  isbn13: '9784301004660'
-  release_date: 2026-04
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
   - name:はぐはぐ|name:サーシャちゃんとクラスメイトオタクくん
   number: 6
   isbn13: '9784049169140'
@@ -3756,36 +2054,9 @@ volumes:
   added_at: '2026-06-25'
   note: 2026新刊蒸留 型1 promote --only 用
 - series_keys:
-  - name:どまどま|name:最底辺のおっさん冒険者。ギルドを追放されるところで今までの努力が報われ、急に最強スキル《無条件勝利》を得る
-  number: 4
-  isbn13: '9784575424157'
-  release_date: 2026-05
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
-  - qid:Q104013483|name:SAKAMOTO DAYS
-  number: 27
-  isbn13: '9784088850344'
-  release_date: 2026-05
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
   - name:泉里侑希|name:死ぬ運命にある悪役令嬢の兄に転生したので、妹を育てて未来を変えたいと思います
   number: 3
   isbn13: '9784824016522'
-  release_date: 2026-06
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-25'
-  note: 2026新刊蒸留 型1 promote --only 用
-- series_keys:
-  - name:櫛灘ゐるゑ|name:転生したら皇帝でした～生まれながらの皇帝はこの先生き残れるか～@COMIC
-  number: 7
-  isbn13: '9784867949993'
   release_date: 2026-06
   edition_type: standard
   source: ndl-distill-2026
@@ -3810,33 +2081,6 @@ volumes:
   added_at: '2026-06-25'
   note: 2026新刊蒸留 型1 promote --only 用
 - series_keys:
-  - name:バロン吉元1940-|name:あゝ、荒野
-  number: 2
-  isbn13: '9784868230243'
-  release_date: 2026-04
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-26'
-  note: 2026新刊蒸留 promote可(種2在・新巻補完)
-- series_keys:
-  - name:月越優希|name:吾が君散るらむ
-  number: 2
-  isbn13: '9784098545896'
-  release_date: 2026-05
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-26'
-  note: 2026新刊蒸留 promote可(種2在・新巻補完)
-- series_keys:
-  - name:望月沙菜|name:愛されすぎの身代わり婚
-  number: 2
-  isbn13: '9784302118960'
-  release_date: 2026-05
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-26'
-  note: 2026新刊蒸留 promote可(種2在・新巻補完)
-- series_keys:
   - name:サカイタカヒロ|name:あかつきのヒマリとくま
   number: 2
   isbn13: '9784046601100'
@@ -3846,37 +2090,9 @@ volumes:
   added_at: '2026-06-26'
   note: 2026新刊蒸留 promote可(種2在・新巻補完)
 - series_keys:
-  - name:大上誠人|name:悪魔の剣で天使を喰らう
-  number: 2
-  isbn13: '9784041169599'
-  release_date: 2026-05
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-26'
-  note: 2026新刊蒸留 promote可(種2在・新巻補完)
-- series_keys:
   - name:おちゃぼ水|name:悪の皇女はもう誰も殺さない
   number: 2
   isbn13: '9784301005261'
-  release_date: 2026-05
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-26'
-  note: 2026新刊蒸留 promote可(種2在・新巻補完)
-- series_keys:
-  - name:深澄なん|name:悪役令嬢の継母に転生したので娘を幸せにします、力尽くで。
-  number: 2
-  isbn13: '9784800017574'
-  release_date: 2026-05
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-26'
-  note: 2026新刊蒸留 promote可(種2在・新巻補完)
-- series_keys:
-  - 'qid:Q11268420|name:悪役令嬢と悪役令息が、出逢って恋に落ちたなら|sub:名無しの精霊と契約して追い出された令嬢は、今日も令息と競い合っているようです
-    : コミック'
-  number: 7
-  isbn13: '9784815634384'
   release_date: 2026-05
   edition_type: standard
   source: ndl-distill-2026
@@ -3901,33 +2117,6 @@ volumes:
   added_at: '2026-06-26'
   note: 2026新刊蒸留 promote可(種2在・新巻補完)
 - series_keys:
-  - name:大菊小菊|name:悪夢令嬢は一家滅亡の夢を見た|sub:私の目的は生き延びることです
-  number: 5
-  isbn13: '9784065431399'
-  release_date: 2026-04
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-26'
-  note: 2026新刊蒸留 promote可(種2在・新巻補完)
-- series_keys:
-  - name:魯迅|name:阿Q正伝
-  number: 1
-  isbn13: '9784046077684'
-  release_date: 2026-03
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-26'
-  note: 2026新刊蒸留 promote可(種2在・新巻補完)
-- series_keys:
-  - name:やなぎりと|name:あなたの恋心は間違いです!
-  number: 2
-  isbn13: '9784048119559'
-  release_date: 2026-05
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-26'
-  note: 2026新刊蒸留 promote可(種2在・新巻補完)
-- series_keys:
   - name:山口ねね|name:あのまま、キスしときたかった
   number: 2
   isbn13: '9784253013598'
@@ -3941,24 +2130,6 @@ volumes:
   number: 2
   isbn13: '9784065435977'
   release_date: 2026-05
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-26'
-  note: 2026新刊蒸留 promote可(種2在・新巻補完)
-- series_keys:
-  - name:とうのきり|name:アンタと幼なじみってだけでもイヤなのに!
-  number: 2
-  isbn13: '9784301005414'
-  release_date: 2026-05
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-26'
-  note: 2026新刊蒸留 promote可(種2在・新巻補完)
-- series_keys:
-  - name:ろじ|name:青と碧
-  number: 2
-  isbn13: '9784829687383'
-  release_date: 2026-06
   edition_type: standard
   source: ndl-distill-2026
   added_at: '2026-06-26'
@@ -3985,33 +2156,6 @@ volumes:
   - qid:Q9099435|name:妖精国(アルフヘイム)の騎士Ballad～継ぐ視の守護者～
   number: 11
   isbn13: '9784253013536'
-  release_date: 2026-05
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-26'
-  note: 2026新刊蒸留 promote可(種2在・新巻補完)
-- series_keys:
-  - name:熊雪ふる|name:明日もきみに会いに行く
-  number: 2
-  isbn13: '9784796418133'
-  release_date: 2026-04
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-26'
-  note: 2026新刊蒸留 promote可(種2在・新巻補完)
-- series_keys:
-  - name:江本マシメサ|name:あやかし華族の妖狐令嬢、陰陽師と政略結婚する
-  number: 2
-  isbn13: '9784758098557'
-  release_date: 2026-05
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-26'
-  note: 2026新刊蒸留 promote可(種2在・新巻補完)
-- series_keys:
-  - name:伊達きよ|name:アズラエル家の次男は半魔
-  number: 2
-  isbn13: '9784434364655'
   release_date: 2026-05
   edition_type: standard
   source: ndl-distill-2026
@@ -4063,28 +2207,10 @@ volumes:
   added_at: '2026-06-26'
   note: 2026新刊蒸留 promote可(種2在・新巻補完)
 - series_keys:
-  - name:天池のぞむ|name:SSS級スキル配布神官の辺境セカンドライフ
-  number: 3
-  isbn13: '9784824206282'
-  release_date: 2026-05
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-26'
-  note: 2026新刊蒸留 promote可(種2在・新巻補完)
-- series_keys:
   - name:へいろー|name:S級パーティーから追放された狩人、実は世界最強|sub:射程9999の男、帝国の狙撃手として無双する
   number: 2
   isbn13: '9784575420135'
   release_date: 2024-11
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-26'
-  note: 2026新刊蒸留 promote可(種2在・新巻補完)
-- series_keys:
-  - name:へいろー|name:S級パーティーから追放された狩人、実は世界最強|sub:射程9999の男、帝国の狙撃手として無双する
-  number: 4
-  isbn13: '9784575424287'
-  release_date: 2026-05
   edition_type: standard
   source: ndl-distill-2026
   added_at: '2026-06-26'
@@ -4117,28 +2243,10 @@ volumes:
   added_at: '2026-06-26'
   note: 2026新刊蒸留 promote可(種2在・新巻補完)
 - series_keys:
-  - name:下元朗|name:ガチャンキイ
-  number: 2
-  isbn13: '9784088850627'
-  release_date: 2026-05
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-26'
-  note: 2026新刊蒸留 promote可(種2在・新巻補完)
-- series_keys:
   - name:二時八|name:ゲーム知識で最強に成ったモブ兵士は、真の実力を隠したい
   number: 1
   isbn13: '9784575421378'
   release_date: 2025-04
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-26'
-  note: 2026新刊蒸留 promote可(種2在・新巻補完)
-- series_keys:
-  - name:二時八|name:ゲーム知識で最強に成ったモブ兵士は、真の実力を隠したい
-  number: 3
-  isbn13: '9784575424140'
-  release_date: 2026-05
   edition_type: standard
   source: ndl-distill-2026
   added_at: '2026-06-26'
@@ -4153,55 +2261,10 @@ volumes:
   added_at: '2026-06-26'
   note: 2026新刊蒸留 promote可(種2在・新巻補完)
 - series_keys:
-  - name:美樹ヌメ夫|name:GiNVA
-  number: 3
-  isbn13: '9784868051640'
-  release_date: 2026-03
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-26'
-  note: 2026新刊蒸留 promote可(種2在・新巻補完)
-- series_keys:
-  - name:橘花明|name:銀幕ロマンス
-  number: 2
-  isbn13: '9784866755069'
-  release_date: 2026-05
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-26'
-  note: 2026新刊蒸留 promote可(種2在・新巻補完)
-- series_keys:
   - name:しきシキ|name:ゴブリンアイランド
   number: 2
   isbn13: '9784537173444'
   release_date: 2026-01
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-26'
-  note: 2026新刊蒸留 promote可(種2在・新巻補完)
-- series_keys:
-  - name:町田マーチ|name:ごちそうさまは二丁目で
-  number: 2
-  isbn13: '9784832210226'
-  release_date: 2026-04
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-26'
-  note: 2026新刊蒸留 promote可(種2在・新巻補完)
-- series_keys:
-  - name:クロサキゼロ|name:極上騎士団長の溺愛調教
-  number: 2
-  isbn13: '9784758098953'
-  release_date: 2026-06
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-26'
-  note: 2026新刊蒸留 promote可(種2在・新巻補完)
-- series_keys:
-  - name:陣ノ内康暉|name:GURU
-  number: 2
-  isbn13: '9784065437803'
-  release_date: 2026-05
   edition_type: standard
   source: ndl-distill-2026
   added_at: '2026-06-26'
@@ -4243,15 +2306,6 @@ volumes:
   added_at: '2026-06-26'
   note: 2026新刊蒸留 promote可(種2在・新巻補完)
 - series_keys:
-  - name:辰川皐|name:一条華緒は恋を知らない
-  number: 2
-  isbn13: '9784088432595'
-  release_date: 2026-05
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-26'
-  note: 2026新刊蒸留 promote可(種2在・新巻補完)
-- series_keys:
   - name:つむぎはる|name:家を追い出されましたが、元気に暮らしています
   number: 1
   isbn13: '9784047381773'
@@ -4261,27 +2315,9 @@ volumes:
   added_at: '2026-06-26'
   note: 2026新刊蒸留 promote可(種2在・新巻補完)
 - series_keys:
-  - name:つむぎはる|name:家を追い出されましたが、元気に暮らしています
-  number: 3
-  isbn13: '9784045000874'
-  release_date: 2026-05
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-26'
-  note: 2026新刊蒸留 promote可(種2在・新巻補完)
-- series_keys:
   - name:やきいもほくほく|name:今まで馬鹿にされていた気弱令嬢に転生したら、とんでもない事になった話、聞く?
   number: 2
   isbn13: '9784434368325'
-  release_date: 2026-06
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-26'
-  note: 2026新刊蒸留 promote可(種2在・新巻補完)
-- series_keys:
-  - name:くまだ乙夜|name:妹に婚約者を取られてこのたび醜悪公と押しつけられ婚する運びとなりました@COMIC
-  number: 2
-  isbn13: '9784868540113'
   release_date: 2026-06
   edition_type: standard
   source: ndl-distill-2026
@@ -4306,28 +2342,10 @@ volumes:
   added_at: '2026-06-26'
   note: 2026新刊蒸留 promote可(種2在・新巻補完)
 - series_keys:
-  - name:とこのま1992-|name:稲穂くんは偽カノジョのはずなのに
-  number: 4
-  isbn13: '9784803023053'
-  release_date: 2026-05
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-26'
-  note: 2026新刊蒸留 promote可(種2在・新巻補完)
-- series_keys:
   - name:佐藤啓|name:いんびりの村
   number: 2
   isbn13: '9784785980993'
   release_date: 2026-01
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-26'
-  note: 2026新刊蒸留 promote可(種2在・新巻補完)
-- series_keys:
-  - name:綾雅|name:要らない悪役令嬢、我が国で引き取りますわ
-  number: 4
-  isbn13: '9784801989351'
-  release_date: 2026-04
   edition_type: standard
   source: ndl-distill-2026
   added_at: '2026-06-26'
@@ -4342,15 +2360,6 @@ volumes:
   added_at: '2026-06-26'
   note: 2026新刊蒸留 promote可(種2在・新巻補完)
 - series_keys:
-  - name:東西|name:異世界でスキルを解体したらチートな嫁が増殖しました
-  number: 16
-  isbn13: '9784040763873'
-  release_date: 2026-05
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-26'
-  note: 2026新刊蒸留 promote可(種2在・新巻補完)
-- series_keys:
   - name:椎名明|name:異世界では現代コスメが無敵でした
   number: 2
   isbn13: '9784867208977'
@@ -4360,28 +2369,10 @@ volumes:
   added_at: '2026-06-26'
   note: 2026新刊蒸留 promote可(種2在・新巻補完)
 - series_keys:
-  - name:飯田栄静|name:異世界から帰還したら地球もかなりファンタジーでした。あと、負けヒロインどもこっち見んな。
-  number: 2
-  isbn13: '9784049211269'
-  release_date: 2026-04
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-26'
-  note: 2026新刊蒸留 promote可(種2在・新巻補完)
-- series_keys:
   - name:伊藤ひずみ|name:異世界二度目のおっさん、どう考えても高校生勇者より強い
   number: 1
   isbn13: '9784434347566'
   release_date: 2024-12
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-26'
-  note: 2026新刊蒸留 promote可(種2在・新巻補完)
-- series_keys:
-  - name:伊藤ひずみ|name:異世界二度目のおっさん、どう考えても高校生勇者より強い
-  number: 3
-  isbn13: '9784434366901'
-  release_date: 2026-05
   edition_type: standard
   source: ndl-distill-2026
   added_at: '2026-06-26'
@@ -4405,54 +2396,9 @@ volumes:
   added_at: '2026-06-26'
   note: 2026新刊蒸留 promote可(種2在・新巻補完)
 - series_keys:
-  - qid:Q11571912|name:異世界ソープランド輝夜外伝あんずクエスト|sub:おてんば泡姫の大冒険
-  number: 3
-  isbn13: '9784537173918'
-  release_date: 2026-05
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-26'
-  note: 2026新刊蒸留 promote可(種2在・新巻補完)
-- series_keys:
-  - name:鈴ノ|name:異世界転移して教師になったが、魔女と恐れられている件|sub:アオイ先生の学園奮闘日誌.
-  number: 6
-  isbn13: '9784803023077'
-  release_date: 2026-05
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-26'
-  note: 2026新刊蒸留 promote可(種2在・新巻補完)
-- series_keys:
-  - name:ひろいうみ|name:いっしょにいちゃおっか
-  number: 2
-  isbn13: '9784065436967'
-  release_date: 2026-05
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-26'
-  note: 2026新刊蒸留 promote可(種2在・新巻補完)
-- series_keys:
-  - name:ぱぴぽぱん|name:いつかお嬢様になりたい系ダンジョン配信者が本物のお嬢様になるまで
-  number: 2
-  isbn13: '9784199509681'
-  release_date: 2026-05
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-26'
-  note: 2026新刊蒸留 promote可(種2在・新巻補完)
-- series_keys:
   - name:大川なぎ|name:偽りの悪女ですが末永く幸せになりましょう
   number: 4
   isbn13: '9784065434901'
-  release_date: 2026-05
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-26'
-  note: 2026新刊蒸留 promote可(種2在・新巻補完)
-- series_keys:
-  - name:田沼朝|name:いやはや熱海くん|sub:Not easy days of the prince
-  number: 5
-  isbn13: '9784045000584'
   release_date: 2026-05
   edition_type: standard
   source: ndl-distill-2026
@@ -4495,15 +2441,6 @@ volumes:
   added_at: '2026-06-26'
   note: 2026新刊蒸留 promote可(種2在・新巻補完)
 - series_keys:
-  - name:上村秀子|name:獣人王のお手つきが身ごもりまして
-  number: 2
-  isbn13: '9784576260341'
-  release_date: 2026-06
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-26'
-  note: 2026新刊蒸留 promote可(種2在・新巻補完)
-- series_keys:
   - qid:Q2661273|name:影狩りアンコール
   number: 2
   isbn13: '9784845871087'
@@ -4522,36 +2459,9 @@ volumes:
   added_at: '2026-06-26'
   note: 2026新刊蒸留 promote可(種2在・新巻補完)
 - series_keys:
-  - name:有野金吾|name:神絵師のおしごと
-  number: 2
-  isbn13: '9784832297159'
-  release_date: 2026-05
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-26'
-  note: 2026新刊蒸留 promote可(種2在・新巻補完)
-- series_keys:
-  - name:追本|name:かみなり様の恋衣
-  number: 2
-  isbn13: '9784065431344'
-  release_date: 2026-04
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-26'
-  note: 2026新刊蒸留 promote可(種2在・新巻補完)
-- series_keys:
   - name:永瀬さらさ|name:勘当されたので探偵屋はじめます!
   number: 2
   isbn13: '9784801989603'
-  release_date: 2026-05
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-26'
-  note: 2026新刊蒸留 promote可(種2在・新巻補完)
-- series_keys:
-  - name:俵京平|name:金のなる森
-  number: 2
-  isbn13: '9784088850504'
   release_date: 2026-05
   edition_type: standard
   source: ndl-distill-2026
@@ -4567,27 +2477,9 @@ volumes:
   added_at: '2026-06-26'
   note: 2026新刊蒸留 promote可(種2在・新巻補完)
 - series_keys:
-  - name:小祭たまご|name:変わり者の底辺貴族、お人好しが高じてただ一人の宝石獣使いになる
-  number: 2
-  isbn13: '9784301004363'
-  release_date: 2026-04
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-26'
-  note: 2026新刊蒸留 promote可(種2在・新巻補完)
-- series_keys:
   - name:稲乃芽子|name:獣王子の偽恋花嫁
   number: 2
   isbn13: '9784253013550'
-  release_date: 2026-05
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-26'
-  note: 2026新刊蒸留 promote可(種2在・新巻補完)
-- series_keys:
-  - name:綾瀬湊|name:君のキスが泣いている
-  number: 2
-  isbn13: '9784098544813'
   release_date: 2026-05
   edition_type: standard
   source: ndl-distill-2026
@@ -4639,46 +2531,10 @@ volumes:
   added_at: '2026-06-26'
   note: 2026新刊蒸留 promote可(種2在・新巻補完)
 - series_keys:
-  - name:うたの|name:こ、こんなイケメンが私の幼馴染みで婚約者ですって?さすが悪役令嬢、それくらいの器じゃなければこんな大役務まらないわ
-  number: 3
-  isbn13: '9784758099172'
-  release_date: 2026-06
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-26'
-  note: 2026新刊蒸留 promote可(種2在・新巻補完)
-- series_keys:
   - name:佐倉イサミ|name:孤独モラトリアム
   number: 2
   isbn13: '9784785980979'
   release_date: 2026-01
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-26'
-  note: 2026新刊蒸留 promote可(種2在・新巻補完)
-- series_keys:
-  - name:やまのせりか|name:琥珀色の騎士は聖女の左手に愛を誓う
-  number: 2
-  isbn13: '9784046601735'
-  release_date: 2026-05
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-26'
-  note: 2026新刊蒸留 promote可(種2在・新巻補完)
-- series_keys:
-  - name:公たくみ|name:こい丸
-  number: 2
-  isbn13: '9784091542724'
-  release_date: 2026-06
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-26'
-  note: 2026新刊蒸留 promote可(種2在・新巻補完)
-- series_keys:
-  - name:おーうち|name:恋に至る病
-  number: 2
-  isbn13: '9784041171561'
-  release_date: 2026-04
   edition_type: standard
   source: ndl-distill-2026
   added_at: '2026-06-26'
@@ -4693,15 +2549,6 @@ volumes:
   added_at: '2026-06-26'
   note: 2026新刊蒸留 promote可(種2在・新巻補完)
 - series_keys:
-  - name:戸川四餡|name:黒巫鏡談
-  number: 3
-  isbn13: '9784047385610'
-  release_date: 2026-04
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-26'
-  note: 2026新刊蒸留 promote可(種2在・新巻補完)
-- series_keys:
   - name:由那|name:婚約解消のち、お引越し。セイラン・リゼルの気ままで優雅な生活。
   number: 2
   isbn13: '9784803023169'
@@ -4711,90 +2558,9 @@ volumes:
   added_at: '2026-06-26'
   note: 2026新刊蒸留 promote可(種2在・新巻補完)
 - series_keys:
-  - name:北香ひたき|name:氷の公爵様と私の幸せな契約再婚
-  number: 2
-  isbn13: '9784575424195'
-  release_date: 2026-05
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-26'
-  note: 2026新刊蒸留 promote可(種2在・新巻補完)
-- series_keys:
-  - name:茨木野|name:高校生WEB作家のモテ生活|sub:「あんたが神作家なわけないでしょ」と僕を振った幼馴染が後悔してるけどもう遅い
-  number: 7
-  isbn13: '9784301004769'
-  release_date: 2026-04
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-26'
-  note: 2026新刊蒸留 promote可(種2在・新巻補完)
-- series_keys:
-  - name:入江利秀|name:侯爵令嬢の破滅実況
-  number: 2
-  isbn13: '9784301005193'
-  release_date: 2026-05
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-26'
-  note: 2026新刊蒸留 promote可(種2在・新巻補完)
-- series_keys:
-  - name:柊一葉|name:皇帝陛下のお世話係|sub:女官暮らしが幸せすぎて後宮から出られません
-  number: 8
-  isbn13: '9784301004264'
-  release_date: 2026-04
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-26'
-  note: 2026新刊蒸留 promote可(種2在・新巻補完)
-- series_keys:
-  - name:キヨミ屋|name:幸運の初期値が異常に高かった高校生が、缶詰ガチャで手に入れたスキルを使って現代ダンジョンで最強になる物語
-  number: 2
-  isbn13: '9784049211344'
-  release_date: 2026-05
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-26'
-  note: 2026新刊蒸留 promote可(種2在・新巻補完)
-- series_keys:
-  - name:提灯あんこ|name:繰り巫女あやかし夜噺
-  number: 2
-  isbn13: '9784758098540'
-  release_date: 2026-05
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-26'
-  note: 2026新刊蒸留 promote可(種2在・新巻補完)
-- series_keys:
-  - name:ときわ四葩|name:来見沢善彦の愚行
-  number: 2
-  isbn13: '9784088848860'
-  release_date: 2026-05
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-26'
-  note: 2026新刊蒸留 promote可(種2在・新巻補完)
-- series_keys:
-  - name:陽東太郎|name:腐れ縁ほど切り難い
-  number: 2
-  isbn13: '9784301005353'
-  release_date: 2026-05
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-26'
-  note: 2026新刊蒸留 promote可(種2在・新巻補完)
-- series_keys:
   - name:鯖ななこ|name:靴の音
   number: 2
   isbn13: '9784065436004'
-  release_date: 2026-05
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-26'
-  note: 2026新刊蒸留 promote可(種2在・新巻補完)
-- series_keys:
-  - name:黒木めぐみ|name:今日から恋と子育てはじめます
-  number: 2
-  isbn13: '9784832293281'
   release_date: 2026-05
   edition_type: standard
   source: ndl-distill-2026
@@ -4837,15 +2603,6 @@ volumes:
   added_at: '2026-06-26'
   note: 2026新刊蒸留 promote可(種2在・新巻補完)
 - series_keys:
-  - name:ヨネモンタケアキ|name:落ちこぼれ転移者、全てを奪うハッキングスキルで最強に成り上がる
-  number: 3
-  isbn13: '9784867208915'
-  release_date: 2026-05
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-26'
-  note: 2026新刊蒸留 promote可(種2在・新巻補完)
-- series_keys:
   - name:咲月晴|name:お嬢さんの契約カレシ。
   number: 1
   isbn13: '9784824203335'
@@ -4859,15 +2616,6 @@ volumes:
   number: 3
   isbn13: '9784824206855'
   release_date: 2026-06
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-26'
-  note: 2026新刊蒸留 promote可(種2在・新巻補完)
-- series_keys:
-  - name:いどんち|name:オカルトタイムズ
-  number: 2
-  isbn13: '9784065436349'
-  release_date: 2026-05
   edition_type: standard
   source: ndl-distill-2026
   added_at: '2026-06-26'
@@ -4891,60 +2639,6 @@ volumes:
   added_at: '2026-06-26'
   note: 2026新刊蒸留 promote可(種2在・新巻補完)
 - series_keys:
-  - name:桜鳥556|name:俺ではない炎上
-  number: 2
-  isbn13: '9784575862270'
-  release_date: 2026-05
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-26'
-  note: 2026新刊蒸留 promote可(種2在・新巻補完)
-- series_keys:
-  - name:こばやJ|name:お酒と先輩彼女との甘々同居ラブコメは二十歳になってから
-  number: 2
-  isbn13: '9784301005278'
-  release_date: 2026-05
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-26'
-  note: 2026新刊蒸留 promote可(種2在・新巻補完)
-- series_keys:
-  - name:山内了兵|name:おっさん冒険者の遅れた英雄譚
-  number: 2
-  isbn13: '9784301004936'
-  release_date: 2026-05
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-26'
-  note: 2026新刊蒸留 promote可(種2在・新巻補完)
-- series_keys:
-  - name:育田花|name:王子の最恋
-  number: 2
-  isbn13: '9784065434963'
-  release_date: 2026-05
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-26'
-  note: 2026新刊蒸留 promote可(種2在・新巻補完)
-- series_keys:
-  - name:みなとゆみ|name:王子と騎士は男装聖女が死ぬほど愛おしい
-  number: 2
-  isbn13: '9784098733842'
-  release_date: 2026-05
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-26'
-  note: 2026新刊蒸留 promote可(種2在・新巻補完)
-- series_keys:
-  - name:室井ミヤコ|name:幸薄OLちゃんと絶愛エリートくん
-  number: 2
-  isbn13: '9784821111633'
-  release_date: 2026-05
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-26'
-  note: 2026新刊蒸留 promote可(種2在・新巻補完)
-- series_keys:
   - name:琴子|name:冴えない無能令嬢のフリ、やめました
   number: 2
   isbn13: '9784065434888'
@@ -4963,45 +2657,9 @@ volumes:
   added_at: '2026-06-26'
   note: 2026新刊蒸留 promote可(種2在・新巻補完)
 - series_keys:
-  - name:国広仙戯|name:最終兵器勇者～異世界で魔王を倒した後も大人しくしていたのに、いきなり処刑されそうになったので反逆します。国を捨ててスローライフの旅に出たのですが、なんか成り行きで新世界の魔王になりそうです～@COMIC
-  number: 2
-  isbn13: '9784867949986'
-  release_date: 2026-06
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-26'
-  note: 2026新刊蒸留 promote可(種2在・新巻補完)
-- series_keys:
-  - name:日達朔|name:聖女さまは取り替え子@COMIC
-  number: 2
-  isbn13: '9784868540106'
-  release_date: 2026-06
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-26'
-  note: 2026新刊蒸留 promote可(種2在・新巻補完)
-- series_keys:
-  - qid:Q11269890|name:隻眼・隻腕・隻脚の魔術師@COMIC|sub:森の小屋に籠っていたら早2000年。気づけば魔神と呼ばれていた。僕はただ魔術の探求をしたいだけなのに
-  number: 6
-  isbn13: '9784868540014'
-  release_date: 2026-06
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-26'
-  note: 2026新刊蒸留 promote可(種2在・新巻補完)
-- series_keys:
   - name:ぶたばら|name:神秘の子
   number: 2
   isbn13: '9784575424362'
-  release_date: 2026-06
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-26'
-  note: 2026新刊蒸留 promote可(種2在・新巻補完)
-- series_keys:
-  - name:佐々木禎子|name:帝都契約結婚
-  number: 2
-  isbn13: '9784576260358'
   release_date: 2026-06
   edition_type: standard
   source: ndl-distill-2026
@@ -5026,28 +2684,10 @@ volumes:
   added_at: '2026-06-26'
   note: 2026新刊蒸留 promote可(種2在・新巻補完)
 - series_keys:
-  - name:五箇野人|name:うちのルカなら。
-  number: 2
-  isbn13: '9784098545513'
-  release_date: 2026-04
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-26'
-  note: 2026新刊蒸留 promote可(種2在・新巻補完)
-- series_keys:
   - qid:Q6455145|name:運送屋のおっさんがなぜか副業で絶対無敵剣士を務めることに
   number: 4
   isbn13: '9784253013802'
   release_date: 2026-06
-  edition_type: standard
-  source: ndl-distill-2026
-  added_at: '2026-06-26'
-  note: 2026新刊蒸留 promote可(種2在・新巻補完)
-- series_keys:
-  - name:岩宗治生|name:ウスズミの果て|sub:MISSION IN THE APOCALYPSE
-  number: 5
-  isbn13: '9784045000546'
-  release_date: 2026-04
   edition_type: standard
   source: ndl-distill-2026
   added_at: '2026-06-26'
