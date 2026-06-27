@@ -22,9 +22,10 @@ def norm(u):
 
 def build():
     cov = {}
-    # 楽天紙 cache
-    cpath = os.path.join(ROOT, ".cache", "rakuten-isbn.jsonl")
-    if os.path.exists(cpath):
+    # 楽天紙 cache (★delta=全47,922著者収穫828MBを優先=最新・網羅。旧rakuten-isbn.jsonlも併読)
+    for cpath in (os.path.join(ROOT, ".cache", "rakuten-isbn-delta.jsonl"),
+                  os.path.join(ROOT, ".cache", "rakuten-isbn.jsonl")):
+        if not os.path.exists(cpath): continue
         for line in open(cpath, encoding="utf-8"):
             try: o = json.loads(line)
             except: continue
