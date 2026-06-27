@@ -35,13 +35,15 @@ from pathlib import Path
 
 from _madb_authors import load_agent_master, resolve_authors, union_authors
 
+import os as _os
 ROOT = Path(__file__).resolve().parent.parent
 META104 = ROOT / ".cache" / "madb" / "metadata104.json"
-META101 = ROOT / ".cache" / "madb" / "metadata101-clean.json"
+# ★path override (月次蒸留の temp build 用、 既定は従来通り = 後方互換)
+META101 = Path(_os.environ.get("MADB_META101_CLEAN", str(ROOT / ".cache" / "madb" / "metadata101-clean.json")))
 META504 = ROOT / ".cache" / "madb" / "metadata504.json"
 MANGAKA_CSV = ROOT / "data" / "seed" / "mangaka.csv"
 MANGAKA_MADB = ROOT / "data" / "seed" / "mangaka-madb.csv"
-OUT = ROOT / ".cache" / "series-v2.json"
+OUT = Path(_os.environ.get("MADB_SERIES_V2_OUT", str(ROOT / ".cache" / "series-v2.json")))
 
 
 def load_mangaka_map() -> dict[str, dict]:

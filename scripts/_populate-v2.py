@@ -16,9 +16,11 @@ import sys
 from collections import defaultdict, Counter
 from pathlib import Path
 
+import os as _os
 ROOT = Path(__file__).resolve().parent.parent
-DB = ROOT / ".cache" / "db-v2.sqlite"
-SERIES_V2 = ROOT / ".cache" / "series-v2.json"
+# ★path override (月次蒸留の temp build 用、 既定は従来通り = 後方互換)
+DB = Path(_os.environ.get("MADB_DB", str(ROOT / ".cache" / "db-v2.sqlite")))
+SERIES_V2 = Path(_os.environ.get("MADB_SERIES_V2", str(ROOT / ".cache" / "series-v2.json")))
 
 
 # ----------- helpers -----------
