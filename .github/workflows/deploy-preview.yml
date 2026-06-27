@@ -52,6 +52,16 @@ jobs:
       - name: Type check (sanity)
         run: npx tsc --noEmit
 
+      # ★ クライアントは /manga-*-index.json を public/ から runtime fetch する
+      #   (lib/useMangaIndex.ts)。 一覧/検索を preview サブセットに揃えるため、
+      #   .preview-data の索引を public/ に上書きしてから build (= CI のみ、 commit済 public/ は不変=本番不影響)。
+      - name: Stage preview-subset indexes into public/
+        run: |
+          cp .preview-data/manga-list-index.json public/manga-list-index.json
+          cp .preview-data/manga-search-index.json public/manga-search-index.json
+          cp .preview-data/manga-catch-index.json public/manga-catch-index.json
+          echo "preview index entries:"; node -e "console.log('list', require('./public/manga-list-index.json').d.length, '/ search', require('./public/manga-search-index.json').d.length)"
+
       - name: Build Next.js (preview subset → out/)
         env:
           MANGAL_DATA_DIR: .preview-data
