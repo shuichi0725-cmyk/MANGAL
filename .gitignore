@@ -60,3 +60,5 @@ public/manga-search-index.json
 
 # Kobo harvest raw (= 100MB、 .gz をコミット。 raw は再生成可)
 /data/seeds/kobo-harvest.jsonl
+
+.wrangler/
