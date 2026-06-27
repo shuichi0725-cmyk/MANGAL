@@ -55,6 +55,11 @@ def parse(xml):
         d = re.search(r"<dcterms:date>([^<]+)", rec) or re.search(r"<dcterms:issued[^>]*>([^<]+)", rec)
         # 著者: dcterms:creator>foaf:name(典拠ID付・役割なし)
         cre = re.findall(r"<dcterms:creator>.*?<foaf:name>([^<]+)", rec, re.S) or re.findall(r"<dcterms:creator>([^<]+)", rec) or re.findall(r"<dc:creator>([^<]+)", rec)
+        # ★典拠ID(同名異人分離の唯一鍵)= foaf:Agent rdf:about。 name↔authority↔yomi を pair で回収。
+        #   [[acquire_all_obtainable_info]] の抜き忘れ是正(2026-06-27)。
+        auth_pairs = []
+        for am in re.finditer(r'<foaf:Agent\s+rdf:about="https?://id\.ndl\.go\.jp/auth/entity/(\d+)">\s*<foaf:name>([^<]+)</foaf:name>(?:\s*<dcndl:transcription>([^<]+)</dcndl:transcription>)?', rec, re.S):
+            auth_pairs.append(f"{am.group(2).strip()}|{am.group(1)}|{(am.group(3) or '').strip()}")
         # ★役割: dc:creator = "名前 役割"(役割=著/原作/作画/画/漫画/編 等) → 'name:role/...'
         roled = []
         for c in re.findall(r"<dc:creator>([^<]+)</dc:creator>", rec)[:6]:
@@ -69,13 +74,14 @@ def parse(xml):
                     "volume": (vm.group(1).strip() if vm else ""),
                     "date": d.group(1).strip() if d else "",
                     "creators": "/".join(c.strip()[:30] for c in cre[:5]),
-                    "creators_roled": "/".join(roled)[:120]})
+                    "creators_roled": "/".join(roled)[:120],
+                    "creators_auth": "/".join(auth_pairs[:5])})
     total = re.search(r"<numberOfRecords>(\d+)", xml)
     return out, int(total.group(1)) if total else 0
 
 import datetime
 fo = open(OUT, "a", encoding="utf-8")
-if not seen: fo.write("isbn13\tdate\tpublisher\tseries\tvolume\ttitle\tkana\tcreators\tcreators_roled\n")
+if not seen: fo.write("isbn13\tdate\tpublisher\tseries\tvolume\ttitle\tkana\tcreators\tcreators_roled\tcreators_auth\n")
 stat = {"new": 0, "req": 0}
 
 def harvest_range(frm: datetime.date, until: datetime.date, depth: int = 0):
@@ -96,7 +102,7 @@ def harvest_range(frm: datetime.date, until: datetime.date, depth: int = 0):
         for r in recs:
             if r["isbn"] in have or r["isbn"] in seen: continue
             seen.add(r["isbn"]); stat["new"] += 1
-            fo.write(f"{r['isbn']}\t{r['date']}\t{r['publisher'][:20]}\t{r['series'][:24]}\t{r['volume']}\t{r['title'][:120]}\t{r['kana'][:40]}\t{r['creators'][:40]}\t{r['creators_roled']}\n")
+            fo.write(f"{r['isbn']}\t{r['date']}\t{r['publisher'][:20]}\t{r['series'][:24]}\t{r['volume']}\t{r['title'][:120]}\t{r['kana'][:40]}\t{r['creators'][:40]}\t{r['creators_roled']}\t{r['creators_auth']}\n")
         fo.flush(); got += len(recs); start += len(recs)
         if got >= total or len(recs) < WINDOW: break
         recs, total = parse(sru(cql, start)); stat["req"] += 1
