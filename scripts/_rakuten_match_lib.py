@@ -114,6 +114,52 @@ def clean_title(raw):
     """防御的 html unescape (&#39; 等) + NFKC。"""
     return nfkc(html.unescape(html.unescape(str(raw or ""))))
 
+# ---- index 利用ヘルパ (disorder/gaps 共通) ----
+def recs_for(index, bases, vol):
+    """index から (bases × vol) の全printing records (date有) を返す。"""
+    recs = []
+    for b in bases:
+        recs += index.get((b, vol), [])
+    return [r for r in recs if r["date"]]
+
+def pub_key(rec):
+    """版識別子 = ISBN登録者prefix(978-4-RRR) + publisherName。"""
+    return (rec["isbn"][:7], rec.get("publisher", ""))
+
+def primary_publisher(index, bases, vol_numbers):
+    """このページの主版 = 最も多くの『巻番号』をカバーする pub_key。
+    同数なら初版(最古printing有)を優先。return (pub_key, {vol: oldest_rec_in_pub})。"""
+    cover, perpub = {}, {}
+    for v in vol_numbers:
+        for r in recs_for(index, bases, v):
+            pk = pub_key(r)
+            cover.setdefault(pk, set()).add(v)
+            perpub.setdefault(pk, {}).setdefault(v, []).append(r)
+    if not cover:
+        return None, {}
+    def pubage(pk):
+        rs = [r for vs in perpub[pk].values() for r in vs if r["date"]]
+        return min((r["date"] for r in rs), default=(9999, 0, 0))
+    best = max(cover, key=lambda pk: (len(cover[pk]), -pubage(pk)[0]))
+    chosen = {}
+    for v, recs in perpub[best].items():
+        dated = [r for r in recs if r["date"]]
+        if dated:
+            chosen[v] = min(dated, key=lambda r: r["date"])
+    return best, chosen
+
+def inversions(seq):
+    """seq=[(num, date_tuple|None)] num昇順前提。逆行ペア数。"""
+    inv, prev = 0, None
+    for _, dt in seq:
+        if dt is None:
+            continue
+        if prev is not None and dt < prev:
+            inv += 1
+        prev = dt
+    return inv
+
+
 def build_index(target_bases, paths=(DELTA, OLD), progress=None):
     """target_bases = norm済基底題の set。
     return index: dict[(base_norm, vol)] -> list[dict(isbn,date,raw,publisher,cover)]

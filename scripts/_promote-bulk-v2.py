@@ -157,6 +157,29 @@ def get_release_date_supplement() -> dict:
     return _REL_DATE_SUPP
 
 
+_REL_DATE_OVERRIDE = None
+
+
+def get_release_date_override() -> dict:
+    """ISBN13 → 発売日 の ★強制上書き map (= 発売日逆行是正、 種2に値が有っても上書く)。
+    補完(get_release_date_supplement)は『種2が空の時だけ』だが、 こちらは再版日を初版日へ
+    正規化する用途なので 種2値が有っても優先する。
+    data/seeds/release-date-override.jsonl (純粋追加・種2不変・可逆=行削除で戻る)。"""
+    global _REL_DATE_OVERRIDE
+    if _REL_DATE_OVERRIDE is None:
+        _REL_DATE_OVERRIDE = {}
+        p = ROOT / "data" / "seeds" / "release-date-override.jsonl"
+        if p.exists():
+            for line in p.open(encoding="utf-8"):
+                try:
+                    d = json.loads(line)
+                except Exception:
+                    continue
+                if d.get("date") and d.get("isbn13"):
+                    _REL_DATE_OVERRIDE[_norm_isbn(d["isbn13"])] = d["date"]
+    return _REL_DATE_OVERRIDE
+
+
 def _load_adult_overrides() -> set[str]:
     """成人判定 手動 override (= force 非adult の series_key 集合)。
     作者signal単独の誤爆を種aで全年齢確認した分 (Phase A、 純粋追加・種2不変)。"""
@@ -1542,10 +1565,15 @@ def get_editions_with_volumes(con: sqlite3.Connection, series_ids: list[int] | i
         _pfreq[_p] = _pfreq.get(_p, 0) + 1
 
     _rdsupp = get_release_date_supplement()  # release_date欠落巻のNDL補完日付(isbn→date)
+    _rdovr = get_release_date_override()      # ★発売日逆行是正の強制上書き(種2値より優先)
 
     def _eff_date(isbn, rd):
-        # 種2の発売日が無ければ NDL補完seed で補う(dedup tie-break + 表示の時系列化)。
-        return rd or _rdsupp.get(_norm_isbn(isbn))
+        # ★強制override(再版日→初版日正規化)が有ればそれを最優先。
+        # 無ければ 種2の発売日、 それも無ければ NDL補完seed。
+        ni = _norm_isbn(isbn)
+        if ni in _rdovr:
+            return _rdovr[ni]
+        return rd or _rdsupp.get(ni)
 
     def _dedup_key(isbn, rd):
         isbn = isbn or ""
