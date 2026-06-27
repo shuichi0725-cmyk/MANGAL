@@ -51,7 +51,7 @@ export default function MangaCard({ manga, publishers, genres, demographics }: P
 
   return (
     <Card href={`/manga/${manga.slug}`} className="flex gap-3 p-3">
-      <div className="relative w-16 aspect-[2/3] rounded-md overflow-hidden shrink-0 bg-[var(--color-surface-2)]">
+      <div className="relative w-16 aspect-[2/3] self-start rounded-md overflow-hidden shrink-0 bg-[var(--color-surface-2)]">
         {cover ? (
           <CoverImage src={cover} alt={`${manga.title} 1巻 表紙`} sizes="64px" />
         ) : (

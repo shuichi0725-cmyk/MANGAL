@@ -14,7 +14,7 @@ export default function ArtBookCard({ artBook }: Props) {
 
   return (
     <Card href={`/art-books/${artBook.slug}`} className="flex gap-3 p-3">
-      <div className="relative w-16 aspect-[2/3] rounded-md overflow-hidden shrink-0 bg-[var(--color-surface-2)]">
+      <div className="relative w-16 aspect-[2/3] self-start rounded-md overflow-hidden shrink-0 bg-[var(--color-surface-2)]">
         {cover ? (
           // eslint-disable-next-line @next/next/no-img-element
           <img src={cover} alt={`${artBook.title} 表紙`} className="h-full w-full object-cover" />
