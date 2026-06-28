@@ -104,7 +104,7 @@ for (bt, author), isbns in works.items():
         "title_romaji": romaji(bt).replace('-', ' '),
         "year_started": int(str(rep.get('date'))[:4]) if str(rep.get('date'))[:4].isdigit() else None,
         "status": "ongoing", "demographic": "seinen",
-        "authors": [{"name": author}],
+        "authors": [{"name": author, "role": "writer_artist"}],
         "publisher": pub_key(rep.get('publisher')),
         "publishers": [pub_key(rep.get('publisher'))] if pub_key(rep.get('publisher')) != "(unknown)" else [],
         "genres": g, "genres_provisional": True,
