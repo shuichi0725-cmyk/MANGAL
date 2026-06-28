@@ -38,22 +38,29 @@ def search(title, author=""):
     with urllib.request.urlopen(req, timeout=25) as r:
         return json.loads(r.read())
 
-def vol_of(rk_title, base_norm):
+def core_title(bt):
+    # 副題(〜…〜 / ：後 / 全角コロン)を落として検索・照合の核に。 短すぎる時は元題。
+    c = re.split(r'[〜～:：]', str(bt))[0].strip()
+    return c if len(c) >= 3 else str(bt)
+
+def vol_of(rk_title, core_norm):
     t = unicodedata.normalize("NFKC", str(rk_title))
-    # ① 第N巻  ② (N)  ③ 末尾N(任意区切り後)  ④ base除去後の先頭数字  ⑤ 無印=1
+    m = re.search(r'(\d+)\s*(?:st|nd|rd|th)(?![a-z])', t, re.I)   # 序数 4th/2nd (カッラフル型。 和文前でも可)
+    if m: return int(m.group(1))
     m = re.search(r'第\s*(\d+)\s*巻', t)
     if m: return int(m.group(1))
     m = re.search(r'[(\[]\s*(\d+)\s*[)\]]', t)
     if m: return int(m.group(1))
-    m = re.search(r'(\d+)\s*$', t)            # 末尾数字 (題〜副題〜2 / 題、1 / 題 8 を捕捉)
+    m = re.search(r'(\d+)\s*$', t)                          # 末尾N (題〜副題〜2 / 題、1 / 題 8)
     if m: return int(m.group(1))
-    rest = norm(t)
-    if rest.startswith(base_norm):
-        tail = rest[len(base_norm):]
-        m = re.match(r'(\d+)', tail)          # base直後の数字 (カドル4-獣人… 型)
+    nt = norm(t)
+    i = nt.find(core_norm)
+    if i >= 0:
+        tail = nt[i + len(core_norm):]
+        m = re.match(r'(\d+)', tail)                        # core直後の数字 (カドル4-獣人…)
         if m: return int(m.group(1))
-        if not re.search(r'\d', tail):        # base題そのもの = 1巻
-            return 1
+    if not re.search(r'\d', nt):                            # 数字皆無 & core含む(下で確認済) = 1巻
+        return 1
     return None
 
 def parse_date(s):
@@ -82,11 +89,12 @@ for i, (p, d) in enumerate(targets, 1):
     bn = norm(bt)
     page_plus = bool(re.search(r'[+＋]\s*$', unicodedata.normalize("NFKC", str(d.get("title")))))
     pauth = [norm(a.get("name")) for a in (d.get("authors") or []) if a.get("name")]
-    sbt = re.sub(r'[+＋]\s*$', '', bt).strip()   # 検索用は+除去
+    core = core_title(re.sub(r'[+＋]\s*$', '', bt).strip())   # 副題前 + +除去
+    cn = norm(core)
     try:
-        items = (search(sbt, author).get("Items") or [])
-        if len(items) < 2:                        # 著者付きで少ない→題のみ再検索
-            items = (search(sbt, "").get("Items") or [])
+        items = (search(core, author).get("Items") or [])
+        if len(items) < 2:                        # 著者付きで少ない→題(core)のみ再検索
+            items = (search(core, "").get("Items") or [])
     except Exception as e:
         report.append((d["slug"], bt, 0, "ERR")); time.sleep(RATE * 2); continue
     vols = {}
@@ -96,7 +104,7 @@ for i, (p, d) in enumerate(targets, 1):
             continue
         if EXCL.search(ti):
             continue
-        if not norm(ti).startswith(bn):   # 別作除外(題前方一致)
+        if cn not in norm(ti):   # 別作除外(core含有。 前置詞付き題=へたくそ…カッラフル も拾う)
             continue
         # ★著者照合(別作混入防止: おひさま→おひさまピアノ等を弾く)。 item著者に頁著者が含まれるか
         ia = norm(it.get("author", ""))
@@ -106,7 +114,7 @@ for i, (p, d) in enumerate(targets, 1):
         res_plus = bool(re.search(r'[+＋]', unicodedata.normalize("NFKC", ti)))
         if res_plus != page_plus:
             continue
-        v = vol_of(ti, bn)
+        v = vol_of(ti, cn)
         if v is None or v in vols:
             continue
         cover = (it.get("largeImageUrl") or "").split("?")[0]
