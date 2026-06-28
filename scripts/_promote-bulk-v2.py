@@ -180,6 +180,58 @@ def get_release_date_override() -> dict:
     return _REL_DATE_OVERRIDE
 
 
+_EDITION_CANONICAL = None
+
+
+def get_edition_canonical() -> dict:
+    """版分離 canonical seed (= data/seeds/edition-canonical/*.yml) → {slug: seed}。
+    ★版混在シリーズ(golgo/釣りバカ等)の standard/compact 版を Wikipedia確定の
+    vol→ISBN→初版日 で再構築する権威seed。 db-v2クラスタの版混在汚染を上書き是正。
+    各seed: {slug, canonical_label, volumes:[{number,isbn13,release_date}],
+             compact_edition?:{label, volumes:[...]}}。 cover_url は後段 cover stage が ISBN で充填。"""
+    global _EDITION_CANONICAL
+    if _EDITION_CANONICAL is None:
+        _EDITION_CANONICAL = {}
+        d = ROOT / "data" / "seeds" / "edition-canonical"
+        if d.exists():
+            for p in sorted(d.glob("*.yml")):
+                try:
+                    with p.open(encoding="utf-8") as f:
+                        s = _yload(f)
+                    if s and s.get("slug"):
+                        _EDITION_CANONICAL[s["slug"]] = s
+                except Exception:
+                    continue
+    return _EDITION_CANONICAL
+
+
+def apply_edition_canonical(slug: str, editions: list, canon: dict) -> list:
+    """slug の canonical seed で standard/compact 版を再構築。 他版(文庫等)は温存。
+    cover_url=None で出し、 後段 _apply-covers-stage が ISBN で正書影を充填。"""
+    s = canon.get(slug)
+    if not s:
+        return editions
+    def mk(vols, label, publisher, imprint, etype):
+        return {"type": etype, "label": label, "publisher": publisher, "imprint": imprint,
+                "volumes": [{"number": v["number"], "asin": None, "isbn13": v.get("isbn13"),
+                             "cover_url": None, "release_date": v.get("release_date")}
+                            for v in (vols or [])]}
+    # 既存 standard の publisher を継承(無ければ seed/None)
+    cur_std = next((e for e in editions if e.get("type") == "standard"), None)
+    pub = (cur_std or {}).get("publisher") or s.get("publisher")
+    out = []
+    out.append(mk(s.get("volumes"), s.get("canonical_label") or "通常版", pub,
+                  s.get("canonical_label") or (cur_std or {}).get("imprint"), "standard"))
+    if s.get("compact_edition"):
+        ce = s["compact_edition"]
+        out.append(mk(ce.get("volumes"), ce.get("label") or "コンパクト版", pub, ce.get("label"), "aizoban"))
+    # standard/aizoban 以外の既存版(文庫等)は温存
+    for e in editions:
+        if e.get("type") not in ("standard", "aizoban"):
+            out.append(e)
+    return out
+
+
 def _load_adult_overrides() -> set[str]:
     """成人判定 手動 override (= force 非adult の series_key 集合)。
     作者signal単独の誤爆を種aで全年齢確認した分 (Phase A、 純粋追加・種2不変)。"""
@@ -2273,6 +2325,10 @@ def main():
                 volume_exclude.setdefault(_e["slug"], set()).add(_norm_isbn(_e["isbn13"]))
     volume_exclude_pages = 0
     print(f"  巻ISBN除去 map: {len(volume_exclude)} slug", file=sys.stderr)
+    # ★版分離 canonical seed (golgo/釣りバカ等の版混在を Wikipedia確定版で上書き)
+    edition_canonical = get_edition_canonical()
+    edition_canonical_pages = 0
+    print(f"  版canonical map: {len(edition_canonical)} slug", file=sys.stderr)
     # ★数値/bool風の文字列(著者「029」等)を強制引用(JS yaml誤読=schema違反404を封鎖)
     import re as _re_q
     _NUMLIKE_Q = _re_q.compile(r"^[-+]?(\d[\d_]*|\d*\.\d+([eE][-+]?\d+)?|0x[0-9a-fA-F]+|0o[0-7]+)$")
@@ -2447,6 +2503,10 @@ def main():
                     _ver["volumes"] = [v for v in (_ver.get("volumes") or []) if _norm_isbn(v.get("isbn13")) not in _vex]
             new_yml["editions"] = [e for e in (new_yml.get("editions") or []) if (e.get("volumes") or e.get("versions"))]
             volume_exclude_pages += 1
+        # ★版分離: canonical seed があれば standard/compact 版を権威データで再構築(版混在汚染の是正)
+        if slug in edition_canonical:
+            new_yml["editions"] = apply_edition_canonical(slug, new_yml.get("editions") or [], edition_canonical)
+            edition_canonical_pages += 1
         # ★キャッチコピーを slug 経由で join(無ければ未設定=カードは出版社表示にfallback)
         if slug in catch_map and catch_map[slug]:
             new_yml["catch"] = catch_map[slug]
