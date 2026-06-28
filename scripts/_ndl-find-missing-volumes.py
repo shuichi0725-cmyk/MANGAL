@@ -24,22 +24,36 @@ def base_title(t):
     t = re.sub(r'[\s　\.．。]+$', '', t)
     return t.strip()
 
+def clean_author(a):
+    return re.sub(r'\s*[\[【].*?[\]】]', '', str(a or '')).strip()
+
 def search(title, author=""):
-    qs = urllib.parse.urlencode({"applicationId": env["RAKUTEN_APP_ID"], "accessKey": env["RAKUTEN_ACCESS_KEY"],
-        "affiliateId": env.get("RAKUTEN_AFFILIATE_ID", ""), "title": title, "author": author,
-        "outOfStockFlag": "1", "hits": "30", "format": "json", "formatVersion": "2"})
-    req = urllib.request.Request("https://openapi.rakuten.co.jp/services/api/BooksBook/Search/20170404?" + qs)
+    p = {"applicationId": env["RAKUTEN_APP_ID"], "accessKey": env["RAKUTEN_ACCESS_KEY"],
+         "affiliateId": env.get("RAKUTEN_AFFILIATE_ID", ""), "title": title,
+         "outOfStockFlag": "1", "hits": "30", "format": "json", "formatVersion": "2"}
+    if author:
+        p["author"] = author
+    req = urllib.request.Request("https://openapi.rakuten.co.jp/services/api/BooksBook/Search/20170404?" + urllib.parse.urlencode(p))
     req.add_header("Referer", ORIGIN + "/"); req.add_header("Origin", ORIGIN); req.add_header("User-Agent", "Mozilla/5.0 MANGAL")
     with urllib.request.urlopen(req, timeout=25) as r:
         return json.loads(r.read())
 
 def vol_of(rk_title, base_norm):
-    m = re.search(r'第\s*(\d+)\s*巻', rk_title) or re.search(r'[\.．。]\s*(\d+)\s*$', rk_title) or re.search(r'\s(\d+)\s*$', rk_title)
-    if m:
-        return int(m.group(1))
-    # 無印(=base題そのもの) なら 1
-    if norm(rk_title) == base_norm:
-        return 1
+    t = unicodedata.normalize("NFKC", str(rk_title))
+    # ① 第N巻  ② (N)  ③ 末尾N(任意区切り後)  ④ base除去後の先頭数字  ⑤ 無印=1
+    m = re.search(r'第\s*(\d+)\s*巻', t)
+    if m: return int(m.group(1))
+    m = re.search(r'[(\[]\s*(\d+)\s*[)\]]', t)
+    if m: return int(m.group(1))
+    m = re.search(r'(\d+)\s*$', t)            # 末尾数字 (題〜副題〜2 / 題、1 / 題 8 を捕捉)
+    if m: return int(m.group(1))
+    rest = norm(t)
+    if rest.startswith(base_norm):
+        tail = rest[len(base_norm):]
+        m = re.match(r'(\d+)', tail)          # base直後の数字 (カドル4-獣人… 型)
+        if m: return int(m.group(1))
+        if not re.search(r'\d', tail):        # base題そのもの = 1巻
+            return 1
     return None
 
 def parse_date(s):
@@ -63,10 +77,14 @@ print(f"単巻NDLページ: {len(targets)}", flush=True)
 report = []
 for i, (p, d) in enumerate(targets, 1):
     bt = base_title(d.get("title"))
-    author = (d.get("authors") or [{}])[0].get("name", "")
+    author = clean_author((d.get("authors") or [{}])[0].get("name", ""))
     bn = norm(bt)
+    page_plus = bool(re.search(r'[+＋]\s*$', unicodedata.normalize("NFKC", str(d.get("title")))))
+    sbt = re.sub(r'[+＋]\s*$', '', bt).strip()   # 検索用は+除去
     try:
-        items = (search(bt, author).get("Items") or [])
+        items = (search(sbt, author).get("Items") or [])
+        if len(items) < 2:                        # 著者付きで少ない→題のみ再検索
+            items = (search(sbt, "").get("Items") or [])
     except Exception as e:
         report.append((d["slug"], bt, 0, "ERR")); time.sleep(RATE * 2); continue
     vols = {}
@@ -78,6 +96,10 @@ for i, (p, d) in enumerate(targets, 1):
             continue
         if not norm(ti).startswith(bn):   # 別作除外(題前方一致)
             continue
+        # ＋スピンオフ判別: ページが＋系なら＋付きのみ、 そうでなければ＋無しのみ
+        res_plus = bool(re.search(r'[+＋]', unicodedata.normalize("NFKC", ti)))
+        if res_plus != page_plus:
+            continue
         v = vol_of(ti, bn)
         if v is None or v in vols:
             continue
@@ -85,9 +107,15 @@ for i, (p, d) in enumerate(targets, 1):
         vols[v] = {"number": v, "asin": None, "isbn13": isbn,
                    "cover_url": cover if cover and "noimage" not in cover else None,
                    "release_date": parse_date(it.get("salesDate"))}
+    # 外れ値巻番号を除去(誤parse: 1-10に混じる55等)。 巻数の1.8倍+3 を超える孤立番号を落とす
+    if vols:
+        thr = max(len(vols) * 1.8 + 3, 12)
+        vols = {k: v for k, v in vols.items() if k <= thr}
     report.append((d["slug"], bt, len(vols), sorted(vols.keys())))
-    if APPLY and len(vols) >= 1:
+    if APPLY and len(vols) >= 2:   # 2巻以上見つかった時のみ再構築(単巻は触らない)
         d["title"] = bt
+        for a in d.get("authors", []):
+            a["name"] = clean_author(a.get("name", ""))
         d["editions"][0]["volumes"] = [vols[k] for k in sorted(vols)]
         years = [int(str(v["release_date"])[:4]) for v in vols.values() if v.get("release_date")]
         if years:
