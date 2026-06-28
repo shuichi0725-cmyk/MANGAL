@@ -6,9 +6,11 @@ year_started: 1983
 year_ended: 1985
 status: completed
 authors:
+- name: 石原しゅん
+  role: artist
+original_authors:
 - name: 手塚治虫
-  role: writer_artist
-original_authors: []
+  role: writer
 publisher: chuokoron
 magazine: null
 demographic: kodomo
@@ -76,3 +78,6 @@ publishers:
 - chuokoron
 genres_provisional: true
 source: author-fix-preview
+credits:
+- name: 手塚治虫
+  role: 編集・構成
