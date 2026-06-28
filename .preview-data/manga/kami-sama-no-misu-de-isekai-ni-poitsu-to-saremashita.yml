@@ -8,13 +8,9 @@ year_ended: null
 status: ongoing
 authors:
 - name: でんすけ
-  role: writer_artist
-  kana: デンスケ
-  romaji: densuke
+  role: writer
 - name: 舞鶴山画太郎
-  role: writer_artist
-  kana: マイズルヤマカクタロウ
-  romaji: maizuruyamakakutarou
+  role: artist
 original_authors: []
 publisher: kadokawa
 magazine: shonen-ace
@@ -63,3 +59,6 @@ tags:
   rank: 60
 popularity: 16
 source: pub-fix-preview
+credits:
+- name: 長浜めぐみ
+  role: character_design

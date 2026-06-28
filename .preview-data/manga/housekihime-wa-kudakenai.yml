@@ -7,14 +7,10 @@ year_started: 2024
 year_ended: null
 status: ongoing
 authors:
-- name: みなと
-  role: writer_artist
-  kana: ミナト
-  romaji: minato
 - name: 曇後hare
-  role: writer_artist
-  kana: クモリノチ hare
-  romaji: kumorinochi
+  role: artist
+- name: みなと
+  role: writer
 original_authors: []
 publisher: kodansha
 magazine: null
@@ -63,3 +59,6 @@ tags:
   rank: 20
 popularity: 8
 source: pub-fix-preview
+credits:
+- name: 唐崎
+  role: character_design

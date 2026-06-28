@@ -6,14 +6,10 @@ year_started: 2025
 year_ended: null
 status: ongoing
 authors:
-- name: やまだのぼる
-  role: writer_artist
-  kana: ヤマダノボル
-  romaji: yamadanoboru
 - name: 山代カゲツ
-  role: writer_artist
-  kana: ヤマシロカゲツ
-  romaji: yamashirokagetsu
+  role: artist
+- name: やまだのぼる
+  role: writer
 original_authors: []
 publisher: kadokawa
 magazine: shonen-ace
@@ -47,3 +43,6 @@ tags:
   category: Rakuten
   rank: 60
 source: pub-fix-preview
+credits:
+- name: にじまあるく
+  role: character_design

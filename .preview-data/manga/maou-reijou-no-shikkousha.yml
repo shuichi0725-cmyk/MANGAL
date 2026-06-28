@@ -7,12 +7,10 @@ year_started: 2024
 year_ended: 2025
 status: completed
 authors:
-- name: Sty
-  role: writer_artist
 - name: 山水ミド
-  role: writer_artist
-  kana: サンスイミド
-  romaji: sansuimido
+  role: artist
+- name: Sty
+  role: writer
 original_authors: []
 publisher: kadokawa
 magazine: shonen-ace
@@ -61,3 +59,6 @@ tags:
 popularity: 1175
 score: 57
 source: pub-fix-preview
+credits:
+- name: 伊藤宗一
+  role: character_design

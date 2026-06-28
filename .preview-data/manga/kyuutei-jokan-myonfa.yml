@@ -6,14 +6,10 @@ year_started: 2022
 year_ended: null
 status: ongoing
 authors:
-- name: 小野はるか
-  role: writer_artist
-  kana: オノハルカ
-  romaji: onoharuka
 - name: 斎賀菜月
-  role: writer_artist
-  kana: サイガナツキ
-  romaji: saiganatsuki
+  role: artist
+- name: 小野はるか
+  role: writer
 original_authors: []
 publisher: flex-comix
 magazine: null
@@ -58,3 +54,6 @@ tags:
   rank: 20
 popularity: 12
 source: pub-fix-preview
+credits:
+- name: 鈴ノ助
+  role: character_design

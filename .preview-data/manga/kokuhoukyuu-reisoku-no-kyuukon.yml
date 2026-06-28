@@ -6,16 +6,10 @@ year_started: 2025
 year_ended: null
 status: ongoing
 authors:
-- name: sasasa
-  role: writer_artist
-- name: Ai
-  role: writer_artist
-  kana: サイトウタカヒコ
-  romaji: saitoutakahiko
 - name: 神野える
-  role: writer_artist
-  kana: カミノエル
-  romaji: kaminoeru
+  role: artist
+- name: sasasa
+  role: writer
 original_authors: []
 publisher: shufu-to-seikatsu
 magazine: null
@@ -50,3 +44,6 @@ publishers:
 - shufu-to-seikatsu
 genres_rakuten: true
 source: pub-fix-preview
+credits:
+- name: ザネリ
+  role: character_design

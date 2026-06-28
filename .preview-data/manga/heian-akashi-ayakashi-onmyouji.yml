@@ -6,14 +6,10 @@ year_started: 2021
 year_ended: 2022
 status: completed
 authors:
-- name: 星月渉
-  role: writer_artist
-  kana: ホシズキワタル
-  romaji: hoshizukiwataru
 - name: こはく
-  role: writer_artist
-  kana: コハク
-  romaji: kohaku
+  role: artist
+- name: 遠藤遼
+  role: writer
 original_authors: []
 publisher: hakusensha
 magazine: hana-to-yume
@@ -54,3 +50,6 @@ tags:
   rank: 20
 popularity: 51
 source: pub-fix-preview
+credits:
+- name: 沙月
+  role: character_design

@@ -7,14 +7,10 @@ year_started: 2025
 year_ended: null
 status: ongoing
 authors:
-- name: KAZU
-  role: writer_artist
-  kana: イソベカズマ
-  romaji: isobekazuma
 - name: しばかめ
-  role: writer_artist
-  kana: シバカメ
-  romaji: shibakame
+  role: artist
+- name: KAZU
+  role: writer
 original_authors: []
 publisher: overlap
 magazine: null
@@ -49,3 +45,6 @@ genres_anilist:
 - Fantasy
 popularity: 235
 source: pub-fix-preview
+credits:
+- name: まるまい
+  role: character_design

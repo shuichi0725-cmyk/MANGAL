@@ -6,12 +6,10 @@ year_started: 2021
 year_ended: null
 status: ongoing
 authors:
-- name: yocco
-  role: writer_artist
 - name: あさなや
-  role: writer_artist
-  kana: アサナヤ
-  romaji: asanaya
+  role: artist
+- name: yocco
+  role: writer
 original_authors: []
 publisher: kadokawa
 magazine: null
@@ -92,3 +90,6 @@ tags:
 popularity: 840
 score: 57
 source: pub-fix-preview
+credits:
+- name: 純粋
+  role: character_design

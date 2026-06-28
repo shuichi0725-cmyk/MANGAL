@@ -6,14 +6,10 @@ year_started: 2022
 year_ended: null
 status: ongoing
 authors:
-- name: 小野はるか
-  role: writer_artist
-  kana: オノハルカ
-  romaji: onoharuka
 - name: おの秋人
-  role: writer_artist
-  kana: オノアキヒト
-  romaji: onoakihito
+  role: artist
+- name: 小野はるか
+  role: writer
 original_authors: []
 publisher: kadokawa
 magazine: null
@@ -65,3 +61,6 @@ tags:
   rank: 79
 popularity: 30
 source: pub-fix-preview
+credits:
+- name: 夏目レモン
+  role: character_design

@@ -6,14 +6,12 @@ year_started: 2021
 year_ended: 2021
 status: completed
 authors:
-- name: 兎希メグ
-  role: writer_artist
-  kana: トキメグ
-  romaji: tokimegu
+- name: 木元哉多
+  role: writer
 - name: 柴田孫四郎
+  role: artist
+- name: 望月けい
   role: writer_artist
-  kana: シバタマゴシロウ
-  romaji: shibatamagoshirou
 original_authors:
 - name: irom
   role: writer
@@ -56,3 +54,6 @@ tags:
   rank: 60
 popularity: 19
 source: pub-fix-preview
+credits:
+- name: irom
+  role: composition

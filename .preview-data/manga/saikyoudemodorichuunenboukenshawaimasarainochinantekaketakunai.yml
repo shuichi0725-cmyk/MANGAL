@@ -6,14 +6,10 @@ year_started: 2026
 year_ended: 2026
 status: completed
 authors:
-- name: 明石六郎
-  role: writer_artist
-  kana: アカシロクロウ
-  romaji: akashirokurou
 - name: 斯道歩
-  role: writer_artist
-  kana: シドウアユム
-  romaji: shidouayumu
+  role: artist
+- name: 明石六郎
+  role: writer
 original_authors: []
 publisher: kodansha
 magazine: null
@@ -47,3 +43,6 @@ publishers:
 catch: 世界最強の冒険者集団に所属していたジョンマンは、おっさんになった今、スローライフを夢見て故郷へ出戻った。だが穏やかな余生のはずが、史上最凶の大盗賊団が街に乱入。撃退すれば名声は王都へ轟き――命を懸けたくない元最強の、巻き込まれ無双ファンタジー。
 genres_rakuten: true
 source: pub-fix-preview
+credits:
+- name: ごろー＊
+  role: character_design

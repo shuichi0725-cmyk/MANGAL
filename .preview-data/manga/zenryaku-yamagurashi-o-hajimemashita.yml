@@ -6,14 +6,10 @@ year_started: 2023
 year_ended: null
 status: ongoing
 authors:
-- name: 浅葱
-  role: writer_artist
-  kana: アサギ
-  romaji: asagi
 - name: 濱田みふみ
-  role: writer_artist
-  kana: ハマダミフミ
-  romaji: hamadamifumi
+  role: artist
+- name: 浅葱
+  role: writer
 original_authors: []
 publisher: kadokawa
 magazine: null
@@ -65,3 +61,6 @@ tags:
   category: Rakuten
   rank: 60
 source: pub-fix-preview
+credits:
+- name: しの
+  role: character_design

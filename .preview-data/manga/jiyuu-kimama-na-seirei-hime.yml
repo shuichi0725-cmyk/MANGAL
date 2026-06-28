@@ -6,14 +6,10 @@ year_started: 2024
 year_ended: null
 status: ongoing
 authors:
-- name: めざし
-  role: writer_artist
-  kana: メザシpub. 2023
-  romaji: mezashi
 - name: 比良純香
-  role: writer_artist
-  kana: ヒラスミカ
-  romaji: hirasumika
+  role: artist
+- name: めざし
+  role: writer
 original_authors: []
 publisher: kodansha
 magazine: null
@@ -79,3 +75,6 @@ tags:
   rank: 20
 popularity: 150
 source: pub-fix-preview
+credits:
+- name: しょくむら
+  role: character_design
