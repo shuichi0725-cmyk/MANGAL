@@ -7,8 +7,10 @@ year_started: 2021
 year_ended: null
 status: ongoing
 authors:
+- name: 白露雪音
+  role: writer
 - name: わかば
-  role: writer_artist
+  role: artist
 original_authors: []
 publisher: to-books
 magazine: null
@@ -58,4 +60,9 @@ tags:
   category: Demographic
   rank: 20
 popularity: 105
-source: pub-fix-preview
+credits:
+- name: 君塚祥
+  role: 構成
+- name: ICA
+  role: キャラクター原案
+source: author-fix-preview

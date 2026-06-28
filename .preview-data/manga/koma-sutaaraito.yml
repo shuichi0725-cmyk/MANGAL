@@ -8,12 +8,6 @@ status: completed
 authors:
 - name: 巻々廻
   role: artist
-- name: ブシロード
-  role: writer_artist
-- name: ネルケプランニング
-  role: writer_artist
-- name: キネマシトラス
-  role: writer_artist
 original_authors:
 - name: ブシロード
   role: writer
@@ -74,4 +68,11 @@ tags:
   rank: 79
 popularity: 287
 score: 64
-source: pub-fix-preview
+credits:
+- name: ブシロード
+  role: 原作
+- name: ネルケプランニング
+  role: 原作
+- name: キネマシトラス
+  role: 原作
+source: author-fix-preview

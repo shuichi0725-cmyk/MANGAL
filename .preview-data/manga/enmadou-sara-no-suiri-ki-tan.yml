@@ -10,8 +10,6 @@ authors:
   role: writer
 - name: 柴田孫四郎
   role: artist
-- name: 望月けい
-  role: writer_artist
 original_authors:
 - name: irom
   role: writer
@@ -53,7 +51,9 @@ tags:
   category: Theme-Other
   rank: 60
 popularity: 19
-source: pub-fix-preview
 credits:
 - name: irom
-  role: composition
+  role: 構成
+- name: 望月けい
+  role: キャラクター原案
+source: author-fix-preview

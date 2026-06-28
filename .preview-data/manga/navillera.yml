@@ -6,10 +6,10 @@ year_started: 2023
 year_ended: 2024
 status: completed
 authors:
-- name: JIMMY
-  role: artist
 - name: HUN
   role: writer
+- name: JIMMY
+  role: artist
 original_authors:
 - name: HUN
   role: writer
@@ -56,4 +56,4 @@ editions:
 publishers:
 - harpercollins-japan
 genres_provisional: true
-source: pub-fix-preview
+source: author-fix-preview

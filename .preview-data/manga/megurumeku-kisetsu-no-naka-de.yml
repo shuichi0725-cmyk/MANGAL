@@ -8,8 +8,10 @@ year_started: 2020
 year_ended: 2021
 status: completed
 authors:
-- name: 原作：RYO.作画：やぼみ
-  role: writer_artist
+- name: RYO.
+  role: writer
+- name: やぼみ
+  role: artist
 original_authors: []
 publisher: line-digital-frontier
 magazine: null
@@ -63,4 +65,4 @@ tags:
   rank: 20
 popularity: 463
 score: 60
-source: pub-fix-preview
+source: author-fix-preview

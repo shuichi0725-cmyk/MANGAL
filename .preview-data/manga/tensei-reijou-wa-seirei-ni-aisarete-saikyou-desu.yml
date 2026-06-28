@@ -7,8 +7,14 @@ year_ended: null
 status: ongoing
 authors:
 - name: はな
-  role: writer_artist
-original_authors: []
+  role: artist
+- name: 風間レイ
+  role: writer
+original_authors:
+- name: 風間レイ
+  role: writer
+  kana: カザマレイ
+  romaji: kazamarei
 publisher: to-books
 magazine: null
 demographic: josei
@@ -67,4 +73,7 @@ tags:
   rank: 20
 popularity: 23
 work_wikidata_qid: Q136649043
-source: pub-fix-preview
+credits:
+- name: 藤小豆
+  role: キャラクター原案
+source: author-fix-preview

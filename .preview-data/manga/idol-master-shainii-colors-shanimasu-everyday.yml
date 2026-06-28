@@ -9,9 +9,7 @@ year_ended: null
 status: ongoing
 authors:
 - name: ギミー
-  role: artist
-- name: バンダイナムコエンターテインメント
-  role: writer
+  role: writer_artist
 original_authors:
 - name: バンダイナムコエンターテインメント
   role: writer
@@ -67,4 +65,7 @@ tags:
 - name: Cute Girls Doing Cute Things
   category: Rakuten
   rank: 60
-source: pub-fix-preview
+credits:
+- name: バンダイナムコエンターテインメント
+  role: 原作
+source: author-fix-preview

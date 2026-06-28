@@ -10,8 +10,6 @@ authors:
   role: writer
 - name: 田中守
   role: artist
-- name: 菅原健二
-  role: writer_artist
 original_authors:
 - name: 菅原健二
   role: writer
@@ -56,4 +54,7 @@ tags:
   rank: 20
 popularity: 1705
 score: 49
-source: pub-fix-preview
+credits:
+- name: 菅原健二
+  role: ネーム構成
+source: author-fix-preview

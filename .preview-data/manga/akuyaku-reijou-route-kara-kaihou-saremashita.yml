@@ -8,13 +8,9 @@ year_ended: null
 status: ongoing
 authors:
 - name: みなと
-  role: writer_artist
-  kana: ミナト
-  romaji: minato
-- name: 花戸つき
-  role: writer_artist
-  kana: ハナトツキ
-  romaji: hanatotsuki
+  role: writer
+- name: 吉たか結衣
+  role: artist
 original_authors: []
 publisher: kodansha
 magazine: null
@@ -63,4 +59,7 @@ tags:
   category: Demographic
   rank: 20
 popularity: 38
-source: pub-fix-preview
+credits:
+- name: 霧夢ラテ
+  role: キャラクター原案
+source: author-fix-preview

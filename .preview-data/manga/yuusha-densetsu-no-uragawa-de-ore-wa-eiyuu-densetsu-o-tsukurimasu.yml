@@ -8,10 +8,10 @@ year_started: 2020
 year_ended: null
 status: ongoing
 authors:
-- name: まお
-  role: artist
 - name: ナカノムラアヤスケ
   role: writer
+- name: まお
+  role: artist
 original_authors: []
 publisher: futabasha
 magazine: null
@@ -95,4 +95,7 @@ tags:
   rank: 79
 popularity: 1667
 score: 56
-source: pub-fix-preview
+credits:
+- name: をん
+  role: キャラクター原案
+source: author-fix-preview

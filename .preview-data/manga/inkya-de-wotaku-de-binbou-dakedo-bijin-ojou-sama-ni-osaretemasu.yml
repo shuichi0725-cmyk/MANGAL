@@ -7,11 +7,9 @@ year_ended: null
 status: ongoing
 authors:
 - name: 源素水
-  role: artist
-- name: 美月りん
   role: writer
-- name: あさぎ屋
-  role: writer_artist
+- name: 美月りん
+  role: artist
 original_authors: []
 publisher: kadokawa
 magazine: shonen-ace
@@ -59,4 +57,7 @@ tags:
   rank: 60
 popularity: 5353
 score: 65
-source: pub-fix-preview
+credits:
+- name: あさぎ屋
+  role: キャラクター原案
+source: author-fix-preview

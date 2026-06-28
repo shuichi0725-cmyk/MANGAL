@@ -6,12 +6,10 @@ year_started: 2021
 year_ended: null
 status: ongoing
 authors:
-- name: みなみ
-  role: artist
 - name: 逆井卓馬
   role: writer
-- name: 遠坂あさぎ
-  role: writer_artist
+- name: みなみ
+  role: artist
 original_authors:
 - name: 逆井卓馬
   role: writer
@@ -98,4 +96,7 @@ tags:
 popularity: 677
 score: 54
 work_wikidata_qid: Q110060929
-source: pub-fix-preview
+credits:
+- name: 遠坂あさぎ
+  role: キャラクターデザイン
+source: author-fix-preview

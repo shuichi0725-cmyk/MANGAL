@@ -6,8 +6,10 @@ year_started: 2019
 year_ended: null
 status: ongoing
 authors:
+- name: 岬
+  role: writer
 - name: 百地
-  role: writer_artist
+  role: artist
 original_authors: []
 publisher: to-books
 magazine: null
@@ -126,4 +128,13 @@ tags:
   rank: 65
 popularity: 1697
 score: 67
-source: pub-fix-preview
+credits:
+- name: 8KEY
+  role: 構成
+- name: 孫之手ランプ
+  role: 構成
+- name: 鵜呑
+  role: 構成
+- name: さんど
+  role: キャラクター原案
+source: author-fix-preview
