@@ -42,7 +42,9 @@ export default function FilterPanel({
       demographic: tally({ demographics: [] }, (m) => [m.demographic]),
       genre: tally({ genres: [] }, (m) => m.genres ?? []),
       theme: tally({ themes: [] }, (m) => m.themes ?? []),
-      publisher: tally({ publishers: [] }, (m) => m.publishers ?? []),
+      publisher: tally({ publishers: [] }, (m) =>
+        m.publishers?.length ? m.publishers : m.publisher ? [m.publisher] : [],
+      ),
       magazine: tally({ magazines: [] }, (m) => (m.magazine ? [m.magazine] : [])),
     };
   }, [data.manga, state]);
@@ -252,6 +254,17 @@ export default function FilterPanel({
 
       <Section title="出版社">
         <div className="space-y-1">
+          {/* ★出版社未設定(=要補完)を絞り込む QAボタン。 (unknown)キーで applyFilters の
+              フォールバック(publishers空→[publisher])に乗る */}
+          <label className="flex items-center gap-2 cursor-pointer rounded bg-amber-50 px-1 -mx-1">
+            <input
+              type="checkbox"
+              checked={state.publishers.includes("(unknown)")}
+              onChange={() => update({ publishers: toggle(state.publishers, "(unknown)") })}
+            />
+            <span className="text-amber-700">⚠ 出版社未設定</span>
+            <Cnt n={counts.publisher.get("(unknown)") ?? 0} />
+          </label>
           {data.publishers.map((p) => (
             <label key={p.key} className="flex items-center gap-2 cursor-pointer">
               <input
