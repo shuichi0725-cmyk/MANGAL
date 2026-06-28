@@ -1080,6 +1080,15 @@ def _load_page_dedup() -> set:
 _PAGE_DEDUP_DROPS: set = _load_page_dedup()
 
 
+def _load_company_drops() -> set:
+    # ★会社/編集部著者の非漫画(編集部編纂のアンソロ/ガイド/ムック)= slug単位drop。 多ソース検証(WF)で確定分。
+    p = ROOT / "data" / "seeds" / "company-nonmanga-drop.json"
+    return set(json.loads(p.read_text(encoding="utf-8"))) if p.exists() else set()
+
+
+_COMPANY_DROPS: set = _load_company_drops()
+
+
 def _load_drop_series_keys() -> set:
     """非掲載 series_key 集合(non-manga-drop.yml)。 ★merge除外用: drop済series(外国版/
     フィルムコミック等)が find_related_series_ids で他ページに混入するのを防ぐ。
@@ -1134,6 +1143,18 @@ def _load_rakuten_labels() -> tuple[dict, dict]:
 
 
 _RAKUTEN_GENRES, _RAKUTEN_TAGS = _load_rakuten_labels()
+
+
+def _load_enrich_genres_tags():
+    # ★enrich作り直し(vol1 caption基点・closed vocab)の genre/要素タグ。 slug単位。 trusted無時のAI上書き。
+    gp = ROOT / "data" / "seeds" / "genre-enrich-2425.json"
+    tp = ROOT / "data" / "seeds" / "tags-enrich-2425.json"
+    g = json.loads(gp.read_text(encoding="utf-8")) if gp.exists() else {}
+    t = json.loads(tp.read_text(encoding="utf-8")) if tp.exists() else {}
+    return g, t
+
+
+_GENRE_ENRICH, _TAGS_ENRICH = _load_enrich_genres_tags()
 
 
 def _load_author_yomi() -> None:
@@ -2447,6 +2468,10 @@ def main():
         if slug in _PAGE_DEDUP_DROPS:
             stats["dedup_skip"] = stats.get("dedup_skip", 0) + 1
             continue                       # 重複ページ(page-dedup.yml) = canonical 側だけ出力
+        if slug in _COMPANY_DROPS:
+            stats["dropped_non_manga"] += 1
+            dropped_non_manga.append(f"{ypath.name}  会社著者の非漫画(編集部編纂)")
+            continue                       # 会社/編集部著者の編集部編纂物(アンソロ/ガイド) = 非漫画
         title = src["title"]
         qid = src.get("wikidata_qid")
         # 漫画以外 (= テレビアニメ版 / 映画 / 劇場版 等) は MANGAL 対象外
@@ -2624,9 +2649,18 @@ def main():
                 new_yml["genres_rakuten"] = True
                 new_yml.pop("genres_provisional", None)
             else:
-                ai_g = [g for g in (new_yml.get("genres") or []) if g in valid_gens and g != "other"]
-                new_yml["genres"] = ai_g or (new_yml.get("genres") or ["other"])
-                new_yml["genres_provisional"] = True  # 信頼源ゼロ=AI暫定(信頼源が来たら上書き)
+                # ★enrich作り直し(vol1 caption基点・closed vocab・較正済)= 旧AIより高品質 → trusted/rakuten無時に優先
+                ge = [g for g in _GENRE_ENRICH.get(slug, []) if g in valid_gens and g != "other"]
+                if ge:
+                    geset = set(ge)
+                    if geset & {"baseball", "soccer"}:
+                        geset.add("sports")
+                    new_yml["genres"] = sorted(geset)
+                    new_yml["genres_provisional"] = True
+                else:
+                    ai_g = [g for g in (new_yml.get("genres") or []) if g in valid_gens and g != "other"]
+                    new_yml["genres"] = ai_g or (new_yml.get("genres") or ["other"])
+                    new_yml["genres_provisional"] = True  # 信頼源ゼロ=AI暫定(信頼源が来たら上書き)
         # ★楽天あらすじ由来 要素タグ(Phase③) = theme tag未保有 work へ追加(category=Rakuten)。
         #   既存 tag 名は dedup。 表示は要素欄(tag-i18n 和訳)。
         rkt = _RAKUTEN_TAGS.get(slug)
@@ -2636,6 +2670,14 @@ def main():
                    for n in rkt if n not in existing]
             if add:
                 new_yml["tags"] = (new_yml.get("tags") or []) + add
+        # ★enrich作り直しの要素タグ(異世界転生/悪役令嬢/復讐/グルメ等)= 未保有 work へ追加
+        ent = _TAGS_ENRICH.get(slug)
+        if ent:
+            existing2 = {t.get("name") for t in (new_yml.get("tags") or [])}
+            add2 = [{"name": n, "category": "AI", "rank": 55}
+                    for n in ent if n and n not in existing2]
+            if add2:
+                new_yml["tags"] = (new_yml.get("tags") or []) + add2
         # ★MADB安全fallback: AniListで埋まらなかった著者ゼロを series_key で補完
         #   (外国名除去後の単独日本語著者のみ=原作者誤主著/汚染を回避)。
         cur_au2 = new_yml.get("authors") or []
