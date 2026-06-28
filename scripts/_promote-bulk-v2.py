@@ -1466,6 +1466,15 @@ def find_related_series_ids(con: sqlite3.Connection, main: dict) -> list[int]:
     return list(ids)
 
 
+# ★著者名に紛れた「pub. 年」アーティファクトを除去(db-v2 mangaka 189件の汚染)。
+#   例: 「Aipub. 2025」→「Ai」 / 「HIKARIpub. 2022」→「HIKARI」 / 「Sugar.Pub. 2021」→「Sugar」。
+#   「pub. 19xx/20xx(.月)」は実著者名に現れない=機械的に安全に剥がせる。 種2不変・promote出力時のみ。
+_AUTHOR_PUB_RE = re.compile(r'\s*[\(（]?\s*\.?\s*pub\.?\s*(?:19|20)\d\d(?:\.\d+)?\s*[\)）]?\s*$', re.I)
+
+def _clean_author_name(n: str) -> str:
+    return _AUTHOR_PUB_RE.sub('', str(n or '')).strip()
+
+
 def get_authors(con: sqlite3.Connection, series_id: int) -> list[dict]:
     cur = con.cursor()
     cur.row_factory = sqlite3.Row
@@ -1478,7 +1487,7 @@ def get_authors(con: sqlite3.Connection, series_id: int) -> list[dict]:
         """,
         (series_id,),
     ).fetchall()
-    return [{"name": r["name"], "role": r["role"]} for r in rows]
+    return [{"name": _clean_author_name(r["name"]), "role": r["role"]} for r in rows]
 
 
 def edition_passes_filter(ed_row: dict) -> bool:
