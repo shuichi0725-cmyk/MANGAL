@@ -41,6 +41,14 @@ def romaji(s):
     out = re.sub(r'[^a-z0-9]+', '-', out.lower()).strip('-')
     return out or "x"
 
+def make_slug(title, kana):
+    # ★slugは「読み(NDL/楽天のkana)」基点。 漢字をpykakasiで読ませない(君→クン誤読を防ぐ)。
+    #  Latin題/数字含む題は元綴り温存(GROUNDLESS/50婚→keep)、 純日本語題はkana読みをローマ字化。
+    if re.search(r'[A-Za-z]', str(title)) or re.search(r'\d', str(title)) or not kana:
+        return romaji(title)
+    k = re.split(r'[:：]', str(kana))[0]   # 副題off
+    return romaji(k)
+
 def volnum(m):
     v = re.sub(r'\D', '', str(m.get('volume') or ''))
     if v:
@@ -76,8 +84,8 @@ for (bt, author), isbns in works.items():
         continue
     isbns = sorted(isbns, key=lambda ib: volnum(mat[ib]))
     rep = mat[isbns[0]]
-    # slug = author姓 + title romaji (簡易・衝突回避)
-    slug = romaji(bt)[:50]
+    # slug = ★読み(kana)基点 (漢字pykakasi誤読を避ける)。 Latin/数字は元綴り温存
+    slug = make_slug(bt, tk)[:50]
     if slug in used_slugs:
         slug = f"{slug}-{romaji(author)[:12]}" if author else f"{slug}-{isbns[0][-4:]}"
     if slug in used_slugs:
