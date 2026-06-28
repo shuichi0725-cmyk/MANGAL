@@ -63,16 +63,17 @@ def parse_date(s):
         return None
     return f"{m.group(1)}" + (f"-{int(m.group(2)):02d}" if m.group(2) else "") + (f"-{int(m.group(3)):02d}" if m.group(2) and m.group(3) else "")
 
-# 対象 = NDL preview の単巻ページ
+# 対象 = NDL preview の 単巻 or 巻抜け(非連番)ページ
 targets = []
 for p in glob.glob(f"{PREV}/*.yml"):
     d = yaml.safe_load(open(p, encoding="utf-8"))
     if not d or d.get("source") != "ndl-discovery-2425":
         continue
-    nvol = sum(len(e.get("volumes") or []) for e in (d.get("editions") or []))
-    if nvol <= 1:
+    vnums = sorted(v["number"] for e in (d.get("editions") or []) for v in (e.get("volumes") or []))
+    has_gap = bool(vnums) and max(vnums) != len(vnums)   # [1..N]連番でない=欠番
+    if len(vnums) <= 1 or has_gap:
         targets.append((p, d))
-print(f"単巻NDLページ: {len(targets)}", flush=True)
+print(f"単巻/巻抜けNDLページ: {len(targets)}", flush=True)
 
 report = []
 for i, (p, d) in enumerate(targets, 1):
@@ -80,6 +81,7 @@ for i, (p, d) in enumerate(targets, 1):
     author = clean_author((d.get("authors") or [{}])[0].get("name", ""))
     bn = norm(bt)
     page_plus = bool(re.search(r'[+＋]\s*$', unicodedata.normalize("NFKC", str(d.get("title")))))
+    pauth = [norm(a.get("name")) for a in (d.get("authors") or []) if a.get("name")]
     sbt = re.sub(r'[+＋]\s*$', '', bt).strip()   # 検索用は+除去
     try:
         items = (search(sbt, author).get("Items") or [])
@@ -95,6 +97,10 @@ for i, (p, d) in enumerate(targets, 1):
         if EXCL.search(ti):
             continue
         if not norm(ti).startswith(bn):   # 別作除外(題前方一致)
+            continue
+        # ★著者照合(別作混入防止: おひさま→おひさまピアノ等を弾く)。 item著者に頁著者が含まれるか
+        ia = norm(it.get("author", ""))
+        if pauth and not any(pa and pa in ia for pa in pauth):
             continue
         # ＋スピンオフ判別: ページが＋系なら＋付きのみ、 そうでなければ＋無しのみ
         res_plus = bool(re.search(r'[+＋]', unicodedata.normalize("NFKC", ti)))
