@@ -1475,6 +1475,16 @@ def _clean_author_name(n: str) -> str:
     return _AUTHOR_PUB_RE.sub('', str(n or '')).strip()
 
 
+# ★著者override(楽天種突合+多ソース回収で確証ある分のみ。 slug単位で本番著者を是正。 種2不変overlay)
+_AUTHOR_OVERRIDES = None
+def _load_author_overrides() -> dict:
+    global _AUTHOR_OVERRIDES
+    if _AUTHOR_OVERRIDES is None:
+        p = ROOT / "data" / "seeds" / "author-overrides.json"
+        _AUTHOR_OVERRIDES = json.loads(p.read_text(encoding="utf-8")) if p.exists() else {}
+    return _AUTHOR_OVERRIDES
+
+
 def get_authors(con: sqlite3.Connection, series_id: int) -> list[dict]:
     cur = con.cursor()
     cur.row_factory = sqlite3.Row
@@ -2072,6 +2082,19 @@ def build_yml(
     creds = get_author_credits(series_row.get("series_key", ""))
     if creds:
         o["credits"] = creds
+
+    # ★著者override適用(slug単位・confident分のみ。 writer=原作→original_authors / artist・writer_artist→authors)
+    _ov = _load_author_overrides().get(o["slug"])
+    if _ov and _ov.get("authors"):
+        _auth = [a for a in _ov["authors"] if a.get("role") in ("artist", "writer_artist", "editor")]
+        _orig = [{"name": a["name"], "role": "writer"} for a in _ov["authors"] if a.get("role") == "writer"]
+        if not _auth:   # 原作のみ等 = authors空回避(現role保持)
+            _auth = [{"name": a["name"], "role": a.get("role", "writer_artist")} for a in _ov["authors"]]
+            _orig = []
+        o["authors"] = [enrich_author(a) for a in _dedup_authors(_auth)]
+        o["original_authors"] = [enrich_author(a) for a in _dedup_authors(_orig)]
+        if _ov.get("credits"):
+            o["credits"] = [{"name": c["name"], "role": c.get("role", "編集")} for c in _ov["credits"] if c.get("name")]
 
     # publisher: 種3 → 旧 yml の 優先で 取得、 master 未定義なら 旧 yml に fallback
     pub_cand = (seed3 or {}).get("publisher") or src_yml.get("publisher")
