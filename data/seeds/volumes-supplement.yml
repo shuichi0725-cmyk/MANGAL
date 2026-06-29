@@ -5557,3 +5557,15 @@ volumes:
   source: rakuten
   added_at: '2026-06-30'
   note: 愛蔵版vol173取込もれ。NDL+楽天確認(2024-10-30/リイド社)。standard220巻は完全・愛蔵版のみ欠落。ISBN連番から確定。
+- series_keys:
+  - name:ほしのなつみ|name:キジトラ猫の小梅さん
+  qid: null
+  number: 29
+  isbn13: '9784785982683'
+  release_date: null
+  publisher: 少年画報社
+  edition_type: standard
+  title_display: キジトラ猫の小梅さん 29
+  source: rakuten
+  added_at: '2026-06-30'
+  note: ねこぱんちに誤マッチ混入していた29巻を本来のキジトラ猫の小梅さんページへ移設(volume-excludeで除去+ここで純粋追加)
