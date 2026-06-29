@@ -1,19 +1,3 @@
-# 改題 chain による series 統合定義。
-# 種2 sqlite は不変、 audit script + 本番 yml 生成時に lookup する mapping のみ。
-# 自動生成元: scripts/_gen-series-merge.py (= kaitai-chain-strong.csv 由来)
-#
-# 形式:
-#   - main: 統合先 (= 検索性/知名度高い親 title)
-#     aliases: 統合元 子 title 配列 (= title 単位 merge、 改題 chain 主用途)
-#     merge_sids: [int,...] (= optional) ★ 種2 series.id 直接指定で merge
-#                          (= 表記揺れ救済、 個別判断ケース、 同名異作リスク回避)
-#     merge_edition_types: bool (= optional) ★ True で audit 集計時 edition.type
-#                          区別を 解除 (= 装丁切り替えで standard → shinsoban に
-#                          移行した 連続巻 を 1 bucket 集計、 例: シャングリラ
-#                          フロンティア 23/26 巻 「KC magazine deluxe」)
-#     note: |
-#       根拠 / 確認内容
-#
 - main: Fate/stay nightコミックアラカルト
   aliases:
   - Fate/stay night［Unlimited Blade Works］コミックアラカルト
@@ -49,2540 +33,2647 @@
   note: 'M812763: 「艦隊これくしょん-艦これ-電撃コミックアンソロジー」の改題、巻次を継承 ／ NDC（9版）はNDC（10版）を自動変換した値である。'
 - main: うる星やつらパーフェクト★カラーエディション
   aliases: []
-  merge_keys:  # ★STEP6: series_key 参照 (sid非依存)
-  - 'qid:Q219948|name:うる星やつら パーフェクト★カラーエディション'
-  - 'qid:Q219948|name:うる星やつらパーフェクト★カラーエディション'
-  note: |
-    MADB 表記揺れ (= 半角空白あり/なし) で 上下巻が 別 sid 化:
-      - sid=36057  : 「うる星やつら パーフェクト★カラーエディション」 (= 空白あり) = 上 巻
-      - sid=126413 : 「うる星やつらパーフェクト★カラーエディション」 (= 空白なし) = 下 巻
-    両方とも 2016-01-23 同日発売、 ISBN 連番 (9784091266873 + 9784091266880)、
-    高橋留美子、 小学館少年サンデーコミックス、 「うる星やつら」 名場面 フルカラー
-    再収録 愛蔵版。 statistics ベース 統合で 本番 yml 上下表示 統一。
-    ユーザ判断 = 2026-05-26。
+  merge_keys:
+  - qid:Q219948|name:うる星やつら パーフェクト★カラーエディション
+  - qid:Q219948|name:うる星やつらパーフェクト★カラーエディション
+  note: "MADB 表記揺れ (= 半角空白あり/なし) で 上下巻が 別 sid 化:\n  - sid=36057  : 「うる星やつら パーフェクト★カラーエディション」 (= 空白あり) = 上 巻\n  - sid=126413 : 「うる星やつらパーフェクト★カラーエディション」 (= 空白なし) = 下 巻\n両方とも 2016-01-23 同日発売、 ISBN 連番 (9784091266873 + 9784091266880)、\n高橋留美子、 小学館少年サンデーコミックス、 「うる星やつら」 名場面 フルカラー\n再収録 愛蔵版。 statistics ベース 統合で 本番 yml 上下表示 統一。\nユーザ判断 = 2026-05-26。\n"
 - main: シャングリラフロンティア
   aliases: []
-  merge_keys:  # ★STEP6: series_key 参照 (sid非依存)
-  - 'name:硬梨菜|name:シャングリラ・フロンティア|sub:クソゲーハンター、神ゲーに挑まんとす'
-  - 'name:不二涼介|name:シャングリラフロンティア'
-  - 'name:硬梨菜|name:シャングリラフロンティア|sub:クソゲーハンター、神ゲーに挑まんとす'
-  - 'name:硬梨菜|name:シャングリラフロンティア|sub:クソゲーハンター、神ゲーに挑まんとす.'
+  merge_keys:
+  - name:硬梨菜|name:シャングリラ・フロンティア|sub:クソゲーハンター、神ゲーに挑まんとす
+  - name:不二涼介|name:シャングリラフロンティア
+  - name:硬梨菜|name:シャングリラフロンティア|sub:クソゲーハンター、神ゲーに挑まんとす
+  - name:硬梨菜|name:シャングリラフロンティア|sub:クソゲーハンター、神ゲーに挑まんとす.
   merge_edition_types: true
-  note: |
-    表記揺れ + 著者振り分け 差異で 種2 内 4 sid に分散登録:
-      - sid=77559  : 中黒違い 「シャングリラ・フロンティア」 sub=クソゲーハンター...
-      - sid=141297 : subtitle なし 「シャングリラフロンティア」 (= 著者=不二涼介)
-      - sid=141298 : subtitle あり (= 著者=硬梨菜 原作)
-      - sid=141299 : 末尾 . 揺れ sub=クソゲーハンター...とす.
-    実態 = 1-26 巻 同一作品 (= 20 巻 は MADB 取込もれ、 種4 で補完済 ISBN 9784065377437)。
-    硬梨菜 (原作) / 不二涼介 (漫画) の 2 著者で MADB が 巻ごと creator 振り分け 差異。
-    23 / 26 巻 = brand 「KC magazine deluxe」 で 種2 build script が shinsoban に
-    振り分けたが、 実態は 連続通常巻 = merge_edition_types: true で standard と
-    shinsoban を 同 bucket 集計。
-    cluster 統合により audit 偽陽性 解消。 ユーザ判断 = 2026-05-25。
-
-# ── frag-merge: 同題+著者完全一致+無副題の版違い統合 (_merge-frag-build.py) ──
-- main: '新世紀エヴァンゲリオン'
+  note: "表記揺れ + 著者振り分け 差異で 種2 内 4 sid に分散登録:\n  - sid=77559  : 中黒違い 「シャングリラ・フロンティア」 sub=クソゲーハンター...\n  - sid=141297 : subtitle なし 「シャングリラフロンティア」 (= 著者=不二涼介)\n  - sid=141298 : subtitle あり (= 著者=硬梨菜 原作)\n  - sid=141299 : 末尾 . 揺れ sub=クソゲーハンター...とす.\n実態 = 1-26 巻 同一作品 (= 20 巻 は MADB 取込もれ、 種4 で補完済 ISBN 9784065377437)。\n硬梨菜 (原作) / 不二涼介 (漫画) の 2 著者で MADB が 巻ごと creator 振り分け 差異。\n23 / 26 巻 = brand 「KC magazine deluxe」 で 種2 build script が shinsoban に\n振り分けたが、 実態は 連続通常巻 = merge_edition_types: true で standard と\nshinsoban を 同 bucket 集計。\ncluster 統合により audit 偽陽性 解消。 ユーザ判断 = 2026-05-25。\n"
+- main: 新世紀エヴァンゲリオン
   merge_keys:
-  - 'name:GAINAX|name:新世紀エヴァンゲリオン'
-  - 'name:カラー|name:新世紀エヴァンゲリオン'
-  - 'qid:Q282121|name:新世紀エヴァンゲリオン'
+  - name:GAINAX|name:新世紀エヴァンゲリオン
+  - name:カラー|name:新世紀エヴァンゲリオン
+  - qid:Q282121|name:新世紀エヴァンゲリオン
   note: 'frag-merge: 著者完全一致+無副題の版違い 3key'
-- main: 'しゅごキャラ!'
+- main: しゅごキャラ!
   merge_keys:
-  - 'name:PEACH-PIT|name:しゅごキャラ!'
-  - 'name:Peach-Pit|name:しゅごキャラ!'
-  - 'name:Peach-pit|name:しゅごキャラ!'
+  - name:PEACH-PIT|name:しゅごキャラ!
+  - name:Peach-Pit|name:しゅごキャラ!
+  - name:Peach-pit|name:しゅごキャラ!
   note: 'frag-merge: 著者完全一致+無副題の版違い 3key'
-- main: '新上ってなンボ!!太一よ泣くな'
+- main: 新上ってなンボ!!太一よ泣くな
   merge_keys:
-  - 'qid:Q11412214|name:(新)上ってなンボ!!太一よ泣くな'
-  - 'qid:Q11412214|name:新々上ってなンボ!!太一よ泣くな'
-  - 'qid:Q11412214|name:新上ってなンボ!!太一よ泣くな'
-  - 'qid:Q967455|name:新々上ってなンボ!!太一よ泣くな'
-  - 'qid:Q967455|name:新上ってなンボ!!太一よ泣くな'
-  - 'qid:Q967455|name:新上ってなンボ太一よ泣くな'
+  - qid:Q11412214|name:(新)上ってなンボ!!太一よ泣くな
+  - qid:Q11412214|name:新々上ってなンボ!!太一よ泣くな
+  - qid:Q11412214|name:新上ってなンボ!!太一よ泣くな
+  - qid:Q967455|name:新々上ってなンボ!!太一よ泣くな
+  - qid:Q967455|name:新上ってなンボ!!太一よ泣くな
+  - qid:Q967455|name:新上ってなンボ太一よ泣くな
   note: 'frag-merge: 著者完全一致+無副題の版違い 6key'
-- main: 'カードキャプターさくら'
+- main: カードキャプターさくら
   merge_keys:
-  - 'name:Clamp|name:カードキャプターさくら'
-  - 'name:ショート・みちる|name:カードキャプターさくら'
+  - name:Clamp|name:カードキャプターさくら
+  - name:ショート・みちる|name:カードキャプターさくら
   note: 'frag-merge: 著者完全一致+無副題の版違い 2key'
-- main: 'パンプキン'
+- main: パンプキン
   merge_keys:
-  - 'name:L・LIME|name:パンプキン'
-  - 'name:オーエスビー出版|name:パンプキン'
+  - name:L・LIME|name:パンプキン
+  - name:オーエスビー出版|name:パンプキン
   note: 'frag-merge: 著者完全一致+無副題の版違い 2key'
-- main: 'パンプキン'
+- main: パンプキン
   merge_keys:
-  - 'name:L・ライム|name:パンプキン'
-  - 'name:YUMI|name:パンプキン'
+  - name:L・ライム|name:パンプキン
+  - name:YUMI|name:パンプキン
   note: 'frag-merge: 著者完全一致+無副題の版違い 2key'
-- main: 'パンプキン'
+- main: パンプキン
   merge_keys:
-  - 'name:MASAO|name:パンプキン'
-  - 'name:スタジオバトル|name:パンプキン'
+  - name:MASAO|name:パンプキン
+  - name:スタジオバトル|name:パンプキン
   note: 'frag-merge: 著者完全一致+無副題の版違い 2key'
-- main: 'BOYS BE…'
+- main: BOYS BE…
   merge_keys:
-  - 'name:イタバシマサヒロ|name:BOYS BE…'
-  - 'name:イタバシマサヒロ|name:Boys be…'
+  - name:イタバシマサヒロ|name:BOYS BE…
+  - name:イタバシマサヒロ|name:Boys be…
   note: 'frag-merge: 著者完全一致+無副題の版違い 2key'
-- main: 'ナカノヒトゲノム【実況中】'
+- main: ナカノヒトゲノム【実況中】
   merge_keys:
-  - 'name:おそら|name:ナカノヒトゲノム〈実況中〉'
-  - 'name:おそら|name:ナカノヒトゲノム【実況中】'
+  - name:おそら|name:ナカノヒトゲノム〈実況中〉
+  - name:おそら|name:ナカノヒトゲノム【実況中】
   note: 'frag-merge: 著者完全一致+無副題の版違い 2key'
-- main: 'ちび本当にあった笑える話'
+- main: ちび本当にあった笑える話
   merge_keys:
-  - 'qid:Q109596251|name:ちび本当にあった笑える話'
-  - 'qid:Q11538067|name:ちび本当にあった笑える話'
+  - qid:Q109596251|name:ちび本当にあった笑える話
+  - qid:Q11538067|name:ちび本当にあった笑える話
   note: 'frag-merge: 著者完全一致+無副題の版違い 2key'
-- main: 'とある科学の超電磁砲'
+- main: とある科学の超電磁砲
   merge_keys:
-  - 'name:灰村キヨタカ|name:とある科学の超電磁砲'
-  - 'qid:Q11330038|name:とある科学の超電磁砲'
+  - name:灰村キヨタカ|name:とある科学の超電磁砲
+  - qid:Q11330038|name:とある科学の超電磁砲
   note: 'frag-merge: 著者完全一致+無副題の版違い 2key'
-- main: 'Barレモン・ハート'
+- main: Barレモン・ハート
   merge_keys:
-  - 'name:ファミリー企画|name:BARレモン・ハート'
-  - 'qid:Q3776937|name:Barレモン・ハート'
+  - name:ファミリー企画|name:BARレモン・ハート
+  - qid:Q3776937|name:Barレモン・ハート
   note: 'frag-merge: 著者完全一致+無副題の版違い 2key'
-- main: 'ホップ☆ステップ賞SELECTION'
+- main: ホップ☆ステップ賞SELECTION
   merge_keys:
-  - 'name:ホーム社|name:ホップ☆ステップ賞 SELECTION'
-  - 'name:ホーム社|name:ホップ☆ステップ賞SELECTION'
+  - name:ホーム社|name:ホップ☆ステップ賞 SELECTION
+  - name:ホーム社|name:ホップ☆ステップ賞SELECTION
   note: 'frag-merge: 著者完全一致+無副題の版違い 2key'
-- main: '冥王計画ゼオライマーΩ'
+- main: 冥王計画ゼオライマーΩ
   merge_keys:
-  - 'name:ワタリユウ|name:冥王計画 (プロジェクト) ゼオライマーΩ'
-  - 'name:ワタリユウ|name:冥王計画ゼオライマーΩ'
-  - 'qid:Q1079837|name:冥王計画ゼオライマー'
+  - name:ワタリユウ|name:冥王計画 (プロジェクト) ゼオライマーΩ
+  - name:ワタリユウ|name:冥王計画ゼオライマーΩ
+  - qid:Q1079837|name:冥王計画ゼオライマー
   note: 'frag-merge: 著者完全一致+無副題の版違い 3key'
-- main: '名探偵コナン特別編'
+- main: 名探偵コナン特別編
   merge_keys:
-  - 'name:丸伝次郎|name:名探偵コナン特別編'
-  - 'qid:Q11657721|name:名探偵コナン特別編'
+  - name:丸伝次郎|name:名探偵コナン特別編
+  - qid:Q11657721|name:名探偵コナン特別編
   note: 'frag-merge: 著者完全一致+無副題の版違い 2key'
-- main: '名探偵コナン特別編'
+- main: 名探偵コナン特別編
   merge_keys:
-  - 'name:山【きし】栄一|name:名探偵コナン特別編'
-  - 'name:山【ぎし】栄一|name:名探偵コナン特別編'
+  - name:山【きし】栄一|name:名探偵コナン特別編
+  - name:山【ぎし】栄一|name:名探偵コナン特別編
   note: 'frag-merge: 著者完全一致+無副題の版違い 2key'
-- main: 'GIANT KILLING extra ジャイアントキリング発サッカーエンターテインメントマガジン'
+- main: GIANT KILLING extra ジャイアントキリング発サッカーエンターテインメントマガジン
   merge_keys:
-  - 'name:講談社|name:GIANT KILLING extra ジャイアントキリング発サッカーエンターテインメントマガジン'
-  - 'name:講談社|name:Giant killing extra ジャイアントキリング発サッカーエンターテインメントマガジン'
+  - name:講談社|name:GIANT KILLING extra ジャイアントキリング発サッカーエンターテインメントマガジン
+  - name:講談社|name:Giant killing extra ジャイアントキリング発サッカーエンターテインメントマガジン
   note: 'frag-merge: 著者完全一致+無副題の版違い 2key'
-- main: 'マンガ日本の歴史'
+- main: マンガ日本の歴史
   merge_keys:
-  - 'qid:Q471103|name:マンガ 日本の歴史'
-  - 'qid:Q471103|name:マンガ日本の歴史'
+  - qid:Q471103|name:マンガ 日本の歴史
+  - qid:Q471103|name:マンガ日本の歴史
   note: 'frag-merge: 著者完全一致+無副題の版違い 2key'
-- main: 'Re:ゼロから始める異世界生活'
+- main: Re:ゼロから始める異世界生活
   merge_keys:
-  - 'name:大塚真一郎|name:Re:ゼロから始める異世界生活'
-  - 'qid:Q16138206|name:Re:ゼロから始める異世界生活'
+  - name:大塚真一郎|name:Re:ゼロから始める異世界生活
+  - qid:Q16138206|name:Re:ゼロから始める異世界生活
   note: 'frag-merge: 著者完全一致+無副題の版違い 2key'
-- main: 'ラブライブ!スーパースター!!liella! kila² life comic'
+- main: ラブライブ!スーパースター!!liella! kila² life comic
   merge_keys:
-  - 'name:矢立肇|name:ラブライブ!スーパースター!!Liella!Kila[2] Life Comic'
-  - 'name:矢立肇|name:ラブライブ!スーパースター!!liella! kila² life comic'
+  - name:矢立肇|name:ラブライブ!スーパースター!!Liella!Kila[2] Life Comic
+  - name:矢立肇|name:ラブライブ!スーパースター!!liella! kila² life comic
   note: 'frag-merge: 著者完全一致+無副題の版違い 2key'
-- main: 'Dear boys'
+- main: Dear boys
   merge_keys:
-  - 'qid:Q1015799|name:DEAR BOYS'
-  - 'qid:Q1015799|name:Dear boys'
+  - qid:Q1015799|name:DEAR BOYS
+  - qid:Q1015799|name:Dear boys
   note: 'frag-merge: 著者完全一致+無副題の版違い 2key'
-- main: 'ファイアーエムブレム聖戦の系譜'
+- main: ファイアーエムブレム聖戦の系譜
   merge_keys:
-  - 'qid:Q11260369|name:ファイアーエムブレム 聖戦の系譜'
-  - 'qid:Q11260369|name:ファイアーエムブレム聖戦の系譜'
+  - qid:Q11260369|name:ファイアーエムブレム 聖戦の系譜
+  - qid:Q11260369|name:ファイアーエムブレム聖戦の系譜
   note: 'frag-merge: 著者完全一致+無副題の版違い 2key'
-- main: '宇宙戦艦ヤマト 完結編'
+- main: 宇宙戦艦ヤマト 完結編
   merge_keys:
-  - 'qid:Q11276108|name:宇宙戦艦ヤマト 完結編'
-  - 'qid:Q431443|name:宇宙戦艦ヤマト 完結編'
+  - qid:Q11276108|name:宇宙戦艦ヤマト 完結編
+  - qid:Q431443|name:宇宙戦艦ヤマト 完結編
   note: 'frag-merge: 著者完全一致+無副題の版違い 2key'
-- main: 'カスミ伝（全）'
+- main: カスミ伝（全）
   merge_keys:
-  - 'qid:Q11418590|name:カスミ伝'
-  - 'qid:Q11418590|name:カスミ伝 〔○全〕'
-  - 'qid:Q11418590|name:カスミ伝△'
-  - 'qid:Q11418590|name:カスミ伝（全）'
+  - qid:Q11418590|name:カスミ伝
+  - qid:Q11418590|name:カスミ伝 〔○全〕
+  - qid:Q11418590|name:カスミ伝△
+  - qid:Q11418590|name:カスミ伝（全）
   note: 'frag-merge: 著者完全一致+無副題の版違い 4key'
-- main: 'ドラゴンクエスト～プリンセスアリーナ～'
+- main: ドラゴンクエスト～プリンセスアリーナ～
   merge_keys:
-  - 'qid:Q11443794|name:ドラゴンクエスト プリンセスアリーナ'
-  - 'qid:Q11443794|name:ドラゴンクエスト～プリンセスアリーナ～'
+  - qid:Q11443794|name:ドラゴンクエスト プリンセスアリーナ
+  - qid:Q11443794|name:ドラゴンクエスト～プリンセスアリーナ～
   note: 'frag-merge: 著者完全一致+無副題の版違い 2key'
-- main: '今日から俺は!!'
+- main: 今日から俺は!!
   merge_keys:
-  - 'qid:Q1153258|name:今日から俺は'
-  - 'qid:Q1153258|name:今日から俺は!!'
+  - qid:Q1153258|name:今日から俺は
+  - qid:Q1153258|name:今日から俺は!!
   note: 'frag-merge: 著者完全一致+無副題の版違い 2key'
-- main: 'ハッピー!ハッピー♪'
+- main: ハッピー!ハッピー♪
   merge_keys:
-  - 'qid:Q11555608|name:ハッピー!ハッピー'
-  - 'qid:Q11555608|name:ハッピー!ハッピー♪'
+  - qid:Q11555608|name:ハッピー!ハッピー
+  - qid:Q11555608|name:ハッピー!ハッピー♪
   note: 'frag-merge: 著者完全一致+無副題の版違い 2key'
-- main: 'ジンキ・エクステンド リレイション'
+- main: ジンキ・エクステンド リレイション
   merge_keys:
-  - 'qid:Q11607132|name:ジンキ・エクステンド リレイション'
-  - 'qid:Q11607132|name:ジンキ・エクステンド～リレイション～'
+  - qid:Q11607132|name:ジンキ・エクステンド リレイション
+  - qid:Q11607132|name:ジンキ・エクステンド～リレイション～
   note: 'frag-merge: 著者完全一致+無副題の版違い 2key'
-- main: 'その男、ワガママにつき'
+- main: その男、ワガママにつき
   merge_keys:
-  - 'qid:Q11644242|name:その男、ワガママにつき'
-  - 'qid:Q11644242|name:その男、ワガママにつき+'
-  - 'qid:Q11644242|name:その男、ワガママにつき+α'
-  - 'qid:Q11644242|name:その男、ワガママにつき∞'
+  - qid:Q11644242|name:その男、ワガママにつき
+  - qid:Q11644242|name:その男、ワガママにつき+
+  - qid:Q11644242|name:その男、ワガママにつき+α
+  - qid:Q11644242|name:その男、ワガママにつき∞
   note: 'frag-merge: 著者完全一致+無副題の版違い 4key'
-- main: 'じゃじゃ馬グルーミン★ＵＰ!'
+- main: じゃじゃ馬グルーミン★ＵＰ!
   merge_keys:
-  - 'qid:Q1207548|name:じゃじゃ馬グルーミン★UP!'
-  - 'qid:Q1207548|name:じゃじゃ馬グルーミン★ＵＰ!'
+  - qid:Q1207548|name:じゃじゃ馬グルーミン★UP!
+  - qid:Q1207548|name:じゃじゃ馬グルーミン★ＵＰ!
   note: 'frag-merge: 著者完全一致+無副題の版違い 2key'
-- main: '少女「菜美」'
+- main: 少女「菜美」
   merge_keys:
-  - 'qid:Q17159240|name:少女「菜美」'
-  - 'qid:Q17159240|name:少女菜美'
+  - qid:Q17159240|name:少女「菜美」
+  - qid:Q17159240|name:少女菜美
   note: 'frag-merge: 著者完全一致+無副題の版違い 2key'
-- main: 'からかい上手の〈元〉高木さん'
+- main: からかい上手の〈元〉高木さん
   merge_keys:
-  - 'qid:Q17230626|name:からかい上手の〈元〉高木さん'
-  - 'qid:Q17230626|name:からかい上手の〈元〉高木さん.'
-  - 'qid:Q17230626|name:からかい上手の（元）高木さん'
+  - qid:Q17230626|name:からかい上手の〈元〉高木さん
+  - qid:Q17230626|name:からかい上手の〈元〉高木さん.
+  - qid:Q17230626|name:からかい上手の（元）高木さん
   note: 'frag-merge: 著者完全一致+無副題の版違い 3key'
-- main: '藤子・F・不二雄 異色短編集'
+- main: 藤子・F・不二雄 異色短編集
   merge_keys:
-  - 'qid:Q17572|name:藤子・F・不二雄 異色短編集'
-  - 'qid:Q17572|name:藤子・F・不二雄異色短編集'
+  - qid:Q17572|name:藤子・F・不二雄 異色短編集
+  - qid:Q17572|name:藤子・F・不二雄異色短編集
   note: 'frag-merge: 著者完全一致+無副題の版違い 2key'
-- main: 'さいとう・たかを池波正太郎時代劇画ワイドセレクション'
+- main: さいとう・たかを池波正太郎時代劇画ワイドセレクション
   merge_keys:
-  - 'qid:Q2661273|name:さいとう・たかを/池波正太郎時代劇画ワイドセレクション'
-  - 'qid:Q2661273|name:さいとう・たかを池波正太郎時代劇画ワイドセレクション'
+  - qid:Q2661273|name:さいとう・たかを/池波正太郎時代劇画ワイドセレクション
+  - qid:Q2661273|name:さいとう・たかを池波正太郎時代劇画ワイドセレクション
   note: 'frag-merge: 著者完全一致+無副題の版違い 2key'
-- main: '雲盗り暫平'
+- main: 雲盗り暫平
   merge_keys:
-  - 'qid:Q2661273|name:雲盗り暫平'
-  - 'qid:Q2661273|name:雲盗り暫平.'
+  - qid:Q2661273|name:雲盗り暫平
+  - qid:Q2661273|name:雲盗り暫平.
   note: 'frag-merge: 著者完全一致+無副題の版違い 2key'
-- main: '暁のARIA'
+- main: 暁のARIA
   merge_keys:
-  - 'qid:Q2880551|name:暁のARIA'
-  - 'qid:Q2880551|name:暁のaria'
-  - 'qid:Q2880551|name:暁のＡＲＩＡ'
+  - qid:Q2880551|name:暁のARIA
+  - qid:Q2880551|name:暁のaria
+  - qid:Q2880551|name:暁のＡＲＩＡ
   note: 'frag-merge: 著者完全一致+無副題の版違い 3key'
-- main: 'D・N・A²'
+- main: D・N・A²
   merge_keys:
-  - 'qid:Q452246|name:D・N・A²'
-  - 'qid:Q452246|name:D・N・〔A^2〕'
+  - qid:Q452246|name:D・N・A²
+  - qid:Q452246|name:D・N・〔A^2〕
   note: 'frag-merge: 著者完全一致+無副題の版違い 2key'
-- main: '3 THREE'
+- main: 3 THREE
   merge_keys:
-  - 'qid:Q469923|name:3 THREE'
-  - 'qid:Q469923|name:3 three'
+  - qid:Q469923|name:3 THREE
+  - qid:Q469923|name:3 three
   note: 'frag-merge: 著者完全一致+無副題の版違い 2key'
-- main: '生徒諸君!教師編'
+- main: 生徒諸君!教師編
   merge_keys:
-  - 'qid:Q5398742|name:生徒諸君! 教師編'
-  - 'qid:Q5398742|name:生徒諸君!教師編'
+  - qid:Q5398742|name:生徒諸君! 教師編
+  - qid:Q5398742|name:生徒諸君!教師編
   note: 'frag-merge: 著者完全一致+無副題の版違い 2key'
-- main: '生徒諸君!最終章・旅立ち'
+- main: 生徒諸君!最終章・旅立ち
   merge_keys:
-  - 'qid:Q5398742|name:生徒諸君! 最終章・旅立ち'
-  - 'qid:Q5398742|name:生徒諸君!最終章・旅立ち'
+  - qid:Q5398742|name:生徒諸君! 最終章・旅立ち
+  - qid:Q5398742|name:生徒諸君!最終章・旅立ち
   note: 'frag-merge: 著者完全一致+無副題の版違い 2key'
-- main: '太陽が見ている（かもしれないから）'
+- main: 太陽が見ている（かもしれないから）
   merge_keys:
-  - 'qid:Q7385253|name:太陽が見ている かもしれないから'
-  - 'qid:Q7385253|name:太陽が見ている〈かもしれないから〉'
-  - 'qid:Q7385253|name:太陽が見ている（かもしれないから）'
+  - qid:Q7385253|name:太陽が見ている かもしれないから
+  - qid:Q7385253|name:太陽が見ている〈かもしれないから〉
+  - qid:Q7385253|name:太陽が見ている（かもしれないから）
   note: 'frag-merge: 著者完全一致+無副題の版違い 3key'
-- main: 'クッキングパパセレクション'
+- main: クッキングパパセレクション
   merge_keys:
-  - 'qid:Q9187051|name:クッキングパパ セレクション'
-  - 'qid:Q9187051|name:クッキングパパセレクション'
+  - qid:Q9187051|name:クッキングパパ セレクション
+  - qid:Q9187051|name:クッキングパパセレクション
   note: 'frag-merge: 著者完全一致+無副題の版違い 2key'
-- main: '金田一少年の事件簿　短編集'
+- main: 金田一少年の事件簿　短編集
   merge_keys:
-  - 'qid:Q966701|name:「金田一少年の事件簿」短編集'
-  - 'qid:Q966701|name:金田一少年の事件簿　短編集'
+  - qid:Q966701|name:「金田一少年の事件簿」短編集
+  - qid:Q966701|name:金田一少年の事件簿　短編集
   note: 'frag-merge: 著者完全一致+無副題の版違い 2key'
-
-# ── edition-split: 同一imprint線がstandard/deluxe誤分類→merge_edition_typesで統合 (_edition-split-investigate.py) ──
-- main: 'アゲイン!!'
+- main: アゲイン!!
   merge_keys:
-  - 'qid:Q11368952|name:アゲイン!!'
+  - qid:Q11368952|name:アゲイン!!
   merge_edition_types: true
   note: 'edition-split: deluxe/standard誤分類の単一版を統合(補完巻)'
-- main: 'パンプキン・シザーズ'
+- main: パンプキン・シザーズ
   merge_keys:
-  - 'qid:Q11475248|name:パンプキン・シザーズ'
+  - qid:Q11475248|name:パンプキン・シザーズ
   merge_edition_types: true
   note: 'edition-split: deluxe/standard誤分類の単一版を統合(補完巻)'
-- main: 'RiN'
+- main: RiN
   merge_keys:
-  - 'qid:Q302859|name:RiN'
+  - qid:Q302859|name:RiN
   merge_edition_types: true
   note: 'edition-split: deluxe/standard誤分類の単一版を統合(補完巻)'
-- main: '野球狂の詩 愛蔵版'
+- main: 野球狂の詩 愛蔵版
   merge_keys:
-  - 'qid:Q7497596|name:野球狂の詩 愛蔵版'
+  - qid:Q7497596|name:野球狂の詩 愛蔵版
   merge_edition_types: true
   note: 'edition-split: deluxe/standard誤分類の単一版を統合(補完巻)'
-- main: '極妻デイズ'
+- main: 極妻デイズ
   merge_keys:
-  - 'name:長谷垣なるみ|name:極妻デイズ'
+  - name:長谷垣なるみ|name:極妻デイズ
   merge_edition_types: true
   note: 'edition-split: deluxe/standard誤分類の単一版を統合(補完巻)'
-- main: 'ミキストリ 太陽の死神'
+- main: ミキストリ 太陽の死神
   merge_keys:
-  - 'name:ホーム社|name:ミキストリ 太陽の死神'
+  - name:ホーム社|name:ミキストリ 太陽の死神
   merge_edition_types: true
   note: 'edition-split: deluxe/standard誤分類の単一版を統合(補完巻)'
 - merge_keys:
-  - "qid:Q11397137|name:だって～ハニ太郎です。"
-  - "qid:Q11397137|name:ハニ太郎です。"
-  - "qid:Q11397137|name:うぷぷぷハニ太郎です。"
-  - "qid:Q11397137|name:カレー味ハニ太郎です。"
-  - "qid:Q11397137|name:ぼよよんハニ太郎です。"
-  - "qid:Q11397137|name:やっぱりハニ太郎です。"
-  - "qid:Q11397137|name:10コ入りハニ太郎です。"
-  - "qid:Q11397137|name:3ばんめのハニ太郎です。"
-  - "qid:Q11397137|name:7ばんめのハニ太郎です。"
-  - "qid:Q11397137|name:こりゃまたハニ太郎です。"
-  - "qid:Q11397137|name:人類滅亡までハニ太郎です。"
-  - "qid:Q11397137|name:なんのこっちゃハニ太郎です。"
-  - "qid:Q11397137|name:まぁいいじゃんハニ太郎です。"
-  - "qid:Q11397137|name:いらっしゃいませ❤ハニ太郎です。"
+  - qid:Q11397137|name:だって～ハニ太郎です。
+  - qid:Q11397137|name:ハニ太郎です。
+  - qid:Q11397137|name:うぷぷぷハニ太郎です。
+  - qid:Q11397137|name:カレー味ハニ太郎です。
+  - qid:Q11397137|name:ぼよよんハニ太郎です。
+  - qid:Q11397137|name:やっぱりハニ太郎です。
+  - qid:Q11397137|name:10コ入りハニ太郎です。
+  - qid:Q11397137|name:3ばんめのハニ太郎です。
+  - qid:Q11397137|name:7ばんめのハニ太郎です。
+  - qid:Q11397137|name:こりゃまたハニ太郎です。
+  - qid:Q11397137|name:人類滅亡までハニ太郎です。
+  - qid:Q11397137|name:なんのこっちゃハニ太郎です。
+  - qid:Q11397137|name:まぁいいじゃんハニ太郎です。
+  - qid:Q11397137|name:いらっしゃいませ❤ハニ太郎です。
   renumber: true
   note: 巻割れ統合(ハニ太郎です。) ISBN/Wiki検証済 2026-06
 - merge_keys:
-  - "qid:Q24870802|name:おじさんとマシュマロ"
-  - "qid:Q24870802|name:ごーごーおじさんとマシュマロ"
-  - "qid:Q24870802|name:そうだ!おじさんとマシュマロ"
-  - "qid:Q24870802|name:もっと!おじさんとマシュマロ"
-  - "qid:Q24870802|name:よんだらおじさんとマシュマロ"
+  - qid:Q24870802|name:おじさんとマシュマロ
+  - qid:Q24870802|name:ごーごーおじさんとマシュマロ
+  - qid:Q24870802|name:そうだ!おじさんとマシュマロ
+  - qid:Q24870802|name:もっと!おじさんとマシュマロ
+  - qid:Q24870802|name:よんだらおじさんとマシュマロ
   renumber: true
   note: 巻割れ統合(おじさんとマシュマロ) ISBN/Wiki検証済 2026-06
 - merge_keys:
-  - "qid:Q3135260|name:大魔法峠"
-  - "qid:Q3135260|name:超大魔法峠"
-  - "qid:Q3135260|name:超・超・大魔法峠"
-  - "qid:Q3135260|name:超・超・超・大魔法峠"
+  - qid:Q3135260|name:大魔法峠
+  - qid:Q3135260|name:超大魔法峠
+  - qid:Q3135260|name:超・超・大魔法峠
+  - qid:Q3135260|name:超・超・超・大魔法峠
   renumber: true
   note: 巻割れ統合(大魔法峠) ISBN/Wiki検証済 2026-06
 - merge_keys:
-  - "qid:Q987957|name:超少女 明日香"
-  - "qid:Q987957|name:超少女明日香"
-  - "qid:Q987957|name:超少女明日香眠る蛇"
-  - "qid:Q987957|name:超少女明日香雨の封印"
-  - "qid:Q987957|name:超少女明日香ウェディング☆スター"
+  - qid:Q987957|name:超少女 明日香
+  - qid:Q987957|name:超少女明日香
+  - qid:Q987957|name:超少女明日香眠る蛇
+  - qid:Q987957|name:超少女明日香雨の封印
+  - qid:Q987957|name:超少女明日香ウェディング☆スター
   note: 巻割れ統合(超少女) ISBN/Wiki検証済 2026-06
 - merge_keys:
-  - "qid:Q106478449|name:よっ!ねこむかしばなし"
-  - "qid:Q106478449|name:ねこむかしばなし"
-  - "qid:Q106478449|name:みっけ!ねこむかしばなし"
-  - "qid:Q106478449|name:にゃんと!ねこむかしばなし"
+  - qid:Q106478449|name:よっ!ねこむかしばなし
+  - qid:Q106478449|name:ねこむかしばなし
+  - qid:Q106478449|name:みっけ!ねこむかしばなし
+  - qid:Q106478449|name:にゃんと!ねこむかしばなし
   renumber: true
   note: 巻割れ統合(ねこむかしばなし) ISBN/Wiki検証済 2026-06
 - merge_keys:
-  - "qid:Q106478449|name:ねこもんすたー"
-  - "qid:Q106478449|name:ねこもんすたーフミフミ"
-  - "qid:Q106478449|name:ねこもんすたーニャーオ!"
+  - qid:Q106478449|name:ねこもんすたー
+  - qid:Q106478449|name:ねこもんすたーフミフミ
+  - qid:Q106478449|name:ねこもんすたーニャーオ!
   renumber: true
   note: 巻割れ統合(ねこもんすたー) ISBN/Wiki検証済 2026-06
 - merge_keys:
-  - "qid:Q11599172|name:ととある日のクル"
-  - "qid:Q11599172|name:とある日のクル"
-  - "qid:Q11599172|name:ととある日のクル|sub:ねこまわりクルまわり"
-  - "qid:Q11599172|name:ある日とある日ととある日のクル"
+  - qid:Q11599172|name:ととある日のクル
+  - qid:Q11599172|name:とある日のクル
+  - qid:Q11599172|name:ととある日のクル|sub:ねこまわりクルまわり
+  - qid:Q11599172|name:ある日とある日ととある日のクル
   renumber: true
   note: 竹本泉ととある日のクル全4巻統合(NDL/Amazon/cmoa照合)。vol1=学研とある日のクル2009(92p原作)を大都社が2013ととある日のクル(ダイト317/ISBN9784886534958)で再録改題、vol2ここ毎日のクル(秋水社2015)/vol3ねこまわり(2019)/vol4ある日とある日(大都社2021)。発売日順renumber。 2026-06 検証済
 - merge_keys:
-  - "qid:Q11653135|name:もっとあなたのオモチャ"
-  - "qid:Q11653135|name:あなたのオモチャ"
-  - "qid:Q11653135|name:もっと×2あなたのオモチャ"
-  - "qid:Q11653135|name:もっと×3あなたのオモチャ"
+  - qid:Q11653135|name:もっとあなたのオモチャ
+  - qid:Q11653135|name:あなたのオモチャ
+  - qid:Q11653135|name:もっと×2あなたのオモチャ
+  - qid:Q11653135|name:もっと×3あなたのオモチャ
   renumber: true
   note: 巻割れ統合(あなたのオモチャ) ISBN/Wiki検証済 2026-06
 - merge_keys:
-  - "qid:Q11677649|name:真夜中のジュエル"
-  - "qid:Q11677649|name:もっと真夜中のジュエル"
-  - "qid:Q11677649|name:もっともっと真夜中のジュエル"
+  - qid:Q11677649|name:真夜中のジュエル
+  - qid:Q11677649|name:もっと真夜中のジュエル
+  - qid:Q11677649|name:もっともっと真夜中のジュエル
   renumber: true
   note: 巻割れ統合(真夜中のジュエル) ISBN/Wiki検証済 2026-06
 - merge_keys:
-  - "qid:Q463309|name:窮鼠はチーズの夢を見る"
-  - "qid:Q463309|name:窮鼠はチーズの夢を見るリブートエディション"
-  - "qid:Q463309|name:窮鼠はチーズの夢を見るオールインワンエディション"
+  - qid:Q463309|name:窮鼠はチーズの夢を見る
+  - qid:Q463309|name:窮鼠はチーズの夢を見るリブートエディション
+  - qid:Q463309|name:窮鼠はチーズの夢を見るオールインワンエディション
   note: 巻割れ統合(窮鼠はチーズの夢を見る) ISBN/Wiki検証済 2026-06
-
 - merge_keys:
-  - "qid:Q10959156|name:咲"
-  - "qid:Q10959156|name:咲|sub:re: king's tile draw"
+  - qid:Q10959156|name:咲
+  - 'qid:Q10959156|name:咲|sub:re: king''s tile draw'
   note: AUTO漏れ分裂統合(整形揺れで同一題・同一著者・qid整合・続編副題除外・UNION整合) 2026-06 「咲」
 - merge_keys:
-  - "name:任天堂|name:ファイアーエムブレム|sub:聖戦の系譜"
-  - "qid:Q11260369|name:ファイアーエムブレム|sub:聖戦の系譜"
+  - name:任天堂|name:ファイアーエムブレム|sub:聖戦の系譜
+  - qid:Q11260369|name:ファイアーエムブレム|sub:聖戦の系譜
   note: AUTO漏れ分裂統合(整形揺れで同一題・同一著者・qid整合・続編副題除外・UNION整合) 2026-06 「ファイアーエムブレム」
 - merge_keys:
-  - "name:九十九森|name:江戸前の旬|sub:銀座柳寿司三代目"
-  - "qid:Q11268113|name:江戸前の旬"
+  - name:九十九森|name:江戸前の旬|sub:銀座柳寿司三代目
+  - qid:Q11268113|name:江戸前の旬
   note: AUTO漏れ分裂統合(整形揺れで同一題・同一著者・qid整合・続編副題除外・UNION整合) 2026-06 「江戸前の旬」
 - merge_keys:
-  - "name:やまさき十三|name:釣りバカ日誌"
-  - "name:やまさき十三|name:釣りバカ日誌|sub:番外編"
-  - "qid:Q11404003|name:釣りバカ日誌"
+  - name:やまさき十三|name:釣りバカ日誌
+  - name:やまさき十三|name:釣りバカ日誌|sub:番外編
+  - qid:Q11404003|name:釣りバカ日誌
   note: AUTO漏れ分裂統合(整形揺れで同一題・同一著者・qid整合・続編副題除外・UNION整合) 2026-06 「釣りバカ日誌」
 - merge_keys:
-  - "name:米川裕也|name:ウルトラマン"
-  - "qid:Q1141948|name:ウルトラマン"
+  - name:米川裕也|name:ウルトラマン
+  - qid:Q1141948|name:ウルトラマン
   note: AUTO漏れ分裂統合(整形揺れで同一題・同一著者・qid整合・続編副題除外・UNION整合) 2026-06 「ウルトラマン」
 - merge_keys:
-  - "qid:Q11447429|name:ぴーひょろ一家20XX"
-  - "qid:Q11447429|name:ぴーひょろ一家20ＸＸ"
+  - qid:Q11447429|name:ぴーひょろ一家20XX
+  - qid:Q11447429|name:ぴーひょろ一家20ＸＸ
   note: AUTO漏れ分裂統合(整形揺れで同一題・同一著者・qid整合・続編副題除外・UNION整合) 2026-06 「ぴーひょろ一家20ＸＸ」
 - merge_keys:
-  - "qid:Q11488080|name:ワル"
-  - "qid:Q11488080|name:ワル|sub:最終章"
+  - qid:Q11488080|name:ワル
+  - qid:Q11488080|name:ワル|sub:最終章
   note: AUTO漏れ分裂統合(整形揺れで同一題・同一著者・qid整合・続編副題除外・UNION整合) 2026-06 「ワル」
 - merge_keys:
-  - "qid:Q11549680|name:カルラ舞う!"
-  - "qid:Q11549680|name:カルラ舞う!|sub:変幻退魔夜行"
+  - qid:Q11549680|name:カルラ舞う!
+  - qid:Q11549680|name:カルラ舞う!|sub:変幻退魔夜行
   note: AUTO漏れ分裂統合(整形揺れで同一題・同一著者・qid整合・続編副題除外・UNION整合) 2026-06 「カルラ舞う!」
 - merge_keys:
-  - "qid:Q11562516|name:弱虫ペダル 人気キャラクターセレクション"
-  - "qid:Q11562516|name:弱虫ペダル人気キャラクターセレクション"
+  - qid:Q11562516|name:弱虫ペダル 人気キャラクターセレクション
+  - qid:Q11562516|name:弱虫ペダル人気キャラクターセレクション
   note: AUTO漏れ分裂統合(整形揺れで同一題・同一著者・qid整合・続編副題除外・UNION整合) 2026-06 「弱虫ペダル 人気キャラクターセレクション」
 - merge_keys:
-  - "name:Team猫十字社|name:フィローン士官学校"
-  - "qid:Q11571998|name:フィローン士官学校"
+  - name:Team猫十字社|name:フィローン士官学校
+  - qid:Q11571998|name:フィローン士官学校
   note: AUTO漏れ分裂統合(整形揺れで同一題・同一著者・qid整合・続編副題除外・UNION整合) 2026-06 「フィローン士官学校」
 - merge_keys:
-  - "qid:Q11576599|name:本当にあった愉快な話"
-  - "qid:Q11576599|name:本当にあった愉快な話|sub:もっとお手紙読ませます! 怖い話てんこ盛り!!"
+  - qid:Q11576599|name:本当にあった愉快な話
+  - qid:Q11576599|name:本当にあった愉快な話|sub:もっとお手紙読ませます! 怖い話てんこ盛り!!
   note: AUTO漏れ分裂統合(整形揺れで同一題・同一著者・qid整合・続編副題除外・UNION整合) 2026-06 「本当にあった愉快な話」
 - merge_keys:
-  - "qid:Q11659258|name:本当にあった〔○秘〕女の事件簿 ベストセレクション"
-  - "qid:Q11659258|name:本当にあった〔○秘〕女の事件簿ベストセレクション"
+  - qid:Q11659258|name:本当にあった〔○秘〕女の事件簿 ベストセレクション
+  - qid:Q11659258|name:本当にあった〔○秘〕女の事件簿ベストセレクション
   note: AUTO漏れ分裂統合(整形揺れで同一題・同一著者・qid整合・続編副題除外・UNION整合) 2026-06 「本当にあった〔○秘〕女の事件簿 ベストセレクション」
 - merge_keys:
-  - "qid:Q11668751|name:ハゲしいな!桜井くん"
-  - "qid:Q11668751|name:ハゲしいな!桜井くん|sub:新婚編"
+  - qid:Q11668751|name:ハゲしいな!桜井くん
+  - qid:Q11668751|name:ハゲしいな!桜井くん|sub:新婚編
   note: AUTO漏れ分裂統合(整形揺れで同一題・同一著者・qid整合・続編副題除外・UNION整合) 2026-06 「ハゲしいな!桜井くん」
 - merge_keys:
-  - "qid:Q120757217|name:鍔鳴の太刀 (ダイ・カタナ)|sub:ゴブリンスレイヤー外伝2"
-  - "qid:Q120757217|name:鍔鳴の太刀(ダイ・カタナ)|sub:ゴブリンスレイヤー外伝2"
+  - qid:Q120757217|name:鍔鳴の太刀 (ダイ・カタナ)|sub:ゴブリンスレイヤー外伝2
+  - qid:Q120757217|name:鍔鳴の太刀(ダイ・カタナ)|sub:ゴブリンスレイヤー外伝2
   note: AUTO漏れ分裂統合(整形揺れで同一題・同一著者・qid整合・続編副題除外・UNION整合) 2026-06 「鍔鳴の太刀 (ダイ・カタナ)」
 - merge_keys:
-  - "qid:Q1319777|name:お仕事です!"
-  - "qid:Q1319777|name:お仕事です!|sub:会社運営編"
+  - qid:Q1319777|name:お仕事です!
+  - qid:Q1319777|name:お仕事です!|sub:会社運営編
   note: AUTO漏れ分裂統合(整形揺れで同一題・同一著者・qid整合・続編副題除外・UNION整合) 2026-06 「お仕事です!」
 - merge_keys:
-  - "qid:Q188129|name:め組の大吾"
-  - "qid:Q188129|name:め組の大吾|sub:第一出場指令!!"
+  - qid:Q188129|name:め組の大吾
+  - qid:Q188129|name:め組の大吾|sub:第一出場指令!!
   note: AUTO漏れ分裂統合(整形揺れで同一題・同一著者・qid整合・続編副題除外・UNION整合) 2026-06 「め組の大吾」
 - merge_keys:
-  - "qid:Q1993|name:Naruto総集編"
-  - "qid:Q1993|name:Naruto総集編|sub:うずまき大巻"
+  - qid:Q1993|name:Naruto総集編
+  - qid:Q1993|name:Naruto総集編|sub:うずまき大巻
   note: AUTO漏れ分裂統合(整形揺れで同一題・同一著者・qid整合・続編副題除外・UNION整合) 2026-06 「Naruto総集編」
 - merge_keys:
-  - "qid:Q2010|name:ONE PIECE 総集編"
-  - "qid:Q2010|name:ONE PIECE総集編"
+  - qid:Q2010|name:ONE PIECE 総集編
+  - qid:Q2010|name:ONE PIECE総集編
   note: AUTO漏れ分裂統合(整形揺れで同一題・同一著者・qid整合・続編副題除外・UNION整合) 2026-06 「ONE PIECE 総集編」
 - merge_keys:
-  - "qid:Q2279877|name:クローズ"
-  - "qid:Q2279877|name:クローズ|sub:crows is…"
-  - "qid:Q2279877|name:クローズ|sub:アンコール出版"
-  - "qid:Q2279877|name:クローズ|sub:番外編"
+  - qid:Q2279877|name:クローズ
+  - qid:Q2279877|name:クローズ|sub:crows is…
+  - qid:Q2279877|name:クローズ|sub:アンコール出版
+  - qid:Q2279877|name:クローズ|sub:番外編
   note: AUTO漏れ分裂統合(整形揺れで同一題・同一著者・qid整合・続編副題除外・UNION整合) 2026-06 「クローズ」
 - merge_keys:
-  - "name:矢部享祐|name:クローズ外伝"
-  - "qid:Q2279877|name:クローズ外伝"
+  - name:矢部享祐|name:クローズ外伝
+  - qid:Q2279877|name:クローズ外伝
   note: AUTO漏れ分裂統合(整形揺れで同一題・同一著者・qid整合・続編副題除外・UNION整合) 2026-06 「クローズ外伝」
 - merge_keys:
-  - "name:北鏡太|name:仕掛人藤枝梅安総集編アンコール"
-  - "qid:Q2661273|name:仕掛人藤枝梅安総集編アンコール"
+  - name:北鏡太|name:仕掛人藤枝梅安総集編アンコール
+  - qid:Q2661273|name:仕掛人藤枝梅安総集編アンコール
   note: AUTO漏れ分裂統合(整形揺れで同一題・同一著者・qid整合・続編副題除外・UNION整合) 2026-06 「仕掛人藤枝梅安総集編アンコール」
 - merge_keys:
-  - "name:池波正太郎|name:鬼平犯科帳|sub:season best"
-  - "qid:Q2661273|name:鬼平犯科帳"
+  - name:池波正太郎|name:鬼平犯科帳|sub:season best
+  - qid:Q2661273|name:鬼平犯科帳
   note: AUTO漏れ分裂統合(整形揺れで同一題・同一著者・qid整合・続編副題除外・UNION整合) 2026-06 「鬼平犯科帳」
 - merge_keys:
-  - "qid:Q272299|name:ぼくは地球と歌う"
-  - "qid:Q272299|name:ぼくは地球と歌う|sub:ぼく地球次世代編Ⅱ"
+  - qid:Q272299|name:ぼくは地球と歌う
+  - qid:Q272299|name:ぼくは地球と歌う|sub:ぼく地球次世代編Ⅱ
   note: AUTO漏れ分裂統合(整形揺れで同一題・同一著者・qid整合・続編副題除外・UNION整合) 2026-06 「ぼくは地球と歌う」
 - merge_keys:
-  - "qid:Q2875041|name:麦ちゃんのヰタ・セクスアリス 第2部"
-  - "qid:Q2875041|name:麦ちゃんのヰタ・セクスアリス第2部"
+  - qid:Q2875041|name:麦ちゃんのヰタ・セクスアリス 第2部
+  - qid:Q2875041|name:麦ちゃんのヰタ・セクスアリス第2部
   note: AUTO漏れ分裂統合(整形揺れで同一題・同一著者・qid整合・続編副題除外・UNION整合) 2026-06 「麦ちゃんのヰタ・セクスアリス 第2部」
 - merge_keys:
-  - "qid:Q3136410|name:BOYS BE…"
-  - "qid:Q3136410|name:BOYS BE…|sub:young adult"
+  - qid:Q3136410|name:BOYS BE…
+  - qid:Q3136410|name:BOYS BE…|sub:young adult
   note: AUTO漏れ分裂統合(整形揺れで同一題・同一著者・qid整合・続編副題除外・UNION整合) 2026-06 「BOYS BE…」
 - merge_keys:
-  - "qid:Q3136470|name:DOUGHNUTS BOOKS ドーナツブックス いしいひさいち選集"
-  - "qid:Q3136470|name:DOUGHNUTS BOOKS ドーナツブックスいしいひさいち選集"
+  - qid:Q3136470|name:DOUGHNUTS BOOKS ドーナツブックス いしいひさいち選集
+  - qid:Q3136470|name:DOUGHNUTS BOOKS ドーナツブックスいしいひさいち選集
   note: AUTO漏れ分裂統合(整形揺れで同一題・同一著者・qid整合・続編副題除外・UNION整合) 2026-06 「DOUGHNUTS BOOKS ドーナツブックス いしい」
 - merge_keys:
-  - "name:吉村勲|name:名探偵コナン"
-  - "qid:Q313945|name:名探偵コナン"
+  - name:吉村勲|name:名探偵コナン
+  - qid:Q313945|name:名探偵コナン
   note: AUTO漏れ分裂統合(整形揺れで同一題・同一著者・qid整合・続編副題除外・UNION整合) 2026-06 「名探偵コナン」
 - merge_keys:
-  - "qid:Q3201024|name:すごいよ!!マサルさん"
-  - "qid:Q3201024|name:すごいよ!!マサルさん|sub:セクシーコマンドー外伝"
+  - qid:Q3201024|name:すごいよ!!マサルさん
+  - qid:Q3201024|name:すごいよ!!マサルさん|sub:セクシーコマンドー外伝
   note: AUTO漏れ分裂統合(整形揺れで同一題・同一著者・qid整合・続編副題除外・UNION整合) 2026-06 「すごいよ!!マサルさん」
 - merge_keys:
-  - "qid:Q3276552|name:水色時代ベストセレクション"
-  - "qid:Q3276552|name:水色時代ベストセレクション|sub:MU・JA・KI"
+  - qid:Q3276552|name:水色時代ベストセレクション
+  - qid:Q3276552|name:水色時代ベストセレクション|sub:MU・JA・KI
   note: AUTO漏れ分裂統合(整形揺れで同一題・同一著者・qid整合・続編副題除外・UNION整合) 2026-06 「水色時代ベストセレクション」
 - merge_keys:
-  - "qid:Q3776891|name:原秀則セレクション|sub:ひょっとして恋敵"
-  - "qid:Q3776891|name:原秀則セレクション|sub:甲子園へいこう!"
+  - qid:Q3776891|name:原秀則セレクション|sub:ひょっとして恋敵
+  - qid:Q3776891|name:原秀則セレクション|sub:甲子園へいこう!
   note: AUTO漏れ分裂統合(整形揺れで同一題・同一著者・qid整合・続編副題除外・UNION整合) 2026-06 「原秀則セレクション」
 - merge_keys:
-  - "name:池波正太郎|name:剣客商売|sub:best selection"
-  - "qid:Q4022589|name:剣客商売"
+  - name:池波正太郎|name:剣客商売|sub:best selection
+  - qid:Q4022589|name:剣客商売
   note: AUTO漏れ分裂統合(整形揺れで同一題・同一著者・qid整合・続編副題除外・UNION整合) 2026-06 「剣客商売」
 - merge_keys:
-  - "qid:Q4022589|name:時代劇ベストセレクション 大島やすいち特集"
-  - "qid:Q4022589|name:時代劇ベストセレクション大島やすいち特集"
+  - qid:Q4022589|name:時代劇ベストセレクション 大島やすいち特集
+  - qid:Q4022589|name:時代劇ベストセレクション大島やすいち特集
   note: AUTO漏れ分裂統合(整形揺れで同一題・同一著者・qid整合・続編副題除外・UNION整合) 2026-06 「時代劇ベストセレクション大島やすいち特集」
 - merge_keys:
-  - "name:山岸凉子著|name:アラベスク"
-  - "qid:Q445827|name:アラベスク"
+  - name:山岸凉子著|name:アラベスク
+  - qid:Q445827|name:アラベスク
   note: AUTO漏れ分裂統合(整形揺れで同一題・同一著者・qid整合・続編副題除外・UNION整合) 2026-06 「アラベスク」
 - merge_keys:
-  - "name:林アキラ|name:3THREE"
-  - "qid:Q469923|name:3THREE"
+  - name:林アキラ|name:3THREE
+  - qid:Q469923|name:3THREE
   note: AUTO漏れ分裂統合(整形揺れで同一題・同一著者・qid整合・続編副題除外・UNION整合) 2026-06 「3THREE」
 - merge_keys:
-  - "qid:Q471103|name:買厄懸場帖九頭竜"
-  - "qid:Q471103|name:買厄懸場帖九頭竜|sub:石ノ森章太郎時代劇名作選"
+  - qid:Q471103|name:買厄懸場帖九頭竜
+  - qid:Q471103|name:買厄懸場帖九頭竜|sub:石ノ森章太郎時代劇名作選
   note: AUTO漏れ分裂統合(整形揺れで同一題・同一著者・qid整合・続編副題除外・UNION整合) 2026-06 「買厄懸場帖九頭竜」
 - merge_keys:
-  - "name:寺沢大|name:将太の寿司|sub:全国大会編"
-  - "qid:Q618883|name:将太の寿司"
-  - "qid:Q618883|name:将太の寿司|sub:全国大会編"
+  - name:寺沢大|name:将太の寿司|sub:全国大会編
+  - qid:Q618883|name:将太の寿司
+  - qid:Q618883|name:将太の寿司|sub:全国大会編
   note: AUTO漏れ分裂統合(整形揺れで同一題・同一著者・qid整合・続編副題除外・UNION整合) 2026-06 「将太の寿司」
 - merge_keys:
-  - "qid:Q6883357|name:Theかぼちゃワイン"
-  - "qid:Q6883357|name:The・かぼちゃワイン"
-  - "qid:Q6883357|name:The・かぼちゃワイン|sub:番外編"
+  - qid:Q6883357|name:Theかぼちゃワイン
+  - qid:Q6883357|name:The・かぼちゃワイン
+  - qid:Q6883357|name:The・かぼちゃワイン|sub:番外編
   note: AUTO漏れ分裂統合(整形揺れで同一題・同一著者・qid整合・続編副題除外・UNION整合) 2026-06 「Theかぼちゃワイン」
 - merge_keys:
-  - "qid:Q707783|name:ゴーマニズム宣言SPECIAL 大東亜論"
-  - "qid:Q707783|name:ゴーマニズム宣言SPECIAL大東亜論"
+  - qid:Q707783|name:ゴーマニズム宣言SPECIAL 大東亜論
+  - qid:Q707783|name:ゴーマニズム宣言SPECIAL大東亜論
   note: AUTO漏れ分裂統合(整形揺れで同一題・同一著者・qid整合・続編副題除外・UNION整合) 2026-06 「ゴーマニズム宣言SPECIAL 大東亜論」
 - merge_keys:
-  - "qid:Q721651|name:青木雄二漫画短編集"
-  - "qid:Q721651|name:青木雄二漫画短編集|sub:『ナニワ金融道』第1話＆最終話も特別掲載!!"
+  - qid:Q721651|name:青木雄二漫画短編集
+  - qid:Q721651|name:青木雄二漫画短編集|sub:『ナニワ金融道』第1話＆最終話も特別掲載!!
   note: AUTO漏れ分裂統合(整形揺れで同一題・同一著者・qid整合・続編副題除外・UNION整合) 2026-06 「青木雄二漫画短編集」
 - merge_keys:
-  - "qid:Q7497596|name:ドカベン"
-  - "qid:Q7497596|name:ドカベン|sub:ドカベン名勝負編明訓vs土佐丸 : 週刊少年チャンピオン創刊50周年!名作再発見!!"
+  - qid:Q7497596|name:ドカベン
+  - 'qid:Q7497596|name:ドカベン|sub:ドカベン名勝負編明訓vs土佐丸 : 週刊少年チャンピオン創刊50周年!名作再発見!!'
   note: AUTO漏れ分裂統合(整形揺れで同一題・同一著者・qid整合・続編副題除外・UNION整合) 2026-06 「ドカベン」
 - merge_keys:
-  - "qid:Q7784543|name:怪物くん ベストセレクション"
-  - "qid:Q7784543|name:怪物くんベスト・セレクション"
+  - qid:Q7784543|name:怪物くん ベストセレクション
+  - qid:Q7784543|name:怪物くんベスト・セレクション
   note: AUTO漏れ分裂統合(整形揺れで同一題・同一著者・qid整合・続編副題除外・UNION整合) 2026-06 「怪物くんベスト・セレクション」
 - merge_keys:
-  - "name:北別府ニカ|name:GUSH maniaEX"
-  - "name:楢崎ねねこ|name:GUSH maniaEX"
+  - name:北別府ニカ|name:GUSH maniaEX
+  - name:楢崎ねねこ|name:GUSH maniaEX
   note: AUTO漏れ分裂統合(整形揺れで同一題・同一著者・qid整合・続編副題除外・UNION整合) 2026-06 「GUSH maniaEX」
 - merge_keys:
-  - "name:みろくことこ|name:GUSH maniaEX"
-  - "name:天王寺ミオ|name:GUSH maniaEX"
+  - name:みろくことこ|name:GUSH maniaEX
+  - name:天王寺ミオ|name:GUSH maniaEX
   note: AUTO漏れ分裂統合(整形揺れで同一題・同一著者・qid整合・続編副題除外・UNION整合) 2026-06 「GUSH maniaEX」
 - merge_keys:
-  - "name:CLAMP|name:カードキャプターさくら クリアカード編"
-  - "name:Clamp|name:カードキャプターさくら クリアカード編"
+  - name:CLAMP|name:カードキャプターさくら クリアカード編
+  - name:Clamp|name:カードキャプターさくら クリアカード編
   note: AUTO漏れ分裂統合(整形揺れで同一題・同一著者・qid整合・続編副題除外・UNION整合) 2026-06 「カードキャプターさくら クリアカード編」
 - merge_keys:
-  - "name:大舞キリコ|name:コミック西村京太郎ミステリー傑作選"
-  - "name:宗美智子|name:コミック西村京太郎ミステリー傑作選"
+  - name:大舞キリコ|name:コミック西村京太郎ミステリー傑作選
+  - name:宗美智子|name:コミック西村京太郎ミステリー傑作選
   note: AUTO漏れ分裂統合(整形揺れで同一題・同一著者・qid整合・続編副題除外・UNION整合) 2026-06 「コミック西村京太郎ミステリー傑作選」
 - merge_keys:
-  - "name:タツノコプロ|name:ハクション大魔王"
-  - "name:タツノコプロ|name:ハクション大魔王|sub:一世を風靡した名作ギャグマンガが復活! : よばれてとびでてジャジャジャジャーン!"
+  - name:タツノコプロ|name:ハクション大魔王
+  - 'name:タツノコプロ|name:ハクション大魔王|sub:一世を風靡した名作ギャグマンガが復活! : よばれてとびでてジャジャジャジャーン!'
   note: AUTO漏れ分裂統合(整形揺れで同一題・同一著者・qid整合・続編副題除外・UNION整合) 2026-06 「ハクション大魔王」
 - merge_keys:
-  - "name:大川ぶくぶ|name:ポプテピピック"
-  - "name:大川ぶくぶ|name:ポプテピピック|sub:season five"
-  - "name:大川ぶくぶ|name:ポプテピピック|sub:season three and four"
+  - name:大川ぶくぶ|name:ポプテピピック
+  - name:大川ぶくぶ|name:ポプテピピック|sub:season five
+  - name:大川ぶくぶ|name:ポプテピピック|sub:season three and four
   note: AUTO漏れ分裂統合(整形揺れで同一題・同一著者・qid整合・続編副題除外・UNION整合) 2026-06 「ポプテピピック」
 - merge_keys:
-  - "name:TRYWORKS|name:マンガカピバラさん"
-  - "name:Tryworks|name:マンガカピバラさん"
+  - name:TRYWORKS|name:マンガカピバラさん
+  - name:Tryworks|name:マンガカピバラさん
   note: AUTO漏れ分裂統合(整形揺れで同一題・同一著者・qid整合・続編副題除外・UNION整合) 2026-06 「マンガカピバラさん」
 - merge_keys:
-  - "name:もきゅ|name:一億年ボタンを連打した俺は、気付いたら最強になっていた|sub:落第剣士の学院無双"
-  - "name:士土幽太郎|name:一億年ボタンを連打した俺は、気付いたら最強になっていた"
+  - name:もきゅ|name:一億年ボタンを連打した俺は、気付いたら最強になっていた|sub:落第剣士の学院無双
+  - name:士土幽太郎|name:一億年ボタンを連打した俺は、気付いたら最強になっていた
   note: AUTO漏れ分裂統合(整形揺れで同一題・同一著者・qid整合・続編副題除外・UNION整合) 2026-06 「一億年ボタンを連打した俺は、気付いたら最強になっていた」
 - merge_keys:
-  - "name:志野夏穂|name:倉科先生の受難"
-  - "name:志野夏穂|name:倉科先生の受難|sub:私立翔瑛学園男子高等部"
+  - name:志野夏穂|name:倉科先生の受難
+  - name:志野夏穂|name:倉科先生の受難|sub:私立翔瑛学園男子高等部
   note: AUTO漏れ分裂統合(整形揺れで同一題・同一著者・qid整合・続編副題除外・UNION整合) 2026-06 「倉科先生の受難」
 - merge_keys:
-  - "name:プリンセス編集部|name:刀剣乱舞-ONLINE-アンソロジー"
-  - "name:プリンセス編集部|name:刀剣乱舞-ONLINE-アンソロジー|sub:任務遂行中!"
+  - name:プリンセス編集部|name:刀剣乱舞-ONLINE-アンソロジー
+  - name:プリンセス編集部|name:刀剣乱舞-ONLINE-アンソロジー|sub:任務遂行中!
   note: AUTO漏れ分裂統合(整形揺れで同一題・同一著者・qid整合・続編副題除外・UNION整合) 2026-06 「刀剣乱舞-ONLINE-アンソロジー」
 - merge_keys:
-  - "name:丸伝次郎|name:名探偵コナン 漆黒の追跡者"
-  - "qid:Q11657721|name:名探偵コナン 漆黒の追跡者"
-  - "qid:Q11657721|name:名探偵コナン漆黒の追跡者"
+  - name:丸伝次郎|name:名探偵コナン 漆黒の追跡者
+  - qid:Q11657721|name:名探偵コナン 漆黒の追跡者
+  - qid:Q11657721|name:名探偵コナン漆黒の追跡者
   note: AUTO漏れ分裂統合(整形揺れで同一題・同一著者・qid整合・続編副題除外・UNION整合) 2026-06 「名探偵コナン 漆黒の追跡者」
 - merge_keys:
-  - "name:山崎大紀|name:山崎大紀の極楽H話"
-  - "name:山崎大紀|name:山崎大紀の極楽H話|sub:冬のお色気温泉編完全版"
+  - name:山崎大紀|name:山崎大紀の極楽H話
+  - name:山崎大紀|name:山崎大紀の極楽H話|sub:冬のお色気温泉編完全版
   note: AUTO漏れ分裂統合(整形揺れで同一題・同一著者・qid整合・続編副題除外・UNION整合) 2026-06 「山崎大紀の極楽H話」
 - merge_keys:
-  - "name:作画]喜名朝飛|name:東京魔人学園剣風帖短編集"
-  - "name:喜名朝飛|name:東京魔人学園剣風帖短編集"
+  - name:作画]喜名朝飛|name:東京魔人学園剣風帖短編集
+  - name:喜名朝飛|name:東京魔人学園剣風帖短編集
   note: AUTO漏れ分裂統合(整形揺れで同一題・同一著者・qid整合・続編副題除外・UNION整合) 2026-06 「東京魔人学園剣風帖短編集」
 - merge_keys:
-  - "name:ホイチョイ・プロダクション|name:気まぐれコンセプト"
-  - "name:ホイチョイ・プロダクションズ|name:気まぐれコンセプト"
+  - name:ホイチョイ・プロダクション|name:気まぐれコンセプト
+  - name:ホイチョイ・プロダクションズ|name:気まぐれコンセプト
   note: AUTO漏れ分裂統合(整形揺れで同一題・同一著者・qid整合・続編副題除外・UNION整合) 2026-06 「気まぐれコンセプト」
 - merge_keys:
-  - "name:あさみ青子|name:異世界転生BLアンソロジー|sub:転生&転移した僕らは恋をした"
-  - "name:渦井|name:異世界転生BLアンソロジー|sub:転生&転移した僕らは恋をした"
+  - name:あさみ青子|name:異世界転生BLアンソロジー|sub:転生&転移した僕らは恋をした
+  - name:渦井|name:異世界転生BLアンソロジー|sub:転生&転移した僕らは恋をした
   note: AUTO漏れ分裂統合(整形揺れで同一題・同一著者・qid整合・続編副題除外・UNION整合) 2026-06 「異世界転生BLアンソロジー」
 - merge_keys:
-  - "qid:Q11303326|name:グラゼニ～東京ドーム編～"
-  - "qid:Q11303326|name:グラゼニ～東京ドーム編～|sub:HELL OR HEAVEN"
+  - qid:Q11303326|name:グラゼニ～東京ドーム編～
+  - qid:Q11303326|name:グラゼニ～東京ドーム編～|sub:HELL OR HEAVEN
   note: AUTO漏れ分裂統合(整形揺れで同一題・同一著者・qid整合・続編副題除外・UNION整合) 2026-06 「グラゼニ～東京ドーム編～」
 - merge_keys:
-  - "qid:Q115529614|name:ハナイケル|sub:川北高校華道部"
-  - "qid:Q115529614|name:ハナイケル|sub:川北高校華道部."
+  - qid:Q115529614|name:ハナイケル|sub:川北高校華道部
+  - qid:Q115529614|name:ハナイケル|sub:川北高校華道部.
   note: AUTO漏れ分裂統合(整形揺れで同一題・同一著者・qid整合・続編副題除外・UNION整合) 2026-06 「ハナイケル」
 - merge_keys:
-  - "name:CONCON|name:スゴ盛!本当にあった〔○生〕ここだけの話極"
-  - "qid:Q11591065|name:スゴ盛!本当にあった〔○生〕ここだけの話極"
+  - name:CONCON|name:スゴ盛!本当にあった〔○生〕ここだけの話極
+  - qid:Q11591065|name:スゴ盛!本当にあった〔○生〕ここだけの話極
   note: AUTO漏れ分裂統合(整形揺れで同一題・同一著者・qid整合・続編副題除外・UNION整合) 2026-06 「スゴ盛!本当にあった〔○生〕ここだけの話極」
 - merge_keys:
-  - "qid:Q11603611|name:グラスの破片(かけら)は猫のため息|sub:クォート&ハーフ外伝"
-  - "qid:Q11603611|name:グラスの破片(かけら)は猫のため息|sub:クォート＆ハーフ外伝"
+  - qid:Q11603611|name:グラスの破片(かけら)は猫のため息|sub:クォート&ハーフ外伝
+  - qid:Q11603611|name:グラスの破片(かけら)は猫のため息|sub:クォート＆ハーフ外伝
   note: AUTO漏れ分裂統合(整形揺れで同一題・同一著者・qid整合・続編副題除外・UNION整合) 2026-06 「グラスの破片(かけら)は猫のため息」
 - merge_keys:
-  - "name:あさみさとる|name:名探偵浅見光彦の事件簿＆旅情ミステリーベストコミック"
-  - "name:真雲啓|name:名探偵浅見光彦の事件簿＆旅情ミステリーベストコミック"
-  - "qid:Q11615449|name:名探偵浅見光彦の事件簿＆旅情ミステリーベストコミック"
+  - name:あさみさとる|name:名探偵浅見光彦の事件簿＆旅情ミステリーベストコミック
+  - name:真雲啓|name:名探偵浅見光彦の事件簿＆旅情ミステリーベストコミック
+  - qid:Q11615449|name:名探偵浅見光彦の事件簿＆旅情ミステリーベストコミック
   note: AUTO漏れ分裂統合(整形揺れで同一題・同一著者・qid整合・続編副題除外・UNION整合) 2026-06 「名探偵浅見光彦の事件簿＆旅情ミステリーベストコミック」
 - merge_keys:
-  - "qid:Q11625738|name:刀剣乱舞"
-  - "qid:Q11625738|name:刀剣乱舞|sub:外伝あやかし譚"
+  - qid:Q11625738|name:刀剣乱舞
+  - qid:Q11625738|name:刀剣乱舞|sub:外伝あやかし譚
   note: AUTO漏れ分裂統合(整形揺れで同一題・同一著者・qid整合・続編副題除外・UNION整合) 2026-06 「刀剣乱舞」
 - merge_keys:
-  - "qid:Q11673673|name:パタリロ! 選集"
-  - "qid:Q11673673|name:パタリロ!選集"
+  - qid:Q11673673|name:パタリロ! 選集
+  - qid:Q11673673|name:パタリロ!選集
   note: AUTO漏れ分裂統合(整形揺れで同一題・同一著者・qid整合・続編副題除外・UNION整合) 2026-06 「パタリロ! 選集」
 - merge_keys:
-  - "name:蝸牛くも|name:鍔鳴の太刀"
-  - "qid:Q120757217|name:鍔鳴の太刀|sub:ゴブリンスレイヤー外伝2"
+  - name:蝸牛くも|name:鍔鳴の太刀
+  - qid:Q120757217|name:鍔鳴の太刀|sub:ゴブリンスレイヤー外伝2
   note: AUTO漏れ分裂統合(整形揺れで同一題・同一著者・qid整合・続編副題除外・UNION整合) 2026-06 「鍔鳴の太刀」
 - merge_keys:
-  - "qid:Q1377779|name:宗像教授セレクション"
-  - "qid:Q1377779|name:宗像教授セレクション|sub:暗い村の伝承"
-  - "qid:Q1377779|name:宗像教授セレクション|sub:源氏物語と平安文学"
+  - qid:Q1377779|name:宗像教授セレクション
+  - qid:Q1377779|name:宗像教授セレクション|sub:暗い村の伝承
+  - qid:Q1377779|name:宗像教授セレクション|sub:源氏物語と平安文学
   note: AUTO漏れ分裂統合(整形揺れで同一題・同一著者・qid整合・続編副題除外・UNION整合) 2026-06 「宗像教授セレクション」
 - merge_keys:
-  - "qid:Q17220221|name:白兎と獣の王子|sub:贄姫と獣の王スピンオフ"
-  - "qid:Q17220221|name:白兎と獣の王子|sub:贄姫と獣の王スピンオフ."
+  - qid:Q17220221|name:白兎と獣の王子|sub:贄姫と獣の王スピンオフ
+  - qid:Q17220221|name:白兎と獣の王子|sub:贄姫と獣の王スピンオフ.
   note: AUTO漏れ分裂統合(整形揺れで同一題・同一著者・qid整合・続編副題除外・UNION整合) 2026-06 「白兎と獣の王子」
 - merge_keys:
-  - "qid:Q17221115|name:東京卍リベンジャーズフルカラー短編集"
-  - "qid:Q17221115|name:東京卍リベンジャーズフルカラー短編集|sub:SO YOUNG"
+  - qid:Q17221115|name:東京卍リベンジャーズフルカラー短編集
+  - qid:Q17221115|name:東京卍リベンジャーズフルカラー短編集|sub:SO YOUNG
   note: AUTO漏れ分裂統合(整形揺れで同一題・同一著者・qid整合・続編副題除外・UNION整合) 2026-06 「東京卍リベンジャーズフルカラー短編集」
 - merge_keys:
-  - "name:池波正太郎|name:コミック乱ツインズセレクション|sub:魂の命ずるままに。"
-  - "qid:Q2661273|name:コミック乱ツインズセレクション|sub:一途なる生き様"
+  - name:池波正太郎|name:コミック乱ツインズセレクション|sub:魂の命ずるままに。
+  - qid:Q2661273|name:コミック乱ツインズセレクション|sub:一途なる生き様
   note: AUTO漏れ分裂統合(整形揺れで同一題・同一著者・qid整合・続編副題除外・UNION整合) 2026-06 「コミック乱ツインズセレクション」
 - merge_keys:
-  - "name:池波正太郎|name:コミック乱ツインズセレクション|sub:果てなき大志"
-  - "qid:Q2661273|name:コミック乱ツインズセレクション|sub:切刃の火花"
-  - "qid:Q2661273|name:コミック乱ツインズセレクション|sub:苦境を覆す妙技"
+  - name:池波正太郎|name:コミック乱ツインズセレクション|sub:果てなき大志
+  - qid:Q2661273|name:コミック乱ツインズセレクション|sub:切刃の火花
+  - qid:Q2661273|name:コミック乱ツインズセレクション|sub:苦境を覆す妙技
   note: AUTO漏れ分裂統合(整形揺れで同一題・同一著者・qid整合・続編副題除外・UNION整合) 2026-06 「コミック乱ツインズセレクション」
 - merge_keys:
-  - "name:梶研吾|name:コミック乱ツインズセレクション|sub:交わりし奇縁"
-  - "name:梶研吾|name:コミック乱ツインズセレクション|sub:研鑽と精進の日々"
-  - "qid:Q2661273|name:コミック乱ツインズセレクション|sub:善因は善果に、悪因は悪果に。"
+  - name:梶研吾|name:コミック乱ツインズセレクション|sub:交わりし奇縁
+  - name:梶研吾|name:コミック乱ツインズセレクション|sub:研鑽と精進の日々
+  - qid:Q2661273|name:コミック乱ツインズセレクション|sub:善因は善果に、悪因は悪果に。
   note: AUTO漏れ分裂統合(整形揺れで同一題・同一著者・qid整合・続編副題除外・UNION整合) 2026-06 「コミック乱ツインズセレクション」
 - merge_keys:
-  - "qid:Q2661273|name:コミック乱ツインズセレクション|sub:覚悟、揺るぎなし。"
-  - "qid:Q2661273|name:コミック乱ツインズセレクション|sub:風狂無頼なり。"
+  - qid:Q2661273|name:コミック乱ツインズセレクション|sub:覚悟、揺るぎなし。
+  - qid:Q2661273|name:コミック乱ツインズセレクション|sub:風狂無頼なり。
   note: AUTO漏れ分裂統合(整形揺れで同一題・同一著者・qid整合・続編副題除外・UNION整合) 2026-06 「コミック乱ツインズセレクション」
 - merge_keys:
-  - "qid:Q2661273|name:現代史の中のゴルゴ13"
-  - "qid:Q2661273|name:現代史の中のゴルゴ13|sub:大東亜戦争の闇"
-  - "qid:Q2661273|name:現代史の中のゴルゴ13|sub:第二次世界大戦の亡霊"
+  - qid:Q2661273|name:現代史の中のゴルゴ13
+  - qid:Q2661273|name:現代史の中のゴルゴ13|sub:大東亜戦争の闇
+  - qid:Q2661273|name:現代史の中のゴルゴ13|sub:第二次世界大戦の亡霊
   note: AUTO漏れ分裂統合(整形揺れで同一題・同一著者・qid整合・続編副題除外・UNION整合) 2026-06 「現代史の中のゴルゴ13」
 - merge_keys:
-  - "qid:Q471103|name:Girls"
-  - "qid:Q471103|name:Girls|sub:石ノ森章太郎美女画集"
+  - qid:Q471103|name:Girls
+  - qid:Q471103|name:Girls|sub:石ノ森章太郎美女画集
   note: AUTO漏れ分裂統合(整形揺れで同一題・同一著者・qid整合・続編副題除外・UNION整合) 2026-06 「Girls」
 - merge_keys:
-  - "name:バンダイナムコゲームス|name:テイルズオブシンフォニアコミックアンソロジー"
-  - "qid:Q551551|name:テイルズオブシンフォニアコミックアンソロジー"
+  - name:バンダイナムコゲームス|name:テイルズオブシンフォニアコミックアンソロジー
+  - qid:Q551551|name:テイルズオブシンフォニアコミックアンソロジー
   note: AUTO漏れ分裂統合(整形揺れで同一題・同一著者・qid整合・続編副題除外・UNION整合) 2026-06 「テイルズオブシンフォニアコミックアンソロジー」
 - merge_keys:
-  - "qid:Q6782739|name:修羅の刻(とき)|sub:不破圓明流外伝"
-  - "qid:Q6782739|name:修羅の刻(とき)|sub:陸奥圓明流外伝"
+  - qid:Q6782739|name:修羅の刻(とき)|sub:不破圓明流外伝
+  - qid:Q6782739|name:修羅の刻(とき)|sub:陸奥圓明流外伝
   note: AUTO漏れ分裂統合(整形揺れで同一題・同一著者・qid整合・続編副題除外・UNION整合) 2026-06 「修羅の刻(とき)」
 - merge_keys:
-  - "qid:Q719354|name:The JOJOLands|sub:ジョジョの奇妙な冒険 第9部"
-  - "qid:Q719354|name:The JOJOLands|sub:ジョジョの奇妙な冒険 第9部."
+  - qid:Q719354|name:The JOJOLands|sub:ジョジョの奇妙な冒険 第9部
+  - qid:Q719354|name:The JOJOLands|sub:ジョジョの奇妙な冒険 第9部.
   note: AUTO漏れ分裂統合(整形揺れで同一題・同一著者・qid整合・続編副題除外・UNION整合) 2026-06 「The JOJOLands」
 - merge_keys:
-  - "name:DONKEY|name:Page 1"
-  - "name:SHARK|name:Page 1"
+  - name:DONKEY|name:Page 1
+  - name:SHARK|name:Page 1
   note: AUTO漏れ分裂統合(整形揺れで同一題・同一著者・qid整合・続編副題除外・UNION整合) 2026-06 「Page 1」
 - merge_keys:
-  - "name:SHURA|name:Page 1"
-  - "name:オーエスビー出版|name:Page 1"
+  - name:SHURA|name:Page 1
+  - name:オーエスビー出版|name:Page 1
   note: AUTO漏れ分裂統合(整形揺れで同一題・同一著者・qid整合・続編副題除外・UNION整合) 2026-06 「Page 1」
 - merge_keys:
-  - "name:三嶋しょう子|name:いじめられっ子の悪役令嬢転生記"
-  - "name:弥生真由|name:いじめられっ子の悪役令嬢転生記|sub:第2の人生も不幸だなんて冗談じゃないです!"
+  - name:三嶋しょう子|name:いじめられっ子の悪役令嬢転生記
+  - name:弥生真由|name:いじめられっ子の悪役令嬢転生記|sub:第2の人生も不幸だなんて冗談じゃないです!
   note: AUTO漏れ分裂統合(整形揺れで同一題・同一著者・qid整合・続編副題除外・UNION整合) 2026-06 「いじめられっ子の悪役令嬢転生記」
 - merge_keys:
-  - "name:こいしゆうか|name:くらべて、けみして"
-  - "name:こいしゆうか|name:くらべて、けみして|sub:校閲部の九重さん"
+  - name:こいしゆうか|name:くらべて、けみして
+  - name:こいしゆうか|name:くらべて、けみして|sub:校閲部の九重さん
   note: AUTO漏れ分裂統合(整形揺れで同一題・同一著者・qid整合・続編副題除外・UNION整合) 2026-06 「くらべて、けみして」
 - merge_keys:
-  - "name:‐|name:めざせ漫画家!手塚・赤塚賞受賞作品集"
-  - "name:ホーム社|name:めざせ漫画家!手塚・赤塚賞受賞作品集"
+  - name:‐|name:めざせ漫画家!手塚・赤塚賞受賞作品集
+  - name:ホーム社|name:めざせ漫画家!手塚・赤塚賞受賞作品集
   note: AUTO漏れ分裂統合(整形揺れで同一題・同一著者・qid整合・続編副題除外・UNION整合) 2026-06 「めざせ漫画家!手塚・赤塚賞受賞作品集」
 - merge_keys:
-  - "name:泡沫|name:キス、してもいいですか?"
-  - "name:泡沫|name:キス、してもいいですか?|sub:泡沫創作男女短編集."
+  - name:泡沫|name:キス、してもいいですか?
+  - name:泡沫|name:キス、してもいいですか?|sub:泡沫創作男女短編集.
   note: AUTO漏れ分裂統合(整形揺れで同一題・同一著者・qid整合・続編副題除外・UNION整合) 2026-06 「キス、してもいいですか?」
 - merge_keys:
-  - "name:梶研吾|name:コミック乱ツインズセレクション|sub:一点突破!!"
-  - "name:梶研吾|name:コミック乱ツインズセレクション|sub:困難への挑戦"
+  - name:梶研吾|name:コミック乱ツインズセレクション|sub:一点突破!!
+  - name:梶研吾|name:コミック乱ツインズセレクション|sub:困難への挑戦
   note: AUTO漏れ分裂統合(整形揺れで同一題・同一著者・qid整合・続編副題除外・UNION整合) 2026-06 「コミック乱ツインズセレクション」
 - merge_keys:
-  - "name:池波正太郎|name:コミック乱ツインズセレクション|sub:使命のために。"
-  - "name:池波正太郎|name:コミック乱ツインズセレクション|sub:守るべきもの"
+  - name:池波正太郎|name:コミック乱ツインズセレクション|sub:使命のために。
+  - name:池波正太郎|name:コミック乱ツインズセレクション|sub:守るべきもの
   note: AUTO漏れ分裂統合(整形揺れで同一題・同一著者・qid整合・続編副題除外・UNION整合) 2026-06 「コミック乱ツインズセレクション」
 - merge_keys:
-  - "name:池波正太郎|name:コミック乱ツインズセレクション|sub:宿命を別つ刻"
-  - "name:池波正太郎|name:コミック乱ツインズセレクション|sub:鬼謀錯交"
-  - "name:由良蒼樹|name:コミック乱ツインズセレクション|sub:激闘の果て"
+  - name:池波正太郎|name:コミック乱ツインズセレクション|sub:宿命を別つ刻
+  - name:池波正太郎|name:コミック乱ツインズセレクション|sub:鬼謀錯交
+  - name:由良蒼樹|name:コミック乱ツインズセレクション|sub:激闘の果て
   note: AUTO漏れ分裂統合(整形揺れで同一題・同一著者・qid整合・続編副題除外・UNION整合) 2026-06 「コミック乱ツインズセレクション」
 - merge_keys:
-  - "name:池波正太郎|name:コミック乱ツインズセレクション|sub:身命を賭する時"
-  - "name:池波正太郎|name:コミック乱ツインズセレクション|sub:逆風に抗え。"
+  - name:池波正太郎|name:コミック乱ツインズセレクション|sub:身命を賭する時
+  - name:池波正太郎|name:コミック乱ツインズセレクション|sub:逆風に抗え。
   note: AUTO漏れ分裂統合(整形揺れで同一題・同一著者・qid整合・続編副題除外・UNION整合) 2026-06 「コミック乱ツインズセレクション」
 - merge_keys:
-  - "name:コンプエース編集部|name:コード ギアス反逆のルルーシュ公式コミックアンソロジー queen"
-  - "name:コンプエース編集部|name:コード ギアス反逆のルルーシュ公式コミックアンソロジーqueen"
-  - "name:コンプエース編集部|name:コードギアス 反逆のルルーシュ公式コミックアンソロジー queen"
+  - name:コンプエース編集部|name:コード ギアス反逆のルルーシュ公式コミックアンソロジー queen
+  - name:コンプエース編集部|name:コード ギアス反逆のルルーシュ公式コミックアンソロジーqueen
+  - name:コンプエース編集部|name:コードギアス 反逆のルルーシュ公式コミックアンソロジー queen
   note: AUTO漏れ分裂統合(整形揺れで同一題・同一著者・qid整合・続編副題除外・UNION整合) 2026-06 「コード ギアス反逆のルルーシュ公式コミックアンソロジー 」
 - merge_keys:
-  - "name:ウルトラジャンプ編集部|name:ジョジョの奇妙な冒険 第3部スターダストクルセイダース総集編"
-  - "name:ウルトラジャンプ編集部|name:ジョジョの奇妙な冒険第3部スターダストクルセイダース総集編"
+  - name:ウルトラジャンプ編集部|name:ジョジョの奇妙な冒険 第3部スターダストクルセイダース総集編
+  - name:ウルトラジャンプ編集部|name:ジョジョの奇妙な冒険第3部スターダストクルセイダース総集編
   note: AUTO漏れ分裂統合(整形揺れで同一題・同一著者・qid整合・続編副題除外・UNION整合) 2026-06 「ジョジョの奇妙な冒険 第3部スターダストクルセイダース総」
 - merge_keys:
-  - "name:KINTA|name:パンプキン"
-  - "name:MASAO|name:パンプキン"
-  - "name:スタジオバトル|name:パンプキン"
+  - name:KINTA|name:パンプキン
+  - name:MASAO|name:パンプキン
+  - name:スタジオバトル|name:パンプキン
   note: AUTO漏れ分裂統合(整形揺れで同一題・同一著者・qid整合・続編副題除外・UNION整合) 2026-06 「パンプキン」
 - merge_keys:
-  - "name:荒達哉|name:ヒュドラブレイク"
-  - "name:荒達哉|name:ヒュドラブレイク|sub:ハリガネサービス外伝"
+  - name:荒達哉|name:ヒュドラブレイク
+  - name:荒達哉|name:ヒュドラブレイク|sub:ハリガネサービス外伝
   note: AUTO漏れ分裂統合(整形揺れで同一題・同一著者・qid整合・続編副題除外・UNION整合) 2026-06 「ヒュドラブレイク」
 - merge_keys:
-  - "name:38式|name:ヤバ盛!本当にあった〔○生〕ここだけの話極"
-  - "name:こうづきれお|name:ヤバ盛!本当にあった〔○生〕ここだけの話極"
+  - name:38式|name:ヤバ盛!本当にあった〔○生〕ここだけの話極
+  - name:こうづきれお|name:ヤバ盛!本当にあった〔○生〕ここだけの話極
   note: AUTO漏れ分裂統合(整形揺れで同一題・同一著者・qid整合・続編副題除外・UNION整合) 2026-06 「ヤバ盛!本当にあった〔○生〕ここだけの話極」
 - merge_keys:
-  - "name:森田季節|name:レッドドラゴン女学院"
-  - "name:森田季節|name:レッドドラゴン女学院|sub:スライム倒して300年、知らないうちにレベルmaxになってましたスピンオフ"
+  - name:森田季節|name:レッドドラゴン女学院
+  - name:森田季節|name:レッドドラゴン女学院|sub:スライム倒して300年、知らないうちにレベルmaxになってましたスピンオフ
   note: AUTO漏れ分裂統合(整形揺れで同一題・同一著者・qid整合・続編副題除外・UNION整合) 2026-06 「レッドドラゴン女学院」
 - merge_keys:
-  - "name:地主|name:ロクレイ"
-  - "name:地主|name:ロクレイ|sub:天成市りんね区役所第六感部助霊課活動記"
-  - "name:地主|name:ロクレイ|sub:天成市りんね区役所第六感部助霊課活動記."
+  - name:地主|name:ロクレイ
+  - name:地主|name:ロクレイ|sub:天成市りんね区役所第六感部助霊課活動記
+  - name:地主|name:ロクレイ|sub:天成市りんね区役所第六感部助霊課活動記.
   note: AUTO漏れ分裂統合(整形揺れで同一題・同一著者・qid整合・続編副題除外・UNION整合) 2026-06 「ロクレイ」
 - merge_keys:
-  - "name:池波正太郎|name:剣客商売|sub:一羽流秘伝書"
-  - "name:益川零堂|name:剣客商売"
+  - name:池波正太郎|name:剣客商売|sub:一羽流秘伝書
+  - name:益川零堂|name:剣客商売
   note: AUTO漏れ分裂統合(整形揺れで同一題・同一著者・qid整合・続編副題除外・UNION整合) 2026-06 「剣客商売」
 - merge_keys:
-  - "name:SAIYA|name:同人アンソロジー美少女アラカルト"
-  - "name:STING|name:同人アンソロジー美少女アラカルト"
-  - "name:Sting|name:同人アンソロジー美少女アラカルト"
-  - "name:TAKU|name:同人アンソロジー美少女アラカルト"
-  - "name:YUYA|name:同人アンソロジー美少女アラカルト"
+  - name:SAIYA|name:同人アンソロジー美少女アラカルト
+  - name:STING|name:同人アンソロジー美少女アラカルト
+  - name:Sting|name:同人アンソロジー美少女アラカルト
+  - name:TAKU|name:同人アンソロジー美少女アラカルト
+  - name:YUYA|name:同人アンソロジー美少女アラカルト
   note: AUTO漏れ分裂統合(整形揺れで同一題・同一著者・qid整合・続編副題除外・UNION整合) 2026-06 「同人アンソロジー美少女アラカルト」
 - merge_keys:
-  - "name:太田勝|name:名探偵コナン"
-  - "name:太田勝|name:名探偵コナン|sub:特別編"
+  - name:太田勝|name:名探偵コナン
+  - name:太田勝|name:名探偵コナン|sub:特別編
   note: AUTO漏れ分裂統合(整形揺れで同一題・同一著者・qid整合・続編副題除外・UNION整合) 2026-06 「名探偵コナン」
 - merge_keys:
-  - "name:なっとうごはん|name:天才アミバの異世界覇王伝説"
-  - "name:なっとうごはん|name:天才アミバの異世界覇王伝説|sub:北斗の拳外伝"
-  - "name:なっとうごはん|name:天才アミバの異世界覇王伝説|sub:北斗の拳外伝."
+  - name:なっとうごはん|name:天才アミバの異世界覇王伝説
+  - name:なっとうごはん|name:天才アミバの異世界覇王伝説|sub:北斗の拳外伝
+  - name:なっとうごはん|name:天才アミバの異世界覇王伝説|sub:北斗の拳外伝.
   note: AUTO漏れ分裂統合(整形揺れで同一題・同一著者・qid整合・続編副題除外・UNION整合) 2026-06 「天才アミバの異世界覇王伝説」
 - merge_keys:
-  - "name:レベルファイブ|name:妖怪ウォッチ ～わくわく☆にゃんだふるデイズ～"
-  - "name:レベルファイブ|name:妖怪ウォッチ～わくわく☆にゃんだふるデイズ～"
-  - "name:水木麻子|name:妖怪ウォッチ ～わくわく☆にゃんだふるデイズ～"
+  - name:レベルファイブ|name:妖怪ウォッチ ～わくわく☆にゃんだふるデイズ～
+  - name:レベルファイブ|name:妖怪ウォッチ～わくわく☆にゃんだふるデイズ～
+  - name:水木麻子|name:妖怪ウォッチ ～わくわく☆にゃんだふるデイズ～
   note: AUTO漏れ分裂統合(整形揺れで同一題・同一著者・qid整合・続編副題除外・UNION整合) 2026-06 「妖怪ウォッチ ～わくわく☆にゃんだふるデイズ～」
 - merge_keys:
-  - "name:あかこ|name:婚約破棄の手続きはお済みですか?"
-  - "name:珠梨やすゆき|name:婚約破棄の手続きはお済みですか?|sub:第二の人生を謳歌しようと思ったら、ギルドを立て直すことになりました"
+  - name:あかこ|name:婚約破棄の手続きはお済みですか?
+  - name:珠梨やすゆき|name:婚約破棄の手続きはお済みですか?|sub:第二の人生を謳歌しようと思ったら、ギルドを立て直すことになりました
   note: AUTO漏れ分裂統合(整形揺れで同一題・同一著者・qid整合・続編副題除外・UNION整合) 2026-06 「婚約破棄の手続きはお済みですか?」
 - merge_keys:
-  - "name:涼風|name:悪役令嬢後宮物語～王国激動編～"
-  - "name:鈴ノ助|name:悪役令嬢後宮物語～王国激動編～"
+  - name:涼風|name:悪役令嬢後宮物語～王国激動編～
+  - name:鈴ノ助|name:悪役令嬢後宮物語～王国激動編～
   note: AUTO漏れ分裂統合(整形揺れで同一題・同一著者・qid整合・続編副題除外・UNION整合) 2026-06 「悪役令嬢後宮物語～王国激動編～」
 - merge_keys:
-  - "name:オウカ|name:捨てられ騎士の逆転記!"
-  - "name:オウカ|name:捨てられ騎士の逆転記!|sub:女神と始めた第二の人生は伝説級の英雄だった件."
-  - "name:和田真尚|name:捨てられ騎士の逆転記!"
+  - name:オウカ|name:捨てられ騎士の逆転記!
+  - name:オウカ|name:捨てられ騎士の逆転記!|sub:女神と始めた第二の人生は伝説級の英雄だった件.
+  - name:和田真尚|name:捨てられ騎士の逆転記!
   note: AUTO漏れ分裂統合(整形揺れで同一題・同一著者・qid整合・続編副題除外・UNION整合) 2026-06 「捨てられ騎士の逆転記!」
 - merge_keys:
-  - "name:中邑冴|name:旅情ミステリー事件簿"
-  - "name:中邑冴|name:旅情ミステリー事件簿|sub:名探偵浅見光彦&警視庁十津川警部"
+  - name:中邑冴|name:旅情ミステリー事件簿
+  - name:中邑冴|name:旅情ミステリー事件簿|sub:名探偵浅見光彦&警視庁十津川警部
   note: AUTO漏れ分裂統合(整形揺れで同一題・同一著者・qid整合・続編副題除外・UNION整合) 2026-06 「旅情ミステリー事件簿」
 - merge_keys:
-  - "name:夢枕獏|name:漫画ゆうえんち"
-  - "name:夢枕獏|name:漫画ゆうえんち|sub:バキ外伝"
-  - "name:夢枕獏|name:漫画ゆうえんち|sub:バキ外伝."
+  - name:夢枕獏|name:漫画ゆうえんち
+  - name:夢枕獏|name:漫画ゆうえんち|sub:バキ外伝
+  - name:夢枕獏|name:漫画ゆうえんち|sub:バキ外伝.
   note: AUTO漏れ分裂統合(整形揺れで同一題・同一著者・qid整合・続編副題除外・UNION整合) 2026-06 「漫画ゆうえんち」
 - merge_keys:
-  - "name:シロタカ|name:無職転生|sub:異世界行ったら本気だす"
-  - "name:理不尽な孫の手|name:無職転生"
+  - name:シロタカ|name:無職転生|sub:異世界行ったら本気だす
+  - name:理不尽な孫の手|name:無職転生
   note: AUTO漏れ分裂統合(整形揺れで同一題・同一著者・qid整合・続編副題除外・UNION整合) 2026-06 「無職転生」
 - merge_keys:
-  - "name:ox|name:生き残り錬金術師は街で静かに暮らしたい～輪環の魔法薬～"
-  - "name:のの原兎太|name:生き残り錬金術師は街で静かに暮らしたい～輪環の魔法薬～"
+  - name:ox|name:生き残り錬金術師は街で静かに暮らしたい～輪環の魔法薬～
+  - name:のの原兎太|name:生き残り錬金術師は街で静かに暮らしたい～輪環の魔法薬～
   note: AUTO漏れ分裂統合(整形揺れで同一題・同一著者・qid整合・続編副題除外・UNION整合) 2026-06 「生き残り錬金術師は街で静かに暮らしたい～輪環の魔法薬～」
 - merge_keys:
-  - "name:チャールズ後藤|name:読者投稿DX|sub:お仕事のウラ側SP"
-  - "name:チャールズ後藤|name:読者投稿DX|sub:みんなのアブない事件簿"
-  - "name:チャールズ後藤|name:読者投稿DX|sub:みんなの秘宝館SP"
-  - "name:チャールズ後藤|name:読者投稿DX|sub:ろくでなし大集合"
-  - "name:チャールズ後藤|name:読者投稿DX|sub:サイコな人びとSP"
-  - "name:チャールズ後藤|name:読者投稿DX|sub:スカッと仕返しSP"
-  - "name:チャールズ後藤|name:読者投稿DX|sub:ゾッとする怖い話SP"
-  - "name:チャールズ後藤|name:読者投稿DX|sub:年の瀬カミングアウトSP"
-  - "name:チャールズ後藤|name:読者投稿DX|sub:死ぬかと思った!SP"
-  - "name:チャールズ後藤|name:読者投稿DX|sub:病院ハプニング"
-  - "name:チャールズ後藤|name:読者投稿DX|sub:痛&恥ハプニングSP"
-  - "name:チャールズ後藤|name:読者投稿DX|sub:赤っ恥カミングアウトSP"
+  - name:チャールズ後藤|name:読者投稿DX|sub:お仕事のウラ側SP
+  - name:チャールズ後藤|name:読者投稿DX|sub:みんなのアブない事件簿
+  - name:チャールズ後藤|name:読者投稿DX|sub:みんなの秘宝館SP
+  - name:チャールズ後藤|name:読者投稿DX|sub:ろくでなし大集合
+  - name:チャールズ後藤|name:読者投稿DX|sub:サイコな人びとSP
+  - name:チャールズ後藤|name:読者投稿DX|sub:スカッと仕返しSP
+  - name:チャールズ後藤|name:読者投稿DX|sub:ゾッとする怖い話SP
+  - name:チャールズ後藤|name:読者投稿DX|sub:年の瀬カミングアウトSP
+  - name:チャールズ後藤|name:読者投稿DX|sub:死ぬかと思った!SP
+  - name:チャールズ後藤|name:読者投稿DX|sub:病院ハプニング
+  - name:チャールズ後藤|name:読者投稿DX|sub:痛&恥ハプニングSP
+  - name:チャールズ後藤|name:読者投稿DX|sub:赤っ恥カミングアウトSP
   note: AUTO漏れ分裂統合(整形揺れで同一題・同一著者・qid整合・続編副題除外・UNION整合) 2026-06 「読者投稿DX」
 - merge_keys:
-  - "name:なんじゃもんじゃ|name:隠れ転生勇者"
-  - "name:ゆーにっと|name:隠れ転生勇者|sub:チートスキルと勇者ジョブを隠して第二の人生を楽しんでやる!"
+  - name:なんじゃもんじゃ|name:隠れ転生勇者
+  - name:ゆーにっと|name:隠れ転生勇者|sub:チートスキルと勇者ジョブを隠して第二の人生を楽しんでやる!
   note: AUTO漏れ分裂統合(整形揺れで同一題・同一著者・qid整合・続編副題除外・UNION整合) 2026-06 「隠れ転生勇者」
 - merge_keys:
-  - "name:平石六|name:難攻不落の魔王城へようこそ"
-  - "name:蚕堂j1|name:難攻不落の魔王城へようこそ|sub:デバフは不要と勇者パーティーを追い出された黒魔導士、魔王軍の最高幹部に迎えられる"
+  - name:平石六|name:難攻不落の魔王城へようこそ
+  - name:蚕堂j1|name:難攻不落の魔王城へようこそ|sub:デバフは不要と勇者パーティーを追い出された黒魔導士、魔王軍の最高幹部に迎えられる
   note: AUTO漏れ分裂統合(整形揺れで同一題・同一著者・qid整合・続編副題除外・UNION整合) 2026-06 「難攻不落の魔王城へようこそ」
 - merge_keys:
-  - "name:池波正太郎|name:鬼平犯科帳|sub:pocket ×2 double"
-  - "name:池波正太郎|name:鬼平犯科帳|sub:special edition : 火盗始末"
-  - "name:池波正太郎|name:鬼平犯科帳|sub:ベストセレクション : 女賊"
-  - "name:池波正太郎|name:鬼平犯科帳|sub:ベストセレクション : 平蔵の妹・お園"
-  - "name:池波正太郎|name:鬼平犯科帳|sub:ポケットダブル"
-  - "name:池波正太郎|name:鬼平犯科帳|sub:ワイド版"
+  - name:池波正太郎|name:鬼平犯科帳|sub:pocket ×2 double
+  - 'name:池波正太郎|name:鬼平犯科帳|sub:special edition : 火盗始末'
+  - 'name:池波正太郎|name:鬼平犯科帳|sub:ベストセレクション : 女賊'
+  - 'name:池波正太郎|name:鬼平犯科帳|sub:ベストセレクション : 平蔵の妹・お園'
+  - name:池波正太郎|name:鬼平犯科帳|sub:ポケットダブル
+  - name:池波正太郎|name:鬼平犯科帳|sub:ワイド版
   note: AUTO漏れ分裂統合(整形揺れで同一題・同一著者・qid整合・続編副題除外・UNION整合) 2026-06 「鬼平犯科帳」
 - merge_keys:
-  - "name:池波正太郎|name:鬼平犯科帳|sub:おちよ"
-  - "name:池波正太郎|name:鬼平犯科帳|sub:歳月"
-  - "name:池波正太郎|name:鬼平犯科帳|sub:看板"
+  - name:池波正太郎|name:鬼平犯科帳|sub:おちよ
+  - name:池波正太郎|name:鬼平犯科帳|sub:歳月
+  - name:池波正太郎|name:鬼平犯科帳|sub:看板
   note: AUTO漏れ分裂統合(整形揺れで同一題・同一著者・qid整合・続編副題除外・UNION整合) 2026-06 「鬼平犯科帳」
 - merge_keys:
-  - "name:池波正太郎|name:鬼平犯科帳|sub:不忍池暮色"
-  - "name:池波正太郎|name:鬼平犯科帳|sub:引き込みお里"
-  - "name:池波正太郎|name:鬼平犯科帳|sub:金貸しの首"
+  - name:池波正太郎|name:鬼平犯科帳|sub:不忍池暮色
+  - name:池波正太郎|name:鬼平犯科帳|sub:引き込みお里
+  - name:池波正太郎|name:鬼平犯科帳|sub:金貸しの首
   note: AUTO漏れ分裂統合(整形揺れで同一題・同一著者・qid整合・続編副題除外・UNION整合) 2026-06 「鬼平犯科帳」
 - merge_keys:
-  - "name:池波正太郎|name:鬼平犯科帳|sub:男色武士道"
-  - "name:池波正太郎|name:鬼平犯科帳|sub:遺金八万両"
+  - name:池波正太郎|name:鬼平犯科帳|sub:男色武士道
+  - name:池波正太郎|name:鬼平犯科帳|sub:遺金八万両
   note: AUTO漏れ分裂統合(整形揺れで同一題・同一著者・qid整合・続編副題除外・UNION整合) 2026-06 「鬼平犯科帳」
 - merge_keys:
-  - "name:富士屋カツヒト|name:しょせん他人事(ひとごと)ですから|sub:とある弁護士の本音の仕事"
-  - "name:富士屋カツヒト|name:しょせん他人事ですから|sub:とある弁護士の本音の仕事"
-  - "name:富士屋カツヒト|name:しょせん他人事ですから"
+  - name:富士屋カツヒト|name:しょせん他人事(ひとごと)ですから|sub:とある弁護士の本音の仕事
+  - name:富士屋カツヒト|name:しょせん他人事ですから|sub:とある弁護士の本音の仕事
+  - name:富士屋カツヒト|name:しょせん他人事ですから
   note: 巻範囲分裂統合(巻1-5/6-7/8-10=同一作・anilist_id 163553・同一著者、題の表記ドリフトで3分裂) 2026-06 「しょせん他人事ですから」
 - merge_keys:
-  - "qid:Q11438148|name:環・水惑星年代記"
-  - "qid:Q11438148|name:水惑星年代記"
-  - "qid:Q11438148|name:水惑星年代記 月刊サチサチ"
-  - "qid:Q11438148|name:水惑星年代記 月娘"
-  - "qid:Q11438148|name:翠水惑星年代記"
-  - "qid:Q11438148|name:続水惑星年代記"
-  - "qid:Q11438148|name:碧水惑星年代記"
+  - qid:Q11438148|name:環・水惑星年代記
+  - qid:Q11438148|name:水惑星年代記
+  - qid:Q11438148|name:水惑星年代記 月刊サチサチ
+  - qid:Q11438148|name:水惑星年代記 月娘
+  - qid:Q11438148|name:翠水惑星年代記
+  - qid:Q11438148|name:続水惑星年代記
+  - qid:Q11438148|name:碧水惑星年代記
   renumber: true
   note: 大石まさる 水惑星年代記 全7巻統合(Wikipedia『全7巻』確証=続/環/翠/碧/月娘/月刊サチサチ)。 2026-06 検証済
 - merge_keys:
-  - "qid:Q1141948|name:こわい本"
-  - "qid:Q1141948|name:ゾクこわい本"
-  - "qid:Q1141948|name:楳図かずおこわい本"
-  - "qid:Q1141948|name:楳図かずおこわい本 闇"
-  - "qid:Q1141948|name:楳図かずおこわい本 異形"
-  - "qid:Q1141948|name:楳図かずおこわい本 影"
-  - "qid:Q1141948|name:楳図かずおこわい本 怨念"
-  - "qid:Q1141948|name:楳図かずおこわい本 顔"
-  - "qid:Q1141948|name:楳図かずおこわい本 狂乱"
-  - "qid:Q1141948|name:楳図かずおこわい本 蛇"
-  - "qid:Q1141948|name:楳図かずおこわい本 呪縛"
-  - "qid:Q1141948|name:楳図かずおこわい本 神罰"
-  - "qid:Q1141948|name:楳図かずおこわい本 蜘蛛"
-  - "qid:Q1141948|name:楳図かずおこわい本 虫"
+  - qid:Q1141948|name:こわい本
+  - qid:Q1141948|name:ゾクこわい本
+  - qid:Q1141948|name:楳図かずおこわい本
+  - qid:Q1141948|name:楳図かずおこわい本 闇
+  - qid:Q1141948|name:楳図かずおこわい本 異形
+  - qid:Q1141948|name:楳図かずおこわい本 影
+  - qid:Q1141948|name:楳図かずおこわい本 怨念
+  - qid:Q1141948|name:楳図かずおこわい本 顔
+  - qid:Q1141948|name:楳図かずおこわい本 狂乱
+  - qid:Q1141948|name:楳図かずおこわい本 蛇
+  - qid:Q1141948|name:楳図かずおこわい本 呪縛
+  - qid:Q1141948|name:楳図かずおこわい本 神罰
+  - qid:Q1141948|name:楳図かずおこわい本 蜘蛛
+  - qid:Q1141948|name:楳図かずおこわい本 虫
   note: 楳図かずお こわい本 統合(恐怖文庫 連番ISBN9784257720027-720140・同1996・同社=1シリーズの闇/異形/影/怨念/顔/狂乱/蛇/呪縛/神罰/蜘蛛/虫 + 角川ホラー文庫再刊こわい本/ゾク)。 構造証拠。 2026-06
 - merge_keys:
-  - "qid:Q11475634|name:みこすり半劇場"
-  - "qid:Q11475634|name:みこすり半劇場 カップル編"
-  - "qid:Q11475634|name:みこすり半劇場 タイフーン"
-  - "qid:Q11475634|name:みこすり半劇場 ハリケーン"
-  - "qid:Q11475634|name:みこすり半劇場 ファミリー編"
-  - "qid:Q11475634|name:みこすり半劇場 刑事編"
-  - "qid:Q11475634|name:みこすり半劇場 時代劇編"
-  - "qid:Q11475634|name:みこすり半劇場 青春編"
-  - "qid:Q11475634|name:みこすり半劇場 病院編"
+  - qid:Q11475634|name:みこすり半劇場
+  - qid:Q11475634|name:みこすり半劇場 カップル編
+  - qid:Q11475634|name:みこすり半劇場 タイフーン
+  - qid:Q11475634|name:みこすり半劇場 ハリケーン
+  - qid:Q11475634|name:みこすり半劇場 ファミリー編
+  - qid:Q11475634|name:みこすり半劇場 刑事編
+  - qid:Q11475634|name:みこすり半劇場 時代劇編
+  - qid:Q11475634|name:みこすり半劇場 青春編
+  - qid:Q11475634|name:みこすり半劇場 病院編
   note: 岩谷テンホー みこすり半劇場 統合(本編18巻 + ぶんか社テーマ別デラックス/文庫編=カップル/刑事/時代劇/青春/病院/ファミリー/タイフーン/ハリケーン、 同著者同社の同一作編集版)。 2026-06
 - merge_keys:
-  - "qid:Q3072264|name:とっとこハム太郎"
-  - "qid:Q3072264|name:とっとこハム太郎あいしてるでちゅ"
-  - "qid:Q3072264|name:とっとこハム太郎ハムちゃんずでございまちゅ"
-  - "qid:Q3072264|name:とっとこハム太郎大ぼうけんでちゅ"
+  - qid:Q3072264|name:とっとこハム太郎
+  - qid:Q3072264|name:とっとこハム太郎あいしてるでちゅ
+  - qid:Q3072264|name:とっとこハム太郎ハムちゃんずでございまちゅ
+  - qid:Q3072264|name:とっとこハム太郎大ぼうけんでちゅ
   note: 河井リツ子 とっとこハム太郎 統合(Wikipedia『独立作でなく同一世界観の連続作品』確証=でちゅ系続刊)。 アニメ版ハムージャは除外drop。 2026-06 検証済
 - merge_keys:
-  - "qid:Q1192471|name:ケロロ軍曹"
-  - "qid:Q1192471|name:ケロロ軍曹green"
-  - "qid:Q1192471|name:ケロロ軍曹pink"
-  - "qid:Q1192471|name:ケロロ軍曹red"
+  - qid:Q1192471|name:ケロロ軍曹
+  - qid:Q1192471|name:ケロロ軍曹green
+  - qid:Q1192471|name:ケロロ軍曹pink
+  - qid:Q1192471|name:ケロロ軍曹red
   note: 吉崎観音 ケロロ軍曹 統合(本編 + green/pink/red=角川の同一作の版)。 スウェーデン語版(Keroro/ISBN978-91)はdrop。 2026-06
 - merge_keys:
-  - "name:大原久澄|name:鬼平犯科帳"
-  - "name:池波正太郎|name:鬼平犯科帳"
-  - "name:池波正太郎|name:鬼平犯科帳."
-  - "name:池波正太郎|name:鬼平犯科帳|sub:season best"
+  - name:大原久澄|name:鬼平犯科帳
+  - name:池波正太郎|name:鬼平犯科帳
+  - name:池波正太郎|name:鬼平犯科帳.
+  - name:池波正太郎|name:鬼平犯科帳|sub:season best
   note: 鬼平犯科帳(リイド社SP comics・さいとうプロ/金成陽三郎)の巻断片統合(巻1-122本編 + 61-120等の断片)。 2026-06
 - merge_keys:
-  - "qid:Q11267194|name:June pride"
-  - "qid:Q11267194|name:花散る夜にきみを想えば"
-  - "qid:Q11267194|name:季節はずれのカイダン"
-  - "qid:Q11267194|name:美貌のディテイル"
+  - qid:Q11267194|name:June pride
+  - qid:Q11267194|name:花散る夜にきみを想えば
+  - qid:Q11267194|name:季節はずれのカイダン
+  - qid:Q11267194|name:美貌のディテイル
   note: タクミくんシリーズ(ごとうしのぶ原作・おおや和美画・あすかコミックスCL-DX・aid31770)統合=June pride/花散る夜に/季節はずれのカイダン/美貌のディテイル=同一BL連続シリーズの各巻。 2026-06
 - merge_keys:
-  - "name:天王寺大|name:ミナミの帝王　ヤング編"
-  - "name:天王寺大|name:ミナミの帝王　ヤング編 利権空港スペシャル"
-  - "qid:Q11643389|name:ミナミの帝王　ヤング編 利権空港"
+  - name:天王寺大|name:ミナミの帝王　ヤング編
+  - name:天王寺大|name:ミナミの帝王　ヤング編 利権空港スペシャル
+  - qid:Q11643389|name:ミナミの帝王　ヤング編 利権空港
   note: ミナミの帝王 ヤング編 統合(郷力也/天王寺大・Gコミックス、 ヤング編/利権空港スペシャル/利権空港の断片)。 本編187巻は別ページ保持。 2026-06
 - merge_keys:
-  - "qid:Q3081347|name:私たちは繁殖している"
-  - "qid:Q3081347|name:私たちは繁殖しているオレンジ"
-  - "qid:Q3081347|name:私たちは繁殖しているソーダ"
-  - "qid:Q3081347|name:私たちは繁殖しているトラベラー"
+  - qid:Q3081347|name:私たちは繁殖している
+  - qid:Q3081347|name:私たちは繁殖しているオレンジ
+  - qid:Q3081347|name:私たちは繁殖しているソーダ
+  - qid:Q3081347|name:私たちは繁殖しているトラベラー
   note: 内田春菊 私たちは繁殖している統合(本編24巻 + 角川文庫オレンジ/ソーダ/トラベラー=同一作の文庫版)。 2026-06
 - merge_keys:
-  - "qid:Q5209147|name:栞と紙魚子"
-  - "qid:Q5209147|name:栞と紙魚子と青い馬"
-  - "qid:Q5209147|name:栞と紙魚子の生首事件"
-  - "qid:Q5209147|name:栞と紙魚子殺戮詩集"
+  - qid:Q5209147|name:栞と紙魚子
+  - qid:Q5209147|name:栞と紙魚子と青い馬
+  - qid:Q5209147|name:栞と紙魚子の生首事件
+  - qid:Q5209147|name:栞と紙魚子殺戮詩集
   note: 諸星大二郎 栞と紙魚子シリーズ統合(本編 + 青い馬/生首事件/殺戮詩集=眠れぬ夜の奇妙な話の同一連作各巻、 同キャラ)。 2026-06
 - merge_keys:
-  - "qid:Q6962343|name:Papa told me"
-  - "qid:Q6962343|name:Papa told me 夏"
-  - "qid:Q6962343|name:Papa told me 秋"
-  - "qid:Q6962343|name:Papa told me 春"
+  - qid:Q6962343|name:Papa told me
+  - qid:Q6962343|name:Papa told me 夏
+  - qid:Q6962343|name:Papa told me 秋
+  - qid:Q6962343|name:Papa told me 春
   note: 榛野なな恵 Papa told me統合(本編27巻 + 夏/秋/春=Young you特別企画文庫の同一作選集)。 2026-06
 - merge_keys:
-  - "qid:Q3325226|name:こううんりゅうすい〈徐福〉〈信長〉|sub:行雲流水"
-  - "qid:Q3325226|name:こううんりゅうすい〈徐福〉|sub:行雲流水"
-  - "qid:Q3325226|name:こううんりゅうすい〈信長〉|sub:行雲流水"
-  - "qid:Q3325226|name:こううんりゅうすい|sub:行雲流水"
+  - qid:Q3325226|name:こううんりゅうすい〈徐福〉〈信長〉|sub:行雲流水
+  - qid:Q3325226|name:こううんりゅうすい〈徐福〉|sub:行雲流水
+  - qid:Q3325226|name:こううんりゅうすい〈信長〉|sub:行雲流水
+  - qid:Q3325226|name:こううんりゅうすい|sub:行雲流水
   note: 本宮ひろ志 こううんりゅうすい統合(徐福/信長=同一作の連続巻4-8 + ジャンプremix廉価版=promoteでedition drop)。 2026-06
 - merge_keys:
-  - "name:大原一歩|name:千里の道も"
-  - "name:大原一歩|name:千里の道も-アジアへの道-"
-  - "name:大原一歩|name:千里の道も-研修生時代-"
+  - name:大原一歩|name:千里の道も
+  - name:大原一歩|name:千里の道も-アジアへの道-
+  - name:大原一歩|name:千里の道も-研修生時代-
   note: 千里の道も(大原一歩/渡辺敏 ホーム社)統合=本編45巻 + アジアへの道/研修生時代=同一作の文庫版arc編。 2026-06
 - merge_keys:
-  - "qid:Q551551|name:ああっ女神さまっ"
-  - "qid:Q551551|name:ああっ女神さまっ　いいとこどりシリーズ"
-  - "qid:Q551551|name:新装版ああっ女神さまっ"
+  - qid:Q551551|name:ああっ女神さまっ
+  - qid:Q551551|name:ああっ女神さまっ　いいとこどりシリーズ
+  - qid:Q551551|name:新装版ああっ女神さまっ
   note: 藤島康介 ああっ女神さまっ統合=本編48巻 + 新装版 + いいとこどりシリーズ=同一作の版/選集。 2026-06
 - merge_keys:
-  - "qid:Q841880|name:天才柳沢教授の生活"
-  - "qid:Q841880|name:天才柳沢教授の生活「男はここまで純情です」セレクト18"
-  - "qid:Q841880|name:天才柳沢教授の生活「男はこんなにおバカです!」セレクト16"
+  - qid:Q841880|name:天才柳沢教授の生活
+  - qid:Q841880|name:天才柳沢教授の生活「男はここまで純情です」セレクト18
+  - qid:Q841880|name:天才柳沢教授の生活「男はこんなにおバカです!」セレクト16
   note: 山下和美 天才柳沢教授の生活統合=本編34巻 + 男はここまで純情です/おバカです=講談社+α文庫セレクト。 2026-06
 - merge_keys:
-  - "qid:Q3082793|name:Dragon quest-ダイの大冒険"
-  - "qid:Q3082793|name:ドラゴンクエスト ダイの大冒険"
-  - "qid:Q3082793|name:ドラゴンクエスト|sub:ダイの大冒険"
+  - qid:Q3082793|name:Dragon quest-ダイの大冒険
+  - qid:Q3082793|name:ドラゴンクエスト ダイの大冒険
+  - qid:Q3082793|name:ドラゴンクエスト|sub:ダイの大冒険
   note: 稲田浩司/三条陸 ダイの大冒険統合=集英社文庫コミック版/JC/remix=同一作の版違い(aid30871)。 2026-06
 - merge_keys:
-  - "qid:Q106478449|name:ねこようかい"
-  - "qid:Q106478449|name:ねこようかいゴロゴロ"
-  - "qid:Q106478449|name:ねこようかいムギュッ!"
+  - qid:Q106478449|name:ねこようかい
+  - qid:Q106478449|name:ねこようかいゴロゴロ
+  - qid:Q106478449|name:ねこようかいムギュッ!
   note: ぱんだにあ ねこようかい統合=本編11巻 + ゴロゴロ/ムギュッ!=同一作の関連巻(Bamboo comics aid163905)。 2026-06
 - merge_keys:
-  - "qid:Q11278175|name:魔女っ娘つくねちゃん"
-  - "qid:Q11278175|name:魔女っ娘つくねちゃん かおす"
-  - "qid:Q11278175|name:魔女っ娘つくねちゃん よせあつめ"
+  - qid:Q11278175|name:魔女っ娘つくねちゃん
+  - qid:Q11278175|name:魔女っ娘つくねちゃん かおす
+  - qid:Q11278175|name:魔女っ娘つくねちゃん よせあつめ
   note: まがりひろあき 魔女っ娘つくねちゃん統合=本編 + かおす/よせあつめ=同一作の続巻/compilation(aid52943)。 2026-06
 - merge_keys:
-  - "qid:Q11673673|name:アスタロト"
-  - "qid:Q11673673|name:アスタロト-ASTAROT-"
-  - "qid:Q11673673|name:アスタロト・クロニクル"
+  - qid:Q11673673|name:アスタロト
+  - qid:Q11673673|name:アスタロト-ASTAROT-
+  - qid:Q11673673|name:アスタロト・クロニクル
   note: 魔夜峰央 アスタロト統合=プリンセスC原版/秋田文庫/クロニクル=同一作2巻の版違い(aid111778)。 2026-06
 - merge_keys:
-  - "qid:Q6389358|name:猫ラーメン"
-  - "qid:Q6389358|name:猫ラーメンspecial"
-  - "qid:Q6389358|name:猫ラーメンthe movie"
+  - qid:Q6389358|name:猫ラーメン
+  - qid:Q6389358|name:猫ラーメンspecial
+  - qid:Q6389358|name:猫ラーメンthe movie
   note: そにしけんじ 猫ラーメン統合=本編6巻 + special/the movie=同一作の companion巻(aid38078)。 2026-06
 - merge_keys:
-  - "name:Team猫十字社|name:幻獣の國物語"
-  - "qid:Q11571998|name:幻獣の国物語"
-  - "qid:Q11571998|name:幻獣の國物語"
+  - name:Team猫十字社|name:幻獣の國物語
+  - qid:Q11571998|name:幻獣の国物語
+  - qid:Q11571998|name:幻獣の國物語
   note: 猫十字社 幻獣の國物語統合=國/国の漢字異表記 + 巻1-12/13-16/ソノラマ文庫の版・範囲断片(同一作)。 2026-06
 - merge_keys:
-  - "qid:Q11395578|name:義風堂々!!直江兼続-前田慶次花語り"
-  - "name:堀江信彦|name:義風堂々!!直江兼続～前田慶次花語り～"
-  - "name:山田俊明|name:義風堂々!!"
+  - qid:Q11395578|name:義風堂々!!直江兼続-前田慶次花語り
+  - name:堀江信彦|name:義風堂々!!直江兼続～前田慶次花語り～
+  - name:山田俊明|name:義風堂々!!
   note: 原哲夫 義風堂々!!統合=義風堂々!!(巻3)→直江兼続-前田慶次花語り(巻4-14)の改題連続(脚本交代も巻連番)。 2026-06
 - merge_keys:
-  - "name:ヤグチタカオ|name:釣りキチ三平"
-  - "qid:Q3514183|name:釣りキチ三平　海釣りselection"
-  - "qid:Q3514183|name:釣りキチ三平　湖沼釣りselection"
+  - name:ヤグチタカオ|name:釣りキチ三平
+  - qid:Q3514183|name:釣りキチ三平　海釣りselection
+  - qid:Q3514183|name:釣りキチ三平　湖沼釣りselection
   note: 矢口高雄 釣りキチ三平統合=本編 + 海釣り/湖沼釣りselection=講談社漫画文庫テーマ選集(同一作 aid40054)。 2026-06
 - merge_keys:
-  - "qid:Q471103|name:おかしなおかしなあの子 さるとびエッちゃん"
-  - "qid:Q471103|name:おかしなおかしなおかしなあの子 さるとびエッちゃん"
-  - "qid:Q471103|name:さるとびエッちゃん"
+  - qid:Q471103|name:おかしなおかしなあの子 さるとびエッちゃん
+  - qid:Q471103|name:おかしなおかしなおかしなあの子 さるとびエッちゃん
+  - qid:Q471103|name:さるとびエッちゃん
   note: 石ノ森章太郎 さるとびエッちゃん統合=愛蔵版(おかしな…あの子)+双葉文庫=同一作の版違い(aid164716)。 2026-06
 - merge_keys:
-  - "qid:Q11422790|name:あおい蠢動"
-  - "qid:Q11422790|name:あかい蠢動"
-  - "qid:Q11422790|name:蠢動"
+  - qid:Q11422790|name:あおい蠢動
+  - qid:Q11422790|name:あかい蠢動
+  - qid:Q11422790|name:蠢動
   note: 園山二美 蠢動統合=原作蠢動(1998)+あおい蠢動/あかい蠢動=園山二美作品集(ALTERNATIVE版、aid179034)。 2026-06
 - merge_keys:
-  - "qid:Q7339093|name:美男の殿堂"
-  - "qid:Q7339093|name:美男の殿堂DX"
-  - "qid:Q7339093|name:美男の殿堂Z"
+  - qid:Q7339093|name:美男の殿堂
+  - qid:Q7339093|name:美男の殿堂DX
+  - qid:Q7339093|name:美男の殿堂Z
   note: 神葉理世 美男の殿堂統合=本編+DX+Z=同一BL作の版/続巻(Be-boy aid42079)。 2026-06
 - merge_keys:
-  - "name:ホーム社|name:まじめに!男女交際"
-  - "name:創美社|name:やっぱりまじめに!男女交際"
-  - "qid:Q11536967|name:それでもまじめに!男女交際"
+  - name:ホーム社|name:まじめに!男女交際
+  - name:創美社|name:やっぱりまじめに!男女交際
+  - qid:Q11536967|name:それでもまじめに!男女交際
   note: 桃伊いづみ まじめに!男女交際統合=まじめに/やっぱり/それでも=マーガレット同一継続シリーズ(aid191368)。 2026-06
 - merge_keys:
-  - "qid:Q11606008|name:それでいい。|sub:自分を認めてラクになる対人関係入門"
-  - "qid:Q11606008|name:やっぱり、それでいい。|sub:人の話を聞くストレスが自分の癒しに変わる方法"
-  - "qid:Q11606008|name:夫婦・パートナー関係もそれでいい。"
+  - qid:Q11606008|name:それでいい。|sub:自分を認めてラクになる対人関係入門
+  - qid:Q11606008|name:やっぱり、それでいい。|sub:人の話を聞くストレスが自分の癒しに変わる方法
+  - qid:Q11606008|name:夫婦・パートナー関係もそれでいい。
   note: 細川貂々/水島広子 それでいい。統合=それでいい/やっぱり/夫婦パートナーも=同一エッセイ漫画継続シリーズ(aid210357)。 2026-06
 - merge_keys:
-  - "name:高田裕三,もりやまゆうじ|name:万能文化猫娘"
-  - "qid:Q1970474|name:万能文化猫娘 CONPLETE"
+  - name:高田裕三,もりやまゆうじ|name:万能文化猫娘
+  - qid:Q1970474|name:万能文化猫娘 CONPLETE
   note: 高田裕三 万能文化猫娘統合=本編+CONPLETE(完全版)。 OVA SERIES=アニメコミックdrop(aid39888)。 2026-06
 - merge_keys:
-  - "name:中村聡|name:デュエル・マスターズ"
-  - "name:中村聡|name:DUEL MASTERS"
+  - name:中村聡|name:デュエル・マスターズ
+  - name:中村聡|name:DUEL MASTERS
   note: 松本しげのぶ デュエル・マスターズ統合=デュエル・マスターズ(和題)+DUEL MASTERS(英題)=同一作(aid48269 巻1-17)。 バーサス(aid126468)は別続編で除外。 2026-06
 - merge_keys:
-  - "qid:Q11489301|name:呪"
-  - "qid:Q8972895|name:怨"
-  - "qid:Q8972895|name:妖"
+  - qid:Q11489301|name:呪
+  - qid:Q8972895|name:怨
+  - qid:Q8972895|name:妖
   note: 犬木加奈子 呪/怨/妖統合=あすかコミックスDX連番ISBN(528979/528986/528993)同年同社=1シリーズ3巻(aid140523)。 2026-06
 - merge_keys:
-  - "qid:Q3076805|name:ゴブリンズ・ライ"
-  - "qid:Q3076805|name:サタニックブランチ"
-  - "qid:Q3076805|name:ランプシェード"
+  - qid:Q3076805|name:ゴブリンズ・ライ
+  - qid:Q3076805|name:サタニックブランチ
+  - qid:Q3076805|name:ランプシェード
   note: 坂田靖子 変人探偵Mシリーズ統合=ゴブリンズ・ライ/サタニックブランチ/ランプシェード=JOUR同一連作各話(aid157639)。 2026-06
 - merge_keys:
-  - "name:岡本蛍|name:おもひでぽろぽろ"
-  - "qid:Q17161729|name:おもひでぽろぽろ"
-  - "qid:Q55400|name:おもひでぽろぽろ"
+  - name:岡本蛍|name:おもひでぽろぽろ
+  - qid:Q17161729|name:おもひでぽろぽろ
+  - qid:Q55400|name:おもひでぽろぽろ
   note: 刀根夕子/岡本螢 おもひでぽろぽろ統合=集英社文庫/文春ジブリ文庫/アニメージュ=同一作の版違い(aid48010)。 2026-06
 - merge_keys:
-  - "name:永井豪＆ダイナミックプロ|name:激マン! マジンガーZ編"
-  - "name:永井豪&ダイナミックプロ|name:激マン!スペシャル"
-  - "qid:Q551359|name:激マン!デビルマンの章"
+  - name:永井豪＆ダイナミックプロ|name:激マン! マジンガーZ編
+  - name:永井豪&ダイナミックプロ|name:激マン!スペシャル
+  - qid:Q551359|name:激マン!デビルマンの章
   note: 永井豪 激マン!統合=マジンガーZ編/デビルマンの章/スペシャル=Wikipedia「同一作品の各編」(週刊漫画ゴラク連載 aid92080)。 2026-06 Wiki確証
 - merge_keys:
-  - "qid:Q20039873|name:ぐだぐだエース"
-  - "qid:Q20039873|name:コハエース"
-  - "qid:Q20039873|name:コハエースEX"
-  - "qid:Q20039873|name:コハエースXP"
-  - "qid:Q20039873|name:コハエースこれくしょん"
+  - qid:Q20039873|name:ぐだぐだエース
+  - qid:Q20039873|name:コハエース
+  - qid:Q20039873|name:コハエースEX
+  - qid:Q20039873|name:コハエースXP
+  - qid:Q20039873|name:コハエースこれくしょん
   note: 経験値 コハエース統合=コハエース/EX/XP/これくしょん/ぐだぐだエース=Wikipedia「単一シリーズの段階的改題」(コンプティーク aid100260)。 2026-06 Wiki確証
 - merge_keys:
-  - "qid:Q253412|name:カフカ"
-  - "qid:Q253412|name:赤い羊の刻印"
-  - "qid:Q253412|name:伯爵カイン"
-  - "qid:Q253412|name:忘れられたジュリエット"
+  - qid:Q253412|name:カフカ
+  - qid:Q253412|name:赤い羊の刻印
+  - qid:Q253412|name:伯爵カイン
+  - qid:Q253412|name:忘れられたジュリエット
   note: 由貴香織里 伯爵カインシリーズ統合=カフカ/赤い羊の刻印/伯爵カイン/忘れられたジュリエット=Wikipedia「5部作」構成作(aid30885)。 2026-06 Wiki確証
 - merge_keys:
-  - "qid:Q11470122|name:最終戦争"
-  - "qid:Q11470122|name:最終戦争伝説"
-  - "qid:Q11470122|name:十蘭"
+  - qid:Q11470122|name:最終戦争
+  - qid:Q11470122|name:最終戦争伝説
+  - qid:Q11470122|name:十蘭
   note: 山田ミネコ 最終戦争シリーズ統合=最終戦争(=十蘭の改題同作)/最終戦争伝説=Wikipedia同一シリーズ(aid134173)。 2026-06 Wiki確証
 - merge_keys:
-  - "qid:Q6392014|name:コンフュージョン"
-  - "qid:Q6392014|name:ダーク・マーメイド"
-  - "qid:Q6392014|name:ラスト・クリエイター"
-  - "qid:Q6392014|name:ラミア"
+  - qid:Q6392014|name:コンフュージョン
+  - qid:Q6392014|name:ダーク・マーメイド
+  - qid:Q6392014|name:ラスト・クリエイター
+  - qid:Q6392014|name:ラミア
   note: 矢野健太郎 邪神伝説シリーズ統合=コンフュージョン/ダーク・マーメイド/ラスト・クリエイター/ラミア=Wikipedia「邪神伝説シリーズ5作品」(クトゥルー神話 aid97079)。 2026-06 Wiki確証
 - merge_keys:
-  - "name:ホーム社|name:テニスの王子様"
-  - "qid:Q3181532|name:テニスの王子様"
-  - "qid:Q3181532|name:テニスの王子様 完全版 season 1"
-  - "qid:Q3181532|name:テニスの王子様 完全版 season 2"
-  - "qid:Q3181532|name:テニスの王子様 完全版 season 3"
-  - "qid:Q3181532|name:テニスの王子様 完全版season1"
+  - name:ホーム社|name:テニスの王子様
+  - qid:Q3181532|name:テニスの王子様
+  - qid:Q3181532|name:テニスの王子様 完全版 season 1
+  - qid:Q3181532|name:テニスの王子様 完全版 season 2
+  - qid:Q3181532|name:テニスの王子様 完全版 season 3
+  - qid:Q3181532|name:テニスの王子様 完全版season1
   note: 許斐剛 テニスの王子様統合=本編1-42 + 巻21-26分裂断片(ホーム社claster) + 完全版season1-3(愛蔵版)=同一作の版。 都大会/関東/全国大会編=アニメフィルムコミックでdrop、 新テニス(続編)は別ページ。 2026-06
 - merge_keys:
-  - "qid:Q3776935|name:アポロンの哀しみ"
-  - "qid:Q3776935|name:オデュッセウスの航海"
-  - "qid:Q3776935|name:オリュンポスの神々"
-  - "qid:Q3776935|name:トロイの木馬"
-  - "qid:Q3776935|name:マンガギリシア神話"
-  - "qid:Q3776935|name:マンガギリシア神話 トロイの木馬"
-  - "qid:Q3776935|name:英雄ヘラクレス"
-  - "qid:Q3776935|name:悲劇の王オイディプス"
-  - "qid:Q3776935|name:冥界のオルフェウス"
+  - qid:Q3776935|name:アポロンの哀しみ
+  - qid:Q3776935|name:オデュッセウスの航海
+  - qid:Q3776935|name:オリュンポスの神々
+  - qid:Q3776935|name:トロイの木馬
+  - qid:Q3776935|name:マンガギリシア神話
+  - qid:Q3776935|name:マンガギリシア神話 トロイの木馬
+  - qid:Q3776935|name:英雄ヘラクレス
+  - qid:Q3776935|name:悲劇の王オイディプス
+  - qid:Q3776935|name:冥界のオルフェウス
   note: 里中満智子 マンガ ギリシア神話統合=全8巻シリーズ(検索確証=オリュンポスの神々が1巻/トロイの木馬/英雄ヘラクレス/悲劇の王オイディプス/冥界のオルフェウス/アポロンの哀しみ/オデュッセウスの航海、 中公文庫 aid92278)。 2026-06
 - merge_keys:
-  - "name:CLAMP|name:CLAMP PREMIUM COLLECTION CLAMP学園探偵団"
-  - "name:CLAMP|name:CLAMP学園探偵団"
+  - name:CLAMP|name:CLAMP PREMIUM COLLECTION CLAMP学園探偵団
+  - name:CLAMP|name:CLAMP学園探偵団
   note: ×2同一著者ペア統合(EDITION=版違い:文庫/新装版/完全版/PREMIUM等) 2026-06
 - merge_keys:
-  - "name:CLAMP|name:CLAMP PREMIUM COLLECTIONちょびっツ"
-  - "name:Clamp|name:ちょびっツ"
+  - name:CLAMP|name:CLAMP PREMIUM COLLECTIONちょびっツ
+  - name:Clamp|name:ちょびっツ
   note: ×2同一著者ペア統合(EDITION=版違い:文庫/新装版/完全版/PREMIUM等) 2026-06
 - merge_keys:
-  - "name:CLAMP|name:CLAMP PREMIUM COLLECTION東京BABYLON"
-  - "name:CLAMP|name:東京BABYLON"
+  - name:CLAMP|name:CLAMP PREMIUM COLLECTION東京BABYLON
+  - name:CLAMP|name:東京BABYLON
   note: ×2同一著者ペア統合(EDITION=版違い:文庫/新装版/完全版/PREMIUM等) 2026-06
 - merge_keys:
-  - "name:コミックス|name:野球狂の詩"
-  - "qid:Q7497596|name:野球狂の詩 愛蔵版"
+  - name:コミックス|name:野球狂の詩
+  - qid:Q7497596|name:野球狂の詩 愛蔵版
   note: ×2同一著者ペア統合(EDITION=版違い:文庫/新装版/完全版/PREMIUM等) 2026-06
 - merge_keys:
-  - "qid:Q11586417|name:純潔のマリア"
-  - "qid:Q11586417|name:新装版純潔のマリア"
+  - qid:Q11586417|name:純潔のマリア
+  - qid:Q11586417|name:新装版純潔のマリア
   note: ×2同一著者ペア統合(EDITION=版違い:文庫/新装版/完全版/PREMIUM等) 2026-06
 - merge_keys:
-  - "qid:Q11627987|name:世界の終わりの魔法使い"
-  - "qid:Q11627987|name:世界の終わりの魔法使い完全版"
+  - qid:Q11627987|name:世界の終わりの魔法使い
+  - qid:Q11627987|name:世界の終わりの魔法使い完全版
   note: ×2同一著者ペア統合(EDITION=版違い:文庫/新装版/完全版/PREMIUM等) 2026-06
 - merge_keys:
-  - "qid:Q11648718|name:ブリザードアクセル"
-  - "qid:Q11648718|name:新装版ブリザードアクセル"
+  - qid:Q11648718|name:ブリザードアクセル
+  - qid:Q11648718|name:新装版ブリザードアクセル
   note: ×2同一著者ペア統合(EDITION=版違い:文庫/新装版/完全版/PREMIUM等) 2026-06
 - merge_keys:
-  - "name:古徳稔|name:リボンの騎士"
-  - "qid:Q193300|name:リボンの騎士 ≪なかよしオリジナル版≫ 復刻大全集"
+  - name:古徳稔|name:リボンの騎士
+  - qid:Q193300|name:リボンの騎士 ≪なかよしオリジナル版≫ 復刻大全集
   note: ×2同一著者ペア統合(EDITION=版違い:文庫/新装版/完全版/PREMIUM等) 2026-06
 - merge_keys:
-  - "name:C.H. LINE|name:FRONT MISSION DOG LIFE ＆ DOG STILE"
-  - "name:C.H.Line|name:Front mission dog life ＆ dog style"
+  - name:C.H. LINE|name:FRONT MISSION DOG LIFE ＆ DOG STILE
+  - name:C.H.Line|name:Front mission dog life ＆ dog style
   note: ×2同一著者ペア統合(SCRIPT_VARIANT=同anilist_id・英カナ/表記揺れの同作) 2026-06
 - merge_keys:
-  - "name:CLAMP|name:CLAMP PREMIUM COLLECTION魔法騎士(マジックナイト)レイアース"
-  - "name:CLAMP|name:魔法騎士レイアース"
+  - name:CLAMP|name:CLAMP PREMIUM COLLECTION魔法騎士(マジックナイト)レイアース
+  - name:CLAMP|name:魔法騎士レイアース
   note: ×2同一著者ペア統合(SCRIPT_VARIANT=同anilist_id・英カナ/表記揺れの同作) 2026-06
 - merge_keys:
-  - "name:CLAMP|name:CLAMP PREMIUM COLLECTION魔法騎士(マジックナイト)レイアース2"
-  - "name:CLAMP|name:魔法騎士レイアース2"
+  - name:CLAMP|name:CLAMP PREMIUM COLLECTION魔法騎士(マジックナイト)レイアース2
+  - name:CLAMP|name:魔法騎士レイアース2
   note: ×2同一著者ペア統合(SCRIPT_VARIANT=同anilist_id・英カナ/表記揺れの同作) 2026-06
 - merge_keys:
-  - "name:hyp|name:転生しちゃったよ（いや、ごめん）"
-  - "name:hyp|name:転生しちゃったよ〈いや、ごめん〉"
+  - name:hyp|name:転生しちゃったよ（いや、ごめん）
+  - name:hyp|name:転生しちゃったよ〈いや、ごめん〉
   note: ×2同一著者ペア統合(SCRIPT_VARIANT=同anilist_id・英カナ/表記揺れの同作) 2026-06
 - merge_keys:
-  - "name:Jay.|name:SHERLOCKベルグレービアの醜聞"
-  - "name:Jay.|name:SHERLOCK大いなるゲーム"
+  - name:Jay.|name:SHERLOCKベルグレービアの醜聞
+  - name:Jay.|name:SHERLOCK大いなるゲーム
   note: ×2同一著者ペア統合(SCRIPT_VARIANT=同anilist_id・英カナ/表記揺れの同作) 2026-06
 - merge_keys:
-  - "name:Memeco Arii|name:Hitorijime my hero"
-  - "name:ありいめめこ|name:ひとりじめマイヒーロー"
+  - name:Memeco Arii|name:Hitorijime my hero
+  - name:ありいめめこ|name:ひとりじめマイヒーロー
   note: ×2同一著者ペア統合(SCRIPT_VARIANT=同anilist_id・英カナ/表記揺れの同作) 2026-06
 - merge_keys:
-  - "name:Ume|name:Tokyo toyboxes"
-  - "name:うめ|name:東京トイボクシーズ"
+  - name:Ume|name:Tokyo toyboxes
+  - name:うめ|name:東京トイボクシーズ
   note: ×2同一著者ペア統合(SCRIPT_VARIANT=同anilist_id・英カナ/表記揺れの同作) 2026-06
 - merge_keys:
-  - "name:こうじま奈月|name:君主サマの恋のお相手"
-  - "name:こうじま奈月|name:君主サマの恋は勝手!"
+  - name:こうじま奈月|name:君主サマの恋のお相手
+  - name:こうじま奈月|name:君主サマの恋は勝手!
   note: ×2同一著者ペア統合(SCRIPT_VARIANT=同anilist_id・英カナ/表記揺れの同作) 2026-06
 - merge_keys:
-  - "name:スタジオねこ|name:BAMBOO BLADE B"
-  - "qid:Q11423147|name:バンブーブレードビー"
+  - name:スタジオねこ|name:BAMBOO BLADE B
+  - qid:Q11423147|name:バンブーブレードビー
   note: ×2同一著者ペア統合(SCRIPT_VARIANT=同anilist_id・英カナ/表記揺れの同作) 2026-06
 - merge_keys:
-  - "name:ダイナミックプロ|name:ゴッドマジンガー"
-  - "qid:Q551359|name:魔神伝説"
+  - name:ダイナミックプロ|name:ゴッドマジンガー
+  - qid:Q551359|name:魔神伝説
   note: ×2同一著者ペア統合(SCRIPT_VARIANT=同anilist_id・英カナ/表記揺れの同作) 2026-06
 - merge_keys:
-  - "name:ダイナミックプロ|name:マジンサーガ"
-  - "qid:Q551359|name:魔神サーガ"
+  - name:ダイナミックプロ|name:マジンサーガ
+  - qid:Q551359|name:魔神サーガ
   note: ×2同一著者ペア統合(SCRIPT_VARIANT=同anilist_id・英カナ/表記揺れの同作) 2026-06
 - merge_keys:
-  - "name:チダケイコ|name:4コマカピバラさん"
-  - "name:TRYWORKS|name:くらだしカピバラさん"
+  - name:チダケイコ|name:4コマカピバラさん
+  - name:TRYWORKS|name:くらだしカピバラさん
   note: ×2同一著者ペア統合(SCRIPT_VARIANT=同anilist_id・英カナ/表記揺れの同作) 2026-06
 - merge_keys:
-  - "name:ホーム社|name:BASTARD!!"
-  - "name:萩原一至,岸間信明|name:バスタード"
+  - name:ホーム社|name:BASTARD!!
+  - name:萩原一至,岸間信明|name:バスタード
   note: ×2同一著者ペア統合(SCRIPT_VARIANT=同anilist_id・英カナ/表記揺れの同作) 2026-06
 - merge_keys:
-  - "name:モーリス・ルブラン|name:怪盗ルパン伝〈アバンチュリエ〉"
-  - "name:モーリス・ルブラン|name:怪盗ルパン伝アバンチュリエ 登場編"
+  - name:モーリス・ルブラン|name:怪盗ルパン伝〈アバンチュリエ〉
+  - name:モーリス・ルブラン|name:怪盗ルパン伝アバンチュリエ 登場編
   note: ×2同一著者ペア統合(SCRIPT_VARIANT=同anilist_id・英カナ/表記揺れの同作) 2026-06
 - merge_keys:
-  - "name:花津美子|name:MADARA青"
-  - "name:花津美子|name:MADARAギルガメシュ・サーガ"
+  - name:花津美子|name:MADARA青
+  - name:花津美子|name:MADARAギルガメシュ・サーガ
   note: ×2同一著者ペア統合(SCRIPT_VARIANT=同anilist_id・英カナ/表記揺れの同作) 2026-06
 - merge_keys:
-  - "name:関川夏央|name:『坊っちゃん』の時代"
-  - "name:関川夏央|name:坊ちゃんの時代"
+  - name:関川夏央|name:『坊っちゃん』の時代
+  - name:関川夏央|name:坊ちゃんの時代
   note: ×2同一著者ペア統合(SCRIPT_VARIANT=同anilist_id・英カナ/表記揺れの同作) 2026-06
 - merge_keys:
-  - "name:亀屋樹|name:ファイナルファンタジーロスト・ストレンジャー"
-  - "name:水瀬葉月|name:Final fantasy lost stranger"
+  - name:亀屋樹|name:ファイナルファンタジーロスト・ストレンジャー
+  - name:水瀬葉月|name:Final fantasy lost stranger
   note: ×2同一著者ペア統合(SCRIPT_VARIANT=同anilist_id・英カナ/表記揺れの同作) 2026-06
 - merge_keys:
-  - "name:近田火日輝|name:國崎出雲の事情"
-  - "qid:Q11276659|name:国崎出雲の事情"
+  - name:近田火日輝|name:國崎出雲の事情
+  - qid:Q11276659|name:国崎出雲の事情
   note: ×2同一著者ペア統合(SCRIPT_VARIANT=同anilist_id・英カナ/表記揺れの同作) 2026-06
 - merge_keys:
-  - "name:広里かな|name:オメガポルノcase. たつる"
-  - "name:広里かな|name:オメガポルノcase. 千昭"
+  - name:広里かな|name:オメガポルノcase. たつる
+  - name:広里かな|name:オメガポルノcase. 千昭
   note: ×2同一著者ペア統合(SCRIPT_VARIANT=同anilist_id・英カナ/表記揺れの同作) 2026-06
 - merge_keys:
-  - "name:佐木飛朗斗|name:疾風(かぜ)伝説特攻(ぶっこみ)の拓"
-  - "name:佐木飛朗斗|name:特攻の拓"
+  - name:佐木飛朗斗|name:疾風(かぜ)伝説特攻(ぶっこみ)の拓
+  - name:佐木飛朗斗|name:特攻の拓
   note: ×2同一著者ペア統合(SCRIPT_VARIANT=同anilist_id・英カナ/表記揺れの同作) 2026-06
 - merge_keys:
-  - "name:三枚堂達也|name:紅葉の棋節"
-  - "qid:Q108110456|name:モミジの棋節"
+  - name:三枚堂達也|name:紅葉の棋節
+  - qid:Q108110456|name:モミジの棋節
   note: ×2同一著者ペア統合(SCRIPT_VARIANT=同anilist_id・英カナ/表記揺れの同作) 2026-06
 - merge_keys:
-  - "name:七三太朗|name:Dreams"
-  - "name:七三太朗|name:ドリームス"
+  - name:七三太朗|name:Dreams
+  - name:七三太朗|name:ドリームス
   note: ×2同一著者ペア統合(SCRIPT_VARIANT=同anilist_id・英カナ/表記揺れの同作) 2026-06
 - merge_keys:
-  - "name:城平京|name:スパイラル"
-  - "qid:Q5349996|name:SPIRAL"
+  - name:城平京|name:スパイラル
+  - qid:Q5349996|name:SPIRAL
   note: ×2同一著者ペア統合(SCRIPT_VARIANT=同anilist_id・英カナ/表記揺れの同作) 2026-06
 - merge_keys:
-  - "name:森長あやみ|name:ぶんぶくたぬきのティーパーティ"
-  - "name:森長あやみ|name:ぶんぶくティーポット+"
+  - name:森長あやみ|name:ぶんぶくたぬきのティーパーティ
+  - name:森長あやみ|name:ぶんぶくティーポット+
   note: ×2同一著者ペア統合(SCRIPT_VARIANT=同anilist_id・英カナ/表記揺れの同作) 2026-06
 - merge_keys:
-  - "name:神堂潤|name:red Eyes"
-  - "name:神堂潤|name:レッドアイズ"
+  - name:神堂潤|name:red Eyes
+  - name:神堂潤|name:レッドアイズ
   note: ×2同一著者ペア統合(SCRIPT_VARIANT=同anilist_id・英カナ/表記揺れの同作) 2026-06
 - merge_keys:
-  - "name:天ヶ江ルチカ|name:まんがグリム童話"
-  - "qid:Q45819841|name:淫楽に囚われたグリム童話"
+  - name:天ヶ江ルチカ|name:まんがグリム童話
+  - qid:Q45819841|name:淫楽に囚われたグリム童話
   note: ×2同一著者ペア統合(SCRIPT_VARIANT=同anilist_id・英カナ/表記揺れの同作) 2026-06
 - merge_keys:
-  - "name:任天堂株式会社|name:METROID"
-  - "qid:Q11395646|name:メトロイド"
+  - name:任天堂株式会社|name:METROID
+  - qid:Q11395646|name:メトロイド
   note: ×2同一著者ペア統合(SCRIPT_VARIANT=同anilist_id・英カナ/表記揺れの同作) 2026-06
 - merge_keys:
-  - "name:ホーム社|name:Dr.スランプ"
-  - "qid:Q208582|name:Dr.Slump"
+  - name:ホーム社|name:Dr.スランプ
+  - qid:Q208582|name:Dr.Slump
   note: ×2同一著者ペア統合(SCRIPT_VARIANT=同anilist_id・英カナ/表記揺れの同作) 2026-06
 - merge_keys:
-  - "name:富野由悠季|name:BRAIN POWERD"
-  - "name:富野由悠季|name:ブレンパワード"
+  - name:富野由悠季|name:BRAIN POWERD
+  - name:富野由悠季|name:ブレンパワード
   note: ×2同一著者ペア統合(SCRIPT_VARIANT=同anilist_id・英カナ/表記揺れの同作) 2026-06
 - merge_keys:
-  - "qid:Q1012736|name:殲鬼戦記ももたま"
-  - "qid:Q1012736|name:殱鬼戦記ももたま"
+  - qid:Q1012736|name:殲鬼戦記ももたま
+  - qid:Q1012736|name:殱鬼戦記ももたま
   note: ×2同一著者ペア統合(SCRIPT_VARIANT=同anilist_id・英カナ/表記揺れの同作) 2026-06
 - merge_keys:
-  - "qid:Q105258445|name:KASHI BATTLE"
-  - "qid:Q105258445|name:カシバトル"
+  - qid:Q105258445|name:KASHI BATTLE
+  - qid:Q105258445|name:カシバトル
   note: ×2同一著者ペア統合(SCRIPT_VARIANT=同anilist_id・英カナ/表記揺れの同作) 2026-06
 - merge_keys:
-  - "qid:Q1056339|name:稲作"
-  - "qid:Q1056339|name:僕とお昼を"
+  - qid:Q1056339|name:稲作
+  - qid:Q1056339|name:僕とお昼を
   note: ×2同一著者ペア統合(SCRIPT_VARIANT=同anilist_id・英カナ/表記揺れの同作) 2026-06
 - merge_keys:
-  - "qid:Q1057739|name:FOOL for THE CITY"
-  - "qid:Q1057739|name:フール・フォー・ザ・シティ"
+  - qid:Q1057739|name:FOOL for THE CITY
+  - qid:Q1057739|name:フール・フォー・ザ・シティ
   note: ×2同一著者ペア統合(SCRIPT_VARIANT=同anilist_id・英カナ/表記揺れの同作) 2026-06
 - merge_keys:
-  - "qid:Q11045541|name:Would you suck my blood?"
-  - "qid:Q11045541|name:僕の血吸ってくれませんか"
+  - qid:Q11045541|name:Would you suck my blood?
+  - qid:Q11045541|name:僕の血吸ってくれませんか
   note: ×2同一著者ペア統合(SCRIPT_VARIANT=同anilist_id・英カナ/表記揺れの同作) 2026-06
 - merge_keys:
-  - "qid:Q11265379|name:Akuma no mama"
-  - "qid:Q11265379|name:あくまのまま"
+  - qid:Q11265379|name:Akuma no mama
+  - qid:Q11265379|name:あくまのまま
   note: ×2同一著者ペア統合(SCRIPT_VARIANT=同anilist_id・英カナ/表記揺れの同作) 2026-06
 - merge_keys:
-  - "qid:Q11266807|name:Hiyoko brand"
-  - "qid:Q11266807|name:おくさまは女子高生"
+  - qid:Q11266807|name:Hiyoko brand
+  - qid:Q11266807|name:おくさまは女子高生
   note: ×2同一著者ペア統合(SCRIPT_VARIANT=同anilist_id・英カナ/表記揺れの同作) 2026-06
 - merge_keys:
-  - "qid:Q11267908|name:たたらの辻に…"
-  - "qid:Q11267908|name:水面の郷・水底の守"
+  - qid:Q11267908|name:たたらの辻に…
+  - qid:Q11267908|name:水面の郷・水底の守
   note: ×2同一著者ペア統合(SCRIPT_VARIANT=同anilist_id・英カナ/表記揺れの同作) 2026-06
 - merge_keys:
-  - "qid:Q11271654|name:モフ・モフいちごあじ"
-  - "qid:Q11271654|name:モフ☆モフ"
+  - qid:Q11271654|name:モフ・モフいちごあじ
+  - qid:Q11271654|name:モフ☆モフ
   note: ×2同一著者ペア統合(SCRIPT_VARIANT=同anilist_id・英カナ/表記揺れの同作) 2026-06
 - merge_keys:
-  - "qid:Q11273427|name:恋した人は、妹の代わりに死んでくれと言った。-妹と結婚した片思い相手がなぜ今さら私のもとに?と思ったら-@COMIC"
-  - "qid:Q11273427|name:恋した人は、妹の代わりに死んでくれと言った。@COMIC|sub:妹と結婚した片思い相手がなぜ今さら私のもとに?と思ったら"
+  - qid:Q11273427|name:恋した人は、妹の代わりに死んでくれと言った。-妹と結婚した片思い相手がなぜ今さら私のもとに?と思ったら-@COMIC
+  - qid:Q11273427|name:恋した人は、妹の代わりに死んでくれと言った。@COMIC|sub:妹と結婚した片思い相手がなぜ今さら私のもとに?と思ったら
   note: ×2同一著者ペア統合(SCRIPT_VARIANT=同anilist_id・英カナ/表記揺れの同作) 2026-06
 - merge_keys:
-  - "qid:Q11279038|name:ショコラの魔法 ティアーズコレクション"
-  - "qid:Q11279038|name:ショコラの魔法 パーフェクトコレクション"
+  - qid:Q11279038|name:ショコラの魔法 ティアーズコレクション
+  - qid:Q11279038|name:ショコラの魔法 パーフェクトコレクション
   note: ×2同一著者ペア統合(SCRIPT_VARIANT=同anilist_id・英カナ/表記揺れの同作) 2026-06
 - merge_keys:
-  - "qid:Q11303326|name:Gurazeni"
-  - "qid:Q11303326|name:グラゼニ ～東京ドーム編～"
+  - qid:Q11303326|name:Gurazeni
+  - qid:Q11303326|name:グラゼニ ～東京ドーム編～
   note: ×2同一著者ペア統合(SCRIPT_VARIANT=同anilist_id・英カナ/表記揺れの同作) 2026-06
 - merge_keys:
-  - "qid:Q11303326|name:グラゼニ～パ・リーグ編～"
-  - "qid:Q11303326|name:グラゼニ～東京ドーム編～"
+  - qid:Q11303326|name:グラゼニ～パ・リーグ編～
+  - qid:Q11303326|name:グラゼニ～東京ドーム編～
   note: ×2同一著者ペア統合(SCRIPT_VARIANT=同anilist_id・英カナ/表記揺れの同作) 2026-06
 - merge_keys:
-  - "qid:Q11366646|name:How to discipline shishunki chan"
-  - "qid:Q11366646|name:思春期ちゃんのしつけかた"
+  - qid:Q11366646|name:How to discipline shishunki chan
+  - qid:Q11366646|name:思春期ちゃんのしつけかた
   note: ×2同一著者ペア統合(SCRIPT_VARIANT=同anilist_id・英カナ/表記揺れの同作) 2026-06
 - merge_keys:
-  - "qid:Q11382767|name:〔アキ〕姫"
-  - "qid:Q11382767|name:燁姫"
+  - qid:Q11382767|name:〔アキ〕姫
+  - qid:Q11382767|name:燁姫
   note: ×2同一著者ペア統合(SCRIPT_VARIANT=同anilist_id・英カナ/表記揺れの同作) 2026-06
 - merge_keys:
-  - "qid:Q11388090|name:Check!!"
-  - "qid:Q11388090|name:HAPPYのRECIPE"
+  - qid:Q11388090|name:Check!!
+  - qid:Q11388090|name:HAPPYのRECIPE
   note: ×2同一著者ペア統合(SCRIPT_VARIANT=同anilist_id・英カナ/表記揺れの同作) 2026-06
 - merge_keys:
-  - "qid:Q1141948|name:へび女"
-  - "qid:Q1141948|name:へび少女"
+  - qid:Q1141948|name:へび女
+  - qid:Q1141948|name:へび少女
   note: ×2同一著者ペア統合(SCRIPT_VARIANT=同anilist_id・英カナ/表記揺れの同作) 2026-06
 - merge_keys:
-  - "qid:Q1141948|name:赤んぼう少女"
-  - "qid:Q1141948|name:赤んぼ少女"
+  - qid:Q1141948|name:赤んぼう少女
+  - qid:Q1141948|name:赤んぼ少女
   note: ×2同一著者ペア統合(SCRIPT_VARIANT=同anilist_id・英カナ/表記揺れの同作) 2026-06
 - merge_keys:
-  - "qid:Q1142135|name:ANGEL/DUST neo"
-  - "qid:Q1142135|name:エンジェル/ダスト"
+  - qid:Q1142135|name:ANGEL/DUST neo
+  - qid:Q1142135|name:エンジェル/ダスト
   note: ×2同一著者ペア統合(SCRIPT_VARIANT=同anilist_id・英カナ/表記揺れの同作) 2026-06
 - merge_keys:
-  - "qid:Q11430528|name:ラグナ戦記"
-  - "qid:Q11430528|name:雨の法則"
+  - qid:Q11430528|name:ラグナ戦記
+  - qid:Q11430528|name:雨の法則
   note: ×2同一著者ペア統合(SCRIPT_VARIANT=同anilist_id・英カナ/表記揺れの同作) 2026-06
 - merge_keys:
-  - "qid:Q11454794|name:Are you enemy?"
-  - "qid:Q11454794|name:エンジェリック・カンバセーション"
+  - qid:Q11454794|name:Are you enemy?
+  - qid:Q11454794|name:エンジェリック・カンバセーション
   note: ×2同一著者ペア統合(SCRIPT_VARIANT=同anilist_id・英カナ/表記揺れの同作) 2026-06
 - merge_keys:
-  - "qid:Q11462329|name:Tales of Eternia"
-  - "qid:Q11462329|name:テイルズオブエターニア プレミアムストーリーズ"
+  - qid:Q11462329|name:Tales of Eternia
+  - qid:Q11462329|name:テイルズオブエターニア プレミアムストーリーズ
   note: ×2同一著者ペア統合(SCRIPT_VARIANT=同anilist_id・英カナ/表記揺れの同作) 2026-06
 - merge_keys:
-  - "qid:Q11463964|name:dessin"
-  - "qid:Q11463964|name:NICO SAYS"
+  - qid:Q11463964|name:dessin
+  - qid:Q11463964|name:NICO SAYS
   note: ×2同一著者ペア統合(SCRIPT_VARIANT=同anilist_id・英カナ/表記揺れの同作) 2026-06
 - merge_keys:
-  - "qid:Q11463964|name:Shimi"
-  - "qid:Q11463964|name:凍み"
+  - qid:Q11463964|name:Shimi
+  - qid:Q11463964|name:凍み
   note: ×2同一著者ペア統合(SCRIPT_VARIANT=同anilist_id・英カナ/表記揺れの同作) 2026-06
 - merge_keys:
-  - "qid:Q11534451|name:真・女神転生〔カーン〕"
-  - "name:Atlus|name:真・女神転生if…"
+  - qid:Q11534451|name:真・女神転生〔カーン〕
+  - name:Atlus|name:真・女神転生if…
   note: ×2同一著者ペア統合(SCRIPT_VARIANT=同anilist_id・英カナ/表記揺れの同作) 2026-06
 - merge_keys:
-  - "qid:Q11537925|name:探偵チームKZ事件ノートキーホルダーは知っている"
-  - "qid:Q11537925|name:探偵チームKZ事件ノート消えた自転車は知っている"
+  - qid:Q11537925|name:探偵チームKZ事件ノートキーホルダーは知っている
+  - qid:Q11537925|name:探偵チームKZ事件ノート消えた自転車は知っている
   note: ×2同一著者ペア統合(SCRIPT_VARIANT=同anilist_id・英カナ/表記揺れの同作) 2026-06
 - merge_keys:
-  - "qid:Q11539587|name:カスティリアの貴婦人"
-  - "qid:Q11539587|name:嘆きのトリスタン"
+  - qid:Q11539587|name:カスティリアの貴婦人
+  - qid:Q11539587|name:嘆きのトリスタン
   note: ×2同一著者ペア統合(SCRIPT_VARIANT=同anilist_id・英カナ/表記揺れの同作) 2026-06
 - merge_keys:
-  - "qid:Q11557693|name:闇に光る幼女の目"
-  - "qid:Q11557693|name:夜歩く死体"
+  - qid:Q11557693|name:闇に光る幼女の目
+  - qid:Q11557693|name:夜歩く死体
   note: ×2同一著者ペア統合(SCRIPT_VARIANT=同anilist_id・英カナ/表記揺れの同作) 2026-06
 - merge_keys:
-  - "qid:Q11560486|name:雨降り姫と砂漠王子"
-  - "qid:Q11560486|name:人魚姫と半魚人王子"
+  - qid:Q11560486|name:雨降り姫と砂漠王子
+  - qid:Q11560486|name:人魚姫と半魚人王子
   note: ×2同一著者ペア統合(SCRIPT_VARIANT=同anilist_id・英カナ/表記揺れの同作) 2026-06
 - merge_keys:
-  - "qid:Q11565543|name:わらってごらん"
-  - "qid:Q11565543|name:画太郎先生ありがとう"
+  - qid:Q11565543|name:わらってごらん
+  - qid:Q11565543|name:画太郎先生ありがとう
   note: ×2同一著者ペア統合(SCRIPT_VARIANT=同anilist_id・英カナ/表記揺れの同作) 2026-06
 - merge_keys:
-  - "qid:Q11585349|name:I'm home"
-  - "qid:Q11585349|name:アイムホーム"
+  - qid:Q11585349|name:I'm home
+  - qid:Q11585349|name:アイムホーム
   note: ×2同一著者ペア統合(SCRIPT_VARIANT=同anilist_id・英カナ/表記揺れの同作) 2026-06
 - merge_keys:
-  - "qid:Q11585645|name:北の土竜"
-  - "qid:Q11585645|name:北の土龍"
+  - qid:Q11585645|name:北の土竜
+  - qid:Q11585645|name:北の土龍
   note: ×2同一著者ペア統合(SCRIPT_VARIANT=同anilist_id・英カナ/表記揺れの同作) 2026-06
 - merge_keys:
-  - "name:山田恵子|name:クローバーtrefle"
-  - "qid:Q11596354|name:クローバーtrèfle"
+  - name:山田恵子|name:クローバーtrefle
+  - qid:Q11596354|name:クローバーtrèfle
   note: ×2同一著者ペア統合(SCRIPT_VARIANT=同anilist_id・英カナ/表記揺れの同作) 2026-06
 - merge_keys:
-  - "qid:Q11623533|name:〈急募〉村長さん"
-  - "qid:Q11623533|name:【急募】村長さん"
+  - qid:Q11623533|name:〈急募〉村長さん
+  - qid:Q11623533|name:【急募】村長さん
   note: ×2同一著者ペア統合(SCRIPT_VARIANT=同anilist_id・英カナ/表記揺れの同作) 2026-06
 - merge_keys:
-  - "qid:Q11644242|name:ナイショ×ボーイ 教師（アタシ）にやらせな!"
-  - "qid:Q11644242|name:教師にやらせな!S・T・J"
+  - qid:Q11644242|name:ナイショ×ボーイ 教師（アタシ）にやらせな!
+  - qid:Q11644242|name:教師にやらせな!S・T・J
   note: ×2同一著者ペア統合(SCRIPT_VARIANT=同anilist_id・英カナ/表記揺れの同作) 2026-06
 - merge_keys:
-  - "qid:Q11646326|name:ホールインワン"
-  - "qid:Q11669300|name:HOLEIN ONE"
+  - qid:Q11646326|name:ホールインワン
+  - qid:Q11669300|name:HOLEIN ONE
   note: ×2同一著者ペア統合(SCRIPT_VARIANT=同anilist_id・英カナ/表記揺れの同作) 2026-06
 - merge_keys:
-  - "qid:Q11677543|name:斉木楠雄のΨ (サイ) 難"
-  - "qid:Q11677543|name:超能力者斉木楠雄のΨ難"
+  - qid:Q11677543|name:斉木楠雄のΨ (サイ) 難
+  - qid:Q11677543|name:超能力者斉木楠雄のΨ難
   note: ×2同一著者ペア統合(SCRIPT_VARIANT=同anilist_id・英カナ/表記揺れの同作) 2026-06
 - merge_keys:
-  - "qid:Q1319232|name:猛き竜星"
-  - "name:ホーム社|name:猛き龍星"
+  - qid:Q1319232|name:猛き竜星
+  - name:ホーム社|name:猛き龍星
   note: ×2同一著者ペア統合(SCRIPT_VARIANT=同anilist_id・英カナ/表記揺れの同作) 2026-06
 - merge_keys:
-  - "qid:Q1332841|name:ベスティア"
-  - "qid:Q1332841|name:流月抄"
+  - qid:Q1332841|name:ベスティア
+  - qid:Q1332841|name:流月抄
   note: ×2同一著者ペア統合(SCRIPT_VARIANT=同anilist_id・英カナ/表記揺れの同作) 2026-06
 - merge_keys:
-  - "qid:Q17223912|name:先生の白い嘘"
-  - "qid:Q17223912|name:先生の白い噓"
+  - qid:Q17223912|name:先生の白い嘘
+  - qid:Q17223912|name:先生の白い噓
   note: ×2同一著者ペア統合(SCRIPT_VARIANT=同anilist_id・英カナ/表記揺れの同作) 2026-06
 - merge_keys:
-  - "qid:Q1736792|name:Princess"
-  - "qid:Q1736792|name:美少女創世伝説プリンセス"
+  - qid:Q1736792|name:Princess
+  - qid:Q1736792|name:美少女創世伝説プリンセス
   note: ×2同一著者ペア統合(SCRIPT_VARIANT=同anilist_id・英カナ/表記揺れの同作) 2026-06
 - merge_keys:
-  - "qid:Q193300|name:Dämons"
-  - "qid:Q193300|name:Damons"
+  - qid:Q193300|name:Dämons
+  - qid:Q193300|name:Damons
   note: ×2同一著者ペア統合(SCRIPT_VARIANT=同anilist_id・英カナ/表記揺れの同作) 2026-06
 - merge_keys:
-  - "qid:Q193300|name:GRINGO"
-  - "qid:Q193300|name:グリンゴ"
+  - qid:Q193300|name:GRINGO
+  - qid:Q193300|name:グリンゴ
   note: ×2同一著者ペア統合(SCRIPT_VARIANT=同anilist_id・英カナ/表記揺れの同作) 2026-06
 - merge_keys:
-  - "qid:Q193300|name:ブッキラによろしく!"
-  - "qid:Q193300|name:牙人"
+  - qid:Q193300|name:ブッキラによろしく!
+  - qid:Q193300|name:牙人
   note: ×2同一著者ペア統合(SCRIPT_VARIANT=同anilist_id・英カナ/表記揺れの同作) 2026-06
 - merge_keys:
-  - "qid:Q2279877|name:CROWS"
-  - "qid:Q2279877|name:クローズ"
+  - qid:Q2279877|name:CROWS
+  - qid:Q2279877|name:クローズ
   note: ×2同一著者ペア統合(SCRIPT_VARIANT=同anilist_id・英カナ/表記揺れの同作) 2026-06
 - merge_keys:
-  - "qid:Q242774|name:おひさま笑顔"
-  - "qid:Q242774|name:向日葵"
+  - qid:Q242774|name:おひさま笑顔
+  - qid:Q242774|name:向日葵
   note: ×2同一著者ペア統合(SCRIPT_VARIANT=同anilist_id・英カナ/表記揺れの同作) 2026-06
 - merge_keys:
-  - "qid:Q24863382|name:MURCIELAGO"
-  - "qid:Q24863382|name:Murciélago"
+  - qid:Q24863382|name:MURCIELAGO
+  - qid:Q24863382|name:Murciélago
   note: ×2同一著者ペア統合(SCRIPT_VARIANT=同anilist_id・英カナ/表記揺れの同作) 2026-06
 - merge_keys:
-  - "qid:Q256425|name:ウェディング・ドレス"
-  - "qid:Q256425|name:白いエグモント"
+  - qid:Q256425|name:ウェディング・ドレス
+  - qid:Q256425|name:白いエグモント
   note: ×2同一著者ペア統合(SCRIPT_VARIANT=同anilist_id・英カナ/表記揺れの同作) 2026-06
 - merge_keys:
-  - "qid:Q256425|name:エロイカ"
-  - "qid:Q256425|name:栄光のナポレオン"
+  - qid:Q256425|name:エロイカ
+  - qid:Q256425|name:栄光のナポレオン
   note: ×2同一著者ペア統合(SCRIPT_VARIANT=同anilist_id・英カナ/表記揺れの同作) 2026-06
 - merge_keys:
-  - "qid:Q2608898|name:Gigant"
-  - "qid:Q2608898|name:ギガント"
+  - qid:Q2608898|name:Gigant
+  - qid:Q2608898|name:ギガント
   note: ×2同一著者ペア統合(SCRIPT_VARIANT=同anilist_id・英カナ/表記揺れの同作) 2026-06
 - merge_keys:
-  - "qid:Q2630137|name:BLACK KNIGHT BAT"
-  - "qid:Q2630137|name:BLACK KNIGHTバット"
+  - qid:Q2630137|name:BLACK KNIGHT BAT
+  - qid:Q2630137|name:BLACK KNIGHTバット
   note: ×2同一著者ペア統合(SCRIPT_VARIANT=同anilist_id・英カナ/表記揺れの同作) 2026-06
 - merge_keys:
-  - "qid:Q265061|name:ゴールデンライラック"
-  - "qid:Q265061|name:ばらの花びん"
+  - qid:Q265061|name:ゴールデンライラック
+  - qid:Q265061|name:ばらの花びん
   note: ×2同一著者ペア統合(SCRIPT_VARIANT=同anilist_id・英カナ/表記揺れの同作) 2026-06
 - merge_keys:
-  - "qid:Q2723165|name:CHRNO CRUSADE"
-  - "qid:Q2723165|name:クロノクルセイド"
+  - qid:Q2723165|name:CHRNO CRUSADE
+  - qid:Q2723165|name:クロノクルセイド
   note: ×2同一著者ペア統合(SCRIPT_VARIANT=同anilist_id・英カナ/表記揺れの同作) 2026-06
 - merge_keys:
-  - "qid:Q2875041|name:うさねこちゃん"
-  - "qid:Q2875041|name:ぎんねこMINMIN"
+  - qid:Q2875041|name:うさねこちゃん
+  - qid:Q2875041|name:ぎんねこMINMIN
   note: ×2同一著者ペア統合(SCRIPT_VARIANT=同anilist_id・英カナ/表記揺れの同作) 2026-06
 - merge_keys:
-  - "qid:Q2880551|name:ケータイが落ちていた。"
-  - "qid:Q2880551|name:セブンピース"
+  - qid:Q2880551|name:ケータイが落ちていた。
+  - qid:Q2880551|name:セブンピース
   note: ×2同一著者ペア統合(SCRIPT_VARIANT=同anilist_id・英カナ/表記揺れの同作) 2026-06
 - merge_keys:
-  - "qid:Q29561711|name:Made in Abyss"
-  - "qid:Q29561711|name:メイドインアビス"
+  - qid:Q29561711|name:Made in Abyss
+  - qid:Q29561711|name:メイドインアビス
   note: ×2同一著者ペア統合(SCRIPT_VARIANT=同anilist_id・英カナ/表記揺れの同作) 2026-06
 - merge_keys:
-  - "qid:Q3076805|name:階段宮殿"
-  - "qid:Q3076805|name:天花粉"
+  - qid:Q3076805|name:階段宮殿
+  - qid:Q3076805|name:天花粉
   note: ×2同一著者ペア統合(SCRIPT_VARIANT=同anilist_id・英カナ/表記揺れの同作) 2026-06
 - merge_keys:
-  - "qid:Q3081347|name:Stressers"
-  - "qid:Q3081347|name:ストレッサーズ"
+  - qid:Q3081347|name:Stressers
+  - qid:Q3081347|name:ストレッサーズ
   note: ×2同一著者ペア統合(SCRIPT_VARIANT=同anilist_id・英カナ/表記揺れの同作) 2026-06
 - merge_keys:
-  - "name:白泉社|name:アプローズ"
-  - "qid:Q3201020|name:ブルージュ"
+  - name:白泉社|name:アプローズ
+  - qid:Q3201020|name:ブルージュ
   note: ×2同一著者ペア統合(SCRIPT_VARIANT=同anilist_id・英カナ/表記揺れの同作) 2026-06
 - merge_keys:
-  - "qid:Q324980|name:夏の思い出"
-  - "qid:Q324980|name:夜の領域"
+  - qid:Q324980|name:夏の思い出
+  - qid:Q324980|name:夜の領域
   note: ×2同一著者ペア統合(SCRIPT_VARIANT=同anilist_id・英カナ/表記揺れの同作) 2026-06
 - merge_keys:
-  - "qid:Q3276552|name:おねがい!マルチくん"
-  - "qid:Q3276552|name:軌道はずれの迷惑星"
+  - qid:Q3276552|name:おねがい!マルチくん
+  - qid:Q3276552|name:軌道はずれの迷惑星
   note: ×2同一著者ペア統合(SCRIPT_VARIANT=同anilist_id・英カナ/表記揺れの同作) 2026-06
 - merge_keys:
-  - "qid:Q3313737|name:DAI-HONYA"
-  - "qid:Q3313737|name:ダイホンヤ"
+  - qid:Q3313737|name:DAI-HONYA
+  - qid:Q3313737|name:ダイホンヤ
   note: ×2同一著者ペア統合(SCRIPT_VARIANT=同anilist_id・英カナ/表記揺れの同作) 2026-06
 - merge_keys:
-  - "qid:Q403201|name:ストロベリーちゃんの華麗な生活"
-  - "qid:Q403201|name:ストロベリーちゃんの超華麗な生活"
+  - qid:Q403201|name:ストロベリーちゃんの華麗な生活
+  - qid:Q403201|name:ストロベリーちゃんの超華麗な生活
   note: ×2同一著者ペア統合(SCRIPT_VARIANT=同anilist_id・英カナ/表記揺れの同作) 2026-06
 - merge_keys:
-  - "qid:Q4348970|name:銀牙伝説Weed"
-  - "qid:Q4348970|name:銀牙伝説ウィード"
+  - qid:Q4348970|name:銀牙伝説Weed
+  - qid:Q4348970|name:銀牙伝説ウィード
   note: ×2同一著者ペア統合(SCRIPT_VARIANT=同anilist_id・英カナ/表記揺れの同作) 2026-06
 - merge_keys:
-  - "qid:Q4348970|name:銀牙伝説Weed外伝"
-  - "qid:Q4348970|name:銀牙伝説ウィード外伝"
+  - qid:Q4348970|name:銀牙伝説Weed外伝
+  - qid:Q4348970|name:銀牙伝説ウィード外伝
   note: ×2同一著者ペア統合(SCRIPT_VARIANT=同anilist_id・英カナ/表記揺れの同作) 2026-06
 - merge_keys:
-  - "qid:Q445827|name:クリスマス"
-  - "qid:Q445827|name:赤い髪の少年"
+  - qid:Q445827|name:クリスマス
+  - qid:Q445827|name:赤い髪の少年
   note: ×2同一著者ペア統合(SCRIPT_VARIANT=同anilist_id・英カナ/表記揺れの同作) 2026-06
 - merge_keys:
-  - "qid:Q445827|name:ドリーム"
-  - "qid:Q445827|name:妖精王"
+  - qid:Q445827|name:ドリーム
+  - qid:Q445827|name:妖精王
   note: ×2同一著者ペア統合(SCRIPT_VARIANT=同anilist_id・英カナ/表記揺れの同作) 2026-06
 - merge_keys:
-  - "qid:Q445827|name:夏の寓話"
-  - "qid:Q445827|name:天人唐草"
+  - qid:Q445827|name:夏の寓話
+  - qid:Q445827|name:天人唐草
   note: ×2同一著者ペア統合(SCRIPT_VARIANT=同anilist_id・英カナ/表記揺れの同作) 2026-06
 - merge_keys:
-  - "qid:Q452246|name:PRESENT FROM LEMON"
-  - "qid:Q452246|name:プレゼント・フロム LEMON"
+  - qid:Q452246|name:PRESENT FROM LEMON
+  - qid:Q452246|name:プレゼント・フロム LEMON
   note: ×2同一著者ペア統合(SCRIPT_VARIANT=同anilist_id・英カナ/表記揺れの同作) 2026-06
 - merge_keys:
-  - "qid:Q465645|name:TAKE IT EASY"
-  - "qid:Q465645|name:テイクイットイージー"
+  - qid:Q465645|name:TAKE IT EASY
+  - qid:Q465645|name:テイクイットイージー
   note: ×2同一著者ペア統合(SCRIPT_VARIANT=同anilist_id・英カナ/表記揺れの同作) 2026-06
 - merge_keys:
-  - "qid:Q465645|name:UNTITLED"
-  - "qid:Q465645|name:アンタイトルド"
+  - qid:Q465645|name:UNTITLED
+  - qid:Q465645|name:アンタイトルド
   note: ×2同一著者ペア統合(SCRIPT_VARIANT=同anilist_id・英カナ/表記揺れの同作) 2026-06
 - merge_keys:
-  - "qid:Q4700930|name:LAWMAN"
-  - "qid:Q4700930|name:ロウマンS"
+  - qid:Q4700930|name:LAWMAN
+  - qid:Q4700930|name:ロウマンS
   note: ×2同一著者ペア統合(SCRIPT_VARIANT=同anilist_id・英カナ/表記揺れの同作) 2026-06
 - merge_keys:
-  - "qid:Q4700930|name:Wilderness"
-  - "qid:Q4700930|name:ワイルダネス"
+  - qid:Q4700930|name:Wilderness
+  - qid:Q4700930|name:ワイルダネス
   note: ×2同一著者ペア統合(SCRIPT_VARIANT=同anilist_id・英カナ/表記揺れの同作) 2026-06
 - merge_keys:
-  - "qid:Q510977|name:チャレンジャーズ"
-  - "qid:Q510977|name:合格祈願"
+  - qid:Q510977|name:チャレンジャーズ
+  - qid:Q510977|name:合格祈願
   note: ×2同一著者ペア統合(SCRIPT_VARIANT=同anilist_id・英カナ/表記揺れの同作) 2026-06
 - merge_keys:
-  - "qid:Q5399979|name:Golondrina"
-  - "qid:Q5399979|name:ゴロンドリーナ"
+  - qid:Q5399979|name:Golondrina
+  - qid:Q5399979|name:ゴロンドリーナ
   note: ×2同一著者ペア統合(SCRIPT_VARIANT=同anilist_id・英カナ/表記揺れの同作) 2026-06
 - merge_keys:
-  - "qid:Q619010|name:OZ"
-  - "qid:Q619010|name:オズマニュアル"
+  - qid:Q619010|name:OZ
+  - qid:Q619010|name:オズマニュアル
   note: ×2同一著者ペア統合(SCRIPT_VARIANT=同anilist_id・英カナ/表記揺れの同作) 2026-06
 - merge_keys:
-  - "qid:Q669049|name:私はゲゲゲ"
-  - "qid:Q669049|name:神秘家水木しげる伝"
+  - qid:Q669049|name:私はゲゲゲ
+  - qid:Q669049|name:神秘家水木しげる伝
   note: ×2同一著者ペア統合(SCRIPT_VARIANT=同anilist_id・英カナ/表記揺れの同作) 2026-06
 - merge_keys:
-  - "qid:Q6883357|name:レディーQ"
-  - "qid:Q6883357|name:天才調香師宝条ミカ"
+  - qid:Q6883357|name:レディーQ
+  - qid:Q6883357|name:天才調香師宝条ミカ
   note: ×2同一著者ペア統合(SCRIPT_VARIANT=同anilist_id・英カナ/表記揺れの同作) 2026-06
 - merge_keys:
-  - "qid:Q731579|name:Compiler"
-  - "qid:Q731579|name:コンパイラフェスタ"
+  - qid:Q731579|name:Compiler
+  - qid:Q731579|name:コンパイラフェスタ
   note: ×2同一著者ペア統合(SCRIPT_VARIANT=同anilist_id・英カナ/表記揺れの同作) 2026-06
 - merge_keys:
-  - "qid:Q7862713|name:82分署"
-  - "qid:Q7862713|name:ワニ分署"
+  - qid:Q7862713|name:82分署
+  - qid:Q7862713|name:ワニ分署
   note: ×2同一著者ペア統合(SCRIPT_VARIANT=同anilist_id・英カナ/表記揺れの同作) 2026-06
 - merge_keys:
-  - "qid:Q8019333|name:Mobile suit gundam F90"
-  - "qid:Q8019333|name:機動戦士ガンダムF90"
+  - qid:Q8019333|name:Mobile suit gundam F90
+  - qid:Q8019333|name:機動戦士ガンダムF90
   note: ×2同一著者ペア統合(SCRIPT_VARIANT=同anilist_id・英カナ/表記揺れの同作) 2026-06
 - merge_keys:
-  - "qid:Q8062691|name:仮面少年"
-  - "qid:Q8062691|name:我楽多街奇譚"
+  - qid:Q8062691|name:仮面少年
+  - qid:Q8062691|name:我楽多街奇譚
   note: ×2同一著者ペア統合(SCRIPT_VARIANT=同anilist_id・英カナ/表記揺れの同作) 2026-06
 - merge_keys:
-  - "qid:Q8193635|name:ますらお"
-  - "qid:Q8193635|name:秘本義経記"
+  - qid:Q8193635|name:ますらお
+  - qid:Q8193635|name:秘本義経記
   note: ×2同一著者ペア統合(SCRIPT_VARIANT=同anilist_id・英カナ/表記揺れの同作) 2026-06
 - merge_keys:
-  - "qid:Q8964576|name:スロップマンションにお帰り"
-  - "qid:Q8964576|name:不思議図書館"
+  - qid:Q8964576|name:スロップマンションにお帰り
+  - qid:Q8964576|name:不思議図書館
   note: ×2同一著者ペア統合(SCRIPT_VARIANT=同anilist_id・英カナ/表記揺れの同作) 2026-06
 - merge_keys:
-  - "qid:Q9102165|name:キミノトナリ"
-  - "qid:Q9102165|name:闇都市伝説"
+  - qid:Q9102165|name:キミノトナリ
+  - qid:Q9102165|name:闇都市伝説
   note: ×2同一著者ペア統合(SCRIPT_VARIANT=同anilist_id・英カナ/表記揺れの同作) 2026-06
 - merge_keys:
-  - "qid:Q9104481|name:女王を愛した暗殺者"
-  - "qid:Q9104481|name:白き王子の恋物語"
+  - qid:Q9104481|name:女王を愛した暗殺者
+  - qid:Q9104481|name:白き王子の恋物語
   note: ×2同一著者ペア統合(SCRIPT_VARIANT=同anilist_id・英カナ/表記揺れの同作) 2026-06
 - merge_keys:
-  - "qid:Q9307321|name:Pangaea ezel"
-  - "qid:Q9307321|name:パンゲア・エゼル"
+  - qid:Q9307321|name:Pangaea ezel
+  - qid:Q9307321|name:パンゲア・エゼル
   note: ×2同一著者ペア統合(SCRIPT_VARIANT=同anilist_id・英カナ/表記揺れの同作) 2026-06
 - merge_keys:
-  - "qid:Q9310006|name:KEY JACK TEENAGE EDITION"
-  - "qid:Q9310006|name:KEY JACK TEENAGE EDITTION"
+  - qid:Q9310006|name:KEY JACK TEENAGE EDITION
+  - qid:Q9310006|name:KEY JACK TEENAGE EDITTION
   note: ×2同一著者ペア統合(SCRIPT_VARIANT=同anilist_id・英カナ/表記揺れの同作) 2026-06
 - merge_keys:
-  - "qid:Q959193|name:中沢啓治平和マンガ作品集"
-  - "qid:Q959193|name:平和の鐘シリーズ"
+  - qid:Q959193|name:中沢啓治平和マンガ作品集
+  - qid:Q959193|name:平和の鐘シリーズ
   note: ×2同一著者ペア統合(SCRIPT_VARIANT=同anilist_id・英カナ/表記揺れの同作) 2026-06
 - merge_keys:
-  - "qid:Q97031321|name:姫ヶ崎櫻子は今日も不憫可愛い"
-  - "qid:Q97031321|name:姫ケ崎櫻子は今日も不憫可愛い"
+  - qid:Q97031321|name:姫ヶ崎櫻子は今日も不憫可愛い
+  - qid:Q97031321|name:姫ケ崎櫻子は今日も不憫可愛い
   note: ×2同一著者ペア統合(SCRIPT_VARIANT=同anilist_id・英カナ/表記揺れの同作) 2026-06
 - merge_keys:
-  - "qid:Q977749|name:Cleopatra D.C."
-  - "qid:Q977749|name:クレオパトラD.C."
+  - qid:Q977749|name:Cleopatra D.C.
+  - qid:Q977749|name:クレオパトラD.C.
   note: ×2同一著者ペア統合(SCRIPT_VARIANT=同anilist_id・英カナ/表記揺れの同作) 2026-06
 - merge_keys:
-  - "name:5pb.|name:シュタインズ・ゲート"
-  - "name:5pb.|name:しゅたいんず・げーと!"
+  - name:5pb.|name:シュタインズ・ゲート
+  - name:5pb.|name:しゅたいんず・げーと!
   note: ×2同一著者ペア統合(完全一致=同作の巻範囲分裂fragments) 2026-06
 - merge_keys:
-  - "name:C.ブロンテ|name:ジェーン・エア"
-  - "name:はやせたくみ|name:ジェーン・エア"
+  - name:C.ブロンテ|name:ジェーン・エア
+  - name:はやせたくみ|name:ジェーン・エア
   note: ×2同一著者ペア統合(完全一致=同作の巻範囲分裂fragments) 2026-06
 - merge_keys:
-  - "name:Nyan|name:スゴ盛!本当にあった〔○生〕ここだけの話極"
-  - "name:Poko|name:スゴ盛!本当にあった〔○生〕ここだけの話極"
+  - name:Nyan|name:スゴ盛!本当にあった〔○生〕ここだけの話極
+  - name:Poko|name:スゴ盛!本当にあった〔○生〕ここだけの話極
   note: ×2同一著者ペア統合(完全一致=同作の巻範囲分裂fragments) 2026-06
 - merge_keys:
-  - "name:P.I.C.S.|name:オッドタクシー"
-  - "name:肋家竹一|name:オッドタクシー"
+  - name:P.I.C.S.|name:オッドタクシー
+  - name:肋家竹一|name:オッドタクシー
   note: ×2同一著者ペア統合(完全一致=同作の巻範囲分裂fragments) 2026-06
 - merge_keys:
-  - "name:あおぎり|name:デュラララ!!"
-  - "name:茶鳥木明代|name:デュラララ!!"
+  - name:あおぎり|name:デュラララ!!
+  - name:茶鳥木明代|name:デュラララ!!
   note: ×2同一著者ペア統合(完全一致=同作の巻範囲分裂fragments) 2026-06
 - merge_keys:
-  - "name:あおむら純まんが|name:少年少女日本の歴史"
-  - "name:児玉幸多|name:少年少女日本の歴史"
+  - name:あおむら純まんが|name:少年少女日本の歴史
+  - name:児玉幸多|name:少年少女日本の歴史
   note: ×2同一著者ペア統合(完全一致=同作の巻範囲分裂fragments) 2026-06
 - merge_keys:
-  - "name:あさみさとる|name:コミック浅見光彦本格旅情ミステリー"
-  - "qid:Q56349534|name:コミック浅見光彦本格旅情ミステリー"
+  - name:あさみさとる|name:コミック浅見光彦本格旅情ミステリー
+  - qid:Q56349534|name:コミック浅見光彦本格旅情ミステリー
   note: ×2同一著者ペア統合(完全一致=同作の巻範囲分裂fragments) 2026-06
 - merge_keys:
-  - "name:おだやか|name:冒険者をクビになったので、錬金術師として出直します!"
-  - "name:紺野賢護|name:冒険者をクビになったので、錬金術師として出直します!|sub:辺境開拓?よし、俺に任せとけ!"
+  - name:おだやか|name:冒険者をクビになったので、錬金術師として出直します!
+  - name:紺野賢護|name:冒険者をクビになったので、錬金術師として出直します!|sub:辺境開拓?よし、俺に任せとけ!
   note: ×2同一著者ペア統合(完全一致=同作の巻範囲分裂fragments) 2026-06
 - merge_keys:
-  - "name:ガース・ヱニス|name:ヒットマン"
-  - "name:ジョン・マクリア|name:ヒットマン"
+  - name:ガース・ヱニス|name:ヒットマン
+  - name:ジョン・マクリア|name:ヒットマン
   note: ×2同一著者ペア統合(完全一致=同作の巻範囲分裂fragments) 2026-06
 - merge_keys:
-  - "name:カズマ|name:実録鬼嫁日記"
-  - "name:スヤマミヅホ|name:実録鬼嫁日記"
+  - name:カズマ|name:実録鬼嫁日記
+  - name:スヤマミヅホ|name:実録鬼嫁日記
   note: ×2同一著者ペア統合(完全一致=同作の巻範囲分裂fragments) 2026-06
 - merge_keys:
-  - "name:ダイナミックプロ|name:鋼鉄ジーグ"
-  - "qid:Q8193684|name:鋼鉄ジーグ"
+  - name:ダイナミックプロ|name:鋼鉄ジーグ
+  - qid:Q8193684|name:鋼鉄ジーグ
   note: ×2同一著者ペア統合(完全一致=同作の巻範囲分裂fragments) 2026-06
 - merge_keys:
-  - "name:とびらの|name:ずたぼろ令嬢は姉の元婚約者に溺愛される"
-  - "name:紫真依|name:ずたぼろ令嬢は姉の元婚約者に溺愛される"
+  - name:とびらの|name:ずたぼろ令嬢は姉の元婚約者に溺愛される
+  - name:紫真依|name:ずたぼろ令嬢は姉の元婚約者に溺愛される
   note: ×2同一著者ペア統合(完全一致=同作の巻範囲分裂fragments) 2026-06
 - merge_keys:
-  - "name:ナツミチハル|name:誰にも言えない(秘)"
-  - "qid:Q6884883|name:誰にも言えない(秘)"
+  - name:ナツミチハル|name:誰にも言えない(秘)
+  - qid:Q6884883|name:誰にも言えない(秘)
   note: ×2同一著者ペア統合(完全一致=同作の巻範囲分裂fragments) 2026-06
 - merge_keys:
-  - "name:はいむらきよたか|name:とある科学の超電磁砲"
-  - "name:灰村キヨタカ|name:とある科学の超電磁砲"
+  - name:はいむらきよたか|name:とある科学の超電磁砲
+  - name:灰村キヨタカ|name:とある科学の超電磁砲
   note: ×2同一著者ペア統合(完全一致=同作の巻範囲分裂fragments) 2026-06
 - merge_keys:
-  - "name:ホーム社|name:すごいよ!!マサルさん"
-  - "qid:Q3201024|name:すごいよ!!マサルさん"
+  - name:ホーム社|name:すごいよ!!マサルさん
+  - qid:Q3201024|name:すごいよ!!マサルさん
   note: ×2同一著者ペア統合(完全一致=同作の巻範囲分裂fragments) 2026-06
 - merge_keys:
-  - "name:よし☆ヲ|name:魔弾の王と戦姫"
-  - "name:川口士|name:魔弾の王と戦姫"
+  - name:よし☆ヲ|name:魔弾の王と戦姫
+  - name:川口士|name:魔弾の王と戦姫
   note: ×2同一著者ペア統合(完全一致=同作の巻範囲分裂fragments) 2026-06
 - merge_keys:
-  - "name:井沢ひろし|name:変身忍者嵐"
-  - "qid:Q471103|name:変身忍者嵐"
+  - name:井沢ひろし|name:変身忍者嵐
+  - qid:Q471103|name:変身忍者嵐
   note: ×2同一著者ペア統合(完全一致=同作の巻範囲分裂fragments) 2026-06
 - merge_keys:
-  - "name:横溝正史|name:犬神家の一族"
-  - "name:長尾文子|name:犬神家の一族"
+  - name:横溝正史|name:犬神家の一族
+  - name:長尾文子|name:犬神家の一族
   note: ×2同一著者ペア統合(完全一致=同作の巻範囲分裂fragments) 2026-06
 - merge_keys:
-  - "name:夏目漱石|name:それから"
-  - "qid:Q11382072|name:それから"
+  - name:夏目漱石|name:それから
+  - qid:Q11382072|name:それから
   note: ×2同一著者ペア統合(完全一致=同作の巻範囲分裂fragments) 2026-06
 - merge_keys:
-  - "name:夏目漱石|name:三四郎"
-  - "qid:Q11433491|name:三四郎"
+  - name:夏目漱石|name:三四郎
+  - qid:Q11433491|name:三四郎
   note: ×2同一著者ペア統合(完全一致=同作の巻範囲分裂fragments) 2026-06
 - merge_keys:
-  - "name:宮沢賢治|name:風の又三郎"
-  - "qid:Q11468776|name:風の又三郎"
+  - name:宮沢賢治|name:風の又三郎
+  - qid:Q11468776|name:風の又三郎
   note: ×2同一著者ペア統合(完全一致=同作の巻範囲分裂fragments) 2026-06
 - merge_keys:
-  - "name:源一|name:御手洗くんの冒険"
-  - "name:源一実|name:御手洗くんの冒険"
+  - name:源一|name:御手洗くんの冒険
+  - name:源一実|name:御手洗くんの冒険
   note: ×2同一著者ペア統合(完全一致=同作の巻範囲分裂fragments) 2026-06
 - merge_keys:
-  - "name:江原良道|name:成りあがり"
-  - "name:矢沢永吉|name:成りあがり"
+  - name:江原良道|name:成りあがり
+  - name:矢沢永吉|name:成りあがり
   note: ×2同一著者ペア統合(完全一致=同作の巻範囲分裂fragments) 2026-06
 - merge_keys:
-  - "name:江戸川乱歩|name:黒とかげ"
-  - "qid:Q11539225|name:黒トカゲ"
+  - name:江戸川乱歩|name:黒とかげ
+  - qid:Q11539225|name:黒トカゲ
   note: ×2同一著者ペア統合(完全一致=同作の巻範囲分裂fragments) 2026-06
 - merge_keys:
-  - "name:浅野まいこ|name:SAMURAI 7"
-  - "name:周防瑞孝|name:Samurai 7"
+  - name:浅野まいこ|name:SAMURAI 7
+  - name:周防瑞孝|name:Samurai 7
   note: ×2同一著者ペア統合(完全一致=同作の巻範囲分裂fragments) 2026-06
 - merge_keys:
-  - "name:榊一郎|name:まじしゃんず・あかでみい"
-  - "qid:Q11378504|name:まじしゃんず・あかでみい"
+  - name:榊一郎|name:まじしゃんず・あかでみい
+  - qid:Q11378504|name:まじしゃんず・あかでみい
   note: ×2同一著者ペア統合(完全一致=同作の巻範囲分裂fragments) 2026-06
 - merge_keys:
-  - "name:ダイナミックプロ|name:魔界転生"
-  - "qid:Q11273362|name:魔界転生"
+  - name:ダイナミックプロ|name:魔界転生
+  - qid:Q11273362|name:魔界転生
   note: ×2同一著者ペア統合(完全一致=同作の巻範囲分裂fragments) 2026-06
 - merge_keys:
-  - "name:宗美智子|name:警視庁十津川警部の事件簿&鉄道ミステリーベストコミック"
-  - "name:宗美智子|name:警視庁十津川警部の事件簿＆鉄道ミステリーベストコミック"
+  - name:宗美智子|name:警視庁十津川警部の事件簿&鉄道ミステリーベストコミック
+  - name:宗美智子|name:警視庁十津川警部の事件簿＆鉄道ミステリーベストコミック
   note: ×2同一著者ペア統合(完全一致=同作の巻範囲分裂fragments) 2026-06
 - merge_keys:
-  - "name:春乃えり|name:サバンナゲーム"
-  - "qid:Q11428651|name:サバンナゲーム"
+  - name:春乃えり|name:サバンナゲーム
+  - qid:Q11428651|name:サバンナゲーム
   note: ×2同一著者ペア統合(完全一致=同作の巻範囲分裂fragments) 2026-06
 - merge_keys:
-  - "name:城咲綾|name:トム・ソーヤーの冒険"
-  - "name:マーク=トウェン|name:トム=ソーヤーの冒険|sub:名作マンガ"
+  - name:城咲綾|name:トム・ソーヤーの冒険
+  - name:マーク=トウェン|name:トム=ソーヤーの冒険|sub:名作マンガ
   note: ×2同一著者ペア統合(完全一致=同作の巻範囲分裂fragments) 2026-06
 - merge_keys:
-  - "name:森こさち|name:これは経費で落ちません!"
-  - "name:青木祐子|name:これは経費で落ちません!|sub:経理部の森若さん"
+  - name:森こさち|name:これは経費で落ちません!
+  - name:青木祐子|name:これは経費で落ちません!|sub:経理部の森若さん
   note: ×2同一著者ペア統合(完全一致=同作の巻範囲分裂fragments) 2026-06
 - merge_keys:
-  - "name:森岡浩之|name:星界の紋章"
-  - "qid:Q355103|name:星界の紋章"
+  - name:森岡浩之|name:星界の紋章
+  - qid:Q355103|name:星界の紋章
   note: ×2同一著者ペア統合(完全一致=同作の巻範囲分裂fragments) 2026-06
 - merge_keys:
-  - "name:進行諸島|name:転生賢者の異世界ライフ|sub:第二の職業を得て、世界最強になりました"
-  - "name:彭傑|name:転生賢者の異世界ライフ"
+  - name:進行諸島|name:転生賢者の異世界ライフ|sub:第二の職業を得て、世界最強になりました
+  - name:彭傑|name:転生賢者の異世界ライフ
   note: ×2同一著者ペア統合(完全一致=同作の巻範囲分裂fragments) 2026-06
 - merge_keys:
-  - "name:ホーム社|name:名探偵保健室のオバさん"
-  - "qid:Q11455234|name:名探偵保健室のオバサン"
+  - name:ホーム社|name:名探偵保健室のオバさん
+  - qid:Q11455234|name:名探偵保健室のオバサン
   note: ×2同一著者ペア統合(完全一致=同作の巻範囲分裂fragments) 2026-06
 - merge_keys:
-  - "name:兎谷しぇぱこ|name:マンガ百人一首物語"
-  - "name:飯田要|name:マンガ百人一首物語"
+  - name:兎谷しぇぱこ|name:マンガ百人一首物語
+  - name:飯田要|name:マンガ百人一首物語
   note: ×2同一著者ペア統合(完全一致=同作の巻範囲分裂fragments) 2026-06
 - merge_keys:
-  - "name:孫之手ランプ|name:穏やか貴族の休暇のすすめ。@COMIC"
-  - "name:岬pub.|name:穏やか貴族の休暇のすすめ。@COMIC"
+  - name:孫之手ランプ|name:穏やか貴族の休暇のすすめ。@COMIC
+  - name:岬pub.|name:穏やか貴族の休暇のすすめ。@COMIC
   note: ×2同一著者ペア統合(完全一致=同作の巻範囲分裂fragments) 2026-06
 - merge_keys:
-  - "name:田中芳樹|name:銀河英雄伝説"
-  - "name:大坂尚子|name:銀河英雄伝説"
+  - name:田中芳樹|name:銀河英雄伝説
+  - name:大坂尚子|name:銀河英雄伝説
   note: ×2同一著者ペア統合(完全一致=同作の巻範囲分裂fragments) 2026-06
 - merge_keys:
-  - "name:藤田幸久|name:借りぐらしのアリエッティ"
-  - "qid:Q55400|name:借りぐらしのアリエッティ"
+  - name:藤田幸久|name:借りぐらしのアリエッティ
+  - qid:Q55400|name:借りぐらしのアリエッティ
   note: ×2同一著者ペア統合(完全一致=同作の巻範囲分裂fragments) 2026-06
 - merge_keys:
-  - "name:白山仁|name:MIX"
-  - "qid:Q351742|name:MIX"
+  - name:白山仁|name:MIX
+  - qid:Q351742|name:MIX
   note: ×2同一著者ペア統合(完全一致=同作の巻範囲分裂fragments) 2026-06
 - merge_keys:
-  - "name:百瀬祐一郎|name:ヒプノシスマイク|sub:division rap battle-side B.B & M.T.C"
-  - "name:百瀬祐一郎|name:ヒプノシスマイク|sub:division rap battle-side F.P & M"
+  - name:百瀬祐一郎|name:ヒプノシスマイク|sub:division rap battle-side B.B & M.T.C
+  - name:百瀬祐一郎|name:ヒプノシスマイク|sub:division rap battle-side F.P & M
   note: ×2同一著者ペア統合(完全一致=同作の巻範囲分裂fragments) 2026-06
 - merge_keys:
-  - "name:夢枕獏,板垣恵介,ヤングマガジンアッパーズ編集部|name:餓狼伝"
-  - "qid:Q723853|name:餓狼伝"
+  - name:夢枕獏,板垣恵介,ヤングマガジンアッパーズ編集部|name:餓狼伝
+  - qid:Q723853|name:餓狼伝
   note: ×2同一著者ペア統合(完全一致=同作の巻範囲分裂fragments) 2026-06
 - merge_keys:
-  - "name:夢枕獏|name:大帝の剣"
-  - "qid:Q17220983|name:大帝の剣"
+  - name:夢枕獏|name:大帝の剣
+  - qid:Q17220983|name:大帝の剣
   note: ×2同一著者ペア統合(完全一致=同作の巻範囲分裂fragments) 2026-06
 - merge_keys:
-  - "name:柳実冬貴|name:対魔導学園35試験小隊"
-  - "qid:Q11396223|name:対魔導学園35試験小隊"
+  - name:柳実冬貴|name:対魔導学園35試験小隊
+  - qid:Q11396223|name:対魔導学園35試験小隊
   note: ×2同一著者ペア統合(完全一致=同作の巻範囲分裂fragments) 2026-06
 - merge_keys:
-  - "name:稜敦水|name:旅情ミステリー事件簿|sub:名探偵浅見光彦&警視庁十津川警部"
-  - "qid:Q47580510|name:旅情ミステリー事件簿|sub:名探偵浅見光彦&警視庁十津川警部"
+  - name:稜敦水|name:旅情ミステリー事件簿|sub:名探偵浅見光彦&警視庁十津川警部
+  - qid:Q47580510|name:旅情ミステリー事件簿|sub:名探偵浅見光彦&警視庁十津川警部
   note: ×2同一著者ペア統合(完全一致=同作の巻範囲分裂fragments) 2026-06
 - merge_keys:
-  - "qid:Q109596250|name:ちび本当にあった笑える話ガールズコレクション"
-  - "qid:Q11538067|name:ちび本当にあった笑える話ガールズコレクション"
+  - qid:Q109596250|name:ちび本当にあった笑える話ガールズコレクション
+  - qid:Q11538067|name:ちび本当にあった笑える話ガールズコレクション
   note: ×2同一著者ペア統合(完全一致=同作の巻範囲分裂fragments) 2026-06
 - merge_keys:
-  - "qid:Q109596251|name:本当にあった笑える話"
-  - "qid:Q11538067|name:本当にあった笑える話"
+  - qid:Q109596251|name:本当にあった笑える話
+  - qid:Q11538067|name:本当にあった笑える話
   note: ×2同一著者ペア統合(完全一致=同作の巻範囲分裂fragments) 2026-06
 - merge_keys:
-  - "qid:Q11264824|name:To heart 2"
-  - "qid:Q11489015|name:To heart 2"
+  - qid:Q11264824|name:To heart 2
+  - qid:Q11489015|name:To heart 2
   note: ×2同一著者ペア統合(完全一致=同作の巻範囲分裂fragments) 2026-06
 - merge_keys:
-  - "qid:Q11272388|name:空手バカ一代"
-  - "name:影丸譲也とJ・Kプロ|name:空手バカ一代"
+  - qid:Q11272388|name:空手バカ一代
+  - name:影丸譲也とJ・Kプロ|name:空手バカ一代
   note: ×2同一著者ペア統合(完全一致=同作の巻範囲分裂fragments) 2026-06
 - merge_keys:
-  - "qid:Q11276108|name:ヤマトよ永遠に"
-  - "name:松本零士,西崎義展|name:ヤマトよ永遠に"
+  - qid:Q11276108|name:ヤマトよ永遠に
+  - name:松本零士,西崎義展|name:ヤマトよ永遠に
   note: ×2同一著者ペア統合(完全一致=同作の巻範囲分裂fragments) 2026-06
 - merge_keys:
-  - "qid:Q11291851|name:コミック東野圭吾ミステリー|sub:アンコール出版"
-  - "qid:Q11531495|name:コミック東野圭吾ミステリー"
+  - qid:Q11291851|name:コミック東野圭吾ミステリー|sub:アンコール出版
+  - qid:Q11531495|name:コミック東野圭吾ミステリー
   note: ×2同一著者ペア統合(完全一致=同作の巻範囲分裂fragments) 2026-06
 - merge_keys:
-  - "qid:Q11305485|name:学園黙示録HIGHSCHOOL OF THE DEAD"
-  - "qid:Q503748|name:学園黙示録 HIGHSCHOOL OF THE DEAD"
+  - qid:Q11305485|name:学園黙示録HIGHSCHOOL OF THE DEAD
+  - qid:Q503748|name:学園黙示録 HIGHSCHOOL OF THE DEAD
   note: ×2同一著者ペア統合(完全一致=同作の巻範囲分裂fragments) 2026-06
 - merge_keys:
-  - "qid:Q11359703|name:女神異聞録～ペルソナ～"
-  - "qid:Q11359703|name:女神異聞録ペルソナ|sub:Be your true mind"
+  - qid:Q11359703|name:女神異聞録～ペルソナ～
+  - qid:Q11359703|name:女神異聞録ペルソナ|sub:Be your true mind
   note: ×2同一著者ペア統合(完全一致=同作の巻範囲分裂fragments) 2026-06
 - merge_keys:
-  - "qid:Q11373354|name:稲川怪談"
-  - "qid:Q11549680|name:稲川怪談"
+  - qid:Q11373354|name:稲川怪談
+  - qid:Q11549680|name:稲川怪談
   note: ×2同一著者ペア統合(完全一致=同作の巻範囲分裂fragments) 2026-06
 - merge_keys:
-  - "qid:Q11468284|name:少年ケニヤ"
-  - "qid:Q11585907|name:少年ケニヤ"
+  - qid:Q11468284|name:少年ケニヤ
+  - qid:Q11585907|name:少年ケニヤ
   note: ×2同一著者ペア統合(完全一致=同作の巻範囲分裂fragments) 2026-06
 - merge_keys:
-  - "qid:Q11529922|name:世界一残酷で美しいグリム童話"
-  - "qid:Q11573764|name:世界一残酷で美しいグリム童話"
+  - qid:Q11529922|name:世界一残酷で美しいグリム童話
+  - qid:Q11573764|name:世界一残酷で美しいグリム童話
   note: ×2同一著者ペア統合(完全一致=同作の巻範囲分裂fragments) 2026-06
 - merge_keys:
-  - "qid:Q11657721|name:ルパン三世VS名探偵コナン"
-  - "qid:Q1370780|name:ルパン三世vs名探偵コナン"
+  - qid:Q11657721|name:ルパン三世VS名探偵コナン
+  - qid:Q1370780|name:ルパン三世vs名探偵コナン
   note: ×2同一著者ペア統合(完全一致=同作の巻範囲分裂fragments) 2026-06
 - merge_keys:
-  - "qid:Q11657721|name:ルパン三世vs名探偵コナンTHE MOVIE"
-  - "qid:Q1370780|name:ルパン三世vs名探偵コナンTHE MOVIE"
+  - qid:Q11657721|name:ルパン三世vs名探偵コナンTHE MOVIE
+  - qid:Q1370780|name:ルパン三世vs名探偵コナンTHE MOVIE
   note: ×2同一著者ペア統合(完全一致=同作の巻範囲分裂fragments) 2026-06
 - merge_keys:
-  - "qid:Q11657721|name:名探偵コナン迷宮の十字路"
-  - "name:丸伝次郎|name:名探偵コナン迷宮の十字路"
-  note: |
-    [2026-06-16 修正] 旧auto-mergeはコミカライズ(qid:Q11657721)に映画フィルムコミック(qid:Q313945)を著者一致だけで誤統合していた。フィルムコミックはnon-manga-dropで非掲載化するため除去し、コミカライズVOLUME1(name:丸伝次郎)とVOLUME2(qid:Q11657721)を統合。同題連番・青山剛昌案/阿部ゆたか丸伝次郎作画。
+  - qid:Q11657721|name:名探偵コナン迷宮の十字路
+  - name:丸伝次郎|name:名探偵コナン迷宮の十字路
+  note: '[2026-06-16 修正] 旧auto-mergeはコミカライズ(qid:Q11657721)に映画フィルムコミック(qid:Q313945)を著者一致だけで誤統合していた。フィルムコミックはnon-manga-dropで非掲載化するため除去し、コミカライズVOLUME1(name:丸伝次郎)とVOLUME2(qid:Q11657721)を統合。同題連番・青山剛昌案/阿部ゆたか丸伝次郎作画。
+
+    '
 - merge_keys:
-  - "qid:Q181569|name:ひぐらしのなく頃に 鬼隠し編"
-  - "qid:Q6370938|name:ひぐらしのなく頃に 鬼隠し編"
+  - qid:Q181569|name:ひぐらしのなく頃に 鬼隠し編
+  - qid:Q6370938|name:ひぐらしのなく頃に 鬼隠し編
   note: ×2同一著者ペア統合(完全一致=同作の巻範囲分裂fragments) 2026-06
 - merge_keys:
-  - "qid:Q18226168|name:めちゃ盛!本当にあった〔○生〕ここだけの話祭"
-  - "qid:Q24902944|name:めちゃ盛!本当にあった〔○生〕ここだけの話祭"
+  - qid:Q18226168|name:めちゃ盛!本当にあった〔○生〕ここだけの話祭
+  - qid:Q24902944|name:めちゃ盛!本当にあった〔○生〕ここだけの話祭
   note: ×2同一著者ペア統合(完全一致=同作の巻範囲分裂fragments) 2026-06
 - merge_keys:
-  - "qid:Q3049381|name:くもはち"
-  - "qid:Q3049381|name:くもはち。"
+  - qid:Q3049381|name:くもはち
+  - qid:Q3049381|name:くもはち。
   note: ×2同一著者ペア統合(完全一致=同作の巻範囲分裂fragments) 2026-06
 - merge_keys:
-  - "qid:Q38842|name:(後)ハッピーマニア"
-  - "qid:Q38842|name:後ハッピーマニア"
+  - qid:Q38842|name:(後)ハッピーマニア
+  - qid:Q38842|name:後ハッピーマニア
   note: ×2同一著者ペア統合(完全一致=同作の巻範囲分裂fragments) 2026-06
 - merge_keys:
-  - "qid:Q5398742|name:沖の澤グラフィティ"
-  - "qid:Q5398742|name:沖ノ澤グラフィティ"
+  - qid:Q5398742|name:沖の澤グラフィティ
+  - qid:Q5398742|name:沖ノ澤グラフィティ
   note: ×2同一著者ペア統合(完全一致=同作の巻範囲分裂fragments) 2026-06
 - merge_keys:
-  - "name:はいむらきよたか|name:とある科学の一方通行"
-  - "name:はいむらきよたか|name:とある科学の一方通行(アクセラレータ)|sub:とある魔術の禁書目録外伝"
+  - name:はいむらきよたか|name:とある科学の一方通行
+  - name:はいむらきよたか|name:とある科学の一方通行(アクセラレータ)|sub:とある魔術の禁書目録外伝
   note: ×2同一著者ペア統合(内包=括弧グロス/漫画版接頭の同作) 2026-06
 - merge_keys:
-  - "name:はいむらきよたか|name:とある科学の心理掌握(メンタルアウト)"
-  - "name:乃木康仁|name:とある科学の心理掌握"
+  - name:はいむらきよたか|name:とある科学の心理掌握(メンタルアウト)
+  - name:乃木康仁|name:とある科学の心理掌握
   note: ×2同一著者ペア統合(内包=括弧グロス/漫画版接頭の同作) 2026-06
 - merge_keys:
-  - "name:岡崎みな|name:漫画版サマーウォーズ"
-  - "name:細田守|name:サマーウォーズ"
+  - name:岡崎みな|name:漫画版サマーウォーズ
+  - name:細田守|name:サマーウォーズ
   note: ×2同一著者ペア統合(内包=括弧グロス/漫画版接頭の同作) 2026-06
 - merge_keys:
-  - "name:上橋菜穂子|name:コミック獣の奏者"
-  - "name:上橋菜穂子|name:獣の奏者"
+  - name:上橋菜穂子|name:コミック獣の奏者
+  - name:上橋菜穂子|name:獣の奏者
   note: ×2同一著者ペア統合(内包=括弧グロス/漫画版接頭の同作) 2026-06
 - merge_keys:
-  - "name:清水めりぃ|name:ブラック企業の社員が猫になって人生が変わった話"
-  - "name:清水めりぃ|name:ブラック企業の社員が猫になって人生が変わった話〈モフ田くんの場合〉"
+  - name:清水めりぃ|name:ブラック企業の社員が猫になって人生が変わった話
+  - name:清水めりぃ|name:ブラック企業の社員が猫になって人生が変わった話〈モフ田くんの場合〉
   note: ×2同一著者ペア統合(内包=括弧グロス/漫画版接頭の同作) 2026-06
 - merge_keys:
-  - "name:辻村深月|name:コミック冷たい校舎の時は止まる"
-  - "name:辻村深月|name:冷たい校舎の時は止まる"
+  - name:辻村深月|name:コミック冷たい校舎の時は止まる
+  - name:辻村深月|name:冷たい校舎の時は止まる
   note: ×2同一著者ペア統合(内包=括弧グロス/漫画版接頭の同作) 2026-06
 - merge_keys:
-  - "name:キャラメル・ママ|name:南国少年パプワくん"
-  - "qid:Q8193548|name:南国少年パプワくんperfect"
+  - name:キャラメル・ママ|name:南国少年パプワくん
+  - qid:Q8193548|name:南国少年パプワくんperfect
   note: ×2内包ペア統合(純粋版/フォーマットマーカー=同作の版違い確定) 2026-06
 - merge_keys:
-  - "name:さくらねこ|name:俺はまだ、本気を出していないDX"
-  - "name:三木なずな|name:俺はまだ、本気を出していない"
+  - name:さくらねこ|name:俺はまだ、本気を出していないDX
+  - name:三木なずな|name:俺はまだ、本気を出していない
   note: ×2内包ペア統合(純粋版/フォーマットマーカー=同作の版違い確定) 2026-06
 - merge_keys:
-  - "name:角井陽一|name:それゆけ!宇宙戦艦ヤマモト・ヨーコ"
-  - "qid:Q11489255|name:それゆけ!宇宙戦艦ヤマモト・ヨーコRemix"
+  - name:角井陽一|name:それゆけ!宇宙戦艦ヤマモト・ヨーコ
+  - qid:Q11489255|name:それゆけ!宇宙戦艦ヤマモト・ヨーコRemix
   note: ×2内包ペア統合(純粋版/フォーマットマーカー=同作の版違い確定) 2026-06
 - merge_keys:
-  - "name:畠中恵|name:しゃばけ"
-  - "name:畠中恵|name:しゃばけ漫画"
+  - name:畠中恵|name:しゃばけ
+  - name:畠中恵|name:しゃばけ漫画
   note: ×2内包ペア統合(純粋版/フォーマットマーカー=同作の版違い確定) 2026-06
 - merge_keys:
-  - "qid:Q3423740|name:もう誰も愛せない"
-  - "qid:Q3423740|name:もう誰も愛せないremix"
+  - qid:Q3423740|name:もう誰も愛せない
+  - qid:Q3423740|name:もう誰も愛せないremix
   note: ×2内包ペア統合(純粋版/フォーマットマーカー=同作の版違い確定) 2026-06
 - merge_keys:
-  - "qid:Q54867672|name:戦争めし"
-  - "qid:Q54867672|name:漫画戦争めし|sub:命を繋いだ昭和食べ物語"
+  - qid:Q54867672|name:戦争めし
+  - qid:Q54867672|name:漫画戦争めし|sub:命を繋いだ昭和食べ物語
   note: ×2内包ペア統合(純粋版/フォーマットマーカー=同作の版違い確定) 2026-06
 - merge_keys:
-  - "name:夏原武|name:新クロサギ"
-  - "name:夏原武|name:新クロサギ完結編"
+  - name:夏原武|name:新クロサギ
+  - name:夏原武|name:新クロサギ完結編
   note: ×2内包ペア統合(純粋版/フォーマットマーカー=同作の版違い確定) 2026-06
 - merge_keys:
-  - "name:四ノ宮成祥|name:インハンド"
-  - "qid:Q104538769|name:インハンドプロローグ"
+  - name:四ノ宮成祥|name:インハンド
+  - qid:Q104538769|name:インハンドプロローグ
   note: ×2内包ペア統合(純粋版/フォーマットマーカー=同作の版違い確定) 2026-06
 - merge_keys:
-  - "qid:Q1906779|name:かりあげクン"
-  - "qid:Q1906779|name:ほんにゃらゴッコ かりあげクン"
+  - qid:Q1906779|name:かりあげクン
+  - qid:Q1906779|name:ほんにゃらゴッコ かりあげクン
   note: かりあげクン=ほんにゃらゴッコの改題(Wikipedia確証・同一作)
 - merge_keys:
-  - "qid:Q1721423|name:太陽の黙示録"
-  - "qid:Q1721423|name:太陽の黙示録 群雄編"
+  - qid:Q1721423|name:太陽の黙示録
+  - qid:Q1721423|name:太陽の黙示録 群雄編
   note: 太陽の黙示録 群雄編=第1部、建国編と1つの連続作(Wikipedia確証)
 - merge_keys:
-  - "qid:Q8193642|name:GS美神"
-  - "qid:Q8193642|name:GS美神極楽大作戦!!"
+  - qid:Q8193642|name:GS美神
+  - qid:Q8193642|name:GS美神極楽大作戦!!
   note: GS美神極楽大作戦=GS美神の全題(同一作)
 - merge_keys:
-  - "qid:Q3201016|name:ARMS"
-  - "qid:Q602746|name:PROJECT ARMS"
+  - qid:Q3201016|name:ARMS
+  - qid:Q602746|name:PROJECT ARMS
   note: PROJECT ARMS=ARMSの正式題(同一作)
 - merge_keys:
-  - "name:四方山貴史|name:終の退魔師-エンダーガイスター-"
-  - "name:四方山貴史|name:終の退魔師|sub:エンダーガイスター"
+  - name:四方山貴史|name:終の退魔師-エンダーガイスター-
+  - name:四方山貴史|name:終の退魔師|sub:エンダーガイスター
   note: 終の退魔師-エンダーガイスター-=副題(同一作)
 - merge_keys:
-  - "qid:Q11623724|name:S"
-  - "qid:Q11623724|name:S -最後の警官-"
+  - qid:Q11623724|name:S
+  - qid:Q11623724|name:S -最後の警官-
   note: S-最後の警官-=副題(同一作)
 - merge_keys:
-  - "qid:Q11274881|name:真島、爆ぜる!!"
-  - "qid:Q11274881|name:陣内流柔術流浪伝 真島、爆ぜる!!"
+  - qid:Q11274881|name:真島、爆ぜる!!
+  - qid:Q11274881|name:陣内流柔術流浪伝 真島、爆ぜる!!
   note: 陣内流柔術流浪伝 真島爆ぜる=全題(同一作)
 - merge_keys:
-  - "qid:Q958249|name:To LOVEる"
-  - "qid:Q958249|name:To LOVEる-とらぶる-"
+  - qid:Q958249|name:To LOVEる
+  - qid:Q958249|name:To LOVEる-とらぶる-
   note: To LOVEる-とらぶる-=正式副題(同一作)
 - merge_keys:
-  - "qid:Q463078|name:女子高生"
-  - "qid:Q463078|name:女子高生Girls-High"
+  - qid:Q463078|name:女子高生
+  - qid:Q463078|name:女子高生Girls-High
   note: 女子高生Girls-High=副題(同一作)
 - merge_keys:
-  - "name:各務浩章|name:くにはちぶ"
-  - "name:各務浩章|name:くにはちぶ-国八分-"
+  - name:各務浩章|name:くにはちぶ
+  - name:各務浩章|name:くにはちぶ-国八分-
   note: くにはちぶ-国八分-=漢字グロス(同一作)
 - merge_keys:
-  - "name:田島昭宇with|name:Madara赤"
-  - "qid:Q1627449|name:魍魎戦記Madara赤"
+  - name:田島昭宇with|name:Madara赤
+  - qid:Q1627449|name:魍魎戦記Madara赤
   note: 魍魎戦記Madara赤=全題(同一作Madara)
 - merge_keys:
-  - "qid:Q11271167|name:ナッちゃん"
-  - "qid:Q11271167|name:下町鉄工所奮闘記ナッちゃん東京編"
+  - qid:Q11271167|name:ナッちゃん
+  - qid:Q11271167|name:下町鉄工所奮闘記ナッちゃん東京編
   note: ナッちゃん=本編21巻+東京編3巻の連続作(Wikipedia確証 全24巻)
 - merge_keys:
-  - "name:酒井シヅ|name:JIN 仁"
-  - "qid:Q1036246|name:JIN"
+  - name:酒井シヅ|name:JIN 仁
+  - qid:Q1036246|name:JIN
   note: JIN仁=漢字グロス(同一作)
 - merge_keys:
-  - "qid:Q725387|name:B'T X-ビート・エックス-"
-  - "qid:Q725387|name:B'TX"
+  - qid:Q725387|name:B'T X-ビート・エックス-
+  - qid:Q725387|name:B'TX
   note: B'TX=B'T Xの表記違い(同一作)
 - merge_keys:
-  - "qid:Q11569524|name:Go da gun"
-  - "qid:Q11569524|name:GO DA GUN〔銃〕"
+  - qid:Q11569524|name:Go da gun
+  - qid:Q11569524|name:GO DA GUN〔銃〕
   note: GO DA GUN〔銃〕=グロス(同一作)
 - merge_keys:
-  - "qid:Q22127460|name:MUJIN～無尽～"
-  - "qid:Q22127460|name:無尽"
+  - qid:Q22127460|name:MUJIN～無尽～
+  - qid:Q22127460|name:無尽
   note: MUJIN～無尽～=無尽の表記(同一作)
 - merge_keys:
-  - "name:平山夢明|name:DINER"
-  - "name:平山夢明|name:DINER ダイナー"
+  - name:平山夢明|name:DINER
+  - name:平山夢明|name:DINER ダイナー
   note: DINER ダイナー=グロス(同一作)
 - merge_keys:
-  - "qid:Q5701323|name:ぱにぽに"
-  - "qid:Q5701323|name:ぱにぽにリミックス"
+  - qid:Q5701323|name:ぱにぽに
+  - qid:Q5701323|name:ぱにぽにリミックス
   note: リミックス=再編集版(同一作)
 - merge_keys:
-  - "qid:Q6918014|name:Q.E.D."
-  - "qid:Q6918014|name:Q.E.D. 証明終了"
+  - qid:Q6918014|name:Q.E.D.
+  - qid:Q6918014|name:Q.E.D. 証明終了
   note: Q.E.D.証明終了=正式全題(同一作)
 - merge_keys:
-  - "qid:Q11259887|name:ゼロイン"
-  - "qid:Q11259887|name:ゼロインZERO"
+  - qid:Q11259887|name:ゼロイン
+  - qid:Q11259887|name:ゼロインZERO
   note: ZERO=ゼロインのグロス(同一作)
 - merge_keys:
-  - "name:三木なずな|name:没落予定の貴族だけど、暇だったから魔法を極めてみた@COMIC"
-  - "qid:Q11264134|name:没落予定の貴族だけど、暇だったから魔法を極めてみた"
+  - name:三木なずな|name:没落予定の貴族だけど、暇だったから魔法を極めてみた@COMIC
+  - qid:Q11264134|name:没落予定の貴族だけど、暇だったから魔法を極めてみた
   note: 没落予定の貴族=COMIC接尾の表記違い(同一作)
 - merge_keys:
-  - "qid:Q85868847|name:相棒"
-  - "qid:Q85868847|name:相棒 たった二人の特命係"
+  - qid:Q85868847|name:相棒
+  - qid:Q85868847|name:相棒 たった二人の特命係
   note: 相棒-たった二人の特命係-=単一漫画の全題(Wikipedia確証 こやす珠世)
 - merge_keys:
-  - "name:CLAMP|name:聖伝"
-  - "name:CLAMP|name:聖伝 RG VEDA"
+  - name:CLAMP|name:聖伝
+  - name:CLAMP|name:聖伝 RG VEDA
   note: 聖伝 RG VEDA=正式副題(同一作)
 - merge_keys:
-  - "name:冨山玖呂|name:MOON"
-  - "name:冨山玖呂|name:MOON 昴ソリチュードスタンディング"
+  - name:冨山玖呂|name:MOON
+  - name:冨山玖呂|name:MOON 昴ソリチュードスタンディング
   note: MOON 昴ソリチュードスタンディング=副題(同一作)
 - merge_keys:
-  - "qid:Q11614079|name:アンダーザローズ"
-  - "qid:Q11614079|name:アンダーザローズ冬の物語"
+  - qid:Q11614079|name:アンダーザローズ
+  - qid:Q11614079|name:アンダーザローズ冬の物語
   note: アンダーザローズ 冬の物語=副題(同一作)
 - merge_keys:
-  - "qid:Q17350015|name:走馬灯株式会社"
-  - "qid:Q17350015|name:走馬灯株式会社 観ますか?止めますか?全人生収録ディスク"
+  - qid:Q17350015|name:走馬灯株式会社
+  - qid:Q17350015|name:走馬灯株式会社 観ますか?止めますか?全人生収録ディスク
   note: 走馬灯株式会社 観ますか?止めますか?=副題(同一作)
 - merge_keys:
-  - "qid:Q11647729|name:サムライ・ラガッツィ"
-  - "qid:Q11647729|name:サムライ・ラガッツィ 戦国少年西方見聞録"
+  - qid:Q11647729|name:サムライ・ラガッツィ
+  - qid:Q11647729|name:サムライ・ラガッツィ 戦国少年西方見聞録
   note: サムライ・ラガッツィ 戦国少年西方見聞録=副題(同一作)
 - merge_keys:
-  - "qid:Q958256|name:もーれつア太郎"
-  - "qid:Q958256|name:もーれつア太郎 別巻"
+  - qid:Q958256|name:もーれつア太郎
+  - qid:Q958256|name:もーれつア太郎 別巻
   note: 別巻=同一作の補巻
 - merge_keys:
-  - "qid:Q11245588|name:アスタロッテのおもちゃ!"
-  - "qid:Q5362351|name:ロッテのおもちゃ!"
+  - qid:Q11245588|name:アスタロッテのおもちゃ!
+  - qid:Q5362351|name:ロッテのおもちゃ!
   note: アスタロッテのおもちゃ!=ロッテのおもちゃ!の改題(同一作)
 - merge_keys:
-  - "qid:Q105711506|name:もぐささん"
-  - "qid:Q105711506|name:もぐささんは食欲と闘う"
+  - qid:Q105711506|name:もぐささん
+  - qid:Q105711506|name:もぐささんは食欲と闘う
   note: もぐささんは食欲と闘う=全題(同一作)
 - merge_keys:
-  - "qid:Q4531338|name:アタゴオル"
-  - "qid:Q4531338|name:アタゴオルは猫の森"
+  - qid:Q4531338|name:アタゴオル
+  - qid:Q4531338|name:アタゴオルは猫の森
   note: アタゴオル=別作でなく進化する同一シリーズ(Wikipedia確証)
 - merge_keys:
-  - "qid:Q11541939|name:モーメント"
-  - "qid:Q11541939|name:モーメント 永遠の一瞬"
+  - qid:Q11541939|name:モーメント
+  - qid:Q11541939|name:モーメント 永遠の一瞬
   note: モーメント 永遠の一瞬=副題(同一作)
 - merge_keys:
-  - "qid:Q8140707|name:ダイ・ソード"
-  - "qid:Q8140707|name:轟世剣ダイ・ソード"
+  - qid:Q8140707|name:ダイ・ソード
+  - qid:Q8140707|name:轟世剣ダイ・ソード
   note: 轟世剣ダイ・ソード=全題(同一作)
 - merge_keys:
-  - "qid:Q11449857|name:オコジョさん"
-  - "qid:Q11449857|name:しあわせソウのオコジョさん"
+  - qid:Q11449857|name:オコジョさん
+  - qid:Q11449857|name:しあわせソウのオコジョさん
   note: しあわせソウのオコジョさん=正式全題(同一作)
 - merge_keys:
-  - "qid:Q2077268|name:オールド・ボーイ"
-  - "qid:Q7046116|name:オールド・ボーイ ルーズ戦記"
+  - qid:Q2077268|name:オールド・ボーイ
+  - qid:Q7046116|name:オールド・ボーイ ルーズ戦記
   note: ルーズ戦記オールド・ボーイ=原題(同一作)
 - merge_keys:
-  - "qid:Q11429643|name:ブレイド三国志"
-  - "qid:Q11429643|name:ブレイド三国志赤壁"
+  - qid:Q11429643|name:ブレイド三国志
+  - qid:Q11429643|name:ブレイド三国志赤壁
   note: ブレイド三国志 赤壁=同一作品の追加エピソード(Wikipedia確証)
 - merge_keys:
-  - "qid:Q17224076|name:?TRAIL|sub:ニセカヰ的日常と殲滅エレメント"
-  - "qid:Q17224076|name:ATRAIL"
+  - qid:Q17224076|name:?TRAIL|sub:ニセカヰ的日常と殲滅エレメント
+  - qid:Q17224076|name:ATRAIL
   note: TRAIL=ATRAILの表記違い(同一作)
 - merge_keys:
-  - "qid:Q18336946|name:シェリル"
-  - "qid:Q18336946|name:シェリル キス・イン・ザ・ギャラクシー"
+  - qid:Q18336946|name:シェリル
+  - qid:Q18336946|name:シェリル キス・イン・ザ・ギャラクシー
   note: シェリル副題(同一作)
 - merge_keys:
-  - "qid:Q453372|name:マホロミ"
-  - "qid:Q453372|name:マホロミ 時空建築幻視譚"
+  - qid:Q453372|name:マホロミ
+  - qid:Q453372|name:マホロミ 時空建築幻視譚
   note: マホロミ 時空建築幻視譚=副題(同一作)
 - merge_keys:
-  - "qid:Q614514|name:乾いて候"
-  - "qid:Q967455|name:唇役主丞乾いて候"
+  - qid:Q614514|name:乾いて候
+  - qid:Q967455|name:唇役主丞乾いて候
   note: 唇役主丞乾いて候=全題(同一作)
 - merge_keys:
-  - "name:クロノギアクリエイティヴ|name:探偵オペラミルキィホームズはじめまして。"
-  - "name:子安秀明|name:探偵オペラミルキィホームズ"
+  - name:クロノギアクリエイティヴ|name:探偵オペラミルキィホームズはじめまして。
+  - name:子安秀明|name:探偵オペラミルキィホームズ
   note: 探偵オペラミルキィホームズ表記(同一作)
 - merge_keys:
-  - "name:ホーム社|name:猛き黄金の国"
-  - "qid:Q3325226|name:猛き黄金の国斎藤道三"
+  - name:ホーム社|name:猛き黄金の国
+  - qid:Q3325226|name:猛き黄金の国斎藤道三
   note: 猛き黄金の国 斎藤道三=副題(同一作)
 - merge_keys:
-  - "name:岡崎琢磨|name:珈琲店タレーランの事件簿"
-  - "name:岡崎琢磨|name:珈琲店タレーランの事件簿 彼女はカフェオレの夢を見る"
+  - name:岡崎琢磨|name:珈琲店タレーランの事件簿
+  - name:岡崎琢磨|name:珈琲店タレーランの事件簿 彼女はカフェオレの夢を見る
   note: 珈琲店タレーラン副題(同一作)
 - merge_keys:
-  - "name:桑原水菜|name:イルゲネス"
-  - "name:桑原水菜|name:イルゲネス 偽翼の交響曲"
+  - name:桑原水菜|name:イルゲネス
+  - name:桑原水菜|name:イルゲネス 偽翼の交響曲
   note: イルゲネス 偽翼の交響曲=副題(同一作)
 - merge_keys:
-  - "name:清水崇|name:呪怨"
-  - "name:清水崇|name:呪怨/juon"
+  - name:清水崇|name:呪怨
+  - name:清水崇|name:呪怨/juon
   note: 呪怨/juon=ローマ字グロス(同一作)
 - merge_keys:
-  - "name:中村浩二郎|name:機動戦士ガンダムクライマックスU.C."
-  - "name:中村浩二郎|name:機動戦士ガンダムクライマックスU.C.-紡がれし血統-"
+  - name:中村浩二郎|name:機動戦士ガンダムクライマックスU.C.
+  - name:中村浩二郎|name:機動戦士ガンダムクライマックスU.C.-紡がれし血統-
   note: ガンダムクライマックスU.C.紡がれし血脈=全題(同一作)
 - merge_keys:
-  - "name:田中芳樹|name:薬師寺涼子の怪奇事件簿"
-  - "name:田中芳樹|name:薬師寺涼子の怪奇事件簿 霧の訪問者"
+  - name:田中芳樹|name:薬師寺涼子の怪奇事件簿
+  - name:田中芳樹|name:薬師寺涼子の怪奇事件簿 霧の訪問者
   note: 薬師寺涼子の怪奇事件簿 霧の訪問者=巻副題(同一作)
 - merge_keys:
-  - "name:白井幸子|name:鏡の巫女アヤカ"
-  - "qid:Q11549680|name:鏡の巫女アヤカ黒い薔薇十字"
+  - name:白井幸子|name:鏡の巫女アヤカ
+  - qid:Q11549680|name:鏡の巫女アヤカ黒い薔薇十字
   note: 鏡の巫女アヤカ 黒い薔薇十字=副題(同一作)
 - merge_keys:
-  - "qid:Q10855273|name:ゴーダ哲学堂"
-  - "qid:Q10855273|name:ゴーダ哲学堂空気人形"
+  - qid:Q10855273|name:ゴーダ哲学堂
+  - qid:Q10855273|name:ゴーダ哲学堂空気人形
   note: ゴーダ哲学堂 空気人形=副題(同一作)
 - merge_keys:
-  - "qid:Q1010233|name:ドーラ"
-  - "qid:Q1010233|name:ドーラ 失われた世界"
+  - qid:Q1010233|name:ドーラ
+  - qid:Q1010233|name:ドーラ 失われた世界
   note: ドーラ 失われた世界=副題(同一作)
 - merge_keys:
-  - "qid:Q11362042|name:DOGMAN"
-  - "qid:Q11362042|name:Dogman scrap"
+  - qid:Q11362042|name:DOGMAN
+  - qid:Q11362042|name:Dogman scrap
   note: DOGMAN/Dogman scrap=副題(同一作)
 - merge_keys:
-  - "qid:Q1138133|name:地を這う魚"
-  - "qid:Q1138133|name:地を這う魚 ひでおの青春日記"
+  - qid:Q1138133|name:地を這う魚
+  - qid:Q1138133|name:地を這う魚 ひでおの青春日記
   note: 地を這う魚 ひでおの青春日記=副題(同一作)
 - merge_keys:
-  - "qid:Q532615|name:花粉少女"
-  - "qid:Q532615|name:花粉少女注意報!"
+  - qid:Q532615|name:花粉少女
+  - qid:Q532615|name:花粉少女注意報!
   note: 花粉少女注意報!=全題(同一作)
 - merge_keys:
-  - "qid:Q5508584|name:Golden ball"
-  - "qid:Q5508584|name:Golden Ball 女子高生GM山岸四季の挑戦"
+  - qid:Q5508584|name:Golden ball
+  - qid:Q5508584|name:Golden Ball 女子高生GM山岸四季の挑戦
   note: Golden Ball 女子高生GM山岸四季=副題(同一作)
 - merge_keys:
-  - "name:水谷京子|name:蜜薔薇の結婚"
-  - "name:水谷京子|name:蜜薔薇の結婚ディープラブ"
+  - name:水谷京子|name:蜜薔薇の結婚
+  - name:水谷京子|name:蜜薔薇の結婚ディープラブ
   note: 蜜薔薇の結婚 ディープラブ=副題(同一作)
 - merge_keys:
-  - "name:舞木サチ|name:今日からΩになりました。"
-  - "name:舞木サチ|name:今日からΩになりました。安里と波多野"
+  - name:舞木サチ|name:今日からΩになりました。
+  - name:舞木サチ|name:今日からΩになりました。安里と波多野
   note: 今日からΩになりました 安里と波多野=副題(同一作)
 - merge_keys:
-  - "qid:Q4889571|name:彼女のひとりぐらし"
-  - "qid:Q4889571|name:彼女のひとりぐらしツーアウト満塁"
+  - qid:Q4889571|name:彼女のひとりぐらし
+  - qid:Q4889571|name:彼女のひとりぐらしツーアウト満塁
   note: 彼女のひとりぐらし ツーアウト満塁=副題(同一作)
 - merge_keys:
-  - "name:泉藤進|name:アラビアン魔神冒険譚ランプ・ランプ"
-  - "qid:Q313703|name:魔神冒険譚 ランプ・ランプ"
+  - name:泉藤進|name:アラビアン魔神冒険譚ランプ・ランプ
+  - qid:Q313703|name:魔神冒険譚 ランプ・ランプ
   note: アラビアン魔神冒険譚ランプ・ランプ=魔神冒険譚ランプ・ランプの表記(同一作)
 - merge_keys:
-  - "name:すずきあきら|name:百花繚乱"
-  - "name:すずきあきら|name:百花繚乱サムライガールズ"
+  - name:すずきあきら|name:百花繚乱
+  - name:すずきあきら|name:百花繚乱サムライガールズ
   note: 百花繚乱 サムライガールズ=正式全題(同一作)
 - merge_keys:
-  - "name:矢立肇|name:覇王大系リューナイト"
-  - "qid:Q4389440|name:覇王大系リューナイトcollector's edition"
+  - name:矢立肇|name:覇王大系リューナイト
+  - qid:Q4389440|name:覇王大系リューナイトcollector's edition
   note: 覇王大系リューナイト collector's=愛蔵版(同一作)
 - merge_keys:
-  - "qid:Q4383744|name:魔法戦記リリカルなのはForce"
-  - "qid:Q4383744|name:魔法戦記リリカルなのはForce true colored"
+  - qid:Q4383744|name:魔法戦記リリカルなのはForce
+  - qid:Q4383744|name:魔法戦記リリカルなのはForce true colored
   note: 魔法戦記リリカルなのはForce true=完全版/再編集(同一作)
 - merge_keys:
-  - "name:橘由華|name:聖女の魔力は万能です"
-  - "name:珠梨やすゆき|name:聖女の魔力は万能です"
+  - name:橘由華|name:聖女の魔力は万能です
+  - name:珠梨やすゆき|name:聖女の魔力は万能です
   note: 衝突③版違い統合(role作画一致=橘由華/珠梨やすゆき/藤小豆・credit差のみ=同一作) 2026-06
 - merge_keys:
-  - "name:林律雄|name:雲盗り暫平|sub:総集編"
-  - "qid:Q2661273|name:雲盗り暫平"
+  - name:林律雄|name:雲盗り暫平|sub:総集編
+  - qid:Q2661273|name:雲盗り暫平
   note: 衝突③版違い統合(role作画一致=さいとう・たかを/林律雄・credit差のみ=同一作) 2026-06
 - merge_keys:
-  - "qid:Q1036246|name:日本の歴史"
-  - "qid:Q1049596|name:日本の歴史"
-  - "qid:Q11586892|name:日本の歴史"
-  - "qid:Q1191493|name:日本の歴史"
-  - "qid:Q16263860|name:日本の歴史"
-  - "qid:Q1993|name:日本の歴史"
-  - "qid:Q295073|name:日本の歴史"
-  - "qid:Q316970|name:日本の歴史"
-  - "qid:Q3234503|name:日本の歴史"
-  - "qid:Q3297171|name:日本の歴史"
-  - "qid:Q3813166|name:日本の歴史"
-  - "qid:Q6061723|name:日本の歴史"
-  - "qid:Q719354|name:日本の歴史"
-  - "qid:Q9116547|name:日本の歴史"
+  - qid:Q1036246|name:日本の歴史
+  - qid:Q1049596|name:日本の歴史
+  - qid:Q11586892|name:日本の歴史
+  - qid:Q1191493|name:日本の歴史
+  - qid:Q16263860|name:日本の歴史
+  - qid:Q1993|name:日本の歴史
+  - qid:Q295073|name:日本の歴史
+  - qid:Q316970|name:日本の歴史
+  - qid:Q3234503|name:日本の歴史
+  - qid:Q3297171|name:日本の歴史
+  - qid:Q3813166|name:日本の歴史
+  - qid:Q6061723|name:日本の歴史
+  - qid:Q719354|name:日本の歴史
+  - qid:Q9116547|name:日本の歴史
   note: 歴史学習boxed統合(集英社版学習まんが・巻番号重複なし1シーケンス・共通作画おーじろう/行徳ゆみ) 2026-06
 - merge_keys:
-  - "qid:Q11569667|name:日本の歴史"
-  - "qid:Q1192471|name:日本の歴史"
-  - "qid:Q1372761|name:日本の歴史"
-  - "qid:Q313703|name:日本の歴史"
-  - "qid:Q3330991|name:日本の歴史"
-  - "qid:Q377944|name:日本の歴史"
-  - "qid:Q5361785|name:日本の歴史"
-  - "qid:Q6378225|name:日本の歴史"
-  - "qid:Q9109509|name:日本の歴史"
+  - qid:Q11569667|name:日本の歴史
+  - qid:Q1192471|name:日本の歴史
+  - qid:Q1372761|name:日本の歴史
+  - qid:Q313703|name:日本の歴史
+  - qid:Q3330991|name:日本の歴史
+  - qid:Q377944|name:日本の歴史
+  - qid:Q5361785|name:日本の歴史
+  - qid:Q6378225|name:日本の歴史
+  - qid:Q9109509|name:日本の歴史
   note: 歴史学習boxed統合(角川まんが学習シリーズ・巻番号重複なし1シーケンス・共通作画吉崎観音) 2026-06
 - merge_keys:
-  - "name:さいとうしげき|name:はじめての日本の歴史"
-  - "name:たなかしえ|name:はじめての日本の歴史"
-  - "name:田中アキラ|name:はじめての日本の歴史"
+  - name:さいとうしげき|name:はじめての日本の歴史
+  - name:たなかしえ|name:はじめての日本の歴史
+  - name:田中アキラ|name:はじめての日本の歴史
   note: 歴史学習boxed統合(小学館版学習まんが・巻番号重複なし1シーケンス・共通作画同年) 2026-06
 - merge_keys:
-  - "qid:Q11372936|name:日本の歴史"
-  - "qid:Q11474067|name:日本の歴史"
-  - "qid:Q11540302|name:日本の歴史"
-  - "qid:Q11618901|name:日本の歴史"
+  - qid:Q11372936|name:日本の歴史
+  - qid:Q11474067|name:日本の歴史
+  - qid:Q11540302|name:日本の歴史
+  - qid:Q11618901|name:日本の歴史
   note: 歴史学習boxed統合(集英社文庫版学習漫画日本の歴史全20巻・巻番号重複なし・全2007年・各時代別作画) 2026-06
 - merge_keys:
-  - "qid:Q11273889|name:大怪獣ガメラ"
-  - "qid:Q11459921|name:大怪獣ガメラ"
-  - "qid:Q17220038|name:大怪獣ガメラ"
+  - qid:Q11273889|name:大怪獣ガメラ
+  - qid:Q11459921|name:大怪獣ガメラ
+  - qid:Q17220038|name:大怪獣ガメラ
   note: 分断シリーズ統合(同題「大怪獣ガメラ」∧原作高橋二三共有∧巻番号非重複1シーケンス・imprint表記揺れで漏れ) 2026-06
 - merge_keys:
-  - "name:太田勝|name:名探偵コナン特別編"
-  - "name:太田勝と江古田探偵団|name:名探偵コナン特別編"
+  - name:太田勝|name:名探偵コナン特別編
+  - name:太田勝と江古田探偵団|name:名探偵コナン特別編
   note: 分断シリーズ統合(同題「名探偵コナン特別編」∧原作渡辺智博共有∧巻番号非重複1シーケンス・imprint表記揺れで漏れ) 2026-06
 - merge_keys:
-  - "name:加藤貴夫|name:動物のクライシス"
-  - "qid:Q11461285|name:動物のクライシス"
-  - "name:久保田学|name:動物のクライシス"
+  - name:加藤貴夫|name:動物のクライシス
+  - qid:Q11461285|name:動物のクライシス
+  - name:久保田学|name:動物のクライシス
   note: 学習科学/伝記シリーズ分断統合(同題「動物のクライシス」∧学習imprint「科学学習まんがクライシス・シ」∧巻番号非重複) 2026-06
 - merge_keys:
-  - "name:小畠郁生|name:地球の歴史"
-  - "name:横尾浩一|name:地球の歴史"
-  - "name:斎藤靖二|name:地球の歴史"
+  - name:小畠郁生|name:地球の歴史
+  - name:横尾浩一|name:地球の歴史
+  - name:斎藤靖二|name:地球の歴史
   note: 学習科学/伝記シリーズ分断統合(同題「地球の歴史」∧学習imprint「集英社版・学習漫画」∧巻番号非重複) 2026-06
 - merge_keys:
-  - "name:あおむら純まんが|name:少年少女人物日本の歴史"
-  - "name:小井土繁と学習まんが集団まんが|name:少年少女人物日本の歴史"
+  - name:あおむら純まんが|name:少年少女人物日本の歴史
+  - name:小井土繁と学習まんが集団まんが|name:少年少女人物日本の歴史
   note: 学習科学/伝記シリーズ分断統合(同題「少年少女人物日本の歴史」∧学習imprint「小学館版学習まんが」∧巻番号非重複) 2026-06
 - merge_keys:
-  - "qid:Q1192471|name:日本の歴史"
-  - "qid:Q11410412|name:日本の歴史"
-  - "qid:Q11569667|name:日本の歴史"
-  - "qid:Q1372761|name:日本の歴史"
-  - "qid:Q3136401|name:日本の歴史"
-  - "qid:Q313703|name:日本の歴史"
-  - "qid:Q3330991|name:日本の歴史"
-  - "qid:Q377944|name:日本の歴史"
-  - "qid:Q5361785|name:日本の歴史"
-  - "qid:Q6378225|name:日本の歴史"
-  - "qid:Q9109509|name:日本の歴史"
-  - "name:藤田香|name:日本の歴史"
-  - "name:江端里沙|name:日本の歴史"
-  - "name:川元利浩|name:日本の歴史"
-  - "name:しゅー|name:日本の歴史"
-  - "name:琴音らんまる|name:日本の歴史"
+  - qid:Q1192471|name:日本の歴史
+  - qid:Q11410412|name:日本の歴史
+  - qid:Q11569667|name:日本の歴史
+  - qid:Q1372761|name:日本の歴史
+  - qid:Q3136401|name:日本の歴史
+  - qid:Q313703|name:日本の歴史
+  - qid:Q3330991|name:日本の歴史
+  - qid:Q377944|name:日本の歴史
+  - qid:Q5361785|name:日本の歴史
+  - qid:Q6378225|name:日本の歴史
+  - qid:Q9109509|name:日本の歴史
+  - name:藤田香|name:日本の歴史
+  - name:江端里沙|name:日本の歴史
+  - name:川元利浩|name:日本の歴史
+  - name:しゅー|name:日本の歴史
+  - name:琴音らんまる|name:日本の歴史
   note: 学習日本の歴史 全16sid完全統合(角川まんが学習シリーズ・2015-16単一版・表紙作家別分断を全回収=部分merge上書き) 2026-06
 - merge_keys:
-  - "name:おーじろう|name:日本の歴史"
-  - "qid:Q1036246|name:日本の歴史"
-  - "qid:Q1049596|name:日本の歴史"
-  - "qid:Q11586892|name:日本の歴史"
-  - "qid:Q1191493|name:日本の歴史"
-  - "qid:Q16263860|name:日本の歴史"
-  - "qid:Q1993|name:日本の歴史"
-  - "qid:Q295073|name:日本の歴史"
-  - "qid:Q3136401|name:日本の歴史"
-  - "qid:Q316970|name:日本の歴史"
-  - "qid:Q3234503|name:日本の歴史"
-  - "qid:Q3297171|name:日本の歴史"
-  - "qid:Q3813166|name:日本の歴史"
-  - "qid:Q6061723|name:日本の歴史"
-  - "qid:Q719354|name:日本の歴史"
-  - "qid:Q9116547|name:日本の歴史"
+  - name:おーじろう|name:日本の歴史
+  - qid:Q1036246|name:日本の歴史
+  - qid:Q1049596|name:日本の歴史
+  - qid:Q11586892|name:日本の歴史
+  - qid:Q1191493|name:日本の歴史
+  - qid:Q16263860|name:日本の歴史
+  - qid:Q1993|name:日本の歴史
+  - qid:Q295073|name:日本の歴史
+  - qid:Q3136401|name:日本の歴史
+  - qid:Q316970|name:日本の歴史
+  - qid:Q3234503|name:日本の歴史
+  - qid:Q3297171|name:日本の歴史
+  - qid:Q3813166|name:日本の歴史
+  - qid:Q6061723|name:日本の歴史
+  - qid:Q719354|name:日本の歴史
+  - qid:Q9116547|name:日本の歴史
   note: 学習日本の歴史 全16sid完全統合(集英社版学習まんが・2016単一版・表紙作家別分断を全回収=部分merge上書き) 2026-06
 - merge_keys:
-  - "name:鈴木敬信|name:なぜなぜ理科学習漫画（1963年版）"
-  - "qid:Q11453560|name:鳥の博物館"
-  - "name:鈴木敬信|name:ひらけゆく宇宙"
-  - "name:倉島厚|name:やさしい天気教室"
-  - "name:鈴木敬信|name:やさしい天気教室"
-  - "name:鈴木敬信|name:人体の神秘"
-  - "name:西三郎|name:人体の神秘"
-  - "name:青木国夫|name:光・音・熱の魔術師"
-  - "name:鈴木敬信|name:光・音・熱の魔術師"
-  - "name:鈴木敬信|name:動物の王国"
-  - "name:今泉吉典|name:動物の王国"
-  - "name:高橋浩一郎|name:大自然の驚異"
-  - "name:鈴木敬信|name:植物の世界"
-  - "name:奥山春季|name:植物の世界"
-  - "name:鈴木敬信|name:機械の実験室"
-  - "name:石橋一郎|name:機械の実験室"
-  - "name:保田義孝|name:生きている地球"
-  - "name:斉藤靖二|name:生きている地球"
-  - "name:鈴木敬信|name:自然と原子の驚異"
-  - "name:古川晴男|name:虫の国をたずねて"
-  - "name:鈴木敬信|name:虫の国をたずねて"
-  - "name:中村守純|name:魚・貝のふしぎ"
-  - "name:鈴木敬信|name:魚・貝のふしぎ"
-  - "name:鈴木敬信|name:鳥の博物館"
+  - name:鈴木敬信|name:なぜなぜ理科学習漫画（1963年版）
+  - qid:Q11453560|name:鳥の博物館
+  - name:鈴木敬信|name:ひらけゆく宇宙
+  - name:倉島厚|name:やさしい天気教室
+  - name:鈴木敬信|name:やさしい天気教室
+  - name:鈴木敬信|name:人体の神秘
+  - name:西三郎|name:人体の神秘
+  - name:青木国夫|name:光・音・熱の魔術師
+  - name:鈴木敬信|name:光・音・熱の魔術師
+  - name:鈴木敬信|name:動物の王国
+  - name:今泉吉典|name:動物の王国
+  - name:高橋浩一郎|name:大自然の驚異
+  - name:鈴木敬信|name:植物の世界
+  - name:奥山春季|name:植物の世界
+  - name:鈴木敬信|name:機械の実験室
+  - name:石橋一郎|name:機械の実験室
+  - name:保田義孝|name:生きている地球
+  - name:斉藤靖二|name:生きている地球
+  - name:鈴木敬信|name:自然と原子の驚異
+  - name:古川晴男|name:虫の国をたずねて
+  - name:鈴木敬信|name:虫の国をたずねて
+  - name:中村守純|name:魚・貝のふしぎ
+  - name:鈴木敬信|name:魚・貝のふしぎ
+  - name:鈴木敬信|name:鳥の博物館
   renumber: true
   note: NDL確定=なぜなぜ理科学習漫画 全12巻(集英社1963/1976)・各テーマ=巻・テーマ別sid+監修別二重登録を全統合 2026-06
 - merge_keys:
-  - "qid:Q723853|name:シートン"
-  - "name:今泉吉晴|name:シートン|sub:旅するナチュラリスト"
+  - qid:Q723853|name:シートン
+  - name:今泉吉晴|name:シートン|sub:旅するナチュラリスト
   separate_editions: true
   note: 版統合(谷口ジロー シートン旅するナチュラリスト)=ACTION COMICS原版(2005-08)+谷口ジローコレクション(2023再刊)を1ページ2版で並べる。両type=standardだがimprint分離(opt-in) 2026-06
 - merge_keys:
-  - "name:CLAMP|name:CLAMP PREMIUM COLLECTION魔法騎士(マジックナイト)レイアース"
-  - "name:CLAMP|name:魔法騎士レイアース"
-  - "name:Clamp|name:魔法騎士レイアース"
+  - name:CLAMP|name:CLAMP PREMIUM COLLECTION魔法騎士(マジックナイト)レイアース
+  - name:CLAMP|name:魔法騎士レイアース
+  - name:Clamp|name:魔法騎士レイアース
   separate_editions: true
   note: 版統合B(CLAMP 魔法騎士レイアース)=CLAMP PREMIUM COLLECTION新装版+原作各版を1ページ別版併置。旧ペアentry上書き 2026-06
 - merge_keys:
-  - "name:CLAMP|name:CLAMP PREMIUM COLLECTION魔法騎士(マジックナイト)レイアース2"
-  - "name:CLAMP|name:魔法騎士レイアース2"
-  - "name:Clamp|name:魔法騎士レイアース2"
+  - name:CLAMP|name:CLAMP PREMIUM COLLECTION魔法騎士(マジックナイト)レイアース2
+  - name:CLAMP|name:魔法騎士レイアース2
+  - name:Clamp|name:魔法騎士レイアース2
   separate_editions: true
   note: 版統合B(CLAMP 魔法騎士レイアース2)=CLAMP PREMIUM COLLECTION新装版+原作各版を1ページ別版併置。旧ペアentry上書き 2026-06
 - merge_keys:
-  - "name:CLAMP|name:CLAMP PREMIUM COLLECTION CLOVER"
-  - "name:CLAMP|name:Clover"
-  - "name:Clamp|name:Clover"
+  - name:CLAMP|name:CLAMP PREMIUM COLLECTION CLOVER
+  - name:CLAMP|name:Clover
+  - name:Clamp|name:Clover
   separate_editions: true
   note: 版統合B(CLAMP CLOVER)=CLAMP PREMIUM COLLECTION新装版+原作各版を1ページ別版併置。旧ペアentry上書き 2026-06
 - merge_keys:
-  - "name:CLAMP|name:CLAMP PREMIUM COLLECTION X"
-  - "name:CLAMP|name:X"
+  - name:CLAMP|name:CLAMP PREMIUM COLLECTION X
+  - name:CLAMP|name:X
   separate_editions: true
   note: 版統合B(CLAMP X)=CLAMP PREMIUM COLLECTION新装版+原作各版を1ページ別版併置。旧ペアentry上書き 2026-06
 - merge_keys:
-  - "name:CLAMP|name:CLAMP PREMIUM COLLECTION東京BABYLON"
-  - "name:Clamp|name:東京BABYLON"
-  - "name:CLAMP|name:東京babylon"
-  - "name:CLAMP|name:東京BABYLON"
+  - name:CLAMP|name:CLAMP PREMIUM COLLECTION東京BABYLON
+  - name:Clamp|name:東京BABYLON
+  - name:CLAMP|name:東京babylon
+  - name:CLAMP|name:東京BABYLON
   separate_editions: true
   note: 版統合B(CLAMP 東京BABYLON)=CLAMP PREMIUM COLLECTION新装版+原作各版を1ページ別版併置。旧ペアentry上書き 2026-06
 - merge_keys:
-  - "name:CLAMP|name:CLAMP PREMIUM COLLECTION CLAMP学園探偵団"
-  - "name:Clamp|name:CLAMP学園探偵団"
-  - "name:CLAMP|name:CLAMP学園探偵団"
-  - "name:CLAMP|name:Clamp学園探偵団"
-  - "name:Clamp|name:Clamp学園探偵団"
+  - name:CLAMP|name:CLAMP PREMIUM COLLECTION CLAMP学園探偵団
+  - name:Clamp|name:CLAMP学園探偵団
+  - name:CLAMP|name:CLAMP学園探偵団
+  - name:CLAMP|name:Clamp学園探偵団
+  - name:Clamp|name:Clamp学園探偵団
   separate_editions: true
   note: 版統合B(CLAMP CLAMP学園探偵団)=CLAMP PREMIUM COLLECTION新装版+原作各版を1ページ別版併置。旧ペアentry上書き 2026-06
 - merge_keys:
-  - "name:CLAMP|name:CLAMP PREMIUM COLLECTIONちょびっツ"
-  - "name:Clamp|name:ちょびっツ"
+  - name:CLAMP|name:CLAMP PREMIUM COLLECTIONちょびっツ
+  - name:Clamp|name:ちょびっツ
   separate_editions: true
   note: 版統合B(CLAMP ちょびッツ)=CLAMP PREMIUM COLLECTION新装版+原作各版を1ページ別版併置。旧ペアentry上書き 2026-06
 - merge_keys:
-  - "name:CLAMP|name:CLAMP PREMIUM COLLECTION ×××HOLiC"
-  - "name:CLAMP|name:xxxHOLiC"
-  - "name:CLAMP|name:xxxHolic"
+  - name:CLAMP|name:CLAMP PREMIUM COLLECTION ×××HOLiC
+  - name:CLAMP|name:xxxHOLiC
+  - name:CLAMP|name:xxxHolic
   separate_editions: true
   note: 版統合B(CLAMP ×××HOLiC本編)=CLAMP PREMIUM COLLECTION新装版+原作各版を1ページ別版併置。旧ペアentry上書き 2026-06
 - merge_keys:
-  - "name:レベルファイブ|name:イナズマイレブン"
-  - "qid:Q3518204|name:イナズマイレブン"
+  - name:レベルファイブ|name:イナズマイレブン
+  - qid:Q3518204|name:イナズマイレブン
   note: UNKNOWN著者ゼロ再分類=同題×同作画(やぶのてんや)の分裂統合(NDL責任表示で確認・別作画版は分離) 2026-06
 - merge_keys:
-  - "name:川島健三|name:姿三四郎"
-  - "qid:Q3325226|name:姿三四郎"
+  - name:川島健三|name:姿三四郎
+  - qid:Q3325226|name:姿三四郎
   note: UNKNOWN著者ゼロ再分類=同題×同作画(本宮ひろ志)の分裂統合(NDL責任表示で確認・別作画版は分離) 2026-06
 - merge_keys:
-  - "name:necomi|name:元最強の剣士は、異世界魔法に憧れる"
-  - "name:necömi|name:元最強の剣士は、異世界魔法に憧れる"
+  - name:necomi|name:元最強の剣士は、異世界魔法に憧れる
+  - name:necömi|name:元最強の剣士は、異世界魔法に憧れる
   note: UNKNOWN著者ゼロ再分類=同題×同作画(天乃ちはる)の分裂統合(NDL責任表示で確認・別作画版は分離) 2026-06
 - merge_keys:
-  - "name:Ran|name:メイド戦記"
-  - "qid:Q9027719|name:メイド戦記"
+  - name:Ran|name:メイド戦記
+  - qid:Q9027719|name:メイド戦記
   note: UNKNOWN著者ゼロ再分類=同題×同作画(Ran)の分裂統合(NDL責任表示で確認・別作画版は分離) 2026-06
 - merge_keys:
-  - "name:ウオズミアミ|name:冷たくて柔らか"
-  - "name:ウオズミアミ|name:冷たくて柔らか|sub:PiNKY CANDY KiSS"
+  - name:ウオズミアミ|name:冷たくて柔らか
+  - name:ウオズミアミ|name:冷たくて柔らか|sub:PiNKY CANDY KiSS
   note: UNKNOWN著者ゼロ再分類=同題×同作画(ウオズミアミ)の分裂統合(NDL責任表示で確認・別作画版は分離) 2026-06
 - merge_keys:
-  - "name:井上咲子|name:どうぞごじゆうに"
-  - "qid:Q11259883|name:どうぞごじゆうに|sub:クミコの発酵暮らし"
+  - name:井上咲子|name:どうぞごじゆうに
+  - qid:Q11259883|name:どうぞごじゆうに|sub:クミコの発酵暮らし
   note: UNKNOWN著者ゼロ再分類=同題×同作画(いのうえさきこ)の分裂統合(NDL責任表示で確認・別作画版は分離) 2026-06
 - merge_keys:
-  - "name:高橋ツトム|name:JUMBO MAX"
-  - "qid:Q1051001|name:JUMBO MAX"
+  - name:高橋ツトム|name:JUMBO MAX
+  - qid:Q1051001|name:JUMBO MAX
   note: UNKNOWN著者ゼロ再分類=同題×同作画(髙橋ツトム)の分裂統合(NDL責任表示で確認・別作画版は分離) 2026-06
 - merge_keys:
-  - "name:三国司|name:北の砦にて"
-  - "name:草中|name:北の砦にて"
+  - name:三国司|name:北の砦にて
+  - name:草中|name:北の砦にて
   note: UNKNOWN著者ゼロ再分類=同題×同作画(明野たわ)の分裂統合(NDL責任表示で確認・別作画版は分離) 2026-06
 - merge_keys:
-  - "name:篁アンナ|name:秘密はキスで暴かれる"
-  - "name:篁アンナ|name:秘密はキスで暴かれる|sub:qpa edition"
+  - name:篁アンナ|name:秘密はキスで暴かれる
+  - name:篁アンナ|name:秘密はキスで暴かれる|sub:qpa edition
   note: UNKNOWN著者ゼロ再分類=同題×同作画(篁アンナ)の分裂統合(NDL責任表示で確認・別作画版は分離) 2026-06
 - merge_keys:
-  - "name:TYPE-MOON|name:Fate strange Fake"
-  - "name:TYPE-MOON|name:フェイト/ストレンジフェイク"
+  - name:TYPE-MOON|name:Fate strange Fake
+  - name:TYPE-MOON|name:フェイト/ストレンジフェイク
   note: same_art表記揺れ統合(同作画の同一作・英カナ/異体字/版表記の揺れ slug feito-sutorenji-feiku) 2026-06
 - merge_keys:
-  - "name:みやた泰宏|name:アドベンチャー2030学園"
-  - "name:みやた泰宏|name:Adventure2030学園"
+  - name:みやた泰宏|name:アドベンチャー2030学園
+  - name:みやた泰宏|name:Adventure2030学園
   note: same_art表記揺れ統合(同作画の同一作・英カナ/異体字/版表記の揺れ slug adobenchaa-nisen-sanjuu-gakuen) 2026-06
 - merge_keys:
-  - "name:大舞キリコ|name:警視庁捜査一課十津川警部＆トレインミステリーコミックセレクション"
-  - "name:宗美智子|name:警視庁捜査一課十津川警部＆トレインミステリーコミックセレクション"
+  - name:大舞キリコ|name:警視庁捜査一課十津川警部＆トレインミステリーコミックセレクション
+  - name:宗美智子|name:警視庁捜査一課十津川警部＆トレインミステリーコミックセレクション
   note: same_art表記揺れ統合(同作画の同一作・英カナ/異体字/版表記の揺れ slug keishichou-sousa-ikka-totsugawa-keibu-ando-torein-misuterii-komikku-serekushon) 2026-06
 - merge_keys:
-  - "qid:Q471103|name:ホテル"
-  - "name:大石賢一|name:HOTEL"
+  - qid:Q471103|name:ホテル
+  - name:大石賢一|name:HOTEL
   note: same_art表記揺れ統合(同作画の同一作・英カナ/異体字/版表記の揺れ slug hoteru) 2026-06
 - merge_keys:
-  - "qid:Q11242326|name:曉!!男塾"
-  - "qid:Q11242326|name:暁!!男塾"
+  - qid:Q11242326|name:曉!!男塾
+  - qid:Q11242326|name:暁!!男塾
   note: same_art表記揺れ統合(同作画の同一作・英カナ/異体字/版表記の揺れ slug akatsuki-otokojuku) 2026-06
 - merge_keys:
-  - "qid:Q11244884|name:Percolation"
-  - "qid:Q11244884|name:パーコレイション"
+  - qid:Q11244884|name:Percolation
+  - qid:Q11244884|name:パーコレイション
   note: same_art表記揺れ統合(同作画の同一作・英カナ/異体字/版表記の揺れ slug paakoreishon) 2026-06
 - merge_keys:
-  - "qid:Q11269546|name:エキシビション"
-  - "qid:Q11269546|name:EXHIIBITION"
+  - qid:Q11269546|name:エキシビション
+  - qid:Q11269546|name:EXHIIBITION
   note: same_art表記揺れ統合(同作画の同一作・英カナ/異体字/版表記の揺れ slug ekishibishon) 2026-06
 - merge_keys:
-  - "qid:Q11269589|name:超・学校法人スタア學園"
-  - "qid:Q11269589|name:超・学校法人スタア学園"
+  - qid:Q11269589|name:超・学校法人スタア學園
+  - qid:Q11269589|name:超・学校法人スタア学園
   note: same_art表記揺れ統合(同作画の同一作・英カナ/異体字/版表記の揺れ slug chou-gakkou-houjin-sutaa-gakuen) 2026-06
 - merge_keys:
-  - "qid:Q11270865|name:NIGHT ADULTCHILDREN"
-  - "qid:Q11270865|name:ないと★あだるとちるどれん"
+  - qid:Q11270865|name:NIGHT ADULTCHILDREN
+  - qid:Q11270865|name:ないと★あだるとちるどれん
   note: same_art表記揺れ統合(同作画の同一作・英カナ/異体字/版表記の揺れ slug naito-adarutochirudoren) 2026-06
 - merge_keys:
-  - "qid:Q11380307|name:びよーん!!陽快学級"
-  - "qid:Q11380307|name:びょ～ん!!陽快学級"
+  - qid:Q11380307|name:びよーん!!陽快学級
+  - qid:Q11380307|name:びょ～ん!!陽快学級
   note: same_art表記揺れ統合(同作画の同一作・英カナ/異体字/版表記の揺れ slug byoon-youkai-gakkyuu) 2026-06
 - merge_keys:
-  - "qid:Q11384930|name:PRETTY TOUGH"
-  - "qid:Q11384930|name:プリティ・タフ"
+  - qid:Q11384930|name:PRETTY TOUGH
+  - qid:Q11384930|name:プリティ・タフ
   note: same_art表記揺れ統合(同作画の同一作・英カナ/異体字/版表記の揺れ slug puritei-tafu) 2026-06
 - merge_keys:
-  - "qid:Q11452206|name:CHIC"
-  - "qid:Q11452206|name:CICK"
+  - qid:Q11452206|name:CHIC
+  - qid:Q11452206|name:CICK
   note: same_art表記揺れ統合(同作画の同一作・英カナ/異体字/版表記の揺れ slug shikku) 2026-06
 - merge_keys:
-  - "qid:Q11468762|name:ヘイ!!ブルースマン"
-  - "qid:Q11468762|name:Hey!!ブルースマン"
+  - qid:Q11468762|name:ヘイ!!ブルースマン
+  - qid:Q11468762|name:Hey!!ブルースマン
   note: same_art表記揺れ統合(同作画の同一作・英カナ/異体字/版表記の揺れ slug hei-buruusuman) 2026-06
 - merge_keys:
-  - "qid:Q11492362|name:BLOODY MONDAY"
-  - "qid:Q11492362|name:ブラッディ・マンディ"
+  - qid:Q11492362|name:BLOODY MONDAY
+  - qid:Q11492362|name:ブラッディ・マンディ
   note: same_art表記揺れ統合(同作画の同一作・英カナ/異体字/版表記の揺れ slug buraddei-mandei) 2026-06
 - merge_keys:
-  - "qid:Q11551638|name:フェアウエイの侍"
-  - "qid:Q11551638|name:フェアウェイの侍"
+  - qid:Q11551638|name:フェアウエイの侍
+  - qid:Q11551638|name:フェアウェイの侍
   note: same_art表記揺れ統合(同作画の同一作・英カナ/異体字/版表記の揺れ slug feauei-no-samurai) 2026-06
 - merge_keys:
-  - "qid:Q11620792|name:ルナ・シティ17"
-  - "qid:Q11620792|name:ルナ・シティ17〈ワン・セブン〉"
+  - qid:Q11620792|name:ルナ・シティ17
+  - qid:Q11620792|name:ルナ・シティ17〈ワン・セブン〉
   note: same_art表記揺れ統合(同作画の同一作・英カナ/異体字/版表記の揺れ slug runa-shitei-wan-sebun) 2026-06
 - merge_keys:
-  - "qid:Q11620798|name:S+"
-  - "qid:Q11620798|name:S+エスプラス"
+  - qid:Q11620798|name:S+
+  - qid:Q11620798|name:S+エスプラス
   note: same_art表記揺れ統合(同作画の同一作・英カナ/異体字/版表記の揺れ slug esu-purasu) 2026-06
 - merge_keys:
-  - "qid:Q11625662|name:ワールドヒーローズ光竜伝"
-  - "qid:Q11625662|name:ワールドヒーローズ光龍伝"
+  - qid:Q11625662|name:ワールドヒーローズ光竜伝
+  - qid:Q11625662|name:ワールドヒーローズ光龍伝
   note: same_art表記揺れ統合(同作画の同一作・英カナ/異体字/版表記の揺れ slug waarudo-hiiroozu-kouryuuden) 2026-06
 - merge_keys:
-  - "qid:Q11644242|name:お坊っちゃまナイスですね"
-  - "qid:Q11644242|name:お坊ちゃまナイスですね"
+  - qid:Q11644242|name:お坊っちゃまナイスですね
+  - qid:Q11644242|name:お坊ちゃまナイスですね
   note: same_art表記揺れ統合(同作画の同一作・英カナ/異体字/版表記の揺れ slug obotchama-naisu-desune) 2026-06
 - merge_keys:
-  - "qid:Q11651076|name:WINGS"
-  - "qid:Q11651076|name:ウイングス"
+  - qid:Q11651076|name:WINGS
+  - qid:Q11651076|name:ウイングス
   note: same_art表記揺れ統合(同作画の同一作・英カナ/異体字/版表記の揺れ slug uingusu) 2026-06
 - merge_keys:
-  - "qid:Q11653302|name:怒濤の少女"
-  - "qid:Q11653302|name:怒涛の少女"
+  - qid:Q11653302|name:怒濤の少女
+  - qid:Q11653302|name:怒涛の少女
   note: same_art表記揺れ統合(同作画の同一作・英カナ/異体字/版表記の揺れ slug dotou-no-shoujo) 2026-06
 - merge_keys:
-  - "qid:Q11657821|name:放課後関ヶ原"
-  - "qid:Q11657821|name:放課後関ケ原"
+  - qid:Q11657821|name:放課後関ヶ原
+  - qid:Q11657821|name:放課後関ケ原
   note: same_art表記揺れ統合(同作画の同一作・英カナ/異体字/版表記の揺れ slug houkago-sekigahara) 2026-06
 - merge_keys:
-  - "qid:Q11664746|name:Aquarium"
-  - "qid:Q11664746|name:アクアリウム"
+  - qid:Q11664746|name:Aquarium
+  - qid:Q11664746|name:アクアリウム
   note: same_art表記揺れ統合(同作画の同一作・英カナ/異体字/版表記の揺れ slug akuariumu) 2026-06
 - merge_keys:
-  - "qid:Q11671440|name:Lesson"
-  - "qid:Q11671440|name:レッスン"
+  - qid:Q11671440|name:Lesson
+  - qid:Q11671440|name:レッスン
   note: same_art表記揺れ統合(同作画の同一作・英カナ/異体字/版表記の揺れ slug ressun) 2026-06
 - merge_keys:
-  - "qid:Q1399083|name:HURRICANE"
-  - "qid:Q1399083|name:ハリケーン"
+  - qid:Q1399083|name:HURRICANE
+  - qid:Q1399083|name:ハリケーン
   note: same_art表記揺れ統合(同作画の同一作・英カナ/異体字/版表記の揺れ slug harikeen) 2026-06
 - merge_keys:
-  - "qid:Q1736792|name:超龍戦記ザウロスナイト"
-  - "qid:Q1736792|name:超竜戦記ザウロスナイト"
+  - qid:Q1736792|name:超龍戦記ザウロスナイト
+  - qid:Q1736792|name:超竜戦記ザウロスナイト
   note: same_art表記揺れ統合(同作画の同一作・英カナ/異体字/版表記の揺れ slug chouryuu-senki-zaurosu-naito) 2026-06
 - merge_keys:
-  - "qid:Q265148|name:仲よし手帖 新やじきた道中記"
-  - "qid:Q265148|name:新やじきた道中記"
+  - qid:Q265148|name:仲よし手帖 新やじきた道中記
+  - qid:Q265148|name:新やじきた道中記
   note: same_art表記揺れ統合(同作画の同一作・英カナ/異体字/版表記の揺れ slug shin-yajikita-douchuuki) 2026-06
 - merge_keys:
-  - "qid:Q3089616|name:Princess Lucia"
-  - "qid:Q3089616|name:プリンセスルシア"
+  - qid:Q3089616|name:Princess Lucia
+  - qid:Q3089616|name:プリンセスルシア
   note: same_art表記揺れ統合(同作画の同一作・英カナ/異体字/版表記の揺れ slug purinsesu-rushia) 2026-06
 - merge_keys:
-  - "qid:Q3267171|name:魔界三国志CHIMAERA"
-  - "qid:Q3267171|name:魔界三国志キマイラ"
+  - qid:Q3267171|name:魔界三国志CHIMAERA
+  - qid:Q3267171|name:魔界三国志キマイラ
   note: same_art表記揺れ統合(同作画の同一作・英カナ/異体字/版表記の揺れ slug makai-sangokushi-kimaira) 2026-06
 - merge_keys:
-  - "qid:Q38278121|name:わたしの1ケ月1000円ごほうび"
-  - "qid:Q38278121|name:わたしの1ヶ月1000円ごほうび"
+  - qid:Q38278121|name:わたしの1ケ月1000円ごほうび
+  - qid:Q38278121|name:わたしの1ヶ月1000円ごほうび
   note: same_art表記揺れ統合(同作画の同一作・英カナ/異体字/版表記の揺れ slug watashi-no-ikkagetsu-sen-en-gohoubi) 2026-06
 - merge_keys:
-  - "qid:Q41698730|name:Darkness"
-  - "qid:Q41698730|name:ダークネス"
+  - qid:Q41698730|name:Darkness
+  - qid:Q41698730|name:ダークネス
   note: same_art表記揺れ統合(同作画の同一作・英カナ/異体字/版表記の揺れ slug daakunesu) 2026-06
 - merge_keys:
-  - "qid:Q41698730|name:お江戸くノ一変化のお梛事件帖"
-  - "qid:Q41698730|name:お江戸くノ一変化のお椰事件帖"
+  - qid:Q41698730|name:お江戸くノ一変化のお梛事件帖
+  - qid:Q41698730|name:お江戸くノ一変化のお椰事件帖
   note: same_art表記揺れ統合(同作画の同一作・英カナ/異体字/版表記の揺れ slug oedo-kunoichi-henge-no-onagi-jikenchou) 2026-06
 - merge_keys:
-  - "qid:Q471103|name:HATAGO 旅篭"
-  - "qid:Q471103|name:HATAGO 旅籠"
+  - qid:Q471103|name:HATAGO 旅篭
+  - qid:Q471103|name:HATAGO 旅籠
   note: same_art表記揺れ統合(同作画の同一作・英カナ/異体字/版表記の揺れ slug hatago) 2026-06
 - merge_keys:
-  - "qid:Q7505079|name:Golden lucky"
-  - "qid:Q7505079|name:ゴールデンラッキー"
+  - qid:Q7505079|name:Golden lucky
+  - qid:Q7505079|name:ゴールデンラッキー
   note: same_art表記揺れ統合(同作画の同一作・英カナ/異体字/版表記の揺れ slug gooruden-rakkii) 2026-06
 - merge_keys:
-  - "qid:Q7677102|name:ねぇ、ぴよちゃん"
-  - "qid:Q7677102|name:ねえ、ぴよちゃん"
+  - qid:Q7677102|name:ねぇ、ぴよちゃん
+  - qid:Q7677102|name:ねえ、ぴよちゃん
   note: same_art表記揺れ統合(同作画の同一作・英カナ/異体字/版表記の揺れ slug nee-piyochan) 2026-06
 - merge_keys:
-  - "qid:Q8060662|name:是-ZE"
-  - "qid:Q8060662|name:是"
+  - qid:Q8060662|name:是-ZE
+  - qid:Q8060662|name:是
   note: same_art表記揺れ統合(同作画の同一作・英カナ/異体字/版表記の揺れ slug ze) 2026-06
-
+- main: 空手バカ一代
+  merge_keys:
+  - qid:Q11272388|name:空手バカ一代
+  - qid:Q11488080|name:空手バカ一代
+  - qid:Q1319237|name:空手バカ一代
+  note: '巻抜けunder-merge是正: 種2別sidの同題同著者volを統合(vols [18, 19])。title+著者一致確認・spinoff除外。NDL確認 2026-06-29'
+- main: こちら葛飾区亀有公園前派出所
+  merge_keys:
+  - name:ホーム社|name:こちら葛飾区亀有公園前派出所
+  - name:小山高生|name:こちら葛飾区亀有公園前派出所
+  - qid:Q1321466|name:こちら葛飾区亀有公園前派出所
+  note: '巻抜けunder-merge是正: 種2別sidの同題同著者volを統合(vols [25, 26, 33, 41, 42, 43, 44, 45, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 93, 94, 95, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 108, 109, 110, 111, 112, 113, 114, 117, 118, 119, 120])。title+著者一致確認・spinoff除外。NDL確認 2026-06-29'
+- main: 大長編ドラえもん
+  merge_keys:
+  - name:藤子・F・不二雄プロ|name:大長編ドラえもん
+  - name:藤子不二雄|name:大長編ドラえもん
+  - qid:Q17572|name:大長編ドラえもん
+  - qid:Q9009404|name:大長編ドラえもん
+  note: '巻抜けunder-merge是正: 種2別sidの同題同著者volを統合(vols [18])。title+著者一致確認・spinoff除外。NDL確認 2026-06-29'
+- main: 大長編ドラえもん
+  merge_keys:
+  - name:藤子・F・不二雄プロ|name:大長編ドラえもん
+  - name:藤子不二雄|name:大長編ドラえもん
+  - qid:Q17572|name:大長編ドラえもん
+  - qid:Q9132089|name:大長編ドラえもん
+  note: '巻抜けunder-merge是正: 種2別sidの同題同著者volを統合(vols [21])。title+著者一致確認・spinoff除外。NDL確認 2026-06-29'
+- main: 忍者ハットリくん
+  merge_keys:
+  - name:有賀一宇|name:忍者ハットリくん
+  - name:藤子不二雄|name:忍者ハットリくん
+  - qid:Q7784543|name:忍者ハットリくん
+  note: '巻抜けunder-merge是正: 種2別sidの同題同著者volを統合(vols [9])。title+著者一致確認・spinoff除外。NDL確認 2026-06-29'
+- main: BARレモン・ハート
+  merge_keys:
+  - qid:Q3776937|name:BARレモン・ハート
+  - qid:Q3776937|name:Barレモン・ハート
+  note: '巻抜けunder-merge是正: 種2別sidの同題同著者volを統合(vols [26])。title+著者一致確認・spinoff除外。NDL確認 2026-06-29'
+- main: スーパーマリオくん
+  merge_keys:
+  - name:佐々木多利尓|name:スーパーマリオくん
+  - name:佐々木多利爾|name:スーパーマリオくん
+  - qid:Q11477301|name:スーパーマリオくん
+  - qid:Q4023214|name:スーパーマリオくん
+  note: '巻抜けunder-merge是正: 種2別sidの同題同著者volを統合(vols [6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43])。title+著者一致確認・spinoff除外。NDL確認 2026-06-29'
+- main: 魔術士オーフェンはぐれ旅
+  merge_keys:
+  - name:秋田禎信|name:魔術士オーフェンはぐれ旅
+  - name:草河遊也|name:魔術士オーフェンはぐれ旅
+  - qid:Q3125803|name:魔術士オーフェンはぐれ旅
+  note: '巻抜けunder-merge是正: 種2別sidの同題同著者volを統合(vols [4, 5])。title+著者一致確認・spinoff除外。NDL確認 2026-06-29'
+- main: 名探偵コナン 特別編
+  merge_keys:
+  - name:丸伝次郎|name:名探偵コナン特別編
+  - name:太田勝|name:名探偵コナン
+  - name:太田勝|name:名探偵コナン 特別編
+  - name:太田勝|name:名探偵コナン特別編
+  - name:山【きし】栄一|name:名探偵コナン特別編
+  note: '巻抜けunder-merge是正: 種2別sidの同題同著者volを統合(vols [22, 25])。title+著者一致確認・spinoff除外。NDL確認 2026-06-29'
+- main: 誰にも言えない(秘)
+  merge_keys:
+  - name:ナツミチハル|name:誰にも言えない(秘)
+  - name:伊勢崎ゆず|name:誰にも言えない(秘)
+  - name:夏咲たかお|name:誰にも言えない(秘)
+  - name:夏生恒|name:誰にも言えない(秘)
+  - name:夕希はづみ|name:誰にも言えない (秘)
+  - name:将貴和寿|name:誰にも言えない(秘)
+  - name:小澤奈央|name:誰にも言えない(秘)
+  - name:松本蜜柑|name:誰にも言えない(秘)
+  - qid:Q6884883|name:誰にも言えない(秘)
+  note: '巻抜けunder-merge是正: 種2別sidの同題同著者volを統合(vols [19])。title+著者一致確認・spinoff除外。NDL確認 2026-06-29'
+- main: ジャンプSQ.Comic Selection
+  merge_keys:
+  - name:ジャンプSQ.編集部|name:ジャンプSQ.Comic Selection
+  - name:ジャンプSQ.編集部|name:ジャンプSQ.comic selection
+  - name:ジャンプSQ.編集部|name:ジャンプSQ　comic selection
+  note: '巻抜けunder-merge是正: 種2別sidの同題同著者volを統合(vols [4])。title+著者一致確認・spinoff除外。NDL確認 2026-06-29'
+- main: ジャンプSQ.Comic Selection
+  merge_keys:
+  - name:ジャンプSQ.編集部|name:ジャンプSQ. comic selection
+  - name:ジャンプSQ.編集部|name:ジャンプSQ.Comic Selection
+  - name:ジャンプSQ.編集部|name:ジャンプSQ.comic selection
+  note: '巻抜けunder-merge是正: 種2別sidの同題同著者volを統合(vols [5])。title+著者一致確認・spinoff除外。NDL確認 2026-06-29'
+- main: 艦隊これくしょん-艦これ-4コマコミック 吹雪、がんばります!
+  merge_keys:
+  - name:DMM.com|name:艦隊これくしょん -艦これ-4コマコミック 吹雪、がんばります!
+  - name:DMM.com|name:艦隊これくしょん-艦これ-4コマコミック 吹雪、がんばります!
+  - name:桃井涼太|name:艦隊これくしょん -艦これ-4コマコミック 吹雪、がんばります!
+  - name:桃井涼太|name:艦隊これくしょん-艦これ-4コマコミック
+  - name:桃井涼太|name:艦隊これくしょん-艦これ-4コマコミック 吹雪、がんばります!
+  note: '巻抜けunder-merge是正: 種2別sidの同題同著者volを統合(vols [3, 4])。title+著者一致確認・spinoff除外。NDL確認 2026-06-29'
+- main: 艦隊これくしょん-艦これ-コミックアラカルト 舞鶴鎮守府編
+  merge_keys:
+  - name:ES|name:艦隊これくしょん-艦これ-コミックアラカルト 舞鶴鎮守府編
+  - name:「艦これ」運営鎮守府|name:艦隊これくしょん-艦これ-コミックアラカルト
+  - name:「艦これ」運営鎮守府|name:艦隊これくしょん-艦これ-コミックアラカルト 舞鶴鎮守府編
+  - name:こるり|name:艦隊これくしょん-艦これ-コミックアラカルト 舞鶴鎮守府編
+  - name:みゃま|name:艦隊これくしょん-艦これ-コミックアラカルト 舞鶴鎮守府編
+  - qid:Q10843732|name:艦隊これくしょん-艦これ-コミックアラカルト 舞鶴鎮守府編
+  note: '巻抜けunder-merge是正: 種2別sidの同題同著者volを統合(vols [6])。title+著者一致確認・spinoff除外。NDL確認 2026-06-29'
+- main: ちび本当にあった笑える話
+  merge_keys:
+  - name:チャールズ後藤|name:ちび本当にあった笑える話
+  - qid:Q109596250|name:ちび本当にあった笑える話ガールズコレクション
+  - qid:Q109596251|name:ちび本当にあった笑える話
+  - qid:Q11538067|name:ちび本当にあった笑える話
+  - qid:Q11538067|name:ちび本当にあった笑える話 ガールズコレクション
+  - qid:Q11538067|name:ちび本当にあった笑える話.
+  - qid:Q11538067|name:ちび本当にあった笑える話ガールズコレクション
+  note: '巻抜けunder-merge是正: 種2別sidの同題同著者volを統合(vols [220, 221, 222])。title+著者一致確認・spinoff除外。NDL確認 2026-06-29'
+- main: リボンの騎士 ≪なかよしオリジナル版≫ 復刻大全集
+  merge_keys:
+  - qid:Q193300|name:リボンの騎士 ≪なかよしオリジナル版≫ 復刻大全集
+  - qid:Q193300|name:リボンの騎士≪なかよしオリジナル版≫復刻大全集
+  note: '巻抜けunder-merge是正: 種2別sidの同題同著者volを統合(vols [2])。title+著者一致確認・spinoff除外。NDL確認 2026-06-29'
+- main: コミック浅見光彦本格旅情ミステリー
+  merge_keys:
+  - name:あさみさとる|name:コミック浅見光彦本格旅情ミステリー
+  - qid:Q56349534|name:コミック浅見光彦本格旅情ミステリー
+  - qid:Q56349534|name:コミック浅見光彦本格旅情ミステリー.
+  note: '巻抜けunder-merge是正: 種2別sidの同題同著者volを統合(vols [13])。title+著者一致確認・spinoff除外。NDL確認 2026-06-29'
+- main: 悪役令嬢後宮物語王国激動編
+  merge_keys:
+  - name:涼風|name:悪役令嬢後宮物語王国激動編
+  - name:鈴ノ助|name:悪役令嬢後宮物語～王国激動編～
+  note: '巻抜けunder-merge是正: 種2別sidの同題同著者volを統合(vols [4])。title+著者一致確認・spinoff除外。NDL確認 2026-06-29'
+- main: グラゼニ～大リーグ編～
+  merge_keys:
+  - qid:Q11303326|name:グラゼニ～大リーグ編～
+  - qid:Q11303326|name:グラゼニ～大リーグ編～.
+  note: '巻抜けunder-merge是正: 種2別sidの同題同著者volを統合(vols [5])。title+著者一致確認・spinoff除外。NDL確認 2026-06-29'
