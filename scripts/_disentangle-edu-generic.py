@@ -59,7 +59,7 @@ for _ in range(12):
         date = ""
         md = re.search(r"<dcterms:(?:issued|date)[^>]*>([^<]+)<", r) or re.search(r"<dc:date>([^<]+)<", r)
         if md:
-            m2 = re.search(r"(\d{4})(?:[-.](\d{1,2}))?", md.group(1))
+            m2 = re.search(r"([0-9]{4})(?:[-.]([0-9]{1,2}))?", unicodedata.normalize("NFKC", md.group(1)))
             if m2:
                 date = m2.group(1) + (f"-{int(m2.group(2)):02d}" if m2.group(2) else "")
         rt = ""
