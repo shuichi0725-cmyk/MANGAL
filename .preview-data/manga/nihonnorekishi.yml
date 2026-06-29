@@ -6,11 +6,11 @@ year_started: 1982
 year_ended: 1993
 status: completed
 authors:
-- name: 笠原一男
-  role: writer_artist
-  kana: カサハラカズオ
-  romaji: kasaharakazuo
-original_authors: []
+- name: 児玉幸多
+  role: writer
+original_authors:
+- name: 児玉幸多
+  role: writer
 publisher: shueisha
 magazine: null
 demographic: kodomo
@@ -22,16 +22,9 @@ alternative_titles:
   en: Manga History of Japan
 editions:
 - type: standard
-  label: 通常版
+  label: 日本の歴史 2016年版 コンパクト
   publisher: 集英社
-  imprint: 集英社版・学習漫画
   volumes:
-  - number: 1
-    volume_label: 別巻
-    asin: null
-    isbn13: '9784081951017'
-    cover_url: null
-    release_date: 1993-03
   - number: 2
     asin: null
     isbn13: '9784082391027'
@@ -50,6 +43,11 @@ editions:
   - number: 5
     asin: null
     isbn13: '9784082391058'
+    cover_url: null
+    release_date: '2016-10-31'
+  - number: 6
+    asin: null
+    isbn13: '9784082391065'
     cover_url: null
     release_date: '2016-10-31'
   - number: 7
@@ -82,6 +80,99 @@ editions:
     isbn13: '9784082391126'
     cover_url: null
     release_date: '2016-10-31'
+  - number: 16
+    asin: null
+    isbn13: '9784082391164'
+    cover_url: null
+    release_date: '2016-10-31'
+  - number: 18
+    asin: null
+    isbn13: '9784082391188'
+    cover_url: null
+    release_date: '2016-10-31'
+- type: bunkobon
+  label: 日本の歴史 2007年版 漫画版(文庫)
+  publisher: 集英社
+  volumes:
+  - number: 1
+    asin: null
+    isbn13: '9784087461756'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/1756/9784087461756_1_2.jpg?_ex=200x200
+    release_date: 2007-07
+  - number: 2
+    asin: null
+    isbn13: '9784087461763'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/1763/9784087461763.jpg?_ex=200x200
+    release_date: 2007-07
+  - number: 3
+    asin: null
+    isbn13: '9784087461770'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/1770/9784087461770.jpg?_ex=200x200
+    release_date: 2007-08
+  - number: 4
+    asin: null
+    isbn13: '9784087461787'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/1787/9784087461787.jpg?_ex=200x200
+    release_date: 2007-08
+  - number: 5
+    asin: null
+    isbn13: '9784087461794'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/1794/9784087461794.jpg?_ex=200x200
+    release_date: 2007-09
+  - number: 6
+    asin: null
+    isbn13: '9784087461800'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/1800/9784087461800_1_2.jpg?_ex=200x200
+    release_date: 2007-09
+  - number: 7
+    asin: null
+    isbn13: '9784087461817'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/1817/9784087461817.jpg?_ex=200x200
+    release_date: 2007-10
+  - number: 8
+    asin: null
+    isbn13: '9784087461824'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/1824/9784087461824.jpg?_ex=200x200
+    release_date: 2007-10
+  - number: 9
+    asin: null
+    isbn13: '9784087461831'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/1831/9784087461831.jpg?_ex=200x200
+    release_date: 2007-11
+  - number: 10
+    asin: null
+    isbn13: '9784087461848'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/1848/9784087461848.jpg?_ex=200x200
+    release_date: 2007-11
+- type: standard
+  label: 日本の歴史 1992年版
+  publisher: 集英社
+  volumes:
+  - number: 1
+    volume_label: 別巻
+    asin: null
+    isbn13: '9784081951017'
+    cover_url: null
+    release_date: 1993-03
+  - number: 17
+    asin: null
+    isbn13: '9784081950171'
+    cover_url: null
+    release_date: 1992-10
+  - number: 19
+    asin: null
+    isbn13: '9784081950195'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0195/9784081950195.jpg?_ex=200x200
+    release_date: 1992-12
+  - number: 20
+    asin: null
+    isbn13: '9784081950201'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0201/9784081950201.jpg?_ex=200x200
+    release_date: 1993-01
+- type: standard
+  label: 日本の歴史 1982年版
+  publisher: 集英社
+  volumes:
   - number: 13
     asin: null
     isbn13: '9784082440138'
@@ -97,41 +188,15 @@ editions:
     isbn13: '9784082440152'
     cover_url: null
     release_date: '1982-09-07'
-  - number: 16
-    asin: null
-    isbn13: '9784082391164'
-    cover_url: null
-    release_date: '2016-10-31'
-  - number: 17
-    asin: null
-    isbn13: '9784081950171'
-    cover_url: null
-    release_date: 1992-10
+- type: standard
+  label: 日本の歴史 1998年版
+  publisher: 集英社
+  volumes:
   - number: 18
     asin: null
-    isbn13: '9784082391188'
+    isbn13: '9784082390181'
     cover_url: null
-    release_date: '2016-10-31'
-  - number: 19
-    asin: null
-    isbn13: '9784081950195'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0195/9784081950195.jpg?_ex=200x200
-    release_date: 1992-12
-  - number: 20
-    asin: null
-    isbn13: '9784081950201'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0201/9784081950201.jpg?_ex=200x200
-    release_date: 1993-01
-- type: bunkobon
-  label: 文庫版
-  publisher: 集英社
-  imprint: 集英社文庫
-  volumes:
-  - number: 7
-    asin: null
-    isbn13: '9784087461817'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/1817/9784087461817.jpg?_ex=200x200
-    release_date: 2007-10
+    release_date: '1998-03-04'
 publishers:
 - shueisha
 genres_provisional: true
