@@ -69,7 +69,7 @@ export default async function MangaDetailPage({
             <CoverImage src={cover} alt={`${manga.title} 1巻 表紙`} sizes="260px" size="detail" />
           </div>
         )}
-        <div>
+        <div className="min-w-0">
           <div className="flex items-start gap-3 flex-wrap">
             <h1 className="text-2xl md:text-3xl font-bold">{manga.title}</h1>
             {manga.anime_adapted && (
