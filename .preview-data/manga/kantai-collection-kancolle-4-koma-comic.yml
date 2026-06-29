@@ -2,23 +2,26 @@ slug: kantai-collection-kancolle-4-koma-comic
 title: 艦隊これくしょん-艦これ-4コマコミック
 title_kana: カンタイコレクションカンコレヨンコマコミック
 title_romaji: kantai korekushon kankore yonkoma komikku
-year_started: 2017
+year_started: 2013
 year_ended: 2021
 status: completed
 authors:
 - name: 桃井涼太
   role: artist
-original_authors:
-- name: 角川ゲームス
-  role: writer
-  kana: カドカワゲームス
-  romaji: kadokawagemusu
+  kana: モモイリョウタ
+  romaji: momoiryouta
+original_authors: []
+credits:
+- name: DMM.com
+  role: 提供
+- name: 「艦これ」運営鎮守府
+  role: 原作
 publisher: kadokawa
 magazine: null
 demographic: seinen
 genres:
 - comedy
-synopsis: ''
+synopsis: 第二次大戦期の大日本帝国海軍を、かわいい少女たちの姿で描く。艦娘の学校で訓練に励む彼女たちの、心温まる日常を楽しむ4コマ漫画。ブラウザゲーム『艦隊これくしょん』を題材にしている。
 anime_adapted: true
 alternative_titles:
   en: Kantai Collection 4-koma
@@ -28,11 +31,51 @@ editions:
   publisher: KADOKAWA
   imprint: ファミ通クリアコミックス
   volumes:
+  - number: 1
+    asin: null
+    isbn13: '9784047293335'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/3335/9784047293335.jpg?_ex=200x200
+    release_date: 2013-12
+  - number: 2
+    asin: null
+    isbn13: '9784047296404'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/6404/9784047296404.jpg?_ex=200x200
+    release_date: 2014-04
+  - number: 5
+    asin: null
+    isbn13: '9784047304963'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/4963/9784047304963_1_3.jpg?_ex=300x300
+    release_date: null
+  - number: 6
+    asin: null
+    isbn13: '9784047307773'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/7773/9784047307773.jpg?_ex=200x200
+    release_date: 2015-10
+  - number: 7
+    asin: null
+    isbn13: '9784047340787'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0787/9784047340787.jpg?_ex=200x200
+    release_date: 2016-03
+  - number: 8
+    asin: null
+    isbn13: '9784047342828'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/2828/9784047342828.jpg?_ex=200x200
+    release_date: 2016-07
+  - number: 9
+    asin: null
+    isbn13: '9784047344273'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/4273/9784047344273_1_4.jpg?_ex=200x200
+    release_date: 2017-01
   - number: 10
     asin: null
     isbn13: '9784047346963'
     cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/6963/9784047346963.jpg?_ex=200x200
     release_date: 2017-07
+  - number: 11
+    asin: null
+    isbn13: '9784047349506'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/9506/9784047349506_1_4.jpg?_ex=200x200
+    release_date: 2018-01
   - number: 12
     asin: null
     isbn13: '9784047352087'
@@ -65,10 +108,12 @@ editions:
     release_date: 2021-07
 publishers:
 - kadokawa
-genres_rakuten: true
-credits:
-- name: DMM.com
-  role: 提供
-- name: 「艦これ」運営鎮守府
-  role: 原作
-source: author-fix-preview
+anilist_id: 85295
+genres_anilist:
+- Comedy
+tags:
+- name: Educational
+  category: Theme-Other
+  rank: 79
+popularity: 332
+score: 61
