@@ -142,7 +142,7 @@ export const MangaSchema = z.object({
   publishers: z.array(z.string()).default([]),
   magazine: z.string().min(1).nullable().optional(),
   demographic: Demographic,
-  genres: z.array(z.string().min(1)).min(1),
+  genres: z.array(z.string().min(1)).default([]),
   /** ★genres が信頼源(AniList/Wikipedia)でなく AI 暫定のみ = 低信頼。
    *  信頼源が来たら上書きされる(蒸留/第三の源で埋まる余地)。 trusted 由来時は省略/false。 */
   genres_provisional: z.boolean().optional(),
