@@ -2219,6 +2219,9 @@ def build_yml(
     _eov = _load_edition_overrides().get(o["slug"])
     if _eov and _eov.get("editions"):
         o["editions"] = [clean_edition(ed) for ed in _eov["editions"]]
+        if _eov.get("publisher"):
+            o["publisher"] = _eov["publisher"]
+            o["publishers"] = _eov.get("publishers") or [_eov["publisher"]]
         if _eov.get("authors"):
             o["authors"] = [enrich_author(a) for a in _eov["authors"]]
         if _eov.get("original_authors"):

@@ -1,4 +1,4 @@
-slug: manga-botsu-chan
+slug: manga-bocchan
 title: 漫画坊っちゃん
 title_kana: マンガボッチャン
 title_romaji: manga bocchan
@@ -11,7 +11,7 @@ authors:
   kana: コンドウコウイチロ
   romaji: kondoukouichiro
 original_authors: []
-publisher: (unknown)
+publisher: iwanami
 magazine: null
 demographic: kodomo
 genres:
@@ -37,8 +37,9 @@ editions:
   - number: 1
     asin: null
     isbn13: '9784003357910'
-    cover_url: null
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/7910/9784003357910.jpg
     release_date: 2017-01
-publishers: []
+publishers:
+- iwanami
 genres_provisional: true
 source: edu-manga-preview
