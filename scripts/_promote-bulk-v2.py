@@ -1506,6 +1506,18 @@ def _load_author_overrides() -> dict:
     return _AUTHOR_OVERRIDES
 
 
+_EDITION_OVERRIDES = None
+
+
+def _load_edition_overrides() -> dict:
+    """教育系の年代版分離/補完を本番durability化 (= preview編集を seed 化、 promote が editions を置換)。"""
+    global _EDITION_OVERRIDES
+    if _EDITION_OVERRIDES is None:
+        p = ROOT / "data" / "seeds" / "edition-overrides.json"
+        _EDITION_OVERRIDES = json.loads(p.read_text(encoding="utf-8")) if p.exists() else {}
+    return _EDITION_OVERRIDES
+
+
 def get_authors(con: sqlite3.Connection, series_id: int) -> list[dict]:
     cur = con.cursor()
     cur.row_factory = sqlite3.Row
@@ -1901,15 +1913,15 @@ def _fix_complete_sequence_numbers(volumes: list[dict]) -> None:
 def clean_vol(v: dict) -> dict:
     """yml に出力する volume dict を 作る (= null を 適切に省略)"""
     o = {"number": v["number"]}
-    if v["volume_label"]:
+    if v.get("volume_label"):
         o["volume_label"] = v["volume_label"]
     o["asin"] = v.get("asin")
-    if v["isbn13"]:
+    if v.get("isbn13"):
         o["isbn13"] = str(v["isbn13"])
     else:
         o["isbn13"] = None
     o["cover_url"] = v.get("cover_url")
-    if v["release_date"]:
+    if v.get("release_date"):
         o["release_date"] = v["release_date"]
     else:
         o["release_date"] = None
@@ -1925,11 +1937,11 @@ def clean_edition(ed: dict) -> dict:
     _pub = edition_pub_name(ed)
     if _pub:
         out["publisher"] = _pub
-    if ed["imprint"]:
+    if ed.get("imprint"):
         out["imprint"] = ed["imprint"]
-    if ed["year_started"]:
+    if ed.get("year_started"):
         out["year_started"] = ed["year_started"]
-    if ed["year_ended"]:
+    if ed.get("year_ended"):
         out["year_ended"] = ed["year_ended"]
     out["volumes"] = [clean_vol(v) for v in ed["volumes"]]
     return out
@@ -2203,6 +2215,16 @@ def build_yml(
         o["publisher"] = _pv.most_common(1)[0][0]  # 代表 = 最多巻のキー
     else:
         o["publishers"] = []
+    # ★edition-override (= 教育系の年代版分離/NDL補完の本番durability。 最終確定 editions/著者を置換)
+    _eov = _load_edition_overrides().get(o["slug"])
+    if _eov and _eov.get("editions"):
+        o["editions"] = [clean_edition(ed) for ed in _eov["editions"]]
+        if _eov.get("authors"):
+            o["authors"] = [enrich_author(a) for a in _eov["authors"]]
+        if _eov.get("original_authors"):
+            o["original_authors"] = [enrich_author(a) for a in _eov["original_authors"]]
+        if _eov.get("credits"):
+            o["credits"] = [{"name": c["name"], "role": c.get("role", "編集")} for c in _eov["credits"] if c.get("name")]
     return o
 
 
