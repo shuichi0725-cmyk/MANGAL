@@ -117,9 +117,19 @@ def slim_cover(c):
 #   プレビュー用: python _build-list-index.py .preview-data/manga public
 src = sys.argv[1] if len(sys.argv) > 1 else os.path.join(DATA, "manga.v2")
 if not os.path.isdir(src): src = "data/manga.v2"
-OUTDIR = sys.argv[2] if len(sys.argv) > 2 else DATA
+OUTDIR = sys.argv[2] if len(sys.argv) > 2 and not sys.argv[2].startswith("--") else DATA
+# ★増分更新(FS競合で全66k再生成が遅い対策): --update stem1,stem2 = 該当ファイルだけ再構築し既存索引にmerge。
+#   --remove slug1,slug2 = 旧slug(slug変更時の旧エントリ)を除去。 使用: _build-list-index.py data/manga.v2 data --update <stems> [--remove <slugs>]
+UPDATE_STEMS = None
+REMOVE_SLUGS = set()
+for _i, _a in enumerate(sys.argv):
+    if _a == "--update" and _i + 1 < len(sys.argv):
+        UPDATE_STEMS = [s.strip() for s in sys.argv[_i + 1].split(",") if s.strip()]
+    if _a == "--remove" and _i + 1 < len(sys.argv):
+        REMOVE_SLUGS = {s.strip() for s in sys.argv[_i + 1].split(",") if s.strip()}
+_files = [os.path.join(src, st + ".yml") for st in UPDATE_STEMS] if UPDATE_STEMS is not None else glob.glob(os.path.join(src, "*.yml"))
 t0 = time.time(); idx = []; sidx = []; skipped = 0
-for f in glob.glob(os.path.join(src, "*.yml")):
+for f in _files:
     try: d = yaml.load(open(f, encoding="utf-8"), Loader=L)
     except: skipped += 1; continue
     if not d: skipped += 1; continue
@@ -196,6 +206,25 @@ for f in glob.glob(os.path.join(src, "*.yml")):
               + [a.get("name") for a in oaus if a.get("name")]
               + [c.get("name") for c in (d.get("credits") or []) if c.get("name")],
     })
+# ★増分: 再構築した作以外は既存索引から取り込む(66k全read回避)。
+if UPDATE_STEMS is not None:
+    _changed = {m["slug"] for m in idx} | REMOVE_SLUGS
+    _exl = os.path.join(OUTDIR, "manga-list-index.json")
+    if os.path.exists(_exl):
+        _ex = json.load(open(_exl, encoding="utf-8"))
+        for row in _ex["d"]:
+            m = dict(zip(_ex["f"], row))
+            if m.get("slug") not in _changed:
+                idx.append(m)
+    _exs_p = os.path.join(OUTDIR, "manga-search-index.json")
+    if os.path.exists(_exs_p):
+        _exs = json.load(open(_exs_p, encoding="utf-8"))
+        for row in _exs["d"]:
+            m = dict(zip(_exs["f"], row))
+            if m.get("slug") not in _changed:
+                sidx.append(m)
+    print(f"[--update] {len(UPDATE_STEMS)}作再構築 + 既存索引merge(除去{len(REMOVE_SLUGS)})")
+
 idx.sort(key=lambda x: (x["year_started"], x["title"]))
 # ★軽量化: 配列化(キー名の65,980回重複を排除) + catch分離(別ファイル=カードは遅延ロード)。
 #   読込側 useMangaIndex が {f,d}→オブジェクトに復元するので、コンポーネントは無改修。
@@ -211,6 +240,12 @@ json.dump({"f": LIST_FIELDS, "d": [[m.get(f) for f in LIST_FIELDS] for m in idx]
           open(out, "w", encoding="utf-8"), ensure_ascii=False, separators=(",", ":"))
 catch_out = os.path.join(OUTDIR, "manga-catch-index.json")
 catch_map = {m["slug"]: m["catch"] for m in idx if m.get("catch")}
+# ★増分: 既存catch(別ファイル=list rowに載らない)を非変更作分だけ取り込む(catch消失防止)。
+if UPDATE_STEMS is not None and os.path.exists(catch_out):
+    _exc = json.load(open(catch_out, encoding="utf-8"))
+    for _sl, _c in _exc.items():
+        if _sl not in _changed and _sl not in catch_map:
+            catch_map[_sl] = _c
 json.dump(catch_map, open(catch_out, "w", encoding="utf-8"), ensure_ascii=False, separators=(",", ":"))
 SEARCH_FIELDS = ["slug", "title", "title_kana", "title_romaji", "alt", "au"]
 sout = os.path.join(OUTDIR, "manga-search-index.json")
