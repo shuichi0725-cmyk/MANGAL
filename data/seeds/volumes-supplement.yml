@@ -5545,3 +5545,15 @@ volumes:
   source: rakuten
   added_at: '2026-06-27'
   note: 楽天harvest照合(slug=gekiga-shousetsu-yoshida-gakkou・残差題完全一致・主版整合)。MADB欠番補完。
+- series_keys:
+  - qid:Q2661273|name:ゴルゴ13
+  qid: null
+  number: 173
+  isbn13: '9784845831241'
+  release_date: 2024-10
+  publisher: リイド社
+  edition_type: aizoban
+  title_display: ゴルゴ13(173巻)
+  source: rakuten
+  added_at: '2026-06-30'
+  note: 愛蔵版vol173取込もれ。NDL+楽天確認(2024-10-30/リイド社)。standard220巻は完全・愛蔵版のみ欠落。ISBN連番から確定。
