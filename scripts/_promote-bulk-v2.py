@@ -2368,6 +2368,14 @@ def main():
     print("[step A] 親 series 検出 中 ...", file=sys.stderr)
     parent_map = build_parent_map(con)
     print(f"  検出 spinoff series 数: {len(parent_map)}", file=sys.stderr)
+    # ★series-keep: spinoff誤判定で消える独立作をslugで救済(=独立ページ化)。data/seeds/series-keep.yml
+    _SPINOFF_KEEP = set()
+    _skp = ROOT / "data" / "seeds" / "series-keep.yml"
+    if _skp.exists():
+        for _e in (yaml.safe_load(_skp.read_text(encoding="utf-8")) or {}).get("keep", []):
+            if isinstance(_e, str): _SPINOFF_KEEP.add(_e)
+            elif isinstance(_e, dict) and _e.get("slug"): _SPINOFF_KEEP.add(_e["slug"])
+    print(f"  series-keep(spinoff救済): {len(_SPINOFF_KEEP)} slug", file=sys.stderr)
 
     # adult_us(米基準フラグ)= 種a isAdult な series_key + sid→series_key 逆引き
     adult_us_keys = _load_adult_us_map()
@@ -2544,6 +2552,9 @@ def main():
             continue
         # step A: spinoff 判定 (= 親があれば 子 = spinoff)
         is_spinoff = series["id"] in parent_map
+        # ★series-keep: spinoff誤判定で消える独立作(カムイ伝第二部等)をslugで救済(=独立ページ化)
+        if is_spinoff and slug in _SPINOFF_KEEP:
+            is_spinoff = False
         if is_spinoff:
             max_y = get_max_release_year(con, series["id"])
             if max_y is None or max_y < CUTOFF_YEAR:
