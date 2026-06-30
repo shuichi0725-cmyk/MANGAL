@@ -6,14 +6,10 @@ year_started: 1966
 year_ended: 2003
 status: completed
 authors:
-- name: シュガー佐藤
-  role: artist
-  kana: シュガーサトウ
-  romaji: shugasatou
-- name: 土山よしき
-  role: artist
-  kana: ツチヤマヨシキ
-  romaji: tsuchiyamayoshiki
+- name: 石ノ森章太郎
+  role: writer_artist
+  kana: イシノモリショウタロウ
+  romaji: ishinomorishoutarou
 original_authors:
 - name: 石ノ森章太郎
   role: writer
@@ -33,304 +29,505 @@ alternative_titles:
 wikidata_qid: Q471103
 editions:
 - type: standard
-  label: 通常版
+  label: サンデーコミックス
   publisher: 秋田書店
-  imprint: SUNDAY COMICS
   volumes:
   - number: 1
     asin: null
     isbn13: '9784253060011'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0011/9784253060011.jpg?_ex=200x200
-    release_date: '1966-07-15'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0011/9784253060011.jpg
+    release_date: '1995-09-22'
   - number: 2
     asin: null
-    isbn13: '9784253102797'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/2797/9784253102797.jpg?_ex=300x300
-    release_date: '1989-12-15'
+    isbn13: '9784253060028'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0028/9784253060028.jpg
+    release_date: '1995-09-22'
   - number: 3
     asin: null
     isbn13: '9784253060035'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0035/9784253060035.jpg?_ex=200x200
-    release_date: '1966-10-05'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0035/9784253060035.jpg
+    release_date: '1995-09-22'
+  - number: 4
+    asin: null
+    isbn13: '9784253060042'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0042/9784253060042.jpg
+    release_date: '1995-09-22'
+  - number: 5
+    asin: null
+    isbn13: '9784253060059'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0059/9784253060059.jpg
+    release_date: '1995-09-22'
+  - number: 6
+    asin: null
+    isbn13: '9784253060066'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0066/9784253060066.jpg
+    release_date: '1995-09-22'
+  - number: 7
+    asin: null
+    isbn13: '9784253060073'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0073/9784253060073.jpg
+    release_date: '1995-09-22'
+  - number: 8
+    asin: null
+    isbn13: '9784253060080'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0080/9784253060080.jpg
+    release_date: '1995-09-22'
+  - number: 9
+    asin: null
+    isbn13: '9784253060097'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0097/9784253060097.jpg
+    release_date: '1989-07-22'
+  - number: 10
+    asin: null
+    isbn13: '9784253060103'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0103/9784253060103.jpg
+    release_date: '1989-07-22'
+  - number: 11
+    asin: null
+    isbn13: '9784253060110'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0110/9784253060110.jpg
+    release_date: '1989-07-22'
+  - number: 12
+    asin: null
+    isbn13: '9784253060127'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0127/9784253060127.jpg
+    release_date: '1989-07-22'
+  - number: 13
+    asin: null
+    isbn13: '9784253060134'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0134/9784253060134.jpg
+    release_date: '1989-07-22'
+  - number: 14
+    asin: null
+    isbn13: '9784253060141'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0141/9784253060141.jpg
+    release_date: '1989-07-22'
+  - number: 15
+    asin: null
+    isbn13: '9784253060158'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0158/9784253060158_1_2.jpg
+    release_date: '1989-07-22'
+- type: aizoban
+  label: 豪華版
+  publisher: 秋田書店
+  volumes:
+  - number: 1
+    asin: null
+    isbn13: '9784253102780'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/2780/9784253102780.jpg
+    release_date: '1989-10-01'
+  - number: 2
+    asin: null
+    isbn13: '9784253102797'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/2797/9784253102797.jpg
+    release_date: '1989-12-01'
+  - number: 3
+    asin: null
+    isbn13: '9784253102803'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/2803/9784253102803.jpg
+    release_date: 1990-01
   - number: 4
     asin: null
     isbn13: '9784253102810'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/2810/9784253102810.jpg?_ex=300x300
-    release_date: '1990-03-15'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/2810/9784253102810.jpg
+    release_date: 1990-03
   - number: 5
     asin: null
     isbn13: '9784253102827'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/2827/9784253102827.jpg?_ex=300x300
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/2827/9784253102827.jpg
     release_date: '1990-05-01'
   - number: 6
     asin: null
     isbn13: '9784253102834'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/2834/9784253102834.jpg?_ex=300x300
-    release_date: '1990-07-15'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/2834/9784253102834.jpg
+    release_date: '1990-07-01'
   - number: 7
     asin: null
     isbn13: '9784253102841'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/2841/9784253102841.jpg?_ex=300x300
-    release_date: '1990-08-25'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/2841/9784253102841.jpg
+    release_date: '1990-08-01'
   - number: 8
     asin: null
     isbn13: '9784253102858'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/2858/9784253102858.jpg?_ex=300x300
-    release_date: '1990-10-30'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/2858/9784253102858.jpg
+    release_date: '1990-10-01'
   - number: 9
     asin: null
     isbn13: '9784253102865'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/2865/9784253102865.jpg?_ex=300x300
-    release_date: '1990-11-20'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/2865/9784253102865.jpg
+    release_date: '1990-11-01'
   - number: 10
     asin: null
     isbn13: '9784253102872'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/2872/9784253102872.jpg?_ex=300x300
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/2872/9784253102872.jpg
     release_date: '1990-12-20'
   - number: 11
     asin: null
     isbn13: '9784253102889'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/2889/9784253102889.jpg?_ex=300x300
-    release_date: 1991-01
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/2889/9784253102889.jpg
+    release_date: '1991-01-01'
   - number: 12
     asin: null
     isbn13: '9784253102896'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/2896/9784253102896.jpg?_ex=300x300
-    release_date: '1991-02-25'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/2896/9784253102896.jpg
+    release_date: 1991-02
   - number: 13
     asin: null
     isbn13: '9784253102902'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/2902/9784253102902.jpg?_ex=300x300
-    release_date: '1991-07-30'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/2902/9784253102902.jpg
+    release_date: '1991-07-01'
   - number: 14
     asin: null
     isbn13: '9784253102919'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/2919/9784253102919.jpg?_ex=300x300
-    release_date: '1991-10-30'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/2919/9784253102919.jpg
+    release_date: '1991-10-01'
   - number: 15
     asin: null
     isbn13: '9784253102926'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/2926/9784253102926.jpg?_ex=300x300
-    release_date: '1992-01-15'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/2926/9784253102926.jpg
+    release_date: '1992-01-01'
   - number: 16
     asin: null
     isbn13: '9784253103688'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/3688/9784253103688.jpg?_ex=200x200
-    release_date: '1992-05-25'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/3688/9784253103688.jpg
+    release_date: '1992-05-01'
   - number: 17
     asin: null
     isbn13: '9784253103695'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/3695/9784253103695.jpg?_ex=200x200
-    release_date: '1992-07-30'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/3695/9784253103695.jpg
+    release_date: '1992-06-29'
   - number: 18
     asin: null
     isbn13: '9784253103701'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/3701/9784253103701.jpg?_ex=200x200
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/3701/9784253103701.jpg
     release_date: '1992-09-30'
   - number: 19
     asin: null
     isbn13: '9784253103718'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/3718/9784253103718.jpg?_ex=200x200
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/3718/9784253103718.jpg
     release_date: '1993-10-30'
   - number: 20
     asin: null
     isbn13: '9784253103725'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/3725/9784253103725.jpg?_ex=200x200
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/3725/9784253103725.jpg
     release_date: '1994-01-15'
   - number: 21
     asin: null
     isbn13: '9784253103732'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/3732/9784253103732.jpg?_ex=200x200
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/3732/9784253103732.jpg
     release_date: '1996-04-30'
   - number: 22
     asin: null
     isbn13: '9784253103985'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/3985/9784253103985.jpg?_ex=300x300
-    release_date: 2001-11
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/3985/9784253103985.jpg
+    release_date: '2001-11-25'
   - number: 23
     asin: null
     isbn13: '9784253103992'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/3992/9784253103992.jpg?_ex=300x300
-    release_date: 2003-06
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/3992/9784253103992.jpg
+    release_date: '2003-06-30'
+- type: kanzenban
+  label: MF完全版
+  publisher: メディアファクトリー
+  volumes:
+  - number: 1
+    asin: null
+    isbn13: '9784889917949'
+    cover_url: null
+    release_date: '2001-10-23'
+  - number: 2
+    asin: null
+    isbn13: '9784889915907'
+    cover_url: null
+    release_date: '1998-08-01'
+  - number: 3
+    asin: null
+    isbn13: '9784889915969'
+    cover_url: null
+    release_date: '1998-09-01'
+  - number: 4
+    asin: null
+    isbn13: '9784889916102'
+    cover_url: null
+    release_date: '1998-10-01'
+  - number: 5
+    asin: null
+    isbn13: '9784889916287'
+    cover_url: null
+    release_date: '1998-11-01'
+  - number: 6
+    asin: null
+    isbn13: '9784840104135'
+    cover_url: null
+    release_date: '2001-11-23'
+  - number: 7
+    asin: null
+    isbn13: '9784889916720'
+    cover_url: null
+    release_date: '1999-01-01'
+  - number: 8
+    asin: null
+    isbn13: '9784889918397'
+    cover_url: null
+    release_date: 1999-04
+  - number: 9
+    asin: null
+    isbn13: '9784889918403'
+    cover_url: null
+    release_date: 1999-04
+  - number: 10
+    asin: null
+    isbn13: '9784840104241'
+    cover_url: null
+    release_date: '2001-12-24'
+  - number: 11
+    asin: null
+    isbn13: '9784840104265'
+    cover_url: null
+    release_date: '2002-01-23'
+  - number: 12
+    asin: null
+    isbn13: '9784840104272'
+    cover_url: null
+    release_date: '2002-01-23'
+  - number: 13
+    asin: null
+    isbn13: '9784840104296'
+    cover_url: null
+    release_date: '2002-02-23'
+  - number: 14
+    asin: null
+    isbn13: '9784889919127'
+    cover_url: null
+    release_date: 1999-09
+  - number: 15
+    asin: null
+    isbn13: '9784840104357'
+    cover_url: null
+    release_date: '2002-03-23'
+  - number: 16
+    asin: null
+    isbn13: '9784889919196'
+    cover_url: null
+    release_date: 1999-10
+  - number: 17
+    asin: null
+    isbn13: '9784840104425'
+    cover_url: null
+    release_date: '2002-04-23'
+  - number: 18
+    asin: null
+    isbn13: '9784840104432'
+    cover_url: null
+    release_date: '2002-04-23'
+  - number: 19
+    asin: null
+    isbn13: '9784889919301'
+    cover_url: null
+    release_date: 1999-11
+  - number: 20
+    asin: null
+    isbn13: '9784840104470'
+    cover_url: null
+    release_date: '2002-05-23'
+  - number: 21
+    asin: null
+    isbn13: '9784889919561'
+    cover_url: null
+    release_date: 1999-12
+  - number: 22
+    asin: null
+    isbn13: '9784889919837'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/rakutenkobo-ebooks/cabinet/0622/2000002190622.jpg?_ex=300x300
+    release_date: 2000-01
+  - number: 23
+    asin: null
+    isbn13: '9784840104524'
+    cover_url: null
+    release_date: '2002-07-23'
   - number: 24
     asin: null
-    isbn13: '9784840100199'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/rakutenkobo-ebooks/cabinet/0568/2000002190568.jpg?_ex=300x300
-    release_date: '2000-02-01'
+    isbn13: '9784840104531'
+    cover_url: null
+    release_date: '2002-07-23'
   - number: 25
     asin: null
-    isbn13: '9784840100205'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/rakutenkobo-ebooks/cabinet/0581/2000002190581.jpg?_ex=300x300
-    release_date: '2000-02-01'
+    isbn13: '9784840104579'
+    cover_url: null
+    release_date: '2002-08-23'
   - number: 26
     asin: null
     isbn13: '9784840100298'
     cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/rakutenkobo-ebooks/cabinet/0630/2000002190630.jpg?_ex=300x300
-    release_date: '2000-03-01'
+    release_date: 2000-03
   - number: 27
     asin: null
-    isbn13: '9784840100304'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/rakutenkobo-ebooks/cabinet/0634/2000002190634.jpg?_ex=300x300
-    release_date: '2000-03-01'
+    isbn13: '9784840104616'
+    cover_url: null
+    release_date: '2002-09-21'
   - number: 28
     asin: null
-    isbn13: '9784840100489'
+    isbn13: '9784840104623'
     cover_url: null
-    release_date: '2000-04-01'
+    release_date: '2002-09-21'
   - number: 29
     asin: null
     isbn13: '9784840104692'
     cover_url: null
-    release_date: '2002-11-30'
+    release_date: '2002-11-20'
   - number: 30
     asin: null
     isbn13: '9784840104708'
     cover_url: null
-    release_date: '2002-11-30'
+    release_date: '2002-11-20'
   - number: 31
     asin: null
     isbn13: '9784840104715'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/8401/84010471.gif?_ex=200x200
-    release_date: '2002-12-31'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/8401/84010471.gif
+    release_date: '2002-12-21'
   - number: 32
     asin: null
     isbn13: '9784840104722'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/8401/84010472.gif?_ex=200x200
-    release_date: '2002-12-31'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/8401/84010472.gif
+    release_date: '2002-12-21'
   - number: 33
     asin: null
     isbn13: '9784840104753'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/8401/84010475.gif?_ex=200x200
-    release_date: '2003-01-31'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/8401/84010475.gif
+    release_date: '2003-01-23'
   - number: 34
     asin: null
     isbn13: '9784840104760'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/8401/84010476.gif?_ex=200x200
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/8401/84010476.gif?_ex=300x300
     release_date: '2003-01-31'
   - number: 35
     asin: null
     isbn13: '9784840104791'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/8401/84010479.jpg?_ex=200x200
-    release_date: '2003-02-28'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/8401/84010479.jpg
+    release_date: '2003-02-22'
   - number: 36
     asin: null
     isbn13: '9784840104807'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/8401/84010480.jpg?_ex=200x200
-    release_date: '2003-02-28'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/8401/84010480.jpg
+    release_date: '2003-02-22'
 - type: bunkobon
-  label: 文庫版
+  label: 秋田文庫
   publisher: 秋田書店
-  imprint: 小学館文庫
   volumes:
   - number: 1
     asin: null
     isbn13: '9784253170208'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/2531/25317020.jpg?_ex=300x300
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/2531/25317020.jpg
     release_date: 1994-08
   - number: 2
     asin: null
     isbn13: '9784253170215'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0215/9784253170215.jpg?_ex=300x300
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0215/9784253170215.jpg
     release_date: 1994-08
   - number: 3
     asin: null
     isbn13: '9784253170222'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0222/9784253170222.jpg?_ex=300x300
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0222/9784253170222.jpg
     release_date: 1994-08
   - number: 4
     asin: null
     isbn13: '9784253170239'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0239/9784253170239.jpg?_ex=300x300
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0239/9784253170239.jpg
     release_date: 1994-11
   - number: 5
     asin: null
     isbn13: '9784253170246'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0246/9784253170246.jpg?_ex=300x300
-    release_date: '1994-11-30'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0246/9784253170246.jpg
+    release_date: 1994-11
   - number: 6
     asin: null
     isbn13: '9784253170253'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0253/9784253170253.jpg?_ex=300x300
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0253/9784253170253.jpg
     release_date: 1994-11
   - number: 7
     asin: null
     isbn13: '9784253170260'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0260/9784253170260.jpg?_ex=300x300
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0260/9784253170260.jpg
     release_date: 1995-02
   - number: 8
     asin: null
     isbn13: '9784253170277'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0277/9784253170277.jpg?_ex=300x300
-    release_date: '1995-02-25'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0277/9784253170277.jpg
+    release_date: 1995-02
   - number: 9
     asin: null
     isbn13: '9784253170284'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0284/9784253170284.jpg?_ex=300x300
-    release_date: '1995-02-25'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0284/9784253170284.jpg
+    release_date: 1995-02
   - number: 10
     asin: null
     isbn13: '9784253170291'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0291/9784253170291.jpg?_ex=300x300
-    release_date: '1995-04-10'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0291/9784253170291.jpg
+    release_date: 1995-04
   - number: 11
     asin: null
     isbn13: '9784253170307'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0307/9784253170307.jpg?_ex=300x300
-    release_date: '1995-04-10'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0307/9784253170307.jpg
+    release_date: 1995-04
   - number: 12
     asin: null
     isbn13: '9784253170314'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0314/9784253170314.jpg?_ex=300x300
-    release_date: '1995-04-10'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0314/9784253170314.jpg
+    release_date: 1995-04
   - number: 13
     asin: null
     isbn13: '9784253170321'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0321/9784253170321.jpg?_ex=300x300
-    release_date: '1995-06-10'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0321/9784253170321.jpg
+    release_date: 1995-06
   - number: 14
     asin: null
     isbn13: '9784253170338'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0338/9784253170338.jpg?_ex=300x300
-    release_date: '1995-06-10'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0338/9784253170338.jpg
+    release_date: 1995-06
   - number: 15
     asin: null
     isbn13: '9784253170345'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0345/9784253170345.jpg?_ex=300x300
-    release_date: '1995-08-10'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0345/9784253170345.jpg
+    release_date: 1995-08
   - number: 16
     asin: null
     isbn13: '9784253170352'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0352/9784253170352.jpg?_ex=200x200
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0352/9784253170352.jpg
     release_date: 1995-08
   - number: 17
     asin: null
     isbn13: '9784253170369'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0369/9784253170369.jpg?_ex=200x200
-    release_date: '1995-10-10'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0369/9784253170369.jpg
+    release_date: 1995-10
   - number: 18
     asin: null
     isbn13: '9784253170376'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0376/9784253170376.jpg?_ex=200x200
-    release_date: '1995-10-10'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0376/9784253170376.jpg
+    release_date: 1995-10
   - number: 19
     asin: null
     isbn13: '9784253170383'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0383/9784253170383.jpg?_ex=200x200
-    release_date: '1995-12-10'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0383/9784253170383.jpg
+    release_date: 1995-12
   - number: 20
     asin: null
     isbn13: '9784253170390'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0390/9784253170390.jpg?_ex=200x200
-    release_date: '1996-02-10'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0390/9784253170390.jpg
+    release_date: 1996-02
+  - number: 21
+    asin: null
+    isbn13: '9784253170406'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0406/9784253170406.jpg
+    release_date: 1998-06
   - number: 22
     asin: null
     isbn13: '9784253172073'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/2073/9784253172073.jpg?_ex=200x200
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/2073/9784253172073.jpg
     release_date: 2002-08
   - number: 23
     asin: null
     isbn13: '9784253172080'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/2531/25317208.jpg?_ex=200x200
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/2531/25317208.jpg
     release_date: 2004-04
 publishers:
 - akita

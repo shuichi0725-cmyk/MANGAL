@@ -47,17 +47,17 @@ editions:
     asin: null
     isbn13: null
     cover_url: null
-    release_date: 1982-08
+    release_date: '1982-08-19'
   - number: 5
     asin: null
     isbn13: null
     cover_url: null
-    release_date: 1983-05
+    release_date: '1983-05-20'
   - number: 6
     asin: null
     isbn13: null
     cover_url: null
-    release_date: 1983-12
+    release_date: '1983-12-24'
   - number: 7
     asin: null
     isbn13: '9784575930207'
@@ -67,7 +67,7 @@ editions:
     asin: null
     isbn13: null
     cover_url: null
-    release_date: 1985-08
+    release_date: '1985-08-19'
   - number: 9
     asin: null
     isbn13: '9784575930221'
@@ -168,21 +168,11 @@ editions:
     isbn13: '9784575935417'
     cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/5417/9784575935417.jpg?_ex=200x200
     release_date: 1998-01
-  - number: 29
-    asin: null
-    isbn13: '9784575935714'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/rakutenkobo-ebooks/cabinet/4762/2000000194762.jpg?_ex=300x300
-    release_date: 1998-08
   - number: 30
     asin: null
     isbn13: '9784575936025'
     cover_url: null
     release_date: '1999-01-20'
-  - number: 31
-    asin: null
-    isbn13: '9784575936209'
-    cover_url: null
-    release_date: '1999-06-27'
   - number: 32
     asin: null
     isbn13: '9784575936704'
@@ -278,51 +268,56 @@ editions:
     isbn13: '9784575943207'
     cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/3207/9784575943207.jpg?_ex=200x200
     release_date: 2011-06
-  - number: 61
+  - number: 51
     asin: null
-    isbn13: '9784575850987'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0987/9784575850987.jpg?_ex=200x200
-    release_date: 2018-01
-  - number: 62
+    isbn13: '9784575943429'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/3429/9784575943429.jpg?_ex=200x200
+    release_date: 2011-12
+  - number: 52
     asin: null
-    isbn13: '9784575945331'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/5331/9784575945331.jpg?_ex=200x200
-    release_date: 2018-08
-  - number: 63
+    isbn13: '9784575943696'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/3696/9784575943696.jpg?_ex=200x200
+    release_date: 2012-12
+  - number: 53
     asin: null
-    isbn13: '9784575945478'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/5478/9784575945478.jpg?_ex=200x200
-    release_date: 2019-05
-  - number: 64
+    isbn13: '9784575943887'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/3887/9784575943887.jpg?_ex=200x200
+    release_date: 2013-07
+  - number: 54
     asin: null
-    isbn13: '9784575945676'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/5676/9784575945676.jpg?_ex=200x200
-    release_date: 2020-01
-  - number: 65
+    isbn13: '9784575944013'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/4013/9784575944013.jpg?_ex=200x200
+    release_date: 2014-01
+  - number: 55
     asin: null
-    isbn13: '9784575945775'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/5775/9784575945775.jpg?_ex=200x200
-    release_date: 2020-09
-  - number: 66
+    isbn13: '9784575944259'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/4259/9784575944259.jpg?_ex=200x200
+    release_date: 2014-10
+  - number: 56
     asin: null
-    isbn13: '9784575945898'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/5898/9784575945898.jpg?_ex=200x200
-    release_date: 2021-06
-  - number: 67
+    isbn13: '9784575944525'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/4525/9784575944525.jpg?_ex=200x200
+    release_date: 2015-05
+  - number: 57
     asin: null
-    isbn13: '9784575946017'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/6017/9784575946017_1_3.jpg?_ex=200x200
-    release_date: 2022-03
-  - number: 68
+    isbn13: '9784575944648'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/4648/9784575944648.jpg?_ex=200x200
+    release_date: 2015-12
+  - number: 58
     asin: null
-    isbn13: '9784575946222'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/6222/9784575946222_1_3.jpg?_ex=200x200
-    release_date: 2023-09
-  - number: 69
+    isbn13: '9784575944747'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/4747/9784575944747.jpg?_ex=200x200
+    release_date: 2016-05
+  - number: 59
     asin: null
-    isbn13: '9784575946321'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/6321/9784575946321_1_2.jpg?_ex=200x200
-    release_date: '2026-01-26'
+    isbn13: '9784575944907'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/4907/9784575944907.jpg?_ex=200x200
+    release_date: 2016-12
+  - number: 60
+    asin: null
+    isbn13: '9784575945027'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/5027/9784575945027.jpg?_ex=200x200
+    release_date: 2017-05
 publishers:
 - futabasha
 anilist_id: 53659

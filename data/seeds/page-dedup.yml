@@ -391,8 +391,7 @@ dedup:
   canonical: meitantei-conan-2005
   title: 名探偵コナン特別編
   isbns: 38
-  note: '[2026-06-16修正] 旧canonical meitantei-conan-2011 はslug-overrideで消滅。特別編は meitantei-conan-2005
-    が出力するためそちらへ付替(redirect 404防止)'
+  note: '[2026-06-16修正] 旧canonical meitantei-conan-2011 はslug-overrideで消滅。特別編は meitantei-conan-2005 が出力するためそちらへ付替(redirect 404防止)'
 - drop: meitantei-conan-tokubetsuhen-2002
   canonical: meitantei-conan-2005
   title: 名探偵コナン特別編
@@ -1542,3 +1541,18 @@ dedup:
   canonical: doraemon
   title: overmerge-fix
   note: 非漫画(声優/著名人エッセイ文庫sid142928を藤子Fと誤ラベル)
+- drop: chiyokoreito
+  canonical: chokoreito
+  title: ちょこれいと
+  isbns: 0
+  note: series-merge由来の重複ページ(別題別slug)を是正。2026-06-30 巻抜けper-case merge後dedup
+- drop: honnyara-gokko-kariage-kun
+  canonical: honnyaragokko-kariage-kun
+  title: ほんにゃらゴッコ かりあげクン
+  isbns: 0
+  note: series-merge由来の重複ページ(別題別slug)を是正。2026-06-30 巻抜けper-case merge後dedup
+- drop: hokuto-no-ken-2016
+  canonical: hokuto-no-ken-ichigoaji
+  title: 北斗の拳 イチゴ味
+  isbns: 0
+  note: series-merge由来の重複ページ(別題別slug)を是正。2026-06-30 巻抜けper-case merge後dedup
