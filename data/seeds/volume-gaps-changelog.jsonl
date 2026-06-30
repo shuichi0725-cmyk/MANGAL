@@ -1140,3 +1140,4 @@
 {"op": "daichouhen-v18+doraemon-pin", "reason": "大長編v18(9784091417589 南海大冒険・1998-10 NDL確証・種2別クラスタunder-merge)をedition-overrideで補完。ドラえもん本体にrelated_pin=[大長編]で関連先頭固定", "at": "2026-06-30"}
 {"op": "doraemon-tentomushi-complete", "count": 15, "reason": "てんとう虫コミックス欠落15巻(19,20,22,24-35)をWikipedia権威ISBN(発売日順マッピング・現データv21/v23一致で確定)で補完→全45巻。NDLは巻番号フィールドがゴミ(全vol1)で不可", "at": "2026-06-30"}
 {"op": "doraemon-tentomushi-canonical-rebuild", "reason": "てんとう虫全45巻をWikipedia権威ISBN(全巻表)で再構築。現データの誤ISBN(v15-18=091480別版/v36-40=中央公論4124等の版混在)を是正。発売日も正(v19=1980-06等)", "at": "2026-06-30"}
+{"op": "edition-override-rebuild", "slug": "kamui-den", "reason": "カムイ伝第一部をユーザ権威データで版正規化。ゴールデンC全21巻(71系・v1=017等NDL確証で汚染197系是正+欠けv1,5-9,20補完)+白土三平全集16+小学館文庫11(1999)+決定版カムイ伝全集15(2005)。断片の197系1988/920系1995文庫は不完全につき除外", "at": "2026-06-30"}
