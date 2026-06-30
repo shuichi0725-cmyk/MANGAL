@@ -1139,3 +1139,4 @@
 {"op": "doraemon-consolidate", "reason": "本体ドラえもん4分裂統合。doraemon(著者汚染修正=藤子・F・不二雄のみ・手塚企画/朝松健除去)に一本化+2013(ローマ字重複)の文庫追加・page-dedup 2013/2009/2014。てんとう虫30巻のまま(45完全版harvestは別途)", "at": "2026-06-30"}
 {"op": "daichouhen-v18+doraemon-pin", "reason": "大長編v18(9784091417589 南海大冒険・1998-10 NDL確証・種2別クラスタunder-merge)をedition-overrideで補完。ドラえもん本体にrelated_pin=[大長編]で関連先頭固定", "at": "2026-06-30"}
 {"op": "doraemon-tentomushi-complete", "count": 15, "reason": "てんとう虫コミックス欠落15巻(19,20,22,24-35)をWikipedia権威ISBN(発売日順マッピング・現データv21/v23一致で確定)で補完→全45巻。NDLは巻番号フィールドがゴミ(全vol1)で不可", "at": "2026-06-30"}
+{"op": "doraemon-tentomushi-canonical-rebuild", "reason": "てんとう虫全45巻をWikipedia権威ISBN(全巻表)で再構築。現データの誤ISBN(v15-18=091480別版/v36-40=中央公論4124等の版混在)を是正。発売日も正(v19=1980-06等)", "at": "2026-06-30"}
