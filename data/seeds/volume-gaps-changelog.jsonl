@@ -1152,3 +1152,4 @@
 {"op": "complete-v2", "slug": "usaru-san", "isbn": "9784840123921", "reason": "NDL照合でv2(2008-08メディアファクトリー)発見・補完。zenkan-shutsugeki(v2 ISBN無)/parabellum/rinjou/gundam-moon-crisis/uta-puri(別作混在orISBN無)はskip", "at": "2026-07-01"}
 {"op": "complete", "slugs": {"game-sekai-tensei-dankatsu": "v4=9784867943564", "kiss-me-crying": "v1=9784799751305"}, "reason": "NDL照合で欠け巻発見・補完。worklistは古くyappa/hana/kishibe/ouji-dakimakuraは既に[1-4]完備=stale", "at": "2026-07-01"}
 {"op": "seed4-bulk-ndl-verified", "count": 92, "works": 46, "closed": 41, "reason": "巻抜け440の全件triage→128作が欠け巻NDL-ISBN有→同社guard(既存巻と出版者一致=版混同排除)で46作92巻に絞り種4手動へ純粋追加。巻抜け仮想で41作完全閉鎖確認(gap440→398)。残5=多版作の第2版gap(後回し)。各巻=NDL volume番号一致+同一出版者で取込もれ確証", "at": "2026-07-01"}
+{"op": "seed4-salvage-ndl", "count": 51, "works": 19, "reason": "MIXED79のうちNDL出版社名=ページ版社一致の20作を救済(同社別ISBN block=版混同でない)。ねこぱんち(アンソロ既往問題)除外し19作51巻を種4追加。18作閉鎖。ARMS(wide)/王様の仕立て屋/グラゼニ/エロイカ(文庫)等", "at": "2026-07-01"}
