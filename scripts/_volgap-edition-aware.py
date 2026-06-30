@@ -4,6 +4,8 @@
 うしおととら型(ワイド版9784091258XXX系のv2-9)を安全に拾う。 confirmableのみ出力。
 使用: _volgap-edition-aware.py [--apply]"""
 import sys,os,re,json,sqlite3,yaml
+sys.path.insert(0,os.path.dirname(os.path.abspath(__file__)))
+import _rakuten_match_lib as L
 sys.stdout.reconfigure(encoding="utf-8")
 ROOT=os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 APPLY="--apply" in sys.argv
@@ -52,20 +54,26 @@ for slug in remain:
         gaps=[n for n in range(nums[0],nums[-1]+1) if n not in nums]
         if not gaps: continue
         ed_isbns=[ib for _,ib,_ in vols if len(ib)==13]
-        pre=lcp(ed_isbns)
-        if len(pre)<10: continue   # 版のISBN系列が固まってない=同版判定不可→skip(怪しい)
+        ed_isbns=[i for i in ed_isbns if len(i)==13]
+        if not ed_isbns: continue
+        pre9=set(i[:9] for i in ed_isbns)   # 版ブロック=既存巻いずれかと9桁prefix一致(scatter ISBN対応)
         datemap={n:dt for n,_,dt in vols if dt}
         def neigh(n,lo):
             rng=range(n-1,0,-1) if lo else range(n+1,nums[-1]+2)
             for m in rng:
                 if m in datemap: return datemap[m]
             return None
+        wbase=L.norm(d.get("title",""))
         for n in gaps:
             best=None
             for r in by_vol.get(n,[]):
                 ib=norm_isbn(r.get("isbn"))
-                if len(ib)!=13 or not ib.startswith(pre): continue   # 同版ISBN系列のみ
+                if len(ib)!=13 or ib[:9] not in pre9: continue   # 同版ブロック(9桁prefix一致)のみ
                 if ib in db_isbns: continue
+                # ★残差題完全一致(外伝/別作排除): ndl_titleの巻トークン剥がし後がwork題と一致
+                nt=r.get("ndl_title","") or ""
+                _v,_res=L.parse_vol(L.clean_title(nt.split(" : ")[0]))
+                if wbase and L.norm(_res)!=wbase: continue
                 dt=pdate(r.get("date"))
                 lo,hi=neigh(n,True),neigh(n,False)
                 if dt is not None:

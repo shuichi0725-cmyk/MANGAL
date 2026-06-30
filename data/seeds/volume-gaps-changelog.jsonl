@@ -1120,3 +1120,4 @@
 {"op": "add-seed4-rakuten", "series_keys": ["name:九田こすも|name:悪役令嬢に転生したはずが、主人公よりも溺愛されてるみたいです", "name:茶乃ひなの|name:悪役令嬢に転生したはずが、主人公よりも溺愛されてるみたいです"], "number": 5, "isbn13": "9784824202512", "release_date": "2024-11", "title": "悪役令嬢に転生したはずが、主人公よりも溺愛されてるみたいです", "reason": "巻抜けper-case 楽天harvest確証(残差題完全一致+同出版社+発売日整合)", "at": "2026-06-30"}
 {"op": "add-seed4-manual-wideban", "slug": "ushio-to-tora", "edition": "wideban", "numbers": [2, 3, 4, 5, 6, 7, 8, 9], "reason": "奇子型#3 ワイド版v2-9取込もれ NDL確証", "at": "2026-06-30"}
 {"op": "edition-override-rebuild", "slug": "kaze-no-tani-no-naushika", "reason": "奇子型Frankenstein全面rebuild。Wikipedia権威でワイド版全7巻(1983-1995)+豪華装幀本上下(1996)に再構築。著者宮崎駿。混在ISBN(上下巻/別年/楽譜)を排除", "at": "2026-06-30"}
+{"op": "add-seed4-edition-aware", "count": 18, "reason": "版aware(9桁prefix一致+残差題完全一致+発売日整合)確証・ぼっち外伝除外", "at": "2026-06-30"}
