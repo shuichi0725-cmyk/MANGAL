@@ -1145,3 +1145,4 @@
 {"op": "create-kamui-part2-page", "reason": "カムイ伝第二部ページ復活。spinoff誤判定でdropされていた(max2000<CUTOFF2015)→series-keep.yml新設(promoteにkeep機構追加)で独立ページ化→edition-overrideで原版ビッグC711系22+文庫858系10+決定版878系12(全楽天確証)。第一部/外伝/第二部をrelated_pin相互リンク", "at": "2026-06-30"}
 {"op": "drop-naushika-filmcomic", "slug": "kaze-no-tani-no-naushika-1984", "series_key": "name:ツカモトルーム|name:風の谷のナウシカ", "reason": "ナウシカ分裂の元=講談社フィルムコミック(宮崎駿原作クレジットのみ・ツカモトルーム作画・1984映画絵本化)→非漫画scope外でnon-manga-drop。promote#2はseed読込済なので完了後に手動削除+seedで恒久", "at": "2026-07-01"}
 {"op": "remove-noisbn-bessaku", "count": 18, "reason": "登録少+no-ISBN高番号巻=別作誤接続(影v42=1960等・本体と5年以上乖離or無日付)をedition-overrideで除去し真の巻数に。近接日付は真の可能性で温存", "at": "2026-07-01"}
+{"op": "remove-pubdiff-bessaku", "count": 2, "reason": "出版社違い75のNDL照合で真の別作2件(群青←海街diary/合格祈願←チャレンジャーズ)をvolume-exclude。残73は同作別版/誤番号(別作でない)", "at": "2026-07-01"}
