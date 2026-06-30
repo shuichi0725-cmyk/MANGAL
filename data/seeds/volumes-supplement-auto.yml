@@ -13899,3 +13899,96 @@ volumes:
   source: rakuten-auto
   added_at: '2026-06-30'
   note: MADB取込もれ。楽天harvest確証(単一版・残差題完全一致+同出版社+発売日整合)。巻抜けper-case。
+- series_keys:
+  - qid:Q11622587|name:怪物事変
+  - qid:Q11622587|name:怪物(けもの)事変
+  qid: null
+  number: 22
+  isbn13: '9784088842158'
+  release_date: 2024-11
+  pages: null
+  publisher: 集英社
+  edition_type: standard
+  title_display: 怪物事変
+  source: rakuten
+  added_at: '2026-06-30'
+  note: MADB取込もれ。楽天確証(最近刊・種2欠落)。巻抜けper-case手動(ルビ題/出版社移籍でauto漏れ)。
+- series_keys:
+  - qid:Q11622587|name:怪物事変
+  - qid:Q11622587|name:怪物(けもの)事変
+  qid: null
+  number: 23
+  isbn13: '9784088844206'
+  release_date: 2025-05
+  pages: null
+  publisher: 集英社
+  edition_type: standard
+  title_display: 怪物事変
+  source: rakuten
+  added_at: '2026-06-30'
+  note: MADB取込もれ。楽天確証(最近刊・種2欠落)。巻抜けper-case手動(ルビ題/出版社移籍でauto漏れ)。
+- series_keys:
+  - qid:Q51337465|name:魔法使いの嫁
+  qid: null
+  number: 21
+  isbn13: '9784048996396'
+  release_date: 2024-10
+  pages: null
+  publisher: ブシロードワークス
+  edition_type: standard
+  title_display: 魔法使いの嫁
+  source: rakuten
+  added_at: '2026-06-30'
+  note: MADB取込もれ。楽天確証(最近刊・種2欠落)。巻抜けper-case手動(ルビ題/出版社移籍でauto漏れ)。
+- series_keys:
+  - qid:Q11423339|name:極道めし
+  qid: null
+  number: 7
+  isbn13: '9784575838732'
+  release_date: 2011-02
+  pages: null
+  publisher: 双葉社
+  edition_type: standard
+  title_display: 極道めし
+  source: rakuten
+  added_at: '2026-06-30'
+  note: MADB取込もれ。live楽天確証(残差題完全一致+同出版社+発売日整合・単一版)。巻抜けper-case。
+- series_keys:
+  - qid:Q11423339|name:極道めし
+  qid: null
+  number: 8
+  isbn13: '9784575839647'
+  release_date: 2011-09
+  pages: null
+  publisher: 双葉社
+  edition_type: standard
+  title_display: 極道めし
+  source: rakuten
+  added_at: '2026-06-30'
+  note: MADB取込もれ。live楽天確証(残差題完全一致+同出版社+発売日整合・単一版)。巻抜けper-case。
+- series_keys:
+  - name:高橋三千綱|name:元祖Dr.タイフーン
+  qid: null
+  number: 7
+  isbn13: '9784575823967'
+  release_date: 1998-12
+  pages: null
+  publisher: 双葉社
+  edition_type: standard
+  title_display: 元祖Dr.タイフーン
+  source: rakuten
+  added_at: '2026-06-30'
+  note: MADB取込もれ。live楽天確証(残差題完全一致+同出版社+発売日整合・単一版)。巻抜けper-case。
+- series_keys:
+  - name:高橋三千綱|name:元祖Dr.タイフーン
+  qid: null
+  number: 11
+  isbn13: '9784575824582'
+  release_date: 1999-10
+  pages: null
+  publisher: 双葉社
+  edition_type: standard
+  title_display: 元祖Dr.タイフーン
+  source: rakuten
+  added_at: '2026-06-30'
+  note: MADB取込もれ。live楽天確証(残差題完全一致+同出版社+発売日整合・単一版)。巻抜けper-case。
