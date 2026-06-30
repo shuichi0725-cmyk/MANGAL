@@ -118,7 +118,9 @@ volumes:
   title_display: ゼロ THE MAN OF THE CREATION 50
   source: amazon
   added_at: '2026-05-29'
-  note: "MADB 取込もれ。 Amazon 確認 (= ISBN 978-4-08-859449-1、 2004-12-03、 194p、\n4.4 / 12 レビュー)。 「ゼロ THE MAN OF THE CREATION」 全78巻中 第50巻、\n原作 愛英史 / 漫画 里見桂、 集英社ジャンプコミックスデラックス。\naudit --by-title で max=78 / present=77 / 欠番=50 として検出。\n★ build 修正済 (2026-05-29): 種2 の この series (= sid=79110) は\n(1) edition が「ジャンプ・コミックスデラックス」 = deluxe type に是正\n    (旧 shinsoban 誤分類)。 本 entry も edition_type: deluxe に揃え 78巻通しに合流。\n(2) 作者 = 里見桂(作画) を C-ID 解決で紐付け (愛英史=原作 は mangaka.csv 未登録で保留)。\n"
+  note: "MADB 取込もれ。 Amazon 確認 (= ISBN 978-4-08-859449-1、 2004-12-03、 194p、\n4.4 / 12 レビュー)。 「ゼロ THE MAN OF THE CREATION」 全78巻中 第50巻、\n原作 愛英史 / 漫画 里見桂、 集英社ジャンプコミックスデラックス。\naudit --by-title で max=78 / present=77\
+    \ / 欠番=50 として検出。\n★ build 修正済 (2026-05-29): 種2 の この series (= sid=79110) は\n(1) edition が「ジャンプ・コミックスデラックス」 = deluxe type に是正\n    (旧 shinsoban 誤分類)。 本 entry も edition_type: deluxe に揃え 78巻通しに合流。\n(2)\
+    \ 作者 = 里見桂(作画) を C-ID 解決で紐付け (愛英史=原作 は mangaka.csv 未登録で保留)。\n"
 - series_keys:
   - qid:Q219948|name:半妖の夜叉姫|sub:異伝・絵本草子
   - qid:Q8193642|name:半妖の夜叉姫
@@ -5569,3 +5571,141 @@ volumes:
   source: rakuten
   added_at: '2026-06-30'
   note: ねこぱんちに誤マッチ混入していた29巻を本来のキジトラ猫の小梅さんページへ移設(volume-excludeで除去+ここで純粋追加)
+- series_keys: &id001
+  - qid:Q958449|name:うしおととら
+  qid: Q958449
+  number: 2
+  isbn13: '9784091258625'
+  release_date: 2000-10
+  pages: null
+  publisher: 小学館
+  edition_type: wideban
+  title_display: うしおととら
+  source: ndl
+  added_at: '2026-06-30'
+  note: 巻抜けper-case(奇子型#3)。ワイド版(小学館・2000-2003)のv2-9取込もれ。NDLでISBN連番・発売日整合・第N巻ラベル確認。standard33巻/文庫19巻は完備、ワイド版だけv1,v10-18でv2-9欠落していた。
+- series_keys: *id001
+  qid: Q958449
+  number: 3
+  isbn13: '9784091258632'
+  release_date: 2000-12
+  pages: null
+  publisher: 小学館
+  edition_type: wideban
+  title_display: うしおととら
+  source: ndl
+  added_at: '2026-06-30'
+  note: 巻抜けper-case(奇子型#3)。ワイド版(小学館・2000-2003)のv2-9取込もれ。NDLでISBN連番・発売日整合・第N巻ラベル確認。standard33巻/文庫19巻は完備、ワイド版だけv1,v10-18でv2-9欠落していた。
+- series_keys: *id001
+  qid: Q958449
+  number: 4
+  isbn13: '9784091258649'
+  release_date: 2001-02
+  pages: null
+  publisher: 小学館
+  edition_type: wideban
+  title_display: うしおととら
+  source: ndl
+  added_at: '2026-06-30'
+  note: 巻抜けper-case(奇子型#3)。ワイド版(小学館・2000-2003)のv2-9取込もれ。NDLでISBN連番・発売日整合・第N巻ラベル確認。standard33巻/文庫19巻は完備、ワイド版だけv1,v10-18でv2-9欠落していた。
+- series_keys: *id001
+  qid: Q958449
+  number: 5
+  isbn13: '9784091258656'
+  release_date: 2001-04
+  pages: null
+  publisher: 小学館
+  edition_type: wideban
+  title_display: うしおととら
+  source: ndl
+  added_at: '2026-06-30'
+  note: 巻抜けper-case(奇子型#3)。ワイド版(小学館・2000-2003)のv2-9取込もれ。NDLでISBN連番・発売日整合・第N巻ラベル確認。standard33巻/文庫19巻は完備、ワイド版だけv1,v10-18でv2-9欠落していた。
+- series_keys: *id001
+  qid: Q958449
+  number: 6
+  isbn13: '9784091258663'
+  release_date: 2001-06
+  pages: null
+  publisher: 小学館
+  edition_type: wideban
+  title_display: うしおととら
+  source: ndl
+  added_at: '2026-06-30'
+  note: 巻抜けper-case(奇子型#3)。ワイド版(小学館・2000-2003)のv2-9取込もれ。NDLでISBN連番・発売日整合・第N巻ラベル確認。standard33巻/文庫19巻は完備、ワイド版だけv1,v10-18でv2-9欠落していた。
+- series_keys: *id001
+  qid: Q958449
+  number: 7
+  isbn13: '9784091258670'
+  release_date: 2001-08
+  pages: null
+  publisher: 小学館
+  edition_type: wideban
+  title_display: うしおととら
+  source: ndl
+  added_at: '2026-06-30'
+  note: 巻抜けper-case(奇子型#3)。ワイド版(小学館・2000-2003)のv2-9取込もれ。NDLでISBN連番・発売日整合・第N巻ラベル確認。standard33巻/文庫19巻は完備、ワイド版だけv1,v10-18でv2-9欠落していた。
+- series_keys: *id001
+  qid: Q958449
+  number: 8
+  isbn13: '9784091258687'
+  release_date: 2001-10
+  pages: null
+  publisher: 小学館
+  edition_type: wideban
+  title_display: うしおととら
+  source: ndl
+  added_at: '2026-06-30'
+  note: 巻抜けper-case(奇子型#3)。ワイド版(小学館・2000-2003)のv2-9取込もれ。NDLでISBN連番・発売日整合・第N巻ラベル確認。standard33巻/文庫19巻は完備、ワイド版だけv1,v10-18でv2-9欠落していた。
+- series_keys: *id001
+  qid: Q958449
+  number: 9
+  isbn13: '9784091258694'
+  release_date: 2001-12
+  pages: null
+  publisher: 小学館
+  edition_type: wideban
+  title_display: うしおととら
+  source: ndl
+  added_at: '2026-06-30'
+  note: 巻抜けper-case(奇子型#3)。ワイド版(小学館・2000-2003)のv2-9取込もれ。NDLでISBN連番・発売日整合・第N巻ラベル確認。standard33巻/文庫19巻は完備、ワイド版だけv1,v10-18でv2-9欠落していた。
+- series_keys:
+  - qid:Q11553712|name:帯をギュッとね!
+  qid: null
+  number: 14
+  isbn13: '9784091257345'
+  release_date: 2000-11
+  pages: null
+  publisher: 小学館
+  edition_type: wideban
+  title_display: 帯をギュッとね!
+  source: ndl
+  added_at: '2026-06-30'
+  note: 巻抜けper-case(奇子型)。wideban版の取込もれ。NDLで同版ISBN系列(共通prefix)・発売日整合確認。
+- series_keys:
+  - qid:Q8193548|name:南国少年パプワくん
+  - qid:Q8193548|name:南国少年パプワくんperfect
+  qid: null
+  number: 2
+  isbn13: '9784757597075'
+  release_date: 2025-4
+  pages: null
+  publisher: スクウェア・エニックス
+  edition_type: deluxe
+  title_display: 南国少年パプワくん
+  source: ndl
+  added_at: '2026-06-30'
+  note: 巻抜けper-case(奇子型)。deluxe版の取込もれ。NDLで同版ISBN系列(共通prefix)・発売日整合確認。
+- series_keys:
+  - name:ホーム社|name:世紀末リーダー伝たけし!
+  - qid:Q1040463|name:世紀末リーダー伝たけし!
+  qid: null
+  number: 6
+  isbn13: '9784088594613'
+  release_date: 2004-12
+  pages: null
+  publisher: 集英社
+  edition_type: deluxe
+  title_display: 世紀末リーダー伝たけし!
+  source: ndl
+  added_at: '2026-06-30'
+  note: 巻抜けper-case(奇子型)。deluxe版の取込もれ。NDLで同版ISBN系列(共通prefix)・発売日整合確認。
