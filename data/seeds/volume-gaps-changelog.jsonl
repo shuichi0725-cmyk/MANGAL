@@ -1122,3 +1122,4 @@
 {"op": "edition-override-rebuild", "slug": "kaze-no-tani-no-naushika", "reason": "奇子型Frankenstein全面rebuild。Wikipedia権威でワイド版全7巻(1983-1995)+豪華装幀本上下(1996)に再構築。著者宮崎駿。混在ISBN(上下巻/別年/楽譜)を排除", "at": "2026-06-30"}
 {"op": "add-seed4-edition-aware", "count": 18, "reason": "版aware(9桁prefix一致+残差題完全一致+発売日整合)確証・ぼっち外伝除外", "at": "2026-06-30"}
 {"op": "add-seed4-edlive", "count": 50, "reason": "live楽天×版aware(残差題完全一致+版ブロック+発売日整合)・怪しい14作除外", "at": "2026-06-30"}
+{"op": "add-seed4-ruby", "count": 16, "reason": "ルビ題auto漏れ救済(ルビ除去マッチ)", "at": "2026-06-30"}
