@@ -6868,3 +6868,1197 @@ volumes:
   source: rakuten
   added_at: '2026-06-30'
   note: 巻抜けper-case。ルビ題でauto漏れ→ルビ除去マッチ+版ブロック+発売日整合+残差題完全一致で確証(live楽天)。
+- series_keys: &id002
+  - qid:Q11468284|name:少年ケニヤ
+  qid: null
+  number: 16
+  isbn13: '9784041547168'
+  release_date: '1984.1'
+  pages: null
+  publisher: 角川書店
+  edition_type: bunkobon
+  title_display: 少年ケニヤ
+  source: ndl
+  added_at: '2026-07-01'
+  note: '巻抜けper-case: NDL照合で取込もれ巻確認(同社guard). slug=shounen-keniya'
+- series_keys: *id002
+  qid: null
+  number: 17
+  isbn13: '9784041547175'
+  release_date: '1984.2'
+  pages: null
+  publisher: 角川書店
+  edition_type: bunkobon
+  title_display: 少年ケニヤ
+  source: ndl
+  added_at: '2026-07-01'
+  note: '巻抜けper-case: NDL照合で取込もれ巻確認(同社guard). slug=shounen-keniya'
+- series_keys: *id002
+  qid: null
+  number: 14
+  isbn13: '9784041547144'
+  release_date: '1984.1'
+  pages: null
+  publisher: 角川書店
+  edition_type: bunkobon
+  title_display: 少年ケニヤ
+  source: ndl
+  added_at: '2026-07-01'
+  note: '巻抜けper-case: NDL照合で取込もれ巻確認(同社guard). slug=shounen-keniya'
+- series_keys: *id002
+  qid: null
+  number: 15
+  isbn13: '9784041547151'
+  release_date: '1984.1'
+  pages: null
+  publisher: 角川書店
+  edition_type: bunkobon
+  title_display: 少年ケニヤ
+  source: ndl
+  added_at: '2026-07-01'
+  note: '巻抜けper-case: NDL照合で取込もれ巻確認(同社guard). slug=shounen-keniya'
+- series_keys: &id003
+  - name:佐々木守|name:男どアホウ甲子園
+  qid: null
+  number: 3
+  isbn13: '9784253172684'
+  release_date: '1996.10'
+  pages: null
+  publisher: 秋田書店
+  edition_type: bunkobon
+  title_display: 男どアホウ甲子園
+  source: ndl
+  added_at: '2026-07-01'
+  note: '巻抜けper-case: NDL照合で取込もれ巻確認(同社guard). slug=otoko-do-ahou-koshien'
+- series_keys: *id003
+  qid: null
+  number: 4
+  isbn13: '9784253172691'
+  release_date: '1996.12'
+  pages: null
+  publisher: 秋田書店
+  edition_type: bunkobon
+  title_display: 男どアホウ甲子園
+  source: ndl
+  added_at: '2026-07-01'
+  note: '巻抜けper-case: NDL照合で取込もれ巻確認(同社guard). slug=otoko-do-ahou-koshien'
+- series_keys: *id003
+  qid: null
+  number: 6
+  isbn13: '9784253172714'
+  release_date: '1997.2'
+  pages: null
+  publisher: 秋田書店
+  edition_type: bunkobon
+  title_display: 男どアホウ甲子園
+  source: ndl
+  added_at: '2026-07-01'
+  note: '巻抜けper-case: NDL照合で取込もれ巻確認(同社guard). slug=otoko-do-ahou-koshien'
+- series_keys: *id003
+  qid: null
+  number: 7
+  isbn13: '9784253172721'
+  release_date: '1997.2'
+  pages: null
+  publisher: 秋田書店
+  edition_type: bunkobon
+  title_display: 男どアホウ甲子園
+  source: ndl
+  added_at: '2026-07-01'
+  note: '巻抜けper-case: NDL照合で取込もれ巻確認(同社guard). slug=otoko-do-ahou-koshien'
+- series_keys: *id003
+  qid: null
+  number: 8
+  isbn13: '9784253172738'
+  release_date: '1997.3'
+  pages: null
+  publisher: 秋田書店
+  edition_type: bunkobon
+  title_display: 男どアホウ甲子園
+  source: ndl
+  added_at: '2026-07-01'
+  note: '巻抜けper-case: NDL照合で取込もれ巻確認(同社guard). slug=otoko-do-ahou-koshien'
+- series_keys: *id003
+  qid: null
+  number: 9
+  isbn13: '9784253172745'
+  release_date: '1997.6'
+  pages: null
+  publisher: 秋田書店
+  edition_type: bunkobon
+  title_display: 男どアホウ甲子園
+  source: ndl
+  added_at: '2026-07-01'
+  note: '巻抜けper-case: NDL照合で取込もれ巻確認(同社guard). slug=otoko-do-ahou-koshien'
+- series_keys: *id003
+  qid: null
+  number: 10
+  isbn13: '9784253172752'
+  release_date: '1997.8'
+  pages: null
+  publisher: 秋田書店
+  edition_type: bunkobon
+  title_display: 男どアホウ甲子園
+  source: ndl
+  added_at: '2026-07-01'
+  note: '巻抜けper-case: NDL照合で取込もれ巻確認(同社guard). slug=otoko-do-ahou-koshien'
+- series_keys: *id003
+  qid: null
+  number: 11
+  isbn13: '9784253172769'
+  release_date: '1997.10'
+  pages: null
+  publisher: 秋田書店
+  edition_type: bunkobon
+  title_display: 男どアホウ甲子園
+  source: ndl
+  added_at: '2026-07-01'
+  note: '巻抜けper-case: NDL照合で取込もれ巻確認(同社guard). slug=otoko-do-ahou-koshien'
+- series_keys: *id003
+  qid: null
+  number: 12
+  isbn13: '9784253172776'
+  release_date: '1997.12'
+  pages: null
+  publisher: 秋田書店
+  edition_type: bunkobon
+  title_display: 男どアホウ甲子園
+  source: ndl
+  added_at: '2026-07-01'
+  note: '巻抜けper-case: NDL照合で取込もれ巻確認(同社guard). slug=otoko-do-ahou-koshien'
+- series_keys: *id003
+  qid: null
+  number: 13
+  isbn13: '9784253172783'
+  release_date: '1998.2'
+  pages: null
+  publisher: 秋田書店
+  edition_type: bunkobon
+  title_display: 男どアホウ甲子園
+  source: ndl
+  added_at: '2026-07-01'
+  note: '巻抜けper-case: NDL照合で取込もれ巻確認(同社guard). slug=otoko-do-ahou-koshien'
+- series_keys: *id003
+  qid: null
+  number: 14
+  isbn13: '9784253172790'
+  release_date: '1998.4'
+  pages: null
+  publisher: 秋田書店
+  edition_type: bunkobon
+  title_display: 男どアホウ甲子園
+  source: ndl
+  added_at: '2026-07-01'
+  note: '巻抜けper-case: NDL照合で取込もれ巻確認(同社guard). slug=otoko-do-ahou-koshien'
+- series_keys: *id003
+  qid: null
+  number: 15
+  isbn13: '9784253172806'
+  release_date: '1998.6'
+  pages: null
+  publisher: 秋田書店
+  edition_type: bunkobon
+  title_display: 男どアホウ甲子園
+  source: ndl
+  added_at: '2026-07-01'
+  note: '巻抜けper-case: NDL照合で取込もれ巻確認(同社guard). slug=otoko-do-ahou-koshien'
+- series_keys:
+  - qid:Q11584823|name:750ライダー
+  qid: null
+  number: 3
+  isbn13: '9784253171977'
+  release_date: '1996.6'
+  pages: null
+  publisher: 秋田書店
+  edition_type: bunkobon
+  title_display: 750ライダー
+  source: ndl
+  added_at: '2026-07-01'
+  note: '巻抜けper-case: NDL照合で取込もれ巻確認(同社guard). slug=nanahan-rider'
+- series_keys: &id004
+  - qid:Q11653884|name:博多っ子純情
+  qid: null
+  number: 3
+  isbn13: '9784120019340'
+  release_date: '1990.8'
+  pages: null
+  publisher: 中央公論社
+  edition_type: aizoban
+  title_display: 博多っ子純情
+  source: ndl
+  added_at: '2026-07-01'
+  note: '巻抜けper-case: NDL照合で取込もれ巻確認(同社guard). slug=hakatakko-junjou'
+- series_keys: *id004
+  qid: null
+  number: 4
+  isbn13: '9784120019357'
+  release_date: '1990.9'
+  pages: null
+  publisher: 中央公論社
+  edition_type: aizoban
+  title_display: 博多っ子純情
+  source: ndl
+  added_at: '2026-07-01'
+  note: '巻抜けper-case: NDL照合で取込もれ巻確認(同社guard). slug=hakatakko-junjou'
+- series_keys:
+  - name:有賀一宇|name:ドラゴン拳
+  - qid:Q11461285|name:ドラゴン拳
+  qid: null
+  number: 4
+  isbn13: '9784091405944'
+  release_date: '1984.8'
+  pages: null
+  publisher: 小学館
+  edition_type: standard
+  title_display: ドラゴン拳
+  source: ndl
+  added_at: '2026-07-01'
+  note: '巻抜けper-case: NDL照合で取込もれ巻確認(同社guard). slug=dragon-ken'
+- series_keys: &id005
+  - qid:Q967455|name:マッド☆ブル34
+  - qid:Q967455|name:マッド・ブル34
+  qid: null
+  number: 5
+  isbn13: '9784088615257'
+  release_date: '1987.7'
+  pages: null
+  publisher: 集英社
+  edition_type: standard
+  title_display: マッド・ブル34
+  source: ndl
+  added_at: '2026-07-01'
+  note: '巻抜けper-case: NDL照合で取込もれ巻確認(同社guard). slug=mad-buru-34'
+- series_keys: *id005
+  qid: null
+  number: 8
+  isbn13: '9784088615288'
+  release_date: '1988.4'
+  pages: null
+  publisher: 集英社
+  edition_type: standard
+  title_display: マッド・ブル34
+  source: ndl
+  added_at: '2026-07-01'
+  note: '巻抜けper-case: NDL照合で取込もれ巻確認(同社guard). slug=mad-buru-34'
+- series_keys: *id005
+  qid: null
+  number: 9
+  isbn13: '9784088615295'
+  release_date: '1988.7'
+  pages: null
+  publisher: 集英社
+  edition_type: standard
+  title_display: マッド・ブル34
+  source: ndl
+  added_at: '2026-07-01'
+  note: '巻抜けper-case: NDL照合で取込もれ巻確認(同社guard). slug=mad-buru-34'
+- series_keys: *id005
+  qid: null
+  number: 10
+  isbn13: '9784088615301'
+  release_date: '1988.10'
+  pages: null
+  publisher: 集英社
+  edition_type: standard
+  title_display: マッド・ブル34
+  source: ndl
+  added_at: '2026-07-01'
+  note: '巻抜けper-case: NDL照合で取込もれ巻確認(同社guard). slug=mad-buru-34'
+- series_keys: *id005
+  qid: null
+  number: 11
+  isbn13: '9784088618210'
+  release_date: '1989.1'
+  pages: null
+  publisher: 集英社
+  edition_type: standard
+  title_display: マッド・ブル34
+  source: ndl
+  added_at: '2026-07-01'
+  note: '巻抜けper-case: NDL照合で取込もれ巻確認(同社guard). slug=mad-buru-34'
+- series_keys: *id005
+  qid: null
+  number: 12
+  isbn13: '9784088618227'
+  release_date: '1989.4'
+  pages: null
+  publisher: 集英社
+  edition_type: standard
+  title_display: マッド・ブル34
+  source: ndl
+  added_at: '2026-07-01'
+  note: '巻抜けper-case: NDL照合で取込もれ巻確認(同社guard). slug=mad-buru-34'
+- series_keys: *id005
+  qid: null
+  number: 13
+  isbn13: '9784088618234'
+  release_date: '1989.7'
+  pages: null
+  publisher: 集英社
+  edition_type: standard
+  title_display: マッド・ブル34
+  source: ndl
+  added_at: '2026-07-01'
+  note: '巻抜けper-case: NDL照合で取込もれ巻確認(同社guard). slug=mad-buru-34'
+- series_keys: *id005
+  qid: null
+  number: 14
+  isbn13: '9784088618241'
+  release_date: '1989.10'
+  pages: null
+  publisher: 集英社
+  edition_type: standard
+  title_display: マッド・ブル34
+  source: ndl
+  added_at: '2026-07-01'
+  note: '巻抜けper-case: NDL照合で取込もれ巻確認(同社guard). slug=mad-buru-34'
+- series_keys: *id005
+  qid: null
+  number: 15
+  isbn13: '9784088618258'
+  release_date: '1990.1'
+  pages: null
+  publisher: 集英社
+  edition_type: standard
+  title_display: マッド・ブル34
+  source: ndl
+  added_at: '2026-07-01'
+  note: '巻抜けper-case: NDL照合で取込もれ巻確認(同社guard). slug=mad-buru-34'
+- series_keys: *id005
+  qid: null
+  number: 16
+  isbn13: '9784088618265'
+  release_date: '1990.4'
+  pages: null
+  publisher: 集英社
+  edition_type: standard
+  title_display: マッド・ブル34
+  source: ndl
+  added_at: '2026-07-01'
+  note: '巻抜けper-case: NDL照合で取込もれ巻確認(同社guard). slug=mad-buru-34'
+- series_keys:
+  - qid:Q841020|name:アイムナム
+  qid: null
+  number: 2
+  isbn13: '9784091216328'
+  release_date: '1987.8'
+  pages: null
+  publisher: 小学館
+  edition_type: standard
+  title_display: アイムナム
+  source: ndl
+  added_at: '2026-07-01'
+  note: '巻抜けper-case: NDL照合で取込もれ巻確認(同社guard). slug=aimu-namu'
+- series_keys:
+  - name:企画者104|name:ビックリマン おもしろランド
+  qid: null
+  number: 4
+  isbn13: '9784253099325'
+  release_date: '1988.06'
+  pages: null
+  publisher: 秋田書店
+  edition_type: standard
+  title_display: ビックリマン おもしろランド
+  source: ndl
+  added_at: '2026-07-01'
+  note: '巻抜けper-case: NDL照合で取込もれ巻確認(同社guard). slug=bikkuriman-omoshirorando'
+- series_keys: &id006
+  - name:菊地としを|name:明王伝レイ
+  - qid:Q11619700|name:明王伝レイ
+  qid: null
+  number: 8
+  isbn13: '9784063131437'
+  release_date: '1990.07'
+  pages: null
+  publisher: 講談社
+  edition_type: standard
+  title_display: 明王伝レイ
+  source: ndl
+  added_at: '2026-07-01'
+  note: '巻抜けper-case: NDL照合で取込もれ巻確認(同社guard). slug=myououden-rei'
+- series_keys: *id006
+  qid: null
+  number: 9
+  isbn13: '9784063131444'
+  release_date: '1990.11'
+  pages: null
+  publisher: 講談社
+  edition_type: standard
+  title_display: 明王伝レイ
+  source: ndl
+  added_at: '2026-07-01'
+  note: '巻抜けper-case: NDL照合で取込もれ巻確認(同社guard). slug=myououden-rei'
+- series_keys: *id006
+  qid: null
+  number: 10
+  isbn13: '9784063132113'
+  release_date: '1991.03'
+  pages: null
+  publisher: 講談社
+  edition_type: standard
+  title_display: 明王伝レイ
+  source: ndl
+  added_at: '2026-07-01'
+  note: '巻抜けper-case: NDL照合で取込もれ巻確認(同社guard). slug=myououden-rei'
+- series_keys: *id006
+  qid: null
+  number: 11
+  isbn13: '9784063132366'
+  release_date: '1991.07'
+  pages: null
+  publisher: 講談社
+  edition_type: standard
+  title_display: 明王伝レイ
+  source: ndl
+  added_at: '2026-07-01'
+  note: '巻抜けper-case: NDL照合で取込もれ巻確認(同社guard). slug=myououden-rei'
+- series_keys: *id006
+  qid: null
+  number: 12
+  isbn13: '9784063132588'
+  release_date: '1991.11'
+  pages: null
+  publisher: 講談社
+  edition_type: standard
+  title_display: 明王伝レイ
+  source: ndl
+  added_at: '2026-07-01'
+  note: '巻抜けper-case: NDL照合で取込もれ巻確認(同社guard). slug=myououden-rei'
+- series_keys: &id007
+  - qid:Q438368|name:シッポがともだち
+  qid: null
+  number: 2
+  isbn13: '9784088621883'
+  release_date: １９９１．０８
+  pages: null
+  publisher: 集英社
+  edition_type: standard
+  title_display: シッポがともだち
+  source: ndl
+  added_at: '2026-07-01'
+  note: '巻抜けper-case: NDL照合で取込もれ巻確認(同社guard). slug=shippo-ga-tomodachi'
+- series_keys: *id007
+  qid: null
+  number: 3
+  isbn13: '9784088622460'
+  release_date: '1993.4'
+  pages: null
+  publisher: 集英社
+  edition_type: standard
+  title_display: シッポがともだち
+  source: ndl
+  added_at: '2026-07-01'
+  note: '巻抜けper-case: NDL照合で取込もれ巻確認(同社guard). slug=shippo-ga-tomodachi'
+- series_keys:
+  - name:牛次郎|name:芝の貴婦人
+  qid: null
+  number: 2
+  isbn13: '9784061037984'
+  release_date: null
+  pages: null
+  publisher: 講談社
+  edition_type: deluxe
+  title_display: 芝の貴婦人
+  source: ndl
+  added_at: '2026-07-01'
+  note: '巻抜けper-case: NDL照合で取込もれ巻確認(同社guard). slug=green-no-kifujin'
+- series_keys: &id008
+  - qid:Q9127335|name:キャプテンキッド
+  qid: null
+  number: 8
+  isbn13: '9784063193879'
+  release_date: '1993.05'
+  pages: null
+  publisher: 講談社
+  edition_type: deluxe
+  title_display: キャプテンキッド
+  source: ndl
+  added_at: '2026-07-01'
+  note: '巻抜けper-case: NDL照合で取込もれ巻確認(同社guard). slug=captain-kid'
+- series_keys: *id008
+  qid: null
+  number: 9
+  isbn13: '9784063193978'
+  release_date: '1993.07'
+  pages: null
+  publisher: 講談社
+  edition_type: deluxe
+  title_display: キャプテンキッド
+  source: ndl
+  added_at: '2026-07-01'
+  note: '巻抜けper-case: NDL照合で取込もれ巻確認(同社guard). slug=captain-kid'
+- series_keys: *id008
+  qid: null
+  number: 7
+  isbn13: '9784063193039'
+  release_date: '1992.07'
+  pages: null
+  publisher: 講談社
+  edition_type: deluxe
+  title_display: キャプテンキッド
+  source: ndl
+  added_at: '2026-07-01'
+  note: '巻抜けper-case: NDL照合で取込もれ巻確認(同社guard). slug=captain-kid'
+- series_keys:
+  - name:門松巧大|name:死のホワイトマジック
+  qid: null
+  number: 2
+  isbn13: '9784063131680'
+  release_date: '1990.09'
+  pages: null
+  publisher: 講談社
+  edition_type: standard
+  title_display: 死のホワイトマジック
+  source: ndl
+  added_at: '2026-07-01'
+  note: '巻抜けper-case: NDL照合で取込もれ巻確認(同社guard). slug=shi-no-white-magic'
+- series_keys:
+  - name:創美社|name:わたしがママよ
+  - qid:Q9008743|name:わたしがママよ
+  qid: null
+  number: 4
+  isbn13: '9784088623184'
+  release_date: '1995.5'
+  pages: null
+  publisher: 集英社
+  edition_type: standard
+  title_display: わたしがママよ
+  source: ndl
+  added_at: '2026-07-01'
+  note: '巻抜けper-case: NDL照合で取込もれ巻確認(同社guard). slug=watashi-ga-mama-yo'
+- series_keys: &id009
+  - qid:Q376174|name:へば!Helloちゃん
+  qid: null
+  number: 3
+  isbn13: '9784063193541'
+  release_date: '1993.02'
+  pages: null
+  publisher: 講談社
+  edition_type: standard
+  title_display: へば!Helloちゃん
+  source: ndl
+  added_at: '2026-07-01'
+  note: '巻抜けper-case: NDL照合で取込もれ巻確認(同社guard). slug=heba-hello-chan'
+- series_keys: *id009
+  qid: null
+  number: 4
+  isbn13: '9784063194135'
+  release_date: '1993.08'
+  pages: null
+  publisher: 講談社
+  edition_type: standard
+  title_display: へば!Helloちゃん
+  source: ndl
+  added_at: '2026-07-01'
+  note: '巻抜けper-case: NDL照合で取込もれ巻確認(同社guard). slug=heba-hello-chan'
+- series_keys:
+  - name:エルティーン編集部|name:りん太のももいろコミック
+  qid: null
+  number: 2
+  isbn13: '9784764817586'
+  release_date: '1995.4'
+  pages: null
+  publisher: 近代映画社
+  edition_type: standard
+  title_display: りん太のももいろコミック
+  source: ndl
+  added_at: '2026-07-01'
+  note: '巻抜けper-case: NDL照合で取込もれ巻確認(同社guard). slug=rinta-no-momoiro-comic'
+- series_keys:
+  - name:サンライズ|name:Mobile suit Gundam the movies
+  qid: null
+  number: 5
+  isbn13: '9784751101124'
+  release_date: '1997.11'
+  pages: null
+  publisher: 旭屋出版
+  edition_type: standard
+  title_display: Mobile suit Gundam the movies
+  source: ndl
+  added_at: '2026-07-01'
+  note: '巻抜けper-case: NDL照合で取込もれ巻確認(同社guard). slug=mobile-suit-gundam-the-movies'
+- series_keys:
+  - name:ぺるそな|name:Xero site（無法恥帯）
+  - name:富秋悠|name:Xero site（無法恥帯）
+  - qid:Q11318682|name:Xero site（無法恥帯）
+  qid: null
+  number: 2
+  isbn13: '9784576961088'
+  release_date: '[1996]'
+  pages: null
+  publisher: 二見書房
+  edition_type: standard
+  title_display: Xero site（無法恥帯）
+  source: ndl
+  added_at: '2026-07-01'
+  note: '巻抜けper-case: NDL照合で取込もれ巻確認(同社guard). slug=zero-site-muhou-chitai'
+- series_keys:
+  - qid:Q510977|name:チャレンジャーズ
+  - qid:Q510977|name:合格祈願
+  qid: null
+  number: 3
+  isbn13: '9784877244835'
+  release_date: '2006.12'
+  pages: null
+  publisher: 海王社
+  edition_type: standard
+  title_display: チャレンジャーズ
+  source: ndl
+  added_at: '2026-07-01'
+  note: '巻抜けper-case: NDL照合で取込もれ巻確認(同社guard). slug=charenjaazu'
+- series_keys:
+  - qid:Q11479927|name:瑠璃子女王の華麗なる日々
+  qid: null
+  number: 2
+  isbn13: '9784088583648'
+  release_date: '1997.3'
+  pages: null
+  publisher: 集英社
+  edition_type: deluxe
+  title_display: 瑠璃子女王の華麗なる日々
+  source: ndl
+  added_at: '2026-07-01'
+  note: '巻抜けper-case: NDL照合で取込もれ巻確認(同社guard). slug=ruriko-joou-no-kareinaru-hibi'
+- series_keys:
+  - name:三原陽子|name:12の結婚物語
+  - name:森谷幸子|name:12の結婚物語
+  - qid:Q40039813|name:12の結婚物語
+  qid: null
+  number: 4
+  isbn13: '9784063198225'
+  release_date: '1997.7'
+  pages: null
+  publisher: コミックス
+  edition_type: standard
+  title_display: 12の結婚物語
+  source: ndl
+  added_at: '2026-07-01'
+  note: '巻抜けper-case: NDL照合で取込もれ巻確認(同社guard). slug=12-no-kekkon-monogatari'
+- series_keys:
+  - name:沢本英二郎|name:マンガ法律の抜け穴
+  - name:飯野たから|name:マンガ法律の抜け穴
+  qid: null
+  number: 3
+  isbn13: '9784426270001'
+  release_date: '1997.6'
+  pages: null
+  publisher: 自由国民社
+  edition_type: standard
+  title_display: マンガ法律の抜け穴
+  source: ndl
+  added_at: '2026-07-01'
+  note: '巻抜けper-case: NDL照合で取込もれ巻確認(同社guard). slug=manga-houritsu-no-nukeana'
+- series_keys:
+  - qid:Q4675114|name:困った時には星に聞け!
+  qid: null
+  number: 4
+  isbn13: '9784887418233'
+  release_date: '2008.2'
+  pages: null
+  publisher: 冬水社
+  edition_type: standard
+  title_display: 困った時には星に聞け!
+  source: ndl
+  added_at: '2026-07-01'
+  note: '巻抜けper-case: NDL照合で取込もれ巻確認(同社guard). slug=komatta-toki-niwa-hoshi-ni-kike'
+- series_keys:
+  - qid:Q11479927|name:たそかれの夢
+  qid: null
+  number: 2
+  isbn13: '9784088590752'
+  release_date: '1999.5'
+  pages: null
+  publisher: 集英社
+  edition_type: deluxe
+  title_display: たそかれの夢
+  source: ndl
+  added_at: '2026-07-01'
+  note: '巻抜けper-case: NDL照合で取込もれ巻確認(同社guard). slug=tasokare-no-yume'
+- series_keys:
+  - name:竜騎らみゅー|name:スターオーシャン セカンドストーリー
+  - qid:Q11443794|name:スターオーシャン セカンドストーリー
+  qid: null
+  number: 5
+  isbn13: '9784757500556'
+  release_date: '1999.8'
+  pages: null
+  publisher: エニックス
+  edition_type: standard
+  title_display: スターオーシャン セカンドストーリー
+  source: ndl
+  added_at: '2026-07-01'
+  note: '巻抜けper-case: NDL照合で取込もれ巻確認(同社guard). slug=star-ocean-second-story'
+- series_keys:
+  - qid:Q11665645|name:すてきな主婦たち
+  qid: null
+  number: 2
+  isbn13: '9784575723298'
+  release_date: '2001.7'
+  pages: null
+  publisher: 双葉社
+  edition_type: bunkobon
+  title_display: すてきな主婦たち
+  source: ndl
+  added_at: '2026-07-01'
+  note: '巻抜けper-case: NDL照合で取込もれ巻確認(同社guard). slug=sutekina-shufutachi'
+- series_keys:
+  - qid:Q11386899|name:だめんず・うぉ～か～
+  qid: null
+  number: 5
+  isbn13: '9784594050467'
+  release_date: '2005.10'
+  pages: null
+  publisher: 扶桑社
+  edition_type: standard
+  title_display: だめんず・うぉ～か～
+  source: ndl
+  added_at: '2026-07-01'
+  note: '巻抜けper-case: NDL照合で取込もれ巻確認(同社guard). slug=damenzu-walker'
+- series_keys:
+  - qid:Q11280216|name:絶対したいHな恋!
+  qid: null
+  number: 2
+  isbn13: '9784253134057'
+  release_date: '2002.7'
+  pages: null
+  publisher: 秋田書店
+  edition_type: standard
+  title_display: 絶対したいHな恋!
+  source: ndl
+  added_at: '2026-07-01'
+  note: '巻抜けper-case: NDL照合で取込もれ巻確認(同社guard). slug=zettai-shitai-etchi-na-koi'
+- series_keys: &id010
+  - qid:Q8972749|name:岸辺の唄
+  qid: null
+  number: 2
+  isbn13: '9784834275087'
+  release_date: '2013.10'
+  pages: null
+  publisher: ホーム社
+  edition_type: standard
+  title_display: 岸辺の唄
+  source: ndl
+  added_at: '2026-07-01'
+  note: '巻抜けper-case: NDL照合で取込もれ巻確認(同社guard). slug=kishibe-no-uta'
+- series_keys: *id010
+  qid: null
+  number: 3
+  isbn13: '9784834275124'
+  release_date: '2017.4'
+  pages: null
+  publisher: ホーム社
+  edition_type: standard
+  title_display: 岸辺の唄
+  source: ndl
+  added_at: '2026-07-01'
+  note: '巻抜けper-case: NDL照合で取込もれ巻確認(同社guard). slug=kishibe-no-uta'
+- series_keys: &id011
+  - qid:Q3514183|name:釣りキチ三平 平成版
+  qid: null
+  number: 5
+  isbn13: '9784063850024'
+  release_date: '2014.8'
+  pages: null
+  publisher: 講談社
+  edition_type: bunkobon
+  title_display: 釣りキチ三平 平成版
+  source: ndl
+  added_at: '2026-07-01'
+  note: '巻抜けper-case: NDL照合で取込もれ巻確認(同社guard). slug=tsurikichi-sanpei-heiseiban'
+- series_keys: *id011
+  qid: null
+  number: 6
+  isbn13: '9784063850031'
+  release_date: '2014.9'
+  pages: null
+  publisher: 講談社
+  edition_type: bunkobon
+  title_display: 釣りキチ三平 平成版
+  source: ndl
+  added_at: '2026-07-01'
+  note: '巻抜けper-case: NDL照合で取込もれ巻確認(同社guard). slug=tsurikichi-sanpei-heiseiban'
+- series_keys:
+  - name:中西ゆか|name:浅見光彦ミステリースペシャル
+  - name:中邑冴|name:浅見光彦ミステリースペシャル
+  - name:千村青|name:浅見光彦ミステリースペシャル
+  - name:太田美香|name:浅見光彦ミステリースペシャル
+  - name:日下部拓海|name:浅見光彦ミステリースペシャル
+  - name:稜敦水|name:浅見光彦ミステリースペシャル
+  - name:羽柴麟|name:浅見光彦ミステリースペシャル
+  - qid:Q17161092|name:浅見光彦ミステリースペシャル
+  - qid:Q22127111|name:浅見光彦ミステリースペシャル
+  - qid:Q47580510|name:浅見光彦ミステリースペシャル
+  qid: null
+  number: 20
+  isbn13: '9784408176505'
+  release_date: '2020.9'
+  pages: null
+  publisher: 実業之日本社
+  edition_type: standard
+  title_display: 浅見光彦ミステリースペシャル
+  source: ndl
+  added_at: '2026-07-01'
+  note: '巻抜けper-case: NDL照合で取込もれ巻確認(同社guard). slug=asami-mitsuhiko-mystery-special'
+- series_keys:
+  - name:坂口よしを|name:霊験お初捕物控
+  qid: null
+  number: 2
+  isbn13: '9784253154062'
+  release_date: '2009.10'
+  pages: null
+  publisher: 秋田書店
+  edition_type: deluxe
+  title_display: 霊験お初捕物控
+  source: ndl
+  added_at: '2026-07-01'
+  note: '巻抜けper-case: NDL照合で取込もれ巻確認(同社guard). slug=reigen-ohatsu-torimono-hikae'
+- series_keys: &id012
+  - qid:Q11539826|name:G・DEFEND
+  qid: null
+  number: 26
+  isbn13: '9784864233149'
+  release_date: '2015.2'
+  pages: null
+  publisher: 冬水社
+  edition_type: bunkobon
+  title_display: G・defend
+  source: ndl
+  added_at: '2026-07-01'
+  note: '巻抜けper-case: NDL照合で取込もれ巻確認(同社guard). slug=g-defend'
+- series_keys: *id012
+  qid: null
+  number: 27
+  isbn13: '9784864233156'
+  release_date: '2015.2'
+  pages: null
+  publisher: 冬水社
+  edition_type: bunkobon
+  title_display: G・defend
+  source: ndl
+  added_at: '2026-07-01'
+  note: '巻抜けper-case: NDL照合で取込もれ巻確認(同社guard). slug=g-defend'
+- series_keys:
+  - qid:Q2715658|name:島耕作全集
+  qid: null
+  number: 3
+  isbn13: '9784063647181'
+  release_date: '2008.5'
+  pages: null
+  publisher: 講談社
+  edition_type: standard
+  title_display: 島耕作全集
+  source: ndl
+  added_at: '2026-07-01'
+  note: '巻抜けper-case: NDL照合で取込もれ巻確認(同社guard). slug=shima-kousaku-zenshuu'
+- series_keys:
+  - name:あさみさとる|name:名探偵浅見光彦＆旅情ミステリーコミックセレクション
+  - name:大舞キリコ|name:名探偵浅見光彦＆旅情ミステリーコミックセレクション
+  - name:時友美如|name:名探偵浅見光彦＆旅情ミステリーコミックセレクション
+  - name:月嶋つぐ美|name:名探偵浅見光彦＆旅情ミステリーコミックセレクション
+  - name:長尾文子|name:名探偵浅見光彦＆旅情ミステリーコミックセレクション
+  - name:風祭壮太|name:名探偵浅見光彦＆旅情ミステリーコミックセレクション
+  - name:飯島淳子|name:名探偵浅見光彦＆旅情ミステリーコミックセレクション
+  - name:香椎オルカ|name:名探偵浅見光彦＆旅情ミステリーコミックセレクション
+  - name:鳥羽笙子|name:名探偵浅見光彦&旅情ミステリーコミックセレクション
+  - qid:Q11587761|name:名探偵浅見光彦&旅情ミステリーコミックセレクション
+  - qid:Q11587761|name:名探偵浅見光彦＆旅情ミステリーコミックセレクション
+  - qid:Q11615449|name:名探偵浅見光彦＆旅情ミステリーコミックセレクション
+  - qid:Q8967541|name:名探偵浅見光彦＆旅情ミステリーコミックセレクション
+  qid: null
+  number: 4
+  isbn13: '9784253245326'
+  release_date: '2012.4'
+  pages: null
+  publisher: 秋田書店
+  edition_type: standard
+  title_display: 名探偵浅見光彦＆旅情ミステリーコミックセレクション
+  source: ndl
+  added_at: '2026-07-01'
+  note: '巻抜けper-case: NDL照合で取込もれ巻確認(同社guard). slug=mei-tantei-asami-mitsuhiko-ando-ryojou-mystery-comic-selection'
+- series_keys: &id013
+  - name:5pb.|name:Robotics;Notes
+  qid: null
+  number: 4
+  isbn13: '9784800002051'
+  release_date: '2013.9'
+  pages: null
+  publisher: マッグガーデン
+  edition_type: standard
+  title_display: Robotics;Notes
+  source: ndl
+  added_at: '2026-07-01'
+  note: '巻抜けper-case: NDL照合で取込もれ巻確認(同社guard). slug=robotics-notes-2012'
+- series_keys: *id013
+  qid: null
+  number: 5
+  isbn13: '9784800002976'
+  release_date: '2014.5'
+  pages: null
+  publisher: マッグガーデン
+  edition_type: standard
+  title_display: Robotics;Notes
+  source: ndl
+  added_at: '2026-07-01'
+  note: '巻抜けper-case: NDL照合で取込もれ巻確認(同社guard). slug=robotics-notes-2012'
+- series_keys: &id014
+  - name:松本帆加|name:暴君ヴァーデルの花嫁
+  qid: null
+  number: 4
+  isbn13: '9784776740407'
+  release_date: '2015.7'
+  pages: null
+  publisher: 宙出版
+  edition_type: standard
+  title_display: 暴君ヴァーデルの花嫁
+  source: ndl
+  added_at: '2026-07-01'
+  note: '巻抜けper-case: NDL照合で取込もれ巻確認(同社guard). slug=bou-kun-vaaderu-no-hanayome'
+- series_keys: *id014
+  qid: null
+  number: 5
+  isbn13: '9784776741473'
+  release_date: '2015.12'
+  pages: null
+  publisher: 宙出版
+  edition_type: standard
+  title_display: 暴君ヴァーデルの花嫁
+  source: ndl
+  added_at: '2026-07-01'
+  note: '巻抜けper-case: NDL照合で取込もれ巻確認(同社guard). slug=bou-kun-vaaderu-no-hanayome'
+- series_keys: *id014
+  qid: null
+  number: 6
+  isbn13: '9784776742234'
+  release_date: '2016.4'
+  pages: null
+  publisher: 宙出版
+  edition_type: standard
+  title_display: 暴君ヴァーデルの花嫁
+  source: ndl
+  added_at: '2026-07-01'
+  note: '巻抜けper-case: NDL照合で取込もれ巻確認(同社guard). slug=bou-kun-vaaderu-no-hanayome'
+- series_keys: *id014
+  qid: null
+  number: 7
+  isbn13: '9784776742739'
+  release_date: '2016.7'
+  pages: null
+  publisher: 宙出版
+  edition_type: standard
+  title_display: 暴君ヴァーデルの花嫁
+  source: ndl
+  added_at: '2026-07-01'
+  note: '巻抜けper-case: NDL照合で取込もれ巻確認(同社guard). slug=bou-kun-vaaderu-no-hanayome'
+- series_keys: *id014
+  qid: null
+  number: 8
+  isbn13: '9784776743590'
+  release_date: '2016.11'
+  pages: null
+  publisher: 宙出版
+  edition_type: standard
+  title_display: 暴君ヴァーデルの花嫁
+  source: ndl
+  added_at: '2026-07-01'
+  note: '巻抜けper-case: NDL照合で取込もれ巻確認(同社guard). slug=bou-kun-vaaderu-no-hanayome'
+- series_keys: *id014
+  qid: null
+  number: 9
+  isbn13: '9784776744276'
+  release_date: '2017.3'
+  pages: null
+  publisher: 宙出版
+  edition_type: standard
+  title_display: 暴君ヴァーデルの花嫁
+  source: ndl
+  added_at: '2026-07-01'
+  note: '巻抜けper-case: NDL照合で取込もれ巻確認(同社guard). slug=bou-kun-vaaderu-no-hanayome'
+- series_keys: *id014
+  qid: null
+  number: 10
+  isbn13: '9784776745037'
+  release_date: '2017.7'
+  pages: null
+  publisher: 宙出版
+  edition_type: standard
+  title_display: 暴君ヴァーデルの花嫁
+  source: ndl
+  added_at: '2026-07-01'
+  note: '巻抜けper-case: NDL照合で取込もれ巻確認(同社guard). slug=bou-kun-vaaderu-no-hanayome'
+- series_keys: *id014
+  qid: null
+  number: 11
+  isbn13: '9784776745952'
+  release_date: '2017.11'
+  pages: null
+  publisher: 宙出版
+  edition_type: standard
+  title_display: 暴君ヴァーデルの花嫁
+  source: ndl
+  added_at: '2026-07-01'
+  note: '巻抜けper-case: NDL照合で取込もれ巻確認(同社guard). slug=bou-kun-vaaderu-no-hanayome'
+- series_keys: *id014
+  qid: null
+  number: 12
+  isbn13: '9784776746539'
+  release_date: '2018.3'
+  pages: null
+  publisher: 宙出版
+  edition_type: standard
+  title_display: 暴君ヴァーデルの花嫁
+  source: ndl
+  added_at: '2026-07-01'
+  note: '巻抜けper-case: NDL照合で取込もれ巻確認(同社guard). slug=bou-kun-vaaderu-no-hanayome'
+- series_keys:
+  - qid:Q24863382|name:MURCIELAGO
+  - qid:Q24863382|name:Murcielago
+  - qid:Q24863382|name:Murciélago
+  qid: null
+  number: 13
+  isbn13: '9784757559585'
+  release_date: '2019.1'
+  pages: null
+  publisher: スクウェア・エニック
+  edition_type: standard
+  title_display: Murciélago
+  source: ndl
+  added_at: '2026-07-01'
+  note: '巻抜けper-case: NDL照合で取込もれ巻確認(同社guard). slug=murci-lago'
+- series_keys:
+  - name:野原ゆた|name:シークレット×シブリングス
+  qid: null
+  number: 2
+  isbn13: '9784757543553'
+  release_date: '2014.7'
+  pages: null
+  publisher: スクウェア・エニック
+  edition_type: standard
+  title_display: シークレット×シブリングス
+  source: ndl
+  added_at: '2026-07-01'
+  note: '巻抜けper-case: NDL照合で取込もれ巻確認(同社guard). slug=secret-siblings'
+- series_keys:
+  - name:安田卓也|name:原水爆漫画コレクション
+  - qid:Q11565267|name:原水爆漫画コレクション
+  qid: null
+  number: 2
+  isbn13: '9784582286922'
+  release_date: '2015.7'
+  pages: null
+  publisher: 平凡社
+  edition_type: standard
+  title_display: 原水爆漫画コレクション
+  source: ndl
+  added_at: '2026-07-01'
+  note: '巻抜けper-case: NDL照合で取込もれ巻確認(同社guard). slug=gensuibaku-manga-collection'
+- series_keys:
+  - name:いけがみ小5|name:Api
+  - name:さちも|name:Api
+  - name:ひじき|name:Api
+  - name:中村まきの|name:Api
+  - name:安堂ろめだ|name:Api
+  - name:林マキ|name:Api
+  qid: null
+  number: 4
+  isbn13: '9784832290761'
+  release_date: '2018.12'
+  pages: null
+  publisher: 芳文社
+  edition_type: standard
+  title_display: Api
+  source: ndl
+  added_at: '2026-07-01'
+  note: '巻抜けper-case: NDL照合で取込もれ巻確認(同社guard). slug=api'
+- series_keys:
+  - name:Magica Quartet|name:マギアレコード
+  - name:富士フジノ|name:マギアレコード|sub:魔法少女まどか☆マギカ外伝
+  - name:富士フジノ|name:マギアレコード魔法少女まどか☆マギカ外伝
+  qid: null
+  number: 5
+  isbn13: '9784832273306'
+  release_date: '2021.12'
+  pages: null
+  publisher: 芳文社
+  edition_type: standard
+  title_display: マギアレコード
+  source: ndl
+  added_at: '2026-07-01'
+  note: '巻抜けper-case: NDL照合で取込もれ巻確認(同社guard). slug=magia-record-2025'
+- series_keys:
+  - name:佳門サエコ|name:これから俺は、後輩に抱かれます
+  qid: null
+  number: 4
+  isbn13: '9784799769140'
+  release_date: '2024.10'
+  pages: null
+  publisher: リブレ
+  edition_type: deluxe
+  title_display: これから俺は、後輩に抱かれます
+  source: ndl
+  added_at: '2026-07-01'
+  note: '巻抜けper-case: NDL照合で取込もれ巻確認(同社guard). slug=korekara-ore-wa-kouhai-ni-dakaremasu'
+- series_keys:
+  - qid:Q3959525|name:#DRCL
+  - qid:Q3959525|name:#DRCL|sub:midnight children
+  qid: null
+  number: 5
+  isbn13: '9784087928112'
+  release_date: '2024.11'
+  pages: null
+  publisher: 集英社
+  edition_type: aizoban
+  title_display: '#DRCL'
+  source: ndl
+  added_at: '2026-07-01'
+  note: '巻抜けper-case: NDL照合で取込もれ巻確認(同社guard). slug=drcl'
+- series_keys:
+  - name:kisui|name:追放されたチート付与魔術師は気ままなセカンドライフを謳歌する。|sub:俺は武器だけじゃなく、あらゆるものに『強化ポイント』を付与できるし、俺の意思でいつでも効果を解除できるけど、残った人たち大丈夫?
+  qid: null
+  number: 11
+  isbn13: '9784065372777'
+  release_date: '2024.9'
+  pages: null
+  publisher: 講談社
+  edition_type: standard
+  title_display: 追放されたチート付与魔術師は気ままなセカンドライフを謳歌する。
+  source: ndl
+  added_at: '2026-07-01'
+  note: '巻抜けper-case: NDL照合で取込もれ巻確認(同社guard). slug=tsuihousareta-sareta-cheat-fuyo-majutsushi-wa-kimama-na-sekando-life-o-ouka-suru'
+- series_keys: &id015
+  - name:ととふみ|name:伝説のヤリチンvs鉄壁の尻穴
+  - name:ととふみ|name:伝説のヤリチンvs鉄壁の尻穴.
+  qid: null
+  number: 2
+  isbn13: '9784799761212'
+  release_date: '2023.2'
+  pages: null
+  publisher: リブレ
+  edition_type: deluxe
+  title_display: 伝説のヤリチンvs鉄壁の尻穴
+  source: ndl
+  added_at: '2026-07-01'
+  note: '巻抜けper-case: NDL照合で取込もれ巻確認(同社guard). slug=densetsu-no-yarichin-vs-teppeki-no-shiriana'
+- series_keys: *id015
+  qid: null
+  number: 3
+  isbn13: '9784799765043'
+  release_date: '2023.12'
+  pages: null
+  publisher: リブレ
+  edition_type: deluxe
+  title_display: 伝説のヤリチンvs鉄壁の尻穴
+  source: ndl
+  added_at: '2026-07-01'
+  note: '巻抜けper-case: NDL照合で取込もれ巻確認(同社guard). slug=densetsu-no-yarichin-vs-teppeki-no-shiriana'
+- series_keys: *id015
+  qid: null
+  number: 4
+  isbn13: '9784799769157'
+  release_date: '2024.10'
+  pages: null
+  publisher: リブレ
+  edition_type: deluxe
+  title_display: 伝説のヤリチンvs鉄壁の尻穴
+  source: ndl
+  added_at: '2026-07-01'
+  note: '巻抜けper-case: NDL照合で取込もれ巻確認(同社guard). slug=densetsu-no-yarichin-vs-teppeki-no-shiriana'
