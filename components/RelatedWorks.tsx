@@ -10,9 +10,15 @@ export function computeRelated(manga: Manga, all: Manga[], limit = 10) {
     [...manga.authors, ...manga.original_authors].map((a) => a.name),
   );
   const t = manga.title;
+  // ★pin: related_pin の slug は順序保持で最優先(例: ドラえもん→大長編ドラえもん)
+  const pinRank = new Map((manga.related_pin ?? []).map((s, i) => [s, i]));
   const scored: Array<{ m: Manga; score: number; why: string }> = [];
   for (const m of all) {
     if (m.slug === manga.slug) continue;
+    if (pinRank.has(m.slug)) {
+      scored.push({ m, score: 1000 - (pinRank.get(m.slug) ?? 0), why: "シリーズ" });
+      continue;
+    }
     let score = 0;
     let why = "";
     // シリーズ/スピンオフ = 題名の前方一致(4字以上)

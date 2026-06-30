@@ -2228,6 +2228,8 @@ def build_yml(
             o["original_authors"] = [enrich_author(a) for a in _eov["original_authors"]]
         if _eov.get("credits"):
             o["credits"] = [{"name": c["name"], "role": c.get("role", "編集")} for c in _eov["credits"] if c.get("name")]
+        if _eov.get("related_pin"):
+            o["related_pin"] = list(_eov["related_pin"])
     return o
 
 

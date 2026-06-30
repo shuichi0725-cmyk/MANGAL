@@ -1556,3 +1556,18 @@ dedup:
   title: 北斗の拳 イチゴ味
   isbns: 0
   note: series-merge由来の重複ページ(別題別slug)を是正。2026-06-30 巻抜けper-case merge後dedup
+- drop: doraemon-2013
+  canonical: doraemon
+  title: ドラえもん
+  isbns: 0
+  note: 本体ドラえもんの分裂統合(2013=ローマ字DORAEMON重複/2009海野一雄・2014リングァギルド=無ISBN orphan)。2026-06-30
+- drop: doraemon-2009
+  canonical: doraemon
+  title: ドラえもん
+  isbns: 0
+  note: 本体ドラえもんの分裂統合(2013=ローマ字DORAEMON重複/2009海野一雄・2014リングァギルド=無ISBN orphan)。2026-06-30
+- drop: doraemon-2014
+  canonical: doraemon
+  title: ドラえもん
+  isbns: 0
+  note: 本体ドラえもんの分裂統合(2013=ローマ字DORAEMON重複/2009海野一雄・2014リングァギルド=無ISBN orphan)。2026-06-30

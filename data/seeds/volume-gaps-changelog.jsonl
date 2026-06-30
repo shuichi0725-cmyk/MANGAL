@@ -1136,3 +1136,5 @@
 {"op": "skip-needs-series-split", "slug": "ou-sama-no-shitateya", "reason": "4別シリーズ(サルト・フィニート32/サルトリア・ナポレターナ13/フィオリ・ディ・ジラソーレ7/下町テーラー19)の混在。現ページにサルト・フィニート+下町テーラー混載・フィオリは別ページ既存・サルトリア欠落。edition-overrideでなくシリーズ分割(別ページ作成+再クラスタ)が必要=慎重にskip。専用作業で別途", "at": "2026-06-30"}
 {"op": "edition-override-rebuild", "slug": "deimosu-no-hanayome", "reason": "悪魔の花嫁(デイモス・あしべゆうほ)版正規化。standard17(v1誤ISBN=2009幻の未収録特典→null・v2-6,10,11 NDL補完)+deluxe12+bunkobon全12巻(v7,8,9,12 NDL補完)。最終章は別ページ・ハーレクイン版は別作", "at": "2026-06-30"}
 {"op": "edition-override-rebuild", "slug": "golgo-13", "reason": "SPコミックスコンパクト版v173取込もれ補完(9784845831241/2024-11 NDL確認)。種4のtype単位routingでは種2でtype=standard(imprint=コンパクト)のコンパクト版を狙えなかったためedition-overrideで現データコピー+v173挿入", "at": "2026-06-30"}
+{"op": "doraemon-consolidate", "reason": "本体ドラえもん4分裂統合。doraemon(著者汚染修正=藤子・F・不二雄のみ・手塚企画/朝松健除去)に一本化+2013(ローマ字重複)の文庫追加・page-dedup 2013/2009/2014。てんとう虫30巻のまま(45完全版harvestは別途)", "at": "2026-06-30"}
+{"op": "daichouhen-v18+doraemon-pin", "reason": "大長編v18(9784091417589 南海大冒険・1998-10 NDL確証・種2別クラスタunder-merge)をedition-overrideで補完。ドラえもん本体にrelated_pin=[大長編]で関連先頭固定", "at": "2026-06-30"}

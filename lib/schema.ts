@@ -158,6 +158,8 @@ export const MangaSchema = z.object({
   alternative_titles: AlternativeTitlesSchema.optional(),
   /** 受賞歴。 自由記述 (例: "講談社漫画賞 少年部門 1985") */
   awards: z.array(z.string()).optional(),
+  /** 関連作品の先頭固定 slug 群 (= 関連欄の最初に並べる。 例: ドラえもん→大長編ドラえもん)。 edition-overrides由来 */
+  related_pin: z.array(z.string()).optional(),
   /** Wikidata の QID (例: "Q282470")、 cross-reference / debug 用。 ★series.qid=著者QID */
   wikidata_qid: z.string().regex(/^Q\d+$/).optional(),
   /** 作品(work)の Wikidata QID。 AniList漫画ID(P8731)経由で一意取得。 著者QIDとは別 */
