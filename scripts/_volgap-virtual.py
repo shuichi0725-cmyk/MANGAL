@@ -59,6 +59,9 @@ def load_seed4(path):
 load_seed4(f"{ROOT}/data/seeds/volumes-supplement.yml")
 load_seed4(f"{ROOT}/data/seeds/volumes-supplement-auto.yml")
 
+# --- edition-overrides (奇子型=版を完全置換) ---
+edov=json.load(open(f"{ROOT}/data/seeds/edition-overrides.json",encoding="utf-8"))
+
 slugs=[l.rstrip("\n").split("\t")[0] for l in open(f"{ROOT}/docs/production-diagnostics/vol_gap.tsv",encoding="utf-8")][1:]
 if LIMIT: slugs=slugs[:LIMIT]
 
@@ -85,6 +88,10 @@ for slug in slugs:
     d=yaml.safe_load(open(p,encoding="utf-8")); eds=d.get("editions") or []
     tv=[(e.get("type") or "standard",v.get("number")) for e in eds for v in (e.get("volumes") or []) if v.get("number")]
     bg,_=has_gap(tv)
+    # edition-overrides(奇子型)= 版を完全置換して仮想適用
+    if slug in edov:
+        oeds=edov[slug].get("editions") or []
+        tv=[(e.get("type") or "standard",v.get("number")) for e in oeds for v in (e.get("volumes") or []) if v.get("number")]
     if bg: before_gap+=1
     # virtual apply
     isbns=[i for i in (norm(v.get("isbn13")) for e in eds for v in (e.get("volumes") or []) if v.get("isbn13")) if i]
