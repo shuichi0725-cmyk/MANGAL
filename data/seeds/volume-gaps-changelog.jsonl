@@ -1146,3 +1146,5 @@
 {"op": "drop-naushika-filmcomic", "slug": "kaze-no-tani-no-naushika-1984", "series_key": "name:ツカモトルーム|name:風の谷のナウシカ", "reason": "ナウシカ分裂の元=講談社フィルムコミック(宮崎駿原作クレジットのみ・ツカモトルーム作画・1984映画絵本化)→非漫画scope外でnon-manga-drop。promote#2はseed読込済なので完了後に手動削除+seedで恒久", "at": "2026-07-01"}
 {"op": "remove-noisbn-bessaku", "count": 18, "reason": "登録少+no-ISBN高番号巻=別作誤接続(影v42=1960等・本体と5年以上乖離or無日付)をedition-overrideで除去し真の巻数に。近接日付は真の可能性で温存", "at": "2026-07-01"}
 {"op": "remove-pubdiff-bessaku", "count": 2, "reason": "出版社違い75のNDL照合で真の別作2件(群青←海街diary/合格祈願←チャレンジャーズ)をvolume-exclude。残73は同作別版/誤番号(別作でない)", "at": "2026-07-01"}
+{"op": "fix-renumber", "slug": "shichikai-karano-tegami", "reason": "楽天確証で1巻もの。角川版が誤って19巻採番→朝日ソノラマ版v1+角川版v1の2版に是正。偽gap[2-18]解消", "at": "2026-07-01"}
+{"op": "fix-renumber-1vol", "slugs": ["kozame-kaikyou", "nakayoshi-techiyou"], "reason": "楽天確証で1巻もの。誤った高番号(虎鮫v4/仲よしv3)→各刷/版をv1に是正。偽gap解消。犬狼伝説は真の多巻多版でskip(flag)", "at": "2026-07-01"}
