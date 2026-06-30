@@ -33,9 +33,8 @@ for r in rows:
     for seg in gaps.split(";"):
         if ":" not in seg: continue
         for x in re.findall(r"\d+",seg.split(":",1)[1]): miss.add(int(x)); mx=max(mx,int(x))
-    if mx>20: continue   # BIG=後回し
-    works.append((slug,title,sorted(miss)))
-print(f"対象(EASY+MID, BIG除外) {len(works)}作")
+    works.append((slug,title,sorted(miss)))   # BIG除外撤廃=全remain対象(版混在は後段filterで処理)
+print(f"対象(全remain) {len(works)}作")
 
 # build target_bases from production titles
 slug2yml={}

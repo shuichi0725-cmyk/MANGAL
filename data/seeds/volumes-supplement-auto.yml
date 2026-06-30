@@ -1,5 +1,5 @@
-# 【自動生成】NDL/楽天 確認済 MADB取込もれ巻 (= 種4 auto)。 生成元 _register-seed4-ndl.py / _volgap-offline-harvest.py / _volgap-rakuten-harvest.py。
-# 手動版 data/seeds/volumes-supplement.yml は不変。 promote/audit が両方 load。
+# 【自動生成】NDL/楽天 確認済 MADB取込もれ巻 (= 種4 auto)。
+# 手動版は不変。promote/audit両load。
 schema_version: 1
 generator: ndl-auto
 volumes:
@@ -13873,3 +13873,29 @@ volumes:
   source: rakuten-auto
   added_at: '2026-06-30'
   note: MADB取込もれ。楽天全harvestで確証(残差題完全一致+同出版社prefix+前後巻発売日整合・版混在/人気作除外)。巻抜けper-case。
+- series_keys:
+  - qid:Q11671864|name:読者投稿心霊体験
+  qid: null
+  number: 22
+  isbn13: '9784785933364'
+  release_date: 2010-03
+  pages: null
+  publisher: 少年画報社
+  edition_type: standard
+  title_display: 読者投稿心霊体験
+  source: rakuten-auto
+  added_at: '2026-06-30'
+  note: MADB取込もれ。楽天harvest確証(単一版・残差題完全一致+同出版社+発売日整合)。巻抜けper-case。
+- series_keys:
+  - qid:Q11523489|name:死に戻り王女は生き延びるために百合ハーレムを作ることにした
+  qid: null
+  number: 2
+  isbn13: '9784868050773'
+  release_date: 2025-07
+  pages: null
+  publisher: ヒーローズ
+  edition_type: standard
+  title_display: 死に戻り王女は生き延びるために百合ハーレムを作ることにした
+  source: rakuten-auto
+  added_at: '2026-06-30'
+  note: MADB取込もれ。楽天harvest確証(単一版・残差題完全一致+同出版社+発売日整合)。巻抜けper-case。
