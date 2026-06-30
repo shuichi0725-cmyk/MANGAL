@@ -1148,3 +1148,4 @@
 {"op": "remove-pubdiff-bessaku", "count": 2, "reason": "出版社違い75のNDL照合で真の別作2件(群青←海街diary/合格祈願←チャレンジャーズ)をvolume-exclude。残73は同作別版/誤番号(別作でない)", "at": "2026-07-01"}
 {"op": "fix-renumber", "slug": "shichikai-karano-tegami", "reason": "楽天確証で1巻もの。角川版が誤って19巻採番→朝日ソノラマ版v1+角川版v1の2版に是正。偽gap[2-18]解消", "at": "2026-07-01"}
 {"op": "fix-renumber-1vol", "slugs": ["kozame-kaikyou", "nakayoshi-techiyou"], "reason": "楽天確証で1巻もの。誤った高番号(虎鮫v4/仲よしv3)→各刷/版をv1に是正。偽gap解消。犬狼伝説は真の多巻多版でskip(flag)", "at": "2026-07-01"}
+{"op": "fix-renumber-1vol", "slugs": ["pin-pin-pin", "oshigoto"], "reason": "1巻もの誤番号是正(ピンピンピン=リイド社1990/1996/おしごと=マガジンハウス1992/2010新装)。まめだ先生=学校の本(非漫画)skip・そして子連れ狼=多巻で後回し", "at": "2026-07-01"}
