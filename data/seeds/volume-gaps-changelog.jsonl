@@ -1134,3 +1134,4 @@
 {"op": "edition-override-rebuild", "slug": "capeta", "reason": "版混在是正。standard/deluxeが通常版KC(9784063連番v1-32)と新装版(9784065 v1-16・2024-25)の混在Frankensteinだった→Wiki確証で通常版32+新装版16に分離。新装版v9=9784065388785補完。v32特装版(9784063584523)は通常版v32(768213)と重複につき除外", "at": "2026-06-30"}
 {"op": "edition-override-rebuild", "slug": "nijinsky-guuwa", "reason": "standardに秋田文庫v3(173841)誤混入+集英社v3(601236)/v5(602318)欠落。NDL確証で集英社ぶ～け全5巻+秋田プリンセスCDX全4巻+秋田文庫全4巻に分離", "at": "2026-06-30"}
 {"op": "skip-needs-series-split", "slug": "ou-sama-no-shitateya", "reason": "4別シリーズ(サルト・フィニート32/サルトリア・ナポレターナ13/フィオリ・ディ・ジラソーレ7/下町テーラー19)の混在。現ページにサルト・フィニート+下町テーラー混載・フィオリは別ページ既存・サルトリア欠落。edition-overrideでなくシリーズ分割(別ページ作成+再クラスタ)が必要=慎重にskip。専用作業で別途", "at": "2026-06-30"}
+{"op": "edition-override-rebuild", "slug": "deimosu-no-hanayome", "reason": "悪魔の花嫁(デイモス・あしべゆうほ)版正規化。standard17(v1誤ISBN=2009幻の未収録特典→null・v2-6,10,11 NDL補完)+deluxe12+bunkobon全12巻(v7,8,9,12 NDL補完)。最終章は別ページ・ハーレクイン版は別作", "at": "2026-06-30"}
