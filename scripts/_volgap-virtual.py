@@ -62,6 +62,10 @@ load_seed4(f"{ROOT}/data/seeds/volumes-supplement-auto.yml")
 # --- edition-overrides (奇子型=版を完全置換) ---
 edov=json.load(open(f"{ROOT}/data/seeds/edition-overrides.json",encoding="utf-8"))
 
+# --- page-dedup (重複ページ=本番でdrop→gap計上しない) ---
+_pd=yaml.safe_load(open(f"{ROOT}/data/seeds/page-dedup.yml",encoding="utf-8")) or {}
+dedup_drop={e["drop"] for e in _pd.get("dedup",[]) if e.get("drop")}
+
 slugs=[l.rstrip("\n").split("\t")[0] for l in open(f"{ROOT}/docs/production-diagnostics/vol_gap.tsv",encoding="utf-8")][1:]
 if LIMIT: slugs=slugs[:LIMIT]
 
@@ -83,6 +87,7 @@ def gap_detail(by):
 
 before_gap=0; after_gap=0; closed=[]; remain=[]
 for slug in slugs:
+    if slug in dedup_drop: continue  # 本番でpage-dedup drop=表示されない
     p=f"{ROOT}/data/manga.v2/{slug}.yml"
     if not os.path.exists(p): continue
     d=yaml.safe_load(open(p,encoding="utf-8")); eds=d.get("editions") or []
