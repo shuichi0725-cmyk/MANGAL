@@ -1130,3 +1130,4 @@
 {"op": "skip-ambiguous", "slug": "hachi-no-su-taishou", "reason": "standard2冊1963-1998年幅+bunko ISBN無=sparse/版混在→慎重判断でskip(無理にrebuildしない)", "at": "2026-06-30"}
 {"op": "skip-ambiguous", "slug": "kamui-den", "reason": "第一部/第二部/外伝の多部構成+愛蔵版2冊に内部gap=データ要精査・誤rebuild危険→慎重判断でskip(無理にrebuildしない)", "at": "2026-06-30"}
 {"op": "edition-override-rebuild", "slug": "jinzou-ningen-kikaider", "reason": "種2でbunkobon v2(9784253176125)がedition_type=standard誤分類→dedupで消失。NDL確証でstandard6(サンデーC)+bunkobon4(秋田文庫)に正しく再構築", "at": "2026-06-30"}
+{"op": "edition-complete-batch", "count": 8, "works": ["kikaider", "lemon-hakusho", "yajikita", "urayasu", "atagoul", "kirikiritei", "hikari-to-tomoni", "uchi-no-3-shimai"], "reason": "clean多版の版完成(同ISBNブロック9桁+残差題完全一致でNDL欠番補完・既存巻保持・版間prefix重複作はskip)", "at": "2026-06-30"}
