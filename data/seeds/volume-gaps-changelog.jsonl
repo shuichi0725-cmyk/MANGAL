@@ -1131,3 +1131,4 @@
 {"op": "skip-ambiguous", "slug": "kamui-den", "reason": "第一部/第二部/外伝の多部構成+愛蔵版2冊に内部gap=データ要精査・誤rebuild危険→慎重判断でskip(無理にrebuildしない)", "at": "2026-06-30"}
 {"op": "edition-override-rebuild", "slug": "jinzou-ningen-kikaider", "reason": "種2でbunkobon v2(9784253176125)がedition_type=standard誤分類→dedupで消失。NDL確証でstandard6(サンデーC)+bunkobon4(秋田文庫)に正しく再構築", "at": "2026-06-30"}
 {"op": "edition-complete-batch", "count": 8, "works": ["kikaider", "lemon-hakusho", "yajikita", "urayasu", "atagoul", "kirikiritei", "hikari-to-tomoni", "uchi-no-3-shimai"], "reason": "clean多版の版完成(同ISBNブロック9桁+残差題完全一致でNDL欠番補完・既存巻保持・版間prefix重複作はskip)", "at": "2026-06-30"}
+{"op": "edition-override-rebuild", "slug": "capeta", "reason": "版混在是正。standard/deluxeが通常版KC(9784063連番v1-32)と新装版(9784065 v1-16・2024-25)の混在Frankensteinだった→Wiki確証で通常版32+新装版16に分離。新装版v9=9784065388785補完。v32特装版(9784063584523)は通常版v32(768213)と重複につき除外", "at": "2026-06-30"}
