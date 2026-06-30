@@ -2687,3 +2687,35 @@
   - qid:Q11583906|name:気分はもう戦争
   - qid:Q6359803|name:気分はもう戦争
   note: 1冊≠1巻 断片を本編に統合(title厳密一致+著者重複)。2026-06-29
+- main: キラーズホリディ
+  aliases: []
+  merge_keys:
+  - name:松(A・TYPEcorp.)|name:キラーズホリディ
+  - name:松イラストレーター|name:キラーズホリディ
+  - name:松(A・TYPEcorp.)|name:キラーズホリデイ
+  note: 表記ゆれ ディ/デイ。著者=松イラストレーター(全クラスタ同一)。同作分裂を統合。2026-06-30 巻抜けper-case under-merge(著者一致確認)。
+- main: ミスター味っ子Ⅱ
+  aliases: []
+  merge_keys:
+  - qid:Q618883|name:ミスター味っ子Ⅱ
+  - qid:Q618883|name:ミスター味っ子2
+  note: 表記ゆれ Ⅱ/2。qid Q618883・著者寺沢大介(同一)。2026-06-30 巻抜けper-case under-merge。
+- main: 新約Märchen
+  aliases: []
+  merge_keys:
+  - name:Sound Horizon|name:新約Marchen
+  - name:Sound Horizon|name:新約Märchen
+  note: 表記ゆれ Marchen/Märchen(umlaut)。著者えむけえ/Sound Horizon(同一)。2026-06-30 巻抜けper-case under-merge。
+- main: ちょこれいと
+  aliases: []
+  merge_keys:
+  - qid:Q463594|name:ちょこれいと
+  - qid:Q463594|name:ちよこれいと
+  note: 表記ゆれ ょ/よ。qid Q463594・著者フクシマハルカ(同一)。2026-06-30 巻抜けper-case under-merge。
+- main: 猛き竜星
+  aliases: []
+  merge_keys:
+  - qid:Q1319232|name:猛き竜星
+  - qid:Q1319232|name:猛き龍星
+  - name:ホーム社|name:猛き龍星
+  note: 表記ゆれ 竜/龍。qid Q1319232・著者原哲夫(同一)。2026-06-30 巻抜けper-case under-merge。
