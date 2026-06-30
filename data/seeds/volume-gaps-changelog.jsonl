@@ -1123,3 +1123,9 @@
 {"op": "add-seed4-edition-aware", "count": 18, "reason": "版aware(9桁prefix一致+残差題完全一致+発売日整合)確証・ぼっち外伝除外", "at": "2026-06-30"}
 {"op": "add-seed4-edlive", "count": 50, "reason": "live楽天×版aware(残差題完全一致+版ブロック+発売日整合)・怪しい14作除外", "at": "2026-06-30"}
 {"op": "add-seed4-ruby", "count": 16, "reason": "ルビ題auto漏れ救済(ルビ除去マッチ)", "at": "2026-06-30"}
+{"op": "skip-ambiguous", "slug": "shounen-keniya", "reason": "多版Frankenstein(原作絵物語1953-55 ISBN無+角川文庫20+パンローリング復刻上下+1962/1976再版混在)で正典版構造が曖昧→慎重判断でskip", "at": "2026-06-30"}
+{"op": "skip-ambiguous", "slug": "anmitsuhime", "reason": "原作ISBN無(1956-76)+standard再版(1986-87)混在・正典曖昧→慎重判断でskip(無理にrebuildしない)", "at": "2026-06-30"}
+{"op": "skip-ambiguous", "slug": "tange-sazen", "reason": "standard2冊が1959-1981の異常年幅=版混在・#4で別作除去済だが構造曖昧→慎重判断でskip(無理にrebuildしない)", "at": "2026-06-30"}
+{"op": "skip-ambiguous", "slug": "sebangou-0", "reason": "全巻ISBN無(1960-68原作+1976文庫)=pre-ISBN・データ無で確証不能→慎重判断でskip(無理にrebuildしない)", "at": "2026-06-30"}
+{"op": "skip-ambiguous", "slug": "hachi-no-su-taishou", "reason": "standard2冊1963-1998年幅+bunko ISBN無=sparse/版混在→慎重判断でskip(無理にrebuildしない)", "at": "2026-06-30"}
+{"op": "skip-ambiguous", "slug": "kamui-den", "reason": "第一部/第二部/外伝の多部構成+愛蔵版2冊に内部gap=データ要精査・誤rebuild危険→慎重判断でskip(無理にrebuildしない)", "at": "2026-06-30"}
