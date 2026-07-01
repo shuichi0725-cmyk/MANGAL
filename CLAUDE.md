@@ -160,6 +160,7 @@
 - 不明 / 停滞時 は ユーザから 聞かれる前に 「待機中 / 進行中」 を 明示報告
 - 大規模変更 / 既存破壊リスクある操作は **必ず Go サイン** を待つ
 - ユーザの `/clear` 後も protocol が機能するよう、 重要な約束はこの CLAUDE.md か MEMORY.md に永続化
+- ★**記憶をgitに焼く**: Claude標準の記憶(`.claude/projects/.../memory/`)は**このPCローカル=git管理外**でGitHub非バックアップ・別PC不可視。 **記憶ファイルを書いた/消したら `python scripts/_sync-memory.py` → `git add .claude-memory && commit && push`** で repo `.claude-memory/` に鏡写し永続化する(2026-07-01確立)。 旧 repo `MEMORY.md`(1,825行手動doc・5/22凍結)とは別物、 現行記憶は`.claude-memory/`が正。
 
 ---
 
