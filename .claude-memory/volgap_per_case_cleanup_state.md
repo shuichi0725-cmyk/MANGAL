@@ -144,3 +144,11 @@ seed投入後、`python scripts/_promote-bulk-v2.py`(フル~90分 or 影響slug�
 - ★著者汚染是正例: 狼の星座=川島健三除去→横山光輝(NDL権威)。パーマン=中公藤子不二雄ランドv11補完+レーベル是正。
 - ★**自律の到達点**: 「ISBN無し飛ばす」方針では**ISBN付きで安全に閉じられる分は尽きた**。残411の大半=(a)no-ISBN pre-ISBN原版(走れメロス/背番号0/RG VEDA新書館原版等) (b)実在最近巻が未取込でNDLもISBN無 (c)別作homonym。純no-ISBNの完全再構築は推測要=方針上skip。
 - ★キャッシュ`.cache/volgap434-ndl.jsonl`(全433 title+author NDL)+`docs/production-diagnostics/volgap434-remaining.tsv`は永続化=中断耐性。特定作をユーザ指定 or 方針緩和時に再開可。
+
+
+## 2026-07-02 棚卸し+Phase1(慎重4ガード) = 411→401
+- ★**棚卸し(READ-ONLY)**: 残411×手元キャッシュ全量(楽天harvest 57万item+NDL2種)を機械分類→`docs/production-diagnostics/volgap-fill-assessment.tsv`。A埋まる69/B部分10/C版混在(発売日矛盾)69/D著者不一致(homonym)10/E preISBN27/F候補無し226。
+- ★**Phase1**: A69にapply級4ガード(同社prefix+著者厳格+発売日整合±18mo+**種2非存在**)→確実に閉じるのは**10作のみ**。11巻を種4補完・全close。dry-run表=`volgap-phase1-dryrun.tsv`。
+- ★★**最重要発見 NG_SEED2_EXISTS=166巻**: 「埋まりそう」の大半は候補ISBNが**種2の別クラスタに実在=under-merge**。種4で埋めるのは誤り(重複ISBN汚染)・正解はmerge(要外部確証=危険領域)。[[volgap_mostly_undermerge]]の定量確認。
+- ★★**種4の契約=種2既存ISBN禁止を実地で学習**: だめんず事故=#39で文庫ISBN(9784594050467)をstandard v5誤登録→promoteの同一ISBN strip→正しいv5(9784594041014)が「番号既存」skip、の連鎖。誤エントリ除去で解消。**同型130件が種4手動に残存(=#39期のNDL補完・要レビュー未変更)**。はた万次郎=edition_type誤記(standard→wideban)4件も是正。
+- ★残計画: Phase2=D homonym10のper-case判定 / Phase3=C版混在69の版分解(狼の星座式) / Phase4=F226の表記揺れ再マッチ(ローカル)+live probe(1.1s/1.2s厳守)サンプル20→歩留まり判断 / E27=skip。種4クリーンアップ=130件レビュー(under-merge重複)+auto/manual間ISBN重複(hataに冗長standard群の見た目dup)。
