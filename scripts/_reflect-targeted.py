@@ -74,6 +74,16 @@ def main():
     if only:
         run([PY, "scripts/_promote-bulk-v2.py", "--only", ",".join(only)])
 
+    # 2.4 ★edition-canonical警告: canonical結線slug(golgo/釣りバカ等)は edition-overrides を
+    #     直しても canonical が後勝ちで無効(2026-07-01の実事故)。修正先を間違えていないか警告。
+    _canon_dir = os.path.join(ROOT, "data", "seeds", "edition-canonical")
+    if os.path.isdir(_canon_dir):
+        _canon = {os.path.splitext(f)[0] for f in os.listdir(_canon_dir) if f.endswith(".yml")}
+        for st in only:
+            if st in _canon or internal_slug(st, MV2) in _canon:
+                print(f"  ★注意: {st} は edition-canonical 結線slug = 版/巻/ISBN修正は "
+                      f"data/seeds/edition-canonical/{st}.yml が正(edition-overridesは上書きされ無効)", flush=True)
+
     # 2.5 ★検証ゲート(=Zod相当のquickチェック。落ちる頁をpush前に検出=検索404の再発防止)
     import re as _re
     _DATE = _re.compile(r"^\d{4}(-\d{2}(-\d{2})?)?$")
@@ -140,6 +150,8 @@ def main():
 
     # 5. push (★seed変更(edition-overrides/種4/slug等)も含める=反映の source も永続化)
     if a.push:
+        # ★統合台帳を自動集約(数秒)=「節目で手動」だと忘れて台帳が死ぬ、の恒久対策
+        run([PY, "scripts/_manifest-consolidate-ops.py"])
         run(["git", "add", ".preview-data", "data/manga-catch-index.json", "data/seeds"])
         run(["git", "commit", "-q", "-m", a.msg])
         run(["git", "push"])

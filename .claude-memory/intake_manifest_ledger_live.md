@@ -19,3 +19,13 @@ metadata:
 **忘れない仕組み**: CLAUDE.md 冒頭に「統合台帳=必ず使う」protocol を転記済(毎セッション読まれる)。新cleanup前に台帳参照→操作後にchangelog記録→consolidate→audit、の4手。
 
 **運用**: 全操作は可逆(`.cache/*-bak-*`)・種2不変。人手可読ビュー=`docs/isbn-unmerge-ledger.md`。一次ソースは台帳。関連 [[merge_needs_external_proof]] [[feedback_complete_data_before_ship]] [[data_assets_inventory]]。
+
+
+## 2026-07-02 実用化改修(ユーザ「有効活用されてない」→直した)
+- **問題**: operations.jsonlが6/20で停止(手動集約が回らず)。10日分・8changelog・6千行が未集約=台帳が死んでいた。
+- ★**自動集約**: `_reflect-targeted.py --push` がpush前に `_manifest-consolidate-ops.py` 自動実行。反映フローに乗るだけで台帳が生きる。
+- ★**クエリツール** `scripts/_ledger.py <slug>` = 操作履歴(op_source別サマリ+各種別最新)+holes状態を一発表示。`--stale`=未集約検出。cleanup前の確認はこれを使う(目grep禁止)。
+- ★CLAUDE.md月次蒸留Phase0の廃止.ts 3種(_diff-madb.ts等)を実在スクリプト(clean-madb-seed.ts/_build-series-v2/_populate-v2/_distill-incremental-merge/intake.py)に修正=次蒸留の誤abort防止。種2現行=db-v2.sqlite/種3現行=series-supplement-v2.ymlも明記。
+- ★slug-overrides.ymlヘッダに2形式の説明追記(flat=歴史記録inert/overrides:=有効)。
+- ★reflectにcanonical衝突警告(golgo/釣りバカはedition-overrides無効)。
+- 集約済: operations.jsonl 3,725→9,959操作(最新=2026-07-02)。holes-snapshotも再取得。

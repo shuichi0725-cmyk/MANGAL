@@ -12,13 +12,14 @@
 ★過去、 簿記監査は走ったのに出力が `.cache`(gitignore)に落ちて消え「あるはずなのに無い」事故が起きた。
 以後は**ここを一次ソースとして必ず使う**。
 
-### 厳守ルール
+### 厳守ルール (= 2026-07-02 自動化で形骸化対策済)
 
 1. **本番ページ (`data/manga.v2` / `.preview-data`) を触る cleanup/intake 操作は、 操作専用 `*-changelog.jsonl` に1行記録** (= 既存慣習。 slug / 操作 / before→after / at / 可逆backup 必須)。
-2. **節目で `python scripts/_manifest-consolidate-ops.py`** → `operations.jsonl` 更新 (= 統合台帳へ反映)。
+2. `operations.jsonl` への集約は ★**`_reflect-targeted.py --push` が自動実行**(2026-07-02〜)。 反映フローに乗れば手動不要。 反映を通らない大作業だけ手動 `python scripts/_manifest-consolidate-ops.py`。 鮮度確認= `python scripts/_ledger.py --stale`。
 3. **大きめ作業後 `python scripts/_intake-manifest-audit.py`** → holes 取り直し、 `holes-snapshot.jsonl.gz` + `holes-summary.json` を git に**永続化** (= .cache 置きっぱで消さない)。
-4. **新しい cleanup を始める前に台帳を見る** (= `operations.jsonl` で既処理か / holes で穴か を確認。 grep 総当たりでなく**台帳で**確認)。
+4. **新しい cleanup を始める前に ★`python scripts/_ledger.py <slug>`** (= このslugの操作履歴[op_source別]+holes を一発表示。 9千行の目grepは形骸化するためツールで引く)。
 5. 全操作は**可逆** (= `.cache/*-bak-*` に before 退避) かつ **種2 sqlite 不変**。 人手可読サマリ (例 `docs/isbn-unmerge-ledger.md`) は台帳の**ビュー**、 一次ソースは台帳。
+6. ★版/巻/ISBN修正の2系統注意: `edition-canonical/*.yml` 結線slug (golgo-13/tsuribaka-nisshi) は edition-overrides を直しても**canonicalが後勝ちで無効** (reflectが警告する)。
 
 ---
 
@@ -36,13 +37,12 @@
 以下のいずれかが存在しない場合、 「**対象 X が無いので蒸留できない**」 とユーザに報告して終了。 自動 fallback / 自動作成 はしない。
 
 - `.cache/madb-last-release.txt` (= 前回取込 MADB release tag)
-- `.cache/db.sqlite` (= 種2 = 派生 DB)
-- `data/seeds/series-supplement.yml` (= 種3 = AI fill 蓄積)
+- `.cache/db-v2.sqlite` (= ★種2 現行 = 派生 DB。 旧 `db.sqlite` は前世代)
+- `data/seeds/series-supplement-v2.yml` (= ★種3 現行 = AI fill 蓄積。 旧 `-v2`無しは前世代)
 - 種1 raw (= MADB release zip 由来の `cm101.csv` / `metadata101.json`、 `.cache/` 配下に unzip される想定)
 - `data/seed/mangaka.csv` (= 漫画家マスター = 6,751 名、 種1 とは別 input)
-- `scripts/_diff-madb.ts` (= 種1 差分抽出)
-- `scripts/_diff-series.ts` (= 種2 差分抽出)
-- `scripts/_select-supplement-diff.ts` (= 種3 fill 候補生成)
+- `scripts/clean-madb-seed.ts` / `scripts/_build-series-v2.py` / `scripts/_populate-v2.py` / `scripts/_distill-incremental-merge.py` (= ★実パイプライン。 [[monthly_distill_real_pipeline]]。 旧 `_diff-madb.ts` 等の .ts 差分3種は**廃止済=存在しない**、 チェックするな)
+- `scripts/intake.py` (= 派生層+matcher+promote の一括 runner)
 - `git status` clean (= dirty なら abort)
 
 ### Phase 1: 差分 report + Go サイン待ち
