@@ -1,7 +1,3 @@
-# フリガナ補正 seed (= 3ソースconsensus: NDL公式 / 種3-AI / 種2-MADB)
-# 種2/種3とも誤りだった key を補正。 promoteがtitle_kanaを最優先で読む。 種2種3不変・可逆。
-# source: ndl/manual/audit-*/review-confident/user-verified/manual-adult。 一部entryにslug/en特例メタ。
-# 更新 2026-06-03 / 計450件。
 schema_version: 1
 corrections:
 - key: name:I・N・J・カルバード|name:クトゥルフ神話～ラヴクラフト傑作選
@@ -3148,15 +3144,15 @@ corrections:
   title_kana: ユウシャワオソレズ
   title_kana_segmented: ユウシャ ワ オソレズ
   source: ndl
-  old_seed2: ""
-  old_seed3: ""
+  old_seed2: ''
+  old_seed3: ''
 - key: name:LOSA|name:囿者は懼れず
   title: 囿者は懼れず
   title_kana: ユウシャワオソレズ
   title_kana_segmented: ユウシャ ワ オソレズ
   source: ndl
-  old_seed2: ""
-  old_seed3: ""
+  old_seed2: ''
+  old_seed3: ''
 - key: name:CLAMP|name:ツバサ原画集
   title: ツバサ原画集
   title_kana: ツバサゲンガシュウ
@@ -3341,29 +3337,33 @@ corrections:
   title_kana: カズアキアートワークス
   source: manual
   note: artbook-furigana-fill / katakana
-
-# --- 2026-06-10 slug前監査: flag1精査(2,012→手動裁定23件。当て字は維持、2ソース合意/確実知識のみ) ---
-- key: "qid:Q11276199|name:劇場版ポケットモンスター ダイヤモンド・パール スペシャルコミック"
-  title: "劇場版ポケットモンスター ダイヤモンド・パール スペシャルコミック"
-  title_kana: "ゲキジョウバンポケットモンスターダイヤモンドパールスペシャルコミック"
-  title_kana_segmented: "ゲキジョウバン ポケットモンスター ダイヤモンド パール スペシャル コミック"
+- key: qid:Q11276199|name:劇場版ポケットモンスター ダイヤモンド・パール スペシャルコミック
+  title: 劇場版ポケットモンスター ダイヤモンド・パール スペシャルコミック
+  title_kana: ゲキジョウバンポケットモンスターダイヤモンドパールスペシャルコミック
+  title_kana_segmented: ゲキジョウバン ポケットモンスター ダイヤモンド パール スペシャル コミック
   source: ndl
-  note: "kana欄に漢字残留(機械構成)"
-- key: "qid:Q11673673|name:May探偵プリコロの狼狽"
-  title: "May探偵プリコロの狼狽"
-  title_kana: "タブンタンテイプリコロノロウバイ"
-  title_kana_segmented: "タブン タンテイ プリコロ ノ ロウバイ"
+  note: kana欄に漢字残留(機械構成)
+- key: qid:Q11673673|name:May探偵プリコロの狼狽
+  title: May探偵プリコロの狼狽
+  title_kana: タブンタンテイプリコロノロウバイ
+  title_kana_segmented: タブン タンテイ プリコロ ノ ロウバイ
   source: ndl
-  note: "狼狽=ロウバイのみ修正(May=タブン当て字は維持)"
-- key: "qid:Q276378|name:お兄ちゃんLAB"
-  title: "お兄ちゃんLAB"
-  title_kana: "オニイチャンラボ"
-  title_kana_segmented: "オニイチャン ラボ"
+  note: 狼狽=ロウバイのみ修正(May=タブン当て字は維持)
+- key: qid:Q276378|name:お兄ちゃんLAB
+  title: お兄ちゃんLAB
+  title_kana: オニイチャンラボ
+  title_kana_segmented: オニイチャン ラボ
   source: ndl
-  note: "兄=ニイ(機械構成)"
-- key: "qid:Q1018763|name:鉄道員C.W.ラブ・レター"
-  title: "鉄道員C.W.ラブ・レター"
-  title_kana: "ポッポヤC.W.ラブレター"
-  title_kana_segmented: "ポッポヤ C.W. ラブレター"
+  note: 兄=ニイ(機械構成)
+- key: qid:Q1018763|name:鉄道員C.W.ラブ・レター
+  title: 鉄道員C.W.ラブ・レター
+  title_kana: ポッポヤC.W.ラブレター
+  title_kana_segmented: ポッポヤ C.W. ラブレター
   source: ndl
-  note: "鉄道員=ポッポヤ(浅田次郎原作の当て字、NDL)"
+  note: 鉄道員=ポッポヤ(浅田次郎原作の当て字、NDL)
+- key: qid:Q418449|name:吉田秋生
+  title: 夜明け
+  title_kana: ヨアケ
+  title_kana_segmented: ヨアケ
+  source: user-verified
+  note: MADB M386340=吉田秋生「夜明け」(小学館フラワーコミックスマスターピーシーズ2012・作品集)。種2でtitle=著者名に化けていた
