@@ -62,6 +62,22 @@ def main():
     if not os.path.isdir(OUT):
         print("out/ が無い。 先に next build(static export)。"); sys.exit(1)
 
+    # --- ★本番索引 overlay (= 構造欠陥の恒久対策 2026-07-02) ---
+    # public/ の索引は **preview専用(1400件subset)** で、next export が out/ にそのまま継承する。
+    # 上書きせず R2 同期すると本番の一覧/検索が 1400件になる。ここで data/ の本番索引で必ず上書きする。
+    import shutil
+    _IDX = ("manga-list-index.json", "manga-search-index.json", "manga-catch-index.json")
+    for name in _IDX:
+        src = os.path.join(ROOT, "data", name)
+        dst = os.path.join(OUT, name)
+        if not os.path.exists(src):
+            print(f"★abort: 本番索引が無い data/{name} (= _build-list-index.py data/manga.v2 data を先に)"); sys.exit(3)
+        shutil.copyfile(src, dst)
+        print(f"  本番索引 overlay: {name} ({os.path.getsize(src)/1048576:.1f}MB)")
+    # guard: 一覧索引が小さすぎる(<5MB)= preview subset を焼こうとしている
+    if os.path.getsize(os.path.join(OUT, "manga-list-index.json")) < 5 * 1048576:
+        print("★abort: manga-list-index.json が 5MB 未満 = preview subset 疑い。data/ の生成元を確認。"); sys.exit(3)
+
     acct = os.environ.get("R2_ACCOUNT_ID")
     akid = os.environ.get("R2_ACCESS_KEY_ID")
     secret = os.environ.get("R2_SECRET_ACCESS_KEY")

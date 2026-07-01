@@ -31,3 +31,11 @@ metadata:
 
 ## 未確認(実装前に精査)
 genres_anilist(52%・detail page参照1=表示かfallbackか)/ synonyms(日本語ゴミ表示[[display_data_polish_tasks]])。
+
+
+## 2026-07-02 本番R2向け再点検で発見した構造欠陥(修正済)
+- ★**public/の索引=preview専用1400件subset**(next devとPages preview用)を next export が out/ に継承 → そのままR2同期すると**本番の一覧/検索が1400件**になる重大バグ(未然発見)。
+- 恒久修正: `_r2-sync.py` が同期前に data/ の本番索引(list25MB/search9.7MB/catch5.8MB)を out/ に**自動上書き+5MB未満abort guard**。public/は触らない(preview壊れる)。
+- 実効配信サイズ: list 25MB→gzip 6.0MB / search 9.7MB→gzip 3.6MB(Cloudflare edgeがCT=application/jsonで自動圧縮)。
+- ★未実装候補(モバイル初回6MBが重い時): 一覧索引の分割ロード(shard)/初期表示分だけ先行。大工事なので必要になってから。
+- 既知pending: worker.js=素通し(adult_us geo出し分け未実装・別タスク)。
