@@ -8888,3 +8888,29 @@ volumes:
   source: ndl-titleauthor
   added_at: '2026-07-01'
   note: 巻抜け434 title+author NDL照合・同社guard. slug=resu
+- series_keys:
+  - name:竹崎真実|name:まんがグリム童話
+  qid: null
+  number: 58
+  isbn13: '9784821159352'
+  release_date: 2024-11
+  pages: null
+  publisher: ぶんか
+  edition_type: standard
+  title_display: まんがグリム童話
+  source: ndl-cache-auto
+  added_at: '2026-07-02'
+  note: 自律ISBN補完(キャッシュNDL同社). slug=manga-grimm-douwa
+- series_keys:
+  - name:あべ弘士|name:まんげつのよるに
+  qid: null
+  number: 3
+  isbn13: '9784062764025'
+  release_date: 2009-07
+  pages: null
+  publisher: 講談
+  edition_type: standard
+  title_display: まんげつのよるに
+  source: ndl-cache-auto
+  added_at: '2026-07-02'
+  note: 自律ISBN補完(キャッシュNDL同社). slug=mangetsu-no-yoru-ni
