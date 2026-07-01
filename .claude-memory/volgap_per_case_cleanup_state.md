@@ -152,3 +152,14 @@ seed投入後、`python scripts/_promote-bulk-v2.py`(フル~90分 or 影響slug�
 - ★★**最重要発見 NG_SEED2_EXISTS=166巻**: 「埋まりそう」の大半は候補ISBNが**種2の別クラスタに実在=under-merge**。種4で埋めるのは誤り(重複ISBN汚染)・正解はmerge(要外部確証=危険領域)。[[volgap_mostly_undermerge]]の定量確認。
 - ★★**種4の契約=種2既存ISBN禁止を実地で学習**: だめんず事故=#39で文庫ISBN(9784594050467)をstandard v5誤登録→promoteの同一ISBN strip→正しいv5(9784594041014)が「番号既存」skip、の連鎖。誤エントリ除去で解消。**同型130件が種4手動に残存(=#39期のNDL補完・要レビュー未変更)**。はた万次郎=edition_type誤記(standard→wideban)4件も是正。
 - ★残計画: Phase2=D homonym10のper-case判定 / Phase3=C版混在69の版分解(狼の星座式) / Phase4=F226の表記揺れ再マッチ(ローカル)+live probe(1.1s/1.2s厳守)サンプル20→歩留まり判断 / E27=skip。種4クリーンアップ=130件レビュー(under-merge重複)+auto/manual間ISBN重複(hataに冗長standard群の見た目dup)。
+
+
+## 2026-07-02 種4契約違反130件レビュー = 一括除去は誤り(適用→計測→即revert)
+- ★生成データ: `docs/production-diagnostics/seed4-contract-violations.tsv`(130件4分類=SAME_CLUSTER62/FRAG_JUNK30/REAL_SAME8/REAL_DIFF30) + `seed4-percase-worklist.tsv`(48件19作)。
+- **一括除去+断片merge11作を適用→gap 401→443(+42悪化)を計測→backupから即復元(401回復)**。
+- ★★誤りの正体(重要):
+  1. **SAME_CLUSTERの多くはload-bearing**: 種2に同ISBNが在っても、そのコピーは**キカイダー型(edition_type誤分類)等でpageに表示されておらず、種4がその巻の表示を担っていた**。「種2に在る=page表示済」は成り立たない。
+  2. **断片吸収mergeは番号ズレで充填にならない**: junk断片(題「5」)の巻はnumber=1扱い→mergeしてもv5の穴は埋まらない(renumberが要る)。
+- ★正しいアプローチ(将来per-case): 各entryごとに「種2コピーが実際にpage表示されているか」を判定→表示済=除去safe/未表示=種4は正当な表示手段としてkeep(契約の例外)。断片は merge+renumber セットでのみ解消可。
+- ★教訓: 「契約違反だから一括除去」はデータの実態(load-bearing)を無視した理屈先行。**適用前に影響のgap再計算をdry-runに含めるべきだった**。revertが数分で済んだのはtargeted反映+backupのおかげ。
+- 現状: 130件は種4に残置(見た目上のdup ISBN汚染はあるが表示は正しい)。damenzu/hataの実害2件だけは先行修正済(別commit)。
