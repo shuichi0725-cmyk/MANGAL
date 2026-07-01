@@ -1,105 +1,25 @@
 {
  "generated_for": "data/manga.v2",
- "pages": 66406,
- "pages_no_holes": 822,
+ "generated_at": "2026-07-02",
+ "pages": 66827,
+ "pages_no_holes": 914,
  "by_field": {
-  "release_date_month_only": 53955,
-  "magazine": 52453,
-  "catch": 40642,
-  "synopsis": 37757,
-  "anilist_unmatched": 31307,
-  "alt_title_en": 28044,
-  "cover_all_missing": 14534,
-  "synonyms_japanese": 3797,
-  "author_kana_missing": 3046,
-  "genre_other": 904,
-  "author_unknown": 181,
-  "demographic_other": 50,
-  "title_romaji": 15,
-  "demographic": 2,
-  "genres": 2
+  "release_date_month_only": 54707,
+  "magazine": 52862,
+  "catch": 38943,
+  "synopsis": 36313,
+  "anilist_unmatched": 31661,
+  "alt_title_en": 28364,
+  "cover_all_missing": 11084,
+  "synonyms_japanese": 3818,
+  "author_kana_missing": 3212,
+  "genre_other": 929,
+  "author_unknown": 92,
+  "demographic_other": 50
  },
  "by_severity": {
-  "T2": 262489,
-  "T1": 4181,
-  "T0": 19
+  "T2": 257752,
+  "T1": 4283
  },
- "t0_blockers": [
-  {
-   "slug": "basara-3001",
-   "field": "title_romaji"
-  },
-  {
-   "slug": "gift-2012",
-   "field": "demographic"
-  },
-  {
-   "slug": "gift-2012",
-   "field": "genres"
-  },
-  {
-   "slug": "kurotokage-2019",
-   "field": "demographic"
-  },
-  {
-   "slug": "kurotokage-2019",
-   "field": "genres"
-  },
-  {
-   "slug": "r-1064454",
-   "field": "title_romaji"
-  },
-  {
-   "slug": "r-1086685",
-   "field": "title_romaji"
-  },
-  {
-   "slug": "r-1782014",
-   "field": "title_romaji"
-  },
-  {
-   "slug": "r-1782038",
-   "field": "title_romaji"
-  },
-  {
-   "slug": "r-3611193",
-   "field": "title_romaji"
-  },
-  {
-   "slug": "r-3966128",
-   "field": "title_romaji"
-  },
-  {
-   "slug": "r-5910498",
-   "field": "title_romaji"
-  },
-  {
-   "slug": "r-6172615",
-   "field": "title_romaji"
-  },
-  {
-   "slug": "r-6172622",
-   "field": "title_romaji"
-  },
-  {
-   "slug": "r-6300877",
-   "field": "title_romaji"
-  },
-  {
-   "slug": "r-6728036",
-   "field": "title_romaji"
-  },
-  {
-   "slug": "r-8165936",
-   "field": "title_romaji"
-  },
-  {
-   "slug": "ribonmanga",
-   "field": "title_romaji"
-  },
-  {
-   "slug": "sasayananae",
-   "field": "title_romaji"
-  }
- ]
+ "t0_blockers": []
 }
