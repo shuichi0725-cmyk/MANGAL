@@ -128,3 +128,4 @@
 - [【最重要方針】掲載除外の優先度](exclusion_priority_policy.md) — ①成年誌(ダントツ)②コンビニ本(本編誤り+無駄増)③纏められないもの(アンソロ>教育)。imprint例付き
 - [【必ず使う】反映=targeted反映(数分)](reflect_protocol_fast.md) — per-caseにフルpromote(3時間)禁止。_reflect-targeted.py。書影promote統合済。トリガー「反映して」
 - [【必ず使う】記憶をgit永続化(.claude→repo/.claude-memory)](memory_git_mirror.md) — ローカル記憶をrepoへ鏡写し。更新後は_sync-memory.py+push。旧MEMORY.mdは別物凍結
+- [【厳守】新規登録は順番固定](new_manga_registration_order.md) — ①全巻回収②題確定(勝手命名禁止)③ヨミ/著者確定(不明=報告)④一括登録⑤enrich1巻基点⑥作れない物=欠落表。単巻先行/捏造の再発防止
