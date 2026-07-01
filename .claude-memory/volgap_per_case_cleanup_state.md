@@ -136,3 +136,11 @@ seed投入後、`python scripts/_promote-bulk-v2.py`(フル~90分 or 影響slug�
 - ★除去はISBN無だと volume-exclude 不可→**edition-override で版再構築**(ISBN有巻保持)。著者は**現ページ保持**(推測禁止=水島新司と誤記した反省)。
 - 反映=`_reflect-targeted.py --only <stem> --push`(数分)。stemはslug-aliases逆引きで解決。
 - ★残complex365の大半=「真に不完全(原版pre-ISBN欠番)」「別作homonym」「版混在Frankenstein」で**無理に触らない**。安全fixは~10-15%程度。多セッションgrind。
+
+
+## 2026-07-02 自律per-case最終tally
+- ★本番巻抜け **434→411**(今セッションで約23頁closed)。全fix=targeted反映+push済(_reflect-targeted.py)。
+- 済28作: SAFE13(新刊ラグ種4)+迷子除去7(あばしり/俺甲/ムサシ/月姫/コンドル+α)+奇子reconstruct5(イアラ/けっこう仮面/ハチのす大将/狼の星座/パーマン)+ISBN補完3。
+- ★著者汚染是正例: 狼の星座=川島健三除去→横山光輝(NDL権威)。パーマン=中公藤子不二雄ランドv11補完+レーベル是正。
+- ★**自律の到達点**: 「ISBN無し飛ばす」方針では**ISBN付きで安全に閉じられる分は尽きた**。残411の大半=(a)no-ISBN pre-ISBN原版(走れメロス/背番号0/RG VEDA新書館原版等) (b)実在最近巻が未取込でNDLもISBN無 (c)別作homonym。純no-ISBNの完全再構築は推測要=方針上skip。
+- ★キャッシュ`.cache/volgap434-ndl.jsonl`(全433 title+author NDL)+`docs/production-diagnostics/volgap434-remaining.tsv`は永続化=中断耐性。特定作をユーザ指定 or 方針緩和時に再開可。
