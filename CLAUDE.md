@@ -163,6 +163,34 @@
 
 ---
 
+## ★反映 protocol (= seed変更を本番/テストへ。 「反映して」= トリガー語)
+
+★**per-case修正(数〜数百頁)にフルpromoteを使うな**。 フルは66k再生成~110分+書影~50分+索引で**3時間**。 変更頁だけなら**数分**。 [[feedback_efficiency_first]]
+
+### 既定 = targeted反映 (= `scripts/_reflect-targeted.py`)
+ユーザが「**反映して**」と言ったら、 per-case変更は これを使う:
+```
+python scripts/_reflect-targeted.py --only <変更stem,...> [--drop <削除stem,...>] [--push -m "msg"]
+```
+- `--only` = 再生成する **manga.v2ファイル名(=SRC slug)**。 slug-override頁もSRC名(例 夜明け=`yoshida-akimi`, 内部slug=yoake-yoshida2012)。
+- `--drop` = non-manga-drop等で消す頁のファイル名(manga.v2/preview から削除 + 索引remove)。
+- 処理 = drop削除 → `promote --only` → 索引 `--update/--remove`(本番data+preview両方) → preview同期 → push。 **書影はpromoteに統合済**(下記)なので別工程不要。
+- 変更したslugを忘れず列挙する(edition-overrides.json / seed の触ったkey → 対応slug)。
+
+### ★書影は promote に統合済 (= 2026-07-01。 旧 `_apply-covers-stage.py` は不要)
+- `_promote-bulk-v2.py` が **書込直前の最終passで `covers.jsonl.gz`(isbn13→url) から null cover を充填**(`_cover_for`)。 edition-canonical/override/exclude/version の**後**に走るので全経路をカバー。
+- 帰結: promote単独で書影付き。 別cover stageの66k再走(~50分)を廃止。 covers seedの(再)生成が要る時だけ `_apply-covers-stage.py --build`。
+
+### フルpromote = 月次蒸留の時だけ
+- `python scripts/_promote-bulk-v2.py`(引数無=全66k)。 ~110分+索引フル。 dropを一括除外する時や広範変更時のみ。
+- ★**Windows注意**: 完了後もプロセスが居座る(ハング)。 ログ最終「art-books (別ストリーム)」到達 or manga.v2ファイル数で完了判定し**kill**。 実行中は manga.v2 を覗かない(ロック競合)。 [[promote_hangs_on_exit_windows]]
+
+### 本番R2配信 (= 重い別工程)
+- 本番(mangal.shuichi0725.workers.dev)= `next export`→`out/`→`python scripts/_r2-sync.py --bucket mangal-site`(差分PUT、要R2認証env)。 Next buildが重い。 テスト(mangal-preview)は `.preview-data` push で自動デプロイ(preview反映は targeted反映が済ませる)。
+- ★**高速化候補(未実施)**: リポジトリを Defender 除外(`Add-MpPreference -ExclusionPath`)で全I/O短縮。
+
+---
+
 ## 種4 = MADB 取込もれ巻 補完 yml (= data/seeds/volumes-supplement.yml)
 
 ### 目的
