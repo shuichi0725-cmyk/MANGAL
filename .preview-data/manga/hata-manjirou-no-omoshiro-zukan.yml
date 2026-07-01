@@ -38,14 +38,6 @@ editions:
     isbn13: '9784088611297'
     cover_url: null
     release_date: 1990-12
-  - number: 7
-    asin: null
-    isbn13: '9784088610580'
-    cover_url: null
-    release_date: 1992-08
-- type: standard
-  label: 通常版
-  volumes:
   - number: 3
     asin: null
     isbn13: '9784088610542'
@@ -66,6 +58,35 @@ editions:
     isbn13: '9784088610573'
     cover_url: null
     release_date: '1992-07-17'
+  - number: 7
+    asin: null
+    isbn13: '9784088610580'
+    cover_url: null
+    release_date: 1992-08
+- type: standard
+  label: 通常版
+  imprint: 集英社
+  volumes:
+  - number: 3
+    asin: null
+    isbn13: '9784088610542'
+    cover_url: null
+    release_date: 1991-03
+  - number: 4
+    asin: null
+    isbn13: '9784088610559'
+    cover_url: null
+    release_date: 1992-02
+  - number: 5
+    asin: null
+    isbn13: '9784088610566'
+    cover_url: null
+    release_date: 1992-06
+  - number: 6
+    asin: null
+    isbn13: '9784088610573'
+    cover_url: null
+    release_date: 1992-07
 publishers:
 - shueisha
 genres_provisional: true

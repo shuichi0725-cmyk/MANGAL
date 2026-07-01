@@ -304,7 +304,7 @@ volumes:
   number: 3
   isbn13: '9784088610542'
   release_date: '1991-03-19'
-  edition_type: standard
+  edition_type: wideban
   title_display: はた万次郎のおもしろ図鑑（3）
   source: rakuten
   added_at: '2026-06-21'
@@ -315,7 +315,7 @@ volumes:
   number: 4
   isbn13: '9784088610559'
   release_date: '1992-02-19'
-  edition_type: standard
+  edition_type: wideban
   title_display: はた万次郎のおもしろ図鑑（4）
   source: rakuten
   added_at: '2026-06-21'
@@ -326,7 +326,7 @@ volumes:
   number: 5
   isbn13: '9784088610566'
   release_date: '1992-06-19'
-  edition_type: standard
+  edition_type: wideban
   title_display: はた万次郎のおもしろ図鑑（5）
   source: rakuten
   added_at: '2026-06-21'
@@ -337,7 +337,7 @@ volumes:
   number: 6
   isbn13: '9784088610573'
   release_date: '1992-07-17'
-  edition_type: standard
+  edition_type: wideban
   title_display: はた万次郎のおもしろ図鑑（6）
   source: rakuten
   added_at: '2026-06-21'
@@ -7601,19 +7601,6 @@ volumes:
   source: ndl
   added_at: '2026-07-01'
   note: '巻抜けper-case: NDL照合で取込もれ巻確認(同社guard). slug=sutekina-shufutachi'
-- series_keys:
-  - qid:Q11386899|name:だめんず・うぉ～か～
-  qid: null
-  number: 5
-  isbn13: '9784594050467'
-  release_date: 2005-10
-  pages: null
-  publisher: 扶桑社
-  edition_type: standard
-  title_display: だめんず・うぉ～か～
-  source: ndl
-  added_at: '2026-07-01'
-  note: '巻抜けper-case: NDL照合で取込もれ巻確認(同社guard). slug=damenzu-walker'
 - series_keys:
   - qid:Q11280216|name:絶対したいHな恋!
   qid: null
