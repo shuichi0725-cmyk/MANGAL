@@ -22,7 +22,7 @@ anime_adapted: false
 wikidata_qid: Q268789
 editions:
 - type: standard
-  label: 通常版
+  label: サンコミックス
   publisher: 朝日ソノラマ
   imprint: サンコミックス
   volumes:
@@ -31,11 +31,15 @@ editions:
     isbn13: '9784257913863'
     cover_url: null
     release_date: 1980-07
-  - number: 19
+- type: shinsoban
+  label: 角川書店版
+  publisher: 角川書店
+  volumes:
+  - number: 1
     asin: null
     isbn13: '9784048521291'
     cover_url: null
-    release_date: '1989-10-17'
+    release_date: 1989-10
 publishers:
 - asahi-sonorama
 anilist_id: 184901

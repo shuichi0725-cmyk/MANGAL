@@ -23,6 +23,15 @@ wikidata_qid: Q265148
 editions:
 - type: standard
   label: 通常版
+  publisher: 姉妹社
+  volumes:
+  - number: 1
+    asin: null
+    isbn13: '9784784440078'
+    cover_url: null
+    release_date: 1981-05
+- type: shinsoban
+  label: 朝日新聞出版版
   publisher: 朝日新聞社
   volumes:
   - number: 1
@@ -30,12 +39,6 @@ editions:
     isbn13: '9784022613431'
     cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/3431/9784022613431.jpg?_ex=300x300
     release_date: 2001-08
-  - number: 3
-    volume_label: 下
-    asin: null
-    isbn13: '9784784440078'
-    cover_url: null
-    release_date: '1981-05-15'
 publishers:
 - asahi-shimbun
 catch: 戦前に始まり、戦中の中断を越えて戦後へ受け継がれた物語。仲良しの少女たちが過ごす、ほのぼのとした日々を描いた名作。
