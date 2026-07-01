@@ -1161,3 +1161,4 @@
 {"op": "iara-edition-rebuild", "slug": "iara", "reason": "奇子型是正(NDL確定)。GC版全6巻(1974-75)+小学館文庫全5巻(1980)+異色短編傑作選大型単行本1巻(1984・9784091703118)に版分離。誤=GC v1に1984異色短編傑作選混入+v8余剰(v7欠け見せかけ)/文庫v1に2002単行本混入で1980 v1欠け。ユーザNDL検索提供", "at": "2026-07-01"}
 {"op": "stray-removal-percase", "slugs": {"abashiriikka": "bunkobon 1978 v7除去", "ore-no-koshien": "standard 1976 v11除去", "musashi": "standard 1977 v12,13除去"}, "reason": "巻抜け434 per-case: 版内の年代外れ迷子巻(ISBN無・別版)をNDL確認の上除去。ISBN有の最近巻(railgun v19等=実巻)は触らない", "at": "2026-07-01"}
 {"op": "stray-removal-percase2", "slugs": {"gekki": "standard v5(2003)v11(2004)除去=1995学研3巻に別作/別版混入", "condor-king": "standard v5(1997)v7(1998)除去=2009完全版に別版混入"}, "reason": "ISBN無・別年代・NDL不在の迷子除去。著者現ページ保持", "at": "2026-07-01"}
+{"op": "kekkoukamen-rebuild", "reason": "奇子型是正(Wikipedia確定)。JC集英社5巻+JCDX3巻+角川文庫3巻+講談社KCDX1巻+リイド新装2巻に版分離。誤=standard v1に2026誤ISBN・deluxe v2欠け・KCDX/新装欠落", "at": "2026-07-01"}
