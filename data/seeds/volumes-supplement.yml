@@ -8914,3 +8914,149 @@ volumes:
   source: ndl-cache-auto
   added_at: '2026-07-02'
   note: 自律ISBN補完(キャッシュNDL同社). slug=mangetsu-no-yoru-ni
+- series_keys:
+  - qid:Q11422791|name:さすらいのギャンブラー
+  qid: null
+  number: 3
+  isbn13: '9784643950212'
+  release_date: 1995-02
+  pages: null
+  publisher: 読売新聞社
+  edition_type: standard
+  title_display: さすらいのギャンブラー
+  source: rakuten+ndl-cache
+  added_at: '2026-07-02'
+  note: '巻抜けPhase1: 同社prefix+著者厳格+発売日整合±18mo+種2非存在の4ガード通過. slug=sasurai-no-gambler'
+- series_keys:
+  - qid:Q302859|name:BECK
+  qid: null
+  number: 9
+  isbn13: '9784065389478'
+  release_date: 2025-04
+  pages: null
+  publisher: 講談社
+  edition_type: deluxe
+  title_display: BECK
+  source: rakuten+ndl-cache
+  added_at: '2026-07-02'
+  note: '巻抜けPhase1: 同社prefix+著者厳格+発売日整合±18mo+種2非存在の4ガード通過. slug=beck'
+- series_keys:
+  - qid:Q11386899|name:だめんず・うぉ～か～
+  qid: null
+  number: 5
+  isbn13: '9784594041014'
+  release_date: 2003-07
+  pages: null
+  publisher: 扶桑社
+  edition_type: standard
+  title_display: だめんず・うぉ～か～
+  source: rakuten+ndl-cache
+  added_at: '2026-07-02'
+  note: '巻抜けPhase1: 同社prefix+著者厳格+発売日整合±18mo+種2非存在の4ガード通過. slug=damenzu-walker'
+- series_keys: &id028
+  - qid:Q94610343|name:ぷるるんゼミナール
+  qid: null
+  number: 3
+  isbn13: '9784575826142'
+  release_date: 2001-10
+  pages: null
+  publisher: 双葉社
+  edition_type: standard
+  title_display: ぷるるんゼミナール
+  source: rakuten+ndl-cache
+  added_at: '2026-07-02'
+  note: '巻抜けPhase1: 同社prefix+著者厳格+発売日整合±18mo+種2非存在の4ガード通過. slug=pururun-seminar'
+- series_keys: *id028
+  qid: null
+  number: 4
+  isbn13: '9784575826388'
+  release_date: 2002-01
+  pages: null
+  publisher: 双葉社
+  edition_type: standard
+  title_display: ぷるるんゼミナール
+  source: rakuten+ndl-cache
+  added_at: '2026-07-02'
+  note: '巻抜けPhase1: 同社prefix+著者厳格+発売日整合±18mo+種2非存在の4ガード通過. slug=pururun-seminar'
+- series_keys: *id028
+  qid: null
+  number: 5
+  isbn13: '9784575826616'
+  release_date: 2002-03
+  pages: null
+  publisher: 双葉社
+  edition_type: standard
+  title_display: ぷるるんゼミナール
+  source: rakuten+ndl-cache
+  added_at: '2026-07-02'
+  note: '巻抜けPhase1: 同社prefix+著者厳格+発売日整合±18mo+種2非存在の4ガード通過. slug=pururun-seminar'
+- series_keys:
+  - qid:Q11242326|name:天下無双
+  qid: null
+  number: 3
+  isbn13: '9784088594514'
+  release_date: 2004-12
+  pages: null
+  publisher: 集英社
+  edition_type: deluxe
+  title_display: 天下無双
+  source: rakuten+ndl-cache
+  added_at: '2026-07-02'
+  note: '巻抜けPhase1: 同社prefix+著者厳格+発売日整合±18mo+種2非存在の4ガード通過. slug=tenka-musou'
+- series_keys:
+  - name:高橋ツトム|name:爆音列島
+  - qid:Q1051001|name:爆音列島
+  qid: null
+  number: 10
+  isbn13: '9784063144413'
+  release_date: 2007-02
+  pages: null
+  publisher: 講談社
+  edition_type: standard
+  title_display: 爆音列島
+  source: rakuten+ndl-cache
+  added_at: '2026-07-02'
+  note: '巻抜けPhase1: 同社prefix+著者厳格+発売日整合±18mo+種2非存在の4ガード通過. slug=bakuon-rettou'
+- series_keys:
+  - name:坂戸佐兵衛|name:めしばな刑事タチバナ
+  - name:旅井とり|name:めしばな刑事 (デカ) タチバナ
+  - name:旅井とり|name:めしばな刑事 タチバナ
+  - name:旅井とり|name:めしばな刑事タチバナ
+  - name:旅井とり|name:めしばな刑事タチバナ.
+  qid: null
+  number: 55
+  isbn13: '9784197806621'
+  release_date: 2024-10
+  pages: null
+  publisher: 徳間書店
+  edition_type: standard
+  title_display: めしばな刑事タチバナ
+  source: rakuten+ndl-cache
+  added_at: '2026-07-02'
+  note: '巻抜けPhase1: 同社prefix+著者厳格+発売日整合±18mo+種2非存在の4ガード通過. slug=meshibana-deka-tachibana'
+- series_keys:
+  - name:柳内たくみ|name:ゲート
+  qid: null
+  number: 26
+  isbn13: '9784434350016'
+  release_date: 2024-12
+  pages: null
+  publisher: アルファポリス
+  edition_type: standard
+  title_display: ゲート
+  source: rakuten+ndl-cache
+  added_at: '2026-07-02'
+  note: '巻抜けPhase1: 同社prefix+著者厳格+発売日整合±18mo+種2非存在の4ガード通過. slug=gate'
+- series_keys:
+  - name:桜谷シュウ|name:ニワトリ・ファイター
+  qid: null
+  number: 10
+  isbn13: '9784868050834'
+  release_date: 2025-07
+  pages: null
+  publisher: ヒーローズ
+  edition_type: standard
+  title_display: ニワトリ・ファイター
+  source: rakuten+ndl-cache
+  added_at: '2026-07-02'
+  note: '巻抜けPhase1: 同社prefix+著者厳格+発売日整合±18mo+種2非存在の4ガード通過. slug=niwatori-fighter'
