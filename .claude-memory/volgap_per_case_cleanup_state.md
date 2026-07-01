@@ -123,3 +123,16 @@ metadata:
 seed投入後、`python scripts/_promote-bulk-v2.py`(フル~90分 or 影響slugを--only)→cover stage(`_apply-covers-stage.py`)→索引(`_build-list-index.py` フル or --update)→commit/push。テスト環境=`.preview-data`に巻抜け作copy+索引(現在巻抜けだけ1,399配置済)。promoteは重いので数十件溜めてから。
 
 関連: [[kiko_multiedition_mixing_heuristic]] [[edition_canonical_mechanism]] [[volgap_mostly_undermerge]] [[harvest_match_mechanism_applied]] [[feedback_accuracy_is_the_goal]]
+
+
+## 2026-07-01 巻抜け434 title+author NDL per-case (イアラ式)
+- ★**全433作をtitle+author でNDL検索しキャッシュ**=`.cache/volgap434-ndl.jsonl`(全版データ・再検索不要)。残worklist=`docs/production-diagnostics/volgap434-remaining.tsv`。
+- triage: **SAFE13**(同社ISBNで欠け全被覆=新刊ラグ最新巻・種4補完済 bocchi/saki/riezon等) / complex365(奇子・版混在) / NDLデータ無55。
+- ★**per-case済**: イアラ(GC6+文庫5+異色短編傑作選1に版分離)/あばしり一家(bunko 1978v7除去)/俺の甲子園(1976v11除去)/ムサシ(1977v12,13除去)。
+- ★**迷子巻除去の判定(重要・危険)**: 「版内の年代外れ巻」除去でgap解消に見えるが**2種を峻別必須**:
+  - (a)**別版の迷子**=ISBN無+別年代(あばしり1978/俺甲1976)→除去OK。NDLで別版と確認。
+  - (b)**実在する後巻**=ISBN有+最近(railgun v19/20=2024/25, out v26/29)→中間が未取込なだけ。**除去=実巻消し=重大誤り**。触るな。
+  - 自動検出(`.cache/stray-cand.json`)は両者を混同=一括禁止。必ずNDL+ISBN有無で個別確認。
+- ★除去はISBN無だと volume-exclude 不可→**edition-override で版再構築**(ISBN有巻保持)。著者は**現ページ保持**(推測禁止=水島新司と誤記した反省)。
+- 反映=`_reflect-targeted.py --only <stem> --push`(数分)。stemはslug-aliases逆引きで解決。
+- ★残complex365の大半=「真に不完全(原版pre-ISBN欠番)」「別作homonym」「版混在Frankenstein」で**無理に触らない**。安全fixは~10-15%程度。多セッションgrind。
