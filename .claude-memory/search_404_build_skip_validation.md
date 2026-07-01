@@ -15,3 +15,10 @@ metadata:
 2. ★**master外genre**: `genre 'other'`(data/genres.yml 32キー外)→loadData line252で「未定義genre」throw→skip。除去すると今度は`genres min(1)`違反→**schemaを`genres: z.array().default([])`に変更**(空許容)。ユーザ方針[[ai_genre_closed_vocabulary]]「該当無ければ空でよい(other行きより未付与)」準拠。適当にジャンルを当てない。
 
 **教訓**: ★索引化と本番ビルドで**検証粒度を揃える**。新データ生成後は `loadAllManga` の skip 0 を確認してから索引化・push。slug変更でなくvalidation skipが「検索404」の正体だった。[[preview_deploy_pitfalls]] [[edu_multiedition_disentangle_ndl]]
+
+
+## 2026-07-01 追記: release_date不正形式が最大の404源
+- Zod: release_date=。**NDL生形式(2014.8 / 1997-9 / 全角２００５．４)は落ちる**。種4巻補完でNDL日付を未正規化で入れて153件混入→70頁が404だった。
+- ★恒久策: **promote clean_volに統合済**(NFKC+→+月2桁)。種4 seedも正規化。今後の日付入りseedは正規化される。
+- ★preview同期の罠: **内部slug≠ファイル名(slug-override頁)を、ファイル名一致で同期すると消える**。preview欠落23作はこれ(slug-aliasesで逆引き回収)。同期は内部slug基準で。
+- 検証法: の release_date が全て YYYY-MM形式か + 検索索引slug==頁内部slug を確認(不整合0が正)。
