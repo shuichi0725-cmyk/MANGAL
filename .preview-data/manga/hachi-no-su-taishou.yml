@@ -23,31 +23,57 @@ alternative_titles:
   en: The Beehive General
 wikidata_qid: Q2339941
 editions:
-- type: standard
-  label: 通常版
-  publisher: 集英社
-  imprint: ちばてつや漫画全集 第2回配本
+- type: wideban
+  label: ちばてつや漫画全集(東邦図書)
+  imprint: ちばてつや漫画全集
   volumes:
   - number: 1
     asin: null
-    isbn13: '9784834283495'
+    isbn13: null
     cover_url: null
-    release_date: 1998-09
-  - number: 3
-    volume_label: 下巻
+    release_date: 1963-07
+  - number: 2
     asin: null
     isbn13: null
     cover_url: null
     release_date: 1963-09
+- type: standard
+  label: 虫コミックス
+  imprint: 虫コミックス
+  volumes:
+  - number: 1
+    asin: null
+    isbn13: null
+    cover_url: null
+    release_date: '1970'
+- type: shinsoban
+  label: 講談社コミックス
+  imprint: 講談社コミックス
+  volumes:
+  - number: 1
+    asin: null
+    isbn13: null
+    cover_url: null
+    release_date: 1975-08
 - type: bunkobon
-  label: 文庫版
+  label: ちばてつや漫画文庫
   imprint: ちばてつや漫画文庫
   volumes:
   - number: 1
     asin: null
     isbn13: null
     cover_url: null
-    release_date: '1977-06-10'
+    release_date: 1977-06
+- type: aizoban
+  label: ちばてつや全集(ホーム社)
+  publisher: 集英社
+  imprint: ちばてつや全集
+  volumes:
+  - number: 1
+    asin: null
+    isbn13: '9784834283495'
+    cover_url: null
+    release_date: 1998-09
 publishers:
 - shueisha
 anilist_id: 139689
