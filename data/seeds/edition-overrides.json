@@ -9903,5 +9903,111 @@
   "publishers": [
    "shogakukan"
   ]
+ },
+ "iara": {
+  "editions": [
+   {
+    "type": "standard",
+    "label": "ゴールデン・コミックス",
+    "publisher": "小学館",
+    "imprint": "ゴールデン・コミックス",
+    "volumes": [
+     {
+      "number": 1,
+      "isbn13": null,
+      "cover_url": null,
+      "release_date": "1974-08"
+     },
+     {
+      "number": 2,
+      "isbn13": null,
+      "cover_url": null,
+      "release_date": "1974-09"
+     },
+     {
+      "number": 3,
+      "isbn13": null,
+      "cover_url": null,
+      "release_date": "1974-10"
+     },
+     {
+      "number": 4,
+      "isbn13": null,
+      "cover_url": null,
+      "release_date": "1974-11"
+     },
+     {
+      "number": 5,
+      "isbn13": null,
+      "cover_url": null,
+      "release_date": "1974-12"
+     },
+     {
+      "number": 6,
+      "isbn13": null,
+      "cover_url": null,
+      "release_date": "1975-01"
+     }
+    ]
+   },
+   {
+    "type": "bunkobon",
+    "label": "小学館文庫",
+    "publisher": "小学館",
+    "imprint": "小学館文庫",
+    "volumes": [
+     {
+      "number": 1,
+      "isbn13": null,
+      "cover_url": null,
+      "release_date": "1980-04"
+     },
+     {
+      "number": 2,
+      "isbn13": null,
+      "cover_url": null,
+      "release_date": "1980-05"
+     },
+     {
+      "number": 3,
+      "isbn13": null,
+      "cover_url": null,
+      "release_date": "1980-06"
+     },
+     {
+      "number": 4,
+      "isbn13": null,
+      "cover_url": null,
+      "release_date": "1980-07"
+     },
+     {
+      "number": 5,
+      "isbn13": null,
+      "cover_url": null,
+      "release_date": "1980-08"
+     }
+    ]
+   },
+   {
+    "type": "aizoban",
+    "label": "異色短編傑作選(大型単行本)",
+    "publisher": "小学館",
+    "imprint": "",
+    "volumes": [
+     {
+      "number": 1,
+      "isbn13": "9784091703118",
+      "cover_url": null,
+      "release_date": "1984-07"
+     }
+    ]
+   }
+  ],
+  "authors": [
+   {
+    "name": "楳図かずお",
+    "role": "writer_artist"
+   }
+  ]
  }
 }
