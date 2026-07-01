@@ -1163,3 +1163,4 @@
 {"op": "stray-removal-percase2", "slugs": {"gekki": "standard v5(2003)v11(2004)除去=1995学研3巻に別作/別版混入", "condor-king": "standard v5(1997)v7(1998)除去=2009完全版に別版混入"}, "reason": "ISBN無・別年代・NDL不在の迷子除去。著者現ページ保持", "at": "2026-07-01"}
 {"op": "kekkoukamen-rebuild", "reason": "奇子型是正(Wikipedia確定)。JC集英社5巻+JCDX3巻+角川文庫3巻+講談社KCDX1巻+リイド新装2巻に版分離。誤=standard v1に2026誤ISBN・deluxe v2欠け・KCDX/新装欠落", "at": "2026-07-01"}
 {"op": "hachinosu-rebuild", "reason": "奇子型是正(NDL確定)。1巻もの多版を版分離: 東邦全集上下(1963)/虫コミックス(1970)/講談社KC(1975)/ちばてつや漫画文庫(1977)/ちばてつや全集ホーム社(1998・9784834283495)。誤=[v1=1998,v3=1963東邦下]混在", "at": "2026-07-02"}
+{"op": "ookami-no-seiza-rebuild", "reason": "奇子型是正(NDL確定)。KC全7巻(1975-76・無ISBN)/KCスペシャル4巻(1985)/講談社漫画文庫4巻(2005)に版分離。誤=standardにKCスペシャル1985(v1-4)とKC1976(v6,7)混在(v5欠け)。著者=川島健三汚染除去→横山光輝(NDL全記録一致)", "at": "2026-07-02"}
