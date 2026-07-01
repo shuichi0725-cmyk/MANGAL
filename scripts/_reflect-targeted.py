@@ -98,9 +98,9 @@ def main():
 
     print(f"\n=== targeted反映 完了 === 再生成{len(only)} / drop{len(drop)} / preview同期{len(pv_changed)}", flush=True)
 
-    # 5. push
+    # 5. push (★seed変更(edition-overrides/種4/slug等)も含める=反映の source も永続化)
     if a.push:
-        run(["git", "add", ".preview-data", "data/manga-catch-index.json"])
+        run(["git", "add", ".preview-data", "data/manga-catch-index.json", "data/seeds"])
         run(["git", "commit", "-q", "-m", a.msg])
         run(["git", "push"])
 
