@@ -74,6 +74,40 @@ def main():
     if only:
         run([PY, "scripts/_promote-bulk-v2.py", "--only", ",".join(only)])
 
+    # 2.5 ★検証ゲート(=Zod相当のquickチェック。落ちる頁をpush前に検出=検索404の再発防止)
+    import re as _re
+    _DATE = _re.compile(r"^\d{4}(-\d{2}(-\d{2})?)?$")
+    _errs = []
+    for st in only:
+        fp = os.path.join(MV2, st + ".yml")
+        if not os.path.exists(fp):
+            _errs.append(f"{st}: promote後にファイル無し(SRC stem誤り?)"); continue
+        try:
+            d = yaml.safe_load(open(fp, encoding="utf-8"))
+        except Exception as e:
+            _errs.append(f"{st}: YAML parse失敗 {e}"); continue
+        if not d.get("slug"): _errs.append(f"{st}: slug欠落")
+        if not d.get("title"): _errs.append(f"{st}: title欠落")
+        if not d.get("title_kana"): _errs.append(f"{st}: title_kana欠落")
+        for e in (d.get("editions") or []):
+            for vs in [e.get("volumes") or []] + [vv.get("volumes") or [] for vv in (e.get("versions") or [])]:
+                for v in vs:
+                    n = v.get("number")
+                    if not (isinstance(n, int) and n >= 1):
+                        _errs.append(f"{st}: 不正number={n!r}")
+                    rd = v.get("release_date")
+                    if rd is not None and not _DATE.match(str(rd)):
+                        _errs.append(f"{st}: 不正release_date={rd!r}")
+                    ib = v.get("isbn13")
+                    if ib is not None and len(str(ib)) != 13:
+                        _errs.append(f"{st}: 不正isbn13={ib!r}")
+    if _errs:
+        print("\n★検証ゲートNG(push中止・修正してから再実行):", file=sys.stderr)
+        for x in _errs[:20]: print(f"  {x}", file=sys.stderr)
+        sys.exit(2)
+    if only:
+        print(f"  検証ゲートOK({len(only)}頁: slug/title/kana/number/date/isbn)", flush=True)
+
     # 3. 索引 増分更新 (本番 data/ + preview)
     upd = ",".join(only)
     rem = ",".join(remove_slugs)
@@ -83,13 +117,19 @@ def main():
     if only or remove_slugs: run(idx_data)
 
     # 4. preview同期 (changed頁が.preview-dataに在れば新版で上書き) + preview索引
+    #    ★内部slug≠SRC名の罠対応: preview側ファイル名はSRC名/内部slug名の両方があり得る→両方試す
     pv_changed = []
     if not a.no_preview:
         import shutil
         for st in only:
-            src = os.path.join(MV2, st + ".yml"); dst = os.path.join(PV, st + ".yml")
-            if os.path.exists(dst) and os.path.exists(src):
-                shutil.copyfile(src, dst); pv_changed.append(st)
+            src = os.path.join(MV2, st + ".yml")
+            if not os.path.exists(src):
+                continue
+            islug = internal_slug(st, MV2)
+            for dst_name in dict.fromkeys([st, islug]):  # 順序保持dedup
+                dst = os.path.join(PV, dst_name + ".yml")
+                if os.path.exists(dst):
+                    shutil.copyfile(src, dst); pv_changed.append(dst_name); break
         if pv_changed or remove_slugs:
             idx_pv = [PY, "scripts/_build-list-index.py", ".preview-data/manga", ".preview-data"]
             if pv_changed: idx_pv += ["--update", ",".join(pv_changed)]

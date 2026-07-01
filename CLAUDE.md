@@ -168,6 +168,19 @@
 
 ★**per-case修正(数〜数百頁)にフルpromoteを使うな**。 フルは66k再生成~110分+書影~50分+索引で**3時間**。 変更頁だけなら**数分**。 [[feedback_efficiency_first]]
 
+### ★指示の出し方 早見表 (= ユーザ→Claude のトリガー語。 2026-07-02整理)
+
+| ユーザの言い方 | Claudeがやること | 所要 |
+|---|---|---|
+| **「反映して」** | targeted反映(`_reflect-targeted.py`)= 直した頁だけ 本番manga.v2+索引+テスト同期+push。**検証ゲート内蔵**(slug/kana/date/isbn不正はpush前に停止) | 数分 |
+| **「巻抜け仮想」** | `_volgap-virtual.py --list` = 残巻抜けを算出(promote不要) | ~2分 |
+| **「新規追加/新刊入れて」** | distillパイプライン(`_distill_preview`系)= **テスト先行**で新規頁生成→ユーザ確認→GOで本番化 | 件数次第 |
+| **「月次蒸留して」** | フルパイプライン(Phase0→Go待ち→取込→フルpromote) | ~3時間+ |
+| 作品名+リンク(Wiki/NDL) | per-case版再構築(イアラ式)→即「反映して」相当まで実施 | 1作数分 |
+
+- ★流れは**一方向**: seed修正 → 本番manga.v2 → テスト(.preview-data=subset同期) → push → 確認。**例外=新規マンガだけテスト先行**(preview生成→確認→本番化)。双方向に流さない(ズレの元)。
+- ★Claudeは反映時に**変更slugを自分で列挙**する(ユーザに聞かない)。preview反映はpush後15-20分・追いpush禁止([[preview_deploy_pitfalls]])。
+
 ### 既定 = targeted反映 (= `scripts/_reflect-targeted.py`)
 ユーザが「**反映して**」と言ったら、 per-case変更は これを使う:
 ```

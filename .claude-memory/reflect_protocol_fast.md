@@ -30,3 +30,9 @@ python scripts/_reflect-targeted.py --only <変更stem,...> [--drop <削除stem,
 
 ## 今回(2026-07-01)フル反映で確定した実測
 - フルpromote~110分 / 旧cover stage~52分 / 全索引~10分 = 3時間。これをtargetedで数分に。golgo-13 targeted反映=書影220/220+177/177が~2分で付与実証。
+
+
+## 2026-07-02 強化: 検証ゲート+内部slug同期+トリガー早見表
+- ★`_reflect-targeted.py`に**検証ゲート内蔵**(promote後・push前にslug/title/kana/number/release_date形式/isbn13桁を検査。NG=exit2でpush中止)=検索404の構造的再発防止。
+- ★preview同期が**内部slug名のファイルも探す**(SRC名→内部slug名の順)=slug-override頁の同期漏れ封鎖。
+- ★指示トリガー早見表をCLAUDE.mdに整理: 「反映して」=targeted/「巻抜け仮想」/「新規追加」=distillテスト先行/「月次蒸留して」=フル/作品名+リンク=イアラ式per-case。流れは一方向(seed→本番→テスト)、例外=新規のみテスト先行。
