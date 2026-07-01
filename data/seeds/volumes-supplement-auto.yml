@@ -1,5 +1,3 @@
-# 【自動生成】NDL/楽天 確認済 MADB取込もれ巻 (= 種4 auto)。
-# 手動版は不変。promote/audit両load。
 schema_version: 1
 generator: ndl-auto
 volumes:
@@ -198,7 +196,7 @@ volumes:
   qid: null
   number: 45
   isbn13: '9784091397959'
-  release_date: ''
+  release_date: null
   pages: null
   publisher: ''
   edition_type: standard
@@ -426,7 +424,7 @@ volumes:
   qid: null
   number: 4
   isbn13: '9784091861542'
-  release_date: ''
+  release_date: null
   pages: null
   publisher: ''
   edition_type: standard

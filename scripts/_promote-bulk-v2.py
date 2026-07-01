@@ -78,6 +78,24 @@ def _cover_for(isbn13):
         return None
     return _COVERS.get(str(isbn13).replace("-", ""))
 
+def _norm_date(s):
+    """release_date を schema形式(YYYY / YYYY-MM / YYYY-MM-DD)へ正規化。
+    NDL生形式(2014.8 / 1997-9 / 全角２００５．４)がZod検証(^\\d{4}(-\\d{2}(-\\d{2})?)?$)で
+    落ちて頁が404化するのを恒久防止。 不正で解釈不能は None。"""
+    if s is None:
+        return None
+    import unicodedata as _u
+    s = _u.normalize("NFKC", str(s)).strip().replace(".", "-").replace("/", "-")
+    m = re.match(r"^(\d{4})(?:-(\d{1,2}))?(?:-(\d{1,2}))?", s)
+    if not m:
+        return None
+    y = m.group(1)
+    if not m.group(2):
+        return y
+    if not m.group(3):
+        return f"{y}-{m.group(2).zfill(2)}"
+    return f"{y}-{m.group(2).zfill(2)}-{m.group(3).zfill(2)}"
+
 _ART_BOOK_SEGMENTED: dict | None = None
 
 
@@ -1941,10 +1959,7 @@ def clean_vol(v: dict) -> dict:
         o["isbn13"] = None
     # ★書影を promote 内で直接充填 (= 別 cover stage 廃止)。 既存値優先→seed fallback。
     o["cover_url"] = v.get("cover_url") or _cover_for(o["isbn13"])
-    if v.get("release_date"):
-        o["release_date"] = v["release_date"]
-    else:
-        o["release_date"] = None
+    o["release_date"] = _norm_date(v.get("release_date"))  # ★schema形式に正規化(404防止)
     return o
 
 
