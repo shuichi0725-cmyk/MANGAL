@@ -1,437 +1,431 @@
-# 漫画家の画集/原画集/イラスト集 = 掲載対象(漫画とは別カテゴリ・絶対混ぜない・アダルト除外)。
-# 紐付けは作画家(artist role)。 原作者には紐付けない(ラノベ等)。 設計=docs予定。
 art_books:
-  - series_key: "qid:Q1010233|name:真鍋譲治イラスト集"
-    artist: "真鍋譲治"
-  - series_key: "qid:Q11044547|name:画集・なんて素敵にジャパネスク"
-    artist: "山内直実"
-  - series_key: "qid:Q11260369|name:ファイアーエムブレム聖戦の系譜画集"
-    artist: "うさ銀太郎"
-  - series_key: "qid:Q11283231|name:アシオART WORKS"
-    artist: "アシオ"
-    # adult除去: 作家signal単独の誤爆。 実体=「千の魔剣と盾の乙女画集」(一迅社文庫)
-    # =全年齢LNイラスト集。 作画家は成年誌でも描くが本画集は全年齢 (2026-06-05 確認)
-  - series_key: "qid:Q11294123|name:ぱらみった★ カスカベアキラ画集"
-    artist: "カスカベアキラ"
-  - series_key: "qid:Q11294123|name:カスカベアキラARTWORKS"
-    artist: "カスカベアキラ"
-  - series_key: "qid:Q11359743|name:上田夢人画集"
-    artist: "上田夢人"
-  - series_key: "qid:Q11382314|name:佐々木淳子イラスト集"
-    artist: "佐々木淳子"
-  - series_key: "qid:Q1150879|name:漫画似顔画集"
-    artist: "下川凹天"
-  - series_key: "qid:Q11522228|name:当世おんな風俗画集"
-    artist: "杉浦幸雄"
-  - series_key: "qid:Q11534158|name:柳原良平船の画集"
-    artist: "柳原良平"
-  - series_key: "qid:Q11562516|name:弱虫ペダル 原画集"
-    artist: "渡辺航"
-  - series_key: "qid:Q1157669|name:五十嵐大介画集 海獣とタマシイ"
-    artist: "五十嵐大介"
-  - series_key: "qid:Q11583610|name:シドニアの騎士トリビュートマンガ・イラスト集"
-    artist: "小川彌生"
-    multi_artist: true
-  - series_key: "qid:Q11585198|name:ななつの星とお月さま コーセルテルのイラスト集"
-    artist: "石動あゆま"
-  - series_key: "qid:Q11626418|name:Y's art works"
-    artist: "衣谷遊"
-  - series_key: "qid:Q11628495|name:西村しのぶイラスト集"
-    artist: "西村しのぶ"
-  - series_key: "qid:Q11638680|name:近藤るるる画集"
-    artist: "近藤るるる"
-  - series_key: "qid:Q11638680|name:近藤るるる画集L・Rプレミアムbox"
-    artist: "近藤るるる"
-  - series_key: "qid:Q11649074|name:鈴木理華画集 女王と海賊と天使たち"
-    artist: "鈴木理華"
-  - series_key: "qid:Q11661464|name:青春画集|sub:青春鉄道キャラクターブック＆イラスト集"
-    artist: "青春"
-  - series_key: "qid:Q11664540|name:柳瀬正夢画集"
-    artist: "須山計一"
-  - series_key: "qid:Q11671469|name:高橋真琴画集 あこがれ"
-    artist: "高橋真琴"
-  - series_key: "qid:Q11672754|name:二ノ宮くん画集"
-    artist: "高苗京鈴"
-  - series_key: "qid:Q1377779|name:Artworks"
-    artist: "星野之宣"
-  - series_key: "qid:Q1377779|name:Pilots初期画集成"
-    artist: "星野之宣"
-  - series_key: "qid:Q1399083|name:わたせせいぞうオリジナルカレンダーイラスト集"
-    artist: "ワタセセイゾウ"
-  - series_key: "qid:Q1713234|name:三原順自選複製原画集"
-    artist: "三原順"
-  - series_key: "qid:Q193300|name:ブラック・ジャック画集"
-    artist: "手塚治虫"
-  - series_key: "qid:Q193300|name:手塚治虫SFヒーロー画集"
-    artist: "手塚治虫"
-  - series_key: "qid:Q193300|name:手塚治虫カラーマンガ原画コレクション 単行本未収録画集成"
-    artist: "手塚治虫"
-  - series_key: "qid:Q194556|name:黒執事 枢やな画集"
-    artist: "枢やな"
-  - series_key: "qid:Q1970474|name:高田裕三画集"
-    artist: "高田裕三"
-  - series_key: "qid:Q1993|name:岸本斉史画集 UZUMAKI （渦巻）"
-    artist: "岸本斉史"
-  - series_key: "qid:Q208582|name:DRAGON BALL超画集"
-    artist: "鳥山明"
-  - series_key: "qid:Q22127383|name:雲田はるこ原画集"
-    artist: "雲田はるこ"
-  - series_key: "qid:Q22128066|name:カーニヴァルパレード 御巫桃也画集"
-    artist: "御巫桃也"
-  - series_key: "qid:Q2280124|name:頭文字D画集"
-    artist: "しげの秀一"
-  - series_key: "qid:Q229724|name:美少女戦士セーラームーン原画集"
-    artist: "武内直子"
-  - series_key: "qid:Q230962|name:荒川弘イラスト集"
-    artist: "荒川弘"
-  - series_key: "qid:Q232660|name:紳士同盟+ 種村有菜イラスト集"
-    artist: "種村有菜"
-  - series_key: "qid:Q2339941|name:ちばてつや画集"
-    artist: "ちばてつや"
-  - series_key: "qid:Q234425|name:「ご近所物語」イラスト集"
-    artist: "矢沢あい"
-  - series_key: "qid:Q240225|name:DUEL ART高橋和希遊☆戯☆王イラスト集"
-    artist: "高橋和希"
-  - series_key: "qid:Q241885|name:高屋奈月画集フルーツバスケット"
-    artist: "高屋奈月"
-  - series_key: "qid:Q2532959|name:ぬらりひょんの孫イラスト集 妖絵巻"
-    artist: "椎橋寛"
-  - series_key: "qid:Q256425|name:ベルサイユのばらオールカラーイラスト集"
-    artist: "池田理代子"
-  - series_key: "qid:Q2661273|name:さいとう・たかを「ゴルゴ13」イラスト画集"
-    artist: "さいとう・たかを"
-  - series_key: "qid:Q2663665|name:純情ロマンチカ・イラスト集"
-    artist: "中村春菊"
-  - series_key: "qid:Q268789|name:竹宮惠子「風と木の詩」豪華画集"
-    artist: "竹宮惠子"
-  - series_key: "qid:Q272333|name:蟲師 画集"
-    artist: "漆原友紀"
-  - series_key: "qid:Q2829038|name:山田章博画集"
-    artist: "山田章博"
-  - series_key: "qid:Q3113855|name:一条ゆかりデビュー30周年イラスト集"
-    artist: "一条ゆかり"
-  - series_key: "qid:Q311589|name:赤松健画集"
-    artist: "赤松健"
-  - series_key: "qid:Q3136401|name:テガミバチイラスト集shine"
-    artist: "浅田弘幸"
-  - series_key: "qid:Q3191990|name:彩雲国物語イラスト集"
-    artist: "由羅カイリ"
-  - series_key: "qid:Q325196|name:北沢楽天画集"
-    artist: "北澤楽天"
-  - series_key: "qid:Q3276235|name:青池保子イラスト集"
-    artist: "青池保子"
-  - series_key: "qid:Q3574302|name:熊倉裕一画集"
-    artist: "熊倉裕一"
-  - series_key: "qid:Q359625|name:上條淳士画集1983 SINCE"
-    artist: "上條淳士"
-  - series_key: "qid:Q3776935|name:里中満智子オリジナルイラスト集恋人たち"
-    artist: "里中満智子"
-  - series_key: "qid:Q38278877|name:三月画集"
-    artist: "三月"
-  - series_key: "qid:Q38842|name:ハッピーマニアイラスト集"
-    artist: "安野モヨコ"
-  - series_key: "qid:Q38842|name:蔦と鸚鵡 安野モヨコ紙版画集"
-    artist: "安野モヨコ"
-  - series_key: "qid:Q41693046|name:画集 将国のアルタイル"
-    artist: "カトウコトノ"
-  - series_key: "qid:Q4348970|name:銀牙伝説Weed原画集"
-    artist: "高橋よしひろ"
-  - series_key: "qid:Q4383744|name:緋賀ゆかり画集15th ART WORKS"
-    artist: "緋賀ゆかり"
-  - series_key: "qid:Q4383744|name:緋賀ゆかり魔法戦記リリカルなのはForce画集"
-    artist: "緋賀ゆかり"
-  - series_key: "qid:Q445827|name:山岸凉子画集 光"
-    artist: "山岸凉子"
-  - series_key: "qid:Q448653|name:つだみきよ画集"
-    artist: "つだみきよ"
-  - series_key: "qid:Q448653|name:蔵王大志画集"
-    artist: "つだみきよ"
-  - series_key: "qid:Q452246|name:桂正和×TIGER＆BUNNY 原画＆ラフ画集成"
-    artist: "桂正和"
-  - series_key: "qid:Q4531338|name:ますむらひろし北斎画集|sub:Atagoal Hokusai"
-    artist: "ますむらひろし"
-  - series_key: "qid:Q453372|name:冬目景画集"
-    artist: "冬目景"
-  - series_key: "qid:Q45819753|name:はりかも画集"
-    artist: "はりかも"
-  - series_key: "qid:Q459911|name:バガボンド画集:墨"
-    artist: "井上雄彦"
-  - series_key: "qid:Q4700966|name:雨柳堂夢咄画集"
-    artist: "波津彬子"
-  - series_key: "qid:Q471103|name:少年サンデーデラックス サイボーグ009 石森章太郎傑作画集"
-    artist: "石ノ森章太郎"
-  - series_key: "qid:Q471103|name:石ノ森章太郎変身ヒーロー画集"
-    artist: "石ノ森章太郎"
-  - series_key: "qid:Q471133|name:横山光輝原画集"
-    artist: "横山光輝"
-  - series_key: "qid:Q510977|name:高永ひなこイラスト集 リトル・バタフライand more"
-    artist: "高永ひなこ"
-  - series_key: "qid:Q510977|name:高永ひなこイラスト集 恋する暴君"
-    artist: "高永ひなこ"
-  - series_key: "qid:Q5366793|name:超人ロック 自選複製原画集"
-    artist: "聖悠紀"
-  - series_key: "qid:Q5366793|name:超人ロックART WORKS"
-    artist: "聖悠紀"
-  - series_key: "qid:Q5398742|name:生徒諸君!イラスト集"
-    artist: "庄司陽子"
-  - series_key: "qid:Q545168|name:17NOISE ARTWORKS of RYOKO FUKUYAMA"
-    artist: "福山リョウコ"
-  - series_key: "qid:Q545717|name:あとり硅子イラスト集"
-    artist: "あとり硅子"
-  - series_key: "qid:Q550311|name:幽・遊・白書画集"
-    artist: "冨樫義博"
-  - series_key: "qid:Q600384|name:石川賢画集"
-    artist: "石川賢"
-  - series_key: "qid:Q617888|name:ヤスダスズヒト画集 シューティングスター・カルナバルside: 夜桜四重奏"
-    artist: "ヤスダスズヒト"
-  - series_key: "qid:Q617888|name:ヤスダスズヒト画集 シューティングスター・ビバップSide:デュラララ!!"
-    artist: "ヤスダスズヒト"
-  - series_key: "qid:Q619010|name:樹なつみキャラクター画集"
-    artist: "樹なつみ"
-  - series_key: "qid:Q619018|name:北川みゆきイラスト集"
-    artist: "北川みゆき"
-  - series_key: "qid:Q6359803|name:藤原カムイ画集40GB"
-    artist: "藤原カムイ"
-  - series_key: "qid:Q6455061|name:小島功画集|sub:創立八十周年記念「京」増刊号"
-    artist: "小島功"
-  - series_key: "qid:Q6455061|name:小島功美女画集"
-    artist: "小島功"
-  - series_key: "qid:Q692237|name:美樹本晴彦ガンダム画集into the sky"
-    artist: "美樹本晴彦"
-  - series_key: "qid:Q707507|name:安倍吉俊画集「垓層宮」"
-    artist: "安倍吉俊"
-  - series_key: "qid:Q725387|name:聖闘士星矢THE LOST CANVAS冥王神話画集"
-    artist: "手代木史織"
-  - series_key: "qid:Q7426424|name:ポケットモンスターSPECIAL 山本サトシ画集"
-    artist: "山本サトシ"
-  - series_key: "qid:Q7497596|name:ドカベン原画集"
-    artist: "水島新司"
-  - series_key: "qid:Q8193548|name:柴田亜美イラスト集"
-    artist: "柴田亜美"
-  - series_key: "qid:Q844082|name:上村一夫美女画集"
-    artist: "上村一夫"
-  - series_key: "qid:Q8495163|name:石田敦子画集"
-    artist: "石田敦子"
-  - series_key: "qid:Q873283|name:藤原ここあ画集"
-    artist: "藤原ここあ"
-  - series_key: "qid:Q8919606|name:あずまゆき画集"
-    artist: "あずまゆき"
-  - series_key: "qid:Q8972749|name:画集 百鬼夜行抄"
-    artist: "今市子"
-  - series_key: "qid:Q9014744|name:風の聖痕イラスト集"
-    artist: "納都花丸"
-  - series_key: "qid:Q9097377|name:なもり画集 ゆるなもり"
-    artist: "なもり"
-  - series_key: "qid:Q9185904|name:ヒャッコ画集"
-    artist: "カトウハルアキ"
-  - series_key: "qid:Q9318942|name:おまもりひまり処女画集"
-    artist: "的良みらん"
-  - series_key: "qid:Q958249|name:To LOVEる ダークネス画集 Harem Gold"
-    artist: "矢吹健太朗"
-  - series_key: "qid:Q958249|name:To LOVEる 画集らぶから!"
-    artist: "矢吹健太朗"
-  - series_key: "qid:Q958249|name:To LOVEるダークネス画集 Venus"
-    artist: "矢吹健太朗"
-  - series_key: "qid:Q994045|name:迎夏生画集"
-    artist: "迎夏生"
-  - series_key: "qid:Q999229|name:あさぎ桜画集 新機動戦記ガンダムW Frozen Teardrop"
-    artist: "あさぎ桜"
-  - series_key: "name:Koi|name:Caf? du lapin 「ご注文はうさぎですか?」画集"
-    artist: "Koi"
-  - series_key: "name:カズアキ|name:Kazuaki Artworks"
-    artist: "カズアキ"
-  - series_key: "name:長谷見沙貴|name:To LOVEる ダークネス アニメイラスト集JUICY"
-    artist: "矢吹健太朗"
-  - series_key: "name:円陣闇丸|name:Voice or Noise MEMORIAL BOOK ART WORKS"
-    artist: "円陣闇丸"
-  - series_key: "name:Clamp|name:「魔法騎士レイアース」原画集"
-    artist: "CLAMP"
-  - series_key: "name:七生|name:あかやあかしやあやかしの画集"
-    artist: "七生"
-  - series_key: "name:ひろき真冬|name:ひろき真冬画集"
-    artist: "ひろき真冬"
-  - series_key: "name:Clamp|name:カードキャプターさくらイラスト集"
-    artist: "CLAMP"
-  - series_key: "name:CLAMP|name:カードキャプターさくら連載開始20周年記念イラスト集"
-    artist: "CLAMP"
-  - series_key: "name:ほしのなつみ|name:キジトラ猫の小梅さんほしのなつみ画集"
-    artist: "ほしのなつみ"
-  - series_key: "name:宮崎吾朗|name:ゲド戦記詩画集"
-    artist: "宮崎吾朗"
-  - series_key: "name:宇崎純一|name:スミカズ画集"
-    artist: "宇崎純一"
-  - series_key: "name:オリヴィエ・ショパン・ド・ジャンヴリー|name:セム画集"
-    artist: "セム"
-  - series_key: "name:Clamp|name:ツバサ-album de reproductions-原画集"
-    artist: "CLAMP"
-  - series_key: "name:名取芳之助|name:デモ画集|sub:戌の卷"
-    artist: "名取芳之助"
-  - series_key: "name:加賀充|name:ドラゴンボールイラスト画集"
-    artist: "加賀充"
-  - series_key: "name:ドレ|name:ドレ『聖書』画集"
-    artist: "ドレ"
-  - series_key: "name:佐々木英也|name:ファブリ世界名画集"
-    artist: "佐々木英也"
-  - series_key: "name:村田天籟|name:ヘボ画集"
-    artist: "村田天籟"
-  - series_key: "name:渡辺与平|name:ヨヘイ画集"
-    artist: "渡辺与平"
-  - series_key: "name:レイモン・ペイネ|name:レイモン・ペイネ画集"
-    artist: "レイモン・ペイネ"
-  - series_key: "name:東堂いづみ|name:上北ふたごオールプリキュアイラスト集"
-    artist: "上北双子"
-  - series_key: "name:井上洋介|name:井上洋介画集"
-    artist: "井上洋介"
-  - series_key: "name:富田晃弘|name:兵隊画集"
-    artist: "富田晃弘"
-  - series_key: "name:CLAMP|name:創竜伝原画集"
-    artist: "CLAMP"
-  - series_key: "name:竹久夢二|name:夢二画集"
-    artist: "竹久夢二"
-  - series_key: "name:横田幸子|name:夢色画集"
-    artist: "横田幸子"
-  - series_key: "name:大塚康生|name:大塚康生ルパン三世作画集"
-    artist: "大塚康生"
-  - series_key: "name:日本漫画会|name:大震災画集"
-    artist: "日本漫画会"
-  - series_key: "name:宮田雅之|name:宮田雅之きりえ画集"
-    artist: "宮田雅之"
-  - series_key: "name:高りょう|name:戯画集第四交狂画譜"
-    artist: "高りょう"
-  - series_key: "name:斑鳩|name:斑鳩的遊画集"
-    artist: "IKa"
-  - series_key: "name:okama|name:月面兎兵器ミーナ okama ARTWORKS"
-    artist: "OKAMA"
-    multi_artist: true
-  - series_key: "name:榊原瑞紀|name:榊原瑞紀TIGER＆BUNNY画集"
-    artist: "西田征史"
-  - series_key: "name:河鍋暁斎|name:河鍋暁斎戯画集"
-    artist: "及川茂"
-  - series_key: "name:永尾まる|name:猫絵十兵衛～御伽草紙～永尾まる画集"
-    artist: "永尾まる"
-  - series_key: "name:川上四郎|name:童謡画集"
-    artist: "川上四郎"
-  - series_key: "name:Clamp|name:聖伝イラスト集 天魔劫火"
-    artist: "CLAMP"
-  - series_key: "name:鄭問|name:鄭問画集"
-    artist: "鄭問"
-  - series_key: "name:鈴木雅久|name:鈴木雅久エリアル画集"
-    artist: "鈴木雅久"
-  - series_key: "name:深遊|name:鋼殻のレギオス画集"
-    artist: "雨木シュウスケ"
-  # 高橋ツトム画集 = 講談社×集英社 2社同時発売(2009-12, デビュー20周年初画集)。
-  # ★MADBがNDL題「S : / K : 高橋ツトム画集」をtitle「S」「K」と誤parse → title上書きで是正。
-  # 空の重複series(name:高橋ツトム画集)は廃し、実体(巻ISBN有)のS/Kを登録。
-  - series_key: "name:高橋ツトム|name:S"
-    artist: "高橋ツトム"
-    title: "高橋ツトム画集 S"
-    title_kana: "タカハシツトムガシュウエス"
-    source: ndl-split-shueisha
-  - series_key: "name:高橋ツトム|name:K"
-    artist: "高橋ツトム"
-    title: "高橋ツトム画集 K"
-    title_kana: "タカハシツトムガシュウケー"
-    source: ndl-split-kodansha
-  - series_key: "name:晴智|name:魔女の怪画集"
-    artist: "晴智"
-  - series_key: "qid:Q11638680|name:[近藤るるる画集L・Rプレミアムbox]|sub:初回限定版"
-    artist: "近藤るるる"
-  - series_key: "qid:Q11638680|name:近藤るるる画集L"
-    artist: "近藤るるる"
-  - series_key: "qid:Q11638680|name:近藤るるる画集R"
-    artist: "近藤るるる"
-  - series_key: "qid:Q443171|name:［今日、恋をはじめます］ 原画集"
-    artist: "水波風南"
-  - series_key: "qid:Q452246|name:榊原瑞紀TIGER＆BUNNY画集"
-    artist: "桂正和"
-    multi_artist: true
-  - series_key: "qid:Q471103|name:石ノ森章太郎変身ヒーロー画集 after 1975"
-    artist: "石ノ森章太郎"
-  - series_key: "qid:Q471103|name:石ノ森章太郎変身ヒーロー画集 before 1975"
-    artist: "石ノ森章太郎"
-  - series_key: "qid:Q504482|name:シドニアの騎士トリビュートマンガ・イラスト集"
-    artist: "小川彌生"
-    multi_artist: true
-  - series_key: "qid:Q5366793|name:超人ロック　自選複製原画集"
-    artist: "聖悠紀"
-  - series_key: "qid:Q8972749|name:画集百鬼夜行抄"
-    artist: "今市子"
-  - series_key: "qid:Q9097377|name:なもり百合姫表紙画集truth"
-    artist: "なもり"
-  - series_key: "qid:Q958249|name:To LOVEる ダークネス アニメイラスト集JUICY"
-    artist: "矢吹健太朗"
-  - series_key: "name:Koi|name:Café du lapin 「ご注文はうさぎですか?」画集"
-    artist: "Koi"
-  - series_key: "name:Vジャンプ編集部|name:DRAGON BALL超画集"
-    artist: "鳥山明"
-  - series_key: "name:Clamp|name:「魔法騎士レイアース2」原画集"
-    artist: "CLAMP"
-  - series_key: "name:矢立肇|name:あさぎ桜画集 新機動戦記ガンダムW Frozen Teardrop"
-    artist: "あさぎ桜"
-    multi_artist: true
-  - series_key: "name:Jecy|name:こむぎこをこねたもの画集"
-    artist: "Jecy"
-  - series_key: "name:Jecy|name:こむぎこをこねたもの画集|sub:日日是好日-こむぎこ寺へようこそ"
-    artist: "Jecy"
-  - series_key: "name:ジャック・クレピノー|name:セム画集"
-    artist: "グザヴィエ・シロン"
-    multi_artist: true
-  - series_key: "name:グザヴィエ・シロン|name:セム画集"
-    artist: "セム"
-  - series_key: "name:セム|name:セム画集|sub:彼の生きたフランス、時代と文化"
-    artist: "Sem"
-    multi_artist: true
-  - series_key: "name:CLAMP|name:ツバサ原画集"
-    artist: "CLAMP"
-  - series_key: "name:京極夏彦|name:京極夏彦が選ぶ!水木しげるの奇妙な劇画集"
-    artist: "水木しげる"
-  - series_key: "name:トムス・エンタテインメント|name:大塚康生ルパン三世作画集"
-    artist: "大塚康生"
-  - series_key: "name:峯島正行|name:当世おんな風俗画集"
-    artist: "杉浦幸雄"
-  - series_key: "name:森晴路|name:手塚治虫カラーマンガ原画コレクション 単行本未収録画集成"
-    artist: "手塚治虫"
-    multi_artist: true
-  - series_key: "name:フジテレビ|name:月面兎兵器ミーナ okama ARTWORKS"
-    artist: "OKAMA"
-    multi_artist: true
-  - series_key: "name:山口静一|name:河鍋暁斎戯画集"
-    artist: "山口静一"
-    multi_artist: true
-  - series_key: "name:雨木シュウスケ|name:鋼殻のレギオス画集"
-    artist: "雨木シュウスケ"
-  - series_key: "qid:Q2738694|name:彩"
-    artist: "大和和紀"
-    source: ndl-marker-less
-  - series_key: "qid:Q966701|name:G/B"
-    artist: "綾峰欄人"
-    source: ndl-marker-less
-  - series_key: "qid:Q669049|name:妖鬼化"
-    artist: "水木しげる"
-    source: ndl-marker-less
-  - series_key: "qid:Q11599978|name:艶夢"
-    artist: "笠間しろう"
-    source: ndl-marker-less
-    # adult確定: 笠間しろう=成人劇画家(known) AND 題「艶」marker。 設計§4の既知漏れ (2026-06-05 確認)
-    adult: true
-  - series_key: "qid:Q38842|name:安野モヨコSTRIP!"
-    artist: "安野モヨコ"
-    source: ndl-marker-less
-  - series_key: "qid:Q11280638|name:Soul flower"
-    artist: "ゆうきあずさ"
-    source: ndl-marker-less
-  - series_key: "qid:Q268789|name:少年の詩"
-    artist: "竹宮惠子"
-    source: ndl-marker-less
-  - series_key: "qid:Q958449|name:うしおととら全集"
-    artist: "藤田和日郎"
-    source: ndl-marker-less
-  - series_key: "qid:Q958449|name:藤田和日郎魂"
-    artist: "藤田和日郎"
-    source: ndl-marker-less
-  - series_key: "qid:Q351742|name:タッチ|sub:あだち充自選複製原画集"
-    artist: "あだち充"
-    source: ndl-marker-less
-  - series_key: "qid:Q9046266|name:螺旋"
-    artist: "橘皆無"
-    source: ndl-marker-less
+- series_key: qid:Q1010233|name:真鍋譲治イラスト集
+  artist: 真鍋譲治
+- series_key: qid:Q11044547|name:画集・なんて素敵にジャパネスク
+  artist: 山内直実
+- series_key: qid:Q11260369|name:ファイアーエムブレム聖戦の系譜画集
+  artist: うさ銀太郎
+- series_key: qid:Q11283231|name:アシオART WORKS
+  artist: アシオ
+- series_key: qid:Q11294123|name:ぱらみった★ カスカベアキラ画集
+  artist: カスカベアキラ
+- series_key: qid:Q11294123|name:カスカベアキラARTWORKS
+  artist: カスカベアキラ
+- series_key: qid:Q11359743|name:上田夢人画集
+  artist: 上田夢人
+- series_key: qid:Q11382314|name:佐々木淳子イラスト集
+  artist: 佐々木淳子
+- series_key: qid:Q1150879|name:漫画似顔画集
+  artist: 下川凹天
+- series_key: qid:Q11522228|name:当世おんな風俗画集
+  artist: 杉浦幸雄
+- series_key: qid:Q11534158|name:柳原良平船の画集
+  artist: 柳原良平
+- series_key: qid:Q11562516|name:弱虫ペダル 原画集
+  artist: 渡辺航
+- series_key: qid:Q1157669|name:五十嵐大介画集 海獣とタマシイ
+  artist: 五十嵐大介
+- series_key: qid:Q11583610|name:シドニアの騎士トリビュートマンガ・イラスト集
+  artist: 小川彌生
+  multi_artist: true
+- series_key: qid:Q11585198|name:ななつの星とお月さま コーセルテルのイラスト集
+  artist: 石動あゆま
+- series_key: qid:Q11626418|name:Y's art works
+  artist: 衣谷遊
+- series_key: qid:Q11628495|name:西村しのぶイラスト集
+  artist: 西村しのぶ
+- series_key: qid:Q11638680|name:近藤るるる画集
+  artist: 近藤るるる
+- series_key: qid:Q11638680|name:近藤るるる画集L・Rプレミアムbox
+  artist: 近藤るるる
+- series_key: qid:Q11649074|name:鈴木理華画集 女王と海賊と天使たち
+  artist: 鈴木理華
+- series_key: qid:Q11661464|name:青春画集|sub:青春鉄道キャラクターブック＆イラスト集
+  artist: 青春
+- series_key: qid:Q11664540|name:柳瀬正夢画集
+  artist: 須山計一
+- series_key: qid:Q11671469|name:高橋真琴画集 あこがれ
+  artist: 高橋真琴
+- series_key: qid:Q11672754|name:二ノ宮くん画集
+  artist: 高苗京鈴
+- series_key: qid:Q1377779|name:Artworks
+  artist: 星野之宣
+- series_key: qid:Q1377779|name:Pilots初期画集成
+  artist: 星野之宣
+- series_key: qid:Q1399083|name:わたせせいぞうオリジナルカレンダーイラスト集
+  artist: ワタセセイゾウ
+- series_key: qid:Q1713234|name:三原順自選複製原画集
+  artist: 三原順
+- series_key: qid:Q193300|name:ブラック・ジャック画集
+  artist: 手塚治虫
+- series_key: qid:Q193300|name:手塚治虫SFヒーロー画集
+  artist: 手塚治虫
+- series_key: qid:Q193300|name:手塚治虫カラーマンガ原画コレクション 単行本未収録画集成
+  artist: 手塚治虫
+- series_key: qid:Q194556|name:黒執事 枢やな画集
+  artist: 枢やな
+- series_key: qid:Q1970474|name:高田裕三画集
+  artist: 高田裕三
+- series_key: qid:Q1993|name:岸本斉史画集 UZUMAKI （渦巻）
+  artist: 岸本斉史
+- series_key: qid:Q208582|name:DRAGON BALL超画集
+  artist: 鳥山明
+- series_key: qid:Q22127383|name:雲田はるこ原画集
+  artist: 雲田はるこ
+- series_key: qid:Q22128066|name:カーニヴァルパレード 御巫桃也画集
+  artist: 御巫桃也
+- series_key: qid:Q2280124|name:頭文字D画集
+  artist: しげの秀一
+- series_key: qid:Q229724|name:美少女戦士セーラームーン原画集
+  artist: 武内直子
+- series_key: qid:Q230962|name:荒川弘イラスト集
+  artist: 荒川弘
+- series_key: qid:Q232660|name:紳士同盟+ 種村有菜イラスト集
+  artist: 種村有菜
+- series_key: qid:Q2339941|name:ちばてつや画集
+  artist: ちばてつや
+- series_key: qid:Q234425|name:「ご近所物語」イラスト集
+  artist: 矢沢あい
+- series_key: qid:Q240225|name:DUEL ART高橋和希遊☆戯☆王イラスト集
+  artist: 高橋和希
+- series_key: qid:Q241885|name:高屋奈月画集フルーツバスケット
+  artist: 高屋奈月
+- series_key: qid:Q2532959|name:ぬらりひょんの孫イラスト集 妖絵巻
+  artist: 椎橋寛
+- series_key: qid:Q256425|name:ベルサイユのばらオールカラーイラスト集
+  artist: 池田理代子
+- series_key: qid:Q2661273|name:さいとう・たかを「ゴルゴ13」イラスト画集
+  artist: さいとう・たかを
+- series_key: qid:Q2663665|name:純情ロマンチカ・イラスト集
+  artist: 中村春菊
+- series_key: qid:Q268789|name:竹宮惠子「風と木の詩」豪華画集
+  artist: 竹宮惠子
+- series_key: qid:Q272333|name:蟲師 画集
+  artist: 漆原友紀
+- series_key: qid:Q2829038|name:山田章博画集
+  artist: 山田章博
+- series_key: qid:Q3113855|name:一条ゆかりデビュー30周年イラスト集
+  artist: 一条ゆかり
+- series_key: qid:Q311589|name:赤松健画集
+  artist: 赤松健
+- series_key: qid:Q3136401|name:テガミバチイラスト集shine
+  artist: 浅田弘幸
+- series_key: qid:Q3191990|name:彩雲国物語イラスト集
+  artist: 由羅カイリ
+- series_key: qid:Q325196|name:北沢楽天画集
+  artist: 北澤楽天
+- series_key: qid:Q3276235|name:青池保子イラスト集
+  artist: 青池保子
+- series_key: qid:Q3574302|name:熊倉裕一画集
+  artist: 熊倉裕一
+- series_key: qid:Q359625|name:上條淳士画集1983 SINCE
+  artist: 上條淳士
+- series_key: qid:Q3776935|name:里中満智子オリジナルイラスト集恋人たち
+  artist: 里中満智子
+- series_key: qid:Q38278877|name:三月画集
+  artist: 三月
+- series_key: qid:Q38842|name:ハッピーマニアイラスト集
+  artist: 安野モヨコ
+- series_key: qid:Q38842|name:蔦と鸚鵡 安野モヨコ紙版画集
+  artist: 安野モヨコ
+- series_key: qid:Q41693046|name:画集 将国のアルタイル
+  artist: カトウコトノ
+- series_key: qid:Q4348970|name:銀牙伝説Weed原画集
+  artist: 高橋よしひろ
+- series_key: qid:Q4383744|name:緋賀ゆかり画集15th ART WORKS
+  artist: 緋賀ゆかり
+- series_key: qid:Q4383744|name:緋賀ゆかり魔法戦記リリカルなのはForce画集
+  artist: 緋賀ゆかり
+- series_key: qid:Q445827|name:山岸凉子画集 光
+  artist: 山岸凉子
+- series_key: qid:Q448653|name:つだみきよ画集
+  artist: つだみきよ
+- series_key: qid:Q448653|name:蔵王大志画集
+  artist: つだみきよ
+- series_key: qid:Q452246|name:桂正和×TIGER＆BUNNY 原画＆ラフ画集成
+  artist: 桂正和
+- series_key: qid:Q4531338|name:ますむらひろし北斎画集|sub:Atagoal Hokusai
+  artist: ますむらひろし
+- series_key: qid:Q453372|name:冬目景画集
+  artist: 冬目景
+- series_key: qid:Q45819753|name:はりかも画集
+  artist: はりかも
+- series_key: qid:Q459911|name:バガボンド画集:墨
+  artist: 井上雄彦
+- series_key: qid:Q4700966|name:雨柳堂夢咄画集
+  artist: 波津彬子
+- series_key: qid:Q471103|name:少年サンデーデラックス サイボーグ009 石森章太郎傑作画集
+  artist: 石ノ森章太郎
+- series_key: qid:Q471103|name:石ノ森章太郎変身ヒーロー画集
+  artist: 石ノ森章太郎
+- series_key: qid:Q471133|name:横山光輝原画集
+  artist: 横山光輝
+- series_key: qid:Q510977|name:高永ひなこイラスト集 リトル・バタフライand more
+  artist: 高永ひなこ
+- series_key: qid:Q510977|name:高永ひなこイラスト集 恋する暴君
+  artist: 高永ひなこ
+- series_key: qid:Q5366793|name:超人ロック 自選複製原画集
+  artist: 聖悠紀
+- series_key: qid:Q5366793|name:超人ロックART WORKS
+  artist: 聖悠紀
+- series_key: qid:Q5398742|name:生徒諸君!イラスト集
+  artist: 庄司陽子
+- series_key: qid:Q545168|name:17NOISE ARTWORKS of RYOKO FUKUYAMA
+  artist: 福山リョウコ
+- series_key: qid:Q545717|name:あとり硅子イラスト集
+  artist: あとり硅子
+- series_key: qid:Q550311|name:幽・遊・白書画集
+  artist: 冨樫義博
+- series_key: qid:Q600384|name:石川賢画集
+  artist: 石川賢
+- series_key: 'qid:Q617888|name:ヤスダスズヒト画集 シューティングスター・カルナバルside: 夜桜四重奏'
+  artist: ヤスダスズヒト
+- series_key: qid:Q617888|name:ヤスダスズヒト画集 シューティングスター・ビバップSide:デュラララ!!
+  artist: ヤスダスズヒト
+- series_key: qid:Q619010|name:樹なつみキャラクター画集
+  artist: 樹なつみ
+- series_key: qid:Q619018|name:北川みゆきイラスト集
+  artist: 北川みゆき
+- series_key: qid:Q6359803|name:藤原カムイ画集40GB
+  artist: 藤原カムイ
+- series_key: qid:Q6455061|name:小島功画集|sub:創立八十周年記念「京」増刊号
+  artist: 小島功
+- series_key: qid:Q6455061|name:小島功美女画集
+  artist: 小島功
+- series_key: qid:Q692237|name:美樹本晴彦ガンダム画集into the sky
+  artist: 美樹本晴彦
+- series_key: qid:Q707507|name:安倍吉俊画集「垓層宮」
+  artist: 安倍吉俊
+- series_key: qid:Q725387|name:聖闘士星矢THE LOST CANVAS冥王神話画集
+  artist: 手代木史織
+- series_key: qid:Q7426424|name:ポケットモンスターSPECIAL 山本サトシ画集
+  artist: 山本サトシ
+- series_key: qid:Q7497596|name:ドカベン原画集
+  artist: 水島新司
+- series_key: qid:Q8193548|name:柴田亜美イラスト集
+  artist: 柴田亜美
+- series_key: qid:Q844082|name:上村一夫美女画集
+  artist: 上村一夫
+- series_key: qid:Q8495163|name:石田敦子画集
+  artist: 石田敦子
+- series_key: qid:Q873283|name:藤原ここあ画集
+  artist: 藤原ここあ
+- series_key: qid:Q8919606|name:あずまゆき画集
+  artist: あずまゆき
+- series_key: qid:Q8972749|name:画集 百鬼夜行抄
+  artist: 今市子
+- series_key: qid:Q9014744|name:風の聖痕イラスト集
+  artist: 納都花丸
+- series_key: qid:Q9097377|name:なもり画集 ゆるなもり
+  artist: なもり
+- series_key: qid:Q9185904|name:ヒャッコ画集
+  artist: カトウハルアキ
+- series_key: qid:Q9318942|name:おまもりひまり処女画集
+  artist: 的良みらん
+- series_key: qid:Q958249|name:To LOVEる ダークネス画集 Harem Gold
+  artist: 矢吹健太朗
+- series_key: qid:Q958249|name:To LOVEる 画集らぶから!
+  artist: 矢吹健太朗
+- series_key: qid:Q958249|name:To LOVEるダークネス画集 Venus
+  artist: 矢吹健太朗
+- series_key: qid:Q994045|name:迎夏生画集
+  artist: 迎夏生
+- series_key: qid:Q999229|name:あさぎ桜画集 新機動戦記ガンダムW Frozen Teardrop
+  artist: あさぎ桜
+- series_key: name:Koi|name:Caf? du lapin 「ご注文はうさぎですか?」画集
+  artist: Koi
+- series_key: name:カズアキ|name:Kazuaki Artworks
+  artist: カズアキ
+- series_key: name:長谷見沙貴|name:To LOVEる ダークネス アニメイラスト集JUICY
+  artist: 矢吹健太朗
+- series_key: name:円陣闇丸|name:Voice or Noise MEMORIAL BOOK ART WORKS
+  artist: 円陣闇丸
+- series_key: name:Clamp|name:「魔法騎士レイアース」原画集
+  artist: CLAMP
+- series_key: name:七生|name:あかやあかしやあやかしの画集
+  artist: 七生
+- series_key: name:ひろき真冬|name:ひろき真冬画集
+  artist: ひろき真冬
+- series_key: name:Clamp|name:カードキャプターさくらイラスト集
+  artist: CLAMP
+- series_key: name:CLAMP|name:カードキャプターさくら連載開始20周年記念イラスト集
+  artist: CLAMP
+- series_key: name:ほしのなつみ|name:キジトラ猫の小梅さんほしのなつみ画集
+  artist: ほしのなつみ
+- series_key: name:宮崎吾朗|name:ゲド戦記詩画集
+  artist: 宮崎吾朗
+- series_key: name:宇崎純一|name:スミカズ画集
+  artist: 宇崎純一
+- series_key: name:オリヴィエ・ショパン・ド・ジャンヴリー|name:セム画集
+  artist: セム
+- series_key: name:Clamp|name:ツバサ-album de reproductions-原画集
+  artist: CLAMP
+- series_key: name:名取芳之助|name:デモ画集|sub:戌の卷
+  artist: 名取芳之助
+- series_key: name:加賀充|name:ドラゴンボールイラスト画集
+  artist: 加賀充
+- series_key: name:ドレ|name:ドレ『聖書』画集
+  artist: ドレ
+- series_key: name:佐々木英也|name:ファブリ世界名画集
+  artist: 佐々木英也
+- series_key: name:村田天籟|name:ヘボ画集
+  artist: 村田天籟
+- series_key: name:渡辺与平|name:ヨヘイ画集
+  artist: 渡辺与平
+- series_key: name:レイモン・ペイネ|name:レイモン・ペイネ画集
+  artist: レイモン・ペイネ
+- series_key: name:東堂いづみ|name:上北ふたごオールプリキュアイラスト集
+  artist: 上北双子
+- series_key: name:井上洋介|name:井上洋介画集
+  artist: 井上洋介
+- series_key: name:富田晃弘|name:兵隊画集
+  artist: 富田晃弘
+- series_key: name:CLAMP|name:創竜伝原画集
+  artist: CLAMP
+- series_key: name:竹久夢二|name:夢二画集
+  artist: 竹久夢二
+- series_key: name:横田幸子|name:夢色画集
+  artist: 横田幸子
+- series_key: name:大塚康生|name:大塚康生ルパン三世作画集
+  artist: 大塚康生
+- series_key: name:日本漫画会|name:大震災画集
+  artist: 日本漫画会
+- series_key: name:宮田雅之|name:宮田雅之きりえ画集
+  artist: 宮田雅之
+- series_key: name:高りょう|name:戯画集第四交狂画譜
+  artist: 高りょう
+- series_key: name:斑鳩|name:斑鳩的遊画集
+  artist: IKa
+- series_key: name:okama|name:月面兎兵器ミーナ okama ARTWORKS
+  artist: OKAMA
+  multi_artist: true
+- series_key: name:榊原瑞紀|name:榊原瑞紀TIGER＆BUNNY画集
+  artist: 西田征史
+- series_key: name:河鍋暁斎|name:河鍋暁斎戯画集
+  artist: 及川茂
+- series_key: name:永尾まる|name:猫絵十兵衛～御伽草紙～永尾まる画集
+  artist: 永尾まる
+- series_key: name:川上四郎|name:童謡画集
+  artist: 川上四郎
+- series_key: name:Clamp|name:聖伝イラスト集 天魔劫火
+  artist: CLAMP
+- series_key: name:鄭問|name:鄭問画集
+  artist: 鄭問
+- series_key: name:鈴木雅久|name:鈴木雅久エリアル画集
+  artist: 鈴木雅久
+- series_key: name:深遊|name:鋼殻のレギオス画集
+  artist: 雨木シュウスケ
+- series_key: name:高橋ツトム|name:S
+  artist: 高橋ツトム
+  title: 高橋ツトム画集 S
+  title_kana: タカハシツトムガシュウエス
+  source: ndl-split-shueisha
+- series_key: name:高橋ツトム|name:K
+  artist: 高橋ツトム
+  title: 高橋ツトム画集 K
+  title_kana: タカハシツトムガシュウケー
+  source: ndl-split-kodansha
+- series_key: name:晴智|name:魔女の怪画集
+  artist: 晴智
+- series_key: qid:Q11638680|name:[近藤るるる画集L・Rプレミアムbox]|sub:初回限定版
+  artist: 近藤るるる
+- series_key: qid:Q11638680|name:近藤るるる画集L
+  artist: 近藤るるる
+- series_key: qid:Q11638680|name:近藤るるる画集R
+  artist: 近藤るるる
+- series_key: qid:Q443171|name:［今日、恋をはじめます］ 原画集
+  artist: 水波風南
+- series_key: qid:Q452246|name:榊原瑞紀TIGER＆BUNNY画集
+  artist: 桂正和
+  multi_artist: true
+- series_key: qid:Q471103|name:石ノ森章太郎変身ヒーロー画集 after 1975
+  artist: 石ノ森章太郎
+- series_key: qid:Q471103|name:石ノ森章太郎変身ヒーロー画集 before 1975
+  artist: 石ノ森章太郎
+- series_key: qid:Q504482|name:シドニアの騎士トリビュートマンガ・イラスト集
+  artist: 小川彌生
+  multi_artist: true
+- series_key: qid:Q5366793|name:超人ロック　自選複製原画集
+  artist: 聖悠紀
+- series_key: qid:Q8972749|name:画集百鬼夜行抄
+  artist: 今市子
+- series_key: qid:Q9097377|name:なもり百合姫表紙画集truth
+  artist: なもり
+- series_key: qid:Q958249|name:To LOVEる ダークネス アニメイラスト集JUICY
+  artist: 矢吹健太朗
+- series_key: name:Koi|name:Café du lapin 「ご注文はうさぎですか?」画集
+  artist: Koi
+- series_key: name:Vジャンプ編集部|name:DRAGON BALL超画集
+  artist: 鳥山明
+- series_key: name:Clamp|name:「魔法騎士レイアース2」原画集
+  artist: CLAMP
+- series_key: name:矢立肇|name:あさぎ桜画集 新機動戦記ガンダムW Frozen Teardrop
+  artist: あさぎ桜
+  multi_artist: true
+- series_key: name:Jecy|name:こむぎこをこねたもの画集
+  artist: Jecy
+- series_key: name:Jecy|name:こむぎこをこねたもの画集|sub:日日是好日-こむぎこ寺へようこそ
+  artist: Jecy
+- series_key: name:ジャック・クレピノー|name:セム画集
+  artist: グザヴィエ・シロン
+  multi_artist: true
+- series_key: name:グザヴィエ・シロン|name:セム画集
+  artist: セム
+- series_key: name:セム|name:セム画集|sub:彼の生きたフランス、時代と文化
+  artist: Sem
+  multi_artist: true
+- series_key: name:CLAMP|name:ツバサ原画集
+  artist: CLAMP
+- series_key: name:京極夏彦|name:京極夏彦が選ぶ!水木しげるの奇妙な劇画集
+  artist: 水木しげる
+- series_key: name:トムス・エンタテインメント|name:大塚康生ルパン三世作画集
+  artist: 大塚康生
+- series_key: name:峯島正行|name:当世おんな風俗画集
+  artist: 杉浦幸雄
+- series_key: name:森晴路|name:手塚治虫カラーマンガ原画コレクション 単行本未収録画集成
+  artist: 手塚治虫
+  multi_artist: true
+- series_key: name:フジテレビ|name:月面兎兵器ミーナ okama ARTWORKS
+  artist: OKAMA
+  multi_artist: true
+- series_key: name:山口静一|name:河鍋暁斎戯画集
+  artist: 山口静一
+  multi_artist: true
+- series_key: name:雨木シュウスケ|name:鋼殻のレギオス画集
+  artist: 雨木シュウスケ
+- series_key: qid:Q2738694|name:彩
+  artist: 大和和紀
+  source: ndl-marker-less
+- series_key: qid:Q966701|name:G/B
+  artist: 綾峰欄人
+  source: ndl-marker-less
+- series_key: qid:Q669049|name:妖鬼化
+  artist: 水木しげる
+  source: ndl-marker-less
+- series_key: qid:Q11599978|name:艶夢
+  artist: 笠間しろう
+  source: ndl-marker-less
+  adult: true
+- series_key: qid:Q38842|name:安野モヨコSTRIP!
+  artist: 安野モヨコ
+  source: ndl-marker-less
+- series_key: qid:Q11280638|name:Soul flower
+  artist: ゆうきあずさ
+  source: ndl-marker-less
+- series_key: qid:Q268789|name:少年の詩
+  artist: 竹宮惠子
+  source: ndl-marker-less
+- series_key: qid:Q958449|name:うしおととら全集
+  artist: 藤田和日郎
+  source: ndl-marker-less
+- series_key: qid:Q958449|name:藤田和日郎魂
+  artist: 藤田和日郎
+  source: ndl-marker-less
+- series_key: qid:Q351742|name:タッチ|sub:あだち充自選複製原画集
+  artist: あだち充
+  source: ndl-marker-less
+- series_key: qid:Q9046266|name:螺旋
+  artist: 橘皆無
+  source: ndl-marker-less
+- series_key: qid:Q418449|name:ALL ABOUT AKIMI YOSHIDA ぜんぶ吉田秋生
+  artist: 吉田秋生
