@@ -10313,5 +10313,83 @@
     "role": "artist"
    }
   ]
+ },
+ "gekki": {
+  "editions": [
+   {
+    "type": "standard",
+    "label": "通常版",
+    "publisher": "学習研究社",
+    "imprint": "ピチコミックスミステリー",
+    "volumes": [
+     {
+      "number": 1,
+      "isbn13": "9784056008364",
+      "cover_url": null,
+      "release_date": "1995-02"
+     },
+     {
+      "number": 2,
+      "isbn13": "9784056009859",
+      "cover_url": null,
+      "release_date": "1995-06"
+     },
+     {
+      "number": 3,
+      "isbn13": "9784056009934",
+      "cover_url": null,
+      "release_date": "1995-09"
+     }
+    ]
+   }
+  ],
+  "authors": [
+   {
+    "name": "穂実あゆこ",
+    "role": "writer_artist"
+   }
+  ]
+ },
+ "condor-king": {
+  "editions": [
+   {
+    "type": "standard",
+    "label": "通常版",
+    "publisher": "パンローリング",
+    "imprint": "武内つなよし傑作集",
+    "volumes": [
+     {
+      "number": 1,
+      "isbn13": "9784775913338",
+      "cover_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/3338/9784775913338.jpg?_ex=300x300",
+      "release_date": "2009-08"
+     },
+     {
+      "number": 2,
+      "isbn13": "9784775913345",
+      "cover_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/3345/9784775913345.jpg?_ex=300x300",
+      "release_date": "2009-08"
+     },
+     {
+      "number": 3,
+      "isbn13": "9784775913352",
+      "cover_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/3352/9784775913352.jpg?_ex=300x300",
+      "release_date": "2009-08"
+     },
+     {
+      "number": 4,
+      "isbn13": "9784775913369",
+      "cover_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/7759/77591336.jpg?_ex=300x300",
+      "release_date": "2009-09"
+     }
+    ]
+   }
+  ],
+  "authors": [
+   {
+    "name": "武内つなよし",
+    "role": "writer_artist"
+   }
+  ]
  }
 }
