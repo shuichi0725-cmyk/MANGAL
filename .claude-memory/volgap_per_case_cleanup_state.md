@@ -163,3 +163,10 @@ seed投入後、`python scripts/_promote-bulk-v2.py`(フル~90分 or 影響slug�
 - ★正しいアプローチ(将来per-case): 各entryごとに「種2コピーが実際にpage表示されているか」を判定→表示済=除去safe/未表示=種4は正当な表示手段としてkeep(契約の例外)。断片は merge+renumber セットでのみ解消可。
 - ★教訓: 「契約違反だから一括除去」はデータの実態(load-bearing)を無視した理屈先行。**適用前に影響のgap再計算をdry-runに含めるべきだった**。revertが数分で済んだのはtargeted反映+backupのおかげ。
 - 現状: 130件は種4に残置(見た目上のdup ISBN汚染はあるが表示は正しい)。damenzu/hataの実害2件だけは先行修正済(別commit)。
+
+
+## 2026-07-02 実重複の即時是正(ユーザ「重複は今、統合か削除」) = 52→7 ISBN
+- ★本番66,827頁を130 ISBNでスキャン→**52 ISBNが実際に2頁重複表示**(=「帳簿だけ」でなく実害あり。ユーザ指摘が正)。`.cache/dup130-pages.json`。
+- 是正: **A=junk断片頁10drop**(マッドブル34断片=題が数字だけの頁『5』『10』等が本番に実在→non-manga-drop) / **B=同一作split4頁page-dedup**(I'mナム/恋ヶ窪無印/すてきな主婦/絶対したいH=superset安全のみ) / **C=誤fill37冊種4除去**(グラゼニ別作編11/暴君tangle13/あつ森3/就活女神2等) / **D=complex10件per-case worklist**。
+- 結果: 実重複52→**7**(全て種2ネイティブ重複=同ISBNが種2の2クラスタに二重: clamp-premium/xxxholic・合格祈願/恋する暴君・グラゼニパ/東京4冊・お初/天狗風)。gap 401→412(+11=誤fill除去の正直な再開・帰属は別作)。
+- ★worklist=`docs/production-diagnostics/seed4-percase-worklist.tsv`(48+11件)。残7重複はここのper-case(NDLで巻帰属確定→volume-exclude/merge)。
