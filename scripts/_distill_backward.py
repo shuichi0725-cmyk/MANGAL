@@ -181,6 +181,21 @@ def _pad_date(sd):
     if mo: return f"{y}-{int(mo):02d}"
     return y
 
+def _pub_map():
+    import yaml as _y
+    doc = _y.safe_load(open(os.path.join(ROOT, "data", "publishers.yml"), encoding="utf-8"))
+    m = {}
+    def nkp(x):
+        x = unicodedata.normalize("NFKC", str(x or ""))
+        return re.sub(r"[\s・株式会社]", "", x).lower()
+    for k, v in (doc or {}).items():
+        if not isinstance(v, dict):
+            continue
+        m[nkp(v.get("name", ""))] = k
+        for a in (v.get("aliases") or []):
+            m[nkp(a)] = k
+    return m, nkp
+
 def stage_emit():
     pub = json.load(open(os.path.join(WORK, "publishable.json"), encoding="utf-8"))
     todo = {}
@@ -197,6 +212,8 @@ def stage_emit():
             return dp.represent_scalar("tag:yaml.org,2002:str", data, style="'")
         return dp.represent_scalar("tag:yaml.org,2002:str", data)
     yaml.add_representer(str, _rep, Dumper=yaml.SafeDumper)
+    PUBMAP, _nkp = _pub_map()
+    unmatched_pubs = {}
     written = 0; skipped = []
     for x in pub:
         t = todo.get(x["key"], {})
@@ -230,7 +247,9 @@ def stage_emit():
                 "title_romaji": slug.replace("-", " "),
                 "year_started": year, "year_ended": None if year >= 2025 else year, "status": "ongoing" if year >= 2025 else "completed",
                 "authors": [{"name": c, "role": "writer_artist"} for c in x["creators"][:3]],
-                "publisher": "(unknown)", "magazine": None,
+                "publisher": PUBMAP.get(_nkp(x["publisher"]), "(unknown)"),
+                "publishers": ([PUBMAP[_nkp(x["publisher"])]] if _nkp(x["publisher"]) in PUBMAP else []),
+                "magazine": None,
                 "demographic": t["demographic"], "genres": gs, "genres_provisional": True,
                 "synopsis": t.get("synopsis", ""), "catch": t.get("catch", ""),
                 "anime_adapted": False,
@@ -251,6 +270,11 @@ def stage_emit():
         with open(out, "w", encoding="utf-8") as fo:
             yaml.dump(page, fo, allow_unicode=True, sort_keys=False, Dumper=yaml.SafeDumper)
         allslugs.add(slug); written += 1
+    for x in pub:
+        if _nkp(x["publisher"]) not in PUBMAP:
+            unmatched_pubs[x["publisher"]] = unmatched_pubs.get(x["publisher"], 0) + 1
+    if unmatched_pubs:
+        print("★未キー出版社(=(unknown)扱い・要レビュー):", dict(sorted(unmatched_pubs.items(), key=lambda z: -z[1])))
     print(f"preview生成: {written} / 検証NG skip: {len(skipped)}")
     for tskip, errs in skipped[:10]:
         print("  skip:", tskip[:20], errs)
