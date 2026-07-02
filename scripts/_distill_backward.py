@@ -172,6 +172,15 @@ def stage_plan():
     print(f"→ 欠落表 docs/production-diagnostics/backward-{YEAR}-lacking.tsv")
 
 
+def _pad_date(sd):
+    if not sd: return None
+    m = re.match(r"^(\d{4})(?:[.\-/](\d{1,2}))?(?:[.\-/](\d{1,2}))?", str(sd))
+    if not m: return None
+    y, mo, d = m.group(1), m.group(2), m.group(3)
+    if mo and d: return f"{y}-{int(mo):02d}-{int(d):02d}"
+    if mo: return f"{y}-{int(mo):02d}"
+    return y
+
 def stage_emit():
     pub = json.load(open(os.path.join(WORK, "publishable.json"), encoding="utf-8"))
     todo = {}
@@ -225,12 +234,19 @@ def stage_emit():
                 "demographic": t["demographic"], "genres": gs, "genres_provisional": True,
                 "synopsis": t.get("synopsis", ""), "catch": t.get("catch", ""),
                 "anime_adapted": False,
-                "alternative_titles": ({"en": alt_en} if alt_en else None),
+                
                 "editions": [{"type": "standard", "label": "通常版", "publisher": x["publisher"], "imprint": x["series_label"],
                               "volumes": [{"number": v["n"], "asin": None, "isbn13": v["isbn"],
                                            "cover_url": v.get("cover"),
-                                           "release_date": re.sub(r"\.", "-", str(v.get("date") or ""))[:7] or None}
+                                           "release_date": _pad_date(v.get("date"))}
                                           for v in x["vols"]]}]}
+        if alt_en:
+            page["alternative_titles"] = {"en": alt_en}
+        # ★Zodミラー最終検証(検索404の構造防止): date形式/None値キー
+        for e2 in page["editions"]:
+            for v2 in e2["volumes"]:
+                rd = v2.get("release_date")
+                assert rd is None or re.fullmatch(r"\d{4}(-\d{2}(-\d{2})?)?", str(rd)), f"date不正 {slug} {rd}"
         out = os.path.join(ROOT, ".preview-data", "manga", f"{slug}.yml")
         with open(out, "w", encoding="utf-8") as fo:
             yaml.dump(page, fo, allow_unicode=True, sort_keys=False, Dumper=yaml.SafeDumper)
