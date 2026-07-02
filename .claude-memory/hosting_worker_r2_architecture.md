@@ -21,3 +21,11 @@ metadata:
 **引き換え**: 配信Worker(req→R2→キャッシュ制御)とデプロイスクリプト(out/→R2同期)を自作(一度きりの小工事)。Pagesのプレビュー URL等は失う。
 
 **関連する構造課題(同時期に対処、2026-06-10洗い出し)**: ①★トップページが全DB(69k)をHomeClient propsで送る=数十MBで死ぬ → **軽量検索索引の別ファイル化+遅延ロード**が必須 ②検索matchTextがO(n)全件線形 ③promoteの旧sourceページ(data/manga)起点依存=slug再生成時に種2+seeds直接生成へ。
+
+
+## 2026-07-03 R2移行の実施状態
+- ★**本番ドメイン取得: mangal-db.com**(Cloudflare Registrar直・同アカウントzone・WHOIS redaction自動)。R2検証OK後にworkerへカスタムドメイン紐付け→公開→楽天アフィのサイトURL更新。
+- R2有効化済・bucket `mangal-site`作成済・**staging worker `mangal-r2` デプロイ済**(https://mangal-r2.shuichi0725.workers.dev / workers/r2-serve.js=エッジキャッシュ+CT+cache tiers)。wrangler=PCでOAuthログイン済。
+- S3鍵=.env.local(R2_ACCOUNT_ID/R2_ACCESS_KEY_ID/R2_SECRET_ACCESS_KEY)・接続テスト済。★鍵はチャット経由で渡ったため**完了後にローテーション予定**(忘れず声かけ)。
+- ★next buildの罠: サイトローダーは`DATA_DIR/manga`を読む=旧`data/manga`(69,901残骸)が参照され**空build(_emptyのみ)**になった→ **ステージングdir方式**で解決: `D:\mangal-cache\proddata\`にjunction(manga→data/manga.v2, seeds, art-books)+master/索引コピー→`MANGAL_DATA_DIR`指定でフルbuild。旧data/mangaの退役+GH Actions(deploy-cloudflare.yml=旧dir前提)の更新はR2移行後のbacklog。
+- 同期=`_r2-sync.py --bucket mangal-site`(.env.localからR2_*を環境注入して実行・本番索引overlay+5MBguard内蔵)。
