@@ -1,4 +1,3 @@
-# OFFSET/GAP/A/B/C-NDL 補完(種4)。promoteのload_volumes_supplementが読む。
 schema_version: 1
 volumes:
 - series_keys:
@@ -12939,10 +12938,10 @@ volumes:
   number: 3
   isbn13: '9784088594767'
   release_date: 2004-12
-  edition_type: standard
+  edition_type: deluxe
   source: rakuten
   added_at: '2026-06-21'
-  note: OFFSET/GAP低巻・内部欠け補完。onmitsu-kenshi
+  note: OFFSET/GAP低巻・内部欠け補完。onmitsu-kenshi | type是正standard→deluxe(JC-DX連番594729<767<927)
 - series_keys:
   - name:かわさき健|name:オーイ!とんぼ
   number: 53
