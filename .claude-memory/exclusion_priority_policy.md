@@ -35,3 +35,5 @@ metadata:
 - 恒久修正: `DROP_IMPRINT_LOWER_PATTERNS`に**"remix"**追加(case-insens・種2実測で全variantコンビニ再録確認・正規版に'remix'無し)+`DROP_IMPRINT_PATTERNS`に**「リミックス」**。
 - 実害: remix専用54頁(こち亀年度別コンビニ本'76-'2000系14頁/鳥山明○作劇場改/ベスト・オブ・手塚治虫/必殺仕置長屋等)=non-manga-drop 55キーでdrop。混在11頁(魁男塾/パタリロ/狂四郎2030/隠密剣士等)=remix版除去済。**remix漏れ0確認**。
 - ★教訓: imprintフィルタは**カナ/latin/大小文字のvariant全部**を種2実測で洗ってから書く。単一表記のパターンは必ず漏れる。
+
+- ★remix除去後の正規版置き換え(2026-07-02完了): 隠密剣士v3=auto種4のtype誤記(standard→deluxe・JC-DX連番で確定)/忍空2nd=JC干支忍編2021全5追加/Golden boy=BJ標準10冊完成/パタリロ=pre-ISBN 8巻に再版ISBN補完(書影104/104化)/コドク=版分離(ソニマガBCDX2000全3+幻冬舎新装上下2016+文庫)。**情事の達人=NDL悉皆で正規版が存在しない**(双葉文庫自選名作集+白泉社リミックスのみ)=そのまま。★教訓: pre-ISBN巻は再版ISBN補完で書影が付く/type誤記はauto/offset種4も疑う。
