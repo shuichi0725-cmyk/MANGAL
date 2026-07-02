@@ -70,3 +70,5 @@ distill-{adult,drop,integrate-override-,fill-,enrich-,author-supplement-,genre-a
 - カーソル=`data/seeds/distill-cursor.json`(git追跡)。
 - ★**正式skill** `.claude/skills/daily-distill/SKILL.md`(トリガー「日次蒸留して」・NEVER=429連打/捏造/単巻先行/closed vocab外・成功判定つき=弱いモデル耐性設計の1号)。
 - smoke(2026): 掲載可worksheet待ち34(6月蒸留以降の新着)/欠落319。本番化(種2 INSERT-only --commit)は未実装=preview確認まで。
+
+- ★Layer1+2接続(2026-07-02): L1=楽天booksGenreId(rk enrichに捕捉→demographic裏取り+001021=BL自動付与・検証前適用)/L2=要素タグ(TODO.tags→page.tags category=Rakuten rank60・確信のみ)。emit題清掃(NDL並記英題→alt.en/末尾ピリオド)・日付ゼロ埋め(_pad_date=検索404根治)・publisher master正規化(未キー自動flag)・Zodミラーassert内蔵。実運転=2026年6月新着59頁(書影/catch/synopsis/genre/demo/tags/出版社完備)をpreviewテスト先行。
