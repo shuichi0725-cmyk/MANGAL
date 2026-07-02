@@ -177,6 +177,7 @@
 | **「巻抜け仮想」** | `_volgap-virtual.py --list` = 残巻抜けを算出(promote不要) | ~2分 |
 | **「新規追加/新刊入れて」** | distillパイプライン(`_distill_preview`系)= **テスト先行**で新規頁生成→ユーザ確認→GOで本番化 | 件数次第 |
 | **「月次蒸留して」** | フルパイプライン(Phase0→Go待ち→取込→フルpromote) | ~3時間+ |
+| **「日次蒸留して」** | skill `daily-distill`= `_distill_daily.py --discover`(NDL当月live・429即中断)→`--plan`(差分レポート=新規掲載可/新規欠落・カーソル自動更新)→worksheet記入→`--emit`。カーソル=distill-cursor.json | 数分 |
 | **「後退蒸留して <年>」** | `_distill_backward.py <年> --discover(NDL live)→--plan(仕分け/ゲート)→AI worksheet記入→--emit(preview生成)`。掲載ゲート=必須メタ完備+楽天書影v1。不足=欠落表。被覆台帳=distill-coverage.json | 年次第 |
 | 作品名+リンク(Wiki/NDL) | per-case版再構築(イアラ式)→即「反映して」相当まで実施 | 1作数分 |
 

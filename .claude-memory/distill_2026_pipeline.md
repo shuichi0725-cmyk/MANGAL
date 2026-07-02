@@ -63,3 +63,10 @@ distill-{adult,drop,integrate-override-,fill-,enrich-,author-supplement-,genre-a
 - 2024smoke実測: discovery1400行→フィルタ後1333→既存作の巻330(A=種4候補・別route)/新規作964→**掲載可250**(AI worksheet待ち)/欠落711(巻不連続=全巻回収要530・v1書影無591・題不一致等)。
 - ★worksheet形式=.cache/backward/<year>/ai-todo.jsonl {TODO:{is_manga,slug,genres,catch,synopsis,demographic}}。emit検証=closed vocab/slug衝突/demographic enum。
 - 残設計: A route(既存作の巻)→種4ガード付き投入 / 巻不連続→NDL title+creator全巻回収(live) / 楽天miss→live補完 / 日次蒸留=同コアでcursor運転(未実装)。
+
+
+## 2026-07-02 日次蒸留(skill化1号)
+- ★`scripts/_distill_daily.py` = 後退蒸留コアの薄いカーソル運転: --discover(当月NDL live・月初3日は前月も・**429検知で即中断exit2**) / --plan(年plan冪等再実行→**カーソル差分レポート**=新規掲載可/新規欠落/累計→cursor自動更新)。emitは後退と共通。
+- カーソル=`data/seeds/distill-cursor.json`(git追跡)。
+- ★**正式skill** `.claude/skills/daily-distill/SKILL.md`(トリガー「日次蒸留して」・NEVER=429連打/捏造/単巻先行/closed vocab外・成功判定つき=弱いモデル耐性設計の1号)。
+- smoke(2026): 掲載可worksheet待ち34(6月蒸留以降の新着)/欠落319。本番化(種2 INSERT-only --commit)は未実装=preview確認まで。
