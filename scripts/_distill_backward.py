@@ -114,7 +114,7 @@ def stage_plan():
             it = d.get("item") or {}
             img = str(it.get("largeImageUrl") or it.get("mediumImageUrl") or "")
             rk[ib] = {"cover": None if (not img or "noimage" in img) else img.split("?")[0] + "?_ex=300x300",
-                      "kana": it.get("titleKana", ""), "sales": it.get("salesDate", ""), "title": it.get("title", ""), "caption": it.get("itemCaption", "")}
+                      "kana": it.get("titleKana", ""), "sales": it.get("salesDate", ""), "title": it.get("title", ""), "caption": it.get("itemCaption", ""), "genreid": it.get("booksGenreId", "")}
             need.discard(ib)
         if not need:
             break
@@ -148,7 +148,7 @@ def stage_plan():
                "series_label": w["series_label"],
                "vols": [{**v, "cover": rk.get(v["isbn"], {}).get("cover"),
                          "sales": rk.get(v["isbn"], {}).get("sales", "")} for v in vols],
-               "rakuten_kana": rk.get(v1["isbn"], {}).get("kana", "") if v1 else "", "caption": rk.get(v1["isbn"], {}).get("caption", "") if v1 else ""}
+               "rakuten_kana": rk.get(v1["isbn"], {}).get("kana", "") if v1 else "", "caption": rk.get(v1["isbn"], {}).get("caption", "") if v1 else "", "genreid": rk.get(v1["isbn"], {}).get("genreid", "") if v1 else ""}
         if miss_fields:
             lacking.append({**rec, "lacking": miss_fields})
         else:
@@ -213,6 +213,8 @@ def stage_emit():
         return dp.represent_scalar("tag:yaml.org,2002:str", data)
     yaml.add_representer(str, _rep, Dumper=yaml.SafeDumper)
     PUBMAP, _nkp = _pub_map()
+    _gids_path = os.path.join(WORK, "genreids.json")
+    _GIDS = json.load(open(_gids_path, encoding="utf-8")) if os.path.exists(_gids_path) else {}
     unmatched_pubs = {}
     written = 0; skipped = []
     for x in pub:
@@ -226,6 +228,18 @@ def stage_emit():
         elif slug in allslugs:
             errs.append(f"slug衝突:{slug}")
         gs = t.get("genres") or []
+        # ★Layer1: 楽天booksGenreIdで demographic裏取り + BL自動付与(検証前)
+        gid = str((x.get("genreid") or (_GIDS.get(x["vols"][0]["isbn"], "") if x.get("vols") else "")) or "")
+        if not t.get("demographic"):
+            demo = ""
+            if "001001001" in gid: demo = "shounen"
+            elif "001001002" in gid: demo = "shoujo"
+            elif "001001003" in gid: demo = "seinen"
+            elif "001001004" in gid or "001017" in gid: demo = "josei"
+            elif "001021" in gid: demo = "josei"
+            if demo: t = {**t, "demographic": demo}
+        if "001021" in gid and "bl" not in gs:
+            gs = list(gs) + ["bl"]
         if not gs or any(g not in GENRES for g in gs):
             errs.append(f"genre不正{gs}")
         if not str(t.get("demographic", "")) in ("shounen", "shoujo", "seinen", "josei", "kids", "general"):
@@ -253,6 +267,7 @@ def stage_emit():
                 "demographic": t["demographic"], "genres": gs, "genres_provisional": True,
                 "synopsis": t.get("synopsis", ""), "catch": t.get("catch", ""),
                 "anime_adapted": False,
+                "tags": ([{"name": tg, "category": "Rakuten", "rank": 60} for tg in (t.get("tags") or [])] or None),
                 
                 "editions": [{"type": "standard", "label": "通常版", "publisher": x["publisher"], "imprint": x["series_label"],
                               "volumes": [{"number": v["n"], "asin": None, "isbn13": v["isbn"],
@@ -261,6 +276,8 @@ def stage_emit():
                                           for v in x["vols"]]}]}
         if alt_en:
             page["alternative_titles"] = {"en": alt_en}
+        if page.get("tags") is None:
+            page.pop("tags", None)
         # ★Zodミラー最終検証(検索404の構造防止): date形式/None値キー
         for e2 in page["editions"]:
             for v2 in e2["volumes"]:
