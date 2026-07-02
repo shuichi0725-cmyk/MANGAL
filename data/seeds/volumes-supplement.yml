@@ -7249,19 +7249,6 @@ volumes:
   source: ndl
   added_at: '2026-07-01'
   note: '巻抜けper-case: NDL照合で取込もれ巻確認(同社guard). slug=aimu-namu'
-- series_keys:
-  - name:企画者104|name:ビックリマン おもしろランド
-  qid: null
-  number: 4
-  isbn13: '9784253099325'
-  release_date: 1988-06
-  pages: null
-  publisher: 秋田書店
-  edition_type: standard
-  title_display: ビックリマン おもしろランド
-  source: ndl
-  added_at: '2026-07-01'
-  note: '巻抜けper-case: NDL照合で取込もれ巻確認(同社guard). slug=bikkuriman-omoshirorando'
 - series_keys: &id006
   - name:菊地としを|name:明王伝レイ
   - qid:Q11619700|name:明王伝レイ
@@ -7493,20 +7480,6 @@ volumes:
   added_at: '2026-07-01'
   note: '巻抜けper-case: NDL照合で取込もれ巻確認(同社guard). slug=zero-site-muhou-chitai'
 - series_keys:
-  - qid:Q510977|name:チャレンジャーズ
-  - qid:Q510977|name:合格祈願
-  qid: null
-  number: 3
-  isbn13: '9784877244835'
-  release_date: 2006-12
-  pages: null
-  publisher: 海王社
-  edition_type: standard
-  title_display: チャレンジャーズ
-  source: ndl
-  added_at: '2026-07-01'
-  note: '巻抜けper-case: NDL照合で取込もれ巻確認(同社guard). slug=charenjaazu'
-- series_keys:
   - qid:Q11479927|name:瑠璃子女王の華麗なる日々
   qid: null
   number: 2
@@ -7574,20 +7547,6 @@ volumes:
   source: ndl
   added_at: '2026-07-01'
   note: '巻抜けper-case: NDL照合で取込もれ巻確認(同社guard). slug=tasokare-no-yume'
-- series_keys:
-  - name:竜騎らみゅー|name:スターオーシャン セカンドストーリー
-  - qid:Q11443794|name:スターオーシャン セカンドストーリー
-  qid: null
-  number: 5
-  isbn13: '9784757500556'
-  release_date: 1999-08
-  pages: null
-  publisher: エニックス
-  edition_type: standard
-  title_display: スターオーシャン セカンドストーリー
-  source: ndl
-  added_at: '2026-07-01'
-  note: '巻抜けper-case: NDL照合で取込もれ巻確認(同社guard). slug=star-ocean-second-story'
 - series_keys:
   - qid:Q11665645|name:すてきな主婦たち
   qid: null
@@ -7686,19 +7645,6 @@ volumes:
   source: ndl
   added_at: '2026-07-01'
   note: '巻抜けper-case: NDL照合で取込もれ巻確認(同社guard). slug=asami-mitsuhiko-mystery-special'
-- series_keys:
-  - name:坂口よしを|name:霊験お初捕物控
-  qid: null
-  number: 2
-  isbn13: '9784253154062'
-  release_date: 2009-10
-  pages: null
-  publisher: 秋田書店
-  edition_type: deluxe
-  title_display: 霊験お初捕物控
-  source: ndl
-  added_at: '2026-07-01'
-  note: '巻抜けper-case: NDL照合で取込もれ巻確認(同社guard). slug=reigen-ohatsu-torimono-hikae'
 - series_keys: &id012
   - qid:Q11539826|name:G・DEFEND
   qid: null
@@ -7762,140 +7708,6 @@ volumes:
   source: ndl
   added_at: '2026-07-01'
   note: '巻抜けper-case: NDL照合で取込もれ巻確認(同社guard). slug=mei-tantei-asami-mitsuhiko-ando-ryojou-mystery-comic-selection'
-- series_keys: &id013
-  - name:5pb.|name:Robotics;Notes
-  qid: null
-  number: 4
-  isbn13: '9784800002051'
-  release_date: 2013-09
-  pages: null
-  publisher: マッグガーデン
-  edition_type: standard
-  title_display: Robotics;Notes
-  source: ndl
-  added_at: '2026-07-01'
-  note: '巻抜けper-case: NDL照合で取込もれ巻確認(同社guard). slug=robotics-notes-2012'
-- series_keys: *id013
-  qid: null
-  number: 5
-  isbn13: '9784800002976'
-  release_date: 2014-05
-  pages: null
-  publisher: マッグガーデン
-  edition_type: standard
-  title_display: Robotics;Notes
-  source: ndl
-  added_at: '2026-07-01'
-  note: '巻抜けper-case: NDL照合で取込もれ巻確認(同社guard). slug=robotics-notes-2012'
-- series_keys: &id014
-  - name:松本帆加|name:暴君ヴァーデルの花嫁
-  qid: null
-  number: 4
-  isbn13: '9784776740407'
-  release_date: 2015-07
-  pages: null
-  publisher: 宙出版
-  edition_type: standard
-  title_display: 暴君ヴァーデルの花嫁
-  source: ndl
-  added_at: '2026-07-01'
-  note: '巻抜けper-case: NDL照合で取込もれ巻確認(同社guard). slug=bou-kun-vaaderu-no-hanayome'
-- series_keys: *id014
-  qid: null
-  number: 5
-  isbn13: '9784776741473'
-  release_date: 2015-12
-  pages: null
-  publisher: 宙出版
-  edition_type: standard
-  title_display: 暴君ヴァーデルの花嫁
-  source: ndl
-  added_at: '2026-07-01'
-  note: '巻抜けper-case: NDL照合で取込もれ巻確認(同社guard). slug=bou-kun-vaaderu-no-hanayome'
-- series_keys: *id014
-  qid: null
-  number: 6
-  isbn13: '9784776742234'
-  release_date: 2016-04
-  pages: null
-  publisher: 宙出版
-  edition_type: standard
-  title_display: 暴君ヴァーデルの花嫁
-  source: ndl
-  added_at: '2026-07-01'
-  note: '巻抜けper-case: NDL照合で取込もれ巻確認(同社guard). slug=bou-kun-vaaderu-no-hanayome'
-- series_keys: *id014
-  qid: null
-  number: 7
-  isbn13: '9784776742739'
-  release_date: 2016-07
-  pages: null
-  publisher: 宙出版
-  edition_type: standard
-  title_display: 暴君ヴァーデルの花嫁
-  source: ndl
-  added_at: '2026-07-01'
-  note: '巻抜けper-case: NDL照合で取込もれ巻確認(同社guard). slug=bou-kun-vaaderu-no-hanayome'
-- series_keys: *id014
-  qid: null
-  number: 8
-  isbn13: '9784776743590'
-  release_date: 2016-11
-  pages: null
-  publisher: 宙出版
-  edition_type: standard
-  title_display: 暴君ヴァーデルの花嫁
-  source: ndl
-  added_at: '2026-07-01'
-  note: '巻抜けper-case: NDL照合で取込もれ巻確認(同社guard). slug=bou-kun-vaaderu-no-hanayome'
-- series_keys: *id014
-  qid: null
-  number: 9
-  isbn13: '9784776744276'
-  release_date: 2017-03
-  pages: null
-  publisher: 宙出版
-  edition_type: standard
-  title_display: 暴君ヴァーデルの花嫁
-  source: ndl
-  added_at: '2026-07-01'
-  note: '巻抜けper-case: NDL照合で取込もれ巻確認(同社guard). slug=bou-kun-vaaderu-no-hanayome'
-- series_keys: *id014
-  qid: null
-  number: 10
-  isbn13: '9784776745037'
-  release_date: 2017-07
-  pages: null
-  publisher: 宙出版
-  edition_type: standard
-  title_display: 暴君ヴァーデルの花嫁
-  source: ndl
-  added_at: '2026-07-01'
-  note: '巻抜けper-case: NDL照合で取込もれ巻確認(同社guard). slug=bou-kun-vaaderu-no-hanayome'
-- series_keys: *id014
-  qid: null
-  number: 11
-  isbn13: '9784776745952'
-  release_date: 2017-11
-  pages: null
-  publisher: 宙出版
-  edition_type: standard
-  title_display: 暴君ヴァーデルの花嫁
-  source: ndl
-  added_at: '2026-07-01'
-  note: '巻抜けper-case: NDL照合で取込もれ巻確認(同社guard). slug=bou-kun-vaaderu-no-hanayome'
-- series_keys: *id014
-  qid: null
-  number: 12
-  isbn13: '9784776746539'
-  release_date: 2018-03
-  pages: null
-  publisher: 宙出版
-  edition_type: standard
-  title_display: 暴君ヴァーデルの花嫁
-  source: ndl
-  added_at: '2026-07-01'
-  note: '巻抜けper-case: NDL照合で取込もれ巻確認(同社guard). slug=bou-kun-vaaderu-no-hanayome'
 - series_keys:
   - qid:Q24863382|name:MURCIELAGO
   - qid:Q24863382|name:Murcielago
@@ -7957,21 +7769,6 @@ volumes:
   added_at: '2026-07-01'
   note: '巻抜けper-case: NDL照合で取込もれ巻確認(同社guard). slug=api'
 - series_keys:
-  - name:Magica Quartet|name:マギアレコード
-  - name:富士フジノ|name:マギアレコード|sub:魔法少女まどか☆マギカ外伝
-  - name:富士フジノ|name:マギアレコード魔法少女まどか☆マギカ外伝
-  qid: null
-  number: 5
-  isbn13: '9784832273306'
-  release_date: 2021-12
-  pages: null
-  publisher: 芳文社
-  edition_type: standard
-  title_display: マギアレコード
-  source: ndl
-  added_at: '2026-07-01'
-  note: '巻抜けper-case: NDL照合で取込もれ巻確認(同社guard). slug=magia-record-2025'
-- series_keys:
   - name:佳門サエコ|name:これから俺は、後輩に抱かれます
   qid: null
   number: 4
@@ -8011,7 +7808,7 @@ volumes:
   source: ndl
   added_at: '2026-07-01'
   note: '巻抜けper-case: NDL照合で取込もれ巻確認(同社guard). slug=tsuihousareta-sareta-cheat-fuyo-majutsushi-wa-kimama-na-sekando-life-o-ouka-suru'
-- series_keys: &id015
+- series_keys: &id013
   - name:ととふみ|name:伝説のヤリチンvs鉄壁の尻穴
   - name:ととふみ|name:伝説のヤリチンvs鉄壁の尻穴.
   qid: null
@@ -8025,7 +7822,7 @@ volumes:
   source: ndl
   added_at: '2026-07-01'
   note: '巻抜けper-case: NDL照合で取込もれ巻確認(同社guard). slug=densetsu-no-yarichin-vs-teppeki-no-shiriana'
-- series_keys: *id015
+- series_keys: *id013
   qid: null
   number: 3
   isbn13: '9784799765043'
@@ -8037,7 +7834,7 @@ volumes:
   source: ndl
   added_at: '2026-07-01'
   note: '巻抜けper-case: NDL照合で取込もれ巻確認(同社guard). slug=densetsu-no-yarichin-vs-teppeki-no-shiriana'
-- series_keys: *id015
+- series_keys: *id013
   qid: null
   number: 4
   isbn13: '9784799769157'
@@ -8049,7 +7846,7 @@ volumes:
   source: ndl
   added_at: '2026-07-01'
   note: '巻抜けper-case: NDL照合で取込もれ巻確認(同社guard). slug=densetsu-no-yarichin-vs-teppeki-no-shiriana'
-- series_keys: &id016
+- series_keys: &id014
   - qid:Q3276235|name:エロイカより愛をこめて
   qid: null
   number: 3
@@ -8062,7 +7859,7 @@ volumes:
   source: ndl
   added_at: '2026-07-01'
   note: '巻抜けper-case救済: NDL出版社名=ページ版社一致(同社別ISBN block). slug=eroika-yori-ai-o-komete'
-- series_keys: *id016
+- series_keys: *id014
   qid: null
   number: 4
   isbn13: '9784253071123'
@@ -8074,7 +7871,7 @@ volumes:
   source: ndl
   added_at: '2026-07-01'
   note: '巻抜けper-case救済: NDL出版社名=ページ版社一致(同社別ISBN block). slug=eroika-yori-ai-o-komete'
-- series_keys: *id016
+- series_keys: *id014
   qid: null
   number: 5
   isbn13: '9784253071130'
@@ -8086,7 +7883,7 @@ volumes:
   source: ndl
   added_at: '2026-07-01'
   note: '巻抜けper-case救済: NDL出版社名=ページ版社一致(同社別ISBN block). slug=eroika-yori-ai-o-komete'
-- series_keys: &id017
+- series_keys: &id015
   - name:クラフト団|name:プラモ狂四郎
   - qid:Q11280522|name:プラモ狂四郎
   qid: null
@@ -8100,7 +7897,7 @@ volumes:
   source: ndl
   added_at: '2026-07-01'
   note: '巻抜けper-case救済: NDL出版社名=ページ版社一致(同社別ISBN block). slug=plamo-kyoushirou'
-- series_keys: *id017
+- series_keys: *id015
   qid: null
   number: 10
   isbn13: '9784063706024'
@@ -8112,7 +7909,7 @@ volumes:
   source: ndl
   added_at: '2026-07-01'
   note: '巻抜けper-case救済: NDL出版社名=ページ版社一致(同社別ISBN block). slug=plamo-kyoushirou'
-- series_keys: &id018
+- series_keys: &id016
   - qid:Q958412|name:Golden boy
   qid: null
   number: 3
@@ -8125,7 +7922,7 @@ volumes:
   source: ndl
   added_at: '2026-07-01'
   note: '巻抜けper-case救済: NDL出版社名=ページ版社一致(同社別ISBN block). slug=golden-boy-1993'
-- series_keys: *id018
+- series_keys: *id016
   qid: null
   number: 4
   isbn13: '9784088587240'
@@ -8137,32 +7934,7 @@ volumes:
   source: ndl
   added_at: '2026-07-01'
   note: '巻抜けper-case救済: NDL出版社名=ページ版社一致(同社別ISBN block). slug=golden-boy-1993'
-- series_keys: &id019
-  - qid:Q11511468|name:女神
-  qid: null
-  number: 2
-  isbn13: '9784065197516'
-  release_date: 2020-06
-  pages: null
-  publisher: 講談社
-  edition_type: standard
-  title_display: 女神
-  source: ndl
-  added_at: '2026-07-01'
-  note: '巻抜けper-case救済: NDL出版社名=ページ版社一致(同社別ISBN block). slug=megami'
-- series_keys: *id019
-  qid: null
-  number: 4
-  isbn13: '9784065243824'
-  release_date: 2021-08
-  pages: null
-  publisher: 講談社
-  edition_type: standard
-  title_display: 女神
-  source: ndl
-  added_at: '2026-07-01'
-  note: '巻抜けper-case救済: NDL出版社名=ページ版社一致(同社別ISBN block). slug=megami'
-- series_keys: &id020
+- series_keys: &id017
   - qid:Q3201016|name:Arms
   - qid:Q602746|name:ARMS
   qid: null
@@ -8176,7 +7948,7 @@ volumes:
   source: ndl
   added_at: '2026-07-01'
   note: '巻抜けper-case救済: NDL出版社名=ページ版社一致(同社別ISBN block). slug=arms'
-- series_keys: *id020
+- series_keys: *id017
   qid: null
   number: 5
   isbn13: '9784091932198'
@@ -8188,7 +7960,7 @@ volumes:
   source: ndl
   added_at: '2026-07-01'
   note: '巻抜けper-case救済: NDL出版社名=ページ版社一致(同社別ISBN block). slug=arms'
-- series_keys: *id020
+- series_keys: *id017
   qid: null
   number: 6
   isbn13: '9784091932204'
@@ -8200,7 +7972,7 @@ volumes:
   source: ndl
   added_at: '2026-07-01'
   note: '巻抜けper-case救済: NDL出版社名=ページ版社一致(同社別ISBN block). slug=arms'
-- series_keys: *id020
+- series_keys: *id017
   qid: null
   number: 7
   isbn13: '9784091932228'
@@ -8212,21 +7984,7 @@ volumes:
   source: ndl
   added_at: '2026-07-01'
   note: '巻抜けper-case救済: NDL出版社名=ページ版社一致(同社別ISBN block). slug=arms'
-- series_keys:
-  - name:CLAMP|name:xxxHOLiC
-  - name:CLAMP|name:xxxHolic
-  qid: null
-  number: 14
-  isbn13: '9784065267899'
-  release_date: 2022-02
-  pages: null
-  publisher: 講談社
-  edition_type: standard
-  title_display: CLAMP PREMIUM COLLECTION ×××HOLiC
-  source: ndl
-  added_at: '2026-07-01'
-  note: '巻抜けper-case救済: NDL出版社名=ページ版社一致(同社別ISBN block). slug=clamp-premium-collection-holic'
-- series_keys: &id021
+- series_keys: &id018
   - name:片瀬平太|name:王様の仕立て屋
   - qid:Q11437087|name:王様の仕立て屋
   qid: null
@@ -8240,7 +7998,7 @@ volumes:
   source: ndl
   added_at: '2026-07-01'
   note: '巻抜けper-case救済: NDL出版社名=ページ版社一致(同社別ISBN block). slug=ou-sama-no-shitateya'
-- series_keys: *id021
+- series_keys: *id018
   qid: null
   number: 6
   isbn13: '9784088797625'
@@ -8252,7 +8010,7 @@ volumes:
   source: ndl
   added_at: '2026-07-01'
   note: '巻抜けper-case救済: NDL出版社名=ページ版社一致(同社別ISBN block). slug=ou-sama-no-shitateya'
-- series_keys: *id021
+- series_keys: *id018
   qid: null
   number: 7
   isbn13: '9784088798769'
@@ -8264,7 +8022,7 @@ volumes:
   source: ndl
   added_at: '2026-07-01'
   note: '巻抜けper-case救済: NDL出版社名=ページ版社一致(同社別ISBN block). slug=ou-sama-no-shitateya'
-- series_keys: *id021
+- series_keys: *id018
   qid: null
   number: 8
   isbn13: '9784088900667'
@@ -8276,7 +8034,7 @@ volumes:
   source: ndl
   added_at: '2026-07-01'
   note: '巻抜けper-case救済: NDL出版社名=ページ版社一致(同社別ISBN block). slug=ou-sama-no-shitateya'
-- series_keys: *id021
+- series_keys: *id018
   qid: null
   number: 9
   isbn13: '9784088901381'
@@ -8288,7 +8046,7 @@ volumes:
   source: ndl
   added_at: '2026-07-01'
   note: '巻抜けper-case救済: NDL出版社名=ページ版社一致(同社別ISBN block). slug=ou-sama-no-shitateya'
-- series_keys: *id021
+- series_keys: *id018
   qid: null
   number: 11
   isbn13: '9784088902807'
@@ -8313,44 +8071,7 @@ volumes:
   source: ndl
   added_at: '2026-07-01'
   note: '巻抜けper-case救済: NDL出版社名=ページ版社一致(同社別ISBN block). slug=eiyuu-sangokushi'
-- series_keys: &id022
-  - qid:Q11258271|name:どうぶつの森
-  qid: null
-  number: 9
-  isbn13: '9784091436818'
-  release_date: 2024-04
-  pages: null
-  publisher: 小学館
-  edition_type: standard
-  title_display: どうぶつの森
-  source: ndl
-  added_at: '2026-07-01'
-  note: '巻抜けper-case救済: NDL出版社名=ページ版社一致(同社別ISBN block). slug=doubutsu-no-mori'
-- series_keys: *id022
-  qid: null
-  number: 10
-  isbn13: '9784091498847'
-  release_date: 2025-02
-  pages: null
-  publisher: 小学館
-  edition_type: standard
-  title_display: どうぶつの森
-  source: ndl
-  added_at: '2026-07-01'
-  note: '巻抜けper-case救済: NDL出版社名=ページ版社一致(同社別ISBN block). slug=doubutsu-no-mori'
-- series_keys: *id022
-  qid: null
-  number: 11
-  isbn13: '9784091540430'
-  release_date: 2025-07
-  pages: null
-  publisher: 小学館
-  edition_type: standard
-  title_display: どうぶつの森
-  source: ndl
-  added_at: '2026-07-01'
-  note: '巻抜けper-case救済: NDL出版社名=ページ版社一致(同社別ISBN block). slug=doubutsu-no-mori'
-- series_keys: &id023
+- series_keys: &id019
   - name:東宮千子|name:赤白たまご
   qid: null
   number: 3
@@ -8363,7 +8084,7 @@ volumes:
   source: ndl
   added_at: '2026-07-01'
   note: '巻抜けper-case救済: NDL出版社名=ページ版社一致(同社別ISBN block). slug=akashiro-tamago'
-- series_keys: *id023
+- series_keys: *id019
   qid: null
   number: 4
   isbn13: '9784887418103'
@@ -8375,190 +8096,6 @@ volumes:
   source: ndl
   added_at: '2026-07-01'
   note: '巻抜けper-case救済: NDL出版社名=ページ版社一致(同社別ISBN block). slug=akashiro-tamago'
-- series_keys: &id024
-  - qid:Q11303326|name:Gurazeni
-  - qid:Q11303326|name:グラゼニ ～東京ドーム編～
-  qid: null
-  number: 5
-  isbn13: '9784065339084'
-  release_date: 2024-01
-  pages: null
-  publisher: 講談社
-  edition_type: standard
-  title_display: Gurazeni
-  source: ndl
-  added_at: '2026-07-01'
-  note: '巻抜けper-case救済: NDL出版社名=ページ版社一致(同社別ISBN block). slug=gurazeni-2014'
-- series_keys: *id024
-  qid: null
-  number: 6
-  isbn13: '9784065366714'
-  release_date: 2024-07
-  pages: null
-  publisher: 講談社
-  edition_type: standard
-  title_display: Gurazeni
-  source: ndl
-  added_at: '2026-07-01'
-  note: '巻抜けper-case救済: NDL出版社名=ページ版社一致(同社別ISBN block). slug=gurazeni-2014'
-- series_keys: *id024
-  qid: null
-  number: 7
-  isbn13: '9784065382707'
-  release_date: 2025-01
-  pages: null
-  publisher: 講談社
-  edition_type: standard
-  title_display: Gurazeni
-  source: ndl
-  added_at: '2026-07-01'
-  note: '巻抜けper-case救済: NDL出版社名=ページ版社一致(同社別ISBN block). slug=gurazeni-2014'
-- series_keys: *id024
-  qid: null
-  number: 8
-  isbn13: '9784065402276'
-  release_date: 2025-08
-  pages: null
-  publisher: 講談社
-  edition_type: standard
-  title_display: Gurazeni
-  source: ndl
-  added_at: '2026-07-01'
-  note: '巻抜けper-case救済: NDL出版社名=ページ版社一致(同社別ISBN block). slug=gurazeni-2014'
-- series_keys: *id024
-  qid: null
-  number: 9
-  isbn13: '9784065429457'
-  release_date: 2026-03
-  pages: null
-  publisher: 講談社
-  edition_type: standard
-  title_display: Gurazeni
-  source: ndl
-  added_at: '2026-07-01'
-  note: '巻抜けper-case救済: NDL出版社名=ページ版社一致(同社別ISBN block). slug=gurazeni-2014'
-- series_keys: *id024
-  qid: null
-  number: 10
-  isbn13: '9784063886955'
-  release_date: 2017-03
-  pages: null
-  publisher: 講談社
-  edition_type: standard
-  title_display: Gurazeni
-  source: ndl
-  added_at: '2026-07-01'
-  note: '巻抜けper-case救済: NDL出版社名=ページ版社一致(同社別ISBN block). slug=gurazeni-2014'
-- series_keys: *id024
-  qid: null
-  number: 11
-  isbn13: '9784063887273'
-  release_date: 2017-05
-  pages: null
-  publisher: 講談社
-  edition_type: standard
-  title_display: Gurazeni
-  source: ndl
-  added_at: '2026-07-01'
-  note: '巻抜けper-case救済: NDL出版社名=ページ版社一致(同社別ISBN block). slug=gurazeni-2014'
-- series_keys: *id024
-  qid: null
-  number: 12
-  isbn13: '9784065102138'
-  release_date: 2017-08
-  pages: null
-  publisher: 講談社
-  edition_type: standard
-  title_display: Gurazeni
-  source: ndl
-  added_at: '2026-07-01'
-  note: '巻抜けper-case救済: NDL出版社名=ページ版社一致(同社別ISBN block). slug=gurazeni-2014'
-- series_keys: *id024
-  qid: null
-  number: 13
-  isbn13: '9784065104941'
-  release_date: 2017-10
-  pages: null
-  publisher: 講談社
-  edition_type: standard
-  title_display: Gurazeni
-  source: ndl
-  added_at: '2026-07-01'
-  note: '巻抜けper-case救済: NDL出版社名=ページ版社一致(同社別ISBN block). slug=gurazeni-2014'
-- series_keys: *id024
-  qid: null
-  number: 14
-  isbn13: '9784065109434'
-  release_date: 2018-02
-  pages: null
-  publisher: 講談社
-  edition_type: standard
-  title_display: Gurazeni
-  source: ndl
-  added_at: '2026-07-01'
-  note: '巻抜けper-case救済: NDL出版社名=ページ版社一致(同社別ISBN block). slug=gurazeni-2014'
-- series_keys: *id024
-  qid: null
-  number: 15
-  isbn13: '9784065116937'
-  release_date: 2018-05
-  pages: null
-  publisher: 講談社
-  edition_type: standard
-  title_display: Gurazeni
-  source: ndl
-  added_at: '2026-07-01'
-  note: '巻抜けper-case救済: NDL出版社名=ページ版社一致(同社別ISBN block). slug=gurazeni-2014'
-- series_keys: &id025
-  - name:松本帆加|name:暴君ヴァーデルの花嫁 初夜編
-  - name:松本帆加|name:暴君ヴァーデルの花嫁初夜編
-  qid: null
-  number: 16
-  isbn13: '9784776750093'
-  release_date: 2019-09
-  pages: null
-  publisher: 宙出版
-  edition_type: standard
-  title_display: 暴君ヴァーデルの花嫁 初夜編
-  source: ndl
-  added_at: '2026-07-01'
-  note: '巻抜けper-case救済: NDL出版社名=ページ版社一致(同社別ISBN block). slug=bou-kun-vaaderu-no-hanayome-shoya-hen'
-- series_keys: *id025
-  qid: null
-  number: 13
-  isbn13: '9784776747369'
-  release_date: 2018-07
-  pages: null
-  publisher: 宙出版
-  edition_type: standard
-  title_display: 暴君ヴァーデルの花嫁 初夜編
-  source: ndl
-  added_at: '2026-07-01'
-  note: '巻抜けper-case救済: NDL出版社名=ページ版社一致(同社別ISBN block). slug=bou-kun-vaaderu-no-hanayome-shoya-hen'
-- series_keys: *id025
-  qid: null
-  number: 14
-  isbn13: '9784776748205'
-  release_date: 2018-11
-  pages: null
-  publisher: 宙出版
-  edition_type: standard
-  title_display: 暴君ヴァーデルの花嫁 初夜編
-  source: ndl
-  added_at: '2026-07-01'
-  note: '巻抜けper-case救済: NDL出版社名=ページ版社一致(同社別ISBN block). slug=bou-kun-vaaderu-no-hanayome-shoya-hen'
-- series_keys: *id025
-  qid: null
-  number: 15
-  isbn13: '9784776748984'
-  release_date: 2019-03
-  pages: null
-  publisher: 宙出版
-  edition_type: standard
-  title_display: 暴君ヴァーデルの花嫁 初夜編
-  source: ndl
-  added_at: '2026-07-01'
-  note: '巻抜けper-case救済: NDL出版社名=ページ版社一致(同社別ISBN block). slug=bou-kun-vaaderu-no-hanayome-shoya-hen'
 - series_keys:
   - qid:Q11675023|name:蝶か犯か|sub:極道様溢れて溢れて泣かせたい
   qid: null
@@ -8572,7 +8109,7 @@ volumes:
   source: ndl
   added_at: '2026-07-01'
   note: '巻抜けper-case救済: NDL出版社名=ページ版社一致(同社別ISBN block). slug=chou-ka-han-ka'
-- series_keys: &id026
+- series_keys: &id020
   - qid:Q11593991|name:妻と僕の小規模な育児
   qid: null
   number: 11
@@ -8585,7 +8122,7 @@ volumes:
   source: ndl
   added_at: '2026-07-01'
   note: '巻抜けper-case救済: NDL出版社名=ページ版社一致(同社別ISBN block). slug=tsuma-to-boku-no-shoukibo-na-ikuji'
-- series_keys: *id026
+- series_keys: *id020
   qid: null
   number: 12
   isbn13: '9784065392362'
@@ -8597,7 +8134,7 @@ volumes:
   source: ndl
   added_at: '2026-07-01'
   note: '巻抜けper-case救済: NDL出版社名=ページ版社一致(同社別ISBN block). slug=tsuma-to-boku-no-shoukibo-na-ikuji'
-- series_keys: &id027
+- series_keys: &id021
   - qid:Q11609486|name:恋ケ窪くんにはじめてを奪われました
   qid: null
   number: 8
@@ -8610,7 +8147,7 @@ volumes:
   source: ndl
   added_at: '2026-07-01'
   note: '巻抜けper-case救済: NDL出版社名=ページ版社一致(同社別ISBN block). slug=koigakubo-kun-ni-hajimete-o-ubawaremashita-2023'
-- series_keys: *id027
+- series_keys: *id021
   qid: null
   number: 6
   isbn13: '9784065329764'
@@ -8622,7 +8159,7 @@ volumes:
   source: ndl
   added_at: '2026-07-01'
   note: '巻抜けper-case救済: NDL出版社名=ページ版社一致(同社別ISBN block). slug=koigakubo-kun-ni-hajimete-o-ubawaremashita-2023'
-- series_keys: *id027
+- series_keys: *id021
   qid: null
   number: 7
   isbn13: '9784065349731'
@@ -8940,7 +8477,7 @@ volumes:
   source: rakuten+ndl-cache
   added_at: '2026-07-02'
   note: '巻抜けPhase1: 同社prefix+著者厳格+発売日整合±18mo+種2非存在の4ガード通過. slug=damenzu-walker'
-- series_keys: &id028
+- series_keys: &id022
   - qid:Q94610343|name:ぷるるんゼミナール
   qid: null
   number: 3
@@ -8953,7 +8490,7 @@ volumes:
   source: rakuten+ndl-cache
   added_at: '2026-07-02'
   note: '巻抜けPhase1: 同社prefix+著者厳格+発売日整合±18mo+種2非存在の4ガード通過. slug=pururun-seminar'
-- series_keys: *id028
+- series_keys: *id022
   qid: null
   number: 4
   isbn13: '9784575826388'
@@ -8965,7 +8502,7 @@ volumes:
   source: rakuten+ndl-cache
   added_at: '2026-07-02'
   note: '巻抜けPhase1: 同社prefix+著者厳格+発売日整合±18mo+種2非存在の4ガード通過. slug=pururun-seminar'
-- series_keys: *id028
+- series_keys: *id022
   qid: null
   number: 5
   isbn13: '9784575826616'
