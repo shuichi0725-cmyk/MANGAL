@@ -18,6 +18,7 @@
 2. `operations.jsonl` への集約は ★**`_reflect-targeted.py --push` が自動実行**(2026-07-02〜)。 反映フローに乗れば手動不要。 反映を通らない大作業だけ手動 `python scripts/_manifest-consolidate-ops.py`。 鮮度確認= `python scripts/_ledger.py --stale`。
 3. **大きめ作業後 `python scripts/_intake-manifest-audit.py`** → holes 取り直し、 `holes-snapshot.jsonl.gz` + `holes-summary.json` を git に**永続化** (= .cache 置きっぱで消さない)。
 4. **新しい cleanup を始める前に ★`python scripts/_ledger.py <slug>`** (= このslugの操作履歴[op_source別]+holes を一発表示。 9千行の目grepは形骸化するためツールで引く)。
+4b. ★**本番存在チェックは `python scripts/_exists.py`** (--title/--slug=一覧索引で即答 / --isbn=ISBN索引.cache/isbn-page-index.json、大量照合前に--build)。 **生ファイル66k走査は禁止**(遅い・索引→台帳→ファイルの順)。
 5. 全操作は**可逆** (= `.cache/*-bak-*` に before 退避) かつ **種2 sqlite 不変**。 人手可読サマリ (例 `docs/isbn-unmerge-ledger.md`) は台帳の**ビュー**、 一次ソースは台帳。
 6. ★版/巻/ISBN修正の2系統注意: `edition-canonical/*.yml` 結線slug (golgo-13/tsuribaka-nisshi) は edition-overrides を直しても**canonicalが後勝ちで無効** (reflectが警告する)。
 
