@@ -564,9 +564,14 @@ DROP_IMPRINT_PATTERNS = ["My first big", "コンビニ", "増刊", "同人", "�
                          "カッパ・ノベル", "カッパノベル", "カッパ・ホーム", "カッパホーム",
                          # ★コンビニ向け廉価再録レーベル(既刊の抜粋/収録 = 本編でない。 2026-06)。
                          #   KPC=講談社プラチナコミックス(頭文字D始動編 等)。 ★DX/デラックスは正規装丁で除外しない。
-                         "KPC", "プラチナコミックス"]
+                         "KPC", "プラチナコミックス",
+                         # ★remixカナ表記(2026-07-02: 「ジャンプremix」だけでは Shueisha jump remix 等の
+                         #   latin variantを素通し=こち亀年度別コンビニ本54頁が漏れていた。latin側はlowerで捕捉)
+                         "リミックス"]
 # bilingual / 英訳版 imprint は drop (= 翻訳版 は 別 product)
-DROP_IMPRINT_LOWER_PATTERNS = ["bilingual", "english", "novel", "novels"]
+# ★"remix" = コンビニ廉価再録レーベル全variant(Shueisha jump remix/ガンガンコミックスremix/
+#   G fantasy comics remix/My first big special remix等)。種2実測で全てコンビニ再録・正規版に'remix'無し。
+DROP_IMPRINT_LOWER_PATTERNS = ["bilingual", "english", "novel", "novels", "remix"]
 # 'complete works' は 英訳 全集 で 多用 (= 「TEZUKA OSAMU THE COMPLETE WORKS」、
 # 「The complete works of Fujiko・F・Fujio」 等)。 但し 日本語 imprint で 「= English」
 # 並列表記 cases (= 「藤子・F・不二雄大全集 = The Complete Works of Fujiko・F・Fujio」)

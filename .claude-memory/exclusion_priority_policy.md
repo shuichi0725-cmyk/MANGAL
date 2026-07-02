@@ -28,3 +28,10 @@ metadata:
 ## 適用
 - 除外判断は ①→②→③ の順で。成年疑いは最優先で潰す。
 - title==著者名の壊れレコード([[volgap_per_case_cleanup_state]]の派生で発掘した79件)の大半は②コンビニ廉価再録+①成年selection。正規は小学館フラワーコミックスマスターピーシーズ(夜明け型・作品タイトル有)のみ。
+
+
+## 2026-07-02 コンビニremixの系統漏れ64頁を根治(ユーザ発見=鳥山明○作劇場「改」)
+- ★dropパターン「ジャンプremix」(カナ+latin混合1種)だけでは**latin variant 9種を素通し**: Shueisha jump remix/ガンガンコミックスremix/G fantasy comics remix/Ganganwing comics remix/Shueisya girls remix/My first big special remix/MyBestRemix/バーズコミックス リミックス等。
+- 恒久修正: `DROP_IMPRINT_LOWER_PATTERNS`に**"remix"**追加(case-insens・種2実測で全variantコンビニ再録確認・正規版に'remix'無し)+`DROP_IMPRINT_PATTERNS`に**「リミックス」**。
+- 実害: remix専用54頁(こち亀年度別コンビニ本'76-'2000系14頁/鳥山明○作劇場改/ベスト・オブ・手塚治虫/必殺仕置長屋等)=non-manga-drop 55キーでdrop。混在11頁(魁男塾/パタリロ/狂四郎2030/隠密剣士等)=remix版除去済。**remix漏れ0確認**。
+- ★教訓: imprintフィルタは**カナ/latin/大小文字のvariant全部**を種2実測で洗ってから書く。単一表記のパターンは必ず漏れる。
