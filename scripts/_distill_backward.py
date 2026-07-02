@@ -114,7 +114,7 @@ def stage_plan():
             it = d.get("item") or {}
             img = str(it.get("largeImageUrl") or it.get("mediumImageUrl") or "")
             rk[ib] = {"cover": None if (not img or "noimage" in img) else img.split("?")[0] + "?_ex=300x300",
-                      "kana": it.get("titleKana", ""), "sales": it.get("salesDate", ""), "title": it.get("title", "")}
+                      "kana": it.get("titleKana", ""), "sales": it.get("salesDate", ""), "title": it.get("title", ""), "caption": it.get("itemCaption", "")}
             need.discard(ib)
         if not need:
             break
@@ -148,7 +148,7 @@ def stage_plan():
                "series_label": w["series_label"],
                "vols": [{**v, "cover": rk.get(v["isbn"], {}).get("cover"),
                          "sales": rk.get(v["isbn"], {}).get("sales", "")} for v in vols],
-               "rakuten_kana": rk.get(v1["isbn"], {}).get("kana", "") if v1 else ""}
+               "rakuten_kana": rk.get(v1["isbn"], {}).get("kana", "") if v1 else "", "caption": rk.get(v1["isbn"], {}).get("caption", "") if v1 else ""}
         if miss_fields:
             lacking.append({**rec, "lacking": miss_fields})
         else:
@@ -164,7 +164,7 @@ def stage_plan():
             fo.write(json.dumps({"key": x["key"], "title": x["title"], "kana": x["kana"],
                                  "rakuten_kana": x["rakuten_kana"], "creators": x["creators"],
                                  "publisher": x["publisher"], "series_label": x["series_label"],
-                                 "n_vols": len(x["vols"]),
+                                 "n_vols": len(x["vols"]), "caption": str(x.get("caption",""))[:300],
                                  "TODO": {"is_manga": True, "slug": "", "genres": [], "catch": "", "synopsis": "", "demographic": ""}},
                                 ensure_ascii=False) + "\n")
     print(f"掲載可(AI worksheet待ち): {len(publishable)} / 欠落表: {len(lacking)}")
@@ -208,16 +208,24 @@ def stage_emit():
             errs.append("synopsis無")
         if errs:
             skipped.append((x["title"], errs)); continue
+        # ★NDL書誌規約の掃除: 「題 = 並記英題」→分離してalt.enへ / 末尾ピリオド除去
+        raw_t = str(x["title"]).strip()
+        alt_en = None
+        m2 = re.match(r"^(.*?)\s*=\s*([^=]+)$", raw_t)
+        if m2 and re.search(r"[A-Za-z]", m2.group(2)) and not re.search(r"[ぁ-んァ-ヶ一-龯]", m2.group(2)):
+            raw_t, alt_en = m2.group(1).strip(), m2.group(2).strip().rstrip(".")
+        raw_t = re.sub(r"[.．]$", "", raw_t).strip()
         y0 = re.search(r"(19|20)\d{2}", str(x["vols"][0].get("date", ""))) or re.search(r"(19|20)\d{2}", YEAR)
         year = int(y0.group()) if y0 else int(YEAR)
-        page = {"slug": slug, "title": x["title"], "title_kana": re.sub(r"[\s　]+", "", x["kana"]),
+        page = {"slug": slug, "title": raw_t, "title_kana": re.sub(r"[\s　]+", "", x["kana"]),
                 "title_romaji": slug.replace("-", " "),
-                "year_started": year, "year_ended": year, "status": "completed",
+                "year_started": year, "year_ended": None if year >= 2025 else year, "status": "ongoing" if year >= 2025 else "completed",
                 "authors": [{"name": c, "role": "writer_artist"} for c in x["creators"][:3]],
                 "publisher": "(unknown)", "magazine": None,
                 "demographic": t["demographic"], "genres": gs, "genres_provisional": True,
                 "synopsis": t.get("synopsis", ""), "catch": t.get("catch", ""),
                 "anime_adapted": False,
+                "alternative_titles": ({"en": alt_en} if alt_en else None),
                 "editions": [{"type": "standard", "label": "通常版", "publisher": x["publisher"], "imprint": x["series_label"],
                               "volumes": [{"number": v["n"], "asin": None, "isbn13": v["isbn"],
                                            "cover_url": v.get("cover"),
