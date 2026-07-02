@@ -185,3 +185,10 @@ seed投入後、`python scripts/_promote-bulk-v2.py`(フル~90分 or 影響slug�
 - 手順: K3候補174巻(41作)収集→**候補ISBNを全66,758頁でレンダリング判定**→未描画43巻(13作)=安全fill適用/描画済み116巻=真のmerge案件(`docs/production-diagnostics/k3-rendered-merge-worklist.tsv`)。
 - 適用結果: 巻抜け399→**390**(9作close: HOTEL/湘南爆走族/どうぶつの森/艦これ4コマ/魔法科2018/エルハザード等)。残4作(ちび本当/蜘蛛/コナン特別編/マリオくん)は別gap併存のtangled。
 - ★恒久教訓: 種2存在チェックは**「存在するか」でなく「どの頁に描画されているか」**まで見る。孤立クラスタ(qid同一の表記違い等)は宝の山。
+
+
+## 2026-07-02 表記split統合BATCH-1(慎重) = 鉄壁7ペア
+- ★merge116巻の証拠表(`docs/production-diagnostics/merge116-evidence.tsv`)→31ペア→**確証(同題正規化一致+同著者+相補/subset構造)の7ペアのみ**統合: BARレモン・ハート(大小文字)/B'T X(カナlatin・1-16完全相補)/遙かなる時空(異体字遙遥・1-17)/遊戯王5D's(1-9完全相補)/BASTARD!!/Fate strange Fake/どうやら私の(ルビ差・1-13)。series-merge+page-dedupセット。
+- ★skip判断: NHKその時(巻ごと著者違い=アンソロ型)/robotics-notes(**別作画の別コミカライズ**=分離が正)/ビックリマン(著者不一致)/金瓶梅24冊(別シリーズ)/X-MEN群(外国版問題)/JOKER REBOOT・スカイハイ新章(続編別作)。
+- ★機構の学び: series-merge追記時「既存entryにキー有→丸ごとskip」は粗い→**既存entryのmerge_keysを拡張**する(B'T X 13-15が一時未合流→是正)。page-dedupとseries-mergeはセットで(dedupだけだと巻が失われる)。
+- 残merge worklist=k3-rendered-merge-worklist.tsvの残(かりあげクン改題/グラゼニ本編split/暴君初夜編/殺し屋1断片等=per-case)。
