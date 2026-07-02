@@ -178,3 +178,10 @@ seed投入後、`python scripts/_promote-bulk-v2.py`(フル~90分 or 影響slug�
 - 適用=9作29巻(K1+K4のみ・全close)。**skip判断**: magia v5(再追加=gaiden頁との重複再発) / chobits v2,3(日付逆行+別社=版混在)。
 - ★preview 416→403=本番と完全一致(stale4頁=内部slug名の取り残し掃除+9作close)。
 - ★安全な自動fixは真に尽きた。残403の構成: K3 under-merge165巻(mergeで直る=要外部確証per-case) / 候補無し(pre-ISBN/no-data) / per-case worklist(同題split merge・種2ネイティブ重複7・tangle群)。次はworklist=`docs/production-diagnostics/seed4-percase-worklist.tsv`のper-case。
+
+
+## 2026-07-02 K3再分類=「簡単そうなのが埋まらない」謎の解明(ユーザ指摘が契機)
+- ★**謎の正体=私のguardの粒度が粗すぎた**: 「候補ISBNが種2に存在=一律skip(under-merge危険)」としていたが、真の危険条件は**相手クラスタが本番で描画されている場合だけ**(=fillすると2頁重複)。相手が**未描画の孤立クラスタ**(HOTEL型=表記split等)なら重複リスクゼロで安全にfillできる。
+- 手順: K3候補174巻(41作)収集→**候補ISBNを全66,758頁でレンダリング判定**→未描画43巻(13作)=安全fill適用/描画済み116巻=真のmerge案件(`docs/production-diagnostics/k3-rendered-merge-worklist.tsv`)。
+- 適用結果: 巻抜け399→**390**(9作close: HOTEL/湘南爆走族/どうぶつの森/艦これ4コマ/魔法科2018/エルハザード等)。残4作(ちび本当/蜘蛛/コナン特別編/マリオくん)は別gap併存のtangled。
+- ★恒久教訓: 種2存在チェックは**「存在するか」でなく「どの頁に描画されているか」**まで見る。孤立クラスタ(qid同一の表記違い等)は宝の山。
