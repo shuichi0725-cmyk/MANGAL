@@ -21,7 +21,11 @@ magazine: weekly-shonen-jump
 demographic: shounen
 genres:
 - action
-synopsis: ''
+- adventure
+- comedy
+- drama
+- sci-fi
+synopsis: サテライトの街を駆け抜ける高速ターボデュエル。不動遊星と相棒セクトは、都市伝説の体現者スケルトン・ナイトと対峙する。そして新都(ニュードミノ)シティの支配者ジャック・アトラスの企みとは。アクション。
 anime_adapted: true
 alternative_titles:
   en: Yu-Gi-Oh! 5D's
@@ -41,6 +45,36 @@ editions:
     isbn13: '9784088701721'
     cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/1721/9784088701721.jpg?_ex=200x200
     release_date: '2010-12-31'
+  - number: 3
+    asin: null
+    isbn13: '9784088703237'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/3237/9784088703237.jpg?_ex=200x200
+    release_date: 2011-09
+  - number: 4
+    asin: null
+    isbn13: '9784088704388'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/4388/9784088704388.jpg?_ex=200x200
+    release_date: '2012-06-09'
+  - number: 5
+    asin: null
+    isbn13: '9784088705644'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/5644/9784088705644.jpg?_ex=200x200
+    release_date: '2013-01-09'
+  - number: 6
+    asin: null
+    isbn13: '9784088707938'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/7938/9784088707938.jpg?_ex=200x200
+    release_date: '2013-08-07'
+  - number: 7
+    asin: null
+    isbn13: '9784088800394'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0394/9784088800394.jpg?_ex=200x200
+    release_date: '2014-03-09'
+  - number: 8
+    asin: null
+    isbn13: '9784088802053'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/2053/9784088802053.jpg?_ex=200x200
+    release_date: '2014-10-08'
   - number: 9
     asin: null
     isbn13: '9784088803432'
@@ -48,4 +82,21 @@ editions:
     release_date: '2015-06-09'
 publishers:
 - shueisha
-genres_rakuten: true
+anilist_id: 45372
+synonyms:
+- Yu-Gi-Oh 5D's
+genres_anilist:
+- Action
+- Adventure
+- Comedy
+- Drama
+- Sci-Fi
+tags:
+- name: Card Battle
+  category: Theme-Game-Card & Board Game
+  rank: 60
+- name: Shounen
+  category: Demographic
+  rank: 50
+popularity: 1600
+score: 64
