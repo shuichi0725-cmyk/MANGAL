@@ -54,3 +54,12 @@ distill-{adult,drop,integrate-override-,fill-,enrich-,author-supplement-,genre-a
 
 ## 確認方法(公開せず)
 本番フル(69k・索引47MB)は重い→**確認は蒸留(.preview-data=698件・0.5MB)だけ**で速い。 ローカルは `MANGAL_DATA_DIR=.preview-data npm run dev`。 本番化は別途promote(未実施=preview止まり)。
+
+
+## 2026-07-02 後退蒸留ツール化(`scripts/_distill_backward.py`)
+- ★3段stage: **--discover**(NDL live=_ndl-discovery委譲・throttle中は回さない) / **--plan**(オフライン: 漫画性フィルタ→既存作A/新規作B仕分け→楽天キャッシュenrich→掲載ゲート→AI worksheet+欠落表) / **--emit**(worksheet検証→previewページ生成=テスト先行→被覆台帳記帳)。
+- **掲載ゲート**(ユーザ裁定): 必須メタ完備(題/ヨミ/著者/年/genre/status/demographic)+**楽天書影v1あり**=掲載。不足=欠落表(何が足りないか明記)。fail-closed。
+- **漫画性フィルタ**=`_promote_drop_patterns.py`(共有モジュール: CLAUDE.mdのdropパターン+NDL FP型=研究書/』論/図録/画集/インタビュアー役割/絵と文)。+worksheet側is_manga=false最終ゲートの**二重化**。
+- 2024smoke実測: discovery1400行→フィルタ後1333→既存作の巻330(A=種4候補・別route)/新規作964→**掲載可250**(AI worksheet待ち)/欠落711(巻不連続=全巻回収要530・v1書影無591・題不一致等)。
+- ★worksheet形式=.cache/backward/<year>/ai-todo.jsonl {TODO:{is_manga,slug,genres,catch,synopsis,demographic}}。emit検証=closed vocab/slug衝突/demographic enum。
+- 残設計: A route(既存作の巻)→種4ガード付き投入 / 巻不連続→NDL title+creator全巻回収(live) / 楽天miss→live補完 / 日次蒸留=同コアでcursor運転(未実装)。
