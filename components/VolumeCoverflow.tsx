@@ -20,11 +20,20 @@ function fmtIsbn(v?: string | number | null): string {
   if (s.length === 13) return `${s.slice(0, 3)}-${s.slice(3, 4)}-${s.slice(4, 6)}-${s.slice(6, 12)}-${s.slice(12)}`;
   return s;
 }
+// 楽天アフィリエイトリンク化 (= 収益の根幹。 build時に NEXT_PUBLIC_RAKUTEN_AFFILIATE_ID が inline される。
+//   未設定なら素リンクに fallback = 開発/preview でも壊れない)
+const RAKUTEN_AFF = process.env.NEXT_PUBLIC_RAKUTEN_AFFILIATE_ID || "";
+function rakutenAff(url: string): string {
+  if (!RAKUTEN_AFF) return url;
+  const e = encodeURIComponent(url);
+  return `https://hb.afl.rakuten.co.jp/hgc/${RAKUTEN_AFF}/?pc=${e}&m=${e}`;
+}
+
 function searchLinks(title: string, v: Volume) {
   const isbn = v.isbn13 ? String(v.isbn13) : "";
   const q = encodeURIComponent(isbn || `${title} ${v.number}`);
   return {
-    rakuten: `https://books.rakuten.co.jp/search?sitem=${encodeURIComponent(isbn || `${title} ${v.number}`)}`,
+    rakuten: rakutenAff(`https://books.rakuten.co.jp/search?sitem=${encodeURIComponent(isbn || `${title} ${v.number}`)}`),
     yahoo: `https://shopping.yahoo.co.jp/search?p=${q}`,
     amazon: `https://www.amazon.co.jp/s?k=${q}`,
   };
@@ -223,7 +232,7 @@ export default function VolumeCoverflow({
               const q = vr.isbn13 ? String(vr.isbn13) : `${title} ${cur.number}`;
               const e = encodeURIComponent(q);
               const vl = {
-                rakuten: `https://books.rakuten.co.jp/search?sitem=${e}`,
+                rakuten: rakutenAff(`https://books.rakuten.co.jp/search?sitem=${e}`),
                 yahoo: `https://shopping.yahoo.co.jp/search?p=${e}`,
                 amazon: `https://www.amazon.co.jp/s?k=${e}`,
               };
@@ -262,8 +271,11 @@ export default function VolumeCoverflow({
         </div>
       )}
 
-      {/* カート(据え置き) */}
-      <div className="mt-3 grid grid-cols-3 gap-2">
+      {/* カート(据え置き) ★[PR]表記=景表法ステマ規制対応(アフィリエイトリンクを含むことの明示) */}
+      <div className="mt-3 flex items-center justify-between">
+        <span className="text-[10px] text-ink/40">[PR] 店舗リンクにはアフィリエイト広告を含みます</span>
+      </div>
+      <div className="mt-1 grid grid-cols-3 gap-2">
         <a href={links.rakuten} target="_blank" rel="noopener noreferrer"
            className="spring-press rounded-full bg-[#bf0000] py-2 text-center text-sm font-bold text-white">楽天</a>
         <a href={links.yahoo} target="_blank" rel="noopener noreferrer"
