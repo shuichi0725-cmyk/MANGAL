@@ -22,12 +22,12 @@ description: 日次蒸留 — 前回以降のNDL新着漫画を取得し、掲�
 2. `python scripts/_distill_daily.py --plan`
    - オフライン。**日次レポート**(新規掲載可 N / 新規欠落 M / 累計)が出る。カーソル自動更新。
 3. 新規掲載可が有れば: `.cache/backward/<年>/ai-todo.jsonl` の該当 TODO を記入
-   - `is_manga`(非漫画なら false) / `slug`(規則: ヘボン式・ハイフン区切り・勝手命名禁止=NDL/楽天ヨミ基点) / `genres`(closed vocab) / `demographic`(shounen/shoujo/seinen/josei/kids/general) / `catch` / `synopsis`(60-120字・ネタバレ無し) / `tags`(要素タグ=AniList流英語名1-3個・caption基点・**確信あるもののみ**、無理に付けない)
+   - `is_manga`(非漫画なら false) / `slug`(規則: ヘボン式・ハイフン区切り・勝手命名禁止=NDL/楽天ヨミ基点) / `genres`(closed vocab) / `demographic`(shounen/shoujo/seinen/josei/kodomo/other) / `catch` / `synopsis`(60-120字・ネタバレ無し) / `tags`(要素タグ=AniList流英語名1-3個・caption基点・**確信あるもののみ**、無理に付けない)
    - ★Layer1(自動): 楽天booksGenreIdが demographic裏取り(001001001=少年/002=少女/003=青年/004=レディース)+001021=BL自動付与。demographic空ならL1が埋める。
    - ★Layer2の参考rubric: `.cache/genre-rakuten/genre-cues.json`(学習済み特徴語)。
 4. `python scripts/_distill_backward.py <年> --emit`
    - 検証(closed vocab/slug衝突/demographic enum)を通った作品だけ **preview生成(テスト先行)**。
-5. preview索引更新 + push → **ユーザ確認 → GO後に本番化**(種2へINSERT-only=`--commit`ステージ※実装待ち)。
+5. ★masterを変えたら preview側にも同期(`cp data/publishers.yml .preview-data/publishers.yml` 等=preview buildは.preview-data/のmasterを読む)。preview索引更新 + push → **ユーザ確認 → GO後に本番化**(種2へINSERT-only=`--commit`ステージ※実装待ち)。
 6. 報告: 掲載N件(題一覧) / 欠落M件(何が足りないか) / カーソル日付。
 
 ## 成功判定(機械照合)

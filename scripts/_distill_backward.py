@@ -242,7 +242,7 @@ def stage_emit():
             gs = list(gs) + ["bl"]
         if not gs or any(g not in GENRES for g in gs):
             errs.append(f"genre不正{gs}")
-        if not str(t.get("demographic", "")) in ("shounen", "shoujo", "seinen", "josei", "kids", "general"):
+        if not str(t.get("demographic", "")) in ("shounen", "shoujo", "seinen", "josei", "kodomo", "other"):
             errs.append("demographic不正")
         if not t.get("synopsis"):
             errs.append("synopsis無")
