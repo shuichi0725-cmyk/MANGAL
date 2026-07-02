@@ -170,3 +170,11 @@ seed投入後、`python scripts/_promote-bulk-v2.py`(フル~90分 or 影響slug�
 - 是正: **A=junk断片頁10drop**(マッドブル34断片=題が数字だけの頁『5』『10』等が本番に実在→non-manga-drop) / **B=同一作split4頁page-dedup**(I'mナム/恋ヶ窪無印/すてきな主婦/絶対したいH=superset安全のみ) / **C=誤fill37冊種4除去**(グラゼニ別作編11/暴君tangle13/あつ森3/就活女神2等) / **D=complex10件per-case worklist**。
 - 結果: 実重複52→**7**(全て種2ネイティブ重複=同ISBNが種2の2クラスタに二重: clamp-premium/xxxholic・合格祈願/恋する暴君・グラゼニパ/東京4冊・お初/天狗風)。gap 401→412(+11=誤fill除去の正直な再開・帰属は別作)。
 - ★worklist=`docs/production-diagnostics/seed4-percase-worklist.tsv`(48+11件)。残7重複はここのper-case(NDLで巻帰属確定→volume-exclude/merge)。
+
+
+## 2026-07-02 全件pass(人気順なし・全部) = 412→403・preview完全一致
+- ★408作×1,777欠け巻をゼロベース再走査(`.cache/_volgap_full_pass.py`→`docs/production-diagnostics/volgap-fullpass.tsv`)。
+- verdict: **K1同クラスタ未表示29巻**(kikaider型=種2の自クラスタにISBN有るが頁未表示→種4で表示修復。トリニティセブンv4-14/薬屋シノ版v7-13/おそ松くんdeluxe3-5等) / K2 junk断片9(→**全skip**=同題splitクラスタを誤検出・drop すると実頁を殺す) / K4新規18(暴君初夜編v13-16=中間欠け実在等) / K3 under-merge165(merge領域=skip) / 候補無し1,556。
+- 適用=9作29巻(K1+K4のみ・全close)。**skip判断**: magia v5(再追加=gaiden頁との重複再発) / chobits v2,3(日付逆行+別社=版混在)。
+- ★preview 416→403=本番と完全一致(stale4頁=内部slug名の取り残し掃除+9作close)。
+- ★安全な自動fixは真に尽きた。残403の構成: K3 under-merge165巻(mergeで直る=要外部確証per-case) / 候補無し(pre-ISBN/no-data) / per-case worklist(同題split merge・種2ネイティブ重複7・tangle群)。次はworklist=`docs/production-diagnostics/seed4-percase-worklist.tsv`のper-case。
