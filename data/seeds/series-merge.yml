@@ -1995,7 +1995,8 @@
 - merge_keys:
   - qid:Q725387|name:B'T X-ビート・エックス-
   - qid:Q725387|name:B'TX
-  note: B'TX=B'T Xの表記違い(同一作)
+  - qid:Q725387|name:ビート・エックス
+  note: B'TX=B'T Xの表記違い(同一作) | B'T X表記split全キー統合(BATCH-1追記)
 - merge_keys:
   - qid:Q11569524|name:Go da gun
   - qid:Q11569524|name:GO DA GUN〔銃〕
