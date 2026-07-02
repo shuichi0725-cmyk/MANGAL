@@ -29,3 +29,10 @@ metadata:
 **★状態**: 監査完了→朝レポート提出済。 ★ユーザGOサインで着手(最優先=slug de-collapse)。 [[merge-needs-external-proof]]の成果(merge約250+drop)適用後の状態で監査。
 
 関連: [[furigana_ndl_audit]](フリガナは既に448 NDL補正・残差低)、 [[collision_slug_investigation]]、 [[merge_needs_external_proof]]、 [[pending_slug_generator]]。
+
+
+## 2026-07-02 slug/フリガナ総点検表(ユーザ発注=本番前洗い出し)
+- ★`docs/production-diagnostics/slug-kana-audit.tsv` = 全66,751頁×(題/現kana/slug/楽天titleKana/種2MADBkana)+flag+tier。生成=`.cache/_ska_flags3.py`(pages/rakuten-kanaは.cache/ska-*.jsonにキャッシュ済=再実行高速)。
+- flag実績: **NOHYPHEN 501+LOWHYPHEN 85**(楽天分かち書き2語以上で検証済=ハイフン規則違反・機械修正可能な本命) / KANA_DIFF_RAKUTEN tier1 218 / KANA_DIFF_MADB tier1 57(=フリガナ疑義レビュー) / SLUG_TOKEN_MISMATCH tier1 3,262(hana-no-deka型=辞書誤読を含むが、**外来語英綴りルール正解slugのFPが大量混在**=kanaから英綴りを検証できない構造的限界。目視or英語辞書照合が要る)。
+- NDLフリガナ列は断念(66k live=22h・キャッシュにヨミ列無し)→楽天+MADBの2ソース照合で代替、疑義のみNDL live方針。
+- ★次の一手: NOHYPHEN/LOWHYPHEN 586件に「楽天分かち書き→提案slug」を生成してレビューTSV化→承認後に一括rename(slug-overrides+alias機構は整備済)。
