@@ -1,8 +1,3 @@
-# ★2形式が混在(歴史的経緯・両方保持):
-#  1) flat "old: new" (トップ直下) = 過去のslug-fix適用記録(2026-06 slug-fix-834等)。
-#     ★promoteは読まない(inert)。歴史的applyスクリプトの参照用=削除禁止。
-#  2) overrides: {old: {slug: new, reason, at}} = ★現行有効。promote _slug_override が読むのはこちらだけ。
-# 新しいslug変更は必ず 2) overrides: に書く。
 100-mandoru-naito: 100-mandoru-night
 2-ma-no-hito-all-2shoku-karaaban: 2-ma-no-hito-all-2shoku-colorban
 7-nwairudo7: 7-nwild7
@@ -1023,6 +1018,10 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: hamuhamu-zukushi
+  hana-no-deka:
+    at: '2026-07-02'
+    reason: 'slug生成の辞書誤変換: 慶次(けいじ)→刑事(デカ)。花のデカという作品は存在しない(種2確認)。正=hana-no-keiji(空き確認済)'
+    slug: hana-no-keiji
   hananokikuchiyo:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
