@@ -1,5 +1,7 @@
 import Link from "next/link";
 import LikeButtonMock from "@/components/LikeButtonMock";
+import SansedaiDaily from "@/components/SansedaiDaily";
+import FeaturedDaily from "@/components/FeaturedDaily";
 import DestinyPickMock from "@/components/DestinyPickMock";
 import MarqueeTitle from "@/components/MarqueeTitle";
 import CalendarView from "@/components/CalendarView";
@@ -34,65 +36,6 @@ export default function Design11() {
     oldest && `最も古い収録作は『${oldest.title}』(${oldest.year_started}年〜)。`,
   ].filter(Boolean) as string[];
   const todayTrivia = trivia[daySalt % trivia.length];
-
-  // ★三世代 v2(ユーザ設計 2026-06-12): ライター名簿=三世代×各2人(増員可・3の倍数)。
-  //   毎日「各世代から1人ずつ」の3人が掲載。載り方が日替わり(0=3人一緒/1=ソロ+ペア/2=3ヶ所ソロ)。
-  //   ★どのカードを押しても過去ログ(/sansedai-archive)へ。
-  const WRITERS = [
-    { gen: 0, persona: "ミナト(10-20代)", slug: "kimetsu-no-yaiba", copy: "今さら?って言われても推す。1巻の絶望から全部が伏線🔥 週末で完走できるよ", likes: 128 },
-    { gen: 0, persona: "リコ(10-20代・美大生)", slug: "rozen-maiden", copy: "ドレスの皺一本まで「設定」じゃなくて「執念」。画集レベルの線を毎話やってるの、冷静に考えてやばい。", likes: 84 },
-    { gen: 1, persona: "サオリ(30-40代)", slug: "slam-dunk", copy: "「左手はそえるだけ」を超える最終話を、私はまだ知りません。青春の総量を描いた漫画です。", likes: 211 },
-    { gen: 1, persona: "タケル(30-40代・元書店員)", slug: "berserk", copy: "蝕の夜を越えて、それでも生きる方を選ぶ。店頭で何百回すすめたか分からない一作です。", likes: 188 },
-    { gen: 2, persona: "圭三(50代以上・古書店主)", slug: "hokuto-no-ken", copy: "昭和五十八年、ジャンプにこれが載った日のことを覚えております。北斗は「強さ」ではなく「哀しみ」の漫画です。", likes: 96 },
-    { gen: 2, persona: "静江(50代以上・喫茶店ママ)", slug: "urusei-yatsura", copy: "ラムちゃんの「ダーリン」で青春を過ごした身としては、何度読み返しても店の仕込みが止まるのよね。", likes: 102 },
-  ];
-  const sansedaiToday = [0, 1, 2].map((g) => {
-    const pool = WRITERS.filter((w) => w.gen === g);
-    return pool[(daySalt + g) % pool.length];
-  });
-  const sansedaiMode = daySalt % 3; // 0=3人一緒 / 1=ソロ+ペア / 2=3ヶ所ソロ
-  const soloIdx = daySalt % 3;
-  // slot A(ことばカード後)/ B(数字トリビア後)/ C(特集後) への振り分け
-  const slotA = sansedaiMode === 0 ? [] : sansedaiMode === 1 ? [sansedaiToday[soloIdx]] : [sansedaiToday[0]];
-  const slotB = sansedaiMode === 0 ? sansedaiToday : sansedaiMode === 2 ? [sansedaiToday[1]] : [];
-  const slotC = sansedaiMode === 1 ? sansedaiToday.filter((_, i) => i !== soloIdx) : sansedaiMode === 2 ? [sansedaiToday[2]] : [];
-
-  const SansedaiSlot = ({ group }: { group: typeof WRITERS }) => {
-    if (group.length === 0) return null;
-    const label = group.length === 3 ? "今日は3人そろい踏み" : group.length === 2 ? "ペアでお届け" : "の推し";
-    return (
-      <section className="mt-4 px-4">
-        <Tile className="p-3.5">
-          <div className="flex items-baseline justify-between">
-            <h2 className="text-[14px] font-extrabold">
-              👥 三世代、今日の一冊
-              <span className="ml-1 text-[10px] font-semibold text-ink/45">
-                {group.length === 1 ? `${group[0].persona.split("(")[0]}${label}` : label}
-              </span>
-            </h2>
-            <span className="text-[11px] font-semibold text-[var(--color-accent)]">過去ログ →</span>
-          </div>
-          <div className="mt-2.5 space-y-2.5">
-            {group.map((p) => {
-              const m = manga.find((x) => x.slug === p.slug);
-              if (!m) return null;
-              return (
-                <Link key={p.persona} href="/sansedai-archive" className={`spring-press flex gap-3 ${group.length > 1 ? "rounded-lg border border-[var(--color-line)]/70 bg-[var(--color-bg)]/50 p-2.5" : "mt-1"}`}>
-                  <div className="w-14 shrink-0 self-start"><Cover m={m} sizes="56px" /></div>
-                  <div className="min-w-0">
-                    <p className="text-[10px] font-bold text-[var(--color-accent)]">{p.persona}</p>
-                    <p className="text-[13px] font-bold">{m.title}</p>
-                    <p className={`mt-0.5 text-[12px] leading-relaxed text-ink/75 ${group.length === 1 ? "" : "line-clamp-2"}`}>{p.copy}</p>
-                    <div className="mt-1"><LikeButtonMock id={`d11:${p.slug}`} base={p.likes} /></div>
-                  </div>
-                </Link>
-              );
-            })}
-          </div>
-        </Tile>
-      </section>
-    );
-  };
 
   const Tile = ({ children, className = "" }: { children: React.ReactNode; className?: string }) => (
     <div className={`rounded-xl border border-[var(--color-line)] bg-[var(--color-surface)] shadow-sm ${className}`}>{children}</div>
@@ -158,7 +101,7 @@ export default function Design11() {
       )}
 
       {/* 2.5【三世代 slot A】ソロ or 散開時の1人目 */}
-      <SansedaiSlot group={slotA} />
+      <FeaturedDaily />
 
       {/* 3.【中】新刊棚(★題=1行オートスクロール+下に作者。はみ出す題だけ動く) */}
       <section className="mt-4 px-4">
@@ -205,7 +148,7 @@ export default function Design11() {
       )}
 
       {/* 5.【三世代 slot B】そろい踏み or 散開時の2人目 */}
-      <SansedaiSlot group={slotB} />
+      <SansedaiDaily />
 
       {/* 6.【小・新】ジャンルルーレット */}
       <section className="mt-4 px-4">
@@ -253,7 +196,6 @@ export default function Design11() {
       </section>
 
       {/* 7.5【三世代 slot C】ペア or 散開時の3人目 */}
-      <SansedaiSlot group={slotC} />
 
       {/* 8.【小】運命の一冊(★ガチャ化: ↻で再抽選・確率演出。候補プール埋込=通信ゼロ) */}
       <section className="mt-4 px-4">

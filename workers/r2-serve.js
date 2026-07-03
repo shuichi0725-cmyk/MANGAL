@@ -54,6 +54,30 @@ function pathToKey(pathname) {
 export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
+
+    // ★いいねAPI(匿名カウンタ・PIIゼロ。 KV=LIKES)。 静的配信より前・キャッシュしない。
+    if (url.pathname === "/api/like" && env.LIKES) {
+      if (request.method === "GET") {
+        const id = url.searchParams.get("id") || "";
+        const v = id ? parseInt((await env.LIKES.get(`like:${id}`)) || "0", 10) : 0;
+        return new Response(JSON.stringify({ id, count: v }), {
+          headers: { "content-type": "application/json", "cache-control": "no-store" },
+        });
+      }
+      if (request.method === "POST") {
+        let id = "";
+        try { id = String((await request.json()).id || ""); } catch {}
+        if (!id || id.length > 80) return new Response("bad request", { status: 400 });
+        const key = `like:${id}`;
+        const v = parseInt((await env.LIKES.get(key)) || "0", 10) + 1;
+        await env.LIKES.put(key, String(v));
+        return new Response(JSON.stringify({ id, count: v }), {
+          headers: { "content-type": "application/json", "cache-control": "no-store" },
+        });
+      }
+      return new Response("Method Not Allowed", { status: 405 });
+    }
+
     if (request.method !== "GET" && request.method !== "HEAD") {
       return new Response("Method Not Allowed", { status: 405 });
     }

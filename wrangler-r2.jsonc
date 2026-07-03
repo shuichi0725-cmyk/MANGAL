@@ -10,6 +10,9 @@
   "r2_buckets": [
     { "binding": "BUCKET", "bucket_name": "mangal-site" }
   ],
+  "kv_namespaces": [
+    { "binding": "LIKES", "id": "751056d3bdc34407a93da3403b4591bd" }
+  ],
   // ★任意: alias 301 と adult_us geo 用 KV(使うなら id を埋める)
   // "kv_namespaces": [
   //   { "binding": "REDIRECTS", "id": "<kv-id>" },
