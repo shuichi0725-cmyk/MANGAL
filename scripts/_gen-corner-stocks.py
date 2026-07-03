@@ -9,9 +9,17 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 idx = json.load(open(os.path.join(ROOT, "data", "manga-list-index.json"), encoding="utf-8"))
 f = idx["f"]; si = f.index("slug"); ci = f.index("cover")
+RK_PRE = "https://thumbnail.image.rakuten.co.jp/@0_mall/"
+RK_SUF = "?_ex=200x200"
+def full_cover(c):
+    # ★索引coverはslim形式(可変部のみ)。lib/coverSlim.tsのfullCoverと同一の展開。
+    if not c:
+        return None
+    return c if str(c).startswith("http") else RK_PRE + str(c) + RK_SUF
+
 cover = {}
 for r in idx["d"]:
-    cover[r[si]] = r[ci]
+    cover[r[si]] = full_cover(r[ci])
 
 os.makedirs(os.path.join(ROOT, "public", "data"), exist_ok=True)
 

@@ -70,30 +70,29 @@ export default function SansedaiDaily() {
         </div>
         <div className="mt-2.5 space-y-2.5">
           {picks.map((p) => (
-            <Link
-              key={p.gen}
-              href={`/manga/${p.slug}`}
-              className="spring-press flex gap-3 rounded-lg border border-[var(--color-line)] bg-[var(--color-surface-2)]/40 p-2.5"
-            >
-              <div
-                className="relative shrink-0 overflow-hidden rounded-md border border-[var(--color-line)] bg-[var(--color-surface-2)]"
-                style={{ width: 52, aspectRatio: "2 / 3" }}
-              >
-                {p.cover ? (
-                  <CoverImage src={p.cover} alt={p.title} sizes="52px" />
-                ) : (
-                  <span className="flex h-full w-full items-center justify-center text-[9px] text-ink/40">no image</span>
-                )}
-              </div>
-              <div className="min-w-0 flex-1">
-                <p className="text-[10px] font-bold text-[var(--color-accent)]">{p.persona}</p>
-                <p className="truncate text-[13px] font-bold">{p.title}</p>
-                <p className="mt-0.5 line-clamp-3 text-[11px] leading-relaxed text-ink/70">{p.comment}</p>
-                <div className="mt-1.5">
-                  <LikeButton id={`sansedai:${date}:${p.gen}`} />
+            <div key={p.gen} className="rounded-lg border border-[var(--color-line)] bg-[var(--color-surface-2)]/40 p-2.5">
+              <Link href={`/manga/${p.slug}`} className="spring-press flex gap-3">
+                <div
+                  className="relative shrink-0 self-start overflow-hidden rounded-md border border-[var(--color-line)] bg-[var(--color-surface-2)]"
+                  style={{ width: 52, aspectRatio: "2 / 3" }}
+                >
+                  {p.cover ? (
+                    <CoverImage src={p.cover} alt={p.title} sizes="52px" />
+                  ) : (
+                    <span className="flex h-full w-full items-center justify-center text-[9px] text-ink/40">no image</span>
+                  )}
                 </div>
+                <div className="min-w-0 flex-1">
+                  <p className="text-[10px] font-bold text-[var(--color-accent)]">{p.persona}</p>
+                  <p className="truncate text-[13px] font-bold">{p.title}</p>
+                  <p className="mt-0.5 line-clamp-3 text-[11px] leading-relaxed text-ink/70">{p.comment}</p>
+                </div>
+              </Link>
+              {/* いいね=カード欄外(フッター行・右寄せ)。flex内に置くと書影が伸縮するため */}
+              <div className="mt-1.5 flex justify-end">
+                <LikeButton id={`sansedai:${date}:${p.gen}`} />
               </div>
-            </Link>
+            </div>
           ))}
         </div>
       </div>

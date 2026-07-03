@@ -24,30 +24,29 @@ export default function ArchiveClient() {
             </h2>
             <div className="mt-2 space-y-2.5">
               {picks.map((p) => (
-                <Link
-                  key={`${off}-${p.gen}`}
-                  href={`/manga/${p.slug}`}
-                  className="spring-press flex gap-3 rounded-xl border border-[var(--color-line)] bg-[var(--color-surface)] p-3 shadow-sm"
-                >
-                  <div
-                    className="relative shrink-0 overflow-hidden rounded-md border border-[var(--color-line)] bg-[var(--color-surface-2)]"
-                    style={{ width: 56, aspectRatio: "2 / 3" }}
-                  >
-                    {p.cover ? (
-                      <CoverImage src={p.cover} alt={p.title} sizes="56px" />
-                    ) : (
-                      <span className="flex h-full w-full items-center justify-center text-[9px] text-ink/40">no image</span>
-                    )}
-                  </div>
-                  <div className="min-w-0 flex-1">
-                    <p className="text-[10px] font-bold text-[var(--color-accent)]">{p.persona}</p>
-                    <p className="truncate text-[13.5px] font-bold">{p.title}</p>
-                    <p className="mt-0.5 line-clamp-3 text-[11px] leading-relaxed text-ink/70">{p.comment}</p>
-                    <div className="mt-1.5">
-                      <LikeButton id={`sansedai:${date}:${p.gen}`} />
+                <div key={`${off}-${p.gen}`} className="rounded-xl border border-[var(--color-line)] bg-[var(--color-surface)] p-3 shadow-sm">
+                  <Link href={`/manga/${p.slug}`} className="spring-press flex gap-3">
+                    <div
+                      className="relative shrink-0 self-start overflow-hidden rounded-md border border-[var(--color-line)] bg-[var(--color-surface-2)]"
+                      style={{ width: 56, aspectRatio: "2 / 3" }}
+                    >
+                      {p.cover ? (
+                        <CoverImage src={p.cover} alt={p.title} sizes="56px" />
+                      ) : (
+                        <span className="flex h-full w-full items-center justify-center text-[9px] text-ink/40">no image</span>
+                      )}
                     </div>
+                    <div className="min-w-0 flex-1">
+                      <p className="text-[10px] font-bold text-[var(--color-accent)]">{p.persona}</p>
+                      <p className="truncate text-[13.5px] font-bold">{p.title}</p>
+                      <p className="mt-0.5 line-clamp-3 text-[11px] leading-relaxed text-ink/70">{p.comment}</p>
+                    </div>
+                  </Link>
+                  {/* いいね=カード欄外(フッター行・右寄せ) */}
+                  <div className="mt-1.5 flex justify-end">
+                    <LikeButton id={`sansedai:${date}:${p.gen}`} />
                   </div>
-                </Link>
+                </div>
               ))}
             </div>
           </section>

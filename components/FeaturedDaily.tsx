@@ -32,7 +32,7 @@ export default function FeaturedDaily() {
         </div>
         <Link href={`/manga/${pick.slug}`} className="spring-press mt-2.5 flex gap-3">
           <div
-            className="relative shrink-0 overflow-hidden rounded-md border border-[var(--color-line)] bg-[var(--color-surface-2)]"
+            className="relative shrink-0 self-start overflow-hidden rounded-md border border-[var(--color-line)] bg-[var(--color-surface-2)]"
             style={{ width: 72, aspectRatio: "2 / 3" }}
           >
             {pick.cover ? (
@@ -45,11 +45,12 @@ export default function FeaturedDaily() {
             <p className="text-[14px] font-bold leading-snug">{pick.title}</p>
             {pick.author && <p className="text-[11px] text-ink/55">{pick.author}</p>}
             <p className="mt-1 line-clamp-4 text-[11.5px] leading-relaxed text-ink/75">{pick.blurb}</p>
-            <div className="mt-1.5">
-              <LikeButton id={`featured:${date}`} />
-            </div>
           </div>
         </Link>
+        {/* いいね=カード欄外(フッター行・右寄せ) */}
+        <div className="mt-1.5 flex justify-end">
+          <LikeButton id={`featured:${date}`} />
+        </div>
       </div>
     </section>
   );
