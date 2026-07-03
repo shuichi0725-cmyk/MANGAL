@@ -2001,6 +2001,9 @@ def clean_vol(v: dict) -> dict:
     # ★書影を promote 内で直接充填 (= 別 cover stage 廃止)。 既存値優先→seed fallback。
     o["cover_url"] = v.get("cover_url") or _cover_for(o["isbn13"])
     o["release_date"] = _norm_date(v.get("release_date"))  # ★schema形式に正規化(404防止)
+    if v.get("variants"):
+        # ★edition-override等が明示したvariants(特装/限定併存)を保持(2026-07-03。出版社跨ぎ特装=シャイナ・ダルク型はseedペア不可なのでoverride直書き)
+        o["variants"] = v["variants"]
     return o
 
 
