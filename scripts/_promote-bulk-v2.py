@@ -61,6 +61,42 @@ ART_BOOK_SEGMENTED_YML = ROOT / "data" / "seeds" / "art-book-furigana-segmented.
 # ★書影を promote 内で直接貼る (= 旧 _apply-covers-stage.py の 66k 再走を廃止=毎回-50分)。
 # covers.jsonl.gz (isbn13→cover_url) を lazy load し clean_vol で null cover を埋める。
 COVERS_GZ = ROOT / "data" / "seeds" / "covers.jsonl.gz"
+
+# ★特装版是正 seed(案B: 通常版を主に・特装はvariants併存)。 6ファイルを順に読み後勝ち。
+#   旧 _special_edition_fix_apply.py の直接パッチはフルpromoteで消えた(2026-07-03発覚)→promote内蔵で恒久化。
+_SPECIAL_FIX = None
+def _special_fix_map():
+    global _SPECIAL_FIX
+    if _SPECIAL_FIX is None:
+        _SPECIAL_FIX = {}
+        import yaml as _y
+        for name in ("special-edition-fix.yml", "special-edition-fix-b.yml", "special-edition-fix-extra.yml",
+                     "special-edition-fix-ndl.yml", "special-edition-fix-redo.yml", "special-edition-fix-redo2.yml"):
+            p = ROOT / "data" / "seeds" / name
+            if not p.exists():
+                continue
+            d = _y.safe_load(p.read_text(encoding="utf-8")) or {}
+            for c in (d.get("corrections") or []):
+                si = str(c.get("special_isbn") or "")
+                ni = str(c.get("normal_isbn") or "")
+                # ★出版社コード跨ぎペアは無視(臨場→王様ゲーム型の誤爆ガード 2026-07-03。seed側も除去済だが二重防御)
+                if len(si) == 13 and len(ni) == 13 and si[4:6] != ni[4:6]:
+                    continue
+                if si:
+                    _SPECIAL_FIX[si] = c
+    return _SPECIAL_FIX
+
+_SPECIAL_BY_NORMAL = None
+def _special_by_normal():
+    global _SPECIAL_BY_NORMAL
+    if _SPECIAL_BY_NORMAL is None:
+        _SPECIAL_BY_NORMAL = {}
+        for si, c in _special_fix_map().items():
+            ni = str(c.get("normal_isbn") or "")
+            if ni:
+                _SPECIAL_BY_NORMAL[ni] = c
+    return _SPECIAL_BY_NORMAL
+
 _COVERS = None
 def _cover_for(isbn13):
     global _COVERS
@@ -2772,6 +2808,33 @@ def main():
         if not new_yml.get("synopsis") and slug in synopsis_slug:
             new_yml["synopsis"] = synopsis_slug[slug]
             synopsis_pages += 1
+        # ★特装版是正 最終pass(standardのみ): special ISBN→通常版差替+variants併存(書影無し補正はskip=空タイル回避)
+        _sfm = _special_fix_map()
+        for _ce in (new_yml.get("editions") or []):
+            if _ce.get("type") != "standard":
+                continue
+            for _v in (_ce.get("volumes") or []):
+                _c = _sfm.get(str(_v.get("isbn13") or ""))
+                if not _c or not _c.get("normal_cover"):
+                    continue
+                _v["isbn13"] = _c["normal_isbn"]
+                _v["cover_url"] = _c["normal_cover"]
+                if _c.get("normal_date"):
+                    _v["release_date"] = _c["normal_date"]
+                _var = _c.get("variant") or {}
+                _v["variants"] = [{k: _var.get(k) for k in ("label", "isbn13", "cover_url", "price")}]
+        # ★通常版が既に主枠の巻にも特装variantを添付(2026-07-03拡張: 落語心中/ろこどる型)
+        _sbn = _special_by_normal()
+        for _ce in (new_yml.get("editions") or []):
+            if _ce.get("type") != "standard":
+                continue
+            for _v in (_ce.get("volumes") or []):
+                if _v.get("variants"):
+                    continue
+                _c = _sbn.get(str(_v.get("isbn13") or ""))
+                if _c and _c.get("variant"):
+                    _var = _c["variant"]
+                    _v["variants"] = [{k: _var.get(k) for k in ("label", "isbn13", "cover_url", "price")}]
         # ★書影 最終充填 (= 全edition操作後=edition-canonical/override/exclude/version の後。
         #   clean_vol充填が canonical再構築で消える件を確実に埋める。 旧 _apply-covers-stage 廃止)。
         for _ce in (new_yml.get("editions") or []):
