@@ -1,23 +1,23 @@
 slug: urusei-yatsura
 canonical_label: 少年サンデーコミックス
-source: wikipedia(刊行情報)+現ページ(ユーザ確定済み旧34巻)+楽天(新装/BOX) 2026-07-04
+source: 'wikipedia 34巻ISBN+発売年月日(権威・2026-07-04ユーザ指摘で汚染8巻を是正: v1/v3=劇場版オンリー・ユー混入 v4=アニメ関連 v5/v12=新装版混入)+楽天(新装/BOX)'
 publisher: 小学館
-volumes:
+volumes: &id001
 - number: 1
-  isbn13: '9784091208835'
-  release_date: 1983-03
+  isbn13: '9784091204417'
+  release_date: '1980-04-15'
 - number: 2
   isbn13: '9784091204424'
-  release_date: 1980-07
+  release_date: '1980-07-15'
 - number: 3
-  isbn13: '9784091208842'
-  release_date: 1983-04
+  isbn13: '9784091204431'
+  release_date: '1980-10-15'
 - number: 4
-  isbn13: '9784091218308'
-  release_date: '1985-01-15'
+  isbn13: '9784091204448'
+  release_date: '1981-01-15'
 - number: 5
-  isbn13: '9784091207203'
-  release_date: 2007-02
+  isbn13: '9784091204455'
+  release_date: '1981-03-15'
 - number: 6
   isbn13: '9784091204462'
   release_date: '1981-06-15'
@@ -37,8 +37,8 @@ volumes:
   isbn13: '9784091207418'
   release_date: '1982-06-15'
 - number: 12
-  isbn13: '9784091207593'
-  release_date: 2007-04
+  isbn13: '9784091207425'
+  release_date: '1982-09-15'
 - number: 13
   isbn13: '9784091207432'
   release_date: '1982-10-15'
@@ -56,10 +56,10 @@ volumes:
   release_date: '1983-10-15'
 - number: 18
   isbn13: '9784091207487'
-  release_date: 1984-01
+  release_date: '1984-01-15'
 - number: 19
   isbn13: '9784091207494'
-  release_date: 1984-04
+  release_date: '1984-04-15'
 - number: 20
   isbn13: '9784091207500'
   release_date: '1984-06-15'
@@ -106,6 +106,8 @@ volumes:
   isbn13: '9784091215048'
   release_date: '1987-04-15'
 versions:
+- label: 初版カバー(1980-87)
+  volumes: *id001
 - label: 新装版カバー(2006-08)
   volumes:
   - number: 1

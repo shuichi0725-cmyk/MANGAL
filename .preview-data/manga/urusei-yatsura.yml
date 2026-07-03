@@ -35,29 +35,29 @@ editions:
   volumes:
   - number: 1
     asin: null
-    isbn13: '9784091208835'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/8835/9784091208835.gif?_ex=300x300
-    release_date: 1983-03
+    isbn13: '9784091204417'
+    cover_url: null
+    release_date: '1980-04-15'
   - number: 2
     asin: null
     isbn13: '9784091204424'
     cover_url: null
-    release_date: 1980-07
+    release_date: '1980-07-15'
   - number: 3
     asin: null
-    isbn13: '9784091208842'
+    isbn13: '9784091204431'
     cover_url: null
-    release_date: 1983-04
+    release_date: '1980-10-15'
   - number: 4
     asin: null
-    isbn13: '9784091218308'
+    isbn13: '9784091204448'
     cover_url: null
-    release_date: '1985-01-15'
+    release_date: '1981-01-15'
   - number: 5
     asin: null
-    isbn13: '9784091207203'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0912/09120720.jpg?_ex=300x300
-    release_date: 2007-02
+    isbn13: '9784091204455'
+    cover_url: null
+    release_date: '1981-03-15'
   - number: 6
     asin: null
     isbn13: '9784091204462'
@@ -90,9 +90,9 @@ editions:
     release_date: '1982-06-15'
   - number: 12
     asin: null
-    isbn13: '9784091207593'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0912/09120759.jpg?_ex=300x300
-    release_date: 2007-04
+    isbn13: '9784091207425'
+    cover_url: null
+    release_date: '1982-09-15'
   - number: 13
     asin: null
     isbn13: '9784091207432'
@@ -122,12 +122,12 @@ editions:
     asin: null
     isbn13: '9784091207487'
     cover_url: null
-    release_date: 1984-01
+    release_date: '1984-01-15'
   - number: 19
     asin: null
     isbn13: '9784091207494'
     cover_url: null
-    release_date: 1984-04
+    release_date: '1984-04-15'
   - number: 20
     asin: null
     isbn13: '9784091207500'
@@ -204,6 +204,178 @@ editions:
     cover_url: null
     release_date: '1987-04-15'
   versions:
+  - label: 初版カバー(1980-87)
+    volumes:
+    - number: 1
+      asin: null
+      isbn13: '9784091204417'
+      cover_url: null
+      release_date: '1980-04-15'
+    - number: 2
+      asin: null
+      isbn13: '9784091204424'
+      cover_url: null
+      release_date: '1980-07-15'
+    - number: 3
+      asin: null
+      isbn13: '9784091204431'
+      cover_url: null
+      release_date: '1980-10-15'
+    - number: 4
+      asin: null
+      isbn13: '9784091204448'
+      cover_url: null
+      release_date: '1981-01-15'
+    - number: 5
+      asin: null
+      isbn13: '9784091204455'
+      cover_url: null
+      release_date: '1981-03-15'
+    - number: 6
+      asin: null
+      isbn13: '9784091204462'
+      cover_url: null
+      release_date: '1981-06-15'
+    - number: 7
+      asin: null
+      isbn13: '9784091204479'
+      cover_url: null
+      release_date: '1981-09-15'
+    - number: 8
+      asin: null
+      isbn13: '9784091204486'
+      cover_url: null
+      release_date: '1981-11-15'
+    - number: 9
+      asin: null
+      isbn13: '9784091204493'
+      cover_url: null
+      release_date: '1982-01-15'
+    - number: 10
+      asin: null
+      isbn13: '9784091204509'
+      cover_url: null
+      release_date: '1982-03-15'
+    - number: 11
+      asin: null
+      isbn13: '9784091207418'
+      cover_url: null
+      release_date: '1982-06-15'
+    - number: 12
+      asin: null
+      isbn13: '9784091207425'
+      cover_url: null
+      release_date: '1982-09-15'
+    - number: 13
+      asin: null
+      isbn13: '9784091207432'
+      cover_url: null
+      release_date: '1982-10-15'
+    - number: 14
+      asin: null
+      isbn13: '9784091207449'
+      cover_url: null
+      release_date: '1982-12-15'
+    - number: 15
+      asin: null
+      isbn13: '9784091207456'
+      cover_url: null
+      release_date: '1983-04-15'
+    - number: 16
+      asin: null
+      isbn13: '9784091207463'
+      cover_url: null
+      release_date: '1983-06-15'
+    - number: 17
+      asin: null
+      isbn13: '9784091207470'
+      cover_url: null
+      release_date: '1983-10-15'
+    - number: 18
+      asin: null
+      isbn13: '9784091207487'
+      cover_url: null
+      release_date: '1984-01-15'
+    - number: 19
+      asin: null
+      isbn13: '9784091207494'
+      cover_url: null
+      release_date: '1984-04-15'
+    - number: 20
+      asin: null
+      isbn13: '9784091207500'
+      cover_url: null
+      release_date: '1984-06-15'
+    - number: 21
+      asin: null
+      isbn13: '9784091211712'
+      cover_url: null
+      release_date: '1984-09-15'
+    - number: 22
+      asin: null
+      isbn13: '9784091211729'
+      cover_url: null
+      release_date: '1984-11-15'
+    - number: 23
+      asin: null
+      isbn13: '9784091211736'
+      cover_url: null
+      release_date: '1985-01-15'
+    - number: 24
+      asin: null
+      isbn13: '9784091211743'
+      cover_url: null
+      release_date: '1985-02-15'
+    - number: 25
+      asin: null
+      isbn13: '9784091211750'
+      cover_url: null
+      release_date: '1985-04-15'
+    - number: 26
+      asin: null
+      isbn13: '9784091211767'
+      cover_url: null
+      release_date: '1985-07-15'
+    - number: 27
+      asin: null
+      isbn13: '9784091211774'
+      cover_url: null
+      release_date: '1985-10-15'
+    - number: 28
+      asin: null
+      isbn13: '9784091211781'
+      cover_url: null
+      release_date: '1986-01-15'
+    - number: 29
+      asin: null
+      isbn13: '9784091211798'
+      cover_url: null
+      release_date: '1986-04-15'
+    - number: 30
+      asin: null
+      isbn13: '9784091211804'
+      cover_url: null
+      release_date: '1986-07-15'
+    - number: 31
+      asin: null
+      isbn13: '9784091215017'
+      cover_url: null
+      release_date: '1986-09-15'
+    - number: 32
+      asin: null
+      isbn13: '9784091215024'
+      cover_url: null
+      release_date: '1986-11-15'
+    - number: 33
+      asin: null
+      isbn13: '9784091215031'
+      cover_url: null
+      release_date: '1987-01-15'
+    - number: 34
+      asin: null
+      isbn13: '9784091215048'
+      cover_url: null
+      release_date: '1987-04-15'
   - label: 新装版カバー(2006-08)
     volumes:
     - number: 1
