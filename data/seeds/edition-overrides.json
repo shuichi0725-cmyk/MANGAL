@@ -12587,5 +12587,111 @@
     "role": "writer_artist"
    }
   ]
+ },
+ "shina-dark": {
+  "editions": [
+   {
+    "type": "standard",
+    "label": "コミックス",
+    "publisher": "メディアファクトリー/角川書店",
+    "imprint": "MFコミックス→カドカワコミックスA",
+    "volumes": [
+     {
+      "number": 1,
+      "isbn13": "9784840238687",
+      "cover_url": null,
+      "release_date": "2007-04"
+     },
+     {
+      "number": 2,
+      "isbn13": "9784840240093",
+      "cover_url": null,
+      "release_date": "2007-08"
+     },
+     {
+      "number": 3,
+      "isbn13": "9784048671545",
+      "cover_url": null,
+      "release_date": "2008-05",
+      "variants": [
+       {
+        "label": "アニメDVD付き特装版",
+        "isbn13": "9784840241984",
+        "cover_url": null,
+        "price": 2178
+       }
+      ]
+     },
+     {
+      "number": 4,
+      "isbn13": "9784048677189",
+      "cover_url": null,
+      "release_date": "2009-03"
+     }
+    ]
+   }
+  ],
+  "authors": [
+   {
+    "name": "緋賀ゆかり",
+    "role": "artist"
+   }
+  ],
+  "original_authors": [
+   {
+    "name": "石踏一榁",
+    "role": "writer"
+   }
+  ]
+ },
+ "greed-packet-unlimited": {
+  "editions": [
+   {
+    "type": "standard",
+    "label": "カドカワコミックスA",
+    "publisher": "角川書店",
+    "imprint": "カドカワコミックス・エース",
+    "volumes": [
+     {
+      "number": 1,
+      "isbn13": "9784048671972",
+      "cover_url": null,
+      "release_date": "2008-07"
+     },
+     {
+      "number": 2,
+      "isbn13": "9784048677073",
+      "cover_url": null,
+      "release_date": "2009-04"
+     },
+     {
+      "number": 3,
+      "isbn13": "9784048683661",
+      "cover_url": null,
+      "release_date": "2010-01"
+     },
+     {
+      "number": 4,
+      "isbn13": "9784048689236",
+      "cover_url": null,
+      "release_date": "2010-11",
+      "variants": [
+       {
+        "label": "ドラマCD付き特装版",
+        "isbn13": "9784048689380",
+        "cover_url": null,
+        "price": 1650
+       }
+      ]
+     }
+    ]
+   }
+  ],
+  "authors": [
+   {
+    "name": "榎宮祐",
+    "role": "writer_artist"
+   }
+  ]
  }
 }

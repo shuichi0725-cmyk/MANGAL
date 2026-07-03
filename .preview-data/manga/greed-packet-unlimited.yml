@@ -25,19 +25,33 @@ alternative_titles:
 wikidata_qid: Q8977221
 editions:
 - type: standard
-  label: 通常版
-  publisher: 角川グループパブリッシング
-  imprint: 電撃コミックス
+  label: カドカワコミックスA
+  imprint: カドカワコミックス・エース
   volumes:
+  - number: 1
+    asin: null
+    isbn13: '9784048671972'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0486/04867197.jpg?_ex=300x300
+    release_date: 2008-07
+  - number: 2
+    asin: null
+    isbn13: '9784048677073'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0486/04867707.jpg?_ex=300x300
+    release_date: 2009-04
+  - number: 3
+    asin: null
+    isbn13: '9784048683661'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0486/04868366.jpg?_ex=300x300
+    release_date: 2010-01
   - number: 4
     asin: null
     isbn13: '9784048689236'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0486/04868923.jpg?_ex=200x200
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0486/04868923.jpg?_ex=300x300
     release_date: 2010-11
     variants:
-    - label: ドラマCDつき特装版
+    - label: ドラマCD付き特装版
       isbn13: '9784048689380'
-      cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0486/04868938.jpg?_ex=200x200
+      cover_url: null
       price: 1650
 publishers:
 - kadokawa
