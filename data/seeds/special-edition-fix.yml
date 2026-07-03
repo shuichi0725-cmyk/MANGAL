@@ -1,5 +1,3 @@
-# 特装版混入 修正(a)= 種1で通常版兄弟がある巻。 通常版を主に差替+特装をvariant併存(案B)。
-# 生成: scripts/_special_edition_fix_gen.py / 適用: _special_edition_fix_apply.py。 種1=版名権威・書影=楽天収穫。
 corrections:
 - special_isbn: '9784022141224'
   normal_isbn: '9784022141217'
@@ -577,15 +575,6 @@ corrections:
     isbn13: '9784056017267'
     cover_url: null
     price: null
-- special_isbn: '9784056041729'
-  normal_isbn: '9784499206013'
-  normal_cover: null
-  normal_date: 1992-12
-  variant:
-    label: 限定版
-    isbn13: '9784056041729'
-    cover_url: null
-    price: null
 - special_isbn: '9784056070859'
   normal_isbn: '9784056070835'
   normal_cover: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0835/9784056070835.jpg?_ex=200x200
@@ -809,24 +798,6 @@ corrections:
   variant:
     label: 特装版
     isbn13: '9784063530124'
-    cover_url: null
-    price: null
-- special_isbn: '9784063530285'
-  normal_isbn: '9784834243994'
-  normal_cover: null
-  normal_date: 2011-10
-  variant:
-    label: 特装版
-    isbn13: '9784063530285'
-    cover_url: null
-    price: null
-- special_isbn: '9784063530292'
-  normal_isbn: '9784834243994'
-  normal_cover: null
-  normal_date: 2011-10
-  variant:
-    label: 特装版
-    isbn13: '9784063530292'
     cover_url: null
     price: null
 - special_isbn: '9784063582246'
@@ -4483,15 +4454,6 @@ corrections:
     isbn13: '9784065150672'
     cover_url: null
     price: 4500
-- special_isbn: '9784065173107'
-  normal_isbn: '9784048526524'
-  normal_cover: null
-  normal_date: 1996-03
-  variant:
-    label: 特装版
-    isbn13: '9784065173107'
-    cover_url: null
-    price: 900
 - special_isbn: '9784087821734'
   normal_isbn: '9784088568126'
   normal_cover: null
@@ -6211,78 +6173,6 @@ corrections:
     isbn13: '9784198810528'
     cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0528/9784198810528_1_5.jpg?_ex=200x200
     price: 2800
-- special_isbn: '9784253099691'
-  normal_isbn: '9784061087514'
-  normal_cover: null
-  normal_date: null
-  variant:
-    label: 豪華版
-    isbn13: '9784253099691'
-    cover_url: null
-    price: null
-- special_isbn: '9784253099707'
-  normal_isbn: '9784061087521'
-  normal_cover: null
-  normal_date: null
-  variant:
-    label: 豪華版
-    isbn13: '9784253099707'
-    cover_url: null
-    price: null
-- special_isbn: '9784253099714'
-  normal_isbn: '9784061087538'
-  normal_cover: null
-  normal_date: null
-  variant:
-    label: 豪華版
-    isbn13: '9784253099714'
-    cover_url: null
-    price: null
-- special_isbn: '9784253099721'
-  normal_isbn: '9784061087545'
-  normal_cover: null
-  normal_date: null
-  variant:
-    label: 豪華版
-    isbn13: '9784253099721'
-    cover_url: null
-    price: null
-- special_isbn: '9784253099738'
-  normal_isbn: '9784061087552'
-  normal_cover: null
-  normal_date: null
-  variant:
-    label: 豪華版
-    isbn13: '9784253099738'
-    cover_url: null
-    price: null
-- special_isbn: '9784253099745'
-  normal_isbn: '9784061087569'
-  normal_cover: null
-  normal_date: null
-  variant:
-    label: 豪華版
-    isbn13: '9784253099745'
-    cover_url: null
-    price: null
-- special_isbn: '9784253099806'
-  normal_isbn: '9784061087620'
-  normal_cover: null
-  normal_date: null
-  variant:
-    label: 豪華版
-    isbn13: '9784253099806'
-    cover_url: null
-    price: null
-- special_isbn: '9784253099813'
-  normal_isbn: '9784063674132'
-  normal_cover: null
-  normal_date: 2004-11
-  variant:
-    label: 豪華版
-    isbn13: '9784253099813'
-    cover_url: null
-    price: null
 - special_isbn: '9784253102346'
   normal_isbn: '9784253170413'
   normal_cover: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/2531/25317041.jpg?_ex=200x200
@@ -6479,42 +6369,6 @@ corrections:
   variant:
     label: 豪華版
     isbn13: '9784253102865'
-    cover_url: null
-    price: null
-- special_isbn: '9784253102872'
-  normal_isbn: '9784889918700'
-  normal_cover: null
-  normal_date: null
-  variant:
-    label: 豪華版
-    isbn13: '9784253102872'
-    cover_url: null
-    price: null
-- special_isbn: '9784253102889'
-  normal_isbn: '9784889918717'
-  normal_cover: null
-  normal_date: null
-  variant:
-    label: 豪華版
-    isbn13: '9784253102889'
-    cover_url: null
-    price: null
-- special_isbn: '9784253102896'
-  normal_isbn: '9784889919011'
-  normal_cover: null
-  normal_date: null
-  variant:
-    label: 豪華版
-    isbn13: '9784253102896'
-    cover_url: null
-    price: null
-- special_isbn: '9784253102902'
-  normal_isbn: '9784889919059'
-  normal_cover: null
-  normal_date: null
-  variant:
-    label: 豪華版
-    isbn13: '9784253102902'
     cover_url: null
     price: null
 - special_isbn: '9784253103688'
@@ -10702,51 +10556,6 @@ corrections:
     isbn13: '9784796875448'
     cover_url: null
     price: null
-- special_isbn: '9784797338133'
-  normal_isbn: '9784047122864'
-  normal_cover: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0471/04712286.jpg?_ex=200x200
-  normal_date: 2001-12
-  variant:
-    label: 豪華装丁版
-    isbn13: '9784797338133'
-    cover_url: null
-    price: null
-- special_isbn: '9784797338782'
-  normal_isbn: '9784047123083'
-  normal_cover: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0471/04712308.jpg?_ex=200x200
-  normal_date: 2002-10
-  variant:
-    label: 豪華装丁版
-    isbn13: '9784797338782'
-    cover_url: null
-    price: null
-- special_isbn: '9784797338799'
-  normal_isbn: '9784047123236'
-  normal_cover: null
-  normal_date: null
-  variant:
-    label: 豪華装丁版
-    isbn13: '9784797338799'
-    cover_url: null
-    price: null
-- special_isbn: '9784797338805'
-  normal_isbn: '9784047123465'
-  normal_cover: null
-  normal_date: null
-  variant:
-    label: 豪華装丁版
-    isbn13: '9784797338805'
-    cover_url: null
-    price: null
-- special_isbn: '9784797338812'
-  normal_isbn: '9784047123618'
-  normal_cover: null
-  normal_date: null
-  variant:
-    label: 豪華装丁版
-    isbn13: '9784797338812'
-    cover_url: null
-    price: null
 - special_isbn: '9784797346329'
   normal_isbn: '9784797346060'
   normal_cover: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/7973/79734606.jpg?_ex=200x200
@@ -11116,15 +10925,6 @@ corrections:
     isbn13: '9784801983571'
     cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/3571/9784801983571_1_5.jpg?_ex=200x200
     price: 980
-- special_isbn: '9784812487402'
-  normal_isbn: '9784799735954'
-  normal_cover: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/5954/9784799735954.jpg?_ex=200x200
-  normal_date: 2017-11
-  variant:
-    label: 小冊子付初回限定版
-    isbn13: '9784812487402'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/7402/9784812487402.jpg?_ex=200x200
-    price: null
 - special_isbn: '9784814801862'
   normal_isbn: '9784814801855'
   normal_cover: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/1855/9784814801855.jpg?_ex=200x200
@@ -11150,42 +10950,6 @@ corrections:
   variant:
     label: 小冊子つき特装版
     isbn13: '9784834262667'
-    cover_url: null
-    price: null
-- special_isbn: '9784835453941'
-  normal_isbn: '9784088501062'
-  normal_cover: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/1062/9784088501062_1_2.jpg?_ex=200x200
-  normal_date: null
-  variant:
-    label: 豪華限定版
-    isbn13: '9784835453941'
-    cover_url: null
-    price: null
-- special_isbn: '9784835453958'
-  normal_isbn: '9784088501086'
-  normal_cover: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/1086/9784088501086_1_2.jpg?_ex=200x200
-  normal_date: null
-  variant:
-    label: 豪華限定版
-    isbn13: '9784835453958'
-    cover_url: null
-    price: null
-- special_isbn: '9784835453972'
-  normal_isbn: '9784087482232'
-  normal_cover: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/2232/9784087482232_1_3.jpg?_ex=200x200
-  normal_date: null
-  variant:
-    label: 豪華限定版
-    isbn13: '9784835453972'
-    cover_url: null
-    price: null
-- special_isbn: '9784835453989'
-  normal_isbn: '9784087482249'
-  normal_cover: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/2249/9784087482249_1_3.jpg?_ex=200x200
-  normal_date: null
-  variant:
-    label: 豪華限定版
-    isbn13: '9784835453989'
     cover_url: null
     price: null
 - special_isbn: '9784835646473'
@@ -11647,24 +11411,6 @@ corrections:
     isbn13: '9784867206010'
     cover_url: null
     price: 900
-- special_isbn: '9784884812621'
-  normal_isbn: '9784575720983'
-  normal_cover: null
-  normal_date: 1998-04
-  variant:
-    label: 石ノ森章太郎画業35周年記念限定版
-    isbn13: '9784884812621'
-    cover_url: null
-    price: null
-- special_isbn: '9784894219915'
-  normal_isbn: '9784799501252'
-  normal_cover: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/1252/9784799501252.jpg?_ex=200x200
-  normal_date: null
-  variant:
-    label: 限定版
-    isbn13: '9784894219915'
-    cover_url: null
-    price: null
 - special_isbn: '9784896374247'
   normal_isbn: '9784896374230'
   normal_cover: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/4230/9784896374230.jpg?_ex=200x200
