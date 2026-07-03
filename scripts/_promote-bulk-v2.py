@@ -295,6 +295,15 @@ def apply_edition_canonical(slug: str, editions: list, canon: dict) -> list:
     out = []
     out.append(mk(s.get("volumes"), s.get("canonical_label") or "通常版", pub,
                   s.get("canonical_label") or (cur_std or {}).get("imprint"), "standard"))
+    # ★刷タブ(2026-07-04 うる星復旧): 同冊数の別カバー刷(新装版等)を standard の versions[] に畳む
+    #   ([[urusei_version_display_rules]]。 旧 _regroup-versions.py 直接パッチは非durableで消えた→canonical結線)
+    if s.get("versions"):
+        out[0]["versions"] = [
+            {"label": vv.get("label") or "別刷",
+             "volumes": [{"number": v["number"], "asin": None, "isbn13": v.get("isbn13"),
+                          "cover_url": None, "release_date": v.get("release_date")}
+                         for v in (vv.get("volumes") or [])]}
+            for vv in s["versions"]]
     if s.get("compact_edition"):
         ce = s["compact_edition"]
         out.append(mk(ce.get("volumes"), ce.get("label") or "コンパクト版", pub, ce.get("label"), "aizoban"))
