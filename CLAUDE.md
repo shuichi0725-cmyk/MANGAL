@@ -169,7 +169,11 @@
 
 ★**per-case修正(数〜数百頁)にフルpromoteを使うな**。 フルは66k再生成~110分+書影~50分+索引で**3時間**。 変更頁だけなら**数分**。 [[feedback_efficiency_first]]
 
-### ★指示の出し方 早見表 (= ユーザ→Claude のトリガー語。 2026-07-02整理)
+### ★指示の出し方 早見表 (= ユーザ→Claude のトリガー語。 2026-07-04 全面skill化済)
+
+★**正本 = `docs/skill-triggers.md` + `.claude/skills/*/SKILL.md`**(9 skill)。トリガー語を見たら対応skillを必ず開く:
+反映して=reflect-targeted / テスト環境に出して=test-deploy / 週次蒸留=weekly-distill / 日次蒸留=daily-distill /
+後退蒸留=backward-distill / 月次蒸留=monthly-distill / 作品名+リンク=percase-fix / 新規追加=new-manga-register / 巻抜け仮想=volgap-audit
 
 | ユーザの言い方 | Claudeがやること | 所要 |
 |---|---|---|

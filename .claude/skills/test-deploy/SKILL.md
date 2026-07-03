@@ -1,0 +1,22 @@
+---
+name: test-deploy
+description: テスト環境に出して=対象頁を.preview-dataへ投入/入替してmangal-previewで確認可能にする(push自動デプロイ・15-20分)
+---
+
+# テスト環境に出して (= preview投入)
+
+トリガー語: 「テスト環境に出して」「テストに入れて」「preview で見たい」等。
+
+## 手順
+1. 入替なら先に空にする: `rm -f .preview-data/manga/*.yml`(ユーザが「消した上で」と言った時のみ)
+2. 対象を copy: `cp data/manga.v2/<stem>.yml .preview-data/manga/`(複数可)
+3. preview索引再構築: `python scripts/_build-list-index.py .preview-data/manga .preview-data`(~20秒/500頁)
+4. masters が変わっていたら同期: `cp data/publishers.yml .preview-data/publishers.yml` 等
+5. `git add .preview-data && git commit && git push`
+
+## NEVER / 罠
+- **push後15-20分待つ・追いpush禁止**(前ビルドがcancelされ「変わらない」)
+- preview索引はsubset=正常。**public/ の索引(ルート直下3本)を本番索引に差し替えない**(previewが66k化して壊れる)
+- UI変更は .preview-data 不要(コード push だけで preview に出る)
+- デプロイ確認は Actions REST API か時間経過。反映されない時はビルドcancelを疑う
+- 本番R2へはこのskillでは**絶対出さない**(週次蒸留のみ)
