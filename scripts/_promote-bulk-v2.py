@@ -1444,6 +1444,9 @@ def _is_homonym(main_id: int, cand_id: int) -> bool:
     return overlap >= 0.5  # 別著者 かつ 小さい方の半数以上が巻番号重複 = 別作
 
 
+_MERGE_EXC = None
+
+
 def find_related_series_ids(con: sqlite3.Connection, main: dict) -> list[int]:
     """main series と 関連 series id を 返す。
 
@@ -1562,6 +1565,18 @@ def find_related_series_ids(con: sqlite3.Connection, main: dict) -> list[int]:
     if len(ids) > 1:
         _build_author_vol_index(con)
         ids = {i for i in ids if i == main["id"] or not _is_homonym(main["id"], i)}
+    # ★merge例外seed(2026-07-03 ドカベン発): 同qidスピンオフ(プロ野球編/スーパースターズ編)が
+    #   本編clusterに吸われ番号衝突で不可視化する型を、明示ペアでblock(git追跡・対称)。
+    global _MERGE_EXC
+    if _MERGE_EXC is None:
+        _MERGE_EXC = set()
+        _mep = ROOT / "data" / "seeds" / "merge-exceptions.yml"
+        if _mep.exists():
+            for pair in (yaml.safe_load(_mep.read_text(encoding="utf-8")) or {}).get("blocks", []):
+                if isinstance(pair, list) and len(pair) == 2:
+                    _MERGE_EXC.add(frozenset(pair))
+    if _MERGE_EXC and len(ids) > 1:
+        ids = {i for i in ids if i == main["id"] or frozenset({main["id"], i}) not in _MERGE_EXC}
     return list(ids)
 
 
