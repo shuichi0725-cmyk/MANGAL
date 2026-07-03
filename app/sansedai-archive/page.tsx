@@ -9,7 +9,7 @@ export default function SansedaiArchive() {
   return (
     <div className="min-h-screen bg-[var(--color-bg)]">
       <div className="px-4 pb-2 pt-6">
-        <h1 className="text-[19px] font-extrabold">👥 三世代、今日の一冊 − 過去ログ</h1>
+        <h1 className="text-[19px] font-extrabold">📖 三世代、今日の一冊 − 過去ログ</h1>
         <p className="mt-1 text-[12px] leading-relaxed text-ink/60">
           三世代の案内人が毎日1冊ずつ。過去の推薦をさかのぼれます。♥で「この人の推し、良い」を教えてください(匿名・登録不要)。
         </p>

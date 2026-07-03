@@ -27,8 +27,11 @@ export default function FeaturedDaily() {
         <div className="flex items-baseline justify-between">
           <h2 className="text-[14px] font-extrabold">
             📖 今日の一冊
-            <span className="ml-1.5 text-[10px] font-semibold text-ink/45">{date}・毎日書評</span>
+            <span className="ml-1.5 text-[10px] font-semibold text-ink/45">{date}・毎日更新</span>
           </h2>
+          <Link href="/sansedai-archive" className="text-[11px] font-semibold text-[var(--color-accent)]">
+            過去ログ →
+          </Link>
         </div>
         <Link href={`/manga/${pick.slug}`} className="spring-press mt-2.5 flex gap-3">
           <div

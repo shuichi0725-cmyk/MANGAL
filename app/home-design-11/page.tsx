@@ -1,6 +1,5 @@
 import Link from "next/link";
 import LikeButtonMock from "@/components/LikeButtonMock";
-import SansedaiDaily from "@/components/SansedaiDaily";
 import FeaturedDaily from "@/components/FeaturedDaily";
 import DestinyPickMock from "@/components/DestinyPickMock";
 import MarqueeTitle from "@/components/MarqueeTitle";
@@ -8,12 +7,14 @@ import CalendarView from "@/components/CalendarView";
 import { bundle, DesignNav, seeded, volCount, Cover, CoverTile } from "@/lib/homeDesign";
 import { coverUrl } from "@/lib/schema";
 import { loadAiReviews } from "@/lib/loadData";
+import AiLeagueTeaser from "@/components/AiLeagueTeaser";
 
 /** 案11: 編成C「リズム重視」 — 大(ヒーロー)→小(ことば)→中(棚)→小(豆知識)→… と
  *  コーナーの大小を交互に置いて縦読みのテンポを作る。 新パーツ: ことばカード/ジャンルルーレット/数字トリビア */
 export default function Design11() {
   const { data, manga, byNew, completedClassics } = bundle();
-  const aiLatest = loadAiReviews()[0]; // AI書評家リーグ 最新節(corner9)
+  // AI書評家リーグ: 週次順出しに合わせslim情報を全節渡す(選定はclient=AiLeagueTeaser)
+  const aiSections = loadAiReviews().map((x) => ({ setsu: x.setsu, title: x.title, models: x.reviews.map((r) => r.model) }));
   const daySalt = Number(new Date().toISOString().slice(0, 10).replace(/-/g, ""));
   // ★今週の一冊 = 完結の名作上位から週(=ビルド)替わり(固定だった bug 修正)
   const hero = seeded(completedClassics.slice(0, 40), (m) => m.slug, 1, daySalt + 70)[0] ?? completedClassics[0];
@@ -74,123 +75,7 @@ export default function Design11() {
       {hero && (
         <section className="mt-4 px-4">
           <Tile className="overflow-hidden">
-            <Link href={`/manga/${hero.slug}`} className="flex gap-4 p-4 spring-press">
-              <div className="w-28 shrink-0 rotate-[-2deg] shadow-xl"><Cover m={hero} sizes="112px" /></div>
-              <div className="min-w-0 self-center">
-                <p className="inline-block rounded bg-ink px-2 py-0.5 text-[10px] font-bold tracking-widest text-white">今週の一冊</p>
-                <p className="mt-1.5 text-lg font-extrabold leading-snug line-clamp-2">{hero.title}</p>
-                <p className="mt-1.5 border-l-2 border-[var(--color-accent)] pl-2 text-[12px] leading-relaxed text-ink/70 line-clamp-3">
-                  {hero.synopsis ?? `全${volCount(hero)}巻。`}
-                </p>
-              </div>
-            </Link>
-          </Tile>
-        </section>
-      )}
-
-      {/* 2.【小・新】ことばカード = あらすじの一文だけ大きく(縦読みの「息継ぎ」) */}
-      {kotoba && (
-        <section className="mt-4 px-4">
-          <Link href={`/manga/${kotoba.slug}`} className="block rounded-xl bg-ink px-5 py-6 text-center shadow-md spring-press">
-            <p className="text-[15px] font-bold leading-relaxed text-white">
-              「{kotoba.synopsis!.split("。")[0]}。」
-            </p>
-            <p className="mt-2 text-[11px] text-white/60">— 今日のことば: 『{kotoba.title}』のあらすじから</p>
-          </Link>
-        </section>
-      )}
-
-      {/* 2.5【三世代 slot A】ソロ or 散開時の1人目 */}
-      <FeaturedDaily />
-
-      {/* 3.【中】新刊棚(★題=1行オートスクロール+下に作者。はみ出す題だけ動く) */}
-      <section className="mt-4 px-4">
-        <Tile className="p-3.5">
-          <div className="flex items-baseline justify-between">
-            <h2 className="text-[14px] font-bold">📦 今月の新刊</h2>
-            <span className="text-[11px] text-ink/50">カレンダー →</span>
-          </div>
-          <ul className="-mx-3.5 mt-2.5 flex gap-3 overflow-x-auto px-3.5 pb-1 snap-x">
-            {byNew.slice(0, 12).map((m) => (
-              <li key={m.slug} className="w-[96px] shrink-0 snap-start">
-                <Link href={`/manga/${m.slug}`} className="block group spring-press">
-                  <Cover m={m} sizes="96px" />
-                  <MarqueeTitle text={m.title} className="mt-1 text-[12px] leading-snug text-ink/85 group-hover:text-[var(--color-accent)]" />
-                  <p className="truncate text-[10px] text-ink/50">{m.authors.map((a) => a.name).join("・")}</p>
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </Tile>
-      </section>
-
-      {/* 3.5【中】発売/創刊カレンダー(2ビュー・データ駆動 = public/calendar を遅延fetch・index join) */}
-      <section className="mt-4 px-4">
-        <Tile className="p-3.5">
-          <div className="mb-1 flex items-baseline justify-between">
-            <h2 className="text-[14px] font-extrabold">📅 カレンダー</h2>
-            <span className="text-[10px] text-ink/45">発売日 / 創刊 切替</span>
-          </div>
-          <CalendarView />
-        </Tile>
-      </section>
-
-      {/* 4.【小・新】数字トリビア */}
-      {todayTrivia && (
-        <section className="mt-4 px-4">
-          <div className="flex items-center gap-3 rounded-xl border border-dashed border-[var(--color-line)] bg-[var(--color-surface-2)]/60 px-4 py-3">
-            <span className="text-2xl">🔢</span>
-            <p className="text-[12px] leading-relaxed text-ink/75">
-              <b>きょうの数字:</b> {todayTrivia}
-            </p>
-          </div>
-        </section>
-      )}
-
-      {/* 5.【三世代 slot B】そろい踏み or 散開時の2人目 */}
-      <SansedaiDaily />
-
-      {/* 6.【小・新】ジャンルルーレット */}
-      <section className="mt-4 px-4">
-        <Link href={`/browse?genre=${encodeURIComponent(todayGenreObj.key)}`} className="block rounded-xl bg-gradient-to-r from-[var(--color-accent)] to-[var(--color-accent)]/80 px-4 py-3.5 text-white shadow-md spring-press">
-          <p className="text-[13px] font-bold leading-snug">🎡 今日のジャンルルーレット: <span className="text-[16px] whitespace-nowrap">{todayGenreObj.name}</span></p>
-          <p className="mt-0.5 text-right text-[11px] opacity-85">回ったジャンルの棚へ →</p>
-        </Link>
-      </section>
-
-      {/* 7.【中】特集 */}
-      <section className="mt-4 px-4">
-        <Tile className="p-3.5">
-          <h2 className="border-l-4 border-[var(--color-accent)] pl-2.5 text-[14px] font-extrabold">特集: 週末で読み切る、全5巻以内の完結作</h2>
-          <ul className="mt-3 grid grid-cols-3 gap-3">
-            {manga.filter((m) => m.status === "completed" && volCount(m) >= 3 && volCount(m) <= 5).slice(0, 6).map((m) => (
-              <li key={m.slug}><CoverTile m={m} sizes="104px" /></li>
-            ))}
-          </ul>
-        </Tile>
-      </section>
-
-      {/* 7.3【深・新】AI書評家リーグ(週刊・完結作・ネタバレなし。AIを名前ごと前面に=ユーザ発案) */}
-      <section className="mt-4 px-4">
-        <Link href="/column-ai-league" className="spring-press block">
-          <Tile className="overflow-hidden">
-            <div className="border-b-2 border-ink/75 px-4 pb-2 pt-3">
-              <p className="text-[9px] font-bold tracking-[0.25em] text-[var(--color-accent)]">AI書評家リーグ ・ 週刊 ・ 完結作だけ、ネタバレなし</p>
-              <h2 className="mt-1 text-[16px] font-black leading-snug">
-                今週の課題図書『{aiLatest?.title ?? "幽☆遊☆白書"}』を、AI書評家{aiLatest?.reviews.length ?? 5}人が読んだら。
-              </h2>
-            </div>
-            <div className="px-4 py-3">
-              <div className="flex flex-wrap gap-1.5 text-[10px]">
-                {(aiLatest?.reviews.map((r) => r.model) ?? ["Gemini 3.1 Pro", "ChatGPT", "Qwen 3.7 MAX", "DeepSeek", "Claude Opus 4.8 (1M)"]).map((n) => (
-                  <span key={n} className="rounded-full border border-[var(--color-line)] bg-[var(--color-surface-2)] px-2 py-0.5 font-semibold text-ink/70">{n}</span>
-                ))}
-              </div>
-              <p className="mt-2 text-[12px] leading-relaxed text-ink/75">
-                同じ本、同じ依頼文——それでも書評はこんなに違う。実在の各社AIに同じお題を渡して読み比べ。
-              </p>
-              <p className="mt-2 text-right text-[11px] font-semibold text-[var(--color-accent)]">{aiLatest?.reviews.length ?? 5}本読み比べる →</p>
-            </div>
+            <AiLeagueTeaser sections={aiSections} />
           </Tile>
         </Link>
       </section>

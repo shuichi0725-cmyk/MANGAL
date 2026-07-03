@@ -6,7 +6,7 @@ export default function SiteFooter() {
     ["ホーム", "/"],
     ["一覧", "/list"],
     ["検索", "/browse"],
-    ["三世代 過去ログ", "/sansedai-archive"],
+    ["今日の一冊 過去ログ", "/sansedai-archive"],
     ["AI書評家リーグ", "/column-ai-league"],
     ["画集", "/art-books"],
     ["使い方", "/about"],
