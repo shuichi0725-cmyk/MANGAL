@@ -1172,3 +1172,4 @@
 {"op": "ndl7-percase", "reason": "ユーザ提供7作: railgun13-18=K1表示修復/SDK35=楽天/ちょびっツ旧DXKC2-3=楽天連番/MSV-R混在頁=Frankenstein解体(J・ライデン17-26を本来頁へ移設+シン・マツナガv7重複解消)。rinjou v2(NDL無・prefix混在要調査)/落語心中v15(1-20構造も不審)/ろこどるv5=候補なし保留", "at": "2026-07-03"}
 {"op": "rakugo-ghost-fix", "reason": "昭和元禄落語心中: v11-20=ISBN無しの幽霊巻(MADBパースノイズ・本編はv10<完>で完結)→edition-overrideでKCx全10巻に確定(variants保持)", "at": "2026-07-03"}
 {"op": "wiki3-percase", "reason": "Wikipedia確定3作: 落語心中=新装版BE LOVE KC 1-5追加+特装4/7/8/10をvariant化(promote拡張=normal主枠へのvariant添付) / ろこどるv5=Wiki記載ISBNで補完+CD特装variant / 臨場=上農版は上下2巻が正(現1-3はコンビニ編混在・v3不存在)→ニチブン上下に確定", "at": "2026-07-03"}
+{"op": "rinjou-fix2", "reason": "Wikipedia精読による是正: 上農版臨場=芳文社コミックス単行本1巻のみ(9784832230972,2007-09)。上下(4537126xxx,712円)もコンビニ廉価と判明→全コンビニ解体。特装seedの出版社跨ぎ誤ペア(126136→王様ゲーム4575848021)も除去(同月+価格ヒューリスティックの誤爆)", "at": "2026-07-03"}
