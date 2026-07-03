@@ -37,7 +37,7 @@ export default function AboutPage() {
             >
               国立国会図書館サーチ (NDL)
             </a>
-            （巻 ISBN・タイトル・出版社・発売日 等の主力書誌情報）
+            （巻 ISBN・タイトル・出版社・発売日・タイトルヨミ 等の主力書誌情報）
           </li>
           <li>
             <a
@@ -72,17 +72,6 @@ export default function AboutPage() {
             </a>
             （書影・商品情報。店舗リンクは [PR] アフィリエイト広告を含みます）
           </li>
-          <li>
-            <a
-              href="https://ndlsearch.ndl.go.jp/"
-              target="_blank"
-              rel="noopener"
-              className="text-[var(--color-accent)] underline"
-            >
-              国立国会図書館サーチ
-            </a>
-            （書誌情報・タイトルヨミの照合）
-          </li>
           <li>各出版社の公式情報・編集部による手動補完</li>
         </ul>
         <p>
@@ -105,9 +94,9 @@ export default function AboutPage() {
       <section className="mt-8 space-y-4 text-sm leading-relaxed text-ink/80">
         <h2 className="text-base font-semibold text-ink">運営</h2>
         <p>
-          運営者: （運営者名）
+          運営者: MANGAL
           <br />
-          お問い合わせ: （連絡先メールアドレス）
+          お問い合わせ: <Link href="/contact" className="text-[var(--color-accent)] underline">お問い合わせフォーム</Link>
         </p>
       </section>
 

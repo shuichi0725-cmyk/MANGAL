@@ -13,6 +13,7 @@ const ITEMS: Array<[string, string, string]> = [
   ["📝", "AI書評家リーグ(週刊)", "/column-ai-league"],
   ["🎨", "画集", "/art-books"],
   ["🔰", "使い方", "/about"],
+  ["✉️", "お問い合わせ", "/contact"],
   ["📜", "利用規約", "/terms"],
   ["🔒", "プライバシー", "/privacy"],
 ];

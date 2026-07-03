@@ -78,6 +78,26 @@ export default {
       return new Response("Method Not Allowed", { status: 405 });
     }
 
+    // ★お問い合わせ(受信箱=KV。 送信先メールはコードに置かない=非公開。 将来Email Routing転送)
+    if (url.pathname === "/api/contact" && env.CONTACT && request.method === "POST") {
+      let d = {};
+      try { d = await request.json(); } catch {}
+      const body = String(d.body || "").slice(0, 4000);
+      if (!body.trim()) return new Response("bad request", { status: 400 });
+      const rec = {
+        name: String(d.name || "").slice(0, 80),
+        email: String(d.email || "").slice(0, 120),
+        body,
+        at: new Date().toISOString(),
+        country: request.headers.get("CF-IPCountry") || "",
+      };
+      const key = `contact:${rec.at}:${Math.random().toString(36).slice(2, 8)}`;
+      await env.CONTACT.put(key, JSON.stringify(rec));
+      return new Response(JSON.stringify({ ok: true }), {
+        headers: { "content-type": "application/json", "cache-control": "no-store" },
+      });
+    }
+
     if (request.method !== "GET" && request.method !== "HEAD") {
       return new Response("Method Not Allowed", { status: 405 });
     }

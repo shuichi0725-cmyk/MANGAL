@@ -30,6 +30,7 @@ export default function SiteFooter() {
       </p>
       <p className="mt-1.5 leading-relaxed">[PR] 店舗リンクにはアフィリエイト広告を含みます。</p>
       <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-1">
+        <Link href="/contact" className="hover:text-ink">お問い合わせ</Link>
         <Link href="/terms" className="hover:text-ink">利用規約</Link>
         <Link href="/privacy" className="hover:text-ink">プライバシー</Link>
         <span className="ml-auto">© 2026 MANGAL</span>
