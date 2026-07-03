@@ -46,7 +46,13 @@ export default function HomeClient({ data }: Props) {
   const [isPreview, setIsPreview] = useState(false);
   useEffect(() => {
     const h = window.location.hostname;
-    setIsPreview(h.includes("preview") || h === "localhost" || h === "127.0.0.1");
+    // ★隠しコマンド(2026-07-03): URL末尾 #debug で本番でも診断チップON(localStorage永続)・#nodebug でOFF
+    if (window.location.hash === "#debug") localStorage.setItem("mangal-diag", "1");
+    if (window.location.hash === "#nodebug") localStorage.removeItem("mangal-diag");
+    setIsPreview(
+      h.includes("preview") || h === "localhost" || h === "127.0.0.1" ||
+      localStorage.getItem("mangal-diag") === "1"
+    );
   }, []);
 
   // フィルタ系 URL params(?page を除く)の署名。 ページ送りでフィルタ effect が
