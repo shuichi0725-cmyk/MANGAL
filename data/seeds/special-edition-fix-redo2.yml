@@ -1,4 +1,3 @@
-# 未マッチ201の取り直し(seriesName経由・outOfStockFlag=1)。 通常版主+特装variant(案B)。
 corrections:
 - special_isbn: '9784091592408'
   normal_isbn: '9784091422705'
@@ -756,3 +755,12 @@ corrections:
     isbn13: '9784040658490'
     cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/8490/9784040658490.jpg?_ex=200x200
     price: 1980
+- special_isbn: '9784592106401'
+  normal_isbn: '9784592166931'
+  normal_cover: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/6931/9784592166931_1_18.jpg?_ex=200x200
+  normal_date: 2025-08
+  variant:
+    label: ゾッド胸像フィギュア付き特装版
+    isbn13: '9784592106401'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/6401/9784592106401.jpg?_ex=200x200
+    price: 9680
