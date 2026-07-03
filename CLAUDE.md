@@ -217,7 +217,7 @@ python scripts/_reflect-targeted.py --only <変更stem,...> [--drop <削除stem,
 ### 本番R2配信 (= 重い別工程)
 - 本番(mangal.shuichi0725.workers.dev)= `next export`→`out/`→`python scripts/_r2-sync.py --bucket mangal-site`(差分PUT、要R2認証env)。 Next buildが重い。 テスト(mangal-preview)は `.preview-data` push で自動デプロイ(preview反映は targeted反映が済ませる)。
 - ★**public/ の索引は preview専用(1400件subset)** = next export が out/ に継承する構造欠陥があった。 `_r2-sync.py` が同期前に **data/ の本番索引(25MB)で自動上書き+5MB未満guard**(2026-07-02恒久修正)。 public/ 側を本番索引に差し替えるな(previewが66k化して壊れる)。
-- ★**高速化候補(未実施)**: リポジトリを Defender 除外(`Add-MpPreference -ExclusionPath`)で全I/O短縮。
+- ★**Defender除外=実施済(2026-07-04)**: リポジトリと D:\mangal-cache を除外済み(ユーザ実行、管理者PS)。全I/O短縮。戻す時は `Remove-MpPreference -ExclusionPath`。
 
 ---
 
