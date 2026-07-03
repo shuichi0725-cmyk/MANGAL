@@ -9812,3 +9812,240 @@ volumes:
   source: k3-unrendered
   added_at: '2026-07-02'
   note: 'K3再分類: 相手クラスタ未描画=重複リスク0(HOTEL型)。同社+datefit+著者guard済. slug=kumo-desu-nanika 相手=[''蜘蛛ですが、なにか?'']'
+- series_keys: &id025
+  - name:はいむらきよたか|name:とある科学の超電磁砲
+  - name:はいむらきよたか|name:とある科学の超電磁砲|sub:とある魔術の禁書目録外伝
+  - name:灰村キヨタカ|name:とある科学の超電磁砲
+  - qid:Q11330038|name:とある科学の超電磁砲
+  qid: null
+  number: 13
+  isbn13: '9784048934251'
+  release_date: 2017-11
+  pages: null
+  publisher: KADOKAWA
+  edition_type: standard
+  title_display: とある科学の超電磁砲
+  source: ndl7-percase
+  added_at: '2026-07-03'
+  note: 'NDL per-case: K1同クラスタ表示修復(電撃C連番). slug=toaru-kagaku-no-railgun'
+- series_keys: *id025
+  qid: null
+  number: 14
+  isbn13: '9784049121469'
+  release_date: 2018-10
+  pages: null
+  publisher: KADOKAWA
+  edition_type: standard
+  title_display: とある科学の超電磁砲
+  source: ndl7-percase
+  added_at: '2026-07-03'
+  note: 'NDL per-case: K1同クラスタ表示修復(電撃C連番). slug=toaru-kagaku-no-railgun'
+- series_keys: *id025
+  qid: null
+  number: 15
+  isbn13: '9784049128383'
+  release_date: 2019-10
+  pages: null
+  publisher: KADOKAWA
+  edition_type: standard
+  title_display: とある科学の超電磁砲
+  source: ndl7-percase
+  added_at: '2026-07-03'
+  note: 'NDL per-case: K1同クラスタ表示修復(電撃C連番). slug=toaru-kagaku-no-railgun'
+- series_keys: *id025
+  qid: null
+  number: 16
+  isbn13: '9784049134810'
+  release_date: 2020-10
+  pages: null
+  publisher: KADOKAWA
+  edition_type: standard
+  title_display: とある科学の超電磁砲
+  source: ndl7-percase
+  added_at: '2026-07-03'
+  note: 'NDL per-case: K1同クラスタ表示修復(電撃C連番). slug=toaru-kagaku-no-railgun'
+- series_keys: *id025
+  qid: null
+  number: 17
+  isbn13: '9784049142556'
+  release_date: 2022-02
+  pages: null
+  publisher: KADOKAWA
+  edition_type: standard
+  title_display: とある科学の超電磁砲
+  source: ndl7-percase
+  added_at: '2026-07-03'
+  note: 'NDL per-case: K1同クラスタ表示修復(電撃C連番). slug=toaru-kagaku-no-railgun'
+- series_keys: *id025
+  qid: null
+  number: 18
+  isbn13: '9784049149593'
+  release_date: 2023-03
+  pages: null
+  publisher: KADOKAWA
+  edition_type: standard
+  title_display: とある科学の超電磁砲
+  source: ndl7-percase
+  added_at: '2026-07-03'
+  note: 'NDL per-case: K1同クラスタ表示修復(電撃C連番). slug=toaru-kagaku-no-railgun'
+- series_keys:
+  - qid:Q749265|name:SAMURAI DEEPER KYO
+  - qid:Q749265|name:Samurai deeper Kyo
+  qid: null
+  number: 35
+  isbn13: '9784063636079'
+  release_date: 2005-12
+  pages: null
+  publisher: 講談社
+  edition_type: standard
+  title_display: SAMURAI DEEPER KYO
+  source: ndl7-percase
+  added_at: '2026-07-03'
+  note: 楽天確定(第35巻・シリーズ後半406363帯). slug=samurai-deeper-kyo
+- series_keys: &id026
+  - name:CLAMP|name:CLAMP PREMIUM COLLECTIONちょびっツ
+  - name:Clamp|name:ちょびっツ
+  qid: null
+  number: 2
+  isbn13: '9784063344271'
+  release_date: 2001-06
+  pages: null
+  publisher: 講談社
+  edition_type: deluxe
+  title_display: CLAMP PREMIUM COLLECTIONちょびっツ
+  source: ndl7-percase
+  added_at: '2026-07-03'
+  note: 楽天確定(旧デラックスKC連番343830-345278内). slug=clamp-premium-collection-chobittsu
+- series_keys: *id026
+  qid: null
+  number: 3
+  isbn13: '9784063344608'
+  release_date: 2001-09
+  pages: null
+  publisher: 講談社
+  edition_type: deluxe
+  title_display: CLAMP PREMIUM COLLECTIONちょびっツ
+  source: ndl7-percase
+  added_at: '2026-07-03'
+  note: 楽天確定(同上). slug=clamp-premium-collection-chobittsu
+- series_keys: &id027
+  - name:大河原邦男|name:機動戦士ガンダムMSV-R ジョニー・ライデンの帰還
+  qid: null
+  number: 17
+  isbn13: '9784041073513'
+  release_date: 2018-10
+  pages: null
+  publisher: KADOKAWA
+  edition_type: standard
+  title_display: 機動戦士ガンダムMSV-R ジョニー・ライデンの帰還
+  source: ndl7-percase
+  added_at: '2026-07-03'
+  note: 'Frankenstein是正: MSV-R混在頁に幽閉されていたジョニー・ライデンの帰還17-26(楽天実題確認済)を本来頁へ移設. slug=mobile-suit-gundam-emuesubuiaaru-jonii-raiden-no-kikan'
+- series_keys: *id027
+  qid: null
+  number: 18
+  isbn13: '9784041080023'
+  release_date: 2019-03
+  pages: null
+  publisher: KADOKAWA
+  edition_type: standard
+  title_display: 機動戦士ガンダムMSV-R ジョニー・ライデンの帰還
+  source: ndl7-percase
+  added_at: '2026-07-03'
+  note: 'Frankenstein是正: MSV-R混在頁に幽閉されていたジョニー・ライデンの帰還17-26(楽天実題確認済)を本来頁へ移設. slug=mobile-suit-gundam-emuesubuiaaru-jonii-raiden-no-kikan'
+- series_keys: *id027
+  qid: null
+  number: 19
+  isbn13: '9784041086742'
+  release_date: 2019-09
+  pages: null
+  publisher: KADOKAWA
+  edition_type: standard
+  title_display: 機動戦士ガンダムMSV-R ジョニー・ライデンの帰還
+  source: ndl7-percase
+  added_at: '2026-07-03'
+  note: 'Frankenstein是正: MSV-R混在頁に幽閉されていたジョニー・ライデンの帰還17-26(楽天実題確認済)を本来頁へ移設. slug=mobile-suit-gundam-emuesubuiaaru-jonii-raiden-no-kikan'
+- series_keys: *id027
+  qid: null
+  number: 20
+  isbn13: '9784041092187'
+  release_date: 2020-03
+  pages: null
+  publisher: KADOKAWA
+  edition_type: standard
+  title_display: 機動戦士ガンダムMSV-R ジョニー・ライデンの帰還
+  source: ndl7-percase
+  added_at: '2026-07-03'
+  note: 'Frankenstein是正: MSV-R混在頁に幽閉されていたジョニー・ライデンの帰還17-26(楽天実題確認済)を本来頁へ移設. slug=mobile-suit-gundam-emuesubuiaaru-jonii-raiden-no-kikan'
+- series_keys: *id027
+  qid: null
+  number: 21
+  isbn13: '9784041110867'
+  release_date: 2021-01
+  pages: null
+  publisher: KADOKAWA
+  edition_type: standard
+  title_display: 機動戦士ガンダムMSV-R ジョニー・ライデンの帰還
+  source: ndl7-percase
+  added_at: '2026-07-03'
+  note: 'Frankenstein是正: MSV-R混在頁に幽閉されていたジョニー・ライデンの帰還17-26(楽天実題確認済)を本来頁へ移設. slug=mobile-suit-gundam-emuesubuiaaru-jonii-raiden-no-kikan'
+- series_keys: *id027
+  qid: null
+  number: 22
+  isbn13: '9784041119020'
+  release_date: 2021-09
+  pages: null
+  publisher: KADOKAWA
+  edition_type: standard
+  title_display: 機動戦士ガンダムMSV-R ジョニー・ライデンの帰還
+  source: ndl7-percase
+  added_at: '2026-07-03'
+  note: 'Frankenstein是正: MSV-R混在頁に幽閉されていたジョニー・ライデンの帰還17-26(楽天実題確認済)を本来頁へ移設. slug=mobile-suit-gundam-emuesubuiaaru-jonii-raiden-no-kikan'
+- series_keys: *id027
+  qid: null
+  number: 23
+  isbn13: '9784041123737'
+  release_date: 2022-03
+  pages: null
+  publisher: KADOKAWA
+  edition_type: standard
+  title_display: 機動戦士ガンダムMSV-R ジョニー・ライデンの帰還
+  source: ndl7-percase
+  added_at: '2026-07-03'
+  note: 'Frankenstein是正: MSV-R混在頁に幽閉されていたジョニー・ライデンの帰還17-26(楽天実題確認済)を本来頁へ移設. slug=mobile-suit-gundam-emuesubuiaaru-jonii-raiden-no-kikan'
+- series_keys: *id027
+  qid: null
+  number: 24
+  isbn13: '9784041129333'
+  release_date: 2022-09
+  pages: null
+  publisher: KADOKAWA
+  edition_type: standard
+  title_display: 機動戦士ガンダムMSV-R ジョニー・ライデンの帰還
+  source: ndl7-percase
+  added_at: '2026-07-03'
+  note: 'Frankenstein是正: MSV-R混在頁に幽閉されていたジョニー・ライデンの帰還17-26(楽天実題確認済)を本来頁へ移設. slug=mobile-suit-gundam-emuesubuiaaru-jonii-raiden-no-kikan'
+- series_keys: *id027
+  qid: null
+  number: 25
+  isbn13: '9784041134979'
+  release_date: 2023-03
+  pages: null
+  publisher: KADOKAWA
+  edition_type: standard
+  title_display: 機動戦士ガンダムMSV-R ジョニー・ライデンの帰還
+  source: ndl7-percase
+  added_at: '2026-07-03'
+  note: 'Frankenstein是正: MSV-R混在頁に幽閉されていたジョニー・ライデンの帰還17-26(楽天実題確認済)を本来頁へ移設. slug=mobile-suit-gundam-emuesubuiaaru-jonii-raiden-no-kikan'
+- series_keys: *id027
+  qid: null
+  number: 26
+  isbn13: '9784041142158'
+  release_date: 2023-09
+  pages: null
+  publisher: KADOKAWA
+  edition_type: standard
+  title_display: 機動戦士ガンダムMSV-R ジョニー・ライデンの帰還
+  source: ndl7-percase
+  added_at: '2026-07-03'
+  note: 'Frankenstein是正: MSV-R混在頁に幽閉されていたジョニー・ライデンの帰還17-26(楽天実題確認済)を本来頁へ移設. slug=mobile-suit-gundam-emuesubuiaaru-jonii-raiden-no-kikan'
