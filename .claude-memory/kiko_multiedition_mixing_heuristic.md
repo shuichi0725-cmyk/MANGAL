@@ -23,3 +23,10 @@ metadata:
 4. 書影は楽天ISBN直引き(絶版は無し許容)。
 
 **進め方**: 162作を**一個ずつ**(効率でなく)。誤マッチ(別作混入)は volume-exclude+正ページへ種4移設。多版混在は edition-override。durable seed。[[edition_mix_same_author_ayako]] [[multi_edition_unification_pending]] [[volgap_mostly_undermerge]]
+
+
+## 2026-07-03 ドカベン型=複合Frankenstein(奇子型の上位種)と新機構2つ
+- ★症状: 本編standardの「原版ISBN無し枠」にだけ文庫ISBN(1994-)や別作(プロ野球編0557帯)が滲む。原因は2層: ①種2ネイティブ汚染(51472に245冊) ②同qidスピンオフ(プロ野球編51477/スーパースターズ編51474)がclusterに吸われ番号衝突→本編が勝ち**スピンオフ全体が不可視化**(ページ不存在)。
+- ★新機構: **merge-exceptions.yml**(対称series-idペアでfind_related block・promote結線済) + **series-keep.yml**(spinoff旧作dropからの救済・既存)。スピンオフ独立ページ化の定石=例外ペア+keep+種4gap fill+本編override浄化。
+- ★slugは旧source棚卸し由来(promote旧source依存)→新独立ページのslugは data/manga/(旧69k)に既存の名がある(dokaben-super-sutaazuhen等)。--onlyで書けない時は旧sourceでslugを確認。
+- 適用結果: 本編1-48(プレISBN37=正)+文庫31 / プロ野球編1-52 / スーパースターズ編1-45。
