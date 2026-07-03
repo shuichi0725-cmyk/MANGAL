@@ -22,3 +22,8 @@ mangal-preview.pages.dev のUI修正で「変わらない」と長時間ハマ�
 - 私はずっと `/` のJSを見て「修正が無い」と誤判定した。
 
 **CSS教訓:** grid/flex item は `min-width:auto` 既定で、 長い無分割テキスト(日本語題)の中身に押し広げられ容器(root)を超えることがある→stickyヘッダーとズレる。 ★**一覧列に `min-w-0`** + body `overflow-x:clip`(sticky非破壊) で封鎖。 [[lightweight_index_architecture]]
+
+
+## 2026-07-03 stale生成物クラスの教訓(カレンダー)
+- ★public/calendar(6/26製)がslug改名後も残置→①launch表示が別作品に化ける(1968-08のK幽霊=実体はこんにちは先生konnichiwa-sensei) ②一覧が生slug表示 ③current月が古い。
+- 恒久策: **生成物(public/calendar・public/data/*-stock.json等)は週次蒸留/月次蒸留で必ず再生成**する工程に含める(`_build-calendar.py`+`_gen-corner-stocks.py`)。発売日カレンダーは全期間化済(release 832ヶ月・月戻り可)。
