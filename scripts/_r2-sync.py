@@ -78,6 +78,14 @@ def main():
     if os.path.getsize(os.path.join(OUT, "manga-list-index.json")) < 5 * 1048576:
         print("★abort: manga-list-index.json が 5MB 未満 = preview subset 疑い。data/ の生成元を確認。"); sys.exit(3)
 
+    # ★.env.local から R2_* を自動読込(CR/空白strip。 bash export経由のCRLF事故 2026-07-03 の恒久対策)
+    envp = os.path.join(ROOT, ".env.local")
+    if os.path.exists(envp) and not os.environ.get("R2_ACCOUNT_ID"):
+        for ln in open(envp, encoding="utf-8"):
+            ln = ln.strip()
+            if ln.startswith("R2_") and "=" in ln:
+                k, v = ln.split("=", 1)
+                os.environ.setdefault(k.strip(), v.strip())
     acct = os.environ.get("R2_ACCOUNT_ID")
     akid = os.environ.get("R2_ACCESS_KEY_ID")
     secret = os.environ.get("R2_SECRET_ACCESS_KEY")
