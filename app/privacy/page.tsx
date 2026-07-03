@@ -4,7 +4,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "プライバシーポリシー — MANGAL",
   description:
-    "MANGAL における個人情報・Cookie の取り扱い、Amazon アソシエイトに関する開示。",
+    "MANGAL における個人情報・Cookie の取り扱い、アフィリエイト広告に関する開示。",
 };
 
 export default function PrivacyPage() {
@@ -27,7 +27,7 @@ export default function PrivacyPage() {
       <section className="mt-8 space-y-3 text-sm leading-relaxed text-ink/80">
         <h2 className="text-base font-semibold text-ink">2. Cookie の利用</h2>
         <p>
-          リンク先の事業者（Amazon.co.jp 等）が、遷移時に Cookie を発行することがあります。これらの Cookie は本サイトが直接管理するものではなく、各事業者のプライバシーポリシーに従って取り扱われます。将来的にアフィリエイト計測を導入する場合も同様です。
+          リンク先の事業者（楽天・Amazon.co.jp 等）およびアフィリエイト計測（楽天アフィリエイト）が、遷移時に Cookie を発行することがあります。これらの Cookie は本サイトが直接管理するものではなく、各事業者のプライバシーポリシーに従って取り扱われます。
         </p>
         <p>
           Cookie の受け入れを希望されない場合は、お使いのブラウザの設定で Cookie を無効化することで拒否できます。Cookie を無効化しても本サイトの閲覧に支障はありません。
@@ -37,10 +37,17 @@ export default function PrivacyPage() {
       <section className="mt-8 space-y-3 text-sm leading-relaxed text-ink/80">
         <h2 className="text-base font-semibold text-ink">3. アフィリエイトプログラムについて</h2>
         <p>
-          当サイトは将来的に、Amazon アソシエイト・プログラム等のアフィリエイトプログラムを利用する場合があります。利用を開始した際は、運営規約所定の開示文を本ページに掲載します。現時点では、商品リンクは外部サイトの該当ページへ遷移するのみです。
+          当サイトは楽天アフィリエイトを利用しており、店舗リンク（楽天等）にはアフィリエイト広告を含みます（該当箇所に [PR] を表示）。今後、Amazon アソシエイト等ほかのプログラムを追加する場合も、開始時に本ページへ開示します。
         </p>
         <p>
-          各作品の購入ボタンをクリックすると Amazon.co.jp の商品ページに遷移し、その後の購入に応じて運営者に紹介料が支払われる場合があります。リンクのクリックによって読者が追加の費用を負担することはありません。
+          各作品の購入ボタンをクリックすると楽天ブックス等の商品ページに遷移し、その後の購入に応じて運営者に紹介料が支払われる場合があります。リンクのクリックによって読者が追加の費用を負担することはありません。
+        </p>
+      </section>
+
+      <section className="mt-8 space-y-3 text-sm leading-relaxed text-ink/80">
+        <h2 className="text-base font-semibold text-ink">4. いいね機能</h2>
+        <p>
+          「いいね（♥）」は匿名の集計カウンタで、個人を特定する情報は取得・保存しません。押した状態の記憶にはブラウザのローカルストレージのみを使用します。
         </p>
       </section>
 

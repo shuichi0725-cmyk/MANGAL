@@ -1,3 +1,4 @@
+import SiteFooter from "@/components/SiteFooter";
 import type { Metadata } from "next";
 import Link from "next/link";
 import "./globals.css";
@@ -28,7 +29,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <PurchaseModeToggle />
           </div>
         </header>
-        <main className="flex-1">{children}</main>
+        <main className="flex-1">{children}
+        <SiteFooter /></main>
         <footer className="border-t border-[var(--color-line)] mt-12 py-8 text-center text-xs text-ink/50 space-y-3">
           <nav className="flex justify-center gap-4">
             <Link href="/about" className="hover:text-ink">

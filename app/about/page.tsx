@@ -63,14 +63,25 @@ export default function AboutPage() {
           </li>
           <li>
             <a
-              href="https://openbd.jp/"
+              href="https://books.rakuten.co.jp/"
               target="_blank"
               rel="noopener"
               className="text-[var(--color-accent)] underline"
             >
-              openBD
+              楽天ブックス
             </a>
-            （書誌情報の照合用に参照）
+            （書影・商品情報。店舗リンクは [PR] アフィリエイト広告を含みます）
+          </li>
+          <li>
+            <a
+              href="https://ndlsearch.ndl.go.jp/"
+              target="_blank"
+              rel="noopener"
+              className="text-[var(--color-accent)] underline"
+            >
+              国立国会図書館サーチ
+            </a>
+            （書誌情報・タイトルヨミの照合）
           </li>
           <li>各出版社の公式情報・編集部による手動補完</li>
         </ul>
