@@ -20,7 +20,7 @@ export default function PrivacyPage() {
       <section className="mt-8 space-y-3 text-sm leading-relaxed text-ink/80">
         <h2 className="text-base font-semibold text-ink">1. 個人情報の収集について</h2>
         <p>
-          MANGAL（以下「本サイト」）はユーザの個人情報を能動的に収集していません。会員登録・お問い合わせフォーム等を設置していないため、お名前・メールアドレス・連絡先の入力を求めることはありません。
+          MANGAL（以下「本サイト」）は会員登録を設けておらず、閲覧にあたって個人情報の入力を求めることはありません。お問い合わせフォームでは、任意でお名前・返信先メールアドレスをご記入いただけます。ご記入いただいた情報は、お問い合わせ内容の確認とご返信の目的にのみ使用し、目的を終えたものは削除します。第三者に提供することはありません。
         </p>
       </section>
 
@@ -68,7 +68,9 @@ export default function PrivacyPage() {
       <section className="mt-8 space-y-3 text-sm leading-relaxed text-ink/80">
         <h2 className="text-base font-semibold text-ink">6. お問い合わせ</h2>
         <p>
-          本ポリシーに関するご質問は、（連絡先メールアドレス）までご連絡ください。
+          本ポリシーに関するご質問は、
+          <a href="/contact" className="text-[var(--color-accent)] underline">お問い合わせフォーム</a>
+          からご連絡ください。
         </p>
       </section>
     </div>
