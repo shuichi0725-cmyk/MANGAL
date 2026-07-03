@@ -48,6 +48,11 @@ editions:
     isbn13: '9784063806311'
     cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/6311/9784063806311.jpg?_ex=200x200
     release_date: 2013-06
+    variants:
+    - label: 特装版
+      isbn13: '9784063584400'
+      cover_url: null
+      price: null
   - number: 5
     asin: null
     isbn13: '9784063806700'
@@ -63,11 +68,21 @@ editions:
     isbn13: '9784063807523'
     cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/7523/9784063807523.jpg?_ex=200x200
     release_date: 2015-03
+    variants:
+    - label: 特装版
+      isbn13: '9784063587425'
+      cover_url: null
+      price: null
   - number: 8
     asin: null
     isbn13: '9784063807882'
     cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/7882/9784063807882.jpg?_ex=200x200
     release_date: 2015-08
+    variants:
+    - label: 特装版
+      isbn13: '9784063587449'
+      cover_url: null
+      price: null
   - number: 9
     asin: null
     isbn13: '9784063808322'
@@ -78,6 +93,41 @@ editions:
     isbn13: '9784063808766'
     cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/8766/9784063808766.jpg?_ex=200x200
     release_date: 2016-09
+    variants:
+    - label: 特装版
+      isbn13: '9784063623406'
+      cover_url: null
+      price: null
+- type: shinsoban
+  label: 新装版(BE LOVE KC)
+  publisher: 講談社
+  imprint: BE LOVE KC
+  volumes:
+  - number: 1
+    asin: null
+    isbn13: '9784065383353'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/3353/9784065383353_1_4.jpg?_ex=300x300
+    release_date: '2025'
+  - number: 2
+    asin: null
+    isbn13: '9784065383360'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/3360/9784065383360_1_2.jpg?_ex=300x300
+    release_date: '2025'
+  - number: 3
+    asin: null
+    isbn13: '9784065383377'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/3377/9784065383377_1_3.jpg?_ex=300x300
+    release_date: '2025'
+  - number: 4
+    asin: null
+    isbn13: '9784065383384'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/3384/9784065383384_1_3.jpg?_ex=300x300
+    release_date: '2025'
+  - number: 5
+    asin: null
+    isbn13: '9784065383391'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/3391/9784065383391_1_2.jpg?_ex=300x300
+    release_date: '2025'
 publishers:
 - kodansha
 catch: 服役中に聴いた名人の「死神」が忘れられず、元小悪党は出所後その門を叩く。落語に魅入られた男たちの、世代を超えた業と情念を描く——昭和を彩る話芸の人間ドラマ。
