@@ -1,6 +1,9 @@
 import Link from "next/link";
 import LikeButtonMock from "@/components/LikeButtonMock";
 import FeaturedDaily from "@/components/FeaturedDaily";
+import AnniversaryDaily from "@/components/AnniversaryDaily";
+import DeluxeWeekly from "@/components/DeluxeWeekly";
+import TimeMachine from "@/components/TimeMachine";
 import DestinyPickMock from "@/components/DestinyPickMock";
 import MarqueeTitle from "@/components/MarqueeTitle";
 import CalendarView from "@/components/CalendarView";
@@ -104,6 +107,9 @@ export default function Design11() {
       {/* 2.5【三世代 slot A】ソロ or 散開時の1人目 */}
       <FeaturedDaily />
 
+      {/* 2.7【新・自動】周年: 今日で連載開始N年(anniversaries.json週次再生成) */}
+      <AnniversaryDaily />
+
       {/* 3.【中】新刊棚(★題=1行オートスクロール+下に作者。はみ出す題だけ動く) */}
       <section className="mt-4 px-4">
         <Tile className="p-3.5">
@@ -135,6 +141,12 @@ export default function Design11() {
           <CalendarView />
         </Tile>
       </section>
+
+      {/* 3.6【新・自動】タイムマシン: N年前の今日発売(全期間カレンダー流用) */}
+      <TimeMachine />
+
+      {/* 3.7【新・自動】豪華版: 特装・限定版の週替わりshowcase(価格表示禁止) */}
+      <DeluxeWeekly />
 
       {/* 4.【小・新】数字トリビア */}
       {todayTrivia && (

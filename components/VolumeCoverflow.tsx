@@ -251,9 +251,7 @@ export default function VolumeCoverflow({
                     </div>
                     <div className="min-w-0 flex-1">
                       <div className="text-[12px] font-semibold leading-snug">{vr.label}</div>
-                      {vr.price != null && (
-                        <div className="text-[11px] text-ink/55">¥{vr.price.toLocaleString()}</div>
-                      )}
+                      {/* ★価格の静的表示は禁止(2026-07-03 ユーザ裁定: アフィ規約違反+誤データ。動的取得以外表示しない) */}
                     </div>
                   </div>
                   <div className="mt-2 grid grid-cols-3 gap-2">
