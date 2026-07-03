@@ -58,9 +58,11 @@ for f in glob.glob(os.path.join(SRC, "*.yml")):
     n += 1
     # 創刊(全期間)
     fvd = fvd_of(eds)
+    title = d.get("title") or slug
     if fvd:
-        if DAY_RE.match(fvd): bucket(launch, fvd[:7], fvd[8:10], slug)
-        elif MON_RE.match(fvd): bucket(launch, fvd[:7], None, slug)
+        # ★title埋め込み(2026-07-03): 索引subset/slug改名でもタイトル表示が壊れない
+        if DAY_RE.match(fvd): bucket(launch, fvd[:7], fvd[8:10], [slug, title])
+        elif MON_RE.match(fvd): bucket(launch, fvd[:7], None, [slug, title])
         # 年のみ → 除外
     # 発売(当月+未来のみ)
     for e in eds:
@@ -68,7 +70,7 @@ for f in glob.glob(os.path.join(SRC, "*.yml")):
             rd = eff_date(v)
             if not rd: continue
             # ★全期間化(2026-07-03 ユーザ要望「月が戻る」): 過去の発売月も出す
-            item = [slug, v.get("number")]
+            item = [slug, v.get("number"), title]
             if DAY_RE.match(rd): bucket(release, rd[:7], rd[8:10], item)
             elif MON_RE.match(rd): bucket(release, rd[:7], None, item)
 

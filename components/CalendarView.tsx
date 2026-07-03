@@ -88,15 +88,20 @@ export default function CalendarView() {
   const first = new Date(`${ym}-01T00:00:00`);
   const pad = first.getDay();
   const last = new Date(Number(yy), Number(mm), 0).getDate();
-  const renderItem = (it: [string, number | null]) => {
-    const [slug, vol] = it;
+  // ★item形式(2026-07-03 title埋め込み): launch=[slug,title] / release=[slug,vol,title] / 旧=slug文字列も許容。
+  //   表示優先= 索引title → 埋め込みtitle → slug (索引subset環境やslug改名でも壊れない)
+  const renderItem = (it: string | Array<string | number | null>) => {
+    const arr: Array<string | number | null> = Array.isArray(it) ? it : [it];
+    const slug = String(arr[0]);
+    const vol = type === "release" ? (arr[1] as number | null) : null;
+    const embedded = (type === "release" ? arr[2] : arr[1]) as string | undefined;
     const m = bySlug.get(slug);
     return (
-      <li key={slug + "-" + vol}>
+      <li key={slug + "-" + String(vol)}>
         <Link href={`/manga/${slug}`} className="spring-press flex items-baseline gap-2">
           <span className="h-1.5 w-1.5 shrink-0 translate-y-[-1px] rounded-full bg-[var(--color-accent)]" />
           <span className="min-w-0 flex-1 truncate text-[12.5px] text-ink/85">
-            {m?.title ?? slug}
+            {m?.title ?? embedded ?? slug}
             {type === "release" && vol ? <span className="text-ink/45"> {vol}巻</span> : null}
           </span>
           <span className="shrink-0 text-[10px] text-ink/45">{m?.authors?.map((a) => a.name).join("・") ?? ""}</span>
