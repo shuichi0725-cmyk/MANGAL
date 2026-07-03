@@ -75,6 +75,105 @@ export default function Design11() {
       {hero && (
         <section className="mt-4 px-4">
           <Tile className="overflow-hidden">
+            <Link href={`/manga/${hero.slug}`} className="flex gap-4 p-4 spring-press">
+              <div className="w-28 shrink-0 rotate-[-2deg] shadow-xl"><Cover m={hero} sizes="112px" /></div>
+              <div className="min-w-0 self-center">
+                <p className="inline-block rounded bg-ink px-2 py-0.5 text-[10px] font-bold tracking-widest text-white">今週の一冊</p>
+                <p className="mt-1.5 text-lg font-extrabold leading-snug line-clamp-2">{hero.title}</p>
+                <p className="mt-1.5 border-l-2 border-[var(--color-accent)] pl-2 text-[12px] leading-relaxed text-ink/70 line-clamp-3">
+                  {hero.synopsis ?? `全${volCount(hero)}巻。`}
+                </p>
+              </div>
+            </Link>
+          </Tile>
+        </section>
+      )}
+
+      {/* 2.【小・新】ことばカード = あらすじの一文だけ大きく(縦読みの「息継ぎ」) */}
+      {kotoba && (
+        <section className="mt-4 px-4">
+          <Link href={`/manga/${kotoba.slug}`} className="block rounded-xl bg-ink px-5 py-6 text-center shadow-md spring-press">
+            <p className="text-[15px] font-bold leading-relaxed text-white">
+              「{kotoba.synopsis!.split("。")[0]}。」
+            </p>
+            <p className="mt-2 text-[11px] text-white/60">— 今日のことば: 『{kotoba.title}』のあらすじから</p>
+          </Link>
+        </section>
+      )}
+
+      {/* 2.5【三世代 slot A】ソロ or 散開時の1人目 */}
+      <FeaturedDaily />
+
+      {/* 3.【中】新刊棚(★題=1行オートスクロール+下に作者。はみ出す題だけ動く) */}
+      <section className="mt-4 px-4">
+        <Tile className="p-3.5">
+          <div className="flex items-baseline justify-between">
+            <h2 className="text-[14px] font-bold">📦 今月の新刊</h2>
+            <span className="text-[11px] text-ink/50">カレンダー →</span>
+          </div>
+          <ul className="-mx-3.5 mt-2.5 flex gap-3 overflow-x-auto px-3.5 pb-1 snap-x">
+            {byNew.slice(0, 12).map((m) => (
+              <li key={m.slug} className="w-[96px] shrink-0 snap-start">
+                <Link href={`/manga/${m.slug}`} className="block group spring-press">
+                  <Cover m={m} sizes="96px" />
+                  <MarqueeTitle text={m.title} className="mt-1 text-[12px] leading-snug text-ink/85 group-hover:text-[var(--color-accent)]" />
+                  <p className="truncate text-[10px] text-ink/50">{m.authors.map((a) => a.name).join("・")}</p>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </Tile>
+      </section>
+
+      {/* 3.5【中】発売/創刊カレンダー(2ビュー・データ駆動 = public/calendar を遅延fetch・index join) */}
+      <section className="mt-4 px-4">
+        <Tile className="p-3.5">
+          <div className="mb-1 flex items-baseline justify-between">
+            <h2 className="text-[14px] font-extrabold">📅 カレンダー</h2>
+            <span className="text-[10px] text-ink/45">発売日 / 創刊 切替</span>
+          </div>
+          <CalendarView />
+        </Tile>
+      </section>
+
+      {/* 4.【小・新】数字トリビア */}
+      {todayTrivia && (
+        <section className="mt-4 px-4">
+          <div className="flex items-center gap-3 rounded-xl border border-dashed border-[var(--color-line)] bg-[var(--color-surface-2)]/60 px-4 py-3">
+            <span className="text-2xl">🔢</span>
+            <p className="text-[12px] leading-relaxed text-ink/75">
+              <b>きょうの数字:</b> {todayTrivia}
+            </p>
+          </div>
+        </section>
+      )}
+
+      {/* 5.【三世代 slot B】そろい踏み or 散開時の2人目 */}
+
+      {/* 6.【小・新】ジャンルルーレット */}
+      <section className="mt-4 px-4">
+        <Link href={`/browse?genre=${encodeURIComponent(todayGenreObj.key)}`} className="block rounded-xl bg-gradient-to-r from-[var(--color-accent)] to-[var(--color-accent)]/80 px-4 py-3.5 text-white shadow-md spring-press">
+          <p className="text-[13px] font-bold leading-snug">🎡 今日のジャンルルーレット: <span className="text-[16px] whitespace-nowrap">{todayGenreObj.name}</span></p>
+          <p className="mt-0.5 text-right text-[11px] opacity-85">回ったジャンルの棚へ →</p>
+        </Link>
+      </section>
+
+      {/* 7.【中】特集 */}
+      <section className="mt-4 px-4">
+        <Tile className="p-3.5">
+          <h2 className="border-l-4 border-[var(--color-accent)] pl-2.5 text-[14px] font-extrabold">特集: 週末で読み切る、全5巻以内の完結作</h2>
+          <ul className="mt-3 grid grid-cols-3 gap-3">
+            {manga.filter((m) => m.status === "completed" && volCount(m) >= 3 && volCount(m) <= 5).slice(0, 6).map((m) => (
+              <li key={m.slug}><CoverTile m={m} sizes="104px" /></li>
+            ))}
+          </ul>
+        </Tile>
+      </section>
+
+      {/* 7.3【深・新】AI書評家リーグ(週刊・完結作・ネタバレなし。AIを名前ごと前面に=ユーザ発案) */}
+      <section className="mt-4 px-4">
+        <Link href="/column-ai-league" className="spring-press block">
+          <Tile className="overflow-hidden">
             <AiLeagueTeaser sections={aiSections} />
           </Tile>
         </Link>
