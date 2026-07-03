@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """創刊/発売日カレンダーの per-month データを build時に manga.v2 から算出。
  ・創刊(launch) = first_volume_date(standard版1巻)。全期間。
- ・発売(release) = 各巻 release_date。当月+未来のみ(過去は創刊で足りる)。
+ ・発売(release) = 各巻 release_date。★全期間(過去へも戻れる)。
  ・中身は slug 参照のみ(title/cover は索引 join = 重複なし)。
  ・日精度を派生判定: 完全日→days[DD] / 年月→unknown(日未定) / 年のみ→除外。
 引数: [1]=src(既定 data/manga.v2) [2]=out(既定 public/calendar) [3]=当月 YYYY-MM(既定 today)。
@@ -67,7 +67,7 @@ for f in glob.glob(os.path.join(SRC, "*.yml")):
         for v in (e.get("volumes") or []):
             rd = eff_date(v)
             if not rd: continue
-            if rd[:7] < CUR: continue
+            # ★全期間化(2026-07-03 ユーザ要望「月が戻る」): 過去の発売月も出す
             item = [slug, v.get("number")]
             if DAY_RE.match(rd): bucket(release, rd[:7], rd[8:10], item)
             elif MON_RE.match(rd): bucket(release, rd[:7], None, item)
