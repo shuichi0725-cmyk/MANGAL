@@ -19,16 +19,19 @@ export default function ContactForm() {
         const fd = new FormData(f);
         if (String(fd.get("website") || "")) return; // honeypot
         setState("sending");
+        const payload = JSON.stringify({
+          name: String(fd.get("name") || ""),
+          email: String(fd.get("email") || ""),
+          body: String(fd.get("body") || ""),
+        });
+        const post = (url: string) =>
+          fetch(url, { method: "POST", headers: { "content-type": "application/json" }, body: payload });
         try {
-          const r = await fetch("/api/contact", {
-            method: "POST",
-            headers: { "content-type": "application/json" },
-            body: JSON.stringify({
-              name: String(fd.get("name") || ""),
-              email: String(fd.get("email") || ""),
-              body: String(fd.get("body") || ""),
-            }),
-          });
+          let r = await post("/api/contact").catch(() => null);
+          if (!r || !r.ok) {
+            // preview等 API 無し環境 → 本番Workerへ直接(CORS許可済)
+            r = await post("https://mangal-r2.shuichi0725.workers.dev/api/contact");
+          }
           setState(r.ok ? "done" : "error");
         } catch {
           setState("error");

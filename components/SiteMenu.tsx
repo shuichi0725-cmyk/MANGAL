@@ -35,10 +35,11 @@ export default function SiteMenu() {
         <div className="fixed inset-0 z-50" role="dialog" aria-label="サイトメニュー">
           <button
             aria-label="閉じる"
-            className="absolute inset-0 bg-black/40"
+            className="absolute inset-0 bg-black/25"
             onClick={() => setOpen(false)}
           />
-          <div className="absolute right-0 top-0 h-full w-[78%] max-w-[320px] overflow-y-auto bg-[var(--color-surface)] p-4 shadow-2xl">
+          {/* ★検索UIと同トーン: 浮いたカード・角丸・白が透ける(backdrop-blur)。全画面に広げない */}
+          <div className="absolute right-2 top-2 max-h-[88vh] w-[76%] max-w-[300px] overflow-y-auto rounded-2xl border border-[var(--color-line)] bg-[var(--color-surface)]/80 p-3 shadow-[var(--shadow-lift)] backdrop-blur-md">
             <div className="flex items-center justify-between">
               <p className="text-[15px] font-extrabold">
                 MANGAL<span className="text-[var(--color-accent)]">.</span> メニュー
@@ -51,20 +52,20 @@ export default function SiteMenu() {
                 ×
               </button>
             </div>
-            <nav className="mt-3 space-y-1">
+            <nav className="mt-2 space-y-0.5">
               {ITEMS.map(([icon, label, href]) => (
                 <Link
                   key={label}
                   href={href}
                   onClick={() => setOpen(false)}
-                  className="spring-press flex items-center gap-3 rounded-xl px-3 py-2.5 text-[13.5px] font-semibold hover:bg-[var(--color-surface-2)]"
+                  className="spring-press flex items-center gap-2.5 rounded-xl px-2.5 py-2 text-[13px] font-semibold hover:bg-[var(--color-surface-2)]/70"
                 >
                   <span className="text-[17px]">{icon}</span>
                   {label}
                 </Link>
               ))}
             </nav>
-            <p className="mt-4 border-t border-[var(--color-line)] pt-3 text-[10px] leading-relaxed text-ink/45">
+            <p className="mt-3 border-t border-[var(--color-line)] pt-2.5 text-[10px] leading-relaxed text-ink/45">
               [PR] 本サイトの店舗リンクにはアフィリエイト広告を含みます。
             </p>
           </div>

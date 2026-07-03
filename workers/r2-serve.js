@@ -55,13 +55,23 @@ export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
 
+    // ★API共通CORS(previewサイト=別オリジンからも叩けるように)
+    const CORS = {
+      "access-control-allow-origin": "*",
+      "access-control-allow-methods": "GET, POST, OPTIONS",
+      "access-control-allow-headers": "content-type",
+    };
+    if (url.pathname.startsWith("/api/") && request.method === "OPTIONS") {
+      return new Response(null, { status: 204, headers: CORS });
+    }
+
     // ★いいねAPI(匿名カウンタ・PIIゼロ。 KV=LIKES)。 静的配信より前・キャッシュしない。
     if (url.pathname === "/api/like" && env.LIKES) {
       if (request.method === "GET") {
         const id = url.searchParams.get("id") || "";
         const v = id ? parseInt((await env.LIKES.get(`like:${id}`)) || "0", 10) : 0;
         return new Response(JSON.stringify({ id, count: v }), {
-          headers: { "content-type": "application/json", "cache-control": "no-store" },
+          headers: { "content-type": "application/json", "cache-control": "no-store", ...CORS },
         });
       }
       if (request.method === "POST") {
@@ -72,7 +82,7 @@ export default {
         const v = parseInt((await env.LIKES.get(key)) || "0", 10) + 1;
         await env.LIKES.put(key, String(v));
         return new Response(JSON.stringify({ id, count: v }), {
-          headers: { "content-type": "application/json", "cache-control": "no-store" },
+          headers: { "content-type": "application/json", "cache-control": "no-store", ...CORS },
         });
       }
       return new Response("Method Not Allowed", { status: 405 });
@@ -94,7 +104,7 @@ export default {
       const key = `contact:${rec.at}:${Math.random().toString(36).slice(2, 8)}`;
       await env.CONTACT.put(key, JSON.stringify(rec));
       return new Response(JSON.stringify({ ok: true }), {
-        headers: { "content-type": "application/json", "cache-control": "no-store" },
+        headers: { "content-type": "application/json", "cache-control": "no-store", ...CORS },
       });
     }
 
