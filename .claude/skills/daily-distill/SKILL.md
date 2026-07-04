@@ -40,3 +40,9 @@ description: 日次蒸留 — 前回以降のNDL新着漫画を取得し、掲�
 
 - 後退蒸留(過去年の一括版): `python scripts/_distill_backward.py <年> --discover|--plan|--emit`
 - 掲載ゲート/欠落表の設計: CLAUDE.md「新規登録 protocol」+ memory distill_2026_pipeline
+
+
+## 運用実測(2026-07-04 初実戦)
+- ★**発売直後の新刊は楽天caption(あらすじ根拠)が空**が普通(NDL/キャッシュ/liveすべて)。掲載ゲートのsynopsis必須が正しくfail-closedし保留になる=正常動作。捏造して通さない。
+- worksheetにslug/genre(provisional)/demographicまで記入して保留にしておけば、caption供給後(発売後数日〜数週)の日次で自動的に通る。
+- demographicの根拠にレーベル実態を使ってよい(一迅社LAKE=女性向け→josei等)。genreはタイトル根拠ならprovisional必須。
