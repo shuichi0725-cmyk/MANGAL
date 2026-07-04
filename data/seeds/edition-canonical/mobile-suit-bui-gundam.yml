@@ -1,0 +1,24 @@
+slug: mobile-suit-bui-gundam
+canonical_label: 通常版
+source: 上下巻対応拡張 2026-07-04(volume_label搬送・全ゲート再適用 sid=157292)
+publisher: 講談社
+volumes: &id001
+- number: 1
+  isbn13: '9784063216837'
+  release_date: '1993-10-06'
+- number: 2
+  isbn13: null
+  release_date: '1994-03-05'
+versions:
+- label: 講談社コミックスボンボン(1993-94)
+  volumes: *id001
+- label: KPC(2003)
+  volumes:
+  - number: 1
+    isbn13: '9784063530858'
+    release_date: 2003-07
+    volume_label: 上
+  - number: 2
+    isbn13: '9784063530865'
+    release_date: 2003-07
+    volume_label: 下

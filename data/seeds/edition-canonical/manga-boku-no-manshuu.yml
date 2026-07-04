@@ -1,0 +1,26 @@
+slug: manga-boku-no-manshuu
+canonical_label: 通常版
+source: 上下巻対応拡張 2026-07-04(volume_label搬送・全ゲート再適用 sid=20373)
+publisher: あゆみ出版
+volumes: &id001
+- number: 1
+  isbn13: '9784751923375'
+  release_date: '1999-08-10'
+  volume_label: 上巻
+- number: 2
+  isbn13: '9784751923382'
+  release_date: '1999-08-10'
+  volume_label: 下巻
+versions:
+- label: 通常版(1999)
+  volumes: *id001
+- label: 2001年版
+  volumes:
+  - number: 1
+    isbn13: '9784893802606'
+    release_date: 2001-08
+    volume_label: 上
+  - number: 2
+    isbn13: '9784893802613'
+    release_date: 2001-08
+    volume_label: 下

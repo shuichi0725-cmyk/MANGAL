@@ -1,0 +1,28 @@
+slug: komorebi-no-moto-de
+canonical_label: 通常版
+source: 上下巻対応拡張 2026-07-04(volume_label搬送・全ゲート再適用 sid=44882)
+publisher: 集英社
+volumes: &id001
+- number: 1
+  isbn13: '9784088713557'
+  release_date: 1994-03
+  volume_label: 第1幕
+- number: 2
+  isbn13: '9784088713564'
+  release_date: 1994-05
+  volume_label: 第2幕
+- number: 3
+  isbn13: '9784088713571'
+  release_date: 1994-07
+  volume_label: 第3幕
+versions:
+- label: ジャンプ・コミックス(1994)
+  volumes: *id001
+- label: ゼノンコミックスDX(2017)
+  volumes:
+  - number: 1
+    isbn13: '9784199804410'
+    release_date: 2017-09
+  - number: 2
+    isbn13: '9784199804465'
+    release_date: 2017-10

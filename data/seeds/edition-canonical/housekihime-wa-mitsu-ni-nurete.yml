@@ -1,0 +1,27 @@
+slug: housekihime-wa-mitsu-ni-nurete
+canonical_label: 通常版
+source: 上下巻対応拡張 2026-07-04(volume_label搬送・全ゲート再適用 sid=96965)
+publisher: 宙出版
+volumes: &id001
+- number: 1
+  isbn13: '9784776737377'
+  release_date: 2014-05
+- number: 2
+  isbn13: '9784776737384'
+  release_date: 2014-05
+- number: 3
+  isbn13: '9784776737599'
+  release_date: 2014-06
+versions:
+- label: Missy comics(2014)
+  volumes: *id001
+- label: Missy comics(2018)
+  volumes:
+  - number: 1
+    isbn13: '9784776748250'
+    release_date: 2018-10
+    volume_label: 上
+  - number: 2
+    isbn13: '9784776748267'
+    release_date: 2018-10
+    volume_label: 下

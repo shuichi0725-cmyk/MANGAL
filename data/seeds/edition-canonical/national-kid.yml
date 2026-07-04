@@ -1,0 +1,31 @@
+slug: national-kid
+canonical_label: 通常版
+source: 上下巻対応拡張 2026-07-04(volume_label搬送・全ゲート再適用 sid=81003)
+publisher: 星雲社
+volumes: &id001
+- number: 1
+  isbn13: '9784795298194'
+  release_date: '1992-05-16'
+- number: 2
+  isbn13: '9784795298200'
+  release_date: '1992-06-19'
+- number: 3
+  isbn13: '9784795298217'
+  release_date: '1992-07-11'
+versions:
+- label: 通常版(1992)
+  volumes: *id001
+- label: マンガショップシリーズ(2008)
+  volumes:
+  - number: 1
+    isbn13: '9784775912812'
+    release_date: '2008-12-02'
+    volume_label: 上
+  - number: 2
+    isbn13: '9784775912829'
+    release_date: 2008-12
+    volume_label: 中
+  - number: 3
+    isbn13: '9784775912836'
+    release_date: '2008-12-02'
+    volume_label: 下

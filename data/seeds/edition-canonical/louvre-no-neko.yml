@@ -1,0 +1,26 @@
+slug: louvre-no-neko
+canonical_label: 通常版
+source: 上下巻対応拡張 2026-07-04(volume_label搬送・全ゲート再適用 sid=146234)
+publisher: 小学館
+volumes: &id001
+- number: 1
+  isbn13: '9784091897480'
+  release_date: 2017-11
+  volume_label: 上
+- number: 2
+  isbn13: '9784091897497'
+  release_date: 2017-11
+  volume_label: 下
+versions:
+- label: ビッグコミックススペシャル(2017)
+  volumes: *id001
+- label: ビッグコミックススペシャル(2018)
+  volumes:
+  - number: 1
+    isbn13: '9784091792488'
+    release_date: 2018-04
+    volume_label: 上
+  - number: 2
+    isbn13: '9784091792495'
+    release_date: 2018-04
+    volume_label: 下

@@ -1,0 +1,27 @@
+slug: qp-gaiden-azuma-ryou
+canonical_label: 通常版
+source: 上下巻対応拡張 2026-07-04(volume_label搬送・全ゲート再適用 sid=36831)
+publisher: 秋田書店
+volumes: &id001
+- number: 1
+  isbn13: '9784253252010'
+  release_date: 2013-06
+- number: 2
+  isbn13: '9784253252027'
+  release_date: 2013-11
+- number: 3
+  isbn13: '9784253252034'
+  release_date: 2014-06
+versions:
+- label: プレイコミック・シリーズ(2013-14)
+  volumes: *id001
+- label: Akita top comics wide(2019)
+  volumes:
+  - number: 1
+    isbn13: '9784253249423'
+    release_date: 2019-02
+    volume_label: 上
+  - number: 2
+    isbn13: '9784253249430'
+    release_date: 2019-03
+    volume_label: 下

@@ -1,0 +1,26 @@
+slug: sukimon-yanen
+canonical_label: 通常版
+source: 上下巻対応拡張 2026-07-04(volume_label搬送・全ゲート再適用 sid=24538)
+publisher: 講談社
+volumes: &id001
+- number: 1
+  isbn13: '9784063285116'
+  release_date: 1997-04
+  volume_label: 上巻
+- number: 2
+  isbn13: '9784063285123'
+  release_date: 1997-04
+  volume_label: 下巻
+versions:
+- label: モーニングKC(1997)
+  volumes: *id001
+- label: King series(2009)
+  volumes:
+  - number: 1
+    isbn13: '9784862254863'
+    release_date: 2009-08
+    volume_label: 上
+  - number: 2
+    isbn13: '9784862254870'
+    release_date: 2009-08
+    volume_label: 下

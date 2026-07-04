@@ -1,0 +1,27 @@
+slug: nariagari
+canonical_label: 通常版
+source: 上下巻対応拡張 2026-07-04(volume_label搬送・全ゲート再適用 sid=102007)
+publisher: 角川グループパブリッシング
+volumes: &id001
+- number: 1
+  isbn13: '9784047250406'
+  release_date: 2008-07
+- number: 2
+  isbn13: '9784047250505'
+  release_date: 2008-10
+- number: 3
+  isbn13: '9784047250581'
+  release_date: 2009-03
+versions:
+- label: 1993年版
+  volumes:
+  - number: 1
+    isbn13: '9784894240063'
+    release_date: 1993-10
+    volume_label: 前編
+  - number: 2
+    isbn13: '9784894240124'
+    release_date: 1993-12
+    volume_label: 後編
+- label: 通常版(2008-09)
+  volumes: *id001

@@ -1,0 +1,26 @@
+slug: manga-kabuki-nyuumon
+canonical_label: 通常版
+source: 上下巻対応拡張 2026-07-04(volume_label搬送・全ゲート再適用 sid=71068)
+publisher: 平凡社
+volumes: &id001
+- number: 1
+  isbn13: '9784582287073'
+  release_date: 1987-08
+  volume_label: 上
+- number: 2
+  isbn13: '9784582287127'
+  release_date: 1988-06
+  volume_label: 下
+versions:
+- label: 通常版(1987-88)
+  volumes: *id001
+- label: 2009年版
+  volumes:
+  - number: 1
+    isbn13: '9784582287349'
+    release_date: 2009-12
+    volume_label: 上
+  - number: 2
+    isbn13: '9784582287356'
+    release_date: 2009-12
+    volume_label: 下

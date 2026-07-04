@@ -1,0 +1,27 @@
+slug: tokugawa-ieyasu-2012
+canonical_label: 通常版
+source: 上下巻対応拡張 2026-07-04(volume_label搬送・全ゲート再適用 sid=6131)
+publisher: 小学館
+volumes: &id001
+- number: 1
+  isbn13: '9784091780812'
+  release_date: 1983-02
+- number: 2
+  isbn13: '9784091780829'
+  release_date: 1983-03
+- number: 3
+  isbn13: '9784091780836'
+  release_date: 1983-04
+versions:
+- label: 通常版(1983)
+  volumes: *id001
+- label: King series 漫画スーパーワイド(2012)
+  volumes:
+  - number: 1
+    isbn13: '9784862258595'
+    release_date: 2012-09
+    volume_label: 上
+  - number: 2
+    isbn13: '9784862258601'
+    release_date: 2012-09
+    volume_label: 下

@@ -1,0 +1,24 @@
+slug: lupin-iii-vs-meitantei-conan-za-movie
+canonical_label: 通常版
+source: 上下巻対応拡張 2026-07-04(volume_label搬送・全ゲート再適用 sid=31750)
+publisher: 小学館
+volumes: &id001
+- number: 1
+  isbn13: '9784091257000'
+  release_date: '2015-03-23'
+- number: 2
+  isbn13: '9784091258359'
+  release_date: '2015-05-23'
+versions:
+- label: 少年サンデーコミックススペシャル(2014)
+  volumes:
+  - number: 1
+    isbn13: '9784091252203'
+    release_date: '2014-08-23'
+    volume_label: 上
+  - number: 2
+    isbn13: '9784091252333'
+    release_date: '2014-09-23'
+    volume_label: 下
+- label: 少年サンデーコミックス(2015)
+  volumes: *id001

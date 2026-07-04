@@ -1,0 +1,27 @@
+slug: kishi-gundam-seiden
+canonical_label: 通常版
+source: 上下巻対応拡張 2026-07-04(volume_label搬送・全ゲート再適用 sid=165680)
+publisher: 講談社
+volumes: &id001
+- number: 1
+  isbn13: '9784063218169'
+  release_date: '1997-09-05'
+- number: 2
+  isbn13: '9784063218244'
+  release_date: '1997-11-06'
+- number: 3
+  isbn13: '9784063218374'
+  release_date: '1998-05-07'
+versions:
+- label: 講談社コミックスボンボン(1997-98)
+  volumes: *id001
+- label: KCDX(2017)
+  volumes:
+  - number: 1
+    isbn13: '9784065104064'
+    release_date: 2017-10
+    volume_label: 上
+  - number: 2
+    isbn13: '9784065104132'
+    release_date: 2017-11
+    volume_label: 下

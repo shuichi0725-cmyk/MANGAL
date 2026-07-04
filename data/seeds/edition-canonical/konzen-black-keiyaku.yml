@@ -1,0 +1,26 @@
+slug: konzen-black-keiyaku
+canonical_label: 通常版
+source: 上下巻対応拡張 2026-07-04(volume_label搬送・全ゲート再適用 sid=96428)
+publisher: 竹書房
+volumes: &id001
+- number: 1
+  isbn13: '9784801952331'
+  release_date: 2015-05
+  volume_label: 上
+- number: 2
+  isbn13: '9784801952348'
+  release_date: 2015-05
+  volume_label: 下
+versions:
+- label: Bamboo comics(2015)
+  volumes: *id001
+- label: Bamboo comics(2019)
+  volumes:
+  - number: 1
+    isbn13: '9784801967632'
+    release_date: 2019-10
+    volume_label: 上
+  - number: 2
+    isbn13: '9784801967649'
+    release_date: 2019-10
+    volume_label: 下

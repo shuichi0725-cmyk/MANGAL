@@ -1,0 +1,25 @@
+slug: sherlock-berugureebia-no-shuubun
+canonical_label: 通常版
+source: 上下巻対応拡張 2026-07-04(volume_label搬送・全ゲート再適用 sid=60796)
+publisher: KADOKAWA
+volumes: &id001
+- number: 1
+  isbn13: '9784041016862'
+  release_date: 2016-02
+- number: 3
+  isbn13: '9784041120200'
+  release_date: 2021-12
+  volume_label: 下
+versions:
+- label: 角川コミックス・エース(2016-21)
+  volumes: *id001
+- label: 2019年版
+  volumes:
+  - number: 1
+    isbn13: '9784046043665'
+    release_date: 2019-12
+    volume_label: 上
+  - number: 2
+    isbn13: '9784046058171'
+    release_date: 2022-06
+    volume_label: 下

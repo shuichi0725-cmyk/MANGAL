@@ -1,0 +1,26 @@
+slug: running-dai-2-bu
+canonical_label: 通常版
+source: 上下巻対応拡張 2026-07-04(volume_label搬送・全ゲート再適用 sid=45953)
+publisher: 集英社
+volumes: &id001
+- number: 1
+  isbn13: '9784088600505'
+  release_date: '1983-08-17'
+  volume_label: 前編
+- number: 2
+  isbn13: '9784088600512'
+  release_date: '1983-09-19'
+  volume_label: 後編
+versions:
+- label: ぶ～けコミックス(1983)
+  volumes: *id001
+- label: ぶ～けコミックス(1984)
+  volumes:
+  - number: 1
+    isbn13: '9784088600741'
+    release_date: 1984-11
+    volume_label: 前編
+  - number: 2
+    isbn13: '9784088600765'
+    release_date: 1984-12
+    volume_label: 後編

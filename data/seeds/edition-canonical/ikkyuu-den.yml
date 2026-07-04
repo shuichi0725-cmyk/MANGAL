@@ -1,0 +1,34 @@
+slug: ikkyuu-den
+canonical_label: 通常版
+source: 上下巻対応拡張 2026-07-04(volume_label搬送・全ゲート再適用 sid=48489)
+publisher: 平凡社
+volumes: &id001
+- number: 1
+  isbn13: '9784582287165'
+  release_date: 1989-11
+  volume_label: 上巻
+- number: 2
+  isbn13: '9784582287172'
+  release_date: 1990-05
+  volume_label: 中巻
+- number: 3
+  isbn13: '9784582287189'
+  release_date: 1990-10
+  volume_label: 下巻
+versions:
+- label: 通常版(1989-90)
+  volumes: *id001
+- label: HMB(2005)
+  volumes:
+  - number: 1
+    isbn13: '9784834273397'
+    release_date: 2005-07
+    volume_label: 上
+  - number: 2
+    isbn13: '9784834273427'
+    release_date: 2005-09
+    volume_label: 中
+  - number: 3
+    isbn13: '9784834273458'
+    release_date: 2005-09
+    volume_label: 下
