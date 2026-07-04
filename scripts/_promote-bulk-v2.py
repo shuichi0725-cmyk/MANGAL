@@ -319,8 +319,10 @@ def apply_edition_canonical(slug: str, editions: list, canon: dict) -> list:
         out.append(mk(xe.get("volumes"), xe.get("label") or "別版", xe.get("publisher") or pub,
                       xe.get("label"), xe.get("type") or "kanzenban"))
     # standard/aizoban 以外の既存版(文庫等)は温存
+    # ★suppress_types(2026-07-05 009): canonicalのextraと重複する既存タブを明示除去(opt-in)
+    _sup = set(s.get("suppress_types") or [])
     for e in editions:
-        if e.get("type") not in ("standard", "aizoban"):
+        if e.get("type") not in ("standard", "aizoban") and e.get("type") not in _sup:
             out.append(e)
     return out
 
