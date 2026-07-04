@@ -2122,6 +2122,8 @@ def build_yml(
     raw_kana = ((corr or {}).get("title_kana") or series_row["title_kana"]
                 or fill or src_yml.get("title_kana", ""))
     o["title_kana"] = _strip_pua(re.sub(r"[\s　]+", "", raw_kana)) if raw_kana else ""
+    if src_yml.get("_kana_force"):  # ★_title_forceのkana版(影響半径=このsrcのみ。正規代入の後で上書き)
+        o["title_kana"] = src_yml["_kana_force"]
     # title_romaji = 分かち書きかな(corr_segmented優先)からヘボン式生成。
     seg_kana = (corr or {}).get("title_kana_segmented") or raw_kana
     _rom = romanize_kana(_strip_pua(seg_kana))
