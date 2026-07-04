@@ -285,10 +285,14 @@ def apply_edition_canonical(slug: str, editions: list, canon: dict) -> list:
     if not s:
         return editions
     def mk(vols, label, publisher, imprint, etype):
+        def _v(v):
+            o = {"number": v["number"], "asin": None, "isbn13": v.get("isbn13"),
+                 "cover_url": None, "release_date": v.get("release_date")}
+            if v.get("volume_label"):  # ★上下巻対応(2026-07-04): seedのvolume_labelを搬送
+                o["volume_label"] = v["volume_label"]
+            return o
         return {"type": etype, "label": label, "publisher": publisher, "imprint": imprint,
-                "volumes": [{"number": v["number"], "asin": None, "isbn13": v.get("isbn13"),
-                             "cover_url": None, "release_date": v.get("release_date")}
-                            for v in (vols or [])]}
+                "volumes": [_v(v) for v in (vols or [])]}
     # 既存 standard の publisher を継承(無ければ seed/None)
     cur_std = next((e for e in editions if e.get("type") == "standard"), None)
     pub = (cur_std or {}).get("publisher") or s.get("publisher")
@@ -298,11 +302,14 @@ def apply_edition_canonical(slug: str, editions: list, canon: dict) -> list:
     # ★刷タブ(2026-07-04 うる星復旧): 同冊数の別カバー刷(新装版等)を standard の versions[] に畳む
     #   ([[urusei_version_display_rules]]。 旧 _regroup-versions.py 直接パッチは非durableで消えた→canonical結線)
     if s.get("versions"):
+        def _vv(v):
+            o = {"number": v["number"], "asin": None, "isbn13": v.get("isbn13"),
+                 "cover_url": None, "release_date": v.get("release_date")}
+            if v.get("volume_label"):
+                o["volume_label"] = v["volume_label"]
+            return o
         out[0]["versions"] = [
-            {"label": vv.get("label") or "別刷",
-             "volumes": [{"number": v["number"], "asin": None, "isbn13": v.get("isbn13"),
-                          "cover_url": None, "release_date": v.get("release_date")}
-                         for v in (vv.get("volumes") or [])]}
+            {"label": vv.get("label") or "別刷", "volumes": [_vv(v) for v in (vv.get("volumes") or [])]}
             for vv in s["versions"]]
     if s.get("compact_edition"):
         ce = s["compact_edition"]
