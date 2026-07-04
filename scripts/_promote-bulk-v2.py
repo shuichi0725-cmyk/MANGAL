@@ -2112,7 +2112,8 @@ def build_yml(
     o: dict = {}
     o["slug"] = _slug_override(src_yml["slug"])
     # title: seed3.title(手動 override)優先 → series_row.title(cluster-best 反映済)。
-    o["title"] = _strip_pua((seed3 or {}).get("title") or series_row["title"])
+    # ★_title_force(2026-07-04): 新頁stubが本編series rowを基盤にする時の題強制(激マン!Z&グレート編型)
+    o["title"] = _strip_pua(src_yml.get("_title_force") or (seed3 or {}).get("title") or series_row["title"])
     # title_kana は スペース削除 (= MANGAL protocol: ふりがな に空白 入れない)
     # ★フリガナ補正 seed を最優先(種2[series_row]も種3[src_yml]も誤っていた key)。
     corr = load_furigana_corrections().get(series_row["series_key"])
