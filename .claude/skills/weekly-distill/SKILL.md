@@ -57,7 +57,13 @@ API: POST $B/api/contact {"body":"smoke"} → {"ok":true}
 価格非表示: 作品頁に ¥ が無い
 ```
 
-### 6. 報告
+### 6. marker更新 (= 差分反映エンジンの基準点)
+```
+python -c "import json,subprocess;h=subprocess.run(['git','rev-parse','HEAD'],capture_output=True,text=True).stdout.strip();json.dump({'code_commit':h,'data_commit':h,'note':'週次蒸留'},open('.cache/prod-deploy-marker.json','w'),indent=1)"
+```
+(diff-deploy skill のコードドリフト判定・差分検出の起点。忘れると差分反映が過剰検出/誤abortする)
+
+### 7. 報告
 工程表(ビルド頁数/PUT数/疎通結果)で完了報告。異常は隠さずそのまま。
 
 ## 備考

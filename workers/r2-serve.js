@@ -88,6 +88,27 @@ export default {
       return new Response("Method Not Allowed", { status: 405 });
     }
 
+    // ★edge cache purge(差分反映エンジン用 2026-07-04。 PURGE_TOKEN認証・対象パスのみ)
+    if (url.pathname === "/api/purge" && request.method === "POST") {
+      let d = {};
+      try { d = await request.json(); } catch {}
+      if (!env.PURGE_TOKEN || d.token !== env.PURGE_TOKEN) {
+        return new Response("forbidden", { status: 403 });
+      }
+      const paths = Array.isArray(d.paths) ? d.paths.slice(0, 500) : [];
+      const cache = caches.default;
+      let purged = 0;
+      for (const p of paths) {
+        const u = new URL(String(p), url.origin);
+        if (await cache.delete(new Request(u.toString()))) purged++;
+        // trailing slash / index variant も念のため
+        if (await cache.delete(new Request(u.toString() + "/"))) purged++;
+      }
+      return new Response(JSON.stringify({ ok: true, purged, requested: paths.length }), {
+        headers: { "content-type": "application/json", "cache-control": "no-store", ...CORS },
+      });
+    }
+
     // ★お問い合わせ(受信箱=KV。 送信先メールはコードに置かない=非公開。 将来Email Routing転送)
     if (url.pathname === "/api/contact" && env.CONTACT && request.method === "POST") {
       let d = {};
