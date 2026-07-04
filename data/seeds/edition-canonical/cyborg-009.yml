@@ -1,113 +1,287 @@
 slug: cyborg-009
-canonical_label: MFコミックス
-source: Wiki蒸留 2026(巻別ISBN+日付・全36巻・checksum再計算・楽天gate36/36)
+canonical_label: サンデーコミックス
+source: 'Wiki書誌4版(2026-07-05ユーザ指摘で再構築): standard=秋田サンデーC全15(1966原版)+MF36/豪華版23をextra化。旧canonical(MF36をstandard誤配置)是正+native MF重複タブsuppress'
 publisher: 秋田書店
 volumes:
 - number: 1
-  isbn13: '9784889917949'
-  release_date: '2001-10-23'
+  isbn13: '9784253060011'
+  release_date: '1966-07-01'
 - number: 2
-  isbn13: '9784889917956'
-  release_date: '2001-10-23'
+  isbn13: '9784253060028'
+  release_date: '1966-08-03'
 - number: 3
-  isbn13: '9784889917963'
-  release_date: '2001-10-23'
+  isbn13: '9784253060035'
+  release_date: '1966-09-24'
 - number: 4
-  isbn13: '9784840104111'
-  release_date: '2001-11-23'
+  isbn13: '9784253060042'
+  release_date: '1966-10-31'
 - number: 5
-  isbn13: '9784840104128'
-  release_date: '2001-11-23'
+  isbn13: '9784253060059'
+  release_date: '1967-01-31'
 - number: 6
-  isbn13: '9784840104135'
-  release_date: '2001-11-23'
+  isbn13: '9784253060066'
+  release_date: '1967-04-21'
 - number: 7
-  isbn13: '9784840104210'
-  release_date: '2001-12-24'
+  isbn13: '9784253060073'
+  release_date: '1967-08-31'
 - number: 8
-  isbn13: '9784840104227'
-  release_date: '2001-12-24'
+  isbn13: '9784253060080'
+  release_date: '1968-04-13'
 - number: 9
-  isbn13: '9784840104234'
-  release_date: '2001-12-24'
+  isbn13: '9784253060097'
+  release_date: '1968-11-16'
 - number: 10
-  isbn13: '9784840104241'
-  release_date: '2001-12-24'
+  isbn13: '9784253060103'
+  release_date: '1970-03-27'
 - number: 11
-  isbn13: '9784840104265'
-  release_date: '2002-01-23'
+  isbn13: '9784253060110'
+  release_date: '1976-10-07'
 - number: 12
-  isbn13: '9784840104272'
-  release_date: '2002-01-23'
+  isbn13: '9784253060127'
+  release_date: '1977-08-11'
 - number: 13
-  isbn13: '9784840104296'
-  release_date: '2002-02-23'
+  isbn13: '9784253060134'
+  release_date: '1980-08-02'
 - number: 14
-  isbn13: '9784840104302'
-  release_date: '2002-02-23'
+  isbn13: '9784253060141'
+  release_date: '1980-10-03'
 - number: 15
-  isbn13: '9784840104357'
-  release_date: '2002-03-23'
-- number: 16
-  isbn13: '9784840104364'
-  release_date: '2002-03-23'
-- number: 17
-  isbn13: '9784840104425'
-  release_date: '2002-04-23'
-- number: 18
-  isbn13: '9784840104432'
-  release_date: '2002-04-23'
-- number: 19
-  isbn13: '9784840104463'
-  release_date: '2002-05-23'
-- number: 20
-  isbn13: '9784840104470'
-  release_date: '2002-05-23'
-- number: 21
-  isbn13: '9784840104487'
-  release_date: '2002-06-23'
-- number: 22
-  isbn13: '9784840104494'
-  release_date: '2002-06-23'
-- number: 23
-  isbn13: '9784840104524'
-  release_date: '2002-07-23'
-- number: 24
-  isbn13: '9784840104531'
-  release_date: '2002-07-23'
-- number: 25
-  isbn13: '9784840104579'
-  release_date: '2002-08-23'
-- number: 26
-  isbn13: '9784840104586'
-  release_date: '2002-08-23'
-- number: 27
-  isbn13: '9784840104616'
-  release_date: '2002-09-21'
-- number: 28
-  isbn13: '9784840104623'
-  release_date: '2002-09-21'
-- number: 29
-  isbn13: '9784840104692'
-  release_date: '2002-11-20'
-- number: 30
-  isbn13: '9784840104708'
-  release_date: '2002-11-20'
-- number: 31
-  isbn13: '9784840104715'
-  release_date: '2002-12-21'
-- number: 32
-  isbn13: '9784840104722'
-  release_date: '2002-12-21'
-- number: 33
-  isbn13: '9784840104753'
-  release_date: '2003-01-23'
-- number: 34
-  isbn13: '9784840104760'
-  release_date: '2003-01-23'
-- number: 35
-  isbn13: '9784840104791'
-  release_date: '2003-02-22'
-- number: 36
-  isbn13: '9784840104807'
-  release_date: '2003-02-22'
+  isbn13: '9784253060158'
+  release_date: '1980-12-31'
+extra_editions:
+- type: shinsoban
+  label: MFコミックス版(2001-02)
+  publisher: メディアファクトリー
+  volumes:
+  - number: 1
+    isbn13: '9784889917949'
+    release_date: '2001-10-23'
+  - number: 2
+    isbn13: '9784889917956'
+    release_date: '2001-10-23'
+  - number: 3
+    isbn13: '9784889917963'
+    release_date: '2001-10-23'
+  - number: 4
+    isbn13: '9784840104111'
+    release_date: '2001-11-23'
+  - number: 5
+    isbn13: '9784840104128'
+    release_date: '2001-11-23'
+  - number: 6
+    isbn13: '9784840104135'
+    release_date: '2001-11-23'
+  - number: 7
+    isbn13: '9784840104210'
+    release_date: '2001-12-24'
+  - number: 8
+    isbn13: '9784840104227'
+    release_date: '2001-12-24'
+  - number: 9
+    isbn13: '9784840104234'
+    release_date: '2001-12-24'
+  - number: 10
+    isbn13: '9784840104241'
+    release_date: '2001-12-24'
+  - number: 11
+    isbn13: '9784840104265'
+    release_date: '2002-01-23'
+    volume_label: 怪物島編
+  - number: 12
+    isbn13: '9784840104272'
+    release_date: '2002-01-23'
+    volume_label: 中東編
+  - number: 13
+    isbn13: '9784840104296'
+    release_date: '2002-02-23'
+    volume_label: 移民編
+  - number: 14
+    isbn13: '9784840104302'
+    release_date: '2002-02-23'
+    volume_label: 海の底編
+  - number: 15
+    isbn13: '9784840104357'
+    release_date: '2002-03-23'
+    volume_label: 天使編
+  - number: 16
+    isbn13: '9784840104364'
+    release_date: '2002-03-23'
+    volume_label: 神々との闘い編
+  - number: 17
+    isbn13: '9784840104425'
+    release_date: '2002-04-23'
+    volume_label: エッダ［北欧神話］編
+  - number: 18
+    isbn13: '9784840104432'
+    release_date: '2002-04-23'
+    volume_label: 雪のカーニバル編
+  - number: 19
+    isbn13: '9784840104463'
+    release_date: '2002-05-23'
+    volume_label: 海底ピラミッド編 1
+  - number: 20
+    isbn13: '9784840104470'
+    release_date: '2002-05-23'
+    volume_label: 海底ピラミッド編 2
+  - number: 21
+    isbn13: '9784840104487'
+    release_date: '2002-06-23'
+    volume_label: 海底ピラミッド編 3
+  - number: 22
+    isbn13: '9784840104494'
+    release_date: '2002-06-23'
+    volume_label: 黄金の三角地帯編
+  - number: 23
+    isbn13: '9784840104524'
+    release_date: '2002-07-23'
+    volume_label: 極北の幽霊編
+  - number: 24
+    isbn13: '9784840104531'
+    release_date: '2002-07-23'
+    volume_label: アステカ編
+  - number: 25
+    isbn13: '9784840104579'
+    release_date: '2002-08-23'
+    volume_label: '{{ruby|未来都市|コンピュートピア}}編'
+  - number: 26
+    isbn13: '9784840104586'
+    release_date: '2002-08-23'
+    volume_label: 裸足のザンジバル編
+  - number: 27
+    isbn13: '9784840104616'
+    release_date: '2002-09-21'
+    volume_label: イシュタルの竜編
+  - number: 28
+    isbn13: '9784840104623'
+    release_date: '2002-09-21'
+    volume_label: 結晶時間編
+  - number: 29
+    isbn13: '9784840104692'
+    release_date: '2002-11-20'
+    volume_label: ファラオ・ウイルス編
+  - number: 30
+    isbn13: '9784840104708'
+    release_date: '2002-11-20'
+    volume_label: コスモチャイルド編
+  - number: 31
+    isbn13: '9784840104715'
+    release_date: '2002-12-21'
+    volume_label: アフロディーテ編
+  - number: 32
+    isbn13: '9784840104722'
+    release_date: '2002-12-21'
+    volume_label: 変身編
+  - number: 33
+    isbn13: '9784840104753'
+    release_date: '2003-01-23'
+    volume_label: スターマーメイド伝説編
+  - number: 34
+    isbn13: '9784840104760'
+    release_date: '2003-01-23'
+    volume_label: ザ・ディープスペース編
+  - number: 35
+    isbn13: '9784840104791'
+    release_date: '2003-02-22'
+    volume_label: 時空間漂流民編 1
+  - number: 36
+    isbn13: '9784840104807'
+    release_date: '2003-02-22'
+    volume_label: 時空間漂流民編 2
+- type: aizoban
+  label: 豪華版(1989-92)
+  publisher: 秋田書店
+  volumes:
+  - number: 1
+    isbn13: '9784253102780'
+    release_date: '1989-10-12'
+    volume_label: 神話・伝説編
+  - number: 2
+    isbn13: '9784253102797'
+    release_date: '1989-11-13'
+    volume_label: 海の底編
+  - number: 3
+    isbn13: '9784253102803'
+    release_date: '1989-12-18'
+    volume_label: 海底ピラミッド編 Part-1
+  - number: 4
+    isbn13: '9784253102810'
+    release_date: '1990-02-16'
+    volume_label: 海底ピラミッド編 Part-2
+  - number: 5
+    isbn13: '9784253102827'
+    release_date: '1990-04-02'
+    volume_label: 誕生編 Part-1
+  - number: 6
+    isbn13: '9784253102834'
+    release_date: '1990-06-14'
+    volume_label: 誕生編 Part-2
+  - number: 7
+    isbn13: '9784253102841'
+    release_date: '1990-07-26'
+    volume_label: 誕生編 Part-3
+  - number: 8
+    isbn13: '9784253102858'
+    release_date: '1990-09-28'
+    volume_label: 誕生編 Part-4
+  - number: 9
+    isbn13: '9784253102865'
+    release_date: '1990-10-18'
+    volume_label: 地下帝国ヨミ編 Part-1
+  - number: 10
+    isbn13: '9784253102872'
+    release_date: '1990-11-26'
+    volume_label: 地下帝国ヨミ編 Part-2
+  - number: 11
+    isbn13: '9784253102889'
+    release_date: '1990-12-17'
+    volume_label: '{{ruby|怪物島|モンスター・アイランド}}&砂漠のモーゼ編'
+  - number: 12
+    isbn13: '9784253102896'
+    release_date: '1991-01-24'
+    volume_label: 移民編
+  - number: 13
+    isbn13: '9784253102902'
+    release_date: '1991-06-27'
+    volume_label: 甦る{{ruby|黒い幽霊団|ブラック・ゴースト}}編
+  - number: 14
+    isbn13: '9784253102919'
+    release_date: '1991-09-27'
+    volume_label: 宇宙からの{{ruby|伝言|メッセージ}}編
+  - number: 15
+    isbn13: '9784253102926'
+    release_date: '1991-12-16'
+    volume_label: 失われし伝説編
+  - number: 16
+    isbn13: '9784253103688'
+    release_date: '1992-04-24'
+    volume_label: '{{ruby|新・黒い幽霊団|ネオ・ブラック・ゴースト}} NEW PROJECT編'
+  - number: 17
+    isbn13: '9784253103695'
+    release_date: '1992-06-29'
+    volume_label: ザ・ディープ・スペース編
+  - number: 18
+    isbn13: '9784253103701'
+    release_date: '1992-08-27'
+    volume_label: スター・マーメイド伝説編
+  - number: 19
+    isbn13: '9784253103718'
+    release_date: '1993-09-28'
+    volume_label: 時空間漂流民編
+  - number: 20
+    isbn13: '9784253103725'
+    release_date: '1993-12-15'
+    volume_label: '{{ruby|未来都市|コンピュートピア}}編'
+  - number: 21
+    isbn13: '9784253103732'
+    release_date: '1996-03-29'
+    volume_label: 神々との闘い編
+  - number: 22
+    isbn13: '9784253103985'
+    release_date: '2001-10-25'
+    volume_label: '{{ruby|雪割草交響曲|レーバー・ブリュームヘン・シンフォニー}}編'
+  - number: 23
+    isbn13: '9784253103992'
+    release_date: '2003-05-29'
+    volume_label: 天使編
+suppress_types:
+- kanzenban
