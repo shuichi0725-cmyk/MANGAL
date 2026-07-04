@@ -33,7 +33,7 @@ export default function Design03() {
               <p className="inline-block bg-ink px-2 py-0.5 text-[10px] font-bold tracking-widest text-white">今週の一冊</p>
               <p className="mt-2 text-xl font-extrabold leading-snug">{feature.title}</p>
               <p className="mt-1.5 border-l-2 border-[var(--color-accent)] pl-2 text-[12px] leading-relaxed text-ink/70 line-clamp-3">
-                {feature.synopsis ?? `${feature.authors.map((a) => a.name).join("・")}が描く、全${volCount(feature)}巻の金字塔。`}
+                {feature.synopsis ?? `${(feature.authors ?? []).map((a) => a.name).join("・")}が描く、全${volCount(feature)}巻の金字塔。`}
               </p>
             </div>
           </div>

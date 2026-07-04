@@ -38,7 +38,7 @@ export default function Design02() {
           <div className="min-w-0 self-center">
             <p className="text-[10px] font-bold tracking-widest opacity-80">今日の新刊から</p>
             <p className="mt-1 text-lg font-extrabold leading-snug line-clamp-2">{hero.title}</p>
-            <p className="mt-1 text-[12px] opacity-90">{hero.authors.map((a) => a.name).join("・")}</p>
+            <p className="mt-1 text-[12px] opacity-90">{(hero.authors ?? []).map((a) => a.name).join("・")}</p>
             <span className="mt-2 inline-block rounded-full bg-white/20 px-3 py-1 text-[11px] font-semibold">作品ページへ →</span>
           </div>
         </Link>

@@ -44,7 +44,7 @@ export default function Design01() {
               <div className="min-w-0 flex-1">
                 <p className="truncate text-[13.5px] font-semibold text-ink">{m.title}</p>
                 <p className="truncate text-[11px] text-ink/55">
-                  {m.authors.map((a) => a.name).join("・")} ・ {m.year_started ?? "—"}年
+                  {(m.authors ?? []).map((a) => a.name).join("・")} ・ {m.year_started ?? "—"}年
                 </p>
                 <p className="text-[11px] text-ink/45">
                   {volCount(m)}巻 {m.status === "completed" ? "完結" : "続刊"} ・ 最新 {latestDate(m)?.slice(0, 7) ?? "—"}

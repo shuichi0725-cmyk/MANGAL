@@ -123,7 +123,7 @@ export default function Design11() {
                 <Link href={`/manga/${m.slug}`} className="block group spring-press">
                   <Cover m={m} sizes="96px" />
                   <MarqueeTitle text={m.title} className="mt-1 text-[12px] leading-snug text-ink/85 group-hover:text-[var(--color-accent)]" />
-                  <p className="truncate text-[10px] text-ink/50">{m.authors.map((a) => a.name).join("・")}</p>
+                  <p className="truncate text-[10px] text-ink/50">{(m.authors ?? []).map((a) => a.name).join("・")}</p>
                 </Link>
               </li>
             ))}
@@ -200,7 +200,7 @@ export default function Design11() {
             items={seeded(manga, (m) => m.slug, 60, daySalt).map((m) => ({
               slug: m.slug,
               title: m.title,
-              authors: m.authors.map((a) => a.name).join("・"),
+              authors: (m.authors ?? []).map((a) => a.name).join("・"),
               vols: volCount(m),
               cover: coverUrl(m),
             }))}

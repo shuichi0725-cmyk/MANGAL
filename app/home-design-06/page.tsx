@@ -33,7 +33,7 @@ export default function Design06() {
                   </Link>
                 </td>
                 <td className="max-w-[120px] truncate border-b border-[var(--color-line)]/60 px-2 py-1.5 text-ink/75">
-                  {m.authors.map((a) => a.name).join("・")}
+                  {(m.authors ?? []).map((a) => a.name).join("・")}
                 </td>
                 <td className="border-b border-[var(--color-line)]/60 px-2 py-1.5 text-right tabular-nums">{volCount(m)}</td>
                 <td className="border-b border-[var(--color-line)]/60 px-2 py-1.5 text-right tabular-nums text-ink/70">{m.year_started ?? "—"}</td>

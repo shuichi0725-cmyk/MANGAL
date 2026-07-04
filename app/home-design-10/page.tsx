@@ -78,7 +78,7 @@ export default function Design10() {
                 <p className="inline-block rounded bg-ink px-2 py-0.5 text-[10px] font-bold tracking-widest text-white">今週の一冊</p>
                 <p className="mt-1.5 text-lg font-extrabold leading-snug line-clamp-2">{hero.title}</p>
                 <p className="mt-1.5 border-l-2 border-[var(--color-accent)] pl-2 text-[12px] leading-relaxed text-ink/70 line-clamp-3">
-                  {hero.synopsis ?? `${hero.authors.map((a) => a.name).join("・")}、全${volCount(hero)}巻。`}
+                  {hero.synopsis ?? `${(hero.authors ?? []).map((a) => a.name).join("・")}、全${volCount(hero)}巻。`}
                 </p>
               </div>
             </Link>

@@ -35,7 +35,7 @@ export default function Design05() {
               <div className="min-w-0 self-center">
                 <p className="text-[10px] font-bold tracking-widest text-[var(--color-accent)]">🎲 運命の一冊</p>
                 <p className="mt-0.5 text-[14px] font-bold leading-snug line-clamp-2">{random1.title}</p>
-                <p className="text-[11px] text-ink/55">{random1.authors.map((a) => a.name).join("・")} ・ 全{volCount(random1)}巻</p>
+                <p className="text-[11px] text-ink/55">{(random1.authors ?? []).map((a) => a.name).join("・")} ・ 全{volCount(random1)}巻</p>
               </div>
             </Tile>
           </Link>
