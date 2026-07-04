@@ -7,6 +7,9 @@ metadata:
   originSessionId: 40db3460-5533-4358-8d06-8214ea9ecaea
 ---
 
+★叩き方の実装の正 = **`scripts/_lookup.py` + skill external-data-access**(2026-07-04)。コピペ再実装禁止。
+以下はその根拠となる実測知識(SRU/OAI特性)=保持。
+
 ★NDL API の叩き方(2026-06-24 確定。 [[ndl_clustering_design]]の運用面を実測で確定)。
 
 ## ★レート = 楽天Books APIと同じ 1.2秒/req(厳守)

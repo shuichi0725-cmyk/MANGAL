@@ -7,6 +7,9 @@ metadata:
   originSessionId: 04923414-a96f-48e2-b7f4-5622fc881e58
 ---
 
+★運用手順の正 = **skill monthly-distill**(2026-07-04 skill化。トリガー/順序/監査はそちら)。
+本fileは配管の実体・1.2.17実績・検証方式の**記録**(skillの根拠)として保持。
+
 月次蒸留の**実体**(2026-06-28に1.2.17取込で確立)。★CLAUDE.md記載の旧protocol(`_diff-madb.ts`/`_diff-series.ts`/`_select-supplement-diff.ts`/db.sqlite)は**廃止済**。実scriptは下記。
 
 ## 配管の実体

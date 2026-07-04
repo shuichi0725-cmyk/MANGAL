@@ -1,8 +1,8 @@
 - [Project architecture - seeds pyramid](project_architecture_seeds.md) — 種1=MADB raw / 漫画家マスター / 種2=sqlite / 種3=AI fill yaml / 種4=巻補完 / 本番DB の関係
 - [【戒め】人気順で優先するな・全部やる](feedback_no_popularity_priority.md) — 残タスクをpopソートせず端から全部処理。順位付けは無駄(全件やる前提)
-- [【トリガー語】「巻抜け仮想」=_volgap-virtual.py実行](volgap_virtual_tool_trigger.md) — 本番DBで巻抜けフィルタ仮想再現。未promoteのseed適用後の残巻抜けを80秒で算出
+- [巻抜け仮想(実績記録)](volgap_virtual_tool_trigger.md) — やり方の正=skill volgap-audit
 - [【再利用】2026新刊蒸留の完全フロー](distill_2026_pipeline.md) — NDL発見→_distill_preview生成→3段fill(NDL題/作者ISBN錨/楽天)→AI enrich(genre/catch/synopsis要約)。solo_nonfirst130→0・vol_gap21→0。verbatim撲滅・書影recheck・型1本番尊重。スクリプト/seed/順序を全記録
-- [【必読】プレビューデプロイの罠](preview_deploy_pitfalls.md) — mangal-preview反映=15-20分・連投で前ビルドがcancel(変わらないの正体)。push後20分待つ・追加push禁止。確認=Actions REST API curl。一覧は/browse(HomeClient)・ホーム/はhome-design-11。grid item min-w-0でヘッダーズレ封鎖
+- [preview実測+stale生成物の教訓](preview_deploy_pitfalls.md) — やり方の正=skill test-deploy/display-bug-triage。ここは実測と事故史
 - [軽量索引2分割(一覧+検索)実装](lightweight_index_architecture.md) — SSRで65k送らずクライアント遅延fetch。_build-list-index.py生成/MangaListItem・MangaSearchItem型/useMangaIndex・useSearchIndex。プレビューはpushで自動デプロイ・索引はpublic+.preview-data両置き
 - [【必ず使う】統合台帳の実体](intake_manifest_ledger_live.md) — data/seeds/intake-manifest/(operations.jsonl=20台帳3725操作集約 + holes snapshot)。.cache消失事故の恒久対策。CLAUDE.md冒頭にprotocol。新cleanup前に参照
 - [NDL漫画判定=NDC726.1/genre=漫画](ndl_manga_filter_ndc726.md) — 権威的に漫画判定。小説913.6/画集/雑誌を除外。古レコードはgenre=漫画で可。アンソロはシリーズ(レーベル)単位分割・アメコミ対象外
@@ -72,7 +72,7 @@
 - [【戒め】効率を先に考える](feedback_efficiency_first.md) — 重い/繰り返す作業はいきなり実行せず複数案比較→結果同じなら低コスト選択。確実だが遅い手に飛びつかない。前フィルタ/索引/キャッシュ/サンプル確認で速く
 - [【最重要】クラスタ単位=シリーズ](clustering_unit_is_series.md) — 統合は「同一シリーズ題+巻番号連続」の時だけ(ベルセルク続編型)。同IP/同出版社/同著者は統合根拠にしない。著者を軸にしたのが分裂の根本。デフォルト分離。ARIEL14とアウター1は別
 - [著者汚染の根本原因と overlay修正](author_pollution_overlay_fix.md) — clean工程が[著]/[編]タグstrip→build役割優先が死にコード→声優/編集/発売元が作画化+分裂。author-role-corrections.yml(20,959補正)で修正。原作/作画分離+credits欄+キーワード検索も実装し★本番v2適用済(2026-06-10)。残=版違い統合/アンソロ方針
-- [promoteは完了後に終了ハングする(Windows)](promote_hangs_on_exit_windows.md) — 処理は完了済なのにプロセスが居座る。ログ最終ステップ(art-books.v2)/ファイル数で完了判定しkill。終了通知を待たない。dryrun済なら再生成せずcopy。run中はディレクトリ覗かない(ロック競合)
+- [promote/build完了後のプロセス居座り(事実)](promote_hangs_on_exit_windows.md) — 対処の正=skill long-job-ops
 - [重複ページdedup完了(335件)](page_dedup_2026_06.md) — 中身同一の二重出力を統合(69,474→69,139)。源=種2断片を旧source2枚が再集合。page-dedup.yml+alias301+promote skip。同名別作品952は正当=触らない。残=FLAG367(同ISBN別title)/C2副題欠落/怖い話vol不一致
 - [公開時=Worker+R2方式(Pages不可)](hosting_worker_r2_architecture.md) — 69k頁≈14万ファイルがPages上限(有料10万)超え。R2実質0円/差分アップ可/geo・API・redirect一元化。課題=トップが全DB送信(軽量索引要)/O(n)検索/promote旧source依存
 - [【運用】AI書評家リーグ(corner9)](ai_review_league_operation.md) — 同一プロンプト×実在各社AIで書評並列(会社+モデル名表示)。Claudeは題名+同プロンプトだけで自分の分を執筆(公平)、他社はユーザ生成。週キーseed自動表示・初期8節・在庫4で補充通知。第1弾docs/ai-review-pack-01.md配布済
@@ -126,7 +126,9 @@
 - [奇子型(多版混在)の経験則検出](kiko_multiedition_mixing_heuristic.md) — ユーザ経験則=volume_label混在(数字+上/下)+発売日矛盾+書影一部欠け=同一作の複数版conflate。巻抜け1417中162作。NDLで版確定→edition-overrideで版分離。誤マッチ(別作混入)も併発(ねこぱんち←キジトラ)。per-case是正
 - [【進行中・最重要】巻抜けper-case本番前仕上げ](volgap_per_case_cleanup_state.md) — 巻抜け1417を一個ずつ。誤マッチ(別作混入)/奇子型162(多版混在)/単純抜け1050。土台=.cache/volgap-ndl.jsonl(全NDL正データ)。型=Wiki版確定+楽天harvest(1秒1回厳守)+edition-override/volume-exclude/種4。済=ゴルゴ173/ねこぱんち/人間ども/サイボーグ009等。全部やる・順番聞かない・推測で触らない
 - [【最重要方針】掲載除外の優先度](exclusion_priority_policy.md) — ①成年誌(ダントツ)②コンビニ本(本編誤り+無駄増)③纏められないもの(アンソロ>教育)。imprint例付き
-- [【必ず使う】反映=targeted反映(数分)](reflect_protocol_fast.md) — per-caseにフルpromote(3時間)禁止。_reflect-targeted.py。書影promote統合済。トリガー「反映して」
+- [反映=targeted(実測記録)](reflect_protocol_fast.md) — やり方の正=skill reflect-targeted。ここは3時間→数分の実測根拠のみ
 - [【必ず使う】記憶をgit永続化(.claude→repo/.claude-memory)](memory_git_mirror.md) — ローカル記憶をrepoへ鏡写し。更新後は_sync-memory.py+push。旧MEMORY.mdは別物凍結
-- [【厳守】新規登録は順番固定](new_manga_registration_order.md) — ①全巻回収②題確定(勝手命名禁止)③ヨミ/著者確定(不明=報告)④一括登録⑤enrich1巻基点⑥作れない物=欠落表。単巻先行/捏造の再発防止
+- [新規登録の戒め(やらかし記録)](new_manga_registration_order.md) — やり方の正=skill new-manga-register。ここは再発防止の経緯
 - [【厳守】本番デプロイはトリガー待ち](feedback_production_deploy_gate.md) — 週次蒸留して等の明示指示まで本番build/同期しない。テスト確認→GO→本番の順
+
+- [【方針】記憶とskillの棲み分け](feedback_memory_vs_skill_policy.md) — 事実・戒め=memory(無圧縮・巨大化は資産)/やり方=skillが唯一の正
