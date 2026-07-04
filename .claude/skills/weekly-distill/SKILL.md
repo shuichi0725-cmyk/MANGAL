@@ -61,7 +61,11 @@ API: POST $B/api/contact {"body":"smoke"} → {"ok":true}
 ```
 python -c "import json,subprocess;h=subprocess.run(['git','rev-parse','HEAD'],capture_output=True,text=True).stdout.strip();json.dump({'code_commit':h,'data_commit':h,'note':'週次蒸留'},open('.cache/prod-deploy-marker.json','w'),indent=1)"
 ```
-(diff-deploy skill のコードドリフト判定・差分検出の起点。忘れると差分反映が過剰検出/誤abortする)
+続けて pages-manifest も初期化:
+```
+python scripts/_init-pages-manifest.py
+```
+(diff-deploy の検出基準点。marker と対。忘れると差分反映が過剰検出/誤abortする)
 
 ### 7. 報告
 工程表(ビルド頁数/PUT数/疎通結果)で完了報告。異常は隠さずそのまま。

@@ -98,18 +98,21 @@ def main():
     if a.only:
         stems = [s.strip() for s in a.only.split(",") if s.strip()]
     else:
-        r = sh(["git", "diff", "--name-status", f"{mk['data_commit']}..HEAD", "--", "data/manga.v2"], cwd=ROOT)
-        stems, seen = [], set()
-        for ln in r.stdout.splitlines():
-            parts = ln.split("\t")
-            if len(parts) < 2:
-                continue
-            st, path = parts[0], parts[-1]
-            stem = os.path.basename(path)[:-4]
-            if stem in seen:
-                continue
-            seen.add(stem)
-            (dropped if st.startswith("D") else stems).append(stem)
+        # ★manga.v2はgit外(再生成物・.gitignore /data/manga.v2/)なのでgit diff検出は不可(2026-07-04発覚)。
+        #   検出 = 前回デプロイ時のymlハッシュmanifest(.cache/prod-pages-manifest.json)との比較。
+        import glob as _g
+        pm_path = os.path.join(ROOT, ".cache", "prod-pages-manifest.json")
+        if not os.path.exists(pm_path):
+            print("★abort: prod-pages-manifest無し。週次蒸留後に scripts/_init-pages-manifest.py で初期化。")
+            sys.exit(3)
+        prev_pm = json.load(open(pm_path, encoding="utf-8"))
+        cur = {}
+        for p in _g.glob(os.path.join(ROOT, "data", "manga.v2", "*.yml")):
+            st = os.path.basename(p)[:-4]
+            cur[st] = hashlib.sha1(open(p, "rb").read()).hexdigest()[:16]
+        stems = [st for st, h in sorted(cur.items()) if prev_pm.get(st) != h]
+        dropped = [st for st in sorted(prev_pm) if st not in cur]
+        globals()["_CUR_PM"] = cur
     if not stems and not dropped:
         print("差分なし(marker以降 data/manga.v2 に変更がない)。")
         return
@@ -211,6 +214,21 @@ def main():
     mk["data_commit"] = git_head()
     json.dump(mk, open(MARKER, "w", encoding="utf-8"), indent=1)
     print(f"marker更新 data_commit={mk['data_commit'][:9]}")
+    # ★pages-manifest更新(検出の基準点)。--auto=全snapshot / --only=対象stemだけ差し替え
+    pm_path = os.path.join(ROOT, ".cache", "prod-pages-manifest.json")
+    if "_CUR_PM" in globals():
+        json.dump(globals()["_CUR_PM"], open(pm_path, "w"))
+        print("pages-manifest全更新")
+    elif os.path.exists(pm_path):
+        pm = json.load(open(pm_path, encoding="utf-8"))
+        for st in inner:
+            fp = os.path.join(ROOT, "data", "manga.v2", f"{st}.yml")
+            if os.path.exists(fp):
+                pm[st] = hashlib.sha1(open(fp, "rb").read()).hexdigest()[:16]
+        for st in dropped:
+            pm.pop(st, None)
+        json.dump(pm, open(pm_path, "w"))
+        print("pages-manifest部分更新")
 
     # --- 8. 疎通 ---
     ok = 0
