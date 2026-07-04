@@ -24,5 +24,6 @@ export function normalizeForSearch(input: string): string {
     .normalize("NFKC")
     .toLowerCase()
     .replace(/[ー・\-\s]/g, "")
+    .replace(/[惡應戀壽假萬圓學國]/g, (c) => "悪応恋寿仮万円学国"["惡應戀壽假萬圓學國".indexOf(c)])
     .trim();
 }

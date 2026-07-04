@@ -146,6 +146,12 @@ function sortItems(items: MangaListItem[], sort: SortKey): MangaListItem[] {
   }
 }
 
+/** 検索実行時の既定ソート(2026-07-04 ユーザ要望): query有り+sort未指定なら人気順 */
+export function effectiveSort(state: FilterState): SortKey {
+  if (state.query.trim() && state.sort === "default") return "popularity";
+  return state.sort;
+}
+
 /**
  * 一覧フィルタ。 ★検索(query)は別索引(検索索引)で事前計算した matchedSlugs を渡す
  *  (= 一覧索引は検索フィールドを持たない)。 query 有 + matchedSlugs 無(=検索索引未ロード)
@@ -192,7 +198,7 @@ export function applyFilters(
     if (state.statuses.length && !state.statuses.includes(m.status)) return false;
     return true;
   });
-  return sortItems(filtered, state.sort);
+  return sortItems(filtered, effectiveSort(state));
 }
 
 /**
