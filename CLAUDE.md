@@ -173,7 +173,8 @@
 
 ★**正本 = `docs/skill-triggers.md` + `.claude/skills/*/SKILL.md`**(9 skill)。トリガー語を見たら対応skillを必ず開く:
 反映して=reflect-targeted / テスト環境に出して=test-deploy / 週次蒸留=weekly-distill / 日次蒸留=daily-distill /
-後退蒸留=backward-distill / 月次蒸留=monthly-distill / 作品名+リンク=percase-fix / 新規追加=new-manga-register / 巻抜け仮想=volgap-audit / **差分反映して=diff-deploy(データのみ本番へ数分・コード変更はabort→週次)**
+後退蒸留=backward-distill / 月次蒸留=monthly-distill / 作品名+リンク=percase-fix / 新規追加=new-manga-register / 巻抜け仮想=volgap-audit / **差分反映して=diff-deploy(データのみ本番へ数分・コード変更はabort→週次)**。
+★常時参照: 楽天/NDL照会=**external-data-access(必ず_lookup.py)** / 長時間ジョブ=long-job-ops / 表示不具合=display-bug-triage
 
 | ユーザの言い方 | Claudeがやること | 所要 |
 |---|---|---|
