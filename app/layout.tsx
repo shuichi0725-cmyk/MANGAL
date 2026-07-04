@@ -6,9 +6,14 @@ import ScrollTopButton from "@/components/ScrollTopButton";
 import { PurchaseModeProvider, PurchaseModeToggle } from "@/components/PurchaseMode";
 
 export const metadata: Metadata = {
-  title: "MANGAL — 日本の漫画データベース",
+  metadataBase: new URL("https://mangal-db.com"),
+  title: {
+    default: "MANGAL — 日本の漫画データベース",
+    template: "%s | MANGAL",
+  },
   description:
-    "出版年・著者・出版社・分野・ジャンルから日本の漫画を絞り込めるデータベース。各作品の購入はAmazonへ。",
+    "出版年・著者・出版社・分野・ジャンルから日本の漫画を絞り込めるデータベース。全巻の発売日・ISBN・書影と、楽天ブックス等の購入リンクつき。",
+  alternates: { canonical: "/" },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

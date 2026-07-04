@@ -55,6 +55,11 @@ export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
 
+    // ★正規ドメイン301(SEO重複対策 2026-07-04): workers.devアクセスは mangal-db.com へ。/api/は除外(ツール互換)
+    if (url.hostname.endsWith("workers.dev") && !url.pathname.startsWith("/api/")) {
+      return Response.redirect("https://mangal-db.com" + url.pathname + url.search, 301);
+    }
+
     // ★API共通CORS(previewサイト=別オリジンからも叩けるように)
     const CORS = {
       "access-control-allow-origin": "*",

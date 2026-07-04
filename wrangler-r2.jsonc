@@ -19,6 +19,7 @@
   //   { "binding": "REDIRECTS", "id": "<kv-id>" },
   //   { "binding": "ADULT_US_SLUGS", "id": "<kv-id>" }
   // ],
+  "workers_dev": true,
   "routes": [
     { "pattern": "mangal-db.com", "custom_domain": true },
     { "pattern": "www.mangal-db.com", "custom_domain": true }

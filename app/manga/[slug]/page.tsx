@@ -18,6 +18,35 @@ export function generateStaticParams() {
   return slugs.length > 0 ? slugs : [{ slug: "_empty" }];
 }
 
+const SITE = "https://mangal-db.com";
+
+/** ★SEO(2026-07-04): 頁別 title/description + canonical + OGP。66k頁が全て同一メタだった問題の根治 */
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const m = loadAllManga().manga.find((x) => x.slug === slug);
+  if (!m) return {};
+  const authors = (m.authors ?? []).map((a) => a.name).join("・");
+  const title = `${m.title}${authors ? ` | ${authors}` : ""} - 全巻一覧・発売日`;
+  const desc = (m.catch || m.synopsis ||
+    `${m.title}(${authors})の巻一覧・発売日・ISBN・出版社情報。楽天ブックス等の購入リンクつき。`)
+    .slice(0, 120);
+  const cover = coverUrl(m);
+  return {
+    title,
+    description: desc,
+    alternates: { canonical: `${SITE}/manga/${m.slug}` },
+    openGraph: {
+      title,
+      description: desc,
+      url: `${SITE}/manga/${m.slug}`,
+      siteName: "MANGAL",
+      type: "book",
+      ...(cover ? { images: [{ url: cover }] } : {}),
+    },
+    twitter: { card: cover ? "summary_large_image" : "summary" },
+  };
+}
+
 export default async function MangaDetailPage({
   params,
 }: {
@@ -56,8 +85,22 @@ export default async function MangaDetailPage({
     </Link>
   );
 
+  // ★構造化データ(JSON-LD): ComicSeries — 検索リッチ化(2026-07-04 SEO)
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "ComicSeries",
+    name: manga.title,
+    url: `https://mangal-db.com/manga/${manga.slug}`,
+    ...(cover ? { image: cover } : {}),
+    author: (manga.authors ?? []).map((a) => ({ "@type": "Person", name: a.name })),
+    ...(publisher ? { publisher: { "@type": "Organization", name: publisher.name } } : {}),
+    ...(manga.year_started ? { startDate: String(manga.year_started) } : {}),
+    ...(manga.synopsis ? { description: String(manga.synopsis).slice(0, 200) } : {}),
+  };
+
   return (
     <div className="mx-auto max-w-4xl px-4 py-8">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <Link href="/" className="text-sm text-ink/60 hover:text-ink">
         ← ホームへ戻る
       </Link>

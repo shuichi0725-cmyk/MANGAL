@@ -39,6 +39,12 @@ $env:MANGAL_DATA_DIR="D:\mangal-cache\proddata"; npx next build 2>&1 | Out-File 
 - attempt 1-2 の retry は warmup 通常挙動。
 - 完了判定: log 末尾 `✓ Exporting (2/2)` + `out/manga` ファイル数 ≈ 頁数×2。
 
+### 3.5 sitemap生成 (build後・sync前)
+```
+python scripts/_gen-sitemap.py
+```
+(out/ に sitemap.xml+分割を書く=syncが拾う。SEO②)
+
 ### 4. R2 同期 (差分PUT)
 ```
 python scripts/_r2-sync.py --bucket mangal-site
