@@ -314,6 +314,10 @@ def apply_edition_canonical(slug: str, editions: list, canon: dict) -> list:
     if s.get("compact_edition"):
         ce = s["compact_edition"]
         out.append(mk(ce.get("volumes"), ce.get("label") or "コンパクト版", pub, ce.get("label"), "aizoban"))
+    # ★extra_editions(2026-07-04 激マン型=完全版侵食の版分離用): 任意type/labelの追加版を並べる
+    for xe in (s.get("extra_editions") or []):
+        out.append(mk(xe.get("volumes"), xe.get("label") or "別版", xe.get("publisher") or pub,
+                      xe.get("label"), xe.get("type") or "kanzenban"))
     # standard/aizoban 以外の既存版(文庫等)は温存
     for e in editions:
         if e.get("type") not in ("standard", "aizoban"):
