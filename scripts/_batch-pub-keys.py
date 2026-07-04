@@ -54,9 +54,13 @@ def ndl(ib):
     req = urllib.request.Request("https://ndlsearch.ndl.go.jp/api/sru?" + urllib.parse.urlencode(q)); req.add_header("User-Agent", "Mozilla/5.0")
     try:
         xml = html.unescape(urllib.request.urlopen(req, timeout=20).read().decode("utf-8"))
-        for pat in [r"<dcterms:publisher>.*?<rdf:value>([^<]+)<", r"<dc:publisher>([^<]+)<", r"<dcndl:publicationName>([^<]+)<", r"<dcterms:publisher>([^<]+)<"]:
+        # ★dcterms:publisher 内の foaf:name が社名(著者foaf:name/NDL自身と区別)
+        for pat in [r"<dcterms:publisher>.*?<foaf:name>([^<]+)</foaf:name>", r"<dc:publisher>([^<]+)<", r"<dcndl:publicationName>([^<]+)<"]:
             m = re.search(pat, xml, re.S)
-            if m: return re.sub(r"<.*?>", "", m.group(1)).strip()
+            if m:
+                v = re.sub(r"<.*?>", "", m.group(1)).strip()
+                if v and v != "国立国会図書館":
+                    return v
     except Exception: return ""
     return ""
 
