@@ -2757,7 +2757,7 @@ def main():
                 is_unknown = (not cur_au) or (len(cur_au) == 1 and cur_au[0].get("name") == "(unknown)")
                 af = author_fill.get(str(en["anilist_id"]))
                 if is_unknown and af and af.get("authors"):
-                    new_yml["authors"] = af["authors"]
+                    new_yml["authors"] = [enrich_author(dict(a)) for a in af["authors"]]
                     if af.get("original_authors") and not new_yml.get("original_authors"):
                         new_yml["original_authors"] = [{"name": n, "role": "writer"} for n in af["original_authors"]]
                     author_fill_pages += 1
@@ -2826,7 +2826,7 @@ def main():
             for k in [series["series_key"], *(page_keys or [])]:
                 if k and k in author_fill_madb:
                     e2 = author_fill_madb[k]
-                    new_yml["authors"] = e2["authors"]
+                    new_yml["authors"] = [enrich_author(dict(a)) for a in e2["authors"]]
                     if e2.get("original_authors") and not new_yml.get("original_authors"):
                         new_yml["original_authors"] = [{"name": n, "role": "writer"} for n in e2["original_authors"]]
                     author_fill_madb_pages += 1
@@ -2835,6 +2835,12 @@ def main():
         if not new_yml.get("synopsis") and slug in synopsis_slug:
             new_yml["synopsis"] = synopsis_slug[slug]
             synopsis_pages += 1
+        # ★著者ヨミ最終pass(2026-07-04 join漏れ659名/974頁の根治): どの経路で入った著者でも
+        #   kana欠け×seed有りなら充填(冪等)。個別経路のenrich漏れを構造的にカバー
+        for _ak in ("authors", "original_authors"):
+            for _a in (new_yml.get(_ak) or []):
+                if not _a.get("kana"):
+                    enrich_author(_a)
         # ★特装版是正 最終pass(standardのみ): special ISBN→通常版差替+variants併存(書影無し補正はskip=空タイル回避)
         _sfm = _special_fix_map()
         for _ce in (new_yml.get("editions") or []):
