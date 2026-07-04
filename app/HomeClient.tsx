@@ -38,6 +38,7 @@ export default function HomeClient({ data }: Props) {
   const [noAuthor, setNoAuthor] = useState(false);
   const [mv2026, setMv2026] = useState(false);
   const [volGap, setVolGap] = useState(false);
+  const [coverGap, setCoverGap] = useState(false);
   const [anthology, setAnthology] = useState(false);
   const [copied, setCopied] = useState(false);
   const isNoAuthor = (m: MangaListItem) =>
@@ -113,10 +114,11 @@ export default function HomeClient({ data }: Props) {
       if (noAuthor) base = (base as MangaListItem[]).filter(isNoAuthor);
       if (mv2026) base = (base as MangaListItem[]).filter(isMv2026);
       if (volGap) base = (base as MangaListItem[]).filter((m) => m.vol_gap);
+      if (coverGap) base = (base as MangaListItem[]).filter((m) => m.cover_gap);
       if (anthology) base = (base as MangaListItem[]).filter((m) => m._anthology);
     }
     return base;
-  }, [showArt, filteredArt, filteredManga, noCover, soloNonfirst, multiVol, noAuthor, mv2026, volGap, anthology]);
+  }, [showArt, filteredArt, filteredManga, noCover, soloNonfirst, multiVol, noAuthor, mv2026, volGap, coverGap, anthology]);
   const noCoverCount = useMemo(
     () => (showArt ? 0 : filteredManga.filter((m) => !m.cover).length),
     [showArt, filteredManga],
@@ -279,6 +281,16 @@ export default function HomeClient({ data }: Props) {
             title="複数巻あるのに途中の巻が抜けている(fill漏れ/欠番・要確認)"
           >
             巻抜け{volGap ? " ✓" : ""}（{volGapCount}）
+          </button>
+          <button
+            type="button"
+            onClick={() => setCoverGap((v) => !v)}
+            className={`tactile-chip rounded-card px-3 py-1.5 font-medium transition active:scale-95 ${
+              coverGap ? "bg-[var(--color-accent)] text-white" : ""
+            }`}
+            title="複数巻あるのに途中の巻が抜けている(fill漏れ/欠番・要確認)"
+          >
+            書影欠け{coverGap ? " ✓" : ""}（{manga.filter((m) => m.cover_gap).length}）
           </button>
           <button
             type="button"

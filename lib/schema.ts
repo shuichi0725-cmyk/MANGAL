@@ -231,6 +231,7 @@ export type MangaListItem = {
   score?: number;
   /** 1冊のみ かつ その巻が1巻でない(= 統合失敗/取りこぼし signal。 テスト診断用) */
   solo_nonfirst?: boolean;
+  cover_gap?: boolean;
   /** 複数巻あるのに途中の巻が抜けている(= fill漏れ/欠番 signal。 テスト診断用) */
   vol_gap?: boolean;
   /** アンソロジー統合ページ(= テスト点検用。 本番化前の確認) */

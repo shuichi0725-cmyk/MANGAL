@@ -155,6 +155,8 @@ for f in _files:
         _vn = sorted({v.get("number") for v in (_e.get("volumes") or []) if v.get("number")})
         if len(_vn) >= 2 and _vn[-1] - _vn[0] + 1 > len(_vn):
             vol_gap = True; break
+    # ★1冊でも書影欠け(= Kobo補完worklist用 2026-07-05)
+    cover_gap = any(not v.get("cover_url") for _e in eds for v in (_e.get("volumes") or []))
     latest = ""
     for e in eds:
         for v in (e.get("volumes") or []):
@@ -193,6 +195,7 @@ for f in _files:
         "popularity": d.get("popularity"), "score": d.get("score"),
         **({"solo_nonfirst": True} if solo_nonfirst else {}),
         **({"vol_gap": True} if vol_gap else {}),
+        **({"cover_gap": True} if cover_gap else {}),
         **({"_anthology": True} if d.get("_anthology") else {}),
         **({"_slugfix": True, "_slugfix_new": d.get("_slugfix_new")} if d.get("_slugfix") else {}),
     })
@@ -233,7 +236,7 @@ LIST_FIELDS = [
     "status", "authors", "original_authors", "genres", "themes", "demographic",
     "publisher", "publishers", "magazine", "awards", "anime_adapted", "total_volumes",
     "max_edition_volumes", "latest_date", "first_volume_date", "popularity", "score",
-    "solo_nonfirst", "vol_gap", "_anthology", "_slugfix", "_slugfix_new",
+    "solo_nonfirst", "vol_gap", "cover_gap", "_anthology", "_slugfix", "_slugfix_new",
 ]
 out = os.path.join(OUTDIR, "manga-list-index.json")
 json.dump({"f": LIST_FIELDS, "d": [[m.get(f) for f in LIST_FIELDS] for m in idx]},
