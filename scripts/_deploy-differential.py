@@ -242,15 +242,20 @@ def main():
     if token:
         paths = [f"/manga/{s}" for s in inner.values()] + [f"/manga/{s}" for s in dropped] + \
                 [f"/{n}" for n in IDX]
-        try:
-            req = urllib.request.Request(f"{WORKER}/api/purge", method="POST",
-                                         data=json.dumps({"paths": paths, "token": token}).encode(),
-                                         headers={"content-type": "application/json",
-                                                  "User-Agent": "Mozilla/5.0"})  # ★UA無し=CF 403
-            res = json.load(urllib.request.urlopen(req, timeout=30))
-            print(f"cache purge: {res}")
-        except Exception as e:
-            print(f"purge失敗(致命でない・最長1日で自然失効): {e}")
+        # ★50/batch(大きいbatch=worker CPU上限で500)。UA必須(無し=CF 403)。失敗は致命でない(≤1日で自然失効)
+        import time as _t
+        purged, pfail = 0, 0
+        for _i in range(0, len(paths), 50):
+            try:
+                req = urllib.request.Request(f"{WORKER}/api/purge", method="POST",
+                                             data=json.dumps({"paths": paths[_i:_i + 50], "token": token}).encode(),
+                                             headers={"content-type": "application/json",
+                                                      "User-Agent": "Mozilla/5.0"})
+                purged += json.load(urllib.request.urlopen(req, timeout=60)).get("purged", 0)
+            except Exception:
+                pfail += 1
+            _t.sleep(0.3)
+        print(f"cache purge: {len(paths)}パス / purged {purged} / 失敗batch {pfail}")
     else:
         print("purge token未設定 → 旧キャッシュは最長1日残る")
 
