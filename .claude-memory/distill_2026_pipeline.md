@@ -7,6 +7,8 @@ metadata:
   originSessionId: 40db3460-5533-4358-8d06-8214ea9ecaea
 ---
 
+★手順の正 = **skill daily-distill / backward-distill**(2026-07-04 skill化)。本fileは2026新刊蒸留の全記録(歴史・根拠)として保持。
+
 2026新刊蒸留(NDL由来の新刊をテストページ化)の**完全フロー**。次回月次で再利用する。種2(db-v2.sqlite)不変・preview(.preview-data)のみ。
 
 ## パイプライン(順序厳守)
