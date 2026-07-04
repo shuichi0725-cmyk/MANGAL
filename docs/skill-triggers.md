@@ -14,6 +14,7 @@ skill 実体 = `.claude/skills/<name>/SKILL.md`(git追跡。Opus 4.8 等でも�
 | **「月次蒸留して」** | monthly-distill | MADB取込→フルpromote→enrich→AI fill→月次サニティ監査(Phase0確認→**Goサイン必須**) | ~3時間+ |
 | **作品名+リンク(Wiki/NDL)を貼る** | percase-fix | per-case是正(イアラ式): 汚染除去/版分離/巻補完/variants。型別seed早見表つき | 1作数分〜 |
 | **「新規追加」「新刊入れて」** | new-manga-register | 新規マンガ登録(順番固定: 全巻回収→題→ヨミ→一括→enrich→欠落表)。テスト先行→GO→本番 | 件数次第 |
+| **「Wiki蒸留して」** | wiki-distill | Wikipedia書誌(巻別ISBN+日付)で壊れた長期連載をcanonical復元(釣りキチ65巻等で実証・fail-closedゲート) | 10作/回 数分 |
 | **「巻抜け仮想」** | volgap-audit | 残巻抜け算出(~2分)。単巻切り詰め検出(solo-truncated)・巻出力監査も同居 | ~2分 |
 
 ## 常時参照系skill(トリガー語でなく状況で発動)
