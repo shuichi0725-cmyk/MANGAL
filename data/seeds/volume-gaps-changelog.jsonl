@@ -1178,3 +1178,4 @@
 {"op": "fusoku-correction", "reason": "先の「1-2巻=電子限定」判定は誤り(ユーザ提供ISBN 9784861345258/9784861346026=紙(1)(2)実在・楽天live確定)。NDL不在+キャッシュ不在を不存在と誤認した。種4で全3巻化", "at": "2026-07-03"}
 {"op": "dokaben-frankenstein", "reason": "ドカベン書籍情報かなりおかしい(ユーザ): 種2ネイティブ汚染(51472=245冊)+スピンオフ2編がcluster吸収で不可視。①merge例外機構新設(51477プロ野球編/51474スーパースターズ編をblock→独立ページ化) ②本編override(文庫帯11+プロ野球帯16のISBN剥がし・原版日付復元) ③プロ野球編gap19を楽天で種4fill", "at": "2026-07-03"}
 {"op": "urusei-canonical", "reason": "うる星やつら再汚染(ユーザ指摘): 新装版34(表紙変更後の通常版)/復刻BOX4が消滅・versions刷タブ0。旧_regroup-versions直接パッチが非durableだった→edition-canonical結線(promoteにversions拡張)。v9/v34の新装ISBNはISBN連番で確定(9784091207562/9784091208071)", "at": "2026-07-04"}
+{"op": "aku-no-hana-dedup", "reason": "ユーザ指摘: 悪の華(押見)がv3のみ断片頁(同ISBN9784063844368が本体=惡の華2010と重複)。solo-truncated DUP_ELSEWHERE級。canonical=aku-no-hana-2010(旧字体=公式表記)", "at": "2026-07-04"}
