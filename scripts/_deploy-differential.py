@@ -86,12 +86,13 @@ def main():
     # --- 1. コードドリフトガード ---
     r = sh(["git", "diff", "--name-only", f"{mk['code_commit']}..HEAD", "--", *CODE_SCOPE], cwd=ROOT)
     drift = [x for x in r.stdout.splitlines() if x.strip()]
+    strict_chunks = bool(drift)
     if drift:
-        print("★abort: 前回フルビルド以降に漫画頁へ効くコードが変更されている → 「週次蒸留して」が必要:")
-        for d in drift[:10]:
+        print(f"コードドリフト検知({len(drift)}件) → ビルド後に★チャンク実測検証(参照_next資産が全てR2に実在するかをmanifestで確認。1つでも欠けたらabort→週次):")
+        for d in drift[:6]:
             print("  ", d)
-        sys.exit(4)
-    print(f"コードドリフト: なし (marker {mk['code_commit'][:9]})")
+    else:
+        print(f"コードドリフト: なし (marker {mk['code_commit'][:9]})")
 
     # --- 2. 対象検出 ---
     dropped = []
@@ -160,8 +161,39 @@ def main():
         print("★abort: build失敗"); print((r.stdout or "")[-1500:]); print((r.stderr or "")[-800:]); sys.exit(6)
     print("build OK")
 
-    # --- 5. 選択同期(対象頁 + 索引3本のみ。他は絶対PUTしない) ---
+    # --- 4.5 ★チャンク実測検証(コードドリフト時のみ): 対象頁HTMLが参照する /_next/ 資産が
+    #     全て前回同期manifestに在る=本番R2に実在する、を確認。欠け=新チャンク=部分反映不可→abort
     manifest = json.load(open(MANIFEST, encoding="utf-8")) if os.path.exists(MANIFEST) else {}
+    if strict_chunks:
+        import re as _re
+        missing_assets = set()
+        for st, slug in inner.items():
+            hp = os.path.join(OUT, "manga", f"{slug}.html")
+            if not os.path.exists(hp):
+                continue
+            html_txt = open(hp, encoding="utf-8", errors="replace").read()
+            for m in _re.finditer(r'/_next/[A-Za-z0-9_\-./%\[\]]+?\.(?:js|css)', html_txt):
+                key = m.group(0).lstrip("/")
+                if key not in manifest:
+                    missing_assets.add(key)
+        if missing_assets:
+            # ★欠けチャンクの追加PUT(2026-07-04拡張): content-hash名=衝突不能の純粋追加なので、
+            #   ローカルoutに実体があれば本番へ追加して整合させる(旧頁は旧チャンク参照のまま無傷)。
+            #   前提=遅延import(next/dynamic)不使用(検証済)。outに無い参照だけは真の不整合→abort。
+            not_local = [k for k in missing_assets if not os.path.exists(os.path.join(OUT, k.replace("%5B", "[").replace("%5D", "]")))]
+            if not_local:
+                print(f"★abort: 参照資産がローカルoutにも無い({not_local[:3]}) → 「週次蒸留して」"); sys.exit(4)
+            for k in sorted(missing_assets):
+                lp = os.path.join(OUT, k.replace("%5B", "[").replace("%5D", "]"))
+                body = open(lp, "rb").read()
+                ctype = "application/javascript" if k.endswith(".js") else "text/css"
+                s3.put_object(Bucket=BUCKET, Key=k.replace("%5B", "[").replace("%5D", "]"), Body=body, ContentType=ctype)
+                manifest[k.replace("%5B", "[").replace("%5D", "]")] = hashlib.sha256(body).hexdigest()[:20]
+            print(f"チャンク追加PUT: {len(missing_assets)}件(純粋追加・旧頁無傷) → 部分反映続行")
+        else:
+            print("チャンク実測検証: 参照資産すべて本番に実在 → 部分反映は安全")
+
+    # --- 5. 選択同期(対象頁 + 索引3本のみ。他は絶対PUTしない) ---
     puts, misses = [], []
     for st, slug in inner.items():
         for ext in (".html", ".txt"):
@@ -171,7 +203,19 @@ def main():
             elif ext == ".html":
                 misses.append(slug)
     if misses:
-        print(f"★abort: ビルド出力に無い頁 {len(misses)}: {misses[:5]} (= schema検証落ち等。先に修正)"); sys.exit(7)
+        # ★本番に居る頁が出力に無い=そのまま進むと本番頁を劣化させる→abort。
+        #   元々本番に無い頁(=以前からschema不良で未掲載)=除外して続行+worklist報告(2026-07-04)。
+        was_live = [m for m in misses if f"manga/{m}.html" in manifest]
+        never = [m for m in misses if f"manga/{m}.html" not in manifest]
+        if was_live:
+            print(f"★abort: 本番稼働中の頁がビルド出力に無い {len(was_live)}: {was_live[:5]} (= 今回の変更でschema落ち。先に修正)"); sys.exit(7)
+        if never:
+            print(f"skip(元々未掲載のschema不良 {len(never)}): {never[:8]} → docs/production-diagnostics/schema-invalid-pages.txt")
+            os.makedirs(os.path.join(ROOT, "docs", "production-diagnostics"), exist_ok=True)
+            open(os.path.join(ROOT, "docs", "production-diagnostics", "schema-invalid-pages.txt"), "w", encoding="utf-8").write(chr(10).join(sorted(never)) + chr(10))
+            nv = set(never)
+            inner = {st: sl for st, sl in inner.items() if sl not in nv and st not in nv}
+            puts = [(k, lp) for k, lp in puts if not any(k == f"manga/{x}{ext}" for x in nv for ext in (".html", ".txt"))]
     for name in IDX:
         src = os.path.join(ROOT, "data", name)
         if os.path.getsize(src) < 5 * 1048576 and name == "manga-list-index.json":
@@ -201,7 +245,8 @@ def main():
         try:
             req = urllib.request.Request(f"{WORKER}/api/purge", method="POST",
                                          data=json.dumps({"paths": paths, "token": token}).encode(),
-                                         headers={"content-type": "application/json"})
+                                         headers={"content-type": "application/json",
+                                                  "User-Agent": "Mozilla/5.0"})  # ★UA無し=CF 403
             res = json.load(urllib.request.urlopen(req, timeout=30))
             print(f"cache purge: {res}")
         except Exception as e:
