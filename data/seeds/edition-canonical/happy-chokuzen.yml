@@ -1,0 +1,46 @@
+slug: happy-chokuzen
+canonical_label: 通常版
+source: 'urusei-type per-case復元 2026-07-04(7ゲート通過: 著者一致[''克亜樹'']・同冊数別版sid=33914)'
+publisher: 小学館
+volumes: &id001
+- number: 1
+  isbn13: '9784091216212'
+  release_date: 1987-06
+- number: 2
+  isbn13: '9784091216229'
+  release_date: '1987-08-15'
+- number: 3
+  isbn13: '9784091216236'
+  release_date: '1987-10-15'
+- number: 4
+  isbn13: '9784091216243'
+  release_date: 1987-12
+- number: 5
+  isbn13: '9784091216250'
+  release_date: 1988-02
+- number: 6
+  isbn13: '9784091216267'
+  release_date: 1988-03
+versions:
+- label: 少年サンデーコミックス(1987-88)
+  volumes: *id001
+- label: ヤンマガKC(2005-06)
+  volumes:
+  - number: 1
+    isbn13: '9784063613872'
+    release_date: 2005-11
+  - number: 2
+    isbn13: '9784063613889'
+    release_date: 2005-11
+  - number: 3
+    isbn13: '9784063614022'
+    release_date: 2005-12
+  - number: 4
+    isbn13: '9784063614039'
+    release_date: 2005-12
+  - number: 5
+    isbn13: '9784063614138'
+    release_date: 2006-01
+  - number: 6
+    isbn13: '9784063614145'
+    release_date: 2006-01

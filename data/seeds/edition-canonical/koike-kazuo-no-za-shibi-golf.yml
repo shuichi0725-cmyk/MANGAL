@@ -1,0 +1,25 @@
+slug: koike-kazuo-no-za-shibi-golf
+canonical_label: 通常版
+source: 'urusei-type per-case復元 2026-07-04(7ゲート通過: 著者一致[''小池一夫'']・同冊数別版sid=124478)'
+publisher: スタジオ・シップ
+volumes: &id001
+- number: 1
+  isbn13: '9784915289002'
+  release_date: 1986-01
+- number: 2
+  isbn13: '9784915289019'
+  release_date: 1986-02
+- number: 6
+  isbn13: '9784915289057'
+  release_date: 1986-06
+versions:
+- label: 1983年版
+  volumes:
+  - number: 1
+    isbn13: '9784093940818'
+    release_date: 1983-05
+  - number: 2
+    isbn13: '9784093940825'
+    release_date: 1984-12
+- label: 通常版(1986)
+  volumes: *id001

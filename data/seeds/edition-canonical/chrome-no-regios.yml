@@ -1,0 +1,25 @@
+slug: chrome-no-regios
+canonical_label: 通常版
+source: 'urusei-type per-case復元 2026-07-04(7ゲート通過: 著者一致[''渡里'']・同冊数別版sid=117520)'
+publisher: 角川グループパブリッシング
+volumes: &id001
+- number: 1
+  isbn13: '9784047125315'
+  release_date: 2007-12
+- number: 2
+  isbn13: '9784047126008'
+  release_date: 2009-04
+- number: 3
+  isbn13: '9784047127661'
+  release_date: 2011-12
+versions:
+- label: 角川コミックスドラゴンJr.(2007-11)
+  volumes: *id001
+- label: ASUKA COMICS DX(2008-09)
+  volumes:
+  - number: 1
+    isbn13: '9784048542685'
+    release_date: 2008-12
+  - number: 2
+    isbn13: '9784048543217'
+    release_date: 2009-05

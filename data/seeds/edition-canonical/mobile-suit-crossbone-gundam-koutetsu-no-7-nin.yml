@@ -1,0 +1,28 @@
+slug: mobile-suit-crossbone-gundam-koutetsu-no-7-nin
+canonical_label: 通常版
+source: 'urusei-type per-case復元 2026-07-04(7ゲート通過: 著者一致[''富野由悠季'']・同冊数別版sid=105751)'
+publisher: 角川グループパブリッシング
+volumes: &id001
+- number: 1
+  isbn13: '9784047138889'
+  release_date: 2006-12
+- number: 2
+  isbn13: '9784047139268'
+  release_date: 2007-05
+- number: 3
+  isbn13: '9784047150058'
+  release_date: 2007-12
+versions:
+- label: 角川コミックス・エース(2006-07)
+  volumes: *id001
+- label: 角川コミックス・エース(2021)
+  volumes:
+  - number: 1
+    isbn13: '9784041110003'
+    release_date: null
+  - number: 2
+    isbn13: '9784041109991'
+    release_date: null
+  - number: 3
+    isbn13: '9784041110010'
+    release_date: 2021-02

@@ -1,0 +1,46 @@
+slug: mazin-saga
+canonical_label: 通常版
+source: 'urusei-type per-case復元 2026-07-04(7ゲート通過: 著者一致[''ダイナミックプロダクション'']・同冊数別版sid=47223)'
+publisher: 扶桑社
+volumes: &id001
+- number: 1
+  isbn13: '9784594023553'
+  release_date: '1997-10-30'
+- number: 2
+  isbn13: '9784594023560'
+  release_date: '1997-10-30'
+- number: 3
+  isbn13: '9784594023867'
+  release_date: 1997-11
+- number: 4
+  isbn13: '9784594023874'
+  release_date: 1997-11
+- number: 5
+  isbn13: '9784594023966'
+  release_date: 1997-12
+- number: 6
+  isbn13: '9784594025731'
+  release_date: '1998-09-30'
+versions:
+- label: YOUNG JUMP COMICS SPECIAL(1997-98)
+  volumes: *id001
+- label: KCDX(2012)
+  volumes:
+  - number: 1
+    isbn13: '9784063766554'
+    release_date: 2012-07
+  - number: 2
+    isbn13: '9784063766769'
+    release_date: '2012-08-06'
+  - number: 3
+    isbn13: '9784063766936'
+    release_date: 2012-09
+  - number: 4
+    isbn13: '9784063767049'
+    release_date: 2012-10
+  - number: 5
+    isbn13: '9784063767193'
+    release_date: 2012-11
+  - number: 6
+    isbn13: '9784063767209'
+    release_date: 2012-12

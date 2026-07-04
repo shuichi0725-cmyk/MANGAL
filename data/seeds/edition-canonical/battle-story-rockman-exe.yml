@@ -1,0 +1,31 @@
+slug: battle-story-rockman-exe
+canonical_label: 通常版
+source: 'urusei-type per-case復元 2026-07-04(7ゲート通過: 著者一致[''あさだみほ'']・同冊数別版sid=82075)'
+publisher: 小学館
+volumes: &id001
+- number: 1
+  isbn13: '9784091495075'
+  release_date: '2002-07-25'
+- number: 2
+  isbn13: '9784091495082'
+  release_date: 2003-02
+- number: 3
+  isbn13: '9784091495099'
+  release_date: '2003-11-25'
+- number: 4
+  isbn13: '9784091495105'
+  release_date: '2004-09-25'
+versions:
+- label: てんとう虫コミックススペシャル(2002-04)
+  volumes: *id001
+- label: 2017年版
+  volumes:
+  - number: 1
+    isbn13: '9784835454573'
+    release_date: 2017-03
+  - number: 2
+    isbn13: '9784835454580'
+    release_date: 2017-04
+  - number: 3
+    isbn13: '9784835454597'
+    release_date: 2017-05

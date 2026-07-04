@@ -1,0 +1,25 @@
+slug: yappari-majime-ni-danjo-kousai
+canonical_label: 通常版
+source: 'urusei-type per-case復元 2026-07-04(7ゲート通過: 著者一致[''桃伊いづみ'']・同冊数別版sid=138023)'
+publisher: 集英社
+volumes: &id001
+- number: 1
+  isbn13: '9784088496856'
+  release_date: 1990-09
+- number: 2
+  isbn13: '9784088497167'
+  release_date: 1990-12
+- number: 3
+  isbn13: '9784088497426'
+  release_date: 1991-03
+versions:
+- label: マーガレットコミックス(1990-91)
+  volumes: *id001
+- label: マーガレットコミックス(1995)
+  volumes:
+  - number: 1
+    isbn13: '9784088483078'
+    release_date: 1995-02
+  - number: 2
+    isbn13: '9784088483559'
+    release_date: 1995-06

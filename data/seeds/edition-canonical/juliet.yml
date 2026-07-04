@@ -1,0 +1,34 @@
+slug: juliet
+canonical_label: 通常版
+source: 'urusei-type per-case復元 2026-07-04(7ゲート通過: 著者一致[''遊人'']・同冊数別版sid=56173)'
+publisher: 小学館
+volumes: &id001
+- number: 1
+  isbn13: '9784091513717'
+  release_date: 1992-05
+- number: 2
+  isbn13: '9784091513724'
+  release_date: 1992-10
+- number: 3
+  isbn13: '9784091513731'
+  release_date: 1993-04
+- number: 4
+  isbn13: '9784091513748'
+  release_date: 1993-11
+versions:
+- label: ヤングサンデーコミックス(1992-93)
+  volumes: *id001
+- label: ビンゴ・コミックス(2000)
+  volumes:
+  - number: 1
+    isbn13: '9784160900639'
+    release_date: 2000-01
+  - number: 2
+    isbn13: '9784160900646'
+    release_date: '2000-02-25'
+  - number: 3
+    isbn13: '9784160900653'
+    release_date: '2000-03-25'
+  - number: 4
+    isbn13: '9784160900660'
+    release_date: 2000-04

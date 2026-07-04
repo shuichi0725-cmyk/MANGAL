@@ -1,0 +1,22 @@
+slug: tandem-high
+canonical_label: 通常版
+source: 'urusei-type per-case復元 2026-07-04(7ゲート通過: 著者一致[''かやのさちこ'']・同冊数別版sid=79337)'
+publisher: 講談社
+volumes: &id001
+- number: 1
+  isbn13: '9784063046052'
+  release_date: '1987-09-22'
+- number: 2
+  isbn13: '9784063046120'
+  release_date: 1987-12
+versions:
+- label: バーガーKC(1987)
+  volumes: *id001
+- label: バーガーSC()
+  volumes:
+  - number: 1
+    isbn13: '9784882750062'
+    release_date: null
+  - number: 2
+    isbn13: '9784882750079'
+    release_date: null

@@ -1,0 +1,22 @@
+slug: hyakka-ryouran-samurai-girls
+canonical_label: 通常版
+source: 'urusei-type per-case復元 2026-07-04(7ゲート通過: 著者一致[''すずきあきら'']・同冊数別版sid=160362)'
+publisher: ホビージャパン
+volumes: &id001
+- number: 1
+  isbn13: '9784798601458'
+  release_date: 2010-11
+- number: 2
+  isbn13: '9784798602417'
+  release_date: 2011-06
+versions:
+- label: ホビージャパンコミックス(2010-11)
+  volumes: *id001
+- label: MFコミックス(2010-11)
+  volumes:
+  - number: 1
+    isbn13: '9784840137058'
+    release_date: 2010-11
+  - number: 2
+    isbn13: '9784840140478'
+    release_date: '2011-10-31'

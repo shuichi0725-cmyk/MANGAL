@@ -1,0 +1,49 @@
+slug: amon-devilman-mokushiroku
+canonical_label: 通常版
+source: 'urusei-type per-case復元 2026-07-04(7ゲート通過: 著者一致[''衣谷遊'']・同冊数別版sid=47127)'
+publisher: 講談社
+volumes: &id001
+- number: 1
+  isbn13: '9784063490084'
+  release_date: '2000-01-21'
+- number: 2
+  isbn13: '9784063490404'
+  release_date: '2000-12-22'
+- number: 3
+  isbn13: '9784063490664'
+  release_date: 2001-09
+- number: 4
+  isbn13: '9784063491043'
+  release_date: 2002-08
+- number: 5
+  isbn13: '9784063491364'
+  release_date: 2003-07
+- number: 6
+  isbn13: '9784063491692'
+  release_date: 2004-04
+versions:
+- label: マガジンZ KC(2000-04)
+  volumes: *id001
+- label: MOVE ON COMICS(2015-26)
+  volumes:
+  - number: 1
+    isbn13: '9784063771428'
+    release_date: 2015-03
+  - number: 1
+    isbn13: '9784768331446'
+    release_date: '2026-04-18'
+  - number: 2
+    isbn13: '9784063771640'
+    release_date: 2015-04
+  - number: 2
+    isbn13: '9784768331453'
+    release_date: '2026-04-18'
+  - number: 3
+    isbn13: '9784063771879'
+    release_date: 2015-05
+  - number: 3
+    isbn13: '9784768331460'
+    release_date: '2026-04-18'
+  - number: 4
+    isbn13: '9784063772135'
+    release_date: 2015-06

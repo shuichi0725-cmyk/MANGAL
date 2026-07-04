@@ -1,0 +1,40 @@
+slug: choujinrui-6
+canonical_label: 通常版
+source: 'urusei-type per-case復元 2026-07-04(7ゲート通過: 著者一致[''鹿賀ミツル'']・同冊数別版sid=46671)'
+publisher: 竹書房
+volumes: &id001
+- number: 1
+  isbn13: '9784801952478'
+  release_date: 2015-04
+- number: 2
+  isbn13: '9784801953000'
+  release_date: 2015-07
+- number: 3
+  isbn13: '9784801954762'
+  release_date: 2016-03
+- number: 4
+  isbn13: '9784801956506'
+  release_date: 2016-10
+- number: 5
+  isbn13: '9784801959071'
+  release_date: 2017-04
+versions:
+- label: Bamboo comics(2015-17)
+  volumes: *id001
+- label: Bamboo comics(2018-20)
+  volumes:
+  - number: 1
+    isbn13: '9784801964136'
+    release_date: 2018-10
+  - number: 2
+    isbn13: '9784801965843'
+    release_date: 2019-05
+  - number: 3
+    isbn13: '9784801967694'
+    release_date: 2019-11
+  - number: 4
+    isbn13: '9784801968974'
+    release_date: null
+  - number: 5
+    isbn13: '9784801970632'
+    release_date: 2020-10
