@@ -49,7 +49,7 @@ python scripts/_r2-sync.py --bucket mangal-site
 
 ### 5. 疎通確認 (URLを間違えるな)
 ```
-B=https://mangal-r2.shuichi0725.workers.dev
+B=https://mangal-db.com
 主要頁: / /manga/urusei-yatsura /contact /about → 200
 ★索引は**ルート直下**: $B/manga-list-index.json → 25MB級/200 (★/data/ ではない! 2026-07-04誤検証の教訓)
 コーナーデータ: $B/data/anniversaries.json 等 → 200

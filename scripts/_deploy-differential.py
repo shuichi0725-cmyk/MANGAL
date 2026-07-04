@@ -33,7 +33,7 @@ DIFFDATA = r"D:\mangal-cache\diffdata"
 MARKER = os.path.join(ROOT, ".cache", "prod-deploy-marker.json")
 MANIFEST = os.path.join(ROOT, ".cache", "r2-manifest.json")
 BUCKET = "mangal-site"
-WORKER = "https://mangal-r2.shuichi0725.workers.dev"
+WORKER = "https://mangal-db.com"  # 2026-07-04 カスタムドメイン開通(workers.devも並行稼働)
 # 漫画頁のHTML/チャンクに影響するコード面(ここが動いたら部分ビルド禁止)
 CODE_SCOPE = ["app/manga", "app/layout.tsx", "app/globals.css", "components", "lib",
               "next.config.ts", "package.json", "tailwind.config.ts"]

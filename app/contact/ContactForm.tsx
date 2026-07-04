@@ -30,7 +30,7 @@ export default function ContactForm() {
           let r = await post("/api/contact").catch(() => null);
           if (!r || !r.ok) {
             // preview等 API 無し環境 → 本番Workerへ直接(CORS許可済)
-            r = await post("https://mangal-r2.shuichi0725.workers.dev/api/contact");
+            r = await post("https://mangal-db.com/api/contact");
           }
           setState(r.ok ? "done" : "error");
         } catch {
