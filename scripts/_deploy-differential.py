@@ -242,13 +242,13 @@ def main():
     if token:
         paths = [f"/manga/{s}" for s in inner.values()] + [f"/manga/{s}" for s in dropped] + \
                 [f"/{n}" for n in IDX]
-        # ★50/batch(大きいbatch=worker CPU上限で500)。UA必須(無し=CF 403)。失敗は致命でない(≤1日で自然失効)
+        # ★10/batch(実測: ≤10成功/≥50はworker CPU上限500)。UA必須(無し=CF 403)。失敗は致命でない(≤1日で自然失効)
         import time as _t
         purged, pfail = 0, 0
-        for _i in range(0, len(paths), 50):
+        for _i in range(0, len(paths), 10):
             try:
                 req = urllib.request.Request(f"{WORKER}/api/purge", method="POST",
-                                             data=json.dumps({"paths": paths[_i:_i + 50], "token": token}).encode(),
+                                             data=json.dumps({"paths": paths[_i:_i + 10], "token": token}).encode(),
                                              headers={"content-type": "application/json",
                                                       "User-Agent": "Mozilla/5.0"})
                 purged += json.load(urllib.request.urlopen(req, timeout=60)).get("purged", 0)
