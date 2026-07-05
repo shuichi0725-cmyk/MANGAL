@@ -76,6 +76,21 @@ python scripts/_init-pages-manifest.py
 ### 7. 報告
 工程表(ビルド頁数/PUT数/疎通結果)で完了報告。異常は隠さずそのまま。
 
+
+## ★ディスク事前確認(2026-07-05 事故対策・必須)
+ビルド前に **C:空きを確認**: `Get-PSDrive C`。**out/(.next含む)で計10-15GB要る**。C:が10GB未満なら**out/と.nextをD:へジャンクション**してから開始:
+```
+# 事前(ビルド前)に一度だけ:
+cmd /c rmdir out .next 2>$null
+New-Item -ItemType Directory -Force D:\mangal-cache\weekly-out,D:\mangal-cache
+ext-build
+cmd /c mklink /J out D:\mangal-cache\weekly-out
+cmd /c mklink /J .next D:\mangal-cache
+ext-build
+```
+- ★事故史(2026-07-05): C:0GBでexport最終コピー(.next→out .rsc→.txt)がENOSPC死。out/をD:へrobocopy /MOVE退避+junction+`.next/server/app`から残り.html/.rscを手コピーで復旧(2h再ビルド回避)。以後は上の事前junctionで再発防止。
+- junction中は `next build` がout/を消す時リンクを触るので、毎回ビルド前にrmdir→mklinkし直すのが安全。
+
 ## 備考
 - Defender除外は実施済(2026-07-04)。ビルドが異常に遅い時は `Get-MpPreference | Select ExclusionPath` で除外が生きてるか確認。
 - 本番ドメイン mangal-db.com の紐付けは別タスク(未実施)。
