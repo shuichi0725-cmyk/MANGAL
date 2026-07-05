@@ -3,3 +3,7 @@ miyamoto-musashi-1985	Koboは吉川英治「宮本武蔵」小説文庫を返す
 douseiai	Kobo=BE-BOY版だがページ既存表紙はSUPER BE-BOY(リブレ別フォーマット)。混在回避でskip	kobo-covers 2026-07-05
 hakatakko-junjou	Kobo=ACTION COMICS双葉社だがページ標準版は西日本新聞社。版別書影で要edition-override	kobo-covers 2026-07-05
 notari-matsutarou	欠けはbunkobon(小学館文庫)だがKoboはコミックス版の装丁。文庫書影が別途要る	kobo-covers 2026-07-05
+otoko-oidon	Kobo=講談社漫画文庫だが欠けはstandard(講談社KC)にも及ぶ。文庫書影がKC巻に混入するのでskip	kobo-covers 2026-07-05
+rontai-baby	欠けはbunkobon(角川文庫)だがKoboはmimi講談社KC版。別出版社書影	kobo-covers 2026-07-05
+tera-e	欠けはstandard(朝日ソノラマ)だがKoboは中公文庫コミック版。別出版社書影	kobo-covers 2026-07-05
+watari	ページstandardは小学館クリエイティブ復刻版(暗いアート)だがKoboは原コミックス(カラー)。混在回避でskip	kobo-covers 2026-07-05
