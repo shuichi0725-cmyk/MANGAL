@@ -31,13 +31,16 @@ python scripts/_build-list-index.py data/manga.v2 data   # 本番索引(~10分)
   masters(demographics/genres/magazines/publisher-aliases/publishers/slug-aliases).yml と索引3本(manga-list/search/catch-index.json)を `data/` から cp。
 - `git status` を見て **scripts/ の未コミット変更が無いか**確認(promote拡張のcommit漏れ=2026-07-04実害)。
 
-### 3. フルビルド (~2.5h、バックグラウンド+Monitor)
+### 3. フルビルド (★実測2.5〜3.5h、バックグラウンド+Monitor)
+★**開始前に必ず下の「ディスク事前確認」を実施**(C:満杯だと終盤のexportコピーがENOSPC死する)。
 ```
 $env:MANGAL_DATA_DIR="D:\mangal-cache\proddata"; npx next build 2>&1 | Out-File .cache\weekly-build.log
 ```
-- Monitor は 1万頁節目+「attempt 3 of 3 / Export encountered / Build error」+完了のみ通知(2分毎は通知過多)。
-- attempt 1-2 の retry は warmup 通常挙動。
-- 完了判定: log 末尾 `✓ Exporting (2/2)` + `out/manga` ファイル数 ≈ 頁数×2。
+- ★`staticPageGenerationTimeout=300s`(next.config.ts)前提。既定60sだと重頁(home-design=66k全読込)がワーカー競合で3回超過しビルドkill(2026-07-05 home-design-05で発覚・是正済)。
+- Monitor は 1万頁節目+「after 3 attempts / Export encountered / Build error」+完了のみ通知(2分毎は通知過多)。
+- attempt 1-2 の retry は **コールドワーカーの初回66k読込(warmup)**=正常。300s猶予で温まればリトライ成功。
+- 終盤(6万頁以降)は重頁が残り生成速度が落ちる=正常。完了判定: log 末尾 `✓ Exporting (2/2)` + `out/manga` ファイル数 ≈ 頁数×2(≈132k)。
+- ★完了後の**居座りnodeをStop-Process**(Windows恒例。file lock解除)。
 
 ### 3.5 sitemap生成 (build後・sync前)
 ```
@@ -77,19 +80,18 @@ python scripts/_init-pages-manifest.py
 工程表(ビルド頁数/PUT数/疎通結果)で完了報告。異常は隠さずそのまま。
 
 
-## ★ディスク事前確認(2026-07-05 事故対策・必須)
-ビルド前に **C:空きを確認**: `Get-PSDrive C`。**out/(.next含む)で計10-15GB要る**。C:が10GB未満なら**out/と.nextをD:へジャンクション**してから開始:
+## ★ディスク事前確認 (= Step3の直前に必須。2026-07-05 ENOSPC事故対策)
+★**out/と.nextは常にD:へジャンクションしてからビルド**(C:は満杯気味・D:に455GB空き)。`out/+.next`で計10-15GB要る。
+ビルド前に一度だけ(PowerShell):
 ```
-# 事前(ビルド前)に一度だけ:
-cmd /c rmdir out .next 2>$null
-New-Item -ItemType Directory -Force D:\mangal-cache\weekly-out,D:\mangal-cache
-ext-build
-cmd /c mklink /J out D:\mangal-cache\weekly-out
-cmd /c mklink /J .next D:\mangal-cache
-ext-build
+Get-PSDrive C,D | Select Name,@{n='Free_GB';e={[math]::Round($_.Free/1GB,1)}}   # 確認
+cmd /c rmdir "C:\Users\shuic\code\MANGAL\out" "C:\Users\shuic\code\MANGAL\.next" 2>$null
+New-Item -ItemType Directory -Force "D:\mangal-cache\weekly-out","D:\mangal-cache\next-build" | Out-Null
+cmd /c mklink /J "C:\Users\shuic\code\MANGAL\out" "D:\mangal-cache\weekly-out"
+cmd /c mklink /J "C:\Users\shuic\code\MANGAL\.next" "D:\mangal-cache\next-build"
 ```
-- ★事故史(2026-07-05): C:0GBでexport最終コピー(.next→out .rsc→.txt)がENOSPC死。out/をD:へrobocopy /MOVE退避+junction+`.next/server/app`から残り.html/.rscを手コピーで復旧(2h再ビルド回避)。以後は上の事前junctionで再発防止。
-- junction中は `next build` がout/を消す時リンクを触るので、毎回ビルド前にrmdir→mklinkし直すのが安全。
+- junction中は `next build` がout/を消す時リンクを触るので、**毎ビルド前にrmdir→mklinkし直す**のが安全。
+- ★ENOSPC復旧(万一C:直ビルドで途中失敗した時): outをD:へ`robocopy SRC DST /E /MOVE`退避→`cmd /c rmdir`でjunction作成→`.next/server/app`の`.html`/`.rsc`を out へ手コピー(.rsc→.txt改名・既存skip)で**2h再ビルド回避**できる(2026-07-05実証)。junction除去は`cmd /c rmdir`(Remove-Itemは中身を追ってD:保護に弾かれる)。
 
 ## 備考
 - Defender除外は実施済(2026-07-04)。ビルドが異常に遅い時は `Get-MpPreference | Select ExclusionPath` で除外が生きてるか確認。

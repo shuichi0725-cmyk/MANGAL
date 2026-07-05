@@ -30,7 +30,10 @@ python scripts/_lookup.py --title "うる星やつら" --max 20 --live
 
 ## live仕様の要点 (= _lookup.py 実装済み。修正時のみ参照)
 - 楽天: `openapi.rakuten.co.jp/.../BooksBook/Search/20170404` + **Referer/Origin header必須**(無しやapp.rakuten直=400)。applicationId+accessKey+**outOfStockFlag=1**+formatVersion=2
-- NDL SRU: `ndlsearch.ndl.go.jp/api/sru` recordSchema=dcndl。**一般語のtitle単独クエリはtimeout**(「臨場」型)→creator束縛を優先・timeoutはスキップ続行可。ページングはstartRecord(200件/頁)
+- 楽天Kobo(電子版・書影補完用): `openapi.rakuten.co.jp/services/api/Kobo/EbookSearch/20170426` 同じReferer/Origin/レート。title+巻でlargeImageUrlが取れる(紙の欠け巻補完=skill kobo-covers)。noimage除外必須
+- NDL SRU: `ndlsearch.ndl.go.jp/api/sru` recordSchema=dcndl。**一般語のtitle単独クエリはtimeout**(「臨場」型)→creator束縛を優先・timeoutはスキップ続行可。
+- ★**NDLページングは大物で必須**(2026-07-05実害): 1リクエスト最大200件。数百版ある作(009/おそ松/バカボン)は`startRecord=1,201,401…`で総件数(numberOfRecords)まで**全ページ取得しないと原版を静かに取りこぼす**。1頁だけ取る実装は禁止。ループ=`while start<=total: start+=200`。
+- ★**dcndl:BibResourceの断片割れ**(2026-07-05): レコードが2要素に割れ原版のISBNとvol/dateが泣き別れる型あり。「isbnのみ断片」を直前の「title/vol/date断片」に縫合するmerge_fragments処理を入れる(band-intruder-swapが手本)。
 - 書影CDN構築URL: `thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/<ISBN下4桁(チェックディジット除く)>/<ISBN13>.jpg?_ex=200x200`(在庫切れでも取れる。使用前にHEADで200確認)
 
 ## 大量ハーベスト(数百件超)をする時
