@@ -7,7 +7,7 @@ import TimeMachine from "@/components/TimeMachine";
 import DestinyPickMock from "@/components/DestinyPickMock";
 import MarqueeTitle from "@/components/MarqueeTitle";
 import CalendarView from "@/components/CalendarView";
-import { bundle, DesignNav, seeded, volCount, Cover, CoverTile } from "@/lib/homeDesign";
+import { bundle, DesignNav, seeded, volCount, Cover, CoverTile, thisMonthReleases } from "@/lib/homeDesign";
 import { coverUrl } from "@/lib/schema";
 import { loadAiReviews } from "@/lib/loadData";
 import AiLeagueTeaser from "@/components/AiLeagueTeaser";
@@ -118,7 +118,7 @@ export default function Design11() {
             <span className="text-[11px] text-ink/50">カレンダー →</span>
           </div>
           <ul className="-mx-3.5 mt-2.5 flex gap-3 overflow-x-auto px-3.5 pb-1 snap-x">
-            {byNew.slice(0, 12).map((m) => (
+            {thisMonthReleases(manga, byNew, 12).map((m) => (
               <li key={m.slug} className="w-[96px] shrink-0 snap-start">
                 <Link href={`/manga/${m.slug}`} className="block group spring-press">
                   <Cover m={m} sizes="96px" />

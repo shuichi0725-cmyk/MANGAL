@@ -26,8 +26,9 @@ import { useMangaIndex } from "@/lib/useMangaIndex";
 /** 一覧表クライアント: 絞り込み=既存の多窓フィルター(トップと同じ)、並び順=独立チップ。
  *  「完結×ジャンル×作者×開始が古い順」のような自由なAND合成が成立する。 */
 
-type SortId = "kana" | "year-asc" | "year-desc" | "vols-desc" | "latest-desc";
+type SortId = "kana" | "year-asc" | "year-desc" | "vols-desc" | "latest-desc" | "popularity";
 const SORTS: Array<{ id: SortId; label: string }> = [
+  { id: "popularity", label: "人気順" },
   { id: "kana", label: "50音順" },
   { id: "year-asc", label: "開始が古い" },
   { id: "year-desc", label: "開始が新しい" },
@@ -47,6 +48,7 @@ export default function ListClient({ data }: { data: ListBundle }) {
   const [open, setOpen] = useState(false);
   const [q, setQ] = useState("");
   const [sort, setSort] = useState<SortId>("kana");
+  const [sortTouched, setSortTouched] = useState(false);
   const [limit, setLimit] = useState(200);
   const [slugfixOnly, setSlugfixOnly] = useState(false);
 
@@ -80,8 +82,12 @@ export default function ListClient({ data }: { data: ListBundle }) {
           m.authors.some((a) => a.name.toLowerCase().includes(needle)),
       );
     }
+    // ★検索時の既定=人気順(2026-07-05 ユーザ要望: 検索したら人気順で出る)。手動選択があればそれを尊重
+    const effSort: SortId = q.trim() && !sortTouched ? "popularity" : sort;
     const sorted = [...r].sort((a, b) => {
-      switch (sort) {
+      switch (effSort) {
+        case "popularity":
+          return (b.popularity ?? 0) - (a.popularity ?? 0) || (b.score ?? 0) - (a.score ?? 0) || a.title_kana.localeCompare(b.title_kana, "ja");
         case "year-asc":
           return (a.year_started ?? 9999) - (b.year_started ?? 9999);
         case "year-desc":
@@ -95,7 +101,7 @@ export default function ListClient({ data }: { data: ListBundle }) {
       }
     });
     return sorted;
-  }, [manga, state, q, sort, slugfixOnly]);
+  }, [manga, state, q, sort, sortTouched, slugfixOnly]);
 
   return (
     <div>
@@ -122,7 +128,7 @@ export default function ListClient({ data }: { data: ListBundle }) {
           {SORTS.map((s) => (
             <button
               key={s.id}
-              onClick={() => setSort(s.id)}
+              onClick={() => { setSort(s.id); setSortTouched(true); }}
               className={`spring-press shrink-0 rounded-full px-2.5 py-1 text-[11px] font-semibold ${
                 sort === s.id ? "bg-ink text-white" : "border border-[var(--color-line)] bg-[var(--color-surface)] text-ink/65"
               }`}
