@@ -23,6 +23,29 @@ alternative_titles:
   en: Shumari
 wikidata_qid: Q193300
 editions:
+- type: standard
+  label: 角川書店(1987)
+  publisher: 角川書店
+  imprint: 角川書店(1987)
+  volumes:
+  - number: 1
+    asin: null
+    isbn13: '9784048520768'
+    cover_url: null
+    release_date: 1987-10
+    volume_label: 上
+  - number: 2
+    asin: null
+    isbn13: '9784048520775'
+    cover_url: null
+    release_date: 1987-11
+    volume_label: 中
+  - number: 3
+    asin: null
+    isbn13: '9784048520782'
+    cover_url: null
+    release_date: 1987-12
+    volume_label: 下
 - type: bunkobon
   label: 文庫版
   publisher: 角川書店
@@ -51,34 +74,6 @@ editions:
     isbn13: null
     cover_url: null
     release_date: 1976-07
-- type: standard
-  label: 通常版
-  publisher: 角川書店
-  imprint: 手塚治虫漫画全集
-  volumes:
-  - number: 1
-    volume_label: 上
-    asin: null
-    isbn13: '9784048520768'
-    cover_url: null
-    release_date: '1987-10-30'
-  - number: 2
-    volume_label: 中
-    asin: null
-    isbn13: '9784048520775'
-    cover_url: null
-    release_date: '1987-11-30'
-  - number: 3
-    volume_label: 下
-    asin: null
-    isbn13: '9784048520782'
-    cover_url: null
-    release_date: '1987-12-20'
-  - number: 4
-    asin: null
-    isbn13: '9784061087002'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/7002/9784061087002.jpg?_ex=200x200
-    release_date: '1979-01-20'
 publishers:
 - kadokawa
 genres_provisional: true
