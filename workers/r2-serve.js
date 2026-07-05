@@ -1,3 +1,4 @@
+import { EmailMessage } from "cloudflare:email";
 /**
  * MANGAL R2配信 Worker(★ドラフト・未デプロイ。 R2移行時に使う)。
  *
@@ -129,6 +130,32 @@ export default {
       };
       const key = `contact:${rec.at}:${Math.random().toString(36).slice(2, 8)}`;
       await env.CONTACT.put(key, JSON.stringify(rec));
+      // ★Gmail転送(2026-07-05 Email Routing): MAILER binding がある時だけ・失敗してもKV保存は成功扱い
+      if (env.MAILER) {
+        try {
+          const b64 = (s) => btoa(String.fromCharCode(...new TextEncoder().encode(s)));
+          const subj = `=?utf-8?B?${b64("【MANGAL】お問い合わせ " + rec.at.slice(0, 16))}?=`;
+          const bodyText = `名前: ${rec.name || "(名無し)"}
+メール: ${rec.email || "(無し)"}
+国: ${rec.country}
+受信: ${rec.at}
+KVキー: ${key}
+
+--- 本文 ---
+${rec.body}`;
+          const raw = [
+            `From: MANGAL <contact@mangal-db.com>`,
+            `To: <${env.MAIL_TO}>`,
+            `Subject: ${subj}`,
+            `MIME-Version: 1.0`,
+            `Content-Type: text/plain; charset=utf-8`,
+            `Content-Transfer-Encoding: base64`,
+            ``,
+            b64(bodyText),
+          ].join("\r\n");
+          await env.MAILER.send(new EmailMessage("contact@mangal-db.com", env.MAIL_TO, raw));
+        } catch (e) { /* 転送失敗はKV受信箱でカバー */ }
+      }
       return new Response(JSON.stringify({ ok: true }), {
         headers: { "content-type": "application/json", "cache-control": "no-store", ...CORS },
       });
