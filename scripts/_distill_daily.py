@@ -35,9 +35,22 @@ def run(cmd):
     return subprocess.run(cmd, cwd=ROOT, capture_output=True, text=True, encoding="utf-8", errors="replace")
 
 if STAGE == "--discover":
-    months = [today.month]
-    if today.day <= 3 and today.month > 1:
-        months.insert(0, today.month - 1)
+    # ★取得窓=「前回実行から」(2026-07-06 ユーザ指摘で当月固定→動的化)。
+    #   前回実行月の前月〜当月を取る(前月余分=NDL遅延収載対策)。間隔が空いても取りこぼさない。
+    c0 = load_cursor()
+    last = c0.get("last_run") or ""
+    start_m = today.month
+    if last[:4] == str(today.year):
+        start_m = max(1, int(last[5:7]) - 1)
+    elif last and last[:4] < str(today.year):
+        print(f"★前回={last}が年跨ぎ → 当年1月からに丸め(昨年分の穴は「後退蒸留して {last[:4]}」で回収を推奨)")
+        start_m = 1
+    else:
+        start_m = max(1, today.month - 1)  # カーソル無し初回も前月から
+    months = list(range(start_m, today.month + 1))
+    print(f"取得窓: 前回({last or '初回'})以降 = {today.year}年 {months[0]}〜{months[-1]}月")
+    if len(months) > 6:
+        print(f"★窓が{len(months)}ヶ月=間隔が空きすぎ。NDL負荷に注意(1.2s厳守で続行)")
     for m in months:
         r = run([PY, "scripts/_ndl-discovery.py", YEAR, str(m), str(m)])
         out = (r.stdout or "") + (r.stderr or "")
