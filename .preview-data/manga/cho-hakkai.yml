@@ -23,40 +23,31 @@ synopsis: ''
 anime_adapted: false
 wikidata_qid: Q2661273
 editions:
-- type: deluxe
-  label: デラックス版
-  publisher: スコラ
-  imprint: SC deluxe
+- type: standard
+  label: バーガーSCデラックス(1989-91)
+  publisher: リイド社
+  imprint: バーガーSCデラックス(1989-91)
   volumes:
   - number: 1
     asin: null
     isbn13: '9784796240130'
     cover_url: null
     release_date: 1989-11
-- type: standard
-  label: 通常版
-  publisher: リイド社
-  volumes:
-  - number: 1
-    asin: null
-    isbn13: '9784845859221'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/9221/9784845859221.gif?_ex=200x200
-    release_date: 2022-08
   - number: 2
     asin: null
     isbn13: '9784796240482'
     cover_url: null
-    release_date: '1990-06-16'
+    release_date: 1990-06
   - number: 3
     asin: null
-    isbn13: '9784845859566'
+    isbn13: '9784796240888'
     cover_url: null
-    release_date: 2022-10
+    release_date: 1991-01
   - number: 4
     asin: null
     isbn13: '9784796241304'
     cover_url: null
-    release_date: '1991-09-16'
+    release_date: 1991-09
 publishers:
 - leed
 - scola
