@@ -27,7 +27,7 @@ export function jstDateStr(offset = 0): string {
 export function picksForDay(entries: SansedaiEntry[], dayIndex: number): SansedaiEntry[] {
   return [0, 1, 2]
     .map((g) => {
-      const pool = entries.filter((e) => e.gen === g);
+      const pool = entries.filter((e) => Number(e.gen) === g); // ★JSONのgenは文字列のことがある(2026-07-06型バグ修正)
       if (pool.length === 0) return null;
       return pool[((dayIndex % pool.length) + pool.length) % pool.length];
     })
