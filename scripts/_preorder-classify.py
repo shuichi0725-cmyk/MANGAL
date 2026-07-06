@@ -20,6 +20,11 @@ def norm(t):
     t = unicodedata.normalize("NFKC", str(t or ""))
     return re.sub(r"[\s　・!！?？:：〜~\-＆&。、．.『』「」]", "", t).lower()
 
+
+# ★scope外ゲート(2026-07-06 ユーザ指摘=特装版/アンソロ/N巻誤1巻化): これらは新作1巻(new1a/b)にしない
+import re as _re
+SCOPE_BAN = _re.compile(r"特装版|限定版|初回限定|豪華版|特別版|特典付|小冊子付|ドラマCD|CD付き?|DVD付|Blu-?ray|OAD|アンソロジ|総集編|選集|傑作|名作選|セレクション|新装版|愛蔵版|完全版|画集|イラスト集|ファンブック|設定資料|ガイドブック|公式ガイド|データブック|ビジュアルブック|原画|ぬりえ|ムック|フィギュア付|BOXセット|ボックス|スターターセット|スペシャルプライス|第?\s*[2-9２-９][0-9０-９]*\s*巻|第[二三四五六七八九十]+[集部]|(?:II|Ⅱ|III|Ⅲ|IV|Ⅳ|V|Ⅴ|VI|Ⅵ|VII|Ⅶ)\s*$|シーズン\s*[2-9]|[2-9]nd\s|3rd\s|第\d+号|別冊|【楽天ブックス限定特典】", _re.I)
+
 VOLP = re.compile(r"[（(]\s*(\d{1,3})\s*[)）]\s*$|\s+(\d{1,3})\s*$|第\s*(\d{1,3})\s*巻\s*$")
 
 def split_vol(title):
@@ -65,6 +70,10 @@ for r in rows:
         out["zokkan"].append(r); continue
     if vol is not None and vol >= 2:
         out["ex_mid"].append(r); continue
+    # ★scope外(特装版/アンソロ/セット/ガイド/N巻誤検出)は新作1巻にしない(2026-07-06)
+    if SCOPE_BAN.search(str(r.get("title") or "")):
+        r["reason"] = "scope外(特装/アンソロ/セット/再編/巻表記)"
+        out["skip"].append(r); continue
     # 新作1巻(vol=1 or 単巻)
     if r_auth & known_authors:
         out["new1a"].append(r)
