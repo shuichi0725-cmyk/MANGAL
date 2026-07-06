@@ -36,6 +36,13 @@ def split_title(raw):
             return {"base": base, "vol": {"上": 1, "中": 2, "下": None}.get(part), "part": part,
                     "subtitle": "", "clean": base, "matched": matched}
 
+    # B0. 括弧+巻語: 題(1巻)/(全1巻) (2026-07-07 ユーザ発見)。全N巻=完結情報(zen=True)
+    m = re.search(r"^(.*?)[\s　]*[（(]\s*(全\s*)?(\d{1,3})\s*巻\s*[)）][\s　]*(.*)$", t)
+    if m and m.group(1).strip():
+        base = m.group(1).strip(); vol = int(m.group(3)); sub = (m.group(4) or "").strip()
+        clean = (base + ("　" + sub if sub else "")).strip()
+        return {"base": base, "vol": vol, "part": None, "subtitle": sub, "clean": clean,
+                "matched": "paren_kan", "vol_suspect": None, "zen": bool(m.group(2))}
     # B. 中間括弧: 題(N) 副題
     m = re.match(r"^(.{3,}?)[\s　]*[（(]\s*(\d{1,3})\s*[)）][\s　]*(\S.*)$", t)
     if m:
