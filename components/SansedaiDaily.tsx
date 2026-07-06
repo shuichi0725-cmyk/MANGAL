@@ -34,6 +34,20 @@ export function picksForDay(entries: SansedaiEntry[], dayIndex: number): Sanseda
     .filter(Boolean) as SansedaiEntry[];
 }
 
+/** 表示用ペルソナ名 = 括弧の属性表記を落とす(2026-07-06 ユーザ要望「(10-20代)はいらない」) */
+export function personaName(p: string): string {
+  return p.replace(/[（(].*$/, "");
+}
+/** 案内人プロフィール(過去ログ冒頭用)。 stockのpersona表記のヒントから起こした短文 */
+export const PERSONA_BIOS: Record<string, string> = {
+  "ミナト": "話題作から掘り出しまで、テンポ重視でどんどん読む。",
+  "リコ": "美大生。絵と空気感で一冊を選ぶ。",
+  "サオリ": "仕事の合間が読書時間。恋愛と人間ドラマに強い。",
+  "タケル": "元書店員。棚づくりの目線でおすすめを組む。",
+  "圭三": "古書店主。古典と劇画の生き字引。",
+  "静江": "喫茶店のママ。カウンター越しに一冊すすめてくる。",
+};
+
 let _stock: SansedaiEntry[] | null = null;
 export function useSansedaiStock(): SansedaiEntry[] | null {
   const [data, setData] = useState<SansedaiEntry[] | null>(_stock);

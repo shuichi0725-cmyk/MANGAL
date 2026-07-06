@@ -105,7 +105,7 @@ export default function Design11() {
       )}
 
       {/* 2.5【三世代 slot A】ソロ or 散開時の1人目 */}
-      <FeaturedDaily />
+      <FeaturedDaily slot={0} />
 
       {/* 2.7【新・自動】周年: 今日で連載開始N年(anniversaries.json週次再生成) */}
       <AnniversaryDaily />
@@ -160,7 +160,8 @@ export default function Design11() {
         </section>
       )}
 
-      {/* 5.【三世代 slot B】そろい踏み or 散開時の2人目 */}
+      {/* 5.【今日の一冊 slot1】日替わり分散(散開日の2人目/1+2の2冊側) */}
+      <FeaturedDaily slot={1} />
 
       {/* 6.【小・新】ジャンルルーレット */}
       <section className="mt-4 px-4">
@@ -169,6 +170,9 @@ export default function Design11() {
           <p className="mt-0.5 text-right text-[11px] opacity-85">回ったジャンルの棚へ →</p>
         </Link>
       </section>
+
+      {/* 6.5【今日の一冊 slot2】日替わり分散(バラバラ日の3人目/2+1の1冊側) */}
+      <FeaturedDaily slot={2} />
 
       {/* 7.【中】特集 */}
       <section className="mt-4 px-4">
