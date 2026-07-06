@@ -46,7 +46,10 @@ export default function ArchiveClient() {
             <ul className="mt-1 space-y-2.5">
               {picks.map((p) => (
                 <li key={`${p.gen}-${p.slug}`} className="border-t border-[var(--color-line)]/60 pt-2 first:border-t-0 first:pt-1">
-                  <p className="text-[10.5px] font-bold text-[var(--color-accent)]">{personaName(p.persona)}</p>
+                  <div className="flex items-center justify-between">
+                    <p className="text-[10.5px] font-bold text-[var(--color-accent)]">{personaName(p.persona)}</p>
+                    <LikeButton id={`sansedai:${date}:${p.gen}`} />
+                  </div>
                   <Link href={`/manga/${p.slug}`} className="spring-press mt-1 flex gap-3">
                     <div
                       className="relative shrink-0 self-start overflow-hidden rounded-md border border-[var(--color-line)] bg-[var(--color-surface-2)]"
@@ -63,9 +66,6 @@ export default function ArchiveClient() {
                       <p className="mt-0.5 text-[11px] leading-relaxed text-ink/70">{p.comment}</p>
                     </div>
                   </Link>
-                  <div className="mt-1 flex justify-end">
-                    <LikeButton id={`sansedai:${date}:${p.gen}`} />
-                  </div>
                 </li>
               ))}
             </ul>
