@@ -43,6 +43,12 @@ def split_title(raw):
         sub = re.sub(r"^[（(]完[)）][\s　]*", "", sub)
         matched = "mid_paren"
     else:
+        # B''. 直結数字+副題(アメと傷2 副題 型 2026-07-06): suspect(題の一部数字かもなので確定しない。
+        #   呼び出し側が「同base他巻の存在(楽天/キャッシュ/既存頁)」で確定する=ユーザ提案の題名調査)
+        m = re.match(r"^(.{2,}?[ぁ-ん一-龯ァ-ヶー])([2-9]|[1-9][0-9])[\s　](\S.*)$", t)
+        if m:
+            return {"base": m.group(1).strip(), "vol": None, "part": None, "subtitle": m.group(3).strip(),
+                    "clean": t, "matched": None, "vol_suspect": int(m.group(2))}
         # B'. 中間裸数字(前後空白): 題 N 副題
         m = re.match(r"^(.{3,}?[^A-Za-z0-9])[\s　](\d{1,3})[\s　](\S.*)$", t)
         if m and not re.match(r"^[0-9]", m.group(3)):

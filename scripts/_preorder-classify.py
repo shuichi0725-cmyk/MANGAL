@@ -34,7 +34,7 @@ def split_vol(title):
     r = _split_title(title)
     vol = r["vol"]
     if vol is None and r.get("vol_suspect") and r["vol_suspect"] >= 2:
-        vol = r["vol_suspect"]
+        vol = r["vol_suspect"]  # ★安全側=巻扱い。真偽は同base他巻の存在(題名調査)で上流が判断可能
     if vol is None and r["part"] in ("中", "下"):
         vol = 2
     import unicodedata as _u, re as _re
