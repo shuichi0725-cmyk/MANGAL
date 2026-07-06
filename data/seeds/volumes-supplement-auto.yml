@@ -27402,3 +27402,31 @@ volumes:
   source: preorder-midparen-sweep
   added_at: '2026-07-06'
   note: '題中間(N)巻の誤新作化救済(三ツ星レシピ型・ユーザ発見): ボンデージ ( 4)完'
+- series_keys:
+  - qid:Q11458288|name:SEX PISTOLS
+  qid: null
+  number: 12
+  isbn13: '9784799779262'
+  release_date: '2026-08-07'
+  pages: null
+  publisher: null
+  edition_type: standard
+  title_display: SEX PISTOLS
+  source: preorder-homonym-rescue
+  added_at: '2026-07-06'
+  note: 同名suffix-2の正体=同一作続巻(ユーザ発見の工程バグ調査から)
+- series_keys:
+  - name:MISS BLACK|name:Ziggurat
+  - name:MISS BLACK|name:ジグラット
+  - name:Miss Black|name:Ziggurat
+  qid: null
+  number: 10
+  isbn13: '9784799222034'
+  release_date: '2026-08-07'
+  pages: null
+  publisher: null
+  edition_type: standard
+  title_display: Ziggurat
+  source: preorder-homonym-rescue
+  added_at: '2026-07-06'
+  note: 同名suffix-2の正体=同一作続巻(ユーザ発見の工程バグ調査から)
