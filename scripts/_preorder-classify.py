@@ -27,13 +27,20 @@ SCOPE_BAN = _re.compile(r"特装版|限定版|初回限定|豪華版|特別版|�
 
 VOLP = re.compile(r"[（(]\s*(\d{1,3})\s*[)）]\s*$|\s+(\d{1,3})\s*$|第\s*(\d{1,3})\s*巻\s*$")
 
+from _preorder_title_lib import split_title as _split_title
+
 def split_vol(title):
-    t = unicodedata.normalize("NFKC", str(title or "")).strip()
-    m = VOLP.search(t)
-    if m:
-        n = next((g for g in m.groups() if g), None)
-        return norm(VOLP.sub("", t)), (int(n) if n else None)
-    return norm(t), None
+    """★分離器(2026-07-06): base正規化題と巻数。vol_suspect(直結数字)は巻2+扱いで安全側。"""
+    r = _split_title(title)
+    vol = r["vol"]
+    if vol is None and r.get("vol_suspect") and r["vol_suspect"] >= 2:
+        vol = r["vol_suspect"]
+    if vol is None and r["part"] in ("中", "下"):
+        vol = 2
+    import unicodedata as _u, re as _re
+    b = _u.normalize("NFKC", r["base"])
+    b = _re.sub(r"[\s　・!！?？:：〜~\-＆&。、．.『』「」]", "", b).lower()
+    return b, vol
 
 # 既存資産
 iidx = json.load(open(f"{ROOT}/.cache/isbn-page-index.json", encoding="utf-8"))
@@ -70,6 +77,11 @@ for r in rows:
         out["zokkan"].append(r); continue
     if vol is not None and vol >= 2:
         out["ex_mid"].append(r); continue
+    # ★裸数字N>=2末尾=続巻(2026-07-06 VOLSTRIP事故クラス): 題の一部数字(レベル99/U149=直前が英数字)は除く
+    _bm = _re.search(r"[^A-Za-z0-9]\s*([2-9]|[1-9][0-9]{1,2})\s*$", str(r.get("title") or ""))  # 3桁対応(鬼平128漏れ 2026-07-06)
+    if _bm:
+        r["reason"] = f"裸数字末尾{_bm.group(1)}=続巻疑い(新作1巻にしない)"
+        out["skip"].append(r); continue
     # ★巻表記が末尾以外に居る続巻の検出(2026-07-06 ユーザ発見=悪役令嬢99その六/アンゴルモア(13)博多編):
     #   題中間の(N) or ヨミ末尾ソノ漢数字/ダイNカン → 新作1巻にしない(skip=人判 or 次回title照合)
     _t_mid = _re.search(r"[（(]\s*([2-9]|[1-9][0-9])\s*[)）]", str(r.get("title") or ""))

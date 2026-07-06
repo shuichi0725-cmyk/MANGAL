@@ -102,8 +102,15 @@ targets = targets[:LIMIT]
 made = []
 holds = []
 pend_lines = []
-VOLSTRIP = re.compile(r"[\s　]*(?:[（(]\s*\d{1,3}\s*[)）]|第\s*\d{1,3}\s*巻|\d{1,3})\s*$")
+VOLSTRIP = re.compile(r"[\s　]*(?:[（(]\s*\d{1,3}\s*[)）]|第\s*\d{1,3}\s*巻|1)\s*$")  # ★裸数字は1のみ(N≥2を削ると「その6」の6等を破壊し誤1巻化=2026-07-06事故)
+from _preorder_title_lib import split_title as _split_title, strip_kana_vol as _strip_kana_vol
+
 def strip_vol_disp(t):
+    """★分離器に委譲(2026-07-06 ユーザ裁定): タイトル/巻数/副題を正しく分解しclean題を返す"""
+    r = _split_title(t)
+    return r["clean"]
+
+def _old_strip_vol_disp(t):
     """表示題/ヨミから末尾の巻表記を除去(作品題に正規化)。全部消える場合は元のまま"""
     t2 = VOLSTRIP.sub("", str(t or "").strip())
     return t2 if t2 else str(t or "").strip()
