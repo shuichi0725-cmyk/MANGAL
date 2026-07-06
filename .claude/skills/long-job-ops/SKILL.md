@@ -27,3 +27,12 @@ description: 長時間ジョブ(build/promote/sync/harvest)の運転法。生存
 - R2実体の確認は wrangler より **S3 API(boto3+.env.local認証)** が確実
 - edge cache確認は `?v=<適当>` でバイパス。HTML s-maxage=86400
 - git commit をコマンドチェーン末尾に置かない(前段failでも走る)。tsc→OK確認→commit の順で分離
+
+
+## ★destructiveコマンドとシェル変数 (= 2026-07-06 全消し事故から)
+- `python scripts/_promote-bulk-v2.py --only "$VAR"` 型は **必ず `[ -n "$VAR" ] &&` を前置**。
+  $VARが空だとフルモード(=manga.v2全削除→再生成)に落ちた実害(ガードは実装済みだが二重防御)。
+- **フルpromote等の長時間処理をBashのtimeout付きフォアグラウンドで直接実行しない**
+  (途中killで「削除済み・書きかけ」の中途半端状態になる)。run_in_background で回す。
+- 復旧手順(実証済): manga.v2=種2+seedの純派生。seedがcommit済みなら `python scripts/_promote-bulk-v2.py`(フル)で全成果込み完全復元→本番索引+カレンダー再生成+当日修正頁のスポット検証。
+- 索引フル再生成のskip平常値=**~923**(genre other 920=既知未解決)。0でないと慌てず「増えたか」で見る。
