@@ -70,6 +70,15 @@ def split_title(raw):
                 if m:
                     return {"base": m.group(1).strip(), "vol": None, "part": None, "subtitle": "",
                             "clean": t, "matched": None, "vol_suspect": int(m.group(2))}
+    # C'. 漢数字末尾(大江戸イノベーション 二/税務職員の美酒 弐 型 2026-07-06): スペース区切りのみ
+    if matched is None:
+        m = re.search(r"^(.{3,}?)[\s　]([一二三四五六七八九十]|[壱弐参])$", t)
+        if m and m.group(1).strip():
+            _KN2 = {"壱": 1, "弐": 2, "参": 3}
+            g = m.group(2)
+            base = m.group(1).strip()
+            vol = _KANJI_NUM.get(g) or _KN2.get(g)
+            matched = "kanji_tail"
     # C. かな数詞末尾: 題 その六
     if matched is None:
         m = re.search(r"^(.*?)[\s　]*その([一二三四五六七八九十]|\d{1,2})$", t)
