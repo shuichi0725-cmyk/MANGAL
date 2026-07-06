@@ -253,7 +253,8 @@ export default function FilterPanel({
       )}
 
       <Section title="出版社">
-        <div className="space-y-1">
+        {/* ★連載誌と同じ縦圧縮(2026-07-06 ユーザ要望): 長リストはスクロール */}
+        <div className="space-y-1 max-h-48 overflow-y-auto">
           {/* ★出版社未設定(=要補完)を絞り込む QAボタン。 (unknown)キーで applyFilters の
               フォールバック(publishers空→[publisher])に乗る */}
           <label className="flex items-center gap-2 cursor-pointer rounded bg-amber-50 px-1 -mx-1">

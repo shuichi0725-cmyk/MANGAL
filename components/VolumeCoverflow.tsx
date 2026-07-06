@@ -144,7 +144,13 @@ export default function VolumeCoverflow({
   if (n === 0) return null;
   const cur = vols[sel];
   const links = searchLinks(title, cur);
-  const bulk = `https://www.amazon.co.jp/s?k=${encodeURIComponent(`${title} 全巻 コミック セット`)}`;
+  // ★全巻まとめ買い=3店舗(2026-07-06 ユーザ要望)。楽天はアフィリンク化
+  const bulkQ = encodeURIComponent(`${title} 全巻 セット`);
+  const bulk3 = {
+    rakuten: rakutenAff(`https://books.rakuten.co.jp/search?sitem=${bulkQ}`),
+    yahoo: `https://shopping.yahoo.co.jp/search?p=${bulkQ}`,
+    amazon: `https://www.amazon.co.jp/s?k=${bulkQ}`,
+  };
   const pub = [publisher, imprint].filter(Boolean).join(" / ");
 
   return (
@@ -281,15 +287,19 @@ export default function VolumeCoverflow({
         <a href={links.amazon} target="_blank" rel="noopener noreferrer"
            className="spring-press rounded-full bg-[#e69500] py-2 text-center text-sm font-bold text-white">Amazon</a>
       </div>
-      <a href={bulk} target="_blank" rel="noopener noreferrer"
-         className="spring-press mt-2 flex items-center justify-between rounded-2xl px-5 py-3 text-white shadow-soft"
-         style={{ background: "linear-gradient(90deg,#145a3c,#2ebe82)" }}>
-        <span>
-          <span className="block text-[15px] font-bold">全巻まとめ買い</span>
-          <span className="block text-[11px] text-white/80">全{n}巻セットをまとめて</span>
-        </span>
-        <span className="text-2xl leading-none">›</span>
-      </a>
+      <div className="spring-press mt-2 rounded-2xl px-5 py-3 text-white shadow-soft"
+           style={{ background: "linear-gradient(90deg,#145a3c,#2ebe82)" }}>
+        <span className="block text-[15px] font-bold">全巻まとめ買い</span>
+        <span className="block text-[11px] text-white/80">全{n}巻セットをまとめて</span>
+        <div className="mt-2 grid grid-cols-3 gap-2">
+          <a href={bulk3.rakuten} target="_blank" rel="noopener noreferrer"
+             className="rounded-full bg-white/95 py-1.5 text-center text-[12px] font-bold text-[#bf0000]">楽天</a>
+          <a href={bulk3.yahoo} target="_blank" rel="noopener noreferrer"
+             className="rounded-full bg-white/95 py-1.5 text-center text-[12px] font-bold text-[#ff0033]">Yahoo!</a>
+          <a href={bulk3.amazon} target="_blank" rel="noopener noreferrer"
+             className="rounded-full bg-white/95 py-1.5 text-center text-[12px] font-bold text-[#e69500]">Amazon</a>
+        </div>
+      </div>
     </div>
   );
 }

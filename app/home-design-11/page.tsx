@@ -113,10 +113,7 @@ export default function Design11() {
       {/* 3.【中】新刊棚(★題=1行オートスクロール+下に作者。はみ出す題だけ動く) */}
       <section className="mt-4 px-4">
         <Tile className="p-3.5">
-          <div className="flex items-baseline justify-between">
-            <h2 className="text-[14px] font-bold">📦 今月の新刊</h2>
-            <span className="text-[11px] text-ink/50">カレンダー →</span>
-          </div>
+          <h2 className="text-[14px] font-bold">📦 今月の新刊</h2>
           <ul className="-mx-3.5 mt-2.5 flex gap-3 overflow-x-auto px-3.5 pb-1 snap-x">
             {thisMonthReleases(manga, byNew, 12).map((m) => (
               <li key={m.slug} className="w-[96px] shrink-0 snap-start">

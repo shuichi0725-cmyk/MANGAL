@@ -32,12 +32,23 @@ export default function AffiliateLink({ manga, volume, className, labelPrefix }:
   const store = ebook ? "Kindle" : "アマゾン";
   const icon = ebook ? "📱" : "📖";
 
+  // ★電子(Kindle)はブラウザで開く(2026-07-06 ユーザ要望): Amazonアプリ内ではKindle本が
+  //   購入できない(IAP規約)ため、JSナビゲーション(window.open)でAndroid App Links/iOS
+  //   Universal Linksの発火を回避しブラウザタブで開く。紙は通常の<a>のまま。
+  const openInBrowser = ebook
+    ? (e: React.MouseEvent) => {
+        e.preventDefault();
+        window.open(href, "_blank", "noopener");
+      }
+    : undefined;
+
   return (
     <a
       href={href}
       target="_blank"
       rel="nofollow sponsored noopener"
       className={className}
+      onClick={openInBrowser}
       aria-label={`${labelPrefix ? `${labelPrefix} を ` : ""}${store} で見る`}
     >
       <span aria-hidden className="mr-1">

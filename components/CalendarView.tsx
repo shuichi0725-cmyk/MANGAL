@@ -80,6 +80,20 @@ export default function CalendarView() {
     const el = scroller.current;
     if (el) el.scrollTo({ left: i * el.clientWidth, behavior: "smooth" });
   };
+  // ★可変高(2026-07-06 ユーザ要望): コンテナ高さ=表示中パネルの実高さ。
+  //   flexの既定(最大子に揃う)だと「以降・未定」の長さに引っ張られ月表示の下が巨大空白になるため。
+  const [panelH, setPanelH] = useState<number | undefined>(undefined);
+  useEffect(() => {
+    const el = scroller.current;
+    if (!el) return;
+    const panel = el.children[active] as HTMLElement | undefined;
+    if (!panel) return;
+    const measure = () => setPanelH(panel.scrollHeight);
+    measure();
+    const ro = new ResizeObserver(measure);
+    ro.observe(panel);
+    return () => ro.disconnect();
+  }, [active, months, beyond]);
 
   if (!current) return <div className="py-6 text-center text-[11px] text-ink/45">カレンダー読込中…</div>;
 
@@ -185,7 +199,8 @@ export default function CalendarView() {
       <div
         ref={scroller}
         onScroll={onScroll}
-        className="mt-2 flex snap-x snap-mandatory overflow-x-auto overscroll-x-contain [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+        className="mt-2 flex snap-x snap-mandatory items-start overflow-x-auto overflow-y-hidden overscroll-x-contain transition-[height] duration-300 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+        style={panelH !== undefined ? { height: panelH } : undefined}
       >
         {panelYms.map((ym) => monthPanel(ym))}
         {/* 5枚目: 以降・未定(一覧表) */}
