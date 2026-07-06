@@ -53,6 +53,7 @@ export default function HomeSidebar({ genres }: { genres: Array<{ key: string; n
         <div className="rounded-xl border border-[var(--color-line)] bg-[var(--color-surface)] p-3.5 shadow-sm">
           <p className="text-[12px] font-extrabold text-ink/70">📚 コーナー</p>
           <nav className="mt-1.5 space-y-1 text-[12px]">
+            <Link href="/rankings" className="spring-press block rounded px-1.5 py-1 hover:bg-[var(--color-surface-2)]">🏆 なんでもランキング</Link>
             <Link href="/sansedai-archive" className="spring-press block rounded px-1.5 py-1 hover:bg-[var(--color-surface-2)]">🕘 今日の一冊 過去ログ</Link>
             <Link href="/column-ai-league" className="spring-press block rounded px-1.5 py-1 hover:bg-[var(--color-surface-2)]">📝 AI書評家リーグ</Link>
             <Link href="/art-books" className="spring-press block rounded px-1.5 py-1 hover:bg-[var(--color-surface-2)]">🎨 画集</Link>

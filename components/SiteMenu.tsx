@@ -11,6 +11,7 @@ const ITEMS: Array<[string, string, string]> = [
   ["📖", "今日の一冊(毎日更新)", "/"],
   ["🗒️", "今日の一冊 過去ログ", "/sansedai-archive"],
   ["📝", "AI書評家リーグ(週刊)", "/column-ai-league"],
+  ["🏆", "なんでもランキング", "/rankings"],
   ["🎨", "画集", "/art-books"],
   ["🔰", "使い方", "/about"],
   ["✉️", "お問い合わせ", "/contact"],

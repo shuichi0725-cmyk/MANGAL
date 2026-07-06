@@ -31,6 +31,16 @@ export function latestDate(m: Manga): string | null {
 
 /** ★今月の新刊(2026-07-05): ビルド時JSTの当月に発売巻を持つ作品を発売日昇順で。
  *  旧byNew(最新刊行日降順)は未来予約巻持ちの長期連載が上位を占め固定化していた。 */
+/** ★#1巻応援(2026-07-07 manba学び): 当月に1巻が出る新作。新刊棚と違い「はじまる作品」だけ */
+export function debutThisMonth(manga: Manga[], n = 12): Manga[] {
+  const now = new Date(Date.now() + 9 * 3600 * 1000);
+  const ym = `${now.getUTCFullYear()}-${String(now.getUTCMonth() + 1).padStart(2, "0")}`;
+  return manga
+    .filter((m) => m.first_volume_date && String(m.first_volume_date).startsWith(ym))
+    .sort((a, b) => String(a.first_volume_date).localeCompare(String(b.first_volume_date)))
+    .slice(0, n);
+}
+
 export function thisMonthReleases(manga: Manga[], fallback: Manga[], n = 12): Manga[] {
   const now = new Date(Date.now() + 9 * 3600 * 1000); // JST
   const ym = `${now.getUTCFullYear()}-${String(now.getUTCMonth() + 1).padStart(2, "0")}`;

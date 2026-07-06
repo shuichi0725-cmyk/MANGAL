@@ -8,7 +8,7 @@ import DestinyPickMock from "@/components/DestinyPickMock";
 import MarqueeTitle from "@/components/MarqueeTitle";
 import CalendarView from "@/components/CalendarView";
 import HomeSidebar from "@/components/HomeSidebar";
-import { bundle, DesignNav, seeded, volCount, Cover, CoverTile, thisMonthReleases } from "@/lib/homeDesign";
+import { bundle, DesignNav, seeded, volCount, Cover, CoverTile, thisMonthReleases, debutThisMonth } from "@/lib/homeDesign";
 import { coverUrl } from "@/lib/schema";
 import { loadAiReviews } from "@/lib/loadData";
 import AiLeagueTeaser from "@/components/AiLeagueTeaser";
@@ -134,6 +134,30 @@ export default function Design11() {
           </ul>
         </Tile>
       </section>
+
+      {/* 3.2【新】#1巻応援: 今月はじまる新作だけの棚(manba学び 2026-07-07)。空月は非表示 */}
+      {(() => {
+        const debuts = debutThisMonth(manga, 12);
+        if (debuts.length === 0) return null;
+        return (
+          <section className="mt-4 px-4">
+            <Tile className="p-3.5">
+              <h2 className="text-[14px] font-bold">🌱 #1巻応援 <span className="ml-1 text-[10px] font-semibold text-ink/45">今月はじまる新作</span></h2>
+              <ul className="-mx-3.5 mt-2.5 flex gap-3 overflow-x-auto px-3.5 pb-1 snap-x">
+                {debuts.map((m) => (
+                  <li key={m.slug} className="w-[96px] shrink-0 snap-start">
+                    <Link href={`/manga/${m.slug}`} className="block group spring-press">
+                      <Cover m={m} sizes="96px" />
+                      <MarqueeTitle text={m.title} className="mt-1 text-[12px] leading-snug text-ink/85 group-hover:text-[var(--color-accent)]" />
+                      <p className="text-[10px] text-ink/45">{String(m.first_volume_date).slice(5).replace("-", "/")} 発売</p>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </Tile>
+          </section>
+        );
+      })()}
 
       {/* 3.5【中】発売/創刊カレンダー(2ビュー・データ駆動 = public/calendar を遅延fetch・index join) */}
       <section className="mt-4 px-4">
