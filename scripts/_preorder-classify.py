@@ -70,6 +70,11 @@ for r in rows:
         out["zokkan"].append(r); continue
     if vol is not None and vol >= 2:
         out["ex_mid"].append(r); continue
+    # ★コンビニ本レーベル(2026-07-06 ユーザ指摘): seriesName/レーベルで判定(題では分からない)
+    _imp = str(r.get("seriesName") or "") + " " + str(r.get("label") or "")
+    if _re.search(r"集英社リミックス|講談社プラチナコミックス|my\s*first\s*big|マイファーストビッグ|コンビニ|廉価|ジャンプ\s*リミックス|アンコール刊行|トップコミックスW|SPコミックスLEAD|(?:^|\s)Gコミックス", _imp, _re.I):
+        r["reason"] = "コンビニ本レーベル"
+        out["skip"].append(r); continue
     # ★scope外(特装版/アンソロ/セット/ガイド/N巻誤検出)は新作1巻にしない(2026-07-06)
     if SCOPE_BAN.search(str(r.get("title") or "")):
         r["reason"] = "scope外(特装/アンソロ/セット/再編/巻表記)"
