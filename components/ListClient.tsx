@@ -44,6 +44,12 @@ function latestDate(m: MangaListItem): string {
 }
 
 export default function ListClient({ data }: { data: ListBundle }) {
+  // ★テストモード判定(HomeClientと同じ): preview/localhost or #debug。テスト時は題名列を最長題に合わせる(チェック用・ユーザ要望 2026-07-06)
+  const [isPreview, setIsPreview] = useState(false);
+  useEffect(() => {
+    const h = window.location.hostname;
+    setIsPreview(h.includes("preview") || h === "localhost" || h === "127.0.0.1" || localStorage.getItem("mangal-diag") === "1");
+  }, []);
   const [state, setState] = useState<FilterState>(emptyFilterState());
   const [open, setOpen] = useState(false);
   const [q, setQ] = useState("");
@@ -173,7 +179,7 @@ export default function ListClient({ data }: { data: ListBundle }) {
             )}
             {rows.slice(0, limit).map((m, i) => (
               <tr key={m.slug} className={i % 2 ? "bg-[var(--color-surface)]/60" : ""}>
-                <td className="max-w-[200px] border-b border-[var(--color-line)]/60 px-2 py-1.5">
+                <td className={`${isPreview ? "" : "max-w-[200px] "}border-b border-[var(--color-line)]/60 px-2 py-1.5`}>
                   {/* ★題名は切らない(2026-07-06 ユーザ要望): truncate廃止→セル内横スクロール(whitespace-nowrap+overflow-x-auto) */}
                   <div className="max-w-full overflow-x-auto" style={{ scrollbarWidth: "none" }}>
                     {/* DEBUG: フォルダ名(slug)表示。 本番前に削除する */}
@@ -186,7 +192,7 @@ export default function ListClient({ data }: { data: ListBundle }) {
                     </Link>
                   </div>
                 </td>
-                <td className="max-w-[120px] border-b border-[var(--color-line)]/60 px-2 py-1.5 text-ink/75">
+                <td className={`${isPreview ? "" : "max-w-[120px] "}border-b border-[var(--color-line)]/60 px-2 py-1.5 text-ink/75`}>
                   <div className="max-w-full overflow-x-auto whitespace-nowrap" style={{ scrollbarWidth: "none" }}>
                     {m.authors.map((a) => a.name).join("・")}
                   </div>
