@@ -2990,6 +2990,21 @@ def main():
         for d in dropped_non_manga:
             print(f"  🚫 {d}", file=sys.stderr)
 
+    # ★予約新規頁の恒久合流(2026-07-06): data/seeds/preorder-pages/*.yml(git追跡=消えない保管庫)を
+    #   出力へ素通しコピー。種2に同slugが現れたら種2側優先=自己retire(コピーskip+警告)。
+    #   種2への正式INSERTは月次蒸留時に別途(それまでの恒久化がこのseed)。
+    _pp_dir = ROOT / "data" / "seeds" / "preorder-pages"
+    if _pp_dir.is_dir():
+        _pp_n = _pp_skip = 0
+        for _f in sorted(_pp_dir.glob("*.yml")):
+            _dst = OUT_DIR / _f.name
+            if _dst.exists():
+                _pp_skip += 1
+                continue
+            _dst.write_bytes(_f.read_bytes())
+            _pp_n += 1
+        print(f"  preorder-pages合流: {_pp_n} (種2側に出現しskip={_pp_skip})", file=sys.stderr)
+
     print(f"\nwrote {stats['regenerated']} yml to {OUT_DIR}", file=sys.stderr)
 
 
