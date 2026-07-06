@@ -27,6 +27,6 @@ previewは**「いま確認したいセットだけ」を入れる**(混在=確�
 - セット入替: `.preview-data/manga/` を対象ymlだけにする(旧セットは削除可=本番/ステージングに実体がある)
 - ドラフト退避場所: `.cache/preorders/drafts/`(未確認の②③④はここ。previewに出すのは確認する分だけ)
 - 入替後は必ず: `python scripts/_build-list-index.py .preview-data/manga .preview-data`(索引)
-  + previewカレンダー再生成(`_build-calendar.py ... public/calendar <当月> .preview-data/manga` ★実在フィルタ必須)
+  + previewカレンダー再生成(`_build-calendar.py .preview-data/manga public/calendar <当月>` ★srcはpreview自身=ドラフトも載る)
   + push
 - ★カレンダーは二重化済み: public/=preview実在フィルタ版 / data/calendar=本番フル(r2-sync overlayが自動で本番へ)

@@ -58,7 +58,7 @@ python scripts/_verify-kana-pending.py --limit 200
 
 ```
 python scripts/_build-calendar.py data/manga.v2 data/calendar <当月YYYY-MM>                     # 本番フル
-python scripts/_build-calendar.py data/manga.v2 public/calendar <当月> .preview-data/manga      # preview(実在フィルタ)
+python scripts/_build-calendar.py .preview-data/manga public/calendar <当月>                    # preview(★srcはpreview自身。本番+ALLOWフィルタだとpreview限定ドラフトが落ちる=2026-07-06実害)
 ```
 - 本番R2へ即時反映したい時: 変更月JSON+manifest+beyond.jsonをPUT(姫松対応の手順)。通常は週次のr2-sync overlayが運ぶ。
 - previewのカレンダーは**ページ実在フィルタ必須**(subsetなのでフィルタ無し=リンク切れ)。
