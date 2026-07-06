@@ -244,17 +244,21 @@ export function uniqueAuthors(items: MangaListItem[], includeOriginal = false): 
 export function authorsWithKana(
   items: MangaListItem[],
   includeOriginal = false,
-): { name: string; kana: string }[] {
-  const map = new Map<string, string>();
+): { name: string; kana: string; count: number }[] {
+  const map = new Map<string, { kana: string; count: number }>();
   const add = (name: string, kana?: string) => {
     const prev = map.get(name);
-    if (prev === undefined || (!prev && kana)) map.set(name, kana ?? "");
+    if (prev === undefined) map.set(name, { kana: kana ?? "", count: 1 });
+    else {
+      prev.count += 1;
+      if (!prev.kana && kana) prev.kana = kana;
+    }
   };
   for (const m of items) {
     for (const a of m.authors) add(a.name, a.kana);
     if (includeOriginal) for (const a of m.original_authors) add(a.name, a.kana);
   }
-  return Array.from(map, ([name, kana]) => ({ name, kana })).sort((a, b) =>
+  return Array.from(map, ([name, v]) => ({ name, kana: v.kana, count: v.count })).sort((a, b) =>
     (a.kana || a.name).localeCompare(b.kana || b.name, "ja"),
   );
 }

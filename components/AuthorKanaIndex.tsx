@@ -3,7 +3,7 @@
 import { useMemo, useState } from "react";
 import { ChipButton } from "@/components/ui/Chip";
 
-type AuthorEntry = { name: string; kana: string };
+type AuthorEntry = { name: string; kana: string; count?: number };
 
 type Props = {
   authors: AuthorEntry[];
@@ -49,9 +49,22 @@ function baseKana(s: string): string | null {
   return KANA_TO_ROW[c] ? c : null;
 }
 
+/** 読みの2文字目 → 清音カタカナ(2音目チップ用)。 無し/カナ以外は "他"。 */
+function secondKana(s: string): string {
+  if (!s || s.length < 2) return "他";
+  let c = s[1];
+  if (c >= "ぁ" && c <= "ん") c = String.fromCharCode(c.charCodeAt(0) + 0x60);
+  if (DAKU[c]) c = DAKU[c];
+  return KANA_TO_ROW[c] ? c : "他";
+}
+
+// 2音目チップを出す規模の閾値(小さいバケツは従来どおり直接リスト)
+const KANA2_THRESHOLD = 40;
+
 export default function AuthorKanaIndex({ authors, selected, onToggle }: Props) {
   const [openRow, setOpenRow] = useState<string | null>(null);
   const [openKana, setOpenKana] = useState<string | null>(null);
+  const [openKana2, setOpenKana2] = useState<string | null>(null);
 
   // 著者を音単位でバケット化。 byRow[row] = 件数, byKana[音] = 著者[]
   const { byKana, otherList, rowCount } = useMemo(() => {
@@ -71,8 +84,39 @@ export default function AuthorKanaIndex({ authors, selected, onToggle }: Props) 
     return { byKana, otherList, rowCount };
   }, [authors]);
 
-  const shownAuthors: AuthorEntry[] =
-    openRow === OTHER ? otherList : openKana ? byKana.get(openKana) ?? [] : [];
+  // ★2音目バケツ(2026-07-06): タ1164人→タカ312人のもう一段。清音化キー。
+  const kana2Buckets = useMemo(() => {
+    if (!openKana) return null;
+    const bucket = byKana.get(openKana) ?? [];
+    if (bucket.length < KANA2_THRESHOLD) return null;
+    const m = new Map<string, AuthorEntry[]>();
+    for (const a of bucket) {
+      const k2 = secondKana(a.kana || a.name);
+      (m.get(k2) ?? m.set(k2, []).get(k2)!).push(a);
+    }
+    return m;
+  }, [openKana, byKana]);
+
+  const baseList: AuthorEntry[] =
+    openRow === OTHER
+      ? otherList
+      : openKana
+        ? kana2Buckets
+          ? openKana2
+            ? kana2Buckets.get(openKana2) ?? []
+            : []
+          : byKana.get(openKana) ?? []
+        : [];
+  // ★作品数の多い順(高橋留美子が最上位に来る)。同数はヨミ順
+  const shownAuthors = useMemo(
+    () =>
+      [...baseList].sort(
+        (a, b) =>
+          (b.count ?? 0) - (a.count ?? 0) ||
+          (a.kana || a.name).localeCompare(b.kana || b.name, "ja"),
+      ),
+    [baseList],
+  );
 
   const rowDef = GYO.find((g) => g.row === openRow);
 
@@ -98,6 +142,7 @@ export default function AuthorKanaIndex({ authors, selected, onToggle }: Props) 
             onClick={() => {
               setOpenRow(openRow === g.row ? null : g.row);
               setOpenKana(null);
+              setOpenKana2(null);
             }}
           >
             {g.row}
@@ -109,6 +154,7 @@ export default function AuthorKanaIndex({ authors, selected, onToggle }: Props) 
             onClick={() => {
               setOpenRow(openRow === OTHER ? null : OTHER);
               setOpenKana(null);
+              setOpenKana2(null);
             }}
           >
             A-Z他
@@ -125,13 +171,31 @@ export default function AuthorKanaIndex({ authors, selected, onToggle }: Props) 
               <ChipButton
                 key={k}
                 active={openKana === k}
-                onClick={() => setOpenKana(openKana === k ? null : k)}
+                onClick={() => { setOpenKana(openKana === k ? null : k); setOpenKana2(null); }}
               >
                 {k}
                 {c > 0 && <span className="text-[10px] opacity-60">{c}</span>}
               </ChipButton>
             );
           })}
+        </div>
+      )}
+
+      {/* 第2.5段: 2音目チップ(大バケツのみ。タ→タカ) */}
+      {kana2Buckets && (
+        <div className="flex flex-wrap gap-1 pl-2">
+          {Array.from(kana2Buckets.entries())
+            .sort(([a], [b]) => (a === "他" ? 1 : b === "他" ? -1 : a.localeCompare(b, "ja")))
+            .map(([k2, list]) => (
+              <ChipButton
+                key={k2}
+                active={openKana2 === k2}
+                onClick={() => setOpenKana2(openKana2 === k2 ? null : k2)}
+              >
+                {openKana}{k2 === "他" ? "-他" : k2}
+                <span className="text-[10px] opacity-60">{list.length}</span>
+              </ChipButton>
+            ))}
         </div>
       )}
 
@@ -150,6 +214,7 @@ export default function AuthorKanaIndex({ authors, selected, onToggle }: Props) 
               />
               <span>{a.name}</span>
               {a.kana && <span className="text-[11px] text-ink/40">{a.kana}</span>}
+              {(a.count ?? 0) > 1 && <span className="ml-auto text-[10px] tabular-nums text-ink/35">{a.count}</span>}
             </label>
           ))}
         </div>
