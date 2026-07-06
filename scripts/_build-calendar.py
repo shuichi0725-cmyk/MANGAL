@@ -16,6 +16,17 @@ except ImportError: from yaml import SafeLoader as L
 SRC = sys.argv[1] if len(sys.argv) > 1 else "data/manga.v2"
 OUT = sys.argv[2] if len(sys.argv) > 2 else "public/calendar"
 CUR = sys.argv[3] if len(sys.argv) > 3 else date.today().strftime("%Y-%m")
+# ★[4]=slugフィルタdir(2026-07-06 preview用): 指定ディレクトリのymlに実在するslugだけ載せる
+#   =「載っている→必ず飛べる」の構造保証(previewはsubsetなのでフィルタ必須・リンク切れ根絶)
+FILTER_DIR = sys.argv[4] if len(sys.argv) > 4 else None
+ALLOW = None
+if FILTER_DIR:
+    ALLOW = set()
+    for _f in glob.glob(os.path.join(FILTER_DIR, "*.yml")):
+        try:
+            _d = yaml.load(open(_f, encoding="utf-8"), Loader=L)
+            if _d and _d.get("slug"): ALLOW.add(_d["slug"])
+        except Exception: pass
 
 DAY_RE = re.compile(r"^(\d{4})-(\d{2})-(\d{2})$")
 MON_RE = re.compile(r"^(\d{4})-(\d{2})$")
@@ -32,6 +43,7 @@ def eff_date(v):
     return s
 
 def bucket(store, ym, day, item):
+    if ALLOW is not None and item[0] not in ALLOW: return
     m = store.setdefault(ym, {"days": {}, "unknown": []})
     if day: m["days"].setdefault(day, []).append(item)
     else: m["unknown"].append(item)
@@ -81,6 +93,23 @@ for ym, data in launch.items():
     json.dump(data, open(os.path.join(OUT, "launch", ym + ".json"), "w", encoding="utf-8"), ensure_ascii=False, separators=(",", ":"))
 for ym, data in release.items():
     json.dump(data, open(os.path.join(OUT, "release", ym + ".json"), "w", encoding="utf-8"), ensure_ascii=False, separators=(",", ":"))
+# ★「以降・未定」集約(2026-07-06 5パネルUI用): 当月+4ヶ月目以降の全巻+各月の日未定を一覧化
+def _next_ym(ym, k):
+    y, m = int(ym[:4]), int(ym[5:7])
+    m += k; y += (m - 1) // 12; m = (m - 1) % 12 + 1
+    return f"{y:04d}-{m:02d}"
+_horizon = _next_ym(CUR, 4)  # これより先=「以降」
+beyond = []
+for ym in sorted(release.keys()):
+    if ym >= _horizon:
+        d0 = release[ym]
+        for day in sorted(d0["days"]):
+            for it in d0["days"][day]:
+                beyond.append([it[0], it[1], it[2], f"{ym}-{day}"])
+        for it in d0["unknown"]:
+            beyond.append([it[0], it[1], it[2], ym])
+json.dump({"items": beyond}, open(os.path.join(OUT, "release", "beyond.json"), "w", encoding="utf-8"), ensure_ascii=False, separators=(",", ":"))
+
 manifest = {
     "current": CUR,
     "launch_months": sorted(launch.keys()),

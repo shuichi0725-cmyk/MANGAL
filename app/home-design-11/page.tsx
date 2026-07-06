@@ -136,7 +136,7 @@ export default function Design11() {
         <Tile className="p-3.5">
           <div className="mb-1 flex items-baseline justify-between">
             <h2 className="text-[14px] font-extrabold">📅 カレンダー</h2>
-            <span className="text-[10px] text-ink/45">発売日 / 創刊 切替</span>
+            <span className="text-[10px] text-ink/45">今月〜3ヶ月先+未定</span>
           </div>
           <CalendarView />
         </Tile>
