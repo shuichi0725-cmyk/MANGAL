@@ -31,14 +31,28 @@ export function latestDate(m: Manga): string | null {
 
 /** ★今月の新刊(2026-07-05): ビルド時JSTの当月に発売巻を持つ作品を発売日昇順で。
  *  旧byNew(最新刊行日降順)は未来予約巻持ちの長期連載が上位を占め固定化していた。 */
+/** 1巻の発売日(最小)を導出(full Manga用。索引のfirst_volume_dateと同義) */
+export function firstVolumeDate(m: Manga): string | null {
+  let best: string | null = null;
+  for (const e of m.editions) for (const v of e.volumes) {
+    if (v.number === 1 && v.release_date) {
+      const d = String(v.release_date);
+      if (!best || d < best) best = d;
+    }
+  }
+  return best;
+}
+
 /** ★#1巻応援(2026-07-07 manba学び): 当月に1巻が出る新作。新刊棚と違い「はじまる作品」だけ */
 export function debutThisMonth(manga: Manga[], n = 12): Manga[] {
   const now = new Date(Date.now() + 9 * 3600 * 1000);
   const ym = `${now.getUTCFullYear()}-${String(now.getUTCMonth() + 1).padStart(2, "0")}`;
   return manga
-    .filter((m) => m.first_volume_date && String(m.first_volume_date).startsWith(ym))
-    .sort((a, b) => String(a.first_volume_date).localeCompare(String(b.first_volume_date)))
-    .slice(0, n);
+    .map((m) => [firstVolumeDate(m), m] as const)
+    .filter(([d]) => d && d.startsWith(ym))
+    .sort((a, b) => String(a[0]).localeCompare(String(b[0])))
+    .slice(0, n)
+    .map(([, m]) => m);
 }
 
 export function thisMonthReleases(manga: Manga[], fallback: Manga[], n = 12): Manga[] {

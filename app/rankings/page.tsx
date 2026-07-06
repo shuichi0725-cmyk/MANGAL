@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { bundle, DesignNav, volCount, Cover } from "@/lib/homeDesign";
+import { bundle, DesignNav, volCount, Cover, firstVolumeDate } from "@/lib/homeDesign";
 import type { Manga } from "@/lib/schema";
 
 export const metadata = {
@@ -42,8 +42,8 @@ export default function RankingsPage() {
     },
     {
       icon: "🐣", title: "1巻が出たのはいつ? 現役最長キャリア", note: "巻データで見る古参",
-      items: manga.filter((m) => m.first_volume_date && m.status !== "completed").sort((a, b) => String(a.first_volume_date).localeCompare(String(b.first_volume_date))).slice(0, 10),
-      value: (m) => `1巻 ${String(m.first_volume_date).replaceAll("-", ".")}`,
+      items: manga.filter((m) => firstVolumeDate(m) && m.status !== "completed").sort((a, b) => String(firstVolumeDate(a)).localeCompare(String(firstVolumeDate(b)))).slice(0, 10),
+      value: (m) => `1巻 ${String(firstVolumeDate(m)).replaceAll("-", ".")}`,
     },
   ];
 

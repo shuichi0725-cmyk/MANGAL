@@ -8,7 +8,7 @@ import DestinyPickMock from "@/components/DestinyPickMock";
 import MarqueeTitle from "@/components/MarqueeTitle";
 import CalendarView from "@/components/CalendarView";
 import HomeSidebar from "@/components/HomeSidebar";
-import { bundle, DesignNav, seeded, volCount, Cover, CoverTile, thisMonthReleases, debutThisMonth } from "@/lib/homeDesign";
+import { bundle, DesignNav, seeded, volCount, Cover, CoverTile, thisMonthReleases, debutThisMonth, firstVolumeDate } from "@/lib/homeDesign";
 import { coverUrl } from "@/lib/schema";
 import { loadAiReviews } from "@/lib/loadData";
 import AiLeagueTeaser from "@/components/AiLeagueTeaser";
@@ -149,7 +149,7 @@ export default function Design11() {
                     <Link href={`/manga/${m.slug}`} className="block group spring-press">
                       <Cover m={m} sizes="96px" />
                       <MarqueeTitle text={m.title} className="mt-1 text-[12px] leading-snug text-ink/85 group-hover:text-[var(--color-accent)]" />
-                      <p className="text-[10px] text-ink/45">{String(m.first_volume_date).slice(5).replace("-", "/")} 発売</p>
+                      <p className="text-[10px] text-ink/45">{String(firstVolumeDate(m) ?? "").slice(5).replace("-", "/")} 発売</p>
                     </Link>
                   </li>
                 ))}
