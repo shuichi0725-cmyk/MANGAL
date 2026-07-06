@@ -142,7 +142,8 @@ for f in _files:
     if any(p not in pubKeys for p in (d.get("publishers") or [])): skipped += 1; continue
     if d.get("magazine") and d["magazine"] not in magKeys: skipped += 1; continue
     gs = d.get("genres") or []
-    if not gs or any(g not in genreKeys for g in gs): skipped += 1; continue
+    # ★genre空は許容(2026-07-06 予約新作=捏造しない合意。master外キーのみ拒否)
+    if any(g not in genreKeys for g in gs): skipped += 1; continue
     eds = d.get("editions") or []
     tv = sum(len(e.get("volumes") or []) for e in eds)
     maxev = max((len(e.get("volumes") or []) for e in eds), default=0)
