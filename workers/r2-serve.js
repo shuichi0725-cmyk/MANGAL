@@ -72,6 +72,29 @@ export default {
     }
 
     // ★いいねAPI(匿名カウンタ・PIIゼロ。 KV=LIKES)。 静的配信より前・キャッシュしない。
+    // ★/go = Kindle等のブラウザ中継(2026-07-07 本実装): Amazonアプリ(IAP規約でKindle購入不可)への
+    //   App Links/Universal Links発火を避けるため、自ドメインの中間ページからJSで遷移させる。
+    //   オープンリダイレクタ防止: amazon.co.jp / amzn.to のみ許可。
+    if (url.pathname === "/go") {
+      let dest = "";
+      try { dest = decodeURIComponent(url.searchParams.get("u") || ""); } catch {}
+      let ok = false;
+      try {
+        const h = new URL(dest).hostname;
+        ok = h === "www.amazon.co.jp" || h === "amazon.co.jp" || h === "amzn.to";
+      } catch {}
+      if (!ok) return new Response("bad destination", { status: 400 });
+      const esc = dest.replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;");
+      const html = `<!doctype html><html lang="ja"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>ストアへ移動中… | MANGAL</title>
+<style>body{font-family:sans-serif;display:flex;min-height:80vh;align-items:center;justify-content:center;color:#444}</style>
+</head><body><p>ストアへ移動しています…<br><a href="${esc}" rel="nofollow sponsored noopener">開かない場合はこちら</a></p>
+<script>setTimeout(function(){ location.replace(${JSON.stringify(dest)}); }, 60);</script>
+</body></html>`;
+      return new Response(html, { headers: { "content-type": "text/html; charset=utf-8", "cache-control": "no-store" } });
+    }
     if (url.pathname === "/api/like" && env.LIKES) {
       if (request.method === "GET") {
         const id = url.searchParams.get("id") || "";
@@ -154,7 +177,7 @@ ${rec.body}`;
             b64(bodyText),
           ].join("\r\n");
           await env.MAILER.send(new EmailMessage("contact@mangal-db.com", env.MAIL_TO, raw));
-        } catch (e) { /* 転送失敗はKV受信箱でカバー */ }
+        } catch (e) { console.error("MAIL_FAIL", (e && e.message) || String(e)); }
       }
       return new Response(JSON.stringify({ ok: true }), {
         headers: { "content-type": "application/json", "cache-control": "no-store", ...CORS },

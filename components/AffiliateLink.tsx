@@ -38,7 +38,14 @@ export default function AffiliateLink({ manga, volume, className, labelPrefix }:
   const openInBrowser = ebook
     ? (e: React.MouseEvent) => {
         e.preventDefault();
-        window.open(href, "_blank", "noopener");
+        // ★本番(Worker配下)は /go 中継=中間ページからのJS遷移でアプリ起動を確実に回避。
+        //   preview/開発(Worker無し)は window.open 簡易版でフォールバック。
+        const viaWorker = window.location.hostname === "mangal-db.com" || window.location.hostname.endsWith("workers.dev");
+        if (viaWorker) {
+          window.open(`/go?u=${encodeURIComponent(href)}`, "_blank", "noopener");
+        } else {
+          window.open(href, "_blank", "noopener");
+        }
       }
     : undefined;
 
