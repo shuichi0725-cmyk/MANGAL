@@ -383,6 +383,11 @@ ONLY_SLUGS: set[str] = set()
 for _i, _a in enumerate(sys.argv):
     if _a == "--only" and _i + 1 < len(sys.argv):
         ONLY_SLUGS = {s.strip() for s in sys.argv[_i + 1].split(",") if s.strip()}
+        # ★安全ガード(2026-07-06 事故): --only指定なのに空(シェル変数の展開ミス等)なら
+        #   フルモード(=全66k削除→再生成)に落とさず即abort。全消し誤発動の再発防止。
+        if not ONLY_SLUGS:
+            print("[abort] --only が空(シェル変数の展開ミス?)。フルpromoteに落とさず終了。", file=sys.stderr)
+            sys.exit(2)
 
 
 def _entry_sids(entry: dict, key_to_sid: dict) -> list[int]:
