@@ -48,6 +48,10 @@ export default function Design11() {
   return (
     <div className="min-h-screen bg-[var(--color-bg)] pb-12">
       <DesignNav current={11} />
+      {/* ★PC見栄え(2026-07-06 ユーザ指摘: 広幅で間延び・カレンダー散り・特集巨大空白):
+          モバイル設計のコーナー群はPCでは~640pxの中央カラムに収める(アプリ風)。
+          将来のPC2カラム化(左=検索)までの即効レイアウト。 */}
+      <div className="mx-auto w-full max-w-[640px]">
 
       {/* 0.【極小】統計ストリップ: 場所を取らない1行、各数字タップでフィルター絞り込みへ */}
       {(() => {
@@ -228,6 +232,7 @@ export default function Design11() {
           )}
         </div>
       </section>
+      </div>
     </div>
   );
 }
