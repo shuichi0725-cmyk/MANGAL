@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { DesignNav } from "@/lib/homeDesign";
 import { notFound } from "next/navigation";
 import CoverImage from "@/components/CoverImage";
 import RelatedWorks, { computeRelated } from "@/components/RelatedWorks";
@@ -99,11 +100,11 @@ export default async function MangaDetailPage({
   };
 
   return (
-    <div className="mx-auto max-w-4xl px-4 py-8">
+    <div>
+      {/* ★共通ナビヘッダー(2026-07-06 ユーザ要望: 「←ホームへ戻る」でなく他頁と同じヘッダーを出す) */}
+      <DesignNav />
+      <div className="mx-auto max-w-4xl px-4 py-8">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-      <Link href="/" className="text-sm text-ink/60 hover:text-ink">
-        ← ホームへ戻る
-      </Link>
       <div className={`mt-6 grid gap-8 ${cover ? "md:grid-cols-[260px_1fr]" : ""}`}>
         {/* ヒーロー表紙: モバイルでは巻コーフロー(下の VolumeRow)が表紙を見せるため非表示
             (= タイトル上に全幅の巨大画像が出るのを抑止)。 デスクトップのみ 260px サイドバー表示。 */}
@@ -425,6 +426,7 @@ export default async function MangaDetailPage({
         >
           ← ホームへ戻る
         </Link>
+      </div>
       </div>
     </div>
   );
