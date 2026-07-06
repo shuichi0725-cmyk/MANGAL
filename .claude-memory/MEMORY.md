@@ -132,3 +132,4 @@
 - [【厳守】本番デプロイはトリガー待ち](feedback_production_deploy_gate.md) — 週次蒸留して等の明示指示まで本番build/同期しない。テスト確認→GO→本番の順
 
 - [【方針】記憶とskillの棲み分け](feedback_memory_vs_skill_policy.md) — 事実・戒め=memory(無圧縮・巨大化は資産)/やり方=skillが唯一の正
+- [【戒め】promote空--onlyで全消し事故](promote_empty_only_wipe_accident.md) — シェル変数空→フル誤発動→66k削除(2026-07-06)。ガード済/復旧=フルpromote/索引skip平常値923
