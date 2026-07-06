@@ -41,7 +41,7 @@ python scripts/_enrich-captions.py --slugs a,b,c --live                         
 ## Step4: 適用
 - **previewドラフト頁(予約②③④等)**: yml へ直接書く(ドラフト自体がソース)。
 - **本番既存頁**: 適用スクリプトで manga.v2 へ純粋追加(空欄のみ埋める)+ 変更slugを「反映して」。
-  永続化が必要な確定分は種3扱いのseedへ(上書き禁止・純粋追加 only)。
+  永続化seed=`catch-ja.json`(既存)+`synopsis-slug-ja.json`(2026-07-06新設・promote結線済=空欄fill)。上書き禁止・純粋追加のみ。
 - 100件/batchで処理し、`applied=N, missing=0, overwrites=0` を毎バッチ確認(月次蒸留の保護策と同じ)。
 
 ## 過去の実績・教訓(re-inventしない)

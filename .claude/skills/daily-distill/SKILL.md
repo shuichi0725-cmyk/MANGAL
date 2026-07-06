@@ -1,48 +1,77 @@
 ---
 name: daily-distill
-description: 日次蒸留 — 前回以降のNDL新着漫画を取得し、掲載ゲート(必須メタ完備+楽天書影v1)を通る作品だけ掲載準備、足りない物は欠落表で報告する。トリガー「日次蒸留して」。
+description: 日次蒸留 — 2本立て: A=楽天予約ハーベスト(未来の新刊・カレンダーの餌)/B=NDL新着回収(過去の納本)。+NDL照合キュー消化+カレンダー更新。トリガー「日次蒸留して」。
 ---
 
-# 日次蒸留
+# 日次蒸留 (= 2026-07-06 全面改訂: 楽天予約が主柱に)
 
-前回カーソル以降の NDL 新着だけを処理する軽量ラン(通常数分)。実体は後退蒸留と同一コア。
+**2本立て**: A=楽天予約ハーベスト(未来〜当月の新刊。カレンダー/新刊棚の唯一の未来供給源) /
+B=NDL新着回収(納本済み過去分)。毎日でなくてよい(間隔が空いても窓が自動で広がり取りこぼさない)。
+理想運用: 日次蒸留して→(previewで)確認→週次蒸留して=週1本番更新。
 
 ## NEVER(禁止)
 
-- **NDLが429/throttleを返したら即中断して報告**。リトライ連打・並行リクエスト禁止(レートは1.2s/req厳守)。
-- **捏造禁止**: 著者/ヨミ/genre等が確定できない作品を推測で埋めて掲載しない → 欠落表へ(fail-closed)。
-- **単巻先行登録禁止**: 巻不連続の作品は掲載せず「全巻回収要」として欠落表へ。
-- worksheet の genre は **closed vocabulary(data/genres.yml の32キー)のみ**。新語禁止。
-- catch/synopsis は**1巻の内容基点・ネタバレ禁止**。途中巻あらすじの丸写し禁止。
+- **429/throttle即中断**(NDL・楽天とも1.1〜1.3s/req厳守。リトライ連打禁止)。
+- **捏造禁止**: ヨミ/著者/genreを推測で埋めない。ヨミ=楽天仮確定+NDL照合キュー(下記)が正規ルート。
+- **単巻先行登録禁止**: 途中巻でページ無し(④)は全巻回収が成立した作品だけドラフト化。
+- **②③④は必ずpreview先行**(B裁定)。ユーザ確認GOなしに本番化しない。
+- genre=closed vocabulary(master32)のみ+provisional。catch/synopsis=skill enrich-catch-synopsis の規律。
 
-## 手順
+## A. 楽天予約パイプライン (= 主柱)
 
-1. `python scripts/_distill_daily.py --discover`
-   - NDL live で当月分を取得(1.2s・resumable)。★出力に「429/throttle検知」が出たら中断・報告して終了。
-2. `python scripts/_distill_daily.py --plan`
-   - オフライン。**日次レポート**(新規掲載可 N / 新規欠落 M / 累計)が出る。カーソル自動更新。
-3. 新規掲載可が有れば: `.cache/backward/<年>/ai-todo.jsonl` の該当 TODO を記入
-   - `is_manga`(非漫画なら false) / `slug`(規則: ヘボン式・ハイフン区切り・勝手命名禁止=NDL/楽天ヨミ基点) / `genres`(closed vocab) / `demographic`(shounen/shoujo/seinen/josei/kodomo/other) / `catch` / `synopsis`(60-120字・ネタバレ無し) / `tags`(要素タグ=AniList流英語名1-3個・caption基点・**確信あるもののみ**、無理に付けない)
-   - ★Layer1(自動): 楽天booksGenreIdが demographic裏取り(001001001=少年/002=少女/003=青年/004=レディース)+001021=BL自動付与。demographic空ならL1が埋める。
-   - ★Layer2の参考rubric: `.cache/genre-rakuten/genre-cues.json`(学習済み特徴語)。
-4. `python scripts/_distill_backward.py <年> --emit`
-   - 検証(closed vocab/slug衝突/demographic enum)を通った作品だけ **preview生成(テスト先行)**。
-5. ★masterを変えたら preview側にも同期(`cp data/publishers.yml .preview-data/publishers.yml` 等=preview buildは.preview-data/のmasterを読む)。preview索引更新 + push → **ユーザ確認 → GO後に本番化**(種2へINSERT-only=`--commit`ステージ※実装待ち)。
-6. 報告: 掲載N件(題一覧) / 欠落M件(何が足りないか) / カーソル日付。
+```
+1. python scripts/_rakuten-preorder-harvest.py        # 6サブジャンル×発売日降順→未来〜当月全量(数分)
+2. python scripts/_preorder-classify.py               # ①続巻/②新作作者既知/③新作作者新規/④途中巻頁無し/skip
+3. python scripts/_preorder-apply-zokkan.py           # ①→種4自動追加(ゲート:slug実在/巻番号/series_key逆引き)
+   → promote --only <touched> → reflect --only <touched> --push   (①は確認不要で即出せる)
+4. python scripts/_preorder-gen-preview.py new1a      # ②ドラフト生成(→.preview-data)
+   python scripts/_preorder-gen-preview.py new1b      # ③(著者マスタ新規はヨミ=楽天仮)
+   python scripts/_preorder-gen-midfill.py            # ④(キャッシュ全巻回収成立分のみ)
+   → preview索引再構築 → push → ★ユーザ確認(段階: ①→②→③→④の順で1クラスずつ)
+5. 確認GO後: python scripts/_preorder-promote-drafts.py --class new1a 等
+   → data/seeds/preorder-pages/(git恒久保管庫=promote合流結線済・フルpromoteで消えない)
+   → data/manga.v2(即公開) → reflect --only <last-promoted> --push
+   ※種2への正式INSERTは月次蒸留時。それまでpreorder-pagesが恒久化を担う。
+```
+- 分類の保留/不備は `docs/production-diagnostics/preorder-triage.tsv` に自動記録。
+- ②③生成時に**キャッチ/詳細/ジャンルも埋める**なら skill enrich-catch-synopsis を続けて実行。
 
-## 成功判定(機械照合)
+## B. NDL新着回収 (= 従来コア)
 
-- --plan が「カーソル更新」を出力している。
-- --emit が「preview生成: N / 検証NG skip: M」を出力し、skip理由に想定外が無い。
-- 掲載ゲートを通らない作品が preview に出ていない(欠落表と重複しない)。
+```
+1. python scripts/_distill_daily.py --discover   # 窓=★前回実行月の前月〜当月(動的・取りこぼさない)
+2. python scripts/_distill_daily.py --plan       # 差分レポート+カーソル更新
+3. 新規掲載可→ai-todo.jsonl記入→ --emit(preview先行) ※詳細は従来手順(下の旧手順参照)
+```
+- NDLはNDC付与が納本後のため**未来は取れない**(未来=Aの楽天が担当)。
+
+## C. NDL照合キュー消化 (= A裁定「漏れない仕組み」・毎回実行)
+
+```
+python scripts/_verify-kana-pending.py --limit 200
+```
+- `rakuten-kana-pending.jsonl` のpendingを古い順にNDL by-ISBN照合。
+- 一致→confirmed / 不一致→`kana-mismatch.tsv`(slug直しの人間判断へ) / **NDL未収載→pendingのまま残る=漏れない**。
+- 比較は巻番号・上下巻ヨミ差(「〜1」「ジョウカン」)を許容(2026-07-06 偽陽性4→0実証)。
+
+## D. 締め: カレンダー/新刊データ更新
+
+```
+python scripts/_build-calendar.py data/manga.v2 data/calendar <当月YYYY-MM>                     # 本番フル
+python scripts/_build-calendar.py data/manga.v2 public/calendar <当月> .preview-data/manga      # preview(実在フィルタ)
+```
+- 本番R2へ即時反映したい時: 変更月JSON+manifest+beyond.jsonをPUT(姫松対応の手順)。通常は週次のr2-sync overlayが運ぶ。
+- previewのカレンダーは**ページ実在フィルタ必須**(subsetなのでフィルタ無し=リンク切れ)。
+
+## 報告形式
+
+A: 収穫N件(月分布)/①種4追加/②③④ドラフト数+保留 ・ B: 新着N/欠落M ・ C: 確定/不一致/残pending ・ D: カレンダー月別巻数。
+
+## 旧手順の詳細(B系の worksheet 記入規律)
+
+- `is_manga`/`slug`(ヘボン・勝手命名禁止)/`genres`(closed)/`demographic`/`catch`/`synopsis`(60-120字・ネタバレ無)/`tags`(確信のみ)。
+- Layer1: 楽天booksGenreIdがdemographic裏取り(001=少年/002=少女/003=青年/004=レディース/001021=BL)。
+- 発売直後はcaption空が普通→ゲートが保留にする=正常(捏造して通さない)。caption供給後の日次で自動的に通る。
 
 ## 関連
-
-- 後退蒸留(過去年の一括版): `python scripts/_distill_backward.py <年> --discover|--plan|--emit`
-- 掲載ゲート/欠落表の設計: CLAUDE.md「新規登録 protocol」+ memory distill_2026_pipeline
-
-
-## 運用実測(2026-07-04 初実戦)
-- ★**発売直後の新刊は楽天caption(あらすじ根拠)が空**が普通(NDL/キャッシュ/liveすべて)。掲載ゲートのsynopsis必須が正しくfail-closedし保留になる=正常動作。捏造して通さない。
-- worksheetにslug/genre(provisional)/demographicまで記入して保留にしておけば、caption供給後(発売後数日〜数週)の日次で自動的に通る。
-- demographicの根拠にレーベル実態を使ってよい(一迅社LAKE=女性向け→josei等)。genreはタイトル根拠ならprovisional必須。
+- 後退蒸留=`_distill_backward.py <年>` / preview管理=skill test-deploy / エンリッチ=skill enrich-catch-synopsis
