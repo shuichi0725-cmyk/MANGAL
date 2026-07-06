@@ -85,7 +85,7 @@ def make_slug(title):
     merged = []
     for kind, r, pos in parts:
         attach = (pos[0] in ('助動詞',)) or (len(pos) > 1 and pos[1] in ('非自立', '接尾'))
-        if attach and merged and merged[-1][0] == 'ja':
+        if attach and kind == 'ja' and merged and merged[-1][0] == 'ja':  # lat断片(kilometer等)は連結しない
             merged[-1] = ('ja', merged[-1][1] + r, pos)
         else:
             merged.append((kind, r, pos))
