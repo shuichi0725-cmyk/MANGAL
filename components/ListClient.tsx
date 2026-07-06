@@ -53,6 +53,11 @@ export default function ListClient({ data }: { data: ListBundle }) {
   const [state, setState] = useState<FilterState>(emptyFilterState());
   const [open, setOpen] = useState(false);
   const [q, setQ] = useState("");
+  // ★URL ?q= を初期値に(2026-07-06 PCサイドバー検索からの遷移受け)
+  useEffect(() => {
+    const uq = new URLSearchParams(window.location.search).get("q");
+    if (uq) setQ(uq);
+  }, []);
   const [sort, setSort] = useState<SortId>("kana");
   const [sortTouched, setSortTouched] = useState(false);
   const [limit, setLimit] = useState(200);

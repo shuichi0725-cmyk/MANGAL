@@ -7,6 +7,7 @@ import TimeMachine from "@/components/TimeMachine";
 import DestinyPickMock from "@/components/DestinyPickMock";
 import MarqueeTitle from "@/components/MarqueeTitle";
 import CalendarView from "@/components/CalendarView";
+import HomeSidebar from "@/components/HomeSidebar";
 import { bundle, DesignNav, seeded, volCount, Cover, CoverTile, thisMonthReleases } from "@/lib/homeDesign";
 import { coverUrl } from "@/lib/schema";
 import { loadAiReviews } from "@/lib/loadData";
@@ -16,6 +17,7 @@ import AiLeagueTeaser from "@/components/AiLeagueTeaser";
  *  コーナーの大小を交互に置いて縦読みのテンポを作る。 新パーツ: ことばカード/ジャンルルーレット/数字トリビア */
 export default function Design11() {
   const { data, manga, byNew, completedClassics } = bundle();
+  const genreList = data.genres.map((g: { key: string; name: string }) => ({ key: g.key, name: g.name }));
   // AI書評家リーグ: 週次順出しに合わせslim情報を全節渡す(選定はclient=AiLeagueTeaser)
   const aiSections = loadAiReviews().map((x) => ({ setsu: x.setsu, title: x.title, models: x.reviews.map((r) => r.model) }));
   const daySalt = Number(new Date().toISOString().slice(0, 10).replace(/-/g, ""));
@@ -48,10 +50,11 @@ export default function Design11() {
   return (
     <div className="min-h-screen bg-[var(--color-bg)] pb-12">
       <DesignNav current={11} />
-      {/* ★PC見栄え(2026-07-06 ユーザ指摘: 広幅で間延び・カレンダー散り・特集巨大空白):
-          モバイル設計のコーナー群はPCでは~640pxの中央カラムに収める(アプリ風)。
-          将来のPC2カラム化(左=検索)までの即効レイアウト。 */}
-      <div className="mx-auto w-full max-w-[640px]">
+      {/* ★PCレイアウト(2026-07-06): lg+=左サイドバー(検索常駐)+640pxコンテンツ列の2カラム。
+          モバイル=従来の1カラム(サイドバー非表示)。 */}
+      <div className="mx-auto flex w-full max-w-[960px] justify-center gap-6 lg:px-4">
+      <HomeSidebar genres={genreList} />
+      <div className="w-full max-w-[640px] min-w-0">
 
       {/* 0.【極小】統計ストリップ: 場所を取らない1行、各数字タップでフィルター絞り込みへ */}
       {(() => {
@@ -232,6 +235,7 @@ export default function Design11() {
           )}
         </div>
       </section>
+      </div>
       </div>
     </div>
   );
