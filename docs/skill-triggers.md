@@ -16,6 +16,7 @@ skill 実体 = `.claude/skills/<name>/SKILL.md`(git追跡。Opus 4.8 等でも�
 | **「新規追加」「新刊入れて」** | new-manga-register | 新規マンガ登録(順番固定: 全巻回収→題→ヨミ→一括→enrich→欠落表)。テスト先行→GO→本番 | 件数次第 |
 | **「Koboして/書影補完して/Kobo続けて」** | kobo-covers | Kobo電子版の書影で紙の欠け巻を補完(装丁目視ゲート必須) | 10-20作/回 |
 | **「帯混入直して/激マン型見て」** | band-intruder-fix | 少数帯×日付逆行の混入巻をNDL×楽天でスワップ是正 | 数分〜 |
+| **「エンリッチして」** | enrich-catch-synopsis | キャッチ(一覧惹句20-40字)と詳細(頁あらすじ60-120字)を全巻紹介文から役割分担生成+ジャンル要素付与 | 100件/batch |
 | **「Wiki蒸留して」** | wiki-distill | Wikipedia書誌(巻別ISBN+日付)で壊れた長期連載をcanonical復元(釣りキチ65巻等で実証・fail-closedゲート) | 10作/回 数分 |
 | **「巻抜け仮想」** | volgap-audit | 残巻抜け算出(~2分)。単巻切り詰め検出(solo-truncated)・巻出力監査も同居 | ~2分 |
 
