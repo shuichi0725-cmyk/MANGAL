@@ -46,6 +46,15 @@ export default function FilterPanel({
         m.publishers?.length ? m.publishers : m.publisher ? [m.publisher] : [],
       ),
       magazine: tally({ magazines: [] }, (m) => (m.magazine ? [m.magazine] : [])),
+      // ★創刊ドリルダウン(Q3-A): 各作品から[年代,年,年-月]の3階層キーをemit
+      launch: tally({ launch: null }, (m) => {
+        const fvd = m.first_volume_date || (m.year_started ? String(m.year_started) : "");
+        if (!fvd || fvd.length < 4) return [];
+        const y = fvd.slice(0, 4);
+        const keys = [`${Math.floor(Number(y) / 10) * 10}s`, y];
+        if (fvd.length >= 7) keys.push(fvd.slice(0, 7));
+        return keys;
+      }),
     };
   }, [data.manga, state]);
   // 要素タグの一覧 = 出現する全タグを件数降順(同数は名前順)で。 master が無いのでデータから導出。
@@ -127,50 +136,68 @@ export default function FilterPanel({
         </select>
       </Section>
 
-      <Section title="出版年">
-        <div className="flex items-center gap-2">
-          <input
-            type="number"
-            inputMode="numeric"
-            min={yearBounds[0]}
-            max={yearBounds[1]}
-            value={state.yearMin ?? ""}
-            placeholder={String(yearBounds[0])}
-            onChange={(e) =>
-              update({ yearMin: e.target.value ? Number(e.target.value) : null })
-            }
-            className="w-20 rounded-card border border-[var(--color-line)] px-2 py-1 transition focus:outline-none focus:border-[var(--color-accent)]"
-          />
-          <span className="text-ink/50">〜</span>
-          <input
-            type="number"
-            inputMode="numeric"
-            min={yearBounds[0]}
-            max={yearBounds[1]}
-            value={state.yearMax ?? ""}
-            placeholder={String(yearBounds[1])}
-            onChange={(e) =>
-              update({ yearMax: e.target.value ? Number(e.target.value) : null })
-            }
-            className="w-20 rounded-card border border-[var(--color-line)] px-2 py-1 transition focus:outline-none focus:border-[var(--color-accent)]"
-          />
+      <Section title="創刊(1巻発売)">
+        {/* ★年代→年→月ドリルダウン(2026-07-07 Q3-A裁定)。件数付きチップ・タップで展開 */}
+        <div className="space-y-1.5">
+          <div className="flex flex-wrap gap-1.5">
+            {Array.from({ length: 11 }, (_, i) => `${1920 + i * 10}s`)
+              .filter((dec) => (counts.launch.get(dec) ?? 0) > 0)
+              .map((dec) => {
+                const on = state.launch === dec || (state.launch ?? "").startsWith(dec.slice(0, 3));
+                return (
+                  <button
+                    key={dec}
+                    type="button"
+                    onClick={() => update({ launch: state.launch === dec ? null : dec })}
+                    className={`rounded-full border px-2 py-0.5 text-[11px] ${on ? "border-[var(--color-accent)] bg-[var(--color-accent)]/10 text-[var(--color-accent)] font-bold" : "border-[var(--color-line)] text-ink/70"}`}
+                  >
+                    {dec.slice(0, 4)}年代<Cnt n={counts.launch.get(dec) ?? 0} />
+                  </button>
+                );
+              })}
+          </div>
+          {state.launch && (
+            <div className="flex flex-wrap gap-1.5 rounded-lg bg-[var(--color-surface-2)]/50 p-1.5">
+              {(() => {
+                const dec = Number((state.launch.endsWith("s") ? state.launch : state.launch).slice(0, 3) + "0");
+                return Array.from({ length: 10 }, (_, i) => String(dec + i))
+                  .filter((y) => (counts.launch.get(y) ?? 0) > 0)
+                  .map((y) => {
+                    const on = state.launch === y || (state.launch ?? "").startsWith(y);
+                    return (
+                      <button
+                        key={y}
+                        type="button"
+                        onClick={() => update({ launch: state.launch === y ? `${dec}s` : y })}
+                        className={`rounded-full border px-2 py-0.5 text-[11px] ${on && !state.launch!.endsWith("s") ? "border-[var(--color-accent)] bg-[var(--color-accent)]/10 text-[var(--color-accent)] font-bold" : "border-[var(--color-line)] text-ink/60"}`}
+                      >
+                        {y}<Cnt n={counts.launch.get(y) ?? 0} />
+                      </button>
+                    );
+                  });
+              })()}
+            </div>
+          )}
+          {state.launch && !state.launch.endsWith("s") && (
+            <div className="flex flex-wrap gap-1.5 rounded-lg bg-[var(--color-surface-2)]/30 p-1.5">
+              {(() => {
+                const y = state.launch.slice(0, 4);
+                return Array.from({ length: 12 }, (_, i) => `${y}-${String(i + 1).padStart(2, "0")}`)
+                  .filter((ym) => (counts.launch.get(ym) ?? 0) > 0)
+                  .map((ym) => (
+                    <button
+                      key={ym}
+                      type="button"
+                      onClick={() => update({ launch: state.launch === ym ? y : ym })}
+                      className={`rounded-full border px-2 py-0.5 text-[11px] ${state.launch === ym ? "border-[var(--color-accent)] bg-[var(--color-accent)]/10 text-[var(--color-accent)] font-bold" : "border-[var(--color-line)] text-ink/60"}`}
+                    >
+                      {Number(ym.slice(5, 7))}月<Cnt n={counts.launch.get(ym) ?? 0} />
+                    </button>
+                  ));
+              })()}
+            </div>
+          )}
         </div>
-        <input
-          type="range"
-          min={yearBounds[0]}
-          max={yearBounds[1]}
-          value={state.yearMin ?? yearBounds[0]}
-          onChange={(e) => update({ yearMin: Number(e.target.value) })}
-          className="w-full mt-2"
-        />
-        <input
-          type="range"
-          min={yearBounds[0]}
-          max={yearBounds[1]}
-          value={state.yearMax ?? yearBounds[1]}
-          onChange={(e) => update({ yearMax: Number(e.target.value) })}
-          className="w-full"
-        />
       </Section>
 
       <Section title="分野">

@@ -13,6 +13,8 @@ export type FilterState = {
   query: string;
   yearMin: number | null;
   yearMax: number | null;
+  /** ★創刊ドリルダウン(2026-07-07 Q3-A): "1990s"(年代) | "1994"(年) | "1994-07"(月)。first_volume_date前方一致 */
+  launch: string | null;
   demographics: string[];        // 空配列 = 全て
   publishers: string[];
   magazines: string[];
@@ -36,6 +38,7 @@ export const emptyFilterState = (): FilterState => ({
   query: "",
   yearMin: null,
   yearMax: null,
+  launch: null,
   demographics: [],
   publishers: [],
   magazines: [],
@@ -165,6 +168,14 @@ export function applyFilters(
   const filtered = items.filter((m) => {
     if (state.query && (!matchedSlugs || !matchedSlugs.has(m.slug))) return false;
     if (!inRange(m.year_started, state.yearMin, state.yearMax)) return false;
+    if (state.launch) {
+      const fvd = m.first_volume_date || (m.year_started ? String(m.year_started) : "");
+      if (state.launch.endsWith("s")) {
+        const dec = Number(state.launch.slice(0, 4));
+        const y = Number(fvd.slice(0, 4));
+        if (!(y >= dec && y < dec + 10)) return false;
+      } else if (!fvd.startsWith(state.launch)) return false;
+    }
     if (state.demographics.length && !state.demographics.includes(m.demographic)) return false;
     // 複数社作品対応: 選択キーが「どれかの版の出版社」に一致すればヒット (m.publishers 集合)
     if (state.publishers.length) {
@@ -288,6 +299,8 @@ export function filtersFromSearchParams(p: ParamsLike | null | undefined): Parti
     if (!v) return undefined;
     return v.split(",").map((x) => x.trim()).filter(Boolean);
   };
+  const launch = p.get("launch");
+  if (launch) out.launch = launch;
   const yearMin = p.get("yearMin");
   const yearMax = p.get("yearMax");
   if (yearMin) out.yearMin = Number(yearMin);
