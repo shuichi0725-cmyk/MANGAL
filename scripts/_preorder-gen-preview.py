@@ -86,7 +86,7 @@ import glob as _g
 for p in _g.glob(f"{ROOT}/.preview-data/manga/*.yml"):
     existing.add(os.path.basename(p)[:-4])
 
-DEMO = {"少年": "shonen", "少女": "shojo", "青年": "seinen", "レディース": "josei"}
+DEMO = {"少年": "shounen", "少女": "shoujo", "青年": "seinen", "レディース": "josei"}
 
 def author_names(s):
     return [x.strip() for x in re.split(r"[/,、;；]", str(s or "")) if x.strip()]
@@ -129,7 +129,7 @@ for klass, r in targets:
     rd = ym + (f"-{r['day']:02d}" if r.get("day") else "")
     authors = []
     for i2, name in enumerate(auths):
-        a = {"name": name}
+        a = {"name": name, "role": "writer_artist"}  # schema必須。共著の原作/作画分離はNDL照合時に是正
         if i2 < len(akanas) and akanas[i2]:
             a["kana"] = akanas[i2]
         authors.append(a)
@@ -139,9 +139,9 @@ for klass, r in targets:
         "title_kana": kana.replace(" ", "").replace("　", ""),
         "title_romaji": romaji.replace("-", " "),
         "authors": authors,
-        "year_started": int(ym[:4]),
+        "year_ended": None, "year_started": int(ym[:4]),
         "status": "ongoing",
-        "demographic": DEMO.get(r.get("subgenre")),
+        "demographic": DEMO.get(r.get("subgenre")) or "other",  # schema必須(null不可)
         "genres": [],
         "editions": [{
             "type": "standard", "label": "通常版", "publisher": r.get("publisher"), "imprint": r.get("seriesName") or "",

@@ -53,7 +53,7 @@ import glob as _g
 for p in _g.glob(f"{ROOT}/.preview-data/manga/*.yml"):
     existing.add(os.path.basename(p)[:-4])
 
-DEMO = {"少年": "shonen", "少女": "shojo", "青年": "seinen", "レディース": "josei"}
+DEMO = {"少年": "shounen", "少女": "shoujo", "青年": "seinen", "レディース": "josei"}
 def author_names(s):
     return [x.strip() for x in re.split(r"[/,、;；]", str(s or "")) if x.strip()]
 
@@ -97,15 +97,15 @@ for r in cls["ex_mid"]:
         volumes.append({"number": v, "asin": None, "isbn13": ib, "cover_url": cov, "release_date": rd})
     authors = []
     for i2, name in enumerate(auths):
-        a = {"name": name}
+        a = {"name": name, "role": "writer_artist"}  # schema必須。共著の原作/作画分離はNDL照合時に是正
         if i2 < len(akanas) and akanas[i2]:
             a["kana"] = akanas[i2]
         authors.append(a)
     doc = {"slug": slug, "title": title,
            "title_kana": kana.replace(" ", "").replace("　", ""),
            "title_romaji": romaji.replace("-", " "),
-           "authors": authors, "year_started": int(ym[:4]), "status": "ongoing",
-           "demographic": DEMO.get(r.get("subgenre")), "genres": [],
+           "authors": authors, "year_ended": None, "year_started": int(ym[:4]), "status": "ongoing",
+           "demographic": DEMO.get(r.get("subgenre")) or "other",  # schema必須(null不可) "genres": [],
            "editions": [{"type": "standard", "label": "通常版", "publisher": r.get("publisher"),
                           "imprint": r.get("seriesName") or "", "volumes": volumes}],
            "_preorder_draft": {"class": "ex_mid", "added_at": TODAY, "source": "rakuten-preorder",
