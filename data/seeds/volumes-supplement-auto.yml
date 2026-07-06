@@ -26289,3 +26289,30 @@ volumes:
   source: volgap-fill-78
   added_at: '2026-07-06'
   note: 巻抜け充填(NDL確定・v1無印/v2) slug=korekara-ore-wa-kouhai-ni-dakaremasu
+- series_keys:
+  - name:Tea|name:悪役令嬢レベル99|sub:私は裏ボスですが魔王ではありません
+  - name:のこみ|name:悪役令嬢レベル99|sub:私は裏ボスですが魔王ではありません
+  qid: null
+  number: 6
+  isbn13: '9784045001918'
+  release_date: '2026-07-31'
+  pages: null
+  publisher: null
+  edition_type: standard
+  title_display: 悪役令嬢レベル99
+  source: preorder-zokkan-rescue
+  added_at: '2026-07-06'
+  note: '②③誤新作化の救済(ユーザ発見): 悪役令嬢レベル99 その六(ヨミ末尾ソノロクで発覚・題は途切れ)'
+- series_keys:
+  - qid:Q17219513|name:アンゴルモア
+  qid: null
+  number: 13
+  isbn13: '9784041175750'
+  release_date: '2026-08-25'
+  pages: null
+  publisher: null
+  edition_type: standard
+  title_display: アンゴルモア
+  source: preorder-zokkan-rescue
+  added_at: '2026-07-06'
+  note: '②③誤新作化の救済(ユーザ発見): アンゴルモア博多編(13)=巻番号が題中間でパーサ漏れ'
