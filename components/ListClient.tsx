@@ -174,17 +174,22 @@ export default function ListClient({ data }: { data: ListBundle }) {
             {rows.slice(0, limit).map((m, i) => (
               <tr key={m.slug} className={i % 2 ? "bg-[var(--color-surface)]/60" : ""}>
                 <td className="max-w-[200px] border-b border-[var(--color-line)]/60 px-2 py-1.5">
-                  {/* DEBUG: フォルダ名(slug)表示。 本番前に削除する */}
-                  <span className="block truncate font-mono text-[10px] text-rose-600/80">{m.slug}</span>
-                  {m._slugfix && m._slugfix_new && m._slugfix_new !== m.slug && (
-                    <span className="block truncate font-mono text-[10px] font-bold text-emerald-600">→ {m._slugfix_new}</span>
-                  )}
-                  <Link href={`/manga/${m.slug}`} className="spring-press block truncate font-medium text-[#1f4e79] active:underline">
-                    {m.title}
-                  </Link>
+                  {/* ★題名は切らない(2026-07-06 ユーザ要望): truncate廃止→セル内横スクロール(whitespace-nowrap+overflow-x-auto) */}
+                  <div className="max-w-full overflow-x-auto" style={{ scrollbarWidth: "none" }}>
+                    {/* DEBUG: フォルダ名(slug)表示。 本番前に削除する */}
+                    <span className="block whitespace-nowrap font-mono text-[10px] text-rose-600/80">{m.slug}</span>
+                    {m._slugfix && m._slugfix_new && m._slugfix_new !== m.slug && (
+                      <span className="block whitespace-nowrap font-mono text-[10px] font-bold text-emerald-600">→ {m._slugfix_new}</span>
+                    )}
+                    <Link href={`/manga/${m.slug}`} className="spring-press block whitespace-nowrap font-medium text-[#1f4e79] active:underline">
+                      {m.title}
+                    </Link>
+                  </div>
                 </td>
-                <td className="max-w-[120px] truncate border-b border-[var(--color-line)]/60 px-2 py-1.5 text-ink/75">
-                  {m.authors.map((a) => a.name).join("・")}
+                <td className="max-w-[120px] border-b border-[var(--color-line)]/60 px-2 py-1.5 text-ink/75">
+                  <div className="max-w-full overflow-x-auto whitespace-nowrap" style={{ scrollbarWidth: "none" }}>
+                    {m.authors.map((a) => a.name).join("・")}
+                  </div>
                 </td>
                 <td className="border-b border-[var(--color-line)]/60 px-2 py-1.5 text-right tabular-nums">{volCount(m)}</td>
                 <td className="border-b border-[var(--color-line)]/60 px-2 py-1.5 text-right tabular-nums text-ink/70">{m.year_started ?? "—"}</td>
