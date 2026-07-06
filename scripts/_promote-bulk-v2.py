@@ -2549,6 +2549,10 @@ def main():
     _catch_path = ROOT / "data" / "seeds" / "catch-ja.json"
     catch_map = json.loads(_catch_path.read_text(encoding="utf-8")) if _catch_path.exists() else {}
     catch_pages = 0
+    # ★synopsis(slugキー)seed = enrich-catch-synopsis skill用(2026-07-06。anilist synopsis-jaとは別系=非AniList作品向け)
+    _synslug_path = ROOT / "data" / "seeds" / "synopsis-slug-ja.json"
+    synslug_map = json.loads(_synslug_path.read_text(encoding="utf-8")) if _synslug_path.exists() else {}
+    synslug_pages = 0
     print(f"  catch コピー map: {len(catch_map):,} slug", file=sys.stderr)
 
     # 作品(work)Wikidata QID map = {anilist_id(str): {"qid","label"}}。
@@ -2725,6 +2729,9 @@ def main():
         if slug in catch_map and catch_map[slug]:
             new_yml["catch"] = catch_map[slug]
             catch_pages += 1
+        if not new_yml.get("synopsis") and slug in synslug_map and synslug_map[slug]:
+            new_yml["synopsis"] = synslug_map[slug]
+            synslug_pages += 1
         # (ジャンルは下の trusted優先マージで確定 = AniList+Wiki+手動を採用、 AIはfallback)
         # ★adult_us(米基準): ページの series_key(merge込)が種a isAdult なら付与。
         #   非日本geoで非表示用(日本は表示)。 採用作品集合は不変=表示制御のみ追加。
@@ -2964,6 +2971,7 @@ def main():
     print(f"  anilist enrich(id/synonyms/genres/tags 付与): {enrich_pages}", file=sys.stderr)
     print(f"  synopsis 種a和訳 付与: {synopsis_pages}(残りは空=種3 AI文不使用)", file=sys.stderr)
     print(f"  catch コピー付与: {catch_pages}", file=sys.stderr)
+    print(f"  synopsis(slug seed)付与: {synslug_pages}", file=sys.stderr)
     print(f"  著者修正(新刊・連結是正): {author_reparse_pages}", file=sys.stderr)
     print(f"  巻ISBN除去(過剰統合是正): {volume_exclude_pages}", file=sys.stderr)
     print(f"  作品Wikidata QID 付与: {work_qid_pages}", file=sys.stderr)
