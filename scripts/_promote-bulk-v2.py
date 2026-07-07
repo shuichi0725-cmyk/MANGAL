@@ -1765,11 +1765,13 @@ def get_editions_with_volumes(con: sqlite3.Connection, series_ids: list[int] | i
         _passed = [r for r in _rows if edition_passes_filter(
             {"type": r["_etype"], "imprint": r["_eimprint"]})
             and _norm_isbn(r["isbn13"]) not in _excl_isbn]
-        # ★1冊(= 1 source series_id)につき代表1巻(最古release→最小ISBN)。
-        #   同一書籍の別版ISBN(通常版/文庫版等)を別巻に数えない = 過剰巻数を防ぐ。
+        # ★代表巻 = (source series_id, 巻番号) 単位で最古release→最小ISBN。
+        #   同一書籍の別版ISBN(通常版/文庫版等・同番号)を別巻に数えない = 過剰巻数を防ぐ。
+        #   ★sid単位だった旧実装は、1sidが別の本を複数持つ時(VPアンソロ第1集+第3集が同sid)に
+        #   2冊目以降を取りこぼした(2026-07-07是正)。番号が違えば別書籍として代表を立てる。
         _by_sid: dict = defaultdict(list)
         for r in _passed:
-            _by_sid[r["_sid"]].append(r)
+            _by_sid[(r["_sid"], r["number"])].append(r)
         _reps = [min(rs, key=lambda v: (v["release_date"] or "9999-99", v["isbn13"] or ""))
                  for rs in _by_sid.values()]
         _reps.sort(key=lambda v: (v["release_date"] or "9999-99", v["isbn13"] or ""))
