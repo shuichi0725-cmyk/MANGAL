@@ -1527,10 +1527,6 @@ dedup:
   canonical: genjuu-no-kuni-monogatari
   title: frag-dedup
   isbns: subset/equal
-- drop: boys-be-2nd-season
-  canonical: boys-be
-  title: overmerge-fix
-  note: 完全重複(33巻バイト一致・2nd固有巻ゼロ・種2 sid57800同一)
 - drop: ring-suzuki-2005
   canonical: ring-inagaki-1999
   title: overmerge-fix
