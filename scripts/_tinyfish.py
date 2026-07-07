@@ -38,6 +38,16 @@ def _post(url, body):
     except urllib.error.HTTPError as e:
         raise SystemExit(f"TinyFish HTTP {e.code}: {e.read().decode('utf-8', 'replace')[:300]}")
 
+def _get(url, params):
+    import urllib.request, urllib.parse
+    full = url + "?" + urllib.parse.urlencode(params)
+    req = urllib.request.Request(full, method="GET", headers={"X-API-Key": _key()})
+    try:
+        with urllib.request.urlopen(req, timeout=120) as r:
+            return json.loads(r.read().decode("utf-8"))
+    except urllib.error.HTTPError as e:
+        raise SystemExit(f"TinyFish HTTP {e.code}: {e.read().decode('utf-8', 'replace')[:300]}")
+
 def fetch(urls, fmt="markdown", live=False):
     """URL(str or list)→ [{url,title,text,...}]。live=Trueでキャッシュ無視。"""
     if isinstance(urls, str):
@@ -47,9 +57,12 @@ def fetch(urls, fmt="markdown", live=False):
         body["ttl"] = 0
     return _post("https://api.fetch.tinyfish.ai", body)
 
-def search(query, limit=10):
-    """Web検索 → 構造化結果。"""
-    return _post("https://api.search.tinyfish.ai", {"query": query, "limit": limit})
+def search(query, purpose=None, location="US"):
+    """Web検索(GET) → {query, results:[{title,url,snippet,...}], total_results}。"""
+    p = {"query": query, "location": location}
+    if purpose:
+        p["purpose"] = purpose[:2000]
+    return _get("https://api.search.tinyfish.ai", p)
 
 if __name__ == "__main__":
     if len(sys.argv) < 3:
