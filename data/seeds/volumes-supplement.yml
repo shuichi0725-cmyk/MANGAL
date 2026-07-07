@@ -11501,3 +11501,16 @@ volumes:
   source: rakuten
   added_at: '2026-07-07'
   note: 本編容器sid49705に紛れていたボンボンKC最新版(2)を本来の最新版ページへ(楽天題・日付確認。本編頁には未表示だったため除去不要)
+- series_keys:
+  - qid:Q1321466|name:こちら葛飾区亀有公園前派出所
+  qid: null
+  number: 1
+  isbn13: '9784088528113'
+  release_date: '1977-07-09'
+  pages: null
+  publisher: 集英社
+  edition_type: standard
+  title_display: こちら葛飾区亀有公園前派出所 1
+  source: rakuten
+  added_at: '2026-07-07'
+  note: 真のJC1巻(ユーザ提示ISBN4088528115→13桁。楽天=秋本治/1977-07-09/書影有・2巻8120/3巻8137と連番一致)。旧vol1枠はノベライズ混入でvolume-exclude
