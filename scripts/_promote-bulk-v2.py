@@ -477,6 +477,20 @@ SUPP_AUTO_YML = ROOT / "data" / "seeds" / "volumes-supplement-auto.yml"
 # OFFSET低巻補完 (= vol1取りこぼし[2,3]始まりを楽天harvestで補完、scripts/_offset_harvest.py)
 SUPP_OFFSET_YML = ROOT / "data" / "seeds" / "volumes-supplement-offset.yml"
 
+_VEX_ALL: set | None = None
+def _all_excluded_isbns() -> set:
+    """volume-exclude.yml の全ISBN集合(slug横断)。 種4番号ガードの先読み用。"""
+    global _VEX_ALL
+    if _VEX_ALL is None:
+        _VEX_ALL = set()
+        _p = ROOT / "data" / "seeds" / "volume-exclude.yml"
+        if _p.exists():
+            for _e in (yaml.safe_load(_p.read_text(encoding="utf-8")) or {}).get("excludes", []):
+                if _e.get("isbn13"):
+                    _VEX_ALL.add(_norm_isbn(_e["isbn13"]))
+    return _VEX_ALL
+
+
 def load_volumes_supplement(con: sqlite3.Connection) -> dict[int, list[dict]]:
     """volumes-supplement(.yml + -auto.yml + -offset.yml) → {sid: [補完 vol dict, ...]} dict 構築。
     series_keys (= 種2 series.series_key) と qid で 該当 sid を 引く。"""
@@ -1814,8 +1828,11 @@ def get_editions_with_volumes(con: sqlite3.Connection, series_ids: list[int] | i
 
     def _dedup_key(isbn, rd):
         isbn = isbn or ""
+        # ★volume-exclude予定ISBNは必ず負けさせる(こち亀vol1=ノベライズが偽日付タイ+最小ISBNで
+        #   真巻に勝ち、その後の除去でvol1消失した穴 2026-07-07)。
+        _vex = 1 if _norm_isbn(isbn) in _all_excluded_isbns() else 0
         # 多数派出版者線を最優先(降順) → その中で最古日付(NDL補完込み) → 最小ISBN。
-        return (-_pfreq.get(_jp_pub_prefix(isbn), 0), _eff_date(isbn, rd) or "9999-99", isbn)
+        return (_vex, -_pfreq.get(_jp_pub_prefix(isbn), 0), _eff_date(isbn, rd) or "9999-99", isbn)
 
     # merge_edition_types: true の sid なら shinsoban/aizoban 等 → standard 統合
     merge_edt_sids = get_merge_edition_types(con)
@@ -1929,9 +1946,19 @@ def get_editions_with_volumes(con: sqlite3.Connection, series_ids: list[int] | i
             # 既存 ed_group の volumes に追加。 ★同 number が既に在れば skip
             #   (= MADBが後の更新で追いついた巻を 種4 と二重表示しない = 種2優先・自己retire)。
             #   単一edition は後段 by_num dedup が効かないため、 ここで番号重複を防ぐ。
+            #   ★volume-exclude 予定のISBN巻・ISBN無し幽霊巻は番号占有と見なさない
+            #     (こち亀vol1: ノベライズ混入→除去予定 + ISBN無し旧レコード が番号1を握り
+            #      真巻の種4を二重に弾いた 2026-07-07是正)。ISBN付き種4は同番号のISBN無し幽霊を置換。
             clean_vol = {k: v for k, v in supp_vol.items() if not k.startswith("_")}
-            existing_nums = {v.get("number") for v in ed_group[0]["volumes"]}
-            if clean_vol.get("number") not in existing_nums:
+            _num = clean_vol.get("number")
+            def _occupies(v):
+                _i = v.get("isbn13")
+                return _i is not None and _norm_isbn(_i) not in _all_excluded_isbns()
+            existing_nums = {v.get("number") for v in ed_group[0]["volumes"] if _occupies(v)}
+            if _num not in existing_nums:
+                if clean_vol.get("isbn13"):
+                    ed_group[0]["volumes"] = [v for v in ed_group[0]["volumes"]
+                                              if not (v.get("number") == _num and not _occupies(v))]
                 ed_group[0]["volumes"].append(clean_vol)
     # 全 edition_group の volumes を number 順 sort (= 単一 edition + 補完追加 で 順序崩れ防止)
     def _vol_sort_key(v):
@@ -2356,6 +2383,18 @@ def build_yml(
     _eov = _load_edition_overrides().get(o["slug"])
     if _eov and _eov.get("editions"):
         o["editions"] = [clean_edition(ed) for ed in _eov["editions"]]
+        # ★出版年の是正: 既存年レンジがoverride確定巻の年と全く交差しない時だけ再計算
+        #   (上杉謙信: 種2由来1969-2004 vs 確定巻2005-2006=交差なし→再計算。
+        #    タッチ: 1981-1987は確定巻1981-2013と交差→連載年を保持=復刻年で延ばさない 2026-07-07)
+        _yrs = [int(str(v["release_date"])[:4]) for ed in o["editions"] for v in (ed.get("volumes") or [])
+                if v.get("release_date") and str(v["release_date"])[:4].isdigit()]
+        if _yrs:
+            _ys, _ye = o.get("year_started"), o.get("year_ended")
+            _cur = (_ys or 9999, _ye or _ys or 9999)
+            if _cur[1] < min(_yrs) or _cur[0] > max(_yrs):
+                o["year_started"] = min(_yrs)
+                if _ye is not None or o.get("status") == "completed":
+                    o["year_ended"] = max(_yrs)
         if _eov.get("publisher"):
             o["publisher"] = _eov["publisher"]
             o["publishers"] = _eov.get("publishers") or [_eov["publisher"]]
@@ -2386,12 +2425,18 @@ def build_artbook(
     ★linked_works は build/表示段 (step5) で計算 (= 作画家→漫画 slug 群)。 ここでは空。
     """
     editions = get_editions_with_volumes(con, group_sids)
-    if not editions:
+    # ★種4補完(画集にも取込もれ巻がある=INTRON DEPOT等。manga経路と同じsupp_mapを合流 2026-07-07)
+    supp_map = get_supplement_vols(con)
+    supp_flat = []
+    for _sid in group_sids:
+        for sv in supp_map.get(_sid, []):
+            supp_flat.append({k: v for k, v in sv.items() if not k.startswith("_")})
+    if not editions and not supp_flat:
         return None
     # 全 edition の volumes を集約 → ISBN dedup → 発売日順 → 1..N 連番 (画集は版分岐が薄い)
     seen_isbn: set[str] = set()
     flat: list[dict] = []
-    for ed in editions:
+    for ed in (editions or []):
         for v in ed["volumes"]:
             isbn = _norm_isbn(v.get("isbn13"))
             if isbn and isbn in seen_isbn:
@@ -2399,6 +2444,13 @@ def build_artbook(
             if isbn:
                 seen_isbn.add(isbn)
             flat.append(v)
+    for v in supp_flat:  # 種4巻(既存ISBNはdedupで弾く)
+        isbn = _norm_isbn(v.get("isbn13"))
+        if isbn and isbn in seen_isbn:
+            continue
+        if isbn:
+            seen_isbn.add(isbn)
+        flat.append(v)
     if not flat:
         return None
     flat.sort(key=lambda v: (v.get("release_date") or "9999-99", v.get("number") or 0,
