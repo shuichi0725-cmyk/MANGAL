@@ -14,11 +14,15 @@ D・N・A²分裂(2026-07-07 ユーザ発見)を機に系統検出→一括是�
 - 層別 `scripts/_isbn-dup-triage.py` = クラスタ化し AUTO(正規化同題×ISBN集合完全一致=外部確証不要で dedup 可) と QUEUE(per-case) に分割 → .cache/isbn-dup-auto.json + docs/production-diagnostics/isbn-dup-queue.tsv
 - 適用 `scripts/_isbn-dup-apply.py` = AUTO を page-dedup.yml+alias+_redirects+changelog に焼く → reflect-targeted で反映
 
-**済(R1 2026-07-07)**: AUTO 19群19頁drop(空手バカ一代/BOYS BE/國崎出雲/魔法科高校/DARKER THAN BLACK/北の土龍等。著者表記違い5群=作画交代断片も集合一致で安全)。ダブリISBN 2033→1819・ペア601→582。
+**済(2026-07-07 R1-R3 = 計65群81頁drop)**: ダブリISBN 2033→1361・ペア601→488。
+- R1 AUTO(同題×集合完全一致) 19群19頁: 空手バカ一代/BOYS BE/國崎出雲/魔法科高校等
+- R2 楽天題裁定(題違い×集合一致、`_isbn-dup-r2-titlefix.py`) 45群61頁: 共有ISBN全冊の楽天題が90%以上単一作品に収斂+★少数派頁題ガード(闇都市伝説×キミノトナリ型=別作品union疑いはSPLIT送り)。スパイラル/WINGS/千里の道も3部/ギリシア神話巻題7頁等
+- R3 包含(同題×著者×⊆、`_isbn-dup-r3-subset.py`) 1群: こち亀226⊂227統合
 
-**残 = QUEUE 250群**(isbn-dup-queue.tsv)。内訳と型:
-- 題不一致(87群+複合): こわい本/続こわい本型=**分割案件**(dedупでなく巻の正しい振り分け。外部確証要)、SPIRAL/スパイラル型=**表記違い**(実は同作、正題を決めて dedup+slug 判断)、ハニ太郎型=**巻割れ**(各巻題が頁化、renumber統合系)
-- 集合不一致(部分重なり): 混入巻の除去/移設(per-case、[[volgap_per_case_cleanup_state]]と同型)
-- 著者不一致+集合不一致(33群): homonym/過merge疑い=最も慎重に
+**残 ≈ 204群 = 全て per-case**(機械層は掘り尽くした):
+- **SPLIT 38群**(docs/production-diagnostics/isbn-dup-split.tsv、楽天題グループ証拠つき) = union汚染の分割(こわい本/ハニ太郎/ダイの大冒険巻題群)。dedup でなく巻の振り分け直し=volume-exclude/種4移設
+- FLAG 4群 = 楽天キャッシュ0件(wani-bunsho等)→楽天live/NDLで裁定
+- 題不一致+集合不一致 102群 / 著者不一致系 58群 / ヤマト・ウルトラマン(相互固有1冊) = 外部確証(Wiki/NDL)per-case、誤merge厳禁
+続きのトリガー=「ISBNダブリの続き」。SPLIT38 から着手が効率的(楽天証拠が既に付いている)。
 
 **注意**: AUTO の canonical 選定はメタ充実度優先のため、slug が汚い方(無分かちローマ字長串)が残った群がある(呪具師/レンガ城等)。slug品質是正は別軸(slug-fix ラウンド)で。誤merge厳禁=集合完全一致以外は必ず外部確証([[merge_needs_external_proof]])。
