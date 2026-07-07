@@ -2391,10 +2391,17 @@ def build_yml(
     _eov = _load_edition_overrides().get(o["slug"])
     if _eov and _eov.get("editions"):
         o["editions"] = [clean_edition(ed) for ed in _eov["editions"]]
+        # ★年の明示指定(override直書き)最優先=再版edition混在で連載期間が化ける時の確定手段
+        #   (ヤマトひおあきら版: 原作連載1974-83だがMF文庫再版2005が混じり年が化けた 2026-07-08)
+        if _eov.get("year_started") is not None:
+            o["year_started"] = _eov["year_started"]
+            o["year_ended"] = _eov.get("year_ended")
+            _yrs = None  # 明示指定時は自動再計算しない
         # ★出版年の是正: 既存年レンジがoverride確定巻の年と全く交差しない時だけ再計算
         #   (上杉謙信: 種2由来1969-2004 vs 確定巻2005-2006=交差なし→再計算。
         #    タッチ: 1981-1987は確定巻1981-2013と交差→連載年を保持=復刻年で延ばさない 2026-07-07)
-        _yrs = [int(str(v["release_date"])[:4]) for ed in o["editions"] for v in (ed.get("volumes") or [])
+        _yrs = None if _eov.get("year_started") is not None else \
+               [int(str(v["release_date"])[:4]) for ed in o["editions"] for v in (ed.get("volumes") or [])
                 if v.get("release_date") and str(v["release_date"])[:4].isdigit()]
         if _yrs:
             _ys, _ye = o.get("year_started"), o.get("year_ended")
