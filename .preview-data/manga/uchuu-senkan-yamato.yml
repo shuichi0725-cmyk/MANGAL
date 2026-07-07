@@ -3,25 +3,23 @@ slug: uchuu-senkan-yamato
 title: 宇宙戦艦ヤマト
 title_kana: ウチュウセンカンヤマト
 title_romaji: uchuu senkan yamato
-year_started: 1976
-year_ended: 1999
+year_started: 2005
+year_ended: 2005
 status: completed
 authors:
 - name: ひおあきら
   role: artist
   kana: ひおあきら
   romaji: hioakira
-- name: 企画
-  role: writer_artist
 original_authors:
-- name: 松本零士
-  role: writer
-  kana: マツモトレイジ
-  romaji: matsumotoreiji
 - name: 藤川桂介
   role: writer
   kana: フジカワケイスケ
   romaji: fujikawakeisuke
+- name: 松本零士
+  role: writer
+  kana: マツモトレイジ
+  romaji: matsumotoreiji
 publisher: mediafactory
 magazine: null
 demographic: shounen
@@ -35,10 +33,10 @@ anime_adapted: true
 alternative_titles:
   en: Space Battleship Yamato
 editions:
-- type: bunkobon
-  label: 文庫版
+- type: standard
+  label: 通常版
   publisher: メディアファクトリー
-  imprint: ソノラマ漫画文庫
+  imprint: MF文庫 宇宙戦艦ヤマトライブラリー
   volumes:
   - number: 1
     asin: null
@@ -51,29 +49,35 @@ editions:
     cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/8401/84011216.jpg?_ex=300x300
     release_date: 2005-02
   - number: 3
+    volume_label: さらば 愛の戦士たち(1)
     asin: null
-    isbn13: null
-    cover_url: null
-    release_date: '1976-12-20'
-- type: standard
-  label: 通常版
-  publisher: 朝日ソノラマ
-  volumes:
-  - number: 1
+    isbn13: '9784840112307'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/8401/84011230.jpg?_ex=300x300
+    release_date: 2005-03
+  - number: 4
+    volume_label: さらば 愛の戦士たち(2)
     asin: null
-    isbn13: '9784257901983'
-    cover_url: null
-    release_date: 1993-08
-  - number: 2
+    isbn13: '9784840112314'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/8401/84011231.jpg?_ex=300x300
+    release_date: 2005-03
+  - number: 5
+    volume_label: 新たなる旅立ち
     asin: null
-    isbn13: '9784257720423'
-    cover_url: null
-    release_date: 1999-08
-  - number: 3
+    isbn13: '9784840112482'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/8401/84011248.jpg?_ex=300x300
+    release_date: 2005-04
+  - number: 6
+    volume_label: ヤマトよ永遠に
     asin: null
-    isbn13: '9784257720430'
-    cover_url: null
-    release_date: 1999-09
+    isbn13: '9784840112581'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/8401/84011258.jpg?_ex=300x300
+    release_date: 2005-05
+  - number: 7
+    volume_label: 完結編
+    asin: null
+    isbn13: '9784840112697'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/8401/84011269.jpg?_ex=300x300
+    release_date: 2005-06
 publishers:
 - asahi-sonorama
 - mediafactory
