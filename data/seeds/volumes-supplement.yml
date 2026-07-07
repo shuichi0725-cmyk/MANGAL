@@ -11744,3 +11744,16 @@ volumes:
   source: ndl
   added_at: '2026-07-07'
   note: 士郎正宗フルカラー画集INTRON DEPOT全14巻(青心社)の欠落。NDL全巻リスト(ユーザ提供TSV)でISBN/発売日確定。画集=将来別ストリーム候補
+- series_keys:
+  - name:CLAMP|name:xxxHOLiC
+  qid: null
+  number: 14
+  isbn13: '9784063756562'
+  release_date: '2009-02-17'
+  pages: null
+  publisher: 講談社
+  edition_type: standard
+  title_display: xxxHOLiC 14
+  source: rakuten
+  added_at: '2026-07-07'
+  note: KCDX通常版14巻の取込もれ(種2はCPC版14巻のみ保持)。楽天×NDLでISBN・発売日確定(vol13=2008-06/vol15=2009-06の連番間)
