@@ -160,7 +160,10 @@ def main():
     if a.push:
         # ★統合台帳を自動集約(数秒)=「節目で手動」だと忘れて台帳が死ぬ、の恒久対策
         run([PY, "scripts/_manifest-consolidate-ops.py"])
-        run(["git", "add", ".preview-data", "data/manga-catch-index.json", "data/seeds"])
+        # ★slug-aliases/_redirects/主要索引も必ずadd(per-case修正で毎回触るのに漏れ→301切れ+版タブ消失事故 2026-07-08)
+        run(["git", "add", ".preview-data", "data/manga-catch-index.json", "data/seeds",
+             "data/slug-aliases.yml", "public/_redirects",
+             "data/manga-list-index.json", "data/manga-search-index.json"])
         run(["git", "commit", "-q", "-m", a.msg])
         run(["git", "push"])
 
