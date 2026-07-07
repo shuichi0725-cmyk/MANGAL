@@ -30,3 +30,4 @@
 {"slug": "tekken-shounen", "op": "foreign_drop", "detail": "台湾版(森田まさのり)", "at": "2026-06-21T23:59:59"}
 {"slug": "tytus-romek-i-a-tomek", "op": "foreign_drop", "detail": "波蘭comic(非日本作)", "at": "2026-06-21T23:59:59"}
 {"slug": "touch", "op": "edition-split-add", "source": "wikipedia+rakuten+madb", "before": "editions=3(standard26/wideban11/bunkobon14)", "after": "editions=5(+kanzenban12=完全版2005/+aizoban26=完全復刻版2012-13)", "note": "奇子型: 種2 standard枠に完全版/完全復刻版/MFW/MFB混在→dedup最古でSSCのみ表示。正規2版をedition-overridesで版分離表示。MFW/MFB(コンビニ)は除外scope、復刻BOX5箱は載せ方未決で保留", "at": "2026-07-07T16:18:58"}
+{"slug": ["fukkokuban-shounen-magazine-dai-zenshuu", "fukkokuban-shounen-magazine-daizenshuu"], "op": "non-manga-drop", "source": "user-report+rakuten", "before": "雑誌復刻合本2頁(同題断片で相互ダブリ)", "after": "両頁drop(scope外=雑誌)", "at": "2026-07-07T19:35:36"}
