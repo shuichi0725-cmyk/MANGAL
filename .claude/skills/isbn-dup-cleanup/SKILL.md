@@ -30,6 +30,7 @@ description: ISBNダブリの続き=本番ページ間の同ISBN重複を潰す(
 - 種4 qid注入(作者QID)/本籍無しISBN → 種4 seed を疑う
 - ゲーム同題群(VP/スターオーシャン/FE/X-MEN型)の解き方: Wikiのコミカライズ一覧×楽天delta著者×レーベル(エニックススーパーコミック劇場=アンソロ)で 正規コミカライズ各頁+アンソロ1頁(series-merge renumber) に再編。VP前例=2026-07-07
 - 過去の一括dedup(2026-06の335件)にも誤りがある(VP土方本編が丸ごと消えていた)=canonicalの中身を疑ってよい
+- ★**R1の同ISBN集合dedup(19群)も後で誤りが出た**: BOYS BE 2nd season(別作品全20巻)を「集合一致」でdropしたが、実は本物20巻が種2に埋もれ1st33冊が両頁に二重出力されていただけ=2ndがサイトから消失(2026-07-07ユーザ発見)。**同著者フランチャイズの続編(2nd season/L/next等)は集合一致でも別頁**。dropする前にdrop側SRCの_skey sidの実巻がcanonicalと本当に同一ISBNか(種2で直接)確認。似た危険=ちび本GC/スゴ盛ultra等の姉妹シリーズ
 
 ## 関連道具
 - 個別調査: `python scripts/_isbn-dup-case.py <stem1,stem2,...>`(sid/本籍/楽天題の一覧)
