@@ -135,3 +135,4 @@
 - [【戒め】promote空--onlyで全消し事故](promote_empty_only_wipe_accident.md) — シェル変数空→フル誤発動→66k削除(2026-07-06)。ガード済/復旧=フルpromote/索引skip平常値923
 - [manba観察(デザイン/出し方)](manba_design_learnings.md) — 切り口ランキング乱立/記事題は固有名詞+数字/#1巻応援/テーマ別リスト自動生成の弾。コミュニティは真似しない
 - [【進行中】エンリッチ7k再開手順](enrich_7k_resume_state.md) — enrich-out実ファイル=完了。無い番号だけWF再開。「エンリッチ続き」
+- [【進行中】ISBNダブリ潰し](isbn_dup_cleanup_state.md) — R1=AUTO19群済/残250群per-case queue。道具3点(audit/triage/apply)git済
