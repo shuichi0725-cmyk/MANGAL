@@ -2772,3 +2772,10 @@
   - qid:Q669049|name:最新版 ゲゲゲの鬼太郎
   - name:水木プロ|name:ゲゲゲの鬼太郎
   note: 最新版ゲゲゲの鬼太郎(1985ボンボン・水木プロ作画・全4巻=楽天全巻確認+Wiki)の断片統合(v1,3,4) 2026-07-07
+- merge_keys:
+  - qid:Q442602|name:Intron depot
+  - qid:Q442602|name:Blades|sub:A collection
+  - qid:Q442602|name:Bullets
+  - qid:Q442602|name:INTRON DEPOT
+  renumber: true
+  note: INTRON DEPOT画集の4断片統合(Intron depot/Blades=vol2/Bullets=vol4/INTRON DEPOT)。作者QID共有の攻殻等は含めない=explicit key限定。NDL全巻確認 2026-07-07
