@@ -39,3 +39,5 @@ skill 実体 = `.claude/skills/<name>/SKILL.md`(git追跡。Opus 4.8 等でも�
 - NDL/楽天 live は 1.2-1.3秒/req・429=即中断
 - 推測・捏造で埋めない。不明=報告して待つ
 - push後のpreview反映は15-20分・追いpush禁止
+
+- **ISBNダブリの続き/ISBNダブリ潰して** = skill `isbn-dup-cleanup`(検出→層別→判定→適用→検証。進行状態=memory isbn-dup-cleanup-state)

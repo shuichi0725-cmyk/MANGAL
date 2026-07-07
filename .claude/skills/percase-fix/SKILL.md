@@ -12,6 +12,13 @@ description: 作品名+リンク(Wiki/NDL)を渡されたら per-case で版/巻
 - NDL不在=不存在と断じない(BL/小出版はNDL収録が弱い=不測ノ恋情の教訓)。楽天live(outOfStockFlag=1)が一次手段
 - canonical に「現ページの現状」を凍結しない(汚染ごと凍結する=うる星の失策)。**外部権威(Wiki)から作る**
 - 価格を表示に出さない(内部ソートのみ可)
+- ★**種4に qid を書かない**(種2のqid=作者QID→作者の全作品に巻が注入される。うしおととら→藤田14作事故 2026-07-07。series_keysで十分)
+- ★**種4の release_date はフル日付でも必ず引用符**(`'1986-09-18'`。裸だとYAMLがdate型に解釈されpromoteがクラッシュ)
+
+## 2026-07-07 promote側で封鎖済の罠(知っておく)
+- 混入巻除去(volume-exclude)+真巻登録(種4)のセット: 旧来は「混入巻が番号占有/偽日付タイ/ISBN無し幽霊」の三重の壁で真巻が弾かれた→全て封鎖済(こち亀vol1)。同時に書いてよい
+- edition-override頁の出版年: 確定巻と既存年が非交差なら自動再計算(上杉謙信)。交差時は連載年保持(タッチ)
+- renumber統合の代表巻=(sid,巻番号)単位(1sidに別書籍複数でも取りこぼさない=VPアンソロ第3集)
 
 ## 調査手順
 1. `python scripts/_ledger.py <slug>` で操作履歴+holes / `python scripts/_exists.py --title/--isbn` で本番存在
