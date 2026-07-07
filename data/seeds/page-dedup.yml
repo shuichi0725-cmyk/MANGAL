@@ -2642,3 +2642,8 @@ dedup:
   title: 最新版 ゲゲゲの鬼太郎
   isbns: 4
   note: 最新版の断片頁(水木プロ名義)を統合(2026-07-07)
+- drop: miyazawa-kenji-mangakan-1996
+  canonical: miyazawa-kenji-mangakan
+  title: 宮澤賢治・漫画館
+  isbns: 5
+  note: アンソロジー(宮沢賢治×漫画家19人・潮出版社全5巻)が著者不一致で2頁分裂→edition-overridesで全5巻1頁に統合(ユーザ提示ISBN・NDL確認 2026-07-08)

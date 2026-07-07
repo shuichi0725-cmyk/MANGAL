@@ -40,3 +40,4 @@
 {"slug": ["xxxholic", "holic-rei"], "op": "xxxholic-fix", "source": "wikipedia(user)+rakuten+ndl", "before": "本編標準版14巻欠落+続編×××HOLiC・戻(全4巻)が不可視(SRC有・未promote)", "after": "14巻補完(全19巻)+戻ページ公開", "at": "2026-07-07T23:21:53"}
 {"slug": "ishinomori-shoutarou-world", "op": "non-manga-drop", "source": "user-ndl-tsv", "before": "傑作選が単独ページ化", "after": "drop(傑作選=本編でない)", "at": "2026-07-08T00:12:12"}
 {"slug": "touch", "op": "version-fold", "source": "user指摘", "before": "通常版26 + 完全復刻版26 が別タブ(同巻数)", "after": "通常版26(主=完備最古1981)に完全復刻版26を刷/版タブ(versions[])として畳む", "at": "2026-07-08T00:17:18"}
+{"slug": "miyazawa-kenji-mangakan", "op": "anthology-consolidate", "source": "user(isbn+authors)+ndl", "before": "2頁分裂(著者不一致でmerge不可)+1巻欠落+1985年幽霊ISBN混入", "after": "全5巻1頁(原作=宮沢賢治/作画19人・潮出版社)", "at": "2026-07-08T00:46:37"}
