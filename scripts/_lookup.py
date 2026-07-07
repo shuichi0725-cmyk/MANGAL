@@ -143,15 +143,21 @@ def ndl_live(query, maximum=30):
     if "Too Many Requests" in xml:
         print("★NDL429 → 即中断。回復するので慌てず休ませる(1時間単位)"); sys.exit(2)
     out = []
-    for r in re.split(r"<dcndl:BibResource", xml)[1:]:
+    # ★recordData単位で分割(BibResource分割より確実=ひおあきらヤマト検証 2026-07-08)
+    recs = re.findall(r"<recordData>(.*?)</recordData>", xml, re.S) or re.split(r"<dcndl:BibResource", xml)[1:]
+    for r in recs:
         g = lambda pat: (re.search(pat, r, re.S) or [None, ""])[1] if re.search(pat, r, re.S) else ""
+        # ISBN10/13両対応(古典はISBN10)。creator複数(アンソロ/原作+作画)
+        _isbn = g(r'ISBN">([0-9\-]+)') or g(r"(97[89][\d\-]{10,16})")
+        creators = re.findall(r"<dcterms:creator>.*?<foaf:name>([^<]+)", r, re.S) or re.findall(r"<dc:creator>([^<]+)", r)
         out.append({
             "title": g(r"<dcterms:title>([^<]+)"),
             "vol": g(r"<dcndl:volume>.*?<rdf:value>([^<]+)"),
             "date": g(r"<dcterms:date>([^<]+)"),
-            "isbn": norm_isbn(g(r"(97[89][\d\-]{10,16})")),
-            "pub": g(r"<foaf:name>([^<]+)"),
+            "isbn": norm_isbn(_isbn),
+            "pub": g(r"<dcterms:publisher>.*?<foaf:name>([^<]+)") or g(r"<foaf:name>([^<]+)"),
             "series": g(r"<dcndl:seriesTitle>.*?<rdf:value>([^<]+)"),
+            "creators": [c.replace("/", "") for c in creators],
         })
     time.sleep(RATE)
     return out
@@ -170,6 +176,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--isbn")
     ap.add_argument("--title")
+    ap.add_argument("--creator", help="作者名でNDL SRUを束縛検索(古典/多同名作の全巻回収。--titleと併用可)")
     ap.add_argument("--live", action="store_true")
     ap.add_argument("--max", type=int, default=20)
     a = ap.parse_args()
@@ -203,6 +210,23 @@ def main():
                 print(f" NDL  {i}: " + (f"「{nd[0]['title']}」vol={nd[0]['vol']} {nd[0]['date']}" if nd else "─ 無し(※不在≠不存在)"))
         return
 
+    # ★作者束縛NDL検索(ユーザ手作業のTSVエクスポート代替=作品名+作者名。古典/同名多発作の全巻回収)
+    if a.creator:
+        cql = f'creator="{a.creator}"' + (f' AND title="{a.title}"' if a.title else "")
+        print(f"== NDL SRU 作者束縛検索: {cql} ==")
+        recs = ndl_live(cql, maximum=a.max)
+        # 版(seriesTitle)ごとに巻を束ねて表示(=版分離の下ごしらえ)
+        from collections import defaultdict
+        by_series = defaultdict(list)
+        for r in recs:
+            by_series[r["series"] or "(シリーズ記載なし)"].append(r)
+        for ser, lst in by_series.items():
+            print(f"\n【{ser}】")
+            for r in sorted(lst, key=lambda x: (x["vol"] or "", x["date"] or "")):
+                print(f"  巻={r['vol'] or '-':4} ISBN={r['isbn'] or '無':13} {r['date'] or '?':10} {r['pub'] or '?'} | {r['title']} | 著者={r['creators']}")
+        print(f"\n計 {len(recs)}件 / {len(by_series)}版")
+        return
+
     if a.title:
         print(f"== キャッシュ題検索(部分一致) ==")
         hits = title_map_search(a.title, a.max)
@@ -214,6 +238,7 @@ def main():
             print("== 楽天live title検索 ==")
             for it in rakuten_live(env, title=a.title, hits=min(30, a.max))[:a.max]:
                 print(" ", fmt_item(it))
+            print("== NDL作者束縛検索は --creator を使う(--titleだけではNDLを叩かない) ==")
         return
 
     ap.print_help()
