@@ -5573,7 +5573,7 @@ volumes:
   note: ねこぱんちに誤マッチ混入していた29巻を本来のキジトラ猫の小梅さんページへ移設(volume-excludeで除去+ここで純粋追加)
 - series_keys: &id001
   - qid:Q958449|name:うしおととら
-  qid: Q958449
+  qid: null  # ★Q958449=作者QID(藤田和日郎)で全作品に注入される事故(2026-07-07修正)。series_keysで十分
   number: 2
   isbn13: '9784091258625'
   release_date: 2000-10
@@ -5585,7 +5585,7 @@ volumes:
   added_at: '2026-06-30'
   note: 巻抜けper-case(奇子型#3)。ワイド版(小学館・2000-2003)のv2-9取込もれ。NDLでISBN連番・発売日整合・第N巻ラベル確認。standard33巻/文庫19巻は完備、ワイド版だけv1,v10-18でv2-9欠落していた。
 - series_keys: *id001
-  qid: Q958449
+  qid: null  # ★Q958449=作者QID(藤田和日郎)で全作品に注入される事故(2026-07-07修正)。series_keysで十分
   number: 3
   isbn13: '9784091258632'
   release_date: 2000-12
@@ -5597,7 +5597,7 @@ volumes:
   added_at: '2026-06-30'
   note: 巻抜けper-case(奇子型#3)。ワイド版(小学館・2000-2003)のv2-9取込もれ。NDLでISBN連番・発売日整合・第N巻ラベル確認。standard33巻/文庫19巻は完備、ワイド版だけv1,v10-18でv2-9欠落していた。
 - series_keys: *id001
-  qid: Q958449
+  qid: null  # ★Q958449=作者QID(藤田和日郎)で全作品に注入される事故(2026-07-07修正)。series_keysで十分
   number: 4
   isbn13: '9784091258649'
   release_date: 2001-02
@@ -5609,7 +5609,7 @@ volumes:
   added_at: '2026-06-30'
   note: 巻抜けper-case(奇子型#3)。ワイド版(小学館・2000-2003)のv2-9取込もれ。NDLでISBN連番・発売日整合・第N巻ラベル確認。standard33巻/文庫19巻は完備、ワイド版だけv1,v10-18でv2-9欠落していた。
 - series_keys: *id001
-  qid: Q958449
+  qid: null  # ★Q958449=作者QID(藤田和日郎)で全作品に注入される事故(2026-07-07修正)。series_keysで十分
   number: 5
   isbn13: '9784091258656'
   release_date: 2001-04
@@ -5621,7 +5621,7 @@ volumes:
   added_at: '2026-06-30'
   note: 巻抜けper-case(奇子型#3)。ワイド版(小学館・2000-2003)のv2-9取込もれ。NDLでISBN連番・発売日整合・第N巻ラベル確認。standard33巻/文庫19巻は完備、ワイド版だけv1,v10-18でv2-9欠落していた。
 - series_keys: *id001
-  qid: Q958449
+  qid: null  # ★Q958449=作者QID(藤田和日郎)で全作品に注入される事故(2026-07-07修正)。series_keysで十分
   number: 6
   isbn13: '9784091258663'
   release_date: 2001-06
@@ -5633,7 +5633,7 @@ volumes:
   added_at: '2026-06-30'
   note: 巻抜けper-case(奇子型#3)。ワイド版(小学館・2000-2003)のv2-9取込もれ。NDLでISBN連番・発売日整合・第N巻ラベル確認。standard33巻/文庫19巻は完備、ワイド版だけv1,v10-18でv2-9欠落していた。
 - series_keys: *id001
-  qid: Q958449
+  qid: null  # ★Q958449=作者QID(藤田和日郎)で全作品に注入される事故(2026-07-07修正)。series_keysで十分
   number: 7
   isbn13: '9784091258670'
   release_date: 2001-08
@@ -5645,7 +5645,7 @@ volumes:
   added_at: '2026-06-30'
   note: 巻抜けper-case(奇子型#3)。ワイド版(小学館・2000-2003)のv2-9取込もれ。NDLでISBN連番・発売日整合・第N巻ラベル確認。standard33巻/文庫19巻は完備、ワイド版だけv1,v10-18でv2-9欠落していた。
 - series_keys: *id001
-  qid: Q958449
+  qid: null  # ★Q958449=作者QID(藤田和日郎)で全作品に注入される事故(2026-07-07修正)。series_keysで十分
   number: 8
   isbn13: '9784091258687'
   release_date: 2001-10
@@ -5657,7 +5657,7 @@ volumes:
   added_at: '2026-06-30'
   note: 巻抜けper-case(奇子型#3)。ワイド版(小学館・2000-2003)のv2-9取込もれ。NDLでISBN連番・発売日整合・第N巻ラベル確認。standard33巻/文庫19巻は完備、ワイド版だけv1,v10-18でv2-9欠落していた。
 - series_keys: *id001
-  qid: Q958449
+  qid: null  # ★Q958449=作者QID(藤田和日郎)で全作品に注入される事故(2026-07-07修正)。series_keysで十分
   number: 9
   isbn13: '9784091258694'
   release_date: 2001-12
