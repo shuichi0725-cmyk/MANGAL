@@ -107,3 +107,17 @@ def strip_kana_vol(kana, vol):
     k = re.sub(r"[\s　]+(?:\d{1,3}|イチ|ニ|サン|ヨン|ゴ|ロク|ナナ|ハチ|キュウ|ジュウ(?:イチ|ニ|サン|ヨン|ゴ|ロク|ナナ|ハチ|キュウ)?)(?=[\s　]|$)", " ", k)
     k = re.sub(r"[\s　]+(?:ジョウ|チュウ|ゲ)(?:カン)?$", "", k)
     return re.sub(r"[\s　]{2,}", " ", k).strip()
+
+
+COMIC_MARK = re.compile(r"[\s　]*(?:[（(]\s*コミック\s*[)）]|@\s*COMIC|THE COMIC|The Comic|[（(]\s*comic\s*[)）])[\s　]*", re.I)
+
+def split_subtitle(title):
+    """本題と副題の分離(2026-07-07 ユーザ裁定): (a)コミカライズ表記(@COMIC/THE COMIC/(コミック))は除去
+    (b)末尾の『〜副題〜』はsubtitleへ(詳細頁は title+subtitle 2行表示が既存設計)。slugは本題のみから生成。
+    → (title, subtitle|None)"""
+    t = _nfkc(title)
+    t = COMIC_MARK.sub(" ", t).strip()
+    m = re.search(r"^(.{3,}?)[\s　]*[〜~]([^〜~]{3,})[〜~][\s　]*$", t)
+    if m:
+        return m.group(1).strip(), m.group(2).strip()
+    return t, None
