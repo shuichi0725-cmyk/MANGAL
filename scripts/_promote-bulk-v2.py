@@ -2105,6 +2105,14 @@ def clean_edition(ed: dict) -> dict:
     if ed.get("year_ended"):
         out["year_ended"] = ed["year_ended"]
     out["volumes"] = [clean_vol(v) for v in ed["volumes"]]
+    # ★versions[] = 同巻数の別刷/別版を畳んだ刷タブ(タッチ完全復刻版/うる星初版カバー型)。保持。
+    if ed.get("versions"):
+        out["versions"] = [{
+            **({"label": _ver["label"]} if _ver.get("label") else {}),
+            **({"publisher": _ver["publisher"]} if _ver.get("publisher") else {}),
+            **({"imprint": _ver["imprint"]} if _ver.get("imprint") else {}),
+            "volumes": [clean_vol(v) for v in (_ver.get("volumes") or [])],
+        } for _ver in ed["versions"]]
     return out
 
 
@@ -2790,6 +2798,14 @@ def main():
                 for _ver in (_ed.get("versions") or []):
                     _ver["volumes"] = [v for v in (_ver.get("volumes") or []) if _norm_isbn(v.get("isbn13")) not in _vex]
             new_yml["editions"] = [e for e in (new_yml.get("editions") or []) if (e.get("volumes") or e.get("versions"))]
+            # ★除去で最終巻が消えたら出版年を残存巻から再計算(1(イチ)=アーク9混入除去後も年1993-2014に化けた 2026-07-08)
+            _vy = [int(str(v["release_date"])[:4]) for e in new_yml["editions"]
+                   for vs in [e.get("volumes") or []] + [vv.get("volumes") or [] for vv in (e.get("versions") or [])]
+                   for v in vs if v.get("release_date") and str(v["release_date"])[:4].isdigit()]
+            if _vy:
+                new_yml["year_started"] = min(_vy)
+                if new_yml.get("year_ended") is not None:
+                    new_yml["year_ended"] = max(_vy)
             volume_exclude_pages += 1
         # ★版分離: canonical seed があれば standard/compact 版を権威データで再構築(版混在汚染の是正)
         if slug in edition_canonical:
