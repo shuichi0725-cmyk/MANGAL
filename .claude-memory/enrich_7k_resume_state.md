@@ -1,18 +1,16 @@
 ---
 name: enrich-7k-resume-state
-description: 【進行中】キャッチ/詳細7,048作の一括エンリッチ(分散WF)の再開手順と進捗。「エンリッチ続き」で再開
+description: 【中断・保留】キャッチ/詳細7,048作エンリッチ。セッション枠問題で一括WFは破棄(2026-07-07ユーザ裁定)。成果物10バッチはgit保存済み。再開条件と手順
 metadata:
   type: project
 ---
 
-キャッチ/詳細の分散エンリッチ(2026-07-07開始)。対象7,048作=71バッチ(100作/バッチ)。
+キャッチ/詳細の分散エンリッチ(対象7,048作=71バッチ)は**2026-07-07にユーザ裁定で一時破棄**。
+理由: Workflowのサブエージェント(Sonnet 5でも)が**セッション枠を大量消費**し、他の作業がもたない。
 
-- 材料: `.cache/enrich-batches/batch-000..070.json` (楽天caption。再生成は `.cache/_prep_enrich_batches.py`)
-- 完了出力: `.cache/enrich-out/batch-NNN.json` — **ファイルが在るバッチ=完了済み(再生成不要)**
-- 再開: 出力ファイルの無いバッチ番号だけ Workflow並列で回す(プロンプトはworkflowsスクリプト保存済み
-  `enrich-catch-synopsis-7k-sonnet-wf_8145bc6c-0a8.js` を流用、DONEリストを実ファイルから更新)
-- モデル: sonnet(4.6→アップデート後は解決先を確認、Sonnet 5になっていればそのまま得)。
-  batch000-008=Fable5製(品質基準)。Sonnet製と比較検収する。
-- 完了後: 機械検収(文字数20-40/60-120・master32外genre拒否・catch≠synopsis先頭一致)
-  → catch-ja.json+synopsis-slug-ja.json純粋追加 → manga.v2パッチ(genres_add+provisional)
-  → 本番索引再生成 → 「反映して」相当。適用は前回93作の適用スクリプト方式([[enrich-catch-synopsis]] skill Step4)。
+- **完了10バッチ(約1,000作)= `data/enrich-out-2026-07/`にgit保存済み**(000-008=Fable5製, 009=Sonnet5製・品質良)。未適用。
+- 材料は `.cache/enrich-batches/`(消えたら `.cache/_prep_enrich_batches.py` で再生成可)。
+- **再開条件**: セッション枠に余裕がある時に小分け(1日5-10バッチ等)で回す、またはAPI課金側で回す構成を作る。全量一括はしない。
+- 再開手順: 出力ファイルの無いバッチ番号だけWF並列(スクリプトはworkflows/scripts/enrich-catch-synopsis-7k-sonnet5-*.js)。
+- **適用手順**(バッチが揃い次第 or 部分適用も可): 機械検収(文字数20-40/60-120・master外genre拒否・catch≠synopsis)→catch-ja.json+synopsis-slug-ja.json純粋追加→manga.v2パッチ(genres_add+provisional)→索引再生成→反映。前回93作の適用方式([[enrich-catch-synopsis]] skill Step4)。
+- 完了10バッチだけ先に適用するのは有効(1,000作分の価値)——ユーザに確認して実施。

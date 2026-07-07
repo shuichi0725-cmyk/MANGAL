@@ -134,3 +134,4 @@
 - [【方針】記憶とskillの棲み分け](feedback_memory_vs_skill_policy.md) — 事実・戒め=memory(無圧縮・巨大化は資産)/やり方=skillが唯一の正
 - [【戒め】promote空--onlyで全消し事故](promote_empty_only_wipe_accident.md) — シェル変数空→フル誤発動→66k削除(2026-07-06)。ガード済/復旧=フルpromote/索引skip平常値923
 - [manba観察(デザイン/出し方)](manba_design_learnings.md) — 切り口ランキング乱立/記事題は固有名詞+数字/#1巻応援/テーマ別リスト自動生成の弾。コミュニティは真似しない
+- [【進行中】エンリッチ7k再開手順](enrich_7k_resume_state.md) — enrich-out実ファイル=完了。無い番号だけWF再開。「エンリッチ続き」

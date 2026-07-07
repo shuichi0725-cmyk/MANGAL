@@ -88,6 +88,17 @@ for p in _g.glob(f"{ROOT}/.preview-data/manga/*.yml"):
 
 DEMO = {"少年": "shounen", "少女": "shoujo", "青年": "seinen", "レディース": "josei"}
 
+# ★publisher key正規化(2026-07-07 索引skip22事故の恒久修正): 生社名→publishers.ymlのkey。
+import unicodedata as _ud
+_pubs = yaml.safe_load(open(os.path.join(ROOT, "data", "publishers.yml"), encoding="utf-8")) or {}
+_name2key = {}
+for _k, _v in _pubs.items():
+    if isinstance(_v, dict):
+        if _v.get("name"): _name2key[_ud.normalize("NFKC", _v["name"])] = _k
+        for _a in _v.get("aliases") or []: _name2key[_ud.normalize("NFKC", _a)] = _k
+def _pubkey(name):
+    return _name2key.get(_ud.normalize("NFKC", str(name or "")))
+
 def author_names(s):
     return [x.strip() for x in re.split(r"[/,、;；]", str(s or "")) if x.strip()]
 
@@ -146,12 +157,12 @@ for klass, r in targets:
         "title_kana": kana.replace(" ", "").replace("　", ""),
         "title_romaji": romaji.replace("-", " "),
         "authors": authors,
-        "year_ended": None, "year_started": int(ym[:4]),
+        "publisher": None, "publishers": [], "year_ended": None, "year_started": int(ym[:4]),
         "status": "ongoing",
         "demographic": DEMO.get(r.get("subgenre")) or "other",  # schema必須(null不可)
         "genres": [],
         "editions": [{
-            "type": "standard", "label": "通常版", "publisher": r.get("publisher"), "imprint": r.get("seriesName") or "",
+            "type": "standard", "label": "通常版", "publisher": (_pubkey(r.get("publisher")) or r.get("publisher")), "imprint": r.get("seriesName") or "",
             "volumes": [{"number": r.get("_vol") or 1, "asin": None, "isbn13": isbn,
                          "cover_url": r.get("cover"), "release_date": rd}],
         }],
