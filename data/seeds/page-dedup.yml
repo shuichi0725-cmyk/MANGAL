@@ -1663,3 +1663,8 @@ dedup:
   canonical: magia-record-mahou-shoujo-madoka-magica-gaiden
   title: マギアレコード
   isbns: 11
+- drop: d-n-a2
+  canonical: d-n-ei-2
+  title: D・N・A²
+  isbns: 8
+  note: 断片重複(同ISBN8冊/同AniList30683)。drop側は題がMADB化け(D・N・〔A^2〕)。canonical(正題+副題)をslug-overridesでd-n-a2へ改名(2026-07-07)

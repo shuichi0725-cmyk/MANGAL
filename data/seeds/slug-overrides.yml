@@ -4118,6 +4118,10 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: zoukin-to-houseki
+  d-n-ei-2:
+    slug: d-n-a2
+    at: '2026-07-07'
+    reason: 英字題D・N・A²のAをエイとカナ転写した誤slug是正(dedupで空いた正slugへ。ユーザ指摘)
 paradise-6238: paradise-taguchi-1998
 pet-2032: pet-himawari-2002
 piasu-no-rannaa: piasu-no-runner
