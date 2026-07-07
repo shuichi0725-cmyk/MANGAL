@@ -35,3 +35,4 @@
 {"slug": "kochira-katsushikaku-kameari-kouen-mae-hashutsujo", "op": "vol1-swap", "source": "user(isbn)+rakuten+ndl", "before": "vol1=9784087030327(JUMP j BOOKSノベライズ・偽1977日付)", "after": "vol1=9784088528113(JC真1巻)", "at": "2026-07-07T21:46:51"}
 {"slug": "uesugi-kenshin", "op": "edition-override-fix", "source": "user(isbn2冊)+rakuten", "before": "混入2件: ゴルゴ13コンパクトvol42(9784845825806=種2誤join)+講談社劇画伝記文庫1969(ISBN無し別作)", "after": "岡村賢二版 上杉謙信 全2巻(リイド社SPコミックス戦国武将列伝・2005-2006・書影有)に確定", "at": "2026-07-07T22:05:20"}
 {"slug": ["boys-be", "boys-be-2nd-season"], "op": "boys-be-franchise-fix", "source": "wikipedia(user)+rakuten+種2", "before": "R1で2nd season(20巻)誤drop=消失+原作者イタバシマサヒロ欠落+文庫1/10巻", "after": "2nd season復活(block)+原作者追加(4頁)+文庫10巻完成", "at": "2026-07-07T22:46:02"}
+{"slug": "intron-depot", "op": "volume-completion", "source": "ndl-tsv(user)", "before": "6巻(1,3,4,5,6,7)", "after": "全14巻(欠落2,8-14を種4補完)", "note": "画集(NDC726.1)。art-book stream移行候補", "at": "2026-07-07T23:00:05"}
