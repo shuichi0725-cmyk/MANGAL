@@ -507,6 +507,8 @@ def load_volumes_supplement(con: sqlite3.Connection) -> dict[int, list[dict]]:
                 "cover_url": None,
                 "asin": None,
                 "_edition_type": entry.get("edition_type") or "standard",
+                # ★_edition_label = 新設版ブロックの表示ラベル(任意。完全版/完全復刻版等。無ければ通常版)
+                "_edition_label": entry.get("edition_label"),
                 # ★_imprint = imprint(任意・separate_editions合流用) → 無ければ publisher fallback(後方互換)
                 "_imprint": entry.get("imprint") or entry.get("publisher") or "",
             }
@@ -1907,7 +1909,7 @@ def get_editions_with_volumes(con: sqlite3.Connection, series_ids: list[int] | i
             if not ed_group:
                 # 新 edition group 作成 (= 補完巻 1 巻のみ)
                 ed_group = [{
-                    "type": target_type, "label": "通常版",
+                    "type": target_type, "label": supp_vol.get("_edition_label") or "通常版",
                     "imprint": supp_vol["_imprint"] or "",
                     "year_started": None, "year_ended": None,
                     "volumes": [],
