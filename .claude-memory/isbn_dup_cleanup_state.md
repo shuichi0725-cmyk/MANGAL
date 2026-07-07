@@ -19,10 +19,16 @@ D・N・A²分裂(2026-07-07 ユーザ発見)を機に系統検出→一括是�
 - R2 楽天題裁定(題違い×集合一致、`_isbn-dup-r2-titlefix.py`) 45群61頁: 共有ISBN全冊の楽天題が90%以上単一作品に収斂+★少数派頁題ガード(闇都市伝説×キミノトナリ型=別作品union疑いはSPLIT送り)。スパイラル/WINGS/千里の道も3部/ギリシア神話巻題7頁等
 - R3 包含(同題×著者×⊆、`_isbn-dup-r3-subset.py`) 1群: こち亀226⊂227統合
 
-**残 ≈ 204群 = 全て per-case**(機械層は掘り尽くした):
-- **SPLIT 38群**(docs/production-diagnostics/isbn-dup-split.tsv、楽天題グループ証拠つき) = union汚染の分割(こわい本/ハニ太郎/ダイの大冒険巻題群)。dedup でなく巻の振り分け直し=volume-exclude/種4移設
-- FLAG 4群 = 楽天キャッシュ0件(wani-bunsho等)→楽天live/NDLで裁定
-- 題不一致+集合不一致 102群 / 著者不一致系 58群 / ヤマト・ウルトラマン(相互固有1冊) = 外部確証(Wiki/NDL)per-case、誤merge厳禁
-続きのトリガー=「ISBNダブリの続き」。SPLIT38 から着手が効率的(楽天証拠が既に付いている)。
+**済(R4 2026-07-07)**: SPLIT38群を全証拠精査(`_isbn-dup-case.py`+split38-evidence)で手動裁定→`_isbn-dup-r4-apply.py`で展開。
+- dedup 20群48頁(ダイの大冒険/HOLiC×CPC/ナポレオン=エロイカ/ハニ太郎13頁/水惑星7頁/マシュマロ/大魔法峠/クル等=union lossless家族)
+- 分割 17群44block(merge-exceptions): ★**number-dedupの不可視本をsurfacing**=ゾクこわい本2025新シリーズ10冊/こわい本角川全11巻/キミノトナリ3巻/ベスティア1-3/カフカ/ドリーム/十蘭/しゅたいんず・げーと!等。検証済(各頁が自分の本だけ持つ)
+- ★重要知見: **DUP_PAGE群の正体=find_relatedのグループmergeが「メンバーsidごとに同じunionページをN枚出力」**する構造。しかもnumber-dedup(最古優先)が新しい版/続シリーズを隠す(タッチと同型)。dedupは隠れ本が無い(lossless)時だけ安全、隠れ本があれば分割が正
+- 判定手順: ①メンバーsidの自ISBNがunionに全部あるか(隠れ本) ②題系譜(自本の楽天題がcanonical題と相互substring) ③canonical=楽天多数派
+- 保留: 妖精国Ballad×継ぐ視の守護者(arc構造の外部確認要・隠れ2冊)
+
+**残(2026-07-07時点: ダブリISBN 992個/ペア301件)**:
+- 題不一致+集合不一致 102群 / 著者不一致系 58群 / FLAG4(楽天キャッシュ0) / ヤマト・ウルトラマン(相互固有1冊) / SHARED_FEW 46件
+- 進め方: `_isbn-dup-triage.py`再実行→R4と同じ判定手順(隠れ本→分割/lossless家族→dedup)。著者不一致系はhomonymに注意して外部確証
+続きのトリガー=「ISBNダブリの続き」。
 
 **注意**: AUTO の canonical 選定はメタ充実度優先のため、slug が汚い方(無分かちローマ字長串)が残った群がある(呪具師/レンガ城等)。slug品質是正は別軸(slug-fix ラウンド)で。誤merge厳禁=集合完全一致以外は必ず外部確証([[merge_needs_external_proof]])。
