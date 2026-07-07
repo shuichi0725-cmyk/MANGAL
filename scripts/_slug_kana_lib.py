@@ -75,21 +75,30 @@ def make_slug(title):
             for frag in kata_run_convert(surf):
                 parts.append(('lat' if not re.search(r'[^a-z0-9-]', frag) else 'ja', frag, pos))
             continue
-        r = kana2romaji(reading)
-        if not r: continue
-        if pos[0] == '助詞':
-            if surf == 'は': r = 'wa'
-            elif surf == 'へ': r = 'e'
-            elif surf == 'を': r = 'o'
-        parts.append(('ja', r, pos))
-    merged = []
-    for kind, r, pos in parts:
-        attach = (pos[0] in ('助動詞',)) or (len(pos) > 1 and pos[1] in ('非自立', '接尾'))
-        if attach and kind == 'ja' and merged and merged[-1][0] == 'ja':  # lat断片(kilometer等)は連結しない
-            merged[-1] = ('ja', merged[-1][1] + r, pos)
+        # ★助詞は/へ/をは読み替え、それ以外は読みを保持(ローマ字化は連結後=モーラ割れ/過分割の根治 2026-07-07)
+        if pos[0] == '助詞' and surf in ('は', 'へ', 'を'):
+            parts.append(('ja', {'は': 'wa', 'へ': 'e', 'を': 'o'}[surf], pos, True))  # 変換済フラグ
         else:
-            merged.append((kind, r, pos))
-    slug = '-'.join(m[1] for m in merged)
+            parts.append(('ja', reading, pos, False))  # 読み(未変換)を保持
+    # 読みレベルで結合してからローマ字化(にゃ→ニャのモーラ割れ・ほどいて過分割を根治)
+    SMALL = 'ァィゥェォャュョヮッぁぃぅぇぉゃゅょゎっ'
+    merged = []  # [kind, value, converted]
+    for item in parts:
+        if len(item) == 4:
+            kind, val, pos, conv = item
+        else:
+            kind, val, pos = item; conv = True  # lat/katakana断片は変換済
+        # 小書き先頭 or 動詞+活用/助動詞/非自立/接尾 は前のjaへ読み連結
+        small_lead = (kind == 'ja' and not conv and val and unicodedata.normalize('NFKC', val)[0] in SMALL)
+        attach = (kind == 'ja' and not conv and merged and merged[-1][0] == 'ja' and not merged[-1][2]
+                  and ((pos[0] in ('助動詞',)) or (len(pos) > 1 and pos[1] in ('非自立', '接尾'))
+                       or (pos[0] == '助詞' and merged[-1][3][0] == '動詞')  # 動詞+て/で
+                       or small_lead))
+        if attach:
+            merged[-1][1] += val
+        else:
+            merged.append([kind, val, conv, pos])
+    slug = '-'.join(m[1] if m[2] else kana2romaji(m[1]) for m in merged)
     slug = re.sub(r'[^a-z0-9-]', '', slug.lower())
     return re.sub(r'-{2,}', '-', slug).strip('-')[:80]
 
