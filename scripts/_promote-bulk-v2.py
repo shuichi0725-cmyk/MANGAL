@@ -495,8 +495,17 @@ def load_volumes_supplement(con: sqlite3.Connection) -> dict[int, list[dict]]:
                     sids.add(r[0])
             qid = entry.get("qid")
             if qid:
-                for r in cur.execute("SELECT id FROM series WHERE qid=?", (qid,)).fetchall():
-                    sids.add(r[0])
+                # ★種2のqid=作者QID(shu2_qid_is_author)。無条件qid一致は「作者の全作品」に巻を
+                #   注入する事故になる(うしおととらワイド版が藤田全15作へ滲んだ 2026-07-07)。
+                #   → qid一致sidは、entryのseries_keysのname部/title_displayと題が合う時だけ採用。
+                _names = {sk.split("name:")[-1] for sk in (entry.get("series_keys") or []) if "name:" in sk}
+                if entry.get("title_display"):
+                    _names.add(str(entry["title_display"]))
+                _nnames = {re.sub(r"[\s　]+", "", n) for n in _names if n}
+                for r in cur.execute("SELECT id, title FROM series WHERE qid=?", (qid,)).fetchall():
+                    _t = re.sub(r"[\s　]+", "", r[1] or "")
+                    if not _nnames or any(_t and (_t in n or n in _t) for n in _nnames):
+                        sids.add(r[0])
             if not sids:
                 continue
             vol_dict = {
