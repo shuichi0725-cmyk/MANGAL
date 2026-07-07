@@ -25,71 +25,84 @@ anime_adapted: true
 alternative_titles:
   en: Magic Knight Rayearth 2
 editions:
-- type: deluxe
-  label: KCデラックス（1995）
+- type: standard
+  label: 通常版
   publisher: 講談社
   imprint: KCデラックス
   volumes:
   - number: 1
     asin: null
     isbn13: '9784063196108'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/6108/9784063196108.jpg?_ex=200x200
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/6108/9784063196108.jpg?_ex=300x300
     release_date: 1995-07
   - number: 2
     asin: null
     isbn13: '9784063196634'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/6634/9784063196634.jpg?_ex=200x200
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/6634/9784063196634.jpg?_ex=300x300
     release_date: '1995-12-18'
-- type: standard
-  label: KCDX（1996）
-  publisher: 講談社
-  imprint: KCDX
-  volumes:
   - number: 3
     asin: null
     isbn13: '9784063196986'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/6986/9784063196986.jpg?_ex=200x200
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/6986/9784063196986.jpg?_ex=300x300
     release_date: '1996-04-23'
-- type: deluxe
-  label: KCデラックス（2003）
-  publisher: 講談社
-  imprint: KCデラックス
-  volumes:
-  - number: 1
-    asin: null
-    isbn13: '9784063346596'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/6596/9784063346596.jpg?_ex=200x200
-    release_date: 2003-01
-  - number: 2
-    asin: null
-    isbn13: '9784063346602'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/6602/9784063346602.jpg?_ex=200x200
-    release_date: 2003-01
-  - number: 3
-    asin: null
-    isbn13: '9784063346619'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/6619/9784063346619.jpg?_ex=200x200
-    release_date: 2003-01
-- type: deluxe
-  label: CLAMP PREMIUM COLLECTION（2022–2023）
-  publisher: 講談社
-  imprint: KCデラックス
-  volumes:
-  - number: 1
-    asin: null
-    isbn13: '9784065295267'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/5267/9784065295267.jpg?_ex=200x200
-    release_date: 2022-12
-  - number: 2
-    asin: null
-    isbn13: '9784065295250'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/5250/9784065295250.jpg?_ex=200x200
-    release_date: 2023-01
-  - number: 3
-    asin: null
-    isbn13: '9784065295243'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/5243/9784065295243.jpg?_ex=200x200
-    release_date: 2023-01
+  versions:
+  - label: オリジナル
+    publisher: 講談社
+    imprint: KCデラックス
+    volumes:
+    - number: 1
+      asin: null
+      isbn13: '9784063196108'
+      cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/6108/9784063196108.jpg?_ex=300x300
+      release_date: 1995-07
+    - number: 2
+      asin: null
+      isbn13: '9784063196634'
+      cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/6634/9784063196634.jpg?_ex=300x300
+      release_date: '1995-12-18'
+    - number: 3
+      asin: null
+      isbn13: '9784063196986'
+      cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/6986/9784063196986.jpg?_ex=300x300
+      release_date: '1996-04-23'
+  - label: 新装版
+    publisher: 講談社
+    imprint: KCデラックス
+    volumes:
+    - number: 1
+      asin: null
+      isbn13: '9784063346596'
+      cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/6596/9784063346596.jpg?_ex=300x300
+      release_date: 2003-01
+    - number: 2
+      asin: null
+      isbn13: '9784063346602'
+      cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/6602/9784063346602.jpg?_ex=300x300
+      release_date: 2003-01
+    - number: 3
+      asin: null
+      isbn13: '9784063346619'
+      cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/6619/9784063346619.jpg?_ex=300x300
+      release_date: 2003-01
+  - label: CLAMP PREMIUM
+    publisher: 講談社
+    imprint: CLAMP PREMIUM COLLECTION
+    volumes:
+    - number: 1
+      asin: null
+      isbn13: '9784065295267'
+      cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/5267/9784065295267.jpg?_ex=300x300
+      release_date: 2022-12
+    - number: 2
+      asin: null
+      isbn13: '9784065295250'
+      cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/5250/9784065295250.jpg?_ex=300x300
+      release_date: 2023-01
+    - number: 3
+      asin: null
+      isbn13: '9784065295243'
+      cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/5243/9784065295243.jpg?_ex=300x300
+      release_date: 2023-01
 publishers:
 - kodansha
 catch: 二度と行けないと思っていたセフィーロへ、三人の少女が再び召喚される。だがその世界は以前とは違っていて——CLAMPが描く異世界冒険ファンタジー続章。
