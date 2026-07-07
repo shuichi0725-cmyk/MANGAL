@@ -776,12 +776,10 @@ dedup:
   canonical: tsuiraku-jk-to-haijin-kyoushi
   title: 墜落JKと廃人教師
   isbns: 20
-- drop: valkyrie-profile-hijikata-2000
-  canonical: valkyrie-profile
   title: VALKYRIE PROFILE
   isbns: 5
 - drop: valkyrie-profile-takanagi-2000
-  canonical: valkyrie-profile
+  canonical: valkyrie-profile-2000
   title: VALKYRIE PROFILE
   isbns: 5
 - drop: x-men-2022
@@ -2633,3 +2631,13 @@ dedup:
   title: よりぬきパタリロ
   isbns: 2
   note: ISBNダブリ一括dedup(集合完全一致+同題)(2026-07-07)
+- drop: valkyrie-profile-2001
+  canonical: valkyrie-profile-2000
+  title: VALKYRIE PROFILE
+  isbns: 7
+  note: VPアンソロ統合(第1-7集を valkyrie-profile-2000 へ。2026-07-07)
+- drop: valkyrie-profile-2001-2
+  canonical: valkyrie-profile-2000
+  title: VALKYRIE PROFILE
+  isbns: 7
+  note: VPアンソロ統合(第1-7集を valkyrie-profile-2000 へ。2026-07-07)

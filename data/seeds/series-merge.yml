@@ -2755,3 +2755,16 @@
   - name:ふーみ|name:どうやら私の身体は完全無敵のようですね
   - qid:Q61787645|name:どうやら私の身体は完全無敵のようですね
   note: '表記split統合(K3描画済み系・慎重BATCH-1): どうやら私の身体は ルビ/送りsplit(さばねこ・[1,4-12]+[2,3,12,13]=union1-13) 2026-07-02'
+- merge_keys:
+  - qid:Q11474104|name:VALKYRIE PROFILE
+  - qid:Q11673888|name:VALKYRIE PROFILE
+  - name:佐伯弥四郎|name:VALKYRIE PROFILE
+  - qid:Q11591065|name:VALKYRIE PROFILE
+  - qid:Q8978628|name:VALKYRIE PROFILE
+  - name:たかなぎ優名|name:VALKYRIE PROFILE
+  renumber: true
+  note: VPアンソロ統合(エニックススーパーコミック劇場 第1-7集=NDL/楽天全巻確認・Wiki裏付け 2026-07-07)
+- merge_keys:
+  - name:藍山恵|name:VALKYRIE PROFILE
+  - name:藍山恵|name:ヴァルキリープロファイル|sub:ザダークアルケミスト
+  note: 藍山恵版(ザ・ダーク・アルケミスト全4巻)のvol1断片(sub:ザダークアルケミスト sid)を本体へ(Wiki+種2 sub確証 2026-07-07)
