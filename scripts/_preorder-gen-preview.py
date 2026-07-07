@@ -82,6 +82,36 @@ idx = json.load(open(f"{ROOT}/data/manga-list-index.json", encoding="utf-8"))
 si = idx["f"].index("slug")
 for r in idx["d"]:
     existing.add(r[si])
+
+# ★続編slug継承の親候補(2026-07-07 ユーザ指摘=byuutii-poppu-returns事故の恒久修正):
+#   同著者の既存本番作の題ヨミが新作ヨミの真の接頭辞なら、親slugを継承し残部だけローマ字化
+#   (= ビューティーポップ Returns → beauty-pop + returns)。カタカナ外来語の英語綴りslugを壊さない。
+def _norm_kana_key(s):
+    return re.sub(r"[\s　]+", "", unicodedata.normalize("NFKC", str(s or "")))
+_ki = idx["f"].index("title_kana")
+_ai = idx["f"].index("authors")
+_parents = {}  # kana_norm -> list[(slug, author_name_set)]
+for r in idx["d"]:
+    k = _norm_kana_key(r[_ki])
+    if len(k) >= 4:
+        _parents.setdefault(k, []).append((r[si], {a.get("name") for a in (r[_ai] or []) if isinstance(a, dict)}))
+
+def inherit_parent_slug(kana, auths):
+    """新作ヨミ=既存本番題ヨミ+残部 かつ 著者一致 なら 親slug-残部romaji を返す(無ければNone)"""
+    k = _norm_kana_key(kana)
+    best = None  # (parent_kana, parent_slug)
+    for pk, cands in _parents.items():
+        if not (k.startswith(pk) and len(k) > len(pk)):
+            continue
+        hits = [slug for slug, names in cands if names & set(auths)]
+        if len(hits) != 1:  # 著者不一致 or 同ヨミ同著者の曖昧は継承しない(安全側)
+            continue
+        if best is None or len(pk) > len(best[0]):
+            best = (pk, hits[0])
+    if not best:
+        return None
+    rest = kana2romaji(k[len(best[0]):])
+    return f"{best[1]}-{rest}" if rest else None
 import glob as _g
 for p in _g.glob(f"{ROOT}/.preview-data/manga/*.yml"):
     existing.add(os.path.basename(p)[:-4])
@@ -138,7 +168,7 @@ for klass, r in targets:
     romaji = kana2romaji(kana)
     if not romaji or len(romaji) < 2:
         holds.append((klass, isbn, title, f"slug生成不可 kana={kana[:16]}")); continue
-    slug = romaji[:70]
+    slug = (inherit_parent_slug(kana, auths) or romaji)[:70]
     if slug in existing:
         slug = f"{slug}-{ym[:4]}"
         if slug in existing:
