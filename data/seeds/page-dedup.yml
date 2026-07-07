@@ -2647,3 +2647,8 @@ dedup:
   title: 宮澤賢治・漫画館
   isbns: 5
   note: アンソロジー(宮沢賢治×漫画家19人・潮出版社全5巻)が著者不一致で2頁分裂→edition-overridesで全5巻1頁に統合(ユーザ提示ISBN・NDL確認 2026-07-08)
+- drop: mobile-suit-gundam-f90-1997
+  canonical: mobile-suit-gundam-f90
+  title: 機動戦士ガンダムF90
+  isbns: 1
+  note: 中原れい 機動戦士ガンダムF90(1巻完結)の別版分裂=1991 B-CLUB版と1997電撃版を版タブに統合(ユーザ指摘 2026-07-08)
