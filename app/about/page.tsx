@@ -18,15 +18,42 @@ export default function AboutPage() {
 
       <section className="mt-8 space-y-4 text-sm leading-relaxed text-ink/80">
         <h2 className="text-base font-semibold text-ink">サイトの目的</h2>
+        <p>数ある漫画サイトの中から MANGAL を見つけていただき、ありがとうございます。</p>
         <p>
-          MANGAL は日本の漫画を「出版年」「著者・原作者」「出版社・連載誌」「分野（少年・青年・少女・女性 など）」「ジャンル（ギャグ・ラブコメ・SF など）」から絞り込んで閲覧できるカタログサイトです。
-          各作品の詳細ページには、巻ごとの発売日と Amazon の商品ページへのリンクを掲載しています。
+          MANGAL は「日本で発売された漫画を、ひとりで自由に探せる」ことをコンセプトにしたサイトです。
+          ユーザー同士のつながりは SNS に任せて、ここは“あなたのまだ知らない漫画に出会える検索”に特化しています。
+        </p>
+        <p>
+          正確さや使いやすさにはまだ改善の余地がありますが、情報量と検索の自由度は、他ではなかなか味わえないものになっていると思います。
+        </p>
+        <p>
+          まずは「検索」ボタンを押して、色々いじってみてください。きっと気になる漫画に出会えるはずです。
+          ——なぜなら、日本で発売された漫画のほとんど（全部ではありませんが）が、いまあなたの目の前にあるからです。
         </p>
       </section>
 
       <section className="mt-8 space-y-4 text-sm leading-relaxed text-ink/80">
+        <h2 className="text-base font-semibold text-ink">できること</h2>
+        <ul className="list-disc pl-5 space-y-1">
+          <li>
+            <strong>キーワード検索</strong> — 作品名・著者名から（ヨミでも探せます）
+          </li>
+          <li>
+            <strong>絞り込み</strong> —
+            分野（少年・青年・少女・女性）／ジャンル（ラブコメ・SF など）／要素タグ／連載状態／出版社／連載誌／創刊年代（年代→年→月）／著者（五十音）
+          </li>
+          <li>
+            <strong>並び替え</strong> — 発売年代順・タイトル五十音順・巻数順
+          </li>
+          <li>
+            <strong>作品ページ</strong> — 巻ごとの発売日・書影・版違い（文庫版・完全版など）・書店へのリンク
+          </li>
+        </ul>
+      </section>
+
+      <section className="mt-8 space-y-4 text-sm leading-relaxed text-ink/80">
         <h2 className="text-base font-semibold text-ink">データソース</h2>
-        <p>本サイトに掲載している書誌情報は、以下の公開データを基に構築しています。表紙画像は使用していません（Amazon 公式画像の連携を予定）。</p>
+        <p>本サイトに掲載している書誌情報は、以下の公開データを基に構築しています。表紙画像は楽天ブックス提供の書影を使用しています。</p>
         <ul className="list-disc pl-5 space-y-1">
           <li>
             <a
