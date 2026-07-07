@@ -119,6 +119,14 @@ def main():
         print(f"  検証ゲートOK({len(only)}頁: slug/title/kana/number/date/isbn)", flush=True)
 
     # 3. 索引 増分更新 (本番 data/ + preview)
+    # ★slug変更(slug-override)検知: 内部slugがSRC stemと違う頁は、旧stem名の索引エントリが
+    #   残留し二重表示になる(SHERLOCK sherlock-ooinaru-game→sherlock事故 2026-07-08)。
+    #   内部slug≠stem の stem を remove に追加し旧エントリを purge。
+    for st in only:
+        isl = internal_slug(st, MV2)
+        if isl != st and st not in remove_slugs:
+            remove_slugs.append(st)
+            print(f"  slug変更検知: {st} → {isl} (旧slug索引purge)", flush=True)
     upd = ",".join(only)
     rem = ",".join(remove_slugs)
     idx_data = [PY, "scripts/_build-list-index.py", "data/manga.v2", "data"]
