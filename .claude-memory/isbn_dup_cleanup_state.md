@@ -26,9 +26,12 @@ D・N・A²分裂(2026-07-07 ユーザ発見)を機に系統検出→一括是�
 - 判定手順: ①メンバーsidの自ISBNがunionに全部あるか(隠れ本) ②題系譜(自本の楽天題がcanonical題と相互substring) ③canonical=楽天多数派
 - 保留: 妖精国Ballad×継ぐ視の守護者(arc構造の外部確認要・隠れ2冊)
 
-**残(2026-07-07時点: ダブリISBN 992個/ペア301件)**:
-- 題不一致+集合不一致 102群 / 著者不一致系 58群 / FLAG4(楽天キャッシュ0) / ヤマト・ウルトラマン(相互固有1冊) / SHARED_FEW 46件
-- 進め方: `_isbn-dup-triage.py`再実行→R4と同じ判定手順(隠れ本→分割/lossless家族→dedup)。著者不一致系はhomonymに注意して外部確証
+**済(R5 2026-07-07)**: 残139クラスタへR4手順を判定器化(`_isbn-dup-r5.py`=基底題canonical+隠れ本+題系譜+著者不一致はdedup禁止)→全ログ目視→**override6件**(デュエマ世代/双貌のオズO2/ログホラ西風/ダイヤのA外伝=誤dedup→split、C0DE/あおぞら家族セレクト=canonical逆転)→適用。dedup57群64頁(海街diary巻題7頁等)+分割361block(銀河鉄道の夜4作画版/ポケスペ/グラゼニ編別/コーセルテル子竜7冊等)。**機械判定は必ず全ログ目視してから適用**(毎回誤りが出る)。
+
+**残(R5後: ダブリISBN 426個/ペア190件=DUP_PAGE141+SHARED_FEW49)**:
+- **REVIEW 33群**(著者不一致×家族題=R5ログ`.cache/r5-log.txt`) = homonym/作画版違い(源氏物語/リング/ウルトラセブン/VALKYRIE PROFILE3頁/X-MEN等)。外部確証per-case。八つ墓村(影丸譲也≠穣也)は同一人名揺れ=dedup可
+- **種2二重本籍ISBN**: 同一ISBNが2sidに登録されている型は merge block では消えない → 楽天題を審判に volume-exclude で誤側から除去(気分はもう戦争の前例)
+- SHARED_FEW 49件(少数混入) = 同上 volume-exclude 系
 続きのトリガー=「ISBNダブリの続き」。
 
 **注意**: AUTO の canonical 選定はメタ充実度優先のため、slug が汚い方(無分かちローマ字長串)が残った群がある(呪具師/レンガ城等)。slug品質是正は別軸(slug-fix ラウンド)で。誤merge厳禁=集合完全一致以外は必ず外部確証([[merge_needs_external_proof]])。
