@@ -19,3 +19,10 @@ metadata:
 **実装**: scripts/_investigate-nihonshi → _disentangle-nihonshi(コード分離) → _complete-nihonshi-ndl(NDL全巻) → _rebuild-nihonshi-final(統合・補完・書影)。結果=2016版/2021版/1982版が[1-20/18]完全。
 
 **残**: ①preview のみ=本番durabilityは種4 or option2(promote側で発行コード版分離を恒久実装=全多版作に効く本丸)未了。②他教育系(世界の歴史等)も同jumbleの可能性大=同法で展開可。[[multi_edition_unification_pending]] [[overmerge_sweep_conclusion]]
+
+## ★集英社 日本の歴史 完全分離(2026-07-08・確証取得の成功例)
+「検索しても確証を得られなかった」教育系を、新道具で解決:
+- **確証源** = 集英社公式 `kids.shueisha.co.jp/nihonshi/` を **TinyFish fetch** で取得 → 権威ある全20巻構成(各巻タイトル+監修者)。
+- **分離軸** = **ISBN発行帯**が年代版できれいに分かれる: 1982年版=9784082500xx / 1990年代版=9784081950xx / 2007年版漫画版=9784087461xx / **2016年版=9784082391xx(公式20巻と完全一致)** / 2021コンパクト=9784082392xx。
+- **結果** = 88巻Frankensteinを5年代版の**版タブ**に再構成(2016年版20/2021コンパクト20/2007漫画版10/1990年代19/1982年19)。2016年版は公式タイトルをvolume_labelに。井上大助頁28巻は完全内包でdrop。年1982-2023。
+- ★**手法の型**: 教育系の版混在は (1)出版社公式をTinyFishで取得=確証 (2)ISBN発行帯で年代版grouping (3)NDL発行年で裏取り (4)版タブ化。「同名多数で危険」だった教育系が確証取得で安全に分離可能に。
