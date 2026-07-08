@@ -28,3 +28,9 @@ metadata:
 - 蒸留の **型1 新刊巻**: 既存作の正しい edition/刷 に新巻を挿す（巻選び②③が効く）。
 - 型2/型3 新作: 新ページを上記規則で組む。
 - 関連: [[multi_edition_unification_pending]] / [[version_tabs_stock_ebook]]（既定=完備最古）/ [[edition_mix_same_author_ayako]]（奇子型=同著者版違い混在の分離）。
+
+## ★冊数違い=版タブ(versions[])で纏めるな(2026-07-08 ユーザ再指摘)
+- **同冊数=versions[]刷タブOK**(レイアース=オリジナル/新装版/CLAMP PREMIUM 全3巻→versions[])。
+- **冊数違い=別editionタブ(editions[]配列)**にする。versions[]に詰めるのは誤り(タッチ=通常版26/ワイド11/文庫14/完全版12を別editions[]タブ)。
+- ★私のミス: 堕靡泥(完全版9/原作7/新装版3)・ショーイチ(完全版24/原作9)を冊数違いなのにversions[]に詰めた→別editionタブに是正。
+- ★楽天は原作の書影付きISBNを持つ(ショーイチ本編9巻=NDL欠のvol8含め全ISBN+書影)。Type B再構築は**NDL TSV(全版)+楽天(書影/欠ISBN)+Wiki(正典巻数)**の3点で。
