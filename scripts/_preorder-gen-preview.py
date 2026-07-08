@@ -208,7 +208,8 @@ for klass, r in targets:
         "editions": [{
             "type": "standard", "label": "通常版", "publisher": (_pubkey(r.get("publisher")) or r.get("publisher")), "imprint": r.get("seriesName") or "",
             "volumes": [{"number": r.get("_vol") or 1, "asin": None, "isbn13": isbn,
-                         "cover_url": r.get("cover"), "release_date": rd}],
+                         "cover_url": r.get("cover") or f"https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/{isbn[-4:-1]}/{isbn}.jpg?_ex=200x200",  # ★harvest空→CDN(書影付与忘れ防止 2026-07-09)
+                         "release_date": rd}],
         }],
         "_preorder_draft": {"class": klass, "added_at": TODAY, "source": "rakuten-preorder",
                             "note": "予約②③previewドラフト。本番化はユーザ確認後。ヨミ=楽天仮(NDL照合待ち)"},

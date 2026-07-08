@@ -66,6 +66,10 @@ python scripts/_preorder-increment.py   # ①latest-prev差分(新ISBN) ②過�
 4. **Zodスキーマ検証**: `loadAllManga`でskip 0確認(year_ended/authors.role/demographic enum=shounen/shoujo…。索引はPython製で検証なし=「検索に載るが404」の既知クラス)
 5. **slug品質**: janome分かち+ヘボン(は=wa/長音前母音重ね)・カタカナ明白英単語のみ英語綴り・rename時は**made lists+rakuten-kana-pending+staging三点同期**
 6. 作者の法人クレジット(Magica Quartet/バンダイナムコ型)は既存DB慣行どおり正当=触らない
+7. ★**全巻に発売日+書影が付いているか検査**(2026-07-09 ユーザ指摘): 特に④midfillの**回収先行巻**は要注意=
+   ・発売日: 予約巻はharvest、**回収巻は種2(db-v2 volumes.release_date)から引く**(捨てるな)。種2未収載のみ空(NDL/enrichで後補完)。
+   ・書影: harvest cover空/回収巻は **Rakuten CDN `.../cabinet/{isbn13[-4:-1]}/{isbn13}.jpg?_ex=200x200`** で構築(付与忘れ防止)。
+   ・gen-preview/gen-midfill は結線済み。生成後 `release_date`/`cover_url` の欠けを必ず数える(欠け>0なら原因調査)。
 
 ## B. NDL新着回収 (= 従来コア)
 
