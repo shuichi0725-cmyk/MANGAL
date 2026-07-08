@@ -1,21 +1,20 @@
-# 【自動生成】NDL 確認済 MADB取込もれ巻 (= 種4 auto)。 生成元 _register-seed4-ndl.py。
-# 手動版 data/seeds/volumes-supplement.yml は不変。 promote/audit が両方 load。
-# ★ db-v2 再build / NDL再取得時は再生成。
-schema_version: 1
-generator: ndl-auto
 volumes:
 - series_keys:
-  - name:すかいふぁーむ|name:俺だけ不遇スキルの異世界召喚叛逆記
   - name:すかいふぁーむ|name:俺だけ不遇スキルの異世界召喚叛逆記|sub:最弱スキル〈吸収〉が全てを飲み込むまで
-  - name:すかいふぁーむ|name:俺だけ不遇スキルの異世界召喚叛逆記|sub:最弱スキル〈吸収〉が全てを飲み込むまで.
-  qid: null
   number: 16
   isbn13: '9784088942469'
   release_date: 2026-06
-  pages: null
-  publisher: ''
-  edition_type: standard
+  publisher: 集英社
+  source: ndl
+  added_at: '2026-07-08'
   title_display: 俺だけ不遇スキルの異世界召喚叛逆記
-  source: ndl-auto
-  added_at: '2026-05-30'
-  note: MADB取込もれ。NDL Search で確認 (ISBN/巻/発売日)。自動登録 (_register-seed4-ndl.py)。
+  note: MADB未収録の最新刊をNDL照会で発見(巻抜け仮想fix)
+- series_keys:
+  - 'name:桃井桃子|name:1: 2交際はラブコメに入りますか?'
+  number: 2
+  isbn13: '9784832205284'
+  release_date: 2025-07
+  source: ndl
+  added_at: '2026-07-08'
+  title_display: 1×2 交際はラブコメに入りますか?
+  note: MADB未収録巻をNDL照会で発見(巻抜け仮想fix)
