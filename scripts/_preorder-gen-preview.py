@@ -187,7 +187,10 @@ for klass, r in targets:
         "title_kana": kana.replace(" ", "").replace("　", ""),
         "title_romaji": romaji.replace("-", " "),
         "authors": authors,
-        "publisher": None, "publishers": [], "year_ended": None, "year_started": int(ym[:4]),
+        # ★トップレベルpublisher=edition社キー(2026-07-09 索引skip恒久修正: Noneだと表示ガードでskip)。未登録キーなら None のまま(=skipは正=publisher未整備signal)
+        "publisher": (_pubkey(r.get("publisher")) if _pubkey(r.get("publisher")) in _pubs else None),
+        "publishers": ([_pubkey(r.get("publisher"))] if _pubkey(r.get("publisher")) in _pubs else []),
+        "year_ended": None, "year_started": int(ym[:4]),
         "status": "ongoing",
         "demographic": DEMO.get(r.get("subgenre")) or "other",  # schema必須(null不可)
         "genres": [],
