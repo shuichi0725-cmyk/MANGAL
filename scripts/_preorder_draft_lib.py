@@ -42,13 +42,18 @@ def clean_title(title):
     t = unicodedata.normalize("NFKC", str(title or "")).strip()
     prov = bool(_PROV.search(t))
     t = _PROV.sub("", t).strip()
-    t = _ATCOMIC.sub("", t).strip()          # @COMIC
     sub = None
-    m = _SUB.search(t)
-    if m:
-        sub = m.group().strip(" 　〜～-")
-        t = t[:m.start()].strip()
-    t = _VOL_TAIL.sub("", t).strip()          # 末尾巻番号
+    # ★末尾の [巻番号 / @COMIC / 〜副題〜] を順不同で安定するまでループ除去(@COMIC後に(N)型に対応)
+    for _ in range(5):
+        t0 = t
+        m = _SUB.search(t)
+        if m:
+            sub = m.group().strip(" 　〜～-")
+            t = t[:m.start()].strip()
+        t = _VOL_TAIL.sub("", t).strip()      # 末尾巻番号 (N)/第N巻/裸N
+        t = _ATCOMIC.sub("", t).strip()       # @COMIC
+        if t == t0:
+            break
     t = re.sub(r"[\s　]+$", "", t)
     return t, sub, prov
 

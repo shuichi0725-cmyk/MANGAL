@@ -82,16 +82,23 @@ def _old_strip_vol_disp(t):
     t2 = VOLSTRIP.sub("", str(t or "").strip())
     return t2 if t2 else str(t or "").strip()
 
+# ★2026-07-09 整形は _preorder_draft_lib に一本化(gen-previewと同じ規律=捏造回避)
+from _preorder_draft_lib import clean_title as _clean_title, clean_kana as _clean_kana, make_slug as _make_slug, scope_out as _scope_out
 for r in cls["ex_mid"]:
-    title = strip_vol_disp(r.get("title"))
-    kana = strip_vol_disp(r.get("titleKana"))
+    if _scope_out(r.get("title")):
+        holds.append((r.get("isbn"), r.get("title"), "scope外(非漫画)")); continue
+    _bt, _sub, _prov = _clean_title(r.get("title"))
+    if _prov:
+        holds.append((r.get("isbn"), r.get("title"), "(仮)題未確定")); continue
+    title = _bt
+    kana = _clean_kana(r.get("titleKana"), _sub)                 # 楽天ヨミのみ・捏造(漢字/汚染)はNone=hold
     ym = r.get("ym")
     auths = author_names(r.get("author"))
     akanas = author_names(r.get("authorKana"))
-    if not (title and kana and ym and auths):
+    if kana is None:
+        holds.append((r.get("isbn"), title, "楽天ヨミ無し/汚染=捏造回避hold")); continue
+    if not (title and ym and auths):
         holds.append((r.get("isbn"), title, "必須欠け")); continue
-    if __import__("re").search(r"[一-鿿]", str(kana)):  # 捏造kanaゲート(2026-07-09): 漢字含む=楽天kana無し→題流用の捏造。ヨミ捏造禁止でhold
-        holds.append((r.get("isbn"), title, "kana漢字含む(楽天ヨミ無=捏造回避)")); continue
     base = r.get("_base") or split_vol(r.get("title"))[0]
     vols_map = dict(by_base.get(base) or {})
     vols_map[r["_vol"]] = r["isbn"]  # 予約巻自身
@@ -100,10 +107,10 @@ for r in cls["ex_mid"]:
     ns = sorted(vols_map)
     if not ns or ns[0] != 1 or len(ns) < 0.8 * ns[-1] or len(ns) < 2:
         holds.append((r.get("isbn"), title, f"全巻回収不成立 vols={ns[:6]}{'..' if len(ns)>6 else ''}")); continue
-    romaji = kana2romaji(kana)
-    if not romaji or len(romaji) < 2:
+    slug = _make_slug(base, r.get("titleKana"))
+    if not slug:
         holds.append((r.get("isbn"), title, "slug生成不可")); continue
-    slug = romaji[:70]
+    romaji = slug.replace("-", " ")
     if slug in existing:
         slug = f"{slug}-{ym[:4]}"
         if slug in existing:
