@@ -21,6 +21,17 @@ def norm(t):
     return re.sub(r"[\s　・!！?？:：〜~\-＆&。、．.『』「」]", "", t).lower()
 
 
+def norm_strip(t):
+    """★設計台帳(型1 new_volume)準拠: 特装版/【】/〜サブタイトル〜/版名を剥がして正規化。
+    ①zokkanの題完全一致が表記揺れ(特装版・編・サブ)で外れ④に漏れる問題の対処(2026-07-08)。"""
+    t = unicodedata.normalize("NFKC", str(t or ""))
+    t = re.sub(r"【[^】]*】", "", t)
+    t = re.sub(r"[〜~][^〜~]*[〜~]", "", t)          # 〜サブタイトル〜
+    t = re.sub(r"(特装版|限定版|愛蔵版|新装版|完全版|豪華版|特別版|通常版)", "", t)
+    t = re.sub(r"[　\s]*[-ー]\s*[^-ー（(]{1,12}編\s*$", "", t)  # 末尾「-〇〇編」
+    return re.sub(r"[\s　・!！?？:：〜~\-＆&。、．.『』「」]", "", t).lower()
+
+
 # ★scope外ゲート(2026-07-06 ユーザ指摘=特装版/アンソロ/N巻誤1巻化): これらは新作1巻(new1a/b)にしない
 import re as _re
 SCOPE_BAN = _re.compile(r"特装版|限定版|初回限定|豪華版|特別版|特典付|小冊子付|ドラマCD|CD付き?|DVD付|Blu-?ray|OAD|アンソロジ|総集編|選集|傑作|名作選|セレクション|新装版|愛蔵版|完全版|画集|イラスト集|ファンブック|設定資料|ガイドブック|公式ガイド|コミックガイド|データブック|ビジュアルブック|原画|ぬりえ|ムック|フィギュア付|BOXセット|ボックス|スターターセット|スペシャルプライス|第?\s*[2-9２-９][0-9０-９]*\s*巻|第[二三四五六七八九十]+[集部]|(?:II|Ⅱ|III|Ⅲ|IV|Ⅳ|V|Ⅴ|VI|Ⅵ|VII|Ⅶ)\s*$|シーズン\s*[2-9]|[2-9]nd\s|3rd\s|第\d+号|別冊|【楽天ブックス限定特典】", _re.I)
@@ -48,9 +59,11 @@ idx = json.load(open(f"{ROOT}/data/manga-list-index.json", encoding="utf-8"))
 f = idx["f"]
 si, ti, ai = f.index("slug"), f.index("title"), f.index("authors")
 page_by_title = {}
+page_by_stripped = {}   # ★設計台帳準拠の②次索引(特装版/サブ剥がし)
 known_authors = set()
 for r in idx["d"]:
     page_by_title.setdefault(norm(r[ti]), []).append(r)
+    page_by_stripped.setdefault(norm_strip(r[ti]), []).append(r)
     for a in (r[ai] or []):
         known_authors.add(norm(a.get("name")))
 
@@ -75,6 +88,16 @@ for r in rows:
     if match:
         r["_slug"] = match[si]
         out["zokkan"].append(r); continue
+    # ★設計台帳(型1 new_volume)②次マッチ: 特装版/【】/サブ剥がした正規化題+著者集合overlap。
+    #   ①の完全一致が表記揺れで外れ④に漏れる問題の恒久対処(2026-07-08 ユーザ指摘)。著者一致必須で同題別作を弾く。
+    if r_auth:
+        sb = norm_strip(_split_title(r["title"])["base"])
+        for c in page_by_stripped.get(sb, []):
+            if r_auth & {norm(a.get("name")) for a in (c[ai] or [])}:
+                match = c; break
+        if match:
+            r["_slug"] = match[si]
+            out["zokkan"].append(r); continue
     if vol is not None and vol >= 2:
         out["ex_mid"].append(r); continue
     # ★裸数字N>=2末尾=続巻(2026-07-06 VOLSTRIP事故クラス): 題の一部数字(レベル99/U149=直前が英数字)は除く
