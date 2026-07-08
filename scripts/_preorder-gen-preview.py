@@ -156,24 +156,35 @@ def _old_strip_vol_disp(t):
     t2 = VOLSTRIP.sub("", str(t or "").strip())
     return t2 if t2 else str(t or "").strip()
 
+# ★2026-07-09 全面作り直し: 整形は _preorder_draft_lib に一本化(副題分離/kana=楽天のみ捏造hold/pykakasi slug/@COMIC/英語保持)
+from _preorder_draft_lib import clean_title as _clean_title, clean_kana as _clean_kana, make_slug as _make_slug, scope_out as _scope_out
 for klass, r in targets:
-    title = strip_vol_disp(r.get("title"))
-    kana = strip_vol_disp(r.get("titleKana"))
+    raw_title = r.get("title")
     ym = r.get("ym")
     isbn = r.get("isbn")
     auths = author_names(r.get("author"))
     akanas = author_names(r.get("authorKana"))
-    if not (title and kana and ym and isbn and len(isbn) == 13 and auths):
-        holds.append((klass, isbn, title, "必須欠け(kana/author/ym)")); continue
-    romaji = kana2romaji(kana)
-    if not romaji or len(romaji) < 2:
-        holds.append((klass, isbn, title, f"slug生成不可 kana={kana[:16]}")); continue
-    slug = (inherit_parent_slug(kana, auths) or romaji)[:70]
-    if slug in existing:
+    if _scope_out(raw_title):                                     # カレンダー/画集/グッズ=掲載外
+        holds.append((klass, isbn, raw_title, "scope外(非漫画)")); continue
+    base, subtitle, prov = _clean_title(raw_title)
+    if prov:                                                      # (仮)=題未確定
+        holds.append((klass, isbn, raw_title, "(仮)題未確定")); continue
+    title = base
+    kana = _clean_kana(r.get("titleKana"), subtitle)              # 楽天ヨミのみ・捏造(漢字/汚染)はNone=hold
+    if kana is None:
+        holds.append((klass, isbn, base, "楽天ヨミ無し/汚染=捏造回避hold(NDL照合キューへ)")); continue
+    if not (title and ym and isbn and len(isbn) == 13 and auths):
+        holds.append((klass, isbn, title, "必須欠け(author/ym)")); continue
+    slug = _make_slug(base, r.get("titleKana"), existing)
+    if not slug:                                                  # 空slug/衝突=hold(2026化禁止)
+        slug = _make_slug(base, r.get("titleKana"))
+        if not slug:
+            holds.append((klass, isbn, title, "slug生成不可")); continue
         slug = f"{slug}-{ym[:4]}"
         if slug in existing:
             holds.append((klass, isbn, title, f"slug衝突 {slug}")); continue
     existing.add(slug)
+    romaji = slug.replace("-", " ")
     rd = ym + (f"-{r['day']:02d}" if r.get("day") else "")
     authors = []
     for i2, name in enumerate(auths):
@@ -181,8 +192,6 @@ for klass, r in targets:
         if i2 < len(akanas) and akanas[i2]:
             a["kana"] = akanas[i2]
         authors.append(a)
-    if __import__("re").search(r"[一-鿿]", str(kana)):  # 捏造kanaゲート(2026-07-09)
-        print(f"  hold(kana漢字=捏造回避): {title[:20]}"); continue
     doc = {
         "slug": slug,
         "title": title,
