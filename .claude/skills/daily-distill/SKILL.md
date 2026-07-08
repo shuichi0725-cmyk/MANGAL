@@ -9,19 +9,37 @@ description: 日次蒸留 — 2本立て: A=楽天予約ハーベスト(未来�
 B=NDL新着回収(納本済み過去分)。毎日でなくてよい(間隔が空いても窓が自動で広がり取りこぼさない)。
 理想運用: 日次蒸留して→(previewで)確認→週次蒸留して=週1本番更新。
 
-## NEVER(禁止)
+## NEVER(禁止) ★2026-07-09 ハードニング: 下記4つは今日全部踏んだ実害。飛ばすな
 
+- ★**フルharvest処理禁止=必ず増加分だけ**: `preorders-latest.jsonl` を丸ごとclassifyするな。**必ず `preorders-prev.jsonl` との差分(新ISBN=fresh)に絞ってから**classify/生成する(下A0)。フル処理=昨日以前のbacklogを全部「新規」に水増しする(実害2934件)。
+- ★**過去ドラフト再カウント禁止**: 増加分(ISBN fresh)でも、**前回previewドラフト化したが未promoteの作品**が後続巻の新ISBNで再登場する。`.cache/preorders/drafts*`(過去draft)の**題(base正規化)と突合して除外**してから生成(下A0)。[[daily_distill_classifier_gate]]。
+- ★**ヨミ捏造禁止(厳守)**: title_kana=**楽天titleKanaのみ**。楽天に無ければ**題流用/生成読み/巻番号混入で捏造するな→hold**(NDL照合キュー行き)。**title_kanaに漢字が1字でも入る=捏造=即hold**(gen-midfillはゲート済、生成物は必ず漢字混入チェック)。
 - **429/throttle即中断**(NDL・楽天とも1.1〜1.3s/req厳守。リトライ連打禁止)。
 - **捏造禁止**: ヨミ/著者/genreを推測で埋めない。ヨミ=楽天仮確定+NDL照合キュー(下記)が正規ルート。
 - **単巻先行登録禁止**: 途中巻でページ無し(④)は全巻回収が成立した作品だけドラフト化。
-- **②③④は必ずpreview先行**(B裁定)。ユーザ確認GOなしに本番化しない。
+- **②③④は必ずpreview先行**(B裁定)。ユーザ確認GOなしに本番化しない。**previewは"今回のみ"**(増加分−過去draft−捏造kana)に絞る。ユーザは「前回見た」に敏感で正確=水増しを即見抜く。
 - genre=closed vocabulary(master32)のみ+provisional。catch/synopsis=skill enrich-catch-synopsis の規律。
+- ★**改善は即興でなくskill/scriptに焼く**: 実行中に穴を見つけたら手動で継ぎ足すな。scriptにゲート追加→commitしてから進む(即興は次回消える+報告が水増しでブレる)。
+
+## A0. ★増加分ゲート (= 2026-07-09 必須。ここを飛ばすと全部水増しになる)
+
+harvest後・classify前に**必ず**増加分に絞る。`_preorder-increment.py`(下記機能を1本化):
+```
+python scripts/_preorder-increment.py   # ①latest-prev差分(新ISBN) ②過去draft題を除外 → classified.json は増加分のみ
+```
+機能(script化して飛ばせなくする):
+1. **fresh = preorders-latest − preorders-prev**(ISBN差分)。prev無しなら「初回=全部fresh」と明示ログ。
+2. **過去draft除外**: `.cache/preorders/drafts*` + `data/seeds/preorder-pages/` の題(base正規化)集合と突合し、**既ドラフト作は増加分から落とす**。
+3. 出力: `classified.json`(or 前段のfresh jsonl)を増加分のみに絞る + 件数ログ「fresh N / 過去draft除外 M / 実処理 K」。
+※このscriptが無ければ手動で同等を実施し、**その場でscript化してcommit**(NEVER最終項)。
 
 ## A. 楽天予約パイプライン (= 主柱)
 
 ```
 1. python scripts/_rakuten-preorder-harvest.py        # 6サブジャンル×発売日降順→未来〜当月全量(数分)
+1b. python scripts/_preorder-increment.py             # ★A0=増加分に絞る(prev差分+過去draft除外)。飛ばすな
 2. python scripts/_preorder-classify.py               # ①続巻/②新作作者既知/③新作作者新規/④途中巻頁無し/skip
+   → ★生成後、title_kanaに漢字含むドラフト=捏造→hold(NEVER)。全巻回収の先行巻ヨミも楽天由来のみ。
 3. python scripts/_preorder-apply-zokkan.py           # ①→種4自動追加(ゲート:slug実在/巻番号/series_key逆引き)
    → promote --only <touched> → reflect --only <touched> --push   (①は確認不要で即出せる)
 4. python scripts/_preorder-gen-preview.py new1a      # ②ドラフト生成(→.preview-data)

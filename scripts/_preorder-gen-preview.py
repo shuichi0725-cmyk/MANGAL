@@ -181,6 +181,8 @@ for klass, r in targets:
         if i2 < len(akanas) and akanas[i2]:
             a["kana"] = akanas[i2]
         authors.append(a)
+    if __import__("re").search(r"[一-鿿]", str(kana)):  # 捏造kanaゲート(2026-07-09)
+        print(f"  hold(kana漢字=捏造回避): {title[:20]}"); continue
     doc = {
         "slug": slug,
         "title": title,
