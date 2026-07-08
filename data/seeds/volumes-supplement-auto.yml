@@ -18,3 +18,79 @@ volumes:
   added_at: '2026-07-08'
   title_display: 1×2 交際はラブコメに入りますか?
   note: MADB未収録巻をNDL照会で発見(巻抜け仮想fix)
+- series_keys: &id001
+  - qid:Q3509589|name:史上最強の弟子ケンイチ
+  qid: null
+  number: 2
+  isbn13: '9784098547487'
+  release_date: '2026-08-18'
+  pages: null
+  publisher: 小学館
+  edition_type: standard
+  title_display: 史上最強の弟子ケンイチ2　〜達人編〜（1）
+  source: rakuten-preorder
+  added_at: '2026-07-09'
+  note: 楽天予約ハーベスト① slug=shijou-saikyou-no-deshi-kenichi
+- series_keys: *id001
+  qid: null
+  number: 2
+  isbn13: '9784098547517'
+  release_date: '2026-08-18'
+  pages: null
+  publisher: 小学館
+  edition_type: standard
+  title_display: 史上最強の弟子ケンイチ　愛蔵版（2）
+  source: rakuten-preorder
+  added_at: '2026-07-09'
+  note: 楽天予約ハーベスト① slug=shijou-saikyou-no-deshi-kenichi
+- series_keys: *id001
+  qid: null
+  number: 1
+  isbn13: '9784098547388'
+  release_date: '2026-08-18'
+  pages: null
+  publisher: 小学館
+  edition_type: standard
+  title_display: 史上最強の弟子ケンイチ　愛蔵版（1）
+  source: rakuten-preorder
+  added_at: '2026-07-09'
+  note: 楽天予約ハーベスト① slug=shijou-saikyou-no-deshi-kenichi
+- series_keys:
+  - qid:Q448707|name:天は赤い河のほとり
+  qid: null
+  number: 3
+  isbn13: '9784098735518'
+  release_date: '2026-08-26'
+  pages: null
+  publisher: 小学館
+  edition_type: standard
+  title_display: 愛蔵版 天は赤い河のほとり（3）
+  source: rakuten-preorder
+  added_at: '2026-07-09'
+  note: 楽天予約ハーベスト① slug=sora-wa-akai-kawa-no-hotori
+- series_keys:
+  - qid:Q2661273|name:ゴルゴ13
+  qid: null
+  number: 222
+  isbn13: '9784845872206'
+  release_date: '2026-09-04'
+  pages: null
+  publisher: リイド社
+  edition_type: standard
+  title_display: ゴルゴ13（222巻）
+  source: rakuten-preorder
+  added_at: '2026-07-09'
+  note: 楽天予約ハーベスト① slug=golgo-13
+- series_keys:
+  - name:市川けい|name:ブルースカイコンプレックス
+  qid: null
+  number: 11
+  isbn13: '9784864425643'
+  release_date: '2026-08-07'
+  pages: null
+  publisher: 東京漫画社
+  edition_type: standard
+  title_display: ブルースカイコンプレックス　11
+  source: rakuten-preorder
+  added_at: '2026-07-09'
+  note: 楽天予約ハーベスト① slug=blue-sky-complex
