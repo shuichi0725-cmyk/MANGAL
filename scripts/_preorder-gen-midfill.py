@@ -90,6 +90,8 @@ for r in cls["ex_mid"]:
     akanas = author_names(r.get("authorKana"))
     if not (title and kana and ym and auths):
         holds.append((r.get("isbn"), title, "必須欠け")); continue
+    if __import__("re").search(r"[一-鿿]", str(kana)):  # 捏造kanaゲート(2026-07-09): 漢字含む=楽天kana無し→題流用の捏造。ヨミ捏造禁止でhold
+        holds.append((r.get("isbn"), title, "kana漢字含む(楽天ヨミ無=捏造回避)")); continue
     base = r.get("_base") or split_vol(r.get("title"))[0]
     vols_map = dict(by_base.get(base) or {})
     vols_map[r["_vol"]] = r["isbn"]  # 予約巻自身
