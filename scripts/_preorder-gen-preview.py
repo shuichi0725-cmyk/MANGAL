@@ -132,6 +132,21 @@ def _pubkey(name):
 def author_names(s):
     return [x.strip() for x in re.split(r"[/,、;；]", str(s or "")) if x.strip()]
 
+# ★書影の実URL源(構築禁止 2026-07-09): covers seed → 楽天API
+import gzip as _gzip
+from _preorder_draft_lib import real_cover as _real_cover
+try:
+    from _lookup import rakuten_live as _rk_live, _env as _rk_env
+    _RKENV = _rk_env()
+except Exception:
+    _rk_live = _RKENV = None
+_COVERS = {}
+try:
+    for _l in _gzip.open(os.path.join(ROOT, "data", "seeds", "covers.jsonl.gz"), "rt", encoding="utf-8"):
+        _r = json.loads(_l); _COVERS[_r.get("isbn13") or _r.get("isbn")] = _r.get("url") or _r.get("cover")
+except Exception:
+    pass
+
 cls = json.load(open(f"{ROOT}/.cache/preorders/classified.json", encoding="utf-8"))
 targets = []
 if WHICH in ("new1a", "both"):
@@ -208,7 +223,7 @@ for klass, r in targets:
         "editions": [{
             "type": "standard", "label": "通常版", "publisher": (_pubkey(r.get("publisher")) or r.get("publisher")), "imprint": r.get("seriesName") or "",
             "volumes": [{"number": r.get("_vol") or 1, "asin": None, "isbn13": isbn,
-                         "cover_url": r.get("cover") or f"https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/{isbn[-4:-1]}/{isbn}.jpg?_ex=200x200",  # ★harvest空→CDN(書影付与忘れ防止 2026-07-09)
+                         "cover_url": (r.get("cover") if "noimage" not in str(r.get("cover") or "") else None) or _real_cover(isbn, _COVERS, _rk_live, _RKENV),  # ★harvest空→covers seed/楽天API実URL(構築禁止 2026-07-09)
                          "release_date": rd}],
         }],
         "_preorder_draft": {"class": klass, "added_at": TODAY, "source": "rakuten-preorder",

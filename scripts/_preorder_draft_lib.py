@@ -138,6 +138,27 @@ def _romaji_word(w):
     return ""
 
 
+def real_cover(isbn, covers_dict=None, live_fn=None, env=None):
+    """★書影は構築禁止(2026-07-09): cabinetパス/サフィックス(_1_2)/拡張子(.jpg/.gif)はISBNから推測不可。
+    実URLを covers seed → 楽天API(largeImageUrl) の順で取得。無ければNone(cover harvest/enrichで後補完)。"""
+    if not isbn:
+        return None
+    if covers_dict:
+        u = covers_dict.get(isbn)
+        if u and "noimage" not in u:
+            return u
+    if live_fn and env:
+        try:
+            items = live_fn(env, isbn=isbn) or []
+            if items:
+                img = str(items[0].get("largeImageUrl") or items[0].get("mediumImageUrl") or "")
+                if img and "noimage" not in img:
+                    return img
+        except Exception:
+            pass
+    return None
+
+
 def make_slug(base, kana_raw, existing=None):
     """slug生成。分かち書き=楽天titleKanaのスペース優先、無ければpykakasiが題を分割。
     英語綴り保持・末尾巻番号除去・助詞を→o。空/短すぎ=None(hold)。"""

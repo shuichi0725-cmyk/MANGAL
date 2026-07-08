@@ -34,8 +34,21 @@ def split_vol(title):
     return norm(t), None
 
 tm = json.load(open(f"{ROOT}/.cache/isbn-title-map.json", encoding="utf-8"))
-import sqlite3
+import sqlite3, gzip
 _DBV2 = sqlite3.connect(f"{ROOT}/.cache/db-v2.sqlite")   # ★回収先行巻の発売日引き当て(種2)
+# ★書影の実URL源(構築禁止): covers seed → 楽天API
+from _preorder_draft_lib import real_cover as _real_cover
+try:
+    from _lookup import rakuten_live as _rk_live, _env as _rk_env
+    _RKENV = _rk_env()
+except Exception:
+    _rk_live = _RKENV = None
+_COVERS = {}
+try:
+    for _l in gzip.open(f"{ROOT}/data/seeds/covers.jsonl.gz", "rt", encoding="utf-8"):
+        _r = json.loads(_l); _COVERS[_r.get("isbn13") or _r.get("isbn")] = _r.get("url") or _r.get("cover")
+except Exception:
+    pass
 iidx = json.load(open(f"{ROOT}/.cache/isbn-page-index.json", encoding="utf-8"))
 # 題base→ [(vol, isbn)] の逆引き(キャッシュ全巻回収)
 by_base = {}
@@ -126,8 +139,10 @@ for r in cls["ex_mid"]:
         else:                                     # ★回収先行巻=種2から発売日を引く(捨てない・2026-07-09修正)
             _row = _DBV2.execute("SELECT release_date FROM volumes WHERE isbn13=? AND release_date IS NOT NULL", (ib,)).fetchone()
             rd = _row[0] if _row and _row[0] else None
-        # 書影=予約巻はharvest、無ければ/回収巻はRakuten CDN(isbn[-4:-1])
-        cov = (r.get("cover") if ib == r["isbn"] else None) or f"https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/{ib[-4:-1]}/{ib}.jpg?_ex=200x200"
+        # 書影=予約巻はharvest実URL、回収巻/harvest空は covers seed→楽天API 実URL(★構築禁止=推測不可)
+        cov = (r.get("cover") if ib == r["isbn"] and "noimage" not in str(r.get("cover") or "") else None)
+        if not cov:
+            cov = _real_cover(ib, _COVERS, _rk_live, _RKENV)
         volumes.append({"number": v, "asin": None, "isbn13": ib, "cover_url": cov, "release_date": rd})
     authors = []
     for i2, name in enumerate(auths):
