@@ -122,7 +122,7 @@ for r in cls["ex_mid"]:
     doc = {"slug": slug, "title": title,
            "title_kana": kana.replace(" ", "").replace("　", ""),
            "title_romaji": romaji.replace("-", " "),
-           "authors": authors, "publisher": None, "publishers": [], "year_ended": None, "year_started": int(ym[:4]), "status": "ongoing",
+           "authors": authors, "publisher": (_pk if (_pk:=_pubkey(r.get("publisher"))) in _pubs else None), "publishers": ([_pk] if _pk in _pubs else []), "year_ended": None, "year_started": int(ym[:4]), "status": "ongoing",
            "demographic": DEMO.get(r.get("subgenre")) or "other",  # schema必須(null不可) "genres": [],
            "editions": [{"type": "standard", "label": "通常版", "publisher": (_pubkey(r.get("publisher")) or r.get("publisher")),
                           "imprint": r.get("seriesName") or "", "volumes": volumes}],
