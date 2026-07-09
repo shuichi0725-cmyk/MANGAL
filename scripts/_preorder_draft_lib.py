@@ -159,39 +159,29 @@ def real_cover(isbn, covers_dict=None, live_fn=None, env=None):
     return None
 
 
-def make_slug(base, kana_raw, existing=None):
-    """slug生成。分かち書き=楽天titleKanaのスペース優先、無ければpykakasiが題を分割。
-    英語綴り保持・末尾巻番号除去・助詞を→o。空/短すぎ=None(hold)。"""
-    kana_raw = unicodedata.normalize("NFKC", str(kana_raw or ""))
-    kana_raw = _ATCOMIC.sub("", kana_raw)
-    m = _SUB.search(kana_raw)
-    if m:
-        kana_raw = kana_raw[:m.start()]
-    kana_raw = _VOL_TAIL.sub("", kana_raw).strip()
-    # ★slugは clean base題(副題除去済)からpykakasiで生成=副題混入を防ぐ。
-    #   pykakasiが漢字/かな/英字を語分割+ローマ字化(英字はそのまま=STRAY保持)。
-    parts = []
-    if _KKS:
-        for p in _KKS.convert(base):
-            orig = p["orig"]
-            h = p["hepburn"].strip()
-            if re.fullmatch(r"[A-Za-z0-9]+", orig.strip()):
-                parts.append(orig.strip().lower())
-            elif h:
-                parts.append(h)
-    else:
-        for w in re.split(r"[\s　]+", _hira2kata(kana_raw)):
-            if w.strip():
-                parts.append(_romaji_word(w))
-    slug = "-".join(x for x in parts if x)
-    slug = slug.lower()
-    slug = re.sub(r"[^a-z0-9]+", "-", slug).strip("-")
+def make_slug(base, kana_raw=None, existing=None):
+    """slug生成。★正規装置 _slug_kana_lib(janome分かち+katakana-english.yml貪欲辞書変換+ヘボン)に委譲
+    (2026-07-09 ユーザ指摘=英語綴り辞書を使え)。clean base題(副題/巻/@COMIC除去済)を渡す。
+    英語綴り(summer-blend/duel-masters/beauty-pop)・助詞は→wa/を→o・長音保持。空/短すぎ/衝突=None(hold)。"""
+    try:
+        from _slug_kana_lib import make_slug as _slug_impl
+        slug = _slug_impl(base)
+    except Exception:
+        # fallback: pykakasi(辞書無し)。装置が使えない時のみ
+        slug = ""
+        if _KKS:
+            parts = []
+            for p in _KKS.convert(base):
+                orig = p["orig"].strip()
+                h = p["hepburn"].strip()
+                parts.append(orig.lower() if re.fullmatch(r"[A-Za-z0-9]+", orig) else h)
+            slug = re.sub(r"-+", "-", "-".join(x for x in parts if x).lower()).strip("-")
+    slug = re.sub(r"[^a-z0-9-]+", "-", str(slug).lower()).strip("-")
     slug = re.sub(r"-+", "-", slug)
-    slug = re.sub(r"-?\d{1,3}$", "", slug).strip("-")  # 末尾巻番号(stray5→stray / love-3→love)
+    slug = re.sub(r"(?<=[a-z])-?\d{1,3}$", "", slug).strip("-")  # 末尾巻番号(stray5→stray)。rx等英字suffixは保持
     if len(slug) < 2:
         return None                             # ゴミslug(2026化)禁止=hold
     slug = slug[:70]
-    if existing is not None:
-        if slug in existing:
-            return None                         # 衝突=hold(-2026で誤魔化さない)
+    if existing is not None and slug in existing:
+        return None                             # 衝突=hold(-2026で誤魔化さない)
     return slug

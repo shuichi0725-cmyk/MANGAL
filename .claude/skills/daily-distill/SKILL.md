@@ -65,7 +65,7 @@ python scripts/_preorder-increment.py   # ①latest-prev差分(新ISBN) ②過�
 2. **上下巻**: ペア=1頁統合(上=v1,下=v2・題から上下除去) / 下巻単独=保留(上巻の全巻回収要)
 3. **scope外**: 特装/限定版・アンソロ・傑作選/再編・コンビニ本(★題でなくimprint判定=集英社リミックス/プラチナコミックス/Gコミックス)・画集/ガイド/BOX・雑誌/別冊・アメコミ翻訳・(仮)
 4. **Zodスキーマ検証**: `loadAllManga`でskip 0確認(year_ended/authors.role/demographic enum=shounen/shoujo…。索引はPython製で検証なし=「検索に載るが404」の既知クラス)
-5. **slug品質**: janome分かち+ヘボン(は=wa/長音前母音重ね)・カタカナ明白英単語のみ英語綴り・rename時は**made lists+rakuten-kana-pending+staging三点同期**
+5. **slug品質**: ★**正規装置 `_slug_kana_lib.make_slug` を使う**(2026-07-09 ユーザ指摘=pykakasi再発明禁止)。janome分かち+**`data/seeds/katakana-english.yml` 貪欲辞書変換**(サマーブレンド→summer-blend/デュエルマスターズ→duel-masters/ビューティーポップ→beauty-pop)+ヘボン(は=wa/長音保持)。**英語綴りが出ない語は辞書に追加して強化**(カタカナ→英単語)。`_preorder_draft_lib.make_slug`は装置に委譲済。rename時は**made lists+rakuten-kana-pending+staging三点同期**
 6. 作者の法人クレジット(Magica Quartet/バンダイナムコ型)は既存DB慣行どおり正当=触らない
 7. ★**全巻に発売日+書影が付いているか検査**(2026-07-09 ユーザ指摘): 特に④midfillの**回収先行巻**は要注意=
    ・発売日: 予約巻はharvest、**回収巻は種2(db-v2 volumes.release_date)から引く**(捨てるな)。種2未収載のみ空(NDL/enrichで後補完)。
