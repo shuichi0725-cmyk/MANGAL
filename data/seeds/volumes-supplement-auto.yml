@@ -1782,3 +1782,92 @@ volumes:
   source: rakuten-preorder
   added_at: '2026-07-10'
   note: 楽天予約ハーベスト① slug=moto-yan-ooeru-narita-narumi-wa-service-zangyou-joutou-rashii
+- series_keys:
+  - qid:Q5517698|name:アオバ自転車店といこうよ!
+  qid: null
+  number: 13
+  isbn13: '9784785977832'
+  release_date: 2024-10
+  pages: null
+  publisher: null
+  edition_type: standard
+  title_display: アオバ自転車店といこうよ 13
+  source: ndl
+  added_at: '2026-07-10'
+  note: 巻抜け補完(ユーザ指摘・NDL by-title確証) slug=aoba-jitenshaten-to-ikouyo
+- series_keys:
+  - qid:Q11574300|name:せふれ
+  qid: null
+  number: 11
+  isbn13: '9784785981907'
+  release_date: 2026-05
+  pages: null
+  publisher: null
+  edition_type: standard
+  title_display: せふれ 11
+  source: ndl
+  added_at: '2026-07-10'
+  note: 巻抜け補完(ユーザ指摘・NDL by-title確証) slug=sefure
+- series_keys: &id026
+  - qid:Q108109356|name:ドンケツ第2章
+  qid: null
+  number: 13
+  isbn13: '9784785978136'
+  release_date: 2024-12
+  pages: null
+  publisher: null
+  edition_type: standard
+  title_display: ドンケツ第2章 13
+  source: ndl
+  added_at: '2026-07-10'
+  note: 巻抜け補完(ユーザ指摘・NDL by-title確証) slug=donketsu-dainishou
+- series_keys: *id026
+  qid: null
+  number: 16
+  isbn13: '9784785980962'
+  release_date: 2026-01
+  pages: null
+  publisher: null
+  edition_type: standard
+  title_display: ドンケツ第2章 16
+  source: ndl
+  added_at: '2026-07-10'
+  note: 巻抜け補完(ユーザ指摘・NDL by-title確証) slug=donketsu-dainishou
+- series_keys: &id027
+  - name:狛犬はやと|name:ベアフェイス
+  qid: null
+  number: 2
+  isbn13: '9784785978051'
+  release_date: 2024-11
+  pages: null
+  publisher: null
+  edition_type: standard
+  title_display: ベアフェイス 2
+  source: ndl
+  added_at: '2026-07-10'
+  note: 巻抜け補完(ユーザ指摘・NDL by-title確証) slug=bear-face
+- series_keys: *id027
+  qid: null
+  number: 7
+  isbn13: '9784785982027'
+  release_date: 2026-06
+  pages: null
+  publisher: null
+  edition_type: standard
+  title_display: ベアフェイス 7
+  source: ndl
+  added_at: '2026-07-10'
+  note: 巻抜け補完(ユーザ指摘・NDL by-title確証) slug=bear-face
+- series_keys:
+  - name:トモゼロ|name:国に最強のバリアを張ったら平和になりすぎて追放されました。|sub:俺の魔法がヤバすぎて、美女と魔族に囲まれてるんだが!?
+  qid: null
+  number: 3
+  isbn13: '9784803021219'
+  release_date: 2025-05
+  pages: null
+  publisher: null
+  edition_type: standard
+  title_display: 国に最強のバリアを張ったら平和になりすぎて追放されました 3
+  source: ndl
+  added_at: '2026-07-10'
+  note: 巻抜け補完(ユーザ指摘・NDL by-title確証) slug=kuni-ni-saikyou-no-baria-o-hattara-heiwa-ni-narisugite-tsuihousareta-saremashita
