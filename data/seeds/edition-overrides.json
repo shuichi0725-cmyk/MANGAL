@@ -24238,6 +24238,316 @@
  "ashita-no-joe": {
   "year_started": 1968,
   "year_ended": 1973,
-  "note": "原作連載1968-1973(週刊少年マガジン・ちばてつや/梶原一騎・全20巻)。MANGAL保有は1972以降の再版のみ→year単独overrideで連載期間是正(Wikipedia確認 2026-07-09)"
+  "editions": [
+   {
+    "type": "standard",
+    "label": "通常版",
+    "publisher": "講談社",
+    "volumes": [
+     {
+      "number": 1,
+      "isbn13": "9784061090804",
+      "release_date": "1970-03-07"
+     },
+     {
+      "number": 2,
+      "isbn13": "9784061090811",
+      "release_date": "1970-03-07"
+     },
+     {
+      "number": 3,
+      "isbn13": "9784061090866",
+      "release_date": "1970-05-04"
+     },
+     {
+      "number": 4,
+      "isbn13": "9784061090873",
+      "release_date": "1970-05-04"
+     },
+     {
+      "number": 5,
+      "isbn13": "9784061090910",
+      "release_date": "1970-07-06"
+     },
+     {
+      "number": 6,
+      "isbn13": "9784061090996",
+      "release_date": "1970-10-07"
+     },
+     {
+      "number": 7,
+      "isbn13": "9784061091108",
+      "release_date": "1971-01-18"
+     },
+     {
+      "number": 8,
+      "isbn13": "9784061091160",
+      "release_date": "1971-03-08"
+     },
+     {
+      "number": 9,
+      "isbn13": "9784061091221",
+      "release_date": "1971-05-06"
+     },
+     {
+      "number": 10,
+      "isbn13": "9784061091252",
+      "release_date": "1971-07-06"
+     },
+     {
+      "number": 11,
+      "isbn13": "9784061091306",
+      "release_date": "1971-10-07"
+     },
+     {
+      "number": 12,
+      "isbn13": "9784061091351",
+      "release_date": "1971-12-08"
+     },
+     {
+      "number": 13,
+      "isbn13": "9784061091429",
+      "release_date": "1972-02-04"
+     },
+     {
+      "number": 14,
+      "isbn13": "9784061091504",
+      "release_date": "1972-06-06"
+     },
+     {
+      "number": 15,
+      "isbn13": "9784061091542",
+      "release_date": "1972-08-08"
+     },
+     {
+      "number": 16,
+      "isbn13": "9784061091641",
+      "release_date": "1972-10-09"
+     },
+     {
+      "number": 17,
+      "isbn13": "9784061091726",
+      "release_date": "1972-12-08"
+     },
+     {
+      "number": 18,
+      "isbn13": "9784061091849",
+      "release_date": "1973-02-08"
+     },
+     {
+      "number": 19,
+      "isbn13": "9784061091917",
+      "release_date": "1973-05-07"
+     },
+     {
+      "number": 20,
+      "isbn13": "9784061091962",
+      "release_date": "1973-06-15"
+     }
+    ]
+   },
+   {
+    "type": "kanzenban",
+    "label": "完全復刻版",
+    "publisher": "講談社",
+    "volumes": [
+     {
+      "number": 1,
+      "isbn13": "9784063193558",
+      "release_date": "1993-02-19"
+     },
+     {
+      "number": 2,
+      "isbn13": "9784063193565",
+      "release_date": "1993-02-19"
+     },
+     {
+      "number": 3,
+      "isbn13": "9784063193572",
+      "release_date": "1993-03-18"
+     },
+     {
+      "number": 4,
+      "isbn13": "9784063193589",
+      "release_date": "1993-03-18"
+     },
+     {
+      "number": 5,
+      "isbn13": "9784063193596",
+      "release_date": "1993-04-20"
+     },
+     {
+      "number": 6,
+      "isbn13": "9784063193602",
+      "release_date": "1993-04-20"
+     },
+     {
+      "number": 7,
+      "isbn13": "9784063193619",
+      "release_date": "1993-05-18"
+     },
+     {
+      "number": 8,
+      "isbn13": "9784063193626",
+      "release_date": "1993-05-18"
+     },
+     {
+      "number": 9,
+      "isbn13": "9784063193633",
+      "release_date": "1993-06-18"
+     },
+     {
+      "number": 10,
+      "isbn13": "9784063193640",
+      "release_date": "1993-06-18"
+     },
+     {
+      "number": 11,
+      "isbn13": "9784063193657",
+      "release_date": "1993-07-20"
+     },
+     {
+      "number": 12,
+      "isbn13": "9784063193664",
+      "release_date": "1993-07-20"
+     },
+     {
+      "number": 13,
+      "isbn13": "9784063193671",
+      "release_date": "1993-08-19"
+     },
+     {
+      "number": 14,
+      "isbn13": "9784063193688",
+      "release_date": "1993-08-19"
+     },
+     {
+      "number": 15,
+      "isbn13": "9784063193695",
+      "release_date": "1993-09-17"
+     },
+     {
+      "number": 16,
+      "isbn13": "9784063193701",
+      "release_date": "1993-09-17"
+     }
+    ]
+   },
+   {
+    "type": "bunkobon",
+    "label": "文庫版",
+    "publisher": "講談社",
+    "volumes": [
+     {
+      "number": 1,
+      "isbn13": "9784062607643",
+      "release_date": "2000-06-01"
+     },
+     {
+      "number": 2,
+      "isbn13": "9784062607650",
+      "release_date": "2000-06-01"
+     },
+     {
+      "number": 3,
+      "isbn13": "9784062607667",
+      "release_date": "2000-07-04"
+     },
+     {
+      "number": 4,
+      "isbn13": "9784062607674",
+      "release_date": "2000-07-04"
+     },
+     {
+      "number": 5,
+      "isbn13": "9784062607681",
+      "release_date": "2000-07-31"
+     },
+     {
+      "number": 6,
+      "isbn13": "9784062607698",
+      "release_date": "2000-07-31"
+     },
+     {
+      "number": 7,
+      "isbn13": "9784062607704",
+      "release_date": "2000-09-04"
+     },
+     {
+      "number": 8,
+      "isbn13": "9784062607711",
+      "release_date": "2000-09-04"
+     },
+     {
+      "number": 9,
+      "isbn13": "9784062607728",
+      "release_date": "2000-10-03"
+     },
+     {
+      "number": 10,
+      "isbn13": "9784062607735",
+      "release_date": "2000-10-03"
+     },
+     {
+      "number": 11,
+      "isbn13": "9784062607742",
+      "release_date": "2000-11-01"
+     },
+     {
+      "number": 12,
+      "isbn13": "9784062607759",
+      "release_date": "2000-11-01"
+     }
+    ]
+   },
+   {
+    "type": "shinsoban",
+    "label": "HGT版",
+    "publisher": "講談社",
+    "volumes": [
+     {
+      "number": 1,
+      "isbn13": "9784063347012",
+      "release_date": "2003-05-22"
+     },
+     {
+      "number": 2,
+      "isbn13": "9784063347029",
+      "release_date": "2003-06-21"
+     },
+     {
+      "number": 3,
+      "isbn13": "9784063347036",
+      "release_date": "2003-07-18"
+     },
+     {
+      "number": 4,
+      "isbn13": "9784063347043",
+      "release_date": "2003-08-21"
+     },
+     {
+      "number": 5,
+      "isbn13": "9784063347050",
+      "release_date": "2003-09-19"
+     },
+     {
+      "number": 6,
+      "isbn13": "9784063347067",
+      "release_date": "2003-10-22"
+     },
+     {
+      "number": 7,
+      "isbn13": "9784063347074",
+      "release_date": "2003-11-20"
+     },
+     {
+      "number": 8,
+      "isbn13": "9784063347081",
+      "release_date": "2003-12-20"
+     }
+    ]
+   }
+  ],
+  "note": "Wikipedia全巻ISBN/発売日で版再構築(奇子型混在是正 2026-07-10): 通常版=オリジナル20巻1970-73/完全復刻16巻1993/文庫12巻2000/HGT8巻2003。旧データは1972/1985/1989再版混在で発売日が化けていた"
  }
 }
