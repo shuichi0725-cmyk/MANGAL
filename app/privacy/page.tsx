@@ -27,7 +27,7 @@ export default function PrivacyPage() {
       <section className="mt-8 space-y-3 text-sm leading-relaxed text-ink/80">
         <h2 className="text-base font-semibold text-ink">2. Cookie の利用</h2>
         <p>
-          リンク先の事業者（楽天・Amazon.co.jp 等）およびアフィリエイト計測（楽天アフィリエイト）が、遷移時に Cookie を発行することがあります。これらの Cookie は本サイトが直接管理するものではなく、各事業者のプライバシーポリシーに従って取り扱われます。
+          リンク先の事業者（楽天・Amazon.co.jp 等）および各種アフィリエイトプログラムの計測が、遷移時に Cookie を発行することがあります。これらの Cookie は本サイトが直接管理するものではなく、各事業者のプライバシーポリシーに従って取り扱われます。
         </p>
         <p>
           Cookie の受け入れを希望されない場合は、お使いのブラウザの設定で Cookie を無効化することで拒否できます。Cookie を無効化しても本サイトの閲覧に支障はありません。
@@ -37,7 +37,7 @@ export default function PrivacyPage() {
       <section className="mt-8 space-y-3 text-sm leading-relaxed text-ink/80">
         <h2 className="text-base font-semibold text-ink">3. アフィリエイトプログラムについて</h2>
         <p>
-          当サイトは楽天アフィリエイトを利用しており、店舗リンク（楽天等）にはアフィリエイト広告を含みます（該当箇所に [PR] を表示）。今後、Amazon アソシエイト等ほかのプログラムを追加する場合も、開始時に本ページへ開示します。
+          当サイトは各種アフィリエイトプログラムを利用しており、店舗リンクにはアフィリエイト広告を含みます（該当箇所に [PR] を表示）。利用するプログラムを追加・変更する場合も、本ページへ開示します。
         </p>
         <p>
           各作品の購入ボタンをクリックすると楽天ブックス等の商品ページに遷移し、その後の購入に応じて運営者に紹介料が支払われる場合があります。リンクのクリックによって読者が追加の費用を負担することはありません。
