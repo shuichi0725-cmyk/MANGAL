@@ -1,28 +1,32 @@
 ---
 name: cf-analytics
-description: アクセス解析して=Cloudflare Worker(mangal-r2)のリクエスト/エラー日別レポート。必ず _cf-analytics.py から(GraphQL再実装禁止)。訪問者/人気ページは取れない(Web Analytics未設置)
+description: アクセス解析して=Cloudflare解析2系統(report=Workerリクエスト/エラー・web=訪問者/人気ページ/国)。必ず _cf-analytics.py から(GraphQL再実装禁止)
 ---
 
-# Cloudflareアクセス解析 (= 2026-07-09 トークン設置・2026-07-10 script/skill化)
+# Cloudflareアクセス解析 (= 2026-07-09 トークン・2026-07-10 script/skill化+Web Analytics対応)
 
-トリガー語: **「アクセス解析して」**(「アクセスどう?」等も同義)。
+トリガー語: **「アクセス解析して」**(「アクセスどう?」「人気ページは?」等も同義)。
 
-## やること (1コマンド)
+## やること (2系統・質問に合わせて選ぶ)
 ```
-python scripts/_cf-analytics.py report --days 7      # 日別 requests/errors/subreq + 合計/エラー率
+python scripts/_cf-analytics.py web --days 7         # ★人間の訪問者: 閲覧/訪問/人気ページ/国/流入元
+python scripts/_cf-analytics.py report --days 7      # Workerインフラ: 総req/エラー率(クロール込み=配信健康)
 python scripts/_cf-analytics.py verify               # トークン生存確認(失敗時の切り分け)
 ```
-- endpoint/認証/GraphQL(workersInvocationsAdaptive)の正は **script に封じ込め済み=その場で再実装しない**(_lookup.py と同じ原則)。
-- キー: `.env` の `CLOUDFLARE_API_TOKEN`(Analytics Read。★絶対commitしない)。account/Worker名はscript内定数(本番=mangal-r2)。
+- 「アクセスどう?」= **web が主役**(訪問者視点)、report は配信健康(エラー率)の補助。
+- endpoint/認証/GraphQL(workersInvocationsAdaptive+rumPageloadEventsAdaptiveGroups)の正は**scriptに封じ込め済み=再実装しない**。siteTag等の定数もscript内。
+- キー: `.env` の `CLOUDFLARE_API_TOKEN`(Analytics Read。★絶対commitしない)。RUM RESTは403=scope外だがGraphQL rumは通る(実証済)。
 
 ## 読み方の規律 (= 数字を誤読して報告しない)
-- ★**requests≠訪問者**: R2配信は1頁閲覧=HTML+索引+書影etc複数リクエスト。さらに**クロール支配**(実測: 波が来ると日10万超、引くと日2千台)。「訪問者N人」とは絶対に言わない。
-- 言えるのは: リクエスト総量の推移 / エラー率(平常0.01%未満。急増=配信障害signal) / クロール波の有無。
-- **取れないもの**: 訪問者数・人気ページ・流入国(Web Analyticsビーコン未設置。設置=サイトへのJS追加=ユーザ裁定マター)。聞かれたら「取れない+設置すれば取れる」と答える。
+- **web(ビーコン計測)=人間**: JS実行ブラウザのみ、bot/クローラは原則含まれない。設置=2026-07-05(自動セットアップ)以降のみ。
+- **report(Worker)=機械込み**: requests≠訪問者(1頁=複数ファイル+クロール支配。波が来ると日10万超/引くと日2千台)。「訪問者N人」はwebの数字でのみ言う。
+- エラー率(report)平常0.01%未満。急増=配信障害signal。
+- 流入元「(直接)」=refererなし(ブックマーク/アプリ/一部ブラウザのプライバシー設定)。
 
 ## 使いどころ
-- 週次蒸留後の健康確認(エラー率が跳ねていないか)・「最近アクセスどう?」への即答。
-- 定期監視はしない(トラフィックが意味を持つ規模になるまで=ユーザ判断 2026-07-09)。
+- 週次蒸留後の健康確認(report のエラー率)・「最近どう?」への即答(web)。
+- 人気ページ(web)は discovery/ランキング戦略の実データ源として蓄積中(2026-07-10時点: 週66訪問・Google流入が出始め)。
+- 定期監視はしない(規模が意味を持つまで=ユーザ判断 2026-07-09)。
 
 ## 関連
 - 事実の記録=memory [[cloudflare_analytics_access]] / 本番構成=memory [[deploy_environments_state]]
