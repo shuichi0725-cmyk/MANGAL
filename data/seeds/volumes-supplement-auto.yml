@@ -172,3 +172,1469 @@ volumes:
   source: rakuten-preorder
   added_at: '2026-07-08'
   note: ④→①(増加分・完全手動確認・過剰統合回避) slug=ryuuko-2023
+- series_keys: &id002
+  - qid:Q6455129|name:僕のヒーローアカデミアチームアップミッション
+  qid: null
+  number: 7
+  isbn13: '9784088842998'
+  release_date: 2024-12
+  pages: null
+  publisher: null
+  edition_type: standard
+  title_display: 僕のヒーローアカデミア チームアップミッション 7
+  source: ndl-volgap
+  added_at: '2026-07-09'
+  note: mangazenkan完結検出→NDL裏取り(3ソース一致)で欠け巻補完(僕のヒーローアカデミア チームアップミッ)
+- series_keys: *id002
+  qid: null
+  number: 8
+  isbn13: '9784088844589'
+  release_date: 2025-05
+  pages: null
+  publisher: null
+  edition_type: standard
+  title_display: 僕のヒーローアカデミア チームアップミッション 8
+  source: ndl-volgap
+  added_at: '2026-07-09'
+  note: mangazenkan完結検出→NDL裏取り(3ソース一致)で欠け巻補完(僕のヒーローアカデミア チームアップミッ)
+- series_keys: &id003
+  - name:市川寛|name:クジャクのダンス、誰が見た?
+  - qid:Q132432502|name:クジャクのダンス、誰が見た?
+  qid: null
+  number: 6
+  isbn13: '9784065372098'
+  release_date: 2024-11
+  pages: null
+  publisher: null
+  edition_type: standard
+  title_display: クジャクのダンス、誰が見た? 6
+  source: ndl-volgap
+  added_at: '2026-07-09'
+  note: mangazenkan完結検出→NDL裏取り(3ソース一致)で欠け巻補完(クジャクのダンス、誰が見た?)
+- series_keys: *id003
+  qid: null
+  number: 7
+  isbn13: '9784065389812'
+  release_date: 2025-03
+  pages: null
+  publisher: null
+  edition_type: standard
+  title_display: クジャクのダンス、誰が見た? 7
+  source: ndl-volgap
+  added_at: '2026-07-09'
+  note: mangazenkan完結検出→NDL裏取り(3ソース一致)で欠け巻補完(クジャクのダンス、誰が見た?)
+- series_keys: &id004
+  - name:有川浩|name:図書館戦争 LOVE ＆ WAR 別冊編
+  qid: null
+  number: 6
+  isbn13: '9784592210863'
+  release_date: 2018-07
+  pages: null
+  publisher: null
+  edition_type: standard
+  title_display: 図書館戦争 LOVE&WAR 別冊編 6
+  source: ndl-volgap
+  added_at: '2026-07-09'
+  note: mangazenkan完結検出→NDL裏取り(3ソース一致)で欠け巻補完(図書館戦争 LOVE&WAR 別冊編)
+- series_keys: *id004
+  qid: null
+  number: 7
+  isbn13: '9784592210870'
+  release_date: 2019-02
+  pages: null
+  publisher: null
+  edition_type: standard
+  title_display: 図書館戦争 LOVE&WAR 別冊編 7
+  source: ndl-volgap
+  added_at: '2026-07-09'
+  note: mangazenkan完結検出→NDL裏取り(3ソース一致)で欠け巻補完(図書館戦争 LOVE&WAR 別冊編)
+- series_keys: *id004
+  qid: null
+  number: 8
+  isbn13: '9784592210887'
+  release_date: 2019-10
+  pages: null
+  publisher: null
+  edition_type: standard
+  title_display: 図書館戦争 LOVE&WAR 別冊編 8
+  source: ndl-volgap
+  added_at: '2026-07-09'
+  note: mangazenkan完結検出→NDL裏取り(3ソース一致)で欠け巻補完(図書館戦争 LOVE&WAR 別冊編)
+- series_keys: *id004
+  qid: null
+  number: 9
+  isbn13: '9784592220220'
+  release_date: 2020-06
+  pages: null
+  publisher: null
+  edition_type: standard
+  title_display: 図書館戦争 LOVE&WAR 別冊編 9
+  source: ndl-volgap
+  added_at: '2026-07-09'
+  note: mangazenkan完結検出→NDL裏取り(3ソース一致)で欠け巻補完(図書館戦争 LOVE&WAR 別冊編)
+- series_keys: *id004
+  qid: null
+  number: 10
+  isbn13: '9784592220695'
+  release_date: 2021-02
+  pages: null
+  publisher: null
+  edition_type: standard
+  title_display: 図書館戦争 LOVE&WAR 別冊編 10
+  source: ndl-volgap
+  added_at: '2026-07-09'
+  note: mangazenkan完結検出→NDL裏取り(3ソース一致)で欠け巻補完(図書館戦争 LOVE&WAR 別冊編)
+- series_keys: &id005
+  - name:中村勇志|name:六道の悪女たち
+  qid: null
+  number: 9
+  isbn13: '9784253225847'
+  release_date: 2018-05
+  pages: null
+  publisher: null
+  edition_type: standard
+  title_display: 六道の悪女たち 9
+  source: ndl-volgap
+  added_at: '2026-07-09'
+  note: mangazenkan完結検出→NDL裏取り(3ソース一致)で欠け巻補完(六道の悪女たち)
+- series_keys: *id005
+  qid: null
+  number: 10
+  isbn13: '9784253225854'
+  release_date: 2018-07
+  pages: null
+  publisher: null
+  edition_type: standard
+  title_display: 六道の悪女たち 10
+  source: ndl-volgap
+  added_at: '2026-07-09'
+  note: mangazenkan完結検出→NDL裏取り(3ソース一致)で欠け巻補完(六道の悪女たち)
+- series_keys: *id005
+  qid: null
+  number: 11
+  isbn13: '9784253225861'
+  release_date: 2018-09
+  pages: null
+  publisher: null
+  edition_type: standard
+  title_display: 六道の悪女たち 11
+  source: ndl-volgap
+  added_at: '2026-07-09'
+  note: mangazenkan完結検出→NDL裏取り(3ソース一致)で欠け巻補完(六道の悪女たち)
+- series_keys: *id005
+  qid: null
+  number: 12
+  isbn13: '9784253225878'
+  release_date: 2018-12
+  pages: null
+  publisher: null
+  edition_type: standard
+  title_display: 六道の悪女たち 12
+  source: ndl-volgap
+  added_at: '2026-07-09'
+  note: mangazenkan完結検出→NDL裏取り(3ソース一致)で欠け巻補完(六道の悪女たち)
+- series_keys: *id005
+  qid: null
+  number: 13
+  isbn13: '9784253225885'
+  release_date: 2019-02
+  pages: null
+  publisher: null
+  edition_type: standard
+  title_display: 六道の悪女たち 13
+  source: ndl-volgap
+  added_at: '2026-07-09'
+  note: mangazenkan完結検出→NDL裏取り(3ソース一致)で欠け巻補完(六道の悪女たち)
+- series_keys: *id005
+  qid: null
+  number: 14
+  isbn13: '9784253225892'
+  release_date: 2019-04
+  pages: null
+  publisher: null
+  edition_type: standard
+  title_display: 六道の悪女たち 14
+  source: ndl-volgap
+  added_at: '2026-07-09'
+  note: mangazenkan完結検出→NDL裏取り(3ソース一致)で欠け巻補完(六道の悪女たち)
+- series_keys: *id005
+  qid: null
+  number: 15
+  isbn13: '9784253225908'
+  release_date: 2019-06
+  pages: null
+  publisher: null
+  edition_type: standard
+  title_display: 六道の悪女たち 15
+  source: ndl-volgap
+  added_at: '2026-07-09'
+  note: mangazenkan完結検出→NDL裏取り(3ソース一致)で欠け巻補完(六道の悪女たち)
+- series_keys: *id005
+  qid: null
+  number: 16
+  isbn13: '9784253228565'
+  release_date: 2019-08
+  pages: null
+  publisher: null
+  edition_type: standard
+  title_display: 六道の悪女たち 16
+  source: ndl-volgap
+  added_at: '2026-07-09'
+  note: mangazenkan完結検出→NDL裏取り(3ソース一致)で欠け巻補完(六道の悪女たち)
+- series_keys: *id005
+  qid: null
+  number: 17
+  isbn13: '9784253228572'
+  release_date: 2019-11
+  pages: null
+  publisher: null
+  edition_type: standard
+  title_display: 六道の悪女たち 17
+  source: ndl-volgap
+  added_at: '2026-07-09'
+  note: mangazenkan完結検出→NDL裏取り(3ソース一致)で欠け巻補完(六道の悪女たち)
+- series_keys: *id005
+  qid: null
+  number: 18
+  isbn13: '9784253228589'
+  release_date: 2020-01
+  pages: null
+  publisher: null
+  edition_type: standard
+  title_display: 六道の悪女たち 18
+  source: ndl-volgap
+  added_at: '2026-07-09'
+  note: mangazenkan完結検出→NDL裏取り(3ソース一致)で欠け巻補完(六道の悪女たち)
+- series_keys: *id005
+  qid: null
+  number: 19
+  isbn13: '9784253228596'
+  release_date: 2020-04
+  pages: null
+  publisher: null
+  edition_type: standard
+  title_display: 六道の悪女たち 19
+  source: ndl-volgap
+  added_at: '2026-07-09'
+  note: mangazenkan完結検出→NDL裏取り(3ソース一致)で欠け巻補完(六道の悪女たち)
+- series_keys: *id005
+  qid: null
+  number: 20
+  isbn13: '9784253228602'
+  release_date: 2020-05
+  pages: null
+  publisher: null
+  edition_type: standard
+  title_display: 六道の悪女たち 20
+  source: ndl-volgap
+  added_at: '2026-07-09'
+  note: mangazenkan完結検出→NDL裏取り(3ソース一致)で欠け巻補完(六道の悪女たち)
+- series_keys: *id005
+  qid: null
+  number: 21
+  isbn13: '9784253228626'
+  release_date: 2020-08
+  pages: null
+  publisher: null
+  edition_type: standard
+  title_display: 六道の悪女たち 21
+  source: ndl-volgap
+  added_at: '2026-07-09'
+  note: mangazenkan完結検出→NDL裏取り(3ソース一致)で欠け巻補完(六道の悪女たち)
+- series_keys: *id005
+  qid: null
+  number: 22
+  isbn13: '9784253228633'
+  release_date: 2020-10
+  pages: null
+  publisher: null
+  edition_type: standard
+  title_display: 六道の悪女たち 22
+  source: ndl-volgap
+  added_at: '2026-07-09'
+  note: mangazenkan完結検出→NDL裏取り(3ソース一致)で欠け巻補完(六道の悪女たち)
+- series_keys: *id005
+  qid: null
+  number: 23
+  isbn13: '9784253228640'
+  release_date: 2020-12
+  pages: null
+  publisher: null
+  edition_type: standard
+  title_display: 六道の悪女たち 23
+  source: ndl-volgap
+  added_at: '2026-07-09'
+  note: mangazenkan完結検出→NDL裏取り(3ソース一致)で欠け巻補完(六道の悪女たち)
+- series_keys: *id005
+  qid: null
+  number: 24
+  isbn13: '9784253228657'
+  release_date: 2021-03
+  pages: null
+  publisher: null
+  edition_type: standard
+  title_display: 六道の悪女たち 24
+  source: ndl-volgap
+  added_at: '2026-07-09'
+  note: mangazenkan完結検出→NDL裏取り(3ソース一致)で欠け巻補完(六道の悪女たち)
+- series_keys: *id005
+  qid: null
+  number: 25
+  isbn13: '9784253228664'
+  release_date: 2021-05
+  pages: null
+  publisher: null
+  edition_type: standard
+  title_display: 六道の悪女たち 25
+  source: ndl-volgap
+  added_at: '2026-07-09'
+  note: mangazenkan完結検出→NDL裏取り(3ソース一致)で欠け巻補完(六道の悪女たち)
+- series_keys: *id005
+  qid: null
+  number: 26
+  isbn13: '9784253228671'
+  release_date: 2021-06
+  pages: null
+  publisher: null
+  edition_type: standard
+  title_display: 六道の悪女たち 26
+  source: ndl-volgap
+  added_at: '2026-07-09'
+  note: mangazenkan完結検出→NDL裏取り(3ソース一致)で欠け巻補完(六道の悪女たち)
+- series_keys: &id006
+  - qid:Q11490838|name:モンキーピークthe rock
+  qid: null
+  number: 4
+  isbn13: '9784537143201'
+  release_date: 2021-01
+  pages: null
+  publisher: null
+  edition_type: standard
+  title_display: モンキーピーク the Rock 4
+  source: ndl-volgap
+  added_at: '2026-07-09'
+  note: mangazenkan完結検出→NDL裏取り(3ソース一致)で欠け巻補完(モンキーピーク the Rock)
+- series_keys: *id006
+  qid: null
+  number: 5
+  isbn13: '9784537143492'
+  release_date: 2021-04
+  pages: null
+  publisher: null
+  edition_type: standard
+  title_display: モンキーピーク the Rock 5
+  source: ndl-volgap
+  added_at: '2026-07-09'
+  note: mangazenkan完結検出→NDL裏取り(3ソース一致)で欠け巻補完(モンキーピーク the Rock)
+- series_keys: *id006
+  qid: null
+  number: 6
+  isbn13: '9784537143812'
+  release_date: 2021-07
+  pages: null
+  publisher: null
+  edition_type: standard
+  title_display: モンキーピーク the Rock 6
+  source: ndl-volgap
+  added_at: '2026-07-09'
+  note: mangazenkan完結検出→NDL裏取り(3ソース一致)で欠け巻補完(モンキーピーク the Rock)
+- series_keys: *id006
+  qid: null
+  number: 7
+  isbn13: '9784537144079'
+  release_date: 2021-10
+  pages: null
+  publisher: null
+  edition_type: standard
+  title_display: モンキーピーク the Rock 7
+  source: ndl-volgap
+  added_at: '2026-07-09'
+  note: mangazenkan完結検出→NDL裏取り(3ソース一致)で欠け巻補完(モンキーピーク the Rock)
+- series_keys: *id006
+  qid: null
+  number: 8
+  isbn13: '9784537144413'
+  release_date: 2022-01
+  pages: null
+  publisher: null
+  edition_type: standard
+  title_display: モンキーピーク the Rock 8
+  source: ndl-volgap
+  added_at: '2026-07-09'
+  note: mangazenkan完結検出→NDL裏取り(3ソース一致)で欠け巻補完(モンキーピーク the Rock)
+- series_keys: *id006
+  qid: null
+  number: 9
+  isbn13: '9784537144529'
+  release_date: 2022-02
+  pages: null
+  publisher: null
+  edition_type: standard
+  title_display: モンキーピーク the Rock 9
+  source: ndl-volgap
+  added_at: '2026-07-09'
+  note: mangazenkan完結検出→NDL裏取り(3ソース一致)で欠け巻補完(モンキーピーク the Rock)
+- series_keys: &id007
+  - qid:Q11431904|name:すみれ先生は料理したくない
+  qid: null
+  number: 3
+  isbn13: '9784821159161'
+  release_date: 2024-10
+  pages: null
+  publisher: null
+  edition_type: standard
+  title_display: すみれ先生は料理したくない 3
+  source: ndl-volgap
+  added_at: '2026-07-09'
+  note: mangazenkan完結検出→NDL裏取り(3ソース一致)で欠け巻補完(すみれ先生は料理したくない)
+- series_keys: *id007
+  qid: null
+  number: 4
+  isbn13: '9784821159178'
+  release_date: 2024-10
+  pages: null
+  publisher: null
+  edition_type: standard
+  title_display: すみれ先生は料理したくない 4
+  source: ndl-volgap
+  added_at: '2026-07-09'
+  note: mangazenkan完結検出→NDL裏取り(3ソース一致)で欠け巻補完(すみれ先生は料理したくない)
+- series_keys: &id008
+  - qid:Q11490838|name:凍牌 ミナゴロシ篇
+  qid: null
+  number: 2
+  isbn13: '9784253141321'
+  release_date: 2018-10
+  pages: null
+  publisher: null
+  edition_type: standard
+  title_display: 凍牌 〜ミナゴロシ篇〜 2
+  source: ndl-volgap
+  added_at: '2026-07-09'
+  note: mangazenkan完結検出→NDL裏取り(3ソース一致)で欠け巻補完(凍牌 〜ミナゴロシ篇〜)
+- series_keys: *id008
+  qid: null
+  number: 3
+  isbn13: '9784253141338'
+  release_date: 2019-02
+  pages: null
+  publisher: null
+  edition_type: standard
+  title_display: 凍牌 〜ミナゴロシ篇〜 3
+  source: ndl-volgap
+  added_at: '2026-07-09'
+  note: mangazenkan完結検出→NDL裏取り(3ソース一致)で欠け巻補完(凍牌 〜ミナゴロシ篇〜)
+- series_keys: *id008
+  qid: null
+  number: 4
+  isbn13: '9784253141345'
+  release_date: 2019-07
+  pages: null
+  publisher: null
+  edition_type: standard
+  title_display: 凍牌 〜ミナゴロシ篇〜 4
+  source: ndl-volgap
+  added_at: '2026-07-09'
+  note: mangazenkan完結検出→NDL裏取り(3ソース一致)で欠け巻補完(凍牌 〜ミナゴロシ篇〜)
+- series_keys: *id008
+  qid: null
+  number: 5
+  isbn13: '9784253141352'
+  release_date: 2019-10
+  pages: null
+  publisher: null
+  edition_type: standard
+  title_display: 凍牌 〜ミナゴロシ篇〜 5
+  source: ndl-volgap
+  added_at: '2026-07-09'
+  note: mangazenkan完結検出→NDL裏取り(3ソース一致)で欠け巻補完(凍牌 〜ミナゴロシ篇〜)
+- series_keys: *id008
+  qid: null
+  number: 6
+  isbn13: '9784253141369'
+  release_date: 2020-03
+  pages: null
+  publisher: null
+  edition_type: standard
+  title_display: 凍牌 〜ミナゴロシ篇〜 6
+  source: ndl-volgap
+  added_at: '2026-07-09'
+  note: mangazenkan完結検出→NDL裏取り(3ソース一致)で欠け巻補完(凍牌 〜ミナゴロシ篇〜)
+- series_keys: *id008
+  qid: null
+  number: 7
+  isbn13: '9784253141376'
+  release_date: 2020-08
+  pages: null
+  publisher: null
+  edition_type: standard
+  title_display: 凍牌 〜ミナゴロシ篇〜 7
+  source: ndl-volgap
+  added_at: '2026-07-09'
+  note: mangazenkan完結検出→NDL裏取り(3ソース一致)で欠け巻補完(凍牌 〜ミナゴロシ篇〜)
+- series_keys: *id008
+  qid: null
+  number: 8
+  isbn13: '9784253141383'
+  release_date: 2021-01
+  pages: null
+  publisher: null
+  edition_type: standard
+  title_display: 凍牌 〜ミナゴロシ篇〜 8
+  source: ndl-volgap
+  added_at: '2026-07-09'
+  note: mangazenkan完結検出→NDL裏取り(3ソース一致)で欠け巻補完(凍牌 〜ミナゴロシ篇〜)
+- series_keys: *id008
+  qid: null
+  number: 9
+  isbn13: '9784253141390'
+  release_date: 2021-06
+  pages: null
+  publisher: null
+  edition_type: standard
+  title_display: 凍牌 〜ミナゴロシ篇〜 9
+  source: ndl-volgap
+  added_at: '2026-07-09'
+  note: mangazenkan完結検出→NDL裏取り(3ソース一致)で欠け巻補完(凍牌 〜ミナゴロシ篇〜)
+- series_keys: *id008
+  qid: null
+  number: 10
+  isbn13: '9784253141406'
+  release_date: 2021-08
+  pages: null
+  publisher: null
+  edition_type: standard
+  title_display: 凍牌 〜ミナゴロシ篇〜 10
+  source: ndl-volgap
+  added_at: '2026-07-09'
+  note: mangazenkan完結検出→NDL裏取り(3ソース一致)で欠け巻補完(凍牌 〜ミナゴロシ篇〜)
+- series_keys: &id009
+  - name:漂月|name:人狼への転生、魔王の副官 はじまりの章
+  qid: null
+  number: 3
+  isbn13: '9784803012163'
+  release_date: 2018-08
+  pages: null
+  publisher: null
+  edition_type: standard
+  title_display: 人狼への転生、魔王の副官 はじまりの章 3
+  source: ndl-volgap
+  added_at: '2026-07-09'
+  note: mangazenkan完結検出→NDL裏取り(3ソース一致)で欠け巻補完(人狼への転生、魔王の副官 はじまりの章)
+- series_keys: *id009
+  qid: null
+  number: 4
+  isbn13: '9784803013009'
+  release_date: 2019-06
+  pages: null
+  publisher: null
+  edition_type: standard
+  title_display: 人狼への転生、魔王の副官 はじまりの章 4
+  source: ndl-volgap
+  added_at: '2026-07-09'
+  note: mangazenkan完結検出→NDL裏取り(3ソース一致)で欠け巻補完(人狼への転生、魔王の副官 はじまりの章)
+- series_keys: *id009
+  qid: null
+  number: 5
+  isbn13: '9784803013825'
+  release_date: 2020-02
+  pages: null
+  publisher: null
+  edition_type: standard
+  title_display: 人狼への転生、魔王の副官 はじまりの章 5
+  source: ndl-volgap
+  added_at: '2026-07-09'
+  note: mangazenkan完結検出→NDL裏取り(3ソース一致)で欠け巻補完(人狼への転生、魔王の副官 はじまりの章)
+- series_keys: *id009
+  qid: null
+  number: 6
+  isbn13: '9784803014594'
+  release_date: 2020-10
+  pages: null
+  publisher: null
+  edition_type: standard
+  title_display: 人狼への転生、魔王の副官 はじまりの章 6
+  source: ndl-volgap
+  added_at: '2026-07-09'
+  note: mangazenkan完結検出→NDL裏取り(3ソース一致)で欠け巻補完(人狼への転生、魔王の副官 はじまりの章)
+- series_keys: *id009
+  qid: null
+  number: 7
+  isbn13: '9784803015195'
+  release_date: 2021-05
+  pages: null
+  publisher: null
+  edition_type: standard
+  title_display: 人狼への転生、魔王の副官 はじまりの章 7
+  source: ndl-volgap
+  added_at: '2026-07-09'
+  note: mangazenkan完結検出→NDL裏取り(3ソース一致)で欠け巻補完(人狼への転生、魔王の副官 はじまりの章)
+- series_keys: *id009
+  qid: null
+  number: 8
+  isbn13: '9784803016024'
+  release_date: 2022-01
+  pages: null
+  publisher: null
+  edition_type: standard
+  title_display: 人狼への転生、魔王の副官 はじまりの章 8
+  source: ndl-volgap
+  added_at: '2026-07-09'
+  note: mangazenkan完結検出→NDL裏取り(3ソース一致)で欠け巻補完(人狼への転生、魔王の副官 はじまりの章)
+- series_keys: *id009
+  qid: null
+  number: 9
+  isbn13: '9784803016888'
+  release_date: 2022-09
+  pages: null
+  publisher: null
+  edition_type: standard
+  title_display: 人狼への転生、魔王の副官 はじまりの章 9
+  source: ndl-volgap
+  added_at: '2026-07-09'
+  note: mangazenkan完結検出→NDL裏取り(3ソース一致)で欠け巻補完(人狼への転生、魔王の副官 はじまりの章)
+- series_keys: *id009
+  qid: null
+  number: 10
+  isbn13: '9784803017823'
+  release_date: 2023-05
+  pages: null
+  publisher: null
+  edition_type: standard
+  title_display: 人狼への転生、魔王の副官 はじまりの章 10
+  source: ndl-volgap
+  added_at: '2026-07-09'
+  note: mangazenkan完結検出→NDL裏取り(3ソース一致)で欠け巻補完(人狼への転生、魔王の副官 はじまりの章)
+- series_keys: *id009
+  qid: null
+  number: 11
+  isbn13: '9784803019056'
+  release_date: 2024-02
+  pages: null
+  publisher: null
+  edition_type: standard
+  title_display: 人狼への転生、魔王の副官 はじまりの章 11
+  source: ndl-volgap
+  added_at: '2026-07-09'
+  note: mangazenkan完結検出→NDL裏取り(3ソース一致)で欠け巻補完(人狼への転生、魔王の副官 はじまりの章)
+- series_keys: &id010
+  - qid:Q109594836|name:推しにガチ恋しちゃったら
+  qid: null
+  number: 5
+  isbn13: '9784088430638'
+  release_date: 2024-11
+  pages: null
+  publisher: null
+  edition_type: standard
+  title_display: 推しにガチ恋しちゃったら 5
+  source: ndl-volgap
+  added_at: '2026-07-09'
+  note: mangazenkan完結検出→NDL裏取り(3ソース一致)で欠け巻補完(推しにガチ恋しちゃったら)
+- series_keys: *id010
+  qid: null
+  number: 6
+  isbn13: '9784088431284'
+  release_date: 2025-04
+  pages: null
+  publisher: null
+  edition_type: standard
+  title_display: 推しにガチ恋しちゃったら 6
+  source: ndl-volgap
+  added_at: '2026-07-09'
+  note: mangazenkan完結検出→NDL裏取り(3ソース一致)で欠け巻補完(推しにガチ恋しちゃったら)
+- series_keys: &id011
+  - name:谷口廣次朗|name:コードギアス復活のルルーシュ
+  qid: null
+  number: 5
+  isbn13: '9784041153420'
+  release_date: 2024-10
+  pages: null
+  publisher: null
+  edition_type: standard
+  title_display: コードギアス 復活のルルーシュ 5
+  source: ndl-volgap
+  added_at: '2026-07-09'
+  note: mangazenkan完結検出→NDL裏取り(3ソース一致)で欠け巻補完(コードギアス 復活のルルーシュ)
+- series_keys: *id011
+  qid: null
+  number: 6
+  isbn13: '9784041163665'
+  release_date: 2025-12
+  pages: null
+  publisher: null
+  edition_type: standard
+  title_display: コードギアス 復活のルルーシュ 6
+  source: ndl-volgap
+  added_at: '2026-07-09'
+  note: mangazenkan完結検出→NDL裏取り(3ソース一致)で欠け巻補完(コードギアス 復活のルルーシュ)
+- series_keys: &id012
+  - qid:Q134508014|name:見るからに怪しい二人
+  qid: null
+  number: 4
+  isbn13: '9784046846013'
+  release_date: 2025-04
+  pages: null
+  publisher: null
+  edition_type: standard
+  title_display: 見るからに怪しい二人 4
+  source: ndl-volgap
+  added_at: '2026-07-09'
+  note: mangazenkan完結検出→NDL裏取り(3ソース一致)で欠け巻補完(見るからに怪しい二人)
+- series_keys: *id012
+  qid: null
+  number: 5
+  isbn13: '9784046600974'
+  release_date: null
+  pages: null
+  publisher: null
+  edition_type: standard
+  title_display: 見るからに怪しい二人 5
+  source: ndl-volgap
+  added_at: '2026-07-09'
+  note: mangazenkan完結検出→NDL裏取り(3ソース一致)で欠け巻補完(見るからに怪しい二人)
+- series_keys: &id013
+  - name:脊髄引き抜きの刑|name:正体不明と恐怖
+  qid: null
+  number: 3
+  isbn13: '9784065378823'
+  release_date: 2024-11
+  pages: null
+  publisher: null
+  edition_type: standard
+  title_display: 正体不明と恐怖 3
+  source: ndl-volgap
+  added_at: '2026-07-09'
+  note: mangazenkan完結検出→NDL裏取り(3ソース一致)で欠け巻補完(正体不明と恐怖)
+- series_keys: *id013
+  qid: null
+  number: 4
+  isbn13: '9784065385197'
+  release_date: 2025-03
+  pages: null
+  publisher: null
+  edition_type: standard
+  title_display: 正体不明と恐怖 4
+  source: ndl-volgap
+  added_at: '2026-07-09'
+  note: mangazenkan完結検出→NDL裏取り(3ソース一致)で欠け巻補完(正体不明と恐怖)
+- series_keys: &id014
+  - name:酒井ゆかり|name:引きこもり姫と毒舌騎士様
+  qid: null
+  number: 5
+  isbn13: '9784592225201'
+  release_date: 2025-02
+  pages: null
+  publisher: null
+  edition_type: standard
+  title_display: 引きこもり姫と毒舌騎士様 5
+  source: ndl-volgap
+  added_at: '2026-07-09'
+  note: mangazenkan完結検出→NDL裏取り(3ソース一致)で欠け巻補完(引きこもり姫と毒舌騎士様)
+- series_keys: *id014
+  qid: null
+  number: 6
+  isbn13: '9784592225218'
+  release_date: 2025-02
+  pages: null
+  publisher: null
+  edition_type: standard
+  title_display: 引きこもり姫と毒舌騎士様 6
+  source: ndl-volgap
+  added_at: '2026-07-09'
+  note: mangazenkan完結検出→NDL裏取り(3ソース一致)で欠け巻補完(引きこもり姫と毒舌騎士様)
+- series_keys: &id015
+  - qid:Q126005314|name:学校でいちばん地味な2人が付き合う話
+  qid: null
+  number: 3
+  isbn13: '9784537148664'
+  release_date: 2024-08
+  pages: null
+  publisher: null
+  edition_type: standard
+  title_display: 学校でいちばん地味な2人が付き合う話 3
+  source: ndl-volgap
+  added_at: '2026-07-09'
+  note: mangazenkan完結検出→NDL裏取り(3ソース一致)で欠け巻補完(学校でいちばん地味な2人が付き合う話)
+- series_keys: *id015
+  qid: null
+  number: 4
+  isbn13: '9784537148671'
+  release_date: 2024-08
+  pages: null
+  publisher: null
+  edition_type: standard
+  title_display: 学校でいちばん地味な2人が付き合う話 4
+  source: ndl-volgap
+  added_at: '2026-07-09'
+  note: mangazenkan完結検出→NDL裏取り(3ソース一致)で欠け巻補完(学校でいちばん地味な2人が付き合う話)
+- series_keys: &id016
+  - name:桜花舞|name:闇属性の嫌われ王女は、滅びの連鎖を断ち切りたい
+  qid: null
+  number: 4
+  isbn13: '9784065370971'
+  release_date: 2024-10
+  pages: null
+  publisher: null
+  edition_type: standard
+  title_display: 闇属性の嫌われ王女は、滅びの連鎖を断ち切りたい 4
+  source: ndl-volgap
+  added_at: '2026-07-09'
+  note: mangazenkan完結検出→NDL裏取り(3ソース一致)で欠け巻補完(闇属性の嫌われ王女は、滅びの連鎖を断ち切)
+- series_keys: *id016
+  qid: null
+  number: 5
+  isbn13: '9784065387672'
+  release_date: 2025-03
+  pages: null
+  publisher: null
+  edition_type: standard
+  title_display: 闇属性の嫌われ王女は、滅びの連鎖を断ち切りたい 5
+  source: ndl-volgap
+  added_at: '2026-07-09'
+  note: mangazenkan完結検出→NDL裏取り(3ソース一致)で欠け巻補完(闇属性の嫌われ王女は、滅びの連鎖を断ち切)
+- series_keys: &id017
+  - qid:Q467415|name:エンジェル・ハート 2ndシーズン
+  qid: null
+  number: 11
+  isbn13: '9784199802805'
+  release_date: 2015-08
+  pages: null
+  publisher: null
+  edition_type: standard
+  title_display: エンジェル・ハート 2ndシーズン 11
+  source: ndl-volgap
+  added_at: '2026-07-09'
+  note: mangazenkan完結検出→NDL裏取り(3ソース一致)で欠け巻補完(エンジェル・ハート 2ndシーズン)
+- series_keys: *id017
+  qid: null
+  number: 12
+  isbn13: '9784199803000'
+  release_date: 2015-11
+  pages: null
+  publisher: null
+  edition_type: standard
+  title_display: エンジェル・ハート 2ndシーズン 12
+  source: ndl-volgap
+  added_at: '2026-07-09'
+  note: mangazenkan完結検出→NDL裏取り(3ソース一致)で欠け巻補完(エンジェル・ハート 2ndシーズン)
+- series_keys: *id017
+  qid: null
+  number: 13
+  isbn13: '9784199803413'
+  release_date: 2016-05
+  pages: null
+  publisher: null
+  edition_type: standard
+  title_display: エンジェル・ハート 2ndシーズン 13
+  source: ndl-volgap
+  added_at: '2026-07-09'
+  note: mangazenkan完結検出→NDL裏取り(3ソース一致)で欠け巻補完(エンジェル・ハート 2ndシーズン)
+- series_keys: *id017
+  qid: null
+  number: 14
+  isbn13: '9784199803659'
+  release_date: 2016-10
+  pages: null
+  publisher: null
+  edition_type: standard
+  title_display: エンジェル・ハート 2ndシーズン 14
+  source: ndl-volgap
+  added_at: '2026-07-09'
+  note: mangazenkan完結検出→NDL裏取り(3ソース一致)で欠け巻補完(エンジェル・ハート 2ndシーズン)
+- series_keys: *id017
+  qid: null
+  number: 15
+  isbn13: '9784199803932'
+  release_date: 2017-03
+  pages: null
+  publisher: null
+  edition_type: standard
+  title_display: エンジェル・ハート 2ndシーズン 15
+  source: ndl-volgap
+  added_at: '2026-07-09'
+  note: mangazenkan完結検出→NDL裏取り(3ソース一致)で欠け巻補完(エンジェル・ハート 2ndシーズン)
+- series_keys: *id017
+  qid: null
+  number: 16
+  isbn13: '9784199804304'
+  release_date: 2017-08
+  pages: null
+  publisher: null
+  edition_type: standard
+  title_display: エンジェル・ハート 2ndシーズン 16
+  source: ndl-volgap
+  added_at: '2026-07-09'
+  note: mangazenkan完結検出→NDL裏取り(3ソース一致)で欠け巻補完(エンジェル・ハート 2ndシーズン)
+- series_keys: &id018
+  - name:津本陽|name:柳生兵庫助
+  qid: null
+  number: 4
+  isbn13: '9784845832767'
+  release_date: null
+  pages: null
+  publisher: null
+  edition_type: standard
+  title_display: 柳生兵庫助 4
+  source: ndl-volgap
+  added_at: '2026-07-09'
+  note: mangazenkan完結検出→NDL裏取り(3ソース一致)で欠け巻補完(柳生兵庫助)
+- series_keys: *id018
+  qid: null
+  number: 5
+  isbn13: '9784845832774'
+  release_date: null
+  pages: null
+  publisher: null
+  edition_type: standard
+  title_display: 柳生兵庫助 5
+  source: ndl-volgap
+  added_at: '2026-07-09'
+  note: mangazenkan完結検出→NDL裏取り(3ソース一致)で欠け巻補完(柳生兵庫助)
+- series_keys: *id018
+  qid: null
+  number: 6
+  isbn13: '9784845832828'
+  release_date: null
+  pages: null
+  publisher: null
+  edition_type: standard
+  title_display: 柳生兵庫助 6
+  source: ndl-volgap
+  added_at: '2026-07-09'
+  note: mangazenkan完結検出→NDL裏取り(3ソース一致)で欠け巻補完(柳生兵庫助)
+- series_keys: *id018
+  qid: null
+  number: 7
+  isbn13: '9784845832835'
+  release_date: null
+  pages: null
+  publisher: null
+  edition_type: standard
+  title_display: 柳生兵庫助 7
+  source: ndl-volgap
+  added_at: '2026-07-09'
+  note: mangazenkan完結検出→NDL裏取り(3ソース一致)で欠け巻補完(柳生兵庫助)
+- series_keys:
+  - qid:Q11049344|name:ロックマンX
+  qid: null
+  number: 4
+  isbn13: '9784063218213'
+  release_date: 1997-11
+  pages: null
+  publisher: null
+  edition_type: standard
+  title_display: ロックマンX 4
+  source: ndl-volgap
+  added_at: '2026-07-09'
+  note: mangazenkan完結検出→NDL裏取り(3ソース一致)で欠け巻補完(ロックマンX)
+- series_keys: &id019
+  - qid:Q11273362|name:柳生連也武芸帖
+  qid: null
+  number: 2
+  isbn13: '9784845818181'
+  release_date: null
+  pages: null
+  publisher: null
+  edition_type: standard
+  title_display: 柳生連也武芸帖 2
+  source: ndl-volgap
+  added_at: '2026-07-09'
+  note: mangazenkan完結検出→NDL裏取り(3ソース一致)で欠け巻補完(柳生連也武芸帖)
+- series_keys: *id019
+  qid: null
+  number: 3
+  isbn13: '9784845823147'
+  release_date: null
+  pages: null
+  publisher: null
+  edition_type: standard
+  title_display: 柳生連也武芸帖 3
+  source: ndl-volgap
+  added_at: '2026-07-09'
+  note: mangazenkan完結検出→NDL裏取り(3ソース一致)で欠け巻補完(柳生連也武芸帖)
+- series_keys: *id019
+  qid: null
+  number: 4
+  isbn13: '9784845823154'
+  release_date: null
+  pages: null
+  publisher: null
+  edition_type: standard
+  title_display: 柳生連也武芸帖 4
+  source: ndl-volgap
+  added_at: '2026-07-09'
+  note: mangazenkan完結検出→NDL裏取り(3ソース一致)で欠け巻補完(柳生連也武芸帖)
+- series_keys: *id019
+  qid: null
+  number: 5
+  isbn13: '9784845823161'
+  release_date: null
+  pages: null
+  publisher: null
+  edition_type: standard
+  title_display: 柳生連也武芸帖 5
+  source: ndl-volgap
+  added_at: '2026-07-09'
+  note: mangazenkan完結検出→NDL裏取り(3ソース一致)で欠け巻補完(柳生連也武芸帖)
+- series_keys: &id020
+  - qid:Q7506271|name:海猿
+  qid: null
+  number: 6
+  isbn13: '9784091523662'
+  release_date: 2000-07
+  pages: null
+  publisher: null
+  edition_type: standard
+  title_display: 海猿 6
+  source: ndl-volgap
+  added_at: '2026-07-09'
+  note: mangazenkan完結検出→NDL裏取り(3ソース一致)で欠け巻補完(海猿)
+- series_keys: *id020
+  qid: null
+  number: 7
+  isbn13: '9784091523679'
+  release_date: 2000-10
+  pages: null
+  publisher: null
+  edition_type: standard
+  title_display: 海猿 7
+  source: ndl-volgap
+  added_at: '2026-07-09'
+  note: mangazenkan完結検出→NDL裏取り(3ソース一致)で欠け巻補完(海猿)
+- series_keys: *id020
+  qid: null
+  number: 8
+  isbn13: '9784091523686'
+  release_date: 2001-01
+  pages: null
+  publisher: null
+  edition_type: standard
+  title_display: 海猿 8
+  source: ndl-volgap
+  added_at: '2026-07-09'
+  note: mangazenkan完結検出→NDL裏取り(3ソース一致)で欠け巻補完(海猿)
+- series_keys: *id020
+  qid: null
+  number: 9
+  isbn13: '9784091523693'
+  release_date: 2001-03
+  pages: null
+  publisher: null
+  edition_type: standard
+  title_display: 海猿 9
+  source: ndl-volgap
+  added_at: '2026-07-09'
+  note: mangazenkan完結検出→NDL裏取り(3ソース一致)で欠け巻補完(海猿)
+- series_keys: *id020
+  qid: null
+  number: 10
+  isbn13: '9784091523709'
+  release_date: 2001-06
+  pages: null
+  publisher: null
+  edition_type: standard
+  title_display: 海猿 10
+  source: ndl-volgap
+  added_at: '2026-07-09'
+  note: mangazenkan完結検出→NDL裏取り(3ソース一致)で欠け巻補完(海猿)
+- series_keys: *id020
+  qid: null
+  number: 11
+  isbn13: '9784091526113'
+  release_date: 2001-09
+  pages: null
+  publisher: null
+  edition_type: standard
+  title_display: 海猿 11
+  source: ndl-volgap
+  added_at: '2026-07-09'
+  note: mangazenkan完結検出→NDL裏取り(3ソース一致)で欠け巻補完(海猿)
+- series_keys: *id020
+  qid: null
+  number: 12
+  isbn13: '9784091526120'
+  release_date: 2001-10
+  pages: null
+  publisher: null
+  edition_type: standard
+  title_display: 海猿 12
+  source: ndl-volgap
+  added_at: '2026-07-09'
+  note: mangazenkan完結検出→NDL裏取り(3ソース一致)で欠け巻補完(海猿)
+- series_keys: &id021
+  - qid:Q11573764|name:Cafe南青山骨董通り
+  qid: null
+  number: 6
+  isbn13: '9784253197847'
+  release_date: 2011-02
+  pages: null
+  publisher: null
+  edition_type: standard
+  title_display: Cafe南青山骨董通り 6
+  source: ndl-volgap
+  added_at: '2026-07-09'
+  note: mangazenkan完結検出→NDL裏取り(3ソース一致)で欠け巻補完(Cafe南青山骨董通り)
+- series_keys: *id021
+  qid: null
+  number: 7
+  isbn13: '9784253197854'
+  release_date: 2011-08
+  pages: null
+  publisher: null
+  edition_type: standard
+  title_display: Cafe南青山骨董通り 7
+  source: ndl-volgap
+  added_at: '2026-07-09'
+  note: mangazenkan完結検出→NDL裏取り(3ソース一致)で欠け巻補完(Cafe南青山骨董通り)
+- series_keys: *id021
+  qid: null
+  number: 8
+  isbn13: '9784253197861'
+  release_date: 2012-03
+  pages: null
+  publisher: null
+  edition_type: standard
+  title_display: Cafe南青山骨董通り 8
+  source: ndl-volgap
+  added_at: '2026-07-09'
+  note: mangazenkan完結検出→NDL裏取り(3ソース一致)で欠け巻補完(Cafe南青山骨董通り)
+- series_keys: *id021
+  qid: null
+  number: 9
+  isbn13: '9784253197878'
+  release_date: 2012-10
+  pages: null
+  publisher: null
+  edition_type: standard
+  title_display: Cafe南青山骨董通り 9
+  source: ndl-volgap
+  added_at: '2026-07-09'
+  note: mangazenkan完結検出→NDL裏取り(3ソース一致)で欠け巻補完(Cafe南青山骨董通り)
+- series_keys: *id021
+  qid: null
+  number: 10
+  isbn13: '9784253197892'
+  release_date: 2013-04
+  pages: null
+  publisher: null
+  edition_type: standard
+  title_display: Cafe南青山骨董通り 10
+  source: ndl-volgap
+  added_at: '2026-07-09'
+  note: mangazenkan完結検出→NDL裏取り(3ソース一致)で欠け巻補完(Cafe南青山骨董通り)
+- series_keys: &id022
+  - name:石田可奈|name:魔法科高校の劣等生 よんこま編
+  qid: null
+  number: 4
+  isbn13: '9784048938440'
+  release_date: 2018-06
+  pages: null
+  publisher: null
+  edition_type: standard
+  title_display: 魔法科高校の劣等生 よんこま編 4
+  source: ndl-volgap
+  added_at: '2026-07-09'
+  note: mangazenkan完結検出→NDL裏取り(3ソース一致)で欠け巻補完(魔法科高校の劣等生 よんこま編)
+- series_keys: *id022
+  qid: null
+  number: 5
+  isbn13: '9784049127003'
+  release_date: 2019-08
+  pages: null
+  publisher: null
+  edition_type: standard
+  title_display: 魔法科高校の劣等生 よんこま編 5
+  source: ndl-volgap
+  added_at: '2026-07-09'
+  note: mangazenkan完結検出→NDL裏取り(3ソース一致)で欠け巻補完(魔法科高校の劣等生 よんこま編)
+- series_keys: *id022
+  qid: null
+  number: 6
+  isbn13: '9784049134155'
+  release_date: 2020-09
+  pages: null
+  publisher: null
+  edition_type: standard
+  title_display: 魔法科高校の劣等生 よんこま編 6
+  source: ndl-volgap
+  added_at: '2026-07-09'
+  note: mangazenkan完結検出→NDL裏取り(3ソース一致)で欠け巻補完(魔法科高校の劣等生 よんこま編)
+- series_keys: *id022
+  qid: null
+  number: 7
+  isbn13: '9784049139785'
+  release_date: 2021-09
+  pages: null
+  publisher: null
+  edition_type: standard
+  title_display: 魔法科高校の劣等生 よんこま編 7
+  source: ndl-volgap
+  added_at: '2026-07-09'
+  note: mangazenkan完結検出→NDL裏取り(3ソース一致)で欠け巻補完(魔法科高校の劣等生 よんこま編)
+- series_keys: *id022
+  qid: null
+  number: 8
+  isbn13: '9784049161670'
+  release_date: 2024-12
+  pages: null
+  publisher: null
+  edition_type: standard
+  title_display: 魔法科高校の劣等生 よんこま編 8
+  source: ndl-volgap
+  added_at: '2026-07-09'
+  note: mangazenkan完結検出→NDL裏取り(3ソース一致)で欠け巻補完(魔法科高校の劣等生 よんこま編)
+- series_keys: &id023
+  - qid:Q11464147|name:ブレイブ・ストーリー新説
+  qid: null
+  number: 4
+  isbn13: '9784107711700'
+  release_date: 2004-09
+  pages: null
+  publisher: null
+  edition_type: standard
+  title_display: ブレイブ・ストーリー〜新説〜 4
+  source: ndl-volgap
+  added_at: '2026-07-09'
+  note: mangazenkan完結検出→NDL裏取り(3ソース一致)で欠け巻補完(ブレイブ・ストーリー〜新説〜)
+- series_keys: *id023
+  qid: null
+  number: 5
+  isbn13: '9784107711885'
+  release_date: 2004-12
+  pages: null
+  publisher: null
+  edition_type: standard
+  title_display: ブレイブ・ストーリー〜新説〜 5
+  source: ndl-volgap
+  added_at: '2026-07-09'
+  note: mangazenkan完結検出→NDL裏取り(3ソース一致)で欠け巻補完(ブレイブ・ストーリー〜新説〜)
+- series_keys: *id023
+  qid: null
+  number: 6
+  isbn13: '9784107712059'
+  release_date: 2005-03
+  pages: null
+  publisher: null
+  edition_type: standard
+  title_display: ブレイブ・ストーリー〜新説〜 6
+  source: ndl-volgap
+  added_at: '2026-07-09'
+  note: mangazenkan完結検出→NDL裏取り(3ソース一致)で欠け巻補完(ブレイブ・ストーリー〜新説〜)
+- series_keys: *id023
+  qid: null
+  number: 7
+  isbn13: '9784107712141'
+  release_date: 2005-05
+  pages: null
+  publisher: null
+  edition_type: standard
+  title_display: ブレイブ・ストーリー〜新説〜 7
+  source: ndl-volgap
+  added_at: '2026-07-09'
+  note: mangazenkan完結検出→NDL裏取り(3ソース一致)で欠け巻補完(ブレイブ・ストーリー〜新説〜)
+- series_keys: *id023
+  qid: null
+  number: 8
+  isbn13: '9784107712301'
+  release_date: 2005-08
+  pages: null
+  publisher: null
+  edition_type: standard
+  title_display: ブレイブ・ストーリー〜新説〜 8
+  source: ndl-volgap
+  added_at: '2026-07-09'
+  note: mangazenkan完結検出→NDL裏取り(3ソース一致)で欠け巻補完(ブレイブ・ストーリー〜新説〜)
+- series_keys: *id023
+  qid: null
+  number: 9
+  isbn13: '9784107712400'
+  release_date: 2005-10
+  pages: null
+  publisher: null
+  edition_type: standard
+  title_display: ブレイブ・ストーリー〜新説〜 9
+  source: ndl-volgap
+  added_at: '2026-07-09'
+  note: mangazenkan完結検出→NDL裏取り(3ソース一致)で欠け巻補完(ブレイブ・ストーリー〜新説〜)
+- series_keys: *id023
+  qid: null
+  number: 10
+  isbn13: '9784107712509'
+  release_date: 2005-12
+  pages: null
+  publisher: null
+  edition_type: standard
+  title_display: ブレイブ・ストーリー〜新説〜 10
+  source: ndl-volgap
+  added_at: '2026-07-09'
+  note: mangazenkan完結検出→NDL裏取り(3ソース一致)で欠け巻補完(ブレイブ・ストーリー〜新説〜)
+- series_keys: *id023
+  qid: null
+  number: 11
+  isbn13: '9784107712660'
+  release_date: 2006-03
+  pages: null
+  publisher: null
+  edition_type: standard
+  title_display: ブレイブ・ストーリー〜新説〜 11
+  source: ndl-volgap
+  added_at: '2026-07-09'
+  note: mangazenkan完結検出→NDL裏取り(3ソース一致)で欠け巻補完(ブレイブ・ストーリー〜新説〜)
+- series_keys: *id023
+  qid: null
+  number: 12
+  isbn13: '9784107712769'
+  release_date: 2006-06
+  pages: null
+  publisher: null
+  edition_type: standard
+  title_display: ブレイブ・ストーリー〜新説〜 12
+  source: ndl-volgap
+  added_at: '2026-07-09'
+  note: mangazenkan完結検出→NDL裏取り(3ソース一致)で欠け巻補完(ブレイブ・ストーリー〜新説〜)
+- series_keys: *id023
+  qid: null
+  number: 13
+  isbn13: '9784107712875'
+  release_date: 2006-08
+  pages: null
+  publisher: null
+  edition_type: standard
+  title_display: ブレイブ・ストーリー〜新説〜 13
+  source: ndl-volgap
+  added_at: '2026-07-09'
+  note: mangazenkan完結検出→NDL裏取り(3ソース一致)で欠け巻補完(ブレイブ・ストーリー〜新説〜)
+- series_keys: *id023
+  qid: null
+  number: 14
+  isbn13: '9784107713018'
+  release_date: 2006-11
+  pages: null
+  publisher: null
+  edition_type: standard
+  title_display: ブレイブ・ストーリー〜新説〜 14
+  source: ndl-volgap
+  added_at: '2026-07-09'
+  note: mangazenkan完結検出→NDL裏取り(3ソース一致)で欠け巻補完(ブレイブ・ストーリー〜新説〜)
+- series_keys: *id023
+  qid: null
+  number: 15
+  isbn13: '9784107713230'
+  release_date: 2007-03
+  pages: null
+  publisher: null
+  edition_type: standard
+  title_display: ブレイブ・ストーリー〜新説〜 15
+  source: ndl-volgap
+  added_at: '2026-07-09'
+  note: mangazenkan完結検出→NDL裏取り(3ソース一致)で欠け巻補完(ブレイブ・ストーリー〜新説〜)
+- series_keys: *id023
+  qid: null
+  number: 16
+  isbn13: '9784107713414'
+  release_date: 2007-06
+  pages: null
+  publisher: null
+  edition_type: standard
+  title_display: ブレイブ・ストーリー〜新説〜 16
+  source: ndl-volgap
+  added_at: '2026-07-09'
+  note: mangazenkan完結検出→NDL裏取り(3ソース一致)で欠け巻補完(ブレイブ・ストーリー〜新説〜)
+- series_keys: *id023
+  qid: null
+  number: 17
+  isbn13: '9784107713490'
+  release_date: 2007-08
+  pages: null
+  publisher: null
+  edition_type: standard
+  title_display: ブレイブ・ストーリー〜新説〜 17
+  source: ndl-volgap
+  added_at: '2026-07-09'
+  note: mangazenkan完結検出→NDL裏取り(3ソース一致)で欠け巻補完(ブレイブ・ストーリー〜新説〜)
+- series_keys: *id023
+  qid: null
+  number: 18
+  isbn13: '9784107713667'
+  release_date: 2007-11
+  pages: null
+  publisher: null
+  edition_type: standard
+  title_display: ブレイブ・ストーリー〜新説〜 18
+  source: ndl-volgap
+  added_at: '2026-07-09'
+  note: mangazenkan完結検出→NDL裏取り(3ソース一致)で欠け巻補完(ブレイブ・ストーリー〜新説〜)
+- series_keys: *id023
+  qid: null
+  number: 19
+  isbn13: '9784107713889'
+  release_date: 2008-03
+  pages: null
+  publisher: null
+  edition_type: standard
+  title_display: ブレイブ・ストーリー〜新説〜 19
+  source: ndl-volgap
+  added_at: '2026-07-09'
+  note: mangazenkan完結検出→NDL裏取り(3ソース一致)で欠け巻補完(ブレイブ・ストーリー〜新説〜)
+- series_keys: *id023
+  qid: null
+  number: 20
+  isbn13: '9784107713964'
+  release_date: 2008-05
+  pages: null
+  publisher: null
+  edition_type: standard
+  title_display: ブレイブ・ストーリー〜新説〜 20
+  source: ndl-volgap
+  added_at: '2026-07-09'
+  note: mangazenkan完結検出→NDL裏取り(3ソース一致)で欠け巻補完(ブレイブ・ストーリー〜新説〜)
+- series_keys: &id024
+  - name:片瀬平太|name:王様の仕立て屋 フィオリ・ディ・ジラソーレ
+  qid: null
+  number: 6
+  isbn13: '9784088908878'
+  release_date: 2018-03
+  pages: null
+  publisher: null
+  edition_type: standard
+  title_display: 王様の仕立て屋 〜フィオリ・ディ・ジラソーレ〜 6
+  source: ndl-volgap
+  added_at: '2026-07-09'
+  note: mangazenkan完結検出→NDL裏取り(3ソース一致)で欠け巻補完(王様の仕立て屋 〜フィオリ・ディ・ジラソ)
+- series_keys: *id024
+  qid: null
+  number: 7
+  isbn13: '9784088910598'
+  release_date: 2018-07
+  pages: null
+  publisher: null
+  edition_type: standard
+  title_display: 王様の仕立て屋 〜フィオリ・ディ・ジラソーレ〜 7
+  source: ndl-volgap
+  added_at: '2026-07-09'
+  note: mangazenkan完結検出→NDL裏取り(3ソース一致)で欠け巻補完(王様の仕立て屋 〜フィオリ・ディ・ジラソ)
+- series_keys: &id025
+  - qid:Q11678043|name:放課後プレイ
+  qid: null
+  number: 2
+  isbn13: '9784048653305'
+  release_date: 2015-07
+  pages: null
+  publisher: null
+  edition_type: standard
+  title_display: 放課後プレイ 2
+  source: ndl-volgap
+  added_at: '2026-07-09'
+  note: mangazenkan完結検出→NDL裏取り(3ソース一致)で欠け巻補完(放課後プレイ)
+- series_keys: *id025
+  qid: null
+  number: 3
+  isbn13: '9784048928465'
+  release_date: 2017-03
+  pages: null
+  publisher: null
+  edition_type: standard
+  title_display: 放課後プレイ 3
+  source: ndl-volgap
+  added_at: '2026-07-09'
+  note: mangazenkan完結検出→NDL裏取り(3ソース一致)で欠け巻補完(放課後プレイ)
