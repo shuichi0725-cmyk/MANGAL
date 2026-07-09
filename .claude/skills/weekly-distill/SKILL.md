@@ -26,13 +26,15 @@ python scripts/_build-list-index.py data/manga.v2 data   # 本番索引(~10分)
 - ai-reviews 等 seed 由来はそのまま(生成不要)。
 - 生成物を commit+push。
 
-### 2. ステージング鮮度 + git 確認
-- `D:\mangal-cache\proddata` は junction(manga/seeds/art-books)=自動追随、**コピー物は手動更新**:
-  masters(demographics/genres/magazines/publisher-aliases/publishers/slug-aliases).yml と索引3本(manga-list/search/catch-index.json)を `data/` から cp。
-- `git status` を見て **scripts/ の未コミット変更が無いか**確認(promote拡張のcommit漏れ=2026-07-04実害)。
+### 2. ★preflight (= 2026-07-10 script化。手動チェックリスト全廃)
+```
+python scripts/_weekly-preflight.py --fix     # FAILが1つでもあればビルド開始禁止(exit 1)
+```
+- 内蔵: コード未コミット検査(2026-07-04実害)/timeout=300/D:空き20GB+/out・.next junction再作成(★実体dirは絶対に自動削除しない=中身有りは手動退避を指示)/staging junction+masters6+索引3本の同期/生成物鮮度WARN。
+- 下の「ディスク事前確認」の手動PowerShellはpreflightが代替(復旧手順のみ手動参照)。
 
 ### 3. フルビルド (★実測2.5〜3.5h、バックグラウンド+Monitor)
-★**開始前に必ず下の「ディスク事前確認」を実施**(C:満杯だと終盤のexportコピーがENOSPC死する)。
+★**preflight全通過(exit 0)を確認してから開始**(C:満杯だと終盤のexportコピーがENOSPC死する)。
 ```
 $env:MANGAL_DATA_DIR="D:\mangal-cache\proddata"; npx next build 2>&1 | Out-File .cache\weekly-build.log
 ```
@@ -56,33 +58,27 @@ python scripts/_r2-sync.py --bucket mangal-site
 - スクリプトが .env.local から R2_* 自動読込・**本番索引 overlay(out/ ルートへ)+5MBガード**内蔵。
 - レイアウト級の変更(全頁共通部)があった週は全量PUT=正常。
 
-### 5. 疎通確認 (URLを間違えるな)
+### 5+6. ★finalize (= 2026-07-10 script化。疎通→marker→manifestをゲート連鎖で1本化)
 ```
-B=https://mangal-db.com
-主要頁: / /manga/urusei-yatsura /contact /about → 200
-★索引は**ルート直下**: $B/manga-list-index.json → 25MB級/200 (★/data/ ではない! 2026-07-04誤検証の教訓)
-コーナーデータ: $B/data/anniversaries.json 等 → 200
-API: POST $B/api/contact {"body":"smoke"} → {"ok":true}
-価格非表示: 作品頁に ¥ が無い
+python scripts/_weekly-finalize.py
 ```
-
-### 6. marker更新 (= 差分反映エンジンの基準点)
-```
-python -c "import json,subprocess;h=subprocess.run(['git','rev-parse','HEAD'],capture_output=True,text=True).stdout.strip();json.dump({'code_commit':h,'data_commit':h,'note':'週次蒸留'},open('.cache/prod-deploy-marker.json','w'),indent=1)"
-```
-続けて pages-manifest も初期化:
-```
-python scripts/_init-pages-manifest.py
-```
-(diff-deploy の検出基準点。marker と対。忘れると差分反映が過剰検出/誤abortする)
+- 内蔵順序: ①ビルド完了判定(log『✓ Exporting』+out/manga≥120k枚) → ②sitemap存在 → ③疎通確認(`_prod-smoke.py`=主要頁200/索引ルート直下+5MBガード/¥非含有/contact POST) → ④marker更新 → ⑤`_init-pages-manifest.py`。
+- ★**①〜③のどれかがFAILならmarkerを書かずabort**(=diff-deployは前回基準のまま安全側)。手動one-liner写経は廃止。
+- 疎通だけ単独で回す時: `python scripts/_prod-smoke.py`(検証練習は `--no-post`)。URL正解はscriptに焼き込み済(索引は**ルート直下**=/data/ではない。2026-07-04誤検証の教訓)。
 
 ### 7. 報告
 工程表(ビルド頁数/PUT数/疎通結果)で完了報告。異常は隠さずそのまま。
 
+## ★成功判定 (= 完了主張の前にこの数字を全部言えること)
+- preflight exit 0 / out/manga ≈ **132k files**(≥120kがfinalize下限) / R2 PUT数(全量=レイアウト週・少数=データ週)
+- smoke **PASS 10/10**(FAIL 0) / 索引 **25MB級**(5MB未満=preview索引化事故)
+- marker `note=週次蒸留` + pages-manifest 初期化ログ
+- どれかが言えない=完了していない(finalizeがexit 0を返すまで完了報告禁止)
 
-## ★ディスク事前確認 (= Step3の直前に必須。2026-07-05 ENOSPC事故対策)
+
+## ★ディスク事前確認 (= 2026-07-10より `_weekly-preflight.py --fix` が自動実施。以下は仕組みの説明+ENOSPC復旧手順)
 ★**out/と.nextは常にD:へジャンクションしてからビルド**(C:は満杯気味・D:に455GB空き)。`out/+.next`で計10-15GB要る。
-ビルド前に一度だけ(PowerShell):
+手動でやる場合(PowerShell):
 ```
 Get-PSDrive C,D | Select Name,@{n='Free_GB';e={[math]::Round($_.Free/1GB,1)}}   # 確認
 cmd /c rmdir "C:\Users\shuic\code\MANGAL\out" "C:\Users\shuic\code\MANGAL\.next" 2>$null
@@ -96,5 +92,5 @@ cmd /c mklink /J "C:\Users\shuic\code\MANGAL\.next" "D:\mangal-cache\next-build"
 ## 備考
 - ★カレンダーは索引と同型の二重化(2026-07-06): public/calendar=preview実在フィルタ版なので、_r2-sync.pyが **data/calendar(本番フル)で自動overlay**する。Step1の再生成はフル/preview両方を回すこと(daily-distill Dと同じコマンド)。
 - Defender除外は実施済(2026-07-04)。ビルドが異常に遅い時は `Get-MpPreference | Select ExclusionPath` で除外が生きてるか確認。
-- 本番ドメイン mangal-db.com の紐付けは別タスク(未実施)。
+- 本番ドメイン mangal-db.com = 紐付け済(2026-07-10 疎通200確認。smokeの既定BASE)。
 - edge cache(HTML s-maxage=86400)により旧頁が最長1日残る。確認は `?v=` クエリでバイパス。
