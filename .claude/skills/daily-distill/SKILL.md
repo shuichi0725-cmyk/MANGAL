@@ -22,6 +22,36 @@ B=NDL新着回収(納本済み過去分)。毎日でなくてよい(間隔が空
 - genre=closed vocabulary(master32)のみ+provisional。catch/synopsis=skill enrich-catch-synopsis の規律。
 - ★**改善は即興でなくskill/scriptに焼く**: 実行中に穴を見つけたら手動で継ぎ足すな。scriptにゲート追加→commitしてから進む(即興は次回消える+報告が水増しでブレる)。
 
+## ★毎日の実行手順 (= runbook・この順で回す。2026-07-09 確立。ツール把握用)
+
+前提: `git status` clean。楽天/NDL認証env有り。
+
+| # | やること | ツール(コマンド) |
+|---|---|---|
+| 1 | 予約harvest | `python scripts/_rakuten-preorder-harvest.py` |
+| 2 | ★**増加分に絞る**(必須) | `python scripts/_preorder-increment.py`  ← prev差分+過去draft除外。飛ばすと水増し |
+| 3 | 分類 | `python scripts/_preorder-classify.py` |
+| 4 | ①続巻→種4+反映 | `python scripts/_preorder-apply-zokkan.py` → `python scripts/_reflect-targeted.py --only <touched> --push` |
+| 5 | ②③新作ドラフト | `python scripts/_preorder-gen-preview.py new1a` ; `new1b` |
+| 6 | ④途中巻ドラフト | `python scripts/_preorder-gen-midfill.py` |
+| 7 | genre付与 | 各draftの`_preorder_draft.rakuten_caption`(harvest捕捉済)を読み、master32から**provisional付与**(captionあれば発売前でも可)。無い分はcover用API時に同応答からvol1 caption捕捉 |
+| 8 | Cヨミ照合 | `python scripts/_verify-kana-pending.py --limit 200` |
+| 9 | **検査**(下記チェックリスト) | 欠け>0なら原因調査 |
+| 10 | 索引+暦+push | `python scripts/_build-list-index.py .preview-data/manga .preview-data` ; `python scripts/_build-calendar.py .preview-data/manga public/calendar <当月>` ; commit+push |
+| 11 | B NDL新着(任意) | `python scripts/_distill_daily.py --discover`→`--plan`→`--emit` |
+
+### ★生成後チェックリスト (= 全部2026-07-09に実際踏んだ罠。毎回数える)
+- □ **kana純カタカナ**(漢字/ひらがな0)。楽天ヨミ無し/汚染は**捏造せずhold**が効いているか
+- □ **slug=辞書装置**(`_slug_kana_lib`経由)・英語綴り(summer-blend等)。pykakasi再発明でない。英語出ない語は`katakana-english.yml`に追加
+- □ **全巻に発売日**(回収先行巻=種2 db-v2から引く)+**書影**(実URL=harvest/covers seed/楽天API。★構築禁止)
+- □ **genre**=captionからprovisional・master32のみ(捏造なら空)
+- □ **作者kana**=楽天authorKana由来 or 空(捏造なし。漢字混入0を確認)
+- □ **preview=今回のみ**(増加分・前回draft混入0・捏造kana hold済)
+- □ **索引skip 0**(Zod検証で落ちる頁=検索に載るが404)
+
+### ★今日の学び(runbookに焼いた恒久修正・再発防止)
+- 増加分ゲート(過去draft再カウント防止) / kana捏造hold / slug辞書装置 / 発売日=種2引き当て / 書影=実URL(構築禁止) / 1API全フィールド捕捉(caption→genre) / preview今回のみ。
+
 ## A0. ★増加分ゲート (= 2026-07-09 必須。ここを飛ばすと全部水増しになる)
 
 harvest後・classify前に**必ず**増加分に絞る。`_preorder-increment.py`(下記機能を1本化):
