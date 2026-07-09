@@ -68,4 +68,23 @@ json.dump(sorted(touched), open(f"{ROOT}/.cache/preorders/zokkan-touched.json", 
 with open(f"{ROOT}/docs/production-diagnostics/preorder-triage.tsv", "a", encoding="utf-8") as f:
     for isbn, title, why in wl:
         f.write(f"zokkan_hold\t{isbn}\t\t{str(title)[:40]}\t\t\t{why}\n")
+
+# ★covers seed自動追記(2026-07-10 ユーザ指摘=新刊巻の書影忘れ): harvestの実URL書影を
+#   data/seeds/covers.jsonl.gz へ純粋追加。promoteの_cover_forがnull書影を充填する経路に乗せる。
+import gzip as _gz
+_cp = os.path.join(ROOT, "data", "seeds", "covers.jsonl.gz")
+_have = set()
+try:
+    for _l in _gz.open(_cp, "rt", encoding="utf-8"):
+        try: _have.add(json.loads(_l).get("isbn13"))
+        except Exception: pass
+except Exception: pass
+_added_cov = 0
+with _gz.open(_cp, "at", encoding="utf-8") as _f:
+    for _r in cls["zokkan"]:
+        _c = _r.get("cover")
+        if _c and "noimage" not in _c and _r.get("isbn") not in _have:
+            _f.write(json.dumps({"isbn13": _r["isbn"], "cover_url": _c}, ensure_ascii=False) + "\n")
+            _have.add(_r["isbn"]); _added_cov += 1
+print(f"covers seed追記: {_added_cov}件(新刊書影)")
 print(f"種4追加 {added} / 対象頁 {len(touched)} / 保留 {len(wl)} (worklist追記)")
