@@ -7,6 +7,9 @@ metadata:
   originSessionId: 8f5c881f-9859-490c-b682-bd1969ec515c
 ---
 
+★**2026-07-10 現況更新**: 本番=**mangal-db.com**(Worker `mangal-r2`+R2配信・ドメイン紐付け済・疎通200確認)。下の「Worker mangal→workers.dev・R2移行が別タスク」の節は**歴史**(R2移行済)。
+★**SEO/一般衛生=済(2026-07-10 実測確認・再提案するな)**: GSC登録済(**DNS TXT方式**=`google-site-verification=oXIq...`がDNSに現存。リポジトリ/HTMLに痕跡が無くても未登録と即断しない) / robots.txt(sitemap参照) / sitemap.xml / JSON-LD / OGP / ストアリンク[PR]表記。★未実施=Cloudflare Web Analyticsビーコン(訪問者/人気ページ用・ユーザ裁定)と外形監視(当面不要=ユーザ判断)。
+
 Cloudflare に2系統。 **本番=Worker / 見た目テスト=Pages** で使い分け(2026-06-14 ユーザ確定)。
 
 - **本番** = Worker `mangal` → `https://mangal.shuichi0725.workers.dev`（アカウントサブドメイン=shuichi0725、account_id=`774e95ed884a48e76ffb5aa78ae7e037`）。
