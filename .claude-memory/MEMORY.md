@@ -138,3 +138,4 @@
 - [【進行中】ISBNダブリ潰し](isbn_dup_cleanup_state.md) — R1=AUTO19群済/残250群per-case queue。道具3点(audit/triage/apply)git済
 - [【残タスク】鬼太郎本編の多版正規化](kitaro_honpen_multiedition_pending.md) — sid49705巨大容器(1968-2023十数版)。トリガー=鬼太郎本編やって。最新版/著者是正は済
 - [TinyFish=WebFetch補完(APIない/弾かれるサイト)](tinyfish_web_fetch.md) — scripts/_tinyfish.py・Fetch無料・キーは.env。潮出版社等で実証
+- [Cloudflareアクセス解析の叩き方](cloudflare_analytics_access.md) — トークン=.env(gitignore)/GraphQL workersInvocationsAdaptive/本番Worker=mangal-r2。訪問者/人気ページは未対応(Web Analytics要)
