@@ -13,7 +13,9 @@ year_ended: null
 year_started: 2026
 status: ongoing
 demographic: other
-genres: []
+genres:
+- bl
+- fantasy
 editions:
 - type: standard
   label: 通常版
@@ -30,3 +32,6 @@ _preorder_draft:
   added_at: '2026-07-09'
   source: rakuten-preorder
   note: 予約②③previewドラフト。本番化はユーザ確認後。ヨミ=楽天仮(NDL照合待ち)
+  rakuten_caption: 「嘘」を見抜く力と「愛」を操る力。運命が交錯する神力ファンタジーBL。美麗作画と緻密な世界観が光る著者初単行本。
+  rakuten_genre_id: '001001012'
+genres_provisional: true

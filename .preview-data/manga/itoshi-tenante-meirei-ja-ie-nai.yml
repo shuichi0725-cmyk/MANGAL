@@ -13,7 +13,9 @@ year_ended: null
 year_started: 2026
 status: ongoing
 demographic: other
-genres: []
+genres:
+- bl
+- romance
 editions:
 - type: standard
   label: 通常版
@@ -30,3 +32,6 @@ _preorder_draft:
   added_at: '2026-07-09'
   source: rakuten-preorder
   note: 予約②③previewドラフト。本番化はユーザ確認後。ヨミ=楽天仮(NDL照合待ち)
+  rakuten_caption: Domの虎太は、従者のSub・狼に片思い中。恋人になるために奮闘中だけど、すべては狼の手のひらの上で…？
+  rakuten_genre_id: 001021002015/001001012
+genres_provisional: true

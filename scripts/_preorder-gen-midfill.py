@@ -158,6 +158,7 @@ for r in cls["ex_mid"]:
            "editions": [{"type": "standard", "label": "通常版", "publisher": (_pubkey(r.get("publisher")) or r.get("publisher")),
                           "imprint": r.get("seriesName") or "", "volumes": volumes}],
            "_preorder_draft": {"class": "ex_mid", "added_at": TODAY, "source": "rakuten-preorder",
+                               "rakuten_caption": (r.get("caption") or None),  # ★あらすじ捕捉(genre/catch/synopsis元 2026-07-09)。vol1あらすじはcover API時に上書き捕捉可
                                "note": f"取りこぼし作品(予約巻v{r['_vol']}発見→キャッシュ全巻回収{len(ns)}冊)。過去巻の日付/確証は本番化前にNDL等で要補完"}}
     yaml.dump(doc, open(f"{ROOT}/.preview-data/manga/{slug}.yml", "w", encoding="utf-8"),
               allow_unicode=True, sort_keys=False, width=200)

@@ -13,7 +13,10 @@ year_ended: null
 year_started: 2026
 status: ongoing
 demographic: seinen
-genres: []
+genres:
+- gag
+- comedy
+- supernatural
 editions:
 - type: standard
   label: 通常版
@@ -30,3 +33,8 @@ _preorder_draft:
   added_at: '2026-07-09'
   source: rakuten-preorder
   note: 予約②③previewドラフト。本番化はユーザ確認後。ヨミ=楽天仮(NDL照合待ち)
+  rakuten_caption: 'ピコマルはとってもキュートでラブリーな天使!! ある日、女神様から重大任務を仰せつかることに。それは、善悪の審判として、人間を裁くこと。気の優しい天使であるピコマルの前で、邪悪な本性を剥き出しにしてしまうと、ピコマルによって断罪されてしまう!!　キュートな笑みをたたえ、無慈悲に人間を断罪するピコマルの日常がはじまる!!
+
+    Xでも大反響！　キュートでラブリーな天使からスカッと痛快ペナルティ！　最恐の知育漫画、待望のリターンズ！'
+  rakuten_genre_id: '001001003003'
+genres_provisional: true

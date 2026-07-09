@@ -227,7 +227,8 @@ for klass, r in targets:
                          "release_date": rd}],
         }],
         "_preorder_draft": {"class": klass, "added_at": TODAY, "source": "rakuten-preorder",
-                            "note": "予約②③previewドラフト。本番化はユーザ確認後。ヨミ=楽天仮(NDL照合待ち)"},
+                            "rakuten_caption": (r.get("caption") or None),  # ★あらすじ捕捉(genre/catch/synopsis元・書影と同じharvestで取れる=捨てない 2026-07-09)
+                            "note": "予約②③previewドラフト。本番化はユーザ確認後。ヨミ=楽天仮(NDL照合待ち)。genre=captionからprovisional付与"},
     }
     yaml.dump(doc, open(f"{ROOT}/.preview-data/manga/{slug}.yml", "w", encoding="utf-8"),
               allow_unicode=True, sort_keys=False, width=200)
