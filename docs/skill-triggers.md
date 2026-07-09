@@ -7,6 +7,7 @@ skill 実体 = `.claude/skills/<name>/SKILL.md`(git追跡。Opus 4.8 等でも�
 |---|---|---|---|
 | **「反映して」** | reflect-targeted | 直した頁だけ本番manga.v2+索引+テスト同期+push(検証ゲート内蔵)。フルpromote禁止 | 数分 |
 | **「テスト環境に出して」** | test-deploy | 対象頁を .preview-data へ投入/入替+索引再構築+push(反映15-20分・追いpush禁止) | 数分+待ち |
+| **「本番化して」** | productionize-drafts | 確認済み予約ドラフトをpreorder-pages(恒久)へ昇格+preview解放。週次蒸留で本番公開。R2配信はしない(=週次/差分反映が担う) | 数分 |
 | **「週次蒸留して」** | weekly-distill | 本番へのフルビルド+R2フルアップ(事前再生成→build~2.5h→差分PUT→疎通確認)。コード変更を本番に出す唯一のルート | ~3-4時間 |
 | **「差分反映して」** | diff-deploy | 変更ページだけ部分ビルド→本番R2へ選択PUT+cache purge。**コードドリフト時は自動abort→週次へ** | 数分 |
 | **「日次蒸留して」** | daily-distill | 2本立て=楽天予約ハーベスト(未来・カレンダー供給)+NDL新着回収+ヨミ照合キュー+カレンダー更新 | 数分〜 |
