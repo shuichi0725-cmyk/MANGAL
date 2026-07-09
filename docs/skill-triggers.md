@@ -28,6 +28,8 @@ skill 実体 = `.claude/skills/<name>/SKILL.md`(git追跡。Opus 4.8 等でも�
 | 60秒超のジョブを走らせる | long-job-ops | 生存確認・監視の絞り方・ハング判定・wrangler/シェルの罠 |
 | 「表示がおかしい」と言われた | display-bug-triage | 環境特定→キャッシュ→stale生成物→データ実体の順で1往復診断 |
 | APIが無い+WebFetchが弾かれるサイト /「TinyFishで」 | tinyfish | `_tinyfish.py fetch/search`(無料枠のみ・search=GET・Agent/Browserは有料=ユーザ承認)。序列=_lookup.py→WebFetch→TinyFish |
+| **「魚で調べて」** | tinyfish | **TinyFishだけ**で調査(他ソース使わない) |
+| **「魚などで調べて」** | tinyfish | **全ソース調査**(_lookup.py→WebFetch→TinyFishのエスカレーション込み) |
 
 ## skill でない便利トリガー
 | 言い方/操作 | 内容 |

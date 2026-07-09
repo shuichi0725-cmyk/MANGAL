@@ -1,12 +1,21 @@
 ---
 name: tinyfish
-description: TinyFishで/タイニーフィッシュ=APIが無い+標準WebFetchが弾かれるサイトの取得(fetch)とWeb検索(search)。無料枠のみ・主力はNDL/楽天(_lookup.py)でそれで埋まらない時の補完
+description: 魚で調べて=TinyFishだけで調査/魚などで調べて=全ソース(_lookup.py→WebFetch→TinyFish)で調査。APIが無い+標準WebFetchが弾かれるサイトの取得(fetch)とWeb検索(search)。無料枠のみ
 ---
 
 # TinyFish (= WebFetch補完。2026-07-08 導入・2026-07-10 skill化)
 
 AIエージェント向けWebインフラ。MANGALでは **「APIが無い + 標準WebFetchが返らない/弾かれる」サイトの取得** と、
 **性質判定のWeb検索**(これはアンソロか/雑誌か等)に使う。位置づけ=**必須でない便利ツール**(ユーザ評)。
+
+## トリガー語 (= 「魚」=TinyFishの愛称。2026-07-10 ユーザ設定)
+
+| ユーザの言い方 | やること |
+|---|---|
+| **「魚で調べて」** | **TinyFishだけ**で調査(search/fetch)。_lookup.py等の他ソースは使わない(ユーザがTinyFish単独の結果を見たい時) |
+| **「魚などで調べて」** | **全ソース調査**=下の「使う順番」どおり(_lookup.py→WebFetch→TinyFish のエスカレーション込みの深い調査) |
+| 「TinyFishで」「タイニーフィッシュ」 | 文脈次第(単独指定ならTinyFishのみ) |
+| (トリガー無し) | 状況発動=per-case/蒸留中に「APIに無い+WebFetch弾かれ」に当たったら自分の判断で使う |
 
 ## 使う順番 (= エスカレーション。いきなりTinyFishに行かない)
 
