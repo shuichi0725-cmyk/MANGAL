@@ -7,6 +7,8 @@ metadata:
   originSessionId: a2ed548f-4b21-42ea-9ad0-229054bf2d45
 ---
 
+**やり方の正 = skill `cf-analytics` + `scripts/_cf-analytics.py`**(2026-07-10 script/skill化=ユーザ依頼。ここは事実の記録のみ)。
+
 Cloudflare のアクセス解析が叩けるようになった(2026-07-09 ユーザがトークン作成)。
 
 - **トークン**: `.env` の `CLOUDFLARE_API_TOKEN`(テンプレ「分析およびログを読み取る」=Analytics/Logs Read)。gitignore済み・**絶対commitしない**。

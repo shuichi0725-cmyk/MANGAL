@@ -30,6 +30,7 @@ skill 実体 = `.claude/skills/<name>/SKILL.md`(git追跡。Opus 4.8 等でも�
 | APIが無い+WebFetchが弾かれるサイト /「TinyFishで」 | tinyfish | `_tinyfish.py fetch/search`(無料枠のみ・search=GET・Agent/Browserは有料=ユーザ承認)。序列=_lookup.py→WebFetch→TinyFish |
 | **「魚で調べて」** | tinyfish | **TinyFishだけ**で調査(他ソース使わない) |
 | **「魚などで調べて」** | tinyfish | **全ソース調査**(_lookup.py→WebFetch→TinyFishのエスカレーション込み) |
+| **「アクセス解析して」** | cf-analytics | `_cf-analytics.py report`(Worker日別req/エラー率)。★requests≠訪問者・人気ページは取れない |
 
 ## skill でない便利トリガー
 | 言い方/操作 | 内容 |

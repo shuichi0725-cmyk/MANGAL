@@ -139,5 +139,5 @@
 - [【進行中】ISBNダブリ潰し](isbn_dup_cleanup_state.md) — R1済/残250群
 - [【残】鬼太郎本編の多版正規化](kitaro_honpen_multiedition_pending.md) — トリガー=鬼太郎本編やって
 - [TinyFish=WebFetch補完](tinyfish_web_fetch.md) — 正=skill tinyfish
-- [Cloudflareアクセス解析](cloudflare_analytics_access.md) — トークン.env/GraphQL/mangal-r2
+- [Cloudflareアクセス解析](cloudflare_analytics_access.md) — 正=skill cf-analytics(_cf-analytics.py)
 - [進行中状態2026-07-10](inflight_state_2026_07_10.md) — 週次待ち52件+検証資産+残タスク
