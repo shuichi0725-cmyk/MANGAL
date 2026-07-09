@@ -34,11 +34,12 @@ B=NDL新着回収(納本済み過去分)。毎日でなくてよい(間隔が空
 | 4 | ①続巻→種4+反映 | `python scripts/_preorder-apply-zokkan.py` → `python scripts/_reflect-targeted.py --only <touched> --push` |
 | 5 | ②③新作ドラフト | `python scripts/_preorder-gen-preview.py new1a` ; `new1b` |
 | 6 | ④途中巻ドラフト | `python scripts/_preorder-gen-midfill.py` |
-| 7 | genre付与 | 各draftの`_preorder_draft.rakuten_caption`(harvest捕捉済)を読み、master32から**provisional付与**(captionあれば発売前でも可)。無い分はcover用API時に同応答からvol1 caption捕捉 |
+| 7 | genre付与(★worksheet化 2026-07-10) | `python scripts/_preorder-genre-worksheet.py --emit` → AIがworksheetのgenres[]にmaster32キー記入(確信なければ空) → `--apply`(master32外=abort・純粋追加・provisional自動)。caption無し頁は先に `_preorder-capture-captions.py` |
 | 8 | Cヨミ照合 | `python scripts/_verify-kana-pending.py --limit 200` |
 | 9 | **検査**(下記チェックリスト) | 欠け>0なら原因調査 |
-| 10 | 索引+暦+push | `python scripts/_build-list-index.py .preview-data/manga .preview-data` ; `python scripts/_build-calendar.py .preview-data/manga public/calendar <当月>` ; commit+push |
-| 11 | B NDL新着(任意) | `python scripts/_distill_daily.py --discover`→`--plan`→`--emit` |
+| 10 | ★**prev確定**(処理完了の宣言) | `python scripts/_preorder-increment.py --commit-prev` ← full→prev昇格。**これ以外の方法でprevを触るな**。飛ばすと次回差分が壊れる |
+| 11 | 索引+暦+push | `python scripts/_build-list-index.py .preview-data/manga .preview-data` ; `python scripts/_build-calendar.py .preview-data/manga public/calendar <当月>` ; commit+push |
+| 12 | B NDL新着(任意) | `python scripts/_distill_daily.py --discover`→`--plan`→`--emit` |
 
 ### ★生成後チェックリスト (= 全部2026-07-09に実際踏んだ罠。毎回数える)
 - □ **kana純カタカナ**(漢字/ひらがな0)。楽天ヨミ無し/汚染は**捏造せずhold**が効いているか
@@ -48,6 +49,7 @@ B=NDL新着回収(納本済み過去分)。毎日でなくてよい(間隔が空
 - □ **作者kana**=楽天authorKana由来 or 空(捏造なし。漢字混入0を確認)
 - □ **preview=今回のみ**(増加分・前回draft混入0・捏造kana hold済)
 - □ **索引skip 0**(Zod検証で落ちる頁=検索に載るが404)
+- □ **`--commit-prev` 実行済み**(処理完了後のみ。件数確認だけの日は実行しない)
 
 ### ★今日の学び(runbookに焼いた恒久修正・再発防止)
 - 増加分ゲート(過去draft再カウント防止) / kana捏造hold / slug辞書装置 / 発売日=種2引き当て / 書影=実URL(構築禁止) / 1API全フィールド捕捉(caption→genre) / preview今回のみ。
@@ -143,11 +145,12 @@ A: 収穫N件(月分布)/①種4追加/②③④ドラフト数+保留 ・ B: �
 ## 関連
 - 後退蒸留=`_distill_backward.py <年>` / preview管理=skill test-deploy / エンリッチ=skill enrich-catch-synopsis
 
-### ★prevの意味(2026-07-10 取りこぼし22件事故)
-- `preorders-prev.jsonl` = **最後に「処理」した時点のfull**(最後にharvestした時点ではない)。処理せず件数確認だけした日をprevにすると、その日の増加分が永遠にスルーされる。**処理完了後にのみ prev を latest-full で更新**する。
+### ★prevの意味(2026-07-10 取りこぼし22件事故 → 同日script化で解消)
+- `preorders-prev.jsonl` = **最後に「処理」した時点のfull**(最後にharvestした時点ではない)。処理せず件数確認だけした日をprevにすると、その日の増加分が永遠にスルーされる。
+- ★**更新は `_preorder-increment.py --commit-prev` のみ**(手動copy禁止)。incrementが①full退避を毎回上書き(stale穴封鎖) ②絞り済みLATESTへの二重実行をhash検知でabort ③処理完了後のcommit-prevでfull→prev昇格+prev.bak退避、まで面倒を見る。runbook手順10。
 
 ### ★ライブ回収の束ねルール(2026-07-10 明日もいい日=スピンオフ混同事故)
 - **束ねは正規化題の完全一致**(副題ブロック込み)のみ。title先頭一致は禁止(本編とスピンオフが同じ書き出しのなろう系で誤マッチ)。
 - 束ねた後に**巻番号の連続性を検査**((1)が2つ/系列飛び=別シリーズ混在signal)。
 - ★**著者集合は判定根拠にしない**(ユーザ裁定: スピンオフで作画が増えるとは限らない=同一人・減る・総入替すべてある。著者軸=分裂の根本原因 [[clustering_unit_is_series]])。
-- kana安全網32字は長題なろう系(基底40字)を誤holdする(不貞の子)→ 空白で基底が切れているかを先に見る。要調整。
+- kana安全網32字の長題誤hold(不貞の子=基底40字なろう系)は**是正済**(2026-07-10): `clean_kana`が基底題の機械読み長と整合(比0.6〜1.5)なら32字超でも通す。副題汚染(読み長より膨らむ)は依然hold。gen-preview/midfill結線済。

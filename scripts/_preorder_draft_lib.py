@@ -75,7 +75,7 @@ def _to_kata_reading(text):
     return re.sub(r"[^ァ-ヶー]", "", r)
 
 
-def clean_kana(kana, subtitle=None):
+def clean_kana(kana, subtitle=None, base=None):
     """楽天titleKana→カタカナのみ基底読み。漢字残る/空/汚染=None(hold=捏造回避)。
     ★楽天kanaの空白=語境界(副題境界でない)なので空白は除去して連結。
     ★副題は「副題読み(pykakasi)を末尾から差し引く」で除去(空白前取りは誤り=リターンズ事故)。
@@ -112,8 +112,12 @@ def clean_kana(kana, subtitle=None):
         return None
     # ★安全網(捏造回避): 副題読みの差し引きは pykakasi 読みズレで失敗しうる。
     #   基底題ヨミは通常32字以下。超過=副題連結が残った疑い→hold(NDL照合キューへ)。
+    #   ★長題誤holdの是正(2026-07-10 不貞の子=基底40字なろう系): 基底題の機械読み長と
+    #     整合する(比0.6〜1.5)なら本物の長題として通す(副題汚染なら読み長より大きく膨らむ)。
     if len(k) > 32:
-        return None
+        br = _to_kata_reading(base) if base else None
+        if not (br and 0.6 <= len(k) / max(1, len(br)) <= 1.5):
+            return None
     if not re.search(r"[ァ-ヶー]", k) and not re.search(r"[A-Za-z0-9]", k):
         return None
     return k or None

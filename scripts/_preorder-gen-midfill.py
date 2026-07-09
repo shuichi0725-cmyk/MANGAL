@@ -106,7 +106,7 @@ for r in cls["ex_mid"]:
     if _prov:
         holds.append((r.get("isbn"), r.get("title"), "(仮)題未確定")); continue
     title = _bt
-    kana = _clean_kana(r.get("titleKana"), _sub)                 # 楽天ヨミのみ・捏造(漢字/汚染)はNone=hold
+    kana = _clean_kana(r.get("titleKana"), _sub, _bt)            # 楽天ヨミのみ・捏造(漢字/汚染)はNone=hold。base=長題32字誤hold回避
     ym = r.get("ym")
     auths = author_names(r.get("author"))
     akanas = author_names(r.get("authorKana"))

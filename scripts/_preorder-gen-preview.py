@@ -185,7 +185,7 @@ for klass, r in targets:
     if prov:                                                      # (仮)=題未確定
         holds.append((klass, isbn, raw_title, "(仮)題未確定")); continue
     title = base
-    kana = _clean_kana(r.get("titleKana"), subtitle)              # 楽天ヨミのみ・捏造(漢字/汚染)はNone=hold
+    kana = _clean_kana(r.get("titleKana"), subtitle, base)        # 楽天ヨミのみ・捏造(漢字/汚染)はNone=hold。base=長題32字誤hold回避
     if kana is None:
         holds.append((klass, isbn, base, "楽天ヨミ無し/汚染=捏造回避hold(NDL照合キューへ)")); continue
     if not (title and ym and isbn and len(isbn) == 13 and auths):
