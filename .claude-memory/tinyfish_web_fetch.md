@@ -7,6 +7,8 @@ metadata:
   originSessionId: a2ed548f-4b21-42ea-9ad0-229054bf2d45
 ---
 
+**やり方の正 = skill `tinyfish`**(2026-07-10 skill化。ここは事実の記録のみ)。
+
 **TinyFish** = AIエージェント向けWebインフラ。MANGALでは**NDL/楽天APIに無く標準WebFetchが返らないサイトの取得**に使う(2026-07-08導入)。
 
 - **ツール**: `python scripts/_tinyfish.py fetch <URL>...`(ページ→Markdown・最大10URL・POST) / `search "<クエリ>"`(Web検索・★GET・レスポンス{query,results:[{title,url,snippet}],total_results})。コード内 `from _tinyfish import fetch, search`。urllib実装(requests不要)。★Search=GET(POSTは失敗する・2026-07-08修正)。

@@ -19,7 +19,7 @@ python scripts/_lookup.py --title "うる星やつら" --max 20 --live
 python scripts/_lookup.py --creator "ひおあきら" --title "宇宙戦艦ヤマト"  # ★作者束縛NDL(古典/同名多発の全巻回収)
 ```
 - ★**`--creator`(作品名+作者名でNDL SRU束縛)**=ユーザが手作業でやっていたNDL Search→TSVエクスポートの代替(2026-07-08)。`--title`だけでは楽天liveのみでNDLを叩かず、松本零士版/2199等の人気同名作に埋もれる(ひおあきら版ヤマトの教訓)。**版(seriesTitle)ごとに巻を束ねて表示・著者複数取得**(アンソロ/原作+作画の判定にそのまま使える)。古典・アンソロ・教育系の全巻/版回収はこれが本命。
-- ★**APIに無く標準WebFetchも弾かれるサイト**(潮出版社usio.co.jp等の公式・静的ページ)は `python scripts/_tinyfish.py fetch <URL>`(無料Fetch)。e-hon等セッション必須の検索は無料Fetch不可=有料Browser領域(要ユーザ承認)。[[tinyfish_web_fetch]]
+- ★**APIに無く標準WebFetchも弾かれるサイト**(潮出版社usio.co.jp等の公式・静的ページ)は `python scripts/_tinyfish.py fetch <URL>`(無料Fetch)。e-hon等セッション必須の検索は無料Fetch不可=有料Browser領域(要ユーザ承認)。詳細=**skill tinyfish**
 
 ## キャッシュ資産マップ (= どのファイルに何が入っているか。★往復根絶の核心)
 | ファイル | key | 入っているもの | ★入っていないもの |

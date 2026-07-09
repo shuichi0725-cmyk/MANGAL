@@ -1,142 +1,143 @@
-- [Project architecture - seeds pyramid](project_architecture_seeds.md) — 種1=MADB raw / 漫画家マスター / 種2=sqlite / 種3=AI fill yaml / 種4=巻補完 / 本番DB の関係
-- [【戒め】人気順で優先するな・全部やる](feedback_no_popularity_priority.md) — 残タスクをpopソートせず端から全部処理。順位付けは無駄(全件やる前提)
-- [巻抜け仮想(実績記録)](volgap_virtual_tool_trigger.md) — やり方の正=skill volgap-audit
-- [【再利用】2026新刊蒸留の完全フロー](distill_2026_pipeline.md) — NDL発見→_distill_preview生成→3段fill(NDL題/作者ISBN錨/楽天)→AI enrich(genre/catch/synopsis要約)。solo_nonfirst130→0・vol_gap21→0。verbatim撲滅・書影recheck・型1本番尊重。スクリプト/seed/順序を全記録
-- [preview実測+stale生成物の教訓](preview_deploy_pitfalls.md) — やり方の正=skill test-deploy/display-bug-triage。ここは実測と事故史
-- [軽量索引2分割(一覧+検索)実装](lightweight_index_architecture.md) — SSRで65k送らずクライアント遅延fetch。_build-list-index.py生成/MangaListItem・MangaSearchItem型/useMangaIndex・useSearchIndex。プレビューはpushで自動デプロイ・索引はpublic+.preview-data両置き
-- [【必ず使う】統合台帳の実体](intake_manifest_ledger_live.md) — data/seeds/intake-manifest/(operations.jsonl=20台帳3725操作集約 + holes snapshot)。.cache消失事故の恒久対策。CLAUDE.md冒頭にprotocol。新cleanup前に参照
-- [NDL漫画判定=NDC726.1/genre=漫画](ndl_manga_filter_ndc726.md) — 権威的に漫画判定。小説913.6/画集/雑誌を除外。古レコードはgenre=漫画で可。アンソロはシリーズ(レーベル)単位分割・アメコミ対象外
-- [【戒め】勝手に仕事を増やすな](feedback_dont_inflate_work.md) — 残務リスト肥大化/縁辺の必須化/revert無駄/CLEANを成果に混ぜる癖。コア済んだら言い切る、続きはユーザ具体指示まで生成しない
-- [synopsis和訳=git追跡seed](synopsis_ja_seed.md) — data/seeds/synopsis-ja.json(anilist_id key)。高価なAI生成物だけ永続化、他enrichは再join。種3に焼かない理由3つ。蒸留で純粋追加
-- [掲載scope=日本出版漫画(manhwa含む)](mangal_inclusion_scope.md) — 韓国manhwa日本語版も対象。外国語版書誌のみdrop。EMPTY slugは真作もある(上全/Page1)→drop前にMADB確認
-- [巻割れ統合(renumber)](volume_split_merge.md) — cm104凍結orphanを著者+題でmerge→発売日順renumber(per-sid代表)。種12照合で漏れ巻回収・Wiki/ISBN確証でだろう運転回避
-- [非掲載drop list(388件)](non_manga_drop_cleanup.md) — non-manga-drop.yml=外国版/satellite編集本/画集/アンソロジー。本編照合方式・merge絡み検証で本編影響0
-- [promote merge がdrop listを尊重](promote_merge_respects_drop.md) — find_related_series_idsがdrop済seriesをmerge除外(2026-06-16)。drop=単独ページ化停止だけでは同題merge経由で巻が他ページに混入していた構造バグ修正。drop追加後の再promoteで混入も解消
-- [コナン映画 漫画版/フィルムコミック判別法](conan_movie_filmcomic_method.md) — 楽天seriesName(〔ビジュアル〕/アニメコミック=film=drop vs 阿部ゆたか丸伝次郎=コミカライズ=keep)+wiki生ソース(action=raw)。映画タイアップ仕分けに再利用可
-- [【✅完了】楽天あらすじ→ジャンル/タグ生成](genre_from_rakuten_story_plan.md) — 教師あり学習→信頼度較正→2パス救済→方法D直接パッチ。本番manga.v2に genre 6,638作/tag 7,395作 純粋追加。truth-gap知見・全記録=docs/genre-rakuten-learning.md
-- [【残・次回】タグなし32,609作を埋める](tagless_coverage_next.md) — 要素タグなしは1990s-2010s中心。楽天タグの2パス救済(中精度)or閾値緩和。予測target-out流用で再分類不要。genre残provisional25,529も同様
-- [【重要・再発防止】楽天は在庫切れ除外→outOfStockFlag=1](rakuten_out_of_stock_flag.md) — 楽天Books APIは既定で在庫切れを返さない。絶版/品切れ巻・特装版を拾うにはoutOfStockFlag=1必須。化物語=flag0で13件→flag1で46件(全巻)。特装版修正の(a)(b)はこれで再実行
-- [【進行中・残3】特装版混入の是正(案B)](special_edition_fix_state.md) — 種1 schema:version=版名権威。同月+1.8倍で判別。(a)418+(b)230=648巻適用済。残=none第2パス/41書影(Amazon)/別フォーマット4396(版タブ)。書影CDN構築URLで在庫切れも取得可
-- [【最重要】merge は外部確証がある時だけ](merge_needs_external_proof.md) — 同一anilist_id≠同一作(AniListが別作を1idに束ねる:ゲゲゲ8作/クル4冊)。誤merge=本番DB致命的。デフォルト分離、merge は Wiki/cmoa/NDL/ISBN連番の確証時のみ。種2は統合根拠に使えない
-- [【本番前最終見直し】4軸監査の候補(未適用)](preproduction_review.md) — slug/フリガナ/title/副題を監査。最優先=slug衝突1,794(469franchise固有slug化+1,308homonym姓年suffix)。朝レポート=docs/pre-production-review.md。title_pua13/外国孤児3/sub_publisher8等。GO待ち
-- [掲載対象の境界ルール](inclusion_edge_rules.md) — 映画コミカライズ=keep/フィルムコミック=drop(描き手有無で判別)、KPCコンビニ再録=drop(DXは正規)、furigana副題漏れ込み是正
-- [_extract-top-completed.py = audit ツール、 本番反映なし](extract_top_completed_audit_purpose.md) — 2000 件抽出は 問題点探り用、 本番化 pipeline と 誤認しない、 Claude 重視しすぎ傾向の フィードバック
-- [OpenBD 終了 + 書影は Amazon API 必須](openbd_eol_amazon_required.md) — OpenBD サービス終了予定、 書影は Amazon PA-API のみ合法、 MANGAL は最初から Amazon API 利用方針 (= 過去議論済)
-- [AskUserQuestion は 短い label 必須](feedback_askuserquestion_short_labels.md) — モバイル中心 ユーザ、 長文 option label は 読めない、 4-8 文字 + 本文で 詳細説明 の パターン
-- [AskUserQuestion UI が見えない → テキストで聞く](feedback_no_askuserquestion_ui.md) — 選択 UI が描画されないので、選択肢は通常テキストの番号付きで提示し返信を求める
-- [巨大ファイル Edit でモバイル描画freeze](feedback_mobile_render_freeze_largefile_edit.md) — 33MB yml への Edit カード以降が描画されない、大ファイル操作後は短文を挟む/出力を小さく保つ
-- [スマホ「常に許可」で停止 → c.batで再開](feedback_mobile_permission_hang.md) — モバイルで常に許可を押すと止まる。プロンプト根絶はc.bat(continue+skip-permissions)再起動を案内
-- [user 最新指示 を 自己解釈で 上書きしない](feedback_user_directive_supremacy.md) — 「X 忘れて」 等の user 明示 上書き指示 を 私の prior plan / context 圧迫 心配 で 復活させない (= Phase 2 で 2000 件 区切り 違反 した 反省)
-- [phase2 fill workflow](phase2_fill_workflow.md) — phase2 = 107 entries/batch の shell loop 運用 (= todo 1400 行 read → raw → process + apply → 500件毎 commit + push + JST 報告)
-- [phase2 文字化け 2 件 (永続 skip)](phase2_corrupted_keys.md) — 「いずみタッチダウン!」 / 「キャンディキャンディ」 が todo に残り続ける、 batch loop では無視継続、 別途個別処理必要
-- [種2 qid は作者QID (作品でない)](shu2_qid_is_author.md) — series.qid=mangaka.qid と100%一致。「同一qid=同一作品」は誤り、正しくは同一作者。spinoff判定の誤親子化に注意
-- [種3 フリガナ2形式の使い分け](shu3_kana_two_forms.md) — title_kana(スペースなし)=HP表示用 / title_kana_segmented(スペースあり)=slug生成用。意図的並存、誤分割が slug 品質に影響
-- [MADB ネイティブ容器構造を build が無視](madb_native_series_structure.md) — isPartOf(巻→シリーズC-ID)+dcterms:creator(作者C-ID)が既存。名前パース再構築が問題#1(デラックス誤分類)#2(作画者脱落)の根因
-- [series 分裂の根本原因と統合案](series_fragmentation_rootcause.md) — SLF 4分裂/全DB約1万作品分裂。クラスタキーが単一著者+生title。頑健軸=ndla著者集合。案A実装+gating緩和で16,558 group。STEP1-3/A実装済、docs/series-fragmentation-analysis.md
-- [種a(AniList)照合の現状](anilist_matching_state.md) — v9が本命matcher(staff/year/vol使用済)、マッチ率~44%。title正規化強化で+1,305。残:著者経由23,304件・productionization確認・volumes→STEP4
-- [著者ロール忠実化の現状と限界](author_roles_state.md) — ★101-cleanが役割タグを剥がす/volumes由来はスピンオフ汚染。104ベースで1,512昇格適用済。半妖は104無し+clean剥離で未解決
-- [discovery戦略と競合参考](discovery_strategy_and_refs.md) — discovery=中核価値。manba=コミュニティ先行とは戦わず網羅×カテゴリ×AIで差別化。AniList人気/評価(コミュニティ不要)+/genre/[key]ランディング(自動まとめ記事)実装。ストアクリック=収益兼ランキング
-- [【adult v3信号源】adultcomic.dbsearch.net](adult_signal_dbsearch.md) — キュレーション済み成年作家/出版社/雑誌リスト(更新頻度高・年齢ゲート裏)。authors/magazines強・publishers裏取り。adult_scoreの精度向上に使う
-- [成人判定の機構とPhase A](adult_judgment_architecture.md) — 基準=日本MADB成年、レーベル有効/作者signalが誤爆源、override機構、2フラグ(adult_us)+geo実装済。★決定済: 楽天収穫完走後にv3新規構築(楽天不在+作者伝播+掲載誌+実測閾値)+種1全量スイープ監査(取りこぼし発掘)
-- [フリガナ正当性 検証完了](kana_validity_state.md) — 3ソース突合(MADB ja-hrkt/種a/Wiki)。真の誤り239修正済(白物語シロ→ビャク等)、残りは種3正(MADBノイズ)。Wikiサンプルで歩留まりゼロ確認しフル照合回避。slug土台は信頼可
-- [フリガナNDL監査](furigana_ndl_audit.md) — NDL公式タイトルヨミ=ground-truth。種2/種3/NDL 3ソース監査(_furigana-audit.py)。furigana-corrections.ymlをpromote最優先。当て字は守る/NDLもへうげ型で誤る→2ソース合意のみ高確度。残:flag1(2012)未照合・Tier2(45)per-case
-- [MADB誤番号是正(下=3型)](madb_volume_misnumber_fix.md) — 上下2冊が[1,3]と水増し表示の系統バグ~1,677件をpromoteで1..N振り直し(完全sequenceのみ・欠落は保護)。番号gap検出器=月次監査候補
-- [NDLクラスタリング設計(検証済)](ndl_clustering_design.md) — 分裂/版違い根治=NDL SRU(著者典拠ID+正規化主題)で再クラスタ。cm104凍結後の新刊もNDL典拠で統一可。200群実測で94%統一・over-merge 0。1照会で典拠ID+主題+巻+版
-- [【未決・重大】版違い統合](multi_edition_unification_pending.md) — 同一漫画の複数版を1ページに束ねる(うる星モデル)。edition keyがtype単位で別社standard多版が潰れる→(publisher×type)化要。表紙違い/番外編/復刻BOXの載せ方も未決。天使のたまごがテストケース。同一性はqidで確認可
-- [【保留】slug生成器](pending_slug_generator.md) — ユーザGO待ち。先に規則4点裁定(長音tokyo/を=o/敬称ハイフン/カタカナ英語綴り)要。現makeSlugは漢字破綻、新規則未実装
-- [slug/衝突調査の結論](collision_slug_investigation.md) — 派生物はmerge+promote全filter後のページ単位で。真の本番衝突1,797、雑誌drop list、副題append、merge漏れtaxonomy
-- [作品QID取得(P8731/QLever)](work_qid_enrichment.md) — 作品Wikidata QIDはAniList P8731逆引き。WDQS障害多→QLever使用。蒸留で再実行可、著者QIDとは別
-- [MADBデータ入手2経路(GitHub全件+サイト月次差分)](madb_data_acquisition.md) — baseline=GitHub全件、増分=MADBサイトの項目別月次DL(登録日基準・未来予約も載る・新鮮)。dedup前提
-- [MADB cm104/105は2024-11凍結(cm101のみ月次)](madb_cm104_frozen.md) — シリーズmaster凍結=再DL無駄。新作の著者役割はAniList補完が恒久策、毎月増える
-- [【残タスク】成年3分けレビューUI(4状態)](adult_triage_review_pending.md) — 本番DB後・書影付ローカルで非成年/成年JP/米成年を人が確定。罠=非成年はAniList要、unknown状態追加。日米差はHentai/Ecchi(BL説否定)
-- [【設計済・蒸留中核】型別マニフェスト+出荷ゲート](intake_manifest_gate_design.md) — ship-first/総当たり再探索を潰す台帳+門番。型9種で必須が違う。種4=sweep出力化。NDL束ね×MADB成年。Phase0簿記監査が最短。docs/intake-manifest-gate-design.md
-- [【厳守】Google Driveはcodeフォルダのみ](gdrive_code_folder_only.md) — Drive連携済(Android認証)。code以外は読み書き一切禁止。MCPツールはセッション再起動後に有効
-- [【残タスク】OTOMO THE COMPLETE WORKS補完](otomo_complete_works_pending.md) — 大友克洋全集はMADB未収録。ユーザが資料準備中、揃ったら種4登録。8巻AKIRAが現れたら全集収録シグナル
+- [seeds pyramid=全体構造](project_architecture_seeds.md) — 種1=MADB raw/種2=sqlite/種3=AI fill/種4=巻補完→本番DB
+- [【戒め】人気順で優先するな](feedback_no_popularity_priority.md) — popソート無駄、端から全件
+- [巻抜け仮想](volgap_virtual_tool_trigger.md) — 正=skill volgap-audit
+- [【再利用】2026新刊蒸留フロー](distill_2026_pipeline.md) — NDL発見→preview生成→3段fill→AI enrichの全記録
+- [preview実測+stale事故史](preview_deploy_pitfalls.md) — 正=skill test-deploy/display-bug-triage
+- [軽量索引2分割(一覧+検索)](lightweight_index_architecture.md) — 65k直送せずクライアント遅延fetch。_build-list-index.py
+- [【必ず使う】統合台帳](intake_manifest_ledger_live.md) — data/seeds/intake-manifest/=操作集約+holes。新cleanup前に参照
+- [NDL漫画判定=NDC726.1](ndl_manga_filter_ndc726.md) — 権威判定。小説/画集/雑誌除外
+- [【戒め】勝手に仕事を増やすな](feedback_dont_inflate_work.md) — コア済んだら言い切る、続きはユーザ指示まで
+- [synopsis和訳=git追跡seed](synopsis_ja_seed.md) — data/seeds/synopsis-ja.json(anilist_id key)。種3に焼かない
+- [掲載scope=日本出版漫画](mangal_inclusion_scope.md) — manhwa日本語版も対象。EMPTY slug≠junk
+- [巻割れ統合(renumber)](volume_split_merge.md) — orphanを著者+題merge→発売日順renumber
+- [非掲載drop list](non_manga_drop_cleanup.md) — non-manga-drop.yml=外国版/編集本/画集/アンソロ
+- [promote mergeがdrop list尊重](promote_merge_respects_drop.md) — drop済はmerge除外(同題混入バグ修正済)
+- [コナン映画 判別法](conan_movie_filmcomic_method.md) — 楽天seriesName+wiki rawでフィルム(drop)/コミカライズ(keep)
+- [【✅】楽天あらすじ→genre/tag](genre_from_rakuten_story_plan.md) — genre6,638/tag7,395追加済。docs/genre-rakuten-learning.md
+- [【残】タグなし32,609作](tagless_coverage_next.md) — 楽天タグ2パス救済or閾値緩和
+- [【再発防止】楽天outOfStockFlag=1必須](rakuten_out_of_stock_flag.md) — 既定は在庫切れ非表示
+- [【残3】特装版混入是正](special_edition_fix_state.md) — 種1 schema:version=版名権威。648巻適用済
+- [【最重要】mergeは外部確証必須](merge_needs_external_proof.md) — 同一anilist_id≠同一作。Wiki/NDL/ISBN連番のみ
+- [【未適用】4軸監査候補](preproduction_review.md) — slug衝突1,794最優先。GO待ち
+- [掲載境界ルール](inclusion_edge_rules.md) — 映画コミカライズkeep/フィルムdrop/KPCコンビニdrop
+- [_extract-top-completed=audit用](extract_top_completed_audit_purpose.md) — 本番化pipelineと誤認しない
+- [OpenBD終了・書影Amazon必須](openbd_eol_amazon_required.md) — PA-APIのみ合法(方針議論済)
+- [AskUserQuestionは短label](feedback_askuserquestion_short_labels.md) — 4-8文字+本文詳細
+- [選択UI見えない→テキストで](feedback_no_askuserquestion_ui.md) — 番号付き提示で返信を待つ
+- [巨大ファイルEditでモバイルfreeze](feedback_mobile_render_freeze_largefile_edit.md) — 大操作後は短文を挟む
+- [「常に許可」停止→c.bat再開](feedback_mobile_permission_hang.md)
+- [ユーザ最新指示を自己解釈で上書きしない](feedback_user_directive_supremacy.md)
+- [phase2 fill workflow](phase2_fill_workflow.md) — 107 entries/batch loop
+- [phase2文字化け2件skip](phase2_corrupted_keys.md) — 別途個別処理
+- [種2 qid=作者QID](shu2_qid_is_author.md) — 「同一qid=同一作品」は誤り
+- [種3フリガナ2形式](shu3_kana_two_forms.md) — kana=表示/segmented=slug生成。意図的並存
+- [MADBネイティブ容器をbuildが無視](madb_native_series_structure.md) — isPartOf+creator既存。名前パース再構築が根因
+- [series分裂の根本原因](series_fragmentation_rootcause.md) — クラスタキー=単一著者+生title。頑健軸=ndla著者集合
+- [種a(AniList)照合状態](anilist_matching_state.md) — v9本命~44%。残=著者経由23,304
+- [著者ロール忠実化の限界](author_roles_state.md) — 101-cleanが役割剥がし。104ベース1,512昇格済
+- [discovery戦略](discovery_strategy_and_refs.md) — 網羅×カテゴリ×AI。/genre/[key]ランディング実装
+- [adult v3信号源=dbsearch.net](adult_signal_dbsearch.md) — 成年作家/出版社/雑誌リスト
+- [成人判定機構](adult_judgment_architecture.md) — 基準=MADB成年。adult_us+geo実装済。v3=楽天収穫後
+- [フリガナ正当性検証完了](kana_validity_state.md) — 誤り239修正済。slug土台信頼可
+- [フリガナNDL監査](furigana_ndl_audit.md) — NDLヨミ=ground-truth。2ソース合意のみ高確度
+- [MADB誤番号(下=3型)是正](madb_volume_misnumber_fix.md) — ~1,677件promoteで1..N振り直し
+- [NDLクラスタリング設計](ndl_clustering_design.md) — 典拠ID+主題で94%統一・over-merge0
+- [【未決】版違い統合](multi_edition_unification_pending.md) — うる星モデル。edition key(publisher×type)化要
+- [【保留】slug生成器](pending_slug_generator.md) — GO待ち・規則4点裁定要
+- [slug衝突調査の結論](collision_slug_investigation.md) — 本番衝突1,797。副題append
+- [作品QID=P8731/QLever](work_qid_enrichment.md) — 著者QIDとは別
+- [MADB入手2経路](madb_data_acquisition.md) — GitHub全件+サイト月次差分
+- [MADB cm104/105凍結](madb_cm104_frozen.md) — cm101のみ月次。著者役割=AniList補完
+- [【残】成年3分けレビューUI](adult_triage_review_pending.md) — 書影付ローカルで人が確定
+- [【設計済】型別マニフェスト+出荷ゲート](intake_manifest_gate_design.md) — docs/intake-manifest-gate-design.md
+- [【厳守】Driveはcodeのみ](gdrive_code_folder_only.md)
+- [【残】OTOMO全集補完](otomo_complete_works_pending.md) — ユーザ資料待ち→種4
 
-- [NDL巻構造で分断シリーズ確定](ndl_volume_structure_resolves_fragmentation.md) — NDL SRUのdcndl:volume+dcndl:alternativeで「テーマ別題=実は番号付き巻」を裁定。なぜなぜ理科=全12巻と確定し24sid統合。学習/古典シリーズの分断裁定に再利用可
-- [収益設計=作品→読めるストア連動](store_affiliate_architecture.md) — 楽天API(無料gate無)起点で書影+リンク、e-bookは検索deep-link(誤マッチ回避)、収益本命は電書ストア初回特典ASP(数百円/件)をDB連動。Amazonは売上gateで後回し。法務=広告PR表記必須
-- [画集を別カテゴリで掲載](art_book_inclusion.md) — 漫画家画集203件を漫画と別ストリームで掲載(絶対混ぜない・作画家紐付け・原作者回避・アダルト除外)。Phase1済(seed)Phase2-3設計済(docs)未実装
-- [NDL非漫画一掃の手順と罠](ndl_nonmanga_sweep.md) — ユーザNDL RDF×ISBN突合で非漫画検出。罠=ファンブックに漫画/画集に小説/1巻画集2巻混在/本編存在チェック
-- [【✅完了】FilterPanel全チップに件数表示](filterpanel_show_counts.md) — 連載状態/分野/ジャンル/出版社/掲載誌に動的件数(faceted)実装済。FilterPanel.tsx counts+Cnt
-- [【残タスク】著者50音索引+スマホ透過フィルター](author_kana_index_and_mobile_filter.md) — 著者読みAniList41%取得済(NDL補完要)/フィルター透過オーバーレイ化(スマホ)
-- [【有効手法】AI一括生成+AI Web検証](method_ai_generate_plus_webverify.md) — 大量不確実データ精緻化=workflow並列でAI生成→怪しい物だけ作品特定クエリでWeb裏取り→残りAI案。slug英綴りで実証(是正8%)
-- [NDL option2巻レベル再クラスタ](ndl_option2_recluster.md) — NDL著者典拠+ISBN+読みで作画版の巻混在を是正。option2全10群→31ページ。zelda=11ゲーム分離。volume-final.tsv=ISBN→slug
-- [NDL slug-fix手法(by-ISBN確証)](ndl_slug_fix_method.md) — slugの-2/数字二重化/年欠落をNDLライブby-ISBN照会で解決。作画家姓=NDL creator+AniList読み。junk断片drop。巻kan漏れ=0実証
-- [【保留】機能ロードマップ(DB完成後)](feature_roadmap_post_db.md) — 一覧検索表(最優先・API不要)/種4は楽天で可(Amazon不要)/蔵書はlocalStorage+合言葉暗号化同期でPIIゼロ/続刊は.ics/衝突誘導=カノニカル+301
-- [版/刷タブ・在庫・電子割引](version_tabs_stock_ebook.md) — うる星で版タブ実装済(NDL網羅・既定=完備最古)。在庫タブ制御は将来(リアルタイム不可→キャッシュ準リアルタイム・楽天Yahoo先行Amazon後・OR集約)。電子は在庫でなく割引率表示
-- [【未解決】成人判定は版単位+ANGEL試金石](adult_per_edition_angel.md) — 自動imprintリストが劇画再販社(宙出版/シュベール/日本文芸社)を取りこぼす→手動要。成人は版(出版社)で変わる。同冊数タブ統合はページ数で同内容検証(_regroup-versions.py)
-- [publisher設計=版ごと当時社名(事実)](publisher_model_edition_level.md) — edition.publisher=種2 ISBN由来の当時社名/work.publishers=社キー集合(多社作品捕捉)。families不採用=実体はISBN出版者記号で統廃合に強い。ISBN10/13正規化必須。蒸留は自動導出+新社flag
-- [【台帳】全データ資産の地図](data_assets_inventory.md) — 種1-4/DB(db-v2)/seed/master/cache/出力の実ファイルと役割。何を持ち何を作ったかの一覧。実スキャン2026-06-08
-- [【私の弱点・必読】著者データ全源](author_data_map.md) — 正体=DB mangaka(48866,qid)/読み本命=metadata504(ヨミ21140+NDL典拠ID40792)/author-yomi.yml(19391)。著者検索は表記揺れで見落とす(ボンバ!反省)
-- [【戒め】全データ揃えてから本番に載せる](feedback_complete_data_before_ship.md) — 新規検知時は必要全フィールドを抜けゼロで(kana/romaji/英名/多言語名は例示、カテゴリ/出版社/あらすじ等も)揃えてから載せる。私のship-first傾向を抑える。穴埋め優先>表示
-- [【戒め】効率を先に考える](feedback_efficiency_first.md) — 重い/繰り返す作業はいきなり実行せず複数案比較→結果同じなら低コスト選択。確実だが遅い手に飛びつかない。前フィルタ/索引/キャッシュ/サンプル確認で速く
-- [【最重要】クラスタ単位=シリーズ](clustering_unit_is_series.md) — 統合は「同一シリーズ題+巻番号連続」の時だけ(ベルセルク続編型)。同IP/同出版社/同著者は統合根拠にしない。著者を軸にしたのが分裂の根本。デフォルト分離。ARIEL14とアウター1は別
-- [著者汚染の根本原因と overlay修正](author_pollution_overlay_fix.md) — clean工程が[著]/[編]タグstrip→build役割優先が死にコード→声優/編集/発売元が作画化+分裂。author-role-corrections.yml(20,959補正)で修正。原作/作画分離+credits欄+キーワード検索も実装し★本番v2適用済(2026-06-10)。残=版違い統合/アンソロ方針
-- [promote/build完了後のプロセス居座り(事実)](promote_hangs_on_exit_windows.md) — 対処の正=skill long-job-ops
-- [重複ページdedup完了(335件)](page_dedup_2026_06.md) — 中身同一の二重出力を統合(69,474→69,139)。源=種2断片を旧source2枚が再集合。page-dedup.yml+alias301+promote skip。同名別作品952は正当=触らない。残=FLAG367(同ISBN別title)/C2副題欠落/怖い話vol不一致
-- [公開時=Worker+R2方式(Pages不可)](hosting_worker_r2_architecture.md) — 69k頁≈14万ファイルがPages上限(有料10万)超え。R2実質0円/差分アップ可/geo・API・redirect一元化。課題=トップが全DB送信(軽量索引要)/O(n)検索/promote旧source依存
-- [【運用】AI書評家リーグ(corner9)](ai_review_league_operation.md) — 同一プロンプト×実在各社AIで書評並列(会社+モデル名表示)。Claudeは題名+同プロンプトだけで自分の分を執筆(公平)、他社はユーザ生成。週キーseed自動表示・初期8節・在庫4で補充通知。第1弾docs/ai-review-pack-01.md配布済
-- [【公開環境2系統】本番Worker / テストPages](deploy_environments_state.md) — 本番=mangal.shuichi0725.workers.dev(R2化が別タスク・現状部分のみ)/テスト=mangal-preview.pages.dev(600件,.preview-data push で更新)。Pagesデプロイの罠(metadata1MiB→Pages/project先作成/トークンPages権限)。account_id=774e95...
-- [著者kana完埋め=完了](author_kana_fill_state.md) — Web裏取り全30バッチ済、author-yomi.ymlに1,676件純粋追加(35,679キー)。unresolved372=ユーザ手動調査中(戻り次第純粋追加・AI再調査しない)。本番反映は次回promote待ち
-- [Wikipediaジャンルカテゴリ活用(調査済・GO待ち)](feature_roadmap_post_db.md) — Category:ジャンル別の漫画=人手キュレーション5千記事級。fantasy1166/SF820/action383等→genre-additions突合方式(野球で実証済)。スポーツは増やさない(ユーザ指示)。★戦争漫画88の受け皿キー未決(war新設orhistorical)
-- [【完了+手順】slug適用パイプライン](slug_apply_pipeline.md) — 2026-06-11本番適用済(69,004頁・alias30,533)。実行順序6段+罠5つ(reps凍結/rep単位/latin title優先/音写長さガード/dict3カナ)。残=Stage E(ISBN振り直し920)+Stage F(版クラスタ統合スイープ)
-- [【残タスク】ジャンル品質改善(4段)](genre_quality_improvement.md) — AI付与56%未検証+二系統並存が問題。監査→AniList語彙マッピング→多数決統合→Wikipediaスイープ。タクソノミーは増やさない(ユーザ方針)
-- [【厳守】AIジャンルはmaster32キーから選ぶだけ](ai_genre_closed_vocabulary.md) — 蒸留でAI付与時はclosed vocabulary(data/genres.yml=正本)から文言を持ってくる。新語/英語禁止+genres_provisional低信頼マーク。表はCLAUDE.mdにも転記
-- [【残タスク】Kindleボタンはブラウザで開く](kindle_link_browser_not_app.md) — アプリ内でKindle本は買えない(IAP規約)→自ドメイン中継+JS遷移でUL/AppLinks回避。Android=Chrome/iOS=Safari。アフィタグ保持
-- [【残タスク】表示データの磨き(実機レビュー発)](display_data_polish_tasks.md) — 著者重複16頁(promote dedup1行)/synonyms日本語3,914頁(表示分離)/月精度日付73%ガード/page-1空kana/genre other未定義
-- [【測定済】AniListリンク精度(bardock型)](anilist_link_quality.md) — 本編keyに読切/番外ID=疑惑3,967(10%)・あらすじ誤表示3,238頁。S3単独は副題照合で精緻化要。修正=剥がし or relations付け替え(スクリプト化でトークン極小)
-- [【測定済】MADBに完全版/新装版がほぼ無い](madb_missing_reprint_editions.md) — 全DBで完全版11/新装版12件=系統欠落(DB完全版はraw 0回)。版タブ欠けの根因。補完=楽天タイトル検索→種4拡張(収穫機の機構再利用)
-- [【月曜以降】蒸留定期運転の協議+新刊コーナー成立条件](monthly_intake_reality.md) — 月間流入1,000-1,300冊/カバー65-70%/直近2ヶ月は取込停止の崖。新刊・カレンダーは月次蒸留が前提、予約はMADBサイト差分で取れる
+- [NDL巻構造で分断確定](ndl_volume_structure_resolves_fragmentation.md) — dcndl:volumeで「テーマ題=番号巻」裁定
+- [収益設計=ストア連動](store_affiliate_architecture.md) — 楽天起点/本命=電書ASP初回特典。PR表記必須
+- [画集=別カテゴリ掲載](art_book_inclusion.md) — 203件別ストリーム。Phase1済
+- [NDL非漫画一掃の罠](ndl_nonmanga_sweep.md) — 混在本(ファンブックに漫画等)注意
+- [【✅】FilterPanel件数表示](filterpanel_show_counts.md)
+- [【残】著者50音索引+透過フィルター](author_kana_index_and_mobile_filter.md)
+- [【手法】AI一括生成+Web検証](method_ai_generate_plus_webverify.md) — 怪しい物だけWeb裏取り。slug英綴りで実証
+- [NDL option2再クラスタ](ndl_option2_recluster.md) — 典拠+ISBN+読みで巻混在是正
+- [NDL slug-fix手法](ndl_slug_fix_method.md) — by-ISBN照会でslug異常解決
+- [【保留】機能ロードマップ](feature_roadmap_post_db.md) — 一覧表/蔵書localStorage/続刊.ics
+- [版/刷タブ・在庫・電子割引](version_tabs_stock_ebook.md) — 版タブ実装済。電子=割引率表示
+- [【未解決】成人=版単位](adult_per_edition_angel.md) — 劇画再販社は手動要
+- [publisher設計=版ごと当時社名](publisher_model_edition_level.md) — families不採用。ISBN10/13正規化必須
+- [【台帳】全データ資産地図](data_assets_inventory.md)
+- [【必読】著者データ全源](author_data_map.md) — mangaka/metadata504/author-yomi.yml。表記揺れ注意
+- [【戒め】全データ揃えてから載せる](feedback_complete_data_before_ship.md) — ship-first抑制
+- [【戒め】効率を先に考える](feedback_efficiency_first.md) — 複数案比較→低コスト選択
+- [【最重要】クラスタ単位=シリーズ](clustering_unit_is_series.md) — 同一題+巻連続のみ統合。著者軸禁止
+- [著者汚染overlay修正](author_pollution_overlay_fix.md) — author-role-corrections.yml(20,959)本番適用済
+- [promote完了後プロセス居座り](promote_hangs_on_exit_windows.md) — 正=skill long-job-ops
+- [重複ページdedup完了](page_dedup_2026_06.md) — 335統合。同名別作品952は正当
+- [公開=Worker+R2(Pages不可)](hosting_worker_r2_architecture.md) — 14万ファイル>Pages上限
+- [AI書評家リーグ運用](ai_review_league_operation.md) — 同一プロンプト×各社。Claude分は題名のみで公平
+- [公開環境2系統](deploy_environments_state.md) — 本番=workers.dev/テスト=mangal-preview.pages.dev
+- [著者kana完埋め済](author_kana_fill_state.md) — 35,679キー。unresolved372=ユーザ調査中
+- [Wikipediaジャンルカテゴリ(GO待ち)](feature_roadmap_post_db.md) — genre-additions突合。war受け皿未決
+- [【✅】slug適用パイプライン](slug_apply_pipeline.md) — 69,004頁適用済。残=StageE/F
+- [【残】ジャンル品質改善4段](genre_quality_improvement.md) — タクソノミー増やさない
+- [【厳守】AIジャンル=master32のみ](ai_genre_closed_vocabulary.md) — closed vocabulary+provisional
+- [【残】Kindleはブラウザで開く](kindle_link_browser_not_app.md) — 自ドメイン中継+JS遷移
+- [【残】表示データ磨き](display_data_polish_tasks.md) — 著者重複/synonyms日本語等
+- [AniListリンク精度](anilist_link_quality.md) — 疑惑3,967(10%)。剥がしor付替
+- [MADBに完全版/新装版ほぼ無し](madb_missing_reprint_editions.md) — 補完=楽天題検索→種4
+- [蒸留定期運転の実態](monthly_intake_reality.md) — 月間1,000-1,300冊/直近2ヶ月停止の崖
 
-- [三世代/今週ストック=生成済み未配線](sansedai_featured_stock_state.md) — data/seeds/sansedai-stock.yml(741件)+featured-stock.yml(55件)。分散WF3ティア(1800作)6人格均等。配線/公開は未了、home-design-11はまだハードコードWRITERS
-- [【計画済】書影harvest3段(楽天紙→Kobo電子→ISBN無)](cover_harvest_plan.md) — ISBN有書影無≈39千巻が対象。ISBNキー安全/題キー(ISBN無)は誤書影リスク最悪→厳格orskip。docs/cover-harvest-plan.md
-- [楽天書影データ資産(ISBN単位・noimage罠)](rakuten_cover_data_asset.md) — rakuten-isbn.jsonlに書影/アフィリンク/価格/発売日。noimage除外必須。_fill-preview-covers.py+coverUrl()ヘルパでテスト環境564/600表示実証
-- [slug主版消失バグ修正と来歴ログ](slug_cluster_fix_and_changelog.md) — 本編が従版slugに収容+著者汚染を37作修正(コナン他)。_change-log.jsonl/slug-overrides.yml機構。promote未読込=恒久化未了。残flag23
-- [書影=アフィリエイト元画像のみ(NDL不可)](cover_source_affiliate_only.md) — NDL画像は今後不可。注力=ISBN精度+正しい巻数。正ISBNにすれば楽天/Amazon画像が自動で付く
-- [【最重要・戒め】再グルーピングの誤りを繰り返すな](feedback_dont_repeat_regrouping_error.md) — 今の本番DBの誤りはMADB再導出+私の解釈の累積産物。単一ソース+解釈で上書き禁止。多数決一致+人手確認+可逆+小バッチ
-- [【最難関】奇子型=同一著者の版違い混在](edition_mix_same_author_ayako.md) — cm104が9版を権威分解。T3/T1/T4で捕まらない→cm104駆動の版分離専用パス要(除去でなく分離+欠け補完)
-- [【進行中・中核】ISBN/巻数是正の進捗](data_quality_cleanup_state.md) — 楽天種+NDL+cm104+Wiki照合でT1-T4是正。混入除去77/再ISBN12/DUPLICATE統合+strip。多数決・可逆・dry-run必須。保留=続編/シリーズ断片/空作23
-- [【計画・実装後】本番軽量化(索引値スリム+詳細未使用3フィールドstrip)](index_lightening_plan.md) — 本番配信の大物=索引2つ(46.8M+12.9M)。cover→ISBN化/authors.kana削除/null省略/検索title重複。詳細からgenres_rakuten/provisional/note_origin strip。Kobo完走後に再生成。adult_us=geo配信未実装(worker.js素通し)だが保持
-- [【新検出器】巻出力監査(本番yml側で#1欠落/日付矛盾)](audit_volume_output_detector.md) — _audit-volume-output.py。種2を見る旧監査が見逃すpromote出力の穴を検出。全量629 MISSING_VOL1/485 DATE_DISORDER等→docs/audit/。RECOVERABLE223が機械復元可。菜の根因=多版統合問題
-- [【残務・Kobo完走後】広域監査🟡🔵修正queue](audit_fix_queue_post_kobo.md) — 著者会社→真著者(回収220+111)/genre_other904に楽天学習/title_latin3464外国版判別/個別2件。Kobo中はmanga.v2競合で保留。anomaly-*.tsv証拠
-- [【残務】巻番号クリーンアップの残=分裂merge21+傑作集19](volnum_remaining_merge_collection.md) — A/B/C群の自動分(是正62+補完770巻)適用済。残40件=S2_HAS(分裂要merge)+COLLECTION(傑作集)=慎重人手判断。data/seeds/volnum-remaining-tasks.tsv
-- [うる星=版/巻/刷タブ表示の正規ルール](urusei_version_display_rules.md) — 巻選び=完備最古/違う版=type×冊数で別タブ/同冊数=刷タブ(versions[])に畳む。_regroup-versions.py実装。新manga生成時に適用
-- [shared-ISBN過merge=homonym guard](shared_isbn_overmerge_homonym_guard.md) — find_relatedが別著者を読み/題衝突でmerge。生成器に実行時guard(共通著者なし+巻∩/min≥0.5)で2,264→1,594(-30%)。種2qid不整合はNDL典拠で確認、著者名+巻番号で判定。残=同著者/アンソロ
-- [【厳守】NDLの叩き方=楽天と同じ1.2秒/req](ndl_access_rate_method.md) — 0.2s(5req/秒)burst1,043件で429/IP遮断を実踏。SRU=典拠ありレート制限/OAI=throttle無だが削除支配+漫画希薄+典拠無で漫画discovery不可。discovery=_ndl-discovery.py(NDC726.1月分割+再帰日付分割500件窓+種2dedup)。回復するので慌てず1.2s
-- [アンソロジー統合の状態](anthology_consolidation_state.md) — Web照合372→真アンソロ304/safe270(anthology-merge.yml)。過統合監査3ガード(題発散0/imprint実体社1/巻数照合)、ISBN5桁prefixは誤検出。promote結線未実装(drop免除+強制統合+page-dedup)
-- [【原則】取得できる情報は全部取得して活用](acquire_all_obtainable_info.md) — 楽天/NDL/AniListの全フィールドを抜いて使う(最小限で済ませない)。蒸留時のfurigana取りこぼし=今回のslug誤りの根因。題ヨミ→slug/著者ヨミ→author-yomi/2ソース合意。slug修正834で楽天全Kana項目+NDL426を初適用
-- [新刊著者の連結バグ是正(再パース)](new_manga_author_reparse.md) — parse_authorsが源creators_roledのカンマ共著者を分割せず連結(矢立肇富野由悠季型)。_reparse-new-authors.pyで,、∥／分割+ブラケット/スペース役割分離+&デコード=55作。seed+promote結線でdurability(enrich_authorでヨミも付く)。蒸留で再発しうる
-- [本番軽量化v2(配列化+cover slim+catch分離)](lightweight_index_architecture.md) — 一覧索引51→26MB(-49%)/検索13.7→10MB。{f,d}配列でキー名重複排除・client+server両デコード必須・cover可変部のみ(coverSlim.ts)。CI通過
-- [分裂・過剰統合の地道クリーンアップ](fragmentation_overmerge_cleanup.md) — 全DBスキャン(同題+著者+ISBN包含)で重複検出。分裂dedup11面+過剰統合drop3件適用済。残=巻ISBN除去機構(気分/ドラessay/銀河鉄道)。種2照合で真の所属確定・docs/overmerge-6-investigation.md
-- [【調査済・harvest後是正】発売日逆行リスト515件](volume_date_disorder_list.md) — 長期連載で巻番号順に発売日が逆行=版混在汚染(golgo-13/子連れ狼等)。_audit-date-disorder.py→docs/volume-date-disorder.tsv。変更は楽天harvest後・per-case
-- [【harvest後】キャッチ/説明欠落の補完](catch_synopsis_enrich_pending.md) — 2巻以上で欠落=docs/missing-catch-synopsis-2000plus.tsv(19,750件)。Web取得法は試金石成功(WebFetch Wikipedia→あらすじ/分野/要素、キャッチはあらすじからAI生成)。Top100から
-- [【次の中核】楽天harvest完了→題+巻照合機構](harvest_based_fix_mechanism.md) — 全47,922著者完了(delta828MB・全item:説明/書影/価格/salesDate)。発売日逆行(515)/巻抜け(647)是正は「題+巻番号→楽天item照合(NFKC・最古採用)」が核。ISBN照合では再版日のまま。旧rakuten-isbn.jsonl独自10.4%→merge要
-- [【月次蒸留の実体】1.2.17取込で確立した実パイプライン](monthly_distill_real_pipeline.md) — CLAUDE.md旧.tsスクリプトは廃止。実=clean-madb-seed→build-series-v2→populate-v2(temp)→★_distill-incremental-merge(series_key突合の安全純粋追加)→promote→cover再適用→索引。1.2.17=新作323/巻1,195。残=AI fill表示化
-- [B=NDL典拠ID回収で同名異人分離(進行中)](ndl_authority_homonym_state.md) — discovery抜き忘れ是正+回収148(残54 throttle待ち)+分類(known56/new44)+homonym104(ハル4人等)。seed=ndl-author-authority.jsonl。残=top-up+DB適用(要GO)
-- [【✅実装+適用済】題+巻→楽天照合機構(A是正)](harvest_match_mechanism_applied.md) — _rakuten_match_lib.py。①発売日逆行851→547(release-date-override.jsonl+promote patch・版整合) ②巻抜け247を種4(既存ISBN→db-v2逆引きでseries_key確定)。Frankenstein版混在は除外。本番反映=次promote。db=db-v2.sqlite
-- [版混在汚染の恒久是正=edition-canonical+promote結線](edition_canonical_mechanism.md) — Wikipedia確定vol→ISBN→初版日で版再構築。golgo/釣りバカ本番結線済。MADB/NDL/楽天は再版日でWiki必須。連載中はseed定期再生成要
-- [【後で判断】Kobo電子書影が古い印刷版で誤カバー](kobo_cover_wrong_for_old_print.md) — covers.jsonl.gz中Kobo由来11,643件(3- [巻補完=NDL title検索が楽天より強い](ndl_volume_completion_better_than_rakuten.md) — ニッチ/表記揺れ作の全巻ISBNはNDL SRU title検索で。書影は楽天ISBN直引き(title0件でも取れる)。キラーズホリディ8巻で実証
-- [NDL discoveryは非漫画の偽陽性を含む](ndl_discovery_nonmanga_false_positives.md) — NDC726.1にエッセイ/ガイド本/インタビュー本が紛れる。名前一致でなくcaption/NDL/著者で漫画性を検証。ゲゲゲ女房等4件ドロップ
-- [【最重要・根本】目的は正確さ。適当に埋めない/間違いと分かって進まない](feedback_accuracy_is_the_goal.md) — slug/著者/巻/漫画性を推測やダミーで埋めるの絶対ダメ。表示優先で目的を履き違えない。怪しいと気づいたら止めて確認/flag。NDL登録は精度上げて続ける
-- [著者回収の罠=監修の有名人名を作画と誤る](author_recovery_supervisor_false_positive.md) — 楽天は監修者名をauthorで返す(手塚治虫=世界の歴史は編集構成)。NDL役割(責任監修/編集・構成)で監修と作画を分ける。学習まんが系で多い
-- [過剰統合スイープの結論=稀](overmerge_sweep_conclusion.md) — ISBN prefix混在の大半は正当(同一作の別版/別刷ISBN・花の慶次vol20は実在)。真の過剰統合6件のみ(修正済)。教育=publisher+labelキー/非教育=名+作者キー。機械一括除去禁止
-- [教育系の年代版混入是正=NDL補完](edu_multiedition_disentangle_ndl.md) — 学習まんがの年代版Frankenstein(vol1-20に別年ISBN混入)を ISBN発行コード×NDL発行年で年代版分離→NDL全巻補完→楽天書影。集英社日本の歴史で実証(2016/2021/1982版が完全)。別シリーズ(人物日本の歴史)除外
-- [検索に出るのに404=ビルドskip(検証不整合)](search_404_build_skip_validation.md) — 索引(Python検証なし)とNextビルド(Zod検証)の不整合。検証エラー頁は検索に載るが404。全角数字日付(NDL由来・NFKC必須)/master外genre(空許容にschema変更)が典型。新データ後はloadAllManga skip0確認
-- [巻抜けの大半はunder-merge(取込もれでない)](volgap_mostly_undermerge.md) — 欠番巻の大半は種2に在るが別クラスタで未merge or 別作(こち亀spinoff型homonym)。NDL→種4(_gen-volgap-ndl-drafts→_register)は真の取込もれだけ安全収穫、register検証が過剰統合回避。under-merge主因は別途慎重merge要
-- [奇子型(多版混在)の経験則検出](kiko_multiedition_mixing_heuristic.md) — ユーザ経験則=volume_label混在(数字+上/下)+発売日矛盾+書影一部欠け=同一作の複数版conflate。巻抜け1417中162作。NDLで版確定→edition-overrideで版分離。誤マッチ(別作混入)も併発(ねこぱんち←キジトラ)。per-case是正
-- [【進行中・最重要】巻抜けper-case本番前仕上げ](volgap_per_case_cleanup_state.md) — 巻抜け1417を一個ずつ。誤マッチ(別作混入)/奇子型162(多版混在)/単純抜け1050。土台=.cache/volgap-ndl.jsonl(全NDL正データ)。型=Wiki版確定+楽天harvest(1秒1回厳守)+edition-override/volume-exclude/種4。済=ゴルゴ173/ねこぱんち/人間ども/サイボーグ009等。全部やる・順番聞かない・推測で触らない
-- [【最重要方針】掲載除外の優先度](exclusion_priority_policy.md) — ①成年誌(ダントツ)②コンビニ本(本編誤り+無駄増)③纏められないもの(アンソロ>教育)。imprint例付き
-- [反映=targeted(実測記録)](reflect_protocol_fast.md) — やり方の正=skill reflect-targeted。ここは3時間→数分の実測根拠のみ
-- [【必ず使う】記憶をgit永続化(.claude→repo/.claude-memory)](memory_git_mirror.md) — ローカル記憶をrepoへ鏡写し。更新後は_sync-memory.py+push。旧MEMORY.mdは別物凍結
-- [新規登録の戒め(やらかし記録)](new_manga_registration_order.md) — やり方の正=skill new-manga-register。ここは再発防止の経緯
-- [【厳守】本番デプロイはトリガー待ち](feedback_production_deploy_gate.md) — 週次蒸留して等の明示指示まで本番build/同期しない。テスト確認→GO→本番の順
+- [三世代/今週ストック未配線](sansedai_featured_stock_state.md) — sansedai-stock.yml(741)+featured(55)生成済
+- [【計画】書影harvest3段](cover_harvest_plan.md) — 楽天紙→Kobo→ISBN無。題キーは誤書影リスク
+- [楽天書影資産(noimage罠)](rakuten_cover_data_asset.md) — rakuten-isbn.jsonl。noimage除外必須
+- [slug主版消失修正+来歴ログ](slug_cluster_fix_and_changelog.md) — slug-overrides.yml機構。残flag23
+- [書影=アフィ元画像のみ](cover_source_affiliate_only.md) — NDL不可。正ISBNなら自動で付く
+- [【戒め】再グルーピング誤り繰り返すな](feedback_dont_repeat_regrouping_error.md) — 単一ソース+解釈の上書き禁止
+- [【最難関】奇子型=版違い混在](edition_mix_same_author_ayako.md) — cm104駆動の版分離パス要
+- [ISBN/巻数是正の進捗](data_quality_cleanup_state.md) — T1-T4。多数決・可逆・dry-run必須
+- [【計画】本番軽量化(索引スリム)](index_lightening_plan.md) — Kobo完走後再生成
+- [巻出力監査検出器](audit_volume_output_detector.md) — _audit-volume-output.py=promote出力の穴
+- [【残務】広域監査修正queue](audit_fix_queue_post_kobo.md) — 著者会社/genre_other/title_latin
+- [【残】巻番号残40件](volnum_remaining_merge_collection.md) — 分裂merge21+傑作集19(人手)
+- [うる星=版/巻/刷タブ正規ルール](urusei_version_display_rules.md) — 完備最古/type×冊数/versions[]
+- [shared-ISBN過merge guard](shared_isbn_overmerge_homonym_guard.md) — 共通著者+巻∩≥0.5で-30%
+- [【厳守】NDL=1.2秒/req](ndl_access_rate_method.md) — burst=429/IP遮断実踏。discovery=_ndl-discovery.py
+- [アンソロジー統合状態](anthology_consolidation_state.md) — 真304/safe270。promote結線未実装
+- [【原則】取れる情報は全部取る](acquire_all_obtainable_info.md) — 1API使い捨て禁止
+- [新刊著者の連結バグ是正](new_manga_author_reparse.md) — カンマ共著者分割55作。蒸留で再発しうる
+- [本番軽量化v2(配列化)](lightweight_index_architecture.md) — 索引51→26MB。{f,d}配列・両デコード必須
+- [分裂・過統合クリーンアップ](fragmentation_overmerge_cleanup.md) — dedup11+drop3済。残=巻ISBN除去機構
+- [発売日逆行515件リスト](volume_date_disorder_list.md) — 版混在汚染。per-case是正
+- [【残】キャッチ/説明欠落補完](catch_synopsis_enrich_pending.md) — 19,750件。Web取得法実証済
+- [楽天harvest→題+巻照合機構](harvest_based_fix_mechanism.md) — 全著者完了。「題+巻→楽天照合」が核
+- [【実体】月次蒸留パイプライン](monthly_distill_real_pipeline.md) — clean→build→populate→incremental-merge→promote
+- [NDL典拠IDで同名異人分離](ndl_authority_homonym_state.md) — 進行中・DB適用は要GO
+- [【✅】題+巻→楽天照合適用済](harvest_match_mechanism_applied.md) — 逆行851→547/巻抜け247種4
+- [版混在恒久是正=edition-canonical](edition_canonical_mechanism.md) — Wiki確定vol→promote結線済
+- [【後で判断】Kobo書影が旧印刷版で誤カバー](kobo_cover_wrong_for_old_print.md) — Kobo由来11,643件
+- [巻補完=NDL title検索が強い](ndl_volume_completion_better_than_rakuten.md) — 書影は楽天ISBN直引き
+- [NDL discoveryの非漫画偽陽性](ndl_discovery_nonmanga_false_positives.md) — caption/著者で漫画性検証
+- [【最重要】目的は正確さ](feedback_accuracy_is_the_goal.md) — 推測/ダミーで埋めない。怪しければ止めて確認
+- [著者回収の罠=監修者混入](author_recovery_supervisor_false_positive.md) — NDL役割で監修と作画を分離
+- [過剰統合スイープ=稀](overmerge_sweep_conclusion.md) — 真は6件のみ。機械一括除去禁止
+- [教育系年代版の分離=NDL補完](edu_multiedition_disentangle_ndl.md) — ISBN発行コード×NDL発行年
+- [検索に出るのに404=ビルドskip](search_404_build_skip_validation.md) — 索引/Zod不整合。skip0確認
+- [巻抜け大半=under-merge](volgap_mostly_undermerge.md) — 種4は真の取込もれのみ安全
+- [奇子型の経験則検出](kiko_multiedition_mixing_heuristic.md) — label混在+日付矛盾+書影欠け
+- [【進行中】巻抜けper-case仕上げ](volgap_per_case_cleanup_state.md) — 1417を一個ずつ。全部やる・推測で触らない
+- [【方針】掲載除外の優先度](exclusion_priority_policy.md) — ①成年誌②コンビニ本③纏められないもの
+- [反映=targeted](reflect_protocol_fast.md) — 正=skill reflect-targeted
+- [【必ず使う】記憶をgit永続化](memory_git_mirror.md) — _sync-memory.py+push
+- [新規登録の戒め](new_manga_registration_order.md) — 正=skill new-manga-register
+- [【厳守】本番デプロイはトリガー待ち](feedback_production_deploy_gate.md) — テスト確認→GO→本番
 
-- [【方針】記憶とskillの棲み分け](feedback_memory_vs_skill_policy.md) — 事実・戒め=memory(無圧縮・巨大化は資産)/やり方=skillが唯一の正
-- [【戒め】promote空--onlyで全消し事故](promote_empty_only_wipe_accident.md) — シェル変数空→フル誤発動→66k削除(2026-07-06)。ガード済/復旧=フルpromote/索引skip平常値923
-- [manba観察(デザイン/出し方)](manba_design_learnings.md) — 切り口ランキング乱立/記事題は固有名詞+数字/#1巻応援/テーマ別リスト自動生成の弾。コミュニティは真似しない
-- [【進行中】エンリッチ7k再開手順](enrich_7k_resume_state.md) — enrich-out実ファイル=完了。無い番号だけWF再開。「エンリッチ続き」
-- [【進行中】ISBNダブリ潰し](isbn_dup_cleanup_state.md) — R1=AUTO19群済/残250群per-case queue。道具3点(audit/triage/apply)git済
-- [【残タスク】鬼太郎本編の多版正規化](kitaro_honpen_multiedition_pending.md) — sid49705巨大容器(1968-2023十数版)。トリガー=鬼太郎本編やって。最新版/著者是正は済
-- [TinyFish=WebFetch補完(APIない/弾かれるサイト)](tinyfish_web_fetch.md) — scripts/_tinyfish.py・Fetch無料・キーは.env。潮出版社等で実証
-- [Cloudflareアクセス解析の叩き方](cloudflare_analytics_access.md) — トークン=.env(gitignore)/GraphQL workersInvocationsAdaptive/本番Worker=mangal-r2。訪問者/人気ページは未対応(Web Analytics要)
-- [進行中状態2026-07-10](inflight_state_2026_07_10.md) — 週次待ち52件+検証資産(mangazenkan8778/cmoa再開可)+完結漏れ残626+D:symlink注意
+- [【方針】記憶とskillの棲み分け](feedback_memory_vs_skill_policy.md) — 事実=memory/やり方=skill
+- [【戒め】promote空--only全消し事故](promote_empty_only_wipe_accident.md) — ガード済。索引skip平常923
+- [manba観察](manba_design_learnings.md) — コミュニティは真似しない
+- [【進行中】エンリッチ7k再開](enrich_7k_resume_state.md) — 「エンリッチ続き」
+- [【進行中】ISBNダブリ潰し](isbn_dup_cleanup_state.md) — R1済/残250群
+- [【残】鬼太郎本編の多版正規化](kitaro_honpen_multiedition_pending.md) — トリガー=鬼太郎本編やって
+- [TinyFish=WebFetch補完](tinyfish_web_fetch.md) — 正=skill tinyfish
+- [Cloudflareアクセス解析](cloudflare_analytics_access.md) — トークン.env/GraphQL/mangal-r2
+- [進行中状態2026-07-10](inflight_state_2026_07_10.md) — 週次待ち52件+検証資産+残タスク

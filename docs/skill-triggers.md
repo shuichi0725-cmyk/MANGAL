@@ -27,6 +27,7 @@ skill 実体 = `.claude/skills/<name>/SKILL.md`(git追跡。Opus 4.8 等でも�
 | 楽天/NDL/キャッシュを引きたい | external-data-access | **必ず `_lookup.py` から**(レート1.3s内蔵・キャッシュ資産マップ・NDL不在≠不存在) |
 | 60秒超のジョブを走らせる | long-job-ops | 生存確認・監視の絞り方・ハング判定・wrangler/シェルの罠 |
 | 「表示がおかしい」と言われた | display-bug-triage | 環境特定→キャッシュ→stale生成物→データ実体の順で1往復診断 |
+| APIが無い+WebFetchが弾かれるサイト /「TinyFishで」 | tinyfish | `_tinyfish.py fetch/search`(無料枠のみ・search=GET・Agent/Browserは有料=ユーザ承認)。序列=_lookup.py→WebFetch→TinyFish |
 
 ## skill でない便利トリガー
 | 言い方/操作 | 内容 |
