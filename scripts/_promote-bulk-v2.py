@@ -1314,7 +1314,9 @@ def _load_author_corr() -> None:
         _AUTHOR_CORR[k] = {"drop": {cc["name"] for cc in creds if cc.get("name")},
                            "credits": creds,
                            "original": set(e.get("original") or []),
-                           "add": list(e.get("add") or [])}
+                           "add": list(e.get("add") or []),
+                           # ★remove=誤クレジット人物の完全除去(creditsに出さない。うさ銀太郎/むつきらん型 2026-07-10)
+                           "remove": set(e.get("remove") or [])}
 
 
 def get_author_credits(series_key: str) -> list[dict]:
@@ -1334,7 +1336,7 @@ def apply_author_corrections(authors: list[dict], series_key: str) -> list[dict]
     corr = _AUTHOR_CORR.get(series_key)
     if not corr:
         return authors
-    drop, orig = corr["drop"], corr["original"]
+    drop, orig = corr["drop"] | corr.get("remove", set()), corr["original"]
     out = []
     for a in authors:
         nm = a.get("name")
@@ -2430,12 +2432,21 @@ def build_yml(
                     o["year_started"] = min(_yrs)
                     if _ye is not None or o.get("status") == "completed":
                         o["year_ended"] = max(_yrs)
+        # ★title/kana override(2026-07-10 ToHeart2族: latin書誌題クラスタの頁を正題で建てる。
+        #   kanaは必ずNDL/楽天ヨミ確証を添えること=捏造禁止)
+        if _eov.get("title"):
+            o["title"] = _eov["title"]
+        if _eov.get("title_kana"):
+            o["title_kana"] = _eov["title_kana"]
+        if _eov.get("title_romaji"):
+            o["title_romaji"] = _eov["title_romaji"]
         if _eov.get("publisher"):
             o["publisher"] = _eov["publisher"]
             o["publishers"] = _eov.get("publishers") or [_eov["publisher"]]
         if _eov.get("authors"):
             o["authors"] = [enrich_author(a) for a in _eov["authors"]]
-        if _eov.get("original_authors"):
+        if _eov.get("original_authors") is not None:
+            # ★空リスト[]=原作クレジット全消去も有効(2026-07-10 高橋K: 混入クラスタ由来のGoRA等を剥がす)
             o["original_authors"] = [enrich_author(a) for a in _eov["original_authors"]]
         if _eov.get("credits"):
             o["credits"] = [{"name": c["name"], "role": c.get("role", "編集")} for c in _eov["credits"] if c.get("name")]
@@ -2798,8 +2809,12 @@ def main():
         related_ids = find_related_series_ids(con, merged_series)
         editions = get_editions_with_volumes(con, related_ids)
         if not editions:
-            stats["no_editions"] += 1
-            continue
+            # ★edition-override が editions を持つ頁は skip しない(2026-07-10 忍空2nd stage:
+            #   種2実体がリミックス(ムック=filter落ち)のみでも override の確定版で頁を建てる。
+            #   override は build_yml 終盤で editions を全置換するので空のまま进めてよい)
+            if not (_load_edition_overrides().get(_slug_override(src.get("slug", ""))) or {}).get("editions"):
+                stats["no_editions"] += 1
+                continue
         # ★cluster-best: merge cluster の title/subtitle variant から最良を merged_series へ
         #   反映(中黒是正 + 代表脱落副題の回収)。 seed3 override は build_yml で優先。
         _apply_cluster_best(con, merged_series, related_ids)
