@@ -2064,3 +2064,8 @@ corrections:
     status: completed
     year_ended: 1994
     source: 全3巻(1993-94・ISBN帯の次は別作)。幽霊v5-21=花マル伝(題『花』の巻題)混入を除去
+  pocket-monsters-special:
+    status: ongoing
+    remove:
+    - year_ended
+    source: 'Wikipedia(2026-07-10): 連載中・既刊64巻(全64巻ではない)。先行版SV編継続中=通巻は今後も増える'
