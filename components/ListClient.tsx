@@ -58,6 +58,13 @@ export default function ListClient({ data }: { data: ListBundle }) {
     const uq = new URLSearchParams(window.location.search).get("q");
     if (uq) setQ(uq);
   }, []);
+  // ★q変更をURLへ書き戻し(replace=履歴を汚さない)。詳細→OS戻るで検索語が消えない(2026-07-10 ユーザ相談)
+  useEffect(() => {
+    const url = new URL(window.location.href);
+    if (q) url.searchParams.set("q", q);
+    else url.searchParams.delete("q");
+    window.history.replaceState(null, "", url.toString());
+  }, [q]);
   const [sort, setSort] = useState<SortId>("kana");
   const [sortTouched, setSortTouched] = useState(false);
   const [limit, setLimit] = useState(200);

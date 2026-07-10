@@ -26,6 +26,9 @@ export default function SearchProto() {
   const [ms, setMs] = useState(0);
   const data = useRef<Entry[] | null>(null);
   const haystack = useRef<string[]>([]);
+  const inputRef = useRef<HTMLInputElement | null>(null);
+  const scrollRestored = useRef(false);
+  const hadInitialQ = useRef(false);
 
   async function ensureLoaded() {
     if (data.current || loaded === "loading") return;
@@ -44,6 +47,38 @@ export default function SearchProto() {
       setLoaded("error");
     }
   }
+
+  // ★戻る対応(2026-07-10 ユーザ相談): 詳細→OS戻るで検索状態が消えないよう、
+  //   ①マウント時に URL ?q= から復元(即ロード) ②q変更をURLへ replaceState(履歴を汚さない)。
+  useEffect(() => {
+    const uq = new URLSearchParams(window.location.search).get("q");
+    if (uq) {
+      hadInitialQ.current = true;
+      setQ(uq);
+      void ensureLoaded();
+    } else {
+      // 新規に開いた時だけキーボードを出す(復元時はautoFocusしない=モバイルで鬱陶しい)
+      inputRef.current?.focus();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  useEffect(() => {
+    const url = new URL(window.location.href);
+    if (q) url.searchParams.set("q", q);
+    else url.searchParams.delete("q");
+    window.history.replaceState(null, "", url.toString());
+  }, [q]);
+  // ★スクロール復元: 結果は索引ロード後に非同期描画されるため、ready後に一度だけ戻す
+  useEffect(() => {
+    if (loaded !== "ready" || scrollRestored.current) return;
+    scrollRestored.current = true;
+    if (!hadInitialQ.current) return;
+    const y = sessionStorage.getItem("mangal-search-scroll");
+    if (y) {
+      sessionStorage.removeItem("mangal-search-scroll");
+      requestAnimationFrame(() => window.scrollTo(0, parseInt(y, 10) || 0));
+    }
+  }, [loaded]);
 
   // 初回アイドル時に先読み(触る前に裏で用意)
   useEffect(() => {
@@ -75,7 +110,7 @@ export default function SearchProto() {
       </p>
 
       <input
-        autoFocus
+        ref={inputRef}
         value={q}
         onChange={(e) => setQ(e.target.value)}
         onFocus={ensureLoaded}
@@ -94,7 +129,11 @@ export default function SearchProto() {
       <ul className="mt-3 divide-y divide-[var(--color-line)] rounded-xl border border-[var(--color-line)] bg-[var(--color-surface)]">
         {results.map((e) => (
           <li key={e.slug}>
-            <Link href={`/manga/${e.slug}`} className="spring-press flex items-baseline justify-between gap-2 px-4 py-3">
+            <Link
+              href={`/manga/${e.slug}`}
+              onClick={() => sessionStorage.setItem("mangal-search-scroll", String(window.scrollY))}
+              className="spring-press flex items-baseline justify-between gap-2 px-4 py-3"
+            >
               <span className="min-w-0">
                 <span className="text-sm font-semibold">{e.t}</span>
                 {e.a && <span className="ml-2 text-[11px] text-ink/55">{e.a}</span>}
