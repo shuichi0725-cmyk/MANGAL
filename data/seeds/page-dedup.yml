@@ -2777,3 +2777,58 @@ dedup:
   title: 『坊っちゃん』の時代
   isbns: 4
   note: 同作の断片頁(新装3+文庫1・固有0)。『』括弧の表記差で題名検索から漏れていた(ユーザ発見) 2026-07-10
+- drop: rikudou-no-onnatachi
+  canonical: rokudou-no-onnatachi
+  title: 六道の悪女たち
+  isbns: 18
+  note: 読み違いslug重複(六道=ロクドウ正) bocchan型スイープ 2026-07-10
+- drop: ninkuu-sekando-stage-etoninhen
+  canonical: ninkuu-2nd-stage
+  title: 忍空 SECOND STAGE干支忍編
+  isbns: 12
+  note: カナslug重複(12/12同一) bocchan型スイープ 2026-07-10
+- drop: ninku
+  canonical: ninkuu
+  title: NINKU-忍空-
+  isbns: 9
+  note: latin断片(9⊆15) bocchan型スイープ 2026-07-10
+- drop: bokuha-ano-yoru-ano-ko-to
+  canonical: boku-wa-ano-yoru-ano-ko-to
+  title: 僕はあの夜あの子と
+  isbns: 3
+  note: 助詞表記slug重複 bocchan型スイープ 2026-07-10
+- drop: makeinu-to-raion
+  canonical: makeinu-to-lion
+  title: 負け犬とライオン
+  isbns: 2
+  note: raion/lion綴り重複(英語綴り=正) bocchan型スイープ 2026-07-10
+- drop: shieahapi
+  canonical: sheahapi
+  title: シェアハピ
+  isbns: 2
+  note: 綴り違い重複(シェア=shea正) bocchan型スイープ 2026-07-10
+- drop: oshi-no-teki-ninattanode-comic
+  canonical: oshino-teki-ni-nattanode
+  title: 推しの敵になったので
+  isbns: 2
+  note: @COMIC付きslug重複 bocchan型スイープ 2026-07-10
+- drop: meshi-bafu-shokudou-seikyou-nariossanha-jama-dato-tsuihou-sareta-fuyo-
+  canonical: meshi-bafu-shokudou-seikyounari
+  title: 飯バフ食堂、盛況なり
+  isbns: 2
+  note: 長title切り詰めslug重複 bocchan型スイープ 2026-07-10
+- drop: 19
+  canonical: mad-buru-34
+  title: マッド★ブル34
+  isbns: 1
+  note: 巻番号題断片の再発(06-19統合がchangelogのみでseed未登録=FF型)。今回seed恒久化 bocchan型スイープ 2026-07-10
+- drop: 6
+  canonical: mad-buru-34
+  title: マッド★ブル34
+  isbns: 1
+  note: 同上(v6断片) bocchan型スイープ 2026-07-10
+- drop: sugomori-hontou-ni-atta-koko-dake-no-hanashi-kiwami
+  canonical: sugomori-hontou-ni-atta-nama-koko-dake-no-hanashi-kiwami-ultra
+  title: スゴ盛!本当にあった(生)ここだけの話 極
+  isbns: 24
+  note: 実話アンソロ誌の同ISBN群重複(24⊆27) bocchan型スイープ 2026-07-10
