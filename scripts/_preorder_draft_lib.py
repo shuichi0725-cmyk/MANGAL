@@ -142,25 +142,38 @@ def _romaji_word(w):
     return ""
 
 
-def real_cover(isbn, covers_dict=None, live_fn=None, env=None):
-    """★書影は構築禁止(2026-07-09): cabinetパス/サフィックス(_1_2)/拡張子(.jpg/.gif)はISBNから推測不可。
-    実URLを covers seed → 楽天API(largeImageUrl) の順で取得。無ければNone(cover harvest/enrichで後補完)。"""
+def real_cover_and_date(isbn, covers_dict=None, live_fn=None, env=None, need_date=False):
+    """書影+salesDate(ISO)を同一API応答から取る(★1API全フィールド捕捉。2026-07-11:
+    回収先行巻の発売日が種2未収載の時、cover照会と同じ応答のsalesDateを捨てていた穴を封鎖)。
+    ★書影は構築禁止(2026-07-09): cabinetパス/サフィックス/拡張子はISBNから推測不可=実URLのみ。"""
     if not isbn:
-        return None
+        return None, None
+    cov = None
     if covers_dict:
         u = covers_dict.get(isbn)
         if u and "noimage" not in u:
-            return u
-    if live_fn and env:
+            cov = u
+    date = None
+    if (cov is None or need_date) and live_fn and env:
         try:
             items = live_fn(env, isbn=isbn) or []
             if items:
-                img = str(items[0].get("largeImageUrl") or items[0].get("mediumImageUrl") or "")
-                if img and "noimage" not in img:
-                    return img
+                it = items[0]
+                if cov is None:
+                    img = str(it.get("largeImageUrl") or it.get("mediumImageUrl") or "")
+                    if img and "noimage" not in img:
+                        cov = img
+                m = re.search(r"(\d{4})年(\d{1,2})月(?:(\d{1,2})日)?", str(it.get("salesDate") or ""))
+                if m:
+                    date = f"{m.group(1)}-{int(m.group(2)):02d}" + (f"-{int(m.group(3)):02d}" if m.group(3) else "")
         except Exception:
             pass
-    return None
+    return cov, date
+
+
+def real_cover(isbn, covers_dict=None, live_fn=None, env=None):
+    """後方互換wrapper。新規コードは real_cover_and_date を使う。"""
+    return real_cover_and_date(isbn, covers_dict, live_fn, env)[0]
 
 
 def make_slug(base, kana_raw=None, existing=None):

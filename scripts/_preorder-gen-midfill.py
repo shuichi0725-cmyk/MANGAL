@@ -38,6 +38,7 @@ import sqlite3, gzip
 _DBV2 = sqlite3.connect(f"{ROOT}/.cache/db-v2.sqlite")   # ★回収先行巻の発売日引き当て(種2)
 # ★書影の実URL源(構築禁止): covers seed → 楽天API
 from _preorder_draft_lib import real_cover as _real_cover
+from _preorder_draft_lib import real_cover_and_date as _real_cover_date
 try:
     from _lookup import rakuten_live as _rk_live, _env as _rk_env
     _RKENV = _rk_env()
@@ -140,9 +141,12 @@ for r in cls["ex_mid"]:
             _row = _DBV2.execute("SELECT release_date FROM volumes WHERE isbn13=? AND release_date IS NOT NULL", (ib,)).fetchone()
             rd = _row[0] if _row and _row[0] else None
         # 書影=予約巻はharvest実URL、回収巻/harvest空は covers seed→楽天API 実URL(★構築禁止=推測不可)
+        # ★日付が種2未収載の回収巻は、cover照会と同一の楽天応答からsalesDateも取る(捨てない 2026-07-11)
         cov = (r.get("cover") if ib == r["isbn"] and "noimage" not in str(r.get("cover") or "") else None)
-        if not cov:
-            cov = _real_cover(ib, _COVERS, _rk_live, _RKENV)
+        if not cov or rd is None:
+            _c2, _d2 = _real_cover_date(ib, _COVERS, _rk_live, _RKENV, need_date=(rd is None))
+            cov = cov or _c2
+            rd = rd or _d2
         volumes.append({"number": v, "asin": None, "isbn13": ib, "cover_url": cov, "release_date": rd})
     authors = []
     for i2, name in enumerate(auths):
