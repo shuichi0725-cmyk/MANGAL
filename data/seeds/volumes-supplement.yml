@@ -12751,103 +12751,6 @@ volumes:
   added_at: '2026-07-10'
   note: 巻抜け仮想・連載中スイープ(cache帯ガード照合)
 - series_keys: &id031
-  - name:竹崎真実|name:まんがグリム童話
-  qid: null
-  number: 32
-  isbn13: '9784821178582'
-  release_date: 2016-05
-  pages: null
-  publisher: ぶんか社
-  edition_type: standard
-  title_display: まんがグリム童話金瓶梅（32）
-  source: rakuten
-  added_at: '2026-07-10'
-  note: 巻抜け仮想・連載中スイープ(cache帯ガード照合)
-- series_keys: *id031
-  qid: null
-  number: 33
-  isbn13: '9784821178995'
-  release_date: 2016-08
-  pages: null
-  publisher: ぶんか社
-  edition_type: standard
-  title_display: まんがグリム童話金瓶梅（33）
-  source: rakuten
-  added_at: '2026-07-10'
-  note: 巻抜け仮想・連載中スイープ(cache帯ガード照合)
-- series_keys: *id031
-  qid: null
-  number: 34
-  isbn13: '9784821179442'
-  release_date: 2016-11
-  pages: null
-  publisher: ぶんか社
-  edition_type: standard
-  title_display: まんがグリム童話金瓶梅（34）
-  source: rakuten
-  added_at: '2026-07-10'
-  note: 巻抜け仮想・連載中スイープ(cache帯ガード照合)
-- series_keys: *id031
-  qid: null
-  number: 35
-  isbn13: '9784821179893'
-  release_date: 2017-02
-  pages: null
-  publisher: ぶんか社
-  edition_type: standard
-  title_display: まんがグリム童話金瓶梅（35）
-  source: rakuten
-  added_at: '2026-07-10'
-  note: 巻抜け仮想・連載中スイープ(cache帯ガード照合)
-- series_keys: *id031
-  qid: null
-  number: 36
-  isbn13: '9784821134373'
-  release_date: 2017-05
-  pages: null
-  publisher: ぶんか社
-  edition_type: standard
-  title_display: まんがグリム童話金瓶梅（36）
-  source: rakuten
-  added_at: '2026-07-10'
-  note: 巻抜け仮想・連載中スイープ(cache帯ガード照合)
-- series_keys: *id031
-  qid: null
-  number: 37
-  isbn13: '9784821135479'
-  release_date: 2017-11
-  pages: null
-  publisher: ぶんか社
-  edition_type: standard
-  title_display: まんがグリム童話金瓶梅（37）
-  source: rakuten
-  added_at: '2026-07-10'
-  note: 巻抜け仮想・連載中スイープ(cache帯ガード照合)
-- series_keys: *id031
-  qid: null
-  number: 38
-  isbn13: '9784821136063'
-  release_date: 2018-03
-  pages: null
-  publisher: ぶんか社
-  edition_type: standard
-  title_display: まんがグリム童話金瓶梅（38）
-  source: rakuten
-  added_at: '2026-07-10'
-  note: 巻抜け仮想・連載中スイープ(cache帯ガード照合)
-- series_keys: *id031
-  qid: null
-  number: 39
-  isbn13: '9784821136797'
-  release_date: 2018-07
-  pages: null
-  publisher: ぶんか社
-  edition_type: standard
-  title_display: まんがグリム童話金瓶梅（39）
-  source: rakuten
-  added_at: '2026-07-10'
-  note: 巻抜け仮想・連載中スイープ(cache帯ガード照合)
-- series_keys: &id032
   - qid:Q9116547|name:キングダム
   qid: null
   number: 15
@@ -12860,7 +12763,7 @@ volumes:
   source: rakuten
   added_at: '2026-07-10'
   note: 巻抜け仮想・連載中スイープ(cache帯ガード照合)
-- series_keys: *id032
+- series_keys: *id031
   qid: null
   number: 16
   isbn13: '9784087928013'
@@ -12872,7 +12775,7 @@ volumes:
   source: rakuten
   added_at: '2026-07-10'
   note: 巻抜け仮想・連載中スイープ(cache帯ガード照合)
-- series_keys: *id032
+- series_keys: *id031
   qid: null
   number: 17
   isbn13: '9784087928020'
@@ -12884,7 +12787,7 @@ volumes:
   source: rakuten
   added_at: '2026-07-10'
   note: 巻抜け仮想・連載中スイープ(cache帯ガード照合)
-- series_keys: *id032
+- series_keys: *id031
   qid: null
   number: 18
   isbn13: '9784087928037'
@@ -12909,7 +12812,7 @@ volumes:
   source: rakuten
   added_at: '2026-07-10'
   note: 巻抜け仮想・連載中スイープ(cache帯ガード照合)
-- series_keys: &id033
+- series_keys: &id032
   - qid:Q11423339|name:極道めし
   qid: null
   number: 2
@@ -12922,7 +12825,7 @@ volumes:
   source: rakuten
   added_at: '2026-07-10'
   note: 巻抜け仮想・連載中スイープ(cache帯ガード照合)
-- series_keys: *id033
+- series_keys: *id032
   qid: null
   number: 3
   isbn13: '9784575835199'
@@ -12934,7 +12837,7 @@ volumes:
   source: rakuten
   added_at: '2026-07-10'
   note: 巻抜け仮想・連載中スイープ(cache帯ガード照合)
-- series_keys: *id033
+- series_keys: *id032
   qid: null
   number: 4
   isbn13: '9784575836158'
@@ -12946,7 +12849,7 @@ volumes:
   source: rakuten
   added_at: '2026-07-10'
   note: 巻抜け仮想・連載中スイープ(cache帯ガード照合)
-- series_keys: *id033
+- series_keys: *id032
   qid: null
   number: 5
   isbn13: '9784575836868'
@@ -12958,7 +12861,7 @@ volumes:
   source: rakuten
   added_at: '2026-07-10'
   note: 巻抜け仮想・連載中スイープ(cache帯ガード照合)
-- series_keys: &id034
+- series_keys: &id033
   - name:kisui|name:追放されたチート付与魔術師は気ままなセカンドライフを謳歌する。|sub:俺は武器だけじゃなく、あらゆるものに『強化ポイント』を付与できるし、俺の意思でいつでも効果を解除できるけど、残った人たち大丈夫?
   qid: null
   number: 13
@@ -12971,7 +12874,7 @@ volumes:
   source: rakuten
   added_at: '2026-07-10'
   note: 巻抜け仮想・連載中スイープ第2弾(表記注記/の巻suffix等の照合漏れを手動確定)
-- series_keys: *id034
+- series_keys: *id033
   qid: null
   number: 14
   isbn13: '9784065391013'
@@ -12983,7 +12886,7 @@ volumes:
   source: rakuten
   added_at: '2026-07-10'
   note: 巻抜け仮想・連載中スイープ第2弾(表記注記/の巻suffix等の照合漏れを手動確定)
-- series_keys: *id034
+- series_keys: *id033
   qid: null
   number: 15
   isbn13: '9784065400937'
@@ -12995,7 +12898,7 @@ volumes:
   source: rakuten
   added_at: '2026-07-10'
   note: 巻抜け仮想・連載中スイープ第2弾(表記注記/の巻suffix等の照合漏れを手動確定)
-- series_keys: *id034
+- series_keys: *id033
   qid: null
   number: 16
   isbn13: '9784065401576'
@@ -13007,7 +12910,7 @@ volumes:
   source: rakuten
   added_at: '2026-07-10'
   note: 巻抜け仮想・連載中スイープ第2弾(表記注記/の巻suffix等の照合漏れを手動確定)
-- series_keys: *id034
+- series_keys: *id033
   qid: null
   number: 17
   isbn13: '9784065411179'
@@ -13019,7 +12922,7 @@ volumes:
   source: rakuten
   added_at: '2026-07-10'
   note: 巻抜け仮想・連載中スイープ第2弾(表記注記/の巻suffix等の照合漏れを手動確定)
-- series_keys: *id034
+- series_keys: *id033
   qid: null
   number: 18
   isbn13: '9784065414347'
@@ -13031,7 +12934,7 @@ volumes:
   source: rakuten
   added_at: '2026-07-10'
   note: 巻抜け仮想・連載中スイープ第2弾(表記注記/の巻suffix等の照合漏れを手動確定)
-- series_keys: *id034
+- series_keys: *id033
   qid: null
   number: 19
   isbn13: '9784065423127'
@@ -13043,7 +12946,7 @@ volumes:
   source: rakuten
   added_at: '2026-07-10'
   note: 巻抜け仮想・連載中スイープ第2弾(表記注記/の巻suffix等の照合漏れを手動確定)
-- series_keys: *id034
+- series_keys: *id033
   qid: null
   number: 20
   isbn13: '9784065434352'
@@ -13055,7 +12958,7 @@ volumes:
   source: rakuten
   added_at: '2026-07-10'
   note: 巻抜け仮想・連載中スイープ第2弾(表記注記/の巻suffix等の照合漏れを手動確定)
-- series_keys: &id035
+- series_keys: &id034
   - name:コトバノリアキ|name:姫騎士は蛮族(バルバロイ)の嫁
   qid: null
   number: 8
@@ -13068,7 +12971,7 @@ volumes:
   source: rakuten
   added_at: '2026-07-10'
   note: 巻抜け仮想・連載中スイープ第2弾(表記注記/の巻suffix等の照合漏れを手動確定)
-- series_keys: *id035
+- series_keys: *id034
   qid: null
   number: 9
   isbn13: '9784065390474'
