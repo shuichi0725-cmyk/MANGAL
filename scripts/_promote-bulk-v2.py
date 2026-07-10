@@ -1346,7 +1346,9 @@ def apply_author_corrections(authors: list[dict], series_key: str) -> list[dict]
     have = {a.get("name") for a in out}
     for nm in corr["add"]:
         if nm not in have:
-            out.append({"name": nm, "role": "writer_artist"})
+            # ★add×original 両指定=「取りこぼした原作者」の救済(FF Lost Stranger水瀬葉月 2026-07-10)。
+            #   従来はwriter_artist固定で原作がauthors欄に混ざった。既存seedにadd∩original重複は0=無影響。
+            out.append({"name": nm, "role": "original_author" if nm in orig else "writer_artist"})
             have.add(nm)
     # ★最終安全網: 原作化で authors(非original)が0になったら、 我々が原作化した分を著者へ戻す
     if out and not any(a.get("role") != "original_author" for a in out):
@@ -1661,6 +1663,17 @@ def _load_edition_overrides() -> dict:
         p = ROOT / "data" / "seeds" / "edition-overrides.json"
         _EDITION_OVERRIDES = json.loads(p.read_text(encoding="utf-8")) if p.exists() else {}
     return _EDITION_OVERRIDES
+
+
+def _load_status_corrections() -> dict:
+    """★Wiki検証済みの完結漏れ是正(2026-07-09)。slug→{status,year_ended,wiki_url}。種3不変を汚さず可逆。"""
+    p = ROOT / "data" / "seeds" / "status-corrections.yml"
+    if p.exists():
+        return (yaml.safe_load(p.read_text(encoding="utf-8")) or {}).get("corrections", {})
+    return {}
+
+
+_STATUS_CORR = _load_status_corrections()
 
 
 def get_authors(con: sqlite3.Connection, series_id: int) -> list[dict]:
@@ -2254,8 +2267,14 @@ def build_yml(
             o["year_ended"] = src_yml.get("year_ended")
     else:
         o["year_ended"] = src_yml.get("year_ended")
-    # status は 種3 から
-    o["status"] = (seed3 or {}).get("status") or src_yml.get("status", "completed")
+    # status は 種3 から。★status-corrections(Wiki検証済み完結是正 2026-07-09)を最優先(種3不変を汚さず可逆)
+    _sc = _STATUS_CORR.get(o["slug"])
+    if _sc and _sc.get("status"):
+        o["status"] = _sc["status"]
+        if _sc.get("year_ended"):
+            o["year_ended"] = _sc["year_ended"]
+    else:
+        o["status"] = (seed3 or {}).get("status") or src_yml.get("status", "completed")
     # status=ongoing なら year_ended は null
     if o["status"] == "ongoing":
         o["year_ended"] = None
@@ -2389,27 +2408,28 @@ def build_yml(
         o["publishers"] = []
     # ★edition-override (= 教育系の年代版分離/NDL補完の本番durability。 最終確定 editions/著者を置換)
     _eov = _load_edition_overrides().get(o["slug"])
-    if _eov and _eov.get("editions"):
-        o["editions"] = [clean_edition(ed) for ed in _eov["editions"]]
-        # ★年の明示指定(override直書き)最優先=再版edition混在で連載期間が化ける時の確定手段
+    if _eov:
+        if _eov.get("editions"):
+            o["editions"] = [clean_edition(ed) for ed in _eov["editions"]]
+        # ★年の明示指定(override直書き)最優先=再版edition混在で連載期間が化ける時の確定手段。
+        #   ★editions有無を問わず適用(2026-07-09: あしたのジョー=1968連載だがMANGALは1972再版のみ保有→year単独overrideで是正)。
         #   (ヤマトひおあきら版: 原作連載1974-83だがMF文庫再版2005が混じり年が化けた 2026-07-08)
         if _eov.get("year_started") is not None:
             o["year_started"] = _eov["year_started"]
             o["year_ended"] = _eov.get("year_ended")
-            _yrs = None  # 明示指定時は自動再計算しない
-        # ★出版年の是正: 既存年レンジがoverride確定巻の年と全く交差しない時だけ再計算
+        # ★出版年の是正: editions確定時かつ年明示無し時のみ、交差しないなら再計算
         #   (上杉謙信: 種2由来1969-2004 vs 確定巻2005-2006=交差なし→再計算。
         #    タッチ: 1981-1987は確定巻1981-2013と交差→連載年を保持=復刻年で延ばさない 2026-07-07)
-        _yrs = None if _eov.get("year_started") is not None else \
-               [int(str(v["release_date"])[:4]) for ed in o["editions"] for v in (ed.get("volumes") or [])
-                if v.get("release_date") and str(v["release_date"])[:4].isdigit()]
-        if _yrs:
-            _ys, _ye = o.get("year_started"), o.get("year_ended")
-            _cur = (_ys or 9999, _ye or _ys or 9999)
-            if _cur[1] < min(_yrs) or _cur[0] > max(_yrs):
-                o["year_started"] = min(_yrs)
-                if _ye is not None or o.get("status") == "completed":
-                    o["year_ended"] = max(_yrs)
+        if _eov.get("editions") and _eov.get("year_started") is None:
+            _yrs = [int(str(v["release_date"])[:4]) for ed in o["editions"] for v in (ed.get("volumes") or [])
+                    if v.get("release_date") and str(v["release_date"])[:4].isdigit()]
+            if _yrs:
+                _ys, _ye = o.get("year_started"), o.get("year_ended")
+                _cur = (_ys or 9999, _ye or _ys or 9999)
+                if _cur[1] < min(_yrs) or _cur[0] > max(_yrs):
+                    o["year_started"] = min(_yrs)
+                    if _ye is not None or o.get("status") == "completed":
+                        o["year_ended"] = max(_yrs)
         if _eov.get("publisher"):
             o["publisher"] = _eov["publisher"]
             o["publishers"] = _eov.get("publishers") or [_eov["publisher"]]
