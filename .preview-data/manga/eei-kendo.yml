@@ -26,29 +26,19 @@ wikidata_qid: Q1036246
 editions:
 - type: standard
   label: 通常版
-  publisher: ビズコミュニケーションズジャパン
+  publisher: 小学館
   imprint: 少年サンデーコミックス
   volumes:
   - number: 1
     asin: null
+    isbn13: '9784091602114'
+    cover_url: null
+    release_date: 1992-06
+  - number: 2
+    asin: null
     isbn13: '9784091602121'
     cover_url: null
     release_date: 1992-07
-  versions:
-  - label: 1992年版
-    volumes:
-    - number: 1
-      asin: null
-      isbn13: '9784091602114'
-      cover_url: null
-      release_date: 1992-06
-  - label: 1992年版
-    volumes:
-    - number: 1
-      asin: null
-      isbn13: '9784091602121'
-      cover_url: null
-      release_date: 1992-07
 publishers:
 - shogakukan
 genres_provisional: true
