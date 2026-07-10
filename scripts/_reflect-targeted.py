@@ -99,6 +99,12 @@ def main():
         if not d.get("slug"): _errs.append(f"{st}: slug欠落")
         if not d.get("title"): _errs.append(f"{st}: title欠落")
         if not d.get("title_kana"): _errs.append(f"{st}: title_kana欠落")
+        # ★著者role必須(Zod AuthorSchema)。eov手書きでrole忘れ→ビルドskip404の実害(ポケスペ 2026-07-11)
+        _ROLES = {"writer", "artist", "writer_artist", "editor"}
+        for fld in ("authors", "original_authors"):
+            for a in (d.get(fld) or []):
+                if not isinstance(a, dict) or a.get("role") not in _ROLES:
+                    _errs.append(f"{st}: {fld}にrole欠落/不正={a!r}")
         for e in (d.get("editions") or []):
             for vs in [e.get("volumes") or []] + [vv.get("volumes") or [] for vv in (e.get("versions") or [])]:
                 for v in vs:
