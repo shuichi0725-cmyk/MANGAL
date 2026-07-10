@@ -166,3 +166,4 @@
 {"slug": "supesharu", "old_kana": "餓狼伝説スペシャル", "new_kana": "ガロウデンセツスペシャル", "title_fix": null, "at": "2026-06-19T18:34:12"}
 {"slug": "r-8301074", "old_kana": "日ノ興奮", "new_kana": "ヒノコウフン", "title_fix": "日の興奮", "at": "2026-06-19T18:34:12"}
 {"op": "kana-from-other-volume-detector", "fixed": {"gensou-fantasy": "キンレイヤワ(1巻題読み)→ゲンソウファンタジー", "muumin-no-bouken-nikki": "ムーミンエイユウニナル(巻題読み)→ムーミンノボウケンニッキ"}, "queue": ["nagi=題誤字疑い(椰↔梛)", "dream-kiss=夢chu×ドリームキッス文庫混在疑い", "garou-4koma=本編1巻混入疑い", "ohanashi-pokemon=児童書scope疑い"], "false_positive_ok": ["eyes-kingin-youdou(当て字正常)", "t-patrol-bon(当て字正常)"], "at": "2026-07-10"}
+{"op": "kana-author-authority-class", "found": 76, "fixed_yearsuffix": ["angel-eyes-1994", "she-is-beautiful-2010", "sweet-home-2002", "yellow-kawaguchi-1996"], "note": "NDL典拠形著者名(姓,名,生年)がkanaに化けた夜明け型の親戚。半角カンマ検出・残=次バッチ", "at": "2026-07-10"}
