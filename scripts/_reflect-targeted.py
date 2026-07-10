@@ -102,9 +102,9 @@ def main():
         # ★著者role必須(Zod AuthorSchema)。eov手書きでrole忘れ→ビルドskip404の実害(ポケスペ 2026-07-11)
         _ROLES = {"writer", "artist", "writer_artist", "editor"}
         for fld in ("authors", "original_authors"):
-            for a in (d.get(fld) or []):
-                if not isinstance(a, dict) or a.get("role") not in _ROLES:
-                    _errs.append(f"{st}: {fld}にrole欠落/不正={a!r}")
+            for _au in (d.get(fld) or []):
+                if not isinstance(_au, dict) or _au.get("role") not in _ROLES:
+                    _errs.append(f"{st}: {fld}にrole欠落/不正={_au!r}")
         for e in (d.get("editions") or []):
             for vs in [e.get("volumes") or []] + [vv.get("volumes") or [] for vv in (e.get("versions") or [])]:
                 for v in vs:
