@@ -1189,3 +1189,4 @@
 {"op": "umizaru-fix", "exclude": "9784091533616(誤ISBN幽霊v1)", "seed4": "YSC1-5", "queue": "テーマ題18冊(決意/爆発/追跡/潜水士編等)=Wiki未記載の新装版疑い→版確定後に版タブ検討", "source": "Wikipedia(全12巻1998-2001)+楽天delta", "at": "2026-07-10"}
 {"op": "ongoing-sweep-revert", "minami": "本編18巻の誤マッチをrevert(前方一致の逆方向適用が穴。スペシャル巻はcache不在)", "lesson": "tn.startswith(b)方向のマッチ=より短い別シリーズ題を吸う→禁止(b.startswith(tn)のみに)", "at": "2026-07-10"}
 {"op": "ongoing-sweep-revert2", "grimm": "金瓶梅32-39の誤マッチrevert(同じ前方一致穴)。グリム童話gap2-57=誌アンソロ叢書=NDL/構成調査キュー", "at": "2026-07-10"}
+{"at": "2026-07-10", "op": "volgap-fill-batch", "slugs": ["onna-no-sono-no-hoshi", "tougen-anki", "hell-mode", "alfheim-no-kishi-ballad-tsugumi-no-mori", "outaishihi-ni-nante-naritakunai-konyakusha-hen", "ouji-sama-no-tomodachi", "kekkon-shoubai"], "added": 17, "note": "ユーザ報告7作の欠番16冊+新刊2冊(ヘルモード14/王太子妃5)を種4登録"}
