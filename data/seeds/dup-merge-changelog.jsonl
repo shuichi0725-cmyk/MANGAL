@@ -40,3 +40,4 @@
 {"dropped": "18-1990", "canonical": "mad-buru-34", "reason": "マッド・ブル34分裂統合", "applied_at": "2026-06-19T01:03:24"}
 {"dropped": "19", "canonical": "mad-buru-34", "reason": "マッド・ブル34分裂統合", "applied_at": "2026-06-19T01:03:24"}
 {"work": "hokuto-no-ken", "action": "remove_shinchosha_28-30_from_standard", "removed": [{"number": 28, "isbn13": "9784107700964"}, {"number": 29, "isbn13": "9784107701008"}, {"number": 30, "isbn13": "9784107701114"}], "reason": "集英社JC=27巻(cm104)。新潮社版vol28-30混入を除去", "applied_at": "2026-06-19T05:15:36"}
+{"dropped": "final-fantasy-lost-stranger-2021", "canonical": "final-fantasy-lost-stranger", "reason": "06-18統合がpage-dedup seed未登録で復活→seed恒久登録+alias2本(-2/-2021→無印)。著者補充=水瀬葉月(原作・楽天+NDL2ソース)をadd×original(promoteパッチでoriginal_author化)", "applied_at": "2026-07-10T09:43:46"}
