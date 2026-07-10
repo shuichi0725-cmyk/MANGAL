@@ -1184,3 +1184,4 @@
 {"op": "gekiman-franchise", "reason": "ユーザ指摘(gekiman-2015のv1-2=ISBN帯断絶+日付逆行+コンビニ疑い)→franchise全解体: 実体=スペシャルデビルマン編(2018廉価再録)がZ編1-2枠に混入+3頁三重複。Z編全5正規化/スペシャル頁drop(政策②)/愛蔵版上中下=本編タブ化/ハニー編全3+Z&グレート編=新頁。全て楽天題+帯+日付整合で確定", "at": "2026-07-04"}
 {"op": "backlog-withdrawn-restore", "restored": 55, "pages": 42, "hold": ["ハヤテ完全版27=頁特定不能"], "source": "a77bcba7b削除231中、後続日次で未回収の56を再検証", "at": "2026-07-10"}
 {"op": "backlog-stale-backing", "morohoshi": 9, "auto_backed": 169, "why": "撤回231巻のうちprod表示中169件はseed無し=再生成(per-case reflect/フルpromote)で消える構造穴。morohoshiで実害発現→全量seed化", "at": "2026-07-10"}
+{"op": "volgap54", "seed4": 33, "neko_rebuild": "テーマ題11冊(ニッ=NDL発掘9784801963498)", "hold": [["x-men-1994", 2, "9784884757106", "日付未解決"], ["x-men-1994", 12, "9784884757441", "日付未解決"], ["ultra-seven-1978", "1978年版=ISBNレス時代"], ["the-combat", "マーク2=NDL/cache無"], ["oruchuban-ebichu", "多版Frankenstein=per-case"], ["shin-agatte×2", "2頁同一gap=構成問題R8"], ["nhk v2", "別著者問題R8"]], "at": "2026-07-10"}
