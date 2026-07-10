@@ -86,3 +86,4 @@
 {"op": "isbn-dup-final-2pairs", "nanoha": "llyrical(typo)断片dedup+movie-1st和題化・2巻日付確定", "ohatsu": "天狗風其ノ2混入除去+真の其ノ2(2007-05)種4補完。天狗風頁=正(全2巻)", "at": "2026-07-10"}
 {"op": "thunder3-edition-fix", "bug": "種2がv7,8をimprint表記差(講談社コミックスデラックス)でdeluxe版に分離(全巻KCDXなのに)", "fix": "eovで1版9巻に統合(Wiki=KCデラックス全巻)", "at": "2026-07-10"}
 {"op": "complementary-split-sweep", "fixed": ["fire-emblem-watanabe-1992", "koigakubo-kun-2023"], "detector": "互い違い版分裂(standard/deluxeが巻を持ち合い・合体で連続)=サンダー3型。全DB掃引で計3件", "at": "2026-07-10"}
+{"op": "gifuu-doudou-family", "fix": {"sakegatari": "9,10補完=全10巻", "hanagatari": "混入2除去+1-3補完=全14巻", "plain": "junk混成dedup→月語りへ"}, "source": "Wiki(酒10/花14完結)+cache真題", "at": "2026-07-10"}
