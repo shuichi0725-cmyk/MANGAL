@@ -25,7 +25,7 @@ python scripts/_preorder-productionize.py --keep-preview  # 本番化するがpr
 
 ## 締め (必須)
 ```
-git add data/seeds/preorder-pages data/manga.v2 data .preview-data
+git add data/seeds/preorder-pages data .preview-data   # ★data/manga.v2はgitignore対象=addに入れると失敗してchainが切れる(2026-07-11)
 git commit -m "予約ドラフト本番化 N件(preorder-pages恒久・週次で公開)"
 git push
 ```
