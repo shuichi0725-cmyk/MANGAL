@@ -6,6 +6,7 @@ description: テスト環境に出して=対象頁を.preview-dataへ投入/入�
 # テスト環境に出して (= preview投入)
 
 トリガー語: 「テスト環境に出して」「テストに入れて」「preview で見たい」等。
+★**「本番待ち全部」を出す時は skill prodwait-preview**(`_prodwait-to-preview.py --push` 1コマンド=週次の事前レビュー)。このskillはper-case/少数セット用。
 
 ## 手順
 1. 入替なら先に空にする: `rm -f .preview-data/manga/*.yml`(ユーザが「消した上で」と言った時のみ)
