@@ -106,6 +106,10 @@ osananajimi-wa-faiaaman: osananajimi-wa-fireman
 oshare-majo-rabu-ando-berry: oshare-majo-love-and-berry
 ouji-ni-dekiai-saretakunai-node-motopurinsesu-desu-dansou-shitsuji-ni-narimasu: ouji-ni-dekiai-saretakunai-node-motoprincess-desu-dansou-shitsuji-ni-narimasu
 overrides:
+  botsu-chan-no-jidai-1989:
+    at: '2026-07-10'
+    reason: 5部作の統合再建+誤ローマ字slug是正(botsu→bocchan)。ユーザ指摘=ヨミが第2部(秋の舞姫)に化けていた
+    slug: bocchan-no-jidai
   mahouka-koukou-no-rettousei-2012:
     at: '2026-07-10'
     reason: 魔法科=編名slug化(year-suffix Wave3・Wiki編構成確証)
