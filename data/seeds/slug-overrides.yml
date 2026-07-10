@@ -106,6 +106,10 @@ osananajimi-wa-faiaaman: osananajimi-wa-fireman
 oshare-majo-rabu-ando-berry: oshare-majo-love-and-berry
 ouji-ni-dekiai-saretakunai-node-motopurinsesu-desu-dansou-shitsuji-ni-narimasu: ouji-ni-dekiai-saretakunai-node-motoprincess-desu-dansou-shitsuji-ni-narimasu
 overrides:
+  2011-ritsu-kiwamemichi-koukou-2011:
+    at: '2026-07-10'
+    reason: 私立→2011立の誤パースslug是正(year-suffix見直しWave1)
+    slug: shiritsu-kiwamemichi-koukou-2011
   008-uchuutoshizerozerohachi:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)

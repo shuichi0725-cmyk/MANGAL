@@ -2707,3 +2707,28 @@ dedup:
   title: ファイナルファンタジーロスト・ストレンジャー
   isbns: 3
   note: 外国語書誌題クラスタ(sid131298)の断片重複(v8-10=主頁と同ISBN)。06-18統合がchangelog記録のみでseed未登録→フルpromoteで復活、恒久登録 2026-07-10
+- drop: gurazeni-2014
+  canonical: gurazeni
+  title: Gurazeni
+  isbns: 1
+  note: latin書誌orphan(v16のみ・固有0) 2026-07-10 year-suffix見直し
+- drop: monkey-peak-the-rock
+  canonical: monkey-peak-the-rock-2020
+  title: モンキーピーク the Rock
+  isbns: 6
+  note: latin書誌orphan(v4-9・固有0)。canonical=-2020(1-9完) 2026-07-10 year-suffix見直し
+- drop: brains
+  canonical: brains-1997
+  title: Brains
+  isbns: 1
+  note: v1のみ固有0。canonical=-1997(全2巻) 2026-07-10 year-suffix見直し
+- drop: gundam-exa-2013
+  canonical: gundam-exa
+  title: GUNDAM EXA
+  isbns: 7
+  note: EXA本編+VSの混成頁。EXA2は本編頁と重複/6,7は種4で本編へ/VS1,3,4,5はvs頁に在り=lossless 2026-07-10 year-suffix見直し
+- drop: yatsuhakamura-1996
+  canonical: yatsuhakamura
+  title: 八つ墓村
+  isbns: 1
+  note: JET巻exclude後は影丸巻のみ=plainと同ISBN。JET版は登録保留 2026-07-10 year-suffix見直し

@@ -5573,7 +5573,7 @@ volumes:
   note: ねこぱんちに誤マッチ混入していた29巻を本来のキジトラ猫の小梅さんページへ移設(volume-excludeで除去+ここで純粋追加)
 - series_keys: &id001
   - qid:Q958449|name:うしおととら
-  qid: null  # ★Q958449=作者QID(藤田和日郎)で全作品に注入される事故(2026-07-07修正)。series_keysで十分
+  qid: null
   number: 2
   isbn13: '9784091258625'
   release_date: 2000-10
@@ -5585,7 +5585,7 @@ volumes:
   added_at: '2026-06-30'
   note: 巻抜けper-case(奇子型#3)。ワイド版(小学館・2000-2003)のv2-9取込もれ。NDLでISBN連番・発売日整合・第N巻ラベル確認。standard33巻/文庫19巻は完備、ワイド版だけv1,v10-18でv2-9欠落していた。
 - series_keys: *id001
-  qid: null  # ★Q958449=作者QID(藤田和日郎)で全作品に注入される事故(2026-07-07修正)。series_keysで十分
+  qid: null
   number: 3
   isbn13: '9784091258632'
   release_date: 2000-12
@@ -5597,7 +5597,7 @@ volumes:
   added_at: '2026-06-30'
   note: 巻抜けper-case(奇子型#3)。ワイド版(小学館・2000-2003)のv2-9取込もれ。NDLでISBN連番・発売日整合・第N巻ラベル確認。standard33巻/文庫19巻は完備、ワイド版だけv1,v10-18でv2-9欠落していた。
 - series_keys: *id001
-  qid: null  # ★Q958449=作者QID(藤田和日郎)で全作品に注入される事故(2026-07-07修正)。series_keysで十分
+  qid: null
   number: 4
   isbn13: '9784091258649'
   release_date: 2001-02
@@ -5609,7 +5609,7 @@ volumes:
   added_at: '2026-06-30'
   note: 巻抜けper-case(奇子型#3)。ワイド版(小学館・2000-2003)のv2-9取込もれ。NDLでISBN連番・発売日整合・第N巻ラベル確認。standard33巻/文庫19巻は完備、ワイド版だけv1,v10-18でv2-9欠落していた。
 - series_keys: *id001
-  qid: null  # ★Q958449=作者QID(藤田和日郎)で全作品に注入される事故(2026-07-07修正)。series_keysで十分
+  qid: null
   number: 5
   isbn13: '9784091258656'
   release_date: 2001-04
@@ -5621,7 +5621,7 @@ volumes:
   added_at: '2026-06-30'
   note: 巻抜けper-case(奇子型#3)。ワイド版(小学館・2000-2003)のv2-9取込もれ。NDLでISBN連番・発売日整合・第N巻ラベル確認。standard33巻/文庫19巻は完備、ワイド版だけv1,v10-18でv2-9欠落していた。
 - series_keys: *id001
-  qid: null  # ★Q958449=作者QID(藤田和日郎)で全作品に注入される事故(2026-07-07修正)。series_keysで十分
+  qid: null
   number: 6
   isbn13: '9784091258663'
   release_date: 2001-06
@@ -5633,7 +5633,7 @@ volumes:
   added_at: '2026-06-30'
   note: 巻抜けper-case(奇子型#3)。ワイド版(小学館・2000-2003)のv2-9取込もれ。NDLでISBN連番・発売日整合・第N巻ラベル確認。standard33巻/文庫19巻は完備、ワイド版だけv1,v10-18でv2-9欠落していた。
 - series_keys: *id001
-  qid: null  # ★Q958449=作者QID(藤田和日郎)で全作品に注入される事故(2026-07-07修正)。series_keysで十分
+  qid: null
   number: 7
   isbn13: '9784091258670'
   release_date: 2001-08
@@ -5645,7 +5645,7 @@ volumes:
   added_at: '2026-06-30'
   note: 巻抜けper-case(奇子型#3)。ワイド版(小学館・2000-2003)のv2-9取込もれ。NDLでISBN連番・発売日整合・第N巻ラベル確認。standard33巻/文庫19巻は完備、ワイド版だけv1,v10-18でv2-9欠落していた。
 - series_keys: *id001
-  qid: null  # ★Q958449=作者QID(藤田和日郎)で全作品に注入される事故(2026-07-07修正)。series_keysで十分
+  qid: null
   number: 8
   isbn13: '9784091258687'
   release_date: 2001-10
@@ -5657,7 +5657,7 @@ volumes:
   added_at: '2026-06-30'
   note: 巻抜けper-case(奇子型#3)。ワイド版(小学館・2000-2003)のv2-9取込もれ。NDLでISBN連番・発売日整合・第N巻ラベル確認。standard33巻/文庫19巻は完備、ワイド版だけv1,v10-18でv2-9欠落していた。
 - series_keys: *id001
-  qid: null  # ★Q958449=作者QID(藤田和日郎)で全作品に注入される事故(2026-07-07修正)。series_keysで十分
+  qid: null
   number: 9
   isbn13: '9784091258694'
   release_date: 2001-12
@@ -11519,7 +11519,7 @@ volumes:
   qid: null
   number: 2
   isbn13: '9784063603620'
-  release_date: '2002-09'
+  release_date: 2002-09
   pages: null
   publisher: 講談社
   edition_type: bunkobon
@@ -11533,7 +11533,7 @@ volumes:
   qid: null
   number: 3
   isbn13: '9784063603811'
-  release_date: '2002-10'
+  release_date: 2002-10
   pages: null
   publisher: 講談社
   edition_type: bunkobon
@@ -11547,7 +11547,7 @@ volumes:
   qid: null
   number: 4
   isbn13: '9784063603828'
-  release_date: '2002-10'
+  release_date: 2002-10
   pages: null
   publisher: 講談社
   edition_type: bunkobon
@@ -11561,7 +11561,7 @@ volumes:
   qid: null
   number: 5
   isbn13: '9784063603996'
-  release_date: '2002-11'
+  release_date: 2002-11
   pages: null
   publisher: 講談社
   edition_type: bunkobon
@@ -11575,7 +11575,7 @@ volumes:
   qid: null
   number: 6
   isbn13: '9784063604009'
-  release_date: '2002-11'
+  release_date: 2002-11
   pages: null
   publisher: 講談社
   edition_type: bunkobon
@@ -11589,7 +11589,7 @@ volumes:
   qid: null
   number: 7
   isbn13: '9784063604269'
-  release_date: '2002-12'
+  release_date: 2002-12
   pages: null
   publisher: 講談社
   edition_type: bunkobon
@@ -11603,7 +11603,7 @@ volumes:
   qid: null
   number: 8
   isbn13: '9784063604276'
-  release_date: '2002-12'
+  release_date: 2002-12
   pages: null
   publisher: 講談社
   edition_type: bunkobon
@@ -11617,7 +11617,7 @@ volumes:
   qid: null
   number: 9
   isbn13: '9784063604634'
-  release_date: '2003-01'
+  release_date: 2003-01
   pages: null
   publisher: 講談社
   edition_type: bunkobon
@@ -11631,7 +11631,7 @@ volumes:
   qid: null
   number: 10
   isbn13: '9784063604641'
-  release_date: '2003-01'
+  release_date: 2003-01
   pages: null
   publisher: 講談社
   edition_type: bunkobon
@@ -11645,7 +11645,7 @@ volumes:
   qid: null
   number: 2
   isbn13: '9784878921568'
-  release_date: '1998-11'
+  release_date: 1998-11
   pages: null
   publisher: 青心社
   edition_type: standard
@@ -11658,7 +11658,7 @@ volumes:
   qid: null
   number: 8
   isbn13: '9784878924194'
-  release_date: '2018-09'
+  release_date: 2018-09
   pages: null
   publisher: 青心社
   edition_type: standard
@@ -11671,7 +11671,7 @@ volumes:
   qid: null
   number: 9
   isbn13: '9784878924217'
-  release_date: '2019-09'
+  release_date: 2019-09
   pages: null
   publisher: 青心社
   edition_type: standard
@@ -11684,7 +11684,7 @@ volumes:
   qid: null
   number: 10
   isbn13: '9784878924293'
-  release_date: '2020-04'
+  release_date: 2020-04
   pages: null
   publisher: 青心社
   edition_type: standard
@@ -11697,7 +11697,7 @@ volumes:
   qid: null
   number: 11
   isbn13: '9784878924354'
-  release_date: '2021-09'
+  release_date: 2021-09
   pages: null
   publisher: 青心社
   edition_type: standard
@@ -11710,7 +11710,7 @@ volumes:
   qid: null
   number: 12
   isbn13: '9784878924422'
-  release_date: '2024-07'
+  release_date: 2024-07
   pages: null
   publisher: 青心社
   edition_type: standard
@@ -11723,7 +11723,7 @@ volumes:
   qid: null
   number: 13
   isbn13: '9784878924446'
-  release_date: '2025-07'
+  release_date: 2025-07
   pages: null
   publisher: 青心社
   edition_type: standard
@@ -11757,3 +11757,180 @@ volumes:
   source: rakuten
   added_at: '2026-07-07'
   note: KCDX通常版14巻の取込もれ(種2はCPC版14巻のみ保持)。楽天×NDLでISBN・発売日確定(vol13=2008-06/vol15=2009-06の連番間)
+- series_keys: &id028
+  - qid:Q11275039|name:薬屋のひとりごと
+  qid: null
+  number: 7
+  isbn13: '9784757568563'
+  release_date: '2020-11-25'
+  pages: null
+  publisher: スクウェア・エニックス
+  edition_type: standard
+  title_display: 薬屋のひとりごと（7）
+  source: rakuten
+  added_at: '2026-07-10'
+  note: 'year-suffix見直し2026-07-10: 混入除去の対巻補充(ねこクラゲ版の真巻)'
+- series_keys: *id028
+  qid: null
+  number: 8
+  isbn13: '9784757572713'
+  release_date: '2021-05-25'
+  pages: null
+  publisher: スクウェア・エニックス
+  edition_type: standard
+  title_display: 薬屋のひとりごと（8）
+  source: rakuten
+  added_at: '2026-07-10'
+  note: 'year-suffix見直し2026-07-10: 混入除去の対巻補充(ねこクラゲ版の真巻)'
+- series_keys: *id028
+  qid: null
+  number: 9
+  isbn13: '9784757575868'
+  release_date: '2021-11-25'
+  pages: null
+  publisher: スクウェア・エニックス
+  edition_type: standard
+  title_display: 薬屋のひとりごと（9）
+  source: rakuten
+  added_at: '2026-07-10'
+  note: 'year-suffix見直し2026-07-10: 混入除去の対巻補充(ねこクラゲ版の真巻)'
+- series_keys: *id028
+  qid: null
+  number: 11
+  isbn13: '9784757583245'
+  release_date: '2023-02-25'
+  pages: null
+  publisher: スクウェア・エニックス
+  edition_type: standard
+  title_display: 薬屋のひとりごと（11）
+  source: rakuten
+  added_at: '2026-07-10'
+  note: 'year-suffix見直し2026-07-10: 混入除去の対巻補充(ねこクラゲ版の真巻)'
+- series_keys: *id028
+  qid: null
+  number: 12
+  isbn13: '9784757588134'
+  release_date: '2023-09-29'
+  pages: null
+  publisher: スクウェア・エニックス
+  edition_type: standard
+  title_display: 薬屋のひとりごと（12）
+  source: rakuten
+  added_at: '2026-07-10'
+  note: 'year-suffix見直し2026-07-10: 混入除去の対巻補充(ねこクラゲ版の真巻)'
+- series_keys: *id028
+  qid: null
+  number: 13
+  isbn13: '9784757590274'
+  release_date: '2024-03-25'
+  pages: null
+  publisher: スクウェア・エニックス
+  edition_type: standard
+  title_display: 薬屋のひとりごと（13）
+  source: rakuten
+  added_at: '2026-07-10'
+  note: 'year-suffix見直し2026-07-10: 混入除去の対巻補充(ねこクラゲ版の真巻)'
+- series_keys:
+  - name:千葉智宏|name:GUNDAM EXA
+  qid: null
+  number: 6
+  isbn13: '9784041209271'
+  release_date: '2013-11-26'
+  pages: null
+  publisher: KADOKAWA
+  edition_type: standard
+  title_display: GUNDAM EXA (6)
+  source: rakuten
+  added_at: '2026-07-10'
+  note: 'year-suffix見直し2026-07-10: 混入除去の対巻補充'
+- series_keys:
+  - name:千葉智宏|name:GUNDAM EXA
+  qid: null
+  number: 7
+  isbn13: '9784041210727'
+  release_date: '2014-03-26'
+  pages: null
+  publisher: KADOKAWA
+  edition_type: standard
+  title_display: GUNDAM EXA (7)
+  source: rakuten
+  added_at: '2026-07-10'
+  note: 'year-suffix見直し2026-07-10: 混入除去の対巻補充'
+- series_keys:
+  - qid:Q692237|name:マクロス7トラッシュ
+  qid: null
+  number: 7
+  isbn13: '9784047132931'
+  release_date: 1999-08
+  pages: null
+  publisher: KADOKAWA
+  edition_type: standard
+  title_display: マクロス7トラッシュ（7）
+  source: rakuten
+  added_at: '2026-07-10'
+  note: 'year-suffix見直し2026-07-10: 混入除去の対巻補充'
+- series_keys:
+  - qid:Q692237|name:マクロス7トラッシュ
+  qid: null
+  number: 8
+  isbn13: '9784047133976'
+  release_date: 2001-07
+  pages: null
+  publisher: KADOKAWA
+  edition_type: standard
+  title_display: マクロス7トラッシュ（8）
+  source: rakuten
+  added_at: '2026-07-10'
+  note: 'year-suffix見直し2026-07-10: 混入除去の対巻補充'
+- series_keys:
+  - name:藤子不二雄|name:パーマン
+  qid: null
+  number: 9
+  isbn13: '9784124101904'
+  release_date: 1988-05
+  pages: null
+  publisher: 中央公論社
+  edition_type: standard
+  title_display: 新編集パーマン（9）
+  source: rakuten
+  added_at: '2026-07-10'
+  note: 'year-suffix見直し2026-07-10: 混入除去の対巻補充'
+- series_keys:
+  - name:井口達也|name:OUT
+  qid: null
+  number: 29
+  isbn13: '9784253013079'
+  release_date: '2026-04-20'
+  pages: null
+  publisher: 秋田書店
+  edition_type: standard
+  title_display: OUT 29
+  source: rakuten
+  added_at: '2026-07-10'
+  note: 'year-suffix見直し2026-07-10: 混入除去の対巻補充'
+- series_keys:
+  - name:斎田晴子|name:JOKER
+  qid: null
+  number: 1
+  isbn13: '9784575334555'
+  release_date: '2011-07-16'
+  pages: null
+  publisher: 双葉社
+  edition_type: standard
+  title_display: JOKER（1）
+  source: rakuten
+  added_at: '2026-07-10'
+  note: 'year-suffix見直し2026-07-10: 混入除去の対巻補充(上杉可南子版v1)'
+- series_keys:
+  - qid:Q692237|name:マクロス7trash
+  qid: null
+  number: 1
+  isbn13: '9784047153318'
+  release_date: 2009-11
+  pages: null
+  publisher: KADOKAWA
+  edition_type: standard
+  title_display: マクロス7 TRASH (vol.1) 新装版
+  source: rakuten
+  added_at: '2026-07-10'
+  note: 'year-suffix見直し2026-07-10: 混入除去の対巻補充'
