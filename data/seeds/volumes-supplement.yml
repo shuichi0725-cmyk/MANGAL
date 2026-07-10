@@ -12012,3 +12012,40 @@ volumes:
   source: ndl
   added_at: '2026-07-10'
   note: スコラ倒産→MF移籍の続刊12-16(NDL確証)。year-suffix Wave2
+- series_keys: &id029
+  - name:ありいめめこ|name:ひとりじめマイヒーロー
+  qid: null
+  number: 15
+  isbn13: '9784758026857'
+  release_date: 2024-04
+  pages: null
+  publisher: 一迅社
+  edition_type: standard
+  title_display: ひとりじめマイヒーロー 15
+  source: rakuten
+  added_at: '2026-07-10'
+  note: 分裂断片(-2025頁=latin書誌クラスタ)からの本編続巻統合。year-suffix Wave7
+- series_keys: *id029
+  qid: null
+  number: 16
+  isbn13: '9784758028318'
+  release_date: '2025-01-03'
+  pages: null
+  publisher: 一迅社
+  edition_type: standard
+  title_display: ひとりじめマイヒーロー 16
+  source: rakuten
+  added_at: '2026-07-10'
+  note: 分裂断片(-2025頁=latin書誌クラスタ)からの本編続巻統合。year-suffix Wave7
+- series_keys: *id029
+  qid: null
+  number: 17
+  isbn13: '9784758089746'
+  release_date: '2026-03-30'
+  pages: null
+  publisher: 一迅社
+  edition_type: standard
+  title_display: ひとりじめマイヒーロー 17
+  source: rakuten
+  added_at: '2026-07-10'
+  note: 分裂断片(-2025頁=latin書誌クラスタ)からの本編続巻統合。year-suffix Wave7
