@@ -12647,3 +12647,63 @@ volumes:
   source: rakuten
   added_at: '2026-07-10'
   note: 巻抜け54件是正。★初回はケルン市警オドの誤キー(照会用にでっち上げたISBNが実在した事故)→v1/6/21の3点逆引きで正キー確定 2026-07-10
+- series_keys: &id030 []
+  qid: null
+  number: 1
+  isbn13: '9784091523617'
+  release_date: 1999-05
+  pages: null
+  publisher: 小学館
+  edition_type: standard
+  title_display: 海猿（1）
+  source: rakuten
+  added_at: '2026-07-10'
+  note: '巻抜け是正(ユーザ指摘): YSC版1-5補完(Wiki全12巻確証)。v1は誤ISBN差替'
+- series_keys: *id030
+  qid: null
+  number: 2
+  isbn13: '9784091523624'
+  release_date: 1999-07
+  pages: null
+  publisher: 小学館
+  edition_type: standard
+  title_display: 海猿（2）
+  source: rakuten
+  added_at: '2026-07-10'
+  note: '巻抜け是正(ユーザ指摘): YSC版1-5補完(Wiki全12巻確証)。v1は誤ISBN差替'
+- series_keys: *id030
+  qid: null
+  number: 3
+  isbn13: '9784091523631'
+  release_date: 1999-10
+  pages: null
+  publisher: 小学館
+  edition_type: standard
+  title_display: 海猿（3）
+  source: rakuten
+  added_at: '2026-07-10'
+  note: '巻抜け是正(ユーザ指摘): YSC版1-5補完(Wiki全12巻確証)。v1は誤ISBN差替'
+- series_keys: *id030
+  qid: null
+  number: 4
+  isbn13: '9784091523648'
+  release_date: 2000-01
+  pages: null
+  publisher: 小学館
+  edition_type: standard
+  title_display: 海猿（4）
+  source: rakuten
+  added_at: '2026-07-10'
+  note: '巻抜け是正(ユーザ指摘): YSC版1-5補完(Wiki全12巻確証)。v1は誤ISBN差替'
+- series_keys: *id030
+  qid: null
+  number: 5
+  isbn13: '9784091523655'
+  release_date: 2000-04
+  pages: null
+  publisher: 小学館
+  edition_type: standard
+  title_display: 海猿（5）
+  source: rakuten
+  added_at: '2026-07-10'
+  note: '巻抜け是正(ユーザ指摘): YSC版1-5補完(Wiki全12巻確証)。v1は誤ISBN差替'
