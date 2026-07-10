@@ -12621,3 +12621,28 @@ volumes:
   source: rakuten
   added_at: '2026-07-10'
   note: '巻抜け54件是正(ユーザ提供リスト): 題+巻cache照合(帯ガード/前方一致/手動確定)'
+- series_keys: &id030
+  - qid:Q3276235|name:ケルン市警オド
+  qid: null
+  number: 48
+  isbn13: '9784253012690'
+  release_date: '2026-04-08'
+  pages: null
+  publisher: 秋田書店
+  edition_type: standard
+  title_display: 魔入りました！入間くん　48
+  source: rakuten
+  added_at: '2026-07-10'
+  note: 巻抜け54件是正の残り(復元v50で顕在化したgap)
+- series_keys: *id030
+  qid: null
+  number: 49
+  isbn13: '9784253013864'
+  release_date: '2026-06-08'
+  pages: null
+  publisher: 秋田書店
+  edition_type: standard
+  title_display: 魔入りました！入間くん　49
+  source: rakuten
+  added_at: '2026-07-10'
+  note: 巻抜け54件是正の残り(復元v50で顕在化したgap)
