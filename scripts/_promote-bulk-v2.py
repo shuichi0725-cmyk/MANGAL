@@ -670,7 +670,10 @@ DROP_IMPRINT_PATTERNS = ["My first big", "コンビニ", "増刊", "同人", "�
                          "KPC", "プラチナコミックス",
                          # ★remixカナ表記(2026-07-02: 「ジャンプremix」だけでは Shueisha jump remix 等の
                          #   latin variantを素通し=こち亀年度別コンビニ本54頁が漏れていた。latin側はlowerで捕捉)
-                         "リミックス"]
+                         "リミックス",
+                         # ★略記SJR=ShueishaジャンプREMIX(2026-07-11: 'remix'文字列を含まない略記が
+                         #   平成こち亀13-28年等41頁を素通し=ユーザ発見)
+                         "SJR"]
 # bilingual / 英訳版 imprint は drop (= 翻訳版 は 別 product)
 # ★"remix" = コンビニ廉価再録レーベル全variant(Shueisha jump remix/ガンガンコミックスremix/
 #   G fantasy comics remix/My first big special remix等)。種2実測で全てコンビニ再録・正規版に'remix'無し。
