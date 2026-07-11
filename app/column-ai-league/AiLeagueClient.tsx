@@ -14,7 +14,7 @@ export default function AiLeagueClient({ sections }: { sections: AiReviewSection
   useEffect(() => setNow(Date.now()), []);
   if (now === null) return null;
   const weeks = Math.floor((now - EPOCH_SUNDAY_JST) / (7 * 86400_000));
-  const visibleCount = Math.max(1, weeks + 2); // 公開前=1節のみ、EPOCH日曜で2節目…
+  const visibleCount = Math.max(1, weeks + 1); // seed=1始まりに正規化(2026-07-12)。EPOCH日曜=第1節、以降毎週+1
   const visible = sections.filter((s) => s.setsu <= visibleCount).sort((a, b) => b.setsu - a.setsu);
   const current = visible[0];
   const past = visible.slice(1);

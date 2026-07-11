@@ -35,7 +35,7 @@ export default function AiReviewSectionView({ section }: { section: AiReviewSect
   return (
     <div>
       <p className="text-[10px] font-bold tracking-[0.25em] text-[var(--color-accent)]">
-        AI書評家リーグ ・ 第{section.setsu - 1}節
+        AI書評家リーグ ・ 第{section.setsu}節
       </p>
       <h1 className="mt-2 text-[22px] font-black leading-snug">
         今回の課題図書『{section.title}』を、<br />AI書評家{section.reviews.length}人が読んだら。
