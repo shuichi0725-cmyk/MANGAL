@@ -38,6 +38,7 @@
 - [discovery戦略](discovery_strategy_and_refs.md) — 網羅×カテゴリ×AI。/genre/[key]ランディング実装
 - [adult v3信号源=dbsearch.net](adult_signal_dbsearch.md) — 成年作家/出版社/雑誌リスト
 - [成人判定機構](adult_judgment_architecture.md) — 基準=MADB成年。adult_us+geo実装済。v3=楽天収穫後
+- [成年すり抜け型+force_adult](adult_slipthrough_class.md) — imprint社名一致穴。triage871件残(一括drop禁止)
 - [フリガナ正当性検証完了](kana_validity_state.md) — 誤り239修正済。slug土台信頼可
 - [フリガナNDL監査](furigana_ndl_audit.md) — NDLヨミ=ground-truth。2ソース合意のみ高確度
 - [MADB誤番号(下=3型)是正](madb_volume_misnumber_fix.md) — ~1,677件promoteで1..N振り直し
