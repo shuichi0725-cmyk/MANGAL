@@ -13817,3 +13817,59 @@ volumes:
   source: rakuten
   added_at: '2026-07-11'
   note: 巻抜け回収(ユーザ提供ISBN・楽天live+NDL確認)。全9巻完結
+- series_keys: &id047
+  - name:TYPE-MOON|name:Fate/Grand Order-turas réalta-
+  number: 1
+  isbn13: '9784065107645'
+  release_date: '2018-01-09'
+  pages: null
+  publisher: 講談社
+  edition_type: standard
+  title_display: Fate/Grand Order -turas réalta-（1）
+  source: rakuten
+  added_at: '2026-07-11'
+  note: クラスタ分裂統合(realta/réaltaアクセント題ゆれ=ユーザ報告)。v1,3,4=旧realta頁から移設/18,19=両頁欠け
+- series_keys: *id047
+  number: 3
+  isbn13: '9784065129876'
+  release_date: '2018-10-09'
+  pages: null
+  publisher: 講談社
+  edition_type: standard
+  title_display: Fate/Grand Order -turas réalta-（3）
+  source: rakuten
+  added_at: '2026-07-11'
+  note: クラスタ分裂統合(realta/réaltaアクセント題ゆれ=ユーザ報告)。v1,3,4=旧realta頁から移設/18,19=両頁欠け
+- series_keys: *id047
+  number: 4
+  isbn13: '9784065144398'
+  release_date: '2019-03-08'
+  pages: null
+  publisher: 講談社
+  edition_type: standard
+  title_display: Fate/Grand Order -turas réalta-（4）
+  source: rakuten
+  added_at: '2026-07-11'
+  note: クラスタ分裂統合(realta/réaltaアクセント題ゆれ=ユーザ報告)。v1,3,4=旧realta頁から移設/18,19=両頁欠け
+- series_keys: *id047
+  number: 18
+  isbn13: '9784065374269'
+  release_date: '2024-11-08'
+  pages: null
+  publisher: 講談社
+  edition_type: standard
+  title_display: Fate/Grand Order -turas réalta-（18）
+  source: rakuten
+  added_at: '2026-07-11'
+  note: クラスタ分裂統合(realta/réaltaアクセント題ゆれ=ユーザ報告)。v1,3,4=旧realta頁から移設/18,19=両頁欠け
+- series_keys: *id047
+  number: 19
+  isbn13: '9784065390559'
+  release_date: '2025-04-09'
+  pages: null
+  publisher: 講談社
+  edition_type: standard
+  title_display: Fate/Grand Order -turas réalta-（19）
+  source: rakuten
+  added_at: '2026-07-11'
+  note: クラスタ分裂統合(realta/réaltaアクセント題ゆれ=ユーザ報告)。v1,3,4=旧realta頁から移設/18,19=両頁欠け
