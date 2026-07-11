@@ -22,38 +22,20 @@ synopsis: ''
 anime_adapted: false
 wikidata_qid: Q11383543
 editions:
-- type: standard
-  label: 通常版
+- type: kanzenban
+  label: 完全版
   publisher: サニー出版
   volumes:
   - number: 1
-    volume_label: 上巻
     asin: null
     isbn13: '9784882191018'
     cover_url: null
     release_date: 2000-10
   - number: 2
-    volume_label: 前篇
-    asin: null
-    isbn13: null
-    cover_url: null
-    release_date: null
-  - number: 3
-    volume_label: 下巻
     asin: null
     isbn13: '9784882191025'
     cover_url: null
     release_date: 2000-10
-  - number: 8
-    asin: null
-    isbn13: null
-    cover_url: null
-    release_date: null
-  - number: 9
-    asin: null
-    isbn13: null
-    cover_url: null
-    release_date: null
 publishers:
 - sunny-shuppan
 genres_provisional: true
