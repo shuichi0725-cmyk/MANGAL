@@ -52,11 +52,15 @@ export default function ListClient({ data }: { data: ListBundle }) {
   }, []);
   const [state, setState] = useState<FilterState>(emptyFilterState());
   const [open, setOpen] = useState(false);
-  const [q, setQ] = useState("");
+  const [q, setQ] = useState("");             // 確定済み検索語(=絞込に効く)
+  const [qInput, setQInput] = useState("");   // 入力中の文字(★ボタン/Enterまで検索しない 2026-07-11 ユーザ仕様)
   // ★URL ?q= を初期値に(2026-07-06 PCサイドバー検索からの遷移受け)
   useEffect(() => {
     const uq = new URLSearchParams(window.location.search).get("q");
-    if (uq) setQ(uq);
+    if (uq) {
+      setQ(uq);
+      setQInput(uq);
+    }
   }, []);
   // ★q変更をURLへ書き戻し(replace=履歴を汚さない)。詳細→OS戻るで検索語が消えない(2026-07-10 ユーザ相談)
   useEffect(() => {
@@ -65,7 +69,8 @@ export default function ListClient({ data }: { data: ListBundle }) {
     else url.searchParams.delete("q");
     window.history.replaceState(null, "", url.toString());
   }, [q]);
-  const [sort, setSort] = useState<SortId>("kana");
+  // ★既定=人気順(2026-07-11 ユーザ仕様: 検索前のデフォルトは人気順)
+  const [sort, setSort] = useState<SortId>("popularity");
   const [sortTouched, setSortTouched] = useState(false);
   const [limit, setLimit] = useState(200);
   const [slugfixOnly, setSlugfixOnly] = useState(false);
@@ -125,14 +130,30 @@ export default function ListClient({ data }: { data: ListBundle }) {
     <div>
       {/* ── コントロール: 検索 / フィルターボタン / 並び順チップ ── */}
       <div className="px-3 pt-2.5">
-        <div className="flex items-center gap-2">
+        <form
+          className="flex items-center gap-2"
+          onSubmit={(e) => {
+            e.preventDefault();
+            setQ(qInput.trim());
+          }}
+        >
           <input
-            value={q}
-            onChange={(e) => setQ(e.target.value)}
+            value={qInput}
+            onChange={(e) => {
+              setQInput(e.target.value);
+              if (e.target.value === "" && q) setQ(""); // 全消しは即解除(押し直し不要)
+            }}
             placeholder="題名・よみ・著者で検索…"
             className="min-w-0 flex-1 rounded-full border border-[var(--color-line)] bg-white px-3.5 py-1.5 text-[13px] outline-none focus:border-[var(--color-accent)]"
           />
           <button
+            type="submit"
+            className="spring-press shrink-0 rounded-full bg-[var(--color-accent)] px-3.5 py-1.5 text-[12px] font-bold text-white"
+          >
+            検索
+          </button>
+          <button
+            type="button"
             onClick={() => setOpen(true)}
             className={`spring-press shrink-0 rounded-full px-3 py-1.5 text-[12px] font-bold ${
               nActive > 0 ? "bg-[var(--color-accent)] text-white" : "border border-[var(--color-line)] bg-[var(--color-surface)] text-ink/75"
@@ -140,7 +161,7 @@ export default function ListClient({ data }: { data: ListBundle }) {
           >
             ⚙ フィルター{nActive > 0 ? ` (${nActive})` : ""}
           </button>
-        </div>
+        </form>
         <div className="mt-2 flex items-center gap-1.5 overflow-x-auto pb-1">
           <span className="shrink-0 text-[10px] font-bold text-ink/45">並び順</span>
           {SORTS.map((s) => (
