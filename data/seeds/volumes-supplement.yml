@@ -13783,3 +13783,37 @@ volumes:
   source: rakuten
   added_at: '2026-07-11'
   note: 新装細読版(SJR)が6,7枠を占有→除去に伴い真のYJC6,7を登録(こち亀v50型交差)
+- series_keys: &id046
+  - name:相原瑛人|name:ニューノーマル
+  number: 6
+  isbn13: '9784910617268'
+  release_date: '2024-06-17'
+  pages: null
+  publisher: ファンギルド
+  edition_type: standard
+  title_display: ニューノーマル6
+  source: rakuten
+  added_at: '2026-07-11'
+  note: 巻抜け回収(ユーザ提供ISBN・楽天live+NDL確認)。全9巻完結
+- series_keys: *id046
+  number: 8
+  isbn13: '9784910617480'
+  release_date: '2025-10-17'
+  pages: null
+  publisher: ファンギルド
+  edition_type: standard
+  title_display: ニューノーマル8
+  source: rakuten
+  added_at: '2026-07-11'
+  note: 巻抜け回収(ユーザ提供ISBN・楽天live+NDL確認)。全9巻完結
+- series_keys: *id046
+  number: 9
+  isbn13: '9784910617749'
+  release_date: '2026-06-17'
+  pages: null
+  publisher: ファンギルド
+  edition_type: standard
+  title_display: ニューノーマル9
+  source: rakuten
+  added_at: '2026-07-11'
+  note: 巻抜け回収(ユーザ提供ISBN・楽天live+NDL確認)。全9巻完結
