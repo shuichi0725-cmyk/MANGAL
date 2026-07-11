@@ -122,3 +122,15 @@ overrides:
     evidence: "ユーザ裁定=非掲載(2026-07-11)。久保書店ワールドコミックス・楽天紙+Kobo完全不在(撤去)・一部ストア成年判定の境界作。Amazonは非成年だが判定割れのため非掲載"
     title: '未成熟'
     added_at: "2026-07-11"
+  - series_key: 'name:あべもりおか|name:あべもりおかの… (仮) Ex'
+    force_adult: true
+    reason: user_ruling_nonlisting
+    evidence: "ユーザ裁定=非掲載(2026-07-11)。成年誌COMIC阿吽(ヒット出版社)巻末エッセイの単行本化・全4巻。楽天=v3のみ取扱/他3冊不在・Kobo著者ごと0件の境界作"
+    title: 'あべもりおかの… (仮) Ex'
+    added_at: "2026-07-11"
+  - series_key: 'name:あべもりおか|name:あべもりおかの…（仮） Ex'
+    force_adult: true
+    reason: user_ruling_nonlisting
+    evidence: "ユーザ裁定=非掲載(2026-07-11)。成年誌COMIC阿吽(ヒット出版社)巻末エッセイの単行本化・全4巻。楽天=v3のみ取扱/他3冊不在・Kobo著者ごと0件の境界作"
+    title: 'あべもりおかの… (仮) Ex'
+    added_at: "2026-07-11"
