@@ -344,6 +344,21 @@ def _load_adult_overrides() -> set[str]:
     return out
 
 
+def _load_adult_force() -> set[str]:
+    """★逆方向: force_adult: true の series_key 集合 (= scoreすり抜け成年の per-case 除外)。
+    穴の型: adult_publisher signal が imprint文字列内の社名一致のみで、成年専業社の
+    ブランドimprint(バベルコミックス等)が score=0 で素通りする (獣耳のリコリス 2026-07-11)。"""
+    if not ADULT_OVERRIDES.exists():
+        return set()
+    try:
+        with ADULT_OVERRIDES.open(encoding="utf-8") as f:
+            data = _yload(f) or {}
+    except Exception:
+        return set()
+    return {str(o["series_key"]) for o in (data.get("overrides") or [])
+            if isinstance(o, dict) and o.get("force_adult") is True and o.get("series_key")}
+
+
 ADULT_US_MAP = ROOT / ".cache" / "adult-us-map.json"
 
 
@@ -2721,6 +2736,7 @@ def main():
     #   されたり promote 単体実行でも漏れないよう、 ここでも adult_score>=3 を弾く
     #   (override force非adult は除外)。 現データはクリーンなので実質no-op = 安全網。
     _adult_net_ovr = _load_adult_overrides()
+    _adult_net_force = _load_adult_force()
 
     stats = {"total": 0, "regenerated": 0, "not_found_in_db": 0,
              "no_editions": 0, "dropped_spinoff_old": 0,
@@ -2765,7 +2781,8 @@ def main():
             continue
         # ★成年ネット(defense-in-depth): 成年(adult_score>=3)は本番に出さない。
         #   slug-apply-prep ゲートの第二線(data/manga 汚染・promote単体実行でも漏らさない)。
-        if (series.get("adult_score") or 0) >= 3 and series.get("series_key") not in _adult_net_ovr:
+        if ((series.get("adult_score") or 0) >= 3 and series.get("series_key") not in _adult_net_ovr) \
+                or series.get("series_key") in _adult_net_force:
             stats["dropped_adult"] = stats.get("dropped_adult", 0) + 1
             continue
         # 雑誌(cm105マスター準拠)は作品でないため除外
