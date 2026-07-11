@@ -1,4 +1,4 @@
-# 成人判定 手動 override (= force 非adult)。 promote が adult_score>=3 でも本番採用。
+# 成人判定 手動 override。 force_adult: false = 非adult採用 / ★true = すり抜け成年の除外(2026-07-11追加)。
 # 由来: 作者signal(wikipedia_adult_mangaka_list)単独の誤爆を 種aで全年齢確認 (Phase A)。
 # 形式: series_key 単位。 純粋追加 only。 種2/adult_score は不変。
 overrides:
@@ -104,3 +104,9 @@ overrides:
     evidence: '艦これゲーム由来アンソロジー=全年齢'
     title: '艦隊これくしょん-艦これ-アンソロジーコミック 横須賀鎮守府編'
     added_at: "2026-05-31"
+  - series_key: 'name:京極燈弥|name:獣耳のリコリス'
+    force_adult: true
+    reason: adult_publisher_brand_imprint_slipthrough
+    evidence: "publisher=文苑堂(21社リスト在)だがimprint=バベルコミックス(=COMIC BAVEL系成年ブランドのカナ表記)でsignal不一致→score=0。楽天も成年判定で非掲載(ユーザ発見)"
+    title: '獣耳のリコリス'
+    added_at: "2026-07-11"
