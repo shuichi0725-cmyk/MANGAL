@@ -13726,3 +13726,37 @@ volumes:
   source: rakuten
   added_at: '2026-07-11'
   note: 上下巻の下=v2(ヤンマガ公式/講談社で確認)。キャッシュ在中だが上下巻表記で自動fixが結べず残存していた
+- series_keys: &id044
+  - qid:Q3325226|name:こううんりゅうすい〈徐福〉|sub:行雲流水
+  number: 1
+  isbn13: '9784088907154'
+  release_date: '2017-11-17'
+  pages: null
+  publisher: 集英社
+  edition_type: standard
+  title_display: こううんりゅうすい＜徐福＞ 1
+  source: rakuten
+  added_at: '2026-07-11'
+  note: remix巻(SJR1-3)が本編1-3枠を占有していた→除去に伴い真の徐福1-3を登録
+- series_keys: *id044
+  number: 2
+  isbn13: '9784088907901'
+  release_date: '2017-11-17'
+  pages: null
+  publisher: 集英社
+  edition_type: standard
+  title_display: こううんりゅうすい＜徐福＞ 2
+  source: rakuten
+  added_at: '2026-07-11'
+  note: remix巻(SJR1-3)が本編1-3枠を占有していた→除去に伴い真の徐福1-3を登録
+- series_keys: *id044
+  number: 3
+  isbn13: '9784088910048'
+  release_date: '2018-04-19'
+  pages: null
+  publisher: 集英社
+  edition_type: standard
+  title_display: こううんりゅうすい＜徐福＞ 3
+  source: rakuten
+  added_at: '2026-07-11'
+  note: remix巻(SJR1-3)が本編1-3枠を占有していた→除去に伴い真の徐福1-3を登録
