@@ -4,7 +4,7 @@ title: 失われたムー大陸
 title_kana: ウシナワレタムータイリク
 title_romaji: ushinawareta mu tairiku
 year_started: 1979
-year_ended: 2005
+year_ended: 1979
 status: completed
 authors:
 - name: 桑田二郎
@@ -25,18 +25,20 @@ wikidata_qid: Q11537576
 editions:
 - type: standard
   label: 通常版
-  publisher: パンローリング
-  imprint: 大陸・謎シリーズ
   volumes:
   - number: 1
     asin: null
     isbn13: null
     cover_url: null
     release_date: 1979-12
-  - number: 6
+- type: shinsoban
+  label: 復刻版
+  publisher: パンローリング
+  volumes:
+  - number: 1
     asin: null
     isbn13: '9784775910474'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/7759/77591047.jpg?_ex=200x200
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/7759/77591047.jpg?_ex=300x300
     release_date: 2005-07
 publishers:
 - pan-rolling
