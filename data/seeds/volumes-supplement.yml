@@ -13760,3 +13760,26 @@ volumes:
   source: rakuten
   added_at: '2026-07-11'
   note: remix巻(SJR1-3)が本編1-3枠を占有していた→除去に伴い真の徐福1-3を登録
+- series_keys: &id045
+  - qid:Q3325226|name:新サラリーマン金太郎
+  number: 6
+  isbn13: '9784088791210'
+  release_date: 2011-03
+  pages: null
+  publisher: 集英社
+  edition_type: standard
+  title_display: 新サラリーマン金太郎（6）
+  source: rakuten
+  added_at: '2026-07-11'
+  note: 新装細読版(SJR)が6,7枠を占有→除去に伴い真のYJC6,7を登録(こち亀v50型交差)
+- series_keys: *id045
+  number: 7
+  isbn13: '9784088791272'
+  release_date: 2011-03
+  pages: null
+  publisher: 集英社
+  edition_type: standard
+  title_display: 新サラリーマン金太郎（7）
+  source: rakuten
+  added_at: '2026-07-11'
+  note: 新装細読版(SJR)が6,7枠を占有→除去に伴い真のYJC6,7を登録(こち亀v50型交差)
