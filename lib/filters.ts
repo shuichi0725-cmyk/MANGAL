@@ -149,9 +149,9 @@ function sortItems(items: MangaListItem[], sort: SortKey): MangaListItem[] {
   }
 }
 
-/** 検索実行時の既定ソート(2026-07-04 ユーザ要望): query有り+sort未指定なら人気順 */
+/** 既定ソート=人気順(2026-07-11 ユーザ仕様: 検索前のデフォルトから人気順。手動選択があればそれを尊重) */
 export function effectiveSort(state: FilterState): SortKey {
-  if (state.query.trim() && state.sort === "default") return "popularity";
+  if (state.sort === "default") return "popularity";
   return state.sort;
 }
 

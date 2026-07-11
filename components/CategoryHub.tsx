@@ -1,3 +1,6 @@
+"use client";
+
+import { useSearchParams } from "next/navigation";
 import Card from "@/components/ui/Card";
 import type { ListBundle } from "@/lib/schema";
 
@@ -19,6 +22,15 @@ type Category = {
  * `lib/filters.ts:filtersFromSearchParams` で対応。
  */
 export default function CategoryHub({ data }: Props) {
+  // ★選択中タイルの可視化(2026-07-11 ユーザ指摘: どれが押されているか分からない)
+  const searchParams = useSearchParams();
+  const isActive = (href: string) => {
+    const target = new URLSearchParams(href.split("?")[1] || "");
+    for (const [k, v] of target.entries()) {
+      if (searchParams.get(k) !== v) return false;
+    }
+    return true;
+  };
   const total = data.manga.length;
   const animeCount = data.manga.filter((m) => m.anime_adapted).length;
   const awardCount = data.manga.filter(
@@ -129,21 +141,31 @@ export default function CategoryHub({ data }: Props) {
         カテゴリで探す
       </h2>
       <ul className="grid grid-cols-4 sm:grid-cols-5 lg:grid-cols-6 gap-2">
-        {categories.map((c) => (
-          <li key={c.href}>
-            <Card href={c.href} className="h-full px-1 py-2.5 text-center">
-              <span className="flex flex-col items-center justify-center gap-1">
-                <span className="text-base leading-none" aria-hidden="true">
-                  {c.icon}
+        {categories.map((c) => {
+          const active = isActive(c.href);
+          return (
+            <li key={c.href}>
+              <Card
+                href={active ? "/browse" : c.href}
+                className={`h-full px-1 py-2.5 text-center ${
+                  active ? "!bg-[var(--color-accent)] !text-white ring-2 ring-[var(--color-accent)]" : ""
+                }`}
+              >
+                <span className="flex flex-col items-center justify-center gap-1">
+                  <span className="text-base leading-none" aria-hidden="true">
+                    {c.icon}
+                  </span>
+                  <span className="text-[11px] font-semibold leading-tight">
+                    {active ? "✓ " : ""}{c.label}
+                  </span>
+                  <span className={`text-[10px] font-medium leading-none tabular-nums ${active ? "text-white/75" : "text-ink/40"}`}>
+                    {c.count}
+                  </span>
                 </span>
-                <span className="text-[11px] font-semibold leading-tight">{c.label}</span>
-                <span className="text-[10px] font-medium leading-none text-ink/40 tabular-nums">
-                  {c.count}
-                </span>
-              </span>
-            </Card>
-          </li>
-        ))}
+              </Card>
+            </li>
+          );
+        })}
       </ul>
     </section>
   );

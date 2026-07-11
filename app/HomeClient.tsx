@@ -212,7 +212,19 @@ export default function HomeClient({ data }: Props) {
           </p>
         </div>
         <div className="md:w-96">
-          <SearchBox value={state.query} onChange={(q) => setState({ ...state, query: q })} />
+          {/* ★確定した検索語はURL(?q=)へ書く=source of truth。詳細→戻るで検索語・結果が復元される(2026-07-11 ユーザ仕様) */}
+          <SearchBox
+            value={state.query}
+            onChange={(q) => {
+              setState({ ...state, query: q });
+              const params = new URLSearchParams(searchParams.toString());
+              if (q) params.set("q", q);
+              else params.delete("q");
+              params.delete("page");
+              const qs = params.toString();
+              router.replace(qs ? `${pathname}?${qs}` : pathname, { scroll: false });
+            }}
+          />
         </div>
       </section>
 
