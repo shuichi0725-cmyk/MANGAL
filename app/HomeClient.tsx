@@ -228,7 +228,8 @@ export default function HomeClient({ data }: Props) {
         </div>
       </section>
 
-      <CategoryHub data={liveData} />
+      {/* ★filtered=現在の絞り込み後(検索込み)を渡す=タイル件数が交差件数になる(2026-07-12) */}
+      <CategoryHub data={liveData} filtered={showArt ? undefined : filteredManga} />
 
       {/* ★テスト環境限定ツールバー(本番=workers.dev では非表示)。
           ①画像なし=cover無だけ表示 ②コピー=表示中の情報をクリップボードへ(私への共有用) */}
