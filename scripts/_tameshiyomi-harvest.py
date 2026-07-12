@@ -7,11 +7,21 @@
   2. TinyFish検索 site:booklive.jp <題> <著者> → title_id をURLから正規表現抽出
   3. ゲート: 題の正規化一致(部分不可・完全一致のみ) + 著者姓一致 → 不一致は自動採用しない(保留)
   4. 検証: bviewer cid=<title_id>_001 を HEAD 200 確認(失敗=保留)
-  5. 出力: data/seeds/tameshiyomi-booklive.jsonl に純粋追加(証拠込み)。保留= docs/production-diagnostics/tameshiyomi-holds.tsv
+  5. 出力: data/seeds/tameshiyomi-booklive.jsonl に純粋追加(証拠込み、= シリーズ単位のanchor)。
+     保留= docs/production-diagnostics/tameshiyomi-holds.tsv
   再開可能(収集済み/保留済みはskip)。429/失敗は即中断。
 
+★全巻展開 (= 2026-07-12発見。ユーザ指摘「ドラゴンボールなら42巻分取らないとダメ」で判明):
+  BookLiveのtitle_idは**シリーズ/版単位**で、vol_no(product頁)やcid末尾3桁(bviewerの巻番号)を
+  変えるだけで**同一title_idのまま全巻に到達できる**(TinyFish検索不要・HEADチェックのみ)。
+  実証: title_id/582763(チェンソーマン)でvol_no/001→1巻、/002→2巻。
+        title_id/185409(BLEACHモノクロ版)で_001/_025/_100相当のcidが全部HEAD200。
+  帰結: アンカー(シリーズ→title_id)さえ集めれば、巻数分の追加検索は不要、
+  cid=f"{title_id}_{vol:03d}" をmax_edition_volumes分HEAD検証するだけで全巻リンクが揃う。
+
 使い方:
-  python scripts/_tameshiyomi-harvest.py --limit 50          # 上位50作を収集
+  python scripts/_tameshiyomi-harvest.py --limit 50          # 上位50作のtitle_id(アンカー)を収集
+  python scripts/_tameshiyomi-harvest.py --expand --expand-limit 100  # アンカー済みシリーズを全巻展開(検索不要・高速)
   python scripts/_tameshiyomi-harvest.py --review            # 保留一覧を表示(AIが裁定)
   python scripts/_tameshiyomi-harvest.py --accept slug=ID    # 保留を手動採用(裁定後)
   python scripts/_tameshiyomi-harvest.py --stats             # 進捗
@@ -22,6 +32,7 @@ sys.stdout.reconfigure(encoding="utf-8")
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(ROOT, "scripts"))
 SEED = os.path.join(ROOT, "data", "seeds", "tameshiyomi-booklive.jsonl")
+VOLSEED = os.path.join(ROOT, "data", "seeds", "tameshiyomi-booklive-volumes.jsonl")
 HOLDS = os.path.join(ROOT, "docs", "production-diagnostics", "tameshiyomi-holds.tsv")
 
 
@@ -66,6 +77,66 @@ def head_ok(cid):
         return urllib.request.urlopen(req, timeout=20).status == 200
     except Exception:
         return False
+
+
+def load_volumes_done():
+    """slug -> set(volume已検証)"""
+    done = {}
+    if os.path.exists(VOLSEED):
+        for line in open(VOLSEED, encoding="utf-8"):
+            r = json.loads(line)
+            done.setdefault(r["slug"], set()).add(r["volume"])
+    return done
+
+
+def volume_target_n():
+    li = json.load(open(os.path.join(ROOT, "data", "manga-list-index.json"), encoding="utf-8"))
+    f = li["f"]
+    isl = f.index("slug")
+    itv = f.index("total_volumes")
+    imv = f.index("max_edition_volumes")
+    out = {}
+    for r in li["d"]:
+        n = max(r[itv] or 0, r[imv] or 0)
+        if n:
+            out[r[isl]] = n
+    return out
+
+
+def expand_volumes(expand_limit):
+    """アンカー済み(title_id確定)シリーズを対象に、TinyFish検索なしでHEADのみ全巻展開する。"""
+    anchors, _ = load_done()
+    n_by_slug = volume_target_n()
+    vol_done = load_volumes_done()
+    targets = []
+    for slug, rec in anchors.items():
+        n = n_by_slug.get(slug)
+        if not n:
+            continue
+        have = vol_done.get(slug, set())
+        if len(have) >= n:
+            continue  # 展開済み
+        targets.append((slug, rec["title_id"], n, have))
+    targets = targets[:expand_limit]
+    print(f"展開対象 {len(targets)} シリーズ(アンカー済み・未全巻展開)", flush=True)
+    out = open(VOLSEED, "a", encoding="utf-8")
+    total_new = 0
+    for slug, tid, n, have in targets:
+        added = 0
+        for vol in range(1, n + 1):
+            if vol in have:
+                continue
+            cid = f"{tid}_{vol:03d}"
+            if head_ok(cid):
+                rec = {"slug": slug, "volume": vol, "title_id": tid, "cid": cid,
+                       "verified": "head200", "at": time.strftime("%Y-%m-%d")}
+                out.write(json.dumps(rec, ensure_ascii=False) + "\n")
+                out.flush()
+                added += 1
+            time.sleep(0.3)
+        total_new += added
+        print(f"  {slug}: +{added}/{n}巻", flush=True)
+    print(f"展開完了 +{total_new}巻 (seed={os.path.relpath(VOLSEED, ROOT)})")
 
 
 def harvest(limit):
@@ -122,10 +193,20 @@ def main():
     ap.add_argument("--review", action="store_true")
     ap.add_argument("--accept", help="slug=title_id 形式で保留を手動採用")
     ap.add_argument("--stats", action="store_true")
+    ap.add_argument("--expand", action="store_true", help="アンカー済みシリーズを全巻展開(検索不要)")
+    ap.add_argument("--expand-limit", type=int, default=50, help="--expand で処理するシリーズ数上限")
     a = ap.parse_args()
     if a.stats:
         done, holds = load_done()
-        print(f"収集済 {len(done)} / 保留 {len(holds)}")
+        vol_done = load_volumes_done()
+        n_by_slug = volume_target_n()
+        vol_rows = sum(len(v) for v in vol_done.values())
+        expanded_full = sum(1 for slug, vs in vol_done.items() if len(vs) >= n_by_slug.get(slug, 1 << 30))
+        print(f"収集済(アンカー) {len(done)} / 保留 {len(holds)}")
+        print(f"全巻展開 = {vol_rows}巻 ({len(vol_done)}シリーズ着手、うち{expanded_full}シリーズ完了)")
+        return
+    if a.expand:
+        expand_volumes(a.expand_limit)
         return
     if a.review:
         if os.path.exists(HOLDS):
