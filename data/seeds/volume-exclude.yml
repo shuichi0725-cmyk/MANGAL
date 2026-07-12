@@ -105,11 +105,13 @@ excludes:
   at: '2026-07-01'
 - slug: hana-no-deka
   isbn13: '9784107700902'
-  reason: '花の慶次: 新潮社BUNCH WORLD版(全21巻・2001-2002・コンビニコミック=Wikipedia確定)のv20がJC標準版に迷子混入。コンビニ本=除外優先度②。JC全18/集英社文庫全10/BUNCH COMICS DELUXE全12は完備'
+  reason: '花の慶次: 新潮社BUNCH WORLD版(全21巻・2001-2002・コンビニコミック=Wikipedia確定)のv20がJC標準版に迷子混入。コンビニ本=除外優先度②。JC全18/集英社文庫全10/BUNCH
+    COMICS DELUXE全12は完備'
   at: '2026-07-02'
 - slug: hana-no-keiji
   isbn13: '9784107700902'
-  reason: '花の慶次: 新潮社BUNCH WORLD版(全21巻・2001-2002・コンビニコミック=Wikipedia確定)のv20がJC標準版に迷子混入。コンビニ本=除外優先度②。JC全18/集英社文庫全10/BUNCH COMICS DELUXE全12は完備'
+  reason: '花の慶次: 新潮社BUNCH WORLD版(全21巻・2001-2002・コンビニコミック=Wikipedia確定)のv20がJC標準版に迷子混入。コンビニ本=除外優先度②。JC全18/集英社文庫全10/BUNCH
+    COMICS DELUXE全12は完備'
   at: '2026-07-02'
 - slug: ashitakagayaku
   isbn13: '9784120024610'
@@ -724,4 +726,8 @@ excludes:
 - slug: kenkaku-shoubai
   isbn13: '9784845823895'
   reason: '別作画版の混入(原作者キーダンプ掃引・NDL確証): さいとう・たかを版3→同'
+  at: '2026-07-12'
+- slug: adolf-ni-tsugu
+  isbn13: '9784061759763'
+  reason: 手塚治虫漫画全集376(講談社1996)の混入。文藝春秋初刊版=全4巻(Wiki書誌978-4-16-363250-6〜363280-3と完全一致)にvol5として滲んでいた。全集巻は別プロダクトライン(全集コーナー構想)。ユーザ発見2026-07-12
   at: '2026-07-12'
