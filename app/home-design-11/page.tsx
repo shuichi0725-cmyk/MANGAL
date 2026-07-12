@@ -12,6 +12,7 @@ import { bundle, DesignNav, seeded, volCount, Cover, CoverTile, thisMonthRelease
 import { coverUrl } from "@/lib/schema";
 import { loadAiReviews } from "@/lib/loadData";
 import AiLeagueTeaser from "@/components/AiLeagueTeaser";
+import AnimeSeasonCorner from "@/components/AnimeSeasonCorner";
 
 /** 案11: 編成C「リズム重視」 — 大(ヒーロー)→小(ことば)→中(棚)→小(豆知識)→… と
  *  コーナーの大小を交互に置いて縦読みのテンポを作る。 新パーツ: ことばカード/ジャンルルーレット/数字トリビア */
@@ -134,6 +135,9 @@ export default function Design11() {
           </ul>
         </Tile>
       </section>
+
+      {/* 3.2【中・新】今季アニメの原作(季刊入替=view JSON再生成。履歴=/anime) */}
+      <AnimeSeasonCorner />
 
       {/* 3.5【中】発売/創刊カレンダー(2ビュー・データ駆動 = public/calendar を遅延fetch・index join) */}
       <section className="mt-4 px-4">
