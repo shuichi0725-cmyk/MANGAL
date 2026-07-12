@@ -25,7 +25,7 @@ QUERY = """
 query ($y: Int, $s: MediaSeason, $p: Int) {
   Page(page: $p, perPage: 50) {
     pageInfo { hasNextPage }
-    media(season: $s, seasonYear: $y, type: ANIME, format_in: [TV, TV_SHORT]) {
+    media(season: $s, seasonYear: $y, type: ANIME, format_in: [TV, TV_SHORT, ONA]) {
       id
       idMal
       title { native romaji }
@@ -46,10 +46,19 @@ query ($y: Int, $s: MediaSeason, $p: Int) {
 
 def gql(y, s, p):
     body = json.dumps({"query": QUERY, "variables": {"y": y, "s": s, "p": p}}).encode()
-    req = urllib.request.Request("https://graphql.anilist.co", data=body,
-                                 headers={"Content-Type": "application/json",
-                                          "User-Agent": "Mozilla/5.0 (MANGAL harvest)"})
-    return json.loads(urllib.request.urlopen(req, timeout=30).read())
+    for attempt in range(4):
+        req = urllib.request.Request("https://graphql.anilist.co", data=body,
+                                     headers={"Content-Type": "application/json",
+                                              "User-Agent": "Mozilla/5.0 (MANGAL harvest)"})
+        try:
+            return json.loads(urllib.request.urlopen(req, timeout=30).read())
+        except urllib.error.HTTPError as e:
+            if e.code == 429 and attempt < 3:
+                wait = int(e.headers.get("Retry-After") or 65)
+                print(f"    429: {wait}s待機して再試行({attempt + 1}/3)", flush=True)
+                time.sleep(wait)
+                continue
+            raise
 
 
 def load_done():
@@ -90,7 +99,7 @@ def harvest_season(y, s, out):
         if not page["pageInfo"]["hasNextPage"]:
             break
         p += 1
-        time.sleep(1.7)
+        time.sleep(2.6)
     for row in rows:
         out.write(json.dumps(row, ensure_ascii=False) + "\n")
     out.flush()
@@ -133,7 +142,7 @@ def main():
             print(f"★中断 {y}-{s}: {e} (再実行で再開)")
             break
         print(f"  {y}-{s}: {n}作品 [{k + 1}/{len(targets)}]", flush=True)
-        time.sleep(1.7)
+        time.sleep(2.6)
     print("done")
 
 

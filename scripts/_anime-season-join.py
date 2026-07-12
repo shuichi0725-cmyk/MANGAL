@@ -88,12 +88,25 @@ def main():
                     break
             if slug:
                 break
-        # 2) 題名の正規化完全一致
+        # 2) 原作漫画ノードの題名一致 (= コミカライズのanilist_idが頁側に未結線でも題で繋ぐ。
+        #    骸骨騎士様Ⅱ型: アニメ題はⅡ付きだが漫画relationの題は無印=頁題と一致する)
         if not slug:
-            hit = t2s.get(norm(r.get("anime_title")))
-            if hit and len(hit) == 1:
-                slug = hit[0]
-                via = "title"
+            for c in manga_nodes:
+                hit = t2s.get(norm(c.get("title")))
+                if hit and len(hit) == 1:
+                    slug = hit[0]
+                    via = "manga-title"
+                    break
+        # 3) アニメ題の正規化完全一致(続編サフィックスを剥がした形も試す)
+        if not slug:
+            at = norm(r.get("anime_title"))
+            cands_t = [at, re.sub(r"(ⅱ|ⅲ|2ndseason|3rdseason|season\d|第\d期|\d)$", "", at)]
+            for t in cands_t:
+                hit = t2s.get(t)
+                if hit and len(hit) == 1:
+                    slug = hit[0]
+                    via = "title"
+                    break
         if slug:
             out.write(json.dumps({"season_key": r["season_key"], "anime_anilist_id": r["anime_anilist_id"],
                                   "anime_title": r.get("anime_title"), "source": src,
