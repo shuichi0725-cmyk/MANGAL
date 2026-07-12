@@ -1,0 +1,65 @@
+slug: kantouheiya
+canonical_label: 上中下版(小池書院2005)
+source: 'ユーザ提供書誌+NDL creator束縛(上村一夫×関東平野=4版14冊)+楽天cache突合 2026-07-13。同作汚染=新潮コミック版vol4(9784106030123)が上中下版の4巻目に混入→新潮コミック版全4巻として正しく版分離。双葉社アクションコミックス初刊(1978-79・ISBN無し)もNDL確証で収載'
+publisher: 小池書院
+volumes:
+- number: 1
+  isbn13: '9784883159789'
+  release_date: 2005-08
+  volume_label: 上
+- number: 2
+  isbn13: '9784883159796'
+  release_date: 2005-09
+  volume_label: 中
+- number: 3
+  isbn13: '9784883159802'
+  release_date: 2005-10
+  volume_label: 下
+suppress_types:
+- bunkobon
+extra_editions:
+- label: 新潮コミック(1989)
+  type: standard
+  publisher: 新潮社
+  volumes:
+  - number: 1
+    isbn13: '9784106030093'
+    release_date: 1989-06
+  - number: 2
+    isbn13: '9784106030109'
+    release_date: 1989-06
+  - number: 3
+    isbn13: '9784106030116'
+    release_date: 1989-08
+  - number: 4
+    isbn13: '9784106030123'
+    release_date: 1989-08
+- label: 道草文庫(1996)
+  type: bunkobon
+  publisher: 小池書院
+  volumes:
+  - number: 1
+    isbn13: '9784883157143'
+    release_date: 1996-07
+  - number: 2
+    isbn13: '9784883157150'
+    release_date: 1996-07
+  - number: 3
+    isbn13: '9784883157181'
+    release_date: 1996-07
+  - number: 4
+    isbn13: '9784883157198'
+    release_date: 1996-07
+- label: アクション・コミックス(1978-79)
+  type: standard
+  publisher: 双葉社
+  volumes:
+  - number: 1
+    isbn13: null
+    release_date: '1978-06-25'
+  - number: 2
+    isbn13: null
+    release_date: '1978-08-20'
+  - number: 3
+    isbn13: null
+    release_date: '1979-01-10'
