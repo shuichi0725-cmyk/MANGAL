@@ -22,8 +22,6 @@ export default function Design11() {
   // AI書評家リーグ: 週次順出しに合わせslim情報を全節渡す(選定はclient=AiLeagueTeaser)
   const aiSections = loadAiReviews().map((x) => ({ setsu: x.setsu, title: x.title, models: x.reviews.map((r) => r.model) }));
   const daySalt = Number(new Date().toISOString().slice(0, 10).replace(/-/g, ""));
-  // ★今週の一冊 = 完結の名作上位から週(=ビルド)替わり(固定だった bug 修正)
-  const hero = seeded(completedClassics.slice(0, 40), (m) => m.slug, 1, daySalt + 70)[0] ?? completedClassics[0];
 
   // 新パーツ: ことばカード = あらすじから今日の一文(synopsis 冒頭文を日替わり)
   const withSyn = manga.filter((m) => m.synopsis && m.synopsis.length > 40);
@@ -82,23 +80,27 @@ export default function Design11() {
         );
       })()}
 
-      {/* 1.【大】今週の一冊 */}
-      {hero && (
-        <section className="mt-4 px-4">
-          <Tile className="overflow-hidden">
-            <Link href={`/manga/${hero.slug}`} className="flex gap-4 p-4 spring-press">
-              <div className="w-28 shrink-0 rotate-[-2deg] shadow-xl"><Cover m={hero} sizes="112px" /></div>
-              <div className="min-w-0 self-center">
-                <p className="inline-block rounded bg-ink px-2 py-0.5 text-[10px] font-bold tracking-widest text-white">今週の一冊</p>
-                <p className="mt-1.5 text-lg font-extrabold leading-snug line-clamp-2">{hero.title}</p>
-                <p className="mt-1.5 border-l-2 border-[var(--color-accent)] pl-2 text-[12px] leading-relaxed text-ink/70 line-clamp-3">
-                  {hero.synopsis ?? `全${volCount(hero)}巻。`}
-                </p>
-              </div>
-            </Link>
-          </Tile>
-        </section>
-      )}
+      {/* 1.【大】今季アニメの原作(★2026-07-12 ユーザ裁定: 旧「今週の一冊」ヒーローを廃止し
+          アニメコーナーを最上段へ。表示は再読込ごとランダム=client側シャッフル) */}
+      <AnimeSeasonCorner />
+
+      {/* 1.5【中】今月の新刊(アニメ直下へ移動 2026-07-12) */}
+      <section className="mt-4 px-4">
+        <Tile className="p-3.5">
+          <h2 className="text-[14px] font-bold">📦 今月の新刊</h2>
+          <ul className="-mx-3.5 mt-2.5 flex gap-3 overflow-x-auto px-3.5 pb-1 snap-x">
+            {thisMonthReleases(manga, byNew, 12).map((m) => (
+              <li key={m.slug} className="w-[96px] shrink-0 snap-start">
+                <Link href={`/manga/${m.slug}`} className="block group spring-press">
+                  <Cover m={m} sizes="96px" />
+                  <MarqueeTitle text={m.title} className="mt-1 text-[12px] leading-snug text-ink/85 group-hover:text-[var(--color-accent)]" />
+                  <p className="truncate text-[10px] text-ink/50">{(m.authors ?? []).map((a) => a.name).join("・")}</p>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </Tile>
+      </section>
 
       {/* 2.【小・新】ことばカード = あらすじの一文だけ大きく(縦読みの「息継ぎ」) */}
       {kotoba && (
@@ -117,27 +119,6 @@ export default function Design11() {
 
       {/* 2.7【新・自動】周年: 今日で連載開始N年(anniversaries.json週次再生成) */}
       <AnniversaryDaily />
-
-      {/* 3.【中】新刊棚(★題=1行オートスクロール+下に作者。はみ出す題だけ動く) */}
-      <section className="mt-4 px-4">
-        <Tile className="p-3.5">
-          <h2 className="text-[14px] font-bold">📦 今月の新刊</h2>
-          <ul className="-mx-3.5 mt-2.5 flex gap-3 overflow-x-auto px-3.5 pb-1 snap-x">
-            {thisMonthReleases(manga, byNew, 12).map((m) => (
-              <li key={m.slug} className="w-[96px] shrink-0 snap-start">
-                <Link href={`/manga/${m.slug}`} className="block group spring-press">
-                  <Cover m={m} sizes="96px" />
-                  <MarqueeTitle text={m.title} className="mt-1 text-[12px] leading-snug text-ink/85 group-hover:text-[var(--color-accent)]" />
-                  <p className="truncate text-[10px] text-ink/50">{(m.authors ?? []).map((a) => a.name).join("・")}</p>
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </Tile>
-      </section>
-
-      {/* 3.2【中・新】今季アニメの原作(季刊入替=view JSON再生成。履歴=/anime) */}
-      <AnimeSeasonCorner />
 
       {/* 3.5【中】発売/創刊カレンダー(2ビュー・データ駆動 = public/calendar を遅延fetch・index join) */}
       <section className="mt-4 px-4">
