@@ -94,3 +94,11 @@ cmd /c mklink /J "C:\Users\shuic\code\MANGAL\.next" "D:\mangal-cache\next-build"
 - Defender除外は実施済(2026-07-04)。ビルドが異常に遅い時は `Get-MpPreference | Select ExclusionPath` で除外が生きてるか確認。
 - 本番ドメイン mangal-db.com = 紐付け済(2026-07-10 疎通200確認。smokeの既定BASE)。
 - edge cache(HTML s-maxage=86400)により旧頁が最長1日残る。確認は `?v=` クエリでバイパス。
+
+## ★ビルド環境の罠(2026-07-12 実害3連発→恒久対処済み。消すな)
+- **D:\node_modules junction 必須**: `.next`をD:へjunctionすると、ビルド成果物からの`require('react')`が
+  node_modulesに届かず`Cannot find module 'react/jsx-runtime'`で死ぬ。対処= `cmd /c mklink /J D:\node_modules C:\Users\shuic\code\MANGAL\node_modules`
+  (作成済み。消えていたら再作成)。next-build内に旧ビルド残骸があると同エラー→`rm -rf D:/mangal-cache/next-build/*`
+- **buildは必ずStart-Processでデタッチ起動**: ツールのrun_in_backgroundは~10分で親ごとkillされworker巻き添え死。
+  `Start-Process powershell -ArgumentList "-NoProfile","-File","D:\mangal-cache\_wkbuild.ps1" -WindowStyle Hidden`
+- **r2-syncも同様にscript file経由でデタッチ**(`D:\mangal-cache\_r2sync.ps1`作成済み)。PSの`|Out-File`パイプ直渡しは空ログ即死する
