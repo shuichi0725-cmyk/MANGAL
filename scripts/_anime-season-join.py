@@ -27,6 +27,8 @@ SEED = os.path.join(ROOT, "data", "seeds", "anime-seasons.jsonl")
 OUT = os.path.join(ROOT, "data", "seeds", "anime-season-links.jsonl")
 HOLDS = os.path.join(ROOT, "docs", "production-diagnostics", "anime-season-holds.tsv")
 MAP = os.path.join(ROOT, ".cache", "anilist-to-slug.json")
+# 裁定済みaccepts (= _anime-season-adjudicate.py / 手動。 anime_anilist_id→slug or slug=null(結線不能確定))
+ACCEPTS = os.path.join(ROOT, "data", "seeds", "anime-season-accepts.jsonl")
 
 
 def norm(t):
@@ -65,11 +67,31 @@ def main():
         maps = json.load(open(MAP, encoding="utf-8"))
     a2s, t2s = maps["anilist"], maps["titles"]
 
+    accepts = {}
+    if os.path.exists(ACCEPTS):
+        for l in open(ACCEPTS, encoding="utf-8"):
+            try:
+                d = json.loads(l)
+                accepts[d["anime_anilist_id"]] = d.get("slug")  # None=結線不能確定(holdsに出さない)
+            except Exception:
+                pass
+
     rows = [json.loads(l) for l in open(SEED, encoding="utf-8")]
     out = open(OUT, "w", encoding="utf-8")
     holds = open(HOLDS, "w", encoding="utf-8")
-    n_join = n_hold = n_skip = 0
+    n_join = n_hold = n_skip = n_acc = 0
     for r in rows:
+        # 0) 裁定済み(最優先)
+        if r["anime_anilist_id"] in accepts:
+            slug0 = accepts[r["anime_anilist_id"]]
+            if slug0:
+                out.write(json.dumps({"season_key": r["season_key"], "anime_anilist_id": r["anime_anilist_id"],
+                                      "anime_title": r.get("anime_title"), "source": r.get("source"),
+                                      "popularity": r.get("popularity"), "slug": slug0, "via": "accept"},
+                                     ensure_ascii=False) + "\n")
+                n_join += 1
+            n_acc += 1
+            continue
         src = r.get("source")
         cands = r.get("source_manga") or []
         # 非漫画原作かつ漫画relationも無い = コーナー対象外(ORIGINAL/GAME等)
@@ -116,7 +138,7 @@ def main():
         else:
             holds.write(f"{r['season_key']}\t{r.get('anime_title')}\t{src}\t{json.dumps(manga_nodes, ensure_ascii=False)[:150]}\n")
             n_hold += 1
-    print(f"join {n_join} / 保留 {n_hold} / 非漫画skip {n_skip} (全{len(rows)}アニメ)")
+    print(f"join {n_join} (うち裁定accept {n_acc}) / 保留 {n_hold} / 非漫画skip {n_skip} (全{len(rows)}アニメ)")
     print(f"→ {os.path.relpath(OUT, ROOT)} / holds={os.path.relpath(HOLDS, ROOT)}")
 
 
