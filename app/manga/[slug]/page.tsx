@@ -3,6 +3,7 @@ import { DesignNav } from "@/lib/homeDesign";
 import { notFound } from "next/navigation";
 import CoverImage from "@/components/CoverImage";
 import RelatedWorks, { computeRelated } from "@/components/RelatedWorks";
+import ShareButtons from "@/components/ShareButtons";
 import VolumeRow from "@/components/VolumeRow";
 import ArtBookCard from "@/components/ArtBookCard";
 import Badge from "@/components/ui/Badge";
@@ -357,6 +358,9 @@ export default async function MangaDetailPage({
               </ul>
             </div>
           )}
+
+          {/* 共有(X/LINE/OS共有) = 説明と関連作品の間(2026-07-12 ユーザ指定位置) */}
+          <ShareButtons title={manga.title} url={`${SITE}/manga/${manga.slug}`} />
 
           <RelatedWorks items={related} />
 
