@@ -507,6 +507,11 @@ corrections:
     source: wiki-verified
     status: completed
     wiki_url: https://ja.wikipedia.org/wiki/堀江卓
+  hana:
+    added_at: '2026-07-10'
+    source: 全3巻(1993-94・ISBN帯の次は別作)。幽霊v5-21=花マル伝(題『花』の巻題)混入を除去
+    status: completed
+    year_ended: 1994
   hana-haki-otome:
     added_at: '2026-07-09'
     source: wiki-verified
@@ -754,6 +759,12 @@ corrections:
     source: wiki-verified
     status: completed
     year_ended: 2012
+  kantouheiya:
+    added_at: '2026-07-13'
+    note: 初刊=双葉社アクションコミックス全3巻の最終巻1979-01(NDL)。新潮版1989は4巻再分割の再版のため機械則がendedを1989に誤導出
+    source: ndl-verified
+    status: completed
+    year_ended: 1979
   karasu-ni-hitoe-wa-niawanai:
     added_at: '2026-07-09'
     source: wiki-verified
@@ -1107,6 +1118,40 @@ corrections:
     source: wiki-verified
     status: completed
     year_ended: 2016
+  mahouka-koukou-no-rettousei-double-seven-hen:
+    added_at: '2026-07-10'
+    source: wiki-verified
+    status: completed
+    wiki_url: https://ja.wikipedia.org/wiki/魔法科高校の劣等生
+    year_ended: 2019
+  mahouka-koukou-no-rettousei-natsuyasumi-hen:
+    added_at: '2026-07-10'
+    source: cache-terminal(vol3=2018終)
+    status: completed
+    year_ended: 2018
+  mahouka-koukou-no-rettousei-nyuugaku-hen:
+    added_at: '2026-07-10'
+    source: wiki-verified
+    status: completed
+    wiki_url: https://ja.wikipedia.org/wiki/魔法科高校の劣等生
+    year_ended: 2013
+  mahouka-koukou-no-rettousei-raihousha-hen:
+    added_at: '2026-07-10'
+    source: wiki-verified
+    status: completed
+    wiki_url: https://ja.wikipedia.org/wiki/魔法科高校の劣等生
+    year_ended: 2019
+  mahouka-koukou-no-rettousei-shizoku-kaigi-hen:
+    added_at: '2026-07-10'
+    source: wiki-verified
+    status: completed
+    wiki_url: https://ja.wikipedia.org/wiki/魔法科高校の劣等生
+    year_ended: 2024
+  mahouka-koukou-no-rettousei-steeplechase-hen:
+    added_at: '2026-07-10'
+    source: cache-terminal(全3巻2020終・以後4年新刊なし)
+    status: completed
+    year_ended: 2020
   maison-de-beauties:
     added_at: '2026-07-09'
     source: wiki-verified
@@ -1212,6 +1257,10 @@ corrections:
     status: completed
     wiki_url: https://ja.wikipedia.org/wiki/艶々
     year_ended: 2012
+  morohoshi-daijirou-tanpen-shuusei:
+    added_at: '2026-07-10'
+    source: '小学館公式: 全12巻を2027-11まで隔月刊行中。★第1集(生物都市)=意図的に第12回配本=最終刊(デビュー作をフィナーレに)。1巻の未来日付は正データ(ユーザ指摘→魚+公式確証)'
+    status: ongoing
   mosaic-love-shower:
     added_at: '2026-07-09'
     source: wiki-verified
@@ -1419,6 +1468,11 @@ corrections:
     status: completed
     wiki_url: https://ja.wikipedia.org/wiki/遠藤淑子
     year_ended: 2015
+  pocket-monsters-special:
+    remove:
+    - year_ended
+    source: 'Wikipedia(2026-07-10): 連載中・既刊64巻(全64巻ではない)。先行版SV編継続中=通巻は今後も増える'
+    status: ongoing
   ponkotsu-ponko:
     added_at: '2026-07-09'
     source: wiki-verified
@@ -1719,6 +1773,11 @@ corrections:
     status: completed
     wiki_url: https://ja.wikipedia.org/wiki/すのはら荘の管理人さん
     year_ended: 2022
+  super-mario-kun:
+    remove:
+    - year_ended
+    source: 'NDL(2026-07-12): v61=2025.10刊・コロコロ連載継続中'
+    status: ongoing
   survival:
     added_at: '2026-07-09'
     source: wiki-verified
@@ -2021,56 +2080,3 @@ corrections:
     status: completed
     wiki_url: https://ja.wikipedia.org/wiki/ゼロの白鷹
     year_ended: 1976
-  mahouka-koukou-no-rettousei-nyuugaku-hen:
-    added_at: '2026-07-10'
-    source: wiki-verified
-    status: completed
-    year_ended: 2013
-    wiki_url: https://ja.wikipedia.org/wiki/魔法科高校の劣等生
-  mahouka-koukou-no-rettousei-shizoku-kaigi-hen:
-    added_at: '2026-07-10'
-    source: wiki-verified
-    status: completed
-    year_ended: 2024
-    wiki_url: https://ja.wikipedia.org/wiki/魔法科高校の劣等生
-  mahouka-koukou-no-rettousei-raihousha-hen:
-    added_at: '2026-07-10'
-    source: wiki-verified
-    status: completed
-    year_ended: 2019
-    wiki_url: https://ja.wikipedia.org/wiki/魔法科高校の劣等生
-  mahouka-koukou-no-rettousei-double-seven-hen:
-    added_at: '2026-07-10'
-    source: wiki-verified
-    status: completed
-    year_ended: 2019
-    wiki_url: https://ja.wikipedia.org/wiki/魔法科高校の劣等生
-  mahouka-koukou-no-rettousei-steeplechase-hen:
-    added_at: '2026-07-10'
-    source: cache-terminal(全3巻2020終・以後4年新刊なし)
-    status: completed
-    year_ended: 2020
-  mahouka-koukou-no-rettousei-natsuyasumi-hen:
-    added_at: '2026-07-10'
-    source: cache-terminal(vol3=2018終)
-    status: completed
-    year_ended: 2018
-  morohoshi-daijirou-tanpen-shuusei:
-    added_at: '2026-07-10'
-    status: ongoing
-    source: '小学館公式: 全12巻を2027-11まで隔月刊行中。★第1集(生物都市)=意図的に第12回配本=最終刊(デビュー作をフィナーレに)。1巻の未来日付は正データ(ユーザ指摘→魚+公式確証)'
-  hana:
-    added_at: '2026-07-10'
-    status: completed
-    year_ended: 1994
-    source: 全3巻(1993-94・ISBN帯の次は別作)。幽霊v5-21=花マル伝(題『花』の巻題)混入を除去
-  pocket-monsters-special:
-    status: ongoing
-    remove:
-    - year_ended
-    source: 'Wikipedia(2026-07-10): 連載中・既刊64巻(全64巻ではない)。先行版SV編継続中=通巻は今後も増える'
-  super-mario-kun:
-    status: ongoing
-    remove:
-    - year_ended
-    source: 'NDL(2026-07-12): v61=2025.10刊・コロコロ連載継続中'
