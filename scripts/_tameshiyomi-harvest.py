@@ -103,8 +103,12 @@ def volume_target_n():
     return out
 
 
-def expand_volumes(expand_limit):
-    """アンカー済み(title_id確定)シリーズを対象に、TinyFish検索なしでHEADのみ全巻展開する。"""
+def expand_volumes(expand_limit, workers=8):
+    """アンカー済み(title_id確定)シリーズを対象に、TinyFish検索なしでHEADのみ全巻展開する。
+    ★HEADは並列8本(2026-07-13)。BookLive=大手CDNの軽いHEADのみなので安全。
+    楽天/NDL/TinyFishの逐次レート則はここには適用されない(別ホスト・別性質)。"""
+    from concurrent.futures import ThreadPoolExecutor
+
     anchors, _ = load_done()
     n_by_slug = volume_target_n()
     vol_done = load_volumes_done()
@@ -118,24 +122,24 @@ def expand_volumes(expand_limit):
             continue  # 展開済み
         targets.append((slug, rec["title_id"], n, have))
     targets = targets[:expand_limit]
-    print(f"展開対象 {len(targets)} シリーズ(アンカー済み・未全巻展開)", flush=True)
+    print(f"展開対象 {len(targets)} シリーズ(アンカー済み・未全巻展開) / HEAD {workers}並列", flush=True)
     out = open(VOLSEED, "a", encoding="utf-8")
     total_new = 0
-    for slug, tid, n, have in targets:
-        added = 0
-        for vol in range(1, n + 1):
-            if vol in have:
-                continue
-            cid = f"{tid}_{vol:03d}"
-            if head_ok(cid):
-                rec = {"slug": slug, "volume": vol, "title_id": tid, "cid": cid,
-                       "verified": "head200", "at": time.strftime("%Y-%m-%d")}
-                out.write(json.dumps(rec, ensure_ascii=False) + "\n")
-                out.flush()
-                added += 1
-            time.sleep(0.3)
-        total_new += added
-        print(f"  {slug}: +{added}/{n}巻", flush=True)
+    with ThreadPoolExecutor(max_workers=workers) as pool:
+        for slug, tid, n, have in targets:
+            todo = [v for v in range(1, n + 1) if v not in have]
+            results = list(pool.map(lambda v: (v, head_ok(f"{tid}_{v:03d}")), todo))
+            added = 0
+            for vol, ok in results:
+                if ok:
+                    rec = {"slug": slug, "volume": vol, "title_id": tid, "cid": f"{tid}_{vol:03d}",
+                           "verified": "head200", "at": time.strftime("%Y-%m-%d")}
+                    out.write(json.dumps(rec, ensure_ascii=False) + "\n")
+                    added += 1
+            out.flush()
+            total_new += added
+            print(f"  {slug}: +{added}/{n}巻", flush=True)
+            time.sleep(0.2)
     print(f"展開完了 +{total_new}巻 (seed={os.path.relpath(VOLSEED, ROOT)})")
 
 

@@ -36,7 +36,7 @@ BookLiveのtitle_idは**シリーズ/版単位**。product頁の`vol_no`パス�
 - **seedを手で編集しない**(追記はscript経由のみ。壊すと全ボタンが死ぬ)
 - TinyFishは**無料枠のみ**(Fetch/Search)。Agent/Browserは絶対に使わない(クレジット消費)
 - 1回の**検索(--limit)**実行は100まで。それ以上は分割(TinyFish 150req/分制限)。
-  ★**--expand(HEAD検証のみ)にはこの制限は不要**(TinyFishを一切呼ばない・BookLive直HEAD)
+  ★**--expand(HEAD検証のみ)にはこの制限は不要**(TinyFishを一切呼ばない・BookLive直HEAD。★2026-07-13からHEAD8並列=高速。楽天/NDL/TinyFishの逐次レート則は別ホストなので適用外)
 - 検索失敗/エラーで止まったら**そのまま再実行**(再開可能設計)。リトライ連打しない
 
 ## 手順 (= この順で回す)
