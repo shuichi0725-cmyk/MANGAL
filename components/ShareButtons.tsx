@@ -34,8 +34,9 @@ export default function ShareButtons({ title, url }: { title: string; url: strin
 
   return (
     <div className="mt-6 flex flex-wrap items-center gap-2">
+      {/* x.com/intent/post はアプリのApp Linksに拾われず失敗する端末がある(2026-07-12実害) → 旧twitter.comのintentが最も互換 */}
       <a
-        href={`https://x.com/intent/post?text=${enc(text)}&url=${enc(url)}`}
+        href={`https://twitter.com/intent/tweet?text=${enc(text)}&url=${enc(url)}`}
         target="_blank"
         rel="noopener nofollow"
         aria-label="Xで共有"
