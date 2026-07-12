@@ -14029,3 +14029,15 @@ volumes:
   source: rakuten
   added_at: '2026-07-12'
   note: 完全版(愛蔵版コミックス)の欠け回収。集英社公式(魚検索)+楽天live実在検証の2ソース
+- series_keys:
+  - qid:Q471137|name:Rave
+  number: 9
+  isbn13: '9784063129502'
+  release_date: '2001-03-16'
+  pages: null
+  publisher: 講談社
+  edition_type: standard
+  title_display: RAVE（9）
+  source: rakuten
+  added_at: '2026-07-12'
+  note: 通常版9巻(ユーザ提供=2001-03-16第1刷)。ISBNがモナ頁に取り違えで居たため欠けていた(文庫9がありgap検出をすり抜け)
