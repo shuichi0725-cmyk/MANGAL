@@ -962,3 +962,4 @@
 {"at": "2026-07-11", "op": "cover-refill-2024plus", "pages": 333, "vols": 358, "note": "書影無し2024+レビュー(preview370頁)→楽天再照会: ローカル195+live163=358解決/残59楽天未掲載。covers seed追記+3箇所充填"}
 {"at": "2026-07-11", "op": "adult-quarantine-cdn-probe", "isbn": "9784864166898", "slug": "migawari-nante-okotowari", "note": "楽天アダルトジャンル隔離=API不可視だがCDN画像実在(HEAD200+目視確認)。ユーザ発見の新パターン"}
 {"slug": "kantouheiya", "op": "cover-fix", "before": "Kobo同数ゲート誤判定(新潮混入で4巻に見えた旧standard×Kobo4巻=道草文庫装丁): 中/下/新潮4に道草②③④が貼られていた", "after": "中/下/新潮4のseed行除去(上=楽天紙の正書影のみ残存)+道草文庫4巻に④を正配置", "source": "ユーザ目視(preview装丁確認)", "at": "2026-07-13"}
+{"op": "cover-dup-fix", "slugs": "adolf/oyakodeka/tenma/prime-rose/ai-hitotsu/love-senka", "policy": "巻割り不一致=両側剥がし・巻数タイ=新しい版に残す(関東平野前例)", "at": "2026-07-13"}
