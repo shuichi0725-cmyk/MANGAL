@@ -2896,6 +2896,26 @@ def main():
         if slug in edition_canonical:
             new_yml["editions"] = apply_edition_canonical(slug, new_yml.get("editions") or [], edition_canonical)
             edition_canonical_pages += 1
+            # ★出版年を最終editionsから再導出(2026-07-13 関東平野型: canonicalで足した初刊1978が
+            #   年計算(canonical適用より前)に反映されず1989のままだった)。導出規則は本計算と同じ:
+            #   started=全巻min / ended=standard系の巻別初版dateの最大巻番号の年。
+            #   status-corrections頁(Wiki検証済み完結年)とongoingのendedは触らない。
+            _eds = new_yml.get("editions") or []
+            _all_y = [int(str(v["release_date"])[:4]) for e in _eds
+                      for vs in [e.get("volumes") or []] + [vv.get("volumes") or [] for vv in (e.get("versions") or [])]
+                      for v in vs if v.get("release_date") and str(v["release_date"])[:4].isdigit()]
+            if _all_y:
+                new_yml["year_started"] = min(_all_y)
+            if new_yml.get("year_ended") is not None and slug not in _STATUS_CORR:
+                _stds = [e for e in _eds if e.get("type") == "standard"] or _eds
+                _pvm: dict = {}
+                for e in _stds:
+                    for v in (e.get("volumes") or []):
+                        n, d = v.get("number"), v.get("release_date")
+                        if n and d and (n not in _pvm or str(d) < str(_pvm[n])):
+                            _pvm[n] = str(d)
+                if _pvm and _pvm[max(_pvm)][:4].isdigit():
+                    new_yml["year_ended"] = int(_pvm[max(_pvm)][:4])
         # ★キャッチコピーを slug 経由で join(無ければ未設定=カードは出版社表示にfallback)
         if slug in catch_map and catch_map[slug]:
             new_yml["catch"] = catch_map[slug]
