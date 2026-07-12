@@ -253,6 +253,29 @@ def get_release_date_override() -> dict:
     return _REL_DATE_OVERRIDE
 
 
+_COVER_OVERRIDE = None
+
+
+def get_cover_override() -> dict:
+    """ISBN13 → cover_url の ★強制上書き map (= release-date-override と同型)。
+    covers.jsonl.gz(seed)は『null の時だけ』充填だが、 こちらは種2に書影が有っても優先する
+    (= 例: 頁全体をKobo装丁で統一したいのに1巻だけ種2の紙gifが勝つ、 の是正。 2026-07-12 ライ26巻)。
+    data/seeds/cover-override.jsonl (純粋追加・種2不変・可逆=行削除で戻る)。"""
+    global _COVER_OVERRIDE
+    if _COVER_OVERRIDE is None:
+        _COVER_OVERRIDE = {}
+        p = ROOT / "data" / "seeds" / "cover-override.jsonl"
+        if p.exists():
+            for line in p.open(encoding="utf-8"):
+                try:
+                    d = json.loads(line)
+                except Exception:
+                    continue
+                if d.get("cover_url") and d.get("isbn13"):
+                    _COVER_OVERRIDE[_norm_isbn(d["isbn13"])] = d["cover_url"]
+    return _COVER_OVERRIDE
+
+
 _EDITION_CANONICAL = None
 
 
@@ -2113,8 +2136,8 @@ def clean_vol(v: dict) -> dict:
         o["isbn13"] = str(v["isbn13"])
     else:
         o["isbn13"] = None
-    # ★書影を promote 内で直接充填 (= 別 cover stage 廃止)。 既存値優先→seed fallback。
-    o["cover_url"] = v.get("cover_url") or _cover_for(o["isbn13"])
+    # ★書影を promote 内で直接充填 (= 別 cover stage 廃止)。 override>既存値>seed fallback。
+    o["cover_url"] = get_cover_override().get(_norm_isbn(o["isbn13"])) or v.get("cover_url") or _cover_for(o["isbn13"])
     o["release_date"] = _norm_date(v.get("release_date"))  # ★schema形式に正規化(404防止)
     if v.get("variants"):
         # ★edition-override等が明示したvariants(特装/限定併存)を保持(2026-07-03。出版社跨ぎ特装=シャイナ・ダルク型はseedペア不可なのでoverride直書き)
