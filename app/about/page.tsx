@@ -107,6 +107,15 @@ export default function AboutPage() {
       </section>
 
       <section className="mt-8 space-y-4 text-sm leading-relaxed text-ink/80">
+        <h2 className="text-base font-semibold text-ink">書影について</h2>
+        <p>
+          表紙画像（書影）は、絶版などで紙の書影が入手できない場合に、同一作品の電子書籍版の書影で代用していることがあります。
+          そのため、表示中の版（判型・カバーデザイン）と書影が一致しない場合があります。
+          実際の商品の表紙は、各購入サイトの商品ページでご確認ください。
+        </p>
+      </section>
+
+      <section className="mt-8 space-y-4 text-sm leading-relaxed text-ink/80">
         <h2 className="text-base font-semibold text-ink">アフィリエイトについて</h2>
         <p>
           各作品の購入リンクは楽天ブックス・Amazon.co.jp 等の商品ページへ誘導します。当サイトは
