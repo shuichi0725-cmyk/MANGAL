@@ -20,6 +20,13 @@ BookLiveのtitle_idは**シリーズ/版単位**。product頁の`vol_no`パス�
 `cid=f"{title_id}_{vol:03d}"` を `max(total_volumes, max_edition_volumes)` 分HEAD検証するだけ
 (= `_tameshiyomi-harvest.py --expand`)。TinyFish検索が要るのは**新規シリーズのtitle_id発見時だけ**。
 
+## 収集するのは title_id(+巻の実在HEAD確認)だけ (= 2026-07-13 ユーザ裁定)
+
+**購入ページURLは収集しない**。試し読みビューアも購入ページも `title_id`+`巻番号` から決定的に生成できる:
+- 試し読み: `booklive.jp/bviewer/s/?cid=<title_id>_<巻3桁>`
+- 購入: `booklive.jp/product/index/title_id/<title_id>/vol_no/<巻3桁>`
+アフィリエイトパラメータもURL生成時(ボタンUI実装側)に付ける。収集の仕事を勝手に増やさない。
+
 ## NEVER (最重要・全部実害防止)
 
 - **title_idを推測や連番で作らない**。scriptの検索+検証を通ったものだけがseedに入る
