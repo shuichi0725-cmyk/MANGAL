@@ -1,0 +1,107 @@
+slug: adolf-ni-tsugu
+canonical_label: 文藝春秋
+source: 'wikipedia書誌(全10版)×楽天cache×種2の3面突合 2026-07-12(ユーザ発見の同作汚染=全集376がstandard5巻目に混入→除去後ゴマブックスPODが繰り上がる型。sid34947に約10プロダクトラインが2枠圧縮されていた奇子型)'
+publisher: 文芸春秋
+volumes: &shokan
+- number: 1
+  isbn13: '9784163632506'
+  release_date: '1985-05-30'
+- number: 2
+  isbn13: '9784163632605'
+  release_date: '1985-06-30'
+- number: 3
+  isbn13: '9784163632704'
+  release_date: '1985-08-01'
+- number: 4
+  isbn13: '9784163632803'
+  release_date: '1985-11-10'
+versions:
+- label: 初刊版(1985)
+  volumes: *shokan
+- label: 文春コミックス版(1988)
+  volumes:
+  - number: 1
+    isbn13: '9784168501135'
+    release_date: 1988-11
+  - number: 2
+    isbn13: '9784168501142'
+    release_date: 1988-11
+  - number: 3
+    isbn13: '9784168501159'
+    release_date: 1988-11
+  - number: 4
+    isbn13: '9784168501166'
+    release_date: 1988-12
+  - number: 5
+    isbn13: '9784168501173'
+    release_date: 1988-12
+suppress_types:
+- bunkobon
+extra_editions:
+- label: 文春文庫ビジュアル版(1992)
+  type: bunkobon
+  volumes:
+  - number: 1
+    isbn13: '9784168110139'
+    release_date: 1992-04
+  - number: 2
+    isbn13: '9784168110146'
+    release_date: 1992-04
+  - number: 3
+    isbn13: '9784168110153'
+    release_date: 1992-04
+  - number: 4
+    isbn13: '9784168110160'
+    release_date: 1992-05
+  - number: 5
+    isbn13: '9784168110177'
+    release_date: 1992-05
+- label: 新編 文春文庫版(2009)
+  type: bunkobon
+  volumes:
+  - number: 1
+    isbn13: '9784167757014'
+    release_date: 2009-01
+  - number: 2
+    isbn13: '9784167757021'
+    release_date: 2009-01
+  - number: 3
+    isbn13: '9784167757038'
+    release_date: 2009-02
+  - number: 4
+    isbn13: '9784167757045'
+    release_date: 2009-02
+- label: 手塚治虫文庫全集(2010)
+  type: bunkobon
+  publisher: 講談社
+  volumes:
+  - number: 1
+    isbn13: '9784063737707'
+    release_date: 2010-06
+  - number: 2
+    isbn13: '9784063737714'
+    release_date: 2010-07
+  - number: 3
+    isbn13: '9784063737721'
+    release_date: 2010-08
+- label: 手塚治虫の収穫 BIG COMIC SPECIAL(2008)
+  type: wideban
+  publisher: 小学館
+  volumes:
+  - number: 1
+    isbn13: '9784091820655'
+    release_date: 2008-07
+  - number: 2
+    isbn13: '9784091820662'
+    release_date: 2008-08
+  - number: 3
+    isbn13: '9784091820679'
+    release_date: 2008-09
+- label: オリジナル版・函入(2020)
+  type: aizoban
+  publisher: 国書刊行会
+  volumes:
+  - number: 1
+    isbn13: '9784336063656'
+    release_date: '2020-03-10'
+    volume_label: 全3冊+別冊

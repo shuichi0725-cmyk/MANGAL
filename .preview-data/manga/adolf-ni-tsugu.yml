@@ -4,7 +4,7 @@ title: アドルフに告ぐ
 title_kana: アドルフニツグ
 title_romaji: adorufu ni tsugu
 year_started: 1985
-year_ended: 2019
+year_ended: 1992
 status: completed
 authors:
 - name: 手塚治虫
@@ -29,8 +29,9 @@ alternative_titles:
 wikidata_qid: Q193300
 editions:
 - type: standard
-  label: 通常版
+  label: 文藝春秋
   publisher: 文芸春秋
+  imprint: 文藝春秋
   volumes:
   - number: 1
     asin: null
@@ -52,15 +53,60 @@ editions:
     isbn13: '9784163632803'
     cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/rakutenkobo-ebooks/cabinet/8021/2000002958021.jpg?_ex=300x300
     release_date: '1985-11-10'
-  - number: 5
-    asin: null
-    isbn13: '9784814919413'
-    cover_url: null
-    release_date: 2019-06
+  versions:
+  - label: 初刊版(1985)
+    volumes:
+    - number: 1
+      asin: null
+      isbn13: '9784163632506'
+      cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/rakutenkobo-ebooks/cabinet/8054/2000002958054.jpg?_ex=300x300
+      release_date: '1985-05-30'
+    - number: 2
+      asin: null
+      isbn13: '9784163632605'
+      cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/rakutenkobo-ebooks/cabinet/9055/2000002959055.jpg?_ex=300x300
+      release_date: '1985-06-30'
+    - number: 3
+      asin: null
+      isbn13: '9784163632704'
+      cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/rakutenkobo-ebooks/cabinet/8166/2000002958166.jpg?_ex=300x300
+      release_date: '1985-08-01'
+    - number: 4
+      asin: null
+      isbn13: '9784163632803'
+      cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/rakutenkobo-ebooks/cabinet/8021/2000002958021.jpg?_ex=300x300
+      release_date: '1985-11-10'
+  - label: 文春コミックス版(1988)
+    volumes:
+    - number: 1
+      asin: null
+      isbn13: '9784168501135'
+      cover_url: null
+      release_date: 1988-11
+    - number: 2
+      asin: null
+      isbn13: '9784168501142'
+      cover_url: null
+      release_date: 1988-11
+    - number: 3
+      asin: null
+      isbn13: '9784168501159'
+      cover_url: null
+      release_date: 1988-11
+    - number: 4
+      asin: null
+      isbn13: '9784168501166'
+      cover_url: null
+      release_date: 1988-12
+    - number: 5
+      asin: null
+      isbn13: '9784168501173'
+      cover_url: null
+      release_date: 1988-12
 - type: bunkobon
-  label: 文庫版
+  label: 文春文庫ビジュアル版(1992)
   publisher: 文芸春秋
-  imprint: 文春文庫 ビジュアル版
+  imprint: 文春文庫ビジュアル版(1992)
   volumes:
   - number: 1
     asin: null
@@ -87,6 +133,82 @@ editions:
     isbn13: '9784168110177'
     cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/rakutenkobo-ebooks/cabinet/8050/2000002958050.jpg?_ex=300x300
     release_date: 1992-05
+- type: bunkobon
+  label: 新編 文春文庫版(2009)
+  publisher: 文芸春秋
+  imprint: 新編 文春文庫版(2009)
+  volumes:
+  - number: 1
+    asin: null
+    isbn13: '9784167757014'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/7014/9784167757014_1_3.jpg?_ex=300x300
+    release_date: 2009-01
+  - number: 2
+    asin: null
+    isbn13: '9784167757021'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/7021/9784167757021_1_3.jpg?_ex=300x300
+    release_date: 2009-01
+  - number: 3
+    asin: null
+    isbn13: '9784167757038'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/7038/9784167757038_1_5.jpg?_ex=300x300
+    release_date: 2009-02
+  - number: 4
+    asin: null
+    isbn13: '9784167757045'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/7045/9784167757045_1_5.jpg?_ex=300x300
+    release_date: 2009-02
+- type: bunkobon
+  label: 手塚治虫文庫全集(2010)
+  publisher: 講談社
+  imprint: 手塚治虫文庫全集(2010)
+  volumes:
+  - number: 1
+    asin: null
+    isbn13: '9784063737707'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/7707/9784063737707.jpg?_ex=300x300
+    release_date: 2010-06
+  - number: 2
+    asin: null
+    isbn13: '9784063737714'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/7714/9784063737714.jpg?_ex=300x300
+    release_date: 2010-07
+  - number: 3
+    asin: null
+    isbn13: '9784063737721'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/7721/9784063737721.jpg?_ex=300x300
+    release_date: 2010-08
+- type: wideban
+  label: 手塚治虫の収穫 BIG COMIC SPECIAL(2008)
+  publisher: 小学館
+  imprint: 手塚治虫の収穫 BIG COMIC SPECIAL(2008)
+  volumes:
+  - number: 1
+    asin: null
+    isbn13: '9784091820655'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0918/09182065.jpg?_ex=300x300
+    release_date: 2008-07
+  - number: 2
+    asin: null
+    isbn13: '9784091820662'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0918/09182066.jpg?_ex=300x300
+    release_date: 2008-08
+  - number: 3
+    asin: null
+    isbn13: '9784091820679'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0918/09182067.jpg?_ex=300x300
+    release_date: 2008-09
+- type: aizoban
+  label: オリジナル版・函入(2020)
+  publisher: 国書刊行会
+  imprint: オリジナル版・函入(2020)
+  volumes:
+  - number: 1
+    asin: null
+    isbn13: '9784336063656'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/3656/9784336063656.jpg?_ex=300x300
+    release_date: '2020-03-10'
+    volume_label: 全3冊+別冊
 publishers:
 - bungei-shunju
 catch: 墓前に花を手向ける老紳士が思い起こす、三人のアドルフ——神戸で育った少年たちと、かの総統。運命が交錯する重厚な歴史ドラマ。
