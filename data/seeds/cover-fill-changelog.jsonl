@@ -961,3 +961,4 @@
 {"slug": "tenshi-no-tamago", "number": 1, "isbn13": "9784344401112", "cover_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/3444/34440111.gif?_ex=200x200", "src": "harvest18", "applied_at": "2026-06-18T12:35:59"}
 {"at": "2026-07-11", "op": "cover-refill-2024plus", "pages": 333, "vols": 358, "note": "書影無し2024+レビュー(preview370頁)→楽天再照会: ローカル195+live163=358解決/残59楽天未掲載。covers seed追記+3箇所充填"}
 {"at": "2026-07-11", "op": "adult-quarantine-cdn-probe", "isbn": "9784864166898", "slug": "migawari-nante-okotowari", "note": "楽天アダルトジャンル隔離=API不可視だがCDN画像実在(HEAD200+目視確認)。ユーザ発見の新パターン"}
+{"slug": "kantouheiya", "op": "cover-fix", "before": "Kobo同数ゲート誤判定(新潮混入で4巻に見えた旧standard×Kobo4巻=道草文庫装丁): 中/下/新潮4に道草②③④が貼られていた", "after": "中/下/新潮4のseed行除去(上=楽天紙の正書影のみ残存)+道草文庫4巻に④を正配置", "source": "ユーザ目視(preview装丁確認)", "at": "2026-07-13"}
