@@ -1,0 +1,45 @@
+slug: prime-rose
+canonical_label: 少年チャンピオン・コミックス エクストラ版(1989-90)
+source: 'wikipedia書誌(4版)×楽天cache×種2突合 2026-07-13。汚染なし(表示2版はWiki一致・1989=エクストラ版初単行本化で正)。文庫全集2011全2巻が種2のtype割れで不可視だったのを版として可視化+全集1995をexclude(black-jack前例)'
+publisher: 秋田書店
+volumes:
+- number: 1
+  isbn13: '9784253132138'
+  release_date: 1989-11
+- number: 2
+  isbn13: '9784253132145'
+  release_date: 1989-11
+- number: 3
+  isbn13: '9784253132152'
+  release_date: 1990-01
+- number: 4
+  isbn13: '9784253132169'
+  release_date: 1990-02
+suppress_types:
+- bunkobon
+extra_editions:
+- label: 秋田文庫(1998-99)
+  type: bunkobon
+  volumes:
+  - number: 1
+    isbn13: '9784253174206'
+    release_date: 1998-10
+  - number: 2
+    isbn13: '9784253174213'
+    release_date: 1998-12
+  - number: 3
+    isbn13: '9784253174220'
+    release_date: 1999-02
+  - number: 4
+    isbn13: '9784253174237'
+    release_date: 1999-04
+- label: 手塚治虫文庫全集(2011)
+  type: bunkobon
+  publisher: 講談社
+  volumes:
+  - number: 1
+    isbn13: '9784063738674'
+    release_date: 2011-10
+  - number: 2
+    isbn13: '9784063738681'
+    release_date: 2011-11
