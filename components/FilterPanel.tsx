@@ -39,7 +39,7 @@ export default function FilterPanel({
     };
     return {
       status: tally({ statuses: [] }, (m) => [m.status]),
-      demographic: tally({ demographics: [] }, (m) => [m.demographic]),
+      demographic: tally({ demographics: [] }, (m) => (m.demographic ? [m.demographic] : [])),
       genre: tally({ genres: [] }, (m) => m.genres ?? []),
       theme: tally({ themes: [] }, (m) => m.themes ?? []),
       publisher: tally({ publishers: [] }, (m) =>

@@ -158,7 +158,7 @@ for r in cls["ex_mid"]:
            "title_kana": kana.replace(" ", "").replace("　", ""),
            "title_romaji": romaji.replace("-", " "),
            "authors": authors, "publisher": (_pk if (_pk:=_pubkey(r.get("publisher"))) in _pubs else None), "publishers": ([_pk] if _pk in _pubs else []), "year_ended": None, "year_started": int(ym[:4]), "status": "ongoing",
-           "demographic": DEMO.get(r.get("subgenre")) or "other",  # schema必須(null不可) "genres": [],
+           "demographic": DEMO.get(r.get("subgenre")),  # ★不明はNone(旧"other"廃止2026-07-13。schemaはnullable化済み) "genres": [],
            "editions": [{"type": "standard", "label": "通常版", "publisher": (_pubkey(r.get("publisher")) or r.get("publisher")),
                           "imprint": r.get("seriesName") or "", "volumes": volumes}],
            "_preorder_draft": {"class": "ex_mid", "added_at": TODAY, "source": "rakuten-preorder",

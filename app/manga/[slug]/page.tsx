@@ -247,12 +247,16 @@ export default async function MangaDetailPage({
                 </dd>
               </>
             )}
-            <dt className="font-semibold text-ink/65 pt-1">分野</dt>
-            <dd className="flex flex-wrap gap-1.5">
-              <FilterLink href={`/browse?demographic=${encodeURIComponent(manga.demographic)}`}>
-                {demographic?.name ?? manga.demographic}
-              </FilterLink>
-            </dd>
+            {manga.demographic && (
+              <>
+                <dt className="font-semibold text-ink/65 pt-1">分野</dt>
+                <dd className="flex flex-wrap gap-1.5">
+                  <FilterLink href={`/browse?demographic=${encodeURIComponent(manga.demographic)}`}>
+                    {demographic?.name ?? manga.demographic}
+                  </FilterLink>
+                </dd>
+              </>
+            )}
             {(() => {
               // ★ジャンル(= masterジャンル + Wiki/AniList/AI 由来。 filter link 付き)と
               //   要素(= AniListタグの和訳。 filter 無しの素チップ)を分離。

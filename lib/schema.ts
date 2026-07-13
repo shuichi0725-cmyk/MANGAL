@@ -6,13 +6,14 @@ export type AuthorRoleT = z.infer<typeof AuthorRole>;
 export const Status = z.enum(["ongoing", "completed", "hiatus"]);
 export type StatusT = z.infer<typeof Status>;
 
+// ★"other"は廃止(2026-07-13 ユーザ裁定: 意味がないカテゴリは付けない・不明なら空欄)。
+//   enumから外すことで再混入をbuildで弾く(genres masterのbackstopと同型)。
 export const Demographic = z.enum([
   "shounen",
   "shoujo",
   "seinen",
   "josei",
   "kodomo",
-  "other",
 ]);
 export type DemographicT = z.infer<typeof Demographic>;
 
@@ -141,7 +142,8 @@ export const MangaSchema = z.object({
    *  publisher は代表1社、 こちらは「どれかの版を出した社」全部 (= 集合フィルタ) */
   publishers: z.array(z.string()).default([]),
   magazine: z.string().min(1).nullable().optional(),
-  demographic: Demographic,
+  // ★不明は空欄(旧"other"廃止 2026-07-13)。必須だったことが生成器の"other"捏造を誘発していた
+  demographic: Demographic.nullable().optional(),
   genres: z.array(z.string().min(1)).default([]),
   /** ★genres が信頼源(AniList/Wikipedia)でなく AI 暫定のみ = 低信頼。
    *  信頼源が来たら上書きされる(蒸留/第三の源で埋まる余地)。 trusted 由来時は省略/false。 */

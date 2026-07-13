@@ -2381,14 +2381,21 @@ def build_yml(
         mag_cand = infer_magazine_from_brand(editions, valid_mags)
     o["magazine"] = mag_cand
 
-    o["demographic"] = (seed3 or {}).get("demographic") or src_yml.get("demographic", "shounen")
+    # ★"other"は出荷しない(2026-07-13 ユーザ裁定: 意味がないカテゴリ。不明=キー自体を出さない=UI非表示)
+    _demo = (seed3 or {}).get("demographic") or src_yml.get("demographic", "shounen")
+    if _demo and _demo != "other":
+        o["demographic"] = _demo
+    else:
+        o.pop("demographic", None)
 
     # genres: 種3 由来 keys を validate
-    genres_cand = (seed3 or {}).get("genres") or src_yml.get("genres", ["other"])
+    # ★"other"は出荷しない(2026-07-13 ユーザ裁定: 意味がないカテゴリ。不明=空=索引ガードも空を許容)
+    genres_cand = (seed3 or {}).get("genres") or src_yml.get("genres") or []
+    genres_cand = [g for g in genres_cand if g != "other"]
     if valid_gens:
         filtered = [g for g in genres_cand if g in valid_gens]
         if not filtered:
-            filtered = src_yml.get("genres", ["other"])
+            filtered = [g for g in (src_yml.get("genres") or []) if g != "other" and g in valid_gens]
         genres_cand = filtered
     o["genres"] = genres_cand
 

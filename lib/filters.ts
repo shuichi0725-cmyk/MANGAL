@@ -176,7 +176,7 @@ export function applyFilters(
         if (!(y >= dec && y < dec + 10)) return false;
       } else if (!fvd.startsWith(state.launch)) return false;
     }
-    if (state.demographics.length && !state.demographics.includes(m.demographic)) return false;
+    if (state.demographics.length && (!m.demographic || !state.demographics.includes(m.demographic))) return false;
     // 複数社作品対応: 選択キーが「どれかの版の出版社」に一致すればヒット (m.publishers 集合)
     if (state.publishers.length) {
       const pubs = m.publishers.length ? m.publishers : [m.publisher];
