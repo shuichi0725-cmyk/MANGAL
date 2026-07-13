@@ -145,3 +145,4 @@
 - [【方針】1件のバグ=型と疑う](feedback_one_bug_means_a_class.md) — 署名化→全DB掃引(全件目視)→検出器script化→月次サニティ登録まで一続き
 - [kobo見直しセット復元](kobo_review_preview_set.md) — トリガー「kobo見直ししたい」=302作をpreviewへ(slug一覧=preview-sets/)
 - [D:外付け認識外れ→挿し直し待ちのみ](d_drive_external_flaky.md) — レター探索/変更は絶対しない
+- [Gemini API運用実測](gemini_api_ops.md) — ~500req/日・JST16時リセット・flash-lite主力・グラウンディング枠外
