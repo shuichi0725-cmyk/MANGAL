@@ -13,6 +13,8 @@ description: テスト環境に出して=対象頁を.preview-dataへ投入/入�
 2. 対象を copy: `cp data/manga.v2/<stem>.yml .preview-data/manga/`(複数可)
 3. preview索引再構築: `python scripts/_build-list-index.py .preview-data/manga .preview-data`(~20秒/500頁)
 4. masters が変わっていたら同期: `cp data/publishers.yml .preview-data/publishers.yml` 等
+   ★**schema(lib/schema.ts)のenum等を変えた時は必ず全masters(demographics/genres/publishers/magazines)をdiff確認**。
+   2026-07-14実害: demographics.ymlからother削除時にpreviewミラー未同期→enum backstopがbuildを止め、preview deploy3連続failure(ユーザにエラーメール)
 5. `git add .preview-data && git commit && git push`
 
 ## NEVER / 罠
