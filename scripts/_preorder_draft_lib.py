@@ -75,11 +75,87 @@ def _to_kata_reading(text):
     return re.sub(r"[^ァ-ヶー]", "", r)
 
 
+_KANA_NUM_TAIL = re.compile(
+    r"^(イチ|ニ|サン|ヨン|ゴ|ロク|ナナ|ハチ|キュウ|ジュウ(イチ|ニ|サン|ヨン|ゴ|ロク|ナナ|ハチ|キュウ)?|"
+    r"ジョウ|ゲ|チュウ|(ザ)?コミック(イチ|ニ|サン|ヨン|ゴ)?)$")
+
+_slug_device = None
+def _device():
+    global _slug_device
+    if _slug_device is None:
+        try:
+            from _slug_kana_lib import make_slug as _impl
+            _slug_device = _impl
+        except Exception:
+            _slug_device = False
+    return _slug_device or None
+
+
+_DIGIT_READ = {"0": "zero", "1": "ichi", "2": "ni", "3": "san", "4": "yon", "5": "go",
+               "6": "roku", "7": "nana", "8": "hachi", "9": "kyuu", "10": "juu"}
+
+
+def _letters(s):
+    """比較用正規化(等値判定専用): 記号除去+小文字。数字→音読み展開(slug数字keep vs ヨミのイチニ差吸収)。
+    助詞ゆらぎ(は=wa/ha・を=o/wo・へ=e/he)は両辺同写像で潰す(比較にのみ使い表示には使わない)。"""
+    t = re.sub(r"[^a-z0-9]", "", str(s or "").lower())
+    t = re.sub(r"10|\d", lambda m: _DIGIT_READ.get(m.group(), m.group()), t)
+    return t.replace("wo", "o").replace("ha", "wa").replace("he", "e")
+
+
+def kana_tail_trim(base, kana):
+    """★2026-07-14(1,029ドラフト裁定の学び): 楽天titleKanaは巻タイトル由来のため
+    末尾に裸の巻数読み(アカルイミライ「ニ」型)が乗ることがある。
+    基底題の装置読みに一致する接頭辞+残尾が数読み → 接頭辞に自動トリム。該当なしはそのまま返す。"""
+    dev = _device()
+    if not (dev and base and kana):
+        return kana
+    try:
+        tgt = _letters(dev(base))
+    except Exception:
+        return kana
+    if not tgt or _letters(dev(kana)) == tgt:
+        return kana
+    for i in range(len(kana) - 1, max(2, len(kana) // 2) - 1, -1):
+        tail = kana[i:]
+        if not _KANA_NUM_TAIL.match(tail):
+            continue
+        try:
+            if _letters(dev(kana[:i])) == tgt:
+                return kana[:i]
+        except Exception:
+            return kana
+    return kana
+
+
+def slug_kana_gate(base, kana, slug, out_tsv="docs/production-diagnostics/slug-gate-pending.tsv"):
+    """★ヨミ一致ゲート(2026-07-14): 装置が題から読んだ綴りとヨミから読んだ綴りが不一致
+    (剣聖→ken-hijiri型の漢字誤読リスク)なら pending tsv に1行残す(fail-open=生成は止めない)。
+    戻り値 True=一致/False=flag済み。"""
+    dev = _device()
+    if not (dev and base and kana and slug):
+        return True
+    try:
+        if _letters(slug) == _letters(dev(kana)):
+            return True
+    except Exception:
+        return True
+    try:
+        import os
+        os.makedirs(os.path.dirname(out_tsv), exist_ok=True)
+        with open(out_tsv, "a", encoding="utf-8") as f:
+            f.write(f"{slug}\t{base}\t{kana}\n")
+    except Exception:
+        pass
+    return False
+
+
 def clean_kana(kana, subtitle=None, base=None):
     """楽天titleKana→カタカナのみ基底読み。漢字残る/空/汚染=None(hold=捏造回避)。
     ★楽天kanaの空白=語境界(副題境界でない)なので空白は除去して連結。
     ★副題は「副題読み(pykakasi)を末尾から差し引く」で除去(空白前取りは誤り=リターンズ事故)。
-    末尾@COMIC読み(アットコミック)/巻読み(ダイN/Nカン)/(N)/裸数字も除去。"""
+    末尾@COMIC読み(アットコミック)/巻読み(ダイN/Nカン)/(N)/裸数字も除去。
+    ★base付きで呼ぶと裸の巻数読み尾(アカルイミライニ型)も装置照合で自動トリム(2026-07-14)。"""
     if not kana:
         return None
     k = unicodedata.normalize("NFKC", str(kana)).strip()
@@ -120,6 +196,8 @@ def clean_kana(kana, subtitle=None, base=None):
             return None
     if not re.search(r"[ァ-ヶー]", k) and not re.search(r"[A-Za-z0-9]", k):
         return None
+    if base:
+        k = kana_tail_trim(base, k)   # ★裸巻数読み尾の自動トリム(2026-07-14)
     return k or None
 
 
@@ -201,4 +279,6 @@ def make_slug(base, kana_raw=None, existing=None):
     slug = slug[:70]
     if existing is not None and slug in existing:
         return None                             # 衝突=hold(-2026で誤魔化さない)
+    if kana_raw:
+        slug_kana_gate(base, _hira2kata(re.sub(r"[\s　]+", "", str(kana_raw))), slug)  # ★誤読flag(fail-open)
     return slug
