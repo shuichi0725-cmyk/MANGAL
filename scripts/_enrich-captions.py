@@ -40,7 +40,7 @@ ORIGIN = env.get("RAKUTEN_REFERER", "").rstrip("/")
 
 def live_caption(isbn):
     q = {"applicationId": env["RAKUTEN_APP_ID"], "accessKey": env["RAKUTEN_ACCESS_KEY"],
-         "isbn": isbn, "format": "json", "formatVersion": "2"}
+         "isbn": isbn, "outOfStockFlag": "1", "format": "json", "formatVersion": "2"}  # ★在庫切れ含む(旧刊必須 [[rakuten_out_of_stock_flag]])
     req = urllib.request.Request("https://openapi.rakuten.co.jp/services/api/BooksBook/Search/20170404?" + urllib.parse.urlencode(q))
     req.add_header("Referer", ORIGIN + "/")
     req.add_header("Origin", ORIGIN)
