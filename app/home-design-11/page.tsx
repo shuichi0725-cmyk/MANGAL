@@ -8,7 +8,8 @@ import DestinyPickMock from "@/components/DestinyPickMock";
 import MarqueeTitle from "@/components/MarqueeTitle";
 import CalendarView from "@/components/CalendarView";
 import HomeSidebar from "@/components/HomeSidebar";
-import { bundle, DesignNav, seeded, volCount, Cover, CoverTile, thisMonthReleases } from "@/lib/homeDesign";
+import { bundle, DesignNav, seeded, volCount, Cover, thisMonthReleases, releaseDayLabel } from "@/lib/homeDesign";
+import WeekendFeature from "@/components/WeekendFeature";
 import { coverUrl } from "@/lib/schema";
 import { loadAiReviews } from "@/lib/loadData";
 import AiLeagueTeaser from "@/components/AiLeagueTeaser";
@@ -89,12 +90,17 @@ export default function Design11() {
         <Tile className="p-3.5">
           <h2 className="text-[14px] font-bold">📦 今月の新刊</h2>
           <ul className="-mx-3.5 mt-2.5 flex gap-3 overflow-x-auto px-3.5 pb-1 snap-x">
-            {thisMonthReleases(manga, byNew, 12).map((m) => (
-              <li key={m.slug} className="w-[96px] shrink-0 snap-start">
-                <Link href={`/manga/${m.slug}`} className="block group spring-press">
-                  <Cover m={m} sizes="96px" />
-                  <MarqueeTitle text={m.title} className="mt-1 text-[12px] leading-snug text-ink/85 group-hover:text-[var(--color-accent)]" />
-                  <p className="truncate text-[10px] text-ink/50">{(m.authors ?? []).map((a) => a.name).join("・")}</p>
+            {thisMonthReleases(manga, byNew, 12).map((r) => (
+              <li key={r.m.slug} className="w-[96px] shrink-0 snap-start">
+                <Link href={`/manga/${r.m.slug}`} className="block group spring-press">
+                  {/* ★当月に出る巻の書影を出す(旧=1巻書影で「一年前の本?」と誤読された 2026-07-13) */}
+                  <Cover m={r.m} sizes="96px" src={r.cover ?? undefined} />
+                  <MarqueeTitle text={r.m.title} className="mt-1 text-[12px] leading-snug text-ink/85 group-hover:text-[var(--color-accent)]" />
+                  <p className="truncate text-[10px] font-semibold text-[var(--color-accent)]">
+                    {r.number ? `${r.number}巻` : "新刊"}
+                    {releaseDayLabel(r.date) ? `・${releaseDayLabel(r.date)}` : ""}
+                  </p>
+                  <p className="truncate text-[10px] text-ink/50">{(r.m.authors ?? []).map((a) => a.name).join("・")}</p>
                 </Link>
               </li>
             ))}
@@ -163,15 +169,26 @@ export default function Design11() {
       {/* 6.5【今日の一冊 slot2】日替わり分散(バラバラ日の3人目/2+1の1冊側) */}
       <FeaturedDaily slot={2} />
 
-      {/* 7.【中】特集 */}
+      {/* 7.【中】特集(★2026-07-13 改修: 書影あり必須+週替わりrotation。旧=先頭6作固定でのらくろが出続けた) */}
       <section className="mt-4 px-4">
         <Tile className="p-3.5">
-          <h2 className="border-l-4 border-[var(--color-accent)] pl-2.5 text-[14px] font-extrabold">特集: 週末で読み切る、全5巻以内の完結作</h2>
-          <ul className="mt-3 grid grid-cols-3 gap-3">
-            {manga.filter((m) => m.status === "completed" && volCount(m) >= 3 && volCount(m) <= 5).slice(0, 6).map((m) => (
-              <li key={m.slug}><CoverTile m={m} sizes="104px" /></li>
-            ))}
-          </ul>
+          <h2 className="border-l-4 border-[var(--color-accent)] pl-2.5 text-[14px] font-extrabold">
+            特集: 週末で読み切る、全5巻以内の完結作
+            <span className="ml-1.5 text-[10px] font-semibold text-ink/45">週替わり</span>
+          </h2>
+          <WeekendFeature
+            pool={seeded(
+              manga.filter((m) => m.status === "completed" && volCount(m) >= 3 && volCount(m) <= 5 && coverUrl(m)),
+              (m) => m.slug,
+              120,
+              42,
+            ).map((m) => ({
+              slug: m.slug,
+              title: m.title,
+              authors: (m.authors ?? []).map((a) => a.name).join("・"),
+              cover: coverUrl(m)!,
+            }))}
+          />
         </Tile>
       </section>
 

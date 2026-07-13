@@ -15,7 +15,7 @@ description: 「表示がおかしい」報告の切り分け手順。環境特�
 - 本番の報告 = 「旧ビルドの内容」の可能性を最初に疑う(直近の修正はテストにしか無い)
 
 ### 1. キャッシュか実体か
-- 本番HTML/JSONは edge cache 最長1日 → `?v=xxx` を付けて再現するか確認
+- 本番HTML=edge最長1日、★**JSON/アセット=edge最長7日**(ASSET系 s-maxage=604800。2026-07-13実害=カレンダー/コーナーstockが1週間前のまま) → `?v=xxx` を付けて再現するか確認。stale確定なら worker `/api/purge` で即時失効(R2_PURGE_TOKEN、_deploy-differential.py step6と同機構)
 - preview は push 後15-20分待ったか・追いpushでビルドcancelされていないか
 
 ### 2. ★stale生成物クラスか (= 頻出の真犯人)

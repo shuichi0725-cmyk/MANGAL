@@ -18,7 +18,10 @@ description: 週次蒸留=本番フルビルド+R2フルアップ。トリガー
 
 ### 1. 事前再生成 (= stale生成物クラスを全部焼き直す)
 ```
-python scripts/_build-calendar.py            # カレンダー(~3分)
+python scripts/_build-calendar.py data/manga.v2 data/calendar <当月YYYY-MM>   # ★本番フル(r2-syncがこれをoverlay)
+python scripts/_build-calendar.py .preview-data/manga public/calendar <当月>  # preview版(src=preview自身)
+# ★引数なし実行は禁止(2026-07-13実害): 既定out=public/calendarにフル版が書かれ、本番overlay元のdata/calendarは古いまま
+#   =本番カレンダーが前週のまま stale。しかも生成器は古い月ファイルを消さないので、srcを替える時は out を rm -rf してから。
 python scripts/_gen-corner-stocks.py         # 三世代/featured stock JSON
 python scripts/_gen-corner-auto.py           # 周年/豪華版 JSON(66k走査 ~5分)
 python scripts/_build-list-index.py data/manga.v2 data   # 本番索引(~10分)
@@ -57,6 +60,10 @@ python scripts/_r2-sync.py --bucket mangal-site
 - 起動直後に**生存確認**(python の CPU 時間が伸びているか)。ログ0バイトでもハッシュ照合中は無言(10-25分)が正常。
 - スクリプトが .env.local から R2_* 自動読込・**本番索引 overlay(out/ ルートへ)+5MBガード**内蔵。
 - レイアウト級の変更(全頁共通部)があった週は全量PUT=正常。
+- ★**同期後にJSONのedge cache purge必須**(2026-07-13実害): workerのASSET系は `s-maxage=604800`=**エッジ7日**。
+  purgeしないと calendar/*.json・data/*-stock.json 等が最長1週間前のまま配信される(ユーザ画面が更新されない)。
+  purge = worker `/api/purge`(R2_PURGE_TOKEN認証、_deploy-differential.py step6 と同機構)。最低限
+  `/calendar/manifest.json`+`/calendar/release/*.json`(当月〜3ヶ月+beyond)+`/data/*.json` を対象に。
 
 ### 5+6. ★finalize (= 2026-07-10 script化。疎通→marker→manifestをゲート連鎖で1本化)
 ```

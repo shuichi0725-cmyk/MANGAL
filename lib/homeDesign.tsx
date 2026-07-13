@@ -55,28 +55,42 @@ export function debutThisMonth(manga: Manga[], n = 12): Manga[] {
     .map(([, m]) => m);
 }
 
-export function thisMonthReleases(manga: Manga[], fallback: Manga[], n = 12): Manga[] {
+/** 今月発売の1エントリ: m=作品 / date・number・cover=当月に出る巻そのもの
+ *  (★2026-07-13: 旧実装は作品の1巻書影を出し「一年前の本?」と誤読された。新刊巻を明示する) */
+export type MonthRelease = { m: Manga; date: string; number: number | null; cover: string | null };
+
+export function thisMonthReleases(manga: Manga[], fallback: Manga[], n = 12): MonthRelease[] {
   const now = new Date(Date.now() + 9 * 3600 * 1000); // JST
   const ym = `${now.getUTCFullYear()}-${String(now.getUTCMonth() + 1).padStart(2, "0")}`;
-  const hits: Array<[string, Manga]> = [];
+  const hits: MonthRelease[] = [];
   for (const m of manga) {
-    let best: string | null = null;
+    let best: { date: string; number: number | null; cover: string | null } | null = null;
     for (const ed of m.editions) {
       for (const v of ed.volumes) {
         if (v.release_date && v.release_date.startsWith(ym)) {
-          if (!best || v.release_date < best) best = v.release_date;
+          if (!best || v.release_date < best.date)
+            best = { date: v.release_date, number: v.number ?? null, cover: v.cover_url ?? null };
         }
       }
     }
-    if (best) hits.push([best, m]);
+    if (best) hits.push({ m, ...best });
   }
-  hits.sort((a, b) => a[0].localeCompare(b[0]));
-  const out = hits.map(([, m]) => m).slice(0, n);
+  hits.sort((a, b) => a.date.localeCompare(b.date));
+  // ★書影なしは出さない(当月巻の書影が無ければ作品代表書影で代用、それも無ければ落とす)
+  const out = hits.filter((h) => h.cover || coverUrl(h.m)).slice(0, n);
   for (const m of fallback) {
     if (out.length >= n) break;
-    if (!out.includes(m)) out.push(m);
+    if (!out.some((h) => h.m === m) && coverUrl(m)) out.push({ m, date: "", number: null, cover: null });
   }
   return out;
+}
+
+/** 発売日ラベル: "2026-07-15"→"7/15発売" / "2026-07"(月精度)→"7月発売" */
+export function releaseDayLabel(date: string): string | null {
+  if (!date) return null;
+  const mm = Number(date.slice(5, 7));
+  if (date.length >= 10) return `${mm}/${Number(date.slice(8, 10))}発売`;
+  return `${mm}月発売`;
 }
 
 export function volCount(m: Manga): number {
@@ -93,8 +107,8 @@ export function seeded<T>(arr: T[], key: (t: T) => string, n: number, salt = 7):
   return [...arr].sort((a, b) => h(key(a)) - h(key(b))).slice(0, n);
 }
 
-export function Cover({ m, sizes = "120px" }: { m: Manga; sizes?: string }) {
-  const c = coverUrl(m);
+export function Cover({ m, sizes = "120px", src }: { m: Manga; sizes?: string; src?: string | null }) {
+  const c = src ?? coverUrl(m);
   return (
     <div className="relative aspect-[2/3] w-full overflow-hidden rounded bg-[var(--color-surface-2)] border border-[var(--color-line)]">
       {c ? (
