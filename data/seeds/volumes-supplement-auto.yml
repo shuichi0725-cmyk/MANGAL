@@ -22940,13 +22940,26 @@ volumes:
   - name:ナカノムラアヤスケ|name:転生ババァは見過ごせない!
   - name:ナカノムラアヤスケ|name:転生ババァは見過ごせない!|sub:元悪徳女帝の二周目ライフ
   number: 4
-  isbn13: '9784434380822'
-  release_date: 2026-07
+  isbn13: '9784434329593'
+  release_date: '2023-11-30'
   publisher: 星雲社 (発売)
   edition_type: standard
-  source: stale-backfill
-  added_at: '2026-07-11'
-  note: seed非バック巻の一括固定(2026-07-11掃引=フルpromoteで消える1951巻。過去のper-case/harvest直書き分)
+  source: percase-fix
+  added_at: '2026-07-13'
+  note: 是正2026-07-13=旧値9784434380822はレジーナ文庫(小説文庫版4巻2026-07)の混入。真の漫画4巻=レジーナCOMICS
+    9784434329593(楽天2023-11-30・文月路亜/ナカノムラアヤスケ)。同題小説3系統(ブックス/文庫)混入型
+- series_keys:
+  - name:タカ氏|name:転生ババァは見過ごせない!|sub:元悪徳女帝の二周目ライフ
+  - name:ナカノムラアヤスケ|name:転生ババァは見過ごせない!
+  - name:ナカノムラアヤスケ|name:転生ババァは見過ごせない!|sub:元悪徳女帝の二周目ライフ
+  number: 8
+  isbn13: '9784434379734'
+  release_date: '2026-06-30'
+  publisher: 星雲社 (発売)
+  edition_type: standard
+  source: percase-fix
+  added_at: '2026-07-13'
+  note: 漫画8巻(レジーナCOMICS・楽天2026-06-30発売済・書影有)。小説文庫4巻の誤補完に隠れて取りこぼされていた真の新刊
 - series_keys:
   - name:キダニエル|name:転生大聖女の異世界のんびり紀行
   - name:四葉夕卜|name:転生大聖女の異世界のんびり紀行
