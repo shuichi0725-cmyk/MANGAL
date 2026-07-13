@@ -13,7 +13,10 @@ description: ジャンル検品して/Gemini検品=本番のprovisionalジャン
 - `genres_provisional: true` かつ genres 非空の本番頁(~25,396 @2026-07-14)
 - 順序: ①catch/synopsis空の頁(=題名だけで付与された疑い濃) ②残りslug昇順(端から全件。人気順禁止)
 
-## 運転 (= 429まで回す・再開可能・並走OK)
+## 運転 (= 429まで回す・再開可能・並走OK・★Sonnet運転前提)
+★**運転(起動・再開・--report)は安いモデル(Sonnet)の新しいセッションで回す**(2026-07-14 ユーザ裁定:
+判断はscript側にあり、AIは起動と報告だけ。上位モデルの長大セッションで回すと起動のたび高コスト)。
+**上位モデルが要るのは裁定だけ**(不一致tsvのレビュー)= 溜まってからまとめて依頼する。
 ```
 python scripts/_gemini-genre-verify.py             # queue先頭から429まで(background推奨)
 python scripts/_gemini-genre-verify.py --report    # 突合レポート+不一致tsv
