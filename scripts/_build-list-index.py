@@ -213,7 +213,8 @@ for f in _files:
     sidx.append({
         "slug": d["slug"], "title": d["title"], "title_kana": d["title_kana"],
         "title_romaji": d["title_romaji"],
-        "alt": [v for v in [alt.get("en"), alt.get("fr"), alt.get("de"), alt.get("it"), alt.get("pt")] if v],
+        "alt": [v for v in [alt.get("en"), alt.get("fr"), alt.get("de"), alt.get("it"), alt.get("pt")] if v]
+               + [s for s in (d.get("synonyms") or []) if s],  # ★synonymsも検索可(2026-07-14: 統合頁の巻別題=ソーサリアン型)
         "au": [a.get("name") for a in aus if a.get("name")]
               + [a.get("name") for a in oaus if a.get("name")]
               + [c.get("name") for c in (d.get("credits") or []) if c.get("name")],
