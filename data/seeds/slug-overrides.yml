@@ -106,42 +106,6 @@ osananajimi-wa-faiaaman: osananajimi-wa-fireman
 oshare-majo-rabu-ando-berry: oshare-majo-love-and-berry
 ouji-ni-dekiai-saretakunai-node-motopurinsesu-desu-dansou-shitsuji-ni-narimasu: ouji-ni-dekiai-saretakunai-node-motoprincess-desu-dansou-shitsuji-ni-narimasu
 overrides:
-  mahouka-koukou-no-rettousei:
-    at: '2026-07-10'
-    reason: plain頁=3作混成(スティープル1-2/夏休み3/よんこま4-8重複)の解体→スティープルチェース編に確定
-    slug: mahouka-koukou-no-rettousei-steeplechase-hen
-  botsu-chan-no-jidai-1989:
-    at: '2026-07-10'
-    reason: 5部作の統合再建+誤ローマ字slug是正(botsu→bocchan)。ユーザ指摘=ヨミが第2部(秋の舞姫)に化けていた
-    slug: bocchan-no-jidai
-  mahouka-koukou-no-rettousei-2012:
-    at: '2026-07-10'
-    reason: 魔法科=編名slug化(year-suffix Wave3・Wiki編構成確証)
-    slug: mahouka-koukou-no-rettousei-nyuugaku-hen
-  mahouka-koukou-no-rettousei-2018:
-    at: '2026-07-10'
-    reason: 魔法科=編名slug化(year-suffix Wave3・Wiki編構成確証)
-    slug: mahouka-koukou-no-rettousei-shizoku-kaigi-hen
-  mahouka-koukou-no-rettousei-2016:
-    at: '2026-07-10'
-    reason: 魔法科=編名slug化(year-suffix Wave3・Wiki編構成確証)
-    slug: mahouka-koukou-no-rettousei-raihousha-hen
-  mahouka-koukou-no-rettousei-2017-2:
-    at: '2026-07-10'
-    reason: 魔法科=編名slug化(year-suffix Wave3・Wiki編構成確証)
-    slug: mahouka-koukou-no-rettousei-double-seven-hen
-  mahouka-koukou-no-rettousei-2017:
-    at: '2026-07-10'
-    reason: 魔法科=編名slug化(year-suffix Wave3・Wiki編構成確証)
-    slug: mahouka-koukou-no-rettousei-natsuyasumi-hen
-  to-heart-2-2005:
-    at: '2026-07-10'
-    reason: 3作合体の解体=この頁をTo Heart(高雄右京1998)に確定(year-suffix Wave2)
-    slug: to-heart
-  2011-ritsu-kiwamemichi-koukou-2011:
-    at: '2026-07-10'
-    reason: 私立→2011立の誤パースslug是正(year-suffix見直しWave1)
-    slug: shiritsu-kiwamemichi-koukou-2011
   008-uchuutoshizerozerohachi:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -162,6 +126,12 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: 2001-ya-monogatari
+  2011-ritsu-kiwamemichi-koukou-2011:
+    at: '2026-07-10'
+    reason: 私立→2011立の誤パースslug是正(year-suffix見直しWave1)
+    slug: shiritsu-kiwamemichi-koukou-2011
+  2050-raishisu-2050:
+    slug: crisis-2050
   aahananoouendan:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -254,6 +224,8 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: akagami-elf-no-osouzai-ya-san
+  akage-no-an-1983:
+    slug: akage-no-an-sugimoto-1983
   akai-kami-no-shounen:
     at: '2026-06-26'
     reason: slug衝突edge:incumbent誤slug退避
@@ -586,6 +558,10 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: boruto-naruto-next-generations-story-guide-before-the-reversal
+  botsu-chan-no-jidai-1989:
+    at: '2026-07-10'
+    reason: 5部作の統合再建+誤ローマ字slug是正(botsu→bocchan)。ユーザ指摘=ヨミが第2部(秋の舞姫)に化けていた
+    slug: bocchan-no-jidai
   boukenkyoujidai:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -618,6 +594,8 @@ overrides:
     at: '2026-07-02'
     reason: ハイフン規則違反是正(楽天分かち書き「ビャクヤ ゾウシ」整列・綴り既存保持)
     slug: byakuya-zoushi
+  c-2011:
+    slug: c-minor
   can-you-do-asachun-with-me-for-save-the-worldsekaiwosukuutamenitsugutotoasachundekimasuka:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -654,6 +632,8 @@ overrides:
     at: '2026-07-02'
     reason: ハイフン規則違反是正(楽天分かち書き「チカラ ノ アリカ」整列・綴り既存保持)
     slug: chikara-no-arika
+  chikyuu-no-himitsu-2006:
+    slug: chikyuu-no-himitsu-ooiwa-2006
   chikyuugaiseimeitaiiiba:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -714,6 +694,10 @@ overrides:
     at: '2026-06-16'
     reason: 主版が従版slugに誤収容・無印復帰
     slug: crusher-joe
+  d-n-ei-2:
+    at: '2026-07-07'
+    reason: 英字題D・N・A²のAをエイとカナ転写した誤slug是正(dedupで空いた正slugへ。ユーザ指摘)
+    slug: d-n-a2
   daboshatsunoten:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -942,6 +926,8 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: fitness-gym-zoo-ningen-doubutsuen
+  forward-1999:
+    slug: forward-kondou-1999
   fudeoroshi:
     at: '2026-07-02'
     reason: ハイフン規則違反是正(楽天分かち書き「フデ オロシ」整列・綴り既存保持)
@@ -1050,6 +1036,8 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: gendai-shisou-no-sounanshatachi
+  genji-monogatari-egawa-1991:
+    slug: genji-monogatari-egawa-2001
   genkaiotakugagisoukoibitohajimetaken:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -1254,6 +1242,8 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: haru-ni-nareba-kusa-no-ame
+  hashire-merosu-2010:
+    slug: hashire-merosu-hirooka-2010
   hashirehaiji:
     at: '2026-07-02'
     reason: ハイフン規則違反是正(楽天分かち書き「ハシレ ハイジ」整列・綴り既存保持)
@@ -1402,6 +1392,8 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: houkago-date-club
+  ibitsu-2020:
+    slug: ibitsu-kurosaki-2020
   ichibyousakiwakoi:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -1466,6 +1458,8 @@ overrides:
     at: '2026-07-02'
     reason: ハイフン規則違反是正(楽天分かち書き「イッキ マンダラ」整列・綴り既存保持)
     slug: ikki-mandara
+  imagine-2020:
+    slug: toyoda-minoru-tanpenshuu
   imamadebakanisareteitakiyowareijounitenseishitaratondemonaikotoninatta:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -1494,6 +1488,8 @@ overrides:
     at: '2026-06-16'
     reason: flag精査:単独候補/本編を無印化
     slug: inma-no-ikenie
+  innocent-1995:
+    slug: innocent-teradate-1995
   inochikakerukaa:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -1658,6 +1654,8 @@ overrides:
     at: '2026-06-26'
     reason: 重複dedup:incumbent⊂candidate(完全版採用)
     slug: iyahaya-atami-kun
+  jesus-christ-1986:
+    slug: jesus-christ-higuchi-1986
   jidankoushouninemu:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -2514,6 +2512,30 @@ overrides:
     at: '2026-06-16'
     reason: 主版が従版slugに誤収容・無印復帰
     slug: mahou-o-shinjirukai
+  mahouka-koukou-no-rettousei:
+    at: '2026-07-10'
+    reason: plain頁=3作混成(スティープル1-2/夏休み3/よんこま4-8重複)の解体→スティープルチェース編に確定
+    slug: mahouka-koukou-no-rettousei-steeplechase-hen
+  mahouka-koukou-no-rettousei-2012:
+    at: '2026-07-10'
+    reason: 魔法科=編名slug化(year-suffix Wave3・Wiki編構成確証)
+    slug: mahouka-koukou-no-rettousei-nyuugaku-hen
+  mahouka-koukou-no-rettousei-2016:
+    at: '2026-07-10'
+    reason: 魔法科=編名slug化(year-suffix Wave3・Wiki編構成確証)
+    slug: mahouka-koukou-no-rettousei-raihousha-hen
+  mahouka-koukou-no-rettousei-2017:
+    at: '2026-07-10'
+    reason: 魔法科=編名slug化(year-suffix Wave3・Wiki編構成確証)
+    slug: mahouka-koukou-no-rettousei-natsuyasumi-hen
+  mahouka-koukou-no-rettousei-2017-2:
+    at: '2026-07-10'
+    reason: 魔法科=編名slug化(year-suffix Wave3・Wiki編構成確証)
+    slug: mahouka-koukou-no-rettousei-double-seven-hen
+  mahouka-koukou-no-rettousei-2018:
+    at: '2026-07-10'
+    reason: 魔法科=編名slug化(year-suffix Wave3・Wiki編構成確証)
+    slug: mahouka-koukou-no-rettousei-shizoku-kaigi-hen
   mahounoaidorupasuteruyuumi:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -2682,6 +2704,8 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: mitsume-no-yumeji
+  miyazawa-kenji-mangakan-1985:
+    slug: miyazawa-kenji-mangakan-yamada-1985
   mizunotawamure:
     at: '2026-07-02'
     reason: ハイフン規則違反是正(楽天分かち書き「ミズ ノ タワムレ」整列・綴り既存保持)
@@ -3234,6 +3258,8 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: rengoku-hyouryuu
+  reset-2005:
+    slug: reset-tsutsui-2005
   revantenokurotaishi:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -3258,6 +3284,8 @@ overrides:
     at: '2026-07-02'
     reason: ハイフン規則違反是正(楽天分かち書き「ロボット ケイジ」整列・綴り既存保持)
     slug: robotto-keiji
+  roodosutou-senki-1997:
+    slug: roodosutou-senki-ochi-1994
   ryojou-mystery-special-2020:
     at: '2026-06-16'
     reason: 主版が従版slugに誤収容・無印復帰
@@ -3462,6 +3490,10 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: shatoun-special
+  sherlock-ooinaru-game:
+    at: '2026-07-08'
+    reason: Jay.のSHERLOCK(角川)を全5巻1シリーズに統合しクリーンslug化(ユーザ指摘・副題=volume_label)
+    slug: sherlock
   shiataaapparekanketsuhen:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -3654,6 +3686,8 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: sono-mukou-no-mukougawa
+  sonshi-1993:
+    slug: sonshi-murano-1993
   soraniochiru:
     at: '2026-07-02'
     reason: ハイフン規則違反是正(楽天分かち書き「ソラ ニ オチル」整列・綴り既存保持)
@@ -3746,6 +3780,8 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: tiger-mask-nisei
+  takeda-shingen-1987:
+    slug: takeda-shingen-koike-1987
   takemitsuzamurai:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -3774,6 +3810,8 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: tap-kun-no-tantei-shitsu
+  task-1987:
+    slug: task-kasahara-1987
   teifaniideyakusokuo:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -3794,6 +3832,8 @@ overrides:
     at: '2026-06-16'
     reason: flag精査:単独候補/本編を無印化
     slug: ten-yori-takaku
+  tenchi-muyou-1986:
+    slug: tenchi-muyou
   tennootoko:
     at: '2026-07-02'
     reason: ハイフン規則違反是正(楽天分かち書き「テン ノ オトコ」整列・綴り既存保持)
@@ -3830,6 +3870,10 @@ overrides:
     at: '2026-07-02'
     reason: ハイフン規則違反是正(楽天分かち書き「テツ オ ベルッタ」整列・綴り既存保持)
     slug: tetsu-o-berutta
+  to-heart-2-2005:
+    at: '2026-07-10'
+    reason: 3作合体の解体=この頁をTo Heart(高雄右京1998)に確定(year-suffix Wave2)
+    slug: to-heart
   toaru-kagaku-no-railgun-2025:
     at: '2026-06-16'
     reason: 主版が従版slugに誤収容・無印復帰
@@ -3922,6 +3966,10 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: uchi-no-luka-nara
+  uchuu-battleship-yamato:
+    at: '2026-07-11'
+    reason: battleship=意訳英語でslug規則違反+本番未公開の今が安値。家族パターン(-matsumoto)に合わせ姓suffix
+    slug: uchuu-senkan-yamato-hijiri
   uchuusenkanyamato:
     at: '2026-06-26'
     reason: 'slug衝突suffix(同名異作/サブ): 同題だが別作画(松本零士版 vs ひおあきら版)・ISBN重なりなし=別'
@@ -4154,18 +4202,6 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: zoukin-to-houseki
-  d-n-ei-2:
-    slug: d-n-a2
-    at: '2026-07-07'
-    reason: 英字題D・N・A²のAをエイとカナ転写した誤slug是正(dedupで空いた正slugへ。ユーザ指摘)
-  sherlock-ooinaru-game:
-    slug: sherlock
-    at: '2026-07-08'
-    reason: Jay.のSHERLOCK(角川)を全5巻1シリーズに統合しクリーンslug化(ユーザ指摘・副題=volume_label)
-  uchuu-battleship-yamato:
-    at: '2026-07-11'
-    slug: uchuu-senkan-yamato-hijiri
-    reason: battleship=意訳英語でslug規則違反+本番未公開の今が安値。家族パターン(-matsumoto)に合わせ姓suffix
 paradise-6238: paradise-taguchi-1998
 pet-2032: pet-himawari-2002
 piasu-no-rannaa: piasu-no-runner
