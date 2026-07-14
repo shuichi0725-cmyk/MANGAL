@@ -192,11 +192,16 @@ for klass, r in targets:
     if not (title and ym and isbn and len(isbn) == 13 and auths):
         holds.append((klass, isbn, title, "必須欠け(author/ym)")); continue
     slug = _make_slug(base, r.get("titleKana"), existing)
-    if not slug:                                                  # 空slug/衝突=hold(2026化禁止)
+    if not slug:
         slug = _make_slug(base, r.get("titleKana"))
         if not slug:
             holds.append((klass, isbn, title, "slug生成不可")); continue
-        slug = f"{slug}-{ym[:4]}"
+        # ★同名異作品の衝突=規則「-姓+発売年」(chuka-ichiban-manabe1993型)。裸の-西暦は禁止(shion-2026事故 2026-07-14)
+        _ak = author_names(r.get("authorKana"))
+        _sr = re.sub(r"[^a-z0-9]", "", kana2romaji(_ak[0].split()[0])) if _ak else ""
+        if not _sr:
+            holds.append((klass, isbn, title, "slug衝突(著者ヨミ無し=姓suffix不可hold)")); continue
+        slug = f"{slug}-{_sr}{ym[:4]}"
         if slug in existing:
             holds.append((klass, isbn, title, f"slug衝突 {slug}")); continue
     existing.add(slug)

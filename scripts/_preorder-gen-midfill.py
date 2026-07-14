@@ -128,7 +128,12 @@ for r in cls["ex_mid"]:
         holds.append((r.get("isbn"), title, "slug生成不可")); continue
     romaji = slug.replace("-", " ")
     if slug in existing:
-        slug = f"{slug}-{ym[:4]}"
+        # ★同名異作品の衝突=規則「-姓+発売年」(chuka-ichiban-manabe1993型)。裸の-西暦は禁止(shion-2026事故 2026-07-14)
+        from _slug_kana_lib import kana2romaji as _k2r
+        _sr = re.sub(r"[^a-z0-9]", "", _k2r(akanas[0].split()[0])) if akanas else ""
+        if not _sr:
+            holds.append((r.get("isbn"), title, "slug衝突(著者ヨミ無し=姓suffix不可hold)")); continue
+        slug = f"{slug}-{_sr}{ym[:4]}"
         if slug in existing:
             holds.append((r.get("isbn"), title, f"slug衝突 {slug}")); continue
     existing.add(slug)
