@@ -5,7 +5,7 @@
 editions/volumes全体・synopsis・tags・credits・alternative_titles 等の重い部分は除外 = props/転送を軽量化。
 loadData.loadMangaListIndex() がこれを読む。検証(loadData)は別途 manga.v2 を読む promote が担保。
 """
-import sys, json, glob, time, os
+import sys, json, glob, time, os, re
 sys.stdout.reconfigure(encoding="utf-8")
 import yaml
 try: from yaml import CSafeLoader as L
@@ -106,12 +106,19 @@ def cover_of(d):
     return None
 
 # ★cover軽量化: 楽天サムネの共通prefix/default suffixを剥がし可変部のみ保存(= lib/coverSlim.ts fullCover で復元)
+# ★2026-07-14 判定緩和: 従来「prefix+suffix完全一致」のみ短縮→suffix無しURL(Kobo補完等)が
+#   フルのまま6,100件ドリフトした。prefix一致だけで剥がす(復元は常に?_ex=200x200付与=カード200px統一)。
+#   別クエリ付き(?)だけ例外でフル保持。
 _RK_PRE = "https://thumbnail.image.rakuten.co.jp/@0_mall/"
 _RK_SUF = "?_ex=200x200"
 def slim_cover(c):
-    if c and c.startswith(_RK_PRE) and c.endswith(_RK_SUF):
-        return c[len(_RK_PRE):-len(_RK_SUF)]
-    return c
+    if not c or not c.startswith(_RK_PRE):
+        return c
+    rest = c[len(_RK_PRE):]
+    rest = re.sub(r"\?_ex=\d+x\d+$", "", rest)   # ?_ex=200x200/300x300等のリサイズ指定は剥がす(復元=200x200統一)
+    if "?" in rest:
+        return c   # 想定外クエリ付きはフルのまま(復元で壊さない)
+    return rest
 
 # 引数: [1]=src manga ディレクトリ (既定 data/manga.v2)、 [2]=出力ディレクトリ (既定 DATA)。
 #   プレビュー用: python _build-list-index.py .preview-data/manga public
@@ -184,8 +191,9 @@ for f in _files:
         "cover": slim_cover(cover_of(d)),
         "year_started": d["year_started"], "year_ended": d.get("year_ended"),
         "status": d.get("status"), "catch": d.get("catch"),
-        "authors": [{"name": a.get("name"), "role": a.get("role"), "kana": a.get("kana") or ""} for a in aus],
-        "original_authors": [{"name": a.get("name"), "kana": a.get("kana") or ""} for a in oaus],
+        # ★authors圧縮(2026-07-14): "name\tkana"パック文字列(role廃止=一覧で未使用)。復元=listIndexDecode
+        "authors": [(f"{a.get('name')}\t{a.get('kana')}" if a.get("kana") else str(a.get("name"))) for a in aus],
+        "original_authors": [(f"{a.get('name')}\t{a.get('kana')}" if a.get("kana") else str(a.get("name"))) for a in oaus],
         "genres": gs, "themes": themes_of(d), "demographic": d.get("demographic"),
         "publisher": pub, "publishers": d.get("publishers") or [],
         "magazine": d.get("magazine"), "awards": d.get("awards"),
@@ -194,11 +202,11 @@ for f in _files:
         "latest_date": latest[:7] if latest else None,
         "first_volume_date": fvd,
         "popularity": d.get("popularity"), "score": d.get("score"),
-        **({"solo_nonfirst": True} if solo_nonfirst else {}),
-        **({"vol_gap": True} if vol_gap else {}),
-        **({"cover_gap": True} if cover_gap else {}),
-        **({"_anthology": True} if d.get("_anthology") else {}),
-        **({"_slugfix": True, "_slugfix_new": d.get("_slugfix_new")} if d.get("_slugfix") else {}),
+        # ★診断フラグはビットフィールド1列に圧縮(2026-07-14。復元=listIndexDecode。null列5本の水増し解消)
+        **({"fl": (1 if solo_nonfirst else 0) | (2 if vol_gap else 0) | (4 if cover_gap else 0)
+                  | (8 if d.get("_anthology") else 0) | (16 if d.get("_slugfix") else 0)}
+           if (solo_nonfirst or vol_gap or cover_gap or d.get("_anthology") or d.get("_slugfix")) else {}),
+        **({"_slugfix_new": d.get("_slugfix_new")} if d.get("_slugfix") else {}),
     })
     # ② 検索索引(検索専用) = matchText が必要とする text のみ (= 検索時だけ遅延ロード)
     alt = d.get("alternative_titles") or {}
@@ -237,11 +245,16 @@ LIST_FIELDS = [
     "status", "authors", "original_authors", "genres", "themes", "demographic",
     "publisher", "publishers", "magazine", "awards", "anime_adapted", "total_volumes",
     "max_edition_volumes", "latest_date", "first_volume_date", "popularity", "score",
-    "solo_nonfirst", "vol_gap", "cover_gap", "_anthology", "_slugfix", "_slugfix_new",
+    "fl", "_slugfix_new",
 ]
 out = os.path.join(OUTDIR, "manga-list-index.json")
 json.dump({"f": LIST_FIELDS, "d": [[m.get(f) for f in LIST_FIELDS] for m in idx]},
           open(out, "w", encoding="utf-8"), ensure_ascii=False, separators=(",", ":"))
+# ★head索引(2026-07-14): 人気順先頭200件=初回描画用(~80KB)。コールドスタートの体感対策。
+_head = sorted(idx, key=lambda x: -(x.get("popularity") or 0))[:200]
+hout = os.path.join(OUTDIR, "manga-list-head.json")
+json.dump({"f": LIST_FIELDS, "d": [[m.get(f) for f in LIST_FIELDS] for m in _head]},
+          open(hout, "w", encoding="utf-8"), ensure_ascii=False, separators=(",", ":"))
 catch_out = os.path.join(OUTDIR, "manga-catch-index.json")
 catch_map = {m["slug"]: m["catch"] for m in idx if m.get("catch")}
 # ★増分: 既存catch(別ファイル=list rowに載らない)を非変更作分だけ取り込む(catch消失防止)。
@@ -251,6 +264,12 @@ if UPDATE_STEMS is not None and os.path.exists(catch_out):
         if _sl not in _changed and _sl not in catch_map:
             catch_map[_sl] = _c
 json.dump(catch_map, open(catch_out, "w", encoding="utf-8"), ensure_ascii=False, separators=(",", ":"))
+# ★alt索引(2026-07-14): 別名・英題の2段目照合用(題名ヒット0の時だけ遅延fetch)。
+aout = os.path.join(OUTDIR, "manga-alt-index.json")
+json.dump({m["slug"]: m["alt"] for m in sidx if m.get("alt")},
+          open(aout, "w", encoding="utf-8"), ensure_ascii=False, separators=(",", ":"))
+# ★旧検索索引: 移行期間のみ出し続ける(キャッシュ済み旧HTMLが参照)。新クライアントは使わない。
+#   TODO(2026-08頃): 全キャッシュ失効後にこの3行とR2上のファイルを削除
 SEARCH_FIELDS = ["slug", "title", "title_kana", "title_romaji", "alt", "au"]
 sout = os.path.join(OUTDIR, "manga-search-index.json")
 json.dump({"f": SEARCH_FIELDS, "d": [[m.get(f) for f in SEARCH_FIELDS] for m in sidx]},

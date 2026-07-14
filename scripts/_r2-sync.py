@@ -66,7 +66,8 @@ def main():
     # public/ の索引は **preview専用(1400件subset)** で、next export が out/ にそのまま継承する。
     # 上書きせず R2 同期すると本番の一覧/検索が 1400件になる。ここで data/ の本番索引で必ず上書きする。
     import shutil
-    _IDX = ("manga-list-index.json", "manga-search-index.json", "manga-catch-index.json")
+    _IDX = ("manga-list-index.json", "manga-search-index.json", "manga-catch-index.json",
+            "manga-list-head.json", "manga-alt-index.json")
     for name in _IDX:
         src = os.path.join(ROOT, "data", name)
         dst = os.path.join(OUT, name)

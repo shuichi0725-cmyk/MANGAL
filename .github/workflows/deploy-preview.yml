@@ -60,6 +60,8 @@ jobs:
           cp .preview-data/manga-list-index.json public/manga-list-index.json
           cp .preview-data/manga-search-index.json public/manga-search-index.json
           cp .preview-data/manga-catch-index.json public/manga-catch-index.json
+          cp .preview-data/manga-list-head.json public/manga-list-head.json
+          cp .preview-data/manga-alt-index.json public/manga-alt-index.json
           echo "preview index entries:"; node -e "console.log('list', require('./public/manga-list-index.json').d.length, '/ search', require('./public/manga-search-index.json').d.length)"
 
       - name: Build Next.js (preview subset → out/)

@@ -18,7 +18,7 @@ import {
   type MangaListItem,
   type ListBundle,
 } from "./schema";
-import { fullCover } from "./coverSlim";
+import { decodeListIndex } from "./listIndexDecode";
 import { z } from "zod";
 
 // MANGAL_DATA_DIR でデータルートを差し替え可(= サンプル/プレビュー build 用)。 既定 = ./data
@@ -29,21 +29,8 @@ const DATA_DIR = process.env.MANGAL_DATA_DIR
 // 一覧用 軽量索引 (= data/manga-list-index.json)。 トップ/一覧/フィルタ/カードはこれを使う
 // (= full manga.v2 を props で送らない = 数十MB → 数MB)。 build 時生成 (_build-list-index.py)。
 let _listIndex: MangaListItem[] | null = null;
-// ★軽量化: 索引は {f:フィールド順, d:値配列[]} の配列形式 → ここで MangaListItem[] に復元
-//   (client useMangaIndex と同じデコード)。 旧形式(オブジェクト配列)も互換。
-function decodeListIndex(raw: unknown): MangaListItem[] {
-  if (Array.isArray(raw)) return raw as MangaListItem[];
-  const { f, d } = raw as { f: string[]; d: unknown[][] };
-  return d.map((arr) => {
-    const o: Record<string, unknown> = {};
-    for (let i = 0; i < f.length; i++) {
-      const v = arr[i];
-      if (v !== null && v !== undefined) o[f[i]] = v;
-    }
-    if (o.cover) o.cover = fullCover(o.cover as string) as string; // cover は slim → full URL に復元
-    return o as unknown as MangaListItem;
-  });
-}
+// ★軽量化: 索引は {f,d} 配列形式 → 共有デコーダ(listIndexDecode)で復元(2026-07-14 一本化。
+//   fl ビットフィールド展開・authorsパック復元も共通処理=client/serverのドリフト封じ)。
 export function loadMangaListIndex(): MangaListItem[] {
   if (_listIndex) return _listIndex;
   const p = path.join(DATA_DIR, "manga-list-index.json");

@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import type { MangaListItem, MangaSearchItem } from "./schema";
-import { fullCover } from "./coverSlim";
+import { decodeListIndex } from "./listIndexDecode";
 
 // ★一覧索引をクライアントで遅延ロード (= SSR props で 65k を送らない)。
 //   /manga-list-index.json を一度だけ fetch → module キャッシュで全ページ共有。
@@ -11,23 +11,15 @@ import { fullCover } from "./coverSlim";
 //   ここでオブジェクトに復元(デコード層)するので、コンポーネントは無改修で m.title 等が使える。
 //   catch は別ファイル(manga-catch-index.json)を遅延ロードして後から merge = カード維持・主索引軽量。
 type RawIndex = { f: string[]; d: unknown[][] };
-let _cache: MangaListItem[] | null = null;
+let _cache: MangaListItem[] | null = null;       // head(部分) → full に置換される
+let _cacheIsFull = false;
 let _inflight: Promise<MangaListItem[]> | null = null;
 let _catchLoaded = false;
 const _catchListeners = new Set<() => void>();
+// ★head→full 置換をフックへ通知(2026-07-14 コールドスタート対策: 先頭200件で即描画→全件差替)
+const _indexListeners = new Set<() => void>();
 
-function decode(raw: RawIndex): MangaListItem[] {
-  const { f, d } = raw;
-  return d.map((arr) => {
-    const o: Record<string, unknown> = {};
-    for (let i = 0; i < f.length; i++) {
-      const v = arr[i];
-      if (v !== null && v !== undefined) o[f[i]] = v; // null は欠落扱い(= 既存の任意フィールドと同じ)
-    }
-    if (o.cover) o.cover = fullCover(o.cover as string) as string; // cover は slim → full URL に復元
-    return o as unknown as MangaListItem;
-  });
-}
+const decode = decodeListIndex; // 共有デコーダ(fl展開・authorsパック復元・cover復元)
 
 function loadCatch(): void {
   if (_catchLoaded || !_cache) return;
@@ -46,15 +38,31 @@ function loadCatch(): void {
 }
 
 function fetchIndex(): Promise<MangaListItem[]> {
-  if (_cache) return Promise.resolve(_cache);
+  if (_cacheIsFull && _cache) return Promise.resolve(_cache);
   if (_inflight) return _inflight;
-  _inflight = fetch("/manga-list-index.json")
+  // ★2段読み(2026-07-14): head(人気順200件・~80KB)で即描画→本体(全件)が届いたら差替。
+  //   head が無い環境(旧ビルド)でも本体だけで動く(fail-open)。
+  const headP: Promise<void> = _cache
+    ? Promise.resolve()
+    : fetch("/manga-list-head.json")
+        .then((r) => (r.ok ? r.json() : null))
+        .then((raw: RawIndex | null) => {
+          if (raw && !_cache) {
+            _cache = decode(raw);
+            _indexListeners.forEach((fn) => fn());
+          }
+        })
+        .catch(() => {});
+  _inflight = headP
+    .then(() => fetch("/manga-list-index.json"))
     .then((r) => {
       if (!r.ok) throw new Error(`索引取得失敗 ${r.status}`);
       return r.json();
     })
     .then((raw: RawIndex) => {
       _cache = decode(raw);
+      _cacheIsFull = true;
+      _indexListeners.forEach((fn) => fn());
       loadCatch(); // catch は非同期で後から merge(カードは一瞬遅れて出る)
       return _cache;
     })
@@ -64,12 +72,16 @@ function fetchIndex(): Promise<MangaListItem[]> {
   return _inflight;
 }
 
-/** 一覧索引を返す。 未ロード時は null。 catch ロード完了時は再レンダーで反映。 */
+/** 一覧索引を返す。 未ロード時は null。 head→full差替/catchロード完了時は再レンダーで反映。 */
 export function useMangaIndex(): MangaListItem[] | null {
   const [data, setData] = useState<MangaListItem[] | null>(_cache);
   const [, force] = useState(0);
   useEffect(() => {
     let alive = true;
+    const onIndex = () => {
+      if (alive) setData(_cache);
+    };
+    _indexListeners.add(onIndex);
     fetchIndex().then((d) => {
       if (alive) setData(d);
     });
@@ -80,6 +92,7 @@ export function useMangaIndex(): MangaListItem[] | null {
     else _catchListeners.add(onCatch);
     return () => {
       alive = false;
+      _indexListeners.delete(onIndex);
       _catchListeners.delete(onCatch);
     };
   }, []);

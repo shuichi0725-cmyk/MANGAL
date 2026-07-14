@@ -14,11 +14,11 @@ import {
   emptyFilterState,
   filtersFromSearchParams,
   authorsWithKana,
-  searchMatches,
   yearBounds,
 } from "@/lib/filters";
+import { onAltLoaded, prewarmSearch, searchSlugs } from "@/lib/clientSearch";
 import type { ArtBook, ListBundle, MangaListItem } from "@/lib/schema";
-import { useMangaIndex, useSearchIndex } from "@/lib/useMangaIndex";
+import { useMangaIndex } from "@/lib/useMangaIndex";
 
 type Props = { data: ListBundle };
 
@@ -89,13 +89,19 @@ export default function HomeClient({ data }: Props) {
   const liveData = useMemo(() => ({ ...data, manga }), [data, manga]);
   const indexLoading = mangaIndex === null;
 
-  // ★検索は別索引(検索索引)を query 有の時だけ遅延ロード → matchedSlugs を一覧 filter と AND 合成。
+  // ★検索v2(2026-07-14): 検索専用索引を廃止し一覧索引を共有(前計算haystack+逐次絞り込み+2段照合)。
+  //   alt(別名)は題名ヒット0の時だけ遅延fetch → 到着したら altTick で再検索。
   const hasQuery = state.query.trim().length > 0;
-  const searchIndex = useSearchIndex(hasQuery);
-  const searchLoading = hasQuery && searchIndex === null;
+  const [altTick, setAltTick] = useState(0);
+  useEffect(() => onAltLoaded(() => setAltTick((v) => v + 1)), []);
+  useEffect(() => {
+    if (mangaIndex) prewarmSearch(mangaIndex); // 手すきで前計算(検索開始時のワンショット遅延を消す)
+  }, [mangaIndex]);
+  const searchLoading = hasQuery && mangaIndex === null;
   const matchedSlugs = useMemo(
-    () => (hasQuery ? searchMatches(state.query, searchIndex ?? []) : null),
-    [hasQuery, state.query, searchIndex],
+    () => (hasQuery ? searchSlugs(state.query, manga) : null),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [hasQuery, state.query, manga, altTick],
   );
 
   const bounds = useMemo(() => yearBounds(manga), [manga]);

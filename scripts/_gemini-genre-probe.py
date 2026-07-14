@@ -15,7 +15,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUT_DIR = f"{ROOT}/.cache/gemini-genre"
 os.makedirs(OUT_DIR, exist_ok=True)
 OUT = f"{OUT_DIR}/results.jsonl"
-MODEL = "gemini-3.1-flash-lite"
+MODEL = os.environ.get("GEMINI_MODEL") or (sys.argv[1] if len(sys.argv) > 1 else "gemini-3.1-flash-lite")  # quota到達時は別モデルで継続可(モデル毎に独立)
 
 env = {}
 for ln in open(f"{ROOT}/.env.local", encoding="utf-8"):

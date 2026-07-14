@@ -49,6 +49,7 @@ B=NDL新着回収(納本済み過去分)。毎日でなくてよい(間隔が空
 - □ **作者kana**=楽天authorKana由来 or 空(捏造なし。漢字混入0を確認)
 - □ **preview=今回のみ**(増加分・前回draft混入0・捏造kana hold済)
 - □ **索引skip 0**(Zod検証で落ちる頁=検索に載るが404)
+- □ **索引衛生** `python scripts/_audit-index-hygiene.py data`(cover slim全行/スキーマ/head/alt。2026-07-14新設ゲート)
 - □ **`--commit-prev` 実行済み**(処理完了後のみ。件数確認だけの日は実行しない)
 - □ ★**slug-gate-pending.tsv を確認**(2026-07-14内蔵のヨミ一致ゲート: 装置が題を誤読した疑い
   =剣聖ken-hijiri型がここに落ちる。行があれば当該slugを手裁定=ヨミ基準で正す。

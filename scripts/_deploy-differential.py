@@ -37,7 +37,8 @@ WORKER = "https://mangal-db.com"  # 2026-07-04 カスタムドメイン開通(wo
 # 漫画頁のHTML/チャンクに影響するコード面(ここが動いたら部分ビルド禁止)
 CODE_SCOPE = ["app/manga", "app/layout.tsx", "app/globals.css", "components", "lib",
               "next.config.ts", "package.json", "tailwind.config.ts"]
-IDX = ("manga-list-index.json", "manga-search-index.json", "manga-catch-index.json")
+IDX = ("manga-list-index.json", "manga-search-index.json", "manga-catch-index.json",
+       "manga-list-head.json", "manga-alt-index.json")
 MASTERS = ("demographics.yml", "genres.yml", "magazines.yml", "publisher-aliases.yml",
            "publishers.yml", "slug-aliases.yml") + IDX
 

@@ -151,6 +151,14 @@ def main():
         else:
             ok(f"本番索引 鮮度 {age:.1f} 日")
 
+    # 7. ★索引衛生監査(2026-07-14 新設: cover短縮漏れ/スキーマドリフト/head・alt整合。fail=ビルド禁止)
+    r = subprocess.run([sys.executable, os.path.join(ROOT, "scripts", "_audit-index-hygiene.py"), "data"],
+                       capture_output=True, text=True)
+    if r.returncode == 0:
+        ok("索引衛生(cover slim/スキーマ/head/alt) = OK")
+    else:
+        fail("索引衛生NG", (r.stdout or "") + (r.stderr or ""))
+
     print(f"\n結果: FAIL {len(fails)} / WARN {len(warns)}")
     if fails:
         print("★ビルド開始禁止。上のFAILを直してから再実行。")
