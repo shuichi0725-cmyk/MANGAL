@@ -14,6 +14,7 @@ title/synonyms/staff を一括取得(id_in 50件/req)し、うちのDBと突合:
   python scripts/_anime-season-adjudicate.py --dry    # 書き込まず判定だけ表示
 """
 import argparse, json, os, re, sys, time, unicodedata, urllib.request
+from _idx_authors import au_name  # ★索引v2 authorsパック対応(2026-07-14)
 
 sys.stdout.reconfigure(encoding="utf-8")
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -118,8 +119,8 @@ def main():
         t2s.setdefault(norm(row[it]), []).append(row[isl])
         # ★original_authors も含める (= LN原作アニメのrelationノードはラノベ本体のことがあり、
         #   その著者は頁のoriginal側に居る。ヘルモード=ハム男 型。2026-07-12)
-        authors[row[isl]] = {norm(x.get("name")) for x in (row[ia] or [])} | \
-                            {norm(x.get("name")) for x in (row[io] or [])}
+        authors[row[isl]] = {norm(au_name(x)) for x in (row[ia] or [])} | \
+                            {norm(au_name(x)) for x in (row[io] or [])}
 
     n_acc = n_stay = 0
     out_rows = []
