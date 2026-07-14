@@ -3,7 +3,7 @@
 - [巻抜け仮想](volgap_virtual_tool_trigger.md) — 正=skill volgap-audit
 - [【再利用】2026新刊蒸留フロー](distill_2026_pipeline.md) — NDL発見→preview生成→3段fill→AI enrichの全記録
 - [preview実測+stale事故史](preview_deploy_pitfalls.md) — 正=skill test-deploy/display-bug-triage
-- [軽量索引2分割(一覧+検索)](lightweight_index_architecture.md) — 65k直送せずクライアント遅延fetch。_build-list-index.py
+- [軽量索引=検索v2で一覧共有](lightweight_index_architecture.md) — 検索索引廃止・authorsパック・消費者は必ず共通デコーダ(_idx_authors.py/listIndexDecode.ts)
 - [【必ず使う】統合台帳](intake_manifest_ledger_live.md) — data/seeds/intake-manifest/=操作集約+holes。新cleanup前に参照
 - [NDL漫画判定=NDC726.1](ndl_manga_filter_ndc726.md) — 権威判定。小説/画集/雑誌除外
 - [【戒め】勝手に仕事を増やすな](feedback_dont_inflate_work.md) — コア済んだら言い切る、続きはユーザ指示まで
@@ -141,7 +141,9 @@
 - [【残】鬼太郎本編の多版正規化](kitaro_honpen_multiedition_pending.md) — トリガー=鬼太郎本編やって
 - [TinyFish=WebFetch補完](tinyfish_web_fetch.md) — 正=skill tinyfish
 - [Cloudflareアクセス解析](cloudflare_analytics_access.md) — 正=skill cf-analytics(_cf-analytics.py)
-- [進行中状態2026-07-12](inflight_state_2026_07_12.md) — 週次済/新積み上げ/保留キュー/試し読みskill
+- [進行中状態2026-07-15](inflight_state_2026_07_15.md) — 本番待ち2,300頁(ドラフト1,091+検索v2)・preview=2026-05絞り・次=週次
+- [ソーサリアン統合=保留中](sorcerian_consolidation_state.md) — トリガー「ソーサリアン本番化して」=旧9頁dedup+RelatedWorksガード
+- [slug衝突=姓+年・裸西暦禁止](slug_collision_year_rule.md) — 生成器3箇所修正済。rename正規ルート=overrides+aliases
 - [【方針】1件のバグ=型と疑う](feedback_one_bug_means_a_class.md) — 署名化→全DB掃引(全件目視)→検出器script化→月次サニティ登録まで一続き
 - [kobo見直しセット復元](kobo_review_preview_set.md) — トリガー「kobo見直ししたい」=302作をpreviewへ(slug一覧=preview-sets/)
 - [D:外付け認識外れ→挿し直し待ちのみ](d_drive_external_flaky.md) — レター探索/変更は絶対しない

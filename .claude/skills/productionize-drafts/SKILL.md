@@ -28,8 +28,11 @@ python scripts/_preorder-productionize.py --keep-preview  # 本番化するがpr
 git add data/seeds/preorder-pages data .preview-data   # ★data/manga.v2はgitignore対象=addに入れると失敗してchainが切れる(2026-07-11)
 git commit -m "予約ドラフト本番化 N件(preorder-pages恒久・週次で公開)"
 git push
+python scripts/_exists.py --build   # ★ISBN索引再構築(2026-07-14: これを忘れると次のclassifyが既掲載ISBNをskipできず二重ドラフト化)
 ```
 - 変更slugは `.cache/preorders/last-promoted.json` に出る。commitメッセージに件数を入れる。
+- ★slug渡しは内部でファイル経由(--slugs-file/--update-file 2026-07-14)=1,000件級もWindowsコマンドライン長制限(WinError206)に当たらない。
+- ★特定作を本番化から外したい時(ソーサリアン型hold)=対象ymlを一時 `.cache/` に退避→実行→戻す。
 
 ## この skill が「やらない」こと (= 誤解防止)
 - ★**R2ライブ公開はしない**。preorder-pages/manga.v2(データ+git)まで。**実際に本番サイト(mangal-r2)に出るのは「週次蒸留して」**(フルpromote+R2 sync)。ユーザ設計どおり「溜める→週次でまとめて公開」。

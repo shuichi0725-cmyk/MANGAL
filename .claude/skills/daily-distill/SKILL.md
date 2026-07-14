@@ -138,6 +138,9 @@ python scripts/_verify-kana-pending.py --limit 200
 - `rakuten-kana-pending.jsonl` のpendingを古い順にNDL by-ISBN照合。
 - 一致→confirmed / 不一致→`kana-mismatch.tsv`(slug直しの人間判断へ) / **NDL未収載→pendingのまま残る=漏れない**。
 - 比較は巻番号・上下巻ヨミ差(「〜1」「ジョウカン」)を許容(2026-07-06 偽陽性4→0実証)。
+- ★**不一致の裁定型**(2026-07-14 15件実戦): **偽陽性**=NDL側の巻マーカー`(001)`/副題有無/スペース・中黒差=対応不要。
+  **実修正型**=①頁kana末尾に巻数読み(イチ)混入→剥離 ②slug誤読(魔眼=ma-me型)→ヨミ基準でrename
+  ③**NDL改題型**=増補改訂で実題が変わったのに楽天旧題のまま(アスペルガー→自閉スペクトラム症)。NDL by-ISBN=ground truthで題/kana/slug更新。
 
 ## D. 締め: カレンダー/新刊データ更新
 

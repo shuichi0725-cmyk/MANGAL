@@ -40,3 +40,9 @@ metadata:
 - ★ローカル`next build`の「a[d] is not a function / Could not find /_error」は**.next古いキャッシュの偽陽性**(CIフレッシュは通る)。鵜呑みにせずCI(REST API)で確認。
 - 結果: **一覧索引(常時) 51.1→26.1MB(-49%)** / 検索索引(遅延) 13.7→10.1MB / catch(遅延) 5.9MB。
 - 未実施(B): 検索索引のtitle/title_kana重複削除(一覧索引からslug join・-4MB)=matchText改修要・検索コアなので保留。awards等は消さず空省略(将来使う・[[index_lightening_plan]])。
+
+## ★検索v2+索引v3(2026-07-14 会議決定・実装済)
+- **検索専用索引を廃止し一覧索引を共有**: `lib/clientSearch.ts` searchSlugs=初回1回だけhaystack前計算→includes照合。2段(①題名系title/kana/subtitle+かな→ローマ字形 ②著者)+③別名=`manga-alt-index.json`(1.96MB遅延fetch)。逐次絞り込み(①ヒットのみ再利用)。romaji列廃止=クエリ側romaji→かな変換+collapseVowels(wanpi-su/wanpiisu同一視)。旧検索索引は移行期のみ併出(TODO 2026-08撤去)。
+- **authors列パック**: `"name\tkana"`のタブ区切り文字列(role廃止)。5フラグ列→**flビットフィールド**(1=solo_nonfirst/2=vol_gap/4=cover_gap/8=_anthology/16=_slugfix)。cover slim拡張=任意`?_ex=NxN`も剥ぐ(復元は常に200x200)。**headファイル**`manga-list-head.json`(人気上位200行87KB)=先行表示→full差替。alt索引はalternative_titles+synonyms+**巻title_displayの純副題**(ソーサリアン型)を拾う。一覧22.0MB。
+- ★**消費者ルール(ドリフト封じ・実害で確立)**: 索引を読む側は必ず共通デコーダ経由=TS `lib/listIndexDecode.ts` / Python `scripts/_idx_authors.py`(au_name/au_kana/au_names・旧dict互換)。生読み`.get("name")`は即死、`isinstance(a,dict)`ガードは**黙って空集合**(preorder-gen-previewの親slug継承が音なし無効化=最悪型)。2026-07-14に7script修正+anime-season-viewのcover slim未展開(生成物へ生slim書込=次回再生成で書影全滅)も同型で修正。
+- **恒久ゲート**: `_audit-index-hygiene.py`(cover slim漏れ/authors形式/head整合/行数急減)=週次preflight step7でFAIL・日次チェックリスト入り。ガードテスト`lib/listIndexDecode.test.ts` 7本。

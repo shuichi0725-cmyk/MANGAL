@@ -21,6 +21,9 @@ python scripts/_prodwait-to-preview.py --push      # 投入+索引+カレンダ�
 5. 索引再構築+**skip診断は内部slugで**(ファイル名≠slugのslug-override頁を誤検出しない)+原因分類。`genre:other`=既知クラス(本番索引も同様にskip)=報告のみで止めない
 6. previewカレンダー再生成(src=preview自身)
 
+## オプション運用
+- **日付絞り**(2026-07-14 ユーザ運用): 投入後「最新巻の発売日が YYYY-MM 以降だけに絞って」= 各頁の全版・versions・variants込みの最新release_dateで判定し、それ未満のymlをpreviewから削除→索引+previewカレンダー再生成。**実体(manga.v2/seeds)は無傷**=表示の間引きだけ・週次には全部乗る。preview専用ドラフト(sorcerian等)は特例で残す。
+
 ## NEVER / 罠
 - **push後15-20分・追いpush禁止**(test-deployと同じ)
 - 本番R2へは出さない(公開は「週次蒸留して」のみ)
