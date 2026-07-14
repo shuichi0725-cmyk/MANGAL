@@ -38,9 +38,14 @@ def main():
         build(); return
     d = json.load(open(IDX, encoding="utf-8"))
     f = d["f"]; si = f.index("slug"); ti = f.index("title"); ai = f.index("authors")
+    def au0(v):
+        # 索引v2(2026-07-14)はauthorsを"name\tkana"パック文字列で持つ(旧dict形式も互換)
+        if not v: return ""
+        a = v[0]
+        return a.split("\t")[0] if isinstance(a, str) else a.get("name", "")
     if "--title" in args:
         q = args[args.index("--title") + 1]
-        hits = [(r[si], r[ti], (r[ai] or [{}])[0].get("name", "") if r[ai] else "") for r in d["d"] if q in str(r[ti])]
+        hits = [(r[si], r[ti], au0(r[ai])) for r in d["d"] if q in str(r[ti])]
         for h in hits[:20]:
             print(f"  {h[0]:40} {h[1][:24]} {h[2]}")
         print(f"title『{q}』: {len(hits)}件")
