@@ -9,6 +9,9 @@ export function computeRelated(manga: Manga, all: Manga[], limit = 10) {
   const names = new Set(
     [...manga.authors, ...manga.original_authors].map((a) => a.name),
   );
+  // ★多人数名義ガード(2026-07-15 ソーサリアン型=単巻読切連番の統合頁・著者14人):
+  //   著者5人以上の頁は「同作者」スコアを使わない(各作家の全作品が無関係に並ぶため)。pin/シリーズ一致のみ。
+  const manyAuthors = names.size >= 5;
   const t = manga.title;
   // ★pin: related_pin の slug は順序保持で最優先(例: ドラえもん→大長編ドラえもん)
   const pinRank = new Map((manga.related_pin ?? []).map((s, i) => [s, i]));
@@ -28,7 +31,7 @@ export function computeRelated(manga: Manga, all: Manga[], limit = 10) {
       score += 10;
       why = "シリーズ";
     }
-    const shared = [...m.authors, ...m.original_authors].some((a) => names.has(a.name));
+    const shared = !manyAuthors && [...m.authors, ...m.original_authors].some((a) => names.has(a.name));
     if (shared) {
       score += 5;
       if (!why) why = "同作者";
