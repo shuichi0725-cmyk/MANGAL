@@ -22946,8 +22946,7 @@ volumes:
   edition_type: standard
   source: percase-fix
   added_at: '2026-07-13'
-  note: 是正2026-07-13=旧値9784434380822はレジーナ文庫(小説文庫版4巻2026-07)の混入。真の漫画4巻=レジーナCOMICS
-    9784434329593(楽天2023-11-30・文月路亜/ナカノムラアヤスケ)。同題小説3系統(ブックス/文庫)混入型
+  note: 是正2026-07-13=旧値9784434380822はレジーナ文庫(小説文庫版4巻2026-07)の混入。真の漫画4巻=レジーナCOMICS 9784434329593(楽天2023-11-30・文月路亜/ナカノムラアヤスケ)。同題小説3系統(ブックス/文庫)混入型
 - series_keys:
   - name:タカ氏|name:転生ババァは見過ごせない!|sub:元悪徳女帝の二周目ライフ
   - name:ナカノムラアヤスケ|name:転生ババァは見過ごせない!
@@ -25772,3 +25771,532 @@ volumes:
   source: stale-backfill
   added_at: '2026-07-11'
   note: seed非バック巻の一括固定(2026-07-11掃引=フルpromoteで消える1951巻。過去のper-case/harvest直書き分)
+- series_keys:
+  - name:玉崎たま|name:無力聖女と無能王女
+  qid: null
+  number: 4
+  isbn13: '9784825101227'
+  release_date: '2026-09-16'
+  pages: null
+  publisher: 一迅社
+  edition_type: standard
+  title_display: 無力聖女と無能王女〜魔力ゼロで召喚された聖女の異世界救国記〜(4)
+  source: rakuten-preorder
+  added_at: '2026-07-14'
+  note: 楽天予約ハーベスト① slug=muryoku-seijo-to-munou-joou
+- series_keys: &id029
+  - name:あいだいろ|name:地縛少年花子くん
+  qid: null
+  number: 26
+  isbn13: '9784301006657'
+  release_date: '2026-11-27'
+  pages: null
+  publisher: スクウェア・エニックス
+  edition_type: standard
+  title_display: 地縛少年 花子くん（26）
+  source: rakuten-preorder
+  added_at: '2026-07-14'
+  note: 楽天予約ハーベスト① slug=jibaku-shounen-hanako-kun
+- series_keys:
+  - qid:Q8966383|name:つぐもも
+  qid: null
+  number: 37
+  isbn13: '9784575862713'
+  release_date: '2026-09-26'
+  pages: null
+  publisher: 双葉社
+  edition_type: standard
+  title_display: つぐもも（37）
+  source: rakuten-preorder
+  added_at: '2026-07-14'
+  note: 楽天予約ハーベスト① slug=tsugumomo
+- series_keys:
+  - qid:Q136004682|name:冒険には、武器が必要だ!
+  - qid:Q136004682|name:冒険には、武器が必要だ!|sub:こだわりルディの鍛冶屋ぐらし
+  qid: null
+  number: 5
+  isbn13: '9784575862676'
+  release_date: '2026-09-10'
+  pages: null
+  publisher: 双葉社
+  edition_type: standard
+  title_display: 冒険には、武器が必要だ！〜こだわりルディの鍛冶屋ぐらし〜（5）
+  source: rakuten-preorder
+  added_at: '2026-07-14'
+  note: 楽天予約ハーベスト① slug=bouken-ni-wa-buki-ga-hitsuyou-da
+- series_keys:
+  - qid:Q17129767|name:小林さんちのメイドラゴン エルマのOL日記
+  qid: null
+  number: 12
+  isbn13: '9784575862669'
+  release_date: '2026-09-10'
+  pages: null
+  publisher: 双葉社
+  edition_type: standard
+  title_display: 小林さんちのメイドラゴン エルマのOL日記（12）
+  source: rakuten-preorder
+  added_at: '2026-07-14'
+  note: 楽天予約ハーベスト① slug=kobayashi-san-no-meidoragon-eruma-no-ooeru-nikki
+- series_keys:
+  - qid:Q11270830|name:派遣戦士山田のり子
+  qid: null
+  number: 25
+  isbn13: '9784575946345'
+  release_date: '2026-09-10'
+  pages: null
+  publisher: 双葉社
+  edition_type: standard
+  title_display: 派遣戦士 山田のり子（25）
+  source: rakuten-preorder
+  added_at: '2026-07-14'
+  note: 楽天予約ハーベスト① slug=haken-suit-yamada-noriko
+- series_keys:
+  - qid:Q11380501|name:美味の異国飯
+  qid: null
+  number: 3
+  isbn13: '9784575862690'
+  release_date: '2026-09-10'
+  pages: null
+  publisher: 双葉社
+  edition_type: standard
+  title_display: 美味の異国飯（3）
+  source: rakuten-preorder
+  added_at: '2026-07-14'
+  note: 楽天予約ハーベスト① slug=bimi-no-ikoku-meshi
+- series_keys:
+  - qid:Q17129767|name:小林さんちのメイドラゴン
+  qid: null
+  number: 20
+  isbn13: '9784575862645'
+  release_date: '2026-09-10'
+  pages: null
+  publisher: 双葉社
+  edition_type: standard
+  title_display: 小林さんちのメイドラゴン（20）
+  source: rakuten-preorder
+  added_at: '2026-07-14'
+  note: 楽天予約ハーベスト① slug=kobayashisanchi-no-meidoragon
+- series_keys:
+  - qid:Q17129767|name:小林さんちのメイドラゴン お篭りぐらしのファフニール
+  qid: null
+  number: 7
+  isbn13: '9784575862652'
+  release_date: '2026-09-10'
+  pages: null
+  publisher: 双葉社
+  edition_type: standard
+  title_display: 小林さんちのメイドラゴン お篭りぐらしのファフニール（7）
+  source: rakuten-preorder
+  added_at: '2026-07-14'
+  note: 楽天予約ハーベスト① slug=kobayashi-san-no-meidoragon-okomorigurashi-no-fafuniiru
+- series_keys: *id029
+  qid: null
+  number: 26
+  isbn13: '9784301006664'
+  release_date: '2026-11-27'
+  pages: null
+  publisher: スクウェア・エニックス
+  edition_type: standard
+  title_display: 地縛少年 花子くん（26）特装版　つやつやシール付き
+  source: rakuten-preorder
+  added_at: '2026-07-14'
+  note: 楽天予約ハーベスト① slug=jibaku-shounen-hanako-kun
+- series_keys:
+  - name:子供の子|name:ダンジョンのある世界で賢く健やかに生きる方法
+  - name:子供の子|name:ダンジョンのある世界で賢く健やかに生きる方法.
+  qid: null
+  number: 9
+  isbn13: '9784575425123'
+  release_date: '2026-09-30'
+  pages: null
+  publisher: 双葉社
+  edition_type: standard
+  title_display: ダンジョンのある世界で賢く健やかに生きる方法（9）
+  source: rakuten-preorder
+  added_at: '2026-07-14'
+  note: 楽天予約ハーベスト① slug=dungeon-no-aru-sekai-de-kashikoku-sukoyaka-ni-ikiru-houhou
+- series_keys:
+  - name:kodamazon|name:追放された鍛冶師はチートスキルで伝説を作りまくる|sub:婚約者に店を追い出されたけど、気ままにモノ作っていられる今の方が幸せです
+  - name:添宋|name:追放された鍛冶師はチートスキルで伝説を作りまくる
+  qid: null
+  number: 6
+  isbn13: '9784575425116'
+  release_date: '2026-09-30'
+  pages: null
+  publisher: 双葉社
+  edition_type: standard
+  title_display: 追放された鍛冶師はチートスキルで伝説を作りまくる〜婚約者に店を追い出されたけど、気ままにモノ作っていられる今の方が幸せです〜（6）
+  source: rakuten-preorder
+  added_at: '2026-07-14'
+  note: 楽天予約ハーベスト① slug=tsuihousareta-sareta-kajishi-wa-cheat-skill-de-densetsu-o-tsukurimakuru
+- series_keys:
+  - name:へいろー|name:その門番、最強につき|sub:追放された防御力9999の戦士、王都の門番として無双する
+  qid: null
+  number: 10
+  isbn13: '9784575425093'
+  release_date: '2026-09-30'
+  pages: null
+  publisher: 双葉社
+  edition_type: standard
+  title_display: その門番、最強につき〜追放された防御力9999の戦士、王都の門番として無双する〜（10）
+  source: rakuten-preorder
+  added_at: '2026-07-14'
+  note: 楽天予約ハーベスト① slug=sono-monban-saikyou-ni-tsuki
+- series_keys:
+  - name:山川まち|name:事故物件探偵
+  qid: null
+  number: 3
+  isbn13: '9784825101005'
+  release_date: '2026-09-30'
+  pages: null
+  publisher: 一迅社
+  edition_type: standard
+  title_display: 事故物件探偵　3巻
+  source: rakuten-preorder
+  added_at: '2026-07-14'
+  note: 楽天予約ハーベスト① slug=jiko-bukken-tantei
+- series_keys:
+  - name:ふわいにむ|name:悪役のご令息のどうにかしたい日常
+  qid: null
+  number: 8
+  isbn13: '9784825101456'
+  release_date: '2026-09-30'
+  pages: null
+  publisher: 一迅社
+  edition_type: standard
+  title_display: 悪役のご令息のどうにかしたい日常　8巻
+  source: rakuten-preorder
+  added_at: '2026-07-14'
+  note: 楽天予約ハーベスト① slug=akuyaku-no-go-reisoku-no-dounika-shitai-nichijou
+- series_keys:
+  - name:gacchi|name:冴えない加護持ち令嬢、孤高の王子様に見初められる
+  qid: null
+  number: 3
+  isbn13: '9784575425062'
+  release_date: '2026-09-28'
+  pages: null
+  publisher: 双葉社
+  edition_type: standard
+  title_display: 冴えない加護持ち令嬢、孤高の王子様に見初められる〜美貌の妹に言いなりの家族を捨てたら、真の能力が開花しました〜（3）
+  source: rakuten-preorder
+  added_at: '2026-07-14'
+  note: 楽天予約ハーベスト① slug=saenai-kago-mochi-reijou-kokou-no-ouji-sama-ni-misomerareru
+- series_keys:
+  - name:空地大乃|name:砂魔法で砂の王国を作ろう
+  qid: null
+  number: 4
+  isbn13: '9784825101357'
+  release_date: '2026-09-26'
+  pages: null
+  publisher: 一迅社
+  edition_type: standard
+  title_display: 砂魔法で砂の王国を作ろう 〜砂漠に追放されたから頑張って祖国以上の国家を建ててみた〜(4)
+  source: rakuten-preorder
+  added_at: '2026-07-14'
+  note: 楽天予約ハーベスト① slug=suna-mahou-de-suna-no-oukoku-o-tsukurou
+- series_keys:
+  - name:まるせい|name:「お前を追放する」追放されたのは俺ではなく無口な魔法少女でした
+  qid: null
+  number: 6
+  isbn13: '9784825101395'
+  release_date: '2026-09-26'
+  pages: null
+  publisher: 一迅社
+  edition_type: standard
+  title_display: 「お前を追放する」追放されたのは俺ではなく無口な魔法少女でした(6)
+  source: rakuten-preorder
+  added_at: '2026-07-14'
+  note: 楽天予約ハーベスト① slug=omae-o-tsuihousareta-suru-tsuihousareta-sareta-no-wa-ore-dewa-naku-mukuchi-na-mahou-shoujo-deshita
+- series_keys:
+  - name:ナニン|name:どうも、物欲の聖女です
+  qid: null
+  number: 3
+  isbn13: '9784825101371'
+  release_date: '2026-09-26'
+  pages: null
+  publisher: 一迅社
+  edition_type: standard
+  title_display: どうも、物欲の聖女です〜無双スキル「クリア報酬」で盛大に勘違いされました〜(3)
+  source: rakuten-preorder
+  added_at: '2026-07-14'
+  note: 楽天予約ハーベスト① slug=doumo-butsuyoku-no-seijo-desu
+- series_keys:
+  - name:宇月あい|name:十億のアレ。
+  qid: null
+  number: 10
+  isbn13: '9784302125586'
+  release_date: '2026-09-24'
+  pages: null
+  publisher: ハーパーコリンズ・ジャパン
+  edition_type: standard
+  title_display: 十億のアレ。〜吉原いちの花魁〜 10
+  source: rakuten-preorder
+  added_at: '2026-07-14'
+  note: 楽天予約ハーベスト① slug=juuoku-no-are
+- series_keys:
+  - qid:Q11668955|name:ぼくらはまだ空の夢を見ない
+  qid: null
+  number: 3
+  isbn13: '9784575340174'
+  release_date: '2026-09-17'
+  pages: null
+  publisher: 双葉社
+  edition_type: standard
+  title_display: ぼくらはまだ空の夢を見ない（3）
+  source: rakuten-preorder
+  added_at: '2026-07-14'
+  note: 楽天予約ハーベスト① slug=bokura-wa-mada-sora-no-yume-o-minai
+- series_keys:
+  - name:Garine|name:ジャンル、変えさせて頂きます!
+  - name:KEN|name:ジャンル、変えさせて頂きます!
+  qid: null
+  number: 5
+  isbn13: '9784825101234'
+  release_date: '2026-09-17'
+  pages: null
+  publisher: 一迅社
+  edition_type: standard
+  title_display: ジャンル、変えさせて頂きます！（5）
+  source: rakuten-preorder
+  added_at: '2026-07-14'
+  note: 楽天予約ハーベスト① slug=janru-kaesasete-itadakimasu
+- series_keys:
+  - name:Lefaljinf|name:お姉様、今世では私が王妃よ
+  qid: null
+  number: 3
+  isbn13: '9784825101241'
+  release_date: '2026-09-17'
+  pages: null
+  publisher: 一迅社
+  edition_type: standard
+  title_display: お姉様、今世では私が王妃よ（3）
+  source: rakuten-preorder
+  added_at: '2026-07-14'
+  note: 楽天予約ハーベスト① slug=onee-sama-konsei-dewa-watashi-ga-ouhi-yo
+- series_keys:
+  - qid:Q11668955|name:グランマの憂鬱
+  qid: null
+  number: 20
+  isbn13: '9784575340167'
+  release_date: '2026-09-17'
+  pages: null
+  publisher: 双葉社
+  edition_type: standard
+  title_display: グランマの憂鬱（20）
+  source: rakuten-preorder
+  added_at: '2026-07-14'
+  note: 楽天予約ハーベスト① slug=guranma-no-yuuutsu
+- series_keys:
+  - name:しめさば|name:たゆたう煙は掴めない
+  qid: null
+  number: 3
+  isbn13: '9784825101197'
+  release_date: '2026-09-15'
+  pages: null
+  publisher: 一迅社
+  edition_type: standard
+  title_display: たゆたう煙は掴めない(3)
+  source: rakuten-preorder
+  added_at: '2026-07-14'
+  note: 楽天予約ハーベスト① slug=tayutau-kemuri-wa-tsukamenai
+- series_keys:
+  - name:furu|name:ひなたとお兄ちゃん
+  qid: null
+  number: 3
+  isbn13: '9784825101166'
+  release_date: '2026-09-15'
+  pages: null
+  publisher: 一迅社
+  edition_type: standard
+  title_display: ひなたとお兄ちゃん(3)
+  source: rakuten-preorder
+  added_at: '2026-07-14'
+  note: 楽天予約ハーベスト① slug=hinata-to-onii-chan
+- series_keys:
+  - name:ドルチェ|name:おっさん底辺治癒士と愛娘の辺境ライフ
+  qid: null
+  number: 17
+  isbn13: '9784575425055'
+  release_date: '2026-09-15'
+  pages: null
+  publisher: 双葉社
+  edition_type: standard
+  title_display: おっさん底辺治癒士と愛娘の辺境ライフ〜中年男が回復スキルに覚醒して、英雄へ成り上がる〜（17）
+  source: rakuten-preorder
+  added_at: '2026-07-14'
+  note: 楽天予約ハーベスト① slug=otsu-san-teihen-chiyushi-to-manamusume-no-henkyou-life
+- series_keys:
+  - name:Gisces|name:余命一年の公爵子息は、旅をしたい
+  qid: null
+  number: 3
+  isbn13: '9784575425000'
+  release_date: '2026-09-15'
+  pages: null
+  publisher: 双葉社
+  edition_type: standard
+  title_display: 余命一年の公爵子息は、旅をしたい（3）
+  source: rakuten-preorder
+  added_at: '2026-07-14'
+  note: 楽天予約ハーベスト① slug=yomei-ichinen-no-koushaku-shisoku-wa-tabi-o-shitai
+- series_keys:
+  - name:こがれ|name:社畜の俺、ドラゴンに懐かれたのでペット配信を始めます
+  qid: null
+  number: 4
+  isbn13: '9784575425017'
+  release_date: '2026-09-15'
+  pages: null
+  publisher: 双葉社
+  edition_type: standard
+  title_display: 社畜の俺、ドラゴンに懐かれたのでペット配信を始めます〜チビッ子ドラゴンとモンスター牧場ライフ〜（4）
+  source: rakuten-preorder
+  added_at: '2026-07-14'
+  note: 楽天予約ハーベスト① slug=shachiku-no-ore-dragon-ni-natsukareta-node-pet-haishin-o-hajimemasu
+- series_keys:
+  - name:蒼井美紗|name:転生したら平民でした。
+  - name:赤井てら|name:転生したら平民でした。|sub:生活水準に耐えられないので貴族を目指します
+  qid: null
+  number: 8
+  isbn13: '9784575425024'
+  release_date: '2026-09-15'
+  pages: null
+  publisher: 双葉社
+  edition_type: standard
+  title_display: 転生したら平民でした。〜生活水準に耐えられないので貴族を目指します〜（8）
+  source: rakuten-preorder
+  added_at: '2026-07-14'
+  note: 楽天予約ハーベスト① slug=tensei-shitara-heimin-deshita
+- series_keys:
+  - name:てんまそ|name:白衣の英雄
+  qid: null
+  number: 12
+  isbn13: '9784575425031'
+  release_date: '2026-09-15'
+  pages: null
+  publisher: 双葉社
+  edition_type: standard
+  title_display: 白衣の英雄（12）
+  source: rakuten-preorder
+  added_at: '2026-07-14'
+  note: 楽天予約ハーベスト① slug=hakui-no-eiyuu
+- series_keys:
+  - name:齊藤万丈|name:限界!推し活伝説YOSHIO
+  qid: null
+  number: 8
+  isbn13: '9784098547746'
+  release_date: '2026-09-11'
+  pages: null
+  publisher: 小学館
+  edition_type: standard
+  title_display: 限界！推し活伝説 YOSHIO（8）
+  source: rakuten-preorder
+  added_at: '2026-07-14'
+  note: 楽天予約ハーベスト① slug=genkai-oshikatsu-densetsu-yoshio
+- series_keys:
+  - qid:Q6389358|name:ねこねこ日本史
+  qid: null
+  number: 18
+  isbn13: '9784408642116'
+  release_date: '2026-09-10'
+  pages: null
+  publisher: 実業之日本社
+  edition_type: standard
+  title_display: ねこねこ日本史（18）
+  source: rakuten-preorder
+  added_at: '2026-07-14'
+  note: 楽天予約ハーベスト① slug=neko-neko-nihonshi
+- series_keys:
+  - name:日之影ソラ|name:偽者に奪われた聖女の地位、なんとしても取り返さ……なくていっか!
+  qid: null
+  number: 4
+  isbn13: '9784575424966'
+  release_date: '2026-09-10'
+  pages: null
+  publisher: 双葉社
+  edition_type: standard
+  title_display: 偽者に奪われた聖女の地位、なんとしても取り返さ……なくていっか！（4）
+  source: rakuten-preorder
+  added_at: '2026-07-14'
+  note: 楽天予約ハーベスト① slug=nisemono-ni-ubawareta-seijo-no-chii-nantoshitemo-torikaesa-nakute-ikka
+- series_keys:
+  - name:星見うさぎ|name:落ちこぼれダメ令嬢は溺愛されて生まれ変わります!?
+  qid: null
+  number: 4
+  isbn13: '9784575424959'
+  release_date: '2026-09-10'
+  pages: null
+  publisher: 双葉社
+  edition_type: standard
+  title_display: 落ちこぼれダメ令嬢は溺愛されて生まれ変わります！？〜褒められるのが嬉しくて頑張っていたら規格外の才能が開花しました〜（4）
+  source: rakuten-preorder
+  added_at: '2026-07-14'
+  note: 楽天予約ハーベスト① slug=ochikobore-dame-reijou-wa-dekiai-sarete-umarekawarimasu
+- series_keys:
+  - name:やきいもほくほく|name:牢の中で目覚めた悪役令嬢は死にたくない
+  - name:風ことら|name:牢の中で目覚めた悪役令嬢は死にたくない|sub:処刑を回避したら、待っていたのは溺愛でした
+  - name:風ことら|name:牢の中で目覚めた悪役令嬢は死にたくない|sub:処刑を回避したら、待っていたのは溺愛でした.
+  qid: null
+  number: 7
+  isbn13: '9784575424973'
+  release_date: '2026-09-10'
+  pages: null
+  publisher: 双葉社
+  edition_type: standard
+  title_display: 牢の中で目覚めた悪役令嬢は死にたくない〜処刑を回避したら、待っていたのは溺愛でした〜（7）
+  source: rakuten-preorder
+  added_at: '2026-07-14'
+  note: 楽天予約ハーベスト① slug=rou-no-naka-de-mezameta-akuyaku-reijou-wa-shinitakunai
+- series_keys:
+  - name:しっぽタヌキ|name:「お前が代わりに死ね」と言われた私。妹の身代わりに冷酷な辺境伯のもとへ嫁ぎ、幸せを手に入れる
+  - name:まろ|name:「お前が代わりに死ね」と言われた私。妹の身代わりに冷酷な辺境伯のもとへ嫁ぎ、幸せを手に入れる
+  - name:まろ|name:「お前が代わりに死ね」と言われた私。妹の身代わりに冷酷な辺境伯のもとへ嫁ぎ、幸せを手に入れる.
+  qid: null
+  number: 6
+  isbn13: '9784575424980'
+  release_date: '2026-09-10'
+  pages: null
+  publisher: 双葉社
+  edition_type: standard
+  title_display: 「お前が代わりに死ね」と言われた私。妹の身代わりに冷酷な辺境伯のもとへ嫁ぎ、幸せを手に入れる（6）
+  source: rakuten-preorder
+  added_at: '2026-07-14'
+  note: 楽天予約ハーベスト① slug=omae-ga-kawari-ni-shine-to-iwareta-watashi-imouto-no-migawari-ni-reikoku-na-henkyou-no-moto-e
+- series_keys:
+  - name:中西モトオ|name:鬼人幻燈抄
+  qid: null
+  number: 11
+  isbn13: '9784575441291'
+  release_date: '2026-09-09'
+  pages: null
+  publisher: 双葉社
+  edition_type: standard
+  title_display: 鬼人幻燈抄（11）
+  source: rakuten-preorder
+  added_at: '2026-07-14'
+  note: 楽天予約ハーベスト① slug=kijin-gentoushou
+- series_keys:
+  - name:古屋雄作|name:おはよう!うんこ先生
+  - name:古屋雄作|name:おはよう!うんこ先生.
+  qid: null
+  number: 9
+  isbn13: '9784868451532'
+  release_date: '2026-09-03'
+  pages: null
+  publisher: 文響社
+  edition_type: standard
+  title_display: おはよう！うんこ先生　9
+  source: rakuten-preorder
+  added_at: '2026-07-14'
+  note: 楽天予約ハーベスト① slug=ohayou-unko-sensei
+- series_keys:
+  - name:神堂潤|name:red Eyes
+  qid: null
+  number: 28
+  isbn13: '9784065442975'
+  release_date: '2026-08-17'
+  pages: null
+  publisher: 講談社
+  edition_type: standard
+  title_display: redEyes（28）
+  source: rakuten-preorder
+  added_at: '2026-07-14'
+  note: 楽天予約ハーベスト① slug=red-eyes
