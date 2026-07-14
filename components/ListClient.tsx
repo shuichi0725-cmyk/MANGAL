@@ -70,9 +70,28 @@ export default function ListClient({ data }: { data: ListBundle }) {
     window.history.replaceState(null, "", url.toString());
   }, [q]);
   // ★既定=人気順(2026-07-11 ユーザ仕様: 検索前のデフォルトは人気順)
-  const [sort, setSort] = useState<SortId>("popularity");
-  const [sortTouched, setSortTouched] = useState(false);
-  const [limit, setLimit] = useState(200);
+  // ★表示件数(n)/並び順(s)もURLから復元(2026-07-14 ユーザ報告「さらに表示→詳細→戻るで先頭に戻る」。qと同じ手法)
+  const [sort, setSort] = useState<SortId>(() => {
+    if (typeof window === "undefined") return "popularity";
+    const s = new URLSearchParams(window.location.search).get("s");
+    return SORTS.some((x) => x.id === s) ? (s as SortId) : "popularity";
+  });
+  const [sortTouched, setSortTouched] = useState<boolean>(
+    () => typeof window !== "undefined" && new URLSearchParams(window.location.search).has("s"),
+  );
+  const [limit, setLimit] = useState<number>(() => {
+    if (typeof window === "undefined") return 200;
+    const n = parseInt(new URLSearchParams(window.location.search).get("n") || "", 10);
+    return Number.isFinite(n) && n > 200 ? n : 200;
+  });
+  useEffect(() => {
+    const url = new URL(window.location.href);
+    if (limit > 200) url.searchParams.set("n", String(limit));
+    else url.searchParams.delete("n");
+    if (sortTouched) url.searchParams.set("s", sort);
+    else url.searchParams.delete("s");
+    window.history.replaceState(null, "", url.toString());
+  }, [limit, sort, sortTouched]);
   const [slugfixOnly, setSlugfixOnly] = useState(false);
 
   useEffect(() => {
@@ -92,6 +111,22 @@ export default function ListClient({ data }: { data: ListBundle }) {
   const bounds = useMemo(() => yearBounds(manga), [manga]);
   const authors = useMemo(() => authorsWithKana(manga, true), [manga]);
   const nActive = activeCount(state);
+
+  // ★スクロール位置の復元(詳細→戻る): 遷移時にsessionStorageへ保存(下のLink onClick)→
+  //   索引ロード後に復元。head先行(200件)→full到着で高さが伸びるため、目標に届くまで再試行し
+  //   届いた時点(or full到着後)でキーを消す。
+  useEffect(() => {
+    if (indexLoading) return;
+    const sv = sessionStorage.getItem("mangal-list-scroll");
+    if (sv == null) return;
+    const y = Number(sv);
+    requestAnimationFrame(() => {
+      window.scrollTo(0, y);
+      if (Math.abs(window.scrollY - y) < 2 || manga.length > 250) {
+        sessionStorage.removeItem("mangal-list-scroll");
+      }
+    });
+  }, [indexLoading, manga]);
 
   const rows = useMemo(() => {
     let r = applyFilters(manga, state);
@@ -220,7 +255,11 @@ export default function ListClient({ data }: { data: ListBundle }) {
                     {m._slugfix && m._slugfix_new && m._slugfix_new !== m.slug && (
                       <span className="block whitespace-nowrap font-mono text-[10px] font-bold text-emerald-600">→ {m._slugfix_new}</span>
                     )}
-                    <Link href={`/manga/${m.slug}`} className="spring-press block whitespace-nowrap font-medium text-[#1f4e79] active:underline">
+                    <Link
+                      href={`/manga/${m.slug}`}
+                      onClick={() => sessionStorage.setItem("mangal-list-scroll", String(window.scrollY))}
+                      className="spring-press block whitespace-nowrap font-medium text-[#1f4e79] active:underline"
+                    >
                       {m.title}
                     </Link>
                   </div>
