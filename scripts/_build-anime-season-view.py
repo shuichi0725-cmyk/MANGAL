@@ -19,9 +19,19 @@ SEASON_ORDER = {"WINTER": 0, "SPRING": 1, "SUMMER": 2, "FALL": 3}
 li = json.load(open(INDEX, encoding="utf-8"))
 f = li["f"]
 isl, it, ic, ia = f.index("slug"), f.index("title"), f.index("cover"), f.index("authors")
+
+
+def full_cover(c):
+    # ★索引coverはslim形(可変部のみ 2026-07-14索引v2)。lib/coverSlim.tsのfullCoverと同一の展開。
+    #   ここで復元しないと消費側(app/anime/[season])は生値を<CoverImage>に渡すため書影全滅する。
+    if not c:
+        return None
+    return c if str(c).startswith("http") else "https://thumbnail.image.rakuten.co.jp/@0_mall/" + str(c) + "?_ex=200x200"
+
+
 info = {}
 for r in li["d"]:
-    info[r[isl]] = {"title": r[it], "cover": r[ic],
+    info[r[isl]] = {"title": r[it], "cover": full_cover(r[ic]),
                     "authors": [au_name(a) for a in (r[ia] or [])][:2]}
 
 seasons = {}
