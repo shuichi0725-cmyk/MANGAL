@@ -52,6 +52,12 @@ def clean_title(title):
             t = t[:m.start()].strip()
         t = _VOL_TAIL.sub("", t).strip()      # 末尾巻番号 (N)/第N巻/裸N
         t = _ATCOMIC.sub("", t).strip()       # @COMIC
+        # ★題中の巻数+副題型(2026-07-14 アメと傷2型): 「base N 副題文」→ base+副題に分離
+        #   (巻数は捨てる=巻番号はISBN側が正。baseが数字で終わる題(20世紀少年等)は対象外)
+        m2 = re.match(r"^(.{2,}?)[\s　]*[（(]?(\d{1,2})[)）]?[\s　]+(.{4,})$", t)
+        if m2 and sub is None and not re.search(r"\d$", m2.group(1).strip()):
+            t = m2.group(1).strip()
+            sub = m2.group(3).strip()
         if t == t0:
             break
     t = re.sub(r"[\s　]+$", "", t)
