@@ -18,13 +18,16 @@ os.makedirs(PP, exist_ok=True)
 
 ap = argparse.ArgumentParser()
 ap.add_argument("--slugs")
+ap.add_argument("--slugs-file", help="対象slugを1行1件で書いたファイル(★Windowsコマンドライン長制限対策 2026-07-14)")
 ap.add_argument("--class", dest="klass", choices=["new1a", "new1b", "exmid"])
 ap.add_argument("--from-staging", action="store_true", help="ソース=.cache/preorders/drafts (previewに入れていない分)")
 a = ap.parse_args()
 
 src_dir = os.path.join(ROOT, ".cache", "preorders", "drafts") if a.from_staging else os.path.join(ROOT, ".preview-data", "manga")
 targets = set()
-if a.slugs:
+if a.slugs_file:
+    targets = {s.strip() for s in open(a.slugs_file, encoding="utf-8") if s.strip()}
+elif a.slugs:
     targets = {s.strip() for s in a.slugs.split(",")}
 elif a.klass:
     made = json.load(open(os.path.join(ROOT, ".cache", "preorders", f"preview-made-{'exmid' if a.klass=='exmid' else a.klass}.json"), encoding="utf-8"))

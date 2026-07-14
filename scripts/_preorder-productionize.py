@@ -50,14 +50,19 @@ def main():
     print(f"本番化対象: {len(targets)}件")
 
     # 2. promote-drafts(preorder-pages + manga.v2 + _preorder_draft除去)
-    run([PY, os.path.join(ROOT, "scripts", "_preorder-promote-drafts.py"), "--slugs", ",".join(targets)])
+    #    ★slugはファイル渡し(1,000件級でWindowsコマンドライン長制限WinError206になるため 2026-07-14)
+    tf = os.path.join(ROOT, ".cache", "preorders", "productionize-targets.txt")
+    open(tf, "w", encoding="utf-8").write("\n".join(targets))
+    run([PY, os.path.join(ROOT, "scripts", "_preorder-promote-drafts.py"), "--slugs-file", tf])
     promoted = json.load(open(os.path.join(ROOT, ".cache", "preorders", "last-promoted.json"), encoding="utf-8"))
     if not promoted:
         print("promote 0件(衝突/欠落)。終了。"); return
     print(f"promote済み: {len(promoted)}件")
 
     # 3. 本番索引を増分更新(manga.v2 → data/*-index.json)
-    run([PY, os.path.join(ROOT, "scripts", "_build-list-index.py"), "data/manga.v2", "data", "--update", ",".join(promoted)])
+    pf = os.path.join(ROOT, ".cache", "preorders", "productionize-promoted.txt")
+    open(pf, "w", encoding="utf-8").write("\n".join(promoted))
+    run([PY, os.path.join(ROOT, "scripts", "_build-list-index.py"), "data/manga.v2", "data", "--update-file", pf])
 
     # 4. previewから除去(テスト環境解放) + preview索引再構築
     if not a.keep_preview:

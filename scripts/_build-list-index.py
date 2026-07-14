@@ -132,6 +132,8 @@ REMOVE_SLUGS = set()
 for _i, _a in enumerate(sys.argv):
     if _a == "--update" and _i + 1 < len(sys.argv):
         UPDATE_STEMS = [s.strip() for s in sys.argv[_i + 1].split(",") if s.strip()]
+    if _a == "--update-file" and _i + 1 < len(sys.argv):  # ★1行1slugのファイル渡し(Windowsコマンドライン長対策 2026-07-14)
+        UPDATE_STEMS = [s.strip() for s in open(sys.argv[_i + 1], encoding="utf-8") if s.strip()]
     if _a == "--remove" and _i + 1 < len(sys.argv):
         REMOVE_SLUGS = {s.strip() for s in sys.argv[_i + 1].split(",") if s.strip()}
 _files = [os.path.join(src, st + ".yml") for st in UPDATE_STEMS] if UPDATE_STEMS is not None else glob.glob(os.path.join(src, "*.yml"))
