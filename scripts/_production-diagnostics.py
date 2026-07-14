@@ -2,6 +2,7 @@
 問題作の件数+実リストを出力。 私(Claude)が「ボタンを押す」代わりにこれを走らせて潰す。
 索引(data/manga-list-index.json)由来=高速。 出力 docs/production-diagnostics/*.tsv。"""
 import json, os, re
+from _idx_authors import au_name  # ★索引v2 authorsパック対応(2026-07-14)
 
 ROOT = "C:/Users/shuic/code/MANGAL"
 OUT = f"{ROOT}/docs/production-diagnostics"
@@ -14,7 +15,7 @@ def g(r, k):
     return r[fi[k]] if k in fi else None
 
 def au_names(r):
-    return [a.get("name") for a in (g(r, "authors") or [])]
+    return [au_name(a) for a in (g(r, "authors") or [])]
 
 # 各診断: (キー, 説明, 述語)
 DIAGS = [

@@ -27,6 +27,7 @@
   python scripts/_tameshiyomi-harvest.py --stats             # 進捗
 """
 import argparse, json, os, re, sys, time, unicodedata, urllib.request
+from _idx_authors import au_name  # ★索引v2 authorsパック対応(2026-07-14)
 
 sys.stdout.reconfigure(encoding="utf-8")
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -66,7 +67,7 @@ def targets(limit):
             break
         if r[isl] in done or r[isl] in holds or not (r[ipop] or 0):
             continue
-        out.append((r[isl], r[it], [a.get("name") for a in (r[ia] or [])]))
+        out.append((r[isl], r[it], [au_name(a) for a in (r[ia] or [])]))
     return out
 
 

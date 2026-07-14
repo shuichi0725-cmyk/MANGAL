@@ -6,6 +6,7 @@
   harvest --season YYYY-SEASON → join → これ → 反映(コード無変更ならビルドのみ)
 """
 import json, os, sys
+from _idx_authors import au_name  # ★索引v2 authorsパック対応(2026-07-14)
 
 sys.stdout.reconfigure(encoding="utf-8")
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -21,7 +22,7 @@ isl, it, ic, ia = f.index("slug"), f.index("title"), f.index("cover"), f.index("
 info = {}
 for r in li["d"]:
     info[r[isl]] = {"title": r[it], "cover": r[ic],
-                    "authors": [a.get("name") for a in (r[ia] or [])][:2]}
+                    "authors": [au_name(a) for a in (r[ia] or [])][:2]}
 
 seasons = {}
 n_drop = 0

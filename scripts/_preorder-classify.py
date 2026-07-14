@@ -12,6 +12,7 @@
 出力: .cache/preorders/classified.json + docs/production-diagnostics/preorder-triage.tsv
 """
 import json, os, re, sys, unicodedata
+from _idx_authors import au_name  # ★索引v2 authorsパック対応(2026-07-14)
 from collections import Counter
 sys.stdout.reconfigure(encoding="utf-8")
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -65,7 +66,7 @@ for r in idx["d"]:
     page_by_title.setdefault(norm(r[ti]), []).append(r)
     page_by_stripped.setdefault(norm_strip(r[ti]), []).append(r)
     for a in (r[ai] or []):
-        known_authors.add(norm(a.get("name")))
+        known_authors.add(norm(au_name(a)))
 
 def author_names(s):
     return [x for x in re.split(r"[/,、;；]", str(s or "")) if x.strip()]
@@ -82,7 +83,7 @@ for r in rows:
     r_auth = {norm(a) for a in author_names(r.get("author"))}
     match = None
     for c in cands:
-        p_auth = {norm(a.get("name")) for a in (c[ai] or [])}
+        p_auth = {norm(au_name(a)) for a in (c[ai] or [])}
         if r_auth & p_auth or not r_auth:
             match = c; break
     if match:
@@ -93,7 +94,7 @@ for r in rows:
     if r_auth:
         sb = norm_strip(_split_title(r["title"])["base"])
         for c in page_by_stripped.get(sb, []):
-            if r_auth & {norm(a.get("name")) for a in (c[ai] or [])}:
+            if r_auth & {norm(au_name(a)) for a in (c[ai] or [])}:
                 match = c; break
         if match:
             r["_slug"] = match[si]

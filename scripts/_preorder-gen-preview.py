@@ -14,6 +14,7 @@ demographic: 楽天サブジャンル写像(少年/少女/青年/レディース
 使い方: python scripts/_preorder-gen-preview.py new1a|new1b|both [--limit N]
 """
 import json, os, re, sys, datetime, unicodedata
+from _idx_authors import au_name  # ★索引v2 authorsパック対応(2026-07-14)
 sys.stdout.reconfigure(encoding="utf-8")
 import yaml
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -94,7 +95,7 @@ _parents = {}  # kana_norm -> list[(slug, author_name_set)]
 for r in idx["d"]:
     k = _norm_kana_key(r[_ki])
     if len(k) >= 4:
-        _parents.setdefault(k, []).append((r[si], {a.get("name") for a in (r[_ai] or []) if isinstance(a, dict)}))
+        _parents.setdefault(k, []).append((r[si], {au_name(a) for a in (r[_ai] or []) if au_name(a)}))
 
 def inherit_parent_slug(kana, auths):
     """新作ヨミ=既存本番題ヨミ+残部 かつ 著者一致 なら 親slug-残部romaji を返す(無ければNone)"""
