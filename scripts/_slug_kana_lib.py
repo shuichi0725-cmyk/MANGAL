@@ -40,6 +40,9 @@ def kana2romaji(k):
         out += r
     return out
 
+FALLBACK = []  # ★直近make_slug呼出で辞書に掛からずカナ転写した断片(=自動で決められない語。呼出側が保留簿へ)
+
+
 def kata_run_convert(run):
     """カタカナ連続文字列を辞書最長一致で貪欲分割→英語断片列。未マッチはまとめてカナ転写。"""
     parts = []; i = 0; buf = ''
@@ -50,14 +53,20 @@ def kata_run_convert(run):
                 if run.startswith(k, i):
                     hit = k; break
         if hit:
-            if buf: parts.append(kana2romaji(buf)); buf = ''
+            if buf:
+                parts.append(kana2romaji(buf))
+                if len(buf) >= 2: FALLBACK.append(buf)
+                buf = ''
             parts.append(DIC[hit]); i += len(hit)
         else:
             buf += run[i]; i += 1
-    if buf: parts.append(kana2romaji(buf))
+    if buf:
+        parts.append(kana2romaji(buf))
+        if len(buf) >= 2: FALLBACK.append(buf)
     return [p for p in parts if p]
 
 def make_slug(title):
+    del FALLBACK[:]
     t = unicodedata.normalize('NFKC', str(title))
     t = re.sub(r'[〔\[【（(].*?[〕\]】）)]', ' ', t)
     t = re.sub(r'[・×↔→]', ' ', t)

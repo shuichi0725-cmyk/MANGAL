@@ -260,13 +260,37 @@ def real_cover(isbn, covers_dict=None, live_fn=None, env=None):
     return real_cover_and_date(isbn, covers_dict, live_fn, env)[0]
 
 
+def kata_pending_log(base, slug, frags, out_tsv="docs/production-diagnostics/slug-katakana-pending.tsv"):
+    """★カタカナ語ヘボンfallbackの簿記(2026-07-14 ユーザ要望=自動で決められない箇所を言ってくれ):
+    katakana-english.yml に掛からずカナ転写した断片を保留簿へ(既存行はskip=追記dedup)。fail-open。"""
+    try:
+        import os
+        os.makedirs(os.path.dirname(out_tsv), exist_ok=True)
+        seen = set()
+        if os.path.exists(out_tsv):
+            with open(out_tsv, encoding="utf-8") as f:
+                seen = {ln.split("\t")[0] + "\t" + ln.split("\t")[1] for ln in f if ln.count("\t") >= 2}
+        with open(out_tsv, "a", encoding="utf-8") as f:
+            for fr in frags:
+                key = f"{fr}\t{base}"
+                if key in seen:
+                    continue
+                f.write(f"{fr}\t{base}\t{slug or ''}\n")
+                seen.add(key)
+    except Exception:
+        pass
+
+
 def make_slug(base, kana_raw=None, existing=None):
     """slug生成。★正規装置 _slug_kana_lib(janome分かち+katakana-english.yml貪欲辞書変換+ヘボン)に委譲
     (2026-07-09 ユーザ指摘=英語綴り辞書を使え)。clean base題(副題/巻/@COMIC除去済)を渡す。
     英語綴り(summer-blend/duel-masters/beauty-pop)・助詞は→wa/を→o・長音保持。空/短すぎ/衝突=None(hold)。"""
     try:
-        from _slug_kana_lib import make_slug as _slug_impl
+        from _slug_kana_lib import make_slug as _slug_impl, FALLBACK
         slug = _slug_impl(base)
+        # ★辞書に掛からなかったカタカナ語=自動で決められない箇所を保留簿へ(fail-open。ユーザ報告用 2026-07-14)
+        if FALLBACK:
+            kata_pending_log(base, slug, FALLBACK)
     except Exception:
         # fallback: pykakasi(辞書無し)。装置が使えない時のみ
         slug = ""
