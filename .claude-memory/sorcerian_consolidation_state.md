@@ -1,6 +1,6 @@
 ---
 name: sorcerian-consolidation-state
-description: ソーサリアン統合頁=preview保留中。トリガー「ソーサリアン本番化して」=旧9頁dedup+alias+RelatedWorks多人数ガードとセットで昇格
+description: ソーサリアン統合=本番化済(2026-07-15・週次で公開)。単巻読切連番シリーズ1頁統合の型見本(title_display/alt索引/多人数ガード)
 metadata: 
   node_type: memory
   type: project
@@ -16,10 +16,10 @@ metadata:
 - **検索性**: 索引ビルダーが巻title_displayから括弧書きを剥いだ純副題をalt索引へ拾う汎用拡張(どの巻題でも検索ヒット)。
 - 発売日=参照サイト(tk-nz.game.coocan.jp COMIC欄)で全巻年月日化済み。書影=Kobo3巻分のみ。
 
-## 残作業(トリガー「ソーサリアン本番化して」で着手)
-1. 統合頁を本番へ(現在は本番化のたびに`.cache/`へ退避するhold運用=[[productionize-drafts]] skill参照)
-2. **旧9頁の畳み込み**(ten-no-kamigami-tachi等が本番に残存=そのまま出すと重複)+旧slug→sorcerianのalias
-3. **RelatedWorksの多人数ガード**(著者5人以上の頁は自欄の同作者スコアを無効化=14著者の関連作品欄汚染対策・約3行)
-4. imprint表記の統一(戦国ソーサリアンの`11`混入是正)
+## 本番化済(2026-07-15完遂。以下は実施記録)
+1. ✅統合頁=preorder-pages+manga.v2昇格済
+2. ✅旧9頁=page-dedup恒久drop+manga.v2削除+alias(旧URL→sorcerian・連鎖直結5件込)
+3. ✅RelatedWorks=著者5人以上の頁は「同作者」スコア無効(computeRelated manyAuthorsガード)
+4. ✅imprint=統合頁がソーサリアンシリーズで統一(旧頁削除で11混入も消滅)
 
 とよ田みのる短編集(toyoda-minoru-tanpenshuu)も同型で適用済み(vol1=CATCH&THROW 2012/vol2=イマジン2020)。

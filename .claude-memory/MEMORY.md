@@ -142,7 +142,7 @@
 - [TinyFish=WebFetch補完](tinyfish_web_fetch.md) — 正=skill tinyfish
 - [Cloudflareアクセス解析](cloudflare_analytics_access.md) — 正=skill cf-analytics(_cf-analytics.py)
 - [進行中状態2026-07-15](inflight_state_2026_07_15.md) — 本番待ち2,300頁(ドラフト1,091+検索v2)・preview=2026-05絞り・次=週次
-- [ソーサリアン統合=保留中](sorcerian_consolidation_state.md) — トリガー「ソーサリアン本番化して」=旧9頁dedup+RelatedWorksガード
+- [ソーサリアン統合=本番化済](sorcerian_consolidation_state.md) — 単巻読切連番の1頁統合の型見本(title_display/dedup/多人数ガード)
 - [slug衝突=姓+年・裸西暦禁止](slug_collision_year_rule.md) — 生成器3箇所修正済。rename正規ルート=overrides+aliases
 - [【方針】1件のバグ=型と疑う](feedback_one_bug_means_a_class.md) — 署名化→全DB掃引(全件目視)→検出器script化→月次サニティ登録まで一続き
 - [kobo見直しセット復元](kobo_review_preview_set.md) — トリガー「kobo見直ししたい」=302作をpreviewへ(slug一覧=preview-sets/)
