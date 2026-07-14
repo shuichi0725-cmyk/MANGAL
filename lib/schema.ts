@@ -41,6 +41,8 @@ export const VolumeSchema = z.object({
   number: z.number().int().min(1),
   /** 巻ラベル (= 「上」「下」「特装版」等、 数字以外の表示文字。 既定 `第${number}巻` を上書きする) */
   volume_label: z.string().optional(),
+  /** 巻の個別題 (= 単巻読切の連番シリーズ統合頁で 「副題(著者)」 を巻詳細に表示。 ソーサリアン型) */
+  title_display: z.string().optional(),
   asin: z.string().nullable().optional(),
   kindle_asin: z.string().nullable().optional(),
   isbn13: z.union([z.string(), z.number()]).nullable().optional(),

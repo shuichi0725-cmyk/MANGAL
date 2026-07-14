@@ -214,7 +214,10 @@ for f in _files:
         "slug": d["slug"], "title": d["title"], "title_kana": d["title_kana"],
         "title_romaji": d["title_romaji"],
         "alt": [v for v in [alt.get("en"), alt.get("fr"), alt.get("de"), alt.get("it"), alt.get("pt")] if v]
-               + [s for s in (d.get("synonyms") or []) if s],  # ★synonymsも検索可(2026-07-14: 統合頁の巻別題=ソーサリアン型)
+               + [s for s in (d.get("synonyms") or []) if s]  # ★synonymsも検索可(2026-07-14: 統合頁の巻別題=ソーサリアン型)
+               # ★巻の個別題(title_display)も検索可: 「副題(著者)〔新N〕」から括弧書きを剥いだ純副題を拾う
+               + [t for e in (d.get("editions") or []) for v in (e.get("volumes") or [])
+                  for t in [re.sub(r"[（(].*?[)）]|〔.*?〕", "", str(v.get("title_display") or "")).strip()] if t],
         "au": [a.get("name") for a in aus if a.get("name")]
               + [a.get("name") for a in oaus if a.get("name")]
               + [c.get("name") for c in (d.get("credits") or []) if c.get("name")],

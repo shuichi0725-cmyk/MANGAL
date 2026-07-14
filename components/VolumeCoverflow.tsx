@@ -209,6 +209,9 @@ export default function VolumeCoverflow({
         </div>
         <div className="min-w-0 flex-1">
           <div className="text-lg font-bold">{cur.volume_label ?? `第${cur.number}巻`}</div>
+          {cur.title_display && (
+            <div className="mt-0.5 text-[13px] font-semibold leading-snug text-ink/75">{cur.title_display}</div>
+          )}
           {fmtDate(cur.release_date) && (
             <div className="text-xs text-ink/55">{fmtDate(cur.release_date)} 発売</div>
           )}
