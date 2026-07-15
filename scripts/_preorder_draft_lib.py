@@ -25,7 +25,7 @@ except Exception:
 
 _VOL_TAIL = re.compile(r"(?:[（(]\s*\d{1,3}\s*[)）]|第\s*\d{1,3}\s*巻|[\s　]+\d{1,3}|(?<=[ぁ-んァ-ヶ一-鿿])\d{1,3})\s*$")
 _SUB = re.compile(r"[\s　]*[〜～\-][^〜～]*?[〜～]\s*$")   # 〜副題〜 / ～副題～
-_ATCOMIC = re.compile(r"[@＠]\s*comic\s*$", re.I)
+_ATCOMIC = re.compile(r"(?:[@＠]\s*comic|[\s　]+THE\s+COMIC)\s*$", re.I)  # ★「〜 THE COMIC」尾も剥離(ユーザ裁定 2026-07-15)
 _PROV = re.compile(r"[（(]\s*仮\s*[)）]")
 
 
@@ -68,7 +68,7 @@ def _hira2kata(s):
     return "".join(chr(ord(c) + 0x60) if "ぁ" <= c <= "ゖ" else c for c in s)
 
 
-_ATCOMIC_KANA = re.compile(r"アットコミック\s*$")
+_ATCOMIC_KANA = re.compile(r"(?:アット|ザ)コミック\s*$")  # ★ザコミック=THE COMICの読み尾(2026-07-15)
 _VOL_KANA = re.compile(r"(?:ダイ)?[イチニサンヨンゴロクナナハチキュウジュウゼロ第]+カン\s*$")
 
 
