@@ -61,13 +61,21 @@ def stage_plan():
     # --- 1. 本番既存作とのwork-levelマッチ(title+著者姓) → 既存頁補完候補(A) / 新規(B) ---
     idx = json.load(open(os.path.join(ROOT, "data", "manga-list-index.json"), encoding="utf-8"))
     f = idx["f"]; si = f.index("slug"); ti = f.index("title"); ai = f.index("authors")
+    # ★著者は必ず共通デコーダ(索引v2=パック文字列。旧dict読みでa0が常に空→A=0事故 2026-07-15)
+    from _idx_authors import au_name
     prod = {}
     for r in idx["d"]:
         aus = r[ai] or []
-        a0 = (aus[0].get("name", "") if aus and isinstance(aus[0], dict) else "")
+        a0 = au_name(aus[0]) if aus else ""
         prod.setdefault(nk(r[ti]), []).append((r[si], a0))
     con = sqlite3.connect(f"file:{ROOT}/.cache/db-v2.sqlite?mode=ro".replace("\\", "/"), uri=True)
     have2 = {x[0] for x in con.execute("SELECT isbn13 FROM volumes WHERE isbn13 IS NOT NULL")}
+    # ★既掲載判定は種2だけでは穴(種4/preorder-pages由来の本番ISBNを未掲載と誤認=OUT型再掲 2026-07-15)。
+    #   本番ISBN索引(_exists.py --buildで再生成)があれば合流。
+    try:
+        have2 |= set(json.load(open(os.path.join(ROOT, ".cache", "isbn-page-index.json"), encoding="utf-8")).keys())
+    except Exception:
+        print("  (isbn-page-index.json無し=種2のみで既掲載判定。python scripts/_exists.py --build 推奨)")
     A = []  # 既存作の巻(種4候補)
     works = {}  # B: 新規作 group
     for r in rows:

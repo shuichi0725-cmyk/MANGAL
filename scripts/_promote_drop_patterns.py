@@ -21,6 +21,10 @@ _CONTAINS = [
 ]
 _PREFIX = ["テレビアニメ版", "TVアニメ版", "アニメコミック", "劇場版", "映画 ", "OVA", "ノベライズ", "英訳"]
 
+# ★コンビニ本/廉価再編レーベル(A2規約=題でなくimprint判定 2026-07-15。クッキングパパ・プラチナ型すり抜けから)
+_LABEL_KONBINI = ["My first big", "SP pocket", "ポケットワイド", "プラチナコミックス",
+                  "ジャンプリミックス", "ジャンプremix", "Gコミックス", "コンビニコミック"]
+
 def is_droppable(title: str, series_label: str = "", creators_roled: str = "") -> bool:
     # 役割ベース: インタビュアー/聞き手 = 漫画でない
     cr = str(creators_roled or "")
@@ -33,6 +37,10 @@ def is_droppable(title: str, series_label: str = "", creators_roled: str = "") -
             return True
     for p in _CONTAINS:
         if p in t or p in s:
+            return True
+    sl = s.lower()
+    for p in _LABEL_KONBINI:
+        if p.lower() in sl:  # ★レーベルのみ照合(題は誤爆リスク)
             return True
     # 大全集/短編集/作品集 は keep (= CLAUDE.md: 描き下ろし多い)。ここでは除外しない。
     return False
