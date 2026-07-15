@@ -76,6 +76,14 @@ jobs:
           echo "preview manga pages built: $COUNT"
           ls out/index.html
 
+      # ★previewはnoindex(2026-07-15): 本番(mangal-db.com)と同内容の重複ページとして
+      #   Googleに拾われ「重複/非正規」判定の一因になるのを防ぐ。robots.txtのDisallowでなく
+      #   X-Robots-Tagヘッダ(=クロールは許可しnoindexを見せる)が正道。本番out/には入れない。
+      - name: Add noindex header for preview (Cloudflare Pages _headers)
+        run: |
+          printf '/*\n  X-Robots-Tag: noindex\n' > out/_headers
+          cat out/_headers
+
       - name: Deploy to Cloudflare Pages (mangal-preview)
         # ★Pages = 多数の静的ファイル向けで Workers の metadata 1MiB 制約が無い。
         #   Workers用 wrangler.jsonc は pages deploy と混線するので一時退避してから実行。
