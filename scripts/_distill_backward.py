@@ -92,10 +92,19 @@ def stage_plan():
         creators = [c.split(":")[0].strip() for c in str(r.get("creators_roled") or r.get("creators") or "").split("/") if c.strip()]
         a0 = (creators[0] if creators else "").replace(" ", "").replace("　", "")
         key = nk(residual)
+        # ★第2キー(2026-07-16): NDL題の「 = 英題並記」「 : 副題」「末尾ピリオド」を剥いだ主題でも照合
+        #   (副題差で既存作がBへ落ちる取り違え~285件対策)。著者2字一致ゲートは共通=同名異作品は弾く。
+        base2 = re.sub(r"\s*=\s*[^=]+$", "", str(residual))
+        base2 = re.sub(r"\s*[:：]\s.*$", "", base2)
+        base2 = re.sub(r"[.．]\s*$", "", base2).strip()
+        key2 = nk(base2)
         hit = None
-        for slug, pa in prod.get(key, []):
-            if a0 and pa and (a0[:2] in pa.replace(" ", "") or pa.replace(" ", "")[:2] in a0):
-                hit = slug; break
+        for k in ([key] if key == key2 else [key, key2]):
+            for slug, pa in prod.get(k, []):
+                if a0 and pa and (a0[:2] in pa.replace(" ", "") or pa.replace(" ", "")[:2] in a0):
+                    hit = slug; break
+            if hit:
+                break
         if hit:
             A.append({"slug": hit, "isbn": ib, "vol": vol, "title": title, "date": r.get("date", ""), "publisher": r.get("publisher", "")})
         else:
