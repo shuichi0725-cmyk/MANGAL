@@ -5,10 +5,10 @@ import AnniversaryDaily from "@/components/AnniversaryDaily";
 import DeluxeWeekly from "@/components/DeluxeWeekly";
 import TimeMachine from "@/components/TimeMachine";
 import DestinyPickMock from "@/components/DestinyPickMock";
-import MarqueeTitle from "@/components/MarqueeTitle";
+import MonthReleasesClient from "@/components/MonthReleasesClient";
 import CalendarView from "@/components/CalendarView";
 import HomeSidebar from "@/components/HomeSidebar";
-import { bundle, DesignNav, seeded, volCount, Cover, thisMonthReleases, releaseDayLabel } from "@/lib/homeDesign";
+import { bundle, DesignNav, seeded, volCount, thisMonthReleases, releaseDayLabel } from "@/lib/homeDesign";
 import WeekendFeature from "@/components/WeekendFeature";
 import { coverUrl } from "@/lib/schema";
 import { loadAiReviews } from "@/lib/loadData";
@@ -85,26 +85,22 @@ export default function Design11() {
           アニメコーナーを最上段へ。表示は再読込ごとランダム=client側シャッフル) */}
       <AnimeSeasonCorner />
 
-      {/* 1.5【中】今月の新刊(アニメ直下へ移動 2026-07-12) */}
+      {/* 1.5【中】今月の新刊(アニメ直下へ移動 2026-07-12)
+          ★2026-07-15: 再読込ごとランダム入替(アニメコーナーと同方式)+リンクは当月巻フォーカス(#v)。
+            当月巻の書影を出す(旧=1巻書影で「一年前の本?」と誤読された 2026-07-13) */}
       <section className="mt-4 px-4">
         <Tile className="p-3.5">
           <h2 className="text-[14px] font-bold">📦 今月の新刊</h2>
-          <ul className="-mx-3.5 mt-2.5 flex gap-3 overflow-x-auto px-3.5 pb-1 snap-x">
-            {thisMonthReleases(manga, byNew, 12).map((r) => (
-              <li key={r.m.slug} className="w-[96px] shrink-0 snap-start">
-                <Link href={`/manga/${r.m.slug}`} className="block group spring-press">
-                  {/* ★当月に出る巻の書影を出す(旧=1巻書影で「一年前の本?」と誤読された 2026-07-13) */}
-                  <Cover m={r.m} sizes="96px" src={r.cover ?? undefined} />
-                  <MarqueeTitle text={r.m.title} className="mt-1 text-[12px] leading-snug text-ink/85 group-hover:text-[var(--color-accent)]" />
-                  <p className="truncate text-[10px] font-semibold text-[var(--color-accent)]">
-                    {r.number ? `${r.number}巻` : "新刊"}
-                    {releaseDayLabel(r.date) ? `・${releaseDayLabel(r.date)}` : ""}
-                  </p>
-                  <p className="truncate text-[10px] text-ink/50">{(r.m.authors ?? []).map((a) => a.name).join("・")}</p>
-                </Link>
-              </li>
-            ))}
-          </ul>
+          <MonthReleasesClient
+            pool={thisMonthReleases(manga, byNew, 60).map((r) => ({
+              slug: r.m.slug,
+              title: r.m.title,
+              authors: (r.m.authors ?? []).map((a) => a.name).join("・"),
+              number: r.number,
+              sub: `${r.number ? `${r.number}巻` : "新刊"}${releaseDayLabel(r.date) ? `・${releaseDayLabel(r.date)}` : ""}`,
+              cover: r.cover ?? coverUrl(r.m) ?? null,
+            }))}
+          />
         </Tile>
       </section>
 

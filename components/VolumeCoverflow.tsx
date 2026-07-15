@@ -141,6 +141,26 @@ export default function VolumeCoverflow({
     };
   }, [loop, n]);
 
+  // ★/manga/slug#v<N> で第N巻にフォーカス(2026-07-15 ユーザ要望: ホーム「今月の新刊」→当月巻直行)。
+  //   静的exportなのでhashはclient側で解釈。該当番号がこの版に無ければ何もしない。
+  useEffect(() => {
+    const hit = /^#v(\d+)$/.exec(window.location.hash);
+    if (!hit) return;
+    const i = vols.findIndex((v) => v.number === Number(hit[1]));
+    if (i < 0) return;
+    setSel(i);
+    // サムネ帯も選択巻が見える位置へ(ループ時は中央コピー基準。detent初期化の後に動かすためrAF)
+    requestAnimationFrame(() => {
+      const el = scroller.current;
+      if (!el) return;
+      const s = el.scrollWidth / (loop ? 3 : 1);
+      const t = s / n;
+      const base = loop ? s : 0;
+      el.scrollLeft = Math.max(0, base + i * t - el.clientWidth / 2 + t / 2);
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   if (n === 0) return null;
   const cur = vols[sel];
   const links = searchLinks(title, cur);

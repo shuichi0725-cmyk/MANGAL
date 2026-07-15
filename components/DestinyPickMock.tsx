@@ -1,12 +1,13 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CoverImage from "./CoverImage";
 
 export type DestinyItem = { slug: string; title: string; authors: string; vols: number; cover?: string | null };
 
-/** 運命の一冊: 初期表示=日替わり、↻ボタンで再抽選(候補プール埋込=通信ゼロ)。
+/** 運命の一冊: ★再読込ごとにランダム(2026-07-15 ユーザ要望=アニメコーナーと同方式)、↻ボタンで再抽選
+ *  (候補プール埋込=通信ゼロ)。 SSR初期値=日替わり(hydration一致)→マウント後にランダムへ差し替え。
  *  出会いの確率(1/総数)を演出として表示。 */
 export default function DestinyPickMock({
   items,
@@ -18,6 +19,9 @@ export default function DestinyPickMock({
   total: number;
 }) {
   const [idx, setIdx] = useState(initialIndex % items.length);
+  useEffect(() => {
+    setIdx(Math.floor(Math.random() * items.length));
+  }, [items.length]);
   const [spins, setSpins] = useState(0);
   const m = items[idx];
   if (!m) return null;
