@@ -38,7 +38,9 @@ python scripts/_verify-kana-pending.py --limit 300   # ③ヨミ照合(★1パ�
 - ③を無限ループ化しない(上記=NDL未収載の再照会浪費)
 
 ## セット構成 (= 将来増やせる)
-現在: ①試し読みexpand消化 ②Gemini検品連鎖(probe→verify) ③NDLヨミ照合(1パス)。
+現在: ①試し読みexpand消化 ②Gemini検品連鎖(probe→verify) ③NDLヨミ照合(1パス)
+④**完結判定backlogスイープ**(=skill completion-judge。`--backlog --limit 300`→worksheet記入(明示文言のみtrue)→`--collect`→commit。
+  ②③と違い記入判断があるが「captionに完結の引用があるか」だけ=Sonnet安全。適用(--apply)は絶対にやらない=Opus+専権)。
 退役: 旧①アンカー収集ループ(`_idle-tameshiyomi-loop.sh`)=2026-07-15対象枯れ(queue空なら即終了するので起動しても無害)。
 候補: Kobo書影resume / 楽天キャッシュmiss(B系欠落)のlive照会 — 追加時は「逐次保存・自然停止・冪等再開」の3条件を満たすこと。
 
