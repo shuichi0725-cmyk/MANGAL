@@ -168,3 +168,6 @@
 {"op": "kana-from-other-volume-detector", "fixed": {"gensou-fantasy": "キンレイヤワ(1巻題読み)→ゲンソウファンタジー", "muumin-no-bouken-nikki": "ムーミンエイユウニナル(巻題読み)→ムーミンノボウケンニッキ"}, "queue": ["nagi=題誤字疑い(椰↔梛)", "dream-kiss=夢chu×ドリームキッス文庫混在疑い", "garou-4koma=本編1巻混入疑い", "ohanashi-pokemon=児童書scope疑い"], "false_positive_ok": ["eyes-kingin-youdou(当て字正常)", "t-patrol-bon(当て字正常)"], "at": "2026-07-10"}
 {"op": "kana-author-authority-class", "found": 76, "fixed_yearsuffix": ["angel-eyes-1994", "she-is-beautiful-2010", "sweet-home-2002", "yellow-kawaguchi-1996"], "note": "NDL典拠形著者名(姓,名,生年)がkanaに化けた夜明け型の親戚。半角カンマ検出・残=次バッチ", "at": "2026-07-10"}
 {"op": "kana-author-authority-batch2", "kana_fix": 68, "title_fix": ["as-you-wish-sister", "hijikatatoshizou"], "drop": "gen-si-kaki-ayam(マレー語版ゲン)", "hold": ["warning-1991=夫婦探偵断片(新規登録キュー)"], "source": "楽天titleKana(61/72)+劣化正規化+確信英語音写", "at": "2026-07-10"}
+{"slug": "boku-wa-ano-yoru-ano-ko-to", "op": "kana-fix", "source": "NDLヨミ照合裁定", "before": "ボクハアノヨルアノコト3", "after": "ボクハアノヨルアノコト", "at": "2026-07-16T01:12:59"}
+{"slug": "makeinu-to-lion", "op": "kana-fix", "source": "NDLヨミ照合裁定", "before": "マケイヌトライオン2", "after": "マケイヌトライオン", "at": "2026-07-16T01:12:59"}
+{"slug": "slime-master-chan-no-vrmmo", "op": "kana-fix", "source": "NDLヨミ照合裁定", "before": "スライムマスターチャンノVRMMO", "after": "スライムマスターチャンノブイアールエムエムオー", "at": "2026-07-16T01:12:59"}
