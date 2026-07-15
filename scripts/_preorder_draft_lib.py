@@ -29,7 +29,7 @@ _ATCOMIC = re.compile(r"[@＠]\s*comic\s*$", re.I)
 _PROV = re.compile(r"[（(]\s*仮\s*[)）]")
 
 
-_SCOPE_OUT = re.compile(r"めくり|カレンダー|ぬりえ|塗り絵|写真集|画集|イラスト集|ファンブック|設定資料|ガイドブック|公式ガイド|データブック|ビジュアルブック|原画集|ムック|フィギュア|カードゲーム|トレカ|グッズ|下敷き|ノート|手帳|(?:^|\s)artbook", re.I)
+_SCOPE_OUT = re.compile(r"めくり|カレンダー|ぬりえ|塗り絵|写真集|画集|イラスト集|ファンブック|設定資料|ガイドブック|公式ガイド|データブック|ビジュアルブック|原画集|ムック|フィギュア|カードゲーム|トレカ|グッズ|下敷き|ノート|手帳|大事典|大百科|大図鑑|名鑑|(?:^|\s)artbook", re.I)  # ★大事典型=関連書(ドラえもんひみつ道具大事典すり抜け 2026-07-15)
 
 
 def scope_out(title):
@@ -306,7 +306,7 @@ def make_slug(base, kana_raw=None, existing=None):
     slug = re.sub(r"(?<=[a-z])-?\d{1,3}$", "", slug).strip("-")  # 末尾巻番号(stray5→stray)。rx等英字suffixは保持
     if len(slug) < 2:
         return None                             # ゴミslug(2026化)禁止=hold
-    slug = slug[:70]
+    slug = slug[:70].rstrip("-")  # ★70字cut後の末尾ハイフン剥離(shokei-型 2026-07-15)
     if existing is not None and slug in existing:
         return None                             # 衝突=hold(-2026で誤魔化さない)
     if kana_raw:
