@@ -25,4 +25,11 @@ metadata:
 - R2認証はこのPCから疎通確認済み(mangal-site 読取OK / 134,066オブジェクト / 100%が単一part=ETagはMD5)。
 - git push権限OK。記憶ミラー `.claude-memory` 154 = ローカル154で同期済み。
 
-移行で壊れたものは無い。唯一の破損 [[r2-manifest-corrupt-pending-repair]] は移行前(7/11)から壊れていた。
+## ★移行の穴② = stub層 data/manga が無い(7/17日次蒸留で発覚・最重要)
+
+- **`data/manga/`(promoteのSRC=slug結線+_skey+分かち書きkana+enrich蓄積の~68k yml)はgitignoreで移行から漏れた**(git追跡は例外5件のみ)。`promote --only` が **total:0で空振り**し、reflectが「成功した顔で何も再生成しない」。
+- ★D:にstubバックアップは**無い**(`D:\mangal-cache\appdata\manga`=manga.v2スナップショット7/1でstubではない)。
+- ★stubはv2から完全復元**できない**: stubの title_kana は「スペース入り分かち書き」でromajiの語区切り源(v2側はstrip済)。v2+種3のtitle_kana_segmented+_skeyで**外科的復元は可能**(7/17に3件実証: before/after diff=巻追加のみ)。復元手順=commit 40356eaff参照。
+- **恒久復旧はユーザ裁定待ち**: 最善=旧PCの `data/manga` を丸ごとコピー。それまで per-case promote/reflect は**stubが在る頁のみ**効く(無い頁は空振り=必ずpromoteログの regenerated 数を確認)。
+
+その他の破損 [[r2-manifest-corrupt-pending-repair]] は移行前(7/11)から壊れていた。
