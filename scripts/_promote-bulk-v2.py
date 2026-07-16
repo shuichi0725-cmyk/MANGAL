@@ -16,6 +16,7 @@ filter (= step A/B、 「本編以外は極力表示しない」):
             spinoff series は max(release_date) >= CUTOFF_YEAR なら keep
 """
 
+import datetime
 import json
 import re
 import sqlite3
@@ -2317,7 +2318,31 @@ def build_yml(
         if _sc.get("year_ended"):
             o["year_ended"] = _sc["year_ended"]
     else:
-        o["status"] = (seed3 or {}).get("status") or src_yml.get("status", "completed")
+        # ★「不明=完結」既定の廃止+種3status不信任(2026-07-16 ユーザGO・勇者さま型誤完結の是正):
+        #   種3のstatusはfill期のAI推測が全件に入っており根拠にならない(76,435全entryがstatus持ち)。
+        #   判定 = 「standard版の初版(per_vol_min_date)で新しい巻番号が直近12ヶ月内に出たか」。
+        #   出ていれば連載中 / 出ていなければ完結。真の完結は status-corrections(Wiki検証+
+        #   完結判定caption=証拠ベース)が最優先で上書きする。新装版/復刻は初版minを動かさないので誤爆しない。
+        _st = (seed3 or {}).get("status") or src_yml.get("status")
+        _latest_first = ""
+        try:
+            if per_vol_min_date:
+                _latest_first = max(per_vol_min_date.values())
+        except NameError:
+            pass
+        if not _latest_first:
+            for _ed in editions:
+                for _v in _ed["volumes"]:
+                    _rd = str(_v.get("release_date") or "")
+                    if _rd > _latest_first:
+                        _latest_first = _rd
+        _cut = (datetime.date.today() - datetime.timedelta(days=365)).isoformat()
+        _recent = bool(_latest_first) and _latest_first[:10] >= _cut[: len(_latest_first[:10])]
+        if not _st:
+            _st = "ongoing" if _recent else "completed"
+        elif _st == "completed" and _recent:
+            _st = "ongoing"
+        o["status"] = _st
     # status=ongoing なら year_ended は null
     if o["status"] == "ongoing":
         o["year_ended"] = None
