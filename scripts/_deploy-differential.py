@@ -27,6 +27,9 @@ import argparse, hashlib, json, os, shutil, subprocess, sys, urllib.request
 sys.stdout.reconfigure(encoding="utf-8")
 import yaml
 
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import _r2_manifest
+
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUT = os.path.join(ROOT, "out")
 DIFFDATA = r"D:\mangal-cache\diffdata"
@@ -83,6 +86,15 @@ def main():
         print("  手動初期化: 前回フルビルド時のcommitで {\"code_commit\":..., \"data_commit\":...} を作る。")
         sys.exit(3)
     mk = json.load(open(MARKER, encoding="utf-8"))
+
+    # ★r2-manifest は「その頁が本番で稼働中か」の判定源(下の was_live)。読めないまま空で進むと
+    #   稼働中の頁を「元々未掲載」と誤判定して黙って除外する = 本番劣化。ビルド前に fail-closed。
+    #   復元は「週次蒸留して」(= _r2-sync.py が R2 の ETag 照合で欠損キーを補完し書き戻す)。
+    manifest, mstatus = _r2_manifest.load(MANIFEST, quarantine=False)
+    if mstatus != "ok":
+        print(f"★abort: r2-manifest が {mstatus} (.cache/r2-manifest.json) = 本番に何が在るか判定不能。"
+              f"「週次蒸留して」で復元してから再実行。")
+        sys.exit(3)
 
     # --- 1. コードドリフトガード ---
     r = sh(["git", "diff", "--name-only", f"{mk['code_commit']}..HEAD", "--", *CODE_SCOPE], cwd=ROOT)
@@ -164,7 +176,6 @@ def main():
 
     # --- 4.5 ★チャンク実測検証(コードドリフト時のみ): 対象頁HTMLが参照する /_next/ 資産が
     #     全て前回同期manifestに在る=本番R2に実在する、を確認。欠け=新チャンク=部分反映不可→abort
-    manifest = json.load(open(MANIFEST, encoding="utf-8")) if os.path.exists(MANIFEST) else {}
     if strict_chunks:
         import re as _re
         missing_assets = set()

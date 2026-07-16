@@ -3,6 +3,8 @@
 out/(next export 出力)を R2 バケットへ同期する。
 - ★初回フル(~14万ファイル)も増分(月次蒸留=数百ファイル)も同じ経路。並列なので per-file wrangler より桁違いに速い。
 - 各ファイルの sha256 を manifest(.cache/r2-manifest.json)と比較し、変更/新規のみ PUT。
+- ★manifest が壊れた/キーが欠けた時は、R2 の ETag(単一partは=MD5)と照合して「本番と中身が同一」の
+  キーを PUT 省略し、manifest を書き戻して復元する(= 全件上げ直しを避ける。--no-reconcile で無効化)。
 - Content-Type を拡張子から付与(配信WorkerもCT再設定するが倉庫側も正しく持つ)。
 - --prune でローカルに無いキーを R2 から削除。 --create-bucket で無ければバケット作成。
 
@@ -19,6 +21,9 @@ out/(next export 出力)を R2 バケットへ同期する。
 """
 import os, sys, json, hashlib, argparse
 from concurrent.futures import ThreadPoolExecutor, as_completed
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import _r2_manifest
 
 ROOT = os.getcwd()
 OUT = os.path.join(ROOT, "out")
@@ -50,12 +55,21 @@ def sha(p):
             h.update(chunk)
     return h.hexdigest()
 
+def md5(p):
+    h = hashlib.md5()
+    with open(p, "rb") as f:
+        for chunk in iter(lambda: f.read(1 << 20), b""):
+            h.update(chunk)
+    return h.hexdigest()
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--bucket", default="mangal-site")
     ap.add_argument("--create-bucket", action="store_true")
     ap.add_argument("--prune", action="store_true")
     ap.add_argument("--dry", action="store_true")
+    ap.add_argument("--no-reconcile", action="store_true",
+                    help="manifest 欠損キーの ETag 照合補完をしない(= 欠損は全て PUT し直す)")
     ap.add_argument("--workers", type=int, default=32)
     a = ap.parse_args()
 
@@ -104,7 +118,7 @@ def main():
         sys.exit(2)
 
     # --- 差分計算 ---
-    prev = json.load(open(MANIFEST, encoding="utf-8")) if os.path.exists(MANIFEST) else {}
+    prev, mstatus = _r2_manifest.load(MANIFEST)   # 破損は退避され {} (= 全キー欠損)で返る
     nextm, to_put = {}, []
     for p in walk(OUT):
         key = os.path.relpath(p, OUT).replace("\\", "/")
@@ -131,6 +145,25 @@ def main():
             s3.head_bucket(Bucket=a.bucket); print(f"バケット {a.bucket} 既存")
         except Exception:
             s3.create_bucket(Bucket=a.bucket); print(f"バケット {a.bucket} 作成")
+
+    # --- ★manifest 欠損キーの補完 (2026-07-17) ---
+    # manifest 破損/欠落で「前回何を上げたか」を失うと、中身が同じでも全件 PUT し直しになる。
+    # R2 の ETag(単一part upload では = 内容の MD5)と ローカルの MD5 を突き合わせ、
+    # 同一のキーは PUT を省く(manifest 自体は末尾の json.dump(nextm) が全キー書き戻して復元する)。
+    # ★対象は manifest に記録の無いキーだけ。記録が在るキーの差分判定(sha256)には触らない。
+    # ★一致が保証するのは内容だけ。Content-Type は前回この同じスクリプトが PUT 時に付けている前提。
+    missing = [(k, p) for (k, p) in to_put if k not in prev]
+    if missing and not a.no_reconcile:
+        print(f"manifest 欠損 {len(missing)} キー(manifest={mstatus}) → R2 の ETag と照合して補完")
+        etags = {}
+        for page in s3.get_paginator("list_objects_v2").paginate(Bucket=a.bucket):
+            for o in page.get("Contents", []):
+                et = o["ETag"].strip('"')
+                if "-" not in et:   # multipart の ETag は MD5 でない = 照合不可 → PUT 対象のまま残す
+                    etags[o["Key"]] = et
+        skip = {k for k, p in missing if etags.get(k) == md5(p)}
+        to_put = [it for it in to_put if it[0] not in skip]
+        print(f"  補完 {len(skip)} キー(本番と同一 = PUT 省略) / 要PUT {len(missing) - len(skip)}")
 
     done = [0]
     def put(item):
