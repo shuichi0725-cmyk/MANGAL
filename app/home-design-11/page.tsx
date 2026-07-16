@@ -68,7 +68,8 @@ export default function Design11() {
           </Link>
         );
         return (
-          <div className="flex items-center gap-x-3 overflow-x-auto px-4 pt-3 text-[11px]">
+          // ★py均等=行内文字を帯の上下センターに(旧pt-3のみ=下に詰まって見えた 2026-07-16)
+          <div className="flex items-center gap-x-3 overflow-x-auto px-4 py-2.5 text-[11px] leading-none">
             <S href="/browse" label="作品" n={manga.length} />
             <span className="text-ink/25">|</span>
             <S href="/browse" label="漫画本" n={books} />
