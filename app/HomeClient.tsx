@@ -41,6 +41,7 @@ export default function HomeClient({ data }: Props) {
   const [coverGap, setCoverGap] = useState(false);
   const [anthology, setAnthology] = useState(false);
   const [copied, setCopied] = useState(false);
+  const [copied2, setCopied2] = useState(false);
   const isNoAuthor = (m: MangaListItem) =>
     !m.authors?.length || m.authors.every((a) => !a.name || a.name === "(unknown)");
   const isMv2026 = (m: MangaListItem) => (m.total_volumes ?? 0) >= 2 && m.year_started === 2026;
@@ -172,6 +173,21 @@ export default function HomeClient({ data }: Props) {
       await navigator.clipboard.writeText(text);
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
+    } catch {
+      alert("コピー失敗(クリップボード権限)");
+    }
+  };
+
+  // ★コピー2(テスト専用 2026-07-16): 「漫画名　作者名」の2項目だけを1作1行で(ユーザ要望)。
+  const copyFiltered2 = async () => {
+    const items = filtered as MangaListItem[];
+    const lines = items.map(
+      (m) => `${m.title}　${(m.authors || []).map((a) => a.name).join("・")}`,
+    );
+    try {
+      await navigator.clipboard.writeText(lines.join("\n"));
+      setCopied2(true);
+      setTimeout(() => setCopied2(false), 2000);
     } catch {
       alert("コピー失敗(クリップボード権限)");
     }
@@ -327,6 +343,13 @@ export default function HomeClient({ data }: Props) {
             className="tactile-chip rounded-card px-3 py-1.5 font-medium transition active:scale-95"
           >
             {copied ? "✓ コピーした" : `コピー（${filtered.length}）`}
+          </button>
+          <button
+            type="button"
+            onClick={copyFiltered2}
+            className="tactile-chip rounded-card px-3 py-1.5 font-medium transition active:scale-95"
+          >
+            {copied2 ? "✓ コピーした" : `コピー2（${filtered.length}）`}
           </button>
         </div>
       )}
