@@ -141,7 +141,9 @@
 - [【残】鬼太郎本編の多版正規化](kitaro_honpen_multiedition_pending.md) — トリガー=鬼太郎本編やって
 - [TinyFish=WebFetch補完](tinyfish_web_fetch.md) — 正=skill tinyfish
 - [Cloudflareアクセス解析](cloudflare_analytics_access.md) — 正=skill cf-analytics(_cf-analytics.py)
-- [進行中状態2026-07-15](inflight_state_2026_07_15.md) — 本番待ち2,300頁(ドラフト1,091+検索v2)・preview=2026-05絞り・次=週次
+- [進行中状態2026-07-17](inflight_state_2026_07_17.md) — 本番待ち2,300頁+完結適用2,082件・preview=2026-05絞り・次=週次
+- [【要注意】r2-manifest破損中](r2_manifest_corrupt_pending_repair.md) — 次の週次がETag照合で自動復元。それまで差分反映のabortは正常
+- [新PCへ移行済み2026-07-17](pc_migration_2026_07_17.md) — 移行で欠けるのはpip依存(boto3必須)。requestsは元々不要
 - [ソーサリアン統合=本番化済](sorcerian_consolidation_state.md) — 単巻読切連番の1頁統合の型見本(title_display/dedup/多人数ガード)
 - [slug衝突=姓+年・裸西暦禁止](slug_collision_year_rule.md) — 生成器3箇所修正済。rename正規ルート=overrides+aliases
 - [【方針】1件のバグ=型と疑う](feedback_one_bug_means_a_class.md) — 署名化→全DB掃引(全件目視)→検出器script化→月次サニティ登録まで一続き
