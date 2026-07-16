@@ -51,7 +51,7 @@ export default function RelatedWorks({
   return (
     <section className="mt-6">
       <h2 className="text-sm font-semibold text-ink/70 mb-2">関連作品</h2>
-      <ul className="flex gap-3 overflow-x-auto pb-2 -mx-1 px-1 snap-x">
+      <ul className="flex gap-3 overflow-x-auto pb-2 -mx-1 px-1 snap-x scroll-pl-1">
         {items.map(({ m, why }) => {
           const cover = primaryVolume(m)?.cover_url ?? null;
           return (

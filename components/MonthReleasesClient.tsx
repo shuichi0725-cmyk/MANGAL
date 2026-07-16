@@ -34,7 +34,8 @@ export default function MonthReleasesClient({ pool }: { pool: MonthPick[] }) {
   if (picks.length === 0) return null;
 
   return (
-    <ul className="-mx-3.5 mt-2.5 flex gap-3 overflow-x-auto px-3.5 pb-1 snap-x">
+    {/* ★scroll-pl: snapは左paddingを無視して端に吸着する→スナップ位置にも14px余白(2026-07-16 ユーザ指摘) */}
+    <ul className="-mx-3.5 mt-2.5 flex gap-3 overflow-x-auto px-3.5 pb-1 snap-x scroll-pl-3.5">
       {picks.map((r) => (
         <li key={r.slug} className="w-[96px] shrink-0 snap-start">
           <Link
