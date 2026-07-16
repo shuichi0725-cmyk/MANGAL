@@ -9,18 +9,37 @@
 使い方: python scripts/_sync-memory.py        (ミラー: 追加/更新/削除を反映)
         記憶ファイルを書いた/消した後に実行 → git add .claude-memory && commit && push。
 
-★機械依存: SRC は現PC/プロジェクトのパス。 別PCでは各自の .claude パスに合わせる。
+★SRC は自動判定(= PC/ユーザ名に依存させない)。 上書きしたい時だけ env CLAUDE_MEMORY_SRC。
+  2026-07-17: 旧PCのパス(C:\\Users\\shuic\\...)が固定で書かれており、PC移行後は
+  「★SRC無し(別PC?)」と出して**何もせず終了** = 記憶のgit永続化が黙って止まっていた。
 """
 import os, sys, shutil, glob
 sys.stdout.reconfigure(encoding="utf-8")
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-# Claude記憶の実体(このPC/プロジェクト固有)。 CLAUDE.md冒頭に記載のパスと一致。
-SRC = r"C:\Users\shuic\.claude\projects\C--Users-shuic-code-MANGAL\memory"
 DST = os.path.join(ROOT, ".claude-memory")
+
+def find_src():
+    """Claude記憶(.claude/projects/<repo>/memory)の実体を、このPCの環境から見つける。"""
+    env = os.environ.get("CLAUDE_MEMORY_SRC")
+    if env:
+        return env
+    projects = os.path.join(os.path.expanduser("~"), ".claude", "projects")
+    # Claude Code の命名 = repo絶対パスの ":" "\" "/" " " を全て "-" に潰したもの
+    mangled = ROOT.replace(":", "-").replace("\\", "-").replace("/", "-").replace(" ", "-")
+    p = os.path.join(projects, mangled, "memory")
+    if os.path.isdir(p):
+        return p
+    # 命名規則が変わった時の保険: 末尾が repo 名で一致する候補が1つだけなら採用
+    cand = [d for d in glob.glob(os.path.join(projects, "*", "memory"))
+            if os.path.basename(os.path.dirname(d)).endswith("-" + os.path.basename(ROOT))]
+    return cand[0] if len(cand) == 1 else p   # 0件/複数なら p のまま下で止める
+
+SRC = find_src()
 
 def main():
     if not os.path.isdir(SRC):
-        print(f"★SRC無し(別PC?): {SRC}", file=sys.stderr); sys.exit(1)
+        print(f"★abort: 記憶の実体が見つからない: {SRC}\n"
+              f"  env CLAUDE_MEMORY_SRC で明示指定できる。", file=sys.stderr); sys.exit(1)
     os.makedirs(DST, exist_ok=True)
     src_md = {os.path.basename(p) for p in glob.glob(os.path.join(SRC, "*.md"))}
     dst_md = {os.path.basename(p) for p in glob.glob(os.path.join(DST, "*.md"))}
