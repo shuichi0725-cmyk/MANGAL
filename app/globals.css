@@ -207,3 +207,47 @@ body {
   -webkit-line-clamp: 5;
   line-clamp: 5;
 }
+
+/* ============================================================
+   ★デザインD「マンガ・ポップ」(2026-07-16 ユーザ採用試行)
+   コマ枠=黒2px枠+ベタ影+小さめ角丸、地=薄い網点トーン、アクセント=漫画の朱。
+   ★戻す時はこのブロックを丸ごと削除(1commitでrevert可・他は無変更)。
+   ============================================================ */
+:root {
+  --color-paper: #fffdf5;
+  --color-accent: #e60023;
+  --color-accent-warm: #f08300;
+  --color-line: #141210;            /* 罫線=ベタ黒(コマ枠) */
+  --color-surface-2: #fdf6e0;       /* チップ地=淡いクリーム黄 */
+  --radius-card: 6px;
+  --radius-tag: 4px;
+  --shadow-soft: 3px 3px 0 rgba(20, 18, 16, 0.16);
+  --shadow-lift: 5px 5px 0 rgba(20, 18, 16, 0.24);
+  --shadow-press: inset 2px 2px 0 rgba(20, 18, 16, 0.18);
+}
+html,
+body {
+  /* 和紙ハッチ → 網点トーン(漫画のスクリーントーン) */
+  background-image: radial-gradient(rgba(20, 18, 16, 0.075) 1px, transparent 1.2px);
+  background-size: 9px 9px;
+  background-attachment: fixed;
+}
+/* コマ枠化: 枠は2px、角丸は控えめ、影はベタ落とし(Tailwind静的ユーティリティも寄せる) */
+.border {
+  border-width: 2px;
+}
+.shadow-sm {
+  box-shadow: 3px 3px 0 rgba(20, 18, 16, 0.16) !important;
+}
+.shadow-md {
+  box-shadow: 5px 5px 0 rgba(20, 18, 16, 0.24) !important;
+}
+.rounded-xl,
+.rounded-2xl {
+  border-radius: 6px !important;
+}
+/* 電子モードはDの上でも青アクセント+黒枠を維持 */
+html[data-purchase-mode="ebook"] {
+  --color-line: #10203c;
+  --color-surface-2: #e6ecf5;
+}
