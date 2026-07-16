@@ -238,6 +238,12 @@ for klass, r in targets:
     }
     yaml.dump(doc, open(f"{ROOT}/.preview-data/manga/{slug}.yml", "w", encoding="utf-8"),
               allow_unicode=True, sort_keys=False, width=200)
+    # ★drafts台帳にも書く(2026-07-17): incrementの「過去draft題」網は .cache/preorders/drafts*/ を読む。
+    #   A系(gen-preview)はpreview-made-*.jsonにしか記録せず、後続巻の新ISBNで同作が再登場した時に
+    #   網から漏れていた(B系_distill_dailyだけがdrafts/を書く片肺)。同じdocをそのまま複製。
+    os.makedirs(f"{ROOT}/.cache/preorders/drafts", exist_ok=True)
+    yaml.dump(doc, open(f"{ROOT}/.cache/preorders/drafts/{slug}.yml", "w", encoding="utf-8"),
+              allow_unicode=True, sort_keys=False, width=200)
     made.append(slug)
     pend_lines.append(json.dumps({"isbn": isbn, "slug": slug, "title": title, "title_kana": kana,
                                   "authors": auths, "author_kanas": akanas, "added_at": TODAY,

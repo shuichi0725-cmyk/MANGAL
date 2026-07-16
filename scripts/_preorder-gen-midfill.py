@@ -171,6 +171,10 @@ for r in cls["ex_mid"]:
                                "note": f"取りこぼし作品(予約巻v{r['_vol']}発見→キャッシュ全巻回収{len(ns)}冊)。過去巻の日付/確証は本番化前にNDL等で要補完"}}
     yaml.dump(doc, open(f"{ROOT}/.preview-data/manga/{slug}.yml", "w", encoding="utf-8"),
               allow_unicode=True, sort_keys=False, width=200)
+    # ★drafts台帳にも書く(2026-07-17 gen-previewと同修正): incrementの過去draft題網がdrafts*/を読むため
+    os.makedirs(f"{ROOT}/.cache/preorders/drafts", exist_ok=True)
+    yaml.dump(doc, open(f"{ROOT}/.cache/preorders/drafts/{slug}.yml", "w", encoding="utf-8"),
+              allow_unicode=True, sort_keys=False, width=200)
     made.append(slug)
     pend.append(json.dumps({"isbn": r["isbn"], "slug": slug, "title": title, "title_kana": kana,
                             "authors": auths, "author_kanas": akanas, "added_at": TODAY,

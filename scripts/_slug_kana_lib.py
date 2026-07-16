@@ -69,6 +69,13 @@ def make_slug(title):
     del FALLBACK[:]
     t = unicodedata.normalize('NFKC', str(title))
     t = re.sub(r'[〔\[【（(].*?[〕\]】）)]', ' ', t)
+    # ★中黒跨ぎの辞書キー救済(2026-07-17 ファム・ファタール型): ・はこの後スペース化されるため、
+    #   「ファムファタール: femme-fatale」のような結合キーが構造的に永久マッチしなかった。
+    #   ・で繋がったカタカナ列を結合形で辞書照合し、完全一致だけ英語綴りに先行置換(部分一致は触らない)。
+    def _nakaguro_dict(m):
+        joined = m.group(0).replace('・', '')
+        return f' {DIC[joined]} ' if joined in DIC else m.group(0)
+    t = re.sub(r'[ァ-ヶー]+(?:・[ァ-ヶー]+)+', _nakaguro_dict, t)
     t = re.sub(r'[・×↔→]', ' ', t)
     parts = []
     for tk in T.tokenize(t):
