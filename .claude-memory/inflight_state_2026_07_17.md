@@ -25,6 +25,11 @@ metadata:
 - 裁定待ち1件: 『私の近衛騎士が女装をする理由』の楽天ヨミ「オネエナリユウ」(ルビ読みらしい)→slug=josouのままかonee-naか。
 - ~~stub層data/manga復旧~~ → ★**7/17解消済み**(旧PCcopy69,906件・検証6/7完全一致・D:\mangal-cache\stub-mangaへ保険ミラー=[[pc-migration-2026-07-17]])。
 
+## 素材ハーベスト(2026-07-17新設=アイドル柱⑤・skill material-harvest)
+- 初回: 日付候補98,642(seed収集済・★promote結線GO待ち)/月ズレhold35,911(裁定待ち)/wiki記事3,478結線(在庫≒46分=アイドル主食)/賞=作者196・作品68(海外賞込み)
+- ★fish-residue=TINYFISH_API_KEY待ち([[pc-migration-2026-07-17]]穴④)
+- GO待ち4件はskill本文のGO待ち節が正本(date結線/月ズレ/hiatus基準/awards結線+賞名マスター)
+
 ## 次のタスク候補
 1. **週次蒸留**(上記全部を公開 + manifest復元)
 2. ソーサリアン本番化(旧9頁畳み込み+RelatedWorksガード=[[sorcerian-consolidation-state]])

@@ -39,4 +39,10 @@ metadata:
 - ★危険な副作用: `_verify-kana-pending.py` はSSL失敗を「NDL未収載→pending継続」に落とす=**エラーでも全件処理済みの顔をする**(安全側=誤確定は無いが空振り)。移行直後のNDL系結果は疑うこと。
 - **直し方(30秒)**: PowerShellで `Invoke-WebRequest https://ndlsearch.ndl.go.jp/...` を1回叩く(SChannelが中間証明書を取得しWindowsにキャッシュ→python即復旧)。ブラウザで開くでも同じ。
 
+## 移行の穴④ = `.env`(TINYFISH_API_KEY)が未搬入(7/17発覚・★鍵待ち)
+
+- `D:\migrate\env` には env.local しか無く、**`.env`(魚=TinyFishの鍵)が運ばれていない**。fish系(素材ハーベストfish-residue/試し読みharvest)が「TINYFISH_API_KEY が .env に無い」で止まる。
+- 復旧 = 旧PCの `.env` をコピー or tinyfish.ai ダッシュボードで鍵再発行 → repo直下 `.env` に `TINYFISH_API_KEY=...` を書く(gitignore済み)。
+- ★教訓: 移行対象リスト = manga.v2 + data-index + **env(.env.localと.env両方)** + data/manga + .cache主要物。
+
 その他の破損 [[r2-manifest-corrupt-pending-repair]] は移行前(7/11)から壊れていた。
