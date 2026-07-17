@@ -37,7 +37,9 @@ def load_holds():
             try:
                 cand = json.loads(c[4])
             except Exception:
-                cand = {}
+                # ★旧[:200]切り詰め行の救済(2026-07-18): 壊れJSONからtidだけregex回収。
+                #   compareはmeta(商品頁実取得)で判定するのでev欠落は問題ない。
+                cand = {tid: {} for tid in re.findall(r'"(\d{3,9})":', c[4])}
             rows.append({"slug": c[0], "title": c[1], "author": c[2], "reason": c[3], "cand": cand})
     return rows
 

@@ -185,7 +185,8 @@ def harvest(limit):
             print(f"  OK {slug} → {strong[0]}", flush=True)
         else:
             reason = "候補0" if not cand else ("完全一致なし" if not strong else ("複数候補" if len(strong) > 1 else "HEAD失敗"))
-            holds.write(f"{slug}\t{title}\t{au}\t{reason}\t{json.dumps(cand, ensure_ascii=False)[:200]}\n")
+            # ★[:200]切り詰め禁止(2026-07-18実害: 9,674保留の候補が評価不能化していた)。タブ/改行だけ潰して全量書く
+            holds.write(f"{slug}\t{title}\t{au}\t{reason}\t{json.dumps(cand, ensure_ascii=False).replace(chr(9),' ').replace(chr(10),' ')}\n")
             holds.flush()
             n_hold += 1
         time.sleep(1.0)
