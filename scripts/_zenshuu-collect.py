@@ -32,16 +32,26 @@ _spec.loader.exec_module(_lookup)
 
 UA = "MANGAL-zenshuu-collect/1.0"
 
-# 対象全集 (= key / wikipedia記事名 / NDL CQL)
+# 対象全集 (= key / wikipedia記事名 / NDL CQL / 楽天titleクエリ)
 TARGETS = [
-    ("tezuka",    "手塚治虫漫画全集",        'creator="手塚治虫" AND title="手塚治虫漫画全集"'),
-    ("fujiko-f",  "藤子・F・不二雄大全集",   'creator="藤子・F・不二雄" AND title="藤子・F・不二雄大全集"'),
-    ("ishinomori","石ノ森萬画大全集",  'creator="石ノ森章太郎" AND title="萬画大全集"'),
+    ("tezuka",     "手塚治虫漫画全集",       'creator="手塚治虫" AND title="手塚治虫漫画全集"',       "手塚治虫漫画全集"),
+    ("fujiko-f",   "藤子・F・不二雄大全集",  'creator="藤子・F・不二雄" AND title="藤子・F・不二雄大全集"', "藤子・F・不二雄大全集"),
+    ("ishinomori", "石ノ森萬画大全集",       'creator="石ノ森章太郎" AND title="萬画大全集"',          "石ノ森章太郎萬画大全集"),
+    ("mizuki",     "水木しげる漫画大全集",   'creator="水木しげる" AND title="水木しげる漫画大全集"',   "水木しげる漫画大全集"),
+    ("fujiko-land","藤子不二雄ランド",       'title="藤子不二雄ランド"',                              "藤子不二雄ランド"),
+    ("kamuiden",   "カムイ伝",               'creator="白土三平" AND title="カムイ伝全集"',            "カムイ伝全集"),
+    ("tsuge",      "つげ義春",               'creator="つげ義春" AND title="つげ義春全集"',            "つげ義春全集"),
+    ("hasegawa",   "長谷川町子",             'creator="長谷川町子" AND title="長谷川町子全集"',        "長谷川町子全集"),
 ]
+
+def _sel():
+    """argv[2:] でkey絞り(無指定=全部)。"""
+    keys = set(sys.argv[2:])
+    return [t for t in TARGETS if not keys or t[0] in keys]
 
 
 def cmd_wiki():
-    for key, article, _ in TARGETS:
+    for key, article, _, _q in _sel():
         p = {"action": "parse", "page": article, "prop": "wikitext", "format": "json",
              "formatversion": "2", "redirects": "1"}
         req = urllib.request.Request("https://ja.wikipedia.org/w/api.php?" + urllib.parse.urlencode(p),
@@ -59,7 +69,7 @@ def cmd_wiki():
 
 
 def cmd_ndl():
-    for key, _, cql in TARGETS:
+    for key, _, cql, _q in _sel():
         out_p = os.path.join(OUT, f"ndl-{key}.jsonl")
         recs_all, start = [], 1
         while True:
@@ -80,7 +90,7 @@ def cmd_rakuten():
     """楽天Books title検索で巻ISBN回収 (= NDLがセット親+内容細目方式でISBNを持たない全集の代替経路。
     石ノ森萬画大全集で実証。ページング・1.2s/req・outOfStockFlag=1)"""
     env = _lookup._env()
-    for key, q in (("ishinomori", "石ノ森章太郎萬画大全集"), ("tezuka", "手塚治虫漫画全集"), ("fujiko-f", "藤子・F・不二雄大全集")):
+    for key, _a, _c, q in _sel():
         out_p = os.path.join(OUT, f"rakuten-{key}.jsonl")
         rows, page = [], 1
         while page <= 34:
@@ -115,7 +125,7 @@ def cmd_rakuten():
 def cmd_report():
     idx_p = os.path.join(ROOT, ".cache", "isbn-page-index.json")
     idx = json.load(io.open(idx_p, encoding="utf-8")) if os.path.exists(idx_p) else {}
-    for key, article, _ in TARGETS:
+    for key, article, _, _q in _sel():
         p = os.path.join(OUT, f"ndl-{key}.jsonl")
         if not os.path.exists(p):
             print(f"{key}: NDL未収集")
