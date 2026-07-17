@@ -23,7 +23,7 @@ metadata:
 - **「最新巻の発売日≥2026-05」絞り=1,253頁**+sorcerian(統合頁hold=[[sorcerian-consolidation-state]])。実体は無傷、絞りは表示のみ。
 - 裁定待ち1件: 『私の近衛騎士が女装をする理由』の楽天ヨミ「オネエナリユウ」(ルビ読みらしい)→slug=josouのままかonee-naか。
 - ★7/17日次分の確認待ち: 新作ドラフト3件(femme-fatale-o-meshiagare/zieina-drive=表紙ロゴ公式英字で裁定済/saka-no-aru-machi)。
-- ★最重要裁定待ち: **stub層data/manga復旧**([[pc-migration-2026-07-17]]の穴②=旧PCからのcopyが最善)。
+- ~~stub層data/manga復旧~~ → ★**7/17解消済み**(旧PCcopy69,906件・検証6/7完全一致・D:\mangal-cache\stub-mangaへ保険ミラー=[[pc-migration-2026-07-17]])。
 
 ## 次のタスク候補
 1. **週次蒸留**(上記全部を公開 + manifest復元)

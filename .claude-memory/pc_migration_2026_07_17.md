@@ -25,11 +25,12 @@ metadata:
 - R2認証はこのPCから疎通確認済み(mangal-site 読取OK / 134,066オブジェクト / 100%が単一part=ETagはMD5)。
 - git push権限OK。記憶ミラー `.claude-memory` 154 = ローカル154で同期済み。
 
-## ★移行の穴② = stub層 data/manga が無い(7/17日次蒸留で発覚・最重要)
+## 移行の穴② = stub層 data/manga 欠損 → ★7/17ユーザが旧PCからcopyして解消済み
 
-- **`data/manga/`(promoteのSRC=slug結線+_skey+分かち書きkana+enrich蓄積の~68k yml)はgitignoreで移行から漏れた**(git追跡は例外5件のみ)。`promote --only` が **total:0で空振り**し、reflectが「成功した顔で何も再生成しない」。
-- ★D:にstubバックアップは**無い**(`D:\mangal-cache\appdata\manga`=manga.v2スナップショット7/1でstubではない)。
-- ★stubはv2から完全復元**できない**: stubの title_kana は「スペース入り分かち書き」でromajiの語区切り源(v2側はstrip済)。v2+種3のtitle_kana_segmented+_skeyで**外科的復元は可能**(7/17に3件実証: before/after diff=巻追加のみ)。復元手順=commit 40356eaff参照。
-- **恒久復旧はユーザ裁定待ち**: 最善=旧PCの `data/manga` を丸ごとコピー。それまで per-case promote/reflect は**stubが在る頁のみ**効く(無い頁は空振り=必ずpromoteログの regenerated 数を確認)。
+- **`data/manga/`(promoteのSRC・69,906 yml・gitignore)はgitignoreで移行から漏れていた**。`promote --only` が **total:0で空振り**し、reflectが「成功した顔で何も再生成しない」症状(7/17日次蒸留で発覚)。
+- ★stubの実体=**最小形の slug↔クラスタ結線層**(slug/title/qid/_skey/title_romaji''のみ)。kana/romaji/genre等は全部seed側(スペース入り分かち書きヨミの供給源=`data/seeds/title-kana-fill.yml`)。git追跡は例外8件のみ。
+- **復旧検証済み**: 代表7頁promote→現行v2とdiff、6頁完全一致+1頁はkana1字が正規系(オ)へ収束=健全。
+- ★**再発保険: `D:\mangal-cache\stub-manga` にミラー**(7/17 robocopy /MIR)。次のPC移行では **data/manga を移行対象に必ず含める**(移行物=manga.v2+data-index+env+**data/manga**+.cache主要物)。
+- promoteが空振りしていないかは **ログの regenerated 数**で常に確認する(0=stub不在シグナル)。
 
 その他の破損 [[r2-manifest-corrupt-pending-repair]] は移行前(7/11)から壊れていた。
