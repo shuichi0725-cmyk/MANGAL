@@ -32,7 +32,7 @@ import _r2_manifest
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUT = os.path.join(ROOT, "out")
-DIFFDATA = r"D:\mangal-cache\diffdata"
+DIFFDATA = os.path.join(ROOT, ".cache", "diffdata")  # ★2026-07-17 C:化(ユーザ裁定=D:はバックアップ倉庫のみ・ビルド経路に入れない)
 MARKER = os.path.join(ROOT, ".cache", "prod-deploy-marker.json")
 MANIFEST = os.path.join(ROOT, ".cache", "r2-manifest.json")
 BUCKET = "mangal-site"

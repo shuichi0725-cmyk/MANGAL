@@ -37,9 +37,12 @@ python scripts/_weekly-preflight.py --fix     # FAILが1つでもあればビル
 - 下の「ディスク事前確認」の手動PowerShellはpreflightが代替(復旧手順のみ手動参照)。
 
 ### 3. フルビルド (★実測2.5〜3.5h、バックグラウンド+Monitor)
-★**preflight全通過(exit 0)を確認してから開始**(C:満杯だと終盤のexportコピーがENOSPC死する)。
+★**preflight全通過(exit 0)を確認してから開始**。
+★**2026-07-17 C:完結に全面改訂(ユーザ裁定)**: ジャンクション全廃・staging=`.cache/proddata`(実体コピー)・
+out/.next=C:実体。**D:はバックアップ倉庫のみでビルド経路に入れない**(外付けD:はストールしやすく、
+junction経由だとC:側の操作まで巻き込まれる=2026-07-17実害。旧D:構成は旧PCのC:満杯が理由で新PCでは無意味)。
 ```
-$env:MANGAL_DATA_DIR="D:\mangal-cache\proddata"; npx next build 2>&1 | Out-File .cache\weekly-build.log
+$env:MANGAL_DATA_DIR="C:\Users\chiba shuichi\code\MANGAL\.cache\proddata"; npx next build 2>&1 | Out-File .cache\weekly-build.log
 ```
 - ★`staticPageGenerationTimeout=300s`(next.config.ts)前提。既定60sだと重頁(home-design=66k全読込)がワーカー競合で3回超過しビルドkill(2026-07-05 home-design-05で発覚・是正済)。
 - Monitor は 1万頁節目+「after 3 attempts / Export encountered / Build error」+完了のみ通知(2分毎は通知過多)。
@@ -83,18 +86,11 @@ python scripts/_weekly-finalize.py
 - どれかが言えない=完了していない(finalizeがexit 0を返すまで完了報告禁止)
 
 
-## ★ディスク事前確認 (= 2026-07-10より `_weekly-preflight.py --fix` が自動実施。以下は仕組みの説明+ENOSPC復旧手順)
-★**out/と.nextは常にD:へジャンクションしてからビルド**(C:は満杯気味・D:に455GB空き)。`out/+.next`で計10-15GB要る。
-手動でやる場合(PowerShell):
-```
-Get-PSDrive C,D | Select Name,@{n='Free_GB';e={[math]::Round($_.Free/1GB,1)}}   # 確認
-cmd /c rmdir "C:\Users\shuic\code\MANGAL\out" "C:\Users\shuic\code\MANGAL\.next" 2>$null
-New-Item -ItemType Directory -Force "D:\mangal-cache\weekly-out","D:\mangal-cache\next-build" | Out-Null
-cmd /c mklink /J "C:\Users\shuic\code\MANGAL\out" "D:\mangal-cache\weekly-out"
-cmd /c mklink /J "C:\Users\shuic\code\MANGAL\.next" "D:\mangal-cache\next-build"
-```
-- junction中は `next build` がout/を消す時リンクを触るので、**毎ビルド前にrmdir→mklinkし直す**のが安全。
-- ★ENOSPC復旧(万一C:直ビルドで途中失敗した時): outをD:へ`robocopy SRC DST /E /MOVE`退避→`cmd /c rmdir`でjunction作成→`.next/server/app`の`.html`/`.rsc`を out へ手コピー(.rsc→.txt改名・既存skip)で**2h再ビルド回避**できる(2026-07-05実証)。junction除去は`cmd /c rmdir`(Remove-Itemは中身を追ってD:保護に弾かれる)。
+## ★ディスク方針 (= 2026-07-17 C:完結に改訂。旧D:ジャンクション運用は全廃)
+- preflightがC:空き30GB+を検査(out/.next 10-15GB+staging ~3GB)。新PCはC:850GB級空きで余裕。
+- **ジャンクションは作らない**(残骸junctionがD:を指しているとD:ストール時にC:側の操作まで固まる=2026-07-17実害)。
+- ★D:の役割=**バックアップ倉庫のみ**(stub-manga保険ミラー等)。ビルド・staging・一時ファイルは全てC:。
+- ENOSPC復旧(参考・C:が万一逼迫した時): `.next/server/app`の`.html`/`.rsc`を out へ手コピー(.rsc→.txt改名・既存skip)で再ビルド回避可(2026-07-05実証)。
 
 ## 備考
 - ★カレンダーは索引と同型の二重化(2026-07-06): public/calendar=preview実在フィルタ版なので、_r2-sync.pyが **data/calendar(本番フル)で自動overlay**する。Step1の再生成はフル/preview両方を回すこと(daily-distill Dと同じコマンド)。
@@ -102,10 +98,9 @@ cmd /c mklink /J "C:\Users\shuic\code\MANGAL\.next" "D:\mangal-cache\next-build"
 - 本番ドメイン mangal-db.com = 紐付け済(2026-07-10 疎通200確認。smokeの既定BASE)。
 - edge cache(HTML s-maxage=86400)により旧頁が最長1日残る。確認は `?v=` クエリでバイパス。
 
-## ★ビルド環境の罠(2026-07-12 実害3連発→恒久対処済み。消すな)
-- **D:\node_modules junction 必須**: `.next`をD:へjunctionすると、ビルド成果物からの`require('react')`が
-  node_modulesに届かず`Cannot find module 'react/jsx-runtime'`で死ぬ。対処= `cmd /c mklink /J D:\node_modules C:\Users\shuic\code\MANGAL\node_modules`
-  (作成済み。消えていたら再作成)。next-build内に旧ビルド残骸があると同エラー→`rm -rf D:/mangal-cache/next-build/*`
+## ★ビルド環境の罠(2026-07-12 実害3連発→2026-07-17 C:完結化で一部陳腐化。現行版)
+- ~~D:\node_modules junction~~ = **C:完結化で不要になった**(.next/outがC:実体になったためrequire解決は普通に届く)。
 - **buildは必ずStart-Processでデタッチ起動**: ツールのrun_in_backgroundは~10分で親ごとkillされworker巻き添え死。
-  `Start-Process powershell -ArgumentList "-NoProfile","-File","D:\mangal-cache\_wkbuild.ps1" -WindowStyle Hidden`
-- **r2-syncも同様にscript file経由でデタッチ**(`D:\mangal-cache\_r2sync.ps1`作成済み)。PSの`|Out-File`パイプ直渡しは空ログ即死する
+  `Start-Process powershell -ArgumentList "-NoProfile","-File","C:\Users\chiba shuichi\code\MANGAL\.cache\_wkbuild.ps1" -WindowStyle Hidden`
+- **r2-syncも同様にscript file経由でデタッチ**(`.cache\_r2sync.ps1`)。PSの`|Out-File`パイプ直渡しは空ログ即死する
+- ps1 2本は `.cache/` 置き(C:)。中身のパスはこのPCの絶対パス=PC移行時は書き直す。
