@@ -151,3 +151,4 @@
 - [Gemini API運用実測](gemini_api_ops.md) — ~500req/日・JST16時リセット・flash-lite主力・グラウンディング枠外
 - [M5_Ultra=家庭内ファイルサーバー構成](m5ultra_file_server_setup.md) — 固定IP.146/E:共有/share1認証/スリープ無効。幽霊SIDはtakeown+icacls resetで退治
 - [全集コーナー=素材収集済み](zenshuu_corner_state.md) — 手塚421/藤子F123冊未収・石ノ森=単巻ISBN無し(期セット)。まとめはGO待ち
+- [試し読み裁定=枯れ達成](tameshiyomi_adjudication_state.md) — アンカー25,149・保留9,749全分類・台帳=docs/…/tameshiyomi-adjudication.jsonl
