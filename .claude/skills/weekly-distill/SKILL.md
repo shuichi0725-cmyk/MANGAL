@@ -48,6 +48,12 @@ $env:MANGAL_DATA_DIR="C:\Users\chiba shuichi\code\MANGAL\.cache\proddata"; npx n
 - Monitor は 1万頁節目+「after 3 attempts / Export encountered / Build error」+完了のみ通知(2分毎は通知過多)。
 - attempt 1-2 の retry は **コールドワーカーの初回66k読込(warmup)**=正常。300s猶予で温まればリトライ成功。
 - 終盤(6万頁以降)は重頁が残り生成速度が落ちる=正常。完了判定: log 末尾 `✓ Exporting (2/2)` + `out/manga` ファイル数 ≈ 頁数×2(≈132k)。
+  ★**`✓ Exporting (2/2)` 単独では完了扱いしない**(2026-07-17実害: その直後に
+  `build worker exited with code: 4294967295` でexport copy workerが即死し、生成は全完了なのに
+  out/がスケルトン11MBのままだった)。**必ず out/manga 枚数を数えてから** node kill に進む。
+- ★export copy死の復旧(=再ビルド不要・2026-07-05手順の一般化・07-17に67,920頁で実証102秒):
+  `.next/server/app` を walk し `*.html→out/<rel>.html` / `*.rsc→out/<rel>.txt`(`.meta`と`_not-found`はskip・既存skip)。
+  静的chunk(out/_next)とpublic系はexport序盤で搬出済みのことが多い=検証は du で。
 - ★完了後の**居座りnodeをStop-Process**(Windows恒例。file lock解除)。
 
 ### 3.5 sitemap生成 (build後・sync前)
