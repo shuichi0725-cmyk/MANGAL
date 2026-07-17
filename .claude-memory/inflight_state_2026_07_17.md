@@ -27,7 +27,7 @@ metadata:
 
 ## 素材ハーベスト(2026-07-17新設=アイドル柱⑤・skill material-harvest)
 - 初回: 日付候補98,642(seed収集済・★promote結線GO待ち)/月ズレhold35,911(裁定待ち)/wiki記事3,478結線(在庫≒46分=アイドル主食)/賞=作者196・作品68(海外賞込み)
-- ★fish-residue=TINYFISH_API_KEY待ち([[pc-migration-2026-07-17]]穴④)
+- fish-residue=鍵解消済み・稼働可(deny=Amazon/楽天・サイト台帳簿記)
 - GO待ち4件はskill本文のGO待ち節が正本(date結線/月ズレ/hiatus基準/awards結線+賞名マスター)
 
 ## 次のタスク候補
