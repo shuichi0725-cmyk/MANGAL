@@ -41,8 +41,14 @@ python scripts/_verify-kana-pending.py --limit 300   # ③ヨミ照合(★1パ�
 現在: ①試し読みexpand消化 ②Gemini検品連鎖(probe→verify) ③NDLヨミ照合(1パス)
 ④**完結判定backlogスイープ**(=skill completion-judge。`--backlog --limit 300`→worksheet記入(明示文言のみtrue)→`--collect`→commit。
   ②③と違い記入判断があるが「captionに完結の引用があるか」だけ=Sonnet安全。適用(--apply)は絶対にやらない=Opus+専権)。
+⑤**素材ハーベスト**(=skill material-harvest 2026-07-17新設。本番に書かず素材収集のみ):
+  `python scripts/_material-harvest.py wiki-fetch --limit 500`(主食=wiki本文+infobox。在庫~3.5k)
+  → 在庫が切れたら `fish-residue --limit 50`(★.envのTINYFISH_API_KEY必須。無ければskipして報告)。
+  triage/dates-local/wiki-link/awards は素材が古くなった時だけ(週1目安)。全cmd冪等・逐次保存。
+  ★wiki-fetch は ③(NDL)や①(BookLive)とホスト別=並走可。commitは素材がcache置きなので不要
+  (date seedのみ `git add data/seeds/release-date-fill.jsonl` を終了時に1回)。
 退役: 旧①アンカー収集ループ(`_idle-tameshiyomi-loop.sh`)=2026-07-15対象枯れ(queue空なら即終了するので起動しても無害)。
 候補: Kobo書影resume / 楽天キャッシュmiss(B系欠落)のlive照会 — 追加時は「逐次保存・自然停止・冪等再開」の3条件を満たすこと。
 
 ## 関連
-- 各柱の正本: tameshiyomi-harvest / gemini-genre-audit / daily-distill(手順8=ヨミ照合) / enrich-catch-synopsis(Gemini同定)
+- 各柱の正本: tameshiyomi-harvest / gemini-genre-audit / daily-distill(手順8=ヨミ照合) / enrich-catch-synopsis(Gemini同定) / material-harvest(素材収集)
