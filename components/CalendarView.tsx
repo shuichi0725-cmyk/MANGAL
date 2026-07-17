@@ -35,6 +35,38 @@ export default function CalendarView() {
   const [sel, setSel] = useState<string | null>(null); // "ym-dd"
   const scroller = useRef<HTMLDivElement>(null);
 
+  // ★戻る復元(2026-07-17 ユーザ要望): 選択日・表示月を sessionStorage に持ち、
+  //   作品頁→戻るで「日付を押し直してリンクを出し直す」二度手間を無くす(一覧表のスクロール復元と同方式)。
+  //   月替わりで stale になった保存値は単に何にもマッチせず無害。
+  useEffect(() => {
+    try {
+      const s = sessionStorage.getItem("calv:sel");
+      if (s) setSel(s);
+    } catch {}
+  }, []);
+  useEffect(() => {
+    try {
+      if (sel) sessionStorage.setItem("calv:sel", sel);
+      else sessionStorage.removeItem("calv:sel");
+    } catch {}
+  }, [sel]);
+  useEffect(() => {
+    try { sessionStorage.setItem("calv:active", String(active)); } catch {}
+  }, [active]);
+  const restoredPanel = useRef(false);
+  useEffect(() => {
+    if (!current || restoredPanel.current) return;
+    restoredPanel.current = true;
+    let a = 0;
+    try { a = Number(sessionStorage.getItem("calv:active") ?? "0") || 0; } catch {}
+    if (a > 0) {
+      requestAnimationFrame(() => {
+        const el = scroller.current;
+        if (el) el.scrollTo({ left: a * el.clientWidth }); // 瞬時復元(smoothなし)→onScrollがactive/下線を追従
+      });
+    }
+  }, [current]);
+
   const index = useMangaIndex();
   const bySlug = useMemo(() => {
     const m = new Map<string, MangaListItem>();
