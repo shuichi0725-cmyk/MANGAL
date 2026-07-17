@@ -315,6 +315,8 @@ def cmd_fish_residue(a):
     from _tinyfish import search as tf_search, fetch as tf_fetch
     ledger_p = os.path.join(MAT, "fish-site-ledger.json")
     ledger = json.load(io.open(ledger_p, encoding="utf-8")) if os.path.exists(ledger_p) else {}
+    # ★fetchしないドメイン: Amazon=PA-APIのみ合法(既裁定) / 楽天=照会は_lookup.py経由(skill external-data-access)
+    DENY = ("amazon.co.jp", "amazon.com", "rakuten.co.jp")
     linked = {r["slug"] for r in _jsonl_load(os.path.join(MAT, "wiki-links.jsonl")) if r.get("article")}
     # caption有無: delta cacheを引かず、素材庫に無い×wiki無しをそのまま残差扱い(v1)
     out = os.path.join(MAT, "fish-material.jsonl")
@@ -336,7 +338,7 @@ def cmd_fish_residue(a):
         pick = []
         for x in results[:5]:
             dom = urllib.parse.urlparse(x.get("url", "")).netloc
-            if ledger.get(dom) == "blocked":
+            if ledger.get(dom) == "blocked" or any(dom.endswith(d) for d in DENY):
                 continue
             pick.append(x["url"])
             if len(pick) >= 2:
@@ -349,8 +351,11 @@ def cmd_fish_residue(a):
                 fr = {"results": [], "errors": [{"url": u, "error": str(e)[:80]} for u in pick]}
             for ok in (fr or {}).get("results") or []:
                 dom = urllib.parse.urlparse(ok.get("url", "")).netloc
-                ledger[dom] = "ok"
-                texts.append({"url": ok.get("url"), "text": (ok.get("markdown") or ok.get("content") or "")[:4000]})
+                body = (ok.get("text") or ok.get("markdown") or "")[:4000]
+                # 空文=取れていない(JS重等)。okにせずempty印(=blockedとは区別・再挑戦余地を残す)
+                ledger[dom] = "ok" if body.strip() else ledger.get(dom, "empty")
+                if body.strip():
+                    texts.append({"url": ok.get("url"), "text": body})
             for er in (fr or {}).get("errors") or []:
                 dom = urllib.parse.urlparse(er.get("url", "")).netloc
                 ledger.setdefault(dom, "blocked")
