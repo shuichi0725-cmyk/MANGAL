@@ -197,6 +197,7 @@ def main():
     ap.add_argument("--limit", type=int, default=50)
     ap.add_argument("--review", action="store_true")
     ap.add_argument("--accept", help="slug=title_id 形式で保留を手動採用")
+    ap.add_argument("--accept-file", help="一括採用TSV(slug<TAB>title_id)。裁定済み前提・HEADゲート同等")
     ap.add_argument("--stats", action="store_true")
     ap.add_argument("--expand", action="store_true", help="アンカー済みシリーズを全巻展開(検索不要)")
     ap.add_argument("--expand-limit", type=int, default=50, help="--expand で処理するシリーズ数上限")
@@ -216,6 +217,41 @@ def main():
     if a.review:
         if os.path.exists(HOLDS):
             print(open(HOLDS, encoding="utf-8").read())
+        return
+    if a.accept_file:
+        # ★一括採用(2026-07-18 保留裁定バッチ用): TSV(slug<TAB>title_id)を1行ずつ --accept と同じ保証で処理
+        #   (HEAD200ゲート/seed追記/保留行除去)。裁定自体はAIが済ませた前提=このscriptは検証と簿記のみ。
+        import concurrent.futures as _cf
+        pairs = []
+        seen_seed = set()
+        if os.path.exists(SEED):
+            for l in open(SEED, encoding="utf-8"):
+                try: seen_seed.add(json.loads(l)["slug"])
+                except Exception: pass
+        for l in open(a.accept_file, encoding="utf-8"):
+            c = l.rstrip("\n").split("\t")
+            if len(c) >= 2 and c[0] and not c[0].startswith("#") and c[0] not in seen_seed:
+                pairs.append((c[0], c[1]))
+        print(f"一括採用: 対象{len(pairs)}(seed既存はskip済)")
+        ok_pairs, ng = [], 0
+        with _cf.ThreadPoolExecutor(max_workers=8) as ex:
+            futs = {ex.submit(head_ok, f"{t}_001"): (s, t) for s, t in pairs}
+            for fu in _cf.as_completed(futs):
+                s, t = futs[fu]
+                try:
+                    if fu.result(): ok_pairs.append((s, t))
+                    else: ng += 1
+                except Exception: ng += 1
+        with open(SEED, "a", encoding="utf-8") as f:
+            for s, t in ok_pairs:
+                f.write(json.dumps({"slug": s, "title_id": t, "cid1": f"{t}_001",
+                                    "verified": "head200+manual", "at": time.strftime("%Y-%m-%d")},
+                                   ensure_ascii=False) + "\n")
+        done = {s for s, _ in ok_pairs}
+        if os.path.exists(HOLDS):
+            lines = [l for l in open(HOLDS, encoding="utf-8") if l.split("\t", 1)[0] not in done]
+            open(HOLDS, "w", encoding="utf-8").writelines(lines)
+        print(f"採用 {len(ok_pairs)} / HEAD失敗 {ng} (失敗分は保留のまま)")
         return
     if a.accept:
         slug, tid = a.accept.split("=", 1)
