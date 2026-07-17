@@ -20,10 +20,9 @@ metadata:
 - ★**週次は r2-manifest の復元も兼ねる** = [[r2-manifest-corrupt-pending-repair]](それまで「差分反映して」はabort=正常)
 
 ## preview現況
-- ★**preview実体=日次7/17ドラフト3頁のみ**(rakuten_partial2頁[mainichi/red-dragon]は成年判定で本番ごとドロップ済=force_adult+adult-drop-changelog。R2上の旧HTML/索引の公開消滅は次の週次)。
+- ★**preview=空(解放済み)**。日次7/17ドラフト3頁は本番化済み(preorder-pages恒久+manga.v2+索引=週次待ち)。mainichi/red-dragonは成年ドロップ済(公開消滅は週次)。
 - ★アダルトスキャン①②=**完了**(triage837×1,853ISBN→835頁が楽天一般流通/partial2/absent0。TSV=adult-scan-rakuten.tsv。対照=真成年4冊はAPI不在。ドロップ/override適用は未実施=ユーザ確定待ち)。
 - 裁定待ち1件: 『私の近衛騎士が女装をする理由』の楽天ヨミ「オネエナリユウ」(ルビ読みらしい)→slug=josouのままかonee-naか。
-- ★7/17日次分の確認待ち: 新作ドラフト3件(femme-fatale-o-meshiagare/zieina-drive=表紙ロゴ公式英字で裁定済/saka-no-aru-machi)。
 - ~~stub層data/manga復旧~~ → ★**7/17解消済み**(旧PCcopy69,906件・検証6/7完全一致・D:\mangal-cache\stub-mangaへ保険ミラー=[[pc-migration-2026-07-17]])。
 
 ## 次のタスク候補
