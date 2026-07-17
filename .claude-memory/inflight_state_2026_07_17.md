@@ -9,15 +9,10 @@ metadata:
 
 旧 [[inflight-state-2026-07-15]] を置換(引き継ぎ分は下の保留キュー)。
 
-## 週次待ち(次の「週次蒸留して」で本番公開・全て本番化/適用済み)
-- **予約ドラフト1,091頁本番化**(1,024=数週分レビュー済み+67=7/14日次分。preorder-pages恒久)
-- **検索v2+索引v3**(検索索引廃止・一覧共有・authorsパック・fl・head/alt・衛生監査ゲート=[[lightweight_index_architecture]])
-- **一覧表の戻る復元**(さらに表示n/並びs=URL・スクロール=sessionStorage)
-- **巻title_display表示**(VolumeSchema+VolumeCoverflow=ソーサリアン型の汎用機構)
-- 西暦suffix見直し18rename(slug-overrides+aliases=[[slug-collision-year-rule]])・著者中黒分割6件・題末尾「上/（上）」剥離15件・赤塚不二夫語辞典drop(非漫画)・アスペルガー本のNDL改題適用
-- 7/14日次分: 続巻40巻(reflect済=本番R2にも出てる)・genre28件付与
-- ★**完結適用2,082件**(7/17 commit 3f640371b = status既定の証拠ベース化。S側2,082完結化 / F側1,828を連載中へ復帰)
-- ★**週次は r2-manifest の復元も兼ねる** = [[r2-manifest-corrupt-pending-repair]](それまで「差分反映して」はabort=正常)
+## 週次待ち → ★2026-07-17夜 週次蒸留で全て公開済み
+- ドラフト1,094頁(1,091+日次3)・完結適用2,082件・検索v2+索引v3・一覧戻る復元・巻title_display・西暦rename等・成年drop2頁の索引消滅 = 全部本番ライブ(put136,599/smoke10PASS)。
+- r2-manifest=ETag照合で復元済み(補完871/退避r2-manifest-bad-20260717-200553.json)。差分反映(diff-deploy)も基準リセット済みで使用可。
+- ★成年drop2頁(mainichi/red-dragon)の旧HTMLはR2に残存(直URLのみ・索引不在)。次回--prune判断で掃除可。
 
 ## preview現況
 - ★**preview=空(解放済み)**。日次7/17ドラフト3頁は本番化済み(preorder-pages恒久+manga.v2+索引=週次待ち)。mainichi/red-dragonは成年ドロップ済(公開消滅は週次)。
@@ -30,7 +25,7 @@ metadata:
 - fish-residue=鍵解消済み・稼働可(deny=Amazon/楽天・サイト台帳簿記)
 - GO待ち4件はskill本文のGO待ち節が正本(date結線/月ズレ/hiatus基準/awards結線+賞名マスター)
 
-## ★週次蒸留=実行中(2026-07-17午後)
+## ~~週次蒸留=実行中~~ → 完了(下記)
 - 事前再生成+preflight済み→**フルビルド走行中**(C:完結・.cache/_wkbuild.ps1をStart-Process起動・logは.cache/weekly-build.log)。
 - ★今回からビルドは**C:完結**(ユーザ裁定=ジャンクション全廃・D:はバックアップ倉庫のみ。D:ストール実害が契機。preflight/skill/deploy-differential改訂済みcommit 01a736b1f)。
 - 残手順: sitemap→r2-sync(.cache/_r2sync.ps1=★破損manifestのETag復元が今回発動)→purge→finalize→報告。
