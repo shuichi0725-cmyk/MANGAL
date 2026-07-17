@@ -143,7 +143,7 @@
 - [Cloudflareアクセス解析](cloudflare_analytics_access.md) — 正=skill cf-analytics(_cf-analytics.py)
 - [進行中状態2026-07-17](inflight_state_2026_07_17.md) — 本番待ち2,300頁+完結適用2,082件・preview=2026-05絞り・次=週次
 - [【要注意】r2-manifest破損中](r2_manifest_corrupt_pending_repair.md) — 次の週次がETag照合で自動復元。それまで差分反映のabortは正常
-- [新PCへ移行済み2026-07-17](pc_migration_2026_07_17.md) — 穴①pip依存・穴②stub層data/manga とも解消済。stub=最小結線層・D:\mangal-cache\stub-mangaに保険ミラー
+- [新PCへ移行済み2026-07-17](pc_migration_2026_07_17.md) — 穴①pip・穴②stub層・穴③NDL SSL(中間証明書=PS1回で解消)全て解消済。stub=最小結線層・D:に保険ミラー
 - [ソーサリアン統合=本番化済](sorcerian_consolidation_state.md) — 単巻読切連番の1頁統合の型見本(title_display/dedup/多人数ガード)
 - [slug衝突=姓+年・裸西暦禁止](slug_collision_year_rule.md) — 生成器3箇所修正済。rename正規ルート=overrides+aliases
 - [【方針】1件のバグ=型と疑う](feedback_one_bug_means_a_class.md) — 署名化→全DB掃引(全件目視)→検出器script化→月次サニティ登録まで一続き

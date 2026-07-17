@@ -33,4 +33,10 @@ metadata:
 - ★**再発保険: `D:\mangal-cache\stub-manga` にミラー**(7/17 robocopy /MIR)。次のPC移行では **data/manga を移行対象に必ず含める**(移行物=manga.v2+data-index+env+**data/manga**+.cache主要物)。
 - promoteが空振りしていないかは **ログの regenerated 数**で常に確認する(0=stub不在シグナル)。
 
+## 移行の穴③ = NDLだけSSL失敗(7/17発覚・即解消) ★症状と直し方を覚えておく
+
+- 症状: python の NDL照会だけ `SSL: CERTIFICATE_VERIFY_FAILED (unable to get local issuer)`(楽天は正常)。★**新Windowsは中間証明書を未キャッシュ**で、pythonはOSと違い自動取得(AIA fetch)しないため。
+- ★危険な副作用: `_verify-kana-pending.py` はSSL失敗を「NDL未収載→pending継続」に落とす=**エラーでも全件処理済みの顔をする**(安全側=誤確定は無いが空振り)。移行直後のNDL系結果は疑うこと。
+- **直し方(30秒)**: PowerShellで `Invoke-WebRequest https://ndlsearch.ndl.go.jp/...` を1回叩く(SChannelが中間証明書を取得しWindowsにキャッシュ→python即復旧)。ブラウザで開くでも同じ。
+
 その他の破損 [[r2-manifest-corrupt-pending-repair]] は移行前(7/11)から壊れていた。
