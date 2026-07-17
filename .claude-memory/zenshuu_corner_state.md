@@ -1,0 +1,29 @@
+---
+name: zenshuu-corner-state
+description: 全集コーナー構想(2026-07-18ユーザGO=③)。素材収集済み(.cache/enrich-material/zenshuu/)。手塚421冊・藤子F123冊が未収と判明。★石ノ森萬画大全集=単巻ISBN無し(期セット売り)の刊行形態
+metadata: 
+  node_type: memory
+  type: project
+  originSessionId: 2263dd16-1146-4141-862a-d1a3408de999
+---
+
+**構想(ユーザ裁定2026-07-18)**: 既刊の全集を「wiki/出版社で情報収集→見つけてまとめる」方式で作家名コーナー化。①コーナー実装 ②巻補完 の順序は未裁定。**収集フェーズは完了**、まとめ(種4生成・頁結線・コーナーUI)はユーザGO待ち。
+
+## 本番の現状(2026-07-18棚卸し)
+- imprint=全集系: **214頁**(赤塚大全集82/手塚漫画全集66/手塚文庫全集27/木原敏江9/藤子F 7/石ノ森4/ちばてつや2+2[表記揺れ]…)+ 題名=全集の合本型34頁。
+- **手塚治虫漫画全集(講談社・全400巻): 本番97冊のみ**。藤子F大全集(全115巻): 7頁。
+
+## 収集済み素材 = `.cache/enrich-material/zenshuu/`(2026-07-18・再収集可)
+- `wiki-{tezuka,fujiko-f}.txt` = ja.wikipedia記事wikitext(巻リスト原文)。石ノ森は記事名解決できず未取得。
+- `ndl-{key}.jsonl` = NDL SRU作者束縛+ページング(手塚500行/ISBN254・藤子F163行/ISBN144)。
+- `rakuten-{key}.jsonl` = 楽天title検索(手塚330/藤子F118/石ノ森12)+`rakuten-ishinomori-byauthor.jsonl`(著者1,020件走査)。
+- **クロス被覆**: 手塚=ユニーク580 ISBN中★未収421(400巻+文庫/別冊混在=まとめ時に要フィルタ) / 藤子F=146中★未収123。
+- 収集装置 = `scripts/_zenshuu-collect.py`(wiki/ndl/rakuten/report。ndl_liveにstartRecordページング追加済み=_lookup.py)。
+
+## ★石ノ森萬画大全集の重要発見(2026-07-18)
+- **単巻ISBNが存在しない刊行形態**(予約購読の「期」セット直販・全12期。楽天=期セットISBN[9784045310041等]のみ・NDL=セット親+収録作1,004内容細目でISBN/日付なし)。
+- 帰結: 巻単位ISBN前提のDB構造に乗らない→ まとめ方は**裁定マター**(期セット単位で扱う/コーナーで紹介のみ/現4頁のまま等)。
+
+## 関連
+- 大友全集=刊行中のため保留継続([[otomo-complete-works-pending]]=完結後に着手・8巻AKIRA出現が監視シグナル)。
+- 手塚の作品単位欠け45冊(A-E分類)=`docs/production-diagnostics/tezuka-zenshu-missing.tsv`(E組27=ISBNレス旧書)。全集巻補完とは別軸。

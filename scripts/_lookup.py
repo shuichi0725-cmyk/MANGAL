@@ -127,11 +127,13 @@ def rakuten_live(env, *, isbn=None, title=None, hits=30):
         time.sleep(RATE)
 
 
-def ndl_live(query, maximum=30):
+def ndl_live(query, maximum=30, start=1):
     """NDL SRU live。 ★1.3秒/req厳守・429=即中断。 ★一般語のtitle単独クエリはtimeoutする
-    → creator束縛を優先し、timeoutは握りつぶして続行してよい。 ★NDL不在≠不存在(BL/小出版は収録弱)。"""
+    → creator束縛を優先し、timeoutは握りつぶして続行してよい。 ★NDL不在≠不存在(BL/小出版は収録弱)。
+    ★start=startRecord(2026-07-18追加): 大物(数百版)は 1,201,401… とページングして全取得する
+    (skill external-data-access「1頁だけ取る実装は禁止」)。短い頁(件数<maximum)が終端。"""
     p = {"operation": "searchRetrieve", "query": query, "recordSchema": "dcndl",
-         "maximumRecords": str(maximum)}
+         "maximumRecords": str(maximum), "startRecord": str(start)}
     req = urllib.request.Request("https://ndlsearch.ndl.go.jp/api/sru?" + urllib.parse.urlencode(p))
     req.add_header("User-Agent", "Mozilla/5.0")
     try:

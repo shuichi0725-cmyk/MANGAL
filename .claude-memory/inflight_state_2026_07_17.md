@@ -38,5 +38,5 @@ metadata:
 4. Gemini検品/試し読み=アイドル運転(skill idle-run)
 
 ## 保留キュー(07-12から引き継ぎ)
-- 試し読み保留6,623裁定+収集続行 / 成年triage871頁目視 / 手塚全集突合E組27冊 / ghost-volumes22頁 / 全集コーナー構想 / kobo-gap-skip185作 / FLAG108(genre-other-flags=画集/評論/対談集等)=ユーザ「あとで」
+- 試し読み保留6,623裁定+収集続行 / 成年triage871頁目視 / 手塚全集突合E組27冊 / ghost-volumes22頁 / 全集コーナー=収集済み・まとめGO待ち([[zenshuu-corner-state]]) / kobo-gap-skip185作 / FLAG108(genre-other-flags=画集/評論/対談集等)=ユーザ「あとで」
 - 環境: [[pc-migration-2026-07-17]](= 新PCへ移行済み。Defender除外だけ未確認)
