@@ -350,3 +350,15 @@ overrides:
     evidence: "ユーザ裁定=全drop(2026-07-11 みんな怪しいのは事実)。シグナル: 成年専業imprint+楽天隔離+Amazonゲート"
     title: 'Zodiac lovers'
     added_at: "2026-07-11"
+  - series_key: 'qid:Q11518743|name:マイニチ'
+    force_adult: true
+    reason: user_confirmed_adult_triage
+    evidence: "ユーザ目視確定(preview 2026-07-17)。楽天Books=1巻API不在(成年シグナル)。版元=久保書店(成人系)"
+    title: 'マイニチ'
+    added_at: "2026-07-17"
+  - series_key: 'name:佐藤真理乃|name:Red dragon'
+    force_adult: true
+    reason: user_confirmed_adult_triage
+    evidence: "ユーザ目視確定(preview 2026-07-17)。楽天Books=1巻API不在(成年シグナル)。版元=ヒット出版社(成人系)"
+    title: 'Red dragon'
+    added_at: "2026-07-17"
