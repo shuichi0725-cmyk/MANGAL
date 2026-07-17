@@ -30,6 +30,12 @@ metadata:
 - fish-residue=鍵解消済み・稼働可(deny=Amazon/楽天・サイト台帳簿記)
 - GO待ち4件はskill本文のGO待ち節が正本(date結線/月ズレ/hiatus基準/awards結線+賞名マスター)
 
+## ★週次蒸留=実行中(2026-07-17午後)
+- 事前再生成+preflight済み→**フルビルド走行中**(C:完結・.cache/_wkbuild.ps1をStart-Process起動・logは.cache/weekly-build.log)。
+- ★今回からビルドは**C:完結**(ユーザ裁定=ジャンクション全廃・D:はバックアップ倉庫のみ。D:ストール実害が契機。preflight/skill/deploy-differential改訂済みcommit 01a736b1f)。
+- 残手順: sitemap→r2-sync(.cache/_r2sync.ps1=★破損manifestのETag復元が今回発動)→purge→finalize→報告。
+- 中断/再起動した場合: ビルドlog確認→未完なら再ビルド(再開機構なし)。
+
 ## 次のタスク候補
 1. **週次蒸留**(上記全部を公開 + manifest復元)
 2. ソーサリアン本番化(旧9頁畳み込み+RelatedWorksガード=[[sorcerian-consolidation-state]])
