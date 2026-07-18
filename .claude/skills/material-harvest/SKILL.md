@@ -35,7 +35,7 @@ description: 素材ハーベスト=本番に書かず「素材」だけ収集す
 
 | 素材 | 置き場 | 下流(誰が使うか) |
 |---|---|---|
-| 発売日精密化候補 | `data/seeds/release-date-fill.jsonl` | ★**promote結線=GO待ち**(貯めるだけ。結線されるまで頁に出ない) |
+| 発売日精密化候補 | `data/seeds/release-date-fill.jsonl` | ★**promote結線済**(2026-07-18 GO消化。書影と同じ最終passでprefix精密化のみ充填=`_date_fill_for`) |
 | 日付矛盾hold | `.cache/enrich-material/dates-conflict-holds.tsv` | 奥付月vs実売月の月ズレ型が主。裁定マター |
 | wiki本文(raw) | `.cache/enrich-material/wiki/<slug>.wiki.txt` | enrich素材・status証拠の原本 |
 | infobox抽出 | `.cache/enrich-material/wiki-extract.jsonl` | 掲載誌/連載期間/巻数/受賞/hiatus_mention |
@@ -55,7 +55,7 @@ description: 素材ハーベスト=本番に書かず「素材」だけ収集す
 
 ## GO待ち(結線マター=ユーザ裁定)
 
-1. **release-date-fill.jsonl → promote結線**(prefix精密化をbuild時に適用する数十行。影響=全頁)
+1. ~~release-date-fill.jsonl → promote結線~~ ★**済(2026-07-18)**: フルpromoteで98,703巻精密化・矛盾skip20。dates-local再収集後は次のpromoteで自動反映
 2. **日付月ズレhold**(~3.6万件)の扱い(奥付月→実売日への訂正は精密化でなく上書き=別ルール要)
 3. **hiatus付与基準**(schema/表示は実装済・7頁使用中。機械証拠でどこまで広げるかの線引き)
 4. **作品awards結線**+賞名マスター(closed vocabulary)・著者受賞歴の置き場/表示
