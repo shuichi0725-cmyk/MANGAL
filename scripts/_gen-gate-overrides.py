@@ -54,6 +54,8 @@ def main():
 
     # AI裁定
     ai_drop = ai_keep = ai_unsure = ai_badkey = 0
+    confirmed = {}
+    verdict_rows = []
     for p in sorted(glob.glob(str(SCRATCH / "out-*.tsv"))):
         for r in read_tsv(p):
             k = r.get("key") or ""
@@ -61,12 +63,15 @@ def main():
             if k not in ws_keys:
                 ai_badkey += 1
                 continue
+            verdict_rows.append((r.get("a_id") or "", k, v, r.get("reason") or ""))
             if v == "drop":
                 if k not in new:  # 機械裁定優先
                     new[k] = {"key": k, "action": "drop"}
                 ai_drop += 1
             elif v == "keep":
                 ai_keep += 1
+                if r.get("a_id"):
+                    confirmed[k] = int(r["a_id"])
             else:
                 ai_unsure += 1
     print(f"AI裁定: drop {ai_drop} / keep {ai_keep} / unsure {ai_unsure} / 不正key {ai_badkey}")
@@ -99,6 +104,22 @@ def main():
     doc2 = yaml.safe_load(OVR.read_text(encoding="utf-8"))
     assert len(doc2["overrides"]) == len(merged), "読み戻し件数不一致"
     print(f"wrote {OVR} ({len(merged):,} entries, 読み戻しOK)")
+
+    # ★AI keep = 確認済みallowlist(key→a_id ペア単位)。 ゲート再走時に PASS 扱い(再フラグ抑止)。
+    import json
+    conf_p = ROOT / "data/seeds/anilist-link-confirmed.json"
+    prev = json.loads(conf_p.read_text(encoding="utf-8")) if conf_p.exists() else {}
+    prev.update({k: v for k, v in confirmed.items()})
+    conf_p.write_text(json.dumps(prev, ensure_ascii=False, indent=0), encoding="utf-8")
+    print(f"wrote {conf_p} ({len(prev):,} 確認済みリンク)")
+
+    # ★裁定証跡をgit永続化(.cache/scratchpad は消える → 台帳原則)
+    ev = ROOT / "docs/production-diagnostics/anilist-gate-ai-verdicts.tsv"
+    with ev.open("w", encoding="utf-8") as f:
+        f.write("a_id\tkey\tverdict\treason\n")
+        for x in sorted(verdict_rows, key=lambda t: t[1]):
+            f.write("\t".join(str(v).replace("\t", " ") for v in x) + "\n")
+    print(f"wrote {ev} ({len(verdict_rows):,} 裁定証跡)")
 
 
 if __name__ == "__main__":

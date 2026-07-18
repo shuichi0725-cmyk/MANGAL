@@ -85,7 +85,7 @@
 - [【厳守】AIジャンル=master32のみ](ai_genre_closed_vocabulary.md) — closed vocabulary+provisional
 - [【残】Kindleはブラウザで開く](kindle_link_browser_not_app.md) — 自ドメイン中継+JS遷移
 - [【残】表示データ磨き](display_data_polish_tasks.md) — 著者重複/synonyms日本語等
-- [AniListリンク精度](anilist_link_quality.md) — 疑惑3,967(10%)。剥がしor付替
+- [AniListリンク精度=解消済](anilist_link_quality.md) — 検証ゲートで裁定完了。現行は verification_plan
 - [MADBに完全版/新装版ほぼ無し](madb_missing_reprint_editions.md) — 補完=楽天題検索→種4
 - [蒸留定期運転の実態](monthly_intake_reality.md) — 月間1,000-1,300冊/直近2ヶ月停止の崖
 
@@ -153,4 +153,4 @@
 - [全集コーナー=素材収集済み](zenshuu_corner_state.md) — 手塚421/藤子F123冊未収・石ノ森=単巻ISBN無し(期セット)。まとめはGO待ち
 - [試し読み裁定=枯れ達成](tameshiyomi_adjudication_state.md) — アンカー25,149・保留9,749全分類・台帳=docs/…/tameshiyomi-adjudication.jsonl
 - [【厳守】索引形式変更=ファイル名バンプ](index_format_change_versioned_filename.md) — 同名で契約変更禁止(版ズレApplication error根絶)。旧ファイルは残す
-- [【計画】AniListリンク検証](anilist_link_verification_plan.md) — トリガー=AniListリンク検証やって。①検証ゲート②疑惑3,967裁定③recall。誤マッチ潰しが先
+- [AniListリンク検証①②✅](anilist_link_verification_plan.md) — ゲート稼働・drop813/relink616・allowlist化。残=③recall+unsure12+次promoteで本番反映

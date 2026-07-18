@@ -184,6 +184,9 @@ def main():
     wq = json.load((ROOT / ".cache/work-qid-map.json").open(encoding="utf-8"))
     srn = json.load((ROOT / ".cache/anilist-author-surname.json").open(encoding="utf-8"))
     syn_ja = json.loads((ROOT / "data/seeds/synopsis-ja.json").read_text(encoding="utf-8"))
+    # ★確認済みallowlist(AI/人手裁定で keep 確定した key→a_id ペア)。 再フラグ抑止。
+    conf_p = ROOT / "data/seeds/anilist-link-confirmed.json"
+    confirmed = json.loads(conf_p.read_text(encoding="utf-8")) if conf_p.exists() else {}
 
     rows = []
     vc = Counter()
@@ -283,8 +286,13 @@ def main():
         if fmt == "MANGA" and ch and ch <= 6 and s3v >= 3:
             sigs.append("C-")
             score -= 2
+        # --- K+ 確認済み(pair単位。 リンク先が変わったら失効)
+        if confirmed.get(key) == aid:
+            sigs.append("K+")
         # --- verdict
-        if "T+" in sigs or "W+" in sigs:
+        if "K+" in sigs:
+            v = "PASS"
+        elif "T+" in sigs or "W+" in sigs:
             v = "PASS"
         elif score >= 3:
             v = "PASS"

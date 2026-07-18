@@ -1,6 +1,6 @@
 ---
 name: anilist-link-quality
-description: "【測定済・修正待ち】AniListリンク誤り=本編keyに同franchiseの読切/番外IDが付く系統欠陥。疑惑3,967(S判定の10%)、あらすじ誤表示3,238頁。S3単独3,300は要精緻化。修正はスクリプト化でトークン極小"
+description: "【✅解消 2026-07-18】AniListリンク誤り(bardock型)=検証ゲートで全リンク裁定済(drop813/relink616/FAIL0)。歴史記録。現行機構は[[anilist_link_verification_plan]]"
 metadata: 
   node_type: memory
   type: project
