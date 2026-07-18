@@ -7,9 +7,11 @@ type Props = {
   onChange: (v: string) => void;
 };
 
-/** 検索ボックス(2026-07-11 ユーザ仕様=ボタン確定型):
+/** 検索ボックス(2026-07-11 ユーザ仕様=ボタン確定型 / 2026-07-19 改訂):
  *  入力はローカル状態のみ。親(66k件フィルタ)へは「検索」ボタン or Enter で確定した時だけ伝える。
- *  例外=全消し(×ボタン/空にする)は即解除。IME変換中のEnterは確定しない。 */
+ *  ★空も確定制(2026-07-19 ユーザ要望): 文字を全部消しただけでは全件再読込を走らせない
+ *  (旧「全消しは即解除」は次の検索語を打つ途中で重い全件描画が挟まる操作性悪化)。
+ *  解除は ×ボタン / 空でEnter / 空で検索ボタン の明示操作のみ。IME変換中のEnterは確定しない。 */
 export default function SearchBox({ value, onChange }: Props) {
   const [local, setLocal] = useState(value);
   const composing = useRef(false);
@@ -44,8 +46,7 @@ export default function SearchBox({ value, onChange }: Props) {
           placeholder="タイトル・よみがな・ローマ字で検索"
           value={local}
           onChange={(e) => {
-            setLocal(e.target.value);
-            if (e.target.value === "" && value) onChange(""); // 全消しは即解除
+            setLocal(e.target.value); // 空になっても確定はしない(解除=×/Enter/検索ボタンのみ)
           }}
           onCompositionStart={() => {
             composing.current = true;
@@ -55,7 +56,7 @@ export default function SearchBox({ value, onChange }: Props) {
           }}
           className="w-full rounded-card border border-[var(--color-line)] bg-[var(--color-surface)] shadow-[var(--shadow-soft)] pl-9 pr-10 py-2.5 text-sm transition focus:outline-none focus:border-[var(--color-accent)] focus:shadow-[var(--shadow-lift)]"
         />
-        {local && (
+        {(local || value) && (
           <button
             type="button"
             onClick={() => {
