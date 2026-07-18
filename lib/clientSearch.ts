@@ -8,7 +8,7 @@ import type { MangaListItem } from "./schema";
  *  - 検索専用索引を廃止し一覧索引を共有。照合材料は初回1回だけここで前計算(haystack)
  *    → 以後は 1作品=1回の .includes(旧: キー入力ごとに作品ごと正規化6-10回+カナ→ローマ字変換)。
  *  - 正規化はTS一箇所(normalizeForSearch)のみ=Python側と二重実装しない(ドリフト封じ)。
- *  - 2段照合: ①題名系(title/kana/subtitle) → ヒット0なら ②著者 → まだ0なら ③別名(alt=遅延fetch)。
+ *  - 照合: ①題名系(title/kana/subtitle)+②著者を併走マージ(2026-07-19: 旧2段は作家名入り題で著者検索が沈黙) → 0なら ③別名(alt=遅延fetch)。
  *  - 逐次絞り込み: クエリが前回の延長なら前回ヒット集合内だけ再走査。
  *  - romaji列は廃止: クエリ側で romaji→かな 変換して kana と照合(逆方向 kana→romaji も照合)。
  */
@@ -33,8 +33,13 @@ function buildHay(items: MangaListItem[]): Hay {
   for (let i = 0; i < items.length; i++) {
     const m = items[i];
     title[i] = [m.title, m.title_kana, m.subtitle || ""].map(normalizeForSearch).join("");
+    // 著者= 名+かな+かなのローマ字形(かな/ローマ字入力の著者検索も題名と同機構で。2026-07-19)
     au[i] = [...(m.authors || []), ...(m.original_authors || [])]
-      .map((a) => normalizeForSearch(a.name))
+      .flatMap((a) => [
+        normalizeForSearch(a.name),
+        a.kana ? normalizeForSearch(a.kana) : "",
+        a.kana ? collapseVowels(normalizeForSearch(kanaToRomaji(a.kana))) : "",
+      ])
       .join("");
     // かな→ローマ字形(= ローマ字クエリの照合先。旧title_romaji列の代替)。
     // ★母音連続を圧縮(wanpiisu→wanpisu): 長音表記ゆらぎ(wanpi-su/wanpiisu/wanpisu)を同一視
@@ -83,10 +88,9 @@ export function onAltLoaded(fn: () => void): () => void {
 }
 
 // 逐次絞り込みキャッシュ(クエリ延長時は前回ヒットの行だけ再走査)。
-// ★①題名ヒットの結果のみ再利用可(②③由来の集合を①走査すると取りこぼす)
+// ★①②統合走査(2026-07-19)なので延長クエリは常に前回集合の再走査で安全(③alt由来0件時は_lastIdx空=全走査に戻る)
 let _lastQuery = "";
 let _lastIdx: number[] | null = null;
-let _lastStage1 = false;
 
 /** クエリの照合形を作る(1クエリ1回)。 */
 function queryForms(query: string): { q: string; qKana: string; qRoma: string } {
@@ -107,27 +111,25 @@ export function searchSlugs(query: string, items: MangaListItem[]): Set<string> 
   const { q, qKana, qRoma } = queryForms(query);
   if (!q) return out;
 
-  // 走査対象: 逐次絞り込み(前回クエリの延長 かつ 前回が①題名ヒットの時のみ、前回ヒット行だけ再走査)
-  const scanAll = !(_lastStage1 && _lastIdx && _lastQuery && q.startsWith(_lastQuery) && q !== _lastQuery);
+  // 走査対象: 逐次絞り込み(前回クエリの延長なら前回ヒット行だけ再走査。①②は同一走査に統合済=単調なので常に安全)
+  const scanAll = !(_lastIdx && _lastQuery && q.startsWith(_lastQuery) && q !== _lastQuery);
   const scanLen = scanAll ? items.length : (_lastIdx as number[]).length;
   const hits: number[] = [];
 
-  // ① 題名系(title/kana/subtitle + かなのローマ字形)
+  // ①+② 題名系(title/kana/subtitle + かなのローマ字形)と著者を併走マージ。
+  // ★旧「著者は題名ヒット0の時だけ」は、作家名が題に入る作家(高橋留美子劇場/水木しげる漫画大全集型)で
+  //   著者検索が丸ごと沈黙する実害(2026-07-19ユーザ報告: 高橋留美子=題名一致のみ・永野護=正常の非対称)。
   for (let s = 0; s < scanLen; s++) {
     const i = scanAll ? s : (_lastIdx as number[])[s];
     if (
       hay.title[i].includes(q) ||
       (qKana && qKana !== q && hay.title[i].includes(qKana)) ||
-      (qRoma && hay.kanaRoma[i].includes(qRoma))
+      (qRoma && hay.kanaRoma[i].includes(qRoma)) ||
+      hay.au[i].includes(q) ||
+      (qKana && qKana !== q && hay.au[i].includes(qKana)) ||
+      (qRoma && hay.au[i].includes(qRoma))
     )
       hits.push(i);
-  }
-  const stage1 = hits.length > 0;
-  // ② 著者(題名ヒット0の時だけ)
-  if (hits.length === 0) {
-    for (let i = 0; i < items.length; i++) {
-      if (hay.au[i].includes(q) || (qKana && qKana !== q && hay.au[i].includes(qKana))) hits.push(i);
-    }
   }
   // ③ 別名・英題(まだ0の時だけ。未ロードなら fetch を蹴る=到着後に再検索される)
   if (hits.length === 0) {
@@ -142,7 +144,6 @@ export function searchSlugs(query: string, items: MangaListItem[]): Set<string> 
 
   _lastQuery = q;
   _lastIdx = hits;
-  _lastStage1 = stage1;
   for (const i of hits) out.add(items[i].slug);
   return out;
 }

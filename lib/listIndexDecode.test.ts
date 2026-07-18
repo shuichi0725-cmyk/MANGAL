@@ -58,9 +58,9 @@ describe("searchSlugs(検索v2)", () => {
   it("ローマ字クエリ→かな照合(romaji列なし)", () => {
     expect(searchSlugs("wanpi-su", items).has("one-piece")).toBe(true);
   });
-  it("題名ヒット0なら著者に降格して照合する", () => {
+  it("著者照合(題名と併走マージ 2026-07-19)", () => {
     expect(searchSlugs("尾田栄一郎", items).has("one-piece")).toBe(true);
-    expect(searchSlugs("ほそかわ", items).size).toBe(0); // 著者かな照合はカタカナ正規化側(ひらがな→未対応=既存挙動と同じ)
+    expect(searchSlugs("ほそかわ", items).has("tsure-utsu")).toBe(true); // ★著者ひらがな入力=ローマ字経由で対応(旧: 未対応)
   });
   it("逐次絞り込みが結果を壊さない(延長→短縮)", () => {
     expect(searchSlugs("ワン", items).has("one-piece")).toBe(true);
