@@ -197,7 +197,7 @@ export default function ListClient({ data }: { data: ListBundle }) {
             ⚙ フィルター{nActive > 0 ? ` (${nActive})` : ""}
           </button>
         </form>
-        <div className="mt-2 flex items-center gap-1.5 overflow-x-auto pb-1">
+        <div className="mt-2 flex items-center gap-1.5 overflow-x-auto no-scrollbar pb-1">
           <span className="shrink-0 text-[10px] font-bold text-ink/45">並び順</span>
           {SORTS.map((s) => (
             <button

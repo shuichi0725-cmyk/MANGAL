@@ -45,7 +45,7 @@ export default function AiReviewSectionView({ section }: { section: AiReviewSect
       </p>
 
       {/* 出演AI = キャラのラインナップ(飾り。 顔で誰の評か掴みやすく) */}
-      <div className="mt-4 flex items-center gap-2 overflow-x-auto rounded-xl border border-[var(--color-line)] bg-[var(--color-surface)] px-3 py-2.5">
+      <div className="mt-4 flex items-center gap-2 overflow-x-auto no-scrollbar rounded-xl border border-[var(--color-line)] bg-[var(--color-surface)] px-3 py-2.5">
         <span className="shrink-0 text-[10px] font-bold text-ink/45">出演</span>
         {chars.map((c, i) => (
           <Avatar key={i} c={c} size={34} />

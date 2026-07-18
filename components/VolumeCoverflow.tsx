@@ -178,7 +178,7 @@ export default function VolumeCoverflow({
       {/* 横フリースクロール(スナップ無し) */}
       <div
         ref={scroller}
-        className="flex gap-1.5 overflow-x-auto py-2"
+        className="flex gap-1.5 overflow-x-auto no-scrollbar py-2"
         style={{ scrollbarWidth: "none", WebkitOverflowScrolling: "touch" }}
       >
         {reps.map((rep) =>

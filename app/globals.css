@@ -207,3 +207,12 @@ body {
   -webkit-line-clamp: 5;
   line-clamp: 5;
 }
+
+/* 横スクロールカルーセルのスクロールバー非表示 (= 端の見切れカードがスクロール可の合図。バーはノイズ) */
+@utility no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
