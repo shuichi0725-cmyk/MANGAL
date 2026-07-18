@@ -42,6 +42,7 @@ TARGETS = [
     ("kamuiden",   "カムイ伝",               'creator="白土三平" AND title="カムイ伝全集"',            "カムイ伝全集"),
     ("tsuge",      "つげ義春",               'creator="つげ義春" AND title="つげ義春全集"',            "つげ義春全集"),
     ("hasegawa",   "長谷川町子",             'creator="長谷川町子" AND title="長谷川町子全集"',        "長谷川町子全集"),
+    ("tsuge-taizen", "つげ義春大全",         'creator="つげ義春" AND title="つげ義春大全"',            "つげ義春大全"),
 ]
 
 def _sel():

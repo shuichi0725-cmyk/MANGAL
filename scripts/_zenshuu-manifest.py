@@ -72,11 +72,33 @@ def num_of(key, r, src):
     if key == "hasegawa":
         m = re.search(r"長谷川町子全集\s*;\s*(?:第)?(\d+)巻?\s*$", ser)
         return int(m.group(1)) if m and int(m.group(1)) <= 33 else None
+    if key == "tsuge-taizen":
+        m = re.search(r"第([一二三四五六七八九十]+)巻", ttl)
+        if m:
+            n = _kn(m.group(1))
+            return n if n and n <= 19 else None
+        m = re.search(r"別巻([一二三])", ttl)
+        if m:
+            return 19 + _kn(m.group(1))
+        return None
     return None  # fujiko-f / mizuki = 作品×巻軸
 
 
 TOTALS = {"tezuka": 400, "fujiko-f": 115, "mizuki": 103, "fujiko-land": 301,
-          "kamuiden": 38, "tsuge": 9, "hasegawa": 33}
+          "kamuiden": 38, "tsuge": 9, "hasegawa": 34, "tsuge-taizen": 22}
+# hasegawa=本編33+別巻(思い出記念館)=34 / tsuge-taizen=講談社2020・本編19+別巻3=22(ユーザ指摘2026-07-19で追加)
+
+_KANJI = {"一":1,"二":2,"三":3,"四":4,"五":5,"六":6,"七":7,"八":8,"九":9,"十":10}
+def _kn(s):
+    """漢数字(一〜十九)→int"""
+    if not s: return None
+    if s in _KANJI: return _KANJI[s]
+    if s.startswith("十"): return 10 + _KANJI.get(s[1:], 0) if len(s) > 1 else 10
+    if s.endswith("十"): return _KANJI.get(s[0], 0) * 10
+    if "十" in s:
+        a, b = s.split("十", 1)
+        return _KANJI.get(a, 0) * 10 + _KANJI.get(b, 0)
+    return None
 
 # ★ユーザ裁定(2026-07-19)の特例2種:
 #  1) 122 = KC版ISBNがNDL/楽天/wiki全滅 → 文庫全集版(楽天在庫あり・書影あり)で代用
@@ -137,8 +159,9 @@ def main():
     for key, total in TOTALS.items():
         import glob as _g
         ndl = []
-        for p in sorted(_g.glob(os.path.join(Z, f"ndl-{key}*.jsonl"))):
-            ndl.extend(jload(p))  # 追加スライス(-full/-broad等)も全部読む
+        # 本体 + 追加スライス(★ドット区切り ndl-{key}.xxx.jsonl のみ。ハイフンだと別キー(tsuge-taizen)を誤吸収する)
+        for p in [os.path.join(Z, f"ndl-{key}.jsonl")] + sorted(_g.glob(os.path.join(Z, f"ndl-{key}.*.jsonl"))):
+            ndl.extend(jload(p))
         rk = jload(os.path.join(Z, f"rakuten-{key}.jsonl"))
         ex = EXCLUDE_SER.get(key)
         vols = {}  # num or isbn -> row
@@ -192,6 +215,12 @@ def main():
                         num_map[n] = o
                         unnum.remove(o)
                         break
+        # ★長谷川: 別巻(思い出記念館)=34巻目に割当
+        if key == "hasegawa":
+            for o in by_isbn.values():
+                if not o["num"] and "思い出記念館" in o["title"] and 34 not in num_map:
+                    o["num"] = 34
+                    num_map[34] = o
         # ★手塚 特例適用(ユーザ裁定): 122=文庫版代用 / 383-393=題のみ登録+非漫画flag
         if key == "tezuka":
             for n, sub in TEZUKA_SUBST.items():
