@@ -121,9 +121,19 @@ def main():
             past.add(base_of(yaml.safe_load(open(p, encoding="utf-8")).get("title", "")))
         except Exception:
             pass
+    # ★恒久除外簿(2026-07-19 麻雀コンボ理論=戦術書すり抜け対策): 非漫画とdrop裁定済みの題は
+    #   preorder-pages seedを消しても再提案しない。1行={"title":..., "reason":...}(title=base正規化前でよい)
+    deny_p = os.path.join(ROOT, "data", "seeds", "preorder-deny.jsonl")
+    n_deny = 0
+    if os.path.exists(deny_p):
+        for l in open(deny_p, encoding="utf-8"):
+            try:
+                past.add(base_of(json.loads(l).get("title", ""))); n_deny += 1
+            except Exception:
+                pass
     before = len(fresh)
     inc = [r for r in fresh if base_of(r.get("title", "")) not in past]
-    print(f"  過去draft題({len(past)}) 除外: {before} → {len(inc)} (再カウント防止 -{before - len(inc)})")
+    print(f"  過去draft題({len(past)}、うち恒久deny {n_deny}) 除外: {before} → {len(inc)} (再カウント防止 -{before - len(inc)})")
 
     # 上書き(fullは退避)。★毎回上書き(旧: 存在時skip=staleなfullが残り --commit-prev が古いprevを作る穴)
     shutil.copy(LATEST, FULL)
