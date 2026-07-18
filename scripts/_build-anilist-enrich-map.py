@@ -103,7 +103,15 @@ def main():
             for r in csv.DictReader(f, delimiter="\t"):
                 if r.get("a_id") and r["s3_key"] not in sk_aid:
                     sk_aid[r["s3_key"]] = int(r["a_id"]); ar_added += 1
-    print(f"  base(v14 S-tier): {base_n:,} + recovery追加: {rec_added:,} + 著者recall: {ar_added:,}", file=sys.stderr)
+    # ★recall v2(計画③、 _anilist-recall-v2.py: 広域題一致+P8731全量+骨格、証拠合議済)を追加読み(既存優先)
+    rv2 = Path(".cache/match-recall-v2.tsv")
+    rv2_added = 0
+    if rv2.exists():
+        with rv2.open(encoding="utf-8") as f:
+            for r in csv.DictReader(f, delimiter="\t", quoting=csv.QUOTE_NONE):
+                if r.get("a_id") and r["s3_key"] not in sk_aid:
+                    sk_aid[r["s3_key"]] = int(r["a_id"]); rv2_added += 1
+    print(f"  base(v14 S-tier): {base_n:,} + recovery追加: {rec_added:,} + 著者recall: {ar_added:,} + recall-v2: {rv2_added:,}", file=sys.stderr)
     # ★誤リンク override: relink=本編idへ付替(優先) / drop=enrich除外
     drop_keys, relink_keys = load_link_overrides()
     relinked = 0

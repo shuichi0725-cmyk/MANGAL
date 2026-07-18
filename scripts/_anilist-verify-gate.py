@@ -72,7 +72,8 @@ def load_links():
                 sk_aid[r["s3_key"]] = int(r["a_id"])
                 src[r["s3_key"]] = "v14"
     for path, tag in ((".cache/match-recovery.tsv", "recovery"),
-                      (".cache/match-recall-authorroute.tsv", "authorroute")):
+                      (".cache/match-recall-authorroute.tsv", "authorroute"),
+                      (".cache/match-recall-v2.tsv", "recall-v2")):
         p = ROOT / path
         if not p.exists():
             continue
@@ -182,6 +183,9 @@ def main():
         print(f"sqlite fallback: {filled:,}/{len(missing):,} キーの証拠を種2から補完")
 
     wq = json.load((ROOT / ".cache/work-qid-map.json").open(encoding="utf-8"))
+    # ★P8731全量(ラベル+別名)があれば W+ の照合面を広げる(_fetch-p8731-full.py)
+    p87_p = ROOT / ".cache/p8731-full-map.json"
+    p87 = json.loads(p87_p.read_text(encoding="utf-8")) if p87_p.exists() else {}
     srn = json.load((ROOT / ".cache/anilist-author-surname.json").open(encoding="utf-8"))
     syn_ja = json.loads((ROOT / "data/seeds/synopsis-ja.json").read_text(encoding="utf-8"))
     # ★確認済みallowlist(AI/人手裁定で keep 確定した key→a_id ペア)。 再フラグ抑止。
@@ -228,10 +232,14 @@ def main():
                         or (ksk and abs(len(ask) - len(ksk)) <= max(2, len(ksk) // 6) and (ask.startswith(ksk[:6]) if len(ksk) >= 6 else ask == ksk))):
                 sigs.append("R+")
                 score += 2
-        # --- W+ Wikidata ラベル一致
+        # --- W+ Wikidata ラベル一致(逆引きmap + P8731全量のラベル/別名)
         w = wq.get(str(aid)) or {}
-        wl = tnorm(w.get("label"))
-        if wl and page_t and (wl == page_t or (sub and wl == tnorm(r["s3_title"] + sub))):
+        wd_titles = {tnorm(w.get("label"))}
+        p = p87.get(str(aid)) or {}
+        wd_titles.add(tnorm(p.get("label")))
+        wd_titles |= {tnorm(x) for x in (p.get("aliases") or [])}
+        wd_titles.discard("")
+        if page_t and (page_t in wd_titles or (sub and tnorm(r["s3_title"] + sub) in wd_titles)):
             sigs.append("W+")
             score += 3
         # --- A+ 著者 overlap

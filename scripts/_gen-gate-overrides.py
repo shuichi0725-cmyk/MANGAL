@@ -76,6 +76,16 @@ def main():
                 ai_unsure += 1
     print(f"AI裁定: drop {ai_drop} / keep {ai_keep} / unsure {ai_unsure} / 不正key {ai_badkey}")
 
+    # ★recall v2 の drop→relink 復活(計画③: 正しい付替先が証拠合議で見つかった drop 済み key)
+    rl = ROOT / ".cache/recall-drop-relinks.tsv"
+    n_revive = 0
+    if rl.exists():
+        for r in read_tsv(rl):
+            if r.get("a_id"):
+                new[r["s3_key"]] = {"key": r["s3_key"], "action": "relink", "to_id": int(r["a_id"])}
+                n_revive += 1
+    print(f"recall drop→relink復活: {n_revive}")
+
     replaced = sum(1 for k in new if k in old)
     merged = dict(old)
     merged.update(new)

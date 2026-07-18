@@ -224,7 +224,7 @@ overrides:
   - {key: "name:井上堅二|name:バカとテストと召喚獣", action: relink, to_id: 43872}
   - {key: "name:井原西鶴|name:男色大鑑", action: drop}
   - {key: "name:井深英記|name:ランナーズ・ハイ!", action: drop}
-  - {key: "name:今野緒雪|name:マリア様がみてる", action: drop}
+  - {key: "name:今野緒雪|name:マリア様がみてる", action: relink, to_id: 31227}
   - {key: "name:伊月慶悟|name:天医無縫", action: drop}
   - {key: "name:伊藤寿規|name:王国へ続く道", action: relink, to_id: 86443}
   - {key: "name:伊藤左千夫|name:野菊の墓", action: drop}
@@ -234,7 +234,7 @@ overrides:
   - {key: "name:住川惠|name:魔導具師ダリヤはうつむかない", action: drop}
   - {key: "name:佐々木ラスト|name:迷宮メトロ|sub:目覚めたら最強職だったのでシマリスを連れて新世界を歩く", action: relink, to_id: 125194}
   - {key: "name:佐々木多利爾|name:スーパーマリオくん", action: relink, to_id: 40314}
-  - {key: "name:佐世保太郎|name:大門寺と問題児", action: drop}
+  - {key: "name:佐世保太郎|name:大門寺と問題児", action: relink, to_id: 158864}
   - {key: "name:佐久本あゆ|name:転生アイドルとドルオタの騎士", action: drop}
   - {key: "name:佐伯さん|name:お隣の天使様にいつの間にか駄目人間にされていた件", action: relink, to_id: 122337}
   - {key: "name:佐伯庸介|name:昔勇者で今は骨", action: relink, to_id: 125906}
@@ -243,7 +243,7 @@ overrides:
   - {key: "name:佐藤千恵|name:オレ様キングダム", action: relink, to_id: 46583}
   - {key: "name:佐藤順一|name:魔法使いTai!", action: relink, to_id: 39806}
   - {key: "name:依空まつり|name:サイレント・ウィッチ", action: drop}
-  - {key: "name:兎月あい|name:いなくなれ、群青|sub:fragile light of pistol star", action: drop}
+  - {key: "name:兎月あい|name:いなくなれ、群青|sub:fragile light of pistol star", action: relink, to_id: 105692}
   - {key: "name:円谷プロダクション|name:ウルトラマン", action: relink, to_id: 116352}
   - {key: "name:冬葉つがる|name:かくりよの宿飯", action: relink, to_id: 116778}
   - {key: "name:冲方丁|name:オイレンシュピーゲル", action: drop}
@@ -291,13 +291,13 @@ overrides:
   - {key: "name:天王寺大|name:白竜LEGENDスペシャル", action: drop}
   - {key: "name:天王寺大|name:白竜legendスペシャル", action: drop}
   - {key: "name:天野こひつじ|name:異世界に来たみたいだけど如何すれば良いのだろう|sub:社畜SEのマイペース冒険記", action: relink, to_id: 100838}
-  - {key: "name:太田ぐいや|name:ばくおん!!台湾編", action: drop}
+  - {key: "name:太田ぐいや|name:ばくおん!!台湾編", action: relink, to_id: 144285}
   - {key: "name:太田勝|name:名探偵コナン", action: relink, to_id: 31061}
   - {key: "name:太田勝|name:名探偵コナン|sub:特別編", action: relink, to_id: 31061}
   - {key: "name:夾竹桃|name:戦国小町苦労譚", action: relink, to_id: 101334}
   - {key: "name:奥たまむし|name:百合ドリル", action: relink, to_id: 115010}
   - {key: "name:姫川明|name:ゼルダの伝説", action: drop}
-  - {key: "name:嬉野君|name:熱帯デラシネ宝飾店", action: drop}
+  - {key: "name:嬉野君|name:熱帯デラシネ宝飾店", action: relink, to_id: 120965}
   - {key: "name:子子子子子子子|name:魔術破りのリベンジ・マギア", action: drop}
   - {key: "name:安斉秀|name:神のみぞ知るセカイ", action: relink, to_id: 37519}
   - {key: "name:安斎秀|name:神のみぞ知るセカイ", action: relink, to_id: 37519}
@@ -307,7 +307,7 @@ overrides:
   - {key: "name:宮沢賢治|name:銀河鉄道の夜 初期形 ブルカニロ博士篇", action: drop}
   - {key: "name:宮沢賢治|name:風の又三郎", action: drop}
   - {key: "name:富野由悠季|name:新機動戦記ガンダムW", action: drop}
-  - {key: "name:富野由悠季|name:機動戦士ガンダム00", action: drop}
+  - {key: "name:富野由悠季|name:機動戦士ガンダム00", action: relink, to_id: 41561}
   - {key: "name:富野由悠季|name:重戦機エルガイム", action: relink, to_id: 149793}
   - {key: "name:寺澤広蔵|name:（新）ブラックジャックによろしく", action: relink, to_id: 50894}
   - {key: "name:小学館ドラえもんルーム|name:ドラえもん", action: relink, to_id: 31032}
@@ -368,7 +368,7 @@ overrides:
   - {key: "name:杜乃ミズ|name:ティアムーン帝国物語～断頭台から始まる、姫の転生逆転ストーリー～@COMIC", action: relink, to_id: 112830}
   - {key: "name:東映アニメーション|name:Dragon ball Z", action: relink, to_id: 30042}
   - {key: "name:東郷源|name:ボドカン!", action: relink, to_id: 159151}
-  - {key: "name:松智洋|name:パパのいうことを聞きなさい! 路上観察研究日誌", action: drop}
+  - {key: "name:松智洋|name:パパのいうことを聞きなさい! 路上観察研究日誌", action: relink, to_id: 63101}
   - {key: "name:柚希きひろ|name:転生王子は〈学園でも〉ダラけたい", action: relink, to_id: 135777}
   - {key: "name:柚月裕子|name:孤狼の血", action: drop}
   - {key: "name:柳実冬貴|name:対魔導学園35試験小隊", action: relink, to_id: 78635}
@@ -444,7 +444,7 @@ overrides:
   - {key: "name:石沢将人|name:史上最強の弟子ケンイチ", action: relink, to_id: 30988}
   - {key: "name:石田リンネ|name:茉莉花官吏伝", action: relink, to_id: 123166}
   - {key: "name:石田可奈|name:魔法科高校の劣等生", action: relink, to_id: 64127}
-  - {key: "name:砂阿久雁|name:進撃の巨人 悔いなき選択", action: drop}
+  - {key: "name:砂阿久雁|name:進撃の巨人 悔いなき選択", action: relink, to_id: 85199}
   - {key: "name:碓井ツカサ|name:異世界居酒屋「げん」", action: relink, to_id: 112257}
   - {key: "name:碧門たかね|name:しろがねの王", action: relink, to_id: 44858}
   - {key: "name:神奈月昇|name:ゴブリンスレイヤー", action: relink, to_id: 87321}
@@ -562,7 +562,7 @@ overrides:
   - {key: "qid:Q11232856|name:ほしのこ!", action: drop}
   - {key: "qid:Q11241885|name:大図書館の羊飼いLovely・Librarians", action: drop}
   - {key: "qid:Q11243978|name:みんなのトニオちゃんreturns", action: drop}
-  - {key: "qid:Q11254723|name:ファイナルファンタジー零式外伝氷剣の死神", action: drop}
+  - {key: "qid:Q11254723|name:ファイナルファンタジー零式外伝氷剣の死神", action: relink, to_id: 89217}
   - {key: "qid:Q11256762|name:女神の降る里", action: relink, to_id: 54140}
   - {key: "qid:Q11257396|name:悪魔の花嫁", action: relink, to_id: 31464}
   - {key: "qid:Q11257396|name:風の呪歌", action: drop}
@@ -750,7 +750,7 @@ overrides:
   - {key: "qid:Q11523734|name:闇狩り師", action: drop}
   - {key: "qid:Q11530791|name:Duel Masters LOST～月下の死神～", action: drop}
   - {key: "qid:Q11530791|name:切札勝舞はマジック:ザ・ギャザリングを使いつづける", action: drop}
-  - {key: "qid:Q11530825|name:ボーイズラブ!", action: drop}
+  - {key: "qid:Q11530825|name:ボーイズラブ!", action: relink, to_id: 118380}
   - {key: "qid:Q11530842|name:闘神伝|sub:エイジの章", action: relink, to_id: 50534}
   - {key: "qid:Q11530895|name:彼、岸島", action: relink, to_id: 35227}
   - {key: "qid:Q11531964|name:杜子春・羅生門", action: drop}
@@ -770,7 +770,7 @@ overrides:
   - {key: "qid:Q11539498|name:この愛は、異端。: ベリアル文書", action: relink, to_id: 109757}
   - {key: "qid:Q11539587|name:ヴェネチア風琴", action: drop}
   - {key: "qid:Q11539587|name:蘇州夜曲", action: drop}
-  - {key: "qid:Q11540292|name:ゾイドワイルド2+", action: drop}
+  - {key: "qid:Q11540292|name:ゾイドワイルド2+", action: relink, to_id: 135422}
   - {key: "qid:Q11544888|name:Road runner", action: drop}
   - {key: "qid:Q11545822|name:ラヴァーズコンチェルト", action: drop}
   - {key: "qid:Q11547408|name:人間失格", action: relink, to_id: 43290}
@@ -877,7 +877,7 @@ overrides:
   - {key: "qid:Q1343976|name:Bastard!!", action: drop}
   - {key: "qid:Q1353888|name:ねじ式", action: relink, to_id: 40521}
   - {key: "qid:Q1353888|name:ねじ式紅い花|sub:漫画アクション版 : つげ義春カラー作品集", action: relink, to_id: 123255}
-  - {key: "qid:Q1353888|name:ゲンセンカン主人", action: drop}
+  - {key: "qid:Q1353888|name:ゲンセンカン主人", action: relink, to_id: 119364}
   - {key: "qid:Q1353888|name:夢の散歩", action: drop}
   - {key: "qid:Q1353888|name:大場電気鍍金工業所/やもり", action: drop}
   - {key: "qid:Q1353888|name:紅い花", action: relink, to_id: 71501}
@@ -1068,7 +1068,7 @@ overrides:
   - {key: "qid:Q2661273|name:武田信玄", action: relink, to_id: 80061}
   - {key: "qid:Q2661273|name:水滸伝", action: relink, to_id: 66097}
   - {key: "qid:Q2661273|name:自選ホーキング|sub:collection「ゴルゴ13」のライバルたち", action: drop}
-  - {key: "qid:Q2663665|name:世界一初恋", action: drop}
+  - {key: "qid:Q2663665|name:世界一初恋", action: relink, to_id: 40573}
   - {key: "qid:Q268789|name:夏への扉", action: drop}
   - {key: "qid:Q268789|name:天馬の血族 総集編", action: drop}
   - {key: "qid:Q2715658|name:課長島耕作", action: drop}
@@ -1088,7 +1088,7 @@ overrides:
   - {key: "qid:Q290896|name:Pandora Hearts", action: drop}
   - {key: "qid:Q295073|name:BLEACH", action: relink, to_id: 30012}
   - {key: "qid:Q295073|name:劇場版 BLEACH", action: drop}
-  - {key: "qid:Q302859|name:RiN", action: drop}
+  - {key: "qid:Q302859|name:RiN", action: relink, to_id: 76894}
   - {key: "qid:Q302859|name:ゴリラーマン40", action: drop}
   - {key: "qid:Q3045424|name:グラップラー刃牙 幼年編", action: drop}
   - {key: "qid:Q3045424|name:グラップラー刃牙 最大トーナメント編", action: drop}
@@ -1125,7 +1125,7 @@ overrides:
   - {key: "qid:Q3297171|name:Rookies", action: drop}
   - {key: "qid:Q3325226|name:新グッドジョブ", action: drop}
   - {key: "qid:Q3431787|name:こどもの時間", action: drop}
-  - {key: "qid:Q3472646|name:Tokyo tribe", action: drop}
+  - {key: "qid:Q3472646|name:Tokyo tribe", action: relink, to_id: 39849}
   - {key: "qid:Q3482066|name:猿飛佐助", action: relink, to_id: 184753}
   - {key: "qid:Q3482283|name:あまつき絵巻金華糖", action: drop}
   - {key: "qid:Q3514142|name:映画総集編 ダレン・シャン", action: drop}
@@ -1224,7 +1224,7 @@ overrides:
   - {key: "qid:Q471103|name:幽霊船", action: drop}
   - {key: "qid:Q471103|name:新変身忍者嵐", action: drop}
   - {key: "qid:Q471103|name:買厄懸場帖九頭竜", action: relink, to_id: 66357}
-  - {key: "qid:Q471103|name:龍神沼", action: drop}
+  - {key: "qid:Q471103|name:龍神沼", action: relink, to_id: 88570}
   - {key: "qid:Q471133|name:ジャイアントロボ", action: drop}
   - {key: "qid:Q471133|name:仮面の忍者赤影", action: drop}
   - {key: "qid:Q471133|name:伊賀の影丸", action: drop}
@@ -1258,7 +1258,7 @@ overrides:
   - {key: "qid:Q551359|name:マジンガーZ visual works", action: drop}
   - {key: "qid:Q551359|name:新デビルマン", action: drop}
   - {key: "qid:Q551359|name:激マン!デビルマンの章", action: drop}
-  - {key: "qid:Q551359|name:鬼公子炎魔", action: drop}
+  - {key: "qid:Q551359|name:鬼公子炎魔", action: relink, to_id: 37703}
   - {key: "qid:Q551359|name:魔王ダンテ", action: relink, to_id: 37666}
   - {key: "qid:Q551551|name:ああっ女神さまっ　いいとこどりシリーズ", action: drop}
   - {key: "qid:Q551551|name:新装版ああっ女神さまっ", action: drop}
@@ -1271,7 +1271,7 @@ overrides:
   - {key: "qid:Q600384|name:ゲッターロボG", action: drop}
   - {key: "qid:Q60231010|name:呪術廻戦 東京都立呪術高等専門学校", action: drop}
   - {key: "qid:Q605735|name:のぞき屋", action: drop}
-  - {key: "qid:Q608701|name:旅人くん", action: drop}
+  - {key: "qid:Q608701|name:旅人くん", action: relink, to_id: 181927}
   - {key: "qid:Q61058221|name:家族相姦図式", action: drop}
   - {key: "qid:Q6139039|name:メンズ校", action: relink, to_id: 33418}
   - {key: "qid:Q614514|name:木枯し紋次郎ベストコレクション", action: drop}
@@ -1373,7 +1373,7 @@ overrides:
   - {key: "qid:Q7827779|name:Monacoの空へ", action: drop}
   - {key: "qid:Q8017002|name:ねじまき真野さん", action: relink, to_id: 61585}
   - {key: "qid:Q8049952|name:Days", action: relink, to_id: 86600}
-  - {key: "qid:Q8060533|name:ダイヤのA act Ⅱ", action: drop}
+  - {key: "qid:Q8060533|name:ダイヤのA act Ⅱ", action: relink, to_id: 86569}
   - {key: "qid:Q8060669|name:ちはやふる 公式コミックガイド", action: drop}
   - {key: "qid:Q8062691|name:クレイジーピエロ", action: drop}
   - {key: "qid:Q8062691|name:夢幻紳士 冒険活劇編", action: drop}
@@ -1420,7 +1420,7 @@ overrides:
   - {key: "qid:Q9124559|name:ハウスバッカー", action: relink, to_id: 76564}
   - {key: "qid:Q9124928|name:シュート!熱き挑戦", action: relink, to_id: 53691}
   - {key: "qid:Q9300389|name:GOSICK", action: drop}
-  - {key: "qid:Q9330089|name:カノジョも彼女", action: drop}
+  - {key: "qid:Q9330089|name:カノジョも彼女", action: relink, to_id: 116266}
   - {key: "qid:Q933469|name:新・だぁ!だぁ!だぁ!", action: relink, to_id: 33664}
   - {key: "qid:Q958249|name:Black cat", action: relink, to_id: 186853}
   - {key: "qid:Q958249|name:To LOVEる-とらぶる-ダークネス", action: relink, to_id: 52519}
