@@ -8,7 +8,7 @@ description: アイドル運転して=手すき時間の常設柱(試し読みex
 やることがない時間に回す常設ジョブのセット。**時間指定はしない**: 起動→(勝手に走る)→「やめて」で即停止→
 別作業→また「アイドル運転して」で続きから。全ループが逐次保存なので停止の損失は最大でも走行中1バッチ(~5分)。
 
-## 起動 (= ★柱①〜⑤を全部、同時にbackgroundへ。3本で止めない)
+## 起動 (= ★柱①〜⑥を全部、同時にbackgroundへ。3本で止めない)
 ```
 bash scripts/_idle-tameshiyomi-expand-loop.sh   # ①試し読みexpand消化(無限・バッチごとcommit+push)
 python scripts/_gemini-genre-probe.py && python scripts/_gemini-genre-verify.py   # ②Gemini連鎖(429で自然停止)
