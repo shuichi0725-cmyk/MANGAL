@@ -15,6 +15,7 @@ python scripts/_gemini-genre-probe.py && python scripts/_gemini-genre-verify.py 
 python scripts/_verify-kana-pending.py --limit 300   # ③ヨミ照合(★1パスのみ=ループ禁止、下記)
 python scripts/_completion-judge.py --backlog --limit 300   # ④完結判定backlog(→worksheet記入→--collect→commit、詳細=skill completion-judge)
 python scripts/_material-harvest.py wiki-fetch --limit 500  # ⑤素材ハーベスト(在庫切れ後は fish-residue --limit 50、詳細=skill material-harvest)
+python scripts/_anilist-delta.py   # ⑥AniList鮮度維持(直近更新~5,000件回収・~5分で自然停止・★セッション1回のみ)
 ```
 - それぞれ **run_in_background で別タスク**として起動し、**タスクIDを控えて報告**(=「やめて」で使う)。
 - ★④⑤は1バッチ終了ごとに**同じコマンドを再起動**して続きを回す(④はworksheet記入→--collectを挟む。⑤はwiki-fetch在庫が尽きたらfish-residueへ)。②③のように自然停止で終わりではない。
@@ -42,6 +43,9 @@ python scripts/_material-harvest.py wiki-fetch --limit 500  # ⑤素材ハーベ
 
 ## セット構成 (= 将来増やせる)
 現在: ①試し読みexpand消化 ②Gemini検品連鎖(probe→verify) ③NDLヨミ照合(1パス)
+⑥**AniList鮮度維持**(=`_anilist-delta.py` 2026-07-18新設。updatedAt降順でカーソルまで回収=ローリング再同期。
+  ★収集のみ=deltaは.cacheに貯まるだけ。dumpへの`--merge`と enrichマップ再生成は蒸留時のOpus作業=アイドルでやらない。
+  ②③同様の自然停止型・セッション1回でよい[cap5,000/回])
 ④**完結判定backlogスイープ**(=skill completion-judge。`--backlog --limit 300`→worksheet記入(明示文言のみtrue)→`--collect`→commit。
   ②③と違い記入判断があるが「captionに完結の引用があるか」だけ=Sonnet安全。適用(--apply)は絶対にやらない=Opus+専権)。
 ⑤**素材ハーベスト**(=skill material-harvest 2026-07-17新設。本番に書かず素材収集のみ):
