@@ -8,13 +8,16 @@ description: アイドル運転して=手すき時間の常設柱(試し読みex
 やることがない時間に回す常設ジョブのセット。**時間指定はしない**: 起動→(勝手に走る)→「やめて」で即停止→
 別作業→また「アイドル運転して」で続きから。全ループが逐次保存なので停止の損失は最大でも走行中1バッチ(~5分)。
 
-## 起動 (= 柱を同時にbackgroundへ)
+## 起動 (= ★柱①〜⑤を全部、同時にbackgroundへ。3本で止めない)
 ```
 bash scripts/_idle-tameshiyomi-expand-loop.sh   # ①試し読みexpand消化(無限・バッチごとcommit+push)
 python scripts/_gemini-genre-probe.py && python scripts/_gemini-genre-verify.py   # ②Gemini連鎖(429で自然停止)
 python scripts/_verify-kana-pending.py --limit 300   # ③ヨミ照合(★1パスのみ=ループ禁止、下記)
+python scripts/_completion-judge.py --backlog --limit 300   # ④完結判定backlog(→worksheet記入→--collect→commit、詳細=skill completion-judge)
+python scripts/_material-harvest.py wiki-fetch --limit 500  # ⑤素材ハーベスト(在庫切れ後は fish-residue --limit 50、詳細=skill material-harvest)
 ```
 - それぞれ **run_in_background で別タスク**として起動し、**タスクIDを控えて報告**(=「やめて」で使う)。
+- ★④⑤は1バッチ終了ごとに**同じコマンドを再起動**して続きを回す(④はworksheet記入→--collectを挟む。⑤はwiki-fetch在庫が尽きたらfish-residueへ)。②③のように自然停止で終わりではない。
 - ①は積み残し~1.2万シリーズ(アンカー13,949作は収集済=旧アンカーループは枯れて即終了する)。BookLive HEADのみ=高速。
 - ②はquota(~500req/日・JST16時リセット)で~40分で止まるのが正常。
 - ③は**起動時に1回だけ**(NDL 1.2s/req・429=exit2で自然停止)。確定/不一致はjsonl/TSVへ逐次保存。
