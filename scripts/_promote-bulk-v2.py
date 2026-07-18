@@ -1731,6 +1731,21 @@ def _load_edition_overrides() -> dict:
     return _EDITION_OVERRIDES
 
 
+_ISBN_FILL = None
+
+
+def _load_isbn_fill() -> dict:
+    """★ガラスの仮面型ISBN補充 seed (2026-07-18)。旧刊初版書誌のISBN欠け巻に、
+    Wiki×楽天等2ソース確証済みの現行刷ISBNを純粋補充する。
+    形式: {slug: [{edition, number, isbn13, release_date?}, ...]}
+    ★空欄のみ埋める(既存isbn13は不可侵)。release_dateはseedが持つ時だけ確定日で置換。"""
+    global _ISBN_FILL
+    if _ISBN_FILL is None:
+        p = ROOT / "data" / "seeds" / "isbn-fill.json"
+        _ISBN_FILL = json.loads(p.read_text(encoding="utf-8")) if p.exists() else {}
+    return _ISBN_FILL
+
+
 def _load_status_corrections() -> dict:
     """★Wiki検証済みの完結漏れ是正(2026-07-09)。slug→{status,year_ended,wiki_url}。種3不変を汚さず可逆。"""
     p = ROOT / "data" / "seeds" / "status-corrections.yml"
@@ -2547,6 +2562,20 @@ def build_yml(
             o["credits"] = [{"name": c["name"], "role": c.get("role", "編集")} for c in _eov["credits"] if c.get("name")]
         if _eov.get("related_pin"):
             o["related_pin"] = list(_eov["related_pin"])
+    # ★isbn-fill (= ガラスの仮面型: ISBN欠け巻へ確証済み現行刷ISBNを補充。空欄のみ・上書き禁止)
+    _fills = _load_isbn_fill().get(o["slug"])
+    if _fills:
+        _fmap = {(f["edition"], f["number"]): f for f in _fills}
+        for _ed in o.get("editions") or []:
+            for _v in _ed.get("volumes") or []:
+                _f = _fmap.get((_ed.get("type"), _v.get("number")))
+                if _f and not _v.get("isbn13"):
+                    _v["isbn13"] = str(_f["isbn13"])
+                    if _f.get("release_date"):
+                        _v["release_date"] = _norm_date(_f["release_date"])
+                    if not _v.get("cover_url"):
+                        _v["cover_url"] = (get_cover_override().get(_norm_isbn(_v["isbn13"]))
+                                           or _cover_for(_v["isbn13"]))
     return o
 
 
