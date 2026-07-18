@@ -9,14 +9,23 @@
   4. head索引: 存在・フィールド一致・全slugが本体に存在・人気順(先頭要素のpopularity>=末尾)
   5. alt索引: 存在・dict形
   6. 行数レポート(本体 vs head vs alt。異常な激減=前回比>10%減 は警告)
+  7. ★形式契約(2026-07-18 版ズレApplication error対策=[[index-format-change-versioned-filename]]):
+     data/manga-*.json の形式署名を data/seeds/index-format-contract.json(git管理)と突合。
+     同名のまま形式が変わっていたら FAIL =「ファイル名をバンプ+fetch側変更+--accept-format」を要求。
+     旧ファイルはR2に残す(r2-syncはprune無し)ので旧JSは旧形式を読み続ける=デプロイ跨ぎ無害。
+     加えて lib/ の fetch("/manga-*.json") 先が実在することを確認(改名の片割れ忘れ検知)。
 
-使い方: python scripts/_audit-index-hygiene.py [DATA_DIR=data]
+使い方: python scripts/_audit-index-hygiene.py [DATA_DIR=data] [--accept-format]
+        --accept-format = 意図的な形式変更/新ファイル追加時に契約を現状から書き直す(単独で明示実行)
 """
-import json, os, sys
+import glob as _glob
+import json, os, re, sys
 sys.stdout.reconfigure(encoding="utf-8")
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-D = sys.argv[1] if len(sys.argv) > 1 else "data"
+ACCEPT_FORMAT = "--accept-format" in sys.argv
+argv = [a for a in sys.argv[1:] if not a.startswith("--")]
+D = argv[0] if argv else "data"
 BASE = os.path.join(ROOT, D)
 
 EXPECT_FIELDS = [
@@ -96,6 +105,64 @@ if prev and len(rows) < prev * 0.9:
     warns.append(f"行数が前回比10%超減({prev}→{len(rows)})。大量skip/データ消失を疑う")
 os.makedirs(os.path.dirname(marker), exist_ok=True)
 open(marker, "w").write(str(len(rows)))
+
+# 7. ★形式契約(同名での形式変更を禁止するゲート)
+CONTRACT = os.path.join(ROOT, "data", "seeds", "index-format-contract.json")
+
+def _jstype(v):
+    if isinstance(v, bool): return "bool"
+    if isinstance(v, (int, float)): return "number"
+    if isinstance(v, str): return "string"
+    if isinstance(v, list):
+        inner = next((x for x in v if x is not None), None)
+        return f"array<{_jstype(inner) if inner is not None else '?'}>"
+    if isinstance(v, dict): return "object"
+    return "?"
+
+def _signature(path):
+    """形式署名 = 中身の行数でなく「契約」だけを畳む({f,d}型=f列+各列型 / map型=値型)"""
+    j = json.load(open(path, encoding="utf-8"))
+    if isinstance(j, dict) and isinstance(j.get("f"), list) and isinstance(j.get("d"), list):
+        cols = {}
+        for i, name in enumerate(j["f"]):
+            v = next((r[i] for r in j["d"] if i < len(r) and r[i] is not None), None)
+            cols[name] = _jstype(v) if v is not None else "?"
+        return {"kind": "fd", "f": j["f"], "coltypes": cols}
+    if isinstance(j, dict):
+        v = next(iter(j.values()), None)
+        return {"kind": "map", "valtype": _jstype(v) if v is not None else "?"}
+    return {"kind": _jstype(j)}
+
+if D == "data":  # 本番索引のみ(previewはsubsetミラーなので対象外)
+    cur = {os.path.basename(p): _signature(p)
+           for p in sorted(_glob.glob(os.path.join(BASE, "manga-*.json")))}
+    if ACCEPT_FORMAT:
+        old = json.load(open(CONTRACT, encoding="utf-8")) if os.path.exists(CONTRACT) else {}
+        json.dump(cur, open(CONTRACT, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
+        chg = [n for n in cur if old.get(n) != cur.get(n)] + [n for n in old if n not in cur]
+        print(f"形式契約を更新: {CONTRACT} (変更 {chg or 'なし'})。★同名での形式変更なら、これは誤り=ファイル名バンプが先")
+    elif not os.path.exists(CONTRACT):
+        fails.append(f"形式契約なし {CONTRACT} → 初回は --accept-format で登録")
+    else:
+        con = json.load(open(CONTRACT, encoding="utf-8"))
+        for name, sig in cur.items():
+            if name not in con:
+                fails.append(f"契約未登録の索引 {name} → 新ファイルなら --accept-format で登録(fetch側の実装も確認)")
+            elif con[name] != sig:
+                fails.append(
+                    f"★形式契約違反 {name}: 同名のままフォーマットが変わっている(版ズレでApplication errorになる型)。"
+                    f"→ ファイル名をバンプ(例 {name.replace('.json', '.v2.json')})+fetch側(lib/)も変更+旧ファイルはR2に残す+--accept-format で新契約登録")
+        for name in con:
+            if name not in cur:
+                warns.append(f"契約にあるが実体なし {name}(廃止したなら --accept-format で契約からも除去。R2の旧配信は残してよい)")
+    # fetch側の実在確認(改名の片割れ忘れ)
+    fetched = set()
+    for src in _glob.glob(os.path.join(ROOT, "lib", "*.ts*")) + _glob.glob(os.path.join(ROOT, "components", "*.ts*")):
+        for m in re.findall(r'fetch\("/(manga-[\w.-]+\.json)"', open(src, encoding="utf-8").read()):
+            fetched.add(m)
+    for name in sorted(fetched):
+        if not os.path.exists(os.path.join(BASE, name)):
+            fails.append(f"コードが fetch する {name} が {D}/ に無い(改名の片割れ忘れ)")
 
 print(f"一覧 {len(rows)}行 / head {len(json.load(open(hp, encoding='utf-8'))['d']) if os.path.exists(hp) else 0}行 / cover短縮漏れ {full_cover} / authors旧形式 {obj_author}")
 for w in warns: print("WARN:", w)
