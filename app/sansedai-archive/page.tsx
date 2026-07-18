@@ -3,7 +3,8 @@ import ArchiveClient from "./ArchiveClient";
 /** 「三世代、今日の一冊」過去ログ(本実装 2026-07-03)。
  *  sansedai-stock.json(741件)からクライアントがJST日付で決定的に選ぶ=ホームと同じ式。
  *  静的サイトのまま毎日自動でログが伸びる。 いいねは Worker /api/like の匿名カウンタ。 */
-export const metadata = { title: "今日の一冊 − 過去ログ | MANGAL" };
+export const metadata = {
+  alternates: { canonical: "/sansedai-archive" }, title: "今日の一冊 − 過去ログ | MANGAL" };
 
 export default function SansedaiArchive() {
   return (

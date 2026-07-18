@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { bundle, DesignNav, latestDate, volCount } from "@/lib/homeDesign";
 
+export const metadata = { robots: { index: false, follow: false } };  // 実験頁=非索引
+
 /** 案6: テキスト表型 — スプレッドシートが主役の尖り案(他サイトに無い密度=差別化) */
 export default function Design06() {
   const { manga } = bundle();

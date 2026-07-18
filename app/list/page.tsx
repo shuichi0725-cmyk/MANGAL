@@ -3,6 +3,8 @@ import { DesignNav } from "@/lib/homeDesign";
 import { loadMasters, loadArtBooks } from "@/lib/loadData";
 import type { ListBundle } from "@/lib/schema";
 
+export const metadata = { alternates: { canonical: "/list" } };
+
 /** 一覧表(案6の正式な行き先): 全作品のスプレッドシート型ビュー。
  *  列タップでソート・検索・状態絞り込み。
  *

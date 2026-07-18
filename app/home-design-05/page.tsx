@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { bundle, DesignNav, seeded, volCount, Cover } from "@/lib/homeDesign";
 
+export const metadata = { robots: { index: false, follow: false } };  // 実験頁=非索引
+
 /** 案5: ダッシュボード型 — タイルで一望。数字+ランダム1冊+新着+ジャンル分布 */
 export default function Design05() {
   const { manga, byNew } = bundle();

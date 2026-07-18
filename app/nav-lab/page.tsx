@@ -1,5 +1,7 @@
 import Link from "next/link";
 
+export const metadata = { robots: { index: false, follow: false } };  // 実験頁=非索引
+
 /** ナビ見本ラボ(/nav-lab): ヘッダーのアイコン大きさ×間隔×ラベル有無を 30種 並べて選ぶ用。
  *  レイアウトは「🏠ホーム左固定 / 残り右寄せ + ≡メニュー」で固定。 本番反映はしない見本。 */
 

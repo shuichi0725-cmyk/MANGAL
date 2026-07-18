@@ -6,6 +6,7 @@ import { currentSeasonKey, seasonLabel, type AnimeSeasonsView } from "@/lib/anim
 const V = view as unknown as AnimeSeasonsView;
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/anime" },
   title: "アニメ化された漫画・季節別一覧 - MANGAL",
   description: "1960年代から現在までのTV・配信アニメの原作漫画を放送季ごとに一覧。",
 };

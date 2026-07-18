@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { bundle, DesignNav, seeded, CoverTile, Cover } from "@/lib/homeDesign";
 
+export const metadata = { robots: { index: false, follow: false } };  // 実験頁=非索引
+
 /** 案2: 本屋の平台型 — 表紙が主役。新刊平台+棚(BOOK☆WALKER寄りのビジュアル先行) */
 export default function Design02() {
   const { byNew, completedClassics, manga } = bundle();

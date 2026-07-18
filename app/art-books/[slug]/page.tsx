@@ -5,6 +5,11 @@ import Badge from "@/components/ui/Badge";
 import { loadAllManga } from "@/lib/loadData";
 import { buildAmazonUrlForArtBook } from "@/lib/amazon";
 
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  return { alternates: { canonical: `/art-books/${slug}` } };
+}
+
 export function generateStaticParams() {
   const slugs = loadAllManga().artBooks.map((a) => ({ slug: a.slug }));
   // empty state (= データ準備中) でも build を通すための placeholder。

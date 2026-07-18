@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { bundle, DesignNav, volCount } from "@/lib/homeDesign";
 
+export const metadata = { robots: { index: false, follow: false } };  // 実験頁=非索引
+
 /** 案4: 図書館型 — 索引が主役。50音・ジャンル・年代の静かな目録(serif基調) */
 export default function Design04() {
   const { manga } = bundle();

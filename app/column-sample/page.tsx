@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { DesignNav } from "@/lib/homeDesign";
 
+export const metadata = { robots: { index: false, follow: false } };  // 実験頁=非索引
+
 /** 週刊コラム(モック1本)。 本実装 = AI月次バッチ生成(ネタバレ検査パス付)→seed→静的生成。
  *  完結作限定・ネタバレなし・読み応え重視の長文。 */
 export default function ColumnSample() {

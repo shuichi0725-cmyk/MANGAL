@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { bundle, DesignNav, seeded, volCount, Cover, CoverTile } from "@/lib/homeDesign";
 
+export const metadata = { robots: { index: false, follow: false } };  // 実験頁=非索引
+
 /** 案7: 合成案 — ホーム=コーナーの目次。ヒーロー(3)+新刊棚(2)+特集(3)+運命の一冊(5)+入口群(4/6) */
 export default function Design07() {
   const { manga, byNew, completedClassics } = bundle();

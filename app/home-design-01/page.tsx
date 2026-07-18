@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { bundle, DesignNav, latestDate, volCount, Cover } from "@/lib/homeDesign";
 
+export const metadata = { robots: { index: false, follow: false } };  // 実験頁=非索引
+
 /** 案1: データベース型 — 検索が主役、密度の高いリスト行(IMDb/読書メーター寄り) */
 export default function Design01() {
   const { manga, byNew } = bundle();

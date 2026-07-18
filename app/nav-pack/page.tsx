@@ -1,5 +1,7 @@
 import Link from "next/link";
 
+export const metadata = { robots: { index: false, follow: false } };  // 実験頁=非索引
+
 /** ナビ見本ラボ2(/nav-pack): #1(アイコン16px・ラベル有)ベースで「右側の詰め方」だけを振る。
  *  ≡メニューは右端で固定(位置を変えない)。 変えるのは 5項目の間隔 / メニューとの距離 / 分散か密集か。 */
 

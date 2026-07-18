@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/terms" },
   title: "利用規約 — MANGAL",
   description: "MANGAL の利用規約・免責事項・著作権について。",
 };

@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/privacy" },
   title: "プライバシーポリシー — MANGAL",
   description:
     "MANGAL における個人情報・Cookie の取り扱い、アフィリエイト広告に関する開示。",

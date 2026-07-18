@@ -4,6 +4,11 @@ import { DesignNav } from "@/lib/homeDesign";
 import { loadAiReviews } from "@/lib/loadData";
 import AiReviewSectionView from "@/components/AiReviewSection";
 
+export async function generateMetadata({ params }: { params: Promise<{ setsu: string }> }) {
+  const { setsu } = await params;
+  return { alternates: { canonical: `/column-ai-league/${setsu}` } };
+}
+
 /** AI書評家リーグ 過去ログ個別ページ(節ごと)。 三世代の過去ログと同様。 */
 export function generateStaticParams() {
   const params = loadAiReviews().map((s) => ({ setsu: String(s.setsu) }));

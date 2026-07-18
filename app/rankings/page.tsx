@@ -3,6 +3,7 @@ import { bundle, DesignNav, volCount, Cover, firstVolumeDate } from "@/lib/homeD
 import type { Manga } from "@/lib/schema";
 
 export const metadata = {
+  alternates: { canonical: "/rankings" },
   title: "なんでもランキング | MANGAL",
   description: "巻数・連載年数・完結大作…データベースだから作れる切り口ランキング。",
 };

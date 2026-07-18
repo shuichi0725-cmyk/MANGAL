@@ -1,6 +1,8 @@
 import { DesignNav } from "@/lib/homeDesign";
 import SearchProto from "@/components/SearchProto";
 
+export const metadata = { robots: { index: false, follow: false } };  // 実験頁=非索引
+
 /** 索引プロトタイプ(仕様v2 S1)。 既存ページを壊さない独立ルート。
  *  /idx/search.json(_build-index.py が生成)を遅延ロードしてクライアント検索。 */
 export default function SearchProtoPage() {

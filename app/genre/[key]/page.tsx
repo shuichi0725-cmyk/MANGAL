@@ -6,6 +6,11 @@ import { loadListBundle, loadGenreIntros } from "@/lib/loadData";
 import { DesignNav } from "@/lib/homeDesign";
 import { type MangaListItem } from "@/lib/schema";
 
+export async function generateMetadata({ params }: { params: Promise<{ key: string }> }) {
+  const { key } = await params;
+  return { alternates: { canonical: `/genre/${key}` } };
+}
+
 /** ジャンル別ランディング = 「自動生成まとめ記事」の土台(discovery + SEO + アフィの集約)。
  *  全作品をジャンルで絞り、 ★AniList人気順(コミュニティ不要)で並べる。
  *  AI解説スロット(intro)は将来 per-genre のキュレーション文を差し込む(今はデータ駆動の暫定)。

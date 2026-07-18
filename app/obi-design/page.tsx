@@ -2,6 +2,8 @@
    縦線色 6 × 背景 5 = 30案。 文面・文字組みは本番カードと同一(text-xs font-medium leading-snug line-clamp-3)。
    番号で選んでもらう用。 ミニカード文脈(タイトル+著者行)付き。 */
 
+export const metadata = { robots: { index: false, follow: false } };  // 実験頁=非索引
+
 const CATCH = "鬼ごっこに負けて宇宙人の押しかけ女房がやってきた。すべてのラブコメの原点、ここに在り。";
 
 type Line = { name: string; color: string };

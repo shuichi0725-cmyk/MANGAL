@@ -2,7 +2,8 @@ import ContactForm from "./ContactForm";
 
 /** お問い合わせフォーム(2026-07-03)。 送信先メールアドレスはソースに含めない
  *  (= Worker /api/contact が受信箱へ中継。 スクレイピング耐性)。 */
-export const metadata = { title: "お問い合わせ | MANGAL" };
+export const metadata = {
+  alternates: { canonical: "/contact" }, title: "お問い合わせ | MANGAL" };
 
 export default function ContactPage() {
   return (

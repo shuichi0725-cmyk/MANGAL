@@ -3,6 +3,8 @@
    中央「新装版」を選択中(橙塗り)表示。 */
 import type { CSSProperties } from "react";
 
+export const metadata = { robots: { index: false, follow: false } };  // 実験頁=非索引
+
 type T = { name: string; year: string; full: boolean };
 const TABS: T[] = [
   { name: "初版", year: "1980", full: false },

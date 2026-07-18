@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { bundle, DesignNav, seeded, volCount, Cover, CoverTile } from "@/lib/homeDesign";
 
+export const metadata = { robots: { index: false, follow: false } };  // 実験頁=非索引
+
 /** 案3: 雑誌型 — 特集が主役。帯コピー付きフィーチャー+自動生成特集ブロック */
 export default function Design03() {
   const { byNew, completedClassics, manga } = bundle();

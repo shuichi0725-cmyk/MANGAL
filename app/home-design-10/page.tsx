@@ -3,6 +3,8 @@ import LikeButtonMock from "@/components/LikeButtonMock";
 import ScrollShortcutsMock from "@/components/ScrollShortcutsMock";
 import { bundle, DesignNav, seeded, volCount, latestDate, Cover, CoverTile } from "@/lib/homeDesign";
 
+export const metadata = { robots: { index: false, follow: false } };  // 実験頁=非索引
+
 /** 案10: 編成B「実用先行」 — 計器盤+新刊+検索例を上に、物語性コーナーは中段、索引が最深。
  *  浅→深: 計器盤 → 新刊 → 完結したて(新) → 今週の一冊 → 三世代 → 1巻完結棚(新) → 画集(新) → 入口群 */
 export default function Design10() {

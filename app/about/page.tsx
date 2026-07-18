@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/about" },
   title: "MANGAL について",
   description:
     "MANGAL は日本の漫画を出版年・著者・出版社・分野・ジャンルから絞り込めるカタログサイトです。",

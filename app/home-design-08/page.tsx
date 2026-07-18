@@ -3,6 +3,8 @@ import LikeButtonMock from "@/components/LikeButtonMock";
 import ScrollShortcutsMock from "@/components/ScrollShortcutsMock";
 import { bundle, DesignNav, seeded, volCount, Cover, CoverTile } from "@/lib/homeDesign";
 
+export const metadata = { robots: { index: false, follow: false } };  // 実験頁=非索引
+
 /** 案8: 7のコーナー編成 × 5のコックピット質感 + ヘッダーショートカット(確定済ヘッダーUI設計を反映)。
  *  アイコン下ラベルは「初回訪問時のみ表示」想定の状態で見せている。 */
 export default function Design08() {

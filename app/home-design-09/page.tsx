@@ -3,6 +3,8 @@ import LikeButtonMock from "@/components/LikeButtonMock";
 import ScrollShortcutsMock from "@/components/ScrollShortcutsMock";
 import { bundle, DesignNav, seeded, volCount, Cover, CoverTile } from "@/lib/homeDesign";
 
+export const metadata = { robots: { index: false, follow: false } };  // 実験頁=非索引
+
 /** 案9: 編成A「出会い重視」 — 人格と物語性を上に、実用は下に。
  *  浅→深: 今週の一冊 → 三世代 → 特集 → 新刊 → 作家特集(新) → 連載誌の棚(新) → 入口群 */
 export default function Design09() {
