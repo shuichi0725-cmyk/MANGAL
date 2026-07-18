@@ -14,6 +14,7 @@ import { coverUrl } from "@/lib/schema";
 import { loadAiReviews } from "@/lib/loadData";
 import AiLeagueTeaser from "@/components/AiLeagueTeaser";
 import AnimeSeasonCorner from "@/components/AnimeSeasonCorner";
+import ZenshuuCorner from "@/components/ZenshuuCorner";
 
 export const metadata = { robots: { index: false, follow: false } };  // 実験頁=非索引
 
@@ -87,6 +88,9 @@ export default function Design11() {
       {/* 1.【大】今季アニメの原作(★2026-07-12 ユーザ裁定: 旧「今週の一冊」ヒーローを廃止し
           アニメコーナーを最上段へ。表示は再読込ごとランダム=client側シャッフル) */}
       <AnimeSeasonCorner />
+
+      {/* 1.2【中】全集コーナー(A-1案・2026-07-19 テスト導入。一覧ページ無し=カードから直接 /zenshuu/[key] へ) */}
+      <ZenshuuCorner />
 
       {/* 1.5【中】今月の新刊(アニメ直下へ移動 2026-07-12)
           ★2026-07-15: 再読込ごとランダム入替(アニメコーナーと同方式)+リンクは当月巻フォーカス(#v)。
