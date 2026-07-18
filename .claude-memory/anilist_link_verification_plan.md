@@ -1,6 +1,6 @@
 ---
 name: anilist-link-verification-plan
-description: "【①②✅済 2026-07-18】AniListリンク検証: 検証ゲート稼働・疑惑裁定完了(drop813/relink616/FAIL0)。残=③recall上積み(著者経由23,304+P8731直結線)と本番反映(次promote)+unsure12"
+description: "【①②③全✅ 2026-07-18】AniListリンク検証完了: ゲート稼働・全裁定済(SUSPECT0/FAIL0/PASS51,381)・recall+330。残=本番反映(次promote)と将来のファジーrecall"
 metadata: 
   node_type: memory
   type: project
@@ -24,10 +24,18 @@ metadata:
 3. enrich map再生成済(.cache/anilist-enrich-map.json 50,919キー)。**本番反映は次promote(週次蒸留)で自動**。
 4. CLAUDE.md 月次サニティ監査に「AniListリンク層」として登録済(蒸留後に再走→新規FAIL/SUSPECTだけ裁定)。
 
-## 残 (=③、未着手)
-- **recall上積み**: 著者経由23,304([[anilist_matching_state]])+P8731直結線+synonyms改善。AniListに無いロングテールは素材ハーベスト(wiki/楽天)が受け皿で正。
-- 東京喰種:re 等、AI dropしたが正しい付替先がdumpに実在しうる分はrecall時にrelink回収余地。
-- unsure12の目視裁定(ユーザ or Web深掘り)。
+## ③recall v2 ✅ (同日実施)
+- `_fetch-p8731-full.py`: ★P8731全量8,072項目(jaラベル7,818+別名2,512)をQLever取得=.cache/p8731-full-map.json。
+  AniList側typo(リーセロッテ/スカバンジャーズ)をWikidata正ラベルで橋渡す独立正解チャネル。ゲートW+もこれで拡大(5,836→6,466)。
+- `_anilist-recall-v2.py`: 未マッチ37kに C1広域題一致/C2 P8731/C3著者×骨格 → 証拠合議で **新規310+drop復活relink20**(進撃の巨人悔いなき選択→外伝ID等)。
+  ★実装ガード3種: A-(両側著者あり不一致=同名異作) / Y-はV+必須(坊っちゃん型=原作者経由の別作画遮断) / 純ASCII<3文字候補化禁止(MÄR→"mr"衝突)。
+- unsure12は専任エージェント深掘りで**全件drop確定**(頁実体がエッセイ本/画集/レシピ本/米版邦訳/選集の部分一致等)。
+- 最終: **リンク51,383 / PASS 51,381 / SUSPECT 0 / FAIL 0**(NO_DATA2=dump外aidで実質no-op)。overrides 1,460(relink636/drop805相当)。
+
+## 残
+- **本番反映=次promote(週次蒸留)で自動**(enrich map 51,234キー再生成済)。
+- 将来recall: 残る未マッチ大半はAniList未収録 or ファジー題(AI照合要)。素材ハーベスト(wiki/楽天)が受け皿で正。
+- 蒸留後の運用: ゲート再走(dump/match更新後)→新規FAIL/SUSPECTだけ `_anilist-adjudicate-gate.py`→AIスライス→`_gen-gate-overrides.py`。
 
 ## 素材の所在
 - dump=.cache/anilist-manga-dump-v3.jsonl.gz(5/31)+delta=.cache/anilist-delta.jsonl(柱⑥随時、mergeはOpus専権=[[idle-run]])

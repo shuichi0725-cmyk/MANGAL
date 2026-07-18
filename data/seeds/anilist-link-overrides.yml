@@ -675,6 +675,7 @@ overrides:
   - {key: "qid:Q11418276|name:ラブリー・レッスン", action: drop}
   - {key: "qid:Q1141948|name:ウルトラマン", action: relink, to_id: 116352}
   - {key: "qid:Q1141948|name:半魚人", action: drop}
+  - {key: "qid:Q1141948|name:恐怖への招待", action: drop}
   - {key: "qid:Q1141948|name:楳図かずお", action: drop}
   - {key: "qid:Q1141948|name:楳図かずおこわい本 怪物", action: drop}
   - {key: "qid:Q11422790|name:あかい蠢動", action: drop}
@@ -840,6 +841,7 @@ overrides:
   - {key: "qid:Q11649074|name:ダブロウ・ゲート", action: drop}
   - {key: "qid:Q11653135|name:もっと×2あなたのオモチャ", action: drop}
   - {key: "qid:Q11653135|name:もっと×3あなたのオモチャ", action: drop}
+  - {key: "qid:Q11653135|name:もっとあなたのオモチャ", action: drop}
   - {key: "qid:Q11658030|name:食戟のソーマL'étoile", action: drop}
   - {key: "qid:Q11658055|name:紅", action: relink, to_id: 47824}
   - {key: "qid:Q11659889|name:魔界王子devils and realist 雪広うたこアートワークス", action: drop}
@@ -1094,6 +1096,7 @@ overrides:
   - {key: "qid:Q3045424|name:グラップラー刃牙 最大トーナメント編", action: drop}
   - {key: "qid:Q3045424|name:グラップラー刃牙|sub:アンコール出版", action: relink, to_id: 41425}
   - {key: "qid:Q3045424|name:範馬刃牙|sub:アンコール出版", action: relink, to_id: 37760}
+  - {key: "qid:Q3049381|name:義血侠血", action: drop}
   - {key: "qid:Q3081347|name:呪いのワンピース", action: drop}
   - {key: "qid:Q3089616|name:プリンセスルシア", action: relink, to_id: 42985}
   - {key: "qid:Q30929609|name:ないしょごと", action: drop}
@@ -1157,6 +1160,7 @@ overrides:
   - {key: "qid:Q4022589|name:こちら大阪社会部", action: relink, to_id: 210360}
   - {key: "qid:Q4022589|name:剣客商売", action: relink, to_id: 72221}
   - {key: "qid:Q41695430|name:よりぬきくるねこ", action: drop}
+  - {key: "qid:Q41698730|name:Magic", action: drop}
   - {key: "qid:Q41698730|name:まんがグリム童話", action: drop}
   - {key: "qid:Q418449|name:Banana fish another story", action: drop}
   - {key: "qid:Q418449|name:ラヴァーズ・キス", action: drop}
@@ -1193,6 +1197,7 @@ overrides:
   - {key: "qid:Q452246|name:SHADOW LADY", action: relink, to_id: 187164}
   - {key: "qid:Q452246|name:TIGER & BUNNY", action: relink, to_id: 59553}
   - {key: "qid:Q452246|name:TIGER & BUNNY|sub:新装版", action: relink, to_id: 59553}
+  - {key: "qid:Q4531338|name:アタゴオル", action: drop}
   - {key: "qid:Q457637|name:Tactics", action: drop}
   - {key: "qid:Q457637|name:tactics illustration works", action: drop}
   - {key: "qid:Q457637|name:魔探偵ロキ RAGNAROK", action: relink, to_id: 38442}
@@ -1235,14 +1240,17 @@ overrides:
   - {key: "qid:Q47465101|name:アオアシ.", action: relink, to_id: 107279}
   - {key: "qid:Q48757687|name:君のことが大大大大大好きな100人の彼女", action: relink, to_id: 114416}
   - {key: "qid:Q504482|name:BLAME!", action: relink, to_id: 30149}
+  - {key: "qid:Q504482|name:Blame! and so on", action: drop}
   - {key: "qid:Q504482|name:人形の国", action: relink, to_id: 98354}
   - {key: "qid:Q510959|name:グラビテーション完全攻略ファンブック", action: drop}
+  - {key: "qid:Q5209147|name:妖怪ハンター稗田の生徒たち", action: drop}
   - {key: "qid:Q5209147|name:西遊妖猿伝 大唐篇", action: relink, to_id: 177519}
   - {key: "qid:Q5276666|name:天元突破グレンラガン", action: relink, to_id: 31648}
   - {key: "qid:Q533664|name:人間失格", action: relink, to_id: 43290}
   - {key: "qid:Q534001|name:SHAMAN KING FAUST 8|sub:永遠のエリザ", action: relink, to_id: 130523}
   - {key: "qid:Q534490|name:フイチンさん", action: drop}
   - {key: "qid:Q535183|name:源氏物語", action: relink, to_id: 174423}
+  - {key: "qid:Q5358186|name:深夜食堂の勝手口", action: drop}
   - {key: "qid:Q5362351|name:バカとテストと召喚獣→spinout! それが僕らの日常。", action: relink, to_id: 55637}
   - {key: "qid:Q5363905|name:貧乏神が! ポケット画廊舌戦絵巻", action: drop}
   - {key: "qid:Q5364998|name:超人類6|sub:re-animator", action: relink, to_id: 124081}
@@ -1254,9 +1262,12 @@ overrides:
   - {key: "qid:Q551359|name:ハレンチ学園|sub:50周年記念愛蔵版", action: relink, to_id: 42808}
   - {key: "qid:Q551359|name:バイオレンスジャック", action: drop}
   - {key: "qid:Q551359|name:バイオレンスジャック|sub:連載再現版 : 1973-1978", action: relink, to_id: 31442}
+  - {key: "qid:Q551359|name:マジンガー", action: drop}
   - {key: "qid:Q551359|name:マジンガーZ", action: relink, to_id: 38773}
   - {key: "qid:Q551359|name:マジンガーZ visual works", action: drop}
+  - {key: "qid:Q551359|name:怖すぎる永井豪", action: drop}
   - {key: "qid:Q551359|name:新デビルマン", action: drop}
+  - {key: "qid:Q551359|name:永井豪鬼と悪魔のfantasy", action: drop}
   - {key: "qid:Q551359|name:激マン!デビルマンの章", action: drop}
   - {key: "qid:Q551359|name:鬼公子炎魔", action: relink, to_id: 37703}
   - {key: "qid:Q551359|name:魔王ダンテ", action: relink, to_id: 37666}
@@ -1392,6 +1403,7 @@ overrides:
   - {key: "qid:Q841880|name:天才柳沢教授の生活「男はここまで純情です」セレクト18", action: drop}
   - {key: "qid:Q841880|name:天才柳沢教授の生活「男はこんなにおバカです!」セレクト16", action: drop}
   - {key: "qid:Q841880|name:天才柳沢教授の生活傑作集", action: drop}
+  - {key: "qid:Q84461618|name:百合姫Wildrose", action: drop}
   - {key: "qid:Q849446|name:ニセコイ.", action: relink, to_id: 61499}
   - {key: "qid:Q872923|name:カモのネギには毒がある", action: drop}
   - {key: "qid:Q873283|name:Dear", action: drop}

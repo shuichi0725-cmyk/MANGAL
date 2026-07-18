@@ -153,4 +153,4 @@
 - [全集コーナー=素材収集済み](zenshuu_corner_state.md) — 手塚421/藤子F123冊未収・石ノ森=単巻ISBN無し(期セット)。まとめはGO待ち
 - [試し読み裁定=枯れ達成](tameshiyomi_adjudication_state.md) — アンカー25,149・保留9,749全分類・台帳=docs/…/tameshiyomi-adjudication.jsonl
 - [【厳守】索引形式変更=ファイル名バンプ](index_format_change_versioned_filename.md) — 同名で契約変更禁止(版ズレApplication error根絶)。旧ファイルは残す
-- [AniListリンク検証①②✅](anilist_link_verification_plan.md) — ゲート稼働・drop813/relink616・allowlist化。残=③recall+unsure12+次promoteで本番反映
+- [AniListリンク検証 全✅](anilist_link_verification_plan.md) — SUSPECT0/FAIL0達成・recall+330・P8731全量チャネル。残=次promoteで本番反映

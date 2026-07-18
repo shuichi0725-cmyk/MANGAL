@@ -1003,6 +1003,7 @@ a_id	key	verdict	reason
 155977	qid:Q1141948|name:別世界・幽霊を呼ぶ少女|sub:完全復刻版	keep	完全復刻版合本
 163585	qid:Q1141948|name:姿なき招待 続姿なき招待	keep	原作+続編合本
 109587	qid:Q1141948|name:恐怖への招待	unsure	材料不足で判断不能
+109587	qid:Q1141948|name:恐怖への招待	drop	頁=河出1988自伝エッセイ本、漫画「恐怖」と別物
 163677	qid:Q1141948|name:森の兄妹 底のない町	keep	表題+併録合本
 163089	qid:Q1141948|name:森の兄妹・底のない町|sub:完全復刻版	keep	完全復刻版合本
 141485	qid:Q1141948|name:楳図かずお	drop	題名不一致(の呪い欠)
@@ -1248,6 +1249,7 @@ a_id	key	verdict	reason
 34526	qid:Q11653135|name:もっと×2あなたのオモチャ	drop	続編を本編に誤リンク
 34526	qid:Q11653135|name:もっと×3あなたのオモチャ	drop	続編を本編に誤リンク
 47557	qid:Q11653135|name:もっとあなたのオモチャ	unsure	材料不足
+47557	qid:Q11653135|name:もっとあなたのオモチャ	drop	頁=「もっと」2003、a=続編「もっと×3」2006
 69561	qid:Q11653767|name:ナポレオン	keep	副題差のみ
 131536	qid:Q11657910|name:エリートヤンキー三郎 第2部	keep	同一連載の後半部
 128605	qid:Q11658030|name:食戟のソーマL'étoile	drop	スピンオフに読切誤リンク
@@ -1479,6 +1481,7 @@ a_id	key	verdict	reason
 43122	qid:Q3045424|name:バキ外伝疵面	keep	同一作品副題差
 112854	qid:Q3045424|name:謝男 スペシャル	keep	同一作品特別編
 157666	qid:Q3049381|name:義血侠血	unsure	表記違い裏取り不可
+157666	qid:Q3049381|name:義血侠血	drop	a=腐蝕の成年読切「欺血嬌血」、鏡花原作と無関係
 201471	qid:Q304953|name:義経鬼	keep	同一作品副題差
 41696	qid:Q3072264|name:とっとこハム太郎あいしてるでちゅ	keep	シリーズ内巻
 41696	qid:Q3072264|name:とっとこハム太郎ハムちゃんずでございまちゅ	keep	シリーズ内巻
@@ -1568,6 +1571,7 @@ a_id	key	verdict	reason
 86036	qid:Q4023215|name:Shiori experience	keep	同一作品副題差
 48109	qid:Q41695430|name:よりぬきくるねこ	drop	よりぬき選集
 82243	qid:Q41698730|name:Magic	unsure	情報不足で判断不可
+82243	qid:Q41698730|name:Magic	drop	頁=魔木子、a=両角潤香MTG読切=作者別
 30756	qid:Q418449|name:Banana fish another story	drop	番外編別entry
 112189	qid:Q431443|name:1000年女王	keep	同一作品副題差
 56486	qid:Q431443|name:Queenエメラルダス|sub:復刻決定版	keep	復刻版=同一作
@@ -1601,6 +1605,7 @@ a_id	key	verdict	reason
 187164	qid:Q452246|name:4C SHADOW LADY	keep	カラー版の同一作
 146313	qid:Q452246|name:TIGER & BUNNY 2	keep	表記一致
 107515	qid:Q4531338|name:アタゴオル	unsure	同名複数シリーズ有
+107515	qid:Q4531338|name:アタゴオル	drop	頁=スコラ選集/MF混在、a=猫の森のみの部分一致
 53951	qid:Q453372|name:マホロミ	keep	副題違いのみ
 30087	qid:Q457637|name:tactics illustration works	drop	イラスト集で別物
 57485	qid:Q45819841|name:淫楽に囚われたグリム童話	keep	同一+シリーズ冠
@@ -1642,14 +1647,17 @@ a_id	key	verdict	reason
 198382	qid:Q48750055|name:俺だけ余裕の異世界サバイバル	keep	表記一致
 52498	qid:Q4889571|name:彼女のひとりぐらしツーアウト満塁	keep	同一作品副題
 141020	qid:Q504482|name:Blame! and so on	unsure	一話集か判別不能
+141020	qid:Q504482|name:Blame! and so on	drop	頁=2003弐瓶勉画集、a=1995読切BLAME
 30332	qid:Q510959|name:グラビテーション完全攻略ファンブック	drop	ファンブック
 154724	qid:Q51166237|name:Splatoonバンカラ!	keep	表記一致
 58589	qid:Q51166537|name:とでんか 少年探偵団	keep	同一作品副題
 77421	qid:Q5209147|name:妖怪ハンター稗田の生徒たち	unsure	別話か判別不能
+77421	qid:Q5209147|name:妖怪ハンター稗田の生徒たち	drop	頁=2014新章夢見村にて、a=1974本編
 58353	qid:Q5209147|name:栞と紙魚子の生首事件	keep	同一シリーズ巻題
 58353	qid:Q5209147|name:栞と紙魚子殺戮詩集	keep	同一シリーズ巻題
 30534	qid:Q5349996|name:SPIRAL	keep	副題違いのみ
 47988	qid:Q5358186|name:深夜食堂の勝手口	unsure	実在確認できず
+47988	qid:Q5358186|name:深夜食堂の勝手口	drop	頁=レシピ・こぼれ話本=関連書、漫画本編でない
 50242	qid:Q5363905|name:貧乏神が! ポケット画廊舌戦絵巻	drop	ポケット画廊(画集)
 35393	qid:Q5366793|name:超人ロッククアドラ	keep	同一シリーズ内
 34258	qid:Q5367543|name:光とともに… 自閉症児を抱えて	keep	副題一致
@@ -1660,9 +1668,12 @@ a_id	key	verdict	reason
 137306	qid:Q551359|name:ガルラ 電送人バルバー	keep	同一作品副題
 36891	qid:Q551359|name:ゲッターロボ飛焔	keep	表記一致
 90931	qid:Q551359|name:マジンガー	unsure	対象作特定不能
+90931	qid:Q551359|name:マジンガー	drop	頁=リブロポート1992米版邦訳、a=乙女2009橘作画
 150788	qid:Q551359|name:マジンガーZ visual works	drop	ビジュアル集で別物
 181274	qid:Q551359|name:怖すぎる永井豪	unsure	収録範囲不明
+181274	qid:Q551359|name:怖すぎる永井豪	drop	頁=選集全3巻、a=くずれる編1巻のみの部分一致
 38715	qid:Q551359|name:永井豪鬼と悪魔のfantasy	unsure	アンソロジー疑い
+38715	qid:Q551359|name:永井豪鬼と悪魔のfantasy	drop	頁=1986講談社A4解説ムック、a=読切集「鬼」1970
 92080	qid:Q551359|name:激マン! マジンガーZ編	keep	表記一致
 92080	qid:Q551359|name:激マン!デビルマンの章	drop	別章に誤リンク
 38713	qid:Q551359|name:青春一番	keep	同一作品副題
@@ -1806,6 +1817,7 @@ a_id	key	verdict	reason
 44621	qid:Q841880|name:天才柳沢教授の生活「男はこんなにおバカです!」セレクト16	drop	セレクト=別編集本
 44621	qid:Q841880|name:天才柳沢教授の生活傑作集	drop	傑作集=別編集本
 36400	qid:Q84461618|name:百合姫Wildrose	unsure	材料不足で判断不能
+36400	qid:Q84461618|name:百合姫Wildrose	drop	頁=一迅社Wildroseアンソロ2007-、a=百合姫2004別実体
 41156	qid:Q844891|name:KA-NON かりん×碧海のAiON	keep	同franchise内続編
 123842	qid:Q85874944|name:優し異世界	keep	副題追加のみ
 52707	qid:Q863653|name:えびてん フルカラー	keep	フルカラー版=同一作品
