@@ -3068,7 +3068,9 @@ def main():
                     new_yml["genres_provisional"] = True
                 else:
                     ai_g = [g for g in (new_yml.get("genres") or []) if g in valid_gens and g != "other"]
-                    new_yml["genres"] = ai_g or (new_yml.get("genres") or ["other"])
+                    # ★信頼源ゼロは空のまま出荷(2026-07-13裁定=otherを出さない。旧['other']fallbackは
+                    #   索引ガードのmaster外拒否でページごと一覧から消える実害=2026-07-18に84頁で発覚)
+                    new_yml["genres"] = ai_g
                     new_yml["genres_provisional"] = True  # 信頼源ゼロ=AI暫定(信頼源が来たら上書き)
         # ★楽天あらすじ由来 要素タグ(Phase③) = theme tag未保有 work へ追加(category=Rakuten)。
         #   既存 tag 名は dedup。 表示は要素欄(tag-i18n 和訳)。
