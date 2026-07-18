@@ -351,16 +351,22 @@ def cmd_fish_residue(a):
         results = (sr or {}).get("results") or []
         pick = []
         for x in results[:5]:
-            dom = urllib.parse.urlparse(x.get("url", "")).netloc
+            u = x.get("url", "")
+            parsed = urllib.parse.urlparse(u)
+            if parsed.scheme not in ("http", "https") or not parsed.netloc:
+                continue  # 検索結果に混じる不正URL(相対パス等)はfetch対象から除外
+            dom = parsed.netloc
             if ledger.get(dom) == "blocked" or any(dom.endswith(d) for d in DENY):
                 continue
-            pick.append(x["url"])
+            pick.append(u)
             if len(pick) >= 2:
                 break
         texts = []
         if pick:
             try:
                 fr = tf_fetch(pick)
+            except SystemExit as e:
+                fr = {"results": [], "errors": [{"url": u, "error": str(e)[:80]} for u in pick]}
             except Exception as e:
                 fr = {"results": [], "errors": [{"url": u, "error": str(e)[:80]} for u in pick]}
             for ok in (fr or {}).get("results") or []:
