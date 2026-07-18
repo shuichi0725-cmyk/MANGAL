@@ -25,7 +25,7 @@ OUT = os.path.join(ROOT, "data", "zenshuu-view.json")
 
 META = {
     # key: (表示名, 出版社, 定義巻数, 軸)  年はデータから算出
-    "mizuki": ("水木しげる漫画大全集", "講談社", 103, "works"),
+    "mizuki": ("水木しげる漫画大全集", "講談社", 103, "num"),
     "tezuka": ("手塚治虫漫画全集", "講談社", 400, "num"),
     "kamuiden": ("カムイ伝全集", "小学館", 38, "num"),
     "tsuge-taizen": ("つげ義春大全", "講談社", 22, "num"),
@@ -67,6 +67,10 @@ def work_of(title):
     while prev != t:
         prev = t
         t = _VOLTAIL.sub("", t).strip()
+    # 複合巻題「貸本漫画集 1 ロケットマン 他」型 = 数字より前をグループ名に(水木正典題 2026-07-19)
+    m = re.match(r"^(.{2,20}?)[\s　]*[0-9０-９]{1,3}[\s　].+", t)
+    if m:
+        t = m.group(1).strip()
     return t or "その他"
 
 

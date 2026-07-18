@@ -215,6 +215,27 @@ def main():
                         num_map[n] = o
                         unnum.remove(o)
                         break
+        # ★水木: Wikipedia専用記事の正典表(000-103・ISBN付き 2026-07-19ユーザ提供)で番号+巻題を確定
+        if key == "mizuki":
+            cp = os.path.join(Z, "mizuki-canonical.json")
+            if os.path.exists(cp):
+                canon = json.load(io.open(cp, encoding="utf-8"))
+                for n_str, row in canon.items():
+                    n = int(n_str)
+                    i13 = row["isbn13"]
+                    o = by_isbn.get(i13)
+                    if o is None:
+                        o = {"isbn13": i13, "num": None, "title": "", "date": row.get("date") or "",
+                             "rk_cover": False}
+                        by_isbn[i13] = o
+                    o["title"] = row["title"]  # 正典巻題を優先
+                    if n == 0:
+                        o["num"] = 0
+                        o["nonmanga"] = True  # 総索引/年譜=資料巻
+                        continue
+                    o["num"] = n
+                    if n not in num_map:
+                        num_map[n] = o
         # ★長谷川: 別巻(思い出記念館)=34巻目に割当
         if key == "hasegawa":
             for o in by_isbn.values():
@@ -240,7 +261,7 @@ def main():
             for o in by_isbn.values():
                 if NONMANGA_PAT.search(o.get("title") or ""):
                     o["nonmanga"] = True
-        numbered_axis = key not in ("fujiko-f", "mizuki", "fujiko-land")  # ★ランド=作品×巻軸へ変更(wiki/NDLに全巻通番リスト無し)
+        numbered_axis = key not in ("fujiko-f", "fujiko-land")  # ★ランド=作品×巻軸へ変更(wiki/NDLに全巻通番リスト無し)
         missing_nums = sorted(set(range(1, total + 1)) - set(num_map)) if numbered_axis else []
         for o in by_isbn.values():
             o["cover_ok"] = o["rk_cover"] or (o["isbn13"] in covers)
