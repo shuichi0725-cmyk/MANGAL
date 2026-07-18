@@ -14,7 +14,7 @@ while :; do
   echo "$out" | tail -2
   if echo "$out" | grep -q "展開対象 0 "; then echo "expand queue空→終了"; break; fi
   git add data/seeds/tameshiyomi-booklive-volumes.jsonl 2>/dev/null
-  git commit -qm "試し読みexpand: idle $(date '+%m%d-%H%M')" 2>/dev/null && git push -q
+  git commit -qm "試し読みexpand: idle $(date '+%m%d-%H%M')" -- data/seeds/tameshiyomi-booklive-volumes.jsonl 2>/dev/null && git push -q  # ★pathspec限定=他セッションのstage巻き込み防止(2026-07-19実害)
   if [ "$fails" -ge 3 ]; then echo "連続エラー3→終了"; break; fi
   i=$((i+1))
 done
