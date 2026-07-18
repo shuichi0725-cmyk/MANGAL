@@ -32,7 +32,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 MAT = os.path.join(ROOT, ".cache", "enrich-material")
 V2 = os.path.join(ROOT, "data", "manga.v2")
 QLEVER = "https://qlever.dev/api/wikidata"
-UA = "MANGAL-material-harvest/1.0 (contact: repo-local)"
+UA = "MANGAL-material-harvest/1.0 (contact: shuichi0725@gmail.com)"
 WIKI_API = "https://ja.wikipedia.org/w/api.php"
 DATE_SEED = os.path.join(ROOT, "data", "seeds", "release-date-fill.jsonl")
 
@@ -240,7 +240,11 @@ def cmd_wiki_fetch(a):
     if a.limit:
         todo = todo[:a.limit]
     print(f"wiki-fetch: 残{len([r for r in links if r['slug'] not in done]):,} / 今回{len(todo):,} (0.8s/req)")
+    # ★エラー方針(2026-07-18 改訂): 429/503=レート制限はバックオフ(60s→120s→240s)して続行、
+    #   3連続バックオフ後も429なら「冷却待ち」を明示して中断。その他エラーは連続5(成功でリセット)で中断。
+    #   旧実装の「累積5で即死」はアイドル運転が数分で止まる実害(2026-07-18朝=24件で停止)。
     n_err = 0
+    n_backoff = 0
     for i, r in enumerate(todo):
         p = {"action": "parse", "page": r["article"], "prop": "wikitext", "format": "json",
              "formatversion": "2", "redirects": "1"}
@@ -248,10 +252,20 @@ def cmd_wiki_fetch(a):
         try:
             d = json.load(urllib.request.urlopen(req, timeout=60))
             wt = (d.get("parse") or {}).get("wikitext") or ""
+            n_err = 0
+            n_backoff = 0
         except Exception as e:
+            code = getattr(e, "code", None)
+            if code in (429, 503):
+                n_backoff += 1
+                if n_backoff > 3:
+                    print(f"★429/503が継続({r['article']}) = Wikipedia冷却待ち。1時間ほど空けて再実行(done集合で続きから)"); return
+                wait = 60 * (2 ** (n_backoff - 1))
+                print(f"  429/503 → {wait}s バックオフ({n_backoff}/3)"); time.sleep(wait); continue
             n_err += 1
+            print(f"  err({n_err}/5) {r['article']}: {str(e)[:80]}")
             if n_err >= 5:
-                print("★連続/累積エラー5 = 中断(再実行で再開)"); return
+                print("★連続エラー5 = 中断(再実行で再開)"); return
             time.sleep(3); continue
         io.open(os.path.join(rawdir, r["slug"] + ".wiki.txt"), "w", encoding="utf-8").write(wt)
         ex = {"slug": r["slug"], "article": r["article"]}

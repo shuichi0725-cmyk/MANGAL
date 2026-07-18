@@ -48,6 +48,9 @@ python scripts/_material-harvest.py wiki-fetch --limit 500  # ⑤素材ハーベ
   `python scripts/_material-harvest.py wiki-fetch --limit 500`(主食=wiki本文+infobox。在庫~3.5k)
   → 在庫が切れたら `fish-residue --limit 50`(★.envのTINYFISH_API_KEY必須。無ければskipして報告)。
   triage/dates-local/wiki-link/awards は素材が古くなった時だけ(週1目安)。全cmd冪等・逐次保存。
+  ★wiki-fetchの停止メッセージで振る舞いを変える(2026-07-18改訂: 429/503は script が自動バックオフ60→120→240s):
+  「冷却待ち」で止まった=1時間空けて同コマンド再起動 / 「連続エラー5」で止まった=そのまま再起動(壊れ記事skipで進む)/
+  正常終了(今回N件)=即再起動で次バッチ。いずれも done集合で続きから=判断不要。
   ★wiki-fetch は ③(NDL)や①(BookLive)とホスト別=並走可。commitは素材がcache置きなので不要
   (date seedのみ `git add data/seeds/release-date-fill.jsonl` を終了時に1回)。
 退役: 旧①アンカー収集ループ(`_idle-tameshiyomi-loop.sh`)=2026-07-15対象枯れ(queue空なら即終了するので起動しても無害)。
