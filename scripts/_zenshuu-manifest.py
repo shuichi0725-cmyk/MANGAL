@@ -77,6 +77,17 @@ def num_of(key, r, src):
 
 TOTALS = {"tezuka": 400, "fujiko-f": 115, "mizuki": 103, "fujiko-land": 301,
           "kamuiden": 38, "tsuge": 9, "hasegawa": 33}
+
+# ★ユーザ裁定(2026-07-19)の特例2種:
+#  1) 122 = KC版ISBNがNDL/楽天/wiki全滅 → 文庫全集版(楽天在庫あり・書影あり)で代用
+#  2) 383-393のエッセイ/対談/小説/シナリオ集 = 非漫画巻だが全集構成として特例掲載。
+#     9巻は書誌DB未登録(NDL/楽天/wiki全て不在=1996-97別巻)→ ISBN無し・題のみで登録
+TEZUKA_SUBST = {122: {"isbn13": "9784063738162", "title": "タイガーブックス 2",
+                      "date": "2011.3", "note": "KC版書誌が全DB不在→文庫全集版で代用(ユーザ裁定)"}}
+TEZUKA_TITLE_ONLY = {383: "手塚治虫エッセイ集 第1巻", 384: "手塚治虫小説集", 386: "手塚治虫シナリオ集",
+                     387: "手塚治虫エッセイ集 第2巻", 388: "手塚治虫対談集 第1巻", 389: "手塚治虫エッセイ集 第3巻",
+                     390: "手塚治虫対談集 第2巻", 392: "手塚治虫エッセイ集 第4巻", 393: "手塚治虫対談集 第3巻"}
+NONMANGA_PAT = re.compile(r"エッセイ集|対談集|小説集|シナリオ集|まんが専科|漫画の奥義|総目録")
 # 混入除外(全集本体でないISBN帯/シリーズ)
 EXCLUDE_SER = {"tezuka": re.compile(r"文庫全集|KCピース|ワイド"),
                "hasegawa": re.compile(r"セット")}
@@ -181,12 +192,31 @@ def main():
                         num_map[n] = o
                         unnum.remove(o)
                         break
+        # ★手塚 特例適用(ユーザ裁定): 122=文庫版代用 / 383-393=題のみ登録+非漫画flag
+        if key == "tezuka":
+            for n, sub in TEZUKA_SUBST.items():
+                if n not in num_map:
+                    o = {"isbn13": sub["isbn13"], "num": n, "title": sub["title"], "date": sub["date"],
+                         "rk_cover": True, "cover_ok": True, "prod_slug": idx.get(sub["isbn13"]),
+                         "note": sub["note"]}
+                    by_isbn[sub["isbn13"]] = o
+                    num_map[n] = o
+            for n, t in TEZUKA_TITLE_ONLY.items():
+                if n not in num_map:
+                    o = {"isbn13": None, "num": n, "title": t, "date": "", "rk_cover": False,
+                         "cover_ok": False, "prod_slug": None,
+                         "note": "書誌DB未登録(NDL/楽天/wiki不在)=題のみ・特例掲載(ユーザ裁定)"}
+                    by_isbn[f"_titleonly_{n}"] = o
+                    num_map[n] = o
+            for o in by_isbn.values():
+                if NONMANGA_PAT.search(o.get("title") or ""):
+                    o["nonmanga"] = True
         numbered_axis = key not in ("fujiko-f", "mizuki", "fujiko-land")  # ★ランド=作品×巻軸へ変更(wiki/NDLに全巻通番リスト無し)
         missing_nums = sorted(set(range(1, total + 1)) - set(num_map)) if numbered_axis else []
         for o in by_isbn.values():
             o["cover_ok"] = o["rk_cover"] or (o["isbn13"] in covers)
-        no_date = [o for o in by_isbn.values() if not o["date"]]
-        no_cover = [o for o in by_isbn.values() if not o["cover_ok"]]
+        no_date = [o for o in by_isbn.values() if not o["date"] and not o.get("note")]
+        no_cover = [o for o in by_isbn.values() if not o["cover_ok"] and not o.get("note")]
         no_prod = [o for o in by_isbn.values() if not o["prod_slug"]]
         with io.open(os.path.join(Z, f"manifest-{key}.jsonl"), "w", encoding="utf-8") as f:
             for i, o in sorted(by_isbn.items(), key=lambda kv: (kv[1]["num"] or 9999, kv[0])):
