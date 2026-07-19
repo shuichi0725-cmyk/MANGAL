@@ -16,10 +16,10 @@ publisher: square-enix
 magazine: null
 demographic: seinen
 genres:
-- action
-- adventure
 - fantasy
-synopsis: 「オーブス・バリア」で結ばれた二つの星、インフェリアとセレスティアからなる世界エターニア。両星の衝突という破滅を防ぐため、セレスティアの少女メルディがインフェリアへ送られる。リッド、ファラ、キールら若者たちと旅を始める冒険ファンタジー。
+- action
+- comedy
+synopsis: ''
 anime_adapted: true
 alternative_titles:
   en: 'Tales of Eternia: Premium Stories'
@@ -40,6 +40,11 @@ editions:
     isbn13: '9784757505315'
     cover_url: null
     release_date: '2001-09-27'
+  - number: 3
+    asin: null
+    isbn13: '9784757508644'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/7575/75750864.gif?_ex=300x300
+    release_date: 2003-02
   - number: 4
     asin: null
     isbn13: '9784757507302'
@@ -58,17 +63,4 @@ editions:
 publishers:
 - square-enix
 catch: 二つの星の衝突という破滅を防ぐため、少女メルディが異星へ。リッドたち若者が運命を背負って駆ける、王道冒険ファンタジー。
-anilist_id: 32559
-genres_anilist:
-- Action
-- Adventure
-- Fantasy
-tags:
-- name: Shounen
-  category: Demographic
-  rank: 79
-- name: Swordplay
-  category: Theme-Action
-  rank: 60
-popularity: 222
-score: 68
+genres_provisional: true

@@ -27687,5 +27687,41 @@
    }
   ],
   "note": "2026-07-19 ユーザ指摘: 『デラックス版』=ジャンプ・コミックスデラックス(レーベル名)が原刊本編21巻→通常版へ改称。旧『通常版』2冊は解体(19巻=同一ISBN重複/1巻=別シリーズ『バーテンダー〜イーデンホール〜』9784088934105の混入→別頁化)"
+ },
+ "chousen-shikaku": {
+  "editions": [
+   {
+    "type": "standard",
+    "label": "通常版",
+    "publisher": "パンローリング",
+    "volumes": [
+     {
+      "number": 1,
+      "asin": null,
+      "isbn13": "9784775910382",
+      "cover_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/7759/77591038.jpg?_ex=200x200",
+      "release_date": "2005-05-04",
+      "volume_label": "上"
+     },
+     {
+      "number": 2,
+      "asin": null,
+      "isbn13": "9784775910399",
+      "cover_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/7759/77591039.jpg?_ex=200x200",
+      "release_date": "2005-05-04",
+      "volume_label": "中"
+     },
+     {
+      "number": 3,
+      "asin": null,
+      "isbn13": "9784775910405",
+      "cover_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/7759/77591040.jpg?_ex=200x200",
+      "release_date": "2005-05-04",
+      "volume_label": "下"
+     }
+    ]
+   }
+  ],
+  "note": "2026-07-19 巻抜けスイープで判明: 実体=上中下 全3巻(2005パンローリング復刻)。旧4-9(うち6-9はISBN無しの幽霊巻)は種2ゴミ→3巻構成に確定"
  }
 }

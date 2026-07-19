@@ -118,8 +118,11 @@ volumes:
   title_display: ゼロ THE MAN OF THE CREATION 50
   source: amazon
   added_at: '2026-05-29'
-  note: "MADB 取込もれ。 Amazon 確認 (= ISBN 978-4-08-859449-1、 2004-12-03、 194p、\n4.4 / 12 レビュー)。 「ゼロ THE MAN OF THE CREATION」 全78巻中 第50巻、\n原作 愛英史 / 漫画 里見桂、 集英社ジャンプコミックスデラックス。\naudit --by-title で max=78 / present=77\
-    \ / 欠番=50 として検出。\n★ build 修正済 (2026-05-29): 種2 の この series (= sid=79110) は\n(1) edition が「ジャンプ・コミックスデラックス」 = deluxe type に是正\n    (旧 shinsoban 誤分類)。 本 entry も edition_type: deluxe に揃え 78巻通しに合流。\n(2)\
+  note: "MADB 取込もれ。 Amazon 確認 (= ISBN 978-4-08-859449-1、 2004-12-03、 194p、\n4.4 /\
+    \ 12 レビュー)。 「ゼロ THE MAN OF THE CREATION」 全78巻中 第50巻、\n原作 愛英史 / 漫画 里見桂、 集英社ジャンプコミックスデラックス。\n\
+    audit --by-title で max=78 / present=77 / 欠番=50 として検出。\n★ build 修正済 (2026-05-29):\
+    \ 種2 の この series (= sid=79110) は\n(1) edition が「ジャンプ・コミックスデラックス」 = deluxe type\
+    \ に是正\n    (旧 shinsoban 誤分類)。 本 entry も edition_type: deluxe に揃え 78巻通しに合流。\n(2)\
     \ 作者 = 里見桂(作画) を C-ID 解決で紐付け (愛英史=原作 は mangaka.csv 未登録で保留)。\n"
 - series_keys:
   - qid:Q219948|name:半妖の夜叉姫|sub:異伝・絵本草子
@@ -8596,7 +8599,8 @@ volumes:
   title_display: 本気!
   source: fullpass-K1_SAMECLUSTER_DISPLAY
   added_at: '2026-07-02'
-  note: '全件pass K1_SAMECLUSTER_DISPLAY(K1=同クラスタ未表示のkikaider型表示修復/K4=新規): datefit+同頁未表示guard. slug=maji'
+  note: '全件pass K1_SAMECLUSTER_DISPLAY(K1=同クラスタ未表示のkikaider型表示修復/K4=新規): datefit+同頁未表示guard.
+    slug=maji'
 - series_keys:
   - qid:Q958256|name:おそ松くん
   qid: null
@@ -8609,7 +8613,8 @@ volumes:
   title_display: おそ松くん
   source: fullpass-K1_SAMECLUSTER_DISPLAY
   added_at: '2026-07-02'
-  note: '全件pass K1_SAMECLUSTER_DISPLAY(K1=同クラスタ未表示のkikaider型表示修復/K4=新規): datefit+同頁未表示guard. slug=osomatsu-kun'
+  note: '全件pass K1_SAMECLUSTER_DISPLAY(K1=同クラスタ未表示のkikaider型表示修復/K4=新規): datefit+同頁未表示guard.
+    slug=osomatsu-kun'
 - series_keys:
   - qid:Q958256|name:おそ松くん
   qid: null
@@ -8622,7 +8627,8 @@ volumes:
   title_display: おそ松くん
   source: fullpass-K1_SAMECLUSTER_DISPLAY
   added_at: '2026-07-02'
-  note: '全件pass K1_SAMECLUSTER_DISPLAY(K1=同クラスタ未表示のkikaider型表示修復/K4=新規): datefit+同頁未表示guard. slug=osomatsu-kun'
+  note: '全件pass K1_SAMECLUSTER_DISPLAY(K1=同クラスタ未表示のkikaider型表示修復/K4=新規): datefit+同頁未表示guard.
+    slug=osomatsu-kun'
 - series_keys:
   - qid:Q958256|name:おそ松くん
   qid: null
@@ -8635,7 +8641,8 @@ volumes:
   title_display: おそ松くん
   source: fullpass-K1_SAMECLUSTER_DISPLAY
   added_at: '2026-07-02'
-  note: '全件pass K1_SAMECLUSTER_DISPLAY(K1=同クラスタ未表示のkikaider型表示修復/K4=新規): datefit+同頁未表示guard. slug=osomatsu-kun'
+  note: '全件pass K1_SAMECLUSTER_DISPLAY(K1=同クラスタ未表示のkikaider型表示修復/K4=新規): datefit+同頁未表示guard.
+    slug=osomatsu-kun'
 - series_keys:
   - qid:Q11489537|name:最狂超プロレスファン烈伝
   qid: null
@@ -8648,7 +8655,8 @@ volumes:
   title_display: 最狂超プロレスファン烈伝
   source: fullpass-K4_NEW_FILL
   added_at: '2026-07-02'
-  note: '全件pass K4_NEW_FILL(K1=同クラスタ未表示のkikaider型表示修復/K4=新規): datefit+同頁未表示guard. slug=chou-puroresu-fun-rendetsu'
+  note: '全件pass K4_NEW_FILL(K1=同クラスタ未表示のkikaider型表示修復/K4=新規): datefit+同頁未表示guard.
+    slug=chou-puroresu-fun-rendetsu'
 - series_keys:
   - name:夢枕獏|name:陰陽師
   qid: null
@@ -8661,7 +8669,8 @@ volumes:
   title_display: 陰陽師
   source: fullpass-K1_SAMECLUSTER_DISPLAY
   added_at: '2026-07-02'
-  note: '全件pass K1_SAMECLUSTER_DISPLAY(K1=同クラスタ未表示のkikaider型表示修復/K4=新規): datefit+同頁未表示guard. slug=onmyouji'
+  note: '全件pass K1_SAMECLUSTER_DISPLAY(K1=同クラスタ未表示のkikaider型表示修復/K4=新規): datefit+同頁未表示guard.
+    slug=onmyouji'
 - series_keys:
   - name:戸川幸夫|name:野性伝説
   qid: null
@@ -8674,7 +8683,8 @@ volumes:
   title_display: 野性伝説
   source: fullpass-K1_SAMECLUSTER_DISPLAY
   added_at: '2026-07-02'
-  note: '全件pass K1_SAMECLUSTER_DISPLAY(K1=同クラスタ未表示のkikaider型表示修復/K4=新規): datefit+同頁未表示guard. slug=yasei-densetsu'
+  note: '全件pass K1_SAMECLUSTER_DISPLAY(K1=同クラスタ未表示のkikaider型表示修復/K4=新規): datefit+同頁未表示guard.
+    slug=yasei-densetsu'
 - series_keys:
   - name:松本帆加|name:暴君ヴァーデルの花嫁 初夜編
   - name:松本帆加|name:暴君ヴァーデルの花嫁初夜編
@@ -8688,7 +8698,8 @@ volumes:
   title_display: 暴君ヴァーデルの花嫁 初夜編
   source: fullpass-K4_NEW_FILL
   added_at: '2026-07-02'
-  note: '全件pass K4_NEW_FILL(K1=同クラスタ未表示のkikaider型表示修復/K4=新規): datefit+同頁未表示guard. slug=bou-kun-vaaderu-no-hanayome-shoya-hen'
+  note: '全件pass K4_NEW_FILL(K1=同クラスタ未表示のkikaider型表示修復/K4=新規): datefit+同頁未表示guard.
+    slug=bou-kun-vaaderu-no-hanayome-shoya-hen'
 - series_keys:
   - name:松本帆加|name:暴君ヴァーデルの花嫁 初夜編
   - name:松本帆加|name:暴君ヴァーデルの花嫁初夜編
@@ -8702,7 +8713,8 @@ volumes:
   title_display: 暴君ヴァーデルの花嫁 初夜編
   source: fullpass-K4_NEW_FILL
   added_at: '2026-07-02'
-  note: '全件pass K4_NEW_FILL(K1=同クラスタ未表示のkikaider型表示修復/K4=新規): datefit+同頁未表示guard. slug=bou-kun-vaaderu-no-hanayome-shoya-hen'
+  note: '全件pass K4_NEW_FILL(K1=同クラスタ未表示のkikaider型表示修復/K4=新規): datefit+同頁未表示guard.
+    slug=bou-kun-vaaderu-no-hanayome-shoya-hen'
 - series_keys:
   - name:松本帆加|name:暴君ヴァーデルの花嫁 初夜編
   - name:松本帆加|name:暴君ヴァーデルの花嫁初夜編
@@ -8716,7 +8728,8 @@ volumes:
   title_display: 暴君ヴァーデルの花嫁 初夜編
   source: fullpass-K4_NEW_FILL
   added_at: '2026-07-02'
-  note: '全件pass K4_NEW_FILL(K1=同クラスタ未表示のkikaider型表示修復/K4=新規): datefit+同頁未表示guard. slug=bou-kun-vaaderu-no-hanayome-shoya-hen'
+  note: '全件pass K4_NEW_FILL(K1=同クラスタ未表示のkikaider型表示修復/K4=新規): datefit+同頁未表示guard.
+    slug=bou-kun-vaaderu-no-hanayome-shoya-hen'
 - series_keys:
   - name:松本帆加|name:暴君ヴァーデルの花嫁 初夜編
   - name:松本帆加|name:暴君ヴァーデルの花嫁初夜編
@@ -8730,7 +8743,8 @@ volumes:
   title_display: 暴君ヴァーデルの花嫁 初夜編
   source: fullpass-K4_NEW_FILL
   added_at: '2026-07-02'
-  note: '全件pass K4_NEW_FILL(K1=同クラスタ未表示のkikaider型表示修復/K4=新規): datefit+同頁未表示guard. slug=bou-kun-vaaderu-no-hanayome-shoya-hen'
+  note: '全件pass K4_NEW_FILL(K1=同クラスタ未表示のkikaider型表示修復/K4=新規): datefit+同頁未表示guard.
+    slug=bou-kun-vaaderu-no-hanayome-shoya-hen'
 - series_keys:
   - name:山田俊明|name:義風堂々!!
   - qid:Q11395578|name:義風堂々!!直江兼続-前田慶次花語り
@@ -8745,7 +8759,8 @@ volumes:
   title_display: 義風堂々!!
   source: fullpass-K1_SAMECLUSTER_DISPLAY
   added_at: '2026-07-02'
-  note: '全件pass K1_SAMECLUSTER_DISPLAY(K1=同クラスタ未表示のkikaider型表示修復/K4=新規): datefit+同頁未表示guard. slug=gifuu-doudou'
+  note: '全件pass K1_SAMECLUSTER_DISPLAY(K1=同クラスタ未表示のkikaider型表示修復/K4=新規): datefit+同頁未表示guard.
+    slug=gifuu-doudou'
 - series_keys:
   - name:サイトウケンジ|name:トリニティセブン
   - qid:Q11444957|name:トリニティセブン
@@ -8760,7 +8775,8 @@ volumes:
   title_display: トリニティセブン
   source: fullpass-K1_SAMECLUSTER_DISPLAY
   added_at: '2026-07-02'
-  note: '全件pass K1_SAMECLUSTER_DISPLAY(K1=同クラスタ未表示のkikaider型表示修復/K4=新規): datefit+同頁未表示guard. slug=trinity-seven'
+  note: '全件pass K1_SAMECLUSTER_DISPLAY(K1=同クラスタ未表示のkikaider型表示修復/K4=新規): datefit+同頁未表示guard.
+    slug=trinity-seven'
 - series_keys:
   - name:サイトウケンジ|name:トリニティセブン
   - qid:Q11444957|name:トリニティセブン
@@ -8775,7 +8791,8 @@ volumes:
   title_display: トリニティセブン
   source: fullpass-K1_SAMECLUSTER_DISPLAY
   added_at: '2026-07-02'
-  note: '全件pass K1_SAMECLUSTER_DISPLAY(K1=同クラスタ未表示のkikaider型表示修復/K4=新規): datefit+同頁未表示guard. slug=trinity-seven'
+  note: '全件pass K1_SAMECLUSTER_DISPLAY(K1=同クラスタ未表示のkikaider型表示修復/K4=新規): datefit+同頁未表示guard.
+    slug=trinity-seven'
 - series_keys:
   - name:サイトウケンジ|name:トリニティセブン
   - qid:Q11444957|name:トリニティセブン
@@ -8790,7 +8807,8 @@ volumes:
   title_display: トリニティセブン
   source: fullpass-K1_SAMECLUSTER_DISPLAY
   added_at: '2026-07-02'
-  note: '全件pass K1_SAMECLUSTER_DISPLAY(K1=同クラスタ未表示のkikaider型表示修復/K4=新規): datefit+同頁未表示guard. slug=trinity-seven'
+  note: '全件pass K1_SAMECLUSTER_DISPLAY(K1=同クラスタ未表示のkikaider型表示修復/K4=新規): datefit+同頁未表示guard.
+    slug=trinity-seven'
 - series_keys:
   - name:サイトウケンジ|name:トリニティセブン
   - qid:Q11444957|name:トリニティセブン
@@ -8805,7 +8823,8 @@ volumes:
   title_display: トリニティセブン
   source: fullpass-K1_SAMECLUSTER_DISPLAY
   added_at: '2026-07-02'
-  note: '全件pass K1_SAMECLUSTER_DISPLAY(K1=同クラスタ未表示のkikaider型表示修復/K4=新規): datefit+同頁未表示guard. slug=trinity-seven'
+  note: '全件pass K1_SAMECLUSTER_DISPLAY(K1=同クラスタ未表示のkikaider型表示修復/K4=新規): datefit+同頁未表示guard.
+    slug=trinity-seven'
 - series_keys:
   - name:サイトウケンジ|name:トリニティセブン
   - qid:Q11444957|name:トリニティセブン
@@ -8820,7 +8839,8 @@ volumes:
   title_display: トリニティセブン
   source: fullpass-K1_SAMECLUSTER_DISPLAY
   added_at: '2026-07-02'
-  note: '全件pass K1_SAMECLUSTER_DISPLAY(K1=同クラスタ未表示のkikaider型表示修復/K4=新規): datefit+同頁未表示guard. slug=trinity-seven'
+  note: '全件pass K1_SAMECLUSTER_DISPLAY(K1=同クラスタ未表示のkikaider型表示修復/K4=新規): datefit+同頁未表示guard.
+    slug=trinity-seven'
 - series_keys:
   - name:サイトウケンジ|name:トリニティセブン
   - qid:Q11444957|name:トリニティセブン
@@ -8835,7 +8855,8 @@ volumes:
   title_display: トリニティセブン
   source: fullpass-K1_SAMECLUSTER_DISPLAY
   added_at: '2026-07-02'
-  note: '全件pass K1_SAMECLUSTER_DISPLAY(K1=同クラスタ未表示のkikaider型表示修復/K4=新規): datefit+同頁未表示guard. slug=trinity-seven'
+  note: '全件pass K1_SAMECLUSTER_DISPLAY(K1=同クラスタ未表示のkikaider型表示修復/K4=新規): datefit+同頁未表示guard.
+    slug=trinity-seven'
 - series_keys:
   - name:サイトウケンジ|name:トリニティセブン
   - qid:Q11444957|name:トリニティセブン
@@ -8850,7 +8871,8 @@ volumes:
   title_display: トリニティセブン
   source: fullpass-K1_SAMECLUSTER_DISPLAY
   added_at: '2026-07-02'
-  note: '全件pass K1_SAMECLUSTER_DISPLAY(K1=同クラスタ未表示のkikaider型表示修復/K4=新規): datefit+同頁未表示guard. slug=trinity-seven'
+  note: '全件pass K1_SAMECLUSTER_DISPLAY(K1=同クラスタ未表示のkikaider型表示修復/K4=新規): datefit+同頁未表示guard.
+    slug=trinity-seven'
 - series_keys:
   - name:サイトウケンジ|name:トリニティセブン
   - qid:Q11444957|name:トリニティセブン
@@ -8865,7 +8887,8 @@ volumes:
   title_display: トリニティセブン
   source: fullpass-K1_SAMECLUSTER_DISPLAY
   added_at: '2026-07-02'
-  note: '全件pass K1_SAMECLUSTER_DISPLAY(K1=同クラスタ未表示のkikaider型表示修復/K4=新規): datefit+同頁未表示guard. slug=trinity-seven'
+  note: '全件pass K1_SAMECLUSTER_DISPLAY(K1=同クラスタ未表示のkikaider型表示修復/K4=新規): datefit+同頁未表示guard.
+    slug=trinity-seven'
 - series_keys:
   - name:サイトウケンジ|name:トリニティセブン
   - qid:Q11444957|name:トリニティセブン
@@ -8880,7 +8903,8 @@ volumes:
   title_display: トリニティセブン
   source: fullpass-K1_SAMECLUSTER_DISPLAY
   added_at: '2026-07-02'
-  note: '全件pass K1_SAMECLUSTER_DISPLAY(K1=同クラスタ未表示のkikaider型表示修復/K4=新規): datefit+同頁未表示guard. slug=trinity-seven'
+  note: '全件pass K1_SAMECLUSTER_DISPLAY(K1=同クラスタ未表示のkikaider型表示修復/K4=新規): datefit+同頁未表示guard.
+    slug=trinity-seven'
 - series_keys:
   - name:サイトウケンジ|name:トリニティセブン
   - qid:Q11444957|name:トリニティセブン
@@ -8895,7 +8919,8 @@ volumes:
   title_display: トリニティセブン
   source: fullpass-K1_SAMECLUSTER_DISPLAY
   added_at: '2026-07-02'
-  note: '全件pass K1_SAMECLUSTER_DISPLAY(K1=同クラスタ未表示のkikaider型表示修復/K4=新規): datefit+同頁未表示guard. slug=trinity-seven'
+  note: '全件pass K1_SAMECLUSTER_DISPLAY(K1=同クラスタ未表示のkikaider型表示修復/K4=新規): datefit+同頁未表示guard.
+    slug=trinity-seven'
 - series_keys:
   - name:サイトウケンジ|name:トリニティセブン
   - qid:Q11444957|name:トリニティセブン
@@ -8910,7 +8935,8 @@ volumes:
   title_display: トリニティセブン
   source: fullpass-K1_SAMECLUSTER_DISPLAY
   added_at: '2026-07-02'
-  note: '全件pass K1_SAMECLUSTER_DISPLAY(K1=同クラスタ未表示のkikaider型表示修復/K4=新規): datefit+同頁未表示guard. slug=trinity-seven'
+  note: '全件pass K1_SAMECLUSTER_DISPLAY(K1=同クラスタ未表示のkikaider型表示修復/K4=新規): datefit+同頁未表示guard.
+    slug=trinity-seven'
 - series_keys:
   - name:しのとうこ|name:薬屋のひとりごと
   - qid:Q11275039|name:薬屋のひとりごと
@@ -8924,7 +8950,8 @@ volumes:
   title_display: 薬屋のひとりごと
   source: fullpass-K1_SAMECLUSTER_DISPLAY
   added_at: '2026-07-02'
-  note: '全件pass K1_SAMECLUSTER_DISPLAY(K1=同クラスタ未表示のkikaider型表示修復/K4=新規): datefit+同頁未表示guard. slug=kusuriya-no-hitorigoto-shino-2017'
+  note: '全件pass K1_SAMECLUSTER_DISPLAY(K1=同クラスタ未表示のkikaider型表示修復/K4=新規): datefit+同頁未表示guard.
+    slug=kusuriya-no-hitorigoto-shino-2017'
 - series_keys:
   - name:しのとうこ|name:薬屋のひとりごと
   - qid:Q11275039|name:薬屋のひとりごと
@@ -8938,7 +8965,8 @@ volumes:
   title_display: 薬屋のひとりごと
   source: fullpass-K1_SAMECLUSTER_DISPLAY
   added_at: '2026-07-02'
-  note: '全件pass K1_SAMECLUSTER_DISPLAY(K1=同クラスタ未表示のkikaider型表示修復/K4=新規): datefit+同頁未表示guard. slug=kusuriya-no-hitorigoto-shino-2017'
+  note: '全件pass K1_SAMECLUSTER_DISPLAY(K1=同クラスタ未表示のkikaider型表示修復/K4=新規): datefit+同頁未表示guard.
+    slug=kusuriya-no-hitorigoto-shino-2017'
 - series_keys:
   - name:しのとうこ|name:薬屋のひとりごと
   - qid:Q11275039|name:薬屋のひとりごと
@@ -8952,7 +8980,8 @@ volumes:
   title_display: 薬屋のひとりごと
   source: fullpass-K1_SAMECLUSTER_DISPLAY
   added_at: '2026-07-02'
-  note: '全件pass K1_SAMECLUSTER_DISPLAY(K1=同クラスタ未表示のkikaider型表示修復/K4=新規): datefit+同頁未表示guard. slug=kusuriya-no-hitorigoto-shino-2017'
+  note: '全件pass K1_SAMECLUSTER_DISPLAY(K1=同クラスタ未表示のkikaider型表示修復/K4=新規): datefit+同頁未表示guard.
+    slug=kusuriya-no-hitorigoto-shino-2017'
 - series_keys:
   - name:しのとうこ|name:薬屋のひとりごと
   - qid:Q11275039|name:薬屋のひとりごと
@@ -8966,7 +8995,8 @@ volumes:
   title_display: 薬屋のひとりごと
   source: fullpass-K1_SAMECLUSTER_DISPLAY
   added_at: '2026-07-02'
-  note: '全件pass K1_SAMECLUSTER_DISPLAY(K1=同クラスタ未表示のkikaider型表示修復/K4=新規): datefit+同頁未表示guard. slug=kusuriya-no-hitorigoto-shino-2017'
+  note: '全件pass K1_SAMECLUSTER_DISPLAY(K1=同クラスタ未表示のkikaider型表示修復/K4=新規): datefit+同頁未表示guard.
+    slug=kusuriya-no-hitorigoto-shino-2017'
 - series_keys:
   - name:しのとうこ|name:薬屋のひとりごと
   - qid:Q11275039|name:薬屋のひとりごと
@@ -8980,7 +9010,8 @@ volumes:
   title_display: 薬屋のひとりごと
   source: fullpass-K1_SAMECLUSTER_DISPLAY
   added_at: '2026-07-02'
-  note: '全件pass K1_SAMECLUSTER_DISPLAY(K1=同クラスタ未表示のkikaider型表示修復/K4=新規): datefit+同頁未表示guard. slug=kusuriya-no-hitorigoto-shino-2017'
+  note: '全件pass K1_SAMECLUSTER_DISPLAY(K1=同クラスタ未表示のkikaider型表示修復/K4=新規): datefit+同頁未表示guard.
+    slug=kusuriya-no-hitorigoto-shino-2017'
 - series_keys:
   - name:しのとうこ|name:薬屋のひとりごと
   - qid:Q11275039|name:薬屋のひとりごと
@@ -8994,7 +9025,8 @@ volumes:
   title_display: 薬屋のひとりごと
   source: fullpass-K1_SAMECLUSTER_DISPLAY
   added_at: '2026-07-02'
-  note: '全件pass K1_SAMECLUSTER_DISPLAY(K1=同クラスタ未表示のkikaider型表示修復/K4=新規): datefit+同頁未表示guard. slug=kusuriya-no-hitorigoto-shino-2017'
+  note: '全件pass K1_SAMECLUSTER_DISPLAY(K1=同クラスタ未表示のkikaider型表示修復/K4=新規): datefit+同頁未表示guard.
+    slug=kusuriya-no-hitorigoto-shino-2017'
 - series_keys: &id023
   - qid:Q6455159|name:Ninku
   qid: null
@@ -9166,7 +9198,8 @@ volumes:
   title_display: 湘南爆走族
   source: k3-unrendered
   added_at: '2026-07-02'
-  note: 'K3再分類: 相手クラスタ未描画=重複リスク0(HOTEL型)。同社+datefit+著者guard済. slug=shiyounan-bakusouzoku 相手=[''湘南爆走族'']'
+  note: 'K3再分類: 相手クラスタ未描画=重複リスク0(HOTEL型)。同社+datefit+著者guard済. slug=shiyounan-bakusouzoku
+    相手=[''湘南爆走族'']'
 - series_keys:
   - name:佐々木多利尓|name:スーパーマリオくん
   - name:佐々木多利爾|name:スーパーマリオくん
@@ -9181,7 +9214,8 @@ volumes:
   title_display: スーパーマリオくん
   source: k3-unrendered
   added_at: '2026-07-02'
-  note: 'K3再分類: 相手クラスタ未描画=重複リスク0(HOTEL型)。同社+datefit+著者guard済. slug=super-mario-kun 相手=[''スーパーマリオくん'']'
+  note: 'K3再分類: 相手クラスタ未描画=重複リスク0(HOTEL型)。同社+datefit+著者guard済. slug=super-mario-kun
+    相手=[''スーパーマリオくん'']'
 - series_keys:
   - name:佐々木多利尓|name:スーパーマリオくん
   - name:佐々木多利爾|name:スーパーマリオくん
@@ -9196,7 +9230,8 @@ volumes:
   title_display: スーパーマリオくん
   source: k3-unrendered
   added_at: '2026-07-02'
-  note: 'K3再分類: 相手クラスタ未描画=重複リスク0(HOTEL型)。同社+datefit+著者guard済. slug=super-mario-kun 相手=[''スーパーマリオくん'']'
+  note: 'K3再分類: 相手クラスタ未描画=重複リスク0(HOTEL型)。同社+datefit+著者guard済. slug=super-mario-kun
+    相手=[''スーパーマリオくん'']'
 - series_keys:
   - name:佐々木多利尓|name:スーパーマリオくん
   - name:佐々木多利爾|name:スーパーマリオくん
@@ -9211,7 +9246,8 @@ volumes:
   title_display: スーパーマリオくん
   source: k3-unrendered
   added_at: '2026-07-02'
-  note: 'K3再分類: 相手クラスタ未描画=重複リスク0(HOTEL型)。同社+datefit+著者guard済. slug=super-mario-kun 相手=[''スーパーマリオくん'']'
+  note: 'K3再分類: 相手クラスタ未描画=重複リスク0(HOTEL型)。同社+datefit+著者guard済. slug=super-mario-kun
+    相手=[''スーパーマリオくん'']'
 - series_keys:
   - name:佐々木多利尓|name:スーパーマリオくん
   - name:佐々木多利爾|name:スーパーマリオくん
@@ -9226,7 +9262,8 @@ volumes:
   title_display: スーパーマリオくん
   source: k3-unrendered
   added_at: '2026-07-02'
-  note: 'K3再分類: 相手クラスタ未描画=重複リスク0(HOTEL型)。同社+datefit+著者guard済. slug=super-mario-kun 相手=[''スーパーマリオくん'']'
+  note: 'K3再分類: 相手クラスタ未描画=重複リスク0(HOTEL型)。同社+datefit+著者guard済. slug=super-mario-kun
+    相手=[''スーパーマリオくん'']'
 - series_keys:
   - name:佐々木多利尓|name:スーパーマリオくん
   - name:佐々木多利爾|name:スーパーマリオくん
@@ -9241,7 +9278,8 @@ volumes:
   title_display: スーパーマリオくん
   source: k3-unrendered
   added_at: '2026-07-02'
-  note: 'K3再分類: 相手クラスタ未描画=重複リスク0(HOTEL型)。同社+datefit+著者guard済. slug=super-mario-kun 相手=[''スーパーマリオくん'']'
+  note: 'K3再分類: 相手クラスタ未描画=重複リスク0(HOTEL型)。同社+datefit+著者guard済. slug=super-mario-kun
+    相手=[''スーパーマリオくん'']'
 - series_keys:
   - name:佐々木多利尓|name:スーパーマリオくん
   - name:佐々木多利爾|name:スーパーマリオくん
@@ -9256,7 +9294,8 @@ volumes:
   title_display: スーパーマリオくん
   source: k3-unrendered
   added_at: '2026-07-02'
-  note: 'K3再分類: 相手クラスタ未描画=重複リスク0(HOTEL型)。同社+datefit+著者guard済. slug=super-mario-kun 相手=[''スーパーマリオくん'']'
+  note: 'K3再分類: 相手クラスタ未描画=重複リスク0(HOTEL型)。同社+datefit+著者guard済. slug=super-mario-kun
+    相手=[''スーパーマリオくん'']'
 - series_keys:
   - name:佐々木多利尓|name:スーパーマリオくん
   - name:佐々木多利爾|name:スーパーマリオくん
@@ -9271,7 +9310,8 @@ volumes:
   title_display: スーパーマリオくん
   source: k3-unrendered
   added_at: '2026-07-02'
-  note: 'K3再分類: 相手クラスタ未描画=重複リスク0(HOTEL型)。同社+datefit+著者guard済. slug=super-mario-kun 相手=[''スーパーマリオくん'']'
+  note: 'K3再分類: 相手クラスタ未描画=重複リスク0(HOTEL型)。同社+datefit+著者guard済. slug=super-mario-kun
+    相手=[''スーパーマリオくん'']'
 - series_keys:
   - name:佐々木多利尓|name:スーパーマリオくん
   - name:佐々木多利爾|name:スーパーマリオくん
@@ -9286,7 +9326,8 @@ volumes:
   title_display: スーパーマリオくん
   source: k3-unrendered
   added_at: '2026-07-02'
-  note: 'K3再分類: 相手クラスタ未描画=重複リスク0(HOTEL型)。同社+datefit+著者guard済. slug=super-mario-kun 相手=[''スーパーマリオくん'']'
+  note: 'K3再分類: 相手クラスタ未描画=重複リスク0(HOTEL型)。同社+datefit+著者guard済. slug=super-mario-kun
+    相手=[''スーパーマリオくん'']'
 - series_keys:
   - name:佐々木多利尓|name:スーパーマリオくん
   - name:佐々木多利爾|name:スーパーマリオくん
@@ -9301,7 +9342,8 @@ volumes:
   title_display: スーパーマリオくん
   source: k3-unrendered
   added_at: '2026-07-02'
-  note: 'K3再分類: 相手クラスタ未描画=重複リスク0(HOTEL型)。同社+datefit+著者guard済. slug=super-mario-kun 相手=[''スーパーマリオくん'']'
+  note: 'K3再分類: 相手クラスタ未描画=重複リスク0(HOTEL型)。同社+datefit+著者guard済. slug=super-mario-kun
+    相手=[''スーパーマリオくん'']'
 - series_keys:
   - name:佐々木多利尓|name:スーパーマリオくん
   - name:佐々木多利爾|name:スーパーマリオくん
@@ -9316,7 +9358,8 @@ volumes:
   title_display: スーパーマリオくん
   source: k3-unrendered
   added_at: '2026-07-02'
-  note: 'K3再分類: 相手クラスタ未描画=重複リスク0(HOTEL型)。同社+datefit+著者guard済. slug=super-mario-kun 相手=[''スーパーマリオくん'']'
+  note: 'K3再分類: 相手クラスタ未描画=重複リスク0(HOTEL型)。同社+datefit+著者guard済. slug=super-mario-kun
+    相手=[''スーパーマリオくん'']'
 - series_keys:
   - name:佐々木多利尓|name:スーパーマリオくん
   - name:佐々木多利爾|name:スーパーマリオくん
@@ -9331,7 +9374,8 @@ volumes:
   title_display: スーパーマリオくん
   source: k3-unrendered
   added_at: '2026-07-02'
-  note: 'K3再分類: 相手クラスタ未描画=重複リスク0(HOTEL型)。同社+datefit+著者guard済. slug=super-mario-kun 相手=[''スーパーマリオくん'']'
+  note: 'K3再分類: 相手クラスタ未描画=重複リスク0(HOTEL型)。同社+datefit+著者guard済. slug=super-mario-kun
+    相手=[''スーパーマリオくん'']'
 - series_keys:
   - name:有村しのぶ|name:SPRITE
   qid: null
@@ -9344,7 +9388,8 @@ volumes:
   title_display: SPRITE
   source: k3-unrendered
   added_at: '2026-07-02'
-  note: 'K3再分類: 相手クラスタ未描画=重複リスク0(HOTEL型)。同社+datefit+著者guard済. slug=sprite-arimura-1995 相手=[''私はカジノガール'']'
+  note: 'K3再分類: 相手クラスタ未描画=重複リスク0(HOTEL型)。同社+datefit+著者guard済. slug=sprite-arimura-1995
+    相手=[''私はカジノガール'']'
 - series_keys:
   - name:月村了衛|name:神秘の世界エルハザード
   qid: null
@@ -9357,7 +9402,8 @@ volumes:
   title_display: 神秘の世界エルハザード
   source: k3-unrendered
   added_at: '2026-07-02'
-  note: 'K3再分類: 相手クラスタ未描画=重複リスク0(HOTEL型)。同社+datefit+著者guard済. slug=shinpi-no-sekai-eruhazaado-tsubura-1996 相手=[''エルハザード'']'
+  note: 'K3再分類: 相手クラスタ未描画=重複リスク0(HOTEL型)。同社+datefit+著者guard済. slug=shinpi-no-sekai-eruhazaado-tsubura-1996
+    相手=[''エルハザード'']'
 - series_keys:
   - name:丸伝次郎|name:名探偵コナン特別編
   - name:太田勝|name:名探偵コナン
@@ -9374,7 +9420,8 @@ volumes:
   title_display: 名探偵コナン 特別編
   source: k3-unrendered
   added_at: '2026-07-02'
-  note: 'K3再分類: 相手クラスタ未描画=重複リスク0(HOTEL型)。同社+datefit+著者guard済. slug=meitantei-conan-tokubetsuhen-2016 相手=[''名探偵コナン特別編'']'
+  note: 'K3再分類: 相手クラスタ未描画=重複リスク0(HOTEL型)。同社+datefit+著者guard済. slug=meitantei-conan-tokubetsuhen-2016
+    相手=[''名探偵コナン特別編'']'
 - series_keys:
   - name:丸伝次郎|name:名探偵コナン特別編
   - name:太田勝|name:名探偵コナン
@@ -9391,7 +9438,8 @@ volumes:
   title_display: 名探偵コナン 特別編
   source: k3-unrendered
   added_at: '2026-07-02'
-  note: 'K3再分類: 相手クラスタ未描画=重複リスク0(HOTEL型)。同社+datefit+著者guard済. slug=meitantei-conan-tokubetsuhen-2016 相手=[''名探偵コナン特別編'']'
+  note: 'K3再分類: 相手クラスタ未描画=重複リスク0(HOTEL型)。同社+datefit+著者guard済. slug=meitantei-conan-tokubetsuhen-2016
+    相手=[''名探偵コナン特別編'']'
 - series_keys:
   - name:丸伝次郎|name:名探偵コナン特別編
   - name:太田勝|name:名探偵コナン
@@ -9408,7 +9456,8 @@ volumes:
   title_display: 名探偵コナン 特別編
   source: k3-unrendered
   added_at: '2026-07-02'
-  note: 'K3再分類: 相手クラスタ未描画=重複リスク0(HOTEL型)。同社+datefit+著者guard済. slug=meitantei-conan-tokubetsuhen-2016 相手=[''名探偵コナン特別編'']'
+  note: 'K3再分類: 相手クラスタ未描画=重複リスク0(HOTEL型)。同社+datefit+著者guard済. slug=meitantei-conan-tokubetsuhen-2016
+    相手=[''名探偵コナン特別編'']'
 - series_keys:
   - name:丸伝次郎|name:名探偵コナン特別編
   - name:太田勝|name:名探偵コナン
@@ -9425,7 +9474,8 @@ volumes:
   title_display: 名探偵コナン 特別編
   source: k3-unrendered
   added_at: '2026-07-02'
-  note: 'K3再分類: 相手クラスタ未描画=重複リスク0(HOTEL型)。同社+datefit+著者guard済. slug=meitantei-conan-tokubetsuhen-2016 相手=[''名探偵コナン特別編'']'
+  note: 'K3再分類: 相手クラスタ未描画=重複リスク0(HOTEL型)。同社+datefit+著者guard済. slug=meitantei-conan-tokubetsuhen-2016
+    相手=[''名探偵コナン特別編'']'
 - series_keys:
   - name:丸伝次郎|name:名探偵コナン特別編
   - name:太田勝|name:名探偵コナン
@@ -9442,7 +9492,8 @@ volumes:
   title_display: 名探偵コナン 特別編
   source: k3-unrendered
   added_at: '2026-07-02'
-  note: 'K3再分類: 相手クラスタ未描画=重複リスク0(HOTEL型)。同社+datefit+著者guard済. slug=meitantei-conan-tokubetsuhen-2016 相手=[''名探偵コナン特別編'']'
+  note: 'K3再分類: 相手クラスタ未描画=重複リスク0(HOTEL型)。同社+datefit+著者guard済. slug=meitantei-conan-tokubetsuhen-2016
+    相手=[''名探偵コナン特別編'']'
 - series_keys:
   - name:丸伝次郎|name:名探偵コナン特別編
   - name:太田勝|name:名探偵コナン
@@ -9459,7 +9510,8 @@ volumes:
   title_display: 名探偵コナン 特別編
   source: k3-unrendered
   added_at: '2026-07-02'
-  note: 'K3再分類: 相手クラスタ未描画=重複リスク0(HOTEL型)。同社+datefit+著者guard済. slug=meitantei-conan-tokubetsuhen-2016 相手=[''名探偵コナン特別編'']'
+  note: 'K3再分類: 相手クラスタ未描画=重複リスク0(HOTEL型)。同社+datefit+著者guard済. slug=meitantei-conan-tokubetsuhen-2016
+    相手=[''名探偵コナン特別編'']'
 - series_keys:
   - name:丸伝次郎|name:名探偵コナン特別編
   - name:太田勝|name:名探偵コナン
@@ -9476,7 +9528,8 @@ volumes:
   title_display: 名探偵コナン 特別編
   source: k3-unrendered
   added_at: '2026-07-02'
-  note: 'K3再分類: 相手クラスタ未描画=重複リスク0(HOTEL型)。同社+datefit+著者guard済. slug=meitantei-conan-tokubetsuhen-2016 相手=[''名探偵コナン'']'
+  note: 'K3再分類: 相手クラスタ未描画=重複リスク0(HOTEL型)。同社+datefit+著者guard済. slug=meitantei-conan-tokubetsuhen-2016
+    相手=[''名探偵コナン'']'
 - series_keys:
   - name:丸伝次郎|name:名探偵コナン特別編
   - name:太田勝|name:名探偵コナン
@@ -9493,7 +9546,8 @@ volumes:
   title_display: 名探偵コナン 特別編
   source: k3-unrendered
   added_at: '2026-07-02'
-  note: 'K3再分類: 相手クラスタ未描画=重複リスク0(HOTEL型)。同社+datefit+著者guard済. slug=meitantei-conan-tokubetsuhen-2016 相手=[''名探偵コナン'']'
+  note: 'K3再分類: 相手クラスタ未描画=重複リスク0(HOTEL型)。同社+datefit+著者guard済. slug=meitantei-conan-tokubetsuhen-2016
+    相手=[''名探偵コナン'']'
 - series_keys:
   - name:丸伝次郎|name:名探偵コナン特別編
   - name:太田勝|name:名探偵コナン
@@ -9510,7 +9564,8 @@ volumes:
   title_display: 名探偵コナン 特別編
   source: k3-unrendered
   added_at: '2026-07-02'
-  note: 'K3再分類: 相手クラスタ未描画=重複リスク0(HOTEL型)。同社+datefit+著者guard済. slug=meitantei-conan-tokubetsuhen-2016 相手=[''名探偵コナン'']'
+  note: 'K3再分類: 相手クラスタ未描画=重複リスク0(HOTEL型)。同社+datefit+著者guard済. slug=meitantei-conan-tokubetsuhen-2016
+    相手=[''名探偵コナン'']'
 - series_keys:
   - name:丸伝次郎|name:名探偵コナン特別編
   - name:太田勝|name:名探偵コナン
@@ -9527,7 +9582,8 @@ volumes:
   title_display: 名探偵コナン 特別編
   source: k3-unrendered
   added_at: '2026-07-02'
-  note: 'K3再分類: 相手クラスタ未描画=重複リスク0(HOTEL型)。同社+datefit+著者guard済. slug=meitantei-conan-tokubetsuhen-2016 相手=[''名探偵コナン'']'
+  note: 'K3再分類: 相手クラスタ未描画=重複リスク0(HOTEL型)。同社+datefit+著者guard済. slug=meitantei-conan-tokubetsuhen-2016
+    相手=[''名探偵コナン'']'
 - series_keys:
   - name:丸伝次郎|name:名探偵コナン特別編
   - name:太田勝|name:名探偵コナン
@@ -9544,7 +9600,8 @@ volumes:
   title_display: 名探偵コナン 特別編
   source: k3-unrendered
   added_at: '2026-07-02'
-  note: 'K3再分類: 相手クラスタ未描画=重複リスク0(HOTEL型)。同社+datefit+著者guard済. slug=meitantei-conan-tokubetsuhen-2016 相手=[''名探偵コナン'']'
+  note: 'K3再分類: 相手クラスタ未描画=重複リスク0(HOTEL型)。同社+datefit+著者guard済. slug=meitantei-conan-tokubetsuhen-2016
+    相手=[''名探偵コナン'']'
 - series_keys:
   - name:丸伝次郎|name:名探偵コナン特別編
   - name:太田勝|name:名探偵コナン
@@ -9561,7 +9618,8 @@ volumes:
   title_display: 名探偵コナン 特別編
   source: k3-unrendered
   added_at: '2026-07-02'
-  note: 'K3再分類: 相手クラスタ未描画=重複リスク0(HOTEL型)。同社+datefit+著者guard済. slug=meitantei-conan-tokubetsuhen-2016 相手=[''名探偵コナン'']'
+  note: 'K3再分類: 相手クラスタ未描画=重複リスク0(HOTEL型)。同社+datefit+著者guard済. slug=meitantei-conan-tokubetsuhen-2016
+    相手=[''名探偵コナン'']'
 - series_keys:
   - name:丸伝次郎|name:名探偵コナン特別編
   - name:太田勝|name:名探偵コナン
@@ -9578,7 +9636,8 @@ volumes:
   title_display: 名探偵コナン 特別編
   source: k3-unrendered
   added_at: '2026-07-02'
-  note: 'K3再分類: 相手クラスタ未描画=重複リスク0(HOTEL型)。同社+datefit+著者guard済. slug=meitantei-conan-tokubetsuhen-2016 相手=[''名探偵コナン'']'
+  note: 'K3再分類: 相手クラスタ未描画=重複リスク0(HOTEL型)。同社+datefit+著者guard済. slug=meitantei-conan-tokubetsuhen-2016
+    相手=[''名探偵コナン'']'
 - series_keys:
   - qid:Q11258271|name:どうぶつの森
   qid: null
@@ -9591,7 +9650,8 @@ volumes:
   title_display: どうぶつの森
   source: k3-unrendered
   added_at: '2026-07-02'
-  note: 'K3再分類: 相手クラスタ未描画=重複リスク0(HOTEL型)。同社+datefit+著者guard済. slug=doubutsu-no-mori 相手=[''どうぶつの森 ホヒンダ村だより'']'
+  note: 'K3再分類: 相手クラスタ未描画=重複リスク0(HOTEL型)。同社+datefit+著者guard済. slug=doubutsu-no-mori
+    相手=[''どうぶつの森 ホヒンダ村だより'']'
 - series_keys:
   - qid:Q11258271|name:どうぶつの森
   qid: null
@@ -9604,7 +9664,8 @@ volumes:
   title_display: どうぶつの森
   source: k3-unrendered
   added_at: '2026-07-02'
-  note: 'K3再分類: 相手クラスタ未描画=重複リスク0(HOTEL型)。同社+datefit+著者guard済. slug=doubutsu-no-mori 相手=[''どうぶつの森 ホヒンダ村だより'']'
+  note: 'K3再分類: 相手クラスタ未描画=重複リスク0(HOTEL型)。同社+datefit+著者guard済. slug=doubutsu-no-mori
+    相手=[''どうぶつの森 ホヒンダ村だより'']'
 - series_keys:
   - qid:Q11258271|name:どうぶつの森
   qid: null
@@ -9617,7 +9678,8 @@ volumes:
   title_display: どうぶつの森
   source: k3-unrendered
   added_at: '2026-07-02'
-  note: 'K3再分類: 相手クラスタ未描画=重複リスク0(HOTEL型)。同社+datefit+著者guard済. slug=doubutsu-no-mori 相手=[''どうぶつの森 ホヒンダ村だより'']'
+  note: 'K3再分類: 相手クラスタ未描画=重複リスク0(HOTEL型)。同社+datefit+著者guard済. slug=doubutsu-no-mori
+    相手=[''どうぶつの森 ホヒンダ村だより'']'
 - series_keys:
   - name:ジャンプSQ.編集部|name:ジャンプSQ. comic selection
   - name:ジャンプSQ.編集部|name:ジャンプSQ.Comic Selection
@@ -9632,7 +9694,8 @@ volumes:
   title_display: ジャンプSQ.Comic Selection
   source: k3-unrendered
   added_at: '2026-07-02'
-  note: 'K3再分類: 相手クラスタ未描画=重複リスク0(HOTEL型)。同社+datefit+著者guard済. slug=jump-sq-comic-selection 相手=[''ジャンプSQ\u3000comic selection'']'
+  note: 'K3再分類: 相手クラスタ未描画=重複リスク0(HOTEL型)。同社+datefit+著者guard済. slug=jump-sq-comic-selection
+    相手=[''ジャンプSQ\u3000comic selection'']'
 - series_keys:
   - qid:Q11623724|name:S
   - qid:Q11623724|name:S -最後の警官-
@@ -9675,7 +9738,8 @@ volumes:
   title_display: 艦隊これくしょん-艦これ-4コマコミック
   source: k3-unrendered
   added_at: '2026-07-02'
-  note: 'K3再分類: 相手クラスタ未描画=重複リスク0(HOTEL型)。同社+datefit+著者guard済. slug=kantai-collection-kancolle-4-koma-comic 相手=[''艦隊これくしょん -艦これ-4コマコミック 吹雪、がんばります!'']'
+  note: 'K3再分類: 相手クラスタ未描画=重複リスク0(HOTEL型)。同社+datefit+著者guard済. slug=kantai-collection-kancolle-4-koma-comic
+    相手=[''艦隊これくしょん -艦これ-4コマコミック 吹雪、がんばります!'']'
 - series_keys:
   - name:DMM.com|name:艦隊これくしょん-艦これ-4コマコミック 吹雪、がんばります!
   - name:桃井涼太|name:艦隊これくしょん -艦これ-4コマコミック 吹雪、がんばります!
@@ -9691,7 +9755,8 @@ volumes:
   title_display: 艦隊これくしょん-艦これ-4コマコミック
   source: k3-unrendered
   added_at: '2026-07-02'
-  note: 'K3再分類: 相手クラスタ未描画=重複リスク0(HOTEL型)。同社+datefit+著者guard済. slug=kantai-collection-kancolle-4-koma-comic 相手=[''艦隊これくしょん -艦これ-4コマコミック 吹雪、がんばります!'']'
+  note: 'K3再分類: 相手クラスタ未描画=重複リスク0(HOTEL型)。同社+datefit+著者guard済. slug=kantai-collection-kancolle-4-koma-comic
+    相手=[''艦隊これくしょん -艦これ-4コマコミック 吹雪、がんばります!'']'
 - series_keys:
   - name:チャールズ後藤|name:ちび本当にあった笑える話
   - qid:Q109596250|name:ちび本当にあった笑える話ガールズコレクション
@@ -9709,7 +9774,8 @@ volumes:
   title_display: ちび本当にあった笑える話
   source: k3-unrendered
   added_at: '2026-07-02'
-  note: 'K3再分類: 相手クラスタ未描画=重複リスク0(HOTEL型)。同社+datefit+著者guard済. slug=chibi-hontou-ni-atta-waraeru-hanashi 相手=[''ちび本当にあった笑える話.'']'
+  note: 'K3再分類: 相手クラスタ未描画=重複リスク0(HOTEL型)。同社+datefit+著者guard済. slug=chibi-hontou-ni-atta-waraeru-hanashi
+    相手=[''ちび本当にあった笑える話.'']'
 - series_keys:
   - name:チャールズ後藤|name:ちび本当にあった笑える話
   - qid:Q109596250|name:ちび本当にあった笑える話ガールズコレクション
@@ -9727,7 +9793,8 @@ volumes:
   title_display: ちび本当にあった笑える話
   source: k3-unrendered
   added_at: '2026-07-02'
-  note: 'K3再分類: 相手クラスタ未描画=重複リスク0(HOTEL型)。同社+datefit+著者guard済. slug=chibi-hontou-ni-atta-waraeru-hanashi 相手=[''ちび本当にあった笑える話.'']'
+  note: 'K3再分類: 相手クラスタ未描画=重複リスク0(HOTEL型)。同社+datefit+著者guard済. slug=chibi-hontou-ni-atta-waraeru-hanashi
+    相手=[''ちび本当にあった笑える話.'']'
 - series_keys:
   - name:チャールズ後藤|name:ちび本当にあった笑える話
   - qid:Q109596250|name:ちび本当にあった笑える話ガールズコレクション
@@ -9745,7 +9812,8 @@ volumes:
   title_display: ちび本当にあった笑える話
   source: k3-unrendered
   added_at: '2026-07-02'
-  note: 'K3再分類: 相手クラスタ未描画=重複リスク0(HOTEL型)。同社+datefit+著者guard済. slug=chibi-hontou-ni-atta-waraeru-hanashi 相手=[''ちび本当にあった笑える話.'']'
+  note: 'K3再分類: 相手クラスタ未描画=重複リスク0(HOTEL型)。同社+datefit+著者guard済. slug=chibi-hontou-ni-atta-waraeru-hanashi
+    相手=[''ちび本当にあった笑える話.'']'
 - series_keys:
   - name:マジコ!|name:魔法科高校の劣等生
   - name:竹田羽角|name:魔法科高校の劣等生
@@ -9759,7 +9827,8 @@ volumes:
   title_display: 魔法科高校の劣等生
   source: k3-unrendered
   added_at: '2026-07-02'
-  note: 'K3再分類: 相手クラスタ未描画=重複リスク0(HOTEL型)。同社+datefit+著者guard済. slug=mahouka-koukou-no-rettousei-2018 相手=[''魔法科高校の劣等生'']'
+  note: 'K3再分類: 相手クラスタ未描画=重複リスク0(HOTEL型)。同社+datefit+著者guard済. slug=mahouka-koukou-no-rettousei-2018
+    相手=[''魔法科高校の劣等生'']'
 - series_keys:
   - qid:Q11263580|name:蜘蛛ですが、なにか?|sub:蜘蛛子四姉妹の日常
   qid: null
@@ -9772,7 +9841,8 @@ volumes:
   title_display: 蜘蛛ですが、なにか?
   source: k3-unrendered
   added_at: '2026-07-02'
-  note: 'K3再分類: 相手クラスタ未描画=重複リスク0(HOTEL型)。同社+datefit+著者guard済. slug=kumo-desu-nanika 相手=[''蜘蛛ですが、なにか?'']'
+  note: 'K3再分類: 相手クラスタ未描画=重複リスク0(HOTEL型)。同社+datefit+著者guard済. slug=kumo-desu-nanika
+    相手=[''蜘蛛ですが、なにか?'']'
 - series_keys:
   - qid:Q11263580|name:蜘蛛ですが、なにか?|sub:蜘蛛子四姉妹の日常
   qid: null
@@ -9785,7 +9855,8 @@ volumes:
   title_display: 蜘蛛ですが、なにか?
   source: k3-unrendered
   added_at: '2026-07-02'
-  note: 'K3再分類: 相手クラスタ未描画=重複リスク0(HOTEL型)。同社+datefit+著者guard済. slug=kumo-desu-nanika 相手=[''蜘蛛ですが、なにか?'']'
+  note: 'K3再分類: 相手クラスタ未描画=重複リスク0(HOTEL型)。同社+datefit+著者guard済. slug=kumo-desu-nanika
+    相手=[''蜘蛛ですが、なにか?'']'
 - series_keys:
   - qid:Q11263580|name:蜘蛛ですが、なにか?|sub:蜘蛛子四姉妹の日常
   qid: null
@@ -9798,7 +9869,8 @@ volumes:
   title_display: 蜘蛛ですが、なにか?
   source: k3-unrendered
   added_at: '2026-07-02'
-  note: 'K3再分類: 相手クラスタ未描画=重複リスク0(HOTEL型)。同社+datefit+著者guard済. slug=kumo-desu-nanika 相手=[''蜘蛛ですが、なにか?'']'
+  note: 'K3再分類: 相手クラスタ未描画=重複リスク0(HOTEL型)。同社+datefit+著者guard済. slug=kumo-desu-nanika
+    相手=[''蜘蛛ですが、なにか?'']'
 - series_keys:
   - qid:Q11263580|name:蜘蛛ですが、なにか?|sub:蜘蛛子四姉妹の日常
   qid: null
@@ -9811,7 +9883,8 @@ volumes:
   title_display: 蜘蛛ですが、なにか?
   source: k3-unrendered
   added_at: '2026-07-02'
-  note: 'K3再分類: 相手クラスタ未描画=重複リスク0(HOTEL型)。同社+datefit+著者guard済. slug=kumo-desu-nanika 相手=[''蜘蛛ですが、なにか?'']'
+  note: 'K3再分類: 相手クラスタ未描画=重複リスク0(HOTEL型)。同社+datefit+著者guard済. slug=kumo-desu-nanika
+    相手=[''蜘蛛ですが、なにか?'']'
 - series_keys: &id025
   - name:はいむらきよたか|name:とある科学の超電磁砲
   - name:はいむらきよたか|name:とある科学の超電磁砲|sub:とある魔術の禁書目録外伝
@@ -10075,7 +10148,8 @@ volumes:
   title_display: 不測ノ恋情
   source: rakuten-live-user
   added_at: '2026-07-03'
-  note: ユーザ提供ISBN→楽天live照会で「不測ノ恋情(1)」富士山ひょうた/フロンティアワークス確定(書影有)。★教訓=NDL絶無でも不存在と断じない(BL系小出版はNDL収録弱). slug=fusoku-no-renjou
+  note: ユーザ提供ISBN→楽天live照会で「不測ノ恋情(1)」富士山ひょうた/フロンティアワークス確定(書影有)。★教訓=NDL絶無でも不存在と断じない(BL系小出版はNDL収録弱).
+    slug=fusoku-no-renjou
 - series_keys:
   - qid:Q11455984|name:不測ノ恋情
   qid: null
@@ -10088,7 +10162,8 @@ volumes:
   title_display: 不測ノ恋情
   source: rakuten-live-user
   added_at: '2026-07-03'
-  note: ユーザ提供ISBN→楽天live照会で「不測ノ恋情(2)」富士山ひょうた/フロンティアワークス確定(書影有)。★教訓=NDL絶無でも不存在と断じない(BL系小出版はNDL収録弱). slug=fusoku-no-renjou
+  note: ユーザ提供ISBN→楽天live照会で「不測ノ恋情(2)」富士山ひょうた/フロンティアワークス確定(書影有)。★教訓=NDL絶無でも不存在と断じない(BL系小出版はNDL収録弱).
+    slug=fusoku-no-renjou
 - series_keys:
   - qid:Q7497596|name:ドカベン プロ野球編
   qid: null
@@ -14041,3 +14116,579 @@ volumes:
   source: rakuten
   added_at: '2026-07-12'
   note: 通常版9巻(ユーザ提供=2001-03-16第1刷)。ISBNがモナ頁に取り違えで居たため欠けていた(文庫9がありgap検出をすり抜け)
+- series_keys:
+  - qid:Q11263580|name:蜘蛛ですが、なにか?|sub:蜘蛛子四姉妹の日常
+  qid: null
+  number: 7
+  isbn13: '9784041070598'
+  release_date: '2019-07-10'
+  publisher: null
+  edition_type: standard
+  title_display: 蜘蛛ですが、なにか?(7)
+  source: rakuten
+  added_at: '2026-07-19'
+  note: 巻抜け37件スイープ(ユーザ指定・連載中セット)。題+巻一致をrakutenで確認。
+- series_keys:
+  - qid:Q11263580|name:蜘蛛ですが、なにか?|sub:蜘蛛子四姉妹の日常
+  qid: null
+  number: 8
+  isbn13: '9784041089361'
+  release_date: '2020-03-03'
+  publisher: null
+  edition_type: standard
+  title_display: 蜘蛛ですが、なにか?(8)
+  source: rakuten
+  added_at: '2026-07-19'
+  note: 巻抜け37件スイープ(ユーザ指定・連載中セット)。題+巻一致をrakutenで確認。
+- series_keys:
+  - qid:Q11263580|name:蜘蛛ですが、なにか?|sub:蜘蛛子四姉妹の日常
+  qid: null
+  number: 9
+  isbn13: '9784041099223'
+  release_date: '2020-10-10'
+  publisher: null
+  edition_type: standard
+  title_display: 蜘蛛ですが、なにか?(9)
+  source: rakuten
+  added_at: '2026-07-19'
+  note: 巻抜け37件スイープ(ユーザ指定・連載中セット)。題+巻一致をrakutenで確認。
+- series_keys:
+  - qid:Q11263580|name:蜘蛛ですが、なにか?|sub:蜘蛛子四姉妹の日常
+  qid: null
+  number: 10
+  isbn13: '9784041099230'
+  release_date: '2021-04-09'
+  publisher: null
+  edition_type: standard
+  title_display: 蜘蛛ですが、なにか?(10)
+  source: rakuten
+  added_at: '2026-07-19'
+  note: 巻抜け37件スイープ(ユーザ指定・連載中セット)。題+巻一致をrakutenで確認。
+- series_keys:
+  - qid:Q11402337|name:DEAD Tube
+  qid: null
+  number: 28
+  isbn13: '9784253013277'
+  release_date: '2026-04-20'
+  publisher: null
+  edition_type: standard
+  title_display: DEAD Tube(28)
+  source: rakuten
+  added_at: '2026-07-19'
+  note: 巻抜け37件スイープ(ユーザ指定・連載中セット)。題+巻一致をrakutenで確認。
+- series_keys:
+  - name:斧名田マニマニ|name:幼馴染彼女のモラハラがひどいんで絶縁宣言してやった|sub:自分らしく生きることにしたら、なぜか隣の席の隠れ美少女から告白された
+  qid: null
+  number: 5
+  isbn13: '9784088942995'
+  release_date: 2026-06
+  publisher: null
+  edition_type: standard
+  title_display: 幼馴染彼女のモラハラがひどいんで絶縁宣言してやった(5)
+  source: ndl
+  added_at: '2026-07-19'
+  note: 巻抜け37件スイープ(ユーザ指定・連載中セット)。題+巻一致をndlで確認。
+- series_keys:
+  - name:シオヤマ琴|name:最強で最速の無限レベルアップ
+  qid: null
+  number: 6
+  isbn13: '9784065378830'
+  release_date: '2025-01-08'
+  publisher: null
+  edition_type: standard
+  title_display: 最強で最速の無限レベルアップ(6)
+  source: rakuten
+  added_at: '2026-07-19'
+  note: 巻抜け37件スイープ(ユーザ指定・連載中セット)。題+巻一致をrakutenで確認。
+- series_keys:
+  - name:シオヤマ琴|name:最強で最速の無限レベルアップ
+  qid: null
+  number: 7
+  isbn13: '9784065392669'
+  release_date: '2025-04-09'
+  publisher: null
+  edition_type: standard
+  title_display: 最強で最速の無限レベルアップ(7)
+  source: rakuten
+  added_at: '2026-07-19'
+  note: 巻抜け37件スイープ(ユーザ指定・連載中セット)。題+巻一致をrakutenで確認。
+- series_keys:
+  - name:シオヤマ琴|name:最強で最速の無限レベルアップ
+  qid: null
+  number: 8
+  isbn13: '9784065399187'
+  release_date: '2025-07-09'
+  publisher: null
+  edition_type: standard
+  title_display: 最強で最速の無限レベルアップ(8)
+  source: rakuten
+  added_at: '2026-07-19'
+  note: 巻抜け37件スイープ(ユーザ指定・連載中セット)。題+巻一致をrakutenで確認。
+- series_keys:
+  - name:シオヤマ琴|name:最強で最速の無限レベルアップ
+  qid: null
+  number: 9
+  isbn13: '9784065409251'
+  release_date: '2025-10-09'
+  publisher: null
+  edition_type: standard
+  title_display: 最強で最速の無限レベルアップ(9)
+  source: rakuten
+  added_at: '2026-07-19'
+  note: 巻抜け37件スイープ(ユーザ指定・連載中セット)。題+巻一致をrakutenで確認。
+- series_keys:
+  - name:シオヤマ琴|name:最強で最速の無限レベルアップ
+  qid: null
+  number: 10
+  isbn13: '9784065420980'
+  release_date: '2026-01-08'
+  publisher: null
+  edition_type: standard
+  title_display: 最強で最速の無限レベルアップ(10)
+  source: rakuten
+  added_at: '2026-07-19'
+  note: 巻抜け37件スイープ(ユーザ指定・連載中セット)。題+巻一致をrakutenで確認。
+- series_keys:
+  - name:シオヤマ琴|name:最強で最速の無限レベルアップ
+  qid: null
+  number: 11
+  isbn13: '9784065431658'
+  release_date: '2026-04-09'
+  publisher: null
+  edition_type: standard
+  title_display: 最強で最速の無限レベルアップ(11)
+  source: rakuten
+  added_at: '2026-07-19'
+  note: 巻抜け37件スイープ(ユーザ指定・連載中セット)。題+巻一致をrakutenで確認。
+- series_keys:
+  - name:二宮悦巳|name:災厄は僕を好きすぎる
+  qid: null
+  number: 5
+  isbn13: '9784199606441'
+  release_date: '2015-08-25'
+  publisher: null
+  edition_type: standard
+  title_display: 災厄は僕を好きすぎる(5)
+  source: rakuten
+  added_at: '2026-07-19'
+  note: 巻抜け37件スイープ(ユーザ指定・連載中セット)。題+巻一致をrakutenで確認。
+- series_keys:
+  - qid:Q11644966|name:はるかリセット
+  qid: null
+  number: 25
+  isbn13: '9784253017565'
+  release_date: '2026-06-19'
+  publisher: null
+  edition_type: standard
+  title_display: はるかリセット(25)
+  source: rakuten
+  added_at: '2026-07-19'
+  note: 巻抜け37件スイープ(ユーザ指定・連載中セット)。題+巻一致をrakutenで確認。
+- series_keys:
+  - name:SWAV|name:DOUBLE HELIX BLOSSOM
+  qid: null
+  number: 9
+  isbn13: '9784091542694'
+  release_date: '2026-05-28'
+  publisher: null
+  edition_type: standard
+  title_display: DOUBLE HELIX BLOSSOM(9)
+  source: rakuten
+  added_at: '2026-07-19'
+  note: 巻抜け37件スイープ(ユーザ指定・連載中セット)。題+巻一致をrakutenで確認。
+- series_keys:
+  - name:マニャ子|name:無駄飯食らい認定されたので愛想をつかし、帝国に移って出世する|sub:王国の偉い人にはそれが分からんのです
+  qid: null
+  number: 7
+  isbn13: '9784088940519'
+  release_date: '2025-12-18'
+  publisher: null
+  edition_type: standard
+  title_display: 無駄飯食らい認定されたので愛想をつかし、帝国に移って出世する(7)
+  source: rakuten
+  added_at: '2026-07-19'
+  note: 巻抜け37件スイープ(ユーザ指定・連載中セット)。題+巻一致をrakutenで確認。
+- series_keys:
+  - name:やまち|name:溢れて零れて、我慢できない
+  qid: null
+  number: 2
+  isbn13: '9784801987388'
+  release_date: '2025-08-18'
+  publisher: null
+  edition_type: standard
+  title_display: 溢れて零れて、我慢できない overflow(上)
+  source: rakuten
+  added_at: '2026-07-19'
+  note: 巻抜け37件スイープ(ユーザ指定・連載中セット)。題+巻一致をrakutenで確認。2巻=overflow上(3巻=同下と対)
+- series_keys:
+  - qid:Q11266148|name:やってらんねェぜ!
+  qid: null
+  number: 2
+  isbn13: '9784199600210'
+  release_date: 1996-05
+  publisher: null
+  edition_type: standard
+  title_display: やってらんねェぜ!(2)
+  source: ndl
+  added_at: '2026-07-19'
+  note: 巻抜け37件スイープ(ユーザ指定・連載中セット)。題+巻一致をndlで確認。
+- series_keys:
+  - qid:Q11266148|name:やってらんねェぜ!
+  qid: null
+  number: 3
+  isbn13: '9784199600418'
+  release_date: 1997-03
+  publisher: null
+  edition_type: standard
+  title_display: やってらんねェぜ!(3)
+  source: ndl
+  added_at: '2026-07-19'
+  note: 巻抜け37件スイープ(ユーザ指定・連載中セット)。題+巻一致をndlで確認。
+- series_keys:
+  - qid:Q11266148|name:やってらんねェぜ!
+  qid: null
+  number: 5
+  isbn13: '9784199600777'
+  release_date: 1998-09
+  publisher: null
+  edition_type: standard
+  title_display: やってらんねェぜ!(5)
+  source: ndl
+  added_at: '2026-07-19'
+  note: 巻抜け37件スイープ(ユーザ指定・連載中セット)。題+巻一致をndlで確認。
+- series_keys:
+  - qid:Q11462329|name:テイルズオブエターニア プレミアムストーリーズ
+  qid: null
+  number: 3
+  isbn13: '9784757508644'
+  release_date: 2003-02
+  publisher: null
+  edition_type: standard
+  title_display: テイルズオブエターニア プレミアムストーリーズ(3)
+  source: ndl
+  added_at: '2026-07-19'
+  note: 巻抜け37件スイープ(ユーザ指定・連載中セット)。題+巻一致をndlで確認。
+- series_keys:
+  - qid:Q11616515|name:ぱちん娘(こ)。
+  qid: null
+  number: 6
+  isbn13: '9784065357507'
+  release_date: '2024-11-13'
+  publisher: null
+  edition_type: standard
+  title_display: ぱちん娘。(6)
+  source: rakuten
+  added_at: '2026-07-19'
+  note: 巻抜け37件スイープ(ユーザ指定・連載中セット)。題+巻一致をrakutenで確認。
+- series_keys:
+  - qid:Q11423339|name:極道めし
+  qid: null
+  number: 7
+  isbn13: '9784575838732'
+  release_date: '2011-02-28'
+  publisher: null
+  edition_type: standard
+  title_display: 極道めし(7)
+  source: rakuten
+  added_at: '2026-07-19'
+  note: 巻抜け37件スイープ(ユーザ指定・連載中セット)。題+巻一致をrakutenで確認。
+- series_keys:
+  - qid:Q11423339|name:極道めし
+  qid: null
+  number: 8
+  isbn13: '9784575839647'
+  release_date: '2011-09-20'
+  publisher: null
+  edition_type: standard
+  title_display: 極道めし(8)
+  source: rakuten
+  added_at: '2026-07-19'
+  note: 巻抜け37件スイープ(ユーザ指定・連載中セット)。題+巻一致をrakutenで確認。
+- series_keys:
+  - qid:Q276378|name:ミューズの学園で逢おう
+  qid: null
+  number: 3
+  isbn13: '9784862636058'
+  release_date: '2009-06-10'
+  publisher: null
+  edition_type: standard
+  title_display: ミューズの学園で逢おう(3)
+  source: rakuten
+  added_at: '2026-07-19'
+  note: 巻抜け37件スイープ(ユーザ指定・連載中セット)。題+巻一致をrakutenで確認。
+- series_keys:
+  - qid:Q11280450|name:太陽のロマンス
+  qid: null
+  number: 2
+  isbn13: '9784403660450'
+  release_date: 2001-09
+  publisher: null
+  edition_type: standard
+  title_display: 太陽のロマンス(2)
+  source: rakuten
+  added_at: '2026-07-19'
+  note: 巻抜け37件スイープ(ユーザ指定・連載中セット)。題+巻一致をrakutenで確認。
+- series_keys:
+  - qid:Q11280450|name:太陽のロマンス
+  qid: null
+  number: 3
+  isbn13: '9784403660634'
+  release_date: '2002-09-30'
+  publisher: null
+  edition_type: standard
+  title_display: 太陽のロマンス(3)
+  source: rakuten
+  added_at: '2026-07-19'
+  note: 巻抜け37件スイープ(ユーザ指定・連載中セット)。題+巻一致をrakutenで確認。
+- series_keys:
+  - qid:Q463346|name:GTU-怒りのDEATH山田-
+  qid: null
+  number: 2
+  isbn13: '9784868051107'
+  release_date: '2025-10-03'
+  publisher: null
+  edition_type: standard
+  title_display: GTU-怒りのDEATH山田-(2)
+  source: rakuten
+  added_at: '2026-07-19'
+  note: 巻抜け37件スイープ(ユーザ指定・連載中セット)。題+巻一致をrakutenで確認。
+- series_keys:
+  - qid:Q11470077|name:火の神さまの掃除人ですが、いつの間にか花嫁として溺愛されています
+  qid: null
+  number: 8
+  isbn13: '9784098734375'
+  release_date: '2026-06-10'
+  publisher: null
+  edition_type: standard
+  title_display: 火の神さまの掃除人ですが、いつの間にか花嫁として溺愛されています(8)
+  source: rakuten
+  added_at: '2026-07-19'
+  note: 巻抜け37件スイープ(ユーザ指定・連載中セット)。題+巻一致をrakutenで確認。
+- series_keys:
+  - qid:Q11431707|name:日・日・天(そら)のたより|sub:あの山越えて
+  qid: null
+  number: 8
+  isbn13: '9784253160599'
+  release_date: '2024-06-14'
+  publisher: null
+  edition_type: standard
+  title_display: あの山越えて 日・日・天のたより(8)
+  source: rakuten
+  added_at: '2026-07-19'
+  note: 巻抜け37件スイープ(ユーザ指定・連載中セット)。題+巻一致をrakutenで確認。秋田の刊行題=「あの山越えて」併記
+- series_keys:
+  - qid:Q11380501|name:美味の異国飯
+  qid: null
+  number: 2
+  isbn13: '9784575861747'
+  release_date: '2025-12-25'
+  publisher: null
+  edition_type: standard
+  title_display: 美味の異国飯(2)
+  source: rakuten
+  added_at: '2026-07-19'
+  note: 巻抜け37件スイープ(ユーザ指定・連載中セット)。題+巻一致をrakutenで確認。
+- series_keys:
+  - name:大竹とも|name:ハードナッツ
+  qid: null
+  number: 2
+  isbn13: '9784334807504'
+  release_date: '2010-04-22'
+  publisher: null
+  edition_type: standard
+  title_display: ハードナッツ(2)
+  source: rakuten
+  added_at: '2026-07-19'
+  note: 巻抜け37件スイープ(ユーザ指定・連載中セット)。題+巻一致をrakutenで確認。
+- series_keys:
+  - name:大竹とも|name:ハードナッツ
+  qid: null
+  number: 3
+  isbn13: '9784334807979'
+  release_date: '2013-01-24'
+  publisher: null
+  edition_type: standard
+  title_display: ハードナッツ(3)
+  source: rakuten
+  added_at: '2026-07-19'
+  note: 巻抜け37件スイープ(ユーザ指定・連載中セット)。題+巻一致をrakutenで確認。
+- series_keys:
+  - qid:Q11576599|name:本当にあった愉快な話
+  qid: null
+  number: 2
+  isbn13: '9784884758233'
+  release_date: '1995-07-27'
+  publisher: null
+  edition_type: standard
+  title_display: 田島みるくの本当にあった愉快な話(2)
+  source: rakuten
+  added_at: '2026-07-19'
+  note: 巻抜け37件スイープ(ユーザ指定・連載中セット)。題+巻一致をrakutenで確認。
+- series_keys:
+  - qid:Q11668643|name:理系クン
+  qid: null
+  number: 3
+  isbn13: '9784163753706'
+  release_date: '2012-06-14'
+  publisher: null
+  edition_type: standard
+  title_display: 理系クン夫婦できるかな?
+  source: rakuten
+  added_at: '2026-07-19'
+  note: 巻抜け37件スイープ(ユーザ指定・連載中セット)。題+巻一致をrakutenで確認。3巻=題「夫婦できるかな?」(2=結婚/4=イクメンの並び)
+- series_keys:
+  - qid:Q11551656|name:霊感工務店リペア
+  qid: null
+  number: 7
+  isbn13: '9784420152839'
+  release_date: 2014-02
+  publisher: null
+  edition_type: standard
+  title_display: 霊感工務店リペア 烈の巻
+  source: rakuten
+  added_at: '2026-07-19'
+  note: 巻抜け37件スイープ(ユーザ指定・連載中セット)。題+巻一致をrakutenで確認。7巻=烈の巻(6巻2013-04と8巻・天の巻2014-12の間・ISBN連番単調)
+- series_keys:
+  - qid:Q3431787|name:できるかな
+  qid: null
+  number: 2
+  isbn13: '9784594028718'
+  release_date: 2000-04
+  publisher: null
+  edition_type: standard
+  title_display: できるかなリターンズ
+  source: ndl
+  added_at: '2026-07-19'
+  note: 巻抜け37件スイープ(ユーザ指定・連載中セット)。題+巻一致をndlで確認。2巻=リターンズ(1=無印/3=V3/4=クアトロの扶桑社並び)
+- series_keys:
+  - name:ゴムドリco.|name:学校勝ち抜き戦 実験対決
+  qid: null
+  number: 1
+  isbn13: '9784023308503'
+  release_date: 2010-10
+  publisher: null
+  edition_type: standard
+  title_display: 実験対決(1) 酸性・アルカリ性の対決
+  source: ndl
+  added_at: '2026-07-19'
+  note: 巻抜け37件スイープ(ユーザ指定・連載中セット)。題+巻一致をndlで確認。
+- series_keys:
+  - name:ゴムドリco.|name:学校勝ち抜き戦 実験対決
+  qid: null
+  number: 2
+  isbn13: '9784023308787'
+  release_date: 2011-01
+  publisher: null
+  edition_type: standard
+  title_display: 実験対決(2) 力の対決
+  source: ndl
+  added_at: '2026-07-19'
+  note: 巻抜け37件スイープ(ユーザ指定・連載中セット)。題+巻一致をndlで確認。
+- series_keys:
+  - name:ゴムドリco.|name:学校勝ち抜き戦 実験対決
+  qid: null
+  number: 3
+  isbn13: '9784023308978'
+  release_date: 2011-03
+  publisher: null
+  edition_type: standard
+  title_display: 実験対決(3) 光の対決
+  source: ndl
+  added_at: '2026-07-19'
+  note: 巻抜け37件スイープ(ユーザ指定・連載中セット)。題+巻一致をndlで確認。
+- series_keys:
+  - name:ゴムドリco.|name:学校勝ち抜き戦 実験対決
+  qid: null
+  number: 4
+  isbn13: '9784023309548'
+  release_date: 2011-07
+  publisher: null
+  edition_type: standard
+  title_display: 実験対決(4) 生物の対決
+  source: ndl
+  added_at: '2026-07-19'
+  note: 巻抜け37件スイープ(ユーザ指定・連載中セット)。題+巻一致をndlで確認。
+- series_keys:
+  - name:ゴムドリco.|name:学校勝ち抜き戦 実験対決
+  qid: null
+  number: 5
+  isbn13: '9784023309906'
+  release_date: 2011-10
+  publisher: null
+  edition_type: standard
+  title_display: 実験対決(5) 電気の対決
+  source: ndl
+  added_at: '2026-07-19'
+  note: 巻抜け37件スイープ(ユーザ指定・連載中セット)。題+巻一致をndlで確認。
+- series_keys:
+  - name:ゴムドリco.|name:学校勝ち抜き戦 実験対決
+  qid: null
+  number: 6
+  isbn13: '9784023310070'
+  release_date: 2012-01
+  publisher: null
+  edition_type: standard
+  title_display: 実験対決(6) 環境の対決
+  source: ndl
+  added_at: '2026-07-19'
+  note: 巻抜け37件スイープ(ユーザ指定・連載中セット)。題+巻一致をndlで確認。
+- series_keys:
+  - name:ゴムドリco.|name:学校勝ち抜き戦 実験対決
+  qid: null
+  number: 7
+  isbn13: '9784023310452'
+  release_date: 2012-03
+  publisher: null
+  edition_type: standard
+  title_display: 実験対決(7) 人体の対決 その1
+  source: ndl
+  added_at: '2026-07-19'
+  note: 巻抜け37件スイープ(ユーザ指定・連載中セット)。題+巻一致をndlで確認。
+- series_keys:
+  - name:ゴムドリco.|name:学校勝ち抜き戦 実験対決
+  qid: null
+  number: 8
+  isbn13: '9784023310940'
+  release_date: 2012-07
+  publisher: null
+  edition_type: standard
+  title_display: 実験対決(8) 人体の対決 その2
+  source: ndl
+  added_at: '2026-07-19'
+  note: 巻抜け37件スイープ(ユーザ指定・連載中セット)。題+巻一致をndlで確認。
+- series_keys:
+  - name:ゴムドリco.|name:学校勝ち抜き戦 実験対決
+  qid: null
+  number: 14
+  isbn13: '9784023312647'
+  release_date: 2014-01
+  publisher: null
+  edition_type: standard
+  title_display: 実験対決(14) 地質の対決
+  source: ndl
+  added_at: '2026-07-19'
+  note: 巻抜け37件スイープ(ユーザ指定・連載中セット)。題+巻一致をndlで確認。
+- series_keys:
+  - name:ゴムドリco.|name:学校勝ち抜き戦 実験対決
+  qid: null
+  number: 15
+  isbn13: '9784023312739'
+  release_date: 2014-03
+  publisher: null
+  edition_type: standard
+  title_display: 実験対決(15) 地震の対決
+  source: ndl
+  added_at: '2026-07-19'
+  note: 巻抜け37件スイープ(ユーザ指定・連載中セット)。題+巻一致をndlで確認。
+- series_keys:
+  - name:ゴムドリco.|name:学校勝ち抜き戦 実験対決
+  qid: null
+  number: 17
+  isbn13: '9784023313354'
+  release_date: 2014-10
+  publisher: null
+  edition_type: standard
+  title_display: 実験対決(17) 刺激と反応の対決
+  source: ndl
+  added_at: '2026-07-19'
+  note: 巻抜け37件スイープ(ユーザ指定・連載中セット)。題+巻一致をndlで確認。
