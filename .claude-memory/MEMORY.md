@@ -154,5 +154,5 @@
 - [試し読み裁定=枯れ達成](tameshiyomi_adjudication_state.md) — アンカー25,149・保留9,749全分類・台帳=docs/…/tameshiyomi-adjudication.jsonl
 - [【厳守】索引形式変更=ファイル名バンプ](index_format_change_versioned_filename.md) — 同名で契約変更禁止(版ズレApplication error根絶)。旧ファイルは残す
 - [AniListリンク検証 全✅](anilist_link_verification_plan.md) — SUSPECT0/FAIL0達成・recall+330・P8731全量チャネル。残=次promoteで本番反映
-- [c.bat/d.batセッション分離](launcher_bats_session_namespaces.md) — d.bat=MANGAL-remote junction起動。--continue横取り根絶・復旧=claude --resume
+- [起動bat3本=モデル名(fable/sonnet/opus)](launcher_bats_session_namespaces.md) — 1バッチ=1junction=1名前空間。--continue横取り根絶・復旧=claude --resume
 - [【注意信号】書影の違和感=上流誤りの症状](feedback_cover_oddity_signal.md) — 揃いすぎ/装丁不一致/同一画像はISBN帰属・版・リンク誤りを疑う
