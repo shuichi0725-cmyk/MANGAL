@@ -40,6 +40,8 @@ ap.add_argument("--slugs")
 ap.add_argument("--slugs-file")
 ap.add_argument("--src", default="data/manga.v2")
 ap.add_argument("--live", action="store_true")
+ap.add_argument("--local-only", dest="local_only", action="store_true",
+                help="liveを一切叩かず、ローカル2本に無い=材料なしとして台帳記録(bulk用・実測で局所未収=captionほぼ皆無)")
 ap.add_argument("--limit", type=int, default=10**9)
 ap.add_argument("--take", type=int, default=100, help="autoモードで集める未生成巻数の目安")
 a = ap.parse_args()
@@ -198,7 +200,7 @@ print(f"材料書出 → {OUT} (caption有 {len(caps)} / 材料なし {n_miss} =
 
 # ★このラウンドで材料なしと確定したISBNを台帳に追記(次回auto除外=カーソル前進)。
 #   ただしlive未実行(--live無し)だと"未照会"を誤って材料なし扱いする恐れ→liveの時だけ記録。
-if a.live and not a.slugs and not a.slugs_file:
+if (a.live or a.local_only) and not a.slugs and not a.slugs_file:
     prev = set()
     if os.path.exists(NOMAT):
         prev = {l.strip() for l in open(NOMAT, encoding="utf-8") if l.strip()}
