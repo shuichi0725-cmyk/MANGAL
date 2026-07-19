@@ -25,10 +25,10 @@ anime_adapted: false
 alternative_titles:
   en: Red Eyes
 editions:
-- type: deluxe
-  label: デラックス版
+- type: standard
+  label: 通常版
   publisher: 講談社
-  imprint: KCデラックス
+  imprint: KCDX
   volumes:
   - number: 1
     asin: null
@@ -65,16 +65,6 @@ editions:
     isbn13: '9784063348248'
     cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/8248/9784063348248_1_5.jpg?_ex=200x200
     release_date: '2003-12-17'
-  - number: 27
-    asin: null
-    isbn13: '9784065388266'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/8266/9784065388266_1_2.jpg?_ex=200x200
-    release_date: '2025-04-02'
-- type: standard
-  label: 通常版
-  publisher: 講談社
-  imprint: KCDX
-  volumes:
   - number: 8
     asin: null
     isbn13: '9784063349047'
@@ -170,6 +160,11 @@ editions:
     isbn13: '9784065245415'
     cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/5415/9784065245415_1_2.jpg?_ex=200x200
     release_date: '2022-03-17'
+  - number: 27
+    asin: null
+    isbn13: '9784065388266'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/8266/9784065388266_1_2.jpg?_ex=200x200
+    release_date: '2025-04-02'
   - number: 28
     asin: null
     isbn13: '9784065442975'
