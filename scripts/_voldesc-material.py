@@ -26,6 +26,11 @@ os.makedirs(f"{ROOT}/.cache/voldesc", exist_ok=True)
 OUT = f"{ROOT}/.cache/voldesc/materials.jsonl"
 SEED = f"{ROOT}/data/seeds/volume-desc-ja.jsonl"
 DELTA = f"{ROOT}/.cache/rakuten-isbn-delta.jsonl"
+# ★ローカル楽天キャッシュは2本ある(deltaだけだとliveに落ちる)。両方をローカル層で舐める。
+#   rakuten-isbn.jsonl(373MB・歴史harvest全件)と delta(828MB・新着差分)は別カバレッジ。
+#   測定: R6のcaption 119件中110件(92%)が rakuten-isbn.jsonl 側に在り、liveはほぼ不要だった。
+RFULL = f"{ROOT}/.cache/rakuten-isbn.jsonl"
+LOCAL_RAKUTEN = [p for p in (RFULL, DELTA) if os.path.exists(p)]
 # ★材料なし(caption無しと確定)ISBNの蓄積台帳。auto除外に加えてカーソルを真に前進させる
 # (無いと材料なし巻を毎回先頭から再照会し、蓄積で--take枠を食い潰して停滞する)。単発実行は無影響。
 NOMAT = f"{ROOT}/.cache/voldesc/no-material.txt"
@@ -138,12 +143,15 @@ if os.path.exists(pj):
         if r.get("isbn") in want and r.get("caption"):
             caps.setdefault(r["isbn"], {"caption": r["caption"], "contents": ""})
 
-# 層2: rakuten-isbn-delta 1パス(830MB・requestedぶんだけ拾う)
-rest = want - set(caps)
-if rest and os.path.exists(DELTA):
+# 層2: ローカル楽天キャッシュ(rakuten-isbn.jsonl 373MB + delta 828MB)を順に1パス。
+#   残り(rest)が尽きたら次ファイルは読まずに打ち切り(速い方から)。両方合わせてliveをほぼ消す。
+for path in LOCAL_RAKUTEN:
+    rest = want - set(caps)
+    if not rest:
+        break
     t0 = time.time()
     hit = 0
-    for ln in open(DELTA, encoding="utf-8", errors="ignore"):
+    for ln in open(path, encoding="utf-8", errors="ignore"):
         m = re.match(r'^\{"isbn": ?"(\d{13})"', ln)
         ib = m.group(1) if m else None
         if ib is None or ib in caps or ib not in rest:
@@ -156,7 +164,7 @@ if rest and os.path.exists(DELTA):
         if cap:
             caps[ib] = {"caption": cap, "contents": (item.get("contents") or "").strip()}
             hit += 1
-    print(f"delta 1パス: hit {hit} ({time.time()-t0:.0f}秒)")
+    print(f"{os.path.basename(path)} 1パス: hit {hit} ({time.time()-t0:.0f}秒)")
 
 # 層3: live(残りだけ)
 rest = sorted(want - set(caps))
