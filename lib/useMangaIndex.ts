@@ -37,11 +37,52 @@ function loadCatch(): void {
     .catch(() => {});
 }
 
+// ★初期サクサク化(2026-07-19 ユーザ体感報告): フル索引(22MB+67kデコード)を初描画と奪い合わない。
+//   head(200件)で即描画 → フルは requestIdleCallback(初描画後の手すき・上限2秒)で開始。
+//   デコードも8,000行ずつのチャンク処理=メインスレッドの長タスク(旧~数百ms一撃)を解消。
+//   検索確定・フィルタ時は ensureFullIndex() で即時開始(headだけで検索する誤答窓を最小化)。
+async function decodeChunked(raw: RawIndex): Promise<MangaListItem[]> {
+  const CH = 8000;
+  const out: MangaListItem[] = [];
+  for (let i = 0; i < raw.d.length; i += CH) {
+    out.push(...decode({ f: raw.f, d: raw.d.slice(i, i + CH) }));
+    if (i + CH < raw.d.length) await new Promise((r) => setTimeout(r, 0));
+  }
+  return out;
+}
+
+let _fullState: "idle" | "loading" | "done" = "idle";
+
+/** フル索引の取得を(まだなら)開始する。検索/フィルタ開始時に呼んで正確性を担保。冪等。 */
+export function ensureFullIndex(): void {
+  if (_fullState !== "idle") return;
+  _fullState = "loading";
+  fetch("/manga-list-index.json")
+    .then((r) => {
+      if (!r.ok) throw new Error(`索引取得失敗 ${r.status}`);
+      return r.json();
+    })
+    .then((raw: RawIndex) => decodeChunked(raw))
+    .then((items) => {
+      _cache = items;
+      _cacheIsFull = true;
+      _fullState = "done";
+      _indexListeners.forEach((fn) => fn());
+      loadCatch(); // catch は非同期で後から merge
+    })
+    .catch(() => {
+      _fullState = "idle"; // 失敗時は再試行可能に
+    });
+}
+
+function scheduleIdle(fn: () => void, timeout = 2000): void {
+  if (typeof requestIdleCallback === "function") requestIdleCallback(fn, { timeout });
+  else setTimeout(fn, 800);
+}
+
 function fetchIndex(): Promise<MangaListItem[]> {
   if (_cacheIsFull && _cache) return Promise.resolve(_cache);
   if (_inflight) return _inflight;
-  // ★2段読み(2026-07-14): head(人気順200件・~80KB)で即描画→本体(全件)が届いたら差替。
-  //   head が無い環境(旧ビルド)でも本体だけで動く(fail-open)。
   const headP: Promise<void> = _cache
     ? Promise.resolve()
     : fetch("/manga-list-head.json")
@@ -54,17 +95,9 @@ function fetchIndex(): Promise<MangaListItem[]> {
         })
         .catch(() => {});
   _inflight = headP
-    .then(() => fetch("/manga-list-index.json"))
-    .then((r) => {
-      if (!r.ok) throw new Error(`索引取得失敗 ${r.status}`);
-      return r.json();
-    })
-    .then((raw: RawIndex) => {
-      _cache = decode(raw);
-      _cacheIsFull = true;
-      _indexListeners.forEach((fn) => fn());
-      loadCatch(); // catch は非同期で後から merge(カードは一瞬遅れて出る)
-      return _cache;
+    .then(() => {
+      scheduleIdle(() => ensureFullIndex()); // フルは初描画後の手すきで
+      return _cache ?? [];
     })
     .finally(() => {
       _inflight = null;

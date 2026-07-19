@@ -17,6 +17,7 @@ import {
   yearBounds,
 } from "@/lib/filters";
 import { onAltLoaded, prewarmSearch, searchSlugs } from "@/lib/clientSearch";
+import { ensureFullIndex } from "@/lib/useMangaIndex";
 import type { ArtBook, ListBundle, MangaListItem } from "@/lib/schema";
 import { useMangaIndex } from "@/lib/useMangaIndex";
 
@@ -98,6 +99,9 @@ export default function HomeClient({ data }: Props) {
   useEffect(() => {
     if (mangaIndex) prewarmSearch(mangaIndex); // 手すきで前計算(検索開始時のワンショット遅延を消す)
   }, [mangaIndex]);
+  useEffect(() => {
+    if (hasQuery) ensureFullIndex(); // 検索確定=フル索引を即時要求(head 200件だけの誤答窓を閉じる)
+  }, [hasQuery]);
   const searchLoading = hasQuery && mangaIndex === null;
   const matchedSlugs = useMemo(
     () => (hasQuery ? searchSlugs(state.query, manga) : null),
