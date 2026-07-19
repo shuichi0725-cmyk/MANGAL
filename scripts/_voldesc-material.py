@@ -26,6 +26,9 @@ os.makedirs(f"{ROOT}/.cache/voldesc", exist_ok=True)
 OUT = f"{ROOT}/.cache/voldesc/materials.jsonl"
 SEED = f"{ROOT}/data/seeds/volume-desc-ja.jsonl"
 DELTA = f"{ROOT}/.cache/rakuten-isbn-delta.jsonl"
+# ★材料なし(caption無しと確定)ISBNの蓄積台帳。auto除外に加えてカーソルを真に前進させる
+# (無いと材料なし巻を毎回先頭から再照会し、蓄積で--take枠を食い潰して停滞する)。単発実行は無影響。
+NOMAT = f"{ROOT}/.cache/voldesc/no-material.txt"
 
 ap = argparse.ArgumentParser()
 ap.add_argument("--slugs")
@@ -44,6 +47,12 @@ if os.path.exists(SEED):
             done.add(json.loads(ln)["isbn13"])
         except Exception:
             pass
+# ★材料なし確定ISBNも除外(=カーソル前進・再照会防止)
+if os.path.exists(NOMAT):
+    for ln in open(NOMAT, encoding="utf-8"):
+        ib = ln.strip()
+        if len(ib) == 13:
+            done.add(ib)
 
 slugs = []
 if a.slugs:
@@ -178,3 +187,17 @@ with open(OUT, "w", encoding="utf-8") as fo:
         fo.write(json.dumps({"slug": slug, "title": pg["title"], "authors": pg["authors"],
                              "vols": vols, "missing": missing}, ensure_ascii=False) + "\n")
 print(f"材料書出 → {OUT} (caption有 {len(caps)} / 材料なし {n_miss} = 欠落表へ)")
+
+# ★このラウンドで材料なしと確定したISBNを台帳に追記(次回auto除外=カーソル前進)。
+#   ただしlive未実行(--live無し)だと"未照会"を誤って材料なし扱いする恐れ→liveの時だけ記録。
+if a.live and not a.slugs and not a.slugs_file:
+    prev = set()
+    if os.path.exists(NOMAT):
+        prev = {l.strip() for l in open(NOMAT, encoding="utf-8") if l.strip()}
+    add = [v["isbn"] for pg in pages.values() for v in pg["vols"] if v["isbn"] not in caps]
+    new = [ib for ib in add if ib not in prev]
+    if new:
+        with open(NOMAT, "a", encoding="utf-8") as f:
+            for ib in new:
+                f.write(ib + "\n")
+        print(f"材料なし台帳 +{len(new)}件 → {os.path.basename(NOMAT)} (累計 {len(prev)+len(new)})")
