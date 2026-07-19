@@ -31,9 +31,12 @@ promote/UI結線は別途設計(勝手に結線しない)。
 
 ### Step1: 材料収集
 ```
-python scripts/_voldesc-material.py --slugs a,b,c --live
-python scripts/_voldesc-material.py --slugs-file list.txt --live   # 大量時
+python scripts/_voldesc-material.py --live                          # ★auto: 裸の「巻説明つくって」はこれ
+python scripts/_voldesc-material.py --slugs a,b,c --live            # 対象指定時
+python scripts/_voldesc-material.py --slugs-file list.txt --live    # 大量時
 ```
+- ★**auto** = slug無し時、ファイル名順(=端から全件・人気順禁止 [[feedback_no_popularity_priority]])に
+  seed未生成の巻を `--take`(既定100巻)ぶん自動選定。**再実行=自動で続きから**(seed除外が実質cursor・cursorファイル不要)。
 - キャッシュ順=予約キャッシュ→**rakuten-isbn-delta 1パス(830MB・数分)**→live(1.2s/req・429即中断)。
 - seed既存ISBNは自動除外(純粋追加運用)。slugは**SRC stem名**で渡す。
 - 出力 `.cache/voldesc/materials.jsonl` = {slug, title, authors, vols:[{vol,isbn,edition,caption,contents}], missing:[...]}

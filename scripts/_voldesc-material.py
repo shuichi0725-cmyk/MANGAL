@@ -10,9 +10,11 @@
 使い方:
   python scripts/_voldesc-material.py --slugs a,b,c [--live]
   python scripts/_voldesc-material.py --slugs-file list.txt [--live]   # 大量時(WinError206回避)
-レート: live 1.2s/req・429即中断。
+  python scripts/_voldesc-material.py [--take 100] [--live]            # ★auto: slug無し=端から順(ファイル名順)に
+                                                                       #   seed未生成の巻を--take件ぶん自動選定(人気順禁止方針)
+レート: live 1.2s/req・429即中断。auto再開はcursor不要(seed既存ISBN除外が実質cursor)。
 """
-import argparse, json, os, re, sys, time, urllib.request, urllib.parse
+import argparse, glob as _g, json, os, re, sys, time, urllib.request, urllib.parse
 sys.stdout.reconfigure(encoding="utf-8")
 import yaml
 try:
@@ -31,16 +33,8 @@ ap.add_argument("--slugs-file")
 ap.add_argument("--src", default="data/manga.v2")
 ap.add_argument("--live", action="store_true")
 ap.add_argument("--limit", type=int, default=10**9)
+ap.add_argument("--take", type=int, default=100, help="autoモードで集める未生成巻数の目安")
 a = ap.parse_args()
-
-slugs = []
-if a.slugs:
-    slugs = [s.strip() for s in a.slugs.split(",") if s.strip()]
-if a.slugs_file:
-    slugs += [s.strip() for s in open(a.slugs_file, encoding="utf-8") if s.strip()]
-if not slugs:
-    print("--slugs か --slugs-file を指定"); sys.exit(1)
-slugs = slugs[: a.limit]
 
 # 既seedのISBNは除外(純粋追加)
 done = set()
@@ -50,6 +44,31 @@ if os.path.exists(SEED):
             done.add(json.loads(ln)["isbn13"])
         except Exception:
             pass
+
+slugs = []
+if a.slugs:
+    slugs = [s.strip() for s in a.slugs.split(",") if s.strip()]
+if a.slugs_file:
+    slugs += [s.strip() for s in open(a.slugs_file, encoding="utf-8") if s.strip()]
+if not slugs:
+    # ★auto: ファイル名順(=端から全件、人気順禁止 [[feedback_no_popularity_priority]])に
+    #   seed未生成ISBNを持つ頁を --take 巻ぶん選定。seed除外が実質cursorなので再実行=続きから。
+    n_isbn = 0
+    for p in sorted(_g.glob(os.path.join(ROOT, a.src, "*.yml"))):
+        if n_isbn >= a.take:
+            break
+        try:
+            d = yaml.load(open(p, encoding="utf-8"), Loader=_L)
+        except Exception:
+            continue
+        fresh = [str(v.get("isbn13")) for e in (d.get("editions") or [])
+                 for v in (e.get("volumes") or [])
+                 if len(str(v.get("isbn13") or "")) == 13 and str(v.get("isbn13")) not in done]
+        if fresh:
+            slugs.append(os.path.basename(p)[:-4])
+            n_isbn += len(fresh)
+    print(f"auto選定: {len(slugs)}頁 / ~{n_isbn}巻 (ファイル名順・seed未生成のみ)")
+slugs = slugs[: a.limit]
 
 env = {}
 for ln in open(f"{ROOT}/.env.local", encoding="utf-8"):
