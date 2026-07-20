@@ -1,6 +1,6 @@
 ---
 name: idle-run
-description: アイドル運転して=手すき時間の常設柱(試し読みexpand消化+Gemini検品連鎖+ヨミ照合1パス)をbackground起動。「やめて」で成果を無駄にせず即停止、同じ一言で続きから再開。Sonnet運転前提
+description: アイドル運転して=手すき時間の常設柱(試し読みexpand+ヨミ照合+完結判定+素材ハーベスト+AniList鮮度+巻説明recheck)をbackground起動。Geminiジャンル検品は幻覚多で退役(2026-07-20)。「やめて」で即停止・同語で再開。Sonnet運転前提
 ---
 
 # アイドル運転 (= トリガー「アイドル運転して」/ 停止「やめて」。2026-07-14 ユーザ設計、07-15 柱を更新)
@@ -8,19 +8,20 @@ description: アイドル運転して=手すき時間の常設柱(試し読みex
 やることがない時間に回す常設ジョブのセット。**時間指定はしない**: 起動→(勝手に走る)→「やめて」で即停止→
 別作業→また「アイドル運転して」で続きから。全ループが逐次保存なので停止の損失は最大でも走行中1バッチ(~5分)。
 
-## 起動 (= ★柱①〜⑥を全部、同時にbackgroundへ。3本で止めない)
+## 起動 (= ★下記の柱を全部、同時にbackgroundへ。3本で止めない)
 ```
 bash scripts/_idle-tameshiyomi-expand-loop.sh   # ①試し読みexpand消化(無限・バッチごとcommit+push)
-python scripts/_gemini-genre-probe.py && python scripts/_gemini-genre-verify.py   # ②Gemini連鎖(429で自然停止)
+# ②Geminiジャンル検品=退役(2026-07-20)。不一致の76%が幻覚テンプレ→常設から外す。下記「退役」参照
 python scripts/_verify-kana-pending.py --limit 300   # ③ヨミ照合(★1パスのみ=ループ禁止、下記)
 python scripts/_completion-judge.py --backlog --limit 300   # ④完結判定backlog(→worksheet記入→--collect→commit、詳細=skill completion-judge)
 python scripts/_material-harvest.py wiki-fetch --limit 500  # ⑤素材ハーベスト(在庫切れ後は fish-residue --limit 50、詳細=skill material-harvest)
 python scripts/_anilist-delta.py   # ⑥AniList鮮度維持(直近更新~5,000件回収・~5分で自然停止・★セッション1回のみ)
+python scripts/_voldesc-material.py --recheck-nomaterial 300   # ⑦巻説明・材料なし台帳のlive再照会救済(偽陰性~10%回収・冪等・逐次保存・429中断。詳細=skill volume-desc)
 ```
 - それぞれ **run_in_background で別タスク**として起動し、**タスクIDを控えて報告**(=「やめて」で使う)。
-- ★④⑤は1バッチ終了ごとに**同じコマンドを再起動**して続きを回す(④はworksheet記入→--collectを挟む。⑤はwiki-fetch在庫が尽きたらfish-residueへ)。②③のように自然停止で終わりではない。
+- ★④⑤⑦は1バッチ終了ごとに**同じコマンドを再起動**して続きを回す(④はworksheet記入→--collectを挟む。⑤はwiki-fetch在庫が尽きたらfish-residueへ。⑦は台帳が尽きるまで)。③⑥のように自然停止で終わりではない。
 - ①は積み残し~1.2万シリーズ(アンカー13,949作は収集済=旧アンカーループは枯れて即終了する)。BookLive HEADのみ=高速。
-- ②はquota(~500req/日・JST16時リセット)で~40分で止まるのが正常。
+- ⑦は台帳(no-material.txt)~5,900件を300件/バッチでlive再照会(1.2s/req)。救済分は`.cache/voldesc/recovered.jsonl`に貯まる=**Opusが後で説明生成**(Sonnetは書かない)。全部.cache=commit不要。
 - ③は**起動時に1回だけ**(NDL 1.2s/req・429=exit2で自然停止)。確定/不一致はjsonl/TSVへ逐次保存。
   ★ループさせない: 残pendingの大半は「NDL未収載(納本待ち)」でループすると同じISBNを再照会し続けるだけ。
   終了後 `git add data/seeds/rakuten-kana-pending.jsonl docs/production-diagnostics/kana-mismatch.tsv && commit && push`。
@@ -42,10 +43,14 @@ python scripts/_anilist-delta.py   # ⑥AniList鮮度維持(直近更新~5,000�
 - ③を無限ループ化しない(上記=NDL未収載の再照会浪費)
 
 ## セット構成 (= 将来増やせる)
-現在: ①試し読みexpand消化 ②Gemini検品連鎖(probe→verify) ③NDLヨミ照合(1パス)
+現在: ①試し読みexpand消化 ③NDLヨミ照合(1パス) ④完結判定 ⑤素材ハーベスト ⑥AniList鮮度維持 ⑦巻説明recheck
+⑦**巻説明・材料なし台帳の再照会救済**(=skill volume-desc 2026-07-20新設。`--recheck-nomaterial 300`):
+  `--local-only`bulkがローカル harvest 履歴(全楽天でない)に無い巻を「材料なし」と恒久記録した偽陰性(実測10%)を
+  live再照会で拾い直す。captionが在れば`captions-cache.jsonl`+`recovered.jsonl`に回収し台帳から除去。
+  冪等(残る分だけ)・1件ごと保存・1.2s/req・429即中断。救済分の**説明生成はOpus**(Sonnetは材料回収まで)。全部.cache=commit不要。
 ⑥**AniList鮮度維持**(=`_anilist-delta.py` 2026-07-18新設。updatedAt降順でカーソルまで回収=ローリング再同期。
   ★収集のみ=deltaは.cacheに貯まるだけ。dumpへの`--merge`と enrichマップ再生成は蒸留時のOpus作業=アイドルでやらない。
-  ②③同様の自然停止型・セッション1回でよい[cap5,000/回])
+  ③同様の自然停止型・セッション1回でよい[cap5,000/回])
 ④**完結判定backlogスイープ**(=skill completion-judge。`--backlog --limit 300`→worksheet記入(明示文言のみtrue)→`--collect`→commit。
   ②③と違い記入判断があるが「captionに完結の引用があるか」だけ=Sonnet安全。適用(--apply)は絶対にやらない=Opus+専権)。
 ⑤**素材ハーベスト**(=skill material-harvest 2026-07-17新設。本番に書かず素材収集のみ):
@@ -58,6 +63,11 @@ python scripts/_anilist-delta.py   # ⑥AniList鮮度維持(直近更新~5,000�
   ★wiki-fetch は ③(NDL)や①(BookLive)とホスト別=並走可。commitは素材がcache置きなので不要
   (date seedのみ `git add data/seeds/release-date-fill.jsonl` を終了時に1回)。
 退役: 旧①アンカー収集ループ(`_idle-tameshiyomi-loop.sh`)=2026-07-15対象枯れ(queue空なら即終了するので起動しても無害)。
+★**②Geminiジャンル検品=2026-07-20退役**(ユーザ裁定+Opus検証): 不一致514の**76%(391件)が幻覚テンプレート**
+  (「近未来SFアクション」「女子高生×教師の学園ラブコメ」を無関係な題に量産)。使えたのは形式判定(essay/4コマ86件=構造的)だけで
+  ストーリージャンルの判断は信用できない=常設柱から外す。scriptは残す(genre:other新バッチ等の**個別依頼時のみ**手動起動。
+  採用は必ず3ゲート+Web裏取り=鵜呑み禁止 [[method_ai_generate_plus_webverify]] [[feedback_accuracy_is_the_goal]])。
+  既裁定の適用86/回付37は週次で本番反映済み予定。保留391はGemini置換せず据置(現行の題名推測provisionalのまま)。
 候補: Kobo書影resume / 楽天キャッシュmiss(B系欠落)のlive照会 — 追加時は「逐次保存・自然停止・冪等再開」の3条件を満たすこと。
 
 ## 関連

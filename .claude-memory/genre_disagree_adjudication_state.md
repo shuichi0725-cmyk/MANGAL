@@ -1,12 +1,20 @@
 ---
 name: genre-disagree-adjudication-state
-description: "ジャンル検品の不一致514を全裁定(2026-07-20): essay/4koma 86適用・回付37・保留391はWeb裏取り待ち。Gemini幻覚テンプレ注意"
+description: "ジャンル検品の不一致514を全裁定(2026-07-20): essay/4koma 86適用・回付37・保留391=幻覚テンプレ。★Geminiジャンル検品はアイドル常設柱から退役(2026-07-20 ユーザ裁定)"
 metadata: 
   node_type: memory
   type: project
   originSessionId: f4071c28-d0c4-41f1-84b0-8f783d97925c
-  modified: 2026-07-20T09:05:34.331Z
+  modified: 2026-07-20T09:20:24.242Z
 ---
+
+## ★2026-07-20 ユーザ裁定: Geminiジャンル検品を退役
+不一致514の**76%(391件)が幻覚テンプレ**という実績から、`gemini-genre-verify`(と連鎖のprobe)を
+**アイドル運転の常設柱②から外した**([[idle_run]]の起動リストから削除)。理由=story系ジャンルの
+Gemini判断は信用できず、使えたのは形式判定(essay/4コマ)だけ=常設で回す価値が薄い。
+- **scriptは残す**: genre:other新バッチ等の**個別依頼時のみ**手動起動。採用は3ゲート+Web裏取り(鵜呑み禁止)。
+- 既裁定の適用86(essay82+4コマ4)/回付37は週次で本番反映。保留391はGemini置換せず現行provisional据置。
+- 代わりに柱⑦=巻説明recheck(volume-desc)を追加。
 
 2026-07-20、Gemini検品の不一致(genre-verify-disagree.tsv=514行=Gemini案と現行が完全非重複)をOpusが全裁定。seedまで(週次で本番反映)。
 
