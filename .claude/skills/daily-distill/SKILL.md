@@ -22,6 +22,12 @@ B=NDL新着回収(納本済み過去分)。毎日でなくてよい(間隔が空
 - ★**1回のAPIで全フィールド捕捉**(2026-07-09 ユーザ指摘 [[acquire_all_obtainable_info]]): 楽天API/harvestは書影だけでなく **itemCaption(あらすじ=genre/catch/synopsis元)/booksGenreId/itemPrice/subTitle/affiliateUrl** を返す。**書影だけ取って捨てるな**。captionを`_preorder_draft.rakuten_caption`に保存→genre(master32・provisional)/catch/synopsisを生成(caption有れば発売前でも付く)。書影のためにAPIを叩くなら同じ応答からcaptionも必ず取る。
 - genre=closed vocabulary(master32)のみ+provisional。catch/synopsis=skill enrich-catch-synopsis の規律。
 - ★**改善は即興でなくskill/scriptに焼く**: 実行中に穴を見つけたら手動で継ぎ足すな。scriptにゲート追加→commitしてから進む(即興は次回消える+報告が水増しでブレる)。
+- ★**slug検品前のpush禁止**(2026-07-20 実害=86ドラフト中49件をユーザ指摘後に総直し):
+  `slug-gate-pending.tsv`(誤読)と`slug-katakana-pending.tsv`(未変換カタカナ)の**当日行をAIが裁定し、
+  誤slugをrename(preview+drafts両方)してから**手順13のpushに進む。件数ゼロ確認もチェックリストでなく**ゲート**扱い。
+  途中切り(70字語中切断)は語境界cut化済(2026-07-20 _preorder_draft_lib)だが、なろう長題は**意味の切れ目**で
+  短縮できているか目視1周(機械cutは文節を知らない)。既存作の続巻が新規ドラフト化されていないかも
+  `_exists.py --title <基底題>`で疑わしい題(題中に漢数字巻/篇名)だけ確認(千年狐十四/KATANA23型)。
 
 ## ★毎日の実行手順 (= runbook・この順で回す。2026-07-09 確立。ツール把握用)
 

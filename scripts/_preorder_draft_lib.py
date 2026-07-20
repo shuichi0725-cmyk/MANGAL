@@ -306,7 +306,18 @@ def make_slug(base, kana_raw=None, existing=None):
     slug = re.sub(r"(?<=[a-z])-?\d{1,3}$", "", slug).strip("-")  # 末尾巻番号(stray5→stray)。rx等英字suffixは保持
     if len(slug) < 2:
         return None                             # ゴミslug(2026化)禁止=hold
-    slug = slug[:70].rstrip("-")  # ★70字cut後の末尾ハイフン剥離(shokei-型 2026-07-15)
+    # ★長題は語境界で切る(2026-07-20: 機械70字cutが語中切断「tsukaretemashit」型を44件量産した対策)。
+    #   切った後の尻に残る助詞トークンも剥がす(「-sekai-o」型)。完全slugは触らない。
+    if len(slug) > 70:
+        cut = slug[:70]
+        if "-" in cut[1:]:
+            cut = cut[:cut.rfind("-")]
+        _PART = r"-(?:no|o|wa|ni|de|to|ga|e|mo|kara|made|niwa|noni|node|yori|toka|kedo)$"
+        while re.search(_PART, cut):
+            cut = re.sub(_PART, "", cut)
+        slug = cut.rstrip("-")
+        if len(slug) < 2:
+            return None
     if existing is not None and slug in existing:
         return None                             # 衝突=hold(-2026で誤魔化さない)
     if kana_raw:
