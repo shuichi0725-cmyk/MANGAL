@@ -137,6 +137,28 @@ def _date_fill_for(isbn13):
         return None
     return _DATE_FILL.get(str(isbn13).replace("-", ""))
 
+# ★巻説明 seed (= volume-desc-ja.jsonl。 2026-07-20 結線=skill volume-desc)。
+#   単行本(巻)単位の説明文。 isbn13キーで clean_vol の書込直前に充填(書影と同じ最終pass)。
+#   標準版+版バージョン(versions[])の両方が clean_vol を通るので1箇所で両対応。
+VOLDESC_SEED = ROOT / "data" / "seeds" / "volume-desc-ja.jsonl"
+_VOLDESC = None
+def _desc_for(isbn13):
+    global _VOLDESC
+    if _VOLDESC is None:
+        _VOLDESC = {}
+        if VOLDESC_SEED.exists():
+            with VOLDESC_SEED.open(encoding="utf-8") as _f:
+                for _ln in _f:
+                    try:
+                        _o = json.loads(_ln)
+                        if _o.get("isbn13") and _o.get("desc"):
+                            _VOLDESC[str(_o["isbn13"])] = _o["desc"]
+                    except Exception:
+                        pass
+    if not isbn13:
+        return None
+    return _VOLDESC.get(str(isbn13).replace("-", ""))
+
 def _norm_date(s):
     """release_date を schema形式(YYYY / YYYY-MM / YYYY-MM-DD)へ正規化。
     NDL生形式(2014.8 / 1997-9 / 全角２００５．４)がZod検証(^\\d{4}(-\\d{2}(-\\d{2})?)?$)で
@@ -2177,6 +2199,10 @@ def clean_vol(v: dict) -> dict:
     # ★書影を promote 内で直接充填 (= 別 cover stage 廃止)。 override>既存値>seed fallback。
     o["cover_url"] = get_cover_override().get(_norm_isbn(o["isbn13"])) or v.get("cover_url") or _cover_for(o["isbn13"])
     o["release_date"] = _norm_date(v.get("release_date"))  # ★schema形式に正規化(404防止)
+    # ★巻説明 = volume-desc seed(isbn13キー)から充填(既存値優先・純粋追加)。 skill volume-desc。
+    _desc = v.get("description") or _desc_for(o["isbn13"])
+    if _desc:
+        o["description"] = _desc
     if v.get("variants"):
         # ★edition-override等が明示したvariants(特装/限定併存)を保持(2026-07-03。出版社跨ぎ特装=シャイナ・ダルク型はseedペア不可なのでoverride直書き)
         o["variants"] = v["variants"]
@@ -3177,6 +3203,11 @@ def main():
                         _cu = _cover_for(_v.get("isbn13"))
                         if _cu:
                             _v["cover_url"] = _cu
+                    # ★巻説明も同じ最終passで充填(canonical再構築でclean_vol充填が消えるため。書影と同型)
+                    if not _v.get("description"):
+                        _dd = _desc_for(_v.get("isbn13"))
+                        if _dd:
+                            _v["description"] = _dd
                     _nd = _date_fill_for(_v.get("isbn13"))
                     if _nd:
                         _cur = str(_v.get("release_date") or "")

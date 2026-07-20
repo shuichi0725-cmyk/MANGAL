@@ -20,6 +20,24 @@ function fmtIsbn(v?: string | number | null): string {
   if (s.length === 13) return `${s.slice(0, 3)}-${s.slice(3, 4)}-${s.slice(4, 6)}-${s.slice(6, 12)}-${s.slice(12)}`;
   return s;
 }
+// 巻説明 (= volume-desc。 B2方式: 冒頭2行チラ見せ + 続きを読むで全文。 skill volume-desc / 出し方はB2で確定 2026-07-20)
+function VolDesc({ text }: { text?: string }) {
+  const [open, setOpen] = useState(false);
+  if (!text) return null;
+  return (
+    <div className="mt-3">
+      <p className={`text-[13px] leading-relaxed text-ink/80 ${open ? "" : "line-clamp-2"}`}>{text}</p>
+      <button
+        type="button"
+        onClick={() => setOpen((o) => !o)}
+        aria-expanded={open}
+        className="mt-1 text-[12px] font-bold text-[var(--color-accent)]"
+      >
+        {open ? "閉じる" : "続きを読む"}
+      </button>
+    </div>
+  );
+}
 // 楽天アフィリエイトリンク化 (= 収益の根幹。 build時に NEXT_PUBLIC_RAKUTEN_AFFILIATE_ID が inline される。
 //   未設定なら素リンクに fallback = 開発/preview でも壊れない)
 const RAKUTEN_AFF = process.env.NEXT_PUBLIC_RAKUTEN_AFFILIATE_ID || "";
@@ -251,6 +269,9 @@ export default function VolumeCoverflow({
           </dl>
         </div>
       </div>
+
+      {/* 巻説明(B2: 冒頭2行 + 続きを読む)。 説明が無い巻は非表示(VolDesc内でnull返し) */}
+      <VolDesc text={cur.description} />
 
       {/* この巻の特装版/限定版(案B: 通常版を主に、 特装版は捨てず併存) */}
       {cur.variants && cur.variants.length > 0 && (
