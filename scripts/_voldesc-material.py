@@ -198,6 +198,22 @@ with open(OUT, "w", encoding="utf-8") as fo:
                              "vols": vols, "missing": missing}, ensure_ascii=False) + "\n")
 print(f"材料書出 → {OUT} (caption有 {len(caps)} / 材料なし {n_miss} = 欠落表へ)")
 
+# ★収集した caption を永続キャッシュへ追記(applyの丸写しゲートがここを参照)。
+#   materials.jsonl は毎回/スライス毎に上書きされるため、ゲートの照合元にすると
+#   並列運転で他スライスのcaptionが見えず素通りする(2026-07-20 実測48件すり抜けの根因)。
+CAPCACHE = f"{ROOT}/.cache/voldesc/captions-cache.jsonl"
+_cached = set()
+if os.path.exists(CAPCACHE):
+    for ln in open(CAPCACHE, encoding="utf-8"):
+        try:
+            _cached.add(json.loads(ln)["isbn"])
+        except Exception:
+            pass
+with open(CAPCACHE, "a", encoding="utf-8") as f:
+    for ib, c in caps.items():
+        if ib not in _cached:
+            f.write(json.dumps({"isbn": ib, "caption": c["caption"]}, ensure_ascii=False) + "\n")
+
 # ★このラウンドで材料なしと確定したISBNを台帳に追記(次回auto除外=カーソル前進)。
 #   ただしlive未実行(--live無し)だと"未照会"を誤って材料なし扱いする恐れ→liveの時だけ記録。
 if (a.live or a.local_only) and not a.slugs and not a.slugs_file:

@@ -31,6 +31,16 @@ if os.path.exists(SEED):
             pass
 
 capmap = {}
+# ★照合元は永続キャッシュ(captions-cache.jsonl)が正: materials.jsonlはスライス毎に上書きされ
+#   並列運転でゲートが素通りする(2026-07-20 実測48件すり抜けの根因)。materialsは補助で重畳。
+CAPC = os.path.join(ROOT, ".cache", "voldesc", "captions-cache.jsonl")
+if os.path.exists(CAPC):
+    for ln in io.open(CAPC, encoding="utf-8"):
+        try:
+            r = json.loads(ln)
+            capmap[r["isbn"]] = r.get("caption") or ""
+        except Exception:
+            pass
 if os.path.exists(MAT):
     for ln in io.open(MAT, encoding="utf-8"):
         try:
@@ -38,13 +48,13 @@ if os.path.exists(MAT):
         except Exception:
             continue
         for v in r.get("vols") or []:
-            capmap[v["isbn"]] = v.get("caption") or ""
+            capmap.setdefault(v["isbn"], v.get("caption") or "")
 
 
 def verbatim(desc, cap, win=50):
     if not cap or len(cap) < win:
         return False
-    for i in range(0, len(cap) - win + 1, 25):
+    for i in range(0, len(cap) - win + 1, 10):
         if cap[i:i + win] in desc:
             return True
     return False

@@ -44,6 +44,8 @@ python scripts/_voldesc-material.py --slugs-file list.txt --live    # 大量時
 ### Step2: AI生成 (Opus 4.8)
 - materials.jsonl を読み、**1巻=1説明**を上の規律で書く。
 - 同一巻が複数版にある場合は **standard(初出単行本)のISBNを優先**(文庫/新装は同文流用しない=別ISBNは別caption)。
+- ★許容例外(うる星型 2026-07-20追認): **頁在ISBNにcaptionが無く、同一作品・同一巻番号の別版(新装版等)にだけある**場合、
+  その版のcaptionを材料に**頁在ISBNキー**で書いてよい(内容は同じ巻。巻構成が版間で一致する時のみ)。
 - 出力 `.cache/voldesc/out/batch-NNN.jsonl`: 1行= `{"isbn13":"9784...","slug":"...","vol":3,"desc":"..."}`
 - **100巻/batch**。PUA文字混入時はPython経由で生キー書き出し(種3 fillと同じ注意)。
 
@@ -52,10 +54,16 @@ python scripts/_voldesc-material.py --slugs-file list.txt --live    # 大量時
 python scripts/_voldesc-apply.py ".cache/voldesc/out/batch-*.jsonl"
 git add data/seeds/volume-desc-ja.jsonl && git commit -m "巻説明 +N件(volume-desc)" && git push
 ```
-- 検証ゲート内蔵: isbn13形式 / desc≥60字 / 丸写し(50字連続一致) / 既存ISBN=dup skip。
+- 検証ゲート内蔵: isbn13形式 / desc≥60字 / 丸写し(50字連続一致・照合元=**captions-cache.jsonl 永続キャッシュ**) / 既存ISBN=dup skip。
+  ★materials.jsonlはスライス毎に上書きされるため照合元にしない(2026-07-20: 並列運転で48件素通りした穴を封鎖済)。
 - 毎バッチ `applied=N, dup_skip=K, rejected=M, overwrites=0` を確認して報告
   (= 月次蒸留の保護策と同形式。rejectedはバッチを直して再apply)。
 - 報告形式: `🎉 Batch NNN 完了 (= X巻 / 欠落Y巻) [JST YYYY-MM-DD HH:MM:SS]`
+
+## 運用ノート
+- **材料なし台帳** `.cache/voldesc/no-material.txt` は恒久skip(カーソル前進用)。楽天が後からcaptionを
+  足しても再照会されないので、**月次で削除してリセット**するとカバレッジが追いつく(削除=安全・再走が少し増えるだけ)。
+- `--local-only` はbulk専用(live 0/101実測が根拠)。少数per-caseでは `--live` を使う。
 
 ## NEVER
 - 表示結線(promote/UI)を勝手にやらない(表示方法はユーザが後で決める)
