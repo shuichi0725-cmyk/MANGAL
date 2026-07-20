@@ -14692,3 +14692,39 @@ volumes:
   source: ndl
   added_at: '2026-07-19'
   note: 巻抜け37件スイープ(ユーザ指定・連載中セット)。題+巻一致をndlで確認。
+- series_keys:
+  - name:張六郎|name:千年狐|sub:干宝「捜神記」より
+  qid: null
+  number: 14
+  isbn13: '9784046604613'
+  release_date: '2026-09-18'
+  publisher: KADOKAWA
+  edition_type: standard
+  title_display: 千年狐 十四
+  source: rakuten
+  added_at: '2026-07-20'
+  note: 日次蒸留新規ドラフト誤生成(既存作の続巻)からの転送。楽天予約+NDL照合。
+- series_keys:
+  - qid:Q11264155|name:KATANA
+  qid: null
+  number: 22
+  isbn13: '9784041153994'
+  release_date: 2024-10
+  publisher: KADOKAWA
+  edition_type: standard
+  title_display: KATANA 22
+  source: ndl
+  added_at: '2026-07-20'
+  note: 23巻回収時にNDL作者束縛で発見した取込もれ(NDL 2024.10)。
+- series_keys:
+  - qid:Q11264155|name:KATANA
+  qid: null
+  number: 23
+  isbn13: '9784041177815'
+  release_date: '2026-09-24'
+  publisher: KADOKAWA
+  edition_type: standard
+  title_display: KATANA 23
+  source: rakuten
+  added_at: '2026-07-20'
+  note: 日次蒸留新規ドラフト誤生成(既存作の続巻)からの転送。楽天予約2026-09-24。
