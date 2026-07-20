@@ -3,6 +3,7 @@
 - [巻抜け仮想](volgap_virtual_tool_trigger.md) — 正=skill volgap-audit
 - [【再利用】2026新刊蒸留フロー](distill_2026_pipeline.md) — NDL発見→preview生成→3段fill→AI enrichの全記録
 - [preview実測+stale事故史](preview_deploy_pitfalls.md) — 正=skill test-deploy/display-bug-triage
+- [preview反映=GitHub Actions実体+詰まり診断](preview_deploy_github_actions.md) — deploy-preview.yml/cancel-in-progress。実配信probe→runs API→GitHub status
 - [軽量索引=検索v2で一覧共有](lightweight_index_architecture.md) — 検索索引廃止・authorsパック・消費者は必ず共通デコーダ(_idx_authors.py/listIndexDecode.ts)
 - [【必ず使う】統合台帳](intake_manifest_ledger_live.md) — data/seeds/intake-manifest/=操作集約+holes。新cleanup前に参照
 - [NDL漫画判定=NDC726.1](ndl_manga_filter_ndc726.md) — 権威判定。小説/画集/雑誌除外
