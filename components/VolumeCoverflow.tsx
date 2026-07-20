@@ -25,13 +25,25 @@ function VolDesc({ text }: { text?: string }) {
   const [open, setOpen] = useState(false);
   if (!text) return null;
   return (
-    <div className="mt-3">
-      <p className={`text-[13px] leading-relaxed text-ink/80 ${open ? "" : "line-clamp-2"}`}>{text}</p>
+    <div className="mt-2 rounded-2xl border border-[var(--color-line)] bg-[var(--color-surface)] p-3">
+      <div className="mb-1.5 flex items-center gap-1.5 text-[11px] font-bold text-ink/55">
+        <span className="inline-block h-3 w-[3px] rounded-full bg-[var(--color-accent)]" />
+        あらすじ
+      </div>
+      <div className="relative">
+        <p className={`text-[13px] leading-relaxed text-ink/80 ${open ? "" : "line-clamp-2"}`}>{text}</p>
+        {!open && (
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-x-0 bottom-0 h-7 bg-gradient-to-t from-[var(--color-surface)] to-transparent"
+          />
+        )}
+      </div>
       <button
         type="button"
         onClick={() => setOpen((o) => !o)}
         aria-expanded={open}
-        className="mt-1 text-[12px] font-bold text-[var(--color-accent)]"
+        className="mt-1.5 text-[12px] font-bold text-[var(--color-accent)]"
       >
         {open ? "閉じる" : "続きを読む"}
       </button>
