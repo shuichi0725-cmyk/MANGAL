@@ -108,6 +108,26 @@ def main():
                          "sets": sets})
             continue
         mf = [json.loads(l) for l in io.open(os.path.join(Z, f"manifest-{key}.jsonl"), encoding="utf-8")]
+        if key == "tezuka":
+            # ★全集400巻純化(2026-07-21 ユーザ指摘「手塚は400冊では?」):
+            #   manifestには別版・関連本・NDL別レコードが混ざり478行あった。
+            #   ①「全集(NNN(別巻M))」型のISBN付き別レコード → 同番号の番号行(ISBN無)へISBN/日付/slugをマージ
+            #   ②番号なし行(講談社豪華版・復刊長編冒険漫画版・立東舎集成・中国語版・DX版401-405等) → drop
+            #   = 表は講談社手塚治虫漫画全集の400行(本編382+別巻18)だけにする
+            _bynum = {o.get("num"): o for o in mf if o.get("num")}
+            _bekkan = re.compile(r"全集[（(](\d+)")
+            for o in mf:
+                if o.get("num"):
+                    continue
+                _m = _bekkan.search(o.get("title") or "")
+                _tgt = _bynum.get(int(_m.group(1))) if _m else None
+                if _tgt is not None and not _tgt.get("isbn13"):
+                    _tgt["isbn13"] = o.get("isbn13")
+                    if not _tgt.get("date"):
+                        _tgt["date"] = o.get("date")
+                    if not _tgt.get("prod_slug"):
+                        _tgt["prod_slug"] = o.get("prod_slug")
+            mf = [o for o in mf if o.get("num")]
         years = sorted(int(m.group(0)) for o in mf if (m := re.search(r"(19|20)\d{2}", str(o.get("date") or ""))))
         groups = {}
         order = []

@@ -31,7 +31,7 @@ function Band({ c }: { c: ZenshuuCollection }) {
       </p>
       {done !== null && (
         <div className="mt-2 flex items-center gap-2 text-[10px]">
-          <span>{done ? "✓ 完備" : "収録中"}</span>
+          <span>{done ? "✓ 完備" : "作品ページ連携"}</span>
           <div className="h-[5px] flex-1 overflow-hidden rounded-full bg-white/25">
             <i className="block h-full rounded-full bg-[#ffd76a]" style={{ width: `${Math.min(100, Math.round(((c.linked || 0) / c.total) * 100))}%` }} />
           </div>
