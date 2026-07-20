@@ -44,6 +44,9 @@ ap.add_argument("--local-only", dest="local_only", action="store_true",
                 help="liveを一切叩かず、ローカル2本に無い=材料なしとして台帳記録(bulk用・実測で局所未収=captionほぼ皆無)")
 ap.add_argument("--limit", type=int, default=10**9)
 ap.add_argument("--take", type=int, default=100, help="autoモードで集める未生成巻数の目安")
+ap.add_argument("--recheck-nomaterial", type=int, metavar="N", default=0,
+                help="材料なし台帳(no-material.txt)の先頭N件を★live再照会し、captionが在れば救済"
+                     "(cache追加+台帳から除去)。ローカル未収=材料なしの偽陰性(実測10%)を回収する常設パス。")
 a = ap.parse_args()
 
 # 既seedのISBNは除外(純粋追加)
@@ -66,7 +69,7 @@ if a.slugs:
     slugs = [s.strip() for s in a.slugs.split(",") if s.strip()]
 if a.slugs_file:
     slugs += [s.strip() for s in open(a.slugs_file, encoding="utf-8") if s.strip()]
-if not slugs:
+if not slugs and not a.recheck_nomaterial:
     # ★auto: ファイル名順(=端から全件、人気順禁止 [[feedback_no_popularity_priority]])に
     #   seed未生成ISBNを持つ頁を --take 巻ぶん選定。seed除外が実質cursorなので再実行=続きから。
     n_isbn = 0
@@ -111,6 +114,52 @@ def live_item(isbn):
             print("★429→中断"); sys.exit(2)
         return None
 
+
+# ==== recheck モード: 材料なし台帳をlive再照会して偽陰性を救済 ====
+#   ローカルキャッシュは harvest 履歴=全楽天ではないため、--local-only 時のローカル未収を
+#   「材料なし」と恒久記録してしまう(実測10%が実はlive有)。ここで live で拾い直す。
+#   冪等(台帳に残る分だけ照会)・逐次保存(1件ごとにcache追記+台帳書換)・429即中断=アイドル運転安全。
+if a.recheck_nomaterial:
+    if not os.path.exists(NOMAT):
+        print("no-material.txt 無し=対象なし"); sys.exit(0)
+    todo = [l.strip() for l in open(NOMAT, encoding="utf-8") if len(l.strip()) == 13]
+    batch = todo[: a.recheck_nomaterial]
+    print(f"recheck: 台帳 {len(todo)}件 の先頭 {len(batch)}件を live再照会 (~{len(batch)*1.2/60:.0f}分)")
+    CAPCACHE = f"{ROOT}/.cache/voldesc/captions-cache.jsonl"
+    cached = set()
+    if os.path.exists(CAPCACHE):
+        for ln in open(CAPCACHE, encoding="utf-8"):
+            try:
+                cached.add(json.loads(ln)["isbn"])
+            except Exception:
+                pass
+    recovered, checked = {}, set()
+    RECOV = f"{ROOT}/.cache/voldesc/recovered.jsonl"   # 救済分(Opusが説明を書く材料)
+    fo_r = open(RECOV, "a", encoding="utf-8")
+    fo_c = open(CAPCACHE, "a", encoding="utf-8")
+    for i, ib in enumerate(batch):
+        checked.add(ib)
+        item = live_item(ib)
+        cap = (item.get("itemCaption") or "").strip() if item else ""
+        if cap:
+            recovered[ib] = cap
+            if ib not in cached:
+                fo_c.write(json.dumps({"isbn": ib, "caption": cap}, ensure_ascii=False) + "\n"); fo_c.flush()
+                cached.add(ib)
+            fo_r.write(json.dumps({"isbn": ib, "caption": cap,
+                                   "contents": (item.get("contents") or "").strip(),
+                                   "title": item.get("title")}, ensure_ascii=False) + "\n"); fo_r.flush()
+        time.sleep(1.2)
+        if (i + 1) % 50 == 0:
+            print(f"  {i+1}/{len(batch)} 救済 {len(recovered)}")
+    fo_r.close(); fo_c.close()
+    # 台帳を更新: 照会済み(checked)は台帳から落とす(救済も"cap無し確定"も、もう再照会不要)
+    remain = [ib for ib in todo if ib not in checked]
+    with open(NOMAT, "w", encoding="utf-8") as f:
+        f.write("\n".join(remain) + ("\n" if remain else ""))
+    print(f"recheck完了: 照会 {len(batch)} / 救済(caption回収) {len(recovered)} / 台帳 {len(todo)}→{len(remain)}")
+    print(f"救済分 → {os.path.relpath(RECOV, ROOT)} (Opusがこれを材料に説明生成→_voldesc-apply)")
+    sys.exit(0)
 
 # 対象巻の収集(slug→[{vol,isbn,edition}])
 pages, want = {}, set()

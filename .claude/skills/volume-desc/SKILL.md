@@ -61,8 +61,17 @@ git add data/seeds/volume-desc-ja.jsonl && git commit -m "巻説明 +N件(volume
 - 報告形式: `🎉 Batch NNN 完了 (= X巻 / 欠落Y巻) [JST YYYY-MM-DD HH:MM:SS]`
 
 ## 運用ノート
-- **材料なし台帳** `.cache/voldesc/no-material.txt` は恒久skip(カーソル前進用)。楽天が後からcaptionを
-  足しても再照会されないので、**月次で削除してリセット**するとカバレッジが追いつく(削除=安全・再走が少し増えるだけ)。
+- **材料なし台帳** `.cache/voldesc/no-material.txt` は bulk 速度用のカーソル。★ただし `--local-only` は
+  ローカル harvest 履歴(全楽天ではない)に無い=材料なしと記録するため**偽陰性を含む**(2026-07-20 実測10%が実はlive有)。
+- ★**偽陰性の回収 = recheckモード(Sonnet/アイドル向き)**:
+  ```
+  python scripts/_voldesc-material.py --recheck-nomaterial 300   # 台帳先頭300件をlive再照会・救済
+  ```
+  captionが在れば `captions-cache.jsonl` + `recovered.jsonl` に回収し台帳から除去(冪等・逐次保存・1.2s/req・429即中断)。
+  救済分(recovered.jsonl)は**Opusが説明生成**→`_voldesc-apply`。台帳が尽きるまで繰り返す。
+- ★**別版caption(うる星型)**: 頁在ISBN(標準版)のcaptionが空でも、同一巻の別版(文庫/新装)に在ることがある
+  (うる星1巻=標準版空・文庫版62字)。材料scriptは頁の**全edition ISBN**を舐めるので yml に別版があれば拾う。
+  yml に無い版だけに在る場合は per-case で `_lookup.py --creator` 補完。
 - `--local-only` はbulk専用(live 0/101実測が根拠)。少数per-caseでは `--live` を使う。
 
 ## NEVER
