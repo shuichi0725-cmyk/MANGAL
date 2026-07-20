@@ -7,8 +7,16 @@ description: 巻説明つくって=単行本(巻)単位の説明文を楽天item
 
 **単行本(巻)単位**の説明文を、その巻の楽天紹介文(itemCaption+contents)から生成して蓄積する。
 ★**Opus 4.8 運転前提**(opus.bat セッションで回す。fable側はレビュー/反映担当)。
-★**表示方法は未定** = このskillの仕事は seed `data/seeds/volume-desc-ja.jsonl` に中身を貯めるまで。
-promote/UI結線は別途設計(勝手に結線しない)。
+
+## ★表示 = 実装済み(2026-07-20 確定。B2方式・ISBN基準)
+- **出し方 = B2(冒頭2行チラ見せ+2行目フェード+「続きを読む」)**。`components/VolumeCoverflow.tsx` の `VolDesc`
+  (専用パネルで囲い・赤アクセント「あらすじ」ラベル。選択中の1巻ぶんだけDOM出力)。
+- **結線 = ISBN基準**。`_promote-bulk-v2.py` の `_desc_for(isbn13)` が最終pass(書影・発売日と同じ場所=
+  canonical再構築の後)で `volume.description` に充填。schemaの既存 `description` フィールドを使用。
+- ★**巻番号基準に広げない(ファイナルアンサー・ユーザ裁定)**: 説明は**そのISBN(版バージョン単位)にだけ**出す。
+  同じ巻でも別版(元祖/文庫/ワイド)には出さない。理由=①版で冊数が違うと巻番号がズレて内容不整合
+  (文庫18巻 vs 新装版34巻型)②同一ページ内の文言重複はSEO不利。**この判断を再発明しない**。
+- 反映は**週次蒸留**(コード変更のため週次ルート)。preview確認は reflect-targeted → .preview-data。
 
 ## 書き方の規律 (= 2026-07-19 ユーザ裁定・最重要)
 
