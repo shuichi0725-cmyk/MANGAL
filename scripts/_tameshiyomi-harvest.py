@@ -104,44 +104,68 @@ def volume_target_n():
     return out
 
 
+# ★チェック済み台帳(2026-07-20): HEADで200/404どちらを引いたか(slug,vol)を記録=再チェック防止。
+#   これが無いと「404の欠け巻」を毎バッチ叩き直し、部分カバレッジ(幽遊白書型)が永久に未完了で
+#   先頭に居座り、後方アンカーが飢餓する(枯れない根因)。cache置き=git非追跡・冪等カーソル。
+VOL_CHECKED = os.path.join(ROOT, ".cache", "tameshiyomi", "vol-checked.jsonl")
+
+
+def load_vol_checked():
+    """slug -> set(checkedしたvolume。200も404も)。全1..nがcheckedならそのシリーズは完了。"""
+    ck = {}
+    if os.path.exists(VOL_CHECKED):
+        for line in open(VOL_CHECKED, encoding="utf-8"):
+            try:
+                r = json.loads(line)
+                ck.setdefault(r["slug"], set()).add(r["v"])
+            except Exception:
+                pass
+    return ck
+
+
 def expand_volumes(expand_limit, workers=8):
     """アンカー済み(title_id確定)シリーズを対象に、TinyFish検索なしでHEADのみ全巻展開する。
     ★HEADは並列8本(2026-07-13)。BookLive=大手CDNの軽いHEADのみなので安全。
-    楽天/NDL/TinyFishの逐次レート則はここには適用されない(別ホスト・別性質)。"""
+    ★2026-07-20: checked台帳で200/404両方を記録。完了=全1..nがchecked(ヒット数でなく)。
+    これで404欠け巻の無限再チェックと後方飢餓を解消し、ループが実際に枯れる。"""
     from concurrent.futures import ThreadPoolExecutor
 
     anchors, _ = load_done()
     n_by_slug = volume_target_n()
-    vol_done = load_volumes_done()
+    checked = load_vol_checked()
+    os.makedirs(os.path.dirname(VOL_CHECKED), exist_ok=True)
     targets = []
     for slug, rec in anchors.items():
         n = n_by_slug.get(slug)
         if not n:
             continue
-        have = vol_done.get(slug, set())
-        if len(have) >= n:
-            continue  # 展開済み
-        targets.append((slug, rec["title_id"], n, have))
+        ck = checked.get(slug, set())
+        if all(v in ck for v in range(1, n + 1)):
+            continue  # 全巻チェック済み(200/404問わず)=完了
+        targets.append((slug, rec["title_id"], n, ck))
+    remaining = len(targets)
     targets = targets[:expand_limit]
-    print(f"展開対象 {len(targets)} シリーズ(アンカー済み・未全巻展開) / HEAD {workers}並列", flush=True)
+    print(f"展開対象 {len(targets)} シリーズ(未チェック巻あり・残 {remaining}) / HEAD {workers}並列", flush=True)
     out = open(VOLSEED, "a", encoding="utf-8")
+    ckout = open(VOL_CHECKED, "a", encoding="utf-8")
     total_new = 0
     with ThreadPoolExecutor(max_workers=workers) as pool:
-        for slug, tid, n, have in targets:
-            todo = [v for v in range(1, n + 1) if v not in have]
+        for slug, tid, n, ck in targets:
+            todo = [v for v in range(1, n + 1) if v not in ck]
             results = list(pool.map(lambda v: (v, head_ok(f"{tid}_{v:03d}")), todo))
             added = 0
             for vol, ok in results:
+                ckout.write(json.dumps({"slug": slug, "v": vol}, ensure_ascii=False) + "\n")  # 200も404も記録
                 if ok:
                     rec = {"slug": slug, "volume": vol, "title_id": tid, "cid": f"{tid}_{vol:03d}",
                            "verified": "head200", "at": time.strftime("%Y-%m-%d")}
                     out.write(json.dumps(rec, ensure_ascii=False) + "\n")
                     added += 1
-            out.flush()
+            out.flush(); ckout.flush()
             total_new += added
-            print(f"  {slug}: +{added}/{n}巻", flush=True)
+            print(f"  {slug}: +{added}hit/{len(todo)}chk (n={n})", flush=True)
             time.sleep(0.2)
-    print(f"展開完了 +{total_new}巻 (seed={os.path.relpath(VOLSEED, ROOT)})")
+    print(f"展開完了 +{total_new}巻 hit (seed={os.path.relpath(VOLSEED, ROOT)})")
 
 
 def harvest(limit):
@@ -207,10 +231,15 @@ def main():
         done, holds = load_done()
         vol_done = load_volumes_done()
         n_by_slug = volume_target_n()
+        checked = load_vol_checked()
         vol_rows = sum(len(v) for v in vol_done.values())
-        expanded_full = sum(1 for slug, vs in vol_done.items() if len(vs) >= n_by_slug.get(slug, 1 << 30))
+        # ★完了=全1..nがchecked(200/404問わず)。残=未チェック巻ありのアンカー数(=真のキュー長)
+        anchored = [s for s in done if n_by_slug.get(s)]
+        remain = sum(1 for s in anchored
+                     if not all(v in checked.get(s, set()) for v in range(1, n_by_slug[s] + 1)))
         print(f"収集済(アンカー) {len(done)} / 保留 {len(holds)}")
-        print(f"全巻展開 = {vol_rows}巻 ({len(vol_done)}シリーズ着手、うち{expanded_full}シリーズ完了)")
+        print(f"全巻展開 = {vol_rows}巻hit / チェック済台帳 {sum(len(v) for v in checked.values())}巻")
+        print(f"★expandキュー残 = {remain} / {len(anchored)} アンカー(=未チェック巻あり。0で枯れる)")
         return
     if a.expand:
         expand_volumes(a.expand_limit)
