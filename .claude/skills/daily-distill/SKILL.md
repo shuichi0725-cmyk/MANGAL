@@ -14,6 +14,7 @@ B=NDL新着回収(納本済み過去分)。毎日でなくてよい(間隔が空
 - ★**フルharvest処理禁止=必ず増加分だけ**: `preorders-latest.jsonl` を丸ごとclassifyするな。**必ず `preorders-prev.jsonl` との差分(新ISBN=fresh)に絞ってから**classify/生成する(下A0)。フル処理=昨日以前のbacklogを全部「新規」に水増しする(実害2934件)。
 - ★**過去ドラフト再カウント禁止**: 増加分(ISBN fresh)でも、**前回previewドラフト化したが未promoteの作品**が後続巻の新ISBNで再登場する。`.cache/preorders/drafts*`(過去draft)の**題(base正規化)と突合して除外**してから生成(下A0)。[[daily_distill_classifier_gate]]。
 - ★**ヨミ捏造禁止(厳守)**: title_kana=**楽天titleKanaのみ**。楽天に無ければ**題流用/生成読み/巻番号混入で捏造するな→hold**(NDL照合キュー行き)。**title_kanaに漢字が1字でも入る=捏造=即hold**(gen-midfillはゲート済、生成物は必ず漢字混入チェック)。
+- ★**中間pushしない=最後に1回だけpush**(2026-07-20 ユーザ裁定): 日次蒸留は①続巻反映も索引もBも、途中は**全部ローカルcommit止め**(`_reflect-targeted.py --commit-only`/索引は`git commit`のみ)。全工程完了後に**`git push`を1回だけ**。中間pushを重ねると Cloudflare Pages のpreviewビルドが次々cancelされ「反映されない/36のまま」になる([[reflect_protocol_fast]] NEVER=追いpush禁止)。
 - **429/throttle即中断**(NDL・楽天とも1.1〜1.3s/req厳守。リトライ連打禁止)。
 - **捏造禁止**: ヨミ/著者/genreを推測で埋めない。ヨミ=楽天仮確定+NDL照合キュー(下記)が正規ルート。
 - **単巻先行登録禁止**: 途中巻でページ無し(④)は全巻回収が成立した作品だけドラフト化。
@@ -31,15 +32,16 @@ B=NDL新着回収(納本済み過去分)。毎日でなくてよい(間隔が空
 | 1 | 予約harvest | `python scripts/_rakuten-preorder-harvest.py` |
 | 2 | ★**増加分に絞る**(必須) | `python scripts/_preorder-increment.py`  ← prev差分+過去draft除外。飛ばすと水増し |
 | 3 | 分類 | `python scripts/_preorder-classify.py` |
-| 4 | ①続巻→種4+反映 | `python scripts/_preorder-apply-zokkan.py` → `python scripts/_reflect-targeted.py --only <touched> --push` |
+| 4 | ①続巻→種4+反映 | `python scripts/_preorder-apply-zokkan.py` → `python scripts/_reflect-targeted.py --only <touched> --commit-only` ★**--push禁止**=commit止め(最後にまとめて1回push) |
 | 5 | ②③新作ドラフト | `python scripts/_preorder-gen-preview.py new1a` ; `new1b` |
 | 6 | ④途中巻ドラフト | `python scripts/_preorder-gen-midfill.py` |
 | 7 | genre付与(★worksheet化 2026-07-10) | `python scripts/_preorder-genre-worksheet.py --emit` → AIがworksheetのgenres[]にmaster32キー記入(確信なければ空) → `--apply`(master32外=abort・純粋追加・provisional自動)。caption無し頁は先に `_preorder-capture-captions.py` |
 | 8 | Cヨミ照合 | `python scripts/_verify-kana-pending.py --limit 200` |
 | 9 | **検査**(下記チェックリスト) | 欠け>0なら原因調査 |
 | 10 | ★**prev確定**(処理完了の宣言) | `python scripts/_preorder-increment.py --commit-prev` ← full→prev昇格。**これ以外の方法でprevを触るな**。飛ばすと次回差分が壊れる |
-| 11 | 索引+暦+push | `python scripts/_build-list-index.py .preview-data/manga .preview-data` ; `python scripts/_build-calendar.py .preview-data/manga public/calendar <当月>` ; commit+push |
-| 12 | B NDL新着(任意) | `python scripts/_distill_daily.py --discover`→`--plan`→`--emit` |
+| 11 | 索引+暦(**commit止め**) | `python scripts/_build-list-index.py .preview-data/manga .preview-data` ; `python scripts/_build-calendar.py .preview-data/manga public/calendar <当月>` ; `git add .preview-data public/calendar && git commit`(★**pushしない**) |
+| 12 | B NDL新着(任意) | `python scripts/_distill_daily.py --discover`→`--plan`→`--emit` ★**push前に済ませる**(Bもpreviewドラフトを作る=最後の1pushに同梱) |
+| 13 | ★**最後に1回だけpush** | `git push` ← 全工程(①〜B)完了後にここで**初めてpush**。Pagesビルドは1回だけ発火=追いpush回避([[reflect_protocol_fast]] NEVER)。中間で絶対pushしない |
 
 ### ★生成後チェックリスト (= 全部2026-07-09に実際踏んだ罠。毎回数える)
 - □ **kana純カタカナ**(漢字/ひらがな0)。楽天ヨミ無し/汚染は**捏造せずhold**が効いているか
@@ -90,11 +92,11 @@ python scripts/_preorder-increment.py   # ①latest-prev差分(新ISBN) ②過�
 2. python scripts/_preorder-classify.py               # ①続巻/②新作作者既知/③新作作者新規/④途中巻頁無し/skip
    → ★生成後、title_kanaに漢字含むドラフト=捏造→hold(NEVER)。全巻回収の先行巻ヨミも楽天由来のみ。
 3. python scripts/_preorder-apply-zokkan.py           # ①→種4自動追加(ゲート:slug実在/巻番号/series_key逆引き)
-   → promote --only <touched> → reflect --only <touched> --push   (①は確認不要で即出せる)
+   → promote --only <touched> → reflect --only <touched> --commit-only  ★**--push禁止**(①も中間はcommit止め・最後の1pushに同梱)
 4. python scripts/_preorder-gen-preview.py new1a      # ②ドラフト生成(→.preview-data)
    python scripts/_preorder-gen-preview.py new1b      # ③(著者マスタ新規はヨミ=楽天仮)
    python scripts/_preorder-gen-midfill.py            # ④(キャッシュ全巻回収成立分のみ)
-   → preview索引再構築 → push → ★ユーザ確認(段階: ①→②→③→④の順で1クラスずつ)
+   → preview索引再構築 → ★**commit止め(pushしない)** → 全工程完了後に**1回だけpush** → ★ユーザ確認
 5. 確認GO後: python scripts/_preorder-promote-drafts.py --class new1a 等
    → data/seeds/preorder-pages/(git恒久保管庫=promote合流結線済・フルpromoteで消えない)
    → data/manga.v2(即公開) → reflect --only <last-promoted> --push

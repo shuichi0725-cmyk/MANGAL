@@ -53,6 +53,8 @@ def main():
     ap.add_argument("--only", default="", help="再生成する manga.v2 stem(カンマ区切り)")
     ap.add_argument("--drop", default="", help="削除する manga.v2 stem(カンマ区切り)")
     ap.add_argument("--push", action="store_true")
+    ap.add_argument("--commit-only", dest="commit_only", action="store_true",
+                    help="add+commitまでで止め、pushしない(日次/週次で途中反映を溜め、最後に1回だけpush=追いpush回避)")
     ap.add_argument("-m", "--msg", default="targeted反映")
     ap.add_argument("--no-preview", action="store_true", help="preview同期をskip")
     a = ap.parse_args()
@@ -162,8 +164,9 @@ def main():
 
     print(f"\n=== targeted反映 完了 === 再生成{len(only)} / drop{len(drop)} / preview同期{len(pv_changed)}", flush=True)
 
-    # 5. push (★seed変更(edition-overrides/種4/slug等)も含める=反映の source も永続化)
-    if a.push:
+    # 5. commit(+push) (★seed変更(edition-overrides/種4/slug等)も含める=反映の source も永続化)
+    #   --commit-only = pushせずcommitまで(日次/週次で途中反映を溜め、最後に1回だけpush=追いpush回避)。
+    if a.push or a.commit_only:
         # ★統合台帳を自動集約(数秒)=「節目で手動」だと忘れて台帳が死ぬ、の恒久対策
         run([PY, "scripts/_manifest-consolidate-ops.py"])
         # ★slug-aliases/_redirects/主要索引も必ずadd(per-case修正で毎回触るのに漏れ→301切れ+版タブ消失事故 2026-07-08)
@@ -171,7 +174,10 @@ def main():
              "data/slug-aliases.yml", "public/_redirects",
              "data/manga-list-index.json", "data/manga-search-index.json"])
         run(["git", "commit", "-q", "-m", a.msg])
-        run(["git", "push"])
+        if a.push:
+            run(["git", "push"])
+        else:
+            print("(--commit-only: pushは保留。最後に1回だけ git push する)", flush=True)
 
 if __name__ == "__main__":
     main()
