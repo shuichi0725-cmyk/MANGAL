@@ -22,12 +22,19 @@ B=NDL新着回収(納本済み過去分)。毎日でなくてよい(間隔が空
 - ★**1回のAPIで全フィールド捕捉**(2026-07-09 ユーザ指摘 [[acquire_all_obtainable_info]]): 楽天API/harvestは書影だけでなく **itemCaption(あらすじ=genre/catch/synopsis元)/booksGenreId/itemPrice/subTitle/affiliateUrl** を返す。**書影だけ取って捨てるな**。captionを`_preorder_draft.rakuten_caption`に保存→genre(master32・provisional)/catch/synopsisを生成(caption有れば発売前でも付く)。書影のためにAPIを叩くなら同じ応答からcaptionも必ず取る。
 - genre=closed vocabulary(master32)のみ+provisional。catch/synopsis=skill enrich-catch-synopsis の規律。
 - ★**改善は即興でなくskill/scriptに焼く**: 実行中に穴を見つけたら手動で継ぎ足すな。scriptにゲート追加→commitしてから進む(即興は次回消える+報告が水増しでブレる)。
-- ★**slug検品前のpush禁止**(2026-07-20 実害=86ドラフト中49件をユーザ指摘後に総直し):
-  `slug-gate-pending.tsv`(誤読)と`slug-katakana-pending.tsv`(未変換カタカナ)の**当日行をAIが裁定し、
-  誤slugをrename(preview+drafts両方)してから**手順13のpushに進む。件数ゼロ確認もチェックリストでなく**ゲート**扱い。
-  途中切り(70字語中切断)は語境界cut化済(2026-07-20 _preorder_draft_lib)だが、なろう長題は**意味の切れ目**で
-  短縮できているか目視1周(機械cutは文節を知らない)。既存作の続巻が新規ドラフト化されていないかも
-  `_exists.py --title <基底題>`で疑わしい題(題中に漢数字巻/篇名)だけ確認(千年狐十四/KATANA23型)。
+- ★**出荷前レビュー(`_preorder-review.py`)を通すまでpush禁止**(2026-07-20 実害=86ドラフト中49件をユーザ指摘後に総直し。
+  検知は`slug-*-pending.tsv`に出ていたのに簿を消化せずpushした=プロセス漏れ。判断力でなく決定的ワークリストで塞ぐ):
+  - **exit 0(ブロッキング0)を確認してから手順13のpush**。件数チェックでなく**ゲート**(exit 1=push禁止)。
+  - `docs/production-diagnostics/preorder-review.tsv` の各行をAIが1行ずつ裁定:
+    - **CONTINUATION**(最優先)=既存作の続巻を誤ってドラフト化。`_lookup.py --creator`で新シリーズ(第二章/龍を継ぐ男型=別頁が正)か
+      続巻(千年狐十四/KATANA23型=種4転送)かを確認→種4転送 or 「新シリーズなので正」でpending該当行削除。
+    - **NONMANGA**(最優先)=図鑑/写真集/再編集本。deny台帳(preorder-deny.jsonl)へ+ドラフト除去(preview+drafts両方)。
+    - **MISREAD**=漢字誤読疑い。題を読んでslug綴りが読みと合うか確認。誤りはrename(preview+drafts両方)、
+      正しければ`slug-gate-pending.tsv`の該当行を消す(nidaime/shinzou型=既に正=偽陽性)。
+    - **KATA_UNCONV**=未変換カタカナ。辞書語(マージャン→mahjong型)はrename+`katakana-english.yml`に追加、
+      造語/固有名(ヒトナー/オダロク=英語綴り無しが正)は`slug-katakana-pending.tsv`の該当行を消す。
+    - **LONG_CHECK**(情報・非ブロッキング)=長題。語境界cut済だが意味の切れ目か1件だけ目視。
+  - rename時は**preview(.preview-data/manga)とドラフト保管(.cache/preorders/drafts)の両方**を付け替える(衝突チェック=本番stem+alias+preview)。
 
 ## ★毎日の実行手順 (= runbook・この順で回す。2026-07-09 確立。ツール把握用)
 
@@ -45,6 +52,7 @@ B=NDL新着回収(納本済み過去分)。毎日でなくてよい(間隔が空
 | 8 | Cヨミ照合 | `python scripts/_verify-kana-pending.py --limit 200` |
 | 9 | **検査**(下記チェックリスト) | 欠け>0なら原因調査 |
 | 10 | ★**prev確定**(処理完了の宣言) | `python scripts/_preorder-increment.py --commit-prev` ← full→prev昇格。**これ以外の方法でprevを触るな**。飛ばすと次回差分が壊れる |
+| 10.5 | ★**出荷前レビュー(ゲート)** | `python scripts/_preorder-review.py` ← **exit 0 まで push禁止**。下記で各行裁定 |
 | 11 | 索引+暦(**commit止め**) | `python scripts/_build-list-index.py .preview-data/manga .preview-data` ; `python scripts/_build-calendar.py .preview-data/manga public/calendar <当月>` ; `git add .preview-data public/calendar && git commit`(★**pushしない**) |
 | 12 | B NDL新着(任意) | `python scripts/_distill_daily.py --discover`→`--plan`→`--emit` ★**push前に済ませる**(Bもpreviewドラフトを作る=最後の1pushに同梱) |
 | 13 | ★**最後に1回だけpush** | `git push` ← 全工程(①〜B)完了後にここで**初めてpush**。Pagesビルドは1回だけ発火=追いpush回避([[reflect_protocol_fast]] NEVER)。中間で絶対pushしない |
