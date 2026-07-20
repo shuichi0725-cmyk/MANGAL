@@ -5,19 +5,22 @@ import type { ZenshuuView } from "@/lib/zenshuu";
 
 const V = (view as unknown as ZenshuuView).collections;
 
-/** 📚 全集コーナー(トップ用・A-1案 2026-07-19)。
+/** 📚 全集コーナー(トップ用・A-1案 2026-07-19 → 2026-07-21 カード枠化)。
  *  全集を一覧ページ無しでその場で選ぶ=カード横スクロール(アニメ化コーナーと同型)。
+ *  ★他コーナーと同じ白カード枠に統一(ユーザ指摘)。旧: 枠なし+ul -mx-3.5 が
+ *  padding無し親からはみ出し、ページ全体が横スクロールできてしまうbugの原因だった。
  *  データ=data/zenshuu-view.json(_gen-zenshuu-data.py で再生成)。 */
 export default function ZenshuuCorner() {
   if (V.length === 0) return null;
   return (
-    <section className="mt-6">
-      <div className="flex items-baseline gap-2 px-3.5">
+    <section className="mt-4 px-4">
+      <div className="rounded-xl border border-[var(--color-line)] bg-[var(--color-surface)] p-3.5 shadow-sm">
+      <div className="flex items-baseline gap-2">
         <span className="rounded bg-[var(--color-accent)] px-1.5 py-0.5 text-[10px] font-bold tracking-wider text-white">全集</span>
         <h2 className="text-[16px] font-black">📚 作家の全仕事、まるごと</h2>
       </div>
-      <p className="px-3.5 pt-0.5 text-[10.5px] text-ink/55">巨匠の全集を一棚に。タップでその全集の全巻へ。</p>
-      <ul className="-mx-3.5 mt-2.5 flex gap-3 overflow-x-auto no-scrollbar px-7 pb-1 snap-x scroll-pl-3.5">
+      <p className="pt-0.5 text-[10.5px] text-ink/55">巨匠の全集を一棚に。タップでその全集の全巻へ。</p>
+      <ul className="-mx-3.5 mt-2.5 flex gap-3 overflow-x-auto no-scrollbar px-3.5 pb-1 snap-x scroll-pl-3.5">
         {V.map((c) => (
           <li key={c.key} className="w-[132px] shrink-0 snap-start">
             <Link href={`/zenshuu/${c.key}`} className="block group spring-press rounded-xl border border-[var(--color-line)] bg-[var(--color-surface)] p-2.5">
@@ -49,6 +52,7 @@ export default function ZenshuuCorner() {
           </li>
         ))}
       </ul>
+      </div>
     </section>
   );
 }
