@@ -21,6 +21,7 @@ function activeCount(s: FilterState): number {
   return n;
 }
 import type { ListBundle, MangaListItem } from "@/lib/schema";
+import { onAltLoaded, prewarmSearch, searchSlugs } from "@/lib/clientSearch";
 import { useMangaIndex } from "@/lib/useMangaIndex";
 
 /** 一覧表クライアント: 絞り込み=既存の多窓フィルター(トップと同じ)、並び順=独立チップ。
@@ -128,17 +129,20 @@ export default function ListClient({ data }: { data: ListBundle }) {
     });
   }, [indexLoading, manga]);
 
+  // ★検索はトップと同じ本体(clientSearch)に統一(2026-07-21。旧: 素朴なincludes照合が
+  //   ここだけ残り、かな/ローマ字/別名/複数語が効かず「トップで出るのに一覧表で出ない」非対称)
+  useEffect(() => {
+    if (mangaIndex) prewarmSearch(mangaIndex);
+  }, [mangaIndex]);
+  const [altTick, setAltTick] = useState(0);
+  useEffect(() => onAltLoaded(() => setAltTick((v) => v + 1)), []);
   const rows = useMemo(() => {
     let r = applyFilters(manga, state);
     if (slugfixOnly) r = r.filter((m) => m._slugfix);
-    const needle = q.trim().toLowerCase();
+    const needle = q.trim();
     if (needle) {
-      r = r.filter(
-        (m) =>
-          m.title.toLowerCase().includes(needle) ||
-          (m.title_kana || "").includes(q.trim()) ||
-          m.authors.some((a) => a.name.toLowerCase().includes(needle)),
-      );
+      const hit = searchSlugs(needle, manga);
+      r = r.filter((m) => hit.has(m.slug));
     }
     // ★検索時の既定=人気順(2026-07-05 ユーザ要望: 検索したら人気順で出る)。手動選択があればそれを尊重
     const effSort: SortId = q.trim() && !sortTouched ? "popularity" : sort;
@@ -159,7 +163,8 @@ export default function ListClient({ data }: { data: ListBundle }) {
       }
     });
     return sorted;
-  }, [manga, state, q, sort, sortTouched, slugfixOnly]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [manga, state, q, sort, sortTouched, slugfixOnly, altTick]);
 
   return (
     <div>
