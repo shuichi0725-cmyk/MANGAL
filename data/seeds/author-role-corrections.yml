@@ -42630,3 +42630,9 @@ corrections:
   - series_key: "name:任天堂|name:ファイアーエムブレム|sub:聖戦の系譜"
     add: ["大沢美月"]
     remove: ["うさ銀太郎"]
+  # ★per-case追記(2026-07-21): B・J×bj(吉富昭仁トリビュート・9784253132381)が本編クラスタに混入し
+  #   著者欄を汚染(authors=吉富artist/手塚がoriginal落ち)。remove+addで手塚単独著者に復元。
+  #   混入巻自体は volume-exclude.yml で除去。
+  - series_key: "qid:Q193300|name:ブラック・ジャック"
+    remove: ["吉富昭仁", "手塚治虫"]
+    add: ["手塚治虫"]
