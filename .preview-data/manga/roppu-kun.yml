@@ -4,7 +4,7 @@ title: ロップくん
 title_kana: ロップクン
 title_romaji: roppu kun
 year_started: 1980
-year_ended: 1980
+year_ended: 2002
 status: completed
 authors:
 - name: 手塚治虫
@@ -43,15 +43,27 @@ editions:
     release_date: '1980-12-20'
 - type: bunkobon
   label: 文庫版
-  publisher: 講談社
+  publisher: 秋田書店
   imprint: 秋田文庫
+  volumes:
+  - number: 1
+    asin: null
+    isbn13: '9784253172257'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/2531/25317225.gif?_ex=200x200
+    release_date: 2002-12
+- type: bunkobon
+  label: 手塚治虫文庫全集(2011)
+  publisher: 講談社
+  imprint: 手塚治虫文庫全集
   volumes:
   - number: 1
     asin: null
     isbn13: '9784063738353'
     cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/8353/9784063738353_1_5.jpg?_ex=300x300
     release_date: '2011-06-10'
+    title_display: 文庫全集BT-135
 publishers:
+- akita
 - kodansha
 catch: 捨てられた宇宙のおもちゃ・ロップを拾った漁師の息子。空を飛び不可能さえ叶える相棒を、怪しい者たちが狙う。二人の冒険が始まる。
 anilist_id: 123652

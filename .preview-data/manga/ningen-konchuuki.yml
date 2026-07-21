@@ -4,7 +4,7 @@ title: 人間昆虫記
 title_kana: ニンゲンコンチュウキ
 title_romaji: ningen konchuuki
 year_started: 1979
-year_ended: 1983
+year_ended: 1995
 status: completed
 authors:
 - name: 手塚治虫
@@ -12,7 +12,7 @@ authors:
   kana: テズカオサム
   romaji: tezukaosamu
 original_authors: []
-publisher: kodansha
+publisher: akita
 magazine: null
 demographic: seinen
 genres:
@@ -25,14 +25,14 @@ wikidata_qid: Q193300
 editions:
 - type: bunkobon
   label: 文庫版
-  publisher: 講談社
+  publisher: 秋田書店
   imprint: 秋田漫画文庫
   volumes:
   - number: 1
     asin: null
-    isbn13: '9784063738995'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/8995/9784063738995_1_5.jpg?_ex=300x300
-    release_date: '2012-04-12'
+    isbn13: '9784253171205'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/1205/9784253171205.jpg?_ex=300x300
+    release_date: 1995-04
   - number: 2
     asin: null
     isbn13: null
@@ -40,19 +40,42 @@ editions:
     release_date: '1979-05-20'
 - type: standard
   label: 通常版
-  publisher: 講談社
+  publisher: 秋田書店
   imprint: COM名作コミックス
+  volumes:
+  - number: 1
+    asin: null
+    isbn13: '9784253103473'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/3473/9784253103473.jpg?_ex=300x300
+    release_date: '1993-05-25'
+- type: bunkobon
+  label: 手塚治虫文庫全集(2012)
+  publisher: 講談社
+  imprint: 手塚治虫文庫全集
+  volumes:
+  - number: 1
+    asin: null
+    isbn13: '9784063738995'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/8995/9784063738995_1_5.jpg?_ex=300x300
+    release_date: '2012-04-12'
+    title_display: 文庫全集BT-199
+- type: standard
+  label: 手塚治虫漫画全集(1983)
+  publisher: 講談社
+  imprint: 手塚治虫漫画全集
   volumes:
   - number: 1
     asin: null
     isbn13: '9784061732711'
     cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/2711/9784061732711.jpg?_ex=300x300
     release_date: '1983-02-20'
+    title_display: 第1巻(全集271)
   - number: 2
     asin: null
     isbn13: '9784061732728'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/2728/9784061732728.jpg?_ex=200x200
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/2728/9784061732728.jpg?_ex=300x300
     release_date: '1983-03-20'
+    title_display: 第2巻(全集272)
 publishers:
-- kodansha
+- akita
 genres_provisional: true

@@ -3,8 +3,8 @@ slug: neo-faust
 title: ネオ・ファウスト
 title_kana: ネオファウスト
 title_romaji: neo fausuto
-year_started: 1995
-year_ended: 1995
+year_started: 1989
+year_ended: 1992
 status: completed
 authors:
 - name: 手塚治虫
@@ -12,7 +12,7 @@ authors:
   kana: テズカオサム
   romaji: tezukaosamu
 original_authors: []
-publisher: kodansha
+publisher: asahi-shimbun
 magazine: null
 demographic: seinen
 genres:
@@ -25,27 +25,50 @@ wikidata_qid: Q193300
 editions:
 - type: standard
   label: 通常版
-  publisher: 講談社
+  publisher: 朝日新聞社
   volumes:
   - number: 1
     asin: null
-    isbn13: '9784061759688'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/9688/9784061759688.jpg?_ex=300x300
-    release_date: '1995-11-16'
-  - number: 2
-    asin: null
-    isbn13: '9784061759695'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0617/06175969.jpg?_ex=200x200
-    release_date: '1995-12-14'
+    isbn13: '9784022559333'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/rakutenkobo-ebooks/cabinet/8308/2000002958308.jpg?_ex=300x300
+    release_date: '1989-04-25'
 - type: bunkobon
   label: 文庫版
-  publisher: 講談社
+  publisher: 朝日新聞社
   imprint: 朝日文庫
+  volumes:
+  - number: 1
+    asin: null
+    isbn13: '9784022607270'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/7270/9784022607270.jpg?_ex=200x200
+    release_date: '1992-10-01'
+- type: bunkobon
+  label: 手塚治虫文庫全集(2011)
+  publisher: 講談社
+  imprint: 手塚治虫文庫全集
   volumes:
   - number: 1
     asin: null
     isbn13: '9784063738704'
     cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/8704/9784063738704.jpg?_ex=300x300
     release_date: '2011-10-12'
+    title_display: 文庫全集BT-170
+- type: standard
+  label: 手塚治虫漫画全集(1995)
+  publisher: 講談社
+  imprint: 手塚治虫漫画全集
+  volumes:
+  - number: 1
+    asin: null
+    isbn13: '9784061759688'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/9688/9784061759688.jpg?_ex=300x300
+    release_date: '1995-11-16'
+    title_display: 第1巻(全集368)
+  - number: 2
+    asin: null
+    isbn13: '9784061759695'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0617/06175969.jpg?_ex=300x300
+    release_date: '1995-12-14'
+    title_display: 第2巻(全集369)
 publishers:
-- kodansha
+- asahi-shimbun

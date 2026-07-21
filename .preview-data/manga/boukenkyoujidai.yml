@@ -4,7 +4,7 @@ title: 冒険狂時代
 title_kana: ボウケンキョウジダイ
 title_romaji: boukenkyoujidai
 year_started: 1978
-year_ended: 1978
+year_ended: 2002
 status: completed
 authors:
 - name: 手塚治虫
@@ -34,15 +34,27 @@ editions:
     release_date: '1978-02-25'
 - type: bunkobon
   label: 文庫版
-  publisher: 講談社
+  publisher: 秋田書店
   imprint: 秋田文庫
+  volumes:
+  - number: 1
+    asin: null
+    isbn13: '9784253172882'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/2882/9784253172882.jpg?_ex=200x200
+    release_date: 2002-02
+- type: bunkobon
+  label: 手塚治虫文庫全集(2012)
+  publisher: 講談社
+  imprint: 手塚治虫文庫全集
   volumes:
   - number: 1
     asin: null
     isbn13: '9784063738971'
     cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/8971/9784063738971_1_5.jpg?_ex=300x300
     release_date: '2012-04-12'
+    title_display: 文庫全集BT-197
 publishers:
+- akita
 - kodansha
 catch: 1876年、幕府の密命でアメリカへ。だが船は海賊に襲われ、宝の地図を手にした個性豊かな面々と漂流。世界をめぐる大冒険が幕を開ける。
 anilist_id: 52200

@@ -3,8 +3,8 @@ slug: ore-wa-sarutobi-da
 title: おれは猿飛だ!
 title_kana: オレワサルトビダ
 title_romaji: ore wa sarutobi da
-year_started: 1982
-year_ended: 1982
+year_started: 1962
+year_ended: 2001
 status: completed
 authors:
 - name: 手塚治虫
@@ -28,25 +28,49 @@ editions:
   volumes:
   - number: 1
     asin: null
-    isbn13: '9784061732155'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/2155/9784061732155.jpg?_ex=300x300
-    release_date: '1982-04-20'
-  - number: 2
-    asin: null
-    isbn13: '9784061732162'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/2162/9784061732162.jpg?_ex=200x200
-    release_date: '1982-06-20'
+    isbn13: null
+    cover_url: null
+    release_date: 1962-09
 - type: bunkobon
   label: 文庫版
-  publisher: 講談社
+  publisher: 秋田書店
   imprint: 秋田文庫
+  volumes:
+  - number: 1
+    asin: null
+    isbn13: '9784253176057'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/6057/9784253176057.jpg?_ex=200x200
+    release_date: 2001-02
+- type: bunkobon
+  label: 手塚治虫文庫全集(2011)
+  publisher: 講談社
+  imprint: 手塚治虫文庫全集
   volumes:
   - number: 1
     asin: null
     isbn13: '9784063738308'
     cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/8308/9784063738308_1_3.jpg?_ex=300x300
     release_date: '2011-05-13'
+    title_display: 文庫全集BT-130
+- type: standard
+  label: 手塚治虫漫画全集(1982)
+  publisher: 講談社
+  imprint: 手塚治虫漫画全集
+  volumes:
+  - number: 1
+    asin: null
+    isbn13: '9784061732155'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/2155/9784061732155.jpg?_ex=300x300
+    release_date: '1982-04-20'
+    title_display: 第1巻(全集215)
+  - number: 2
+    asin: null
+    isbn13: '9784061732162'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/2162/9784061732162.jpg?_ex=300x300
+    release_date: '1982-06-20'
+    title_display: 第2巻(全集216)
 publishers:
+- akita
 - kodansha
 catch: 16世紀を駆け抜けた伝説の少年忍者・猿飛佐助。手に汗握る忍術と冒険が満載の、痛快無比な忍者活劇。少年の心を取り戻したくなる一作。
 anilist_id: 52265

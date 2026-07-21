@@ -4,7 +4,7 @@ title: ゴッドファーザーの息子
 title_kana: ゴッドファーザーノムスコ
 title_romaji: goddo faza no musuko
 year_started: 1982
-year_ended: 1982
+year_ended: 1995
 status: completed
 authors:
 - name: 手塚治虫
@@ -39,16 +39,28 @@ editions:
     release_date: '1982-06-20'
 - type: bunkobon
   label: 文庫版
-  publisher: 講談社
+  publisher: 集英社
   imprint: 集英社文庫
+  volumes:
+  - number: 1
+    asin: null
+    isbn13: '9784087482898'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/2898/9784087482898.jpg?_ex=200x200
+    release_date: 1995-03
+- type: bunkobon
+  label: 手塚治虫文庫全集(2010)
+  publisher: 講談社
+  imprint: 手塚治虫文庫全集
   volumes:
   - number: 1
     asin: null
     isbn13: '9784063737806'
     cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/7806/9784063737806.jpg?_ex=300x300
     release_date: '2010-08-12'
+    title_display: 文庫全集BT-80
 publishers:
 - kodansha
+- shueisha
 catch: 絵の才を認められた少年が、学校一の番長と意外な友に。だが招かれた家は地元で名の知れた一家だった。戦争の足音が迫るなか、漫画で結ぶ熱い友情。
 anilist_id: 161007
 synonyms:

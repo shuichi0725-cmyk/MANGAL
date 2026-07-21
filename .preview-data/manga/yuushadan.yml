@@ -3,8 +3,8 @@ slug: yuushadan
 title: 勇者ダン
 title_kana: ユウシャダン
 title_romaji: yuushadan
-year_started: 1979
-year_ended: 1979
+year_started: 1970
+year_ended: 1998
 status: completed
 authors:
 - name: 夏目房之介
@@ -16,7 +16,7 @@ authors:
   kana: テズカオサム
   romaji: tezukaosamu
 original_authors: []
-publisher: kodansha
+publisher: shogakukan
 magazine: null
 demographic: shounen
 genres:
@@ -30,26 +30,47 @@ wikidata_qid: Q193300
 editions:
 - type: standard
   label: 通常版
-  publisher: 講談社
   imprint: ゴールデン・コミックス
   volumes:
   - number: 1
     asin: null
-    isbn13: '9784061086296'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/6296/9784061086296.jpg?_ex=300x300
-    release_date: '1979-02-24'
+    isbn13: null
+    cover_url: null
+    release_date: '1970-03-20'
 - type: bunkobon
   label: 文庫版
-  publisher: 講談社
+  publisher: 小学館
   imprint: 小学館文庫
+  volumes:
+  - number: 1
+    asin: null
+    isbn13: '9784091922632'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/2632/9784091922632.gif?_ex=200x200
+    release_date: 1998-07
+- type: bunkobon
+  label: 手塚治虫文庫全集(2010)
+  publisher: 講談社
+  imprint: 手塚治虫文庫全集
   volumes:
   - number: 1
     asin: null
     isbn13: '9784063737875'
     cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/7875/9784063737875_1_7.jpg?_ex=300x300
     release_date: '2010-10-08'
+    title_display: 文庫全集BT-87
+- type: standard
+  label: 手塚治虫漫画全集(1979)
+  publisher: 講談社
+  imprint: 手塚治虫漫画全集
+  volumes:
+  - number: 1
+    asin: null
+    isbn13: '9784061086296'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/6296/9784061086296.jpg?_ex=300x300
+    release_date: '1979-02-24'
+    title_display: 全集第29巻
 publishers:
-- kodansha
+- shogakukan
 catch: アイヌの血を引く者だけが受け継げる古き秘宝。人食い虎ダンを友に、少年コタンが悪党どもと挑む壮絶な宝探し——血と絆をかけた冒険ドラマ。
 anilist_id: 51476
 synonyms:

@@ -4,7 +4,7 @@ title: 平原太平記
 title_kana: ヘイゲンタイヘイキ
 title_romaji: heigen taiheiki
 year_started: 1977
-year_ended: 1977
+year_ended: 1995
 status: completed
 authors:
 - name: 手塚治虫
@@ -36,15 +36,27 @@ editions:
     release_date: '1977-07-15'
 - type: bunkobon
   label: 文庫版
-  publisher: 講談社
+  publisher: 角川書店
   imprint: 角川文庫
+  volumes:
+  - number: 1
+    asin: null
+    isbn13: '9784041851227'
+    cover_url: null
+    release_date: '1995-02-25'
+- type: bunkobon
+  label: 手塚治虫文庫全集(2010)
+  publisher: 講談社
+  imprint: 手塚治虫文庫全集
   volumes:
   - number: 1
     asin: null
     isbn13: '9784063737974'
     cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/7974/9784063737974_1_7.jpg?_ex=300x300
     release_date: '2010-11-12'
+    title_display: 文庫全集BT-97
 publishers:
+- kadokawa
 - kodansha
 catch: 南北朝の動乱を描いた歴史叙事詩『太平記』に、手塚治虫が独自の解釈で挑む。読切「月世界紳士」を併録した意欲作。
 anilist_id: 124086

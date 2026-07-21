@@ -3,8 +3,8 @@ slug: chiteikoku-no-kaijin
 title: 地底国の怪人
 title_kana: チテイコクノカイジン
 title_romaji: chiteikoku no kaijin
-year_started: 1982
-year_ended: 1982
+year_started: 1975
+year_ended: 1994
 status: completed
 authors:
 - name: 手塚治虫
@@ -12,7 +12,7 @@ authors:
   kana: テズカオサム
   romaji: tezukaosamu
 original_authors: []
-publisher: kodansha
+publisher: kadokawa
 magazine: null
 demographic: shounen
 genres:
@@ -24,25 +24,46 @@ wikidata_qid: Q193300
 editions:
 - type: standard
   label: 通常版
-  publisher: 講談社
   volumes:
   - number: 1
     asin: null
-    isbn13: '9784061732537'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0617/06173253.jpg?_ex=300x300
-    release_date: '1982-09-20'
+    isbn13: null
+    cover_url: null
+    release_date: 1975-09
 - type: bunkobon
   label: 文庫版
-  publisher: 講談社
+  publisher: 角川書店
   imprint: 角川文庫
+  volumes:
+  - number: 1
+    asin: null
+    isbn13: '9784041851159'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/rakutenkobo-ebooks/cabinet/8062/2000002958062.jpg?_ex=300x300
+    release_date: 1994-11
+- type: bunkobon
+  label: 手塚治虫文庫全集(2010)
+  publisher: 講談社
+  imprint: 手塚治虫文庫全集
   volumes:
   - number: 1
     asin: null
     isbn13: '9784063737752'
     cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/7752/9784063737752_1_5.jpg?_ex=300x300
     release_date: '2010-06-11'
+    title_display: 文庫全集BT-75
+- type: standard
+  label: 手塚治虫漫画全集(1982)
+  publisher: 講談社
+  imprint: 手塚治虫漫画全集
+  volumes:
+  - number: 1
+    asin: null
+    isbn13: '9784061732537'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0617/06173253.jpg?_ex=300x300
+    release_date: '1982-09-20'
+    title_display: 全集第253巻
 publishers:
-- kodansha
+- kadokawa
 catch: 言葉を話すウサギが、自らの人間らしさを証明しようとしながら、怒れる人型アリの侵略から地球を救うべく奮闘する。地底を舞台にした冒険SF。
 anilist_id: 52307
 synonyms:

@@ -3,8 +3,8 @@ slug: hyou-tan-komako
 title: ひょうたん駒子
 title_kana: ヒョウタンコマコ
 title_romaji: hyoutan komako
-year_started: 1980
-year_ended: 1980
+year_started: 2008
+year_ended: 2011
 status: completed
 authors:
 - name: 手塚治虫
@@ -12,7 +12,7 @@ authors:
   kana: テズカオサム
   romaji: tezukaosamu
 original_authors: []
-publisher: kodansha
+publisher: poplar
 magazine: null
 demographic: shoujo
 genres:
@@ -23,14 +23,14 @@ wikidata_qid: Q193300
 editions:
 - type: standard
   label: 通常版
-  publisher: 講談社
+  publisher: ポプラ社
   imprint: 手塚治虫傑作選集
   volumes:
   - number: 1
     asin: null
-    isbn13: '9784061086845'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/6845/9784061086845.jpg?_ex=300x300
-    release_date: '1980-02-20'
+    isbn13: '9784591104637'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/4637/9784591104637.jpg?_ex=300x300
+    release_date: 2008-12
 - type: bunkobon
   label: 文庫版
   publisher: 講談社
@@ -41,6 +41,18 @@ editions:
     isbn13: '9784063738360'
     cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/8360/9784063738360_1_5.jpg?_ex=200x200
     release_date: '2011-06-10'
+- type: standard
+  label: 手塚治虫漫画全集(1980)
+  publisher: 講談社
+  imprint: 手塚治虫漫画全集
+  volumes:
+  - number: 1
+    asin: null
+    isbn13: '9784061086845'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/6845/9784061086845.jpg?_ex=300x300
+    release_date: '1980-02-20'
+    title_display: 全集第84巻
 publishers:
 - kodansha
+- poplar
 genres_rakuten: true

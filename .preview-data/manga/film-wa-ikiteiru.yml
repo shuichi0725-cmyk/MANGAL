@@ -3,8 +3,8 @@ slug: film-wa-ikiteiru
 title: フィルムは生きている
 title_kana: フィルムワイキテイル
 title_romaji: firumu wa ikiteiru
-year_started: 1977
-year_ended: 1977
+year_started: 1998
+year_ended: 2014
 status: completed
 authors:
 - name: 手塚治虫
@@ -16,7 +16,7 @@ authors:
   kana: オオバヤシノブヒコ
   romaji: oobayashinobuhiko
 original_authors: []
-publisher: kodansha
+publisher: shogakukan
 magazine: null
 demographic: seinen
 genres:
@@ -27,28 +27,51 @@ alternative_titles:
   en: The Film is Alive
 wikidata_qid: Q193300
 editions:
+- type: bunkobon
+  label: 文庫版
+  publisher: 小学館
+  imprint: 小学館文庫
+  volumes:
+  - number: 1
+    asin: null
+    isbn13: '9784091922656'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/2656/9784091922656_1_5.jpg?_ex=200x200
+    release_date: '1998-11-10'
 - type: standard
   label: 通常版
-  publisher: 講談社
+  publisher: 国書刊行会
   imprint: 手塚治虫漫画選集
   volumes:
   - number: 1
     asin: null
-    isbn13: '9784061086555'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/6555/9784061086555.jpg?_ex=300x300
-    release_date: '1977-08-18'
+    isbn13: '9784336058188'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/8188/9784336058188.jpg?_ex=300x300
+    release_date: '2014-06-25'
 - type: bunkobon
-  label: 文庫版
+  label: 手塚治虫文庫全集(2011)
   publisher: 講談社
-  imprint: 小学館文庫
+  imprint: 手塚治虫文庫全集
   volumes:
   - number: 1
     asin: null
     isbn13: '9784063738209'
     cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/8209/9784063738209_1_5.jpg?_ex=300x300
     release_date: '2011-02-10'
+    title_display: 文庫全集BT-120
+- type: standard
+  label: 手塚治虫漫画全集(1977)
+  publisher: 講談社
+  imprint: 手塚治虫漫画全集
+  volumes:
+  - number: 1
+    asin: null
+    isbn13: '9784061086555'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/6555/9784061086555.jpg?_ex=300x300
+    release_date: '1977-08-18'
+    title_display: 全集第55巻
 publishers:
-- kodansha
+- kokushokankoukai
+- shogakukan
 catch: 漫画映画を志して上京した若者は、ベテランに「動きに生命力が足りない」と一蹴される。同じ夢を抱くライバルとの出会いが描く、アニメ制作青春譚。
 anilist_id: 52206
 synonyms:

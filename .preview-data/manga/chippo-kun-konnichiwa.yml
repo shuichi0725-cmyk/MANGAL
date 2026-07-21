@@ -3,8 +3,8 @@ slug: chippo-kun-konnichiwa
 title: チッポくんこんにちは
 title_kana: チッポクンコンニチワ
 title_romaji: chippo kun konnichiwa
-year_started: 1993
-year_ended: 1993
+year_started: 2016
+year_ended: 2016
 status: completed
 authors:
 - name: 手塚治虫
@@ -12,7 +12,7 @@ authors:
   kana: テズカオサム
   romaji: tezukaosamu
 original_authors: []
-publisher: kodansha
+publisher: kokushokankoukai
 magazine: null
 demographic: kodomo
 genres:
@@ -25,14 +25,25 @@ wikidata_qid: Q193300
 editions:
 - type: standard
   label: 通常版
-  publisher: 講談社
+  publisher: 国書刊行会
   imprint: 学研カラー絵ばなし
+  volumes:
+  - number: 1
+    asin: null
+    isbn13: '9784336060792'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0792/9784336060792.jpg?_ex=300x300
+    release_date: 2016-12
+- type: standard
+  label: 手塚治虫漫画全集(1993)
+  publisher: 講談社
+  imprint: 手塚治虫漫画全集
   volumes:
   - number: 1
     asin: null
     isbn13: '9784061759176'
     cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/9176/9784061759176.jpg?_ex=300x300
     release_date: '1993-10-16'
+    title_display: 全集第317巻
 publishers:
-- kodansha
+- kokushokankoukai
 genres_provisional: true

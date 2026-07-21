@@ -3,8 +3,8 @@ slug: i-l
 title: I.L
 title_kana: アイエル
 title_romaji: aieru
-year_started: 1982
-year_ended: 1982
+year_started: 1994
+year_ended: 1996
 status: completed
 authors:
 - name: 手塚治虫
@@ -16,7 +16,7 @@ authors:
   kana: オオバヤシノブヒコ
   romaji: oobayashinobuhiko
 original_authors: []
-publisher: kodansha
+publisher: shogakukan
 magazine: null
 demographic: seinen
 genres:
@@ -30,19 +30,14 @@ wikidata_qid: Q193300
 editions:
 - type: standard
   label: 通常版
-  publisher: 講談社
+  publisher: 小学館
   imprint: 名作COMコミックス
   volumes:
   - number: 1
     asin: null
-    isbn13: '9784061732629'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/2629/9784061732629.jpg?_ex=300x300
-    release_date: '1982-09-20'
-  - number: 2
-    asin: null
-    isbn13: '9784061732636'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0617/06173263.jpg?_ex=200x200
-    release_date: '1982-10-20'
+    isbn13: '9784091973542'
+    cover_url: null
+    release_date: 1994-10
 - type: bunkobon
   label: 文庫版
   publisher: 小学館
@@ -53,8 +48,35 @@ editions:
     isbn13: '9784091920591'
     cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0591/9784091920591.gif?_ex=200x200
     release_date: 1996-11
+- type: bunkobon
+  label: 手塚治虫文庫全集(2012)
+  publisher: 講談社
+  imprint: 手塚治虫文庫全集
+  volumes:
+  - number: 1
+    asin: null
+    isbn13: '9784063738933'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/8933/9784063738933.jpg?_ex=300x300
+    release_date: 2012-03
+    title_display: 文庫全集BT-193
+- type: standard
+  label: 手塚治虫漫画全集(1982)
+  publisher: 講談社
+  imprint: 手塚治虫漫画全集
+  volumes:
+  - number: 1
+    asin: null
+    isbn13: '9784061732629'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/2629/9784061732629.jpg?_ex=300x300
+    release_date: '1982-09-20'
+    title_display: 第1巻(全集262)
+  - number: 2
+    asin: null
+    isbn13: '9784061732636'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0617/06173263.jpg?_ex=300x300
+    release_date: '1982-10-20'
+    title_display: 第2巻(全集263)
 publishers:
-- kodansha
 - shogakukan
 catch: 空想が見向きもされなくなった世で、行き場を失った映画監督。奇妙な一団と、変身する力を秘めた謎のマネキンとの出会いが、彼の人生を根こそぎ塗り替えていく。
 anilist_id: 48167

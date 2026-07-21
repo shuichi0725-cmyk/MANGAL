@@ -3,7 +3,7 @@ slug: big-x
 title: ビッグX
 title_kana: ビッグX
 title_romaji: biggu
-year_started: 1981
+year_started: 1972
 year_ended: 2023
 status: completed
 authors:
@@ -12,7 +12,7 @@ authors:
   kana: テズカオサム
   romaji: tezukaosamu
 original_authors: []
-publisher: kodansha
+publisher: fukkan-com
 magazine: null
 demographic: shounen
 genres:
@@ -26,29 +26,29 @@ wikidata_qid: Q193300
 editions:
 - type: standard
   label: 通常版
-  publisher: 講談社
+  publisher: 復刊ドットコム
   imprint: SUNDAY COMICS
   volumes:
   - number: 1
     asin: null
-    isbn13: '9784061732438'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0617/06173243.jpg?_ex=300x300
-    release_date: '1981-07-20'
+    isbn13: '9784835458885'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/8885/9784835458885_1_2.jpg?_ex=300x300
+    release_date: 2023-03
   - number: 2
     asin: null
-    isbn13: '9784061732445'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0617/06173244.jpg?_ex=300x300
-    release_date: '1981-08-20'
+    isbn13: '9784835458892'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/8892/9784835458892_1_3.jpg?_ex=300x300
+    release_date: 2023-05
   - number: 3
     asin: null
-    isbn13: '9784061732452'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/2452/9784061732452.jpg?_ex=300x300
-    release_date: '1981-09-20'
+    isbn13: '9784253062893'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/2893/9784253062893.jpg?_ex=200x200
+    release_date: '1972-11-15'
   - number: 4
     asin: null
-    isbn13: '9784061732469'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0617/06173246.jpg?_ex=300x300
-    release_date: '1981-10-20'
+    isbn13: '9784253062909'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/2909/9784253062909.jpg?_ex=200x200
+    release_date: '1972-11-30'
   - number: 5
     asin: null
     isbn13: '9784835458922'
@@ -56,26 +56,73 @@ editions:
     release_date: '2023-11-20'
 - type: bunkobon
   label: 文庫版
-  publisher: 講談社
+  publisher: 秋田書店
   imprint: 秋田文庫
+  volumes:
+  - number: 1
+    asin: null
+    isbn13: '9784253179393'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/2531/25317939.jpg?_ex=200x200
+    release_date: 2004-11
+  - number: 2
+    asin: null
+    isbn13: '9784253179409'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/2531/25317940.jpg?_ex=200x200
+    release_date: 2005-02
+  - number: 3
+    asin: null
+    isbn13: '9784253179416'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/2531/25317941.jpg?_ex=200x200
+    release_date: '2005-05-10'
+- type: bunkobon
+  label: 手塚治虫文庫全集(2011)
+  publisher: 講談社
+  imprint: 手塚治虫文庫全集
   volumes:
   - number: 1
     asin: null
     isbn13: '9784063738049'
     cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/8049/9784063738049_1_3.jpg?_ex=300x300
     release_date: '2011-01-12'
+    title_display: 第1巻(BT-104)
   - number: 2
     asin: null
     isbn13: '9784063738056'
     cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/8056/9784063738056.jpg?_ex=300x300
     release_date: '2011-01-12'
+    title_display: 第2巻(BT-105)
+- type: standard
+  label: 手塚治虫漫画全集(1981)
+  publisher: 講談社
+  imprint: 手塚治虫漫画全集
+  volumes:
+  - number: 1
+    asin: null
+    isbn13: '9784061732438'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0617/06173243.jpg?_ex=300x300
+    release_date: '1981-07-20'
+    title_display: 第1巻(全集243)
+  - number: 2
+    asin: null
+    isbn13: '9784061732445'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0617/06173244.jpg?_ex=300x300
+    release_date: '1981-08-20'
+    title_display: 第2巻(全集244)
   - number: 3
     asin: null
-    isbn13: '9784253179416'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/2531/25317941.jpg?_ex=200x200
-    release_date: '2005-05-10'
+    isbn13: '9784061732452'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/2452/9784061732452.jpg?_ex=300x300
+    release_date: '1981-09-20'
+    title_display: 第3巻(全集245)
+  - number: 4
+    asin: null
+    isbn13: '9784061732469'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0617/06173246.jpg?_ex=300x300
+    release_date: '1981-10-20'
+    title_display: 第4巻(全集246)
 publishers:
-- kodansha
+- akita
+- fukkan-com
 catch: ナチスの秘密兵器ビッグX。完成を恐れた博士が息子の体に埋め込んだ秘密のカードが、20年後に発見される——時を超えて受け継がれるSFヒーローアクション。
 anilist_id: 52196
 synonyms:

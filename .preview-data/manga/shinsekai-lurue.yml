@@ -4,7 +4,7 @@ title: 新世界ルルー
 title_kana: シンセカイルルー
 title_romaji: shinsekai ruru
 year_started: 1980
-year_ended: 1980
+year_ended: 1995
 status: completed
 authors:
 - name: 手塚治虫
@@ -39,15 +39,27 @@ editions:
     release_date: '1980-06-20'
 - type: bunkobon
   label: 文庫版
-  publisher: 講談社
+  publisher: 角川書店
   imprint: 角川文庫
+  volumes:
+  - number: 1
+    asin: null
+    isbn13: '9784041851210'
+    cover_url: null
+    release_date: '1995-02-25'
+- type: bunkobon
+  label: 手塚治虫文庫全集(2011)
+  publisher: 講談社
+  imprint: 手塚治虫文庫全集
   volumes:
   - number: 1
     asin: null
     isbn13: '9784063738544'
     cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/8544/9784063738544_1_3.jpg?_ex=300x300
     release_date: '2011-09-09'
+    title_display: 文庫全集BT-154
 publishers:
+- kadokawa
 - kodansha
 anilist_id: 124088
 synonyms:

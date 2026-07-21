@@ -4,7 +4,7 @@ title: ぼくの孫悟空
 title_kana: ボクノソンゴクウ
 title_romaji: boku no songokuu
 year_started: 1977
-year_ended: 1980
+year_ended: 2001
 status: completed
 authors:
 - name: 手塚治虫
@@ -68,30 +68,54 @@ editions:
     release_date: '1980-07-20'
 - type: bunkobon
   label: 文庫版
-  publisher: 講談社
+  publisher: 秋田書店
   imprint: 冒険漫画文庫
+  volumes:
+  - number: 1
+    asin: null
+    isbn13: '9784253176170'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/6170/9784253176170.jpg?_ex=200x200
+    release_date: '2001-04-10'
+  - number: 2
+    asin: null
+    isbn13: '9784253176187'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/6187/9784253176187.jpg?_ex=200x200
+    release_date: 2001-06
+  - number: 3
+    asin: null
+    isbn13: '9784253176194'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/6194/9784253176194.jpg?_ex=300x300
+    release_date: 2001-08
+  - number: 4
+    asin: null
+    isbn13: '9784253176200'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/6200/9784253176200.jpg?_ex=200x200
+    release_date: '2001-10-10'
+- type: bunkobon
+  label: 手塚治虫文庫全集(2010–2011)
+  publisher: 講談社
+  imprint: 手塚治虫文庫全集
   volumes:
   - number: 1
     asin: null
     isbn13: '9784063737905'
     cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/7905/9784063737905_1_3.jpg?_ex=300x300
     release_date: '2010-11-12'
+    title_display: 第1巻(BT-90)
   - number: 2
     asin: null
     isbn13: '9784063737912'
     cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/7912/9784063737912_1_3.jpg?_ex=300x300
     release_date: '2010-12-10'
+    title_display: 第2巻(BT-91)
   - number: 3
     asin: null
     isbn13: '9784063737929'
     cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/7929/9784063737929_1_3.jpg?_ex=300x300
     release_date: '2011-01-12'
-  - number: 4
-    asin: null
-    isbn13: '9784253176200'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/6200/9784253176200.jpg?_ex=200x200
-    release_date: '2001-10-10'
+    title_display: 第3巻(BT-92)
 publishers:
+- akita
 - kodansha
 catch: 妖術を会得した金髪の猿・孫悟空が、天竺を目指す僧とともに旅立つ。古代中国を舞台に巨匠が描く、笑いと冒険に満ちた西遊ファンタジー。
 anilist_id: 49507

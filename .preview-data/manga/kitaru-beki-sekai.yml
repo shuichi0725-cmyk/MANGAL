@@ -4,7 +4,7 @@ title: 来るべき世界
 title_kana: キタルベキセカイ
 title_romaji: kitaru beki sekai
 year_started: 1977
-year_ended: 1978
+year_ended: 1995
 status: completed
 authors:
 - name: 手塚治虫
@@ -43,15 +43,27 @@ editions:
     release_date: '1978-03-15'
 - type: bunkobon
   label: 文庫版
-  publisher: 講談社
+  publisher: 角川書店
   imprint: 角川文庫
+  volumes:
+  - number: 1
+    asin: null
+    isbn13: '9784041851173'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/rakutenkobo-ebooks/cabinet/4566/2000002954566.jpg?_ex=300x300
+    release_date: '1995-01-25'
+- type: bunkobon
+  label: 手塚治虫文庫全集(2010)
+  publisher: 講談社
+  imprint: 手塚治虫文庫全集
   volumes:
   - number: 1
     asin: null
     isbn13: '9784063737424'
     cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/7424/9784063737424_1_3.jpg?_ex=300x300
     release_date: '2010-02-10'
+    title_display: 文庫全集BT-42
 publishers:
+- kadokawa
 - kodansha
 catch: 核実験が生んだ、超常の力を持つ変異動物たち。それは世界を第三次大戦の淵へと引きずり込む火種となる——巨匠が描く文明への警鐘SF。
 anilist_id: 31688

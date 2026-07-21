@@ -3,8 +3,8 @@ slug: fushigina-shounen-tezuka-1978
 title: ふしぎな少年
 title_kana: フシギナショウネン
 title_romaji: fushigina shounen
-year_started: 1978
-year_ended: 1979
+year_started: 1969
+year_ended: 2018
 status: completed
 authors:
 - name: 手塚治虫
@@ -16,7 +16,7 @@ authors:
   kana: ツジマサキ
   romaji: tsujimasaki
 original_authors: []
-publisher: kodansha
+publisher: shogakukan
 magazine: null
 demographic: shounen
 genres:
@@ -30,31 +30,59 @@ wikidata_qid: Q193300
 editions:
 - type: standard
   label: 通常版
-  publisher: 講談社
+  publisher: 小学館
   imprint: ゴールデン・コミックス
   volumes:
   - number: 1
     asin: null
-    isbn13: '9784061086562'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0610/06108656.jpg?_ex=300x300
-    release_date: '1978-08-30'
+    isbn13: '9784778033149'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/3149/9784778033149_1_5.jpg?_ex=300x300
+    release_date: 2018-02
   - number: 2
     asin: null
-    isbn13: '9784061086579'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0610/06108657.jpg?_ex=300x300
-    release_date: '1979-04-30'
+    isbn13: null
+    cover_url: null
+    release_date: '1969-08-10'
 - type: bunkobon
   label: 文庫版
-  publisher: 講談社
+  publisher: 小学館
   imprint: 小学館文庫
+  volumes:
+  - number: 1
+    asin: null
+    isbn13: '9784091922649'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/2649/9784091922649.gif?_ex=200x200
+    release_date: '1998-09-10'
+- type: bunkobon
+  label: 手塚治虫文庫全集(2010)
+  publisher: 講談社
+  imprint: 手塚治虫文庫全集
   volumes:
   - number: 1
     asin: null
     isbn13: '9784063737899'
     cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/7899/9784063737899_1_3.jpg?_ex=300x300
     release_date: '2010-10-08'
+    title_display: 文庫全集BT-89
+- type: standard
+  label: 手塚治虫漫画全集(1978–1979)
+  publisher: 講談社
+  imprint: 手塚治虫漫画全集
+  volumes:
+  - number: 1
+    asin: null
+    isbn13: '9784061086562'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0610/06108656.jpg?_ex=300x300
+    release_date: '1978-08-30'
+    title_display: 第1巻(全集56)
+  - number: 2
+    asin: null
+    isbn13: '9784061086579'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0610/06108657.jpg?_ex=300x300
+    release_date: '1979-04-30'
+    title_display: 第2巻(全集57)
 publishers:
-- kodansha
+- shogakukan
 catch: 地下道で四次元世界に迷い込んだ平凡な少年が授かったのは、時間を止める力。「時間よ止まれ!」の一言で世界が静止する——巨匠が描くSF活劇。
 anilist_id: 146563
 synonyms:

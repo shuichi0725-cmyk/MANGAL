@@ -99,6 +99,23 @@ editions:
     isbn13: null
     cover_url: null
     release_date: 1976-07
+- type: bunkobon
+  label: 手塚治虫文庫全集(2009)
+  publisher: 講談社
+  imprint: 手塚治虫文庫全集
+  volumes:
+  - number: 1
+    asin: null
+    isbn13: '9784063737257'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/7257/9784063737257_1_7.jpg?_ex=300x300
+    release_date: 2009-12
+    title_display: 第1巻(BT-25)
+  - number: 2
+    asin: null
+    isbn13: '9784063737264'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/7264/9784063737264_1_7.jpg?_ex=300x300
+    release_date: 2009-12
+    title_display: 第2巻(BT-26)
 publishers:
 - kadokawa
 genres_provisional: true

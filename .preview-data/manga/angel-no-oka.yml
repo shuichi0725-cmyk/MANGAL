@@ -3,8 +3,8 @@ slug: angel-no-oka
 title: エンゼルの丘
 title_kana: エンゼルノオカ
 title_romaji: enzeru no oka
-year_started: 1961
-year_ended: 1963
+year_started: 1960
+year_ended: 1999
 status: completed
 authors:
 - name: 手塚治虫
@@ -26,19 +26,18 @@ wikidata_qid: Q193300
 editions:
 - type: standard
   label: 通常版
-  publisher: 講談社
   imprint: 手塚治虫漫画選集
   volumes:
   - number: 1
     asin: null
-    isbn13: '9784061086753'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/6753/9784061086753.jpg?_ex=300x300
-    release_date: '1978-03-15'
+    isbn13: null
+    cover_url: null
+    release_date: '1960-11-20'
   - number: 2
     asin: null
-    isbn13: '9784061086760'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/6760/9784061086760.jpg?_ex=300x300
-    release_date: '1978-04-20'
+    isbn13: null
+    cover_url: null
+    release_date: '1960-12-20'
   - number: 3
     asin: null
     isbn13: null
@@ -59,6 +58,34 @@ editions:
     isbn13: '9784062606691'
     cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0626/06260669.jpg?_ex=200x200
     release_date: 1999-12
+- type: bunkobon
+  label: 手塚治虫文庫全集(2011)
+  publisher: 講談社
+  imprint: 手塚治虫文庫全集
+  volumes:
+  - number: 1
+    asin: null
+    isbn13: '9784063738261'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/8261/9784063738261_1_3.jpg?_ex=300x300
+    release_date: 2011-04
+    title_display: 文庫全集BT-126
+- type: standard
+  label: 手塚治虫漫画全集(1978)
+  publisher: 講談社
+  imprint: 手塚治虫漫画全集
+  volumes:
+  - number: 1
+    asin: null
+    isbn13: '9784061086753'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/6753/9784061086753.jpg?_ex=300x300
+    release_date: '1978-03-15'
+    title_display: 第1巻(全集75)
+  - number: 2
+    asin: null
+    isbn13: '9784061086760'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/6760/9784061086760.jpg?_ex=300x300
+    release_date: '1978-04-20'
+    title_display: 第2巻(全集76)
 publishers:
 - kodansha
 genres_provisional: true

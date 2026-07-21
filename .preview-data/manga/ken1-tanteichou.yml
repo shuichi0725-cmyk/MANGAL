@@ -4,7 +4,7 @@ title: ケン1探偵長
 title_kana: ケン1タンテイチョウ
 title_romaji: ken tanteichou
 year_started: 1980
-year_ended: 1980
+year_ended: 2000
 status: completed
 authors:
 - name: 手塚治虫
@@ -44,16 +44,28 @@ editions:
     release_date: '1980-06-20'
 - type: bunkobon
   label: 文庫版
-  publisher: 講談社
+  publisher: 小学館
   imprint: 小学館文庫
+  volumes:
+  - number: 1
+    asin: null
+    isbn13: '9784091923943'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/3943/9784091923943.gif?_ex=200x200
+    release_date: 2000-01
+- type: bunkobon
+  label: 手塚治虫文庫全集(2011)
+  publisher: 講談社
+  imprint: 手塚治虫文庫全集
   volumes:
   - number: 1
     asin: null
     isbn13: '9784063738193'
     cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/8193/9784063738193_1_7.jpg?_ex=300x300
     release_date: '2011-02-10'
+    title_display: 文庫全集BT-119
 publishers:
 - kodansha
+- shogakukan
 catch: 全国26支部を率いる少年探偵長ケン一と、声を完璧に真似る相棒の九官鳥。難解なトリックを次々と暴く、痛快無比の本格少年探偵活劇。
 anilist_id: 52253
 synonyms:

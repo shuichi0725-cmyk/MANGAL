@@ -4,7 +4,7 @@ title: アラバスター
 title_kana: アラバスター
 title_romaji: arabasuta
 year_started: 1978
-year_ended: 1981
+year_ended: 1995
 status: completed
 authors:
 - name: 手塚治虫
@@ -47,20 +47,33 @@ editions:
     release_date: 1981-07
 - type: bunkobon
   label: 文庫版
-  publisher: 講談社
+  publisher: 秋田書店
   imprint: 秋田文庫
+  volumes:
+  - number: 1
+    asin: null
+    isbn13: '9784253171502'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/1502/9784253171502.jpg?_ex=200x200
+    release_date: 1995-10
+  - number: 2
+    asin: null
+    isbn13: '9784253171519'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/1519/9784253171519.jpg?_ex=200x200
+    release_date: '1995-10-10'
+- type: bunkobon
+  label: 手塚治虫文庫全集(2010)
+  publisher: 講談社
+  imprint: 手塚治虫文庫全集
   volumes:
   - number: 1
     asin: null
     isbn13: '9784063737882'
     cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/7882/9784063737882.jpg?_ex=300x300
     release_date: '2010-10-08'
-  - number: 2
-    asin: null
-    isbn13: '9784253171519'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/1519/9784253171519.jpg?_ex=200x200
-    release_date: '1995-10-10'
+    title_display: 文庫全集BT-88
+    description: オリンピックの英雄ジェームズは、自分を裏切った女への復讐のため、怪人アラバスターへと姿を変えた。虚飾に満ちた社会へ戦いを挑む、SFクライムサスペンス。人間の心の闇に踏み込んでいく。
 publishers:
+- akita
 - kodansha
 catch: 名アスリートから犯罪者へ堕ちた男が、獄中で出会った狂気の科学者。手に入れたのは生物を透明にする力。歪んだ復讐の引き金が引かれるアクションSF。
 anilist_id: 52194

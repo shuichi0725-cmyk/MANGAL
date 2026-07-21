@@ -3,8 +3,8 @@ slug: ningendomo-atsumare
 title: 人間ども集まれ!
 title_kana: ニンゲンドモアツマレ
 title_romaji: ningendomo atsumare
-year_started: 1978
-year_ended: 2010
+year_started: 1995
+year_ended: 1995
 status: completed
 authors:
 - name: 手塚治虫
@@ -12,7 +12,7 @@ authors:
   kana: テズカオサム
   romaji: tezukaosamu
 original_authors: []
-publisher: kodansha
+publisher: jitsugyo-no-nihon
 magazine: null
 demographic: seinen
 genres:
@@ -23,29 +23,6 @@ synopsis: 気弱で従順、しかし操られやすい小男・天下泰平。�
 anime_adapted: false
 wikidata_qid: Q193300
 editions:
-- type: standard
-  label: 通常版
-  publisher: 講談社
-  volumes:
-  - number: 1
-    asin: null
-    isbn13: '9784061086814'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0610/06108681.jpg?_ex=300x300
-    release_date: 1978-04
-  - number: 2
-    asin: null
-    isbn13: '9784061086821'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0610/06108682.jpg?_ex=200x200
-    release_date: 1978-05
-- type: bunkobon
-  label: 講談社漫画文庫
-  publisher: 講談社
-  volumes:
-  - number: 1
-    asin: null
-    isbn13: '9784063737486'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/7486/9784063737486_1_5.jpg?_ex=300x300
-    release_date: '2010-03-12'
 - type: bunkobon
   label: 文春文庫
   publisher: 文芸春秋
@@ -62,8 +39,37 @@ editions:
     isbn13: '9784168110368'
     cover_url: null
     release_date: 1995-02
+- type: bunkobon
+  label: 手塚治虫文庫全集(2010)
+  publisher: 講談社
+  imprint: 手塚治虫文庫全集
+  volumes:
+  - number: 1
+    asin: null
+    isbn13: '9784063737486'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/7486/9784063737486_1_5.jpg?_ex=300x300
+    release_date: '2010-03-12'
+    title_display: 文庫全集BT-48
+- type: standard
+  label: 手塚治虫漫画全集(1978)
+  publisher: 講談社
+  imprint: 手塚治虫漫画全集
+  volumes:
+  - number: 1
+    asin: null
+    isbn13: '9784061086814'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0610/06108681.jpg?_ex=300x300
+    release_date: '1978-04-20'
+    title_display: 第1巻(全集81)
+  - number: 2
+    asin: null
+    isbn13: '9784061086821'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0610/06108682.jpg?_ex=300x300
+    release_date: '1978-05-25'
+    title_display: 第2巻(全集82)
 publishers:
-- kodansha
+- bungei-shunju
+- jitsugyo-no-nihon
 catch: 男でも女でもない、第三の人類が試験管で生まれる世界。気弱な小男が引き起こす奇想天外な事態を描く、風刺の効いたSFコメディ。
 anilist_id: 116387
 synonyms:

@@ -3,8 +3,8 @@ slug: chikyuu-no-akuma
 title: 地球の悪魔
 title_kana: チキュウノアクマ
 title_romaji: chikyuu no akuma
-year_started: 1977
-year_ended: 1977
+year_started: 1951
+year_ended: 1995
 status: completed
 authors:
 - name: 手塚治虫
@@ -15,7 +15,7 @@ original_authors: []
 credits:
 - name: 安西水丸
   role: 解説
-publisher: kodansha
+publisher: kadokawa
 magazine: null
 demographic: shounen
 genres:
@@ -27,26 +27,47 @@ wikidata_qid: Q193300
 editions:
 - type: standard
   label: 通常版
-  publisher: 講談社
   imprint: 漫画選書
   volumes:
   - number: 1
     asin: null
-    isbn13: '9784061086098'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/6098/9784061086098.jpg?_ex=300x300
-    release_date: '1977-06-15'
+    isbn13: null
+    cover_url: null
+    release_date: 1951-12
 - type: bunkobon
   label: 文庫版
-  publisher: 講談社
+  publisher: 角川書店
   imprint: 角川文庫
+  volumes:
+  - number: 1
+    asin: null
+    isbn13: '9784041851180'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/rakutenkobo-ebooks/cabinet/4528/2000002954528.jpg?_ex=300x300
+    release_date: '1995-01-25'
+- type: bunkobon
+  label: 手塚治虫文庫全集(2010)
+  publisher: 講談社
+  imprint: 手塚治虫文庫全集
   volumes:
   - number: 1
     asin: null
     isbn13: '9784063737479'
     cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/7479/9784063737479_1_9.jpg?_ex=300x300
     release_date: '2010-03-12'
+    title_display: 文庫全集BT-47
+- type: standard
+  label: 手塚治虫漫画全集(1977)
+  publisher: 講談社
+  imprint: 手塚治虫漫画全集
+  volumes:
+  - number: 1
+    asin: null
+    isbn13: '9784061086098'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/6098/9784061086098.jpg?_ex=300x300
+    release_date: '1977-06-15'
+    title_display: 全集第9巻
 publishers:
-- kodansha
+- kadokawa
 catch: 平和な小さな村に、ある日突然押し寄せた建設トラックの一団。少年がひき逃げで命を落とすと、村人たちの驚きはやがて激しい抵抗へ変わっていく。緊迫のSFミステリー。
 anilist_id: 52201
 synonyms:

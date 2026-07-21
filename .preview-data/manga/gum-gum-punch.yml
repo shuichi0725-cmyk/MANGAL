@@ -4,7 +4,7 @@ title: ガムガムパンチ
 title_kana: ガムガムパンチ
 title_romaji: gamu gamu panchi
 year_started: 1994
-year_ended: 1994
+year_ended: 2002
 status: completed
 authors:
 - name: 手塚治虫
@@ -40,14 +40,14 @@ editions:
     release_date: 1994-05
 - type: bunkobon
   label: 文庫版
-  publisher: 講談社
+  publisher: 秋田書店
   imprint: 秋田文庫
   volumes:
   - number: 1
     asin: null
-    isbn13: '9784063737790'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/7790/9784063737790_1_5.jpg?_ex=300x300
-    release_date: '2010-08-12'
+    isbn13: '9784253175838'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/5838/9784253175838.jpg?_ex=200x200
+    release_date: 2002-08
 - type: standard
   label: 手塚治虫漫画全集(1984)
   publisher: 講談社
@@ -57,8 +57,19 @@ editions:
     asin: null
     isbn13: '9784061732131'
     cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0617/06173213.jpg?_ex=300x300
-    release_date: 1984-01
+    release_date: '1984-01-20'
     title_display: 全集第213巻
+- type: bunkobon
+  label: 手塚治虫文庫全集(2010)
+  publisher: 講談社
+  imprint: 手塚治虫文庫全集
+  volumes:
+  - number: 1
+    asin: null
+    isbn13: '9784063737790'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/7790/9784063737790_1_5.jpg?_ex=300x300
+    release_date: '2010-08-12'
+    title_display: 文庫全集BT-79
 publishers:
-- kodansha
+- akita
 - shogakukan

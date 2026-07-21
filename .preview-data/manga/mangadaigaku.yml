@@ -15,7 +15,7 @@ original_authors: []
 credits:
 - name: 水野英子
   role: 解説
-publisher: kodansha
+publisher: kadokawa
 magazine: null
 demographic: shounen
 genres:
@@ -28,27 +28,34 @@ editions:
   label: 通常版
   publisher: 講談社
   imprint: 漫画選書
+  volumes: []
+  versions:
+  - label: 1977年版
+    volumes: []
+  - label: 2009年版
+    volumes: []
+- type: bunkobon
+  label: 手塚治虫文庫全集(2009)
+  publisher: 講談社
+  imprint: 手塚治虫文庫全集
+  volumes:
+  - number: 1
+    asin: null
+    isbn13: '9784063737196'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/7196/9784063737196_1_7.jpg?_ex=300x300
+    release_date: '2009-11-11'
+    title_display: 文庫全集BT-19
+- type: standard
+  label: 手塚治虫漫画全集(1977)
+  publisher: 講談社
+  imprint: 手塚治虫漫画全集
   volumes:
   - number: 1
     asin: null
     isbn13: '9784061086395'
     cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0610/06108639.jpg?_ex=300x300
-    release_date: 1977-11
-  versions:
-  - label: 1977年版
-    volumes:
-    - number: 1
-      asin: null
-      isbn13: '9784061086395'
-      cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0610/06108639.jpg?_ex=300x300
-      release_date: 1977-11
-  - label: 2009年版
-    volumes:
-    - number: 1
-      asin: null
-      isbn13: '9784063737196'
-      cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/7196/9784063737196_1_7.jpg?_ex=300x300
-      release_date: '2009-11-11'
+    release_date: '1977-11-20'
+    title_display: 全集第39巻
 publishers:
-- kodansha
+- kadokawa
 genres_provisional: true

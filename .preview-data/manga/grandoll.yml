@@ -3,8 +3,8 @@ slug: grandoll
 title: グランドール
 title_kana: グランドール
 title_romaji: gurandoru
-year_started: 1978
-year_ended: 1978
+year_started: 1970
+year_ended: 1995
 status: completed
 authors:
 - name: 手塚治虫
@@ -16,7 +16,7 @@ authors:
   kana: テズカマコト
   romaji: tezukamakoto
 original_authors: []
-publisher: kodansha
+publisher: shueisha
 magazine: null
 demographic: seinen
 genres:
@@ -29,14 +29,13 @@ wikidata_qid: Q193300
 editions:
 - type: standard
   label: 通常版
-  publisher: 講談社
   imprint: ゴールデン・コミックス
   volumes:
   - number: 1
     asin: null
-    isbn13: '9784061086777'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0610/06108677.jpg?_ex=300x300
-    release_date: '1978-07-25'
+    isbn13: null
+    cover_url: null
+    release_date: '1970-04-25'
 - type: bunkobon
   label: 文庫版
   publisher: 集英社
@@ -47,8 +46,18 @@ editions:
     isbn13: '9784087483055'
     cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/3055/9784087483055_1_2.jpg?_ex=200x200
     release_date: 1995-07
+- type: standard
+  label: 手塚治虫漫画全集(1978)
+  publisher: 講談社
+  imprint: 手塚治虫漫画全集
+  volumes:
+  - number: 1
+    asin: null
+    isbn13: '9784061086777'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0610/06108677.jpg?_ex=300x300
+    release_date: '1978-07-25'
+    title_display: 全集第77巻
 publishers:
-- kodansha
 - shueisha
 catch: 人間に化ける人形を送り込み地球侵略を企てる宇宙人。平凡な中学生が拾った奇妙な人形が、彼の運命を一変させるSFアクション。
 anilist_id: 52210

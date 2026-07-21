@@ -1,7 +1,7 @@
 # ★版付加 seed(2026-07-21 新設): 既存版に触れず版を末尾追加(promote apply_extra_editions)。
-# 手塚治虫漫画全集の可視化(35作品)。部分欠け9作は volume-exclude で既存タブから全集ISBNを
-# 排除し、ここで全巻を全集タブへ集約(2026-07-21 三つ目がとおる混在のユーザ指摘)。
-# 日付=種2(日単位)>楽天>NDL。キーはSRC stem(slug-override頁対応)。ISBN重複巻はpromoteが自動skip。
+# 手塚治虫漫画全集(400巻)+手塚治虫文庫全集(200巻BT)の可視化。混在作品は volume-exclude で
+# 既存タブから排除しここへ集約(三つ目がとおる型)。日付=種2(日単位)>楽天>NDL。
+# キーはSRC stem(slug-override頁対応)。ISBN重複巻はpromoteが自動skip。
 extra:
   0man:
   - imprint: 手塚治虫漫画全集
@@ -25,6 +25,99 @@ extra:
       number: 4
       release_date: '1978-06-25'
       title_display: 第4巻(全集24)
+  - imprint: 手塚治虫文庫全集
+    label: 手塚治虫文庫全集(2011)
+    publisher: 講談社
+    type: bunkobon
+    volumes:
+    - isbn13: '9784063738735'
+      number: 1
+      release_date: 2011-11
+      title_display: 第1巻(BT-173)
+    - isbn13: '9784063738742'
+      number: 2
+      release_date: 2011-12
+      title_display: 第2巻(BT-174)
+  alabaster:
+  - imprint: 手塚治虫文庫全集
+    label: 手塚治虫文庫全集(2010)
+    publisher: 講談社
+    type: bunkobon
+    volumes:
+    - isbn13: '9784063737882'
+      number: 1
+      release_date: 2010-10
+      title_display: 文庫全集BT-88
+  angel-no-oka:
+  - imprint: 手塚治虫文庫全集
+    label: 手塚治虫文庫全集(2011)
+    publisher: 講談社
+    type: bunkobon
+    volumes:
+    - isbn13: '9784063738261'
+      number: 1
+      release_date: 2011-04
+      title_display: 文庫全集BT-126
+  - imprint: 手塚治虫漫画全集
+    label: 手塚治虫漫画全集(1978)
+    publisher: 講談社
+    type: standard
+    volumes:
+    - isbn13: '9784061086753'
+      number: 1
+      release_date: '1978-03-15'
+      title_display: 第1巻(全集75)
+    - isbn13: '9784061086760'
+      number: 2
+      release_date: '1978-04-20'
+      title_display: 第2巻(全集76)
+  apollo-no-uta:
+  - imprint: 手塚治虫文庫全集
+    label: 手塚治虫文庫全集(2010)
+    publisher: 講談社
+    type: bunkobon
+    volumes:
+    - isbn13: '9784063737967'
+      number: 1
+      release_date: 2010-11
+      title_display: 文庫全集BT-96
+  - imprint: 手塚治虫漫画全集
+    label: 手塚治虫漫画全集(1977)
+    publisher: 講談社
+    type: standard
+    volumes:
+    - isbn13: '9784061086357'
+      number: 1
+      release_date: '1977-08-18'
+      title_display: 第1巻(全集35)
+    - isbn13: '9784061086364'
+      number: 2
+      release_date: 1977-10
+      title_display: 第2巻(全集36)
+    - isbn13: '9784061086371'
+      number: 3
+      release_date: 1977-11
+      title_display: 第3巻(全集37)
+  atom-cat:
+  - imprint: 手塚治虫文庫全集
+    label: 手塚治虫文庫全集(2009)
+    publisher: 講談社
+    type: bunkobon
+    volumes:
+    - isbn13: '9784063737318'
+      number: 1
+      release_date: 2009-12
+      title_display: 文庫全集BT-31
+  aventure-21:
+  - imprint: 手塚治虫文庫全集
+    label: 手塚治虫文庫全集(2011)
+    publisher: 講談社
+    type: bunkobon
+    volumes:
+    - isbn13: '9784063738315'
+      number: 1
+      release_date: 2011-05
+      title_display: 文庫全集BT-131
   barbara:
   - imprint: 手塚治虫漫画全集
     label: 手塚治虫漫画全集(1982)
@@ -39,6 +132,50 @@ extra:
       number: 2
       release_date: '1982-04-20'
       title_display: 第2巻(全集146)
+  - imprint: 手塚治虫文庫全集
+    label: 手塚治虫文庫全集(2011)
+    publisher: 講談社
+    type: bunkobon
+    volumes:
+    - isbn13: '9784063738698'
+      number: 1
+      release_date: 2011-10
+      title_display: 文庫全集BT-169
+  big-x:
+  - imprint: 手塚治虫文庫全集
+    label: 手塚治虫文庫全集(2011)
+    publisher: 講談社
+    type: bunkobon
+    volumes:
+    - isbn13: '9784063738049'
+      number: 1
+      release_date: 2011-01
+      title_display: 第1巻(BT-104)
+    - isbn13: '9784063738056'
+      number: 2
+      release_date: 2011-01
+      title_display: 第2巻(BT-105)
+  - imprint: 手塚治虫漫画全集
+    label: 手塚治虫漫画全集(1981)
+    publisher: 講談社
+    type: standard
+    volumes:
+    - isbn13: '9784061732438'
+      number: 1
+      release_date: '1981-07-20'
+      title_display: 第1巻(全集243)
+    - isbn13: '9784061732445'
+      number: 2
+      release_date: '1981-08-20'
+      title_display: 第2巻(全集244)
+    - isbn13: '9784061732452'
+      number: 3
+      release_date: '1981-09-20'
+      title_display: 第3巻(全集245)
+    - isbn13: '9784061732469'
+      number: 4
+      release_date: '1981-10-20'
+      title_display: 第4巻(全集246)
   black-jack:
   - imprint: 手塚治虫漫画全集
     label: 手塚治虫漫画全集(1977–1996)
@@ -133,6 +270,87 @@ extra:
       number: 22
       release_date: '1996-05-16'
       title_display: 第22巻(全集371)
+  - imprint: 手塚治虫文庫全集
+    label: 手塚治虫文庫全集(2010)
+    publisher: 講談社
+    type: bunkobon
+    volumes:
+    - isbn13: '9784063737585'
+      number: 1
+      release_date: 2010-06
+      title_display: 第1巻(BT-58)
+    - isbn13: '9784063737592'
+      number: 2
+      release_date: 2010-06
+      title_display: 第2巻(BT-59)
+    - isbn13: '9784063737608'
+      number: 3
+      release_date: 2010-06
+      title_display: 第3巻(BT-60)
+    - isbn13: '9784063737615'
+      number: 4
+      release_date: 2010-07
+      title_display: 第4巻(BT-61)
+    - isbn13: '9784063737622'
+      number: 5
+      release_date: 2010-07
+      title_display: 第5巻(BT-62)
+    - isbn13: '9784063737639'
+      number: 6
+      release_date: 2010-07
+      title_display: 第6巻(BT-63)
+    - isbn13: '9784063737646'
+      number: 7
+      release_date: 2010-08
+      title_display: 第7巻(BT-64)
+    - isbn13: '9784063737653'
+      number: 8
+      release_date: 2010-08
+      title_display: 第8巻(BT-65)
+    - isbn13: '9784063737660'
+      number: 9
+      release_date: 2010-09
+      title_display: 第9巻(BT-66)
+    - isbn13: '9784063737677'
+      number: 10
+      release_date: 2010-09
+      title_display: 第10巻(BT-67)
+    - isbn13: '9784063737684'
+      number: 11
+      release_date: 2010-10
+      title_display: 第11巻(BT-68)
+    - isbn13: '9784063737691'
+      number: 12
+      release_date: 2010-10
+      title_display: 第12巻(BT-69)
+  boku-no-songokuu:
+  - imprint: 手塚治虫文庫全集
+    label: 手塚治虫文庫全集(2010–2011)
+    publisher: 講談社
+    type: bunkobon
+    volumes:
+    - isbn13: '9784063737905'
+      number: 1
+      release_date: 2010-11
+      title_display: 第1巻(BT-90)
+    - isbn13: '9784063737912'
+      number: 2
+      release_date: 2010-12
+      title_display: 第2巻(BT-91)
+    - isbn13: '9784063737929'
+      number: 3
+      release_date: 2011-01
+      title_display: 第3巻(BT-92)
+  boukenkyoujidai:
+  - imprint: 手塚治虫文庫全集
+    label: 手塚治虫文庫全集(2012)
+    publisher: 講談社
+    type: bunkobon
+    volumes:
+    - isbn13: '9784063738971'
+      number: 1
+      release_date: 2012-04
+      title_display: 文庫全集BT-197
   buddha:
   - imprint: 手塚治虫漫画全集
     label: 手塚治虫漫画全集(1983–1984)
@@ -195,6 +413,39 @@ extra:
       number: 14
       release_date: '1984-10-03'
       title_display: 第14巻(全集300)
+  - imprint: 手塚治虫文庫全集
+    label: 手塚治虫文庫全集(2011)
+    publisher: 講談社
+    type: bunkobon
+    volumes:
+    - isbn13: '9784063738087'
+      number: 1
+      release_date: 2011-02
+      title_display: 第1巻(BT-108)
+    - isbn13: '9784063738094'
+      number: 2
+      release_date: 2011-02
+      title_display: 第2巻(BT-109)
+    - isbn13: '9784063738100'
+      number: 3
+      release_date: 2011-03
+      title_display: 第3巻(BT-110)
+    - isbn13: '9784063738117'
+      number: 4
+      release_date: 2011-03
+      title_display: 第4巻(BT-111)
+    - isbn13: '9784063738124'
+      number: 5
+      release_date: 2011-04
+      title_display: 第5巻(BT-112)
+    - isbn13: '9784063738131'
+      number: 6
+      release_date: 2011-04
+      title_display: 第6巻(BT-113)
+    - isbn13: '9784063738148'
+      number: 7
+      release_date: 2011-05
+      title_display: 第7巻(BT-114)
   bukkira-ni-yoroshiku:
   - imprint: 手塚治虫漫画全集
     label: 手塚治虫漫画全集(1993)
@@ -209,6 +460,80 @@ extra:
       number: 2
       release_date: '1993-08-17'
       title_display: 第2巻(全集308)
+  - imprint: 手塚治虫文庫全集
+    label: 手塚治虫文庫全集(2011)
+    publisher: 講談社
+    type: bunkobon
+    volumes:
+    - isbn13: '9784063738766'
+      number: 1
+      release_date: 2011-12
+      title_display: 文庫全集BT-176
+  burunga1sei:
+  - imprint: 手塚治虫文庫全集
+    label: 手塚治虫文庫全集(2012)
+    publisher: 講談社
+    type: bunkobon
+    volumes:
+    - isbn13: '9784063738810'
+      number: 1
+      release_date: 2012-01
+      title_display: 文庫全集BT-181
+  - imprint: 手塚治虫漫画全集
+    label: 手塚治虫漫画全集(1983)
+    publisher: 講談社
+    type: standard
+    volumes:
+    - isbn13: '9784061087699'
+      number: 1
+      release_date: 1983-09
+      title_display: 第1巻(全集169)
+    - isbn13: '9784061087705'
+      number: 2
+      release_date: 1983-10
+      title_display: 第2巻(全集170)
+  captain-ken:
+  - imprint: 手塚治虫文庫全集
+    label: 手塚治虫文庫全集(2011)
+    publisher: 講談社
+    type: bunkobon
+    volumes:
+    - isbn13: '9784063738759'
+      number: 1
+      release_date: 2011-11
+      title_display: 文庫全集BT-175
+  - imprint: 手塚治虫漫画全集
+    label: 手塚治虫漫画全集(1978)
+    publisher: 講談社
+    type: standard
+    volumes:
+    - isbn13: '9784061086258'
+      number: 1
+      release_date: 1978-01
+      title_display: 第1巻(全集25)
+    - isbn13: '9784061086265'
+      number: 2
+      release_date: 1978-05
+      title_display: 第2巻(全集26)
+  chikyuu-no-akuma:
+  - imprint: 手塚治虫文庫全集
+    label: 手塚治虫文庫全集(2010)
+    publisher: 講談社
+    type: bunkobon
+    volumes:
+    - isbn13: '9784063737479'
+      number: 1
+      release_date: 2010-03
+      title_display: 文庫全集BT-47
+  - imprint: 手塚治虫漫画全集
+    label: 手塚治虫漫画全集(1977)
+    publisher: 講談社
+    type: standard
+    volumes:
+    - isbn13: '9784061086098'
+      number: 1
+      release_date: '1977-06-15'
+      title_display: 全集第9巻
   chikyuuwonomu:
   - imprint: 手塚治虫漫画全集
     label: 手塚治虫漫画全集(1982)
@@ -223,6 +548,98 @@ extra:
       number: 2
       release_date: '1982-12-20'
       title_display: 第2巻(全集260)
+  - imprint: 手塚治虫文庫全集
+    label: 手塚治虫文庫全集(2012)
+    publisher: 講談社
+    type: bunkobon
+    volumes:
+    - isbn13: '9784063738865'
+      number: 1
+      release_date: 2012-02
+      title_display: 文庫全集BT-186
+  chippo-kun-konnichiwa:
+  - imprint: 手塚治虫漫画全集
+    label: 手塚治虫漫画全集(1993)
+    publisher: 講談社
+    type: standard
+    volumes:
+    - isbn13: '9784061759176'
+      number: 1
+      release_date: '1993-10-16'
+      title_display: 全集第317巻
+  chiteikoku-no-kaijin:
+  - imprint: 手塚治虫文庫全集
+    label: 手塚治虫文庫全集(2010)
+    publisher: 講談社
+    type: bunkobon
+    volumes:
+    - isbn13: '9784063737752'
+      number: 1
+      release_date: 2010-06
+      title_display: 文庫全集BT-75
+  - imprint: 手塚治虫漫画全集
+    label: 手塚治虫漫画全集(1982)
+    publisher: 講談社
+    type: standard
+    volumes:
+    - isbn13: '9784061732537'
+      number: 1
+      release_date: '1982-09-20'
+      title_display: 全集第253巻
+  choujintaikei:
+  - imprint: 手塚治虫文庫全集
+    label: 手塚治虫文庫全集(2011)
+    publisher: 講談社
+    type: bunkobon
+    volumes:
+    - isbn13: '9784063738483'
+      number: 1
+      release_date: 2011-08
+      title_display: 文庫全集BT-148
+  - imprint: 手塚治虫漫画全集
+    label: 手塚治虫漫画全集(1980)
+    publisher: 講談社
+    type: standard
+    volumes:
+    - isbn13: '9784061086944'
+      number: 1
+      release_date: '1980-10-20'
+      title_display: 第1巻(全集94)
+    - isbn13: '9784061086951'
+      number: 2
+      release_date: '1980-11-20'
+      title_display: 第2巻(全集95)
+  don-dracula:
+  - imprint: 手塚治虫文庫全集
+    label: 手塚治虫文庫全集(2011)
+    publisher: 講談社
+    type: bunkobon
+    volumes:
+    - isbn13: '9784063738285'
+      number: 1
+      release_date: 2011-05
+      title_display: 第1巻(BT-128)
+    - isbn13: '9784063738292'
+      number: 2
+      release_date: 2011-05
+      title_display: 第2巻(BT-129)
+  - imprint: 手塚治虫漫画全集
+    label: 手塚治虫漫画全集(1982)
+    publisher: 講談社
+    type: standard
+    volumes:
+    - isbn13: '9784061732483'
+      number: 1
+      release_date: '1982-04-20'
+      title_display: 第1巻(全集248)
+    - isbn13: '9784061732490'
+      number: 2
+      release_date: '1982-05-20'
+      title_display: 第2巻(全集249)
+    - isbn13: '9784061732506'
+      number: 3
+      release_date: '1982-06-20'
+      title_display: 第3巻(全集250)
   dororo:
   - imprint: 手塚治虫漫画全集
     label: 手塚治虫漫画全集(1981)
@@ -245,6 +662,72 @@ extra:
       number: 4
       release_date: '1981-06-20'
       title_display: 第4巻(全集150)
+  - imprint: 手塚治虫文庫全集
+    label: 手塚治虫文庫全集(2009)
+    publisher: 講談社
+    type: bunkobon
+    volumes:
+    - isbn13: '9784063737172'
+      number: 1
+      release_date: 2009-11
+      title_display: 第1巻(BT-17)
+    - isbn13: '9784063737189'
+      number: 2
+      release_date: 2009-11
+      title_display: 第2巻(BT-18)
+  dotsuitare:
+  - imprint: 手塚治虫文庫全集
+    label: 手塚治虫文庫全集(2011)
+    publisher: 講談社
+    type: bunkobon
+    volumes:
+    - isbn13: '9784063738728'
+      number: 1
+      release_date: 2011-11
+      title_display: 文庫全集BT-172
+  dust-8:
+  - imprint: 手塚治虫文庫全集
+    label: 手塚治虫文庫全集(2011)
+    publisher: 講談社
+    type: bunkobon
+    volumes:
+    - isbn13: '9784063738520'
+      number: 1
+      release_date: 2011-09
+      title_display: 文庫全集BT-152
+  film-wa-ikiteiru:
+  - imprint: 手塚治虫文庫全集
+    label: 手塚治虫文庫全集(2011)
+    publisher: 講談社
+    type: bunkobon
+    volumes:
+    - isbn13: '9784063738209'
+      number: 1
+      release_date: 2011-02
+      title_display: 文庫全集BT-120
+  - imprint: 手塚治虫漫画全集
+    label: 手塚治虫漫画全集(1977)
+    publisher: 講談社
+    type: standard
+    volumes:
+    - isbn13: '9784061086555'
+      number: 1
+      release_date: '1977-08-18'
+      title_display: 全集第55巻
+  flying-ben:
+  - imprint: 手塚治虫文庫全集
+    label: 手塚治虫文庫全集(2010)
+    publisher: 講談社
+    type: bunkobon
+    volumes:
+    - isbn13: '9784063737738'
+      number: 1
+      release_date: 2010-06
+      title_display: 第1巻(BT-73)
+    - isbn13: '9784063737745'
+      number: 2
+      release_date: 2010-06
+      title_display: 第2巻(BT-74)
   fushigi-na-melmo:
   - imprint: 手塚治虫漫画全集
     label: 手塚治虫漫画全集(1984)
@@ -255,6 +738,87 @@ extra:
       number: 1
       release_date: '1984-10-03'
       title_display: 全集第280巻
+  - imprint: 手塚治虫文庫全集
+    label: 手塚治虫文庫全集(2012)
+    publisher: 講談社
+    type: bunkobon
+    volumes:
+    - isbn13: '9784063738988'
+      number: 1
+      release_date: 2012-04
+      title_display: 文庫全集BT-198
+  fushigina-shounen-tezuka-1978:
+  - imprint: 手塚治虫文庫全集
+    label: 手塚治虫文庫全集(2010)
+    publisher: 講談社
+    type: bunkobon
+    volumes:
+    - isbn13: '9784063737899'
+      number: 1
+      release_date: 2010-10
+      title_display: 文庫全集BT-89
+  - imprint: 手塚治虫漫画全集
+    label: 手塚治虫漫画全集(1978–1979)
+    publisher: 講談社
+    type: standard
+    volumes:
+    - isbn13: '9784061086562'
+      number: 1
+      release_date: '1978-08-30'
+      title_display: 第1巻(全集56)
+    - isbn13: '9784061086579'
+      number: 2
+      release_date: '1979-04-30'
+      title_display: 第2巻(全集57)
+  fushigiryokouki:
+  - imprint: 手塚治虫漫画全集
+    label: 手塚治虫漫画全集(1979)
+    publisher: 講談社
+    type: standard
+    volumes:
+    - isbn13: '9784061086593'
+      number: 1
+      release_date: '1979-03-30'
+      title_display: 全集第59巻
+  futago-no-kishi:
+  - imprint: 手塚治虫文庫全集
+    label: 手塚治虫文庫全集(2010)
+    publisher: 講談社
+    type: bunkobon
+    volumes:
+    - isbn13: '9784063737547'
+      number: 1
+      release_date: 2010-05
+      title_display: 文庫全集BT-54
+  - imprint: 手塚治虫漫画全集
+    label: 手塚治虫漫画全集(1978)
+    publisher: 講談社
+    type: standard
+    volumes:
+    - isbn13: '9784061086531'
+      number: 1
+      release_date: '1978-07-25'
+      title_display: 全集第53巻
+  fuusuke:
+  - imprint: 手塚治虫文庫全集
+    label: 手塚治虫文庫全集(2010)
+    publisher: 講談社
+    type: bunkobon
+    volumes:
+    - isbn13: '9784063737950'
+      number: 1
+      release_date: 2010-11
+      title_display: 文庫全集BT-95
+  garasunoshironokiroku:
+  - imprint: 手塚治虫文庫全集
+    label: 手塚治虫文庫全集(2010)
+    publisher: 講談社
+    type: bunkobon
+    volumes:
+    - isbn13: '9784063737776'
+      number: 1
+      release_date: 2010-07
+      title_display: 文庫全集BT-77
   goblin-koushaku:
   - imprint: 手塚治虫漫画全集
     label: 手塚治虫漫画全集(1995)
@@ -269,6 +833,35 @@ extra:
       number: 2
       release_date: '1995-10-17'
       title_display: 第2巻(全集353)
+  - imprint: 手塚治虫文庫全集
+    label: 手塚治虫文庫全集(2011)
+    publisher: 講談社
+    type: bunkobon
+    volumes:
+    - isbn13: '9784063738711'
+      number: 1
+      release_date: 2011-10
+      title_display: 文庫全集BT-171
+  god-father-no-musuko:
+  - imprint: 手塚治虫文庫全集
+    label: 手塚治虫文庫全集(2010)
+    publisher: 講談社
+    type: bunkobon
+    volumes:
+    - isbn13: '9784063737806'
+      number: 1
+      release_date: 2010-08
+      title_display: 文庫全集BT-80
+  grandoll:
+  - imprint: 手塚治虫漫画全集
+    label: 手塚治虫漫画全集(1978)
+    publisher: 講談社
+    type: standard
+    volumes:
+    - isbn13: '9784061086777'
+      number: 1
+      release_date: '1978-07-25'
+      title_display: 全集第77巻
   gringo:
   - imprint: 手塚治虫漫画全集
     label: 手塚治虫漫画全集(1993)
@@ -287,6 +880,19 @@ extra:
       number: 3
       release_date: '1993-06-17'
       title_display: 第3巻(全集306)
+  - imprint: 手塚治虫文庫全集
+    label: 手塚治虫文庫全集(2011)
+    publisher: 講談社
+    type: bunkobon
+    volumes:
+    - isbn13: '9784063738322'
+      number: 1
+      release_date: 2011-06
+      title_display: 第1巻(BT-132)
+    - isbn13: '9784063738339'
+      number: 2
+      release_date: 2011-06
+      title_display: 第2巻(BT-133)
   gum-gum-punch:
   - imprint: 手塚治虫漫画全集
     label: 手塚治虫漫画全集(1984)
@@ -297,6 +903,39 @@ extra:
       number: 1
       release_date: '1984-01-20'
       title_display: 全集第213巻
+  - imprint: 手塚治虫文庫全集
+    label: 手塚治虫文庫全集(2010)
+    publisher: 講談社
+    type: bunkobon
+    volumes:
+    - isbn13: '9784063737790'
+      number: 1
+      release_date: 2010-08
+      title_display: 文庫全集BT-79
+  hato-yo-ten-made:
+  - imprint: 手塚治虫文庫全集
+    label: 手塚治虫文庫全集(2010)
+    publisher: 講談社
+    type: bunkobon
+    volumes:
+    - isbn13: '9784063738001'
+      number: 1
+      release_date: 2010-12
+      title_display: 第1巻(BT-100)
+    - isbn13: '9784063738018'
+      number: 2
+      release_date: 2010-12
+      title_display: 第2巻(BT-101)
+  heigen-taiheiki:
+  - imprint: 手塚治虫文庫全集
+    label: 手塚治虫文庫全集(2010)
+    publisher: 講談社
+    type: bunkobon
+    volumes:
+    - isbn13: '9784063737974'
+      number: 1
+      release_date: 2010-11
+      title_display: 文庫全集BT-97
   hidamari-no-ki:
   - imprint: 手塚治虫漫画全集
     label: 手塚治虫漫画全集(1993–1994)
@@ -347,6 +986,35 @@ extra:
       number: 11
       release_date: '1994-09-16'
       title_display: 第11巻(全集336)
+  - imprint: 手塚治虫文庫全集
+    label: 手塚治虫文庫全集(2012)
+    publisher: 講談社
+    type: bunkobon
+    volumes:
+    - isbn13: '9784063738872'
+      number: 1
+      release_date: 2012-03
+      title_display: 第1巻(BT-187)
+    - isbn13: '9784063738889'
+      number: 2
+      release_date: 2012-03
+      title_display: 第2巻(BT-188)
+    - isbn13: '9784063738896'
+      number: 3
+      release_date: 2012-04
+      title_display: 第3巻(BT-189)
+    - isbn13: '9784063738902'
+      number: 4
+      release_date: 2012-04
+      title_display: 第4巻(BT-190)
+    - isbn13: '9784063738919'
+      number: 5
+      release_date: 2012-05
+      title_display: 第5巻(BT-191)
+    - isbn13: '9784063738926'
+      number: 6
+      release_date: 2012-05
+      title_display: 第6巻(BT-192)
   hinotori:
   - imprint: 手塚治虫漫画全集
     label: 手塚治虫漫画全集(1978–1995)
@@ -421,6 +1089,92 @@ extra:
       number: 17
       release_date: '1995-09-16'
       title_display: 第17巻(全集365)
+  - imprint: 手塚治虫文庫全集
+    label: 手塚治虫文庫全集(2011–2012)
+    publisher: 講談社
+    type: bunkobon
+    volumes:
+    - isbn13: '9784063738551'
+      number: 1
+      release_date: 2011-10
+      title_display: 第1巻(BT-155)
+    - isbn13: '9784063738568'
+      number: 2
+      release_date: 2011-10
+      title_display: 第2巻(BT-156)
+    - isbn13: '9784063738575'
+      number: 3
+      release_date: 2011-11
+      title_display: 第3巻(BT-157)
+    - isbn13: '9784063738582'
+      number: 4
+      release_date: 2011-11
+      title_display: 第4巻(BT-158)
+    - isbn13: '9784063738599'
+      number: 5
+      release_date: 2011-12
+      title_display: 第5巻(BT-159)
+    - isbn13: '9784063738605'
+      number: 6
+      release_date: 2011-12
+      title_display: 第6巻(BT-160)
+    - isbn13: '9784063738612'
+      number: 7
+      release_date: 2012-01
+      title_display: 第7巻(BT-161)
+    - isbn13: '9784063738629'
+      number: 8
+      release_date: 2012-01
+      title_display: 第8巻(BT-162)
+    - isbn13: '9784063738636'
+      number: 9
+      release_date: 2012-02
+      title_display: 第9巻(BT-163)
+    - isbn13: '9784063738643'
+      number: 10
+      release_date: 2012-02
+      title_display: 第10巻(BT-164)
+    - isbn13: '9784063738650'
+      number: 11
+      release_date: 2012-03
+      title_display: 第11巻(BT-165)
+    - isbn13: '9784063738667'
+      number: 12
+      release_date: 2012-03
+      title_display: 第12巻(BT-166)
+  hyou-tan-komako:
+  - imprint: 手塚治虫漫画全集
+    label: 手塚治虫漫画全集(1980)
+    publisher: 講談社
+    type: standard
+    volumes:
+    - isbn13: '9784061086845'
+      number: 1
+      release_date: '1980-02-20'
+      title_display: 全集第84巻
+  i-l:
+  - imprint: 手塚治虫文庫全集
+    label: 手塚治虫文庫全集(2012)
+    publisher: 講談社
+    type: bunkobon
+    volumes:
+    - isbn13: '9784063738933'
+      number: 1
+      release_date: 2012-03
+      title_display: 文庫全集BT-193
+  - imprint: 手塚治虫漫画全集
+    label: 手塚治虫漫画全集(1982)
+    publisher: 講談社
+    type: standard
+    volumes:
+    - isbn13: '9784061732629'
+      number: 1
+      release_date: '1982-09-20'
+      title_display: 第1巻(全集262)
+    - isbn13: '9784061732636'
+      number: 2
+      release_date: '1982-10-20'
+      title_display: 第2巻(全集263)
   ikkimandara:
   - imprint: 手塚治虫漫画全集
     label: 手塚治虫漫画全集(1983–1984)
@@ -435,6 +1189,111 @@ extra:
       number: 2
       release_date: 1984-03
       title_display: 第2巻(全集283)
+  jangurumakyou:
+  - imprint: 手塚治虫漫画全集
+    label: 手塚治虫漫画全集(1982)
+    publisher: 講談社
+    type: standard
+    volumes:
+    - isbn13: '9784061087385'
+      number: 1
+      release_date: '1982-02-20'
+      title_display: 全集第138巻
+  jangurutaitei:
+  - imprint: 手塚治虫文庫全集
+    label: 手塚治虫文庫全集(2009)
+    publisher: 講談社
+    type: bunkobon
+    volumes:
+    - isbn13: '9784063737103'
+      number: 1
+      release_date: 2009-10
+      title_display: 第1巻(BT-10)
+    - isbn13: '9784063737110'
+      number: 2
+      release_date: 2009-10
+      title_display: 第2巻(BT-11)
+  - imprint: 手塚治虫漫画全集
+    label: 手塚治虫漫画全集(1977)
+    publisher: 講談社
+    type: standard
+    volumes:
+    - isbn13: '9784061086012'
+      number: 1
+      release_date: '1977-06-15'
+      title_display: 第1巻(全集1)
+    - isbn13: '9784061086029'
+      number: 2
+      release_date: '1977-07-15'
+      title_display: 第2巻(全集2)
+    - isbn13: '9784061086036'
+      number: 3
+      release_date: '1977-08-18'
+      title_display: 第3巻(全集3)
+  kami-no-toride:
+  - imprint: 手塚治虫漫画全集
+    label: 手塚治虫漫画全集(1983)
+    publisher: 講談社
+    type: standard
+    volumes:
+    - isbn13: '9784061732742'
+      number: 1
+      release_date: '1983-09-20'
+      title_display: 全集第274巻
+  kasekitou:
+  - imprint: 手塚治虫漫画全集
+    label: 手塚治虫漫画全集(1979)
+    publisher: 講談社
+    type: standard
+    volumes:
+    - isbn13: '9784061086739'
+      number: 1
+      release_date: '1979-06-30'
+      title_display: 全集第73巻
+  ken1-tanteichou:
+  - imprint: 手塚治虫文庫全集
+    label: 手塚治虫文庫全集(2011)
+    publisher: 講談社
+    type: bunkobon
+    volumes:
+    - isbn13: '9784063738193'
+      number: 1
+      release_date: 2011-02
+      title_display: 文庫全集BT-119
+  kenjuutenshi:
+  - imprint: 手塚治虫漫画全集
+    label: 手塚治虫漫画全集(1993)
+    publisher: 講談社
+    type: standard
+    volumes:
+    - isbn13: '9784061759244'
+      number: 1
+      release_date: '1993-11-17'
+      title_display: 全集第324巻
+  kirihito-sanka:
+  - imprint: 手塚治虫文庫全集
+    label: 手塚治虫文庫全集(2010)
+    publisher: 講談社
+    type: bunkobon
+    volumes:
+    - isbn13: '9784063737431'
+      number: 1
+      release_date: 2010-02
+      title_display: 第1巻(BT-43)
+    - isbn13: '9784063737448'
+      number: 2
+      release_date: 2010-02
+      title_display: 第2巻(BT-44)
+  kitaru-beki-sekai:
+  - imprint: 手塚治虫文庫全集
+    label: 手塚治虫文庫全集(2010)
+    publisher: 講談社
+    type: bunkobon
+    volumes:
+    - isbn13: '9784063737424'
+      number: 1
+      release_date: 2010-02
+      title_display: 文庫全集BT-42
   kuuki-no-soko:
   - imprint: 手塚治虫漫画全集
     label: 手塚治虫漫画全集(1981)
@@ -445,6 +1304,70 @@ extra:
       number: 1
       release_date: '1982-10-20'
       title_display: 全集第264巻
+  - imprint: 手塚治虫文庫全集
+    label: 手塚治虫文庫全集(2011)
+    publisher: 講談社
+    type: bunkobon
+    volumes:
+    - isbn13: '9784063738438'
+      number: 1
+      release_date: 2011-07
+      title_display: 文庫全集BT-143
+  lion-books:
+  - imprint: 手塚治虫文庫全集
+    label: 手塚治虫文庫全集(2009–2011)
+    publisher: 講談社
+    type: bunkobon
+    volumes:
+    - isbn13: '9784063737288'
+      number: 1
+      release_date: 2009-12
+      title_display: 第1巻(BT-28)
+    - isbn13: '9784063737295'
+      number: 2
+      release_date: 2010-01
+      title_display: 第2巻(BT-29)
+    - isbn13: '9784063737301'
+      number: 3
+      release_date: 2010-02
+      title_display: 第3巻(BT-30)
+    - isbn13: '9784063738346'
+      number: 4
+      release_date: 2011-06
+      title_display: 第4巻(BT-134)
+  - imprint: 手塚治虫漫画全集
+    label: 手塚治虫漫画全集(1977–1983)
+    publisher: 講談社
+    type: standard
+    volumes:
+    - isbn13: '9784061086616'
+      number: 1
+      release_date: '1977-10-20'
+      title_display: 第1巻(全集61)
+    - isbn13: '9784061086623'
+      number: 2
+      release_date: '1977-11-20'
+      title_display: 第2巻(全集62)
+    - isbn13: '9784061086630'
+      number: 3
+      release_date: '1977-12-20'
+      title_display: 第3巻(全集63)
+    - isbn13: '9784061086647'
+      number: 4
+      release_date: '1978-01-25'
+      title_display: 第4巻(全集64)
+    - isbn13: '9784061086654'
+      number: 5
+      release_date: '1978-05-25'
+      title_display: 第5巻(全集65)
+    - isbn13: '9784061732759'
+      number: 6
+      release_date: '1983-10-30'
+      title_display: 第6巻(全集275)
+    - isbn13: '9784061732766'
+      number: 7
+      release_date: '1983-12-20'
+      title_display: 第7巻(全集276)
   ludwig-b:
   - imprint: 手塚治虫漫画全集
     label: 手塚治虫漫画全集(1994)
@@ -459,6 +1382,52 @@ extra:
       number: 2
       release_date: '1994-11-17'
       title_display: 第2巻(全集338)
+  - imprint: 手塚治虫文庫全集
+    label: 手塚治虫文庫全集(2010)
+    publisher: 講談社
+    type: bunkobon
+    volumes:
+    - isbn13: '9784063737868'
+      number: 1
+      release_date: 2010-10
+      title_display: 文庫全集BT-86
+  maguma-taishi:
+  - imprint: 手塚治虫文庫全集
+    label: 手塚治虫文庫全集(2011)
+    publisher: 講談社
+    type: bunkobon
+    volumes:
+    - isbn13: '9784063738476'
+      number: 1
+      release_date: 2011-08
+      title_display: 文庫全集BT-147
+  - imprint: 手塚治虫漫画全集
+    label: 手塚治虫漫画全集(1980)
+    publisher: 講談社
+    type: standard
+    volumes:
+    - isbn13: '9784061087866'
+      number: 1
+      release_date: 1980-02
+      title_display: 第1巻(全集186)
+    - isbn13: '9784061087873'
+      number: 2
+      release_date: 1980-03
+      title_display: 第2巻(全集187)
+    - isbn13: '9784061087880'
+      number: 3
+      release_date: '1980-05-20'
+      title_display: 第3巻(全集188)
+  mahou-yashiki:
+  - imprint: 手塚治虫漫画全集
+    label: 手塚治虫漫画全集(1982)
+    publisher: 講談社
+    type: standard
+    volumes:
+    - isbn13: '9784061732179'
+      number: 1
+      release_date: '1982-07-20'
+      title_display: 全集第217巻
   mako-to-rumi-to-chii:
   - imprint: 手塚治虫漫画全集
     label: 手塚治虫漫画全集(1983)
@@ -469,6 +1438,105 @@ extra:
       number: 1
       release_date: '1983-07-10'
       title_display: 全集第273巻
+  mangadaigaku:
+  - imprint: 手塚治虫文庫全集
+    label: 手塚治虫文庫全集(2009)
+    publisher: 講談社
+    type: bunkobon
+    volumes:
+    - isbn13: '9784063737196'
+      number: 1
+      release_date: 2009-11
+      title_display: 文庫全集BT-19
+  - imprint: 手塚治虫漫画全集
+    label: 手塚治虫漫画全集(1977)
+    publisher: 講談社
+    type: standard
+    volumes:
+    - isbn13: '9784061086395'
+      number: 1
+      release_date: '1977-11-20'
+      title_display: 全集第39巻
+  mazin-garon:
+  - imprint: 手塚治虫文庫全集
+    label: 手塚治虫文庫全集(2010)
+    publisher: 講談社
+    type: bunkobon
+    volumes:
+    - isbn13: '9784063737561'
+      number: 1
+      release_date: 2010-05
+      title_display: 第1巻(BT-56)
+    - isbn13: '9784063737578'
+      number: 2
+      release_date: 2010-05
+      title_display: 第2巻(BT-57)
+  - imprint: 手塚治虫漫画全集
+    label: 手塚治虫漫画全集(1982–1997)
+    publisher: 講談社
+    type: standard
+    volumes:
+    - isbn13: '9784061732667'
+      number: 1
+      release_date: '1982-12-20'
+      title_display: 第1巻(全集266)
+    - isbn13: '9784061732674'
+      number: 2
+      release_date: '1983-01-20'
+      title_display: 第2巻(全集267)
+    - isbn13: '9784061759770'
+      number: 3
+      release_date: '1996-11-15'
+      title_display: 第3巻(全集377)
+    - isbn13: '9784061759787'
+      number: 4
+      release_date: '1996-12-13'
+      title_display: 第4巻(全集378)
+    - isbn13: '9784061759794'
+      number: 5
+      release_date: '1997-01-17'
+      title_display: 第5巻(全集379)
+  metropolis:
+  - imprint: 手塚治虫漫画全集
+    label: 手塚治虫漫画全集(1979)
+    publisher: 講談社
+    type: standard
+    volumes:
+    - isbn13: '9784061086449'
+      number: 1
+      release_date: '1979-01-20'
+      title_display: 全集第44巻
+  microid-s:
+  - imprint: 手塚治虫文庫全集
+    label: 手塚治虫文庫全集(2012)
+    publisher: 講談社
+    type: bunkobon
+    volumes:
+    - isbn13: '9784063738841'
+      number: 1
+      release_date: 2012-01
+      title_display: 第1巻(BT-184)
+    - isbn13: '9784063738858'
+      number: 2
+      release_date: 2012-02
+      title_display: 第2巻(BT-185)
+  - imprint: 手塚治虫漫画全集
+    label: 手塚治虫漫画全集(1981)
+    publisher: 講談社
+    type: standard
+    volumes:
+    - isbn13: '9784061087835'
+      number: 1
+      release_date: '1981-07-20'
+      title_display: 第1巻(全集183)
+    - isbn13: '9784061087842'
+      number: 2
+      release_date: '1981-08-20'
+      title_display: 第2巻(全集184)
+    - isbn13: '9784061087859'
+      number: 3
+      release_date: '1981-09-20'
+      title_display: 第3巻(全集185)
   midnight:
   - imprint: 手塚治虫漫画全集
     label: 手塚治虫漫画全集(1995)
@@ -499,6 +1567,37 @@ extra:
       number: 6
       release_date: '1995-08-17'
       title_display: 第6巻(全集359)
+  - imprint: 手塚治虫文庫全集
+    label: 手塚治虫文庫全集(2010)
+    publisher: 講談社
+    type: bunkobon
+    volumes:
+    - isbn13: '9784063737493'
+      number: 1
+      release_date: 2010-04
+      title_display: 第1巻(BT-49)
+    - isbn13: '9784063737509'
+      number: 2
+      release_date: 2010-04
+      title_display: 第2巻(BT-50)
+    - isbn13: '9784063737516'
+      number: 3
+      release_date: 2010-05
+      title_display: 第3巻(BT-51)
+  miraijin-chaos:
+  - imprint: 手塚治虫文庫全集
+    label: 手塚治虫文庫全集(2011)
+    publisher: 講談社
+    type: bunkobon
+    volumes:
+    - isbn13: '9784063738384'
+      number: 1
+      release_date: 2011-07
+      title_display: 第1巻(BT-138)
+    - isbn13: '9784063738391'
+      number: 2
+      release_date: 2011-07
+      title_display: 第2巻(BT-139)
   mitsumegatooru:
   - imprint: 手塚治虫漫画全集
     label: 手塚治虫漫画全集(1977–1981)
@@ -557,6 +1656,39 @@ extra:
       number: 13
       release_date: '1981-03-20'
       title_display: 第13巻(全集113)
+  - imprint: 手塚治虫文庫全集
+    label: 手塚治虫文庫全集(2010)
+    publisher: 講談社
+    type: bunkobon
+    volumes:
+    - isbn13: '9784063737356'
+      number: 1
+      release_date: 2010-02
+      title_display: 第1巻(BT-35)
+    - isbn13: '9784063737363'
+      number: 2
+      release_date: 2010-02
+      title_display: 第2巻(BT-36)
+    - isbn13: '9784063737370'
+      number: 3
+      release_date: 2010-02
+      title_display: 第3巻(BT-37)
+    - isbn13: '9784063737387'
+      number: 4
+      release_date: 2010-03
+      title_display: 第4巻(BT-38)
+    - isbn13: '9784063737394'
+      number: 5
+      release_date: 2010-03
+      title_display: 第5巻(BT-39)
+    - isbn13: '9784063737400'
+      number: 6
+      release_date: 2010-04
+      title_display: 第6巻(BT-40)
+    - isbn13: '9784063737417'
+      number: 7
+      release_date: 2010-04
+      title_display: 第7巻(BT-41)
   mw:
   - imprint: 手塚治虫漫画全集
     label: 手塚治虫漫画全集(1993)
@@ -575,6 +1707,19 @@ extra:
       number: 3
       release_date: 1993-03
       title_display: 第3巻(全集303)
+  - imprint: 手塚治虫文庫全集
+    label: 手塚治虫文庫全集(2011)
+    publisher: 講談社
+    type: bunkobon
+    volumes:
+    - isbn13: '9784063738506'
+      number: 1
+      release_date: 2011-09
+      title_display: 第1巻(BT-150)
+    - isbn13: '9784063738513'
+      number: 2
+      release_date: 2011-09
+      title_display: 第2巻(BT-151)
   nanairo-inko:
   - imprint: 手塚治虫漫画全集
     label: 手塚治虫漫画全集(1994)
@@ -609,6 +1754,137 @@ extra:
       number: 7
       release_date: '1994-12-14'
       title_display: 第7巻(全集347)
+  - imprint: 手塚治虫文庫全集
+    label: 手塚治虫文庫全集(2011)
+    publisher: 講談社
+    type: bunkobon
+    volumes:
+    - isbn13: '9784063738445'
+      number: 1
+      release_date: 2011-08
+      title_display: 第1巻(BT-144)
+    - isbn13: '9784063738452'
+      number: 2
+      release_date: 2011-08
+      title_display: 第2巻(BT-145)
+    - isbn13: '9784063738469'
+      number: 3
+      release_date: 2011-08
+      title_display: 第3巻(BT-146)
+  nanbaa-7:
+  - imprint: 手塚治虫文庫全集
+    label: 手塚治虫文庫全集(2011)
+    publisher: 講談社
+    type: bunkobon
+    volumes:
+    - isbn13: '9784063738063'
+      number: 1
+      release_date: 2011-01
+      title_display: 第1巻(BT-106)
+    - isbn13: '9784063738070'
+      number: 2
+      release_date: 2011-01
+      title_display: 第2巻(BT-107)
+  - imprint: 手塚治虫漫画全集
+    label: 手塚治虫漫画全集(1980–1981)
+    publisher: 講談社
+    type: standard
+    volumes:
+    - isbn13: '9784061087934'
+      number: 1
+      release_date: '1980-06-20'
+      title_display: 第1巻(全集193)
+    - isbn13: '9784061087941'
+      number: 2
+      release_date: '1980-08-20'
+      title_display: 第2巻(全集194)
+    - isbn13: '9784061087958'
+      number: 3
+      release_date: '1980-11-20'
+      title_display: 第3巻(全集195)
+    - isbn13: '9784061087965'
+      number: 4
+      release_date: '1981-01-20'
+      title_display: 第4巻(全集196)
+  neo-faust:
+  - imprint: 手塚治虫文庫全集
+    label: 手塚治虫文庫全集(2011)
+    publisher: 講談社
+    type: bunkobon
+    volumes:
+    - isbn13: '9784063738704'
+      number: 1
+      release_date: 2011-10
+      title_display: 文庫全集BT-170
+  - imprint: 手塚治虫漫画全集
+    label: 手塚治虫漫画全集(1995)
+    publisher: 講談社
+    type: standard
+    volumes:
+    - isbn13: '9784061759688'
+      number: 1
+      release_date: '1995-11-16'
+      title_display: 第1巻(全集368)
+    - isbn13: '9784061759695'
+      number: 2
+      release_date: '1995-12-14'
+      title_display: 第2巻(全集369)
+  niji-no-hotori-de:
+  - imprint: 手塚治虫漫画全集
+    label: 手塚治虫漫画全集(1980)
+    publisher: 講談社
+    type: standard
+    volumes:
+    - isbn13: '9784061086302'
+      number: 1
+      release_date: '1980-07-20'
+      title_display: 全集第30巻
+  ningen-konchuuki:
+  - imprint: 手塚治虫文庫全集
+    label: 手塚治虫文庫全集(2012)
+    publisher: 講談社
+    type: bunkobon
+    volumes:
+    - isbn13: '9784063738995'
+      number: 1
+      release_date: 2012-04
+      title_display: 文庫全集BT-199
+  - imprint: 手塚治虫漫画全集
+    label: 手塚治虫漫画全集(1983)
+    publisher: 講談社
+    type: standard
+    volumes:
+    - isbn13: '9784061732711'
+      number: 1
+      release_date: '1983-02-20'
+      title_display: 第1巻(全集271)
+    - isbn13: '9784061732728'
+      number: 2
+      release_date: '1983-03-20'
+      title_display: 第2巻(全集272)
+  ningendomo-atsumare:
+  - imprint: 手塚治虫文庫全集
+    label: 手塚治虫文庫全集(2010)
+    publisher: 講談社
+    type: bunkobon
+    volumes:
+    - isbn13: '9784063737486'
+      number: 1
+      release_date: 2010-03
+      title_display: 文庫全集BT-48
+  - imprint: 手塚治虫漫画全集
+    label: 手塚治虫漫画全集(1978)
+    publisher: 講談社
+    type: standard
+    volumes:
+    - isbn13: '9784061086814'
+      number: 1
+      release_date: '1978-04-20'
+      title_display: 第1巻(全集81)
+    - isbn13: '9784061086821'
+      number: 2
+      release_date: '1978-05-25'
+      title_display: 第2巻(全集82)
   nippon-hakkyou:
   - imprint: 手塚治虫漫画全集
     label: 手塚治虫漫画全集(1982)
@@ -637,6 +1913,19 @@ extra:
       number: 3
       release_date: '1981-06-20'
       title_display: 第3巻(全集178)
+  - imprint: 手塚治虫文庫全集
+    label: 手塚治虫文庫全集(2012)
+    publisher: 講談社
+    type: bunkobon
+    volumes:
+    - isbn13: '9784063738827'
+      number: 1
+      release_date: 2012-01
+      title_display: 第1巻(BT-182)
+    - isbn13: '9784063738834'
+      number: 2
+      release_date: 2012-02
+      title_display: 第2巻(BT-183)
   onimaru-taishou:
   - imprint: 手塚治虫漫画全集
     label: 手塚治虫漫画全集(1979)
@@ -651,6 +1940,56 @@ extra:
       number: 2
       release_date: '1979-12-10'
       title_display: 第2巻(全集175)
+  - imprint: 手塚治虫文庫全集
+    label: 手塚治虫文庫全集(2011)
+    publisher: 講談社
+    type: bunkobon
+    volumes:
+    - isbn13: '9784063738414'
+      number: 1
+      release_date: 2011-07
+      title_display: 文庫全集BT-141
+  ore-wa-sarutobi-da:
+  - imprint: 手塚治虫文庫全集
+    label: 手塚治虫文庫全集(2011)
+    publisher: 講談社
+    type: bunkobon
+    volumes:
+    - isbn13: '9784063738308'
+      number: 1
+      release_date: 2011-05
+      title_display: 文庫全集BT-130
+  - imprint: 手塚治虫漫画全集
+    label: 手塚治虫漫画全集(1982)
+    publisher: 講談社
+    type: standard
+    volumes:
+    - isbn13: '9784061732155'
+      number: 1
+      release_date: '1982-04-20'
+      title_display: 第1巻(全集215)
+    - isbn13: '9784061732162'
+      number: 2
+      release_date: '1982-06-20'
+      title_display: 第2巻(全集216)
+  ozuma-taichou:
+  - imprint: 手塚治虫文庫全集
+    label: 手塚治虫文庫全集(2011–2012)
+    publisher: 講談社
+    type: bunkobon
+    volumes:
+    - isbn13: '9784063738780'
+      number: 1
+      release_date: 2011-12
+      title_display: 第1巻(BT-178)
+    - isbn13: '9784063738797'
+      number: 2
+      release_date: 2012-01
+      title_display: 第2巻(BT-179)
+    - isbn13: '9784063738803'
+      number: 3
+      release_date: 2012-02
+      title_display: 第3巻(BT-180)
   ribonnokishi:
   - imprint: 手塚治虫漫画全集
     label: 手塚治虫漫画全集(1977–1979)
@@ -677,6 +2016,204 @@ extra:
       number: 5
       release_date: '1979-11-20'
       title_display: 少女クラブ版 第5巻(全集86)
+  - imprint: 手塚治虫文庫全集
+    label: 手塚治虫文庫全集(2009–2011)
+    publisher: 講談社
+    type: bunkobon
+    volumes:
+    - isbn13: '9784063737134'
+      number: 1
+      release_date: 2009-10
+      title_display: 第1巻(BT-13)
+    - isbn13: '9784063737141'
+      number: 2
+      release_date: 2009-10
+      title_display: 第2巻(BT-14)
+    - isbn13: '9784063738216'
+      number: 3
+      release_date: 2011-02
+      title_display: 第3巻(BT-121)
+  rokkuboukenki:
+  - imprint: 手塚治虫文庫全集
+    label: 手塚治虫文庫全集(2010)
+    publisher: 講談社
+    type: bunkobon
+    volumes:
+    - isbn13: '9784063737530'
+      number: 1
+      release_date: 2010-04
+      title_display: 文庫全集BT-53
+  - imprint: 手塚治虫漫画全集
+    label: 手塚治虫漫画全集(1977)
+    publisher: 講談社
+    type: standard
+    volumes:
+    - isbn13: '9784061086074'
+      number: 1
+      release_date: 1977-07
+      title_display: 第1巻(全集7)
+    - isbn13: '9784061086081'
+      number: 2
+      release_date: '1977-09-20'
+      title_display: 第2巻(全集8)
+  roppu-kun:
+  - imprint: 手塚治虫文庫全集
+    label: 手塚治虫文庫全集(2011)
+    publisher: 講談社
+    type: bunkobon
+    volumes:
+    - isbn13: '9784063738353'
+      number: 1
+      release_date: 2011-06
+      title_display: 文庫全集BT-135
+  rosutowaarudo:
+  - imprint: 手塚治虫文庫全集
+    label: 手塚治虫文庫全集(2009)
+    publisher: 講談社
+    type: bunkobon
+    volumes:
+    - isbn13: '9784063737226'
+      number: 1
+      release_date: 2009-11
+      title_display: 文庫全集BT-22
+  - imprint: 手塚治虫漫画全集
+    label: 手塚治虫漫画全集(1982)
+    publisher: 講談社
+    type: standard
+    volumes:
+    - isbn13: '9784061087309'
+      number: 1
+      release_date: '1982-02-20'
+      title_display: 全集第130巻
+  ryuusei-ouji:
+  - imprint: 手塚治虫漫画全集
+    label: 手塚治虫漫画全集(1993)
+    publisher: 講談社
+    type: standard
+    volumes:
+    - isbn13: '9784061759169'
+      number: 1
+      release_date: '1993-04-17'
+      title_display: 全集第316巻
+  saboten-kun:
+  - imprint: 手塚治虫漫画全集
+    label: 手塚治虫漫画全集(1980)
+    publisher: 講談社
+    type: standard
+    volumes:
+    - isbn13: '9784061086692'
+      number: 1
+      release_date: '1980-04-20'
+      title_display: 全集第69巻
+  senpuu-z:
+  - imprint: 手塚治虫文庫全集
+    label: 手塚治虫文庫全集(2011)
+    publisher: 講談社
+    type: bunkobon
+    volumes:
+    - isbn13: '9784063738032'
+      number: 1
+      release_date: 2011-01
+      title_display: 文庫全集BT-103
+  - imprint: 手塚治虫漫画全集
+    label: 手塚治虫漫画全集(1978)
+    publisher: 講談社
+    type: standard
+    volumes:
+    - isbn13: '9784061086524'
+      number: 1
+      release_date: '1978-11-20'
+      title_display: 全集第52巻
+  shin-takarajima:
+  - imprint: 手塚治虫文庫全集
+    label: 手塚治虫文庫全集(2010–2012)
+    publisher: 講談社
+    type: bunkobon
+    volumes:
+    - isbn13: '9784063737462'
+      number: 1
+      release_date: 2010-03
+      title_display: 第1巻(BT-46)
+    - isbn13: '9784063739008'
+      number: 2
+      release_date: 2012-05
+      title_display: 第2巻(BT-200)
+  - imprint: 手塚治虫漫画全集
+    label: 手塚治虫漫画全集(1984)
+    publisher: 講談社
+    type: standard
+    volumes:
+    - isbn13: '9784061732810'
+      number: 1
+      release_date: '1984-10-03'
+      title_display: 全集第281巻
+  shinsekai-lurue:
+  - imprint: 手塚治虫文庫全集
+    label: 手塚治虫文庫全集(2011)
+    publisher: 講談社
+    type: bunkobon
+    volumes:
+    - isbn13: '9784063738544'
+      number: 1
+      release_date: 2011-09
+      title_display: 文庫全集BT-154
+  shinsengumi-tezuka-1967:
+  - imprint: 手塚治虫漫画全集
+    label: 手塚治虫漫画全集(1977)
+    publisher: 講談社
+    type: standard
+    volumes:
+    - isbn13: '9784061086111'
+      number: 1
+      release_date: 1977-06
+      title_display: 全集第11巻
+  shiroi-pilot:
+  - imprint: 手塚治虫文庫全集
+    label: 手塚治虫文庫全集(2011)
+    publisher: 講談社
+    type: bunkobon
+    volumes:
+    - isbn13: '9784063738773'
+      number: 1
+      release_date: 2011-12
+      title_display: 文庫全集BT-177
+  - imprint: 手塚治虫漫画全集
+    label: 手塚治虫漫画全集(1978–1979)
+    publisher: 講談社
+    type: standard
+    volumes:
+    - isbn13: '9784061086272'
+      number: 1
+      release_date: '1978-10-10'
+      title_display: 第1巻(全集27)
+    - isbn13: '9784061086289'
+      number: 2
+      release_date: 1979-02
+      title_display: 第2巻(全集28)
+  shumari:
+  - imprint: 手塚治虫文庫全集
+    label: 手塚治虫文庫全集(2009)
+    publisher: 講談社
+    type: bunkobon
+    volumes:
+    - isbn13: '9784063737257'
+      number: 1
+      release_date: 2009-12
+      title_display: 第1巻(BT-25)
+    - isbn13: '9784063737264'
+      number: 2
+      release_date: 2009-12
+      title_display: 第2巻(BT-26)
+  tetsu-no-michi:
+  - imprint: 手塚治虫漫画全集
+    label: 手塚治虫漫画全集(1979)
+    publisher: 講談社
+    type: standard
+    volumes:
+    - isbn13: '9784061086746'
+      number: 1
+      release_date: '1979-05-30'
+      title_display: 全集第74巻
   tetsuwan-atom:
   - imprint: 手塚治虫漫画全集
     label: 手塚治虫漫画全集(1979–1982)
@@ -763,6 +2300,186 @@ extra:
       number: 20
       release_date: '1982-11-20'
       title_display: 第20巻(全集252)
+  - imprint: 手塚治虫文庫全集
+    label: 手塚治虫文庫全集(2009–2010)
+    publisher: 講談社
+    type: bunkobon
+    volumes:
+    - isbn13: '9784063737011'
+      number: 1
+      release_date: 2009-10
+      title_display: 第1巻(BT-1)
+    - isbn13: '9784063737028'
+      number: 2
+      release_date: 2009-10
+      title_display: 第2巻(BT-2)
+    - isbn13: '9784063737035'
+      number: 3
+      release_date: 2009-10
+      title_display: 第3巻(BT-3)
+    - isbn13: '9784063737042'
+      number: 4
+      release_date: 2009-11
+      title_display: 第4巻(BT-4)
+    - isbn13: '9784063737059'
+      number: 5
+      release_date: 2009-11
+      title_display: 第5巻(BT-5)
+    - isbn13: '9784063737066'
+      number: 6
+      release_date: 2009-12
+      title_display: 第6巻(BT-6)
+    - isbn13: '9784063737073'
+      number: 7
+      release_date: 2009-12
+      title_display: 第7巻(BT-7)
+    - isbn13: '9784063737080'
+      number: 8
+      release_date: 2010-01
+      title_display: 第8巻(BT-8)
+    - isbn13: '9784063737097'
+      number: 9
+      release_date: 2010-01
+      title_display: 第9巻(BT-9)
+    - isbn13: '9784063737332'
+      number: 10
+      release_date: 2010-01
+      title_display: 第10巻(BT-33)
+  tezuka-osamu-manga-zenshuu-mishuuroku-sakuhinshuu:
+  - imprint: 手塚治虫文庫全集
+    label: 手塚治虫文庫全集(2012)
+    publisher: 講談社
+    type: bunkobon
+    volumes:
+    - isbn13: '9784063738940'
+      number: 1
+      release_date: 2012-03
+      title_display: 第1巻(BT-194)
+    - isbn13: '9784063738957'
+      number: 2
+      release_date: 2012-04
+      title_display: 第2巻(BT-195)
+    - isbn13: '9784063738964'
+      number: 3
+      release_date: 2012-05
+      title_display: 第3巻(BT-196)
+  the-kureetaa:
+  - imprint: 手塚治虫文庫全集
+    label: 手塚治虫文庫全集(2010)
+    publisher: 講談社
+    type: bunkobon
+    volumes:
+    - isbn13: '9784063737455'
+      number: 1
+      release_date: 2010-03
+      title_display: 文庫全集BT-45
+  - imprint: 手塚治虫漫画全集
+    label: 手塚治虫漫画全集(1982)
+    publisher: 講談社
+    type: standard
+    volumes:
+    - isbn13: '9784061732186'
+      number: 1
+      release_date: '1982-04-20'
+      title_display: 第1巻(全集218)
+    - isbn13: '9784061732193'
+      number: 2
+      release_date: '1982-05-20'
+      title_display: 第2巻(全集219)
+    - isbn13: '9784061732209'
+      number: 3
+      release_date: '1982-07-20'
+      title_display: 第3巻(全集220)
+  thrill-hakase:
+  - imprint: 手塚治虫文庫全集
+    label: 手塚治虫文庫全集(2011)
+    publisher: 講談社
+    type: bunkobon
+    volumes:
+    - isbn13: '9784063738254'
+      number: 1
+      release_date: 2011-04
+      title_display: 文庫全集BT-125
+  - imprint: 手塚治虫漫画全集
+    label: 手塚治虫漫画全集(1979)
+    publisher: 講談社
+    type: standard
+    volumes:
+    - isbn13: '9784061086203'
+      number: 1
+      release_date: '1979-08-20'
+      title_display: 全集第20巻
+  thunder-mask:
+  - imprint: 手塚治虫漫画全集
+    label: 手塚治虫漫画全集(1983)
+    publisher: 講談社
+    type: standard
+    volumes:
+    - isbn13: '9784061732704'
+      number: 1
+      release_date: '1983-05-20'
+      title_display: 全集第270巻
+  tiger-books:
+  - imprint: 手塚治虫漫画全集
+    label: 手塚治虫漫画全集(1978–1984)
+    publisher: 講談社
+    type: standard
+    volumes:
+    - isbn13: '9784061087217'
+      number: 1
+      release_date: '1978-03-15'
+      title_display: 第1巻(全集121)
+    - isbn13: '9784061087224'
+      number: 2
+      release_date: '1978-04-20'
+      title_display: 第2巻(全集122)
+    - isbn13: '9784061087231'
+      number: 3
+      release_date: '1978-11-20'
+      title_display: 第3巻(全集123)
+    - isbn13: '9784061087248'
+      number: 4
+      release_date: '1979-08-20'
+      title_display: 第4巻(全集124)
+    - isbn13: '9784061087255'
+      number: 5
+      release_date: '1979-12-20'
+      title_display: 第5巻(全集125)
+    - isbn13: '9784061087262'
+      number: 6
+      release_date: '1980-10-20'
+      title_display: 第6巻(全集126)
+    - isbn13: '9784061087279'
+      number: 7
+      release_date: '1982-03-20'
+      title_display: 第7巻(全集127)
+    - isbn13: '9784061087286'
+      number: 8
+      release_date: 1984-03
+      title_display: 第8巻(全集128)
+  uewoshitahenojiretta:
+  - imprint: 手塚治虫文庫全集
+    label: 手塚治虫文庫全集(2011)
+    publisher: 講談社
+    type: bunkobon
+    volumes:
+    - isbn13: '9784063738278'
+      number: 1
+      release_date: 2011-04
+      title_display: 文庫全集BT-127
+  - imprint: 手塚治虫漫画全集
+    label: 手塚治虫漫画全集(1983)
+    publisher: 講談社
+    type: standard
+    volumes:
+    - isbn13: '9784061087712'
+      number: 1
+      release_date: 1983-07
+      title_display: 第1巻(全集171)
+    - isbn13: '9784061087729'
+      number: 2
+      release_date: 1983-08
+      title_display: 第2巻(全集172)
   umi-no-toriton:
   - imprint: 手塚治虫漫画全集
     label: 手塚治虫漫画全集(1979–1980)
@@ -785,6 +2502,19 @@ extra:
       number: 4
       release_date: 1980-01
       title_display: 第4巻(全集192)
+  - imprint: 手塚治虫文庫全集
+    label: 手塚治虫文庫全集(2009–2010)
+    publisher: 講談社
+    type: bunkobon
+    volumes:
+    - isbn13: '9784063737233'
+      number: 1
+      release_date: 2009-12
+      title_display: 第1巻(BT-23)
+    - isbn13: '9784063737240'
+      number: 2
+      release_date: 2010-01
+      title_display: 第2巻(BT-24)
   unico:
   - imprint: 手塚治虫漫画全集
     label: 手塚治虫漫画全集(1983–1993)
@@ -803,6 +2533,15 @@ extra:
       number: 3
       release_date: '1993-02-17'
       title_display: 小学一年生版 第3巻(全集310)
+  - imprint: 手塚治虫文庫全集
+    label: 手塚治虫文庫全集(2009)
+    publisher: 講談社
+    type: bunkobon
+    volumes:
+    - isbn13: '9784063737202'
+      number: 1
+      release_date: 2009-11
+      title_display: 文庫全集BT-20
   vampire:
   - imprint: 手塚治虫漫画全集
     label: 手塚治虫漫画全集(1979–1993)
@@ -825,6 +2564,50 @@ extra:
       number: 4
       release_date: 1993-06
       title_display: 第4巻(全集320)
+  - imprint: 手塚治虫文庫全集
+    label: 手塚治虫文庫全集(2010)
+    publisher: 講談社
+    type: bunkobon
+    volumes:
+    - isbn13: '9784063737820'
+      number: 1
+      release_date: 2010-09
+      title_display: 第1巻(BT-82)
+    - isbn13: '9784063737837'
+      number: 2
+      release_date: 2010-09
+      title_display: 第2巻(BT-83)
+  w3:
+  - imprint: 手塚治虫文庫全集
+    label: 手塚治虫文庫全集(2009)
+    publisher: 講談社
+    type: bunkobon
+    volumes:
+    - isbn13: '9784063737158'
+      number: 1
+      release_date: 2009-10
+      title_display: 第1巻(BT-15)
+    - isbn13: '9784063737165'
+      number: 2
+      release_date: 2009-10
+      title_display: 第2巻(BT-16)
+  - imprint: 手塚治虫漫画全集
+    label: 手塚治虫漫画全集(1980–1981)
+    publisher: 講談社
+    type: standard
+    volumes:
+    - isbn13: '9784061087392'
+      number: 1
+      release_date: '1980-10-20'
+      title_display: 第1巻(全集139)
+    - isbn13: '9784061087408'
+      number: 2
+      release_date: '1980-12-20'
+      title_display: 第2巻(全集140)
+    - isbn13: '9784061087415'
+      number: 3
+      release_date: '1981-03-20'
+      title_display: 第3巻(全集141)
   wansa-kun:
   - imprint: 手塚治虫漫画全集
     label: 手塚治虫漫画全集(1997)
@@ -849,6 +2632,25 @@ extra:
       number: 2
       release_date: '1983-04-20'
       title_display: 第2巻(全集269)
+  - imprint: 手塚治虫文庫全集
+    label: 手塚治虫文庫全集(2010)
+    publisher: 講談社
+    type: bunkobon
+    volumes:
+    - isbn13: '9784063737523'
+      number: 1
+      release_date: 2010-04
+      title_display: 文庫全集BT-52
+  yoakejou:
+  - imprint: 手塚治虫漫画全集
+    label: 手塚治虫漫画全集(1978)
+    publisher: 講談社
+    type: standard
+    volumes:
+    - isbn13: '9784061086500'
+      number: 1
+      release_date: '1978-08-30'
+      title_display: 全集第50巻
   yoru-yo-sayonara:
   - imprint: 手塚治虫漫画全集
     label: 手塚治虫漫画全集(1994)
@@ -859,3 +2661,42 @@ extra:
       number: 1
       release_date: '1994-02-17'
       title_display: 全集第325巻
+  yufurate-no-ki:
+  - imprint: 手塚治虫文庫全集
+    label: 手塚治虫文庫全集(2009)
+    publisher: 講談社
+    type: bunkobon
+    volumes:
+    - isbn13: '9784063737219'
+      number: 1
+      release_date: 2009-11
+      title_display: 文庫全集BT-21
+  yuubijin:
+  - imprint: 手塚治虫漫画全集
+    label: 手塚治虫漫画全集(1982)
+    publisher: 講談社
+    type: standard
+    volumes:
+    - isbn13: '9784061732544'
+      number: 1
+      release_date: '1982-11-20'
+      title_display: 全集第254巻
+  yuushadan:
+  - imprint: 手塚治虫文庫全集
+    label: 手塚治虫文庫全集(2010)
+    publisher: 講談社
+    type: bunkobon
+    volumes:
+    - isbn13: '9784063737875'
+      number: 1
+      release_date: 2010-10
+      title_display: 文庫全集BT-87
+  - imprint: 手塚治虫漫画全集
+    label: 手塚治虫漫画全集(1979)
+    publisher: 講談社
+    type: standard
+    volumes:
+    - isbn13: '9784061086296'
+      number: 1
+      release_date: '1979-02-24'
+      title_display: 全集第29巻

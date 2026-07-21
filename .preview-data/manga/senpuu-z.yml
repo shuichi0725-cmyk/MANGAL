@@ -12,7 +12,7 @@ authors:
   kana: テズカオサム
   romaji: tezukaosamu
 original_authors: []
-publisher: kodansha
+publisher: kokushokankoukai
 magazine: null
 demographic: shounen
 genres:
@@ -26,29 +26,37 @@ editions:
   label: 通常版
   publisher: 講談社
   imprint: 手塚治虫漫画選集
+  volumes: []
+  versions:
+  - label: 1978年版
+    volumes: []
+  - label: 2011年版
+    volumes: []
+- type: bunkobon
+  label: 手塚治虫文庫全集(2011)
+  publisher: 講談社
+  imprint: 手塚治虫文庫全集
+  volumes:
+  - number: 1
+    asin: null
+    isbn13: '9784063738032'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/8032/9784063738032_1_7.jpg?_ex=300x300
+    release_date: '2011-01-12'
+    title_display: 文庫全集BT-103
+- type: standard
+  label: 手塚治虫漫画全集(1978)
+  publisher: 講談社
+  imprint: 手塚治虫漫画全集
   volumes:
   - number: 1
     asin: null
     isbn13: '9784061086524'
     cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0610/06108652.jpg?_ex=300x300
-    release_date: 1978-11
-  versions:
-  - label: 1978年版
-    volumes:
-    - number: 1
-      asin: null
-      isbn13: '9784061086524'
-      cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0610/06108652.jpg?_ex=300x300
-      release_date: 1978-11
-  - label: 2011年版
-    volumes:
-    - number: 1
-      asin: null
-      isbn13: '9784063738032'
-      cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/8032/9784063738032_1_7.jpg?_ex=300x300
-      release_date: '2011-01-12'
+    release_date: '1978-11-20'
+    title_display: 全集第52巻
 publishers:
-- kodansha
+- kokushokankoukai
+- shogakukan
 catch: 才を妬む歪んだ科学者に、両親を奪われた幼い少年。遺された養育ロボットに育てられ、やがて正義のヒーロー「Z」へ。胸熱の冒険ファンタジー。
 anilist_id: 106304
 synonyms:

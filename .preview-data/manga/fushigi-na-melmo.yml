@@ -4,7 +4,7 @@ title: ふしぎなメルモ
 title_kana: フシギナメルモ
 title_romaji: fushigi na merumo
 year_started: 1994
-year_ended: 1994
+year_ended: 2004
 status: completed
 authors:
 - name: 手塚治虫
@@ -40,14 +40,14 @@ editions:
     release_date: 1994-05
 - type: bunkobon
   label: 文庫版
-  publisher: 講談社
+  publisher: 秋田書店
   imprint: 秋田文庫
   volumes:
   - number: 1
     asin: null
-    isbn13: '9784063738988'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/8988/9784063738988.jpg?_ex=300x300
-    release_date: '2012-04-12'
+    isbn13: '9784253171496'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/2531/25317149.jpg?_ex=200x200
+    release_date: 2004-08
 - type: standard
   label: 手塚治虫漫画全集(1984)
   publisher: 講談社
@@ -57,9 +57,20 @@ editions:
     asin: null
     isbn13: '9784061732803'
     cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0617/06173280.jpg?_ex=300x300
-    release_date: 1984-09
+    release_date: '1984-10-03'
     title_display: 全集第280巻
+- type: bunkobon
+  label: 手塚治虫文庫全集(2012)
+  publisher: 講談社
+  imprint: 手塚治虫文庫全集
+  volumes:
+  - number: 1
+    asin: null
+    isbn13: '9784063738988'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/8988/9784063738988.jpg?_ex=300x300
+    release_date: '2012-04-12'
+    title_display: 文庫全集BT-198
 publishers:
-- kodansha
+- akita
 - shogakukan
 genres_provisional: true

@@ -3,8 +3,8 @@ slug: ue-o-shita-e-no-giretta
 title: 上を下へのジレッタ
 title_kana: ウエヲシタヘノジレッタ
 title_romaji: ueoshitahenojiretta
-year_started: 1983
-year_ended: 1983
+year_started: 1995
+year_ended: 2008
 status: completed
 authors:
 - name: 手塚治虫
@@ -12,7 +12,7 @@ authors:
   kana: テズカオサム
   romaji: tezukaosamu
 original_authors: []
-publisher: kodansha
+publisher: jitsugyo-no-nihon
 magazine: null
 demographic: seinen
 genres:
@@ -27,37 +27,62 @@ wikidata_qid: Q193300
 editions:
 - type: standard
   label: 通常版
-  publisher: 講談社
+  publisher: 実業之日本社
   imprint: ホリデー・コミックス
   volumes:
   - number: 1
     asin: null
-    isbn13: '9784061087712'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0610/06108771.jpg?_ex=300x300
-    release_date: 1983-07
-  - number: 2
-    asin: null
-    isbn13: '9784061087729'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0610/06108772.jpg?_ex=200x200
-    release_date: 1983-08
+    isbn13: '9784408612690'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/2690/9784408612690.jpg?_ex=300x300
+    release_date: 2008-11
 - type: bunkobon
   label: 文庫版
-  publisher: 講談社
+  publisher: 文芸春秋
   imprint: 文春文庫ビジュアル版
+  volumes:
+  - number: 1
+    volume_label: 上
+    asin: null
+    isbn13: '9784168110375'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/rakutenkobo-ebooks/cabinet/8245/2000002958245.jpg?_ex=300x300
+    release_date: '1995-04-10'
+  - number: 2
+    volume_label: 下
+    asin: null
+    isbn13: '9784168110382'
+    cover_url: null
+    release_date: '1995-04-10'
+- type: bunkobon
+  label: 手塚治虫文庫全集(2011)
+  publisher: 講談社
+  imprint: 手塚治虫文庫全集
   volumes:
   - number: 1
     asin: null
     isbn13: '9784063738278'
     cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/8278/9784063738278.jpg?_ex=300x300
     release_date: '2011-04-19'
-  - number: 3
-    volume_label: 下
+    title_display: 文庫全集BT-127
+- type: standard
+  label: 手塚治虫漫画全集(1983)
+  publisher: 講談社
+  imprint: 手塚治虫漫画全集
+  volumes:
+  - number: 1
     asin: null
-    isbn13: '9784168110382'
-    cover_url: null
-    release_date: '1995-04-10'
+    isbn13: '9784061087712'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0610/06108771.jpg?_ex=300x300
+    release_date: 1983-07
+    title_display: 第1巻(全集171)
+  - number: 2
+    asin: null
+    isbn13: '9784061087729'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0610/06108772.jpg?_ex=300x300
+    release_date: 1983-08
+    title_display: 第2巻(全集172)
 publishers:
-- kodansha
+- bungei-shunju
+- jitsugyo-no-nihon
 catch: 断食すれば絶世の美女に変わる歌姫、不死の恋人、世界的スター——型破りプロデューサーが集めた異形のメンバー。手塚治虫が描く、めくるめく幻想ドラマ。
 anilist_id: 106665
 synonyms:
