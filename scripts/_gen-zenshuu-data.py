@@ -27,6 +27,7 @@ META = {
     # key: (表示名, 出版社, 定義巻数, 軸)  年はデータから算出
     "mizuki": ("水木しげる漫画大全集", "講談社", 103, "num"),
     "tezuka": ("手塚治虫漫画全集", "講談社", 400, "num"),
+    "tezuka-bunko": ("手塚治虫文庫全集", "講談社", 200, "num"),
     "kamuiden": ("カムイ伝全集", "小学館", 38, "num"),
     "tsuge-taizen": ("つげ義春大全", "講談社", 22, "num"),
     "tsuge": ("つげ義春全集", "筑摩書房", 9, "num"),
@@ -195,15 +196,21 @@ def main():
                 **({"nm": True} if o.get("nonmanga") else {}),
             })
         works = [{"name": w, "vols": groups[w]} for w in order]
-        if key == "tezuka":
+        if key in ("tezuka", "tezuka-bunko"):
             works = _link_by_title(works, "手塚治虫")
             # ★巻番号ピン結線(2026-07-21): 題が本編と別表記の版は fallback で結線されないため明示。
             #   少女クラブ版(85/86=リボンの騎士・200=火の鳥)/小学一年生版(310=ユニコ)は
             #   同一作品の初出誌版=主頁へ(別頁を立てるほどの巻数でない・ユーザ400冊完備裁定)。
-            _pin = {85: "ribon-no-kishi", 86: "ribon-no-kishi", 200: "hinotori", 310: "unico",
+            _pin = {"tezuka": {85: "ribon-no-kishi", 86: "ribon-no-kishi", 200: "hinotori", 310: "unico",
                     # MW=表記(ムウ)付きでfallback不一致 / 奥義=「手塚治虫漫画…」始まりの題が
                     # 仮グループ(その他)送りになりグループ名照合に乗らない → 番号でピン
-                    301: "mw", 302: "mw", 303: "mw", 391: "tezuka-osamu-manga-no-ougi"}
+                    301: "mw", 302: "mw", 303: "mw", 391: "tezuka-osamu-manga-no-ougi"},
+                    # 文庫全集: 少女クラブ版(121/166)=主頁へ(400巻側と同じ裁定)。
+                    # 22=合本(先頭作品頁へ=400巻の合本巻慣行) / 131・152=グループ名の数字剥がれ /
+                    # 134=おもしろブック版(別版→主頁=少女クラブ裁定と同型) / 200=寶/宝字体差
+                    "tezuka-bunko": {121: "ribon-no-kishi", 166: "hinotori",
+                                     22: "rosutowaarudo", 131: "aventure-21", 134: "lion-books",
+                                     152: "dust-8", 200: "shin-takarajima"}}[key]
             for ws in works:
                 for v in ws["vols"]:
                     if not v.get("s") and v.get("n") in _pin:
@@ -225,7 +232,7 @@ def main():
                      "axis": axis, "linked": linked, "isbns": n_isbn,
                      "complete": complete, "covers": cvs, "works": works})
     # コーナー表示順 = 完備→大物
-    orderkey = ["mizuki", "tezuka", "kamuiden", "tsuge-taizen", "hasegawa", "tsuge", "fujiko-f", "fujiko-land", "ishinomori"]
+    orderkey = ["mizuki", "tezuka", "tezuka-bunko", "kamuiden", "tsuge-taizen", "hasegawa", "tsuge", "fujiko-f", "fujiko-land", "ishinomori"]
     cols.sort(key=lambda c: orderkey.index(c["key"]))
     json.dump({"collections": cols}, io.open(OUT, "w", encoding="utf-8"), ensure_ascii=False)
     kb = os.path.getsize(OUT) // 1024
