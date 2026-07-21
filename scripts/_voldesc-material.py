@@ -194,6 +194,23 @@ if os.path.exists(pj):
         if r.get("isbn") in want and r.get("caption"):
             caps.setdefault(r["isbn"], {"caption": r["caption"], "contents": ""})
 
+# 層1.5: 収集済み永続キャッシュ(captions-cache.jsonl = 過去収集+Sonnetアイドル救済分[recovered]も入る)。
+#   ★ローカル専用運転(2026-07-21 ユーザ指示=生成セッションはliveを叩かない)の重要源。巨大2本より先に引く。
+_cc_path = f"{ROOT}/.cache/voldesc/captions-cache.jsonl"
+if os.path.exists(_cc_path):
+    _cc_hit = 0
+    _cc_rest = want - set(caps)
+    for ln in open(_cc_path, encoding="utf-8"):
+        try:
+            _d = json.loads(ln)
+        except Exception:
+            continue
+        _ib = _d.get("isbn")
+        if _ib in _cc_rest and _ib not in caps and (_d.get("caption") or "").strip():
+            caps[_ib] = {"caption": _d["caption"].strip(), "contents": ""}
+            _cc_hit += 1
+    print(f"captions-cache(救済分含む) 1パス: hit {_cc_hit}")
+
 # 層2: ローカル楽天キャッシュ(rakuten-isbn.jsonl 373MB + delta 828MB)を順に1パス。
 #   残り(rest)が尽きたら次ファイルは読まずに打ち切り(速い方から)。両方合わせてliveをほぼ消す。
 for path in LOCAL_RAKUTEN:

@@ -37,15 +37,21 @@ description: 巻説明つくって=単行本(巻)単位の説明文を楽天item
 
 ## 手順
 
-### Step1: 材料収集
+### Step1: 材料収集 (★2026-07-21 ユーザ指示=**ローカル専用が既定。liveを叩かない**)
 ```
-python scripts/_voldesc-material.py --live                          # ★auto: 裸の「巻説明つくって」はこれ
-python scripts/_voldesc-material.py --slugs a,b,c --live            # 対象指定時
-python scripts/_voldesc-material.py --slugs-file list.txt --live    # 大量時
+python scripts/_voldesc-material.py --local-only                          # ★auto: 裸の「巻説明つくって」はこれ
+python scripts/_voldesc-material.py --slugs a,b,c --local-only            # 対象指定時
+python scripts/_voldesc-material.py --slugs-file list.txt --local-only    # 大量時
 ```
+- ★★**`--live` は使わない**(2026-07-21 ユーザ指示「次からはローカルの情報から作り出す」)。
+  理由=分業: **材料収集(live照会含む)はSonnetのアイドル運転が担当**(柱⑦ `--recheck-nomaterial` が
+  「材料なし」台帳をlive再照会で敗者復活)。Opus/Fableの生成セッションはローカル在庫
+  (予約キャッシュ+`rakuten-isbn.jsonl`+`rakuten-isbn-delta.jsonl`+`recovered.jsonl`)だけで書く。
+  ローカル未収の巻は「材料なし」台帳に記録されて後日Sonnet側が回収する=**待てば材料が来る**。
+  liveを使うのはユーザが明示した時だけ。
 - ★**auto** = slug無し時、ファイル名順(=端から全件・人気順禁止 [[feedback_no_popularity_priority]])に
   seed未生成の巻を `--take`(既定100巻)ぶん自動選定。**再実行=自動で続きから**(seed除外が実質cursor・cursorファイル不要)。
-- キャッシュ順=予約キャッシュ→**ローカル楽天2本を1パス**(`rakuten-isbn.jsonl` 373MB全件harvest + `rakuten-isbn-delta.jsonl` 828MB新着差分。別カバレッジなので**両方舐める**=数秒・liveほぼゼロ)→live(1.2s/req・429即中断。実測でローカル未収=captionほぼ無し)。★deltaだけだとliveに落ちる穴があった(2026-07-19修正)。
+- キャッシュ順=予約キャッシュ→**ローカル楽天2本を1パス**(`rakuten-isbn.jsonl` 373MB全件harvest + `rakuten-isbn-delta.jsonl` 828MB新着差分。別カバレッジなので**両方舐める**=数秒)。★救済分 `.cache/voldesc/recovered.jsonl` も材料に含める。
 - seed既存ISBNは自動除外(純粋追加運用)。slugは**SRC stem名**で渡す。
 - 出力 `.cache/voldesc/materials.jsonl` = {slug, title, authors, vols:[{vol,isbn,edition,caption,contents}], missing:[...]}
 
@@ -80,7 +86,9 @@ git add data/seeds/volume-desc-ja.jsonl && git commit -m "巻説明 +N件(volume
 - ★**別版caption(うる星型)**: 頁在ISBN(標準版)のcaptionが空でも、同一巻の別版(文庫/新装)に在ることがある
   (うる星1巻=標準版空・文庫版62字)。材料scriptは頁の**全edition ISBN**を舐めるので yml に別版があれば拾う。
   yml に無い版だけに在る場合は per-case で `_lookup.py --creator` 補完。
-- `--local-only` はbulk専用(live 0/101実測が根拠)。少数per-caseでは `--live` を使う。
+- ★`--local-only` が**常に既定**(2026-07-21 ユーザ指示。per-caseでも live を使わない)。ローカル未収の巻は
+  「材料なし」台帳行き→**Sonnetアイドル運転(柱⑦)がliveで敗者復活**→captions-cacheに入り次回のローカル収集で拾える。
+  材料scriptは層1.5でcaptions-cache(救済分含む)を読む(2026-07-21追加)。liveはユーザ明示時のみ。
 
 ## NEVER
 - 表示結線(promote/UI)を勝手にやらない(表示方法はユーザが後で決める)
