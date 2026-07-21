@@ -92,25 +92,6 @@ export default function Design11() {
       {/* 1.2【中】全集コーナー(A-1案・2026-07-19 テスト導入。一覧ページ無し=カードから直接 /zenshuu/[key] へ) */}
       <ZenshuuCorner />
 
-      {/* 1.5【中】今月の新刊(アニメ直下へ移動 2026-07-12)
-          ★2026-07-15: 再読込ごとランダム入替(アニメコーナーと同方式)+リンクは当月巻フォーカス(#v)。
-            当月巻の書影を出す(旧=1巻書影で「一年前の本?」と誤読された 2026-07-13) */}
-      <section className="mt-4 px-4">
-        <Tile className="p-3.5">
-          <h2 className="text-[14px] font-bold">📦 今月の新刊</h2>
-          <MonthReleasesClient
-            pool={thisMonthReleases(manga, byNew, 60).map((r) => ({
-              slug: r.m.slug,
-              title: r.m.title,
-              authors: (r.m.authors ?? []).map((a) => a.name).join("・"),
-              number: r.number,
-              sub: `${r.number ? `${r.number}巻` : "新刊"}${releaseDayLabel(r.date) ? `・${releaseDayLabel(r.date)}` : ""}`,
-              cover: r.cover ?? coverUrl(r.m) ?? null,
-            }))}
-          />
-        </Tile>
-      </section>
-
       {/* 2.【小・新】ことばカード = あらすじの一文だけ大きく(縦読みの「息継ぎ」) */}
       {kotoba && (
         <section className="mt-4 px-4">
@@ -128,6 +109,25 @@ export default function Design11() {
 
       {/* 2.7【新・自動】周年: 今日で連載開始N年(anniversaries.json週次再生成) */}
       <AnniversaryDaily />
+
+      {/* 3.4【中】今月の新刊(カレンダー直上へ移動 2026-07-21 ユーザ指示。旧=アニメ直下2026-07-12)
+          ★2026-07-15: 再読込ごとランダム入替(アニメコーナーと同方式)+リンクは当月巻フォーカス(#v)。
+            当月巻の書影を出す(旧=1巻書影で「一年前の本?」と誤読された 2026-07-13) */}
+      <section className="mt-4 px-4">
+        <Tile className="p-3.5">
+          <h2 className="text-[14px] font-bold">📦 今月の新刊</h2>
+          <MonthReleasesClient
+            pool={thisMonthReleases(manga, byNew, 60).map((r) => ({
+              slug: r.m.slug,
+              title: r.m.title,
+              authors: (r.m.authors ?? []).map((a) => a.name).join("・"),
+              number: r.number,
+              sub: `${r.number ? `${r.number}巻` : "新刊"}${releaseDayLabel(r.date) ? `・${releaseDayLabel(r.date)}` : ""}`,
+              cover: r.cover ?? coverUrl(r.m) ?? null,
+            }))}
+          />
+        </Tile>
+      </section>
 
       {/* 3.5【中】発売/創刊カレンダー(2ビュー・データ駆動 = public/calendar を遅延fetch・index join) */}
       <section className="mt-4 px-4">
