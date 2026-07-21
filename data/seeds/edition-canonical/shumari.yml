@@ -15,3 +15,21 @@ volumes:
   isbn13: '9784048520782'
   release_date: 1987-12
   volume_label: 下
+# ★2026-07-21 全集版復活(ユーザ裁定=作品頁にも全集掲載。日付=楽天×NDL)
+extra_editions:
+- label: 手塚治虫漫画全集(1978–1995)
+  type: standard
+  publisher: 講談社
+  volumes:
+  - number: 1
+    isbn13: '9784061086975'
+    release_date: 1995-11
+  - number: 2
+    isbn13: '9784061086982'
+    release_date: 1978-11
+  - number: 3
+    isbn13: '9784061086999'
+    release_date: 1978-12
+  - number: 4
+    isbn13: '9784061087002'
+    release_date: 1979-01-10

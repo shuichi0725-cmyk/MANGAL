@@ -11,3 +11,21 @@ volumes:
   isbn13: '9784091971227'
   release_date: 1989-07
   volume_label: 下
+# ★2026-07-21 全集版復活(ユーザ裁定=作品頁にも全集掲載。日付=楽天×NDL)
+extra_editions:
+- label: 手塚治虫漫画全集(1977)
+  type: standard
+  publisher: 講談社
+  volumes:
+  - number: 1
+    isbn13: '9784061086319'
+    release_date: 1977-06
+  - number: 2
+    isbn13: '9784061086326'
+    release_date: 1977-08
+  - number: 3
+    isbn13: '9784061086333'
+    release_date: 1977-11
+  - number: 4
+    isbn13: '9784061086340'
+    release_date: 1977-12
