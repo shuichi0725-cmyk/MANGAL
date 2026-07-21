@@ -380,7 +380,7 @@ extra:
       isbn13: '9784061732124'
       release_date: '1983-12'
       title_display: 第13巻(全集212)
-  ikki-mandara:
+  ikkimandara:  # SRC名(slug-override頁はpromote内部でSRC slugのまま処理される)
   - label: 手塚治虫漫画全集(1983–1984)
     type: standard
     publisher: 講談社
@@ -570,7 +570,7 @@ extra:
       isbn13: '9784061087750'
       release_date: '1979-12-10'
       title_display: 第2巻(全集175)
-  ribon-no-kishi:
+  ribonnokishi:  # SRC名(同上)
   - label: 手塚治虫漫画全集(1979)
     type: standard
     publisher: 講談社
