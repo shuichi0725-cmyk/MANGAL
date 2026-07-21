@@ -5,6 +5,7 @@ metadata:
   node_type: memory
   type: project
   originSessionId: 2263dd16-1146-4141-862a-d1a3408de999
+  modified: 2026-07-21T11:44:06.957Z
 ---
 
 2026-07-17、**新PCへ移行完了**(= このリポジトリは `github.com/shuichi0725-cmyk/MANGAL` からの fresh clone + pull)。搬入経路 = **`D:\migrate\`**(manga.v2 / data-index / env)。全て適用済みで実データと一致確認済み(manga.v2 68,973件 / 本番索引 22MB+10.5MB がバイト一致 / `.env.local` 11キー全て値あり)。★**`D:\migrate` は用済み**(削除可・未実施)。
@@ -43,5 +44,11 @@ metadata:
 
 - `D:\migrate\env`にenv.localしか無く`.env`が未搬入だった。`.env`の中身=**TINYFISH_API_KEY + CLOUDFLARE_API_TOKEN**の2行(読むのは_tinyfish.py/_cf-analytics.pyの2本のみ)。7/17ユーザが両鍵を提供(CFは再発行=アカウント分析+ゾーン分析Read)→fish疎通・cf-analytics verify/report/web全部確認済み。
 - ★教訓: 移行対象リスト = manga.v2 + data-index + **env(.env.localと.env両方)** + data/manga + .cache主要物。
+
+## 移行の穴⑤ = 旧PCハードコードパス `C:/Users/shuic/code/MANGAL` が約90本のscriptに残存(7/21発覚・discovery分のみ修正)
+
+- ★**症状**: `_ndl-discovery.py` が旧パスの `.cache/db-v2.sqlite` を見て `unable to open database file` → **日次蒸留B(NDL新着discovery)が移行後ずっと無音失敗**(2026-07-15〜07-21の新着を取りこぼし)。`--plan`は本体scriptが現パスでcacheを読めるので**正常な顔で「新規0」を返す**=Bが死んでいることに気付けない型。7/21修正後に再discoverで種2外160件(6月151+7月9)を一括回収。
+- ★**修正パターン**(2箇所): ①`ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__))).replace("\\","/")` ②sqlite roは**空白パス("chiba shuichi")がURIで壊れる**ので `sqlite3.connect(pathlib.Path(f"{ROOT}/.cache/db-v2.sqlite").as_uri() + "?mode=ro", uri=True)`(→`file:///C:/Users/chiba%20shuichi/...`にpercent-encode)。
+- ★**残る同型**: `grep "C:/Users/shuic/" scripts/` で**約90本**hit(大半は単発の歴史script=非パイプライン)。**現行の日次/週次/反映パイプラインで叩く物だけ**都度この型で潰す(一括sweepは別タスク・GO要)。`_sync-memory.py`のコメントが既知として記録済。[[feedback_one_bug_means_a_class]]
 
 その他の破損 [[r2-manifest-corrupt-pending-repair]] は移行前(7/11)から壊れていた。
