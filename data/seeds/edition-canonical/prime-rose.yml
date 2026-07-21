@@ -1,6 +1,6 @@
 slug: prime-rose
 canonical_label: 少年チャンピオン・コミックス エクストラ版(1989-90)
-source: 'wikipedia書誌(4版)×楽天cache×種2突合 2026-07-13。汚染なし(表示2版はWiki一致・1989=エクストラ版初単行本化で正)。文庫全集2011全2巻が種2のtype割れで不可視だったのを版として可視化+全集1995をexclude(black-jack前例)'
+source: 'wikipedia書誌(4版)×楽天cache×種2突合 2026-07-13。汚染なし(表示2版はWiki一致・1989=エクストラ版初単行本化で正)。文庫全集2011全2巻が種2のtype割れで不可視だったのを版として可視化。★2026-07-21 全集1995を版として復活(ユーザ裁定=全集コーナー整備に伴い作品頁にも全集版を掲載。旧「載せない方針」の理由=繰り上がり事故はextra_edition明示なら起きない。日付=楽天×NDL 2ソース)'
 publisher: 秋田書店
 volumes:
 - number: 1
@@ -43,3 +43,19 @@ extra_editions:
   - number: 2
     isbn13: '9784063738681'
     release_date: 2011-11
+- label: 手塚治虫漫画全集(1995)
+  type: standard
+  publisher: 講談社
+  volumes:
+  - number: 1
+    isbn13: '9784061759480'
+    release_date: 1995-01
+  - number: 2
+    isbn13: '9784061759497'
+    release_date: 1995-02
+  - number: 3
+    isbn13: '9784061759503'
+    release_date: 1995-03
+  - number: 4
+    isbn13: '9784061759510'
+    release_date: 1995-04
