@@ -346,6 +346,47 @@ def get_edition_canonical() -> dict:
     return _EDITION_CANONICAL
 
 
+def get_extra_editions() -> dict:
+    """★版付加 seed (= data/seeds/extra-editions.yml → {slug: [edition,...]})。
+    既存版に一切触れず、指定した版を頁末尾に追加する軽量機構(2026-07-21 手塚全集版の可視化)。
+    canonical(全面再構築=外部権威必須)/separate_editions(全imprint分離=古典で版爆発)の
+    どちらも過剰な「同type統合で沈んだ特定版を1本だけ足す」ケース用。
+    ISBNが頁内の既存版と重複する巻は自動skip(冪等・ダブリ防止)。"""
+    p = ROOT / "data" / "seeds" / "extra-editions.yml"
+    if not p.exists():
+        return {}
+    with p.open(encoding="utf-8") as f:
+        doc = _yload(f) or {}
+    return doc.get("extra") or {}
+
+
+def apply_extra_editions(slug: str, editions: list, extra: dict) -> tuple[list, bool]:
+    """slug の extra-editions を editions 末尾へ追加。既存ISBNと重複する巻はskip。"""
+    xes = extra.get(slug)
+    if not xes:
+        return editions, False
+    seen = {str(v.get("isbn13")) for e in editions
+            for vs in [e.get("volumes") or []] + [vv.get("volumes") or [] for vv in (e.get("versions") or [])]
+            for v in vs if v.get("isbn13")}
+    added = False
+    for xe in xes:
+        vols = []
+        for v in (xe.get("volumes") or []):
+            if str(v.get("isbn13")) in seen:
+                continue
+            o = {"number": v["number"], "asin": None, "isbn13": v.get("isbn13"),
+                 "cover_url": None, "release_date": v.get("release_date")}
+            if v.get("title_display"):
+                o["title_display"] = v["title_display"]
+            vols.append(o)
+        if vols:
+            editions.append({"type": xe.get("type") or "standard", "label": xe.get("label") or "別版",
+                             "publisher": xe.get("publisher"),
+                             "imprint": xe.get("imprint") or xe.get("label"), "volumes": vols})
+            added = True
+    return editions, added
+
+
 def apply_edition_canonical(slug: str, editions: list, canon: dict) -> list:
     """slug の canonical seed で standard/compact 版を再構築。 他版(文庫等)は温存。
     cover_url=None で出し、 後段 _apply-covers-stage が ISBN で正書影を充填。"""
@@ -2802,6 +2843,10 @@ def main():
     edition_canonical = get_edition_canonical()
     edition_canonical_pages = 0
     print(f"  版canonical map: {len(edition_canonical)} slug", file=sys.stderr)
+    # ★版付加 seed (extra-editions.yml = 既存版に触れず版を末尾追加。手塚全集タブ等)
+    extra_editions_map = get_extra_editions()
+    extra_editions_pages = 0
+    print(f"  版付加 map: {len(extra_editions_map)} slug", file=sys.stderr)
     # ★数値/bool風の文字列(著者「029」等)を強制引用(JS yaml誤読=schema違反404を封鎖)
     import re as _re_q
     _NUMLIKE_Q = _re_q.compile(r"^[-+]?(\d[\d_]*|\d*\.\d+([eE][-+]?\d+)?|0x[0-9a-fA-F]+|0o[0-7]+)$")
@@ -3025,6 +3070,12 @@ def main():
                             _pvm[n] = str(d)
                 if _pvm and _pvm[max(_pvm)][:4].isdigit():
                     new_yml["year_ended"] = int(_pvm[max(_pvm)][:4])
+        # ★版付加(extra-editions.yml): 既存版はそのまま、指定版を末尾に追加(手塚全集タブ等 2026-07-21)
+        if slug in extra_editions_map:
+            new_yml["editions"], _xadded = apply_extra_editions(
+                slug, new_yml.get("editions") or [], extra_editions_map)
+            if _xadded:
+                extra_editions_pages += 1
         # ★キャッチコピーを slug 経由で join(無ければ未設定=カードは出版社表示にfallback)
         if slug in catch_map and catch_map[slug]:
             new_yml["catch"] = catch_map[slug]
