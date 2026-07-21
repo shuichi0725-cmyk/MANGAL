@@ -3,7 +3,7 @@
 種2/本番不変。usage: python _distill_preview.py"""
 import csv, json, os, re, glob, unicodedata, yaml, collections, datetime
 import pykakasi
-ROOT = "C:/Users/shuic/code/MANGAL"
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # 旧PCパス→動的導出(2026-07-21一括是正)
 PREV = f"{ROOT}/.preview-data/manga"
 kks = pykakasi.kakasi()
 TODAY = datetime.date.today().strftime("%Y-%m")  # ★未来発売(予約)判定の基準月

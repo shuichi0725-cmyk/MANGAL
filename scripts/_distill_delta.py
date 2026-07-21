@@ -1,7 +1,7 @@
 """月次蒸留 試走: 種1蒸留(delta抽出)→型分類→管理表(holes)。種2はread-onlyのみ(凍結保証)。
 出力: .cache/madb-distill/delta-<tag>.jsonl (種1蒸留) + manifest-<tag>.tsv (管理表)。種4登録はしない。"""
 import sqlite3, ijson, json, re, unicodedata, sys, time, os
-ROOT = "C:/Users/shuic/code/MANGAL"
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # 旧PCパス→動的導出(2026-07-21一括是正)
 TAG = sys.argv[1] if len(sys.argv) > 1 else "1.2.17"
 SRC = f"{ROOT}/.cache/madb-distill/metadata101.json"
 DELTA = f"{ROOT}/.cache/madb-distill/delta-{TAG}.jsonl"

@@ -1,7 +1,7 @@
 """未登録出版社の上位を、サンプルISBNで NDL+楽天 確認(種2社名と照合)。キー追加前の検証。"""
 import json, re, os, time, html, urllib.parse, urllib.request, yaml, sys
 sys.stdout.reconfigure(encoding="utf-8")
-ROOT = "C:/Users/shuic/code/MANGAL"
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # 旧PCパス→動的導出(2026-07-21一括是正)
 env = dict(l.strip().split("=", 1) for l in open(f"{ROOT}/.env.local", encoding="utf-8") if "=" in l and not l.strip().startswith("#"))
 ORIGIN = "https://mangal.shuichi0725.workers.dev"
 N = int(sys.argv[sys.argv.index("--top")+1]) if "--top" in sys.argv else 25

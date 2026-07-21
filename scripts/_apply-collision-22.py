@@ -1,7 +1,7 @@
 """slug衝突22の裁定適用(docs/collision-22-resolution.tsv)。suffix/subtitle=candidate改名 / swap・edge=両者改名 / dedup=incumbent drop+candidate改名。
 durable=slug-overrides.yml(+dedupはpage-dedup.yml drop) / redirect=slug-aliases.yml+_redirects / 可逆=backup+changelog。"""
 import csv, os, yaml, shutil, json, sys
-ROOT = "C:/Users/shuic/code/MANGAL"; NOW = "2026-06-26"
+import os; ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__))); NOW = "2026-06-26"
 v2dir, pvdir = ROOT + "/data/manga.v2", ROOT + "/.preview-data/manga"
 bakdir = ROOT + "/.cache/collision22-bak"; os.makedirs(bakdir, exist_ok=True)
 so = yaml.safe_load(open(ROOT+"/data/seeds/slug-overrides.yml", encoding="utf-8")) or {"overrides": {}}

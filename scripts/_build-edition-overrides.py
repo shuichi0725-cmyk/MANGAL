@@ -3,7 +3,7 @@ preview と 本番 data/manga.v2 で editions(巻ISBN集合)が異なるペー�
 promote が最後にこの seed でページの editions/著者を置換 → 再promoteで年代版分離・補完が再現。"""
 import glob, os, yaml, json, re
 
-ROOT = "C:/Users/shuic/code/MANGAL"
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # 旧PCパス→動的導出(2026-07-21一括是正)
 
 def isbn_set(d):
     s = set()

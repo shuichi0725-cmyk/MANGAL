@@ -1,7 +1,7 @@
 """蒸留テストページ生成(バッチ): 台帳の統合先に従い、型1=既存本番ページに新巻挿入、型2/3=新規ページ。
 書影+caption(synopsis)付与。うる星regroup(同type同冊数→刷タブ)。出力=.preview-data(テスト・差替可)。種2/本番不変(本番はread-only copy)。"""
 import csv, json, os, re, unicodedata, yaml, glob, collections, html
-ROOT = "C:/Users/shuic/code/MANGAL"
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # 旧PCパス→動的導出(2026-07-21一括是正)
 PREV = f"{ROOT}/.preview-data/manga"
 
 def norm(s):

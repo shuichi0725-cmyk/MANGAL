@@ -1,7 +1,7 @@
 """slug修正対象の権威フリガナをNDLから取得(楽天無し+楽天MADB乖離分)。1.2秒/件・resumable。"""
 import json, yaml, os, re, time, unicodedata, urllib.request, sys
 sys.stdout.reconfigure(encoding="utf-8")
-ROOT = "C:/Users/shuic/code/MANGAL"
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # 旧PCパス→動的導出(2026-07-21一括是正)
 CACHE = ROOT + "/.cache/slugfix-ndl-yomi.json"
 
 fix = dict(json.load(open(ROOT + "/data/seeds/slug-fix-candidates-2026.json", encoding="utf-8")))

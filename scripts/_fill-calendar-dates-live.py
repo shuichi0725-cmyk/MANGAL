@@ -2,7 +2,7 @@
 ★取得できる物は全部とる = Rakuten完全itemを rakuten-isbn-delta.jsonl に保存(書影/価格/Kana等も)。日付→override。"""
 import json,os,re,time,urllib.request,urllib.parse,sys,yaml
 sys.stdout.reconfigure(encoding="utf-8")
-ROOT="C:/Users/shuic/code/MANGAL"
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # 旧PCパス→動的導出(2026-07-21一括是正)
 env={}
 for ln in open(ROOT+"/.env.local",encoding="utf-8"):
     if "=" in ln: k,v=ln.split("=",1); env[k.strip()]=v.strip()

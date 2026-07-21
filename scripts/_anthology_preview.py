@@ -1,6 +1,6 @@
 """安全アンソロ270群を種2から統合(one-page-all)→.preview-dataに生成(テスト点検用)。_anthology:true付与。"""
 import yaml,sqlite3,re,unicodedata,os,pykakasi
-ROOT="C:/Users/shuic/code/MANGAL"; PREV=ROOT+"/.preview-data/manga"
+import os; ROOT=os.path.dirname(os.path.dirname(os.path.abspath(__file__))); PREV=ROOT+"/.preview-data/manga"
 kks=pykakasi.kakasi()
 _NUM=re.compile(r"^[-+]?(\d[\d_]*|\d*\.\d+([eE][-+]?\d+)?)$")
 def _rep(d,data):

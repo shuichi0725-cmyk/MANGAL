@@ -2,7 +2,7 @@
 import sqlite3,sys,re,html,json,os,time,csv,urllib.request,urllib.parse
 from collections import Counter
 sys.stdout.reconfigure(encoding="utf-8")
-ROOT="C:/Users/shuic/code/MANGAL"
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # 旧PCパス→動的導出(2026-07-21一括是正)
 # 疑著者集合(本番index: 単独作0 ∧ 総≤3)
 idx=json.load(open(ROOT+"/.cache/v2-index.json",encoding="utf-8"))
 total=Counter(); solo=Counter()

@@ -16,9 +16,10 @@
   iter_items(paths)        : 生jsonlを (isbn13, item) で yield (utf-8固定・防御デコード)
   build_index(targets,...) : target基底題集合に対して focused index を1パスで構築
 """
+import os
 import re, json, unicodedata, html
 
-ROOT = "C:/Users/shuic/code/MANGAL"
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # 旧PCパス→動的導出(2026-07-21一括是正)
 DELTA = f"{ROOT}/.cache/rakuten-isbn-delta.jsonl"
 OLD = f"{ROOT}/.cache/rakuten-isbn.jsonl"
 

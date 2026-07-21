@@ -2,7 +2,7 @@
 NDL=古書/絶版に強い(楽天は絶版なし)。 書影のみ後で楽天ISBN直引き。 dry-run=結果表示。 --apply=preview反映。"""
 import urllib.parse, urllib.request, html, re, json, time, sys, os, yaml, collections
 
-ROOT = "C:/Users/shuic/code/MANGAL"
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # 旧PCパス→動的導出(2026-07-21一括是正)
 APPLY = "--apply" in sys.argv
 SRU = "https://ndlsearch.ndl.go.jp/api/sru"
 

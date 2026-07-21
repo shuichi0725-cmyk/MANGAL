@@ -4,9 +4,10 @@ NDL SRU title検索で全巻ISBN取得 → 楽天ISBN直引きで書影/発売�
 [[ndl_volume_completion_better_than_rakuten]]。著者照合で別作混入防止・外れ値ガード。
 usage: python _ndl-volume-complete.py [--apply]
 """
+import os
 import sys, re, json, time, glob, html, unicodedata, urllib.parse, urllib.request
 import yaml
-ROOT = "C:/Users/shuic/code/MANGAL"
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # 旧PCパス→動的導出(2026-07-21一括是正)
 PREV = f"{ROOT}/.preview-data/manga"
 APPLY = "--apply" in sys.argv
 SRU = "https://ndlsearch.ndl.go.jp/api/sru"

@@ -7,7 +7,7 @@
 """
 import sqlite3, sys, re, json, os, csv
 sys.stdout.reconfigure(encoding="utf-8")
-ROOT = "C:/Users/shuic/code/MANGAL"
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # 旧PCパス→動的導出(2026-07-21一括是正)
 db = sqlite3.connect(ROOT + "/.cache/db-v2.sqlite"); c = db.cursor()
 ndl = json.load(open(ROOT + "/.cache/ndl-by-isbn.json", encoding="utf-8"))
 sids = json.load(open(ROOT + "/.cache/polluted-sids.json"))

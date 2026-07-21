@@ -8,7 +8,7 @@ canonical 選定: ①末尾 -数字 suffix 無し優先 ②短い方 ③辞書�
 import glob, os, sys, re, collections, csv
 import yaml
 sys.stdout.reconfigure(encoding="utf-8", errors="replace")
-ROOT = "C:/Users/shuic/code/MANGAL"
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # 旧PCパス→動的導出(2026-07-21一括是正)
 
 pages = {}
 for p in glob.glob(ROOT + "/data/manga.v2/*.yml"):

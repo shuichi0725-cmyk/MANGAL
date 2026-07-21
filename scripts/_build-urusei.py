@@ -1,11 +1,12 @@
 """うる星やつら を NDLデータから 版/刷(versions)構造で生成。
 通常版=初版/新装版/復刻box の3刷タブ、+ワイド版 +文庫版。既定=全巻ISBN有りの最古刷。
 """
+import os
 import json, sys, re
 from collections import defaultdict
 import yaml
 sys.stdout.reconfigure(encoding="utf-8")
-ROOT = "C:/Users/shuic/code/MANGAL"
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # 旧PCパス→動的導出(2026-07-21一括是正)
 
 Z2H = str.maketrans("０１２３４５６７８９", "0123456789")
 def volnum(s):

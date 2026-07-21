@@ -1,7 +1,7 @@
 """疑著者の職業をWikipediaで裏取り。漫画家→keep / 声優・俳優・作家等→remove確定 / 不明→leave。中断耐性。"""
 import urllib.request,urllib.parse,sys,re,json,os,time,csv
 sys.stdout.reconfigure(encoding="utf-8")
-ROOT="C:/Users/shuic/code/MANGAL"
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # 旧PCパス→動的導出(2026-07-21一括是正)
 names=[r['疑著者'] for r in csv.DictReader(open(ROOT+"/.cache/suspect-authors.csv",encoding="utf-8-sig"))]
 CACHE=ROOT+"/.cache/suspect-verify.json"
 out=json.load(open(CACHE,encoding="utf-8")) if os.path.exists(CACHE) else {}

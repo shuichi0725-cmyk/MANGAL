@@ -3,7 +3,7 @@
 import csv, json, os, re, sys, time, html, urllib.request, urllib.parse
 sys.stdout.reconfigure(encoding='utf-8')
 import yaml
-ROOT = r'C:\Users\shuic\code\MANGAL'
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # 旧PCパス→動的導出(2026-07-21一括是正)
 OUT = f'{ROOT}/.cache/intruder-ndl.jsonl'
 
 slugs = sorted({r[0] for r in csv.reader(open(f'{ROOT}/docs/production-diagnostics/band-intruders.tsv', encoding='utf-8'), delimiter='\t') if r and r[0] != 'slug'})

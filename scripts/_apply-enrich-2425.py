@@ -5,7 +5,7 @@
 純粋追加・既存上書き最小。 usage: python _apply-enrich-2425.py [--apply]
 """
 import json, os, sys, yaml
-ROOT = "C:/Users/shuic/code/MANGAL"
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # 旧PCパス→動的導出(2026-07-21一括是正)
 APPLY = "--apply" in sys.argv
 GENVOCAB = set('action,adventure,fantasy,sci-fi,mystery,horror,gag,comedy,romcom,romance,drama,slice-of-life,school,sports,baseball,soccer,historical,samurai,mecha,yokai,gourmet,4-koma,essay,isekai,bl,suspense,music,supernatural,ecchi,mind-game,mahou-shoujo,war'.split(','))
 

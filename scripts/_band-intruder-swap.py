@@ -5,7 +5,7 @@ import csv, json, os, re, sys, sqlite3, unicodedata
 from collections import Counter, defaultdict
 sys.stdout.reconfigure(encoding='utf-8')
 import yaml
-ROOT = r'C:\Users\shuic\code\MANGAL'
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # 旧PCパス→動的導出(2026-07-21一括是正)
 
 def months(s):
     m = re.match(r'^(\d{4})[.\-/]?(\d{1,2})?', str(s or ''))

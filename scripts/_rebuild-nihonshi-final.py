@@ -2,7 +2,7 @@
 発行コード→年代で版を確定、人物日本の歴史(別シリーズ)除外、NDLで欠巻補完、書影は楽天ISBN直引き。"""
 import yaml, re, os, json, time, collections, urllib.parse, urllib.request
 
-ROOT = "C:/Users/shuic/code/MANGAL"
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # 旧PCパス→動的導出(2026-07-21一括是正)
 env = dict(l.strip().split("=", 1) for l in open(f"{ROOT}/.env.local", encoding="utf-8")
            if "=" in l and not l.strip().startswith("#"))
 ORIGIN = "https://mangal.shuichi0725.workers.dev"

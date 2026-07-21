@@ -5,9 +5,10 @@
   - unknown のみ          -> KEEP(保守的=誤落とし防止)
 出力: .cache/role-overlay-preview.csv + 統計
 """
+import os
 import sqlite3, json, sys, re
 sys.stdout.reconfigure(encoding="utf-8", errors="replace")
-ROOT = "C:/Users/shuic/code/MANGAL"
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # 旧PCパス→動的導出(2026-07-21一括是正)
 db = sqlite3.connect(ROOT + "/.cache/db-v2.sqlite"); c = db.cursor()
 roles = json.load(open(ROOT + "/.cache/madb-mid-roles.json", encoding="utf-8"))
 sids = json.load(open(ROOT + "/.cache/polluted-sids.json"))

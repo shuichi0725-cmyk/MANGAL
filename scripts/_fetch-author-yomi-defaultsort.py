@@ -3,7 +3,7 @@
 """
 import urllib.request, urllib.parse, sys, re, json, os, time
 sys.stdout.reconfigure(encoding="utf-8")
-ROOT = "C:/Users/shuic/code/MANGAL"
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # 旧PCパス→動的導出(2026-07-21一括是正)
 names = json.load(open(ROOT + "/.cache/author-residual-prod.json", encoding="utf-8"))
 CACHE = ROOT + "/.cache/author-defaultsort.json"
 out = json.load(open(CACHE, encoding="utf-8")) if os.path.exists(CACHE) else {}

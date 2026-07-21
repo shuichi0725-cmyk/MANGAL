@@ -2,7 +2,7 @@
 主prefixの年範囲外(=別シリーズの混入signal、 世界の歴史型)。 これが確証ある over-merge 候補。"""
 import json, yaml, re, os
 
-ROOT = "C:/Users/shuic/code/MANGAL"
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # 旧PCパス→動的導出(2026-07-21一括是正)
 
 def registrant(isbn):
     if not isbn.startswith("9784") or len(isbn) != 13:

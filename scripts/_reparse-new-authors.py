@@ -1,7 +1,7 @@
 """新刊著者の統合修正(再パース): 源creators_roled(ISBN/題名突合)から①共著者カンマ分割②空role時の末尾役割(ブラケット/スペース)分離③&amp;デコード。
 dry-run(既定): 表示。 --apply で .preview-data + data/manga.v2 に適用(backup付)。"""
 import yaml, glob, os, csv, re, html, sys, datetime, shutil, unicodedata
-ROOT = "C:/Users/shuic/code/MANGAL"
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # 旧PCパス→動的導出(2026-07-21一括是正)
 APPLY = "--apply" in sys.argv
 def basetitle(t):
     t = unicodedata.normalize("NFKC", str(t or "")); t = re.sub(r"[\s　]+", "", t)

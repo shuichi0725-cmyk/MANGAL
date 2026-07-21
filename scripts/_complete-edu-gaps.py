@@ -2,7 +2,7 @@
 generic題なので prefix一致 + 題前方一致 + EXCL で厳格filter。 preview反映。"""
 import json, yaml, re, os, time, urllib.parse, urllib.request, unicodedata
 
-ROOT = "C:/Users/shuic/code/MANGAL"
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # 旧PCパス→動的導出(2026-07-21一括是正)
 env = dict(l.strip().split("=", 1) for l in open(f"{ROOT}/.env.local", encoding="utf-8")
            if "=" in l and not l.strip().startswith("#"))
 ORIGIN = "https://mangal.shuichi0725.workers.dev"

@@ -1,7 +1,7 @@
 """当月+未来の月のみ(発売日カレンダー不足・新刊・harvest無)をライブ楽天で完全日化→overrideへ統合。"""
 import sqlite3,re,json,os,time,urllib.request,urllib.parse,sys
 sys.stdout.reconfigure(encoding="utf-8")
-ROOT="C:/Users/shuic/code/MANGAL"
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # 旧PCパス→動的導出(2026-07-21一括是正)
 env={}
 for ln in open(ROOT+"/.env.local",encoding="utf-8"):
     if "=" in ln: k,v=ln.split("=",1); env[k.strip()]=v.strip()

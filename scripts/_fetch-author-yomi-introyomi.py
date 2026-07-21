@@ -1,7 +1,7 @@
 """漢字名著者の読み=Wikipedia記事冒頭「名前(よみ、...)」から取得(濁点保持)。名前直後のカッコに限定し誤爆抑制。中断耐性。"""
 import urllib.request,urllib.parse,sys,re,json,os,time
 sys.stdout.reconfigure(encoding="utf-8")
-ROOT="C:/Users/shuic/code/MANGAL"
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # 旧PCパス→動的導出(2026-07-21一括是正)
 names=json.load(open(ROOT+"/.cache/author-residual-prod.json",encoding="utf-8"))
 CACHE=ROOT+"/.cache/author-introyomi.json"
 out=json.load(open(CACHE,encoding="utf-8")) if os.path.exists(CACHE) else {}

@@ -2,7 +2,7 @@
 NDL creator検索→作者の全作品→既存ページのISBNを含むtitle群=同一作→全巻採用。
 出力: distill-fill-2026.jsonl に上書き追記(slug key)。usage: python _distill_fill_byauthor.py <slug1> <slug2> ..."""
 import sys, re, json, os, time, html, urllib.request, urllib.parse, yaml, unicodedata
-ROOT = "C:/Users/shuic/code/MANGAL"
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # 旧PCパス→動的導出(2026-07-21一括是正)
 RATE = 1.2
 def norm(s): return re.sub(r"[\s　・･:：!！?？.,。、\-〜~\[\]()『』「」]", "", unicodedata.normalize("NFKC", str(s or ""))).lower()
 def basetitle(t): return re.sub(r"[.．:：]\s*(vol(ume)?\.?\s*)?\d+.*$", "", str(t or ""), flags=re.I).strip()

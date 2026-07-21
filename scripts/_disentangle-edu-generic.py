@@ -3,7 +3,7 @@ slug指定→NDL title検索で全巻取得→出版社prefix絞り→ISBN発行
 dry-run=結果表示 / --apply=preview反映。 慎重: backup・別シリーズ除外・人手確認前提。"""
 import sys, yaml, re, os, json, time, collections, urllib.parse, urllib.request, html, unicodedata
 
-ROOT = "C:/Users/shuic/code/MANGAL"
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # 旧PCパス→動的導出(2026-07-21一括是正)
 SLUG = sys.argv[1] if len(sys.argv) > 1 else None
 APPLY = "--apply" in sys.argv
 env = dict(l.strip().split("=", 1) for l in open(f"{ROOT}/.env.local", encoding="utf-8")

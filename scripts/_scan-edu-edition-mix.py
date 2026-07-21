@@ -1,7 +1,7 @@
 """教育系で年代版混入(1edition内に複数ISBN発行コード=別年版が混ざる)を検出。日本の歴史型の横展開対象を洗い出す。"""
 import json, yaml, re, os, collections
 
-ROOT = "C:/Users/shuic/code/MANGAL"
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # 旧PCパス→動的導出(2026-07-21一括是正)
 idx = json.load(open(f"{ROOT}/data/manga-list-index.json", encoding="utf-8"))
 fi = {k: i for i, k in enumerate(idx["f"])}
 EDU = re.compile(r"世界の歴史|日本の歴史|まんが日本|歴史人物|伝記|偉人|学習まんが|学習漫画|学研まんが|科学|サバイバル|図鑑|大百科|ことわざ|四字熟語|百人一首|古典|名作|ひみつ|なぜ|物語|大戦|文明")

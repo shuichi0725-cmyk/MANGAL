@@ -4,7 +4,7 @@ ja-Kana transcription を抽出 → 姓名連結カタカナ。 中断耐性(.ca
 import json, sys, re, html, time, os
 import urllib.request
 sys.stdout.reconfigure(encoding="utf-8")
-ROOT = "C:/Users/shuic/code/MANGAL"
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # 旧PCパス→動的導出(2026-07-21一括是正)
 
 todo = json.load(open(ROOT + "/.cache/b2-ndl-todo.json", encoding="utf-8"))  # {name: ndla_url}
 CACHE = ROOT + "/.cache/b2-ndl-yomi.json"

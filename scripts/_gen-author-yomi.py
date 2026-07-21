@@ -5,7 +5,7 @@ name→カタカナ読み。 ground-truth(504のja-hrkt)。 残=B2(ma:ndla NDL�
 import json, sys, re, sqlite3, yaml
 from collections import Counter, defaultdict
 sys.stdout.reconfigure(encoding="utf-8")
-ROOT = "C:/Users/shuic/code/MANGAL"
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # 旧PCパス→動的導出(2026-07-21一括是正)
 
 # 504 作者master: name(漢字) → yomi(ja-hrkt) majority
 g = json.load(open(ROOT + "/.cache/madb/metadata504.json", encoding="utf-8"))

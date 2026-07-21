@@ -2,7 +2,7 @@
 各作: slug/title/current_authors/rakuten_author/caption。 WFが drop(非漫画)/fix(著者是正)/keep を判定。"""
 import glob, os, re, json, gzip
 
-ROOT = "C:/Users/shuic/code/MANGAL"
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # 旧PCパス→動的導出(2026-07-21一括是正)
 amap = json.load(open(f"{ROOT}/.cache/isbn-author-map.json", encoding="utf-8"))
 # caption seed
 cap = {}

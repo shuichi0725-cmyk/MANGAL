@@ -16,7 +16,7 @@ usage:
 """
 import sys, os, sqlite3, shutil, json, importlib.util
 
-ROOT = "C:/Users/shuic/code/MANGAL"
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # 旧PCパス→動的導出(2026-07-21一括是正)
 APPLY = "--apply" in sys.argv
 AT = "2026-06-27"
 args = [a for a in sys.argv[1:] if not a.startswith("--")]

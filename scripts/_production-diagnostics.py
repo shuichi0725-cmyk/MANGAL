@@ -4,7 +4,7 @@
 import json, os, re
 from _idx_authors import au_name  # ★索引v2 authorsパック対応(2026-07-14)
 
-ROOT = "C:/Users/shuic/code/MANGAL"
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # 旧PCパス→動的導出(2026-07-21一括是正)
 OUT = f"{ROOT}/docs/production-diagnostics"
 os.makedirs(OUT, exist_ok=True)
 d = json.load(open(f"{ROOT}/data/manga-list-index.json", encoding="utf-8"))

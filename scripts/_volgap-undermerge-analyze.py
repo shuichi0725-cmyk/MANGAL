@@ -1,5 +1,5 @@
 import json,sqlite3,os,re,yaml
-ROOT=r"C:\Users\shuic\code\MANGAL"
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # 旧PCパス→動的導出(2026-07-21一括是正)
 con=sqlite3.connect(f"{ROOT}/.cache/db-v2.sqlite"); cur=con.cursor()
 def norm(s): return re.sub(r"[^0-9X]","",str(s or "").upper())
 def reg(ib):

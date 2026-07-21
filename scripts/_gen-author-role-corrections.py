@@ -5,9 +5,10 @@
   add      = drop後に実在人物著者0 の救済(マスター実在・非entity・変種重複除外)
   ★ガード: drop後に実在著者もaddも無いなら drop撤回(現状維持)
 """
+import os
 import sqlite3, json, sys, re, collections
 sys.stdout.reconfigure(encoding="utf-8", errors="replace")
-ROOT = "C:/Users/shuic/code/MANGAL"
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # 旧PCパス→動的導出(2026-07-21一括是正)
 db = sqlite3.connect(ROOT + "/.cache/db-v2.sqlite"); c = db.cursor()
 roles = json.load(open(ROOT + "/.cache/madb-mid-roles.json", encoding="utf-8"))
 

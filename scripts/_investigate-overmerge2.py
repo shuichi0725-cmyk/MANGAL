@@ -3,7 +3,7 @@
 キー=マンガ名+作者。 アンソロ除外。 版分離が必要な規模を把握。"""
 import json, yaml, re, os, collections, unicodedata
 
-ROOT = "C:/Users/shuic/code/MANGAL"
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # 旧PCパス→動的導出(2026-07-21一括是正)
 cand = json.load(open(f"{ROOT}/.cache/single-edition-mix.json", encoding="utf-8"))
 idx = json.load(open(f"{ROOT}/data/manga-list-index.json", encoding="utf-8"))
 fi = {k: i for i, k in enumerate(idx["f"])}

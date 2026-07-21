@@ -2,7 +2,7 @@
 各作のvol1 ISBNで楽天著者を引き、現著者名と1つも重ならなければ mismatch(=要確認)。"""
 import glob, os, re, json, unicodedata
 
-ROOT = "C:/Users/shuic/code/MANGAL"
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # 旧PCパス→動的導出(2026-07-21一括是正)
 amap = json.load(open(f"{ROOT}/.cache/isbn-author-map.json", encoding="utf-8"))
 
 def norm(s):

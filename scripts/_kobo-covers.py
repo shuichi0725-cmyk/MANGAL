@@ -7,7 +7,7 @@ try:
     from yaml import CSafeLoader as L
 except ImportError:
     from yaml import SafeLoader as L
-ROOT = r'C:\Users\shuic\code\MANGAL'
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # 旧PCパス→動的導出(2026-07-21一括是正)
 KEEP = {'standard', 'bunkobon', 'wideban', 'kanzenban', 'shinsoban', 'aizoban'}
 CHK = f'{ROOT}/.cache/kobocheck'
 os.makedirs(CHK, exist_ok=True)

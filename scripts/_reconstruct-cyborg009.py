@@ -1,7 +1,7 @@
 """サイボーグ009 edition-canonical再構築。 楽天harvest→レーベル別に本編4版を確定→edition-override。
 著者=石ノ森章太郎(コミカライズ別作シュガー佐藤/土山よしき版は除外)。 spinoff(完結編/VSデビルマン/BGOOPARTS/ムック)は本編edition外。"""
 import json, re, os, urllib.parse, urllib.request, time
-ROOT = "C:/Users/shuic/code/MANGAL"
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # 旧PCパス→動的導出(2026-07-21一括是正)
 env = dict(l.strip().split("=", 1) for l in open(f"{ROOT}/.env.local", encoding="utf-8") if "=" in l and not l.strip().startswith("#"))
 ORIGIN = "https://mangal.shuichi0725.workers.dev"
 

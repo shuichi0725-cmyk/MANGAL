@@ -10,7 +10,7 @@ import sys, gzip, json
 from pathlib import Path
 
 sys.stdout.reconfigure(encoding="utf-8")
-ROOT = Path("C:/Users/shuic/code/mangal")
+ROOT = Path(__file__).resolve().parents[1]  # 旧PCパス→動的導出(2026-07-21一括是正)
 DUMP = ROOT / ".cache/anilist-manga-dump-v3.jsonl.gz"
 
 AUTHOR_ROLE = {"Story & Art": "writer_artist", "Art": "artist", "Story": "writer"}

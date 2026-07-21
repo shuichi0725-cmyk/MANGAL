@@ -5,7 +5,7 @@ NDL 不在は {} を記録(再照会しない)。 role は dc:creator 末尾の�
 """
 import urllib.request, urllib.parse, sys, re, time, json, os, html
 sys.stdout.reconfigure(encoding="utf-8")
-ROOT = "C:/Users/shuic/code/MANGAL"
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # 旧PCパス→動的導出(2026-07-21一括是正)
 ISBNS = json.load(open(ROOT + "/.cache/polluted-isbns.json", encoding="utf-8"))
 CACHE = ROOT + "/.cache/ndl-by-isbn.json"
 out = json.load(open(CACHE, encoding="utf-8")) if os.path.exists(CACHE) else {}

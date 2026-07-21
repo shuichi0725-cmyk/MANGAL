@@ -1,7 +1,7 @@
 """奇子型per-case用 版アナライザ。 引数=slug。 現データの全巻(num/label/isbn/date/cover/実題)
 + NDL取得データの版グループ(出版社×年×巻)を一望して、 版分離(edition-override)判断の材料を出す。"""
 import json, re, os, sys, yaml
-ROOT = "C:/Users/shuic/code/MANGAL"
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # 旧PCパス→動的導出(2026-07-21一括是正)
 sys.stdout.reconfigure(encoding="utf-8")
 slug = sys.argv[1]
 tmap = json.load(open(f"{ROOT}/.cache/isbn-title-map.json", encoding="utf-8"))

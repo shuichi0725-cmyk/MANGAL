@@ -5,7 +5,7 @@
 出力: .cache/volgap-rakuten-clean2.json"""
 import json,os,re,yaml,sys
 sys.stdout.reconfigure(encoding="utf-8")
-ROOT=r"C:\Users\shuic\code\MANGAL"
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # 旧PCパス→動的導出(2026-07-21一括是正)
 EXCLUDE_ISBN={"9784832295810"}  # ぼっち外伝
 cands=json.load(open(f"{ROOT}/.cache/volgap-rakuten-cands.json",encoding="utf-8"))
 from collections import defaultdict

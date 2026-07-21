@@ -1,7 +1,7 @@
 """(2)残74件(harvest未収録の上限超え巻)をRakuten直接照会し実題名で別作混入か確定。"""
 import json, re, os, time, unicodedata, urllib.parse, urllib.request, yaml
 
-ROOT = "C:/Users/shuic/code/MANGAL"
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # 旧PCパス→動的導出(2026-07-21一括是正)
 env = dict(l.strip().split("=", 1) for l in open(f"{ROOT}/.env.local", encoding="utf-8")
            if "=" in l and not l.strip().startswith("#"))
 ORIGIN = "https://mangal.shuichi0725.workers.dev"

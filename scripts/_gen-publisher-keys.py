@@ -1,10 +1,11 @@
 """publishers.yml 拡張 + publisher-aliases.yml 生成。
 方針: 新キーは display名=生社名(promoteがnorm照合で自動マッチ)。aliasは別名同一実体のmergeのみ(ISBN帯確認済)。
 """
+import os
 import json, sys, re, unicodedata, yaml
 from collections import Counter, defaultdict
 sys.stdout.reconfigure(encoding="utf-8")
-ROOT = "C:/Users/shuic/code/MANGAL"
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # 旧PCパス→動的導出(2026-07-21一括是正)
 
 def norm(s):
     s = unicodedata.normalize("NFKC", s)

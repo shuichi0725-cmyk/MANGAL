@@ -13,7 +13,7 @@ usage:
   python _ndl-recover-authority.py --all       # discovery全ISBN
 """
 import sys, os, re, json, time, html, collections, urllib.request, urllib.parse
-ROOT = "C:/Users/shuic/code/MANGAL"
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # 旧PCパス→動的導出(2026-07-21一括是正)
 CACHE = f"{ROOT}/.cache/ndl-sru-raw-cache.json"
 RATE = 1.2  # NDL安全(楽天速度・429回避)
 ALLISBN = "--all" in sys.argv

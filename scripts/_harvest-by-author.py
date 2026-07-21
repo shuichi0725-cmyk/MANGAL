@@ -2,7 +2,7 @@
 取得し忘れゼロ設計: 全著者×全ページ×全item。resumable(done管理)・429リトライ・1.3秒/req。"""
 import json,os,re,time,urllib.request,urllib.parse,sqlite3,sys
 sys.stdout.reconfigure(encoding="utf-8")
-ROOT="C:/Users/shuic/code/MANGAL"
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # 旧PCパス→動的導出(2026-07-21一括是正)
 env={}
 for ln in open(ROOT+"/.env.local",encoding="utf-8"):
     if "=" in ln: k,v=ln.split("=",1); env[k.strip()]=v.strip()

@@ -10,7 +10,7 @@
   docs/ndl-homonym-confirmed.tsv          : 同一name(norm)→複数authority(=同名異人)。既知+回収を統合
 """
 import json, re, os, collections
-ROOT = "C:/Users/shuic/code/MANGAL"
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # 旧PCパス→動的導出(2026-07-21一括是正)
 
 def nm(s):
     return re.sub(r"[\s　,、・]", "", str(s or ""))

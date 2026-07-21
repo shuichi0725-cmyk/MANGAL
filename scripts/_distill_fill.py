@@ -2,7 +2,7 @@
 ★著者一致のみ採用(homonym/別作の誤混入を防ぐ=慎重)。 1.2s・resumable。
 出力: data/seeds/distill-fill-2026.jsonl  ({slug, base_title, author, volumes:[{number,isbn13,release_date}], n_found})"""
 import csv, re, json, os, time, html, urllib.request, urllib.parse
-ROOT = "C:/Users/shuic/code/MANGAL"
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # 旧PCパス→動的導出(2026-07-21一括是正)
 OUT = f"{ROOT}/data/seeds/distill-fill-2026.jsonl"
 RATE = 1.2
 

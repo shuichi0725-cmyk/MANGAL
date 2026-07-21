@@ -3,7 +3,7 @@ per-case是正の土台。 中断耐性=JSONL追記・resume。 NDL 1.2s/req厳�
 出力: .cache/volgap-ndl.jsonl ({slug, title, records:[{isbn,publisher,date,volume,series,ndl_title}]})"""
 import json, re, os, time, html, urllib.parse, urllib.request, sys
 sys.stdout.reconfigure(encoding="utf-8")
-ROOT = "C:/Users/shuic/code/MANGAL"
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # 旧PCパス→動的導出(2026-07-21一括是正)
 SRU = "https://ndlsearch.ndl.go.jp/api/sru"
 OUT = f"{ROOT}/.cache/volgap-ndl.jsonl"
 

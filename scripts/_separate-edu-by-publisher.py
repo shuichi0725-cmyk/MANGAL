@@ -3,7 +3,7 @@
 dry-run(既定): 除去候補をdocs出力。 --apply: volume-exclude.yml追記 + preview反映。"""
 import json, yaml, re, os, sys, glob
 
-ROOT = "C:/Users/shuic/code/MANGAL"
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # 旧PCパス→動的導出(2026-07-21一括是正)
 APPLY = "--apply" in sys.argv
 
 def reg(isbn):

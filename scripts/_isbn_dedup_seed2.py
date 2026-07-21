@@ -3,7 +3,7 @@
 空になったページはexclude候補に。dry-run既定、--apply で manga.v2 書換(可逆backup)。
 種2 read-only。"""
 import sqlite3, os, re, json, collections, unicodedata, sys, shutil
-ROOT = "C:/Users/shuic/code/MANGAL"
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # 旧PCパス→動的導出(2026-07-21一括是正)
 APPLY = "--apply" in sys.argv
 
 def norm(s):

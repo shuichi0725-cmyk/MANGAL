@@ -3,7 +3,7 @@ NDL題/kana/著者/出版社 + 楽天書影/caption + enrich(あらすじ/キャ
 非漫画(画集/語学/公式ガイド)・mook(コミック誌/Vol.のみ)は除外。db-v2/本番は不変(preview直書き)。
 """
 import json, re, os, collections, unicodedata, yaml, pykakasi
-ROOT = "C:/Users/shuic/code/MANGAL"
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # 旧PCパス→動的導出(2026-07-21一括是正)
 PREV = f"{ROOT}/.preview-data/manga"
 kks = pykakasi.kakasi()
 mat = json.load(open(f"{ROOT}/.cache/ndl316-material.json", encoding="utf-8"))

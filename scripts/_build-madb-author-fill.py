@@ -11,7 +11,7 @@ from collections import defaultdict
 from pathlib import Path
 
 sys.stdout.reconfigure(encoding="utf-8")
-ROOT = Path("C:/Users/shuic/code/mangal")
+ROOT = Path(__file__).resolve().parents[1]  # 旧PCパス→動的導出(2026-07-21一括是正)
 spec = importlib.util.spec_from_file_location("ma", ROOT / "scripts/_madb_authors.py")
 ma = importlib.util.module_from_spec(spec); spec.loader.exec_module(ma)
 

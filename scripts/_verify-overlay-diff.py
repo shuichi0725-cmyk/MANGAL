@@ -3,7 +3,7 @@
 """
 import glob, os, sys, yaml
 sys.stdout.reconfigure(encoding="utf-8", errors="replace")
-ROOT = "C:/Users/shuic/code/MANGAL"
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # 旧PCパス→動的導出(2026-07-21一括是正)
 V2 = ROOT + "/data/manga.v2"
 DRY = ROOT + "/data/manga.dryrun"
 

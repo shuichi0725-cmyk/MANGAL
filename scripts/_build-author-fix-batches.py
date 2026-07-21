@@ -3,7 +3,7 @@
 低確度(表記揺れ/別版/共著の差)は対象外(触らない=慎重)。"""
 import csv, re, json, os, unicodedata
 
-ROOT = "C:/Users/shuic/code/MANGAL"
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # 旧PCパス→動的導出(2026-07-21一括是正)
 rows = list(csv.DictReader(open(f"{ROOT}/docs/author-mismatch-vs-rakuten.tsv", encoding="utf-8"), delimiter="\t"))
 
 CORRUPT = re.compile(r"pub\.\s*(?:19|20)\d\d|株式会社|出版|編集部|Pictures|工房|Elements|ANYCOLOR|ネットワークス|企画室|^\(unknown\)$", re.I)

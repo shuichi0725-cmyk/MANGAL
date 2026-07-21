@@ -3,7 +3,7 @@
 慎重: preview のみ・可逆(backup)・結果表示。 本番反映は確認後。"""
 import yaml, re, os, json, collections, copy
 
-ROOT = "C:/Users/shuic/code/MANGAL"
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # 旧PCパス→動的導出(2026-07-21一括是正)
 SRC = ["nihonnorekishi", "nippon-no-rekishi-2007-2"]
 # 発行コード → (label, type)  ※集英社 日本の歴史の年代版
 CODEMAP = {

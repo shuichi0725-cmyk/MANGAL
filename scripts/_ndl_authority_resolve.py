@@ -2,7 +2,7 @@
 種2 qid不整合(同著者別qid=FULL SWING型)を NDL典拠が解消。低速0.7s・cache優先・resumable。
 出力: data/seeds/merge-authority-decisions.tsv (group→keep/split/flag + 証拠)。種2 read-only。"""
 import sqlite3, collections, re, json, os, urllib.request, urllib.parse, html, time, sys
-ROOT = "C:/Users/shuic/code/MANGAL"
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # 旧PCパス→動的導出(2026-07-21一括是正)
 CACHE = f"{ROOT}/.cache/ndl-sru-raw-cache.json"
 con = sqlite3.connect(f"file:{ROOT}/.cache/db-v2.sqlite?mode=ro", uri=True); con.text_factory = lambda b: b.decode("utf-8","replace")
 

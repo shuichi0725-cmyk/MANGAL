@@ -2,7 +2,7 @@
 ISBN→社名=metadata101-clean.json(promote resolverと同源)。"""
 import json, re, os, glob, unicodedata, collections, yaml
 
-ROOT = "C:/Users/shuic/code/MANGAL"
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # 旧PCパス→動的導出(2026-07-21一括是正)
 
 def to13(s):
     s = re.sub(r"[^0-9X]", "", str(s or "").upper())

@@ -3,9 +3,10 @@ clean が剥がした [著]/[編]/[解説] タグを生データから復元。 
 出力: .cache/madb-mid-roles.json  {Mid: [[name, tag, cls], ...]}
   cls = 'author' | 'nonauthor' | 'unknown'
 """
+import os
 import sys, re, json, time
 sys.stdout.reconfigure(encoding="utf-8", errors="replace")
-ROOT = "C:/Users/shuic/code/MANGAL"
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # 旧PCパス→動的導出(2026-07-21一括是正)
 RAW = ROOT + "/.cache/madb/metadata101.json"
 OUT = ROOT + "/.cache/madb-mid-roles.json"
 

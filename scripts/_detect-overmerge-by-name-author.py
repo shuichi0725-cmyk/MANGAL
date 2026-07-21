@@ -2,7 +2,7 @@
 キー=マンガ名+作者(教育系のpublisher+labelとは別)。 アンソロジー除外。 確証=題名or著者の不一致。"""
 import json, yaml, re, os, unicodedata, collections, sys
 
-ROOT = "C:/Users/shuic/code/MANGAL"
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # 旧PCパス→動的導出(2026-07-21一括是正)
 APPLY = "--apply" in sys.argv
 amap = json.load(open(f"{ROOT}/.cache/isbn-author-map.json", encoding="utf-8"))
 tmap = json.load(open(f"{ROOT}/.cache/isbn-title-map.json", encoding="utf-8"))

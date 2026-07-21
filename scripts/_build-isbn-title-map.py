@@ -1,6 +1,6 @@
 """楽天harvestから ISBN→題名 マップ構築(過剰統合検出: 少数派巻の実題名照合用)。"""
 import json, os
-ROOT = "C:/Users/shuic/code/MANGAL"
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # 旧PCパス→動的導出(2026-07-21一括是正)
 m = {}
 for fn in [f"{ROOT}/.cache/rakuten-isbn-delta.jsonl", f"{ROOT}/.cache/rakuten-isbn.jsonl"]:
     if not os.path.exists(fn):

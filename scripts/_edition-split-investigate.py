@@ -9,7 +9,7 @@ from collections import defaultdict
 from pathlib import Path
 
 sys.stdout.reconfigure(encoding="utf-8")
-ROOT = Path("C:/Users/shuic/code/mangal")
+ROOT = Path(__file__).resolve().parents[1]  # 旧PCパス→動的導出(2026-07-21一括是正)
 spec = importlib.util.spec_from_file_location("promote", ROOT / "scripts/_promote-bulk-v2.py")
 pm = importlib.util.module_from_spec(spec); sys.argv = ["x"]; spec.loader.exec_module(pm)
 

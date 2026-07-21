@@ -2,8 +2,9 @@
 signal: ①NDL編(metadata101 [編]/編集部 creator) ②題名アンソロ ③巻内多作家(M-ID)
 filter: 作者が多様(単一consistent作者でない=大全集/単著編集を除外) かつ アニメコミック/大全集除外。
 種2 read-only。出力: data/seeds/anthology-candidates.tsv"""
+import os
 import json, re, collections, sqlite3
-ROOT = "C:/Users/shuic/code/MANGAL"
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # 旧PCパス→動的導出(2026-07-21一括是正)
 con = sqlite3.connect(f"file:{ROOT}/.cache/db-v2.sqlite?mode=ro", uri=True); con.text_factory = lambda b: b.decode("utf-8","replace")
 roles = json.load(open(f"{ROOT}/.cache/madb-mid-roles.json", encoding="utf-8"))
 

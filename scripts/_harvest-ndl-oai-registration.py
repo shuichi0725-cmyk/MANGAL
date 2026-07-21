@@ -5,7 +5,7 @@
 usage: python _harvest-ndl-oai-registration.py <from-date> <until-date>   例: 2025-05-01 2025-06-01
 Stage2(典拠enrich)は別途 SRU per-ISBN(同1.2s)で新刊ISBNのみ。"""
 import urllib.request, urllib.parse, re, time, json, os, sys, sqlite3, html
-ROOT = "C:/Users/shuic/code/MANGAL"
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # 旧PCパス→動的導出(2026-07-21一括是正)
 RATE = 1.2  # ★楽天Books API と同じ 1req/sec 余裕(1.2s)。NDL礼儀・遮断回避。
 OAI = "https://ndlsearch.ndl.go.jp/api/oaipmh"
 FROM = sys.argv[1] if len(sys.argv) > 1 else "2025-05-01"

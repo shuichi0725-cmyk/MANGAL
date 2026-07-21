@@ -4,9 +4,10 @@ NDL発見ISBNは多巻シリーズの1冊(vol1とは限らず第13巻等)なの�
 - 題NFKC前方一致 + 著者ゆるく一致 で別作混入を防ぐ。 巻番号=第N巻/.N/末尾数字、無印=1。
 - dry-run(既定)で巻数report、 --apply で .preview-data 再構築。 1.2s/req・resumable。
 """
+import os
 import sys, re, json, time, glob, unicodedata, urllib.parse, urllib.request
 import yaml
-ROOT = "C:/Users/shuic/code/MANGAL"
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # 旧PCパス→動的導出(2026-07-21一括是正)
 PREV = f"{ROOT}/.preview-data/manga"
 APPLY = "--apply" in sys.argv
 RATE = 1.2

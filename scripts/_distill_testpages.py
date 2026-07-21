@@ -3,7 +3,7 @@
 うる星ルール: (type×冊数)一致を刷タブに畳む(_regroup-versions相当)。書影=楽天CDN。
 usage: python _distill_testpages.py [--sample N | --all]  出力先=.cache/distill-testpages/"""
 import csv, sqlite3, re, unicodedata, collections, os, sys, json, yaml, urllib.request, time
-ROOT = "C:/Users/shuic/code/MANGAL"
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # 旧PCパス→動的導出(2026-07-21一括是正)
 OUTDIR = f"{ROOT}/.cache/distill-testpages"
 os.makedirs(OUTDIR, exist_ok=True)
 SAMPLE = None

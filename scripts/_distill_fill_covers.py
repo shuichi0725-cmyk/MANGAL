@@ -1,6 +1,6 @@
 """fill earlier volumes の書影を楽天取得→distill-enrich-2026.jsonl に追記。"""
 import json, os, time, urllib.request, urllib.parse
-ROOT = "C:/Users/shuic/code/MANGAL"
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # 旧PCパス→動的導出(2026-07-21一括是正)
 OUT = f"{ROOT}/data/seeds/distill-enrich-2026.jsonl"
 RATE = 1.2
 env = {}

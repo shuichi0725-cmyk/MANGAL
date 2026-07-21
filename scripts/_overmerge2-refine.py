@@ -2,7 +2,7 @@
 「上限超え(花の慶次vol20型=シリーズ巻数を超える=別作混入の強疑い)」に分け、上限超えの実題名を照合。"""
 import json, yaml, re, os, unicodedata
 
-ROOT = "C:/Users/shuic/code/MANGAL"
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # 旧PCパス→動的導出(2026-07-21一括是正)
 tmap = json.load(open(f"{ROOT}/.cache/isbn-title-map.json", encoding="utf-8"))
 amap = json.load(open(f"{ROOT}/.cache/isbn-author-map.json", encoding="utf-8"))
 outr = json.load(open(f"{ROOT}/.cache/overmerge2-outrange.json", encoding="utf-8"))

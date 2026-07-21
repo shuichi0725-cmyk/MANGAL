@@ -2,8 +2,9 @@
 3点: ①既存題の最長一致 ②出版社ガード(別社選集の誤統合防止) ③vol≥2未マッチ→NDL vol1→種2 ISBN照合。
 over-merge回避: 確証無ければ統合せず別扱い。種2 read-only。出力: .cache/madb-distill/ledger.tsv
 usage: python _distill_match_v2.py [--ndl]  (--ndlでvol1照合実行、無で保留)"""
+import os
 import sqlite3, re, unicodedata, csv, sys, json, urllib.request, urllib.parse, html, time, collections
-ROOT = "C:/Users/shuic/code/MANGAL"
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # 旧PCパス→動的導出(2026-07-21一括是正)
 USE_NDL = "--ndl" in sys.argv
 LEDGER = f"{ROOT}/.cache/madb-distill/ledger.tsv"
 

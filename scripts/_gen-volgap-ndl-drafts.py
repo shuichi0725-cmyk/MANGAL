@@ -3,7 +3,7 @@ NDL先(楽天でない)・出版社prefix制約で別作混入防止。 既存IS
 使用: _gen-volgap-ndl-drafts.py [--limit N] [--offset M]"""
 import sys, os, re, json, time, html, sqlite3, urllib.parse, urllib.request, yaml
 sys.stdout.reconfigure(encoding="utf-8")
-ROOT = "C:/Users/shuic/code/MANGAL"
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # 旧PCパス→動的導出(2026-07-21一括是正)
 DB = f"{ROOT}/.cache/db-v2.sqlite"
 SRU = "https://ndlsearch.ndl.go.jp/api/sru"
 LIMIT = int(sys.argv[sys.argv.index("--limit")+1]) if "--limit" in sys.argv else 40

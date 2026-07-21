@@ -1,7 +1,8 @@
 # 128件の漢字題(NDL読み無)にAI生成読みを適用。 kana-128.json(題名ソート順)とindex対応。
+import os
 import json, yaml, sys
 sys.stdout.reconfigure(encoding="utf-8")
-ROOT = "C:/Users/shuic/code/MANGAL"
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # 旧PCパス→動的導出(2026-07-21一括是正)
 R = [
 "ジュウサンガツノハナタバ","ゴネンメノユーターン","ハチジュウバンチノイヌ","ハチジュウイチバンチノイヌ","ハチジュウニバンチノイヌ",
 "ケーシノユイゴン","マイマイダーリン","ショップリードコウタロウ","タミコサンノコイビト","ザニンジャ",

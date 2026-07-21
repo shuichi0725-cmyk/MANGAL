@@ -1,6 +1,6 @@
 """巻数抜け(巻番号の欠番)を検出(調査リスト作成のみ・変更なし)。standard版の巻番号1..maxで欠番=取りこぼし候補。"""
 import yaml, json, os, csv
-ROOT = "C:/Users/shuic/code/MANGAL"
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # 旧PCパス→動的導出(2026-07-21一括是正)
 raw = json.load(open(ROOT + "/data/manga-list-index.json", encoding="utf-8"))
 f = raw["f"]; si = f.index("slug"); tvi = f.index("total_volumes")
 targets = [r[si] for r in raw["d"] if (r[tvi] or 0) >= 3]

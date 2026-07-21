@@ -1,6 +1,7 @@
+import os
 import json,urllib.request,urllib.parse,html,re,time,sys,unicodedata
 sys.stdout.reconfigure(encoding="utf-8")
-ROOT=r"C:\Users\shuic\code\MANGAL"
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # 旧PCパス→動的導出(2026-07-21一括是正)
 def norm(s): return unicodedata.normalize("NFKC",re.sub(r"[\s　・:：!！?？.,。、\-―~〜()（）\[\]【】'\"]","",str(s or ""))).lower()
 def lk(ib):
     q={"operation":"searchRetrieve","query":f'isbn="{ib}"',"recordSchema":"dcndl","maximumRecords":"2"}

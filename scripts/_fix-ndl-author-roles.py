@@ -5,7 +5,7 @@
 - authors が空になる作(編集/監修のみ=mook)はreportのみ(別途filter)。
 """
 import glob, os, re, yaml, json, collections
-ROOT = "C:/Users/shuic/code/MANGAL"
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # 旧PCパス→動的導出(2026-07-21一括是正)
 PREV = f"{ROOT}/.preview-data/manga"
 
 # ISBN -> creators_roled (NDL discovery)

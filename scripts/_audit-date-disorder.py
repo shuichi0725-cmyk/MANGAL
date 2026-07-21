@@ -1,7 +1,7 @@
 """発売日と巻番号の順番が矛盾するページを検出(調査リスト作成のみ・変更なし)。
 standard版で巻番号順に並べた時、発売日が逆行する箇所=汚染(別作/別版の混入)の候補。長期連載優先。"""
 import yaml, json, os, csv, sys
-ROOT = "C:/Users/shuic/code/MANGAL"
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # 旧PCパス→動的導出(2026-07-21一括是正)
 raw = json.load(open(ROOT + "/data/manga-list-index.json", encoding="utf-8"))
 f = raw["f"]; si = f.index("slug"); tvi = f.index("total_volumes")
 longs = [r[si] for r in raw["d"] if (r[tvi] or 0) >= 10]

@@ -2,7 +2,7 @@
 題検索→題一致で全巻(ISBN/巻番/書影/発売日)→FILL seed更新+enrichに書影追記。
 usage: python _distill_fill_rakuten.py <slug1> <slug2> ..."""
 import sys, re, json, os, time, urllib.request, urllib.parse, yaml, unicodedata
-ROOT = "C:/Users/shuic/code/MANGAL"
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # 旧PCパス→動的導出(2026-07-21一括是正)
 RATE = 1.2
 env = {}
 for ln in open(f"{ROOT}/.env.local", encoding="utf-8"):

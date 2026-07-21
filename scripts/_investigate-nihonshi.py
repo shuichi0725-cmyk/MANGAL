@@ -1,7 +1,7 @@
 """日本の歴史 各ページの巻を詳細展開(番号/ISBN/prefix/年/実題名)し混入を調査。"""
 import json, yaml, re, os
 
-ROOT = "C:/Users/shuic/code/MANGAL"
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # 旧PCパス→動的導出(2026-07-21一括是正)
 tmap = json.load(open(f"{ROOT}/.cache/isbn-title-map.json", encoding="utf-8"))
 amap = json.load(open(f"{ROOT}/.cache/isbn-author-map.json", encoding="utf-8"))
 

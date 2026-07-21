@@ -1,7 +1,8 @@
 """蒸留試走(NDL+楽天): NDL gap(種1蒸留)を種2(凍結)照合で型分類+scope+holes化。種2/種4不変。
 出力: .cache/madb-distill/ndl-manifest.tsv (管理表)。種4登録はしない。"""
+import os
 import csv, sqlite3, re, unicodedata, collections, sys
-ROOT = "C:/Users/shuic/code/MANGAL"
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # 旧PCパス→動的導出(2026-07-21一括是正)
 GAP = f"{ROOT}/data/seeds/ndl-2026-gap.tsv"
 OUT = f"{ROOT}/.cache/madb-distill/ndl-manifest.tsv"
 

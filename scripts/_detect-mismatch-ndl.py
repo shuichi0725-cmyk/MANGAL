@@ -1,7 +1,7 @@
 """巻抜け作の誤マッチ(別作混入)を NDL取得データ + harvest の ISBN→実題名で網羅検出。
 各巻のISBN→実題名(NDL優先,harvest補完)が作品題と乖離=別作混入。英↔カナ/ハイフン揺れは著者一致or base一致で除外。"""
 import json, re, os, unicodedata, yaml
-ROOT = "C:/Users/shuic/code/MANGAL"
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # 旧PCパス→動的導出(2026-07-21一括是正)
 # harvest ISBN→題
 tmap = json.load(open(f"{ROOT}/.cache/isbn-title-map.json", encoding="utf-8"))
 amap = json.load(open(f"{ROOT}/.cache/isbn-author-map.json", encoding="utf-8"))

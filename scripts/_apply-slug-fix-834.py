@@ -2,7 +2,7 @@
 クリーン(old!=new かつ new未使用 かつ new重複なし かつ 上書き衝突なし)のみ rename。 衝突22/重複new/no-op は除外(別途)。
 dry-run(既定)/--apply。 durable=slug-overrides.yml、 redirect=slug-aliases.yml+_redirects(★追記モード=数値キーsortエラー回避)、 可逆=changelog。"""
 import json, os, yaml, glob, sys, collections
-ROOT = "C:/Users/shuic/code/MANGAL"
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # 旧PCパス→動的導出(2026-07-21一括是正)
 APPLY = "--apply" in sys.argv
 NOW = "2026-06-26"
 cand = json.load(open(ROOT + "/data/seeds/slug-fix-candidates-2026.json", encoding="utf-8"))

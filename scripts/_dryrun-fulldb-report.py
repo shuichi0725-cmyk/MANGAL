@@ -9,7 +9,7 @@ from collections import defaultdict, Counter
 from pathlib import Path
 
 sys.stdout.reconfigure(encoding="utf-8")
-ROOT = Path("C:/Users/shuic/code/mangal")
+ROOT = Path(__file__).resolve().parents[1]  # 旧PCパス→動的導出(2026-07-21一括是正)
 csv.field_size_limit(10**7)
 
 # promote の DROP 定数を実体から import(定義のdrift防止)

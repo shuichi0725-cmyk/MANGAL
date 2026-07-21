@@ -1,8 +1,9 @@
 """NDL by-creator取得(63)を author-yomi へ適用 + 異体字(旧字)名を正規化して再照会・救済。"""
+import os
 import json, sys, re, html, time, urllib.request, urllib.parse, yaml
 from collections import Counter
 sys.stdout.reconfigure(encoding="utf-8")
-ROOT = "C:/Users/shuic/code/MANGAL"
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # 旧PCパス→動的導出(2026-07-21一括是正)
 
 doc = yaml.safe_load(open(ROOT + "/data/seeds/author-yomi.yml", encoding="utf-8")) or {"yomi": {}}
 y = doc["yomi"]; before = len(y)

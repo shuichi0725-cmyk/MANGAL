@@ -1,7 +1,7 @@
 """蒸留enrich(楽天): in-scope新刊の 書影+caption+アフィリンク+出版社 を楽天で取得。
 叩き速度=楽天規定 1.2秒/req。resumable(取得済skip)。出力: .cache/distill-enrich-2026.jsonl"""
 import csv, json, os, re, time, urllib.request, urllib.parse
-ROOT = "C:/Users/shuic/code/MANGAL"
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # 旧PCパス→動的導出(2026-07-21一括是正)
 OUT = f"{ROOT}/.cache/distill-enrich-2026.jsonl"
 RATE = 1.2  # ★楽天Books API 1req/秒 規定
 env = {}

@@ -4,7 +4,7 @@ per-Agent抽出+検証(カタカナ・長さ・名前一致)。 非人物(組織
 import json, sys, re, html, time, os, urllib.request, urllib.parse
 from collections import Counter
 sys.stdout.reconfigure(encoding="utf-8")
-ROOT = "C:/Users/shuic/code/MANGAL"
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # 旧PCパス→動的導出(2026-07-21一括是正)
 
 ranked = json.load(open(ROOT + "/.cache/b2-variant-junk.json", encoding="utf-8"))["genuine_ranked"]
 CACHE = ROOT + "/.cache/b2-web-yomi.json"

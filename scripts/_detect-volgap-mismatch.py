@@ -1,7 +1,7 @@
 """巻抜け作の中の誤マッチ(別作の巻が混入)を検出。各巻のISBN→実題名(harvest)が作品題と乖離=混入候補。
 title厳密でなく base一致で判定、英↔カナ表記揺れは著者一致で吸収。 per-case精査の対象を出す。"""
 import json, re, os, unicodedata, yaml
-ROOT = "C:/Users/shuic/code/MANGAL"
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # 旧PCパス→動的導出(2026-07-21一括是正)
 tmap = json.load(open(f"{ROOT}/.cache/isbn-title-map.json", encoding="utf-8"))
 amap = json.load(open(f"{ROOT}/.cache/isbn-author-map.json", encoding="utf-8"))
 

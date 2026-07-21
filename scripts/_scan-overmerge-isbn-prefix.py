@@ -3,7 +3,7 @@ ISBN-13 978-4-{registrant} の registrant(出版社記号)を範囲規則で抽�
 少数派prefix巻=intruder候補。 確証は別途(WF/手動)。 [[fragmentation_overmerge_cleanup]]"""
 import glob, os, re, json, collections
 
-ROOT = "C:/Users/shuic/code/MANGAL"
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # 旧PCパス→動的導出(2026-07-21一括是正)
 
 def registrant(isbn):
     # 978-4-{registrant}. 日本ISBNの registrant 範囲で桁数決定(標準ISBN-13規則)
