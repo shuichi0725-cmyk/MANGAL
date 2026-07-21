@@ -5,7 +5,7 @@ metadata:
   node_type: memory
   type: project
   originSessionId: 2263dd16-1146-4141-862a-d1a3408de999
-  modified: 2026-07-21T11:44:06.957Z
+  modified: 2026-07-21T11:55:22.339Z
 ---
 
 2026-07-17、**新PCへ移行完了**(= このリポジトリは `github.com/shuichi0725-cmyk/MANGAL` からの fresh clone + pull)。搬入経路 = **`D:\migrate\`**(manga.v2 / data-index / env)。全て適用済みで実データと一致確認済み(manga.v2 68,973件 / 本番索引 22MB+10.5MB がバイト一致 / `.env.local` 11キー全て値あり)。★**`D:\migrate` は用済み**(削除可・未実施)。
@@ -49,6 +49,7 @@ metadata:
 
 - ★**症状**: `_ndl-discovery.py` が旧パスの `.cache/db-v2.sqlite` を見て `unable to open database file` → **日次蒸留B(NDL新着discovery)が移行後ずっと無音失敗**(2026-07-15〜07-21の新着を取りこぼし)。`--plan`は本体scriptが現パスでcacheを読めるので**正常な顔で「新規0」を返す**=Bが死んでいることに気付けない型。7/21修正後に再discoverで種2外160件(6月151+7月9)を一括回収。
 - ★**修正パターン**(2箇所): ①`ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__))).replace("\\","/")` ②sqlite roは**空白パス("chiba shuichi")がURIで壊れる**ので `sqlite3.connect(pathlib.Path(f"{ROOT}/.cache/db-v2.sqlite").as_uri() + "?mode=ro", uri=True)`(→`file:///C:/Users/chiba%20shuichi/...`にpercent-encode)。
-- ★**残る同型**: `grep "C:/Users/shuic/" scripts/` で**約90本**hit(大半は単発の歴史script=非パイプライン)。**現行の日次/週次/反映パイプラインで叩く物だけ**都度この型で潰す(一括sweepは別タスク・GO要)。`_sync-memory.py`のコメントが既知として記録済。[[feedback_one_bug_means_a_class]]
+- ★**一括sweep完遂(2026-07-21 同日)**: ユーザ「いろいろ見直して」を受け全scriptを掃引 → **99本のROOT代入を動的導出へ一括是正**(単純代入96+同一行`;`連結3。全ファイルpy_compile検証・失敗0・残存0)。残るshuic一致=メール/ドメイン/説明コメントのみ=無害。commit e87a4382c。★このクラスは**根絶済み**=以後の同型症状は別原因を疑う。
+- 注意: `_gen-gate-overrides.py` のSCRATCHは旧セッションのscratchpadパス(裁定完了済の単発script=実害なし・触らず)。[[feedback_one_bug_means_a_class]]
 
 その他の破損 [[r2-manifest-corrupt-pending-repair]] は移行前(7/11)から壊れていた。
