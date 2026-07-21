@@ -5,7 +5,7 @@ metadata:
   node_type: memory
   type: project
   originSessionId: e65fec7d-934a-44f5-8087-f90ac21cce9c
-  modified: 2026-07-21T12:02:45.612Z
+  modified: 2026-07-21T12:34:36.591Z
 ---
 
 著者名表記に**2つの流儀が併存**していることが2026-07-21の日次蒸留検品で確定:
@@ -21,6 +21,6 @@ metadata:
 - 是正するなら「日本語姓名かつ本番に無空白同名が既存」の分裂ケースに限定するか、著者indexの照合キー側で空白を無視する(表記は触らない)のが安全。
 
 **★裁定(2026-07-21ユーザ承認=推奨案)**: 表記は触らず**照合側で空白無視**。実装済み:
--  = 空白除去キー。著者フィルタ(applyFilters)/50音索引(authorsWithKana)/uniqueAuthors/関連作品(RelatedWorks)が空白違い横断で束なる。表示名は無空白形優先。
+- lib/filters.ts の authorKey() = 空白除去キー。著者フィルタ(applyFilters)/50音索引(authorsWithKana)/uniqueAuthors/関連作品(RelatedWorks)が空白違い横断で束なる。表示名は無空白形優先。
 - ドラフト生成器(_preorder-gen-preview/-midfill)= 日本語のみ著者名の楽天「姓 名」空白を除去(欧文保持)+midfill year=最古巻年。
 - 本番950名の表記自体は不変(是正不要=照合で吸収)。新規の著者名照合を書く時は必ず authorKey を通すこと。関連 [[feedback-accuracy-is-the-goal]]
