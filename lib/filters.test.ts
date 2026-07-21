@@ -1,6 +1,8 @@
 import { describe, expect, it } from "vitest";
 import {
   applyFilters,
+  authorKey,
+  authorsWithKana,
   emptyFilterState,
   matchText,
   uniqueAuthors,
@@ -135,5 +137,27 @@ describe("yearBounds と uniqueAuthors", () => {
   it("uniqueAuthors は原作者を含めるオプション", () => {
     expect(uniqueAuthors(items, false)).toEqual(["A", "B"]);
     expect(uniqueAuthors(items, true).sort()).toEqual(["A", "B", "C"]);
+  });
+});
+
+describe("authorKey 空白違いの同一人物統合(2026-07-21)", () => {
+  const items: MangaListItem[] = [
+    m({ slug: "x1", authors: [{ name: "蟹沢ちひろ", role: "writer_artist" }] }),
+    m({ slug: "x2", authors: [{ name: "蟹沢 ちひろ", kana: "カニサワ チヒロ", role: "writer_artist" }] }),
+    m({ slug: "x3", authors: [{ name: "Ark Performance", role: "writer_artist" }] }),
+  ];
+  it("uniqueAuthors が空白違いを1人に束ね無空白表示を選ぶ", () => {
+    const names = uniqueAuthors(items);
+    expect(names.filter((n) => authorKey(n) === "蟹沢ちひろ")).toEqual(["蟹沢ちひろ"]);
+    expect(names).toContain("Ark Performance");
+  });
+  it("authorsWithKana も1エントリ(count=2)に統合", () => {
+    const a = authorsWithKana(items).find((e) => authorKey(e.name) === "蟹沢ちひろ");
+    expect(a?.count).toBe(2);
+    expect(a?.name).toBe("蟹沢ちひろ");
+  });
+  it("著者フィルタが空白違いの頁も通す", () => {
+    const st = { ...emptyFilterState(), authors: ["蟹沢ちひろ"] };
+    expect(applyFilters(items, st).map((r) => r.slug).sort()).toEqual(["x1", "x2"]);
   });
 });

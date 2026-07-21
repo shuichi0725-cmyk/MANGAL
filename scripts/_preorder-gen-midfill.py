@@ -82,7 +82,17 @@ for _k, _v in _pubs.items():
 def _pubkey(name):
     return _name2key.get(_ud.normalize("NFKC", str(name or "")))
 def author_names(s):
-    return [x.strip() for x in re.split(r"[/,、;；]", str(s or "")) if x.strip()]
+    out = []
+    for x in re.split(r"[/,、;；]", str(s or "")):
+        x = x.strip()
+        if not x:
+            continue
+        # ★日本語のみの名前は姓名間の空白を除去(楽天「姓 名」形式→本番無空白慣行。蟹沢ちひろ分裂対策 2026-07-21)
+        #   欧文を含む名前(Ark Performance等)の空白は公式表記なので保持
+        if not re.search(r"[A-Za-z]", x):
+            x = re.sub(r"[ 　]+", "", x)
+        out.append(x)
+    return out
 
 cls = json.load(open(f"{ROOT}/.cache/preorders/classified.json", encoding="utf-8"))
 made, holds, pend = [], [], []
@@ -162,7 +172,7 @@ for r in cls["ex_mid"]:
     doc = {"slug": slug, "title": title,
            "title_kana": kana.replace(" ", "").replace("　", ""),
            "title_romaji": romaji.replace("-", " "),
-           "authors": authors, "publisher": (_pk if (_pk:=_pubkey(r.get("publisher"))) in _pubs else None), "publishers": ([_pk] if _pk in _pubs else []), "year_ended": None, "year_started": int(ym[:4]), "status": "ongoing",
+           "authors": authors, "publisher": (_pk if (_pk:=_pubkey(r.get("publisher"))) in _pubs else None), "publishers": ([_pk] if _pk in _pubs else []), "year_ended": None, "year_started": (min([int(str(_v["release_date"])[:4]) for _v in volumes if _v.get("release_date")] or [int(ym[:4])])), "status": "ongoing",  # ★巻1年=最古巻年(ひよこcomic型: 予約巻の年を拾う誤り是正 2026-07-21)
            "demographic": DEMO.get(r.get("subgenre")),  # ★不明はNone(旧"other"廃止2026-07-13。schemaはnullable化済み) "genres": [],
            "editions": [{"type": "standard", "label": "通常版", "publisher": (_pubkey(r.get("publisher")) or r.get("publisher")),
                           "imprint": r.get("seriesName") or "", "volumes": volumes}],

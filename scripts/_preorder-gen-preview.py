@@ -131,7 +131,17 @@ def _pubkey(name):
     return _name2key.get(_ud.normalize("NFKC", str(name or "")))
 
 def author_names(s):
-    return [x.strip() for x in re.split(r"[/,、;；]", str(s or "")) if x.strip()]
+    out = []
+    for x in re.split(r"[/,、;；]", str(s or "")):
+        x = x.strip()
+        if not x:
+            continue
+        # ★日本語のみの名前は姓名間の空白を除去(楽天「姓 名」形式→本番無空白慣行。蟹沢ちひろ分裂対策 2026-07-21)
+        #   欧文を含む名前(Ark Performance等)の空白は公式表記なので保持
+        if not re.search(r"[A-Za-z]", x):
+            x = re.sub(r"[ 　]+", "", x)
+        out.append(x)
+    return out
 
 # ★書影の実URL源(構築禁止 2026-07-09): covers seed → 楽天API
 import gzip as _gzip

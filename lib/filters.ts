@@ -186,10 +186,11 @@ export function applyFilters(
       if (!m.magazine || !state.magazines.includes(m.magazine)) return false;
     }
     if (state.authors.length) {
-      if (!intersects(state.authors, m.authors.map((a) => a.name))) return false;
+      // ★authorKey照合(空白違いの同一人物を通す)
+      if (!intersects(state.authors.map(authorKey), m.authors.map((a) => authorKey(a.name)))) return false;
     }
     if (state.originalAuthors.length) {
-      if (!intersects(state.originalAuthors, m.original_authors.map((a) => a.name))) return false;
+      if (!intersects(state.originalAuthors.map(authorKey), m.original_authors.map((a) => authorKey(a.name)))) return false;
     }
     if (state.genres.length) {
       const ok = state.genreMode === "and"
@@ -242,13 +243,25 @@ export function applyArtBookFilters(items: ArtBook[], state: FilterState): ArtBo
   }
 }
 
+/** ★著者名の照合キー(2026-07-21): 空白(半角/全角)を無視して同一人物を束ねる。
+ *  「蟹沢ちひろ」(MADB系無空白)と「蟹沢 ちひろ」(楽天2026新刊系)が別著者に分裂する実害の吸収。
+ *  表記自体は触らない(ユズキ カズ/欧文名など空白が公式のケースを壊さないため=ユーザ裁定の推奨案)。 */
+export function authorKey(name: string): string {
+  return name.replace(/[\s　]+/g, "");
+}
+
 export function uniqueAuthors(items: MangaListItem[], includeOriginal = false): string[] {
-  const set = new Set<string>();
+  const map = new Map<string, string>(); // authorKey → 表示名(無空白形を優先)
+  const add = (name: string) => {
+    const k = authorKey(name);
+    const prev = map.get(k);
+    if (prev === undefined || (prev !== k && name === k)) map.set(k, name);
+  };
   for (const m of items) {
-    for (const a of m.authors) set.add(a.name);
-    if (includeOriginal) for (const a of m.original_authors) set.add(a.name);
+    for (const a of m.authors) add(a.name);
+    if (includeOriginal) for (const a of m.original_authors) add(a.name);
   }
-  return Array.from(set).sort((a, b) => a.localeCompare(b, "ja"));
+  return Array.from(map.values()).sort((a, b) => a.localeCompare(b, "ja"));
 }
 
 /** 著者名 → 読み(カタカナ)の一覧 (= 50音索引用)。 重複排除、 kana有る方を優先採用。 */
@@ -256,20 +269,23 @@ export function authorsWithKana(
   items: MangaListItem[],
   includeOriginal = false,
 ): { name: string; kana: string; count: number }[] {
-  const map = new Map<string, { kana: string; count: number }>();
+  // ★authorKeyで空白違いの同一人物を1エントリに統合(表示名は無空白形を優先=本体67kの慣行)
+  const map = new Map<string, { name: string; kana: string; count: number }>();
   const add = (name: string, kana?: string) => {
-    const prev = map.get(name);
-    if (prev === undefined) map.set(name, { kana: kana ?? "", count: 1 });
+    const k = authorKey(name);
+    const prev = map.get(k);
+    if (prev === undefined) map.set(k, { name, kana: (kana ?? "").replace(/[\s　]+/g, ""), count: 1 });
     else {
       prev.count += 1;
-      if (!prev.kana && kana) prev.kana = kana;
+      if (prev.name !== k && name === k) prev.name = name;
+      if (!prev.kana && kana) prev.kana = kana.replace(/[\s　]+/g, "");
     }
   };
   for (const m of items) {
     for (const a of m.authors) add(a.name, a.kana);
     if (includeOriginal) for (const a of m.original_authors) add(a.name, a.kana);
   }
-  return Array.from(map, ([name, v]) => ({ name, kana: v.kana, count: v.count })).sort((a, b) =>
+  return Array.from(map.values()).sort((a, b) =>
     (a.kana || a.name).localeCompare(b.kana || b.name, "ja"),
   );
 }
