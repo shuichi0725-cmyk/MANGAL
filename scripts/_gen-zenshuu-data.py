@@ -37,6 +37,37 @@ META = {
 }
 
 
+def _link_by_title(works, author):
+    """★結線fallback(2026-07-21): manifestの結線はISBN一致のみ(_zenshuu-manifest.py)で、
+    本番頁が標準版(秋田書店等)しか持たない作品は全集ISBNで引けず未結線だった
+    (ブラック・ジャック/どろろ/アドルフに告ぐ等158巻=実は全部本番に存在=ユーザ指摘で発覚)。
+    作品グループ名×著者の正規化完全一致・一意の時だけ本番slugへ結線する。
+    少女クラブ版/小学一年生版など題が完全一致しない別版は結線しない(正確性優先)。"""
+    from _idx_authors import au_names
+    d = json.load(io.open(os.path.join(ROOT, "data", "manga-list-index.json"), encoding="utf-8"))
+    fi = d["f"]; si = fi.index("slug"); ti = fi.index("title"); ai = fi.index("authors")
+
+    def _n(s):
+        return re.sub(r"[\s・.,、。()（）\[\]!！?？:：=＝\-]", "", unicodedata.normalize("NFKC", s or "")).lower()
+
+    m = {}
+    for r in d["d"]:
+        if author in au_names(r[ai]):
+            k = _n(r[ti])
+            m[k] = None if k in m else r[si]  # 同題複数頁は結線しない(一意のみ)
+    hit = 0
+    for ws in works:
+        slug = m.get(_n(ws["name"]))
+        if not slug:
+            continue
+        for v in ws["vols"]:
+            if not v.get("s"):
+                v["s"] = slug
+                hit += 1
+    print(f"  tezuka title-fallback結線: +{hit}巻", file=sys.stderr)
+    return works
+
+
 def load_covers():
     m = {}
     p = os.path.join(ROOT, "data", "seeds", "covers.jsonl.gz")
@@ -128,6 +159,21 @@ def main():
                     if not _tgt.get("prod_slug"):
                         _tgt["prod_slug"] = o.get("prod_slug")
             mf = [o for o in mf if o.get("num")]
+            # ★巻別是正(2026-07-21 NDL照会で確定):
+            #   384/386=立東舎復刻ISBNが別巻の座を占有→講談社正本(NDL題)へ差し替え
+            #   164-167=NDLレコードの題欠落(「全集(164)」)→シリーズ番号でブラック・ジャックと確定
+            _fix = {
+                384: ("手塚治虫小説集", "9784061759848", "1996-03"),
+                386: ("手塚治虫シナリオ集", "9784061759862", "1996-07"),
+                164: ("ブラック・ジャック", None, None), 165: ("ブラック・ジャック", None, None),
+                166: ("ブラック・ジャック", None, None), 167: ("ブラック・ジャック", None, None),
+            }
+            for o in mf:
+                fx = _fix.get(o.get("num"))
+                if fx:
+                    o["title"] = fx[0]
+                    if fx[1]:
+                        o["isbn13"], o["date"], o["prod_slug"] = fx[1], fx[2], None
         years = sorted(int(m.group(0)) for o in mf if (m := re.search(r"(19|20)\d{2}", str(o.get("date") or ""))))
         groups = {}
         order = []
@@ -147,9 +193,22 @@ def main():
                 **({"nm": True} if o.get("nonmanga") else {}),
             })
         works = [{"name": w, "vols": groups[w]} for w in order]
+        if key == "tezuka":
+            works = _link_by_title(works, "手塚治虫")
+            # ★巻番号ピン結線(2026-07-21): 題が本編と別表記の版は fallback で結線されないため明示。
+            #   少女クラブ版(85/86=リボンの騎士・200=火の鳥)/小学一年生版(310=ユニコ)は
+            #   同一作品の初出誌版=主頁へ(別頁を立てるほどの巻数でない・ユーザ400冊完備裁定)。
+            _pin = {85: "ribon-no-kishi", 86: "ribon-no-kishi", 200: "hinotori", 310: "unico",
+                    # MW=表記(ムウ)付きでfallback不一致 / 奥義=「手塚治虫漫画…」始まりの題が
+                    # 仮グループ(その他)送りになりグループ名照合に乗らない → 番号でピン
+                    301: "mw", 302: "mw", 303: "mw", 391: "tezuka-osamu-manga-no-ougi"}
+            for ws in works:
+                for v in ws["vols"]:
+                    if not v.get("s") and v.get("n") in _pin:
+                        v["s"] = _pin[v["n"]]
         linked = sum(1 for ws in works for v in ws["vols"] if v["s"])
         n_isbn = sum(len(ws["vols"]) for ws in works)
-        complete = (key in ("mizuki", "kamuiden", "tsuge", "tsuge-taizen", "hasegawa"))
+        complete = (key in ("mizuki", "kamuiden", "tsuge", "tsuge-taizen", "hasegawa")) or linked >= total
         # コーナー用: 別グループから書影3枚
         cvs = []
         for ws in works:
