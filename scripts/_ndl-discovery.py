@@ -5,8 +5,8 @@ throttle回避: 1.2s・小バッチ・月分割・resumable(取得済ISBN skip)�
 usage: python _ndl-discovery.py 2026          # 2026年の漫画新刊を月分割discovery
        python _ndl-discovery.py 2026 5 6       # 2026年5-6月のみ
 """
-import sys, os, re, time, json, html, urllib.request, urllib.parse, sqlite3
-ROOT = "C:/Users/shuic/code/MANGAL"
+import sys, os, re, time, json, html, urllib.request, urllib.parse, sqlite3, pathlib
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__))).replace("\\", "/")
 SRU = "https://ndlsearch.ndl.go.jp/api/sru"
 RATE = 1.2  # ★楽天Books API と同じ。NDL遮断回避(per-ISBN burst 0.2sで429を踏んだ反省)。
 WINDOW = 500  # NDL SRU 1照会の最大取得(maximumRecords上限)
@@ -15,7 +15,7 @@ M_FROM = int(sys.argv[2]) if len(sys.argv) > 2 else 1
 M_UNTIL = int(sys.argv[3]) if len(sys.argv) > 3 else 12
 OUT = f"{ROOT}/data/seeds/ndl-discovery-{YEAR}.tsv"
 
-con = sqlite3.connect(f"file:{ROOT}/.cache/db-v2.sqlite?mode=ro", uri=True)
+con = sqlite3.connect(pathlib.Path(f"{ROOT}/.cache/db-v2.sqlite").as_uri() + "?mode=ro", uri=True)
 have = {r[0] for r in con.execute("SELECT isbn13 FROM volumes WHERE isbn13 IS NOT NULL")}
 seen = set()
 if os.path.exists(OUT):
