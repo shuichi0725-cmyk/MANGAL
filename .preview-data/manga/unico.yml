@@ -3,7 +3,7 @@ slug: unico
 title: ユニコ
 title_kana: ユニコ
 title_romaji: yuniko
-year_started: 1983
+year_started: 1985
 year_ended: 2005
 status: completed
 authors:
@@ -37,14 +37,14 @@ editions:
   volumes:
   - number: 1
     asin: null
-    isbn13: '9784061732858'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0617/06173285.jpg?_ex=300x300
-    release_date: '1983-06-20'
+    isbn13: '9784061907089'
+    cover_url: null
+    release_date: 1985-06
   - number: 2
     asin: null
-    isbn13: '9784061732865'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0617/06173286.jpg?_ex=300x300
-    release_date: 1983-08
+    isbn13: '9784061907096'
+    cover_url: null
+    release_date: 1985-08
   - number: 3
     asin: null
     isbn13: '9784091480835'
@@ -71,16 +71,28 @@ editions:
     cover_url: null
     release_date: '1996-07-16'
 - type: standard
-  label: 手塚治虫漫画全集(1993)
+  label: 手塚治虫漫画全集(1983–1993)
   publisher: 講談社
   imprint: 手塚治虫漫画全集
   volumes:
   - number: 1
     asin: null
+    isbn13: '9784061732858'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0617/06173285.jpg?_ex=300x300
+    release_date: '1983-06-20'
+    title_display: 第1巻(全集285)
+  - number: 2
+    asin: null
+    isbn13: '9784061732865'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0617/06173286.jpg?_ex=300x300
+    release_date: 1983-08
+    title_display: 第2巻(全集286)
+  - number: 3
+    asin: null
     isbn13: '9784061759107'
     cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/9107/9784061759107.jpg?_ex=300x300
-    release_date: 1993-02
-    title_display: 全集第310巻
+    release_date: '1993-02-17'
+    title_display: 小学一年生版 第3巻(全集310)
 publishers:
 - kodansha
 - scola
