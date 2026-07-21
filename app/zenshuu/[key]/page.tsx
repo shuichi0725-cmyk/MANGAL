@@ -106,12 +106,18 @@ export default async function ZenshuuPage({ params }: { params: Promise<{ key: s
         </div>
       ) : (
         <>
+          {/* ★グループジャンプ(2026-07-21修正): 旧実装はfilter後の連番でhrefを作り、
+              飛び先idは全グループ通し番号=単巻が挟まるたびにズレ跳び/無反応(ユーザ報告)。
+              元indexを保持して一致させる。24個capも撤廃(後半グループのチップが無かった)。 */}
           <div className="mb-2.5 flex gap-1.5 overflow-x-auto no-scrollbar px-3.5">
-            {(c.works ?? []).filter((w) => w.vols.length >= 2).slice(0, 24).map((w, i) => (
-              <a key={i} href={`#w${i}`} className="shrink-0 rounded-full border border-[var(--color-line)] bg-[var(--color-surface)] px-2.5 py-1 text-[10px] font-bold">
-                {w.name.slice(0, 12)}
-              </a>
-            ))}
+            {(c.works ?? [])
+              .map((w, i) => ({ w, i }))
+              .filter(({ w }) => w.vols.length >= 2)
+              .map(({ w, i }) => (
+                <a key={i} href={`#w${i}`} className="shrink-0 rounded-full border border-[var(--color-line)] bg-[var(--color-surface)] px-2.5 py-1 text-[10px] font-bold">
+                  {w.name.slice(0, 12)}
+                </a>
+              ))}
           </div>
           {(c.works ?? []).map((w, i) => (
             <section key={i} id={w.vols.length >= 2 ? `w${i}` : undefined} className="mb-3.5 scroll-mt-14">
