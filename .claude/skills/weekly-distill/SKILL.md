@@ -75,6 +75,8 @@ python scripts/_r2-sync.py --bucket mangal-site
   purgeしないと calendar/*.json・data/*-stock.json 等が最長1週間前のまま配信される(ユーザ画面が更新されない)。
   purge = worker `/api/purge`(R2_PURGE_TOKEN認証、_deploy-differential.py step6 と同機構)。最低限
   `/calendar/manifest.json`+`/calendar/release/*.json`(当月〜3ヶ月+beyond)+`/data/*.json` を対象に。
+  ★**ルート索引5本も必須**(2026-07-22追記: ASSET=エッジ7日。忘れると検索改善・新頁が最長1週間出ない):
+  `/manga-list-index.json` `/manga-list-head.json` `/manga-search-index.json` `/manga-catch-index.json` `/manga-alt-index.json`
 
 ### 5+6. ★finalize (= 2026-07-10 script化。疎通→marker→manifestをゲート連鎖で1本化)
 ```
