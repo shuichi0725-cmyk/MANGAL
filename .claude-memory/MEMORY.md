@@ -136,4 +136,4 @@
 - [起動bat3本=モデル名(fable/sonnet/opus)](launcher_bats_session_namespaces.md) — 1バッチ=1junction=1名前空間・復旧=claude --resume
 - [【注意信号】書影の違和感=上流誤りの症状](feedback_cover_oddity_signal.md) — 揃いすぎ/装丁不一致/同一画像はISBN帰属・版・リンク誤りを疑う
 - [【厳守】週次蒸留=「週次蒸留して」のみで発動](feedback_weekly_distill_exact_trigger_only.md) — 類語解釈での代行起動禁止
-- [【未決】著者名の空白=2流儀衝突](author_name_space_conventions_conflict.md) — MADB系無空白vs楽天系空白。一括機械是正禁止・裁定待ち
+- [【✅】著者名の空白=authorKeyで照合吸収](author_name_space_conventions_conflict.md) — 表記不変・新規照合は必ずauthorKey経由
