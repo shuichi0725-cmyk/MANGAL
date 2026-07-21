@@ -135,3 +135,4 @@
 - [【厳守】索引形式変更=ファイル名バンプ](index_format_change_versioned_filename.md) — 同名で契約変更禁止。旧ファイルは残す
 - [起動bat3本=モデル名(fable/sonnet/opus)](launcher_bats_session_namespaces.md) — 1バッチ=1junction=1名前空間・復旧=claude --resume
 - [【注意信号】書影の違和感=上流誤りの症状](feedback_cover_oddity_signal.md) — 揃いすぎ/装丁不一致/同一画像はISBN帰属・版・リンク誤りを疑う
+- [【厳守】週次蒸留=「週次蒸留して」のみで発動](feedback_weekly_distill_exact_trigger_only.md) — 類語解釈での代行起動禁止
