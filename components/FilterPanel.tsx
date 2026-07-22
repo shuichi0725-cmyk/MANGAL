@@ -40,8 +40,12 @@ export default function FilterPanel({
     return {
       status: tally({ statuses: [] }, (m) => [m.status]),
       demographic: tally({ demographics: [] }, (m) => (m.demographic ? [m.demographic] : [])),
-      genre: tally({ genres: [] }, (m) => m.genres ?? []),
-      theme: tally({ themes: [] }, (m) => m.themes ?? []),
+      // ★ジャンル/要素はAND仕様(2026-07-22): 自facet解除をやめ「現在の絞り込み全体との交差数」を出す。
+      //   旧(OR時代の定石=自facet解除)だと「お色気3」と見えて押すと0件になる不一致が起きる
+      //   (3=少年∩お色気であって、選択中の冒険との交差ではないため)。ANDでは
+      //   未選択チップの数字=「押したらこの件数になる」と完全一致する。
+      genre: tally({}, (m) => m.genres ?? []),
+      theme: tally({}, (m) => m.themes ?? []),
       publisher: tally({ publishers: [] }, (m) =>
         m.publishers?.length ? m.publishers : m.publisher ? [m.publisher] : [],
       ),
@@ -222,6 +226,7 @@ export default function FilterPanel({
               key={g.key}
               active={state.genres.includes(g.key)}
               onClick={() => update({ genres: toggle(state.genres, g.key) })}
+              className={!state.genres.includes(g.key) && (counts.genre.get(g.key) ?? 0) === 0 ? "opacity-40" : ""}
             >
               {g.name}<Cnt n={counts.genre.get(g.key) ?? 0} />
             </ChipButton>
