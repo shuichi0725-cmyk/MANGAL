@@ -171,3 +171,4 @@
 {"slug": "boku-wa-ano-yoru-ano-ko-to", "op": "kana-fix", "source": "NDLヨミ照合裁定", "before": "ボクハアノヨルアノコト3", "after": "ボクハアノヨルアノコト", "at": "2026-07-16T01:12:59"}
 {"slug": "makeinu-to-lion", "op": "kana-fix", "source": "NDLヨミ照合裁定", "before": "マケイヌトライオン2", "after": "マケイヌトライオン", "at": "2026-07-16T01:12:59"}
 {"slug": "slime-master-chan-no-vrmmo", "op": "kana-fix", "source": "NDLヨミ照合裁定", "before": "スライムマスターチャンノVRMMO", "after": "スライムマスターチャンノブイアールエムエムオー", "at": "2026-07-16T01:12:59"}
+{"op": "kana-digit-fix", "count": {"digit_resolved": 586, "digit_unresolved": 558, "html_entity": 23, "corrections_added": 656}, "method": "楽天ローカルキャッシュtitleKana(数字を読みに開く)を順序保存セグメントゲートで採用→furigana-corrections.yml追記。API照会ゼロ。エンティティはunescape", "gate": "現kanaの数字以外断片が順序保存でRK内に出現+RKに数字残無し+読み長増", "found_by": "ユーザ発見(殺し屋1=コロシヤ1)", "remaining": "未解決558=楽天キャッシュ未収/楽天も数字のまま→NDL live/AI+Web裏取りの後続バッチ候補", "at": "2026-07-23"}

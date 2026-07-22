@@ -3391,3 +3391,3825 @@ corrections:
   title_kana_segmented: アイノホウセキ
   source: ndl
   note: 小学館フラワーコミックスマスターピーシーズ. 種2でtitle=著者名化け→作品題. slug=hagio-moto
+# ★2026-07-23 数字kana是正(楽天titleKanaゲート採用)+HTMLエンティティ除去
+- key: qid:Q253412|name:0の奏香師
+  title: 0の奏香師
+  title_kana: ゼロノソウコウシ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 0ノソウコウシ
+  title_kana_segmented: ゼロ ノ ソウコウシ
+- key: name:海華|name:0歳児スタートダッシュ物語
+  title: 0歳児スタートダッシュ物語
+  title_kana: ゼロサイジスタートダッシュモノガタリ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 0サイジスタートダッシュモノガタリ
+  title_kana_segmented: ゼロサイジ スタート ダッシュ モノガタリ
+- key: name:はやせれく|name:0歳児スタートダッシュ物語
+  title: 0歳児スタートダッシュ物語
+  title_kana: ゼロサイジスタートダッシュモノガタリ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 0サイジスタートダッシュモノガタリ
+  title_kana_segmented: ゼロサイジ スタート ダッシュ モノガタリ
+- key: qid:Q11545808|name:0×0メモリーズ
+  title: 0×0メモリーズ
+  title_kana: ゼロゼロメモリーズ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 00メモリーズ
+  title_kana_segmented: ゼロ ゼロ メモリーズ
+- key: qid:Q275121|name:死刑囚042
+  title: 死刑囚042
+  title_kana: シケイシュウオシニ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: シケイシュウ042
+  title_kana_segmented: シケイシュウ オシニ
+- key: qid:Q11373862|name:090えこといっしょ。
+  title: 090えこといっしょ。
+  title_kana: ゼロキュウゼロエコトイッショ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 090エコトイッショ
+  title_kana_segmented: ゼロキュウゼロ エコ ト イッショ
+- key: name:内記稔夫|name:0マン
+  title: 0マン
+  title_kana: ゼロマン
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 0マン
+- key: qid:Q193300|name:0マン
+  title: 0マン
+  title_kana: ゼロマン
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 0マン
+- key: name:青山りさ|name:0日婚でも恋したい
+  title: 0日婚でも恋したい
+  title_kana: ゼロニチコンデモコイシタイ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 0ニチコンデモコイシタイ
+- key: name:青山理砂|name:0日婚でも恋したい
+  title: 0日婚でも恋したい
+  title_kana: ゼロニチコンデモコイシタイ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 0ニチコンデモコイシタイ
+- key: qid:Q17349922|name:0リー打越くん!!
+  title: 0リー打越くん!!
+  title_kana: ラヴリーウチコシクン
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 0リーウチコシクン
+  title_kana_segmented: ラヴリー ウチコシクン
+- key: qid:Q1319237|name:0戦チャンピオン
+  title: 0戦チャンピオン
+  title_kana: ゼロセンチャンピオン
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 0センチャンピオン
+  title_kana_segmented: ゼロセン チャンピオン
+- key: qid:Q1319237|name:0戦仮面
+  title: 0戦仮面
+  title_kana: ゼロセンカメンクウボトウ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 0センカメン
+  title_kana_segmented: ゼロセン カメン クウボトウ
+- key: qid:Q376174|name:1・2の三四郎
+  title: 1・2の三四郎
+  title_kana: イチニノサンシロウ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 12ノサンシロウ
+- key: qid:Q105036669|name:1年366日のひみつ
+  title: 1年366日のひみつ
+  title_kana: イチネンサンビャクロクジュウロクニチノヒミツ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 1ネン366ニチノヒミツ
+  title_kana_segmented: イチネン サンビャク ロクジュウロクニチ ノ ヒミツ
+- key: qid:Q11372765|name:小1タイム
+  title: 小1タイム
+  title_kana: ショウイチタイム
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ショウ1タイム
+  title_kana_segmented: ショウイチ タイム
+- key: qid:Q11257393|name:新・10代でママになった女の子
+  title: 新・10代でママになった女の子
+  title_kana: シンジュウダイデママニナッタオンナノコ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: シン10ダイデママニナッタオンナノコ
+  title_kana_segmented: シン ジュウダイ デ ママ ニ ナッタ オンナノコ
+- key: name:miyamon|name:10年越しの復讐
+  title: 10年越しの復讐
+  title_kana: ジュウネンゴシノフクシュウイチ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 10ネンゴシノフクシュウ
+  title_kana_segmented: ジュウネンゴシノフクシュウ イチ
+- key: qid:Q256887|name:いちご100％
+  title: いちご100％
+  title_kana: イチゴヒャクパーセント
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: イチゴ100パーセント
+  title_kana_segmented: イチゴ ヒャクパーセント
+- key: qid:Q11261319|name:100万回きかせてよ
+  title: 100万回きかせてよ
+  title_kana: ヒャクマンカイキカセテヨ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 100マンカイキカセテヨ
+  title_kana_segmented: ヒャクマンカイ キカセテヨ
+- key: qid:Q48762140|name:100年のライラ
+  title: 100年のライラ
+  title_kana: ヒヤクネンノライラ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 100ネンノライラ
+- key: name:伊藤ゆう|name:1000の鼓動
+  title: 1000の鼓動
+  title_kana: センノコドウ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 1000ノコドウ
+- key: qid:Q11516658|name:1000分の1
+  title: 1000分の1
+  title_kana: センブンノイチ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 1000ブンノ1
+- key: qid:Q11264025|name:1000万@スキャンダル
+  title: 1000万@スキャンダル
+  title_kana: イッセンマンスキャンダル
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 1000マンスキャンダル
+  title_kana_segmented: イッセンマン スキャンダル
+- key: qid:Q11476822|name:1000日のディアナ
+  title: 1000日のディアナ
+  title_kana: イッセンニチノディアナ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 1000ニチノディアナ
+  title_kana_segmented: イッセンニチ ノ ディアナ
+- key: qid:Q11377035|name:100番めの羊
+  title: 100番めの羊
+  title_kana: ヒャクバンメノヒツジ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 100バンメノヒツジ
+  title_kana_segmented: ヒャクバンメ ノ ヒツジ
+- key: name:佐藤良治|name:100兆の男
+  title: 100兆の男
+  title_kana: ヒャクチョウノオトコ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 100チョウノオトコ
+  title_kana_segmented: ヒャクチョウ ノ オトコ
+- key: qid:Q958269|name:100Mジャンパー
+  title: 100Mジャンパー
+  title_kana: ヒャクメートルジャンパー
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 100メートルジャンパー
+  title_kana_segmented: ヒャクメートル ジャンパー
+- key: name:楯山ヒロコ|name:100万ボルトの彼女
+  title: 100万ボルトの彼女
+  title_kana: ヒャクマンボルトノカノジョ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 100マンボルトノカノジョ
+  title_kana_segmented: ヒャクマンボルト ノ カノジョ
+- key: qid:Q11585381|name:100万ドルキッド
+  title: 100万ドルキッド
+  title_kana: ヒャクマンドルキッド
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 100マンドルキッド
+  title_kana_segmented: ヒャクマンドル キッド
+- key: qid:Q463309|name:100万ドルの女
+  title: 100万ドルの女
+  title_kana: ヒャクマンドルノオンナ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 100マンドルノオンナ
+  title_kana_segmented: ヒャクマンドル ノ オンナ
+- key: qid:Q22128640|name:100万円!ベガスくん
+  title: 100万円!ベガスくん
+  title_kana: ヒャクマンエンベガスクン
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 100マンエンベガスクン
+  title_kana_segmented: ヒャクマンエン ベガスクン
+- key: qid:Q460877|name:100万ポンドの愛
+  title: 100万ポンドの愛
+  title_kana: ヒャクマンポンドノアイ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 100マンポンドノアイ
+  title_kana_segmented: ヒャクマンポンド ノ アイ
+- key: qid:Q11532037|name:100年たったらみんな死ぬ
+  title: 100年たったらみんな死ぬ
+  title_kana: ヒャクネンタッタラミンナシヌ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 100ネンタッタラミンナシヌ
+  title_kana_segmented: ヒャクネン タッタラ ミンナ シヌ
+- key: qid:Q11385040|name:100％コットン
+  title: 100％コットン
+  title_kana: ヒャクパーセントコットン
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 100パーセントコットン
+  title_kana_segmented: ヒャクパーセント コットン
+- key: qid:Q8060669|name:100％の君へ
+  title: 100％の君へ
+  title_kana: ヒャクパーセントノキミエ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 100パーセントノキミエ
+  title_kana_segmented: ヒャク パーセント ノ キミ エ
+- key: qid:Q11644242|name:101回目のトラバーユ
+  title: 101回目のトラバーユ
+  title_kana: ヒャクイッカイメノトラバーユ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 101カイメノトラバーユ
+  title_kana_segmented: ヒャクイッカイメ ノ トラバーユ
+- key: name:かわい千草|name:101人目のアリス
+  title: 101人目のアリス
+  title_kana: ヒャクイチニンメノアリス
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 101ニンメノアリス
+  title_kana_segmented: ヒャク イチニンメ ノ アリス
+- key: qid:Q11279774|name:109ばんめのぼくの姫
+  title: 109ばんめのぼくの姫
+  title_kana: ヒヤクキユウバンメノボクノヒメ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 109バンメノボクノヒメ
+- key: qid:Q11257393|name:10代でママになった女の子
+  title: 10代でママになった女の子
+  title_kana: ジュウダイデママニナッタオンナノコ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 10ダイデママニナッタオンナノコ
+  title_kana_segmented: ジュウダイ デ ママ ニ ナッタ オンナノコ
+- key: qid:Q11264488|name:10代の本当にあった感動体験
+  title: 10代の本当にあった感動体験
+  title_kana: ジュウダイノホントウニアッタカンドウタイケン
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 10ダイノホントウニアッタカンドウタイケン
+  title_kana_segmented: ジュウダイ ノ ホントウ ニ アッタ カンドウ タイケン
+- key: qid:Q11675527|name:10年スフレ
+  title: 10年スフレ
+  title_kana: ジュウネンスフレ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 10ネンスフレ
+  title_kana_segmented: ジュウネン スフレ
+- key: name:アオダ|name:10年後の和美ちゃん
+  title: 10年後の和美ちゃん
+  title_kana: ジュウネンゴノカズミチャン
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 10ネンゴノカズミチャン
+- key: name:佐原ナギ|name:10歳下の彼だけど
+  title: 10歳下の彼だけど
+  title_kana: ジュッサイシタノカレダケド
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 10サイシタノカレダケド
+- key: qid:Q8917466|name:10歳からの家族計画
+  title: 10歳からの家族計画
+  title_kana: ジッサイカラノカゾクケイカク
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 10サイカラノカゾクケイカク
+  title_kana_segmented: ジッサイ カラノ カゾク ケイカク
+- key: qid:Q11527904|name:ショージ君の漫画文学全集110選
+  title: ショージ君の漫画文学全集110選
+  title_kana: ショージクンノマンガブンガクゼンシュウヒャクジッセン
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ショージクンノマンガブンガクゼンシュウ110セン
+  title_kana_segmented: ショージ クン ノ マンガ ブンガク ゼンシュウ ヒャク ジッセン
+- key: qid:Q11385040|name:11月の子供
+  title: 11月の子供
+  title_kana: ジュウイチガツノコドモ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 11ガツノコドモ
+  title_kana_segmented: ジュウイチガツ ノ コドモ
+- key: qid:Q11281673|name:シシ12か月
+  title: シシ12か月
+  title_kana: シシジュウニカゲツ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: シシ12カゲツ
+  title_kana_segmented: シシ ジュウニカゲツ
+- key: qid:Q11513052|name:新12の結婚物語
+  title: 新12の結婚物語
+  title_kana: シンジュウニノケッコンモノガタリ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: シン12ノケッコンモノガタリ
+  title_kana_segmented: シン ジュウニ ノ ケッコン モノガタリ
+- key: name:鴇乃翠|name:12星座のセレナーデ
+  title: 12星座のセレナーデ
+  title_kana: ジュウニセイザノセレナーデ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 12セイザノセレナーデ
+  title_kana_segmented: ジュウニ セイザ ノ セレナーデ
+- key: qid:Q351029|name:12色物語
+  title: 12色物語
+  title_kana: ジュウニショクモノガタリ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 12ショクモノガタリ
+  title_kana_segmented: ジュウニショク モノガタリ
+- key: qid:Q11648840|name:にんぽぽ123
+  title: にんぽぽ123
+  title_kana: ニンポポワンツースリー
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ニンポポ123
+  title_kana_segmented: ニンポポ ワン ツー スリー
+- key: qid:Q11414755|name:12月、彼女は思う
+  title: 12月、彼女は思う
+  title_kana: ジュウニガツカノジョワオモウ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 12ガツカノジョワオモウ
+  title_kana_segmented: ジュウニガツ カノジョ ワ オモウ
+- key: qid:Q11504409|name:12月生まれの少年
+  title: 12月生まれの少年
+  title_kana: ジュウニガツウマレノショウネン
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 12ガツウマレノショウネン
+  title_kana_segmented: ジュウニガツ ウマレ ノ ショウネン
+- key: qid:Q11412137|name:12時からはじまる
+  title: 12時からはじまる
+  title_kana: ジュウニジカラハジマル
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 12ジカラハジマル
+  title_kana_segmented: ジュウニジ カラ ハジマル
+- key: name:さぎり和紗|name:12時の権力者
+  title: 12時の権力者
+  title_kana: ジュウニジノケンリョクシャ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 12ジノケンリョクシャ
+  title_kana_segmented: ジュウニジ ノ ケンリョクシャ
+- key: qid:Q3290846|name:12ヵ月
+  title: 12ヵ月
+  title_kana: ジュウニカゲツ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 12カゲツ
+- key: name:Founder masaki|name:12人の優しい殺し屋
+  title: 12人の優しい殺し屋
+  title_kana: ジュウニニンノヤサシイコロシヤライブラクロキシンパン
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 12ニンノヤサシイコロシヤ
+  title_kana_segmented: ジュウニニン ノ ヤサシイ コロシヤ ライブラ クロキ シンパン
+- key: name:高橋燎央|name:12人の優しい殺し屋
+  title: 12人の優しい殺し屋
+  title_kana: ジュウニニンノヤサシイコロシヤライブラクロキシンパン
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 12ニンノヤサシイコロシヤ
+  title_kana_segmented: ジュウニニン ノ ヤサシイ コロシヤ ライブラ クロキ シンパン
+- key: name:高橋燎央|name:12人の優しい殺し屋|sub:leo murder case
+  title: 12人の優しい殺し屋
+  title_kana: ジュウニニンノヤサシイコロシヤライブラクロキシンパン
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 12ニンノヤサシイコロシヤ
+  title_kana_segmented: ジュウニニン ノ ヤサシイ コロシヤ ライブラ クロキ シンパン
+- key: qid:Q106479058|name:12連休
+  title: 12連休
+  title_kana: セイシンサクヒンシュウジュウニレンキュウビームコミックス
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 12レンキュウ
+  title_kana_segmented: セイシンサクヒンシュウ ジュウニレンキュウ ビームコミックス
+- key: name:ベイブリッジ・スタジオ|name:12歳。
+  title: 12歳。
+  title_kana: ジュウニサイ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 12サイ
+- key: name:西野紗彩|name:12歳。
+  title: 12歳。
+  title_kana: ジュウニサイ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 12サイ
+- key: qid:Q11278120|name:12歳。
+  title: 12歳。
+  title_kana: ジュウニサイ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 12サイ
+- key: qid:Q3776937|name:12色のカクテル
+  title: 12色のカクテル
+  title_kana: ジュウニショクノカクテル
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 12ショクノカクテル
+  title_kana_segmented: ジュウニショク ノ カクテル
+- key: qid:Q1040261|name:130センチのダンディ
+  title: 130センチのダンディ
+  title_kana: ヒャクサンジュッセンチノダンディ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 130センチノダンディ
+- key: qid:Q22125596|name:13月のゆうれい
+  title: 13月のゆうれい
+  title_kana: ジュウサンガツノユウレイ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 13ガツノユウレイ
+  title_kana_segmented: ジュウサンガツ ノ ユウレイ
+- key: qid:Q11672988|name:13号発進せよ
+  title: 13号発進せよ
+  title_kana: ジュウサンゴウハッシンセヨカンゼンバン
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 13ゴウハッシンセヨ
+  title_kana_segmented: ジュウサンゴウ ハッシンセヨ カンゼンバン
+- key: name:餅田まか|name:13年後の君
+  title: 13年後の君
+  title_kana: ジュウサンネンゴノキミ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 13ネンゴノキミ
+  title_kana_segmented: ジュウサンネンゴ ノ キミ
+- key: qid:Q8952511|name:13日は金曜日?
+  title: 13日は金曜日?
+  title_kana: ジュウサンニチワキンヨウビ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 13ニチワキンヨウビ
+  title_kana_segmented: ジュウサンニチ ワ キンヨウビ
+- key: name:朝田光|name:14ジューシー
+  title: 14ジューシー
+  title_kana: ジュウシジューシー
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 14ジューシー
+  title_kana_segmented: ジュウシ ジューシー
+- key: qid:Q11369360|name:14さいマニュアル
+  title: 14さいマニュアル
+  title_kana: ジュウヨンサイマニュアル
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 14サイマニュアル
+  title_kana_segmented: ジュウヨンサイ マニュアル
+- key: qid:Q11387986|name:14歳の里山レシピ|sub:東吉野で、いただきます。
+  title: 14歳の里山レシピ
+  title_kana: ジュウヨンサイノサトヤマレシピヒガシヨシノデイタダキマス
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 14サイノサトヤマレシピ
+  title_kana_segmented: ジュウヨンサイ ノ サトヤマ レシピ ヒガシヨシノ デ イタダキマス
+- key: qid:Q11369360|name:14さいオートマティック
+  title: 14さいオートマティック
+  title_kana: ジュウヨンサイオートマティック
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 14サイオートマティック
+  title_kana_segmented: ジュウヨンサイ オートマティック
+- key: name:斧名田マニマニ|name:転生したら15歳の王妃でした|sub:元社畜の私が、年下の国王陛下に迫られています!?
+  title: 転生したら15歳の王妃でした
+  title_kana: テンセイシタラジュウゴサイノオウヒデシタモトシャチクノワタシガトシシタノコクオウヘイカニセマラレテイマス
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: テンセイシタラ15サイノオウヒデシタ
+  title_kana_segmented: テンセイシタラジュウゴサイノオウヒデシタ モトシャチクノワタシガトシシタノコクオウヘイカニセマラレテイマス
+- key: qid:Q11495584|name:15明刹工業高校ラグビー部
+  title: 15明刹工業高校ラグビー部
+  title_kana: フィフティーンメイセツコウギョウコウコウラグビーブ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 15メイセツコウギョウコウコウラグビーブ
+  title_kana_segmented: フィフティーン メイセツ コウギョウ コウコウ ラグビーブ
+- key: qid:Q6739981|name:15の春
+  title: 15の春
+  title_kana: ジュウゴノハル
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 15ノハル
+  title_kana_segmented: ジュウゴ ノ ハル
+- key: name:福井晴敏|name:戦国自衛隊1549
+  title: 戦国自衛隊1549
+  title_kana: センゴクジエイタイイチゴヨンキュウ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: センゴクジエイタイ1549
+  title_kana_segmented: センゴク ジエイタイ イチゴヨンキュウ
+- key: name:あさぎ龍|name:15才
+  title: 15才
+  title_kana: ジュウゴサイ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 15サイ
+- key: qid:Q9019518|name:16秒間の密室
+  title: 16秒間の密室
+  title_kana: ジュウロクビョウカンノミッシツ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 16ビョウカンノミッシツ
+  title_kana_segmented: ジュウロクビョウカン ノ ミッシツ
+- key: qid:Q11622572|name:16LIFE
+  title: 16LIFE
+  title_kana: シックスティーンライフ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 16ライフ
+  title_kana_segmented: シックスティーン ライフ
+- key: name:木下けい子|name:17
+  title: '17'
+  title_kana: ジュウシチセイト
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: '17'
+  title_kana_segmented: ジュウシチ セイト
+- key: qid:Q11532585|name:17歳からやり直すプロポーズ
+  title: 17歳からやり直すプロポーズ
+  title_kana: ジュウナナサイカラヤリナオスプロポーズイチ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 17サイカラヤリナオスプロポーズ
+  title_kana_segmented: ジュウナナサイカラヤリナオスプロポーズ イチ
+- key: qid:Q2235128|name:17日めのショパン
+  title: 17日めのショパン
+  title_kana: ジュウシチニチメノショパン
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 17ニチメノショパン
+- key: qid:Q211099|name:17歳、夏。
+  title: 17歳、夏。
+  title_kana: ジュウシチサイナツ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 17サイナツ
+  title_kana_segmented: ジュウシチサイ ナツ
+- key: qid:Q4411283|name:17歳の解剖学
+  title: 17歳の解剖学
+  title_kana: ジュウナナサイノカイボウガク
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 17サイノカイボウガク
+  title_kana_segmented: ジュウナナサイ ノ カイボウガク
+- key: name:樋口真里奈|name:17歳のママ
+  title: 17歳のママ
+  title_kana: ジュウシチサイノママ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 17サイノママ
+  title_kana_segmented: ジュウシチサイ ノ ママ
+- key: qid:Q11543616|name:17歳の夏恋に死ぬ
+  title: 17歳の夏恋に死ぬ
+  title_kana: ジュウシチサイノナツコイニシヌ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 17サイノナツコイニシヌ
+  title_kana_segmented: ジュウシチサイ ノ ナツ コイ ニ シヌ
+- key: qid:Q11579928|name:17才旅立ちのふたり
+  title: 17才旅立ちのふたり
+  title_kana: ジュウナナサイタビダチノフタリ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 17サイタビダチノフタリ
+  title_kana_segmented: ジュウナナサイ タビダチ ノ フタリ
+- key: qid:Q9139736|name:18 diary
+  title: 18 diary
+  title_kana: ジュウハチダイアリー
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 18ダイアリー
+  title_kana_segmented: ジュウハチ ダイアリー
+- key: qid:Q11532585|name:社畜と少女の1800日
+  title: 社畜と少女の1800日
+  title_kana: シャチクトショウジョノセンハッピャクニチ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: シャチクトショウジョノ1800ニチ
+- key: name:ヨシザワ|name:18禁のつくりかた
+  title: 18禁のつくりかた
+  title_kana: ジュウハチキンノツクリカタ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 18キンノツクリカタ
+  title_kana_segmented: ジュウハチキン ノ ツクリカタ
+- key: name:松本タカ|name:18倫
+  title: 18倫
+  title_kana: ジュウハチリン
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 18リン
+- key: qid:Q11264488|name:18歳の鼓動
+  title: 18歳の鼓動
+  title_kana: ジュウハッサイノコドウ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 18サイノコドウ
+  title_kana_segmented: ジュウハッサイ ノ コドウ
+- key: qid:Q11279292|name:ゴルフ19
+  title: ゴルフ19
+  title_kana: ゴルフナインティーン
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ゴルフ19
+  title_kana_segmented: ゴルフ ナインティーン
+- key: qid:Q1937859|name:辰奈1905
+  title: 辰奈1905
+  title_kana: シンナセンキュウヒャクゴ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: シンナ1905
+  title_kana_segmented: シンナ センキュウヒャク ゴ
+- key: name:いしかわまみ|name:1945年10代の戦争
+  title: 1945年10代の戦争
+  title_kana: センキュウヒャクシジュウゴネンジュウダイノセンソウ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 1945ネン10ダイノセンソウ
+  title_kana_segmented: センキュウヒャク シジュウゴネン ジュウダイ ノ センソウ
+- key: qid:Q11578417|name:1970年代記
+  title: 1970年代記
+  title_kana: センキュウヒャクシチジュウネンダイキ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 1970ネンダイキ
+  title_kana_segmented: センキュウヒャク シチジュウネンダイキ
+- key: qid:Q48760993|name:1995年のスモーク・オン・ザ・ウォーター
+  title: 1995年のスモーク・オン・ザ・ウォーター
+  title_kana: センキュウヒャククジュウゴネンノスモークオンザウォーター
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 1995ネンノスモークオンザウォーター
+  title_kana_segmented: センキュウヒャク クジュウゴネン ノ スモーク オン ザ ウォーター
+- key: name:川下剛史|name:19番目のカルテ|sub:徳重晃の問診
+  title: 19番目のカルテ
+  title_kana: ジュウキュウバンメノカルテトクシゲアキラノモンシン
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 19バンメノカルテ
+  title_kana_segmented: ジュウキュウバンメノカルテ トクシゲアキラノモンシン
+- key: name:富士屋カツヒト|name:19番目のカルテ
+  title: 19番目のカルテ
+  title_kana: ジュウキュウバンメノカルテトクシゲアキラノモンシン
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 19バンメノカルテ
+  title_kana_segmented: ジュウキュウバンメノカルテ トクシゲアキラノモンシン
+- key: qid:Q22128959|name:19歳
+  title: 19歳
+  title_kana: ジュウキュウサイ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 19サイ
+- key: qid:Q11264488|name:19歳。愛をつらぬくために
+  title: 19歳。愛をつらぬくために
+  title_kana: ジュウキュウサイアイオツラヌクタメニ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 19サイアイオツラヌクタメニ
+  title_kana_segmented: ジュウキュウサイ アイ オ ツラヌク タメニ
+- key: name:捨井タスコ|name:19歳の密かな欲望
+  title: 19歳の密かな欲望
+  title_kana: ジュウキュウサイノヒソカナヨクボウ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 19サイノヒソカナヨクボウ
+  title_kana_segmented: ジュウキュウサイ ノ ヒソカナ ヨクボウ
+- key: qid:Q11281122|name:1丁目の楽園
+  title: 1丁目の楽園
+  title_kana: イッチョウメノラクエン
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 1チョウメノラクエン
+  title_kana_segmented: イッチョウメ ノ ラクエン
+- key: qid:Q11294502|name:1丁目のタイムカプセル機動戦士ガンダムより
+  title: 1丁目のタイムカプセル機動戦士ガンダムより
+  title_kana: イッチョウメノタイムカプセルキドウセンシガンダムヨリ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 1チョウメノタイムカプセルキドウセンシガンダムヨリ
+  title_kana_segmented: イッチョウメ ノ タイム カプセル キドウ センシ ガンダム ヨリ
+- key: qid:Q11280216|name:1円の男
+  title: 1円の男
+  title_kana: イチエンノオトコ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 1エンノオトコ
+  title_kana_segmented: イチエン ノ オトコ
+- key: qid:Q11512868|name:1月のプリュヴィオーズ
+  title: 1月のプリュヴィオーズ
+  title_kana: イチガツノプリュヴィオーズ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 1ガツノプリュヴィオーズ
+  title_kana_segmented: イチガツ ノ プリュヴィオーズ
+- key: qid:Q1065383|name:1限めはやる気の民法
+  title: 1限めはやる気の民法
+  title_kana: イチゲンメワヤルキノミンポウ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 1ゲンメワヤルキノミンポウ
+  title_kana_segmented: イチゲンメ ワ ヤルキ ノ ミンポウ
+- key: qid:Q11539451|name:1万分の1の奇跡
+  title: 1万分の1の奇跡
+  title_kana: イチマンブンノイチノキセキ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 1マンブンノ1ノキセキ
+  title_kana_segmented: イチマンブン ノ イチ ノ キセキ
+- key: qid:Q11352347|name:1年1組甲斐せんせい
+  title: 1年1組甲斐せんせい
+  title_kana: イチネンイチクミカイセンセイ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 1ネン1クミカイセンセイ
+  title_kana_segmented: イチネン イチクミ カイ センセイ
+- key: name:さくらばつかさ|name:1年3組にゃんぱち先生!
+  title: 1年3組にゃんぱち先生!
+  title_kana: イチネンサンクミニャンパチセンセイ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 1ネン3クミニャンパチセンセイ
+  title_kana_segmented: イチネン サンクミ ニャンパチ センセイ
+- key: qid:Q11606245|name:1ねん3くみ桃ちゃん先生。
+  title: 1ねん3くみ桃ちゃん先生。
+  title_kana: イチネンサンクミモモチャンセンセイ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 1ネン3クミモモチャンセンセイ
+  title_kana_segmented: イチネン サンクミ モモチャン センセイ
+- key: qid:Q463594|name:1年5組いきものがかり
+  title: 1年5組いきものがかり
+  title_kana: イチネンゴクミイキモノガカリ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 1ネン5クミイキモノガカリ
+  title_kana_segmented: イチネン ゴクミ イキモノガカリ
+- key: qid:Q219948|name:1ポンドの福音
+  title: 1ポンドの福音
+  title_kana: イチポンドノフクイン
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 1ポンドノフクイン
+  title_kana_segmented: イチポンド ノ フクイン
+- key: name:等々力秋声|name:1分間ハァハァ
+  title: 1分間ハァハァ
+  title_kana: イップンカンハァハァ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 1プンカンハァハァ
+  title_kana_segmented: イップンカン ハァハァ
+- key: qid:Q193300|name:1冊で3度楽しめる手塚治虫ヒット選集
+  title: 1冊で3度楽しめる手塚治虫ヒット選集
+  title_kana: イッサツデサンドタノシメルテズカオサムヒットセンシュウ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 1サツデ3ドタノシメルテズカオサムヒットセンシュウ
+  title_kana_segmented: イッサツ デ サンド タノシメル テズカ オサム ヒット センシュウ
+- key: qid:Q11455707|name:1千万の恋人
+  title: 1千万の恋人
+  title_kana: イッセンマンノコイビト
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 1センマンノコイビト
+  title_kana_segmented: イッセンマン ノ コイビト
+- key: qid:Q11270497|name:2×2ゲーム
+  title: 2×2ゲーム
+  title_kana: ツーバイツーゲーム
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 22ゲーム
+  title_kana_segmented: ツー バイ ツー ゲーム
+- key: name:張傘|name:天才伝説第2章
+  title: 天才伝説第2章
+  title_kana: テンサイデンセツダイニショウ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: テンサイデンセツダイ2ショウ
+  title_kana_segmented: テンサイ デンセツ ダイ ニショウ
+- key: name:西都大貴|name:戦場のヴァルキュリア2
+  title: 戦場のヴァルキュリア2
+  title_kana: センジョウノヴァルキュリアニ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: センジョウノヴァルキュリア2
+  title_kana_segmented: センジョウ ノ ヴァルキュリア ニ
+- key: qid:Q11553037|name:20代の心とカラダ
+  title: 20代の心とカラダ
+  title_kana: ニジュウダイノココロトカラダ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 20ダイノココロトカラダ
+  title_kana_segmented: ニジュウダイ ノ ココロ ト カラダ
+- key: qid:Q38277645|name:20代のリアル
+  title: 20代のリアル
+  title_kana: カナラズナケルドクシャタイケンニジュウダイノリアル
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 20ダイノリアル
+  title_kana_segmented: カナラズ ナケル ドクシャ タイケン ニジュウダイ ノ リアル
+- key: name:Clamp|name:20面相におねがい!!
+  title: 20面相におねがい!!
+  title_kana: ニジュウメンソウニオネガイ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 20メンソウニオネガイ
+  title_kana_segmented: ニジュウメンソウ ニ オネガイ
+- key: qid:Q1377779|name:2001夜物語
+  title: 2001夜物語
+  title_kana: ニセンイチヤモノガタリ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 2001ヤモノガタリ
+  title_kana_segmented: ニセン イチヤ モノガタリ
+- key: qid:Q11543862|name:2003年の365日
+  title: 2003年の365日
+  title_kana: ニセンサンネンノサンビャクロクジュウゴニチ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 2003ネンノ365ニチ
+  title_kana_segmented: ニセン サンネン ノ サンビャク ロクジュウゴニチ
+- key: qid:Q11532003|name:200年の夜と孤独
+  title: 200年の夜と孤独
+  title_kana: ニヒャクネンノヨルトコドクオヒトリサマキュウケツキ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 200ネンノヨルトコドク
+  title_kana_segmented: ニヒャクネン ノ ヨル ト コドク オヒトリサマ キュウケツキ
+- key: qid:Q6383691|name:2010カネモリ
+  title: 2010カネモリ
+  title_kana: ニセンジュウカネモリ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 2010カネモリ
+  title_kana_segmented: ニセン ジュウ カネモリ
+- key: qid:Q11470146|name:203号室の尽子さん
+  title: 203号室の尽子さん
+  title_kana: ニヒャクサンゴウシツノジンコサン
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 203ゴウシツノジンコサン
+  title_kana_segmented: ニヒャク サンゴウシツ ノ ジンコサン
+- key: qid:Q348436|name:20世紀少年
+  title: 20世紀少年
+  title_kana: ニジュッセイキショウネン
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 20セイキショウネン
+- key: name:門脇正法|name:20世紀を彩った女たち
+  title: 20世紀を彩った女たち
+  title_kana: ニジッセイキオイロドッタオンナタチ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 20セイキオイロドッタオンナタチ
+  title_kana_segmented: ニジッセイキ オ イロドッタ オンナタチ
+- key: qid:Q11623533|name:ゴールドラッシュ21
+  title: ゴールドラッシュ21
+  title_kana: ゴールドラッシュニジュウイチ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ゴールドラッシュ21
+  title_kana_segmented: ゴールドラッシュ ニジュウイチ
+- key: qid:Q11443794|name:21世紀マンガ大賞セレクション
+  title: 21世紀マンガ大賞セレクション
+  title_kana: ニジュウイッセイキマンガタイショウセレクション
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 21セイキマンガタイショウセレクション
+  title_kana_segmented: ニジュウイッセイキ マンガ タイショウ セレクション
+- key: qid:Q11500157|name:21世紀の君へ
+  title: 21世紀の君へ
+  title_kana: ニジュウイッセイキノキミエ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 21セイキノキミエ
+  title_kana_segmented: ニジュウイッセイキ ノ キミ エ
+- key: name:猫葉りて|name:2200年ねこの国ニッポン
+  title: 2200年ねこの国ニッポン
+  title_kana: ニセンニヒャクネンネコノクニニッポン
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 2200ネンネコノクニニッポン
+- key: qid:Q11517039|name:二十四の瞳
+  title: 二十四の瞳
+  title_kana: ニジュウシノヒトミ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 24ノヒトミ
+  title_kana_segmented: ニジュウシ ノ ヒトミ
+- key: qid:Q11405867|name:24COLORS
+  title: 24COLORS
+  title_kana: トゥエンティーフォーカラーズ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 24カラーズ
+  title_kana_segmented: トゥエンティーフォー カラーズ
+- key: qid:Q11605762|name:24時間、あまい服従
+  title: 24時間、あまい服従
+  title_kana: ニジュウヨジカンアマイフクジュウ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 24ジカンアマイフクジュウ
+  title_kana_segmented: ニジュウヨジカン アマイ フクジュウ
+- key: name:夏のティー|name:25才ビッグベイビー
+  title: 25才ビッグベイビー
+  title_kana: ニジュウゴサイビッグベイビー
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 25サイビッグベイビー
+  title_kana_segmented: ニジュウゴサイ ビッグ ベイビー
+- key: name:梶本あかり|name:25時のゴーストライター
+  title: 25時のゴーストライター
+  title_kana: ニジュゴジノゴーストライター
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 25ジノゴーストライター
+  title_kana_segmented: ニジュゴジ ノ ゴースト ライター
+- key: qid:Q11531267|name:27歳、ナオの決断
+  title: 27歳、ナオの決断
+  title_kana: ニジュウシチサイナオノケツダン
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 27サイナオノケツダン
+  title_kana_segmented: ニジュウシチサイ ナオ ノ ケツダン
+- key: qid:Q11620418|name:2番目のカノジョ
+  title: 2番目のカノジョ
+  title_kana: ニバンメノカノジョ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 2バンメノカノジョ
+  title_kana_segmented: ニバンメ ノ カノジョ
+- key: name:創美社|name:1/2ハート
+  title: 1/2ハート
+  title_kana: ニブンノイチハート
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 2ブンノ1ハート
+  title_kana_segmented: ニブンノイチ ハート
+- key: qid:Q11624305|name:1/2ハート
+  title: 1/2ハート
+  title_kana: ニブンノイチハート
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 2ブンノ1ハート
+  title_kana_segmented: ニブンノイチ ハート
+- key: qid:Q43425398|name:1/2の林檎
+  title: 1/2の林檎
+  title_kana: ニブンノイチノリンゴ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 2ブンノ1ノリンゴ
+  title_kana_segmented: ニブン ノ イチ ノ リンゴ
+- key: qid:Q11578427|name:2度目の恋は嘘つき
+  title: 2度目の恋は嘘つき
+  title_kana: ニドメノコイワウソツキ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 2ドメノコイワウソツキ
+  title_kana_segmented: ニドメ ノ コイ ワ ウソツキ
+- key: name:川崎のぞみ|name:2本足の犬
+  title: 2本足の犬
+  title_kana: ニホンアシノイヌ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 2ホンアシノイヌ
+  title_kana_segmented: ニホンアシ ノ イヌ
+- key: qid:Q6381491|name:2乗な恋の駆け引き
+  title: 2乗な恋の駆け引き
+  title_kana: ニジョウナコイノカケヒキ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 2ジョウナコイノカケヒキ
+  title_kana_segmented: ニジョウナ コイ ノ カケヒキ
+- key: qid:Q11352894|name:2組のお友達。
+  title: 2組のお友達。
+  title_kana: ニクミノオトモダチ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 2クミノオトモダチ
+  title_kana_segmented: ニクミ ノ オトモダチ
+- key: qid:Q4811878|name:2週間のアバンチュール
+  title: 2週間のアバンチュール
+  title_kana: ニシュウカンノアバンチュール
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 2シュウカンノアバンチュール
+  title_kana_segmented: ニシュウカン ノ アバンチュール
+- key: qid:Q11275100|name:午前3時の危険地帯
+  title: 午前3時の危険地帯
+  title_kana: ゴゼンサンジノキケンチタイ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ゴゼン3ジノキケンチタイ
+  title_kana_segmented: ゴゼン サンジ ノ キケン チタイ
+- key: qid:Q468571|name:午後3時の魔法
+  title: 午後3時の魔法
+  title_kana: ゴゴサンジノマホウ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ゴゴ3ジノマホウ
+- key: qid:Q11275100|name:午前3時の無法地帯
+  title: 午前3時の無法地帯
+  title_kana: ゴゼンサンジノムホウチタイ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ゴゼン3ジノムホウチタイ
+  title_kana_segmented: ゴゼン サンジ ノ ムホウ チタイ
+- key: qid:Q11282787|name:しんりゃくし隊のメイド3
+  title: しんりゃくし隊のメイド3
+  title_kana: シンリャクシタイノメイドサン
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: シンリャクシタイノメイド3
+  title_kana_segmented: シンリャクシタイ ノ メイド サン
+- key: qid:Q11459199|name:3色♪シグナル
+  title: 3色♪シグナル
+  title_kana: サンショクシグナル
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 3ショクシグナル
+  title_kana_segmented: サンショク シグナル
+- key: qid:Q11413524|name:くしゃみ3回
+  title: くしゃみ3回
+  title_kana: クシャミサンカイ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: クシャミ3カイ
+  title_kana_segmented: クシャミ サンカイ
+- key: qid:Q60230073|name:極悪妻・花奈30歳
+  title: 極悪妻・花奈30歳
+  title_kana: ゴクアクズマカナサンジッサイ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ゴクアクズマカナ30サイ
+  title_kana_segmented: ゴクアクズマ カナ サンジッサイ
+- key: name:桑原あつし|name:30デイズ・ナイト
+  title: 30デイズ・ナイト
+  title_kana: サンジュウデイズナイト
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 30デイズナイト
+  title_kana_segmented: サンジュウ デイズ ナイト
+- key: name:八木戸マト|name:3000年封印されし邪龍ちゃんと友達になりました
+  title: 3000年封印されし邪龍ちゃんと友達になりました
+  title_kana: サンゼンネンフウインサレシジャリュウチャントトモダチニナリマシタ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 3000ネンフウインサレシジャリュウチャントトモダチニナリマシタ
+- key: qid:Q3081347|name:30代はまだキレイ
+  title: 30代はまだキレイ
+  title_kana: サンジユウダイワマダキレイ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 30ダイワマダキレイ
+  title_kana_segmented: サンジユウダイ ワ マダ キレイ
+- key: qid:Q11604246|name:30婚
+  title: 30婚
+  title_kana: ミソコン
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 30コン
+- key: qid:Q11549126|name:30日間世界一周!
+  title: 30日間世界一周!
+  title_kana: サンジュウニチカンセカイイッシュウイチ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 30ニチカンセカイイッシュウ
+  title_kana_segmented: サンジュウニチカンセカイイッシュウ イチ
+- key: qid:Q11540020|name:30才、処女なのにエロ漫画描いてます。
+  title: 30才、処女なのにエロ漫画描いてます。
+  title_kana: サンジッサイショジョナノニエロマンガエガイテマス
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 30サイショジョナノニエロマンガエガイテマス
+  title_kana_segmented: サンジッサイ ショジョ ナノニ エロ マンガ エガイテマス
+- key: qid:Q55524412|name:30歳まで童貞だと魔法使いになれるらしい|sub:#チェリまほ
+  title: 30歳まで童貞だと魔法使いになれるらしい
+  title_kana: サンジュッサイマデドウテイダトマホウツカイニナレルラシイ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 30サイマデドウテイダトマホウツカイニナレルラシイ
+- key: name:Toyota Yuu|name:#チェリまほ
+  title: 30歳まで童貞だと魔法使いになれるらしい
+  title_kana: サンジュッサイマデドウテイダトマホウツカイニナレルラシイ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 30サイマデドウテイダトマホウツカイニナレルラシイ
+- key: qid:Q10882406|name:30歳の保健体育
+  title: 30歳の保健体育
+  title_kana: サンジッサイノホケンタイイク
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 30サイノホケンタイイク
+  title_kana_segmented: サンジッサイ ノ ホケン タイイク
+- key: name:たかぎなおこ|name:30点かあさん
+  title: 30点かあさん
+  title_kana: サンジュッテンカアサン
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 30テンカアサン
+- key: name:くりきまる|name:31番目のユーリ
+  title: 31番目のユーリ
+  title_kana: サンジュウイチバンメノユーリ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 31バンメノユーリ
+- key: qid:Q11549126|name:35日間世界一周!!
+  title: 35日間世界一周!!
+  title_kana: サンジュウゴニチカンセカイイッシュウ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 35ニチカンセカイイッシュウ
+  title_kana_segmented: サンジュウゴニチカン セカイ イッシュウ
+- key: qid:Q7336446|name:35歳で独身で
+  title: 35歳で独身で
+  title_kana: サンジュウゴサイデドクシンデ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 35サイデドクシンデ
+  title_kana_segmented: サンジュウゴサイ デ ドクシン デ
+- key: qid:Q1883643|name:まんが古典落語36話
+  title: まんが古典落語36話
+  title_kana: マンガコテンラクゴサンジユウロクワ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: マンガコテンラクゴ36ワ
+  title_kana_segmented: マンガ コテン ラクゴ サンジユウロクワ
+- key: name:田中寅彦|name:365歩のユウキ!!!
+  title: 365歩のユウキ!!!
+  title_kana: サンビャクロクジュウゴホノユウキ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 365ホノユウキ
+  title_kana_segmented: サンビャク ロクジュウゴホ ノ ユウキ
+- key: name:矢島正雄|name:365歩の竜太
+  title: 365歩の竜太
+  title_kana: サンビャクロクジュウゴホノリュウタ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 365ホノリュウタ
+  title_kana_segmented: サンビャク ロクジュウゴホ ノ リュウタ
+- key: name:金田正太郎|name:37歳で医者になった僕
+  title: 37歳で医者になった僕
+  title_kana: サンジュウナナサイデイシャニナッタボクケンシュウイジュンジョウモ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 37サイデイシャニナッタボク
+  title_kana_segmented: サンジュウナナサイ デ イシャ ニ ナッタ ボク ケンシュウイ ジュンジョウ モ
+- key: qid:Q11463550|name:3番目の彼氏
+  title: 3番目の彼氏
+  title_kana: サンバンメノカレシ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 3バンメノカレシ
+  title_kana_segmented: サンバンメ ノ カレシ
+- key: qid:Q3853963|name:3月の第2ボタン
+  title: 3月の第2ボタン
+  title_kana: サンガツノダイニボタン
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 3ガツノダイ2ボタン
+  title_kana_segmented: サンガツ ノ ダイニ ボタン
+- key: qid:Q351029|name:3月の風は3ノット
+  title: 3月の風は3ノット
+  title_kana: サンガツノカゼワサンノット
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 3ガツノカゼワ3ノット
+  title_kana_segmented: サンガツ ノ カゼ ワ サンノット
+- key: name:先崎学|name:3月のライオン
+  title: 3月のライオン
+  title_kana: サンガツノライオン
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 3ガツノライオン
+- key: qid:Q3915762|name:3月の夢
+  title: 3月の夢
+  title_kana: サンガツノユメ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 3ガツノユメ
+  title_kana_segmented: サンガツ ノ ユメ
+- key: qid:Q11552274|name:3時のおやつ
+  title: 3時のおやつ
+  title_kana: サンジノオヤツ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 3ジノオヤツ
+  title_kana_segmented: サンジ ノ オヤツ
+- key: name:うつろあきこ|name:3回まわって恋をして
+  title: 3回まわって恋をして
+  title_kana: サンカイマワッテコイオシテ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 3カイマワッテコイオシテ
+  title_kana_segmented: サンカイ マワッテ コイ オ シテ
+- key: qid:Q17211299|name:3万円の彼氏
+  title: 3万円の彼氏
+  title_kana: サンマンエンノカレシ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 3マンエンノカレシ
+  title_kana_segmented: サンマンエン ノ カレシ
+- key: qid:Q6917997|name:3年奇面組
+  title: 3年奇面組
+  title_kana: サンネンキメングミ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 3ネンキメングミ
+  title_kana_segmented: サンネン キメングミ
+- key: qid:Q11412573|name:3年目のキス
+  title: 3年目のキス
+  title_kana: サンネンメノキス
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 3ネンメノキス
+  title_kana_segmented: サンネンメ ノ キス
+- key: qid:Q11558957|name:3人で愛しあいましょう?
+  title: 3人で愛しあいましょう?
+  title_kana: サンニンデアイシアイマショ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 3ニンデアイシアイマショ
+  title_kana_segmented: サンニン デ アイシアイマショ
+- key: qid:Q11450410|name:3人とひとり
+  title: 3人とひとり
+  title_kana: サンニントヒトリ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 3ニントヒトリ
+- key: qid:Q619015|name:3歳児くん
+  title: 3歳児くん
+  title_kana: サンサイジクン
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 3サイジクン
+- key: name:板羽皆|name:3センチメンタル
+  title: 3センチメンタル
+  title_kana: サンセンチメンタル
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 3センチメンタル
+  title_kana_segmented: サン センチメンタル
+- key: qid:Q7334539|name:3YEARS
+  title: 3YEARS
+  title_kana: スリーイヤーズ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 3イヤーズ
+  title_kana_segmented: スリー イヤーズ
+- key: qid:Q11488605|name:まんがで発見!たまごっち爆笑4コマ劇場
+  title: まんがで発見!たまごっち爆笑4コマ劇場
+  title_kana: マンガデハッケンタマゴッチヨンコマゲキジョウ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: マンガデハッケンタマゴッチ4コマゲキジョウ
+  title_kana_segmented: マンガ デ ハッケン タマゴッチ ヨンコマ ゲキジョウ
+- key: name:CHuN|name:死神様と4人の彼女
+  title: 死神様と4人の彼女
+  title_kana: シニガミサマトヨニンノカノジョ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: シニガミサマト4ニンノカノジョ
+  title_kana_segmented: シニガミサマ ト ヨニン ノ カノジョ
+- key: name:マミタ|name:40までにしたい10のこと
+  title: 40までにしたい10のこと
+  title_kana: ヨンジュウマデニシタイジュウノコトニ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 40マデニシタイ10ノコト
+- key: qid:Q17220352|name:44歳の彼女
+  title: 44歳の彼女
+  title_kana: ヨンジュウヨンサイノカノジョ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 44サイノカノジョ
+- key: name:藤代百|name:45分間の魔法使い
+  title: 45分間の魔法使い
+  title_kana: ヨンジュウゴフンカンノマホウツカイ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 45フンカンノマホウツカイ
+- key: name:土田悠史|name:4番の卓球
+  title: 4番の卓球
+  title_kana: ヨバンノタッキュウ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 4バンノタッキュウ
+  title_kana_segmented: ヨバン ノ タッキュウ
+- key: qid:Q7680576|name:4コマ漫玉日記
+  title: 4コマ漫玉日記
+  title_kana: ヨンコママンタマニッキ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 4コママンタマニッキ
+  title_kana_segmented: ヨンコマ マンタマ ニッキ
+- key: qid:Q1155646|name:4コマちびまる子ちゃん
+  title: 4コマちびまる子ちゃん
+  title_kana: ヨンコマチビマルコチャン
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 4コマチビマルコチャン
+  title_kana_segmented: ヨンコマ チビマルコチャン
+- key: name:Cygames|name:4コマのバハムート
+  title: 4コマのバハムート
+  title_kana: ヨンコマノバハムート
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 4コマノバハムート
+  title_kana_segmented: ヨンコマ ノ バハムート
+- key: qid:Q11557657|name:4年1組起立!
+  title: 4年1組起立!
+  title_kana: ヨネンイチクミキリツ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 4ネン1クミキリツ
+  title_kana_segmented: ヨネン イチクミ キリツ
+- key: qid:Q11378196|name:4人のラストブルー
+  title: 4人のラストブルー
+  title_kana: ヨニンノラストブルー
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 4ニンノラストブルー
+- key: qid:Q1353888|name:四つの犯罪 七つの墓場
+  title: 四つの犯罪 七つの墓場
+  title_kana: ヨッツノハンザイ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 4ツノハンザイ
+  title_kana_segmented: ヨッツ ノ ハンザイ
+- key: qid:Q3113855|name:5愛のルール
+  title: 5愛のルール
+  title_kana: ファイブアイノルール
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 5アイノルール
+  title_kana_segmented: ファイブ アイ ノ ルール
+- key: qid:Q2715024|name:5時から9時まで
+  title: 5時から9時まで
+  title_kana: ゴジカラクジマデ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 5ジカラ9ジマデ
+  title_kana_segmented: ゴジ カラ クジ マデ
+- key: qid:Q11269589|name:クローン5
+  title: クローン5
+  title_kana: クローンファイブ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: クローン5
+  title_kana_segmented: クローン ファイブ
+- key: name:玄野さわ|name:5年ぶりに繋がる元カレ医師から伝わる熱い熱
+  title: 5年ぶりに繋がる元カレ医師から伝わる熱い熱
+  title_kana: ゴネンブリニツナガルモトカレイシカラツタワルアツイネツ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 5ネンブリニツナガルモトカレイシカラツタワルアツイネツ
+- key: name:恵庭|name:5人の王
+  title: 5人の王
+  title_kana: ゴニンノオウ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 5ニンノオウ
+  title_kana_segmented: ゴニン ノ オウ
+- key: name:恵庭|name:5人の王.
+  title: 5人の王
+  title_kana: ゴニンノオウ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 5ニンノオウ
+  title_kana_segmented: ゴニン ノ オウ
+- key: name:睦茸|name:小5な彼女とオトナの愛
+  title: 小5な彼女とオトナの愛
+  title_kana: ショウゴナカノジョトオトナノアイ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ショウ5ナカノジョトオトナノアイ
+  title_kana_segmented: ショウゴナ カノジョ ト オトナ ノ アイ
+- key: name:姫川明|name:556ラボ
+  title: 556ラボ
+  title_kana: ココロラボ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 556ラボ
+  title_kana_segmented: ココロ ラボ
+- key: qid:Q20039845|name:55歳の地図
+  title: 55歳の地図
+  title_kana: ゴジュウゴサイノチズ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 55サイノチズ
+  title_kana_segmented: ゴジュウゴサイ ノ チズ
+- key: qid:Q11560265|name:5秒前
+  title: 5秒前
+  title_kana: ゴビョウマエ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 5ビョウマエ
+  title_kana_segmented: ゴビョウ マエ
+- key: qid:Q11480848|name:5月の不思議
+  title: 5月の不思議
+  title_kana: ゴガツノフシギ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 5ガツノフシギ
+- key: qid:Q11443765|name:5時から始まるヒミツの時間。
+  title: 5時から始まるヒミツの時間。
+  title_kana: ゴジカラハジマルヒミツノジカン
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 5ジカラハジマルヒミツノジカン
+  title_kana_segmented: ゴジ カラ ハジマル ヒミツ ノ ジカン
+- key: qid:Q11614539|name:5時まで待てない
+  title: 5時まで待てない
+  title_kana: ゴジマデマテナイイチ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 5ジマデマテナイ
+  title_kana_segmented: ゴジマデマテナイ イチ
+- key: qid:Q11665402|name:5階美少女家電売り場でございます
+  title: 5階美少女家電売り場でございます
+  title_kana: ゴカイビショウジョカデンウリバデゴザイマス
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 5カイビショウジョカデンウリバデゴザイマス
+  title_kana_segmented: ゴカイ ビショウジョ カデン ウリバ デ ゴザイマス
+- key: qid:Q11420594|name:5年目の結婚記念日
+  title: 5年目の結婚記念日
+  title_kana: ゴネンメノケッコンキネンビ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 5ネンメノケッコンキネンビ
+  title_kana_segmented: ゴネンメ ノ ケッコン キネンビ
+- key: name:H・制作所|name:5人いるっ!?
+  title: 5人いるっ!?
+  title_kana: ゴニンイルッ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 5ニンイルッ
+  title_kana_segmented: ゴニン イルッ
+- key: name:中村なかち|name:6人の死なない少女と必ず死ぬ運命の人
+  title: 6人の死なない少女と必ず死ぬ運命の人
+  title_kana: ロクニンノシナナイショウジョトカナラズシヌウンメイノヒト
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 6ニンノシナナイショウジョトカナラズシヌウンメイノヒト
+- key: qid:Q11395229|name:小6ノスタルジア
+  title: 小6ノスタルジア
+  title_kana: ショウロクノスタルジア
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ショウ6ノスタルジア
+  title_kana_segmented: ショウロク ノスタルジア
+- key: qid:Q11265637|name:60歳のラブレター
+  title: 60歳のラブレター
+  title_kana: ロクジッサイノラブレター
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 60サイノラブレター
+  title_kana_segmented: ロクジッサイ ノ ラブ レター
+- key: qid:Q360610|name:666～サタン～
+  title: 666～サタン～
+  title_kana: ロッピャクロクジュウロクサタン
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 666サタン
+  title_kana_segmented: ロッピャク ロクジュウロク サタン
+- key: qid:Q8050004|name:69デナシ
+  title: 69デナシ
+  title_kana: ロクデナシ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 69デナシ
+- key: qid:Q6410148|name:市民ポリス69
+  title: 市民ポリス69
+  title_kana: シミンポリスロクジュウク
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: シミンポリス69
+  title_kana_segmented: シミン ポリス ロクジュウク
+- key: qid:Q11478714|name:6番目の殺人
+  title: 6番目の殺人
+  title_kana: ロクバンメノサツジン
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 6バンメノサツジン
+- key: name:岡本一文|name:6号警備
+  title: 6号警備
+  title_kana: ロクゴウケイビ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 6ゴウケイビ
+  title_kana_segmented: ロクゴウ ケイビ
+- key: qid:Q11622982|name:6年3組スターなやつら
+  title: 6年3組スターなやつら
+  title_kana: ロクネンサンクミスターナヤツラ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 6ネン3クミスターナヤツラ
+  title_kana_segmented: ロクネン サンクミ スターナ ヤツラ
+- key: qid:Q20042581|name:7コール
+  title: 7コール
+  title_kana: セブンコール
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 7コール
+  title_kana_segmented: セブン コール
+- key: qid:Q11517058|name:新ワイルド7
+  title: 新ワイルド7
+  title_kana: シンワイルドセブン
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: シンワイルド7
+  title_kana_segmented: シン ワイルド セブン
+- key: qid:Q11399069|name:白雪姫と7人のコドモ
+  title: 白雪姫と7人のコドモ
+  title_kana: シラユキヒメトシチニンノコドモ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: シラユキヒメト7ニンノコドモ
+  title_kana_segmented: シラユキヒメ ト シチニン ノ コドモ
+- key: qid:Q11622526|name:白雪姫と7人の囚人
+  title: 白雪姫と7人の囚人
+  title_kana: シラユキヒメトシチニンノシュウジン
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: シラユキヒメト7ニンノシュウジン
+  title_kana_segmented: シラユキヒメ ト シチニン ノ シュウジン
+- key: name:エルジェ|name:シドニー行き714便
+  title: シドニー行き714便
+  title_kana: シドニーユキナナヒャクジュウシビン
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: シドニーユキ714ビン
+  title_kana_segmented: シドニー ユキ ナナヒャク ジュウシビン
+- key: qid:Q11369440|name:シルバー77
+  title: シルバー77
+  title_kana: シルバーセブンセブン
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: シルバー77
+  title_kana_segmented: シルバー セブンセブン
+- key: qid:Q9099435|name:7番目の少年
+  title: 7番目の少年
+  title_kana: ナナバンメノショウネン
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 7バンメノショウネン
+  title_kana_segmented: ナナバンメ ノ ショウネン
+- key: qid:Q9047874|name:7月の魔法使い
+  title: 7月の魔法使い
+  title_kana: シチガツノマホウツカイ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 7ガツノマホウツカイ
+  title_kana_segmented: シチガツ ノ マホウツカイ
+- key: qid:Q9047874|name:7時間目ラプソディー
+  title: 7時間目ラプソディー
+  title_kana: シチジカンメラプソディー
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 7ジカンメラプソディー
+  title_kana_segmented: シチジカンメ ラプソディー
+- key: qid:Q11624981|name:7年目の純愛
+  title: 7年目の純愛
+  title_kana: ナナネンメノジュンアイ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 7ネンメノジュンアイ
+- key: qid:Q5371846|name:7年目のセキララ結婚生活
+  title: 7年目のセキララ結婚生活
+  title_kana: シチネンメノセキララケッコンセイカツ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 7ネンメノセキララケッコンセイカツ
+  title_kana_segmented: シチネンメ ノ セキララ ケッコン セイカツ
+- key: qid:Q302859|name:7人のシェイクスピア
+  title: 7人のシェイクスピア
+  title_kana: シチニンノシェイクスピア
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 7ニンノシェイクスピア
+  title_kana_segmented: シチニン ノ シェイクスピア
+- key: name:青紀やまと|name:7人のイリア
+  title: 7人のイリア
+  title_kana: シチニンノイリア
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 7ニンノイリア
+- key: qid:Q11353513|name:7センチ!
+  title: 7センチ!
+  title_kana: ナナセンチ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 7センチ
+- key: qid:Q11540317|name:88の夏休み
+  title: 88の夏休み
+  title_kana: ハチジュウハチノナツヤスミ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 88ノナツヤスミ
+  title_kana_segmented: ハチジュウハチ ノ ナツヤスミ
+- key: qid:Q11470077|name:8番目の罪
+  title: 8番目の罪
+  title_kana: ハチバンメノツミ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 8バンメノツミ
+  title_kana_segmented: ハチバンメ ノ ツミ
+- key: qid:Q11565237|name:8月19日の戦争
+  title: 8月19日の戦争
+  title_kana: ハチガツジュウクニチノセンソウ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 8ガツ19ニチノセンソウ
+  title_kana_segmented: ハチガツ ジュウクニチ ノ センソウ
+- key: qid:Q3135257|name:8月の光・ひな
+  title: 8月の光・ひな
+  title_kana: ハチガツノヒカリヒナ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 8ガツノヒカリヒナ
+  title_kana_segmented: ハチガツ ノ ヒカリ ヒナ
+- key: qid:Q11540782|name:8月の悪戯
+  title: 8月の悪戯
+  title_kana: ハチガツノイタズラ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 8ガツノイタズラ
+- key: qid:Q11390770|name:8月のまなざし
+  title: 8月のまなざし
+  title_kana: ハチガツノマナザシ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 8ガツノマナザシ
+  title_kana_segmented: ハチガツ ノ マナザシ
+- key: qid:Q11264488|name:8か月の天使
+  title: 8か月の天使
+  title_kana: ハチカゲツノテンシハジメテママニナレタヒ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 8カゲツノテンシ
+  title_kana_segmented: ハチカゲツ ノ テンシ ハジメテ ママ ニ ナレタ ヒ
+- key: name:池玲文|name:8人の戦士
+  title: 8人の戦士
+  title_kana: ハチニンノセンシ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 8ニンノセンシ
+  title_kana_segmented: ハチニン ノ センシ
+- key: qid:Q3113855|name:クリスチーナの青い空 摩耶の葬列 9月のポピィ
+  title: クリスチーナの青い空 摩耶の葬列 9月のポピィ
+  title_kana: クリスチーナノアオイソラマヤノソウレツクガツノポピィ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: クリスチーナノアオイソラマヤノソウレツ9ガツノポピィ
+  title_kana_segmented: クリスチーナ ノ アオイ ソラ マヤ ノ ソウレツ クガツ ノ ポピィ
+- key: name:小田三月|name:90日彼氏|sub:愛がないのに抱かれています
+  title: 90日彼氏
+  title_kana: キュウジュウニチカレシイチ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 90ニチカレシ
+- key: qid:Q5975051|name:99
+  title: '99'
+  title_kana: ナインティナイン
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: '99'
+- key: qid:Q431443|name:潜水艦スーパー99
+  title: 潜水艦スーパー99
+  title_kana: センスイカンスーパーナインナイン
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: センスイカンスーパー99
+  title_kana_segmented: センスイカン スーパー ナインナイン
+- key: name:バーミー双六|name:999ドクター
+  title: 999ドクター
+  title_kana: キュウキュウキュウドクター
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 999ドクター
+  title_kana_segmented: キュウキュウキュウ ドクター
+- key: qid:Q3113855|name:9月のポピィ
+  title: 9月のポピィ
+  title_kana: クガツノポピィ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 9ガツノポピィ
+  title_kana_segmented: クガツ ノ ポピィ
+- key: qid:Q11356487|name:9匹目の猫
+  title: 9匹目の猫
+  title_kana: キュウヒキメノネコ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 9ヒキメノネコ
+  title_kana_segmented: キュウヒキメ ノ ネコ
+- key: qid:Q11639800|name:9時から5時半まで
+  title: 9時から5時半まで
+  title_kana: クジカラゴジハンマデ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 9ジカラ5ジハンマデ
+  title_kana_segmented: クジ カラ ゴジハン マデ
+- key: qid:Q3337062|name:ACCA 13区監察課
+  title: ACCA 13区監察課
+  title_kana: アッカジュウサンクカンサツカ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: アッカ13クカンサツカ
+  title_kana_segmented: アッカ ジュウサンク カンサツカ
+- key: qid:Q3337062|name:Acca 13区監察課
+  title: ACCA 13区監察課
+  title_kana: アッカジュウサンクカンサツカ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: アッカ13クカンサツカ
+  title_kana_segmented: アッカ ジュウサンク カンサツカ
+- key: qid:Q3337062|name:ACCA13区監察課P.S.
+  title: ACCA13区監察課P.S
+  title_kana: アッカジュウサンクカンサツカピーエス
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: アッカ13クカンサツカピーエス
+  title_kana_segmented: アッカ ジュウサンク カンサツカ ピーエス
+- key: qid:Q3337062|name:ACCA13区監察課P.S
+  title: ACCA13区監察課P.S
+  title_kana: アッカジュウサンクカンサツカピーエス
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: アッカ13クカンサツカピーエス
+  title_kana_segmented: アッカ ジュウサンク カンサツカ ピーエス
+- key: qid:Q11545808|name:アゲハ100％
+  title: アゲハ100％
+  title_kana: アゲハヒャクパーセント
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: アゲハ100パーセント
+  title_kana_segmented: アゲハ ヒャクパーセント
+- key: qid:Q11331564|name:アホ汁666
+  title: アホ汁666
+  title_kana: アホジルロッピャクロクジュウロク
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: アホジル666
+  title_kana_segmented: アホジル ロッピャク ロクジュウロク
+- key: qid:Q11372765|name:愛人31号
+  title: 愛人31号
+  title_kana: アイジンサンジュウイチゴウ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: アイジン31ゴウ
+  title_kana_segmented: アイジン サンジュウイチゴウ
+- key: name:アクワイア|name:AKIBA'S TRIP 2
+  title: AKIBA'S TRIP 2
+  title_kana: アキバズトリップニ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: アキバズトリップ2
+  title_kana_segmented: アキバズ トリップ ニ
+- key: qid:Q11544067|name:握力1トンの執行人
+  title: 握力1トンの執行人
+  title_kana: アクリョクイットンノシッコウニンアームドアーム
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: アクリョク1トンノシッコウニン
+  title_kana_segmented: アクリョク イットン ノ シッコウニン アーム ド アーム
+- key: qid:Q11460644|name:悪1013
+  title: 悪1013
+  title_kana: アクトウイチミ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: アク1013
+  title_kana_segmented: アクトウ イチミ
+- key: qid:Q4389496|name:エイリアン9
+  title: エイリアン9
+  title_kana: エイリアンナイン
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: エイリアン9
+  title_kana_segmented: エイリアン ナイン
+- key: name:宮本延春|name:オール1の落ちこぼれ、教師になる
+  title: オール1の落ちこぼれ、教師になる
+  title_kana: オールイチノオチコボレキョウシニナル
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: オール1ノオチコボレキョウシニナル
+  title_kana_segmented: オール イチ ノ オチコボレ キョウシ ニ ナル
+- key: qid:Q2880551|name:AMAKUSA 1637
+  title: AMAKUSA 1637
+  title_kana: アマクサセンロッピャクサンジュウナナ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: アマクサ1637
+  title_kana_segmented: アマクサ センロッピャクサンジュウナナ
+- key: name:彩木咲花|name:あんたを口説く100のセリフ
+  title: あんたを口説く100のセリフ
+  title_kana: アンタオクドクヒャクノセリフ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: アンタオクドク100ノセリフ
+  title_kana_segmented: アンタ オ クドク ヒャク ノ セリフ
+- key: qid:Q11280638|name:アポクリファ／0
+  title: アポクリファ／0
+  title_kana: アポクリファゼロ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: アポクリファ0
+  title_kana_segmented: アポクリファ ゼロ
+- key: qid:Q11628163|name:Arc the lad Ⅱ
+  title: アークザラッドⅡ
+  title_kana: アークザラッドツー
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: アークザラッド2
+  title_kana_segmented: アーク ザ ラッド ツー
+- key: qid:Q11628163|name:アークザラッドⅡ
+  title: アークザラッドⅡ
+  title_kana: アークザラッドツー
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: アークザラッド2
+  title_kana_segmented: アーク ザ ラッド ツー
+- key: qid:Q11622962|name:Arc The Lad Ⅱ
+  title: Arc The Lad Ⅱ
+  title_kana: アークザラッドツー
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: アークザラッド2
+  title_kana_segmented: アーク ザ ラッド ツー
+- key: qid:Q11369454|name:エリア51
+  title: エリア51
+  title_kana: エリアゴジユウイチ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: エリア51
+  title_kana_segmented: エリア ゴジユウイチ
+- key: qid:Q193300|name:明日、人に話したくなる10本の手塚治虫
+  title: 明日、人に話したくなる10本の手塚治虫
+  title_kana: アスヒトニハナシタクナルジッポンノテズカオサム
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: アスヒトニハナシタクナル10ポンノテズカオサム
+  title_kana_segmented: アス ヒト ニ ハナシタクナル ジッポン ノ テズカ オサム
+- key: qid:Q537063|name:アタシがハマッた4つの純愛
+  title: アタシがハマッた4つの純愛
+  title_kana: アタシガハマッタヨッツノジュンアイ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: アタシガハマッタ4ツノジュンアイ
+  title_kana_segmented: アタシ ガ ハマッタ ヨッツ ノ ジュンアイ
+- key: name:カミラ・デルリコ|name:アヴリル・ラヴィーン5つの願いごと
+  title: アヴリル・ラヴィーン5つの願いごと
+  title_kana: アヴリルラヴィーンイツツノネガイゴト
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: アヴリルラヴィーン5ツノネガイゴト
+  title_kana_segmented: アヴリル ラヴィーン イツツ ノ ネガイゴト
+- key: name:藤森直子|name:綾。ホステス、18歳。
+  title: 綾。ホステス、18歳。
+  title_kana: アヤホステスジュウハッサイ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: アヤホステス18サイ
+  title_kana_segmented: アヤ ホステス ジュウハッサイ
+- key: name:藤森直子|name:綾。ホステス、22歳。
+  title: 綾。ホステス、22歳。
+  title_kana: アヤホステスニジュウニサイ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: アヤホステス22サイ
+  title_kana_segmented: アヤ ホステス ニジュウニサイ
+- key: qid:Q11468044|name:バーキッツヴィル7
+  title: バーキッツヴィル7
+  title_kana: バーキッツヴィルシチ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: バーキッツヴィル7
+  title_kana_segmented: バーキッツヴィル シチ
+- key: qid:Q471133|name:バビル2世
+  title: バビル2世
+  title_kana: バビルニセイ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: バビル2セイ
+- key: qid:Q38842|name:バッファロー5人娘
+  title: バッファロー5人娘
+  title_kana: バッファローゴニンムスメ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: バッファロー5ニンムスメ
+  title_kana_segmented: バッファロー ゴニン ムスメ
+- key: qid:Q2661273|name:バロム・1
+  title: バロム・1
+  title_kana: バロムワン
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: バロム1
+  title_kana_segmented: バロム ワン
+- key: qid:Q11377047|name:ビーストウォーズⅡ
+  title: ビーストウォーズⅡ
+  title_kana: ビーストウォーズセカンド
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ビーストウォーズ2
+  title_kana_segmented: ビースト ウォーズ セカンド
+- key: qid:Q7784543|name:ビッグ・1
+  title: ビッグ・1
+  title_kana: ビッグワン
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ビッグ1
+  title_kana_segmented: ビッグ ワン
+- key: name:エサカマサミ|name:ビックリマン2000
+  title: ビックリマン2000
+  title_kana: ビックリマンニセン
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ビックリマン2000
+  title_kana_segmented: ビックリマン ニセン
+- key: qid:Q48763464|name:BLEACH 4コマコマブリ
+  title: BLEACH 4コマコマブリ
+  title_kana: ブリーチヨンコマコマブリ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ブリーチ4コマコマブリ
+  title_kana_segmented: ブリーチ ヨンコマ コマブリ
+- key: name:鬼山瑞樹|name:ぼくとミモザの75日
+  title: ぼくとミモザの75日
+  title_kana: ボクトミモザノナナジュウゴニチ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ボクトミモザノ75ニチ
+- key: name:鬼山瑞樹|name:ぼくとミモザの75日.
+  title: ぼくとミモザの75日
+  title_kana: ボクトミモザノナナジュウゴニチ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ボクトミモザノ75ニチ
+- key: name:吉田ゆうこ|name:ボーイフレンド17
+  title: ボーイフレンド17
+  title_kana: ボーイフレンドセブンティーン
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ボーイフレンド17
+- key: qid:Q6782715|name:ブレイブサーガ 2
+  title: ブレイブサーガ2
+  title_kana: ブレイブサーガニ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ブレイブサーガ2
+  title_kana_segmented: ブレイブ サーガ ニ
+- key: qid:Q6782715|name:ブレイブサーガ2
+  title: ブレイブサーガ2
+  title_kana: ブレイブサーガニ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ブレイブサーガ2
+  title_kana_segmented: ブレイブ サーガ ニ
+- key: qid:Q193300|name:ブルンガ1世
+  title: ブルンガ1世
+  title_kana: ブルンガイツセイ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ブルンガ1セイ
+  title_kana_segmented: ブルンガ イツセイ
+- key: name:新海誠|name:秒速5センチメートル
+  title: 秒速5センチメートル
+  title_kana: ビョウソクゴセンチメートル
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ビョウソク5センチメートル
+  title_kana_segmented: ビョウソク ゴセンチメートル
+- key: qid:Q9216389|name:CHANGE×CHANGE
+  title: CHANGE×CHANGE
+  title_kana: チェンジチェンジ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: チェンジ2
+  title_kana_segmented: チェンジ チェンジ
+- key: qid:Q11425021|name:ちぇんじ123
+  title: ちぇんじ123
+  title_kana: チェンジヒフミ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: チェンジ123
+  title_kana_segmented: チェンジ ヒフミ
+- key: qid:Q16263678|name:ちびギアス4コマのるるーしゅ
+  title: ちびギアス4コマのるるーしゅ
+  title_kana: チビギアスヨンコマノルルーシュ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: チビギアス4コマノルルーシュ
+  title_kana_segmented: チビ ギアス ヨンコマ ノ ルルーシュ
+- key: qid:Q2661273|name:超人バロム・1
+  title: 超人バロム・1
+  title_kana: チョウジンバロムワンカンゼンバン
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: チョウジンバロム1
+  title_kana_segmented: チョウジン バロム ワン カンゼンバン
+- key: qid:Q11279182|name:コミック1970
+  title: コミック1970
+  title_kana: コミックイチキュウナナゼロ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: コミック1970
+  title_kana_segmented: コミック イチキュウナナゼロ
+- key: name:コーエー出版部|name:コミック戦国無双2 サムライサバイバー
+  title: コミック戦国無双2 サムライサバイバー
+  title_kana: コミックセンゴクムソウニサムライサバイバー
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: コミックセンゴクムソウ2サムライサバイバー
+  title_kana_segmented: コミック センゴク ムソウ ニ サムライ サバイバー
+- key: name:コーエー出版部|name:コミック真・三國無双4ワンダーエボリューション
+  title: コミック真・三國無双4ワンダーエボリューション
+  title_kana: コミックシンサンゴクムソウシワンダーエボリューション
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: コミックシンサンゴクムソウ4ワンダーエボリューション
+  title_kana_segmented: コミック シン サンゴク ムソウ シ ワンダー エボリューション
+- key: name:青龍倶楽部|name:コミック真・三國無双3バトルイリュージョン
+  title: コミック真・三國無双3バトルイリュージョン
+  title_kana: コミックシンサンゴクムソウサンバトルイリュージョン
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: コミックシンサンゴクムソウ3バトルイリュージョン
+  title_kana_segmented: コミック シン サンゴク ムソウ サン バトル イリュージョン
+- key: qid:Q551359|name:クライシス2050
+  title: クライシス2050
+  title_kana: クライシスニーマルゴーマル
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: クライシス2050
+- key: name:Circus|name:D.C.2
+  title: D.C.2
+  title_kana: ダカーポニ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ダカーポ2
+  title_kana_segmented: ダカーポ ニ
+- key: name:日向ののか|name:D.C. 〔Ⅲ〕
+  title: D.C. 〔Ⅲ〕
+  title_kana: ダカーポスリーダカーポスリーイチ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ダカーポ3
+- key: name:えみこ山|name:第7天国
+  title: 第7天国
+  title_kana: ダイシチテンゴク
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ダイ7テンゴク
+  title_kana_segmented: ダイシチ テンゴク
+- key: name:桜日梯子|name:抱かれたい男1位に脅されています。
+  title: 抱かれたい男1位に脅されています。
+  title_kana: ダカレタイオトコイチイニオドサレテイマス
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ダカレタイオトコ1イニオドサレテイマス
+  title_kana_segmented: ダカレタイ オトコ イチイ ニ オドサレテイマス
+- key: qid:Q62601600|name:だんじり母ちゃんとコシノ3姉妹
+  title: だんじり母ちゃんとコシノ3姉妹
+  title_kana: ダンジリカアチャントコシノサンシマイ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ダンジリカアチャントコシノ3シマイ
+  title_kana_segmented: ダンジリ カアチャン ト コシノ サンシマイ
+- key: qid:Q11468186|name:ダーリンは55歳
+  title: ダーリンは55歳
+  title_kana: ダーリンワゴジユウゴサイ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ダーリンワ55サイ
+  title_kana_segmented: ダーリン ワ ゴジユウゴサイ
+- key: qid:Q11388484|name:デーモン72
+  title: デーモン72
+  title_kana: デーモンナナジュウニ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: デーモン72
+  title_kana_segmented: デーモン ナナジュウニ
+- key: name:原るみか|name:電撃6ハロン!!
+  title: 電撃6ハロン!!
+  title_kana: デンゲキロクハロン
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: デンゲキ6ハロン
+  title_kana_segmented: デンゲキ ロク ハロン
+- key: qid:Q6388734|name:どきどき魔女神判2
+  title: どきどき魔女神判2
+  title_kana: ドキドキマジョシンパンデュオ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ドキドキマジョシンパン2
+  title_kana_segmented: ドキドキ マジョ シンパン デュオ
+- key: name:ゲームドラゴンクエストシリーズ|name:ドラゴンクエスト4コママンガ劇場
+  title: ドラゴンクエスト4コママンガ劇場
+  title_kana: ドラゴンクエストヨンコママンガゲキジョウ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ドラゴンクエスト4コママンガゲキジョウ
+  title_kana_segmented: ドラゴン クエスト ヨンコマ マンガ ゲキジョウ
+- key: name:エニックス出版局|name:ドラゴンクエスト4コママンガ劇場
+  title: ドラゴンクエスト4コママンガ劇場
+  title_kana: ドラゴンクエストヨンコママンガゲキジョウ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ドラゴンクエスト4コママンガゲキジョウ
+  title_kana_segmented: ドラゴン クエスト ヨンコマ マンガ ゲキジョウ
+- key: qid:Q3082793|name:ドラゴンクエスト4外伝
+  title: ドラゴンクエスト4外伝
+  title_kana: ドラゴンクエストフォーガイデンジゴクノメイキュウ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ドラゴンクエスト4ガイデン
+  title_kana_segmented: ドラゴン クエスト フォー ガイデン ジゴク ノ メイキュウ
+- key: name:ゲームドラゴンクエストシリーズ|name:ドラゴンクエスト4コママンガ大全集
+  title: ドラゴンクエスト4コママンガ大全集
+  title_kana: ドラゴンクエストヨンコママンガダイゼンシュウ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ドラゴンクエスト4コママンガダイゼンシュウ
+  title_kana_segmented: ドラゴン クエスト ヨンコマ マンガ ダイゼンシュウ
+- key: name:エニックス出版局|name:ドラゴンクエストⅦ 4コママンガ劇場
+  title: ドラゴンクエストⅦ 4コママンガ劇場
+  title_kana: ドラゴンクエストシチヨンコママンガゲキジョウ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ドラゴンクエスト74コママンガゲキジョウ
+  title_kana_segmented: ドラゴン クエスト シチ ヨンコマ マンガ ゲキジョウ
+- key: name:エニックス|name:ドラゴンクエストⅦ 4コママンガ劇場
+  title: ドラゴンクエストⅦ 4コママンガ劇場
+  title_kana: ドラゴンクエストシチヨンコママンガゲキジョウ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ドラゴンクエスト74コママンガゲキジョウ
+  title_kana_segmented: ドラゴン クエスト シチ ヨンコマ マンガ ゲキジョウ
+- key: name:エニックス出版局|name:ドラゴンクエストあるくんです 4コママンガ劇場
+  title: ドラゴンクエストあるくんです 4コママンガ劇場
+  title_kana: ドラゴンクエストアルクンデスヨンコママンガゲキジョウ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ドラゴンクエストアルクンデス4コママンガゲキジョウ
+  title_kana_segmented: ドラゴン クエスト アルクンデス ヨンコマ マンガ ゲキジョウ
+- key: qid:Q17685876|name:ドラゴンクエスト〔Ⅹ〕4コママンガ劇場
+  title: ドラゴンクエスト〔Ⅹ〕4コママンガ劇場
+  title_kana: ドラゴンクエストジュウヨンコママンガゲキジョウ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ドラゴンクエスト104コママンガゲキジョウ
+  title_kana_segmented: ドラゴン クエスト ジュウ ヨンコマ マンガ ゲキジョウ
+- key: qid:Q17685876|name:ドラゴンクエストⅩ4コママンガ劇場
+  title: ドラゴンクエスト〔Ⅹ〕4コママンガ劇場
+  title_kana: ドラゴンクエストジュウヨンコママンガゲキジョウ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ドラゴンクエスト104コママンガゲキジョウ
+  title_kana_segmented: ドラゴン クエスト ジュウ ヨンコマ マンガ ゲキジョウ
+- key: name:大森藤ノ|name:ダンジョンに出会いを求めるのは間違っているだろうかⅡ
+  title: ダンジョンに出会いを求めるのは間違っているだろうかⅡ
+  title_kana: ダンジョンニデアイオモトメルノワマチガッテイルダロウカツゥー
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ダンジョンニデアイオモトメルノワマチガッテイルダロウカ2
+  title_kana_segmented: ダンジョン ニ デアイ オ モトメル ノワ マチガッテ イルダロウカ ツゥー
+- key: qid:Q268789|name:エデン2185
+  title: エデン2185
+  title_kana: エデンニイチハチゴ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: エデン2185
+- key: qid:Q9075138|name:江戸を騒がせた10人の女たち
+  title: 江戸を騒がせた10人の女たち
+  title_kana: エドオサワガセタジユウニンノオンナタチ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: エドオサワガセタ10ニンノオンナタチ
+  title_kana_segmented: エド オ サワガセタ ジユウニン ノ オンナタチ
+- key: qid:Q9099435|name:四月学院の4月
+  title: 四月学院の4月
+  title_kana: エイプリルハウスノシガツ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: エイプリルハウスノ4ガツ
+  title_kana_segmented: エイプリル ハウス ノ シガツ
+- key: qid:Q5362298|name:駅から5分
+  title: 駅から5分
+  title_kana: エキカラゴフン
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: エキカラ5フン
+  title_kana_segmented: エキ カラ ゴフン
+- key: name:高橋はるの|name:駅前5坪
+  title: 駅前5坪
+  title_kana: エキマエゴツボ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: エキマエ5ツボ
+  title_kana_segmented: エキマエ ゴツボ
+- key: name:百名哲|name:演劇部5分前
+  title: 演劇部5分前
+  title_kana: エンゲキブゴフンマエ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: エンゲキブ5フンマエ
+  title_kana_segmented: エンゲキブ ゴフンマエ
+- key: qid:Q41698614|name:ファイナルファンタジー11
+  title: ファイナルファンタジー11
+  title_kana: ファイナルファンタジージュウイチ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ファイナルファンタジー11
+  title_kana_segmented: ファイナル ファンタジー ジュウイチ
+- key: qid:Q11561327|name:ファイナルファンタジー11
+  title: ファイナルファンタジー11
+  title_kana: ファイナルファンタジージュウイチ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ファイナルファンタジー11
+  title_kana_segmented: ファイナル ファンタジー ジュウイチ
+- key: qid:Q11260418|name:ファイナルファンタジー11
+  title: ファイナルファンタジー11
+  title_kana: ファイナルファンタジージュウイチオカエリ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ファイナルファンタジー11
+  title_kana_segmented: ファイナル ファンタジー ジュウイチ オカエリ
+- key: name:はせがわみやび|name:ファイナルファンタジーⅪ
+  title: ファイナルファンタジーⅪ
+  title_kana: ファイナルファンタジージュウイチイノリノカゼ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ファイナルファンタジー11
+  title_kana_segmented: ファイナル ファンタジー ジュウイチ イノリ ノ カゼ
+- key: qid:Q97189093|name:ファイナルファンタジー11ガルカ、はじめました。
+  title: ファイナルファンタジー11ガルカ、はじめました。
+  title_kana: ファイナルファンタジージュウイチガルカハジメマシタ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ファイナルファンタジー11ガルカハジメマシタ
+  title_kana_segmented: ファイナル ファンタジー ジュウイチ ガルカ ハジメマシタ
+- key: qid:Q11443419|name:FINAL FANTASY Ⅻ
+  title: FINAL FANTASY Ⅻ
+  title_kana: ファイナルファンタジージュウニ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ファイナルファンタジー12
+  title_kana_segmented: ファイナル ファンタジー ジュウニ
+- key: name:たかなぎ優名|name:FIRE EMBLEMトラキア776
+  title: FIRE EMBLEM THRACIA 776
+  title_kana: ファイアーエムブレムトラキアナナヒャクシチジュウロク
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ファイアーエムブレムトラキア776
+  title_kana_segmented: ファイアー エムブレム トラキア ナナヒャク シチジュウロク
+- key: name:たかなぎ優名|name:FIRE EMBLEM THRACIA 776
+  title: FIRE EMBLEM THRACIA 776
+  title_kana: ファイアーエムブレムトラキアナナヒャクシチジュウロク
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ファイアーエムブレムトラキア776
+  title_kana_segmented: ファイアー エムブレム トラキア ナナヒャク シチジュウロク
+- key: qid:Q11510591|name:ファイアーエムブレム トラキア776
+  title: ファイアーエムブレム トラキア776
+  title_kana: ファイアーエムブレムトラキアナナヒャクシチジュウロク
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ファイアーエムブレムトラキア776
+  title_kana_segmented: ファイアー エムブレム トラキア ナナヒャク シチジュウロク
+- key: name:エニックス出版局|name:ファイアーエムブレムトラキア776　4コママンガ劇場
+  title: ファイアーエムブレムトラキア776　4コママンガ劇場
+  title_kana: ファイアーエムブレムトラキアナナナナロクヨンコママンガゲキジョウ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ファイアーエムブレムトラキア7764コママンガゲキジョウ
+  title_kana_segmented: ファイアー エムブレム トラキア ナナナナロク ヨンコマ マンガ ゲキジョウ
+- key: qid:Q18054718|name:from 701号室
+  title: from 701号室
+  title_kana: フロムナナマルイチゴウシツ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: フロム701ゴウシツ
+  title_kana_segmented: フロム ナナマルイチゴウシツ
+- key: qid:Q9018907|name:フルーツ果汁100％
+  title: フルーツ果汁100％
+  title_kana: フルーツカジュウヒャクパーセント
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: フルーツカジュウ100パーセント
+  title_kana_segmented: フルーツ カジュウ ヒャクパーセント
+- key: name:藤原らんか|name:藤原らんかの4コマ劇場
+  title: 藤原らんかの4コマ劇場
+  title_kana: フジワラランカノヨンコマゲキジョウ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: フジワラランカノ4コマゲキジョウ
+  title_kana_segmented: フジワラ ランカ ノ ヨンコマ ゲキジョウ
+- key: qid:Q3100347|name:餓狼伝説special 4コマ大行進
+  title: 餓狼伝説special 4コマ大行進
+  title_kana: ガロウデンセツスペシャルヨンコマダイコウシン
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ガロウデンセツスペシャル4コマダイコウシン
+  title_kana_segmented: ガロウデンセツ スペシャル ヨンコマ ダイコウシン
+- key: qid:Q2661273|name:現代史の中のゴルゴ13|sub:第二次世界大戦の亡霊
+  title: 現代史の中のゴルゴ13
+  title_kana: ゲンダイシノナカノゴルゴサーティーン
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ゲンダイシノナカノゴルゴ13
+  title_kana_segmented: ゲンダイシ ノ ナカ ノ ゴルゴ サーティーン
+- key: qid:Q2661273|name:現代史の中のゴルゴ13
+  title: 現代史の中のゴルゴ13
+  title_kana: ゲンダイシノナカノゴルゴサーティーン
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ゲンダイシノナカノゴルゴ13
+  title_kana_segmented: ゲンダイシ ノ ナカ ノ ゴルゴ サーティーン
+- key: name:柘植ミズキ|name:幻想水滸伝Ⅴ
+  title: 幻想水滸伝Ⅴ
+  title_kana: ゲンソウスイコデンゴレイメイノシロ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ゲンソウスイコデン5
+  title_kana_segmented: ゲンソウ スイコデン ゴ レイメイ ノ シロ
+- key: qid:Q958412|name:GOLDEN BOY 2
+  title: GOLDEN BOY 2
+  title_kana: ゴールデンボーイツー
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ゴールデンボーイ2
+  title_kana_segmented: ゴールデン ボーイ ツー
+- key: qid:Q11555608|name:GO!GO!12歳
+  title: GO!GO!12歳
+  title_kana: ゴーゴージユウニサイ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ゴーゴー12サイ
+- key: qid:Q18818050|name:合コン1000回、結婚1回!
+  title: 合コン1000回、結婚1回!
+  title_kana: ゴウコンセンカイケッコンイッカイ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ゴウコン1000カイケッコン1カイ
+  title_kana_segmented: ゴウコン センカイ ケッコン イッカイ
+- key: name:鮭田ねね|name:午前0時の甘い罠
+  title: 午前0時の甘い罠
+  title_kana: ゴゼンレイジノアマイワナ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ゴゼン0ジノアマイワナ
+- key: name:奥田枠|name:午前2時まで君のもの
+  title: 午前2時まで君のもの
+  title_kana: ゴゼンニジマデキミノモノ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ゴゼン2ジマデキミノモノ
+  title_kana_segmented: ゴゼン ニジ マデ キミ ノ モノ
+- key: qid:Q11414755|name:ぐるぐる迷路23
+  title: ぐるぐる迷路23
+  title_kana: グルグルメイロニジュウサン
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: グルグルメイロ23
+  title_kana_segmented: グルグル メイロ ニジュウサン
+- key: qid:Q958256|name:ギャグ21世紀
+  title: ギャグ21世紀
+  title_kana: ギャグニジュウイッセイキ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ギャグ21セイキ
+  title_kana_segmented: ギャグ ニジュウイッセイキ
+- key: qid:Q230962|name:鋼の錬金術師4コマ
+  title: 鋼の錬金術師4コマ
+  title_kana: ハガネノレンキンジュツシヨンコマ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ハガネノレンキンジュツシ4コマ
+  title_kana_segmented: ハガネ ノ レンキンジュツシ ヨンコマ
+- key: qid:Q7564122|name:母が拉致された時僕はまだ1歳だった
+  title: 母が拉致された時僕はまだ1歳だった
+  title_kana: ハハガラチサレタトキボクワマダイッサイダッタ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ハハガラチサレタトキボクワマダ1サイダッタ
+  title_kana_segmented: ハハ ガ ラチサレタ トキ ボク ワ マダ イッサイ ダッタ
+- key: qid:Q11264572|name:背後霊24時!
+  title: 背後霊24時!
+  title_kana: ハイゴレイニジュウヨジ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ハイゴレイ24ジ
+  title_kana_segmented: ハイゴレイ ニジュウヨジ
+- key: qid:Q11624934|name:ハレルヤ7
+  title: ハレルヤ7
+  title_kana: ハレルヤセブン
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ハレルヤ7
+  title_kana_segmented: ハレルヤ セブン
+- key: qid:Q11645305|name:羽根くんの10年ロマンス
+  title: 羽根くんの10年ロマンス
+  title_kana: ハネクンノジュウネンロマンス
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ハネクンノ10ネンロマンス
+  title_kana_segmented: ハネクン ノ ジュウネン ロマンス
+- key: qid:Q11468186|name:はるか17
+  title: はるか17
+  title_kana: ハルカセブンティーン
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ハルカ17
+  title_kana_segmented: ハルカ セブンティーン
+- key: name:ルビー・パーティー|name:遙かなる時空の中で5
+  title: 遙かなる時空の中で5
+  title_kana: ハルカナルトキノナカデゴ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ハルカナルトキノナカデ5
+  title_kana_segmented: ハルカナル トキ ノ ナカ デ ゴ
+- key: qid:Q11654937|name:ハワイバカ一代
+  title: ハワイバカ一代
+  title_kana: ハワイバカイチダイ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ハワイバカ1ダイ
+  title_kana_segmented: ハワイ バカ イチダイ
+- key: qid:Q20042284|name:平成生まれ2
+  title: 平成生まれ2
+  title_kana: ヘイセイウマレニ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ヘイセイウマレ2
+  title_kana_segmented: ヘイセイ ウマレ ニ
+- key: qid:Q20042284|name:平成生まれ3
+  title: 平成生まれ3
+  title_kana: ヘイセイウマレスリー
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ヘイセイウマレ3
+- key: qid:Q11488834|name:火の鳥2772
+  title: 火の鳥2772
+  title_kana: ヒノトリニセンナナヒャクシチジュウニ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ヒノトリ2772
+  title_kana_segmented: ヒ ノ トリ ニセンナナヒャク シチジュウニ
+- key: 'qid:Q11488834|name:火の鳥2772|sub:愛のコスモゾーン : カラー完全版'
+  title: 火の鳥2772
+  title_kana: ヒノトリニセンナナヒャクシチジュウニ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ヒノトリ2772
+  title_kana_segmented: ヒ ノ トリ ニセンナナヒャク シチジュウニ
+- key: qid:Q11640392|name:雲雀町1丁目の事情
+  title: 雲雀町1丁目の事情
+  title_kana: ヒバリチョウイッチョウメノジジョウ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ヒバリチョウ1チョウメノジジョウ
+  title_kana_segmented: ヒバリチョウ イッチョウメ ノ ジジョウ
+- key: qid:Q11532037|name:東北沢5号
+  title: 東北沢5号
+  title_kana: ヒガシキタザワゴゴウ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ヒガシキタザワ5ゴウ
+  title_kana_segmented: ヒガシキタザワ ゴゴウ
+- key: qid:Q11278399|name:被虐の運命に縛られ悶える6人のプリンセス
+  title: 被虐の運命に縛られ悶える6人のプリンセス
+  title_kana: ヒギャクノウンメイニシバラレモダエルロクニンノプリンセス
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ヒギャクノウンメイニシバラレモダエル6ニンノプリンセス
+  title_kana_segmented: ヒギャク ノ ウンメイ ニ シバラレ モダエル ロクニン ノ プリンセス
+- key: name:モリダム|name:姫と女勇者が結ばれるための12の聖行為
+  title: 姫と女勇者が結ばれるための12の聖行為
+  title_kana: ヒメトオンナユウシャガムスバレルタメノジュウニノセイコウイイチ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ヒメトオンナユウシャガムスバレルタメノ12ノセイコウイ
+  title_kana_segmented: ヒメトオンナユウシャガムスバレルタメノジュウニノセイコウイ イチ
+- key: name:モリダム|name:姫と女勇者が結ばれるための12の聖行為.
+  title: 姫と女勇者が結ばれるための12の聖行為
+  title_kana: ヒメトオンナユウシャガムスバレルタメノジュウニノセイコウイイチ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ヒメトオンナユウシャガムスバレルタメノ12ノセイコウイ
+  title_kana_segmented: ヒメトオンナユウシャガムスバレルタメノジュウニノセイコウイ イチ
+- key: qid:Q6883359|name:ひみつ指令マシン刑事999
+  title: ひみつ指令マシン刑事999
+  title_kana: ヒミツシレイマシンケイジキュウヒャククジュウク
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ヒミツシレイマシンケイジ999
+  title_kana_segmented: ヒミツ シレイ マシン ケイジ キュウヒャク クジュウク
+- key: qid:Q11623986|name:ひなた120％
+  title: ひなた120％
+  title_kana: ヒナタヒャクニジッパーセント
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ヒナタ120パーセント
+  title_kana_segmented: ヒナタ ヒャク ニジッパーセント
+- key: qid:Q6389358|name:ほぼ0円ペット
+  title: ほぼ0円ペット
+  title_kana: ホボゼロエンペット
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ホボ0エンペット
+  title_kana_segmented: ホボ ゼロエン ペット
+- key: qid:Q22128069|name:ホリミヤ メモリアルブック page.100
+  title: ホリミヤ メモリアルブック page.100
+  title_kana: ホリミヤメモリアルブックページヒャク
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ホリミヤメモリアルブックページ100
+  title_kana_segmented: ホリ ミヤ メモリアル ブック ページ ヒャク
+- key: qid:Q11658171|name:星まで5分!
+  title: 星まで5分!
+  title_kana: ホシマデゴフン
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ホシマデ5フン
+  title_kana_segmented: ホシ マデ ゴフン
+- key: name:エニックス出版局|name:星のカービィ64 4コママンガ劇場
+  title: 星のカービィ64 4コママンガ劇場
+  title_kana: ホシノカービィロクヨンヨンコママンガゲキジョウ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ホシノカービィ644コママンガゲキジョウ
+  title_kana_segmented: ホシ ノ カービィ ロクヨン ヨンコマ マンガ ゲキジョウ
+- key: name:森下Suu|name:捕食系ヒロインにあと1年以内に食べられます
+  title: 捕食系ヒロインにあと1年以内に食べられます
+  title_kana: ホショクケイヒロインニアトイチネンイナイニタベラレマス
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ホショクケイヒロインニアト1ネンイナイニタベラレマス
+  title_kana_segmented: ホショクケイ ヒロイン ニ アト イチネン イナイ ニ タベラレマス
+- key: qid:Q11620418|name:放課後は第2会議室
+  title: 放課後は第2会議室
+  title_kana: ホウカゴワダイニカイギシツ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ホウカゴワダイ2カイギシツ
+  title_kana_segmented: ホウカゴ ワ ダイ ニ カイギシツ
+- key: name:ぷらぱ|name:アイドル声優★上村とまり17歳
+  title: アイドル声優★上村とまり17歳
+  title_kana: アイドルセイユウカミムラトマリジュウシチサイ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: アイドルセイユウカミムラトマリ17サイ
+  title_kana_segmented: アイドル セイユウ カミムラ トマリ ジュウシチサイ
+- key: name:今井ユウ|name:イモリ201
+  title: イモリ201
+  title_kana: イモリニマルイチ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: イモリ201
+  title_kana_segmented: イモリ ニマルイチ
+- key: name:華月章人|name:銀耳3・4
+  title: 銀耳3・4
+  title_kana: インアルサンスー
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: インアル34
+  title_kana_segmented: インアル サン スー
+- key: name:青色イリコ|name:ジャポニズム47
+  title: ジャポニズム47
+  title_kana: ジャポニズムフォーティーセブン
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ジャポニズム47
+  title_kana_segmented: ジャポニズム フォーティーセブン
+- key: qid:Q9330031|name:時間救助隊タイマー3
+  title: 時間救助隊タイマー3
+  title_kana: ジカンキュウジョタイタイマースリー
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ジカンキュウジョタイタイマー3
+  title_kana_segmented: ジカン キュウジョタイ タイマー スリー
+- key: qid:Q11585537|name:実戦攻略!ガチンコ裏テク13時間
+  title: 実戦攻略!ガチンコ裏テク13時間
+  title_kana: ジッセンコウリャクガチンコウラテクジュウサンジカン
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ジッセンコウリャクガチンコウラテク13ジカン
+  title_kana_segmented: ジッセン コウリャク ガチンコ ウラテク ジュウサンジカン
+- key: qid:Q11616860|name:純情ロボット2号
+  title: 純情ロボット2号
+  title_kana: ジュンジョウロボットニゴウ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ジュンジョウロボット2ゴウ
+  title_kana_segmented: ジュンジョウ ロボット ニゴウ
+- key: qid:Q11594781|name:純真ミラクル100％
+  title: 純真ミラクル100％
+  title_kana: ジュンシンミラクルヒャクパーセント
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ジュンシンミラクル100パーセント
+  title_kana_segmented: ジュンシン ミラクル ヒャクパーセント
+- key: name:黒沼健|name:海底人8823
+  title: 海底人8823
+  title_kana: カイテイジンハヤブサカンゼンバン
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: カイテイジン8823
+  title_kana_segmented: カイテイジン ハヤブサ カンゼンバン
+- key: qid:Q11257188|name:快盗!ポケモン7
+  title: 快盗!ポケモン7
+  title_kana: カイトウポケモンセブン
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: カイトウポケモン7
+  title_kana_segmented: カイトウ ポケモン セブン
+- key: qid:Q9139736|name:×2
+  title: ×2
+  title_kana: カケルニ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: カケル2
+  title_kana_segmented: カケル ニ
+- key: qid:Q11583144|name:カッコイイ男の子ベスト10
+  title: カッコイイ男の子ベスト10
+  title_kana: カッコイイオトコノコベストテン
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: カッコイイオトコノコベスト10
+  title_kana_segmented: カッコイイ オトコノコ ベスト テン
+- key: qid:Q11495365|name:仮面ライダー決死戦7人ライダー
+  title: 仮面ライダー決死戦7人ライダー
+  title_kana: カメンライダーケッシセンシチニンライダー
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: カメンライダーケッシセン7ニンライダー
+  title_kana_segmented: カメン ライダー ケッシセン シチニン ライダー
+- key: qid:Q11516658|name:感動ラブストーリー100p長編ベスト5
+  title: 感動ラブストーリー100p長編ベスト5
+  title_kana: カンドウラブストーリーヒャクページチョウヘンベストゴ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: カンドウラブストーリー100ページチョウヘンベスト5
+  title_kana_segmented: カンドウ ラブ ストーリー ヒャクページ チョウヘン ベスト ゴ
+- key: name:アカコッコ|name:彼女がお兄ちゃんになったらしたい10のこと
+  title: 彼女がお兄ちゃんになったらしたい10のこと
+  title_kana: カノジョガオニイチャンニナッタラシタイジュウノコト
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: カノジョガオニイチャンニナッタラシタイ10ノコト
+- key: qid:Q533664|name:彼女を守る51の方法
+  title: 彼女を守る51の方法
+  title_kana: カノジョオマモルゴジュウイチノホウホウ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: カノジョオマモル51ノホウホウ
+  title_kana_segmented: カノジョ オ マモル ゴジュウイチ ノ ホウホウ
+- key: name:小田原みづえ|name:彼の1番になる方法
+  title: 彼の1番になる方法
+  title_kana: カレノイチバンニナルホウホウ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: カレノ1バンニナルホウホウ
+  title_kana_segmented: カレ ノ イチバン ニ ナル ホウホウ
+- key: qid:Q22128959|name:彼氏1号
+  title: 彼氏1号
+  title_kana: カレシイチゴウ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: カレシ1ゴウ
+  title_kana_segmented: カレシ イチゴウ
+- key: qid:Q11593991|name:カワイコちゃんを2度見る
+  title: カワイコちゃんを2度見る
+  title_kana: カワイコチャンオニドミル
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: カワイコチャンオ2ドミル
+  title_kana_segmented: カワイコチャン オ ニド ミル
+- key: qid:Q9330031|name:家族戦隊ノック5
+  title: 家族戦隊ノック5
+  title_kana: カゾクセンタイノックファイブ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: カゾクセンタイノック5
+  title_kana_segmented: カゾク センタイ ノック ファイブ
+- key: qid:Q11480142|name:慶応三年のフルコース
+  title: 慶応三年のフルコース
+  title_kana: ケイオウサンネンノフルコース
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ケイオウ3ネンノフルコース
+  title_kana_segmented: ケイオウ サンネン ノ フルコース
+- key: qid:Q11613965|name:警視庁特犯課007
+  title: 警視庁特犯課007
+  title_kana: ケイシチョウトクハンカゼロゼロセブン
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ケイシチョウトクハンカ007
+  title_kana_segmented: ケイシチョウ トクハンカ ゼロゼロセブン
+- key: qid:Q11644242|name:結婚を2倍楽しむ方法
+  title: 結婚を2倍楽しむ方法
+  title_kana: ケッコンオニバイタノシムホウホウ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ケッコンオ2バイタノシムホウホウ
+  title_kana_segmented: ケッコン オ ニバイ タノシム ホウホウ
+- key: qid:Q193300|name:ケン1探偵長
+  title: ケン1探偵長
+  title_kana: ケンイチタンテイチョウ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ケン1タンテイチョウ
+- key: qid:Q471103|name:決死戦7人ライダー
+  title: 決死戦7人ライダー
+  title_kana: ケッシセンシチニンライダー
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ケッシセン7ニンライダー
+  title_kana_segmented: ケッシセン シチニン ライダー
+- key: qid:Q2738694|name:紀元2600年のプレイボール
+  title: 紀元2600年のプレイボール
+  title_kana: キゲンニセンロッピャクネンノプレイボール
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: キゲン2600ネンノプレイボール
+  title_kana_segmented: キゲン ニセンロッピャクネン ノ プレイボール
+- key: qid:Q471103|name:キカイダー02
+  title: キカイダー02
+  title_kana: キカイダーゼロニ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: キカイダー02
+  title_kana_segmented: キカイダー ゼロニ
+- key: qid:Q11278399|name:禁断の愛に溺れた6人の処女
+  title: 禁断の愛に溺れた6人の処女
+  title_kana: キンダンノアイニオボレタロクニンノショジョ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: キンダンノアイニオボレタ6ニンノショジョ
+  title_kana_segmented: キンダン ノ アイ ニ オボレタ ロクニン ノ ショジョ
+- key: qid:Q555822|name:キングダムハーツ3
+  title: キングダムハーツⅢ
+  title_kana: キングダムハーツスリー
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: キングダムハーツ3
+  title_kana_segmented: キングダム ハーツ スリー
+- key: qid:Q555822|name:キングダムハーツⅢ
+  title: キングダムハーツⅢ
+  title_kana: キングダムハーツスリー
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: キングダムハーツ3
+  title_kana_segmented: キングダム ハーツ スリー
+- key: name:野村哲也|name:キングダムハーツⅡ
+  title: キングダムハーツⅡ
+  title_kana: キングダムハーツニ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: キングダムハーツ2
+  title_kana_segmented: キングダム ハーツ ニ
+- key: qid:Q555822|name:キングダムハーツⅡ
+  title: キングダムハーツⅡ
+  title_kana: キングダムハーツニ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: キングダムハーツ2
+  title_kana_segmented: キングダム ハーツ ニ
+- key: name:月島さと|name:金貨1枚で変わる冒険者生活
+  title: 金貨1枚で変わる冒険者生活
+  title_kana: キンカイチマイデカワルボウケンシャセイカツ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: キンカ1マイデカワルボウケンシャセイカツ
+  title_kana_segmented: キンカ イチマイ デ カワル ボウケンシャ セイカツ
+- key: qid:Q3853963|name:キラキラ100％
+  title: キラキラ100％
+  title_kana: キラキラヒャクパーセント
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: キラキラ100パーセント
+  title_kana_segmented: キラキラ ヒャクパーセント
+- key: qid:Q11455984|name:キスまでの13センチ|sub:sweet distance between you & I
+  title: キスまでの13センチ
+  title_kana: キスマデノジュウサンセンチ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: キスマデノ13センチ
+- key: qid:Q11396374|name:キスは0時を過ぎてから
+  title: キスは0時を過ぎてから
+  title_kana: キスワレイジオスギテカラ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: キスワ0ジオスギテカラ
+  title_kana_segmented: キス ワ レイジ オ スギテカラ
+- key: qid:Q11291945|name:恋人8号
+  title: 恋人8号
+  title_kana: コイビトハチゴウ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: コイビト8ゴウ
+  title_kana_segmented: コイビト ハチゴウ
+- key: qid:Q20042581|name:恋心パート2
+  title: 恋心パート2
+  title_kana: コイゴコロパートニ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: コイゴコロパート2
+  title_kana_segmented: コイゴコロ パート ニ
+- key: qid:Q11576073|name:ここ10年分のヒロシ。
+  title: ここ10年分のヒロシ。
+  title_kana: ココジュウネンブンノヒロシ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ココ10ネンブンノヒロシ
+  title_kana_segmented: ココ ジュウネンブン ノ ヒロシ
+- key: name:ホーム社|name:コクーン荘1×1
+  title: コクーン荘1×1
+  title_kana: コクーンソウイチカケルイチ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: コクーンソウ11
+- key: qid:Q11541939|name:コクーン荘1×1
+  title: コクーン荘1×1
+  title_kana: コクーンソウイチカケルイチ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: コクーンソウ11
+- key: qid:Q11640227|name:こーしょー19さい
+  title: こーしょー19さい
+  title_kana: コーショージュウキュウサイ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: コーショー19サイ
+  title_kana_segmented: コーショー ジュウキュウサイ
+- key: qid:Q605735|name:殺し屋1
+  title: 殺し屋1
+  title_kana: コロシヤイチ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: コロシヤ1
+  title_kana_segmented: コロシヤ イチ
+- key: name:鏡裕之|name:高1ですが異世界で城主はじめました
+  title: 高1ですが異世界で城主はじめました
+  title_kana: コウイチデスガイセカイデジョウシュハジメマシタ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: コウ1デスガイセカイデジョウシュハジメマシタ
+  title_kana_segmented: コウイチ デスガ イセカイ デ ジョウシュ ハジメマシタ
+- key: name:ごばん|name:高1ですが異世界で城主はじめました
+  title: 高1ですが異世界で城主はじめました
+  title_kana: コウイチデスガイセカイデジョウシュハジメマシタ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: コウ1デスガイセカイデジョウシュハジメマシタ
+  title_kana_segmented: コウイチ デスガ イセカイ デ ジョウシュ ハジメマシタ
+- key: qid:Q11514224|name:高機動幻想ガンパレード・マーチ 4コママンガ劇場
+  title: 高機動幻想ガンパレード・マーチ 4コママンガ劇場
+  title_kana: コウキドウゲンソウガンパレードマーチヨンコママンガゲキジョウ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: コウキドウゲンソウガンパレードマーチ4コママンガゲキジョウ
+  title_kana_segmented: コウキドウ ゲンソウ ガンパレード マーチ ヨンコマ マンガ ゲキジョウ
+- key: qid:Q11398480|name:鴻鵠館1301
+  title: 鴻鵠館1301
+  title_kana: コウコクカンセンサンビャクイチ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: コウコクカン1301
+  title_kana_segmented: コウコクカン センサンビャク イチ
+- key: qid:Q2066927|name:クルスク1943
+  title: クルスク1943
+  title_kana: クルスクセンキュウヒャクシジュウサン
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: クルスク1943
+  title_kana_segmented: クルスク センキュウヒャク シジュウサン
+- key: qid:Q2880551|name:キャッチ30秒
+  title: キャッチ30秒
+  title_kana: キャッチサンジュウビョウ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: キャッチ30ビョウ
+- key: qid:Q11606008|name:きょとんチャン。1歩前へ!
+  title: きょとんチャン。1歩前へ!
+  title_kana: キョトンチャンイッポマエエ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: キョトンチャン1ポマエエ
+  title_kana_segmented: キョトンチャン イッポ マエ エ
+- key: qid:Q11265379|name:今日も2人は仲良しです。
+  title: 今日も2人は仲良しです。
+  title_kana: キョウモフタリワナカヨシデス
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: キョウモ2リワナカヨシデス
+  title_kana_segmented: キョウ モ フタリ ワ ナカヨシデス
+- key: qid:Q5158759|name:今日の5の2
+  title: 今日の5の2
+  title_kana: キョウノゴノニ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: キョウノ5ノ2
+  title_kana_segmented: キョウ ノ ゴ ノ ニ
+- key: name:ホーム社|name:狂四郎2030
+  title: 狂四郎2030
+  title_kana: キョウシロウニマルサンマル
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: キョウシロウ2030
+  title_kana_segmented: キョウシロウ ニマルサンマル
+- key: qid:Q6782774|name:狂四郎2030
+  title: 狂四郎2030
+  title_kana: キョウシロウニマルサンマル
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: キョウシロウ2030
+  title_kana_segmented: キョウシロウ ニマルサンマル
+- key: qid:Q11274761|name:りとる〔＾2〕☆ミラクル
+  title: りとる〔＾2〕☆ミラクル
+  title_kana: リトルリトルミラクル
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: リトル2ミラクル
+  title_kana_segmented: リトル リトル ミラクル
+- key: qid:Q11678160|name:恋愛1年生
+  title: 恋愛1年生
+  title_kana: レンアイイチネンセイ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: レンアイ1ネンセイ
+  title_kana_segmented: レンアイ イチネンセイ
+- key: qid:Q4700602|name:恋愛内科25時
+  title: 恋愛内科25時
+  title_kana: レンアイナイカニジュウゴジ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: レンアイナイカ25ジ
+  title_kana_segmented: レンアイ ナイカ ニジュウゴジ
+- key: qid:Q841889|name:ラバーズ7
+  title: ラバーズ7
+  title_kana: ラバーズセブン
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ラバーズ7
+  title_kana_segmented: ラバーズ セブン
+- key: qid:Q441692|name:ルートヴィヒⅡ世
+  title: ルートヴィヒⅡ世
+  title_kana: ルートヴィヒニセイ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ルートヴィヒ2セイ
+  title_kana_segmented: ルートヴィヒ ニセイ
+- key: name:「麻雀放浪記2020」製作委員会|name:麻雀放浪記2020
+  title: 麻雀放浪記2020
+  title_kana: マージャンホウロウキニセンニジュウ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: マージャンホウロウキ2020
+  title_kana_segmented: マージャン ホウロウキ ニセンニジュウ
+- key: qid:Q56349534|name:幻の9階
+  title: 幻の9階
+  title_kana: マボロシノキユウカイ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: マボロシノ9カイ
+- key: qid:Q11669404|name:マクロスダイナマイト7
+  title: マクロスダイナマイト7
+  title_kana: マクロスダイナマイトシチミレーヌビート
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: マクロスダイナマイト7ミレーヌビート
+  title_kana_segmented: マクロス ダイナマイト シチ ミレーヌ ビート
+- key: qid:Q967455|name:マッド・ブル2000
+  title: マッド・ブル2000
+  title_kana: マッドブルニセン
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: マッドブル2000
+  title_kana_segmented: マッド ブル ニセン
+- key: qid:Q11266902|name:魔法少女なら1105号室にいます。
+  title: 魔法少女なら1105号室にいます。
+  title_kana: マホウショウジョナライチイチゼロゴウシツニイマス
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: マホウショウジョナラ1105ゴウシツニイマス
+  title_kana_segmented: マホウ ショウジョ ナラ イチイチゼロゴウシツ ニ イマス
+- key: qid:Q3785783|name:魔法陣グルグル2
+  title: 魔法陣グルグル2
+  title_kana: マホウジングルグルニ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: マホウジングルグル2
+  title_kana_segmented: マホウジン グルグル ニ
+- key: name:KURONEKO|name:マジキュー4コマ ひぐらしのなく頃に
+  title: マジキュー4コマ ひぐらしのなく頃に
+  title_kana: マジキューヨンコマヒグラシノナクコロニ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: マジキュー4コマヒグラシノナクコロニ
+  title_kana_segmented: マジキュー ヨンコマ ヒグラシ ノ ナク コロ ニ
+- key: name:あづま笙子|name:マジキュー4コマ ひぐらしのなく頃に
+  title: マジキュー4コマ ひぐらしのなく頃に
+  title_kana: マジキューヨンコマヒグラシノナクコロニ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: マジキュー4コマヒグラシノナクコロニ
+  title_kana_segmented: マジキュー ヨンコマ ヒグラシ ノ ナク コロ ニ
+- key: qid:Q11265328|name:マジキュー4コマ ひぐらしのなく頃に
+  title: マジキュー4コマ ひぐらしのなく頃に
+  title_kana: マジキューヨンコマヒグラシノナクコロニ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: マジキュー4コマヒグラシノナクコロニ
+  title_kana_segmented: マジキュー ヨンコマ ヒグラシ ノ ナク コロ ニ
+- key: name:焼鮭|name:マジキュー4コマ ひぐらしのなく頃に
+  title: マジキュー4コマ ひぐらしのなく頃に
+  title_kana: マジキューヨンコマヒグラシノナクコロニ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: マジキュー4コマヒグラシノナクコロニ
+  title_kana_segmented: マジキュー ヨンコマ ヒグラシ ノ ナク コロ ニ
+- key: name:DATE|name:マジキュー4コマ ひぐらしのなく頃に
+  title: マジキュー4コマ ひぐらしのなく頃に
+  title_kana: マジキューヨンコマヒグラシノナクコロニ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: マジキュー4コマヒグラシノナクコロニ
+  title_kana_segmented: マジキュー ヨンコマ ヒグラシ ノ ナク コロ ニ
+- key: name:日本一ソフトウェア|name:魔界戦記ディスガイア3
+  title: 魔界戦記ディスガイア3
+  title_kana: マカイセンキディスガイアサン
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: マカイセンキディスガイア3
+  title_kana_segmented: マカイ センキ ディスガイア サン
+- key: qid:Q11575654|name:マニアックス21
+  title: マニアックス21
+  title_kana: マニアックスニジュウイチ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: マニアックス21
+  title_kana_segmented: マニアックス ニジュウイチ
+- key: name:大慈|name:万年2位だからと勘当された少年、無自覚に無双する
+  title: 万年2位だからと勘当された少年、無自覚に無双する
+  title_kana: マンネンニイダカラトカンドウサレタショウネン、ムジカクニムソウスル
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: マンネン2イダカラトカンドウサレタショウネン、ムジカクニムソウスル
+- key: name:たかぎなおこ|name:マラソン1年生
+  title: マラソン1年生
+  title_kana: マラソンイチネンセイ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: マラソン1ネンセイ
+  title_kana_segmented: マラソン イチネンセイ
+- key: name:空地大乃|name:魔力0で最強の大賢者|sub:それは魔法ではない、物理だ!
+  title: 魔力0で最強の大賢者
+  title_kana: マリョクゼロデサイキョウノダイケンジャソレハマホウデハナイブツリダ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: マリョク0デサイキョウノダイケンジャ
+- key: qid:Q11078068|name:メダロット2
+  title: メダロット2
+  title_kana: メダロットニ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: メダロット2
+  title_kana_segmented: メダロット ニ
+- key: qid:Q16264919|name:めぐる88
+  title: めぐる88
+  title_kana: メグルハチジュウハチ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: メグル88
+  title_kana_segmented: メグル ハチジュウハチ
+- key: qid:Q3076805|name:緑が丘3丁目
+  title: 緑が丘3丁目
+  title_kana: ミドリガオカサンチョウメ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ミドリガオカ3チョウメ
+  title_kana_segmented: ミドリガオカ サンチョウメ
+- key: qid:Q18817680|name:ミカコ72歳
+  title: ミカコ72歳
+  title_kana: ミカコナナジュウニサイ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ミカコ72サイ
+- key: qid:Q11479927|name:ミキストリ2
+  title: ミキストリ2
+  title_kana: ミキストリニ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ミキストリ2
+  title_kana_segmented: ミキストリ ニ
+- key: qid:Q17687364|name:みのりと100人のお嬢様
+  title: みのりと100人のお嬢様
+  title_kana: ミノリトヒャクニンノオジョウサマ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ミノリト100ニンノオジョウサマ
+  title_kana_segmented: ミノリ ト ヒャクニン ノ オジョウサマ
+- key: name:三月まうす|name:ミラクルチロル44キロ
+  title: ミラクルチロル44キロ
+  title_kana: ミラクルチロルシジュウヨンキロ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ミラクルチロル44キロ
+  title_kana_segmented: ミラクル チロル シジュウヨンキロ
+- key: qid:Q8193548|name:未来冒険チャンネル5
+  title: 未来冒険チャンネル5
+  title_kana: ミライボウケンチャンネルファイブ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ミライボウケンチャンネル5
+  title_kana_segmented: ミライ ボウケン チャンネル ファイブ
+- key: qid:Q618883|name:ミスター味っ子Ⅱ
+  title: ミスター味っ子Ⅱ
+  title_kana: ミスターアジッコツー
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ミスターアジッコ2
+  title_kana_segmented: ミスター アジッコ ツー
+- key: qid:Q618883|name:ミスター味っ子2
+  title: ミスター味っ子Ⅱ
+  title_kana: ミスターアジッコツー
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ミスターアジッコ2
+  title_kana_segmented: ミスター アジッコ ツー
+- key: qid:Q11521948|name:3つ星ラブデイズ
+  title: 3つ星ラブデイズ
+  title_kana: ミツボシラブデイズ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 3ツボシラブデイズ
+  title_kana_segmented: ミツボシ ラブ デイズ
+- key: name:富野由悠季|name:機動戦士ガンダム00
+  title: 機動戦士ガンダム00
+  title_kana: キドウセンシガンダムダブルオー
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: キドウセンシガンダム00
+  title_kana_segmented: キドウ センシ ガンダム ダブルオー
+- key: name:ガンダムエース|name:機動戦士ガンダム4コマ最前線
+  title: 機動戦士ガンダム4コマ最前線
+  title_kana: キドウセンシガンダムヨンコマフロントライン
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: キドウセンシガンダム4コマフロントライン
+  title_kana_segmented: キドウ センシ ガンダム ヨンコマ フロントライン
+- key: qid:Q1049526|name:機動戦士ガンダム2
+  title: 機動戦士ガンダム2
+  title_kana: キドウセンシガンダムニ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: キドウセンシガンダム2
+  title_kana_segmented: キドウ センシ ガンダム ニ
+- key: name:富野喜幸|name:機動戦士ガンダムⅢめぐりあい宇宙編
+  title: 機動戦士ガンダムⅢめぐりあい宇宙編
+  title_kana: キドウセンシガンダムパートスリー
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: キドウセンシガンダム3
+  title_kana_segmented: キドウ センシ ガンダム パート スリー
+- key: qid:Q1049526|name:機動戦士ガンダム3
+  title: 機動戦士ガンダム3
+  title_kana: キドウセンシガンダムサン
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: キドウセンシガンダム3
+  title_kana_segmented: キドウ センシ ガンダム サン
+- key: name:矢立肇|name:機動戦士ガンダムハイブリッド4コマ大戦線
+  title: 機動戦士ガンダムハイブリッド4コマ大戦線
+  title_kana: キドウセンシガンダムハイブリッドヨンコマダイセンセン
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: キドウセンシガンダムハイブリッド4コマダイセンセン
+  title_kana_segmented: キドウセンシガンダム ハイブリッドヨンコマダイセンセン
+- key: name:富野喜幸|name:機動戦士ガンダムⅡ哀戦士編
+  title: 機動戦士ガンダムⅡ哀戦士編
+  title_kana: キドウセンシガンダムパートツー
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: キドウセンシガンダム2
+  title_kana_segmented: キドウ センシ ガンダム パート ツー
+- key: qid:Q11461881|name:もち・ぽちいつも二人で
+  title: もち・ぽちいつも二人で
+  title_kana: モチポチイツモフタリデ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: モチポチイツモ2リデ
+  title_kana_segmented: モチ ポチ イツモ フタリ デ
+- key: name:青柳俊|name:もがけ!100万馬力
+  title: もがけ!100万馬力
+  title_kana: モガケヒャクマンバリキ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: モガケ100マンバリキ
+  title_kana_segmented: モガケ ヒャクマン バリキ
+- key: name:白鳥ハト|name:モンスターファーム 4コママンガ劇場
+  title: モンスターファーム 4コママンガ劇場
+  title_kana: モンスターファームヨンコママンガゲキジョウ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: モンスターファーム4コママンガゲキジョウ
+  title_kana_segmented: モンスター ファーム ヨンコマ マンガ ゲキジョウ
+- key: name:エニックス出版局|name:モンスターファーム 4コママンガ劇場
+  title: モンスターファーム 4コママンガ劇場
+  title_kana: モンスターファームヨンコママンガゲキジョウ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: モンスターファーム4コママンガゲキジョウ
+  title_kana_segmented: モンスター ファーム ヨンコマ マンガ ゲキジョウ
+- key: name:関根光太郎|name:モスクワ2160
+  title: モスクワ2160
+  title_kana: モスクワニイチロクゼロ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: モスクワ2160
+- key: name:蝸牛くも|name:モスクワ2160
+  title: モスクワ2160
+  title_kana: モスクワニイチロクゼロ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: モスクワ2160
+- key: qid:Q11520731|name:本秀康の描く4ページ
+  title: 本秀康の描く4ページ
+  title_kana: モトヒデヤスノエガクヨンページ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: モトヒデヤスノエガク4ページ
+  title_kana_segmented: モト ヒデヤス ノ エガク ヨンページ
+- key: qid:Q17230032|name:もっとも淫靡で残酷な6人の姫君
+  title: もっとも淫靡で残酷な6人の姫君
+  title_kana: モットモインビデザンコクナロクニンノヒメギミ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: モットモインビデザンコクナ6ニンノヒメギミ
+  title_kana_segmented: モットモ インビ デ ザンコクナ ロクニン ノ ヒメギミ
+- key: qid:Q618978|name:もうひとつの9月
+  title: もうひとつの9月
+  title_kana: モウヒトツノクガツ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: モウヒトツノ9ガツ
+  title_kana_segmented: モウ ヒトツ ノ クガツ
+- key: qid:Q11462946|name:妄想トラッカー8823
+  title: 妄想トラッカー8823
+  title_kana: モウソウトラッカーハヤブサ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: モウソウトラッカー8823
+  title_kana_segmented: モウソウ トラッカー ハヤブサ
+- key: qid:Q9019518|name:6つの箱の死体
+  title: 6つの箱の死体
+  title_kana: ムッツノハコノシタイ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 6ツノハコノシタイ
+  title_kana_segmented: ムッツ ノ ハコ ノ シタイ
+- key: qid:Q8050004|name:内線893
+  title: 内線893
+  title_kana: ナイセンハチキユウサン
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ナイセン893
+  title_kana_segmented: ナイセン ハチキユウサン
+- key: qid:Q11412836|name:涙100万粒の泣けちゃう恋
+  title: 涙100万粒の泣けちゃう恋
+  title_kana: ナミダヒャクマンツブノナケチャウコイ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ナミダ100マンツブノナケチャウコイ
+  title_kana_segmented: ナミダ ヒャクマンツブ ノ ナケチャウ コイ
+- key: qid:Q3566599|name:涙100万粒のリアル・ライフ
+  title: 涙100万粒のリアル・ライフ
+  title_kana: ナミダヒャクマンツブノリアルライフ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ナミダ100マンツブノリアルライフ
+  title_kana_segmented: ナミダ ヒャクマンツブ ノ リアル ライフ
+- key: name:川内康範|name:七色仮面
+  title: 七色仮面
+  title_kana: ナナイロカメン
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 7イロカメン
+  title_kana_segmented: ナナイロ カメン
+- key: name:一二三もげぞう|name:那波18歳♂ママになりました
+  title: 那波18歳♂ママになりました
+  title_kana: ナナミジュウハッサイママニナリマシタ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ナナミ18サイママニナリマシタ
+  title_kana_segmented: ナナミ ジュウハッサイ ママ ニ ナリマシタ
+- key: name:あぬ|name:なんで生きてるかわからない人和泉澄25歳
+  title: なんで生きてるかわからない人和泉澄25歳
+  title_kana: ナンデイキテルカワカラナイヒトイズミスミニジュウゴサイイチ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ナンデイキテルカワカラナイヒトイズミスミ25サイ
+- key: qid:Q965600|name:南極28号
+  title: 南極28号
+  title_kana: ナンキョクニジュウハチゴウ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ナンキョク28ゴウ
+  title_kana_segmented: ナンキョク ニジュウハチゴウ
+- key: qid:Q17220983|name:夏休みを666倍楽しむ方法
+  title: 夏休みを666倍楽しむ方法
+  title_kana: ナツヤスミオロッピャクロクジュウロクバイタノシムホウホウ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ナツヤスミオ666バイタノシムホウホウ
+  title_kana_segmented: ナツヤスミ オ ロッピャク ロクジュウロクバイ タノシム ホウホウ
+- key: qid:Q11584832|name:猫の101の愛し方
+  title: 猫の101の愛し方
+  title_kana: ネコノヒヤクイチノアイシカタ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ネコノ101ノアイシカタ
+- key: qid:Q17226828|name:日本史人物55人のひみつ
+  title: 日本史人物55人のひみつ
+  title_kana: ニホンシジンブツゴジュウゴニンノヒミツ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ニホンシジンブツ55ニンノヒミツ
+  title_kana_segmented: ニホンシ ジンブツ ゴジュウゴニン ノ ヒミツ
+- key: qid:Q11532508|name:野村24時
+  title: 野村24時
+  title_kana: ノムラニジュウヨジ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ノムラ24ジ
+  title_kana_segmented: ノムラ ニジュウヨジ
+- key: qid:Q6918002|name:ノルマンディー1944
+  title: ノルマンディー1944
+  title_kana: ノルマンディーセンキュウヒャクシジュウシ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ノルマンディー1944
+  title_kana_segmented: ノルマンディー センキュウヒャク シジュウシ
+- key: name:ナイダウル内田|name:おじゃる丸 4コマンガ劇場
+  title: おじゃる丸 4コマンガ劇場
+  title_kana: オジャルマルヨンコママンガゲキジョウ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: オジャルマル4コママンガゲキジョウ
+  title_kana_segmented: オジャルマル ヨンコマ マンガ ゲキジョウ
+- key: qid:Q11624264|name:王子さまlv2 the comic
+  title: 王子さまlv2 the comic
+  title_kana: オウジサマレベルツーザコミック
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: オウジサマレベル2ザコミック
+  title_kana_segmented: オウジサマ レベル ツー ザ コミック
+- key: qid:Q11455707|name:思いっきりキレイになる7つの方法
+  title: 思いっきりキレイになる7つの方法
+  title_kana: オモイッキリキレイニナルナナツノホウホウ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: オモイッキリキレイニナル7ツノホウホウ
+  title_kana_segmented: オモイッキリ キレイ ニ ナル ナナツ ノ ホウホウ
+- key: qid:Q11153241|name:思いっきりキレイになる8つの方法
+  title: 思いっきりキレイになる8つの方法
+  title_kana: オモイッキリキレイニナルヤッツノホウホウ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: オモイッキリキレイニナル8ツノホウホウ
+  title_kana_segmented: オモイッキリ キレイ ニ ナル ヤッツ ノ ホウホウ
+- key: qid:Q11573419|name:おむかえまで8時間
+  title: おむかえまで8時間
+  title_kana: オムカエマデハチジカン
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: オムカエマデ8ジカン
+  title_kana_segmented: オムカエ マデ ハチジカン
+- key: name:裕時悠示|name:俺の彼女と幼なじみが修羅場すぎる4コマ
+  title: 俺の彼女と幼なじみが修羅場すぎる4コマ
+  title_kana: オレノカノジョトオサナナジミガシュラバスギルヨンコマ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: オレノカノジョトオサナナジミガシュラバスギル4コマ
+  title_kana_segmented: オレ ノ カノジョ ト オサナナジミ ガ シュラバスギル ヨンコマ
+- key: qid:Q3136470|name:大阪100円生活
+  title: 大阪100円生活
+  title_kana: オオサカヒャクエンセイカツ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: オオサカ100エンセイカツ
+  title_kana_segmented: オオサカ ヒャクエン セイカツ
+- key: qid:Q5367352|name:おってけ!3ハロン
+  title: おってけ!3ハロン
+  title_kana: オッテケサンハロン
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: オッテケ3ハロン
+  title_kana_segmented: オッテケ サンハロン
+- key: qid:Q11405623|name:王子を1匹飼っています。
+  title: 王子を1匹飼っています。
+  title_kana: オウジオイッピキカッテイマス
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: オウジオ1ピキカッテイマス
+  title_kana_segmented: オウジ オ イッピキ カッテイマス
+- key: qid:Q11382917|name:奥州平泉藤原4代
+  title: 奥州平泉藤原4代
+  title_kana: オウシュウヒライズミフジワラヨンダイユメノアリカキヨヒラヘン
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: オウシュウヒライズミフジワラ4ダイ
+  title_kana_segmented: オウシュウ ヒライズミ フジワラ ヨンダイ ユメ ノ アリカ キヨヒラヘン
+- key: qid:Q3019586|name:パターンその1 駄目人間
+  title: パターンその1 駄目人間
+  title_kana: パターンソノイチダメニンゲン
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: パターンソノ1ダメニンゲン
+  title_kana_segmented: パターン ソノ イチ ダメ ニンゲン
+- key: qid:Q11359703|name:ペルソナ2罰
+  title: ペルソナ2罰
+  title_kana: ペルソナニバツ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ペルソナ2バツ
+  title_kana_segmented: ペルソナ ニ バツ
+- key: name:エニックス出版局|name:ペルソナ2罰　4コママンガ劇場
+  title: ペルソナ2罰　4コママンガ劇場
+  title_kana: ペルソナニバツヨンコママンガゲキジョウ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ペルソナ2バツ4コママンガゲキジョウ
+  title_kana_segmented: ペルソナ ニ バツ ヨンコマ マンガ ゲキジョウ
+- key: qid:Q11359703|name:ペルソナ2罪
+  title: ペルソナ2罪
+  title_kana: ペルソナニツミ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ペルソナ2ツミ
+  title_kana_segmented: ペルソナ ニ ツミ
+- key: name:エニックス出版局|name:ペルソナ2罪　4コママンガ劇場
+  title: ペルソナ2罪　4コママンガ劇場
+  title_kana: ペルソナニツミヨンコママンガゲキジョウ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ペルソナ2ツミ4コママンガゲキジョウ
+  title_kana_segmented: ペルソナ ニ ツミ ヨンコマ マンガ ゲキジョウ
+- key: qid:Q11572365|name:ポケモン全キャラ2コマまんが全集
+  title: ポケモン全キャラ2コマまんが全集
+  title_kana: ポケモンゼンキャラフタコママンガゼンシュウ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ポケモンゼンキャラ2コママンガゼンシュウ
+  title_kana_segmented: ポケモン ゼンキャラ フタコマ マンガ ゼンシュウ
+- key: qid:Q11280480|name:ポケモン4コマ学園
+  title: ポケモン4コマ学園
+  title_kana: ポケモンヨンコマガクエン
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ポケモン4コマガクエン
+- key: qid:Q11477301|name:ポケモンルビー・サファイア2コマまんが全集
+  title: ポケモンルビー・サファイア2コマまんが全集
+  title_kana: ポケモンルビーサファイアフタコママンガゼンシュウ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ポケモンルビーサファイア2コママンガゼンシュウ
+  title_kana_segmented: ポケモン ルビー サファイア フタコマ マンガ ゼンシュウ
+- key: qid:Q11273356|name:ポンコツ19
+  title: ポンコツ19
+  title_kana: ポンコツナインテイーン
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ポンコツ19
+- key: name:サイコパス製作委員会|name:PSYCHO-PASS 2
+  title: PSYCHO-PASS 2
+  title_kana: サイコパスニ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: サイコパス2
+  title_kana_segmented: サイコ パス ニ
+- key: name:Kojino|name:ぷりぞな6
+  title: ぷりぞな6
+  title_kana: プリゾナシックス
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: プリゾナ6
+  title_kana_segmented: プリゾナ シックス
+- key: qid:Q11497672|name:プロ野球日本シリーズ9番勝負!!
+  title: プロ野球日本シリーズ9番勝負!!
+  title_kana: プロヤキュウニホンシリーズクバンショウブ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: プロヤキュウニホンシリーズ9バンショウブ
+  title_kana_segmented: プロ ヤキュウ ニホン シリーズ クバン ショウブ
+- key: name:佐木飛朗斗|name:R-16
+  title: R-16
+  title_kana: アールジュウロク
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: アール16
+  title_kana_segmented: アール ジュウロク
+- key: qid:Q11488595|name:ラブ2ポーション
+  title: ラブ2ポーション
+  title_kana: ラブラブポーション
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ラブ2ポーション
+  title_kana_segmented: ラブラブ ポーション
+- key: qid:Q11523385|name:ラブアタック5対1
+  title: ラブアタック5対1
+  title_kana: ラブアタックゴタイイチ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ラブアタック5タイ1
+  title_kana_segmented: ラブ アタック ゴ タイ イチ
+- key: qid:Q6388734|name:ラブコメ彼氏と18禁彼女
+  title: ラブコメ彼氏と18禁彼女
+  title_kana: ラブコメカレシトジュウハチキンカノジョ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ラブコメカレシト18キンカノジョ
+  title_kana_segmented: ラブコメ カレシ ト ジュウハチキン カノジョ
+- key: name:高橋構造|name:麗奈と9人の男たち
+  title: 麗奈と9人の男たち
+  title_kana: レイナトキュウニンノオトコタチイチ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: レイナト9ニンノオトコタチ
+  title_kana_segmented: レイナトキュウニンノオトコタチ イチ
+- key: name:jaguchi|name:リモート授業になったらクラス1の美少女と同居することになった
+  title: リモート授業になったらクラス1の美少女と同居することになった
+  title_kana: リモートジュギョウニナッタラクラスイチノビショウジョトドウキョスルコトニナッタ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: リモートジュギョウニナッタラクラス1ノビショウジョトドウキョスルコトニナッタ
+- key: qid:Q11544888|name:レストアガレージ251
+  title: レストアガレージ251
+  title_kana: レストアガレージニコイチ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: レストアガレージ251
+  title_kana_segmented: レストア ガレージ ニコイチ
+- key: qid:Q3472646|name:隣人13号
+  title: 隣人13号
+  title_kana: リンジンジユウサンゴウ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: リンジン13ゴウ
+- key: name:コンドウアキ|name:リラックマ4クママンガ
+  title: リラックマ4クママンガ
+  title_kana: リラックマヨンクママンガ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: リラックマ4クママンガ
+  title_kana_segmented: リラックマ ヨンクマ マンガ
+- key: name:緒々田みの虫|name:りりあ01
+  title: りりあ01
+  title_kana: リリアゼロワン
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: リリア01
+  title_kana_segmented: リリア ゼロワン
+- key: name:ともながあきひろ|name:ロックマン4コマ大行進
+  title: ロックマン4コマ大行進
+  title_kana: ロックマンヨンコマダイコウシン
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ロックマン4コマダイコウシン
+  title_kana_segmented: ロックマン ヨンコマ ダイコウシン
+- key: qid:Q11516671|name:ロックマン4コマ大行進
+  title: ロックマン4コマ大行進
+  title_kana: ロックマンヨンコマダイコウシン
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ロックマン4コマダイコウシン
+  title_kana_segmented: ロックマン ヨンコマ ダイコウシン
+- key: qid:Q11395646|name:ロックマン8
+  title: ロックマン8
+  title_kana: ロックマンエイト
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ロックマン8
+  title_kana_segmented: ロックマン エイト
+- key: name:カプコン|name:ロックマン8
+  title: ロックマン8
+  title_kana: ロックマンエイト
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ロックマン8
+  title_kana_segmented: ロックマン エイト
+- key: name:フェアリーテール|name:ロマンスは剣の輝き2
+  title: ロマンスは剣の輝き2
+  title_kana: ロマンスワツルギノカガヤキニ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ロマンスワツルギノカガヤキ2
+  title_kana_segmented: ロマンス ワ ツルギ ノ カガヤキ ニ
+- key: qid:Q3136470|name:ロスタイム17分
+  title: ロスタイム17分
+  title_kana: ロスタイムジュウナナフン
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ロスタイム17フン
+  title_kana_segmented: ロス タイム ジュウナナフン
+- key: qid:Q3573275|name:労働2号
+  title: 労働2号
+  title_kana: ロウドウニゴウ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ロウドウ2ゴウ
+  title_kana_segmented: ロウドウ ニゴウ
+- key: qid:Q11518743|name:〔√3〕
+  title: 〔√3〕
+  title_kana: ルートサン
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ルート3
+  title_kana_segmented: ルート サン
+- key: qid:Q11442949|name:龍虎の拳2
+  title: 龍虎の拳2
+  title_kana: リュウコノケンニ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: リュウコノケン2
+  title_kana_segmented: リュウコ ノ ケン ニ
+- key: name:瘤久保慎司|name:錆喰いビスコ2
+  title: 錆喰いビスコ2
+  title_kana: サビクイビスコツー
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: サビクイビスコ2
+- key: qid:Q17209194|name:裁判長!ぼくの弟懲役4年でどうすか
+  title: 裁判長!ぼくの弟懲役4年でどうすか
+  title_kana: サイバンチョウボクノオトウトチョウエキヨネンデドウスカ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: サイバンチョウボクノオトウトチョウエキ4ネンデドウスカ
+  title_kana_segmented: サイバンチョウ ボク ノ オトウト チョウエキ ヨネン デ ドウスカ
+- key: name:北尾トロ|name:裁判長!ここは懲役4年でどうすか
+  title: 裁判長!ここは懲役4年でどうすか
+  title_kana: サイバンチョウココワチョウエキヨネンデドウスカ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: サイバンチョウココワチョウエキ4ネンデドウスカ
+  title_kana_segmented: サイバンチョウ ココ ワ チョウエキ ヨネン デ ドウスカ
+- key: qid:Q11462404|name:最高の結婚500
+  title: 最高の結婚500
+  title_kana: サイコウノケッコンゴヒャク
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: サイコウノケッコン500
+  title_kana_segmented: サイコウ ノ ケッコン ゴヒャク
+- key: qid:Q11553037|name:最高の結婚600
+  title: 最高の結婚600
+  title_kana: サイコウノケッコンロッピャク
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: サイコウノケッコン600
+  title_kana_segmented: サイコウ ノ ケッコン ロッピャク
+- key: qid:Q3076805|name:サカタ荘221号室
+  title: サカタ荘221号室
+  title_kana: サカタソウニヒャクニジュウイチゴウシツ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: サカタソウ221ゴウシツ
+  title_kana_segmented: サカタソウ ニヒャク ニジュウイチゴウシツ
+- key: qid:Q11518236|name:咲とファイナルファンタジーⅩⅣ
+  title: 咲とファイナルファンタジーⅩⅣ
+  title_kana: サキトファイナルファンタジーフォーティーン
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: サキトファイナルファンタジー14
+- key: qid:Q5399979|name:作品ナンバー20
+  title: 作品ナンバー20
+  title_kana: サクヒンナンバーニジュウ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: サクヒンナンバー20
+  title_kana_segmented: サクヒン ナンバー ニジュウ
+- key: qid:Q11270956|name:桜2号
+  title: 桜2号
+  title_kana: サクラニゴウ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: サクラ2ゴウ
+  title_kana_segmented: サクラ ニゴウ
+- key: name:桜小路むつみ|name:サムライガール21
+  title: サムライガール21
+  title_kana: サムライガールニジュウイチ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: サムライガール21
+  title_kana_segmented: サムライ ガール ニジュウイチ
+- key: qid:Q11522650|name:サユリ1号
+  title: サユリ1号
+  title_kana: サユリイチゴウ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: サユリ1ゴウ
+  title_kana_segmented: サユリ イチゴウ
+- key: qid:Q890174|name:青年14歳
+  title: 青年14歳
+  title_kana: セイネンジュウヨンサイ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: セイネン14サイ
+  title_kana_segmented: セイネン ジュウヨンサイ
+- key: name:石原理|name:セルナンバー8
+  title: セルナンバー8
+  title_kana: セルナンバーエイト
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: セルナンバー8
+  title_kana_segmented: セル ナンバー エイト
+- key: qid:Q11242326|name:私立極道高校2011
+  title: 私立極道高校2011
+  title_kana: シリツキワメミチコウコウニセンジュウイチ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: シリツキワメミチコウコウ2011
+  title_kana_segmented: シリツ キワメミチ コウコウ ニセン ジュウイチ
+- key: qid:Q11527904|name:ショージ君不滅の100名作
+  title: ショージ君不滅の100名作
+  title_kana: ショージクンフメツノヒャクメイサク
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ショージクンフメツノ100メイサク
+  title_kana_segmented: ショージクン フメツ ノ ヒャク メイサク
+- key: name:La'cryma|name:空を飛ぶ、3つの方法。
+  title: 空を飛ぶ、3つの方法。
+  title_kana: ソラオトブミッツノホウホウ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ソラオトブ3ツノホウホウ
+  title_kana_segmented: ソラ オ トブ ミッツ ノ ホウホウ
+- key: qid:Q11553037|name:それぞれの40
+  title: それぞれの40
+  title_kana: ソレゾレノフォーティー
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ソレゾレノ40
+  title_kana_segmented: ソレゾレ ノ フォーティー
+- key: name:説話社|name:卒業までの1000日
+  title: 卒業までの1000日
+  title_kana: ソツギョウマデノイッセンニチ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ソツギョウマデノ1000ニチ
+  title_kana_segmented: ソツギョウ マデノ イッセンニチ
+- key: qid:Q11497486|name:卒業までの1000日
+  title: 卒業までの1000日
+  title_kana: ソツギョウマデノイッセンニチ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ソツギョウマデノ1000ニチ
+  title_kana_segmented: ソツギョウ マデノ イッセンニチ
+- key: name:川島健三（水野プロ）|name:宗志郎100万$ハート
+  title: 宗志郎100万$ハート
+  title_kana: ソウシロウヒヤクマンドルハート
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ソウシロウ100マンドルハート
+- key: qid:Q7385253|name:スターダスト3年め
+  title: スターダスト3年め
+  title_kana: スターダストサンネンメ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: スターダスト3ネンメ
+  title_kana_segmented: スターダスト サンネンメ
+- key: name:エニックス出版局|name:スターオーシャン セカンドストーリー 4コママンガ劇場
+  title: スターオーシャン セカンドストーリー 4コママンガ劇場
+  title_kana: スターオーシャンセカンドストーリーヨンコママンガゲキジョウ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: スターオーシャンセカンドストーリー4コママンガゲキジョウ
+  title_kana_segmented: スター オーシャン セカンド ストーリー ヨンコマ マンガ ゲキジョウ
+- key: name:G.G.C.|name:ストリートファイターⅡ 4コマまんが王国
+  title: ストリートファイターⅡ 4コマまんが王国
+  title_kana: ストリートファイターツーヨンコママンガオウコク
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ストリートファイターツー4コママンガオウコク
+  title_kana_segmented: ストリート ファイター ツー ヨンコマ マンガ オウコク
+- key: qid:Q11598910|name:STUDIO FIVE
+  title: STUDIO FIVE
+  title_kana: ステューディオファイブ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ステューディオ5
+  title_kana_segmented: ステューディオ ファイブ
+- key: qid:Q11352894|name:末広町35番地
+  title: 末広町35番地
+  title_kana: スエヒロチョウサンジュウゴバンチ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: スエヒロチョウ35バンチ
+  title_kana_segmented: スエヒロチョウ サンジュウゴバンチ
+- key: qid:Q11558002|name:好きの100万倍
+  title: 好きの100万倍
+  title_kana: スキノヒャクマンバイ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: スキノ100マンバイ
+  title_kana_segmented: スキ ノ ヒャクマンバイ
+- key: qid:Q11584832|name:「好き!」を100万回
+  title: 「好き!」を100万回
+  title_kana: スキオヒヤクマンカイ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: スキオ100マンカイ
+- key: qid:Q7678088|name:スミレ❤16歳!!
+  title: スミレ❤16歳!!
+  title_kana: スミレジュウロクサイ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: スミレ16サイ
+  title_kana_segmented: スミレ ジュウロクサイ
+- key: qid:Q7678088|name:スミレ❤17歳!!
+  title: スミレ❤17歳!!
+  title_kana: スミレジユウナナサイ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: スミレ17サイ
+- key: qid:Q1155646|name:スーパー0くん
+  title: スーパー0くん
+  title_kana: スーパーゼロクン
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: スーパー0クン
+- key: qid:Q9049328|name:突撃め!第二少年工科学校
+  title: 突撃め!第二少年工科学校
+  title_kana: ススメダイニショウネンコウカガッコウ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ススメダイ2ショウネンコウカガッコウ
+  title_kana_segmented: ススメ ダイニ ショウネン コウカ ガッコウ
+- key: qid:Q43425398|name:スイート10
+  title: スイート10
+  title_kana: スイートテン
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: スイート10
+  title_kana_segmented: スイート テン
+- key: qid:Q6383691|name:太陽の下の17歳
+  title: 太陽の下の17歳
+  title_kana: タイヨウノシタノジユウナナサイ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: タイヨウノシタノ17サイ
+  title_kana_segmented: タイヨウ ノ シタ ノ ジユウナナサイ
+- key: name:エニックス|name:テイルズオブエターニア　4コママンガ劇場
+  title: テイルズオブエターニア　4コママンガ劇場
+  title_kana: テイルズオブエターニアヨンコママンガゲキジョウ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: テイルズオブエターニア4コママンガゲキジョウ
+  title_kana_segmented: テイルズ オブ エターニア ヨンコマ マンガ ゲキジョウ
+- key: qid:Q11230943|name:Tales of Destiny2
+  title: Tales of Destiny2
+  title_kana: テイルズオブデスティニーニ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: テイルズオブデスティニー2
+  title_kana_segmented: テイルズ オブ デスティニー ニ
+- key: name:我孫子武丸|name:探偵になるための893の方法
+  title: 探偵になるための893の方法
+  title_kana: タンテイニナルタメノハッピャククジュウサンノホウホウ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: タンテイニナルタメノ893ノホウホウ
+  title_kana_segmented: タンテイ ニ ナル タメノ ハッピャク クジュウサン ノ ホウホウ
+- key: name:新徳丸|name:探偵ボーズ21休さん
+  title: 探偵ボーズ21休さん
+  title_kana: タンテイボーズニジュウイッキュウサン
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: タンテイボーズ21キュウサン
+  title_kana_segmented: タンテイ ボーズ ニジュウイッキュウサン
+- key: name:ブシロード|name:探偵オペラミルキィホームズ2
+  title: 探偵オペラミルキィホームズ2
+  title_kana: タンテイオペラミルキィホームズニ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: タンテイオペラミルキィホームズ2
+  title_kana_segmented: タンテイ オペラ ミルキィ ホームズ ニ
+- key: qid:Q438368|name:黄昏のニキータちゃん2010
+  title: 黄昏のニキータちゃん2010
+  title_kana: タソガレノニキータチャンニセンジュウ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: タソガレノニキータチャン2010
+  title_kana_segmented: タソガレ ノ ニキータチャン ニセン ジュウ
+- key: qid:Q9146730|name:天使1/2方程式
+  title: 天使1/2方程式
+  title_kana: テンシニブンノイチホウテイシキ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: テンシ2ブンノ1ホウテイシキ
+  title_kana_segmented: テンシ ニブンノイチ ホウテイシキ
+- key: name:平島良一|name:天使1/2方程式
+  title: 天使1/2方程式
+  title_kana: テンシニブンノイチホウテイシキ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: テンシ2ブンノ1ホウテイシキ
+  title_kana_segmented: テンシ ニブンノイチ ホウテイシキ
+- key: name:鈴木一誌|name:鉄人28号
+  title: 鉄人28号
+  title_kana: テツジンニジュウハチゴウゲンサクカンゼンバン
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: テツジン28ゴウ
+  title_kana_segmented: テツジン ニジュウハチゴウ ゲンサク カンゼンバン
+- key: qid:Q471133|name:鉄人28号
+  title: 鉄人28号
+  title_kana: テツジンニジュウハチゴウゲンサクカンゼンバン
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: テツジン28ゴウ
+  title_kana_segmented: テツジン ニジュウハチゴウ ゲンサク カンゼンバン
+- key: qid:Q7446734|name:鉄娘な3姉妹
+  title: 鉄娘な3姉妹
+  title_kana: テツコナサンシマイ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: テツコナ3シマイ
+  title_kana_segmented: テツコナ サンシマイ
+- key: qid:Q6666477|name:特選三丁目の夕日・12か月
+  title: 特選三丁目の夕日・12か月
+  title_kana: トクセンサンチョウメノユウヒジュウニカゲツ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: トクセンサンチョウメノユウヒ12カゲツ
+  title_kana_segmented: トクセン サンチョウメ ノ ユウヒ ジュウニカゲツ
+- key: qid:Q11624618|name:東京直下震度7!!
+  title: 東京直下震度7!!
+  title_kana: トウキョウチョッカシンドシチメトロサヴァイブ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: トウキョウチョッカシンド7
+  title_kana_segmented: トウキョウ チョッカ シンド シチ メトロ サヴァイブ
+- key: qid:Q11543907|name:東京熱血110番|sub:金メダル警官塊太
+  title: 東京熱血110番
+  title_kana: トウキョウネッケツヒャクトウバンキンメダルケイカンカイタ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: トウキョウネッケツ110バン
+  title_kana_segmented: トウキョウ ネッケツ ヒャクトウバン キンメダル ケイカン カイタ
+- key: qid:Q11543907|name:東京熱血110番
+  title: 東京熱血110番
+  title_kana: トウキョウネッケツヒャクトウバンキンメダルケイカンカイタ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: トウキョウネッケツ110バン
+  title_kana_segmented: トウキョウ ネッケツ ヒャクトウバン キンメダル ケイカン カイタ
+- key: qid:Q3472646|name:TOKYO TRIBE 2
+  title: Tokyo tribe 2
+  title_kana: トーキョートライブツー
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: トーキョートライブ2
+  title_kana_segmented: トーキョー トライブ ツー
+- key: qid:Q3472646|name:TOKYO TRIBE2
+  title: Tokyo tribe 2
+  title_kana: トーキョートライブツー
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: トーキョートライブ2
+  title_kana_segmented: トーキョー トライブ ツー
+- key: qid:Q3472646|name:Tokyo tribe 2
+  title: Tokyo tribe 2
+  title_kana: トーキョートライブツー
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: トーキョートライブ2
+  title_kana_segmented: トーキョー トライブ ツー
+- key: qid:Q5359621|name:友達100人できるかな
+  title: 友達100人できるかな
+  title_kana: トモダチヒャクニンデキルカナ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: トモダチ100ニンデキルカナ
+  title_kana_segmented: トモダチ ヒャクニン デキルカナ
+- key: qid:Q11460076|name:となりの801ちゃん
+  title: となりの801ちゃん
+  title_kana: トナリノヤオイチャン
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: トナリノ801チャン
+  title_kana_segmented: トナリ ノ ヤオイチャン
+- key: name:御薗橋801商店街振興組合|name:となりの801ちゃん+
+  title: となりの801ちゃん
+  title_kana: トナリノヤオイチャン
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: トナリノ801チャン
+  title_kana_segmented: トナリ ノ ヤオイチャン
+- key: qid:Q79017980|name:となりの801ちゃん
+  title: となりの801ちゃん
+  title_kana: トナリノヤオイチャン
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: トナリノ801チャン
+  title_kana_segmented: トナリ ノ ヤオイチャン
+- key: qid:Q11571912|name:都立水商!2
+  title: 都立水商!2
+  title_kana: トリツミズショウニ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: トリツミズショウ2
+  title_kana_segmented: トリツ ミズショウ ニ
+- key: qid:Q11522664|name:トルネコの大冒険2
+  title: トルネコの大冒険2
+  title_kana: トルネコノダイボウケンツーフシギノダンジョン
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: トルネコノダイボウケン2
+  title_kana_segmented: トルネコ ノ ダイボウケン ツー フシギノ ダンジョン
+- key: qid:Q11397149|name:闘破蛇烈伝DEI48
+  title: 闘破蛇烈伝DEI48
+  title_kana: トウハジャレツデンデイシジュウハチ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: トウハジャレツデンデイ48
+  title_kana_segmented: トウハジャ レツデン デイ シジュウハチ
+- key: qid:Q22130278|name:椿荘101号室
+  title: 椿荘101号室
+  title_kana: ツバキソウイチマルイチゴウシツ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ツバキソウ101ゴウシツ
+  title_kana_segmented: ツバキソウ イチマルイチゴウシツ
+- key: qid:Q11279968|name:ツイステ4コマ
+  title: ツイステ4コマ
+  title_kana: ツイステヨンコマバイモチ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ツイステ4コマ
+- key: qid:Q11550117|name:ツヨシしっかり²しなさい
+  title: ツヨシしっかり²しなさい
+  title_kana: ツヨシシッカリシッカリシナサイ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ツヨシシッカリ2シナサイ
+  title_kana_segmented: ツヨシ シッカリ シッカリシナサイ
+- key: name:綱本将也|name:U-31
+  title: U-31
+  title_kana: アンダーサンジュウイチ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: アンダー31
+  title_kana_segmented: アンダー サンジュウイチ
+- key: qid:Q9037315|name:ユーベルブラット Ⅱ
+  title: ユーベルブラットⅡ
+  title_kana: ユーベルブラットツーシセルオウノキシダン
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ユーベルブラット2
+  title_kana_segmented: ユーベルブラットツー シセルオウノキシダン
+- key: qid:Q9037315|name:ユーベルブラットⅡ
+  title: ユーベルブラットⅡ
+  title_kana: ユーベルブラットツーシセルオウノキシダン
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ユーベルブラット2
+  title_kana_segmented: ユーベルブラットツー シセルオウノキシダン
+- key: qid:Q11367095|name:宇宙戦艦ヤマト2199 緋眼のエース
+  title: 宇宙戦艦ヤマト2199 緋眼のエース
+  title_kana: ウチュウセンカンヤマトニイイチキュウキュウヒガンノエース
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ウチュウセンカンヤマト2199ヒガンノエース
+  title_kana_segmented: ウチュウ センカン ヤマト ニイイチキュウキュウ ヒガン ノ エース
+- key: name:G.G.C.|name:ウィザードリィ4コマまんが王国
+  title: ウィザードリィ4コマまんが王国
+  title_kana: ウィザードリィヨンコママンガオウコク
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ウィザードリィ4コママンガオウコク
+  title_kana_segmented: ウィザードリィ ヨンコマ マンガ オウコク
+- key: name:久山ちず|name:うっかり戦国4コマかいこ
+  title: うっかり戦国4コマかいこ
+  title_kana: ウッカリセンゴクヨンコマカイコ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ウッカリセンゴク4コマカイコ
+  title_kana_segmented: ウッカリ センゴク ヨンコマ カイコ
+- key: qid:Q11465597|name:ウルトラマン80宇宙大戦争
+  title: ウルトラマン80宇宙大戦争
+  title_kana: ウルトラマンハチジュウウチュウダイセンソウ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ウルトラマン80ウチュウダイセンソウ
+  title_kana_segmented: ウルトラマン ハチジュウ ウチュウ ダイセンソウ
+- key: name:李秀顯|name:アンバランス×2
+  title: アンバランス×2
+  title_kana: アンバランスカケルニ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: アンバランス2
+  title_kana_segmented: アンバランス カケル ニ
+- key: qid:Q17212545|name:うのはな3姉妹
+  title: うのはな3姉妹
+  title_kana: ウノハナサンシマイ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ウノハナ3シマイ
+  title_kana_segmented: ウノハナ サンシマイ
+- key: name:渡辺ともえ|name:うわさのピンクハウス806
+  title: うわさのピンクハウス806
+  title_kana: ウワサノピンクハウスハチマルロ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ウワサノピンクハウス806
+- key: name:エニックス出版局|name:ヴァルキリープロファイル 4コママンガ劇場
+  title: ヴァルキリープロファイル 4コママンガ劇場
+  title_kana: ヴァルキリープロファイルヨンコママンガゲキジョウ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ヴァルキリープロファイル4コママンガゲキジョウ
+  title_kana_segmented: ヴァルキリー プロファイル ヨンコマ マンガ ゲキジョウ
+- key: name:エニックス|name:ヴァルキリープロファイル 4コママンガ劇場
+  title: ヴァルキリープロファイル 4コママンガ劇場
+  title_kana: ヴァルキリープロファイルヨンコママンガゲキジョウ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ヴァルキリープロファイル4コママンガゲキジョウ
+  title_kana_segmented: ヴァルキリー プロファイル ヨンコマ マンガ ゲキジョウ
+- key: qid:Q6918002|name:ヴィットマン戦記1943
+  title: ヴィットマン戦記1943
+  title_kana: ヴィットマンセンキセンキュウヒャクシジュウサン
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ヴィットマンセンキ1943
+  title_kana_segmented: ヴィットマン センキ センキュウヒャク シジュウサン
+- key: qid:Q11517058|name:ワイルド7 R
+  title: ワイルド7 R
+  title_kana: ワイルドセブンリターンズ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ワイルド7リターンズ
+  title_kana_segmented: ワイルド セブン リターンズ
+- key: name:小松大幹|name:ウイニング・チケットⅡ
+  title: ウイニング・チケットⅡ
+  title_kana: ウイニングチケットニ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ウイニングチケット2
+  title_kana_segmented: ウイニング チケット ニ
+- key: qid:Q11280638|name:ウィッチクラフト109
+  title: ウィッチクラフト109
+  title_kana: ウィッチクラフトヒャクク
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ウィッチクラフト109
+  title_kana_segmented: ウィッチ クラフト ヒャク ク
+- key: name:渡航|name:やはり4コマでも俺の青春ラブコメはまちがっている。
+  title: やはり4コマでも俺の青春ラブコメはまちがっている。
+  title_kana: ヤハリヨンコマデモオレノセイシュンラブコメワマチガッテイル
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ヤハリ4コマデモオレノセイシュンラブコメワマチガッテイル
+  title_kana_segmented: ヤハリ ヨンコマ デモ オレ ノ セイシュン ラブコメ ワ マチガッテイル
+- key: qid:Q9188012|name:やじきた学園道中記Ⅱ
+  title: やじきた学園道中記Ⅱ
+  title_kana: ヤジキタガクエンドウチュウキニ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ヤジキタガクエンドウチュウキ2
+  title_kana_segmented: ヤジキタ ガクエン ドウチュウキ ニ
+- key: qid:Q11424848|name:山口組六代目司忍王国への原点回帰
+  title: 山口組六代目司忍王国への原点回帰
+  title_kana: ヤマグチグミロクダイメツカサシノブオウコクエノゲンテンカイキ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ヤマグチグミ6ダイメツカサシノブオウコクエノゲンテンカイキ
+  title_kana_segmented: ヤマグチグミ ロクダイメ ツカサ シノブ オウコク エノ ゲンテン カイキ
+- key: name:にざかな|name:4ジゲン
+  title: 4ジゲン
+  title_kana: ヨジゲン
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 4ジゲン
+- key: qid:Q11539451|name:余命1ヶ月の花嫁
+  title: 余命1ヶ月の花嫁
+  title_kana: ヨメイイッカゲツノハナヨメ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ヨメイ1カゲツノハナヨメ
+  title_kana_segmented: ヨメイ イッカゲツ ノ ハナヨメ
+- key: name:山本悪々|name:4年制不老不死
+  title: 4年制不老不死
+  title_kana: ヨネンセイフロウフシ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: 4ネンセイフロウフシ
+- key: qid:Q11460076|name:よりぬきとなりの801ちゃん
+  title: よりぬきとなりの801ちゃん
+  title_kana: ヨリヌキトナリノヤオイチャン
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ヨリヌキトナリノ801チャン
+  title_kana_segmented: ヨリヌキ トナリ ノ ヤオイチャン
+- key: qid:Q890174|name:夢が叶う12月
+  title: 夢が叶う12月
+  title_kana: ユメガカナウジュウニガツ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ユメガカナウ12ガツ
+  title_kana_segmented: ユメ ガ カナウ ジュウニガツ
+- key: qid:Q11620397|name:ユリア100式
+  title: ユリア100式
+  title_kana: ユリアヒャクシキ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ユリア100シキ
+  title_kana_segmented: ユリア ヒャクシキ
+- key: qid:Q2232808|name:幽子ちゃん100連発!!
+  title: 幽子ちゃん100連発!!
+  title_kana: ユウコチャンヒャクレンパツ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ユウコチャン100レンパツ
+  title_kana_segmented: ユウコチャン ヒャクレンパツ
+- key: qid:Q11583507|name:ザ・キング・オブ・ファイターズ'94
+  title: ザ・キング・オブ・ファイターズ'94
+  title_kana: ザキングオブファイターズクジュウシ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ザキングオブファイターズ94
+  title_kana_segmented: ザ キング オブ ファイターズ クジュウシ
+- key: qid:Q6918002|name:ザームラント1945
+  title: ザームラント1945
+  title_kana: ザームラントセンキュウヒャクシジュウゴ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ザームラント1945
+  title_kana_segmented: ザームラント センキュウヒャク シジュウゴ
+- key: qid:Q7310129|name:ゼブラーマン2
+  title: ゼブラーマン2
+  title_kana: ゼブラーマンニ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ゼブラーマン2
+  title_kana_segmented: ゼブラーマン ニ
+- key: name:エニックス出版局|name:ゼルダの伝説時のオカリナ 4コママンガ劇場
+  title: ゼルダの伝説時のオカリナ 4コママンガ劇場
+  title_kana: ゼルダノデンセツトキノオカリナヨンコママンガゲキジョウ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ゼルダノデンセツトキノオカリナ4コママンガゲキジョウ
+  title_kana_segmented: ゼルダ ノ デンセツ トキ ノ オカリナ ヨンコマ マンガ ゲキジョウ
+- key: qid:Q11517058|name:続・新ワイルド7
+  title: 続・新ワイルド7
+  title_kana: ゾクシンワイルドセブン
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ゾクシンワイルド7
+- key: qid:Q471133|name:続・鉄人28号
+  title: 続・鉄人28号
+  title_kana: ゾクテツジンニジュウハチゴウ
+  source: rakuten-titlekana(数字読み開き2026-07-23)
+  old_seed2: ゾクテツジン28ゴウ
+  title_kana_segmented: ゾク テツジン ニジュウハチゴウ
+- key: qid:Q9321741|name:A・D
+  title: A・D
+  title_kana: A・D(Angel'sdoubt)
+  source: html-entity-unescape(2026-07-23)
+  old_seed2: A・D(Angel&#39;sdoubt)
+- key: qid:Q11450910|name:Boys'n girl
+  title: Boys'n girl
+  title_kana: Boys'ngirl
+  source: html-entity-unescape(2026-07-23)
+  old_seed2: Boys&#39;ngirl
+- key: name:酒見賢一|name:D'arc
+  title: D'arc
+  title_kana: D'arc
+  source: html-entity-unescape(2026-07-23)
+  old_seed2: D&#39;arc
+- key: qid:Q1721423|name:Hard ＆ loose
+  title: ハード＆ルーズ
+  title_kana: ハード&ルーズ
+  source: html-entity-unescape(2026-07-23)
+  old_seed2: ハード&amp;ルーズ
+- key: qid:Q2077268|name:ハード＆ルーズ
+  title: ハード＆ルーズ
+  title_kana: ハード&ルーズ
+  source: html-entity-unescape(2026-07-23)
+  old_seed2: ハード&amp;ルーズ
+- key: qid:Q1721423|name:ハード＆ルーズ
+  title: ハード＆ルーズ
+  title_kana: ハード&ルーズ
+  source: html-entity-unescape(2026-07-23)
+  old_seed2: ハード&amp;ルーズ
+- key: qid:Q11280551|name:I'm a faker!
+  title: I'm A Faker!
+  title_kana: I'mafaker
+  source: html-entity-unescape(2026-07-23)
+  old_seed2: I&#39;mafaker
+- key: qid:Q11280551|name:I'm A Faker!
+  title: I'm A Faker!
+  title_kana: I'mafaker
+  source: html-entity-unescape(2026-07-23)
+  old_seed2: I&#39;mafaker
+- key: qid:Q11585349|name:I'm home
+  title: I'm home
+  title_kana: I'mhome
+  source: html-entity-unescape(2026-07-23)
+  old_seed2: I&#39;mhome
+- key: name:阿部あかね|name:I'm in love
+  title: I'm in love
+  title_kana: I'minlove
+  source: html-entity-unescape(2026-07-23)
+  old_seed2: I&#39;minlove
+- key: qid:Q17361555|name:J.P.S
+  title: J.P.S
+  title_kana: J.P.S(Justice&peacespirits)
+  source: html-entity-unescape(2026-07-23)
+  old_seed2: J.P.S(Justice&amp;peacespirits)
+- key: name:たにぐち千賀|name:近親相姦＆SM体験
+  title: 近親相姦＆SM体験
+  title_kana: キンシンソウカン&SMタイケン
+  source: html-entity-unescape(2026-07-23)
+  old_seed2: キンシンソウカン&amp;SMタイケン
+- key: name:たかみしほ|name:近親相姦＆SM体験
+  title: 近親相姦＆SM体験
+  title_kana: キンシンソウカン&SMタイケン
+  source: html-entity-unescape(2026-07-23)
+  old_seed2: キンシンソウカン&amp;SMタイケン
+- key: qid:Q11454332|name:L'autocensure
+  title: L'autocensure
+  title_kana: L'autocensure
+  source: html-entity-unescape(2026-07-23)
+  old_seed2: L&#39;autocensure
+- key: name:百地元|name:Let's go nirvana
+  title: Let's go nirvana
+  title_kana: Let'sgonirvana
+  source: html-entity-unescape(2026-07-23)
+  old_seed2: Let&#39;sgonirvana
+- key: qid:Q9448801|name:LET'S SMILEメグ
+  title: LET'S SMILEメグ
+  title_kana: Let'ssmileメグ
+  source: html-entity-unescape(2026-07-23)
+  old_seed2: Let&#39;ssmileメグ
+- key: qid:Q26043508|name:Love ＆ hate
+  title: Love ＆ hate
+  title_kana: Love&hate
+  source: html-entity-unescape(2026-07-23)
+  old_seed2: Love&amp;hate
+- key: qid:Q4332514|name:Lover's diary
+  title: Lover's diary
+  title_kana: Lover'sdiary
+  source: html-entity-unescape(2026-07-23)
+  old_seed2: Lover&#39;sdiary
+- key: qid:Q9019844|name:Makin' PURPLE
+  title: Makin' PURPLE
+  title_kana: Makin'purple
+  source: html-entity-unescape(2026-07-23)
+  old_seed2: Makin&#39;purple
+- key: qid:Q11242369|name:ready lady's how to
+  title: ready lady's how to
+  title_kana: readylady'showtoマンガデワカルリソウノコイオテニイレル12ノヒッショウルール
+  source: html-entity-unescape(2026-07-23)
+  old_seed2: readylady&#39;showtoマンガデワカルリソウノコイオテニイレル12ノヒッショウルール
+- key: qid:Q351742|name:Season's album
+  title: Season's album
+  title_kana: Season'salbum
+  source: html-entity-unescape(2026-07-23)
+  old_seed2: Season&#39;salbum
+- key: name:山口芙美子|name:She'sキャサリン
+  title: She'sキャサリン
+  title_kana: She'sキャサリン
+  source: html-entity-unescape(2026-07-23)
+  old_seed2: She&#39;sキャサリン
+- key: name:アトラス|name:真・女神転生Dチルドレン ライト＆ダーク
+  title: 真・女神転生Dチルドレン ライト＆ダーク
+  title_kana: シンメガミテンセイDチルドレンライト&ダーク
+  source: html-entity-unescape(2026-07-23)
+  old_seed2: シンメガミテンセイDチルドレンライト&amp;ダーク
+- key: name:Bones|name:Wolf's rain
+  title: Wolf's rain
+  title_kana: Wolf'srain
+  source: html-entity-unescape(2026-07-23)
+  old_seed2: Wolf&#39;srain
+- key: qid:Q8062691|name:WOMEN'S ISLAND
+  title: WOMEN'S ISLAND
+  title_kana: Women'sisland
+  source: html-entity-unescape(2026-07-23)
+  old_seed2: Women&#39;sisland
+- key: name:コミックゲーメスト編集部|name:ザ・キング・オブ・ファイターズ'97 4コマ決定版
+  title: ザ・キング・オブ・ファイターズ'97 4コマ決定版
+  title_kana: ザキングオブファイターズ'974コマケッテイバン
+  source: html-entity-unescape(2026-07-23)
+  old_seed2: ザキングオブファイターズ&#39;974コマケッテイバン
+- key: name:原麻紀夫|name:That's敬礼!!
+  title: That's敬礼!!
+  title_kana: That'sケイレイ!!
+  source: html-entity-unescape(2026-07-23)
+  old_seed2: That&#39;sケイレイ!!
+- key: qid:Q21019094|name:That's敬礼!!
+  title: That's敬礼!!
+  title_kana: That'sケイレイ!!
+  source: html-entity-unescape(2026-07-23)
+  old_seed2: That&#39;sケイレイ!!
