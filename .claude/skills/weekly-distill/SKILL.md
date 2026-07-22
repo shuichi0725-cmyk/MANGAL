@@ -53,6 +53,9 @@ $env:MANGAL_DATA_DIR="C:\Users\chiba shuichi\code\MANGAL\.cache\proddata"; npx n
   ★**`✓ Exporting (2/2)` 単独では完了扱いしない**(2026-07-17実害: その直後に
   `build worker exited with code: 4294967295` でexport copy workerが即死し、生成は全完了なのに
   out/がスケルトン11MBのままだった)。**必ず out/manga 枚数を数えてから** node kill に進む。
+  ★**枚数は安定するまで再カウント**(2026-07-22実測: Exporting(2/2)直後の列挙が 9,103→77,047→135,124枚と
+  1分弱伸び続けた=巨大ディレクトリの列挙ラグ+書込flush待ち。1回目の過小値でexport copy死と誤判定しない。
+  10-20秒間隔で数え、2回連続同値になってから完了/死の判定をする)。
 - ★export copy死の復旧(=再ビルド不要・2026-07-05手順の一般化・07-17に67,920頁で実証102秒):
   `.next/server/app` を walk し `*.html→out/<rel>.html` / `*.rsc→out/<rel>.txt`(`.meta`と`_not-found`はskip・既存skip)。
   静的chunk(out/_next)とpublic系はexport序盤で搬出済みのことが多い=検証は du で。
@@ -111,6 +114,11 @@ python scripts/_weekly-finalize.py
 ## ★ビルド環境の罠(2026-07-12 実害3連発→2026-07-17 C:完結化で一部陳腐化。現行版)
 - ~~D:\node_modules junction~~ = **C:完結化で不要になった**(.next/outがC:実体になったためrequire解決は普通に届く)。
 - **buildは必ずStart-Processでデタッチ起動**: ツールのrun_in_backgroundは~10分で親ごとkillされworker巻き添え死。
-  `Start-Process powershell -ArgumentList "-NoProfile","-File","C:\Users\chiba shuichi\code\MANGAL\.cache\_wkbuild.ps1" -WindowStyle Hidden`
-- **r2-syncも同様にscript file経由でデタッチ**(`.cache\_r2sync.ps1`)。PSの`|Out-File`パイプ直渡しは空ログ即死する
+  ★**-Fileのパスは引用符を引数の内側に埋め込む**(2026-07-22実害: ArgumentListは空白joinされるため
+  「chiba shuichi」の空白で `-File 'C:\Users\chiba'` に分断→無音起動失敗。症状=ログ0バイト+node無し):
+  `Start-Process powershell -ArgumentList '-NoProfile','-ExecutionPolicy','Bypass','-File','"C:\Users\chiba shuichi\code\MANGAL\.cache\_wkbuild.ps1"' -WindowStyle Hidden`
+- **r2-syncも同様にscript file経由でデタッチ**(`.cache\_r2sync.ps1`・同じ引用符埋め込み起動)。PSの`|Out-File`パイプ直渡しは空ログ即死する
+- ★**デタッチしたpythonの生死はMSYSのpsでなく`tasklist`で判定**(2026-07-22実害: 隠しウィンドウ起動の
+  プロセスをMSYSのpsが間欠的に見失い「終了」と誤検知×2回。`tasklist //FI "IMAGENAME eq python.exe"`
+  +10秒後の2段確認が確実。ログ無言でもpythonのCPU時間が伸びていれば稼働中=ハッシュ照合フェーズ)
 - ps1 2本は `.cache/` 置き(C:)。中身のパスはこのPCの絶対パス=PC移行時は書き直す。
