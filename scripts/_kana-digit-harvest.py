@@ -18,6 +18,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import importlib
 _lookup = importlib.import_module("_lookup")
+from _wiki_host import acquire, cooldown_check, cooldown_set, release
 
 HDIR = os.path.join(ROOT, ".cache", "kana-digit-harvest")
 QUEUE = os.path.join(HDIR, "queue.json")
@@ -65,7 +66,7 @@ def wiki_lead(title):
             d = json.loads(urllib.request.urlopen(req, timeout=25).read())
         except urllib.error.HTTPError as e:
             if e.code == 429:
-                print("★wiki 429 → 即中断"); sys.exit(2)
+                cooldown_set(60, by="kana-digit"); sys.exit(2)  # releaseはfinallyで
             time.sleep(1.0)
             continue
         except Exception:
@@ -88,6 +89,15 @@ def wiki_lead(title):
 
 
 def run(limit):
+    cooldown_check()          # 冷却中なら即exit(3)=待機せず他の柱へ
+    acquire("kana-digit")     # ⑤wiki-fetchと同ホスト排他(使用中なら即exit(3))
+    try:
+        _run_locked(limit)
+    finally:
+        release("kana-digit")
+
+
+def _run_locked(limit):
     if not os.path.exists(QUEUE):
         print("queueが無い → 先に --build-queue"); sys.exit(1)
     q = json.load(open(QUEUE, encoding="utf-8"))

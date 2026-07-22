@@ -231,6 +231,19 @@ _INFO_PATTERNS = {
 
 
 def cmd_wiki_fetch(a):
+    # ★wikiホスト排他+冷却(2026-07-24): ⑧kana-digit-harvestと同ホスト。冷却中/使用中は即exit(3)
+    #   =運転者は待機・調査不要で他の柱へ(_wiki_host.py 参照)
+    sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+    from _wiki_host import acquire, cooldown_check, cooldown_set, release
+    cooldown_check()
+    acquire("wiki-fetch")
+    try:
+        _wiki_fetch_locked(a, cooldown_set)
+    finally:
+        release("wiki-fetch")
+
+
+def _wiki_fetch_locked(a, cooldown_set):
     links = [r for r in _jsonl_load(os.path.join(MAT, "wiki-links.jsonl")) if r.get("article")]
     rawdir = os.path.join(MAT, "wiki")
     os.makedirs(rawdir, exist_ok=True)
@@ -259,7 +272,8 @@ def cmd_wiki_fetch(a):
             if code in (429, 503):
                 n_backoff += 1
                 if n_backoff > 3:
-                    print(f"★429/503が継続({r['article']}) = Wikipedia冷却待ち。1時間ほど空けて再実行(done集合で続きから)"); return
+                    cooldown_set(60, by="wiki-fetch")
+                    print(f"★429/503が継続({r['article']}) = 冷却60分を記録して中断。待機禁止=他の柱へ(再実行は冷却明けに自動で通る)"); return
                 wait = 60 * (2 ** (n_backoff - 1))
                 print(f"  429/503 → {wait}s バックオフ({n_backoff}/3)"); time.sleep(wait); continue
             n_err += 1

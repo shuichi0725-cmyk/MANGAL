@@ -17,8 +17,15 @@ python scripts/_completion-judge.py --backlog --limit 300   # ④完結判定bac
 python scripts/_material-harvest.py wiki-fetch --limit 500  # ⑤素材ハーベスト(在庫切れ後は fish-residue --limit 50、詳細=skill material-harvest)
 python scripts/_anilist-delta.py   # ⑥AniList鮮度維持(直近更新~5,000件回収・~5分で自然停止・★セッション1回のみ)
 python scripts/_voldesc-material.py --recheck-nomaterial 300   # ⑦巻説明・材料なし台帳のlive再照会救済(偽陰性~10%回収・冪等・逐次保存・429中断。詳細=skill volume-desc)
-python scripts/_kana-digit-harvest.py --limit 30   # ⑧数字kana素材(フリガナに数字が残る~528頁のwiki+楽天live読み収集。★⑤のwiki-fetchと同ホスト=同時起動しない)
+python scripts/_kana-digit-harvest.py --limit 30   # ⑧数字kana素材(フリガナに数字が残る~528頁のwiki+楽天live読み収集)
 ```
+
+## ★429/冷却の共通ルール (= 2026-07-24 ユーザ指摘で機械化。運転者の判断ゼロ)
+- ⑤⑧(wikiホスト)は **script自身が排他ロック+冷却タイマーを持つ**(`scripts/_wiki_host.py`):
+  同時起動→後発が即exit(3) / 429→冷却60分をファイルに記録して中断 / 冷却中の再起動→即exit(3)。
+- 運転者(Sonnet)のルールは1つだけ: **柱が「冷却」「使用中」メッセージで止まったら、待たない・調べない・
+  すぐ他の柱を回す**。⑤⑧は次の手すき(≥60分後)に同コマンド再起動するだけ(冷却中ならscriptが勝手に弾く=無害)。
+  ★「429が明けるのをずっと待つ」は禁止(2026-07-24実害: 待機で他の柱まで全停止)。
 - それぞれ **run_in_background で別タスク**として起動し、**タスクIDを控えて報告**(=「やめて」で使う)。
 - ★④⑤⑦は1バッチ終了ごとに**同じコマンドを再起動**して続きを回す(④はworksheet記入→--collectを挟む。⑤はwiki-fetch在庫が尽きたらfish-residueへ。⑦は台帳が尽きるまで)。③⑥のように自然停止で終わりではない。
 - ①は積み残し~1.2万シリーズ(アンカー13,949作は収集済=旧アンカーループは枯れて即終了する)。BookLive HEADのみ=高速。
@@ -49,8 +56,7 @@ python scripts/_kana-digit-harvest.py --limit 30   # ⑧数字kana素材(フリ�
   読み素材を wiki記事冒頭よみ+楽天titleKana live から収集。`--limit 30`を1バッチとして再起動で続き=④⑤⑦と同型。
   queueが古びたら `--build-queue` で索引から再算出(冪等)。★収集のみ=`found.jsonl`への貯めまで。
   **裁定・furigana-corrections.yml適用は上位モデル専権**(検証器v2+当て字手動裁定=2026-07-23の型)。
-  ★wikiホストを⑤wiki-fetchと共有するので**⑤が wiki-fetch を回している間は起動しない**(fish-residue移行後/⑤停止中はOK)。
-  全部.cache=commit不要。429=exit2で自然停止(数分〜1時間休ませ再起動)。
+  全部.cache=commit不要。⑤との同ホスト排他・429冷却は script が自衛(上の共通ルール参照)=起動順を考えなくてよい。
 ⑦**巻説明・材料なし台帳の再照会救済**(=skill volume-desc 2026-07-20新設。`--recheck-nomaterial 300`):
   `--local-only`bulkがローカル harvest 履歴(全楽天でない)に無い巻を「材料なし」と恒久記録した偽陰性(実測10%)を
   live再照会で拾い直す。captionが在れば`captions-cache.jsonl`+`recovered.jsonl`に回収し台帳から除去。
