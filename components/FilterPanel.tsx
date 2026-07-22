@@ -214,21 +214,8 @@ export default function FilterPanel({
         </div>
       </Section>
 
-      <Section
-        title="ジャンル"
-        right={
-          <button
-            type="button"
-            className="text-xs text-ink/50 hover:text-ink"
-            onClick={() =>
-              update({ genreMode: state.genreMode === "and" ? "or" : "and" })
-            }
-            title="AND/OR を切り替え"
-          >
-            条件: {state.genreMode.toUpperCase()}
-          </button>
-        }
-      >
+      {/* ★AND固定(2026-07-22 ユーザ裁定: ORは不要=絞り込み用途に交差のみ)。トグル撤去 */}
+      <Section title="ジャンル">
         <div className="flex flex-wrap gap-1.5">
           {data.genres.map((g) => (
             <ChipButton
@@ -250,21 +237,7 @@ export default function FilterPanel({
       </Section>
 
       {themeList.length > 0 && (
-        <Section
-          title="要素"
-          right={
-            <button
-              type="button"
-              className="text-xs text-ink/50 hover:text-ink"
-              onClick={() =>
-                update({ themeMode: state.themeMode === "and" ? "or" : "and" })
-              }
-              title="AND/OR を切り替え"
-            >
-              条件: {state.themeMode.toUpperCase()}
-            </button>
-          }
-        >
+        <Section title="要素">
           <div className="flex flex-wrap gap-1.5 max-h-60 overflow-y-auto">
             {themeList.map(([name, n]) => (
               <ChipButton

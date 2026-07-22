@@ -216,6 +216,16 @@ export default function ListClient({ data }: { data: ListBundle }) {
           >
             ⚙ フィルター{nActive > 0 ? ` (${nActive})` : ""}
           </button>
+          {/* ★フィルタ有効時のみ: パネルを開かずその場でリセット(2026-07-22 ユーザ要望) */}
+          {nActive > 0 && (
+            <button
+              type="button"
+              onClick={() => applyState(emptyFilterState())}
+              className="spring-press shrink-0 rounded-full px-3 py-1.5 text-[12px] border border-[var(--color-line)] bg-[var(--color-surface)] text-ink/60"
+            >
+              ✕ リセット
+            </button>
+          )}
         </form>
         <div className="mt-2 flex items-center gap-1.5 overflow-x-auto no-scrollbar pb-1">
           <span className="shrink-0 text-[10px] font-bold text-ink/45">並び順</span>

@@ -232,6 +232,12 @@ export default function HomeClient({ data }: Props) {
   // ★フィルタ変更をURLへ反映(2026-07-22): URLがsource of truthなのにFilterPanelの
   //   変更が書かれておらず、詳細→戻るで全フィルタが消えていた(ユーザ報告)。
   //   検索(?q)と同機構: replaceで書く+?pageはリセット。effectがURLから再構築する。
+  // ★フィルタ(検索語以外)が有効か = リセットボタンの表示条件
+  const hasActiveFilters = useMemo(() => {
+    const p = filtersToSearchParams(state);
+    p.delete("q");
+    return p.toString() !== "";
+  }, [state]);
   const applyState = (next: FilterState) => {
     setState(next);
     const params = filtersToSearchParams(next, new URLSearchParams(searchParams.toString()));
@@ -384,11 +390,22 @@ export default function HomeClient({ data }: Props) {
       {/* モバイル: フィルター起動(全画面オーバーレイを開く)。 PC版は右サイドバー常時表示 */}
       <button
         type="button"
-        className="tactile-chip md:hidden mb-4 px-3 py-2.5 text-sm font-medium rounded-card w-full active:scale-[0.99] transition"
+        className="tactile-chip md:hidden mb-2 px-3 py-2.5 text-sm font-medium rounded-card w-full active:scale-[0.99] transition"
         onClick={() => setOpen(true)}
       >
         ⚙ フィルターで絞り込む
       </button>
+      {/* ★フィルタ有効時のみ: その場でリセット(2026-07-22 ユーザ要望=パネルを開かず解除。
+          空状態キャッシュに当たるので即時に既定表示へ戻る) */}
+      {hasActiveFilters && (
+        <button
+          type="button"
+          className="md:hidden mb-4 px-3 py-2 text-xs rounded-card w-full border border-[var(--color-line)] bg-[var(--color-surface)] text-ink/70 active:scale-[0.99] transition"
+          onClick={() => applyState({ ...emptyFilterState(), query: state.query })}
+        >
+          ✕ フィルターをリセット
+        </button>
+      )}
 
       <div className="grid md:grid-cols-[240px_1fr] gap-6">
         {/* デスクトップ: 常時サイドバー(PC版は不変) */}
