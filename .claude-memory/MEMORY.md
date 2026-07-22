@@ -1,3 +1,4 @@
+- [【保留TODO】巻説明=次スライスから再開](voldesc_next_slice_todo.md) — /clear後「巻説明つくって」で次スライスへ進める
 - [seeds pyramid=全体構造](project_architecture_seeds.md) — 種1=MADB raw/種2=sqlite/種3=AI fill/種4=巻補完→本番DB
 - [【戒め】人気順で優先するな](feedback_no_popularity_priority.md) — popソート無駄、端から全件
 - [巻抜け仮想](volgap_virtual_tool_trigger.md) — 正=skill volgap-audit
