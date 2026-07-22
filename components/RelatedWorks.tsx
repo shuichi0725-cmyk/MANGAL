@@ -1,7 +1,7 @@
 import Link from "next/link";
 import CoverImage from "@/components/CoverImage";
 import MarqueeTitle from "@/components/MarqueeTitle";
-import { primaryVolume, type Manga } from "@/lib/schema";
+import { coverUrl, type Manga } from "@/lib/schema";
 
 /** 関連作品 = ①シリーズ/フランチャイズ(題名の前方一致) ②同作者(作画/原作の名前共有)。
  *  説明と版リストの間に置く想定(= 横スクロール1行・高さ最小で購買導線を圧迫しない)。 */
@@ -55,7 +55,9 @@ export default function RelatedWorks({
       <h2 className="text-sm font-semibold text-ink/70 mb-2">関連作品</h2>
       <ul className="flex gap-3 overflow-x-auto no-scrollbar pb-2 -mx-1 px-1 snap-x scroll-pl-1">
         {items.map(({ m, why }) => {
-          const cover = primaryVolume(m)?.cover_url ?? null;
+          // 検索索引・詳細ページ本体と同じフォールバック(1巻に書影が無ければ表紙のある巻へ)。
+          // 主版1巻だけ書影未取得の作品(うる星やつら型)が関連欄で欠落するのを防ぐ。
+          const cover = coverUrl(m);
           return (
             <li key={m.slug} className="shrink-0 w-[104px] snap-start">
               <Link href={`/manga/${m.slug}`} className="block group">
