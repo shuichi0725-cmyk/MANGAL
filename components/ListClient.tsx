@@ -7,6 +7,8 @@ import {
   applyFilters,
   authorsWithKana,
   emptyFilterState,
+  filtersFromSearchParams,
+  filtersToSearchParams,
   yearBounds,
   type FilterState,
 } from "@/lib/filters";
@@ -56,13 +58,26 @@ export default function ListClient({ data }: { data: ListBundle }) {
   const [q, setQ] = useState("");             // 確定済み検索語(=絞込に効く)
   const [qInput, setQInput] = useState("");   // 入力中の文字(★ボタン/Enterまで検索しない 2026-07-11 ユーザ仕様)
   // ★URL ?q= を初期値に(2026-07-06 PCサイドバー検索からの遷移受け)
+  //   +★フィルタ全体もURLから復元(2026-07-22: 詳細→戻るでフィルタが消える問題の恒久修正)
   useEffect(() => {
-    const uq = new URLSearchParams(window.location.search).get("q");
+    const sp = new URLSearchParams(window.location.search);
+    const uq = sp.get("q");
     if (uq) {
       setQ(uq);
       setQInput(uq);
     }
+    const patch = filtersFromSearchParams(sp);
+    if (Object.keys(patch).length) setState({ ...emptyFilterState(), ...patch });
   }, []);
+  // ★フィルタ変更をURLへ書き戻し(q/n/sと同機構。replaceで履歴を汚さない)
+  const applyState = (next: FilterState) => {
+    setState(next);
+    const url = new URL(window.location.href);
+    const params = filtersToSearchParams(next, url.searchParams);
+    params.delete("q"); // qは別state管理(下のeffectが書く)
+    if (q) params.set("q", q);
+    window.history.replaceState(null, "", url.toString());
+  };
   // ★q変更をURLへ書き戻し(replace=履歴を汚さない)。詳細→OS戻るで検索語が消えない(2026-07-10 ユーザ相談)
   useEffect(() => {
     const url = new URL(window.location.href);
@@ -310,7 +325,7 @@ export default function ListClient({ data }: { data: ListBundle }) {
                 </button>
               </div>
             </div>
-            <FilterPanel data={liveData} state={state} setState={setState} yearBounds={bounds} authorEntries={authors} />
+            <FilterPanel data={liveData} state={state} setState={applyState} yearBounds={bounds} authorEntries={authors} />
           </div>
         </div>
       )}

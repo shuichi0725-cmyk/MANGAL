@@ -307,6 +307,40 @@ type ParamsLike = { get(key: string): string | null };
  * URL の検索パラメータ（?publisher=A&genre=action,drama 等）から
  * フィルタ状態を復元する。指定の無い項目は触らない。
  */
+/** ★フィルタ状態→URL params(2026-07-22): filtersFromSearchParams と完全対称のエンコーダ。
+ *  非デフォルト値だけを書く。詳細→戻るでフィルタが消える問題の恒久修正
+ *  (URLがsource of truthなのにFilterPanel変更がURLに書かれていなかった)。 */
+export function filtersToSearchParams(s: FilterState, base?: URLSearchParams): URLSearchParams {
+  const p = base ?? new URLSearchParams();
+  const setList = (key: string, v: string[]) => {
+    if (v.length) p.set(key, v.join(","));
+    else p.delete(key);
+  };
+  const setIf = (key: string, cond: boolean, val: string) => {
+    if (cond) p.set(key, val);
+    else p.delete(key);
+  };
+  setIf("q", !!s.query, s.query);
+  setIf("launch", !!s.launch, s.launch ?? "");
+  setIf("yearMin", s.yearMin !== null, String(s.yearMin));
+  setIf("yearMax", s.yearMax !== null, String(s.yearMax));
+  setList("publisher", s.publishers);
+  setList("magazine", s.magazines);
+  setList("demographic", s.demographics);
+  setList("author", s.authors);
+  setList("originalAuthor", s.originalAuthors);
+  setList("genre", s.genres);
+  setIf("genreMode", s.genreMode !== "or", s.genreMode);
+  setList("theme", s.themes);
+  setIf("themeMode", s.themeMode !== "or", s.themeMode);
+  setIf("anime", s.anime, "true");
+  setIf("artBooks", s.artBooks, "true");
+  setIf("hasAwards", s.hasAwards, "true");
+  setList("status", s.statuses);
+  setIf("sort", s.sort !== "default", s.sort);
+  return p;
+}
+
 export function filtersFromSearchParams(p: ParamsLike | null | undefined): Partial<FilterState> {
   if (!p) return {};
   const out: Partial<FilterState> = {};

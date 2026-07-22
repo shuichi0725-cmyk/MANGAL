@@ -2,6 +2,8 @@ import { describe, expect, it } from "vitest";
 import {
   applyFilters,
   authorKey,
+  filtersFromSearchParams,
+  filtersToSearchParams,
   authorsWithKana,
   emptyFilterState,
   matchText,
@@ -159,5 +161,36 @@ describe("authorKey 空白違いの同一人物統合(2026-07-21)", () => {
   it("著者フィルタが空白違いの頁も通す", () => {
     const st = { ...emptyFilterState(), authors: ["蟹沢ちひろ"] };
     expect(applyFilters(items, st).map((r) => r.slug).sort()).toEqual(["x1", "x2"]);
+  });
+});
+
+describe("filtersToSearchParams ⇄ filtersFromSearchParams round-trip(2026-07-22)", () => {
+  it("非デフォルト値が完全往復する", () => {
+    const s = {
+      ...emptyFilterState(),
+      query: "うる星",
+      yearMin: 1980,
+      yearMax: 1999,
+      launch: "1980s",
+      publishers: ["shogakukan", "kodansha"],
+      genres: ["romcom", "school"],
+      genreMode: "and" as const,
+      authors: ["高橋留美子"],
+      statuses: ["completed" as const],
+      anime: true,
+      sort: "popularity" as const,
+    };
+    const p = filtersToSearchParams(s);
+    const back = { ...emptyFilterState(), ...filtersFromSearchParams(p) };
+    expect(back).toEqual(s);
+  });
+  it("デフォルト状態はparams空", () => {
+    expect(filtersToSearchParams(emptyFilterState()).toString()).toBe("");
+  });
+  it("既存params(page等)を保持しつつフィルタキーだけ管理", () => {
+    const base = new URLSearchParams("page=3&v=x");
+    const p = filtersToSearchParams({ ...emptyFilterState(), genres: ["horror"] }, base);
+    expect(p.get("page")).toBe("3");
+    expect(p.get("genre")).toBe("horror");
   });
 });

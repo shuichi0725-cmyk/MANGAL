@@ -13,6 +13,8 @@ import {
   applyFilters,
   emptyFilterState,
   filtersFromSearchParams,
+  filtersToSearchParams,
+  type FilterState,
   authorsWithKana,
   yearBounds,
 } from "@/lib/filters";
@@ -217,6 +219,17 @@ export default function HomeClient({ data }: Props) {
   const scrollTop = () =>
     window.scrollTo({ top: 0, behavior: "smooth" });
 
+  // ★フィルタ変更をURLへ反映(2026-07-22): URLがsource of truthなのにFilterPanelの
+  //   変更が書かれておらず、詳細→戻るで全フィルタが消えていた(ユーザ報告)。
+  //   検索(?q)と同機構: replaceで書く+?pageはリセット。effectがURLから再構築する。
+  const applyState = (next: FilterState) => {
+    setState(next);
+    const params = filtersToSearchParams(next, new URLSearchParams(searchParams.toString()));
+    params.delete("page");
+    const qs = params.toString();
+    router.replace(qs ? `${pathname}?${qs}` : pathname, { scroll: false });
+  };
+
   return (
     <div className={`mx-auto max-w-6xl px-4 py-6${isPreview ? " preview-mode" : ""}`}>
       <section className="mb-6 flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
@@ -373,7 +386,7 @@ export default function HomeClient({ data }: Props) {
           <FilterPanel
             data={liveData}
             state={state}
-            setState={setState}
+            setState={applyState}
             yearBounds={bounds}
             authorEntries={authors}
           />
@@ -449,7 +462,7 @@ export default function HomeClient({ data }: Props) {
             <FilterPanel
               data={liveData}
               state={state}
-              setState={setState}
+              setState={applyState}
               yearBounds={bounds}
               authorEntries={authors}
             />
