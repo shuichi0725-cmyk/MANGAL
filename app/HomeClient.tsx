@@ -115,7 +115,17 @@ export default function HomeClient({ data }: Props) {
   const authors = useMemo(() => authorsWithKana(manga, true), [manga]);
   // ★画集モード = 一覧を画集に切替(ジャンル欄「画集」チップ)。 漫画用フィルタは非適用。
   const showArt = state.artBooks;
-  const filteredManga = useMemo(() => applyFilters(manga, state, matchedSlugs), [manga, state, matchedSlugs]);
+  // ★空状態(フィルタ無し・検索無し)の結果はキャッシュ(2026-07-22): 検索×リセット時に
+  //   フル索引67kの絞り込み+ソートを同期でやり直してもたつく問題の是正。
+  //   stateはeffectで毎回新objectに再構築されるため、参照でなく「空かどうか」で判定する。
+  const emptyCacheRef = useRef<{ manga: MangaListItem[]; out: MangaListItem[] } | null>(null);
+  const filteredManga = useMemo(() => {
+    const isEmpty = !matchedSlugs && filtersToSearchParams(state).toString() === "";
+    if (isEmpty && emptyCacheRef.current?.manga === manga) return emptyCacheRef.current.out;
+    const out = applyFilters(manga, state, matchedSlugs);
+    if (isEmpty) emptyCacheRef.current = { manga, out };
+    return out;
+  }, [manga, state, matchedSlugs]);
   const filteredArt = useMemo(() => applyArtBookFilters(data.artBooks, state), [data.artBooks, state]);
   // ★テスト専用フィルタ: 画像なし(cover=null) / 1冊≠1巻(solo_nonfirst=統合失敗signal)。
   const filtered: (MangaListItem | ArtBook)[] = useMemo(() => {

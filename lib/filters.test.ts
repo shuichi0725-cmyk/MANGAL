@@ -174,7 +174,7 @@ describe("filtersToSearchParams ⇄ filtersFromSearchParams round-trip(2026-07-2
       launch: "1980s",
       publishers: ["shogakukan", "kodansha"],
       genres: ["romcom", "school"],
-      genreMode: "and" as const,
+      genreMode: "or" as const,
       authors: ["高橋留美子"],
       statuses: ["completed" as const],
       anime: true,

@@ -45,9 +45,9 @@ export const emptyFilterState = (): FilterState => ({
   authors: [],
   originalAuthors: [],
   genres: [],
-  genreMode: "or",
+  genreMode: "and",  // ★既定AND(2026-07-22 ユーザ裁定: 絞り込むためのフィルタなので交差が自然)
   themes: [],
-  themeMode: "or",
+  themeMode: "and",
   anime: false,
   hasAwards: false,
   statuses: [],
@@ -123,6 +123,9 @@ function totalVolumes(m: MangaListItem): number {
   return m.total_volumes;
 }
 
+// ★共有Collator(2026-07-22): localeCompare都度呼びはロケール機構を毎回起こし67kソートで重い
+const _ja = new Intl.Collator("ja");
+
 function sortItems(items: MangaListItem[], sort: SortKey): MangaListItem[] {
   switch (sort) {
     case "year-desc":
@@ -130,9 +133,7 @@ function sortItems(items: MangaListItem[], sort: SortKey): MangaListItem[] {
     case "year-asc":
       return [...items].sort((a, b) => a.year_started - b.year_started);
     case "title":
-      return [...items].sort((a, b) =>
-        a.title_kana.localeCompare(b.title_kana, "ja"),
-      );
+      return [...items].sort((a, b) => _ja.compare(a.title_kana, b.title_kana));
     case "volumes":
       return [...items].sort((a, b) => totalVolumes(b) - totalVolumes(a));
     case "popularity":
@@ -330,9 +331,9 @@ export function filtersToSearchParams(s: FilterState, base?: URLSearchParams): U
   setList("author", s.authors);
   setList("originalAuthor", s.originalAuthors);
   setList("genre", s.genres);
-  setIf("genreMode", s.genreMode !== "or", s.genreMode);
+  setIf("genreMode", s.genreMode !== "and", s.genreMode);
   setList("theme", s.themes);
-  setIf("themeMode", s.themeMode !== "or", s.themeMode);
+  setIf("themeMode", s.themeMode !== "and", s.themeMode);
   setIf("anime", s.anime, "true");
   setIf("artBooks", s.artBooks, "true");
   setIf("hasAwards", s.hasAwards, "true");
