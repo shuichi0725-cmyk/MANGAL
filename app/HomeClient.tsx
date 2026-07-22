@@ -18,7 +18,7 @@ import {
   authorsWithKana,
   yearBounds,
 } from "@/lib/filters";
-import { onAltLoaded, prewarmSearch, searchSlugs } from "@/lib/clientSearch";
+import { onAltLoaded, prewarmSearch, searchWithTiers } from "@/lib/clientSearch";
 import { ensureFullIndex } from "@/lib/useMangaIndex";
 import type { ArtBook, ListBundle, MangaListItem } from "@/lib/schema";
 import { useMangaIndex } from "@/lib/useMangaIndex";
@@ -105,10 +105,14 @@ export default function HomeClient({ data }: Props) {
     if (hasQuery) ensureFullIndex(); // 検索確定=フル索引を即時要求(head 200件だけの誤答窓を閉じる)
   }, [hasQuery]);
   const searchLoading = hasQuery && mangaIndex === null;
-  const matchedSlugs = useMemo(
-    () => (hasQuery ? searchSlugs(state.query, manga) : null),
+  const searchTiers = useMemo(
+    () => (hasQuery ? searchWithTiers(state.query, manga) : null),
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [hasQuery, state.query, manga, altTick],
+  );
+  const matchedSlugs = useMemo(
+    () => (searchTiers ? new Set(searchTiers.keys()) : null),
+    [searchTiers],
   );
 
   const bounds = useMemo(() => yearBounds(manga), [manga]);
@@ -122,10 +126,15 @@ export default function HomeClient({ data }: Props) {
   const filteredManga = useMemo(() => {
     const isEmpty = !matchedSlugs && filtersToSearchParams(state).toString() === "";
     if (isEmpty && emptyCacheRef.current?.manga === manga) return emptyCacheRef.current.out;
-    const out = applyFilters(manga, state, matchedSlugs);
+    let out = applyFilters(manga, state, matchedSlugs);
+    // ★案A(2026-07-23): 検索中×並び順既定 → 一致の強い順(完全一致→前方→部分→著者→ローマ字)。
+    //   Array.sortは安定なので同tier内は既定の人気順が保たれる。手動選択時は尊重(現行ルール)。
+    if (searchTiers && state.sort === "default") {
+      out = [...out].sort((a, b) => (searchTiers.get(a.slug) ?? 9) - (searchTiers.get(b.slug) ?? 9));
+    }
     if (isEmpty) emptyCacheRef.current = { manga, out };
     return out;
-  }, [manga, state, matchedSlugs]);
+  }, [manga, state, matchedSlugs, searchTiers]);
   const filteredArt = useMemo(() => applyArtBookFilters(data.artBooks, state), [data.artBooks, state]);
   // ★テスト専用フィルタ: 画像なし(cover=null) / 1冊≠1巻(solo_nonfirst=統合失敗signal)。
   const filtered: (MangaListItem | ArtBook)[] = useMemo(() => {

@@ -23,7 +23,7 @@ function activeCount(s: FilterState): number {
   return n;
 }
 import type { ListBundle, MangaListItem } from "@/lib/schema";
-import { onAltLoaded, prewarmSearch, searchSlugs } from "@/lib/clientSearch";
+import { onAltLoaded, prewarmSearch, searchWithTiers } from "@/lib/clientSearch";
 import { useMangaIndex } from "@/lib/useMangaIndex";
 
 /** 一覧表クライアント: 絞り込み=既存の多窓フィルター(トップと同じ)、並び順=独立チップ。
@@ -155,8 +155,10 @@ export default function ListClient({ data }: { data: ListBundle }) {
     let r = applyFilters(manga, state);
     if (slugfixOnly) r = r.filter((m) => m._slugfix);
     const needle = q.trim();
+    let tiers: Map<string, number> | null = null;
     if (needle) {
-      const hit = searchSlugs(needle, manga);
+      tiers = searchWithTiers(needle, manga);
+      const hit = tiers;
       r = r.filter((m) => hit.has(m.slug));
     }
     // ★検索時の既定=人気順(2026-07-05 ユーザ要望: 検索したら人気順で出る)。手動選択があればそれを尊重
@@ -177,6 +179,10 @@ export default function ListClient({ data }: { data: ListBundle }) {
           return (a.title_kana || a.title).localeCompare(b.title_kana || b.title, "ja");
       }
     });
+    // ★案A(2026-07-23): 検索中×並び順未タッチ → 一致の強い順(同tier内=人気順。安定ソート)
+    if (tiers && !sortTouched) {
+      sorted.sort((a, b) => (tiers.get(a.slug) ?? 9) - (tiers.get(b.slug) ?? 9));
+    }
     return sorted;
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [manga, state, q, sort, sortTouched, slugfixOnly, altTick]);

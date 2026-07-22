@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it } from "vitest";
-import { __setAltIndexForTest, searchSlugs } from "./clientSearch";
+import { __setAltIndexForTest, searchSlugs, searchWithTiers } from "./clientSearch";
 import type { MangaListItem } from "./schema";
 
 // ★2026-07-19 実害の回帰テスト: 作家名が題に入る作家(高橋留美子劇場型)で
@@ -74,5 +74,34 @@ describe("searchSlugs alt(別名・英題)常時マージ(2026-07-21)", () => {
   it("alt語+著者語のANDが成立する", () => {
     __setAltIndexForTest({ "five-star-stories": ["FSS"] });
     expect(searchSlugs("fss 永野", items)).toEqual(new Set(["five-star-stories"]));
+  });
+});
+
+describe("検索v2.2: 日本語クエリのローマ字橋遮断+関連度tier(2026-07-23)", () => {
+  const short = [
+    { slug: "ys", title: "イース", title_kana: "イース",
+      authors: [{ name: "羽衣翔", kana: "ハゴロモショウ" }] },
+    { slug: "alice", title: "アリス", title_kana: "アリス",
+      authors: [{ name: "誰か", kana: "ダレカ" }] },
+    { slug: "isu-club", title: "イス倶楽部", title_kana: "イスクラブ",
+      authors: [{ name: "誰か2", kana: "ダレカツー" }] },
+  ] as unknown as MangaListItem[];
+  it("★案B: 日本語「イース」がローマ字橋(arisuのisu)でアリスに誤ヒットしない", () => {
+    const got = searchSlugs("イース", short);
+    expect(got.has("ys")).toBe(true);
+    expect(got.has("alice")).toBe(false);
+  });
+  it("ローマ字入力「isu」は従来通り橋が効く", () => {
+    expect(searchSlugs("isu", short).has("alice")).toBe(true);
+  });
+  it("★案A: 完全一致がtier0・部分一致より強い", () => {
+    const tiers = searchWithTiers("イース", short);
+    expect(tiers.get("ys")).toBe(0);
+    expect(tiers.get("isu-club")).toBeGreaterThan(0);
+  });
+  it("著者一致はtier3(題名部分一致tier2より弱い)", () => {
+    const tiers = searchWithTiers("高橋留美子", items);
+    expect(tiers.get("takahashi-rumiko-gekijou")).toBeLessThanOrEqual(1); // 前方一致
+    expect(tiers.get("inuyasha")).toBe(3); // 著者のみ
   });
 });
