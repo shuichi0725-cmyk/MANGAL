@@ -49,12 +49,14 @@ ap.add_argument("--recheck-nomaterial", type=int, metavar="N", default=0,
                      "(cache追加+台帳から除去)。ローカル未収=材料なしの偽陰性(実測10%)を回収する常設パス。")
 a = ap.parse_args()
 
-# 既seedのISBNは除外(純粋追加)
+# 既seedのISBNは除外(純粋追加)。★seed_only=説明済み判定用(NOMATを混ぜない)
 done = set()
+seed_only = set()
 if os.path.exists(SEED):
     for ln in open(SEED, encoding="utf-8"):
         try:
-            done.add(json.loads(ln)["isbn13"])
+            ib = json.loads(ln)["isbn13"]
+            done.add(ib); seed_only.add(ib)
         except Exception:
             pass
 # ★材料なし確定ISBNも除外(=カーソル前進・再照会防止)
@@ -63,6 +65,57 @@ if os.path.exists(NOMAT):
         ib = ln.strip()
         if len(ib) == 13:
             done.add(ib)
+
+def primary_volumes(d):
+    """★主版選定(2026-07-22 ユーザ裁定): 巻説明の対象=「最初に出た通常版」の巻だけ。
+    他版(文庫合本・新装・全集等)は対象外。ただし主版巻のcaptionが無い時だけ、
+    同じ巻番号の他版captionをフォールバック材料に使う(別巻割の巻は考慮しない)。
+    選定 = type==standard のうち最古発売の版。standard皆無なら全版から最古。"""
+    eds = [e for e in (d.get("editions") or []) if e.get("volumes")]
+    def first_date(e):
+        ds = [str(v.get("release_date") or "9999") for v in e["volumes"] if v.get("release_date")]
+        return min(ds) if ds else "9999"
+    cands = [e for e in eds if e.get("type") == "standard"] or eds
+    if not cands:
+        return None, []
+    prim = min(cands, key=first_date)
+    return prim, list(prim["volumes"])
+
+
+def target_volumes(d):
+    """★対象巻の共通選定(2026-07-22): 主版の各巻について
+    - 同じ巻番号がどこかの刷(versions)/他版で説明済み(seed) → 巻として完了=対象外(二重生成防止。うる星=新装カバー刷に34巻分既存の型)
+    - 主版ISBNが材料なし確定(NOMAT) → 対象外
+    それ以外を {vol, isbn, edition, alt_isbns} で返す。alt_isbns=同巻番号の全代替ISBN(他版+全刷)。"""
+    prim, pvols = primary_volumes(d)
+    if prim is None:
+        return []
+    alt_by_num = {}
+    def _collect(vlist):
+        for v in vlist or []:
+            ib = str(v.get("isbn13") or ""); n = v.get("number")
+            if len(ib) == 13 and n is not None:
+                alt_by_num.setdefault(n, []).append(ib)
+    for e in d.get("editions") or []:
+        if e is not prim:
+            _collect(e.get("volumes"))
+        for vv in e.get("versions") or []:
+            _collect(vv.get("volumes"))
+    out = []
+    prim_ibs = {str(v.get("isbn13") or "") for v in pvols}
+    for v in pvols:
+        ib = str(v.get("isbn13") or "")
+        if len(ib) != 13:
+            continue
+        alts = [a2 for a2 in alt_by_num.get(v.get("number"), []) if a2 != ib and a2 not in prim_ibs]
+        if ib in seed_only or any(a2 in seed_only for a2 in alts):
+            continue  # 巻としてどこかに説明済み
+        if ib in done:
+            continue  # 材料なし確定(NOMAT)含む
+        out.append({"vol": v.get("number"), "isbn": ib,
+                    "edition": prim.get("type"), "alt_isbns": alts})
+    return out
+
 
 slugs = []
 if a.slugs:
@@ -80,9 +133,7 @@ if not slugs and not a.recheck_nomaterial:
             d = yaml.load(open(p, encoding="utf-8"), Loader=_L)
         except Exception:
             continue
-        fresh = [str(v.get("isbn13")) for e in (d.get("editions") or [])
-                 for v in (e.get("volumes") or [])
-                 if len(str(v.get("isbn13") or "")) == 13 and str(v.get("isbn13")) not in done]
+        fresh = [v["isbn"] for v in target_volumes(d)]  # ★主版×巻グループ判定(2026-07-22)
         if fresh:
             slugs.append(os.path.basename(p)[:-4])
             n_isbn += len(fresh)
@@ -169,13 +220,11 @@ for slug in slugs:
         # slug-override頁: slugフィールドで探す前にSRC名前提なので警告のみ
         print(f"  ! 見つからない: {slug} (SRC stem名で指定する)"); continue
     d = yaml.load(open(p, encoding="utf-8"), Loader=_L)
-    vols = []
-    for e in d.get("editions") or []:
-        for v in (e.get("volumes") or []):
-            ib = str(v.get("isbn13") or "")
-            if len(ib) == 13 and ib not in done:
-                vols.append({"vol": v.get("number"), "isbn": ib, "edition": e.get("type")})
-                want.add(ib)
+    # ★主版基準+巻グループ判定(2026-07-22): 共通ヘルパー target_volumes に集約
+    vols = target_volumes(d)
+    for v in vols:
+        want.add(v["isbn"])
+        want.update(v.get("alt_isbns") or [])  # 代替源もキャッシュ照合対象に(材料化のみ・生成対象ではない)
     pages[slug] = {"title": d.get("title"),
                    "authors": [x.get("name") for x in (d.get("authors") or [])],
                    "vols": vols}
@@ -254,10 +303,19 @@ with open(OUT, "w", encoding="utf-8") as fo:
         vols, missing = [], []
         for v in pg["vols"]:
             c = caps.get(v["isbn"])
+            src = v["isbn"]
+            if not c:
+                # ★同巻番号の他版captionをフォールバック(うる星型。説明の帰属は主版ISBNのまま)
+                for aib in v.get("alt_isbns") or []:
+                    if caps.get(aib):
+                        c, src = caps[aib], aib
+                        break
+            vv = {k: v[k] for k in ("vol", "isbn", "edition")}
             if c:
-                vols.append({**v, "caption": c["caption"], "contents": c["contents"]})
+                vols.append({**vv, "caption": c["caption"], "contents": c["contents"],
+                             **({"caption_src": src} if src != v["isbn"] else {})})
             else:
-                missing.append(v)
+                missing.append(vv)
         vols.sort(key=lambda x: (x["vol"] is None, x["vol"]))
         n_miss += len(missing)
         fo.write(json.dumps({"slug": slug, "title": pg["title"], "authors": pg["authors"],
@@ -286,7 +344,8 @@ if (a.live or a.local_only) and not a.slugs and not a.slugs_file:
     prev = set()
     if os.path.exists(NOMAT):
         prev = {l.strip() for l in open(NOMAT, encoding="utf-8") if l.strip()}
-    add = [v["isbn"] for pg in pages.values() for v in pg["vols"] if v["isbn"] not in caps]
+    add = [v["isbn"] for pg in pages.values() for v in pg["vols"]
+           if v["isbn"] not in caps and not any(a2 in caps for a2 in (v.get("alt_isbns") or []))]
     new = [ib for ib in add if ib not in prev]
     if new:
         with open(NOMAT, "a", encoding="utf-8") as f:
