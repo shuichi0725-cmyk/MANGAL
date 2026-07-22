@@ -5,12 +5,12 @@ metadata:
   node_type: memory
   type: project
   originSessionId: 97904f9e-0992-4de3-b3a2-7738e71b169c
-  modified: 2026-07-22T00:33:21.886Z
+  modified: 2026-07-22T03:28:33.964Z
 ---
 
 ★保留タスク(2026-07-22 ユーザ指示「クリアーしてから開始したい」): ユーザが `/clear` 後に「巻説明つくって」を再開したら、**次のスライスに進める**。
 
-**背景**: 直近スライス(ファイル名順・タイトル頭「1…」帯)は11巻caption有だが全て非物語(話数題羅列/宣伝定型/限定版BOX/プレースホルダ)で生成0。91巻はローカル材料なし→no-material台帳(累計1,426)。この区画はTL/成人/宣伝主体でcaption薄。
+**背景**: 「1…」帯は非物語で生成0。次の「A…」帯(2026-07-22処理)=104巻caption有のうち物語材料は12巻のみ(穴殺人v3-8/明けても暮れても v2/悪役令嬢/ALIVE v4/ALL OUT柔道 v2/雨の日はお化け v1/アカギv27/悪役令嬢v1)を生成・commit済(seed累計11,703)。残92巻は非物語(TL宣伝/限定版BOX/画集/話数題羅列/新装版の共通premise重複)でskip。この区画(TL・4コマ・アイドル・BL・成人)はcaption薄が続く。
 
 **やること**:
 1. `python scripts/_voldesc-material.py --local-only` を再実行(auto=seed未生成のみファイル名順・端から [[feedback_no_popularity_priority]])。前スライスの11巻はseed未書込のため再選定される可能性あり=スキップして先へ。
