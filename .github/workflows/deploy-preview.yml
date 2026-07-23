@@ -64,6 +64,15 @@ jobs:
           cp .preview-data/manga-alt-index.json public/manga-alt-index.json
           echo "preview index entries:"; node -e "console.log('list', require('./public/manga-list-index.json').d.length, '/ search', require('./public/manga-search-index.json').d.length)"
 
+      # ★画集 = data/art-books に全件(161)。 .preview-data/art-books は .gitignore で未追跡
+      #   (preview サブセットに含めない設計)。 /art-books 一覧を preview で表示するため、
+      #   build 前に data/ から hydrate する (= 常に本番データと同期。 CI のみ・commit不要)。
+      - name: Hydrate art-books into preview data
+        run: |
+          mkdir -p .preview-data/art-books
+          cp data/art-books/*.yml .preview-data/art-books/
+          echo "preview art-books: $(ls .preview-data/art-books/*.yml | wc -l) files"
+
       - name: Build Next.js (preview subset → out/)
         env:
           MANGAL_DATA_DIR: .preview-data
