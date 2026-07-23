@@ -15,6 +15,10 @@ on:
       - claude/manga-database-affiliate-3x0ms
     paths:
       - ".preview-data/**"
+      # ★画集 = build時に data/art-books から hydrate する(下記 Hydrate step)。
+      #   data/ 変更でも preview を建て直すため trigger に含める(2026-07-23: これが無く
+      #   書影同期commitがリビルドを起こさず「preview に画像出ない」事故)。
+      - "data/art-books/**"
       - ".github/workflows/deploy-preview.yml"
       - "wrangler.jsonc"
       - "worker.js"
