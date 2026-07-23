@@ -16,8 +16,11 @@ import argparse, json, gzip, os, re, sys, time, html, urllib.request, urllib.par
 sys.stdout.reconfigure(encoding="utf-8")
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import _rate_gate  # ★プロセス間グローバル・レートゲート(複数柱並走時の合算429を防ぐ)
 C = lambda *p: os.path.join(ROOT, ".cache", *p)
 RATE = 1.3  # NDL/楽天 live 共通(秒/req)。★これ未満に縮めない(429/IP遮断の実績)
+# ★叩く直前に _rate_gate.wait(host, RATE) を通す=柱が何本並走しても host単位で1本の1.3sストリームに直列化。
 
 
 def _env():
@@ -116,6 +119,7 @@ def rakuten_live(env, *, isbn=None, title=None, hits=30):
     req.add_header("Referer", origin + "/")
     req.add_header("Origin", origin)
     req.add_header("User-Agent", "Mozilla/5.0")
+    _rate_gate.wait("rakuten", RATE)  # ★グローバル間隔(全楽天呼出で共有=並走合算429を防ぐ)
     try:
         r = urllib.request.urlopen(req, timeout=25)
         return json.loads(r.read()).get("Items") or []
@@ -123,8 +127,6 @@ def rakuten_live(env, *, isbn=None, title=None, hits=30):
         if e.code == 429:
             print("★楽天429 → 即中断。しばらく(数分)休ませる"); sys.exit(2)
         raise
-    finally:
-        time.sleep(RATE)
 
 
 def ndl_live(query, maximum=30, start=1):
@@ -136,11 +138,11 @@ def ndl_live(query, maximum=30, start=1):
          "maximumRecords": str(maximum), "startRecord": str(start)}
     req = urllib.request.Request("https://ndlsearch.ndl.go.jp/api/sru?" + urllib.parse.urlencode(p))
     req.add_header("User-Agent", "Mozilla/5.0")
+    _rate_gate.wait("ndl", RATE)  # ★グローバル間隔(全NDL呼出で共有)
     try:
         xml = html.unescape(urllib.request.urlopen(req, timeout=30).read().decode("utf-8"))
     except Exception as e:
         print(f"  NDL query失敗(続行可): {e}")
-        time.sleep(RATE)
         return []
     if "Too Many Requests" in xml:
         print("★NDL429 → 即中断。回復するので慌てず休ませる(1時間単位)"); sys.exit(2)
@@ -161,7 +163,6 @@ def ndl_live(query, maximum=30, start=1):
             "series": g(r"<dcndl:seriesTitle>.*?<rdf:value>([^<]+)"),
             "creators": [c.replace("/", "") for c in creators],
         })
-    time.sleep(RATE)
     return out
 
 

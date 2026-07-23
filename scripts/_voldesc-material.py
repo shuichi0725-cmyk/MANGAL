@@ -22,6 +22,8 @@ try:
 except ImportError:
     from yaml import SafeLoader as _L
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import _rate_gate  # ★楽天グローバル・レートゲート(_lookupと共有=並走合算429を防ぐ)
 os.makedirs(f"{ROOT}/.cache/voldesc", exist_ok=True)
 OUT = f"{ROOT}/.cache/voldesc/materials.jsonl"
 SEED = f"{ROOT}/data/seeds/volume-desc-ja.jsonl"
@@ -156,6 +158,7 @@ def live_item(isbn):
     req.add_header("Referer", ORIGIN + "/")
     req.add_header("Origin", ORIGIN)
     req.add_header("User-Agent", "Mozilla/5.0")
+    _rate_gate.wait("rakuten", 1.3)  # ★_lookupと共有の楽天グローバル間隔(並走合算429を防ぐ)
     try:
         d = json.loads(urllib.request.urlopen(req, timeout=20).read())
         items = d.get("Items") or []
@@ -200,7 +203,7 @@ if a.recheck_nomaterial:
             fo_r.write(json.dumps({"isbn": ib, "caption": cap,
                                    "contents": (item.get("contents") or "").strip(),
                                    "title": item.get("title")}, ensure_ascii=False) + "\n"); fo_r.flush()
-        time.sleep(1.2)
+        # 楽天間隔は live_item内の _rate_gate が担保(ここでの追加sleepは二重=削除)
         if (i + 1) % 50 == 0:
             print(f"  {i+1}/{len(batch)} 救済 {len(recovered)}")
     fo_r.close(); fo_c.close()
@@ -293,7 +296,7 @@ if a.live and rest:
             cap = (item.get("itemCaption") or "").strip()
             if cap:
                 caps[ib] = {"caption": cap, "contents": (item.get("contents") or "").strip()}
-        time.sleep(1.2)
+        # 楽天間隔は live_item内の _rate_gate が担保(ここでの追加sleepは二重=削除)
         if (i + 1) % 50 == 0:
             print(f"  {i+1}/{len(rest)}")
 
