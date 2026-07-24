@@ -19,6 +19,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import importlib
 _lookup = importlib.import_module("_lookup")
 from _wiki_host import acquire, cooldown_check, cooldown_set, release
+import _rate_gate  # ★wiki/楽天のプロセス間グローバル・レートゲート
 
 HDIR = os.path.join(ROOT, ".cache", "kana-digit-harvest")
 QUEUE = os.path.join(HDIR, "queue.json")
@@ -62,18 +63,15 @@ def wiki_lead(title):
              "format": "json", "formatversion": "2", "redirects": "1", "titles": t}
         req = urllib.request.Request("https://ja.wikipedia.org/w/api.php?" + urllib.parse.urlencode(p))
         req.add_header("User-Agent", "MANGAL-kana-harvest/1.0 (contact: repo owner)")
+        _rate_gate.wait("wiki", 1.2)  # ★wikiグローバル間隔(⑤material-harvestと共有=合算頻度を抑え429を減らす)
         try:
             d = json.loads(urllib.request.urlopen(req, timeout=25).read())
         except urllib.error.HTTPError as e:
             if e.code == 429:
                 cooldown_set(60, by="kana-digit"); sys.exit(2)  # releaseはfinallyで
-            time.sleep(1.0)
             continue
         except Exception:
-            time.sleep(1.0)
             continue
-        finally:
-            time.sleep(1.0)
         pages = (d.get("query") or {}).get("pages") or []
         if not pages or pages[0].get("missing"):
             continue

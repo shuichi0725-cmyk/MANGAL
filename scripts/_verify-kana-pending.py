@@ -13,6 +13,8 @@ data/seeds/rakuten-kana-pending.jsonl の status=pending を古い順に NDL SRU
 import json, os, re, sys, time, html, unicodedata, urllib.request, urllib.parse, datetime
 sys.stdout.reconfigure(encoding="utf-8")
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import _rate_gate  # ★NDLプロセス間グローバル・レートゲート(_lookup等と共有)
 PEND = os.path.join(ROOT, "data", "seeds", "rakuten-kana-pending.jsonl")
 MISS = os.path.join(ROOT, "docs", "production-diagnostics", "kana-mismatch.tsv")
 LIMIT = int(sys.argv[sys.argv.index("--limit") + 1]) if "--limit" in sys.argv else 200
@@ -30,6 +32,7 @@ def ndl_title_kana(isbn):
     p = {"operation": "searchRetrieve", "query": q, "recordSchema": "dcndl", "maximumRecords": "3"}
     req = urllib.request.Request("https://ndlsearch.ndl.go.jp/api/sru?" + urllib.parse.urlencode(p))
     req.add_header("User-Agent", "Mozilla/5.0")
+    _rate_gate.wait("ndl", 1.3)  # ★NDLグローバル間隔(_lookup.ndl_live等と共有=並走合算429を防ぐ)
     xml = html.unescape(urllib.request.urlopen(req, timeout=30).read().decode("utf-8"))
     if "Too Many Requests" in xml:
         print("★429→中断(進捗は保存済)"); sys.exit(2)
@@ -53,7 +56,7 @@ for i in targets:
         raise
     except Exception:
         ndl = None
-    time.sleep(1.2)
+    # NDL間隔は ndl_title_kana内の _rate_gate が担保(ここでの追加sleepは二重=削除)
     if not ndl:
         still += 1
         continue  # NDL未収載=pendingのまま(漏れない)

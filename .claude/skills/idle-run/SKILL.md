@@ -23,10 +23,13 @@ python scripts/_kana-digit-harvest.py --limit 30   # ⑧数字kana素材(フリ�
 ## ★429/冷却の共通ルール (= 2026-07-24 ユーザ指摘で機械化。運転者の判断ゼロ)
 - ⑤⑧(wikiホスト)は **script自身が排他ロック+冷却タイマーを持つ**(`scripts/_wiki_host.py`):
   同時起動→後発が即exit(3) / 429→冷却60分をファイルに記録して中断 / 冷却中の再起動→即exit(3)。
-- ★**楽天/NDLホストは `scripts/_rate_gate.py` でプロセス間グローバル直列化**(2026-07-24追加。 それ以前は
+  ★wiki 429で「冷却60分中」が出るのは**設計通りの正常動作**(待たずに他の柱へ・次の手すきで自動再開)=異常ではない。
+- ★**楽天/NDL/wiki の3ホスト全てが `scripts/_rate_gate.py` でプロセス間グローバル直列化**(2026-07-24追加。 それ以前は
   ⑦voldescと⑧kana-digitが**同じ楽天app-idを並走**し、各1.3sを守っても合算~1.5req/sで即429だった)。
-  ゲートは全楽天/NDL呼出(`_lookup.rakuten_live`/`ndl_live`・`_voldesc-material.live_item`)の直前で予約制の
-  1.3s間隔を掛ける=**何本並走してもhost単位で1本の1.3sストリーム**に統合。 運転者の判断は不要(並走起動してよい)。
+  ゲートは全live呼出の直前で予約制の間隔を掛ける=**何本並走してもhost単位で1本のストリーム**に統合:
+  楽天1.3s(`_lookup.rakuten_live`・`_voldesc-material.live_item`)/ NDL1.3s(`_lookup.ndl_live`・③`_verify-kana-pending`)/
+  wiki1.2s(⑤`_material-harvest`・⑧`_kana-digit-harvest`)。 運転者の判断は不要(全柱を並走起動してよい)。
+  ※wikiは wiki_host(排他ロック+冷却) と _rate_gate(合算頻度の平滑化) の二段=429の発生を減らしつつ、出ても冷却で自然回復。
 - 運転者(Sonnet)のルールは1つだけ: **柱が「冷却」「使用中」メッセージで止まったら、待たない・調べない・
   すぐ他の柱を回す**。⑤⑧は次の手すき(≥60分後)に同コマンド再起動するだけ(冷却中ならscriptが勝手に弾く=無害)。
   ★「429が明けるのをずっと待つ」は禁止(2026-07-24実害: 待機で他の柱まで全停止)。

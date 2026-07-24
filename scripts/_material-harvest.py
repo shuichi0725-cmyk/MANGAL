@@ -29,6 +29,8 @@ import urllib.request
 
 sys.stdout.reconfigure(encoding="utf-8")
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import _rate_gate  # ★wiki/楽天のプロセス間グローバル・レートゲート(⑧kana-digit等と共有)
 MAT = os.path.join(ROOT, ".cache", "enrich-material")
 V2 = os.path.join(ROOT, "data", "manga.v2")
 QLEVER = "https://qlever.dev/api/wikidata"
@@ -262,6 +264,7 @@ def _wiki_fetch_locked(a, cooldown_set):
         p = {"action": "parse", "page": r["article"], "prop": "wikitext", "format": "json",
              "formatversion": "2", "redirects": "1"}
         req = urllib.request.Request(WIKI_API + "?" + urllib.parse.urlencode(p), headers={"User-Agent": UA})
+        _rate_gate.wait("wiki", 1.2)  # ★wikiグローバル間隔(⑧kana-digitと共有=合算頻度を抑え429を減らす)
         try:
             d = json.load(urllib.request.urlopen(req, timeout=60))
             wt = (d.get("parse") or {}).get("wikitext") or ""
@@ -291,7 +294,7 @@ def _wiki_fetch_locked(a, cooldown_set):
         _jsonl_append(ext_path, [ex])
         if (i + 1) % 100 == 0:
             print(f"  ...{i+1}/{len(todo)}")
-        time.sleep(0.8)
+        # wiki間隔は上の _rate_gate.wait("wiki") が担保(ここでの追加sleepは二重=削除)
     print(f"wiki-fetch: 今回{len(todo)}件(err {n_err}) → {ext_path}")
 
 
