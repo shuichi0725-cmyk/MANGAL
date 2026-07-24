@@ -1,6 +1,11 @@
 # 取り込めなかった巻の追跡 (= 将来 NDL更新/別ソースで再訪用)。
 # reason: NDL未確認(実在不明orラグ) / bind不可 / 重複。 生成元 _register-seed4-ndl.py。
 pending:
+- title: '1: 2交際はラブコメに入りますか?'
+  number: 2
+  isbn13: '9784832205284'
+  reason: 種2に既存ISBN(別クラスタ=未統合/表記揺れ、 取込もれでない)
+  source: ndl
 - title: 名探偵コナン
   number: 106
   reason: NDL未確認 (実在不明/取込もれ候補)
