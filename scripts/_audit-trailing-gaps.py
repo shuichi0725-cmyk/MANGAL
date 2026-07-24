@@ -48,23 +48,32 @@ def main():
     con = sqlite3.connect(DB)
     c = con.cursor()
 
-    # --- merge group: sid → frozenset(group sids) ---
+    # --- series_key → sid (merge_keys 解決に先に必要) ---
+    key_sid = {}
+    for sid, sk in c.execute("SELECT id, series_key FROM series"):
+        key_sid[sk] = sid
+
+    # --- merge group: sid → group sids ---
+    # ★schema: _gen-author-set-merges.py は merge_keys(=series_key) を出す(2026-07)。
+    #   旧 merge_sids(=sid直) も後方互換で受ける。keys は key_sid で sid 解決。
+    def _grp_to_sids(entry):
+        if entry.get("merge_keys"):
+            return [key_sid[k] for k in entry["merge_keys"] if k in key_sid]
+        if entry.get("merge_sids"):
+            return [int(s) for s in entry["merge_sids"]]
+        return []
+
     sid_group = {}
     if AUTO.exists():
         for g in json.load(open(AUTO, encoding="utf-8")).get("merges", []):
-            grp = [int(s) for s in g["merge_sids"]]
+            grp = _grp_to_sids(g)
             for s in grp:
                 sid_group[s] = grp
     if HAND.exists():
         for e in (yaml.safe_load(open(HAND, encoding="utf-8")) or []):
-            grp = [int(s) for s in (e.get("merge_sids") or [])]
+            grp = _grp_to_sids(e)
             for s in grp:
                 sid_group[s] = grp
-
-    # --- series_key → sid ---
-    key_sid = {}
-    for sid, sk in c.execute("SELECT id, series_key FROM series"):
-        key_sid[sk] = sid
 
     # --- sid → max standard volume number (db) ---
     sid_maxstd = defaultdict(int)
