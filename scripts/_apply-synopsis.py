@@ -36,7 +36,8 @@ def main():
         elif aid not in cur:
             added += 1
         cur[aid] = ja
-    MAP.write_text(json.dumps(cur, ensure_ascii=False, indent=0), encoding="utf-8")
+    # ★indent=2 = 既存 seed の現行フォーマット。 揃えないと11MB全行が差分化する(indent=0で事故)。
+    MAP.write_text(json.dumps(cur, ensure_ascii=False, indent=2), encoding="utf-8")
     print(f"applied={added}, overwrote={overwrote}, skipped={skipped}, map計={len(cur):,}")
     if warns:
         print("\n".join(warns[:30]))
