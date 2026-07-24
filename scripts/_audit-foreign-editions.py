@@ -82,8 +82,8 @@ def main():
         for key, title, isbn, n in new_safe:
             cc = CC.get(isbn[:4], isbn[:4])
             t = title[:30].replace('"', "")
-            lines.append(f'  - series_key: "{key}"\n    reason: foreign_language_edition\n'
-                         f'    note: "(蒸留)外国版({cc}・全{n}巻非9784・latin題): {t}"')
+            lines.append(f'- series_key: "{key}"\n  reason: foreign_language_edition\n'
+                         f'  note: "(蒸留)外国版({cc}・全{n}巻非9784・latin題): {t}"')
         io.open(NM, "w", encoding="utf-8").write(nt + "\n".join(lines) + "\n")
         import yaml
         d = yaml.safe_load(io.open(NM, encoding="utf-8").read())
