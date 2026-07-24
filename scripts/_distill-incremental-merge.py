@@ -18,11 +18,11 @@ import sys, os, sqlite3, shutil, json, importlib.util
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # 旧PCパス→動的導出(2026-07-21一括是正)
 APPLY = "--apply" in sys.argv
-AT = "2026-06-27"
+AT = "2026-07-24"
 args = [a for a in sys.argv[1:] if not a.startswith("--")]
 TEMP_DB = args[0] if args else f"{ROOT}/.cache/db-v2-1217-temp.sqlite"
 REAL_DB = f"{ROOT}/.cache/db-v2.sqlite"
-MANIFEST = f"{ROOT}/.cache/madb-distill/merge-manifest-1.2.17.json"
+MANIFEST = f"{ROOT}/.cache/madb-distill/merge-manifest-1.2.18.json"
 
 
 def _load(modname, path):
@@ -166,7 +166,7 @@ def main():
     if APPLY:
         real.commit()
         json.dump({"new_series_ids": new_series_ids, "appended_vol_ids": appended_vol_ids,
-                   "at": AT, "tag": "1.2.17", "stats": st},
+                   "at": AT, "tag": "1.2.18", "stats": st},
                   open(MANIFEST, "w", encoding="utf-8"), ensure_ascii=False)
         print(f"\n適用commit済 / manifest: {MANIFEST}")
     else:
