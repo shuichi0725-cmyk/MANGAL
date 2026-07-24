@@ -56,34 +56,47 @@ def build_queue():
     print(f"queue {len(q)}頁 → {QUEUE}")
 
 
+def _retry_after_min(e, default=30):
+    """429のRetry-Afterヘッダ(秒)を分に。 無ければdefault分。 5〜60分にクランプ。"""
+    try:
+        sec = int((e.headers.get("Retry-After") or "").strip())
+        return max(5, min(60, -(-sec // 60)))  # 切り上げ
+    except Exception:
+        return default
+
+
 def wiki_lead(title):
-    """記事wikitext冒頭を取り、『…』（よみ）候補を抽出。(lead抜粋, yomi候補) を返す。"""
-    for t in (title, f"{title} (漫画)"):
-        p = {"action": "query", "prop": "revisions", "rvprop": "content", "rvslots": "main",
-             "format": "json", "formatversion": "2", "redirects": "1", "titles": t}
-        req = urllib.request.Request("https://ja.wikipedia.org/w/api.php?" + urllib.parse.urlencode(p))
-        req.add_header("User-Agent", "MANGAL-kana-harvest/1.0 (contact: repo owner)")
-        _rate_gate.wait("wiki", 1.2)  # ★wikiグローバル間隔(⑤material-harvestと共有=合算頻度を抑え429を減らす)
+    """記事wikitext冒頭を取り、『…』（よみ）候補を抽出。(lead抜粋, yomi候補) を返す。
+    ★2変種(plain / '(漫画)')を1リクエストに束ねる=wiki負荷半減で429被曝を下げる。"""
+    p = {"action": "query", "prop": "revisions", "rvprop": "content", "rvslots": "main",
+         "format": "json", "formatversion": "2", "redirects": "1",
+         "titles": f"{title}|{title} (漫画)"}
+    req = urllib.request.Request("https://ja.wikipedia.org/w/api.php?" + urllib.parse.urlencode(p))
+    req.add_header("User-Agent", "MANGAL-kana-harvest/1.0 (contact: shuichi0725@gmail.com)")
+    _rate_gate.wait("wiki", 1.2)  # ★wikiグローバル間隔(⑤material-harvestと共有=合算頻度を抑え429を減らす)
+    try:
+        d = json.loads(urllib.request.urlopen(req, timeout=25).read())
+    except urllib.error.HTTPError as e:
+        if e.code == 429:
+            cooldown_set(_retry_after_min(e, 30), by="kana-digit"); sys.exit(2)  # ★Retry-After尊重・既定30分
+        return "", ""
+    except Exception:
+        return "", ""
+    best_lead = ""
+    for pg in (d.get("query") or {}).get("pages") or []:
+        if pg.get("missing"):
+            continue
         try:
-            d = json.loads(urllib.request.urlopen(req, timeout=25).read())
-        except urllib.error.HTTPError as e:
-            if e.code == 429:
-                cooldown_set(60, by="kana-digit"); sys.exit(2)  # releaseはfinallyで
-            continue
-        except Exception:
-            continue
-        pages = (d.get("query") or {}).get("pages") or []
-        if not pages or pages[0].get("missing"):
-            continue
-        try:
-            text = pages[0]["revisions"][0]["slots"]["main"]["content"]
+            text = pg["revisions"][0]["slots"]["main"]["content"]
         except Exception:
             continue
         head = text[:2500].replace("\n", " ")
         m = re.search(r"『'''.{0,80}?'''』\s*（([^）]{1,60})）", head)
-        yomi = m.group(1) if m else ""
-        return head[:400], yomi
-    return "", ""
+        if m:
+            return head[:400], m.group(1)   # yomiが取れたら即採用
+        if not best_lead:
+            best_lead = head[:400]           # yomi無しでもleadは保持(最初の実在頁)
+    return best_lead, ""
 
 
 def run(limit):
