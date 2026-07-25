@@ -113,7 +113,23 @@ def _cover_for(isbn13):
                         pass
     if not isbn13:
         return None
-    return _COVERS.get(str(isbn13).replace("-", ""))
+    return _norm_cover_ex(_COVERS.get(str(isbn13).replace("-", "")))
+
+
+# ★書影の _ex 正規化(2026-07-25): 楽天サムネは「1枚のマスター + _ex サイズ指定」で、
+#   APIの largeImageUrl(=_ex=200x200) は最大ではない。300 にするとマスター原寸まで返り
+#   (新刊 141x200 → 211x300)、マスターが小さい古書は据置き=容量も増えない。
+#   seed(covers.jsonl.gz)は200x200で焼かれているので、書き出し時にここで揃える。
+COVER_EX = "?_ex=300x300"
+
+
+def _norm_cover_ex(url):
+    if not url or not url.startswith("https://thumbnail.image.rakuten.co.jp/"):
+        return url
+    base, _, q = url.partition("?")
+    if q and not q.startswith("_ex="):
+        return url                      # 想定外クエリは触らない
+    return base + COVER_EX
 
 # ★発売日 精密化 seed (= release-date-fill.jsonl。 2026-07-18 結線=素材ハーベスト①)。
 #   楽天salesDate由来の年月日フル値。 収集時に「現在値が空 or 新値のprefix」ゲート済みだが、

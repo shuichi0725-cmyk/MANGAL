@@ -26,7 +26,7 @@ def full_cover(c):
     #   ここで復元しないと消費側(app/anime/[season])は生値を<CoverImage>に渡すため書影全滅する。
     if not c:
         return None
-    return c if str(c).startswith("http") else "https://thumbnail.image.rakuten.co.jp/@0_mall/" + str(c) + "?_ex=200x200"
+    return c if str(c).startswith("http") else "https://thumbnail.image.rakuten.co.jp/@0_mall/" + str(c) + "?_ex=300x300"  # ★300x300統一(coverSlim.tsと同値)
 
 
 info = {}

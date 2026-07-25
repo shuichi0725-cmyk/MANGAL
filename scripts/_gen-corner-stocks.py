@@ -10,7 +10,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 idx = json.load(open(os.path.join(ROOT, "data", "manga-list-index.json"), encoding="utf-8"))
 f = idx["f"]; si = f.index("slug"); ci = f.index("cover")
 RK_PRE = "https://thumbnail.image.rakuten.co.jp/@0_mall/"
-RK_SUF = "?_ex=200x200"
+RK_SUF = "?_ex=300x300"  # ★2026-07-25 _ex=300x300 に統一(lib/coverSlim.ts と同値。200では楽天マスターの解像度を捨てる)
 def full_cover(c):
     # ★索引coverはslim形式(可変部のみ)。lib/coverSlim.tsのfullCoverと同一の展開。
     if not c:

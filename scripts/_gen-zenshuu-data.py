@@ -69,6 +69,19 @@ def _link_by_title(works, author):
     return works
 
 
+def _cov(u):
+    """楽天の「画像なし」プレースホルダを弾き、_ex は 300x300 に揃える。
+    ★noimage_01.gif を書影として出すと「画像あり」に見えて表示が壊れる
+      ([[rakuten_cover_data_asset]] noimage除外必須。 2026-07-25 石ノ森15本で発覚)。"""
+    if not u or "noimage" in u:
+        return None
+    if u.startswith("https://thumbnail.image.rakuten.co.jp/"):
+        base, _, q = u.partition("?")
+        if (not q) or q.startswith("_ex="):
+            return base + "?_ex=300x300"
+    return u
+
+
 def load_covers():
     m = {}
     p = os.path.join(ROOT, "data", "seeds", "covers.jsonl.gz")
@@ -133,7 +146,9 @@ def main():
                     lu = None
                 sets.append({"n": k, "name": f"第{k}期", "isbn": r["isbn"],
                              "date": (r.get("salesDate") or "").replace("頃", ""),
-                             "cover": r.get("cover"), "lineup": lu})
+                             # ★楽天の「画像なし」プレースホルダ(noimage_01.gif)は書影として出さない
+                             #   ([[rakuten_cover_data_asset]] noimage除外必須。2026-07-25 石ノ森15本で発覚)
+                             "cover": _cov(r.get("cover")), "lineup": lu})
             cols.append({"key": key, "name": name, "publisher": pub, "total": total,
                          "years": "2006-2008", "axis": "sets", "linked": 0, "complete": False,
                          "guinness": True, "covers": [s["cover"] for s in sets[:3] if s.get("cover")],
