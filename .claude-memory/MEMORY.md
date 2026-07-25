@@ -139,4 +139,5 @@
 - [【注意信号】書影の違和感=上流誤りの症状](feedback_cover_oddity_signal.md) — 揃いすぎ/装丁不一致/同一画像はISBN帰属・版・リンク誤りを疑う
 - [【厳守】週次蒸留=「週次蒸留して」のみで発動](feedback_weekly_distill_exact_trigger_only.md) — 類語解釈での代行起動禁止
 - [【✅】著者名の空白=authorKeyで照合吸収](author_name_space_conventions_conflict.md) — 表記不変・新規照合は必ずauthorKey経由
+- [【最重要・未決】promoteは元頁駆動=新規シリーズが出ない](orphan_series_promote_is_srcpage_driven.md) — 未掲載46,874。著者マスター起点の副作用・成人/コンビニ本では減らない
 - [2026-07 月次蒸留 MADB1.2.18](distill_2026_07_1218.md) — series+292/vol+1,124取込済・検証green・synopsis9,421未訳残
