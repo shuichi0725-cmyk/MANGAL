@@ -36,9 +36,9 @@ describe("decodeListIndex", () => {
     expect(m.original_authors[0]).toEqual({ name: "旧形式", kana: "キュウ" });
   });
 
-  it("cover slim形をフルURLに復元する(200x200統一)", () => {
+  it("cover slim形をフルURLに復元する(300x300統一)", () => {
     const [m] = decodeListIndex({ f: F, d: [row({ cover: "book/cabinet/1234/9784001.jpg" })] });
-    expect(m.cover).toBe("https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/1234/9784001.jpg?_ex=200x200");
+    expect(m.cover).toBe("https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/1234/9784001.jpg?_ex=300x300");
   });
 });
 
