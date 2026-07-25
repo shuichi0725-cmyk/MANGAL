@@ -1,0 +1,91 @@
+slug: neo-faust
+title: ネオ・ファウスト
+title_kana: ネオファウスト
+title_romaji: neo fausuto
+year_started: 1989
+year_ended: 1992
+status: completed
+authors:
+- name: 手塚治虫
+  role: writer_artist
+  kana: テズカオサム
+  romaji: tezukaosamu
+original_authors: []
+publisher: asahi-shimbun
+magazine: null
+demographic: seinen
+genres:
+- sci-fi
+synopsis: ''
+anime_adapted: false
+alternative_titles:
+  en: Neo Faust
+wikidata_qid: Q193300
+editions:
+- type: standard
+  label: 通常版（全1巻）
+  publisher: null
+  volumes: &id001
+  - number: 1
+    asin: null
+    isbn13: '9784022559333'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/rakutenkobo-ebooks/cabinet/8308/2000002958308.jpg?_ex=300x300
+    release_date: '1989-04-25'
+  versions:
+  - label: 朝日新聞社
+    year_started: 1989
+    volumes: *id001
+  - label: サンエイムック
+    year_started: 2016
+    volumes:
+    - number: 1
+      asin: null
+      isbn13: '9784779628207'
+      cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/8207/9784779628207.jpg?_ex=300x300
+      release_date: 2016-05
+  - label: 復刊ドットコム
+    year_started: 2025
+    volumes:
+    - number: 1
+      asin: null
+      isbn13: '9784835459585'
+      cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/9585/9784835459585_1_4.jpg?_ex=300x300
+      release_date: '2025-06-13'
+- type: bunkobon
+  label: 文庫版（全1巻）
+  publisher: null
+  volumes: &id002
+  - number: 1
+    asin: null
+    isbn13: '9784022607270'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/7270/9784022607270.jpg?_ex=300x300
+    release_date: '1992-10-01'
+  versions:
+  - label: 朝日文庫
+    year_started: 1992
+    volumes: *id002
+  - label: 手塚治虫文庫全集
+    year_started: 2011
+    volumes:
+    - number: 1
+      asin: null
+      isbn13: '9784063738704'
+      cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/8704/9784063738704.jpg?_ex=300x300
+      release_date: 2011-10
+- type: aizoban
+  label: 手塚治虫漫画全集
+  publisher: 講談社
+  imprint: 手塚治虫漫画全集
+  volumes:
+  - number: 1
+    asin: null
+    isbn13: '9784061759688'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/9688/9784061759688.jpg?_ex=300x300
+    release_date: '1995-11-16'
+  - number: 2
+    asin: null
+    isbn13: '9784061759695'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0617/06175969.jpg?_ex=300x300
+    release_date: '1995-12-14'
+publishers:
+- asahi-shimbun
