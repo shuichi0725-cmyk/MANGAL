@@ -160,7 +160,7 @@ def rakuten_live_retry(env, *, backoff=(2, 5, 15, 45), **kw):
     raise last
 
 
-def ndl_live(query, maximum=30, start=1):
+def ndl_live(query, maximum=30, start=1, exit_on_429=True):
     """NDL SRU live。 ★1.3秒/req厳守・429=即中断。 ★一般語のtitle単独クエリはtimeoutする
     → creator束縛を優先し、timeoutは握りつぶして続行してよい。 ★NDL不在≠不存在(BL/小出版は収録弱)。
     ★start=startRecord(2026-07-18追加): 大物(数百版)は 1,201,401… とページングして全取得する
@@ -176,7 +176,9 @@ def ndl_live(query, maximum=30, start=1):
         print(f"  NDL query失敗(続行可): {e}")
         return []
     if "Too Many Requests" in xml:
-        print("★NDL429 → 即中断。回復するので慌てず休ませる(1時間単位)"); sys.exit(2)
+        if exit_on_429:
+            print("★NDL429 → 即中断。回復するので慌てず休ませる(1時間単位)"); sys.exit(2)
+        raise Throttled("ndl 429")
     out = []
     # ★recordData単位で分割(BibResource分割より確実=ひおあきらヤマト検証 2026-07-08)
     recs = re.findall(r"<recordData>(.*?)</recordData>", xml, re.S) or re.split(r"<dcndl:BibResource", xml)[1:]
@@ -185,7 +187,13 @@ def ndl_live(query, maximum=30, start=1):
         # ISBN10/13両対応(古典はISBN10)。creator複数(アンソロ/原作+作画)
         _isbn = g(r'ISBN">([0-9\-]+)') or g(r"(97[89][\d\-]{10,16})")
         creators = re.findall(r"<dcterms:creator>.*?<foaf:name>([^<]+)", r, re.S) or re.findall(r"<dc:creator>([^<]+)", r)
+        # ★題ヨミ = dc:title 内の dcndl:transcription(分かち書き)。 NDLヨミは ground truth
+        #   ([[furigana_ndl_audit]])。 slug生成/索引ガードの土台になるので必ず拾う(2026-07-25追加)。
+        _tk = re.search(r"<dc:title>.*?<dcndl:transcription>([^<]+)", r, re.S)
+        _sk = re.search(r"<dcndl:seriesTitle>.*?<dcndl:transcription>([^<]+)", r, re.S)
         out.append({
+            "title_kana": (_tk.group(1).strip() if _tk else ""),
+            "series_kana": (_sk.group(1).strip() if _sk else ""),
             "title": g(r"<dcterms:title>([^<]+)"),
             "vol": g(r"<dcndl:volume>.*?<rdf:value>([^<]+)"),
             "date": g(r"<dcterms:date>([^<]+)"),
@@ -195,6 +203,21 @@ def ndl_live(query, maximum=30, start=1):
             "creators": [c.replace("/", "") for c in creators],
         })
     return out
+
+
+def ndl_live_retry(query, *, backoff=(3, 10, 30, 90), **kw):
+    """★長時間ジョブ用: NDLの429/瞬断を backoff 再試行で吸収する(対話用 ndl_live は429で即exit)。
+    2026-07-25: 楽天で同じ型の事故(429即exitで柱が73分で停止)を踏んだのでNDL側にも用意。
+    NDLの回復は楽天より遅い(時間単位)ので待ちを長めに取る。"""
+    last = None
+    for i, wait_s in enumerate(backoff):
+        try:
+            return ndl_live(query, exit_on_429=False, **kw)
+        except Exception as e:
+            last = e
+            if i < len(backoff) - 1:
+                time.sleep(wait_s)
+    raise last
 
 
 # ---------- main ----------
