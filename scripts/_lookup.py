@@ -103,9 +103,17 @@ def title_map_search(q, mx):
 
 # ---------- live層 (★叩き方の正はここ。 コピペ再実装しない) ----------
 
-def rakuten_live(env, *, isbn=None, title=None, hits=30):
+class Throttled(Exception):
+    """楽天429(= 一時スロットル)。 長時間ジョブが自前でbackoff再試行するための signal。"""
+
+
+def rakuten_live(env, *, isbn=None, title=None, hits=30, exit_on_429=True):
     """楽天Books live。 ★endpoint=openapi.rakuten.co.jp + Referer/Origin header 必須
-    (app.rakuten.co.jp 直や header 無しは 400)。 ★outOfStockFlag=1 必須(絶版/品切れが既定で消える)。"""
+    (app.rakuten.co.jp 直や header 無しは 400)。 ★outOfStockFlag=1 必須(絶版/品切れが既定で消える)。
+
+    ★exit_on_429: 既定True = 対話照会の安全設計(429で即プロセス終了・連打しない)。
+      **長時間の一括ハーベストはFalseにして `Throttled` を捕まえ、backoff再試行すること**
+      (2026-07-25: 取りこぼし柱が429の即exitで73分で停止した。既存の3日運転柱は再試行を持っていた)。"""
     p = {"applicationId": env["RAKUTEN_APP_ID"], "accessKey": env["RAKUTEN_ACCESS_KEY"],
          "affiliateId": env.get("RAKUTEN_AFFILIATE_ID", ""), "outOfStockFlag": "1",
          "hits": str(hits), "format": "json", "formatVersion": "2"}
@@ -125,8 +133,31 @@ def rakuten_live(env, *, isbn=None, title=None, hits=30):
         return json.loads(r.read()).get("Items") or []
     except urllib.error.HTTPError as e:
         if e.code == 429:
-            print("★楽天429 → 即中断。しばらく(数分)休ませる"); sys.exit(2)
+            if exit_on_429:
+                print("★楽天429 → 即中断。しばらく(数分)休ませる"); sys.exit(2)
+            raise Throttled("rakuten 429")
         raise
+
+
+def rakuten_live_retry(env, *, backoff=(2, 5, 15, 45), **kw):
+    """★長時間ハーベスト用: 429/瞬断を backoff 再試行で吸収する楽天呼出。
+
+    2026-07-25 の型: 対話用 `rakuten_live` は 429 で即 sys.exit する安全設計だが、
+    それを数千件のループで使うと **1回の一時スロットルで柱ごと止まる**
+    (取りこぼし柱が73分で停止)。 3日運転できていた既存柱(_rakuten-fill-covers)は
+    再試行を持っていた = 差はレートでなく再試行の有無。 長時間ジョブはこちらを使う。
+
+    戻り: Items list。 全試行が失敗したら **最後の例外を送出**(呼び側で1件skip等を決める)。
+    """
+    last = None
+    for i, wait_s in enumerate(backoff):
+        try:
+            return rakuten_live(env, exit_on_429=False, **kw)
+        except Exception as e:              # Throttled / HTTPError / URLError / timeout
+            last = e
+            if i < len(backoff) - 1:
+                time.sleep(wait_s)
+    raise last
 
 
 def ndl_live(query, maximum=30, start=1):

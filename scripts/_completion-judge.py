@@ -97,8 +97,8 @@ def caption_sources(need):
 
 
 def fetch_live(isbn):
-    from _lookup import rakuten_live, _env
-    items = rakuten_live(_env(), isbn=isbn, hits=3)
+    from _lookup import rakuten_live_retry, _env
+    items = rakuten_live_retry(_env(), isbn=isbn, hits=3)  # ★長時間柱=429をbackoff吸収
     for it in items:
         if it.get("itemCaption"):
             return it["itemCaption"]

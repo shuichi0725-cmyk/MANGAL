@@ -1,6 +1,6 @@
 ---
 name: torikoboshi-harvest
-description: 取りこぼしして/取りこぼし続けて=サイトに出ていない孤児作品(44,533件)の書誌を楽天からISBNで回収。cache→liveの2段・resumable・429即中断。Sonnet運転前提
+description: 取りこぼしして/取りこぼし続けて=サイトに出ていない孤児作品(44,533件)の書誌を楽天からISBNで回収。cache→liveの2段・resumable・429はbackoff吸収。Sonnet運転前提
 ---
 
 # 取りこぼしハーベスト (= トリガー「取りこぼしして」「取りこぼし続けて」)
@@ -31,7 +31,10 @@ python scripts/_torikoboshi-harvest.py --live --limit 500    # ②残りをlive(
 
 ## NEVER / 罠
 - ★**live呼出を自前で書かない**。 endpoint/header/`outOfStockFlag=1`/レートは `_lookup.py` に封じ込め済で、
-  本scriptは `rakuten_live()` を import して使う。 コピペ実装は 400/429 の元 [[external-data-access]]。
+  本scriptは **`rakuten_live_retry()`** を import して使う。 コピペ実装は 400/429 の元 [[external-data-access]]。
+- ★**長時間ジョブで `rakuten_live()`(対話用)を直接使わない**。 それは 429 で即 `sys.exit` する安全設計で、
+  ループで使うと**一時スロットル1回で柱ごと止まる**(2026-07-25: 3,147件=73分で停止した実害)。
+  3日運転できていた既存柱との差は**レートでなく再試行の有無**だった。 長時間ジョブは必ず retry 版。
 - ★**1.3秒/req を縮めない**(429/IP遮断の実績)。 `_rate_gate` でホスト単位に直列化されるので、
   他の柱と並走しても合算429にならない。 **例外が出たら即中断**(連打しない)= script実装済。
 - ★`--limit` 無しの一括実行はしない(数時間ブロックする)。 既定300。

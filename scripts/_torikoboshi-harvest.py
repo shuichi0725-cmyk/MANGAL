@@ -7,8 +7,10 @@
 ★2段構え(= live 46,874件×1.3秒=17時間 を避ける):
   1. `--cache` : 既存の巨大キャッシュ(rakuten-isbn.jsonl / -delta.jsonl)を **1パス走査**で回収。
                  ここで大半が埋まる。 数分。
-  2. `--live`  : 残りだけ live 取得。 ★1.3秒/req のグローバルレートゲート(_lookup.rakuten_live)
-                 を通す = 他の柱と並走しても合算429にならない。 429検知で即中断(連打しない)。
+  2. `--live`  : 残りだけ live 取得。 ★1.3秒/req のグローバルレートゲートを通す
+                 (= 他の柱と並走しても合算429にならない)。
+                 ★**429/瞬断は `_lookup.rakuten_live_retry` が backoff再試行で吸収**し止まらない。
+                 連続10件失敗で初めて中断(= 一過性スロットルと本当の遮断を区別)。
                  `--limit N` で小分け実行(resumable = 出力済みISBNは自動skip)。
 
 出力 = `.cache/torikoboshi/harvest.jsonl` (1行=1 ISBN、 追記のみ・冪等)
@@ -26,7 +28,11 @@ import importlib.util
 import json
 import os
 import sys
+import time
 from pathlib import Path
+
+BACKOFF = [2, 5, 15, 45]    # ★429/瞬断の再試行待ち(秒)。 最後の要素は「待つだけで再試行しない」
+FAIL_STREAK = 10            # ★これだけ連続で失敗したら本当の遮断とみなして中断
 
 sys.stdout.reconfigure(encoding="utf-8")
 ROOT = Path(__file__).resolve().parent.parent
@@ -134,15 +140,28 @@ def main():
         env = L._env()
         batch = todo[:a.limit]
         print(f"live取得 {len(batch)} 件 (1.3秒/req = 約{len(batch) * 1.3 / 60:.1f}分) ...", flush=True)
-        recs, miss = [], 0
+        recs, miss, throttled, streak = [], 0, 0, 0
+        stopped = None
         for i, r in enumerate(batch, 1):
             ib = r["isbn"]
+            items, err = None, None
+            # ★一時スロットル(429)や瞬断で **止まらない**。 共通ヘルパがbackoff再試行する。
+            #   (2026-07-25: 即中断実装で73分で停止。3日運転できた既存柱は再試行を持っていた)
             try:
-                items = L.rakuten_live(env, isbn=ib)
+                items = L.rakuten_live_retry(env, isbn=ib, backoff=BACKOFF)
             except Exception as e:
-                # ★429/障害は即中断(連打しない)。ここまでの分は保存済み。
-                print(f"  ✗ 中断 ({ib}): {e}", flush=True)
-                break
+                err = "429" if isinstance(e, L.Throttled) else f"{type(e).__name__}: {str(e)[:50]}"
+                throttled += isinstance(e, L.Throttled)
+            if err:
+                streak += 1
+                recs.append({"isbn": ib, "src": "miss", "item": None, "err": err})
+                miss += 1
+                if streak >= FAIL_STREAK:
+                    # ★連続失敗 = 一過性でなく本当の遮断/障害 → ここで初めて中断
+                    stopped = f"{FAIL_STREAK}件連続失敗({err})"
+                    break
+                continue
+            streak = 0
             if items:
                 recs.append({"isbn": ib, "src": "live", "item": items[0]})
             else:
@@ -150,10 +169,13 @@ def main():
                 miss += 1
             if i % 25 == 0:
                 append(recs)
-                print(f"  ...{i}/{len(batch)} (miss {miss})", flush=True)
                 recs = []
+                print(f"  ...{i}/{len(batch)} (ヒット無し{miss} / 429を吸収{throttled})", flush=True)
         append(recs)
-        print(f"★live完了/中断: 追記 {len(batch)}件相当 (ヒットなし {miss})")
+        if stopped:
+            print(f"★中断: {stopped}。 時間を置いて再実行(取得済はskipされる)")
+        else:
+            print(f"★live完了: {len(batch)}件 (ヒット無し {miss} / 429を吸収 {throttled})")
 
 
 if __name__ == "__main__":

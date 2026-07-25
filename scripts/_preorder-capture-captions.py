@@ -15,7 +15,7 @@ import glob, os, sys, yaml, json
 sys.stdout.reconfigure(encoding="utf-8")
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(ROOT, "scripts"))
-from _lookup import rakuten_live, _env
+from _lookup import rakuten_live_retry, _env
 
 env = _env()
 cache = {}
@@ -42,7 +42,7 @@ for p in sorted(glob.glob(os.path.join(ROOT, ".preview-data", "manga", "*.yml"))
     if not ib1:
         continue
     if ib1 not in cache:
-        items = rakuten_live(env, isbn=ib1) or []
+        items = rakuten_live_retry(env, isbn=ib1) or []  # ★一括=429をbackoff吸収
         it = items[0] if items else {}
         cache[ib1] = {"caption": str(it.get("itemCaption") or ""), "genreId": it.get("booksGenreId")}
         fetched += 1

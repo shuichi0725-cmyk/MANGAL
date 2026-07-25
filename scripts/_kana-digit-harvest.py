@@ -122,7 +122,7 @@ def _run_locked(limit):
         lead, yomi = wiki_lead(it["title"])
         rk = []
         for ib in it["isbns"]:
-            items = _lookup.rakuten_live(env, isbn=ib, hits=3)
+            items = _lookup.rakuten_live_retry(env, isbn=ib, hits=3)  # ★長時間柱=429をbackoff吸収(即exitさせない)
             for x in items:
                 tk = (x.get("titleKana") or "").strip()
                 if tk:
