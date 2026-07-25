@@ -187,6 +187,9 @@ def ndl_live(query, maximum=30, start=1, exit_on_429=True):
         # ISBN10/13両対応(古典はISBN10)。creator複数(アンソロ/原作+作画)
         _isbn = g(r'ISBN">([0-9\-]+)') or g(r"(97[89][\d\-]{10,16})")
         creators = re.findall(r"<dcterms:creator>.*?<foaf:name>([^<]+)", r, re.S) or re.findall(r"<dc:creator>([^<]+)", r)
+        # ★著者ヨミ = 典拠紐付きレコードの dcndl:transcription。 「サイトウ, ジュンイチロウ」と
+        #   **姓と名がカンマで分かれる** = slug衝突時の「-姓+年」suffix の姓が取れる(2026-07-25追加)。
+        creators_kana = re.findall(r"<dcterms:creator>.*?<dcndl:transcription>([^<]+)", r, re.S)
         # ★題ヨミ = dc:title 内の dcndl:transcription(分かち書き)。 NDLヨミは ground truth
         #   ([[furigana_ndl_audit]])。 slug生成/索引ガードの土台になるので必ず拾う(2026-07-25追加)。
         _tk = re.search(r"<dc:title>.*?<dcndl:transcription>([^<]+)", r, re.S)
@@ -201,6 +204,7 @@ def ndl_live(query, maximum=30, start=1, exit_on_429=True):
             "pub": g(r"<dcterms:publisher>.*?<foaf:name>([^<]+)") or g(r"<foaf:name>([^<]+)"),
             "series": g(r"<dcndl:seriesTitle>.*?<rdf:value>([^<]+)"),
             "creators": [c.replace("/", "") for c in creators],
+            "creators_kana": [c.strip() for c in creators_kana],
         })
     return out
 

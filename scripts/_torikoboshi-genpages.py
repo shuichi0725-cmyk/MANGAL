@@ -32,6 +32,7 @@ from pathlib import Path
 sys.stdout.reconfigure(encoding="utf-8")
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "scripts"))
+from _kana_romaji import kana2romaji  # noqa: E402
 # ★slug決定は **_slug-gen-v2.decide()** が正本(CLAUDE.mdの7分岐: latin題/カタカナ外来語の
 #   音写フィルタ/数字4分岐/ヘボン)。 2026-07-25: ここで自前のkana→ヘボン1本に済ませて
 #   BEM→bemu / ヴァージン・キラー→vaajin-kiraa という誤slugを作りかけた(ユーザ指摘)。
@@ -61,6 +62,31 @@ def _same_title(rakuten_title, s2_title):
     """楽天商品題と種2題が同一作品の題か(巻番号・記号差は無視)。 副題付きは不一致扱い。"""
     a, b = _norm_t(rakuten_title), _norm_t(s2_title)
     return bool(a) and bool(b) and a == b
+
+
+def _surname_romaji(rk, vv, ndl_ck=None):
+    """従版suffix用の**姓ローマ字**([[slug_collision_year_rule]] -姓+発売年)。
+    ①NDL典拠の著者ヨミ「サイトウ, ジュンイチロウ」= 姓と名がカンマで分かれる(最優先)
+    ②楽天authorKana が空白で姓名に分かれている場合の先頭トークン
+    どちらも取れなければ None = **推測せず保留**。"""
+    for ck in (ndl_ck or []):
+        if "," in ck or "、" in ck:
+            sur = re.split(r"[,、]", ck)[0].strip()
+            r = re.sub(r"[^a-z0-9]", "", kana2romaji(sur))
+            if len(r) >= 2:
+                return r
+    for ib, _, _ in vv:
+        ak = ((rk.get(ib) or {}).get("authorKana") or "").strip()
+        if not ak:
+            continue
+        first = re.split(r"[/／,、]", ak)[0].strip()
+        parts = re.split(r"[\s　]+", first)
+        if len(parts) < 2:
+            continue          # ★姓名が分かれていない読み = 姓を推測しない(保留にする)
+        r = re.sub(r"[^a-z0-9]", "", kana2romaji(parts[0]))
+        if len(r) >= 2:
+            return r
+    return None
 
 
 def _slug_decider():
@@ -117,8 +143,17 @@ def main():
                 rk[d["isbn"]] = d["item"]
 
     idx = json.loads(IDX.read_text(encoding="utf-8"))
-    used = {r[idx["f"].index("slug")] for r in idx["d"]}
-    used |= {p.stem for p in SRC.glob("*.yml")} | {p.stem for p in SRC_LEGACY.glob("*.yml")}
+    _si, _yi = idx["f"].index("slug"), idx["f"].index("year_started")
+    used = {r[_si] for r in idx["d"]}
+    prod_year = {r[_si]: r[_yi] for r in idx["d"] if r[_yi]}
+    # ★自己衝突を避ける: 前回このスクリプトが作った源頁(=今回の対象と同じ _skey)は
+    #   「既存slug」に数えない(再実行で自分の出力と衝突扱いになり保留が増える 2026-07-25)。
+    _mine = set()
+    for _p in SRC.glob("*.yml"):
+        _m = re.search(r"^_skey: (.+)$", _p.read_text(encoding="utf-8"), re.M)
+        if _m and _m.group(1).strip() in {v[0] for v in meta.values()}:
+            _mine.add(_p.stem)
+    used |= ({p.stem for p in SRC.glob("*.yml")} - _mine) | {p.stem for p in SRC_LEGACY.glob("*.yml")}
 
     todo, skip = [], collections.Counter()
     for sid, vv in sorted(vols.items()):
@@ -141,6 +176,7 @@ def main():
         key, title = meta[sid]
         vv.sort(key=lambda x: (x[2] or "", x[1] or 0))
         kana = seg = None
+        ndl_ck = []
         # ★ヨミ: NDL(分かち書き) → 楽天(連結) の順
         for ib, _, _ in vv[:2]:
             try:
@@ -148,6 +184,8 @@ def main():
             except Exception:
                 recs = []
             for r in recs:
+                if r.get("creators_kana"):
+                    ndl_ck = r["creators_kana"]
                 tk = (r.get("title_kana") or "").strip()
                 if tk and KANA_OK.match(tk):
                     seg, kana = tk, tk.replace(" ", "").replace("　", "")
@@ -181,11 +219,23 @@ def main():
             continue
         slug = base
         if slug in used:
-            # ★衝突は自動で解決しない。 規則は「主版=無印 / 従版=-姓+発売年」で、
-            #   どちらを主版にするかと姓の確定は人の裁定が要る([[slug_collision_year_rule]]
-            #   ★裸の西暦suffixは禁止)。 slugはrename困難なので保留にして報告する。
-            hold.append((key, title, f"slug衝突(既存 {base} と同名 → 主版/従版の裁定要)"))
-            continue
+            # ★衝突解決(2026-07-25 ユーザ裁定「基本は一番古いものを主版」):
+            #   既存が古い → 既存が無印のまま / 新規に **-姓+発売年** を付ける。
+            #   新規の方が古い場合は既存のrenameが要る=高コスト → 保留にして報告。
+            #   ★裸の西暦suffixは禁止([[slug_collision_year_rule]])。
+            yr = (sorted(v[2] for v in vv if v[2]) or [""])[0][:4]
+            ex_year = prod_year.get(base)
+            if ex_year and yr and int(yr) < int(ex_year):
+                hold.append((key, title, f"slug衝突: 新規({yr})の方が既存({ex_year})より古い → 主版入替の裁定要"))
+                continue
+            sur = _surname_romaji(rk, vv, ndl_ck)
+            if not (sur and yr):
+                hold.append((key, title, f"slug衝突(既存 {base}) だが姓/年が確定できず保留"))
+                continue
+            slug = f"{base}-{sur}{yr}"
+            if slug in used:
+                hold.append((key, title, f"slug衝突(再: {slug})"))
+                continue
         used.add(slug)
         if a.run:
             body = [f"slug: {slug}", f"title: {title}", f"_skey: {key}",
