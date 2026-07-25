@@ -65,6 +65,37 @@ def _same_title(rakuten_title, s2_title):
     return bool(a) and bool(b) and a == b
 
 
+def _rakuten_kana(it, s2_title):
+    """楽天titleKanaから題ヨミを取る。 ★末尾の巻数トークンを落とす
+    (「ニジュウヨジカン…カシマス　イチ」= 商品題『…。 1』の巻数がヨミにも入る 2026-07-25)。"""
+    tk = (it.get("titleKana") or "").strip()
+    if not tk:
+        return None
+    if re.search(r"[\s　]\d+$", str(it.get("title") or "")):
+        tk = re.sub(r"[\s　]+[^\s　]+$", "", tk)      # 商品題が巻数で終わる → ヨミの末尾トークンも巻数
+    return tk.strip()
+
+
+def _authors_from(it, ndl_creators, ndl_ck):
+    """種2に著者が無い時の補完。 楽天(著者/著者ヨミ)優先、無ければNDL典拠。
+    ★役割は種2の既定と同じ writer_artist のみ(原作/作画の別は分からないので**推測しない**)。"""
+    out = []
+    names = [x.strip() for x in re.split(r"[/／]", str(it.get("author") or "")) if x.strip()]
+    kanas = [x.strip() for x in re.split(r"[/／]", str(it.get("authorKana") or "")) if x.strip()]
+    for i, nm in enumerate(names):
+        nm2 = re.sub(r"[\s　]+", "", nm)
+        ka = re.sub(r"[\s　]+", "", kanas[i]) if i < len(kanas) else ""
+        out.append({"name": nm2, "kana": ka})
+    if not out and ndl_creators:
+        for i, c in enumerate(ndl_creators):
+            nm2 = re.sub(r"[\s　]+", "", str(c).split(",")[0] + (str(c).split(",")[1] if "," in str(c) else ""))
+            ka = ""
+            if i < len(ndl_ck or []):
+                ka = re.sub(r"[\s　,、]+", "", ndl_ck[i])
+            out.append({"name": nm2, "kana": ka})
+    return [a for a in out if a["name"]]
+
+
 def _surname_romaji(rk, vv, ndl_ck=None):
     """従版suffix用の**姓ローマ字**([[slug_collision_year_rule]] -姓+発売年)。
     ①NDL典拠の著者ヨミ「サイトウ, ジュンイチロウ」= 姓と名がカンマで分かれる(最優先)
@@ -135,6 +166,12 @@ def main():
         if sid in sids:
             vols[sid].append((ib, num, rd or ""))
 
+    db_authors = collections.defaultdict(list)
+    for sid_, nm in con.execute(
+            "SELECT sa.series_id, m.name FROM series_authors sa JOIN mangaka m ON m.id=sa.mangaka_id"):
+        if sid_ in sids:
+            db_authors[sid_].append(nm)
+
     live = json.loads(LIVE_ISBN.read_text(encoding="utf-8")) if LIVE_ISBN.exists() else {}
     rk = {}
     if HARVEST.exists():
@@ -182,6 +219,7 @@ def main():
         vv.sort(key=lambda x: (x[2] or "", x[1] or 0))
         kana = seg = None
         ndl_ck = []
+        ndl_creators = []
         # ★ヨミ: NDL(分かち書き) → 楽天(連結) の順
         for ib, _, _ in vv[:2]:
             try:
@@ -191,12 +229,15 @@ def main():
             for r in recs:
                 if r.get("creators_kana"):
                     ndl_ck = r["creators_kana"]
+                if r.get("creators"):
+                    ndl_creators = r["creators"]
                 tk = (r.get("title_kana") or "").strip()
                 if tk and KANA_OK.match(tk):
                     seg, kana = tk, tk.replace(" ", "").replace("　", "")
                     break
             if kana:
                 break
+        rk_item = None
         if not kana:
             # ★楽天titleKanaは**商品題(副題込み)のヨミ**なので、種2の題と一致する時だけ使う。
             #   (バクギャル → 楽天ヨミ「バクギャルレイワギャルガバクマツヲアゲル」= 副題混入。
@@ -207,7 +248,10 @@ def main():
                 if not (tk and KANA_OK.match(tk)):
                     continue
                 if _same_title(it.get("title"), title):
-                    kana = tk.replace(" ", "").replace("　", "")
+                    tk2 = _rakuten_kana(it, title)
+                    if tk2:
+                        kana = tk2.replace(" ", "").replace("　", "")
+                        rk_item = it
                     break
         if not kana:
             hold.append((key, title, "ヨミ不明(NDL/楽天とも無し)"))
@@ -248,6 +292,16 @@ def main():
         if a.run:
             body = [f"slug: {slug}", f"title: {title}", f"_skey: {key}",
                     f"title_kana: {kana}"]
+            if not db_authors.get(sid):
+                it0 = rk_item or next((rk.get(ib) for ib, _, _ in vv if rk.get(ib)), None) or {}
+                aus = _authors_from(it0, ndl_creators, ndl_ck)
+                if aus:
+                    body.append("authors:")
+                    for au in aus:
+                        body.append(f"- name: {au['name']}")
+                        body.append("  role: writer_artist")
+                        if au.get("kana"):
+                            body.append(f"  kana: {au['kana']}")
             if seg:
                 body.append(f"title_kana_segmented: {seg}")
             body.append(f"_note_origin: torikoboshi 2026-07-25 (種2新規series・ヨミ={'NDL' if seg else '楽天'})")
