@@ -32,10 +32,16 @@ from pathlib import Path
 sys.stdout.reconfigure(encoding="utf-8")
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "scripts"))
-from _kana_romaji import kana2romaji          # noqa: E402  ★slug変換の単一ソース
+# ★slug決定は **_slug-gen-v2.decide()** が正本(CLAUDE.mdの7分岐: latin題/カタカナ外来語の
+#   音写フィルタ/数字4分岐/ヘボン)。 2026-07-25: ここで自前のkana→ヘボン1本に済ませて
+#   BEM→bemu / ヴァージン・キラー→vaajin-kiraa という誤slugを作りかけた(ユーザ指摘)。
+#   ★slugはrename困難なので**既存の判定器を必ず通す**。
 
 DB = ROOT / ".cache" / "db-v2.sqlite"
-SRC = ROOT / "data" / "manga"
+# ★源頁の置き場 = data/seeds/source-pages(★git追跡=恒久)。 data/manga は .gitignore なので
+#   そこに書くと git clean/別PCで消える(2026-07-25)。 promote は両方をスキャンする。
+SRC = ROOT / "data" / "seeds" / "source-pages"
+SRC_LEGACY = ROOT / "data" / "manga"
 MANIFEST = ROOT / ".cache" / "madb-distill" / "merge-manifest-1.2.18.json"
 LIVE_ISBN = ROOT / ".cache" / "isbn-page-index.json"
 HARVEST = ROOT / ".cache" / "torikoboshi" / "harvest.jsonl"
@@ -55,6 +61,19 @@ def _same_title(rakuten_title, s2_title):
     """楽天商品題と種2題が同一作品の題か(巻番号・記号差は無視)。 副題付きは不一致扱い。"""
     a, b = _norm_t(rakuten_title), _norm_t(s2_title)
     return bool(a) and bool(b) and a == b
+
+
+def _slug_decider():
+    """_slug-gen-v2.decide(title, seg, kana, a_rom, a_eng) → (slug, source, conf, ratio)。"""
+    argv = sys.argv
+    sys.argv = ["x"]
+    try:
+        spec = importlib.util.spec_from_file_location("sg2", ROOT / "scripts" / "_slug-gen-v2.py")
+        m = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(m)
+        return m
+    finally:
+        sys.argv = argv
 
 
 def _lookup():
@@ -99,7 +118,7 @@ def main():
 
     idx = json.loads(IDX.read_text(encoding="utf-8"))
     used = {r[idx["f"].index("slug")] for r in idx["d"]}
-    used |= {p.stem for p in SRC.glob("*.yml")}
+    used |= {p.stem for p in SRC.glob("*.yml")} | {p.stem for p in SRC_LEGACY.glob("*.yml")}
 
     todo, skip = [], collections.Counter()
     for sid, vv in sorted(vols.items()):
@@ -116,6 +135,7 @@ def main():
         return
 
     L = _lookup()
+    SG = _slug_decider()
     made, hold = [], []
     for n, (sid, vv) in enumerate(todo, 1):
         key, title = meta[sid]
@@ -149,17 +169,22 @@ def main():
         if not kana:
             hold.append((key, title, "ヨミ不明(NDL/楽天とも無し)"))
             continue
-        base = kana2romaji(seg or kana)
-        base = re.sub(r"[^a-z0-9-]", "", base).strip("-")
+        base, src_kind, conf, _ratio = SG.decide(title, seg or "", kana, "", "")
+        base = re.sub(r"[^a-z0-9-]", "", (base or "").lower()).strip("-")
         if len(base) < 2:
-            hold.append((key, title, f"slug生成不可({base!r})"))
+            hold.append((key, title, f"slug生成不可({src_kind})"))
+            continue
+        if conf != "high":
+            # ★確度が high でないものは自動確定しない(= _slug-gen-v2 の設計「人がレビュー→GO」)。
+            #   数字題の4分岐は未実装なので必ずここに落ちる。
+            hold.append((key, title, f"slug要レビュー({src_kind}/{conf}: {base})"))
             continue
         slug = base
         if slug in used:
-            yr = (sorted(v[2] for v in vv if v[2]) or [""])[0][:4]
-            slug = f"{base}-{yr}" if yr else base
-        if slug in used:
-            hold.append((key, title, f"slug衝突({base})"))
+            # ★衝突は自動で解決しない。 規則は「主版=無印 / 従版=-姓+発売年」で、
+            #   どちらを主版にするかと姓の確定は人の裁定が要る([[slug_collision_year_rule]]
+            #   ★裸の西暦suffixは禁止)。 slugはrename困難なので保留にして報告する。
+            hold.append((key, title, f"slug衝突(既存 {base} と同名 → 主版/従版の裁定要)"))
             continue
         used.add(slug)
         if a.run:
@@ -168,6 +193,7 @@ def main():
             if seg:
                 body.append(f"title_kana_segmented: {seg}")
             body.append(f"_note_origin: torikoboshi 2026-07-25 (種2新規series・ヨミ={'NDL' if seg else '楽天'})")
+            SRC.mkdir(parents=True, exist_ok=True)
             (SRC / f"{slug}.yml").write_text("\n".join(body) + "\n", encoding="utf-8")
         made.append((slug, title, kana, "NDL" if seg else "楽天"))
         if n % 25 == 0:
