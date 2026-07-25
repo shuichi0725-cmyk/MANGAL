@@ -28,7 +28,8 @@ from pathlib import Path
 import yaml
 
 ROOT = Path(__file__).resolve().parent.parent
-DB = ROOT / ".cache" / "db-v2.sqlite"
+import os
+DB = Path(os.environ.get("ADULT_SIM_DB") or (ROOT / ".cache" / "db-v2.sqlite"))  # ★env で対象DB差替(監査シミュレーション用。既定=本番種2)
 SERIES_V2 = ROOT / ".cache" / "series-v2.json"
 IMPRINTS_YML = ROOT / "data" / "seeds" / "adult-imprints.yml"
 WIKI_CACHE_YML = ROOT / "data" / "seeds" / "adult-wikipedia-cache.yml"
