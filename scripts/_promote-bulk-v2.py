@@ -2942,7 +2942,15 @@ def main():
     dropped = []
     dropped_non_manga = []
 
-    for ypath in sorted(SRC_DIR.glob("*.yml")):
+    # ★源頁は2箇所: data/manga(gitignore=このPC限り) + data/seeds/source-pages(★git追跡=恒久)。
+    #   2026-07-25: 取りこぼし頁化で作った源頁が data/manga だと git clean/別PCで消える
+    #   ([[orphan_series_promote_is_srcpage_driven]])。 新規生成分は必ず後者に置く。
+    _src_files = sorted(SRC_DIR.glob("*.yml"))
+    _extra_src = ROOT / "data" / "seeds" / "source-pages"
+    if _extra_src.is_dir():
+        _seen_stems = {p.stem for p in _src_files}
+        _src_files += [p for p in sorted(_extra_src.glob("*.yml")) if p.stem not in _seen_stems]
+    for ypath in _src_files:
         if ONLY_SLUGS and ypath.stem not in ONLY_SLUGS:
             continue
         stats["total"] += 1
