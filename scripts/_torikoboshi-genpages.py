@@ -47,6 +47,7 @@ MANIFEST = ROOT / ".cache" / "madb-distill" / "merge-manifest-1.2.18.json"
 LIVE_ISBN = ROOT / ".cache" / "isbn-page-index.json"
 HARVEST = ROOT / ".cache" / "torikoboshi" / "harvest.jsonl"
 IDX = ROOT / "data" / "manga-list-index.json"
+SLUG_OVR = ROOT / "data" / "seeds" / "source-slug-overrides.yml"
 KANA_OK = re.compile(r"^[ァ-ヶーｦ-ﾟ\s　・]+$")
 
 
@@ -171,6 +172,10 @@ def main():
 
     L = _lookup()
     SG = _slug_decider()
+    # ★slug判定フロー #1 = 手動override が最優先(数字題の4分岐など機械が確定できない題)
+    import yaml as _yaml
+    ovr = _yaml.safe_load(SLUG_OVR.read_text(encoding="utf-8")) if SLUG_OVR.exists() else {}
+    ovr = {k: (v.get("slug") if isinstance(v, dict) else v) for k, v in (ovr or {}).items()}
     made, hold = [], []
     for n, (sid, vv) in enumerate(todo, 1):
         key, title = meta[sid]
@@ -207,7 +212,10 @@ def main():
         if not kana:
             hold.append((key, title, "ヨミ不明(NDL/楽天とも無し)"))
             continue
-        base, src_kind, conf, _ratio = SG.decide(title, seg or "", kana, "", "")
+        if key in ovr:
+            base, src_kind, conf, _ratio = ovr[key], "manual-override", "high", ""
+        else:
+            base, src_kind, conf, _ratio = SG.decide(title, seg or "", kana, "", "")
         base = re.sub(r"[^a-z0-9-]", "", (base or "").lower()).strip("-")
         if len(base) < 2:
             hold.append((key, title, f"slug生成不可({src_kind})"))
