@@ -1289,6 +1289,7 @@ def _norm_pub(s: str) -> str:
 #   (2026-07-26 実測: 本番の 2,820頁 がこの型。ユーザ提供のMADB生RDFで判明)。
 #   ★典拠解決は同定にだけ使い、**表示名は本のクレジット**にする。
 _ISBN2CREDIT: dict | None = None
+_PREFIX_PUB: dict | None = None
 
 
 def _isbn_prefixes(isbn13: str) -> list:
@@ -1406,6 +1407,7 @@ def _load_pub_resolver() -> None:
     #   うち1,537版が複数候補からの誤採用(講談社←→一迅社だけで501)。
     #   ★ISBN出版者記号は不変の事実なので、単一出版社ISBNから記号→社名を自己学習し、
     #     複数候補のときは記号に一致する候補を採る。
+    global _PREFIX_PUB
     _table = {}
     for _pf, _c in _votes.items():
         _top, _n = _c.most_common(1)[0]
@@ -1418,6 +1420,7 @@ def _load_pub_resolver() -> None:
         if _want and _want in _cands and _ISBN2PUB.get(k) != _want:
             _ISBN2PUB[k] = _want
             _fixed += 1
+    _PREFIX_PUB = _table
     print(f"  出版社: ISBN出版者記号で是正 {_fixed:,} 件 (記号表 {len(_table):,})", file=sys.stderr)
 
 
@@ -1430,7 +1433,14 @@ def edition_pub_name(ed: dict) -> str | None:
         isbn = v.get("isbn13")
         if not isbn:
             continue
-        nm = _ISBN2PUB.get(_to_isbn13(isbn))
+        k13 = _to_isbn13(isbn)
+        nm = _ISBN2PUB.get(k13)
+        if not nm and k13 and k13.startswith("9784") and _PREFIX_PUB:
+            # ★metadata101に無いISBN(新刊/予約)は **出版者記号** から社名を引く。
+            #   これが無いと edition.publisher に予約頁の**内部キー**(kadokawa等)が
+            #   そのまま表示に残る(2026-07-26 実測1,248版、うち894が未収載ISBN)。
+            nm = next((_PREFIX_PUB[pf] for pf in sorted(_isbn_prefixes(k13), key=len, reverse=True)
+                       if pf in _PREFIX_PUB), None)
         if nm:
             c[nm] += 1
     return c.most_common(1)[0][0] if c else None
@@ -3532,6 +3542,15 @@ def main():
                 _pd["synopsis"] = synslug_map[_stem]
                 _touched = True
             for _e in _pd.get("editions") or []:
+                # ★edition.publisher が **内部キー**(kadokawa/kodansha…)のままだと表示に漏れる。
+                #   予約頁は種2を通らないので edition_pub_name が効かず、実測1,248版が生キー表示だった
+                #   (2026-07-26)。 巻ISBNの**出版者記号**から当時社名に解決する。
+                _pb = str(_e.get("publisher") or "")
+                if _pb and re.fullmatch(r"[a-z0-9-]+", _pb):
+                    _nm = edition_pub_name(_e)
+                    if _nm:
+                        _e["publisher"] = _nm
+                        _touched = True
                 for _pool in [_e.get("volumes") or []] + [vv.get("volumes") or [] for vv in (_e.get("versions") or [])]:
                     for _v in _pool:
                         if not _v.get("cover_url") and _v.get("isbn13"):
