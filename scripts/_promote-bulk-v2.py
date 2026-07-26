@@ -3184,12 +3184,15 @@ def main():
         # ★series-keep: spinoff誤判定で消える独立作(カムイ伝第二部等)をslugで救済(=独立ページ化)
         if is_spinoff and slug in _SPINOFF_KEEP:
             is_spinoff = False
-        if is_spinoff:
-            max_y = get_max_release_year(con, series["id"])
-            if max_y is None or max_y < CUTOFF_YEAR:
-                stats["dropped_spinoff_old"] += 1
-                dropped.append(f"{ypath.name}  title={title}  max_year={max_y}")
-                continue
+        # ★2026-07-26 ユーザ裁定「未発見の2015年以前は排除は条件としておかしい」:
+        #   掲載方針は【版違い=統合 / 続編など独立作品=ページ作成 / コンビニ本=排除】であって、
+        #   **発売年で独立作品を落とすのは筋が通らない**。 旧 CUTOFF_YEAR(2015) 判定を撤廃。
+        #   実害: ドラゴンボールZ 39巻 / ドカベン スーパースターズ編 53巻 /
+        #   シュート!新たなる伝説 35巻 等 **1,499 series** が非掲載だった。
+        #   ★親子(parent_map)判定そのものは残す = 将来 巻数比などで真の派生本を弾く土台。
+        #   コンビニ本/抜粋本の排除は imprint・題patternが別途担っているのでここでは不要。
+        if False:  # 旧: is_spinoff and max_year < CUTOFF_YEAR で drop していた
+            pass
         # 同一作品 cluster 分裂 を 検出 (= main + 同qid + 同title orphan)、 全部 merge
         # yml の title_kana を fallback (= db series row の kana が NULL の cases、
         # e.g. id=128570 'ハンター×ハンター' kana=NULL では kana match 効かない)
