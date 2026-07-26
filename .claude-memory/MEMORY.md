@@ -60,6 +60,7 @@
 - [【手法】AI一括生成+Web検証](method_ai_generate_plus_webverify.md) — 怪しい物だけWeb裏取り。slug英綴りで実証
 - [NDL option2再クラスタ](ndl_option2_recluster.md) — 典拠+ISBN+読みで巻混在是正 ／ [NDL slug-fix手法](ndl_slug_fix_method.md) — by-ISBN照会でslug異常解決
 - [【保留】機能ロードマップ/Wikiジャンル(GO待ち)](feature_roadmap_post_db.md) — 一覧表/蔵書localStorage/続刊.ics・genre-additions突合・war受け皿未決
+- [電子限定版はスコープ外(将来柱で回収)](ebook_only_editions_out_of_scope.md) — MADBは紙のみ。楽天Koboには在る
 - [版/刷タブ・在庫・電子割引](version_tabs_stock_ebook.md) — 版タブ実装済。電子=割引率表示
 - [【未解決】成人=版単位](adult_per_edition_angel.md) — 劇画再販社は手動要
 - [publisher設計=版ごと当時社名](publisher_model_edition_level.md) — families不採用。ISBN10/13正規化必須
