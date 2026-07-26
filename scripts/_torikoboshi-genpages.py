@@ -202,7 +202,10 @@ def main():
         _m = re.search(r"^_skey: (.+)$", _p.read_text(encoding="utf-8"), re.M)
         if _m and _m.group(1).strip() in {v[0] for v in meta.values()}:
             _mine.add(_p.stem)
-    used |= ({p.stem for p in SRC.glob("*.yml")} - _mine) | {p.stem for p in SRC_LEGACY.glob("*.yml")}
+    used |= {p.stem for p in SRC.glob("*.yml")} | {p.stem for p in SRC_LEGACY.glob("*.yml")}
+    # ★自分が前回作った頁は本番索引にも載っているので、**最後にまとめて除外**する
+    #   (索引側から拾うと再実行のたびに自己衝突して保留が増える 2026-07-26)
+    used -= _mine
 
     todo, skip = [], collections.Counter()
     for sid, vv in sorted(vols.items()):

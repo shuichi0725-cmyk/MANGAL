@@ -1,13 +1,12 @@
-# 源頁生成の **slug 手動override**(= CLAUDE.md slug判定フロー #1「種3のslug field」相当)。
-# key = series_key / value = {slug, note}。 ★生成器 _torikoboshi-genpages.py が最優先で使う。
-# 用途: 数字題の4分岐など機械判定が確定できない題を、規則に沿って人が確定させる置き場。
-
-"name:紅生しんた|name:24時間、彼女のカラダ貸します。":
+name:紅生しんた|name:24時間、彼女のカラダ貸します。:
   slug: 24-jikan-kanojo-no-karada-kashimasu
-  note: "数字4分岐=音読み数詞(ニジュウヨ)→算用数字keep(規則例 15歳の地図=15-sai-no-chizu と同型)"
-"name:スイヨウヨシイ|name:三重県津市西区平山町3-15-7":
+  note: 数字4分岐=音読み数詞(ニジュウヨ)→算用数字keep(規則例 15歳の地図=15-sai-no-chizu と同型)
+name:スイヨウヨシイ|name:三重県津市西区平山町3-15-7:
   slug: mieken-tsushi-nishiku-hirayamachou-3-15-7
-  note: "数字4分岐=音読み数詞(サン/ジュウゴ/ナナ)→算用数字keep"
-"name:KADOKAWA|name:機動戦士クロスボーン・ガンダム30周年記念本":
+  note: 数字4分岐=音読み数詞(サン/ジュウゴ/ナナ)→算用数字keep
+name:KADOKAWA|name:機動戦士クロスボーン・ガンダム30周年記念本:
   slug: mobile-suit-crossbone-gundam-30-shuunen-kinenbon
-  note: "数字4分岐=音読み数詞(サンジッ)→算用数字keep。機動戦士=mobile-suit は既存頁の表記に合わせた。★漫画であることをユーザが実物確認済(2026-07-25)"
+  note: 数字4分岐=音読み数詞(サンジッ)→算用数字keep。機動戦士=mobile-suit は既存頁の表記に合わせた。★漫画であることをユーザが実物確認済(2026-07-25)
+name:下崎|name:白と黒:
+  slug: shiro-to-kuro-shimozaki2026
+  note: 'slug衝突の裁定(ユーザ 2026-07-26「②は違うから最初にでた奴が主」): 既存 shiro-to-kuro=Sal Jiang 2021 が主版で無印のまま。本作は別作品(下崎/シモザキ・三交社CLAPコミックス・2026-06・上下巻『白と黒 : 妖蛇と身代わりのつがい』)なので従版=-姓+発売年。NDL+楽天で著者と刊行を確認。'
