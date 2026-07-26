@@ -43,6 +43,12 @@ export default function VolumeTile({ manga, volume, edition }: Props) {
         <p className="text-xs text-ink/50 mt-0.5 leading-tight">
           {date || "発売日未取得"}
         </p>
+        {/* 巻ごとの出版社 (= 版元移管・社名変更で途中から発行元が変わる作品。
+            版の publisher と異なる巻にだけ値が入る = 入っている時だけ表示。
+            2026-07-26: 鬼平犯科帳122巻(文藝春秋46→リイド社76)等 1,672版が該当) */}
+        {volume.publisher ? (
+          <p className="text-xs text-ink/55 mt-0.5 leading-tight">発行: {volume.publisher}</p>
+        ) : null}
         {/* 巻ごとの作画・監修 (= 学習まんが等、 巻で担当が異なる作品。 データがある時だけ表示) */}
         {(volume.artists?.length || volume.supervisors?.length) && (
           <p className="text-xs text-ink/55 mt-0.5 leading-tight">

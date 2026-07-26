@@ -2406,10 +2406,30 @@ def clean_vol(v: dict) -> dict:
     _desc = v.get("description") or _desc_for(o["isbn13"])
     if _desc:
         o["description"] = _desc
+    if v.get("publisher"):
+        o["publisher"] = v["publisher"]      # ★版と異なる巻だけ(下の _mark_volume_publishers が付ける)
     if v.get("variants"):
         # ★edition-override等が明示したvariants(特装/限定併存)を保持(2026-07-03。出版社跨ぎ特装=シャイナ・ダルク型はseedペア不可なのでoverride直書き)
         o["variants"] = v["variants"]
     return o
+
+
+def _mark_volume_publishers(ed: dict) -> None:
+    """★版の途中で発行元が変わる作品に、**版と違う巻だけ** publisher を付ける。
+    publisherは版に1つしか持てず、従来は巻ISBN群の多数決で1社に丸めていたため
+    片方の社が消えていた(2026-07-26 ユーザ指摘。実測1,672版:
+    鬼平犯科帳122巻=文藝春秋46+リイド社76 / 静かなるドン54巻=小学館→実業之日本社)。
+    ★出所は種2 ISBN→metadata101 の当時社名。 推測はしない(引けない巻は付けない)。"""
+    base = (ed.get("publisher") or "").strip()
+    if not base:
+        return
+    for v in (ed.get("volumes") or []):
+        ib = v.get("isbn13")
+        if not ib:
+            continue
+        nm = _ISBN2PUB.get(_to_isbn13(str(ib)))
+        if nm and nm != base:
+            v["publisher"] = nm
 
 
 def clean_edition(ed: dict) -> dict:
@@ -2421,6 +2441,8 @@ def clean_edition(ed: dict) -> dict:
     _pub = edition_pub_name(ed)
     if _pub:
         out["publisher"] = _pub
+        ed["publisher"] = _pub          # ★巻差分の基準にする
+    _mark_volume_publishers(ed)
     if ed.get("imprint"):
         out["imprint"] = ed["imprint"]
     if ed.get("year_started"):
