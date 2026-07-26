@@ -1291,6 +1291,12 @@ def _norm_pub(s: str) -> str:
 _ISBN2CREDIT: dict | None = None
 
 
+def _isbn_prefixes(isbn13: str) -> list:
+    """ISBN13 の出版者記号候補(978-4-XXXX..)。 桁数不定なので 2..7桁を全部返す。"""
+    body = isbn13[4:]
+    return [body[:n] for n in (2, 3, 4, 5, 6, 7)]
+
+
 def _credit_names(v) -> list:
     """schema:creator から **ja の素の名前だけ** 取り出す(ja-hrkt の読みは除外)。
     形は ["名", {@value:"ヨミ",@language:ja-hrkt}] / [{@value:[ヨミ,ヨミ]}, ["名","名"]] 等が混在。"""
@@ -1360,6 +1366,8 @@ def _load_pub_resolver() -> None:
         for nm, key in (yaml.safe_load(open(ali, encoding="utf-8")) or {}).items():
             _PUBKEY[nm] = key   # alias key は norm社名 → 既存/新キー
     _ISBN2PUB = {}
+    from collections import Counter as _Counter, defaultdict as _dd
+    _votes, _multi = _dd(_Counter), {}
     global _ISBN2CREDIT
     _ISBN2CREDIT = {}
     meta = ROOT / ".cache" / "madb" / "metadata101-clean.json"
@@ -1379,10 +1387,38 @@ def _load_pub_resolver() -> None:
                 continue
             k = _to_isbn13(i)   # ★metadata101はISBN-10混在 → 13に正規化してDB(isbn13)と突合
             if k:
+                _raw = r.get("schema:publisher")
+                _cands = [x.strip() for x in ([_raw] if isinstance(_raw, str) else _raw)
+                          if isinstance(x, str) and x.strip()] if _raw else []
                 _ISBN2PUB[k] = p
+                if len(_cands) > 1:
+                    _multi[k] = _cands          # ★複数候補は後で ISBN出版者記号 で選び直す
+                elif _cands and k.startswith("9784"):
+                    for _pf in _isbn_prefixes(k):
+                        _votes[_pf][_cands[0]] += 1
                 cr = _credit_names(r.get("schema:creator"))
                 if cr:
                     _ISBN2CREDIT[k] = cr
+    # ★発行元 vs 頒布元の取り違え是正(2026-07-26 ユーザ提供のMADB生RDFで発覚):
+    #   MADB raw は ["一迅社", "[頒布]講談社"] と役割を明示するが、clean が
+    #   stripLeadingRolePrefix で [頒布]/[発売] を落とすため区別が消え、従来は
+    #   **配列の先頭**を採っていた(順序に意味は無い)。 実測4,149版が食い違い、
+    #   うち1,537版が複数候補からの誤採用(講談社←→一迅社だけで501)。
+    #   ★ISBN出版者記号は不変の事実なので、単一出版社ISBNから記号→社名を自己学習し、
+    #     複数候補のときは記号に一致する候補を採る。
+    _table = {}
+    for _pf, _c in _votes.items():
+        _top, _n = _c.most_common(1)[0]
+        if sum(_c.values()) >= 8 and _n / sum(_c.values()) >= 0.9:
+            _table[_pf] = _top
+    _fixed = 0
+    for k, _cands in _multi.items():
+        _want = next((_table[pf] for pf in sorted(_isbn_prefixes(k), key=len, reverse=True)
+                      if pf in _table), None)
+        if _want and _want in _cands and _ISBN2PUB.get(k) != _want:
+            _ISBN2PUB[k] = _want
+            _fixed += 1
+    print(f"  出版社: ISBN出版者記号で是正 {_fixed:,} 件 (記号表 {len(_table):,})", file=sys.stderr)
 
 
 def edition_pub_name(ed: dict) -> str | None:
