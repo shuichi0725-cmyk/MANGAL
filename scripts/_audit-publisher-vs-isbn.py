@@ -91,11 +91,18 @@ def main():
             allv[pf][ps[0]] += 1
             if y:
                 votes[(pf, y)][ps[0]] += 1
-    table, ytable = {}, {}
+    # ★記号表は「票数」だけで採否を決め、**比率はここで切らない**。
+    #   (比率0.9で切ると 4-8342[ホーム社126/集英社54=0.70] が未学習になり、
+    #    短い記号 4-83.. にフォールバックして **芳文社** に化けた = 142版の偽検出。
+    #    ISBNの短い記号は「同じ出版社の上位区分」ではなく別社と共有する帯なので、
+    #    ★桁をまたぐフォールバックをしてはいけない。 2026-07-26)
+    table, ytable, ratio = {}, {}, {}
     for pf, c in allv.items():
         top, cnt = c.most_common(1)[0]
-        if sum(c.values()) >= 8 and cnt / sum(c.values()) >= 0.9:
+        tot = sum(c.values())
+        if tot >= 8:
             table[pf] = top
+            ratio[pf] = cnt / tot
     for (pf, y), c in votes.items():
         top, cnt = c.most_common(1)[0]
         if sum(c.values()) >= 3 and cnt / sum(c.values()) >= 0.8:
@@ -107,11 +114,16 @@ def main():
         # ★記号は**長いものから**見る。 同じ記号で「年別→年不問」の順に引く。
         #   (短い記号の年別entryが長い記号より先に当たると別社に化ける
         #    = 2026-07-26 実測で 一迅社→スクエニ 333件等の偽陽性が出た)
+        # ★**最長の有効記号だけ**を使う(短い記号へ降りない)。 その記号が割れている
+        #   (majority<0.6)なら判定不能として None を返す = 誤検出より取りこぼしを選ぶ。
         for pf in sorted(prefixes(ib), key=len, reverse=True):
+            if pf not in table:
+                continue
+            if ratio.get(pf, 0) < 0.6:
+                return None, None
             if year and (pf, year) in ytable:
                 return ytable[(pf, year)], pf
-            if pf in table:
-                return table[pf], pf
+            return table[pf], pf
         return None, None
 
     print("[3/4] 本番頁を走査 ...", flush=True)

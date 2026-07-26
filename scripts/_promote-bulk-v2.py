@@ -1290,6 +1290,17 @@ def _norm_pub(s: str) -> str:
 #   ★典拠解決は同定にだけ使い、**表示名は本のクレジット**にする。
 _ISBN2CREDIT: dict | None = None
 _PREFIX_PUB: dict | None = None
+_PREFIX_RATIO: dict | None = None
+
+
+def _implied_pub(isbn13: str, table: dict, ratio: dict):
+    """ISBN出版者記号が示す社名。 ★最長の有効記号だけを見る(桁をまたいで降りない)。
+    その記号が割れている(majority<0.6)なら **判定不能=None**(誤判定より取りこぼしを選ぶ)。"""
+    for pf in sorted(_isbn_prefixes(isbn13), key=len, reverse=True):
+        if pf not in table:
+            continue
+        return table[pf] if ratio.get(pf, 0) >= 0.6 else None
+    return None
 
 
 def _isbn_prefixes(isbn13: str) -> list:
@@ -1408,20 +1419,38 @@ def _load_pub_resolver() -> None:
     #   ★ISBN出版者記号は不変の事実なので、単一出版社ISBNから記号→社名を自己学習し、
     #     複数候補のときは記号に一致する候補を採る。
     global _PREFIX_PUB
-    _table = {}
+    # ★票数だけで採否を決め、比率で切らない。 引く時に「最長の有効記号だけ」を使い
+    #   **桁をまたぐフォールバックをしない**(短い記号は別社と共有する帯。
+    #   4-8342[ホーム社126/集英社54]が未学習→4-83..→芳文社 に化けた 2026-07-26)。
+    _table, _ratio = {}, {}
     for _pf, _c in _votes.items():
         _top, _n = _c.most_common(1)[0]
-        if sum(_c.values()) >= 8 and _n / sum(_c.values()) >= 0.9:
+        _tot = sum(_c.values())
+        if _tot >= 8:
             _table[_pf] = _top
+            _ratio[_pf] = _n / _tot
     _fixed = 0
     for k, _cands in _multi.items():
-        _want = next((_table[pf] for pf in sorted(_isbn_prefixes(k), key=len, reverse=True)
-                      if pf in _table), None)
+        _want = _implied_pub(k, _table, _ratio)
         if _want and _want in _cands and _ISBN2PUB.get(k) != _want:
             _ISBN2PUB[k] = _want
             _fixed += 1
-    _PREFIX_PUB = _table
+    _PREFIX_PUB, _PREFIX_RATIO = _table, _ratio
     print(f"  出版社: ISBN出版者記号で是正 {_fixed:,} 件 (記号表 {len(_table):,})", file=sys.stderr)
+
+
+_PUB_DISPLAY: dict | None = None
+
+
+def _pub_display_name(key: str) -> str | None:
+    """publishers.yml のキー → 表示名(cygames→Cygames / home-sha→ホーム社)。
+    ★ISBN出版者記号が未学習の小規模社(2026-07-26 実測41版)の最終フォールバック。
+    キーは我々が付けた内部識別子なので、表示名は yml が唯一の正。"""
+    global _PUB_DISPLAY
+    if _PUB_DISPLAY is None:
+        _doc = yaml.safe_load(open(ROOT / "data" / "publishers.yml", encoding="utf-8")) or {}
+        _PUB_DISPLAY = {k: (v or {}).get("name") for k, v in _doc.items() if (v or {}).get("name")}
+    return _PUB_DISPLAY.get(key)
 
 
 def edition_pub_name(ed: dict) -> str | None:
@@ -1439,8 +1468,7 @@ def edition_pub_name(ed: dict) -> str | None:
             # ★metadata101に無いISBN(新刊/予約)は **出版者記号** から社名を引く。
             #   これが無いと edition.publisher に予約頁の**内部キー**(kadokawa等)が
             #   そのまま表示に残る(2026-07-26 実測1,248版、うち894が未収載ISBN)。
-            nm = next((_PREFIX_PUB[pf] for pf in sorted(_isbn_prefixes(k13), key=len, reverse=True)
-                       if pf in _PREFIX_PUB), None)
+            nm = _implied_pub(k13, _PREFIX_PUB, _PREFIX_RATIO or {})
         if nm:
             c[nm] += 1
     return c.most_common(1)[0][0] if c else None
@@ -3547,7 +3575,8 @@ def main():
                 #   (2026-07-26)。 巻ISBNの**出版者記号**から当時社名に解決する。
                 _pb = str(_e.get("publisher") or "")
                 if _pb and re.fullmatch(r"[a-z0-9-]+", _pb):
-                    _nm = edition_pub_name(_e)
+                    # ★ISBN記号 → 無ければ publishers.yml の表示名(キーの正式な表示形)
+                    _nm = edition_pub_name(_e) or _pub_display_name(_pb)
                     if _nm:
                         _e["publisher"] = _nm
                         _touched = True
