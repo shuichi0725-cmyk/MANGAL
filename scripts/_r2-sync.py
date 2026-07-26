@@ -19,7 +19,7 @@ out/(next export 出力)を R2 バケットへ同期する。
   python scripts/_r2-sync.py --bucket mangal-site --prune           # 差分PUT + 不要キー削除
   python scripts/_r2-sync.py --dry                                  # 計算だけ(PUTしない)
 """
-import os, sys, json, hashlib, argparse
+import os, sys, json, time, hashlib, argparse
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -67,6 +67,10 @@ def main():
     ap.add_argument("--bucket", default="mangal-site")
     ap.add_argument("--create-bucket", action="store_true")
     ap.add_argument("--prune", action="store_true")
+    ap.add_argument("--prune-max", type=int, default=3000,
+                    help="prune の削除上限(既定3000)。 超えたら削除せず報告のみ = ビルド事故の全消し防止")
+    ap.add_argument("--prune-floor", type=float, default=0.9,
+                    help="prune を許す最低ビルド率(既定0.9)。 out/ の manga頁数 < 前回×これ なら削除中止")
     ap.add_argument("--dry", action="store_true")
     ap.add_argument("--no-reconcile", action="store_true",
                     help="manifest 欠損キーの ETag 照合補完をしない(= 欠損は全て PUT し直す)")
@@ -129,6 +133,23 @@ def main():
     to_del = [k for k in prev if k not in nextm]
     print(f"ローカル {len(nextm)} files / 変更 {len(to_put)} / 削除候補 {len(to_del)}")
 
+    # ★prune の安全弁 (2026-07-26 導入)。
+    #   背景: prune 無しで運用してきたため、非掲載判定でローカルから消した頁の HTML が R2 に残り続け、
+    #   **孤児 1,041頁が本番で200のまま**だった([[r2_orphan_pages_prune_missing]])。
+    #   一方 prune は「out/ に無いキーを全消し」なので、ビルドが途中で失敗した回に走ると本番が消し飛ぶ。
+    #   そこで **消さない方向に倒す**ガードを置く(判定は --dry でも表示される)。
+    _lo = sum(1 for k in nextm if k.startswith("manga/") and k.endswith(".html"))
+    _pr = sum(1 for k in prev if k.startswith("manga/") and k.endswith(".html"))
+    prune_block = None
+    if _pr and _lo < _pr * a.prune_floor:
+        prune_block = (f"ビルド不足の疑い: out/ の manga頁 {_lo:,} < 前回 {_pr:,} × {a.prune_floor} "
+                       f"= {int(_pr * a.prune_floor):,}。 next build が途中で落ちた可能性")
+    elif len(to_del) > a.prune_max:
+        prune_block = f"削除候補 {len(to_del):,} > --prune-max {a.prune_max:,}"
+    if a.prune:
+        print(f"  prune判定: manga頁 前回{_pr:,} → 今回{_lo:,} / "
+              + (f"★中止({prune_block})" if prune_block else f"実行可(削除 {len(to_del):,})"))
+
     if a.dry:
         print("(--dry: アップロードせず終了)"); return
 
@@ -185,10 +206,21 @@ def main():
                 errs.append((futs[fu], str(e)))
 
     if a.prune and to_del:
-        for i in range(0, len(to_del), 1000):
-            batch = to_del[i:i + 1000]
-            s3.delete_objects(Bucket=a.bucket, Delete={"Objects": [{"Key": k} for k in batch]})
-        print(f"prune: {len(to_del)} 削除")
+        _blocked = prune_block
+        # ★削除キーは必ず先にログへ(消した後で「何を消したか」を辿れるように。 再生成は build で可能)
+        _log = os.path.join(ROOT, ".cache", f"r2-pruned-{time.strftime('%Y%m%d-%H%M%S')}.txt")
+        os.makedirs(os.path.dirname(_log), exist_ok=True)
+        with open(_log, "w", encoding="utf-8") as f:
+            f.write("\n".join(to_del))
+        if _blocked:
+            print(f"★prune 中止({_blocked})。 削除は行わず PUT のみ完了。")
+            print(f"  意図した削除なら内容を確認のうえ再実行: --prune --prune-max {len(to_del) + 100}")
+            print(f"  削除候補一覧 → {_log}")
+        else:
+            for i in range(0, len(to_del), 1000):
+                batch = to_del[i:i + 1000]
+                s3.delete_objects(Bucket=a.bucket, Delete={"Objects": [{"Key": k} for k in batch]})
+            print(f"prune: {len(to_del):,} 削除 (一覧 → {_log})")
 
     if errs:
         print(f"★失敗 {len(errs)} 件(manifest更新せず再実行で再試行):")

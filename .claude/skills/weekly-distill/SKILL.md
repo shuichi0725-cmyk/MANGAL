@@ -67,10 +67,19 @@ python scripts/_gen-sitemap.py
 ```
 (out/ に sitemap.xml+分割を書く=syncが拾う。SEO②)
 
-### 4. R2 同期 (差分PUT)
+### 4. R2 同期 (差分PUT + ★不要頁の削除)
 ```
-python scripts/_r2-sync.py --bucket mangal-site
+python scripts/_r2-sync.py --bucket mangal-site --prune
 ```
+- ★**`--prune` 必須**(2026-07-26 追加)。 これが無いと **非掲載にした頁が本番で200のまま残る**。
+  prune 無し運用の結果、孤児HTMLが **1,041頁** 溜まっていた([[r2_orphan_pages_prune_missing]])。
+  フィルムコミック等をdropしても、prune しない限りユーザには消えて見えない。
+- 安全弁は script 内蔵で、**消さない方向に倒す**:
+  ①`--prune-floor 0.9` = out/ の manga頁数が前回の90%未満なら**削除中止**(build途中失敗の全消し防止)
+  ②`--prune-max 3000` = 削除候補がこれを超えたら**削除中止**して報告のみ
+  ③削除キーは実行前に `.cache/r2-pruned-<日時>.txt` へ必ず記録
+- 中止された時は一覧を確認し、意図した削除なら `--prune --prune-max <件数+100>` で再実行。
+- ★**初回(2026-07-26以降の最初の週次)は約2,100キー削除**の見込み(孤児1,041頁×html+txt)= 正常。
 - 起動直後に**生存確認**(python の CPU 時間が伸びているか)。ログ0バイトでもハッシュ照合中は無言(10-25分)が正常。
 - スクリプトが .env.local から R2_* 自動読込・**本番索引 overlay(out/ ルートへ)+5MBガード**内蔵。
 - レイアウト級の変更(全頁共通部)があった週は全量PUT=正常。
