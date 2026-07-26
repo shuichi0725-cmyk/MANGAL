@@ -1282,6 +1282,73 @@ def _norm_pub(s: str) -> str:
     return s
 
 
+# ★本のクレジット名(2026-07-26 ユーザ方針「表示はその本のクレジット」):
+#   MADB は schema:creator に**その本に刷られた名義**を持つ(美月めいあ/さんかく)。
+#   一方 dcterms:creator の典拠IDで人物解決すると mangaka.name は**代表名**(風緒/生倉大福)になり、
+#   従来はそちらで上書きしていたため本の名義が失われていた
+#   (2026-07-26 実測: 本番の 2,820頁 がこの型。ユーザ提供のMADB生RDFで判明)。
+#   ★典拠解決は同定にだけ使い、**表示名は本のクレジット**にする。
+_ISBN2CREDIT: dict | None = None
+
+
+def _credit_names(v) -> list:
+    """schema:creator から **ja の素の名前だけ** 取り出す(ja-hrkt の読みは除外)。
+    形は ["名", {@value:"ヨミ",@language:ja-hrkt}] / [{@value:[ヨミ,ヨミ]}, ["名","名"]] 等が混在。"""
+    out = []
+
+    def walk(x):
+        if isinstance(x, str):
+            t = x.strip()
+            if t:
+                out.append(t)
+        elif isinstance(x, list):
+            for y in x:
+                walk(y)
+        elif isinstance(x, dict):
+            if x.get("@language") == "ja-hrkt":
+                return            # 読み(カナ)は名前ではない
+            walk(x.get("@value"))
+    walk(v)
+    return out
+
+
+def _apply_book_credit(authors: list[dict], isbns: list, alias: dict) -> list[dict]:
+    """著者の**表示名だけ**を「その本のクレジット」へ1:1で寄せる。
+    ★人の追加/削除は絶対にしない(監修者・原作者・題名の混入を原理的に防ぐ。
+      2026-07-26: 追加を許すと『妖怪マンガで楽しい古典→小松和彦(監修)』型の事故が出た)。
+    条件 = 現在名が本のクレジットに無く、かつ **その人物の別名(alt_names)がクレジットに在る** 時だけ改名。"""
+    if not authors or not isbns:
+        return authors
+    cred = []
+    for ib in isbns:
+        cred += (_ISBN2CREDIT or {}).get(str(ib), [])
+    if not cred:
+        return authors
+    cset = {_norm_pub(c): c for c in cred}      # 空白/記号を落とした照合キー
+    out = []
+    for a in authors:
+        nm = a.get("name") or ""
+        if _norm_pub(nm) in cset:
+            out.append(a); continue
+        hit = next((cset[k] for k in (_norm_pub(x) for x in alias.get(nm, ())) if k in cset), None)
+        out.append({**a, "name": hit} if hit else a)
+    return out
+
+
+_MANGAKA_ALIAS: dict | None = None
+
+
+def _mangaka_alias(con) -> dict:
+    """name -> 別名集合(mangaka.alt_names)。 本のクレジットへ寄せる時の**同一人物の証拠**。"""
+    global _MANGAKA_ALIAS
+    if _MANGAKA_ALIAS is None:
+        _MANGAKA_ALIAS = {}
+        for nm, al in con.execute("SELECT name, alt_names FROM mangaka"):
+            if al:
+                _MANGAKA_ALIAS[nm] = {x.strip() for x in str(al).split("|") if x.strip()}
+    return _MANGAKA_ALIAS
+
+
 def _load_pub_resolver() -> None:
     global _PUBKEY, _ISBN2PUB
     if _PUBKEY is not None:
@@ -1293,6 +1360,8 @@ def _load_pub_resolver() -> None:
         for nm, key in (yaml.safe_load(open(ali, encoding="utf-8")) or {}).items():
             _PUBKEY[nm] = key   # alias key は norm社名 → 既存/新キー
     _ISBN2PUB = {}
+    global _ISBN2CREDIT
+    _ISBN2CREDIT = {}
     meta = ROOT / ".cache" / "madb" / "metadata101-clean.json"
     if meta.exists():
         g = json.load(open(meta, encoding="utf-8"))
@@ -1311,6 +1380,9 @@ def _load_pub_resolver() -> None:
             k = _to_isbn13(i)   # ★metadata101はISBN-10混在 → 13に正規化してDB(isbn13)と突合
             if k:
                 _ISBN2PUB[k] = p
+                cr = _credit_names(r.get("schema:creator"))
+                if cr:
+                    _ISBN2CREDIT[k] = cr
 
 
 def edition_pub_name(ed: dict) -> str | None:
@@ -3042,6 +3114,10 @@ def main():
         _apply_cluster_best(con, merged_series, related_ids)
         authors = get_authors(con, series["id"])
         authors = apply_author_corrections(authors, series["series_key"])
+        # ★表示名は「その本のクレジット」(ユーザ方針 2026-07-26)。 典拠解決の代表名で上書きしない。
+        authors = _apply_book_credit(
+            authors, [v.get("isbn13") for ed in editions for v in (ed.get("volumes") or []) if v.get("isbn13")],
+            _mangaka_alias(con))
         seed_entry = seed3.get(series["series_key"])
         new_yml = build_yml(src, merged_series, authors, editions, seed_entry,
                             valid_pubs, valid_mags, valid_gens)
