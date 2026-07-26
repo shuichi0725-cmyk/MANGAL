@@ -15109,3 +15109,640 @@ volumes:
   source: rakuten
   added_at: '2026-07-27'
   note: MADBが2巻の題を「ちちょっとだけかえってきたDr.SLUMP」と誤登録(sid126379)→別クラスタ化で別頁に分裂していた巻。楽天9784088060071=「ちょっとだけかえってきたDr.スランプ(2)」1995-04-19頃で正題・日付確認。誤題頁 chi-chotto-… は page-dedup で drop。
+- series_keys:
+  - qid:Q11264757|name:おせん 真っ当を受け継ぎ繋ぐ。
+  qid: null
+  number: 1
+  isbn13: '9784063522907'
+  release_date: '2009-11'
+  publisher: 講談社
+  edition_type: standard
+  title_display: おせん 真っ当を受け継ぎ繋ぐ。(1)
+  source: rakuten
+  added_at: '2026-07-27'
+  note: 彼岸島型(種2の別clusterに眠りdedup負け)を種4で正頁へ結線。誤配属元はvolume-exclude。solo-truncated17件監査(2026-07-27ユーザ提示)。親clusterおせん(sid3482)に番号衝突で眠っていた
+- series_keys:
+  - qid:Q11264757|name:おせん 真っ当を受け継ぎ繋ぐ。
+  qid: null
+  number: 2
+  isbn13: '9784063523140'
+  release_date: '2010-05'
+  publisher: 講談社
+  edition_type: standard
+  title_display: おせん 真っ当を受け継ぎ繋ぐ。(2)
+  source: rakuten
+  added_at: '2026-07-27'
+  note: 彼岸島型(種2の別clusterに眠りdedup負け)を種4で正頁へ結線。誤配属元はvolume-exclude。solo-truncated17件監査(2026-07-27ユーザ提示)。親clusterおせん(sid3482)に番号衝突で眠っていた
+- series_keys:
+  - qid:Q11264757|name:おせん 真っ当を受け継ぎ繋ぐ。
+  qid: null
+  number: 3
+  isbn13: '9784063523324'
+  release_date: '2010-11'
+  publisher: 講談社
+  edition_type: standard
+  title_display: おせん 真っ当を受け継ぎ繋ぐ。(3)
+  source: rakuten
+  added_at: '2026-07-27'
+  note: 彼岸島型(種2の別clusterに眠りdedup負け)を種4で正頁へ結線。誤配属元はvolume-exclude。solo-truncated17件監査(2026-07-27ユーザ提示)。親clusterおせん(sid3482)に番号衝突で眠っていた
+- series_keys:
+  - qid:Q11264757|name:おせん 真っ当を受け継ぎ繋ぐ。
+  qid: null
+  number: 4
+  isbn13: '9784063523669'
+  release_date: '2011-06'
+  publisher: 講談社
+  edition_type: standard
+  title_display: おせん 真っ当を受け継ぎ繋ぐ。(4)
+  source: rakuten
+  added_at: '2026-07-27'
+  note: 彼岸島型(種2の別clusterに眠りdedup負け)を種4で正頁へ結線。誤配属元はvolume-exclude。solo-truncated17件監査(2026-07-27ユーザ提示)。親clusterおせん(sid3482)に番号衝突で眠っていた
+- series_keys:
+  - qid:Q11264757|name:おせん 真っ当を受け継ぎ繋ぐ。
+  qid: null
+  number: 5
+  isbn13: '9784063523997'
+  release_date: '2012-02'
+  publisher: 講談社
+  edition_type: standard
+  title_display: おせん 真っ当を受け継ぎ繋ぐ。(5)
+  source: rakuten
+  added_at: '2026-07-27'
+  note: 彼岸島型(種2の別clusterに眠りdedup負け)を種4で正頁へ結線。誤配属元はvolume-exclude。solo-truncated17件監査(2026-07-27ユーザ提示)。親clusterおせん(sid3482)に番号衝突で眠っていた
+- series_keys:
+  - qid:Q11264757|name:おせん 真っ当を受け継ぎ繋ぐ。
+  qid: null
+  number: 6
+  isbn13: '9784063524277'
+  release_date: '2012-07'
+  publisher: 講談社
+  edition_type: standard
+  title_display: おせん 真っ当を受け継ぎ繋ぐ。(6)
+  source: rakuten
+  added_at: '2026-07-27'
+  note: 彼岸島型(種2の別clusterに眠りdedup負け)を種4で正頁へ結線。誤配属元はvolume-exclude。solo-truncated17件監査(2026-07-27ユーザ提示)。親clusterおせん(sid3482)に番号衝突で眠っていた
+- series_keys:
+  - qid:Q11264757|name:おせん 真っ当を受け継ぎ繋ぐ。
+  qid: null
+  number: 7
+  isbn13: '9784063524420'
+  release_date: '2012-12'
+  publisher: 講談社
+  edition_type: standard
+  title_display: おせん 真っ当を受け継ぎ繋ぐ。(7)
+  source: rakuten
+  added_at: '2026-07-27'
+  note: 彼岸島型(種2の別clusterに眠りdedup負け)を種4で正頁へ結線。誤配属元はvolume-exclude。solo-truncated17件監査(2026-07-27ユーザ提示)。親clusterおせん(sid3482)に番号衝突で眠っていた
+- series_keys:
+  - qid:Q11264757|name:おせん 真っ当を受け継ぎ繋ぐ。
+  qid: null
+  number: 8
+  isbn13: '9784063524673'
+  release_date: '2013-07-23'
+  publisher: 講談社
+  edition_type: standard
+  title_display: おせん 真っ当を受け継ぎ繋ぐ。(8)
+  source: rakuten
+  added_at: '2026-07-27'
+  note: 彼岸島型(種2の別clusterに眠りdedup負け)を種4で正頁へ結線。誤配属元はvolume-exclude。solo-truncated17件監査(2026-07-27ユーザ提示)。親clusterおせん(sid3482)に番号衝突で眠っていた
+- series_keys:
+  - qid:Q11264757|name:おせん 真っ当を受け継ぎ繋ぐ。
+  qid: null
+  number: 9
+  isbn13: '9784063524932'
+  release_date: '2013-12'
+  publisher: 講談社
+  edition_type: standard
+  title_display: おせん 真っ当を受け継ぎ繋ぐ。(9)
+  source: rakuten
+  added_at: '2026-07-27'
+  note: 彼岸島型(種2の別clusterに眠りdedup負け)を種4で正頁へ結線。誤配属元はvolume-exclude。solo-truncated17件監査(2026-07-27ユーザ提示)。親clusterおせん(sid3482)に番号衝突で眠っていた
+- series_keys:
+  - qid:Q11264757|name:おせん 真っ当を受け継ぎ繋ぐ。
+  qid: null
+  number: 11
+  isbn13: '9784063545258'
+  release_date: '2014-07-23'
+  publisher: 講談社
+  edition_type: standard
+  title_display: おせん 真っ当を受け継ぎ繋ぐ。(11)
+  source: rakuten
+  added_at: '2026-07-27'
+  note: 彼岸島型(種2の別clusterに眠りdedup負け)を種4で正頁へ結線。誤配属元はvolume-exclude。solo-truncated17件監査(2026-07-27ユーザ提示)。親clusterおせん(sid3482)に番号衝突で眠っていた
+- series_keys:
+  - qid:Q11475634|name:みこすり半劇場 蔵出し
+  qid: null
+  number: 1
+  isbn13: '9784821199198'
+  release_date: '2002-01-30'
+  publisher: ぶんか社
+  edition_type: standard
+  title_display: みこすり半劇場 蔵出し(1)
+  source: rakuten
+  added_at: '2026-07-27'
+  note: 真のMADB取込もれ(種2に該当ISBN無し)。楽天で実在確認。solo-truncated17件監査(2026-07-27ユーザ提示)
+- series_keys:
+  - qid:Q11475634|name:みこすり半劇場 蔵出し
+  qid: null
+  number: 2
+  isbn13: '9784821199204'
+  release_date: '2002-01-30'
+  publisher: ぶんか社
+  edition_type: standard
+  title_display: みこすり半劇場 蔵出し(2)
+  source: rakuten
+  added_at: '2026-07-27'
+  note: 彼岸島型(種2の別clusterに眠りdedup負け)を種4で正頁へ結線。誤配属元はvolume-exclude。solo-truncated17件監査(2026-07-27ユーザ提示)。親みこすり半劇場(sid15779)に眠っていた
+- series_keys:
+  - qid:Q11475634|name:みこすり半劇場 蔵出し
+  qid: null
+  number: 3
+  isbn13: '9784821199648'
+  release_date: '2002-06-28'
+  publisher: ぶんか社
+  edition_type: standard
+  title_display: みこすり半劇場 蔵出し(3)
+  source: rakuten
+  added_at: '2026-07-27'
+  note: 真のMADB取込もれ(種2に該当ISBN無し)。楽天で実在確認。solo-truncated17件監査(2026-07-27ユーザ提示)
+- series_keys:
+  - qid:Q11475634|name:みこすり半劇場 蔵出し
+  qid: null
+  number: 4
+  isbn13: '9784821199822'
+  release_date: '2002-11-07'
+  publisher: ぶんか社
+  edition_type: standard
+  title_display: みこすり半劇場 蔵出し(4)
+  source: rakuten
+  added_at: '2026-07-27'
+  note: 真のMADB取込もれ(種2に該当ISBN無し)。楽天で実在確認。solo-truncated17件監査(2026-07-27ユーザ提示)
+- series_keys:
+  - qid:Q11475634|name:みこすり半劇場 蔵出し
+  qid: null
+  number: 5
+  isbn13: '9784821199846'
+  release_date: '2002-12-07'
+  publisher: ぶんか社
+  edition_type: standard
+  title_display: みこすり半劇場 蔵出し(5)
+  source: rakuten
+  added_at: '2026-07-27'
+  note: 真のMADB取込もれ(種2に該当ISBN無し)。楽天で実在確認。solo-truncated17件監査(2026-07-27ユーザ提示)
+- series_keys:
+  - qid:Q11462709|name:サブマリン707レジェンドBOX
+  qid: null
+  number: 1
+  isbn13: '9784778032470'
+  release_date: '2013-08-23'
+  publisher: 小学館クリエイティブ
+  edition_type: standard
+  title_display: サブマリン707 レジェンドBOX潜航編
+  source: rakuten
+  added_at: '2026-07-27'
+  note: 彼岸島型(種2の別clusterに眠りdedup負け)を種4で正頁へ結線。誤配属元はvolume-exclude。solo-truncated17件監査(2026-07-27ユーザ提示)。潜航編が本編頁submarine-nanamarunanaに誤配属されていた
+- series_keys:
+  - qid:Q11276199|name:カセキホリダー ラインの大冒険!!
+  qid: null
+  number: 1
+  isbn13: '9784091411976'
+  release_date: '2011-01'
+  publisher: 小学館
+  edition_type: standard
+  title_display: カセキホリダー ラインの大冒険!!(第1巻)
+  source: rakuten
+  added_at: '2026-07-27'
+  note: 彼岸島型(種2の別clusterに眠りdedup負け)を種4で正頁へ結線。誤配属元はvolume-exclude。solo-truncated17件監査(2026-07-27ユーザ提示)。無印cluster(sid5033)に眠っていた
+- series_keys:
+  - name:はっとりまさき|name:カルネアデス
+  qid: null
+  number: 1
+  isbn13: '9784040757018'
+  release_date: '2024-11-21'
+  publisher: KADOKAWA
+  edition_type: standard
+  title_display: カルネアデス 1
+  source: rakuten
+  added_at: '2026-07-27'
+  note: 真のMADB取込もれ(種2に該当ISBN無し)。楽天で実在確認。solo-truncated17件監査(2026-07-27ユーザ提示)
+- series_keys:
+  - name:かず@神戸トア|name:転生薬師は迷宮都市育ち
+  qid: null
+  number: 1
+  isbn13: '9784065418338'
+  release_date: '2025-12-23'
+  publisher: 講談社
+  edition_type: standard
+  title_display: 転生薬師は迷宮都市育ち(1)
+  source: rakuten
+  added_at: '2026-07-27'
+  note: 真のMADB取込もれ(種2に該当ISBN無し)。楽天で実在確認。solo-truncated17件監査(2026-07-27ユーザ提示)
+- series_keys:
+  - qid:Q1319777|name:離婚したいアナタへ
+  qid: null
+  number: 1
+  isbn13: '9784098636532'
+  release_date: '2025-12-26'
+  publisher: 小学館
+  edition_type: standard
+  title_display: 離婚したいアナタへ(1)
+  source: rakuten
+  added_at: '2026-07-27'
+  note: 真のMADB取込もれ(種2に該当ISBN無し)。楽天で実在確認。solo-truncated17件監査(2026-07-27ユーザ提示)
+- series_keys:
+  - name:影茸|name:忌み子として捨てられた召喚士、実は世界最強
+  qid: null
+  number: 1
+  isbn13: '9784575423396'
+  release_date: '2025-12-26'
+  publisher: 双葉社
+  edition_type: standard
+  title_display: 忌み子として捨てられた召喚士、実は世界最強(1)
+  source: rakuten
+  added_at: '2026-07-27'
+  note: 真のMADB取込もれ(種2に該当ISBN無し)。楽天で実在確認。solo-truncated17件監査(2026-07-27ユーザ提示)
+- series_keys:
+  - name:ボルテージ|name:深夜残業
+  qid: null
+  number: 1
+  isbn13: '9784911186107'
+  release_date: '2024-07-17'
+  publisher: 日販アイ・ピー・エス
+  edition_type: standard
+  title_display: 深夜残業〜肉食後輩の片恋研修
+  source: rakuten
+  added_at: '2026-07-27'
+  note: 真のMADB取込もれ(種2に該当ISBN無し)。楽天で実在確認。solo-truncated17件監査(2026-07-27ユーザ提示)。★正題は「深夜残業〜肉食後輩の片恋研修」(頁題「深夜残業」は切り詰め=別途title改善候補)
+- series_keys:
+  - name:NAKA雅MURA|name:QP外伝我妻涼
+  - qid:Q2279877|name:QP外伝我妻涼
+  qid: null
+  number: 4
+  isbn13: '9784253252041'
+  release_date: '2014-11-20'
+  publisher: 秋田書店
+  edition_type: standard
+  title_display: QP外伝我妻涼(4)
+  source: rakuten
+  added_at: '2026-07-27'
+  note: 彼岸島型(種2の別clusterに眠りdedup負け)を種4で正頁へ結線。誤配属元はvolume-exclude。solo-truncated17件監査(2026-07-27ユーザ提示)。4巻だけ誤ヨミcluster(キューピー外伝我妻涼sid126545)に分裂→当該頁はpage-dedupでdrop
+- series_keys:
+  - qid:Q11274881|name:Bomber girl xxx
+  qid: null
+  number: 1
+  isbn13: '9784785924096'
+  release_date: '2004-04-12'
+  publisher: 少年画報社
+  edition_type: standard
+  title_display: ボンバーガールXXX(1)
+  source: rakuten
+  added_at: '2026-07-27'
+  note: 真のMADB取込もれ(種2に該当ISBN無し)。楽天で実在確認。solo-truncated17件監査(2026-07-27ユーザ提示)
+- series_keys:
+  - qid:Q11274881|name:Bomber girl xxx
+  qid: null
+  number: 2
+  isbn13: '9784785924522'
+  release_date: '2004-08'
+  publisher: 少年画報社
+  edition_type: standard
+  title_display: ボンバーガールXXX(2)
+  source: rakuten
+  added_at: '2026-07-27'
+  note: 真のMADB取込もれ(種2に該当ISBN無し)。楽天で実在確認。solo-truncated17件監査(2026-07-27ユーザ提示)
+- series_keys:
+  - qid:Q551551|name:サクラ大戦 第2部
+  qid: null
+  number: 1
+  isbn13: '9784063758733'
+  release_date: '2010-02-17'
+  publisher: 講談社
+  edition_type: standard
+  title_display: サクラ大戦 漫画版第二部(1)
+  source: rakuten
+  added_at: '2026-07-27'
+  note: 彼岸島型(種2の別clusterに眠りdedup負け)を種4で正頁へ結線。誤配属元はvolume-exclude。solo-truncated17件監査(2026-07-27ユーザ提示)。第二部が3頁+第一部頁deluxe枠に4分裂していた(1,2,6-9=sid47324/5=sid128327)
+- series_keys:
+  - qid:Q551551|name:サクラ大戦 第2部
+  qid: null
+  number: 2
+  isbn13: '9784063759785'
+  release_date: '2010-12-17'
+  publisher: 講談社
+  edition_type: standard
+  title_display: サクラ大戦 漫画版第二部(2)
+  source: rakuten
+  added_at: '2026-07-27'
+  note: 彼岸島型(種2の別clusterに眠りdedup負け)を種4で正頁へ結線。誤配属元はvolume-exclude。solo-truncated17件監査(2026-07-27ユーザ提示)。第二部が3頁+第一部頁deluxe枠に4分裂していた(1,2,6-9=sid47324/5=sid128327)
+- series_keys:
+  - qid:Q551551|name:サクラ大戦 第2部
+  qid: null
+  number: 5
+  isbn13: '9784063769654'
+  release_date: '2014-04-17'
+  publisher: 講談社
+  edition_type: standard
+  title_display: サクラ大戦 漫画版第二部(5)
+  source: rakuten
+  added_at: '2026-07-27'
+  note: 彼岸島型(種2の別clusterに眠りdedup負け)を種4で正頁へ結線。誤配属元はvolume-exclude。solo-truncated17件監査(2026-07-27ユーザ提示)。第二部が3頁+第一部頁deluxe枠に4分裂していた(1,2,6-9=sid47324/5=sid128327)
+- series_keys:
+  - qid:Q551551|name:サクラ大戦 第2部
+  qid: null
+  number: 6
+  isbn13: '9784063773552'
+  release_date: '2016-08-17'
+  publisher: 講談社
+  edition_type: standard
+  title_display: サクラ大戦 漫画版第二部(6)
+  source: rakuten
+  added_at: '2026-07-27'
+  note: 彼岸島型(種2の別clusterに眠りdedup負け)を種4で正頁へ結線。誤配属元はvolume-exclude。solo-truncated17件監査(2026-07-27ユーザ提示)。第二部が3頁+第一部頁deluxe枠に4分裂していた(1,2,6-9=sid47324/5=sid128327)
+- series_keys:
+  - qid:Q551551|name:サクラ大戦 第2部
+  qid: null
+  number: 7
+  isbn13: '9784063931341'
+  release_date: '2018-07-17'
+  publisher: 講談社
+  edition_type: standard
+  title_display: サクラ大戦 漫画版第二部(7)
+  source: rakuten
+  added_at: '2026-07-27'
+  note: 彼岸島型(種2の別clusterに眠りdedup負け)を種4で正頁へ結線。誤配属元はvolume-exclude。solo-truncated17件監査(2026-07-27ユーザ提示)。第二部が3頁+第一部頁deluxe枠に4分裂していた(1,2,6-9=sid47324/5=sid128327)
+- series_keys:
+  - qid:Q551551|name:サクラ大戦 第2部
+  qid: null
+  number: 8
+  isbn13: '9784065134054'
+  release_date: '2021-06-17'
+  publisher: 講談社
+  edition_type: standard
+  title_display: サクラ大戦 漫画版第二部(8)
+  source: rakuten
+  added_at: '2026-07-27'
+  note: 彼岸島型(種2の別clusterに眠りdedup負け)を種4で正頁へ結線。誤配属元はvolume-exclude。solo-truncated17件監査(2026-07-27ユーザ提示)。第二部が3頁+第一部頁deluxe枠に4分裂していた(1,2,6-9=sid47324/5=sid128327)
+- series_keys:
+  - qid:Q551551|name:サクラ大戦 第2部
+  qid: null
+  number: 9
+  isbn13: '9784065221013'
+  release_date: '2021-06-17'
+  publisher: 講談社
+  edition_type: standard
+  title_display: サクラ大戦 漫画版第二部(9)
+  source: rakuten
+  added_at: '2026-07-27'
+  note: 彼岸島型(種2の別clusterに眠りdedup負け)を種4で正頁へ結線。誤配属元はvolume-exclude。solo-truncated17件監査(2026-07-27ユーザ提示)。第二部が3頁+第一部頁deluxe枠に4分裂していた(1,2,6-9=sid47324/5=sid128327)
+- series_keys:
+  - qid:Q8495163|name:球場ラヴァーズ 私を野球につれてって
+  qid: null
+  number: 1
+  isbn13: '9784785950170'
+  release_date: '2013-03'
+  publisher: 少年画報社
+  edition_type: standard
+  title_display: 球場ラヴァーズ〜私を野球につれてって〜(1)
+  source: rakuten
+  added_at: '2026-07-27'
+  note: 彼岸島型(種2の別clusterに眠りdedup負け)を種4で正頁へ結線。誤配属元はvolume-exclude。solo-truncated17件監査(2026-07-27ユーザ提示)。無印cluster(sid52848)に眠っていた
+- series_keys:
+  - qid:Q8495163|name:球場ラヴァーズ 私を野球につれてって
+  qid: null
+  number: 2
+  isbn13: '9784785951344'
+  release_date: '2013-09'
+  publisher: 少年画報社
+  edition_type: standard
+  title_display: 球場ラヴァーズ〜私を野球につれてって〜(2)
+  source: rakuten
+  added_at: '2026-07-27'
+  note: 彼岸島型(種2の別clusterに眠りdedup負け)を種4で正頁へ結線。誤配属元はvolume-exclude。solo-truncated17件監査(2026-07-27ユーザ提示)。無印cluster(sid52848)に眠っていた
+- series_keys:
+  - qid:Q1016880|name:北斗の拳 究極版
+  qid: null
+  number: 1
+  isbn13: '9784199801518'
+  release_date: '2013-09-20'
+  publisher: 徳間書店
+  edition_type: standard
+  title_display: 北斗の拳 究極版(1)
+  source: rakuten
+  added_at: '2026-07-27'
+  note: 彼岸島型(種2の別clusterに眠りdedup負け)を種4で正頁へ結線。誤配属元はvolume-exclude。solo-truncated17件監査(2026-07-27ユーザ提示)。17巻が本編cluster(sid124)に番号衝突で眠り8巻だけの頁になっていた
+- series_keys:
+  - qid:Q1016880|name:北斗の拳 究極版
+  qid: null
+  number: 2
+  isbn13: '9784199801525'
+  release_date: '2013-09-20'
+  publisher: 徳間書店
+  edition_type: standard
+  title_display: 北斗の拳 究極版(2)
+  source: rakuten
+  added_at: '2026-07-27'
+  note: 彼岸島型(種2の別clusterに眠りdedup負け)を種4で正頁へ結線。誤配属元はvolume-exclude。solo-truncated17件監査(2026-07-27ユーザ提示)。17巻が本編cluster(sid124)に番号衝突で眠り8巻だけの頁になっていた
+- series_keys:
+  - qid:Q1016880|name:北斗の拳 究極版
+  qid: null
+  number: 3
+  isbn13: '9784199801662'
+  release_date: '2013-10-19'
+  publisher: 徳間書店
+  edition_type: standard
+  title_display: 北斗の拳 究極版(3)
+  source: rakuten
+  added_at: '2026-07-27'
+  note: 彼岸島型(種2の別clusterに眠りdedup負け)を種4で正頁へ結線。誤配属元はvolume-exclude。solo-truncated17件監査(2026-07-27ユーザ提示)。17巻が本編cluster(sid124)に番号衝突で眠り8巻だけの頁になっていた
+- series_keys:
+  - qid:Q1016880|name:北斗の拳 究極版
+  qid: null
+  number: 4
+  isbn13: '9784199801679'
+  release_date: '2013-10-19'
+  publisher: 徳間書店
+  edition_type: standard
+  title_display: 北斗の拳 究極版(4)
+  source: rakuten
+  added_at: '2026-07-27'
+  note: 彼岸島型(種2の別clusterに眠りdedup負け)を種4で正頁へ結線。誤配属元はvolume-exclude。solo-truncated17件監査(2026-07-27ユーザ提示)。17巻が本編cluster(sid124)に番号衝突で眠り8巻だけの頁になっていた
+- series_keys:
+  - qid:Q1016880|name:北斗の拳 究極版
+  qid: null
+  number: 5
+  isbn13: '9784199801747'
+  release_date: '2013-11-20'
+  publisher: 徳間書店
+  edition_type: standard
+  title_display: 北斗の拳 究極版(5)
+  source: rakuten
+  added_at: '2026-07-27'
+  note: 彼岸島型(種2の別clusterに眠りdedup負け)を種4で正頁へ結線。誤配属元はvolume-exclude。solo-truncated17件監査(2026-07-27ユーザ提示)。17巻が本編cluster(sid124)に番号衝突で眠り8巻だけの頁になっていた
+- series_keys:
+  - qid:Q1016880|name:北斗の拳 究極版
+  qid: null
+  number: 6
+  isbn13: '9784199801754'
+  release_date: '2013-11-20'
+  publisher: 徳間書店
+  edition_type: standard
+  title_display: 北斗の拳 究極版(6)
+  source: rakuten
+  added_at: '2026-07-27'
+  note: 彼岸島型(種2の別clusterに眠りdedup負け)を種4で正頁へ結線。誤配属元はvolume-exclude。solo-truncated17件監査(2026-07-27ユーザ提示)。17巻が本編cluster(sid124)に番号衝突で眠り8巻だけの頁になっていた
+- series_keys:
+  - qid:Q1016880|name:北斗の拳 究極版
+  qid: null
+  number: 7
+  isbn13: '9784199801815'
+  release_date: '2013-12-20'
+  publisher: 徳間書店
+  edition_type: standard
+  title_display: 北斗の拳 究極版(7)
+  source: rakuten
+  added_at: '2026-07-27'
+  note: 彼岸島型(種2の別clusterに眠りdedup負け)を種4で正頁へ結線。誤配属元はvolume-exclude。solo-truncated17件監査(2026-07-27ユーザ提示)。17巻が本編cluster(sid124)に番号衝突で眠り8巻だけの頁になっていた
+- series_keys:
+  - qid:Q1016880|name:北斗の拳 究極版
+  qid: null
+  number: 9
+  isbn13: '9784199801891'
+  release_date: '2014-01-20'
+  publisher: 徳間書店
+  edition_type: standard
+  title_display: 北斗の拳 究極版(9)
+  source: rakuten
+  added_at: '2026-07-27'
+  note: 彼岸島型(種2の別clusterに眠りdedup負け)を種4で正頁へ結線。誤配属元はvolume-exclude。solo-truncated17件監査(2026-07-27ユーザ提示)。17巻が本編cluster(sid124)に番号衝突で眠り8巻だけの頁になっていた
+- series_keys:
+  - qid:Q1016880|name:北斗の拳 究極版
+  qid: null
+  number: 10
+  isbn13: '9784199801907'
+  release_date: '2014-01-20'
+  publisher: 徳間書店
+  edition_type: standard
+  title_display: 北斗の拳 究極版(10)
+  source: rakuten
+  added_at: '2026-07-27'
+  note: 彼岸島型(種2の別clusterに眠りdedup負け)を種4で正頁へ結線。誤配属元はvolume-exclude。solo-truncated17件監査(2026-07-27ユーザ提示)。17巻が本編cluster(sid124)に番号衝突で眠り8巻だけの頁になっていた
+- series_keys:
+  - qid:Q1016880|name:北斗の拳 究極版
+  qid: null
+  number: 11
+  isbn13: '9784199802065'
+  release_date: '2014-04-19'
+  publisher: 徳間書店
+  edition_type: standard
+  title_display: 北斗の拳 究極版(11)
+  source: rakuten
+  added_at: '2026-07-27'
+  note: 彼岸島型(種2の別clusterに眠りdedup負け)を種4で正頁へ結線。誤配属元はvolume-exclude。solo-truncated17件監査(2026-07-27ユーザ提示)。17巻が本編cluster(sid124)に番号衝突で眠り8巻だけの頁になっていた
+- series_keys:
+  - qid:Q1016880|name:北斗の拳 究極版
+  qid: null
+  number: 12
+  isbn13: '9784199802072'
+  release_date: '2014-04-19'
+  publisher: 徳間書店
+  edition_type: standard
+  title_display: 北斗の拳 究極版(12)
+  source: rakuten
+  added_at: '2026-07-27'
+  note: 彼岸島型(種2の別clusterに眠りdedup負け)を種4で正頁へ結線。誤配属元はvolume-exclude。solo-truncated17件監査(2026-07-27ユーザ提示)。17巻が本編cluster(sid124)に番号衝突で眠り8巻だけの頁になっていた
+- series_keys:
+  - qid:Q1016880|name:北斗の拳 究極版
+  qid: null
+  number: 13
+  isbn13: '9784199802133'
+  release_date: '2014-05-20'
+  publisher: 徳間書店
+  edition_type: standard
+  title_display: 北斗の拳 究極版(13)
+  source: rakuten
+  added_at: '2026-07-27'
+  note: 彼岸島型(種2の別clusterに眠りdedup負け)を種4で正頁へ結線。誤配属元はvolume-exclude。solo-truncated17件監査(2026-07-27ユーザ提示)。17巻が本編cluster(sid124)に番号衝突で眠り8巻だけの頁になっていた
+- series_keys:
+  - qid:Q1016880|name:北斗の拳 究極版
+  qid: null
+  number: 14
+  isbn13: '9784199802140'
+  release_date: '2014-05-20'
+  publisher: 徳間書店
+  edition_type: standard
+  title_display: 北斗の拳 究極版(14)
+  source: rakuten
+  added_at: '2026-07-27'
+  note: 彼岸島型(種2の別clusterに眠りdedup負け)を種4で正頁へ結線。誤配属元はvolume-exclude。solo-truncated17件監査(2026-07-27ユーザ提示)。17巻が本編cluster(sid124)に番号衝突で眠り8巻だけの頁になっていた
+- series_keys:
+  - qid:Q1016880|name:北斗の拳 究極版
+  qid: null
+  number: 15
+  isbn13: '9784199802188'
+  release_date: '2014-06-20'
+  publisher: 徳間書店
+  edition_type: standard
+  title_display: 北斗の拳 究極版(15)
+  source: rakuten
+  added_at: '2026-07-27'
+  note: 彼岸島型(種2の別clusterに眠りdedup負け)を種4で正頁へ結線。誤配属元はvolume-exclude。solo-truncated17件監査(2026-07-27ユーザ提示)。17巻が本編cluster(sid124)に番号衝突で眠り8巻だけの頁になっていた
+- series_keys:
+  - qid:Q1016880|name:北斗の拳 究極版
+  qid: null
+  number: 16
+  isbn13: '9784199802195'
+  release_date: '2014-06-20'
+  publisher: 徳間書店
+  edition_type: standard
+  title_display: 北斗の拳 究極版(16)
+  source: rakuten
+  added_at: '2026-07-27'
+  note: 彼岸島型(種2の別clusterに眠りdedup負け)を種4で正頁へ結線。誤配属元はvolume-exclude。solo-truncated17件監査(2026-07-27ユーザ提示)。17巻が本編cluster(sid124)に番号衝突で眠り8巻だけの頁になっていた
+- series_keys:
+  - qid:Q1016880|name:北斗の拳 究極版
+  qid: null
+  number: 17
+  isbn13: '9784199802256'
+  release_date: '2014-07-19'
+  publisher: 徳間書店
+  edition_type: standard
+  title_display: 北斗の拳 究極版(17)
+  source: rakuten
+  added_at: '2026-07-27'
+  note: 彼岸島型(種2の別clusterに眠りdedup負け)を種4で正頁へ結線。誤配属元はvolume-exclude。solo-truncated17件監査(2026-07-27ユーザ提示)。17巻が本編cluster(sid124)に番号衝突で眠り8巻だけの頁になっていた
+- series_keys:
+  - qid:Q1016880|name:北斗の拳 究極版
+  qid: null
+  number: 18
+  isbn13: '9784199802263'
+  release_date: '2014-07-19'
+  publisher: 徳間書店
+  edition_type: standard
+  title_display: 北斗の拳 究極版(18)
+  source: rakuten
+  added_at: '2026-07-27'
+  note: 彼岸島型(種2の別clusterに眠りdedup負け)を種4で正頁へ結線。誤配属元はvolume-exclude。solo-truncated17件監査(2026-07-27ユーザ提示)。17巻が本編cluster(sid124)に番号衝突で眠り8巻だけの頁になっていた
+- series_keys:
+  - name:もなか知弘|name:みそっかす王女の結婚事情
+  qid: null
+  number: 1
+  isbn13: '9784781623887'
+  release_date: '2024-11-06'
+  publisher: イースト・プレス
+  edition_type: standard
+  title_display: みそっかす王女の結婚事情1
+  source: rakuten
+  added_at: '2026-07-27'
+  note: 真のMADB取込もれ(種2に該当ISBN無し)。楽天で実在確認。solo-truncated17件監査(2026-07-27ユーザ提示)
+- series_keys:
+  - name:赤丸九十九|name:パブロ・ロラの英雄譚
+  qid: null
+  number: 1
+  isbn13: '9784065413555'
+  release_date: '2025-12-19'
+  publisher: 講談社
+  edition_type: standard
+  title_display: パブロ・ロラの英雄譚(1)
+  source: rakuten
+  added_at: '2026-07-27'
+  note: 真のMADB取込もれ(種2に該当ISBN無し)。楽天で実在確認。solo-truncated17件監査(2026-07-27ユーザ提示)

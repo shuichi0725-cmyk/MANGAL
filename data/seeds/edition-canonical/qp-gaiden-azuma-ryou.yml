@@ -1,6 +1,6 @@
 slug: qp-gaiden-azuma-ryou
 canonical_label: 通常版
-source: 上下巻対応拡張 2026-07-04(volume_label搬送・全ゲート再適用 sid=36831)
+source: '上下巻対応拡張 2026-07-04(volume_label搬送・全ゲート再適用 sid=36831) / 4巻追加 2026-07-27(solo-truncated監査=4巻だけ誤ヨミcluster「キューピー外伝我妻涼」sid126545に分裂し別頁化していた→page-dedupでdrop・楽天9784253252041=2014-11-20確認。★canonical結線頁なので種4でなくここが正)'
 publisher: 秋田書店
 volumes: &id001
 - number: 1
@@ -12,6 +12,9 @@ volumes: &id001
 - number: 3
   isbn13: '9784253252034'
   release_date: 2014-06
+- number: 4
+  isbn13: '9784253252041'
+  release_date: '2014-11-20'
 versions:
 - label: プレイコミック・シリーズ(2013-14)
   volumes: *id001
