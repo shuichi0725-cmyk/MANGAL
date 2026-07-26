@@ -113,6 +113,7 @@
 - [著者回収の罠=監修者混入](author_recovery_supervisor_false_positive.md) — NDL役割で監修と作画を分離
 - [教育系年代版の分離=NDL補完](edu_multiedition_disentangle_ndl.md) — ISBN発行コード×NDL発行年
 - [検索に出るのに404=ビルドskip](search_404_build_skip_validation.md) — 索引/Zod不整合。skip0確認
+- [【手順】巻抜けは4型=種2在否を先に判定](volgap_diagnosis_order.md) — 誤番号が欠落を偽装する型に注意。種4は種2に無い時だけ
 - [巻抜け大半=under-merge](volgap_mostly_undermerge.md) — 種4は真の取込もれのみ安全 ／ [【進行中】巻抜けper-case仕上げ](volgap_per_case_cleanup_state.md) — 1417を一個ずつ・推測で触らない
 - [【方針】掲載除外の優先度](exclusion_priority_policy.md) — ①成年誌②コンビニ本③纏められないもの
 - [反映=targeted](reflect_protocol_fast.md) — 正=skill reflect-targeted
