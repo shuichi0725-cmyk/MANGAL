@@ -1,4 +1,3 @@
-# title_kana 補完(MADB + NDL by-ISBN + カタカナ題 + 残尾NDL by-title/抽出/AI読み)
 fills:
 - key: name:DONKEY|name:Page 1
   kana_segmented: ページ ワン
@@ -93,8 +92,7 @@ fills:
 - key: name:35まち|name:葉木莉さんは君だけの死神になりたい
   kana_segmented: ハキリ サン ワ キミ ダケ ノ シニガミ ニ ナリタイ
 - key: name:38式|name:ヤバ盛!本当にあった〔○生〕ここだけの話極
-  kana_segmented: ヤバモリ ホントウ ニ アッタ マルナマ ココダケ ノ ハナシ ウルトラ|ヤバモリ ホントウ ニ アッタ マルナマ ココダケ ノ
-    ハナシ キョク
+  kana_segmented: ヤバモリ ホントウ ニ アッタ マルナマ ココダケ ノ ハナシ ウルトラ|ヤバモリ ホントウ ニ アッタ マルナマ ココダケ ノ ハナシ キョク
 - key: name:3B2S|name:盗掘王
   kana_segmented: トウクツオウ
 - key: name:3rd Ie|name:神血の救世主
@@ -120,8 +118,7 @@ fills:
   kana_segmented: クウフク ノ ココロ ニ ヒトクチ
 - key: name:59|name:サイコな黒幕の義姉ちゃん
   kana_segmented: サイコナ クロマク ノ ギシチャン
-- key: name:5pb.|name:Ever17 A promise we once made ＆ to the place we should go back
-    someday
+- key: name:5pb.|name:Ever17 A promise we once made ＆ to the place we should go back someday
   kana_segmented: エバー セブンティーン ア プロミス ウィー ワンス メイド アンド トゥー ザ プレイス ウィー シュッド ゴー バック サムデイ
 - key: name:5pb.|name:Lucian Bee's
   kana_segmented: ルシアンビーズ
@@ -496,8 +493,7 @@ fills:
   kana_segmented: スーパーマン セヴンティエイト
 - key: name:BensonLaurie|name:公爵と疎遠の妻
   kana_segmented: コウシャク ト ソエン ノ ツマ
-- key: name:Bergqvist|name:Kanji de Manga|sub:l「E」ar dig japanska! text, Glenn Kardy
-    ; bild, Chihiro Hattori ; 「E」overs「E」attning, Lotta Bergqvist ＆ Anna Ekstr「E」om.
+- key: name:Bergqvist|name:Kanji de Manga|sub:l「E」ar dig japanska! text, Glenn Kardy ; bild, Chihiro Hattori ; 「E」overs「E」attning, Lotta Bergqvist ＆ Anna Ekstr「E」om.
   kana_segmented: ジドウ トショ
   src: ndl
 - key: name:BernardHannah|name:思いがけない結婚
@@ -626,8 +622,7 @@ fills:
   kana_segmented: スクウェア エニックス
   src: ndl
 - key: name:CHIHIRO|name:「その辺の草でも食っとけ」と追放された無能スキル〈植物食い〉持ち転生者、エルフの里で幻の植物を食べて無双する
-  kana_segmented: ソノ ヘン ノ クサ デモ クットケ ト ツイホウ サレタ ムノウ スキル ショクブツグイモチ テンセイシャ エルフ ノ サト
-    デ マボロシ ノ ショクブツ オ タベテ ムソウ スル
+  kana_segmented: ソノ ヘン ノ クサ デモ クットケ ト ツイホウ サレタ ムノウ スキル ショクブツグイモチ テンセイシャ エルフ ノ サト デ マボロシ ノ ショクブツ オ タベテ ムソウ スル
 - key: name:CHIHIRO|name:元最強攻略者、望まぬダンジョン配信で無双してしまう
   kana_segmented: モト サイキョウ コウリャクシャ 、 ノゾマヌ ダンジョン ハイシン デ ムソウシテシマウ
 - key: name:CHIHIRO|name:転生大聖女、実力を隠して錬金術学科に入学する
@@ -709,8 +704,7 @@ fills:
 - key: name:CONCON|name:めちゃ盛!本当にあった〔○生〕ここだけの話祭
   kana_segmented: メチャモリ ! ホントウ ニ アッタ マルナマ ココ ダケ ノ ハナシ フィーバー
 - key: name:CONCON|name:スゴ盛!本当にあった〔○生〕ここだけの話極
-  kana_segmented: スゴモリ ホントウ ニ アッタ ナマ ココ ダケ ノ ハナシ キョク|スゴモリホントウ ニ アッタ マルナマ ココ ダケ ノ ハナシ
-    ウルトラ
+  kana_segmented: スゴモリ ホントウ ニ アッタ ナマ ココ ダケ ノ ハナシ キョク|スゴモリホントウ ニ アッタ マルナマ ココ ダケ ノ ハナシ ウルトラ
 - key: name:CONCON|name:激盛!本当にあった〔○生〕
   kana_segmented: ゲキモリ ホントウ ニ アッタ マルナマ
 - key: name:CONCON|name:超盛!本当にあった〔○生〕
@@ -848,8 +842,7 @@ fills:
 - key: name:Cygames|name:UMAMUSUME PRETTY DERBY anthologycomic STAR
   kana_segmented: ウマムスメ プリティー ダービー アンソロジー コミック スター
 - key: name:Cygames|name:Umamusume prettyderby anthologycomic star
-  kana_segmented: Umamusume prettyderby anthologycomic star = ウマムスメ プリティー ダービー アンソロジー
-    コミック star|ウマ娘プリティーダービーアンソロジーコミックstar
+  kana_segmented: Umamusume prettyderby anthologycomic star = ウマムスメ プリティー ダービー アンソロジー コミック star|ウマ娘プリティーダービーアンソロジーコミックstar
 - key: name:Cygames|name:ぷりこねっ!りだいぶ
   kana_segmented: プリコネッ リダイブ
 - key: name:Cygames|name:ウマ娘シンデレラグレイ.
@@ -1010,8 +1003,7 @@ fills:
 - key: name:Debbie Macomber|name:結婚がさき
   kana_segmented: ケッコン ガ サキ
 - key: name:DeeCHA|name:「お前には才能がない」と告げられた少女、怪物と評される才能の持ち主だった@COMIC
-  kana_segmented: オマエ ニワ サイノウ ガ ナイ ト ツゲラレタ ショウジョ カイブツ ト ヒョウサレル サイノウ ノ モチヌシ ダッタ アットマーク
-    コミック
+  kana_segmented: オマエ ニワ サイノウ ガ ナイ ト ツゲラレタ ショウジョ カイブツ ト ヒョウサレル サイノウ ノ モチヌシ ダッタ アットマーク コミック
 - key: name:DeeCHA|name:異世界居酒屋さわこさん細腕繁盛記
   kana_segmented: イセカイ イザカヤ サワコ サン ホソウデ ハンジョウキ
 - key: name:DelboJosé|name:トランスフォーマークラシックス
@@ -1484,8 +1476,7 @@ fills:
 - key: name:Hale|name:Rapunzel's revenge
   kana_segmented: ジドウ トショ
   src: ndl
-- key: name:Hama|name:The battle of Iwo Jima|sub:guerrilla warfare in the Pacific
-    by Larry Hama ; illustrated by Anthony Williams.
+- key: name:Hama|name:The battle of Iwo Jima|sub:guerrilla warfare in the Pacific by Larry Hama ; illustrated by Anthony Williams.
   kana_segmented: ジドウ トショ
   src: ndl
 - key: name:HamiltonDiana|name:愛にとらわれて
@@ -1514,11 +1505,9 @@ fills:
 - key: name:Harara|name:旦那が美貌を隠す訳
   kana_segmented: ダンナ ガ ビボウ オ カクス ワケ
 - key: name:Harcana|name:ポーション工場に左遷された錬金術師、美少女に拉致され異国でいつの間にか英雄になる
-  kana_segmented: ポーション コウジョウ ニ サセン サレタ レンキンジュツシ ビショウジョ ニ ラチ サレ イコク デ イツノマニカ エイユウ
-    ニ ナル
+  kana_segmented: ポーション コウジョウ ニ サセン サレタ レンキンジュツシ ビショウジョ ニ ラチ サレ イコク デ イツノマニカ エイユウ ニ ナル
 - key: name:Harcana|name:ポーション工場に左遷された錬金術師、美少女に拉致され異国でいつの間にか英雄になる.
-  kana_segmented: ポーション コウジョウ ニ サセン サレタ レンキンジュツシ ビショウジョ ニ ラチ サレ イコク デ イツノマニカ エイユウ
-    ニ ナル.
+  kana_segmented: ポーション コウジョウ ニ サセン サレタ レンキンジュツシ ビショウジョ ニ ラチ サレ イコク デ イツノマニカ エイユウ ニ ナル.
 - key: name:HardyJoshua|name:君と宇宙を歩くために
   kana_segmented: キミ ト ウチュウ オ アルク タメ ニ
 - key: name:HawthorneMike|name:BATMAN
@@ -1646,8 +1635,7 @@ fills:
 - key: name:I-Ⅳ|name:86-エイティシックス-魔法少女レジーナ☆レーナ
   kana_segmented: エイティシックス マホウ ショウジョ レジーナ レーナ
 - key: name:ICA|name:聖女、勇者パーティーから解雇されたのでギルドを作ったらアットホームな最強ギルドに育ちました。|sub:@comic
-  kana_segmented: セイジョ ユウシャ パーティー カラ カイコ サレタ ノデ ギルド オ ツクッタラ アット ホーム ナ サイキョウ ギルド ニ
-    ソダチマシタ
+  kana_segmented: セイジョ ユウシャ パーティー カラ カイコ サレタ ノデ ギルド オ ツクッタラ アット ホーム ナ サイキョウ ギルド ニ ソダチマシタ
 - key: name:ICHIGAIN|name:ず～っと大好き!!!!!!!
   kana_segmented: ズーット ダイスキ
 - key: name:ICHIGAIN|name:修羅場でイキてるポルノ屋さん
@@ -1720,8 +1708,7 @@ fills:
 - key: name:Ixy|name:なれる!SE
   kana_segmented: ナレル エスイー
 - key: name:Izumi|name:北政所様の御化粧係～戦国の世だって美容オタクは趣味に生きたいのです～@COMIC
-  kana_segmented: キタノマンドコロサマ ノ オケショウガカリ センゴク ノ ヨ ダッテ ビヨウ オタク ワ シュミ ニ イキタイ ノ デス アットマーク
-    コミック
+  kana_segmented: キタノマンドコロサマ ノ オケショウガカリ センゴク ノ ヨ ダッテ ビヨウ オタク ワ シュミ ニ イキタイ ノ デス アットマーク コミック
 - key: name:Izumi|name:後宮妃の管理人
   kana_segmented: コウキュウキサキ ノ カンリニン
 - key: name:Izumi|name:後宮妃の管理人.
@@ -1857,8 +1844,7 @@ fills:
 - key: name:K Storm|name:ドラゴンエフェクト
   kana_segmented: ドラゴン エフェクト
 - key: name:K1you|name:大魔導士と呼ばれた侯爵令嬢～世界が汚いので掃除していただけなんですけど……～@COMIC
-  kana_segmented: ダイマドウシ ト ヨバレタ コウシャク レイジョウ セカイ ガ キタナイ ノデ ソウジ シテ イタ ダケ ナンデス ケド アットマーク
-    コミック
+  kana_segmented: ダイマドウシ ト ヨバレタ コウシャク レイジョウ セカイ ガ キタナイ ノデ ソウジ シテ イタ ダケ ナンデス ケド アットマーク コミック
 - key: name:KADOKAWA|name:GAMERA-Rebirth-コードテルソス
   kana_segmented: ガメラ リバース コード テルソス
 - key: name:KADOKAWA|name:Toxic-a-Holicトキシカホリック
@@ -1892,8 +1878,7 @@ fills:
 - key: name:KAORI.N|name:サスペンス＆ミステリーコミック本格セレクション
   kana_segmented: サスペンスアンドミステリー コミック ホンカク セレクション
 - key: name:KARUTO|name:精霊に「お前は主人にふさわしくない、契約破棄してくれ!」と言われたので、欲しがっている妹に譲ります
-  kana_segmented: セイレイ ニ オマエ ワ シュジン ニ フサワシクナイ ケイヤク ハキ シテ クレ ト イワレタ ノデ ホシガッテ イル イモウト
-    ニ ユズリマス
+  kana_segmented: セイレイ ニ オマエ ワ シュジン ニ フサワシクナイ ケイヤク ハキ シテ クレ ト イワレタ ノデ ホシガッテ イル イモウト ニ ユズリマス
 - key: name:KATINO|name:ロスト・プリンセス
   kana_segmented: ロスト ・ プリンセス
 - key: name:KAY|name:Fate/stay night コミックアンソロジー
@@ -1901,8 +1886,7 @@ fills:
 - key: name:KAZUOMIYAMURA|name:バクバク
   kana_segmented: バクバク
 - key: name:KAZUpub. 2022|name:世界最強の騎士は、必ず死ぬヒロインを救うため異世界でも最強の騎士となる
-  kana_segmented: セカイ サイキョウ ノ ゲーマー ワ カナラズ シヌ ヒロイン オ スクウ タメ イセカイ デモ サイキョウ ノ パイロット ト
-    ナル
+  kana_segmented: セカイ サイキョウ ノ ゲーマー ワ カナラズ シヌ ヒロイン オ スクウ タメ イセカイ デモ サイキョウ ノ パイロット ト ナル
 - key: name:KAZUpub. 2022|name:灰の世界は神の眼で彩づく
   kana_segmented: ハイ ノ セカイ ワ カミ ノ メ デ イロズク
 - key: name:KAZZU|name:恋か病か運命か
@@ -1974,8 +1958,7 @@ fills:
 - key: name:KWKM|name:外れスキル「影が薄い」を持つギルド職員が、実は伝説の暗殺者
   kana_segmented: ハズレ スキル カゲ ガ ウスイ オ モツ ギルド ショクイン ガ ジツ ワ デンセツ ノ アンサツシャ
 - key: name:KYO=H|name:自分の事を主人公だと信じてやまない踏み台が、主人公を踏み台だと勘違いして、優勝してしまうお話です@COMIC
-  kana_segmented: ジブン ノ コト オ シュジンコウ ダト シンジテ ヤマナイ フミダイ ガ シュジンコウ オ フミダイ ダト カンチガイ シテ
-    ユウショウ シテ シマウ オハナシ デス アットマーク コミック
+  kana_segmented: ジブン ノ コト オ シュジンコウ ダト シンジテ ヤマナイ フミダイ ガ シュジンコウ オ フミダイ ダト カンチガイ シテ ユウショウ シテ シマウ オハナシ デス アットマーク コミック
 - key: name:KYUTA|name:男が滅んだ世界
   kana_segmented: オトコ ガ ホロンダ セカイ
 - key: name:Kakeru|name:お気の毒ですが、冒険の書は魔王のモノになりました。
@@ -1997,8 +1980,7 @@ fills:
 - key: name:Kamelie|name:男女の友情は成立する?〈いや、しないっ!!〉
   kana_segmented: ダンジョ ノ ユウジョウ ワ セイリツ スル イヤ シナイッ
 - key: name:Kamicat|name:めちゃ盛!本当にあった〔○生〕ここだけの話祭
-  kana_segmented: メチャモリ ホントウ ニ アッタ ナマココ ダケ ノ ハナシ マツリ|メチャモリホントウ ニ アッタ マルナマ ココ ダケ ノ
-    ハナシ フィーバー
+  kana_segmented: メチャモリ ホントウ ニ アッタ ナマココ ダケ ノ ハナシ マツリ|メチャモリホントウ ニ アッタ マルナマ ココ ダケ ノ ハナシ フィーバー
 - key: name:Kana Riyuma|name:狼の花嫁
   kana_segmented: オオカミ ノ ハナヨメ
 - key: name:Kanae|name:資格救世主てつんど
@@ -2021,12 +2003,10 @@ fills:
   src: ndl
 - key: name:KauffmanDonna|name:危険な恋のまわり道
   kana_segmented: キケンナ コイ ノ マワリ ミチ
-- key: name:Kazutoshi Hando|name:JAPAN'S LONGEST DAY|sub:A GRAPHIC NOVEL ABOUT THE
-    END OF WORLD WAR 2
+- key: name:Kazutoshi Hando|name:JAPAN'S LONGEST DAY|sub:A GRAPHIC NOVEL ABOUT THE END OF WORLD WAR 2
   kana_segmented: ジャパンズ ロンゲスト デイ
 - key: name:KeG|name:欠けた月のメルセデス～吸血鬼の貴族に転生したけど捨てられそうなのでダンジョンを制覇する～@COMIC
-  kana_segmented: カケタ ツキ ノ メルセデス キュウケツキ ノ キゾク ニ テンセイ シタ ケド ステラレソウ ナノデ ダンジョン オ セイハ
-    スル アットマーク コミック
+  kana_segmented: カケタ ツキ ノ メルセデス キュウケツキ ノ キゾク ニ テンセイ シタ ケド ステラレソウ ナノデ ダンジョン オ セイハ スル アットマーク コミック
 - key: name:KeG|name:災悪のアヴァロン|sub:ゲーム最弱の悪役デブに転移したけど、俺だけやせれば強くてニューゲームな世界だったので、最速レベルアップ&破滅フラグ回避で影の英雄を目指します
   kana_segmented: サイアク ノ アヴァロン
 - key: name:KeG|name:災悪のアヴァロン|sub:ゲーム最弱の悪役デブに転移したけど、俺だけやせれば強くてニューゲームな世界だったので、最速レベルアップ&破滅フラグ回避で影の英雄を目指します.
@@ -2524,8 +2504,7 @@ fills:
   kana_segmented: ヒツジカイ ノ ウル ト ユーフ
 - key: name:Miyako漫画家|name:異世界に放置ゲー理論を持ち込んだら世界最強になれる説
   kana_segmented: イセカイ ニ ホウチゲー リロン オ モチコンダラ セカイ サイキョウ ニ ナレル セツ
-- key: name:Miyamoto Musashi|name:Miyamoto Musashi's Book of Five Rings|sub:The Manga
-    Edition
+- key: name:Miyamoto Musashi|name:Miyamoto Musashi's Book of Five Rings|sub:The Manga Edition
   kana_segmented: ミヤモト ムサシズ ブック オブ ファイヴ リングス
 - key: name:Miyasaka|name:Kaho Miyasaka.
   kana_segmented: ミヤサカ, カホ
@@ -2533,8 +2512,7 @@ fills:
 - key: name:Miyazaki|name:Hayao Miyazaki.
   kana_segmented: ミヤザキ, ハヤオ, 1941-
   src: ndl
-- key: name:Miyazaki|name:Spirited away|sub:Chihiros Reise ins Zauberland Vorlage,
-    Drehbuch und Regie, Hayao Miyazaki.
+- key: name:Miyazaki|name:Spirited away|sub:Chihiros Reise ins Zauberland Vorlage, Drehbuch und Regie, Hayao Miyazaki.
   kana_segmented: ミヤザキ, ハヤオ, 1941-
   src: ndl
 - key: name:Mo Hua|name:アシスタントの夜の顔
@@ -2547,8 +2525,7 @@ fills:
   kana_segmented: モット タマラナイ Hナ タイケン オシエマス
 - key: name:Moncher|name:森の中で公爵が拾ったのは
   kana_segmented: モリ ノ ナカ デ コウシャク ガ ヒロッタ ノワ
-- key: name:Monika Kaname|name:Sasen sareta saikyo kenja kyoushi ni natte muteki no
-    class wo tsukuriageru
+- key: name:Monika Kaname|name:Sasen sareta saikyo kenja kyoushi ni natte muteki no class wo tsukuriageru
   kana_segmented: 左遷された最強賢者、教師になって無敵のクラスを作り上げる
 - key: name:MontgomeryLucy Maud|name:アン・シャーリー
   kana_segmented: アン シャーリー
@@ -2608,8 +2585,7 @@ fills:
 - key: name:NBGI|name:The idolm@ster
   kana_segmented: ザ アイドルマスター
 - key: name:NEO草野|name:〈悲報〉清楚系で売っていた底辺配信者、うっかり配信を切り忘れたままSS級モンスターを拳で殴り飛ばしてしまう
-  kana_segmented: ヒホウ セイソケイ デ ウッテ イタ テイヘン ハイシンシャ ウッカリ ハイシン オ キリワスレタ ママ エスエスキュウ モンスター
-    オ コブシ デ ナグリトバシテ シマウ
+  kana_segmented: ヒホウ セイソケイ デ ウッテ イタ テイヘン ハイシンシャ ウッカリ ハイシン オ キリワスレタ ママ エスエスキュウ モンスター オ コブシ デ ナグリトバシテ シマウ
 - key: name:NEO草野|name:なかのみ
   kana_segmented: ナカノミ
 - key: name:NEO草野|name:なかのみ|sub:#中野でカンパイしよっ
@@ -2628,11 +2604,9 @@ fills:
 - key: name:NOBEL|name:猫の手だって役に立つ
   kana_segmented: ネコ ノ テ ダッテ ヤク ニ タツ
 - key: name:NOCO|name:俺以外誰も採取できない素材なのに「素材採取率が低い」とパワハラする幼馴染錬金術師と絶縁した専属魔導士、辺境の町でスローライフを送りたい。
-  kana_segmented: オレ イガイ ダレモ サイシュ デキナイ ソザイ ナノニ ソザイ サイシュリツ ガ ヒクイ ト パワハラ スル オサナナジミ レンキンジュツシ
-    ト ゼツエン シタ センゾク マドウシ ヘンキョウ ノ マチ デ スロー ライフ オ オクリタイ
+  kana_segmented: オレ イガイ ダレモ サイシュ デキナイ ソザイ ナノニ ソザイ サイシュリツ ガ ヒクイ ト パワハラ スル オサナナジミ レンキンジュツシ ト ゼツエン シタ センゾク マドウシ ヘンキョウ ノ マチ デ スロー ライフ オ オクリタイ
 - key: name:NOCO|name:俺以外誰も採取できない素材なのに「素材採取率が低い」とパワハラする幼馴染錬金術師と絶縁した専属魔導士、辺境の町でスローライフを送りたい。.
-  kana_segmented: オレ イガイ ダレモ サイシュ デキナイ ソザイ ナノニ ソザイ サイシュリツ ガ ヒクイ ト パワハラ スル オサナナジミ レンキンジュツシ
-    ト ゼツエン シタ センゾク マドウシ ヘンキョウ ノ マチ デ スロー ライフ オ オクリタイ.
+  kana_segmented: オレ イガイ ダレモ サイシュ デキナイ ソザイ ナノニ ソザイ サイシュリツ ガ ヒクイ ト パワハラ スル オサナナジミ レンキンジュツシ ト ゼツエン シタ センゾク マドウシ ヘンキョウ ノ マチ デ スロー ライフ オ オクリタイ.
 - key: name:NODA|name:宝血のロニー
   kana_segmented: ホウケツ ノ ロニー
 - key: name:NON1987-|name:POLE STAR
@@ -2675,8 +2649,7 @@ fills:
   kana_segmented: エンジェル ビーツ ザ ヨンコマ
 - key: name:Na-Ga|name:Charlotte
   kana_segmented: シャーロット
-- key: 'name:Nagi Yoshizaki|name:Sōseki Natsume''s KOKORO|sub:The Heart of Things
-    : The Manga Edition'
+- key: 'name:Nagi Yoshizaki|name:Sōseki Natsume''s KOKORO|sub:The Heart of Things : The Manga Edition'
   kana_segmented: ソウセキ ナツメズ ココロ
 - key: name:Nagu|name:私より強い男と結婚したいの|sub:清楚な美人生徒会長(実は元番長)の秘密を知る陰キャ(実は彼女を超える最強のヤンキー)
   kana_segmented: ワタシ ヨリ ツヨイ オトコ ト ケッコン シタイノ
@@ -2687,15 +2660,13 @@ fills:
 - key: name:Nakazawa|name:Barfuss durch Hiroshima
   kana_segmented: ナカザワ, ケイジ, 1939-2012
   src: ndl
-- key: name:Nakazawa|name:Gen si kaki ayam （Hadashi no Gen）|sub:Kisah Hancurnya Hiroshima
-    Keiji Nakazawa.
+- key: name:Nakazawa|name:Gen si kaki ayam （Hadashi no Gen）|sub:Kisah Hancurnya Hiroshima Keiji Nakazawa.
   kana_segmented: ナカザワ, ケイジ, 1939-2012
   src: ndl
 - key: name:Nakazawa|name:Gen|sub:p「A」es descal「C」cos （Hadashi no Gen） Keiji Nakazawa.
   kana_segmented: ナカザワ, ケイジ, 1939-2012
   src: ndl
-- key: name:Nakazawa|name:Hiroszima 1945|sub:Bosonogi Gen Nakazawa Keiji ; tl「/」umaczenie,
-    Katsuyoshi Watanabe, Monika Gaczy「A」nska.
+- key: name:Nakazawa|name:Hiroszima 1945|sub:Bosonogi Gen Nakazawa Keiji ; tl「/」umaczenie, Katsuyoshi Watanabe, Monika Gaczy「A」nska.
   kana_segmented: ＨＩＲＯＳＺＩＭＡ　１９４５　ポーランド　ゴ　バン
   src: ndl
 - key: name:Naked Ape|name:DOLLS
@@ -3192,8 +3163,7 @@ fills:
   kana_segmented: ドクゼツ メガネ ワ ヨル ダケ ヤサシイ
 - key: name:Rena|name:雷神とリーマン
   kana_segmented: ライジン ト リーマン
-- key: name:Reom|name:アルマギア|sub:a story of a songstress and a girl who were led by
-    fate to meet each other, and the bond that spins between them
+- key: name:Reom|name:アルマギア|sub:a story of a songstress and a girl who were led by fate to meet each other, and the bond that spins between them
   kana_segmented: アルマギア
 - key: name:Revan|name:敵国のスパイに転生した伯爵令嬢、振られるために頑張ります!
   kana_segmented: テキコク ノ スパイ ニ テンセイ シタ ハクシャク レイジョウ フラレル タメ ニ ガンバリマス
@@ -3530,8 +3500,7 @@ fills:
   kana_segmented: ソノ ボウケンシャ トリアツカイ チュウイ
 - key: name:Sin Guilty|name:怪物たちを統べるモノ
   kana_segmented: カイブツタチ オ スベル モノ
-- key: name:Sinzawa|name:Kimengumi|sub:un coll「G」ege fou, fou, fou Motoei Shinzawa
-    ; [traduction, Akinori Matsumoto].
+- key: name:Sinzawa|name:Kimengumi|sub:un coll「G」ege fou, fou, fou Motoei Shinzawa ; [traduction, Akinori Matsumoto].
   kana_segmented: シンザワ, モトエイ, 1958-
   src: ndl
 - key: name:Siya|name:母が契約結婚しました.
@@ -3582,8 +3551,7 @@ fills:
   kana_segmented: ガクエン ヘヴン レボリューション
 - key: name:Spray|name:鬼畜眼鏡
   kana_segmented: キチク メガネ
-- key: 'name:Stamaty|name:Alia''s mission|sub:saving the books of Iraq : inspired
-    by a true story Mark Alan Stamaty.'
+- key: 'name:Stamaty|name:Alia''s mission|sub:saving the books of Iraq : inspired by a true story Mark Alan Stamaty.'
   kana_segmented: ジドウ トショ
   src: ndl
 - key: name:SteeleJessica|name:こはく色の乙女と銀の狼
@@ -3658,8 +3626,7 @@ fills:
 - key: name:TAIBOGI|name:BLUE NEST
   kana_segmented: ブルー ネスト
 - key: name:TAKApub. 2025|name:女キャラで異世界転移してチートっぽいけど雑魚キャラなので目立たず平和な庶民を目指します!
-  kana_segmented: オンナ キャラ デ イセカイ テンイシテ チートッポイ ケド ザコ キャラ ナノデ メダタズ ヘイワナ ショミン オ メザシマス
-    !
+  kana_segmented: オンナ キャラ デ イセカイ テンイシテ チートッポイ ケド ザコ キャラ ナノデ メダタズ ヘイワナ ショミン オ メザシマス !
 - key: name:TAKUMIサメ男|name:フォーロン・ホープ
   kana_segmented: フォーロン ホープ
 - key: name:TAKUMIサメ男|name:フォーロン・ホープ|sub:警視庁抜刀隊戦記.
@@ -3742,8 +3709,7 @@ fills:
 - key: name:TYPE-MOON|name:Fate/Grand Order SABER WARS 2番外編ジェーン&イシュタル～100万光年の流れ星～
   kana_segmented: フェイト グランド オーダー セイバー ウォーズ ツー バンガイヘン ジェーン アンド イシュタル ヒャクマン コウネン ノ ナガレボシ
 - key: name:TYPE-MOON|name:Fate/Grand Order-Epic of Remnant-亜種特異点1悪性隔絶魔境新宿 新宿幻霊事件
-  kana_segmented: フェイト グランド オーダー エピック オブ レムナント アシュ トクイテン イチ アクセイ カクゼツ マキョウ シンジュク シンジュク
-    ゲンレイ ジケン
+  kana_segmented: フェイト グランド オーダー エピック オブ レムナント アシュ トクイテン イチ アクセイ カクゼツ マキョウ シンジュク シンジュク ゲンレイ ジケン
 - key: name:TYPE-MOON|name:Fate/Grand Order-Epic of Remnant-亜種特異点EX深海電脳楽土SE.RA.PH
   kana_segmented: フェイト グランド オーダー エピック オブ レムナント アシュ トクイテン エクストラ シンカイ デンノウ ラクド セラフ
 - key: name:TYPE-MOON|name:Fate/Grand Order-turas réalta-
@@ -3902,8 +3868,7 @@ fills:
   kana_segmented: カンタイ コレクション カンコレ デンゲキ コミック アンソロジー
 - key: name:Tobi|name:異世界もふもふカフェ
   kana_segmented: イセカイ モフモフ カフェ
-- key: name:Togasi|name:Yoshihiro Togashi ; [traduit et adapt「A」e en fran「C」cais par
-    S「A」ebastien Gesell].
+- key: name:Togasi|name:Yoshihiro Togashi ; [traduit et adapt「A」e en fran「C」cais par S「A」ebastien Gesell].
   kana_segmented: トガシ, ヨシヒロ, 1966-
   src: ndl
 - key: name:TomoN|name:ぴよこ豆
@@ -4087,8 +4052,7 @@ fills:
 - key: name:White|name:Pearl Harbor
   kana_segmented: ジドウ トショ
   src: ndl
-- key: name:White|name:The Battle of Midway|sub:the destruction of the Japanese fleet
-    by Steve White ; illustrated by Richard Elson.
+- key: name:White|name:The Battle of Midway|sub:the destruction of the Japanese fleet by Steve White ; illustrated by Richard Elson.
   kana_segmented: ジドウ トショ
   src: ndl
 - key: name:WilkinsGina|name:出会う前から愛してた
@@ -4128,8 +4092,7 @@ fills:
 - key: name:Y. A|name:婚約者に裏切られた錬金術師は、独立して『ざまぁ』します
   kana_segmented: コンヤクシャ ニ ウラギラレタ レンキンジュツシ ワ ドクリツ シテ ザマァ シマス
 - key: name:Y. A|name:異世界帰りの勇者は、ダンジョンが出現した現実世界で、インフルエンサーになって金を稼ぎます!
-  kana_segmented: イセカイガエリ ノ ユウシャ ワ ダンジョン ガ シュツゲン シタ ゲンジツ セカイ デ インフルエンサー ニ ナッテ カネ オ
-    カセギマス
+  kana_segmented: イセカイガエリ ノ ユウシャ ワ ダンジョン ガ シュツゲン シタ ゲンジツ セカイ デ インフルエンサー ニ ナッテ カネ オ カセギマス
 - key: name:Y. A|name:砂漠だらけの世界で、おっさんが電子マネーで無双する
   kana_segmented: サバクダラケ ノ セカイ デ オッサン ガ デンシ マネー デ ムソウ スル
 - key: name:Y. A|name:銭の力で、戦国の世を駆け抜ける。
@@ -4154,8 +4117,7 @@ fills:
 - key: name:YOKO|name:華麗なる君主は愛をささやく
   kana_segmented: カレイナル クンシュ ワ アイ オ ササヤク
 - key: name:YOUTwo|name:ダンジョン配信者を救って大バズりした転生陰陽師、うっかり超級呪物を配信したら伝説になった
-  kana_segmented: ダンジョン ハイシンシャ オ スクッテ オオバズリ シタ テンセイ オンミョウジ ウッカリ チョウキュウ ジュブツ オ ハイシン
-    シタラ デンセツ ニ ナッタ
+  kana_segmented: ダンジョン ハイシンシャ オ スクッテ オオバズリ シタ テンセイ オンミョウジ ウッカリ チョウキュウ ジュブツ オ ハイシン シタラ デンセツ ニ ナッタ
 - key: name:YUI|name:無能認定で冒険者クビになったから地元に帰って結婚する
   kana_segmented: ムノウ ニンテイ デ ボウケンシャ クビ ニ ナッタ カラ ジモト ニ カエッテ ケッコンスル
 - key: name:YUKIpub. 2025|name:イルビゾーラの逃避行
@@ -4220,8 +4182,7 @@ fills:
 - key: name:Yuttou|name:解雇された宮廷錬金術師は辺境で大農園を作り上げる
   kana_segmented: カイコ サレタ キュウテイ レンキンジュツシ ワ ヘンキョウ デ ダイノウエン オ ツクリアゲル
 - key: name:YuzuKi|name:アナザー・フロンティア・オンライン～生産系スキルを極めたらチートなNPCを雇えるようになりました～@COMIC.
-  kana_segmented: アナザー フロンティア オンライン セイサンケイ スキル オ キワメタラ チート ナ エヌピーシー オ ヤトエル ヨウニ ナリマシタ
-    アットマーク コミック.
+  kana_segmented: アナザー フロンティア オンライン セイサンケイ スキル オ キワメタラ チート ナ エヌピーシー オ ヤトエル ヨウニ ナリマシタ アットマーク コミック.
 - key: name:Z-ONE|name:美鬼神伝説MOMO
   kana_segmented: ビキシン デンセツ モモ
 - key: name:ZAKK|name:Canis|sub:dear hatter
@@ -4338,11 +4299,9 @@ fills:
 - key: name:akn坊|name:俺のクラスに若返った元嫁がいる
   kana_segmented: オレ ノ クラス ニ ワカガエッタ モトヨメ ガ イル
 - key: name:akn坊|name:料理上手のゴリラ男が、空腹で倒れていた美女を助けたら、相性最高のベストカップルになった話
-  kana_segmented: リョウリ ジョウズ ノ ゴリラオトコ ガ クウフク デ タオレテ イタ ビジョ オ タスケタラ アイショウ サイコウ ノ ベスト
-    カップル ニ ナッタ ハナシ
+  kana_segmented: リョウリ ジョウズ ノ ゴリラオトコ ガ クウフク デ タオレテ イタ ビジョ オ タスケタラ アイショウ サイコウ ノ ベスト カップル ニ ナッタ ハナシ
 - key: name:akn坊|name:料理上手のゴリラ男が、空腹で倒れていた美女を助けたら、相性最高のベストカップルになった話.
-  kana_segmented: リョウリ ジョウズ ノ ゴリラオトコ ガ クウフク デ タオレテ イタ ビジョ オ タスケタラ アイショウ サイコウ ノ ベスト
-    カップル ニ ナッタ ハナシ.
+  kana_segmented: リョウリ ジョウズ ノ ゴリラオトコ ガ クウフク デ タオレテ イタ ビジョ オ タスケタラ アイショウ サイコウ ノ ベスト カップル ニ ナッタ ハナシ.
 - key: name:akyo|name:大きい俺でも愛してくれますか?
   kana_segmented: オオキイ オレ デモ アイシテ クレマスカ
 - key: name:amai|name:初恋オーバードーズ
@@ -4365,8 +4324,7 @@ fills:
 - key: name:ayano|name:ごめん…本気で抱いてもいい?|sub:絶倫同期と同棲SEX
   kana_segmented: ゴメン … ホンキ デ ダイテモ イイ?
 - key: name:azegami|name:お前…女だったのか!?美少女に成長した幼馴染と再会してイチャラブするアンソロジーコミック
-  kana_segmented: オマエ オンナ ダッタ ノカ ビショウジョ ニ セイチョウ シタ オサナナジミ ト サイカイ シテ イチャラブ スル アンソロジー
-    コミック
+  kana_segmented: オマエ オンナ ダッタ ノカ ビショウジョ ニ セイチョウ シタ オサナナジミ ト サイカイ シテ イチャラブ スル アンソロジー コミック
 - key: name:azegami|name:田舎で初エッチ!
   kana_segmented: イナカ デ ハツエッチ
 - key: name:azuタロウ|name:引き籠り錬金術師は引き籠れない|sub:お家でのんびりしたい奮闘記
@@ -4550,11 +4508,9 @@ fills:
 - key: name:fu-ta|name:びんかんsyrup
   kana_segmented: ビンカン シロップ
 - key: name:fufu|name:アナザー・フロンティア・オンライン～生産系スキルを極めたらチートなNPCを雇えるようになりました～@COMIC
-  kana_segmented: アナザー フロンティア オンライン セイサンケイ スキル オ キワメタラ チート ナ エヌピーシー オ ヤトエル ヨウニ ナリマシタ
-    アットマーク コミック
+  kana_segmented: アナザー フロンティア オンライン セイサンケイ スキル オ キワメタラ チート ナ エヌピーシー オ ヤトエル ヨウニ ナリマシタ アットマーク コミック
 - key: name:fujy|name:ハズレ属性〈音属性〉で追放されたけど、実は唯一無詠唱で発動できる最強魔法でした
-  kana_segmented: ハズレ ゾクセイ オトゾクセイ デ ツイホウ サレタ ケド ジツ ワ ユイイツ ムエイショウ デ ハツドウ デキル サイキョウ
-    マホウ デシタ
+  kana_segmented: ハズレ ゾクセイ オトゾクセイ デ ツイホウ サレタ ケド ジツ ワ ユイイツ ムエイショウ デ ハツドウ デキル サイキョウ マホウ デシタ
 - key: name:fujy|name:俺、悪役騎士団長に転生する。
   kana_segmented: オレ アクヤク キシダンチョウ ニ テンセイ スル
 - key: name:fumio|name:夜までに帰宅@COMIC
@@ -4592,8 +4548,7 @@ fills:
 - key: name:hai|name:モブ高生の俺でも冒険者になればリア充になれますか?
   kana_segmented: モブコウセイ ノ オレ デモ ボウケンシャ ニ ナレバ リアジュウ ニ ナレマスカ
 - key: name:hakusai|name:転生陰陽師・賀茂一樹～二度と地獄はご免なので、閻魔大王の神気で無双します～@COMIC
-  kana_segmented: テンセイ オンミョウジ カモ イツキ ニド ト ジゴク ワ ゴメン ナノデ エンマ ダイオウ ノ シンキ デ ムソウ シマス アットマーク
-    コミック
+  kana_segmented: テンセイ オンミョウジ カモ イツキ ニド ト ジゴク ワ ゴメン ナノデ エンマ ダイオウ ノ シンキ デ ムソウ シマス アットマーク コミック
 - key: name:hakus|name:伏 少女とケモノの烈花譚
   kana_segmented: フセ ショウジョ ト ケモノ ト レッカタン
 - key: name:hanirim|name:悪女はマリオネット
@@ -4701,8 +4656,7 @@ fills:
 - key: name:junaida|name:ひみつストレンジャー
   kana_segmented: ヒミツ ストレンジャー
 - key: name:k-ing|name:畑で迷子の幼女を保護したらドリアードだった。～野菜づくりと動画配信でスローライフを目指します～@COMIC
-  kana_segmented: ハタケ デ マイゴ ノ ヨウジョ オ ホゴ シタラ ドリアード ダッタ ヤサイズクリ ト ドウガ ハイシン デ スロー ライフ
-    オ メザシマス アットマーク コミック
+  kana_segmented: ハタケ デ マイゴ ノ ヨウジョ オ ホゴ シタラ ドリアード ダッタ ヤサイズクリ ト ドウガ ハイシン デ スロー ライフ オ メザシマス アットマーク コミック
 - key: name:k.|name:いいなり催眠ラブハメ3P
   kana_segmented: イイナリ サイミン ラブハメ 3P
 - key: name:k.|name:溺愛バックステージ
@@ -4716,16 +4670,11 @@ fills:
 - key: name:kakao|name:ラブラリアット!
   kana_segmented: ラブ ラリアット
 - key: name:kakao|name:両親の借金を肩代わりしてもらう条件は日本一可愛い女子高生と一緒に暮らすことでした。
-  kana_segmented: リョウシン ノ シャッキン オ カタガワリ シテ モラウ ジョウケン ワ ニホンイチ カワイイ ジョシコウセイ ト イッショ ニ
-    クラス コト デシタ
-- key: name:kakao|name:両親の借金を肩代わりしてもらう条件は日本一可愛い女子高生と一緒に暮らすことでした。|sub:I'm gonna live
-    with you not because my parents left me their debt but because I like you.
-  kana_segmented: リョウシン ノ シャッキン オ カタガワリ シテ モラウ ジョウケン ワ ニホンイチ カワイイ ジョシコウセイ ト イッショ ニ
-    クラス コト デシタ
-- key: name:kakao|name:両親の借金を肩代わりしてもらう条件は日本一可愛い女子高生と一緒に暮らすことでした。|sub:I'm gonna live
-    with you not because parents left me their debt but because I like you
-  kana_segmented: リョウシン ノ シャッキン オ カタガワリ シテ モラウ ジョウケン ワ ニホンイチ カワイイ ジョシコウセイ ト イッショ ニ
-    クラス コト デシタ
+  kana_segmented: リョウシン ノ シャッキン オ カタガワリ シテ モラウ ジョウケン ワ ニホンイチ カワイイ ジョシコウセイ ト イッショ ニ クラス コト デシタ
+- key: name:kakao|name:両親の借金を肩代わりしてもらう条件は日本一可愛い女子高生と一緒に暮らすことでした。|sub:I'm gonna live with you not because my parents left me their debt but because I like you.
+  kana_segmented: リョウシン ノ シャッキン オ カタガワリ シテ モラウ ジョウケン ワ ニホンイチ カワイイ ジョシコウセイ ト イッショ ニ クラス コト デシタ
+- key: name:kakao|name:両親の借金を肩代わりしてもらう条件は日本一可愛い女子高生と一緒に暮らすことでした。|sub:I'm gonna live with you not because parents left me their debt but because I like you
+  kana_segmented: リョウシン ノ シャッキン オ カタガワリ シテ モラウ ジョウケン ワ ニホンイチ カワイイ ジョシコウセイ ト イッショ ニ クラス コト デシタ
 - key: name:kakao|name:放課後はケンカ最強のギャルに連れこまれる生活|sub:彼女たちに好かれて、僕も最強に!?
   kana_segmented: ホウカゴ ワ ケンカ サイキョウ ノ ギャル ニ ツレコマレル セイカツ
 - key: 'name:kakao|name:転生魔王の大誤算|sub:有能魔王軍の世界征服最短ルート : コミック'
@@ -4763,8 +4712,7 @@ fills:
 - key: name:kiasa|name:なぐさみ螺旋|sub:姉妹の裏表
   kana_segmented: ナグサミ ラセン
 - key: name:kikipub. 2018|name:「お前ごときが魔王に勝てると思うな」と勇者パーティを追放されたので、王都で気ままに暮らしたい
-  kana_segmented: オマエ ゴトキ ガ マオウ ニ カテル ト オモウナ ト ユウシャ パーティ オ ツイホウ サレタ ノデ オウト デ キママ ニ
-    クラシタイ
+  kana_segmented: オマエ ゴトキ ガ マオウ ニ カテル ト オモウナ ト ユウシャ パーティ オ ツイホウ サレタ ノデ オウト デ キママ ニ クラシタイ
 - key: name:kimimaro|name:モンむすご!
   kana_segmented: モンムスゴ
 - key: name:kimimaro|name:モンむすご!|sub:翻訳スキルで最強モン娘と異世界生活
@@ -4838,8 +4786,7 @@ fills:
 - key: name:kyo|name:0能者ミナト
   kana_segmented: レイノウシャ ミナト
 - key: name:kz|name:怠惰な悪役貴族の俺に、婚約破棄された悪役令嬢が嫁いだら最凶の夫婦になりました@COMIC
-  kana_segmented: タイダ ナ アクヤク キゾク ノ オレ ニ コンヤク ハキ サレタ アクヤク レイジョウ ガ トツイダラ サイキョウ ノ フウフ
-    ニ ナリマシタ アットマーク コミック
+  kana_segmented: タイダ ナ アクヤク キゾク ノ オレ ニ コンヤク ハキ サレタ アクヤク レイジョウ ガ トツイダラ サイキョウ ノ フウフ ニ ナリマシタ アットマーク コミック
 - key: name:lack|name:呼び出された殺戮者
   kana_segmented: ヨビダサレタ サツリクシャ
 - key: name:lack|name:銭(インチキ)の力で、戦国の世を駆け抜ける。.
@@ -4970,8 +4917,7 @@ fills:
 - key: name:mono-zo|name:水魔法ぐらいしか取り柄がないけど現代知識があれば充分だよね?
   kana_segmented: ミズ マホウ グライ シカ トリエ ガ ナイ ケド ゲンダイ チシキ ガ アレバ ジュウブン ダヨネ
 - key: name:mononofu|name:死刑が確定した転生令嬢は、冷徹長官の妻になって三度目の人生を謳歌します!
-  kana_segmented: シケイ ガ カクテイ シタ テンセイ レイジョウ ワ レイテツ チョウカン ノ ツマ ニ ナッテ サンドメ ノ ジンセイ オ オウカ
-    シマス
+  kana_segmented: シケイ ガ カクテイ シタ テンセイ レイジョウ ワ レイテツ チョウカン ノ ツマ ニ ナッテ サンドメ ノ ジンセイ オ オウカ シマス
 - key: name:mononofu|name:約束の場所へ|sub:或る少女の供述
   kana_segmented: ヤクソク ノ バショ エ
 - key: name:motai|name:神さまになりまして、ヒトの名前を捨てました。
@@ -5036,8 +4982,7 @@ fills:
 - key: name:nikuhen|name:B組の名物カップルはまだ付き合ってない
   kana_segmented: ビーグミ ノ メイブツ カップル ワ マダ ツキアッテナイ
 - key: name:nima|name:世界で唯一の魔法使いは、宮廷錬金術師として幸せになります※本当の力は秘密です!
-  kana_segmented: セカイ デ ユイイツ ノ マホウツカイ ワ キュウテイ レンキンジュツシ ト シテ シアワセ ニ ナリマス ホントウ ノ チカラ
-    ワ ヒミツ デス
+  kana_segmented: セカイ デ ユイイツ ノ マホウツカイ ワ キュウテイ レンキンジュツシ ト シテ シアワセ ニ ナリマス ホントウ ノ チカラ ワ ヒミツ デス
 - key: name:nima|name:異世界メイドの三ッ星グルメ|sub:現代ごはん作ったら王宮で大バズリしました
   kana_segmented: イセカイ メイド ノ ミツボシ グルメ
 - key: name:nima|name:追放された付与魔法使いの成り上がり|sub:勇者パーティを陰から支えていたと知らなかったので戻って来い?〈剣聖〉と〈賢者〉の美少女たちに囲まれて幸せなので戻りません
@@ -5085,11 +5030,9 @@ fills:
 - key: name:nonco|name:カナン様はあくまでチョロい.
   kana_segmented: カナン サマ ワ アクマ デ チョロイ.
 - key: name:nori|name:黒王子は私にだけ厳しい?異世界の聖女に選ばれたら、美形王子様たちから溺愛されるようになりました!
-  kana_segmented: クロオウジ ワ ワタシ ニ ダケ キビシイ イセカイ ノ セイジョ ニ エラバレタラ ビケイ オウジサマタチ カラ デキアイ サレル
-    ヨウニ ナリマシタ
+  kana_segmented: クロオウジ ワ ワタシ ニ ダケ キビシイ イセカイ ノ セイジョ ニ エラバレタラ ビケイ オウジサマタチ カラ デキアイ サレル ヨウニ ナリマシタ
 - key: name:nouc|name:家を追放された魔法薬師は、薬獣や妖精に囲まれて秘密の薬草園で第二の人生を謳歌する
-  kana_segmented: イエ オ ツイホウ サレタ マホウ クスシ ワ ヤクジュウ ヤ ヨウセイ ニ カコマレテ ヒミツ ノ ヤクソウエン デ ダイニ
-    ノ ジンセイ オ オウカ スル
+  kana_segmented: イエ オ ツイホウ サレタ マホウ クスシ ワ ヤクジュウ ヤ ヨウセイ ニ カコマレテ ヒミツ ノ ヤクソウエン デ ダイニ ノ ジンセイ オ オウカ スル
 - key: name:nov|name:ファンタジーには馴染めない
   kana_segmented: ファンタジー ニワ ナジメナイ
 - key: name:nozomi|name:つくおき生活|sub:週末まとめて作り置きレシピ
@@ -5172,8 +5115,7 @@ fills:
   kana_segmented: テンセイ レンキン ショウジョ ノ スロー ライフ
 - key: name:presented by|name:Shiroi asa ni
   kana_segmented: Shiroi asa ni = シロイ アサ ニ|白い朝に
-- key: name:projectティンガーラ|name:白い砂のアクアトープ|sub:The two girls met in the ruins of damaged
-    dream
+- key: name:projectティンガーラ|name:白い砂のアクアトープ|sub:The two girls met in the ruins of damaged dream
   kana_segmented: シロイ スナ ノ アクアトープ
 - key: name:pupps|name:「無能はいらない」と言われたから絶縁してやった|sub:最強の四天王に育てられた俺は、冒険者となり無双する
   kana_segmented: ムノウ ワ イラナイ ト イワレタ カラ ゼツエン シテ ヤッタ
@@ -5184,19 +5126,15 @@ fills:
 - key: name:pyramid753|name:クロスファイトビーダマン
   kana_segmented: クロス ファイト ビーダマン
 - key: name:quiet|name:「ジョブが忍者の癖にやかましすぎるだろ……」と冒険者パーティを追放されてきた爆音忍者四人衆と、来月末までに莫大な借金を返さなくちゃいけない子爵令嬢の浮き沈み激しい二ヶ月分の人生
-  kana_segmented: ジョブ ガ ニンジャ ノ クセ ニ ヤカマシスギルダロ ト ボウケンシャ パーティ オ ツイホウ サレテ キタ バクオン ニンジャ
-    ヨニンシュウ ト ライゲツマツ マデ ニ バクダイ ナ シャッキン オ カエサナクチャ イケナイ シシャク レイジョウ ノ ウキシズミ ハゲシイ ニカゲツブン
-    ノ ジンセイ
+  kana_segmented: ジョブ ガ ニンジャ ノ クセ ニ ヤカマシスギルダロ ト ボウケンシャ パーティ オ ツイホウ サレテ キタ バクオン ニンジャ ヨニンシュウ ト ライゲツマツ マデ ニ バクダイ ナ シャッキン オ カエサナクチャ イケナイ シシャク レイジョウ ノ ウキシズミ ハゲシイ ニカゲツブン ノ ジンセイ
 - key: name:quiet|name:つまらない女ですので、愛さなくても結構です。
   kana_segmented: ツマラナイ オンナ デス ノデ アイサナクテモ ケッコウ デス
 - key: name:quiet|name:婚約破棄されたりされなかったりですが、不幸令嬢になりました。
   kana_segmented: コンヤク ハキサレタリ サレナカッタリ デスガ 、 フコウ レイジョウ ニ ナリマシタ 。
 - key: name:quiet|name:最高難度迷宮でパーティに置き去りにされたSランク剣士、本当に迷いまくって誰も知らない最深部へ
-  kana_segmented: サイコウ ナンド メイキュウ デ パーティ ニ オキザリ ニ サレタ Sランク ケンシ 、 ホントウ ニ マヨイマクッテ ダレ
-    モ シラナイ サイシンブ エ
+  kana_segmented: サイコウ ナンド メイキュウ デ パーティ ニ オキザリ ニ サレタ Sランク ケンシ 、 ホントウ ニ マヨイマクッテ ダレ モ シラナイ サイシンブ エ
 - key: name:quiet|name:最高難度迷宮でパーティに置き去りにされたSランク剣士、本当に迷いまくって誰も知らない最深部へ|sub:俺の勘だとたぶんこっちが出口だと思う
-  kana_segmented: サイコウ ナンド メイキュウ デ パーティ ニ オキザリ ニ サレタ Sランク ケンシ 、 ホントウ ニ マヨイマクッテ ダレモ
-    シラナイ サイシンブ エ
+  kana_segmented: サイコウ ナンド メイキュウ デ パーティ ニ オキザリ ニ サレタ Sランク ケンシ 、 ホントウ ニ マヨイマクッテ ダレモ シラナイ サイシンブ エ
 - key: name:raemz|name:レプリカだって、恋をする。
   kana_segmented: レプリカ ダッテ コイ オ スル.
 - key: name:rasu|name:アフターアクト
@@ -5362,8 +5300,7 @@ fills:
 - key: name:shiryu|name:生贄として捨てられたので、辺境伯家に自分を売ります|sub:いつの間にか聖女と呼ばれ、溺愛されていました
   kana_segmented: イケニエ ト シテ ステラレタ ノデ ヘンキョウハクケ ニ ジブン オ ウリマス
 - key: name:shiryu|name:義娘が悪役令嬢として破滅することを知ったので、めちゃくちゃ愛します～契約結婚で私に関心がなかったはずの公爵様に、気づいたら溺愛されてました～@comic
-  kana_segmented: ギジョウ ガ アクヤク レイジョウ ト シテ ハメツ スル コト オ シッタ ノデ メチャクチャ アイシマス ケイヤク ケッコン
-    デ ワタクシ ニ カンシン ガ ナカッタ ハズ ノ コウシャクサマ ニ キズイタラ デキアイ サレテマシタ アットマーク コミック
+  kana_segmented: ギジョウ ガ アクヤク レイジョウ ト シテ ハメツ スル コト オ シッタ ノデ メチャクチャ アイシマス ケイヤク ケッコン デ ワタクシ ニ カンシン ガ ナカッタ ハズ ノ コウシャクサマ ニ キズイタラ デキアイ サレテマシタ アットマーク コミック
 - key: name:shiryu|name:脇役の公爵令嬢は回帰し、本物の悪女となり嗤い歩む
   kana_segmented: ワキヤク ノ コウシャク レイジョウ ワ カイキ シ ホンモノ ノ アクジョ ト ナリ ワライ アユム
 - key: name:shnva|name:地球さんはレベルアップしました!@COMIC
@@ -5375,8 +5312,7 @@ fills:
 - key: name:shri|name:異世界ですが魔物栽培しています。
   kana_segmented: イセカイ デスガ マモノ サイバイ シテ イマス
 - key: name:sh|name:森で聖女を拾った最強の吸血姫～娘のためなら国でもあっさり滅ぼします!～@COMIC
-  kana_segmented: モリ デ セイジョ オ ヒロッタ サイキョウ ノ キュウケツキ ムスメ ノ タメ ナラ クニ デモ アッサリ ホロボシマス アットマーク
-    コミック
+  kana_segmented: モリ デ セイジョ オ ヒロッタ サイキョウ ノ キュウケツキ ムスメ ノ タメ ナラ クニ デモ アッサリ ホロボシマス アットマーク コミック
 - key: name:sigama|name:BLOOD FIRE|sub:警視庁特別怪異対応班
   kana_segmented: ブラッド ファイア
 - key: name:sika|name:ハズレ王女ですが、今世は大公殿下に愛されています
@@ -5441,8 +5377,7 @@ fills:
 - key: name:tMnR|name:たとえとどかぬ糸だとしても
   kana_segmented: タトエ トドカヌ イト ダト シテモ
 - key: name:take4|name:2度目の人生、と思ったら、実は3度目だった。～歴史知識と内政努力で不幸な歴史の改変に挑みます～@COMIC
-  kana_segmented: ニドメ ノ ジンセイ ト オモッタラ ジツ ワ サンドメ ダッタ レキシ チシキ ト ナイセイ ドリョク デ フコウ ナ レキシ
-    ノ カイヘン ニ イドミマス アットマーク コミック
+  kana_segmented: ニドメ ノ ジンセイ ト オモッタラ ジツ ワ サンドメ ダッタ レキシ チシキ ト ナイセイ ドリョク デ フコウ ナ レキシ ノ カイヘン ニ イドミマス アットマーク コミック
 - key: name:taki210|name:冷遇された第七皇子はいずれぎゃふんと言わせたい!
   kana_segmented: レイグウ サレタ ダイナナ オウジ ワ イズレ ギャフン ト イワセタイ
 - key: name:tamago|name:魔法科高校の劣等生
@@ -5476,8 +5411,7 @@ fills:
 - key: name:tes_mel|name:けだもの春画|sub:鬼祓い事件譚
   kana_segmented: ケダモノ シュンガ
 - key: name:toi8|name:うちの弟子がいつのまにか人類最強になっていて、なんの才能もない師匠の俺が、それを超える宇宙最強に誤認定されている件について
-  kana_segmented: ウチ ノ デシ ガ イツノマニカ ジンルイ サイキョウ ニ ナッテ イテ ナンノ サイノウ モ ナイ シショウ ノ オレ ガ ソレ
-    オ コエル ウチュウ サイキョウ ニ ゴニンテイ サレテ イル ケン ニ ツイテ
+  kana_segmented: ウチ ノ デシ ガ イツノマニカ ジンルイ サイキョウ ニ ナッテ イテ ナンノ サイノウ モ ナイ シショウ ノ オレ ガ ソレ オ コエル ウチュウ サイキョウ ニ ゴニンテイ サレテ イル ケン ニ ツイテ
 - key: name:toi8|name:まおゆう魔王勇者
   kana_segmented: マオユウ マオウ ユウシャ
 - key: name:toi8|name:まおゆう魔王勇者 外伝まどろみの女魔法使い
@@ -5491,8 +5425,7 @@ fills:
 - key: name:toi8|name:日本国召喚
   kana_segmented: ニホンコク ショウカン
 - key: name:toi8|name:現代でモンスター駆除業者をやってたら社長が赤字をなんとかするために無理をしたせいで社員のほとんどが死んだからずっと一人で仕事をしてたら凄いことになりました
-  kana_segmented: ゲンダイ デ モンスター クジョ ギョウシャ オ ヤッテタラ シャチョウ ガ アカジ オ ナントカ スル タメ ニ ムリ オ シタ
-    セイ デ シャイン ノ ホトンド ガ シンダ カラ ズット ヒトリ デ シゴト オ シテタラ スゴイ コト ニ ナリマシタ
+  kana_segmented: ゲンダイ デ モンスター クジョ ギョウシャ オ ヤッテタラ シャチョウ ガ アカジ オ ナントカ スル タメ ニ ムリ オ シタ セイ デ シャイン ノ ホトンド ガ シンダ カラ ズット ヒトリ デ シゴト オ シテタラ スゴイ コト ニ ナリマシタ
 - key: name:toi8|name:璃寛皇国ひきこもり瑞兆妃伝|sub:日々後宮を抜け出し、有能官吏やってます。
   kana_segmented: リカン コウコク ヒキコモリ ズイチョウヒデン
 - key: name:toi8|name:陰陽屋へようこそ
@@ -5578,11 +5511,9 @@ fills:
 - key: name:whimhalooo|name:「死んでみろ」と言われたので死にました。
   kana_segmented: シンデ ミロ ト イワレタ ノデ シニマシタ
 - key: name:whimhalooo|name:昨日まで名前も呼んでくれなかった公爵様が、急に溺愛してくるのですが?@COMIC
-  kana_segmented: キノウ マデ ナマエ モ ヨンデ クレナカッタ コウシャクサマ ガ キュウ ニ デキアイ シテ クル ノ デスガ アットマーク
-    コミック
+  kana_segmented: キノウ マデ ナマエ モ ヨンデ クレナカッタ コウシャクサマ ガ キュウ ニ デキアイ シテ クル ノ デスガ アットマーク コミック
 - key: name:woonak|name:ループ中の虐げられ令嬢だった私、今世は最強聖女なうえに溺愛モードみたいです.
-  kana_segmented: ループチュウ ノ シイタゲラレ レイジョウ ダッタ ワタシ コンセ ワ サイキョウ セイジョ ナ ウエ ニ デキアイ モード ミタイ
-    デス.
+  kana_segmented: ループチュウ ノ シイタゲラレ レイジョウ ダッタ ワタシ コンセ ワ サイキョウ セイジョ ナ ウエ ニ デキアイ モード ミタイ デス.
 - key: name:woonak|name:悪役聖女のやり直し|sub:冤罪で処刑された聖女は推しの英雄を救うために我慢をやめます
   kana_segmented: アクヤク セイジョ ノ ヤリナオシ
 - key: name:wotaku|name:シャンティ
@@ -5774,8 +5705,7 @@ fills:
 - key: name:あおいまなぶ|name:艦隊これくしょん-艦これ-アンソロジーコミック 横須賀鎮守府編
   kana_segmented: カンタイ コレクション カンコレ アンソロジー コミック ヨコスカ チンジュフ ヘン
 - key: name:あおいゆみ|name:剣聖の幼馴染がパワハラで俺につらく当たるので、絶縁して辺境で魔剣士として出直すことにした。
-  kana_segmented: ケンセイ ノ オサナナジミ ガ パワハラ デ オレ ニ ツラク アタル ノデ ゼツエン シテ ヘンキョウ デ マケンシ ト シテ
-    デナオス コト ニ シタ
+  kana_segmented: ケンセイ ノ オサナナジミ ガ パワハラ デ オレ ニ ツラク アタル ノデ ゼツエン シテ ヘンキョウ デ マケンシ ト シテ デナオス コト ニ シタ
 - key: name:あおいりか|name:こももりた
   kana_segmented: コモモリタ
 - key: name:あおいりか|name:没落麗子のシンデレラグルメ
@@ -5785,8 +5715,7 @@ fills:
 - key: name:あおいれびん|name:ラーク・ケイジdrop
   kana_segmented: ラーク ケイジ ドロップ
 - key: name:あおいれびん|name:婚約者が浮気相手と駆け落ちしました。王子殿下に溺愛されて幸せなので、今さら戻りたいと言われても困ります。
-  kana_segmented: コンヤクシャ ガ ウワキ アイテ ト カケオチ シマシタ オウジ デンカ ニ デキアイ サレテ シアワセ ナノデ イマサラ モドリタイ
-    ト イワレテモ コマリマス
+  kana_segmented: コンヤクシャ ガ ウワキ アイテ ト カケオチ シマシタ オウジ デンカ ニ デキアイ サレテ シアワセ ナノデ イマサラ モドリタイ ト イワレテモ コマリマス
 - key: name:あおおに|name:冒険者デビューには遅すぎる?
   kana_segmented: ボウケンシャ デビュー ニワ オソスギル
 - key: name:あおきけい&みかまる|name:星のカービィウルトラスーパープププヒーロー
@@ -5964,8 +5893,7 @@ fills:
 - key: name:あぐにゅん|name:たかが子爵嫡男に高貴な人たちがグイグイきて困る@COMIC
   kana_segmented: タカガ シシャク チャクナン ニ コウキ ナ ヒトタチ ガ グイグイ キテ コマル アットマーク コミック
 - key: name:あけちともあき|name:魔王を倒した元勇者、元の世界には戻れないと今さら言われたので、王国を捨てて好き勝手にスローライフします!
-  kana_segmented: マオウ オ タオシタ モトユウシャ モト ノ セカイ ニワ モドレナイ ト イマサラ イワレタ ノデ オウコク オ ステテ スキカッテ
-    ニ スロー ライフ シマス
+  kana_segmented: マオウ オ タオシタ モトユウシャ モト ノ セカイ ニワ モドレナイ ト イマサラ イワレタ ノデ オウコク オ ステテ スキカッテ ニ スロー ライフ シマス
 - key: name:あけび|name:ヤンキーアシスタントの芦沢くんに恋をした
   kana_segmented: ヤンキー アシスタント ノ アシザワクン ニ コイ オ シタ
 - key: name:あさ|name:一途な幼馴染の恋について
@@ -5991,8 +5919,7 @@ fills:
 - key: name:あさぎ千夜春|name:私と寝た人、誰ですか!?
   kana_segmented: ワタシ ト シタ ヒト ダレ デスカ
 - key: name:あさぎ千夜春|name:絶対に結婚したくない令嬢、辺境のケダモノと呼ばれる将軍閣下の押しかけ妻になる
-  kana_segmented: ゼッタイ ニ ケッコン シタクナイ レイジョウ ヘンキョウ ノ ケダモノ ト ヨバレル ショウグン カッカ ノ オシカケズマ ニ
-    ナル
+  kana_segmented: ゼッタイ ニ ケッコン シタクナイ レイジョウ ヘンキョウ ノ ケダモノ ト ヨバレル ショウグン カッカ ノ オシカケズマ ニ ナル
 - key: name:あさぎ屋|name:クラスの陰キャブス?…実は超美人コスプレイヤーだった。|sub:みんな知らずに馬鹿にしてるけど。
   kana_segmented: クラス ノ インキャブス ジツ ワ チョウビジン コスプレイヤー ダッタ
 - key: name:あさじまルイ|name:ぼくはまだ噛めない
@@ -6068,8 +5995,7 @@ fills:
 - key: name:あさ稲|name:雨が降ったら、君とキスを
   kana_segmented: アメ ガ フッタラ キミ ト キス オ
 - key: name:あざね|name:剣技も魔法も中途半端だからと勘当された少年、大精霊に見初められ最強のオールラウンダーとなる。|sub:今さら帰ってこいと言われても、冒険者稼業が楽しいのでお断りします!
-  kana_segmented: ケンギ モ マホウ モ チュウト ハンパ ダカラ ト カンドウ サレタ ショウネン ダイセイレイ ニ ミソメラレ サイキョウ ノ
-    オールラウンダー ト ナル
+  kana_segmented: ケンギ モ マホウ モ チュウト ハンパ ダカラ ト カンドウ サレタ ショウネン ダイセイレイ ニ ミソメラレ サイキョウ ノ オールラウンダー ト ナル
 - key: name:あざの耕平|name:東京レイヴンズSword of Song
   kana_segmented: トウキョウ レイヴンズ ソード オブ ソング
 - key: name:あざらしせんせい|name:まおうちゃん
@@ -6434,8 +6360,7 @@ fills:
   kana_segmented: マチ ノ ヤクザ ト パンヤサン
 - key: name:あめのジジ|name:まちのヤクザとパン屋さん結
   kana_segmented: マチ ノ ヤクザ ト パンヤサン ユイ
-- key: name:あめのジジ|name:オメガΩギムナジウム|sub:an affection rhapsody beginning from a transient
-    couple's relationship
+- key: name:あめのジジ|name:オメガΩギムナジウム|sub:an affection rhapsody beginning from a transient couple's relationship
   kana_segmented: オメガ ギムナジウム
 - key: name:あめのジジ|name:ナンバーワンの彼氏
   kana_segmented: ナンバーワン ノ カレシ
@@ -6462,8 +6387,7 @@ fills:
 - key: name:あやとき|name:あやかし夫婦は君の名前をまだ知らない。|sub:浅草鬼嫁日記
   kana_segmented: アヤカシ フウフ ワ キミ ノ ナマエ オ マダ シラナイ
 - key: name:あやね|name:〔○生〕職場の変なひと読者投稿ベスト 前代未聞のキモリーマン＆ヘンテコOL大集合416p!!
-  kana_segmented: マルナマ ショクバ ノ ヘンナ ヒトドクシャ トウコウ ベスト ゼンダイ ミモン ノ キモリーマン＆ヘンテコ OL ダイシュウゴウ
-    416p!!
+  kana_segmented: マルナマ ショクバ ノ ヘンナ ヒトドクシャ トウコウ ベスト ゼンダイ ミモン ノ キモリーマン＆ヘンテコ OL ダイシュウゴウ 416p!!
 - key: name:あやね|name:ヤバ盛!本当にあった〔○生〕ここだけの話極
   kana_segmented: ヤバモリ!ホントウ ニ アッタ マルナマ ココ ダケ ノ ハナシ ウルトラ
 - key: name:あやみね稜緒|name:うそぶく狐は花を咬む
@@ -7012,8 +6936,7 @@ fills:
 - key: name:うさぴょんpub.|name:田舎のホームセンター男の自由な異世界生活
   kana_segmented: イナカ ノ ホーム センター オトコ ノ ジユウ ナ イセカイ セイカツ
 - key: name:うさぺんぎん|name:300年引きこもり、作り続けてしまった骨董品《魔導具》が、軒並みチート級の魔導具だった件
-  kana_segmented: サンビャクネン ヒキコモリ ツクリツズケテ シマッタ コットウヒン マドウグ ガ ノキナミ チートキュウ ノ マドウグ ダッタ
-    ケン
+  kana_segmented: サンビャクネン ヒキコモリ ツクリツズケテ シマッタ コットウヒン マドウグ ガ ノキナミ チートキュウ ノ マドウグ ダッタ ケン
 - key: name:うさみ☆|name:なつかしメシ食堂
   kana_segmented: ナツカシ メシ ショクドウ
 - key: name:うさみみき|name:大正忌憚魔女
@@ -7067,15 +6990,13 @@ fills:
 - key: name:うずめ&もこ|name:みだりにみだらな黒雪姫online
   kana_segmented: ミダリ ニ ミダラ ナ クロユキヒメ オンライン
 - key: name:うたしま|name:S級鑑定士なのにパーティー追放されたので猫耳娘と農業スローライフしようと思います。
-  kana_segmented: エスキュウ カンテイシ ナノニ パーティー ツイホウ サレタ ノデ ネコミミムスメ ト ノウギョウ スロー ライフ シヨウ ト
-    オモイマス
+  kana_segmented: エスキュウ カンテイシ ナノニ パーティー ツイホウ サレタ ノデ ネコミミムスメ ト ノウギョウ スロー ライフ シヨウ ト オモイマス
 - key: name:うたしま|name:ふつつかな吸血鬼ですが、末永くよろしくお願いします
   kana_segmented: フツツカ ナ キュウケツキ デスガ スエナガク ヨロシク オネガイ シマス
 - key: name:うたたね游|name:踊り場にスカートが鳴る.
   kana_segmented: オドリバ ニ スカート ガ ナル.
 - key: name:うたの|name:こ、こんなイケメンが私の幼馴染みで婚約者ですって?さすが悪役令嬢、それくらいの器じゃなければこんな大役務まらないわ
-  kana_segmented: コ 、 コンナ イケメン ガ ワタクシ ノ オサナナジミ デ コンヤクシャ デスッテ ? サスガ アクヤク レイジョウ 、 ソレ
-    クライ ノ ウツワジャ ナケレバ コンナ タイヤク ツトマラナイワ
+  kana_segmented: コ 、 コンナ イケメン ガ ワタクシ ノ オサナナジミ デ コンヤクシャ デスッテ ? サスガ アクヤク レイジョウ 、 ソレ クライ ノ ウツワジャ ナケレバ コンナ タイヤク ツトマラナイワ
 - key: name:うたみつほ|name:優秀コンシェルジュのセックスサービス
   kana_segmented: ユウシュウ コンシェルジュ ノ セックス サービス
 - key: name:うたみつほ|name:後輩とはじめる二人ぐらし
@@ -7186,13 +7107,11 @@ fills:
 - key: name:うめだまりこ|name:流転7年うめだまのイギリス・アメリカ自由帳
   kana_segmented: ルテン ナナネン ウメダマ ノ イギリス アメリカ ジユウチョウ
 - key: name:うめのこっぺ|name:悪役モブ令嬢に転生したら攻略対象外の最強王子から寵愛されています
-  kana_segmented: アクヤク モブ レイジョウ ニ テンセイ シタラ コウリャク タイショウガイ ノ サイキョウ オウジ カラ チョウアイ サレテ
-    イマス
+  kana_segmented: アクヤク モブ レイジョウ ニ テンセイ シタラ コウリャク タイショウガイ ノ サイキョウ オウジ カラ チョウアイ サレテ イマス
 - key: name:うめやまちはる|name:心曇る日はご自愛ごはんを
   kana_segmented: ココロ クモル ヒ ワ ゴジアイ ゴハン オ
 - key: name:うめー|name:不遇皇子は天才錬金術師～皇帝なんて柄じゃないので弟妹を可愛がりたい～@COMIC
-  kana_segmented: フグウ オウジ ワ テンサイ レンキンジュツシ コウテイ ナンテ ガラ ジャ ナイ ノデ テイマイ オ カワイガリタイ アットマーク
-    コミック
+  kana_segmented: フグウ オウジ ワ テンサイ レンキンジュツシ コウテイ ナンテ ガラ ジャ ナイ ノデ テイマイ オ カワイガリタイ アットマーク コミック
 - key: name:うめーち|name:モテる男の圧が強い
   kana_segmented: モテル オトコ ノ アツ ガ ツヨイ
 - key: name:うめーち|name:悪魔はゆりかごを唄う
@@ -7264,8 +7183,7 @@ fills:
 - key: name:えぐちゆう|name:完全実話!心霊恐怖体験スペシャル
   kana_segmented: カンゼン ジツワ シンレイ キョウフ タイケン スペシャル
 - key: name:えすえいち|name:呪われ王女は魔法植物を研究したい～公爵様が婚約者!?私、呪いで幼女になっているのですが～@COMIC
-  kana_segmented: ノロワレ オウジョ ワ マホウ ショクブツ オ ケンキュウ シタイ コウシャクサマ ガ コンヤクシャ ワタクシ ノロイ デ ヨウジョ
-    ニ ナッテ イル ノ デスガ アットマーク コミック
+  kana_segmented: ノロワレ オウジョ ワ マホウ ショクブツ オ ケンキュウ シタイ コウシャクサマ ガ コンヤクシャ ワタクシ ノロイ デ ヨウジョ ニ ナッテ イル ノ デスガ アットマーク コミック
 - key: name:えすじーけー|name:奴隷戦士の異世界種馬生活
   kana_segmented: ドレイ センシ ノ イセカイ タネウマ セイカツ
 - key: name:えぞぎんぎつね|name:みにくいトカゲの子と落ちぶれた元剣聖|sub:虐められていたところを助けた変なトカゲは聖竜の赤ちゃんだったので精霊の守護者になる
@@ -7403,8 +7321,7 @@ fills:
 - key: name:おうじ|name:メランコ・キリング
   kana_segmented: メランコ キリング
 - key: name:おうすけ|name:おっさんはうぜぇぇぇんだよ!ってギルドから追放したくせに、後から復帰要請を出されても遅い。最高の仲間と出会った俺はこっちで最強を目指す!
-  kana_segmented: オッサン ワ ウゼェェェンダヨ ッテ ギルド カラ ツイホウ シタ クセ ニ アト カラ フッキ ヨウセイ オ ダサレテモ オソイ
-    サイコウ ノ ナカマ ト デアッタ オレ ワ コッチ デ サイキョウ オ メザス
+  kana_segmented: オッサン ワ ウゼェェェンダヨ ッテ ギルド カラ ツイホウ シタ クセ ニ アト カラ フッキ ヨウセイ オ ダサレテモ オソイ サイコウ ノ ナカマ ト デアッタ オレ ワ コッチ デ サイキョウ オ メザス
 - key: name:おうすけ|name:魔道機巧
   kana_segmented: マドウ キコウ
 - key: name:おうすけ|name:魔道機巧|sub:壊れた勇者の復讐譚
@@ -7436,8 +7353,7 @@ fills:
 - key: name:おおのいも|name:ブチ切れ令嬢は報復を誓いました。
   kana_segmented: ブチキレ レイジョウ ワ ホウフク オ チカイマシタ 。
 - key: name:おおのいも|name:妹の迷宮配信を手伝っていた俺が、うっかりSランクモンスター相手に無双した結果がこちらです
-  kana_segmented: イモウト ノ メイキュウ ハイシン オ テツダッテ イタ オレ ガ ウッカリ エスランク モンスター アイテ ニ ムソウ シタ
-    ケッカ ガ コチラ デス
+  kana_segmented: イモウト ノ メイキュウ ハイシン オ テツダッテ イタ オレ ガ ウッカリ エスランク モンスター アイテ ニ ムソウ シタ ケッカ ガ コチラ デス
 - key: name:おおのいも|name:探偵令嬢ジュリア・モリアーティ
   kana_segmented: タンテイ レイジョウ ジュリア ・ モリアーティ
 - key: name:おおの藻梨以|name:Tom boy
@@ -7863,8 +7779,7 @@ fills:
 - key: name:かつらぎ|name:蝶よ花よ紫苑の君よ
   kana_segmented: チョウ ヨ ハナ ヨ シオン ノ キミ ヨ
 - key: name:かつらりっく|name:最強ランキングがある異世界に生徒たちと集団転移した高校教師の俺、モブから剣聖へと成り上がる
-  kana_segmented: サイキョウ ランキング ガ アル イセカイ ニ セイトタチ ト シュウダン テンイシタ コウコウ キョウシ ノ オレ 、 モブ
-    カラ ケンセイ エト ナリアガル
+  kana_segmented: サイキョウ ランキング ガ アル イセカイ ニ セイトタチ ト シュウダン テンイシタ コウコウ キョウシ ノ オレ 、 モブ カラ ケンセイ エト ナリアガル
 - key: name:かづ|name:義母クエスト
   kana_segmented: ギボ クエスト
 - key: name:かづか将来|name:失格聖女の下克上
@@ -7898,8 +7813,7 @@ fills:
 - key: name:かなめもにか|name:箱入りお嬢様と庶民な俺のやりたい100のこと
   kana_segmented: ハコイリ オジョウサマ ト ショミン ナ オレ ノ ヤリタイ 100 ノ コト
 - key: name:かなりつ|name:幼馴染のS級パーティーから追放された聖獣使い。万能支援魔法と仲間を増やして最強へ!
-  kana_segmented: オサナナジミ ノ エスキュウ パーティー カラ ツイホウ サレタ セイジュウツカイ バンノウ シエン マホウ ト ナカマ オ フヤシテ
-    サイキョウ エ
+  kana_segmented: オサナナジミ ノ エスキュウ パーティー カラ ツイホウ サレタ セイジュウツカイ バンノウ シエン マホウ ト ナカマ オ フヤシテ サイキョウ エ
 - key: name:かぬアイ|name:ヒャッハーな幼馴染達と始めるVRMMO@COMIC
   kana_segmented: ヒャッハー ナ オサナナジミタチ ト ハジメル ヴイアールエムエムオー アットマーク コミック
 - key: name:かねもと|name:これが恋だと知っている
@@ -7921,15 +7835,13 @@ fills:
 - key: name:かのん1988-|name:愛されなかった社畜令嬢は、第二王子〈もふもふ〉に癒やされ中
   kana_segmented: アイサレナカッタ シャチク レイジョウ ワ ダイニ オウジ モフモフ ニ イヤサレチュウ
 - key: name:かのん1988-|name:感情が天候に反映される特殊能力持ち令嬢は婚約解消されたので不毛の大地へ嫁ぎたい
-  kana_segmented: カンジョウ ガ テンコウ ニ ハンエイ サレル トクシュ ノウリョクモチ レイジョウ ワ コンヤク カイショウ サレタ ノデ フモウ
-    ノ ダイチ エ トツギタイ
+  kana_segmented: カンジョウ ガ テンコウ ニ ハンエイ サレル トクシュ ノウリョクモチ レイジョウ ワ コンヤク カイショウ サレタ ノデ フモウ ノ ダイチ エ トツギタイ
 - key: name:かのん1988-|name:新訳婚約破棄された令嬢は野獣辺境伯へ嫁ぐ!
   kana_segmented: シンヤク コンヤク ハキ サレタ レイジョウ ワ ヤジュウ ヘンキョウハク エ トツグ
 - key: name:かのん1988-|name:根暗騎士による溺愛満喫中のブサ猫、実は聖女です!
   kana_segmented: ネクラ キシ ニ ヨル デキアイ マンキツチュウ ノ ブサネコ ジツ ワ セイジョ デス
 - key: name:かのん1988-|name:聖女の姉ですが、妹のための特殊魔石や特殊薬草の採取をやめたら、隣国の魔術師様の元で幸せになりました!
-  kana_segmented: セイジョ ノ アネ デスガ イモウト ノ タメ ノ トクシュ マセキ ヤ トクシュ ヤクソウ ノ サイシュ オ ヤメタラ リンゴク
-    ノ マジュツシサマ ノ モト デ シアワセ ニ ナリマシタ !
+  kana_segmented: セイジョ ノ アネ デスガ イモウト ノ タメ ノ トクシュ マセキ ヤ トクシュ ヤクソウ ノ サイシュ オ ヤメタラ リンゴク ノ マジュツシサマ ノ モト デ シアワセ ニ ナリマシタ !
 - key: name:かのん|name:悪役令嬢はもう全部が嫌になったので、記憶喪失のふりをすることにした
   kana_segmented: アクヤク レイジョウ ワ モウ ゼンブ ガ イヤ ニ ナッタ ノデ キオク ソウシツ ノ フリ オ スル コト ニ シタ
 - key: name:かぱ|name:10,000本のゴム
@@ -8019,8 +7931,7 @@ fills:
 - key: name:かれい|name:放課後の迷宮冒険者|sub:日本と異世界を行き来できるようになった僕はレベルアップに勤しみます
   kana_segmented: ホウカゴ ノ ダンジョン ダイバー
 - key: name:かれい|name:異世界創造のすゝめ～スマホアプリで惑星を創ってしまった俺は神となり世界を巡る～@COMIC
-  kana_segmented: イセカイ ソウゾウ ノ ススメ スマホ アプリ デ ワクセイ オ ツクッテ シマッタ オレ ワ カミ ト ナリ セカイ オ メグル
-    アットマーク コミック
+  kana_segmented: イセカイ ソウゾウ ノ ススメ スマホ アプリ デ ワクセイ オ ツクッテ シマッタ オレ ワ カミ ト ナリ セカイ オ メグル アットマーク コミック
 - key: name:かれい|name:追放領主の孤島開拓記|sub:秘密のギフト〈クラフトスキル〉で世界一幸せな領地を目指します!
   kana_segmented: ツイホウ リョウシュ ノ コトウ カイタクキ
 - key: name:かれい煮太郎|name:そして、海に日が昇る
@@ -8342,8 +8253,7 @@ fills:
 - key: name:くまこ|name:めちゃ盛!本当にあった〔○生〕ここだけの話祭
   kana_segmented: メチャモリ! ホントウ ニ アッタ マルナマ ココ ダケ ノ ハナシ フィーバー
 - key: name:くまだ乙夜|name:妹に婚約者を取られてこのたび醜悪公と押しつけられ婚する運びとなりました@COMIC
-  kana_segmented: イモウト ニ コンヤクシャ オ トラレテ コノタビ シュウアクコウ ト オシツケラレコン スル ハコビ ト ナリマシタ アットマーク
-    コミック
+  kana_segmented: イモウト ニ コンヤクシャ オ トラレテ コノタビ シュウアクコウ ト オシツケラレコン スル ハコビ ト ナリマシタ アットマーク コミック
 - key: name:くまだ乙夜|name:魔道具師リゼ、開業します
   kana_segmented: マドウグシ リゼ カイギョウ シマス
 - key: name:くまなの|name:くまクマ熊ベアー
@@ -8351,8 +8261,7 @@ fills:
 - key: name:くまなの|name:くまクマ熊ベアー外伝～ユナのよりみち手帖～
   kana_segmented: クマ クマ クマ ベアー ガイデン ユナ ノ ヨリミチ テチョウ
 - key: name:くまのみ鮭|name:私を好きすぎる勇者様を利用して、今世こそ長生きするつもりだったのに〈多分、また失敗した〉
-  kana_segmented: ワタクシ オ スキスギル ユウシャサマ オ リヨウ シテ コンセ コソ ナガイキ スル ツモリ ダッタ ノニ タブン マタ シッパイ
-    シタ
+  kana_segmented: ワタクシ オ スキスギル ユウシャサマ オ リヨウ シテ コンセ コソ ナガイキ スル ツモリ ダッタ ノニ タブン マタ シッパイ シタ
 - key: name:くまの柚子|name:双界幻幽伝
   kana_segmented: ソウカイ ゲンユウデン
 - key: name:くまの柚子|name:身代わり婚約者なのに、銀狼陛下がどうしても離してくれません!
@@ -8362,8 +8271,7 @@ fills:
 - key: name:くみちょう|name:ぼっち・ざ・ろっく!外伝廣井きくりの深酒日記.
   kana_segmented: ボッチ ・ ザ ・ ロック ! ガイデン ヒロイ キクリ ノ フカザケ ニッキ.
 - key: name:くもすずめ|name:報われなかった村人A、貴族に拾われて溺愛される上に、実は持っていた伝説級の神スキルも覚醒した
-  kana_segmented: ムクワレナカッタ ムラビト エー キゾク ニ ヒロワレテ デキアイ サレル ウエ ニ ジツ ワ モッテ イタ デンセツキュウ ノ
-    カミスキル モ カクセイ シタ
+  kana_segmented: ムクワレナカッタ ムラビト エー キゾク ニ ヒロワレテ デキアイ サレル ウエ ニ ジツ ワ モッテ イタ デンセツキュウ ノ カミスキル モ カクセイ シタ
 - key: name:くもそく|name:俺が好きって言ったらどうする?
   kana_segmented: オレ ガ スキ ッテ イッタラ ドウスル
 - key: name:くも子|name:「触れたい」は恋の始まり
@@ -8463,8 +8371,7 @@ fills:
 - key: name:くろでこ|name:芋くさ令嬢ですが悪役令息を助けたら気に入られました
   kana_segmented: イモクサ レイジョウ デスガ アクヤク レイソク オ タスケタラ キ ニ イラレマシタ
 - key: name:くろでこ|name:虐待されていた商家の令嬢は聖女の力を手に入れ、無自覚に容赦なく逆襲する
-  kana_segmented: ギャクタイ サレテ イタ ショウカ ノ レイジョウ ワ セイジョ ノ チカラ オ テ ニ イレ ムジカク ニ ヨウシャ ナク ギャクシュウ
-    スル
+  kana_segmented: ギャクタイ サレテ イタ ショウカ ノ レイジョウ ワ セイジョ ノ チカラ オ テ ニ イレ ムジカク ニ ヨウシャ ナク ギャクシュウ スル
 - key: name:くろでこ|name:追放された聖女ですが、実は国中から愛されすぎてて怖いんですけど!?|sub:聖女イヴリンと愉快な(?)仲間たち
   kana_segmented: ツイホウ サレタ セイジョ デスガ ジツ ワ クニジュウ カラ アイサレスギテテ コワインデス ケド
 - key: name:くろでこ|name:追放悪役令嬢、只今監視中!
@@ -8532,8 +8439,7 @@ fills:
 - key: name:ぐりーんたぬき|name:不遇スキルの錬金術師、辺境を開拓する.
   kana_segmented: フグウ スキル ノ レンキンジュツシ ヘンキョウ オ カイタク スル.
 - key: name:ぐんたお|name:「君を愛することはない」と言った氷の魔術師様の片思い相手が、変装した私だった
-  kana_segmented: 「 キミ オ アイスル コト ワ ナイ 」 ト イッタ コオリ ノ マジュツシ サマ ノ カタオモイ アイテ ガ 、 ヘンソウ
-    シタ ワタクシ ダッタ
+  kana_segmented: 「 キミ オ アイスル コト ワ ナイ 」 ト イッタ コオリ ノ マジュツシ サマ ノ カタオモイ アイテ ガ 、 ヘンソウ シタ ワタクシ ダッタ
 - key: name:ぐんたお|name:幕末ファミリア
   kana_segmented: バクマツ ファミリア
 - key: name:ぐんたお|name:辺境の錬金術師
@@ -8628,8 +8534,7 @@ fills:
 - key: name:こうじま奈月|name:溺愛のウラには
   kana_segmented: デキアイ ノ ウラ ニワ
 - key: name:こうづきれお|name:ヤバ盛!本当にあった〔○生〕ここだけの話極
-  kana_segmented: ヤバモリ ホントウ ニ アッタ マルナマ ココ ダケ ノ ハナシ ウルトラ|ヤバモリ ホントウ ニ アッタ マルナマ ココダケ
-    ノ ハナシ キョク
+  kana_segmented: ヤバモリ ホントウ ニ アッタ マルナマ ココ ダケ ノ ハナシ ウルトラ|ヤバモリ ホントウ ニ アッタ マルナマ ココダケ ノ ハナシ キョク
 - key: name:こうのみさと|name:祖母漫画『ハルエさん』
   kana_segmented: ソボ マンガ 『 ハルエサン 』
 - key: name:こう森|name:夜のまにまに
@@ -8737,13 +8642,11 @@ fills:
 - key: name:こはるんるん|name:神を〈神様ガチャ〉で生み出し放題
   kana_segmented: カミ オ カミサマ ガチャ デ ウミダシ ホウダイ
 - key: name:こはるんるん|name:竜王に拾われて魔法を極めた少年、追放を言い渡した家族の前でうっかり無双してしまう
-  kana_segmented: リュウオウ ニ ヒロワレテ マホウ オ キワメタ ショウネン ツイホウ オ イイワタシタ カゾク ノ マエ デ ウッカリ ムソウ
-    シテ シマウ
+  kana_segmented: リュウオウ ニ ヒロワレテ マホウ オ キワメタ ショウネン ツイホウ オ イイワタシタ カゾク ノ マエ デ ウッカリ ムソウ シテ シマウ
 - key: name:こばきら|name:異世界ラクラク無人島ライフ
   kana_segmented: イセカイ ラクラク ムジントウ ライフ
 - key: name:こばしがわ|name:雷帝と呼ばれた最強冒険者、魔術学院に入学して一切の遠慮なく無双する
-  kana_segmented: ライテイ ト ヨバレタ サイキョウ ボウケンシャ マジュツ ガクイン ニ ニュウガク シテ イッサイ ノ エンリョ ナク ムソウ
-    スル
+  kana_segmented: ライテイ ト ヨバレタ サイキョウ ボウケンシャ マジュツ ガクイン ニ ニュウガク シテ イッサイ ノ エンリョ ナク ムソウ スル
 - key: name:こばぱぱ|name:カナダ移住、家族4人でチャレンジ中!
   kana_segmented: カナダ イジュウ カゾク ヨニン デ チャレンジチュウ
 - key: name:こばみそ|name:異世界で上前はねて生きていく
@@ -8822,8 +8725,7 @@ fills:
 - key: name:こゆき|name:モンスター・コレクション
   kana_segmented: モンスター コレクション
 - key: name:こゆきはら星|name:天下統一恋の乱Love Ballad～華の章～織田信長&明智光秀編@COMIC
-  kana_segmented: テンカ トウイツ コイ ノ ラン ラヴ バラード ハナ ノ ショウ オダ ノブナガ アンド アケチ ミツヒデヘン アットマーク
-    コミック
+  kana_segmented: テンカ トウイツ コイ ノ ラン ラヴ バラード ハナ ノ ショウ オダ ノブナガ アンド アケチ ミツヒデヘン アットマーク コミック
 - key: name:こゆきまや|name:淫らな4Pシェアハウス
   kana_segmented: ミダラ ナ ヨンピー シェア ハウス
 - key: name:こゆき漫画家|name:我が焔炎にひれ伏せ世界
@@ -8861,8 +8763,7 @@ fills:
 - key: name:ころりよ|name:僕とあやかしの365日
   kana_segmented: ボク ト アヤカシ ノ サンビャクロクジュウゴニチ
 - key: name:こわたりひろ|name:悪役の王女に転生したけど、隠しキャラが隠れてない。～光差す世界で君と～@COMIC
-  kana_segmented: アクヤク ノ オウジョ ニ テンセイ シタ ケド カクシ キャラ ガ カクレテ ナイ ヒカリ サス セカイ デ キミ ト アットマーク
-    コミック
+  kana_segmented: アクヤク ノ オウジョ ニ テンセイ シタ ケド カクシ キャラ ガ カクレテ ナイ ヒカリ サス セカイ デ キミ ト アットマーク コミック
 - key: name:こんぱる|name:あなたの妹
   kana_segmented: アナタ ノ イモウト
 - key: name:こん炉|name:Family Affair
@@ -9262,8 +9163,7 @@ fills:
 - key: name:さらさみさ|name:悪役魔導士なのに、スパダリ王子に好かれて困ってます!?
   kana_segmented: アクヤク マドウシ ナノニ スパダリ オウジ ニ スカレテ コマッテマス
 - key: name:さらさみさ|name:無能は不要と言われ『時計使い』の僕は職人ギルドから追い出されるも、ダンジョンの深部で真の力に覚醒する
-  kana_segmented: ムノウ ワ フヨウ ト イワレ トケイツカイ ノ ボク ワ ショクニン ギルド カラ オイダサレルモ ダンジョン ノ シンブ デ
-    シン ノ チカラ ニ カクセイ スル
+  kana_segmented: ムノウ ワ フヨウ ト イワレ トケイツカイ ノ ボク ワ ショクニン ギルド カラ オイダサレルモ ダンジョン ノ シンブ デ シン ノ チカラ ニ カクセイ スル
 - key: name:さらみ|name:宇宙生物学者プラテス
   kana_segmented: ウチュウ セイブツ ガクシャ プラテス
 - key: name:さり|name:プラシーボーイ
@@ -9337,8 +9237,7 @@ fills:
 - key: name:ざぞん|name:鬼ギャルくんの腹のなか
   kana_segmented: オニギャルクン ノ ハラ ノ ナカ
 - key: name:ざっぽん|name:真の仲間じゃないと勇者のパーティーを追い出されたので、辺境でスローライフすることにしました
-  kana_segmented: シン ノ ナカマ ジャ ナイ ト ユウシャ ノ パーティー オ オイダサレタ ノデ ヘンキョウ デ スロー ライフ スル コト
-    ニ シマシタ
+  kana_segmented: シン ノ ナカマ ジャ ナイ ト ユウシャ ノ パーティー オ オイダサレタ ノデ ヘンキョウ デ スロー ライフ スル コト ニ シマシタ
 - key: name:ざらめ鮫|name:俺のサブを暴くな
   kana_segmented: オレ ノ サブ オ アバクナ
 - key: name:ざらめ鮫|name:着飾るヒナはまだ恋を知らない
@@ -9469,8 +9368,7 @@ fills:
 - key: name:しっぽの北|name:好きになってよ、いずみクン。
   kana_segmented: スキ ニ ナッテヨ イズミ クン
 - key: name:しっぽタヌキ|name:「お前が代わりに死ね」と言われた私。妹の身代わりに冷酷な辺境伯のもとへ嫁ぎ、幸せを手に入れる
-  kana_segmented: オマエ ガ カワリ ニ シネ ト イワレタ ワタシ イモウト ノ ミガワリ ニ レイコク ナ ヘンキョウハク ノ モト エ トツギ
-    シアワセ オ テ ニ イレル
+  kana_segmented: オマエ ガ カワリ ニ シネ ト イワレタ ワタシ イモウト ノ ミガワリ ニ レイコク ナ ヘンキョウハク ノ モト エ トツギ シアワセ オ テ ニ イレル
 - key: name:しっぽタヌキ|name:ほのぼの異世界転生デイズ
   kana_segmented: ホノボノ イセカイ テンセイ デイズ
 - key: name:しっぽタヌキ|name:ほのぼの異世界転生デイズ|sub:レベルカンスト、アイテム持ち越し!私は最強幼女です
@@ -9827,11 +9725,9 @@ fills:
 - key: name:すかいふぁーむ|name:FPSゲームのコーチを引き受けたら依頼主が人気VTuberの美少女だった
   kana_segmented: エフピーエス ゲーム ノ コーチ オ ヒキウケタラ イライヌシ ガ ニンキ ヴイチューバー ノ ビショウジョ ダッタ
 - key: name:すかいふぁーむ|name:わがまま王女に仕えた万能執事、隣の帝国で最強の軍人に成り上がり無双する
-  kana_segmented: ワガママ オウジョ ニ ツカエタ バンノウ シツジ トナリ ノ テイコク デ サイキョウ ノ グンジン ニ ナリアガリ ムソウ
-    スル
+  kana_segmented: ワガママ オウジョ ニ ツカエタ バンノウ シツジ トナリ ノ テイコク デ サイキョウ ノ グンジン ニ ナリアガリ ムソウ スル
 - key: name:すかいふぁーむ|name:ギルドを追放されたけどもふもふ神獣に授かった神スキル【ランダム錬金】で最強のギルドを作って無双します
-  kana_segmented: ギルド オ ツイホウサレタケド モフモフ シンジュウ ニ サズカッタ カミ スキル 【 ランダム レンキン 】 デ サイキョウ
-    ノ ギルド オ ツクッテ ムソウシマス
+  kana_segmented: ギルド オ ツイホウサレタケド モフモフ シンジュウ ニ サズカッタ カミ スキル 【 ランダム レンキン 】 デ サイキョウ ノ ギルド オ ツクッテ ムソウシマス
 - key: name:すかいふぁーむ|name:サキュバステイマーの異世界無双
   kana_segmented: サキュバス テイマー ノ イセカイ ムソウ
 - key: name:すかいふぁーむ|name:サキュバステイマーの異世界無双|sub:幻獣たちの血を引く最強のサキュバスとはじめる魔族領開拓
@@ -9877,8 +9773,7 @@ fills:
 - key: name:すがはら竜|name:悪役令嬢は推しが尊すぎて今日も幸せ
   kana_segmented: アクヤク レイジョウ ワ オシ ガ トウトスギテ キョウ モ シアワセ
 - key: name:すがはら竜|name:真実の愛を見つけたと言われて婚約破棄されたので、復縁を迫られても今さらもう遅いです!
-  kana_segmented: シンジツ ノ アイ オ ミツケタ ト イワレテ コンヤク ハキ サレタ ノデ フクエン オ セマラレテモ イマサラ モウ オソイ
-    デス
+  kana_segmented: シンジツ ノ アイ オ ミツケタ ト イワレテ コンヤク ハキ サレタ ノデ フクエン オ セマラレテモ イマサラ モウ オソイ デス
 - key: name:すがはら竜|name:落ちこぼれの俺がエリート天使を落として魔王になる話〈仮〉
   kana_segmented: オチコボレ ノ オレ ガ エリート テンシ オ オトシテ マオウ ニ ナル ハナシ カリ
 - key: name:すきま|name:ポーション頼みで生き延びます!続
@@ -10075,8 +9970,7 @@ fills:
 - key: name:せうかなめ|name:スパイ教室4部
   kana_segmented: スパイ キョウシツ ヨンブ
 - key: name:せうかなめ|name:勝手に勇者パーティの暗部を担っていたけど不要だと追放されたので、本当に不要だったのか見極めます
-  kana_segmented: カッテ ニ ユウシャ パーティ ノ アンブ オ ニナッテ イタ ケド フヨウ ダト ツイホウ サレタ ノデ ホントウ ニ フヨウ
-    ダッタ ノカ ミキワメマス
+  kana_segmented: カッテ ニ ユウシャ パーティ ノ アンブ オ ニナッテ イタ ケド フヨウ ダト ツイホウ サレタ ノデ ホントウ ニ フヨウ ダッタ ノカ ミキワメマス
 - key: name:せがわひろわき|name:平成ギャングエイジ
   kana_segmented: ヘイセイ ギャング エイジ
 - key: name:せきとう|name:さよなら、あの日の服従
@@ -10084,8 +9978,7 @@ fills:
 - key: name:せきの|name:ちくちくぴろんぴろん
   kana_segmented: チクチク ピロンピロン
 - key: name:せきはら|name:身代わり秒バレ令嬢の契約結婚なのに、騎士公爵が「絶対に離婚しない」と溺愛してくる
-  kana_segmented: ミガワリ ビョウバレ レイジョウ ノ ケイヤク ケッコン ナノニ キシ コウシャク ガ ゼッタイ ニ リコン シナイ ト デキアイ
-    シテ クル
+  kana_segmented: ミガワリ ビョウバレ レイジョウ ノ ケイヤク ケッコン ナノニ キシ コウシャク ガ ゼッタイ ニ リコン シナイ ト デキアイ シテ クル
 - key: name:せきやゆりえ|name:おさるのままごと
   kana_segmented: オサル ノ ママゴト
 - key: name:せせなやう|name:天使☆騒々RE-BOOT!
@@ -10422,8 +10315,7 @@ fills:
 - key: name:たまこ|name:おとなの恋は、やぶさかにつき。.
   kana_segmented: オトナ ノ コイ ワ ヤブサカ ニ ツキ.
 - key: name:たまごかけキャンディー|name:異世界創造のすゝめ～スマホアプリで惑星を創ってしまった俺は神となり世界を巡る～@COMIC
-  kana_segmented: イセカイ ソウゾウ ノ ススメ スマホ アプリ デ ワクセイ オ ツクッテ シマッタ オレ ワ カミ ト ナリ セカイ オ メグル
-    アットマーク コミック
+  kana_segmented: イセカイ ソウゾウ ノ ススメ スマホ アプリ デ ワクセイ オ ツクッテ シマッタ オレ ワ カミ ト ナリ セカイ オ メグル アットマーク コミック
 - key: name:たまごかけキャンディー|name:転生悪魔の最強勇者育成計画
   kana_segmented: テンセイ アクマ ノ サイキョウ ユウシャ イクセイ ケイカク
 - key: name:たまび|name:これから
@@ -10459,8 +10351,7 @@ fills:
 - key: name:たらふくハルコ|name:一途なふしだら
   kana_segmented: イチズナ フシダラ
 - key: name:たらんぼマン|name:異世界召喚されてきた聖女様が「彼氏が死んだ」と泣くばかりで働いてくれません。ところでその死んだ彼氏、前世の俺ですね。
-  kana_segmented: イセカイ ショウカン サレテ キタ セイジョサマ ガ カレシ ガ シンダ ト ナク バカリ デ ハタライテ クレマセン トコロデ
-    ソノ シンダ カレシ ゼンセ ノ オレ デスネ
+  kana_segmented: イセカイ ショウカン サレテ キタ セイジョサマ ガ カレシ ガ シンダ ト ナク バカリ デ ハタライテ クレマセン トコロデ ソノ シンダ カレシ ゼンセ ノ オレ デスネ
 - key: name:たら実|name:少女漫画ぽく愚痴る。
   kana_segmented: ショウジョ マンガポク グチル
 - key: name:たるたるぐんぐん|name:役立たず冒険者【メニュー画面】で英雄に!
@@ -10488,15 +10379,13 @@ fills:
 - key: name:た介|name:穢れた血だと追放された魔力無限の精霊魔術士
   kana_segmented: ケガレタ チ ダ ト ツイホウサレタ マリョク ムゲン ノ セイレイ マジュツシ
 - key: name:だいたいねむい|name:パワハラギルマスをぶん殴ってブラック聖剣ギルドをクビになったので、辺境で聖剣工房を開くことにした
-  kana_segmented: パワハラ ギルマス オ ブンナグッテ ブラック セイケン ギルド オ クビ ニ ナッタ ノデ ヘンキョウ デ セイケン コウボウ
-    オ ヒラク コト ニ シタ
+  kana_segmented: パワハラ ギルマス オ ブンナグッテ ブラック セイケン ギルド オ クビ ニ ナッタ ノデ ヘンキョウ デ セイケン コウボウ オ ヒラク コト ニ シタ
 - key: name:だたろう|name:北欧ふたりぐらし
   kana_segmented: ホクオウ フタリグラシ
 - key: name:だにまる|name:この恋に気づいて
   kana_segmented: コノ コイ ニ キズイテ
 - key: name:だぶ竜|name:一瞬で治療していたのに役立たずと追放された天才治癒師、闇ヒーラーとして楽しく生きる|sub:コミック
-  kana_segmented: イッシュン デ チリョウ シテ イタ ノニ ヤクタタズ ト ツイホウ サレタ テンサイ チユシ ヤミヒーラー ト シテ タノシク
-    イキル
+  kana_segmented: イッシュン デ チリョウ シテ イタ ノニ ヤクタタズ ト ツイホウ サレタ テンサイ チユシ ヤミヒーラー ト シテ タノシク イキル
 - key: name:だぶ竜|name:甘く優しい世界で生きるには
   kana_segmented: アマク ヤサシイ セカイ デ イキル ニワ
 - key: name:だぶ竜|name:魔物を狩るなと言われた最強ハンター、料理ギルドに転職する|sub:好待遇な上においしいものまで食べれて幸せです
@@ -10569,8 +10458,7 @@ fills:
 - key: name:ちょりもっき|name:恋して触れて
   kana_segmented: コイシテ フレテ
 - key: name:ちらしま|name:婚約破棄されたのに元婚約者の結婚式に招待されました。断れないので兄の友人に同行してもらいます。
-  kana_segmented: コンヤク ハキサレタ ノニ モト コンヤクシャ ノ ケッコンシキ ニ ショウタイサレマシタ 。 コトワレナイ ノデ アニ ノ ユウジン
-    ニ ドウコウシテモライマス 。
+  kana_segmented: コンヤク ハキサレタ ノニ モト コンヤクシャ ノ ケッコンシキ ニ ショウタイサレマシタ 。 コトワレナイ ノデ アニ ノ ユウジン ニ ドウコウシテモライマス 。
 - key: name:ちらしま|name:殿下の溺愛はわかりにくい!
   kana_segmented: デンカ ノ デキアイ ワ ワカリニクイ !
 - key: name:ちり|name:成長チートでなんでもできるようになったが、無職だけは辞められないようです
@@ -10679,8 +10567,7 @@ fills:
 - key: name:つづ井|name:老犬とつづ井
   kana_segmented: ロウケン ト ツズイ
 - key: name:つなかわ|name:ハズレ属性〈音属性〉で追放されたけど、実は唯一無詠唱で発動できる最強魔法でした|sub:コミック
-  kana_segmented: ハズレ ゾクセイ オトゾクセイ デ ツイホウ サレタ ケド ジツ ワ ユイイツ ムエイショウ デ ハツドウ デキル サイキョウ
-    マホウ デシタ
+  kana_segmented: ハズレ ゾクセイ オトゾクセイ デ ツイホウ サレタ ケド ジツ ワ ユイイツ ムエイショウ デ ハツドウ デキル サイキョウ マホウ デシタ
 - key: name:つなかわ|name:異世界で水の大精霊やってます。
   kana_segmented: イセカイ デ ミズ ノ ダイセイレイ ヤッテマス
 - key: name:つなしや季夏|name:ぎゅってもっと、つないで
@@ -10780,15 +10667,13 @@ fills:
 - key: name:てんてんどんどん|name:偽聖女と虐げられた公爵令嬢は二度目の人生は復讐に生きる.
   kana_segmented: ニセセイジョ ト シイタゲラレタ コウシャク レイジョウ ワ ニドメ ノ ジンセイ ワ フクシュウ ニ イキル.
 - key: name:てんてんどんどん|name:虐待されていた商家の令嬢は聖女の力を手に入れ、無自覚に容赦なく逆襲する
-  kana_segmented: ギャクタイ サレテ イタ ショウカ ノ レイジョウ ワ セイジョ ノ チカラ オ テ ニ イレ ムジカク ニ ヨウシャ ナク ギャクシュウ
-    スル
+  kana_segmented: ギャクタイ サレテ イタ ショウカ ノ レイジョウ ワ セイジョ ノ チカラ オ テ ニ イレ ムジカク ニ ヨウシャ ナク ギャクシュウ スル
 - key: name:てんまそ|name:RPG W(・∀・)RLD
   kana_segmented: ロープレ ワールド
 - key: name:てんまそ|name:リアデイルの大地にて
   kana_segmented: リアデイル ノ ダイチ ニテ
 - key: name:てんまそ|name:外れスキル『レベルアップ』のせいでパーティーを追放された少年は、レベルを上げて物理で殴る
-  kana_segmented: ハズレ スキル レベル アップ ノ セイ デ パーティー オ ツイホウ サレタ ショウネン ワ レベル オ アゲテ ブツリ デ
-    ナグル
+  kana_segmented: ハズレ スキル レベル アップ ノ セイ デ パーティー オ ツイホウ サレタ ショウネン ワ レベル オ アゲテ ブツリ デ ナグル
 - key: name:でぃふぃーと|name:変幻装姫シャインミラージュTHE COMIC
   kana_segmented: ヘンゲン ソウキ シャイン ミラージュ ザ コミック
 - key: name:でえ|name:やさしい隣人に囚われて
@@ -10857,8 +10742,7 @@ fills:
 - key: name:とおる漫画家|name:女装してめんどくさい事になってるネクラとヤンキーの両片想い
   kana_segmented: ジョソウシテ メンドクサイ コト ニ ナッテル ネクラ ト ヤンキー ノ リョウカタオモイ
 - key: name:とがわ愛|name:転生してスリムになったのにまた太った私が生まれて初めて努力して10kg痩せるまで
-  kana_segmented: テンセイ シテ スリム ニ ナッタ ノニ マタ フトッタ ワタシ ガ ウマレテ ハジメテ ドリョク シテ ジッキログラム ヤセル
-    マデ
+  kana_segmented: テンセイ シテ スリム ニ ナッタ ノニ マタ フトッタ ワタシ ガ ウマレテ ハジメテ ドリョク シテ ジッキログラム ヤセル マデ
 - key: name:ときしば|name:人魚と王子とウソツキ悪魔
   kana_segmented: ニンギョ ト オウジ ト ウソツキ アクマ
 - key: name:ときしば|name:人魚と王子とウソツキ悪魔.
@@ -10894,11 +10778,9 @@ fills:
 - key: name:とし山じゅん|name:コスモVS!
   kana_segmented: コスモ ブイエス
 - key: name:とだかづき|name:ポーション工場に左遷された錬金術師、美少女に拉致され異国でいつの間にか英雄になる
-  kana_segmented: ポーション コウジョウ ニ サセン サレタ レンキンジュツシ ビショウジョ ニ ラチ サレ イコク デ イツノマニカ エイユウ
-    ニ ナル
+  kana_segmented: ポーション コウジョウ ニ サセン サレタ レンキンジュツシ ビショウジョ ニ ラチ サレ イコク デ イツノマニカ エイユウ ニ ナル
 - key: name:とだかづき|name:劣等職の回復術師、回復アイテムのほうが役に立つと笑われるが、実は無限の魔力を誇る最強冒険者なので全てを治癒し無双します
-  kana_segmented: レットウショク ノ カイフクジュツシ 、 カイフク アイテム ノ ホウ ガ ヤク ニ タツ ト ワラワレル ガ 、 ジツ ワ ムゲン
-    ノ マリョク オ ホコル サイキョウ ボウケンシャ ナノデ スベテ オ チユシ ムソウシマス
+  kana_segmented: レットウショク ノ カイフクジュツシ 、 カイフク アイテム ノ ホウ ガ ヤク ニ タツ ト ワラワレル ガ 、 ジツ ワ ムゲン ノ マリョク オ ホコル サイキョウ ボウケンシャ ナノデ スベテ オ チユシ ムソウシマス
 - key: name:とだともこ|name:酒場ミモザ
   kana_segmented: サカバ ミモザ
   src: tail
@@ -11047,8 +10929,7 @@ fills:
 - key: name:どまどま|name:外れスキルだからと追放された《∞チートアビリティ》が強すぎて草も生えない件
   kana_segmented: ハズレ スキル ダカラ ト ツイホウ サレタ ムゲン チート アビリティ ガ ツヨスギテ クサ モ ハエナイ ケン
 - key: name:どまどま|name:最底辺のおっさん冒険者。ギルドを追放されるところで今までの努力が報われ、急に最強スキル《無条件勝利》を得る
-  kana_segmented: サイテイヘン ノ オッサン ボウケンシャ ギルド オ ツイホウ サレル トコロ デ イママデ ノ ドリョク ガ ムクワレ キュウ
-    ニ サイキョウ スキル ムジョウケン ショウリ オ エル
+  kana_segmented: サイテイヘン ノ オッサン ボウケンシャ ギルド オ ツイホウ サレル トコロ デ イママデ ノ ドリョク ガ ムクワレ キュウ ニ サイキョウ スキル ムジョウケン ショウリ オ エル
 - key: name:どんぺった|name:欠落錬金術師の異世界生活
   kana_segmented: ケツラク レンキンジュツシ ノ イセカイ セイカツ
 - key: name:どーるる|name:浮気された地味令嬢が王宮付き美容アドバイザーと秘密のレッスン!
@@ -11153,8 +11034,7 @@ fills:
 - key: name:なぎまゆ|name:物事を「いる・いらない」に分けただけで、貯金ゼロから「貯められる人」になりました
   kana_segmented: モノゴト オ イル イラナイ ニ ワケタ ダケ デ チョキン ゼロ カラ タメラレル ヒト ニ ナリマシタ
 - key: name:なぎまゆ|name:痩せるより大切なことに気づいたら、人生で一番楽に17kgのダイエットに成功しました
-  kana_segmented: ヤセル ヨリ タイセツ ナ コト ニ キズイタラ ジンセイ デ イチバン ラク ニ ジュウナナキログラム ノ ダイエット ニ セイコウ
-    シマシタ
+  kana_segmented: ヤセル ヨリ タイセツ ナ コト ニ キズイタラ ジンセイ デ イチバン ラク ニ ジュウナナキログラム ノ ダイエット ニ セイコウ シマシタ
 - key: name:なぐも|name:メガネさんとおいしい湯気。
   kana_segmented: メガネサン ト オイシイ ユゲ 。
 - key: name:なしのありこ|name:ササダはオカネで推しを抱く
@@ -11164,8 +11044,7 @@ fills:
 - key: name:なしぱすた|name:メス10色
   kana_segmented: メス トイロ
 - key: name:なじまる|name:乙女ゲームヒロインの『引き立て役の妹』に転生したので立場を奪ってやることにした。@COMIC
-  kana_segmented: オトメ ゲーム ヒロイン ノ ヒキタテヤク ノ イモウト ニ テンセイ シタ ノデ タチバ オ ウバッテ ヤル コト ニ シタ
-    アットマーク コミック
+  kana_segmented: オトメ ゲーム ヒロイン ノ ヒキタテヤク ノ イモウト ニ テンセイ シタ ノデ タチバ オ ウバッテ ヤル コト ニ シタ アットマーク コミック
 - key: name:なじみ|name:ガールズフィスト!!!!GT
   kana_segmented: ガールズ フィスト ジーティー
 - key: name:なじみ|name:コンビニ夜勤のあくまちゃん
@@ -11226,8 +11105,7 @@ fills:
 - key: name:ななお|name:フォロワーの中に推しがいます
   kana_segmented: フォロワー ノ ナカ ニ オシ ガ イマス
 - key: name:ななしののん|name:家から追い出された私は、隣国のお抱え錬金術師として、幸せな第二の人生を送る事にしました!
-  kana_segmented: イエ カラ オイダサレタ ワタシ ワ リンゴク ノ オカカエ レンキンジュツシ ト シテ シアワセ ナ ダイニ ノ ジンセイ オ
-    オクル コト ニ シマシタ
+  kana_segmented: イエ カラ オイダサレタ ワタシ ワ リンゴク ノ オカカエ レンキンジュツシ ト シテ シアワセ ナ ダイニ ノ ジンセイ オ オクル コト ニ シマシタ
 - key: name:ななせ悠|name:陽光ヲ待ツ
   kana_segmented: ヨウコウ オ マツ
 - key: name:ななつの航|name:ラブ・ユア・ラブエネミー
@@ -11313,8 +11191,7 @@ fills:
 - key: name:なるせまこと|name:さわって教えて高橋くん!|sub:同僚とふしだらな休日
   kana_segmented: サワッテ オシエテ タカハシ クン
 - key: name:なるとし|name:悪役がいっぱい出てくるエロゲのキモデブ悪役貴族に転生した。痩せて、破滅回避し悪役達による犯罪を未然に防いでスローライフを目指す
-  kana_segmented: アクヤク ガ イッパイ デテ クル エロゲ ノ キモデブ アクヤク キゾク ニ テンセイ シタ ヤセテ ハメツ カイヒ シ アクヤクタチ
-    ニ ヨル ハンザイ オ ミゼン ニ フセイデ スロー ライフ オ メザス
+  kana_segmented: アクヤク ガ イッパイ デテ クル エロゲ ノ キモデブ アクヤク キゾク ニ テンセイ シタ ヤセテ ハメツ カイヒ シ アクヤクタチ ニ ヨル ハンザイ オ ミゼン ニ フセイデ スロー ライフ オ メザス
 - key: name:なるのるな|name:狂戦士なモブ、無自覚に本編を破壊する
   kana_segmented: キョウセンシ ナ モブ ムジカク ニ ホンペン オ ハカイ スル
 - key: name:なるみなる|name:のら犬と天使ちゃん
@@ -11929,8 +11806,7 @@ fills:
 - key: name:はりねずみ|name:飯炊き女にヤクザの愛は重すぎる
   kana_segmented: メシタキ オンナ ニ ヤクザ ノ アイ ワ オモスギル
 - key: name:はり太郎|name:「門番やってろ」と言われ15年、突っ立ってる間に俺の魔力が9999 (最強) に育ってました
-  kana_segmented: 「 モンバン ヤッテロ 」 ト イワレ 15ネン 、 ツッタッテル アイダ ニ オレ ノ マリョク ガ 9999 (サイキョウ)
-    ニ ソダッテマシタ
+  kana_segmented: 「 モンバン ヤッテロ 」 ト イワレ 15ネン 、 ツッタッテル アイダ ニ オレ ノ マリョク ガ 9999 (サイキョウ) ニ ソダッテマシタ
 - key: name:はる|name:永久保交幽録
   kana_segmented: ナガクボ コウユウロク
 - key: name:はるあめ|name:可愛いあの子は妹いーちゃん
@@ -12055,8 +11931,7 @@ fills:
 - key: name:ひあるろん|name:小春と湊
   kana_segmented: コハル ト ミナト
 - key: name:ひかり旭|name:歌舞伎町のカリスマ無双キャバ嬢が史上最強の悪役令嬢マリー・アントワネットに生まれ変わったら
-  kana_segmented: カブキチョウ ノ カリスマ ムソウ キャバジョウ ガ シジョウ サイキョウ ノ アクヤク レイジョウ マリー アントワネット ニ
-    ウマレカワッタラ
+  kana_segmented: カブキチョウ ノ カリスマ ムソウ キャバジョウ ガ シジョウ サイキョウ ノ アクヤク レイジョウ マリー アントワネット ニ ウマレカワッタラ
 - key: name:ひかわ玲子|name:三剣物語
   kana_segmented: ミツルギ モノガタリ
   src: ndl
@@ -12080,8 +11955,7 @@ fills:
 - key: name:ひげ猫|name:万能スキルの劣等聖女|sub:器用すぎるので貧乏にはなりませんでした
   kana_segmented: バンノウ スキル ノ レットウ セイジョ
 - key: name:ひげ猫|name:家から追い出された私は、隣国のお抱え錬金術師として、幸せな第二の人生を送る事にしました!
-  kana_segmented: イエ カラ オイダサレタ ワタシ ワ リンゴク ノ オカカエ レンキンジュツシ ト シテ シアワセ ナ ダイニ ノ ジンセイ オ
-    オクル コト ニ シマシタ
+  kana_segmented: イエ カラ オイダサレタ ワタシ ワ リンゴク ノ オカカエ レンキンジュツシ ト シテ シアワセ ナ ダイニ ノ ジンセイ オ オクル コト ニ シマシタ
 - key: name:ひげ猫|name:転生竜騎の英雄譚|sub:趣味全振りの装備と職業ですが、異世界で伝説の竜騎士始めました.
   kana_segmented: テンセイ リュウキ ノ エイユウタン
 - key: name:ひさぎ|name:後輩男子に寝取られSEX
@@ -12108,8 +11982,7 @@ fills:
   kana_segmented: ニンジャ ボーイ トントン トビマル
   src: ndl
 - key: name:ひそな|name:S級ギルドを追放されたけど、実は俺だけドラゴンの言葉がわかるので、気付いたときには竜騎士の頂点を極めてました。
-  kana_segmented: エスキュウ ギルド オ ツイホウ サレタ ケド ジツ ワ オレ ダケ ドラゴン ノ コトバ ガ ワカル ノデ キズイタ トキ ニワ
-    リュウキシ ノ チョウテン オ キワメテマシタ
+  kana_segmented: エスキュウ ギルド オ ツイホウ サレタ ケド ジツ ワ オレ ダケ ドラゴン ノ コトバ ガ ワカル ノデ キズイタ トキ ニワ リュウキシ ノ チョウテン オ キワメテマシタ
 - key: name:ひたきゆう|name:乙女ゲームのヒロインで最強サバイバル@COMIC
   kana_segmented: オトメ ゲーム ノ ヒロイン デ サイキョウ サバイバル アットマーク コミック
 - key: name:ひたきゆう|name:異世界でも無難に生きたい症候群
@@ -12260,8 +12133,7 @@ fills:
 - key: name:びみ太|name:凍堂くんちのメイドショタ
   kana_segmented: トウドウ クンチ ノ メイド ショタ
 - key: name:びゃくし|name:無慈悲な悪役貴族に転生した僕は掌握魔法を駆使して魔法世界の頂点に立つ
-  kana_segmented: ムジヒ ナ アクヤク キゾク ニ テンセイ シタ ボク ワ ショウアク マホウ オ クシ シテ マホウ セカイ ノ チョウテン
-    ニ タツ
+  kana_segmented: ムジヒ ナ アクヤク キゾク ニ テンセイ シタ ボク ワ ショウアク マホウ オ クシ シテ マホウ セカイ ノ チョウテン ニ タツ
 - key: name:ぴい|name:キスだけで結構です。
   kana_segmented: キス ダケ デ ケッコウ デス 。
 - key: name:ぴい|name:キスだけで結構です。.
@@ -12381,8 +12253,7 @@ fills:
 - key: name:ふっくらボリサット|name:夫婦で作るメンタル安全基地|sub:「離婚するほどじゃないけどなんかモヤモヤするッ」を減らして持続可能な夫婦になる
   kana_segmented: フウフ デ ツクル メンタル アンゼン キチ
 - key: name:ふつうのにーちゃん|name:ポーション工場に左遷された錬金術師、美少女に拉致され異国でいつの間にか英雄になる
-  kana_segmented: ポーション コウジョウ ニ サセン サレタ レンキンジュツシ ビショウジョ ニ ラチ サレ イコク デ イツノマニカ エイユウ
-    ニ ナル
+  kana_segmented: ポーション コウジョウ ニ サセン サレタ レンキンジュツシ ビショウジョ ニ ラチ サレ イコク デ イツノマニカ エイユウ ニ ナル
 - key: name:ふつうのにーちゃん|name:皇帝家の七男だが剣よりスコップが得意で困っている
   kana_segmented: コウテイケ ノ ナナナン ダガ ケン ヨリ スコップ ガ トクイ デ コマッテイル
 - key: name:ふでちん|name:PSO2ニュージェネシスせんとらるっ!
@@ -12408,8 +12279,7 @@ fills:
 - key: name:ふゆの春秋|name:世界の終わりの世界録(アンコール).
   kana_segmented: セカイ ノ オワリ ノ アンコール.
 - key: name:ふらすこ|name:世界で唯一の〈神剣使い〉なのに戦力外と呼ばれた俺、覚醒した〈神剣〉と最強になる
-  kana_segmented: セカイ デ ユイイツ ノ シンケンズカイ ナノニ センリョクガイ ト ヨバレタ オレ カクセイ シタ シンケン ト サイキョウ
-    ニ ナル
+  kana_segmented: セカイ デ ユイイツ ノ シンケンズカイ ナノニ センリョクガイ ト ヨバレタ オレ カクセイ シタ シンケン ト サイキョウ ニ ナル
 - key: name:ふるかわてんた|name:迷宮食堂『魔王窟』へようこそ
   kana_segmented: メイキュウ ショクドウ マオウクツ エ ヨウコソ
 - key: name:ふるやちるこ|name:からかわないで、羽鳥くん。
@@ -12454,8 +12324,7 @@ fills:
 - key: name:ぷきゅのすけ|name:無敵商人の異世界成り上がり物語|sub:現代の製品を自在に取り寄せるスキルがあるので異世界では楽勝です
   kana_segmented: ムテキ ショウニン ノ イセカイ ナリアガリ モノガタリ
 - key: name:ぷきゅのすけ|name:異世界帰りの勇者は、ダンジョンが出現した現実世界で、インフルエンサーになって金を稼ぎます!
-  kana_segmented: イセカイガエリ ノ ユウシャ ワ ダンジョン ガ シュツゲン シタ ゲンジツ セカイ デ インフルエンサー ニ ナッテ カネ オ
-    カセギマス
+  kana_segmented: イセカイガエリ ノ ユウシャ ワ ダンジョン ガ シュツゲン シタ ゲンジツ セカイ デ インフルエンサー ニ ナッテ カネ オ カセギマス
 - key: name:ぷきゅのすけ|name:真の聖女である私は追放されました。だからこの国はもう終わりです
   kana_segmented: シン ノ セイジョ デ アル ワタシ ワ ツイホウ サレマシタ ダカラ コノ クニ ワ モウ オワリ デス
 - key: name:ぷきゅのすけ|name:真の聖女である私は追放されました。だからこの国はもう終わりです.
@@ -12600,8 +12469,7 @@ fills:
 - key: name:ぺろぽねそす|name:ひびワれこうじつ
   kana_segmented: ヒビ ワレ コウジツ
 - key: name:ぺんたごん1996-|name:迷子になっていた幼女を助けたら、お隣に住む美少女留学生が家に遊びに来るようになった件について
-  kana_segmented: マイゴ ニ ナッテ イタ ヨウジョ オ タスケタラ オトナリ ニ スム ビショウジョ リュウガクセイ ガ イエ ニ アソビ ニ
-    クル ヨウニ ナッタ ケン ニ ツイテ
+  kana_segmented: マイゴ ニ ナッテ イタ ヨウジョ オ タスケタラ オトナリ ニ スム ビショウジョ リュウガクセイ ガ イエ ニ アソビ ニ クル ヨウニ ナッタ ケン ニ ツイテ
 - key: name:ぺんたぶ|name:腐女子彼女。
   kana_segmented: フジョシ カノジョ
 - key: name:ぺんたん|name:母親を陰謀論で失った
@@ -12800,8 +12668,7 @@ fills:
 - key: name:ぼく|name:はらへりエイリアンとひよっこごはん.
   kana_segmented: ハラヘリ エイリアン ト ヒヨッコ ゴハン.
 - key: name:ぼてまる|name:10年間身体を乗っ取られ悪女になっていた私に、二度と顔を見せるなと婚約破棄してきた騎士様が今日も縋ってくる
-  kana_segmented: ジュウネンカン カラダ オ ノットラレ アクジョ ニ ナッテ イタ ワタシ ニ ニド ト カオ オ ミセルナ ト コンヤク ハキ
-    シテ キタ キシサマ ガ キョウ モ スガッテ クル
+  kana_segmented: ジュウネンカン カラダ オ ノットラレ アクジョ ニ ナッテ イタ ワタシ ニ ニド ト カオ オ ミセルナ ト コンヤク ハキ シテ キタ キシサマ ガ キョウ モ スガッテ クル
 - key: name:ぼんち|name:三夜の受胎|sub:俺の手で孕ませたい
   kana_segmented: サンヤ ノ ジュタイ
 - key: name:ぼんど|name:はにトラ-Honey Trouble-
@@ -12811,8 +12678,7 @@ fills:
 - key: name:ぼーかん|name:いけない!ルナ先生R
   kana_segmented: イケナイ ルナ センセイ アール
 - key: name:ぼーかん|name:外れ職アイテムマスターが外れアイテム木偶人形を使ったら世界一の冒険者になれた件
-  kana_segmented: ハズレショク アイテム マスター ガ ハズレ アイテム デク ニンギョウ オ ツカッタラ セカイイチ ノ ボウケンシャ ニ ナレタ
-    ケン
+  kana_segmented: ハズレショク アイテム マスター ガ ハズレ アイテム デク ニンギョウ オ ツカッタラ セカイイチ ノ ボウケンシャ ニ ナレタ ケン
 - key: name:ぼーかん|name:幼馴染は闇堕ち聖女!
   kana_segmented: オサナナジミ ワ ヤミオチ セイジョ
 - key: name:ぽけろう|name:ご馳走さまが聞こえない!
@@ -13082,8 +12948,7 @@ fills:
 - key: name:まなーん|name:exENDs
   kana_segmented: エクスエンズ
 - key: name:まのひろゆき|name:世界最高の精霊術師～姉たちに虐げられ追放されてしまった私が、実は天才精霊術師だと気づいてももう遅い。私はもふもふと幸せに生きていきます～@COMIC
-  kana_segmented: セカイ サイコウ ノ セイレイジュツシ アネタチ ニ シイタゲラレ ツイホウ サレテ シマッタ ワタクシ ガ ジツ ワ テンサイ
-    セイレイジュツシ ダト キズイテモ モウ オソイ ワタクシ ワ モフモフ ト シアワセ ニ イキテ イキマス アットマーク コミック
+  kana_segmented: セカイ サイコウ ノ セイレイジュツシ アネタチ ニ シイタゲラレ ツイホウ サレテ シマッタ ワタクシ ガ ジツ ワ テンサイ セイレイジュツシ ダト キズイテモ モウ オソイ ワタクシ ワ モフモフ ト シアワセ ニ イキテ イキマス アットマーク コミック
 - key: name:まの瀬|name:この復讐にギャルはいらない|sub:Nematode meets lion and…
   kana_segmented: コノ フクシュウ ニ ギャル ワ イラナイ
 - key: name:まの瀬|name:この復讐にギャルはいらない|sub:Nematode meets lion and….
@@ -13189,8 +13054,7 @@ fills:
 - key: name:まるせい|name:ハズレスキル『添い寝』が覚醒し、僕が最強ハーレムを築くまで|sub:密着添い寝で願望解放!?誘惑されまくって困ってます!!
   kana_segmented: ハズレ スキル ソイネ ガ カクセイ シ ボク ガ サイキョウ ハーレム オ キズク マデ
 - key: name:まるせい|name:女神から『孵化』のスキルを授かった俺が、なぜか幻獣や神獣を従える最強テイマーになるまで
-  kana_segmented: メガミ カラ 『 フカ 』 ノ スキル オ サズカッタ オレ ガ 、 ナゼカ ゲンジュウ ヤ シンジュウ オ シタガエル サイキョウ
-    テイマー ニ ナル マデ
+  kana_segmented: メガミ カラ 『 フカ 』 ノ スキル オ サズカッタ オレ ガ 、 ナゼカ ゲンジュウ ヤ シンジュウ オ シタガエル サイキョウ テイマー ニ ナル マデ
 - key: name:まるぜん|name:男子校の羽生さん
   kana_segmented: ダンシコウ ノ ハニュウサン
 - key: name:まるぜん|name:男子校の羽生さん.
@@ -13212,11 +13076,9 @@ fills:
 - key: name:まれお|name:裏アカ乙女発情期
   kana_segmented: ウラアカ オトメ ハツジョウキ
 - key: name:まろ|name:「お前が代わりに死ね」と言われた私。妹の身代わりに冷酷な辺境伯のもとへ嫁ぎ、幸せを手に入れる
-  kana_segmented: オマエ ガ カワリ ニ シネ ト イワレタ ワタシ イモウト ノ ミガワリ ニ レイコク ナ ヘンキョウハク ノ モト エ トツギ
-    シアワセ オ テ ニ イレル
+  kana_segmented: オマエ ガ カワリ ニ シネ ト イワレタ ワタシ イモウト ノ ミガワリ ニ レイコク ナ ヘンキョウハク ノ モト エ トツギ シアワセ オ テ ニ イレル
 - key: name:まろ|name:「お前が代わりに死ね」と言われた私。妹の身代わりに冷酷な辺境伯のもとへ嫁ぎ、幸せを手に入れる.
-  kana_segmented: オマエ ガ カワリ ニ シネ ト イワレタ ワタシ イモウト ノ ミガワリ ニ レイコク ナ ヘンキョウハク ノ モト エ トツギ
-    シアワセ オ テ ニ イレル.
+  kana_segmented: オマエ ガ カワリ ニ シネ ト イワレタ ワタシ イモウト ノ ミガワリ ニ レイコク ナ ヘンキョウハク ノ モト エ トツギ シアワセ オ テ ニ イレル.
 - key: name:まろ|name:おひとりさまホテル|sub:don't disturb
   kana_segmented: オヒトリサマ ホテル
 - key: name:まろ|name:おひとりさまホテル|sub:don't disturb.
@@ -13331,8 +13193,7 @@ fills:
 - key: name:みずきたつ|name:かりそめの花嫁
   kana_segmented: カリソメ ノ ハナヨメ
 - key: name:みずき春|name:婚約破棄のため冷酷騎士に決闘を挑んでみましたが、溺愛されるとか誰か予想できました?
-  kana_segmented: コンヤク ハキ ノ タメ レイコク キシ ニ ケットウ オ イドンデミマシタ ガ 、 デキアイサレル トカ ダレ カ ヨソウデキマシタ
-    ?
+  kana_segmented: コンヤク ハキ ノ タメ レイコク キシ ニ ケットウ オ イドンデミマシタ ガ 、 デキアイサレル トカ ダレ カ ヨソウデキマシタ ?
 - key: name:みずぐちまふゆ|name:わけわかんないキミが好き
   kana_segmented: ワケ ワカンナイ キミ ガ スキ
 - key: name:みずぐちまふゆ|name:コンビニではじまる恋の話
@@ -13775,11 +13636,9 @@ fills:
 - key: name:めぐみけい|name:ちょこっと?ラブcm
   kana_segmented: チョコット ? ラブ cm
 - key: name:めぐめぐ|name:精霊魔法が使えない無能だと婚約破棄されたので、義妹の奴隷になるより追放を選びました
-  kana_segmented: セイレイ マホウ ガ ツカエナイ ムノウ ダト コンヤク ハキ サレタ ノデ ギマイ ノ ドレイ ニ ナル ヨリ ツイホウ オ
-    エラビマシタ
+  kana_segmented: セイレイ マホウ ガ ツカエナイ ムノウ ダト コンヤク ハキ サレタ ノデ ギマイ ノ ドレイ ニ ナル ヨリ ツイホウ オ エラビマシタ
 - key: name:めぐめぐ|name:精霊魔法が使えない無能だと婚約破棄されたので、義妹の奴隷になるより追放を選びました.
-  kana_segmented: セイレイ マホウ ガ ツカエナイ ムノウ ダト コンヤク ハキ サレタ ノデ ギマイ ノ ドレイ ニ ナル ヨリ ツイホウ オ
-    エラビマシタ.
+  kana_segmented: セイレイ マホウ ガ ツカエナイ ムノウ ダト コンヤク ハキ サレタ ノデ ギマイ ノ ドレイ ニ ナル ヨリ ツイホウ オ エラビマシタ.
 - key: name:めざしpub.|name:自由気ままな精霊姫
   kana_segmented: ジユウ キママ ナ セイレイキ
 - key: name:めしろ|name:なでなでスキルで魔力注入!!
@@ -13875,8 +13734,7 @@ fills:
 - key: name:もちだもちこ|name:四季姫、始めました|sub:召喚された世界で春を司るお仕事します.
   kana_segmented: シキヒメ 、 ハジメマシタ
 - key: name:もちだもちこ|name:氷の侯爵様に甘やかされたいっ!～シリアス展開しかない幼女に転生してしまった私の奮闘記～@COMIC
-  kana_segmented: コオリ ノ コウシャクサマ ニ アマヤカサレタイッ シリアス テンカイ シカ ナイ ヨウジョ ニ テンセイ シテ シマッタ ワタクシ
-    ノ フントウキ アットマーク コミック
+  kana_segmented: コオリ ノ コウシャクサマ ニ アマヤカサレタイッ シリアス テンカイ シカ ナイ ヨウジョ ニ テンセイ シテ シマッタ ワタクシ ノ フントウキ アットマーク コミック
 - key: name:もちづき裕|name:悪役令嬢はやる気がない
   kana_segmented: アクヤク レイジョウ ワ ヤルキ ガ ナイ
 - key: name:もちぬ|name:煙る雨音、鯨幕
@@ -13898,8 +13756,7 @@ fills:
 - key: name:もちオーレ|name:出会い系サイトで妹と出会う話-333日目-
   kana_segmented: デアイケイ サイト デ イモウト ト デアウ ハナシ サンビャクサンジュウサンニチメ
 - key: name:もっつん|name:零細奴隷商人、一人も奴隷が売れなかったので売れ残り少女たちと辺境でスローライフをする
-  kana_segmented: レイサイ ドレイ ショウニン ヒトリ モ ドレイ ガ ウレナカッタ ノデ ウレノコリ ショウジョタチ ト ヘンキョウ デ スロー
-    ライフ オ スル
+  kana_segmented: レイサイ ドレイ ショウニン ヒトリ モ ドレイ ガ ウレナカッタ ノデ ウレノコリ ショウジョタチ ト ヘンキョウ デ スロー ライフ オ スル
 - key: name:もつお|name:あの頃世界のすべてだった学校と自分への呪いにさよならするまで
   kana_segmented: アノ コロ セカイ ノ スベテ ダッタ ガッコウ ト ジブン エノ ノロイ ニ サヨナラ スル マデ
 - key: name:もつお|name:執着じゃない好きなだけだよ
@@ -13907,8 +13764,7 @@ fills:
 - key: name:もつお|name:精神科病棟の青春|sub:あるいは高校時代の特別な1年間について
   kana_segmented: セイシンカ ビョウトウ ノ セイシュン
 - key: name:もつお|name:高校生の娘が精神科病院に入りバラバラになった家族が再び出発するまで
-  kana_segmented: コウコウセイ ノ ムスメ ガ セイシンカ ビョウイン ニ ハイリ バラバラ ニ ナッタ カゾク ガ フタタビ シュッパツ スル
-    マデ
+  kana_segmented: コウコウセイ ノ ムスメ ガ セイシンカ ビョウイン ニ ハイリ バラバラ ニ ナッタ カゾク ガ フタタビ シュッパツ スル マデ
 - key: name:もづ九|name:崖っぷち猫は指名がほしい
   kana_segmented: ガケップチ ネコ ワ シメイ ガ ホシイ
 - key: name:もづ九|name:深々と、死神語りて執着
@@ -13920,8 +13776,7 @@ fills:
 - key: name:もなか|name:宙海町ねこまた堂
   kana_segmented: ソラミマチ ネコマタドウ
 - key: name:もの干し竿|name:MAIDes-メイデス-メイド、地獄の戦場に転送される。固有のゴミ収集魔法で、最弱クラスのまま人類最強に。@COMIC
-  kana_segmented: メイデス メイド ジゴク ノ センジョウ ニ テンソウ サレル コユウ ノ ゴミ シュウシュウ マホウ デ サイジャク クラス
-    ノ ママ ジンルイ サイキョウ ニ アットマーク コミック
+  kana_segmented: メイデス メイド ジゴク ノ センジョウ ニ テンソウ サレル コユウ ノ ゴミ シュウシュウ マホウ デ サイジャク クラス ノ ママ ジンルイ サイキョウ ニ アットマーク コミック
 - key: name:もふ緒|name:モブ推しJKの悪役令嬢異世界転生～悲惨～
   kana_segmented: モブオシ ジェーケー ノ アクヤク レイジョウ イセカイ テンセイ ヒサン
 - key: name:もみもみじ|name:俺があんたを好きなんじゃない!
@@ -14060,8 +13915,7 @@ fills:
 - key: name:やきいもほくほく|name:今まで馬鹿にされていた気弱令嬢に転生したら、とんでもない事になった話、聞く?
   kana_segmented: イママデ バカ ニ サレテ イタ キヨワ レイジョウ ニ テンセイ シタラ トンデモナイ コト ニ ナッタ ハナシ キク
 - key: name:やきいもほくほく|name:出来損ない令嬢に転生したギャルが見返すために努力した結果、溺愛されてますけど何か文句ある?
-  kana_segmented: デキソコナイ レイジョウ ニ テンセイ シタ ギャル ガ ミカエス タメ ニ ドリョク シタ ケッカ デキアイ サレテマス ケド
-    ナニカ モンク アル
+  kana_segmented: デキソコナイ レイジョウ ニ テンセイ シタ ギャル ガ ミカエス タメ ニ ドリョク シタ ケッカ デキアイ サレテマス ケド ナニカ モンク アル
 - key: name:やきいもほくほく|name:牢の中で目覚めた悪役令嬢は死にたくない
   kana_segmented: ロウ ノ ナカ デ メザメタ アクヤク レイジョウ ワ シニタクナイ
 - key: name:やきいもほくほく|name:身代わり令嬢を救ったのは冷酷無慈悲な氷の王子の愛でした
@@ -14102,8 +13956,7 @@ fills:
 - key: name:やすも|name:異世界のんびり農家の日常
   kana_segmented: イセカイ ノンビリ ノウカ ノ ニチジョウ
 - key: name:やすも|name:真の仲間じゃないと勇者のパーティーを追い出されたので、辺境でスローライフすることにしました.
-  kana_segmented: シン ノ ナカマ ジャ ナイ ト ユウシャ ノ パーティー オ オイダサレタ ノデ ヘンキョウ デ スロー ライフ スル コト
-    ニ シマシタ.
+  kana_segmented: シン ノ ナカマ ジャ ナイ ト ユウシャ ノ パーティー オ オイダサレタ ノデ ヘンキョウ デ スロー ライフ スル コト ニ シマシタ.
 - key: name:やすも|name:真の仲間になれなかったお姫様は、辺境でスローライフすることにしました
   kana_segmented: シン ノ ナカマ ニ ナレナカッタ オヒメサマ ワ ヘンキョウ デ スロー ライフ スル コト ニ シマシタ
 - key: name:やそたまお|name:推しの人生×私の一生
@@ -14549,11 +14402,9 @@ fills:
 - key: name:よしだかおる|name:鳥クラスタに捧ぐ鳥4コマ
   kana_segmented: トリ クラスタ ニ ササグ トリ ヨンコマ
 - key: name:よしだひでゆき|name:私、異世界で奴隷にされちゃいました (泣) しかもご主人様は性格の悪いエルフの女王様! (でも超美人←ここ大事)|sub:無能すぎて罵られまくるけど同僚のオークが癒やし系だし里のエルフは可愛いし結構楽しんでる私です。
-  kana_segmented: ワタクシ 、 イセカイ デ ドレイ ニ サレチャイマシタ (ナキ) シカモ ゴシュジンサマ ワ セイカク ノ ワルイ エルフ ノ
-    ジョオウサマ ! (デモ チョウビジン ← ココ ダイジ)
+  kana_segmented: ワタクシ 、 イセカイ デ ドレイ ニ サレチャイマシタ (ナキ) シカモ ゴシュジンサマ ワ セイカク ノ ワルイ エルフ ノ ジョオウサマ ! (デモ チョウビジン ← ココ ダイジ)
 - key: name:よしだひでゆき|name:私、異世界で奴隷にされちゃいました (泣) しかもご主人様は性格の悪いエルフの女王様! (でも超美人←ここ大事)|sub:無能すぎて罵られまくるけど同僚のオークが癒やし系だし里のエルフは可愛いし結構楽しんでる私です。.
-  kana_segmented: ワタクシ 、 イセカイ デ ドレイ ニ サレチャイマシタ (ナキ) シカモ ゴシュジンサマ ワ セイカク ノ ワルイ エルフ ノ
-    ジョオウサマ ! (デモ チョウビジン ← ココ ダイジ)
+  kana_segmented: ワタクシ 、 イセカイ デ ドレイ ニ サレチャイマシタ (ナキ) シカモ ゴシュジンサマ ワ セイカク ノ ワルイ エルフ ノ ジョオウサマ ! (デモ チョウビジン ← ココ ダイジ)
 - key: name:よしだ吉|name:明日、結婚式なんですけど!?
   kana_segmented: アシタ ケッコンシキ ナンデス ケド
 - key: name:よしとら|name:ケダモノ淫モラリズム
@@ -14610,11 +14461,9 @@ fills:
 - key: name:よどら文鳥|name:お人好し悪役令嬢の復讐計画
   kana_segmented: オヒトヨシ アクヤク レイジョウ ノ フクシュウ ケイカク
 - key: name:よね|name:婚約破棄を狙って記憶喪失のフリをしたら、素っ気ない態度だった婚約者が「記憶を失う前の君は、俺にベタ惚れだった」という、とんでもない嘘をつき始めた
-  kana_segmented: コンヤク ハキ オ ネラッテ キオク ソウシツ ノ フリ オ シタラ 、 ソッケナイ タイド ダッタ コンヤクシャ ガ 「 キオク
-    オ ウシナウ マエ ノ キミ ワ 、 オレ ニ ベタボレ ダッタ 」 ト イウ 、 トンデモナイ ウソ オ ツキハジメタ
+  kana_segmented: コンヤク ハキ オ ネラッテ キオク ソウシツ ノ フリ オ シタラ 、 ソッケナイ タイド ダッタ コンヤクシャ ガ 「 キオク オ ウシナウ マエ ノ キミ ワ 、 オレ ニ ベタボレ ダッタ 」 ト イウ 、 トンデモナイ ウソ オ ツキハジメタ
 - key: name:よね|name:婚約破棄を狙って記憶喪失のフリをしたら、素っ気ない態度だった婚約者が「記憶を失う前の君は、俺にベタ惚れだった」という、とんでもない嘘をつき始めた.
-  kana_segmented: コンヤク ハキ オ ネラッテ キオク ソウシツ ノ フリ オ シタラ 、 ソッケナイ タイド ダッタ コンヤクシャ ガ 「 キオク
-    オ ウシナウ マエ ノ キミ ワ 、 オレ ニ ベタボレ ダッタ 」 ト イウ 、 トンデモナイ ウソ オ ツキハジメタ.
+  kana_segmented: コンヤク ハキ オ ネラッテ キオク ソウシツ ノ フリ オ シタラ 、 ソッケナイ タイド ダッタ コンヤクシャ ガ 「 キオク オ ウシナウ マエ ノ キミ ワ 、 オレ ニ ベタボレ ダッタ 」 ト イウ 、 トンデモナイ ウソ オ ツキハジメタ.
 - key: name:よねぞう|name:勇者パーティを追い出された器用貧乏
   kana_segmented: ユウシャ パーティ オ オイダサレタ キヨウ ビンボウ
 - key: name:よねぞう|name:勇者パーティを追い出された器用貧乏外伝
@@ -14706,8 +14555,7 @@ fills:
 - key: name:らむ屋|name:滅びの王国の錬金術令嬢|sub:三百年後の新しい人生は引きこもって過ごしたい!
   kana_segmented: ホロビ ノ オウコク ノ レンキンジュツ レイジョウ
 - key: name:らむ屋|name:薬師ヒナタは癒したい～ブラック医術ギルドを追放されたポーション師は商業ギルドで才能を開花させる～@COMIC
-  kana_segmented: クスシ ヒナタ ワ イヤシタイ ブラック イジュツ ギルド オ ツイホウ サレタ ポーションシ ワ ショウギョウ ギルド デ サイノウ
-    オ カイカ サセル アットマーク コミック
+  kana_segmented: クスシ ヒナタ ワ イヤシタイ ブラック イジュツ ギルド オ ツイホウ サレタ ポーションシ ワ ショウギョウ ギルド デ サイノウ オ カイカ サセル アットマーク コミック
 - key: name:らる鳥|name:帝国貴族の剣闘士生活
   kana_segmented: テイコク キゾク ノ ケントウシ セイカツ
 - key: name:らる鳥|name:転生してハイエルフになりましたが、スローライフは120年で飽きました
@@ -14717,8 +14565,7 @@ fills:
 - key: name:らる鳥|name:転生してハイエルフになりましたが、スローライフは120年で飽きました|sub:Highelf with a long life.
   kana_segmented: テンセイ シテ ハイエルフ ニ ナリマシタガ スロー ライフ ワ ヒャクニジュウネン デ アキマシタ
 - key: name:らんぐ|name:毎日死ね死ね言ってくる義妹が、俺が寝ている隙に催眠術で惚れさせようとしてくるんですけど……!
-  kana_segmented: マイニチ シネ シネ イッテ クル ギマイ ガ オレ ガ ネテ イル スキ ニ サイミンジュツ デ ホレサセヨウ ト シテ クルンデス
-    ケド
+  kana_segmented: マイニチ シネ シネ イッテ クル ギマイ ガ オレ ガ ネテ イル スキ ニ サイミンジュツ デ ホレサセヨウ ト シテ クルンデス ケド
 - key: name:りぃん|name:キッチンカー『デリ・ジョイ』
   kana_segmented: キッチン カー デリ ジョイ
 - key: name:りえ太郎1970-|name:ギャグ漫画家の母が初めて中受伴走をしてみたら
@@ -14937,8 +14784,7 @@ fills:
 - key: name:わかちこ|name:勘違い上司なんか好きじゃない!
   kana_segmented: カンチガイ ジョウシ ナンカ スキジャナイ !
 - key: name:わかばpub.|name:聖女、勇者パーティーから解雇されたのでギルドを作ったらアットホームな最強ギルドに育ちました。@COMIC
-  kana_segmented: セイジョ ユウシャ パーティー カラ カイコ サレタ ノデ ギルド オ ツクッタラ アット ホーム ナ サイキョウ ギルド ニ
-    ソダチマシタ アットマーク コミック
+  kana_segmented: セイジョ ユウシャ パーティー カラ カイコ サレタ ノデ ギルド オ ツクッタラ アット ホーム ナ サイキョウ ギルド ニ ソダチマシタ アットマーク コミック
 - key: name:わが|name:チェイス・ユア・ハート
   kana_segmented: チェイス ・ ユア ・ ハート
 - key: name:わが|name:ララバイバイリリー
@@ -15124,8 +14970,7 @@ fills:
 - key: name:アキミツ|name:転生モブの恋愛ハードモード
   kana_segmented: テンセイ モブ ノ レンアイ ハード モード
 - key: name:アキライズン|name:うちの弟子がいつのまにか人類最強になっていて、なんの才能もない師匠の俺が、それを超える宇宙最強に誤認定されている件について
-  kana_segmented: ウチ ノ デシ ガ イツノマニカ ジンルイ サイキョウ ニ ナッテ イテ ナンノ サイノウ モ ナイ シショウ ノ オレ ガ ソレ
-    オ コエル ウチュウ サイキョウ ニ ゴニンテイ サレテ イル ケン ニ ツイテ
+  kana_segmented: ウチ ノ デシ ガ イツノマニカ ジンルイ サイキョウ ニ ナッテ イテ ナンノ サイノウ モ ナイ シショウ ノ オレ ガ ソレ オ コエル ウチュウ サイキョウ ニ ゴニンテイ サレテ イル ケン ニ ツイテ
 - key: name:アクアプラス|name:WHITE ALBUM2
   kana_segmented: ホワイト アルバム ツー
 - key: name:アクアプラス|name:うたわれるもの偽りの仮面電撃コミックアンソロジー
@@ -15612,8 +15457,7 @@ fills:
 - key: name:アルト|name:味方が弱すぎて補助魔法に徹していた宮廷魔法師、追放されて最強を目指す
   kana_segmented: ミカタ ガ ヨワスギテ ホジョ マホウ ニ テッシテ イタ キュウテイ マホウシ ツイホウ サレテ サイキョウ オ メザス
 - key: name:アルト|name:理不尽な理由で追放された王宮魔道師の私ですが、隣国の王子様とご一緒しています!?
-  kana_segmented: リフジン ナ リユウ デ ツイホウ サレタ オウキュウ マドウシ ノ ワタシ デスガ リンゴク ノ オウジサマ ト ゴイッショ
-    シテ イマス
+  kana_segmented: リフジン ナ リユウ デ ツイホウ サレタ オウキュウ マドウシ ノ ワタシ デスガ リンゴク ノ オウジサマ ト ゴイッショ シテ イマス
 - key: name:アルト|name:転生令嬢が国王陛下に溺愛されるたった一つのワケeterna
   kana_segmented: テンセイ レイジョウ ガ コクオウ ヘイカ ニ デキアイ サレル タッタ ヒトツ ノ ワケ エテルナ
 - key: name:アルバ・M.パストレク|name:スペイン貴族と恋の歌姫
@@ -15970,8 +15814,7 @@ fills:
 - key: name:イット|name:口止めのご褒美は男装乙女とイチャエロです!|sub:THE COMIC
   kana_segmented: クチドメ ノ ゴホウビ ワ ダンソウ オトメ ト イチャエロ デス
 - key: name:イツカぬくもり|name:推しの妹に転生してしまったので、最凶の悪女になってお兄様を独占することにいたします
-  kana_segmented: オシ ノ イモウト ニ テンセイ シテ シマッタ ノデ サイキョウ ノ アクジョ ニ ナッテ オニイサマ オ ドクセン スル コト
-    ニ イタシマス
+  kana_segmented: オシ ノ イモウト ニ テンセイ シテ シマッタ ノデ サイキョウ ノ アクジョ ニ ナッテ オニイサマ オ ドクセン スル コト ニ イタシマス
 - key: name:イテカ|name:俺たちがコラボカフェやるってマジですか?
   kana_segmented: オレタチ ガ コラボ カフェ ヤル ッテ マジ デスカ
 - key: name:イト|name:お前の好きは信じない!
@@ -16283,8 +16126,7 @@ fills:
 - key: name:エド・マクギネス|name:スパイダーマン/デッドプール:イッツィ・ビッツィ
   kana_segmented: スパイダーマン デッドプール イッツィ ビッツィ
 - key: name:エナミカツミ|name:おっさんはうぜぇぇぇんだよ!ってギルドから追放したくせに、後から復帰要請を出されても遅い。最高の仲間と出会った俺はこっちで最強を目指す!
-  kana_segmented: オッサン ワ ウゼェェェンダヨ ッテ ギルド カラ ツイホウ シタ クセ ニ アト カラ フッキ ヨウセイ オ ダサレテモ オソイ
-    サイコウ ノ ナカマ ト デアッタ オレ ワ コッチ デ サイキョウ オ メザス
+  kana_segmented: オッサン ワ ウゼェェェンダヨ ッテ ギルド カラ ツイホウ シタ クセ ニ アト カラ フッキ ヨウセイ オ ダサレテモ オソイ サイコウ ノ ナカマ ト デアッタ オレ ワ コッチ デ サイキョウ オ メザス
 - key: name:エナミカツミ|name:異世界食堂
   kana_segmented: イセカイ ショクドウ
 - key: name:エニックス|name:ドラゴンクエストⅦ 4コママンガ劇場
@@ -16706,8 +16548,7 @@ fills:
 - key: name:オクテイヴィア・E・バトラー|name:キンドレッド|sub:グラフィック・ノベル版
   kana_segmented: キンドレッド
 - key: name:オサフネオウジ|name:スライムは最強たる可能性を秘めている～2回目の人生、ちゃんとスライムと向き合います～@COMIC
-  kana_segmented: スライム ワ サイキョウ タル カノウセイ オ ヒメテ イル ニカイメ ノ ジンセイ チャント スライム ト ムキアイマス アットマーク
-    コミック
+  kana_segmented: スライム ワ サイキョウ タル カノウセイ オ ヒメテ イル ニカイメ ノ ジンセイ チャント スライム ト ムキアイマス アットマーク コミック
 - key: name:オザイ|name:義妹に婚約者を奪われた落ちこぼれ令嬢は、天才魔術師に溺愛される
   kana_segmented: イモウト ニ コンヤクシャ オ ウバワレタ オチコボレ レイジョウ ワ テンサイ マジュツシ ニ デキアイ サレル
 - key: name:オザキミカ|name:猫つきベビーシッターズ
@@ -16771,8 +16612,7 @@ fills:
 - key: name:オモテヤ|name:あまのじゃくの初恋
   kana_segmented: アマノジャク ノ ハツコイ
 - key: name:オヤジ草|name:最近入った白魔導士がパーティークラッシャーで、俺の異世界冒険者生活が崩壊の危機な件について
-  kana_segmented: サイキン ハイッタ シロマドウシ ガ パーティー クラッシャー デ オレ ノ イセカイ ボウケンシャ セイカツ ガ ホウカイ ノ
-    キキ ナ ケン ニ ツイテ
+  kana_segmented: サイキン ハイッタ シロマドウシ ガ パーティー クラッシャー デ オレ ノ イセカイ ボウケンシャ セイカツ ガ ホウカイ ノ キキ ナ ケン ニ ツイテ
 - key: name:オリビア・コワペル|name:アベンジャーズ VS X-MEN
   kana_segmented: アベンジャーズ ヴイエス エックス メン
 - key: name:オリビア・コワペル|name:アンキャニィ・アベンジャーズ:レッドシャドウ
@@ -18063,8 +17903,7 @@ fills:
 - key: name:キューライス1985-|name:絶滅寸前の動物ハッチンパモス
   kana_segmented: ゼツメツ スンゼン ノ ドウブツ ハッチンパモス
 - key: name:キヨミ屋|name:幸運の初期値が異常に高かった高校生が、缶詰ガチャで手に入れたスキルを使って現代ダンジョンで最強になる物語
-  kana_segmented: コウウン ノ ショキチ ガ イジョウ ニ タカカッタ コウコウセイ ガ カンズメ ガチャ デ テ ニ イレタ スキル オ ツカッテ
-    ゲンダイ ダンジョン デ サイキョウ ニ ナル モノガタリ
+  kana_segmented: コウウン ノ ショキチ ガ イジョウ ニ タカカッタ コウコウセイ ガ カンズメ ガチャ デ テ ニ イレタ スキル オ ツカッテ ゲンダイ ダンジョン デ サイキョウ ニ ナル モノガタリ
 - key: name:キヨヤス理解|name:番長!神絵師コイツです!
   kana_segmented: バンチョウ カミエシ コイツ デス
 - key: name:キラト瑠香|name:夢から覚めてもそばにいて.
@@ -18520,8 +18359,7 @@ fills:
 - key: name:ケンティ|name:ギルティホール
   kana_segmented: ギルティ ホール
 - key: name:ケンノジ|name:Fランク召喚士、ペット扱いで可愛がっていた召喚獣がバハムートに成長したので冒険を辞めて最強の竜騎士になる
-  kana_segmented: エフランク ショウカンシ ペットアツカイ デ カワイガッテ イタ ショウカンジュウ ガ バハムート ニ セイチョウ シタ ノデ
-    ボウケン オ ヤメテ サイキョウ ノ リュウキシ ニ ナル
+  kana_segmented: エフランク ショウカンシ ペットアツカイ デ カワイガッテ イタ ショウカンジュウ ガ バハムート ニ セイチョウ シタ ノデ ボウケン オ ヤメテ サイキョウ ノ リュウキシ ニ ナル
 - key: name:ケンノジ|name:やり込んだ恋愛ゲームの悪役に転生したので、原作知識でヒロインを攻略します
   kana_segmented: ヤリコンダ レンアイ ゲーム ノ アクヤク ニ テンセイシタノデ 、 ゲンサク チシキ デ ヒロイン オ コウリャクシマス
 - key: name:ケンノジ|name:今夜コインランドリーで逢いましょう
@@ -18531,8 +18369,7 @@ fills:
 - key: name:ケンノジ|name:神域の魔法使い
   kana_segmented: シンイキ ノ マホウツカイ
 - key: name:ケンノジ|name:追放された底辺職「盗賊」はゲーム知識で無双する。一緒に召喚された先生も外れジョブだったけど効率的に成り上がります
-  kana_segmented: ツイホウ サレタ テイヘンショク トウゾク ワ ゲーム チシキ デ ムソウ スル イッショ ニ ショウカン サレタ センセイ モ
-    ハズレ ジョブ ダッタ ケド コウリツテキ ニ ナリアガリマス
+  kana_segmented: ツイホウ サレタ テイヘンショク トウゾク ワ ゲーム チシキ デ ムソウ スル イッショ ニ ショウカン サレタ センセイ モ ハズレ ジョブ ダッタ ケド コウリツテキ ニ ナリアガリマス
 - key: name:ケン・クリムスティーン|name:ハンナ・アーレント、三つの逃亡
   kana_segmented: ハンナ アーレント ミッツ ノ トウボウ
 - key: name:ケン介護支援専門員|name:ヤベー高齢者ばかり担当しているケアマネの日常
@@ -18795,14 +18632,11 @@ fills:
 - key: name:コンドウ十画|name:スケルトンダブル.
   kana_segmented: スケルトン ダブル.
 - key: name:コンプエース編集部|name:コード ギアス反逆のルルーシュ公式コミックアンソロジー queen
-  kana_segmented: コード ギアス ハンギャク ノ ルルーシュ コウシキ コミック アンソロジー queen|コードギアス ハンギャク ノ ルルーシュ
-    コウシキ コミック アンソロジー クイーン
+  kana_segmented: コード ギアス ハンギャク ノ ルルーシュ コウシキ コミック アンソロジー queen|コードギアス ハンギャク ノ ルルーシュ コウシキ コミック アンソロジー クイーン
 - key: name:コンプエース編集部|name:コード ギアス反逆のルルーシュ公式コミックアンソロジーqueen
-  kana_segmented: コード ギアス ハンギャク ノ ルルーシュ コウシキ コミック アンソロジー queen|コード ギアス ハンギャク ノ ルルーシュ
-    コウシキ コミック アンソロジー クイーン
+  kana_segmented: コード ギアス ハンギャク ノ ルルーシュ コウシキ コミック アンソロジー queen|コード ギアス ハンギャク ノ ルルーシュ コウシキ コミック アンソロジー クイーン
 - key: name:コンプエース編集部|name:コードギアス 反逆のルルーシュ公式コミックアンソロジー queen
-  kana_segmented: コード ギアス ハンギャク ノ ルルーシュ コウシキ コミック アンソロジー queen|コードギアス ハンギャク ノ ルルーシュ
-    コウシキ コミック アンソロジー クイーン
+  kana_segmented: コード ギアス ハンギャク ノ ルルーシュ コウシキ コミック アンソロジー queen|コードギアス ハンギャク ノ ルルーシュ コウシキ コミック アンソロジー クイーン
 - key: name:コンプティーク|name:SHUFFLE!コミックアラカルト
   kana_segmented: Shuffle コミック アラカルト
   src: ndl
@@ -19023,8 +18857,7 @@ fills:
 - key: name:サム・ハンフリーズ|name:ガーディアンズ:チームアップ
   kana_segmented: ガーディアンズ チームアップ
 - key: name:サヤマカヤ|name:厳つい顔で凶悪騎士団長と恐れられる公爵様の最後の婚活相手は社交界の幻の花でした
-  kana_segmented: イカツイ カオ デ キョウアク キシダンチョウ ト オソレラレル コウシャクサマ ノ サイゴ ノ コンカツ アイテ ワ シャコウカイ
-    ノ マボロシ ノ ハナ デシタ
+  kana_segmented: イカツイ カオ デ キョウアク キシダンチョウ ト オソレラレル コウシャクサマ ノ サイゴ ノ コンカツ アイテ ワ シャコウカイ ノ マボロシ ノ ハナ デシタ
 - key: name:サラ|name:誰も知らんがな
   kana_segmented: ダレモ シランガナ
 - key: name:サラ|name:誰も知らんがな.
@@ -19450,8 +19283,7 @@ fills:
 - key: name:シソ|name:竜と歩む成り上がり冒険者道|sub:用済みとしてSランクパーティから追放された回復魔術師、捨てられた先で最強の神竜を復活させてしまう
   kana_segmented: リュウ ト アユム ナリアガリ ボウケンシャドウ
 - key: name:シソ|name:転校先の清楚可憐な美少女が、昔男子と思って一緒に遊んだ幼馴染だった件
-  kana_segmented: テンコウサキ ノ セイソ カレン ナ ビショウジョ ガ ムカシ ダンシ ト オモッテ イッショ ニ アソンダ オサナナジミ ダッタ
-    ケン
+  kana_segmented: テンコウサキ ノ セイソ カレン ナ ビショウジョ ガ ムカシ ダンシ ト オモッテ イッショ ニ アソンダ オサナナジミ ダッタ ケン
 - key: name:シチサブロー|name:夢後のグレイ
   kana_segmented: ボウゴ ノ グレイ
 - key: name:シトラス|name:若返った!おじさん魔術師は現世で二度目の人生を始める
@@ -19725,8 +19557,7 @@ fills:
 - key: name:ショウイチ|name:京都府警あやかし課の事件簿
   kana_segmented: キョウトフケイ アヤカシカ ノ ジケンボ
 - key: name:ショウマケイト|name:友達が私を理解らせにくるので勝利の女神の力を借りてこっちも理解らせにいきます。
-  kana_segmented: メスガキ ガ ワタクシ オ ワカラセ ニ クルノデ メスガキ ノ チカラ オ カリテ コッチ モ ワカラセ ニ イキマス 。|友達
-    (メスガキ) が私を理解 (わか) らせにくるので勝利の女神 (メスガキ) の力を借りてこっちも理解 (わか) らせにいきます。
+  kana_segmented: メスガキ ガ ワタクシ オ ワカラセ ニ クルノデ メスガキ ノ チカラ オ カリテ コッチ モ ワカラセ ニ イキマス 。|友達 (メスガキ) が私を理解 (わか) らせにくるので勝利の女神 (メスガキ) の力を借りてこっちも理解 (わか) らせにいきます。
 - key: name:ショウリ|name:魔導学園の劣等竜騎士
   kana_segmented: マドウ ガクエン ノ レットウ リュウ キシ
 - key: name:ショーキ名古屋|name:黄昏町プリズナーズ
@@ -19802,13 +19633,11 @@ fills:
 - key: name:シロタクロタ|name:夜這ワレ村|sub:ワケアリ合宿所
   kana_segmented: ヨバワレ ムラ
 - key: name:シロヒ|name:「来世で結婚してくれますか」と誓った部下が、現世では年上の騎士団長様になっていて、本当に結婚を迫られている件
-  kana_segmented: ライセ デ ケッコン シテ クレマスカ ト チカッタ ブカ ガ ゲンセ デワ トシウエ ノ キシダンチョウサマ ニ ナッテ イテ
-    ホントウ ニ ケッコン オ セマラレテ イル ケン
+  kana_segmented: ライセ デ ケッコン シテ クレマスカ ト チカッタ ブカ ガ ゲンセ デワ トシウエ ノ キシダンチョウサマ ニ ナッテ イテ ホントウ ニ ケッコン オ セマラレテ イル ケン
 - key: name:シロヒ|name:ゴリラの神から加護された令嬢は王立騎士団で可愛がられる
   kana_segmented: ゴリラ ノ カミ カラ カゴ サレタ レイジョウ ワ オウリツ キシダン デ カワイガラレル
 - key: name:シンキロウpub.|name:転生先は殺されるはずのモブ令嬢でした～見知らぬ公爵様との婚約は想定外です～@COMIC
-  kana_segmented: テンセイサキ ワ コロサレル ハズ ノ モブ レイジョウ デシタ ミシラヌ コウシャクサマ トノ コンヤク ワ ソウテイガイ デス
-    アットマーク コミック
+  kana_segmented: テンセイサキ ワ コロサレル ハズ ノ モブ レイジョウ デシタ ミシラヌ コウシャクサマ トノ コンヤク ワ ソウテイガイ デス アットマーク コミック
 - key: name:シンギョウガク|name:スキル〈再生〉と〈破壊〉から始まる最強冒険者ライフ
   kana_segmented: スキル サイセイ ト ハカイ カラ ハジマル サイキョウ ボウケンシャ ライフ
 - key: name:シンギョウガク|name:ネタキャラ仮プレイのつもりが異世界召喚
@@ -20712,8 +20541,7 @@ fills:
 - key: name:スカーレット・ベリ子|name:保坂さんと三好くん
   kana_segmented: ホサカサン ト ミヨシクン
 - key: name:スカーレッドG|name:ルイ16世に転生してしまった俺はフランス革命を全力で阻止してアントワネットと末永くお幸せに暮らしたい
-  kana_segmented: ルイ ジュウロクセイ ニ テンセイ シテ シマッタ オレ ワ フランス カクメイ オ ゼンリョク デ ソシ シテ アントワネット
-    ト スエナガク オシアワセ ニ クラシタイ
+  kana_segmented: ルイ ジュウロクセイ ニ テンセイ シテ シマッタ オレ ワ フランス カクメイ オ ゼンリョク デ ソシ シテ アントワネット ト スエナガク オシアワセ ニ クラシタイ
 - key: name:スガヒデオ|name:ヒトツマミ
   kana_segmented: ヒトツマミ
 - key: name:スガラジカル|name:魔王軍はホワイト企業
@@ -21199,8 +21027,7 @@ fills:
 - key: name:ゼロキ|name:針子の乙女
   kana_segmented: ハリコ ノ オトメ
 - key: name:ゼロハチネット|name:とんでもスキル〈風が吹けば桶屋が儲かる〉のおかげで俺の異世界ライフはままならない〈良い意味で〉
-  kana_segmented: トンデモ スキル カゼ ガ フケバ オケヤ ガ モウカル ノ オカゲ デ オレ ノ イセカイ ライフ ワ ママナラナイ ヨイ イミ
-    デ
+  kana_segmented: トンデモ スキル カゼ ガ フケバ オケヤ ガ モウカル ノ オカゲ デ オレ ノ イセカイ ライフ ワ ママナラナイ ヨイ イミ デ
 - key: name:ゼロハチネット|name:勇者パーティーをクビになった忍者、忍ばずに生きます
   kana_segmented: ユウシャ パーティー オ クビ ニ ナッタ ニンジャ シノバズニ イキマス
 - key: name:ソウイチロウ|name:サラダ・ヴァイキング
@@ -21268,8 +21095,7 @@ fills:
 - key: name:タイジュン|name:阿武ノーマル
   kana_segmented: アブノーマル
 - key: name:タイフーンの目|name:魔法女学園の売店ではたらく俺は、異世界から召喚された『ハーレム先生』です。
-  kana_segmented: マホウ ジョガクエン ノ バイテン デ ハタラク オレ ワ 、 イセカイ カラ ショウカンサレタ 『 ハーレム センセイ 』 デス
-    。
+  kana_segmented: マホウ ジョガクエン ノ バイテン デ ハタラク オレ ワ 、 イセカイ カラ ショウカンサレタ 『 ハーレム センセイ 』 デス 。
 - key: name:タカキリヱ|name:嫁ぎ先が全員めんどくさい
   kana_segmented: トツギサキ ガ ゼンイン メンドクサイ
 - key: name:タカナシ|name:御曹司に誓いのケーキを
@@ -21527,8 +21353,7 @@ fills:
 - key: name:ダイエクスト|name:この宮廷付与術師、規格外につき|sub:人類唯一のスキル「言霊使い」で、俺は世界に命令する
   kana_segmented: コノ キュウテイ フヨジュツシ キカクガイ ニ ツキ
 - key: name:ダイチ|name:追放された転生王子、『自動製作』スキルで領地を爆速で開拓し最強の村を作ってしまう
-  kana_segmented: ツイホウ サレタ テンセイ オウジ オート クラフト スキル デ リョウチ オ バクソク デ カイタク シ サイキョウ ノ ムラ
-    オ ツクッテ シマウ
+  kana_segmented: ツイホウ サレタ テンセイ オウジ オート クラフト スキル デ リョウチ オ バクソク デ カイタク シ サイキョウ ノ ムラ オ ツクッテ シマウ
 - key: name:ダイナミックプロ|name:あにまるケダマン
   kana_segmented: アニマル ケダマン
   src: ndl
@@ -21696,8 +21521,7 @@ fills:
 - key: name:チノハルカ|name:どこよりも遠い場所にいる君へ
   kana_segmented: ドコ ヨリ モ トオイ バショ ニ イル キミ エ
 - key: name:チハル|name:ゼロの魔術師～Sランク勇者パーティを全力でサポートしていたのに追放された最強の魔術師はパーティ恐怖症になったので全力でお一人様無双を始める事にしました～@COMIC
-  kana_segmented: ゼロ ノ マジュツシ エスランク ユウシャ パーティ オ ゼンリョク デ サポート シテ イタ ノニ ツイホウ サレタ サイキョウ
-    ノ マジュツシ ワ パーティ キョウフショウ ニ ナッタ ノデ ゼンリョク デ オヒトリサマ ムソウ オ ハジメル コト ニ シマシタ アットマーク コミック
+  kana_segmented: ゼロ ノ マジュツシ エスランク ユウシャ パーティ オ ゼンリョク デ サポート シテ イタ ノニ ツイホウ サレタ サイキョウ ノ マジュツシ ワ パーティ キョウフショウ ニ ナッタ ノデ ゼンリョク デ オヒトリサマ ムソウ オ ハジメル コト ニ シマシタ アットマーク コミック
 - key: name:チャトラン|name:恋をした優等生の悪魔的な変貌について
   kana_segmented: コイ オ シタ ユウトウセイ ノ アクマテキ ナ ヘンボウ ニ ツイテ
 - key: name:チャド・ハーディン|name:ハーレイ・クイン パワー・アウテイジ
@@ -21811,8 +21635,7 @@ fills:
 - key: name:チワワ丸|name:ただの屍のようだと言われて幾星霜、気づいたら最強のアンデッドになってた
   kana_segmented: タダ ノ シカバネ ノ ヨウダ ト イワレテ イクセイソウ キズイタラ サイキョウ ノ アンデッド ニ ナッテタ
 - key: name:チワワ丸|name:世界最高の精霊術師～姉たちに虐げられ追放されてしまった私が、実は天才精霊術師だと気づいてももう遅い。私はもふもふと幸せに生きていきます～@COMIC
-  kana_segmented: セカイ サイコウ ノ セイレイジュツシ アネタチ ニ シイタゲラレ ツイホウ サレテ シマッタ ワタクシ ガ ジツ ワ テンサイ
-    セイレイジュツシ ダト キズイテモ モウ オソイ ワタクシ ワ モフモフ ト シアワセ ニ イキテ イキマス アットマーク コミック
+  kana_segmented: セカイ サイコウ ノ セイレイジュツシ アネタチ ニ シイタゲラレ ツイホウ サレテ シマッタ ワタクシ ガ ジツ ワ テンサイ セイレイジュツシ ダト キズイテモ モウ オソイ ワタクシ ワ モフモフ ト シアワセ ニ イキテ イキマス アットマーク コミック
 - key: name:チワワ丸|name:生贄になった俺が、なぜか邪神を滅ぼしてしまった件
   kana_segmented: イケニエ ニ ナッタ オレ ガ ナゼカ ジャシン オ ホロボシテ シマッタ ケン
 - key: name:チワワ丸|name:生贄になった俺が、なぜか邪神を滅ぼしてしまった件.
@@ -22270,8 +22093,7 @@ fills:
 - key: name:トム・ブラウンみちお|name:巨大生物ばかりの異世界をパルクールと足場スキルで無双する。
   kana_segmented: キョダイ セイブツ バカリ ノ イセカイ オ パルクール ト アシバ スキル デ ムソウ スル
 - key: name:トモエキコ|name:全年齢向け乙女ゲームの世界に転生した悪役令嬢は図らずも溺愛エロルートを解放する
-  kana_segmented: ゼンネンレイムケ オトメ ゲーム ノ セカイ ニ テンセイ シタ アクヤク レイジョウ ワ ハカラズモ デキアイ エロ ルート
-    オ カイホウ スル
+  kana_segmented: ゼンネンレイムケ オトメ ゲーム ノ セカイ ニ テンセイ シタ アクヤク レイジョウ ワ ハカラズモ デキアイ エロ ルート オ カイホウ スル
 - key: name:トモセシュンサク|name:ようこそ実力至上主義の教室へ2年生編
   kana_segmented: ヨウコソ ジツリョク シジョウ シュギ ノ キョウシツ エ ニネンセイヘン
 - key: name:トモゼロ|name:国に最強のバリアを張ったら平和になりすぎて追放されました。|sub:俺の魔法がヤバすぎて、美女と魔族に囲まれてるんだが!?
@@ -22705,8 +22527,7 @@ fills:
 - key: name:ニシカワエイト|name:魔剣技師バッカス|sub:神剣を目指す転生者は、喰って呑んで造って過ごす
   kana_segmented: マケン ギシ バッカス
 - key: name:ニシキギカエデ|name:ゲーム世界転生〈ダン活〉～ゲーマーは〈ダンジョン就活のススメ〉を〈はじめから〉プレイする～@COMIC
-  kana_segmented: ゲーム セカイ テンセイ ダンカツ ゲーマー ワ ダンジョン シュウカツ ノ ススメ オ ハジメ カラ プレイ スル アットマーク
-    コミック
+  kana_segmented: ゲーム セカイ テンセイ ダンカツ ゲーマー ワ ダンジョン シュウカツ ノ ススメ オ ハジメ カラ プレイ スル アットマーク コミック
 - key: name:ニシハラハコ|name:ニシハラさんのわかりにくい恋
   kana_segmented: ニシハラ サン ノ ワカリニクイ コイ
 - key: name:ニシヤ康隆|name:ヒーローハラスメント
@@ -22984,8 +22805,7 @@ fills:
 - key: name:ハル吉|name:ニートメタル
   kana_segmented: ニートメタル
 - key: name:ハル犬|name:「雑魚には鍛冶がお似合いだwww」と言われた鍛冶レベル9999の俺、追放されたので冒険者に転職する|sub:最強武器で無双しながらギルドで楽しく暮らします
-  kana_segmented: ザコ ニワ カジ ガ オニアイダ ト イワレタ カジ レベル キュウセンキュウヒャクキュウジュウキュウ ノ オレ ツイホウ サレタ
-    ノデ ボウケンシャ ニ テンショク スル
+  kana_segmented: ザコ ニワ カジ ガ オニアイダ ト イワレタ カジ レベル キュウセンキュウヒャクキュウジュウキュウ ノ オレ ツイホウ サレタ ノデ ボウケンシャ ニ テンショク スル
 - key: name:ハル犬|name:召喚された賢者は異世界を往く|sub:最強なのは不要在庫のアイテムでした
   kana_segmented: ショウカン サレタ ケンジャ ワ イセカイ オ ユク
 - key: name:ハル犬|name:左遷された無能王子は実力を隠したい|sub:二度転生した最強賢者、今世では楽したいので手を抜いてたら、王家を追放された。今更帰ってこいと言われても遅い、領民に実力がバレて、実家に帰してくれないから……
@@ -23059,8 +22879,7 @@ fills:
   kana_segmented: バクツリ ハンターズ
 - key: name:バンダイ|name:爆釣バーハンター
   kana_segmented: バクツリ バーハンター
-- key: name:バンダイナムコエンターテインメント|name:The idolm@ster Cinderella girls U149|sub:special
-    edition
+- key: name:バンダイナムコエンターテインメント|name:The idolm@ster Cinderella girls U149|sub:special edition
   kana_segmented: The アイドル マスター シンデレラ ガールズ ユー 149
 - key: name:バンダイナムコエンターテインメント|name:ぷちます!
   kana_segmented: プチマス
@@ -23159,8 +22978,7 @@ fills:
 - key: name:バンビーナ|name:リラと花虻、嵐の中。
   kana_segmented: リラ ト ハナアブ アラシ ノ ナカ
 - key: name:バンプレスト|name:無限のフロンティアスーパーロボット大戦OGサーガ
-  kana_segmented: ムゲン ノ フロンティア スーパー ロボット タイセン OG サーガ|ムゲン ノ フロンティア スーパー ロボット タイセン オージー
-    サーガ
+  kana_segmented: ムゲン ノ フロンティア スーパー ロボット タイセン OG サーガ|ムゲン ノ フロンティア スーパー ロボット タイセン オージー サーガ
 - key: name:バーバラ・ウォレス|name:冷たいボスの熱いキス
   kana_segmented: ツメタイ ボス ノ アツイ キス
 - key: name:バーバラ・カートランド|name:とらわれの愛
@@ -24366,8 +24184,7 @@ fills:
 - key: name:ペプシ|name:骸VSヒバリ
   kana_segmented: ムクロ vs ヒバリ
 - key: name:ペペロン|name:悪役令嬢みたいに断罪されそうだったけど、全力で愛されてます!不幸な運命に「ざまぁ」しますわ!|sub:アンソロジーコミック
-  kana_segmented: アクヤク レイジョウ ミタイ ニ ダンザイ サレソウ ダッタ ケド ゼンリョク デ アイサレテマス フコウ ナ ウンメイ ニ ザマァ
-    シマスワ
+  kana_segmented: アクヤク レイジョウ ミタイ ニ ダンザイ サレソウ ダッタ ケド ゼンリョク デ アイサレテマス フコウ ナ ウンメイ ニ ザマァ シマスワ
 - key: name:ペペロン|name:悪食令嬢と狂血公爵|sub:その魔物、私が美味しくいただきます!
   kana_segmented: アクジキ レイジョウ ト キョウケツ コウシャク
 - key: name:ペペロン|name:旋風のルスト|sub:逆境少女の傭兵ライフと、無頼英傑たちの西方国境戦記
@@ -24907,8 +24724,7 @@ fills:
 - key: name:ボウツハルミ|name:アザレア新四谷怪談
   kana_segmented: アザレア シン ヨツヤ カイダン
 - key: name:ボダックス|name:10年間身体を乗っ取られ悪女になっていた私に、二度と顔を見せるなと婚約破棄してきた騎士様が今日も縋ってくる
-  kana_segmented: ジュウネンカン カラダ オ ノットラレ アクジョ ニ ナッテ イタ ワタシ ニ ニド ト カオ オ ミセルナ ト コンヤク ハキ
-    シテ キタ キシサマ ガ キョウ モ スガッテ クル
+  kana_segmented: ジュウネンカン カラダ オ ノットラレ アクジョ ニ ナッテ イタ ワタシ ニ ニド ト カオ オ ミセルナ ト コンヤク ハキ シテ キタ キシサマ ガ キョウ モ スガッテ クル
 - key: name:ボダックス|name:結界師の一輪華
   kana_segmented: ケッカイシ ノ イチリンカ
 - key: name:ボダックス|name:結界師の一輪華.
@@ -24939,8 +24755,7 @@ fills:
   kana_segmented: トリアエズ オン エア
   src: ndl
 - key: name:ボーダー|name:10年間身体(からだ)を乗っ取られ悪女になっていた私に、二度と顔を見せるなと婚約破棄してきた騎士様が今日も縋ってくる
-  kana_segmented: ジュウネンカン カラダ オ ノットラレ アクジョ ニ ナッテ イタ ワタシ ニ ニド ト カオ オ ミセルナ ト コンヤク ハキ
-    シテ キタ キシサマ ガ キョウ モ スガッテ クル
+  kana_segmented: ジュウネンカン カラダ オ ノットラレ アクジョ ニ ナッテ イタ ワタシ ニ ニド ト カオ オ ミセルナ ト コンヤク ハキ シテ キタ キシサマ ガ キョウ モ スガッテ クル
 - key: name:ボーダー|name:あやかし極道「鬼灯組」に嫁入りします
   kana_segmented: アヤカシ ゴクドウ ホオズキグミ ニ ヨメイリ シマス
 - key: name:ボーダー|name:迦国あやかし後宮譚
@@ -25788,8 +25603,7 @@ fills:
 - key: name:ミポリオン|name:無自覚最硬タンクのおかしな牧場
   kana_segmented: ムジカク サイコウ タンク ノ オカシナ ボクジョウ
 - key: name:ミポリオン|name:誰一人帰らない『奈落』に落とされたおっさん、うっかり暗号を解読したら、未知の遺物の使い手になりました!
-  kana_segmented: ダレヒトリ カエラナイ ナラク ニ オトサレタ オッサン ウッカリ アンゴウ オ カイドク シタラ オーパーツ ノ ツカイテ ニ
-    ナリマシタ
+  kana_segmented: ダレヒトリ カエラナイ ナラク ニ オトサレタ オッサン ウッカリ アンゴウ オ カイドク シタラ オーパーツ ノ ツカイテ ニ ナリマシタ
 - key: name:ミマ|name:お兄ちゃんから逃げられない!
   kana_segmented: オニイチャン カラ ニゲラレナイ
 - key: name:ミマ|name:かわいいちくびにひとめ惚れ
@@ -26090,8 +25904,7 @@ fills:
 - key: name:メソポたみあ|name:ようこそ『追放者ギルド』へ
   kana_segmented: ヨウコソ ツイホウシャ ギルド エ
 - key: name:メソポたみあ|name:怠惰な悪役貴族の俺に、婚約破棄された悪役令嬢が嫁いだら最凶の夫婦になりました@COMIC
-  kana_segmented: タイダ ナ アクヤク キゾク ノ オレ ニ コンヤク ハキ サレタ アクヤク レイジョウ ガ トツイダラ サイキョウ ノ フウフ
-    ニ ナリマシタ アットマーク コミック
+  kana_segmented: タイダ ナ アクヤク キゾク ノ オレ ニ コンヤク ハキ サレタ アクヤク レイジョウ ガ トツイダラ サイキョウ ノ フウフ ニ ナリマシタ アットマーク コミック
 - key: name:メッツィ・ヒングル|name:シングルマザー作戦
   kana_segmented: シングル マザー サクセン
 - key: name:メッツィ・ヒングル|name:ニューオーリンズに降る雪
@@ -26472,11 +26285,9 @@ fills:
 - key: name:ユウキ|name:美人な妹と、私
   kana_segmented: ビジン ナ イモウト ト ワタクシ
 - key: name:ユウキチ.|name:異世界召喚されたけど、俺はいらないらしいので、美少女ちゃんたち引き連れて、異世界と日本で楽しく過ごします。
-  kana_segmented: イセカイ ショウカンサレタ ケド 、 オレ ハ イラナイ ラシイノデ 、 ビショウジョチャン タチ ヒキツレテ 、 イセカイ ト
-    ニホン デ タノシク スゴシマス 。
+  kana_segmented: イセカイ ショウカンサレタ ケド 、 オレ ハ イラナイ ラシイノデ 、 ビショウジョチャン タチ ヒキツレテ 、 イセカイ ト ニホン デ タノシク スゴシマス 。
 - key: name:ユウキチ|name:異世界召喚されたけど、俺はいらないらしいので、美少女ちゃんたち引き連れて、異世界と日本で楽しく過ごします。
-  kana_segmented: イセカイ ショウカンサレタ ケド 、 オレ ハ イラナイ ラシイノデ 、 ビショウジョチャン タチ ヒキツレテ 、 イセカイ ト
-    ニホン デ タノシク スゴシマス 。
+  kana_segmented: イセカイ ショウカンサレタ ケド 、 オレ ハ イラナイ ラシイノデ 、 ビショウジョチャン タチ ヒキツレテ 、 イセカイ ト ニホン デ タノシク スゴシマス 。
 - key: name:ユウキレイ|name:まほろば小町ハルヒノさん
   kana_segmented: マホロバ コマチ ハルヒノサン
 - key: name:ユウキレイ|name:酒と煙草の日雇いダンジョン
@@ -26578,8 +26389,7 @@ fills:
 - key: name:ヨシミズ|name:妹はシスコン兄がめんどくさい
   kana_segmented: イモウト ワ シスコン アニ ガ メンドクサイ
 - key: name:ヨシモト|name:森で聖女を拾った最強の吸血姫～娘のためなら国でもあっさり滅ぼします!～@COMIC.
-  kana_segmented: モリ デ セイジョ オ ヒロッタ サイキョウ ノ キュウケツキ ムスメ ノ タメ ナラ クニ デモ アッサリ ホロボシマス アットマーク
-    コミック.
+  kana_segmented: モリ デ セイジョ オ ヒロッタ サイキョウ ノ キュウケツキ ムスメ ノ タメ ナラ クニ デモ アッサリ ホロボシマス アットマーク コミック.
 - key: name:ヨシモト|name:魔帝教師と従属少女の背徳契約
   kana_segmented: マテイ キョウシ ト ジュウゾク ショウジョ ノ ハイトク ケイヤク
 - key: name:ヨシモフ郎|name:ドベとノラ
@@ -27574,8 +27384,7 @@ fills:
 - key: name:レベルファイブ|name:映画妖怪ウォッチ空飛ぶクジラとダブル世界の大冒険だニャン!
   kana_segmented: エイガ ヨウカイ ウォッチ ソラトブ クジラ ト ダブル セカイ ノ ダイボウケン ダ ニャン
 - key: name:レルクス|name:王都ワンオペゴーレムマスター。まさかの追放!?～自由の身になったので弟子の美人勇者たちと一緒に最強ゴーレム作ります。戻ってこいと言われてももう知らん!～@COMIC
-  kana_segmented: オウト ワンオペ ゴーレム マスター マサカ ノ ツイホウ ジユウ ノ ミ ニ ナッタ ノデ デシ ノ ビジン ユウシャタチ ト
-    イッショ ニ サイキョウ ゴーレム ツクリマス モドッテ コイ ト イワレテモ モウ シラン アットマーク コミック
+  kana_segmented: オウト ワンオペ ゴーレム マスター マサカ ノ ツイホウ ジユウ ノ ミ ニ ナッタ ノデ デシ ノ ビジン ユウシャタチ ト イッショ ニ サイキョウ ゴーレム ツクリマス モドッテ コイ ト イワレテモ モウ シラン アットマーク コミック
 - key: name:レルシー|name:魔法?そんなことより筋肉だ!
   kana_segmented: マホウ ソンナ コト ヨリ キンニク ダ
 - key: name:レンキしゅん|name:与えられたスキルを使って稼いで異世界美女達とイチャイチャしたい
@@ -27587,8 +27396,7 @@ fills:
 - key: name:レン・ウェイン|name:DC UNIVERSE LEGACIES
   kana_segmented: ディーシー ユニバース レガシーズ
 - key: name:ロウ|name:中年魔術師の悠々自適なダンジョン攻略～スキルオーブを使ったら最強スキルを手に入れたので、好きに生きようと思います～@COMIC
-  kana_segmented: チュウネン マジュツシ ノ ユウユウ ジテキ ナ ダンジョン コウリャク スキル オーブ オ ツカッタラ サイキョウ スキル オ
-    テ ニ イレタ ノデ スキ ニ イキヨウ ト オモイマス アットマーク コミック
+  kana_segmented: チュウネン マジュツシ ノ ユウユウ ジテキ ナ ダンジョン コウリャク スキル オーブ オ ツカッタラ サイキョウ スキル オ テ ニ イレタ ノデ スキ ニ イキヨウ ト オモイマス アットマーク コミック
 - key: name:ロクサナ・セントクレア|name:君がくれたメッセージ
   kana_segmented: キミ ガ クレタ メッセージ
 - key: name:ロクサナ・セントクレア|name:消えない情熱
@@ -27923,8 +27731,7 @@ fills:
 - key: name:一ノ関りん子|name:快感♥ブラザーズ
   kana_segmented: カイカン ブラザーズ
 - key: name:一ノ関りん子|name:硬派だと思ったら執着重めな彼に心も身体も暴かれて24時間とろとろに甘やかされてます
-  kana_segmented: コウハ ダト オモッタラ シュウチャク オモメ ナ カレ ニ ココロ モ シンタイ モ アバカレテ ニジュウヨジカン トロトロ
-    ニ アマヤカサレテマス
+  kana_segmented: コウハ ダト オモッタラ シュウチャク オモメ ナ カレ ニ ココロ モ シンタイ モ アバカレテ ニジュウヨジカン トロトロ ニ アマヤカサレテマス
 - key: name:一メルカ|name:#推しが幸せならOKです
   kana_segmented: オシ ガ シアワセ ナラ オーケー デス
 - key: name:一メルカ|name:時計台の大聖女は婚約破棄に歓喜する
@@ -28151,8 +27958,7 @@ fills:
 - key: name:七星紗英|name:冷徹社長の執愛プロポーズ|sub:花嫁契約は終わったはずですが!?
   kana_segmented: レイテツ シャチョウ ノ シュウアイ プロポーズ
 - key: name:七星郁斗|name:バッドエンド目前のヒロインに転生した私、今世では恋愛するつもりがチートな兄が離してくれません!?@COMIC
-  kana_segmented: バッド エンド モクゼン ノ ヒロイン ニ テンセイ シタ ワタシ コンセ デワ レンアイ スル ツモリ ガ チート ナ アニ
-    ガ ハナシテ クレマセン アットマーク コミック
+  kana_segmented: バッド エンド モクゼン ノ ヒロイン ニ テンセイ シタ ワタシ コンセ デワ レンアイ スル ツモリ ガ チート ナ アニ ガ ハナシテ クレマセン アットマーク コミック
 - key: name:七月ふう|name:元暗殺者、転生して貴族の令嬢になりました。
   kana_segmented: モトアンサツシャ テンセイ シテ キゾク ノ レイジョウ ニ ナリマシタ
 - key: name:七月べにこ|name:にせものラバーズフラット
@@ -28226,8 +28032,7 @@ fills:
 - key: name:七瀬八|name:凛子ちゃんとひもすがら
   kana_segmented: リンコチャン ト ヒモスガラ
 - key: name:七瀬紅|name:悪役令嬢みたいに断罪されそうだったけど、全力で愛されてます!不幸な運命に「ざまぁ」しますわ!
-  kana_segmented: アクヤク レイジョウ ミタイ ニ ダンザイ サレソウ ダッタ ケド ゼンリョク デ アイサレテマス フコウ ナ ウンメイ ニ ザマァ
-    シマスワ
+  kana_segmented: アクヤク レイジョウ ミタイ ニ ダンザイ サレソウ ダッタ ケド ゼンリョク デ アイサレテマス フコウ ナ ウンメイ ニ ザマァ シマスワ
 - key: name:七瀬藍|name:婚約破棄された魔法薬師は炎の騎士に溺愛される
   kana_segmented: コンヤク ハキ サレタ マホウ クスシ ワ ホノオ ノ キシ ニ デキアイ サレル
 - key: name:七瀬藍|name:蛇神様の花嫁はやさしい家族が欲しい
@@ -28353,8 +28158,7 @@ fills:
 - key: name:万野みずき|name:【さびついた剣】を試しに強化してみたら、とんでもない魔剣に化けました
   kana_segmented: 【 サビツイタ ケン 】 オ タメシ ニ キョウカシテミタラ 、 トンデモナイ マケン ニ バケマシタ
 - key: name:万野みずき|name:はじまりの町の育て屋さん追放された万能育成師はポンコツ冒険者を覚醒させて最強スローライフを目指します
-  kana_segmented: ハジマリ ノ マチ ノ ソダテヤサン ツイホウ サレタ バンノウ イクセイシ ワ ポンコツ ボウケンシャ オ カクセイ サセテ
-    サイキョウ スロー ライフ オ メザシマス
+  kana_segmented: ハジマリ ノ マチ ノ ソダテヤサン ツイホウ サレタ バンノウ イクセイシ ワ ポンコツ ボウケンシャ オ カクセイ サセテ サイキョウ スロー ライフ オ メザシマス
 - key: name:丈|name:宇崎ちゃんは遊びたい!If|sub:宇崎家コミックアンソロジー
   kana_segmented: ウザキ チャン ワ アソビタイ イフ
 - key: name:丈月城|name:スローライフ家康
@@ -28624,8 +28428,7 @@ fills:
 - key: name:三月リヒト|name:お試しで喚ばれた聖女なのに最強竜に気に入られてしまいました。.
   kana_segmented: オタメシ デ ヨバレタ セイジョ ナノニ サイキョウリュウ ニ キ ニ イラレテ シマイマシタ.
 - key: name:三月叶姫|name:昨日まで名前も呼んでくれなかった公爵様が、急に溺愛してくるのですが?@COMIC
-  kana_segmented: キノウ マデ ナマエ モ ヨンデ クレナカッタ コウシャクサマ ガ キュウ ニ デキアイ シテ クル ノ デスガ アットマーク
-    コミック
+  kana_segmented: キノウ マデ ナマエ モ ヨンデ クレナカッタ コウシャクサマ ガ キュウ ニ デキアイ シテ クル ノ デスガ アットマーク コミック
 - key: name:三月未来|name:キング・オブ・アルファ
   kana_segmented: キング オブ アルファ
 - key: name:三月未来|name:ダメご主人はオオカミくんがぺろり
@@ -28715,8 +28518,7 @@ fills:
 - key: name:三沢ケイ|name:この婚約は偽装です!|sub:名家の令嬢は敏腕社長に迫られる
   kana_segmented: コノ コンヤク ワ ギソウ デス
 - key: name:三沢ケイ|name:ループ5回目。今度こそ死にたくないので婚約破棄を持ちかけたはずが、前世で私を殺した陛下が溺愛してくるのですが
-  kana_segmented: ループ ゴカイメ コンド コソ シニタクナイ ノデ コンヤク ハキ オ モチカケタ ハズ ガ ゼンセ デ ワタクシ オ コロシタ
-    ヘイカ ガ デキアイ シテ クル ノ デスガ
+  kana_segmented: ループ ゴカイメ コンド コソ シニタクナイ ノデ コンヤク ハキ オ モチカケタ ハズ ガ ゼンセ デ ワタクシ オ コロシタ ヘイカ ガ デキアイ シテ クル ノ デスガ
 - key: name:三沢ケイ|name:今宵、狼神様と契約夫婦になりまして
   kana_segmented: コヨイ オオカミサマ ト ケイヤク フウフ ニ ナリマシテ
 - key: name:三沢ケイ|name:俺様王太子に拾われた崖っぷち令嬢、お飾り側妃になる…はずが溺愛されてます!?
@@ -28726,8 +28528,7 @@ fills:
 - key: name:三沢ケイ|name:竜王陛下のもふもふお世話係
   kana_segmented: リュウオウ ヘイカ ノ モフモフ オセワガカリ
 - key: name:三沢ケイ|name:虐げられ王女に転生しましたが、竜神の加護を持つ最強騎士様に愛されて幸せです
-  kana_segmented: シイタゲラレ オウジョ ニ テンセイ シマシタガ リュウジン ノ カゴ オ モツ サイキョウ キシサマ ニ アイサレテ シアワセ
-    デス
+  kana_segmented: シイタゲラレ オウジョ ニ テンセイ シマシタガ リュウジン ノ カゴ オ モツ サイキョウ キシサマ ニ アイサレテ シアワセ デス
 - key: name:三河ごーすと|name:卒業アルバムの彼女たち
   kana_segmented: ソツギョウ アルバム ノ カノジョタチ
 - key: name:三河ごーすと|name:義妹生活
@@ -28828,8 +28629,7 @@ fills:
   kana_segmented: アイショウジョ ポリアンナ モノガタリ 4
   src: tail
 - key: name:三越はるは|name:「雑魚には鍛冶がお似合いだwww」と言われた鍛冶レベル9999の俺、追放されたので冒険者に転職する
-  kana_segmented: ザコ ニワ カジ ガ オニアイダ ト イワレタ カジ レベル キュウセンキュウヒャクキュウジュウキュウ ノ オレ ツイホウ サレタ
-    ノデ ボウケンシャ ニ テンショク スル
+  kana_segmented: ザコ ニワ カジ ガ オニアイダ ト イワレタ カジ レベル キュウセンキュウヒャクキュウジュウキュウ ノ オレ ツイホウ サレタ ノデ ボウケンシャ ニ テンショク スル
 - key: name:三途河ワタル|name:ちえりの恋は8メートル
   kana_segmented: チエリ ノ コイ ワ ハチメートル
 - key: name:三重真流|name:カミユ+12
@@ -28898,8 +28698,7 @@ fills:
 - key: name:上山ジョジョ|name:社畜剣聖、配信者になる
   kana_segmented: シャチク ケンセイ 、 ハイシンシャ ニ ナル
 - key: name:上嶋ハルキ|name:人数合わせで合コンに参加した俺は、なぜか余り物になってた元人気アイドルで国宝級の美少女をお持ち帰りしました。
-  kana_segmented: ニンズウアワセ デ ゴウコン ニ サンカ シタ オレ ワ ナゼカ アマリモノ ニ ナッテタ モト ニンキ アイドル デ コクホウキュウ
-    ノ ビショウジョ オ オモチカエリ シマシタ
+  kana_segmented: ニンズウアワセ デ ゴウコン ニ サンカ シタ オレ ワ ナゼカ アマリモノ ニ ナッテタ モト ニンキ アイドル デ コクホウキュウ ノ ビショウジョ オ オモチカエリ シマシタ
 - key: name:上嶋ハルキ|name:年下の酒先輩が可愛い
   kana_segmented: トシシタ ノ サケ センパイ ガ カワイイ
 - key: name:上川きち|name:こじらせΩの2度目の恋
@@ -28968,8 +28767,7 @@ fills:
 - key: name:上森優|name:青春ゲシュタルト崩壊
   kana_segmented: セイシュン ゲシュタルト ホウカイ
 - key: name:上機しほ|name:超能力者(エスパー)と恋におちる
-  kana_segmented: I fall in love with a psychic超能力者と恋におちる|エスパー ト コイ ニ オチル = I fall
-    in love with a psychic
+  kana_segmented: I fall in love with a psychic超能力者と恋におちる|エスパー ト コイ ニ オチル = I fall in love with a psychic
 - key: name:上海散爆網絡科技有限公司|name:ドールズフロントラインみしまひろじ作品集
   kana_segmented: ドールズ フロント ライン ミシマ ヒロジ サクヒンシュウ
 - key: name:上田にく|name:あのとき君とシておけば。
@@ -29413,8 +29211,7 @@ fills:
 - key: name:中村浩二郎|name:GUNDAM LEGACY
   kana_segmented: ガンダム レガシー
 - key: name:中村浩二郎|name:機動戦士ガンダムZZ外伝ジオンの幻陽
-  kana_segmented: キドウ センシ ガンダム ZZ ガイデン ジオン ノ ゲンヨウ|キドウ センシ ガンダム ダブル ゼータ ガイデン ジオン ノ
-    ゲンヨウ
+  kana_segmented: キドウ センシ ガンダム ZZ ガイデン ジオン ノ ゲンヨウ|キドウ センシ ガンダム ダブル ゼータ ガイデン ジオン ノ ゲンヨウ
 - key: name:中村浩二郎|name:機動戦士ガンダムクライマックスU.C.-紡がれし血統-
   kana_segmented: キドウ センシ ガンダム クライマックス ユーシー ツムガレシ キズナ
 - key: name:中村淳彦|name:あなたのとなりの闇世界
@@ -29820,8 +29617,7 @@ fills:
   kana_segmented: オカ ノ イエ ノ ミッキー
   src: ndl
 - key: name:久賀フーナ|name:断頭台に消えた伝説の悪女、二度目の人生ではガリ勉地味眼鏡になって平穏を望む
-  kana_segmented: ダントウダイ ニ キエタ デンセツ ノ アクジョ ニドメ ノ ジンセイ デワ ガリベン ジミ メガネ ニ ナッテ ヘイオン オ
-    ノゾム
+  kana_segmented: ダントウダイ ニ キエタ デンセツ ノ アクジョ ニドメ ノ ジンセイ デワ ガリベン ジミ メガネ ニ ナッテ ヘイオン オ ノゾム
 - key: name:久追遥希|name:黒幕ゲーム
   kana_segmented: クロマク ゲーム
 - key: name:久遠|name:蜜アナ|sub:幼馴染の甘く滴るメス穴る?
@@ -30439,8 +30235,7 @@ fills:
 - key: name:京藤好男|name:ワイン知らず、マンガ知らず
   kana_segmented: ワイン シラズ マンガ シラズ
 - key: name:京都国際マンガミュージアム|name:SEIKI 土田世紀43年、18,000枚の生涯
-  kana_segmented: SEIKI ツチダ セイキ 43ネン 18000マイ ノ ショウガイ|セイキ ツチダ セイキ ヨンジュウサンネン イチマンハッセンマイ
-    ノ ショウガイ
+  kana_segmented: SEIKI ツチダ セイキ 43ネン 18000マイ ノ ショウガイ|セイキ ツチダ セイキ ヨンジュウサンネン イチマンハッセンマイ ノ ショウガイ
 - key: name:京野一郎|name:ホステスno.1
   kana_segmented: ホステス no. 1
   src: ndl
@@ -31011,8 +30806,7 @@ fills:
 - key: name:伊黒純|name:Stray Edge
   kana_segmented: ストレイ エッジ
 - key: name:伍長|name:俺だけ選び放題、S級レアアイテムも壊れスキルも覚醒した〈シュレディンガーの猫〉で思うがまま!|sub:冒険者の俺はレベルも金も稼いで幸せなので、追放してきた連中も自力で頑張ってくれ
-  kana_segmented: オレ ダケ エラビホウダイ エスキュウ レア アイテム モ コワレ スキル モ カクセイ シタ シュレディンガー ノ ネコ デ
-    オモウ ガ ママ
+  kana_segmented: オレ ダケ エラビホウダイ エスキュウ レア アイテム モ コワレ スキル モ カクセイ シタ シュレディンガー ノ ネコ デ オモウ ガ ママ
 - key: name:伏夜俄|name:抱かれないとでも思ったか?|sub:フルスペック弁護士の溺愛事情
   kana_segmented: ダカレナイ ト デモ オモッタカ
 - key: name:伏瀬1975-|name:転生したらスライムだった件
@@ -31217,8 +31011,7 @@ fills:
 - key: name:佐々木禎子|name:後宮の男装妃
   kana_segmented: コウキュウ ノ ダンソウヒ
 - key: name:佐々木鏡石|name:がんばれ農強聖女～聖女の地位と婚約者を奪われた令嬢の農業革命日誌～@COMIC
-  kana_segmented: ガンバレ ノウキョウ セイジョ セイジョ ノ チイ ト コンヤクシャ オ ウバワレタ レイジョウ ノ ノウギョウ カクメイ ニッシ
-    アットマーク コミック
+  kana_segmented: ガンバレ ノウキョウ セイジョ セイジョ ノ チイ ト コンヤクシャ オ ウバワレタ レイジョウ ノ ノウギョウ カクメイ ニッシ アットマーク コミック
 - key: name:佐々木順一郎|name:ねずみロワイアル
   kana_segmented: ネズミ ロワイアル
 - key: name:佐々江典子|name:子宮恋愛
@@ -31378,8 +31171,7 @@ fills:
 - key: name:佐崎咲|name:子ども扱いしないでください!
   kana_segmented: コドモアツカイ シナイデ クダサイ
 - key: name:佐崎咲|name:鍛えすぎて婚約破棄された結果、氷の公爵閣下の妻になったけど実は溺愛されているようです
-  kana_segmented: キタエスギテ コンヤク ハキ サレタ ケッカ コオリ ノ コウシャク カッカ ノ ツマ ニ ナッタ ケド ジツ ワ デキアイ サレテ
-    イル ヨウデス
+  kana_segmented: キタエスギテ コンヤク ハキ サレタ ケッカ コオリ ノ コウシャク カッカ ノ ツマ ニ ナッタ ケド ジツ ワ デキアイ サレテ イル ヨウデス
 - key: name:佐悠|name:爛漫ドレスコードレス
   kana_segmented: ランマン ドレス コードレス
 - key: name:佐木かやの|name:平良さんはやっぱりモテたくない
@@ -31429,11 +31221,9 @@ fills:
 - key: name:佐茂すけ|name:根室くんは顔がいい!
   kana_segmented: ネムロ クン ワ カオ ガ イイ
 - key: name:佐藤36|name:えろいことするために巨乳美少女奴隷を買ったはずが、お師匠さまと慕われて思った通りにいかなくなる話
-  kana_segmented: エロイ コト スル タメ ニ キョニュウ ビショウジョ ドレイ オ カッタ ハズ ガ オシショウサマ ト シタワレテ オモッタ
-    トオリ ニ イカナク ナル ハナシ
+  kana_segmented: エロイ コト スル タメ ニ キョニュウ ビショウジョ ドレイ オ カッタ ハズ ガ オシショウサマ ト シタワレテ オモッタ トオリ ニ イカナク ナル ハナシ
 - key: name:佐藤36|name:えろいことするために巨乳美少女奴隷を買ったはずが、お師匠さまと慕われて思った通りにいかなくなる話.
-  kana_segmented: エロイ コト スル タメ ニ キョニュウ ビショウジョ ドレイ オ カッタ ハズ ガ オシショウサマ ト シタワレテ オモッタ
-    トオリ ニ イカナク ナル ハナシ.
+  kana_segmented: エロイ コト スル タメ ニ キョニュウ ビショウジョ ドレイ オ カッタ ハズ ガ オシショウサマ ト シタワレテ オモッタ トオリ ニ イカナク ナル ハナシ.
 - key: name:佐藤かおり|name:さけび
   kana_segmented: サケビ
 - key: name:佐藤けんいち|name:新ランチェスター戦略
@@ -31640,8 +31430,7 @@ fills:
 - key: name:佑吾|name:ファンタジーは知らないけれど、何やら規格外みたいです
   kana_segmented: ファンタジー ワ シラナイ ケレド ナニヤラ キカクガイ ミタイ デス
 - key: name:佑吾|name:宇宙船が遭難したけど、目の前に地球型惑星があったから、今までの人生を捨ててイージーに生きたい
-  kana_segmented: ウチュウセン ガ ソウナン シタ ケド メ ノ マエ ニ チキュウガタ ワクセイ ガ アッタ カラ イママデ ノ ジンセイ オ
-    ステテ イージー ニ イキタイ
+  kana_segmented: ウチュウセン ガ ソウナン シタ ケド メ ノ マエ ニ チキュウガタ ワクセイ ガ アッタ カラ イママデ ノ ジンセイ オ ステテ イージー ニ イキタイ
 - key: name:何某|name:オーダー!!
   kana_segmented: オーダー !!
 - key: name:何田|name:眠り姫は今夜も淫夢にイカされる
@@ -31751,8 +31540,7 @@ fills:
 - key: name:倉月忍|name:駆け出しアイドルの推しごはん
   kana_segmented: カケダシ アイドル ノ オシ ゴハン
 - key: name:倉本たけみ|name:「剣士は時代遅れ」と左遷された人類最強のおっさん、魔術学院で教師になって無双する
-  kana_segmented: ケンシ ワ ジダイオクレ ト サセン サレタ ジンルイ サイキョウ ノ オッサン マジュツ ガクイン デ キョウシ ニ ナッテ
-    ムソウ スル
+  kana_segmented: ケンシ ワ ジダイオクレ ト サセン サレタ ジンルイ サイキョウ ノ オッサン マジュツ ガクイン デ キョウシ ニ ナッテ ムソウ スル
 - key: name:倉橋ユウス|name:スキルがなければレベルを上げる
   kana_segmented: スキル ガ ナケレバ レベル オ アゲル
 - key: name:倉橋光男|name:2011年日中開戦
@@ -31802,8 +31590,7 @@ fills:
 - key: name:億|name:教えてなんて言ってない!
   kana_segmented: オシエテ ナンテ イッテナイ !
 - key: name:優月アカネ|name:ゴミ屋敷令嬢ですが、追放された王子様〈子供の姿にされた超有能魔法使い〉を拾ったら溺愛されました!
-  kana_segmented: ゴミヤシキ レイジョウ デスガ ツイホウ サレタ オウジサマ コドモ ノ スガタ ニ サレタ チョウユウノウ マホウツカイ オ
-    ヒロッタラ デキアイ サレマシタ
+  kana_segmented: ゴミヤシキ レイジョウ デスガ ツイホウ サレタ オウジサマ コドモ ノ スガタ ニ サレタ チョウユウノウ マホウツカイ オ ヒロッタラ デキアイ サレマシタ
 - key: name:優月アカネ|name:後宮湯屋の事件帖
   kana_segmented: コウキュウ ユヤ ノ ジケンチョウ
 - key: name:優月心菜|name:白咲いちごは断れない
@@ -32008,8 +31795,7 @@ fills:
 - key: name:八千代ハル|name:甘い鳥籠
   kana_segmented: アマイ トリカゴ
 - key: name:八又ナガト|name:ゲーム中盤で死ぬ悪役貴族に転生したので、外れスキル〈テイム〉を駆使して最強を目指してみた
-  kana_segmented: ゲーム チュウバン デ シヌ アクヤク キゾク ニ テンセイ シタ ノデ ハズレ スキル テイム オ クシ シテ サイキョウ オ
-    メザシテ ミタ
+  kana_segmented: ゲーム チュウバン デ シヌ アクヤク キゾク ニ テンセイ シタ ノデ ハズレ スキル テイム オ クシ シテ サイキョウ オ メザシテ ミタ
 - key: name:八又ナガト|name:世界最速のレベルアップ
   kana_segmented: セカイ サイソク ノ レベル アップ
 - key: name:八叉のおろち|name:婚約破棄してさしあげますわ
@@ -32132,14 +31918,11 @@ fills:
 - key: name:八緒あいら|name:スライム聖女
   kana_segmented: スライム セイジョ
 - key: name:八緒あいら|name:国を守護している聖女ですが、妹が何より大事です～妹を泣かせる奴は拳で分からせます～@COMIC
-  kana_segmented: クニ オ シュゴ シテ イル セイジョ デスガ イモウト ガ ナニヨリ ダイジ デス イモウト オ ナカセル ヤツ ワ コブシ
-    デ ワカラセマス アットマーク コミック
+  kana_segmented: クニ オ シュゴ シテ イル セイジョ デスガ イモウト ガ ナニヨリ ダイジ デス イモウト オ ナカセル ヤツ ワ コブシ デ ワカラセマス アットマーク コミック
 - key: name:八緒あいら|name:最愛のお姉様が悪役令嬢だったので、神が定めた運命(シナリオ)に抗います@COMIC
-  kana_segmented: サイアイ ノ オネエサマ ガ アクヤク レイジョウ ダッタ ノデ カミ ガ サダメタ シナリオ ニ アラガイマス アットマーク
-    コミック
+  kana_segmented: サイアイ ノ オネエサマ ガ アクヤク レイジョウ ダッタ ノデ カミ ガ サダメタ シナリオ ニ アラガイマス アットマーク コミック
 - key: name:八緒あいら|name:最愛のお姉様が悪役令嬢だったので、神が定めた運命に抗います@COMIC
-  kana_segmented: サイアイ ノ オネエサマ ガ アクヤク レイジョウ ダッタ ノデ カミ ガ サダメタ シナリオ ニ アラガイマス アットマーク
-    コミック
+  kana_segmented: サイアイ ノ オネエサマ ガ アクヤク レイジョウ ダッタ ノデ カミ ガ サダメタ シナリオ ニ アラガイマス アットマーク コミック
 - key: name:八緒あいら|name:私は生贄のはずですが
   kana_segmented: ワタクシ ワ イケニエ ノ ハズデスガ
 - key: name:八美☆わん|name:8度目の人生、嫌われていたはずの王太子殿下の溺愛ルートにはまりました|sub:お飾り側妃なのでどうぞお構いなく
@@ -32243,11 +32026,9 @@ fills:
 - key: name:六花きい|name:夜会で『適当に』ハンカチを渡しただけなのに、騎士様から婚約を迫られています
   kana_segmented: ヤカイ デ テキトウ ニ ハンカチ オ ワタシタ ダケ ナノニ キシサマ カラ コンヤク オ セマラレテ イマス
 - key: name:六花きい|name:悪役令嬢みたいに断罪されそうだったけど、全力で愛されてます!不幸な運命に「ざまぁ」しますわ!
-  kana_segmented: アクヤク レイジョウ ミタイ ニ ダンザイ サレソウ ダッタ ケド ゼンリョク デ アイサレテマス フコウ ナ ウンメイ ニ ザマァ
-    シマスワ
+  kana_segmented: アクヤク レイジョウ ミタイ ニ ダンザイ サレソウ ダッタ ケド ゼンリョク デ アイサレテマス フコウ ナ ウンメイ ニ ザマァ シマスワ
 - key: name:六花きい|name:悪役令嬢みたいに断罪されそうだったけど、全力で愛されてます!不幸な運命に「ざまぁ」しますわ!|sub:アンソロジーコミック
-  kana_segmented: アクヤク レイジョウ ミタイ ニ ダンザイ サレソウ ダッタ ケド ゼンリョク デ アイサレテマス フコウ ナ ウンメイ ニ ザマァ
-    シマスワ
+  kana_segmented: アクヤク レイジョウ ミタイ ニ ダンザイ サレソウ ダッタ ケド ゼンリョク デ アイサレテマス フコウ ナ ウンメイ ニ ザマァ シマスワ
 - key: name:六青みつみ|name:騎士と誓いの花
   kana_segmented: キシ ト チカイ ノ ハナ
 - key: name:具光然|name:プルコギ
@@ -32457,8 +32238,7 @@ fills:
 - key: name:冬月光輝|name:復讐姫ローラ|sub:お姉様を生贄にしたこの国はもう要らない
   kana_segmented: フクシュウキ ローラ
 - key: name:冬月光輝|name:悲劇のヒロインぶる妹のせいで婚約破棄したのですが、何故か正義感の強い王太子に絡まれるようになりました
-  kana_segmented: ヒゲキ ノ ヒロインブル イモウト ノ セイ デ コンヤク ハキ シタ ノ デスガ ナゼカ セイギカン ノ ツヨイ オウタイシ
-    ニ カラマレル ヨウニ ナリマシタ
+  kana_segmented: ヒゲキ ノ ヒロインブル イモウト ノ セイ デ コンヤク ハキ シタ ノ デスガ ナゼカ セイギカン ノ ツヨイ オウタイシ ニ カラマレル ヨウニ ナリマシタ
 - key: name:冬未さと|name:ヤクザが転生したら森蘭丸だった件
   kana_segmented: ヤクザ ガ テンセイ シタラ モリ ランマル ダッタ ケン
 - key: name:冬森雪湖|name:カモ女とサギ男
@@ -32682,8 +32462,7 @@ fills:
 - key: name:剃り残し|name:立ち飲み居酒屋でクーデレダウナー系女子大生が隣に来る話
   kana_segmented: タチノミ イザカヤ デ クーデレ ダウナーケイ ジョシダイセイ ガ トナリ ニ クル ハナシ
 - key: name:則本シゲ|name:高卒、無職、ボッチの俺が、現代ダンジョンで億を稼げたワケ～会社が倒産して無職になったので、今日から秘密のダンジョンに潜って稼いでいこうと思います～@COMIC
-  kana_segmented: コウソツ ムショク ボッチ ノ オレ ガ ゲンダイ ダンジョン デ オク オ カセゲタ ワケ カイシャ ガ トウサン シテ ムショク
-    ニ ナッタ ノデ キョウ カラ ヒミツ ノ ダンジョン ニ モグッテ カセイデ イコウ ト オモイマス アットマーク コミック
+  kana_segmented: コウソツ ムショク ボッチ ノ オレ ガ ゲンダイ ダンジョン デ オク オ カセゲタ ワケ カイシャ ガ トウサン シテ ムショク ニ ナッタ ノデ キョウ カラ ヒミツ ノ ダンジョン ニ モグッテ カセイデ イコウ ト オモイマス アットマーク コミック
 - key: name:前千鶴|name:劇場版NARUTO-ナルト-『大活劇!雪姫忍法帖だってばよ!!』
   kana_segmented: ゲキジョウバン Naruto ナルト ダイカツゲキ ユキヒメ ニンポウチョウ ダッテバヨ
   src: ndl
@@ -33100,8 +32879,7 @@ fills:
 - key: name:加瀬まつり|name:Re:blue.
   kana_segmented: リ ブルー.
 - key: name:加瀬アオ|name:元婚約者から逃げるため吸血伯爵に恋人のフリをお願いしたら、なぜか溺愛モードになりました
-  kana_segmented: モトコンヤクシャ カラ ニゲル タメ キュウケツ ハクシャク ニ コイビト ノ フリ オ オネガイ シタラ ナゼカ デキアイ モード
-    ニ ナリマシタ
+  kana_segmented: モトコンヤクシャ カラ ニゲル タメ キュウケツ ハクシャク ニ コイビト ノ フリ オ オネガイ シタラ ナゼカ デキアイ モード ニ ナリマシタ
 - key: name:加藤いつわ|name:Aランク冒険者のスローライフ.
   kana_segmented: エーランク ボウケンシャ ノ スロー ライフ.
 - key: name:加藤えりこ|name:こはるの空とアニマルライフ
@@ -33205,13 +32983,11 @@ fills:
 - key: name:勿夜AGE|name:憑炎のイフリータ|sub:ついでにあたしが異世界を救っちゃう
   kana_segmented: ヒョウエン ノ イフリータ
 - key: name:匈歌ハトリ|name:がんばれ農強聖女～聖女の地位と婚約者を奪われた令嬢の農業革命日誌～@COMIC
-  kana_segmented: ガンバレ ノウキョウ セイジョ セイジョ ノ チイ ト コンヤクシャ オ ウバワレタ レイジョウ ノ ノウギョウ カクメイ ニッシ
-    アットマーク コミック
+  kana_segmented: ガンバレ ノウキョウ セイジョ セイジョ ノ チイ ト コンヤクシャ オ ウバワレタ レイジョウ ノ ノウギョウ カクメイ ニッシ アットマーク コミック
 - key: name:匈歌ハトリ|name:レジェンド・オブ・イシュリーン
   kana_segmented: レジェンド オブ イシュリーン
 - key: name:匈歌ハトリ|name:厳つい顔で凶悪騎士団長と恐れられる公爵様の最後の婚活相手は社交界の幻の花でした
-  kana_segmented: イカツイ カオ デ キョウアク キシダンチョウ ト オソレラレル コウシャクサマ ノ サイゴ ノ コンカツ アイテ ワ シャコウカイ
-    ノ マボロシ ノ ハナ デシタ
+  kana_segmented: イカツイ カオ デ キョウアク キシダンチョウ ト オソレラレル コウシャクサマ ノ サイゴ ノ コンカツ アイテ ワ シャコウカイ ノ マボロシ ノ ハナ デシタ
 - key: name:匈歌ハトリ|name:完全回避ヒーラーの軌跡
   kana_segmented: カンゼン カイヒ ヒーラー ノ キセキ
 - key: name:匈歌ハトリ|name:洞窟王からはじめる楽園ライフ|sub:万能の採掘スキルで最強に!?
@@ -33280,8 +33056,7 @@ fills:
 - key: name:北川ニキタ|name:レベル1で挑む縛りプレイ!
   kana_segmented: レベル イチ デ イドム シバリ プレイ
 - key: name:北川ニキタ|name:悪役令嬢みたいに断罪されそうだったけど、全力で愛されてます!不幸な運命に「ざまぁ」しますわ!|sub:アンソロジーコミック
-  kana_segmented: アクヤク レイジョウ ミタイ ニ ダンザイ サレソウ ダッタ ケド ゼンリョク デ アイサレテマス フコウ ナ ウンメイ ニ ザマァ
-    シマスワ
+  kana_segmented: アクヤク レイジョウ ミタイ ニ ダンザイ サレソウ ダッタ ケド ゼンリョク デ アイサレテマス フコウ ナ ウンメイ ニ ザマァ シマスワ
 - key: name:北川ニキタ|name:最弱な僕は〈壁抜けバグ〉で成り上がる
   kana_segmented: サイジャク ナ ボク ワ カベヌケ バグ デ ナリアガル
 - key: name:北川怜子|name:十津川警部ミステリースペシャル
@@ -33346,8 +33121,7 @@ fills:
 - key: name:北爪宏幸|name:機動戦士ΖガンダムDefineシャア・アズナブルグリプス戦役
   kana_segmented: キドウ センシ ゼータ ガンダム ディファイン シャア アズナブル グリプス センエキ
 - key: name:北爪宏幸|name:機動戦士ガンダム C.D.A.若き彗星の肖像
-  kana_segmented: キドウ センシ ガンダム C. D. A. ワカキ スイセイ ノ ショウゾウ|キドウ センシ ガンダム シーディエイ ワカキ スイセイ
-    ノ ショウゾウ
+  kana_segmented: キドウ センシ ガンダム C. D. A. ワカキ スイセイ ノ ショウゾウ|キドウ センシ ガンダム シーディエイ ワカキ スイセイ ノ ショウゾウ
 - key: name:北田瀧|name:咆哮!!大和・連合艦隊
   kana_segmented: ホウコウ ヤマト レンゴウ カンタイ
 - key: name:北芝健|name:まるごし刑事 (デカ) special
@@ -33410,8 +33184,7 @@ fills:
 - key: name:十三野こう|name:ごぜほたる
   kana_segmented: ゴゼホタル|玻璃にさす音
 - key: name:十乃壱天|name:一瞬で治療していたのに役立たずと追放された天才治癒師、闇ヒーラーとして楽しく生きる
-  kana_segmented: イッシュン デ チリョウ シテ イタ ノニ ヤクタタズ ト ツイホウ サレタ テンサイ チユシ ヤミヒーラー ト シテ タノシク
-    イキル
+  kana_segmented: イッシュン デ チリョウ シテ イタ ノニ ヤクタタズ ト ツイホウ サレタ テンサイ チユシ ヤミヒーラー ト シテ タノシク イキル
 - key: name:十久かな|name:一夜限りのはずが、クールな帝王の熱烈求愛が始まりました
   kana_segmented: イチヤカギリ ノ ハズ ガ クール ナ テイオウ ノ ネツレツ キュウアイ ガ ハジマリマシタ
 - key: name:十五夜|name:お役に立つので血をください
@@ -33576,8 +33349,7 @@ fills:
 - key: name:千葉智宏|name:ガンダムビルドファイターズA
   kana_segmented: ガンダム ビルド ファイターズ アメイジング
 - key: name:千葉智宏|name:ガンダムビルドファイターズAR(アメイジングレディ)
-  kana_segmented: GUNDAM BUILD FIGHTERS AMAZING READYガンダムビルドファイターズAR|ガンダム ビルド ファイターズ
-    アメイジング レディ
+  kana_segmented: GUNDAM BUILD FIGHTERS AMAZING READYガンダムビルドファイターズAR|ガンダム ビルド ファイターズ アメイジング レディ
 - key: name:千葉智宏|name:宇宙、閃光の果てに…
   kana_segmented: ソラ センコウ ノ ハテ ニ
   src: ndl
@@ -33587,8 +33359,7 @@ fills:
   kana_segmented: キドウ センシ ガンダム seed astray R
   src: ndl
 - key: name:千葉智宏|name:機動戦士ガンダムSEED ASTRAY天空の皇女(プリンセス)
-  kana_segmented: MOBILE SUIT GUNDAM SEED ASTRAY PRINCESS OF THE SKY機動戦士ガンダムSEED ASTRAY天空の皇女|キドウ
-    センシ ガンダム シード アストレイ テンクウ ノ プリンセス
+  kana_segmented: MOBILE SUIT GUNDAM SEED ASTRAY PRINCESS OF THE SKY機動戦士ガンダムSEED ASTRAY天空の皇女|キドウ センシ ガンダム シード アストレイ テンクウ ノ プリンセス
 - key: name:千葉智宏|name:機動戦士ガンダムSEED FREEDOM ASTRAY
   kana_segmented: キドウ センシ ガンダム シード フリーダム アストレイ
 - key: name:千葉智宏|name:機動戦士ガンダム外伝REBELLION
@@ -33672,8 +33443,7 @@ fills:
 - key: name:南々瀬なつ|name:偽物令嬢の復讐
   kana_segmented: ニセモノ レイジョウ ノ フクシュウ
 - key: name:南々瀬なつ|name:薄幸な公爵令嬢〈病弱〉に、残りの人生を託されまして前世が筋肉喪女なので、皇子さまの求愛には気づけません!?
-  kana_segmented: ハッコウ ナ コウシャク レイジョウ ビョウジャク ニ ノコリ ノ ジンセイ オ タクサレマシテ ゼンセ ガ キンニク モジョ
-    ナノデ オウジサマ ノ キュウアイ ニワ キズケマセン
+  kana_segmented: ハッコウ ナ コウシャク レイジョウ ビョウジャク ニ ノコリ ノ ジンセイ オ タクサレマシテ ゼンセ ガ キンニク モジョ ナノデ オウジサマ ノ キュウアイ ニワ キズケマセン
 - key: name:南あらた|name:俺はお前の愛で痛い
   kana_segmented: オレ ワ オマエ ノ アイ デ イタイ
 - key: name:南ゴゼン|name:国境の勇者エコー
@@ -33918,13 +33688,11 @@ fills:
 - key: name:友山アキ|name:弱小国家の英雄王子
   kana_segmented: ジャクショウ コッカ ノ エイユウ オウジ
 - key: name:友成ユタ|name:清楚誠実に生きていたら婚約者に裏切られたので、やり直しの世界では悪役令嬢として生きます
-  kana_segmented: セイソ セイジツ ニ イキテイタラ コンヤクシャ ニ ウラギラレタ ノデ 、 ヤリナオシ ノ セカイ デワ アクヤク レイジョウ
-    ト シテ イキマス
+  kana_segmented: セイソ セイジツ ニ イキテイタラ コンヤクシャ ニ ウラギラレタ ノデ 、 ヤリナオシ ノ セカイ デワ アクヤク レイジョウ ト シテ イキマス
 - key: name:友橋かめつ|name:攻撃力極振りの最強魔術師|sub:筋力値9999の大剣士、転生して二度目の人生を歩む
   kana_segmented: コウゲキリョク キョクブリ ノ サイキョウ マジュツシ
 - key: name:友橋かめつ|name:貞操逆転世界で唯一の男騎士の俺、女騎士学園に入学したらなぜか英雄扱いされた
-  kana_segmented: テイソウ ギャクテン セカイ デ ユイイツ ノ オトコキシ ノ オレ オンナキシ ガクエン ニ ニュウガク シタラ ナゼカ エイユウアツカイ
-    サレタ
+  kana_segmented: テイソウ ギャクテン セカイ デ ユイイツ ノ オトコキシ ノ オレ オンナキシ ガクエン ニ ニュウガク シタラ ナゼカ エイユウアツカイ サレタ
 - key: name:友永ケンジ|name:寝取られるなんてありえない
   kana_segmented: ネトラレル ナンテ アリエナイ
 - key: name:友永ケンジ|name:淫キャ彼女185センチ
@@ -33968,8 +33736,7 @@ fills:
 - key: name:双葉はづき|name:アルバート家の令嬢は没落をご所望です
   kana_segmented: アルバート ケ ノ レイジョウ ワ ボツラク オ ゴショモウ デス
 - key: name:双葉はづき|name:氷の侯爵様に甘やかされたいっ!～シリアス展開しかない幼女に転生してしまった私の奮闘記～@COMIC
-  kana_segmented: コオリ ノ コウシャクサマ ニ アマヤカサレタイッ シリアス テンカイ シカ ナイ ヨウジョ ニ テンセイ シテ シマッタ ワタクシ
-    ノ フントウキ アットマーク コミック
+  kana_segmented: コオリ ノ コウシャクサマ ニ アマヤカサレタイッ シリアス テンカイ シカ ナイ ヨウジョ ニ テンセイ シテ シマッタ ワタクシ ノ フントウキ アットマーク コミック
 - key: name:双葉はづき|name:私が聖女?いいえ、悪役令嬢です!
   kana_segmented: ワタクシ ガ セイジョ イイエ アクヤク レイジョウ デス
 - key: name:双葉はづき|name:私が聖女?いいえ、悪役令嬢です!|sub:なので、全員破滅は阻止させていただきます
@@ -33977,8 +33744,7 @@ fills:
 - key: name:双葉はづき|name:誰にも愛されないので床を磨いていたらそこが聖域化した令嬢の話
   kana_segmented: ダレニモ アイサレナイ ノデ ユカ オ ミガイテ イタラ ソコ ガ セイイキカ シタ レイジョウ ノ ハナシ
 - key: name:双葉葵|name:正式に魔女になった二度目の悪役皇女は、もう二度と大切な者を失わないと心に誓う@COMIC
-  kana_segmented: セイシキ ニ マジョ ニ ナッタ ニドメ ノ アクヤク コウジョ ワ モウ ニド ト タイセツ ナ モノ オ ウシナワナイ ト
-    ココロ ニ チカウ アットマーク コミック
+  kana_segmented: セイシキ ニ マジョ ニ ナッタ ニドメ ノ アクヤク コウジョ ワ モウ ニド ト タイセツ ナ モノ オ ウシナワナイ ト ココロ ニ チカウ アットマーク コミック
 - key: name:双葉陽|name:ばーがー・ふぉー・ゆー!
   kana_segmented: バーガー ・ フォー ・ ユー !
 - key: name:反田背骨|name:OHMYGOD
@@ -34043,8 +33809,7 @@ fills:
 - key: name:古林けやき|name:いらないスキル買い取ります
   kana_segmented: イラナイ スキル カイトリマス
 - key: name:古森きり|name:うちのお嬢様が破滅エンドしかない悪役令嬢のようなので俺が救済したいと思います。
-  kana_segmented: ウチ ノ オジョウサマ ガ ハメツ エンド シカ ナイ アクヤク レイジョウ ノ ヨウ ナノデ オレ ガ キュウサイシタイ ト
-    オモイマス 。
+  kana_segmented: ウチ ノ オジョウサマ ガ ハメツ エンド シカ ナイ アクヤク レイジョウ ノ ヨウ ナノデ オレ ガ キュウサイシタイ ト オモイマス 。
 - key: name:古橋秀之|name:K RETURN OF KINGS
   kana_segmented: K return of kings
   src: ndl
@@ -34112,8 +33877,7 @@ fills:
 - key: name:只野さとる|name:人助けをしたらパーティを追放された男は、ユニークスキル『お助けマン』で成り上がる。
   kana_segmented: ヒトダスケ オ シタラ パーティ オ ツイホウ サレタ オトコ ワ ユニーク スキル オタスケマン デ ナリアガル
 - key: name:只野野郎|name:世界で唯一の転職師～ジョブホッパーな俺は、異世界ですべてのジョブを極めることにした～@COMIC
-  kana_segmented: セカイ デ ユイイツ ノ テンショクシ ジョブ ホッパー ナ オレ ワ イセカイ デ スベテ ノ ジョブ オ キワメル コト ニ
-    シタ アットマーク コミック
+  kana_segmented: セカイ デ ユイイツ ノ テンショクシ ジョブ ホッパー ナ オレ ワ イセカイ デ スベテ ノ ジョブ オ キワメル コト ニ シタ アットマーク コミック
 - key: name:只野野郎|name:魔法少女の仕立て屋
   kana_segmented: マホウ ショウジョ ノ シタテヤ
 - key: name:叫野あぎゃ|name:いかすぜ!ピース
@@ -34528,8 +34292,7 @@ fills:
 - key: name:向井沙子|name:朱のチーリン
   kana_segmented: アカ ノ チーリン
 - key: name:向原行人|name:壁役など不要と追放されたS級冒険者、《奴隷解放》スキルを駆使して史上最強の国造り
-  kana_segmented: カベヤク ナド フヨウ ト ツイホウサレタ Sキュウ ボウケンシャ 、 《 ドレイ カイホウ 》 スキル オ クシシテ シジョウ
-    サイキョウ ノ クニズクリ
+  kana_segmented: カベヤク ナド フヨウ ト ツイホウサレタ Sキュウ ボウケンシャ 、 《 ドレイ カイホウ 》 スキル オ クシシテ シジョウ サイキョウ ノ クニズクリ
 - key: name:向坂悠|name:幼馴染の君と恋人になるまで
   kana_segmented: オサナナジミ ノ キミ ト コイビト ニ ナル マデ
 - key: name:向山正洋|name:G～魚拓哲学
@@ -34946,9 +34709,7 @@ fills:
 - key: name:国原|name:異世界で奴隷になりましたがご主人さまは私に欲情しません
   kana_segmented: イセカイ デ ドレイ ニ ナリマシタガ ゴシュジンサマ ワ ワタシ ニ ヨクジョウ シマセン
 - key: name:国広仙戯|name:最終兵器勇者～異世界で魔王を倒した後も大人しくしていたのに、いきなり処刑されそうになったので反逆します。国を捨ててスローライフの旅に出たのですが、なんか成り行きで新世界の魔王になりそうです～@COMIC
-  kana_segmented: サイシュウ ヘイキ ユウシャ イセカイ デ マオウ オ タオシタ アト モ オトナシク シテ イタ ノニ イキナリ ショケイ サレソウ
-    ニ ナッタ ノデ ハンギャク シマス クニ オ ステテ スロー ライフ ノ タビ ニ デタ ノ デスガ ナンカ ナリユキ デ シンセカイ ノ マオウ ニ ナリソウ
-    デス アットマーク コミック
+  kana_segmented: サイシュウ ヘイキ ユウシャ イセカイ デ マオウ オ タオシタ アト モ オトナシク シテ イタ ノニ イキナリ ショケイ サレソウ ニ ナッタ ノデ ハンギャク シマス クニ オ ステテ スロー ライフ ノ タビ ニ デタ ノ デスガ ナンカ ナリユキ デ シンセカイ ノ マオウ ニ ナリソウ デス アットマーク コミック
 - key: name:国本果子|name:ミラノ・これくしょん
   kana_segmented: ミラノ コレクション
 - key: name:国本龍使|name:血翼の猟人
@@ -35750,8 +35511,7 @@ fills:
 - key: name:夕|name:〈洗濯〉のダンジョン無双|sub:「クソスキルの無能が!」と追放されたスキル〈洗濯〉の俺だけど、このスキルは控えめに言って『最強』でした。綺麗な『天使』と可愛い『異端竜』と共に、俺は夢を叶えます
   kana_segmented: センタク ノ ダンジョン ムソウ
 - key: name:夕|name:「俺、パーティー抜けるわ」が口癖のスキル〈縮小〉のDランク冒険者、聖女と結婚して勇者パーティーに加入するハメになる
-  kana_segmented: オレ パーティー ヌケルワ ガ クチグセ ノ スキル シュクショウ ノ ディーランク ボウケンシャ セイジョ ト ケッコン シテ
-    ユウシャ パーティー ニ カニュウ スル ハメ ニ ナル
+  kana_segmented: オレ パーティー ヌケルワ ガ クチグセ ノ スキル シュクショウ ノ ディーランク ボウケンシャ セイジョ ト ケッコン シテ ユウシャ パーティー ニ カニュウ スル ハメ ニ ナル
 - key: name:夕仁|name:ヴァルハラ・オティンティン館
   kana_segmented: ヴァルハラ オティンティンカン
 - key: name:夕仁|name:剣の女王と烙印の仔
@@ -35903,13 +35663,11 @@ fills:
 - key: name:夜分長文|name:ゴミ以下だと追放された使用人、実は前世賢者です
   kana_segmented: ゴミ イカ ダト ツイホウ サレタ シヨウニン ジツ ワ ゼンセ ケンジャ デス
 - key: name:夜分長文|name:万年Fランク【通訳】スキル持ち底辺冒険者、異種族の最強美少女たちとパーティーを組んで才能に開花し無双する
-  kana_segmented: マンネン Fランク 【 ツウヤク 】 スキルモチ テイヘン ボウケンシャ 、 イシュゾク ノ サイキョウ ビショウジョタチ ト
-    パーティー オ クンデ サイノウ ニ カイカシ ムソウスル
+  kana_segmented: マンネン Fランク 【 ツウヤク 】 スキルモチ テイヘン ボウケンシャ 、 イシュゾク ノ サイキョウ ビショウジョタチ ト パーティー オ クンデ サイノウ ニ カイカシ ムソウスル
 - key: name:夜分長文|name:久々に健康診断を受けたら最強ステータスになっていた
   kana_segmented: ヒサビサ ニ ケンコウ シンダン オ ウケタラ サイキョウ ステータス ニ ナッテ イタ
 - key: name:夜分長文|name:外れスキル【毒無効】を得て追放された転生者、たまたま死んでいたSSSランクの魔物の肉 (猛毒) を食べたらチートスキルを手に入れてしまった
-  kana_segmented: ハズレ スキル 【 ドク ムコウ 】 オ エテ ツイホウサレタ テンセイシャ 、 タマタマ シンデイタ SSSランク ノ マモノ
-    ノ ニク (モウドク) オ タベタラ チート スキル オ テ ニ イレテシマッタ
+  kana_segmented: ハズレ スキル 【 ドク ムコウ 】 オ エテ ツイホウサレタ テンセイシャ 、 タマタマ シンデイタ SSSランク ノ マモノ ノ ニク (モウドク) オ タベタラ チート スキル オ テ ニ イレテシマッタ
 - key: name:夜咲こん|name:あやかし恋紡ぎ|sub:儚き乙女は妖狐の王に溺愛される.
   kana_segmented: アヤカシ コイツムギ
 - key: name:夜墨リョウ|name:××しないで!月峰さん。
@@ -35933,8 +35691,7 @@ fills:
 - key: name:夜愁とーや|name:ロイヤルウェディングはお断り!
   kana_segmented: ロイヤル ウェディング ワ オコトワリ
 - key: name:夜愁とーや|name:感情が天候に反映される特殊能力持ち令嬢は婚約解消されたので不毛の大地へ嫁ぎたい
-  kana_segmented: カンジョウ ガ テンコウ ニ ハンエイ サレル トクシュ ノウリョクモチ レイジョウ ワ コンヤク カイショウ サレタ ノデ フモウ
-    ノ ダイチ エ トツギタイ
+  kana_segmented: カンジョウ ガ テンコウ ニ ハンエイ サレル トクシュ ノウリョクモチ レイジョウ ワ コンヤク カイショウ サレタ ノデ フモウ ノ ダイチ エ トツギタイ
 - key: name:夜更宵|name:タイトル未定のプロローグ
   kana_segmented: タイトル ミテイ ノ プロローグ
 - key: name:夜更宵|name:バックステージ・スキャンダル
@@ -35984,8 +35741,7 @@ fills:
 - key: name:夢乃咲実|name:プロポーズは花束を持って
   kana_segmented: プロポーズ ワ ハナタバ オ モッテ
 - key: name:夢咲まゆ|name:パーティーをクビになったので、「良成長」スキルを駆使して牧場でもふもふスローライフを送ろうと思います!
-  kana_segmented: パーティー オ クビ ニ ナッタノデ 、 「 リョウセイチョウ 」 スキル オ クシシテ ボクジョウ デ モフモフ スロー ライフ
-    オ オクロウ ト オモイマス !
+  kana_segmented: パーティー オ クビ ニ ナッタノデ 、 「 リョウセイチョウ 」 スキル オ クシシテ ボクジョウ デ モフモフ スロー ライフ オ オクロウ ト オモイマス !
 - key: name:夢唄よつば|name:につめて、こうふく
   kana_segmented: ニツメテ 、 コウフク
 - key: name:夢川リサ|name:お江戸で君恋色事情
@@ -36067,8 +35823,7 @@ fills:
 - key: name:大前田助|name:35歳の選択|sub:異世界転生を選んだ場合
   kana_segmented: サンジュウゴサイ ノ センタク
 - key: name:大前貴史|name:信じていた仲間達にダンジョン奥地で殺されかけたがギフト『無限ガチャ』でレベル9999の仲間達を手に入れて元パーティーメンバーと世界に復讐&『ざまぁ!』します!
-  kana_segmented: シンジテ イタ ナカマタチ ニ ダンジョン オクチ デ コロサレカケタガ ギフト ムゲン ガチャ デ レベル キュウセンキュウヒャクキュウジュウキュウ
-    ノ ナカマタチ オ テ ニ イレテ モト パーティー メンバー ト セカイ ニ フクシュウ アンド ザマァ シマス
+  kana_segmented: シンジテ イタ ナカマタチ ニ ダンジョン オクチ デ コロサレカケタガ ギフト ムゲン ガチャ デ レベル キュウセンキュウヒャクキュウジュウキュウ ノ ナカマタチ オ テ ニ イレテ モト パーティー メンバー ト セカイ ニ フクシュウ アンド ザマァ シマス
 - key: name:大創出版|name:八百八町表裏化粧師
   kana_segmented: ハッピャクヤチョウ ヒョウリ ノ ケワイシ
 - key: name:大原まり子|name:マジック・ポイント
@@ -36095,8 +35850,7 @@ fills:
 - key: name:大地|name:広島ギャングスタ
   kana_segmented: ヒロシマ ギャングスタ
 - key: name:大地の怒り|name:初級魔法しか使えず、火力が足りないので徹底的に攻撃魔法の回数を増やしてみることにしました.
-  kana_segmented: ショキュウ マホウ シカ ツカエズ 、 カリョク ガ タリナイ ノデ テッテイテキ ニ コウゲキ マホウ ノ カイスウ オ フヤシテミル
-    コトニ シマシタ.
+  kana_segmented: ショキュウ マホウ シカ ツカエズ 、 カリョク ガ タリナイ ノデ テッテイテキ ニ コウゲキ マホウ ノ カイスウ オ フヤシテミル コトニ シマシタ.
 - key: name:大地幹|name:月とピエタ
   kana_segmented: ツキ ト ピエタ
 - key: name:大坂尚子|name:銀河英雄伝説
@@ -36145,8 +35899,7 @@ fills:
 - key: name:大宮ソフト|name:Culdcept
   kana_segmented: カルドセプト
 - key: name:大山樹奈|name:転校先の清楚可憐な美少女が、昔男子と思って一緒に遊んだ幼馴染だった件
-  kana_segmented: テンコウサキ ノ セイソ カレン ナ ビショウジョ ガ ムカシ ダンシ ト オモッテ イッショ ニ アソンダ オサナナジミ ダッタ
-    ケン
+  kana_segmented: テンコウサキ ノ セイソ カレン ナ ビショウジョ ガ ムカシ ダンシ ト オモッテ イッショ ニ アソンダ オサナナジミ ダッタ ケン
 - key: name:大山満千|name:ミチオ
   kana_segmented: ミチオ
 - key: name:大山満千|name:新宿バッダスベイビーズ
@@ -36212,8 +35965,7 @@ fills:
 - key: name:大川なぎ|name:偽りの悪女ですが末永く幸せになりましょう
   kana_segmented: イツワリ ノ アクジョ デスガ スエナガク シアワセ ニ ナリマショウ
 - key: name:大川なぎ|name:契約婚した相手が鬼宰相でしたが、この度宰相室専任補佐官に任命された地味文官〈変装中〉は私です。
-  kana_segmented: ケイヤクコン シタ アイテ ガ オニサイショウ デシタガ コノタビ サイショウシツ センニン ホサカン ニ ニンメイ サレタ ジミ
-    ブンカン ヘンソウチュウ ワ ワタシ デス
+  kana_segmented: ケイヤクコン シタ アイテ ガ オニサイショウ デシタガ コノタビ サイショウシツ センニン ホサカン ニ ニンメイ サレタ ジミ ブンカン ヘンソウチュウ ワ ワタシ デス
 - key: name:大川なぎ|name:婚約破棄されたりされなかったりですが、不幸令嬢になりました。
   kana_segmented: コンヤク ハキ サレタリ サレナカッタリ デスガ フコウ レイジョウ ニ ナリマシタ
 - key: name:大川ぶくぶ|name:やっぱりチンチランド
@@ -36364,8 +36116,7 @@ fills:
 - key: name:大横山飴|name:花の在りか
   kana_segmented: ハナ ノ アリカ
 - key: name:大橋ウルオ|name:外れスキル『レベルアップ』のせいでパーティーを追放された少年は、レベルを上げて物理で殴る
-  kana_segmented: ハズレ スキル レベル アップ ノ セイ デ パーティー オ ツイホウ サレタ ショウネン ワ レベル オ アゲテ ブツリ デ
-    ナグル
+  kana_segmented: ハズレ スキル レベル アップ ノ セイ デ パーティー オ ツイホウ サレタ ショウネン ワ レベル オ アゲテ ブツリ デ ナグル
 - key: name:大橋キッカ|name:いいから黙って目を閉じて
   kana_segmented: イイカラ ダマッテ メ オ トジテ
 - key: name:大橋キッカ|name:お前は俺のモノだろ?|sub:俺様社長の独占溺愛
@@ -36711,8 +36462,7 @@ fills:
 - key: name:天夜葎|name:結婚寸前で捨てられたら社長の溺愛がはじまりました
   kana_segmented: ケッコン スンゼン デ ステラレタラ シャチョウ ノ デキアイ ガ ハジマリマシタ
 - key: name:天宮こなつ|name:「赤毛の役立たず」とクビになった魔力なしの魔女ですが、「薬草の知識がハンパない!」と王立研究所に即採用されました。
-  kana_segmented: アカゲ ノ ヤクタタズ ト クビ ニ ナッタ マリョク ナシ ノ マジョ デスガ ヤクソウ ノ チシキ ガ ハンパナイ ト オウリツ
-    ケンキュウショ ニ ソクサイヨウ サレマシタ
+  kana_segmented: アカゲ ノ ヤクタタズ ト クビ ニ ナッタ マリョク ナシ ノ マジョ デスガ ヤクソウ ノ チシキ ガ ハンパナイ ト オウリツ ケンキュウショ ニ ソクサイヨウ サレマシタ
 - key: name:天宮さろん|name:#居酒屋新幹線
   kana_segmented: '# イザカヤ シンカンセン'
 - key: name:天宮さろん|name:#居酒屋新幹線.
@@ -36865,8 +36615,7 @@ fills:
 - key: name:天野アンジェラ|name:デミルカ様はごりつよ悪役令嬢|sub:メンタル最強お嬢様は王子からの婚約破棄をぶっ潰します!
   kana_segmented: デミルカ サマ ワ ゴリツヨ アクヤク レイジョウ
 - key: name:天野ハザマ|name:お狐様にお願い!～廃村に残ってた神様がファンタジー化した現代社会に放り込まれたら最強だった～@COMIC
-  kana_segmented: オキツネサマ ニ オネガイ ハイソン ニ ノコッテタ カミサマ ガ ファンタジーカ シタ ゲンダイ シャカイ ニ ホウリコマレタラ
-    サイキョウ ダッタ アットマーク コミック
+  kana_segmented: オキツネサマ ニ オネガイ ハイソン ニ ノコッテタ カミサマ ガ ファンタジーカ シタ ゲンダイ シャカイ ニ ホウリコマレタラ サイキョウ ダッタ アットマーク コミック
 - key: name:天野ハザマ|name:キコリの異世界譚
   kana_segmented: キコリ ノ イセカイタン
 - key: name:天野ハザマ|name:ブレイブファンタジア
@@ -36880,8 +36629,7 @@ fills:
 - key: name:天野緋真|name:猫に転生したけど、暇なのでゲーマー女子と一緒にVRMMOをする
   kana_segmented: ネコ ニ テンセイ シタ ケド ヒマ ナノデ ゲーマー ジョシ ト イッショ ニ ヴイアールエムエムオー オ スル
 - key: name:天野英|name:世界を救った英雄を育てた最強預言者は、冒険者になっても世界中の弟子から慕われてます
-  kana_segmented: セカイ オ スクッタ エイユウ オ ソダテタ サイキョウ ヨゲンシャ ワ ボウケンシャ ニ ナッテモ セカイジュウ ノ デシ カラ
-    シタワレテマス
+  kana_segmented: セカイ オ スクッタ エイユウ オ ソダテタ サイキョウ ヨゲンシャ ワ ボウケンシャ ニ ナッテモ セカイジュウ ノ デシ カラ シタワレテマス
 - key: name:天野英|name:俺だけデイリーミッションがあるダンジョン生活
   kana_segmented: オレ ダケ デイリー ミッション ガ アル ダンジョン セイカツ
 - key: name:天野英|name:悪役王子の英雄譚
@@ -37094,8 +36842,7 @@ fills:
 - key: name:如月命|name:最強タンクの迷宮攻略
   kana_segmented: サイキョウ タンク ノ メイキュウ コウリャク
 - key: name:如月清華|name:厳つい顔で凶悪騎士団長と恐れられる公爵様の最後の婚活相手は社交界の幻の花でした
-  kana_segmented: イカツイ カオ デ キョウアク キシダンチョウ ト オソレラレル コウシャクサマ ノ サイゴ ノ コンカツ アイテ ワ シャコウカイ
-    ノ マボロシ ノ ハナ デシタ
+  kana_segmented: イカツイ カオ デ キョウアク キシダンチョウ ト オソレラレル コウシャクサマ ノ サイゴ ノ コンカツ アイテ ワ シャコウカイ ノ マボロシ ノ ハナ デシタ
 - key: name:妹尾圭祐|name:バンプアー
   kana_segmented: バンプアー
 - key: name:妹尾尻尾|name:ジェノヴァの弟子
@@ -37306,8 +37053,7 @@ fills:
 - key: name:安タケコ|name:リベンジ・ウェディング
   kana_segmented: リベンジ ウェディング
 - key: name:安住たかひろ|name:世界を救った英雄を育てた最強預言者は、冒険者になっても世界中の弟子から慕われてます
-  kana_segmented: セカイ オ スクッタ エイユウ オ ソダテタ サイキョウ ヨゲンシャ ワ ボウケンシャ ニ ナッテモ セカイジュウ ノ デシ カラ
-    シタワレテマス
+  kana_segmented: セカイ オ スクッタ エイユウ オ ソダテタ サイキョウ ヨゲンシャ ワ ボウケンシャ ニ ナッテモ セカイジュウ ノ デシ カラ シタワレテマス
 - key: name:安住露月|name:ブラッド・エンド・ラブ
   kana_segmented: ブラッド エンド ラブ
 - key: name:安住露月|name:愛という名の
@@ -37620,15 +37366,13 @@ fills:
 - key: name:宮下裕一|name:映画スイートプリキュア♪とりもどせ!心がつなぐ奇跡のメロディ♪
   kana_segmented: エイガ スイート プリキュア トリモドセ ココロ ガ ツナグ キセキ ノ メロディ
 - key: name:宮之みやこ|name:『触れられると死ぬ』と言われた私、王子に触れたら最強の大聖女になりました。ところで殿下の愛が重い
-  kana_segmented: 『 フレラレル ト シヌ 』 ト イワレタ ワタクシ 、 オウジ ニ フレタラ サイキョウ ノ ダイセイジョ ニ ナリマシタ 。
-    トコロデ デンカ ノ アイ ガ オモイ
+  kana_segmented: 『 フレラレル ト シヌ 』 ト イワレタ ワタクシ 、 オウジ ニ フレタラ サイキョウ ノ ダイセイジョ ニ ナリマシタ 。 トコロデ デンカ ノ アイ ガ オモイ
 - key: name:宮之みやこ|name:はらぺこ令嬢、れべるあっぷ食堂はじめました
   kana_segmented: ハラペコ レイジョウ レベル アップ ショクドウ ハジメマシタ
 - key: name:宮之みやこ|name:広報部出身の悪役令嬢ですが、無表情な王子が「君を手放したくない」と言い出しました
   kana_segmented: コウホウブ シュッシン ノ アクヤク レイジョウ デスガ ムヒョウジョウ ナ オウジ ガ キミ オ テバナシタクナイ ト イイダシマシタ
 - key: name:宮之みやこ|name:聖女が来るから「君を愛することはない」と言われたのでお飾り王妃に徹していたら、聖女が5歳だったので全力で愛します!!
-  kana_segmented: セイジョ ガ クルカラ 「 キミ オ アイスル コト ワ ナイ 」 ト イワレタノデ オカザリ オウヒ ニ テッシテイタラ 、
-    セイジョ ガ 5サイ ダッタノデ ゼンリョク デ アイシマス !!
+  kana_segmented: セイジョ ガ クルカラ 「 キミ オ アイスル コト ワ ナイ 」 ト イワレタノデ オカザリ オウヒ ニ テッシテイタラ 、 セイジョ ガ 5サイ ダッタノデ ゼンリョク デ アイシマス !!
 - key: name:宮之みやこ|name:贄姫の婚姻|sub:身代わり王女は帝国で最愛となる
   kana_segmented: ニエヒメ ノ コンイン
 - key: name:宮之みやこ|name:隠れ才女は全然めげない
@@ -37727,8 +37471,7 @@ fills:
   kana_segmented: セイケンオウ シグリード
   src: ndl
 - key: name:宮永レン|name:捨てられ令嬢が憧れの宰相様に勢いで結婚してくださいとお願いしたら逆に求婚されました
-  kana_segmented: ステラレ レイジョウ ガ アコガレ ノ サイショウサマ ニ イキオイ デ ケッコン シテ クダサイ ト オネガイ シタラ ギャク
-    ニ キュウコン サレマシタ
+  kana_segmented: ステラレ レイジョウ ガ アコガレ ノ サイショウサマ ニ イキオイ デ ケッコン シテ クダサイ ト オネガイ シタラ ギャク ニ キュウコン サレマシタ
 - key: name:宮沢わたる|name:異世界ロイヤルロワイアル
   kana_segmented: イセカイ ロイヤル ロワイアル
 - key: name:宮沢明|name:TACHIDEN|sub:立川電機工業〈株〉男子ソフトボール部
@@ -37946,15 +37689,13 @@ fills:
 - key: name:富野由悠季|name:機動戦士ガンダム ゼロの旧ザク
   kana_segmented: キドウ センシ ガンダム ゼロ ノ キュウザク
 - key: name:富野由悠季|name:機動戦士ガンダム00 セカンドシーズン
-  kana_segmented: キドウ センシ ガンダム 00 セカンド シーズン|キドウ センシ ガンダム ダブル オー セカンド シーズン|キドウ センシ
-    ガンダム ダブルオー セカンド シーズン
+  kana_segmented: キドウ センシ ガンダム 00 セカンド シーズン|キドウ センシ ガンダム ダブル オー セカンド シーズン|キドウ センシ ガンダム ダブルオー セカンド シーズン
 - key: name:富野由悠季|name:機動戦士ガンダムANAHEIM RECORD
   kana_segmented: キドウ センシ ガンダム アナハイム レコード
 - key: name:富野由悠季|name:機動戦士ガンダムFAR EAST JAPAN
   kana_segmented: キドウ センシ ガンダム ファー イースト ジャパン
 - key: name:富野由悠季|name:機動戦士ガンダムMS IGLOO 2重力戦線
-  kana_segmented: キドウ センシ ガンダム MS IGLOO 2 ジュウリョク センセン|キドウ センシ ガンダム エムエス イグルー 2 ジュウリョク
-    センセン
+  kana_segmented: キドウ センシ ガンダム MS IGLOO 2 ジュウリョク センセン|キドウ センシ ガンダム エムエス イグルー 2 ジュウリョク センセン
 - key: name:富野由悠季|name:機動戦士ガンダムS destiny
   kana_segmented: キドウ センシ ガンダム S destiny
   src: ndl
@@ -37981,8 +37722,7 @@ fills:
 - key: name:富野由悠季|name:機動戦士ガンダムアグレッサー
   kana_segmented: キドウ センシ ガンダム アグレッサー
 - key: name:富野由悠季|name:機動戦士ガンダムアッガイ北米横断2250マイル
-  kana_segmented: キドウ センシ ガンダム アッガイ ホクベイ オウダン 2250マイル|キドウ センシ ガンダム アッガイ ホクベイ オウダン
-    ニセンニヒャクゴジュウマイル
+  kana_segmented: キドウ センシ ガンダム アッガイ ホクベイ オウダン 2250マイル|キドウ センシ ガンダム アッガイ ホクベイ オウダン ニセンニヒャクゴジュウマイル
 - key: name:富野由悠季|name:機動戦士ガンダムエコール・デュ・シエル
   kana_segmented: キドウ センシ ガンダム エコール デュ シエル
 - key: name:富野由悠季|name:機動戦士ガンダムオレら連邦愚連隊
@@ -37998,9 +37738,7 @@ fills:
 - key: name:富野由悠季|name:機動戦士ガンダム外伝 ミッシングリンク
   kana_segmented: キドウ センシ ガンダム ガイデン ミッシング リンク
 - key: name:富野由悠季|name:機動戦士ガンダム第08MS小隊U.C.0079+α
-  kana_segmented: キドウ センシ ガンダム ダイ 08 MS ショウタイ U. C. 0079 + アルファ|キドウ センシ ガンダム ダイ 08
-    エムエス ショウタイ ユーシー 0079 プラス アルファ|キドウ センシ ガンダム ダイゼロハチ エムエス ショウタイ ユー シー ゼロゼロナナキュウ プラス
-    アルファ
+  kana_segmented: キドウ センシ ガンダム ダイ 08 MS ショウタイ U. C. 0079 + アルファ|キドウ センシ ガンダム ダイ 08 エムエス ショウタイ ユーシー 0079 プラス アルファ|キドウ センシ ガンダム ダイゼロハチ エムエス ショウタイ ユー シー ゼロゼロナナキュウ プラス アルファ
 - key: name:富野由悠季|name:機動戦士ガンダム赤い三巨星
   kana_segmented: キドウ センシ ガンダム アカイ サンキョセイ
 - key: name:富野由悠季|name:機動戦士ガンダム逆襲のシャア
@@ -38549,11 +38287,9 @@ fills:
 - key: name:小牧夏子|name:白衣を脱いだら肉食系?|sub:セカンドバージンもあなたと
   kana_segmented: ハクイ オ ヌイダラ ニクショクケイ ?
 - key: name:小狐ミナト|name:S級鑑定士なのにパーティー追放されたので猫耳娘と農業スローライフしようと思います。
-  kana_segmented: エスキュウ カンテイシ ナノニ パーティー ツイホウ サレタ ノデ ネコミミムスメ ト ノウギョウ スロー ライフ シヨウ ト
-    オモイマス
+  kana_segmented: エスキュウ カンテイシ ナノニ パーティー ツイホウ サレタ ノデ ネコミミムスメ ト ノウギョウ スロー ライフ シヨウ ト オモイマス
 - key: name:小狐ミナト|name:ダンジョンキャンパーの俺、ギャル配信者を助けたらバズった上に毎日ギャルが飯を食いにくる
-  kana_segmented: ダンジョン キャンパー ノ オレ ギャル ハイシンシャ オ タスケタラ バズッタ ウエ ニ マイニチ ギャル ガ メシ オ クイニ
-    クル
+  kana_segmented: ダンジョン キャンパー ノ オレ ギャル ハイシンシャ オ タスケタラ バズッタ ウエ ニ マイニチ ギャル ガ メシ オ クイニ クル
 - key: name:小田すずか|name:ディズニーツイステッドワンダーランドザコミック|sub:エピソードオブサバナクロー
   kana_segmented: ディズニー ツイステッド ワンダーランド ザ コミック
 - key: name:小田ヒロ|name:弱気MAX令嬢なのに、辣腕婚約者様の賭けに乗ってしまった
@@ -38581,8 +38317,7 @@ fills:
 - key: name:小田容子|name:シックスティーン症候群(シンドローム)
   kana_segmented: シックスティーン シンドローム|シックスティーン症候群
 - key: name:小田童馬|name:怠惰な悪辱貴族に転生した俺、シナリオをぶっ壊したら規格外の魔力で最凶になった
-  kana_segmented: タイダ ナ アクジョク キゾク ニ テンセイ シタ オレ シナリオ オ ブッコワシタラ キカクガイ ノ マリョク デ サイキョウ
-    ニ ナッタ
+  kana_segmented: タイダ ナ アクジョク キゾク ニ テンセイ シタ オレ シナリオ オ ブッコワシタラ キカクガイ ノ マリョク デ サイキョウ ニ ナッタ
 - key: name:小田童馬|name:桃源暗鬼外伝
   kana_segmented: トウゲン アンキ ガイデン
 - key: name:小田菜摘|name:帝室宮殿の見習い女官
@@ -38622,8 +38357,7 @@ fills:
 - key: name:小笠原智史|name:幻奏戦記ルリルラ
   kana_segmented: ゲンソウ センキ ルリルラ
 - key: name:小箱ハコ|name:病弱な悪役令嬢ですが、婚約者が過保護すぎて逃げ出したい〈私たち犬猿の仲でしたよね!?〉
-  kana_segmented: ビョウジャク ナ アクヤク レイジョウ デスガ コンヤクシャ ガ カホゴ スギテ ニゲダシタイ ワタシタチ ケンエン ノ ナカ
-    デシタヨネ
+  kana_segmented: ビョウジャク ナ アクヤク レイジョウ デスガ コンヤクシャ ガ カホゴ スギテ ニゲダシタイ ワタシタチ ケンエン ノ ナカ デシタヨネ
 - key: name:小花オト|name:BFF
   kana_segmented: ビーエフエフ
 - key: name:小花衣いろは|name:妖花街にて保育士をすることになりまして。
@@ -38724,8 +38458,7 @@ fills:
 - key: name:小鳥遊育|name:妄想腐男子くん
   kana_segmented: モウソウ フダンシクン
 - key: name:小鳩ねねこ|name:身に覚えのない理由で婚約破棄されましたけれど、仮面の下が醜いだなんて、一体誰が言ったのかしら?
-  kana_segmented: ミ ニ オボエ ノ ナイ リユウ デ コンヤク ハキ サレマシタ ケレド カメン ノ シタ ガ ミニクイ ダ ナンテ イッタイ
-    ダレ ガ イッタ ノ カシラ
+  kana_segmented: ミ ニ オボエ ノ ナイ リユウ デ コンヤク ハキ サレマシタ ケレド カメン ノ シタ ガ ミニクイ ダ ナンテ イッタイ ダレ ガ イッタ ノ カシラ
 - key: name:小鳩子鈴|name:レンズ越し、たった一度の恋をする
   kana_segmented: レンズゴシ タッタ イチド ノ コイ オ スル
 - key: name:小鳩子鈴|name:運命の恋人は期限付き
@@ -38828,8 +38561,7 @@ fills:
   kana_segmented: （ギンガ トクメイタイ）パキント キント
   src: ndl
 - key: name:山下180°|name:社畜DTPオペレーターの僕が異世界で技術革新してもいいですか?
-  kana_segmented: シャチク DTP オペレーター ノ ボク ガ イセカイ デ イノベーション シテモ イイデスカ ?|社畜DTPオペレーターの僕が異世界で技術革新
-    (イノベーション) してもいいですか?
+  kana_segmented: シャチク DTP オペレーター ノ ボク ガ イセカイ デ イノベーション シテモ イイデスカ ?|社畜DTPオペレーターの僕が異世界で技術革新 (イノベーション) してもいいですか?
 - key: name:山下ナナオ|name:31番目のお妃様
   kana_segmented: サンジュウイチバンメ ノ オキサキサマ
 - key: name:山下ナナオ|name:〔○仮〕花嫁のやんごとなき事情
@@ -39450,8 +39182,7 @@ fills:
 - key: name:岡沢六十四|name:異世界で土地を買って農場を作ろう
   kana_segmented: イセカイ デ トチ オ カッテ ノウジョウ オ ツクロウ
 - key: name:岡沢六十四|name:退学の末に勘当された騎士は、超絶スキル「絆召喚術」を会得し最強となる
-  kana_segmented: タイガク ノ スエ ニ カンドウ サレタ キシ ワ チョウゼツ スキル キズナ ショウカンジュツ オ エトク シ サイキョウ ト
-    ナル
+  kana_segmented: タイガク ノ スエ ニ カンドウ サレタ キシ ワ チョウゼツ スキル キズナ ショウカンジュツ オ エトク シ サイキョウ ト ナル
 - key: name:岡田ピコ|name:黒崎さんの一途な愛がとまらない
   kana_segmented: クロサキ サン ノ イチズ ナ アイ ガ トマラナイ
 - key: name:岡田卓也|name:動物人間
@@ -39718,8 +39449,7 @@ fills:
 - key: name:島國|name:甘党ヤクザとケーキ屋バイト君の話
   kana_segmented: アマトウ ヤクザ ト ケーキヤ バイトクン ノ ハナシ
 - key: name:島崎勇輝|name:パワハラ限界勇者、魔王軍から好待遇でスカウトされる～勇者ランキング1位なのに手取りがゴミ過ぎて生活できません～@comic
-  kana_segmented: パワハラ ゲンカイ ユウシャ マオウグン カラ コウタイグウ デ スカウト サレル ユウシャ ランキング イチイ ナノニ テドリ
-    ガ ゴミ スギテ セイカツ デキマセン アットマーク コミック
+  kana_segmented: パワハラ ゲンカイ ユウシャ マオウグン カラ コウタイグウ デ スカウト サレル ユウシャ ランキング イチイ ナノニ テドリ ガ ゴミ スギテ セイカツ デキマセン アットマーク コミック
 - key: name:島崎康行|name:Closer
   kana_segmented: クローザー
 - key: name:島崎康行|name:アウトロー日本昔話
@@ -39757,8 +39487,7 @@ fills:
 - key: name:島田莉音|name:伯爵令嬢はヤンデレ旦那様と当て馬シナリオを回避する!!
   kana_segmented: ハクシャク レイジョウ ワ ヤンデレ ダンナサマ ト アテウマ シナリオ オ カイヒ スル
 - key: name:島知宏|name:〈パクパクですわ〉追放されたお嬢様の『モンスターを食べるほど強くなる』スキルは、1食で1レベルアップする前代未聞の最強スキルでした。3日で人類最強になりましたわ～!
-  kana_segmented: パクパク デスワ ツイホウ サレタ オジョウサマ ノ モンスター オ タベルホド ツヨク ナル スキル ワ イッショク デ イチレベル
-    アップ スル ゼンダイ ミモン ノ サイキョウ スキル デシタ ミッカ デ ジンルイ サイキョウ ニ ナリマシタワー
+  kana_segmented: パクパク デスワ ツイホウ サレタ オジョウサマ ノ モンスター オ タベルホド ツヨク ナル スキル ワ イッショク デ イチレベル アップ スル ゼンダイ ミモン ノ サイキョウ スキル デシタ ミッカ デ ジンルイ サイキョウ ニ ナリマシタワー
 - key: name:島袋ユミ|name:夜伽の双子
   kana_segmented: ヨトギ ノ フタゴ
 - key: name:島袋ユミ|name:夜伽の双子|sub:贄姫は二人の王子に愛される
@@ -40549,8 +40278,7 @@ fills:
 - key: name:幸知サライ|name:ラブレター・ラブレター・カフェ
   kana_segmented: ラブレター ラブレター カフェ
 - key: name:幸路|name:闇堕ち勇者の背信配信～追放され、隠しボス部屋に放り込まれた結果、ボスと探索者狩り配信を始める～@comic
-  kana_segmented: ヤミオチ ユウシャ ノ ハイシン ハイシン ツイホウ サレ カクシボスベヤ ニ ホウリコマレタ ケッカ ボス ト タンサクシャガリ
-    ハイシン オ ハジメル アットマーク コミック
+  kana_segmented: ヤミオチ ユウシャ ノ ハイシン ハイシン ツイホウ サレ カクシボスベヤ ニ ホウリコマレタ ケッカ ボス ト タンサクシャガリ ハイシン オ ハジメル アットマーク コミック
 - key: name:幸運ピエロ|name:殺されたらゾンビになったので、進化しまくって無双しようと思います
   kana_segmented: コロサレタラ ゾンビ ニ ナッタ ノデ シンカ シマクッテ ムソウ シヨウ ト オモイマス
 - key: name:幹藻ねずみ|name:実家に帰ったら甘やかされ生活が始まりました
@@ -40619,8 +40347,7 @@ fills:
 - key: name:広田奈都美|name:ナースのチカラplus.
   kana_segmented: ナース ノ チカラ プラス.
 - key: name:広路なゆる|name:〈爆アド〉生まれた直後から最強悪霊と脳内バトルしてたら魔力量が測定可能域を超えてました
-  kana_segmented: バクアド ウマレタ チョクゴ カラ サイキョウ アクリョウ ト ノウナイ バトル シテタラ マリョクリョウ ガ ソクテイ カノウイキ
-    オ コエテマシタ
+  kana_segmented: バクアド ウマレタ チョクゴ カラ サイキョウ アクリョウ ト ノウナイ バトル シテタラ マリョクリョウ ガ ソクテイ カノウイキ オ コエテマシタ
 - key: name:広路なゆる|name:ダンジョンおじさん
   kana_segmented: ダンジョン オジサン
 - key: name:広里かな|name:オメガポルノcase
@@ -40690,8 +40417,7 @@ fills:
 - key: name:廣畑徹|name:マトリの推し事
   kana_segmented: マトリ ノ オシゴト
 - key: name:延野正行|name:「ククク……。奴は四天王の中でも最弱」と解雇された俺、なぜか勇者と聖女の師匠になる
-  kana_segmented: ククク ヤツ ワ シテンノウ ノ ナカ デモ サイジャク ト カイコ サレタ オレ ナゼカ ユウシャ ト セイジョ ノ シショウ
-    ニ ナル
+  kana_segmented: ククク ヤツ ワ シテンノウ ノ ナカ デモ サイジャク ト カイコ サレタ オレ ナゼカ ユウシャ ト セイジョ ノ シショウ ニ ナル
 - key: name:延野正行|name:おっさん勇者は鍛冶屋でスローライフはじめました
   kana_segmented: オッサン ユウシャ ワ カジヤ デ スロー ライフ ハジメマシタ
 - key: name:廻|name:虐げられ令嬢とケガレ公爵
@@ -40775,8 +40501,7 @@ fills:
 - key: name:当麻|name:蓼食う君も好き好き
   kana_segmented: タデ クウ キミ モ スキズキ
 - key: name:当麻リコ|name:悪役令嬢みたいに断罪されそうだったけど、全力で愛されてます!不幸な運命に「ざまぁ」しますわ!|sub:アンソロジーコミック
-  kana_segmented: アクヤク レイジョウ ミタイ ニ ダンザイ サレソウ ダッタ ケド ゼンリョク デ アイサレテマス フコウ ナ ウンメイ ニ ザマァ
-    シマスワ
+  kana_segmented: アクヤク レイジョウ ミタイ ニ ダンザイ サレソウ ダッタ ケド ゼンリョク デ アイサレテマス フコウ ナ ウンメイ ニ ザマァ シマスワ
 - key: name:当麻咲来|name:うちの会社の御曹司が、私の許婚だったみたいです
   kana_segmented: ウチ ノ カイシャ ノ オンゾウシ ガ ワタシ ノ イイナズケ ダッタ ミタイ デス
 - key: name:当麻咲来|name:悪役令嬢は聖女ルートを望まない
@@ -40806,8 +40531,7 @@ fills:
 - key: name:彩戸ゆめ|name:信長公弟記
   kana_segmented: ノブナガ コウテイキ
 - key: name:彩戸ゆめ|name:真実の愛を見つけたと言われて婚約破棄されたので、復縁を迫られても今さらもう遅いです!
-  kana_segmented: シンジツ ノ アイ オ ミツケタ ト イワレテ コンヤク ハキ サレタ ノデ フクエン オ セマラレテモ イマサラ モウ オソイ
-    デス
+  kana_segmented: シンジツ ノ アイ オ ミツケタ ト イワレテ コンヤク ハキ サレタ ノデ フクエン オ セマラレテモ イマサラ モウ オソイ デス
 - key: name:彩月つかさ|name:ワケあって、変装して学園に潜入しています
   kana_segmented: ワケ アッテ ヘンソウ シテ ガクエン ニ センニュウ シテ イマス
 - key: name:彩月ユリィ|name:うい恋|sub:南の島で先住民に求愛されています
@@ -41059,11 +40783,9 @@ fills:
 - key: name:御薗橋801商店街振興組合|name:となりの801ちゃん+
   kana_segmented: トナリ ノ ヤオイチャン プラス
 - key: name:御鷹穂積|name:最近入った白魔導士がパーティークラッシャーで、俺の異世界冒険者生活が崩壊の危機な件について
-  kana_segmented: サイキン ハイッタ シロマドウシ ガ パーティー クラッシャー デ オレ ノ イセカイ ボウケンシャ セイカツ ガ ホウカイ ノ
-    キキ ナ ケン ニ ツイテ
+  kana_segmented: サイキン ハイッタ シロマドウシ ガ パーティー クラッシャー デ オレ ノ イセカイ ボウケンシャ セイカツ ガ ホウカイ ノ キキ ナ ケン ニ ツイテ
 - key: name:御鷹穂積|name:最近入った白魔導士がパーティークラッシャーで、俺の異世界冒険者生活が崩壊の危機な件について.
-  kana_segmented: サイキン ハイッタ シロマドウシ ガ パーティー クラッシャー デ オレ ノ イセカイ ボウケンシャ セイカツ ガ ホウカイ ノ
-    キキ ナ ケン ニ ツイテ.
+  kana_segmented: サイキン ハイッタ シロマドウシ ガ パーティー クラッシャー デ オレ ノ イセカイ ボウケンシャ セイカツ ガ ホウカイ ノ キキ ナ ケン ニ ツイテ.
 - key: name:復八磨直兎|name:催眠天国
   kana_segmented: サイミン テンゴク
 - key: name:徳丸佳貴|name:GUSH maniaEX
@@ -41204,8 +40926,7 @@ fills:
 - key: name:志波ひより|name:純愛ヤクザと同棲生活|sub:私にしか勃たないって本当ですか?
   kana_segmented: ジュンアイ ヤクザ ト ドウセイ セイカツ
 - key: name:志波咲良|name:清楚誠実に生きていたら婚約者に裏切られたので、やり直しの世界では悪役令嬢として生きます
-  kana_segmented: セイソ セイジツ ニ イキテイタラ コンヤクシャ ニ ウラギラレタ ノデ 、 ヤリナオシ ノ セカイ デワ アクヤク レイジョウ
-    ト シテ イキマス
+  kana_segmented: セイソ セイジツ ニ イキテイタラ コンヤクシャ ニ ウラギラレタ ノデ 、 ヤリナオシ ノ セカイ デワ アクヤク レイジョウ ト シテ イキマス
 - key: name:志波由紀|name:人魚のムニエル
   kana_segmented: ニンギョ ノ ムニエル
 - key: name:志波由紀|name:悪魔二世
@@ -41982,8 +41703,7 @@ fills:
 - key: name:新堂アラタ|name:劣等職の最強賢者|sub:底辺の〈村人〉から余裕で世界最強.
   kana_segmented: レットウショク ノ サイキョウ ケンジャ
 - key: name:新堂冬樹|name:歌舞伎町のカリスマ無双キャバ嬢が史上最強の悪役令嬢マリー・アントワネットに生まれ変わったら
-  kana_segmented: カブキチョウ ノ カリスマ ムソウ キャバジョウ ガ シジョウ サイキョウ ノ アクヤク レイジョウ マリー アントワネット ニ
-    ウマレカワッタラ
+  kana_segmented: カブキチョウ ノ カリスマ ムソウ キャバジョウ ガ シジョウ サイキョウ ノ アクヤク レイジョウ マリー アントワネット ニ ウマレカワッタラ
 - key: name:新天新地|name:ゴブリン令嬢と転生貴族が幸せになるまで
   kana_segmented: ゴブリン レイジョウ ト テンセイ キゾク ガ シアワセ ニ ナル マデ
 - key: name:新奈シオ|name:悪役王女の竜騎士団生活
@@ -42217,8 +41937,7 @@ fills:
 - key: name:日暮|name:山奥育ちの俺のゆるり異世界生活
   kana_segmented: ヤマオク ソダチ ノ オレ ノ ユルリ イセカイ セイカツ
 - key: name:日暮|name:幸運値999の私、〈即死魔法〉が絶対に成功するので世界最強です|sub:魔力値1で追放されましたが、確率チートで成り上がる
-  kana_segmented: コウウンチ キュウヒャクキュウジュウキュウ ノ ワタクシ ソクシ マホウ ガ ゼッタイ ニ セイコウ スル ノデ セカイ サイキョウ
-    デス
+  kana_segmented: コウウンチ キュウヒャクキュウジュウキュウ ノ ワタクシ ソクシ マホウ ガ ゼッタイ ニ セイコウ スル ノデ セカイ サイキョウ デス
 - key: name:日暮えむ|name:ひぐらし日記
   kana_segmented: ヒグラシ ニッキ
 - key: name:日暮くれ|name:同じではいられないから
@@ -42274,8 +41993,7 @@ fills:
 - key: 'name:日比野佐和子|name:60kgやせたら人生が爆上がりしました|sub:1年半で成功した(秘)ダイエット術とは? : コミックエッセイ'
   kana_segmented: ロクジッキログラム ヤセタラ ジンセイ ガ バクアガリ シマシタ
 - key: name:日浦あやせ|name:クラス転移に巻き込まれたコンビニ店員のおっさん、勇者には必要なかった余り物スキルを駆使して最強となるようです。
-  kana_segmented: クラス テンイ ニ マキコマレタ コンビニ テンイン ノ オッサン ユウシャ ニワ ヒツヨウ ナカッタ アマリモノ スキル オ
-    クシ シテ サイキョウ ト ナル ヨウデス
+  kana_segmented: クラス テンイ ニ マキコマレタ コンビニ テンイン ノ オッサン ユウシャ ニワ ヒツヨウ ナカッタ アマリモノ スキル オ クシ シテ サイキョウ ト ナル ヨウデス
 - key: name:日生マユ|name:なないろ探訪記
   kana_segmented: ナナイロ タンボウキ
 - key: name:日生佑稀|name:ミスターシンデレラ
@@ -42486,8 +42204,7 @@ fills:
 - key: name:星あかり|name:スバルくんは頭の中全部言いたくてしょうがない|sub:わが家のハッピーBOYは自閉スペクトラム症
   kana_segmented: スバル クン ワ アタマ ノ ナカ ゼンブ イイタクテ ショウガナイ
 - key: name:星くずし|name:冒険者パーティーを追放された回復士の少女を拾って育成したら、まさかの最強職業に転職!?
-  kana_segmented: ボウケンシャ パーティー オ ツイホウサレタ カイフクシ ノ ショウジョ オ ヒロッテ イクセイシタラ 、 マサカ ノ サイキョウ
-    ショクギョウ ニ テンショク !?
+  kana_segmented: ボウケンシャ パーティー オ ツイホウサレタ カイフクシ ノ ショウジョ オ ヒロッテ イクセイシタラ 、 マサカ ノ サイキョウ ショクギョウ ニ テンショク !?
 - key: name:星みあ|name:とろけて絡めて欲しがって
   kana_segmented: トロケテ カラメテ ホシガッテ
 - key: name:星みあ|name:帝様のいうとおり
@@ -42529,8 +42246,7 @@ fills:
   kana_segmented: ケッコン バイブル
   src: ndl
 - key: name:星名あんじ|name:「チート主人公」俺、魅力ステータスを完凸させたらなぜか闇堕ちラスボスに攻略されてます。
-  kana_segmented: 「 チート シュジンコウ 」 オレ 、 ミリョク ステータス オ カントツサセタラ ナゼカ ヤミオチ ラスボス ニ コウリャクサレテマス
-    。
+  kana_segmented: 「 チート シュジンコウ 」 オレ 、 ミリョク ステータス オ カントツサセタラ ナゼカ ヤミオチ ラスボス ニ コウリャクサレテマス 。
 - key: name:星名あんじ|name:カムバック・アフター・フェイト
   kana_segmented: カムバック アフター フェイト
 - key: name:星名あんじ|name:グルメなまものに愛されています
@@ -42668,8 +42384,7 @@ fills:
 - key: name:映画館|name:溺愛
   kana_segmented: デキアイ
 - key: name:春が野かおる|name:たくまし令嬢はへこたれない!～妹に聖女の座を奪われたけど、騎士団でメイドとして働いています～@COMIC
-  kana_segmented: タクマシ レイジョウ ワ ヘコタレナイ イモウト ニ セイジョ ノ ザ オ ウバワレタ ケド キシダン デ メイド ト シテ ハタライテ
-    イマス アットマーク コミック
+  kana_segmented: タクマシ レイジョウ ワ ヘコタレナイ イモウト ニ セイジョ ノ ザ オ ウバワレタ ケド キシダン デ メイド ト シテ ハタライテ イマス アットマーク コミック
 - key: name:春が野かおる|name:伯爵家を守るためにとりあえず婚約しました|sub:ニートの令嬢は醜聞をはらし意地悪な侯爵家に対抗するためいちかばちかの婚約を決断する
   kana_segmented: ハクシャクケ オ マモル タメ ニ トリアエズ コンヤク シマシタ
 - key: name:春が野かおる|name:呪われた龍にくちづけを.
@@ -43085,8 +42800,7 @@ fills:
 - key: name:月ノ輪航介|name:ネットできらいなあいつの消し方
   kana_segmented: ネット デ キライナ アイツ ノ ケシカタ
 - key: name:月ヶ瀬ゆりの|name:断頭台に消えた伝説の悪女、二度目の人生ではガリ勉地味眼鏡になって平穏を望む
-  kana_segmented: ダントウダイ ニ キエタ デンセツ ノ アクジョ ニドメ ノ ジンセイ デワ ガリベン ジミ メガネ ニ ナッテ ヘイオン オ
-    ノゾム
+  kana_segmented: ダントウダイ ニ キエタ デンセツ ノ アクジョ ニドメ ノ ジンセイ デワ ガリベン ジミ メガネ ニ ナッテ ヘイオン オ ノゾム
 - key: name:月並甲介|name:ベヒモスの花婿
   kana_segmented: ベヒモス ノ ハナムコ
 - key: name:月乃ひかり|name:宮廷女医の甘美な治療で皇帝陛下は奮い勃つ
@@ -43322,8 +43036,7 @@ fills:
 - key: name:有賀悠羽揮|name:スタジオ秘密基地劇場
   kana_segmented: スタジオ ヒミツ キチ ゲキジョウ
 - key: name:有都あらゆる|name:〈パクパクですわ〉追放されたお嬢様の『モンスターを食べるほど強くなる』スキルは、1食で1レベルアップする前代未聞の最強スキルでした。3日で人類最強になりましたわ～!
-  kana_segmented: パクパク デスワ ツイホウ サレタ オジョウサマ ノ モンスター オ タベルホド ツヨク ナル スキル ワ イッショク デ イチレベル
-    アップ スル ゼンダイ ミモン ノ サイキョウ スキル デシタ ミッカ デ ジンルイ サイキョウ ニ ナリマシタワー.
+  kana_segmented: パクパク デスワ ツイホウ サレタ オジョウサマ ノ モンスター オ タベルホド ツヨク ナル スキル ワ イッショク デ イチレベル アップ スル ゼンダイ ミモン ノ サイキョウ スキル デシタ ミッカ デ ジンルイ サイキョウ ニ ナリマシタワー.
 - key: name:有里紅良|name:セイル
   kana_segmented: セイル
   src: ndl
@@ -43971,11 +43684,9 @@ fills:
 - key: name:朱西美佐|name:その気にさせてくれ
   kana_segmented: ソノ キ ニ サセテクレ
 - key: name:朱里|name:ゲーム世界転生〈ダン活〉～ゲーマーは〈ダンジョン就活のススメ〉を〈はじめから〉プレイする～@COMIC
-  kana_segmented: ゲーム セカイ テンセイ ダンカツ ゲーマー ワ ダンジョン シュウカツ ノ ススメ オ ハジメ カラ プレイ スル アットマーク
-    コミック
+  kana_segmented: ゲーム セカイ テンセイ ダンカツ ゲーマー ワ ダンジョン シュウカツ ノ ススメ オ ハジメ カラ プレイ スル アットマーク コミック
 - key: name:朱里|name:ゲーム世界転生〈ダン活〉～ゲーマーは〈ダンジョン就活のススメ〉を〈はじめから〉プレイする～@COMIC.
-  kana_segmented: ゲーム セカイ テンセイ ダンカツ ゲーマー ワ ダンジョン シュウカツ ノ ススメ オ ハジメ カラ プレイ スル アットマーク
-    コミック.
+  kana_segmented: ゲーム セカイ テンセイ ダンカツ ゲーマー ワ ダンジョン シュウカツ ノ ススメ オ ハジメ カラ プレイ スル アットマーク コミック.
 - key: name:朱里雀|name:淫魔ですが、堅物騎士団長の妄想だけでお腹いっぱいです!
   kana_segmented: インマ デスガ 、 カタブツ キシ ダンチョウ ノ モウソウ ダケ デ オナカ イッパイデス !
 - key: name:朱野りりん|name:いじわるなのに、嫌なのに
@@ -44098,8 +43809,7 @@ fills:
 - key: name:村上ペコ|name:ガチャマン
   kana_segmented: ガチャマン
 - key: name:村上メイシ|name:「もう‥‥働きたくないんです」冒険者なんか辞めてやる。今更、待遇を変えるからとお願いされてもお断りです。僕はぜーったい働きません。
-  kana_segmented: 「 モウ ‥‥ ハタラキタクナインデス 」 ボウケンシャ ナンカ ヤメテヤル 。 イマサラ 、 タイグウ オ カエル カラ ト
-    オネガイサレテモ オコトワリデス 。 ボク ハ ゼーッタイ ハタラキマセン 。
+  kana_segmented: 「 モウ ‥‥ ハタラキタクナインデス 」 ボウケンシャ ナンカ ヤメテヤル 。 イマサラ 、 タイグウ オ カエル カラ ト オネガイサレテモ オコトワリデス 。 ボク ハ ゼーッタイ ハタラキマセン 。
 - key: name:村上凛|name:おまえをオタクにしてやるから、俺をリア充にしてくれ!
   kana_segmented: オマエ オ オタク ニ シテ ヤル カラ オレ オ リアジュウ ニ シテ クレ
 - key: name:村上左知|name:じれったい花
@@ -44227,8 +43937,7 @@ fills:
 - key: name:来未|name:すまひとらしむ
   kana_segmented: スマイ トラシム
 - key: name:来栖みかん|name:年齢制限付き乙女ゲーの悪役令嬢ですが、堅物騎士様が優秀過ぎてRイベントが一切おきない
-  kana_segmented: ネンレイ セイゲンツキ オトメゲー ノ アクヤク レイジョウ デスガ 、 カタブツ キシサマ ガ ユウシュウ スギテ Rイベント
-    ガ イッサイ オキナイ
+  kana_segmented: ネンレイ セイゲンツキ オトメゲー ノ アクヤク レイジョウ デスガ 、 カタブツ キシサマ ガ ユウシュウ スギテ Rイベント ガ イッサイ オキナイ
 - key: name:来栖もよもよ|name:シシリアとジューシーな侯爵さま
   kana_segmented: シシリア ト ジューシー ナ コウシャクサマ
 - key: name:来栖もよもよ|name:シシリアとジューシーな侯爵さま.
@@ -44260,8 +43969,7 @@ fills:
 - key: name:来須みかん|name:もうすぐ死ぬ悪女に転生してしまった
   kana_segmented: モウスグ シヌ アクジョ ニ テンセイ シテ シマッタ
 - key: name:来須みかん|name:年齢制限付き乙女ゲーの悪役令嬢ですが、堅物騎士様が優秀過ぎてRイベントが一切おきない
-  kana_segmented: ネンレイ セイゲン ツキ オトメ ゲー ノ アクヤク レイジョウ デスガ 、 カタブツ キシサマ ガ ユウシュウ スギテ Rイベント
-    ガ イッサイ オキナイ
+  kana_segmented: ネンレイ セイゲン ツキ オトメ ゲー ノ アクヤク レイジョウ デスガ 、 カタブツ キシサマ ガ ユウシュウ スギテ Rイベント ガ イッサイ オキナイ
 - key: name:来須みかん|name:最恐魔法使いの愛が一途すぎる
   kana_segmented: サイキョウ マホウツカイ ノ アイ ガ イチズ スギル
 - key: name:来須みかん|name:社交界の毒婦とよばれる私
@@ -45086,8 +44794,7 @@ fills:
 - key: name:柳葉あきら|name:骨董屋とうへんボク
   kana_segmented: コットウヤ トウヘンボク
 - key: name:柴乃櫂人|name:報われなかった村人A、貴族に拾われて溺愛される上に、実は持っていた伝説級の神スキルも覚醒した
-  kana_segmented: ムクワレナカッタ ムラビト エー キゾク ニ ヒロワレテ デキアイ サレル ウエ ニ ジツ ワ モッテ イタ デンセツキュウ ノ
-    カミスキル モ カクセイ シタ
+  kana_segmented: ムクワレナカッタ ムラビト エー キゾク ニ ヒロワレテ デキアイ サレル ウエ ニ ジツ ワ モッテ イタ デンセツキュウ ノ カミスキル モ カクセイ シタ
 - key: name:柴乃櫂人|name:田んぼで拾った女騎士、田舎で俺の嫁だと思われている
   kana_segmented: タンボ デ ヒロッタ オンナキシ イナカ デ オレ ノ ヨメ ダト オモワレテ イル
 - key: 'name:柴乃櫂人|name:転生したら皇帝でした|sub:生まれながらの皇帝はこの先生き残れるか : @COMIC'
@@ -45167,8 +44874,7 @@ fills:
 - key: name:栄川遥|name:ニキ。
   kana_segmented: ニキ.
 - key: name:栖ゆち|name:聖騎士の俺が好きになったヒロインが続々とアイツのハーレムメンバーになってしまうんだけど俺の何がいけないのか誰か教えてくれ!!
-  kana_segmented: セイキシ ノ オレ ガ スキニナッタ ヒロイン ガ ゾクゾクト アイツ ノ ハーレム メンバー ニ ナッテシマウンダケド オレ
-    ノ ナニ ガ イケナイノカ ダレ カ オシエテクレ !!
+  kana_segmented: セイキシ ノ オレ ガ スキニナッタ ヒロイン ガ ゾクゾクト アイツ ノ ハーレム メンバー ニ ナッテシマウンダケド オレ ノ ナニ ガ イケナイノカ ダレ カ オシエテクレ !!
 - key: name:栖上ヤタ|name:デッドマウント・デスプレイ外伝 怪人ソリティアの神仙偽術
   kana_segmented: デッド マウント ・ デス プレイ ガイデン カイジン ソリティア ノ シンセン ギジュツ
 - key: name:栖夜まろみ|name:うしろの席のぎゃるに好かれてしまった。
@@ -45406,8 +45112,7 @@ fills:
 - key: name:桃桃子|name:デーモン・デイズ
   kana_segmented: デーモン デイズ
 - key: name:桃瀬いづみ|name:メリバだらけの乙女ゲーで推しを幸せにしようとしたら、執着されて禁断の関係に堕ちました
-  kana_segmented: メリバダラケ ノ オトメゲー デ オシ オ シアワセ ニ シヨウ ト シタラ シュウチャク サレテ キンダン ノ カンケイ ニ
-    オチマシタ
+  kana_segmented: メリバダラケ ノ オトメゲー デ オシ オ シアワセ ニ シヨウ ト シタラ シュウチャク サレテ キンダン ノ カンケイ ニ オチマシタ
 - key: name:桃田さとみ|name:妖怪マンガで楽しい古典
   kana_segmented: ヨウカイ マンガ デ タノシイ コテン
 - key: name:桃田紗世|name:放課後♡秘密の保健室
@@ -45504,8 +45209,7 @@ fills:
 - key: name:桑島黎音|name:世界で一番『可愛い』雨宮さん、二番目は俺。|sub:THE COMIC.
   kana_segmented: セカイ デ イチバン カワイイ アマミヤ サン ニバンメ ワ オレ
 - key: name:桑島黎音|name:冤罪で死刑にされた男は〈略奪〉のスキルを得て蘇り復讐を謳歌する@COMIC
-  kana_segmented: エンザイ デ シケイ ニ サレタ オトコ ワ リャクダツ ノ スキル オ エテ ヨミガエリ フクシュウ オ オウカ スル アットマーク
-    コミック
+  kana_segmented: エンザイ デ シケイ ニ サレタ オトコ ワ リャクダツ ノ スキル オ エテ ヨミガエリ フクシュウ オ オウカ スル アットマーク コミック
 - key: name:桑島黎音|name:最低ランクの冒険者、勇者少女を育てる|sub:俺って数合わせのおっさんじゃなかったか?
   kana_segmented: サイテイ ランク ノ ボウケンシャ ユウシャ ショウジョ オ ソダテル
 - key: name:桑島黎音|name:略奪使いの成り上がり|sub:追放された男は、最高の仲間と英雄を目指す
@@ -45890,11 +45594,9 @@ fills:
 - key: name:森|name:感覚共有メイドさん!
   kana_segmented: カンカク キョウユウ メイドサン
 - key: name:森あいり|name:《最強ステータス》を引き継いで人間に転生した聖獣ベヒーモス、勇者の婚約者〈お姫様〉をうっかり寝取ってしまう
-  kana_segmented: サイキョウ ステータス オ ヒキツイデ ニンゲン ニ テンセイ シタ セイジュウ ベヒーモス ユウシャ ノ コンヤクシャ オヒメサマ
-    オ ウッカリ ネトッテ シマウ
+  kana_segmented: サイキョウ ステータス オ ヒキツイデ ニンゲン ニ テンセイ シタ セイジュウ ベヒーモス ユウシャ ノ コンヤクシャ オヒメサマ オ ウッカリ ネトッテ シマウ
 - key: name:森あいり|name:許嫁が出来たと思ったら、その許嫁が学校で有名な『悪役令嬢』だったんだけど、どうすればいい?
-  kana_segmented: イイナズケ ガ デキタ ト オモッタラ ソノ イイナズケ ガ ガッコウ デ ユウメイ ナ アクヤク レイジョウ ダッタンダケド
-    ドウスレバ イイ
+  kana_segmented: イイナズケ ガ デキタ ト オモッタラ ソノ イイナズケ ガ ガッコウ デ ユウメイ ナ アクヤク レイジョウ ダッタンダケド ドウスレバ イイ
 - key: name:森こさち|name:これは経費で落ちません!
   kana_segmented: コレ ワ ケイヒ デ オチマセン
 - key: name:森もも|name:偽装カレシに溺愛されまして
@@ -46102,8 +45804,7 @@ fills:
   kana_segmented: ホンマ, リュウ, 1946-
   src: ndl
 - key: name:森貴夕貴|name:女神と魔王〈♀〉から迫られて生まれて初めて女の子とフラグが立ったので、意地でも異世界転生を回避したい件!??
-  kana_segmented: メガミ ト マオウ カラ セマラレテ ウマレテ ハジメテ オンナノコ ト フラグ ガ タッタ ノデ イジ デモ イセカイ テンセイ
-    オ カイヒ シタイ ケン
+  kana_segmented: メガミ ト マオウ カラ セマラレテ ウマレテ ハジメテ オンナノコ ト フラグ ガ タッタ ノデ イジ デモ イセカイ テンセイ オ カイヒ シタイ ケン
 - key: name:森野いずみ|name:ぷち本当にあった愉快な話昇天!!夜のお仕事SP
   kana_segmented: プチ ホントウ ニ アッタ ユカイ ナ ハナシ ショウテン!!ヨル ノ オシゴト SP
 - key: name:森野くみち|name:ダメ元の恋では、だめですか?
@@ -46760,8 +46461,7 @@ fills:
 - key: name:櫻木けい|name:後宮の黒猫金庫番.
   kana_segmented: コウキュウ ノ クロネコ キンコバン.
 - key: name:櫻田りん|name:悪役令嬢みたいに断罪されそうだったけど、全力で愛されてます!不幸な運命に「ざまぁ」しますわ!|sub:アンソロジーコミック.
-  kana_segmented: アクヤク レイジョウ ミタイ ニ ダンザイ サレソウ ダッタ ケド ゼンリョク デ アイサレテマス フコウ ナ ウンメイ ニ ザマァ
-    シマスワ
+  kana_segmented: アクヤク レイジョウ ミタイ ニ ダンザイ サレソウ ダッタ ケド ゼンリョク デ アイサレテマス フコウ ナ ウンメイ ニ ザマァ シマスワ
 - key: name:櫻野なゆな|name:教授はイノセントでエロティック
   kana_segmented: キョウジュ ワ イノセント デ エロティック
 - key: name:次恒一|name:木っ端舞い散るその頃に
@@ -47849,8 +47549,7 @@ fills:
 - key: name:沢野いずみ|name:妃教育から逃げたい私
   kana_segmented: キサキキョウイク カラ ニゲタイ ワタクシ
 - key: name:沢野いずみ|name:病弱な悪役令嬢ですが、婚約者が過保護すぎて逃げ出したい〈私たち犬猿の仲でしたよね!?〉
-  kana_segmented: ビョウジャク ナ アクヤク レイジョウ デスガ コンヤクシャ ガ カホゴ スギテ ニゲダシタイ ワタシタチ ケンエン ノ ナカ
-    デシタヨネ
+  kana_segmented: ビョウジャク ナ アクヤク レイジョウ デスガ コンヤクシャ ガ カホゴ スギテ ニゲダシタイ ワタシタチ ケンエン ノ ナカ デシタヨネ
 - key: name:沢野りお|name:ちびっ子転生日記帳
   kana_segmented: チビッコ テンセイ ニッキチョウ
 - key: name:沢野りお|name:みそっかすちびっ子転生王女は死にたくない!
@@ -48005,8 +47704,7 @@ fills:
 - key: name:泉彩|name:人外教室の人間嫌い教師|sub:ヒトマ先生、私たちに人間を教えてくれますか……?
   kana_segmented: ジンガイ キョウシツ ノ ニンゲンギライ キョウシ
 - key: name:泉彩|name:最強職《竜騎士》から初級職《運び屋》になったのに、なぜか勇者達から頼られてます@comic
-  kana_segmented: サイキョウショク リュウキシ カラ ショキュウショク ハコビヤ ニ ナッタ ノニ ナゼカ ユウシャタチ カラ タヨラレテマス アットマーク
-    コミック
+  kana_segmented: サイキョウショク リュウキシ カラ ショキュウショク ハコビヤ ニ ナッタ ノニ ナゼカ ユウシャタチ カラ タヨラレテマス アットマーク コミック
 - key: name:泉藤進|name:アラビアン魔神冒険譚ランプ・ランプ
   kana_segmented: アラビアン マジン ボウケンタン ランプ ランプ
   src: ndl
@@ -48019,8 +47717,7 @@ fills:
 - key: name:泉谷一樹|name:ヤンキーの鬼ヶ原さんが僕にだけ過保護すぎる
   kana_segmented: ヤンキー ノ オニガワラ サン ガ ボク ニ ダケ カホゴ スギル
 - key: name:泉里侑希|name:死ぬ運命にある悪役令嬢の兄に転生したので、妹を育てて未来を変えたいと思います
-  kana_segmented: シヌ ウンメイ ニ アル アクヤク レイジョウ ノ アニ ニ テンセイ シタ ノデ イモウト オ ソダテテ ミライ オ カエタイ
-    ト オモイマス
+  kana_segmented: シヌ ウンメイ ニ アル アクヤク レイジョウ ノ アニ ニ テンセイ シタ ノデ イモウト オ ソダテテ ミライ オ カエタイ ト オモイマス
 - key: name:泉鏡花|name:あの極限の文学作品を美麗漫画で読む。
   kana_segmented: アノ キョクゲン ノ ブンガク サクヒン オ ビレイ マンガ デ ヨム
 - key: name:泉門くき|name:愛の声で暴いて
@@ -48333,8 +48030,7 @@ fills:
 - key: name:海冬レイジ|name:死神探偵エルリアの解
   kana_segmented: シニガミ タンテイ エルリア ノ カイ
 - key: name:海原ゆた|name:ポンコツ王太子のモブ姉王女らしいけど、悪役令嬢が可哀想なので助けようと思います～王女ルートがない!?なら作ればいいのよ!～@COMIC
-  kana_segmented: ポンコツ オウタイシ ノ モブアネ オウジョ ラシイ ケド アクヤク レイジョウ ガ カワイソウ ナノデ タスケヨウ ト オモイマス
-    オウジョ ルート ガ ナイ ナラ ツクレバ イイノヨ アットマーク コミック
+  kana_segmented: ポンコツ オウタイシ ノ モブアネ オウジョ ラシイ ケド アクヤク レイジョウ ガ カワイソウ ナノデ タスケヨウ ト オモイマス オウジョ ルート ガ ナイ ナラ ツクレバ イイノヨ アットマーク コミック
 - key: name:海原ゆた|name:愛が重い騎士公爵は、追放令嬢のすべてを奪い尽くしたい。
   kana_segmented: アイ ガ オモイ キシ コウシャク ワ 、 ツイホウ レイジョウ ノ スベテ オ ウバイツクシタイ 。
 - key: name:海原ゆた|name:魅惑の紳士は、まさに悪魔!?
@@ -48444,8 +48140,7 @@ fills:
   kana_segmented: トナリ ノ セキ ノ イケメン ガ オレ ノ コト スキ カモ シレナイ
 - key: name:涼|name:鮫は桜に恋をする
   kana_segmented: サメ ワ サクラ ニ コイ オ スル
-- key: name:涼子|name:トロイメライ|sub:when it rains,look for rainbows.when it's dark,look
-    for stars
+- key: name:涼子|name:トロイメライ|sub:when it rains,look for rainbows.when it's dark,look for stars
   kana_segmented: トロイメライ
 - key: name:涼子|name:愛しの泣き顔
   kana_segmented: イトシ ノ ナキガオ
@@ -48620,8 +48315,7 @@ fills:
 - key: name:清澄炯一|name:戦野の一服
   kana_segmented: センヤ ノ イップク
 - key: name:清露|name:冒険者パーティーを追放された回復士の少女を拾って育成したら、まさかの最強職業に転職!?|sub:おまけに彼女の様子が何やらおかしくて…
-  kana_segmented: ボウケンシャ パーティー オ ツイホウ サレタ カイフクシ ノ ショウジョ オ ヒロッテ イクセイ シタラ 、 マサカ ノ サイキョウ
-    ショクギョウ ニ テンショク!?
+  kana_segmented: ボウケンシャ パーティー オ ツイホウ サレタ カイフクシ ノ ショウジョ オ ヒロッテ イクセイ シタラ 、 マサカ ノ サイキョウ ショクギョウ ニ テンショク!?
 - key: name:清音圭|name:化け狐の忠心
   kana_segmented: バケギツネ ノ チュウシン
 - key: name:清音圭|name:愛され皇妃のゆううつ
@@ -48644,8 +48338,7 @@ fills:
 - key: name:渚美鈴|name:わったーレキコちゃん
   kana_segmented: ワッター レキコチャン
 - key: name:渡ざらめ|name:最強の皇帝に叛逆したら懲役666年をくらった俺、追放先の精霊界で真の最強となって舞い戻る
-  kana_segmented: サイキョウ ノ コウテイ ニ ハンギャクシタラ チョウエキ 666ネン オ クラッタ オレ 、 ツイホウサキ ノ セイレイカイ
-    デ シン ノ サイキョウ ト ナッテ マイモドル
+  kana_segmented: サイキョウ ノ コウテイ ニ ハンギャクシタラ チョウエキ 666ネン オ クラッタ オレ 、 ツイホウサキ ノ セイレイカイ デ シン ノ サイキョウ ト ナッテ マイモドル
 - key: name:渡ざらめ|name:魂を半分喰われたら女神様に同情された?
   kana_segmented: タマシイ オ ハンブン クワレタラ メガミサマ ニ ドウジョウサレタ ?
 - key: name:渡りに船|name:しまいずまい
@@ -48762,8 +48455,7 @@ fills:
 - key: name:湊祥|name:鬼の生贄花嫁と甘い契りを
   kana_segmented: オニ ノ イケニエ ハナヨメ ト アマイ チギリ オ
 - key: name:湊良弘|name:一緒に剣の修行をした幼馴染が奴隷になっていたので、Sランク冒険者の僕は彼女を買って守ることにした
-  kana_segmented: イッショ ニ ケン ノ シュギョウ オ シタ オサナナジミ ガ ドレイ ニ ナッテ イタ ノデ エスランク ボウケンシャ ノ ボク
-    ワ カノジョ オ カッテ マモル コト ニ シタ
+  kana_segmented: イッショ ニ ケン ノ シュギョウ オ シタ オサナナジミ ガ ドレイ ニ ナッテ イタ ノデ エスランク ボウケンシャ ノ ボク ワ カノジョ オ カッテ マモル コト ニ シタ
 - key: name:湊谷鈴|name:へんてこいきもの
   kana_segmented: ヘンテコ イキモノ
 - key: name:湯土ゆず|name:だって、あなたが浮気をしたから
@@ -49223,8 +48915,7 @@ fills:
 - key: name:照玉ぽてこら|name:お隣のおねぇさんは×××したい
   kana_segmented: オトナリ ノ オネェサン ワ ペケペケペケ シタイ
 - key: name:煮たか|name:ポーションは160km/hで投げるモノ!～アイテム係の俺が万能回復薬を投擲することで最強の冒険者に成り上がる!?～@COMIC
-  kana_segmented: ポーション ワ ジソク ヒャクロクジッキロメートル デ ナゲル モノ アイテムガカリ ノ オレ ガ バンノウ カイフクヤク オ
-    トウテキ スル コト デ サイキョウ ノ ボウケンシャ ニ ナリアガル アットマーク コミック
+  kana_segmented: ポーション ワ ジソク ヒャクロクジッキロメートル デ ナゲル モノ アイテムガカリ ノ オレ ガ バンノウ カイフクヤク オ トウテキ スル コト デ サイキョウ ノ ボウケンシャ ニ ナリアガル アットマーク コミック
 - key: name:熊井秀憲|name:救世主
   kana_segmented: キュウセイシュ|メシア
 - key: name:熊本まさし|name:Last Heaven
@@ -49256,8 +48947,7 @@ fills:
 - key: name:熊辛|name:名もない歌を聴かせてよ
   kana_segmented: ナ モ ナイ ウタ オ キカセテヨ
 - key: name:熊野だいごろう|name:追放された俺が外れギフト『翻訳』で最強パーティー無双!～魔物や魔族と話せる能力を駆使して成り上がる～@COMIC
-  kana_segmented: ツイホウ サレタ オレ ガ ハズレ ギフト ホンヤク デ サイキョウ パーティー ムソウ マモノ ヤ マゾク ト ハナセル ノウリョク
-    オ クシ シテ ナリアガル アットマーク コミック
+  kana_segmented: ツイホウ サレタ オレ ガ ハズレ ギフト ホンヤク デ サイキョウ パーティー ムソウ マモノ ヤ マゾク ト ハナセル ノウリョク オ クシ シテ ナリアガル アットマーク コミック
 - key: name:熊野まゆ|name:国王陛下の溺愛花嫁|sub:屋根裏令嬢の結婚事情
   kana_segmented: コクオウ ヘイカ ノ デキアイ ハナヨメ
 - key: name:熊野まゆ|name:王子な騎士団長は薬草好きの令嬢を溺愛してめとりたい
@@ -49511,8 +49201,7 @@ fills:
 - key: name:狐印|name:這いよれ!スーパーニャル子ちゃんタイム
   kana_segmented: ハイヨレ スーパー ニャルコチャン タイム
 - key: name:狐御前|name:俺以外誰も採取できない素材なのに「素材採取率が低い」とパワハラする幼馴染錬金術師と絶縁した専属魔導士、辺境の町でスローライフを送りたい。
-  kana_segmented: オレ イガイ ダレモ サイシュ デキナイ ソザイ ナノニ ソザイ サイシュリツ ガ ヒクイ ト パワハラ スル オサナナジミ レンキンジュツシ
-    ト ゼツエン シタ センゾク マドウシ ヘンキョウ ノ マチ デ スロー ライフ オ オクリタイ
+  kana_segmented: オレ イガイ ダレモ サイシュ デキナイ ソザイ ナノニ ソザイ サイシュリツ ガ ヒクイ ト パワハラ スル オサナナジミ レンキンジュツシ ト ゼツエン シタ センゾク マドウシ ヘンキョウ ノ マチ デ スロー ライフ オ オクリタイ
 - key: name:狐歪野ツッコ|name:この画像を見てください
   kana_segmented: コノ ガゾウ オ ミテ クダサイ
 - key: name:狐面イエリ|name:異端の祝祭
@@ -49582,13 +49271,11 @@ fills:
 - key: name:猫久|name:笑う門には麦がいる
   kana_segmented: ワラウ カド ニワ ムギ ガ イル
 - key: name:猫倉ありす|name:余命宣告を受けたので私を顧みない家族と婚約者に執着するのをやめることにしました
-  kana_segmented: ヨメイ センコク オ ウケタ ノデ ワタシ オ カエリミナイ カゾク ト コンヤクシャ ニ シュウチャク スル ノオ ヤメル コト
-    ニ シマシタ
+  kana_segmented: ヨメイ センコク オ ウケタ ノデ ワタシ オ カエリミナイ カゾク ト コンヤクシャ ニ シュウチャク スル ノオ ヤメル コト ニ シマシタ
 - key: name:猫倉ありす|name:獣人公爵のエスコート
   kana_segmented: ジュウジン コウシャク ノ エスコート
 - key: name:猫側縁|name:身に覚えのない理由で婚約破棄されましたけれど、仮面の下が醜いだなんて、一体誰が言ったのかしら?
-  kana_segmented: ミ ニ オボエ ノ ナイ リユウ デ コンヤク ハキ サレマシタ ケレド カメン ノ シタ ガ ミニクイ ダ ナンテ イッタイ
-    ダレ ガ イッタ ノ カシラ
+  kana_segmented: ミ ニ オボエ ノ ナイ リユウ デ コンヤク ハキ サレマシタ ケレド カメン ノ シタ ガ ミニクイ ダ ナンテ イッタイ ダレ ガ イッタ ノ カシラ
 - key: name:猫又しょう|name:最高の一夜から始める恋
   kana_segmented: サイコウ ノ イチヤ カラ ハジメル コイ
 - key: name:猫夜|name:AVシェアハウス|sub:セクシー女優たちとアダルトな共同性活
@@ -49684,8 +49371,7 @@ fills:
 - key: name:獅山雨為|name:つまりそういうコト。|sub:カラダは愛に入りますか?
   kana_segmented: ツマリ ソウイウ コト 。
 - key: name:獅東諒|name:バッドエンド確定の政略結婚に使われたモブ伯爵令嬢、転生知識持ちの元クズ旦那さまとこの世界を救います
-  kana_segmented: バッド エンド カクテイ ノ セイリャク ケッコン ニ ツカワレタ モブ ハクシャク レイジョウ テンセイ チシキモチ ノ モト
-    クズ ダンナサマ ト コノ セカイ オ スクイマス
+  kana_segmented: バッド エンド カクテイ ノ セイリャク ケッコン ニ ツカワレタ モブ ハクシャク レイジョウ テンセイ チシキモチ ノ モト クズ ダンナサマ ト コノ セカイ オ スクイマス
 - key: name:玄秀盛|name:REIJI
   kana_segmented: レイジ
 - key: name:玄秀盛|name:ヤクザの交渉術
@@ -49861,8 +49547,7 @@ fills:
 - key: name:琴子|name:おデブ悪女に転生したら、なぜかラスボス王子様に執着されています
   kana_segmented: オデブ アクジョ ニ テンセイ シタラ ナゼカ ラスボス オウジサマ ニ シュウチャク サレテ イマス
 - key: name:琴子|name:バッドエンド目前のヒロインに転生した私、今世では恋愛するつもりがチートな兄が離してくれません!?@COMIC
-  kana_segmented: バッド エンド モクゼン ノ ヒロイン ニ テンセイ シタ ワタシ コンセ デワ レンアイ スル ツモリ ガ チート ナ アニ
-    ガ ハナシテ クレマセン アットマーク コミック
+  kana_segmented: バッド エンド モクゼン ノ ヒロイン ニ テンセイ シタ ワタシ コンセ デワ レンアイ スル ツモリ ガ チート ナ アニ ガ ハナシテ クレマセン アットマーク コミック
 - key: name:琴子|name:二度目の異世界、少年だった彼は年上騎士になり溺愛してくる
   kana_segmented: ニドメ ノ イセカイ ショウネン ダッタ カレ ワ トシウエ キシ ニ ナリ デキアイ シテ クル
 - key: name:琴子|name:二度目の異世界、少年だった彼は年上騎士になり溺愛してくる.
@@ -49876,15 +49561,13 @@ fills:
 - key: name:琴子|name:家から逃げ出したい私が、うっかり憧れの大魔法使い様を買ってしまったら
   kana_segmented: イエ カラ ニゲダシタイ ワタクシ ガ 、 ウッカリ アコガレ ノ ダイマホウツカイサマ オ カッテシマッタラ
 - key: name:琴子|name:成り行きで婚約を申し込んだ弱気貧乏令嬢ですが、何故か次期公爵様に溺愛されて囚われています@COMIC
-  kana_segmented: ナリユキ デ コンヤク オ モウシコンダ ヨワキ ビンボウ レイジョウ デスガ ナゼカ ジキ コウシャクサマ ニ デキアイ サレテ
-    トラワレテ イマス アットマーク コミック
+  kana_segmented: ナリユキ デ コンヤク オ モウシコンダ ヨワキ ビンボウ レイジョウ デスガ ナゼカ ジキ コウシャクサマ ニ デキアイ サレテ トラワレテ イマス アットマーク コミック
 - key: name:琴子|name:推し〈噓〉の筆頭魔術師様が「俺たち、両思いだったんだね」と溺愛してくるんですが!?
   kana_segmented: オシ ウソ ノ ヒットウ マジュツシサマ ガ オレタチ リョウオモイ ダッタンダネ ト デキアイ シテ クルンデスガ
 - key: name:琴子|name:異世界で姉に名前を奪われました
   kana_segmented: イセカイ デ アネ ニ ナマエ オ ウバワレマシタ
 - key: name:琴子|name:私を好きすぎる勇者様を利用して、今世こそ長生きするつもりだったのに〈多分、また失敗した〉
-  kana_segmented: ワタクシ オ スキスギル ユウシャサマ オ リヨウ シテ コンセ コソ ナガイキ スル ツモリ ダッタ ノニ タブン マタ シッパイ
-    シタ
+  kana_segmented: ワタクシ オ スキスギル ユウシャサマ オ リヨウ シテ コンセ コソ ナガイキ スル ツモリ ダッタ ノニ タブン マタ シッパイ シタ
 - key: name:琴子|name:空っぽ聖女として捨てられたはずが、嫁ぎ先の皇帝陛下に溺愛されています
   kana_segmented: カラッポ セイジョ ト シテ ステラレタ ハズ ガ トツギサキ ノ コウテイ ヘイカ ニ デキアイ サレテ イマス
 - key: name:琴子|name:脇役の私がヒロインになるまで
@@ -50619,8 +50302,7 @@ fills:
 - key: name:白樫楓|name:聖女だけど闇堕ちしたらひよこになりました!@COMIC
   kana_segmented: セイジョ ダケド ヤミオチ シタラ ヒヨコ ニ ナリマシタ アットマーク コミック
 - key: name:白樺鹿夜|name:飯バフ食堂、盛況なり～「おっさんは邪魔だ!」と追放された付与術師、特技を生かして田舎で食堂を開くも英雄御用達となる～@COMIC
-  kana_segmented: メシ バフ ショクドウ セイキョウ ナリ オッサン ワ ジャマ ダ ト ツイホウ サレタ フヨジュツシ トクギ オ イカシテ イナカ
-    デ ショクドウ オ ヒラクモ エイユウ ゴヨウタシ ト ナル アットマーク コミック
+  kana_segmented: メシ バフ ショクドウ セイキョウ ナリ オッサン ワ ジャマ ダ ト ツイホウ サレタ フヨジュツシ トクギ オ イカシテ イナカ デ ショクドウ オ ヒラクモ エイユウ ゴヨウタシ ト ナル アットマーク コミック
 - key: name:白沢戌亥|name:追放されたハズレ聖女はチートな魔導具職人でした
   kana_segmented: ツイホウ サレタ ハズレ セイジョ ワ チート ナ マドウグ ショクニン デシタ
 - key: name:白河和華|name:野田くんは方言王子
@@ -50685,8 +50367,7 @@ fills:
 - key: name:白瀬やや|name:夢見る聖女は王子様の添い寝係に選ばれました
   kana_segmented: ユメミル セイジョ ワ オウジサマ ノ ソイネガカリ ニ エラバレマシタ
 - key: name:白狼|name:S級ギルドを追放されたけど、実は俺だけドラゴンの言葉がわかるので、気付いたときには竜騎士の頂点を極めてました。
-  kana_segmented: エスキュウ ギルド オ ツイホウ サレタ ケド ジツ ワ オレ ダケ ドラゴン ノ コトバ ガ ワカル ノデ キズイタ トキ ニワ
-    リュウキシ ノ チョウテン オ キワメテマシタ
+  kana_segmented: エスキュウ ギルド オ ツイホウ サレタ ケド ジツ ワ オレ ダケ ドラゴン ノ コトバ ガ ワカル ノデ キズイタ トキ ニワ リュウキシ ノ チョウテン オ キワメテマシタ
 - key: name:白狼|name:ルパン三世 異世界の姫君
   kana_segmented: ルパン サンセイ ネイバー ワールド プリンセス
 - key: name:白狼|name:ルパン三世 異世界の姫君(ネイバーワールドプリンセス)
@@ -50865,11 +50546,9 @@ fills:
 - key: name:皐月めい|name:婚約破棄の悪意は娼館からお返しします
   kana_segmented: コンヤク ハキ ノ アクイ ワ ショウカン カラ オカエシ シマス
 - key: name:皐月めい|name:次期公爵夫人の役割だけを求めてきた、氷の薔薇と謳われる旦那様が家庭内ストーカーと化した件
-  kana_segmented: ジキ コウシャク フジン ノ ヤクワリ ダケ オ モトメテ キタ コオリ ノ バラ ト ウタワレル ダンナサマ ガ カテイナイ
-    ストーカー ト カシタ ケン
+  kana_segmented: ジキ コウシャク フジン ノ ヤクワリ ダケ オ モトメテ キタ コオリ ノ バラ ト ウタワレル ダンナサマ ガ カテイナイ ストーカー ト カシタ ケン
 - key: name:皐月めい|name:次期公爵夫人の役割だけを求めてきた、氷の薔薇と謳われる旦那様が家庭内ストーカーと化した件.
-  kana_segmented: ジキ コウシャク フジン ノ ヤクワリ ダケ オ モトメテ キタ コオリ ノ バラ ト ウタワレル ダンナサマ ガ カテイナイ
-    ストーカー ト カシタ ケン.
+  kana_segmented: ジキ コウシャク フジン ノ ヤクワリ ダケ オ モトメテ キタ コオリ ノ バラ ト ウタワレル ダンナサマ ガ カテイナイ ストーカー ト カシタ ケン.
 - key: name:皐月文|name:妄愛エロトマニア|sub:えっちな妄想してもいいですか?
   kana_segmented: モウアイ エロトマニア
 - key: name:皐月文|name:溺愛コントラクト|sub:家賃はからだで払います!?
@@ -50998,8 +50677,7 @@ fills:
 - key: name:相舞みー|name:女子力高めな獅子原くん.
   kana_segmented: ジョシリョク タカメナ シシハラクン.
 - key: name:相良なほ|name:ループ5回目。今度こそ死にたくないので婚約破棄を持ちかけたはずが、前世で私を殺した陛下が溺愛してくるのですが
-  kana_segmented: ループ ゴカイメ コンド コソ シニタクナイ ノデ コンヤク ハキ オ モチカケタ ハズ ガ ゼンセ デ ワタクシ オ コロシタ
-    ヘイカ ガ デキアイ シテ クル ノ デスガ
+  kana_segmented: ループ ゴカイメ コンド コソ シニタクナイ ノデ コンヤク ハキ オ モチカケタ ハズ ガ ゼンセ デ ワタクシ オ コロシタ ヘイカ ガ デキアイ シテ クル ノ デスガ
 - key: name:相良俊輔|name:大江戸秘帖|sub:どどぶ木戸
   kana_segmented: オオエド ヒチョウ
 - key: name:相葉キョウコ|name:おじ転生
@@ -51177,8 +50855,7 @@ fills:
 - key: name:真白ばに|name:私の推し男子紹介します
   kana_segmented: ワタシ ノ オシ ダンシ ショウカイ シマス
 - key: name:真白野冬|name:悪役令嬢みたいに断罪されそうだったけど、全力で愛されてます!不幸な運命に「ざまぁ」しますわ!|sub:アンソロジーコミック
-  kana_segmented: アクヤク レイジョウ ミタイ ニ ダンザイ サレソウ ダッタ ケド ゼンリョク デ アイサレテマス フコウ ナ ウンメイ ニ ザマァ
-    シマスワ
+  kana_segmented: アクヤク レイジョウ ミタイ ニ ダンザイ サレソウ ダッタ ケド ゼンリョク デ アイサレテマス フコウ ナ ウンメイ ニ ザマァ シマスワ
 - key: name:真神れい|name:密花の虜囚
   kana_segmented: ミツカ ノ リョシュウ
 - key: name:真空|name:二度目の勇者は復讐の道を嗤い歩む
@@ -51344,8 +51021,7 @@ fills:
   kana_segmented: トニー タケザキ ノ ガンダム マンガ サクサク ダイサクセン
 - key: name:矢立肇|name:バトスピ!
   kana_segmented: バト スピ
-- key: name:矢立肇|name:ラブライブ!サンシャイン!!The School Idol Movie Over the Rainbow Comic Anthology
-    Saint Snow
+- key: name:矢立肇|name:ラブライブ!サンシャイン!!The School Idol Movie Over the Rainbow Comic Anthology Saint Snow
   kana_segmented: ラブ ライブ サンシャイン ザ スクール アイドル ムーヴィー オーヴァー ザ レインボー コミック アンソロジー セイント スノー
 - key: name:矢立肇|name:ラブライブ!スーパースター!!Liella!Kila[2] Life Comic
   kana_segmented: ラブ ライブ スーパー スター リエラ キラキラ ライフ コミック
@@ -51381,8 +51057,7 @@ fills:
 - key: name:矢立肇|name:機動戦士ガンダム00 in those days
   kana_segmented: キドウ センシ ガンダム 00 in those days|キドウ センシ ガンダム ダブルオー イン ゾーズ デイズ
 - key: name:矢立肇|name:機動戦士ガンダム00 セカンドシーズン
-  kana_segmented: キドウ センシ ガンダム 00 セカンド シーズン|キドウ センシ ガンダム ダブル オー セカンド シーズン|キドウ センシ
-    ガンダム ダブルオー セカンド シーズン
+  kana_segmented: キドウ センシ ガンダム 00 セカンド シーズン|キドウ センシ ガンダム ダブル オー セカンド シーズン|キドウ センシ ガンダム ダブルオー セカンド シーズン
 - key: name:矢立肇|name:機動戦士ガンダム0079Episode LUNA2
   kana_segmented: キドウ センシ ガンダム ゼロゼロナナキュウ エピソード ルナ ツー
 - key: name:矢立肇|name:機動戦士ガンダム0083 REBELLION
@@ -51399,8 +51074,7 @@ fills:
 - key: name:矢立肇|name:機動戦士ガンダムGROUND ZEROコロニーの落ちた地で
   kana_segmented: キドウ センシ ガンダム グラウンド ゼロ コロニー ノ オチタ チ デ
 - key: name:矢立肇|name:機動戦士ガンダムMS IGLOO 2重力戦線
-  kana_segmented: キドウ センシ ガンダム MS IGLOO 2 ジュウリョク センセン|キドウ センシ ガンダム エムエス イグルー 2 ジュウリョク
-    センセン
+  kana_segmented: キドウ センシ ガンダム MS IGLOO 2 ジュウリョク センセン|キドウ センシ ガンダム エムエス イグルー 2 ジュウリョク センセン
 - key: name:矢立肇|name:機動戦士ガンダムMS IGLOO 黙示録0079
   kana_segmented: キドウ センシ ガンダム MS Igloo モクシロク 0079|キドウ センシ ガンダム エムエス イグルー モクシロク 0079
 - key: name:矢立肇|name:機動戦士ガンダムMS戦記
@@ -51412,13 +51086,11 @@ fills:
 - key: name:矢立肇|name:機動戦士ガンダムSEED DESTINY THE EDGE
   kana_segmented: キドウ センシ ガンダム シード デスティニー ジ エッジ
 - key: name:矢立肇|name:機動戦士ガンダムSEED DESTINY the edge desire
-  kana_segmented: キドウ センシ ガンダム seed destiny the edge desire|キドウ センシ ガンダム シード デスティニー
-    ジ エッジ デザイア
+  kana_segmented: キドウ センシ ガンダム seed destiny the edge desire|キドウ センシ ガンダム シード デスティニー ジ エッジ デザイア
 - key: 'name:矢立肇|name:機動戦士ガンダムSEED Re:'
   kana_segmented: キドウ センシ ガンダム シード アールイー
 - key: name:矢立肇|name:機動戦士ガンダムSEED SEED Club 4コマえたーなる
-  kana_segmented: キドウ センシ ガンダム seed seed club 4コマ エターナル|キドウ センシ ガンダム シード シード クラブ 4コマ
-    エターナル
+  kana_segmented: キドウ センシ ガンダム seed seed club 4コマ エターナル|キドウ センシ ガンダム シード シード クラブ 4コマ エターナル
 - key: name:矢立肇|name:機動戦士ガンダムSEED SEED Club 4コマえーす
   kana_segmented: キドウ センシ ガンダム シード シード クラブ 4コマ エース
 - key: name:矢立肇|name:機動戦士ガンダムSEED SEED Club4コマじゃすてぃす|sub:完全版
@@ -52132,11 +51804,9 @@ fills:
 - key: name:福きつね|name:万能スキル『調味料作成』で異世界を生き抜きます!
   kana_segmented: バンノウ スキル チョウミリョウ サクセイ デ イセカイ オ イキヌキマス
 - key: name:福きつね|name:無能は不要と言われ『時計使い』の僕は職人ギルドから追い出されるも、ダンジョンの深部で真の力に覚醒する|sub:THE COMIC
-  kana_segmented: ムノウ ワ フヨウ ト イワレ トケイツカイ ノ ボク ワ ショクニン ギルド カラ オイダサレルモ ダンジョン ノ シンブ デ
-    シン ノ チカラ ニ カクセイ スル
+  kana_segmented: ムノウ ワ フヨウ ト イワレ トケイツカイ ノ ボク ワ ショクニン ギルド カラ オイダサレルモ ダンジョン ノ シンブ デ シン ノ チカラ ニ カクセイ スル
 - key: name:福きつね|name:無能は不要と言われ『時計使い』の僕は職人ギルドから追い出されるも、ダンジョンの深部で真の力に覚醒する|sub:The Comic.
-  kana_segmented: ムノウ ワ フヨウ ト イワレ トケイツカイ ノ ボク ワ ショクニン ギルド カラ オイダサレルモ ダンジョン ノ シンブ デ
-    シン ノ チカラ ニ カクセイ スル
+  kana_segmented: ムノウ ワ フヨウ ト イワレ トケイツカイ ノ ボク ワ ショクニン ギルド カラ オイダサレルモ ダンジョン ノ シンブ デ シン ノ チカラ ニ カクセイ スル
 - key: name:福きつね|name:異世界で妹天使となにかする。@COMIC
   kana_segmented: イセカイ デ イモウト テンシ ト ナニカ スル アットマーク コミック
 - key: name:福きつね|name:異世界で聖女になった私、現実世界でも聖女チートで完全勝利!
@@ -52549,8 +52219,7 @@ fills:
 - key: name:稲空穂|name:特別じゃない日
   kana_segmented: トクベツ ジャ ナイ ヒ
 - key: name:稲荷竜|name:勇者パーティーを追い出された死霊魔術師はリッチになって魔王軍で大好きな研究ライフを送る
-  kana_segmented: ユウシャ パーティー オ オイダサレタ シリョウ マジュツシ ワ リッチ ニ ナッテ マオウグン デ ダイスキ ナ ケンキュウ
-    ライフ オ オクル
+  kana_segmented: ユウシャ パーティー オ オイダサレタ シリョウ マジュツシ ワ リッチ ニ ナッテ マオウグン デ ダイスキ ナ ケンキュウ ライフ オ オクル
 - key: name:稲葉すずめ|name:いちばんになりたい恋
   kana_segmented: イチバン ニ ナリタイ コイ
 - key: name:稲葉ふら|name:悪女に転生したらベッドの上でした|sub:お相手はゲスな王子様!?強引な舌先でイクッ…!
@@ -52598,8 +52267,7 @@ fills:
 - key: name:空兎|name:男だらけの異世界トリップ|sub:BLはお断り!?
   kana_segmented: オトコダラケ ノ イセカイ トリップ
 - key: name:空地大乃|name:水魔法なんて使えないと追放されたけど、水が万能だと気がつき水の賢者と呼ばれるまでに成長しました
-  kana_segmented: ミズ マホウ ナンテ ツカエナイ ト ツイホウ サレタ ケド ミズ ガ バンノウ ダト キ ガ ツキ ミズ ノ ケンジャ ト ヨバレル
-    マデ ニ セイチョウ シマシタ
+  kana_segmented: ミズ マホウ ナンテ ツカエナイ ト ツイホウ サレタ ケド ミズ ガ バンノウ ダト キ ガ ツキ ミズ ノ ケンジャ ト ヨバレル マデ ニ セイチョウ シマシタ
 - key: name:空地大乃|name:異世界帰りの元勇者ですが、デスゲームに巻き込まれました
   kana_segmented: イセカイガエリ ノ モト ユウシャ デスガ 、 デス ゲーム ニ マキコマレマシタ
 - key: name:空地大乃|name:異世界帰りの元勇者ですが、デスゲームに巻き込まれました.
@@ -52848,11 +52516,9 @@ fills:
 - key: name:笹原亜美|name:乙女ゲームの世界で私が悪役令嬢!?そんなのお断りです!
   kana_segmented: オトメ ゲーム ノ セカイ デ ワタシ ガ アクヤク レイジョウ ソンナノ オコトワリ デス
 - key: name:笹原亜美|name:成り行きで婚約を申し込んだ弱気貧乏令嬢ですが、何故か次期公爵様に溺愛されて囚われています@COMIC
-  kana_segmented: ナリユキ デ コンヤク オ モウシコンダ ヨワキ ビンボウ レイジョウ デスガ ナゼカ ジキ コウシャクサマ ニ デキアイ サレテ
-    トラワレテ イマス アットマーク コミック
+  kana_segmented: ナリユキ デ コンヤク オ モウシコンダ ヨワキ ビンボウ レイジョウ デスガ ナゼカ ジキ コウシャクサマ ニ デキアイ サレテ トラワレテ イマス アットマーク コミック
 - key: name:笹原亜美|name:成り行きで婚約を申し込んだ弱気貧乏令嬢ですが、何故か次期公爵様に溺愛されて囚われています@Comic
-  kana_segmented: ナリユキ デ コンヤク オ モウシコンダ ヨワキ ビンボウ レイジョウ デスガ ナゼカ ジキ コウシャクサマ ニ デキアイ サレテ
-    トラワレテ イマス アットマーク コミック
+  kana_segmented: ナリユキ デ コンヤク オ モウシコンダ ヨワキ ビンボウ レイジョウ デスガ ナゼカ ジキ コウシャクサマ ニ デキアイ サレテ トラワレテ イマス アットマーク コミック
 - key: name:笹原亜美|name:拝啓陛下、2度目の王妃はお断り!
   kana_segmented: ハイケイ ヘイカ ニドメ ノ オウヒ ワ オコトワリ
 - key: name:笹原亜美|name:落第聖女なのに、なぜか訳ありの王子様に溺愛されています!
@@ -53108,8 +52774,7 @@ fills:
 - key: name:糸井のぞ|name:僕はメイクしてみることにした
   kana_segmented: ボク ワ メイク シテ ミル コト ニ シタ
 - key: name:糸加|name:「赤毛の役立たず」とクビになった魔力なしの魔女ですが、「薬草の知識がハンパない!」と王立研究所に即採用されました。
-  kana_segmented: アカゲ ノ ヤクタタズ ト クビ ニ ナッタ マリョク ナシ ノ マジョ デスガ ヤクソウ ノ チシキ ガ ハンパナイ ト オウリツ
-    ケンキュウショ ニ ソクサイヨウ サレマシタ
+  kana_segmented: アカゲ ノ ヤクタタズ ト クビ ニ ナッタ マリョク ナシ ノ マジョ デスガ ヤクソウ ノ チシキ ガ ハンパナイ ト オウリツ ケンキュウショ ニ ソクサイヨウ サレマシタ
 - key: name:糸加|name:双子王子の継母になりまして
   kana_segmented: フタゴ オウジ ノ ママハハ ニ ナリマシテ
 - key: name:糸加|name:魔力のないオタク令嬢は、次期公爵様の一途な溺愛に翻弄される
@@ -53268,8 +52933,7 @@ fills:
 - key: name:紫藤むらさき|name:義姉の代わりに、余命一年と言われる侯爵子息様と婚約することになりました.
   kana_segmented: アネ ノ カワリ ニ ヨメイ イチネン ト イワレル コウシャク シソクサマ ト コンヤク スル コト ニ ナリマシタ.
 - key: name:紫藤むらさき|name:顔が見分けられない伯爵令嬢ですが、悪人公爵様に溺愛されています@COMIC
-  kana_segmented: カオ ガ ミワケラレナイ ハクシャク レイジョウ デスガ アクニン コウシャクサマ ニ デキアイ サレテ イマス アットマーク
-    コミック
+  kana_segmented: カオ ガ ミワケラレナイ ハクシャク レイジョウ デスガ アクニン コウシャクサマ ニ デキアイ サレテ イマス アットマーク コミック
 - key: name:紫陽|name:霊感保険調査員神鳥谷サキ投身零地点
   kana_segmented: レイカン ホケン チョウサイン ヒトトノヤ サキ トウシン ゼロ チテン
 - key: name:紫陽|name:霊感保険調査員神鳥谷サキ波動霊障
@@ -53519,8 +53183,7 @@ fills:
   kana_segmented: ダブル コール
   src: ndl
 - key: name:緑|name:〈悲報〉コミュ力0オタク少女、ドラゴンをワンパンで沈めて有名配信者を助けたら不本意バズが止まらない
-  kana_segmented: ヒホウ コミュリョク ゼロ オタク ショウジョ ドラゴン オ ワンパン デ シズメテ ユウメイ ハイシンシャ オ タスケタラ フホンイ
-    バズ ガ トマラナイ
+  kana_segmented: ヒホウ コミュリョク ゼロ オタク ショウジョ ドラゴン オ ワンパン デ シズメテ ユウメイ ハイシンシャ オ タスケタラ フホンイ バズ ガ トマラナイ
 - key: name:緑川明|name:100年後に転生した私、前世の従騎士に求婚されました|sub:陛下は私が元・王女だとお気づきでないようです
   kana_segmented: ヒャクネンゴ ニ テンセイ シタ ワタシ ゼンセ ノ ジュウキシ ニ キュウコン サレマシタ
 - key: name:緑川葉|name:転生先は北の辺境でしたが精霊のおかげでけっこう快適です
@@ -53588,11 +53251,9 @@ fills:
 - key: name:縛|name:私のことなんか、どうせ。
   kana_segmented: ワタシ ノ コト ナンカ ドウセ
 - key: name:縛炎|name:「もう‥‥働きたくないんです」冒険者なんか辞めてやる。今更、待遇を変えるからとお願いされてもお断りです。僕はぜーったい働きません。
-  kana_segmented: 「 モウ ‥‥ ハタラキタクナインデス 」 ボウケンシャ ナンカ ヤメテヤル 。 イマサラ 、 タイグウ オ カエル カラ ト
-    オネガイイサレテモ オコトワリデス 。 ボクハゼーッタイ ハタラキマセン 。
+  kana_segmented: 「 モウ ‥‥ ハタラキタクナインデス 」 ボウケンシャ ナンカ ヤメテヤル 。 イマサラ 、 タイグウ オ カエル カラ ト オネガイイサレテモ オコトワリデス 。 ボクハゼーッタイ ハタラキマセン 。
 - key: name:縛炎|name:「もう‥‥働きたくないんです」冒険者なんか辞めてやる。今更、待遇を変えるからとお願いされてもお断りです。僕はぜーったい働きません。.
-  kana_segmented: 「 モウ ‥‥ ハタラキタクナインデス 」 ボウケンシャ ナンカ ヤメテヤル 。 イマサラ 、 タイグウ オ カエル カラ ト
-    オネガイサレテモ オコトワリデス 。 ボク ハ ゼーッタイ ハタラキマセン 。.
+  kana_segmented: 「 モウ ‥‥ ハタラキタクナインデス 」 ボウケンシャ ナンカ ヤメテヤル 。 イマサラ 、 タイグウ オ カエル カラ ト オネガイサレテモ オコトワリデス 。 ボク ハ ゼーッタイ ハタラキマセン 。.
 - key: name:縞|name:王立騎士団の花形職|sub:転移先で授かったのは、聖獣に愛される規格外な魔力と供給スキルでした
   kana_segmented: オウリツ キシダン ノ ハナガタショク
 - key: name:縞|name:赤毛のトアと罪の騎士団
@@ -53770,8 +53431,7 @@ fills:
 - key: name:羽原大介|name:お・ばんざい!
   kana_segmented: オバンザイ
 - key: name:羽尻伊織|name:ポーションは160km/hで投げるモノ!～アイテム係の俺が万能回復薬を投擲することで最強の冒険者に成り上がる!?～@COMIC
-  kana_segmented: ポーション ワ ジソク ヒャクロクジッキロメートル デ ナゲル モノ アイテムガカリ ノ オレ ガ バンノウ カイフクヤク オ
-    トウテキ スル コト デ サイキョウ ノ ボウケンシャ ニ ナリアガル アットマーク コミック
+  kana_segmented: ポーション ワ ジソク ヒャクロクジッキロメートル デ ナゲル モノ アイテムガカリ ノ オレ ガ バンノウ カイフクヤク オ トウテキ スル コト デ サイキョウ ノ ボウケンシャ ニ ナリアガル アットマーク コミック
 - key: name:羽月レイ|name:ライクブルー・ライクサマー
   kana_segmented: ライク ブルー ライク サマー
 - key: name:羽柴みず|name:アイドル彼氏と熱愛???
@@ -54746,8 +54406,7 @@ fills:
 - key: name:菊池政治|name:賢者の孫.
   kana_segmented: ケンジャ ノ マゴ.
 - key: name:菊田幸一|name:一緒に剣の修行をした幼馴染が奴隷になっていたので、Sランク冒険者の僕は彼女を買って守ることにした
-  kana_segmented: イッショ ニ ケン ノ シュギョウ オ シタ オサナナジミ ガ ドレイ ニ ナッテ イタ ノデ エスランク ボウケンシャ ノ ボク
-    ワ カノジョ オ カッテ マモル コト ニ シタ
+  kana_segmented: イッショ ニ ケン ノ シュギョウ オ シタ オサナナジミ ガ ドレイ ニ ナッテ イタ ノデ エスランク ボウケンシャ ノ ボク ワ カノジョ オ カッテ マモル コト ニ シタ
 - key: name:菖エリカ|name:裏アカくんは純情くんにあいされたい
   kana_segmented: ウラアカクン ワ ジュンジョウクン ニ アイサレタイ
 - key: name:菖蒲|name:隣人は有名配信者
@@ -54771,8 +54430,7 @@ fills:
 - key: name:華先亜輝|name:覗く底辺男たち|sub:性奴に堕ちた巨乳若妻の恥部は貪欲で
   kana_segmented: ノゾク テイヘンオトコタチ
 - key: name:華宮ルキ|name:たくまし令嬢はへこたれない!～妹に聖女の座を奪われたけど、騎士団でメイドとして働いています～@COMIC
-  kana_segmented: タクマシ レイジョウ ワ ヘコタレナイ イモウト ニ セイジョ ノ ザ オ ウバワレタ ケド キシダン デ メイド ト シテ ハタライテ
-    イマス アットマーク コミック
+  kana_segmented: タクマシ レイジョウ ワ ヘコタレナイ イモウト ニ セイジョ ノ ザ オ ウバワレタ ケド キシダン デ メイド ト シテ ハタライテ イマス アットマーク コミック
 - key: name:華嶋ひすい|name:貴族転生|sub:恵まれた生まれから最強の力を得る
   kana_segmented: キゾク テンセイ
 - key: name:華師|name:戦国†恋姫 ～乙女絢爛☆戦国絵巻～ ば～さす!
@@ -55012,8 +54670,7 @@ fills:
   kana_segmented: フタリ ノ アツイ ミルク オ ソソイデ
 - key: name:蓬餅|name:百合にはさまる男は死ねばいい!?
   kana_segmented: ユリ ニ ハサマル オトコ ワ シネバ イイ !?
-- key: name:蓮まこと|name:SOL(シード・オブ・ライフ)|sub:The Sound played by Uneven-Genii shall Rock
-    your values,Are U ready?
+- key: name:蓮まこと|name:SOL(シード・オブ・ライフ)|sub:The Sound played by Uneven-Genii shall Rock your values,Are U ready?
   kana_segmented: シード オブ ライフ
 - key: name:蓮地|name:首なし精霊様に口づけを
   kana_segmented: クビナシ セイレイサマ ニ クチズケ オ
@@ -55146,11 +54803,9 @@ fills:
 - key: name:藍葉悠気|name:天下無双ワンスモア
   kana_segmented: テンカ ムソウ ワンス モア
 - key: name:藍野ナナカ|name:婚約破棄されたのに元婚約者の結婚式に招待されました。断れないので兄の友人に同行してもらいます。
-  kana_segmented: コンヤク ハキ サレタノニ モト コンヤクシャ ノ ケッコンシキ ニ ショウタイサレマシタ 。 コトワレナイノデ アニ ノ ユウジン
-    ニ ドウコウシテ モライマス 。
+  kana_segmented: コンヤク ハキ サレタノニ モト コンヤクシャ ノ ケッコンシキ ニ ショウタイサレマシタ 。 コトワレナイノデ アニ ノ ユウジン ニ ドウコウシテ モライマス 。
 - key: name:藍野ナナカ|name:婚約破棄されたのに元婚約者の結婚式に招待されました。断れないので兄の友人に同行してもらいます。.
-  kana_segmented: コンヤク ハキ サレタノニ モト コンヤクシャ ノ ケッコンシキ ニ ショウタイサレマシタ 。 コトワレナイノデ アニ ノ ユウジン
-    ニ ドウコウシテ モライマス 。.
+  kana_segmented: コンヤク ハキ サレタノニ モト コンヤクシャ ノ ケッコンシキ ニ ショウタイサレマシタ 。 コトワレナイノデ アニ ノ ユウジン ニ ドウコウシテ モライマス 。.
 - key: name:藍野ナナカ|name:辺境領主令嬢の白い結婚
   kana_segmented: ヘンキョウ リョウシュ レイジョウ ノ シロイ ケッコン
 - key: name:藍飴|name:光の大聖者と魔導帝国建国記|sub:『勇者選抜レース』勝利後の追放、そこから始まる伝説の国づくり.
@@ -55601,8 +55256,7 @@ fills:
 - key: name:蛹虎次郎|name:ヤリざかり乙女
   kana_segmented: ヤリザカリ オトメ
 - key: name:蜂屋あいet小山鹿梨子|name:校舎の天(そら)では悪魔が嗤っている
-  kana_segmented: L'ange demoniaque vit en ciel de l'ecole校舎の天では悪魔が嗤っている|コウシャ ノ ソラ
-    デワ アクマ ガ ワラッテ イル
+  kana_segmented: L'ange demoniaque vit en ciel de l'ecole校舎の天では悪魔が嗤っている|コウシャ ノ ソラ デワ アクマ ガ ワラッテ イル
 - key: name:蜂巣|name:甘くて熱くて息もできない
   kana_segmented: アマクテ アツクテ イキ モ デキナイ
 - key: name:蜂矢育生|name:アイスヘッドギル
@@ -55842,8 +55496,7 @@ fills:
 - key: name:西村西|name:名代辻そば異世界店
   kana_segmented: ナダイ ツジソバ イセカイテン
 - key: name:西根羽南|name:『理想の花嫁を探して幸せにして差し上げます』と言ったら、そっけなかった婚約者が何故か関わってきますが、花嫁斡旋頑張ります
-  kana_segmented: リソウ ノ ハナヨメ オ サガシテ シアワセ ニ シテ サシアゲマス ト イッタラ ソッケナカッタ コンヤクシャ ガ ナゼカ カカワッテ
-    キマスガ ハナヨメ アッセン ガンバリマス
+  kana_segmented: リソウ ノ ハナヨメ オ サガシテ シアワセ ニ シテ サシアゲマス ト イッタラ ソッケナカッタ コンヤクシャ ガ ナゼカ カカワッテ キマスガ ハナヨメ アッセン ガンバリマス
 - key: name:西根羽南|name:二度目の初恋がこじれた魔女は、ときめくと放電します
   kana_segmented: ニドメ ノ ハツコイ ガ コジレタ マジョ ワ トキメク ト ホウデン シマス
 - key: name:西條六花|name:きまじめ旦那様の隠しきれない情欲溺愛|sub:偽装結婚から甘い恋を始めます
@@ -56212,12 +55865,10 @@ fills:
 - key: name:説話社|name:黒の誘惑
   kana_segmented: クロ ノ ユウワク
   src: ndl
-- key: 'name:諏訪ぺこ|name:ポンコツ王太子のモブ姉王女らしいけど、悪役令嬢が可哀想なので助けようと思います|sub:王女ルートがない!?なら作ればいいのよ!
-    : @comic'
+- key: 'name:諏訪ぺこ|name:ポンコツ王太子のモブ姉王女らしいけど、悪役令嬢が可哀想なので助けようと思います|sub:王女ルートがない!?なら作ればいいのよ! : @comic'
   kana_segmented: ポンコツ オウタイシ ノ モブアネ オウジョ ラシイケド 、 アクヤク レイジョウ ガ カワイソウ ナノデ タスケヨウ ト オモイマス
 - key: name:諏訪ぺこ|name:ポンコツ王太子のモブ姉王女らしいけど、悪役令嬢が可哀想なので助けようと思います～王女ルートがない!?なら作ればいいのよ!～@COMIC
-  kana_segmented: ポンコツ オウタイシ ノ モブアネ オウジョ ラシイ ケド アクヤク レイジョウ ガ カワイソウ ナノデ タスケヨウ ト オモイマス
-    オウジョ ルート ガ ナイ ナラ ツクレバ イイノヨ アットマーク コミック
+  kana_segmented: ポンコツ オウタイシ ノ モブアネ オウジョ ラシイ ケド アクヤク レイジョウ ガ カワイソウ ナノデ タスケヨウ ト オモイマス オウジョ ルート ガ ナイ ナラ ツクレバ イイノヨ アットマーク コミック
 - key: name:諏訪符馬|name:逢いたくて、島耕作
   kana_segmented: アイタクテ シマ コウサク
 - key: name:諏訪符馬|name:逢いたくて、島耕作.
@@ -56434,8 +56085,7 @@ fills:
 - key: name:赤川次郎|name:まんがこのミステリーが面白い!殺人トリックSP
   kana_segmented: マンガ コノ ミステリー ガ オモシロイ!サツジン トリック SP
 - key: name:赤川次郎|name:まんがこのミステリーが面白い!狂気の女犯罪者SP (スペシャル)
-  kana_segmented: まんがこのミステリーが面白い!狂気の女犯罪者SP|マンガ コノ ミステリー ガ オモシロイ ! キョウキ ノ オンナ ハンザイシャ
-    スペシャル
+  kana_segmented: まんがこのミステリーが面白い!狂気の女犯罪者SP|マンガ コノ ミステリー ガ オモシロイ ! キョウキ ノ オンナ ハンザイシャ スペシャル
 - key: name:赤川次郎|name:まんがこのミステリーが面白い!猟奇殺人SP (スペシャル)
   kana_segmented: まんがこのミステリーが面白い!猟奇殺人SP|マンガ コノ ミステリー ガ オモシロイ ! リョウキ サツジン スペシャル
 - key: name:赤川次郎|name:まんがこのミステリーが面白い!異常犯罪トリックSP
@@ -56648,11 +56298,9 @@ fills:
 - key: name:転|name:今日も絵に描いた餅が美味い@COMIC.
   kana_segmented: キョウ モ エ ニ カイタ モチ ガ ウマイ アットマーク コミック.
 - key: name:転|name:幼馴染のS級パーティーから追放された聖獣使い。万能支援魔法と仲間を増やして最強へ!
-  kana_segmented: オサナナジミ ノ エスキュウ パーティー カラ ツイホウ サレタ セイジュウツカイ バンノウ シエン マホウ ト ナカマ オ フヤシテ
-    サイキョウ エ
+  kana_segmented: オサナナジミ ノ エスキュウ パーティー カラ ツイホウ サレタ セイジュウツカイ バンノウ シエン マホウ ト ナカマ オ フヤシテ サイキョウ エ
 - key: name:転|name:社畜、ダンジョンだらけの世界で固有スキル『強欲』を手に入れて最強のバランスブレーカーになる|sub:会社を辞めてのんびり暮らします
-  kana_segmented: シャチク ダンジョン ダラケ ノ セカイ デ コユウ スキル ゴウヨク オ テ ニ イレテ サイキョウ ノ バランス ブレーカー
-    ニ ナル
+  kana_segmented: シャチク ダンジョン ダラケ ノ セカイ デ コユウ スキル ゴウヨク オ テ ニ イレテ サイキョウ ノ バランス ブレーカー ニ ナル
 - key: name:転|name:追放された転生貴族、外れスキルで内政無双|sub:気ままに領地運営するはずが、スキル『ガチャ』のお陰で最強領地を作り上げてしまった
   kana_segmented: ツイホウ サレタ テンセイ キゾク ハズレ スキル デ ナイセイ ムソウ
 - key: name:転はくと|name:ボクらの可愛いニンゲンさま
@@ -56692,8 +56340,7 @@ fills:
 - key: name:轟斗ソラ|name:ドリー夢say・youコレクション岸尾だいすけ・鈴木達央
   kana_segmented: ドリーム say you コレクション キシオ ダイスケ スズキ タツヒサ
 - key: name:轟斗ソラ|name:悪党一家の愛娘、転生先も乙女ゲームの極道令嬢でした。～最上級ランクの悪役さま、その溺愛は不要です!～@COMIC
-  kana_segmented: アクトウ イッカ ノ マナムスメ テンセイサキ モ オトメ ゲーム ノ ゴクドウ レイジョウ デシタ サイジョウキュウ ランク
-    ノ アクヤクサマ ソノ デキアイ ワ フヨウ デス アットマーク コミック
+  kana_segmented: アクトウ イッカ ノ マナムスメ テンセイサキ モ オトメ ゲーム ノ ゴクドウ レイジョウ デシタ サイジョウキュウ ランク ノ アクヤクサマ ソノ デキアイ ワ フヨウ デス アットマーク コミック
 - key: name:轟斗ソラ|name:戦国basara 3コミックアンソロジー
   kana_segmented: センゴク basara 3 コミック アンソロジー
 - key: name:轟昌|name:ダヴルの王冠
@@ -56837,8 +56484,7 @@ fills:
 - key: name:逆襲のドラゴンライダー製作委員会|name:逆襲のドラゴンライダー
   kana_segmented: ギャクシュウ ノ ドラゴン ライダー
 - key: name:逆霧|name:最強ランキングがある異世界に生徒たちと集団転移した高校教師の俺、モブから剣聖へと成り上がる
-  kana_segmented: サイキョウ ランキング ガ アル イセカイ ニ セイトタチ ト シュウダン テンイシタ コウコウ キョウシ ノ オレ 、 モブ
-    カラ ケンセイ エト ナリアガル
+  kana_segmented: サイキョウ ランキング ガ アル イセカイ ニ セイトタチ ト シュウダン テンイシタ コウコウ キョウシ ノ オレ 、 モブ カラ ケンセイ エト ナリアガル
 - key: name:透明いんげん|name:オオカミのさがしもの|sub:脇役でも悪者でもない僕の物語
   kana_segmented: オオカミ ノ サガシモノ
 - key: name:速戸ゆう|name:アジール Asyl
@@ -56933,8 +56579,7 @@ fills:
 - key: name:遠田マリモ|name:星斬りの剣士|sub:The sword fighter's dream.
   kana_segmented: ホシキリ ノ ケンシ
 - key: name:遠矢大介|name:追放された俺が外れギフト『翻訳』で最強パーティー無双!～魔物や魔族と話せる能力を駆使して成り上がる～@COMIC
-  kana_segmented: ツイホウ サレタ オレ ガ ハズレ ギフト ホンヤク デ サイキョウ パーティー ムソウ マモノ ヤ マゾク ト ハナセル ノウリョク
-    オ クシ シテ ナリアガル アットマーク コミック
+  kana_segmented: ツイホウ サレタ オレ ガ ハズレ ギフト ホンヤク デ サイキョウ パーティー ムソウ マモノ ヤ マゾク ト ハナセル ノウリョク オ クシ シテ ナリアガル アットマーク コミック
 - key: name:遠藤寛子|name:算法少女
   kana_segmented: サンポウ ショウジョ
 - key: name:遠藤準|name:ぽんのみち流局西入編
@@ -57628,8 +57273,7 @@ fills:
 - key: name:錦メガネ|name:非実在推理少女あーや
   kana_segmented: ヒジツザイ スイリ ショウジョ アーヤ
 - key: name:錬金王|name:世界で唯一の転職師～ジョブホッパーな俺は、異世界ですべてのジョブを極めることにした～@COMIC
-  kana_segmented: セカイ デ ユイイツ ノ テンショクシ ジョブ ホッパー ナ オレ ワ イセカイ デ スベテ ノ ジョブ オ キワメル コト ニ
-    シタ アットマーク コミック
+  kana_segmented: セカイ デ ユイイツ ノ テンショクシ ジョブ ホッパー ナ オレ ワ イセカイ デ スベテ ノ ジョブ オ キワメル コト ニ シタ アットマーク コミック
 - key: name:錬金王|name:独身貴族は異世界を謳歌する
   kana_segmented: ドクシン キゾク ワ イセカイ オ オウカ スル
 - key: name:錬金王|name:田んぼで拾った女騎士、田舎で俺の嫁だと思われている
@@ -58182,11 +57826,9 @@ fills:
 - key: name:雨川透子|name:偽り姫の内緒ごと|sub:後宮で身代わりの妃を演じたら、皇帝と護衛に寵愛されました
   kana_segmented: イツワリヒメ ノ ナイショゴト
 - key: name:雨川透子|name:悪党一家の愛娘、転生先も乙女ゲームの極道令嬢でした。～最上級ランクの悪役さま、その溺愛は不要です!～@COMIC
-  kana_segmented: アクトウ イッカ ノ マナムスメ テンセイサキ モ オトメ ゲーム ノ ゴクドウ レイジョウ デシタ サイジョウキュウ ランク
-    ノ アクヤクサマ ソノ デキアイ ワ フウヨウ デス アットマーク コミック
+  kana_segmented: アクトウ イッカ ノ マナムスメ テンセイサキ モ オトメ ゲーム ノ ゴクドウ レイジョウ デシタ サイジョウキュウ ランク ノ アクヤクサマ ソノ デキアイ ワ フウヨウ デス アットマーク コミック
 - key: name:雨川透子|name:悪党一家の愛娘、転生先も乙女ゲームの極道令嬢でした。～最上級ランクの悪役さま、その溺愛は不要です!～@COMIC.
-  kana_segmented: アクトウ イッカ ノ マナムスメ テンセイサキ モ オトメ ゲーム ノ ゴクドウ レイジョウ デシタ サイジョウキュウ ランク
-    ノ アクヤクサマ ソノ デキアイ ワ フヨウ デス アットマーク コミック.
+  kana_segmented: アクトウ イッカ ノ マナムスメ テンセイサキ モ オトメ ゲーム ノ ゴクドウ レイジョウ デシタ サイジョウキュウ ランク ノ アクヤクサマ ソノ デキアイ ワ フヨウ デス アットマーク コミック.
 - key: name:雨川透子|name:虐げられた追放王女は、転生した伝説の魔女でした
   kana_segmented: シイタゲラレタ ツイホウ オウジョ ワ テンセイ シタ デンセツ ノ マジョ デシタ
 - key: name:雨市|name:07-ghost
@@ -58669,8 +58311,7 @@ fills:
 - key: name:音羽マリア|name:音羽マリアの異次元透視
   kana_segmented: オトワ マリア ノ イジゲン スコープ
 - key: name:音速炒飯|name:【パクパクですわ】追放されたお嬢様の『モンスターを食べるほど強くなる』スキルは、1食で1レベルアップする前代未聞の最強スキルでした。3日で人類最強になりましたわー!
-  kana_segmented: 【 パクパク デスワ 】 ツイホウサレタ オジョウサマ ノ 『 モンスター オ タベルホド ツヨクナル 』 スキル ワ 、 1ショク
-    デ 1 レベル アップ スル ゼンダイ ミモン ノ サイキョウ スキル デシタ 。 3ニチ デ ジンルイ サイキョウ ニ ナリマシタワー !
+  kana_segmented: 【 パクパク デスワ 】 ツイホウサレタ オジョウサマ ノ 『 モンスター オ タベルホド ツヨクナル 』 スキル ワ 、 1ショク デ 1 レベル アップ スル ゼンダイ ミモン ノ サイキョウ スキル デシタ 。 3ニチ デ ジンルイ サイキョウ ニ ナリマシタワー !
 - key: name:響あい|name:ひとりじめ～調教願望～
   kana_segmented: ヒトリジメ チョウキョウ ガンボウ
 - key: name:響介|name:借金1000万作曲家の人生を変えてくれた猫の話
@@ -59356,8 +58997,7 @@ fills:
 - key: name:高里椎奈|name:少年×少女小説家
   kana_segmented: ショウネン × ショウジョ ショウセツカ
 - key: name:高野ケイ|name:スキル『鑑定』に目覚めたので、憧れの巨乳受付嬢を鑑定したら魔王でパッドだった件
-  kana_segmented: スキル カンテイ ニ メザメタ ノデ アコガレ ノ キョニュウ ウケツケジョウ オ カンテイ シタラ マオウ デ パッド ダッタ
-    ケン
+  kana_segmented: スキル カンテイ ニ メザメタ ノデ アコガレ ノ キョニュウ ウケツケジョウ オ カンテイ シタラ マオウ デ パッド ダッタ ケン
 - key: name:高野克巳|name:BOY×BOY
   kana_segmented: ボーイ ボーイ
   src: ndl
@@ -59557,8 +59197,7 @@ fills:
 - key: name:鰻田まあち|name:秘密法人デスメイカー
   kana_segmented: ヒミツ ホウジン デス メイカー
 - key: name:鱈|name:クラス転移に巻き込まれたコンビニ店員のおっさん、勇者には必要なかった余り物スキルを駆使して最強となるようです。
-  kana_segmented: クラス テンイ ニ マキコマレタ コンビニ テンイン ノ オッサン ユウシャ ニワ ヒツヨウ ナカッタ アマリモノ スキル オ
-    クシ シテ サイキョウ ト ナル ヨウデス
+  kana_segmented: クラス テンイ ニ マキコマレタ コンビニ テンイン ノ オッサン ユウシャ ニワ ヒツヨウ ナカッタ アマリモノ スキル オ クシ シテ サイキョウ ト ナル ヨウデス
 - key: name:鳥トマト|name:アッコちゃんは世界一
   kana_segmented: アッコチャン ワ セカイイチ
 - key: name:鳥トマト|name:幻滅カメラ
@@ -60265,8 +59904,7 @@ fills:
 - key: name:黒裄|name:わたくし、恋愛結婚がしたいんです。|sub:カタブツ陛下の攻略法.
   kana_segmented: ワタクシ レンアイ ケッコン ガ シタインデス
 - key: name:黒裄|name:婚約者が浮気相手と駆け落ちしました。王子殿下に溺愛されて幸せなので、今さら戻りたいと言われても困ります。
-  kana_segmented: コンヤクシャ ガ ウワキ アイテ ト カケオチ シマシタ オウジ デンカ ニ デキアイ サレテ シアワセ ナノデ イマサラ モドリタイ
-    ト イワレテモ コマリマス
+  kana_segmented: コンヤクシャ ガ ウワキ アイテ ト カケオチ シマシタ オウジ デンカ ニ デキアイ サレテ シアワセ ナノデ イマサラ モドリタイ ト イワレテモ コマリマス
 - key: name:黒豆カヌレ|name:童貞くんに鬼愛されまして
   kana_segmented: ドウテイクン ニ オニ アイサレマシテ
 - key: name:黒越陽|name:らぶぱい|sub:私のおっぱい好きですか?
@@ -61733,8 +61371,7 @@ fills:
 - key: qid:Q112324225|name:その悪役令嬢は攻略本を携えている
   kana_segmented: ソノ アクヤク レイジョウ ワ コウリャクボン オ タズサエテイル
 - key: qid:Q112324225|name:元悪役令嬢とS級冒険者のほのぼの街暮らし～不遇なキャラに転生してたけど、理想の美女になれたからプラマイゼロだよね～@COMIC
-  kana_segmented: モト アクヤク レイジョウ ト エスキュウ ボウケンシャ ノ ホノボノ マチグラシ フグウ ナ キャラ ニ テンセイ シテタ ケド
-    リソウ ノ ビジョ ニ ナレタ カラ プラマイ ゼロ ダヨネ アットマーク コミック
+  kana_segmented: モト アクヤク レイジョウ ト エスキュウ ボウケンシャ ノ ホノボノ マチグラシ フグウ ナ キャラ ニ テンセイ シテタ ケド リソウ ノ ビジョ ニ ナレタ カラ プラマイ ゼロ ダヨネ アットマーク コミック
 - key: qid:Q112324225|name:天才宮廷画家の憂鬱|sub:ドSな従者に『男装』がバレて脅されています
   kana_segmented: テンサイ キュウテイ ガカ ノ ユウウツ
 - key: qid:Q112324225|name:婚約破棄された公爵令嬢は森に引き籠ります
@@ -62144,8 +61781,7 @@ fills:
   kana_segmented: ショタコミ
   src: ndl
 - key: qid:Q11263853|name:異世界転生したら辺境伯令嬢だった～推しと共に生きる辺境生活～@COMIC
-  kana_segmented: イセカイ テンセイ シタラ ヘンキョウハク レイジョウ ダッタ オシ ト トモ ニ イキル ヘンキョウ セイカツ アットマーク
-    コミック
+  kana_segmented: イセカイ テンセイ シタラ ヘンキョウハク レイジョウ ダッタ オシ ト トモ ニ イキル ヘンキョウ セイカツ アットマーク コミック
 - key: qid:Q11263891|name:アニムンサクシス
   kana_segmented: アニムン サクシス
   src: ndl
@@ -62439,8 +62075,7 @@ fills:
   kana_segmented: カンタイ コレクション カンコレ デンゲキ コミック アンソロジー サセホチンジュフヘン
 - key: qid:Q11268420|name:Arcana Famiglia Comic Anthology Ciao
   kana_segmented: アルカナ ファミリア コミック アンソロジー
-- key: 'qid:Q11268420|name:悪役令嬢と悪役令息が、出逢って恋に落ちたなら|sub:名無しの精霊と契約して追い出された令嬢は、今日も令息と競い合っているようです
-    : コミック'
+- key: 'qid:Q11268420|name:悪役令嬢と悪役令息が、出逢って恋に落ちたなら|sub:名無しの精霊と契約して追い出された令嬢は、今日も令息と競い合っているようです : コミック'
   kana_segmented: アクヤク レイジョウ ト アクヤク レイソク ガ デアッテ コイ ニ オチタナラ
 - key: qid:Q11268613|name:おねーさんが侵略中!?
   kana_segmented: オネーサン ガ シンリャクチュウ
@@ -62573,8 +62208,7 @@ fills:
 - key: qid:Q11270830|name:金髪 (ブロンド) 女将綾小路ヘレン
   kana_segmented: ブロンド オカミ アヤノコウジ ヘレン|金髪女将綾小路ヘレン
 - key: qid:Q11270837|name:育成スキルはもういらないと勇者パーティを解雇されたので、退職金がわりにもらった【領地】を強くしてみる
-  kana_segmented: イクセイ スキル ワ モウ イラナイ ト ユウシャ パーティ オ カイコサレタ ノデ 、 タイショクキン ガワリ ニ モラッタ
-    【 リョウチ 】 オ ツヨクシテ ミル
+  kana_segmented: イクセイ スキル ワ モウ イラナイ ト ユウシャ パーティ オ カイコサレタ ノデ 、 タイショクキン ガワリ ニ モラッタ 【 リョウチ 】 オ ツヨクシテ ミル
 - key: qid:Q11270847|name:Link!Like!ラブライブ!@COMIC
   kana_segmented: リンク ライク ラブ ライブ アットマーク コミック
 - key: qid:Q11270850|name:アウトロー
@@ -62759,8 +62393,7 @@ fills:
 - key: qid:Q11273389|name:禁愛again|sub:獣人オメガバース
   kana_segmented: キンアイ again
 - key: qid:Q11273427|name:恋した人は、妹の代わりに死んでくれと言った。-妹と結婚した片思い相手がなぜ今さら私のもとに?と思ったら-@COMIC
-  kana_segmented: コイシタ ヒト ワ イモウト ノ カワリ ニ シンデ クレ ト イッタ イモウト ト ケッコン シタ カタオモイ アイテ ガ ナゼ
-    イマサラ ワタクシ ノ モト ニ ト オモッタラ アットマーク コミック
+  kana_segmented: コイシタ ヒト ワ イモウト ノ カワリ ニ シンデ クレ ト イッタ イモウト ト ケッコン シタ カタオモイ アイテ ガ ナゼ イマサラ ワタクシ ノ モト ニ ト オモッタラ アットマーク コミック
 - key: qid:Q11273427|name:恋した人は、妹の代わりに死んでくれと言った。@COMIC|sub:妹と結婚した片思い相手がなぜ今さら私のもとに?と思ったら
   kana_segmented: コイシタ ヒト ワ イモウト ノ カワリ ニ シンデ クレ ト イッタ アットマーク コミック
 - key: qid:Q11273427|name:魔法女子学園の助っ人教師
@@ -63473,8 +63106,7 @@ fills:
 - key: qid:Q11282004|name:驚愕!!超常怪奇事件file
   kana_segmented: キョウガク チョウジョウ カイキ ジケン file|キョウガク チョウジョウ カイキ ジケン ファイル
 - key: qid:Q11283231|name:序盤でボコられるクズ悪役貴族に転生した俺、死にたくなくて強くなったら主人公にキレられました。
-  kana_segmented: ジョバン デ ボコラレル クズ アクヤク キゾク ニ テンセイ シタ オレ シニタクナクテ ツヨク ナッタラ シュジンコウ ニ
-    キレラレマシタ
+  kana_segmented: ジョバン デ ボコラレル クズ アクヤク キゾク ニ テンセイ シタ オレ シニタクナクテ ツヨク ナッタラ シュジンコウ ニ キレラレマシタ
 - key: qid:Q11283701|name:The drifters
   kana_segmented: ザ ドリフターズ
 - key: qid:Q11283866|name:シャングリラ
@@ -64148,8 +63780,7 @@ fills:
 - key: qid:Q11359976|name:触妻姦
   kana_segmented: ショクサイカン
 - key: qid:Q11360088|name:精霊特捜フェアリィセイバーW外伝媚戯妊具
-  kana_segmented: セイレイ トクソウ フェアリィ セイバー W ガイデン ビギニング|セイレイ トクソウ フェアリィ セイバー ダブル ガイデン
-    ビギニング
+  kana_segmented: セイレイ トクソウ フェアリィ セイバー W ガイデン ビギニング|セイレイ トクソウ フェアリィ セイバー ダブル ガイデン ビギニング
 - key: qid:Q11360239|name:おまじないネコ・チャクラくん
   kana_segmented: オマジナイ ネコ チャクラクン
   src: ndl
@@ -64192,8 +63823,7 @@ fills:
 - key: qid:Q11362565|name:ロア|sub:奈落のヒロイン.
   kana_segmented: ロア
 - key: qid:Q11362679|name:北欧美少女のクラスメイトが、婚約者になったらデレデレの甘々になってしまった件について
-  kana_segmented: ホクオウ ビショウジョ ノ クラスメイト ガ コンヤクシャ ニ ナッタラ デレデレ ノ アマアマ ニ ナッテ シマッタ ケン ニ
-    ツイテ
+  kana_segmented: ホクオウ ビショウジョ ノ クラスメイト ガ コンヤクシャ ニ ナッタラ デレデレ ノ アマアマ ニ ナッテ シマッタ ケン ニ ツイテ
 - key: qid:Q11362679|name:断罪された転生聖女は、悪役令嬢の道を行く!
   kana_segmented: ダンザイ サレタ テンセイ セイジョ ワ アクヤク レイジョウ ノ ミチ オ イク
 - key: qid:Q11363488|name:TOGETHER!
@@ -64975,12 +64605,10 @@ fills:
 - key: qid:Q11404147|name:プ～ねこ.
   kana_segmented: プーネコ.
 - key: qid:Q11404315|name:牌師
-  kana_segmented: ブツダン ・ ブツグ ジダイ オ ニナウ キョウ イハイシ フデンボクカイ(ト ミタ ムツミ) イノル タイショウ ト シテ オモイ
-    ・ デントウ ギジュツ オ コメタ キョウ イハイ オ ツクリ ツズケル
+  kana_segmented: ブツダン ・ ブツグ ジダイ オ ニナウ キョウ イハイシ フデンボクカイ(ト ミタ ムツミ) イノル タイショウ ト シテ オモイ ・ デントウ ギジュツ オ コメタ キョウ イハイ オ ツクリ ツズケル
   src: tail
 - key: qid:Q11405159|name:追放された不遇職『テイマー』ですが、2つ目の職業が万能職『配合術師』だったので俺だけの最強パーティを作ります
-  kana_segmented: ツイホウ サレタ フグウショク テイマー デスガ フタツメ ノ ショクギョウ ガ バンノウショク ハイゴウジュツシ ダッタ ノデ
-    オレ ダケ ノ サイキョウ パーティ オ ツクリマス
+  kana_segmented: ツイホウ サレタ フグウショク テイマー デスガ フタツメ ノ ショクギョウ ガ バンノウショク ハイゴウジュツシ ダッタ ノデ オレ ダケ ノ サイキョウ パーティ オ ツクリマス
 - key: qid:Q11405166|name:サクリファイス
   kana_segmented: サクリファイス
   src: ndl
@@ -65374,8 +65002,7 @@ fills:
   kana_segmented: Bloody heaven
   src: ndl
 - key: qid:Q11425281|name:破滅フラグ回避のため山奥へ引き籠っていた最強の悪役は、助けたヒロインによって表舞台へ立たされる
-  kana_segmented: ハメツ フラグ カイヒ ノ タメ ヤマオク エ ヒキコモッテ イタ サイキョウ ノ アクヤク ワ タスケタ ヒロイン ニ ヨッテ
-    オモテブタイ エ タタサレル
+  kana_segmented: ハメツ フラグ カイヒ ノ タメ ヤマオク エ ヒキコモッテ イタ サイキョウ ノ アクヤク ワ タスケタ ヒロイン ニ ヨッテ オモテブタイ エ タタサレル
 - key: qid:Q11425578|name:アイトアイ
   kana_segmented: アイ ト アイ
 - key: qid:Q11425578|name:ドメスティック
@@ -65387,8 +65014,7 @@ fills:
 - key: qid:Q11425578|name:蜜葬
   kana_segmented: ミツソウ
 - key: qid:Q11425602|name:「ククク……。奴は四天王の中でも最弱」と解雇された俺、なぜか勇者と聖女の師匠になる.
-  kana_segmented: ククク ヤツ ワ シテンノウ ノ ナカ デモ サイジャク ト カイコ サレタ オレ ナゼカ ユウシャ ト セイジョ ノ シショウ
-    ニ ナル.
+  kana_segmented: ククク ヤツ ワ シテンノウ ノ ナカ デモ サイジャク ト カイコ サレタ オレ ナゼカ ユウシャ ト セイジョ ノ シショウ ニ ナル.
 - key: qid:Q11425602|name:底辺冒険者だけど魔法を極めてみることにした
   kana_segmented: テイヘン ボウケンシャ ダケド マホウ オ キワメテ ミル コト ニ シタ
 - key: qid:Q11425602|name:陰の実力者になりたくて!
@@ -65709,8 +65335,7 @@ fills:
   kana_segmented: ホシ ノ ヨル ツキ ノ ソラ
   src: tail
 - key: qid:Q11446100|name:劇場版MAJOR友情の一球
-  kana_segmented: ゲキジョウバン MAJOR ユウジョウ ノ ウイニング ショット|ゲキジョウバン major ユウジョウ ノ イッキュウ|ゲキジョウバン
-    メジャー ユウジョウ ノ ウイニング ショット
+  kana_segmented: ゲキジョウバン MAJOR ユウジョウ ノ ウイニング ショット|ゲキジョウバン major ユウジョウ ノ イッキュウ|ゲキジョウバン メジャー ユウジョウ ノ ウイニング ショット
 - key: qid:Q11446129|name:ヒグマグマ
   kana_segmented: ヒグマグマ
 - key: qid:Q11447420|name:死神はささやく
@@ -66180,8 +65805,7 @@ fills:
   kana_segmented: アーティスト オブ ザ センチュリー
   src: tail
 - key: qid:Q11465222|name:波紋
-  kana_segmented: アーツビジョン ゼンシャチョウ タイホ ジケン ノ ハモン ワ セイユウ ギョウカイ ノ シンコク セクハラ ジジョウ ト カイカク
-    オ モトメル ナイブ ノ ウゴキ
+  kana_segmented: アーツビジョン ゼンシャチョウ タイホ ジケン ノ ハモン ワ セイユウ ギョウカイ ノ シンコク セクハラ ジジョウ ト カイカク オ モトメル ナイブ ノ ウゴキ
   src: tail
 - key: qid:Q11465222|name:通り雨
   kana_segmented: アイカン ノ フ
@@ -66843,11 +66467,9 @@ fills:
   kana_segmented: バンジョウ ノ オリオン
 - key: qid:Q11503682|name:静かなるドン-もうひとつの最終章-
   kana_segmented: シズカ ナル ドン モウ ヒトツ ノ サイシュウショウ
-- key: qid:Q11503682|name:静かなるドン-もうひとつの最終章-|sub:YAKUZA SIDE STORY BEYOND THE LAST
-    CHAPTER
+- key: qid:Q11503682|name:静かなるドン-もうひとつの最終章-|sub:YAKUZA SIDE STORY BEYOND THE LAST CHAPTER
   kana_segmented: シズカ ナル ドン モウ ヒトツ ノ サイシュウショウ
-- key: qid:Q11503682|name:静かなるドン-もうひとつの最終章-|sub:YAKUZA SIDE STORY BEYOND THE LAST
-    CHAPTER.
+- key: qid:Q11503682|name:静かなるドン-もうひとつの最終章-|sub:YAKUZA SIDE STORY BEYOND THE LAST CHAPTER.
   kana_segmented: シズカ ナル ドン モウ ヒトツ ノ サイシュウショウ
 - key: qid:Q11503752|name:THE RIDDLE
   kana_segmented: The riddle
@@ -69378,8 +69000,7 @@ fills:
 - key: qid:Q11591065|name:ばく盛!本当にあった〔○生〕ここだけの話祭
   kana_segmented: バクモリ!ホントウ ニ アッタ マルナマ ココ ダケ ノ ハナシ フィーバー
 - key: qid:Q11591065|name:スゴ盛!本当にあった〔○生〕ここだけの話極
-  kana_segmented: スゴモリ ホントウ ニ アッタ ナマ ココ ダケ ノ ハナシ キョク|スゴモリ ホントウ ニ アッタ マルナマ ココ ダケ ノ
-    ハナシ ウルトラ
+  kana_segmented: スゴモリ ホントウ ニ アッタ ナマ ココ ダケ ノ ハナシ キョク|スゴモリ ホントウ ニ アッタ マルナマ ココ ダケ ノ ハナシ ウルトラ
 - key: qid:Q11591065|name:本当にあった〔○生〕ここだけの話〔○超 〕
   kana_segmented: ホントウ ニ アッタ マルナマ ココ ダケ ノ ハナシ スーパー
 - key: qid:Q11591065|name:激盛!本当にあった〔○生〕
@@ -71807,8 +71428,7 @@ fills:
 - key: qid:Q132172867|name:将棋の渡辺くん.
   kana_segmented: ショウギ ノ ワタナベ クン.
 - key: qid:Q132431812|name:恋した人は、妹の代わりに死んでくれと言った。-妹と結婚した片思い相手がなぜ今さら私のもとに?と思ったら-@COMIC
-  kana_segmented: コイシタ ヒト ワ イモウト ノ カワリ ニ シンデ クレ ト イッタ イモウト ト ケッコン シタ カタオモイ アイテ ガ ナゼ
-    イマサラ ワタクシ ノ モト ニ ト オモッタラ アットマーク コミック
+  kana_segmented: コイシタ ヒト ワ イモウト ノ カワリ ニ シンデ クレ ト イッタ イモウト ト ケッコン シタ カタオモイ アイテ ガ ナゼ イマサラ ワタクシ ノ モト ニ ト オモッタラ アットマーク コミック
 - key: qid:Q132431812|name:恋した人は、妹の代わりに死んでくれと言った。@COMIC
   kana_segmented: コイシタ ヒト ワ イモウト ノ カワリ ニ シンデ クレ ト イッタ アットマーク コミック
 - key: qid:Q132432174|name:スモークブルーの雨のち晴れ
@@ -72189,8 +71809,7 @@ fills:
 - key: qid:Q1626187|name:吼えろペンRRR|sub:COMIC BOMBER
   kana_segmented: ホエロ ペン アールアールアール
 - key: qid:Q16263561|name:裏切られたSランク冒険者の俺は、愛する奴隷の彼女らと共に奴隷だけのハーレムギルドを作る
-  kana_segmented: ウラギラレタ エスランク ボウケンシャ ノ オレ ワ アイスル ドレイ ノ カノジョラ ト トモ ニ ドレイ ダケ ノ ハーレム
-    ギルド オ ツクル
+  kana_segmented: ウラギラレタ エスランク ボウケンシャ ノ オレ ワ アイスル ドレイ ノ カノジョラ ト トモ ニ ドレイ ダケ ノ ハーレム ギルド オ ツクル
 - key: qid:Q16263656|name:やわはだに春雷
   kana_segmented: ヤワハダ ニ シュンライ
 - key: qid:Q16263656|name:コミック星新一
@@ -72237,8 +71856,7 @@ fills:
   kana_segmented: アノニマス
   src: ndl
 - key: qid:Q16264587|name:欠けた月のメルセデス～吸血鬼の貴族に転生したけど捨てられそうなのでダンジョンを制覇する～@COMIC
-  kana_segmented: カケタ ツキ ノ メルセデス キュウケツキ ノ キゾク ニ テンセイ シタ ケド ステラレソウ ナノデ ダンジョン オ セイハ
-    スル アットマーク コミック
+  kana_segmented: カケタ ツキ ノ メルセデス キュウケツキ ノ キゾク ニ テンセイ シタ ケド ステラレソウ ナノデ ダンジョン オ セイハ スル アットマーク コミック
 - key: qid:Q16264594|name:ブルーブルーそしてブルース
   kana_segmented: ブルー ブルー ソシテ ブルース
 - key: qid:Q16264753|name:銀河ロケットにお葉書ください
@@ -72833,8 +72451,7 @@ fills:
 - key: qid:Q17349658|name:〔○生〕うっかり大失言読者投稿ベスト
   kana_segmented: マルナマ ウッカリ ダイシツゲン ドクシャ トウコウ ベスト
 - key: qid:Q17349658|name:〔○生〕お仕事ウラ話読者投稿ベスト 元スタッフが激白!衝撃ヤバヤバ業界(秘)スクープ416p!!
-  kana_segmented: マルナマ オシゴト ウラバナシ ドクシャ トウコウ ベスト モト スタッフ ガ ゲキハク!ショウゲキ ヤバヤバ ギョウカイ マルヒ
-    スクープ 416p
+  kana_segmented: マルナマ オシゴト ウラバナシ ドクシャ トウコウ ベスト モト スタッフ ガ ゲキハク!ショウゲキ ヤバヤバ ギョウカイ マルヒ スクープ 416p
 - key: qid:Q17349658|name:〔○生〕サイテー葬式＆結婚式読者投稿ベスト
   kana_segmented: マルナマ サイテー ソウシキ＆ケッコンシキ ドクシャ トウコウ ベスト
 - key: qid:Q17349658|name:〔○生〕ダメ医者とキモい患者読者投稿ベスト
@@ -72964,8 +72581,7 @@ fills:
 - key: qid:Q17349658|name:ヤバ盛!本当にあった〔○生〕ここだけの話極
   kana_segmented: ヤバモリ!ホントウ ニ アッタ マルナマ ココ ダケ ノ ハナシ ウルトラ
 - key: qid:Q17349658|name:本当にあった〔○生〕おバカママ狂騒曲SP
-  kana_segmented: ホントウ ニ アッタ マルナマ オバカ ママ キョウソウキョク SP|ホントウ ニ アッタ マルナマ オバカ ママ キョウソウキョク
-    スペシャル
+  kana_segmented: ホントウ ニ アッタ マルナマ オバカ ママ キョウソウキョク SP|ホントウ ニ アッタ マルナマ オバカ ママ キョウソウキョク スペシャル
 - key: qid:Q17349658|name:本当にあった〔○生〕ここだけの話
   kana_segmented: ホントウ ニ アッタ マルナマ ココ ダケ ノ ハナシ
   src: ndl
@@ -73000,13 +72616,11 @@ fills:
 - key: qid:Q17349658|name:特盛!本当にあった〔○生〕エッチだめ出しSP
   kana_segmented: 'トクモリ!ホントウ ニ アッタ マルナマ エッチ ダメダシ スペシャル :'
 - key: qid:Q17349658|name:特盛!本当にあった〔○生〕妊娠出産スクープSP
-  kana_segmented: トクモリ ホントウ ニ アッタ マルナマ ニンシン シュッサン スクープ SP|トクモリ ホントウ ニ アッタ マルナマ ニンシン
-    シュッサン スクープ スペシャル
+  kana_segmented: トクモリ ホントウ ニ アッタ マルナマ ニンシン シュッサン スクープ SP|トクモリ ホントウ ニ アッタ マルナマ ニンシン シュッサン スクープ スペシャル
 - key: qid:Q17349658|name:特盛!本当にあった〔○生〕妊娠出産体験SP
   kana_segmented: トクモリ ホントウ ニ アッタ マルナマ ニンシン シュッサン タイケン スペシャル
 - key: qid:Q17349658|name:特盛!本当にあった〔○生〕痛かった武勇伝SP
-  kana_segmented: トクモリ ホントウ ニ アッタ ナマ イタカッタ ブユウデン SP|トクモリ ホントウ ニ アッタ マルナマ イタカッタ ブユウデン
-    スペシャル
+  kana_segmented: トクモリ ホントウ ニ アッタ ナマ イタカッタ ブユウデン SP|トクモリ ホントウ ニ アッタ マルナマ イタカッタ ブユウデン スペシャル
 - key: qid:Q17349658|name:病院でぼくらはみんな死にかけた!!
   kana_segmented: ビョウイン デ ボクラ ワ ミンナ シニカケタ
 - key: qid:Q17349658|name:超盛!本当にあった〔○生〕
@@ -73018,13 +72632,11 @@ fills:
 - key: qid:Q17349658|name:超盛!本当にあった〔○生〕ここだけの話超
   kana_segmented: チョウモリ ホントウ ニ アッタ マルナマ ココ ダケ ノ ハナシ スーパー
 - key: qid:Q17349658|name:超盛!本当にあった〔○生〕まるごと県民性SP
-  kana_segmented: チョウモリ ホントウ ニ アッタ マルナマ マルゴト ケンミンセイ SP|チョウモリ ホントウ ニ アッタ マルナマ マルゴト
-    ケンミンセイ スペシャル
+  kana_segmented: チョウモリ ホントウ ニ アッタ マルナマ マルゴト ケンミンセイ SP|チョウモリ ホントウ ニ アッタ マルナマ マルゴト ケンミンセイ スペシャル
 - key: qid:Q17349658|name:超盛!本当にあった〔○生〕夏カミングアウトSP
   kana_segmented: チョウモリ ホントウ ニ アッタ マルナマ ナツ カミングアウト スペシャル
 - key: qid:Q17349658|name:超盛!本当にあった〔○生〕業界ウラ話SP
-  kana_segmented: チョウモリ ホントウ ニ アッタ マルナマ ギョウカイ ウラバナシ SP|チョウモリ ホントウ ニ アッタ マルナマ ギョウカイ
-    ウラバナシ スペシャル
+  kana_segmented: チョウモリ ホントウ ニ アッタ マルナマ ギョウカイ ウラバナシ SP|チョウモリ ホントウ ニ アッタ マルナマ ギョウカイ ウラバナシ スペシャル
 - key: qid:Q17349658|name:超盛!本当にあった〔○生〕死にかけ激痛体験SP
   kana_segmented: チョウモリ ホントウ ニ アッタ マルナマ シニカケ ゲキツウ タイケン スペシャル
 - key: qid:Q17349658|name:超盛!本当にあった〔○生〕職場の変なひとSP
@@ -73087,8 +72699,7 @@ fills:
 - key: qid:Q17572|name:ドラえもんまんがセレクションstand by meドラえもん2スペシャル
   kana_segmented: ドラエモン マンガ セレクション stand by me ドラエモン 2 スペシャル
 - key: qid:Q17572|name:ドラえもんまんがセレクション『映画のび太と空の理想郷』公開スペシャル!
-  kana_segmented: ドラえもんまんがセレクション『映画のび太と空の理想郷 (ユートピア) 』公開スペシャル!|ドラエモン マンガ セレクション 『
-    エイガ ノビタ ト ソラ ノ ユートピア 』 コウカイ スペシャル !
+  kana_segmented: ドラえもんまんがセレクション『映画のび太と空の理想郷 (ユートピア) 』公開スペシャル!|ドラエモン マンガ セレクション 『 エイガ ノビタ ト ソラ ノ ユートピア 』 コウカイ スペシャル !
 - key: qid:Q17572|name:ドラえもんまんがセレクションのび太とぼくらの未来!スペシャル
   kana_segmented: ドラエモン マンガ セレクション ノビタ ト ボクラ ノ ミライ ! スペシャル
 - key: qid:Q17572|name:ドラえもんまんがセレクションのび太の新恐竜!スペシャル
@@ -73096,15 +72707,13 @@ fills:
 - key: qid:Q17572|name:ドラえもんまんがセレクションドラえもん50周年!スペシャル
   kana_segmented: ドラエモン マンガ セレクション ドラエモン 50シュウネン!スペシャル
 - key: qid:Q17572|name:ドラえもんまんがセレクションドラえもん誕生日90年前!スペシャル!
-  kana_segmented: ドラえもんまんがセレクションドラえもん生誕90年前おめでとうSP!|ドラエモン マンガ セレクション ドラエモン タンジョウビ
-    90ネンマエ ! スペシャル !
+  kana_segmented: ドラえもんまんがセレクションドラえもん生誕90年前おめでとうSP!|ドラエモン マンガ セレクション ドラエモン タンジョウビ 90ネンマエ ! スペシャル !
 - key: qid:Q17572|name:ドラえもんまんがセレクション大長編ドラえもん!スペシャル
   kana_segmented: ドラエモン マンガ セレクション ダイチョウヘン ドラエモン ! スペシャル
 - key: qid:Q17572|name:ドラえもんまんがセレクション心に残る名言スペシャル
   kana_segmented: ドラエモン マンガ セレクション ココロ ニ ノコル メイゲン スペシャル
 - key: qid:Q17572|name:ドラえもんまんがセレクション映画ドラえもんのび太の宇宙小戦争2021祝♪公開スペシャル!
-  kana_segmented: ドラエモン マンガ セレクション エイガ ドラエモン ノビタ ノ ウチュウ ショウセンソウ 2021 シュク ♪ コウカイ スペシャル
-    !
+  kana_segmented: ドラエモン マンガ セレクション エイガ ドラエモン ノビタ ノ ウチュウ ショウセンソウ 2021 シュク ♪ コウカイ スペシャル !
 - key: qid:Q17572|name:ドラえもんまんがセレクション映画ドラえもんのび太の宇宙小旅行2021再始動!スペシャル
   kana_segmented: ドラエモン マンガ セレクション エイガ ドラエモン ノビタ ノ ウチュウ ショウリョコウ 2021 サイシドウ ! スペシャル
 - key: qid:Q17572|name:ドラえもんまんがセレクション藤子・F・不二雄ミュージアム10周年スペシャル
@@ -73139,8 +72748,7 @@ fills:
 - key: qid:Q17572|name:夢カメラ
   kana_segmented: ユメカメラ
 - key: qid:Q17572|name:大長編ドラえもんのび太のねじ巻き都市冒険記
-  kana_segmented: ダイチョウヘン ドラエモン ノビタ ノ ネジマキ シティー ボウケンキ|ダイチョウヘン ドラエモン ノビタ ノ ネジマキ トシ
-    ボウケンキ
+  kana_segmented: ダイチョウヘン ドラエモン ノビタ ノ ネジマキ シティー ボウケンキ|ダイチョウヘン ドラエモン ノビタ ノ ネジマキ トシ ボウケンキ
 - key: qid:Q17572|name:大長編ドラえもんのび太の海底鬼岩城
   kana_segmented: ダイチョウヘン ドラエモン ノビタ ノ カイテイ キガンジョウ
 - key: qid:Q17572|name:大長編ドラエもん
@@ -76044,11 +75652,9 @@ fills:
 - key: qid:Q3482132|name:終末の魔女と人形
   kana_segmented: シュウマツ ノ マジョ ト ニンギョウ
 - key: qid:Q3482283|name:元婚約者から逃げるため吸血伯爵に恋人のフリをお願いしたら、なぜか溺愛モードになりました
-  kana_segmented: モトコンヤクシャ カラ ニゲル タメ キュウケツ ハクシャク ニ コイビト ノ フリ オ オネガイ シタラ ナゼカ デキアイ モード
-    ニ ナリマシタ
+  kana_segmented: モトコンヤクシャ カラ ニゲル タメ キュウケツ ハクシャク ニ コイビト ノ フリ オ オネガイ シタラ ナゼカ デキアイ モード ニ ナリマシタ
 - key: qid:Q3482283|name:元婚約者から逃げるため吸血伯爵に恋人のフリをお願いしたら、なぜか溺愛モードになりました.
-  kana_segmented: モトコンヤクシャ カラ ニゲル タメ キュウケツ ハクシャク ニ コイビト ノ フリ オ オネガイ シタラ ナゼカ デキアイ モード
-    ニ ナリマシタ.
+  kana_segmented: モトコンヤクシャ カラ ニゲル タメ キュウケツ ハクシャク ニ コイビト ノ フリ オ オネガイ シタラ ナゼカ デキアイ モード ニ ナリマシタ.
 - key: qid:Q3482405|name:しーちゃんかあさん
   kana_segmented: シーチャン カアサン
 - key: qid:Q3482405|name:特撰思い出食堂
@@ -76831,8 +76437,7 @@ fills:
 - key: qid:Q441692|name:新機動戦記ガンダムW
   kana_segmented: シン キドウ センキ ガンダム ウイング
   src: ndl
-- key: qid:Q442602|name:Blades|sub:A collection of Masamune Shirow's full color works
-    1992-1998
+- key: qid:Q442602|name:Blades|sub:A collection of Masamune Shirow's full color works 1992-1998
   kana_segmented: Blades
   src: ndl
 - key: qid:Q442602|name:Bullets
@@ -77371,8 +76976,7 @@ fills:
   kana_segmented: オーディション
   src: katakana-title
 - key: qid:Q47582971|name:ガラスの時代
-  kana_segmented: チョウセン キギョウ(39)チエ ト ギジュツ デ フキョウ モ ノリコエ オカモト ガラス 21セイキ ワ ガラス ノ ジダイ
-    ダ
+  kana_segmented: チョウセン キギョウ(39)チエ ト ギジュツ デ フキョウ モ ノリコエ オカモト ガラス 21セイキ ワ ガラス ノ ジダイ ダ
   src: tail
 - key: qid:Q4811878|name:Home
   kana_segmented: Home
@@ -77787,8 +77391,7 @@ fills:
 - key: qid:Q5362351|name:バカとテストと召喚獣SPINOUT!それが僕らの日常。
   kana_segmented: バカ ト テスト ト ショウカンジュウ スピンアウト ソレ ガ ボクラ ノ ニチジョウ
 - key: qid:Q5362351|name:バカとテストと召喚獣→spinout! それが僕らの日常。
-  kana_segmented: バカ ト テスト ト ショウカンジュウ spinout ソレ ガ ボクラ ノ ニチジョウ|バカ ト テスト ト ショウカンジュウ
-    スピンアウト ソレ ガ ボクラ ノ ニチジョウ
+  kana_segmented: バカ ト テスト ト ショウカンジュウ spinout ソレ ガ ボクラ ノ ニチジョウ|バカ ト テスト ト ショウカンジュウ スピンアウト ソレ ガ ボクラ ノ ニチジョウ
 - key: qid:Q5362351|name:バカとテストと召喚獣・spinout!
   kana_segmented: バカ ト テスト ト ショウカンジュウ spinout|バカ ト テスト ト ショウカンジュウ スピンアウト
 - key: qid:Q5362703|name:Angel Text
@@ -78203,8 +77806,7 @@ fills:
   kana_segmented: フェローズ
 - key: qid:Q55536130|name:J⇔Mジェイエム
   kana_segmented: ジェイエム
-- key: qid:Q55536130|name:J⇔Mジェイエム|sub:The story about an assassin called J and a
-    lonely girl Megumi
+- key: qid:Q55536130|name:J⇔Mジェイエム|sub:The story about an assassin called J and a lonely girl Megumi
   kana_segmented: ジェイエム
 - key: qid:Q55536130|name:女子高生除霊師アカネ!
   kana_segmented: ジョシコウセイ ジョレイシ アカネ
@@ -78969,8 +78571,7 @@ fills:
 - key: qid:Q6410148|name:特命課長只野仁|sub:大人味
   kana_segmented: トクメイ カチョウ タダノ ヒトシ
 - key: qid:Q6410148|name:自分が好き
-  kana_segmented: アガワサワコ ノ コノ ヒト ニ アイタイ 646 ジブン ガ スキ デ ツヅケラレソウナ コト ワ サクブン デ サッカ ニ
-    ナロウ ト キメマシタ サッカ モリ エト
+  kana_segmented: アガワサワコ ノ コノ ヒト ニ アイタイ 646 ジブン ガ スキ デ ツヅケラレソウナ コト ワ サクブン デ サッカ ニ ナロウ ト キメマシタ サッカ モリ エト
   src: tail
 - key: qid:Q64138593|name:天狗の台所
   kana_segmented: テング ノ ダイドコロ
@@ -80167,8 +79768,7 @@ fills:
   kana_segmented: ハイスクール コネクション
   src: ndl
 - key: qid:Q841880|name:天才柳沢教授の生活「男はここまで純情です」セレクト18
-  kana_segmented: テンサイ ヤナギサワ キョウジュ ノ セイカツ オトコ ワ ココマデ ジュンジョウ デス セレクト 18|テンサイ ヤナギサワ
-    キョウジュ ノ セイカツ オトコ ワ ココマデ ジュンジョウ デス セレクト ジュウハチ
+  kana_segmented: テンサイ ヤナギサワ キョウジュ ノ セイカツ オトコ ワ ココマデ ジュンジョウ デス セレクト 18|テンサイ ヤナギサワ キョウジュ ノ セイカツ オトコ ワ ココマデ ジュンジョウ デス セレクト ジュウハチ
 - key: qid:Q841889|name:WORK BOX
   kana_segmented: WORK BOX
   src: ndl
@@ -81865,8 +81465,7 @@ fills:
 - key: qid:Q966701|name:ドクター・ホワイト
   kana_segmented: ドクター ホワイト
 - key: qid:Q966701|name:ブラッディ・マンディ Season2
-  kana_segmented: Bloody Monday season 2 ゼツボウ ノ ハコ|ブラッディ マンディ SEASON 2|ブラッディ マンデイ
-    シーズン 2 パンドラ ノ ハコ
+  kana_segmented: Bloody Monday season 2 ゼツボウ ノ ハコ|ブラッディ マンディ SEASON 2|ブラッディ マンデイ シーズン 2 パンドラ ノ ハコ
 - key: qid:Q966701|name:ブラッディ・マンデイ ラストシーズン
   kana_segmented: ブラッディ マンデイ ラスト シーズン
 - key: qid:Q966701|name:怪盗紳士の殺人
@@ -82107,8 +81706,7 @@ fills:
 - key: qid:Q98399901|name:ヒロイン?聖女?いいえ、オールワークスメイドです〈誇〉!@comic.
   kana_segmented: ヒロイン セイジョ イイエ オール ワークス メイド デス ホコリ アットマーク コミック.
 - key: qid:Q98399901|name:友人に500円貸したら借金のカタに妹をよこしてきたのだけれど、俺は一体どうすればいいんだろう
-  kana_segmented: ユウジン ニ ゴヒャクエン カシタラ シャッキン ノ カタ ニ イモウト オ ヨコシテ キタ ノダ ケレド オレ ワ イッタイ
-    ドウスレバ イインダロウ
+  kana_segmented: ユウジン ニ ゴヒャクエン カシタラ シャッキン ノ カタ ニ イモウト オ ヨコシテ キタ ノダ ケレド オレ ワ イッタイ ドウスレバ イインダロウ
 - key: qid:Q98399901|name:大預言者は前世から逃げる|sub:三周目は公爵令嬢に転生したから、バラ色ライフを送りたい
   kana_segmented: ダイヨゲンシャ ワ ゼンセ カラ ニゲル
 - key: qid:Q98399901|name:大預言者は前世から逃げる|sub:三周目は公爵令嬢に転生したから、バラ色ライフを送りたい.
@@ -82222,3 +81820,9 @@ fills:
 - key: qid:Q999229|name:明日があるさ
   kana_segmented: アシタ ガ アルサ
   src: ndl
+- key: qid:Q11522045|name:ANIMAL X 原始再来
+  kana_segmented: アニマル エックス ゲンシ サイライ
+  note: 2026-07-26 ユーザ提供。NDL/楽天ともヨミ無しでindex表示ガードに落ちていた頁を救済
+- key: qid:Q193300|name:手塚治虫全百科
+  kana_segmented: テヅカオサム オール ヒャッカ
+  note: 2026-07-26 ユーザ提供。★「全百科」=オール ヒャッカ の当て字読み。NDL/楽天とも空
