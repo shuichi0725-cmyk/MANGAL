@@ -3460,6 +3460,18 @@ def main():
                 if _c and _c.get("variant"):
                     _var = _c["variant"]
                     _v["variants"] = [{k: _var.get(k) for k in ("label", "isbn13", "cover_url", "price")}]
+        # ★volume-exclude 再適用(2026-07-26): 上の特装版是正は special_isbn を normal_isbn に**置換**するため、
+        #   先に除外したISBNが**ここで復活し得る**(僕のヒーローアカデミア14で実害: 除外しても消えなかった)。
+        #   除外は「この頁に出すな」の最終意思なので、置換系passの後でもう一度効かせる。
+        if _vex:
+            for _ce in (new_yml.get("editions") or []):
+                _ce["volumes"] = [v for v in (_ce.get("volumes") or [])
+                                  if _norm_isbn(v.get("isbn13")) not in _vex]
+                for _ver in (_ce.get("versions") or []):
+                    _ver["volumes"] = [v for v in (_ver.get("volumes") or [])
+                                       if _norm_isbn(v.get("isbn13")) not in _vex]
+            new_yml["editions"] = [e for e in (new_yml.get("editions") or [])
+                                   if (e.get("volumes") or e.get("versions"))]
         # ★書影 最終充填 (= 全edition操作後=edition-canonical/override/exclude/version の後。
         #   clean_vol充填が canonical再構築で消える件を確実に埋める。 旧 _apply-covers-stage 廃止)。
         # ★発売日 精密化も同じ最終passで(2026-07-18): 現在値が空 or 新値のprefix(年月→年月日)の時だけ。

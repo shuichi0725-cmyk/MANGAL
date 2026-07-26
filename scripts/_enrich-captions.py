@@ -62,6 +62,24 @@ if os.path.exists(pj):
         r = json.loads(l)
         if r.get("caption"):
             pre[r["isbn"]] = r["caption"]
+# ★楽天ISBNキャッシュ(.cache/rakuten-isbn.jsonl 約370MB)からも caption を拾う (2026-07-26追加)。
+#   これを見ていなかったため --live 無しでは材料が **38,981頁中5頁** しか集まらず、
+#   「楽天に材料が無い」と誤認する状態だった。 既に手元にある内部データなので外部照会ゼロで使える。
+#   形は {"isbn": "...", "item": {楽天itemそのまま}}。
+rj = f"{ROOT}/.cache/rakuten-isbn.jsonl"
+if os.path.exists(rj):
+    _n = 0
+    for l in open(rj, encoding="utf-8"):
+        try:
+            r = json.loads(l)
+        except Exception:
+            continue
+        ib = str(r.get("isbn") or "")
+        cap = ((r.get("item") or {}).get("itemCaption") or "").strip()
+        if ib and cap and ib not in pre:
+            pre[ib] = cap
+            _n += 1
+    print(f"  楽天ISBNキャッシュから caption {_n:,} 件")
 
 targets = []
 files = glob.glob(os.path.join(ROOT, a.src, "*.yml"))
