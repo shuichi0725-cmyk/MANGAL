@@ -143,3 +143,5 @@
 - [【✅】著者名の空白=authorKeyで照合吸収](author_name_space_conventions_conflict.md) — 表記不変・新規照合は必ずauthorKey経由
 - [【最重要・未決】promoteは元頁駆動=新規シリーズが出ない](orphan_series_promote_is_srcpage_driven.md) — 未掲載46,874。著者マスター起点の副作用・成人/コンビニ本では減らない
 - [2026-07 月次蒸留 MADB1.2.18](distill_2026_07_1218.md) — series+292/vol+1,124取込済・検証green・synopsis9,421未訳残
+- [【未決】本番R2に孤児HTML1,041頁](r2_orphan_pages_prune_missing.md) — r2-syncは--prune無し=dropしても公開され続ける
+- [フィルムコミック=imprintだけがアニメ物の穴](film_comic_imprint_hole.md) — title/edition_typeの網をすり抜け45頁。ISBN除外は別刷りで無効
