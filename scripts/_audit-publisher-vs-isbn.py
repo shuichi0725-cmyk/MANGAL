@@ -107,6 +107,20 @@ def main():
         top, cnt = c.most_common(1)[0]
         if sum(c.values()) >= 3 and cnt / sum(c.values()) >= 0.8:
             ytable[(pf, y)] = top
+    # ★年別表は疎なので「その年に**在効**だった社名」を引けるようにする:
+    #   prefix ごとに年を並べ、対象年**以下で最も近い年**の社名を採る。
+    #   (該当年が無い時に年不問の多数決へ落ちると、改称後の名前が古い巻に付く
+    #    = 角川グループパブリッシング2012刊が KADOKAWA 扱いになる 2026-07-26)
+    yseries = collections.defaultdict(list)
+    for (pf, y), nm in ytable.items():
+        yseries[pf].append((y, nm))
+    for pf in list(yseries):
+        yseries[pf].sort()
+        # ★年別を使うのは **実際に社名が変わった記号だけ**。 変わっていない記号で
+        #   疎な年別に頼ると、票の薄い年のノイズを拾って偽陽性が増える
+        #   (2026-07-26 実測: 全記号に年別を当てたら B型が62→152に悪化した)。
+        if len({nm for _, nm in yseries[pf]}) < 2:
+            del yseries[pf]
     print(f"  記号表 {len(table):,} / ★記号×年 表 {len(ytable):,}", flush=True)
 
     def implied(ib, year=None):
@@ -121,6 +135,9 @@ def main():
                 continue
             if ratio.get(pf, 0) < 0.6:
                 return None, None
+            # ★年別は「その年のデータが在る時だけ」使う。 疎な年別で近傍補間すると
+            #   票の薄い年のノイズを拾って偽陽性が増える(2026-07-26 実測: 1,528→1,615に悪化)。
+            #   無い年は年不問の多数決(頑健)に委ねる。
             if year and (pf, year) in ytable:
                 return ytable[(pf, year)], pf
             return table[pf], pf
@@ -144,11 +161,17 @@ def main():
             ibs = [v.get("isbn13") for v in (ed.get("volumes") or []) if v.get("isbn13")]
             if not pub or not ibs:
                 continue
+            # ★判定年 = **版の開始年**(最古の巻の発売年)。 publisher は版に1つしか持てず、
+            #   改称を跨いで刊行された版(角川グループパブリッシング2012-2015 等)は
+            #   「版の開始時点の当時社名」が正([[publisher_model_edition_level]])。
+            #   巻ごとの年で見ると改称跨ぎの版を全部誤りに数えてしまう
+            #   (2026-07-26 実測: 518版中447は全巻が改称前=当方が正、71版が跨ぎ)。
+            _ys = [str(v.get("release_date") or "")[:4] for v in (ed.get("volumes") or [])]
+            _ys = sorted(y for y in _ys if y.isdigit())
+            _edy = _ys[0] if _ys else None
             imp = collections.Counter()
             for ib in ibs:
-                _v = next((v for v in (ed.get("volumes") or []) if v.get("isbn13") == ib), {})
-                _y = str(_v.get("release_date") or "")[:4]
-                w, pf = implied(str(ib), _y if _y.isdigit() else None)
+                w, pf = implied(str(ib), _edy)
                 if w:
                     imp[w] += 1
             if not imp:
