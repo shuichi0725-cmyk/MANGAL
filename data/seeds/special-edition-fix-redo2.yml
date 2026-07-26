@@ -153,8 +153,12 @@ corrections:
     cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/4226/9784864424226_1_7.jpg?_ex=200x200
     price: 1035
 - special_isbn: '9784089082911'
-  normal_isbn: '9784088828596'
-  normal_cover: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/8596/9784088828596_1_2.jpg?_ex=200x200
+  # ★2026-07-26 是正: normal_isbn が 9784088828596(=「ヴィジランテ 14 -僕のヒーローアカデミアILLEGALS-」
+  #   別天荒人/古橋秀之)という **別作品** を指していた。 特装版 9784089082911 は
+  #   「僕のヒーローアカデミア(14)特装版」(堀越耕平・アニメDVD同梱)なので、通常版は 9784088811758 が正。
+  #   実害= 本編頁の14巻がスピンオフの書影/リンクに化けていた(頁内別作品混入監査で発見)。
+  normal_isbn: '9784088811758'
+  normal_cover: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/1758/9784088811758.jpg?_ex=300x300
   normal_date: null
   variant:
     label: アニメDVD同梱版
