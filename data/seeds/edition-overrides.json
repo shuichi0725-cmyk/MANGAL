@@ -31504,5 +31504,93 @@
    }
   ],
   "_note": "2026-07-25 NDL照会で是正。1巻に2002-06(=英知出版『こんにちはマイコン 完全版』トラウママンガブックス ISBN4754232143 の発売日)が誤って入り、1巻ISBNも欠落していた。NDL: 4091041019=ワンダーライフコミックス:1 / 4091041027=同2。1巻日付は種2(MADB M508378)とNDLの1982.11.01を採用。★2002完全版(別出版社)と1985.5の4091041043の扱いは未裁定=別途"
+ },
+ "versailles-no-bara-gaiden": {
+  "_note": "(2026-07-26 巻抜け調査)★『ベルサイユのばら外伝』は月刊Jam連載の全4話=**本来1冊の作品**で、巻抜けではなく**版の混在**だった。旧データは1つの通常版の中に 中央公論新社2003年版(ISBN有)と 実業之日本社1985年版(ISBN無)を「1巻」「3巻」として同居させ、存在しない2巻の欠落を作っていた。版はNDL+楽天で全数確認: 実業之日本社1985初版(上下・ISBN無)→2003復刻版(9784408612294) / 中央公論社愛蔵版1990 / 中公文庫コミック版1995 / 中央公論新社コミックlite2003 / 完全版2004(全2巻)。★ISBNの無い1985年初版は、同一内容で購入導線のある2003年復刻版で代表させた(通常版)。",
+  "editions": [
+   {
+    "type": "standard",
+    "label": "復刻版",
+    "publisher": "実業之日本社",
+    "imprint": "マンサンコミックス",
+    "volumes": [
+     {
+      "number": 1,
+      "asin": null,
+      "isbn13": "9784408612294",
+      "cover_url": null,
+      "release_date": "2003-06-25",
+      "volume_label": "上下巻セット(初版1985年の復刻)"
+     }
+    ]
+   },
+   {
+    "type": "aizoban",
+    "label": "愛蔵版",
+    "publisher": "中央公論社",
+    "imprint": "Chuko・comics",
+    "volumes": [
+     {
+      "number": 1,
+      "asin": null,
+      "isbn13": "9784120018985",
+      "cover_url": null,
+      "release_date": "1990-02"
+     }
+    ]
+   },
+   {
+    "type": "bunkobon",
+    "label": "文庫版",
+    "publisher": "中央公論社",
+    "imprint": "中公文庫コミック版",
+    "volumes": [
+     {
+      "number": 1,
+      "asin": null,
+      "isbn13": "9784122023550",
+      "cover_url": null,
+      "release_date": "1995-06"
+     }
+    ]
+   },
+   {
+    "type": "shinsoban",
+    "label": "新装版",
+    "publisher": "中央公論新社",
+    "imprint": "コミック・スーリ Chukoコミックlite",
+    "volumes": [
+     {
+      "number": 1,
+      "asin": null,
+      "isbn13": "9784124105575",
+      "cover_url": null,
+      "release_date": "2003-03-06"
+     }
+    ]
+   },
+   {
+    "type": "kanzenban",
+    "label": "完全版",
+    "publisher": "中央公論新社",
+    "imprint": "中公文庫コミック版",
+    "volumes": [
+     {
+      "number": 1,
+      "asin": null,
+      "isbn13": "9784122044395",
+      "cover_url": null,
+      "release_date": "2004-10-23"
+     },
+     {
+      "number": 2,
+      "asin": null,
+      "isbn13": "9784122044401",
+      "cover_url": null,
+      "release_date": "2004-10-23"
+     }
+    ]
+   }
+  ]
  }
 }
