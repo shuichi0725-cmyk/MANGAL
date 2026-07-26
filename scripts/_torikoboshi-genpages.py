@@ -207,10 +207,26 @@ def main():
     #   (索引側から拾うと再実行のたびに自己衝突して保留が増える 2026-07-26)
     used -= _mine
 
+    # ★既存の源頁が同じ series_key を持つなら **作らない**(重複頁の防止)。
+    #   2026-07-26 実害: ISBN照合だけでは、既存源頁があっても種2側にISBNが無い/
+    #   本番索引が古い場合に素通りし、同一作品の頁を2つ作ってしまった(48件)。
+    #   例) デビルマンG = devilman-g(既存) と devilman-gurimowaaru(新) の二重頁。
+    existing_skey = set()
+    for _d in (SRC_LEGACY, ROOT / "data" / "seeds" / "preorder-pages"):
+        if not _d.is_dir():
+            continue
+        for _f in _d.glob("*.yml"):
+            _m = re.search(r"^_skey: (.+)$", _f.read_text(encoding="utf-8", errors="replace"), re.M)
+            if _m:
+                existing_skey.add(_m.group(1).strip())
+
     todo, skip = [], collections.Counter()
     for sid, vv in sorted(vols.items()):
         if any(ib in live for ib, _, _ in vv):
             skip["既に本番に在る(ISBN一致)"] += 1
+            continue
+        if meta[sid][0] in existing_skey:
+            skip["★既存源頁が同じseries_keyを持つ(重複防止)"] += 1
             continue
         todo.append((sid, vv))
     print(f"対象 {len(meta)} series / ISBN持ち {len(vols)} / 生成候補 {len(todo)}  (skip: {dict(skip)})")
