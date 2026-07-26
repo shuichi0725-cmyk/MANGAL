@@ -49,6 +49,17 @@ HARVEST = ROOT / ".cache" / "torikoboshi" / "harvest.jsonl"
 IDX = ROOT / "data" / "manga-list-index.json"
 SLUG_OVR = ROOT / "data" / "seeds" / "source-slug-overrides.yml"
 KANA_OK = re.compile(r"^[ァ-ヶーｦ-ﾟ\s　・]+$")
+# ★NDL/楽天のヨミは **副題込み**で返ることが多い。 種2の題は主題だけなので、
+#   主題部分(副題区切りより前)を取り出さないと「ヨミ無し」と誤判定する
+#   (2026-07-26: 45件が全部これだった。「ツイホウ コウシャク … : コンヤクシャ ヲ …」)。
+SUB_SEP = re.compile(r"\s*[:：]\s*|\s*[〜~]\s*|\s*[（(]")
+
+
+def _main_kana(tk: str) -> str:
+    """ヨミから**主題部分**だけ取り出す(副題・巻数・注記を落とす)。"""
+    head = SUB_SEP.split(str(tk or ""), 1)[0].strip()
+    head = re.sub(r"[\s　]+\d+$", "", head)          # 末尾の巻数
+    return head
 
 
 def _norm_t(s):
@@ -231,7 +242,7 @@ def main():
                     ndl_ck = r["creators_kana"]
                 if r.get("creators"):
                     ndl_creators = r["creators"]
-                tk = (r.get("title_kana") or "").strip()
+                tk = _main_kana(r.get("title_kana"))
                 if tk and KANA_OK.match(tk):
                     seg, kana = tk, tk.replace(" ", "").replace("　", "")
                     break
@@ -244,10 +255,10 @@ def main():
             #    題と食い違うヨミを title_kana に入れるのは誤データ = 入れない)
             for ib, _, _ in vv:
                 it = rk.get(ib) or {}
-                tk = (it.get("titleKana") or "").strip()
+                tk = _main_kana(it.get("titleKana"))
                 if not (tk and KANA_OK.match(tk)):
                     continue
-                if _same_title(it.get("title"), title):
+                if _same_title(SUB_SEP.split(str(it.get("title") or ""), 1)[0], title):
                     tk2 = _rakuten_kana(it, title)
                     if tk2:
                         kana = tk2.replace(" ", "").replace("　", "")
