@@ -15097,3 +15097,15 @@ volumes:
   source: ndl
   added_at: '2026-07-26'
   note: ★MADB取込もれ(種2に該当ISBNが無いことを確認済)。NDL「火の鳥《オリジナル版》復刻大全集 4」+楽天で確認。★当方頁は 別巻1・別巻2(火の鳥2772ストーリーボード集)を「1巻・2巻」と誤って番号付けしており、真の1-4巻が丸ごと欠けていた。
+- series_keys:
+  - qid:Q208582|name:ちょっとだけかえってきたDr.SLUMP
+  qid: null
+  number: 2
+  isbn13: '9784088060071'
+  release_date: '1995-04-19'
+  publisher: 集英社
+  edition_type: standard
+  title_display: ちょっとだけかえってきたDr.スランプ(2)
+  source: rakuten
+  added_at: '2026-07-27'
+  note: MADBが2巻の題を「ちちょっとだけかえってきたDr.SLUMP」と誤登録(sid126379)→別クラスタ化で別頁に分裂していた巻。楽天9784088060071=「ちょっとだけかえってきたDr.スランプ(2)」1995-04-19頃で正題・日付確認。誤題頁 chi-chotto-… は page-dedup で drop。
