@@ -44,8 +44,15 @@ python scripts/_weekly-preflight.py --fix     # FAILが1つでもあればビル
 out/.next=C:実体。**D:はバックアップ倉庫のみでビルド経路に入れない**(外付けD:はストールしやすく、
 junction経由だとC:側の操作まで巻き込まれる=2026-07-17実害。旧D:構成は旧PCのC:満杯が理由で新PCでは無意味)。
 ```
-$env:MANGAL_DATA_DIR="C:\Users\chiba shuichi\code\MANGAL\.cache\proddata"; npx next build 2>&1 | Out-File .cache\weekly-build.log
+$env:MANGAL_DATA_DIR="C:\Users\chiba shuichi\code\MANGAL\.cache\proddata"
+$env:NODE_OPTIONS="--max-old-space-size=12288"     # ★必須(2026-07-27〜)
+npx next build 2>&1 | Out-File .cache\weekly-build.log
 ```
+- ★**`NODE_OPTIONS=--max-old-space-size=12288` は必須**(2026-07-27 実害)。 既定のV8ヒープ上限=**約4GB**を
+  コンパイル段階で超え、**開始95秒**で `FATAL ERROR: Ineffective mark-compacts near heap limit` →
+  `build worker exited with code: 134` で即死した(頁生成に入る前なのでログは3KBしか出ない=原因が見えにくい)。
+  ★このとき `out/manga` には **前週ビルドの残骸13.5万枚**が残っているので、枚数だけ見ると成功に見える。
+  **必ずログの `FATAL ERROR`/`code: 134` を確認する**こと。 搭載31GBに対し12GB指定で通過(ワーカー実測6.5GB)。
 - ★`staticPageGenerationTimeout=300s`(next.config.ts)前提。既定60sだと重頁(home-design=66k全読込)がワーカー競合で3回超過しビルドkill(2026-07-05 home-design-05で発覚・是正済)。
 - Monitor は 1万頁節目+「after 3 attempts / Export encountered / Build error」+完了のみ通知(2分毎は通知過多)。
 - attempt 1-2 の retry は **コールドワーカーの初回66k読込(warmup)**=正常。300s猶予で温まればリトライ成功。

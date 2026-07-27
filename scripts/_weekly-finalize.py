@@ -32,7 +32,21 @@ def main():
     # 1. ビルド完了判定
     if not os.path.exists(LOG):
         die(f"{os.path.relpath(LOG, ROOT)} が無い(ビルドを回していない?)")
-    log = open(LOG, encoding="utf-8", errors="replace").read()
+    # ★PowerShell の Out-File は既定で **UTF-16LE(BOM付き)** を書く(PS 5.1)。
+    #   utf-8固定で読むと本文が「?」だらけになり「✓ Exporting」が見つからず、
+    #   ★**ビルドは成功しているのに finalize が abort する**(2026-07-27 実害)。
+    #   BOM を見て復号を切り替える(utf-16 → utf-8-sig → utf-8 の順)。
+    _raw = open(LOG, "rb").read()
+    for _enc in ("utf-16", "utf-8-sig", "utf-8"):
+        if _enc == "utf-16" and not _raw[:2] in (b"\xff\xfe", b"\xfe\xff"):
+            continue
+        try:
+            log = _raw.decode(_enc, errors="replace")
+            break
+        except Exception:
+            continue
+    else:
+        log = _raw.decode("utf-8", errors="replace")
     if "Export encountered" in log or "Build error" in log:
         die("build logにエラー(Export encountered/Build error)。ログを調査")
     if "Exporting" not in log:

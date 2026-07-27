@@ -1,6 +1,6 @@
 ---
 name: r2_orphan_pages_prune_missing
-description: "本番R2に孤児HTML 1,041頁(ローカルでdrop済なのに公開され続けている)。r2-syncは--prune無しが既定"
+description: "r2-syncは--prune無しが既定=dropした頁が本番に残る。2026-07-27の週次で--prune組込+実削除322。★孤児数の照合はslugで行う(stem照合は誤り)"
 metadata: 
   node_type: memory
   type: project
@@ -27,5 +27,6 @@ metadata:
   build途中失敗の全消し防止) / **`--prune-max 3000`**(超過なら削除せず報告) / 削除キーを
   `.cache/r2-pruned-<日時>.txt` へ実行前に記録。 判定は `--dry` でも表示される。
 - **weekly-distill skill の実行行を `--prune` 付きに変更**。
-- ★**初回の週次で約2,100キー(孤児1,041頁×html+txt)が削除される**見込み = 正常。
+- ★**2026-07-27の初回prune実績 = 322キー削除**(見込み2,100は上記の照合ミス由来の過大見積り)。
+  もののけ姫/となりのトトロ/千と千尋/十二国記 が本番で404化したのを実地確認済み。
   中止された時はログを確認し `--prune-max <件数+100>` で再実行する。
