@@ -2121,9 +2121,19 @@ def get_editions_with_volumes(con: sqlite3.Connection, series_ids: list[int] | i
             f"FROM volumes v JOIN editions e ON e.id=v.edition_id "
             f"WHERE e.series_id IN ({placeholders})", series_ids).fetchall()
         _excl_isbn = get_art_book_exclude_isbn()
+        # ★volume-exclude(全体除外集合)も尊重(2026-07-27 あなたのオモチャ: 新装版再販ISBNが
+        #   別巻として混入する型。renumber経路だけ素通りだった)
         _passed = [r for r in _rows if edition_passes_filter(
             {"type": r["_etype"], "imprint": r["_eimprint"]})
-            and _norm_isbn(r["isbn13"]) not in _excl_isbn]
+            and _norm_isbn(r["isbn13"]) not in _excl_isbn
+            and _norm_isbn(r["isbn13"]) not in _all_excluded_isbns()]
+        # ★日付=精密化チェーン(override>種2>NDL補完seed)で並べる(2026-07-27: 種2日付欠落巻が
+        #   renumber順を壊していた。emitも同じ実効日付)
+        _rds = get_release_date_supplement()
+        _rdo = get_release_date_override()
+        def _rn_date(r):
+            ni = _norm_isbn(r["isbn13"])
+            return _rdo.get(ni) or r["release_date"] or _rds.get(ni)
         # ★代表巻 = (source series_id, 巻番号) 単位で最古release→最小ISBN。
         #   同一書籍の別版ISBN(通常版/文庫版等・同番号)を別巻に数えない = 過剰巻数を防ぐ。
         #   ★sid単位だった旧実装は、1sidが別の本を複数持つ時(VPアンソロ第1集+第3集が同sid)に
@@ -2131,11 +2141,20 @@ def get_editions_with_volumes(con: sqlite3.Connection, series_ids: list[int] | i
         _by_sid: dict = defaultdict(list)
         for r in _passed:
             _by_sid[(r["_sid"], r["number"])].append(r)
-        _reps = [min(rs, key=lambda v: (v["release_date"] or "9999-99", v["isbn13"] or ""))
+        _reps = [min(rs, key=lambda v: (_rn_date(v) or "9999-99", v["isbn13"] or ""))
                  for rs in _by_sid.values()]
-        _reps.sort(key=lambda v: (v["release_date"] or "9999-99", v["isbn13"] or ""))
+        _reps.sort(key=lambda v: (_rn_date(v) or "9999-99", v["isbn13"] or ""))
+        # ★巻題の搬送(2026-07-27 ユーザ指示「ソーサリアン方式で題名だけ入れて」):
+        #   巻割れ統合の各巻は「元クラスタの題」がその巻の個別題(世紀末☆ダーリン2006 /
+        #   ハニ太郎です。の「だって〜」等)。群内に複数の題がある時だけ title_display に載せる
+        #   (単一題の群=真の番号巻なので付けない)。
+        _stitles = {r["id"]: r["title"] for r in cur.execute(
+            f"SELECT id, title FROM series WHERE id IN ({placeholders})", series_ids)}
+        _multi = len({t for t in _stitles.values() if t}) > 1
         _rvols = [{"number": i + 1, "volume_label": v["volume_label"], "isbn13": v["isbn13"],
-                   "release_date": v["release_date"], "cover_url": v["cover_url"], "asin": v["asin"]}
+                   "release_date": _rn_date(v), "cover_url": v["cover_url"], "asin": v["asin"],
+                   **({"title_display": _stitles[v["_sid"]]}
+                      if _multi and _stitles.get(v["_sid"]) else {})}
                   for i, v in enumerate(_reps)]
         if not _rvols:
             return []
@@ -2420,6 +2439,9 @@ def clean_vol(v: dict) -> dict:
     o = {"number": v["number"]}
     if v.get("volume_label"):
         o["volume_label"] = v["volume_label"]
+    if v.get("title_display"):
+        # ★巻個別題の搬送(renumber統合の元クラスタ題=ソーサリアン方式 2026-07-27)
+        o["title_display"] = v["title_display"]
     o["asin"] = v.get("asin")
     if v.get("isbn13"):
         o["isbn13"] = str(v["isbn13"])
