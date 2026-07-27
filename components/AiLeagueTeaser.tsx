@@ -12,7 +12,9 @@ export default function AiLeagueTeaser({ sections }: { sections: TeaserSection[]
   const [now, setNow] = useState<number | null>(null);
   useEffect(() => setNow(Date.now()), []);
   const weeks = now === null ? 0 : Math.floor((now - EPOCH_SUNDAY_JST) / (7 * 86400_000));
-  const visibleCount = Math.max(1, weeks + 2);
+  // ★AiLeagueClient と同一式(weeks+1)に統一。旧 weeks+2 はコラム面より1節先の課題図書を
+  //   予告してしまい「トップ=約ネバ/コラム=鬼滅」のズレを毎週再生産していた(2026-07-27ユーザ発見)
+  const visibleCount = Math.max(1, weeks + 1);
   const cur = sections.filter((s) => s.setsu <= visibleCount).sort((a, b) => b.setsu - a.setsu)[0] ?? sections[0];
   if (!cur) return null;
   return (
