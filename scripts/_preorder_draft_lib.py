@@ -306,6 +306,11 @@ def make_slug(base, kana_raw=None, existing=None):
     slug = re.sub(r"(?<=[a-z])-?\d{1,3}$", "", slug).strip("-")  # 末尾巻番号(stray5→stray)。rx等英字suffixは保持
     if len(slug) < 2:
         return None                             # ゴミslug(2026化)禁止=hold
+    # ★無ハイフン連結ガード(2026-07-27 ユーザ発見=princeofghost): 題に語境界(空白/全角空白/
+    #   中黒/&/×)があるのに slug が10字以上ハイフン0本 = 装置バグか題の異常。生成せずhold
+    #   (旧装置期に全角スペース題が連結された型の再発防止)。
+    if len(slug) >= 10 and "-" not in slug and re.search(r"[\s　・&×]", str(base)):
+        return None
     # ★長題は語境界で切る(2026-07-20: 機械70字cutが語中切断「tsukaretemashit」型を44件量産した対策)。
     #   切った後の尻に残る助詞トークンも剥がす(「-sekai-o」型)。完全slugは触らない。
     if len(slug) > 70:
