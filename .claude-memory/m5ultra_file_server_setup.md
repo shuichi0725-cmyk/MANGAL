@@ -15,3 +15,11 @@ metadata:
 - ★Win11 Home側の教訓: **`net use /user:`付き永続マッピングは資格情報保存庫とケンカして毎回パスワードを聞く**→ `/user:無し`の`net use Z: \\192.168.0.146\E /persistent:yes`(認証は保存庫任せ)で解決。
 - **スリープ/休止=無効化済み**(powercfg standby-timeout-ac 0)= ファイルサーバー+アイドル運転+リモート操作の常時稼働前提。ロック画面問題の主因もこれで解消。
 - share1はログイン画面に出る(隠すなら Winlogon\SpecialAccounts\UserList に share1=0、未実施)。
+
+
+## 2026-07-27 追記(D:共有トラブルの解決記録)
+- ★このClaude稼働PC自体が M5_Ultra(hostname確認済・192.168.0.146)。共有=D/D$/E/動画/本(+管理共有)。
+- 「D:\本」だけ共有拒否 = 幽霊SIDでなく**Authenticated Users欠け**(所有者個人+Admin+SYSTEMのみの非継承ACL)。修復= takeown /R + icacls /reset /T で継承復活(データ無傷・実施済)。
+- ★接続の合言葉=「共有は share1」: Microsoftアカウントのメール(shuichi0725@gmail.com)はSMBに使えない(ローカルアカウント認証)。空白入り「chiba shuichi」もAndroidアプリで事故る。
+- Explorerは**検索ボックスでなくアドレスバー**に \192.168.0.146(検索ボックスだと「一致する項目はありません」)。
+- 日本語共有名「本」はAndroidアプリが弾く場合あり→ その時は D 共有経由 or 英字エイリアス(New-SmbShare -Name books -Path D:\本 -ReadAccess Everyone)。
