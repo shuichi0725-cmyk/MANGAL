@@ -146,3 +146,4 @@
 - [2026-07 月次蒸留 MADB1.2.18](distill_2026_07_1218.md) — series+292/vol+1,124取込済・検証green・synopsis9,421未訳残
 - [【未決】本番R2に孤児HTML1,041頁](r2_orphan_pages_prune_missing.md) — r2-syncは--prune無し=dropしても公開され続ける
 - [フィルムコミック=imprintだけがアニメ物の穴](film_comic_imprint_hole.md) — title/edition_typeの網をすり抜け45頁。ISBN除外は別刷りで無効
+- [【戒め】seed機械追記=「: 」必ずquote](seed_yaml_colon_quoting.md) — 未quoteでreflectするとsilent注入漏れ

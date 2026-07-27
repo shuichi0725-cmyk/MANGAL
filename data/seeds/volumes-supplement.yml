@@ -16862,3 +16862,195 @@ volumes:
   source: rakuten
   added_at: '2026-07-27'
   note: 真のMADB取込もれ(種2無)。Wiki=iff全30巻完結(2025)・楽天live確認。QED調査の随伴発見 2026-07-27
+- series_keys:
+  - qid:Q2707181|name:ロザリオとバンパイアseasonⅡ
+  qid: null
+  number: 13
+  isbn13: '9784088708126'
+  release_date: '2013-09-09'
+  publisher: 集英社
+  edition_type: standard
+  title_display: ロザリオとバンパイアseasonⅡ(13)
+  source: rakuten
+  added_at: '2026-07-27'
+  note: 数字表記揺れ分裂(seasonⅡ vs season2)で13-14巻が別クラスタ頁化(ユーザ発見)。相方頁はpage-dedupでdrop
+- series_keys:
+  - qid:Q2707181|name:ロザリオとバンパイアseasonⅡ
+  qid: null
+  number: 14
+  isbn13: '9784088800493'
+  release_date: '2014-05-07'
+  publisher: 集英社
+  edition_type: standard
+  title_display: ロザリオとバンパイアseasonⅡ(14)
+  source: rakuten
+  added_at: '2026-07-27'
+  note: 同上。14巻=最終巻
+- series_keys:
+  - qid:Q1637181|name:初夜
+  qid: null
+  number: 2
+  isbn13: '9784812455272'
+  release_date: '2001-07'
+  publisher: 竹書房
+  edition_type: standard
+  title_display: 初夜2 ヴァージン・ナイト
+  source: rakuten
+  added_at: '2026-07-27'
+  note: 題末尾数字型分裂=「初夜2」=全2巻の2巻(Amazonシリーズ「初夜 ヴァージン・ナイト(全2巻)」=ユーザ提示画像で確認・同qid同著者田中ユタカ)。相方頁drop
+- series_keys:
+  - qid:Q7310129|name:アガペイズ
+  qid: null
+  number: 6
+  isbn13: '9784091522566'
+  release_date: '1999-07'
+  publisher: 小学館
+  edition_type: standard
+  title_display: アガペイズ(6)
+  source: rakuten
+  added_at: '2026-07-27'
+  note: 数字揺れ/断片分裂検出器(_audit-numeral-variant-split)初回スイープSPLIT3件(2026-07-27)。ISBN帯連番×同著者で確定。6-9巻がagapes-1999頁に分裂
+- series_keys:
+  - qid:Q7310129|name:アガペイズ
+  qid: null
+  number: 7
+  isbn13: '9784091522573'
+  release_date: '1999-10'
+  publisher: 小学館
+  edition_type: standard
+  title_display: アガペイズ(7)
+  source: rakuten
+  added_at: '2026-07-27'
+  note: 数字揺れ/断片分裂検出器(_audit-numeral-variant-split)初回スイープSPLIT3件(2026-07-27)。ISBN帯連番×同著者で確定。6-9巻がagapes-1999頁に分裂
+- series_keys:
+  - qid:Q7310129|name:アガペイズ
+  qid: null
+  number: 8
+  isbn13: '9784091522580'
+  release_date: '2000-01'
+  publisher: 小学館
+  edition_type: standard
+  title_display: アガペイズ(8)
+  source: rakuten
+  added_at: '2026-07-27'
+  note: 数字揺れ/断片分裂検出器(_audit-numeral-variant-split)初回スイープSPLIT3件(2026-07-27)。ISBN帯連番×同著者で確定。6-9巻がagapes-1999頁に分裂
+- series_keys:
+  - qid:Q7310129|name:アガペイズ
+  qid: null
+  number: 9
+  isbn13: '9784091522597'
+  release_date: '2000-03'
+  publisher: 小学館
+  edition_type: standard
+  title_display: アガペイズ(9)
+  source: rakuten
+  added_at: '2026-07-27'
+  note: 数字揺れ/断片分裂検出器(_audit-numeral-variant-split)初回スイープSPLIT3件(2026-07-27)。ISBN帯連番×同著者で確定。6-9巻がagapes-1999頁に分裂
+- series_keys:
+  - name:Jim Davis|name:ガーフィールド
+  qid: null
+  number: 1
+  isbn13: '9784767450018'
+  release_date: '1990-07'
+  publisher: 研究社
+  edition_type: standard
+  title_display: ガーフィールド(vol.1)
+  source: rakuten
+  added_at: '2026-07-27'
+  note: 数字揺れ/断片分裂検出器(_audit-numeral-variant-split)初回スイープSPLIT3件(2026-07-27)。ISBN帯連番×同著者で確定。1-5巻がgarfield-1990頁に分裂
+- series_keys:
+  - name:Jim Davis|name:ガーフィールド
+  qid: null
+  number: 2
+  isbn13: '9784767450025'
+  release_date: '1990'
+  publisher: 研究社
+  edition_type: standard
+  title_display: ガーフィールド(vol.2)
+  source: rakuten
+  added_at: '2026-07-27'
+  note: 数字揺れ/断片分裂検出器(_audit-numeral-variant-split)初回スイープSPLIT3件(2026-07-27)。ISBN帯連番×同著者で確定。1-5巻がgarfield-1990頁に分裂
+- series_keys:
+  - name:Jim Davis|name:ガーフィールド
+  qid: null
+  number: 3
+  isbn13: '9784767450032'
+  release_date: '1990'
+  publisher: 研究社
+  edition_type: standard
+  title_display: ガーフィールド(vol.3)
+  source: rakuten
+  added_at: '2026-07-27'
+  note: 数字揺れ/断片分裂検出器(_audit-numeral-variant-split)初回スイープSPLIT3件(2026-07-27)。ISBN帯連番×同著者で確定。1-5巻がgarfield-1990頁に分裂
+- series_keys:
+  - name:Jim Davis|name:ガーフィールド
+  qid: null
+  number: 4
+  isbn13: '9784767450049'
+  release_date: '1990'
+  publisher: 研究社
+  edition_type: standard
+  title_display: ガーフィールド(vol.4)
+  source: rakuten
+  added_at: '2026-07-27'
+  note: 数字揺れ/断片分裂検出器(_audit-numeral-variant-split)初回スイープSPLIT3件(2026-07-27)。ISBN帯連番×同著者で確定。1-5巻がgarfield-1990頁に分裂
+- series_keys:
+  - name:Jim Davis|name:ガーフィールド
+  qid: null
+  number: 5
+  isbn13: '9784767450056'
+  release_date: '1990'
+  publisher: 研究社
+  edition_type: standard
+  title_display: ガーフィールド(vol.5)
+  source: rakuten
+  added_at: '2026-07-27'
+  note: 数字揺れ/断片分裂検出器(_audit-numeral-variant-split)初回スイープSPLIT3件(2026-07-27)。ISBN帯連番×同著者で確定。1-5巻がgarfield-1990頁に分裂
+- series_keys:
+  - name:Jim Davis|name:ガーフィールド
+  qid: null
+  number: 6
+  isbn13: '9784767450063'
+  release_date: '1991-01'
+  publisher: 研究社
+  edition_type: standard
+  title_display: ガーフィールド(vol.6)
+  source: rakuten
+  added_at: '2026-07-27'
+  note: 数字揺れ/断片分裂検出器(_audit-numeral-variant-split)初回スイープSPLIT3件(2026-07-27)。ISBN帯連番×同著者で確定。★6,7巻=真の取込もれ(帯連番から同定・楽天実在確認)
+- series_keys:
+  - name:Jim Davis|name:ガーフィールド
+  qid: null
+  number: 7
+  isbn13: '9784767450070'
+  release_date: '1991-01'
+  publisher: 研究社
+  edition_type: standard
+  title_display: ガーフィールド(vol.7)
+  source: rakuten
+  added_at: '2026-07-27'
+  note: 数字揺れ/断片分裂検出器(_audit-numeral-variant-split)初回スイープSPLIT3件(2026-07-27)。ISBN帯連番×同著者で確定。★6,7巻=真の取込もれ(帯連番から同定・楽天実在確認)
+- series_keys:
+  - name:ニンギヤウ|name:スクールゾーン
+  qid: null
+  number: 4
+  isbn13: '9784800011565'
+  release_date: '2021-12-09'
+  publisher: マッグガーデン
+  edition_type: standard
+  title_display: スクールゾーン(4)
+  source: rakuten
+  added_at: '2026-07-27'
+  note: 数字揺れ/断片分裂検出器(_audit-numeral-variant-split)初回スイープSPLIT3件(2026-07-27)。ISBN帯連番×同著者で確定。4,5巻がschool-zone-2021頁に分裂
+- series_keys:
+  - name:ニンギヤウ|name:スクールゾーン
+  qid: null
+  number: 5
+  isbn13: '9784800013095'
+  release_date: '2023-03-10'
+  publisher: マッグガーデン
+  edition_type: standard
+  title_display: スクールゾーン(5)
+  source: rakuten
+  added_at: '2026-07-27'
+  note: 数字揺れ/断片分裂検出器(_audit-numeral-variant-split)初回スイープSPLIT3件(2026-07-27)。ISBN帯連番×同著者で確定。4,5巻がschool-zone-2021頁に分裂

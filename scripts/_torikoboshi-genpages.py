@@ -223,11 +223,9 @@ def main():
     # ★近似題ゲート用: 本番全題の正規化集合(2026-07-27 solo-truncated17件監査で新設。
     #   「ちちょっとだけかえってきた…」(MADB誤題typo) / 「サクラ大戦 第二部」vs「第2部」の
     #   分裂頁化を防ぐ。既存題の包含 or 漢数字/算用の揺れ一致 = 分裂疑いで保留)。
-    _KANJI_NUM = str.maketrans("一二三四五六七八九〇零", "12345678900")
-    def _sim_norm(t):
-        import unicodedata as _ud
-        s = _ud.normalize("NFKC", str(t or "")).translate(_KANJI_NUM).lower()
-        return re.sub(r"[\s　・!！?？:：〜~\-。、．.()（）]", "", s)
+    # ★数字表記揺れ(ローマ数字Ⅱ/カナ数詞ツー/漢数字)も吸収する共有正規化
+    #   (ロザリオとバンパイアseasonⅡ vs season2 分裂の恒久対策 2026-07-27)
+    from _title_numnorm import numnorm as _sim_norm
     _ti = idx["f"].index("title")
     prod_titles = {}
     for r in idx["d"]:
