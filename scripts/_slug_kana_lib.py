@@ -13,6 +13,9 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 T = Tokenizer()
 DIC = (yaml.safe_load(open(f"{ROOT}/data/seeds/katakana-english.yml", encoding="utf-8")) or {}).get("mappings", {})
 KEYS = sorted(DIC.keys(), key=len, reverse=True)  # 最長一致
+# ★誤分割の結合表(2026-07-27): janomeが漢語複合を割る(異世界→i-sekai)分をハイフン境界限定で結合。
+#   本番慣行の追認のみ(isekai 538 vs i-sekai 36 等)。詳細= data/seeds/slug-joins.yml
+JOINS = (yaml.safe_load(open(f"{ROOT}/data/seeds/slug-joins.yml", encoding="utf-8")) or {}).get("joins", {})
 
 TBL = {'キャ':'kya','キュ':'kyu','キョ':'kyo','シャ':'sha','シュ':'shu','ショ':'sho','チャ':'cha','チュ':'chu','チョ':'cho','ニャ':'nya','ニュ':'nyu','ニョ':'nyo','ヒャ':'hya','ヒュ':'hyu','ヒョ':'hyo','ミャ':'mya','ミュ':'myu','ミョ':'myo','リャ':'rya','リュ':'ryu','リョ':'ryo','ギャ':'gya','ギュ':'gyu','ギョ':'gyo','ジャ':'ja','ジュ':'ju','ジョ':'jo','ビャ':'bya','ビュ':'byu','ビョ':'byo','ピャ':'pya','ピュ':'pyu','ピョ':'pyo','ウィ':'wi','ウェ':'we','ウォ':'wo','ヴァ':'va','ヴィ':'vi','ヴェ':'ve','ヴォ':'vo','ヴ':'vu','ファ':'fa','フィ':'fi','フェ':'fe','フォ':'fo','ティ':'ti','ディ':'di','デュ':'dyu','チェ':'che','シェ':'she','ジェ':'je','ツァ':'tsa','ツェ':'tse','ツォ':'tso','トゥ':'tu','ドゥ':'du',
 'ア':'a','イ':'i','ウ':'u','エ':'e','オ':'o','カ':'ka','キ':'ki','ク':'ku','ケ':'ke','コ':'ko','サ':'sa','シ':'shi','ス':'su','セ':'se','ソ':'so','タ':'ta','チ':'chi','ツ':'tsu','テ':'te','ト':'to','ナ':'na','ニ':'ni','ヌ':'nu','ネ':'ne','ノ':'no','ハ':'ha','ヒ':'hi','フ':'fu','ヘ':'he','ホ':'ho','マ':'ma','ミ':'mi','ム':'mu','メ':'me','モ':'mo','ヤ':'ya','ユ':'yu','ヨ':'yo','ラ':'ra','リ':'ri','ル':'ru','レ':'re','ロ':'ro','ワ':'wa','ヲ':'o','ン':'n','ガ':'ga','ギ':'gi','グ':'gu','ゲ':'ge','ゴ':'go','ザ':'za','ジ':'ji','ズ':'zu','ゼ':'ze','ゾ':'zo','ダ':'da','ヂ':'ji','ヅ':'zu','デ':'de','ド':'do','バ':'ba','ビ':'bi','ブ':'bu','ベ':'be','ボ':'bo','パ':'pa','ピ':'pi','プ':'pu','ペ':'pe','ポ':'po','ァ':'a','ィ':'i','ゥ':'u','ェ':'e','ォ':'o','ッ':'','ー':''}
@@ -116,5 +119,8 @@ def make_slug(title):
             merged.append([kind, val, conv, pos])
     slug = '-'.join(m[1] if m[2] else kana2romaji(m[1]) for m in merged)
     slug = re.sub(r'[^a-z0-9-]', '', slug.lower())
+    slug = re.sub(r'-{2,}', '-', slug).strip('-')
+    for frm, to in JOINS.items():   # ★ハイフン境界限定の結合(部分一致では置換しない)
+        slug = re.sub(rf'(?<![a-z0-9]){re.escape(frm)}(?![a-z0-9])', to, slug)
     return re.sub(r'-{2,}', '-', slug).strip('-')[:80]
 
