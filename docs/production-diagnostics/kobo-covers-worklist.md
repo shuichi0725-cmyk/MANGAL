@@ -6,3 +6,14 @@
 - Kobo一致なし26作(ドカベンプロ野球編/サーキットの狼Ⅱ/日本の歴史等=電子未配信・古典)
 - ※skill記載の --anypaper は script未実装(無反応)。紙参照ゼロ型の扱いは要機構化
 - バッチ2(欠け3以下の30作): ACCEPT chaos-damonne-plus(2巻・装丁一致=電撃レーベル同一)/29作Kobo一致なし
+
+## solo-truncated 証拠なし141 保留分(2026-07-27・NDL裁定後の残)
+- baroque-2017: 上下巻なのに頁v3(上=9784835454436追加要+3→2是正)。番号構造ごとper-case
+- elysion: 青宵廻廊1が2ISBN(9784344825802頁v5/9784344818248)=再版か別版か要判定
+- 続4件(mansion-neko/yamamoto-fuutarou/zoku-kanaike/zoku-kindan): 「続」巻のみ頁。無印巻との統合可否をper-case
+- dai-chouhen-doraemon-1984: 頁v2=のび太の宇宙開拓史。大長編ドラえもん既存頁との統合系
+- supeshiyaru-banguutara-mama: NDL=てっちゃんのつばさ(ISBN不一致疑い)
+- shoki-sakuhin-shuu: レフトアンドライトv28=全集番号系。構造調査要
+- la-vie-en-rose-1998 ⇔ la-vie-en-lose(★slugタイポ)統合 / meshi-baka ⇔ meshi-baka-geki-uma…統合 / f1-sokuhou-guranpuri-tengoku LAP7 ⇔ guranpuri-tengoku頁統合
+- tokyo-debut(下巻vs頁3)/manga-zankoku-nippon-banashi-inagaki(下vs頁3)
+- NDL不在7: miyazawa-kenji-mangakan-1985/saibara-rieko-no-jinsei-ichinensei/shounangurafutei/sushi-damashii-shouwa-44-nen-special/tomodachi-wa-kiss-shinai/ura-aka-otoko…/zebra
