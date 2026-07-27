@@ -106,6 +106,10 @@ osananajimi-wa-faiaaman: osananajimi-wa-fireman
 oshare-majo-rabu-ando-berry: oshare-majo-love-and-berry
 ouji-ni-dekiai-saretakunai-node-motopurinsesu-desu-dansou-shitsuji-ni-narimasu: ouji-ni-dekiai-saretakunai-node-motoprincess-desu-dansou-shitsuji-ni-narimasu
 overrides:
+  q-e-d:
+    at: '2026-07-27'
+    reason: '正式題「Q.E.D.証明終了」への題是正(seed3 title)と同時にslugも正式読みへ。断片頁q-e-d-shoumei-shuuryouはpage-dedupで統合drop'
+    slug: q-e-d-shoumei-shuuryou
   drsuranpu:
     at: '2026-07-27'
     reason: '外来語title=元綴りDr.Slump(規則4=種a音写)。分裂断片頁dr-slump(愛蔵版5巻のみ)の統合と同時にrename(ユーザ裁定: 分裂側slugが正)'

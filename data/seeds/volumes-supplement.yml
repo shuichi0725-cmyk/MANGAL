@@ -16838,3 +16838,27 @@ volumes:
   source: rakuten
   added_at: '2026-07-27'
   note: solo-truncated証拠なし断片141監査(2026-07-27)=NDL著者束縛列挙で確定・日付/書影=楽天live。1巻が無印題(番号なし)で別クラスタ化しdedup外だった型が主。
+- series_keys:
+  - qid:Q6918014|name:Q.E.D.
+  qid: null
+  number: 1
+  isbn13: '9784063336597'
+  release_date: '1998-12-14'
+  publisher: 講談社
+  edition_type: standard
+  title_display: Q.E.D.証明終了(1)
+  source: rakuten
+  added_at: '2026-07-27'
+  note: 彼岸島型=真の1巻が別cluster(sid50514・正式題)に分裂し断片頁化、本編頁の1巻枠は傑作選が占有(exclude)。Wiki全50巻×楽天確認。ユーザ発見 2026-07-27
+- series_keys:
+  - qid:Q6918014|name:Q.E.D.iff
+  qid: null
+  number: 30
+  isbn13: '9784065388297'
+  release_date: '2025-04-16'
+  publisher: 講談社
+  edition_type: standard
+  title_display: Q.E.D.iff -証明終了-(30)
+  source: rakuten
+  added_at: '2026-07-27'
+  note: 真のMADB取込もれ(種2無)。Wiki=iff全30巻完結(2025)・楽天live確認。QED調査の随伴発見 2026-07-27
