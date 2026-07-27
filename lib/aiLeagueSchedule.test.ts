@@ -22,7 +22,13 @@ describe("AI書評リーグ 週次公開式(単一の正・2026-07-27固定化)"
   it("2026-08-02(日曜0時)=第5節(約束のネバーランド)公開", () => {
     expect(visibleSectionCount(jst(2026, 8, 2))).toBe(5);
   });
-  it("2026-08-23=第8節(seed最終節)", () => {
+  it("2026-08-23=第8節", () => {
     expect(visibleSectionCount(jst(2026, 8, 23))).toBe(8);
+  });
+  it("2026-08-30=第9節(MONSTER)公開", () => {
+    expect(visibleSectionCount(jst(2026, 8, 30))).toBe(9);
+  });
+  it("2026-09-27=第13節(seed最終節=呪術廻戦)", () => {
+    expect(visibleSectionCount(jst(2026, 9, 27))).toBe(13);
   });
 });
