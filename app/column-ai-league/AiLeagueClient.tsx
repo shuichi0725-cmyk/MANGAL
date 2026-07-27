@@ -5,16 +5,16 @@ import Link from "next/link";
 import AiReviewSectionView from "@/components/AiReviewSection";
 import type { AiReviewSection } from "@/lib/loadData";
 
-/** 週次順出し(2026-07-03): 第1節から毎週日曜に1節ずつ公開。
- *  EPOCH=第1節の公開日曜。 visible = 経過週+1 (静的ビルドでも client 計算で進む)。 */
-const EPOCH_SUNDAY_JST = Date.UTC(2026, 6, 5) - 9 * 3600_000; // 2026-07-05 00:00 JST
+import { visibleSectionCount } from "@/lib/aiLeagueSchedule";
 
+/** 週次順出し(2026-07-03): 第1節から毎週日曜に1節ずつ公開。
+ *  ★公開週の計算は lib/aiLeagueSchedule に一本化(2026-07-27。teaserとの重複実装が
+ *  節番号二重系・週+2ズレの2バグを生んだため、以後この式の再実装は禁止)。 */
 export default function AiLeagueClient({ sections }: { sections: AiReviewSection[] }) {
   const [now, setNow] = useState<number | null>(null);
   useEffect(() => setNow(Date.now()), []);
   if (now === null) return null;
-  const weeks = Math.floor((now - EPOCH_SUNDAY_JST) / (7 * 86400_000));
-  const visibleCount = Math.max(1, weeks + 1); // seed=1始まりに正規化(2026-07-12)。EPOCH日曜=第1節、以降毎週+1
+  const visibleCount = visibleSectionCount(now);
   const visible = sections.filter((s) => s.setsu <= visibleCount).sort((a, b) => b.setsu - a.setsu);
   const current = visible[0];
   const past = visible.slice(1);

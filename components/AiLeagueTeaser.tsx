@@ -1,20 +1,17 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { visibleSectionCount } from "@/lib/aiLeagueSchedule";
 
 /** ホームのAI書評リーグteaser: 週次順出しと同じ計算で「今週の課題図書」を表示。
- *  親(server)からslim情報のみ受ける(本文は渡さない=軽量)。 */
-const EPOCH_SUNDAY_JST = Date.UTC(2026, 6, 5) - 9 * 3600_000; // AiLeagueClientと同一
-
+ *  親(server)からslim情報のみ受ける(本文は渡さない=軽量)。
+ *  ★公開週の計算は lib/aiLeagueSchedule に一本化(重複実装が過去2バグの根因)。 */
 export type TeaserSection = { setsu: number; title: string; models: string[] };
 
 export default function AiLeagueTeaser({ sections }: { sections: TeaserSection[] }) {
   const [now, setNow] = useState<number | null>(null);
   useEffect(() => setNow(Date.now()), []);
-  const weeks = now === null ? 0 : Math.floor((now - EPOCH_SUNDAY_JST) / (7 * 86400_000));
-  // ★AiLeagueClient と同一式(weeks+1)に統一。旧 weeks+2 はコラム面より1節先の課題図書を
-  //   予告してしまい「トップ=約ネバ/コラム=鬼滅」のズレを毎週再生産していた(2026-07-27ユーザ発見)
-  const visibleCount = Math.max(1, weeks + 1);
+  const visibleCount = now === null ? 1 : visibleSectionCount(now);
   const cur = sections.filter((s) => s.setsu <= visibleCount).sort((a, b) => b.setsu - a.setsu)[0] ?? sections[0];
   if (!cur) return null;
   return (
