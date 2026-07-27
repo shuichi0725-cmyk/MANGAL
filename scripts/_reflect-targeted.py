@@ -170,8 +170,12 @@ def main():
         # ★統合台帳を自動集約(数秒)=「節目で手動」だと忘れて台帳が死ぬ、の恒久対策
         run([PY, "scripts/_manifest-consolidate-ops.py"])
         # ★slug-aliases/_redirects/主要索引も必ずadd(per-case修正で毎回触るのに漏れ→301切れ+版タブ消失事故 2026-07-08)
+        # ★manga-alt-index/manga-list-head も索引出力(追跡対象)= addリスト漏れで未commitのまま残る事故
+        #   (2026-07-27 日次蒸留で実踏)。list-index/search-index はgitignore(巨大)なので -f せず、
+        #   ignored混在で git add が exit 1 を返しても他パスは add 済み = 続行してよい。
         run(["git", "add", ".preview-data", "data/manga-catch-index.json", "data/seeds",
              "data/slug-aliases.yml", "public/_redirects",
+             "data/manga-alt-index.json", "data/manga-list-head.json",
              "data/manga-list-index.json", "data/manga-search-index.json"])
         run(["git", "commit", "-q", "-m", a.msg])
         if a.push:
