@@ -127,7 +127,7 @@
 - [【残】鬼太郎本編の多版正規化](kitaro_honpen_multiedition_pending.md) — トリガー=鬼太郎本編やって
 - [TinyFish=WebFetch補完](tinyfish_web_fetch.md) — 正=skill tinyfish
 - [Cloudflareアクセス解析](cloudflare_analytics_access.md) — 正=skill cf-analytics(_cf-analytics.py)
-- [進行中状態2026-07-17](inflight_state_2026_07_17.md) — 本番待ち2,300頁+完結適用2,082件・preview=2026-05絞り・次=週次
+- [進行中状態2026-07-28](inflight_state_2026_07_28.md) — 次=週次(wrangler deploy+初--prune)・Kobo書影HOLD33裁定待ち・AI書評13節済
 - [新PCへ移行済み2026-07-17](pc_migration_2026_07_17.md) — pip/stub層/NDL SSL全解消。stub=最小結線層・D:に保険ミラー
 - [ソーサリアン統合=本番化済](sorcerian_consolidation_state.md) — 単巻読切連番の1頁統合の型見本(title_display/dedup/多人数ガード)
 - [【方針】1件のバグ=型と疑う](feedback_one_bug_means_a_class.md) — 署名化→全DB掃引(全件目視)→検出器script化→月次サニティ登録
