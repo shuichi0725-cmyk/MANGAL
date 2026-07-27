@@ -17,3 +17,4 @@
 - la-vie-en-rose-1998 ⇔ la-vie-en-lose(★slugタイポ)統合 / meshi-baka ⇔ meshi-baka-geki-uma…統合 / f1-sokuhou-guranpuri-tengoku LAP7 ⇔ guranpuri-tengoku頁統合
 - tokyo-debut(下巻vs頁3)/manga-zankoku-nippon-banashi-inagaki(下vs頁3)
 - NDL不在7: miyazawa-kenji-mangakan-1985/saibara-rieko-no-jinsei-ichinensei/shounangurafutei/sushi-damashii-shouwa-44-nen-special/tomodachi-wa-kiss-shinai/ura-aka-otoko…/zebra
+- 全量スイープ(2026-07-27・preview残190作): ACCEPT6=超人ロック冬の虹/イナズマンVSキカイダー/君の手がささやいている最終章/メダロット3/メダロット4(姉妹作メダロット3を家族参照でゲート通過)/生徒会の一存乙(計8巻)。保留=王国の鍵(hane2026)/玉三郎恋の狂騒曲(紙参照ゼロ)。他182作=Kobo未配信。★previewの書影欠けはこれで打ち止め(付け忘れ0・紙画像なし・Kobo枯れ)
