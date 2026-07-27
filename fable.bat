@@ -6,6 +6,8 @@ rem   → モデル別resume方式に全面変更。3bat共通の仕組み:
 rem   _session-latest.py が「最後のassistantメッセージが該当モデル系」の最新セッションを特定
 rem   → --resume で復元 + --remote-control <名前> で /rc 相当を起動時から自動接続。
 rem   見つからない/resume失敗時は新規セッションにフォールバック(=必ず立ち上がる)。
+rem ★2026-07-28: 前回ログが文脈75%超なら resume せず新規起動(起動時の勝手な自動圧縮を回避)。
+rem   閾値=環境変数 CLAUDE_RESUME_MAX_PCT。過去ログを読むのは log.bat fable (立ち上げ直し不要)。
 rem Usage: double-click in Explorer, OR in PowerShell run:  .\fable
 cd /d "%~dp0"
 set "SID="

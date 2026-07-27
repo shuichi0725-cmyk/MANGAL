@@ -138,7 +138,7 @@
 - [全集コーナー=素材収集済み](zenshuu_corner_state.md) — 手塚421/藤子F123冊未収・石ノ森=単巻ISBN無し。まとめGO待ち
 - [試し読み裁定=枯れ達成](tameshiyomi_adjudication_state.md) — アンカー25,149・保留9,749全分類・台帳=docs/…/tameshiyomi-adjudication.jsonl
 - [【厳守】索引形式変更=ファイル名バンプ](index_format_change_versioned_filename.md) — 同名で契約変更禁止。旧ファイルは残す
-- [起動bat3本=モデル名(fable/sonnet/opus)](launcher_bats_session_namespaces.md) — 1バッチ=1junction=1名前空間・復旧=claude --resume
+- [起動bat3本=モデル別resume+75%超は新規(圧縮回避)](launcher_bats_session_namespaces.md) — log.bat=消えたログ閲覧・復旧=claude --resume
 - [【注意信号】書影の違和感=上流誤りの症状](feedback_cover_oddity_signal.md) — 揃いすぎ/装丁不一致/同一画像はISBN帰属・版・リンク誤りを疑う
 - [【厳守】週次蒸留=「週次蒸留して」のみで発動](feedback_weekly_distill_exact_trigger_only.md) — 類語解釈での代行起動禁止
 - [【✅】著者名の空白=authorKeyで照合吸収](author_name_space_conventions_conflict.md) — 表記不変・新規照合は必ずauthorKey経由
