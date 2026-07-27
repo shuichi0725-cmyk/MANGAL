@@ -1,7 +1,3 @@
-# ★版付加 seed(2026-07-21 新設): 既存版に触れず版を末尾追加(promote apply_extra_editions)。
-# 手塚治虫漫画全集(400巻)+手塚治虫文庫全集(200巻BT)の可視化。混在作品は volume-exclude で
-# 既存タブから排除しここへ集約(三つ目がとおる型)。日付=種2(日単位)>楽天>NDL。
-# キーはSRC stem(slug-override頁対応)。ISBN重複巻はpromoteが自動skip。
 extra:
   0man:
   - imprint: 手塚治虫漫画全集
@@ -695,6 +691,24 @@ extra:
       number: 1
       release_date: 2011-09
       title_display: 文庫全集BT-152
+  ebiten:
+  - imprint: 角川コミックス・エース
+    label: フルカラー版(2012)
+    publisher: 角川書店
+    type: standard
+    volumes:
+    - isbn13: '9784041202418'
+      number: 1
+      release_date: '2012-05-24'
+      title_display: えびてん 公立海老栖川高校天悶部 フルカラー(1)
+    - isbn13: '9784041203200'
+      number: 2
+      release_date: '2012-07-24'
+      title_display: えびてん 公立海老栖川高校天悶部 フルカラー(2)
+    - isbn13: '9784041204054'
+      number: 3
+      release_date: '2012-09-21'
+      title_display: えびてん 公立海老栖川高校天悶部 フルカラー(3)
   film-wa-ikiteiru:
   - imprint: 手塚治虫文庫全集
     label: 手塚治虫文庫全集(2011)
