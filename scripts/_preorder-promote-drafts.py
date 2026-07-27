@@ -54,7 +54,10 @@ for slug in sorted(targets):
         print(f"  skip(本番に既存slug): {slug}"); skip += 1; continue
     d = yaml.safe_load(open(src, encoding="utf-8"))
     meta = d.pop("_preorder_draft", {}) or {}
-    d["_note_origin"] = f"rakuten-preorder {meta.get('class','')} promoted={__import__('datetime').date.today().isoformat()} kana={kstat.get(slug,'?')}"
+    # ★由来は実際の出所で書く(2026-07-27): 予約ドラフト以外(日次蒸留BのNDL新着頁など)も
+    #   このscriptで本番化するため、meta無しを一律"rakuten-preorder"と書くと来歴が嘘になる。
+    origin = f"rakuten-preorder {meta.get('class','')}" if meta else "ndl-distill"
+    d["_note_origin"] = f"{origin} promoted={__import__('datetime').date.today().isoformat()} kana={kstat.get(slug,'?')}"
     body = yaml.dump(d, allow_unicode=True, sort_keys=False, width=200)
     open(os.path.join(PP, f"{slug}.yml"), "w", encoding="utf-8").write(body)
     open(dst_v2, "w", encoding="utf-8").write(body)
