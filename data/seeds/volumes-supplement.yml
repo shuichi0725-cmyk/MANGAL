@@ -15746,3 +15746,471 @@ volumes:
   source: rakuten
   added_at: '2026-07-27'
   note: 真のMADB取込もれ(種2に該当ISBN無し)。楽天で実在確認。solo-truncated17件監査(2026-07-27ユーザ提示)
+- series_keys:
+  - qid:Q11512882|name:B-boyぷち
+  qid: null
+  number: 1
+  isbn13: '9784882717874'
+  release_date: '1998-04'
+  publisher: ビブロス
+  edition_type: standard
+  title_display: b-BOYぷち(1)
+  source: rakuten
+  added_at: '2026-07-27'
+  note: 真の取込もれ(種2に無し)。solo-truncated残32監査(2026-07-27)=著者×レーベル×ISBN帯一致を楽天cache×種2で確認。
+- series_keys:
+  - qid:Q11512882|name:B-boyぷち
+  qid: null
+  number: 3
+  isbn13: '9784882718260'
+  release_date: '1998-08'
+  publisher: ビブロス
+  edition_type: standard
+  title_display: b-BOYぷち(3)
+  source: rakuten
+  added_at: '2026-07-27'
+  note: 真の取込もれ(種2に無し)。solo-truncated残32監査(2026-07-27)=著者×レーベル×ISBN帯一致を楽天cache×種2で確認。
+- series_keys:
+  - qid:Q11255970|name:男爵校長high!
+  qid: null
+  number: 1
+  isbn13: '9784575942972'
+  release_date: '2010-10'
+  publisher: 双葉社
+  edition_type: standard
+  title_display: 男爵校長High!(1)
+  source: rakuten
+  added_at: '2026-07-27'
+  note: 真の取込もれ(種2に無し)。solo-truncated残32監査(2026-07-27)=著者×レーベル×ISBN帯一致を楽天cache×種2で確認。
+- series_keys:
+  - qid:Q11279765|name:ハムスターの救急箱
+  qid: null
+  number: 2
+  isbn13: '9784873170695'
+  release_date: '1999-10-16'
+  publisher: あおば出版
+  edition_type: standard
+  title_display: ハムスターの救急箱(2)
+  source: rakuten
+  added_at: '2026-07-27'
+  note: 真の取込もれ(種2に無し)。solo-truncated残32監査(2026-07-27)=著者×レーベル×ISBN帯一致を楽天cache×種2で確認。1巻はcache/NDL未発見=保留
+- series_keys:
+  - qid:Q510977|name:花丸漫画
+  qid: null
+  number: 1
+  isbn13: '9784592200017'
+  release_date: '1995-02'
+  publisher: 白泉社
+  edition_type: standard
+  title_display: 花丸漫画 1
+  source: rakuten
+  added_at: '2026-07-27'
+  note: 彼岸島型(種2別clusterに眠りdedup負け)。solo-truncated残32監査(2026-07-27)=著者×レーベル×ISBN帯一致を楽天cache×種2で確認。2-4巻はcache未発見=保留。白泉社2011年の花丸漫画v.1-10は別シリーズ(触らず)
+- series_keys:
+  - qid:Q9131784|name:HINAKO !!!
+  qid: null
+  number: 1
+  isbn13: '9784756106957'
+  release_date: '1993-06-22'
+  publisher: アスキー
+  edition_type: standard
+  title_display: HINAKO!!!(1)
+  source: rakuten
+  added_at: '2026-07-27'
+  note: 真の取込もれ(種2に無し)。solo-truncated残32監査(2026-07-27)=著者×レーベル×ISBN帯一致を楽天cache×種2で確認。
+- series_keys:
+  - qid:Q1048873|name:いきなり新連載
+  qid: null
+  number: 1
+  isbn13: '9784796604741'
+  release_date: '1992-09'
+  publisher: 宝島社
+  edition_type: standard
+  title_display: いきなり新連載(1)
+  source: rakuten
+  added_at: '2026-07-27'
+  note: 真の取込もれ(種2に無し)。solo-truncated残32監査(2026-07-27)=著者×レーベル×ISBN帯一致を楽天cache×種2で確認。巻ごと別作家のアンソロ企画
+- series_keys:
+  - qid:Q11470146|name:純愛
+  qid: null
+  number: 1
+  isbn13: '9784575333749'
+  release_date: '2008-10'
+  publisher: 双葉社
+  edition_type: standard
+  title_display: 純愛(1)
+  source: rakuten
+  added_at: '2026-07-27'
+  note: 真の取込もれ(種2に無し)。solo-truncated残32監査(2026-07-27)=著者×レーベル×ISBN帯一致を楽天cache×種2で確認。
+- series_keys:
+  - qid:Q11470146|name:純愛
+  qid: null
+  number: 2
+  isbn13: '9784575333893'
+  release_date: '2009-06'
+  publisher: 双葉社
+  edition_type: standard
+  title_display: 純愛(2)
+  source: rakuten
+  added_at: '2026-07-27'
+  note: 真の取込もれ(種2に無し)。solo-truncated残32監査(2026-07-27)=著者×レーベル×ISBN帯一致を楽天cache×種2で確認。
+- series_keys:
+  - qid:Q7046116|name:ジャングル
+  qid: null
+  number: 1
+  isbn13: '9784884754839'
+  release_date: '1991-02-21'
+  publisher: 竹書房
+  edition_type: standard
+  title_display: ジャングル(1)
+  source: rakuten
+  added_at: '2026-07-27'
+  note: 真の取込もれ(種2に無し)。solo-truncated残32監査(2026-07-27)=著者×レーベル×ISBN帯一致を楽天cache×種2で確認。
+- series_keys:
+  - qid:Q7046116|name:ジャングル
+  qid: null
+  number: 2
+  isbn13: '9784884756147'
+  release_date: '1992-11-27'
+  publisher: 竹書房
+  edition_type: standard
+  title_display: ジャングル(2)
+  source: rakuten
+  added_at: '2026-07-27'
+  note: 真の取込もれ(種2に無し)。solo-truncated残32監査(2026-07-27)=著者×レーベル×ISBN帯一致を楽天cache×種2で確認。
+- series_keys:
+  - qid:Q7046116|name:ジャングル
+  qid: null
+  number: 4
+  isbn13: '9784884757694'
+  release_date: '1994-11-17'
+  publisher: 竹書房
+  edition_type: standard
+  title_display: ジャングル(4)
+  source: rakuten
+  added_at: '2026-07-27'
+  note: 真の取込もれ(種2に無し)。solo-truncated残32監査(2026-07-27)=著者×レーベル×ISBN帯一致を楽天cache×種2で確認。
+- series_keys:
+  - qid:Q11394348|name:歌謡マンガ大全集
+  qid: null
+  number: 1
+  isbn13: '9784061021297'
+  release_date: '1988-11-17'
+  publisher: 講談社
+  edition_type: standard
+  title_display: 歌謡マンガ大全集(1)
+  source: rakuten
+  added_at: '2026-07-27'
+  note: 真の取込もれ(種2に無し)。solo-truncated残32監査(2026-07-27)=著者×レーベル×ISBN帯一致を楽天cache×種2で確認。巻ごと別作家のアンソロ企画
+- series_keys:
+  - qid:Q17220907|name:后と河
+  qid: null
+  number: 1
+  isbn13: '9784796416900'
+  release_date: '2024-09-10'
+  publisher: 海王社
+  edition_type: standard
+  title_display: 后と河(1)
+  source: rakuten
+  added_at: '2026-07-27'
+  note: 真の取込もれ(種2に無し)。solo-truncated残32監査(2026-07-27)=著者×レーベル×ISBN帯一致を楽天cache×種2で確認。
+- series_keys:
+  - qid:Q11560265|name:ママときどき子ども
+  qid: null
+  number: 1
+  isbn13: '9784087852363'
+  release_date: '2002-05-22'
+  publisher: 集英社
+  edition_type: bunkobon
+  title_display: ママときどき子ども(1)
+  source: rakuten
+  added_at: '2026-07-27'
+  note: 彼岸島型(種2別clusterに眠りdedup負け)。solo-truncated残32監査(2026-07-27)=著者×レーベル×ISBN帯一致を楽天cache×種2で確認。You漫画文庫テーマ集(1=森本梢子/2=深見じゅん)
+- series_keys:
+  - qid:Q7564122|name:マタドール
+  qid: null
+  number: 1
+  isbn13: '9784821192847'
+  release_date: '1989-12-01'
+  publisher: ぶんか社
+  edition_type: standard
+  title_display: マタドール(1)
+  source: rakuten
+  added_at: '2026-07-27'
+  note: 真の取込もれ(種2に無し)。solo-truncated残32監査(2026-07-27)=著者×レーベル×ISBN帯一致を楽天cache×種2で確認。
+- series_keys:
+  - qid:Q45819655|name:ネフィリム
+  qid: null
+  number: 1
+  isbn13: '9784840116794'
+  release_date: '2007-02-23'
+  publisher: メディアファクトリー
+  edition_type: standard
+  title_display: ネフィリム1
+  source: rakuten
+  added_at: '2026-07-27'
+  note: 真の取込もれ(種2に無し)。solo-truncated残32監査(2026-07-27)=著者×レーベル×ISBN帯一致を楽天cache×種2で確認。
+- series_keys:
+  - qid:Q45819655|name:ネフィリム
+  qid: null
+  number: 2
+  isbn13: '9784840119306'
+  release_date: '2007-07-23'
+  publisher: メディアファクトリー
+  edition_type: standard
+  title_display: ネフィリム2
+  source: rakuten
+  added_at: '2026-07-27'
+  note: 真の取込もれ(種2に無し)。solo-truncated残32監査(2026-07-27)=著者×レーベル×ISBN帯一致を楽天cache×種2で確認。
+- series_keys:
+  - qid:Q11373855|name:大人の恋愛時間
+  qid: null
+  number: 1
+  isbn13: '9784087852219'
+  release_date: '2001-06'
+  publisher: 集英社
+  edition_type: bunkobon
+  title_display: 大人の恋愛時間(1)
+  source: rakuten
+  added_at: '2026-07-27'
+  note: 彼岸島型(種2別clusterに眠りdedup負け)。solo-truncated残32監査(2026-07-27)=著者×レーベル×ISBN帯一致を楽天cache×種2で確認。You漫画文庫テーマ集(1=池田理代子/2=亜月裕)
+- series_keys:
+  - qid:Q11482997|name:Sarasa
+  qid: null
+  number: 1
+  isbn13: '9784344824270'
+  release_date: '2012-02-24'
+  publisher: 幻冬舎コミックス
+  edition_type: standard
+  title_display: SARASA(1)
+  source: rakuten
+  added_at: '2026-07-27'
+  note: 真の取込もれ(種2に無し)。solo-truncated残32監査(2026-07-27)=著者×レーベル×ISBN帯一致を楽天cache×種2で確認。
+- series_keys:
+  - qid:Q84461618|name:死神アリス
+  qid: null
+  number: 1
+  isbn13: '9784758070973'
+  release_date: '2010-07'
+  publisher: 一迅社
+  edition_type: standard
+  title_display: 死神アリス(#1)
+  source: rakuten
+  added_at: '2026-07-27'
+  note: 真の取込もれ(種2に無し)。solo-truncated残32監査(2026-07-27)=著者×レーベル×ISBN帯一致を楽天cache×種2で確認。Gakken小林ぽんず版1-11は別作既頁(触らず)
+- series_keys:
+  - qid:Q11405238|name:ワルキューレ
+  qid: null
+  number: 1
+  isbn13: '9784765902540'
+  release_date: '1989-09-01'
+  publisher: 久保書店
+  edition_type: standard
+  title_display: ワルキューレ(1)
+  source: rakuten
+  added_at: '2026-07-27'
+  note: 真の取込もれ(種2に無し)。solo-truncated残32監査(2026-07-27)=著者×レーベル×ISBN帯一致を楽天cache×種2で確認。
+- series_keys:
+  - qid:Q11258510|name:コミティア30thクロニクル
+  qid: null
+  number: 1
+  isbn13: '9784575306774'
+  release_date: '2014-05'
+  publisher: コミティア実行委員会
+  edition_type: standard
+  title_display: コミティア30thクロニクル(1)
+  source: rakuten
+  added_at: '2026-07-27'
+  note: 彼岸島型(種2別clusterに眠りdedup負け)。solo-truncated残32監査(2026-07-27)=著者×レーベル×ISBN帯一致を楽天cache×種2で確認。
+- series_keys:
+  - qid:Q11258510|name:コミティア30thクロニクル
+  qid: null
+  number: 2
+  isbn13: '9784575307290'
+  release_date: '2014-09-02'
+  publisher: コミティア実行委員会
+  edition_type: standard
+  title_display: コミティア30thクロニクル(2)
+  source: rakuten
+  added_at: '2026-07-27'
+  note: 彼岸島型(種2別clusterに眠りdedup負け)。solo-truncated残32監査(2026-07-27)=著者×レーベル×ISBN帯一致を楽天cache×種2で確認。
+- series_keys:
+  - qid:Q11492362|name:ブラッディ・マンディ Season2
+  qid: null
+  number: 8
+  isbn13: '9784063844917'
+  release_date: '2011-05'
+  publisher: 講談社
+  edition_type: standard
+  title_display: BLOODY MONDAY Season2 絶望ノ匣(8)
+  source: rakuten
+  added_at: '2026-07-27'
+  note: 2頁分裂の統合(相方頁はpage-dedupでdrop)。solo-truncated残32監査(2026-07-27)=著者×レーベル×ISBN帯一致を楽天cache×種2で確認。8巻だけ別題「Bloody Monday season 2 絶望ノ匣」頁に分裂していた
+- series_keys:
+  - qid:Q11476822|name:人はそれを不倫と呼ぶ
+  qid: null
+  number: 1
+  isbn13: '9784087852493'
+  release_date: '2003-10'
+  publisher: 集英社
+  edition_type: bunkobon
+  title_display: 人はそれを不倫と呼ぶ(1)
+  source: rakuten
+  added_at: '2026-07-27'
+  note: 2頁分裂の統合(相方頁はpage-dedupでdrop)。solo-truncated残32監査(2026-07-27)=著者×レーベル×ISBN帯一致を楽天cache×種2で確認。You漫画文庫テーマ集(1=津雲むつみ/2=島津郷子)が2頁に分裂
+- series_keys:
+  - qid:Q9013687|name:恐怖怪奇
+  qid: null
+  number: 1
+  isbn13: '9784575332124'
+  release_date: '1996-06-28'
+  publisher: 双葉社
+  edition_type: standard
+  title_display: 恐怖怪奇(1)
+  source: rakuten
+  added_at: '2026-07-27'
+  note: 2頁分裂の統合(相方頁はpage-dedupでdrop)。solo-truncated残32監査(2026-07-27)=著者×レーベル×ISBN帯一致を楽天cache×種2で確認。JOURアンソロ(1=風間宏子ほか/2=わたなべまさこほか)が2頁に分裂
+- series_keys:
+  - qid:Q433101|name:PLATINUM BOYS
+  qid: null
+  number: 1
+  isbn13: '9784048529457'
+  release_date: '1998-06'
+  publisher: 角川書店
+  edition_type: standard
+  title_display: Platinum boys(1)
+  source: rakuten
+  added_at: '2026-07-27'
+  note: 2頁分裂の統合(相方頁はpage-dedupでdrop)。solo-truncated残32監査(2026-07-27)=著者×レーベル×ISBN帯一致を楽天cache×種2で確認。あすかDXアンソロ全3巻が2頁分裂+2巻未掲載
+- series_keys:
+  - qid:Q433101|name:PLATINUM BOYS
+  qid: null
+  number: 2
+  isbn13: '9784048529525'
+  release_date: '1998-07'
+  publisher: 角川書店
+  edition_type: standard
+  title_display: Platinum boys(2)
+  source: rakuten
+  added_at: '2026-07-27'
+  note: 2頁分裂の統合(相方頁はpage-dedupでdrop)。solo-truncated残32監査(2026-07-27)=著者×レーベル×ISBN帯一致を楽天cache×種2で確認。あすかDXアンソロ全3巻が2頁分裂+2巻未掲載
+- series_keys:
+  - qid:Q6782774|name:ターヘルアナ富子
+  qid: null
+  number: 1
+  isbn13: '9784088510750'
+  release_date: '1987-07-15'
+  publisher: 集英社
+  edition_type: standard
+  title_display: ターヘルアナ富子(1)
+  source: rakuten
+  added_at: '2026-07-27'
+  note: 2頁分裂の統合(相方頁はpage-dedupでdrop)。solo-truncated残32監査(2026-07-27)=著者×レーベル×ISBN帯一致を楽天cache×種2で確認。誤ヨミ「ターへル」(ひらがな へ)頁に1巻が分裂。日付=種2 1987-07-15(楽天1990-07は再版日)
+- series_keys:
+  - qid:Q11553699|name:ファミコンランナー高橋名人物語
+  qid: null
+  number: 6
+  isbn13: '9784091041524'
+  release_date: '1988-03'
+  publisher: 小学館
+  edition_type: standard
+  title_display: 高橋名人物語(6)
+  source: rakuten
+  added_at: '2026-07-27'
+  note: 2頁分裂の統合(相方頁はpage-dedupでdrop)。solo-truncated残32監査(2026-07-27)=著者×レーベル×ISBN帯一致を楽天cache×種2で確認。6巻だけ「高橋名人物語」頁に分裂(ISBN帯1041272-1524連番で同一シリーズ確認)
+- series_keys:
+  - qid:Q11361825|name:リピート・アフター・ミー?
+  qid: null
+  number: 1
+  isbn13: '9784862636461'
+  release_date: '2009-08-10'
+  publisher: リブレ出版
+  edition_type: standard
+  title_display: リピート・アフター・ミー?
+  source: rakuten
+  added_at: '2026-07-27'
+  note: 真の取込もれ。solo-truncated残32監査パス2(2026-07-27)=NDL/楽天liveで裁定。NDL=ビーボーイコミックス1st+Be×boy 2nd(頁既存)の全2巻構成を確認
+- series_keys:
+  - qid:Q16264109|name:日本の歴史
+  qid: null
+  number: 1
+  isbn13: '9784092538535'
+  release_date: '2013-04'
+  publisher: 小学館
+  edition_type: standard
+  title_display: ドラえもんの社会科おもしろ攻略 日本の歴史 1 旧石器時代〜平安時代
+  source: rakuten
+  added_at: '2026-07-27'
+  note: 真の取込もれ。solo-truncated残32監査パス2(2026-07-27)=NDL/楽天liveで裁定。ドラえもんの学習シリーズ全4巻(4巻=2026-04新刊)
+- series_keys:
+  - qid:Q16264109|name:日本の歴史
+  qid: null
+  number: 3
+  isbn13: '9784092538603'
+  release_date: '2014-02-28'
+  publisher: 小学館
+  edition_type: standard
+  title_display: ドラえもんの社会科おもしろ攻略 日本の歴史 3 江戸時代後半〜現代
+  source: rakuten
+  added_at: '2026-07-27'
+  note: 真の取込もれ。solo-truncated残32監査パス2(2026-07-27)=NDL/楽天liveで裁定。
+- series_keys:
+  - qid:Q16264109|name:日本の歴史
+  qid: null
+  number: 4
+  isbn13: '9784092537576'
+  release_date: '2026-04-22'
+  publisher: 小学館
+  edition_type: standard
+  title_display: ドラえもんの社会科おもしろ攻略 日本の歴史 4 昭和時代後半〜令和時代
+  source: rakuten
+  added_at: '2026-07-27'
+  note: 真の取込もれ。solo-truncated残32監査パス2(2026-07-27)=NDL/楽天liveで裁定。
+- series_keys:
+  - qid:Q2661273|name:ガイ
+  qid: null
+  number: 1
+  isbn13: '9784845803354'
+  release_date: '1990-08-06'
+  publisher: リイド社
+  edition_type: standard
+  title_display: ガイ(1)
+  source: rakuten
+  added_at: '2026-07-27'
+  note: 彼岸島型/分裂。solo-truncated残32監査パス2(2026-07-27)=NDL/楽天liveで裁定。SPコミックス「ガイ」全5巻(帯3354-3392連番・さいとう・たかを)。3巻は誤って「大江戸犯科帖 探索屋ガイ」頁(2012新装かまいたち走る)に配属→exclude移設
+- series_keys:
+  - qid:Q2661273|name:ガイ
+  qid: null
+  number: 3
+  isbn13: '9784845803378'
+  release_date: '1991-03-14'
+  publisher: リイド社
+  edition_type: standard
+  title_display: ガイ(3)
+  source: rakuten
+  added_at: '2026-07-27'
+  note: 彼岸島型/分裂。solo-truncated残32監査パス2(2026-07-27)=NDL/楽天liveで裁定。SPコミックス「ガイ」全5巻(帯3354-3392連番・さいとう・たかを)。3巻は誤って「大江戸犯科帖 探索屋ガイ」頁(2012新装かまいたち走る)に配属→exclude移設
+- series_keys:
+  - qid:Q2661273|name:ガイ
+  qid: null
+  number: 4
+  isbn13: '9784845803385'
+  release_date: '1991-07-23'
+  publisher: リイド社
+  edition_type: standard
+  title_display: ガイ(4)
+  source: rakuten
+  added_at: '2026-07-27'
+  note: 彼岸島型/分裂。solo-truncated残32監査パス2(2026-07-27)=NDL/楽天liveで裁定。SPコミックス「ガイ」全5巻(帯3354-3392連番・さいとう・たかを)。3巻は誤って「大江戸犯科帖 探索屋ガイ」頁(2012新装かまいたち走る)に配属→exclude移設
+- series_keys:
+  - qid:Q2661273|name:ガイ
+  qid: null
+  number: 5
+  isbn13: '9784845803392'
+  release_date: '1991-08-23'
+  publisher: リイド社
+  edition_type: standard
+  title_display: ガイ(5)
+  source: rakuten
+  added_at: '2026-07-27'
+  note: 彼岸島型/分裂。solo-truncated残32監査パス2(2026-07-27)=NDL/楽天liveで裁定。SPコミックス「ガイ」全5巻(帯3354-3392連番・さいとう・たかを)。3巻は誤って「大江戸犯科帖 探索屋ガイ」頁(2012新装かまいたち走る)に配属→exclude移設

@@ -25149,7 +25149,30 @@
   "title_kana": "ウルトラキュー"
  },
  "ultra-q-2011": {
-  "title_kana": "ウルトラキュー"
+  "editions": [
+   {
+    "type": "standard",
+    "label": "マンガショップシリーズ",
+    "publisher": "マンガショップ",
+    "imprint": "マンガショップシリーズ",
+    "volumes": [
+     {
+      "number": 1,
+      "isbn13": "9784775914366",
+      "cover_url": null,
+      "release_date": "2011-09-15",
+      "volume_label": "上"
+     },
+     {
+      "number": 2,
+      "isbn13": "9784775914373",
+      "cover_url": null,
+      "release_date": "2011-09-15",
+      "volume_label": "下"
+     }
+    ]
+   }
+  ]
  },
  "valkyrie-profile-hijikata-2000": {
   "title": "ヴァルキリープロファイル",
@@ -31588,6 +31611,25 @@
       "isbn13": "9784122044401",
       "cover_url": null,
       "release_date": "2004-10-23"
+     }
+    ]
+   }
+  ]
+ },
+ "garou-densetsu-kumocho-1996": {
+  "editions": [
+   {
+    "type": "standard",
+    "label": "SPコミックス",
+    "publisher": "リイド社",
+    "imprint": "SPコミックス",
+    "volumes": [
+     {
+      "number": 1,
+      "isbn13": "9784845812974",
+      "cover_url": null,
+      "release_date": "1996-03",
+      "title_display": "餓狼伝説3"
      }
     ]
    }
