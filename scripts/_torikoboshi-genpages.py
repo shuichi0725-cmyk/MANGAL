@@ -220,7 +220,23 @@ def main():
             if _m:
                 existing_skey.add(_m.group(1).strip())
 
+    # ★近似題ゲート用: 本番全題の正規化集合(2026-07-27 solo-truncated17件監査で新設。
+    #   「ちちょっとだけかえってきた…」(MADB誤題typo) / 「サクラ大戦 第二部」vs「第2部」の
+    #   分裂頁化を防ぐ。既存題の包含 or 漢数字/算用の揺れ一致 = 分裂疑いで保留)。
+    _KANJI_NUM = str.maketrans("一二三四五六七八九〇零", "12345678900")
+    def _sim_norm(t):
+        import unicodedata as _ud
+        s = _ud.normalize("NFKC", str(t or "")).translate(_KANJI_NUM).lower()
+        return re.sub(r"[\s　・!！?？:：〜~\-。、．.()（）]", "", s)
+    _ti = idx["f"].index("title")
+    prod_titles = {}
+    for r in idx["d"]:
+        _n = _sim_norm(r[_ti])
+        if _n:
+            prod_titles.setdefault(_n, r[_si])
+
     todo, skip = [], collections.Counter()
+    hold_gate = []
     for sid, vv in sorted(vols.items()):
         if any(ib in live for ib, _, _ in vv):
             skip["既に本番に在る(ISBN一致)"] += 1
@@ -228,7 +244,33 @@ def main():
         if meta[sid][0] in existing_skey:
             skip["★既存源頁が同じseries_keyを持つ(重複防止)"] += 1
             continue
+        # ★vol1不在ゲート(2026-07-27 solo-truncated17件監査で新設): 番号付き巻の最小が2以上の
+        #   clusterは「途中巻だけの断片」= 大半が彼岸島型(残巻が別clusterに眠りdedup負け)か
+        #   分裂cluster。頁化すると「5巻だけの頁」(Dr.Slump愛蔵5巻/サクラ大戦二部5巻/QP外伝4巻)
+        #   ができる。★頁化せず保留リストに落とし、種2横断(_ledger/_exists --isbn)で裁定してから。
+        _nums = [n for _, n, _ in vv if isinstance(n, int) and n > 0]
+        if _nums and min(_nums) > 1:
+            skip["★vol1不在=途中巻断片(彼岸島型/分裂疑い→保留)"] += 1
+            hold_gate.append((meta[sid][0], meta[sid][1], f"vol1不在(巻{sorted(set(_nums))})=彼岸島型/分裂疑い"))
+            continue
+        # ★近似題ゲート: 正規化題が既存頁題と包含関係(typo/表記揺れの分裂疑い)なら保留。
+        #   完全一致は同名別作の可能性もあるが、新規頁化は人の裁定を先に(偽keep>偽drop)。
+        _tn = _sim_norm(meta[sid][1])
+        _hit = prod_titles.get(_tn)
+        if not _hit and len(_tn) >= 4:
+            for _pt, _ps in prod_titles.items():
+                if len(_pt) >= 4 and abs(len(_pt) - len(_tn)) <= 2 and (_tn in _pt or _pt in _tn):
+                    _hit = _ps
+                    break
+        if _hit:
+            skip["★近似題=既存頁と分裂疑い(→保留)"] += 1
+            hold_gate.append((meta[sid][0], meta[sid][1], f"近似題: 既存頁 {_hit} と包含一致=分裂/誤題疑い"))
+            continue
         todo.append((sid, vv))
+    if hold_gate:
+        print(f"\n★ゲート保留 {len(hold_gate)}件(頁化せず。種2横断で裁定してから):")
+        for k, t, why in hold_gate:
+            print(f"  - {t} | {why} | {k}")
     print(f"対象 {len(meta)} series / ISBN持ち {len(vols)} / 生成候補 {len(todo)}  (skip: {dict(skip)})")
     if a.limit:
         todo = todo[:a.limit]

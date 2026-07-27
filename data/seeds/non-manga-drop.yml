@@ -4626,3 +4626,9 @@ non_manga:
 - series_key: name:木の実和|name:名探偵ホームズ
   reason: non_manga
   note: (2026-07-26 ユーザ裁定)頁「名探偵ホームズ」の残存はこの1件のみで、imprint=おもしろ漫画文庫・**ISBN無し/発売日無し**の書誌断片。同頁に混在していた スタジオジブリ絵コンテ全集(sid47419)と徳間アニメ絵本(sid92971)はimprintルールで既に除去済みで、残りは頁として成立しないため頁ごとdrop。
+- series_key: qid:Q11490838|name:凍牌 竜凰位戦死闘編
+  reason: konbini_reprint
+  note: 秋田トップコミックス上下(2011)=本編連載中のコンビニ廉価再録。実体は「凍牌竜凰位戦死闘編(上)」。除外方針②(ユーザ裁定 2026-07-27)
+- series_key: qid:Q11490838|name:凍牌 竜凰位戦死闘編裏
+  reason: konbini_reprint
+  note: 同上(下)巻。MADB題「裏」=「(下)」の誤記型。除外方針②(ユーザ裁定 2026-07-27)
