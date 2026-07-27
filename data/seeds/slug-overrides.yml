@@ -106,6 +106,10 @@ osananajimi-wa-faiaaman: osananajimi-wa-fireman
 oshare-majo-rabu-ando-berry: oshare-majo-love-and-berry
 ouji-ni-dekiai-saretakunai-node-motopurinsesu-desu-dansou-shitsuji-ni-narimasu: ouji-ni-dekiai-saretakunai-node-motoprincess-desu-dansou-shitsuji-ni-narimasu
 overrides:
+  sp-2000:
+    at: '2026-07-27'
+    reason: '二重頁統合(小池書院キングシリーズ復刻頁を版タブ化)後、正題SPセキュリティポリスの読みslugへ(空いた旧slugを再利用)'
+    slug: sp-security-police
   mangakasan-to-ashisutantosan-to-2:
     at: '2026-07-27'
     reason: '規則4(明白な辞書英単語=assistant)+敬称-san分離。本編slug mangaka-san-to-assistant-san-to と家族整合(ユーザ照会「二巻疑い」の調査時に発見。疑い自体はWiki全1巻続編で白)'

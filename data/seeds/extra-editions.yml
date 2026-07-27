@@ -137,6 +137,16 @@ extra:
       number: 1
       release_date: 2011-10
       title_display: 文庫全集BT-169
+  beast-wars-2:
+  - imprint: 復刊ドットコム
+    label: 復刻版(2023)
+    publisher: 復刊ドットコム
+    type: shinsoban
+    volumes:
+    - isbn13: '9784835458984'
+      number: 1
+      release_date: '2023-09-20'
+      title_display: ビーストウォーズII 超生命体トランスフォーマー(合本復刻)
   big-x:
   - imprint: 手塚治虫文庫全集
     label: 手塚治虫文庫全集(2011)
@@ -681,6 +691,41 @@ extra:
       number: 1
       release_date: 2011-11
       title_display: 文庫全集BT-172
+  dr-ashura:
+  - imprint: Nichibun comics
+    label: 新装版(2025)
+    publisher: 日本文芸社
+    type: shinsoban
+    volumes:
+    - isbn13: '9784537172164'
+      number: 1
+      release_date: '2025-04-04'
+      title_display: 新装版 Dr.アシュラ(上)
+    - isbn13: '9784537172171'
+      number: 2
+      release_date: '2025-04-04'
+      title_display: 新装版 Dr.アシュラ(下)
+  dr-typhoon:
+  - imprint: Action comicsワイド版
+    label: ワイド版(1996)
+    publisher: 双葉社
+    type: wideban
+    volumes:
+    - isbn13: '9784575934564'
+      number: 2
+      release_date: 1996-07
+    - isbn13: '9784575934601'
+      number: 3
+      release_date: 1996-08
+    - isbn13: '9784575934694'
+      number: 5
+      release_date: 1996-10
+    - isbn13: '9784575934731'
+      number: 6
+      release_date: 1996-11
+    - isbn13: '9784575934830'
+      number: 8
+      release_date: 1997-01
   dust-8:
   - imprint: 手塚治虫文庫全集
     label: 手塚治虫文庫全集(2011)
@@ -2200,6 +2245,42 @@ extra:
       number: 2
       release_date: 2009-12
       title_display: 第2巻(BT-26)
+  skyhigh-karma:
+  - imprint: 集英社文庫
+    label: 文庫版(2012)
+    publisher: 集英社
+    type: bunkobon
+    volumes:
+    - isbn13: '9784086193818'
+      number: 1
+      release_date: 2012-09
+  skyhigh-shinshou:
+  - imprint: 集英社文庫
+    label: 文庫版(2012)
+    publisher: 集英社
+    type: bunkobon
+    volumes:
+    - isbn13: '9784086193917'
+      number: 1
+      release_date: 2012-10
+    - isbn13: '9784086193924'
+      number: 2
+      release_date: 2012-11
+    - isbn13: '9784086193931'
+      number: 3
+      release_date: 2012-12
+  sp-2000:
+  - imprint: King series
+    label: キングシリーズ(2010)
+    publisher: 小池書院
+    type: shinsoban
+    volumes:
+    - isbn13: '9784862256393'
+      number: 1
+      release_date: 2010-10
+    - isbn13: '9784862256409'
+      number: 2
+      release_date: 2010-10
   tetsu-no-michi:
   - imprint: 手塚治虫漫画全集
     label: 手塚治虫漫画全集(1979)

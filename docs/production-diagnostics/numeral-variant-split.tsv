@@ -1,20 +1,9 @@
 class	slugs	titles	nums
 DUP	bakuchan-no-ita-sekusuarisu / mugichan-no-ita-sekusuarisu-dai-2-bu	麦ちゃんのヰタ・セクスアリス第2部 / 麦ちゃんのヰタ・セクスアリス 第2部	[1, 2, 3] / [1, 2]
-DUP	beast-wars-2-2023 / beast-wars-2	ビーストウォーズ2 / ビーストウォーズⅡ	[1] / [1, 2]
-DUP	dr-2025 / dr-ashura	Dr.アシュラ / Dr. アシュラ	[1, 2] / [1, 2, 3]
-DUP	dr-typhoon-1996 / dr-typhoon	Dr.タイフーン / Dr.タイフーン	[2, 3, 5, 6, 8] / [1, 2, 3, 4, 5, 6, 7, 8]
 DUP	esper-mami-1996-2 / esper-mami-1996	エスパー魔美 / エスパー魔美	[1, 2, 3, 4, 5, 6, 7, 8] / [1, 2, 3, 4, 5, 6, 7, 8]
-DUP	futago-no-imouto-ni-korosareta-ane-nidome-no-jinsei-wa-hatsukoi-no-ikeoji-outei-ni-furubetto-shimasu-kuroneko2026 / futago-no-imouto-ni-korosareta-ane-nidome-no-jinsei-wa-hatsukoi-no-ikeoji-outei-ni-furubetto-shimasu	双子の妹に殺された姉、二度目の人生は初恋のイケおじ王弟にフルベットします! / 双子の妹に殺された姉、二度目の人生は初恋のイケおじ王弟にフルベットします!	[1] / [1]
-DUP	fuufu-tantei-funsenki / yami-no-ekusasaizu	夫婦探偵奮戦記 / 夫婦探偵奮戦記	[1, 2, 3, 4, 5, 6, 7, 8] / [1, 2, 3, 4, 5, 6, 7, 8]
 DUP	ginga-tetsudou-no-yoru / gingatetsudou-no-yoru	銀河鉄道の夜 / 銀河鉄道の夜	[1, 2] / [1]
 DUP	kao-ni-denai-kashiwada-san-to-kao-ni-deru-oota-kun-2024 / kao-ni-denai-kashiwada-san-to-kao-ni-deru-oota-kun	顔に出ない柏田さんと顔に出る太田君+ / 顔に出ない柏田さんと顔に出る太田君	[1, 2] / [1, 2, 3, 4, 5, 6, 7, 8]
-DUP	reitetsushiiiioohainakanomegaminikoiwosuru / reitetsushiiiioohainakanomegaminikoiwosuruichi	冷徹CEOは田舎の女神に恋をする / 冷徹CEOは田舎の女神に恋をする	[1] / [1]
-DUP	rinjin-no-onii-san-sankaku2026 / rinjin-no-onii-san	隣人のお兄さん。 / 隣人のお兄さん。	[1] / [1]
-DUP	ryoushin-no-shakkin-o-katagawari-shite-morau-jouken-wa-nihonichi-kawaii-joshikousei-to-isshokenmei-ni-class-koto-deshita-mitsuki2026 / ryoushin-no-shakkin-o-katagawari-shite-morau-jouken-wa-nihonichi-kawaii-joshikousei-to-isshokenmei-ni-class-koto-deshita	両親の借金を肩代わりしてもらう条件は日本一可愛い女子高生と一緒に暮らすことでした。 / 両親の借金を肩代わりしてもらう条件は日本一可愛い女子高生と一緒に暮らすことでした。	[1, 2, 3, 4, 5, 6, 7] / [1, 2, 3, 4, 5, 6, 7]
 DUP	shinpi-no-sekai-eruhazaado-tsubura-1996 / shinpi-no-sekai-eruhazaado	神秘の世界エルハザード / 神秘の世界エルハザード	[1, 2, 3] / [1, 2, 3]
-DUP	sky-hai-shinshou / skyhigh-shinshou	スカイハイ新章 / スカイハイ・新章	[1, 2, 3] / [1, 2, 3, 4]
-DUP	sky-high-karma / skyhigh-karma	スカイハイ カルマ / スカイハイ・カルマ	[1] / [1, 2]
-DUP	sp-2000 / sp-security-police	SPセキュリティポリス / SPセキュリティポリス	[1, 2] / [1, 2]
 SEQ?	3-jou-lovers-furu-count -> kyuujou-lovers	球場ラヴァーズ3-2 -> 球場ラヴァーズ	子[1] 親max=6
 SEQ?	dienbienfuu-0 -> dien-bien-phu	ディエンビエンフー0 -> ディエンビエンフー	子[1] 親max=12
 SEQ?	fukuyadou-honpo-ni -> fukuyadou-honpo	福家堂本舗弐 -> 福家堂本舗	子[1] 親max=11
@@ -34,6 +23,3 @@ SEQ?	shinbatsu-1-tenichi -> shinbatsu	神罰1.1 -> 神罰	子[1] 親max=1
 SEQ?	terebi-magazine-ban-kamen-rider-v3 -> televi-magazine-ban-kamen-rider	テレビマガジン版・仮面ライダーV3 -> テレビマガジン版・仮面ライダー	子[1] 親max=1
 SEQ?	warito-yokuaru-danshikou-teki-love-jijou-2 -> warito-yokuaru-danshikouteki-renaijijou	わりとよくある男子校的恋愛事情2 -> わりとよくある男子校的恋愛事情	子[1] 親max=1
 SEQ?	zeburaaman-2 -> zebraman	ゼブラーマン2 -> ゼブラーマン	子[1] 親max=5
-SPLIT	agapes-1999 / agapes	アガペイズ / アガペイズ	[6, 7, 8, 9] / [1, 2, 3, 4, 5]
-SPLIT	garfield-1990 / garfield	ガーフィールド / ガーフィールド	[1, 2, 3, 4, 5] / [8, 9, 10, 11, 12, 13, 14, 15]
-SPLIT	school-zone-2021 / school-zone-ningiyau-2018	スクールゾーン / スクールゾーン	[4, 5] / [1, 2, 3]

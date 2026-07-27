@@ -18,3 +18,10 @@
 - tokyo-debut(下巻vs頁3)/manga-zankoku-nippon-banashi-inagaki(下vs頁3)
 - NDL不在7: miyazawa-kenji-mangakan-1985/saibara-rieko-no-jinsei-ichinensei/shounangurafutei/sushi-damashii-shouwa-44-nen-special/tomodachi-wa-kiss-shinai/ura-aka-otoko…/zebra
 - 全量スイープ(2026-07-27・preview残190作): ACCEPT6=超人ロック冬の虹/イナズマンVSキカイダー/君の手がささやいている最終章/メダロット3/メダロット4(姉妹作メダロット3を家族参照でゲート通過)/生徒会の一存乙(計8巻)。保留=王国の鍵(hane2026)/玉三郎恋の狂騒曲(紙参照ゼロ)。他182作=Kobo未配信。★previewの書影欠けはこれで打ち止め(付け忘れ0・紙画像なし・Kobo枯れ)
+
+## numeral-variant DUP 残5(2026-07-27・NDL休止のためpark)
+- 麦ちゃんのヰタ・セクスアリス: 部構成(第1部/第2部)×ホーム社漫画文庫×集英社が2頁に混在。bakuchan slugも謎(題は麦ちゃん)。NDLで部構成確定要
+- エスパー魔美: 多版(てんとう虫/藤子ランド/文庫系)が2頁に割れた奇子型。版マップ作ってcanonical要
+- 銀河鉄道の夜(ますむらひろし): 扶桑社版×風呂猫版(最終形)等の多版split。版整理要
+- 神秘の世界エルハザード(つぶらひでとも): 徳間1996×竹書房の同巻別ISBN=再刊PARALLEL疑い(自動統合禁止型)。NDLで確定要
+- 顔に出ない柏田さんと顔に出る太田君+: ★偽陽性(「+」=正当な続編。numnormが+を除去するため毎回出る=既知FP)
