@@ -20,6 +20,10 @@ import { EmailMessage } from "cloudflare:email";
 const HTML_CACHE = "public, max-age=300, s-maxage=86400, stale-while-revalidate=604800";
 const IMMUTABLE = "public, max-age=31536000, immutable"; // /_next/static 等ハッシュ付き
 const ASSET = "public, max-age=86400, s-maxage=604800";
+// ★索引JSON(2026-07-27 会議決定): 同名のまま週次更新するため immutable 不可。
+//   ブラウザ4h(週次サイクルに十分)+期限切れ後は If-None-Match 再検証(下の304対応)で
+//   本体転送ゼロ。22MBの一覧索引が「再取得しても304の数十バイト」になる。
+const JSON_CACHE = "public, max-age=14400, s-maxage=86400, stale-while-revalidate=86400";
 
 function contentType(key) {
   if (key.endsWith(".html")) return "text/html; charset=utf-8";
@@ -38,7 +42,25 @@ function contentType(key) {
 function cacheControl(key) {
   if (key.startsWith("_next/static/") || key.includes("/_next/static/")) return IMMUTABLE;
   if (key.endsWith(".html")) return HTML_CACHE;
+  if (key.endsWith(".json")) return JSON_CACHE;
   return ASSET;
+}
+
+/** ETag条件付き要求 → 304(本体転送なし)。エッジ/R2どちらの応答にも適用。 */
+function conditional304(request, res) {
+  const inm = request.headers.get("if-none-match");
+  const etag = res.headers.get("etag");
+  if (!inm || !etag) return res;
+  // W/弱ETag・複数候補("a", "b")も許容する素朴比較
+  if (inm.split(",").map((s) => s.trim().replace(/^W\//, "")).includes(etag.replace(/^W\//, ""))) {
+    const h = new Headers();
+    for (const k of ["etag", "cache-control", "content-type"]) {
+      const v = res.headers.get(k);
+      if (v) h.set(k, v);
+    }
+    return new Response(null, { status: 304, headers: h });
+  }
+  return res;
 }
 
 /** request path → R2 オブジェクトキー(next export 構造)。 末尾/や拡張子なし→ .html / index.html。 */
@@ -199,7 +221,7 @@ ${rec.body}`;
     const cache = caches.default;
     const cacheKey = new Request(url.toString(), request);
     let res = await cache.match(cacheKey);
-    if (res) return res;
+    if (res) return conditional304(request, res);
 
     // ③ R2 から取得
     const key = pathToKey(url.pathname);
@@ -234,7 +256,7 @@ ${rec.body}`;
 
     res = new Response(obj.body, { headers });
     ctx.waitUntil(cache.put(cacheKey, res.clone())); // エッジに焼く
-    return res;
+    return conditional304(request, res);
   },
 };
 

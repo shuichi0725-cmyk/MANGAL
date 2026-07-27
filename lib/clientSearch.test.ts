@@ -105,3 +105,29 @@ describe("検索v2.2: 日本語クエリのローマ字橋遮断+関連度tier(2
     expect(tiers.get("inuyasha")).toBe(3); // 著者のみ
   });
 });
+
+describe("数字表記揺れ折り畳み(2026-07-27 会議決定: ロザリオseasonⅡ型)", () => {
+  const nums = [
+    { slug: "rosario-2", title: "ロザリオとバンパイアseasonⅡ", title_kana: "ロザリオトバンパイアシーズン2",
+      authors: [{ name: "池田晃久", kana: "イケダアキヒサ" }] },
+    { slug: "darling", title: "世紀末☆ダーリン", title_kana: "セイキマツダーリン",
+      authors: [{ name: "なると真樹", kana: "ナルトマキ" }] },
+    { slug: "nanatsu", title: "七つの大罪", title_kana: "ナナツノタイザイ",
+      authors: [{ name: "鈴木央", kana: "スズキナカバ" }] },
+  ] as unknown as MangaListItem[];
+  it("「season2」でseasonⅡ頁が当たる(ローマ数字⇔算用)", () => {
+    expect(searchSlugs("ロザリオとバンパイアseason2", nums).has("rosario-2")).toBe(true);
+  });
+  it("「seasonII」(半角ローマ数字綴り)でも当たる", () => {
+    expect(searchSlugs("season II", nums).has("rosario-2")).toBe(true);
+  });
+  it("かな数詞: 「シーズンツー」でも当たる", () => {
+    expect(searchSlugs("シーズンツー", nums).has("rosario-2")).toBe(true);
+  });
+  it("既存の完全一致tierが数字折り畳みで壊れない", () => {
+    expect(searchWithTiers("世紀末☆ダーリン", nums).get("darling")).toBe(0);
+  });
+  it("漢数字: 「7つの大罪」で七つの大罪が当たる", () => {
+    expect(searchSlugs("7つの大罪", nums).has("nanatsu")).toBe(true);
+  });
+});

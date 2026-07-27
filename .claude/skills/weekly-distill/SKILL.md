@@ -71,6 +71,11 @@ python scripts/_gen-sitemap.py
 ```
 python scripts/_r2-sync.py --bucket mangal-site --prune
 ```
+- ★**workers/r2-serve.js を変更した週は Worker も deploy**(R2同期はファイルだけ=Workerコードは別デプロイ):
+```
+npx wrangler deploy -c wrangler-r2.jsonc
+```
+- ★検索回帰は vitest に内蔵(lib/clientSearch.test.ts=イース型tier/数字表記揺れ/複数語AND)。緑でなければ出さない
 - ★**`--prune` 必須**(2026-07-26 追加)。 これが無いと **非掲載にした頁が本番で200のまま残る**。
   prune 無し運用の結果、孤児HTMLが **1,041頁** 溜まっていた([[r2_orphan_pages_prune_missing]])。
   フィルムコミック等をdropしても、prune しない限りユーザには消えて見えない。
