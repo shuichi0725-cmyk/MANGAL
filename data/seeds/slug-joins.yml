@@ -1,0 +1,14 @@
+# slug誤分割の結合表 (2026-07-27 日次蒸留で確立)
+#
+# なぜ要るか: janome が漢語複合を語素に割るため slug がハイフンで割れる。
+#   例 異世界 → 異(イ)+世界(セカイ) → "i-sekai"。本番慣行は isekai(538頁) で
+#   i-sekai(36頁)は同じ穴で出来た残骸。同型= 最凶 sai-kyou / 最推し sai-oshi。
+#
+# 何をするか: make_slug の最終出力に対し、**ハイフン境界に限定**して from→to 置換。
+#   境界限定なので「nai-sekai」等の別語は巻き込まない(部分一致しない)。
+#
+# 追加条件: 本番slugの多数派がその結合形であること(= 慣行の追認。新綴りの発明はしない)。
+joins:
+  i-sekai: isekai
+  sai-kyou: saikyou
+  sai-oshi: saioshi
