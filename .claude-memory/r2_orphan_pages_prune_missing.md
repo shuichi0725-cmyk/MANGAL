@@ -5,7 +5,7 @@ metadata:
   node_type: memory
   type: project
   originSessionId: dff8a305-89f9-41d1-baa4-d9b9d0478784
-  modified: 2026-07-26T11:31:37.967Z
+  modified: 2026-07-27T23:55:17.719Z
 ---
 
 ★**本番サイトから消したはずの頁が消えていない**(2026-07-26 発見)。
@@ -14,8 +14,11 @@ metadata:
 - `scripts/_r2-sync.py` は **`--prune` を付けた時だけ**「ローカルに無いキー」をR2から削除する。
 - ★**週次蒸留 skill の実行行は `python scripts/_r2-sync.py --bucket mangal-site`** = **prune無し**。
   → drop した頁の HTML は R2 に残り、URLは200のまま生き続ける。
-- 実測(2026-07-26): `.cache/r2-manifest.json`(137,695キー)と `data/manga.v2` を突合し
-  **孤児HTML 1,041頁**。 この日のフィルムコミック掃引で落とした45頁のうち**35頁が公開中**。
+- 実測(2026-07-26): この日のフィルムコミック掃引で落とした45頁のうち**35頁が公開中**だった。
+- ★**「孤児1,041頁」は誤り。 真値は 322キー**(2026-07-27の週次prune実測)。 誤った理由 =
+  **R2のキーは slug なのに `data/manga.v2` の ファイル名(SRC stem) と突合した**ため、
+  slug上書きのある頁(例 kamuigaiden.yml → slug kamui-gaiden)を全部「孤児」に数えていた。
+  ★以後この種の照合は **必ず yml 内の slug フィールド**で行う(ファイル名 ≠ slug)。
 
 ## 効く場面
 - 非掲載判定(非漫画/フィルムコミック/重複)を下しても**サイト上は残る**ので、監査の「本番から消えた」は
