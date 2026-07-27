@@ -34,32 +34,21 @@ editions:
   - number: 1
     asin: null
     isbn13: '9784047153127'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/3127/9784047153127.jpg?_ex=200x200
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/3127/9784047153127.jpg?_ex=300x300
     release_date: 2009-10
   - number: 2
     asin: null
     isbn13: '9784047155107'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/5107/9784047155107.jpg?_ex=200x200
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/5107/9784047155107.jpg?_ex=300x300
     release_date: 2010-08
   - number: 3
     asin: null
     isbn13: '9784047158016'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/8016/9784047158016.jpg?_ex=200x200
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/8016/9784047158016.jpg?_ex=300x300
     release_date: '2012-01-21'
-  - number: 4
-    asin: null
-    isbn13: '9784041203903'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/3903/9784041203903.jpg?_ex=200x200
-    release_date: '2013-02-07'
-    publisher: 角川グループパブリッシング
-    variants:
-    - label: オリジナルアニメBD付き限定版
-      isbn13: '9784041203897'
-      cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/3897/9784041203897.jpg?_ex=200x200
-      price: null
-- type: standard
-  label: フルカラー版(2012)
-  publisher: 角川書店
+- type: kanzenban
+  label: フルカラー版
+  publisher: 角川グループパブリッシング
   imprint: 角川コミックス・エース
   volumes:
   - number: 1
@@ -67,19 +56,21 @@ editions:
     isbn13: '9784041202418'
     cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/2418/9784041202418.jpg?_ex=300x300
     release_date: '2012-05-24'
-    title_display: えびてん 公立海老栖川高校天悶部 フルカラー(1)
   - number: 2
     asin: null
     isbn13: '9784041203200'
     cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/3200/9784041203200.jpg?_ex=300x300
     release_date: '2012-07-24'
-    title_display: えびてん 公立海老栖川高校天悶部 フルカラー(2)
   - number: 3
     asin: null
     isbn13: '9784041204054'
     cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/4054/9784041204054.jpg?_ex=300x300
     release_date: '2012-09-21'
-    title_display: えびてん 公立海老栖川高校天悶部 フルカラー(3)
+  - number: 4
+    asin: null
+    isbn13: '9784041203903'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/3903/9784041203903.jpg?_ex=300x300
+    release_date: '2013-02-07'
 publishers:
 - kadokawa
 catch: 宇宙好きの少女が天文部を目指すも、間違えて女子だらけのオタク部へ。変わり者の部員に囲まれ、まだ気づかない——騒がしい学園コメディ。

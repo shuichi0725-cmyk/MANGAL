@@ -31881,5 +31881,68 @@
    }
   ],
   "_note": "誤番号是正(NDL=巻表記なし単巻/題中数字・完全版等を巻番号と誤認)。solo-truncated証拠なし監査 2026-07-27"
+ },
+ "ebiten": {
+  "editions": [
+   {
+    "type": "standard",
+    "label": "通常版",
+    "publisher": "角川書店",
+    "imprint": "角川コミックス・エース",
+    "volumes": [
+     {
+      "number": 1,
+      "isbn13": "9784047153127",
+      "cover_url": null,
+      "release_date": "2009-10"
+     },
+     {
+      "number": 2,
+      "isbn13": "9784047155107",
+      "cover_url": null,
+      "release_date": "2010-08"
+     },
+     {
+      "number": 3,
+      "isbn13": "9784047158016",
+      "cover_url": null,
+      "release_date": "2012-01-21"
+     }
+    ]
+   },
+   {
+    "type": "kanzenban",
+    "label": "フルカラー版",
+    "publisher": "角川書店",
+    "imprint": "角川コミックス・エース",
+    "volumes": [
+     {
+      "number": 1,
+      "isbn13": "9784041202418",
+      "cover_url": null,
+      "release_date": "2012-05-24"
+     },
+     {
+      "number": 2,
+      "isbn13": "9784041203200",
+      "cover_url": null,
+      "release_date": "2012-07-24"
+     },
+     {
+      "number": 3,
+      "isbn13": "9784041204054",
+      "cover_url": null,
+      "release_date": "2012-09-21"
+     },
+     {
+      "number": 4,
+      "isbn13": "9784041203903",
+      "cover_url": null,
+      "release_date": "2013-02-07"
+     }
+    ]
+   }
+  ],
+  "_note": "ユーザ裁定2026-07-27: 4巻(2013-02)はフルカラー刊行のみ(ISBN帯40412x=フルカラー1-3と同ライン・モノクロ版なし)→フルカラー版タブ1-4に配置。通常版=モノクロ1-3"
  }
 }
