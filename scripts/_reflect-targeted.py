@@ -111,7 +111,8 @@ def main():
             for vs in [e.get("volumes") or []] + [vv.get("volumes") or [] for vv in (e.get("versions") or [])]:
                 for v in vs:
                     n = v.get("number")
-                    if not (isinstance(n, int) and n >= 1):
+                    # ★0巻は実在する(前日譚の商業化等。可哀想な君は僕だけの甘やかな傷(0)=楽天題も(0) 2026-07-28実踏)
+                    if not (isinstance(n, int) and n >= 0):
                         _errs.append(f"{st}: 不正number={n!r}")
                     rd = v.get("release_date")
                     if rd is not None and not _DATE.match(str(rd)):
