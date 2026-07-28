@@ -100,14 +100,16 @@ export default function ListClient({ data }: { data: ListBundle }) {
   const [sortTouched, setSortTouched] = useState<boolean>(
     () => typeof window !== "undefined" && new URLSearchParams(window.location.search).has("s"),
   );
+  // ★初期表示=100件(2026-06-13 ユーザ裁定「初期100件くらいが丁度よい」。実装が200のままだった
+  //   のを2026-07-29 ユーザ指摘で是正)
   const [limit, setLimit] = useState<number>(() => {
-    if (typeof window === "undefined") return 200;
+    if (typeof window === "undefined") return 100;
     const n = parseInt(new URLSearchParams(window.location.search).get("n") || "", 10);
-    return Number.isFinite(n) && n > 200 ? n : 200;
+    return Number.isFinite(n) && n > 100 ? n : 100;
   });
   useEffect(() => {
     const url = new URL(window.location.href);
-    if (limit > 200) url.searchParams.set("n", String(limit));
+    if (limit > 100) url.searchParams.set("n", String(limit));
     else url.searchParams.delete("n");
     if (sortTouched) url.searchParams.set("s", sort);
     else url.searchParams.delete("s");

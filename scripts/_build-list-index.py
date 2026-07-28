@@ -256,8 +256,9 @@ LIST_FIELDS = [
 out = os.path.join(OUTDIR, "manga-list-index.json")
 json.dump({"f": LIST_FIELDS, "d": [[m.get(f) for f in LIST_FIELDS] for m in idx]},
           open(out, "w", encoding="utf-8"), ensure_ascii=False, separators=(",", ":"))
-# ★head索引(2026-07-14): 人気順先頭200件=初回描画用(~80KB)。コールドスタートの体感対策。
-_head = sorted(idx, key=lambda x: -(x.get("popularity") or 0))[:200]
+# ★head索引(2026-07-14): 人気順先頭100件=初回描画用(~40KB)。コールドスタートの体感対策。
+#   (2026-07-29 ユーザ指摘で200→100へ。裁定「初期100件くらいが丁度よい」2026-06-13 に整合)
+_head = sorted(idx, key=lambda x: -(x.get("popularity") or 0))[:100]
 hout = os.path.join(OUTDIR, "manga-list-head.json")
 json.dump({"f": LIST_FIELDS, "d": [[m.get(f) for f in LIST_FIELDS] for m in _head]},
           open(hout, "w", encoding="utf-8"), ensure_ascii=False, separators=(",", ":"))
