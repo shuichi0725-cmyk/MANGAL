@@ -67,6 +67,11 @@ export default function ListClient({ data }: { data: ListBundle }) {
       setQInput(uq);
     }
     const patch = filtersFromSearchParams(sp);
+    // ★q は上の setQ(検索state)が担当。filtersFromSearchParams は q を FilterState.query にも
+    //   写すため(browse用)、ここで消さないと検索+絞り込みの二重適用になり「?q=で着地すると
+    //   フィルター(1)が立って0件」(2026-07-29 ユーザ報告=ホーム左サイドバー検索が全滅していた根因。
+    //   書き込み側L77の params.delete("q") と対になる読み側の除外)。
+    delete (patch as { query?: string }).query;
     if (Object.keys(patch).length) setState({ ...emptyFilterState(), ...patch });
   }, []);
   // ★フィルタ変更をURLへ書き戻し(q/n/sと同機構。replaceで履歴を汚さない)
