@@ -3495,15 +3495,48 @@ def main():
         # ★volume-exclude 再適用(2026-07-26): 上の特装版是正は special_isbn を normal_isbn に**置換**するため、
         #   先に除外したISBNが**ここで復活し得る**(僕のヒーローアカデミア14で実害: 除外しても消えなかった)。
         #   除外は「この頁に出すな」の最終意思なので、置換系passの後でもう一度効かせる。
+        # ★★ただし「意図的seedが明示的に足したISBN」は削らない(2026-07-29 ユーザ発見=手塚全集タブ全滅の根因):
+        #   7/21の全集タブ集約は「volume-excludeで既存版から除去 + extra-editions/edition-overridesで
+        #   タブとして再追加」のペア設計。この再適用(7/26)が後段でタブ巻まで剥がし、手塚漫画全集184巻/
+        #   文庫全集161巻が本編頁から消えていた(103/115頁で交差を実測)。追加seedは除去より後の意思=勝たせる。
         if _vex:
+            _seed_keep: set = set()
+            for _xed in (extra_editions_map.get(slug) or []):
+                for _xv in (_xed.get("volumes") or []):
+                    _seed_keep.add(_norm_isbn(_xv.get("isbn13")))
+            for _xed in ((_load_edition_overrides().get(slug) or {}).get("editions") or []):
+                for _xv in (_xed.get("volumes") or []):
+                    _seed_keep.add(_norm_isbn(_xv.get("isbn13")))
+                for _xver in (_xed.get("versions") or []):
+                    for _xv in (_xver.get("volumes") or []):
+                        _seed_keep.add(_norm_isbn(_xv.get("isbn13")))
+            _vex_eff = _vex - _seed_keep
+        else:
+            _vex_eff = _vex
+        if _vex_eff:
             for _ce in (new_yml.get("editions") or []):
                 _ce["volumes"] = [v for v in (_ce.get("volumes") or [])
-                                  if _norm_isbn(v.get("isbn13")) not in _vex]
+                                  if _norm_isbn(v.get("isbn13")) not in _vex_eff]
                 for _ver in (_ce.get("versions") or []):
                     _ver["volumes"] = [v for v in (_ver.get("volumes") or [])
-                                       if _norm_isbn(v.get("isbn13")) not in _vex]
+                                       if _norm_isbn(v.get("isbn13")) not in _vex_eff]
             new_yml["editions"] = [e for e in (new_yml.get("editions") or [])
                                    if (e.get("volumes") or e.get("versions"))]
+        # ★空骨格の掃除(2026-07-29 漫画大学型): 巻ゼロ×全versionタブも空のeditionは死んだ骨組み
+        #   (7/21 override×除去の残骸)。残すとZodのvolumes≥1で頁ごとビルドskip=404になるため常時prune。
+        #   主巻ゼロ×タブ有り(ロストワールド型)は先頭タブを主版へ昇格(Zodはeditionごとにvolumes≥1を要求)。
+        for _ce in (new_yml.get("editions") or []):
+            if _ce.get("versions"):
+                _ce["versions"] = [vv for vv in _ce["versions"] if vv.get("volumes")]
+                if not _ce["versions"]:
+                    del _ce["versions"]
+            if not _ce.get("volumes") and _ce.get("versions"):
+                _head = _ce["versions"].pop(0)
+                _ce["volumes"] = _head.get("volumes") or []
+                if not _ce["versions"]:
+                    del _ce["versions"]
+        new_yml["editions"] = [e for e in (new_yml.get("editions") or [])
+                               if (e.get("volumes") or e.get("versions"))]
         # ★書影 最終充填 (= 全edition操作後=edition-canonical/override/exclude/version の後。
         #   clean_vol充填が canonical再構築で消える件を確実に埋める。 旧 _apply-covers-stage 廃止)。
         # ★発売日 精密化も同じ最終passで(2026-07-18): 現在値が空 or 新値のprefix(年月→年月日)の時だけ。

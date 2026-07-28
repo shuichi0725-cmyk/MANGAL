@@ -1,4 +1,4 @@
-- [【保留TODO】巻説明=次スライスから再開](voldesc_next_slice_todo.md) — /clear後「巻説明つくって」で次スライスへ進める
+﻿- [【保留TODO】巻説明=次スライスから再開](voldesc_next_slice_todo.md) — /clear後「巻説明つくって」で次スライスへ進める
 - [巻説明=着手作は全巻終わらせる](voldesc_finish_started_series.md) — 1作品に着手したら最後の巻まで仕上げてから次へ
 - [種1→種2脱落=大半アンソロジー(再ビルド不要)](seed1_to_seed2_loss_is_mostly_anthology.md) — 9,797巻はcreator空。真の作品は数十
 - [seeds pyramid=全体構造](project_architecture_seeds.md) — 種1=MADB raw/種2=sqlite/種3=AI fill/種4=巻補完→本番DB
@@ -148,4 +148,4 @@
 - [フィルムコミック=imprintだけがアニメ物の穴](film_comic_imprint_hole.md) — title/edition_typeの網をすり抜け45頁。ISBN除外は別刷りで無効
 - [【戒め】seed機械追記=「: 」必ずquote](seed_yaml_colon_quoting.md) — 未quoteでreflectするとsilent注入漏れ
 - [コンビニ判一掃=148drop/16hold](konbini_reprint_sweep.md) — 秋田トップW/Gコミ純頁。imprint一律drop不可(オリジナル実在)
-- [【残】手塚7頁空頁化(全集タブ空振り)](tezuka_tab_empty_pages.md) — 索引ガードで整合済み・頁修理=per-case。overrideを食うpass未特定
+- [【✅】手塚全集タブ全滅→復旧](tezuka_tab_empty_pages.md) — 根因=exclude再適用が追加seedを剥がす型。教訓=blanket除去passは意図的追加seedを保護
