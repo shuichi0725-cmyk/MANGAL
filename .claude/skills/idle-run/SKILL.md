@@ -18,6 +18,7 @@ python scripts/_material-harvest.py wiki-fetch --limit 500  # ⑤素材ハーベ
 python scripts/_anilist-delta.py   # ⑥AniList鮮度維持(直近更新~5,000件回収・~5分で自然停止・★セッション1回のみ)
 python scripts/_voldesc-material.py --recheck-nomaterial 300   # ⑦巻説明・材料なし台帳のlive再照会救済(偽陰性~10%回収・冪等・逐次保存・429中断。詳細=skill volume-desc)
 python scripts/_kana-digit-harvest.py --limit 30   # ⑧数字kana素材(フリガナに数字が残る~528頁のwiki+楽天live読み収集)
+python scripts/_check-recent-ongoing-volumes.py --limit 200   # ⑨続巻逆照合(連載中頁→楽天題検索。日次蒸留の後方安全網)
 ```
 
 ## ★429/冷却の共通ルール (= 2026-07-24 ユーザ指摘で機械化。運転者の判断ゼロ)
@@ -58,7 +59,15 @@ python scripts/_kana-digit-harvest.py --limit 30   # ⑧数字kana素材(フリ�
 - ③を無限ループ化しない(上記=NDL未収載の再照会浪費)
 
 ## セット構成 (= 将来増やせる)
-現在: ①試し読みexpand消化 ③NDLヨミ照合(1パス) ④完結判定 ⑤素材ハーベスト ⑥AniList鮮度維持 ⑦巻説明recheck ⑧数字kana素材
+現在: ①試し読みexpand消化 ③NDLヨミ照合(1パス) ④完結判定 ⑤素材ハーベスト ⑥AniList鮮度維持 ⑦巻説明recheck ⑧数字kana素材 ⑨続巻逆照合
+⑨**続巻逆照合**(=`_check-recent-ongoing-volumes.py` 2026-07-29柱化。ユーザ発見「日次蒸留の穴」の恒久対策):
+  日次蒸留(前方=未来窓の増加分のみ)が構造的に拾えない続巻(初回baseline切り捨て/発売済み/表記揺れ)を、
+  **逆方向**(連載中・休載の全~11k頁→その題で楽天を引く)で月次一巡して回収する後方安全網。
+  初回実証(2026-07-28)= 日次73巻/窓 に対し逆照合1,335巻登録。ゲート4種(コミックsize/same_series/セット合本除外/著者一致)内蔵。
+  `--limit 200`(~4.5分)を1バッチに再起動で続き=④⑤⑦と同型。queue枯れ=一巡完了(自然停止)。
+  **月1で `--build-queue`**(queueを本番索引から再算出+前周回結果を .cache/zokkan-cycles/ へrotate)=これはOpus作業。
+  ★収集のみ(trail/gapを.cacheに貯める)。**登録= `_zokkan-register.py` で上位モデル専権**(既登録/巻番号/日付ゲート
+  →種4純粋追加→reflectチャンク反映。gapは登録せずper-case行き=under-merge型が混ざるため)。楽天レートは_lookupのgateが自衛。
 ⑧**数字kana素材ハーベスト**(=`_kana-digit-harvest.py` 2026-07-23新設。フリガナに数字/エンティティが残る残置頁の
   読み素材を wiki記事冒頭よみ+楽天titleKana live から収集。`--limit 30`を1バッチとして再起動で続き=④⑤⑦と同型。
   queueが古びたら `--build-queue` で索引から再算出(冪等)。★収集のみ=`found.jsonl`への貯めまで。

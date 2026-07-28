@@ -21,6 +21,15 @@
 resumable(1作ごとjsonl追記)。 rate=_lookup.py の gate(1.3秒/host)。
 usage: python scripts/_check-recent-ongoing-volumes.py [--limit N]
 出力: .cache/recent-ongoing-volumes.jsonl
+
+★2026-07-29 柱化(ユーザ裁定「逆照合を柱にして」= idle-run 柱⑨):
+  日次蒸留は「未来窓の増加分」しか見ない前方視で、初回baseline切り捨て+発売済み+表記揺れの
+  3つの穴があった(07-28実測: 同窓で日次73巻 vs 逆照合~940巻)。この逆方向照合(継続中頁→楽天題検索)を
+  後方の安全網として常設する。
+  --build-queue = queueを本番索引から再算出(status=連載中/休載の全頁を統一queue化。旧2分割を廃止)。
+    既存の走行結果(.cache/recent-ongoing-volumes.jsonl)は .cache/zokkan-cycles/ へ日付付きrotate=次周回開始。
+  運転(Sonnet)= --limit 200 を1バッチに再起動で続き。queue枯れ=一巡完了(自然停止)。
+  ★収集のみ。登録(種4)は scripts/_zokkan-register.py = 上位モデル専権(ゲート+GO運用)。
 """
 import argparse
 import importlib.util
@@ -39,10 +48,51 @@ _c.loader.exec_module(C)          # norm / volnum / same_series / NOISE / author
 L = C.L
 
 
+def build_queue():
+    """本番索引から queue を再算出(連載中+休載の全頁)。走行結果は日付rotateして次周回へ。"""
+    import time
+    import yaml
+    idx = json.load((ROOT / "data" / "manga-list-index.json").open(encoding="utf-8"))
+    fl = idx["f"]
+    SI, TI, ST = fl.index("slug"), fl.index("title"), fl.index("status")
+    targets = [(str(r[SI]), str(r[TI])) for r in idx["d"] if str(r[ST]) in ("ongoing", "hiatus")]
+    rows = []
+    for slug, title in targets:
+        p = ROOT / "data" / "manga.v2" / f"{slug}.yml"
+        if not p.exists():
+            continue  # slug≠ファイル名(夜明け型)は少数=次周回に譲る
+        d = yaml.safe_load(p.open(encoding="utf-8")) or {}
+        vols = set()
+        years = []
+        for e in d.get("editions") or []:
+            for v in e.get("volumes") or []:
+                if isinstance(v.get("number"), int):
+                    vols.add(v["number"])
+                rd = str(v.get("release_date") or "")
+                if rd[:4].isdigit():
+                    years.append(rd[:4])
+        if not vols:
+            continue
+        aus = [a.get("name") for a in (d.get("authors") or []) if a.get("name")]
+        rows.append({"slug": slug, "title": title, "authors": aus,
+                     "vols": sorted(vols), "last_year": max(years) if years else ""})
+    if OUT.exists():
+        arc = ROOT / ".cache" / "zokkan-cycles"
+        arc.mkdir(parents=True, exist_ok=True)
+        OUT.rename(arc / f"recent-ongoing-volumes-{time.strftime('%Y%m%d')}.jsonl")
+        print(f"前周回の結果を {arc} へrotate")
+    json.dump(rows, SRC.open("w", encoding="utf-8"), ensure_ascii=False)
+    print(f"queue再算出: {len(rows)}作(連載中/休載) → {SRC}")
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--limit", type=int, default=0)
+    ap.add_argument("--build-queue", action="store_true", help="queueを本番索引から再算出+前周回rotate")
     a = ap.parse_args()
+    if a.build_queue:
+        build_queue()
+        return
 
     rows = json.load(SRC.open(encoding="utf-8"))
     done = set()
