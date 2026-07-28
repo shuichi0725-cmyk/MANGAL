@@ -195,6 +195,9 @@ def main():
     _si, _yi = idx["f"].index("slug"), idx["f"].index("year_started")
     used = {r[_si] for r in idx["d"]}
     prod_year = {r[_si]: r[_yi] for r in idx["d"] if r[_yi]}
+    # ★同著者ゲート用(2026-07-28 HxH事故): 本番slug→著者文字列(空白除去)。衝突時の同著者検査に使う
+    _ai = idx["f"].index("authors")
+    prod_authors = {r[_si]: re.sub(r"[\s　]", "", str(r[_ai] or "")) for r in idx["d"]}
     # ★自己衝突を避ける: 前回このスクリプトが作った源頁(=今回の対象と同じ _skey)は
     #   「既存slug」に数えない(再実行で自分の出力と衝突扱いになり保留が増える 2026-07-25)。
     _mine = set()
@@ -211,8 +214,12 @@ def main():
     #   2026-07-26 実害: ISBN照合だけでは、既存源頁があっても種2側にISBNが無い/
     #   本番索引が古い場合に素通りし、同一作品の頁を2つ作ってしまった(48件)。
     #   例) デビルマンG = devilman-g(既存) と devilman-gurimowaaru(新) の二重頁。
+    # ★SRC(source-pages自身)も必ず含める(2026-07-28 ハンター×ハンター事故の穴1):
+    #   旧実装はSRC自身を見ておらず、やり直しでslug決定方式が変わると同じ_skeyの頁が
+    #   新slugでもう1枚生成され、旧slug版が残骸として本番二重頁化した(145組)。
+    #   同じ_skeyの源頁が既に在る=頁化済み。意図的な再生成は旧ファイルを消してから。
     existing_skey = set()
-    for _d in (SRC_LEGACY, ROOT / "data" / "seeds" / "preorder-pages"):
+    for _d in (SRC, SRC_LEGACY, ROOT / "data" / "seeds" / "preorder-pages"):
         if not _d.is_dir():
             continue
         for _f in _d.glob("*.yml"):
@@ -341,6 +348,21 @@ def main():
             continue
         slug = base
         if slug in used:
+            # ★同著者ゲート(2026-07-28 ハンター×ハンター事故の穴2): slug衝突した既存頁が
+            #   **同著者**なら同一作品の別クラスタ疑い(MADB別ID再登録型。真の同名別作品は
+            #   著者が違うのが通例=中華一番型)。-姓+年 を付けて登録せず**保留=人の裁定**。
+            #   著者が確認できない時も保留(検査せず登録しない)。
+            _new_au = {re.sub(r"[\s　]", "", str(x)) for x in (db_authors.get(sid) or []) if x}
+            if not _new_au:
+                _it0 = rk_item or next((rk.get(ib) for ib, _, _ in vv if rk.get(ib)), None) or {}
+                _new_au = {re.sub(r"[\s　]", "", au["name"]) for au in _authors_from(_it0, ndl_creators, ndl_ck)}
+            _base_au = prod_authors.get(base, "")
+            if not _new_au or not _base_au:
+                hold.append((key, title, f"slug衝突(既存 {base}) 著者未確認=検査不能 → 登録せず保留"))
+                continue
+            if any(x and x in _base_au for x in _new_au):
+                hold.append((key, title, f"slug衝突×同著者(既存 {base}) = 同一作品の別クラスタ疑い(HxH型) → 裁定待ち"))
+                continue
             # ★衝突解決(2026-07-25 ユーザ裁定「基本は一番古いものを主版」):
             #   既存が古い → 既存が無印のまま / 新規に **-姓+発売年** を付ける。
             #   新規の方が古い場合は既存のrenameが要る=高コスト → 保留にして報告。
