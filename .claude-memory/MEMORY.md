@@ -148,3 +148,4 @@
 - [フィルムコミック=imprintだけがアニメ物の穴](film_comic_imprint_hole.md) — title/edition_typeの網をすり抜け45頁。ISBN除外は別刷りで無効
 - [【戒め】seed機械追記=「: 」必ずquote](seed_yaml_colon_quoting.md) — 未quoteでreflectするとsilent注入漏れ
 - [コンビニ判一掃=148drop/16hold](konbini_reprint_sweep.md) — 秋田トップW/Gコミ純頁。imprint一律drop不可(オリジナル実在)
+- [【残】手塚7頁空頁化(全集タブ空振り)](tezuka_tab_empty_pages.md) — 索引ガードで整合済み・頁修理=per-case。overrideを食うpass未特定
