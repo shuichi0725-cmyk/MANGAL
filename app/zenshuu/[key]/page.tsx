@@ -69,7 +69,9 @@ export default async function ZenshuuPage({ params }: { params: Promise<{ key: s
   if (!c) notFound();
 
   return (
-    <main className="pb-16 pt-3">
+    // ★PC幅是正(2026-07-29 ユーザ報告「全集ページがでかすぎる」): 他頁と同じ max-w-4xl に揃える。
+    //   表紙タイルは モバイル5列のまま / sm以上は7列→md8列 でタイルを詰める(全幅5列だと表紙が巨大化)。
+    <main className="mx-auto w-full max-w-4xl pb-16 pt-3">
       <nav className="px-3.5 pb-2 text-[10px] text-ink/55">
         <Link href="/">ホーム</Link> › <span>全集</span> › <b className="text-[var(--color-accent)]">{c.name}</b>
       </nav>
@@ -127,7 +129,7 @@ export default async function ZenshuuPage({ params }: { params: Promise<{ key: s
                   {w.vols.length}冊{w.vols.every((v) => v.nm) ? "・非漫画巻(特例掲載)" : ""}
                 </span>
               </div>
-              <div className="grid grid-cols-5 gap-1.5 px-3.5">
+              <div className="grid grid-cols-5 gap-1.5 px-3.5 sm:grid-cols-7 md:grid-cols-8">
                 {w.vols.map((v, j) => (
                   <VolCell key={j} v={v} />
                 ))}

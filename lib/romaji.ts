@@ -39,7 +39,15 @@ function foldNumerals(s: string): string {
   // ローマ数字(ASCII綴り): 英字に挟まれていない単独トークンのみ(ILLUSION等の語中は不変)。
   // 空白除去より前に呼ぶこと(境界が要る)。
   s = s.replace(/(?<![a-z])[ivx]{1,4}(?![a-z])/g, (m) => ROMAN_MAP[m] ?? m);
-  for (const [k, v] of KANA_NUMS) s = s.split(k).join(v);
+  for (const [k, v] of KANA_NUMS) {
+    s = s.split(k).join(v);
+    // ★ひらがな表記も同じに畳む(2026-07-28 ユーザ報告「検索が機能してない」の退行修正):
+    //   カナ数詞foldはかな→カナ畳み込みより前に走るため、カタカナ側だけ畳むと
+    //   「わんぴーす」(→わんぴいす)と題「ワンピース」(→1ぴいす)が二度と一致しなくなっていた。
+    //   クエリはひらがな入力が多い=対称に畳んで自己一致を回復する。
+    const hira = k.replace(/[ァ-ヶ]/g, (c) => String.fromCharCode(c.charCodeAt(0) - 0x60));
+    if (hira !== k) s = s.split(hira).join(v);
+  }
   s = s.replace(/[一二三四五六七八九〇零]/g, (c) => "12345678900"["一二三四五六七八九〇零".indexOf(c)]);
   return s;
 }

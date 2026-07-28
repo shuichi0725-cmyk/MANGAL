@@ -131,3 +131,21 @@ describe("数字表記揺れ折り畳み(2026-07-27 会議決定: ロザリオse
     expect(searchSlugs("7つの大罪", nums).has("nanatsu")).toBe(true);
   });
 });
+
+describe("かな数詞foldのひらがな対称性(2026-07-28 退行修正: わんぴーす事件)", () => {
+  const wp = [
+    { slug: "one-piece", title: "ONE PIECE", title_kana: "ワンピース",
+      authors: [{ name: "尾田栄一郎", kana: "オダエイイチロウ" }] },
+    { slug: "five-star-stories", title: "ファイブスター物語", title_kana: "ファイブスターストーリーズ",
+      authors: [{ name: "永野護", kana: "ナガノマモル" }] },
+  ] as unknown as MangaListItem[];
+  it("ひらがな「わんぴーす」でワンピースが当たる(カナ数詞foldの非対称退行の再発防止)", () => {
+    expect(searchSlugs("わんぴーす", wp).has("one-piece")).toBe(true);
+  });
+  it("カタカナ「ワンピース」も従来どおり", () => {
+    expect(searchSlugs("ワンピース", wp).has("one-piece")).toBe(true);
+  });
+  it("ひらがな「ふぁいぶすたー」でファイブスター物語が当たる", () => {
+    expect(searchSlugs("ふぁいぶすたー", wp).has("five-star-stories")).toBe(true);
+  });
+});
