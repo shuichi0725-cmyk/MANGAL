@@ -5,7 +5,7 @@ metadata:
   node_type: memory
   type: project
   originSessionId: a2ed548f-4b21-42ea-9ad0-229054bf2d45
-  modified: 2026-07-28T16:21:04.927Z
+  modified: 2026-07-28T16:31:45.242Z
 ---
 
 D・N・A²分裂(2026-07-07 ユーザ発見)を機に系統検出→一括是正を開始。**全部やる**([[feedback_no_popularity_priority]])。
@@ -45,7 +45,10 @@ D・N・A²分裂(2026-07-07 ユーザ発見)を機に系統検出→一括是�
 - 分割365block追記(R5系354+flip11)。★R5判定器が既知override3件(O2/ダイヤ外伝/西風)を**再びDEDUP判定**した=判定器はoverride履歴を知らない。目視で却下しflip9群(できるかなリターンズ/GP天国クラシック/Compiler/みこすり編別/ヤマト映画別/こわい本影)をSPLITへ
 - ★特攻の拓ペア=drop候補側に固有ISBN3本(After Decade?)→dedup禁止・per-case送り
 - ★★**事故と教訓**: `_isbn-dup-apply.py`は**引数無視で即実行**(--helpで走った)。目視前に叩くな。seed書込のみでreflect前だったためgit checkoutで完全復旧
-- ★★**残145ペアの正体=blockが効かない層**: 楳図こわい本等、R4/R8でsid-pair blockを入れても頁のISBN共有が消えない。sid-pairでないmerge経路(qid merge/find_relatedの橋渡しsid/種4)が束ねている疑い。次ラウンドは「blockが効かない理由」のpromote merge機構調査から(=最後の難所の本体)
+**済(R9 2026-07-29)**: ★「blockが効かない」の根因解明=**carrier未遮断**。共有本は第三のクラスタ(carrier、例: ゾクこわい本122396)が運び、頁mainとのペアblockだけでは切れない(blockはmain×候補の対でしか効かない=promote L1949)。
+- **R9=carrier遮断**: 残ペアの共有ISBN→種2本籍sid(carrier)を逆引き→**題が正規化不一致のmainからblock**(R7本籍遮断と同原理・題一致=自分の表記揺れ断片は遮断しない)。72block追加→**145→62ペア**(開始297から79%減)
+- 検証=巻数before/after全数: 0巻化なし。こわい本各編10→1冊/本気!破門編75→6/バキ最凶死刑囚編31→7/弱虫逃避行編30→3等=**R8のflip9組(編頁worklist)が自然解決**。特攻の拓も固有3巻だけ残り解消
+- **残62ペアの正体(真の最終層)**: ①両クラスタが同じISBNのコピーを持つ型(狼の口8→4=半分だけ解消・残りはdedup裁定要) ②別著者同題(ザ・コンバット等=R8 review組) ③src _skey無しでsid解決不可7stem(9番目のムサシ/人魚シリーズ/手塚シナリオ集等) — 全部per-case
 続きのトリガー=「ISBNダブリの続き」。
 
 **注意**: AUTO の canonical 選定はメタ充実度優先のため、slug が汚い方(無分かちローマ字長串)が残った群がある(呪具師/レンガ城等)。slug品質是正は別軸(slug-fix ラウンド)で。誤merge厳禁=集合完全一致以外は必ず外部確証([[merge_needs_external_proof]])。
