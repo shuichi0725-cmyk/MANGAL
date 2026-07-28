@@ -1,0 +1,105 @@
+"""★連載中で最終巻が新しい作品の **末尾続刊 + 途中欠番** を楽天で一括点検(read-only)。
+
+背景(2026-07-28 ユーザ指摘の「彼女の友達」で発覚):
+  先行調査は「最終巻が2023年以前の3,367作」しか見ておらず、
+  ★**最終巻が2024年以降の連載中 7,719作が丸ごと未検査**だった。 実例:
+    - 白竜HADOU  当方48巻 / 実際49巻(2026-07) = 末尾の取りこぼし
+    - 彼女の友達  当方1,2,3,4,6巻 = **5巻が欠番** かつ **7巻(2026-07)も未取得**
+  つまりこの層は「末尾」と「途中欠番」の**両方**が起きる。 片方だけ見る検出器では拾えない。
+
+判定(先行調査で潰した誤検出型をそのまま継承):
+  ① size=コミック 必須      … ラノベ原作の小説巻を続刊と誤認しない
+  ② same_series ゲート     … 「白竜」に対する「白竜HADOU」等の続編シリーズを弾く
+  ③ セット/合本/分冊版 除外  … 既刊の詰め合わせ・電子の話売りを弾く
+  ④ 著者一致ゲート          … 同名別作を弾く
+
+出力2種:
+  TRAIL = 当方最大巻より大きい巻が実在(末尾の取りこぼし)
+  GAP   = 当方最大巻**以下**なのに当方に無い巻が実在(途中欠番)
+★取りこぼし方向にのみ誤る設計: 楽天に無い巻は「無い」と報告するだけで、当方に在る巻を消す判断はしない。
+
+resumable(1作ごとjsonl追記)。 rate=_lookup.py の gate(1.3秒/host)。
+usage: python scripts/_check-recent-ongoing-volumes.py [--limit N]
+出力: .cache/recent-ongoing-volumes.jsonl
+"""
+import argparse
+import importlib.util
+import json
+import sys
+from pathlib import Path
+
+sys.stdout.reconfigure(encoding="utf-8")
+ROOT = Path(__file__).resolve().parent.parent
+SRC = ROOT / ".cache" / "recent-ongoing.json"
+OUT = ROOT / ".cache" / "recent-ongoing-volumes.jsonl"
+
+_c = importlib.util.spec_from_file_location("chk", str(ROOT / "scripts" / "_check-ongoing-continuation.py"))
+C = importlib.util.module_from_spec(_c)
+_c.loader.exec_module(C)          # norm / volnum / same_series / NOISE / author_ok を共用
+L = C.L
+
+
+def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--limit", type=int, default=0)
+    a = ap.parse_args()
+
+    rows = json.load(SRC.open(encoding="utf-8"))
+    done = set()
+    if OUT.exists():
+        for ln in OUT.open(encoding="utf-8"):
+            try:
+                done.add(json.loads(ln)["slug"])
+            except Exception:
+                pass
+    todo = [r for r in rows if r["slug"] not in done]
+    if a.limit:
+        todo = todo[: a.limit]
+    print(f"対象 {len(rows):,} / 既済 {len(done):,} / 今回 {len(todo):,} "
+          f"(推定 {len(todo) * 1.3 / 60:.0f}分)", flush=True)
+
+    env = L._env()
+    ntr = ngp = 0
+    with OUT.open("a", encoding="utf-8") as f:
+        for i, r in enumerate(todo, 1):
+            have = set(r["vols"])
+            mv = max(have) if have else 0
+            trail, gap, trunc = [], [], False
+            try:
+                items = L.rakuten_live_retry(env, title=r["title"], hits=30) or []
+                trunc = len(items) >= 30          # ★30件上限に当たった=長期連載は取りこぼしうる
+                for it in items:
+                    t, au = str(it.get("title") or ""), str(it.get("author") or "")
+                    if str(it.get("size") or "") != "コミック":
+                        continue
+                    if not C.author_ok(r["authors"], au):
+                        continue
+                    if not C.same_series(r["title"], t):
+                        continue
+                    if C.NOISE.search(t):
+                        continue
+                    v = C.volnum(t)
+                    if v is None:
+                        continue
+                    rec = {"vol": v, "isbn": it.get("isbn"), "date": it.get("salesDate"), "title": t[:60]}
+                    if v > mv:
+                        trail.append(rec)
+                    elif v not in have:
+                        gap.append(rec)
+            except Exception as e:
+                print(f"    ✗ {r['slug']} {str(e)[:60]}", flush=True)
+            if trail:
+                ntr += 1
+            if gap:
+                ngp += 1
+            f.write(json.dumps({"slug": r["slug"], "title": r["title"], "our_max": mv,
+                                "our_vols": sorted(have), "trail": trail, "gap": gap,
+                                "truncated": trunc}, ensure_ascii=False) + "\n")
+            f.flush()
+            if i % 200 == 0:
+                print(f"  {i:,}/{len(todo):,}  末尾{ntr:,} / 欠番{ngp:,}", flush=True)
+    print(f"\n完了 {len(todo):,}作 / ★末尾続刊あり {ntr:,} / ★途中欠番あり {ngp:,} → {OUT}")
+
+
+if __name__ == "__main__":
+    main()
