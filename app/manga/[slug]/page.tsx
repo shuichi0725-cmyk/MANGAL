@@ -14,6 +14,9 @@ import { coverUrl } from "@/lib/schema";
 import { jaGenre, jaTag } from "@/lib/anilist-i18n";
 
 export function generateStaticParams() {
+  // ★機能蒸留ビルド(コードのみ本番反映= _deploy-feature.py): 漫画詳細66kは生成しない。
+  //   placeholder 1頁のみ(= 同期側で manga/** は除外されるので本番に出ない)。
+  if (process.env.MANGAL_FEATURE_BUILD === "1") return [{ slug: "_empty" }];
   const slugs = loadAllManga().manga.map((m) => ({ slug: m.slug }));
   // empty state (= データ準備中) でも build を通すための placeholder。
   // detail page 側で `manga not found` → 404 にフォールバックする。
