@@ -74,17 +74,9 @@ def main() -> int:
         return 2
     family = sys.argv[1]
     back = int(sys.argv[2]) if len(sys.argv) > 2 else 0
-    prefix = FAMILY_PREFIX[family]
-    proj = _latest.project_dir()
-    files = sorted(glob.glob(os.path.join(proj, "*.jsonl")), key=os.path.getmtime, reverse=True)
-    hits = []
-    for p in files:
-        data = _latest.tail(p)
-        m = _latest.last_model(data or "")
-        if m and m.startswith(prefix):
-            hits.append(p)
-            if len(hits) > back:
-                break
+    # ★並びは _session-latest.candidates = 会話の実時刻(最後のassistant発言ts)順。
+    #   mtime順は「開いただけで最新化」するため廃止(2026-07-28b)。
+    hits = [p for _ts, p, _used in _latest.candidates(family)]
     if len(hits) <= back:
         print(f"[{family}] {back}個前のセッションが見つからない (該当{len(hits)}件)", file=sys.stderr)
         return 1
