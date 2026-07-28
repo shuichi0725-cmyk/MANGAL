@@ -59,6 +59,19 @@ def main():
         die(f"out/manga = {n:,} < {MIN_PAGES:,}(欠損ビルド疑い。頁数×2≈132kが正常)")
     print(f"  OK   ビルド完了(out/manga {n:,} files・log正常)")
 
+    # 1.5 ★索引⊆生成頁の実測照合(2026-07-29 ユーザ発見「作品数がズレてる」の恒久ゲート):
+    #   一覧索引に載るslugのHTMLが out/manga に無い=「検索に出るのに404」。過去3回再発した型
+    #   ([[search_404_build_skip_validation]])なので、件数でなく集合差そのものをFAIL条件にする。
+    _idx_p = os.path.join(ROOT, "data", "manga-list-index.json")
+    _idx = json.load(open(_idx_p, encoding="utf-8"))
+    _si = _idx["f"].index("slug")
+    _out_slugs = {f[:-5] for f in os.listdir(out_manga) if f.endswith(".html")}
+    _missing = sorted({str(r[_si]) for r in _idx["d"]} - _out_slugs)
+    if _missing:
+        die(f"索引に居るのに未生成 {len(_missing)}頁(=検索に出るのに404): {_missing[:8]}"
+            f"{' …' if len(_missing) > 8 else ''}(ビルドskipと索引ガードの不整合。両方を揃えてから再実行)")
+    print(f"  OK   索引⊆生成頁(索引 {len(_idx['d']):,} 行すべてHTMLあり)")
+
     # 2. sitemap
     if os.path.exists(os.path.join(ROOT, "out", "sitemap.xml")):
         print("  OK   sitemap.xml あり")

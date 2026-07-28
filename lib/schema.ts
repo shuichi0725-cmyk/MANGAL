@@ -38,7 +38,9 @@ export const CreditSchema = z.object({
 export type Credit = z.infer<typeof CreditSchema>;
 
 export const VolumeSchema = z.object({
-  number: z.number().int().min(1),
+  // ★0巻は実在する(前日譚の商業化等。可哀想な君は僕だけの甘やかな傷(0)=楽天題も(0)。
+  //   2026-07-29: min(1)が0巻頁をビルドskipさせ「索引に居るのに404」の一因になった)
+  number: z.number().int().min(0),
   /** 巻ラベル (= 「上」「下」「特装版」等、 数字以外の表示文字。 既定 `第${number}巻` を上書きする) */
   volume_label: z.string().optional(),
   /** 巻の個別題 (= 単巻読切の連番シリーズ統合頁で 「副題(著者)」 を巻詳細に表示。 ソーサリアン型) */

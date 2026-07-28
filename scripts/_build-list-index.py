@@ -154,6 +154,12 @@ for f in _files:
     # ★genre空は許容(2026-07-06 予約新作=捏造しない合意。master外キーのみ拒否)
     if any(g not in genreKeys for g in gs): skipped += 1; continue
     eds = d.get("editions") or []
+    # ★Zod整合(2026-07-29 ユーザ発見「作品数がズレてる」の恒久修正): lib/schemaは
+    #   「editions≥1 かつ 各editionのvolumes≥1」を要求し、違反頁はビルドskip=404になる。
+    #   索引だけ許すと「検索に出るのに404」8頁+ホーム/browseの件数ズレが生まれた
+    #   (07-21手塚全集タブ作業の空頁化7件+0巻)。同じ基準でここでも弾く。
+    if not eds or any(not (e.get("volumes") or []) for e in eds):
+        skipped += 1; continue
     tv = sum(len(e.get("volumes") or []) for e in eds)
     maxev = max((len(e.get("volumes") or []) for e in eds), default=0)
     # ★1冊しか無いのに その巻が1巻でない(= 統合失敗/取りこぼしの signal。 おーばーふろぉ[8]型)
