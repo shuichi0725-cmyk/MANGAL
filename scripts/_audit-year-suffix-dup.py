@@ -11,6 +11,9 @@ manga.v2 の ISBN交差と源頁の _skey で3分類:
   REDO_LEFTOVER  = 同一_skey(頁化やり直しで旧slug版が残った残骸) → 機械削除可
   CLUSTER_SPLIT  = _skey相違+ISBN交差(MADB別ID再登録/表記揺れ分裂)   → per-case統合
   NO_OVERLAP     = ISBN交差ゼロ(外伝/第2部/〇〇編=概ね正当な別頁)     → 報告のみ
+  FILE_MISSING   = slug名のファイルがmanga.v2に無い=★夜明け型(ファイル名≠slug)が大半。
+                   幽霊と即断せずgrepで実体を逆引きして手動裁定(2026-07-28: 3件とも実体あり。
+                   私立極道高校2011=題に年が入った正当別作/湘南グラフティ・トロッキー=交差0の分裂疑い)
 出力 = docs/production-diagnostics/year-suffix-dup.tsv
 入口側ゲート = _torikoboshi-genpages.py(同_skey既出skip+同著者衝突hold 2026-07-28)。
 月次サニティ: 取込後に走らせ、REDO_LEFTOVER/CLUSTER_SPLIT の新規増加=ゲートすり抜けsignal。
