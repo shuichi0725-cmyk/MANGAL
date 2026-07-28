@@ -145,7 +145,11 @@ def main():
             if os.path.exists(src):
                 shutil.copyfile(src, os.path.join(FEATDATA, f))
         shutil.copytree(os.path.join(ROOT, "data", "seeds"), os.path.join(FEATDATA, "seeds"))
-        ab = os.path.join(ROOT, "data", "art-books.v2")
+        # ★art-books は週次と同じ data/art-books(=公開済み状態)を使う。art-books.v2 は作業中の
+        #   新規(検証未通過あり得る)が混ざる=データ凍結原則にも反する(2026-07-28実踏: 空kanaでZod落ち)。
+        ab = os.path.join(ROOT, "data", "art-books")
+        if not os.path.isdir(ab):
+            ab = os.path.join(ROOT, "data", "art-books.v2")
         if os.path.isdir(ab):
             shutil.copytree(ab, os.path.join(FEATDATA, "art-books"))
         linked, missing_local = 0, 0
@@ -165,6 +169,8 @@ def main():
         # --- 2. ビルド(漫画詳細スキップ) ---
         print(f"機能ビルド開始(MANGAL_FEATURE_BUILD=1)… log={BUILD_LOG}", flush=True)
         benv = dict(os.environ, MANGAL_DATA_DIR=FEATDATA, MANGAL_FEATURE_BUILD="1")
+        # ★Nodeヒープ上限(既定~4GB)ではコンパイル段でOOM死(2026-07-28実踏)。週次と同じ12GBを既定に。
+        benv.setdefault("NODE_OPTIONS", "--max-old-space-size=12288")
         t0 = time.time()
         with open(BUILD_LOG, "w", encoding="utf-8") as lf:
             r = subprocess.run(["npx.cmd", "next", "build"], cwd=ROOT, env=benv,

@@ -28,10 +28,12 @@ python scripts/_deploy-feature.py --dry
 # 2) 本番反映
 python scripts/_deploy-feature.py
 
-# ビルド~数十分 → ★デタッチ起動+ログ監視(ツールrun_in_backgroundは~10分で親ごとkill)
-#   .cache/_featdeploy.ps1: python scripts/_deploy-feature.py *> .cache/featdeploy.log
-#   Start-Process powershell -ArgumentList "-NoProfile","-File",".cache\_featdeploy.ps1" -WindowStyle Hidden
-#   進捗= .cache/feature-build.log(next build) と .cache/featdeploy.log
+# 実測(2026-07-28 --dry初走): staging~1分+build 8.1分+同期計画 ≈ 全行程~15分
+# ビルドが10分超のため ★デタッチ起動+ログ監視(ツールrun_in_backgroundは~10分で親ごとkill)
+#   .cache/_featdeploy.ps1: [Console]::OutputEncoding=[Text.Encoding]::UTF8; Set-Location "<repo>"; python scripts/_deploy-feature.py *> .cache\featdeploy.log
+#   ★ArgumentListは1文字列+ps1パスを引用符で(要素分割渡しは空白パス"chiba shuichi"で-Fileが分断され無音死。2026-07-28実踏):
+#   Start-Process powershell -ArgumentList '-NoProfile -ExecutionPolicy Bypass -File "C:\Users\chiba shuichi\code\MANGAL\.cache\_featdeploy.ps1"' -WindowStyle Hidden
+#   進捗= .cache/feature-build.log(next build) と .cache/featdeploy.log(UTF-8=Get-Content -Encoding UTF8)
 # 直前のfeatビルドを使い回して同期だけ: --skip-build
 ```
 
