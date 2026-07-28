@@ -147,3 +147,4 @@
 - [【未決】本番R2に孤児HTML1,041頁](r2_orphan_pages_prune_missing.md) — r2-syncは--prune無し=dropしても公開され続ける
 - [フィルムコミック=imprintだけがアニメ物の穴](film_comic_imprint_hole.md) — title/edition_typeの網をすり抜け45頁。ISBN除外は別刷りで無効
 - [【戒め】seed機械追記=「: 」必ずquote](seed_yaml_colon_quoting.md) — 未quoteでreflectするとsilent注入漏れ
+- [コンビニ判一掃=148drop/16hold](konbini_reprint_sweep.md) — 秋田トップW/Gコミ純頁。imprint一律drop不可(オリジナル実在)
