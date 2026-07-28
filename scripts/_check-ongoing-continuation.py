@@ -48,6 +48,22 @@ VOLPAT = re.compile(r"[（(]\s*(\d{1,3})\s*[）)]|第\s*(\d{1,3})\s*巻|\s(\d{1,
 NOISE = re.compile(r"セット|ｾｯﾄ|全巻|合本|まとめ買い|分冊版|話売り|\bbox\b|BOX|コミックセット", re.I)
 
 
+
+# ★「題の包含」だけでは **続編シリーズ**を拾ってしまう(2026-07-28 ユーザ指摘の白竜で発覚)。
+#   当方「白竜」に対し楽天が「白竜HADOU (49)」= 別シリーズを返し 21→49巻の巨大な欠落に見えた。
+#   対策 = 相手題から当方題を除いた**残りが巻表記だけ**であることを要求する。
+#   OK: 「カードキャプターさくら クリアカード編(16)」-「…クリアカード編」= "(16)"
+#   NG: 「白竜HADOU (49)」-「白竜」= "hadou(49)"  ← 語が残る = 別シリーズ
+RESIDUAL_OK = re.compile(r"^[0-9()\[\]#巻第上中下:：]*$")
+
+
+def same_series(base: str, found: str) -> bool:
+    b, f = norm(base), norm(found)
+    if b not in f:
+        return False
+    return bool(RESIDUAL_OK.fullmatch(f.replace(b, "", 1)))
+
+
 def volnum(t: str):
     m = VOLPAT.search(unicodedata.normalize("NFKC", str(t or "")))
     if not m:
@@ -111,9 +127,16 @@ def main():
                         if not author_ok(r["authors"], au):
                             continue
                         # 題の同一性(当方題が相手題に含まれる)を要求 = 別作品を弾く
-                        if norm(r["title"]) not in norm(t):
+                        if not same_series(r["title"], t):
                             continue
                         if NOISE.search(t):
+                            continue
+                        # ★楽天 size で **漫画だけに絞る**(2026-07-28 ユーザ指摘で発覚)。
+                        #   ラノベ原作物は同題・同著者(原作者)で小説が並び、巻数が漫画より遥かに多い。
+                        #   例=「痛いのは嫌なので防御力に極振りしたいと思います。」漫画8巻(size=コミック/
+                        #   作画おいもとじろう) に対し 小説18巻(size=単行本/夕蜜柑)。 著者ゲートは原作者名が
+                        #   両方に載るため素通りする → **size=コミック を必須**にしないと小説巻数を続刊と誤認する。
+                        if str(it.get("size") or "") != "コミック":
                             continue
                         v = volnum(t)
                         y = str(it.get("salesDate") or "")[:4]
@@ -130,7 +153,7 @@ def main():
                         au = " ".join(x.get("creators") or [])
                         if not author_ok(r["authors"], au):
                             continue
-                        if norm(r["title"]) not in norm(t):
+                        if not same_series(r["title"], t):
                             continue
                         if NOISE.search(t):
                             continue
