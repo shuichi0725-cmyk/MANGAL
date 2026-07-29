@@ -93,49 +93,9 @@ export default {
       return new Response(null, { status: 204, headers: CORS });
     }
 
+    // (旧/go 302中継と/go-test実験頁は2026-07-29撤去: App Links奪取は最終URLパスで決まり
+    //  中継無関係と実機確定→ボタンは/dp直リンク化で中継不要に。経緯=記憶kindle-link-browser-not-app)
     // ★いいねAPI(匿名カウンタ・PIIゼロ。 KV=LIKES)。 静的配信より前・キャッシュしない。
-    // ★/go = Kindle等のブラウザ中継(2026-07-07 本実装): Amazonアプリ(IAP規約でKindle購入不可)への
-    //   App Links/Universal Links発火を避けるため、自ドメインの中間ページからJSで遷移させる。
-    //   オープンリダイレクタ防止: amazon.co.jp / amzn.to のみ許可。
-    if (url.pathname === "/go") {
-      // ★302サーバーリダイレクト方式(2026-07-29 実測確定): 旧実装のJS遷移(location.replace)は
-      //   タップ由来のナビゲーション連鎖と見なされ Amazon の App Links がアプリを起動してしまう
-      //   (Amazonアプリ内ではKindleを購入できない)。マンバ(/stores/kindle)の実装を解剖した結果、
-      //   自ドメインからの**サーバー302**はApp Linksを発火させずブラウザ内で開くことを確認。
-      //   楽天hb.afl(302中継)が最初からブラウザで開けていたのも同じ理屈。
-      let dest = "";
-      try { dest = decodeURIComponent(url.searchParams.get("u") || ""); } catch {}
-      let ok = false;
-      try {
-        const t = new URL(dest);
-        ok = t.protocol === "https:" && [
-          "www.amazon.co.jp", "amazon.co.jp", "amzn.to",
-          "books.rakuten.co.jp", "hb.afl.rakuten.co.jp", "shopping.yahoo.co.jp",
-        ].includes(t.hostname);
-      } catch {}
-      if (!ok) return new Response("bad destination", { status: 400 });
-      return new Response(null, {
-        status: 302,
-        headers: { location: dest, "cache-control": "no-store", "x-robots-tag": "noindex" },
-      });
-    }
-    // ★/go-test = App Links実機検証ページ(2026-07-29 一時設置・確定後撤去可)。
-    //   実測: /dp/=ブラウザ・/s=アプリに奪われる(302か直かは無関係) → 奪われない検索パスを探す。
-    if (url.pathname === "/go-test") {
-      const q = encodeURIComponent("ONE PIECE 1");
-      const tag = "tag=mangal08-22";
-      const A = `https://www.amazon.co.jp/s?k=${q}&i=digital-text&${tag}`;
-      const B = `https://www.amazon.co.jp/gp/search?ie=UTF8&keywords=${q}&index=digital-text&${tag}`;
-      const C = `https://www.amazon.co.jp/s/?field-keywords=${q}&url=search-alias%3Ddigital-text&${tag}`;
-      const D = `https://www.amazon.co.jp/dp/4088725093?${tag}`;
-      const go = (u) => `/go?u=${encodeURIComponent(u)}`;
-      const row = (label, href) =>
-        `<p><a href="${href}" target="_blank" rel="noopener" style="display:block;padding:12px;background:#eee;border-radius:8px;text-decoration:none">${label}</a></p>`;
-      const html = `<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex"><title>go-test</title><body style="font-family:sans-serif;max-width:480px;margin:20px auto;padding:0 12px"><h3>Amazonリンク実験(どれがブラウザで開くか)</h3>${row("① /s 検索(現行=アプリになる想定)", go(A))}${row("② /gp/search 検索", go(B))}${row("③ /s/ 旧形式検索", go(C))}${row("④ /dp/ 商品直(ブラウザになる想定)", go(D))}${row("⑤ ②の直リンク(302なし)", B)}<p style="color:#888">タップ→開き先がブラウザかアプリかをメモして戻ってください</p></body>`;
-      return new Response(html, {
-        headers: { "content-type": "text/html; charset=utf-8", "cache-control": "no-store", "x-robots-tag": "noindex" },
-      });
-    }
     if (url.pathname === "/api/like" && env.LIKES) {
       if (request.method === "GET") {
         const id = url.searchParams.get("id") || "";
