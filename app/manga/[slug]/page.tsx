@@ -5,6 +5,7 @@ import CoverImage from "@/components/CoverImage";
 import RelatedWorks, { computeRelated } from "@/components/RelatedWorks";
 import ShareButtons from "@/components/ShareButtons";
 import VolumeRow from "@/components/VolumeRow";
+import ColorEditionNote from "@/components/ColorEditionNote";
 import ArtBookCard from "@/components/ArtBookCard";
 import Badge from "@/components/ui/Badge";
 import { ChipLink } from "@/components/ui/Chip";
@@ -370,6 +371,9 @@ export default async function MangaDetailPage({
           <ShareButtons title={manga.title} url={`${SITE}/manga/${manga.slug}`} />
 
           <RelatedWorks items={related} />
+
+          {/* 電子カラー版(Kobo)。データ=public/data/color-editions.json(クライアントfetch=頁再生成不要) */}
+          <ColorEditionNote slug={manga.slug} />
 
           <VolumeRow manga={manga} />
 

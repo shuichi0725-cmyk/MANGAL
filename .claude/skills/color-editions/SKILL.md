@@ -1,0 +1,52 @@
+---
+name: color-editions
+description: カラー版して/カラー版続けて=電子カラー版柱(Koboハーベスト→照合seed→頁ストリップ+一覧)。電子続巻して=紙が止まり電子だけ進む作品の検出。試し読み結線も本柱
+---
+
+# 電子カラー版柱 (= 2026-07-30 新設。トリガー「カラー版して」「カラー版続けて」「電子続巻して」)
+
+電子書籍にしかない**カラー版**を収集し、作品頁に「🎨 電子カラー版 全N巻」ストリップと
+一覧 `/color-manga` を出す柱。[[ebook_only_editions_out_of_scope]] の「将来柱」の実体化。
+
+## パイプライン (= この順で回す)
+
+```
+1. python scripts/_kobo-color-harvest.py     # Kobo「カラー版」×コミック全冊(~6分・全上書き可)
+2. python scripts/_color-editions-build.py   # 束ね→本番照合→seed+public JSON+unmatched TSV
+3. python scripts/_color-tameshiyomi.py --limit 30   # BookLive title_id収集(③試し読み・resumable)
+4. (3の後) 2を再実行 → JSON の b に結線
+5. commit+push(テスト環境)。本番=機能蒸留 or 週次(public/data/color-editions.json + チャンク)
+```
+
+## データの居場所
+
+| 何 | どこ |
+|---|---|
+| 生harvest | .cache/kobo-color-raw.jsonl (再引き直し可・git外) |
+| 確定seed | data/seeds/color-editions.yml (build全置換生成) |
+| 頁表示用 | public/data/color-editions.json = {slug:{v巻数,u楽天affURL,c表紙,t表示題,b=BookLive title_id}} |
+| 試し読みseed | data/seeds/color-tameshiyomi.jsonl (**純粋追記のみ**・buildが読む) |
+| 未照合queue | docs/production-diagnostics/color-editions-unmatched.tsv (AI裁定→照合改善) |
+| 表示 | components/ColorEditionNote.tsx(頁ストリップ・クライアントfetch=頁再生成不要) + app/color-manga(一覧) |
+
+## 照合の鉄則 (= 同題decoy対策。巻抜けfill 2026-07-29 の教訓)
+
+- 残差題完全一致(norm)+★**著者ゲート**(交差ゼロは採用しない→unmatched行き)
+- 分冊版/単話/合本/セット/期間限定 はノイズ除外
+- Kobo APIは1クエリ3,000件上限 → sort=±releaseDate の2パスunion(harvest実装済)
+- レート1.3秒/req・Referer/Origin必須([[external_data_access]])
+
+## 電子続巻(相方の柱・「電子続巻して」)
+
+```
+python scripts/_kobo-dcont-harvest.py --limit 50   # ongoing作をlatest降順に走査(resumable)
+```
+- Kobo最大巻>紙最大巻 → docs/production-diagnostics/kobo-digital-continuation.tsv に候補。
+- ★**報告層のみ・自動seed化禁止**(Koboの採番は新装版でズレる。採用は個別裁定=だろう運転禁止)。
+- 全ongoing走査は長時間=アイドル枠で回す。429/失敗=中断→同コマンド再実行で再開。
+
+## 試し読み(③)の鉄則 (= tameshiyomi-harvest と同基準)
+
+- 採用=結果題がカラー版display題とnorm完全一致 かつ bviewer HEAD200 のみ。曖昧=保留(.cache/color-tame-holds.tsv)
+- TinyFishは無料枠のみ・1回100件まで。title_idの推測/連番生成は絶対禁止
+- URL生成: 試し読み=booklive.jp/bviewer/s/?cid=<title_id>_001 / 購入=…/title_id/<id>/vol_no/001
