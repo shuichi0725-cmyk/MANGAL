@@ -205,20 +205,18 @@ export default function VolumeCoverflow({
   if (n === 0) return null;
   const cur = vols[sel];
   const links = searchLinks(title, cur);
-  // ★電子書籍で買う(2026-07-29 ユーザ要望: 全巻まとめ買いを廃止し置換)。
-  //   Kindle/楽天Kobo とも「/go 中継 + JS遷移」でアプリでなく**ブラウザ**で開く
-  //   (スマホのストアアプリ内では電子書籍を購入できないため)。選択中の巻に連動。
-  // ★/go はWorkerの302中継(本番ドメイン固定)。previewから押してもWorkerを経由させる
-  //   (Pages側にはこのルートが無い+302サーバーリダイレクトでないとAmazonアプリに奪われる)。
+  // ★電子書籍で買う(2026-07-29 ユーザ要望: 全巻まとめ買いを廃止し置換)。選択中の巻に連動。
+  //   目的: アプリでなく**ブラウザ**で開く(ストアアプリ内では電子書籍を購入できないため)。
+  // ★実機検証確定(2026-07-29 /go-test): Amazonアプリ奪取の決め手は**最終URLのパス**。
+  //   検索(/s・/gp/search・/s/)は全形式アプリに奪われ、商品ページ(/dp/)だけブラウザで開く。
+  //   302中継(/go)の有無は無関係(=旧仮説のJS遷移/302対策はどちらも不要だった)。
+  //   電子版ASINはDBに無いため、Kindle=紙の/dp直リンク(=links.amazonと同じ)に飛ばし、
+  //   ページ内の形式切替「Kindle版」で電子へ(一度ブラウザで開けば以後のタップもブラウザ内)。
+  //   ISBN無し巻のみ検索fallback(アプリに開くが稀)。Kobo=楽天は検索でもブラウザで開くので検索のまま。
   const ebookQ = n > 1 ? `${title} ${cur.number}` : title;
-  const GO = "https://mangal-db.com/go?u=";
   const ebook = {
-    kindle: GO + encodeURIComponent(
-      amazonSearchUrl(ebookQ, AMZ_TAG).replace("i=stripbooks", "i=digital-text"),
-    ),
-    kobo: GO + encodeURIComponent(
-      rakutenAff(`https://books.rakuten.co.jp/search?sitem=${encodeURIComponent(ebookQ)}&g=101`),
-    ),
+    kindle: links.amazon,
+    kobo: rakutenAff(`https://books.rakuten.co.jp/search?sitem=${encodeURIComponent(ebookQ)}&g=101`),
   };
   const pub = [publisher, imprint].filter(Boolean).join(" / ");
 
@@ -366,7 +364,7 @@ export default function VolumeCoverflow({
            style={{ background: "linear-gradient(90deg,#3b2f78,#7a5cf0)" }}>
         <span className="block text-[15px] font-bold">📱 電子書籍で買う</span>
         <span className="block text-[11px] text-white/80">
-          {n > 1 ? `第${cur.number}巻を` : ""}対応ストアで(ブラウザで開きます)
+          {n > 1 ? `第${cur.number}巻を` : ""}ブラウザで開きます(Kindleは商品ページで「Kindle版」を選択)
         </span>
         <div className="mt-2 grid grid-cols-2 gap-2">
           <a href={ebook.kindle} target="_blank" rel="noopener noreferrer"

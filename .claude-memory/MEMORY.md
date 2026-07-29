@@ -78,7 +78,7 @@
 - [【✅】slug適用パイプライン](slug_apply_pipeline.md) — 69,004頁適用済。残=StageE/F
 - [【残】ジャンル品質改善4段](genre_quality_improvement.md) — タクソノミー増やさない ／ [【厳守】AIジャンル=master32のみ](ai_genre_closed_vocabulary.md) — closed vocabulary+provisional
 - [ジャンル不一致514全裁定](genre_disagree_adjudication_state.md) — essay/4koma 86適用・保留391=Gemini幻覚テンプレ注意・Web裏取り待ち
-- [【残】Kindleはブラウザで開く](kindle_link_browser_not_app.md) — 自ドメイン中継+JS遷移
+- [【✅】Kindleはブラウザで開く=解決](kindle_link_browser_not_app.md) — 決め手は最終URLパス(/dp=ブラウザ・検索=アプリ)。302/JS無関係
 - [【残】表示データ磨き](display_data_polish_tasks.md) — 著者重複/synonyms日本語等
 - [AniListリンク精度=解消済](anilist_link_quality.md) — 検証ゲートで裁定完了 ／ [AniListリンク検証 全✅](anilist_link_verification_plan.md) — SUSPECT0/FAIL0・recall+330・P8731全量。残=次promote反映
 - [MADBに完全版/新装版ほぼ無し](madb_missing_reprint_editions.md) — 補完=楽天題検索→種4
