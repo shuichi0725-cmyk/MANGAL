@@ -1,16 +1,22 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import CoverImage from "@/components/CoverImage";
 import LikeButton from "@/components/LikeButton";
-import { jstDayIndex, picksForDay, useSansedaiStock, personaName, PERSONA_BIOS } from "@/components/SansedaiDaily";
+import {
+  jstDayIndex,
+  picksForDay,
+  useSansedaiStock,
+  personaName,
+  PERSONA_BIOS,
+  type SansedaiEntry,
+} from "@/components/SansedaiDaily";
 
-/** 今日の一冊 過去ログ: ★三世代3人分/日をホームと同じ式(picksForDay)で再現。
- *  (2026-07-06 ユーザ指摘で1人分→3人分に復元)
- *  ★2026-07-30 改訂: コーナー開始日=2026-06-01 に固定し、月単位セクションで表示
- *  (当月のみ展開・過去月は折りたたみ)。14日打ち切りの平置きは廃止(長くなりすぎるため)。
- *  注: picksはstock(sansedai-stock.json)と式から決定的に再現するため、stock改版時は
- *  過去日の表示も現stockで引き直される(=ログの凍結保存ではない)。 */
+/** 今日の一冊 過去ログ(開始日=2026-06-01・月単位セクション)。
+ *  ★2026-07-30 凍結ログ方式(ユーザ裁定「一度表示した日は永久に固定。変わったら過去ログではない」):
+ *  過去日は public/data/sansedai-log.json(_gen-sansedai-log.py が stock改版前に純粋追記)を正とし、
+ *  未凍結の日(直近のビルド後に増えた日)だけホームと同じ式(picksForDay)でfallback表示する。 */
 
 const EPOCH_DAY = Date.UTC(2026, 5, 1) / 86400000; // 2026-06-01(JST) のdayIndex
 
@@ -18,9 +24,24 @@ function dateStrOf(dayIndex: number): string {
   return new Date(dayIndex * 86400000).toISOString().slice(0, 10);
 }
 
+type FrozenLog = Record<string, SansedaiEntry[]>;
+
+function useSansedaiLog(): FrozenLog | null {
+  const [log, setLog] = useState<FrozenLog | null>(null);
+  useEffect(() => {
+    fetch("/data/sansedai-log.json")
+      .then((r) => (r.ok ? r.json() : {}))
+      .then((d) => setLog(d))
+      .catch(() => setLog({}));
+  }, []);
+  return log;
+}
+
 export default function ArchiveClient() {
   const stock = useSansedaiStock();
-  if (!stock || stock.length === 0) return <p className="px-4 text-[13px] text-ink/60">読み込み中…</p>;
+  const log = useSansedaiLog();
+  if (!stock || stock.length === 0 || log === null)
+    return <p className="px-4 text-[13px] text-ink/60">読み込み中…</p>;
   const today = jstDayIndex();
   // 今日→2026-06-01 の全日を月ごとに束ねる(新しい月が先)
   const months: { key: string; label: string; days: number[] }[] = [];
@@ -61,8 +82,9 @@ export default function ArchiveClient() {
           </summary>
           <div className="space-y-3 px-3 pb-3">
             {m.days.map((day) => {
-              const picks = picksForDay(stock, day);
               const date = dateStrOf(day);
+              // ★凍結ログ優先。未凍結日のみ現stock+式でfallback(次のstock凍結で固定される)
+              const picks = log[date] ?? picksForDay(stock, day);
               return (
                 <div key={day} className="rounded-lg border border-[var(--color-line)] bg-[var(--color-surface-2)]/40 p-3">
                   <p className="text-[11px] font-bold text-ink/50">

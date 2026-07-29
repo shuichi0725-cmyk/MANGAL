@@ -23,6 +23,11 @@ for r in idx["d"]:
 
 os.makedirs(os.path.join(ROOT, "public", "data"), exist_ok=True)
 
+# ★stock改版の前に、旧stockで表示された日を凍結ログへ固定する(2026-07-30 ユーザ裁定:
+#   「一度表示した日は永久に固定。変わったら過去ログではない」)。順序厳守=stock上書きより先。
+import subprocess
+subprocess.run([sys.executable, os.path.join(ROOT, "scripts", "_gen-sansedai-log.py")], check=True)
+
 def conv(src, out, fields):
     doc = yaml.safe_load(open(os.path.join(ROOT, "data", "seeds", src), encoding="utf-8"))
     rows = []
