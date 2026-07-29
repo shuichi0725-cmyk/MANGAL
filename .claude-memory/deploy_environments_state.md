@@ -5,7 +5,10 @@ metadata:
   node_type: memory
   type: project
   originSessionId: 8f5c881f-9859-490c-b682-bd1969ec515c
+  modified: 2026-07-29T07:52:54.309Z
 ---
+
+★**2026-07-29 本番デプロイの正**: `npx wrangler deploy -c wrangler-r2.jsonc`(name=**mangal-r2**に修正済)。認証=**OAuth(`wrangler login`)のみ**。.envの`CF_ANALYTICS_API_TOKEN`(旧CLOUDFLARE_API_TOKEN)は解析Read専用=deploy不可(wranglerが.env自動読込で誤用→Error10000、これが7/5〜7/29の数週間未デプロイの根因だった)。★configのバインディングはデプロイで**置換**される=本番実バインディング(BUCKET/LIKES/CONTACT/MAILER/MAIL_TO、secret PURGE_TOKENは自動継続)を全部configに書く。★旧Worker「mangal」=Workers Builds残骸・ドメイン無し=削除候補(ドメイン付替えの Y/n プロンプトには**n**)。
 
 ★**2026-07-10 現況更新**: 本番=**mangal-db.com**(Worker `mangal-r2`+R2配信・ドメイン紐付け済・疎通200確認)。下の「Worker mangal→workers.dev・R2移行が別タスク」の節は**歴史**(R2移行済)。
 ★**SEO/一般衛生=済(2026-07-10 実測確認・再提案するな)**: GSC登録済(**DNS TXT方式**=`google-site-verification=oXIq...`がDNSに現存。リポジトリ/HTMLに痕跡が無くても未登録と即断しない) / robots.txt(sitemap参照) / sitemap.xml / JSON-LD / OGP / ストアリンク[PR]表記。★Web Analyticsも**設置済だった**(2026-07-05自動セットアップ・ユーザ指摘で判明=私の「未実施」は誤断)。残る未実施=外形監視のみ(当面不要=ユーザ判断)。

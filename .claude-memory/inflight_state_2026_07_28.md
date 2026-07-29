@@ -5,13 +5,13 @@ metadata:
   node_type: memory
   type: project
   originSessionId: db595250-4c34-4603-b151-4b5dbb1db69e
-  modified: 2026-07-27T21:49:26.556Z
+  modified: 2026-07-29T07:52:45.226Z
 ---
 
 旧 [[inflight-state-2026-07-17]] を置換(生き残り保留は下へ引き継ぎ)。
 
 ## 次=週次蒸留(ユーザトリガー待ち。今回だけの特記3点)
-1. ★**`npx wrangler deploy -c wrangler-r2.jsonc` を必ず実行**(Worker改修=JSON 4hキャッシュ+If-None-Match 304 がまだ未デプロイ。skill weekly-distillに追記済みだが忘れると検索改善が本番に出ない)。
+1. ✅済(2026-07-29家作業): **Workerデプロイ完了**(検索改善4hキャッシュ+304、/go 302中継とも本番反映・302/400/secret生存を実測確認)。根因はCF認証2段崩れ=①.envの解析用トークンをwranglerが誤用(→`CF_ANALYTICS_API_TOKEN`に改名で恒久修正)②OAuth失効(→`wrangler login`で復旧)。さらに**wrangler-r2.jsoncのname=mangalが別Worker**でドメイン付きの本番=**mangal-r2**とズレていた→name修正+MAILER/MAIL_TOバインディング追記(デプロイは設定内容で置換されるため)。★旧Worker「mangal」は残骸(今日のコードが誤アップ済・ドメイン無し)=削除候補。
 2. ★**初の r2-sync --prune 回**([[r2-orphan-pages-prune-missing]]の孤児1,041頁+成年drop旧HTML掃除)。削除件数を実行前にユーザへ提示してから流す。
 3. 検索回帰 vitest green 必須(2026-07-27改修: 数字揺れfold/head読み/aiLeagueSchedule等254本)。
 

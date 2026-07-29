@@ -1,13 +1,13 @@
-// ★R2配信 Worker 用 wrangler 設定(ドラフト・未デプロイ)。
-// 現行 wrangler.jsonc(Workers Static Assets= ./out 同梱)は壊さず、 R2移行時にこちらへ切替。
-// デプロイ: wrangler deploy -c wrangler-r2.jsonc  (要: R2バケット作成 + アカウント)
+// ★R2配信 Worker(本番 mangal-db.com)用 wrangler 設定。
+// デプロイ: wrangler deploy -c wrangler-r2.jsonc  (認証=OAuth `wrangler login`。.envトークンは解析専用)
+// ★name=mangal-r2 が本番(ドメイン紐付き)。旧name=mangalは別Worker(Workers Builds残骸)なので戻すな。
+//   バインディングはデプロイでこのファイルの内容に「置換」される=本番の実バインディング
+//   (BUCKET/LIKES/CONTACT/MAILER/MAIL_TO+secret PURGE_TOKEN)を全部書いておくこと(2026-07-29実測)。
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "mangal",
+  "name": "mangal-r2",
   "main": "workers/r2-serve.js",
   "compatibility_date": "2026-04-27",
-  // ★account_id明示(2026-07-29): .envのAPIトークンはアカウント限定権限で /memberships を
-  //   引けない(code:10000)。明示すればmembership解決をスキップしてdeployできる。
   "account_id": "774e95ed884a48e76ffb5aa78ae7e037",
   // ★R2バケット(要作成: wrangler r2 bucket create mangal-site)
   "r2_buckets": [
@@ -17,6 +17,10 @@
     { "binding": "LIKES", "id": "751056d3bdc34407a93da3403b4591bd" },
     { "binding": "CONTACT", "id": "fa55f7ff0035427f87db144a032be3e7" }
   ],
+  "send_email": [
+    { "name": "MAILER", "destination_address": "shuichi0725@gmail.com" }
+  ],
+  "vars": { "MAIL_TO": "shuichi0725@gmail.com" },
   // ★任意: alias 301 と adult_us geo 用 KV(使うなら id を埋める)
   // "kv_namespaces": [
   //   { "binding": "REDIRECTS", "id": "<kv-id>" },
