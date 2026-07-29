@@ -8,10 +8,14 @@ year_started: 2021
 year_ended: null
 status: ongoing
 authors:
-- name: 文月路亜
+- name: マツリ
   role: writer_artist
-- name: ナカノムラアヤスケ
+  kana: マツリ
+  romaji: matsuri
+- name: 橋広功
   role: writer_artist
+  kana: ハシヒロイサム
+  romaji: hashihiroisamu
 original_authors: []
 publisher: seiunsha
 magazine: null
@@ -45,6 +49,11 @@ editions:
     isbn13: '9784434317781'
     cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/7781/9784434317781_1_4.jpg?_ex=200x200
     release_date: '2023-03-30'
+  - number: 4
+    asin: null
+    isbn13: '9784434329593'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/9593/9784434329593_1_3.jpg?_ex=300x300
+    release_date: '2023-11-30'
   - number: 5
     asin: null
     isbn13: '9784434342080'
