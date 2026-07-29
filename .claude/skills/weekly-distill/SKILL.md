@@ -29,6 +29,10 @@ python scripts/_gen-corner-auto.py           # 周年/豪華版 JSON(66k走査 ~
 python scripts/_build-list-index.py data/manga.v2 data   # 本番索引(~10分)
 ```
 - ai-reviews 等 seed 由来はそのまま(生成不要)。
+- ★**art-books昇格**(2026-07-29新設・ユーザ発見「.v2に居るのに公開されない」INTRON DEPOT型):
+  ビルドが読むのは `data/art-books`(公開側)で、promoteの再生成は `data/art-books.v2`(中間物)に出る=
+  **昇格コピーが無いと新規画集は永遠に出ない**。週次前に diff を確認し、検証(kana非空・yaml parse)して
+  `.v2 → data/art-books` へコピー。掲載可否に迷う新規はユーザ裁定を仰いでから。
 - 生成物を commit+push。
 
 ### 2. ★preflight (= 2026-07-10 script化。手動チェックリスト全廃)
