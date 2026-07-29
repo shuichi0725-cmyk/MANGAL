@@ -205,12 +205,17 @@ export default function VolumeCoverflow({
   if (n === 0) return null;
   const cur = vols[sel];
   const links = searchLinks(title, cur);
-  // ★全巻まとめ買い=3店舗(2026-07-06 ユーザ要望)。楽天はアフィリンク化
-  const bulkQ = encodeURIComponent(`${title} 全巻 セット`);
-  const bulk3 = {
-    rakuten: rakutenAff(`https://books.rakuten.co.jp/search?sitem=${bulkQ}`),
-    yahoo: `https://shopping.yahoo.co.jp/search?p=${bulkQ}`,
-    amazon: amazonLink(`${title} 全巻 セット`, false),
+  // ★電子書籍で買う(2026-07-29 ユーザ要望: 全巻まとめ買いを廃止し置換)。
+  //   Kindle/楽天Kobo とも「/go 中継 + JS遷移」でアプリでなく**ブラウザ**で開く
+  //   (スマホのストアアプリ内では電子書籍を購入できないため)。選択中の巻に連動。
+  const ebookQ = n > 1 ? `${title} ${cur.number}` : title;
+  const ebook = {
+    kindle: `/go?u=${encodeURIComponent(
+      amazonSearchUrl(ebookQ, AMZ_TAG).replace("i=stripbooks", "i=digital-text"),
+    )}`,
+    kobo: `/go?u=${encodeURIComponent(
+      rakutenAff(`https://books.rakuten.co.jp/search?sitem=${encodeURIComponent(ebookQ)}&g=101`),
+    )}`,
   };
   const pub = [publisher, imprint].filter(Boolean).join(" / ");
 
@@ -355,16 +360,16 @@ export default function VolumeCoverflow({
            className="spring-press rounded-full bg-[#e69500] py-2 text-center text-sm font-bold text-white">Amazon</a>
       </div>
       <div className="spring-press mt-2 rounded-2xl px-5 py-3 text-white shadow-soft"
-           style={{ background: "linear-gradient(90deg,#145a3c,#2ebe82)" }}>
-        <span className="block text-[15px] font-bold">全巻まとめ買い</span>
-        <span className="block text-[11px] text-white/80">全{n}巻セットをまとめて</span>
-        <div className="mt-2 grid grid-cols-3 gap-2">
-          <a href={bulk3.rakuten} target="_blank" rel="noopener noreferrer"
-             className="rounded-full bg-white/95 py-1.5 text-center text-[12px] font-bold text-[#bf0000]">楽天</a>
-          <a href={bulk3.yahoo} target="_blank" rel="noopener noreferrer"
-             className="rounded-full bg-white/95 py-1.5 text-center text-[12px] font-bold text-[#ff0033]">Yahoo!</a>
-          <a href={bulk3.amazon} target="_blank" rel="noopener noreferrer"
-             className="rounded-full bg-white/95 py-1.5 text-center text-[12px] font-bold text-[#e69500]">Amazon</a>
+           style={{ background: "linear-gradient(90deg,#3b2f78,#7a5cf0)" }}>
+        <span className="block text-[15px] font-bold">📱 電子書籍で買う</span>
+        <span className="block text-[11px] text-white/80">
+          {n > 1 ? `第${cur.number}巻を` : ""}対応ストアで(ブラウザで開きます)
+        </span>
+        <div className="mt-2 grid grid-cols-2 gap-2">
+          <a href={ebook.kindle} target="_blank" rel="noopener noreferrer"
+             className="rounded-full bg-white/95 py-1.5 text-center text-[12px] font-bold text-[#e69500]">Kindle</a>
+          <a href={ebook.kobo} target="_blank" rel="noopener noreferrer"
+             className="rounded-full bg-white/95 py-1.5 text-center text-[12px] font-bold text-[#bf0000]">楽天Kobo</a>
         </div>
       </div>
     </div>
