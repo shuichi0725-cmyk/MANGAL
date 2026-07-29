@@ -31,10 +31,12 @@ SYN_MIN, SYN_MAX = 78, 114         # 規格80-110 ±4
 BLOCK, WARN = 0.55, 0.40
 
 MASTER = set((yaml.safe_load(open(os.path.join(ROOT, 'data', 'genres.yml'), encoding='utf-8')) or {}).get('genres', {}).keys())
-if not MASTER:  # 別形式(list)対応
+if not MASTER:  # 別形式対応(現行 genres.yml = key直下の平坦dict / 旧 list)
     g = yaml.safe_load(open(os.path.join(ROOT, 'data', 'genres.yml'), encoding='utf-8'))
     if isinstance(g, list):
         MASTER = {x['key'] if isinstance(x, dict) else x for x in g}
+    elif isinstance(g, dict):
+        MASTER = set(g.keys())
 
 def prod(slug):
     p = os.path.join(ROOT, 'data', 'manga.v2', slug + '.yml')
