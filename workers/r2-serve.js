@@ -119,6 +119,23 @@ export default {
         headers: { location: dest, "cache-control": "no-store", "x-robots-tag": "noindex" },
       });
     }
+    // ★/go-test = App Links実機検証ページ(2026-07-29 一時設置・確定後撤去可)。
+    //   実測: /dp/=ブラウザ・/s=アプリに奪われる(302か直かは無関係) → 奪われない検索パスを探す。
+    if (url.pathname === "/go-test") {
+      const q = encodeURIComponent("ONE PIECE 1");
+      const tag = "tag=mangal08-22";
+      const A = `https://www.amazon.co.jp/s?k=${q}&i=digital-text&${tag}`;
+      const B = `https://www.amazon.co.jp/gp/search?ie=UTF8&keywords=${q}&index=digital-text&${tag}`;
+      const C = `https://www.amazon.co.jp/s/?field-keywords=${q}&url=search-alias%3Ddigital-text&${tag}`;
+      const D = `https://www.amazon.co.jp/dp/4088725093?${tag}`;
+      const go = (u) => `/go?u=${encodeURIComponent(u)}`;
+      const row = (label, href) =>
+        `<p><a href="${href}" target="_blank" rel="noopener" style="display:block;padding:12px;background:#eee;border-radius:8px;text-decoration:none">${label}</a></p>`;
+      const html = `<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex"><title>go-test</title><body style="font-family:sans-serif;max-width:480px;margin:20px auto;padding:0 12px"><h3>Amazonリンク実験(どれがブラウザで開くか)</h3>${row("① /s 検索(現行=アプリになる想定)", go(A))}${row("② /gp/search 検索", go(B))}${row("③ /s/ 旧形式検索", go(C))}${row("④ /dp/ 商品直(ブラウザになる想定)", go(D))}${row("⑤ ②の直リンク(302なし)", B)}<p style="color:#888">タップ→開き先がブラウザかアプリかをメモして戻ってください</p></body>`;
+      return new Response(html, {
+        headers: { "content-type": "text/html; charset=utf-8", "cache-control": "no-store", "x-robots-tag": "noindex" },
+      });
+    }
     if (url.pathname === "/api/like" && env.LIKES) {
       if (request.method === "GET") {
         const id = url.searchParams.get("id") || "";
