@@ -24,9 +24,12 @@ function GoInner() {
       const url = new URL(u);
       if (url.protocol === "https:" && ALLOW_HOSTS.has(url.hostname)) {
         setDest(u);
-        // 直ちにJS遷移(リンククリックでないためアプリに奪われずブラウザ内で開く)
-        window.location.replace(u);
-        return;
+        // ★遅延JS遷移(2026-07-29 実測修正): 即時replaceだと「タップ→新タブ→即遷移」が
+        //   ひとつのナビゲーション連鎖と見なされ、AmazonのApp Linksがアプリを起動してしまう
+        //   (楽天はhb.afl中継ドメインが未claimなので即時でも平気だった)。
+        //   ~900ms置いてジェスチャー連鎖を切ると、プログラム遷移=ブラウザ内で開く。
+        const t = setTimeout(() => window.location.replace(u), 900);
+        return () => clearTimeout(t);
       }
     } catch {
       /* fallthrough */
