@@ -5,7 +5,7 @@ metadata:
   node_type: memory
   type: project
   originSessionId: 8f5c881f-9859-490c-b682-bd1969ec515c
-  modified: 2026-07-29T08:17:02.993Z
+  modified: 2026-07-29T08:20:23.531Z
 ---
 
 ★2026-07-29 実機検証(本番Worker /go-testページ・ユーザAndroid実機)で**確定解決**。積年の仮説を全部塗り替えた:
@@ -19,3 +19,5 @@ metadata:
 **採用実装(VolumeCoverflow.tsx)**: Kindleボタン=**紙の/dp/ISBN10直リンク(tag付き)** = links.amazonと同一。商品ページ内の形式切替「Kindle版」で電子へ誘導(サブタイトルに明記)。一度ブラウザで開けば以後のタップもブラウザ内に留まる。電子版ASIN(B0…)はDBに無いため検索経由が使えない以上これが唯一のブラウザ完結ルート。ISBN無し巻のみ検索fallback(アプリに開くが稀)。
 
 **残骸**: Worker(r2-serve.js)の /go 302中継と /go-test 実験ページは**用済み**(ボタンはもう使っていない)。害はないが次回Worker整理時に撤去してよい。旧Worker「mangal」(Workers Builds残骸・ドメイン無し)も削除候補。
+
+**★次段=Kindle ASINハーベスト(PA-API解錠後)**: マンバがKindle頁へ一発直行できる種明かし(ユーザ推理2026-07-29で確定的)=**各巻のKindle版ASIN(B0…)をDBに持ち /dp/B0…?tag= の普通の商品URLを作っているだけ**。正規入手路=PA-API(SearchItems×KindleStore、題+巻で照合)。mangal08-22の**180日3成果条件クリアでPA-API解錠**([[openbd-eol-amazon-required]]の書影と同じ解錠条件)→ Kindle ASIN収穫(楽天ハーベストと同型)→ Kindleボタンを電子版/dp直行に進化。現行の「紙/dp→Kindle版選択」はそれまでの暫定解。
