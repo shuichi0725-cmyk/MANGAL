@@ -6,6 +6,9 @@
   "name": "mangal",
   "main": "workers/r2-serve.js",
   "compatibility_date": "2026-04-27",
+  // ★account_id明示(2026-07-29): .envのAPIトークンはアカウント限定権限で /memberships を
+  //   引けない(code:10000)。明示すればmembership解決をスキップしてdeployできる。
+  "account_id": "774e95ed884a48e76ffb5aa78ae7e037",
   // ★R2バケット(要作成: wrangler r2 bucket create mangal-site)
   "r2_buckets": [
     { "binding": "BUCKET", "bucket_name": "mangal-site" }

@@ -98,24 +98,26 @@ export default {
     //   App Links/Universal Links発火を避けるため、自ドメインの中間ページからJSで遷移させる。
     //   オープンリダイレクタ防止: amazon.co.jp / amzn.to のみ許可。
     if (url.pathname === "/go") {
+      // ★302サーバーリダイレクト方式(2026-07-29 実測確定): 旧実装のJS遷移(location.replace)は
+      //   タップ由来のナビゲーション連鎖と見なされ Amazon の App Links がアプリを起動してしまう
+      //   (Amazonアプリ内ではKindleを購入できない)。マンバ(/stores/kindle)の実装を解剖した結果、
+      //   自ドメインからの**サーバー302**はApp Linksを発火させずブラウザ内で開くことを確認。
+      //   楽天hb.afl(302中継)が最初からブラウザで開けていたのも同じ理屈。
       let dest = "";
       try { dest = decodeURIComponent(url.searchParams.get("u") || ""); } catch {}
       let ok = false;
       try {
-        const h = new URL(dest).hostname;
-        ok = h === "www.amazon.co.jp" || h === "amazon.co.jp" || h === "amzn.to";
+        const t = new URL(dest);
+        ok = t.protocol === "https:" && [
+          "www.amazon.co.jp", "amazon.co.jp", "amzn.to",
+          "books.rakuten.co.jp", "hb.afl.rakuten.co.jp", "shopping.yahoo.co.jp",
+        ].includes(t.hostname);
       } catch {}
       if (!ok) return new Response("bad destination", { status: 400 });
-      const esc = dest.replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;");
-      const html = `<!doctype html><html lang="ja"><head><meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="robots" content="noindex">
-<title>ストアへ移動中… | MANGAL</title>
-<style>body{font-family:sans-serif;display:flex;min-height:80vh;align-items:center;justify-content:center;color:#444}</style>
-</head><body><p>ストアへ移動しています…<br><a href="${esc}" rel="nofollow sponsored noopener">開かない場合はこちら</a></p>
-<script>setTimeout(function(){ location.replace(${JSON.stringify(dest)}); }, 60);</script>
-</body></html>`;
-      return new Response(html, { headers: { "content-type": "text/html; charset=utf-8", "cache-control": "no-store" } });
+      return new Response(null, {
+        status: 302,
+        headers: { location: dest, "cache-control": "no-store", "x-robots-tag": "noindex" },
+      });
     }
     if (url.pathname === "/api/like" && env.LIKES) {
       if (request.method === "GET") {

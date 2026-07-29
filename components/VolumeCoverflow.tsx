@@ -208,14 +208,17 @@ export default function VolumeCoverflow({
   // ★電子書籍で買う(2026-07-29 ユーザ要望: 全巻まとめ買いを廃止し置換)。
   //   Kindle/楽天Kobo とも「/go 中継 + JS遷移」でアプリでなく**ブラウザ**で開く
   //   (スマホのストアアプリ内では電子書籍を購入できないため)。選択中の巻に連動。
+  // ★/go はWorkerの302中継(本番ドメイン固定)。previewから押してもWorkerを経由させる
+  //   (Pages側にはこのルートが無い+302サーバーリダイレクトでないとAmazonアプリに奪われる)。
   const ebookQ = n > 1 ? `${title} ${cur.number}` : title;
+  const GO = "https://mangal-db.com/go?u=";
   const ebook = {
-    kindle: `/go?u=${encodeURIComponent(
+    kindle: GO + encodeURIComponent(
       amazonSearchUrl(ebookQ, AMZ_TAG).replace("i=stripbooks", "i=digital-text"),
-    )}`,
-    kobo: `/go?u=${encodeURIComponent(
+    ),
+    kobo: GO + encodeURIComponent(
       rakutenAff(`https://books.rakuten.co.jp/search?sitem=${encodeURIComponent(ebookQ)}&g=101`),
-    )}`,
+    ),
   };
   const pub = [publisher, imprint].filter(Boolean).join(" / ");
 
