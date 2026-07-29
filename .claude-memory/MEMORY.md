@@ -150,3 +150,4 @@
 - [コンビニ判一掃=148drop/16hold](konbini_reprint_sweep.md) — 秋田トップW/Gコミ純頁。imprint一律drop不可(オリジナル実在)
 - [【✅】手塚全集タブ全滅→復旧](tezuka_tab_empty_pages.md) — 根因=exclude再適用が追加seedを剥がす型。教訓=blanket除去passは意図的追加seedを保護
 - [CF請求=Workers Paid $5.50/月のみ・従量0](cloudflare_billing.md) — 27日〆・日割り$4.21は初回のみ
+- [今日の一冊 過去ログ=凍結ログが正](sansedai_archive_frozen_log.md) — 表示済み日は永久固定・stock上書き前に凍結・純粋追記
