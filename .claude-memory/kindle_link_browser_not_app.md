@@ -5,7 +5,7 @@ metadata:
   node_type: memory
   type: project
   originSessionId: 8f5c881f-9859-490c-b682-bd1969ec515c
-  modified: 2026-07-29T08:20:23.531Z
+  modified: 2026-07-29T09:12:40.611Z
 ---
 
 ★2026-07-29 実機検証(本番Worker /go-testページ・ユーザAndroid実機)で**確定解決**。積年の仮説を全部塗り替えた:
@@ -18,6 +18,10 @@ metadata:
 
 **採用実装(VolumeCoverflow.tsx)**: Kindleボタン=**紙の/dp/ISBN10直リンク(tag付き)** = links.amazonと同一。商品ページ内の形式切替「Kindle版」で電子へ誘導(サブタイトルに明記)。一度ブラウザで開けば以後のタップもブラウザ内に留まる。電子版ASIN(B0…)はDBに無いため検索経由が使えない以上これが唯一のブラウザ完結ルート。ISBN無し巻のみ検索fallback(アプリに開くが稀)。
 
-**残骸**: Worker(r2-serve.js)の /go 302中継と /go-test 実験ページは**用済み**(ボタンはもう使っていない)。害はないが次回Worker整理時に撤去してよい。旧Worker「mangal」(Workers Builds残骸・ドメイン無し)も削除候補。
+**最終ボタンマトリクス(2026-07-29ユーザ実機確認済・全着地)**:
+紙=楽天:ブラウザ(intent試行→市場アプリ非受理でfallback。ユーザ「ブラウザで問題なし」裁定) / Yahoo:アプリ(元から・紙はOK) / Amazon:**アプリ**(intent://+専用scheme com.amazon.mobile.shopping.web)。
+電子=Kindle:**ブラウザ**(/dp直) / Kobo:ブラウザ。Androidのみクリック時intent切替・iOS/PC/非JSはhttpsのまま(hydration不一致回避)。
+
+**掃除済(2026-07-29)**: Worker の /go 302中継+/go-test は撤去・デプロイ済(404確認)。★AffiliateLink.tsx/VolumeTile.tsx は**未使用の死にコード**(どの頁からもimportされず・旧/go+JS遷移仮説の残骸。schema `kindle_asin` フィールドは既在=ASINハーベストの受け皿)。残る削除候補=旧Worker「mangal」(要ユーザGO)。
 
 **★次段=Kindle ASINハーベスト(PA-API解錠後)**: マンバがKindle頁へ一発直行できる種明かし(ユーザ推理2026-07-29で確定的)=**各巻のKindle版ASIN(B0…)をDBに持ち /dp/B0…?tag= の普通の商品URLを作っているだけ**。正規入手路=PA-API(SearchItems×KindleStore、題+巻で照合)。mangal08-22の**180日3成果条件クリアでPA-API解錠**([[openbd-eol-amazon-required]]の書影と同じ解錠条件)→ Kindle ASIN収穫(楽天ハーベストと同型)→ Kindleボタンを電子版/dp直行に進化。現行の「紙/dp→Kindle版選択」はそれまでの暫定解。
