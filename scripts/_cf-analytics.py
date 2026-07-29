@@ -12,7 +12,7 @@
   report = Workerインフラ視点(クロール込み総リクエスト・エラー率=配信健康)
   web    = 人間の訪問者視点(ビーコン計測=閲覧/訪問/人気ページ/国/referer。2026-07-05設置・自動セットアップ)
 ★reportのリクエスト数≠訪問者(R2配信は1頁=複数ファイル取得・クロール支配)。訪問者はwebで見る。
-キー: .env の CLOUDFLARE_API_TOKEN(Analytics Read・絶対commitしない)。RUM REST(site_info)は403=scope外だが
+キー: .env の CF_ANALYTICS_API_TOKEN(Analytics Read・絶対commitしない。旧名CLOUDFLARE_API_TOKENはwranglerが誤用するため改名)。RUM REST(site_info)は403=scope外だが
 GraphQL rumデータセットは通る(siteTagは集計から発見済=下の定数)。
 """
 import json, os, sys, argparse, datetime, urllib.request
@@ -25,15 +25,17 @@ SITE_TAG = "806671887a234f4882f85ba92058da5f"   # Web Analytics site (mangal-db.
 
 
 def _token():
-    k = os.environ.get("CLOUDFLARE_API_TOKEN")
-    if k:
-        return k.strip()
+    # 2026-07-29 改名: CLOUDFLARE_API_TOKEN だと wrangler が deploy 認証に誤用する(.env自動読込)
+    for name in ("CF_ANALYTICS_API_TOKEN", "CLOUDFLARE_API_TOKEN"):
+        k = os.environ.get(name)
+        if k:
+            return k.strip()
     envp = os.path.join(ROOT, ".env")
     if os.path.exists(envp):
         for ln in open(envp, encoding="utf-8"):
-            if ln.startswith("CLOUDFLARE_API_TOKEN"):
+            if ln.startswith(("CF_ANALYTICS_API_TOKEN", "CLOUDFLARE_API_TOKEN")):
                 return ln.split("=", 1)[1].strip().strip('"').strip("'")
-    raise SystemExit("CLOUDFLARE_API_TOKEN が .env に無い")
+    raise SystemExit("CF_ANALYTICS_API_TOKEN が .env に無い")
 
 
 def _api(url, body=None):

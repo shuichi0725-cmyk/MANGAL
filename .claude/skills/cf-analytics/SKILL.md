@@ -15,7 +15,7 @@ python scripts/_cf-analytics.py verify               # トークン生存確認(
 ```
 - 「アクセスどう?」= **web が主役**(訪問者視点)、report は配信健康(エラー率)の補助。
 - endpoint/認証/GraphQL(workersInvocationsAdaptive+rumPageloadEventsAdaptiveGroups)の正は**scriptに封じ込め済み=再実装しない**。siteTag等の定数もscript内。
-- キー: `.env` の `CLOUDFLARE_API_TOKEN`(Analytics Read。★絶対commitしない)。RUM RESTは403=scope外だがGraphQL rumは通る(実証済)。
+- キー: `.env` の `CF_ANALYTICS_API_TOKEN`(Analytics Read。★絶対commitしない。旧名`CLOUDFLARE_API_TOKEN`はwranglerがdeploy認証に誤用=2026-07-29改名)。RUM RESTは403=scope外だがGraphQL rumは通る(実証済)。
 
 ## 読み方の規律 (= 数字を誤読して報告しない)
 - **web(ビーコン計測)=人間**: JS実行ブラウザのみ、bot/クローラは原則含まれない。設置=2026-07-05(自動セットアップ)以降のみ。

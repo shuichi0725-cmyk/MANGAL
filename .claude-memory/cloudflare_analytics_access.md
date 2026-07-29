@@ -5,13 +5,14 @@ metadata:
   node_type: memory
   type: reference
   originSessionId: a2ed548f-4b21-42ea-9ad0-229054bf2d45
+  modified: 2026-07-29T07:44:21.707Z
 ---
 
 **やり方の正 = skill `cf-analytics` + `scripts/_cf-analytics.py`**(2026-07-10 script/skill化=ユーザ依頼。ここは事実の記録のみ)。
 
 Cloudflare のアクセス解析が叩けるようになった(2026-07-09 ユーザがトークン作成)。
 
-- **トークン**: `.env` の `CLOUDFLARE_API_TOKEN`(テンプレ「分析およびログを読み取る」=Analytics/Logs Read)。gitignore済み・**絶対commitしない**。
+- **トークン**: `.env` の `CF_ANALYTICS_API_TOKEN`(テンプレ「分析およびログを読み取る」=Analytics/Logs Read)。gitignore済み・**絶対commitしない**。★旧名`CLOUDFLARE_API_TOKEN`はwranglerが.env自動読込でdeploy認証に誤用(権限不足でError 10000=「CFトークン認証壊れ」の正体)→2026-07-29改名。deploy認証はOAuth(`wrangler login`)。
 - **account_id**: `774e95ed884a48e76ffb5aa78ae7e037`(= [[deploy_environments_state]])。
 - **本番Worker名**: `mangal-r2`(R2配信)。
 - **叩き方**: `https://api.cloudflare.com/client/v4/graphql` に GraphQL。dataset=`workersInvocationsAdaptive`、fields=`sum{requests errors subrequests}` dimensions=`{scriptName date}`、filter=`datetime_geq/leq`。検証は `/user/tokens/verify`。
