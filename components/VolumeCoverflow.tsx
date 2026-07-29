@@ -69,6 +69,21 @@ function amazonLink(isbnOrQuery: string, isIsbn: boolean): string {
   }
   return amazonSearchUrl(isbnOrQuery, AMZ_TAG);
 }
+// ★紙の楽天/Amazonボタンは「アプリで開く」(2026-07-29 ユーザ要望。紙はアプリ内購入OK=規約NGは電子のみ)。
+//   httpsのままだとアプリが拾うかはアプリ側のApp Links設定次第(実機実測: amazon /dp・楽天hb.aflともブラウザ)
+//   → Androidのみクリック時に intent:// へ差し替えアプリを明示起動。未インストール/非対応は
+//   S.browser_fallback_url で従来URL(アフィ中継込み)へ自動フォールバック=現状と同じ挙動。
+//   iOS/PCは従来のまま。hrefはhttpsを維持(SEO/非JS/hydration不一致回避)、クリック時にだけ切替。
+//   Amazonはアプリ専用scheme(com.amazon.mobile.shopping.web)=App Links未claimの/dpでも確実にアプリへ。
+function openStoreApp(e: React.MouseEvent<HTMLAnchorElement>, href: string, store: "amazon" | "rakuten") {
+  if (typeof navigator === "undefined" || !/Android/i.test(navigator.userAgent)) return;
+  const fb = encodeURIComponent(href);
+  const intent = store === "amazon"
+    ? `intent://${href.replace(/^https:\/\/(www\.)?/, "")}#Intent;scheme=com.amazon.mobile.shopping.web;package=com.amazon.mShop.android.shopping;S.browser_fallback_url=${fb};end`
+    : `intent://${href.replace(/^https:\/\//, "")}#Intent;scheme=https;package=jp.co.rakuten.android;S.browser_fallback_url=${fb};end`;
+  e.preventDefault();
+  window.location.href = intent;
+}
 
 function searchLinks(title: string, v: Volume) {
   const isbn = v.isbn13 ? String(v.isbn13) : "";
@@ -334,11 +349,11 @@ export default function VolumeCoverflow({
                     </div>
                   </div>
                   <div className="mt-2 grid grid-cols-3 gap-2">
-                    <a href={vl.rakuten} target="_blank" rel="noopener noreferrer"
+                    <a href={vl.rakuten} onClick={(e) => openStoreApp(e, vl.rakuten, "rakuten")} target="_blank" rel="noopener noreferrer"
                        className="spring-press rounded-full bg-[#bf0000] py-1.5 text-center text-[12px] font-bold text-white">楽天</a>
                     <a href={vl.yahoo} target="_blank" rel="noopener noreferrer"
                        className="spring-press rounded-full bg-[#ff0033] py-1.5 text-center text-[12px] font-bold text-white">Yahoo!</a>
-                    <a href={vl.amazon} target="_blank" rel="noopener noreferrer"
+                    <a href={vl.amazon} onClick={(e) => openStoreApp(e, vl.amazon, "amazon")} target="_blank" rel="noopener noreferrer"
                        className="spring-press rounded-full bg-[#e69500] py-1.5 text-center text-[12px] font-bold text-white">Amazon</a>
                   </div>
                 </div>
@@ -353,11 +368,11 @@ export default function VolumeCoverflow({
         <span className="text-[10px] text-ink/40">[PR] 店舗リンクにはアフィリエイト広告を含みます</span>
       </div>
       <div className="mt-1 grid grid-cols-3 gap-2">
-        <a href={links.rakuten} target="_blank" rel="noopener noreferrer"
+        <a href={links.rakuten} onClick={(e) => openStoreApp(e, links.rakuten, "rakuten")} target="_blank" rel="noopener noreferrer"
            className="spring-press rounded-full bg-[#bf0000] py-2 text-center text-sm font-bold text-white">楽天</a>
         <a href={links.yahoo} target="_blank" rel="noopener noreferrer"
            className="spring-press rounded-full bg-[#ff0033] py-2 text-center text-sm font-bold text-white">Yahoo!</a>
-        <a href={links.amazon} target="_blank" rel="noopener noreferrer"
+        <a href={links.amazon} onClick={(e) => openStoreApp(e, links.amazon, "amazon")} target="_blank" rel="noopener noreferrer"
            className="spring-press rounded-full bg-[#e69500] py-2 text-center text-sm font-bold text-white">Amazon</a>
       </div>
       <div className="spring-press mt-2 rounded-2xl px-5 py-3 text-white shadow-soft"
