@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import CoverImage from "./CoverImage";
+import { amazonDpUrlFromIsbn13, amazonSearchUrl } from "@/lib/amazon";
 import type { Volume } from "@/lib/schema";
 
 /**
@@ -58,6 +59,16 @@ function rakutenAff(url: string): string {
   const e = encodeURIComponent(url);
   return `https://hb.afl.rakuten.co.jp/hgc/${RAKUTEN_AFF}/?pc=${e}&m=${e}`;
 }
+// ★Amazonアソシエイト(2026-07-29 開設 mangal08-22): ISBNがあれば /dp/ISBN10 直リンク+tag、
+//   無ければ検索+tag。未設定buildでは素リンクにfallback(楽天と同じ設計)。
+const AMZ_TAG = process.env.NEXT_PUBLIC_AMAZON_ASSOCIATE_TAG || "";
+function amazonLink(isbnOrQuery: string, isIsbn: boolean): string {
+  if (isIsbn) {
+    const dp = amazonDpUrlFromIsbn13(isbnOrQuery, AMZ_TAG);
+    if (dp) return dp;
+  }
+  return amazonSearchUrl(isbnOrQuery, AMZ_TAG);
+}
 
 function searchLinks(title: string, v: Volume) {
   const isbn = v.isbn13 ? String(v.isbn13) : "";
@@ -65,7 +76,7 @@ function searchLinks(title: string, v: Volume) {
   return {
     rakuten: rakutenAff(`https://books.rakuten.co.jp/search?sitem=${encodeURIComponent(isbn || `${title} ${v.number}`)}`),
     yahoo: `https://shopping.yahoo.co.jp/search?p=${q}`,
-    amazon: `https://www.amazon.co.jp/s?k=${q}`,
+    amazon: amazonLink(isbn || `${title} ${v.number}`, !!isbn),
   };
 }
 
@@ -199,7 +210,7 @@ export default function VolumeCoverflow({
   const bulk3 = {
     rakuten: rakutenAff(`https://books.rakuten.co.jp/search?sitem=${bulkQ}`),
     yahoo: `https://shopping.yahoo.co.jp/search?p=${bulkQ}`,
-    amazon: `https://www.amazon.co.jp/s?k=${bulkQ}`,
+    amazon: amazonLink(`${title} 全巻 セット`, false),
   };
   const pub = [publisher, imprint].filter(Boolean).join(" / ");
 
@@ -296,7 +307,7 @@ export default function VolumeCoverflow({
               const vl = {
                 rakuten: rakutenAff(`https://books.rakuten.co.jp/search?sitem=${e}`),
                 yahoo: `https://shopping.yahoo.co.jp/search?p=${e}`,
-                amazon: `https://www.amazon.co.jp/s?k=${e}`,
+                amazon: amazonLink(q, !!vr.isbn13),
               };
               return (
                 <div key={i} className="rounded-xl border border-[var(--color-line)] p-2.5">

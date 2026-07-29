@@ -17,6 +17,36 @@ export type AmazonLinkOptions = {
   locale?: string;
 };
 
+/** ISBN-13 → ISBN-10(チェックデジット再計算)。紙の書籍はAmazonのASIN=ISBN-10なので
+ *  これで /dp/ 直リンクが組める(検索リンクより確実+コンバージョン高)。978以外(979等)は変換不能でnull。 */
+export function isbn13ToIsbn10(isbn13: string | number | null | undefined): string | null {
+  const s = String(isbn13 ?? "").replace(/[^0-9]/g, "");
+  if (s.length !== 13 || !s.startsWith("978")) return null;
+  const body = s.slice(3, 12);
+  let sum = 0;
+  for (let i = 0; i < 9; i++) sum += (10 - i) * Number(body[i]);
+  const check = (11 - (sum % 11)) % 11;
+  return body + (check === 10 ? "X" : String(check));
+}
+
+/** 素の検索クエリ用のAmazonリンク(tag付き)。component側の軽量利用向け。 */
+export function amazonSearchUrl(query: string, tag: string, locale?: string): string {
+  const url = new URL(`https://www.${domain(locale)}/s`);
+  url.searchParams.set("k", query);
+  url.searchParams.set("i", "stripbooks");
+  if (tag) url.searchParams.set("tag", tag);
+  return url.toString();
+}
+
+/** ISBN-13から /dp/ 直リンク(tag付き)。変換不能ならnull(呼び側で検索fallback)。 */
+export function amazonDpUrlFromIsbn13(isbn13: string | number | null | undefined, tag: string, locale?: string): string | null {
+  const i10 = isbn13ToIsbn10(isbn13);
+  if (!i10) return null;
+  const url = new URL(`https://www.${domain(locale)}/dp/${i10}`);
+  if (tag) url.searchParams.set("tag", tag);
+  return url.toString();
+}
+
 /**
  * 任意の巻について Amazon の商品ページ／検索URLを返す。
  * ASIN > ISBN13 > タイトル検索の優先順位。
@@ -36,6 +66,9 @@ export function buildAmazonUrlForVolume(
     if (tag) url.searchParams.set("tag", tag);
     return url.toString();
   }
+  // ★紙のASIN=ISBN-10なので、ISBNがあれば /dp/ 直リンク(2026-07-29 アソシエイト開設で有効化)
+  const dp = amazonDpUrlFromIsbn13(isbn, tag, opts.locale);
+  if (dp) return dp;
 
   const url = new URL(`https://www.${host}/s`);
   const titleQuery = volume?.number && volume.number > 1
@@ -103,6 +136,8 @@ export function buildAmazonUrlForArtBook(
     if (tag) url.searchParams.set("tag", tag);
     return url.toString();
   }
+  const dp = amazonDpUrlFromIsbn13(isbn, tag, opts.locale);
+  if (dp) return dp;
   const url = new URL(`https://www.${host}/s`);
   url.searchParams.set("k", isbn || `${artBook.title} ${artBook.artist}`);
   url.searchParams.set("i", "stripbooks");
