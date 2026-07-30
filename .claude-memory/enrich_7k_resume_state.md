@@ -1,6 +1,6 @@
 ---
 name: enrich-7k-resume-state
-description: "キャッチ/詳細エンリッチの進捗と再開点。2026-07-30時点: full系バッチは全消化済。★現在の作業=短キャッチrequeue(batch-0001〜0190)の消化で、0058まで=1,083作を本番反映済/残2,991作・次はbatch-0059から。genre系0218-0380も実質完了(残121はmaster32該当なし)"
+description: "キャッチ/詳細エンリッチの進捗と再開点。2026-07-30時点: full系バッチは全消化済。★現在の作業=短キャッチrequeue(batch-0001〜0190)の消化で、0066まで=1,260作を本番反映済/残2,814作・次はbatch-0067から。genre系0218-0380も実質完了(残121はmaster32該当なし)"
 metadata: 
   node_type: memory
   type: project
@@ -16,13 +16,13 @@ metadata:
 - 書込先 = catch-ja.json / synopsis-slug-ja.json / genre-enrich-2425.json / manga-catch-index.json(全てpromote結線済)。
 - 初回生成(0191-0217=645作)は 2026-07-29〜30 に消化・本番反映済。★**full系の新規生成は 0217 で打ち止め**。
 
-## ★現在の作業 = 短キャッチ requeue の消化(次は batch-0059 から)
+## ★現在の作業 = 短キャッチ requeue の消化(次は batch-0067 から)
 
 対象リスト = `docs/production-diagnostics/catch-short-requeue.txt`。7/27の並列生成4,750作が平均19字で貧相だった分の作り直し。
 ★調査済の事実: **requeue の中身は全件 kind='full'・2巻以上・caption有で、batch-0001〜0190 に収まっている**(0191以降には1件も無い)。
 
 - **2026-07-30: batch-0001〜0038 = 807作を消化**(生成→`--requeue --apply`→`_reflect-targeted.py --push`で本番反映済)。
-- **残 = 3,451作(batch-0059〜0190)。次は batch-0059 から**。
+- **残 = 3,451作(batch-0067〜0190)。次は batch-0067 から**。
 - ★**本番頁が存在しないslugが49件混在していた**(7/27生成後にdrop/rename済=充填不能)。
   `docs/production-diagnostics/catch-short-requeue-nopage.txt` に分離済。本キューは実作業分だけ。
   新しいブロックに入る前に `os.path.exists(f'data/manga.v2/{slug}.yml')` で洗うと無駄な生成を防げる。
