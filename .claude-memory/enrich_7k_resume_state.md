@@ -1,6 +1,6 @@
 ---
 name: enrich-7k-resume-state
-description: "キャッチ/詳細エンリッチの進捗と再開点。2026-07-30時点: full系バッチは全消化済。★現在の作業=短キャッチrequeue(batch-0001〜0190)の消化で、0014まで=312作を本番反映済/残3,982作・次はbatch-0015から。genre系0218-0380も実質完了(残121はmaster32該当なし)"
+description: "キャッチ/詳細エンリッチの進捗と再開点。2026-07-30時点: full系バッチは全消化済。★現在の作業=短キャッチrequeue(batch-0001〜0190)の消化で、0020まで=442作を本番反映済/残3,852作・次はbatch-0021から。genre系0218-0380も実質完了(残121はmaster32該当なし)"
 metadata: 
   node_type: memory
   type: project
@@ -16,18 +16,18 @@ metadata:
 - 書込先 = catch-ja.json / synopsis-slug-ja.json / genre-enrich-2425.json / manga-catch-index.json(全てpromote結線済)。
 - 初回生成(0191-0217=645作)は 2026-07-29〜30 に消化・本番反映済。★**full系の新規生成は 0217 で打ち止め**。
 
-## ★現在の作業 = 短キャッチ requeue の消化(次は batch-0011 から)
+## ★現在の作業 = 短キャッチ requeue の消化(次は batch-0021 から)
 
 対象リスト = `docs/production-diagnostics/catch-short-requeue.txt`。7/27の並列生成4,750作が平均19字で貧相だった分の作り直し。
 ★調査済の事実: **requeue の中身は全件 kind='full'・2巻以上・caption有で、batch-0001〜0190 に収まっている**(0191以降には1件も無い)。
 
-- **2026-07-30: batch-0001〜0014 = 312作を消化**(生成→`--requeue --apply`→`_reflect-targeted.py --push`で本番反映済)。
-- **残 = 3,982作(batch-0015〜0190)。次は batch-0015 から**。
+- **2026-07-30: batch-0001〜0020 = 442作を消化**(生成→`--requeue --apply`→`_reflect-targeted.py --push`で本番反映済)。
+- **残 = 3,852作(batch-0021〜0190)。次は batch-0021 から**。
 - ★**本番頁が存在しないslugが49件混在していた**(7/27生成後にdrop/rename済=充填不能)。
   `docs/production-diagnostics/catch-short-requeue-nopage.txt` に分離済。本キューは実作業分だけ。
   新しいブロックに入る前に `os.path.exists(f'data/manga.v2/{slug}.yml')` で洗うと無駄な生成を防げる。
 - 1周の手順(2バッチ≒45-49作が実用単位):
-  1. `_rqdigest.py 0011 0012` (scratchpadの自作script。requeue掲載slugだけを、旧catch/syn+全巻captionつきで整形出力。`CAPLEN=150`で十分)
+  1. `python scripts/_rqdigest.py 0021 0022` (★2026-07-30に scripts/ へ恒久化済=毎セッションscratchpadで作り直さない。requeue掲載slugだけを、旧catch/syn+全巻captionつきで整形出力。`CAPLEN=150`で十分)
   2. `data/enrich-out-2026-07/batch-0011.json` 等に生成物を書く
   3. `python scripts/_apply-enrich-batch.py 0011 0012 --requeue`(検証)→ 通ったら `--apply`
   4. requeueリストから消し込み+セッション累積に追記(小scriptで一括)
@@ -82,3 +82,11 @@ CLAUDE.md「該当が無ければ無理に付けず空でよい」に従い**空
   slug側(synopsis-slug-ja.json)は空の時だけ fallback。`_apply-enrich-batch.py` は 2026-07-30 に
   **anilist層へ書く分岐を実装済**(報告に「うちanilist層N」が出る)。旧仕様のまま slug側に書くと**silent空振り**。
 - 検品柱との分担: **誤りは検品柱(synopsis-audit / _catch-audit.py)が直す / 短いのはエンリッチが太らせる**。
+
+## ★2026-07-30 セッションで判明した追加ゲート(生成時に先回りする)
+
+- ★**catch と synopsis の冒頭20字が完全一致すると VIOLATION で弾かれる**(2件実踏: 敏感アイドル/BLACK★ROCKSHOOTER)。
+  同じ導入文を長短で書き分けると必ず踏む=**catchとsynは切り口を変えて書き出す**(catchはフック、synは設定から)。
+- ★丸写しゲートは実際に BLOCK が出る(border-world=0.68)。captionが2巻とも同文の作品は、旧synがcaptionをほぼ写しているので
+  **旧synを下敷きにすると必ずBLOCK**。語順・視点・語尾を変え、caption外の情報(巻数構成/シリーズ位置)を足して落とす。
+- 実績字数: 0015-0020 で catch 中央値≈59字 / syn 80字前後。60台に乗せるコツは「第1文に修飾を足す」(memory本文の既述どおり)。
