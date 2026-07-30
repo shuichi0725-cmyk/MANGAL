@@ -1,6 +1,6 @@
 ---
 name: enrich-7k-resume-state
-description: "キャッチ/詳細エンリッチの進捗と再開点。2026-07-30時点: full系バッチは全消化済。★現在の作業=短キャッチrequeue(batch-0001〜0190)の消化で、0084まで=1,681作を本番反映済/残2,393作・次はbatch-0085から。genre系0218-0380も実質完了(残121はmaster32該当なし)"
+description: "キャッチ/詳細エンリッチの進捗と再開点。2026-07-30時点: full系バッチは全消化済。★現在の作業=短キャッチrequeue(batch-0001〜0190)の消化で、0100まで=2,040作を本番反映済/残2,034作・次はbatch-0101から。genre系0218-0380も実質完了(残121はmaster32該当なし)"
 metadata: 
   node_type: memory
   type: project
@@ -22,7 +22,9 @@ metadata:
 ★調査済の事実: **requeue の中身は全件 kind='full'・2巻以上・caption有で、batch-0001〜0190 に収まっている**(0191以降には1件も無い)。
 
 - **2026-07-30: batch-0001〜0038 = 807作を消化**(生成→`--requeue --apply`→`_reflect-targeted.py --push`で本番反映済)。
-- **残 = 3,451作(batch-0085〜0190)。次は batch-0085 から**。
+- **2026-07-31: batch-0085〜0100 = 359作を消化**(1スライス=2バッチ、8スライス連続。丸写しBLOCK 0件/警告1件のみ)。
+- **残 = 2,034作(batch-0101〜0190)。次は batch-0101 から**。
+- ★消し込みは **scripts/_rqdone.py** に恒久化(2026-07-31新設。バッチ番号を渡すだけでrequeue.txtから除去+残数表示)。
 - ★**本番頁が存在しないslugが49件混在していた**(7/27生成後にdrop/rename済=充填不能)。
   `docs/production-diagnostics/catch-short-requeue-nopage.txt` に分離済。本キューは実作業分だけ。
   新しいブロックに入る前に `os.path.exists(f'data/manga.v2/{slug}.yml')` で洗うと無駄な生成を防げる。
