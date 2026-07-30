@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import "./globals.css";
 import ScrollTopButton from "@/components/ScrollTopButton";
+import GlobalDragScroll from "@/components/GlobalDragScroll";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://mangal-db.com"),
@@ -18,6 +19,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="ja">
       <body className="min-h-screen flex flex-col">
+        {/* PCマウスの横ドラッグを全横帯のスワイプ相当に変換(タッチは不介入) */}
+        <GlobalDragScroll />
         <header className="border-b border-[var(--color-line)] bg-[var(--color-surface)]/80 backdrop-blur sticky top-0 z-20">
           <div className="mx-auto max-w-6xl px-4 py-3 flex items-center justify-between gap-3">
             {/* 左 = ロゴ + 「日本の漫画データベース」。 ロゴ寄りに少し左へ。 */}
