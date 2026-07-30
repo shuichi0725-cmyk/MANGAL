@@ -1,0 +1,46 @@
+# 欧米コミックス邦訳版の疑い(本番掲載中)。2026-07-30 検出。
+# 検出条件= 版元が翻訳コミックスレーベル(小学館集英社プロダクション/ヴィレッジブックス/小学館プロダクション)
+#          かつ 著者名がlatin or 中黒つきカナ(漢字なし)。ISBNは全て978-4=日本刊行のため既存の外国版フィルタでは検出されない。
+# ★掲載可否は未裁定(CLAUDE.mdのscope文言では「日本で出版された漫画」=対象内と読める)。
+slug	title	authors	publisher
+300	スリーハンドレッド	フランク・ミラー/MillerFrank	小学館プロダクション
+batman	バットマン	CapulloGreg	小学館集英社プロダクション
+batman-dark-victory	BATMAN Dark Victory	ティム・セイル	ヴィレッジブックス
+batman-eternal	バットマン:エターナル	ジェイソン・ファボック/ダスティン・グエン	小学館集英社プロダクション
+batman-lil-gotham	バットマン:リル・ゴッサム	ダスティン・グエン	小学館集英社プロダクション
+batman-no-mans-land	バットマン:ノーマンズ・ランド	マイク・デオダート・ジュニア/CarielloSergio	小学館集英社プロダクション
+batman-noel	バットマン:ノエル	リー・ベルメホ/BermejoLee	小学館集英社プロダクション
+batman-the-long-halloween	バットマン ロング・ハロウィーン	ティム・セイル	ヴィレッジブックス
+dark-knights-of-steel	ダークナイツ・オブ・スティール	高木亮/TaylorTom/PutriYasmine	小学館集英社プロダクション
+dc-universe-legacies	DC UNIVERSE LEGACIES	ジェリー・オルドウェイ/ジョー・キューバート/近藤恭佳/KubertJoe/Or	ヴィレッジブックス
+deadpool-kills-the-marvel-universe	デッドプール・キルズ・マーベルユニバース	ダリバー・タラジッチ	ヴィレッジブックス
+deadpool-samurai	デッドプール	DugganGerry	小学館集英社プロダクション
+fun-home	ファン・ホーム	アリソン・ベクダル	小学館集英社プロダクション
+hawkeye	ホークアイ	デイビッド・アジャ	小学館集英社プロダクション
+herubooi-2010	ヘルボーイ	マイク・ミニョーラ	小学館集英社プロダクション
+invincible-iron-man-ironheart	インビンシブル・アイアンマン:アイアンハート	ステファノ・カセッリ	小学館集英社プロダクション
+justice	ジャスティス	アレックス・ロス	ヴィレッジブックス
+justice-league	ジャスティス・リーグ	アイヴァン・リース/ジム・リー/ReisIvan	小学館集英社プロダクション
+justice-league-darkseid-war	ジャスティス・リーグ:ダークサイド・ウォー	ジェイソン・ファボック	小学館集英社プロダクション
+keeburu-ando-deddopuuru-ao-no-senrei	ケーブル＆デッドプール:青の洗礼	LiefeldRob	ヴィレッジブックス
+kick-ass	キック・アス	ジョン・ロミータ Jr./RomitaJohn	小学館集英社プロダクション
+marvel-zombies	マーベルゾンビーズ	PhillipsSean	ヴィレッジブックス
+mazinger-z-tai-transformer	トランスフォーマー:ロボッツ・イン・ディスガイズ	石川裕人/CoelloIban/BarberJohn	ヴィレッジブックス
+meta-baron-no-ichizoku	メタ・バロンの一族	フアン・ヒメネス	小学館集英社プロダクション
+mouse-guard	マウスガード	デイビッド・ピーターセン	小学館集英社プロダクション
+ms-marvel	Ms.マーベル	エイドリアン・アルフォナ	ヴィレッジブックス
+new-frontier	ニューフロンティア	ダーウィン・クック	ヴィレッジブックス
+promethea	プロメテア	J・H・ウィリアムズ〔Ⅲ〕	小学館集英社プロダクション
+saga	サーガ	フィオナ・ステイプルズ	小学館集英社プロダクション
+shin-city	シン・シティ	フランク・ミラー	小学館集英社プロダクション
+spider-man-brand-new-day	スパイダーマン:ブランニュー・デイ	フィル・ヒメネス	小学館集英社プロダクション
+spider-men	スパイダーメン	ブライアン・マイケル・ベンディス	小学館集英社プロダクション
+spider-verse	スパイダーバース	オリビア・コワペル	ヴィレッジブックス
+strange-academy	ストレンジ・アカデミー	ハンベルト・ラモス	小学館集英社プロダクション
+the-incal	アンカル	メビウス/Moebius	小学館集英社プロダクション
+the-ultimates	アルティメッツ	ブライアン・ヒッチ	小学館集英社プロダクション
+toppu-10	トップ10	ザンダー・キャノン/ジーン・ハー	ヴィレッジブックス
+transformers-more-than-meets-the-eye	トランスフォーマー:モア・ザン・ミーツ・ジ・アイ	MilneAlex/神山りお/RaizeJames	ヴィレッジブックス
+vision	ヴィジョン	石川裕人/HernándezGabriel/KingTom	ヴィレッジブックス
+x-men	X-MEN	レイニル・フランシス・ユー	小学館プロダクション
+yami-no-kuniguni	闇の国々	フランソワ・スクイテン	小学館集英社プロダクション
