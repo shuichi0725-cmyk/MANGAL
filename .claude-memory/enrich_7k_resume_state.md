@@ -73,3 +73,12 @@ CLAUDE.md「該当が無ければ無理に付けず空でよい」に従い**空
 - 型の含意: スワップは同一batch内でペアで起きる=1件見つけたら**相手側(内容が指す作品)も必ず誤っている**。両方直す。
 - 未掃引の残リスク: synopsis-ja 39,591件の初期waveに同型が潜在しうる(生成キャッシュは消失=位置法医学不可)。
   検出案=synopsis×同頁caption/catchの語彙交差ゼロflag→AI裁定(月次サニティ候補・未着手)。
+
+## ★2026-07-30 追加: 短あらすじ再生成キュー(4,189件)
+- `docs/production-diagnostics/synopsis-short-requeue.tsv` = synopsis-ja が規格60-120字に足りない分
+  (severe<40字 2,030 / mild40-59字 2,159。**楽天素材あり1,776件が着手対象**、無い2,413件は現状維持)。
+- 消化順は skill enrich-catch-synopsis の通り ①空欄頁 → ②短キャッチrequeue → ③**この短あらすじキュー**。
+- ★★**書込層**: あらすじは2層あり promote は **anilist_id キーの synopsis-ja.json を優先**、
+  slug側(synopsis-slug-ja.json)は空の時だけ fallback。`_apply-enrich-batch.py` は 2026-07-30 に
+  **anilist層へ書く分岐を実装済**(報告に「うちanilist層N」が出る)。旧仕様のまま slug側に書くと**silent空振り**。
+- 検品柱との分担: **誤りは検品柱(synopsis-audit / _catch-audit.py)が直す / 短いのはエンリッチが太らせる**。

@@ -45,6 +45,7 @@ def prod(slug):
     except Exception: return {}
     return {'catch': bool((d.get('catch') or '').strip()),
             'syn': bool((d.get('synopsis') or '').strip()),
+            'aid': str(d.get('anilist_id')) if d.get('anilist_id') else None,
             'genres': list(d.get('genres') or [])}
 
 def ngram_overlap(a, b, k=8):
@@ -97,15 +98,20 @@ print(f'validated {len(out)} entries OK')
 
 paths = {'catch': os.path.join(ROOT, 'data', 'seeds', 'catch-ja.json'),
          'syn':   os.path.join(ROOT, 'data', 'seeds', 'synopsis-slug-ja.json'),
+         'synaid': os.path.join(ROOT, 'data', 'seeds', 'synopsis-ja.json'),
          'genre': os.path.join(ROOT, 'data', 'seeds', 'genre-enrich-2425.json'),
          'cidx':  os.path.join(ROOT, 'data', 'manga-catch-index.json')}
 catch = json.load(open(paths['catch'], encoding='utf-8'))
 syn = json.load(open(paths['syn'], encoding='utf-8'))
+# ★あらすじは2層ある。promoteは anilist_id キーの synopsis-ja.json を先に埋め、slug側は「空の時だけ」
+#   fallback。よって anilist側に既存キーがある頁に slug側へ書いても**頁に出ない**(2026-07-30 実踏)。
+#   → 該当頁は anilist 層へ書く。[[synopsis_ja_seed]]
+synaid = json.load(open(paths['synaid'], encoding='utf-8'))
 genre = json.load(open(paths['genre'], encoding='utf-8'))
 cidx = json.load(open(paths['cidx'], encoding='utf-8'))
 
 ac = asn = ag = ai = 0
-ov_c = ov_s = 0
+ov_c = ov_s = ov_aid = 0
 skip_catch = skip_syn = skip_genre = 0
 changed = []
 for s, v in out.items():
@@ -121,9 +127,16 @@ for s, v in out.items():
             if s not in catch: catch[s] = c; ac += 1; touched = True
             if not cidx.get(s): cidx[s] = c; ai += 1
     if y:
+        aid = st.get('aid')
+        aid_layer = bool(aid and aid in synaid)   # ★この頁のあらすじはanilist層が優先=そちらへ書く
         if REQUEUE:
-            if syn.get(s) != y: syn[s] = y; ov_s += 1; touched = True
+            if aid_layer:
+                if synaid.get(aid) != y: synaid[aid] = y; ov_s += 1; ov_aid += 1; touched = True
+            elif syn.get(s) != y:
+                syn[s] = y; ov_s += 1; touched = True
         elif st.get('syn'): skip_syn += 1
+        elif aid_layer:
+            pass  # anilist層に既存キー=本文が在るので純粋追加モードでは触らない(上書きは--requeueで)
         else:
             if s not in syn: syn[s] = y; asn += 1; touched = True
     if ga:
@@ -133,7 +146,7 @@ for s, v in out.items():
 
 mode = 'REQUEUE(上書き許可)' if REQUEUE else '純粋追加'
 print(f'[{mode}] catch+{ac} / syn+{asn} / genre+{ag} / catch索引+{ai}'
-      + (f' / 上書き catch{ov_c}・syn{ov_s}' if REQUEUE else '')
+      + (f' / 上書き catch{ov_c}・syn{ov_s}(うちanilist層{ov_aid})' if REQUEUE else '')
       + f'  (本番既済skip: catch{skip_catch}/syn{skip_syn}/genre{skip_genre})')
 print(f'変更slug {len(changed)}件')
 if not APPLY:
@@ -144,6 +157,7 @@ for k, p in paths.items():
     shutil.copy2(p, os.path.join(ROOT, '.cache', os.path.basename(p) + f'.bak-enrich{stamp}'))
 json.dump(catch, open(paths['catch'], 'w', encoding='utf-8'), ensure_ascii=False, separators=(',', ':'))
 json.dump(syn, open(paths['syn'], 'w', encoding='utf-8'), ensure_ascii=False, separators=(',', ':'))
+json.dump(synaid, open(paths['synaid'], 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
 json.dump(genre, open(paths['genre'], 'w', encoding='utf-8'), ensure_ascii=False, separators=(',', ':'))
 json.dump(cidx, open(paths['cidx'], 'w', encoding='utf-8'), ensure_ascii=False, separators=(',', ':'))
 open(os.path.join(ROOT, '.cache', 'enrich_changed_slugs.txt'), 'w', encoding='utf-8').write(','.join(changed))
