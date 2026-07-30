@@ -24,7 +24,7 @@ function activeCount(s: FilterState): number {
 }
 import type { ListBundle, MangaListItem } from "@/lib/schema";
 import { onAltLoaded, prewarmSearch, searchWithTiers } from "@/lib/clientSearch";
-import { useMangaIndex } from "@/lib/useMangaIndex";
+import { useMangaIndex, ensureFullIndex, isFullIndexLoaded } from "@/lib/useMangaIndex";
 
 /** 一覧表クライアント: 絞り込み=既存の多窓フィルター(トップと同じ)、並び順=独立チップ。
  *  「完結×ジャンル×作者×開始が古い順」のような自由なAND合成が成立する。 */
@@ -156,6 +156,12 @@ export default function ListClient({ data }: { data: ListBundle }) {
   useEffect(() => {
     if (mangaIndex) prewarmSearch(mangaIndex);
   }, [mangaIndex]);
+  // ★検索クエリがある間はフル索引を即時要求(2026-07-31 ユーザ報告「検索押してから表示まで
+  //   めっちゃ時間かかる」)。旧: idleの2秒待ちに乗るだけで、?q=着地(PCサイドバー検索)は
+  //   head100件に対する誤答→数秒後にフル置換、という体感だった。
+  useEffect(() => {
+    if (q.trim()) ensureFullIndex();
+  }, [q]);
   const [altTick, setAltTick] = useState(0);
   useEffect(() => onAltLoaded(() => setAltTick((v) => v + 1)), []);
   const rows = useMemo(() => {
@@ -264,7 +270,14 @@ export default function ListClient({ data }: { data: ListBundle }) {
         </div>
       </div>
       <p className="px-3 pb-1 text-[11px] text-ink/50">
-        {rows.length.toLocaleString()} 件{nActive > 0 || q ? <span className="text-ink/40">(絞り込み中)</span> : null}
+        {q.trim() && !isFullIndexLoaded() ? (
+          // ★フル索引が届くまでの検索結果は暫定(head100件相当)。到着時にlistener経由で再レンダーされ確定する
+          <span className="text-[var(--color-accent)]">検索中…(全作品データ読み込み中)</span>
+        ) : (
+          <>
+            {rows.length.toLocaleString()} 件{nActive > 0 || q ? <span className="text-ink/40">(絞り込み中)</span> : null}
+          </>
+        )}
       </p>
 
       {/* ── 表 ── */}

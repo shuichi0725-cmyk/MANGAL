@@ -75,6 +75,12 @@ export function ensureFullIndex(): void {
     });
 }
 
+/** フル索引が手元に揃っているか(検索UIの「読み込み中」表示用)。full到着時は
+ *  _indexListeners 経由で使用側が再レンダーされるため、レンダー中に読めば十分新しい。 */
+export function isFullIndexLoaded(): boolean {
+  return _cacheIsFull;
+}
+
 function scheduleIdle(fn: () => void, timeout = 2000): void {
   if (typeof requestIdleCallback === "function") requestIdleCallback(fn, { timeout });
   else setTimeout(fn, 800);

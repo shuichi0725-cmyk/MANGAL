@@ -1,20 +1,39 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import { ensureFullIndex } from "@/lib/useMangaIndex";
 
 /** PC専用の左サイドバー(2026-07-06 ユーザ要望「PCは左に検索常駐」)。
  *  lg未満では非表示(モバイルは従来の1カラム)。sticky常駐。
- *  検索は /list?q= へ(ListClient が初期クエリを読む)。 */
+ *  検索は /list?q= へ(ListClient が初期クエリを読む)。
+ *  ★2026-07-31 検索レスポンス改善(ユーザ報告「検索押してから表示までめっちゃ時間かかる」):
+ *  ①遷移をSPA化(router.push) — 旧form GETはハードナビゲーションでモジュールキャッシュが毎回死に、
+ *    22MB索引の再デコード+検索前処理が検索のたびに走っていた。
+ *  ②PC(lg以上)のみホーム表示中にフル索引をidle先読み — 検索押下時には手元に揃っている。
+ *    モバイルはサイドバー非表示+回線コスト配慮で先読みしない(CSS非表示でもJSは動くためmatchMediaで判定)。 */
 export default function HomeSidebar({ genres }: { genres: Array<{ key: string; name: string }> }) {
   const [q, setQ] = useState("");
+  const router = useRouter();
+  useEffect(() => {
+    if (!window.matchMedia("(min-width: 1024px)").matches) return;
+    const t = setTimeout(() => ensureFullIndex(), 2500);
+    return () => clearTimeout(t);
+  }, []);
   return (
     <aside className="hidden lg:block w-[260px] shrink-0">
       <div className="sticky top-4 space-y-4">
         {/* 検索 */}
         <div className="rounded-xl border border-[var(--color-line)] bg-[var(--color-surface)] p-3.5 shadow-sm">
           <p className="text-[12px] font-extrabold text-ink/70">🔍 さがす</p>
-          <form action="/list" method="GET" className="mt-2">
+          <form
+            className="mt-2"
+            onSubmit={(e) => {
+              e.preventDefault();
+              router.push(q.trim() ? `/list?q=${encodeURIComponent(q.trim())}` : "/list");
+            }}
+          >
             <input
               name="q"
               value={q}
