@@ -53,3 +53,23 @@ AniListリンクは正しいのにseed本文が別作品) + レッツ&ゴーMAX(
 
 - 訂正の実害記録=[[enrich-7k-resume-state]](2026-07-30続報) / 素材照会=skill external-data-access
 - 頁反映=skill reflect-targeted / 同型の月次サニティ化は未着手(全量一巡後に検討)
+
+## ★裁けない時は消す (= 2026-07-30 ユーザ裁定)
+
+**「作れないものは、間違ったものが上がっているより消してok」**。素材ゼロ/証拠が矛盾して正しい本文を
+書けない場合は保留のまま放置せず、キーを削除して**欄そのものを出さない**:
+```
+python scripts/_synopsis-audit.py --drop <aid>      # synopsis-ja.json から削除(backup+changelog内蔵)
+python scripts/_catch-audit.py   --drop <slug>      # catch-ja.json から削除
+```
+判定の目安: ①素材ゼロ+本文が「(出典が乏しく…)」等の屑 → **即drop** ②seedとcatchが矛盾し外部素材も
+無い → **title に支持される側を残し、他方をdrop**(どちらも支持されないなら両方drop)。verdict は `dropped`。
+
+## ★姉妹柱: キャッチ検品 (= `scripts/_catch-audit.py`。2026-07-30 新設)
+
+catch-ja.json(35,188 slug)にも**別作品混入**がある(初回36件是正)。設計は本柱と同一だが証拠は2ストリーム:
+- **A**: 楽天caption素材あり → title+caption と交差せず**かつ**頁synopsisとも交差しない(両証拠が否定)
+- **B**: caption無し → 頁synopsis が唯一の独立証拠(罪と罰型はこちらで拾う)
+★caption単独のscoreだけでflagすると偽陽性2,718件。**証拠2系統の合議に締めて89件**にしてから裁定する。
+台帳 = `docs/production-diagnostics/catch-audit-verdicts.jsonl`。既知の穴 = 短いcatch(内容語3語未満)と
+題語と交差する誤り(「その後を描く」型)は拾えない。

@@ -187,6 +187,23 @@ def fix(aid, text_file):
     print(f"fixed aid={aid} (backup={bak.name})。★反映は該当slugを reflect-targeted で。")
 
 
+def drop(aid):
+    """★素材ゼロ/矛盾で正しい本文を作れない時は「消す」(2026-07-30 ユーザ裁定=
+    誤ったあらすじが出ているより無い方がよい)。キーを消せば promote は synopsis 欄を出さない。"""
+    syn = json.load(open(SYN, encoding="utf-8"))
+    assert str(aid) in syn, f"aid {aid} はseedに無い"
+    import shutil, time
+    bak = ROOT / ".cache" / f"synopsis-ja-bak-{time.strftime('%Y%m%d-%H%M%S')}.json"
+    shutil.copy(SYN, bak)
+    old = syn.pop(str(aid))
+    json.dump(syn, open(SYN, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
+    with CHANGELOG.open("a", encoding="utf-8", newline="\n") as f:
+        f.write(json.dumps({"op": "synopsis_ja_drop", "aid": str(aid), "old_head": old[:50],
+                            "at": time.strftime("%Y-%m-%d"), "via": "_synopsis-audit"},
+                           ensure_ascii=False) + "\n")
+    print(f"dropped aid={aid} (backup={bak.name})。★反映は該当slugを reflect-targeted で。")
+
+
 def verdict(aid, v, note):
     with LEDGER.open("a", encoding="utf-8", newline="\n") as f:
         f.write(json.dumps({"aid": str(aid), "verdict": v, "note": note,
@@ -200,6 +217,7 @@ def main():
     ap.add_argument("--scan", action="store_true")
     ap.add_argument("--show")
     ap.add_argument("--fix")
+    ap.add_argument("--drop", help="素材ゼロ/矛盾で作れない時にseedキーを削除(あらすじ欄を出さない)")
     ap.add_argument("--text-file")
     ap.add_argument("--verdict", nargs=2, metavar=("AID", "V"))
     ap.add_argument("--note", default="")
@@ -213,8 +231,10 @@ def main():
     elif a.fix:
         assert a.text_file, "--text-file 必須"
         fix(a.fix, a.text_file)
+    elif a.drop:
+        drop(a.drop)
     elif a.verdict:
-        assert a.verdict[1] in ("ok", "fixed", "hold"), "verdictは ok|fixed|hold"
+        assert a.verdict[1] in ("ok", "fixed", "hold", "dropped"), "verdictは ok|fixed|hold|dropped"
         verdict(a.verdict[0], a.verdict[1], a.note)
     else:
         ap.print_help()

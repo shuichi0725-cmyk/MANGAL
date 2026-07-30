@@ -71,6 +71,17 @@ python scripts/_enrich-captions.py --slugs a,b,c --live                         
   消し込み、上書き件数を changelog(`enrich-requeue-changelog.jsonl`)に記録。
 - 材料(楽天caption)が取れない作品は書き直さず現状維持(短くても捏造よりまし)+リストに残す。
 
+## ★短あらすじ再生成キュー (= 2026-07-30 あらすじ検品の副産物。ユーザ裁定「エンリッチ対象にあげて」)
+- 対象 = `docs/production-diagnostics/synopsis-short-requeue.tsv`(**4,189件** = synopsis-ja の規格60-120字に
+  対して短すぎる分。tier=severe(<40字) 2,030 / mild(40-59字) 2,159。has_caption列=楽天素材の有無)。
+- 優先は **severe × has_caption=yes**。`has_caption=no`(2,413件)は素材ゼロなので**書き直さない**(現状維持)。
+- ★★**書き込み層に注意**: このキューは **anilist_id キー**の `data/seeds/synopsis-ja.json` が正本。
+  promote は「anilist側を先に埋め、slug側(`synopsis-slug-ja.json`)は空の時だけ fallback」なので、
+  **slug seed に書いても頁に出ない**(2026-07-30 実踏の罠)。訂正は必ず anilist キー側へ。
+- 誤りではなく「短い」だけなので**上書き可**(requeue分と同じ扱い)。処理後はTSVから消し込み、
+  件数を `enrich-requeue-changelog.jsonl` に記録。生成は60-120字・ネタバレ無し・最終巻丸写し禁止。
+- 検品柱(skill synopsis-audit / _catch-audit.py)とは役割分担: **誤りは検品柱が直す / 短いのはここが太らせる**。
+
 ## 過去の実績・教訓(re-inventしない)
 - 2026新刊蒸留: 3段fill+AI enrich(verbatim撲滅・最終巻丸写し禁止はここ由来)。
 - 楽天あらすじ→ジャンル: 教師あり+較正+2パス救済で6,638作付与([[genre_from_rakuten_story_plan]])。
