@@ -1,30 +1,56 @@
 ---
 name: enrich-7k-resume-state
-description: "キャッチ/詳細エンリッチの進捗と再開点。2026-07-30に0191-0217(645作)を新字数規格で消化・本番反映済。★full系バッチは全消化=残は genreのみ0218-0380(4,071作)と短キャッチrequeue(4,343作)"
+description: "キャッチ/詳細エンリッチの進捗と再開点。2026-07-30時点: full系バッチは全消化済。★現在の作業=短キャッチrequeue(batch-0001〜0190)の消化で、0010まで=225作を本番反映済/残4,118作・次はbatch-0011から。genre系0218-0380も実質完了(残121はmaster32該当なし)"
 metadata: 
   node_type: memory
   type: project
   originSessionId: 0f715f40-d14b-4e9a-806c-fe24cfb6fc30
-  modified: 2026-07-29T16:40:50.569Z
+  modified: 2026-07-30T00:02:50.642Z
 ---
 
 エンリッチ(キャッチ/詳細/ジャンル)の消化状況。材料バッチは `.cache/enrich-batches/batch-NNNN.json`(380本、2026-07-26生成)。
 
 - **kind='full'**(2巻以上・楽天caption有)= catch+synopsis / **kind='genre'**(1巻)= ジャンルのみ(2026-07-14裁定)。
-- **7/27の並列生成は190バッチで停止**(4,750作適用済。ただし平均19字で短く、requeue対象)。
-- **2026-07-30に 0191-0204(342作) + 0205-0217(303作) = 645作を消化**。新字数規格(キャッチ50-70/詳細80-110)で生成→適用→`_reflect-targeted.py`で本番反映+push済(検証ゲートOK)。
-  - 生成物は git 追跡: `data/enrich-out-2026-07/batch-0NNN.json`(dict形式 {slug:{catch,synopsis,genres_add}})。
-  - 適用器 = ★**`scripts/_apply-enrich-batch.py`**。字数ゲート(catch48-74/syn78-114)+丸写し8gram+master32検証+本番既済skipの純粋追加。`--requeue` で上書きモード。
-  - 書込先 = catch-ja.json / synopsis-slug-ja.json / genre-enrich-2425.json / manga-catch-index.json(全てpromote結線済)。
+- 生成物は git 追跡: `data/enrich-out-2026-07/batch-NNNN.json`(dict形式 {slug:{catch,synopsis,genres_add}})。
+- 適用器 = ★**`scripts/_apply-enrich-batch.py`**。字数ゲート(catch48-74/syn78-114)+丸写し8gram+master32検証+本番既済skipの純粋追加。`--requeue` で上書きモード。
+- 書込先 = catch-ja.json / synopsis-slug-ja.json / genre-enrich-2425.json / manga-catch-index.json(全てpromote結線済)。
+- 初回生成(0191-0217=645作)は 2026-07-29〜30 に消化・本番反映済。★**full系の新規生成は 0217 で打ち止め**。
 
-**残り**
-- ★**full系は 0217 で打ち止め**(0205-0217が最後の13バッチ)。
-- genreのみ 0218-0380 = 163バッチ・4,071作
-- 短キャッチ再生成キュー = `docs/production-diagnostics/catch-short-requeue.txt` 4,343作(requeueモードで上書き)
+## ★現在の作業 = 短キャッチ requeue の消化(次は batch-0011 から)
 
-**実装知見(効率に直結)**
-- ★キャッチは体感より**10字ほど短く出る**。48字ゲートに1字足りない「47字」落ちが頻発するので、**最初から60字強を狙う**(3節目を長く)。手本=hunter-hunter(64字)。
-- 材料ダイジェストは scratchpad の `_digest.py`(バッチ番号を渡すと本番未充足のみ整形出力。充足済頁は自動除外)。`CAPLEN=260` 環境変数でcaption切詰め長を調整=読む量を圧縮できる。
-- ★**2026-07-30 修正**: `_apply-enrich-batch.py` の master32 ローダが `genres.yml`(=key直下の平坦dict)を `.get('genres')` で読んでおり**ジャンル検証が常に失敗**していた(genre付与が全て弾かれる)。dict分岐を追加して修正済。
-- 保留にする型: 傑作集/編集本(ワタシの川原泉)・材料が実質空(ヤバ盛/吉野家兄弟)・評伝など非漫画候補(闇の王子ディズニー)・**フィルムコミック**(ズートピア=掲載境界)。捏造せず空のまま残す。
-- 全量一括WFはセッション枠を食うので不可([[enrich-catch-synopsis]] skill が正本)。Opusインラインで2バッチ(約50作)ずつが実用単位。
+対象リスト = `docs/production-diagnostics/catch-short-requeue.txt`。7/27の並列生成4,750作が平均19字で貧相だった分の作り直し。
+★調査済の事実: **requeue の中身は全件 kind='full'・2巻以上・caption有で、batch-0001〜0190 に収まっている**(0191以降には1件も無い)。
+
+- **2026-07-30: batch-0001〜0010 = 225作を消化**(生成→`--requeue --apply`→`_reflect-targeted.py --push`で本番反映済)。
+- **残 = 4,118作(batch-0011〜0190)**。
+- 1周の手順(2バッチ≒45-49作が実用単位):
+  1. `_rqdigest.py 0011 0012` (scratchpadの自作script。requeue掲載slugだけを、旧catch/syn+全巻captionつきで整形出力。`CAPLEN=150`で十分)
+  2. `data/enrich-out-2026-07/batch-0011.json` 等に生成物を書く
+  3. `python scripts/_apply-enrich-batch.py 0011 0012 --requeue`(検証)→ 通ったら `--apply`
+  4. requeueリストから消し込み+セッション累積に追記(小scriptで一括)
+  5. commit → `_reflect-targeted.py --only <そのブロックのslug> --push`
+
+## ★実装知見(効率に直結)
+
+- ★**キャッチは必ず「2文構成」で書く**。単文フックだと例外なく38-40字に落ちて48字ゲートで全滅する(2026-07-30に40件一斉違反で実証)。
+  手本 = hunter-hunter(64字)/one-piece(62字)/kimetsu(55字)= 「[主人公と状況のフック]。[ジャンルの手触りで締める第2文]。」
+- ★**狙いは60-68字**。2026-07-30の225作は中央値51字で、規格内だが**実勢コーパス中央値65字より低い**(下限48に寄せすぎた)。
+  次からは第2文を長めに取り、60台に置く。
+- 丸写し8gramゲートは BLOCK 0.55 / WARN 0.40。★**0.42以上が出たら直す**(captionの言い回しをそのまま使っている印)。
+  落とし方 = 固有名詞の登場順を組み替える + caption外の情報(巻数構成・シリーズ位置・完結の有無)を足す。実績: 0.42-0.49が7件出て全て修正。
+- syn は78字が下限なので77字落ちが頻発する。**文末を「〜していく」「〜のだった」で伸ばす**のが手っ取り早い。
+- `_apply-enrich-batch.py` の master32 ローダは 2026-07-30 に修正済(`genres.yml`の平坦dict形式を読めずジャンル検証が常に失敗していた)。
+
+## 残りのもう一方 = genre系 0218-0380 は実質完了(2026-07-30 調査)
+
+4,071件中 **3,948件は既にジャンル付与済**。残121件を本番と突合したところ、
+**学習漫画(ドラえもん学習シリーズ/学研まんがひみつシリーズ)・画集・原画集・図録・挿絵集・評論(大塚英志/押井守/萩尾望都対談)・傑作選**
+が大半で、★**master32に該当キーが無い**(教育・学習・評論のキーは存在しない)。
+CLAUDE.md「該当が無ければ無理に付けず空でよい」に従い**空のまま据置が正しい**=これ以上追わない。
+なお画集/評論/図録は [[art_book_inclusion]] の別ストリーム or 掲載境界の検討対象で、ジャンル付与より先に掲載可否の裁定マター。
+
+## 保留にする型(捏造せず空のまま残す)
+
+傑作集/編集本(ワタシの川原泉)・材料が実質空(ヤバ盛/吉野家兄弟)・評伝など非漫画候補(闇の王子ディズニー)・**フィルムコミック**(ズートピア=掲載境界)。
+
+全量一括WFはセッション枠を食うので不可([[enrich-catch-synopsis]] skill が正本)。Opusインラインで2バッチずつ。
