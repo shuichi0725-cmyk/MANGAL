@@ -62,3 +62,14 @@ CLAUDE.md「該当が無ければ無理に付けず空でよい」に従い**空
 傑作集/編集本(ワタシの川原泉)・材料が実質空(ヤバ盛/吉野家兄弟)・評伝など非漫画候補(闇の王子ディズニー)・**フィルムコミック**(ズートピア=掲載境界)。
 
 全量一括WFはセッション枠を食うので不可([[enrich-catch-synopsis]] skill が正本)。Opusインラインで2バッチずつ。
+
+## ★旧synopsis誤り型の続報(2026-07-30 Fable検証: 訂正が頁に届かない構造があった)
+
+- Opus発見の2件(ばけもの夜話づくし/レッツ&ゴーMAX)は **synopsis-ja.json(anilistキー)側の誤り**で、
+  ★ばけもの夜話づくし(105592)⇔凪のお暇(105614)は**相互スワップ**(=生成batch内の対交換型。第3の被害作=凪のお暇も誤っていた)。
+- ★**synopsis-slug-ja.json への訂正だけでは頁に出ない**: promoteは anilist synopsis-ja が先に埋め、
+  slug seed は「synopsisが空の時だけ」fallback(L3331)。**synopsis訂正は必ず synopsis-ja.json(該当aidキー)を直す**。
+  3キー是正+reflect済(e8b0fa48a)。changelog=enrich-requeue-changelog.jsonl(op=synopsis_ja_fix)。
+- 型の含意: スワップは同一batch内でペアで起きる=1件見つけたら**相手側(内容が指す作品)も必ず誤っている**。両方直す。
+- 未掃引の残リスク: synopsis-ja 39,591件の初期waveに同型が潜在しうる(生成キャッシュは消失=位置法医学不可)。
+  検出案=synopsis×同頁caption/catchの語彙交差ゼロflag→AI裁定(月次サニティ候補・未着手)。
