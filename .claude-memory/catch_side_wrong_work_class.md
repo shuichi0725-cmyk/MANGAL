@@ -1,21 +1,19 @@
 ---
 name: catch_side_wrong_work_class
-description: 頁のcatch(キャッチ)にも別作品の内容が入る型が実在。あらすじ検品(292件)の副産物で4件確認、catch専用の監査は未整備
+description: catchにも別作品混入の型が実在(初回36件是正)。検出器=_catch-audit.py・裁けない時はdropで消す方針
 metadata: 
   node_type: memory
   type: project
   originSessionId: 317b315e-f85b-4abc-8dad-aced941f2d0f
-  modified: 2026-07-30T08:37:26.089Z
+  modified: 2026-07-30T09:01:32.441Z
 ---
 
-あらすじ検品(synopsis-ja 全数裁定 2026-07-30・292件)の副産物として、**catch 側にも「別作品の内容」型がある**ことが確定した。synopsis を検品していると「seed は正しく catch が誤り」というケースが逆向きに出てくる。
+あらすじ検品(synopsis-ja 全数292件裁定 2026-07-30)の副産物として、**catch 側にも「別作品の内容」型がある**ことが確定し、同設計の検出器 `scripts/_catch-audit.py` を新設して初回掃引まで完了した(93件裁定 / **fixed 36・dropped 1・ok 52・hold 2**、残flag 0)。
 
-確認済み4件(いずれも synopsis は正しく catch が別作品):
-- 罪と罰(手塚治虫・tsumitobatsu) — catch=「食糧難を救う新種が変異…救世団」= 別作品のSF
-- 純情クレイジーフルーツ(松苗あけみ1983・junjou-crazy-fruits) — catch=「その後を描く」続編扱いだが頁実体は原作
-- +チック姉さん(plus-chikku-nee-san) — catch=「書道部」だが実体は模型部
-- THE IDOLM@STER(まな・一迅社2013・the-idolm-ster) — catch=「中性的な少年が男性アイドル」= 別作品
+- ★**最初のスワップ(ばけもの夜話づくし⇔凪のお暇)は catch 層にも残っていた**: 凪のお暇のキャッチが「悩みを抱える者に扉を開く宿・雷雲亭」= 相手作品の内容。**synopsisを直してもcatchは直らない**(層が別)。
+- 他の実例: HOME(内田春菊)にスペインと侍の歴史ロマンス / Dawn に疫病パンデミック / だから僕はHができない に愛犬が人間化 / 火の鳥2772 に手塚『火の鳥』本編 / BLAZBLUE に別スピンオフ / 本編の粗筋がスピンオフ頁に入る型(賭ケグルイ(仮)・ウソ婚Rosé・伝勇伝4コマ・アリスと蔵六学園・シマウマ外伝)。
+- **画集頁に原作の粗筋**が入る型もある(セラフィック・フェザー/雪広うたこアートワークス)。[[work_qid_enrichment]]とは別問題。
 
-**Why:** synopsis-ja には検品柱([[synopsis_ja_seed]] / skill synopsis-audit)があるが、**catch には同等の監査が無い**。catch は頁上部に出るため誤りの視認性は synopsis より高い。
+**Why:** catch は頁上部に出るので誤りの視認性が最も高い。かつ catch と synopsis は別seed(`catch-ja.json` / `synopsis-ja.json`)なので、片方を直しても他方は残る。
 
-**How to apply:** catch の掃引を作るときは synopsis-audit と同じ設計(内容語 × 独立証拠[title+巻caption]の交差スコア → 低スコアだけAI裁定)が流用できる。個別の証拠は `docs/production-diagnostics/synopsis-audit-verdicts.jsonl` の note に残してあるので、そこから起点4件を拾える。関連: [[feedback_one_bug_means_a_class]]
+**How to apply:** 検出は必ず**証拠2系統の合議**で締める(caption単独のスコアだけだと偽陽性2,718件 → 「captionとsynopsisの両方と交差しない」に絞って89件)。素材ゼロ/矛盾で正しい本文が書けない時は保留にせず `--drop` でキーを削除する(ユーザ裁定「作れないものは間違ったものが上がっているより消してok」)。やり方は skill synopsis-audit に封入済。関連: [[synopsis_ja_seed]] [[feedback_one_bug_means_a_class]] [[feedback_accuracy_is_the_goal]]
