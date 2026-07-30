@@ -217,6 +217,13 @@ body {
   }
 }
 
+/* PCマウスでは横帯が「つかんで動かせる」合図(GlobalDragScrollが実装。タッチには出さない) */
+@media (pointer: fine) {
+  .no-scrollbar {
+    cursor: grab;
+  }
+}
+
 /* 検索input(type=search)のブラウザ標準クリアボタンを無効化 (= 自前×との二重表示解消 2026-07-19) */
 input[type="search"]::-webkit-search-cancel-button,
 input[type="search"]::-webkit-search-decoration {

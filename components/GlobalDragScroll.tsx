@@ -28,7 +28,7 @@ export default function GlobalDragScroll() {
   useEffect(() => {
     let target: HTMLElement | null = null;
     let dragging = false;
-    let startX = 0, startY = 0, startL = 0, pid = -1;
+    let startX = 0, startY = 0, lastX = 0, pid = -1;
 
     const blockClick = (e: MouseEvent) => {
       e.stopPropagation();
@@ -54,7 +54,7 @@ export default function GlobalDragScroll() {
       dragging = false;
       startX = e.clientX;
       startY = e.clientY;
-      startL = target.scrollLeft;
+      lastX = e.clientX;
       pid = e.pointerId;
     };
     const onMove = (e: PointerEvent) => {
@@ -75,23 +75,33 @@ export default function GlobalDragScroll() {
         target.style.cursor = "grabbing";
         document.documentElement.style.userSelect = "none";
       }
-      target.scrollLeft = startL - dx;
+      // ★相対デルタで加算(絶対座標マッピング禁止): 巻コーフローのループ制御が
+      //   ドラッグ中に scrollLeft をワープさせるため、絶対値で戻すと喧嘩してガクつく(2026-07-31実踏)
+      target.scrollLeft -= e.clientX - lastX;
+      lastX = e.clientX;
       e.preventDefault();
     };
     const onUp = (e: PointerEvent) => {
       if (e.pointerId !== pid) return;
       cleanup();
     };
+    // ★ブラウザ標準の画像/リンクドラッグ(ゴースト画像)を横帯内だけ無効化:
+    //   これが先に発火すると pointer 操作が奪われ「画像をつかんで動かせない」(2026-07-31実踏)
+    const onDragStart = (e: DragEvent) => {
+      if (findScrollableX(e.target as Element)) e.preventDefault();
+    };
 
     document.addEventListener("pointerdown", onDown, { passive: true });
     document.addEventListener("pointermove", onMove);
     document.addEventListener("pointerup", onUp, { passive: true });
     document.addEventListener("pointercancel", onUp, { passive: true });
+    document.addEventListener("dragstart", onDragStart);
     return () => {
       document.removeEventListener("pointerdown", onDown);
       document.removeEventListener("pointermove", onMove);
       document.removeEventListener("pointerup", onUp);
       document.removeEventListener("pointercancel", onUp);
+      document.removeEventListener("dragstart", onDragStart);
     };
   }, []);
   return null;
