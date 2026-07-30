@@ -1,6 +1,6 @@
 ---
 name: enrich-7k-resume-state
-description: "キャッチ/詳細エンリッチの進捗と再開点。2026-07-30時点: full系バッチは全消化済。★現在の作業=短キャッチrequeue(batch-0001〜0190)の消化で、0124まで=2,570作を本番反映済/残1,504作・次はbatch-0125から。genre系0218-0380も実質完了(残121はmaster32該当なし)"
+description: "キャッチ/詳細エンリッチの進捗と再開点。2026-07-30時点: full系バッチは全消化済。★現在の作業=短キャッチrequeue(batch-0001〜0190)の消化で、0138まで=2,881作を本番反映済/残1,193作・次はbatch-0139から。genre系0218-0380も実質完了(残121はmaster32該当なし)"
 metadata: 
   node_type: memory
   type: project
@@ -16,7 +16,7 @@ metadata:
 - 書込先 = catch-ja.json / synopsis-slug-ja.json / genre-enrich-2425.json / manga-catch-index.json(全てpromote結線済)。
 - 初回生成(0191-0217=645作)は 2026-07-29〜30 に消化・本番反映済。★**full系の新規生成は 0217 で打ち止め**。
 
-## ★現在の作業 = 短キャッチ requeue の消化(次は batch-0125 から)
+## ★現在の作業 = 短キャッチ requeue の消化(次は batch-0139 から)
 
 対象リスト = `docs/production-diagnostics/catch-short-requeue.txt`。7/27の並列生成4,750作が平均19字で貧相だった分の作り直し。
 ★調査済の事実: **requeue の中身は全件 kind='full'・2巻以上・caption有で、batch-0001〜0190 に収まっている**(0191以降には1件も無い)。
@@ -27,7 +27,12 @@ metadata:
 - **2026-07-31(続々): batch-0117〜0124 = 177作を追加消化**。丸写し警告0件/字数違反0件で全スライス一発通過。
   コツ=(1)captionの連続一致が8字を超えそうな箇所を書く前に潰す(固有名詞は残し、間に助詞・修飾を挟んで切る)、
   (2)catchは55〜62字、synは82〜90字に着地させると両ゲートに余裕が出る。
-- **残 = 1,504作(batch-0125〜0190)。次は batch-0125 から**。
+- **2026-07-31(4): batch-0125〜0138 = 311作を追加消化**。
+  ★**バッチJSONを書いたら、その場で字数チェックを同時実行する**(生成scriptの末尾に
+  `bad=[(k,len(v['catch']),len(v['synopsis'])) for k,v in d.items() if not (48<=len(v['catch'])<=74 and 78<=len(v['synopsis'])<=114)]` を入れて print)。
+  0135/0136 で **45件が48字未満**で一斉に落ちた=体感で書くと catch は必ず42〜47字に着地する。
+  **書くときは「体感より10字長く」**=3文構成(フック。状況。ジャンル/締め)にすると自然に55〜62字になる。
+- **残 = 1,193作(batch-0139〜0190)。次は batch-0139 から**。
 - ★消し込みは **scripts/_rqdone.py** に恒久化(2026-07-31新設。バッチ番号を渡すだけでrequeue.txtから除去+残数表示)。
 - ★**本番頁が存在しないslugが49件混在していた**(7/27生成後にdrop/rename済=充填不能)。
   `docs/production-diagnostics/catch-short-requeue-nopage.txt` に分離済。本キューは実作業分だけ。
