@@ -18,7 +18,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import _rakuten_match_lib as L
 ROOT = L.ROOT
 APPLY = "--apply" in sys.argv
-AT = "2026-06-27"
+AT = "2026-07-29"
 DB = f"{ROOT}/.cache/db-v2.sqlite"
 SUPP = f"{ROOT}/data/seeds/volumes-supplement.yml"
 CHANGELOG = f"{ROOT}/data/seeds/volume-gaps-changelog.jsonl"
@@ -31,6 +31,13 @@ def norm_isbn(s):
 def main():
     bundle = pickle.load(open(f"{ROOT}/.cache/rakuten-focus-index.pkl", "rb"))
     index = bundle["index"]; s2b = bundle["slug_to_bases"]
+    # ★volume-exclude済みISBNは候補にしない(転生ババァ: exclude済み同題小説4巻を再追加した 2026-07-29)
+    excluded_isbns = set()
+    _vex = f"{ROOT}/data/seeds/volume-exclude.yml"
+    if os.path.exists(_vex):
+        for _e in ((yaml.safe_load(open(_vex, encoding="utf-8")) or {}).get("excludes") or []):
+            if _e.get("isbn13"):
+                excluded_isbns.add(norm_isbn(_e["isbn13"]))
     con = sqlite3.connect(DB)
     cur = con.cursor()
 
@@ -121,7 +128,7 @@ def main():
             cands = []
             for b in bases:
                 cands += index.get((b, vnum), [])
-            cands = [c for c in cands if c["isbn"]]
+            cands = [c for c in cands if c["isbn"] and norm_isbn(c["isbn"]) not in excluded_isbns]
             # 既存ISBN(db/page)除外
             cands = [c for c in cands if norm_isbn(c["isbn"]) not in isbn_to_series and norm_isbn(c["isbn"]) not in all_page_isbns]
             if not cands:
