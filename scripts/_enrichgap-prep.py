@@ -17,6 +17,9 @@ N = int(sys.argv[2]) if len(sys.argv) > 2 else 40
 MINVOL = int(os.environ.get('MINVOL', '2'))
 MAXVOL = int(os.environ.get('MAXVOL', '9999'))
 CAPLEN = int(os.environ.get('CAPLEN', '95'))
+# EARLYMIN>0 = 「1〜2巻の紹介文が EARLYMIN 字以上ある物だけ」に絞る。
+# ★skill規律「文面は1〜2巻の範囲しか書かない」を満たせる頁だけを対象にするためのゲート。
+EARLYMIN = int(os.environ.get('EARLYMIN', '0'))
 
 done = set()
 dp = os.path.join(ROOT, '.cache', 'enrichgap-done.txt')
@@ -32,6 +35,10 @@ for line in io.open(os.path.join(ROOT, '.cache', 'enrich', 'materials.jsonl'), e
     nv = d.get('n_vols') or 0
     if not caps or not (MINVOL <= nv <= MAXVOL):
         continue
+    if EARLYMIN:
+        early = [c for c in caps if (c.get('vol') or 99) <= 2]
+        if max((len(c.get('caption') or '') for c in early), default=0) < EARLYMIN:
+            continue
     picked.append(d)
     if len(picked) >= N:
         break
