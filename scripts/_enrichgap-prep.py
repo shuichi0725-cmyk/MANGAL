@@ -21,6 +21,14 @@ CAPLEN = int(os.environ.get('CAPLEN', '95'))
 # ★skill規律「文面は1〜2巻の範囲しか書かない」を満たせる頁だけを対象にするためのゲート。
 EARLYMIN = int(os.environ.get('EARLYMIN', '0'))
 
+# ★内部slug → 本番ファイル名 の対応(slug-override頁 約1,035件)。
+# materials.jsonl は内部slugを持つが、_apply-enrich-batch.py も本番yml も**ファイル名**で引く。
+# ここで寄せておかないと NOFILE で弾かれ、消し込みも噛み合わず同じ頁が再出する。
+SFMAP = {}
+_sp = os.path.join(ROOT, '.cache', 'slug-file-map.json')
+if os.path.exists(_sp):
+    SFMAP = json.load(io.open(_sp, encoding='utf-8'))
+
 done = set()
 dp = os.path.join(ROOT, '.cache', 'enrichgap-done.txt')
 if os.path.exists(dp):
@@ -29,6 +37,7 @@ if os.path.exists(dp):
 picked = []
 for line in io.open(os.path.join(ROOT, '.cache', 'enrich', 'materials.jsonl'), encoding='utf-8'):
     d = json.loads(line)
+    d['slug'] = SFMAP.get(d['slug'], d['slug'])
     if d['slug'] in done:
         continue
     caps = d.get('captions') or []
