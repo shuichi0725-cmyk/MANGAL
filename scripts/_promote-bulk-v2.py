@@ -1590,6 +1590,36 @@ def _load_rakuten_labels() -> tuple[dict, dict]:
 _RAKUTEN_GENRES, _RAKUTEN_TAGS = _load_rakuten_labels()
 
 
+def _load_genre_append() -> dict:
+    """genre-append.yml = 既存 genres を消さずに **足すだけ** の seed(slug単位)。
+
+    ★他の3つのジャンルseed(genre-additions/genre-wiki, genre-rakuten, genre-enrich)は
+      どれも排他分岐の中で `genres` に**代入**し、さらに genres_provisional / genres_rakuten の
+      フラグまで書き換える = 「provisionalを保ったまま1ジャンルだけ足す」経路が無かった。
+      その穴を埋めるのがこれ(2026-07-31 新設)。
+
+    仕様:
+      - ジャンル決定(trusted/rakuten/enrich/AI)が終わった **後** に union するだけ。
+      - **フラグは一切変えない** = 出所と信頼度を詐称しない。
+      - ファイル不在なら空dict = 挙動は完全に不変。
+      - trusted 作を載せれば trusted にも足さる。載せない方針は **生成スクリプト側**で担保する
+        (例 _genre-rakuten-branch-apply.py は genres_provisional / 空 のみを候補にする)。
+
+    用途: 高精度だが単発のシグナル。 例 = 楽天 booksGenreId の主題枝
+          001029002(TL)→romance P=100% / 001021002(BL)→romance P=90%。
+    """
+    out: dict = {}
+    p = ROOT / "data" / "seeds" / "genre-append.yml"
+    if p.exists():
+        for e in (yaml.safe_load(open(p, encoding="utf-8")) or {}).get("additions", []):
+            if e.get("slug"):
+                out.setdefault(e["slug"], []).extend(e.get("add") or [])
+    return out
+
+
+_GENRE_APPEND: dict = _load_genre_append()
+
+
 def _load_enrich_genres_tags():
     # ★enrich作り直し(vol1 caption基点・closed vocab)の genre/要素タグ。 slug単位。 trusted無時のAI上書き。
     gp = ROOT / "data" / "seeds" / "genre-enrich-2425.json"
@@ -3426,6 +3456,15 @@ def main():
                     #   索引ガードのmaster外拒否でページごと一覧から消える実害=2026-07-18に84頁で発覚)
                     new_yml["genres"] = ai_g
                     new_yml["genres_provisional"] = True  # 信頼源ゼロ=AI暫定(信頼源が来たら上書き)
+        # ★純粋追加ジャンル(genre-append.yml)= 上の決定の**後**に union するだけ(2026-07-31新設)。
+        #   既存 genres を消さない / フラグ(genres_provisional・genres_rakuten)も変えない。
+        #   = trusted を汚さずに「高精度だが単発のシグナル」を足す唯一の経路。
+        gap = [g for g in _GENRE_APPEND.get(slug, []) if g in valid_gens]
+        if gap:
+            merged = set(new_yml.get("genres") or []) | set(gap)
+            if merged & {"baseball", "soccer"}:
+                merged.add("sports")  # 階層検索: 他の経路と同じ規約(CLAUDE.md)
+            new_yml["genres"] = sorted(merged)
         # ★楽天あらすじ由来 要素タグ(Phase③) = theme tag未保有 work へ追加(category=Rakuten)。
         #   既存 tag 名は dedup。 表示は要素欄(tag-i18n 和訳)。
         rkt = _RAKUTEN_TAGS.get(slug)

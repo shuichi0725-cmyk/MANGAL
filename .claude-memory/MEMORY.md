@@ -154,3 +154,4 @@
 - [今日の一冊 過去ログ=凍結ログが正](sansedai_archive_frozen_log.md) — 表示済み日は永久固定・stock上書き前に凍結・純粋追記
 - [catch側にも別作品混入の型](catch_side_wrong_work_class.md) — 検出器=_catch-audit.py新設・初回36件是正。裁けない時はdropで消す
 - [【✅】短キャッチ/短あらすじrequeue 完了](synopsis_short_requeue_done.md) — 残2,413は素材ゼロで書き直さない。次層=空頁4,509(質低・要方針)
+- [【新設】genre-append.yml=既存genresを消さずunion](genre_append_seed_mechanism.md) — promote結線済。直接パッチはpromoteで消える
