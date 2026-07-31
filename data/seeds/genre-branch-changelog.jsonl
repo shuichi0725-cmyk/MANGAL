@@ -176,3 +176,4 @@
 {"op": "genre_add_rakuten_branch", "slug": "uncontrol-love", "before": [], "after": ["romance"], "added": ["romance"], "at": "2026-07-31", "via": "_genre-rakuten-branch-apply"}
 {"op": "genre_add_rakuten_branch", "slug": "ushiro-no-shoumen-darling", "before": [], "after": ["romance"], "added": ["romance"], "at": "2026-07-31", "via": "_genre-rakuten-branch-apply"}
 {"op": "genre_add_rakuten_branch", "slug": "wasurerarenai-otoko", "before": [], "after": ["romance"], "added": ["romance"], "at": "2026-07-31", "via": "_genre-rakuten-branch-apply"}
+{"op": "genre_add_rakuten_branch_REVERTED", "n": 178, "reason": "直接パッチ後に _reflect-targeted(=promote --only)を走らせたため seed から再生成され全件巻き戻った。manga.v2 への直接パッチは promote を通すと消える。", "net_effect": "本番は無変化", "at": "2026-07-31", "via": "_genre-rakuten-branch-apply"}
