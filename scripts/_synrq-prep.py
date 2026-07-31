@@ -25,7 +25,8 @@ N = int(sys.argv[2]) if len(sys.argv) > 2 else 45
 rows = [l.rstrip('\n').split('\t') for l in io.open(TSV, encoding='utf-8')]
 h = rows[0]
 iT, iC, iA, iS, iTi, iCur = (h.index(x) for x in ('tier', 'has_caption', 'anilist_id', 'slug', 'title', 'current_synopsis'))
-targets = [r for r in rows[1:] if len(r) >= len(h) and r[iT] == 'severe' and r[iC] == 'yes']
+TIER = os.environ.get('TIER', 'severe')  # severe(既定) / mild
+targets = [r for r in rows[1:] if len(r) >= len(h) and r[iT] == TIER and r[iC] == 'yes']
 want = {r[iS]: r for r in targets}
 
 mat = {}
