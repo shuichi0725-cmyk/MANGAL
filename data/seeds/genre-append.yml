@@ -1,0 +1,540 @@
+# 純粋追加ジャンル seed (promote結線: _promote-bulk-v2.py の _GENRE_APPEND)
+# ★既存 genres を消さず union するだけ。フラグ(genres_provisional/genres_rakuten)は変えない。
+# ★trusted 作は載せない(生成器が genres_provisional / 空 のみを候補にする)。
+# 出所: 楽天 booksGenreId の主題枝。001029002(TL)→romance P=100% / 001021002(BL)→romance P=90%
+#       ※ bl は P=64%(BL語彙を掛けてもリフト無し)につき不採用。
+additions:
+  - slug: 100-ninbun-no-kairaku
+    add: [romance]
+    source: "rakuten-branch:001029002"
+  - slug: aho-ero
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: ai-ga-kami-o-korosu-toki
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: aizenkagura
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: akiru-made-hanasouyo
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: akoya
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: akujunkanna
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: akunin-o-nakaseru-houhou
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: amaku-kowareru-ongaku
+    add: [romance]
+    source: "rakuten-branch:001029002"
+  - slug: ao-no-sekai
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: aoi-haru-no-yamaimochi
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: api
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: awa-to-yokubou
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: ayakashi-ko-tan
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: baabon-to-honey-toosuto
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: battle-recollect
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: be-monster
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: bishou-hari
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: black-dog-no-biscuits
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: boku-wa-jesus
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: boku-wa-kimi-no-ejiki
+    add: [romance]
+    source: "rakuten-branch:001029002"
+  - slug: boku-wa-tenshi-janaiyo
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: caramel-hardboiled
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: cendrillon
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: cheeky-monkey
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: chibikko-club
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: crush-biscuit
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: daigishi-no-ichizoku
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: danshoku-hikaru-genji
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: diamond-no-jouken
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: dokushin-riiman-no-midarana-ryouseikatsu
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: dramatic-ni-rakurai
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: dynamite-daddy
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: erotic-marchen
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: eternal-wind
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: fake-family
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: fake-hashiba-2022
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: fudanshi-mangamichi
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: fushou-no-bokura
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: gadget-sano-1998
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: gakuran-tengoku-catherine-1997
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: get
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: getsurei-15
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: go-for-it
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: gun-and-heaven
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: guri-gura
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: hachimitsu-kousen-daisakusen
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: hanjukushounen
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: hatsujou-sekuhara-hoikuen
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: hey-doctor
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: hitou-no-okite
+    add: [romance]
+    source: "rakuten-branch:001029002"
+  - slug: hitsuji-no-suimin-suishin-iinkai
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: hoshi-no-oka-paradise
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: hoshigarimasen-shuukaku-made-wa
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: hot-milk-2005
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: hotel-doloud
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: ijiwaru-na-tsugai
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: innocent-1995
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: isekai-oni-joushi
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: itsu-datte-souda-shouki-de-irarenai
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: izayoi-shoukan
+    add: [romance]
+    source: "rakuten-branch:001029002"
+  - slug: jail-bird
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: jakuzure-kousaten-de
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: jiipii-gakuen-jouhou-shoribu
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: jinsei-namekiri-gekijou
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: jinsei-wa-barairo-da-honma-2004
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: jouzen
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: jubunairu
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: kabala
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: kaeranakutemo-iinodakeredo
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: kaigi-wa-odoru
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: kairaku-hakurankai
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: kami-no-ko-kanazawa-2003
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: kamokuna-coffee-okubyouna-kurumi
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: karada-janai
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: karakuri-benimaru-oboro-henge
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: kasou-meikyuu
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: kawareta-hoshi
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: keikoku-muse
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: kemono
+    add: [romance]
+    source: "rakuten-branch:001029002"
+  - slug: kodomo-endorooru
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: koi-to-fukujuu-no-etosetora
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: kono-danshiryou-wa-yabasugiru
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: kono-yo-wa-kane-shidai
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: kouun-no-rihatsushi
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: kumo-to-arukou
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: kusare-en
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: laptop-hiking
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: last-zone
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: lost-child
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: love-blossom
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: love-shousetsu-ga-dekiru-made
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: mainichi-ga-h-youbi
+    add: [romance]
+    source: "rakuten-branch:001029002"
+  - slug: maou-na-kachou-no-teshita-ni-narimashita
+    add: [romance]
+    source: "rakuten-branch:001029002"
+  - slug: marugoto-nekokke
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: matatabi-sensei-hashiru
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: mister-convenience
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: muteki-no-kodomotachi
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: nanami-18sai-mama-18-narimashita
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: nanshoku-ookagami
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: neko-no-hon
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: nekoneko-keiyaku
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: neongai-no-kumo-to-chou
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: nikushoku-kumikyoku
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: nod-kizutsukeru-youni-aishiaimashou
+    add: [romance]
+    source: "rakuten-branch:001029002"
+  - slug: nonguzu
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: nose-kun-ha-daimeiwaku
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: not-ikooru
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: nyotaika-yankee-gakuen
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: odoru-omaera-to-daimeiwaku
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: oiran-yuugi
+    add: [romance]
+    source: "rakuten-branch:001029002"
+  - slug: okaeri-densha
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: ongakushitsu
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: ore-no-super-torauto
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: osu-chichi
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: otoko-no-hanamichi
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: princess-shield
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: raglan-sleeve
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: raisin-noir
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: rapurasu-no-tenshi
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: reinoushi-ojiga-kyousuke
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: reirei-shuushuu-tan
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: ryuu-no-yuigon-iiekkusu
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: ryuu-to-himitsu-no-kisu-o
+    add: [romance]
+    source: "rakuten-branch:001029002"
+  - slug: sadistic-brothers
+    add: [romance]
+    source: "rakuten-branch:001029002"
+  - slug: sara-yashiki-no-wakagimi
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: seru-nanbaa-8
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: seventeen-murder
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: shikon-no-hata-no-moto-ni
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: shinkuu-yuusetsu
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: shirafu-de-itemo-imi-ga-nai
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: shiranai-kao
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: shota-komi
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: shoujo-doll
+    add: [romance]
+    source: "rakuten-branch:001029002"
+  - slug: shounen-heroine
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: shounen-tantei-rokumei-keisuke
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: shujuu-ribaashi-dog
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: shuu-torawarete
+    add: [romance]
+    source: "rakuten-branch:001029002"
+  - slug: simoom
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: sleeper
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: sono-koi-wa-taboo-desuka
+    add: [romance]
+    source: "rakuten-branch:001029002"
+  - slug: souai-aidenteitei
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: star-flight
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: star-light
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: star-night
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: sugar-milk
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: sugarcoat-toui
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: takatori-kingdom-kings
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: teikoku-no-kangan
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: tenshi-mitsuzou
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: tokyo-beni-rashin
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: toppu-2-no-kousai-2-nchoku
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: toppu-2-no-love-jijou
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: tsuba-to-mitsu
+    add: [romance]
+    source: "rakuten-branch:001029002"
+  - slug: tsumetai-taiyou
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: tsurezure
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: tsutsunuke
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: turbulence
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: unconditional-love
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: uncontrol-love
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: ushiro-no-shoumen-darling
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: uso-niwa-mukanai-shokugyou
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: uso-niwa-mukanai-shokugyou-shiikueru
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: vanilla-resort
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: wagahai-wa-otoko-no-musume-de-aru
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: waka-sama-onmitsuchou
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: wasurerarenai-otoko
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: wei
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: wild-lovers
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: yami-ni-naku-hikari
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: yokujou-suru-ooerutachi
+    add: [romance]
+    source: "rakuten-branch:001029002"
+  - slug: yonaki-udon
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: yoromeki-banchou
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: yorozuya-kagyou-tadaima-seigyouchuu
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: yoru-o-hashirinukeru
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: yumemiruandoroido
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: yuuwakusuru-adam
+    add: [romance]
+    source: "rakuten-branch:001021002"
+  - slug: zoku-oretachi-namamono-desu
+    add: [romance]
+    source: "rakuten-branch:001021002"
