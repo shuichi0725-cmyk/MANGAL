@@ -343,7 +343,9 @@ with open(CAPCACHE, "a", encoding="utf-8") as f:
 
 # ★このラウンドで材料なしと確定したISBNを台帳に追記(次回auto除外=カーソル前進)。
 #   ただしlive未実行(--live無し)だと"未照会"を誤って材料なし扱いする恐れ→liveの時だけ記録。
-if (a.live or a.local_only) and not a.slugs and not a.slugs_file:
+# ★--local-only はローカル在庫を全部舐めた後なので slug 指定時も記録してよい
+#   (記録しないと巻数順ランキングが同じ作を永久に先頭に出し続ける = 2026-07-31 実踏)。
+if a.live or a.local_only:
     prev = set()
     if os.path.exists(NOMAT):
         prev = {l.strip() for l in open(NOMAT, encoding="utf-8") if l.strip()}
