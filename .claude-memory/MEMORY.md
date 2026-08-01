@@ -7,6 +7,7 @@
 - [【再利用】2026新刊蒸留フロー](distill_2026_pipeline.md) — NDL発見→preview生成→3段fill→AI enrichの全記録
 - [preview実測+stale事故史](preview_deploy_pitfalls.md) — 正=skill test-deploy/display-bug-triage ／ [preview反映=GitHub Actions実体+詰まり診断](preview_deploy_github_actions.md) — deploy-preview.yml/cancel-in-progress
 - [【番人】検索スナップショットゲート](search_snapshot_gate.md) — 固定コーパスで件数/表示順/tierを焦く。機能贈留の前検査に組込済
+- [【保留・蒸留前に再検討】死蔵検索索引11.3MB](dead_search_index_retire_pending.md) — 呼び出し元ゼロ・86.6%重複。週次/月次の前に可否を仰ぐ
 - [検索が遅い実測内訳](search_perf_hotspots_2026_08.md) — カナ数詞 fold 86%/alt到着で全再構築/巨大単一タスク。是正済
 - [軽量索引=検索v2/本番軽量化v2(配列化)](lightweight_index_architecture.md) — 検索索引廃止・authorsパック・索引51→26MB{f,d}配列・共通デコーダ(_idx_authors.py/listIndexDecode.ts)必須
 - [【必ず使う】統合台帳](intake_manifest_ledger_live.md) — data/seeds/intake-manifest/=操作集約+holes。新cleanup前に参照
