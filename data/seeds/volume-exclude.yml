@@ -2487,3 +2487,27 @@ excludes:
   isbn13: '9784063198799'
   reason: "抜粋本(楽天副題にのみ証拠)『やさしい悪魔（fantasy）』= KCデラックス「川口まどか自選傑作集 3」= 本編13巻からの自選。姉妹巻(love story)は別頁 yasashii-akuma-rabu-story として独立頁化しており Papa told me と同型の分裂。検出=_audit-excerpt-subtitle.py VERSION_MIX"
   at: '2026-08-01'
+- slug: damenzu-walker
+  isbn13: '9784594606275'
+  reason: "ムック混入(判型=ムックその他)。扶桑社mook『究極のダメ男・ダメ女編』=既刊のテーマ別再録ムック。同巻番号に正規の1巻が別途在る。掲載対象はコミックス。検出=_audit-edition-mix.py SERIES最優先"
+  at: '2026-08-02'
+- slug: kagegari
+  isbn13: '9784845863815'
+  reason: "ムック混入(判型=ムックその他)。リイド社パーフェクト・メモワール(ムックその他)『十兵衛は影だ！！』=既刊の再録ムック。本編SPコミックス15巻は無傷。掲載対象はコミックス。検出=_audit-edition-mix.py SERIES最優先"
+  at: '2026-08-02'
+- slug: kagegari
+  isbn13: '9784845863839'
+  reason: "ムック混入(判型=ムックその他)。同上『女罠』。掲載対象はコミックス。検出=_audit-edition-mix.py SERIES最優先"
+  at: '2026-08-02'
+- slug: kumotori-zanpei
+  isbn13: '9784845864577'
+  reason: "ムック混入(判型=ムックその他)。リイド社パーフェクト・メモワール(ムックその他)『お大尽けんか御伽噺』=既刊の再録ムック。掲載対象はコミックス。検出=_audit-edition-mix.py SERIES最優先"
+  at: '2026-08-02'
+- slug: kumotori-zanpei
+  isbn13: '9784845868117'
+  reason: "ムック混入(判型=ムックその他)。同上『暫平草双紙』。掲載対象はコミックス。検出=_audit-edition-mix.py SERIES最優先"
+  at: '2026-08-02'
+- slug: kumotori-zanpei
+  isbn13: '9784845868292'
+  reason: "ムック混入(判型=ムックその他)。同上『梅は咲いたが・・・』。掲載対象はコミックス。検出=_audit-edition-mix.py SERIES最優先"
+  at: '2026-08-02'
