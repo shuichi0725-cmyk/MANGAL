@@ -8,6 +8,8 @@
 - [preview実測+stale事故史](preview_deploy_pitfalls.md) — 正=skill test-deploy/display-bug-triage ／ [preview反映=GitHub Actions実体+詰まり診断](preview_deploy_github_actions.md) — deploy-preview.yml/cancel-in-progress
 - [【番人】検索スナップショットゲート](search_snapshot_gate.md) — 固定コーパスで件数/表示順/tierを焦く。機能贈留の前検査に組込済
 - [【保留・蒸留前に再検討】死蔵検索索引11.3MB](dead_search_index_retire_pending.md) — 呼び出し元ゼロ・86.6%重複。週次/月次の前に可否を仰ぐ
+- [【再発厳禁】キャッシュが修正を隠した事故](deploy_cache_swr_hid_the_fix.md) — HTMLのSWRでデプロイが1回遅れ、直った物を誤診。届いたか先に確認
+- [/browse がサーバ描画0だった(白紙+SEO)](browse_ssr_shell_and_seo.md) — Suspense fallback=null が本文を捨てていた。静的シェルで是正
 - [検索が遅い実測内訳](search_perf_hotspots_2026_08.md) — カナ数詞 fold 86%/alt到着で全再構築/巨大単一タスク。是正済
 - [軽量索引=検索v2/本番軽量化v2(配列化)](lightweight_index_architecture.md) — 検索索引廃止・authorsパック・索引51→26MB{f,d}配列・共通デコーダ(_idx_authors.py/listIndexDecode.ts)必須
 - [【必ず使う】統合台帳](intake_manifest_ledger_live.md) — data/seeds/intake-manifest/=操作集約+holes。新cleanup前に参照

@@ -20,8 +20,30 @@ metadata:
 - ★一覧の人気順は**48.5%が popularity 未設定**でほぼ全比較が最終タイブレークの文字列比較まで落ちる。
   `lib/collator.ts` の共有 Collator へ(`localeCompare` 都度呼び禁止)。292→213ms。
 - 著者50音リスト(119ms)は **FilterPanel が open の時だけマウントされるのに索引到着と同時に走っていた** → 抽斗を開くまで作らない。
-- ★**HomeClient のデスクトップ用 FilterPanel は `hidden md:block`= モバイルでも React はマウントされる**(CSSで隠れているだけ)。
-  つまりモバイル利用者も 67k件×7パスの動的件数と著者リストを払っている。**未着手**(マウント条件を変えると水和のちらつき懸念)。
+- ★**HomeClient は FilterPanel を2つ常時マウントしていた**(PC用 `hidden md:block` とモバイル抽斗 `md:hidden` の
+  両方。CSSで隠れているだけ)。動的件数は67k件の絞り込み6パス=**1個568ms**なので、どの画面幅でも
+  必ず片方分を見えないパネルのために捨てていた。→ **是正済み**: `matchMedia` で合わない側を外す。
+  初期値を "both"(=静的HTMLと同じ)にしてから水和直後に確定させるので**ちらつきは起きない**
+  (外す側はもともと display:none)。1,136ms → 568ms。
+- ★**検索中、FilterPanel のファセット件数が全部0になっていた**(バグ)。`applyFilters` に一致slug集合を
+  渡しておらず、`state.query` があると先頭で全行が弾かれる= 68,724行を6回走査して**ゼロを出していた**。
+  `matchedSlugs` を prop で渡して**是正済み**。
 - 残る重さ = wanakana の `kanaToRomaji`(36万本で約3.7秒)。ローマ字層だけ遅延構築する案は**未着手**。
 
-関連 [[search_snapshot_gate]] [[lightweight_index_architecture]]
+## ★実機で決着(2026-08-01 夜・Android実機)
+
+```
+索引: 取得496ms / デコード218ms
+haystack同期 0ms(0行)      ← 「検索を押した瞬間に残りを同期構築している」という仮説は★外れ★
+空き時間 3,773ms(69,275行)
+検索 37ms(1,312件・イース) / 別名 1,636ms
+```
+- `haystack同期 0ms` = 押した時点で前計算が終わっていた。**効いたのは
+  「カナ数詞foldの単一正規表現化」+「細切れ前計算」の2つが揃ったこと**。片方でも欠けると検索時に数秒の同期処理が走る。
+- ユーザ判定「引っかからなくなった」。**追加の性能改修は不要**と判断。
+- 残る数字: 別名1,636ms(初回検索時に3.2MB。到着後の畳み込みは68msなので固まらない)/ 索引714ms。
+- ★**この数字は実機診断で採った**: `lib/perfDiag.ts` + `/browse` のテスト専用パネル(`#debug` でON)。
+  PC の Node 実測だけで議論すると桁が合わず的を外す。同種の相談が来たらまずこれを見る。
+- ★★ただし**この報告に辿り着くまで7時間、古いHTMLを見せられていた** → [[deploy_cache_swr_hid_the_fix]]
+
+関連 [[search_snapshot_gate]] [[lightweight_index_architecture]] [[deploy_cache_swr_hid_the_fix]] [[browse_ssr_shell_and_seo]]
