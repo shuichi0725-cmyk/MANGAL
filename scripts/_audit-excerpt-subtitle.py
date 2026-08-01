@@ -16,6 +16,11 @@
   その場合は頁の題が独立した実在作品なので **drop したら本物を消す**。
   [[konbini_reprint_sweep]] と同じ教訓 = imprint 一律 drop は不可。人が裁定する。
 
+分類(裁定の下ごしらえ。断定はしない):
+  VERSION_MIX = 頁の一部の巻だけが抜粋 → 頁は本物、その版だけ混入 = volume-exclude 案件
+  RECOLLECT   = 頁の全巻が抜粋 かつ 同著者に桁違いに巻数の多い頁が在る = 再録本の典型形
+  REVIEW      = 全巻が抜粋だが再録元を機械特定できない(作家短編集型など) = 人が中身を見る
+
 出力: docs/production-diagnostics/excerpt-subtitle.tsv
 使い方:
   python scripts/_audit-excerpt-subtitle.py
@@ -39,6 +44,9 @@ OUT = os.path.join(ROOT, "docs", "production-diagnostics", "excerpt-subtitle.tsv
 # 抜粋本(既刊の再編)を示す語。promote の DROP_SUBTITLE_PATTERNS と同族だが、
 # ここは「楽天副題」側を見るので素の「セレクション」も拾う(その代わり自動 drop しない)。
 WORDS = ("セレクション", "傑作選", "傑作集", "名作選", "名作集", "総集編", "特別編集")
+
+COLS = ["分類", "slug", "頁題", "著者", "頁巻数", "対象巻数", "再録元候補",
+        "isbn", "楽天題", "楽天副題", "レーベル", "同著者他頁数"]
 
 
 def main() -> int:
@@ -91,26 +99,54 @@ def main() -> int:
                                                   it.get("seriesName") or ""))
         print(f"  {os.path.basename(fn)}: {n}行走査 / 累計 頁{len(hits)}", flush=True)
 
-    # 同一著者の他頁が在るか = 「再録元が在る」signal(drop候補が強まる)
+    # 同一著者の他頁 = 「再録元が在る」signal
     by_author = collections.defaultdict(set)
     for slug, (_t, au, _v) in meta.items():
-        for a in au.split("・"):
-            if a:
-                by_author[a].add(slug)
+        for a2 in au.split("・"):
+            if a2:
+                by_author[a2].add(slug)
+
+    def classify(slug, nhit):
+        _t, au, vols = meta.get(slug, (None, "", None))
+        try:
+            v = int(vols)
+        except (TypeError, ValueError):
+            return "REVIEW", ""
+        if nhit < v:
+            return "VERSION_MIX", ""
+        cands = []
+        for a2 in au.split("・"):
+            for s2 in by_author.get(a2, ()):
+                if s2 == slug:
+                    continue
+                t2, _a2, v2 = meta[s2]
+                if isinstance(v2, int) and v2 >= max(5, v * 3):
+                    cands.append((v2, t2))
+        if cands:
+            cands.sort(reverse=True)
+            return "RECOLLECT", " / ".join(f"{t2}({v2}巻)" for v2, t2 in cands[:2])
+        return "REVIEW", ""
 
     os.makedirs(os.path.dirname(OUT), exist_ok=True)
     rows = 0
+    cls_n = collections.Counter()
     with io.open(OUT, "w", encoding="utf-8", newline="\n") as fh:
-        fh.write("slug\t頁題\t著者\t頁巻数\t対象巻数\tisbn\t楽天題\t楽天副題\tレーベル\t同著者他頁数\n")
+        fh.write("\t".join(COLS) + "\n")
         for slug in sorted(hits):
             t, au, vols = meta.get(slug, ("(索引に無し)", "", ""))
-            others = max(0, len({s for a in au.split("・") if a for s in by_author[a]}) - 1)
+            others = max(0, len({s for a2 in au.split("・") if a2 for s in by_author[a2]}) - 1)
             vs = sorted(hits[slug])
+            cls, parent = classify(slug, len(vs))
+            cls_n[cls] += 1
             for isbn, rt, sub, ser in vs:
-                fh.write(f"{slug}\t{t}\t{au}\t{vols}\t{len(vs)}\t{isbn}\t{rt}\t{sub}\t{ser}\t{others}\n")
+                fh.write("\t".join(str(x) for x in
+                                   [cls, slug, t, au, vols, len(vs), parent,
+                                    isbn, rt, sub, ser, others]) + "\n")
                 rows += 1
     print(f"\n該当 頁{len(hits)}件 / 巻{rows}件 → {os.path.relpath(OUT, ROOT)}")
-    print("★これは候補一覧。副題が『レーベル名』のケース(叶精作セレクション型)は drop 禁止 = 人が裁定する。")
+    for k, n in cls_n.most_common():
+        print(f"   {k}: {n}頁")
+    print("★これは候補一覧。副題が『レーベル名』のケースは drop 禁止 = 人が裁定する。")
     return 0
 
 
