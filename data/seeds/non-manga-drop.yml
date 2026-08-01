@@ -5420,3 +5420,19 @@ non_manga:
   reason: excerpt_selection
   note: "『手塚治虫セレクション』(サンエイムック(三栄書房))= 既刊手塚作品のテーマ別再録。楽天 size=ムックその他=ムック。掲載対象外。単巻・単一版で他の中身なし。検出=_audit-excerpt-subtitle.py RECOLLECT(楽天副題にのみ証拠)"
   at: '2026-08-01'
+- series_key: "qid:Q11275259|name:子育てアフロ田中|sub:結婚アフロ田中育児セレクション"
+  reason: excerpt_selection
+  note: "『結婚アフロ田中 育児セレクション』= 本編『結婚アフロ田中』(10巻・頁 kekkon-afro-tanaka 在)からの育児テーマ再録。_skey自体に sub:結婚アフロ田中育児セレクション を持つ。単巻・単一版で他の中身なし。★親作品が本番に在るので内容は失われない。検出=_audit-excerpt-subtitle.py RECOLLECT"
+  at: '2026-08-01'
+- series_key: "qid:Q11574851|name:ネコのち晴れ!"
+  reason: excerpt_selection
+  note: "『ゾッチャの日常傑作選』= 本編『ゾッチャの日常』(14巻・頁 zoccha-no-nichijou 在)からの再録。単巻・単一版で他の中身なし。★親作品が本番に在るので内容は失われない。検出=_audit-excerpt-subtitle.py RECOLLECT"
+  at: '2026-08-01'
+- series_key: "qid:Q11347037|name:激ウマ!酒の肴ランキング"
+  reason: excerpt_selection
+  note: "『ラズウェル細木傑作選』(芳文社コミックス)= 本編『酒のほそ道』(59巻)『美味い話にゃ肴あり』(13巻)在。肴テーマの再録。単巻・単一版で他の中身なし。★親作品が本番に在るので内容は失われない。検出=_audit-excerpt-subtitle.py RECOLLECT"
+  at: '2026-08-01'
+- series_key: "qid:Q11347037|name:ラズウェル細木の激ウマ!酒の肴道場"
+  reason: excerpt_selection
+  note: "同上(酒の肴道場)。単巻・単一版で他の中身なし。★親作品が本番に在るので内容は失われない。検出=_audit-excerpt-subtitle.py RECOLLECT"
+  at: '2026-08-01'
