@@ -110,6 +110,13 @@ export function __setAltIndexForTest(raw: Record<string, string[]> | null): void
   _altV++;
 }
 
+/** テスト用: 逐次絞り込みキャッシュだけを捨てる(haystackは作り直さない)。
+ *  スナップショット試験で「クエリを毎回まっさらな状態から引いた結果」を得るために使う。 */
+export function __resetSearchCacheForTest(): void {
+  _lastKey = "";
+  _lastIdx = null;
+}
+
 /** alt(別名)到着時に再検索させたいコンポーネント用の購読。 戻り値=解除。 */
 export function onAltLoaded(fn: () => void): () => void {
   _altListeners.add(fn);

@@ -24,27 +24,15 @@ function activeCount(s: FilterState): number {
 }
 import type { ListBundle, MangaListItem } from "@/lib/schema";
 import { onAltLoaded, prewarmSearch, searchWithTiers } from "@/lib/clientSearch";
+import { SORTS, sortRows, volCount, latestDate, type SortId } from "@/lib/listSort";
 import { useMangaIndex, ensureFullIndex, isFullIndexLoaded } from "@/lib/useMangaIndex";
 
 /** 一覧表クライアント: 絞り込み=既存の多窓フィルター(トップと同じ)、並び順=独立チップ。
  *  「完結×ジャンル×作者×開始が古い順」のような自由なAND合成が成立する。 */
 
-type SortId = "kana" | "year-asc" | "year-desc" | "vols-desc" | "latest-desc" | "popularity";
-const SORTS: Array<{ id: SortId; label: string }> = [
-  { id: "popularity", label: "人気順" },
-  { id: "kana", label: "50音順" },
-  { id: "year-asc", label: "開始が古い" },
-  { id: "year-desc", label: "開始が新しい" },
-  { id: "vols-desc", label: "巻数が多い" },
-  { id: "latest-desc", label: "最新刊が新しい" },
-];
-
-function volCount(m: MangaListItem): number {
-  return m.max_edition_volumes;
-}
-function latestDate(m: MangaListItem): string {
-  return m.latest_date ?? "";
-}
+// ★並べ替えは lib/listSort.ts に切り出し済み(2026-08-01)。
+//   理由: 実索引に対するスナップショット試験(lib/searchSnapshot.test.ts)が
+//   「本番と同じ並べ替え」を通せるようにするため。ここにコピーを持たない。
 
 export default function ListClient({ data }: { data: ListBundle }) {
   // ★テストモード判定(HomeClientと同じ): preview/localhost or #debug。テスト時は題名列を最長題に合わせる(チェック用・ユーザ要望 2026-07-06)
@@ -176,27 +164,7 @@ export default function ListClient({ data }: { data: ListBundle }) {
     }
     // ★検索時の既定=人気順(2026-07-05 ユーザ要望: 検索したら人気順で出る)。手動選択があればそれを尊重
     const effSort: SortId = q.trim() && !sortTouched ? "popularity" : sort;
-    const sorted = [...r].sort((a, b) => {
-      switch (effSort) {
-        case "popularity":
-          return (b.popularity ?? 0) - (a.popularity ?? 0) || (b.score ?? 0) - (a.score ?? 0) || a.title_kana.localeCompare(b.title_kana, "ja");
-        case "year-asc":
-          return (a.year_started ?? 9999) - (b.year_started ?? 9999);
-        case "year-desc":
-          return (b.year_started ?? 0) - (a.year_started ?? 0);
-        case "vols-desc":
-          return volCount(b) - volCount(a);
-        case "latest-desc":
-          return latestDate(b).localeCompare(latestDate(a));
-        default:
-          return (a.title_kana || a.title).localeCompare(b.title_kana || b.title, "ja");
-      }
-    });
-    // ★案A(2026-07-23): 検索中×並び順未タッチ → 一致の強い順(同tier内=人気順。安定ソート)
-    if (tiers && !sortTouched) {
-      sorted.sort((a, b) => (tiers.get(a.slug) ?? 9) - (tiers.get(b.slug) ?? 9));
-    }
-    return sorted;
+    return sortRows(r, effSort, tiers, sortTouched);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [manga, state, q, sort, sortTouched, slugfixOnly, altTick]);
 
