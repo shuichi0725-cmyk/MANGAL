@@ -1,5 +1,5 @@
 import { Suspense } from "react";
-import { loadMasters, loadArtBooks } from "@/lib/loadData";
+import { loadMasters, loadArtBooks, loadIndexSummary } from "@/lib/loadData";
 import { DesignNav } from "@/lib/homeDesign";
 import type { ListBundle } from "@/lib/schema";
 import HomeClient from "../HomeClient";
@@ -12,12 +12,14 @@ export const metadata = { alternates: { canonical: "/browse" } };
 export default function BrowsePage() {
   const masters = loadMasters();
   const data: ListBundle = { manga: [], artBooks: loadArtBooks(), ...masters };
+  // ★総数・分類件数だけ先に渡す(フル索引到着まで「全100件」と嘘をつかないため)
+  const summary = loadIndexSummary();
   return (
     <>
       {/* ★検索画面にもヘッダー下のアイコンナビを出す(他ページと統一) */}
       <DesignNav />
       <Suspense fallback={null}>
-        <HomeClient data={data} />
+        <HomeClient data={data} summary={summary} />
       </Suspense>
     </>
   );

@@ -258,6 +258,29 @@ export type MangaListItem = {
  * ★一覧索引(MangaListItem)とは別ファイル = 検索時だけ遅延ロード (= 既定ブラウズでは読まない)。
  * matchText が必要とする text(題/かな/romaji/別名/人物名)のみ持つ。 表示はしない。
  */
+/**
+ * 索引サマリ (= build 時に data/manga-list-index.json から集計)。
+ *
+ * ★なぜ要るか(2026-08-01 ユーザ報告「まだ200になるしおそいよ」):
+ *   一覧/検索面は head(先頭100件)で即描画し、フル索引(6MB brotli)は後から届く。
+ *   その到着までの数秒〜十数秒、件数を head の件数だけで計算するため
+ *   「全200件」「完結133」等の★嘘の数字★が出ていた。
+ *   総数と分類件数だけを SSR props で先に渡し、フル索引が届いたら実データに切り替える。
+ *   ※ props はビルド時のスナップショット。週次蒸留・機能蒸留のたびに焼き直される。
+ *     差分反映(データのみ)の後は次のビルドまでずれるが、フル索引到着で自動的に解消する。
+ */
+export type IndexSummary = {
+  total: number;
+  anime: number;
+  awards: number;
+  completed: number;
+  ongoing: number;
+  shounen: number;
+  seinen: number;
+  shoujo: number;
+  josei: number;
+};
+
 export type MangaSearchItem = {
   slug: string;
   title: string;

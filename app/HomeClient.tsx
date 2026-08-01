@@ -19,15 +19,21 @@ import {
   yearBounds,
 } from "@/lib/filters";
 import { onAltLoaded, prewarmSearch, searchWithTiers } from "@/lib/clientSearch";
-import { ensureFullIndex } from "@/lib/useMangaIndex";
-import type { ArtBook, ListBundle, MangaListItem } from "@/lib/schema";
+import { ensureFullIndex, isFullIndexLoaded } from "@/lib/useMangaIndex";
+import type { IndexSummary, ArtBook, ListBundle, MangaListItem } from "@/lib/schema";
 import { useMangaIndex } from "@/lib/useMangaIndex";
 
-type Props = { data: ListBundle };
+type Props = {
+  data: ListBundle;
+  /** ★ビルド時に集計した総数・分類件数(2026-08-01)。
+   *  フル索引(6MB)が届くまで head 100件だけで件数を計算し、
+   *  「全100件」と嘘をついていたのを止めるための先出し値。 */
+  summary?: IndexSummary | null;
+};
 
 const PAGE_SIZE = 100;
 
-export default function HomeClient({ data }: Props) {
+export default function HomeClient({ data, summary }: Props) {
   const searchParams = useSearchParams();
   const router = useRouter();
   const pathname = usePathname();
@@ -236,6 +242,12 @@ export default function HomeClient({ data }: Props) {
 
   // ページは URL(?page)から導出 = リロード/共有/戻るで復元。 フィルタURL変更
   // (CategoryHub 等)は ?page を含まないので自然と1ページ目に戻る。
+  // ★フル索引が届く前は head(100件)しか手元に無い。絞り込みも検索も無い間は
+  //   その100件を数えた値でなく、ビルド時に全件を集計した summary を見せる。
+  //   絞り込んだ瞬間には実データの件数へ戻る(嘘の交差件数を出さない)。 2026-08-01
+  const noNarrowing = !matchedSlugs && filtersToSearchParams(state).toString() === "";
+  const useSummary = !!summary && !showArt && noNarrowing && !isFullIndexLoaded();
+  const shownTotal = useSummary && summary ? summary.total : filtered.length;
   const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
   const urlPage = Math.max(1, Number(searchParams.get("page")) || 1);
   const curPage = Math.min(urlPage, totalPages);
@@ -283,10 +295,14 @@ export default function HomeClient({ data }: Props) {
               ? "漫画家の画集・原画集・イラスト集。 "
               : "年・著者・出版社・分野・ジャンルで絞り込めます。 "}
             全{" "}
-            <span className="font-semibold text-ink/80 tabular-nums">{filtered.length}</span> 件中{" "}
+            <span className="font-semibold text-ink/80 tabular-nums">{shownTotal.toLocaleString()}</span> 件中{" "}
             <span className="tabular-nums">{rangeStart}–{rangeEnd}</span> 件表示
-            {totalPages > 1 && (
-              <span className="text-ink/45">（{curPage} / {totalPages} ページ）</span>
+            {useSummary ? (
+              <span className="text-ink/45">（読み込み中…）</span>
+            ) : (
+              totalPages > 1 && (
+                <span className="text-ink/45">（{curPage} / {totalPages} ページ）</span>
+              )
             )}
             。
           </p>
@@ -309,7 +325,7 @@ export default function HomeClient({ data }: Props) {
       </section>
 
       {/* ★filtered=現在の絞り込み後(検索込み)を渡す=タイル件数が交差件数になる(2026-07-12) */}
-      <CategoryHub data={liveData} filtered={showArt ? undefined : filteredManga} />
+      <CategoryHub data={liveData} filtered={showArt ? undefined : filteredManga} summary={useSummary ? summary : null} />
 
       {/* ★テスト環境限定ツールバー(本番=workers.dev では非表示)。
           ①画像なし=cover無だけ表示 ②コピー=表示中の情報をクリップボードへ(私への共有用) */}

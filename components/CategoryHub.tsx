@@ -2,9 +2,9 @@
 
 import { useSearchParams } from "next/navigation";
 import Card from "@/components/ui/Card";
-import type { ListBundle, MangaListItem } from "@/lib/schema";
+import type { IndexSummary, ListBundle, MangaListItem } from "@/lib/schema";
 
-type Props = { data: ListBundle; filtered?: MangaListItem[] };
+type Props = { data: ListBundle; filtered?: MangaListItem[]; summary?: IndexSummary | null };
 
 type Category = {
   params: Record<string, string>;
@@ -22,10 +22,13 @@ type Category = {
  *  - 件数は「現在の絞り込み後」の交差件数(filtered を貰って再計算。無ければ全体)
  *  - タップ=現在のURLパラメータへマージ(置き換えない)。選択中タイルの再タップ=そのパラメータだけ解除
  */
-export default function CategoryHub({ data, filtered }: Props) {
+export default function CategoryHub({ data, filtered, summary }: Props) {
   const searchParams = useSearchParams();
   const base = filtered ?? data.manga;
-  const total = base.length;
+  // ★summary が来ている間(=フル索引未到着かつ絞り込み無し)は、head 100件だけを
+  //   数えた嘘の件数でなく、ビルド時に全件を集計した値を使う。2026-08-01
+  const S = summary ?? null;
+  const total = S ? S.total : base.length;
 
   const isActive = (params: Record<string, string>) => {
     for (const [k, v] of Object.entries(params)) {
@@ -44,21 +47,22 @@ export default function CategoryHub({ data, filtered }: Props) {
     return qs ? `/browse?${qs}` : "/browse";
   };
 
-  const count = (pred: (m: MangaListItem) => boolean) => base.filter(pred).length;
+  const count = (pred: (m: MangaListItem) => boolean, fromSummary?: (s: IndexSummary) => number) =>
+    S && fromSummary ? fromSummary(S) : base.filter(pred).length;
 
   const P = (o: Record<string, string>) => o;
   const categories: Category[] = [
     // 並び順(全件対象なので count = 現在の表示件数)
     { params: P({ sort: "popularity" }), label: "人気順", count: total, icon: "🔥" },
     // フィルタ系(交差件数)
-    { params: P({ anime: "true" }), label: "アニメ化作品", count: count((m) => !!m.anime_adapted), icon: "🎞️" },
-    { params: P({ hasAwards: "true" }), label: "受賞作品", count: count((m) => !!(m.awards && m.awards.length > 0)), icon: "🏆" },
-    { params: P({ status: "completed" }), label: "完結作品", count: count((m) => m.status === "completed"), icon: "✅" },
-    { params: P({ status: "ongoing" }), label: "連載中", count: count((m) => m.status === "ongoing"), icon: "📖" },
-    { params: P({ demographic: "shounen" }), label: "少年", count: count((m) => m.demographic === "shounen"), icon: "👦" },
-    { params: P({ demographic: "seinen" }), label: "青年", count: count((m) => m.demographic === "seinen"), icon: "👨" },
-    { params: P({ demographic: "shoujo" }), label: "少女", count: count((m) => m.demographic === "shoujo"), icon: "👧" },
-    { params: P({ demographic: "josei" }), label: "女性", count: count((m) => m.demographic === "josei"), icon: "👩" },
+    { params: P({ anime: "true" }), label: "アニメ化作品", count: count((m) => !!m.anime_adapted, (s) => s.anime), icon: "🎞️" },
+    { params: P({ hasAwards: "true" }), label: "受賞作品", count: count((m) => !!(m.awards && m.awards.length > 0), (s) => s.awards), icon: "🏆" },
+    { params: P({ status: "completed" }), label: "完結作品", count: count((m) => m.status === "completed", (s) => s.completed), icon: "✅" },
+    { params: P({ status: "ongoing" }), label: "連載中", count: count((m) => m.status === "ongoing", (s) => s.ongoing), icon: "📖" },
+    { params: P({ demographic: "shounen" }), label: "少年", count: count((m) => m.demographic === "shounen", (s) => s.shounen), icon: "👦" },
+    { params: P({ demographic: "seinen" }), label: "青年", count: count((m) => m.demographic === "seinen", (s) => s.seinen), icon: "👨" },
+    { params: P({ demographic: "shoujo" }), label: "少女", count: count((m) => m.demographic === "shoujo", (s) => s.shoujo), icon: "👧" },
+    { params: P({ demographic: "josei" }), label: "女性", count: count((m) => m.demographic === "josei", (s) => s.josei), icon: "👩" },
     { params: P({ sort: "year-desc" }), label: "新しい順", count: total, icon: "🆕" },
     { params: P({ sort: "year-asc" }), label: "古い順", count: total, icon: "📜" },
     { params: P({ sort: "volumes" }), label: "巻数順", count: total, icon: "📚" },

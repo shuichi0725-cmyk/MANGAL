@@ -17,6 +17,7 @@ import {
   DemographicLabelSchema,
   type MangaListItem,
   type ListBundle,
+  type IndexSummary,
 } from "./schema";
 import { decodeListIndex } from "./listIndexDecode";
 import { z } from "zod";
@@ -52,6 +53,56 @@ export function loadMangaListIndex(): MangaListItem[] {
   }
   _listIndex = list;
   return _listIndex;
+}
+
+/**
+ * 索引サマリ (= 総数と分類件数)。 ★オブジェクトに復元せず {f,d} を直接数える★ ので、
+ * 22MB を読んでも 68,724 件のデコードは走らない(build 時 ~0.2 秒)。
+ *
+ * 用途: /browse の初期表示。 head(100件)だけで件数を計算すると「全100件」と嘘をつくため、
+ * フル索引がクライアントに届くまでの間これを表示する ([[IndexSummary]] のコメント参照)。
+ */
+let _summary: IndexSummary | null = null;
+export function loadIndexSummary(): IndexSummary {
+  if (_summary) return _summary;
+  const empty: IndexSummary = {
+    total: 0, anime: 0, awards: 0, completed: 0, ongoing: 0,
+    shounen: 0, seinen: 0, shoujo: 0, josei: 0,
+  };
+  const p = path.join(DATA_DIR, "manga-list-index.json");
+  if (!fs.existsSync(p)) {
+    console.warn(`[loadData] 一覧索引が無い (${p}) → サマリ0。 _build-list-index.py 要実行`);
+    _summary = empty;
+    return _summary;
+  }
+  const raw = JSON.parse(fs.readFileSync(p, "utf8")) as { f: string[]; d: unknown[][] };
+  const col = (name: string) => raw.f.indexOf(name);
+  const iStatus = col("status");
+  const iDemo = col("demographic");
+  const iAnime = col("anime_adapted");
+  const iAwards = col("awards");
+  const out = { ...empty, total: raw.d.length };
+  for (const r of raw.d) {
+    if (iStatus >= 0) {
+      const v = r[iStatus];
+      if (v === "completed") out.completed++;
+      else if (v === "ongoing") out.ongoing++;
+    }
+    if (iDemo >= 0) {
+      const v = r[iDemo];
+      if (v === "shounen") out.shounen++;
+      else if (v === "seinen") out.seinen++;
+      else if (v === "shoujo") out.shoujo++;
+      else if (v === "josei") out.josei++;
+    }
+    if (iAnime >= 0 && r[iAnime]) out.anime++;
+    if (iAwards >= 0) {
+      const v = r[iAwards];
+      if (Array.isArray(v) && v.length > 0) out.awards++;
+    }
+  }
+  _summary = out;
+  return _summary;
 }
 
 function readYaml<S extends z.ZodTypeAny>(file: string, schema: S): z.infer<S> {
