@@ -40,7 +40,7 @@ python scripts/_deploy-feature.py
 # 実測(2026-07-28 --dry初走): staging~1分+build 8.1分+同期計画 ≈ 全行程~15分
 # ビルドが10分超のため ★デタッチ起動+ログ監視(ツールrun_in_backgroundは~10分で親ごとkill)
 #   .cache/_featdeploy.ps1: [Console]::OutputEncoding=[Text.Encoding]::UTF8; $env:PYTHONIOENCODING="utf-8"; Set-Location "<repo>"
-#     ★ログは cmd 経由で書く: cmd /c "python scripts\_deploy-feature.py > .cacheeatdeploy.log 2>&1"
+#     ★ログは cmd 経由で書く: cmd /c "python scripts/_deploy-feature.py > .cache/featdeploy.log 2>&1"
 #     PowerShell 5.1 の `*>` は **UTF-16LE** で書くため tail|grep の監視が一行も一致しない
 #     (2026-08-01 実踏: Monitor が60分無反応→実は完走済みだった)。cmd 経由なら生バイト=UTF-8。
 #     UTF-16 で書かれたログの読み方: python -c "import io;print(io.open('.cache/featdeploy.log',encoding='utf-16').read())"
