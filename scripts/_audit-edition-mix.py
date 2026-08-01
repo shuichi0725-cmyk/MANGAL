@@ -81,9 +81,12 @@ def norm_series(s: str) -> str:
     return "".join(ch for ch in t if ch not in " 　・·‐-—―ー()（）[]【】’'\"")
 
 
-def load_series_map(needed: set) -> dict:
-    """isbn13 → 楽天 seriesName(叢書名)。本番に在るISBNだけ拾う。"""
-    out = {}
+def load_rakuten(needed: set) -> tuple:
+    """isbn13 → (叢書名, 判型)。本番に在るISBNだけ拾う。
+    ★判型(size)は「物理的に別の本」の動かぬ証拠。叢書名は表記ゆらぎが多いが、
+    判型が コミック/文庫/単行本 で割れていれば同じ版に同居するはずがない。
+    ベルサイユのばら実例: 中公愛蔵版=単行本2,970円 / 中公コミックスーリ=コミック726円。"""
+    series, size = {}, {}
     for fn in RAKUTEN:
         if not os.path.exists(fn):
             continue
@@ -95,11 +98,18 @@ def load_series_map(needed: set) -> dict:
             except Exception:
                 continue
             i = norm_isbn(o.get("isbn"))
-            if i in needed and i not in out:
-                sn = ((o.get("item") or {}).get("seriesName") or "").strip()
+            if i not in needed:
+                continue
+            it = o.get("item") or {}
+            if i not in series:
+                sn = (it.get("seriesName") or "").strip()
                 if sn:
-                    out[i] = sn
-    return out
+                    series[i] = sn
+            if i not in size:
+                sz = (it.get("size") or "").strip()
+                if sz:
+                    size[i] = sz
+    return series, size
 
 
 def main() -> int:
@@ -129,8 +139,8 @@ def main() -> int:
         if eds:
             pages.append((d, eds))
     print(f"  対象 {len(pages)}頁 / ISBN {len(all_isbn)}件 → 楽天の叢書名を索く", flush=True)
-    smap = load_series_map(all_isbn)
-    print(f"  叢書名が取れたISBN: {len(smap)}件", flush=True)
+    smap, zmap = load_rakuten(all_isbn)
+    print(f"  叢書名 {len(smap)}件 / 判型 {len(zmap)}件", flush=True)
 
     rows, cls_n = [], collections.Counter()
     for d, eds in pages:
@@ -172,12 +182,22 @@ def main() -> int:
             #   (ビッグコミックス ⊂ ビッグコミックス〔オリジナル〕)。包含しなければ別叢書=本命。
             odd_keys = {x for x in sn if x and x != smaj}
             contained = all(k.startswith(smaj) or smaj.startswith(k) for k in odd_keys)
-            kind = "SERIES低(表記/サブレーベル差)" if contained else "SERIES高(別叢書の混入)"
+            # ★判型(size)まで違えば物理的に別の本=最優先。叢書名の表記ゆらぎでは説明できない。
+            zs = [zmap.get(norm_isbn(v["isbn13"]), "") for v in vols]
+            zknown = [z for z in zs if z]
+            zmaj = collections.Counter(zknown).most_common(1)[0][0] if zknown else ""
+            size_split = bool(zmaj) and any(
+                zmap.get(norm_isbn(v["isbn13"])) and zmap[norm_isbn(v["isbn13"])] != zmaj for v in odd_v)
+            if size_split:
+                kind = "SERIES最優先(叢書も判型も違う)"
+            else:
+                kind = "SERIES低(表記/サブレーベル差)" if contained else "SERIES高(別叢書の混入)"
             cls_n[kind] += 1
             maj_raw = next((smap[norm_isbn(v["isbn13"])] for v, x in zip(vols, sn) if x == smaj), smaj)
             min_raw = sorted({smap[norm_isbn(v["isbn13"])] for v in odd_v if norm_isbn(v["isbn13"]) in smap})
             rows.append([kind, slug, title] + meta + [
-                str(len(vols)), f"{maj_raw}x{smaj_n}", " / ".join(min_raw),
+                str(len(vols)), f"{maj_raw}x{smaj_n}",
+                " / ".join(min_raw) + (f"  [判型 {zmaj}→{','.join(sorted({zmap[norm_isbn(v['isbn13'])] for v in odd_v if norm_isbn(v['isbn13']) in zmap}))}]" if size_split else ""),
                 ",".join(str(v["isbn13"]) for v in odd_v)[:80]])
 
     os.makedirs(os.path.dirname(OUT), exist_ok=True)
@@ -188,7 +208,7 @@ def main() -> int:
     print(f"\n該当 {len(rows)} 版 → {os.path.relpath(OUT, ROOT)}")
     for k, c in cls_n.most_common():
         print(f"   {k}: {c}")
-    print("★自動修正しない。SERIES高 が版取り違えの本命。TAIL は移籍、SERIES低 は表記差が多い。")
+    print("★自動修正しない。SERIES最優先(叢書も判型も違う)から見る。TAIL は移籍で正当なことが多い。")
     return 0
 
 
