@@ -16,6 +16,7 @@
 - [synopsis和訳=git追跡seed](synopsis_ja_seed.md) — data/seeds/synopsis-ja.json(anilist_id key)。種3に焼かない
 - [掲載scope=日本出版漫画](mangal_inclusion_scope.md) — manhwa日本語版も対象。EMPTY slug≠junk
 - [巻割れ統合(renumber)](volume_split_merge.md) — orphanを著者+題merge→発売日順renumber
+- [【進行中】抹粋本=楽天副題にしか無い層](excerpt_subtitle_hidden_layer.md) — promoteの副題dropが構造的に見えない。250頁を3分類済・VERSION_MIXから
 - [非掲載drop list](non_manga_drop_cleanup.md) — non-manga-drop.yml=外国版/編集本/画集/アンソロ
 - [promote mergeがdrop list尊重](promote_merge_respects_drop.md) — drop済はmerge除外(同題混入バグ修正済)
 - [コナン映画 判別法](conan_movie_filmcomic_method.md) — 楽天seriesName+wiki rawでフィルム(drop)/コミカライズ(keep)
