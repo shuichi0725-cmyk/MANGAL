@@ -2463,3 +2463,27 @@ excludes:
   isbn13: '9784087851090'
   reason: "シーズンセレクション(冬)=抜粋本。本編頁に版として混入するのを恒久封鎖。『Papa told me（春/夏/秋/冬）』副題「シーズンセレクション」= 既刊からの季節別選集(抜粋本)。Young you特別企画文庫・集英社・1996-11に4冊同時刊行(ISBN 9784087851069/1076/1083/1090 連番)。本編頁 papa-told-me(28巻)在=再録確定。頁側subtitleが空のためpromoteの副題ルールが発火せず独立頁化+春だけ本編へ吸収され4冊が3か所に分裂していた(2026-08-01 ユーザ発見)"
   at: '2026-08-01'
+- slug: angel-nisshi
+  isbn13: '9784063604771'
+  reason: "抜粋本(楽天副題にのみ証拠)『エンジェル日誌（1）』= 講談社漫画文庫「自選傑作集」= 本編39巻からの自選2巻。自選=DROP_SUBTITLE_PATTERNS該当。完全な文庫版ではない(39巻→2巻は不可能)。検出=_audit-excerpt-subtitle.py VERSION_MIX"
+  at: '2026-08-01'
+- slug: angel-nisshi
+  isbn13: '9784063605181'
+  reason: "抜粋本(楽天副題にのみ証拠)『エンジェル日誌（2）』= 同上(自選傑作集の2巻目)。検出=_audit-excerpt-subtitle.py VERSION_MIX"
+  at: '2026-08-01'
+- slug: doraemon
+  isbn13: '9784091948014'
+  reason: "抜粋本(楽天副題にのみ証拠)『ドラえもん［爆笑パニック編］』= 小学館コロコロ文庫「ドラえもん テーマ別傑作選 1」= 本編45巻からのテーマ別選集。楽天題も［爆笑パニック編］で本編と別物。検出=_audit-excerpt-subtitle.py VERSION_MIX"
+  at: '2026-08-01'
+- slug: gals
+  isbn13: '9784086188814'
+  reason: "抜粋本(楽天副題にのみ証拠)『Gals！（1）』= 集英社文庫「天下無敵の恋バナ傑作選」= 本編10巻からのテーマ別選集2巻。完全な文庫版ではない。検出=_audit-excerpt-subtitle.py VERSION_MIX"
+  at: '2026-08-01'
+- slug: gals
+  isbn13: '9784086188821'
+  reason: "抜粋本(楽天副題にのみ証拠)『Gals！（2）』= 同上(恋バナ傑作選の2巻目)。検出=_audit-excerpt-subtitle.py VERSION_MIX"
+  at: '2026-08-01'
+- slug: yasashii-akuma
+  isbn13: '9784063198799'
+  reason: "抜粋本(楽天副題にのみ証拠)『やさしい悪魔（fantasy）』= KCデラックス「川口まどか自選傑作集 3」= 本編13巻からの自選。姉妹巻(love story)は別頁 yasashii-akuma-rabu-story として独立頁化しており Papa told me と同型の分裂。検出=_audit-excerpt-subtitle.py VERSION_MIX"
+  at: '2026-08-01'
