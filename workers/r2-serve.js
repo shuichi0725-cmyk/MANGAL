@@ -17,7 +17,17 @@ import { EmailMessage } from "cloudflare:email";
  *   - 本番は r2.dev 直URLを使わない(必ずこのWorker経由=キャッシュ+egress無料)
  */
 
-const HTML_CACHE = "public, max-age=300, s-maxage=86400, stale-while-revalidate=604800";
+// ★HTML は「常に最新」(2026-08-01 実害を受けて是正)。
+//   旧: max-age=300 + stale-while-revalidate=604800(7日)。SWRは【古いのを返しながら裏で更新】
+//   する指定なので、デプロイしても★必ず1回は古い画面が出る★。実際 2026-08-01 に性能改修が
+//   7時間ユーザに届かず、「直っていない」と誤判断して存在しない原因を探す事故になった。
+//   新: stale-while-revalidate を撤去し、ブラウザ側は60秒だけ保持。
+//   ★max-age=0(毎回再検証)にはしない: 実測で HTML 応答に ETag が付いておらず
+//     (下の conditional304 が当てにできない)、毎ナビゲーションで183KBを再取得してしまう。
+//     60秒なら「デプロイ後すぐ最新」と「連続操作で再取得しない」を両立できる。
+//   ★コスト方針は不変: s-maxage=86400 でエッジが受け止めるので R2 読込(Class B)は増えない。
+//   デプロイ時は /api/purge でエッジを明示的に失効させるため、purge後の初回で最新に入れ替わる。
+const HTML_CACHE = "public, max-age=60, s-maxage=86400";
 const IMMUTABLE = "public, max-age=31536000, immutable"; // /_next/static 等ハッシュ付き
 const ASSET = "public, max-age=86400, s-maxage=604800";
 // ★索引JSON(2026-07-27 会議決定): 同名のまま週次更新するため immutable 不可。
