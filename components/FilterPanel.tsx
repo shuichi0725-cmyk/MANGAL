@@ -12,6 +12,9 @@ type Props = {
   setState: (next: FilterState) => void;
   yearBounds: [number, number];
   authorEntries: { name: string; kana: string }[];
+  /** ★検索中の一致slug集合(2026-08-01)。渡さないと applyFilters が state.query で全行を弾き、
+   *  ファセット件数が全部0になる(68,724行を6回走査して0を出していた)。 */
+  matchedSlugs?: Set<string> | null;
 };
 
 function toggle<T>(arr: T[], v: T): T[] {
@@ -23,8 +26,7 @@ export default function FilterPanel({
   state,
   setState,
   yearBounds,
-  authorEntries,
-}: Props) {
+  authorEntries, matchedSlugs }: Props) {
   const update = (patch: Partial<FilterState>) => setState({ ...state, ...patch });
 
   // ★動的件数(2026-06-13): 各facetの値ごとに「その値を選んだら何件」を表示。
@@ -39,7 +41,7 @@ export default function FilterPanel({
       const k = JSON.stringify(clear);
       let rows = rowsCache.get(k);
       if (!rows) {
-        rows = applyFilters(data.manga, { ...state, ...clear });
+        rows = applyFilters(data.manga, { ...state, ...clear }, matchedSlugs ?? null);
         rowsCache.set(k, rows);
       }
       return rows;
@@ -73,7 +75,7 @@ export default function FilterPanel({
         return keys;
       }),
     };
-  }, [data.manga, state]);
+  }, [data.manga, state, matchedSlugs]);
   // 要素タグの一覧 = 出現する全タグを件数降順(同数は名前順)で。 master が無いのでデータから導出。
   const themeList = useMemo(
     () =>

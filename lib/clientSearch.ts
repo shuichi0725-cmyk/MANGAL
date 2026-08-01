@@ -1,5 +1,6 @@
 "use client";
 
+import { nowMs, perfDiag, since } from "./perfDiag";
 import { kanaToRomaji, normalizeForSearch, romajiToHiragana } from "./romaji";
 import type { MangaListItem } from "./schema";
 
@@ -94,11 +95,15 @@ function scheduleFill(items: MangaListItem[]): void {
   const step = (deadline?: { timeRemaining: () => number }) => {
     _fillScheduled = false;
     if (!_hay || _hayOf !== items) return; // 索引が差し替わった=この前計算は用済み
+    const t0 = nowMs();
+    const from0 = _hayFilled;
     do {
       const to = Math.min(_hayFilled + FILL_CHUNK, items.length);
       fillHay(items, _hay, _hayFilled, to);
       _hayFilled = to;
     } while (_hayFilled < items.length && deadline && deadline.timeRemaining() > 4);
+    perfDiag.hayIdleMs += since(t0);
+    perfDiag.hayIdleRows += _hayFilled - from0;
     if (_hayFilled < items.length) scheduleFill(items);
   };
   if (typeof requestIdleCallback === "function") requestIdleCallback(step, { timeout: 3000 });
@@ -139,8 +144,13 @@ function ensureHay(items: MangaListItem[]): Hay {
   }
   // 前計算が追いついていなければ、ここで残りを同期で埋める(検索結果は常に完全)
   if (_hayFilled < items.length) {
+    // ★ここが「検索を押した瞬間の固まり」。実機の数字を採るため計測する(perfDiag)
+    const t0 = nowMs();
+    const n = items.length - _hayFilled;
     fillHay(items, _hay, _hayFilled, items.length);
     _hayFilled = items.length;
+    perfDiag.haySyncMs += since(t0);
+    perfDiag.haySyncRows += n;
   }
   return _hay;
 }
@@ -163,6 +173,7 @@ export function prewarmSearch(items: MangaListItem[]): void {
 function fetchAlt(): void {
   if (_alt || _altInflight) return;
   _altInflight = true;
+  const _tAlt = nowMs();
   fetch("/manga-alt-index.json")
     .then((r) => (r.ok ? r.json() : {}))
     .then((raw: Record<string, string[]>) => {
@@ -170,6 +181,7 @@ function fetchAlt(): void {
       for (const [slug, alts] of Object.entries(raw)) norm[slug] = alts.map(normalizeForSearch);
       _alt = norm;
       _altV++;
+      perfDiag.altFetchMs = since(_tAlt);
       _altListeners.forEach((fn) => fn());
     })
     .catch(() => {
@@ -237,6 +249,7 @@ function rowMatchTier(hay: Hay, i: number, f: Forms): number {
  * alt は初回検索で遅延fetch(到着で onAltLoaded 通知→呼び直し→hayに畳み込み済みで照合)。
  */
 export function searchWithTiers(query: string, items: MangaListItem[]): Map<string, number> {
+  const _t0 = nowMs();
   const out = new Map<string, number>();
   const tokens = query.trim().split(/\s+/).filter(Boolean);
   if (!tokens.length) return out;
@@ -276,6 +289,8 @@ export function searchWithTiers(query: string, items: MangaListItem[]): Map<stri
 
   _lastKey = key;
   _lastIdx = hits;
+  perfDiag.searchMs = since(_t0);
+  perfDiag.searchHits = out.size;
   return out;
 }
 

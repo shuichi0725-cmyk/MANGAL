@@ -20,6 +20,7 @@ import {
 } from "@/lib/filters";
 import { onAltLoaded, prewarmSearch, searchWithTiers } from "@/lib/clientSearch";
 import { ensureFullIndex, isFullIndexLoaded } from "@/lib/useMangaIndex";
+import { perfDiag } from "@/lib/perfDiag";
 import type { IndexSummary, ArtBook, ListBundle, MangaListItem } from "@/lib/schema";
 import { useMangaIndex } from "@/lib/useMangaIndex";
 
@@ -329,6 +330,21 @@ export default function HomeClient({ data, summary }: Props) {
 
       {/* ★テスト環境限定ツールバー(本番=workers.dev では非表示)。
           ①画像なし=cover無だけ表示 ②コピー=表示中の情報をクリップボードへ(私への共有用) */}
+      {/* ★実機の実数字(2026-08-01)。PCの測定では当たらないので端末側で拾う。
+          ★haystack同期 = 検索を押した瞬間に残りを同期で埋めた時間(=固まりの最有力候補) */}
+      {isPreview && (
+        <div className="mb-3 rounded-card border border-dashed border-[var(--color-accent)]/40 px-3 py-2 text-[10px] leading-relaxed text-ink/60">
+          <span className="font-bold text-[var(--color-accent)]">診断</span>{" "}
+          索引: 取得{perfDiag.fullFetchMs ?? "–"}ms / デコード{perfDiag.fullDecodeMs ?? "–"}ms{" · "}
+          <span className="font-bold text-rose-600">
+            haystack同期{perfDiag.haySyncMs}ms({perfDiag.haySyncRows.toLocaleString()}行)
+          </span>{" · "}
+          空き時間{perfDiag.hayIdleMs}ms({perfDiag.hayIdleRows.toLocaleString()}行){" · "}
+          検索{perfDiag.searchMs ?? "–"}ms({perfDiag.searchHits ?? "–"}件){" · "}
+          別名{perfDiag.altFetchMs ?? "–"}ms{" · "}
+          索引{isFullIndexLoaded() ? "完備" : "読込中"}({manga.length.toLocaleString()}件)
+        </div>
+      )}
       {isPreview && !showArt && (
         <div className="mb-4 flex flex-wrap items-center gap-2 rounded-card border border-dashed border-[var(--color-accent)]/50 bg-[var(--color-accent)]/5 p-2 text-sm">
           <span className="text-xs font-semibold text-[var(--color-accent)]">🧪 テスト専用</span>
@@ -458,6 +474,7 @@ export default function HomeClient({ data, summary }: Props) {
               setState={applyState}
               yearBounds={bounds}
               authorEntries={authors}
+              matchedSlugs={matchedSlugs}
             />
           </div>
         )}
@@ -537,6 +554,7 @@ export default function HomeClient({ data, summary }: Props) {
               setState={applyState}
               yearBounds={bounds}
               authorEntries={authors}
+              matchedSlugs={matchedSlugs}
             />
           </div>
           <div className="shrink-0 border-t border-[var(--color-line)] p-3">

@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import type { MangaListItem, MangaSearchItem } from "./schema";
 import { decodeListIndex } from "./listIndexDecode";
+import { nowMs, perfDiag, since } from "./perfDiag";
 
 // ★一覧索引をクライアントで遅延ロード (= SSR props で 65k を送らない)。
 //   /manga-list-index.json を一度だけ fetch → module キャッシュで全ページ共有。
@@ -63,13 +64,20 @@ let _fullState: "idle" | "loading" | "done" = "idle";
 export function ensureFullIndex(): void {
   if (_fullState !== "idle") return;
   _fullState = "loading";
+  const _t0 = nowMs();
+  let _tDecode = 0;
   fetch("/manga-list-index.json")
     .then((r) => {
       if (!r.ok) throw new Error(`索引取得失敗 ${r.status}`);
       return r.json();
     })
-    .then((raw: RawIndex) => decodeChunked(raw))
+    .then((raw: RawIndex) => {
+      perfDiag.fullFetchMs = since(_t0); // 取得+解凍+JSON.parse
+      _tDecode = nowMs();
+      return decodeChunked(raw);
+    })
     .then((items) => {
+      perfDiag.fullDecodeMs = since(_tDecode);
       _cache = items;
       _cacheIsFull = true;
       _fullState = "done";
