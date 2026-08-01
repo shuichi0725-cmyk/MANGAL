@@ -1,3 +1,4 @@
+import { jaCollator } from "./collator";
 import type { ArtBook, MangaListItem, MangaSearchItem, StatusT } from "./schema";
 import { kanaToRomaji, normalizeForSearch, romajiToHiragana } from "./romaji";
 
@@ -124,7 +125,8 @@ function totalVolumes(m: MangaListItem): number {
 }
 
 // ★共有Collator(2026-07-22): localeCompare都度呼びはロケール機構を毎回起こし67kソートで重い
-const _ja = new Intl.Collator("ja");
+// ★2026-08-01: 実体を lib/collator.ts に移し、一覧の並べ替え(listSort.ts)と同じものを使う
+const _ja = jaCollator;
 
 function sortItems(items: MangaListItem[], sort: SortKey): MangaListItem[] {
   switch (sort) {
@@ -236,7 +238,7 @@ export function applyArtBookFilters(items: ArtBook[], state: FilterState): ArtBo
     case "year-asc":
       return [...out].sort((a, b) => (a.year ?? 0) - (b.year ?? 0));
     case "title":
-      return [...out].sort((a, b) => a.title_kana.localeCompare(b.title_kana, "ja"));
+      return [...out].sort((a, b) => _ja.compare(a.title_kana, b.title_kana));
     case "volumes":
       return [...out].sort((a, b) => b.volumes.length - a.volumes.length);
     default:
@@ -262,7 +264,7 @@ export function uniqueAuthors(items: MangaListItem[], includeOriginal = false): 
     for (const a of m.authors) add(a.name);
     if (includeOriginal) for (const a of m.original_authors) add(a.name);
   }
-  return Array.from(map.values()).sort((a, b) => a.localeCompare(b, "ja"));
+  return Array.from(map.values()).sort((a, b) => _ja.compare(a, b));
 }
 
 /** 著者名 → 読み(カタカナ)の一覧 (= 50音索引用)。 重複排除、 kana有る方を優先採用。 */
@@ -286,9 +288,7 @@ export function authorsWithKana(
     for (const a of m.authors) add(a.name, a.kana);
     if (includeOriginal) for (const a of m.original_authors) add(a.name, a.kana);
   }
-  return Array.from(map.values()).sort((a, b) =>
-    (a.kana || a.name).localeCompare(b.kana || b.name, "ja"),
-  );
+  return Array.from(map.values()).sort((a, b) => _ja.compare(a.kana || a.name, b.kana || b.name));
 }
 
 export function yearBounds(items: MangaListItem[]): [number, number] {

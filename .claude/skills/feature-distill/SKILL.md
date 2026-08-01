@@ -21,6 +21,15 @@ description: 機能蒸留して=非漫画の面(ホーム/検索/AI書評/コー
 
 ## 実行
 
+★エンジン冒頭で **型検査 + `npm test` を前検査として自動実行**(2026-08-01)。ここに
+**検索スナップショット** (`lib/searchSnapshot.test.ts`) が含まれ、実索引由来の固定コーパスに対する
+**件数・表示順・tier分布・ファセット件数**が記録と1つでも違えば **abort して本番に出さない**。
+- このルートの疎通検査(Step7)は頁のHTTP 200しか見ないため、検索/一覧の退行は素通りしていた。その穴を塞ぐ番人。
+- 変更が**意図どおり**なら `UPDATE_SEARCH_SNAPSHOT=1 npx vitest run lib/searchSnapshot.test.ts` で焼き直し、
+  **git diff を目視してから commit**(黙って更新しない)。
+- コーパス再生成= `python scripts/_build-search-fixture.py`(実索引から決定的に2,500件。週次で索引が変わっても勝手に赤くならない設計)。
+- `--skip-tests` は存在するが**使わない**(退行がそのまま本番に出る)。
+
 ```
 # 1) 計画(初回や不安な時。staging+build+同期計画まで、PUTしない)
 python scripts/_deploy-feature.py --dry

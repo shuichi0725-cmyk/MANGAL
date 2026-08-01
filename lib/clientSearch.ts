@@ -27,27 +27,38 @@ type Hay = { title: string[]; au: string[]; kanaRoma: string[]; t0: string[]; k0
 let _hay: Hay | null = null;
 let _hayOf: MangaListItem[] | null = null;
 let _hayAltV = -1; // hayに畳み込み済みのaltバージョン
+let _hayHasAlt = false; // 現hayに別名を畳み込み済みか(=追記だけで更新できるかの判定)
 
 let _alt: Record<string, string[]> | null = null; // slug → 別名リスト(正規化済み)
 let _altV = 0; // altが届く/差し替わる度に+1(=hay再構築の合図)
 let _altInflight = false;
 const _altListeners = new Set<() => void>();
 
-function buildHay(items: MangaListItem[]): Hay {
-  const title: string[] = new Array(items.length);
-  const au: string[] = new Array(items.length);
-  const kanaRoma: string[] = new Array(items.length);
-  const t0: string[] = new Array(items.length); // 正規化title単体(完全/前方一致tier判定用 2026-07-23)
-  const k0: string[] = new Array(items.length); // 正規化kana単体
-  for (let i = 0; i < items.length; i++) {
+/** hayの器だけ用意する(中身は fillHay が埋める)。 */
+function allocHay(n: number): Hay {
+  return {
+    title: new Array(n).fill(""),
+    au: new Array(n).fill(""),
+    kanaRoma: new Array(n).fill(""),
+    t0: new Array(n).fill(""), // 正規化title単体(完全/前方一致tier判定用 2026-07-23)
+    k0: new Array(n).fill(""), // 正規化kana単体
+  };
+}
+
+/** hayの [from, to) 行ぶんを埋める。呼んだ時点の _alt を畳み込む。 */
+function fillHay(items: MangaListItem[], hay: Hay, from: number, to: number): void {
+  for (let i = from; i < to; i++) {
     const m = items[i];
     const alts = _alt ? _alt[m.slug] : undefined;
+    // ★t0/k0 は題名欄の材料と同一なので使い回す(2026-08-01: 旧実装は同じ
+    //   normalizeForSearch を1行につき2回よけいに呼んでいた)。
+    const nTitle = normalizeForSearch(m.title);
+    const nKana = normalizeForSearch(m.title_kana || "");
     // 題名系 = title/kana/subtitle + alt(別名・英題。ロード済みなら常時同格で照合)
-    title[i] =
-      [m.title, m.title_kana, m.subtitle || ""].map(normalizeForSearch).join("") +
-      (alts ? alts.join("") : "");
+    hay.title[i] =
+      nTitle + nKana + normalizeForSearch(m.subtitle || "") + (alts ? alts.join("") : "");
     // 著者= 名+かな+かなのローマ字形(かな/ローマ字入力の著者検索も題名と同機構で。2026-07-19)
-    au[i] = [...(m.authors || []), ...(m.original_authors || [])]
+    hay.au[i] = [...(m.authors || []), ...(m.original_authors || [])]
       .flatMap((a) => [
         normalizeForSearch(a.name),
         a.kana ? normalizeForSearch(a.kana) : "",
@@ -56,29 +67,97 @@ function buildHay(items: MangaListItem[]): Hay {
       .join("");
     // かな→ローマ字形(= ローマ字クエリの照合先。旧title_romaji列の代替)。
     // ★母音連続を圧縮(wanpiisu→wanpisu): 長音表記ゆらぎ(wanpi-su/wanpiisu/wanpisu)を同一視
-    kanaRoma[i] = collapseVowels(normalizeForSearch(kanaToRomaji(m.title_kana || "")));
-    t0[i] = normalizeForSearch(m.title);
-    k0[i] = normalizeForSearch(m.title_kana || "");
+    hay.kanaRoma[i] = collapseVowels(normalizeForSearch(kanaToRomaji(m.title_kana || "")));
+    hay.t0[i] = nTitle;
+    hay.k0[i] = nKana;
   }
-  return { title, au, kanaRoma, t0, k0 };
+}
+
+/**
+ * ★haystackは「細切れに前計算」する(2026-08-01)。
+ *
+ * 旧: prewarmSearch が requestIdleCallback の中で67k件を一気に構築していた。
+ * idle に載せても★1本の巨大タスク★なので、走り出したら主スレッドは最後まで返らない
+ * (本番実測4.5秒。初期表示の直後に固まる体感の正体)。
+ * 新: 器だけ先に作り、空き時間の許す範囲で行を埋め、足りなければ次の空き時間へ回す。
+ * 埋まりきる前に検索が来たら、その場で残りを同期で埋める(結果は常に完全)。
+ */
+// 1回の刻み幅。空き時間が続く限り下の do-while が続けて回すので、小さくしても総量は変わらず、
+// 「一区切りの長さ」だけが短くなる(=描画が詰まらない)。本番実測で500行あたり約20ms。
+const FILL_CHUNK = 500;
+let _hayFilled = 0; // 先頭から何行ぶん埋まっているか
+let _fillScheduled = false;
+
+function scheduleFill(items: MangaListItem[]): void {
+  if (_fillScheduled) return;
+  _fillScheduled = true;
+  const step = (deadline?: { timeRemaining: () => number }) => {
+    _fillScheduled = false;
+    if (!_hay || _hayOf !== items) return; // 索引が差し替わった=この前計算は用済み
+    do {
+      const to = Math.min(_hayFilled + FILL_CHUNK, items.length);
+      fillHay(items, _hay, _hayFilled, to);
+      _hayFilled = to;
+    } while (_hayFilled < items.length && deadline && deadline.timeRemaining() > 4);
+    if (_hayFilled < items.length) scheduleFill(items);
+  };
+  if (typeof requestIdleCallback === "function") requestIdleCallback(step, { timeout: 3000 });
+  else setTimeout(step, 0);
 }
 
 function ensureHay(items: MangaListItem[]): Hay {
-  if (_hay && _hayOf === items && _hayAltV === _altV) return _hay;
-  _hay = buildHay(items);
-  _hayOf = items;
-  _hayAltV = _altV;
-  _lastKey = ""; // 索引が替わったら絞り込みキャッシュ破棄
-  _lastIdx = null;
+  // 器が無い/索引が別物 → 作り直し
+  if (!_hay || _hayOf !== items) {
+    _hay = allocHay(items.length);
+    _hayOf = items;
+    _hayFilled = 0;
+    _hayAltV = _altV;
+    _hayHasAlt = !!_alt;
+    _lastKey = ""; // 索引が替わったら絞り込みキャッシュ破棄
+    _lastIdx = null;
+  } else if (_hayAltV !== _altV) {
+    // ★alt到着だけなら題名欄に追記して済ませる(2026-08-01)。
+    //   旧: altが届くたび67k件を全再計算していた(本番実測5.1秒)。これが「検索して件数が
+    //   出た直後にまた固まる」体感の主因。alt は題名系の照合材料を★増やす方向にしか
+    //   働かない★ので、未畳み込みのhayには文字列追記だけで等価な結果になる。
+    //   まだ埋めていない行は fillHay が最新の _alt を見て畳み込むので触らなくてよい。
+    if (!_hayHasAlt && _alt) {
+      for (let i = 0; i < _hayFilled; i++) {
+        const alts = _alt[items[i].slug];
+        if (alts && alts.length) _hay.title[i] += alts.join("");
+      }
+      _hayHasAlt = true;
+    } else {
+      // 別名の差し替え(テスト注入・再fetch)は追記では表せない → 全部作り直す
+      _hay = allocHay(items.length);
+      _hayFilled = 0;
+      _hayHasAlt = !!_alt;
+    }
+    _hayAltV = _altV;
+    _lastKey = ""; // 照合材料が変わった=前回ヒット外にも当たりうる。絞り込みキャッシュ破棄
+    _lastIdx = null;
+  }
+  // 前計算が追いついていなければ、ここで残りを同期で埋める(検索結果は常に完全)
+  if (_hayFilled < items.length) {
+    fillHay(items, _hay, _hayFilled, items.length);
+    _hayFilled = items.length;
+  }
   return _hay;
 }
 
 /** 索引ロード後の手すきで前計算を先回り(検索開始時のワンショット遅延を消す)。 */
 export function prewarmSearch(items: MangaListItem[]): void {
-  if (_hay && _hayOf === items && _hayAltV === _altV) return;
-  const run = () => ensureHay(items);
-  if (typeof requestIdleCallback === "function") requestIdleCallback(run, { timeout: 3000 });
-  else setTimeout(run, 300);
+  if (_hay && _hayOf === items && _hayAltV === _altV && _hayFilled === items.length) return;
+  if (!_hay || _hayOf !== items) {
+    _hay = allocHay(items.length);
+    _hayOf = items;
+    _hayFilled = 0;
+    _hayAltV = _altV;
+    _hayHasAlt = !!_alt;
+    _lastKey = "";
+    _lastIdx = null;
+  }
+  scheduleFill(items);
 }
 
 function fetchAlt(): void {

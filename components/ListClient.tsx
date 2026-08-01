@@ -120,11 +120,23 @@ export default function ListClient({ data }: { data: ListBundle }) {
   const indexLoading = mangaIndex === null;
   const liveData = useMemo(() => ({ ...data, manga }), [data, manga]);
   const bounds = useMemo(() => yearBounds(manga), [manga]);
-  const authors = useMemo(() => authorsWithKana(manga, true), [manga]);
+  // ★著者50音リストはフィルター抽斗を開くまで作らない(2026-08-01)。
+  //   一覧の FilterPanel は open の時だけマウントされるのに、この useMemo は索引到着と同時に
+  //   走っていた(67k件×著者を Map に畳んで日本語ソート。実測166ms)。抽斗を一度も開かない
+  //   閲覧者はこの費用を丸ごと払わされ、しかも初期表示直後という一番効く瞬間に固まっていた。
+  //   一度開いたら以後は manga 依存で保持する(開閉のたびに作り直さない)。
+  const [filterUsed, setFilterUsed] = useState(false);
+  useEffect(() => {
+    if (open) setFilterUsed(true);
+  }, [open]);
+  const authors = useMemo(
+    () => (filterUsed ? authorsWithKana(manga, true) : []),
+    [manga, filterUsed],
+  );
   const nActive = activeCount(state);
 
   // ★スクロール位置の復元(詳細→戻る): 遷移時にsessionStorageへ保存(下のLink onClick)→
-  //   索引ロード後に復元。head先行(200件)→full到着で高さが伸びるため、目標に届くまで再試行し
+  //   索引ロード後に復元。head先行(100件)→full到着で高さが伸びるため、目標に届くまで再試行し
   //   届いた時点(or full到着後)でキーを消す。
   useEffect(() => {
     if (indexLoading) return;

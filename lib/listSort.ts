@@ -1,3 +1,4 @@
+import { defaultCollator, jaCollator } from "./collator";
 import type { MangaListItem } from "./schema";
 
 /**
@@ -39,7 +40,10 @@ export function compareBy(sortId: SortId): (a: MangaListItem, b: MangaListItem) 
         return (
           (b.popularity ?? 0) - (a.popularity ?? 0) ||
           (b.score ?? 0) - (a.score ?? 0) ||
-          a.title_kana.localeCompare(b.title_kana, "ja")
+          // ★共有Collator(2026-08-01): 本番索引は48.5%が popularity 未設定で、
+          //   ほぼ全比較がこの文字列比較まで落ちる。localeCompare 都度呼びだと
+          //   67k件の並べ替えで実測225ms(=初期表示直後の固まりの主因)。
+          jaCollator.compare(a.title_kana, b.title_kana)
         );
       case "year-asc":
         return (a.year_started ?? 9999) - (b.year_started ?? 9999);
@@ -48,9 +52,9 @@ export function compareBy(sortId: SortId): (a: MangaListItem, b: MangaListItem) 
       case "vols-desc":
         return volCount(b) - volCount(a);
       case "latest-desc":
-        return latestDate(b).localeCompare(latestDate(a));
+        return defaultCollator.compare(latestDate(b), latestDate(a));
       default:
-        return (a.title_kana || a.title).localeCompare(b.title_kana || b.title, "ja");
+        return jaCollator.compare(a.title_kana || a.title, b.title_kana || b.title);
     }
   };
 }

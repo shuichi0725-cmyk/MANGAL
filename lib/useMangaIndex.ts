@@ -16,7 +16,7 @@ let _cacheIsFull = false;
 let _inflight: Promise<MangaListItem[]> | null = null;
 let _catchLoaded = false;
 const _catchListeners = new Set<() => void>();
-// ★head→full 置換をフックへ通知(2026-07-14 コールドスタート対策: 先頭200件で即描画→全件差替)
+// ★head→full 置換をフックへ通知(2026-07-14 コールドスタート対策: 先頭100件で即描画→全件差替)
 const _indexListeners = new Set<() => void>();
 
 const decode = decodeListIndex; // 共有デコーダ(fl展開・authorsパック復元・cover復元)
@@ -38,7 +38,8 @@ function loadCatch(): void {
 }
 
 // ★初期サクサク化(2026-07-19 ユーザ体感報告): フル索引(22MB+67kデコード)を初描画と奪い合わない。
-//   head(200件)で即描画 → フルは requestIdleCallback(初描画後の手すき・上限2秒)で開始。
+//   head(100件。manga-list-head.json の実体も100件)で即描画 → フルは
+//   requestIdleCallback(初描画後の手すき・上限2秒)で開始。
 //   デコードも8,000行ずつのチャンク処理=メインスレッドの長タスク(旧~数百ms一撃)を解消。
 //   検索確定・フィルタ時は ensureFullIndex() で即時開始(headだけで検索する誤答窓を最小化)。
 async function decodeChunked(raw: RawIndex): Promise<MangaListItem[]> {

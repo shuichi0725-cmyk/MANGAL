@@ -31,8 +31,21 @@ export default function FilterPanel({
   //   faceted-search の定石 = 当該facetだけ解除した state で絞り、 残った作品を値で集計。
   //   静的(R2)のままブラウザJSで計算 = サーバ化しない([[hosting_worker_r2_architecture]])。
   const counts = useMemo(() => {
+    // ★同じ解除条件の絞り込みは1回だけ走らせる(2026-08-01)。
+    //   ジャンルと要素はどちらも解除なし(={})で、本番67k件に対する applyFilters を
+    //   まったく同じ引数で2回やっていた。7パス→6パスに減る。
+    const rowsCache = new Map<string, MangaListItem[]>();
+    const rowsFor = (clear: Partial<FilterState>) => {
+      const k = JSON.stringify(clear);
+      let rows = rowsCache.get(k);
+      if (!rows) {
+        rows = applyFilters(data.manga, { ...state, ...clear });
+        rowsCache.set(k, rows);
+      }
+      return rows;
+    };
     const tally = (clear: Partial<FilterState>, values: (m: MangaListItem) => string[]) => {
-      const base = applyFilters(data.manga, { ...state, ...clear });
+      const base = rowsFor(clear);
       const map = new Map<string, number>();
       for (const m of base) for (const v of values(m)) map.set(v, (map.get(v) ?? 0) + 1);
       return map;

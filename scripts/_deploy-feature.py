@@ -109,6 +109,8 @@ def main():
     ap.add_argument("--dry", action="store_true", help="staging+build+計画のみ(PUT/purge/manifest更新なし)")
     ap.add_argument("--skip-build", action="store_true", help="既存out/(直前のfeatビルド)を再利用")
     ap.add_argument("--allow-dirty", action="store_true", help="コード未コミットでも続行(来歴が濁るので非推奨)")
+    ap.add_argument("--skip-tests", action="store_true",
+                    help="★非推奨: 検索スナップショット等の前検査を飛ばす(退行がそのまま本番に出る)")
     ap.add_argument("--workers", type=int, default=16)
     a = ap.parse_args()
 
@@ -132,6 +134,25 @@ def main():
         for d in dirty[:8]:
             print("  ", d)
         sys.exit(3)
+
+    # --- 0b. 前検査(2026-08-01): 型検査 + 全テスト。★検索スナップショットがここに含まれる ---
+    #   このルートは「コードだけ本番へ」なので、検索や一覧が壊れていても頁のHTTP 200検査
+    #   (Step7)は素通りする。実際に2026-07 の性能改修まで、検索の結果集合や表示順が
+    #   変わっていないことを機械で確かめる手立てが無かった。
+    #   lib/searchSnapshot.test.ts が実索引由来の固定コーパスで「件数・表示順・tier分布・
+    #   ファセット件数」を記録と突合するので、意図しない変化はここで赤くなって止まる。
+    #   意図した変更なら UPDATE_SEARCH_SNAPSHOT=1 で焼き直し、差分を git diff で見てから commit。
+    if not a.skip_tests:
+        for label, cmd in (("型検査", ["npx", "tsc", "--noEmit"]), ("テスト", ["npm", "test"])):
+            print(f"前検査: {label} …", flush=True)
+            r = subprocess.run(cmd, cwd=ROOT, shell=(os.name == "nt"),
+                               capture_output=True, text=True, encoding="utf-8", errors="replace")
+            if r.returncode != 0:
+                print(f"★abort: {label} が失敗 = この状態を本番に出さない。")
+                print((r.stdout or "")[-3000:])
+                print((r.stderr or "")[-2000:])
+                sys.exit(3)
+        print("前検査: 型検査・テストとも green(検索スナップショット一致)", flush=True)
 
     # --- 1. staging(本番公開済み頁集合に凍結) ---
     if not a.skip_build:
