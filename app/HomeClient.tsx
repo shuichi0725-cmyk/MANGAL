@@ -33,6 +33,22 @@ export default function HomeClient({ data }: Props) {
   const pathname = usePathname();
   const [state, setState] = useState(emptyFilterState());
   const [open, setOpen] = useState(false);
+  // ★画面幅に合わないフィルターを外す(2026-08-01)。
+  //   旧: PC用サイドバー(hidden md:block)とモバイル用抽斗(md:hidden)の両方が
+  //   常時マウントされ、CSSで隠れているだけだった。FilterPanel の動的件数は
+  //   67k件の絞り込みを毎回6パス走らせる(本番実測568ms)ので、どの画面幅でも
+  //   必ず片方分(568ms)を見えないパネルのために捨てていた。
+  //   初期値を "both"(=静的HTMLと同じ両方描画)にしてから水和直後に確定させるので、
+  //   水和不一致も起きないし、外す側はもともと display:none = 見た目は1ドットも動かない。
+  //   索引(67k)の到着は水和よりずっと後なので、不要な側は重い計算を一度もしない。
+  const [viewport, setViewport] = useState<"both" | "desktop" | "mobile">("both");
+  useEffect(() => {
+    const mq = window.matchMedia("(min-width: 768px)"); // = Tailwind の md ブレイクポイント
+    const apply = () => setViewport(mq.matches ? "desktop" : "mobile");
+    apply();
+    mq.addEventListener("change", apply); // 回転・リサイズで切り替え
+    return () => mq.removeEventListener("change", apply);
+  }, []);
   const listTopRef = useRef<HTMLDivElement>(null);
   // ★テスト環境限定機能(画像なしフィルタ / 情報コピー)。 本番(workers.dev)では非表示。
   const [noCover, setNoCover] = useState(false);
@@ -88,7 +104,7 @@ export default function HomeClient({ data }: Props) {
 
   // ★一覧 manga は軽量索引をクライアント遅延ロード (= SSR props で 65k を送らない)。
   //   master/画集は props(軽量)。 索引到着までは loading。
-  const mangaIndex = useMangaIndex();
+  const mangaIndex = useMangaIndex({ withCatch: true }); // カード表示=キャッチ文が要る
   const manga = useMemo(() => mangaIndex ?? [], [mangaIndex]);
   const liveData = useMemo(() => ({ ...data, manga }), [data, manga]);
   const indexLoading = mangaIndex === null;
@@ -417,16 +433,18 @@ export default function HomeClient({ data }: Props) {
       )}
 
       <div className="grid md:grid-cols-[240px_1fr] gap-6">
-        {/* デスクトップ: 常時サイドバー(PC版は不変) */}
-        <div className="hidden md:block">
-          <FilterPanel
-            data={liveData}
-            state={state}
-            setState={applyState}
-            yearBounds={bounds}
-            authorEntries={authors}
-          />
-        </div>
+        {/* デスクトップ: 常時サイドバー(PC版は不変。 モバイルでは水和直後に外す=見た目は不変) */}
+        {viewport !== "mobile" && (
+          <div className="hidden md:block">
+            <FilterPanel
+              data={liveData}
+              state={state}
+              setState={applyState}
+              yearBounds={bounds}
+              authorEntries={authors}
+            />
+          </div>
+        )}
         <div className="min-w-0">
           <div ref={listTopRef} className="scroll-mt-20" />
           {showArt ? (
@@ -468,7 +486,9 @@ export default function HomeClient({ data }: Props) {
       </div>
 
       {/* ★モバイル: 全画面オーバーレイ フィルター。 ボタンで徐々に拡大、 ×で徐々に畳む。
-          背景は blur+暗転(背後の文脈は見えるが文字は読める)。 PC版(md:)は出さない。 */}
+          背景は blur+暗転(背後の文脈は見えるが文字は読める)。 PC版(md:)は出さない。
+          ★PCでは水和直後に丸ごと外す(もともと md:hidden = 見た目不変、計算だけ消える) */}
+      {viewport !== "desktop" && (
       <div
         className={`md:hidden fixed inset-0 z-50 transition-[opacity,visibility] duration-300 ${
           open ? "visible opacity-100" : "invisible opacity-0 pointer-events-none"
@@ -514,6 +534,7 @@ export default function HomeClient({ data }: Props) {
           </div>
         </div>
       </div>
+      )}
     </div>
   );
 }

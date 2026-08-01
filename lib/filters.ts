@@ -168,6 +168,11 @@ export function applyFilters(
   state: FilterState,
   matchedSlugs: Set<string> | null = null,
 ): MangaListItem[] {
+  // ★選択侧の正規化はループの外で1回だけ(2026-08-01)。
+  //   旧: 68,749行のそれぞれで state.authors.map(authorKey) を作り直していた
+  //   (配列確保 + 選択人数分の正規表現置換 × 68,749)。値は行に依らない。
+  const selAuthors = state.authors.length ? state.authors.map(authorKey) : null;
+  const selOriginal = state.originalAuthors.length ? state.originalAuthors.map(authorKey) : null;
   const filtered = items.filter((m) => {
     if (state.query && (!matchedSlugs || !matchedSlugs.has(m.slug))) return false;
     if (!inRange(m.year_started, state.yearMin, state.yearMax)) return false;
@@ -188,12 +193,12 @@ export function applyFilters(
     if (state.magazines.length) {
       if (!m.magazine || !state.magazines.includes(m.magazine)) return false;
     }
-    if (state.authors.length) {
+    if (selAuthors) {
       // ★authorKey照合(空白違いの同一人物を通す)
-      if (!intersects(state.authors.map(authorKey), m.authors.map((a) => authorKey(a.name)))) return false;
+      if (!intersects(selAuthors, m.authors.map((a) => authorKey(a.name)))) return false;
     }
-    if (state.originalAuthors.length) {
-      if (!intersects(state.originalAuthors.map(authorKey), m.original_authors.map((a) => authorKey(a.name)))) return false;
+    if (selOriginal) {
+      if (!intersects(selOriginal, m.original_authors.map((a) => authorKey(a.name)))) return false;
     }
     if (state.genres.length) {
       const ok = state.genreMode === "and"

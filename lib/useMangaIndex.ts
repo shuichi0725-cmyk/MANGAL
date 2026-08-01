@@ -15,6 +15,11 @@ let _cache: MangaListItem[] | null = null;       // head(部分) → full に置
 let _cacheIsFull = false;
 let _inflight: Promise<MangaListItem[]> | null = null;
 let _catchLoaded = false;
+// ★キャッチ文(manga-catch-index.json 6.9MB)は【カード表示の画面だけ】読む(2026-08-01)。
+//   旧: フル索引が揃ったら無条件に fetch して63,749件へ merge していたが、
+//   実際に catch を描画するのは MangaCard(=ホームのカード一覧)だけ。
+//   一覧表(/list は表形式)とカレンダーは一切使わないのに6.9MBを落としていた。
+let _catchWanted = false;
 const _catchListeners = new Set<() => void>();
 // ★head→full 置換をフックへ通知(2026-07-14 コールドスタート対策: 先頭100件で即描画→全件差替)
 const _indexListeners = new Set<() => void>();
@@ -69,7 +74,7 @@ export function ensureFullIndex(): void {
       _cacheIsFull = true;
       _fullState = "done";
       _indexListeners.forEach((fn) => fn());
-      loadCatch(); // catch は非同期で後から merge
+      if (_catchWanted) loadCatch(); // ★キャッチを使う画面だけ(下の useMangaIndex 参照)
     })
     .catch(() => {
       _fullState = "idle"; // 失敗時は再試行可能に
@@ -112,8 +117,11 @@ function fetchIndex(): Promise<MangaListItem[]> {
   return _inflight;
 }
 
-/** 一覧索引を返す。 未ロード時は null。 head→full差替/catchロード完了時は再レンダーで反映。 */
-export function useMangaIndex(): MangaListItem[] | null {
+/** 一覧索引を返す。 未ロード時は null。 head→full差替/catchロード完了時は再レンダーで反映。
+ *  @param opts.withCatch キャッチ文も必要な画面(=カード表示)だけ true。
+ *         渡さなければ manga-catch-index.json(6.9MB) を落とさない。 */
+export function useMangaIndex(opts?: { withCatch?: boolean }): MangaListItem[] | null {
+  const withCatch = !!opts?.withCatch;
   const [data, setData] = useState<MangaListItem[] | null>(_cache);
   const [, force] = useState(0);
   useEffect(() => {
@@ -128,14 +136,18 @@ export function useMangaIndex(): MangaListItem[] | null {
     const onCatch = () => {
       if (alive) force((v) => v + 1);
     };
-    if (_catchLoaded) onCatch();
-    else _catchListeners.add(onCatch);
+    if (withCatch) {
+      _catchWanted = true;
+      if (_cacheIsFull) loadCatch(); // 先に別画面で索引だけ揃っていた場合の取り返し
+      if (_catchLoaded) onCatch();
+      else _catchListeners.add(onCatch);
+    }
     return () => {
       alive = false;
       _indexListeners.delete(onIndex);
       _catchListeners.delete(onCatch);
     };
-  }, []);
+  }, [withCatch]);
   return data;
 }
 
