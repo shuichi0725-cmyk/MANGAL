@@ -19,6 +19,7 @@ python scripts/_anilist-delta.py   # ⑥AniList鮮度維持(直近更新~5,000�
 python scripts/_voldesc-material.py --recheck-nomaterial 300   # ⑦巻説明・材料なし台帳のlive再照会救済(偽陰性~10%回収・冪等・逐次保存・429中断。詳細=skill volume-desc)
 python scripts/_kana-digit-harvest.py --limit 30   # ⑧数字kana素材(フリガナに数字が残る~528頁のwiki+楽天live読み収集)
 python scripts/_check-recent-ongoing-volumes.py --limit 200   # ⑨続巻逆照合(連載中頁→楽天題検索。日次蒸留の後方安全網)
+python scripts/_placeholder-cover-refresh.py --limit 200   # ⑩仮書影→実物の差し替え(発売前の文字だけ .gif を楽天liveで引き直す。詳細=skill placeholder-cover-refresh)
 ```
 
 ## ★429/冷却の共通ルール (= 2026-07-24 ユーザ指摘で機械化。運転者の判断ゼロ)
@@ -59,7 +60,14 @@ python scripts/_check-recent-ongoing-volumes.py --limit 200   # ⑨続巻逆照�
 - ③を無限ループ化しない(上記=NDL未収載の再照会浪費)
 
 ## セット構成 (= 将来増やせる)
-現在: ①試し読みexpand消化 ③NDLヨミ照合(1パス) ④完結判定 ⑤素材ハーベスト ⑥AniList鮮度維持 ⑦巻説明recheck ⑧数字kana素材 ⑨続巻逆照合
+現在: ①試し読みexpand消化 ③NDLヨミ照合(1パス) ④完結判定 ⑤素材ハーベスト ⑥AniList鮮度維持 ⑦巻説明recheck ⑧数字kana素材 ⑨続巻逆照合 ⑩仮書影差し替え
+⑩**仮書影→実物の差し替え**(=`_placeholder-cover-refresh.py` 2026-08-02柱化。ユーザ発見「発売前や発売直後に文字の書影が入る」):
+  楽天は発売前の本に「著者名+書名を並べただけの画像」を返し、実物が出ると★URL自体が別物に変わる★ため
+  引き直さない限り永久に仮のまま。判定は形だけで確実= 本物`{ISBN}_1_9.jpg` / 仮`{ISBN}.gif`。
+  本番10,063巻が.gif、うち2025年以降=**1,752巻**が対象(旧作8,300巻は絶版で引いても.gifのまま=既定で除外)。
+  `--limit 200`(~4.5分)を1バッチに再起動で続き=④⑤⑦⑨と同型。queue枯れ=一巡完了(自然停止)。
+  試走12件で実物7件(約6割)。★**seed(cover-override.jsonl)へ1件ごと追記するだけ**=頁反映は上位モデルの
+  「反映して」か週次。**月1で `--build-queue`**(索引から再算出)はOpus作業。
 ⑨**続巻逆照合**(=`_check-recent-ongoing-volumes.py` 2026-07-29柱化。ユーザ発見「日次蒸留の穴」の恒久対策):
   日次蒸留(前方=未来窓の増加分のみ)が構造的に拾えない続巻(初回baseline切り捨て/発売済み/表記揺れ)を、
   **逆方向**(連載中・休載の全~11k頁→その題で楽天を引く)で月次一巡して回収する後方安全網。
