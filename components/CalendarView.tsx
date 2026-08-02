@@ -19,6 +19,12 @@ function addMonths(ym: string, k: number): string {
   return `${yy}-${String(mm).padStart(2, "0")}`;
 }
 
+/** JSTの現在月 "YYYY-MM"(発売日データはJST基準なので端末タイムゾーンに依らず固定)。 */
+function jstYm(): string {
+  const t = new Date(Date.now() + 9 * 3600 * 1000);
+  return `${t.getUTCFullYear()}-${String(t.getUTCMonth() + 1).padStart(2, "0")}`;
+}
+
 /**
  * 発売カレンダー(2026-07-06 全面刷新):
  *  ・当月〜3ヶ月後の4パネル + 「以降・未定」一覧の計5パネルを横スワイプ(scroll-snap)。
@@ -74,10 +80,18 @@ export default function CalendarView() {
     return m;
   }, [index]);
 
+  // ★月替わり自動追従(2026-08-03 ユーザ要望「月が変わっても7月のまま」):
+  //   旧: current = manifest.json の current(=ビルド時に焼いた月)→ 次のフルビルドまで前月のまま。
+  //   新: 当月はJSTの実時刻からその場で算出(月別JSONは将来分まで生成済み・無い月は空グリッドに
+  //   フォールバック)。manifest は「端末時計が過去に狂っている」時の保険としてだけ読む。
+  //   ※初期値""のままclient effectで確定させる=SSR HTML(ビルド月)とのhydration不一致を避ける。
   useEffect(() => {
+    setCurrent(jstYm());
     fetch("/calendar/manifest.json")
       .then((r) => r.json())
-      .then((m: { current: string }) => setCurrent(m.current))
+      .then((m: { current: string }) => {
+        if (m.current) setCurrent((cur) => (m.current > cur ? m.current : cur));
+      })
       .catch(() => {});
   }, []);
 
@@ -130,6 +144,13 @@ export default function CalendarView() {
   if (!current) return <div className="py-6 text-center text-[11px] text-ink/45">カレンダー読込中…</div>;
 
   const tabs = [...panelYms.map((ym, i) => (i === 0 ? "今月" : `${Number(ym.slice(5, 7))}月`)), "以降・未定"];
+
+  // ★beyond.json の境界はビルド時の月+4で焼かれている。current が実時刻で先へ進むと
+  //   4パネル目と重複する月が混ざるため、表示側でも「当月+4以降」だけに絞る(月なし=未定は残す)。
+  const beyondHorizon = addMonths(current, 4);
+  const beyondItems = (beyond?.items ?? []).filter(
+    (it) => !it[3] || String(it[3]).slice(0, 7) >= beyondHorizon,
+  );
 
   const renderItem = (it: Item, key: string) => {
     const slug = String(it[0]);
@@ -237,14 +258,14 @@ export default function CalendarView() {
         {panelYms.map((ym) => monthPanel(ym))}
         {/* 5枚目: 以降・未定(一覧表) */}
         <div className="w-full shrink-0 snap-center px-0.5">
-          <p className="text-center text-[12px] font-bold text-ink/70">{Number(addMonths(current, 4).slice(5, 7))}月以降・発売日未定</p>
+          <p className="text-center text-[12px] font-bold text-ink/70">{Number(beyondHorizon.slice(5, 7))}月以降・発売日未定</p>
           {!beyond && <p className="py-3 text-center text-[11px] text-ink/40">読込中…</p>}
-          {beyond && beyond.items.length === 0 && (
+          {beyond && beyondItems.length === 0 && (
             <p className="py-4 text-center text-[11px] text-ink/40">現在、掲載できる先の予定はありません</p>
           )}
-          {beyond && beyond.items.length > 0 && (
+          {beyond && beyondItems.length > 0 && (
             <ul className="mt-2 space-y-1.5">
-              {beyond.items.map((it, i) => (
+              {beyondItems.map((it, i) => (
                 <li key={i}>
                   <Link href={`/manga/${it[0]}`} className="spring-press flex items-baseline gap-2">
                     <span className="shrink-0 rounded bg-[var(--color-surface-2)] px-1.5 py-0.5 text-[10px] tabular-nums text-ink/60">
