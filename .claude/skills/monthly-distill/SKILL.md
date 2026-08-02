@@ -10,9 +10,6 @@ description: 月次蒸留して=MADB取込→フルpromote→enrich→AI fill。
 ## 大原則
 種1/種2/種3は壊さない。純粋追加only。上書き/削除検出=即abort+報告。**Phase1の差分報告→ユーザGoサイン受領までPhase2に進まない**。
 
-## ★着手前にユーザに出す保留件
-- **`manga-search-index.json`(11.3MB)の廃止** = 死蔵だが 2026-08-01 ユーザ裁定で「週次/月次蒸留の前に再検討」として保留中。Phase1の差分報告に添えて可否を仰ぐ。詳細= [[dead_search_index_retire_pending]]
-
 ## 実パイプライン ([[monthly_distill_real_pipeline]])
 1. Phase0 前提確認 = ★`python scripts/_monthly-phase0.py`(2026-07-10 script化。前提10項+git cleanを機械確認・欠け=exit 1=「対象Xが無いので蒸留できない」とユーザ報告して終了。目視チェックリストで代替しない)
 2. MADB差分取得: サイト月次CSV(cm101+cm504のみ更新。cm103/104/105は2024-11凍結=再DL無駄) + GitHub全件JSONのdateModified比較で訂正回収

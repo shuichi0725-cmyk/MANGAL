@@ -16,12 +16,12 @@ description: 週次蒸留=本番フルビルド+R2フルアップ。トリガー
 - `--prune` を安易に付けない(削除は明示判断)
 - 完了主張の前に疎通確認を飛ばさない
 
-## ★着手前にユーザに出す保留件
+## ★次回週次での一回きりタスク(2026-08-03 検索索引廃止の残務)
 
-- **`manga-search-index.json`(11.3MB)の廃止** = 呼び出し元ゼロの死蔵だが、2026-08-01 ユーザ裁定で「**週次/月次蒸留の前に再検討**」として保留中。
-  蒸留に入る前にこの件を提示して可否を仰ぐ(勝手に消さない/勝手に残さない)。
-  調査済の事実と廃止手順は [[dead_search_index_retire_pending]]。
-  ★R2の実体削除をやるなら**この週次がその場**(全頁が焼き直され旧JSが消えるため)。
+- **R2上の `manga-search-index.json` 実体を削除**(コード・生成・PUTは 2026-08-03 に全廃済み。
+  R2の実体だけ「古いタブの旧JSが参照しうる」ため次回週次=全頁焼き直し後に消す、が文書化済みの安全策):
+  `wrangler r2 object delete mangal-site/manga-search-index.json`(認証は _r2-sync.py と同じ env)。
+  削除後この節を消す。経緯= [[dead_search_index_retire_pending]]
 
 ## 手順
 
@@ -110,8 +110,8 @@ npx wrangler deploy -c wrangler-r2.jsonc
   purgeしないと calendar/*.json・data/*-stock.json 等が最長1週間前のまま配信される(ユーザ画面が更新されない)。
   purge = worker `/api/purge`(R2_PURGE_TOKEN認証、_deploy-differential.py step6 と同機構)。最低限
   `/calendar/manifest.json`+`/calendar/release/*.json`(当月〜3ヶ月+beyond)+`/data/*.json` を対象に。
-  ★**ルート索引5本も必須**(2026-07-22追記: ASSET=エッジ7日。忘れると検索改善・新頁が最長1週間出ない):
-  `/manga-list-index.json` `/manga-list-head.json` `/manga-search-index.json` `/manga-catch-index.json` `/manga-alt-index.json`
+  ★**ルート索引4本も必須**(2026-07-22追記: ASSET=エッジ7日。忘れると検索改善・新頁が最長1週間出ない):
+  `/manga-list-index.json` `/manga-list-head.json` `/manga-catch-index.json` `/manga-alt-index.json`
 
 ### 5+6. ★finalize (= 2026-07-10 script化。疎通→marker→manifestをゲート連鎖で1本化)
 ```

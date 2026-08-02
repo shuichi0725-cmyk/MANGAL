@@ -1,6 +1,6 @@
 import { jaCollator } from "./collator";
-import type { ArtBook, MangaListItem, MangaSearchItem, StatusT } from "./schema";
-import { kanaToRomaji, normalizeForSearch, romajiToHiragana } from "./romaji";
+import type { ArtBook, MangaListItem, StatusT } from "./schema";
+import { normalizeForSearch } from "./romaji";
 
 export type SortKey =
   | "default"
@@ -56,53 +56,8 @@ export const emptyFilterState = (): FilterState => ({
   artBooks: false,
 });
 
-/**
- * 検索クエリにマッチするか。タイトル・よみがな・ローマ字いずれかで部分一致。
- * かな⇄ローマ字の双方向変換も試す。
- */
-export function matchText(query: string, item: MangaSearchItem): boolean {
-  if (!query) return true;
-  const q = normalizeForSearch(query);
-  if (!q) return true;
-
-  const altTitles = item.alt.map((t) => normalizeForSearch(t));
-  // 人物名(著者/原作/credits)も検索対象 (= 検索索引で au[] に統合済)。
-  const people = item.au.map((n) => normalizeForSearch(n));
-
-  const haystacks = [
-    normalizeForSearch(item.title),
-    normalizeForSearch(item.title_kana),
-    normalizeForSearch(item.title_romaji),
-    normalizeForSearch(kanaToRomaji(item.title_kana)),
-    ...altTitles,
-    ...people,
-  ];
-  if (haystacks.some((h) => h && h.includes(q))) return true;
-
-  // クエリがローマ字 → かなに変換して title_kana と照合
-  const asKana = normalizeForSearch(romajiToHiragana(q));
-  if (asKana && asKana !== q) {
-    const kanaHay = normalizeForSearch(romajiToHiragana(kanaToRomaji(item.title_kana)));
-    if (kanaHay.includes(asKana)) return true;
-  }
-
-  // クエリがかな → ローマ字に変換して title_romaji と照合
-  const asRomaji = normalizeForSearch(kanaToRomaji(q));
-  if (asRomaji && asRomaji !== q) {
-    const romajiHay = normalizeForSearch(item.title_romaji);
-    if (romajiHay.includes(asRomaji)) return true;
-  }
-
-  return false;
-}
-
-/** 検索索引 全体から query にマッチする slug 集合を返す (= 一覧 filter と AND 合成して使う)。 */
-export function searchMatches(query: string, searchIndex: MangaSearchItem[]): Set<string> {
-  const set = new Set<string>();
-  if (!query) return set;
-  for (const it of searchIndex) if (matchText(query, it)) set.add(it.slug);
-  return set;
-}
+// (旧 matchText/searchMatches = 検索索引 manga-search-index.json 用の照合層は 2026-08-03 廃止。
+//  現行検索は lib/clientSearch.ts の tier 方式に統一済みで、ここからの呼び出し元はテストのみだった。)
 
 function inRange(value: number, min: number | null, max: number | null): boolean {
   if (min !== null && value < min) return false;

@@ -254,11 +254,6 @@ export type MangaListItem = {
 };
 
 /**
- * 検索専用 索引アイテム (= data/manga-search-index.json の 1 要素)。
- * ★一覧索引(MangaListItem)とは別ファイル = 検索時だけ遅延ロード (= 既定ブラウズでは読まない)。
- * matchText が必要とする text(題/かな/romaji/別名/人物名)のみ持つ。 表示はしない。
- */
-/**
  * 索引サマリ (= build 時に data/manga-list-index.json から集計)。
  *
  * ★なぜ要るか(2026-08-01 ユーザ報告「まだ200になるしおそいよ」):
@@ -279,17 +274,6 @@ export type IndexSummary = {
   seinen: number;
   shoujo: number;
   josei: number;
-};
-
-export type MangaSearchItem = {
-  slug: string;
-  title: string;
-  title_kana: string;
-  title_romaji: string;
-  /** alternative_titles の値配列 (en/fr/de/it/pt から非空のみ) */
-  alt: string[];
-  /** 検索対象の人物名 (= 著者 + 原作者 + credits をまとめた配列) */
-  au: string[];
 };
 
 /**

@@ -7,7 +7,7 @@
 - [【再利用】2026新刊蒸留フロー](distill_2026_pipeline.md) — NDL発見→preview生成→3段fill→AI enrichの全記録
 - [preview実測+stale事故史](preview_deploy_pitfalls.md) — 正=skill test-deploy/display-bug-triage ／ [preview反映=GitHub Actions実体+詰まり診断](preview_deploy_github_actions.md) — deploy-preview.yml/cancel-in-progress
 - [【番人】検索スナップショットゲート](search_snapshot_gate.md) — 固定コーパスで件数/表示順/tierを焦く。機能贈留の前検査に組込済
-- [【保留・蒸留前に再検討】死蔵検索索引11.3MB](dead_search_index_retire_pending.md) — 呼び出し元ゼロ・86.6%重複。週次/月次の前に可否を仰ぐ
+- [【✅】死蔵検索索引11.3MB=廃止済](dead_search_index_retire_pending.md) — 2026-08-03全撤去(alt永続層は自ファイル化)。残=次回週次でR2実体削除
 - [【再発厳禁】キャッシュが修正を隠した事故](deploy_cache_swr_hid_the_fix.md) — HTMLのSWRでデプロイが1回遅れ、直った物を誤診。届いたか先に確認
 - [/browse がサーバ描画0だった(白紙+SEO)](browse_ssr_shell_and_seo.md) — Suspense fallback=null が本文を捨てていた。静的シェルで是正
 - [【宿題】著者誤混入=巻書誌に出ない著者](author_not_in_volumes_audit.md) — 8,680件。メカドックだけ是正済、残りは未着手

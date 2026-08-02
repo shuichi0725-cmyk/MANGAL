@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import type { MangaListItem, MangaSearchItem } from "./schema";
+import type { MangaListItem } from "./schema";
 import { decodeListIndex } from "./listIndexDecode";
 import { nowMs, perfDiag, since } from "./perfDiag";
 
@@ -159,54 +159,5 @@ export function useMangaIndex(opts?: { withCatch?: boolean }): MangaListItem[] |
   return data;
 }
 
-// ★検索索引 = 別ファイル。 検索ボックスに入力があった時だけ遅延ロード (= 既定ブラウズでは読まない)。
-let _scache: MangaSearchItem[] | null = null;
-let _sinflight: Promise<MangaSearchItem[]> | null = null;
-// 検索索引も {f,d} 配列形式 → デコード(cover無いので単純)。 client専用(server側ローダ無し)。
-function decodeSearch(raw: RawIndex): MangaSearchItem[] {
-  const { f, d } = raw;
-  return d.map((arr) => {
-    const o: Record<string, unknown> = {};
-    for (let i = 0; i < f.length; i++) {
-      const v = arr[i];
-      if (v !== null && v !== undefined) o[f[i]] = v;
-    }
-    return o as unknown as MangaSearchItem;
-  });
-}
-function fetchSearchIndex(): Promise<MangaSearchItem[]> {
-  if (_scache) return Promise.resolve(_scache);
-  if (_sinflight) return _sinflight;
-  _sinflight = fetch("/manga-search-index.json")
-    .then((r) => {
-      if (!r.ok) throw new Error(`検索索引取得失敗 ${r.status}`);
-      return r.json();
-    })
-    .then((raw: RawIndex) => {
-      _scache = decodeSearch(raw);
-      return _scache;
-    })
-    .finally(() => {
-      _sinflight = null;
-    });
-  return _sinflight;
-}
-
-/**
- * 検索索引を返す。 `enabled` (= 検索クエリ有) が true の時だけ fetch する。
- * 未ロード/未要求時は null。
- */
-export function useSearchIndex(enabled: boolean): MangaSearchItem[] | null {
-  const [data, setData] = useState<MangaSearchItem[] | null>(_scache);
-  useEffect(() => {
-    if (!enabled) return;
-    let alive = true;
-    fetchSearchIndex().then((d) => {
-      if (alive) setData(d);
-    });
-    return () => {
-      alive = false;
-    };
-  }, [enabled]);
-  return data;
-}
+// (旧: 検索索引 manga-search-index.json の遅延ロード層は 2026-08-03 廃止。
+//  検索は clientSearch.ts が一覧索引+alt索引を共有する方式に統一済みで呼び出し元ゼロだった。)

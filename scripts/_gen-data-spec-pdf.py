@@ -123,25 +123,11 @@ story.append(Paragraph("？=任意（無い時はキーごと省略）。 [str]=
 
 story.append(PageBreak())
 
-# ── 2. 検索索引 ──
-story.append(Paragraph("2. 検索索引  manga-search-index.json", H2))
-story.append(Paragraph(
-    "役割＝検索ボックスに入力があった時だけ遅延fetch（既定ブラウズでは読まない）。 "
-    "題名/かなは一覧索引と重複するため<b>持たず slug で join</b>。 現状 約12.9MB → 約9MB。", BODY))
-story.append(Spacer(1, 3))
-search_rows = [
-    ("slug", "str", "結合キー（一覧索引と join して表示）", "保持"),
-    ("title_romaji", "str", "ローマ字検索（かな⇄ローマ字双方向照合）", "保持"),
-    ("alt", "[str]", "別名 en/fr/de/it/pt の非空値（多言語・SEO検索）", "保持"),
-    ("au", "[str]", "人物名＝著者+原作者+credits（人物名検索）", "保持"),
-    ("title / title_kana", "—", "（旧）題名・かな検索用", "★削除＝一覧索引から join"),
-]
-story.append(field_table(search_rows))
+# (旧「2. 検索索引 manga-search-index.json」節は 2026-08-03 の索引廃止で削除。
+#  検索は一覧索引+alt索引(manga-alt-index.json)の共有方式。)
 
-story.append(Spacer(1, 10))
-
-# ── 3. 詳細ページ ──
-story.append(Paragraph("3. 詳細ページ  data/manga.v2/{slug}.yml", H2))
+# ── 2. 詳細ページ ──
+story.append(Paragraph("2. 詳細ページ  data/manga.v2/{slug}.yml", H2))
 story.append(Paragraph(
     "役割＝各作品の詳細ページ。 アクセス時にそのページの1ファイルだけ取得（全66k件は配信しない）。 "
     "重い本体はここに集約。 軽量化＝本番UIが参照しない開発・監査用フラグを promote 出力時に strip。", BODY))

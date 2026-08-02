@@ -216,7 +216,7 @@ for f in _files:
            if (solo_nonfirst or vol_gap or cover_gap or d.get("_anthology") or d.get("_slugfix")) else {}),
         **({"_slugfix_new": d.get("_slugfix_new")} if d.get("_slugfix") else {}),
     })
-    # ② 検索索引(検索専用) = matchText が必要とする text のみ (= 検索時だけ遅延ロード)
+    # ② alt索引の材料(別名・synonyms・巻別題)。旧検索索引は2026-08-03廃止=ここはalt専用
     alt = d.get("alternative_titles") or {}
     sidx.append({
         "slug": d["slug"], "title": d["title"], "title_kana": d["title_kana"],
@@ -240,13 +240,8 @@ if UPDATE_STEMS is not None:
             m = dict(zip(_ex["f"], row))
             if m.get("slug") not in _changed:
                 idx.append(m)
-    _exs_p = os.path.join(OUTDIR, "manga-search-index.json")
-    if os.path.exists(_exs_p):
-        _exs = json.load(open(_exs_p, encoding="utf-8"))
-        for row in _exs["d"]:
-            m = dict(zip(_exs["f"], row))
-            if m.get("slug") not in _changed:
-                sidx.append(m)
+    # (alt索引の増分保全は下の aout 書き出しで自ファイルから行う。
+    #  旧: manga-search-index.json を永続層に sidx を復元していたが、検索索引は 2026-08-03 廃止。)
     print(f"[--update] {len(UPDATE_STEMS)}作再構築 + 既存索引merge(除去{len(REMOVE_SLUGS)})")
 
 idx.sort(key=lambda x: (x["year_started"], x["title"]))
@@ -278,19 +273,21 @@ if UPDATE_STEMS is not None and os.path.exists(catch_out):
             catch_map[_sl] = _c
 json.dump(catch_map, open(catch_out, "w", encoding="utf-8"), ensure_ascii=False, separators=(",", ":"))
 # ★alt索引(2026-07-14): 別名・英題の2段目照合用(題名ヒット0の時だけ遅延fetch)。
+#   ★増分(--update)時は catch と同型で自ファイルから非変更作分を取り込む(alt消失防止)。
+#   (旧: manga-search-index.json 経由で保全していた。検索索引は死蔵につき 2026-08-03 廃止済 =
+#    生成・配布とも無し。R2上の実体は次回週次で削除。)
 aout = os.path.join(OUTDIR, "manga-alt-index.json")
-json.dump({m["slug"]: m["alt"] for m in sidx if m.get("alt")},
-          open(aout, "w", encoding="utf-8"), ensure_ascii=False, separators=(",", ":"))
-# ★旧検索索引: 移行期間のみ出し続ける(キャッシュ済み旧HTMLが参照)。新クライアントは使わない。
-#   TODO(2026-08頃): 全キャッシュ失効後にこの3行とR2上のファイルを削除
-SEARCH_FIELDS = ["slug", "title", "title_kana", "title_romaji", "alt", "au"]
-sout = os.path.join(OUTDIR, "manga-search-index.json")
-json.dump({"f": SEARCH_FIELDS, "d": [[m.get(f) for f in SEARCH_FIELDS] for m in sidx]},
-          open(sout, "w", encoding="utf-8"), ensure_ascii=False, separators=(",", ":"))
+alt_map = {m["slug"]: m["alt"] for m in sidx if m.get("alt")}
+if UPDATE_STEMS is not None and os.path.exists(aout):
+    _exa = json.load(open(aout, encoding="utf-8"))
+    for _sl, _a in _exa.items():
+        if _sl not in _changed and _sl not in alt_map:
+            alt_map[_sl] = _a
+json.dump(alt_map, open(aout, "w", encoding="utf-8"), ensure_ascii=False, separators=(",", ":"))
 mb = os.path.getsize(out) / 1e6
-smb = os.path.getsize(sout) / 1e6
 cmb = os.path.getsize(catch_out) / 1e6
+amb = os.path.getsize(aout) / 1e6
 print(f"一覧索引: {len(idx)}作品 / {mb:.1f}MB → {out} (配列化)")
 print(f"catch索引: {len(catch_map)}件 / {cmb:.1f}MB → {catch_out} (遅延)")
-print(f"検索索引: {len(sidx)}作品 / {smb:.1f}MB → {sout}")
+print(f"alt索引: {len(alt_map)}件 / {amb:.1f}MB → {aout} (遅延)")
 print(f"(skip {skipped}) / {time.time()-t0:.1f}秒")

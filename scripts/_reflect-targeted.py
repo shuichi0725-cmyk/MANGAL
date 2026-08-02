@@ -177,7 +177,7 @@ def main():
         run(["git", "add", ".preview-data", "data/manga-catch-index.json", "data/seeds",
              "data/slug-aliases.yml", "public/_redirects",
              "data/manga-alt-index.json", "data/manga-list-head.json",
-             "data/manga-list-index.json", "data/manga-search-index.json"])
+             "data/manga-list-index.json"])
         run(["git", "commit", "-q", "-m", a.msg])
         if a.push:
             run(["git", "push"])

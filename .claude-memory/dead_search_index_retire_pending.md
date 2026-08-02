@@ -1,33 +1,33 @@
 ---
 name: dead_search_index_retire_pending
-description: manga-search-index.json 11.3MBは死蔵(呼び出し元ゼロ)。廃止は週次/月次蒸留の前に再検討=ユーザ裁定
-metadata: 
+description: 【✅完了2026-08-03】manga-search-index.json(11.3MB死蔵)は廃止済。残務=次回週次でR2実体削除のみ
+metadata:
   node_type: memory
   type: project
   originSessionId: 9e4afa8a-543a-4b77-966f-1cb6d5cb07d4
-  modified: 2026-08-01T02:22:18.570Z
+  modified: 2026-08-02T23:08:31.022Z
 ---
 
-★**`manga-search-index.json`(11.3MB)は完全な死蔵**。廃止の判断は **2026-08-01 ユーザ裁定で「週次蒸留・月次蒸留の前に再検討」**として保留。
-= 勝手に消さない。蒸留に入る前にこの件を出して可否を仰ぐ。
+★**`manga-search-index.json` は 2026-08-03 ユーザGOで廃止実行済み**(呼び出し元ゼロの死蔵・86.6%重複だった)。
 
-## 調査済みの事実(再調査不要)
+## 実施済み(コミット済)
 
-- **呼び出し元ゼロ**: `useSearchIndex` / `fetchSearchIndex` / `decodeSearch` / `MangaSearchItem` / `matchText` / `searchMatches` を使う画面が存在しない。
-  検索は `lib/clientSearch.ts`(一覧索引を共有)に統一済みで、この索引は旧世代の置き土産。
-- **なのに毎蒸留で生成・R2へPUT・本番に常駐**(manifest に実在を確認)。
-- **68,749行×6列を全行照合した結果**: slug/title/title_kana/alt は他ファイルと**100%一致**、`au`(著者名)は一覧索引と**98.1%一致**。
-  → **11.3MB のうち 86.6% が完全な重複**。
-- ★**固有列は `title_romaji`(13.4%)だけ**。しかもこれは**捨てた方式の遺物** — clientSearch は
-  「romaji列は廃止。クエリ側で romaji→かな 変換して kana と照合」に切替済み(全件焼き込み→1語変換)。
-- ★**唯一の実質差 = `au` が1.9%(1,311件)だけ広い**: 企業(カプコン)・訳者(小野耕世)・キャラクター原案(岸田メル)を含む。
-  一覧索引の authors/original_authors は作者を意図的に絞っている。**復活させるなら索引復活でなく一覧索引の著者欄にロール付きで足すのが筋**。
+- クライアント死蔵コード削除: `useSearchIndex`/`fetchSearchIndex`/`decodeSearch`(useMangaIndex.ts)、`matchText`/`searchMatches`(filters.ts)、`MangaSearchItem`型(schema.ts)、matchTextテスト群。
+- 生成停止: `_build-list-index.py` から SEARCH_FIELDS/sout 削除。
+- ★**罠を処理済み**: `--update`(増分)時の **alt索引の永続層が検索索引ファイルだった** → catch と同型の「manga-alt-index.json 自ファイルから非変更作を取り込む」方式へ付け替え。smoke実測: alt 46,051件完全保全・冪等。
+- 6スクリプト+CI除名: `_r2-sync.py` / `_deploy-feature.py` / `_deploy-differential.py` / `_reflect-targeted.py` / `_weekly-preflight.py` / `_build-list-index.py` + ★**`.github/workflows/deploy-preview.yml`**(cp行=見落とすとpreviewデプロイが落ちるところだった)。
+- 実体削除: data/(非追跡)・public/・.preview-data/ の3コピー。.gitignore の該当2行も整理。
+- doc: `_gen-data-spec-pdf.py` 節削除、weekly/monthly SKILL.md の保留節を撤去。
+- 検証: tsc緑・vitest 262全緑・py_compile緑・残存参照grepゼロ。
 
-## 廃止するときの段取り(安全側・未実行)
+## 残務(1件だけ)
 
-1. クライアントの死蔵コード削除 + `scripts/_build-list-index.py` の生成停止 +
-   ★**索引名を持つ6本のスクリプトから除名**(`_r2-sync.py` / `_deploy-feature.py` / `_deploy-differential.py` /
-   `_reflect-targeted.py` / `_weekly-preflight.py` / `_build-list-index.py`)。1本でも漏らすと「あるはずのファイルが無い」で蒸留が落ちる。
-2. R2の実体削除は**次の週次蒸留**(全頁が焼き直され旧JSが消えた後)。
+- ★**次回週次蒸留で R2 実体を削除**: `wrangler r2 object delete mangal-site/manga-search-index.json`。
+  即時削除しない理由=古いタブの旧JSがまだ参照しうるため「全頁焼き直し後に消す」が安全策。
+  手順は weekly-distill SKILL.md「次回週次での一回きりタスク」節に記載済み(完了したらその節ごと消す)。
+
+## 将来メモ
+
+- 検索索引が唯一広かった `au` 列の差分1,311件(企業・訳者・キャラ原案)は未回収。人物検索を広げたくなったら**一覧索引の著者欄にロール付きで足す**のが筋(索引復活はしない)。
 
 関連 [[lightweight_index_architecture]] [[search_perf_hotspots_2026_08]] [[index_lightening_plan]]
