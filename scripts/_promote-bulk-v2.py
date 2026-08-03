@@ -3744,6 +3744,25 @@ def main():
             if not _pd.get("synopsis") and synslug_map.get(_stem):
                 _pd["synopsis"] = synslug_map[_stem]
                 _touched = True
+            # ★ジャンル決定seed(rakuten/enrich)も本流と同じ優先順でここに通す(2026-08-03 実害)。
+            #   予約頁は種2を通らない=本流の決定点に来ないため、エンリッチ柱が genre-enrich-2425.json に
+            #   正しく書いても**頁のgenresが空のまま**だった(新作25件が silent 空振り)。
+            #   本流の順(trusted > rakuten > enrich)に合わせ、**頁が既にgenresを持つ時は触らない**。
+            if not (_pd.get("genres") or []):
+                for _src_map in (_RAKUTEN_GENRES, _GENRE_ENRICH):
+                    _cand = [g for k in {_stem, _pd.get("slug") or _stem}
+                             for g in _src_map.get(k, []) if g in valid_gens and g != "other"]
+                    if _cand:
+                        _cs = set(_cand)
+                        if _cs & {"baseball", "soccer"}:
+                            _cs.add("sports")
+                        _pd["genres"] = sorted(_cs)
+                        if _src_map is _RAKUTEN_GENRES:
+                            _pd["genres_rakuten"] = True
+                        else:
+                            _pd["genres_provisional"] = True
+                        _touched = True
+                        break
             # ★純粋追加ジャンル(genre-append.yml)= 本流と同じ union をここでも通す(2026-08-03 実害)。
             #   予約頁は種2を通らない=本流の genre-append 適用点に来ないため、seed が**永久に届かなかった**
             #   (ラブコメ適用の hayate-no-gotoku-kanzenban で発覚)。既存 genres は消さない・フラグ不変。
