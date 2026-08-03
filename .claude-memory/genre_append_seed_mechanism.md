@@ -5,7 +5,7 @@ metadata:
   node_type: memory
   type: project
   originSessionId: 2e629c9e-d55a-4074-a6ec-d0691965d657
-  modified: 2026-07-31T06:28:16.064Z
+  modified: 2026-08-03T01:26:10.821Z
 ---
 
 **2026-07-31 新設(ユーザGO済)**。`data/seeds/genre-append.yml` = **既存 genres を消さずに足すだけ**の seed。
@@ -42,6 +42,21 @@ promote のジャンル決定は if/else の**排他分岐**で、どの枝も `
   ただし外れた作を読むと明らかにBL = **truth-gap型**(AniList/Wiki側に bl キーが無いだけ)。
   救済するなら本文での2パス検証(463作)。isekai/gourmet が96%confirmだった前例と同型。
 - level-3(001001001/002/003/004)= 少年/少女/青年/レディース は **demographic** として既に利用中。
+
+## ★不達2型を恒久修正 (= 2026-08-03。ラブコメ2,939件適用で発覚・commit a42b56d11)
+
+seed を書いても**永久に届かない**頁が2型あった。どちらも「本流の適用点(ジャンル決定の直後)に
+来ないか、来ても引くキーが違う」型:
+
+1. **slug-override頁**(`slug-overrides.yml` 経由・実測**1,037件**)= 適用点の `slug` は
+   `_slug_override()` を通す**前**のSRC slug。seed は本番索引の**公開slug**で書くので永久に不一致。
+   → `{slug, new_yml["slug"]}` の**両方**で引くよう修正。
+2. **予約頁**(`data/seeds/preorder-pages/*.yml`)= 種2を通らない別ストリームで、
+   catch/synopsis/publisher/書影の seed だけ通していて **genre-append は素通り**だった。
+   → 予約ストリームにも同じ union を追加(既存genres不変・フラグ不変)。
+
+★教訓= **seed の適用点は1箇所とは限らない**。予約頁ストリームは「種2を通らない」ので、
+新しい seed を結線する時は**本流+予約ストリームの2箇所**を必ず見る。
 
 ## ★踏んだ罠(繰り返さない)
 
