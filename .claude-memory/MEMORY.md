@@ -130,3 +130,4 @@
 - [今日の一冊 過去ログ=凍結ログが正](sansedai_archive_frozen_log.md) — 表示済み日は永久固定・stock上書き前に凍結・純粋追記
 - [【新設】genre-append.yml=既存genresを消さずunion](genre_append_seed_mechanism.md) — promote結線済。★不達2型(slug-override頁/予約頁)は2026-08-03修正 ／ [【✅適用済】ラブコメ復権=romcom裁定](romcom_backfill_state.md) — 全7,184裁定→2,939件適用(143→3,081)。残=次の週次で公開
 - [【✅】派生ジャンル規則=promote恒久層](genre_derive_rules_layer.md) — 枯れキー自動給水(_genre_rules.py)。rank≥60・war等タグのみ・バックフィル2,301頁済
+- [日替わり特集コーナー(/tokushu)](daily_feature_corner.md) — レシピ抽選100選・導線A/B頁1/2日替わり・題材色・凍結過去ログ・週次補充。モック撮影=Edge headless
