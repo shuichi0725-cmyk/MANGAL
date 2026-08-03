@@ -90,31 +90,11 @@ export default function Design11() {
           アニメコーナーを最上段へ。表示は再読込ごとランダム=client側シャッフル) */}
       <AnimeSeasonCorner />
 
-      {/* 1.2【中】全集コーナー(A-1案・2026-07-19 テスト導入。一覧ページ無し=カードから直接 /zenshuu/[key] へ) */}
-      <ZenshuuCorner />
-
-      {/* 1.3【中・新】日替わり特集(2026-08-03 ユーザ採用): 導線=案A帯/案Bチケットを日替わり・題材色つき */}
+      {/* 1.3【中・新】日替わり特集(2026-08-03 ユーザ採用、同日ユーザ指定でアニメ化直下へ):
+          導線=案A帯/案Bチケットを日替わり・題材色つき */}
       <DailyFeatureCorner />
 
-      {/* 2.【小・新】ことばカード = あらすじの一文だけ大きく(縦読みの「息継ぎ」) */}
-      {kotoba && (
-        <section className="mt-4 px-4">
-          <Link href={`/manga/${kotoba.slug}`} className="block rounded-xl bg-ink px-5 py-6 text-center shadow-md spring-press">
-            <p className="text-[15px] font-bold leading-relaxed text-white">
-              「{kotoba.synopsis!.split("。")[0]}。」
-            </p>
-            <p className="mt-2 text-[11px] text-white/60">— 今日のことば: 『{kotoba.title}』のあらすじから</p>
-          </Link>
-        </section>
-      )}
-
-      {/* 2.5【三世代 slot A】ソロ or 散開時の1人目 */}
-      <FeaturedDaily slot={0} />
-
-      {/* 2.7【新・自動】周年: 今日で連載開始N年(anniversaries.json週次再生成) */}
-      <AnniversaryDaily />
-
-      {/* 3.4【中】今月の新刊(カレンダー直上へ移動 2026-07-21 ユーザ指示。旧=アニメ直下2026-07-12)
+      {/* 3.4【中】今月の新刊(★2026-08-03 ユーザ指定の並び: アニメ化→特集→新刊→カレンダー→今日の一冊→ことば)
           ★2026-07-15: 再読込ごとランダム入替(アニメコーナーと同方式)+リンクは当月巻フォーカス(#v)。
             当月巻の書影を出す(旧=1巻書影で「一年前の本?」と誤読された 2026-07-13) */}
       <section className="mt-4 px-4">
@@ -143,6 +123,24 @@ export default function Design11() {
           <CalendarView />
         </Tile>
       </section>
+
+      {/* ①【三世代 slot A】今日の一冊(ソロ or 散開時の1人目。★2026-08-03 ユーザ指定=カレンダー直下の①枠) */}
+      <FeaturedDaily slot={0} />
+
+      {/* 【小・新】ことばカード = あらすじの一文だけ大きく(縦読みの「息継ぎ」。2026-08-03 ①の下へ) */}
+      {kotoba && (
+        <section className="mt-4 px-4">
+          <Link href={`/manga/${kotoba.slug}`} className="block rounded-xl bg-ink px-5 py-6 text-center shadow-md spring-press">
+            <p className="text-[15px] font-bold leading-relaxed text-white">
+              「{kotoba.synopsis!.split("。")[0]}。」
+            </p>
+            <p className="mt-2 text-[11px] text-white/60">— 今日のことば: 『{kotoba.title}』のあらすじから</p>
+          </Link>
+        </section>
+      )}
+
+      {/* 【新・自動】周年: 今日で連載開始N年(anniversaries.json週次再生成) */}
+      <AnniversaryDaily />
 
       {/* 3.6【新・自動】タイムマシン: N年前の今日発売(全期間カレンダー流用) */}
       <TimeMachine />
@@ -226,6 +224,9 @@ export default function Design11() {
           />
         </Tile>
       </section>
+
+      {/* 8.2【中】全集コーナー(★2026-08-03 ユーザ指定=運命の一冊の下へ移動。旧=アニメ化直下) */}
+      <ZenshuuCorner />
       <section className="mt-5 px-4">
         <div className="grid grid-cols-2 gap-2.5">
           {([
