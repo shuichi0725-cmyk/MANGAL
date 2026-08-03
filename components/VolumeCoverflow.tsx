@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import CoverImage from "./CoverImage";
+import CoverLightbox from "./CoverLightbox";
 import { amazonDpUrlFromIsbn13, amazonSearchUrl } from "@/lib/amazon";
 import type { Volume } from "@/lib/schema";
 
@@ -282,7 +283,10 @@ export default function VolumeCoverflow({
           style={{ width: 116, aspectRatio: "2 / 3" }}
         >
           {cur.cover_url ? (
-            <CoverImage src={cur.cover_url} alt={cur.volume_label ?? `第${cur.number}巻`} sizes="116px" />
+            // ★書影タップ=最高画質で拡大(2026-08-03 ユーザ要望。閉じるまで背景操作不可)
+            <CoverLightbox src={cur.cover_url} label={cur.volume_label ?? `第${cur.number}巻`}>
+              <CoverImage src={cur.cover_url} alt={cur.volume_label ?? `第${cur.number}巻`} sizes="116px" />
+            </CoverLightbox>
           ) : (
             <span className="flex h-full w-full items-center justify-center text-xs text-ink/40">
               第{cur.number}巻
