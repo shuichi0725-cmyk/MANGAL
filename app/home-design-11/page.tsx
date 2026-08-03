@@ -16,6 +16,7 @@ import AiLeagueTeaser from "@/components/AiLeagueTeaser";
 import AnimeSeasonCorner from "@/components/AnimeSeasonCorner";
 import ZenshuuCorner from "@/components/ZenshuuCorner";
 import DailyFeatureCorner from "@/components/DailyFeatureCorner";
+import { KotobaDaily, TriviaDaily, GenreRouletteDaily } from "@/components/DailyBits";
 
 export const metadata = { robots: { index: false, follow: false } };  // 実験頁=非索引
 
@@ -26,17 +27,17 @@ export default function Design11() {
   const genreList = data.genres.map((g: { key: string; name: string }) => ({ key: g.key, name: g.name }));
   // AI書評家リーグ: 週次順出しに合わせslim情報を全節渡す(選定はclient=AiLeagueTeaser)
   const aiSections = loadAiReviews().map((x) => ({ setsu: x.setsu, title: x.title, models: x.reviews.map((r) => r.model) }));
-  const daySalt = Number(new Date().toISOString().slice(0, 10).replace(/-/g, ""));
-
-  // 新パーツ: ことばカード = あらすじから今日の一文(synopsis 冒頭文を日替わり)
+  // ★偽日替わりの恒久修正(2026-08-04 見直し): 旧 daySalt=new Date() はサーバ計算=
+  //   静的書き出しでビルド時に凍結され「週次ビルドごと」しか変わっていなかった。
+  //   以後、プール/候補だけをここ(サーバ)で作り、どれを出すかは DailyBits(client)がJSTの日で選ぶ。
+  // ことばカード候補: 固定シードで31件(プールはビルドごと安定・表示はclientが日替わり)
   const withSyn = manga.filter((m) => m.synopsis && m.synopsis.length > 40);
-  const kotoba = seeded(withSyn, (m) => m.slug, 1, daySalt + 11)[0];
-  // ジャンルルーレット: ★master(data.genres)から選び key でリンク(旧=日本語ラベルを
-  //   ?genre= に投げて 0件 になる bug を修正)。 表示は name、 リンクは key。
-  const todayGenreObj = data.genres.length
-    ? data.genres[daySalt % data.genres.length]
-    : { key: "action", name: "アクション" };
-  // 数字トリビア: ★日替わり(固定だった bug 修正。 複数 fact を daySalt で回す)
+  const kotobaPool = seeded(withSyn, (m) => m.slug, 31, 7).map((m) => ({
+    slug: m.slug,
+    title: m.title,
+    line: (m.synopsis as string).split("。")[0],
+  }));
+  // 数字トリビア候補(全部渡す=clientが日替わり)
   const longest = [...manga].sort((a, b) => volCount(b) - volCount(a))[0];
   const totalBooks = manga.reduce((s, m) => s + m.editions.reduce((x, e) => x + e.volumes.length, 0), 0);
   const oldest = [...manga].filter((m) => m.year_started).sort((a, b) => a.year_started - b.year_started)[0];
@@ -45,7 +46,6 @@ export default function Design11() {
     `登録は ${manga.length.toLocaleString()} 作品、漫画本は合計 ${totalBooks.toLocaleString()} 冊。`,
     oldest && `最も古い収録作は『${oldest.title}』(${oldest.year_started}年〜)。`,
   ].filter(Boolean) as string[];
-  const todayTrivia = trivia[daySalt % trivia.length];
 
   const Tile = ({ children, className = "" }: { children: React.ReactNode; className?: string }) => (
     <div className={`rounded-xl border border-[var(--color-line)] bg-[var(--color-surface)] shadow-sm ${className}`}>{children}</div>
@@ -127,17 +127,8 @@ export default function Design11() {
       {/* ①【三世代 slot A】今日の一冊(ソロ or 散開時の1人目。★2026-08-03 ユーザ指定=カレンダー直下の①枠) */}
       <FeaturedDaily slot={0} />
 
-      {/* 【小・新】ことばカード = あらすじの一文だけ大きく(縦読みの「息継ぎ」。2026-08-03 ①の下へ) */}
-      {kotoba && (
-        <section className="mt-4 px-4">
-          <Link href={`/manga/${kotoba.slug}`} className="block rounded-xl bg-ink px-5 py-6 text-center shadow-md spring-press">
-            <p className="text-[15px] font-bold leading-relaxed text-white">
-              「{kotoba.synopsis!.split("。")[0]}。」
-            </p>
-            <p className="mt-2 text-[11px] text-white/60">— 今日のことば: 『{kotoba.title}』のあらすじから</p>
-          </Link>
-        </section>
-      )}
+      {/* 【小・新】ことばカード = あらすじの一文だけ大きく(2026-08-04 client日替わり化=DailyBits) */}
+      <KotobaDaily pool={kotobaPool} />
 
       {/* 【新・自動】周年: 今日で連載開始N年(anniversaries.json週次再生成) */}
       <AnniversaryDaily />
@@ -148,13 +139,13 @@ export default function Design11() {
       {/* 3.7【新・自動】豪華版: 特装・限定版の週替わりshowcase(価格表示禁止) */}
       <DeluxeWeekly />
 
-      {/* 4.【小・新】数字トリビア */}
-      {todayTrivia && (
+      {/* 4.【小・新】数字トリビア(2026-08-04 client日替わり化=DailyBits) */}
+      {trivia.length > 0 && (
         <section className="mt-4 px-4">
           <div className="flex items-center gap-3 rounded-xl border border-dashed border-[var(--color-line)] bg-[var(--color-surface-2)]/60 px-4 py-3">
             <span className="text-2xl">🔢</span>
             <p className="text-[12px] leading-relaxed text-ink/75">
-              <b>きょうの数字:</b> {todayTrivia}
+              <b>きょうの数字:</b> <TriviaDaily items={trivia} />
             </p>
           </div>
         </section>
@@ -163,12 +154,9 @@ export default function Design11() {
       {/* 5.【今日の一冊 slot1】日替わり分散(散開日の2人目/1+2の2冊側) */}
       <FeaturedDaily slot={1} />
 
-      {/* 6.【小・新】ジャンルルーレット */}
+      {/* 6.【小・新】ジャンルルーレット(2026-08-04 client日替わり化=DailyBits) */}
       <section className="mt-4 px-4">
-        <Link href={`/browse?genre=${encodeURIComponent(todayGenreObj.key)}`} className="block rounded-xl bg-gradient-to-r from-[var(--color-accent)] to-[var(--color-accent)]/80 px-4 py-3.5 text-white shadow-md spring-press">
-          <p className="text-[13px] font-bold leading-snug">🎡 今日のジャンルルーレット: <span className="text-[16px] whitespace-nowrap">{todayGenreObj.name}</span></p>
-          <p className="mt-0.5 text-right text-[11px] opacity-85">回ったジャンルの棚へ →</p>
-        </Link>
+        <GenreRouletteDaily genres={genreList} />
       </section>
 
       {/* 6.5【今日の一冊 slot2】日替わり分散(バラバラ日の3人目/2+1の1冊側) */}
@@ -212,14 +200,14 @@ export default function Design11() {
       <section className="mt-4 px-4">
         <Tile>
           <DestinyPickMock
-            items={seeded(manga, (m) => m.slug, 60, daySalt).map((m) => ({
+            items={seeded(manga, (m) => m.slug, 60, 3).map((m) => ({
               slug: m.slug,
               title: m.title,
               authors: (m.authors ?? []).map((a) => a.name).join("・"),
               vols: volCount(m),
               cover: coverUrl(m),
             }))}
-            initialIndex={daySalt % 60}
+            initialIndex={0}
             total={manga.length}
           />
         </Tile>

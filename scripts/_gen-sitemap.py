@@ -16,8 +16,33 @@ idx = json.load(open(os.path.join(ROOT, "data", "manga-list-index.json"), encodi
 f = idx["f"]; si = f.index("slug")
 slugs = [r[si] for r in idx["d"]]
 fixed = ["", "list", "browse", "about", "terms", "privacy", "contact",
-         "column-ai-league", "sansedai-archive", "art-books"]
-urls = [f"{SITE}/{p}" if p else SITE for p in fixed] + [f"{SITE}/manga/{s}" for s in slugs]
+         "column-ai-league", "sansedai-archive", "art-books",
+         "tokushu", "rankings", "anime"]  # ★2026-08-04 見直しで追加(日替わり特集ほか)
+# ★動的ランディング面(2026-08-04 見直しで追加: canonical持ちの索引対象なのにsitemap漏れだった)
+import yaml
+dyn = []
+gy = yaml.safe_load(open(os.path.join(ROOT, "data", "genres.yml"), encoding="utf-8")) or {}
+dyn += [f"genre/{k}" for k in gy]  # ジャンル32面
+try:
+    zv = json.load(open(os.path.join(ROOT, "data", "zenshuu-view.json"), encoding="utf-8"))
+    dyn += [f"zenshuu/{c['key']}" for c in zv.get("collections", []) if c.get("key")]
+except OSError:
+    pass
+ab_dir = os.path.join(ROOT, "data", "art-books")
+if os.path.isdir(ab_dir):
+    for fn in sorted(os.listdir(ab_dir)):
+        if fn.endswith(".yml"):
+            d = yaml.safe_load(open(os.path.join(ab_dir, fn), encoding="utf-8")) or {}
+            if d.get("slug"):
+                dyn.append(f"art-books/{d['slug']}")
+try:
+    ai = yaml.safe_load(open(os.path.join(ROOT, "data", "seeds", "ai-reviews.yml"), encoding="utf-8")) or []
+    secs = ai.get("sections", ai) if isinstance(ai, dict) else ai
+    dyn += [f"column-ai-league/{s['setsu']}" for s in secs if isinstance(s, dict) and s.get("setsu")]
+except OSError:
+    pass
+urls = [f"{SITE}/{p}" if p else SITE for p in fixed] + [f"{SITE}/{p}" for p in dyn] + \
+    [f"{SITE}/manga/{s}" for s in slugs]
 
 os.makedirs(OUT, exist_ok=True)
 n_files = math.ceil(len(urls) / CHUNK)
