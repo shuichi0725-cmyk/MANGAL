@@ -26,6 +26,9 @@ from pathlib import Path
 
 import yaml
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from _genre_rules import derive as _derive_genres  # 派生ジャンル規則(正本=scripts/_genre_rules.py)
+
 # 高速 YAML loader (= libyaml の CSafeLoader、 なければ pure-python に fallback)。
 # series-supplement-v2.yml (= 92万行) を pure-python で読むと数分かかるため。
 # parse 結果は yaml.safe_load と完全同一。
@@ -3502,6 +3505,17 @@ def main():
         if not new_yml.get("synopsis") and slug in synopsis_slug:
             new_yml["synopsis"] = synopsis_slug[slug]
             synopsis_pages += 1
+        # ★派生ジャンル規則(2026-08-03 ユーザ裁定「自動で増えない構造を改善」= 枯れキーの恒久給水):
+        #   タグ名・題名・紹介文の**明記**から yokai/war/4-koma/gag/samurai/mahou-shoujo/romcom を
+        #   決定的に導出(規則の正本= scripts/_genre_rules.py。全タグjoin+catch/synopsis確定の後に置く)。
+        #   union only・フラグ不変= genre-append と同じ流儀。新規作品も蒸留のたび自動で付く。
+        _drv = _derive_genres(
+            new_yml.get("title") or "",
+            new_yml.get("tags") or [],
+            f"{new_yml.get('catch') or ''}／{new_yml.get('synopsis') or ''}",
+        ) & set(valid_gens)
+        if _drv - set(new_yml.get("genres") or []):
+            new_yml["genres"] = sorted(set(new_yml.get("genres") or []) | _drv)
         # ★著者ヨミ最終pass(2026-07-04 join漏れ659名/974頁の根治): どの経路で入った著者でも
         #   kana欠け×seed有りなら充填(冪等)。個別経路のenrich漏れを構造的にカバー
         for _ak in ("authors", "original_authors"):
@@ -3742,6 +3756,15 @@ def main():
                 if _pm != set(_pd.get("genres") or []):
                     _pd["genres"] = sorted(_pm)
                     _touched = True
+            # ★派生ジャンル規則 = 本流と同じ層を予約頁にも(2026-08-03。規則の正本=_genre_rules.py)
+            _pdrv = _derive_genres(
+                _pd.get("title") or "",
+                _pd.get("tags") or [],
+                f"{_pd.get('catch') or ''}／{_pd.get('synopsis') or ''}",
+            ) & set(valid_gens)
+            if _pdrv - set(_pd.get("genres") or []):
+                _pd["genres"] = sorted(set(_pd.get("genres") or []) | _pdrv)
+                _touched = True
             for _e in _pd.get("editions") or []:
                 # ★edition.publisher が **内部キー**(kadokawa/kodansha…)のままだと表示に漏れる。
                 #   予約頁は種2を通らないので edition_pub_name が効かず、実測1,248版が生キー表示だった
