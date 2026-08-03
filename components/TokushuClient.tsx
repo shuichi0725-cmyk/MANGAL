@@ -11,6 +11,7 @@ import {
   type TokushuIndex,
   type TokushuItem,
 } from "@/components/DailyFeatureCorner";
+import TokushuShelf, { themeOf } from "@/components/TokushuShelf";
 
 /** 日替わり特集ページ本体(2026-08-03 ユーザ採用)。見た目は日替わりで
  *  案1(特集扉=色帯ヒーロー+TOP3大カード) / 案2(本棚=木の棚に順位バッジ)。色=題材色。
@@ -136,67 +137,34 @@ export default function TokushuClient() {
     );
   }
 
-  // ── 案2: 本棚型 ──
-  const shelves: TokushuItem[][] = [];
-  for (let i = 0; i < shown.length; i += 5) shelves.push(shown.slice(i, i + 5));
+  // ── 案2: 本棚型(テーマ別演出=TokushuShelf。SF/ホラー/和/恋愛/ポップ/魔法図書館/カフェ/木) ──
   return (
-    <div style={{ background: "#efe9dd" }}>
-      <div className="mx-auto w-[300px] pt-5 text-center">
-        <div className="rounded-md border-2 py-2.5 text-white shadow-md" style={{ background: `linear-gradient(180deg, ${day.c.a}, ${day.c.d})`, borderColor: day.c.d }}>
-          <p className="text-[10px] font-bold tracking-[.3em] opacity-85">日替わり特集 ─ {dateLabel}{isPast ? "号" : ""}</p>
-          <h1 className="mt-0.5 text-[20px] font-black tracking-wide">{day.t}</h1>
-        </div>
-        <p className="mb-3 mt-1.5 text-[11px] font-bold text-ink/55">{isPast ? "過去の号(内容は当日のまま)" : "明日は別のお題に掛け替わります"}</p>
-      </div>
-      <div className="mx-3 mb-4 rounded-[10px] border-[3px] border-[#5d3f21] bg-gradient-to-b from-[#8a6338] to-[#7a5630] px-2.5 pb-3 pt-3.5 shadow-[0_10px_24px_rgba(60,40,15,.35),inset_0_0_40px_rgba(0,0,0,.25)]">
-        {shelves.map((row, si) => (
-          <div key={si} className="mb-1 px-1">
-            <div className="flex items-end justify-between px-0.5">
-              {row.map((it, i) => {
-                const rank = si * 5 + i + 1;
-                return (
-                  <Link key={it[0]} href={`/manga/${it[0]}`} className="spring-press relative w-[68px] text-center">
-                    <span
-                      className="absolute -left-1.5 -top-2 z-10 flex h-6 w-6 items-center justify-center rounded-full border-2 border-white text-[12px] font-black text-white shadow"
-                      style={{ background: rank === 1 ? day.c.a : rank === 2 ? "#8a8f98" : rank === 3 ? "#b0713a" : "#4a4f57" }}
-                    >
-                      {rank}
-                    </span>
-                    {it[3] && (
-                      // eslint-disable-next-line @next/next/no-img-element
-                      <img src={it[3]} alt={it[1]} loading="lazy" className="h-[96px] w-[68px] rounded-[2px_4px_4px_2px] border border-black/25 bg-white object-cover shadow-[-3px_4px_6px_rgba(0,0,0,.4)]" />
-                    )}
-                  </Link>
-                );
-              })}
-              {row.length < 5 && Array.from({ length: 5 - row.length }).map((_, i) => <span key={i} className="w-[68px]" />)}
-            </div>
-            <div className="mt-2 h-3 rounded-[2px] bg-gradient-to-b from-[#a97f4d] to-[#8a6338] shadow-[0_3px_5px_rgba(0,0,0,.35),inset_0_1px_0_rgba(255,255,255,.25)]" />
-            <div className="flex justify-between px-0.5 pb-2 pt-1">
-              {row.map((it) => (
-                <div key={it[0]} className="w-[68px] text-center text-[9px] font-bold leading-tight text-[#ffefd9] [text-shadow:0_1px_2px_rgba(0,0,0,.5)]">
-                  <span className="line-clamp-2 block">{it[1]}</span>
-                  <span className="block text-[8px] font-normal text-[#ffefd9]/70">{it[2]}</span>
-                </div>
-              ))}
-              {row.length < 5 && Array.from({ length: 5 - row.length }).map((_, i) => <span key={i} className="w-[68px]" />)}
-            </div>
-          </div>
-        ))}
-      </div>
-      <div className="pb-2 text-center">
-        {limit < day.items.length && (
-          <button
-            type="button"
-            onClick={() => setLimit((v) => (v === 10 ? 30 : 100))}
-            className="spring-press rounded-full border border-[var(--color-line)] bg-[var(--color-surface)] px-7 py-2.5 text-[13px] font-extrabold shadow"
-            style={{ color: day.c.a }}
-          >
-            {Math.min(limit, day.items.length)}冊まで棚に出し中 ─ もっと出す ▾
-          </button>
-        )}
-        {browseLink}
-      </div>
+    <div>
+      <TokushuShelf
+        day={day}
+        dateLabel={dateLabel}
+        isPast={isPast}
+        shown={shown}
+        theme={themeOf(day.q, sp.get("t"))}
+        footer={
+          <>
+            {limit < day.items.length && (
+              <button
+                type="button"
+                onClick={() => setLimit((v) => (v === 10 ? 30 : 100))}
+                className="spring-press rounded-full border border-[var(--color-line)] bg-[var(--color-surface)] px-7 py-2.5 text-[13px] font-extrabold shadow"
+                style={{ color: day.c.a }}
+              >
+                {Math.min(limit, day.items.length)}冊まで棚に出し中 ─ もっと出す ▾
+              </button>
+            )}
+            {/* ダーク系テーマでも読めるよう色は棚テーマ(th.note)を継承 */}
+            <Link href={`/browse?${day.q}`} className="mx-auto mt-3 block w-fit pb-1 text-[12px] font-bold underline underline-offset-4" style={{ color: "inherit" }}>
+              この条件で検索面でも見る →
+            </Link>
+          </>
+        }
+      />
       {pastLog}
     </div>
   );
