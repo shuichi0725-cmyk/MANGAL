@@ -5,10 +5,33 @@ metadata:
   node_type: memory
   type: project
   originSessionId: 2e629c9e-d55a-4074-a6ec-d0691965d657
-  modified: 2026-07-30T23:46:15.057Z
+  modified: 2026-08-03T05:57:06.547Z
 ---
 
 エンリッチ(キャッチ/詳細/ジャンル)の消化状況。材料バッチ = `.cache/enrich-batches/batch-NNNN.json`(380本、2026-07-26生成)。
+
+## ★2026-08-03: 「新しい順」柱を開始(ユーザ指示)
+
+- **バックログの実測**(`data/manga.v2` 全走査で catch/synopsis 長を採取): catch空 33,578 / syn空 31,217 / **両方空 31,063**。
+  欠けあり合計 **33,724** = **2巻以上 13,727 / 1巻 19,997**。
+- ★**新しい順に並べると上位は全部1巻**(新連載の第1巻・予約頁)。2026-07-14裁定「1巻=ジャンルのみ」に従うと
+  キャッチ/詳細がまったく増えない → ユーザ裁定(2026-08-03)= **「1巻は飛ばして2巻以上を新しい順で」**。
+  以後の「新しい順エンリッチ」は **2巻以上のみ**を対象にする。
+- 消化済: batch-9200(1巻・ジャンルのみ25作) / **batch-9201(2巻以上44作=catch42・syn36・genre42)**。
+  次スライスは 2巻以上バックログの 2026-05-18 より古い側から。
+- ★材料収集は `_enrich-captions.py --slugs ... --src data/manga.v2 --live`(**--src既定は .preview-data なので本番は明示**)。
+  50作/116巻で live 116req ≒ 2.5分。材料取得率は実測 **44/50**。
+- ★ad-hoc スライスは **バッチ番号9200番台**を使う(既存0001-0380/9104-9107と衝突しない)。
+  材料を `.cache/enrich-batches/batch-92NN.json` に `{"items":[...]}` 形式で置けば applier の丸写し検査が効く。
+
+### ★予約頁にジャンルseedが届いていなかった(2026-08-03 修正・commit c6bcc1760)
+
+`data/seeds/preorder-pages`(1,615頁)は種2を通らず promote の**ジャンル決定点に来ない**ため、
+`genre-enrich-2425.json` に正しく書いても **頁の genres が空のまま**だった(applierは applied と報告するのに頁に出ない)。
+本流と同じ優先順(trusted > rakuten > enrich)で予約ストリームにも結線済。巻き添え5頁も是正済。
+★**新しい順は対象が予約頁に偏る**(実測 44作中36作)ので、これを直さないと以降ずっと空振りしていた。
+catch/synopsis は元から予約ストリームが `catch_map`/`synslug_map` を見ていたので無事。
+= [[genre_append_seed_mechanism]] の「seedの適用点は1箇所ではない」型の3例目。
 
 - **kind='full'**(2巻以上・楽天caption有)= catch+synopsis / **kind='genre'**(1巻)= ジャンルのみ(2026-07-14裁定)。
 - 生成物は git 追跡: `data/enrich-out-2026-07/batch-NNNN.json`(dict形式 {slug:{catch,synopsis}})。
