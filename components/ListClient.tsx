@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import FilterPanel from "@/components/FilterPanel";
+import ShareButtons from "@/components/ShareButtons";
 import {
   applyFilters,
   authorsWithKana,
@@ -259,6 +260,18 @@ export default function ListClient({ data }: { data: ListBundle }) {
           </>
         )}
       </p>
+
+      {/* 共有(X/LINE/共有=詳細頁と同型。2026-08-03 ユーザ要望「件数の下・題名の上」)。
+          URLは押した瞬間の現在URL(検索語・絞り込み・並び順つき)=受け取った人に同じ一覧が出る */}
+      <div className="px-3 pb-2">
+        <ShareButtons
+          title={`漫画一覧${q.trim() ? `「${q.trim()}」` : ""} ${rows.length.toLocaleString()}件 - MANGAL`}
+          titleSuffix={false}
+          url="https://mangal-db.com/list"
+          getUrl={() => window.location.href}
+          className="flex flex-wrap items-center gap-2"
+        />
+      </div>
 
       {/* ── 表 ── */}
       <div className="overflow-x-auto">

@@ -7,6 +7,7 @@ import FilterPanel from "@/components/FilterPanel";
 import MangaGrid from "@/components/MangaGrid";
 import ArtBookCard from "@/components/ArtBookCard";
 import SearchBox from "@/components/SearchBox";
+import ShareButtons from "@/components/ShareButtons";
 import Pager from "@/components/ui/Pager";
 import {
   applyArtBookFilters,
@@ -463,6 +464,15 @@ export default function HomeClient({ data, summary }: Props) {
           ✕ フィルターをリセット
         </button>
       )}
+      {/* 共有(X/LINE/共有=詳細頁と同型。2026-08-03 ユーザ要望「絞り込むの下」)。
+          URLは押した瞬間の現在URL(絞り込み条件つき)=受け取った人に同じ検索結果が出る */}
+      <ShareButtons
+        title={`${state.query.trim() ? `漫画検索「${state.query.trim()}」` : "漫画を探す"} ${shownTotal.toLocaleString()}件 - MANGAL`}
+        titleSuffix={false}
+        url="https://mangal-db.com/browse"
+        getUrl={() => window.location.href}
+        className="mb-4 flex flex-wrap items-center gap-2"
+      />
 
       <div className="grid md:grid-cols-[240px_1fr] gap-6">
         {/* デスクトップ: 常時サイドバー(PC版は不変。 モバイルでは水和直後に外す=見た目は不変) */}

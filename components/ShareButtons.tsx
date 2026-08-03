@@ -4,16 +4,39 @@ import { useState } from "react";
 
 /** 共有ボタン列(X / LINE / 共有)。作品詳細の説明文と関連作品の間に置く(2026-07-12 ユーザ指定位置)。
  *  X/LINE = intent URLへの素のリンク(JS不要・静的exportで確実)。
- *  共有 = Web Share API、非対応環境はクリップボードにコピーして「コピーしました」表示。 */
-export default function ShareButtons({ title, url }: { title: string; url: string }) {
+ *  共有 = Web Share API、非対応環境はクリップボードにコピーして「コピーしました」表示。
+ *  ★2026-08-03 検索/一覧にも設置(ユーザ要望): これらはURLが絞り込みで刻々変わるため、
+ *   `getUrl`(任意)を渡すと**押す直前に現在URLでhrefを差し替える**(mousedown/touchstart/focus)。
+ *   素の<a>のまま=x.com App Links回避のtwitter.com intent実績を崩さない。
+ *  `titleSuffix=false` で「 - MANGAL」の自動付与を止める(呼び側が完全な文言を渡す)。 */
+export default function ShareButtons({ title, url, getUrl, className, titleSuffix = true }: {
+  title: string;
+  url: string;
+  getUrl?: () => string;
+  className?: string;
+  titleSuffix?: boolean;
+}) {
   const [copied, setCopied] = useState(false);
-  const text = `${title} - MANGAL`;
+  const text = titleSuffix ? `${title} - MANGAL` : title;
   const enc = encodeURIComponent;
+  const cur = () => (getUrl ? getUrl() : url);
+  const xHref = (u: string) => `https://twitter.com/intent/tweet?text=${enc(text)}&url=${enc(u)}`;
+  const lineHref = (u: string) => `https://social-plugins.line.me/lineit/share?url=${enc(u)}&text=${enc(text)}`;
+  // 押す直前にhrefを現在URLへ(getUrl時のみ)。クリック本体はブラウザ標準遷移のまま
+  const live = (mk: (u: string) => string) =>
+    getUrl
+      ? {
+          onMouseDown: (e: { currentTarget: HTMLAnchorElement }) => { e.currentTarget.href = mk(cur()); },
+          onTouchStart: (e: { currentTarget: HTMLAnchorElement }) => { e.currentTarget.href = mk(cur()); },
+          onFocus: (e: { currentTarget: HTMLAnchorElement }) => { e.currentTarget.href = mk(cur()); },
+        }
+      : {};
 
   const onShare = async () => {
+    const u = cur();
     if (typeof navigator !== "undefined" && navigator.share) {
       try {
-        await navigator.share({ title: text, url });
+        await navigator.share({ title: text, url: u });
         return;
       } catch {
         // ユーザキャンセル等は無視(コピーにfallbackしない)
@@ -21,7 +44,7 @@ export default function ShareButtons({ title, url }: { title: string; url: strin
       }
     }
     try {
-      await navigator.clipboard.writeText(url);
+      await navigator.clipboard.writeText(u);
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     } catch {}
@@ -33,10 +56,11 @@ export default function ShareButtons({ title, url }: { title: string; url: strin
     "shadow-[var(--shadow-soft)] active:scale-95 transition hover:text-[var(--color-accent)]";
 
   return (
-    <div className="mt-6 flex flex-wrap items-center gap-2">
+    <div className={className ?? "mt-6 flex flex-wrap items-center gap-2"}>
       {/* x.com/intent/post はアプリのApp Linksに拾われず失敗する端末がある(2026-07-12実害) → 旧twitter.comのintentが最も互換 */}
       <a
-        href={`https://twitter.com/intent/tweet?text=${enc(text)}&url=${enc(url)}`}
+        href={xHref(url)}
+        {...live(xHref)}
         target="_blank"
         rel="noopener nofollow"
         aria-label="Xで共有"
@@ -49,7 +73,8 @@ export default function ShareButtons({ title, url }: { title: string; url: strin
         ポスト
       </a>
       <a
-        href={`https://social-plugins.line.me/lineit/share?url=${enc(url)}&text=${enc(text)}`}
+        href={lineHref(url)}
+        {...live(lineHref)}
         target="_blank"
         rel="noopener nofollow"
         aria-label="LINEで共有"
