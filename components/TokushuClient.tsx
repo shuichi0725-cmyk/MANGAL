@@ -25,6 +25,12 @@ export default function TokushuClient() {
   const [day, setDay] = useState<TokushuDay | null | undefined>(undefined);
   const [idx, setIdx] = useState<TokushuIndex | null>(null);
   const [limit, setLimit] = useState(10);
+  // ★PC判定(2026-08-03 ユーザ要望): PCは書影を最高画質で読む(楽天サムネの ?_ex=300x300 を
+  //   外すとマスター原寸が返る=coverSlim.ts の逆操作)。スマホは今の300x300のまま(回線配慮)。
+  const [pc, setPc] = useState(false);
+  useEffect(() => {
+    setPc(window.matchMedia("(min-width: 768px)").matches);
+  }, []);
   useEffect(() => {
     setLimit(10);
     fetchTokushuDay(dkey).then((d) => setDay(d));
@@ -34,7 +40,11 @@ export default function TokushuClient() {
   if (day === undefined) return <p className="py-14 text-center text-sm text-ink/50">読み込み中…</p>;
   if (day === null) return <p className="py-14 text-center text-sm text-ink/50">この日の特集はありません。</p>;
 
-  const shown = day.items.slice(0, limit);
+  const upgrade = (u: string | null) => (pc && u ? u.replace(/\?_ex=\d+x\d+$/, "") : u);
+  const items: TokushuItem[] = pc
+    ? day.items.map((it) => [it[0], it[1], it[2], upgrade(it[3]), it[4], it[5], it[6]] as TokushuItem)
+    : day.items;
+  const shown = items.slice(0, limit);
   const dt = new Date(dkey + "T00:00:00");
   const dateLabel = `${dt.getMonth() + 1}/${dt.getDate()}`;
   const isPast = dkey !== today;
@@ -80,9 +90,9 @@ export default function TokushuClient() {
     `${it[4] ?? "?"}${it[5] ? `〜${it[5]}` : "〜"}${it[6] === "completed" ? "・完結" : ""}`;
 
   if (day.sty.p === 1) {
-    // ── 案1: 特集扉型 ──
+    // ── 案1: 特集扉型(★PCはスマホ幅に寄せる=480px中央 2026-08-03 ユーザ要望) ──
     return (
-      <div>
+      <div className="mx-auto w-full md:max-w-[480px]">
         <div className="relative overflow-hidden px-4 pb-8 pt-6 text-white" style={{ background: day.c.a }}>
           <span className="pointer-events-none absolute -top-5 right-0 select-none text-[110px] font-black italic tracking-tighter text-white/10">{dateLabel}</span>
           <span className="inline-block rounded-[2px] border border-white/60 px-2.5 py-0.5 text-[11px] font-extrabold tracking-[.25em]">
@@ -137,9 +147,9 @@ export default function TokushuClient() {
     );
   }
 
-  // ── 案2: 本棚型(テーマ別演出=TokushuShelf。SF/ホラー/和/恋愛/ポップ/魔法図書館/カフェ/木) ──
+  // ── 案2: 本棚型(テーマ別演出=TokushuShelf。★PCはスマホ幅に寄せる=480px中央) ──
   return (
-    <div>
+    <div className="mx-auto w-full md:max-w-[480px]">
       <TokushuShelf
         day={day}
         dateLabel={dateLabel}
