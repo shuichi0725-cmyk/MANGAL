@@ -3459,7 +3459,11 @@ def main():
         # ★純粋追加ジャンル(genre-append.yml)= 上の決定の**後**に union するだけ(2026-07-31新設)。
         #   既存 genres を消さない / フラグ(genres_provisional・genres_rakuten)も変えない。
         #   = trusted を汚さずに「高精度だが単発のシグナル」を足す唯一の経路。
-        gap = [g for g in _GENRE_APPEND.get(slug, []) if g in valid_gens]
+        #   ★key は **公開slug(override後)でも SRC slug でも引く**(2026-08-03 実害): seed は
+        #     本番索引の公開slugで書かれるが、ここの `slug` は override 前。slug-overrides を通る頁
+        #     (実測1,037件)は公開slugキーの追加が**永久に届かなかった**(ラブコメ適用の25頁で発覚)。
+        _gap_keys = {slug, new_yml.get("slug") or slug}
+        gap = [g for k in _gap_keys for g in _GENRE_APPEND.get(k, []) if g in valid_gens]
         if gap:
             merged = set(new_yml.get("genres") or []) | set(gap)
             if merged & {"baseball", "soccer"}:
@@ -3726,6 +3730,18 @@ def main():
             if not _pd.get("synopsis") and synslug_map.get(_stem):
                 _pd["synopsis"] = synslug_map[_stem]
                 _touched = True
+            # ★純粋追加ジャンル(genre-append.yml)= 本流と同じ union をここでも通す(2026-08-03 実害)。
+            #   予約頁は種2を通らない=本流の genre-append 適用点に来ないため、seed が**永久に届かなかった**
+            #   (ラブコメ適用の hayate-no-gotoku-kanzenban で発覚)。既存 genres は消さない・フラグ不変。
+            _pgap = [g for k in {_stem, _pd.get("slug") or _stem}
+                     for g in _GENRE_APPEND.get(k, []) if g in valid_gens]
+            if _pgap:
+                _pm = set(_pd.get("genres") or []) | set(_pgap)
+                if _pm & {"baseball", "soccer"}:
+                    _pm.add("sports")
+                if _pm != set(_pd.get("genres") or []):
+                    _pd["genres"] = sorted(_pm)
+                    _touched = True
             for _e in _pd.get("editions") or []:
                 # ★edition.publisher が **内部キー**(kadokawa/kodansha…)のままだと表示に漏れる。
                 #   予約頁は種2を通らないので edition_pub_name が効かず、実測1,248版が生キー表示だった
