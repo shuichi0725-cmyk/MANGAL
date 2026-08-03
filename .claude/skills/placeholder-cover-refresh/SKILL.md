@@ -30,7 +30,7 @@ description: 仮書影直して=発売前に付いた「文字だけの書影(.g
 ```
 python scripts/_placeholder-cover-refresh.py --limit 200   # 1バッチ(~4.5分)。再起動で続き
 python scripts/_placeholder-cover-refresh.py --stats       # 現在地
-python scripts/_placeholder-cover-refresh.py --build-queue # 月1でqueue再算出(これはOpus作業)
+python scripts/_placeholder-cover-refresh.py --build-queue # 月1でqueue再算出=★次の周回の起点(これはOpus作業)
 ```
 
 - ★**1バッチ終わったら同じコマンドを再起動**して続きを回す(④⑤⑦⑨と同型)。
@@ -66,6 +66,10 @@ git add data/seeds/cover-override.jsonl && git commit -m "仮書影→実物 差
   2026-08-02 に実際に踏んだ。script内の `rakuten_by_isbn` が正)。
 - 429 で待機しない(他の柱を回す。[[idle-run]] の共通ルール)。
 - `--build-queue` を毎バッチ走らせない(66k頁走査で数分かかる。月1でよい)。
+- ★**「一巡完了」は終わりではない**(2026-08-03 ユーザ指摘で周回設計を実装): 実物への差し替わり時期は
+  不定なので、「まだ仮のまま/no_item/error」だった巻も**次周回で全部引き直す**。--build-queue が
+  done.json を自動rotateし、seed(cover-override.jsonl)在籍分だけを除外して再出発する(reflect前の
+  二重照会防止)。= 月1の --build-queue → queue枯れまでバッチ再起動、の繰り返しが恒常運転。
 
 ## 関連
 

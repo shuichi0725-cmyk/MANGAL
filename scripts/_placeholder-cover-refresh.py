@@ -103,12 +103,28 @@ def build_queue(since_year: int) -> int:
                     continue  # 旧作は live でも .gif のまま=既定で除外
                 rows.append({"isbn": m.group(1), "slug": slug,
                              "number": v.get("number"), "release_date": rd})
+    # ★周回設計(2026-08-03 ユーザ指摘「枯れても、いつ実物に差し替わるか不定=一回やったらおしまいではない」):
+    #   旧実装は done.json が build-queue 後も残り、「まだ仮のまま(still_placeholder)」の巻が
+    #   次周回で二度と再照会されなかった(=後から実物が出る層が恒久に取り残される穴)。
+    #   以後: 「済み」の表現は seed(cover-override.jsonl)在籍のみ = queueから除外し(reflect前の二重照会防止)、
+    #   done.json は build-queue 時に rotate(リセット)して still/no_item/error を毎周回すべて引き直す。
+    seeded = set()
+    if os.path.exists(OUT):
+        for ln in io.open(OUT, encoding="utf-8"):
+            try:
+                seeded.add(json.loads(ln)["isbn13"])
+            except Exception:
+                pass
+    before = len(rows)
+    rows = [r for r in rows if r["isbn"] not in seeded]
+    if os.path.exists(DONE):
+        os.replace(DONE, DONE + ".prev")  # 前周回の照会結果は .prev に退避(done はリセット)
     os.makedirs(os.path.dirname(QUEUE), exist_ok=True)
     with io.open(QUEUE, "w", encoding="utf-8", newline="\n") as f:
         for r in rows:
             f.write(json.dumps(r, ensure_ascii=False) + "\n")
     yr = collections.Counter(r["release_date"][:4] for r in rows if r["release_date"])
-    print(f"\nqueue {len(rows)}件 → {os.path.relpath(QUEUE, ROOT)}")
+    print(f"\nqueue {len(rows)}件 (seed差し替え済 {before - len(rows)}件を除外 / done.jsonはrotate) → {os.path.relpath(QUEUE, ROOT)}")
     print("  発売年:", dict(sorted(yr.items(), reverse=True)[:8]))
     return len(rows)
 
