@@ -16,13 +16,6 @@ description: 週次蒸留=本番フルビルド+R2フルアップ。トリガー
 - `--prune` を安易に付けない(削除は明示判断)
 - 完了主張の前に疎通確認を飛ばさない
 
-## ★次回週次での一回きりタスク(2026-08-03 検索索引廃止の残務)
-
-- **R2上の `manga-search-index.json` 実体を削除**(コード・生成・PUTは 2026-08-03 に全廃済み。
-  R2の実体だけ「古いタブの旧JSが参照しうる」ため次回週次=全頁焼き直し後に消す、が文書化済みの安全策):
-  `wrangler r2 object delete mangal-site/manga-search-index.json`(認証は _r2-sync.py と同じ env)。
-  削除後この節を消す。経緯= [[dead_search_index_retire_pending]]
-
 ## 手順
 
 ### 1. 事前再生成 (= stale生成物クラスを全部焼き直す)
