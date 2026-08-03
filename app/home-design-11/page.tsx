@@ -15,6 +15,7 @@ import { loadAiReviews } from "@/lib/loadData";
 import AiLeagueTeaser from "@/components/AiLeagueTeaser";
 import AnimeSeasonCorner from "@/components/AnimeSeasonCorner";
 import ZenshuuCorner from "@/components/ZenshuuCorner";
+import DailyFeatureCorner from "@/components/DailyFeatureCorner";
 
 export const metadata = { robots: { index: false, follow: false } };  // 実験頁=非索引
 
@@ -91,6 +92,9 @@ export default function Design11() {
 
       {/* 1.2【中】全集コーナー(A-1案・2026-07-19 テスト導入。一覧ページ無し=カードから直接 /zenshuu/[key] へ) */}
       <ZenshuuCorner />
+
+      {/* 1.3【中・新】日替わり特集(2026-08-03 ユーザ採用): 導線=案A帯/案Bチケットを日替わり・題材色つき */}
+      <DailyFeatureCorner />
 
       {/* 2.【小・新】ことばカード = あらすじの一文だけ大きく(縦読みの「息継ぎ」) */}
       {kotoba && (

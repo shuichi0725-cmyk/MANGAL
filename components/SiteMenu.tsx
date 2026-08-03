@@ -9,6 +9,7 @@ const ITEMS: Array<[string, string, string]> = [
   ["📋", "一覧(全作品)", "/list"],
   ["🔍", "検索・絞り込み", "/browse"],
   ["📖", "今日の一冊(毎日更新)", "/"],
+  ["📅", "日替わり特集(毎日更新)", "/tokushu"],
   ["🗒️", "今日の一冊 過去ログ", "/sansedai-archive"],
   ["📝", "AI書評家リーグ(週刊)", "/column-ai-league"],
   ["🏆", "なんでもランキング", "/rankings"],
