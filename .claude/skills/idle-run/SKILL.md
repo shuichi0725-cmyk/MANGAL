@@ -20,6 +20,7 @@ python scripts/_voldesc-material.py --recheck-nomaterial 300   # ⑦巻説明・
 python scripts/_kana-digit-harvest.py --limit 30   # ⑧数字kana素材(フリガナに数字が残る~528頁のwiki+楽天live読み収集)
 python scripts/_check-recent-ongoing-volumes.py --limit 200   # ⑨続巻逆照合(連載中頁→楽天題検索。日次蒸留の後方安全網)
 python scripts/_placeholder-cover-refresh.py --limit 200   # ⑩仮書影→実物の差し替え(発売前の文字だけ .gif を楽天liveで引き直す。詳細=skill placeholder-cover-refresh)
+python scripts/_kobo-color-harvest.py --delta   # ⑪カラー版差分(Kobo新着だけ追記・数分で自然停止・詳細=skill color-editions)
 ```
 
 ## ★429/冷却の共通ルール (= 2026-07-24 ユーザ指摘で機械化。運転者の判断ゼロ)
@@ -66,7 +67,12 @@ python scripts/_placeholder-cover-refresh.py --limit 200   # ⑩仮書影→実�
 - ③を無限ループ化しない(上記=NDL未収載の再照会浪費)
 
 ## セット構成 (= 将来増やせる)
-現在: ①試し読みexpand消化 ③NDLヨミ照合(1パス) ④完結判定 ⑤素材ハーベスト ⑥AniList鮮度維持 ⑦巻説明recheck ⑧数字kana素材 ⑨続巻逆照合 ⑩仮書影差し替え
+現在: ①試し読みexpand消化 ③NDLヨミ照合(1パス) ④完結判定 ⑤素材ハーベスト ⑥AniList鮮度維持 ⑦巻説明recheck ⑧数字kana素材 ⑨続巻逆照合 ⑩仮書影差し替え ⑪カラー版差分
+⑪**カラー版差分**(=`_kobo-color-harvest.py --delta` 2026-08-03柱化。ユーザ裁定「全部取得+アイドルで差分」):
+  Kobo{カラー版,フルカラー}の新着降順を既知(itemNumber)に2ページ連続で当たるまで歩き、新規だけ
+  `.cache/kobo-color-raw.jsonl` へ追記(逐次保存・数分で自然停止・③⑥と同じ1パス型=ループ不要)。
+  ★収集のみ。照合(build)は**表示復活を伴うのでユーザGO+Opus専権**(skill color-editions の停止注意を参照)。
+  全量の引き直し(引数なし・~1-2時間)は月1目安のOpus作業。commit不要(.cache)。
 ⑩**仮書影→実物の差し替え**(=`_placeholder-cover-refresh.py` 2026-08-02柱化。ユーザ発見「発売前や発売直後に文字の書影が入る」):
   楽天は発売前の本に「著者名+書名を並べただけの画像」を返し、実物が出ると★URL自体が別物に変わる★ため
   引き直さない限り永久に仮のまま。判定は形だけで確実= 本物`{ISBN}_1_9.jpg` / 仮`{ISBN}.gif`。

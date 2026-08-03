@@ -8,15 +8,31 @@ description: カラー版して/カラー版続けて=電子カラー版柱(Kobo
 電子書籍にしかない**カラー版**を収集し、作品頁に「🎨 電子カラー版 全N巻」ストリップと
 一覧 `/color-manga` を出す柱。[[ebook_only_editions_out_of_scope]] の「将来柱」の実体化。
 
+## ★表示は停止中 (= 2026-08-02 ユーザ要望「勝手につけられた。元にもどしたい」)
+
+頁ストリップ/一覧の表示は `public/data/color-editions.json` を **{} に空化**して止めてある。
+★**手順2(build)は public JSON を再生成する=走らせると表示が復活する**。収集(手順1/差分)は
+いつ回してもよいが、**build以降はユーザの表示再開GOが出るまで走らせない**。
+
 ## パイプライン (= この順で回す)
 
 ```
-1. python scripts/_kobo-color-harvest.py     # Kobo「カラー版」×コミック全冊(~6分・全上書き可)
-2. python scripts/_color-editions-build.py   # 束ね→本番照合→seed+public JSON+unmatched TSV
+1. python scripts/_kobo-color-harvest.py     # ★全量版(2026-08-03): {カラー版,フルカラー}×ジャンル再帰分割×多ソートunion(全上書き)
+1b. python scripts/_kobo-color-harvest.py --delta   # 差分(新着だけ追記・数分)=アイドル運転の柱⑪
+2. python scripts/_color-editions-build.py   # 束ね→本番照合→seed+public JSON+unmatched TSV ★表示復活=GO必須(上記)
 3. python scripts/_color-tameshiyomi.py --limit 30   # BookLive title_id収集(③試し読み・resumable)
 4. (3の後) 2を再実行 → JSON の b に結線
 5. commit+push(テスト環境)。本番=機能蒸留 or 週次(public/data/color-editions.json + チャンク)
 ```
+
+### 全量harvestの設計 (= 2026-08-03 ユーザ裁定「明らかに取得数が少ない。全部取得+アイドルで差分」)
+
+- 旧: title=カラー版×101904×2ソートunion=窓上限~6,000 → 3,779冊で頭打ち。★「フルカラー」
+  (「版」なし表記=TL/BL/単話系に多い)が検索語に無く丸ごと漏れていた。
+- 新: キーワード{カラー版, フルカラー} × countが3,000超のスライスは子ジャンル(GenreSearch APIで
+  動的取得・.cacheに永続)へ再帰分割 → 葉でも超える時は8ソートの窓union(±releaseDate/±itemPrice/
+  sales/standard/reviewCount/reviewAverage)。dedup=itemNumber・_rate_gate直列・429backoff吸収。
+- ★単話/分冊/合本のノイズ除去は**buildの仕事**(rawは全部持つ=[[acquire_all_obtainable_info]])。
 
 ## データの居場所
 

@@ -27,6 +27,7 @@ skill 実体 = `.claude/skills/<name>/SKILL.md`(git追跡。Opus 4.8 等でも�
 | **「Wiki蒸留して」** | wiki-distill | Wikipedia書誌(巻別ISBN+日付)で壊れた長期連載をcanonical復元(釣りキチ65巻等で実証・fail-closedゲート) | 10作/回 数分 |
 | **「巻抜け仮想」** | volgap-audit | 残巻抜け算出(~2分)。単巻切り詰め検出(solo-truncated)・巻出力監査も同居 | ~2分 |
 | **「試し読み拾って」** | tameshiyomi-harvest | BookLiveのtitle_idを魚で収集→tameshiyomi-booklive.jsonl(判断はscript・AIは保留裁定のみ・Sonnet運転前提・--limit100まで) | 100作/回 ~5分 |
+| **「カラー版して/カラー版差分して」** | color-editions | Koboカラー版の収集(全量={カラー版,フルカラー}×ジャンル分割×多ソート / 差分=--delta新着追記=アイドル柱⑪)。★照合buildは表示復活を伴う=ユーザGO必須 | 差分~数分 |
 | **「ジャンル検品して/Gemini検品」** | gemini-genre-audit | 本番provisionalジャンル・要素(~25k頁)をGeminiブラインド検品→不一致だけ裁定。429まで回す常設アイドルジョブ・試し読みと並走可 | ~500件/日 |
 | **「アイドル運転して」/「やめて」** | idle-run | 常設柱(試し読み+Gemini検品連鎖+ヨミ照合+完結判定+素材ハーベスト)を無限ループbackground起動。やめて=成果無駄なく即停止・同語で再開。Sonnet運転前提 | 無期限 |
 | **「素材ハーベストして」** | material-harvest | 本番に書かず素材だけ収集(発売日精密化/wiki本文+infobox/賞P166/魚残差)。生成・反映は各既存protocol。Sonnet運転前提 | フェーズ次第 |
