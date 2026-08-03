@@ -91,7 +91,8 @@ git add data/seeds/volume-desc-ja.jsonl && git commit -m "巻説明 +N件(volume
   ```
   python scripts/_voldesc-material.py --recheck-nomaterial 300   # 台帳先頭300件をlive再照会・救済
   ```
-  captionが在れば `captions-cache.jsonl` + `recovered.jsonl` に回収し台帳から除去(冪等・逐次保存・1.2s/req・429即中断)。
+  captionが在れば `captions-cache.jsonl` + `recovered.jsonl` に回収し台帳から除去(冪等・逐次保存・1.3s/req)。
+  ★429は backoff 自動吸収・連続429のみ中断、瞬断/JSON崩れは台帳に残して次回再照会(2026-08-03 偽429恒久対策)。
   救済分(recovered.jsonl)は**Opusが説明生成**→`_voldesc-apply`。台帳が尽きるまで繰り返す。
 - ★**別版caption(うる星型)**: 頁在ISBN(標準版)のcaptionが空でも、同一巻の別版(文庫/新装)に在ることがある
   (うる星1巻=標準版空・文庫版62字)。材料scriptは頁の**全edition ISBN**を舐めるので yml に別版があれば拾う。

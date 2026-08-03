@@ -24,6 +24,7 @@ except ImportError:
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import _rate_gate  # ★楽天グローバル・レートゲート(_lookupと共有=並走合算429を防ぐ)
+import _lookup as _LK  # ★共通楽天ヘルパ(429厳密判定+backoff吸収。偽429恒久対策 2026-08-03)
 os.makedirs(f"{ROOT}/.cache/voldesc", exist_ok=True)
 OUT = f"{ROOT}/.cache/voldesc/materials.jsonl"
 SEED = f"{ROOT}/data/seeds/volume-desc-ja.jsonl"
@@ -152,21 +153,19 @@ ORIGIN = env.get("RAKUTEN_REFERER", "").rstrip("/")
 
 
 def live_item(isbn):
-    q = {"applicationId": env["RAKUTEN_APP_ID"], "accessKey": env["RAKUTEN_ACCESS_KEY"],
-         "isbn": isbn, "outOfStockFlag": "1", "format": "json", "formatVersion": "2"}
-    req = urllib.request.Request("https://openapi.rakuten.co.jp/services/api/BooksBook/Search/20170404?" + urllib.parse.urlencode(q))
-    req.add_header("Referer", ORIGIN + "/")
-    req.add_header("Origin", ORIGIN)
-    req.add_header("User-Agent", "Mozilla/5.0")
-    _rate_gate.wait("rakuten", 1.3)  # ★_lookupと共有の楽天グローバル間隔(並走合算429を防ぐ)
+    """楽天live 1件。★偽429恒久対策(2026-08-03 アイドル柱⑦停止の根因):
+    旧実装は `"429" in str(e)` の文字列マッチで、JSONDecodeError の位置表示
+    (「line 1 column 429」等)まで実429と誤検知して柱ごと即停止していた。
+    以後は共通ヘルパ `_lookup.rakuten_live_retry`(HTTPError.code==429 の厳密判定 +
+    backoff(2,5,15,45s)吸収・rate_gate内蔵)に統一。連続429(実スロットル)だけ中断し、
+    瞬断/JSON崩れは "ERR" を返す(呼び側で台帳に残す=次回再照会)。"""
     try:
-        d = json.loads(urllib.request.urlopen(req, timeout=20).read())
-        items = d.get("Items") or []
+        items = _LK.rakuten_live_retry(env, isbn=isbn)
         return items[0] if items else None
-    except Exception as e:
-        if "429" in str(e):
-            print("★429→中断"); sys.exit(2)
-        return None
+    except _LK.Throttled:
+        print("★楽天429が連続(実スロットル)→中断(次の手すきで再開)"); sys.exit(2)
+    except Exception:
+        return "ERR"
 
 
 # ==== recheck モード: 材料なし台帳をlive再照会して偽陰性を救済 ====
@@ -194,6 +193,9 @@ if a.recheck_nomaterial:
     for i, ib in enumerate(batch):
         checked.add(ib)
         item = live_item(ib)
+        if item == "ERR":
+            checked.discard(ib)  # 瞬断=「cap無し確定」にしない。台帳に残して次回再照会
+            continue
         cap = (item.get("itemCaption") or "").strip() if item else ""
         if cap:
             recovered[ib] = cap
@@ -292,6 +294,8 @@ if a.live and rest:
     print(f"live照会 {len(rest)}件 (~{len(rest)*1.2/60:.0f}分)")
     for i, ib in enumerate(rest):
         item = live_item(ib)
+        if item == "ERR":
+            continue  # 瞬断=今回skip(未取得のまま=次回対象)
         if item:
             cap = (item.get("itemCaption") or "").strip()
             if cap:

@@ -12,7 +12,7 @@
 - レート1.1s / resumableでなく毎回フル(未来ゾーンは薄いので数分)
 使い方: python scripts/_rakuten-preorder-harvest.py [--max-pages 80]
 """
-import json, os, re, sys, time, datetime, urllib.request, urllib.parse
+import json, os, re, sys, time, datetime, urllib.request, urllib.parse, urllib.error
 sys.stdout.reconfigure(encoding="utf-8")
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUT_DIR = os.path.join(ROOT, ".cache", "preorders")
@@ -43,7 +43,7 @@ def books(genre, page):
         try:
             return json.loads(urllib.request.urlopen(req, timeout=25).read())
         except Exception as e:
-            if "429" in str(e):
+            if isinstance(e, urllib.error.HTTPError) and e.code == 429:  # ★厳密判定(偽429対策2026-08-03: 文字列マッチはJSON崩れの「column 429」を誤検知)
                 print("★429→中断"); sys.exit(2)
             time.sleep(RATE * (attempt + 2))
     return {}

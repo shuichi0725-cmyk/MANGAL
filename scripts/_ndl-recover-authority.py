@@ -12,7 +12,7 @@ usage:
   python _ndl-recover-authority.py            # 271著者のISBNのみ(既定)
   python _ndl-recover-authority.py --all       # discovery全ISBN
 """
-import sys, os, re, json, time, html, collections, urllib.request, urllib.parse
+import sys, os, re, json, time, html, collections, urllib.request, urllib.parse, urllib.error
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # 旧PCパス→動的導出(2026-07-21一括是正)
 CACHE = f"{ROOT}/.cache/ndl-sru-raw-cache.json"
 RATE = 1.2  # NDL安全(楽天速度・429回避)
@@ -61,7 +61,7 @@ def ndl(isbn):
             time.sleep(RATE)
             return x
         except Exception as e:
-            if "429" in str(e):
+            if isinstance(e, urllib.error.HTTPError) and e.code == 429:  # ★厳密判定(偽429対策2026-08-03)
                 print(f"  429 backoff", flush=True)
             time.sleep(RATE * (attempt + 3))
     return ""

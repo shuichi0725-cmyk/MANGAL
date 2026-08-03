@@ -16,7 +16,7 @@ python scripts/_verify-kana-pending.py --limit 300   # ③ヨミ照合(★1パ�
 python scripts/_completion-judge.py --backlog --limit 300   # ④完結判定backlog(→worksheet記入→--collect→commit、詳細=skill completion-judge)
 python scripts/_material-harvest.py wiki-fetch --limit 500  # ⑤素材ハーベスト(在庫切れ後は fish-residue --limit 50、詳細=skill material-harvest)
 python scripts/_anilist-delta.py   # ⑥AniList鮮度維持(直近更新~5,000件回収・~5分で自然停止・★セッション1回のみ)
-python scripts/_voldesc-material.py --recheck-nomaterial 300   # ⑦巻説明・材料なし台帳のlive再照会救済(偽陰性~10%回収・冪等・逐次保存・429中断。詳細=skill volume-desc)
+python scripts/_voldesc-material.py --recheck-nomaterial 300   # ⑦巻説明・材料なし台帳のlive再照会救済(偽陰性~10%回収・冪等・逐次保存・429はbackoff吸収。詳細=skill volume-desc)
 python scripts/_kana-digit-harvest.py --limit 30   # ⑧数字kana素材(フリガナに数字が残る~528頁のwiki+楽天live読み収集)
 python scripts/_check-recent-ongoing-volumes.py --limit 200   # ⑨続巻逆照合(連載中頁→楽天題検索。日次蒸留の後方安全網)
 python scripts/_placeholder-cover-refresh.py --limit 200   # ⑩仮書影→実物の差し替え(発売前の文字だけ .gif を楽天liveで引き直す。詳細=skill placeholder-cover-refresh)
@@ -35,6 +35,12 @@ python scripts/_placeholder-cover-refresh.py --limit 200   # ⑩仮書影→実�
 - 運転者(Sonnet)のルールは1つだけ: **柱が「冷却」「使用中」メッセージで止まったら、待たない・調べない・
   すぐ他の柱を回す**。⑤⑧は次の手すき(≥60分後)に同コマンド再起動するだけ(冷却中ならscriptが勝手に弾く=無害)。
   ★「429が明けるのをずっと待つ」は禁止(2026-07-24実害: 待機で他の柱まで全停止)。
+- ★**偽429は恒久修正済**(2026-08-03 ユーザ報告=⑦⑩が偽429で停止): 旧検知が `"429" in str(e)` の
+  文字列マッチで、**JSONDecodeErrorの位置表示(「line 1 column 429」等)や瞬断まで実429と誤検知**していた。
+  以後は全live系が `HTTPError.code==429` の厳密判定に統一。楽天系柱(⑦⑩)は共通ヘルパ
+  `_lookup.rakuten_live_retry` で **429をbackoff(2-45s)自動吸収**し、連続429(実スロットル)だけ中断。
+  瞬断/JSON崩れは1件skip(⑦は台帳に残して次回再照会)=**柱は止まらない**。
+  運転上の帰結: 「★楽天429が連続(実スロットル)→中断」が出た時だけ本物=次の手すきで再起動。
 - それぞれ **run_in_background で別タスク**として起動し、**タスクIDを控えて報告**(=「やめて」で使う)。
 - ★④⑤⑦は1バッチ終了ごとに**同じコマンドを再起動**して続きを回す(④はworksheet記入→--collectを挟む。⑤はwiki-fetch在庫が尽きたらfish-residueへ。⑦は台帳が尽きるまで)。③⑥のように自然停止で終わりではない。
 - ①は積み残し~1.2万シリーズ(アンカー13,949作は収集済=旧アンカーループは枯れて即終了する)。BookLive HEADのみ=高速。

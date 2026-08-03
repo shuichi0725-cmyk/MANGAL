@@ -35,7 +35,9 @@ python scripts/_placeholder-cover-refresh.py --build-queue # 月1でqueue再算�
 
 - ★**1バッチ終わったら同じコマンドを再起動**して続きを回す(④⑤⑦⑨と同型)。
 - queue が尽きたら「消化済み(自然停止)」と出て終わる。**待たない・調べない**。
-- **429 は即中断**して終了する(次の手すきで同コマンド再起動)。楽天レートは `_rate_gate` が
+- **429 は script が backoff(2-45s)で自動吸収**し、連続429(実スロットル)だけ中断する
+  (2026-08-03 偽429恒久対策: 旧の文字列マッチはJSON崩れの「column 429」を誤検知して停止していた。
+  瞬断/JSON崩れは1件skipで走り続ける)。楽天レートは `_rate_gate` が
   ホスト単位で直列化するので、他の柱と並走してよい。
 - 成果は `data/seeds/cover-override.jsonl` に**1件ごと追記**(停止しても残る)。
 - 進捗は `.cache/placeholder-cover/done.json`(冪等再開の済み集合)。

@@ -40,6 +40,7 @@ import urllib.request
 sys.stdout.reconfigure(encoding="utf-8")
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(ROOT, "scripts"))
+import _lookup as _LK  # ★共通楽天ヘルパ(429厳密判定+backoff吸収。偽429恒久対策 2026-08-03)
 SRC = os.path.join(ROOT, "data", "manga.v2")
 QUEUE = os.path.join(ROOT, ".cache", "placeholder-cover", "queue.jsonl")
 DONE = os.path.join(ROOT, ".cache", "placeholder-cover", "done.json")
@@ -65,21 +66,13 @@ def load_env() -> dict:
 
 
 def rakuten_by_isbn(env: dict, isbn: str) -> dict:
-    """★楽天の呼び方は _rakuten-preorder-harvest.py と同一(Referer/Origin 必須。
-    これが無いと 403。自前で組み直さないこと)。レート間隔は _rate_gate に委ねる。"""
-    try:
-        from _rate_gate import wait as _gate_wait  # 全柱でホスト単位に直列化
-        _gate_wait("rakuten", RATE)
-    except Exception:
-        time.sleep(RATE)
-    origin = env.get("RAKUTEN_REFERER", "").rstrip("/")
-    p = {"applicationId": env["RAKUTEN_APP_ID"], "accessKey": env["RAKUTEN_ACCESS_KEY"],
-         "isbn": isbn, "outOfStockFlag": "1", "format": "json", "formatVersion": "2"}
-    req = urllib.request.Request(EP + "?" + urllib.parse.urlencode(p))
-    req.add_header("Referer", origin + "/")
-    req.add_header("Origin", origin)
-    req.add_header("User-Agent", "Mozilla/5.0")
-    return json.loads(urllib.request.urlopen(req, timeout=25).read())
+    """楽天live 1件。★偽429恒久対策(2026-08-03 アイドル柱⑩停止の根因):
+    旧実装+呼び側の `"429" in str(e)` 文字列マッチが、JSONDecodeError の位置表示
+    (「line 1 column 429」等)まで実429と誤検知して柱ごと停止していた。
+    以後は共通ヘルパ `_lookup.rakuten_live_retry`(HTTPError.code==429 の厳密判定 +
+    backoff(2,5,15,45s)吸収・rate_gate/Referer/Origin内蔵)に統一。
+    連続429(実スロットル)は Throttled が伝播(呼び側で中断)。"""
+    return {"Items": _LK.rakuten_live_retry(env, isbn=isbn)}
 
 
 def build_queue(since_year: int) -> int:
@@ -175,11 +168,11 @@ def main() -> int:
         isbn = r["isbn"]
         try:
             d = rakuten_by_isbn(env, isbn)
-        except Exception as e:
-            if "429" in str(e):
-                print("★429 → 中断(次の手すきで再開)")
-                break
-            done[isbn] = "error"
+        except _LK.Throttled:
+            print("★楽天429が連続(実スロットル)→中断(次の手すきで再開)")
+            break
+        except Exception:
+            done[isbn] = "error"  # 瞬断/JSON崩れ=1件skip(偽429で柱を止めない)
             continue
         its = d.get("Items") or []
         img = str((its[0].get("largeImageUrl") or its[0].get("mediumImageUrl") or "")) if its else ""

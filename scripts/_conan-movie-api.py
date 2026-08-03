@@ -1,7 +1,7 @@
 """[調査] コナン映画クラスタの全ISBNを楽天API直引きで取得→title/author/dateを得て分類。
 キャッシュ命中分も含め全78 ISBNを「フィルムコミック(drop)/漫画版(keep)/その他」に一次分類。
 楽天APIは収穫完走後=空き。1req/秒。結果は .cache/conan-movie-class.json。本番未変更。"""
-import json, sqlite3, time, re, urllib.parse, urllib.request, io, sys
+import json, sqlite3, time, re, urllib.parse, urllib.request, urllib.error, io, sys
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8")
 env = {}
 for ln in open(".env.local", encoding="utf-8"):
@@ -62,7 +62,7 @@ def api(isbn):
             o = (its[0].get("Item", its[0]) if its else {})
             return {"title": o.get("title", ""), "author": o.get("author", ""), "date": o.get("salesDate", "")}
         except Exception as e:
-            if "429" in str(e) and a < 3:
+            if isinstance(e, urllib.error.HTTPError) and e.code == 429 and a < 3:  # ★厳密判定(偽429対策2026-08-03)
                 time.sleep(6 + a * 6); continue
             return None
 

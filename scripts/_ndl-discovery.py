@@ -5,7 +5,7 @@ throttle回避: 1.2s・小バッチ・月分割・resumable(取得済ISBN skip)�
 usage: python _ndl-discovery.py 2026          # 2026年の漫画新刊を月分割discovery
        python _ndl-discovery.py 2026 5 6       # 2026年5-6月のみ
 """
-import sys, os, re, time, json, html, urllib.request, urllib.parse, sqlite3, pathlib
+import sys, os, re, time, json, html, urllib.request, urllib.parse, urllib.error, sqlite3, pathlib
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__))).replace("\\", "/")
 SRU = "https://ndlsearch.ndl.go.jp/api/sru"
 RATE = 1.2  # ★楽天Books API と同じ。NDL遮断回避(per-ISBN burst 0.2sで429を踏んだ反省)。
@@ -32,7 +32,7 @@ def sru(cql, start=1):
             time.sleep(RATE)  # ★楽天速度
             return html.unescape(x)
         except Exception as e:
-            if "429" in str(e):
+            if isinstance(e, urllib.error.HTTPError) and e.code == 429:  # ★厳密判定(偽429対策2026-08-03)
                 print(f"  429 → {RATE*10}s backoff", flush=True)
             time.sleep(RATE * (attempt + 3))  # backoff
     return ""

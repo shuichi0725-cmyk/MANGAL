@@ -11,7 +11,7 @@ AI生成用の材料jsonlを書き出す。
   python scripts/_enrich-captions.py --missing [--src DIR]   # catch/synopsis欠け頁を自動抽出
 レート: live 1.2s/req・429即中断([[ndl_access_rate_method]]と同じ礼儀)。
 """
-import argparse, glob, json, os, sys, time, urllib.request, urllib.parse
+import argparse, glob, json, os, sys, time, urllib.request, urllib.parse, urllib.error
 sys.stdout.reconfigure(encoding="utf-8")
 import yaml
 try:
@@ -50,7 +50,7 @@ def live_caption(isbn):
         items = d.get("Items") or []
         return (items[0].get("itemCaption") or "").strip() if items else ""
     except Exception as e:
-        if "429" in str(e):
+        if isinstance(e, urllib.error.HTTPError) and e.code == 429:  # ★厳密判定(偽429対策2026-08-03)
             print("★429→中断"); sys.exit(2)
         return ""
 
