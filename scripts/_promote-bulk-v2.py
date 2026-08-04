@@ -3813,7 +3813,21 @@ def main():
                         _touched = True
                 for _pool in [_e.get("volumes") or []] + [vv.get("volumes") or [] for vv in (_e.get("versions") or [])]:
                     for _v in _pool:
-                        if not _v.get("cover_url") and _v.get("isbn13"):
+                        if not _v.get("isbn13"):
+                            continue
+                        # ★cover-override は本流(L2493付近)と同じ「キーが在れば必ず勝つ」規則で通す
+                        #   (2026-08-04 実害: 旧実装は `not cover_url` の時しか埋めず、**仮書影(.gif)は
+                        #   非空なので永久に置き換わらなかった**。仮書影が出るのは発売前=予約頁そのもので、
+                        #   一番必要な層に seed が届いていなかった。 空文字=書影なし確定も尊重する。
+                        #   同ブロックの genre-enrich/genre-append と同型の「予約頁は本流を通らない」漏れ)。
+                        _co = get_cover_override()
+                        _ck3 = _norm_isbn(_v["isbn13"])
+                        if _ck3 in _co:
+                            _new = _co[_ck3] or None
+                            if _v.get("cover_url") != _new:
+                                _v["cover_url"] = _new
+                                _touched = True
+                        elif not _v.get("cover_url"):
                             _cu = _cover_for(_v["isbn13"])
                             if _cu:
                                 _v["cover_url"] = _cu
