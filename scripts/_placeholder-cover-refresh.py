@@ -36,6 +36,7 @@ import sys
 import time
 import urllib.parse
 import urllib.request
+from datetime import date, timedelta
 
 sys.stdout.reconfigure(encoding="utf-8")
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -49,6 +50,7 @@ EP = "https://openapi.rakuten.co.jp/services/api/BooksBook/Search/20170404"
 RATE = 1.3
 
 RE_PLACEHOLDER = re.compile(r"/(\d{13})\.gif")
+RECENT_FLOOR = (date.today() - timedelta(days=180)).isoformat()  # ★新刊窓(レーベルロゴ型)の下限
 RE_REAL = re.compile(r"_\d+_\d+\.(jpg|jpeg|png)")
 
 
@@ -95,19 +97,27 @@ def build_queue(since_year: int) -> int:
             for v in (e.get("volumes") or []):
                 cu = str(v.get("cover_url") or "")
                 m = RE_PLACEHOLDER.search(cu)
-                if not m:
-                    continue
                 rd = str(v.get("release_date") or "")
                 y = int(rd[:4]) if rd[:4].isdigit() else 0
-                if y < since_year:
-                    continue  # 旧作は live でも .gif のまま=既定で除外
-                rows.append({"isbn": m.group(1), "slug": slug,
-                             "number": v.get("number"), "release_date": rd})
+                if m:
+                    if y < since_year:
+                        continue  # 旧作は live でも .gif のまま=既定で除外
+                    rows.append({"isbn": m.group(1), "slug": slug,
+                                 "number": v.get("number"), "release_date": rd, "cur": cu})
+                elif rd and rd >= RECENT_FLOOR and v.get("isbn13"):
+                    # ★新刊窓(2026-08-04 LV999の村人21型): URL形式は正常(_1_6.jpg)でも中身が
+                    #   レーベルロゴ等のことがある。発売前後(直近180日〜未来)の巻は live を
+                    #   引き直し、★書影URLが変わっていたら差し替える(変わらなければ何もしない)。
+                    rows.append({"isbn": str(v["isbn13"]), "slug": slug,
+                                 "number": v.get("number"), "release_date": rd, "cur": cu})
     # ★周回設計(2026-08-03 ユーザ指摘「枯れても、いつ実物に差し替わるか不定=一回やったらおしまいではない」):
     #   旧実装は done.json が build-queue 後も残り、「まだ仮のまま(still_placeholder)」の巻が
     #   次周回で二度と再照会されなかった(=後から実物が出る層が恒久に取り残される穴)。
     #   以後: 「済み」の表現は seed(cover-override.jsonl)在籍のみ = queueから除外し(reflect前の二重照会防止)、
     #   done.json は build-queue 時に rotate(リセット)して still/no_item/error を毎周回すべて引き直す。
+    # ★同一ISBNの重複行を除去(複数edition/バージョンで同ISBNが並ぶ型)
+    _seen_q = set()
+    rows = [r for r in rows if not (r["isbn"] in _seen_q or _seen_q.add(r["isbn"]))]
     seeded = set()
     if os.path.exists(OUT):
         for ln in io.open(OUT, encoding="utf-8"):
@@ -192,15 +202,19 @@ def main() -> int:
             continue
         its = d.get("Items") or []
         img = str((its[0].get("largeImageUrl") or its[0].get("mediumImageUrl") or "")) if its else ""
-        if img and RE_REAL.search(img):
+        _norm = lambda u: re.sub(r"\?_ex=\d+x\d+$", "", u or "")  # noqa: E731
+        cur = str(r.get("cur") or "")
+        if img and RE_REAL.search(img) and _norm(img) != _norm(cur):
+            was_gif = RE_PLACEHOLDER.search(cur) is not None
             fout.write(json.dumps({"isbn13": isbn, "cover_url": img, "slug": r["slug"],
-                                   "number": r["number"], "reason": "placeholder_gif→real",
+                                   "number": r["number"],
+                                   "reason": "placeholder_gif→real" if was_gif else "cover_url変化(レーベルロゴ型)",
                                    "at": time.strftime("%Y-%m-%d")}, ensure_ascii=False) + "\n")
             fout.flush()                      # ★逐次保存(停止しても残る)
             done[isbn] = "replaced"
             n_rep += 1
         elif img:
-            done[isbn] = "still_placeholder"
+            done[isbn] = "still_placeholder"  # gif据置き or URL不変(新刊窓)
             n_still += 1
         else:
             done[isbn] = "no_item"

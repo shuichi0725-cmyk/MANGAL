@@ -116,7 +116,13 @@ def _cover_for(isbn13):
                         pass
     if not isbn13:
         return None
-    return _norm_cover_ex(_COVERS.get(str(isbn13).replace("-", "")))
+    # ★cover-override を最優先(2026-08-04): 空値=「書影なし確定」を最終充填passでも尊重する
+    #   (三つ目がとおる全集6巻: noimage除去 override が最終passのseed充填で埋め戻された実害)。
+    _k = str(isbn13).replace("-", "")
+    _ovr = get_cover_override()
+    if _k in _ovr:
+        return _norm_cover_ex(_ovr[_k]) if _ovr[_k] else None
+    return _norm_cover_ex(_COVERS.get(_k))
 
 
 # ★書影の _ex 正規化(2026-07-25): 楽天サムネは「1枚のマスター + _ex サイズ指定」で、
@@ -335,8 +341,10 @@ def get_cover_override() -> dict:
                     d = json.loads(line)
                 except Exception:
                     continue
-                if d.get("cover_url") and d.get("isbn13"):
-                    _COVER_OVERRIDE[_norm_isbn(d["isbn13"])] = d["cover_url"]
+                # ★空文字も採録=「書影なし確定」(2026-08-04 三つ目がとおる全集6巻: 楽天の実体が
+                #   緑noimageアイコンで、URLは正常形式=削除でしか直せない型)。行削除で可逆。
+                if d.get("isbn13") and "cover_url" in d:
+                    _COVER_OVERRIDE[_norm_isbn(d["isbn13"])] = d.get("cover_url") or ""
     return _COVER_OVERRIDE
 
 
@@ -2481,7 +2489,13 @@ def clean_vol(v: dict) -> dict:
     else:
         o["isbn13"] = None
     # ★書影を promote 内で直接充填 (= 別 cover stage 廃止)。 override>既存値>seed fallback。
-    o["cover_url"] = get_cover_override().get(_norm_isbn(o["isbn13"])) or v.get("cover_url") or _cover_for(o["isbn13"])
+    #   ★override は「キーが在れば必ず勝つ」= 空文字なら書影なし確定(noimage型の除去 2026-08-04)。
+    _covr = get_cover_override()
+    _ck = _norm_isbn(o["isbn13"])
+    if _ck in _covr:
+        o["cover_url"] = _covr[_ck] or None
+    else:
+        o["cover_url"] = v.get("cover_url") or _cover_for(o["isbn13"])
     o["release_date"] = _norm_date(v.get("release_date"))  # ★schema形式に正規化(404防止)
     # ★巻説明 = volume-desc seed(isbn13キー)から充填(既存値優先・純粋追加)。 skill volume-desc。
     _desc = v.get("description") or _desc_for(o["isbn13"])
@@ -2906,8 +2920,10 @@ def build_yml(
                     if _f.get("release_date"):
                         _v["release_date"] = _norm_date(_f["release_date"])
                     if not _v.get("cover_url"):
-                        _v["cover_url"] = (get_cover_override().get(_norm_isbn(_v["isbn13"]))
-                                           or _cover_for(_v["isbn13"]))
+                        _cov2 = get_cover_override()
+                        _ck2 = _norm_isbn(_v["isbn13"])
+                        _v["cover_url"] = ((_cov2[_ck2] if _ck2 in _cov2 else _cover_for(_v["isbn13"]))
+                                           or None)
     return o
 
 

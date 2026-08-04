@@ -92,6 +92,21 @@ def load_covers():
                 m[o["isbn13"]] = o["cover_url"]
             except Exception:
                 pass
+    # ★cover-override.jsonl を重ねる(空値=書影なし確定=削除。promoteの_cover_forと同じ規約 2026-08-04
+    #   三つ目がとおる全集6巻のnoimage緑アイコンが/zenshuuに残った実害)。
+    po = os.path.join(ROOT, "data", "seeds", "cover-override.jsonl")
+    if os.path.exists(po):
+        for l in open(po, encoding="utf-8"):
+            try:
+                o = json.loads(l)
+            except Exception:
+                continue
+            if o.get("isbn13") and "cover_url" in o:
+                k = str(o["isbn13"]).replace("-", "")
+                if o.get("cover_url"):
+                    m[k] = o["cover_url"]
+                else:
+                    m.pop(k, None)
     return m
 
 

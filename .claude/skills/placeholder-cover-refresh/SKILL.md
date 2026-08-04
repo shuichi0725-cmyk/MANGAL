@@ -70,6 +70,15 @@ git add data/seeds/cover-override.jsonl && git commit -m "仮書影→実物 差
   不定なので、「まだ仮のまま/no_item/error」だった巻も**次周回で全部引き直す**。--build-queue が
   done.json を自動rotateし、seed(cover-override.jsonl)在籍分だけを除外して再出発する(reflect前の
   二重照会防止)。= 月1の --build-queue → queue枯れまでバッチ再起動、の繰り返しが恒常運転。
+- ★**プレースホルダは .gif だけではない**(2026-08-04 ユーザ発見で2型追加):
+  ①**レーベルロゴ型**(LV999の村人21) = URL形式は本物と同じ `_1_6.jpg` なのに中身が出版社ロゴ。
+    発売後に楽天が**新しい画像番号(_1_10等)で実物を追加**するため、URLパターンでは検出不能。
+    → queueに**新刊窓**(発売日が直近180日〜未来の巻全部)を含め、liveのURLが**変わっていたら**差し替える
+    (変わらなければ何もしない=冪等)。reason=`cover_url変化(レーベルロゴ型)`。
+  ②**noimage型**(三つ目がとおる全集6巻) = 楽天の実体が緑の本アイコンでURLは正常形式。楽天に実画像が
+    無いので差し替え先も無い → **cover-override.jsonl に空文字**(`"cover_url": ""`)= 書影なし確定。
+    promote(`_cover_for`/適用点)と `_gen-zenshuu-data.py` が空値=削除として尊重する(2026-08-04結線)。
+    このクラスは機械検出不能(内容の問題)= ユーザ報告ベースのper-case対応。
 
 ## 関連
 
