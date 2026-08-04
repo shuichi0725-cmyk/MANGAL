@@ -41282,3 +41282,17 @@ volumes:
   source: rakuten-trailing
   added_at: '2026-08-05'
   note: 末尾続巻ハント2周目(括弧読み対応)
+- series_keys:
+  - qid:Q11622587|name:怪物(けもの)事変
+  - qid:Q11622587|name:怪物(けもの)事変.
+  - qid:Q11622587|name:怪物事変
+  qid: null
+  number: 22
+  isbn13: '9784088842158'
+  release_date: '2024-11-01'
+  publisher: 集英社
+  edition_type: standard
+  title_display: 怪物事変 22
+  source: rakuten-live
+  added_at: '2026-08-05'
+  note: 'クエリ側括弧盲点の実証例: 頁題「怪物(けもの)事変」の生クエリでは楽天0件・NDLも括弧付き時代(1-20巻)のみ。剥き題クエリで即発見'
