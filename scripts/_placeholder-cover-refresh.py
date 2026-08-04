@@ -153,7 +153,10 @@ def main() -> int:
     ap.add_argument("--build-queue", action="store_true")
     ap.add_argument("--since-year", type=int, default=2025,
                     help="この年以降の巻だけ対象(既定2025。旧作は live でも .gif のまま)")
-    ap.add_argument("--limit", type=int, default=200, help="1バッチの照会件数")
+    ap.add_argument("--limit", type=int, default=200, help="1バッチの照会件数(進捗表示の粒度)")
+    ap.add_argument("--all", action="store_true",
+                    help="★完走モード(2026-08-04 ユーザ要望「途中で止まる」): queueが尽きるまで"
+                         "バッチを自動継続。運転者の再起動不要。実スロットル連続時のみ中断(exit 2)")
     ap.add_argument("--stats", action="store_true")
     a = ap.parse_args()
 
@@ -186,48 +189,62 @@ def main() -> int:
         return 2
 
     os.makedirs(os.path.dirname(OUT), exist_ok=True)
-    n_rep = n_still = n_none = 0
-    batch = todo[:a.limit]
-    print(f"照会 {len(batch)}件 (残 {len(todo)})", flush=True)
+    _norm = lambda u: re.sub(r"\?_ex=\d+x\d+$", "", u or "")  # noqa: E731
+    t_rep = t_still = t_none = 0
+    throttled = False
     fout = io.open(OUT, "a", encoding="utf-8", newline="\n")
-    for i, r in enumerate(batch, 1):
-        isbn = r["isbn"]
-        try:
-            d = rakuten_by_isbn(env, isbn)
-        except _LK.Throttled:
-            print("★楽天429が連続(実スロットル)→中断(次の手すきで再開)")
+    # ★完走ループ(2026-08-04): --all はqueueが尽きるまでバッチを回し続ける(運転者の再起動不要)。
+    #   従来の1バッチ=1起動は「運転者が再起動を忘れて止まったまま」になる実害があった。
+    while todo:
+        n_rep = n_still = n_none = 0
+        batch = todo[:a.limit]
+        print(f"照会 {len(batch)}件 (残 {len(todo)})", flush=True)
+        for i, r in enumerate(batch, 1):
+            isbn = r["isbn"]
+            try:
+                d = rakuten_by_isbn(env, isbn)
+            except _LK.Throttled:
+                print("★楽天429が連続(実スロットル)→中断(次の手すきで再開)")
+                throttled = True
+                break
+            except Exception:
+                done[isbn] = "error"  # 瞬断/JSON崩れ=1件skip(偽429で柱を止めない)
+                continue
+            its = d.get("Items") or []
+            img = str((its[0].get("largeImageUrl") or its[0].get("mediumImageUrl") or "")) if its else ""
+            cur = str(r.get("cur") or "")
+            if img and RE_REAL.search(img) and _norm(img) != _norm(cur):
+                was_gif = RE_PLACEHOLDER.search(cur) is not None
+                fout.write(json.dumps({"isbn13": isbn, "cover_url": img, "slug": r["slug"],
+                                       "number": r["number"],
+                                       "reason": "placeholder_gif→real" if was_gif else "cover_url変化(レーベルロゴ型)",
+                                       "at": time.strftime("%Y-%m-%d")}, ensure_ascii=False) + "\n")
+                fout.flush()                      # ★逐次保存(停止しても残る)
+                done[isbn] = "replaced"
+                n_rep += 1
+            elif img:
+                done[isbn] = "still_placeholder"  # gif据置き or URL不変(新刊窓)
+                n_still += 1
+            else:
+                done[isbn] = "no_item"
+                n_none += 1
+            if i % 20 == 0:
+                json.dump(done, io.open(DONE, "w", encoding="utf-8"))
+                print(f"  …{i}/{len(batch)} 実物{n_rep} 仮のまま{n_still}", flush=True)
+        json.dump(done, io.open(DONE, "w", encoding="utf-8"))
+        t_rep += n_rep; t_still += n_still; t_none += n_none
+        todo = [r for r in q if r["isbn"] not in done]
+        print(f"バッチ完了: 実物{n_rep} 仮のまま{n_still} 該当なし{n_none} (累計 実物{t_rep} / 残{len(todo)})", flush=True)
+        if throttled or not a.all:
             break
-        except Exception:
-            done[isbn] = "error"  # 瞬断/JSON崩れ=1件skip(偽429で柱を止めない)
-            continue
-        its = d.get("Items") or []
-        img = str((its[0].get("largeImageUrl") or its[0].get("mediumImageUrl") or "")) if its else ""
-        _norm = lambda u: re.sub(r"\?_ex=\d+x\d+$", "", u or "")  # noqa: E731
-        cur = str(r.get("cur") or "")
-        if img and RE_REAL.search(img) and _norm(img) != _norm(cur):
-            was_gif = RE_PLACEHOLDER.search(cur) is not None
-            fout.write(json.dumps({"isbn13": isbn, "cover_url": img, "slug": r["slug"],
-                                   "number": r["number"],
-                                   "reason": "placeholder_gif→real" if was_gif else "cover_url変化(レーベルロゴ型)",
-                                   "at": time.strftime("%Y-%m-%d")}, ensure_ascii=False) + "\n")
-            fout.flush()                      # ★逐次保存(停止しても残る)
-            done[isbn] = "replaced"
-            n_rep += 1
-        elif img:
-            done[isbn] = "still_placeholder"  # gif据置き or URL不変(新刊窓)
-            n_still += 1
-        else:
-            done[isbn] = "no_item"
-            n_none += 1
-        if i % 20 == 0:
-            json.dump(done, io.open(DONE, "w", encoding="utf-8"))
-            print(f"  …{i}/{len(batch)} 実物{n_rep} 仮のまま{n_still}", flush=True)
     fout.close()
-    json.dump(done, io.open(DONE, "w", encoding="utf-8"))
-    print(f"\n実物に差し替え {n_rep} / まだ仮 {n_still} / 該当なし {n_none}")
+    print(f"\n実物に差し替え {t_rep} / まだ仮 {t_still} / 該当なし {t_none}")
     print(f"  seed 追記 → {os.path.relpath(OUT, ROOT)}")
-    print(f"  残 {len([r for r in q if r['isbn'] not in done])}件 → 同じコマンドで続き")
-    return 0
+    if not todo and not throttled:
+        print("★queue 消化済み(一巡完了)")
+    else:
+        print(f"  残 {len(todo)}件 → {'次の手すきで再開(--all)' if throttled else '同じコマンドで続き'}")
+    return 2 if throttled else 0
 
 
 if __name__ == "__main__":
