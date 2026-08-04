@@ -30,7 +30,6 @@ editions:
 - type: standard
   label: 通常版
   publisher: 少年画報社
-  imprint: YKコミックス
   volumes:
   - number: 1
     asin: null
@@ -167,6 +166,18 @@ editions:
     isbn13: '9784785951115'
     cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/1115/9784785951115.jpg?_ex=200x200
     release_date: 2013-09
+  - number: 28
+    asin: null
+    isbn13: '9784063930238'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0238/9784063930238.jpg?_ex=200x200
+    release_date: '2016-08-17'
+    publisher: 講談社
+  - number: 29
+    asin: null
+    isbn13: '9784063931501'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/1501/9784063931501.jpg?_ex=200x200
+    release_date: '2017-03-09'
+    publisher: 講談社
   - number: 30
     asin: null
     isbn13: '9784065106709'
@@ -218,7 +229,6 @@ editions:
 - type: deluxe
   label: デラックス版
   publisher: 講談社
-  imprint: 講談社コミックスデラックス
   volumes:
   - number: 1
     asin: null
@@ -355,16 +365,6 @@ editions:
     isbn13: '9784063774177'
     cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/4177/9784063774177.jpg?_ex=200x200
     release_date: '2016-08-17'
-  - number: 28
-    asin: null
-    isbn13: '9784063930238'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0238/9784063930238.jpg?_ex=200x200
-    release_date: '2016-08-17'
-  - number: 29
-    asin: null
-    isbn13: '9784063931501'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/1501/9784063931501.jpg?_ex=200x200
-    release_date: '2017-03-09'
 publishers:
 - kodansha
 - shonen-gahosha
