@@ -41317,3 +41317,31 @@ volumes:
   source: rakuten-live
   added_at: '2026-08-05'
   note: クエリ側括弧盲点の系統再走(剥き題クエリ)で発見
+- series_keys:
+  - qid:Q24273190|name:SERVAMP
+  - qid:Q24273190|name:SERVAMP.
+  - qid:Q24273190|name:Servamp
+  qid: null
+  number: 22
+  isbn13: '9784046840806'
+  release_date: 2024-10
+  publisher: KADOKAWA
+  edition_type: standard
+  title_display: SERVAMP 22
+  source: ndl-live
+  added_at: '2026-08-05'
+  note: ユーザ発見(22,23欠け・24は種2既在)。NDL素の検索は分冊版150件に埋もれる→creator束縛で単行本層を取得(MFコミックス ジーンシリーズ)
+- series_keys:
+  - qid:Q24273190|name:SERVAMP
+  - qid:Q24273190|name:SERVAMP.
+  - qid:Q24273190|name:Servamp
+  qid: null
+  number: 23
+  isbn13: '9784046841025'
+  release_date: 2024-11
+  publisher: KADOKAWA
+  edition_type: standard
+  title_display: SERVAMP 23
+  source: ndl-live
+  added_at: '2026-08-05'
+  note: ユーザ発見(22,23欠け・24は種2既在)。NDL素の検索は分冊版150件に埋もれる→creator束縛で単行本層を取得(MFコミックス ジーンシリーズ)
