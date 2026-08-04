@@ -47,10 +47,40 @@ python scripts/_placeholder-cover-refresh.py --build-queue # 月1でqueue再算�
 git add data/seeds/cover-override.jsonl && git commit -m "仮書影→実物 差し替え N件" && git push
 ```
 
+## ★反映(Opus+専権)= トリガー「仮書影反映して」(2026-08-04 明文化)
+
+溜まった cover-override.jsonl を頁に反映する時はこの一言でよい。手順:
+1. **未反映slugの列挙**(seedのcover_urlと頁の実値が異なるslugだけ抽出。_ex=200x200/300x300の差は
+   promoteが正規化するので同一視):
+```
+python - <<'EOF'
+import json,io,yaml,os,re
+try: from yaml import CSafeLoader as L
+except ImportError: from yaml import SafeLoader as L
+norm=lambda u: re.sub(r"\?_ex=\d+x\d+$","",u or "")
+ovr={}
+for ln in io.open("data/seeds/cover-override.jsonl",encoding="utf-8"):
+    d=json.loads(ln); ovr[str(d.get("isbn13"))]=(d.get("slug"), d.get("cover_url") or None)
+todo=set()
+for ib,(s,want) in ovr.items():
+    p=f"data/manga.v2/{s}.yml"
+    if not s or not os.path.exists(p): continue
+    y=yaml.load(io.open(p,encoding="utf-8"),Loader=L)
+    for e in y.get("editions") or []:
+        for v in e.get("volumes") or []:
+            if str(v.get("isbn13"))==ib and norm(v.get("cover_url"))!=norm(want):
+                todo.add(s)
+print(",".join(sorted(todo)))
+EOF
+```
+2. `python scripts/_reflect-targeted.py --only <slugリスト> --push`(多い時は700件/チャンクで
+   `--commit-only` を重ね、最後に1回push。[[romcom_backfill_state]]のチャンク実測=700頁/約65秒)。
+3. 反映されない時の既知型: slug-override頁は**SRC stem**で指定(公開slugでない)。
+
 ## ★このskillが「やらない」こと
 
 - **頁への反映はしない**。seed に書くだけ。実際に頁の書影が変わるのは上位モデルの
-  「**反映して**」(reflect-targeted)か週次蒸留。Sonnetは seed 追記まで。
+  「**仮書影反映して**」(上記)か週次蒸留。Sonnetは seed 追記まで。
 - **旧作(2019年以前)は既定で触らない**。引いても `.gif` のままで無駄撃ちになる。
   やるなら明示的に `--build-queue --since-year 2000`(Opus判断)。
 - 書影URLの**構築はしない**(ISBNからパス/サフィックス/拡張子は推測不可=実URLのみ。
