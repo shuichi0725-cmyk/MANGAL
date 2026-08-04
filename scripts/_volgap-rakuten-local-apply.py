@@ -16,8 +16,9 @@ SEED = os.path.join(ROOT, "data", "seeds", "volumes-supplement-auto.yml")
 APPLY = "--apply" in sys.argv
 TODAY = datetime.date.today().isoformat()
 
-rows = [r for r in json.load(open(os.path.join(ROOT, ".cache", "volgap-rakuten-local2.json"), encoding="utf-8"))
-        if r["tier"] == "STRICT"]
+IN = sys.argv[sys.argv.index("--in") + 1] if "--in" in sys.argv else os.path.join(ROOT, ".cache", "volgap-rakuten-local2.json")
+SRCTAG = sys.argv[sys.argv.index("--source") + 1] if "--source" in sys.argv else "rakuten-local"
+rows = [r for r in json.load(open(IN, encoding="utf-8")) if r["tier"] == "STRICT"]
 print(f"STRICT {len(rows)} 巻 / {len({r['stem'] for r in rows})} 頁", flush=True)
 
 # --- 正確な salesDate を取り直す ---
@@ -89,7 +90,7 @@ for r in rows:
         "publisher": r["publisher"],
         "edition_type": r["etype"],
         "title_display": r.get("rakuten_title") or r.get("raw") or "",
-        "source": "rakuten-local",
+        "source": SRCTAG,
         "added_at": TODAY,
         "note": f"巻抜けローカル楽天種fill slug={r['stem']} gate=題完全一致+版prefix{r['cand_prefix']}+日付整合+著者{r['author_ok']}",
     })
