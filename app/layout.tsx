@@ -56,6 +56,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           </p>
         </footer>
         <ScrollTopButton />
+        {/* ValueCommerce LinkSwitch (2026-08-05): BookLive等の提携広告主への素リンクを
+            クリック時に自動でアフィリエイトリンクへ変換する。個別リンク加工不要
+            (試し読みボタン結線時に25,149アンカーがそのまま収益化対象になる)。
+            タグはVC管理画面「LinkSwitch設定」発行の正規スニペット(vc_pid=サイトID紐付き)。 */}
+        <script
+          dangerouslySetInnerHTML={{ __html: 'var vc_pid = "892673489";' }}
+        />
+        <script src="https://aml.valuecommerce.com/vcdal.js" async />
       </body>
     </html>
   );

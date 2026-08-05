@@ -26,3 +26,5 @@ MANGAL の収益の心臓部 = 各作品ページに「**この作品が読め�
 ★2026-07-12 ユーザ裁定: **購入ボタンUIはハイブリッド型**。紙(楽天・Amazon等)= 従来どおり**直ボタンのまま**。電子= 「**電子書籍で買う**」ボタンを1個追加し、押すと**電書ストアのリストが出る**(マンバ型の選択リストは電子だけに適用)。理由=電子はポイント経済圏(PayPay/dポイント等)でユーザのストア選好が割れる+複数ASP収益化に直結、紙は楽天起点で確立済み。電書ASP提携が揃い次第このリストに追加していく。試し読みリンク(BookLive、[[tameshiyomi seed=data/seeds/tameshiyomi-booklive-volumes.jsonl 12,175巻]])は別ボタン。
 
 **Amazonアソシエイト開設(2026-07-29)**: ストアID=**mangal08-22**。`.env.local` の `NEXT_PUBLIC_AMAZON_ASSOCIATE_TAG` で配線済(未設定build=素リンクfallback)。紙は**ASIN=ISBN-10**なので `lib/amazon.ts isbn13ToIsbn10()` で全巻 /dp/ 直リンク化(979系のみ検索fallback)。★**180日以内に3件成果で本登録**=週次で本番に出たら早期に成果確認。Kindle別ASIN/書影は将来PA-API(合格後)。
+
+**ValueCommerce/LinkSwitch(2026-08-05 ユーザ申込)**: バリューコマースにサイト登録(mangal ID:3777739・申込時審査中)し**BookLive!プログラム**へ申請。★**LinkSwitch** = layoutに貼った1タグ(vc_pid=892673489+aml.valuecommerce.com/vcdal.js)が、提携広告主ドメインへの**素リンクをクリック時に自動でアフィリエイトリンク変換**する仕組み。個別リンク加工不要=試し読みアンカー25,149件(BookLive title_id)の結線がそのまま収益化になる。タグは app/layout.tsx 末尾に実装済(2026-08-05・本番反映は週次/機能蒸留待ち)。PR表記は結線時に既存のPR方針に合わせること。
