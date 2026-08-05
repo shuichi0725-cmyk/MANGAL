@@ -25,4 +25,4 @@ metadata:
 
 **How to apply:** 巻抜けper-caseで NDL/楽天が空振りしたら JPRO title_text 検索。ISBNが取れたら日付/書影は楽天ISBN直引きで補完([[cover-source-affiliate-only]])。レート配慮=手動per-case規模で使う(大量sweepに使う前にユーザ相談)。
 
-**柱化済(2026-08-05)**: skill jpro-harvest = アイドル運転の柱⑫(Sonnet)。`scripts/_jpro-harvest.py` が巻抜け未解決slug(queue~198)を無判断で全量収集→`data/seeds/jpro-harvest.jsonl`。ONE PIECE=355行が1POSTで返る(ページネーション無し)。適用=「JPRO判定して」(Opus専権・版取り違え判別つき)。
+**運用形態(2026-08-05 同日で設計替え)**: 柱⑫(Sonnet一括収穫)は**同日退役**=ユーザ裁定「一括では思ったような改善が見られない」。実測でも成果は毎回Opusのper-case検死(偽穴/版取り違えの判定)で出た。以後は**Opusのper-case検死道具**: 1穴ずつ 検死→JPRO題名照会(全ISBN一覧)→楽天/NDL裏取り→適用。skill jpro-harvest参照。収穫済み198slug素材(data/seeds/jpro-harvest.jsonl)は温存・参照材料。ONE PIECE=355行が1POSTで返る(ページネーション無し)。

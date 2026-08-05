@@ -1,73 +1,64 @@
 ---
 name: jpro-harvest
-description: JPROして=JPRO出版権検索(出版社登録の権利DB)から巻抜け未解決slugの題名検索結果を無判断で全量収集。逐次保存・自然停止・冪等再開。Sonnet運転前提(アイドル運転の柱⑫)。適用=「JPRO判定して」(Opus専権)
+description: JPROして=JPRO出版権検索(出版社登録の権利DB)をOpusのper-case検死道具として使い、巻抜けを1件ずつ 検死→JPRO→裏取り→適用 で潰す。柱⑫(Sonnet一括収穫)は2026-08-05退役
 ---
 
-# JPROハーベスト (= トリガー「JPROして/JPRO続けて」/ アイドル運転の柱⑫。2026-08-05 ユーザ裁定で新設)
+# JPRO巻抜けper-case (= トリガー「JPROして」「〈作品名〉でJPROして」。Opus専権)
 
-## 何の問題か
+## 経緯 (= 2026-08-05 同日で設計替え)
 
-巻抜けハントでNDL(納本ラグ/欠落)・楽天(在庫切れ非表示)の両方が空振りする層が残る。
-**JPRO出版権検索**(jpro2.jpo.or.jp = 出版社が自分で登録する権利DB)は題名検索で
-**シリーズ全巻のISBN+発行元が欠けなく出る**(実証=「10年間友達だと思ってた男の子に告白されるお話」
-で紙1-10全ISBN一発→欠落7巻を即特定)。ログイン不要・CSRF+cookieの正規POSTで検索可能。
+朝: 柱⑫として「Sonnet全量収穫→Opus一括判定」で新設 → 夕: **ユーザ裁定で退役**。
+理由=一括収穫(198slug)→一括判定は、機械ゲートを4重にしても**偽穴・版取り違えを裁き切れず**、
+成果が出たのは毎回「Opusが1作を検死した瞬間」だった(実測: スカイハイ=偽穴/あばしり=偽穴+幽霊巻混在/
+君の刀=副題型/COBRA=題違い+別線)。ボトルネックは収集でなく判断。
+収穫済み素材 `data/seeds/jpro-harvest.jsonl`(198slug)は温存=検死時の参照材料(再収穫はしない)。
 
-## 設計 = 全量取得→後段判断 (= ユーザ裁定 2026-08-05)
+## JPROとは (= 何が引けるか)
 
-人気作は関連本込みで検索結果100行超(ONE PIECE=355行・ページネーション無し=1POSTで全量)。
-**Sonnetは判断せず全部保存**する(= 取れる情報は全部取る)。抜けの判定・seed書込は
-後段Opus「**JPRO判定して**」の専権。
+jpro2.jpo.or.jp/limit/pubrights/Index = 出版社が自分で登録する出版権DB。**ログイン不要**
+(GET→cookie+`_token`→POST。手順の正=memory [[jpro_pubrights_search]])。
+題名検索で**シリーズ全巻のISBN+発行元が欠けなく出る**(ページネーション無し・1POSTで全量)。
+NDL納本ラグ・楽天在庫切れ非表示の影響を受けない。★版種は持たない(文庫/新装が同題で混ざる)。
 
-## 運転 (= Sonnet。判断は要らない)
+## per-case手順 (= 1穴ずつ。ユーザが作品名を指定 or 台帳から1件取る)
 
+1. **穴の検死が先**(★埋めるな、疑え): 頁の版構成・隣接巻ISBN帯・日付を見て
+   「その穴は本物か」を判定。偽穴の既知型:
+   - **続編混入型**(スカイハイIV): 別シリーズ単巻が本編vNに座りmaxを押し上げ偽欠番を作る
+   - **幽霊巻混在型**(あばしり): 別版のISBN無し巻が版内に混ざりmaxを押し上げる
+   - **別線衝突型**(ギャングキングKCDX): 同番号が別版に既在=版またぎ統合が正解
+2. **JPRO題名検索**で全ISBN一覧を取得(副題付き・巻番号なし表記に注意=君の刀型)。
+   頁の全ISBNと突合し「JPROに在って頁に無い」だけを候補化。
+3. **裏取り必須**: 楽天ISBN直引きで size/叢書名/著者/日付を確認(JPROは版種を持たないため
+   文庫別刷/学術全集影武者/デザートKC型が混ざる)。楽天無しの旧刊はNDL。
+4. **適用**: 種2無し=種4(volumes-supplement) / 種2在=edition-overrides
+   (★キーは公開slug=[[edition_overrides_key_is_public_slug]])。版が違えば版分離・題違いはtitle override。
+5. **反映+記帳**: reflect-targeted(SRC stem指定)→ 台帳TSV(preview-volgap-local.tsv)に裁定を書く。
+   偽穴も「なぜ偽か」を必ず記帳(次に同じ穴を掘らないため)。
+
+## ワンオフ検索の実体 (= コピペ用)
+
+```python
+# GET→token→POST(title_text=題)。結果=trテーブル(媒体/ebookflag/ISBN/出版物名/発行元/出版権)
+# 実装例は .cache/_jpro-adjudicate.py 冒頭 or memory jpro_pubrights_search
 ```
-python scripts/_jpro-harvest.py --limit 100    # 1バッチ(~4分)。再起動で続き
-python scripts/_jpro-harvest.py --stats        # 現在地
-python scripts/_jpro-harvest.py --build-queue  # queue再算出(巻抜け台帳の未解決slug。Opus作業)
-```
+- creator束縛(contributorName)は登録が薄く旧刊で空振りしやすい=まず題のみで。
+- レート: per-case規模(数req)なら気にしない。連打sweepはしない(業界インフラ=行儀最優先)。
 
-- 1slug=1POST(media=0=紙)。レート2.0秒/req・50reqごとにセッション取り直し。
-- 成果 = `data/seeds/jpro-harvest.jsonl` に**1slug1行追記**(逐次保存・停止しても残る)。
-  行形式: `{slug, query(頁題), missing(抜け巻), n_hits, hits:[{isbn13,title,publisher,media}], at}`
-- 進捗 = `.cache/jpro-harvest/done.json`(冪等再開)。queueが尽きたら「消化済み(自然停止)」。
-- 連続失敗は script が backoff(5/20/60s)で吸収→ダメなら進捗保存して終了。**待たない・調べない**。
+## 判定の道具箱 (= 初回一括判定で実証したゲート。per-caseでも同じ基準)
 
-### 締め (= バッチ後)
-```
-git add data/seeds/jpro-harvest.jsonl && git commit -m "JPROハーベスト N slug" && git push
-```
-
-## ★適用(Opus専権)= トリガー「JPRO判定して」
-
-台帳の hits と頁の実ISBNを突き合わせ、抜け巻を埋める。手順の要点:
-1. hits から**頁題+巻数パターンの行だけ**を抽出(関連本ノイズ=ファンブック/勝利学/弁当BOOK等を落とす。
-   DROP_TITLE_CONTAINS_PATTERNS と同じ感覚。題正規化は巻抜けハントの norm/norm_np を使う)。
-2. 巻番号を題末尾から採り、**頁の抜け番号と一致**するISBNだけ候補化。
-3. **種2在チェック**(在ればedition-overrides、無ければ種4)。日付・書影は楽天ISBN直引きで補完。
-4. 版の判別に注意: JPROは版種を持たない。文庫/新装が同題で混ざる(あばしり一家=角川の新装ISBN群が出る型)
-   → **ISBN帯・発行元と頁の版アンカーを突合**してから入れる(版取り違え禁止=[[edition_mix_same_author_ayako]])。
-5. 反映=reflect-targeted。台帳TSV(preview-volgap-local.tsv)に裁定を記帳。
-
-
-### 初回実測の知見(2026-08-05: OK32→楽天裏取りで21巻適用・11巻却下)
-- 判定器の必須ゲート: **残余語検査**(スカイハイ「新章」=別シリーズが前方一致をすり抜ける)+**4桁年号ガード**(ねこぱんち「2019」→巻19誤パース)。
-- ★**楽天ISBN直引きの実物裏取りは省略不可**: JPROは版種を持たないため、帯✓でも「MF文庫の別刷(アタゴオル)」「学術全集の同題影武者(世界の歴史=樺山紘一)」「デザートKC(はいからさん)」が混ざる。sizeと叢書名で最終確認してから入れる。
-- 種2在candidatesの適用先=edition-overrides。★**overridesのキーは公開slug**(slug-override後)。SRC stemで書くと死にキー=一度も適用されない(2026-08-05に15件発掘・是正済)。
-- 判定器の実体= .cache/_jpro-adjudicate.py(使い捨てでなく再走可能。層別=OK/残余語/番号飛び/帯・発行元不一致)。
-
-## ★このskillが「やらない」こと
-
-- **判断しない**(関連本の除外も巻番号の解釈もしない=全部保存)。
-- **seed(種4/overrides)に書かない**。書くのはOpus「JPRO判定して」。
-- 電子(media=1)は引かない(電子限定はスコープ外=[[ebook_only_editions_out_of_scope]])。
-- 大量並走しない(1プロセス・2秒/req厳守。相手は業界インフラ=行儀最優先)。
+- 残余語検査(新章型=別シリーズ弾き)+**副題学習**(君の刀型=頁既知ISBNのヒットに付く残余語は正当な副題)
+- 4桁年号ガード(ねこぱんち2019→巻19誤パース)
+- 帯(ISBN先頭8桁)×発行元の版アンカー突合
+- 番号飛びは自動適用しない(通巻/別線の疑い)
 
 ## NEVER
 
-- ログイン欄に触らない(検索はログイン不要領域のみ)。
-- `--build-queue` を毎バッチ走らせない(queueは台帳更新後にOpusが再算出)。
-- SSL検証外し(script内蔵)はこのサイトの読み取り専用文脈に限る。他所へ流用しない。
+- ログイン欄に触らない / SSL検証外しはこのサイト読み取り専用文脈のみ
+- 一括sweepに戻さない(ユーザ裁定 2026-08-05)。柱⑫の再有効化はユーザ指示のみ
+- 裏取り(楽天/NDL実物)を省略しない=JPROは版種を持たない
 
 ## 関連
 
-- アクセス手順の記憶=[[jpro_pubrights_search]] / 常設運転=skill idle-run(柱⑫) / 適用先=種4([[volgap_mostly_undermerge]])
+- アクセス手順=[[jpro_pubrights_search]] / 死にキー教訓=[[edition_overrides_key_is_public_slug]] /
+  per-case全般=skill percase-fix / 収穫済み素材=data/seeds/jpro-harvest.jsonl(温存)

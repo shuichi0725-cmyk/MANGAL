@@ -32,7 +32,7 @@ skill 実体 = `.claude/skills/<name>/SKILL.md`(git追跡。Opus 4.8 等でも�
 | **「ジャンル検品して/Gemini検品」** | gemini-genre-audit | 本番provisionalジャンル・要素(~25k頁)をGeminiブラインド検品→不一致だけ裁定。429まで回す常設アイドルジョブ・試し読みと並走可 | ~500件/日 |
 | **「アイドル運転して」/「やめて」** | idle-run | 常設柱(試し読み+Gemini検品連鎖+ヨミ照合+完結判定+素材ハーベスト)を無限ループbackground起動。やめて=成果無駄なく即停止・同語で再開。Sonnet運転前提 | 無期限 |
 | **「素材ハーベストして」** | material-harvest | 本番に書かず素材だけ収集(発売日精密化/wiki本文+infobox/賞P166/魚残差)。生成・反映は各既存protocol。Sonnet運転前提 | フェーズ次第 |
-| **「JPROして/JPRO続けて」** | jpro-harvest | JPRO出版権検索(出版社登録DB・ログイン不要)で巻抜け未解決slugの題名検索結果を無判断で全量収集→jpro-harvest.jsonl(アイドル柱⑫)。**適用=「JPRO判定して」(Opus専権)** | 100slug/回 ~4分 |
+| **「JPROして」「〈作品名〉でJPROして」** | jpro-harvest | **Opus per-case**: 巻抜けを1件ずつ 穴の検死→JPRO全ISBN照会→楽天/NDL裏取り→適用→記帳。一括収穫の柱⑫は2026-08-05退役(偽穴・版取り違えを裁き切れない) | 1作数分 |
 | **「ラブコメ判定して/続けて」** | romcom-judge | romance∩comedy候補(残~4,600)を材料ベースでromcom裁定→台帳へ逐次保存(fail-closed・知識判定禁止・**Sonnet運転前提**)。適用=「ラブコメ適用して」(Opus+専権) | 100件/batch |
 
 ## 常時参照系skill(トリガー語でなく状況で発動)
