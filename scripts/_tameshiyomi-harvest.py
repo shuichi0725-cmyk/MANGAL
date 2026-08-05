@@ -56,16 +56,21 @@ def load_done():
 
 
 def targets(limit):
+    # ★デルタ恒常化(2026-08-06 ユーザ指示「日々増える新作を取得」):
+    #   ①popularity=0の足切りを廃止(新作・マイナー作はpop0=旧ゲートだと永久に収集されなかった)
+    #   ②並び=latest_date降順(新しい作品から先に拾う=日次蒸留の新規頁が次バッチの先頭に来る)
+    #   除外=収集済み(seed)∪保留(holds)。queueは索引から毎回再算出なので新規頁は自動で列に入る。
     li = json.load(open(os.path.join(ROOT, "data", "manga-list-index.json"), encoding="utf-8"))
     f = li["f"]
-    isl, it, ia, ipop = f.index("slug"), f.index("title"), f.index("authors"), f.index("popularity")
-    rows = sorted(li["d"], key=lambda r: -(r[ipop] or 0))
+    isl, it, ia = f.index("slug"), f.index("title"), f.index("authors")
+    ild = f.index("latest_date")
+    rows = sorted(li["d"], key=lambda r: str(r[ild] or ""), reverse=True)
     done, holds = load_done()
     out = []
     for r in rows:
         if len(out) >= limit:
             break
-        if r[isl] in done or r[isl] in holds or not (r[ipop] or 0):
+        if r[isl] in done or r[isl] in holds:
             continue
         out.append((r[isl], r[it], [au_name(a) for a in (r[ia] or [])]))
     return out

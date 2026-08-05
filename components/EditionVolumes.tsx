@@ -38,10 +38,12 @@ function Grow({ open, children }: { open: boolean; children: React.ReactNode }) 
 
 export default function EditionVolumes({
   manga,
+  bl,
   edition,
   defaultCollapsed = false,
 }: {
   manga: Manga;
+  bl?: { id: string; max: number; miss?: number[] } | null;
   edition: Edition;
   defaultCollapsed?: boolean;
 }) {
@@ -140,7 +142,7 @@ export default function EditionVolumes({
         volumes={vols}
         publisher={edition.publisher}
         imprint={edition.imprint}
-        slug={manga.slug}
+        bl={bl}
       />
       </div>
       </Grow>

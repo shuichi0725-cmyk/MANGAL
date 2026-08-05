@@ -1,5 +1,6 @@
 import type { Edition, Manga } from "@/lib/schema";
 import EditionVolumes from "./EditionVolumes";
+import { getTameshiyomi } from "@/lib/tameshiyomi";
 
 type Props = { manga: Manga };
 
@@ -67,7 +68,7 @@ export default function VolumeRow({ manga }: Props) {
         >
           {/* 版本体 (= ISBNが重なる刷のみ EditionVolumes 内でタブ切替)。
               ★コーフロー化で省スペースになったので全版を開いて表示。 */}
-          <EditionVolumes manga={manga} edition={ed} defaultCollapsed={false} />
+          <EditionVolumes manga={manga} edition={ed} defaultCollapsed={false} bl={getTameshiyomi(manga.slug)} />
         </section>
       ))}
     </div>
