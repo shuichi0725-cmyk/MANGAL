@@ -34,13 +34,24 @@ editions:
   - number: 1
     asin: null
     isbn13: '9784575848779'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/8779/9784575848779.jpg?_ex=200x200
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/8779/9784575848779.jpg?_ex=300x300
     release_date: '2016-10-22'
-  - number: 3
+- type: standard
+  label: ジュールコミックス版
+  publisher: 双葉社
+  imprint: JOUR COMICS
+  volumes:
+  - number: 1
+    volume_label: 上
+    asin: null
+    isbn13: '9784575338683'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/8683/9784575338683_1_2.jpg?_ex=300x300
+    release_date: 2022-01
+  - number: 2
     volume_label: 下
     asin: null
     isbn13: '9784575338690'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/8690/9784575338690_1_2.jpg?_ex=200x200
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/8690/9784575338690_1_2.jpg?_ex=300x300
     release_date: '2022-01-17'
 publishers:
 - futabasha

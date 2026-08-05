@@ -11,6 +11,14 @@ authors:
   role: artist
   kana: ハギワラレイジ
   romaji: hagiwarareiji
+- name: 鯛夢
+  role: artist
+  kana: タイム
+  romaji: taimu
+- name: 山根聖史
+  role: artist
+  kana: ヤマネキヨシ
+  romaji: yamanekiyoshi
 original_authors:
 - name: 小松左京
   role: writer
@@ -42,13 +50,31 @@ editions:
     volume_label: 第1夜
     asin: null
     isbn13: '9784834231953'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/1953/9784834231953.jpg?_ex=200x200
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/1953/9784834231953.jpg?_ex=300x300
     release_date: '2013-07-19'
+  - number: 2
+    volume_label: 第2夜
+    asin: null
+    isbn13: '9784834231960'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/1960/9784834231960.jpg?_ex=300x300
+    release_date: '2013-07-19'
+  - number: 3
+    volume_label: 第3夜
+    asin: null
+    isbn13: '9784834232110'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/2110/9784834232110.jpg?_ex=300x300
+    release_date: '2014-04-18'
+  - number: 4
+    volume_label: 第4夜
+    asin: null
+    isbn13: '9784834232158'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/2158/9784834232158.jpg?_ex=300x300
+    release_date: '2014-07-18'
   - number: 5
     volume_label: 第5夜
     asin: null
     isbn13: '9784834232356'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/2356/9784834232356.jpg?_ex=200x200
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/2356/9784834232356.jpg?_ex=300x300
     release_date: '2015-07-17'
 publishers:
 - home-sha
