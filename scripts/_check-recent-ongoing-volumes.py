@@ -61,12 +61,24 @@ def strip_paren(s):
     return _PAREN.sub("", str(s or "")).strip()
 
 
-def series_match(base, found):
-    """same_series を 生題/剥き題 の両方で判定(括弧読み型対応)。"""
+def series_match(base, found, subtitles=()):
+    """same_series を 生題/剥き題 の両方で判定(括弧読み型対応)。
+    ★subtitles=学習済み副題(君の刀型 2026-08-05): 頁既知ISBNのヒットに付く残余語=正当な副題として許可。"""
     if C.same_series(base, found):
         return True
     sb = strip_paren(base)
-    return bool(sb) and sb != base and C.same_series(sb, found)
+    if sb and sb != base and C.same_series(sb, found):
+        return True
+    nb = C.norm(found)
+    for sub in subtitles:
+        for nt0 in (C.norm(base), C.norm(strip_paren(base))):
+            if nt0 and nb.startswith(nt0):
+                resid = nb[len(nt0):]
+                if sub and sub in resid:
+                    resid = resid.replace(sub, "", 1)
+                if C.RESIDUAL_OK.fullmatch(resid):
+                    return True
+    return False
 
 
 def build_queue():
@@ -86,6 +98,7 @@ def build_queue():
         vols = set()
         years = []
         bands = set()
+        isbns = set()
         for e in d.get("editions") or []:
             for v in e.get("volumes") or []:
                 if isinstance(v.get("number"), int):
@@ -96,12 +109,13 @@ def build_queue():
                 ib = str(v.get("isbn13") or "")
                 if len(ib) == 13:
                     bands.add(ib[:8])   # ★ISBN出版者記号帯(帯救済ゲート用)
+                    isbns.add(ib)       # ★既知ISBN(副題学習ゲート用)
         if not vols:
             continue
         aus = [a.get("name") for a in (d.get("authors") or []) if a.get("name")]
         rows.append({"slug": slug, "title": title, "authors": aus,
                      "vols": sorted(vols), "last_year": max(years) if years else "",
-                     "bands": sorted(bands)})
+                     "bands": sorted(bands), "isbns": sorted(isbns)})
     if OUT.exists():
         arc = ROOT / ".cache" / "zokkan-cycles"
         arc.mkdir(parents=True, exist_ok=True)
@@ -141,14 +155,28 @@ def main():
             have = set(r["vols"])
             mv = max(have) if have else 0
             bands = set(r.get("bands") or [])
+            known = set(r.get("isbns") or [])
+            subtitles = set()   # ★既知ISBNヒットの残余語=このシリーズの副題(君の刀型)
             trail, gap, near = [], [], []
             trunc = False
             seen_v = set()
 
+            def learn(it):
+                """既知ISBNのヒットから副題(残余語)を学習"""
+                if str(it.get("isbn") or "") not in known:
+                    return
+                nb = C.norm(str(it.get("title") or ""))
+                m2 = _re.search(r"[0-9]+$", nb)
+                if m2:
+                    nb = nb[: m2.start()]
+                for nt0 in (C.norm(r["title"]), C.norm(strip_paren(r["title"]))):
+                    if nt0 and nb.startswith(nt0) and len(nb) > len(nt0):
+                        subtitles.add(nb[len(nt0):])
+
             def judge(it):
                 """1候補をゲート審査。採用→(rec,'trail'/'gap') / 弾き→(near記録,None) / 対象外→(None,None)"""
                 t, au = str(it.get("title") or ""), str(it.get("author") or "")
-                if not series_match(r["title"], t):
+                if not series_match(r["title"], t, subtitles):
                     return None, None
                 if C.NOISE.search(t):
                     return None, None
@@ -174,6 +202,8 @@ def main():
             try:
                 items = L.rakuten_live_retry(env, title=r["title"], hits=30) or []
                 trunc = len(items) >= 30          # ★30件上限に当たった=長期連載は取りこぼしうる
+                for it in items:
+                    learn(it)
                 for it in items:
                     rec, kind = judge(it)
                     if rec:
