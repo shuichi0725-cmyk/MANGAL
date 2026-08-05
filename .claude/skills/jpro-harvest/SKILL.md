@@ -48,6 +48,13 @@ git add data/seeds/jpro-harvest.jsonl && git commit -m "JPROハーベスト N sl
    → **ISBN帯・発行元と頁の版アンカーを突合**してから入れる(版取り違え禁止=[[edition_mix_same_author_ayako]])。
 5. 反映=reflect-targeted。台帳TSV(preview-volgap-local.tsv)に裁定を記帳。
 
+
+### 初回実測の知見(2026-08-05: OK32→楽天裏取りで21巻適用・11巻却下)
+- 判定器の必須ゲート: **残余語検査**(スカイハイ「新章」=別シリーズが前方一致をすり抜ける)+**4桁年号ガード**(ねこぱんち「2019」→巻19誤パース)。
+- ★**楽天ISBN直引きの実物裏取りは省略不可**: JPROは版種を持たないため、帯✓でも「MF文庫の別刷(アタゴオル)」「学術全集の同題影武者(世界の歴史=樺山紘一)」「デザートKC(はいからさん)」が混ざる。sizeと叢書名で最終確認してから入れる。
+- 種2在candidatesの適用先=edition-overrides。★**overridesのキーは公開slug**(slug-override後)。SRC stemで書くと死にキー=一度も適用されない(2026-08-05に15件発掘・是正済)。
+- 判定器の実体= .cache/_jpro-adjudicate.py(使い捨てでなく再走可能。層別=OK/残余語/番号飛び/帯・発行元不一致)。
+
 ## ★このskillが「やらない」こと
 
 - **判断しない**(関連本の除外も巻番号の解釈もしない=全部保存)。
