@@ -119,7 +119,7 @@ def build_queue():
     if OUT.exists():
         arc = ROOT / ".cache" / "zokkan-cycles"
         arc.mkdir(parents=True, exist_ok=True)
-        OUT.rename(arc / f"recent-ongoing-volumes-{time.strftime('%Y%m%d')}.jsonl")
+        OUT.rename(arc / f"recent-ongoing-volumes-{time.strftime('%Y%m%d-%H%M')}.jsonl")
         print(f"前周回の結果を {arc} へrotate")
     json.dump(rows, SRC.open("w", encoding="utf-8"), ensure_ascii=False)
     print(f"queue再算出: {len(rows)}作(連載中/休載) → {SRC}")
