@@ -41758,3 +41758,31 @@ volumes:
   source: jpro
   added_at: '2026-08-05'
   note: 'ユーザ指定JPRO照会+仮説的中: 頁題に副題(〜月宮まつりの恋難き〜)が無く、外部題は副題付き=残余語ゲートが別シリーズと誤認して弾く型。v4のみ種2にも無い取込もれ'
+- series_keys:
+  - qid:Q2630137|name:COBRA
+  - qid:Q2630137|name:Cobra
+  - qid:Q2630137|name:Cobra|sub:Cobra the space pirate
+  qid: null
+  number: 13
+  isbn13: '9784040675169'
+  release_date: '2015-04-25'
+  publisher: KADOKAWA
+  edition_type: standard
+  title_display: COBRA 13 タイム・ドライブ
+  source: rakuten-live
+  added_at: '2026-08-05'
+  note: 'ユーザWikiリンクpercase(COBRA全大文字指摘の同時発見): 2015年KADOKAWA線13-15のうち頁はv15のみ在→13,14補完(v15と同帯9784040675x)'
+- series_keys:
+  - qid:Q2630137|name:COBRA
+  - qid:Q2630137|name:Cobra
+  - qid:Q2630137|name:Cobra|sub:Cobra the space pirate
+  qid: null
+  number: 14
+  isbn13: '9784040675206'
+  release_date: '2015-05-09'
+  publisher: KADOKAWA
+  edition_type: standard
+  title_display: COBRA 14 ギャラクシー・ナイツ
+  source: rakuten-live
+  added_at: '2026-08-05'
+  note: 'ユーザWikiリンクpercase(COBRA全大文字指摘の同時発見): 2015年KADOKAWA線13-15のうち頁はv15のみ在→13,14補完(v15と同帯9784040675x)'
