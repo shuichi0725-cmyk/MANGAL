@@ -37,13 +37,23 @@ editions:
     isbn13: '9784890482719'
     cover_url: null
     release_date: 1990-12
-  - number: 3
+- type: standard
+  label: 歴史群像コミックス版
+  publisher: 学研マーケティング
+  imprint: 歴史群像コミックス
+  volumes:
+  - number: 1
+    volume_label: 上
+    asin: null
+    isbn13: '9784056070569'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0560/05607056.jpg?_ex=300x300
+    release_date: '2010-02-16'
+  - number: 2
     volume_label: 下
     asin: null
     isbn13: '9784056070576'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0560/05607057.jpg?_ex=200x200
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0560/05607057.jpg?_ex=300x300
     release_date: 2010-03
-    publisher: 学研マーケティング
 publishers:
 - nihon-shuppansha
 catch: もうひとつの日本。都市ゲリラに対抗する首都警の特機隊「ケルベロス」。重装備で最前線に立つ彼らだが、その苛烈な手段への反発が高まっていく緊迫のアクション。
