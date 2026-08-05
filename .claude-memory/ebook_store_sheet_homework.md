@@ -21,6 +21,6 @@ metadata:
 - ★素リンクでも**LinkSwitch**(layout実装済み vc_pid=892673489)が提携承認後に自動収益化=提携が通るたびコード変更ゼロで効き始める
 - Phase2: 各ストアID収集で直リンク化(Kobo itemNumber / 電子ASIN=PA-API / ebookjapan等)
 - 既存のKindle/Kobo即飛びボタンはシート内 or 近道として維持
-- 試し読みボタン(bviewer直開き)は**別件**=選択巻カード直下。巻番号整合はランダム8/8実証済み・382,315巻HEAD検証済み([[tameshiyomi-adjudication-state]])
+- ★試し読みボタン=**実装完了**(2026-08-06 テスト成功→全結線): 選択巻カード直下・白地緑枠・bviewer直開き。ビルド時join=data/tameshiyomi-map.json(25,149作)+lib/tameshiyomi.ts。電子パネルは青5(#3b82f6)確定。**本番公開=次の週次蒸留**(map再生成は週次事前再生成に組込済)。収集はデルタ恒常化(pop0足切り廃止・latest_date降順=新作自動追随)
 
 **関連**: [[store-affiliate-architecture]](LinkSwitch詳細) / カラー版コーナー(Kobo/Kindle/BookLive 3ボタン一覧頁)も別宿題=Phase分け議論済み・「あとで」
