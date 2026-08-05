@@ -24,7 +24,6 @@ editions:
 - type: standard
   label: 通常版
   publisher: 祥伝社
-  imprint: Bisho comic
   volumes:
   - number: 1
     asin: null
@@ -36,6 +35,11 @@ editions:
     isbn13: null
     cover_url: null
     release_date: 1982-09
+  - number: 3
+    asin: null
+    isbn13: '9784396710033'
+    cover_url: null
+    release_date: null
   - number: 4
     asin: null
     isbn13: '9784396750169'
@@ -49,7 +53,6 @@ editions:
 - type: bunkobon
   label: 文庫版
   publisher: 双葉社
-  imprint: 双葉文庫・名作シリーズ
   volumes:
   - number: 1
     asin: null

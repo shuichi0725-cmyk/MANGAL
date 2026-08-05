@@ -8706,16 +8706,58 @@
 "release_date": "1985-09"
 },
 {
+"number": 13,
+"asin": null,
+"isbn13": "9784091808431",
+"cover_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/8431/9784091808431.gif?_ex=200x200",
+"release_date": "1985-12-17"
+},
+{
+"number": 14,
+"asin": null,
+"isbn13": "9784091808448",
+"cover_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/8448/9784091808448.gif?_ex=200x200",
+"release_date": "1986-03-29"
+},
+{
 "number": 15,
 "isbn13": null,
 "cover_url": null,
 "release_date": "1986-08"
 },
 {
+"number": 16,
+"asin": null,
+"isbn13": "9784091808462",
+"cover_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/8462/9784091808462.gif?_ex=200x200",
+"release_date": "1986-12-17"
+},
+{
 "number": 17,
 "isbn13": "9784091808479",
 "cover_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/8479/9784091808479.gif?_ex=200x200",
 "release_date": "1987-02"
+},
+{
+"number": 18,
+"asin": null,
+"isbn13": "9784091808486",
+"cover_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/8486/9784091808486.gif?_ex=200x200",
+"release_date": "1987-03-30"
+},
+{
+"number": 19,
+"asin": null,
+"isbn13": "9784091808493",
+"cover_url": null,
+"release_date": "1987-04-30"
+},
+{
+"number": 20,
+"asin": null,
+"isbn13": "9784091808509",
+"cover_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/8509/9784091808509.gif?_ex=200x200",
+"release_date": "1987-05-30"
 }
 ]
 },
@@ -8883,7 +8925,8 @@
 "related_pin": [
 "kamuidendainibu",
 "kamui-den"
-]
+],
+"note": " / JPRO判定初回2026-08-05: 通常版13,14,16,18,19,20挿入(ビッグコミックス・楽天実物裏取り済)"
 },
 "kamuidendainibu": {
 "editions": [
@@ -33971,5 +34014,141 @@
 }
 ],
 "note": "creator束縛再走2026-08-05: v2(Vジャンプブックス)=種2在だがpromote不達→overridesで挿入"
+},
+"hayou-no-ken": {
+"editions": [
+{
+"type": "standard",
+"label": "通常版",
+"volumes": [
+{
+"number": 1,
+"asin": null,
+"isbn13": "9784088623597",
+"cover_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/3597/9784088623597.jpg?_ex=200x200",
+"release_date": "1996-11-27"
+},
+{
+"number": 2,
+"asin": null,
+"isbn13": "9784088466927",
+"cover_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/6927/9784088466927.jpg?_ex=200x200",
+"release_date": "2011-08"
+},
+{
+"number": 3,
+"asin": null,
+"isbn13": "9784088467719",
+"cover_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/7719/9784088467719.jpg?_ex=200x200",
+"release_date": "2012-04-30"
+},
+{
+"number": 4,
+"asin": null,
+"isbn13": "9784088450155",
+"cover_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0155/9784088450155.jpg?_ex=200x200",
+"release_date": "2013-03-30"
+}
+],
+"publisher": "集英社"
+},
+{
+"type": "deluxe",
+"label": "デラックス版",
+"volumes": [
+{
+"number": 1,
+"asin": null,
+"isbn13": "9784088624013",
+"cover_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/4013/9784088624013.jpg?_ex=200x200",
+"release_date": "1998-01-23"
+},
+{
+"number": 2,
+"asin": null,
+"isbn13": "9784088625041",
+"cover_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/5041/9784088625041.jpg?_ex=200x200",
+"release_date": "2000-08-23"
+}
+],
+"publisher": "集英社"
+}
+],
+"note": "JPRO判定初回2026-08-05: 種2在のpromote不達巻をoverridesで挿入(楽天実物裏取り済)"
+},
+"tanpopo-san-no-uta": {
+"editions": [
+{
+"type": "standard",
+"label": "通常版",
+"volumes": [
+{
+"number": 1,
+"asin": null,
+"isbn13": "9784575992342",
+"cover_url": null,
+"release_date": null
+},
+{
+"number": 2,
+"asin": null,
+"isbn13": null,
+"cover_url": null,
+"release_date": "1982-09"
+},
+{
+"number": 3,
+"asin": null,
+"isbn13": "9784396710033",
+"cover_url": null,
+"release_date": null
+},
+{
+"number": 4,
+"asin": null,
+"isbn13": "9784396750169",
+"cover_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/rakutenkobo-ebooks/cabinet/8706/2000010598706.jpg?_ex=300x300",
+"release_date": "1984-12"
+},
+{
+"number": 5,
+"asin": null,
+"isbn13": "9784396710057",
+"cover_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/rakutenkobo-ebooks/cabinet/8396/2000010598396.jpg?_ex=300x300",
+"release_date": "1986-09"
+}
+],
+"publisher": "祥伝社"
+},
+{
+"type": "bunkobon",
+"label": "文庫版",
+"volumes": [
+{
+"number": 1,
+"asin": null,
+"isbn13": "9784575725049",
+"cover_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/5757/57572504.jpg?_ex=200x200",
+"release_date": "2004-03"
+},
+{
+"number": 2,
+"asin": null,
+"isbn13": "9784575725193",
+"cover_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/5757/57572519.jpg?_ex=200x200",
+"release_date": "2004-07"
+},
+{
+"number": 3,
+"asin": null,
+"isbn13": "9784575725278",
+"cover_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/5757/57572527.jpg?_ex=200x200",
+"release_date": "2004-09"
+}
+],
+"publisher": "双葉社"
+}
+],
+"note": "JPRO判定初回2026-08-05: 種2在のpromote不達巻をoverridesで挿入(楽天実物裏取り済)"
 }
 }
