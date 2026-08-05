@@ -21,6 +21,7 @@ python scripts/_kana-digit-harvest.py --limit 30   # ⑧数字kana素材(フリ�
 python scripts/_check-recent-ongoing-volumes.py --limit 200   # ⑨続巻逆照合(連載中頁→楽天題検索。日次蒸留の後方安全網)
 python scripts/_placeholder-cover-refresh.py --all   # ⑩仮書影→実物の差し替え(★--all=queueが尽きるまで自走・再起動不要 2026-08-04。詳細=skill placeholder-cover-refresh)
 python scripts/_kobo-color-harvest.py --delta   # ⑪カラー版差分(Kobo新着だけ追記・数分で自然停止・詳細=skill color-editions)
+python scripts/_jpro-harvest.py --limit 100   # ⑫JPROハーベスト(巻抜け未解決slugの出版権検索を全量収集・詳細=skill jpro-harvest)
 ```
 
 ## ★429/冷却の共通ルール (= 2026-07-24 ユーザ指摘で機械化。運転者の判断ゼロ)
@@ -67,7 +68,12 @@ python scripts/_kobo-color-harvest.py --delta   # ⑪カラー版差分(Kobo新�
 - ③を無限ループ化しない(上記=NDL未収載の再照会浪費)
 
 ## セット構成 (= 将来増やせる)
-現在: ①試し読みexpand消化 ③NDLヨミ照合(1パス) ④完結判定 ⑤素材ハーベスト ⑥AniList鮮度維持 ⑦巻説明recheck ⑧数字kana素材 ⑨続巻逆照合 ⑩仮書影差し替え ⑪カラー版差分
+現在: ①試し読みexpand消化 ③NDLヨミ照合(1パス) ④完結判定 ⑤素材ハーベスト ⑥AniList鮮度維持 ⑦巻説明recheck ⑧数字kana素材 ⑨続巻逆照合 ⑩仮書影差し替え ⑪カラー版差分 ⑫JPROハーベスト
+⑫**JPROハーベスト**(=`_jpro-harvest.py` 2026-08-05柱化。ユーザ裁定「全量取得→後段Opus判断」):
+  JPRO出版権検索(出版社登録の権利DB・ログイン不要POST)で巻抜け未解決slug(queue~198)の題名検索結果を
+  **無判断で全量** `data/seeds/jpro-harvest.jsonl` へ追記(人気作は関連本込み100行超もそのまま)。
+  2.0s/req・1バッチ100slug~4分・冪等再開。バッチ後 jsonl を commit+push。
+  ★適用は**Opus「JPRO判定して」専権**(版取り違え判別が要る)。queue再算出(--build-queue)もOpus作業。
 ⑪**カラー版差分**(=`_kobo-color-harvest.py --delta` 2026-08-03柱化。ユーザ裁定「全部取得+アイドルで差分」):
   Kobo{カラー版,フルカラー}の新着降順を既知(itemNumber)に2ページ連続で当たるまで歩き、新規だけ
   `.cache/kobo-color-raw.jsonl` へ追記(逐次保存・数分で自然停止・③⑥と同じ1パス型=ループ不要)。

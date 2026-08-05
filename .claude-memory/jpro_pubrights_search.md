@@ -24,3 +24,5 @@ metadata:
 **Why:** 巻抜けハントの外部ソース序列に加える価値がある: NDL(納本ラグ/欠落あり)・楽天(在庫切れ非表示)で出ない巻もJPROには出版社登録で載る。著者区分(原著/企画・原案/イラスト等コードA01,B20…)もあり著者役割の突合源候補。
 
 **How to apply:** 巻抜けper-caseで NDL/楽天が空振りしたら JPRO title_text 検索。ISBNが取れたら日付/書影は楽天ISBN直引きで補完([[cover-source-affiliate-only]])。レート配慮=手動per-case規模で使う(大量sweepに使う前にユーザ相談)。
+
+**柱化済(2026-08-05)**: skill jpro-harvest = アイドル運転の柱⑫(Sonnet)。`scripts/_jpro-harvest.py` が巻抜け未解決slug(queue~198)を無判断で全量収集→`data/seeds/jpro-harvest.jsonl`。ONE PIECE=355行が1POSTで返る(ページネーション無し)。適用=「JPRO判定して」(Opus専権・版取り違え判別つき)。
