@@ -133,3 +133,4 @@
 - [日替わり特集コーナー(/tokushu)](daily_feature_corner.md) — レシピ抽選100選・導線A/B頁1/2日替わり・題材色・凍結過去ログ・週次補充。モック撮影=Edge headless
 - [クエリ側の題正規化=怪物事変22巻型](query_side_title_normalization.md) — 照合側だけ直しても生題クエリは候補ゼロ=門前払い。剥き題でも投げる
 - [JPRO出版権検索=新書誌源](jpro_pubrights_search.md) — ログイン不要POST。題名→全巻ISBN+発行元が一発(7巻欠け即解決の実証)
+- [【厳守】edition-overridesのキー=公開slug](edition_overrides_key_is_public_slug.md) — SRC stemは死にキー(無警告)。15件発掘・是正/回帰2件復元済
