@@ -31,21 +31,34 @@ wikidata_qid: Q17572
 editions:
 - type: standard
   label: 通常版
-  publisher: 中央公論社
   imprint: てんとう虫コミックス
+  volumes:
+  - number: 1
+    asin: null
+    isbn13: '9784091402110'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/2110/9784091402110.gif?_ex=300x300
+    release_date: '1978-02-28'
+- type: aizoban
+  label: 藤子不二雄ランド
+  publisher: 中央公論社
+  imprint: 中公コミックス 藤子不二雄ランド
   volumes:
   - number: 1
     asin: null
     isbn13: '9784124102116'
     cover_url: null
     release_date: '1988-10-21'
-  - number: 19
-    volume_label: 〔19〕
+- type: kanzenban
+  label: 藤子・F・不二雄大全集
+  publisher: 小学館
+  imprint: 藤子・F・不二雄大全集
+  volumes:
+  - number: 1
+    volume_label: みきおとミキオ／バウバウ大臣
     asin: null
     isbn13: '9784091434562'
     cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/4562/9784091434562_1_5.jpg?_ex=200x200
     release_date: '2011-03-30'
-    publisher: 小学館
 - type: bunkobon
   label: 文庫版
   publisher: 小学館
