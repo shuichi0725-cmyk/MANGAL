@@ -140,6 +140,7 @@ export default function EditionVolumes({
         volumes={vols}
         publisher={edition.publisher}
         imprint={edition.imprint}
+        slug={manga.slug}
       />
       </div>
       </Grow>

@@ -104,12 +104,19 @@ export default function VolumeCoverflow({
   volumes,
   publisher,
   imprint,
+  slug,
 }: {
   title: string;
   volumes: Volume[];
   publisher?: string | null;
   imprint?: string | null;
+  slug?: string;
 }) {
+  // ★試し読み(BookLive bviewer直開き) テストゲート(2026-08-06 ユーザ承認=まず進撃の巨人だけ)。
+  //   全結線時は tameshiyomi-booklive.jsonl のビルド時join(頁props)に置換する。
+  //   cid = title_id + 巻番号3桁。全25,149作×382,315巻がHEAD検証済み+巻番号整合ランダム8/8実証。
+  const TAMESHIYOMI_TEST: Record<string, string> = { "shingeki-no-kyojin": "40660" };
+  const blId = slug ? TAMESHIYOMI_TEST[slug] : undefined;
   const vols = [...volumes]
     .filter((v) => v.number != null)
     .sort((a, b) => (a.number as number) - (b.number as number));
@@ -318,6 +325,19 @@ export default function VolumeCoverflow({
         </div>
       </div>
 
+      {/* ★試し読みボタン(確定仕様2026-08-06: 2-c形=白地+緑枠 × 1-c文言。選択巻のビューアを直接開く) */}
+      {blId && cur.number != null && (
+        <a
+          href={`https://booklive.jp/bviewer/s/?cid=${blId}_${String(cur.number).padStart(3, "0")}`}
+          target="_blank"
+          rel="nofollow sponsored noopener"
+          className="spring-press mt-2.5 flex w-full items-center justify-center gap-2 rounded-full border-[1.6px] border-[#16a34a] bg-white py-2.5 text-[14px] font-extrabold text-[#16a34a]"
+        >
+          📖 {n > 1 ? `第${cur.number}巻を試し読み` : "試し読み"}
+          <span className="text-[10.5px] font-bold opacity-90">無料・BookLive</span>
+        </a>
+      )}
+
       {/* 巻説明(B2: 冒頭2行 + 続きを読む)。 説明が無い巻は非表示(VolDesc内でnull返し) */}
       <VolDesc text={cur.description} />
 
@@ -380,7 +400,7 @@ export default function VolumeCoverflow({
            className="spring-press rounded-full bg-[#e69500] py-2 text-center text-sm font-bold text-white">Amazon</a>
       </div>
       <div className="spring-press mt-2 rounded-2xl px-5 py-3 text-white shadow-soft"
-           style={{ background: "linear-gradient(90deg,#3b2f78,#7a5cf0)" }}>
+           style={{ background: blId ? "#3b82f6" : "linear-gradient(90deg,#3b2f78,#7a5cf0)" }}>
         <span className="block text-[15px] font-bold">📱 電子書籍で買う</span>
         <span className="block text-[11px] text-white/80">
           {n > 1 ? `第${cur.number}巻を` : ""}ブラウザで開きます(Kindleは商品ページで「Kindle版」を選択)
