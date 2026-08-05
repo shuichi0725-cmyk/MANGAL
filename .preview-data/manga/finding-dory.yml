@@ -23,18 +23,19 @@ editions:
 - type: standard
   label: 通常版
   publisher: KADOKAWA
-  imprint: まるごとディズニーブックス
+  imprint: 角川アニメまんが
   volumes:
   - number: 1
+    volume_label: 上
     asin: null
-    isbn13: '9784048921640'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/1640/9784048921640.jpg?_ex=200x200
-    release_date: '2016-07-07'
-  - number: 3
+    isbn13: '9784041047873'
+    cover_url: null
+    release_date: '2016-08-26'
+  - number: 2
     volume_label: 下
     asin: null
     isbn13: '9784041047880'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/7880/9784041047880_1_2.jpg?_ex=200x200
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/7880/9784041047880_1_2.jpg?_ex=300x300
     release_date: '2016-08-31'
 publishers:
 - kadokawa
