@@ -47,6 +47,27 @@ C = importlib.util.module_from_spec(_c)
 _c.loader.exec_module(C)          # norm / volnum / same_series / NOISE / author_ok を共用
 L = C.L
 
+# ★2026-08-05 巻抜けハントの教訓を移植(怪物事変/SERVAMP/アラフォー賢者で実証した4盲点):
+#   ①剥き題クエリ = 頁題の括弧読み「怪物(けもの)事変」を生で投げると楽天0件=「異常なし」に誤記帳
+#   ②truncated時プローブ = 分冊版等が30件枠を埋めると単行本が枠外に沈む→「題+巻数」で個別追撃
+#   ③帯救済 = size=単行本(B6判コミックス型)と著者不一致(作画交代型)はISBN帯一致なら通す
+#   ④near記録 = ゲートで弾いた候補を痕跡に残す(fail-visible。黙って捨てると後から検死できない)
+import re as _re
+
+_PAREN = _re.compile(r"[(（][^)）]{1,12}[)）]")
+
+
+def strip_paren(s):
+    return _PAREN.sub("", str(s or "")).strip()
+
+
+def series_match(base, found):
+    """same_series を 生題/剥き題 の両方で判定(括弧読み型対応)。"""
+    if C.same_series(base, found):
+        return True
+    sb = strip_paren(base)
+    return bool(sb) and sb != base and C.same_series(sb, found)
+
 
 def build_queue():
     """本番索引から queue を再算出(連載中+休載の全頁)。走行結果は日付rotateして次周回へ。"""
@@ -64,6 +85,7 @@ def build_queue():
         d = yaml.safe_load(p.open(encoding="utf-8")) or {}
         vols = set()
         years = []
+        bands = set()
         for e in d.get("editions") or []:
             for v in e.get("volumes") or []:
                 if isinstance(v.get("number"), int):
@@ -71,11 +93,15 @@ def build_queue():
                 rd = str(v.get("release_date") or "")
                 if rd[:4].isdigit():
                     years.append(rd[:4])
+                ib = str(v.get("isbn13") or "")
+                if len(ib) == 13:
+                    bands.add(ib[:8])   # ★ISBN出版者記号帯(帯救済ゲート用)
         if not vols:
             continue
         aus = [a.get("name") for a in (d.get("authors") or []) if a.get("name")]
         rows.append({"slug": slug, "title": title, "authors": aus,
-                     "vols": sorted(vols), "last_year": max(years) if years else ""})
+                     "vols": sorted(vols), "last_year": max(years) if years else "",
+                     "bands": sorted(bands)})
     if OUT.exists():
         arc = ROOT / ".cache" / "zokkan-cycles"
         arc.mkdir(parents=True, exist_ok=True)
@@ -114,28 +140,67 @@ def main():
         for i, r in enumerate(todo, 1):
             have = set(r["vols"])
             mv = max(have) if have else 0
-            trail, gap, trunc = [], [], False
+            bands = set(r.get("bands") or [])
+            trail, gap, near = [], [], []
+            trunc = False
+            seen_v = set()
+
+            def judge(it):
+                """1候補をゲート審査。採用→(rec,'trail'/'gap') / 弾き→(near記録,None) / 対象外→(None,None)"""
+                t, au = str(it.get("title") or ""), str(it.get("author") or "")
+                if not series_match(r["title"], t):
+                    return None, None
+                if C.NOISE.search(t):
+                    return None, None
+                v = C.volnum(t)
+                if v is None or v in seen_v:
+                    return None, None
+                ib = str(it.get("isbn") or "")
+                band_ok = bool(bands) and ib[:8] in bands
+                size = str(it.get("size") or "")
+                why = None
+                if size != "コミック" and not (size == "単行本" and band_ok):
+                    why = f"size({size})"        # ★帯一致の単行本は救済(B6判コミックス型)
+                elif not C.author_ok(r["authors"], au) and not band_ok:
+                    why = f"著者({au[:16]})"      # ★帯一致なら著者不一致でも通す(作画交代型)
+                if why:
+                    if len(near) < 5:
+                        near.append({"vol": v, "why": why, "isbn": ib, "title": t[:40]})
+                    return None, None
+                seen_v.add(v)
+                rec = {"vol": v, "isbn": ib, "date": it.get("salesDate"), "title": t[:60]}
+                return (rec, "trail") if v > mv else ((rec, "gap") if v not in have else (None, None))
+
             try:
                 items = L.rakuten_live_retry(env, title=r["title"], hits=30) or []
                 trunc = len(items) >= 30          # ★30件上限に当たった=長期連載は取りこぼしうる
                 for it in items:
-                    t, au = str(it.get("title") or ""), str(it.get("author") or "")
-                    if str(it.get("size") or "") != "コミック":
-                        continue
-                    if not C.author_ok(r["authors"], au):
-                        continue
-                    if not C.same_series(r["title"], t):
-                        continue
-                    if C.NOISE.search(t):
-                        continue
-                    v = C.volnum(t)
-                    if v is None:
-                        continue
-                    rec = {"vol": v, "isbn": it.get("isbn"), "date": it.get("salesDate"), "title": t[:60]}
-                    if v > mv:
-                        trail.append(rec)
-                    elif v not in have:
-                        gap.append(rec)
+                    rec, kind = judge(it)
+                    if rec:
+                        (trail if kind == "trail" else gap).append(rec)
+                # ★剥き題フォールバック(怪物事変型): 生題で同シリーズ候補ゼロ かつ 題に括弧がある
+                sp = strip_paren(r["title"])
+                if not seen_v and not near and sp != r["title"]:
+                    for it in L.rakuten_live_retry(env, title=sp, hits=30) or []:
+                        rec, kind = judge(it)
+                        if rec:
+                            (trail if kind == "trail" else gap).append(rec)
+                # ★truncated時の末尾プローブ(SERVAMP型): 枠がノイズで埋まると単行本が沈む
+                #   → 「題+巻数」で mv+1 から連続2ミスまで個別追撃(上限+15)
+                if trunc and not trail:
+                    miss = 0
+                    v = mv + 1
+                    q = sp if sp != r["title"] else r["title"]
+                    while miss < 2 and v <= mv + 15:
+                        hit = False
+                        for it in L.rakuten_live_retry(env, title=f"{q} {v}", hits=10) or []:
+                            rec, kind = judge(it)
+                            if rec and rec["vol"] == v:
+                                (trail if kind == "trail" else gap).append(rec)
+                                hit = True
+                                break
+                        miss = 0 if hit else miss + 1
+                        v += 1
             except Exception as e:
                 print(f"    ✗ {r['slug']} {str(e)[:60]}", flush=True)
             if trail:
@@ -144,7 +209,7 @@ def main():
                 ngp += 1
             f.write(json.dumps({"slug": r["slug"], "title": r["title"], "our_max": mv,
                                 "our_vols": sorted(have), "trail": trail, "gap": gap,
-                                "truncated": trunc}, ensure_ascii=False) + "\n")
+                                "truncated": trunc, "near": near}, ensure_ascii=False) + "\n")
             f.flush()
             if i % 200 == 0:
                 print(f"  {i:,}/{len(todo):,}  末尾{ntr:,} / 欠番{ngp:,}", flush=True)

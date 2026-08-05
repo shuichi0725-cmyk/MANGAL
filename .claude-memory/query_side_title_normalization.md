@@ -23,3 +23,5 @@ metadata:
 - 診断の順: 精密クエリ → 剥き題クエリ → **素の検索(anywhere)** → それでも無ければ取得不能(納本欠落/電子のみ)。「取得不能」の宣告は素の検索を通してから。
 
 関連: [[feedback-one-bug-means-a-class]]
+
+**常設網へ移植済(2026-08-05)**: 柱⑨続巻逆照合(`_check-recent-ongoing-volumes.py`)に4点パッチ=①剥き題フォールバック ②truncated(30件枠)時の「題+巻数」末尾プローブ ③単行本/著者不一致のISBN帯救済(B6判・作画交代型) ④ゲートで弾いた候補のnear記録(fail-visible)。queueに帯(bands)を持たせる=--build-queue再算出済・新周回はアイドル運転で消化。
