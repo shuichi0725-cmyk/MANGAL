@@ -41744,3 +41744,17 @@ volumes:
   source: wiki-percase
   added_at: '2026-08-05'
   note: 'ユーザWikiリンクpercase: コミカライズ全6巻中v4のみ欠落(Wiki書誌978-4-8156-1877-3+楽天実物裏取り)。原作GAノベル別線は対象外'
+- series_keys:
+  - qid:Q105703973|name:君の刀が折れるまで
+  - qid:Q105703973|name:君の刀が折れるまで|sub:月宮まつりの恋難き
+  - qid:Q105703973|name:君の刀が折れるまで|sub:月宮まつりの恋難き.
+  qid: null
+  number: 4
+  isbn13: '9784098536214'
+  release_date: '2024-10-10'
+  publisher: 小学館
+  edition_type: standard
+  title_display: 君の刀が折れるまで 〜月宮まつりの恋難き〜（4）
+  source: jpro
+  added_at: '2026-08-05'
+  note: 'ユーザ指定JPRO照会+仮説的中: 頁題に副題(〜月宮まつりの恋難き〜)が無く、外部題は副題付き=残余語ゲートが別シリーズと誤認して弾く型。v4のみ種2にも無い取込もれ'
