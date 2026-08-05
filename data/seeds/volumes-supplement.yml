@@ -41705,3 +41705,29 @@ volumes:
   source: jpro
   added_at: '2026-08-05'
   note: 'JPRO判定初回: 出版権検索hits→題残余語/巻番号/帯・発行元ゲート→楽天ISBN直引きで実物裏取り(size/叢書/著者)'
+- series_keys:
+  - qid:Q24870802|name:世界を救うために亜人(わたし)と朝チュンできますか?
+  - qid:Q24870802|name:世界を救うために亜人と朝チュンできますか?
+  qid: null
+  number: 8
+  isbn13: '9784040756424'
+  release_date: '2024-10-08'
+  publisher: KADOKAWA
+  edition_type: standard
+  title_display: 世界を救うために亜人と朝チュンできますか？　8
+  source: jpro
+  added_at: '2026-08-05'
+  note: 'ユーザ指定のJPRO照会: 紙1-10全ISBN登録済み→8巻(種2無し=取込もれ)+10巻(新刊)を補完。日付=楽天ISBN直引き'
+- series_keys:
+  - qid:Q24870802|name:世界を救うために亜人(わたし)と朝チュンできますか?
+  - qid:Q24870802|name:世界を救うために亜人と朝チュンできますか?
+  qid: null
+  number: 10
+  isbn13: '9784040765020'
+  release_date: '2026-08-06'
+  publisher: KADOKAWA
+  edition_type: standard
+  title_display: 世界を救うために亜人と朝チュンできますか？　10
+  source: jpro
+  added_at: '2026-08-05'
+  note: 'ユーザ指定のJPRO照会: 紙1-10全ISBN登録済み→8巻(種2無し=取込もれ)+10巻(新刊)を補完。日付=楽天ISBN直引き'
