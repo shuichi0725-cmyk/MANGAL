@@ -104,7 +104,7 @@ editions:
     cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/2530/25305665.jpg?_ex=300x300
     release_date: 1973-12
 - type: bunkobon
-  label: 文庫版
+  label: 角川文庫
   publisher: 角川書店
   imprint: 角川文庫
   volumes:
@@ -133,6 +133,9 @@ editions:
     isbn13: '9784041978085'
     cover_url: null
     release_date: 1997-11
+- type: bunkobon
+  label: 秋田漫画文庫
+  volumes:
   - number: 7
     asin: null
     isbn13: null

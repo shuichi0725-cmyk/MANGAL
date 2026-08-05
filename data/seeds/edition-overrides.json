@@ -33641,7 +33641,7 @@
 },
 {
 "type": "bunkobon",
-"label": "文庫版",
+"label": "角川文庫",
 "publisher": "角川書店",
 "imprint": "角川文庫",
 "volumes": [
@@ -33674,7 +33674,14 @@
 "isbn13": "9784041978085",
 "cover_url": null,
 "release_date": "1997-11"
+}
+]
 },
+{
+"type": "bunkobon",
+"label": "秋田漫画文庫",
+"publisher": "秋田書店",
+"volumes": [
 {
 "number": 7,
 "asin": null,
@@ -33682,7 +33689,8 @@
 "cover_url": null,
 "release_date": "1978-03"
 }
-]
+],
+"note": "ISBN無し時代の幽霊巻(1-6も実在だがISBN無し=登録不可規律でこの1冊のみ)"
 }
 ],
 "authors": [
@@ -33691,7 +33699,7 @@
 "role": "writer_artist"
 }
 ],
-"note": " / ★死にキー是正2026-08-05(abashiriikka→abashiri-ikka) / 死にキー是正時の回帰復元2026-08-05"
+"note": " / ★死にキー是正2026-08-05(abashiriikka→abashiri-ikka) / 死にキー是正時の回帰復元2026-08-05 / JPRO照会2026-08-05: 角川文庫=全5巻完結(JPRO一致)・幽霊巻v7は秋田漫画文庫線→版分離(偽穴v6の根治)"
 },
 "_dead_baranosakamichi": {
 "year_started": 1975,
