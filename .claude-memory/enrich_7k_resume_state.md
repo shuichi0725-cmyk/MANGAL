@@ -5,10 +5,24 @@ metadata:
   node_type: memory
   type: project
   originSessionId: 2e629c9e-d55a-4074-a6ec-d0691965d657
-  modified: 2026-08-03T05:57:06.547Z
+  modified: 2026-08-06T08:42:17.394Z
 ---
 
 エンリッチ(キャッチ/詳細/ジャンル)の消化状況。材料バッチ = `.cache/enrich-batches/batch-NNNN.json`(380本、2026-07-26生成)。
+
+## ★2026-08-06: 作業リストを script 化(scripts/_enrich-newest-scan.py)
+
+毎回 ad-hoc に走査していたのを恒久化。`python scripts/_enrich-newest-scan.py` で
+`data/manga.v2` 全走査 → **catch/syn 欠け × 2巻以上**を**最新巻の発売日降順**で TSV 出力
+(`.cache/enrich-newest-backlog.tsv`)。**初回実測 12,910頁**。1巻頁は除外済(2026-08-03裁定)。
+- 1周 = TSV先頭50 → `_enrich-captions.py --slugs ... --src data/manga.v2 --live` →
+  `MINVOL=2 CAPLEN=400 _enrichgap-prep.py 92NN 50` → 生成 → `_apply-enrich-batch.py` → `_enrichgap-done.py`。
+- **slice 9202 完了(2026-08-06)**: 50作中**材料あり44**(取得率88%)。catch+43 / syn+40 / genre+14 適用・上書き0。
+  **残 12,864**。★材料なし6件(saikyou-no-seibishi/jadou-season/ken-oni-tensei/shokigai-kara-tabidatanai/
+  saikyou-majutsushi-no-dekiai-saijo/watashi-no-konoe-kishi)は done に入らないので**次スライスで再照会される**
+  (楽天に出たら拾える利点はあるが、常に先頭に居座る。溜まったら別途 skip list 化が要る)。
+- ★**字数は3節構成でも初回全滅**(catch 30〜44字 = 下限48に届かず44件中43件BAD)。**3節でも足りない**:
+  各節を「体言止め1つ」でなく**1文相当**にし、**catch 55〜68 / syn 85〜100 を狙う**と一発で通る(2回目 BAD=2 → 微修正で0)。
 
 ## ★2026-08-03: 「新しい順」柱を開始(ユーザ指示)
 
