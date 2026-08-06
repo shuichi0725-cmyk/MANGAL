@@ -2060,6 +2060,19 @@ def _load_status_corrections() -> dict:
 _STATUS_CORR = _load_status_corrections()
 
 
+def _load_magazine_corrections() -> dict:
+    """★掲載誌の per-case 是正(2026-08-07 夢幻の如く=スーパージャンプをヤングジャンプと誤記)。
+    magazine は種3のAI fill由来で根拠のない推定が混じるが、種3は純粋追加onlyで直せない。
+    slug→{magazine,...}。種3不変を汚さず可逆。値は data/magazines.yml のキー。"""
+    p = ROOT / "data" / "seeds" / "magazine-corrections.yml"
+    if p.exists():
+        return (yaml.safe_load(p.read_text(encoding="utf-8")) or {}).get("corrections", {})
+    return {}
+
+
+_MAG_CORR = _load_magazine_corrections()
+
+
 def get_authors(con: sqlite3.Connection, series_id: int) -> list[dict]:
     cur = con.cursor()
     cur.row_factory = sqlite3.Row
@@ -2798,6 +2811,14 @@ def build_yml(
     # brand → magazine 推定 (= 種3 fill 漏れ 補完)
     if not mag_cand:
         mag_cand = infer_magazine_from_brand(editions, valid_mags)
+    # ★magazine-corrections(2026-08-07): 外部権威で確認した誤記を最優先で上書き(種3不変)
+    _mc = _MAG_CORR.get(o["slug"])
+    if _mc and _mc.get("magazine"):
+        if not valid_mags or _mc["magazine"] in valid_mags:
+            mag_cand = _mc["magazine"]
+        else:
+            print(f"  ! magazine-corrections: {o['slug']} の {_mc['magazine']} は "
+                  f"data/magazines.yml 未登録=無視", file=sys.stderr)
     o["magazine"] = mag_cand
 
     # ★"other"は出荷しない(2026-07-13 ユーザ裁定: 意味がないカテゴリ。不明=キー自体を出さない=UI非表示)

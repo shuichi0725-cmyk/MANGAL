@@ -1,0 +1,13 @@
+# 掲載誌の per-case 是正 (= 種3(series-supplement-v2.yml)のAI fill誤りを、種3を触らずに上書きする)
+#
+# ★なぜ要るか: magazine は種3のAI fill由来で、根拠のない推定が入っている。
+#   種3は「純粋追加only・既存keyの内容変更は禁止」(CLAUDE.md 月次蒸留のabort条件)なので、
+#   誤りは種3を直さずここで上書きする(可逆・出所を残す)。
+# ★キー = 本番slug。値の magazine は data/magazines.yml のキーであること(未登録なら先に登録する)。
+# ★source は必ず外部権威(Wikipedia/出版社公式)を書く。推測で足さない。
+corrections:
+  yume-maboroshi-no-gotoku:
+    magazine: super-jump
+    source: wiki-verified
+    evidence: ja.wikipedia「スーパージャンプ」掲載作品一覧に「夢幻の如く(本宮ひろ志) 1991年12号 - 1995年15号」と明記。種3は weekly-young-jump と誤記していた
+    added_at: '2026-08-07'
