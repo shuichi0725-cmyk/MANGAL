@@ -26,8 +26,9 @@ export function generateStaticParams() {
 const SITE = "https://mangal-db.com";
 
 /** ★SEO(2026-07-04): 頁別 title/description + canonical + OGP。66k頁が全て同一メタだった問題の根治 */
-// ★SEO強化テストゲート(2026-08-06 ユーザ承認=まずチェンソーマンだけ。全展開時はtrue固定に)
-const SEO_TEST = (slug: string) => slug === "chainsaw-man";
+// ★SEO強化①②③(2026-08-06 チェンソーマンでテスト→リッチリザルト検証OK→ユーザGOで全展開):
+//   ①title/descに巻数・完結・最新刊 ②JSON-LD強化+BreadcrumbList ③別題露出
+const SEO_TEST = (_slug: string) => true;
 
 /** 巻数・完結・最新刊のSEO文(①): 「全24巻で完結。最新刊24巻は2026年6月22日発売。」 */
 function seoVolPhrase(m: import("@/lib/schema").Manga): { phrase: string; nVols: number; latest: { n: number | null; date: string } | null } {
