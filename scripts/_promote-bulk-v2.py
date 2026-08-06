@@ -440,8 +440,12 @@ def apply_edition_canonical(slug: str, editions: list, canon: dict) -> list:
     if s.get("canonical_publisher"):
         pub = s["canonical_publisher"]
     out = []
+    # ★canonical_imprint(2026-08-07 夢幻の如く): レーベル名が「◯◯デラックス」でも実体は唯一の単行本
+    #   =通常版、という頁がある(デラックス・レーベル割れ型)。タブ名は「通常版」のまま
+    #   レーベルだけ正しく出したいので、label と imprint を分けられるようにする(opt-in)。
     out.append(mk(s.get("volumes"), s.get("canonical_label") or "通常版", pub,
-                  s.get("canonical_label") or (cur_std or {}).get("imprint"), "standard"))
+                  s.get("canonical_imprint") or s.get("canonical_label")
+                  or (cur_std or {}).get("imprint"), "standard"))
     # ★刷タブ(2026-07-04 うる星復旧): 同冊数の別カバー刷(新装版等)を standard の versions[] に畳む
     #   ([[urusei_version_display_rules]]。 旧 _regroup-versions.py 直接パッチは非durableで消えた→canonical結線)
     if s.get("versions"):
