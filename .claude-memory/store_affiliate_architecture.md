@@ -28,3 +28,5 @@ MANGAL の収益の心臓部 = 各作品ページに「**この作品が読め�
 **Amazonアソシエイト開設(2026-07-29)**: ストアID=**mangal08-22**。`.env.local` の `NEXT_PUBLIC_AMAZON_ASSOCIATE_TAG` で配線済(未設定build=素リンクfallback)。紙は**ASIN=ISBN-10**なので `lib/amazon.ts isbn13ToIsbn10()` で全巻 /dp/ 直リンク化(979系のみ検索fallback)。★**180日以内に3件成果で本登録**=週次で本番に出たら早期に成果確認。Kindle別ASIN/書影は将来PA-API(合格後)。
 
 **ValueCommerce/LinkSwitch(2026-08-05 ユーザ申込)**: バリューコマースにサイト登録(mangal ID:3777739・申込時審査中)し**BookLive!プログラム**へ申請。★**LinkSwitch** = layoutに貼った1タグ(vc_pid=892673489+aml.valuecommerce.com/vcdal.js)が、提携広告主ドメインへの**素リンクをクリック時に自動でアフィリエイトリンク変換**する仕組み。個別リンク加工不要=試し読みアンカー25,149件(BookLive title_id)の結線がそのまま収益化になる。タグは app/layout.tsx 末尾に実装済(2026-08-05・本番反映は週次/機能蒸留待ち)。PR表記は結線時に既存のPR方針に合わせること。
+
+**VC実働確認(2026-08-06)**: サイト審査**通過**。★**Yahoo!ショッピングのカートボタンがLinkSwitch自動変換でアフィ化された**(実測=クリックでck.jp.ap.valuecommerce経由。従来の素リンクが自動収益化=LinkSwitch導入の初成果)。BookLive(プログラムID:2138296)=**提携待ち**→承認後に試し読みボタン(bviewer直開き)が自動変換される。承認後のTODO=①ディープリンク保持の実地確認(VCリダイレクト経由でビューアに着地するか) ②BookLive規約「adult配下のコンテンツ訴求禁止」→adult_us頁で試し読みボタンを出すかの点検。★管理画面で **Renta!/honto=即時提携** 可を確認=ストアシート宿題([[ebook-store-sheet-homework]])の即戦力候補(提携→素リンク並べるだけで収益化)。
