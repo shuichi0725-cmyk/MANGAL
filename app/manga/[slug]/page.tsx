@@ -26,15 +26,43 @@ export function generateStaticParams() {
 const SITE = "https://mangal-db.com";
 
 /** ★SEO(2026-07-04): 頁別 title/description + canonical + OGP。66k頁が全て同一メタだった問題の根治 */
+// ★SEO強化テストゲート(2026-08-06 ユーザ承認=まずチェンソーマンだけ。全展開時はtrue固定に)
+const SEO_TEST = (slug: string) => slug === "chainsaw-man";
+
+/** 巻数・完結・最新刊のSEO文(①): 「全24巻で完結。最新刊24巻は2026年6月22日発売。」 */
+function seoVolPhrase(m: import("@/lib/schema").Manga): { phrase: string; nVols: number; latest: { n: number | null; date: string } | null } {
+  const nums = new Set<number>();
+  let latest: { n: number | null; date: string } | null = null;
+  for (const e of m.editions) for (const v of e.volumes) {
+    if (v.number != null) nums.add(v.number);
+    const d = String(v.release_date ?? "");
+    if (d && (!latest || d > latest.date)) latest = { n: v.number ?? null, date: d };
+  }
+  const nVols = nums.size ? Math.max(...nums) : 0;
+  const parts: string[] = [];
+  if (nVols) parts.push(m.status === "completed" ? `全${nVols}巻で完結。` : `既刊${nVols}巻・連載中。`);
+  if (latest && latest.n && latest.date.length >= 10 && m.status !== "completed") {
+    const [y, mo, dy] = latest.date.split("-").map(Number);
+    parts.push(`最新刊${latest.n}巻は${y}年${mo}月${dy}日発売。`);
+  }
+  return { phrase: parts.join(""), nVols, latest };
+}
+
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const m = loadAllManga().manga.find((x) => x.slug === slug);
   if (!m) return {};
   const authors = (m.authors ?? []).map((a) => a.name).join("・");
-  const title = `${m.title}${authors ? ` | ${authors}` : ""} - 全巻一覧・発売日`;
-  const desc = (m.catch || m.synopsis ||
+  let title = `${m.title}${authors ? ` | ${authors}` : ""} - 全巻一覧・発売日`;
+  let desc = (m.catch || m.synopsis ||
     `${m.title}(${authors})の巻一覧・発売日・ISBN・出版社情報。楽天ブックス等の購入リンクつき。`)
     .slice(0, 120);
+  if (SEO_TEST(m.slug)) {
+    // ★①: 「何巻まで/完結/最新刊いつ」クエリ対応(2026-08-06 テスト=チェンソーマン)
+    const sv = seoVolPhrase(m);
+    if (sv.nVols) title = `${m.title}${authors ? ` | ${authors}` : ""} - 全${sv.nVols}巻の発売日・全巻一覧`;
+    desc = `${sv.phrase}${(m.catch || m.synopsis || "")}`.slice(0, 120) || desc;
+  }
   const cover = coverUrl(m);
   return {
     title,
@@ -91,6 +119,8 @@ export default async function MangaDetailPage({
   );
 
   // ★構造化データ(JSON-LD): ComicSeries — 検索リッチ化(2026-07-04 SEO)
+  const seoTest = SEO_TEST(manga.slug);
+  const svMain = seoTest ? seoVolPhrase(manga) : null;
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "ComicSeries",
@@ -101,7 +131,43 @@ export default async function MangaDetailPage({
     ...(publisher ? { publisher: { "@type": "Organization", name: publisher.name } } : {}),
     ...(manga.year_started ? { startDate: String(manga.year_started) } : {}),
     ...(manga.synopsis ? { description: String(manga.synopsis).slice(0, 200) } : {}),
+    // ★②強化(テストゲート内): 巻数/終了年/ジャンル/別題/巻Book(先頭3+最新)
+    ...(seoTest && svMain
+      ? {
+          ...(svMain.nVols ? { numberOfItems: svMain.nVols } : {}),
+          ...(manga.status === "completed" && manga.year_ended ? { endDate: String(manga.year_ended) } : {}),
+          ...(manga.genres?.length ? { genre: manga.genres } : {}),
+          ...(manga.alternative_titles?.en ? { alternateName: [manga.alternative_titles.en, ...(manga.synonyms ?? [])] } : {}),
+          workExample: (() => {
+            const std = manga.editions.find((e) => e.type === "standard") ?? manga.editions[0];
+            const vs = (std?.volumes ?? []).filter((v) => v.number != null && v.isbn13);
+            const pick = [...vs.slice(0, 3), ...(vs.length > 3 ? [vs[vs.length - 1]] : [])];
+            return pick.map((v) => ({
+              "@type": "Book",
+              name: `${manga.title} ${v.number}`,
+              isbn: String(v.isbn13),
+              position: v.number,
+              ...(v.release_date ? { datePublished: String(v.release_date) } : {}),
+              ...(publisher ? { publisher: { "@type": "Organization", name: publisher.name } } : {}),
+              bookFormat: "https://schema.org/Paperback",
+            }));
+          })(),
+        }
+      : {}),
   };
+  const breadcrumbLd = seoTest
+    ? {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "ホーム", item: "https://mangal-db.com/" },
+          ...(manga.genres?.[0]
+            ? [{ "@type": "ListItem", position: 2, name: data.genres.find((g) => g.key === manga.genres![0])?.name ?? manga.genres[0], item: `https://mangal-db.com/genre/${manga.genres[0]}` }]
+            : []),
+          { "@type": "ListItem", position: manga.genres?.[0] ? 3 : 2, name: manga.title, item: `https://mangal-db.com/manga/${manga.slug}` },
+        ],
+      }
+    : null;
 
   return (
     <div>
@@ -109,6 +175,9 @@ export default async function MangaDetailPage({
       <DesignNav />
       <div className="mx-auto max-w-4xl px-4 py-8">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      {breadcrumbLd && (
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }} />
+      )}
       <div className="mt-6 grid gap-8">
         {/* ヒーロー表紙は撤去(2026-08-03 ユーザ指定: PCでタイトル左に大きく出て、
             書影の有無で段組がズレる。書影は巻コーフロー+ライトボックス拡大が担う) */}
@@ -370,6 +439,16 @@ export default async function MangaDetailPage({
           <ColorEditionNote slug={manga.slug} />
 
           <VolumeRow manga={manga} />
+
+          {/* ★③別題露出(テストゲート内 2026-08-06): 英題・略称・他言語題を検索エンジン可視に */}
+          {seoTest && (manga.alternative_titles?.en || manga.synonyms?.length) && (
+            <div className="mt-6 flex flex-wrap items-center gap-x-3 gap-y-1 text-[11px] text-ink/45">
+              <span className="font-semibold text-ink/40">別題</span>
+              {[manga.alternative_titles?.en, ...(manga.synonyms ?? [])].filter(Boolean).map((t) => (
+                <span key={String(t)}>{String(t)}</span>
+              ))}
+            </div>
+          )}
 
           {/* 外部リンク = 存在するものだけ作品/著者を明示して下部に集約。
               ・作品 AniList = anilist_id(連携済み作品のみ)
