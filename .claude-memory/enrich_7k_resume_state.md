@@ -5,7 +5,7 @@ metadata:
   node_type: memory
   type: project
   originSessionId: 2e629c9e-d55a-4074-a6ec-d0691965d657
-  modified: 2026-08-06T08:42:17.394Z
+  modified: 2026-08-06T09:37:52.566Z
 ---
 
 エンリッチ(キャッチ/詳細/ジャンル)の消化状況。材料バッチ = `.cache/enrich-batches/batch-NNNN.json`(380本、2026-07-26生成)。
@@ -21,6 +21,10 @@ metadata:
   **残 12,864**。★材料なし6件(saikyou-no-seibishi/jadou-season/ken-oni-tensei/shokigai-kara-tabidatanai/
   saikyou-majutsushi-no-dekiai-saijo/watashi-no-konoe-kishi)は done に入らないので**次スライスで再照会される**
   (楽天に出たら拾える利点はあるが、常に先頭に居座る。溜まったら別途 skip list 化が要る)。
+- **slice 9203 完了(2026-08-06)**: 50作中材料あり43 → **41作適用**(catch+41 / syn+40 / genre+11・上書き0)。**残 12,795**。
+- ★**保留台帳を新設**: `docs/production-diagnostics/enrich-hold.tsv`(slug/title/at/batch/reason)。
+  `_enrichgap-done.py` は**バッチ内の全slugを done にする**ので、書かずに見送った作品は**黙って永久に消える**。
+  見送ったら必ずこの TSV に理由付きで残す。初期9件 = 楽天caption無し6 / 材料が後半巻のみ2(uragirareta・norowareta) / premise記述なし1(oshino-teki)。
 - ★**字数は3節構成でも初回全滅**(catch 30〜44字 = 下限48に届かず44件中43件BAD)。**3節でも足りない**:
   各節を「体言止め1つ」でなく**1文相当**にし、**catch 55〜68 / syn 85〜100 を狙う**と一発で通る(2回目 BAD=2 → 微修正で0)。
 
