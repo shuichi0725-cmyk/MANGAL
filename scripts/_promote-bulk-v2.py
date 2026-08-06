@@ -432,6 +432,13 @@ def apply_edition_canonical(slug: str, editions: list, canon: dict) -> list:
     # 既存 standard の publisher を継承(無ければ seed/None)
     cur_std = next((e for e in editions if e.get("type") == "standard"), None)
     pub = (cur_std or {}).get("publisher") or s.get("publisher")
+    # ★canonical_publisher(2026-08-07 鬼平犯科帳): canonicalが**別社の版**を主版に据える時、
+    #   旧standardの社名を継いでしまうと誤表示になる(3版混在の頁を分離したら
+    #   文春時代コミックス(文藝春秋)の版が「リイド社」と表示された)。
+    #   ★canonical版は clean_edition を通らない(canonicalは2852行のclean後=3348行で走る)ため
+    #   ISBN由来の自動解決も効かない。seedで明示された時だけ上書きする opt-in。
+    if s.get("canonical_publisher"):
+        pub = s["canonical_publisher"]
     out = []
     out.append(mk(s.get("volumes"), s.get("canonical_label") or "通常版", pub,
                   s.get("canonical_label") or (cur_std or {}).get("imprint"), "standard"))
@@ -3367,6 +3374,19 @@ def main():
                             _pvm[n] = str(d)
                 if _pvm and _pvm[max(_pvm)][:4].isdigit():
                     new_yml["year_ended"] = int(_pvm[max(_pvm)][:4])
+            # ★work-level publisher も最終editionsから再導出(2026-08-07 鬼平犯科帳):
+            #   集計は L2864 = canonical適用より**前**なので、canonicalで別社の版を足すと
+            #   publishers[] にその社が入らない(3版分離後も leed だけが残り 文藝春秋 が落ちた)。
+            #   規則は本計算と同一(社キー distinct + 代表=最多巻)。
+            from collections import Counter as _C2
+            _pv2 = _C2()
+            for _ce in _eds:
+                _k = pub_key_of(_ce.get("publisher"))
+                if _k:
+                    _pv2[_k] += len(_ce.get("volumes", []))
+            if _pv2:
+                new_yml["publishers"] = sorted(_pv2)
+                new_yml["publisher"] = _pv2.most_common(1)[0][0]
         # ★版付加(extra-editions.yml): 既存版はそのまま、指定版を末尾に追加(手塚全集タブ等 2026-07-21)
         if slug in extra_editions_map:
             new_yml["editions"], _xadded = apply_extra_editions(
