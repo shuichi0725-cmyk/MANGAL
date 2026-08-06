@@ -59,6 +59,12 @@ export function debutThisMonth(manga: Manga[], n = 12): Manga[] {
  *  (★2026-07-13: 旧実装は作品の1巻書影を出し「一年前の本?」と誤読された。新刊巻を明示する) */
 export type MonthRelease = { m: Manga; date: string; number: number | null; cover: string | null };
 
+/** 実書影判定: 楽天の仮書影(文字だけ画像)はURL末尾が.gif=偽装影([[placeholder-cover-refresh]])。
+ *  ★今月の新刊はgifを「書影なし」として扱う(2026-08-06 ユーザ指定「gifは出したくない」)。 */
+function realCover(u?: string | null): boolean {
+  return !!u && !u.split("?")[0].toLowerCase().endsWith(".gif");
+}
+
 export function thisMonthReleases(manga: Manga[], fallback: Manga[], n = 12): MonthRelease[] {
   const now = new Date(Date.now() + 9 * 3600 * 1000); // JST
   const ym = `${now.getUTCFullYear()}-${String(now.getUTCMonth() + 1).padStart(2, "0")}`;
@@ -73,14 +79,18 @@ export function thisMonthReleases(manga: Manga[], fallback: Manga[], n = 12): Mo
         }
       }
     }
-    if (best) hits.push({ m, ...best });
+    if (best) {
+      // ★gif仮書影は書影なし扱い: 当月巻の実書影→作品代表の実書影→どちらも無ければ落とす
+      const c = realCover(best.cover) ? best.cover : realCover(coverUrl(m)) ? coverUrl(m)! : null;
+      if (c) hits.push({ m, ...best, cover: c });
+    }
   }
   hits.sort((a, b) => a.date.localeCompare(b.date));
-  // ★書影なしは出さない(当月巻の書影が無ければ作品代表書影で代用、それも無ければ落とす)
-  const out = hits.filter((h) => h.cover || coverUrl(h.m)).slice(0, n);
+  const out = hits.slice(0, n);
   for (const m of fallback) {
     if (out.length >= n) break;
-    if (!out.some((h) => h.m === m) && coverUrl(m)) out.push({ m, date: "", number: null, cover: null });
+    if (!out.some((h) => h.m === m) && realCover(coverUrl(m)))
+      out.push({ m, date: "", number: null, cover: coverUrl(m)! });
   }
   return out;
 }

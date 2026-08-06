@@ -107,7 +107,7 @@ export default function Design11() {
               authors: (r.m.authors ?? []).map((a) => a.name).join("・"),
               number: r.number,
               sub: `${r.number ? `${r.number}巻` : "新刊"}${releaseDayLabel(r.date) ? `・${releaseDayLabel(r.date)}` : ""}`,
-              cover: r.cover ?? coverUrl(r.m) ?? null,
+              cover: r.cover, // ★実書影のみ(gif仮書影はthisMonthReleasesで除外済 2026-08-06)
             }))}
           />
         </Tile>
