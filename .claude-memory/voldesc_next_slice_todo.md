@@ -103,3 +103,19 @@ seed **6,758 → 7,356行**(+598巻)。完走・消化した作:
 - golgo-13 / minami-no-teiou = **毎回先頭に出るが材料が無い=飛ばす**(既知)
 - ★次は **pocket-monsters-special 63** / **jojo-no-kimyouna-bouken 113**(未着手・材料あり)。patalliro/shizukanaru-don/tsurikichi-sanpei は材料0で台帳送り済み
 - zero 2 / g-defend 0 / marugoshi-deka 0 / nijitte-monogatari 0 / inochi-no-utsuwa 0 = 台帳送り済み
+
+## 2026-08-08 セッション後半(ユーザ「三時間続けて」)
+
+seed **7,485 → 7,688行**(通算 6,758 → 7,688 = **+930巻**)。
+- **ジョジョの奇妙な冒険 全63巻 完走** / **エリアの騎士** 56/57(v57は話タイトルのみ)
+- **犬夜叉** 48/56(**v1-6は収録話タイトルだけ**でキャラ紹介も無し=書けない / v37・v55はあらすじ欠)
+- **ポケットモンスターSPECIAL** 36/64(v3-22・v26-27・v30-32等は**シリーズ共通惹句のみ**。v23/24/25/30/31/32は40字前後の一行惹句で、水増しせずには60字ゲートに届かないため見送り)
+
+### 丸写しゲートに当たった実例(3件・全て再投入で通過)
+BLEACH v33 / 犬夜叉 v42・v49。いずれも**caption が短く要素が少ない巻**で、
+順番どおりに言い換えると50字連続一致になる。**主語と語順を変え、文を分割し直す**と通る。
+
+### 次の着手先(2026-08-08 時点・材料あり未着手)
+- **shijou-saikyou-no-deshi-kenichi 61** / **zettai-karen-children 60** / **higanjima-48-nichigo 53**
+- 材料0で台帳送り済み= patalliro / shizukanaru-don / tsurikichi-sanpei / ginga-densetsu-weed /
+  nijitte-monogatari / inochi-no-utsuwa / g-defend / marugoshi-deka
