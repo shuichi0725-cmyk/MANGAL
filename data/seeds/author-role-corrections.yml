@@ -63026,6 +63026,10 @@ corrections:
     role: 協力
 - series_key: name:京極夏彦|name:水木しげる漫画大全集
   credits:
+  - name: 宮健児
+    role: 解説
+  - name: 手塚真
+    role: 解説
   - name: いしいひさいち
     role: 解説
   - name: かわぐちかいじ
@@ -75117,3 +75121,27 @@ corrections:
   # 秋本治(Q1321466)は series_key の qid(Q11544888=次原隆二)と不一致で、
   # 楽天の巻書誌(8巻分で照合)にも一度も現れない。他の紐付き先は全て こち亀 関連。
   # 検出= _audit-author-not-in-volumes.py
+- series_key: name:ゆでたまご|name:キン肉マン
+  credits:
+  - name: 江川卓
+    role: 解説
+- series_key: qid:Q6426183|name:ときめきトゥナイト
+  credits:
+  - name: 原えりこ
+    role: 解説
+- series_key: qid:Q4348970|name:銀牙-流れ星 銀-
+  credits:
+  - name: 寺沢武一
+    role: 解説
+- series_key: name:ゆでたまご|name:闘将!!拉麺男
+  credits:
+  - name: 角田信朗
+    role: 解説
+- series_key: qid:Q452246|name:ウイングマン
+  credits:
+  - name: 鳥山明
+    role: 解説
+- series_key: qid:Q3805040|name:光の伝説
+  credits:
+  - name: 山崎浩子
+    role: 解説
