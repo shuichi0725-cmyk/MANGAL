@@ -94,7 +94,12 @@ seed **6,758 → 7,356行**(+598巻)。完走・消化した作:
 - ★MAJOR前半(v1-19)は**収録話タイトル+登場人物欄のみ**。人物欄の紹介文が巻ごとに更新される
   (例 v4から「両親を亡くした吾郎」)ので、**そこ+話タイトルから書ける**。推測は足さない。
 
+### 追加で消化(同セッション後半)
+- **Dreams** v34-71 +38(v1-33はローカル材料なし) / **落第忍者乱太郎** +16(v39/43/44/45/46はシリーズ惹句のみ)
+- **王家の紋章** +4(v66-70はシリーズ惹句のみ) / **むこうぶち** +9(v63-65は連載◯周年の煽りのみ)
+- **FAIRY TAIL** 62/63(**v61だけ**「第519話 笑顔を見せて」の話タイトル1行で欠落)
+
 ### 次の着手先(ランキング上位の材料在庫。2026-08-08時点)
 - golgo-13 / minami-no-teiou = **毎回先頭に出るが材料が無い=飛ばす**(既知)
-- **dreams 38** / **rakudai-ninja-rantarou 21** / **mukoubuchi 13** / **ouke-no-monshou 9** = 部分在庫
+- ★次は **pocket-monsters-special 63** / **jojo-no-kimyouna-bouken 113**(未着手・材料あり)。patalliro/shizukanaru-don/tsurikichi-sanpei は材料0で台帳送り済み
 - zero 2 / g-defend 0 / marugoshi-deka 0 / nijitte-monogatari 0 / inochi-no-utsuwa 0 = 台帳送り済み
