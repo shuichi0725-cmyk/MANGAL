@@ -1,6 +1,6 @@
 ---
 name: year_suffix_slug_survey
-description: "【調査済・未着手】年サフィックスslug(-西暦)全1,976頁の分裂洗い出し。ISBN交差=確定4件/同題要判定106/版割れ多数。worklist=docs/production-diagnostics/year-suffix-all.tsv"
+description: "【確定4件是正済】年サフィックスslug全1,976頁の分裂洗い出し。残=同題要判定106(per-case)/C類760の無印化(要ユーザ裁定)。worklist=docs/production-diagnostics/year-suffix-all.tsv"
 metadata: 
   node_type: memory
   type: project
@@ -42,9 +42,9 @@ worklist = **`docs/production-diagnostics/year-suffix-all.tsv`**(判定/分類/�
 `scripts/_audit-year-suffix-dup.py` は「基底slugが実在する同著者ペア」しか見ない(今回実行=69組)。
 **基底slugが無いC類760件を構造的に取りこぼす**。今回の洗い出しはそこを埋めたもの。
 
-## 残タスク(ユーザ判断待ち)
-1. 確定4件(SHIORI=統合 / 残り3件=混入巻除去)
-2. 106件を巻数順に per-case 版統合
-3. C類760件の無印化(URL整形・表示不変)
+## 残タスク
+1. ✅**確定4件是正済(2026-08-07)**: SHIORI=正題で1-22統合(page-dedup+overrides・v1は初版ISBN採用) / 薬屋=スクエニ6巻exclude→promoteが小学館5巻を自動復元+v13をoverrides挿入で**1-22完全化**(★混入巻がdedupで本物を負かしていた型。★同ISBNの旧種4エントリが昔からガード無効で眠っていた) / ヤマト=完結編3冊exclude / エレン=リメイクv25,26 exclude。全反映済み
+2. 106件を巻数順に per-case 版統合(エスパー魔美3頁型。1件ずつ版実体確認が要る=CROSS_ED52と同じ長期戦)
+3. C類760件の無印化 = **URL一括rename=要ユーザ裁定**(slug-overrides+aliases機構で機械化可能だが、760URLの張替えは影響大=GO待ち)
 
 関連: [[year_suffix_dup]] [[slug_collision_year_rule]] [[edition_canonical_mechanism]]
