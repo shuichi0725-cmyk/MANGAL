@@ -29,6 +29,9 @@ python scripts/_kobo-covers.py --prepare 30
 ```
 python scripts/_kobo-covers.py --apply slug1,slug2,...
 ```
+★**per-case指定**(「○○シリーズをKoboして」): `python scripts/_kobo-covers.py --slugs slugA,slugB,...`
+= その頁だけを **data/manga.v2 から直接**対象化(previewに入っていなくてよい)。★done記録も無視するので
+直結数字型の偽「一致なし」の再照会にも使える。
 4. **反映**: touchedを `_reflect-targeted.py --only ... --push`(skill reflect-targeted)。
 5. **検証**: 反映後 `残欠け` が減ったか数字確認。REJECT/発見(同題混在等)は docs/production-diagnostics のworklistへ。
 
@@ -36,6 +39,7 @@ python scripts/_kobo-covers.py --apply slug1,slug2,...
 軽症組でKoboヒット~35%、さらに装丁目視で絞られ**実補完は推定800-900作**。電子未配信(ドカベン=水島新司拒否/学習まんが/貸本)は埋まらない=無理しない。1回10-20作。
 
 ## 罠
+- ★**直結数字題**(まるごし刑事69型 2026-08-06): Kobo題が「題69」とスペース/括弧なしで数字直結するレーベルがあり、旧matcherは全巻「一致なし」でdone記録していた。恒久修正済(括弧一致ゼロ+直結3巻以上の時だけ採用=続編「題2」誤爆防止)。★**過去の「一致なし」doneはこの型の偽記録を含む**=疑わしい作品はdoneから外して再照会してよい(まるごし=75巻全部あった)。
 - 楽天cacheに題があっても書影が`noimage`のことがある→除外必須([[rakuten_out_of_stock_flag]] [[rakuten_cover_data_asset]])。
 - ISBN無し巻(プレISBN古典)はKoboでも埋まらない=母集団外(ISBN有欠けのみ対象)。
 - 藤子Ⓐ系は頁側の装丁次第でACCEPT/REJECTが割れる=必ず個別目視(まんが道=REJECT/魔太郎がくる=ACCEPT)。

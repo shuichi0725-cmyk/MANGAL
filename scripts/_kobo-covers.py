@@ -34,11 +34,20 @@ def kobo(title, page):
     return json.loads(urllib.request.urlopen(req, timeout=25).read())
 
 VOLP = re.compile(r'[（(]\s*(\d{1,3})\s*[)）]\s*$')
+# ★直結数字型(まるごし刑事69型 2026-08-06 ユーザ発見): Kobo題が「題69」とスペース無しで数字直結する
+#   レーベルがあり、括弧形式限定だと全巻不一致→「Kobo一致なし」と誤記帳していた。
+#   誤爆防止(続編「題2」型): 括弧一致がゼロ かつ 直結番号が3巻以上ある時だけ採用する。
+VOLP_BARE = re.compile(r'(\d{1,3})\s*$')
 
-def prepare(n_works):
+def prepare(n_works, only=None):
+    """only= slug集合を指定すると、その頁だけを対象にする(per-case「○○をKoboして」用)。
+    ★only指定時は done 記録も無視する(過去の偽「一致なし」を再照会できるように)。"""
     # 軽症組をpreviewディレクトリ(=既に抽出済み)から、欠け巻数降順で
     works = []
-    for p in glob.glob(f'{ROOT}/.preview-data/manga/*.yml'):
+    src = f'{ROOT}/data/manga.v2' if only else f'{ROOT}/.preview-data/manga'
+    for p in glob.glob(f'{src}/*.yml'):
+        if only and os.path.basename(p)[:-4] not in only:
+            continue
         d = yaml.load(open(p, encoding='utf-8'), Loader=L)
         if not d:
             continue
@@ -50,11 +59,14 @@ def prepare(n_works):
             works.append((len(miss_isbn), os.path.basename(p)[:-4], d.get('title'), miss_isbn, d))
     works.sort(reverse=True, key=lambda x: x[0])
     done = json.load(open(f'{ROOT}/.cache/kobo-done.json', encoding='utf-8')) if os.path.exists(f'{ROOT}/.cache/kobo-done.json') else []
-    works = [w for w in works if w[1] not in done][:n_works]
+    if not only:
+        works = [w for w in works if w[1] not in done]
+    works = works[:n_works]
     pend = []
     for nmiss, slug, title, miss, d in works:
         pt = norm(title)
         vols = {}
+        bare = {}
         total = None
         pg = 1
         while pg <= 4:
@@ -66,17 +78,23 @@ def prepare(n_works):
             total = r.get('count') or 0
             for it in (r.get('Items') or []):
                 t2 = unicodedata.normalize('NFKC', str(it.get('title'))).strip()
-                m = VOLP.search(t2)
-                base = norm(VOLP.sub('', t2))
-                if base != pt or not m:
-                    continue
                 img = str(it.get('largeImageUrl') or '')
-                if img and 'noimage' not in img:
+                if not img or 'noimage' in img:
+                    continue
+                m = VOLP.search(t2)
+                if m and norm(VOLP.sub('', t2)) == pt:
                     vols.setdefault(int(m.group(1)), img)
+                    continue
+                mb = VOLP_BARE.search(t2)
+                if mb and norm(VOLP_BARE.sub('', t2)) == pt:
+                    bare.setdefault(int(mb.group(1)), img)
             pg += 1
             time.sleep(1.3)
             if total and pg * 30 > total:
                 break
+        if not vols and len(bare) >= 3:
+            vols = bare
+            print(f'  {slug}: 直結数字型として採用({len(bare)}巻)')
         cand = [(et, vn, ib, vols[vn]) for et, vn, ib in miss if vn in vols]
         if not cand:
             print(f'  {slug}: 欠{nmiss} → Kobo一致なし(skip)')
@@ -137,5 +155,8 @@ def apply(ok_slugs):
 if __name__ == '__main__':
     if sys.argv[1] == '--prepare':
         prepare(int(sys.argv[2]))
+    elif sys.argv[1] == '--slugs':
+        s = set(sys.argv[2].split(','))
+        prepare(len(s), only=s)
     elif sys.argv[1] == '--apply':
         apply(sys.argv[2].split(','))
