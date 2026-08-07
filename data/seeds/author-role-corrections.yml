@@ -73052,6 +73052,10 @@ corrections:
   - 大沢美月
   remove:
   - うさ銀太郎
+- series_key: qid:Q193300|name:メトロポリス
+  remove:
+  - 藤子不二雄Ⓐ
+  note: 角川文庫版(9784041851203)のMADB creatorにだけ「藤子不二雄A」が入る解説者混入型。同ISBNの楽天著者・他3版のMADB creator・JPRO出版権はいずれも手塚治虫のみ(2026-08-07 ユーザ指摘)
 - series_key: qid:Q193300|name:ブラック・ジャック
   remove:
   - 吉富昭仁
