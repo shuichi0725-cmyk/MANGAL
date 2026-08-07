@@ -1,0 +1,147 @@
+slug: esper-mami
+canonical_label: 通常版
+canonical_imprint: てんとう虫コミックス
+canonical_publisher: 小学館
+source: '★ユーザ指摘 2026-08-07「エスパー魔美が分裂していて足りていない」+ てんとう虫コミックス3巻(9784091415035)の提示。楽天書誌の出版社・叢書名で5版を確定: てんとう虫コミックス9巻(ISBN 9784091415011-097の連番)/中公コミックス藤子不二雄ランド9巻/小学館コロコロ文庫6巻/藤子・F・不二雄大全集5巻/てんとう虫コミックス2017年新装9巻。★従来は3頁に割れ、さらに大全集タブに2017新装の6-9巻が混入し、てんとう虫版はv3欠番+v6,v7がISBN無しの幽霊だった'
+publisher: 小学館
+suppress_types:
+- null
+- standard
+- bunkobon
+- wideban
+- kanzenban
+- shinsoban
+- aizoban
+- deluxe
+volumes:
+- number: 1
+  isbn13: '9784091415011'
+  release_date: '1978-01-13'
+- number: 2
+  isbn13: '9784091415028'
+  release_date: '1978-03-04'
+- number: 3
+  isbn13: '9784091415035'
+  release_date: '1978-05'
+- number: 4
+  isbn13: '9784091415042'
+  release_date: '1978-09-05'
+- number: 5
+  isbn13: '9784091415059'
+  release_date: '1978-10-05'
+- number: 6
+  isbn13: '9784091415066'
+  release_date: '1980-08-05'
+- number: 7
+  isbn13: '9784091415073'
+  release_date: '1980-10-06'
+- number: 8
+  isbn13: '9784091415080'
+  release_date: '1981-10-05'
+- number: 9
+  isbn13: '9784091415097'
+  release_date: '1983-06-04'
+extra_editions:
+- label: 藤子不二雄ランド
+  type: shinsoban
+  publisher: 中央公論社
+  volumes:
+  - number: 1
+    isbn13: '9784124100235'
+    release_date: '1984-11-16'
+  - number: 2
+    isbn13: '9784124100273'
+    release_date: '1984-12-14'
+  - number: 3
+    isbn13: '9784124100310'
+    release_date: '1985-01-18'
+  - number: 4
+    isbn13: '9784124100358'
+    release_date: '1985-02-15'
+  - number: 5
+    isbn13: '9784124100396'
+    release_date: '1985-03-15'
+  - number: 6
+    isbn13: '9784124100433'
+    release_date: '1985-04-19'
+  - number: 7
+    isbn13: '9784124100471'
+    release_date: '1985-05-17'
+  - number: 8
+    isbn13: '9784124100518'
+    release_date: '1985-06'
+  - number: 9
+    isbn13: '9784124100556'
+    release_date: '1985-07'
+- label: てんとう虫コミックス(2017年新装)
+  type: kanzenban
+  publisher: 小学館
+  volumes:
+  - number: 1
+    isbn13: '9784091423153'
+    release_date: '2017-02-28'
+  - number: 2
+    isbn13: '9784091423160'
+    release_date: '2017-02-28'
+  - number: 3
+    isbn13: '9784091423177'
+    release_date: '2017-03-28'
+  - number: 4
+    isbn13: '9784091423184'
+    release_date: '2017-04-28'
+  - number: 5
+    isbn13: '9784091423191'
+    release_date: '2017-05-26'
+  - number: 6
+    isbn13: '9784091423207'
+    release_date: '2017-06-28'
+  - number: 7
+    isbn13: '9784091423238'
+    release_date: '2017-07-28'
+  - number: 8
+    isbn13: '9784091423245'
+    release_date: '2017-08-28'
+  - number: 9
+    isbn13: '9784091423252'
+    release_date: '2017-09-28'
+- label: 藤子・F・不二雄大全集
+  type: aizoban
+  publisher: 小学館
+  volumes:
+  - number: 1
+    isbn13: '9784091434067'
+    release_date: '2009-08-25'
+  - number: 2
+    isbn13: '9784091434128'
+    release_date: '2009-11'
+  - number: 3
+    isbn13: '9784091434227'
+    release_date: '2010-02-25'
+  - number: 4
+    isbn13: '9784091434272'
+    release_date: '2010-04-23'
+  - number: 5
+    isbn13: '9784091434326'
+    release_date: '2010-06-25'
+- label: 小学館コロコロ文庫
+  type: bunkobon
+  publisher: 小学館
+  volumes:
+  - number: 1
+    isbn13: '9784091941015'
+    release_date: '1996-09-20'
+  - number: 2
+    isbn13: '9784091941022'
+    release_date: '1996-09-20'
+  - number: 3
+    isbn13: '9784091941039'
+    release_date: '1996-09-20'
+  - number: 4
+    isbn13: '9784091941046'
+    release_date: '1996-11-22'
+  - number: 5
+    isbn13: '9784091941053'
+    release_date: '1996-11-22'
+  - number: 6
+    isbn13: '9784091941060'
+    release_date: '1996-11-22'
