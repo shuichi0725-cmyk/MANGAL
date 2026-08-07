@@ -137,3 +137,4 @@
 - [JPRO出版権検索=新書誌源](jpro_pubrights_search.md) — ログイン不要POST。題名→全巻ISBN+発行元が一発(7巻欠け即解決の実証)
 - [【厳守】edition-overridesのキー=公開slug](edition_overrides_key_is_public_slug.md) — SRC stemは死にキー(無警告)。15件発掘・是正/回帰2件復元済
 - [【宿題】電子書籍ストア一覧シート](ebook_store_sheet_homework.md) — 紫パネル根治=マンバ風シート。各ストアのアフィ申請通過後に着手。試し読みボタン(検証済み)とカラー版コーナーも同梱
+- [【確認待ち】魔術士オーフェン見直し](oofen_franchise_state.md) — 本編canonical是正+欠落3作を自己完結頁で新規登録。preview9頁セット
