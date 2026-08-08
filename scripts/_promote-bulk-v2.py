@@ -463,8 +463,11 @@ def apply_edition_canonical(slug: str, editions: list, canon: dict) -> list:
         out.append(mk(ce.get("volumes"), ce.get("label") or "コンパクト版", pub, ce.get("label"), "aizoban"))
     # ★extra_editions(2026-07-04 激マン型=完全版侵食の版分離用): 任意type/labelの追加版を並べる
     for xe in (s.get("extra_editions") or []):
+        # ★imprint は seed に明示があればそれを使う(無ければ従来どおり label で代用)。
+        #   label=版タブ名(「文庫版(集英社文庫コミック版)」等)と imprint=レーベル名(「集英社文庫」)は
+        #   別物で、label 代用だとタブ名がそのまま奥付レーベルとして出てしまう(2026-08-08 JIN で実踏)。
         out.append(mk(xe.get("volumes"), xe.get("label") or "別版", xe.get("publisher") or pub,
-                      xe.get("label"), xe.get("type") or "kanzenban"))
+                      xe.get("imprint") or xe.get("label"), xe.get("type") or "kanzenban"))
     # standard/aizoban 以外の既存版(文庫等)は温存
     # ★suppress_types(2026-07-05 009): canonicalのextraと重複する既存タブを明示除去(opt-in)
     _sup = set(s.get("suppress_types") or [])
