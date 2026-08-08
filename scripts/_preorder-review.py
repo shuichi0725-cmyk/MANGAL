@@ -24,7 +24,7 @@
 使い方: python scripts/_preorder-review.py [--src .preview-data/manga]
 裁定後: 直した/除去した/問題なしと判断した行を消して再実行 → 0件で push可。
 """
-import argparse, glob, io, json, os, re, sys
+import argparse, glob, io, json, os, re, sys, unicodedata
 sys.stdout.reconfigure(encoding="utf-8")
 import yaml
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -55,6 +55,37 @@ def base_title(t):
     return t
 
 
+# ★強い正規化(2026-08-08 新設・姫騎士型): 既存頁の題とドラフト題の**表記差**を全部吸収して突合する。
+#   base_title() は副題/巻を剥ぐだけなので、下記の差で完全一致を外し**続巻を新作として別頁化**していた:
+#     ・全角/半角の記号差(「姫騎士がクラスメート**！**」↔ 既存頁「…**!**」)
+#     ・コミカライズ表記(「 THE COMIC」「＠COMIC」「コミカライズ」)
+#     ・巻数が題末尾に直結(「THE COMIC**10**」)
+#   実害: 『姫騎士がクラスメート!』全9巻が既存なのに、10巻を1巻とする別頁を作った(ユーザ指摘)。
+def hard_norm(t):
+    t = unicodedata.normalize("NFKC", str(t or ""))
+    t = re.sub(r"(THE\s*COMIC|@\s*COMIC|＠\s*COMIC|コミカライズ)", "", t, flags=re.I)
+    t = re.sub(r"[0-9]+\s*$", "", t)
+    t = re.sub(r"[\s　・!！?？:：〜~\-＆&。、．.,（）()【】\[\]『』「」]", "", t)
+    return t.lower()
+
+
+def _load_cont_fp():
+    """同名別作品と裁定済みの組(=再フラグしない)。data/seeds/continuation-false-positive.tsv"""
+    out = set()
+    p = os.path.join(ROOT, "data", "seeds", "continuation-false-positive.tsv")
+    if os.path.exists(p):
+        for i, ln in enumerate(io.open(p, encoding="utf-8")):
+            if i == 0 or not ln.strip():
+                continue
+            c = ln.rstrip().split(chr(9))
+            if len(c) >= 2:
+                out.add((c[0], c[1]))
+    return out
+
+
+_CONT_FP = _load_cont_fp()
+
+
 def load_pending(name, col):
     p = os.path.join(ROOT, "docs", "production-diagnostics", name)
     out = set()
@@ -73,11 +104,13 @@ def main():
 
     # 本番既存の基底題集合(続巻検知の照合先)
     prod_bases = {}
+    prod_hard = {}
     if os.path.exists(IDX):
         d = json.load(io.open(IDX, encoding="utf-8"))
         ti = d["f"].index("title"); si = d["f"].index("slug")
         for r in d["d"]:
             prod_bases.setdefault(base_title(r[ti]), r[si])
+            prod_hard.setdefault(hard_norm(r[ti]), r[si])
 
     misread = load_pending("slug-gate-pending.tsv", 0)      # col0=slug
     kata = load_pending("slug-katakana-pending.tsv", 2)     # col2=slug
@@ -97,6 +130,11 @@ def main():
         bt = base_title(title)
         if bt and bt != title and bt in prod_bases:
             rows.append(("CONTINUATION", slug, f"基底題『{bt}』=既存 {prod_bases[bt]}(続巻誤生成疑い→種4転送)", title))
+        _hn = hard_norm(title)
+        if _hn and _hn in prod_hard and prod_hard[_hn] != slug and (slug, prod_hard[_hn]) not in _CONT_FP:
+            rows.append(("CONTINUATION", slug,
+                         f"★正規化題が既存頁と一致『{prod_hard[_hn]}』(記号差/THE COMIC/末尾巻数を吸収)=続巻の誤新作化疑い→種4転送",
+                         title))
         if _NONMANGA_IMPRINT.search(imp) or _NONMANGA_TITLE.search(title):
             hit = (_NONMANGA_IMPRINT.search(imp) or _NONMANGA_TITLE.search(title)).group()
             rows.append(("NONMANGA", slug, f"非漫画/編集本疑い(hit={hit})→deny候補", title))

@@ -23,7 +23,25 @@ try:
 except Exception:
     _KKS = None
 
-_VOL_TAIL = re.compile(r"(?:[（(]\s*\d{1,3}\s*[)）]|第\s*\d{1,3}\s*巻|[\s　]+\d{1,3}|(?<=[ぁ-んァ-ヶ一-鿿])\d{1,3})\s*$")
+# ★末尾の巻表示(2026-08-08 大幅拡張。それまで取りこぼしていた型をユーザに次々指摘された):
+#   旧: (N) / 第N巻 / 空白+N / かな漢字の直後のN  だけ
+#   追加: **(全N)/(全N巻)/(N巻)**(温泉シャーク(全1)・Mother(全1)・ツノカクシ(全1)・エドゼニ(1巻)) /
+#         **ラテン・記号の直後の裸数字**(THE COMIC10 / ズバババァーン!!1) /
+#         **上下中・前後編**(ムジナの城（上）・サムライトルーパー 上)。
+#   ★巻表示は題ではないので必ず剥がす。剥がし忘れると「よけいな文字」として表示に出る。
+_VOL_TAIL = re.compile(
+    r"(?:[（(]\s*全?\s*\d{1,3}\s*巻?\s*[)）]"          # (1) (全1) (1巻) (全1巻)
+    r"|第\s*\d{1,3}\s*巻"                               # 第1巻
+    r"|[\s　]+全?\d{1,3}"                               # 空白+1 / 空白+全1
+    r"|(?<=[ぁ-んァ-ヶ一-鿿])\d{1,3}"                   # かな漢字の直後の裸数字(既存)
+    r"|[\s　]*[（(](?:上|下|中|前編|後編)[)）]"          # ★括弧付きの上下中・前後編
+    r"|[\s　]+(?:上|下|中|前編|後編)"                    # ★空白+上下中・前後編
+    r")\s*$")
+# ★**ラテン/記号の直後の裸数字は剥がさない**(2026-08-08 検討して却下)。
+#   「THE COMIC10」型は剥がしたいが、同じ規則が「ワイルド7」「AKIRA1」型の**題に含まれる数字**を壊す。
+#   数字の剥離は本質的に曖昧なので、**曖昧な型は簿(出荷前レビュー)に回して人が裁く**方針にする。
+#   ★なお既存の「かな漢字の直後の裸数字」も「ワイルド7」→「ワイルド」と壊す既知の穴だが、
+#   長年の挙動なので今回は触らない(変えると別の回帰が出る)。新規題に数字が付く作品は簿で拾うこと。
 _SUB = re.compile(r"[\s　]*[〜～\-][^〜～]*?[〜～]\s*$")   # 〜副題〜 / ～副題～
 _ATCOMIC = re.compile(r"(?:[@＠]\s*comic|[\s　]+THE\s+COMIC)\s*$", re.I)  # ★「〜 THE COMIC」尾も剥離(ユーザ裁定 2026-07-15)
 _PROV = re.compile(r"[（(]\s*仮\s*[)）]")
@@ -323,8 +341,64 @@ def make_slug(base, kana_raw=None, existing=None):
         slug = cut.rstrip("-")
         if len(slug) < 2:
             return None
+    # ★ヨミ基点への自動是正(2026-08-08 新設。それまでは「誤読をflagするだけ」で直していなかった)
+    #   根因= slug を **漢字題から**作っていた。確定ヨミ(楽天titleKana)を持っているのに、
+    #   それは事後照合に使うだけで生成には渡していなかったため、装置の漢字誤読がそのまま出た。
+    #   実害(2026-08-08 日次蒸留・28件をユーザ指摘後に手で直した):
+    #     堕天使ちゃん→chan-(堕天使が丸ごと欠落) / 魔導士→ma-shirubeshi / 聖巡→kiyoshijun /
+    #     包丁人味平→houchoujinmi-taira / 日の名残り→nichi- / 酔拳→yoiken / 転生剣豪→tensei-(テンショウが正)
+    #   ★方針= 題基点を第一候補のまま残し(ラテン混じり題「BanG Dream!」等の綴りを活かすため)、
+    #     **ゲートが不一致を出した時だけヨミ基点で作り直す**。ヨミは純カタカナで捏造ゲート済みなので
+    #     誤読が構造的に起きない。作り直しても不一致なら従来どおり pending 簿に残す(fail-open)。
+    if kana_raw:
+        _k = _hira2kata(re.sub(r"[\s　]+", "", str(kana_raw)))
+        if not slug_kana_gate(base, _k, slug):
+            _fix = None
+            try:
+                from _slug_kana_lib import make_slug as _slug_impl2
+                # ★カタカナ列は janome が1語(未知語)として扱い語境界が消える=slugが全部連結になる。
+                #   題側に**ひらがなの助詞**が見えているので、その並び順でヨミを割って境界を復元する
+                #   (ヒノナゴリ→ヒ ノ ナゴリ / ダテンシチャンハガンバレナイ→ダテンシチャン ハ ガンバレナイ)。
+                #   左から順にマッチさせるので、ヨミ中に同じカナが複数あっても題の出現順に従う。
+                _P = {"の": "ノ", "は": "ハ", "を": "ヲ", "に": "ニ", "と": "ト",
+                      "で": "デ", "が": "ガ", "も": "モ", "へ": "ヘ"}
+                _seq = [_P[c] for c in str(base) if c in _P]
+                _seg, _rest = [], _k
+                for _p in _seq:
+                    _i = _rest.find(_p, 1)          # 先頭の1文字目は助詞にしない
+                    if _i <= 0:
+                        continue
+                    _seg.append(_rest[:_i]); _seg.append(_p); _rest = _rest[_i + 1:]
+                _seg.append(_rest)
+                _src = " ".join(x for x in _seg if x) if len(_seg) > 1 else _k
+                _fix = _slug_impl2(_src)
+            except Exception:
+                _fix = None
+            if _fix:
+                _fix = re.sub(r"[^a-z0-9-]+", "-", str(_fix).lower()).strip("-")
+                _fix = re.sub(r"-+", "-", _fix)
+                _fix = re.sub(r"(?<=[a-z])-?\d{1,3}$", "", _fix).strip("-")
+                # ★助詞のヘボン標準化(CLAUDE.md slug規則2): は=wa / を=o / へ=e。
+                #   ヨミ経由だと ハ→ha, ヲ→wo になるので綴りを揃える。
+                _fix = re.sub(r"(^|-)ha(-|$)", r"\1wa\2", _fix)
+                _fix = re.sub(r"(^|-)wo(-|$)", r"\1o\2", _fix)
+                _fix = re.sub(r"(^|-)he(-|$)", r"\1e\2", _fix)
+                # ★自動採用は「題にラテン文字が無い」時だけ(2026-08-08)。
+                #   ラテン混じり題はヨミ経由で綴りが劣化する(「THE COMIC」→ザコミック→zakomikku /
+                #   「BanG Dream!」→バンドリ…)。その場合は題基点を残し、候補は下の簿に併記して人が裁く。
+                _has_latin = bool(re.search(r"[A-Za-z]", str(base)))
+                if len(_fix) >= 2 and not _has_latin and (existing is None or _fix not in existing):
+                    slug = _fix
+                elif _fix != slug:
+                    # 採用しない場合も**候補を簿に残す**=次に人が直す時の答えを添える
+                    try:
+                        import os as _os
+                        _tsv = "docs/production-diagnostics/slug-kana-candidate.tsv"
+                        _os.makedirs(_os.path.dirname(_tsv), exist_ok=True)
+                        with open(_tsv, "a", encoding="utf-8") as _f:
+                            _f.write(f"{slug}\t{_fix}\t{base}\t{_k}\n")
+                    except Exception:
+                        pass
     if existing is not None and slug in existing:
         return None                             # 衝突=hold(-2026で誤魔化さない)
-    if kana_raw:
-        slug_kana_gate(base, _hira2kata(re.sub(r"[\s　]+", "", str(kana_raw))), slug)  # ★誤読flag(fail-open)
     return slug
