@@ -18,7 +18,7 @@ metadata:
 
 ## 現在地(2026-08-09 セッション終了時)
 
-- seed `data/seeds/volume-desc-ja.jsonl` = **8,452行**(このセッション開始7,760 → **+692巻**)。
+- seed `data/seeds/volume-desc-ja.jsonl` = **8,495行**(このセッション開始7,760 → **+735巻**)。
 - 材料なし台帳 `.cache/voldesc/no-material.txt` = 1,406件。
 
 ### 2026-08-09 セッション(ユーザ「五時間連続で」)で完走・消化した作
@@ -27,11 +27,11 @@ metadata:
 彼岸島48日後+52(v11/12は話数タイトルのみ・v43材料なし) / スーパーマリオくん+54(v34-40共通惹句のみ) /
 金瓶梅24 / オーイ!とんぼ13 / ゴッドハンド輝15 / 新コボちゃん12 / **夕焼けの詩(三丁目の夕日)+57(v16-72)** /
 **ハヤテのごとく!全52完走** / K2+38(v1-7,v9-15は共通惹句+話数のみ) / **ちはやふる全50完走** /
-めしばな刑事タチバナ+44 / 酒のほそ道22 / 剣客商売24 / スキップ・ビート27 / 空手小公子7 / **BE BLUES!全49完走**
+めしばな刑事タチバナ+44 / 酒のほそ道22 / 剣客商売24 / スキップ・ビート27 / 空手小公子7 / **BE BLUES!全49完走** / バトルスタディーズ+43(v6-10は話数タイトルのみ)
 
 ### ★次の着手先(材料収集済み・未着手。`--slugs`で即書ける)
 
-- **battle-studies 48**(medcap181) / **q-e-d 50**(medcap79=薄い) / **glass-no-kamen 49**(medcap87=薄い) /
+- **q-e-d 50**(medcap79=薄い) / **glass-no-kamen 49**(medcap87=薄い) /
   **mairimashita-iruma-kun 38**(medcap109) / kureyon-shin-chan 4
 - 材料0で台帳送り済み(飛ばす)= golgo-13 / minami-no-teiou / nijitte-monogatari / inochi-no-utsuwa / zero /
   g-defend / marugoshi-deka / patalliro / shizukanaru-don / tsurikichi-sanpei / ginga-densetsu-weed /
