@@ -1,0 +1,89 @@
+slug: 7-nwairudo7
+canonical_label: 通常版
+canonical_imprint: トクマコミックス
+canonical_publisher: 徳間書店
+publisher: 徳間書店
+source: wikipedia+madb+ndl+rakuten
+volumes:
+- number: 1
+  isbn13: null
+  release_date: null
+- number: 2
+  isbn13: null
+  release_date: null
+- number: 3
+  isbn13: null
+  release_date: null
+- number: 4
+  isbn13: null
+  release_date: null
+- number: 5
+  isbn13: null
+  release_date: null
+- number: 6
+  isbn13: null
+  release_date: '1988-11-01'
+- number: 7
+  isbn13: null
+  release_date: '1989-01-20'
+- number: 8
+  isbn13: '9784197890507'
+  release_date: '1989-05'
+- number: 9
+  isbn13: '9784197891009'
+  release_date: '1989-10-01'
+- number: 10
+  isbn13: '9784197800117'
+  release_date: '1990-01-01'
+- number: 11
+  isbn13: '9784197800124'
+  release_date: '1990-01-25'
+- number: 12
+  isbn13: '9784197800407'
+  release_date: '1990-04-01'
+- number: 13
+  isbn13: null
+  release_date: '1990-10-01'
+- number: 14
+  isbn13: null
+  release_date: '1991-02-20'
+extra_editions:
+- label: 文庫版（ぶんか社）
+  type: bunkobon
+  publisher: ぶんか社
+  imprint: ぶんか社
+  volumes:
+  - number: 1
+    isbn13: '9784821181360'
+    release_date: '2005-03'
+  - number: 2
+    isbn13: '9784821181377'
+    release_date: '2005-03'
+  - number: 3
+    isbn13: '9784821181469'
+    release_date: '2005-04'
+  - number: 4
+    isbn13: '9784821181476'
+    release_date: '2005-04'
+  - number: 5
+    isbn13: '9784821181537'
+    release_date: '2005-05'
+  - number: 6
+    isbn13: '9784821181544'
+    release_date: '2005-05'
+  - number: 7
+    isbn13: '9784821181629'
+    release_date: '2005-06'
+  - number: 8
+    isbn13: '9784821181636'
+    release_date: '2005-06'
+note: |
+  2026-08-08 per-case是正(ユーザ提供のNDLサーチTSV + Wikipedia)。本編ワイルド7と**同じ版混在(接ぎ木)**だった。
+  ★旧状態: 「通常版」14巻のうち v1-8 が ぶんか社版(2005年・文庫)、v9-14 が徳間書店トクマコミックス版(1989-1991)。
+   レーベル「トクマコミックス」に出版社「ぶんか社」が付く矛盾も出ており、徳間版 v1-v8 は本番に存在しなかった。
+  【再構築】通常版 = 徳間書店トクマコミックス 全14巻(初出単行本) / 文庫版（ぶんか社）= 全8巻(2005-03〜2005-06)。
+  ★通常版 v1-v5 は release_date/ISBN を空にしてある。MADBが持つのは v6 以降だけで、
+   TSVに在るのは図書館所蔵の「1988」(v6が1988-11なのでv1が1988とは考えにくい)と
+   NDLのまとめ書誌「野獣伝説 1～5」のみ。初版日もISBNも確定できないため**推測で埋めない**。
+  ★徳間 v8 の ISBN 9784197890507 は本TSVから新規に判明したもの(旧頁ではこの巻がぶんか社版に占有されていた)。
+  【出典】巻構成=Wikipedia(全14巻) / 巻・日付=メディア芸術DB(MADB) / ぶんか社版=NDLサーチTSV × 楽天(ISBN直引き)一致。

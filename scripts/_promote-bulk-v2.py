@@ -3399,7 +3399,7 @@ def main():
             if _all_y and _eov_yr.get("year_started") is None:
                 new_yml["year_started"] = min(_all_y)
             if (new_yml.get("year_ended") is not None and slug not in _STATUS_CORR
-                    and _eov_yr.get("year_started") is None):
+                    and _eov_yr.get("year_ended") is None):
                 _stds = [e for e in _eds if e.get("type") == "standard"] or _eds
                 _pvm: dict = {}
                 for e in _stds:
