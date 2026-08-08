@@ -146,3 +146,4 @@
 - [ひぐらし=編ごとに別頁・掲載誌20頁誤り](higurashi_franchise_state.md) — 4作新規登録+令の3編混在分離。残=宙出版アンソロジー頁/雀・デイブレイク系
 - [【厳守】per-case修正は必ずpreviewに上げる](percase_fix_always_to_preview.md) — reflectだけでは未投入頁が素通り。明示cp+索引再構築
 - [【厳守】存在チェックはISBNで引く](existence_check_by_isbn_first.md) — 題検索は表記ゆらぎで素通り→二重頁。2026-08-08に2回踏んだ
+- [【最重要】壊れているから消す、を禁止](never_delete_because_broken.md) — 消失は誰にも見えない。消してよいのは非書籍/scope外/移設の3つだけ
