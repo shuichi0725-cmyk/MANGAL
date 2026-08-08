@@ -3390,9 +3390,16 @@ def main():
             _all_y = [int(str(v["release_date"])[:4]) for e in _eds
                       for vs in [e.get("volumes") or []] + [vv.get("volumes") or [] for vv in (e.get("versions") or [])]
                       for v in vs if v.get("release_date") and str(v["release_date"])[:4].isdigit()]
-            if _all_y:
+            # ★edition-overrides で年が明示指定されている頁は上書きしない(2026-08-08 ワイルド7で実踏)。
+            #   override 側は「★年の明示指定(override直書き)最優先」と宣言しているのに、
+            #   canonical後のこの再導出が無条件で潰していた(JINのimprint代用と同型の穴)。
+            #   ワイルド7=少年キング1969連載開始。単行本初刊は1970、canonical後は1973(初刊v1-13が
+            #   初版日不明で空)に化けていた。連載年は巻の刊行年からは導けない。
+            _eov_yr = _load_edition_overrides().get(slug) or {}
+            if _all_y and _eov_yr.get("year_started") is None:
                 new_yml["year_started"] = min(_all_y)
-            if new_yml.get("year_ended") is not None and slug not in _STATUS_CORR:
+            if (new_yml.get("year_ended") is not None and slug not in _STATUS_CORR
+                    and _eov_yr.get("year_started") is None):
                 _stds = [e for e in _eds if e.get("type") == "standard"] or _eds
                 _pvm: dict = {}
                 for e in _stds:
