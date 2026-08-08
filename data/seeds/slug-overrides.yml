@@ -1,6 +1,5 @@
 100-mandoru-naito: 100-mandoru-night
 2-ma-no-hito-all-2shoku-karaaban: 2-ma-no-hito-all-2shoku-colorban
-7-nwairudo7: 7-nwild7
 999-dokutaa: 999-doctor
 aho-jiru-reinboo: aho-jiru-rainbow
 anima-1452: anima-jugemu-1987
@@ -108,15 +107,15 @@ ouji-ni-dekiai-saretakunai-node-motopurinsesu-desu-dansou-shitsuji-ni-narimasu: 
 overrides:
   sp-2000:
     at: '2026-07-27'
-    reason: '二重頁統合(小池書院キングシリーズ復刻頁を版タブ化)後、正題SPセキュリティポリスの読みslugへ(空いた旧slugを再利用)'
+    reason: 二重頁統合(小池書院キングシリーズ復刻頁を版タブ化)後、正題SPセキュリティポリスの読みslugへ(空いた旧slugを再利用)
     slug: sp-security-police
   mangakasan-to-ashisutantosan-to-2:
     at: '2026-07-27'
-    reason: '規則4(明白な辞書英単語=assistant)+敬称-san分離。本編slug mangaka-san-to-assistant-san-to と家族整合(ユーザ照会「二巻疑い」の調査時に発見。疑い自体はWiki全1巻続編で白)'
+    reason: 規則4(明白な辞書英単語=assistant)+敬称-san分離。本編slug mangaka-san-to-assistant-san-to と家族整合(ユーザ照会「二巻疑い」の調査時に発見。疑い自体はWiki全1巻続編で白)
     slug: mangaka-san-to-assistant-san-to-2
   q-e-d:
     at: '2026-07-27'
-    reason: '正式題「Q.E.D.証明終了」への題是正(seed3 title)と同時にslugも正式読みへ。断片頁q-e-d-shoumei-shuuryouはpage-dedupで統合drop'
+    reason: 正式題「Q.E.D.証明終了」への題是正(seed3 title)と同時にslugも正式読みへ。断片頁q-e-d-shoumei-shuuryouはpage-dedupで統合drop
     slug: q-e-d-shoumei-shuuryou
   drsuranpu:
     at: '2026-07-27'
@@ -4218,6 +4217,14 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: zoukin-to-houseki
+  7-nwairudo7:
+    at: '2026-08-08'
+    reason: 数字始まり題の機械生成slugが破損(「新ワイルド7」→7-nwairudo7)。読みシンワイルドセブン基点で本編 wild-7 と整合する形に是正(ユーザ裁定 2026-08-08)
+    slug: shin-wild-7
+  zoku-7-n-wairudo7:
+    at: '2026-08-08'
+    reason: 数字始まり題の機械生成slugが破損(「新ワイルド7」→7-nwairudo7)。読みシンワイルドセブン基点で本編 wild-7 と整合する形に是正(ユーザ裁定 2026-08-08)
+    slug: zoku-shin-wild-7
 paradise-6238: paradise-taguchi-1998
 pet-2032: pet-himawari-2002
 piasu-no-rannaa: piasu-no-runner
@@ -4254,4 +4261,3 @@ watashi-ga-hiroinjanai-wake: watashi-ga-heroinejanai-wake
 yakuyaku-supootsu-land: yakuyaku-sports-land
 yancha-gooru: yancha-goal
 youkaihantaa: youkaihunter
-zoku-7-n-wairudo7: zoku-7-n-wild7

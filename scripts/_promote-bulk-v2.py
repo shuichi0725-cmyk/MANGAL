@@ -3395,7 +3395,9 @@ def main():
             #   canonical後のこの再導出が無条件で潰していた(JINのimprint代用と同型の穴)。
             #   ワイルド7=少年キング1969連載開始。単行本初刊は1970、canonical後は1973(初刊v1-13が
             #   初版日不明で空)に化けていた。連載年は巻の刊行年からは導けない。
-            _eov_yr = _load_edition_overrides().get(slug) or {}
+            # ★キーは**公開slug**(edition-overrides の規約)。ここの `slug` は SRC slug なので
+            #   slug-override頁では引けない(両者が一致する頁でしか効かない罠)。
+            _eov_yr = _load_edition_overrides().get(_slug_override(slug)) or {}
             if _all_y and _eov_yr.get("year_started") is None:
                 new_yml["year_started"] = min(_all_y)
             if (new_yml.get("year_ended") is not None and slug not in _STATUS_CORR

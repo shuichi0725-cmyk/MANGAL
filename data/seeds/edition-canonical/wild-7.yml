@@ -336,6 +336,75 @@ extra_editions:
   - number: 27
     isbn13: '9784821186730'
     release_date: '2008-09'
+- label: 復刻版（生原稿ver.）
+  type: kanzenban
+  publisher: 復刊ドットコム
+  imprint: 復刊ドットコム
+  volumes:
+  - number: 1
+    isbn13: '9784835454849'
+    release_date: '2017-04'
+    volume_label: 1969 野性の7人
+  - number: 2
+    isbn13: '9784835454948'
+    release_date: '2017-07'
+    volume_label: 1970-71 コンクリート・ゲリラ
+  - number: 3
+    isbn13: '9784835455310'
+    release_date: '2017-11'
+    volume_label: 1972 緑の墓 上
+  - number: 4
+    isbn13: '9784835455327'
+    release_date: '2018-01-21'
+    volume_label: 1972 緑の墓 下
+  - number: 5
+    isbn13: '9784835455716'
+    release_date: '2018-03-17'
+    volume_label: 1973-74 地獄の神話 上
+  - number: 6
+    isbn13: '9784835455723'
+    release_date: '2018-05-24'
+    volume_label: 1973-74 地獄の神話 中
+  - number: 7
+    isbn13: '9784835455730'
+    release_date: '2018-07-23'
+    volume_label: 1973-74 地獄の神話 下
+  - number: 8
+    isbn13: null
+    release_date: '2019-11'
+    volume_label: 1972 黄金の新幹線
+  - number: 9
+    isbn13: null
+    release_date: '2020'
+    volume_label: 1969-70 バイク騎士事件
+  - number: 10
+    isbn13: null
+    release_date: '2022'
+    volume_label: 1970 誘拐の掟
+  - number: 11
+    isbn13: null
+    release_date: '2023'
+    volume_label: 1971 千金のロード/灰の砦
+  - number: 12
+    isbn13: null
+    release_date: '2024'
+    volume_label: 1972-73 首にロープ
+  - number: 13
+    isbn13: null
+    release_date: '2025'
+    volume_label: 1974-75 運命の七星 上
+  - number: 14
+    isbn13: null
+    release_date: '2025'
+    volume_label: 1974-75 運命の七星 下
+  - number: 15
+    isbn13: null
+    release_date: '2026'
+    volume_label: 1975-76 熱砂の帝王 上
+  - number: 16
+    isbn13: null
+    release_date: '2026'
+    volume_label: 1975-76 熱砂の帝王 下
 note: |
   2026-08-08 per-case是正(ユーザ提供のNDLサーチTSV + Wikipedia)。
   ★根因=版混在(ベルサイユのばら型): 1つの「通常版」の中で v1-18 が徳間書店トクマコミックス版(2001年・ISBN有)、
@@ -353,3 +422,8 @@ note: |
   ★通常版 v1-13 は release_date を空にしてある。MADBが初版発行年月日を持たず、
    TSVに在る図書館所蔵はいずれも「重版」で、ヒット・コミックス通し番号の順序とも矛盾する
    (v8=HC83が1972.10、v9=HC91が1972.4)ため初版日を確定できない。**推測で埋めない**。
+  ★2026-08-08 追記(ユーザ裁定①): 復刊ドットコム「生原稿ver.」16冊を**復刻版タブに統合**し、
+   年ごとに4分割されていた頁(wild-7-1969 / -1970-71 / -1972 / -1973-74)を廃止した。
+   旧 wild-7-1972 は「黄金の新幹線」(2019)が v2 に紛れ「緑の墓 下」を v3 に押し出していた=巻順も是正。
+   巻番号は刊行順、エピソード名は volume_label で保持。★8巻以降(2019-2026)は楽天にもNDLにもISBNが無く
+   (復刊ドットコム直販)、日付も年までしか取れないため年のみ・ISBN空で登録している(推測で埋めない)。

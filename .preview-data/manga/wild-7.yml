@@ -569,6 +569,107 @@ editions:
     isbn13: '9784821186730'
     cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/8211/82118673.jpg?_ex=300x300
     release_date: 2008-09
+- type: kanzenban
+  label: 復刻版（生原稿ver.）
+  publisher: 復刊ドットコム
+  imprint: 復刊ドットコム
+  volumes:
+  - number: 1
+    asin: null
+    isbn13: '9784835454849'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/4849/9784835454849.jpg?_ex=300x300
+    release_date: 2017-04
+    volume_label: 1969 野性の7人
+  - number: 2
+    asin: null
+    isbn13: '9784835454948'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/4948/9784835454948.jpg?_ex=300x300
+    release_date: 2017-07
+    volume_label: 1970-71 コンクリート・ゲリラ
+  - number: 3
+    asin: null
+    isbn13: '9784835455310'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/5310/9784835455310.jpg?_ex=300x300
+    release_date: 2017-11
+    volume_label: 1972 緑の墓 上
+  - number: 4
+    asin: null
+    isbn13: '9784835455327'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/5327/9784835455327.jpg?_ex=300x300
+    release_date: '2018-01-21'
+    volume_label: 1972 緑の墓 下
+  - number: 5
+    asin: null
+    isbn13: '9784835455716'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/5716/9784835455716.jpg?_ex=300x300
+    release_date: '2018-03-17'
+    volume_label: 1973-74 地獄の神話 上
+  - number: 6
+    asin: null
+    isbn13: '9784835455723'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/5723/9784835455723.jpg?_ex=300x300
+    release_date: '2018-05-24'
+    volume_label: 1973-74 地獄の神話 中
+  - number: 7
+    asin: null
+    isbn13: '9784835455730'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/5730/9784835455730.jpg?_ex=300x300
+    release_date: '2018-07-23'
+    volume_label: 1973-74 地獄の神話 下
+  - number: 8
+    asin: null
+    isbn13: null
+    cover_url: null
+    release_date: 2019-11
+    volume_label: 1972 黄金の新幹線
+  - number: 9
+    asin: null
+    isbn13: null
+    cover_url: null
+    release_date: '2020'
+    volume_label: 1969-70 バイク騎士事件
+  - number: 10
+    asin: null
+    isbn13: null
+    cover_url: null
+    release_date: '2022'
+    volume_label: 1970 誘拐の掟
+  - number: 11
+    asin: null
+    isbn13: null
+    cover_url: null
+    release_date: '2023'
+    volume_label: 1971 千金のロード/灰の砦
+  - number: 12
+    asin: null
+    isbn13: null
+    cover_url: null
+    release_date: '2024'
+    volume_label: 1972-73 首にロープ
+  - number: 13
+    asin: null
+    isbn13: null
+    cover_url: null
+    release_date: '2025'
+    volume_label: 1974-75 運命の七星 上
+  - number: 14
+    asin: null
+    isbn13: null
+    cover_url: null
+    release_date: '2025'
+    volume_label: 1974-75 運命の七星 下
+  - number: 15
+    asin: null
+    isbn13: null
+    cover_url: null
+    release_date: '2026'
+    volume_label: 1975-76 熱砂の帝王 上
+  - number: 16
+    asin: null
+    isbn13: null
+    cover_url: null
+    release_date: '2026'
+    volume_label: 1975-76 熱砂の帝王 下
 - type: deluxe
   label: デラックス版
   imprint: トクマコミックス・デラックス
@@ -815,6 +916,7 @@ editions:
     release_date: '1997-01-31'
 publishers:
 - bunkasha
+- fukkan-com
 - jitsugyo-no-nihon
 - shonen-gahosha
 - tokuma
