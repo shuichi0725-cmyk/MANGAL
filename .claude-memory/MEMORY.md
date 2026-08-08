@@ -142,3 +142,4 @@
 - [SHADOW SKILL=4期の別作品群](shadow_skill_franchise_state.md) — 第1期を新規登録済。第2期/講談社再編集3冊が未登録
 - [ワイルド7=6作品×多版・接ぎ木3件](wild7_franchise_state.md) — 本編/新/続新/W7/飛葉 是正済。復刊ドットコム版の頁構成が未決
 - [【厳守】頁dropは既存リダイレクトも張り替える](drop_page_redirect_chain.md) — 死んだ連鎖+部分一致で追記漏れ。R2は週次--pruneで消す
+- [R2 prune待ち台帳=週次preflightが表示](pending_r2_prune_ledger.md) — 頁drop/slug renameで積む。--prune後に消し込み

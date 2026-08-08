@@ -42,8 +42,16 @@ canonical後1973に化けた。`_promote-bulk-v2.py` で override に年があ�
   `data/slug-aliases.yml` + `public/_redirects` 追記。**出力ファイル名は SRC slug のまま**変わらない(中の `slug` だけ変わる)。
 - ★**残: 週次蒸留で `_r2-sync.py --prune`** を必ず付ける(廃止5頁+旧slug2頁のR2フォルダが残っている)。
 
+### 掲載誌(2026-08-08 ユーザ指示で master 登録)
+`data/magazines.yml` に **`shonen-king`(少年キング/少年画報社/shounen) / `comic-banban`(コミックバンバン/徳間書店/seinen)
+/ `manga-sunday`(漫画サンデー/実業之日本社/seinen)** を追加(52→55誌)。結線は `magazine-corrections.yml`:
+`wild-7`→少年キング / `shin-wild-7`→コミックバンバン。
+★**漫画サンデーはワイルド7系のどの頁の掲載誌でもなかった**(私の「マンサンコミックス→漫画サンデー」という推測が誤り)。
+Wikipediaの実際の掲載誌は **続・新ワイルド7=週刊アサヒ芸能増刊号 / 飛葉=伝説マガジン /
+ワイルド7R=描き下ろしコミックス(雑誌掲載なし) / W7=KATANA(電子配信雑誌)**。
+この3つ(アサヒ芸能増刊・伝説マガジン・KATANA)は**増刊/電子誌をmasterに載せるかというタクソノミー判断**が要るため未登録=該当頁の magazine は空のまま。
+
 ### 未決
-- 掲載誌が全作 空。**少年キング / コミックバンバン / 漫画サンデー** が `data/magazines.yml` 未登録。
 - 別作品として除外したもの: 9784785937591「ワイルド(7)」(著=橋本還、ヤングキングコミックス) / 9784094086645「ワイルド7」(著=奥村千明、小学館文庫) — いずれも望月三起也の単独作ではない。
 
 関連: [[edition_canonical_mechanism]] [[edition_canonical_key_is_src_slug]] [[author_not_in_volumes_audit]]
