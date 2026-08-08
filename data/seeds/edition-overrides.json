@@ -36161,5 +36161,67 @@
   "title_kana": "ドッキリエンジェル",
   "title_romaji": "dokkiri angel",
   "note": "2026-08-08 per-case: ①題の感嘆符を全角に(書影の実物ロゴとKoboの流通題がいずれも全角。NDLだけ半角) ②ヨミをドッキリエンジェルに(NDL transcription「ドツキリ エンジエル」は旧式の大文字表記。書影上部のローマ字「KAZUKI MOTOYAMA / DOKKIRI ANGEL」が裏付け) ③あわせて slug を dotsukiri-angel → dokkiri-angel に是正。"
+ },
+ "joker": {
+  "authors": [
+   {
+    "name": "道原かつみ",
+    "role": "artist"
+   }
+  ],
+  "original_authors": [
+   {
+    "name": "麻城ゆう",
+    "role": "writer"
+   }
+  ],
+  "year_started": 1986,
+  "year_ended": 2004,
+  "editions": [
+   {
+    "type": "bunkobon",
+    "label": "文庫版",
+    "publisher": "新書館",
+    "imprint": "ウィングス・コミック文庫",
+    "volumes": [
+     {
+      "number": 1,
+      "asin": null,
+      "isbn13": "9784403500169",
+      "cover_url": null,
+      "release_date": "1998-11"
+     },
+     {
+      "number": 2,
+      "asin": null,
+      "isbn13": "9784403500176",
+      "cover_url": null,
+      "release_date": "1998-11"
+     },
+     {
+      "number": 3,
+      "asin": null,
+      "isbn13": "9784403500213",
+      "cover_url": null,
+      "release_date": "1999-05"
+     },
+     {
+      "number": 4,
+      "asin": null,
+      "isbn13": "9784403500480",
+      "cover_url": null,
+      "release_date": "2004-10"
+     },
+     {
+      "number": 5,
+      "asin": null,
+      "isbn13": "9784403501227",
+      "cover_url": null,
+      "release_date": "2008-10"
+     }
+    ]
+   }
+  ],
+  "note": "2026-08-08 per-case: 3つの別物が1頁に混ざっていた。①通常版v1=9784403613227は『Joker 道原かつみ・画集』(画集で漫画ではない)→art-booksへ ②通常版v3-v7=『JOKER REBOOT』3-7巻→joker-reboot頁へ戻した ③文庫版5巻だけが本来の中身(ウィングス・コミック文庫=旧『ジョーカー・シリーズ』の再編集・全5巻)。原作の麻城ゆうが欠落していたので追加し、連載年をWINGS連載期間1986-2004に是正。"
  }
 }
