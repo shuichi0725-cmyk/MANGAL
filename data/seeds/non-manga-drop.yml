@@ -5460,3 +5460,13 @@ non_manga:
 - series_key: name:北芝健|name:まるごし刑事スーパーコレクション.
   reason: konbini_reprint
   note: 'ユーザ発見2026-08-06: Qまるごし刑事スーパーコレクション=同コンビニ傑作選(Vol.N 〜編)。catch/synopsisは本編頁へ移植済'
+- series_key: name:KANZUME|name:ひぐらしのなく頃に
+  reason: not_consolidatable_anthology
+  note: |
+    2026-08-08 ユーザ裁定。宙出版ツインハートコミックス『ひぐらしのなく頃に ～the Nth case～』の
+    コミックアンソロジー。作画者30名の寄せ集めで単一作品として纏められず、本番に在るのも
+    第5/6/10/11/12巻だけ(1-4と7-9が欠落)で巻としても纏まらない。
+    ★題に「アンソロジー」の語が無いため promote の DROP_TITLE_CONTAINS_PATTERNS をすり抜け、
+    さらに**無印slug higurashi-no-nakukoro-ni を占有**して本編と誤認される状態だった。
+    除外の理由は「アンソロジーだから」ではなく「纏められないから」(ユーザ基準)。
+    ひぐらしは出題編・回答編・番外編(個人作家の撰集を含む)が本編で、そちらは掲載する。
