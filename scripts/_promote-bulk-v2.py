@@ -3817,6 +3817,19 @@ def main():
             if not _pd.get("synopsis") and synslug_map.get(_stem):
                 _pd["synopsis"] = synslug_map[_stem]
                 _touched = True
+            # ★掲載誌の per-case 是正も本流と同じくここに通す(2026-08-08 実害・下のジャンルと同型)。
+            #   予約頁は種2を通らない=L2818の決定点に来ないため、magazine-corrections.yml に
+            #   正しく書いても**頁の magazine が空のまま**だった(ひぐらし新規4頁で silent 空振り)。
+            #   キーは公開slug(本流と同じ)。頁が既に magazine を持つ時は触らない。
+            if not _pd.get("magazine"):
+                _mcp = _MAG_CORR.get(_pd.get("slug") or _stem) or _MAG_CORR.get(_stem)
+                if _mcp and _mcp.get("magazine"):
+                    if not valid_mags or _mcp["magazine"] in valid_mags:
+                        _pd["magazine"] = _mcp["magazine"]
+                        _touched = True
+                    else:
+                        print(f"  ! magazine-corrections(preorder): {_stem} の {_mcp['magazine']} は "
+                              f"data/magazines.yml 未登録=無視", file=sys.stderr)
             # ★ジャンル決定seed(rakuten/enrich)も本流と同じ優先順でここに通す(2026-08-03 実害)。
             #   予約頁は種2を通らない=本流の決定点に来ないため、エンリッチ柱が genre-enrich-2425.json に
             #   正しく書いても**頁のgenresが空のまま**だった(新作25件が silent 空振り)。
