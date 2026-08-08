@@ -36119,11 +36119,6 @@
   "year_ended": 2022,
   "note": "2026-08-08 per-case: 3編混在頁を『令 鬼熾し編』に確定(ja.wikipedia=夏海ケイ/ガンガンONLINE/2021年11月-2022年8月/全2巻)。刻夜セイゴは星渡し編の作画者なのでこの頁から外し別頁へ。巻構成は edition-canonical/higurashi-no-naku-koro-ni-rei.yml。"
  },
- "higurashi-no-naku-koro-ni-rei-ryukishi-2011": {
-  "title": "ひぐらしのなく頃に礼 賽殺し編",
-  "title_kana": "ヒグラシノナクコロニレイ",
-  "note": "2026-08-08 per-case: 題に編名が欠けていた。ja.wikipedia=『ひぐらしのなく頃に礼 賽殺し編』鈴羅木かりん/月刊ガンガンJOKER/全1巻。NDLも「ひぐらしのなく頃に礼 : 賽殺し編」(ヨミ ヒグラシ ノ ナク コロ ニ レイ : サイコロシヘン)で収録。title_kana は既存の編別頁と同じく本題のヨミのみ。"
- },
  "higurashi-no-naku-koro-ni-onikakushihen": {
   "authors": [
    {
@@ -36243,5 +36238,10 @@
  "moon-fantasy": {
   "title_kana": "ムーンファンタジー",
   "note": "2026-08-08 per-case: title_kana に区切り文字『/』が混入していた(ムーン/ファンタジー)。CLAUDE.mdの規約どおりスペース・記号なしの連結形に是正。NDL/楽天のヨミも「ムーン ファンタジー」。"
+ },
+ "higurashi-no-naku-koro-ni-rei-saikoroshihen": {
+  "title": "ひぐらしのなく頃に礼 賽殺し編",
+  "title_kana": "ヒグラシノナクコロニレイ",
+  "note": "2026-08-08 per-case: 題に編名が欠けていた。ja.wikipedia=『ひぐらしのなく頃に礼 賽殺し編』鈴羅木かりん/月刊ガンガンJOKER/全1巻。NDLも「ひぐらしのなく頃に礼 : 賽殺し編」(ヨミ ヒグラシ ノ ナク コロ ニ レイ : サイコロシヘン)で収録。title_kana は既存の編別頁と同じく本題のヨミのみ。 ★2026-08-08 slug変更(higurashi-no-naku-koro-ni-rei-ryukishi-2011→higurashi-no-naku-koro-ni-rei-saikoroshihen)によりキー付替。"
  }
 }

@@ -1,10 +1,3 @@
-# 掲載誌の per-case 是正 (= 種3(series-supplement-v2.yml)のAI fill誤りを、種3を触らずに上書きする)
-#
-# ★なぜ要るか: magazine は種3のAI fill由来で、根拠のない推定が入っている。
-#   種3は「純粋追加only・既存keyの内容変更は禁止」(CLAUDE.md 月次蒸留のabort条件)なので、
-#   誤りは種3を直さずここで上書きする(可逆・出所を残す)。
-# ★キー = 本番slug。値の magazine は data/magazines.yml のキーであること(未登録なら先に登録する)。
-# ★source は必ず外部権威(Wikipedia/出版社公式)を書く。推測で足さない。
 corrections:
   yume-maboroshi-no-gotoku:
     magazine: super-jump
@@ -51,35 +44,15 @@ corrections:
     source: wiki-verified
     evidence: ja.wikipedia「ひぐらしのなく頃に」漫画一覧の掲載誌欄。祟殺し編=月刊Gファンタジー。旧値は空
     added_at: '2026-08-08'
-  higurashi-no-naku-koro-ni-kai-2007:
-    magazine: gangan-wing
-    source: wiki-verified
-    evidence: ja.wikipedia「ひぐらしのなく頃に」漫画一覧の掲載誌欄。解 目明し編=月刊ガンガンWING。旧値 gangan は誤り
-    added_at: '2026-08-08'
   higurashi-no-naku-koro-ni-kai-tsumihoroboshihen:
     magazine: gangan-powered
     source: wiki-verified
     evidence: ja.wikipedia「ひぐらしのなく頃に」漫画一覧の掲載誌欄。解 罪滅し編=ガンガンパワード(新規登録頁)
     added_at: '2026-08-08'
-  higurashi-no-naku-koro-ni-kai-2009:
-    magazine: gfantasy
-    source: wiki-verified
-    evidence: ja.wikipedia「ひぐらしのなく頃に」漫画一覧の掲載誌欄。解 皆殺し編=月刊Gファンタジー。★旧値 monthly-shonen-magazine(講談社)は他社誌で明白な誤り
-    added_at: '2026-08-08'
-  higurashi-no-naku-koro-ni-kai:
-    magazine: gangan-powered
-    source: wiki-verified
-    evidence: ja.wikipedia「ひぐらしのなく頃に」漫画一覧の掲載誌欄。解 祭囃し編=ガンガンパワード→月刊ガンガンJOKER。初出誌を採用。旧値 gangan は誤り
-    added_at: '2026-08-08'
   higurashi-no-naku-koro-ni-hirukowashihen:
     magazine: gangan-online
     source: wiki-verified
     evidence: ja.wikipedia「ひぐらしのなく頃に」漫画一覧の掲載誌欄。昼壊し編=ガンガンONLINE。旧値は空
-    added_at: '2026-08-08'
-  higurashi-no-naku-koro-ni-rei-ryukishi-2011:
-    magazine: gangan-joker
-    source: wiki-verified
-    evidence: ja.wikipedia「ひぐらしのなく頃に」漫画一覧の掲載誌欄。礼 賽殺し編=月刊ガンガンJOKER。旧値は空
     added_at: '2026-08-08'
   higurashi-no-naku-koro-ni-onisarashihen:
     magazine: comp-ace
@@ -136,3 +109,27 @@ corrections:
     source: wiki-verified
     evidence: ja.wikipedia「ひぐらしのなく頃に」漫画一覧の掲載誌欄。鬼=月刊アクション→webアクション。旧値 manga-action(漫画アクション)は別誌で誤り
     added_at: '2026-08-08'
+  higurashi-no-naku-koro-ni-kai-meakashihen:
+    magazine: gangan-wing
+    source: wiki-verified
+    evidence: ja.wikipedia「ひぐらしのなく頃に」漫画一覧の掲載誌欄。解 目明し編=月刊ガンガンWING。旧値 gangan は誤り
+    added_at: '2026-08-08'
+    note: ★2026-08-08 slug変更(higurashi-no-naku-koro-ni-kai-2007→higurashi-no-naku-koro-ni-kai-meakashihen)によりキー付替。
+  higurashi-no-naku-koro-ni-kai-minagoroshihen:
+    magazine: gfantasy
+    source: wiki-verified
+    evidence: ja.wikipedia「ひぐらしのなく頃に」漫画一覧の掲載誌欄。解 皆殺し編=月刊Gファンタジー。★旧値 monthly-shonen-magazine(講談社)は他社誌で明白な誤り
+    added_at: '2026-08-08'
+    note: ★2026-08-08 slug変更(higurashi-no-naku-koro-ni-kai-2009→higurashi-no-naku-koro-ni-kai-minagoroshihen)によりキー付替。
+  higurashi-no-naku-koro-ni-kai-matsuribayashihen:
+    magazine: gangan-powered
+    source: wiki-verified
+    evidence: ja.wikipedia「ひぐらしのなく頃に」漫画一覧の掲載誌欄。解 祭囃し編=ガンガンパワード→月刊ガンガンJOKER。初出誌を採用。旧値 gangan は誤り
+    added_at: '2026-08-08'
+    note: ★2026-08-08 slug変更(higurashi-no-naku-koro-ni-kai→higurashi-no-naku-koro-ni-kai-matsuribayashihen)によりキー付替。
+  higurashi-no-naku-koro-ni-rei-saikoroshihen:
+    magazine: gangan-joker
+    source: wiki-verified
+    evidence: ja.wikipedia「ひぐらしのなく頃に」漫画一覧の掲載誌欄。礼 賽殺し編=月刊ガンガンJOKER。旧値は空
+    added_at: '2026-08-08'
+    note: ★2026-08-08 slug変更(higurashi-no-naku-koro-ni-rei-ryukishi-2011→higurashi-no-naku-koro-ni-rei-saikoroshihen)によりキー付替。

@@ -4233,6 +4233,22 @@ overrides:
     at: '2026-08-08'
     slug: kai-no-utagoe
     reason: 題の1文字目がギリシャ文字χ(カイ)。書誌DBがラテンXに正規化した表題からslugが ekkusu- になっていた。楽天titleKanaの2読み併記「X ノ ウタゴエ カイ ノ ウタゴエ」とja.wikipediaの「χの歌声」で確認
+  higurashi-no-naku-koro-ni-kai-2007:
+    at: '2026-08-08'
+    slug: higurashi-no-naku-koro-ni-kai-meakashihen
+    reason: 「解」「怪」「礼」がすべて kai/rei に潰れた衝突回避で西暦suffix(-2007/-2009/-2007-2/-2011)が付いていたが、他の編別頁(-onikakushihen 等)と不揃いで内容も分からない。編名を入れて一意化。目明し編=メアカシヘン(楽天titleKana「ヒグラシ ノ ナク コロ ニ カイ メアカシヘン」)
+  higurashi-no-naku-koro-ni-kai-2009:
+    at: '2026-08-08'
+    slug: higurashi-no-naku-koro-ni-kai-minagoroshihen
+    reason: 「解」「怪」「礼」がすべて kai/rei に潰れた衝突回避で西暦suffix(-2007/-2009/-2007-2/-2011)が付いていたが、他の編別頁(-onikakushihen 等)と不揃いで内容も分からない。編名を入れて一意化。皆殺し編=ミナゴロシヘン(楽天titleKana)
+  higurashi-no-naku-koro-ni-kai:
+    at: '2026-08-08'
+    slug: higurashi-no-naku-koro-ni-kai-matsuribayashihen
+    reason: 「解」「怪」「礼」がすべて kai/rei に潰れた衝突回避で西暦suffix(-2007/-2009/-2007-2/-2011)が付いていたが、他の編別頁(-onikakushihen 等)と不揃いで内容も分からない。編名を入れて一意化。祭囃し編=マツリバヤシヘン(楽天titleKana)
+  higurashi-no-naku-koro-ni-rei-ryukishi-2011:
+    at: '2026-08-08'
+    slug: higurashi-no-naku-koro-ni-rei-saikoroshihen
+    reason: 「解」「怪」「礼」がすべて kai/rei に潰れた衝突回避で西暦suffix(-2007/-2009/-2007-2/-2011)が付いていたが、他の編別頁(-onikakushihen 等)と不揃いで内容も分からない。編名を入れて一意化。賽殺し編=サイコロシヘン(NDL2レコードが一致。楽天は「サイゴロシヘン」だが、賽=サイコロの掛詞で濁らないNDL側を採用)
 paradise-6238: paradise-taguchi-1998
 pet-2032: pet-himawari-2002
 piasu-no-rannaa: piasu-no-runner
