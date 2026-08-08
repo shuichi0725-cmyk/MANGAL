@@ -42230,3 +42230,19 @@ volumes:
     MADB取込もれ。 本番頁 higurashi-no-naku-koi-ni-all-you-need-is-love は v2/v3 しか持たず1巻が欠落していた。
     楽天ISBN直引きで「ひぐらしのなく恋に（1）」9784758081245 / 2011年05月 を確認。
     ★1巻の題は副題「All you need is love」が付かない「ひぐらしのなく恋に」で、2巻以降に副題が付く。
+- series_keys:
+  - qid:Q11520170|name:どっきり!エンジェル
+  qid: null
+  number: 2
+  isbn13: '9784061728332'
+  release_date: '1982-06'
+  publisher: 講談社
+  edition_type: standard
+  source: amazon
+  added_at: '2026-08-08'
+  note: |
+    MADB取込もれ。 本番頁は v1(KC832)とv3(KC852)しか持たず2巻が欠落していた(ユーザ提供ISBN 2026-08-08)。
+    Amazon商品情報が「出版社=講談社 / 発売日=1982/6/1 / ISBN-10 4061728334 / **全3巻中 第2巻**」を明示。
+    ★release_dateは'1982-06'と月止まり: Amazonの「1日」は古書にありがちな月精度のプレースホルダで、
+    そのまま採るとv1(NDL 1982-06-20)より前になり巻順と矛盾する。月まではAmazon・KC番号の連番(832→833)・
+    v1と同月の3点で整合するのでそこまでを採用し、日は推測しない。
