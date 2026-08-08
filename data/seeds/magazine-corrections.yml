@@ -64,11 +64,6 @@ corrections:
     source: wiki-verified
     evidence: ja.wikipedia「ひぐらしのなく頃に」漫画一覧の掲載誌欄。宵越し編=月刊Gファンタジー。旧値は空
     added_at: '2026-08-08'
-  higurashi-no-naku-koro-ni-kai-2007-2:
-    magazine: comp-ace
-    source: wiki-verified
-    evidence: ja.wikipedia「ひぐらしのなく頃に」漫画一覧の掲載誌欄。怪 現壊し編=月刊コンプエース。旧値 gangan は誤り
-    added_at: '2026-08-08'
   higurashi-no-naku-koro-ni-kokoroiyashihen:
     magazine: comp-ace
     source: wiki-verified
@@ -133,3 +128,9 @@ corrections:
     evidence: ja.wikipedia「ひぐらしのなく頃に」漫画一覧の掲載誌欄。礼 賽殺し編=月刊ガンガンJOKER。旧値は空
     added_at: '2026-08-08'
     note: ★2026-08-08 slug変更(higurashi-no-naku-koro-ni-rei-ryukishi-2011→higurashi-no-naku-koro-ni-rei-saikoroshihen)によりキー付替。
+  higurashi-no-naku-koro-ni-kai-utsutsukowashihen:
+    magazine: comp-ace
+    source: wiki-verified
+    evidence: ja.wikipedia「ひぐらしのなく頃に」漫画一覧の掲載誌欄。怪 現壊し編=月刊コンプエース。旧値 gangan は誤り
+    added_at: '2026-08-08'
+    note: ★2026-08-08 slug変更(higurashi-no-naku-koro-ni-kai-2007-2→higurashi-no-naku-koro-ni-kai-utsutsukowashihen)によりキー付替。

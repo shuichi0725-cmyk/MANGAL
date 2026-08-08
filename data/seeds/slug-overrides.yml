@@ -4249,6 +4249,10 @@ overrides:
     at: '2026-08-08'
     slug: higurashi-no-naku-koro-ni-rei-saikoroshihen
     reason: 「解」「怪」「礼」がすべて kai/rei に潰れた衝突回避で西暦suffix(-2007/-2009/-2007-2/-2011)が付いていたが、他の編別頁(-onikakushihen 等)と不揃いで内容も分からない。編名を入れて一意化。賽殺し編=サイコロシヘン(NDL2レコードが一致。楽天は「サイゴロシヘン」だが、賽=サイコロの掛詞で濁らないNDL側を採用)
+  higurashi-no-naku-koro-ni-kai-2007-2:
+    at: '2026-08-08'
+    slug: higurashi-no-naku-koro-ni-kai-utsutsukowashihen
+    reason: 「解」「怪」がどちらも kai に潰れる衝突回避で -2007-2 という数字suffixが付いていた。ja.wikipedia「ひぐらしのなく頃に怪 現壊し編」の冒頭よみがな『ひぐらしのなくころにかい うつつこわしへん』で編名の読みを確定し、他の編別頁と同じ編名ベースに是正。NDL(本題まで)・楽天(本題まで)・KADOKAWA公式(ふりがな無し)では取れなかった読み。
 paradise-6238: paradise-taguchi-1998
 pet-2032: pet-himawari-2002
 piasu-no-rannaa: piasu-no-runner
