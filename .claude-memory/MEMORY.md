@@ -144,3 +144,4 @@
 - [【厳守】頁dropは既存リダイレクトも張り替える](drop_page_redirect_chain.md) — 死んだ連鎖+部分一致で追記漏れ。R2は週次--pruneで消す
 - [R2 prune待ち台帳=週次preflightが表示](pending_r2_prune_ledger.md) — 頁drop/slug renameで積む。--prune後に消し込み
 - [ひぐらし=編ごとに別頁・掲載誌20頁誤り](higurashi_franchise_state.md) — 4作新規登録+令の3編混在分離。残=宙出版アンソロジー頁/雀・デイブレイク系
+- [【厳守】per-case修正は必ずpreviewに上げる](percase_fix_always_to_preview.md) — reflectだけでは未投入頁が素通り。明示cp+索引再構築

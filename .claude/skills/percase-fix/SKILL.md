@@ -43,3 +43,16 @@ description: 作品名+リンク(Wiki/NDL)を渡されたら per-case で版/巻
 - changelog(volume-gaps-changelog.jsonl 等)に1行 → **反映して**(reflect-targeted skill)
 - 検証: 再生成後の頁 dump で 欠0・prefix整合・variants/書影 を数字で確認
 - 新規発見の系統バグは検出器化を検討(_audit-solo-truncated.py / _audit-volume-output.py が前例)
+
+## ★仕上げ = 必ずテスト環境に上げる (2026-08-08 ユーザ明示)
+「なおしたらテストページにあげて確認させてね」。反映だけで終わらせない。
+```
+cp data/manga.v2/<stem>.yml .preview-data/manga/          # ★ファイル名はSRC stem(公開slugでない)
+cp data/magazines.yml .preview-data/            # mastersを触った時だけ(未同期=previewビルドが落ちる)
+python scripts/_build-list-index.py .preview-data/manga .preview-data
+git add .preview-data && git commit && git push
+```
+★`_reflect-targeted.py` の preview 同期は**既にpreviewに在る頁しか上書きしない**(新規頁は「preview同期0」で
+静かに素通り)ので、per-caseで触った頁は明示コピーが要る。push後15-20分待つ・追いpush禁止。
+[[percase_fix_always_to_preview]]
+
