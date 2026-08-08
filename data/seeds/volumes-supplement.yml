@@ -42246,3 +42246,20 @@ volumes:
     ★release_dateは'1982-06'と月止まり: Amazonの「1日」は古書にありがちな月精度のプレースホルダで、
     そのまま採るとv1(NDL 1982-06-20)より前になり巻順と矛盾する。月まではAmazon・KC番号の連番(832→833)・
     v1と同月の3点で整合するのでそこまでを採用し、日は推測しない。
+- series_keys:
+  - name:吉沢メガネ|name:姫騎士がクラスメート!
+  qid: null
+  number: 10
+  isbn13: '9784799222256'
+  release_date: '2026-10-08'
+  publisher: キルタイムコミュニケーション
+  edition_type: standard
+  source: rakuten
+  added_at: '2026-08-08'
+  note: |
+    日次蒸留の続巻回収もれ。★分類器が『姫騎士がクラスメート！ THE COMIC10』を**新作**と誤判定し
+    別頁(hime-kishi-ga-classmate-the-comic)を1巻として作ってしまっていた(ユーザ指摘 2026-08-08)。
+    実体は既存頁 hime-kishi-ga-classmate(全9巻)の**10巻**。誤ドラフトは撤去し種4で本来の頁へ収容。
+    ★誤判定の原因= 既存頁の題が「姫騎士がクラスメート!」で、楽天の題が「姫騎士がクラスメート！ THE COMIC10」
+    (全角！+『THE COMIC』+巻数直結)のため題の完全一致に掛からなかった。
+    出典= 楽天ISBN直引き(題「姫騎士がクラスメート！ THE COMIC10」/ 著 NO.ゴメス・EKZ / 2026年10月08日頃)。
