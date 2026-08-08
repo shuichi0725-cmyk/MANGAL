@@ -140,3 +140,4 @@
 - [【確認待ち】魔術士オーフェン見直し](oofen_franchise_state.md) — 本編canonical是正+欠落3作を自己完結頁で新規登録。preview9頁セット
 - [【厳守】edition-canonicalのキー=SRC slug](edition_canonical_key_is_src_slug.md) — overrides(公開slug)と逆。取り違えると無警告で不適用
 - [SHADOW SKILL=4期の別作品群](shadow_skill_franchise_state.md) — 第1期を新規登録済。第2期/講談社再編集3冊が未登録
+- [ワイルド7=6作品×多版・接ぎ木3件](wild7_franchise_state.md) — 本編/新/続新/W7/飛葉 是正済。復刊ドットコム版の頁構成が未決
