@@ -156,6 +156,30 @@ def main():
     else:
         fail("索引衛生NG", (r.stdout or "") + (r.stderr or ""))
 
+    # 8. ★R2 prune 待ち(2026-08-08 新設・ユーザ指示「週次蒸留するときにわかるように」):
+    #    頁を drop / slug rename しても R2 の実体フォルダは残る([[r2_orphan_pages_prune_missing]])。
+    #    per-case作業で消した公開slugを pending-r2-prune.jsonl に積んでおき、ここで必ず目に入れる。
+    pend = os.path.join(ROOT, "data", "seeds", "pending-r2-prune.jsonl")
+    rows = []
+    if os.path.exists(pend):
+        for ln in open(pend, encoding="utf-8"):
+            ln = ln.strip()
+            if ln and not ln.startswith("#"):
+                try:
+                    rows.append(json.loads(ln))
+                except json.JSONDecodeError:
+                    pass
+    if rows:
+        warn(f"★R2 prune 待ち {len(rows)} 件 = 今回の r2-sync に必ず --prune を付ける")
+        for r2 in rows[:30]:
+            print(f"         /{r2.get('slug')}  ({r2.get('reason','')} {r2.get('at','')})")
+        if len(rows) > 30:
+            print(f"         …ほか {len(rows)-30} 件")
+        print("       → 実行後 .cache/r2-pruned-<日時>.txt に載ったか照合し、"
+              "載った行を data/seeds/pending-r2-prune.jsonl から消し込む")
+    else:
+        ok("R2 prune 待ち = なし")
+
     print(f"\n結果: FAIL {len(fails)} / WARN {len(warns)}")
     if fails:
         print("★ビルド開始禁止。上のFAILを直してから再実行。")

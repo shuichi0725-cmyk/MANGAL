@@ -50,6 +50,10 @@ ultra-jump:
   name: ウルトラジャンプ
   publisher: shueisha
   demographic: seinen
+super-jump:
+  name: スーパージャンプ
+  publisher: shueisha
+  demographic: seinen
 weekly-young-sunday:
   name: 週刊ヤングサンデー
   publisher: shogakukan
@@ -204,4 +208,16 @@ ax:
 comic-gardo:
   name: コミックガルド
   publisher: overlap
+  demographic: seinen
+shonen-king:
+  name: 少年キング
+  publisher: shonen-gahosha
+  demographic: shounen
+comic-banban:
+  name: コミックバンバン
+  publisher: tokuma
+  demographic: seinen
+manga-sunday:
+  name: 漫画サンデー
+  publisher: jitsugyo-no-nihon
   demographic: seinen

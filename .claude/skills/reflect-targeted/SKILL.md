@@ -19,6 +19,14 @@ python scripts/_reflect-targeted.py --only <SRC-stem,...> [--drop <消すstem,..
 ```
 - `--only` = **manga.v2ファイル名(SRC slug)**。slug-override頁もSRC名で指定。
 - `--drop` = 消す頁(page-dedup/non-manga-drop 登録後に)。manga.v2+preview 削除+索引remove まで自動。
+  ★**dropしたら必ず2つ後始末する**(2026-08-08 ユーザ指示。どちらも自動ではやらない):
+  ① `data/seeds/pending-r2-prune.jsonl` に **公開slug**を1行追記
+     (`{"slug":"...","reason":"...","at":"YYYY-MM-DD","source":"..."}`)。
+     データを消してもR2の実体フォルダは残るため。週次蒸留の preflight がここを読んで必ず表示する。
+  ② `public/_redirects` に `/旧slug /新しい行き先 301` を追記し、★**その旧slugを「行き先」にしている
+     既存行**も最終行き先へ張り替える(死んだ連鎖の防止。[[drop_page_redirect_chain]])。
+     重複判定は**行頭一致**で。部分一致だと行き先側に誤ヒットして追記が飛ぶ。
+  ★slug rename(slug-overrides.yml)の時も**まったく同じ2つ**が要る(旧slugのフォルダが残るため)。
 - 内蔵: 検証ゲート(slug/kana/date/isbn 不正で push 前停止)・promote --only・索引 --update/--remove(本番+preview)・preview同期・台帳集約・push。
 - 書影は promote に統合済(別工程不要)。
 
