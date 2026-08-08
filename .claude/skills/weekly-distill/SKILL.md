@@ -97,6 +97,10 @@ npx wrangler deploy -c wrangler-r2.jsonc
   ②`--prune-max 3000` = 削除候補がこれを超えたら**削除中止**して報告のみ
   ③削除キーは実行前に `.cache/r2-pruned-<日時>.txt` へ必ず記録
 - 中止された時は一覧を確認し、意図した削除なら `--prune --prune-max <件数+100>` で再実行。
+- ★★**ISBN消失監視の締め**(2026-08-08 新設): R2同期まで終わったら最後に
+  `python scripts/_audit-isbn-loss.py --snapshot` で基準を取り直す。これを忘れると次週の監視が
+  「先週消えた分」を延々と報告し続ける。preflight(手順2)が前回基準との差分を見て、
+  **台帳に理由の無い消失を FAIL** にする(=実在する巻を黙って消した事故の検出)。
 - ★★**prune待ち台帳 `data/seeds/pending-r2-prune.jsonl` を必ず突合**(2026-08-08 新設・ユーザ指示
   「週次蒸留するときにわかるように」)。per-case作業で**頁をdrop / slugをrename**すると、データ側は消えても
   **R2の実体フォルダは残る**ので、その公開slugをこの台帳に積んである。preflight(手順2)が件数と一覧を

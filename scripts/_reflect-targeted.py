@@ -53,6 +53,8 @@ def main():
     ap.add_argument("--only", default="", help="再生成する manga.v2 stem(カンマ区切り)")
     ap.add_argument("--drop", default="", help="削除する manga.v2 stem(カンマ区切り)")
     ap.add_argument("--push", action="store_true")
+    ap.add_argument("--allow-loss", dest="allow_loss", action="store_true",
+                    help="巻/版が減る反映を承認してpushする(既定は減少検出でpush中止=silent lossの防止)")
     ap.add_argument("--commit-only", dest="commit_only", action="store_true",
                     help="add+commitまでで止め、pushしない(日次/週次で途中反映を溜め、最後に1回だけpush=追いpush回避)")
     ap.add_argument("-m", "--msg", default="targeted反映")
@@ -62,6 +64,32 @@ def main():
     drop = [s.strip() for s in a.drop.split(",") if s.strip()]
     if not only and not drop:
         print("--only か --drop を指定", file=sys.stderr); sys.exit(1)
+
+    # 0. ★反映前スナップショット(2026-08-08 新設): 対象頁の ISBN集合/巻数 を控える。
+    #    狙い= **実在する巻を黙って消す事故**の検出。ユーザは「不自然な数字」には気付けるが
+    #    「本当にある物が無い」には**構造的に気付けない**(2026-08-08 ユーザ裁定)。
+    #    増える分は無害なので通し、**減る分だけ**を反映後に必ず列挙する。
+    def _snapshot(stems):
+        snap = {}
+        for _st in stems:
+            _fp = os.path.join(MV2, _st + ".yml")
+            if not os.path.exists(_fp):
+                continue
+            try:
+                _d = yaml.safe_load(open(_fp, encoding="utf-8")) or {}
+            except Exception:
+                continue
+            _is, _lbl = set(), set()
+            for _e in (_d.get("editions") or []):
+                _lbl.add(str(_e.get("label") or _e.get("type")))
+                for _vs in [_e.get("volumes") or []] + [_vv.get("volumes") or [] for _vv in (_e.get("versions") or [])]:
+                    for _v in _vs:
+                        if _v.get("isbn13"):
+                            _is.add(str(_v["isbn13"]))
+            snap[_st] = {"isbn": _is, "editions": _lbl,
+                         "vols": sum(len(_e.get("volumes") or []) for _e in (_d.get("editions") or []))}
+        return snap
+    _before = _snapshot(only)
 
     # 1. drop頁削除 (内部slug回収→索引remove用)
     remove_slugs = []
@@ -75,6 +103,37 @@ def main():
     # 2. promote --only (書影統合済)
     if only:
         run([PY, "scripts/_promote-bulk-v2.py", "--only", ",".join(only)])
+
+    # 2.3 ★減少差分レポート(2026-08-08 新設): 反映で**消えた巻/版**を必ず表示する。
+    #     熱愛プリンス誤deny(実在68巻)/ワイルド7の欠落13巻 のような silent loss を目に入れるのが目的。
+    #     ★消えること自体は正当な場合もある(版分離で別頁へ移した/非掲載ISBNを除去した)ので止めはしないが、
+    #     **--push 時だけは確認を要求**する(--allow-loss で明示承認)。
+    _after = _snapshot(only)
+    _loss = []
+    for _st in only:
+        _b, _af = _before.get(_st), _after.get(_st)
+        if not _b or not _af:
+            continue
+        _gone = sorted(_b["isbn"] - _af["isbn"])
+        _ged = sorted(_b["editions"] - _af["editions"])
+        if _gone or _ged:
+            _loss.append((_st, _gone, _ged, _b["vols"], _af["vols"]))
+    if _loss:
+        print("\n★減少検出(反映で消えた巻/版がある):", file=sys.stderr)
+        for _st, _gone, _ged, _bv, _av in _loss:
+            print(f"  {_st}: 巻 {_bv} → {_av}", file=sys.stderr)
+            if _ged:
+                print(f"     消えた版: {', '.join(_ged)}", file=sys.stderr)
+            if _gone:
+                print(f"     消えたISBN {len(_gone)}件: {', '.join(_gone[:12])}"
+                      + (" …" if len(_gone) > 12 else ""), file=sys.stderr)
+        print("  → 意図した除去(版分離で別頁へ移設/非掲載ISBN除去)ならそのまま。"
+              "★心当たりが無ければ**実在する巻を消している**=止めて調べる", file=sys.stderr)
+        if a.push and not a.allow_loss:
+            print("  ★--push は中止した。意図した減少なら --allow-loss を付けて再実行", file=sys.stderr)
+            sys.exit(3)
+    elif only:
+        print(f"  減少なし(対象{len(only)}頁: 巻・版とも減っていない)", flush=True)
 
     # 2.4 ★edition-canonical警告: canonical結線slug(golgo/釣りバカ等)は edition-overrides を
     #     直しても canonical が後勝ちで無効(2026-07-01の実事故)。修正先を間違えていないか警告。

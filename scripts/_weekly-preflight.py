@@ -180,6 +180,19 @@ def main():
     else:
         ok("R2 prune 待ち = なし")
 
+    # 9. ★ISBN消失監視(2026-08-08 新設・ユーザ裁定「本当にある物を消したときに私は気がつけない」):
+    #    前回スナップショットから消えたISBNを台帳(non-manga-drop/deny/exclude/prune)と突合し、
+    #    **理由なしの消失**を FAIL にする。変なslugはユーザが見つけられるが、
+    #    存在しないものは誰にも見えない=機械で名指しするしかない。
+    r9 = subprocess.run([sys.executable, os.path.join(ROOT, "scripts", "_audit-isbn-loss.py")],
+                        capture_output=True, text=True, encoding="utf-8")
+    _o9 = (r9.stdout or "") + (r9.stderr or "")
+    if r9.returncode == 0:
+        ok("ISBN消失監視 = 理由なしの消失なし")
+    else:
+        fail("★理由なくISBNが本番から消えている(実在する巻を消した疑い)", _o9)
+    print("       ※週次の最後に `python scripts/_audit-isbn-loss.py --snapshot` で基準を取り直す")
+
     print(f"\n結果: FAIL {len(fails)} / WARN {len(warns)}")
     if fails:
         print("★ビルド開始禁止。上のFAILを直してから再実行。")
