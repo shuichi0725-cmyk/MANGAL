@@ -1,0 +1,27 @@
+slug: w7
+canonical_label: 通常版
+canonical_imprint: null
+canonical_publisher: 実業之日本社
+publisher: 実業之日本社
+source: wikipedia+ndl+rakuten
+volumes:
+- number: 1
+  isbn13: '9784408612850'
+  release_date: '2014-12'
+extra_editions:
+- label: モノクローム版
+  type: shinsoban
+  publisher: 実業之日本社
+  imprint: null
+  volumes:
+  - number: 1
+    isbn13: '9784408414638'
+    release_date: '2017-05'
+note: |
+  2026-08-08 per-case是正(ユーザ提供のNDLサーチTSV + Wikipedia)。
+  ★旧状態: 通常版に**2017年のモノクローム版だけ**が入り、初出である2014年版が本番に存在しなかった
+   (=再版が主版の座を占め、出版年も2017に化けていた)。
+  【再構築】通常版 = 9784408612850(2014-12) / モノクローム版 = 9784408414638(2017-05)。
+  【出典】NDLサーチTSV(「W7 : 新世紀ワイルド7」2014 と「…: モノクローム」2017)× 楽天(ISBN直引き)の2ソース一致。
+  ★発売日は楽天 salesDate(2014年12月)を採用。Wikipediaは「2014年11月28日」で月がずれるが、
+   MANGAL全体の日付源はMADB/楽天で統一しているためそちらに合わせた(奥付と店頭日の差と見られる)。
