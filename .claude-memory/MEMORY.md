@@ -143,3 +143,4 @@
 - [ワイルド7=6作品×多版・接ぎ木3件](wild7_franchise_state.md) — 本編/新/続新/W7/飛葉 是正済。復刊ドットコム版の頁構成が未決
 - [【厳守】頁dropは既存リダイレクトも張り替える](drop_page_redirect_chain.md) — 死んだ連鎖+部分一致で追記漏れ。R2は週次--pruneで消す
 - [R2 prune待ち台帳=週次preflightが表示](pending_r2_prune_ledger.md) — 頁drop/slug renameで積む。--prune後に消し込み
+- [ひぐらし=編ごとに別頁・掲載誌20頁誤り](higurashi_franchise_state.md) — 4作新規登録+令の3編混在分離。残=宙出版アンソロジー頁/雀・デイブレイク系
