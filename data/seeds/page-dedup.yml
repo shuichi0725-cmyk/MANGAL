@@ -856,8 +856,7 @@ dedup:
   canonical: final-fantasy-lost-stranger
   title: ファイナルファンタジーロスト・ストレンジャー
   isbns: 3
-  note: 外国語書誌題クラスタ(sid131298)の断片重複(v8-10=主頁と同ISBN)。06-18統合がchangelog記録のみでseed未登録→フルpromoteで復活、恒久登録
-    2026-07-10
+  note: 外国語書誌題クラスタ(sid131298)の断片重複(v8-10=主頁と同ISBN)。06-18統合がchangelog記録のみでseed未登録→フルpromoteで復活、恒久登録 2026-07-10
 - drop: fire-emblem-1997
   canonical: fire-emblem-nintendo-1996
   title: ファイアーエムブレム
@@ -1554,8 +1553,7 @@ dedup:
   canonical: kantai-collection-kancolle-4-koma-comic-fubuki-ganbarimasu
   title: 艦隊これくしょん-艦これ-4コマコミック 吹雪、がんばります!
   isbns: 17
-  note: 艦これ4コマ「吹雪、がんばります!」(桃井涼太作画・全17巻)が2頁で巻分担(fubuki=1-11/base=12-17)していたのをunion統合。全巻同題確認済(混入なし)。ユーザ方針・慎重確認
-    2026-07-08
+  note: 艦これ4コマ「吹雪、がんばります!」(桃井涼太作画・全17巻)が2頁で巻分担(fubuki=1-11/base=12-17)していたのをunion統合。全巻同題確認済(混入なし)。ユーザ方針・慎重確認 2026-07-08
 - drop: kantai-collection-kancolle-comic-arakaruto
   canonical: kantai-collection-kancolle-comic-arakaruto-maizuru-chinjufu-hen
   title: 艦隊これくしょん-艦これ-コミックアラカルト 舞鶴鎮守府編
@@ -2028,8 +2026,7 @@ dedup:
   canonical: meitantei-conan-2005
   title: 名探偵コナン特別編
   isbns: 38
-  note: '[2026-06-16修正] 旧canonical meitantei-conan-2011 はslug-overrideで消滅。特別編は meitantei-conan-2005
-    が出力するためそちらへ付替(redirect 404防止)'
+  note: '[2026-06-16修正] 旧canonical meitantei-conan-2011 はslug-overrideで消滅。特別編は meitantei-conan-2005 が出力するためそちらへ付替(redirect 404防止)'
 - drop: meitantei-conan-tokubetsuhen-1997
   canonical: meitantei-conan-2005
   title: 名探偵コナン特別編
@@ -2054,8 +2051,7 @@ dedup:
   canonical: meitantei-conan-2005
   title: 名探偵コナン特別編
   isbns: 44
-  note: 名探偵コナン特別編(青山剛昌原作)の作画交代を2頁に分割していたのを統合。2016側44巻は2005側50巻に完全内包(固有0)・全作画家(阿部ゆたか/丸伝次郎/太田勝/窪田一裕)合流(ユーザ方針・慎重確認
-    2026-07-08)
+  note: 名探偵コナン特別編(青山剛昌原作)の作画交代を2頁に分割していたのを統合。2016側44巻は2005側50巻に完全内包(固有0)・全作画家(阿部ゆたか/丸伝次郎/太田勝/窪田一裕)合流(ユーザ方針・慎重確認 2026-07-08)
 - drop: meshi-bafu-shokudou-seikyou-nariossanha-jama-dato-tsuihou-sareta-fuyo-
   canonical: meshi-bafu-shokudou-seikyounari
   title: 飯バフ食堂、盛況なり
@@ -2103,8 +2099,7 @@ dedup:
   canonical: miyazawa-kenji-mangakan
   title: 宮澤賢治・漫画館
   isbns: 5
-  note: アンソロジー(宮沢賢治×漫画家19人・潮出版社全5巻)が著者不一致で2頁分裂→edition-overridesで全5巻1頁に統合(ユーザ提示ISBN・NDL確認
-    2026-07-08)
+  note: アンソロジー(宮沢賢治×漫画家19人・潮出版社全5巻)が著者不一致で2頁分裂→edition-overridesで全5巻1頁に統合(ユーザ提示ISBN・NDL確認 2026-07-08)
 - drop: mobile-shinseiki-gundam-ekkusu-2005
   canonical: mobile-shinseiki-gundam-ekkusu
   title: 機動新世紀ガンダムX
@@ -2368,8 +2363,7 @@ dedup:
   canonical: ninkuu
   title: NINKU-忍空-
   isbns: 16
-  note: 文庫6巻(→ninkuu bunkobon)+2021ジャンプリミックス5冊(コンビニ本=scope外)の混成orphan。year-suffix
-    Wave2 2026-07-10
+  note: 文庫6巻(→ninkuu bunkobon)+2021ジャンプリミックス5冊(コンビニ本=scope外)の混成orphan。year-suffix Wave2 2026-07-10
 - drop: ninkuu-sekando-stage-etoninhen
   canonical: ninkuu-2nd-stage
   title: 忍空 SECOND STAGE干支忍編
@@ -2392,8 +2386,7 @@ dedup:
   canonical: nihonnorekishi
   title: 日本の歴史
   isbns: 28
-  note: 集英社日本の歴史の井上大助頁(28巻)はnihonnorekishi(88巻)に完全内包(固有0)。年代版分離済のnihonnorekishiに全巻あり=冗長重複をdrop。ユーザ方針・慎重確認
-    2026-07-08
+  note: 集英社日本の歴史の井上大助頁(28巻)はnihonnorekishi(88巻)に完全内包(固有0)。年代版分離済のnihonnorekishiに全巻あり=冗長重複をdrop。ユーザ方針・慎重確認 2026-07-08
 - drop: nippon-no-rekishi-2007-3
   canonical: nippon-no-rekishi-2007-2
   title: 日本の歴史
@@ -2921,8 +2914,7 @@ dedup:
   canonical: uchuu-senkan-yamato
   title: 宇宙戦艦ヤマト
   isbns: 7
-  note: ひおあきら版ヤマトサーガをMF文庫ライブラリー全7巻1頁に統合(B案・さらば(MF文庫vol3-4に内包)・副題=volume_label・ユーザ指示
-    2026-07-08)
+  note: ひおあきら版ヤマトサーガをMF文庫ライブラリー全7巻1頁に統合(B案・さらば(MF文庫vol3-4に内包)・副題=volume_label・ユーザ指示 2026-07-08)
 - drop: savanna-game-the-comic-2012
   canonical: savanna-game-the-comic
   title: サバンナゲーム
@@ -3549,8 +3541,7 @@ dedup:
   canonical: uchuu-senkan-yamato
   title: 宇宙戦艦ヤマト
   isbns: 7
-  note: ひおあきら版ヤマトサーガをMF文庫ライブラリー全7巻1頁に統合(B案・完結編(MF文庫vol7に内包)・副題=volume_label・ユーザ指示
-    2026-07-08)
+  note: ひおあきら版ヤマトサーガをMF文庫ライブラリー全7巻1頁に統合(B案・完結編(MF文庫vol7に内包)・副題=volume_label・ユーザ指示 2026-07-08)
 - drop: uchuu-senkan-yamato-1993
   canonical: uchuu-senkan-yamato
   title: 宇宙戦艦ヤマト
@@ -3569,8 +3560,7 @@ dedup:
   canonical: unnamed-memory
   title: アンネームドメモリー
   isbns: 10
-  note: アンネームドメモリー(古宮九時原作/オカカ作画)のコミカライズが2頁分裂(base7巻/chibi10巻・全巻Unnamed Memory N同題・vol1共有)→union全10巻に統合。ユーザ方針・慎重確認
-    2026-07-08
+  note: アンネームドメモリー(古宮九時原作/オカカ作画)のコミカライズが2頁分裂(base7巻/chibi10巻・全巻Unnamed Memory N同題・vol1共有)→union全10巻に統合。ユーザ方針・慎重確認 2026-07-08
 - drop: unsouya-no-otsu-san-ga-naze-fukugyou-de-zettai-muteki-kenshi-o-tsutomeru-koto-ni
   canonical: unsouyanoossanganazekafukugyoudezettaimutekikenshiotsutomerukotoni-sa
   title: 運送屋のおっさんがなぜか副業で絶対無敵剣士を務めることに
@@ -3682,14 +3672,12 @@ dedup:
   canonical: x-men-1994
   title: X-MEN
   isbns: 11
-  note: 竹書房バンブーX-MENアンソロジー(全13巻・1994・寄稿13作家)を寄稿者別に3頁分裂していたのを1頁統合。翻訳アメコミ(X-MEN Vol.2戦雲等9784796873xxx)は混入除去=対象外。欠巻2/12(ISBN未確定)。ユーザ方針・慎重確認
-    2026-07-08
+  note: 竹書房バンブーX-MENアンソロジー(全13巻・1994・寄稿13作家)を寄稿者別に3頁分裂していたのを1頁統合。翻訳アメコミ(X-MEN Vol.2戦雲等9784796873xxx)は混入除去=対象外。欠巻2/12(ISBN未確定)。ユーザ方針・慎重確認 2026-07-08
 - drop: x-men-1994-5
   canonical: x-men-1994
   title: X-MEN
   isbns: 11
-  note: 竹書房バンブーX-MENアンソロジー(全13巻・1994・寄稿13作家)を寄稿者別に3頁分裂していたのを1頁統合。翻訳アメコミ(X-MEN Vol.2戦雲等9784796873xxx)は混入除去=対象外。欠巻2/12(ISBN未確定)。ユーザ方針・慎重確認
-    2026-07-08
+  note: 竹書房バンブーX-MENアンソロジー(全13巻・1994・寄稿13作家)を寄稿者別に3頁分裂していたのを1頁統合。翻訳アメコミ(X-MEN Vol.2戦雲等9784796873xxx)は混入除去=対象外。欠巻2/12(ISBN未確定)。ユーザ方針・慎重確認 2026-07-08
 - drop: x-men-2022
   canonical: x-men
   title: X-MEN
@@ -3863,3 +3851,15 @@ dedup:
   canonical: zutaboro-reijou-wa-ane-no-motokonyakusha-ni-dekiai-dekiaisareru
   title: ずたぼろ令嬢は姉の元婚約者に溺愛される
   isbns: 10
+- drop: rakushou-hyper-doll-1996
+  canonical: rakushou-hyper-doll
+  title: 楽勝!ハイパードール
+  isbns: 2
+- drop: rakushou-hyper-doll-2002
+  canonical: rakushou-hyper-doll
+  title: 楽勝!ハイパードール
+  isbns: 2
+- drop: gingatetsudou-no-yoru
+  canonical: ginga-tetsudou-no-yoru
+  title: 銀河鉄道の夜
+  isbns: 2
