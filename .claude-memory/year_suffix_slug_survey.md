@@ -1,6 +1,6 @@
 ---
 name: year_suffix_slug_survey
-description: "【確定4件是正済】年サフィックスslug全1,976頁の分裂洗い出し。残=同題要判定106(per-case)/C類760の無印化(要ユーザ裁定)。worklist=docs/production-diagnostics/year-suffix-all.tsv"
+description: "【1・2完了】年サフィックスslug調査。確定4件+同題106件全裁定済(統合3頁/HOLD3)。残=C類760の無印化のみ(URL一括rename=ユーザGO待ち)"
 metadata: 
   node_type: memory
   type: project
@@ -44,7 +44,7 @@ worklist = **`docs/production-diagnostics/year-suffix-all.tsv`**(判定/分類/�
 
 ## 残タスク
 1. ✅**確定4件是正済(2026-08-07)**: SHIORI=正題で1-22統合(page-dedup+overrides・v1は初版ISBN採用) / 薬屋=スクエニ6巻exclude→promoteが小学館5巻を自動復元+v13をoverrides挿入で**1-22完全化**(★混入巻がdedupで本物を負かしていた型。★同ISBNの旧種4エントリが昔からガード無効で眠っていた) / ヤマト=完結編3冊exclude / エレン=リメイクv25,26 exclude。全反映済み
-2. 106件を巻数順に per-case 版統合(エスパー魔美3頁型。1件ずつ版実体確認が要る=CROSS_ED52と同じ長期戦)
+2. ✅**106件全裁定済(2026-08-10)**: 実頁の著者集合で機械分類→大半(93+)は**原作共通・作画違いの正当併存**(神永学/横溝正史/文豪 原作系)。真の分裂は3組のみ→統合済: 楽勝!ハイパードール3頁(徳間1-5+英知版タブ・伊東/伊藤=表記揺れ)/銀河鉄道の夜ますむら版2頁(slugハイフン揺れ→風呂猫最終形+扶桑社版タブ)。型裁定: 世紀末☆ダーリン日文版=**年刊シリーズ**(実題『世紀末☆ダーリン2006』=番号でなく年号巻)・安達としまむら=同一作画のスクエニ→KADOKAWA**リブート**(番号1リスタート=別シリーズ正当)。★**HOLD3件**(外部確証待ち): エルハザード(同一作画で徳間/竹書房同時並走=OVA/TV版別コミカライズ疑い)・ウルトラマン1997秋田2冊(一峰/楳図混在頁疑い)・気分はもう戦争2002頁(カムイ2.1のはずが大友版幽霊巻2冊の残骸=要再構築)
 3. C類760件の無印化 = **URL一括rename=要ユーザ裁定**(slug-overrides+aliases機構で機械化可能だが、760URLの張替えは影響大=GO待ち)
 
 関連: [[year_suffix_dup]] [[slug_collision_year_rule]] [[edition_canonical_mechanism]]
