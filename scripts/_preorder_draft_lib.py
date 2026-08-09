@@ -327,7 +327,11 @@ def make_slug(base, kana_raw=None, existing=None):
     # ★無ハイフン連結ガード(2026-07-27 ユーザ発見=princeofghost): 題に語境界(空白/全角空白/
     #   中黒/&/×)があるのに slug が10字以上ハイフン0本 = 装置バグか題の異常。生成せずhold
     #   (旧装置期に全角スペース題が連結された型の再発防止)。
-    if len(slug) >= 10 and "-" not in slug and re.search(r"[\s　・&×]", str(base)):
+    #   ★2026-08-09 拡張(ココロメイクコスメティカ型): 題に見える区切りが無くても、**長いカタカナ連**は
+    #   語境界が在るのに janome が1語(未知語)扱いして丸ごと連結する。辞書に載っていない長カタカナ題は
+    #   自動で決められない ⇒ 生成せず hold して人に回す(偽hold > 偽採用)。短い一語(ツノカクシ等)は通す。
+    _kata_run = max((len(m) for m in re.findall(r"[ァ-ヶー]+", str(base))), default=0)
+    if len(slug) >= 10 and "-" not in slug and (re.search(r"[\s　・&×]", str(base)) or _kata_run >= 8):
         return None
     # ★長題は語境界で切る(2026-07-20: 機械70字cutが語中切断「tsukaretemashit」型を44件量産した対策)。
     #   切った後の尻に残る助詞トークンも剥がす(「-sekai-o」型)。完全slugは触らない。

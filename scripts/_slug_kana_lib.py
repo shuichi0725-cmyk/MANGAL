@@ -101,6 +101,10 @@ def make_slug(title):
             parts.append(('ja', reading, pos, False))  # 読み(未変換)を保持
     # 読みレベルで結合してからローマ字化(にゃ→ニャのモーラ割れ・ほどいて過分割を根治)
     SMALL = 'ァィゥェォャュョヮッぁぃぅぇぉゃゅょゎっ'
+    # ★敬称は接尾でも連結しない(CLAUDE.md slug規則3: 高木さん→takagi-san。takagisan 不可)。
+    #   2026-08-09 実測: 牛山さん→ushiyamasan / 高木さんの休日→takagisan-no-… と規則違反を量産していた。
+    HONORIFIC = ('さん', 'サン', 'くん', 'クン', '君', 'ちゃん', 'チャン', 'ちゃま', 'チャマ',
+                 '様', 'さま', 'サマ', '先生', 'せんせい', 'センセイ')
     merged = []  # [kind, value, converted]
     for item in parts:
         if len(item) == 4:
@@ -109,12 +113,26 @@ def make_slug(title):
             kind, val, pos = item; conv = True  # lat/katakana断片は変換済
         # 小書き先頭 or 動詞+活用/助動詞/非自立/接尾 は前のjaへ読み連結
         small_lead = (kind == 'ja' and not conv and val and unicodedata.normalize('NFKC', val)[0] in SMALL)
-        attach = (kind == 'ja' and not conv and merged and merged[-1][0] == 'ja' and not merged[-1][2]
-                  and ((pos[0] in ('助動詞',)) or (len(pos) > 1 and pos[1] in ('非自立', '接尾'))
-                       or (pos[0] == '助詞' and merged[-1][3][0] == '動詞')  # 動詞+て/で
+        _honor = (kind == 'ja' and val in HONORIFIC)          # ★敬称=接尾でも独立トークン(規則3)
+        _prev_pos = merged[-1][3][0] if merged else ''
+        attach = (kind == 'ja' and not conv and not _honor and merged and merged[-1][0] == 'ja'
+                  and not merged[-1][2]
+                  # ★助詞には何も貼り付けない/付属語の親は用言・体言に限る(2026-08-09 是正)。
+                  #   以前は「助動詞・非自立なら直前が何でも連結」だったため、助詞に助動詞が付き、
+                  #   さらに非自立形容詞まで飲み込んで「だけ+で+よかった」が1塊になっていた。
+                  and ((pos[0] == '助動詞' and _prev_pos in ('動詞', '形容詞', '助動詞'))
+                       or (len(pos) > 1 and pos[1] in ('非自立', '接尾')
+                           and _prev_pos in ('動詞', '形容詞', '名詞'))
+                       # ★動詞+接続助詞「て/で」だけ連結する(2026-08-09 是正)。
+                       #   以前は「動詞の後の助詞」を無条件連結していたため、副助詞/格助詞まで飲み込み
+                       #   「見てるだけでよかったのに」→ miterudakedeyokattanoni と全連結していた。
+                       or (pos[0] == '助詞' and merged[-1][3][0] == '動詞' and val in ('テ', 'デ'))
                        or small_lead))
         if attach:
             merged[-1][1] += val
+            # ★連結後は品詞を最新語で更新(2026-08-09)。以前は先頭語のposのまま固定で、
+            #   「お知らせ(名詞)+いたし(動詞)」の塊に「ます(助動詞)」が付けなくなっていた。
+            merged[-1][3] = pos
         else:
             merged.append([kind, val, conv, pos])
     slug = '-'.join(m[1] if m[2] else kana2romaji(m[1]) for m in merged)
