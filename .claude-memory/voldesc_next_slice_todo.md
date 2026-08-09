@@ -18,7 +18,7 @@ metadata:
 
 ## 現在地(2026-08-09 セッション終了時)
 
-- seed `data/seeds/volume-desc-ja.jsonl` = **8,495行**(このセッション開始7,760 → **+735巻**)。
+- seed `data/seeds/volume-desc-ja.jsonl` = **9,009行**(このセッション開始7,760 → **+1,249巻**)。
 - 材料なし台帳 `.cache/voldesc/no-material.txt` = 1,406件。
 
 ### 2026-08-09 セッション(ユーザ「五時間連続で」)で完走・消化した作
@@ -29,10 +29,33 @@ metadata:
 **ハヤテのごとく!全52完走** / K2+38(v1-7,v9-15は共通惹句+話数のみ) / **ちはやふる全50完走** /
 めしばな刑事タチバナ+44 / 酒のほそ道22 / 剣客商売24 / スキップ・ビート27 / 空手小公子7 / **BE BLUES!全49完走** / バトルスタディーズ+43(v6-10は話数タイトルのみ)
 
-### ★次の着手先(材料収集済み・未着手。`--slugs`で即書ける)
+### 2026-08-09 追加: 並列ラン(ユーザ「一時間で終わる量を並列で全力」)で +514巻
 
-- **q-e-d 50**(medcap79=薄い) / **glass-no-kamen 49**(medcap87=薄い) /
-  **mairimashita-iruma-kun 38**(medcap109) / kureyon-shin-chan 4
+美味しんぼアラカルト49 / あずみ48 / ガラスの仮面48 / Q.E.D.50 / 頭文字D48 / 白竜HADOU47 /
+新テニスの王子様47 / ベイビーステップ46 / 入間くん38 / 結界師31 / ヒカルの碁23 /
+チキンドロップ前夜20 / 嘘喰い17 / 華麗なる食卓2
+
+## ★並列運転の型(2026-08-09 確立。これで seed 競合ゼロ)
+
+1. **材料は親が一括収集**(`_voldesc-material.py` は `.cache/voldesc/materials.jsonl` を毎回**上書き**するので、
+   複数回に分けるなら `materials-A/B.jsonl` へ退避してから次を回す)。
+2. **作品ごと(大型は前後半)に `.cache/voldesc/par/<name>.txt` へ分割**。エージェントは自分のファイルだけReadする。
+3. エージェントは **JSONLを書くだけ**。★`_voldesc-apply.py` 実行とgit操作は**禁止**と明記(並列でseedを叩かせない)。
+4. 親が **形式検証**(ISBN↔材料の照合 / 60字 / 改行混入 / ISBN重複)→ **直列apply** → reject書き直し → commit/push。
+5. 実測: 17ジョブ・514巻で reject **4件のみ**、異常0。1ジョブ ≒ 25巻で2〜5分。
+
+## ★エージェントへの指示で効いたこと / 失敗したこと
+
+- ★**失敗**: 「話数タイトルの羅列だけの巻はスキップ」と書くと、**類型2(共通惹句+収録話)を丸ごと捨てる**。
+  頭文字Dで全24巻スキップが発生 → 「**収録話タイトルは事実。これを使って書く。スキップするな**」と
+  作品ごとに明示して再走させ48巻回収。
+- ★**先に型を測る**: `相異なるcaption数 / 平均字数` を親が計算してから指示を書く。
+  相異caption数≒巻数なら書ける、平均50字台なら薄い、全巻同一なら捨てる。
+- 丸写しゲート対策(主語替え/順序入替/文分割)は**プロンプトに明記すれば効く**(reject率0.8%まで低下)。
+
+### ★次の着手先(材料収集済み・未着手)
+
+- kureyon-shin-chan 4 / manga-nippon-no-rekishi 48(平均53字=薄い) / futari-etchi 6(薄い)
 - 材料0で台帳送り済み(飛ばす)= golgo-13 / minami-no-teiou / nijitte-monogatari / inochi-no-utsuwa / zero /
   g-defend / marugoshi-deka / patalliro / shizukanaru-don / tsurikichi-sanpei / ginga-densetsu-weed /
   kobo-chan / kootaroo-makaritooru / ashita-tenki-ni-naare / wataru-ga-pyun / keirin-yarou /
