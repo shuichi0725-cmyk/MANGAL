@@ -83,3 +83,14 @@ export function getAuthor(key: string): AuthorPage | null {
 export function allAuthorKeys(): string[] {
   return [...authorMap().keys()];
 }
+
+let _byName: Map<string, string> | null = null;
+
+/** 著者名→著者頁key(詳細頁チップの行き先解決用)。romaji無し著者はnull=従来の?author=にフォールバック。 */
+export function authorKeyFor(name: string): string | null {
+  if (!_byName) {
+    _byName = new Map();
+    for (const [k, a] of authorMap()) _byName.set(a.name, k);
+  }
+  return _byName.get(name) ?? null;
+}

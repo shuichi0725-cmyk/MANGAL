@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { DesignNav } from "@/lib/homeDesign";
+import { authorKeyFor } from "@/lib/authors";
 import { notFound } from "next/navigation";
 import RelatedWorks, { computeRelated } from "@/components/RelatedWorks";
 import ShareButtons from "@/components/ShareButtons";
@@ -257,27 +258,34 @@ export default async function MangaDetailPage({
             </dd>
             <dt className="font-semibold text-ink/65 pt-1">著者</dt>
             <dd className="flex flex-wrap gap-1.5">
-              {manga.authors.map((a) => (
-                <span key={a.name}>
-                  <FilterLink href={`/browse?author=${encodeURIComponent(a.name)}`}>
-                    {a.name}
-                  </FilterLink>
-                </span>
-              ))}
+              {manga.authors.map((a) => {
+                {/* ★著者静的ページへ(2026-08-10 SEO⑤)。romaji無し著者のみ従来のクエリ絞込へ */}
+                const ak = authorKeyFor(a.name);
+                return (
+                  <span key={a.name}>
+                    <FilterLink href={ak ? `/author/${ak}` : `/browse?author=${encodeURIComponent(a.name)}`}>
+                      {a.name}
+                    </FilterLink>
+                  </span>
+                );
+              })}
             </dd>
             {manga.original_authors.length > 0 && (
               <>
                 <dt className="font-semibold text-ink/65 pt-1">原作</dt>
                 <dd className="flex flex-wrap gap-1.5">
-                  {manga.original_authors.map((a) => (
+                  {manga.original_authors.map((a) => {
+                    const ak = authorKeyFor(a.name);
+                    return (
                     <span key={a.name}>
                           <FilterLink
-                        href={`/browse?originalAuthor=${encodeURIComponent(a.name)}`}
+                        href={ak ? `/author/${ak}` : `/browse?originalAuthor=${encodeURIComponent(a.name)}`}
                       >
                         {a.name}
                       </FilterLink>
                     </span>
-                  ))}
+                    );
+                  })}
                 </dd>
               </>
             )}
