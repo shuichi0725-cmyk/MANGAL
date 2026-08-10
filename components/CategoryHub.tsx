@@ -51,22 +51,18 @@ export default function CategoryHub({ data, filtered, summary }: Props) {
     S && fromSummary ? fromSummary(S) : base.filter(pred).length;
 
   const P = (o: Record<string, string>) => o;
+  // ★8枚構成(2026-08-10 ユーザ裁定・案A): ソート系カードは撤去=フィルターの並び順に一本化。
+  //   受賞もフィルターへ委譲。1行目=アニメ化/完結/連載中/児童(右上)、2行目=分野4はそのまま。
+  //   ※BrowseShell(SSRフォールバック側)と同一構成を維持すること。
   const categories: Category[] = [
-    // 並び順(全件対象なので count = 現在の表示件数)
-    { params: P({ sort: "popularity" }), label: "人気順", count: total, icon: "🔥" },
-    // フィルタ系(交差件数)
     { params: P({ anime: "true" }), label: "アニメ化作品", count: count((m) => !!m.anime_adapted, (s) => s.anime), icon: "🎞️" },
-    { params: P({ hasAwards: "true" }), label: "受賞作品", count: count((m) => !!(m.awards && m.awards.length > 0), (s) => s.awards), icon: "🏆" },
     { params: P({ status: "completed" }), label: "完結作品", count: count((m) => m.status === "completed", (s) => s.completed), icon: "✅" },
     { params: P({ status: "ongoing" }), label: "連載中", count: count((m) => m.status === "ongoing", (s) => s.ongoing), icon: "📖" },
+    { params: P({ demographic: "kodomo" }), label: "児童", count: count((m) => m.demographic === "kodomo", (s) => s.kodomo), icon: "🧒" },
     { params: P({ demographic: "shounen" }), label: "少年", count: count((m) => m.demographic === "shounen", (s) => s.shounen), icon: "👦" },
     { params: P({ demographic: "seinen" }), label: "青年", count: count((m) => m.demographic === "seinen", (s) => s.seinen), icon: "👨" },
     { params: P({ demographic: "shoujo" }), label: "少女", count: count((m) => m.demographic === "shoujo", (s) => s.shoujo), icon: "👧" },
     { params: P({ demographic: "josei" }), label: "女性", count: count((m) => m.demographic === "josei", (s) => s.josei), icon: "👩" },
-    { params: P({ sort: "year-desc" }), label: "新しい順", count: total, icon: "🆕" },
-    { params: P({ sort: "year-asc" }), label: "古い順", count: total, icon: "📜" },
-    { params: P({ sort: "volumes" }), label: "巻数順", count: total, icon: "📚" },
-    { params: P({ sort: "title" }), label: "五十音順", count: total, icon: "🅰️" },
   ].filter((c) => c.count > 0);
 
   if (categories.length === 0) return null;
@@ -76,7 +72,7 @@ export default function CategoryHub({ data, filtered, summary }: Props) {
       <h2 className="text-[11px] font-semibold tracking-[0.18em] uppercase text-ink/50 mb-3">
         カテゴリで探す
       </h2>
-      <ul className="grid grid-cols-4 sm:grid-cols-5 lg:grid-cols-6 gap-2">
+      <ul className="grid grid-cols-4 gap-2">
         {categories.map((c) => {
           const active = isActive(c.params);
           return (
