@@ -104,8 +104,38 @@ export default function FilterPanel({
     { key: "volumes", label: "巻数 (多い順)" },
   ];
 
+  // ★適用中チップ(2026-08-10 ユーザ裁定・案A): カテゴリカードとフィルターが同じ状態を見る
+  //   「2つの窓」であることを可視化。個別×で解除できる。
+  const DEMO_JA: Record<string, string> = { shounen: "少年", shoujo: "少女", seinen: "青年", josei: "女性", kodomo: "児童" };
+  const active: { label: string; clear: Partial<FilterState> }[] = [];
+  if (state.anime) active.push({ label: "アニメ化", clear: { anime: false } });
+  if (state.hasAwards) active.push({ label: "受賞", clear: { hasAwards: false } });
+  for (const st of state.statuses) active.push({ label: STATUS_LABELS[st] ?? st, clear: { statuses: state.statuses.filter((x) => x !== st) } });
+  for (const d of state.demographics) active.push({ label: DEMO_JA[d] ?? d, clear: { demographics: state.demographics.filter((x) => x !== d) } });
+  for (const g of state.genres) active.push({ label: data.genres.find((x) => x.key === g)?.name ?? g, clear: { genres: state.genres.filter((x) => x !== g) } });
+  if (state.launch) active.push({ label: String(state.launch).replace("s", "年代"), clear: { launch: null } });
+  for (const a of state.authors) active.push({ label: a, clear: { authors: state.authors.filter((x) => x !== a) } });
+
   return (
     <aside className="space-y-6 text-sm">
+      {active.length > 0 && (
+        <div className="rounded-xl border border-[var(--color-accent)]/40 bg-[var(--color-accent)]/5 p-2.5">
+          <div className="text-[11px] font-bold text-ink/55">適用中の絞り込み</div>
+          <div className="mt-1.5 flex flex-wrap gap-1.5">
+            {active.map((c) => (
+              <button
+                key={c.label}
+                type="button"
+                onClick={() => update(c.clear)}
+                className="inline-flex items-center gap-1 rounded-full border border-[var(--color-accent)] bg-[var(--color-surface)] px-2.5 py-0.5 text-[12px] font-semibold text-[var(--color-accent)]"
+              >
+                {c.label}
+                <span aria-hidden="true">×</span>
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
       <Section title="種類">
         <label className="flex items-center gap-2 cursor-pointer">
           <input

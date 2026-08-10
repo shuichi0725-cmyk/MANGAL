@@ -26,20 +26,18 @@ type Cat = { href: string; label: string; count: number; icon: string };
 
 export default function BrowseShell({ summary }: { summary: IndexSummary }) {
   const s = summary;
+  // ★8枚構成(2026-08-10 ユーザ裁定・案A): ソート系カード(人気順/新旧/巻数/五十音)は
+  //   「カテゴリではない」ため撤去=フィルターの並び順に一本化。受賞もフィルターへ委譲。
+  //   1行目=アニメ化/完結/連載中/児童(右上)、2行目=分野4はそのまま。
   const cats: Cat[] = [
-    { href: "/browse?sort=popularity", label: "人気順", count: s.total, icon: "🔥" },
     { href: "/browse?anime=true", label: "アニメ化作品", count: s.anime, icon: "🎞️" },
-    { href: "/browse?hasAwards=true", label: "受賞作品", count: s.awards, icon: "🏆" },
     { href: "/browse?status=completed", label: "完結作品", count: s.completed, icon: "✅" },
     { href: "/browse?status=ongoing", label: "連載中", count: s.ongoing, icon: "📖" },
+    { href: "/browse?demographic=kodomo", label: "児童", count: s.kodomo, icon: "🧒" },
     { href: "/browse?demographic=shounen", label: "少年", count: s.shounen, icon: "👦" },
     { href: "/browse?demographic=seinen", label: "青年", count: s.seinen, icon: "👨" },
     { href: "/browse?demographic=shoujo", label: "少女", count: s.shoujo, icon: "👧" },
     { href: "/browse?demographic=josei", label: "女性", count: s.josei, icon: "👩" },
-    { href: "/browse?sort=year-desc", label: "新しい順", count: s.total, icon: "🆕" },
-    { href: "/browse?sort=year-asc", label: "古い順", count: s.total, icon: "📜" },
-    { href: "/browse?sort=volumes", label: "巻数順", count: s.total, icon: "📚" },
-    { href: "/browse?sort=title", label: "五十音順", count: s.total, icon: "🅰️" },
   ].filter((c) => c.count > 0);
 
   return (

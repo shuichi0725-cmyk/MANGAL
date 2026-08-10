@@ -67,7 +67,7 @@ export function loadIndexSummary(): IndexSummary {
   if (_summary) return _summary;
   const empty: IndexSummary = {
     total: 0, anime: 0, awards: 0, completed: 0, ongoing: 0,
-    shounen: 0, seinen: 0, shoujo: 0, josei: 0,
+    shounen: 0, seinen: 0, shoujo: 0, josei: 0, kodomo: 0,
   };
   const p = path.join(DATA_DIR, "manga-list-index.json");
   if (!fs.existsSync(p)) {
@@ -94,6 +94,7 @@ export function loadIndexSummary(): IndexSummary {
       else if (v === "seinen") out.seinen++;
       else if (v === "shoujo") out.shoujo++;
       else if (v === "josei") out.josei++;
+      else if (v === "kodomo") out.kodomo++;
     }
     if (iAnime >= 0 && r[iAnime]) out.anime++;
     if (iAwards >= 0) {

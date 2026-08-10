@@ -274,6 +274,7 @@ export type IndexSummary = {
   seinen: number;
   shoujo: number;
   josei: number;
+  kodomo: number;
 };
 
 /**
