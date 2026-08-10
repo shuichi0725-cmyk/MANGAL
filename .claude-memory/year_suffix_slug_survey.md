@@ -1,6 +1,6 @@
 ---
 name: year_suffix_slug_survey
-description: "【1・2完了】年サフィックスslug調査。確定4件+同題106件全裁定済(統合3頁/HOLD3)。残=C類760の無印化のみ(URL一括rename=ユーザGO待ち)"
+description: "【全完了2026-08-10】年サフィックスslug調査。確定4件+同題106件裁定+C類754件無印化rename済。融合姓+年21件=生成器規則の正規slugで対象外"
 metadata: 
   node_type: memory
   type: project
@@ -45,6 +45,10 @@ worklist = **`docs/production-diagnostics/year-suffix-all.tsv`**(判定/分類/�
 ## 残タスク
 1. ✅**確定4件是正済(2026-08-07)**: SHIORI=正題で1-22統合(page-dedup+overrides・v1は初版ISBN採用) / 薬屋=スクエニ6巻exclude→promoteが小学館5巻を自動復元+v13をoverrides挿入で**1-22完全化**(★混入巻がdedupで本物を負かしていた型。★同ISBNの旧種4エントリが昔からガード無効で眠っていた) / ヤマト=完結編3冊exclude / エレン=リメイクv25,26 exclude。全反映済み
 2. ✅**106件全裁定済(2026-08-10)**: 実頁の著者集合で機械分類→大半(93+)は**原作共通・作画違いの正当併存**(神永学/横溝正史/文豪 原作系)。真の分裂は3組のみ→統合済: 楽勝!ハイパードール3頁(徳間1-5+英知版タブ・伊東/伊藤=表記揺れ)/銀河鉄道の夜ますむら版2頁(slugハイフン揺れ→風呂猫最終形+扶桑社版タブ)。型裁定: 世紀末☆ダーリン日文版=**年刊シリーズ**(実題『世紀末☆ダーリン2006』=番号でなく年号巻)・安達としまむら=同一作画のスクエニ→KADOKAWA**リブート**(番号1リスタート=別シリーズ正当)。★**HOLD3件**(外部確証待ち): エルハザード(同一作画で徳間/竹書房同時並走=OVA/TV版別コミカライズ疑い)・ウルトラマン1997秋田2冊(一峰/楳図混在頁疑い)・気分はもう戦争2002頁(カムイ2.1のはずが大友版幽霊巻2冊の残骸=要再構築)
-3. C類760件の無印化 = **URL一括rename=要ユーザ裁定**(slug-overrides+aliases機構で機械化可能だが、760URLの張替えは影響大=GO待ち)
+3. ✅**C類無印化完了(2026-08-10 ユーザGO)**: 現行データから再算出(調査時760≒実測775計画)→**754件rename**(年のみ剥ぐ・基底空き/A類題年/バッチ内衝突を検証)。
+   - 実装: slug-overrides.yml(★キーは`overrides:`配下dict形式=SRC slug。トップレベル平置きはloaderが読まない罠を実踏)+slug-aliases+_redirects(1508行追記+旧slug行き先の連鎖169行張替え)+pending-r2-prune 754行+索引フル再構築。
+   - ★**融合形(-姓+年 例tange-sazen-yokoyama2009)21件はrename不可で正当**: slug-overridesでなく**生成器の衝突規則(-姓+西暦・裸西暦禁止)が生成時に付与**するもの=overridesの外。規則通り維持。
+   - 誤爆ゲートの教訓: 題末尾語を姓と誤食する型(kamen-**rider**/bad-**blood**/助詞**o**)→純年形優先マッチ+substring拒否で回避。
+   - 既知の平常skip8(title_kana欠の古頁・リネーム無関係)は別件残タスク。本番URL切替=次の週次(R2)。
 
 関連: [[year_suffix_dup]] [[slug_collision_year_rule]] [[edition_canonical_mechanism]]
