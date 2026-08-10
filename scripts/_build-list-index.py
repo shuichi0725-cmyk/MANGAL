@@ -57,7 +57,7 @@ ANILIST_GENRE_JA = {
 }
 ANILIST_TAG_JA = {
     "Surreal Comedy": "シュールコメディ", "Slapstick": "スラップスティック", "Heterosexual": "異性愛",
-    "Female Harem": "女子ハーレム", "Youkai": "妖怪", "Aliens": "宇宙人", "Shounen": "少年",
+    "Female Harem": "ハーレム", "Male Harem": "逆ハーレム", "Youkai": "妖怪", "Aliens": "宇宙人", "Shounen": "少年",
     "Shoujo": "少女", "Seinen": "青年", "Josei": "女性", "Kodomo": "児童", "School": "学園",
     "School Club": "学園クラブ", "Magic": "魔法", "Military": "軍事", "Police": "警察",
     "Yakuza": "ヤクザ", "Tsundere": "ツンデレ", "Yandere": "ヤンデレ", "Kuudere": "クーデレ",
