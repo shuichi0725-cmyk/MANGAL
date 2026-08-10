@@ -71,6 +71,17 @@ ANILIST_TAG_JA = {
 NOISE_TAGS = {"Heterosexual", "Male Protagonist", "Female Protagonist",
               "Primarily Adult Cast", "Primarily Child Cast", "Primarily Teen Cast"}
 
+# ★和名タグゲート(2026-08-11): 楽天あらすじAI付与の和名タグを allow/alias/exclude で表示に通す。
+#   従来は対訳表(英語→和訳)を通らず全滅していた。正本= data/seeds/wamei-tags.yml
+def _load_wamei():
+    p = os.path.join("data", "seeds", "wamei-tags.yml")
+    try:
+        w = yaml.load(open(p, encoding="utf-8"), Loader=L) or {}
+    except FileNotFoundError:
+        return set(), {}, set()
+    return set(w.get("allow") or []), dict(w.get("alias") or {}), set(w.get("exclude") or [])
+WAMEI_ALLOW, WAMEI_ALIAS, WAMEI_EXCLUDE = _load_wamei()
+
 def themes_of(d):
     # このページのジャンル名集合(畳み用) = genres(master) + genres_anilist(jaGenre)
     gnames = set()
@@ -88,7 +99,12 @@ def themes_of(d):
         from_yml = TAG_I18N.get(name)
         from_dict = ANILIST_TAG_JA.get(name)
         ja = from_yml or from_dict
-        if not ja: continue
+        if not ja:
+            # 対訳が無い=和名タグ(またはゴミ)。exclude→alias→allow の順に判定
+            if name in WAMEI_EXCLUDE: continue
+            if name in WAMEI_ALIAS: ja = WAMEI_ALIAS[name]
+            elif name in WAMEI_ALLOW: ja = name
+            else: continue
         if ja in gnames: continue
         if ja in seen: continue
         seen.add(ja); out.append(ja)

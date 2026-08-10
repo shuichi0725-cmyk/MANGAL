@@ -169,6 +169,28 @@ export function loadTagI18n(): Record<string, { ja: string; genre: string }> {
   return _tagI18n;
 }
 
+let _wamei: { allow: Set<string>; alias: Record<string, string>; exclude: Set<string> } | null = null;
+/** 和名タグゲート(data/seeds/wamei-tags.yml)。2026-08-11 導入。
+ *  楽天あらすじAI付与の和名タグは対訳表(英語→和訳)を通らず全滅していた。
+ *  exclude=非テーマ / alias=既存語へ畳む / allow=出現数>=3の確定リストのみ表示。 */
+export function loadWameiTags(): { allow: Set<string>; alias: Record<string, string>; exclude: Set<string> } {
+  if (_wamei) return _wamei;
+  try {
+    const p = path.join(DATA_DIR, "seeds", "wamei-tags.yml");
+    const parsed = YAML.parse(fs.readFileSync(p, "utf8")) as {
+      allow?: string[]; alias?: Record<string, string>; exclude?: string[];
+    };
+    _wamei = {
+      allow: new Set(parsed?.allow ?? []),
+      alias: parsed?.alias ?? {},
+      exclude: new Set(parsed?.exclude ?? []),
+    };
+  } catch {
+    _wamei = { allow: new Set(), alias: {}, exclude: new Set() };
+  }
+  return _wamei;
+}
+
 export type AiReview = { vendor: string; model: string; text: string };
 export type AiReviewSection = {
   setsu: number;

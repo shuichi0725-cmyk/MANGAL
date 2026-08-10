@@ -10,7 +10,7 @@ import ArtBookCard from "@/components/ArtBookCard";
 import Badge from "@/components/ui/Badge";
 import { ChipLink } from "@/components/ui/Chip";
 import { yearStatusLabel } from "@/lib/format";
-import { loadAllManga, loadTagI18n } from "@/lib/loadData";
+import { loadAllManga, loadTagI18n, loadWameiTags } from "@/lib/loadData";
 import { coverUrl } from "@/lib/schema";
 import { jaGenre, jaTag } from "@/lib/anilist-i18n";
 
@@ -99,6 +99,7 @@ export default async function MangaDetailPage({
   const publisher = data.publishers.find((p) => p.key === manga.publisher);
   const magazine = data.magazines.find((m) => m.key === manga.magazine);
   const tagI18n = loadTagI18n();
+  const wamei = loadWameiTags();
   const demographic = data.demographics.find((d) => d.key === manga.demographic);
 
   // ★この作家の画集 = 作者名(作画家)一致のみ。 特定漫画への作品名一致紐付けはしない
@@ -372,8 +373,14 @@ export default async function MangaDetailPage({
                 // 和訳がある tag のみ採用(英語のまま出さない)。 tag-i18n.yml 優先、 旧辞書 fallback。
                 const fromYml = tagI18n[t.name]?.ja;
                 const fromDict = jaTag(t.name);
-                const ja = fromYml ?? (fromDict !== t.name ? fromDict : undefined);
-                if (!ja) continue;
+                let ja = fromYml ?? (fromDict !== t.name ? fromDict : undefined);
+                if (!ja) {
+                  // 和名タグ(楽天あらすじAI付与)= wamei-tags.yml のゲートで通す(2026-08-11)
+                  if (wamei.exclude.has(t.name)) continue;
+                  if (wamei.alias[t.name]) ja = wamei.alias[t.name];
+                  else if (wamei.allow.has(t.name)) ja = t.name;
+                  else continue;
+                }
                 if (genreNames.has(ja)) continue; // ジャンル名と完全一致 → 畳む
                 if (elemNames.has(ja)) continue;
                 elemNames.add(ja);
