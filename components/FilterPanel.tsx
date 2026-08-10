@@ -76,6 +76,28 @@ export default function FilterPanel({
       }),
     };
   }, [data.manga, state, matchedSlugs]);
+  // ★出版社/連載誌リストの並び(2026-08-10 ユーザ要望): 絞り込み中は 0件の行を隠し、
+  //   現在の交差件数の多い順に並べ替える(件数は counts で再計算済み=それを並びにも使う)。
+  //   選択中の行は 0件でも先頭に残す(=外せなくなるのを防ぐ)。
+  const facetList = <T extends { key: string; name: string }>(
+    items: T[],
+    cnt: Map<string, number>,
+    selected: string[],
+  ) =>
+    items
+      .map((it) => ({ ...it, n: cnt.get(it.key) ?? 0, on: selected.includes(it.key) }))
+      .filter((it) => it.on || it.n > 0)
+      .sort((a, b) => Number(b.on) - Number(a.on) || b.n - a.n || a.name.localeCompare(b.name, "ja"));
+  const publisherList = useMemo(
+    () => facetList(data.publishers, counts.publisher, state.publishers),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [data.publishers, counts.publisher, state.publishers],
+  );
+  const magazineList = useMemo(
+    () => facetList(data.magazines, counts.magazine, state.magazines),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [data.magazines, counts.magazine, state.magazines],
+  );
   // 要素タグの一覧 = 出現する全タグを件数降順(同数は名前順)で。 master が無いのでデータから導出。
   const themeList = useMemo(
     () =>
@@ -307,23 +329,25 @@ export default function FilterPanel({
         <div className="space-y-1 max-h-48 overflow-y-auto">
           {/* ★出版社未設定(=要補完)を絞り込む QAボタン。 (unknown)キーで applyFilters の
               フォールバック(publishers空→[publisher])に乗る */}
-          <label className="flex items-center gap-2 cursor-pointer rounded bg-amber-50 px-1 -mx-1">
-            <input
-              type="checkbox"
-              checked={state.publishers.includes("(unknown)")}
-              onChange={() => update({ publishers: toggle(state.publishers, "(unknown)") })}
-            />
-            <span className="text-amber-700">⚠ 出版社未設定</span>
-            <Cnt n={counts.publisher.get("(unknown)") ?? 0} />
-          </label>
-          {data.publishers.map((p) => (
+          {(state.publishers.includes("(unknown)") || (counts.publisher.get("(unknown)") ?? 0) > 0) && (
+            <label className="flex items-center gap-2 cursor-pointer rounded bg-amber-50 px-1 -mx-1">
+              <input
+                type="checkbox"
+                checked={state.publishers.includes("(unknown)")}
+                onChange={() => update({ publishers: toggle(state.publishers, "(unknown)") })}
+              />
+              <span className="text-amber-700">⚠ 出版社未設定</span>
+              <Cnt n={counts.publisher.get("(unknown)") ?? 0} />
+            </label>
+          )}
+          {publisherList.map((p) => (
             <label key={p.key} className="flex items-center gap-2 cursor-pointer">
               <input
                 type="checkbox"
-                checked={state.publishers.includes(p.key)}
+                checked={p.on}
                 onChange={() => update({ publishers: toggle(state.publishers, p.key) })}
               />
-              <span>{p.name}</span><Cnt n={counts.publisher.get(p.key) ?? 0} />
+              <span>{p.name}</span><Cnt n={p.n} />
             </label>
           ))}
         </div>
@@ -331,14 +355,14 @@ export default function FilterPanel({
 
       <Section title="連載誌">
         <div className="space-y-1 max-h-48 overflow-y-auto">
-          {data.magazines.map((m) => (
+          {magazineList.map((m) => (
             <label key={m.key} className="flex items-center gap-2 cursor-pointer">
               <input
                 type="checkbox"
-                checked={state.magazines.includes(m.key)}
+                checked={m.on}
                 onChange={() => update({ magazines: toggle(state.magazines, m.key) })}
               />
-              <span>{m.name}</span><Cnt n={counts.magazine.get(m.key) ?? 0} />
+              <span>{m.name}</span><Cnt n={m.n} />
             </label>
           ))}
         </div>

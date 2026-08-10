@@ -79,11 +79,11 @@ export default function BrowseShell({ summary }: { summary: IndexSummary }) {
       </form>
 
       {cats.length > 0 && (
-        <section className="mb-7">
+        <section id="shell-cats" className="mb-7">
           <h2 className="text-[11px] font-semibold tracking-[0.18em] uppercase text-ink/50 mb-3">
             カテゴリで探す
           </h2>
-          <ul className="grid grid-cols-4 sm:grid-cols-5 lg:grid-cols-6 gap-2">
+          <ul className="grid grid-cols-4 gap-2">
             {cats.map((c) => (
               <li key={c.label}>
                 <Card href={c.href} className="h-full px-1 py-2.5 text-center">
@@ -102,6 +102,16 @@ export default function BrowseShell({ summary }: { summary: IndexSummary }) {
           </ul>
         </section>
       )}
+      {/* ★チラつき対策(2026-08-10 ユーザ報告「検索すると一瞬児童が見えて戻る」):
+          このシェルは静的HTMLでURLを読めないため、?q= 等で着地した時も全件数のカテゴリ8枚が
+          一瞬出て、hydrate後に交差件数版(0件カードは非表示)へ差し替わる=カードが増減して見える。
+          絞り込みURLの間だけシェルのカテゴリ欄を同期スクリプトで隠し、実表示に任せる。 */}
+      <script
+        dangerouslySetInnerHTML={{
+          __html:
+            '(function(){try{var p=new URLSearchParams(location.search);p.delete("page");if(p.toString()){var e=document.getElementById("shell-cats");if(e)e.style.display="none"}}catch(_){}})()',
+        }}
+      />
     </div>
   );
 }
