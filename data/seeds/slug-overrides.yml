@@ -105,22 +105,10 @@ osananajimi-wa-faiaaman: osananajimi-wa-fireman
 oshare-majo-rabu-ando-berry: oshare-majo-love-and-berry
 ouji-ni-dekiai-saretakunai-node-motopurinsesu-desu-dansou-shitsuji-ni-narimasu: ouji-ni-dekiai-saretakunai-node-motoprincess-desu-dansou-shitsuji-ni-narimasu
 overrides:
-  sp-2000:
-    at: '2026-07-27'
-    reason: 二重頁統合(小池書院キングシリーズ復刻頁を版タブ化)後、正題SPセキュリティポリスの読みslugへ(空いた旧slugを再利用)
-    slug: sp-security-police
-  mangakasan-to-ashisutantosan-to-2:
-    at: '2026-07-27'
-    reason: 規則4(明白な辞書英単語=assistant)+敬称-san分離。本編slug mangaka-san-to-assistant-san-to と家族整合(ユーザ照会「二巻疑い」の調査時に発見。疑い自体はWiki全1巻続編で白)
-    slug: mangaka-san-to-assistant-san-to-2
-  q-e-d:
-    at: '2026-07-27'
-    reason: 正式題「Q.E.D.証明終了」への題是正(seed3 title)と同時にslugも正式読みへ。断片頁q-e-d-shoumei-shuuryouはpage-dedupで統合drop
-    slug: q-e-d-shoumei-shuuryou
-  drsuranpu:
-    at: '2026-07-27'
-    reason: '外来語title=元綴りDr.Slump(規則4=種a音写)。分裂断片頁dr-slump(愛蔵版5巻のみ)の統合と同時にrename(ユーザ裁定: 分裂側slugが正)'
-    slug: dr-slump
+  0-shinohara-1977:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: 0-shinohara
   008-uchuutoshizerozerohachi:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -129,6 +117,10 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: shinsoku-no-cyborg-009
+  1-yamamoto-1993:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: 1-yamamoto
   12shokumonogatari:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -147,6 +139,14 @@ overrides:
     slug: shiritsu-kiwamemichi-koukou-2011
   2050-raishisu-2050:
     slug: crisis-2050
+  5-2000:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: '5'
+  7-nwairudo7:
+    at: '2026-08-08'
+    reason: 数字始まり題の機械生成slugが破損(「新ワイルド7」→7-nwairudo7)。読みシンワイルドセブン基点で本編 wild-7 と整合する形に是正(ユーザ裁定 2026-08-08)
+    slug: shin-wild-7
   aahananoouendan:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -163,6 +163,22 @@ overrides:
     at: '2026-07-02'
     reason: ハイフン規則違反是正(楽天分かち書き「アバシリ イッカ」整列・綴り既存保持)
     slug: abashiri-ikka
+  abu-san-tsunohazu-2008:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: abu-san-tsunohazu
+  accel-world-hima-2014:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: accel-world-hima
+  ace-umino-1990:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: ace-umino
+  adachi-to-shimamura-mani-2016:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: adachi-to-shimamura-mani
   adoribukararaimei:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -171,6 +187,10 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: aphrodite-90
+  again-kubo-2011:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: again-kubo
   agakimichiruran:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -179,6 +199,26 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: agaribito-no-atoshimatsu
+  ahiru-ezuki-2004:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: ahiru-ezuki
+  ahiru-no-sora-akiyama-1987:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: ahiru-no-sora-akiyama
+  ahondara-koshiba-2003:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: ahondara-koshiba
+  ai-no-jidai-kurumada-2015:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: ai-no-jidai-kurumada
+  ai-no-seikatsu-sakurazawa-2009:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: ai-no-seikatsu-sakurazawa
   aidoruhimemiyasakurako:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -187,6 +227,18 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: aijin-o-kakou-reitetsu-na-hakushaku-to-no-tenkeiteki-na-seiryaku-kekkon-soshite-kiraware
+  aijin-tanaka-1999:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: aijin-tanaka
+  aijin-watanabe-2008:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: aijin-watanabe
+  aijin-yoshihara-2002:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: aijin-yoshihara
   ainomachigaiejisagashi:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -215,6 +267,14 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: aishite-mint-boy
+  aishiteru-fujitani-2008:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: aishiteru-fujitani
+  aishiteru-morita-1997:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: aishiteru-morita
   aishiterutoomounaraba:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -231,16 +291,25 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: ai-toka-iroiro-aru-tokoro
+  aitsu-maki-2008:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: aitsu-maki
   aizenkagura:
     at: '2026-07-02'
     reason: ハイフン規則違反是正(楽天分かち書き「アイゼン カグラ」整列・綴り既存保持)
     slug: aizen-kagura
+  aka-to-kuro-komachi-2017:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: aka-to-kuro-komachi
   akagamierufunoosouzaiyasan:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: akagami-elf-no-osouzai-ya-san
   akage-no-an-1983:
-    slug: akage-no-an-sugimoto-1983
+    reason: ' / C類年サフィックス無印化2026-08-10'
+    slug: akage-no-an-sugimoto
   akai-kami-no-shounen:
     at: '2026-06-26'
     reason: slug衝突edge:incumbent誤slug退避
@@ -257,6 +326,10 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: akinai-ningyo-to-sora-no-hatsukoi
+  akira-otsuka-2011:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: akira-otsuka
   akumanokendetenshiokurau:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -265,6 +338,10 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: akuma-no-youna-watashi
+  akumu-umezu-2011:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: akumu-umezu
   akunokoujowamoudaremokorosanai:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -297,6 +374,18 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: akumu-reijou-wa-ikka-metsubou-no-yume-o-mita
+  alice-in-wonderland-abe-2010:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: alice-in-wonderland-abe
+  alive-takahashi-1999:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: alive-takahashi
+  alps-no-shoujo-heidi-1990:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: alps-no-shoujo-heidi
   amaitamashii:
     at: '2026-07-02'
     reason: ハイフン規則違反是正(楽天分かち書き「アマイ タマシイ」整列・綴り既存保持)
@@ -309,6 +398,10 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: amanojaku-danshi-to-betabore-danshi
+  amaryllis-fukushima-2014:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: amaryllis-fukushima
   amemajiriromanholiday:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -329,6 +422,10 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: anata-sama-ga-wasurete-hoshii-to-osshaimashita-node-konyaku-haki-sareta-watakushi-ga-juusha
+  anatomia-fuji-2011:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: anatomia-fuji
   anbureramonogatari:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -341,6 +438,26 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: ane-no-inu-kara-me-ga-hanasenai
+  angel-blood-abeno-2013:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: angel-blood-abeno
+  angel-blue-hiura-1988:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: angel-blue-hiura
+  angel-iwadate-1983:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: angel-iwadate
+  angel-wars-ueda-1995:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: angel-wars-ueda
+  angelique-kihara-1978:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: angelique-kihara
   animegaoshigoto:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -357,6 +474,10 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: anta-to-osananajimi-tte-dake-demo-iya-na-noni
+  ao-no-jidai-mizumaru-1987:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: ao-no-jidai-mizumaru
   aoiishiroihanayutakanakajitsu:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -365,6 +486,10 @@ overrides:
     at: '2026-07-02'
     reason: ハイフン規則違反是正(楽天分かち書き「アオイ ヨウマタチ」整列・綴り既存保持)
     slug: aoi-youmatachi
+  appleseed-shirow-2015:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: appleseed-shirow
   arabiankyousoukyoku:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -437,6 +562,18 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: ashiya-yamanote-odougu-geihinkan-comic
+  astaroth-2003:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: astaroth
+  asterisk-akaishi-1992:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: asterisk-akaishi
+  asura-nakamura-2009:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: asura-nakamura
   atamagakongaragatchigekijoukyounoyorugohanwaniku:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -453,10 +590,18 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: awarena-reiraku-kizoku-no-koi-yuku-hate-wa
+  ayakashi-kazuhashi-2017:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: ayakashi-kazuhashi
   ayakashikazokunoyoukoreijou-onmyoujitoseiryakukekkonsuru:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: ayakashi-kazoku-no-youko-reijou-onmyouji-to-seiryaku-kekkon-suru
+  ayashi-2012:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: ayashi
   ayashikotogatari:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -465,6 +610,14 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: azumanga-recycle
+  azumi-koyama-2009:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: azumi-koyama
+  b-a-d-tozaki-2012:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: b-a-d-tozaki
   baadosutoraiku:
     at: '2026-07-02'
     reason: ハイフン規則違反是正(楽天分かち書き「バード ストライク」整列・綴り既存保持)
@@ -473,6 +626,10 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: virgin-jinsei-dokuhon
+  babel-inoe-2019:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: babel-inoe
   bachikaburihime:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -481,10 +638,18 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: bad-da-ne-yoshio-kun
+  bakidou-itagaki2019:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: bakidou-itagaki
   bakkurennayotsu:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: bakkurennayo
+  baku-hakase-2003:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: baku-hakase
   bakumatsufuuunden:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -493,6 +658,14 @@ overrides:
     at: '2026-06-16'
     reason: 主版が従版slugに誤収容・無印復帰
     slug: bakuon-rettou
+  bamboo-blade-b-2009:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: bamboo-blade-b
+  banji-kaichou-do-2025:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: banji-kaichou-do
   banyaseinohanran:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -509,6 +682,10 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: bara-no-sakamichi
+  basara-sai-2001:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: basara-sai
   bashousantoobasuteyamanotsuki:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -517,6 +694,14 @@ overrides:
     at: '2026-07-02'
     reason: ハイフン規則違反是正(楽天分かち書き「バス ガイド モノガタリ」整列・綴り既存保持)
     slug: basu-gaido-monogatari
+  batman-asamiya-2005:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: batman-asamiya
+  battery-kawaguchi-2001:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: battery-kawaguchi
   beddononakadeshinitaino:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -525,10 +710,22 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: bed-no-naka-no-tennyo
+  bem-saitou2026:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: bem-saitou
   benibarakurobara:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: beni-bara-kuro-bara
+  benkyou-shinasai-takanaga-2010:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: benkyou-shinasai-takanaga
+  bet-yamazaki-2012:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: bet-yamazaki
   bgataheijitorimonochou:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -545,10 +742,42 @@ overrides:
     at: '2026-06-16'
     reason: flag精査:単独候補/本編を無印化
     slug: black-jack-kuroi-ishi
+  black-out-maekawa-2015:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: black-out-maekawa
+  blaze-sasameyuki-2006:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: blaze-sasameyuki
+  bloody-kiss-yagami-2011:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: bloody-kiss-yagami
+  bloody-mary-kishi-2003:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: bloody-mary-kishi
+  blue-nananan-2020:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: blue-nananan
+  blue-sakisaka-2006:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: blue-sakisaka
+  body-talk-enomoto-2009:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: body-talk-enomoto
   bokkinseerusuman:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: bokkin-salesman
+  boku-kizuki-2012:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: boku-kizuki
   bokuganekodattakoro:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -561,6 +790,14 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: boku-no-yome-ni-naranai-ka
+  bokura-no-himitsu-yamamoto-2021:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: bokura-no-himitsu-yamamoto
+  bokura-wa-minna-ikiteiru-yamaura-1993:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: bokura-wa-minna-ikiteiru-yamaura
   bokutachinomure:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -569,6 +806,14 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: boku-wa-jissai-de-ichioku-en-kaseida
+  border-kotegawa-2014:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: border-kotegawa
+  border-watanabe-2013:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: border-watanabe
   borutonarutonekusutojienereeshonzusutooriigaido-bifoozaribaasaru:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -581,10 +826,38 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: bouken-kyou-jidai
+  box-rokuda-2002:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: box-rokuda
   boy-meets-girl-2000:
     at: '2026-06-16'
     reason: 主版が従版slugに誤収容・無印復帰
     slug: boy-meets-girl
+  boyfriend-yamada-2009:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: boyfriend-yamada
+  boys-life-kojima-1997:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: boys-life-kojima
+  boys-love-tachibana-2007:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: boys-love-tachibana
+  brains-1997:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: brains
+  buddy-nishizono-2014:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: buddy-nishizono
+  burai-ichinose-1991:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: burai-ichinose
   burattobanii:
     at: '2026-07-02'
     reason: ハイフン規則違反是正(楽天分かち書き「ブラット バニー」整列・綴り既存保持)
@@ -605,6 +878,10 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: butagoya-hatsu-inugoya-iki
+  butterfly-kiss-shinonome-2009:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: butterfly-kiss-shinonome
   byakuyazoushi:
     at: '2026-07-02'
     reason: ハイフン規則違反是正(楽天分かち書き「ビャクヤ ゾウシ」整列・綴り既存保持)
@@ -615,6 +892,10 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: sekai-o-sukuu-tame-ni-watashi-to-asachun-dekimasu-ka
+  cappuccino-yoshizumi-2009:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: cappuccino-yoshizumi
   cashmere-2001:
     at: '2026-06-16'
     reason: flag精査:単独候補/本編を無印化
@@ -623,6 +904,46 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: charlies-angel
+  change-hashiba-2000:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: change-hashiba
+  change-kitamura-2005:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: change-kitamura
+  change-the-world-chiyoda-2025:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: change-the-world-chiyoda
+  charisma-yashioji-2005:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: charisma-yashioji
+  charlotte-totsuki-2024:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: charlotte-totsuki
+  cheers-kobuichi-2019:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: cheers-kobuichi
+  cherish-anan-2005:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: cherish-anan
+  cherish-yoshizumi-2006:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: cherish-yoshizumi
+  cherry-boy-scramble-maya-1985:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: cherry-boy-scramble-maya
+  cherry-orihara-1990:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: cherry-orihara
   chibikkotenshi:
     at: '2026-07-02'
     reason: ハイフン規則違反是正(楽天分かち書き「チビッコ テンシ」整列・綴り既存保持)
@@ -639,6 +960,10 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: cheeklet-love
+  chiisana-koi-no-monogatari-abiko-2002:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: chiisana-koi-no-monogatari-abiko
   chikakuheikitaihikyoutoshitenokinjobutaihaeguchitoiuraamenya:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -648,7 +973,8 @@ overrides:
     reason: ハイフン規則違反是正(楽天分かち書き「チカラ ノ アリカ」整列・綴り既存保持)
     slug: chikara-no-arika
   chikyuu-no-himitsu-2006:
-    slug: chikyuu-no-himitsu-ooiwa-2006
+    reason: ' / C類年サフィックス無印化2026-08-10'
+    slug: chikyuu-no-himitsu-ooiwa
   chikyuugaiseimeitaiiiba:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -677,6 +1003,10 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: chotto-shitteru
+  chou-yo-hana-yo-shimabukuro-2019:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: chou-yo-hana-yo-shimabukuro
   chouhenkyounoryoushuaroonoseikatsu-nureginuokiseraretsuihousaremashi:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -693,22 +1023,78 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: chuubou-ga-futari
+  chuubyou-gekihatsu-boy-rerulili-2017:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: chuubyou-gekihatsu-boy-rerulili
   chuushashichauzo:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: chu-sha-shichauzo
+  chuushingura-sentaro-2014:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: chuushingura-sentaro
+  citrus-ayuko-2011:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: citrus-ayuko
   class-teni-shitara-naze-ka-hikikomori-no-ore-made-isekai-ni-tsuretekaretandaga:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: class-ten-i-shitara-naze-ka-hikikomori-no-ore-made-isekai-ni-tsuretekaretandaga
+  cleopatra-kurashina-1996:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: cleopatra-kurashina
+  cleopatra-sakaguchi-2019:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: cleopatra-sakaguchi
+  cocoon-kyo-2015:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: cocoon-kyo
+  color-mimori-2012:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: color-mimori
+  color-tsuda-1999:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: color-tsuda
+  colorful-tokiwa-2021:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: colorful-tokiwa
+  comic-higashino-keigo-mystery-2014:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: comic-higashino-keigo-mystery
+  complex-kikuchi-2002:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: complex-kikuchi
+  countach-okazaki-1996:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: countach-okazaki
   crescent-2:
     at: '2026-06-16'
     reason: 主版が従版slugに誤収容・無印復帰
     slug: crescent
+  crusader-kawaso-2002:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: crusader-kawaso
   crusher-joe-hosono-1993:
     at: '2026-06-16'
     reason: 主版が従版slugに誤収容・無印復帰
     slug: crusher-joe
+  cut-kawai-2002:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: cut-kawai
   d-n-ei-2:
     at: '2026-07-07'
     reason: 英字題D・N・A²のAをエイとカナ転写した誤slug是正(dedupで空いた正slugへ。ユーザ指摘)
@@ -741,6 +1127,18 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: dai-san-no-gokudou
+  daisuki-kikuchi-1992:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: daisuki-kikuchi
+  daisuki-mizusawa-2007:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: daisuki-mizusawa
+  daisy-momochi-2013:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: daisy-momochi
   daiyamondogeimu:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -753,6 +1151,10 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: dakasete-kurenai-ka
+  dakishimetai-hanada-2014:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: dakishimetai-hanada
   dakishimetekurerunara:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -761,10 +1163,26 @@ overrides:
     at: '2026-07-02'
     reason: ハイフン規則違反是正(楽天分かち書き「ダンシ グラシ」整列・綴り既存保持)
     slug: danshi-gurashi
+  dark-queen-matsubara-2008:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: dark-queen-matsubara
+  daruma-tanaka-2004:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: daruma-tanaka
   dashichaimashousenpai:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: dashichaimashou-senpai
+  datte-aishiteru-akira-2009:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: datte-aishiteru-akira
+  days-yasuda-2018:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: days-yasuda
   ddtboku-miminashihouichidesu:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -773,10 +1191,26 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: dead-dead-demons-dededede-destruction
+  deadpool-samurai-sano-2021:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: deadpool-samurai-sano
+  dear-ito-1991:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: dear-ito
+  dear-mitsuki-2010:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: dear-mitsuki
   deep-impact-2007:
     at: '2026-06-16'
     reason: flag精査:単独候補/本編を無印化
     slug: deep-impact
+  deja-vu-monchi-2001:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: deja-vu-monchi
   dekaiusagininatsukareta:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -785,6 +1219,14 @@ overrides:
     at: '2026-06-26'
     reason: 重複dedup:incumbent⊂candidate(完全版採用)
     slug: dekikon
+  delivery-usi-2018:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: delivery-usi
+  denki-mochizuki-1986:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: denki-mochizuki
   desire-kanazawa-2001:
     at: '2026-06-16'
     reason: 主版が従版slugに誤収容・無印復帰
@@ -801,6 +1243,22 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: yugioh-sevens-luke-bakuretsu-hadou-den
+  diva-yuki-2004:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: diva-yuki
+  dive-kano-2000:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: dive-kano
+  dive-yasuda-2017:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: dive-yasuda
+  do-funaki-1985:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: do-funaki
   doahorizumu:
     at: '2026-07-02'
     reason: ハイフン規則違反是正(楽天分かち書き「ド アホリズム」整列・綴り既存保持)
@@ -809,6 +1267,18 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: do-s-shachou-wa-do-m-hisho-o-ijimetai-office-de-nuretoro-gangu-review
+  dog-days-fujima-2011:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: dog-days-fujima
+  dog-style-minamoto-2010:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: dog-style-minamoto
+  dogs-sato-2023:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: dogs-sato
   dokaben-doriimutoonamentohen:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -857,10 +1327,38 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: doshaburi-no-hi-ni
+  dotsukiri-angel:
+    at: '2026-08-08'
+    reason: NDLのtranscriptionが旧式の大文字表記「ドツキリ エンジエル」で、そこから機械生成されたslugが dotsukiri-angel になっていた。実際の読みはドッキリエンジェル(書影上部のローマ字クレジット「KAZUKI MOTOYAMA / DOKKIRI ANGEL」が裏付け)。ユーザ発見 2026-08-08
+    slug: dokkiri-angel
   dotsukiri-maikuroon:
     at: '2026-07-02'
     reason: ハイフン規則違反是正(楽天分かち書き「ドツキリ マイ クローン」整列・綴り既存保持)
     slug: dotsukiri-mai-kuroon
+  double-hiura-2004:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: double-hiura
+  double-noda-2019:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: double-noda
+  double-yuki-2008:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: double-yuki
+  doubt-amano-2012:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: doubt-amano
+  doubt-tonogai-2008:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: doubt-tonogai
+  doubt-voltage-2019:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: doubt-voltage
   doukutsu-ou-kara-hajimeru-rakuen-life-bannounosaikutsusukirudesaikyouni:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -869,10 +1367,34 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: doukyonin-ga-kono-yo-no-mon-janai
+  doukyuusei-saimon-1988:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: doukyuusei-saimon
+  doukyuusei-ueda-2002:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: doukyuusei-ueda
   doyoubinoehon:
     at: '2026-07-02'
     reason: ハイフン規則違反是正(楽天分かち書き「ドヨウビ ノ エホン」整列・綴り既存保持)
     slug: doyoubi-no-ehon
+  dramatic-irony-fujisaki-2001:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: dramatic-irony-fujisaki
+  dreams-kurashina-2004:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: dreams-kurashina
+  drop-yuki-2018:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: drop-yuki
+  drsuranpu:
+    at: '2026-07-27'
+    reason: '外来語title=元綴りDr.Slump(規則4=種a音写)。分裂断片頁dr-slump(愛蔵版5巻のみ)の統合と同時にrename(ユーザ裁定: 分裂側slugが正)'
+    slug: dr-slump
   dungeon-ni-deai-o-motomeru-nowa-machigatteirudarouka-familia-chronicle:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -881,6 +1403,18 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: dungeon-ni-deai-o-motomeru-no-wa-machigatteiru-darou-ka
+  eden-kawatsu-2015:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: eden-kawatsu
+  eden-sakurazawa-2014:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: eden-sakurazawa
+  eden-sugisaki-2006:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: eden-sugisaki
   edomae-no-shun-ginzayanagisushisandaime:
     at: '2026-06-16'
     reason: 主版が従版slugに誤収容・無印復帰
@@ -889,10 +1423,42 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: hp-5-desu-kedo-auto-heal-ga-areba-shinimasen
+  eighth-izu-2013:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: eighth-izu
+  ekkusu-no-utagoe:
+    at: '2026-08-08'
+    reason: 題の1文字目がギリシャ文字χ(カイ)。書誌DBがラテンXに正規化した表題からslugが ekkusu- になっていた。楽天titleKanaの2読み併記「X ノ ウタゴエ カイ ノ ウタゴエ」とja.wikipediaの「χの歌声」で確認
+    slug: kai-no-utagoe
+  elisabeth-miyano2026:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: elisabeth-miyano
+  elite-yoshinaga-2025:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: elite-yoshinaga
+  embryo-naruse-2007:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: embryo-naruse
+  engage-ikuemi-1985:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: engage-ikuemi
+  engage-watanabe-2009:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: engage-watanabe
   engekishoujoinochi:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: engeki-shoujo-inochi
+  enigma-midori-1997:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: enigma-midori
   enmusubireijougamoteoujinokonkatsuotetsudattaranazekakudokareteirunode:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -917,6 +1483,10 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: elf-sensei-to-yobanaide
+  escape-kano-2014:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: escape-kano
   esuesuesukyuusukiruhaifushinkannohenkyousekandoraifu-sasensakinomu:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -929,20 +1499,101 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: s-rank-party-kara-kaiko-sareta-jugushi
+  face-ito-1993:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: face-ito
+  face-osaka-1998:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: face-osaka
+  fake-hashiba-2022:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: fake-hashiba
+  fake-kano-2015:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: fake-kano
+  fake-makimura-2001:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: fake-makimura
+  fake-tanabe-2011:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: fake-tanabe
   fantajiiginga-nandeuchuunigoburinyaookugairunda:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: fantasy-ginga-nande-uchuu-ni-goblin-ya-orc-ga-irunda
+  fantasy-okachimachi-2012:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: fantasy-okachimachi
+  faraway-hinode-2005:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: faraway-hinode
+  fetish-2001:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: fetish
+  fetish-fujiwara-2004:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: fetish-fujiwara
   final-fantasy-1989:
     at: '2026-06-16'
     reason: 主版が従版slugに誤収容・無印復帰
     slug: final-fantasy
+  fine-otani-2009:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: fine-otani
+  fire-emblem-fuyuki-1999:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: fire-emblem-fuyuki
+  fire-emblem-nintendo-1996:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: fire-emblem-nintendo
+  fire-emblem-seisen-no-keifu-fujimori-1997:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: fire-emblem-seisen-no-keifu-fujimori
+  fire-emblem-watanabe-1992:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: fire-emblem-watanabe
   fittonesujimuzuuningendoubutsuen:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: fitness-gym-zoo-ningen-doubutsuen
+  flag-fuji-2014:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: flag-fuji
+  flight-tsurita-2010:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: flight-tsurita
+  flower-higuri-2001:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: flower-higuri
   forward-1999:
-    slug: forward-kondou-1999
+    reason: ' / C類年サフィックス無印化2026-08-10'
+    slug: forward-kondou
+  free-gan-2012:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: free-gan
+  friends-fujimi-2024:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: friends-fujimi
   fudeoroshi:
     at: '2026-07-02'
     reason: ハイフン規則違反是正(楽天分かち書き「フデ オロシ」整列・綴り既存保持)
@@ -963,6 +1614,10 @@ overrides:
     at: '2026-07-02'
     reason: ハイフン規則違反是正(楽天分かち書き「フクオカ ザムライ」整列・綴り既存保持)
     slug: fukuoka-zamurai
+  full-moon-mato-2008:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: full-moon-mato
   funsensanadamaru:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -971,6 +1626,10 @@ overrides:
     at: '2026-07-02'
     reason: ハイフン規則違反是正(楽天分かち書き「フリムイタ オトコ」整列・綴り既存保持)
     slug: furimuita-otoko
+  fushigina-shounen-tezuka-1978:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: fushigina-shounen-tezuka
   fushigiryokouki:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -979,6 +1638,14 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: futagoza-symmetry
+  futari-no-derby-sasaki-2017:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: futari-no-derby-sasaki
+  futaribocchi-yamakawa-2003:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: futaribocchi-yamakawa
   futsuunohonwaarimasen:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -995,10 +1662,46 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: gacha-shi-ni-kamibiki-saretemita
+  gadget-sano-1998:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: gadget-sano
   gakeppuchireijouwakishisamanokyuuainikizukanai:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: gakeppuchi-reijou-wa-kishi-sama-no-kyuuai-ni-kizukanai
+  gakkou-e-yukou-shinda-1998:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: gakkou-e-yukou-shinda
+  gakkou-no-kaidan-inoe-1995:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: gakkou-no-kaidan-inoe
+  gakkou-no-kaidan-kaima-2010:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: gakkou-no-kaidan-kaima
+  gakkou-no-kaidan-koga-1994:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: gakkou-no-kaidan-koga
+  gakkou-no-kaidan-paja-1997:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: gakkou-no-kaidan-paja
+  gakkou-no-sensei-suyama-2009:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: gakkou-no-sensei-suyama
+  gakuran-tengoku-catherine-1997:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: gakuran-tengoku-catherine
+  game-over-mizutani-2010:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: game-over-mizutani
   gamutsutsusshara:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -1027,6 +1730,22 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: garasu-no-shiro-no-kiroku
+  garden-furuya-2000:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: garden-furuya
+  garden-kotobuki-2008:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: garden-kotobuki
+  garland-hashiba-2002:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: garland-hashiba
+  garou-densetsu-kumocho-1996:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: garou-densetsu-kumocho
   geemuchishikidesaikyouninattamobuheishiwashinnojitsuryokuokakushitai:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -1039,6 +1758,18 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: gekisai-uchuuken
+  gekka-bijin-yamagishi-2010:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: gekka-bijin-yamagishi
+  gekkou-himuro-2002:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: gekkou-himuro
+  gekkou-mizuki-1982:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: gekkou-mizuki
   gekkounokyoushitsu:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -1052,7 +1783,32 @@ overrides:
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: gendai-shisou-no-sounanshatachi
   genji-monogatari-egawa-1991:
-    slug: genji-monogatari-egawa-2001
+    reason: ' / C類年サフィックス無印化2026-08-10'
+    slug: genji-monogatari-egawa
+  genji-monogatari-masaki-1983:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: genji-monogatari-masaki
+  genji-monogatari-mio-2007:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: genji-monogatari-mio
+  genji-monogatari-miyagi-2010:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: genji-monogatari-miyagi
+  genji-monogatari-shikibu-2013:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: genji-monogatari-shikibu
+  genji-monogatari-shin-1991:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: genji-monogatari-shin
+  genji-monogatari-yanagawa-1989:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: genji-monogatari-yanagawa
   genkaiotakugagisoukoibitohajimetaken:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -1065,10 +1821,34 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: gensou-shoujo-zukan
+  get-azuma-1999:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: get-azuma
   getabakikoushien:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: getabaki-koushien
+  ghost-writer-tsubaki-2012:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: ghost-writer-tsubaki
+  gift-hirose-2003:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: gift-hirose
+  gift-ichinose-2015:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: gift-ichinose
+  gigolo-saito-2009:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: gigolo-saito
+  ginga-tetsudou-no-yoru-miyazawa-1992:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: ginga-tetsudou-no-yoru-miyazawa
   ginganagareboshigin:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -1089,6 +1869,22 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: gintama-sannen-z-gumi-ginpachi-sensei
+  girlfriend-mitaonsha-1997:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: girlfriend-mitaonsha
+  girls-bravo-hiura-2005:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: girls-bravo-hiura
+  girls-talk-mogg-2015:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: girls-talk-mogg
+  go-kondo-2002:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: go-kondo
   gochisousamawanichoumede:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -1105,6 +1901,10 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: gokinjo-okusama-no-naisho-banashi
+  gokko-sakurakoji-2003:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: gokko-sakurakoji
   gokujoshi-gokudoujoshishougakuseininaru:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -1113,6 +1913,18 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: gokujou-mechamote-iinchou-gaiden-mechamote-iinchou-datta-watashi-ga-ise
+  gomen-asobase-watase-1990:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: gomen-asobase-watase
+  good-bye-mochida-2003:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: good-bye-mochida
+  good-job-motomiya-2018:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: good-job-motomiya
   goryuukokumonogatari:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -1129,6 +1941,14 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: gozen-niji-no-heart-fizz
+  green-blood-shibata-1984:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: green-blood-shibata
+  guin-saga-yanagisawa-2001:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: guin-saga-yanagisawa
   gunyochanwashippaisakujanai:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -1141,6 +1961,10 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: grisaia-no-kajitsu-sanctuary-fellows
+  guy-saito-1990:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: guy-saito
   gyakkounokuruchan:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -1165,14 +1989,30 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: hachigatsu-no-usagi
+  hachimitsu-shounen-nakagaki-2003:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: hachimitsu-shounen-nakagaki
   hachinan-tte-sore-wa-nai-deshou-2024:
     at: '2026-06-16'
     reason: 主版が従版slugに誤収容・無印復帰
     slug: hachinan-tte-sore-wa-nai-deshou
+  hadaka-no-ouji-sama-nagaike-1994:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: hadaka-no-ouji-sama-nagaike
+  hadashi-no-tenshi-nonomiya-2021:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: hadashi-no-tenshi-nonomiya
   haikaburitohimitsunoyakata:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: haikaburi-to-himitsu-no-yakata
+  hajimete-no-kiss-ishii-2015:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: hajimete-no-kiss-ishii
   hakabakyoushitsu:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -1181,6 +2021,14 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: haka-no-machi-chitei-no-ashioto
+  hakobune-yuki-2024:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: hakobune-yuki
+  hakugei-kagemaru-2004:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: hakugei-kagemaru
   hakuouki-2010:
     at: '2026-06-16'
     reason: 主版が従版slugに誤収容・無印復帰
@@ -1189,14 +2037,66 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: hakushi-no-ue-de-sayounara
+  hal-ayase-2017:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: hal-ayase
+  hal-makino-2010:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: hal-makino
+  half-and-half-nanami-2008:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: half-and-half-nanami
+  hallelujah-watanabe-1991:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: hallelujah-watanabe
   hamuhamuzukushi:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: hamuhamu-zukushi
+  hana-matsumoto-2002:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: hana-matsumoto
+  hana-mo-arashi-mo-miyagi-2014:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: hana-mo-arashi-mo-miyagi
+  hana-ni-arashi-ogawa-2008:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: hana-ni-arashi-ogawa
   hana-no-deka:
     at: '2026-07-02'
     reason: 'slug生成の辞書誤変換: 慶次(けいじ)→刑事(デカ)。花のデカという作品は存在しない(種2確認)。正=hana-no-keiji(空き確認済)'
     slug: hana-no-keiji
+  hana-no-miyako-kirishima-2013:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: hana-no-miyako-kirishima
+  hana-no-namae-makimura-2001:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: hana-no-namae-makimura
+  hana-no-utage-takada-1997:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: hana-no-utage-takada
+  hana-o-meshimase-iwashita-2014:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: hana-o-meshimase-iwashita
+  hana-takeda-1988:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: hana-takeda
+  hanabi-yoshihara-2021:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: hanabi-yoshihara
   hanabiranikki:
     at: '2026-07-02'
     reason: ハイフン規則違反是正(楽天分かち書き「ハナビラ ニッキ」整列・綴り既存保持)
@@ -1225,10 +2125,26 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: hanihoheto-iroha
+  happiness-furuya-2006:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: happiness-furuya
+  happy-days-yamato-2003:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: happy-days-yamato
+  happy-end-arita-2017:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: happy-end-arita
   happy-family-fukushuunorentaruokaasan:
     at: '2026-06-26'
     reason: 'slug衝突suffix(同名異作/サブ): 別著者(坂崎未侑 vs 三原ミツカズ)・ISBN重なりなし=同名異作。c'
     slug: happy-family-sakazaki
+  happy-man-shiozaki-1999:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: happy-man-shiozaki
   harajukumonogatari:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -1237,10 +2153,18 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: harem-sanguubashi
+  harenchi-akira-2002:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: harenchi-akira
   haretahihagakkouwoyasunde:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: hareta-hi-wa-gakkou-o-yasunde
+  harmony-mizutani-2023:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: harmony-mizutani
   haruhayate:
     at: '2026-07-02'
     reason: ハイフン規則違反是正(楽天分かち書き「ハル ハヤテ」整列・綴り既存保持)
@@ -1258,7 +2182,8 @@ overrides:
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: haru-ni-nareba-kusa-no-ame
   hashire-merosu-2010:
-    slug: hashire-merosu-hirooka-2010
+    reason: ' / C類年サフィックス無印化2026-08-10'
+    slug: hashire-merosu-hirooka
   hashirehaiji:
     at: '2026-07-02'
     reason: ハイフン規則違反是正(楽天分かち書き「ハシレ ハイジ」整列・綴り既存保持)
@@ -1267,6 +2192,30 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: hatsukakan-wa-naku-deshou
+  hatsukoi-abe-2011:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: hatsukoi-abe
+  hatsukoi-harumi-2022:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: hatsukoi-harumi
+  hatsukoi-mikokuno-2010:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: hatsukoi-mikokuno
+  hatsukoi-monogatari-aoyagi-2007:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: hatsukoi-monogatari-aoyagi
+  hatsukoi-ninomiya-1998:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: hatsukoi-ninomiya
+  hatsukoi-yamada-2020:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: hatsukoi-yamada
   hatsukoidendoufaito:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -1279,6 +2228,26 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: hayami-rasenjin-no-bashauma-daisakusen-bis
+  heart-no-diamond-shinjo-2010:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: heart-no-diamond-shinjo
+  heaven-oda-2000:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: heaven-oda
+  heaven-s-door-akimoto-2013:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: heaven-s-door-akimoto
+  heaven-s-door-koike-2003:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: heaven-s-door-koike
+  heaven-seino-2003:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: heaven-seino
   heishishuveikunobouken:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -1287,14 +2256,58 @@ overrides:
     at: '2026-06-16'
     reason: 主版が従版slugに誤収容・無印復帰
     slug: help
+  help-fujiwara-2004:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: help-fujiwara
   herubooi-2010:
     at: '2026-06-16'
     reason: 主版が従版slugに誤収容・無印復帰
     slug: herubooi
+  hidarikiki-no-eren-nifuni-2020:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: hidarikiki-no-eren-nifuni
+  high-score-aruko-2002:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: high-score-aruko
+  higurashi-no-naku-koro-ni-kai:
+    at: '2026-08-08'
+    reason: 「解」「怪」「礼」がすべて kai/rei に潰れた衝突回避で西暦suffix(-2007/-2009/-2007-2/-2011)が付いていたが、他の編別頁(-onikakushihen 等)と不揃いで内容も分からない。編名を入れて一意化。祭囃し編=マツリバヤシヘン(楽天titleKana)
+    slug: higurashi-no-naku-koro-ni-kai-matsuribayashihen
+  higurashi-no-naku-koro-ni-kai-2007:
+    at: '2026-08-08'
+    reason: 「解」「怪」「礼」がすべて kai/rei に潰れた衝突回避で西暦suffix(-2007/-2009/-2007-2/-2011)が付いていたが、他の編別頁(-onikakushihen 等)と不揃いで内容も分からない。編名を入れて一意化。目明し編=メアカシヘン(楽天titleKana「ヒグラシ ノ ナク コロ ニ カイ メアカシヘン」)
+    slug: higurashi-no-naku-koro-ni-kai-meakashihen
+  higurashi-no-naku-koro-ni-kai-2007-2:
+    at: '2026-08-08'
+    reason: 「解」「怪」がどちらも kai に潰れる衝突回避で -2007-2 という数字suffixが付いていた。ja.wikipedia「ひぐらしのなく頃に怪 現壊し編」の冒頭よみがな『ひぐらしのなくころにかい うつつこわしへん』で編名の読みを確定し、他の編別頁と同じ編名ベースに是正。NDL(本題まで)・楽天(本題まで)・KADOKAWA公式(ふりがな無し)では取れなかった読み。
+    slug: higurashi-no-naku-koro-ni-kai-utsutsukowashihen
+  higurashi-no-naku-koro-ni-kai-2009:
+    at: '2026-08-08'
+    reason: 「解」「怪」「礼」がすべて kai/rei に潰れた衝突回避で西暦suffix(-2007/-2009/-2007-2/-2011)が付いていたが、他の編別頁(-onikakushihen 等)と不揃いで内容も分からない。編名を入れて一意化。皆殺し編=ミナゴロシヘン(楽天titleKana)
+    slug: higurashi-no-naku-koro-ni-kai-minagoroshihen
+  higurashi-no-naku-koro-ni-rei-ryukishi-2011:
+    at: '2026-08-08'
+    reason: 「解」「怪」「礼」がすべて kai/rei に潰れた衝突回避で西暦suffix(-2007/-2009/-2007-2/-2011)が付いていたが、他の編別頁(-onikakushihen 等)と不揃いで内容も分からない。編名を入れて一意化。賽殺し編=サイコロシヘン(NDL2レコードが一致。楽天は「サイゴロシヘン」だが、賽=サイコロの掛詞で濁らないNDL側を採用)
+    slug: higurashi-no-naku-koro-ni-rei-saikoroshihen
   hijikatatoshizou:
     at: '2026-06-26'
     reason: 'slug衝突suffix(同名異作/サブ): 同題だが別著者(神田たけ志 vs 伊賀和洋/小池一夫原作)・ISBN重な'
     slug: hijikata-toshizou-kanda
+  hikuidori-imamura-2025:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: hikuidori-imamura
+  himawari-hirakawa-2018:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: himawari-hirakawa
+  himawari-ueno-2005:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: himawari-ueno
   himebushoumasamunemairu:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -1307,6 +2320,26 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: himei-kansatsukan-don
+  himiko-murao-2008:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: himiko-murao
+  himitsu-himitsu-morita-2013:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: himitsu-himitsu-morita
+  himitsu-kozuki-1999:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: himitsu-kozuki
+  himitsu-no-hanazono-fujii-1999:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: himitsu-no-hanazono-fujii
+  himitsu-no-hanazono-kotono-1999:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: himitsu-no-hanazono-kotono
   himitsushireimashinkeiji999:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -1319,6 +2352,10 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: hypnosis-mic
+  hirahira-ame-2007:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: hirahira-ame
   hisshoudennougakuen:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -1339,6 +2376,10 @@ overrides:
     at: '2026-07-02'
     reason: ハイフン規則違反是正(楽天分かち書き「ヒトリ マツリ」整列・綴り既存保持)
     slug: hitori-matsuri
+  hitsuji-ga-ippiki-moro-2009:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: hitsuji-ga-ippiki-moro
   hitsujiotokonokurisumasu:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -1347,14 +2388,42 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: hitsukoin-dakara
+  holy-maruo-1996:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: holy-maruo
+  home-nakamura-2022:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: home-nakamura
+  home-ueda-2000:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: home-ueda
+  homemade-home-ashihara-1997:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: homemade-home-ashihara
   hondemotteesupaa:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: hondemotte-esp
+  hone-made-aishite-takaguchi-2011:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: hone-made-aishite-takaguchi
   honenooto:
     at: '2026-07-02'
     reason: ハイフン規則違反是正(楽天分かち書き「ホネ ノ オト」整列・綴り既存保持)
     slug: hone-no-oto
+  honey-meguro-2013:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: honey-meguro
+  honey-sakurai-2001:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: honey-sakurai
   honjitsu-akanebiyori:
     at: '2026-07-02'
     reason: ハイフン規則違反是正(楽天分かち書き「ホンジツ アカネ ビヨリ」整列・綴り既存保持)
@@ -1367,10 +2436,22 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: honto-ni-atta-ecchi-na-hanashi
+  horizon-takuya-2014:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: horizon-takuya
+  hoshi-ni-negai-o-maita-2016:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: hoshi-ni-negai-o-maita
   hoshi-no-kirby-manpukupupupufantajii:
     at: '2026-06-26'
     reason: 'slug衝突suffix(同名異作/サブ): 同題だが別著者(武内いぶき13巻 vs ひかわ博一25巻)・ISBN重な'
     slug: hoshi-no-kirby-takeuchi
+  hoshi-o-tsugu-mono-toda-1996:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: hoshi-o-tsugu-mono-toda
   hoshinohaamonii:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -1407,8 +2488,25 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: houkago-date-club
+  hug-yoshino-2005:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: hug-yoshino
+  i-shiki-2008:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: i-shiki
   ibitsu-2020:
-    slug: ibitsu-kurosaki-2020
+    reason: ' / C類年サフィックス無印化2026-08-10'
+    slug: ibitsu-kurosaki
+  ibitsu-ryo-2010:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: ibitsu-ryo
+  ichiban-yoshikawa-2002:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: ichiban-yoshikawa
   ichibyousakiwakoi:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -1437,6 +2535,14 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: ichizu-de-gozansu
+  idaten-yamashita-2001:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: idaten-yamashita
+  idol-de-ikou-kimoto-1999:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: idol-de-ikou-kimoto
   ieooidasaremashitagagenkinikurashiteimasu-chiitonamahoutozensechishikideka:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -1445,6 +2551,14 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: ie-o-owareta-reijou-wa-kuroneko-ouji-no-okiniiri-norowareta-kuroneko-wa-sugata
+  ihoujin-kodaka-2003:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: ihoujin-kodaka
+  ijiwaru-matsuzaki-1993:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: ijiwaru-matsuzaki
   ikagoriranodoeraigenkigaderumanga:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -1453,6 +2567,10 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: ikasama-nashi-no-kiss-ga-shitai
+  ikenai-koto-kai-hiura-2005:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: ikenai-koto-kai-hiura
   ikeniehimenokoufuku-kodokunanienoshoujowamamononoounohanayometonaru:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -1499,12 +2617,21 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: inbiri-no-mura
+  inferno-rinno-2010:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: inferno-rinno
+  inferno-takadono-2016:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: inferno-takadono
   inma-no-ikenie-2018:
     at: '2026-06-16'
     reason: flag精査:単独候補/本編を無印化
     slug: inma-no-ikenie
   innocent-1995:
-    slug: innocent-teradate-1995
+    reason: ' / C類年サフィックス無印化2026-08-10'
+    slug: innocent-teradate
   inochikakerukaa:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -1529,6 +2656,10 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: ippatsu-hyakuman-moushiuke-sourou
+  ippon-masuda-2016:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: ippon-masuda
   ipponbouchoumantarou:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -1541,6 +2672,10 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: irezumi-to-pierce-to-koigokoro
+  ise-monogatari-kihara-2011:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: ise-monogatari-kihara
   isekai-de-skill-o-kaitai-shitara-cheat-na-yome-ga-zoushoku-shimashita-2025:
     at: '2026-06-16'
     reason: 主版が従版slugに誤収容・無印復帰
@@ -1613,6 +2748,14 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: ishoku-retsuden-kairiki-no-haha
+  isshokenmei-ni-gohan-maruyama-2012:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: isshokenmei-ni-gohan-maruyama
+  isshokenmei-ni-kurasou-togawa-1996:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: isshokenmei-ni-kurasou-togawa
   isshoniichaokka:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -1629,6 +2772,14 @@ overrides:
     at: '2026-07-02'
     reason: ハイフン規則違反是正(楽天分かち書き「イッスン ボウシ」整列・綴り既存保持)
     slug: issun-boushi
+  itadakimasu-uekan-2015:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: itadakimasu-uekan
+  itadakimasu-yoshihara-2004:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: itadakimasu-yoshihara
   itainoitainosoraotobe:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -1669,8 +2820,33 @@ overrides:
     at: '2026-06-26'
     reason: 重複dedup:incumbent⊂candidate(完全版採用)
     slug: iyahaya-atami-kun
+  j-boy-ryuzaki-1994:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: j-boy-ryuzaki
+  jadou-tsuchiyama-2012:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: jadou-tsuchiyama
+  japan-miura-1992:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: japan-miura
+  jealousy-matsusaka-2005:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: jealousy-matsusaka
+  jesus-aoki-2001:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: jesus-aoki
   jesus-christ-1986:
-    slug: jesus-christ-higuchi-1986
+    reason: ' / C類年サフィックス無印化2026-08-10'
+    slug: jesus-christ-higuchi
+  jesus-yasuhiko-1997:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: jesus-yasuhiko
   jidankoushouninemu:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -1707,6 +2883,14 @@ overrides:
     at: '2026-06-16'
     reason: flag精査:単独候補/本編を無印化
     slug: jin
+  jingitachi-tachihara2018:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: jingitachi-tachihara
+  jinsei-wa-barairo-da-honma-2004:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: jinsei-wa-barairo-da-honma
   jinseidonzokonawatashitooopunmarijjinoojisamanokeiyakujun-ai:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -1719,6 +2903,10 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: jireru-munasaki-wa-nemurenai
+  joker-yamane-1997:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: joker-yamane
   joshiananooudou:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -1731,6 +2919,18 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: jouzu-ni-gaman-dekiru-made
+  joyuu-kawasaki-1988:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: joyuu-kawasaki
+  jukai-saitou2026:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: jukai-saitou
+  jun-ishinomori-2003:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: jun-ishinomori
   junjouhaafubeikudoomega:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -1751,6 +2951,10 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: juunen-me-no-mitsugetsu
+  k-shitsuki-1988:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: k-shitsuki
   kaadofaitovangaadodivainzugenmakakuseihen:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -1767,10 +2971,42 @@ overrides:
     at: '2026-07-02'
     reason: ハイフン規則違反是正(楽天分かち書き「カガ アマタ」整列・綴り既存保持)
     slug: kaga-amata
+  kagehime-kondo-1994:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: kagehime-kondo
+  kagehime-umezu-2011:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: kagehime-umezu
+  kagerou-nikki-kio-1998:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: kagerou-nikki-kio
   kagetorakunwamodorenai:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: kagetora-kun-wa-modorenai
+  kagi-mochizuki-2003:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: kagi-mochizuki
+  kago-no-tori-caskabe-2004:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: kago-no-tori-caskabe
+  kagome-kagome-ikebe-2014:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: kagome-kagome-ikebe
+  kaidan-inuki-1996:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: kaidan-inuki
+  kaidan-koizumi-1991:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: kaidan-koizumi
   kaidanshi-shizukikanadenoyoiyamibanashi-yuureiga:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -1799,6 +3035,14 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: kainarase-junjou
+  kakatte-kinasai-enomoto-2001:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: kakatte-kinasai-enomoto
+  kakushigoto-nieki-2019:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: kakushigoto-nieki
   kamakuramonogatari:
     at: '2026-06-26'
     reason: 'slug衝突subtitle(同名異作/サブ): candidateは副題「魔界編」のサブシリーズ、incumbentが本'
@@ -1811,6 +3055,22 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: cameraman-kintarou
+  kami-no-ko-kanazawa-2003:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: kami-no-ko-kanazawa
+  kami-sama-no-iu-toori-mimori-2003:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: kami-sama-no-iu-toori-mimori
+  kami-sama-no-okurimono-takeda-1994:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: kami-sama-no-okurimono-takeda
+  kami-sama-onegai-mio-2012:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: kami-sama-onegai-mio
   kamichamakarinchu:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -1863,6 +3123,18 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: kanojo-tachi-no-tsumoru-hanashi
+  kanon-shimotsuki-2007:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: kanon-shimotsuki
+  kanon-takemiya-1986:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: kanon-takemiya
+  kanon-usami-2003:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: kanon-usami
   kansaiben-otokotomodachitoguchatoromassaaji:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -1875,10 +3147,30 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: kanzen-fukachi-no-gedou-tamer-dungeon-no-saikyou-monster-musume-o-ore-no-skill-de-shihai-suru
+  kapoon-kawahara-2010:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: kapoon-kawahara
   karamorannosora:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: karamoran-no-sora
+  kare-wa-tomodachi-urano-2025:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: kare-wa-tomodachi-urano
+  karen-osakabe-2011:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: karen-osakabe
+  karen-shiozaki-1997:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: karen-shiozaki
+  karin-kagesaki-2003:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: karin-kagesaki
   karura-mau-katsuraginokodaishin:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -1899,14 +3191,30 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: kaseifu-wa-cinderella
+  kasuga-no-tsubone-miura-1989:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: kasuga-no-tsubone-miura
+  kasuga-no-tsubone-watanabe-1989:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: kasuga-no-tsubone-watanabe
   katayoku-no-rabirinsusateraito-stories:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: katayoku-no-labyrinth-satellite-stories
+  katte-ni-shiyagare-konno-2002:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: katte-ni-shiyagare-konno
   kattenishoukanshitakuseniikiokuredakaraseijodewanaitoiwaremashita-ise:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: katte-ni-shoukan-shita-kuse-ni-ikiokure-dakara-seijo-dewa-nai-to-iwaremashita
+  kawaii-hito-konno-2000:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: kawaii-hito-konno
   kawaiitoittekure:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -1919,6 +3227,10 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: kawarimono-no-teihen-kizoku-ohitoyoshi-ga-koujite-tada-hitori-no-houseki-juu-zukai
+  kaze-tachinu-hori-2015:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: kaze-tachinu-hori
   kazenowatokinowasunanowa:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -1935,10 +3247,18 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: kedamono-ouji-no-nise-koi-hanayome
+  keep-out-kanbe-2002:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: keep-out-kanbe
   keikenchi-chochiku-de-nonbiri-shoushin-ryokou-yuushatokoibitonitsuihousaretasenshinomu:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: keikenchi-chochiku-de-nonbiri-shoushin-ryokou
+  keikoku-takahashi-1991:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: keikoku-takahashi
   keishichou-tokumubu-tokushu-kyouaku-han-taisakushitsudainanaka-tokunana:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -1959,6 +3279,10 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: kekkon-tte-nan-nano
+  kemonomichi-kagemaru-1980:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: kemonomichi-kagemaru
   kemonosamawaongaeshideharamasetai:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -1991,10 +3315,26 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: kikan-gentei-koibito-keiyaku-onzoushi-na-douryou-wa-shoushin-joshi-o-nigasanai
+  kimera-kodaka-1995:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: kimera-kodaka
+  kimi-no-iru-basho-sakurazawa-2011:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: kimi-no-iru-basho-sakurazawa
   kimi-no-koto-ga-daidaidaidaidaisuki-na-100-nin-no-kanojo:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: kimi-no-koto-ga-dai-dai-dai-dai-daisuki-na-hyaku-nin-no-kanojo
+  kimi-no-na-wa-watanabe-2014:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: kimi-no-na-wa-watanabe
+  kimi-no-tonari-kitagawa-2008:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: kimi-no-tonari-kitagawa
   kiminiaeteyokatta:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -2031,6 +3371,18 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: kimyou-na-yuujin-tachi
+  kin-no-tamago-wamusato-2008:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: kin-no-tamago-wamusato
+  king-shinmura-2002:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: king-shinmura
+  kingyo-no-fun-sakurada-2012:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: kingyo-no-fun-sakurada
   kinironohoshi:
     at: '2026-07-02'
     reason: ハイフン規則違反是正(楽天分かち書き「キンイロ ノ ホシ」整列・綴り既存保持)
@@ -2039,6 +3391,14 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: kiniro-no-cupid
+  kinku-anisaki-2002:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: kinku-anisaki
+  kinpeibai-watanabe-1995:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: kinpeibai-watanabe
   kinumonogatari:
     at: '2026-07-02'
     reason: ハイフン規則違反是正(楽天分かち書き「キヌ モノガタリ」整列・綴り既存保持)
@@ -2047,18 +3407,50 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: kinyoku-sharehouse
+  kira-kira-yuki-2005:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: kira-kira-yuki
   kiraatouinkuru-anchiwasuteejiniagaremasen:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: killer-twinkle
+  kirakira-kawasaki-2006:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: kirakira-kawasaki
+  kirakira-miike-2008:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: kirakira-miike
+  kirakira-takemiya-2011:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: kirakira-takemiya
   kiramekinogaoka:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: kirameki-no-gaoka
+  kirara-hiramatsu-1987:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: kirara-hiramatsu
   kirawaremononoorewayarinaoshinosekaidegiteitachinigomaosuru:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: kirawaremono-no-ore-wa-yarinaoshi-no-sekai-de-gitei-tachi-ni-goma-o-suru
+  kiriko-honda-2015:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: kiriko-honda
+  kirin-shii-1990:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: kirin-shii
+  kirin-yagami-1998:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: kirin-yagami
   kirinonakanojoniinaishonohanashi:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -2075,10 +3467,18 @@ overrides:
     at: '2026-07-02'
     reason: ハイフン規則違反是正(楽天分かち書き「キル ラ キル」整列・綴り既存保持)
     slug: kiru-ra-kiru
+  kiruto-takahashi-2005:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: kiruto-takahashi
   kisekaedoorumamichan:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: kisekae-doll-mami-chan
+  kiss-komori-2012:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: kiss-komori
   kisudedamashiteochinaide:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -2103,6 +3503,14 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: kitarou-no-vietnam-senki
+  kitsune-no-yomeiri-sato-2015:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: kitsune-no-yomeiri-sato
+  kitsune-no-yomeiri-yoshida-1995:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: kitsune-no-yomeiri-yoshida
   kitsunetoisshonikurashitara:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -2123,6 +3531,22 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: kizoku-reijou-ni-umareta-kara-niwa-nengan-no-daradara-neet-seikatsu-shitai
+  kizuna-mocchii-2012:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: kizuna-mocchii
+  kizuna-momochi-2004:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: kizuna-momochi
+  kizuna-yuki-2007:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: kizuna-yuki
+  knights-murao-2006:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: knights-murao
   ko-konnaikemengawatakushinoosananajimidekonyakushadesutte-sasugaakuyaku:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -2155,10 +3579,34 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: kohakuiro-no-kishi-wa-seijo-no-hidarite-ni-ai-o-chikau
+  koharu-hiyori-mizuki-2004:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: koharu-hiyori-mizuki
+  koi-monogatari-tagura-2015:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: koi-monogatari-tagura
+  koi-no-kaori-takemiya-2012:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: koi-no-kaori-takemiya
+  koibana-enomoto-2007:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: koibana-enomoto
+  koibana-kurashina-2005:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: koibana-kurashina
   koibitokeiyakuchuunitsuki-koushin:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: koibito-keiyaku-chuu-ni-tsuki-koushin
+  koigakubo-kun-ni-hajimete-o-ubawaremashita-2023:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: koigakubo-kun-ni-hajimete-o-ubawaremashita
   koigokorokaihatsujikkyou:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -2199,18 +3647,46 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: koi-to-synchronicity
+  kojika-monogatari-1991:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: kojika-monogatari
+  kojin-jugyou-yamada-2005:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: kojin-jugyou-yamada
   kojiraseyamasewawakarasetai:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: kojirase-yamase-wa-wakarasetai
+  kokoro-momochi-2006:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: kokoro-momochi
+  kokoro-natsume-2023:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: kokoro-natsume
   kokorookinakushoukiwosutee:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: kokoro-okinaku-shouki-o-sutee
+  kokuhaku-akiyama-2001:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: kokuhaku-akiyama
   konamikkusu:
     at: '2026-07-02'
     reason: ハイフン規則違反是正(楽天分かち書き「コナ ミックス」整列・綴り既存保持)
     slug: kona-mikkusu
+  konjaku-monogatari-ozaki-1985:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: konjaku-monogatari-ozaki
+  konjaku-monogatari-yanagawa-1990:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: konjaku-monogatari-yanagawa
   konnamonikagassukaa:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -2227,6 +3703,10 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: konnichiwa-sensei
+  kono-yubi-tomare-shiga-2018:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: kono-yubi-tomare-shiga
   konodamedorudomome-chikaaidoruobudoukannitatasenaitogyarushachouniboku:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -2287,10 +3767,18 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: kotori-rider-wa-tokai-de-kurashitai-mofumofu-na-aibou-to-nonbiri-isekai-bouken-ki
+  kou-u-to-ryuu-hou-sentaro-1987:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: kou-u-to-ryuu-hou-sentaro
   kouenjiatari:
     at: '2026-07-02'
     reason: ハイフン規則違反是正(楽天分かち書き「コウエンジ アタリ」整列・綴り既存保持)
     slug: kouenji-atari
+  koufuku-no-susume-himawari-2003:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: koufuku-no-susume-himawari
   koukokunosouheki-kizumononohanayomegaiden:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -2303,6 +3791,10 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: koukousei-web-sakka-no-mote-seikatsu
+  koukyuu-alice-2023:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: koukyuu-alice
   kousetsu-hyakumonogatari:
     at: '2026-07-02'
     reason: ハイフン規則違反是正(楽天分かち書き「コウセツ ヒャク モノガタリ」整列・綴り既存保持)
@@ -2319,6 +3811,10 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: koushaku-reijou-no-rouraku-mission-maou-to-no-seiryaku-kekkon-ga-jinrui
+  kousoku-esper-asano-2005:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: kousoku-esper-asano
   kouteiheikanoosewagakari-nyokangurashigashiawasesugitekoukyuukaraderare:
     at: '2026-06-26'
     reason: 重複dedup:incumbent⊂candidate(完全版採用)
@@ -2339,6 +3835,10 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: kubi-no-nai-choukoku
+  kugutsu-takahashi-1999:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: kugutsu-takahashi
   kumashirokuro:
     at: '2026-07-02'
     reason: ハイフン規則違反是正(楽天分かち書き「クマ シロクロ」整列・綴り既存保持)
@@ -2375,6 +3875,14 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: kurayami-ni-akuma-ga
+  kurenai-niou-takemiya-1994:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: kurenai-niou-takemiya
+  kurenai-shimizu-1999:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: kurenai-shimizu
   kurenainochousensha:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -2391,6 +3899,18 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: clip-studio-hajimete-no-manga-seisaku-nyuumon
+  kuro-no-meikyuu-hitaka-1987:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: kuro-no-meikyuu-hitaka
+  kurofune-ohara-2001:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: kurofune-ohara
+  kurogane-ikezawa-2011:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: kurogane-ikezawa
   kurohyoukunwatabechaitai:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -2443,6 +3963,10 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: xi-kun-no-hatsumei
+  kusuriya-no-hitorigoto-shino-2017:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: kusuriya-no-hitorigoto-shino
   kuzuouji-yarinaosu-zamaasareteshindakedo-kondowasujigakibuchikowashitei:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -2499,6 +4023,10 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: kyou-wa-nazonazo-no-hi
+  kyrie-kuraka-2018:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: kyrie-kuraka
   kyuubanmenootoko:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -2507,6 +4035,110 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: kyuuketsu-ouji-to-ikenie-hanayome
+  la-vie-en-rose-yamada-2005:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: la-vie-en-rose-yamada
+  last-order-kazunari-2021:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: last-order-kazunari
+  last-order-sumi-2019:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: last-order-sumi
+  last-waltz-katakura-2016:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: last-waltz-katakura
+  lesson-2000:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: lesson
+  liar-chiyozaki-2024:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: liar-chiyozaki
+  liar-liar-kindaichi-2010:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: liar-liar-kindaichi
+  line-kotegawa-2003:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: line-kotegawa
+  lion-heart-shigematsu-2020:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: lion-heart-shigematsu
+  lion-wada-2002:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: lion-wada
+  lost-child-abe-2011:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: lost-child-abe
+  lost-universe-yoshinaka1998:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: lost-universe-yoshinaka
+  love-all-sako-2010:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: love-all-sako
+  love-drug-higashizato-2009:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: love-drug-higashizato
+  love-game-oshima-2004:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: love-game-oshima
+  love-hate-takagi-2020:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: love-hate-takagi
+  love-junkie-tohjoh-2001:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: love-junkie-tohjoh
+  love-lab-momoyuki-2005:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: love-lab-momoyuki
+  love-letter-takahashi-1989:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: love-letter-takahashi
+  love-log-takemiya-2016:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: love-log-takemiya
+  love-monster-mio-2011:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: love-monster-mio
+  love-zombie-morino-2018:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: love-zombie-morino
+  lovely-sick-ohmine-2004:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: lovely-sick-ohmine
+  lovers-high-anzai-2021:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: lovers-high-anzai
+  lunatic-kawaso-2001:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: lunatic-kawaso
+  m-katsura-2005:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: m-katsura
   maboroshinohanayome:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -2523,6 +4155,18 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: machi-to-hito-no-romance
+  madougushi-dariya-wa-utsumukanai-kei-2019:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: madougushi-dariya-wa-utsumukanai-kei
+  magician-matsukawa-1995:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: magician-matsukawa
+  magico-yoshida-2011:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: magico-yoshida
   mahou-o-shinjirukai-tanikawa-2000:
     at: '2026-06-16'
     reason: 主版が従版slugに誤収容・無印復帰
@@ -2555,6 +4199,14 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: mahou-no-idol-pastel-yuumi
+  mahoutsukai-no-deshi-takemiya-2002:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: mahoutsukai-no-deshi-takemiya
+  maihime-kurashina-2006:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: maihime-kurashina
   mainichinekozanmai:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -2563,10 +4215,22 @@ overrides:
     at: '2026-07-02'
     reason: ハイフン規則違反是正(楽天分かち書き「マジ パング」整列・綴り既存保持)
     slug: maji-pangu
+  majo-igarashi-2004:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: majo-igarashi
+  major-iga-2009:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: major-iga
   makarikyuramu:
     at: '2026-07-02'
     reason: ハイフン規則違反是正(楽天分かち書き「マ カリキュラム」整列・綴り既存保持)
     slug: ma-karikyuramu
+  makiko-hino-1988:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: makiko-hino
   makinaniomakase:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -2575,14 +4239,46 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: makunouchi-deathmatch
+  mama-no-koibito-kanesada-2007:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: mama-no-koibito-kanesada
+  mama-urino-2013:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: mama-urino
+  mamagoto-tsudzura-2021:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: mamagoto-tsudzura
+  mamonogatari-matsumoto-1993:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: mamonogatari-matsumoto
+  manabiya-kojima-2009:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: manabiya-kojima
+  manekarezaru-kyaku-miki-2021:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: manekarezaru-kyaku-miki
   manga-botsu-chan:
     at: '2026-06-29'
     reason: 坊っちゃん=ぼっちゃんの誤ローマ字(っ→tsu)是正
     slug: manga-bocchan
+  mangakasan-to-ashisutantosan-to-2:
+    at: '2026-07-27'
+    reason: 規則4(明白な辞書英単語=assistant)+敬称-san分離。本編slug mangaka-san-to-assistant-san-to と家族整合(ユーザ照会「二巻疑い」の調査時に発見。疑い自体はWiki全1巻続編で白)
+    slug: mangaka-san-to-assistant-san-to-2
   mangakenkanryuu:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: manga-kenkanryu
+  mangekyou-ken-2014:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: mangekyou-ken
   mangetsunoyoruni:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -2591,10 +4287,42 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: manhattan-ni-dakarete
+  manimani-unita-2003:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: manimani-unita
+  maria-hiura-2003:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: maria-hiura
+  maria-iguchi-2015:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: maria-iguchi
+  maria-kamimura-2003:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: maria-kamimura
+  maria-takeuchi-1990:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: maria-takeuchi
   mariachirudoren:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: maria-children
+  mars-hashimoto-1996:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: mars-hashimoto
+  mars-yokoyama-1976:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: mars-yokoyama
+  maru-sankaku-shikaku-higashimura-2024:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: maru-sankaku-shikaku-higashimura
   maruboukabushikigaisha:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -2607,6 +4335,10 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: masters-of-universe-houkai-no-ken
+  mata-no-okoshi-o-suzune-2018:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: mata-no-okoshi-o-suzune
   matchiipponnohanashi:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -2635,10 +4367,22 @@ overrides:
     at: '2026-07-02'
     reason: ハイフン規則違反是正(楽天分かち書き「マザン マウジンガ」整列・綴り既存保持)
     slug: mazan-maujinga
+  mazinger-z-tai-transformer-yoshioka-2019:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: mazinger-z-tai-transformer-yoshioka
   mechankokoushien:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: mechanko-koushien
+  medusa-yamagishi-1982:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: medusa-yamagishi
+  megami-sama-no-iutoori-tsuyatsuya-2016:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: megami-sama-no-iutoori-tsuyatsuya
   meioukeikakuzeoraimaa:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -2655,6 +4399,10 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: memememememememe-menhera
+  memento-mori-fumi-2013:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: memento-mori-fumi
   memoriatechnica:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -2663,6 +4411,10 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: menkui-egure-keibu
+  mesh-ono-2010:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: mesh-ono
   meshibanakeijitachibana:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -2671,6 +4423,14 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: meshimori-samurai
+  message-aso-1987:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: message-aso
+  message-hagio-2016:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: message-hagio
   mezaseyamakazoku:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -2679,6 +4439,14 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: midori-no-yuuwaku
+  milk-sato-2007:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: milk-sato
+  milky-way-shimizu-1986:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: milky-way-shimizu
   minami-no-teiou-yanguhenrikenkuukousupesharu:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -2687,6 +4455,10 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: minami-suita-daigaku-yakyuubu
+  minamoto-no-yoshitsune-akiyama-2005:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: minamoto-no-yoshitsune-akiyama
   minamotohakasenoijounabatsubatsu:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -2707,10 +4479,18 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: mirai-no-kuni-no-kenji
+  missing-hino-2023:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: missing-hino
   mitamasekyureitei:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: mitama-security
+  mitsu-no-aji-watanabe-1982:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: mitsu-no-aji-watanabe
   mitsuechangaiku:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -2719,8 +4499,17 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: mitsume-no-yumeji
+  mitsumete-itai-hindenburg-1994:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: mitsumete-itai-hindenburg
+  miyako-hido-2012:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: miyako-hido
   miyazawa-kenji-mangakan-1985:
-    slug: miyazawa-kenji-mangakan-yamada-1985
+    reason: ' / C類年サフィックス無印化2026-08-10'
+    slug: miyazawa-kenji-mangakan-yamada
   mizunotawamure:
     at: '2026-07-02'
     reason: ハイフン規則違反是正(楽天分かち書き「ミズ ノ タワムレ」整列・綴り既存保持)
@@ -2729,18 +4518,46 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: kidou-senshi-gundam-narrative
+  mobile-suit-gundam-seed-destiny-2005:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: mobile-suit-gundam-seed-destiny
   mojamojashitamononaani:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: mojamoja-shita-mono-naani
+  momiji-no-kisetsu-satosho-2017:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: momiji-no-kisetsu-satosho
+  momopan-clover-2012:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: momopan-clover
   momotaroujigokuhen:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: momotarou-jigokuhen
+  monkey-peak-the-rock-2020:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: monkey-peak-the-rock
   monomanedorishinfonii:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: monomanedori-symphony
+  mononoke-muronaga-2019:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: mononoke-muronaga
+  montage-kikuchi-1998:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: montage-kikuchi
+  moon-trick-2018:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: moon-trick
   morikawakuminosekai:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -2757,6 +4574,10 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: mottainai-hodo-ii-onna
+  motto-ikitai-naka-2006:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: motto-ikitai-naka
   mottoganbarekierunashikiso-usuko-san:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -2765,6 +4586,14 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: mousugu-red-zone
+  mozart-sekiguchi-1983:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: mozart-sekiguchi
+  mukashi-no-hanashi-fujiwara-2001:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: mukashi-no-hanashi-fujiwara
   mumeinohitobitoishokuretsuden:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -2781,6 +4610,10 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: murakami-haruki-no-hotaru-orwell-no-senkyuuhyaku-hachijuuyonen
+  musashi-motomiya-1977:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: musashi-motomiya
   mushijingiofisharukomikku:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -2789,10 +4622,18 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: mushirare-ppanashi
+  mushroom-yamamoto-2003:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: mushroom-yamamoto
   musumegahahanichikazukutoki:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: musume-ga-haha-ni-chikazuku-toki
+  muteki-no-hito-kizuki-2019:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: muteki-no-hito-kizuki
   muundorotsupuchiyou-no-kashikoi-usagi-san:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -2825,10 +4666,42 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: narashika-tanashi
+  national-kid-maruo-1989:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: national-kid-maruo
   natsunokumo:
     at: '2026-07-02'
     reason: ハイフン規則違反是正(楽天分かち書き「ナツ ノ クモ」整列・綴り既存保持)
     slug: natsu-no-kumo
+  natural-aso-1989:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: natural-aso
+  navigatoria-oshiishi-2024:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: navigatoria-oshiishi
+  nefirimu-kusakabe-2008:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: nefirimu-kusakabe
+  nega-poji-nao-2013:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: nega-poji-nao
+  negattari-kanattari-wakuhara-2015:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: negattari-kanattari-wakuhara
+  nein-tojitsuki-2018:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: nein-tojitsuki
+  neko-banashi-pandania-2020:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: neko-banashi-pandania
   nekofujin:
     at: '2026-07-02'
     reason: ハイフン規則違反是正(楽天分かち書き「ネコ フジン」整列・綴り既存保持)
@@ -2877,6 +4750,10 @@ overrides:
     at: '2026-07-02'
     reason: ハイフン規則違反是正(楽天分かち書き「ネリマ ノ イタチ」整列・綴り既存保持)
     slug: nerima-no-itachi
+  netemo-sametemo-koide-2006:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: netemo-sametemo-koide
   nezumisannonagaipan:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -2885,6 +4762,10 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: nezumi-san-no-okaimono
+  nibunnoichi-morita-2012:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: nibunnoichi-morita
   nigatsunikoroshitesakuraniumeru:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -2901,14 +4782,34 @@ overrides:
     at: '2026-07-02'
     reason: ハイフン規則違反是正(楽天分かち書き「ニジイロ バクハツ ムスメ」整列・綴り既存保持)
     slug: nijiiro-bakuhatsu-musume
+  nijiiro-days-uchiuchi-2010:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: nijiiro-days-uchiuchi
   nijiironotorokkii:
     at: '2026-06-26'
     reason: 'slug衝突suffix(同名異作/サブ): 同一著者(安彦良和)・別題表記(ッ/ツ)・ISBN重なりなし=別版/別商'
     slug: nijiiro-no-trotsky-1992
+  nijuu-rasen-watanabe-1994:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: nijuu-rasen-watanabe
   nikonikogenkihappiichan:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: nikoniko-genki-happy-chan
+  ningen-shikkaku-ito-2010:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: ningen-shikkaku-ito
+  ningyo-no-namida-nakajima-2021:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: ningyo-no-namida-nakajima
+  ningyo-ouji-ozaki-2016:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: ningyo-ouji-ozaki
   ningyonokizu:
     at: '2026-07-02'
     reason: ハイフン規則違反是正(楽天分かち書き「ニンギョ ノ キズ」整列・綴り既存保持)
@@ -2917,6 +4818,10 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: ninja-bugeichou
+  ninkoi-endo-2014:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: ninkoi-endo
   ninkyou-tensei-isekainoyakuzahime:
     at: '2026-06-16'
     reason: 主版が従版slugに誤収容・無印復帰
@@ -2925,6 +4830,10 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: ninkyou-sakazukigoto-no-subete
+  nipponia-nippon-sugiura-1985:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: nipponia-nippon-sugiura
   nishikawaguchidaigaku-rakuenkurabu:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -2933,6 +4842,22 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: nishi-tokyo-metal-brothers
+  nobunaga-morikawa-2006:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: nobunaga-morikawa
+  noise-nihei-2001:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: noise-nihei
+  nokonoko-nishi-2015:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: nokonoko-nishi
+  nora-mikuriya-2000:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: nora-mikuriya
   norajoshikousei:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -2945,6 +4870,10 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: norowareta-kotou
+  nostalgia-hagiwara-2010:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: nostalgia-hagiwara
   noumitsudousei-kuurunashachounokajounadekiai:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -2953,6 +4882,14 @@ overrides:
     at: '2026-06-16'
     reason: 主版が従版slugに誤収容・無印復帰
     slug: nude-fighter-yuzuki
+  nude-mihiro-2010:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: nude-mihiro
+  nurse-station-kozan-1990:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: nurse-station-kozan
   nyuusutanteikonan:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -2969,6 +4906,18 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: ochita-ringo-wa-koi-o-shiru
+  oda-nobunaga-akizuki-1991:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: oda-nobunaga-akizuki
+  odaijini-korita-1993:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: odaijini-korita
+  odamari-chiba-1999:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: odamari-chiba
   ofurodemoyomerusarari-kun:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -2993,6 +4942,18 @@ overrides:
     at: '2026-07-02'
     reason: ハイフン規則違反是正(楽天分かち書き「オカメ ビヨリ」整列・綴り既存保持)
     slug: okame-biyori
+  okan-moriyama-2007:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: okan-moriyama
+  okashina-futari-fujiwara-2023:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: okashina-futari-fujiwara
+  okashina-futari-okaue-2011:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: okashina-futari-okaue
   okazarihimenodekiaikeikaku:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -3001,6 +4962,10 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: reizouko-no-tsukenosuke
+  oki-ni-mesu-mama-takasugi-2010:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: oki-ni-mesu-mama-takasugi
   okitsunesamanookiniiri:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -3025,6 +4990,10 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: omae-o-aisuru-koto-wa-nai-to-iwareta-node-sou-na-no-watakushi-mo-yo-to-iikaeshite-okimashita
+  one-mugiwara-2025:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: one-mugiwara
   oneesamatooyobitsu:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -3033,10 +5002,30 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: oneko-samazu-gurashi
+  oni-nagai-1971:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: oni-nagai
+  oni-san-kochira-kaneshiki-2019:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: oni-san-kochira-kaneshiki
+  oni-yamagishi-1997:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: oni-yamagishi
   onii-chan-no-koto-nanka-zenzen-sukijanaindakaranetsu:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: onii-chan-no-koto-nanka-zenzen-suki-janai-ndakarane
+  onna-kyoushi-fujii-2002:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: onna-kyoushi-fujii
+  onna-tomodachi-ichijo-1991:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: onna-tomodachi-ichijo
   onnahitorinihon-oyukkurinondemitayo:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -3053,6 +5042,10 @@ overrides:
     at: '2026-07-02'
     reason: ハイフン規則違反是正(楽天分かち書き「オオギリ マミレ」整列・綴り既存保持)
     slug: oogiri-mamire
+  ookami-nanka-kowakunai-ikeyamada-2003:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: ookami-nanka-kowakunai-ikeyamada
   ookamikoushakutoainoreiyaku:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -3073,6 +5066,10 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: oosaki-san-to-komori-san
+  open-sesame-muto-2006:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: open-sesame-muto
   operazanoshinderera-oujisamawagokujouonzoushi:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -3113,6 +5110,14 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: osake-to-senpai-kanojo-tono-amaama-doukyo-lovecome-wa-hatachi-ni-natte-kara
+  osananajimi-oritoka-2019:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: osananajimi-oritoka
+  osananajimi-otani-2010:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: osananajimi-otani
   osananajimitachinishiitageraretaore-seijoninmei-sukirunimezametetenohi:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -3145,10 +5150,18 @@ overrides:
     at: '2026-07-02'
     reason: ハイフン規則違反是正(楽天分かち書き「オトギ ロウカン」整列・綴り既存保持)
     slug: otogi-roukan
+  otogizoushi-hanawa-1991:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: otogizoushi-hanawa
   otokoonna-onnaotoko:
     at: '2026-07-02'
     reason: ハイフン規則違反是正(楽天分かち書き「オトコ オンナ オンナ オトコ」整列・綴り既存保持)
     slug: otoko-onna-onna-otoko
+  otome-no-omocha-asami-2009:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: otome-no-omocha-asami
   otomegokoro:
     at: '2026-07-02'
     reason: ハイフン規則違反是正(楽天分かち書き「オトメ ゴコロ」整列・綴り既存保持)
@@ -3165,6 +5178,22 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: otto-ga-itemo-dareka-o-suki-ni-natte-ii-desu-ka
+  ou-sama-game-takagi-2006:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: ou-sama-game-takagi
+  ouchi-e-kaerou-ichikawa-2007:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: ouchi-e-kaerou-ichikawa
+  ougon-bat-yamane-2023:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: ougon-bat-yamane
+  ouji-sama-game-kirishima-2012:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: ouji-sama-game-kirishima
   oujitokishiwadansouseijogashinuhodoitooshii:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -3177,10 +5206,30 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: oukoku-e-tsuzuku-michi
+  oukoku-no-kagi-hane2026:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: oukoku-no-kagi-hane
+  oumagatsuji-kawamura-2013:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: oumagatsuji-kawamura
+  out-mizuta-2025:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: out-mizuta
+  out-ninomiya-1999:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: out-ninomiya
   oyoso100nenyuuheisareteitamajutsushifuufuwasekaiomeguru:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: oyoso-100-nen-yuuhei-sareteita-majutsushi-fuufu-wa-sekai-o-meguru
+  oz-itsuki-2004:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: oz-itsuki
   paapekiotokozoku:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -3189,18 +5238,126 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: pilot-no-hoshi
+  pandora-nemu-2010:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: pandora-nemu
+  pandora-shibata-2004:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: pandora-shibata
+  pandora-yoshinaga-1995:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: pandora-yoshinaga
+  pangaea-ezel-2010:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: pangaea-ezel
+  papillon-shimizu-1994:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: papillon-shimizu
+  paradise-kumeta-1994:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: paradise-kumeta
+  partner-obana-2000:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: partner-obana
   pazurugeemuhaisukuuru:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: puzzle-game-highschool
+  peace-yamada-1986:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: peace-yamada
+  pearl-garden-hagiiwa-1985:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: pearl-garden-hagiiwa
+  perfect-world-fuwa-1999:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: perfect-world-fuwa
+  perman-fujiko-1979:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: perman-fujiko
   persona-2-tsumi-tsugunaishimonotachi:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: persona-2-tsumi-tsugunaishi-monotachi
+  phaethon-yamagishi-1988:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: phaethon-yamagishi
+  phantom-plus-2009:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: phantom-plus
+  picnic-yamada-2004:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: picnic-yamada
+  pied-piper-yamagishi-1992:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: pied-piper-yamagishi
+  pikaichi-koshiba-2001:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: pikaichi-koshiba
+  ping-pong-kataoka-2025:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: ping-pong-kataoka
+  pink-pepper-okano-2009:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: pink-pepper-okano
+  pink-takaguchi-2001:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: pink-takaguchi
+  plastic-girl-shiraishi-2009:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: plastic-girl-shiraishi
   plus-1-atashinonakanoaitsu:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: plus-one-atashi-no-naka-no-aitsu
+  pocket-monster-special-2017:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: pocket-monster-special
+  present-ikuemi-2003:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: present-ikuemi
+  pride-tagame-2004:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: pride-tagame
+  princess-princess-aoki-2010:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: princess-princess-aoki
+  prism-higashiyama-2012:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: prism-higashiyama
+  private-lesson-saito-2018:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: private-lesson-saito
+  psycho-fujisaki-1993:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: psycho-fujisaki
   puchirinku:
     at: '2026-07-02'
     reason: ハイフン規則違反是正(楽天分かち書き「プチ リンク」整列・綴り既存保持)
@@ -3233,14 +5390,74 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: pururun-seminar
+  puzzle-sanbe-2007:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: puzzle-sanbe
+  puzzle-sugano-2006:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: puzzle-sugano
+  q-e-d:
+    at: '2026-07-27'
+    reason: 正式題「Q.E.D.証明終了」への題是正(seed3 title)と同時にslugも正式読みへ。断片頁q-e-d-shoumei-shuuryouはpage-dedupで統合drop
+    slug: q-e-d-shoumei-shuuryou
+  qp-oya-1990:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: qp-oya
+  raburetaa-aruko-2002:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: raburetaa-aruko
+  raburetaa-seo-2007:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: raburetaa-seo
+  raburetaa-yazawa-1985:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: raburetaa-yazawa
   ragunarokuonrain:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: ragnarok-online
+  rain-hashiba-2003:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: rain-hashiba
   rakkiiruutoherannaueiesuefutanpenshuu:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: lucky-route-he-runaway-sf-tanpenshu
+  rakuen-fujiwara-2003:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: rakuen-fujiwara
+  rakuen-rca-2006:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: rakuen-rca
+  rakuen-sakurakoji-2004:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: rakuen-sakurakoji
+  ramen-daisuki-koizumi-san-narumi-2014:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: ramen-daisuki-koizumi-san-narumi
+  ready-go-morimoto-1994:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: ready-go-morimoto
+  reboot-ichikawa-2023:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: reboot-ichikawa
+  red-dragon-ikeno-2016:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: red-dragon-ikeno
   red-list-keishichoukumitaisankapo:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -3249,6 +5466,14 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: red-list-2
+  red-nakaji-1990:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: red-nakaji
+  red-yamamoto-2007:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: red-yamamoto
   reichouruisaikyoudensetsugorio:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -3273,12 +5498,29 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: rengoku-hyouryuu
+  reo-shingo-2002:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: reo-shingo
+  repeat-after-me-fuwa-2010:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: repeat-after-me-fuwa
   reset-2005:
-    slug: reset-tsutsui-2005
+    reason: ' / C類年サフィックス無印化2026-08-10'
+    slug: reset-tsutsui
+  restart-hidaka-2006:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: restart-hidaka
   revantenokurotaishi:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: levante-no-kurotaishi
+  reverse-mishima-2005:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: reverse-mishima
   ribonnokishi:
     at: '2026-07-02'
     reason: ハイフン規則違反是正(楽天分かち書き「リボン ノ キシ」整列・綴り既存保持)
@@ -3291,6 +5533,18 @@ overrides:
     at: '2026-06-16'
     reason: 主版が従版slugに誤収容・無印復帰
     slug: rin
+  ring-inagaki-1999:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: ring-inagaki
+  riot-tsukada-2025:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: riot-tsukada
+  rising-sun-matsumoto-1989:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: rising-sun-matsumoto
   robottodouwa:
     at: '2026-07-02'
     reason: ハイフン規則違反是正(楽天分かち書き「ロボット ドウワ」整列・綴り既存保持)
@@ -3299,16 +5553,53 @@ overrides:
     at: '2026-07-02'
     reason: ハイフン規則違反是正(楽天分かち書き「ロボット ケイジ」整列・綴り既存保持)
     slug: robotto-keiji
+  rock-gomi-2013:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: rock-gomi
+  romantic-nishida-2020:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: romantic-nishida
+  romeo-to-juliet-isakawa-2014:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: romeo-to-juliet-isakawa
   roodosutou-senki-1997:
-    slug: roodosutou-senki-ochi-1994
+    reason: ' / C類年サフィックス無印化2026-08-10'
+    slug: roodosutou-senki-ochi
+  rude-boy-okazaki-2012:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: rude-boy-okazaki
   ryojou-mystery-special-2020:
     at: '2026-06-16'
     reason: 主版が従版slugに誤収容・無印復帰
     slug: ryojou-mystery-special
+  ryuu-oze-1987:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: ryuu-oze
   ryuuguunotsukai:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: ryuuguu-no-tsukai
+  ryuuhou-kawaso-2005:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: ryuuhou-kawaso
+  ryuurouden-yamahara2007:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: ryuurouden-yamahara
+  s-m-takamiya-2010:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: s-m-takamiya
+  s-mizushiro-2003:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: s-mizushiro
   sabaaitoushirou:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -3333,14 +5624,26 @@ overrides:
     at: '2026-07-02'
     reason: ハイフン規則違反是正(楽天分かち書き「サイ ドリル」整列・綴り既存保持)
     slug: sai-doriru
+  saigo-no-ban-san-maita-2018:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: saigo-no-ban-san-maita
   saigonokougikanzenbanmangakabunpitsukagakayamazakimari-hyougentojiyuu:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: saigo-no-kougi-kanzenban-mangaka-bunpitsuka-gaka-yamazaki-mari-hyougen-to-jiyuu
+  saijou-no-meii-hashiguchi2011:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: saijou-no-meii-hashiguchi
   saikikkuakademiikourabanshou:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: psychic-academy-koura-banshou
+  saiko-tezuka2019:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: saiko-tezuka
   saikounokoibitokouho:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -3369,6 +5672,10 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: saishuu-heiki-yuusha-isekai-de-maou-o-taoshita-ato-mo-otonashiku-shiteita-noni-i
+  sakamoto-ryouma-sugita-1997:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: sakamoto-ryouma-sugita
   sakamotogakari:
     at: '2026-07-02'
     reason: ハイフン規則違反是正(楽天分かち書き「サカモト ガカリ」整列・綴り既存保持)
@@ -3401,6 +5708,22 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: samishii-mamono-to-nise-yuusha
+  sanada-yukimura-nagasawa-2012:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: sanada-yukimura-nagasawa
+  sanctuary-ubukata-2010:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: sanctuary-ubukata
+  sangokushi-sentaro-1980:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: sangokushi-sentaro
+  sangokushi-yamasaki-2005:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: sangokushi-yamasaki
   sanjigen-okotowarinawatashinokeiyakukekkon:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -3433,6 +5756,10 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: sasen-renkinjutsushi-no-henkyou-gurashi-moto-elite-wa-nidome-no-jinsei-mo-shippai
+  sasuke-sasaki-2002:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: sasuke-sasaki
   sasurainogyanburaa:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -3441,6 +5768,14 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: satsujin-sales
+  sayonara-no-wake-odagiri-1996:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: sayonara-no-wake-odagiri
+  sayonara-sankaku-obiya-2017:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: sayonara-sankaku-obiya
   sayonarajurietto:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -3453,10 +5788,34 @@ overrides:
     at: '2026-06-16'
     reason: 主版が従版slugに誤収容・無印復帰
     slug: sazukarikon
+  school-days-sakurazawa-2003:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: school-days-sakurazawa
+  school-zone-ningiyau-2018:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: school-zone-ningiyau
+  scramble-egg-ichijo-1998:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: scramble-egg-ichijo
   sebangou0gakunenshiban:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: sebangou-0-gakunenshi-ban
+  see-you-again-satonaka-1983:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: see-you-again-satonaka
+  seigi-no-mikata-mitsubachi-2012:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: seigi-no-mikata-mitsubachi
+  seigitai-urayama-2018:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: seigitai-urayama
   seijo-sama-ni-minikui-kami-sama-tono-kekkon-o-oshitsukeraremashita:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -3485,6 +5844,10 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: sekigan-sekiwan-sekkyaku-no-majutsushi-comic
+  sen-no-rikyuu-kiyohara-2004:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: sen-no-rikyuu-kiyohara
   senchimentaruumii:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -3493,6 +5856,22 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: senritsu-no-tako-shoujo
+  sensei-anone-moketa-2012:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: sensei-anone-moketa
+  sensei-to-boku-hirao-2013:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: sensei-to-boku-hirao
+  sensei-to-watashi-takahashi-2019:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: sensei-to-watashi-takahashi
+  sentimental-shimokitazawa-2008:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: sentimental-shimokitazawa
   sentomassuru:
     at: '2026-07-02'
     reason: ハイフン規則違反是正(楽天分かち書き「セント マッスル」整列・綴り既存保持)
@@ -3501,10 +5880,18 @@ overrides:
     at: '2026-07-02'
     reason: ハイフン規則違反是正(楽天分かち書き「セト ウツミ」整列・綴り既存保持)
     slug: seto-utsumi
+  shangri-la-karasuma-2008:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: shangri-la-karasuma
   shatouunsupesharu:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: shatoun-special
+  sheets-no-sukima-yoshihara-2008:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: sheets-no-sukima-yoshihara
   sherlock-ooinaru-game:
     at: '2026-07-08'
     reason: Jay.のSHERLOCK(角川)を全5巻1シリーズに統合しクリーンslug化(ユーザ指摘・副題=volume_label)
@@ -3529,10 +5916,30 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: shijin-wa-ichinichi-ni-shite-narazu
+  shikakenin-fujieda-baian-saitou2002:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: shikakenin-fujieda-baian-saitou
   shikakuijanguru:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: shikakui-jungle
+  shikei-shikkounin-mine-1984:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: shikei-shikkounin-mine
+  shiki-ono-2008:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: shiki-ono
+  shiki-sentaro-1979:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: shiki-sentaro
+  shiki-yuki-2002:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: shiki-yuki
   shimaichigai:
     at: '2026-07-02'
     reason: ハイフン規則違反是正(楽天分かち書き「シマイ チガイ」整列・綴り既存保持)
@@ -3565,10 +5972,22 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: shin-dousei-jidai
+  shingeki-no-kyojin-shiki-2014:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: shingeki-no-kyojin-shiki
   shingyakuhakkendenautokaraazu:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: shin-gyaku-hakkenden-outcolors
+  shinigami-alice-izumiya-2011:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: shinigami-alice-izumiya
+  shinigami-yamashita-2025:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: shinigami-yamashita
   shinigamishounenkimu:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -3581,10 +6000,18 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: shinjuku-shounen-tanteidan
+  shinkaigyo-katsumata-2011:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: shinkaigyo-katsumata
   shinomiya-brothers-have-a-secretshinomiyakunnihariyuugaaru:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: shinomiya-kun-ni-wa-wake-ga-aru
+  shinpi-no-sekai-eruhazaado-tsubura-1996:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: shinpi-no-sekai-eruhazaado-tsubura
   shinpinoko-majutsugatsukaenaiochikoboresuuhijutsudenariagaru:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -3601,6 +6028,10 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: shin-lupin-sansei
+  shinsengumi-tezuka-1967:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: shinsengumi-tezuka
   shinsengumiyawakondouisami:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -3625,18 +6056,42 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: shiritsu-sentai-daitenjin
+  shiro-to-kuro-shimozaki2026:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: shiro-to-kuro-shimozaki
   shishanoshouzou:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: shisha-no-shouzou
+  shishunki-kokoro-2011:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: shishunki-kokoro
+  shitsurakuen-kawashima-1988:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: shitsurakuen-kawashima
   shokeisareruateumaoujiwatashigashiawaseniitashimasu:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: shokei-sareru-ateuma-ouji-watashi-ga-shiawase-ni-itashimasu
+  shooting-star-takano-2006:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: shooting-star-takano
   shopannisasagerurokkunrooru:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: chopin-ni-sasageru-rock-n-roll
+  shoujo-doll-mizushiro-1999:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: shoujo-doll-mizushiro
+  shoujo-mangaka-no-koi-konno-2007:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: shoujo-mangaka-no-koi-konno
   shoujogensouayashinonishikie:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -3649,10 +6104,22 @@ overrides:
     at: '2026-06-26'
     reason: 'slug衝突suffix(同名異作/サブ): 同題だが別著者(羽中ルイ vs 咲香里)・ISBN重なりなし=同名異作。'
     slug: shoujo-no-kisetsu-hanaka
+  shoukoujo-nakagawa-1983:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: shoukoujo-nakagawa
   shounangurafutei:
     at: '2026-06-26'
     reason: 'slug衝突suffix(同名異作/サブ): 同一著者(吉田聡)だがISBN別(9784785910921 vs 97'
     slug: shounan-graffiti-1989
+  shounen-shoujo-akatsuki-2016:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: shounen-shoujo-akatsuki
+  shounen-shoujo-nemu-2011:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: shounen-shoujo-nemu
   shounenbanrobottoikka:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -3669,6 +6136,10 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: show-time
+  shuffle-navel-2004:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: shuffle-navel
   shuppatsuseishunki:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -3677,6 +6148,10 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: shutsudou-miniska-police
+  shuudensha-aruko-2010:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: shuudensha-aruko
   shuudenshanaratokkuniitteshimatta:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -3689,6 +6164,38 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: shuushifu-no-hibiki
+  silver-suetsugu-2005:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: silver-suetsugu
+  skip-ito-1987:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: skip-ito
+  sleeping-beauty-enomoto-2013:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: sleeping-beauty-enomoto
+  sleeping-beauty-mizushiro-1994:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: sleeping-beauty-mizushiro
+  sleeping-beauty-yoshikawa-2003:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: sleeping-beauty-yoshikawa
+  smile-de-ikou-ando-1999:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: smile-de-ikou-ando
+  smile-kasugai-2016:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: smile-kasugai
+  snow-white-umekawa-2008:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: snow-white-umekawa
   sobakasunoshounen:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -3697,12 +6204,21 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: soko-kara-saki-wa-ke-sera-sera
+  sono-ki-ni-sasenaide-tenzen-2003:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: sono-ki-ni-sasenaide-tenzen
   sonomukounomukougawa:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: sono-mukou-no-mukougawa
   sonshi-1993:
-    slug: sonshi-murano-1993
+    reason: ' / C類年サフィックス無印化2026-08-10'
+    slug: sonshi-murano
+  sora-to-umi-no-aida-bekkorico-2018:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: sora-to-umi-no-aida-bekkorico
   soraniochiru:
     at: '2026-07-02'
     reason: ハイフン規則違反是正(楽天分かち書き「ソラ ニ オチル」整列・綴り既存保持)
@@ -3719,30 +6235,110 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: soshite-boku-wa-kekkon-ni-hashitta
+  sotsugyou-yamagata-2003:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: sotsugyou-yamagata
   soukaikessen:
     at: '2026-07-02'
     reason: ハイフン規則違反是正(楽天分かち書き「ソウカイ ケッセン」整列・綴り既存保持)
     slug: soukai-kessen
+  sp-2000:
+    at: '2026-07-27'
+    reason: 二重頁統合(小池書院キングシリーズ復刻頁を版タブ化)後、正題SPセキュリティポリスの読みslugへ(空いた旧slugを再利用)
+    slug: sp-security-police
+  spin-out-kunieda-2015:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: spin-out-kunieda
+  spotlight-miura-2021:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: spotlight-miura
   sprichworterbuch:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: sprichwoerterbuch
+  spring-2006:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: spring
+  sprite-arimura-1995:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: sprite-arimura
+  stand-by-me-higashiyama-2008:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: stand-by-me-higashiyama
+  stand-up-kumagai-2010:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: stand-up-kumagai
+  stand-up-yamakawa-2013:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: stand-up-yamakawa
   star-wars-1997:
     at: '2026-06-16'
     reason: 主版が従版slugに誤収容・無印復帰
     slug: star-wars
+  star-wars-1998:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: star-wars
+  step-nakaji-1991:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: step-nakaji
+  stigma-minekura-2000:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: stigma-minekura
+  subete-ga-f-ni-naru-mori-2015:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: subete-ga-f-ni-naru-mori
   succubus-na-iinchou-ni-okotowarisaremashite:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: succubus-na-iinchou-ni-okotowari-saremashite
+  sugar-arai-2002:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: sugar-arai
+  sugars-kurosaki-2007:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: sugars-kurosaki
   sugiurashigeruondemandosenshuu:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: sugiura-shigeru-on-demand-senshuu
+  suika-mori-2021:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: suika-mori
+  suikoden-inoe-2003:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: suikoden-inoe
+  suikoden-sentaro-1980:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: suikoden-sentaro
+  suki-kirai-suki-obata-2000:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: suki-kirai-suki-obata
   sukimameshi:
     at: '2026-07-02'
     reason: ハイフン規則違反是正(楽天分かち書き「スキマ メシ」整列・綴り既存保持)
     slug: sukima-meshi
+  sukisa-sukisa-sukisa-onozuka-1999:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: sukisa-sukisa-sukisa-onozuka
   sukoshidakebarairo:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -3779,6 +6375,18 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: sutedouji-matsudaira-tadateru
+  sweet-darling-watanabe-2002:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: sweet-darling-watanabe
+  sweet-minami-2007:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: sweet-minami
+  sweet-revenge-takase-2002:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: sweet-revenge-takase
   tabakoyanomusume:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -3791,20 +6399,49 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: tabetaku-nacchatta
+  taboo-yahagi-1996:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: taboo-yahagi
   taigaamasukunisei:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: tiger-mask-nisei
+  taiyou-ga-ippai-aoki-1999:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: taiyou-ga-ippai-aoki
+  takane-no-hana-shigeno-2014:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: takane-no-hana-shigeno
+  take-it-easy-2000:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: take-it-easy
   takeda-shingen-1987:
-    slug: takeda-shingen-koike-1987
+    reason: ' / C類年サフィックス無印化2026-08-10'
+    slug: takeda-shingen-koike
   takemitsuzamurai:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: takemitsu-zamurai
+  takeru-nakashima-2006:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: takeru-nakashima
   takitayuumeisakugekijou:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: takita-yuu-meisaku-gekijou
+  tales-of-destiny-inomata-2000:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: tales-of-destiny-inomata
+  tales-of-the-abyss-rei2006:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: tales-of-the-abyss-rei
   tamakikku:
     at: '2026-07-02'
     reason: ハイフン規則違反是正(楽天分かち書き「タマ キック」整列・綴り既存保持)
@@ -3821,12 +6458,21 @@ overrides:
     at: '2026-07-02'
     reason: ハイフン規則違反是正(楽天分かち書き「タマユラ ドウジ」整列・綴り既存保持)
     slug: tamayura-douji
+  tanpenshuu-nananan-2003:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: tanpenshuu-nananan
   tappukunnotanteishitsu:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: tap-kun-no-tantei-shitsu
+  target-kobayashi-2003:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: target-kobayashi
   task-1987:
-    slug: task-kasahara-1987
+    reason: ' / C類年サフィックス無印化2026-08-10'
+    slug: task-kasahara
   teifaniideyakusokuo:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -3839,16 +6485,36 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: teito-no-maid-wa-koi-somuru
+  tekken-hashimoto-1998:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: tekken-hashimoto
   tekkoumutekikagakudaimagou:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: tekkou-muteki-kagaku-daimagou
+  tempest-knife-2005:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: tempest-knife
   ten-yori-takaku-1998:
     at: '2026-06-16'
     reason: flag精査:単独候補/本編を無印化
     slug: ten-yori-takaku
   tenchi-muyou-1986:
     slug: tenchi-muyou
+  tengoku-abe-2002:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: tengoku-abe
+  teni-muhou-jibiki-2006:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: teni-muhou-jibiki
+  tenkaichi-azuma-2025:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: tenkaichi-azuma
   tennootoko:
     at: '2026-07-02'
     reason: ハイフン規則違反是正(楽天分かち書き「テン ノ オトコ」整列・綴り既存保持)
@@ -3857,10 +6523,22 @@ overrides:
     at: '2026-07-02'
     reason: ハイフン規則違反是正(楽天分かち書き「テン ノ タカ」整列・綴り既存保持)
     slug: ten-no-taka
+  tensei-kizoku-no-isekai-boukenroku-sasaki-2020:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: tensei-kizoku-no-isekai-boukenroku-sasaki
   tenshi-no-hammer-1996:
     at: '2026-06-16'
     reason: 主版が従版slugに誤収容・無印復帰
     slug: tenshi-no-hammer
+  tenshi-no-tamago-murayama-2006:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: tenshi-no-tamago-murayama
+  tenshi-no-uta-nishida-2007:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: tenshi-no-uta-nishida
   tenshinobodiitooku:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -3869,6 +6547,22 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: tentoumushi-no-uta
+  teppen-kuga-1994:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: teppen-kuga
+  teppen-kusaka-2017:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: teppen-kusaka
+  teppen-takahashi-2019:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: teppen-takahashi
+  teppen-tsukimiya-2008:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: teppen-tsukimiya
   tetokuchi:
     at: '2026-07-02'
     reason: ハイフン規則違反是正(楽天分かち書き「テ ト クチ」整列・綴り既存保持)
@@ -3889,6 +6583,10 @@ overrides:
     at: '2026-07-10'
     reason: 3作合体の解体=この頁をTo Heart(高雄右京1998)に確定(year-suffix Wave2)
     slug: to-heart
+  to-y-2016:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: to-y
   toaru-kagaku-no-railgun-2025:
     at: '2026-06-16'
     reason: 主版が従版slugに誤収容・無印復帰
@@ -3897,6 +6595,10 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: toaru-kagaku-no-railgun
+  tobidase-doubutsu-no-mori-2014:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: tobidase-doubutsu-no-mori
   tokai-retorosupekuteibu:
     at: '2026-07-02'
     reason: ハイフン規則違反是正(楽天分かち書き「トウカイ レトロ スペクティブ」整列・綴り既存保持)
@@ -3917,22 +6619,66 @@ overrides:
     at: '2026-07-02'
     reason: ハイフン規則違反是正(楽天分かち書き「トクモリ ウエダ マサシ」整列・綴り既存保持)
     slug: tokumori-ueda-masashi
+  tokyo-monogatari-takizawa-2012:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: tokyo-monogatari-takizawa
+  tokyo-shinjuu-tomiya-1986:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: tokyo-shinjuu-tomiya
+  tokyo-toyboxes-2020:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: tokyo-toyboxes
   tomasonnowana:
     at: '2026-07-02'
     reason: ハイフン規則違反是正(楽天分かち書き「トマソン ノ ワナ」整列・綴り既存保持)
     slug: tomason-no-wana
+  tomodachi-gokko-momochi-2011:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: tomodachi-gokko-momochi
+  tomodachi-gokko-yamada-2016:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: tomodachi-gokko-yamada
+  tomodachi-takashi-2018:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: tomodachi-takashi
   tomodachizukuri:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: tomodachi-zukuri
+  tomodachizukuri-eto-2025:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: tomodachizukuri-eto
+  tonari-no-801chan-kojima-2008:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: tonari-no-801chan-kojima
   tonarinoosoegawa:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: tonari-no-osoegawa
+  tonde-buurin-ikeda1995:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: tonde-buurin-ikeda
   torikagohimezono:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: torikago-himezono
+  toriko-kitamimaki-2000:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: toriko-kitamimaki
+  toriko-osakabe-2003:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: toriko-osakabe
   toropikaruzamurai:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -3949,6 +6695,22 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: toshishita-idol-kun-wa-wagamama-de-shittobukai
+  toshiue-no-hito-kawai-2020:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: toshiue-no-hito-kawai
+  toshiue-no-hito-odawara-2007:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: toshiue-no-hito-odawara
+  tough-nakahara-1991:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: tough-nakahara
+  touko-yoshino-2001:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: touko-yoshino
   toukonpurodakushon:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -3957,14 +6719,50 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: toukyou-monogatari
+  toyotomi-hideyoshi-chiba-1996:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: toyotomi-hideyoshi-chiba
+  trace-amematsu-2012:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: trace-amematsu
+  tsubaki-hiura-1999:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: tsubaki-hiura
+  tsubakihime-watanabe-2001:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: tsubakihime-watanabe
   tsugeyoshiharushiryoushuusei:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: tsuge-yoshiharu-shiryou-shuusei
+  tsuiteru-kanojo-enjoji-2005:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: tsuiteru-kanojo-enjoji
+  tsuiteru-kanojo-fujima-2005:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: tsuiteru-kanojo-fujima
+  tsuki-ga-kirei-desune-suzuyuki-2015:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: tsuki-ga-kirei-desune-suzuyuki
+  tsukuyomi-yamagishi-1996:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: tsukuyomi-yamagishi
   tsuriyadomonogatari:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: tsuriyado-monogatari
+  tsurugi-no-mai-iwaaki-2001:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: tsurugi-no-mai-iwaaki
   tsutaeteiino:
     at: '2026-07-02'
     reason: ハイフン規則違反是正(楽天分かち書き「ツタエテ イイノ」整列・綴り既存保持)
@@ -3973,6 +6771,14 @@ overrides:
     at: '2026-07-02'
     reason: ハイフン規則違反是正(楽天分かち書き「ツユ マミレ」整列・綴り既存保持)
     slug: tsuyu-mamire
+  tsuzuki-wa-mata-ashita-hinachi-2020:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: tsuzuki-wa-mata-ashita-hinachi
+  twins-mizushiro-2000:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: twins-mizushiro
   ubunabotsurakureijouwakuurunaonzoushinoamasugiruren-aishinandeubaware:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -3993,6 +6799,10 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: ue-o-shita-e-no-giretta
+  ugetsu-monogatari-kihara-1996:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: ugetsu-monogatari-kihara
   ukedatosemehara:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -4005,6 +6815,14 @@ overrides:
     at: '2026-06-16'
     reason: 主版が従版slugに誤収容・無印復帰
     slug: ultra-b
+  ultra-red-nishimura-2013:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: ultra-red-nishimura
+  ultraman-kazumine-1968:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: ultraman-kazumine
   umagayuku:
     at: '2026-07-02'
     reason: ハイフン規則違反是正(楽天分かち書き「ウマ ガ ユク」整列・綴り既存保持)
@@ -4025,6 +6843,14 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: umi-no-mukou-kimi-no-tonari
+  undead-inoe-2008:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: undead-inoe
+  undead-tsuyuhisa-2021:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: undead-tsuyuhisa
   unsouyanoossanganazekafukugyoudezettaimutekikenshiotsutomerukotoni-sa:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -4053,10 +6879,22 @@ overrides:
     at: '2026-06-26'
     reason: frag-dedup:完全版5巻をclean slugへ(副題slug是正)
     slug: usuzumi-no-hate
+  utahime-aki-2006:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: utahime-aki
   utanojouzunamusume:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: uta-no-jouzu-na-musume
+  utawareru-mono-shimakusa-2006:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: utawareru-mono-shimakusa
+  utsukushiki-kemonotachi-fujisaki-2002:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: utsukushiki-kemonotachi-fujisaki
   uwakibiirusuhasseichuu:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -4065,6 +6903,14 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: virtual-culture
+  valkyrie-profile-hijikata-2000:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: valkyrie-profile-hijikata
+  versus-pyonkti-2009:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: versus-pyonkti
   viinasunihizamazuke:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -4077,14 +6923,106 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: world-hyouryuuki
+  wakakusa-monogatari-kitajima-1989:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: wakakusa-monogatari-kitajima
+  wakakusa-monogatari-nev-2011:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: wakakusa-monogatari-nev
+  waltz-takano-1990:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: waltz-takano
+  waru-kagemaru-1977:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: waru-kagemaru
+  warui-otoko-nakamura-2024:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: warui-otoko-nakamura
+  wasurerarenai-tanikawa-2012:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: wasurerarenai-tanikawa
   watashi-nande-wakarerarenaindarou:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: watashi-nande-wakarerarenai-ndarou
+  watashi-no-ouji-sama-nagae-1999:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: watashi-no-ouji-sama-nagae
+  watashi-no-sensei-ogawa-2008:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: watashi-no-sensei-ogawa
+  watashi-nouryoku-wa-heikinchi-de-tte-ittayone-funa-2017:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: watashi-nouryoku-wa-heikinchi-de-tte-ittayone-funa
+  watashi-to-ouji-sama-hoshino-2006:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: watashi-to-ouji-sama-hoshino
   watashinoiehafutsuu:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: watashi-no-uchi-wa-futsuu
+  water-nananan-2007:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: water-nananan
+  welcome-narita-1978:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: welcome-narita
+  whistle-yuasa-1993:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: whistle-yuasa
+  white-album-aquaplus-2009:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: white-album-aquaplus
+  wild-cats-kobayashi-2001:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: wild-cats-kobayashi
+  wish-fuga-2005:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: wish-fuga
+  with-me-tsuyatsuya-2016:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: with-me-tsuyatsuya
+  wolf-guy-hiroshi-1996:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: wolf-guy-hiroshi
+  wonderful-life-kiyohara-1996:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: wonderful-life-kiyohara
+  wonderful-life-yamakami-2011:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: wonderful-life-yamakami
+  world-s-end-saiki-2008:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: world-s-end-saiki
+  worst-komuro-1970:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: worst-komuro
+  x-day-tamura-1993:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: x-day-tamura
   xl-saizu-desu-kekkonsasetekuremasuka:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -4097,6 +7035,10 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: yamataikoku-no-dai-shinjitsu
+  yami-no-ekusasaizu-1991:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: yami-no-ekusasaizu
   yaminokao:
     at: '2026-07-02'
     reason: ハイフン規則違反是正(楽天分かち書き「ヤミ ノ カオ」整列・綴り既存保持)
@@ -4105,10 +7047,22 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: yami-no-mitsuryoushi
+  yamitsuki-lait-2020:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: yamitsuki-lait
+  yasashii-akuma-fujii-1992:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: yasashii-akuma-fujii
   yasashisagamenishimiru:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: yasashisa-ga-me-ni-shimiru
+  yasha-kohno-2023:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: yasha-kohno
   yasudakuntosonosai-kun:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -4117,6 +7071,10 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: yasuji-no-do-chuuken-haji-kou
+  yellow-kawaguchi-1996:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: yellow-kawaguchi
   yomei-rokkagetsu-enchoushitemoratta-kara-koko-kara-wa-watashi-no-jikandesu:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -4137,6 +7095,10 @@ overrides:
     at: '2026-07-02'
     reason: ハイフン規則違反是正(楽天分かち書き「ヨンマイ ノ クイン」整列・綴り既存保持)
     slug: yonmai-no-kuin
+  yoru-no-suit-okamura-2015:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: yoru-no-suit-okamura
   yorunokousaten:
     at: '2026-07-02'
     reason: ハイフン規則違反是正(楽天分かち書き「ヨル ノ コウサテン」整列・綴り既存保持)
@@ -4155,8 +7117,8 @@ overrides:
     slug: yoru-no-salesman
   yoshida-akimi:
     at: '2026-07-01'
-    reason: '同名homonym是正: 夜明ケ(しりあがり寿1990)が主版=無印、吉田秋生「夜明け」2012は姓+年suffix。旧slugは著者名で不適'
-    slug: yoake-yoshida2012
+    reason: '同名homonym是正: 夜明ケ(しりあがり寿1990)が主版=無印、吉田秋生「夜明け」2012は姓+年suffix。旧slugは著者名で不適 / C類年サフィックス無印化2026-08-10'
+    slug: yoake-yoshida
   yoshiwara-hanaoboro:
     at: '2026-07-02'
     reason: ハイフン規則違反是正(楽天分かち書き「ヨシワラ ハナ オボロ」整列・綴り既存保持)
@@ -4177,6 +7139,14 @@ overrides:
     at: '2026-07-02'
     reason: ハイフン規則違反是正(楽天分かち書き「ユイコ ストーリー」整列・綴り既存保持)
     slug: yuiko-sutoorii
+  yume-de-aimashou-yamamoto-1993:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: yume-de-aimashou-yamamoto
+  yume-o-mita-ikuemi-1985:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: yume-o-mita-ikuemi
   yumemiruandoroido:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -4193,6 +7163,26 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: yugioh-gx
+  yuugo-akana2011:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: yuugo-akana
+  yuuki-2011:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: yuuki
+  yuuwaku-1996:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: yuuwaku
+  yuuwaku-ibuki-2003:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: yuuwaku-ibuki
+  z-aihara-2013:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: z-aihara
   zanmakenden:
     at: '2026-07-02'
     reason: ハイフン規則違反是正(楽天分かち書き「ザンマ ケンデン」整列・綴り既存保持)
@@ -4205,10 +7195,26 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: zen-zen-shiranai-machi-o-aruite-mita-mono-no
+  zero-yamazaki-2009:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: zero-yamazaki
   zetsumetsuishi:
     at: '2026-07-02'
     reason: ハイフン規則違反是正(楽天分かち書き「ゼツメツ イシ」整列・綴り既存保持)
     slug: zetsumetsu-ishi
+  zetsurin-hanyunyu-2018:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: zetsurin-hanyunyu
+  zeus-komori-1996:
+    at: '2026-08-10'
+    reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
+    slug: zeus-komori
+  zoku-7-n-wairudo7:
+    at: '2026-08-08'
+    reason: 数字始まり題の機械生成slugが破損(「新ワイルド7」→7-nwairudo7)。読みシンワイルドセブン基点で本編 wild-7 と整合する形に是正(ユーザ裁定 2026-08-08)
+    slug: zoku-shin-wild-7
   zokutoshishitanoanchikushou:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
@@ -4217,42 +7223,6 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: zoukin-to-houseki
-  7-nwairudo7:
-    at: '2026-08-08'
-    reason: 数字始まり題の機械生成slugが破損(「新ワイルド7」→7-nwairudo7)。読みシンワイルドセブン基点で本編 wild-7 と整合する形に是正(ユーザ裁定 2026-08-08)
-    slug: shin-wild-7
-  zoku-7-n-wairudo7:
-    at: '2026-08-08'
-    reason: 数字始まり題の機械生成slugが破損(「新ワイルド7」→7-nwairudo7)。読みシンワイルドセブン基点で本編 wild-7 と整合する形に是正(ユーザ裁定 2026-08-08)
-    slug: zoku-shin-wild-7
-  dotsukiri-angel:
-    at: '2026-08-08'
-    slug: dokkiri-angel
-    reason: NDLのtranscriptionが旧式の大文字表記「ドツキリ エンジエル」で、そこから機械生成されたslugが dotsukiri-angel になっていた。実際の読みはドッキリエンジェル(書影上部のローマ字クレジット「KAZUKI MOTOYAMA / DOKKIRI ANGEL」が裏付け)。ユーザ発見 2026-08-08
-  ekkusu-no-utagoe:
-    at: '2026-08-08'
-    slug: kai-no-utagoe
-    reason: 題の1文字目がギリシャ文字χ(カイ)。書誌DBがラテンXに正規化した表題からslugが ekkusu- になっていた。楽天titleKanaの2読み併記「X ノ ウタゴエ カイ ノ ウタゴエ」とja.wikipediaの「χの歌声」で確認
-  higurashi-no-naku-koro-ni-kai-2007:
-    at: '2026-08-08'
-    slug: higurashi-no-naku-koro-ni-kai-meakashihen
-    reason: 「解」「怪」「礼」がすべて kai/rei に潰れた衝突回避で西暦suffix(-2007/-2009/-2007-2/-2011)が付いていたが、他の編別頁(-onikakushihen 等)と不揃いで内容も分からない。編名を入れて一意化。目明し編=メアカシヘン(楽天titleKana「ヒグラシ ノ ナク コロ ニ カイ メアカシヘン」)
-  higurashi-no-naku-koro-ni-kai-2009:
-    at: '2026-08-08'
-    slug: higurashi-no-naku-koro-ni-kai-minagoroshihen
-    reason: 「解」「怪」「礼」がすべて kai/rei に潰れた衝突回避で西暦suffix(-2007/-2009/-2007-2/-2011)が付いていたが、他の編別頁(-onikakushihen 等)と不揃いで内容も分からない。編名を入れて一意化。皆殺し編=ミナゴロシヘン(楽天titleKana)
-  higurashi-no-naku-koro-ni-kai:
-    at: '2026-08-08'
-    slug: higurashi-no-naku-koro-ni-kai-matsuribayashihen
-    reason: 「解」「怪」「礼」がすべて kai/rei に潰れた衝突回避で西暦suffix(-2007/-2009/-2007-2/-2011)が付いていたが、他の編別頁(-onikakushihen 等)と不揃いで内容も分からない。編名を入れて一意化。祭囃し編=マツリバヤシヘン(楽天titleKana)
-  higurashi-no-naku-koro-ni-rei-ryukishi-2011:
-    at: '2026-08-08'
-    slug: higurashi-no-naku-koro-ni-rei-saikoroshihen
-    reason: 「解」「怪」「礼」がすべて kai/rei に潰れた衝突回避で西暦suffix(-2007/-2009/-2007-2/-2011)が付いていたが、他の編別頁(-onikakushihen 等)と不揃いで内容も分からない。編名を入れて一意化。賽殺し編=サイコロシヘン(NDL2レコードが一致。楽天は「サイゴロシヘン」だが、賽=サイコロの掛詞で濁らないNDL側を採用)
-  higurashi-no-naku-koro-ni-kai-2007-2:
-    at: '2026-08-08'
-    slug: higurashi-no-naku-koro-ni-kai-utsutsukowashihen
-    reason: 「解」「怪」がどちらも kai に潰れる衝突回避で -2007-2 という数字suffixが付いていた。ja.wikipedia「ひぐらしのなく頃に怪 現壊し編」の冒頭よみがな『ひぐらしのなくころにかい うつつこわしへん』で編名の読みを確定し、他の編別頁と同じ編名ベースに是正。NDL(本題まで)・楽天(本題まで)・KADOKAWA公式(ふりがな無し)では取れなかった読み。
 paradise-6238: paradise-taguchi-1998
 pet-2032: pet-himawari-2002
 piasu-no-rannaa: piasu-no-runner
