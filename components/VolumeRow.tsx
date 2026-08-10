@@ -58,6 +58,23 @@ export default function VolumeRow({ manga }: Props) {
   if (manga.editions.length === 0) return null;
   const blocks = displayBlocks(manga.editions);
 
+  // ★試し読みは巻構成が合う版だけに出す(2026-08-10 ユーザ報告=あしたのジョー型):
+  //   BookLiveのcidは「title_id+巻番号」なので、冊数の違う版(完全復刻16巻/文庫12巻等)に
+  //   同じ番号で付けると別内容の試し読みになる。最大巻番号が bl.max と一致する版のみ対象。
+  //   一致版が無い場合(連載中で電子が先行/遅行して±数巻ズレる型)は最大巻数の版だけに出す
+  //   (=電子化の底本は原則その作品の基本巻割り。番号は揃っており cur.number<=bl.max ガードも効く)。
+  const bl = getTameshiyomi(manga.slug);
+  const maxNum = (b: Edition) => Math.max(0, ...b.volumes.map((v) => v.number ?? 0));
+  const blBlocks = new Set<Edition>();
+  if (bl) {
+    const exact = blocks.filter((b) => maxNum(b) === bl.max);
+    if (exact.length) exact.forEach((b) => blBlocks.add(b));
+    else {
+      const top = Math.max(...blocks.map(maxNum));
+      blocks.filter((b) => maxNum(b) === top).forEach((b) => blBlocks.add(b));
+    }
+  }
+
   return (
     <div className="mt-8">
       {blocks.map((ed, idx) => (
@@ -68,7 +85,7 @@ export default function VolumeRow({ manga }: Props) {
         >
           {/* 版本体 (= ISBNが重なる刷のみ EditionVolumes 内でタブ切替)。
               ★コーフロー化で省スペースになったので全版を開いて表示。 */}
-          <EditionVolumes manga={manga} edition={ed} defaultCollapsed={false} bl={getTameshiyomi(manga.slug)} />
+          <EditionVolumes manga={manga} edition={ed} defaultCollapsed={false} bl={blBlocks.has(ed) ? bl : null} />
         </section>
       ))}
     </div>
