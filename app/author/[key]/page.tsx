@@ -9,6 +9,10 @@ import { DesignNav } from "@/lib/homeDesign";
 
 const SITE = "https://mangal-db.com";
 
+/** 会社・団体名義の判定(アンソロジー編纂元=一迅社等)。JSON-LDをPersonでなくOrganizationにする。
+ *  ペンネーム(矢立肇等)は判定外=Personのまま。 */
+const ORG_RE = /(社|書店|書房|出版|文庫|編集部|プロダクション|製作委員会|プロジェクト|スタジオ|委員会|協会|新聞|放送|通信)$|^(株式会社|有限会社)/;
+
 export const dynamicParams = false;
 
 export async function generateStaticParams() {
@@ -54,12 +58,13 @@ export default async function AuthorPage({ params }: { params: Promise<{ key: st
   const a = getAuthor(key);
   if (!a) notFound();
   const n = a.works.length + a.originals.length;
+  const isOrg = ORG_RE.test(a.name);
   const jsonLd = {
     "@context": "https://schema.org",
-    "@type": "Person",
+    "@type": isOrg ? "Organization" : "Person",
     name: a.name,
     url: `${SITE}/author/${key}`,
-    jobTitle: "漫画家",
+    ...(isOrg ? {} : { jobTitle: "漫画家" }),
   };
   const breadcrumbLd = {
     "@context": "https://schema.org",
