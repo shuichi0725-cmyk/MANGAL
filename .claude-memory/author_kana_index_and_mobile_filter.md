@@ -21,3 +21,5 @@ metadata:
 - ★調整余地(ユーザ「後で変えられる」): 枠の太さ(現4px→6-8px)/枠色(白→紺・金等)/余白量/透過度(現28%)。 ★淡色テーマ+書影なしで透け感は控えめ、 実書影が入れば背後がはっきり見える。
 
 関連: [[filterpanel_show_counts]](FilterPanel別タスク=各チップに件数表示)。
+
+**著者静的ページ+50音索引=実装済(2026-08-10 ユーザGO)**: `/author/[key]`(romaji slug・全著者27,167人のうちromaji有り全員をSSG・Person/Organization自動判定JSON-LD+パンくず)+`/authors`(50音行索引)+詳細頁チップの行き先差し替え(romaji無し372層のみ従来?author=fallback)+フッター導線+sitemap(2作以上・romaji一意のみ送信=thin対策)。実装=lib/authors.ts(ビルド時にloadAllMangaから組立・pregen不要)。同名異人は現状1頁合流(NDL典拠分離が入ったら再設計)。**本番公開=次の週次ビルド**(+30-50分見込み)。Search Console「代替ページ」202件のクロール浪費の根本策。
