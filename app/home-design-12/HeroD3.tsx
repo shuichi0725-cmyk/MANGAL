@@ -13,11 +13,11 @@ const COPIES: Array<[string, string]> = [
   ["漫画の", "全記録。"],
   ["今日も、", "増えてる。"],
   ["全巻・全版・", "全日付。"],
-  ["1945年から、", "現在まで。"],
+  ["1919年から、", "現在まで。"], // 実データ最古=漫画吾輩は猫である(1919)
   ["絶版だって、", "載ってる。"],
   ["何巻まで?に", "即答。"],
   ["漫画の", "記憶装置。"],
-  ["52万冊、", "整列済み。"],
+  ["", "整列済み。"], // 冊数は実数で動的生成(下で差し替え。52万は仮置き数字の捏造だった=2026-08-12ユーザ指摘)
   ["本棚の、", "その先へ。"],
   ["一巻から、", "最終巻まで。"],
   ["漫画史、", "全部入り。"],
@@ -25,14 +25,17 @@ const COPIES: Array<[string, string]> = [
   ["昨日の新刊も、", "載ってる。"],
 ];
 
-export default function HeroD3({ total }: { total: number }) {
+export default function HeroD3({ total, books }: { total: number; books: number }) {
   // SSR/初回は既定コピー(=hydration不一致を避ける)。マウント後に抽選で差し替え。
   const [idx, setIdx] = useState(0);
   useEffect(() => {
     setIdx(Math.floor(Math.random() * COPIES.length));
   }, []);
   const totalStr = total.toLocaleString();
-  const [l1, l2] = idx === 2 ? [`${totalStr}作品、`, "収蔵。"] : COPIES[idx];
+  const manStr = `${Math.floor(books / 10000)}万冊`; // 例: 263,872 → 26万冊
+  let [l1, l2] = COPIES[idx];
+  if (idx === 2) [l1, l2] = [`${totalStr}作品、`, "収蔵。"];
+  if (l2 === "整列済み。") l1 = `${manStr}、`;
   return (
     <section className="relative overflow-hidden border-b-[3px] border-[var(--color-accent)] px-4 pb-5 pt-7">
       <div aria-hidden="true" className="pointer-events-none absolute -right-6 top-3 select-none text-[118px] font-black leading-none text-white opacity-[0.06]">

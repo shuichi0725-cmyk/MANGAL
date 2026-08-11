@@ -119,7 +119,7 @@ export default function Design12() {
       <HomeSidebar genres={genreList} />
       <div className="w-full max-w-[640px] min-w-0">
 
-      <HeroD3 total={manga.length} />
+      <HeroD3 total={manga.length} books={totalBooks} />
 
       {/* カテゴリ8枚(SVG線画・/browseのカテゴリカードと同じ行き先) */}
       <section className="mt-5 px-4">
