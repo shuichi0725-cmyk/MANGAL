@@ -149,3 +149,27 @@ describe("かな数詞foldのひらがな対称性(2026-07-28 退行修正: わ�
     expect(searchSlugs("ふぁいぶすたー", wp).has("five-star-stories")).toBe(true);
   });
 });
+
+describe("曖昧フォールバック(2026-08-12 ぎゃわんぶらー型)", () => {
+  const fz = [
+    { slug: "gyuwanburaa-jikochuushinha", title: "ぎゅわんぶらあ自己中心派", title_kana: "ギュワンブラアジコチュウシンハ",
+      authors: [{ name: "片山まさゆき", kana: "カタヤママサユキ" }] },
+    { slug: "chainsaw-man", title: "チェンソーマン", title_kana: "チェンソーマン",
+      authors: [{ name: "藤本タツキ", kana: "フジモトタツキ" }] },
+  ] as unknown as MangaListItem[];
+  it("1文字違いの誤記でも拾う(ぎゃわんぶらー→ぎゅわんぶらあ)", () => {
+    const got = searchWithTiers("ぎゃわんぶらー", fz);
+    expect(got.get("gyuwanburaa-jikochuushinha")).toBe(5); // tier5=曖昧
+  });
+  it("厳密ヒットがある時は曖昧を発動しない(従来結果不変)", () => {
+    const got = searchWithTiers("チェンソーマン", fz);
+    expect(got.get("chainsaw-man")).toBe(0);
+    expect(got.size).toBe(1);
+  });
+  it("短すぎる語(3字以下)は曖昧発動しない", () => {
+    expect(searchWithTiers("ぎゃわ", fz).size).toBe(0);
+  });
+  it("全く別の語は曖昧でも拾わない", () => {
+    expect(searchWithTiers("ドラゴンボール", fz).size).toBe(0);
+  });
+});

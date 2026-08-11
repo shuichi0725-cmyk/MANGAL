@@ -24,6 +24,31 @@ function collapseVowels(s: string): string {
   return s.replace(/([aeiou])\1+/g, "$1");
 }
 
+/** ★曖昧部分一致(2026-08-12 ユーザ報告「ぎゃわんぶらー」で0件): Wu-Manber bitap。
+ *  pattern が text の中に「編集距離k以内の部分文字列」として現れるかを O(text長×k) で判定。
+ *  厳密検索がヒット0の時だけのフォールバック専用(平常時のコストはゼロ)。pattern≤31字(bitマスク上限)。 */
+function fuzzyIncludes(text: string, pattern: string, k: number): boolean {
+  const m = pattern.length;
+  if (m === 0 || m > 31 || text.length === 0) return false;
+  const alpha = new Map<string, number>();
+  for (let i = 0; i < m; i++) alpha.set(pattern[i], (alpha.get(pattern[i]) ?? 0) | (1 << i));
+  const accept = 1 << (m - 1);
+  const R: number[] = new Array(k + 1).fill(0);
+  for (let j = 0; j < text.length; j++) {
+    const cm = alpha.get(text[j]) ?? 0;
+    let prevOld = R[0]; // R[d-1] の更新前の値
+    R[0] = (((R[0] << 1) | 1) & cm) >>> 0;
+    for (let d = 1; d <= k; d++) {
+      const old = R[d];
+      // 一致 | 置換(prevOld<<1) | 挿入(prevOld) | 削除(R[d-1]新<<1)
+      R[d] = (((((old << 1) | 1) & cm) | prevOld | (prevOld << 1) | (R[d - 1] << 1) | 1) >>> 0);
+      prevOld = old;
+    }
+    if (R[k] & accept) return true;
+  }
+  return false;
+}
+
 type Hay = { title: string[]; au: string[]; kanaRoma: string[]; t0: string[]; k0: string[] };
 let _hay: Hay | null = null;
 let _hayOf: MangaListItem[] | null = null;
@@ -285,6 +310,35 @@ export function searchWithTiers(query: string, items: MangaListItem[]): Map<stri
     else if (fullQ && (hay.t0[i].startsWith(fullQ) || hay.k0[i].startsWith(fullQ))) tier = 1;
     else tier = worst + 1; // 1→2(題部分一致), 2→3(著者), 3→4(ローマ字橋)
     out.set(items[i].slug, tier);
+  }
+
+  // ★曖昧フォールバック(2026-08-12): 厳密照合が0件の時だけ、編集距離1〜2の近似部分一致を全行走査。
+  //   tier=5(最弱)。単語1語×正規化4字以上のみ(短語は誤爆が多すぎる)。多語ANDは対象外。
+  //   逐次絞り込みキャッシュは残さない(曖昧ヒット集合は延長クエリの上位集合と保証できないため)。
+  if (out.size === 0 && forms.length === 1) {
+    const f = forms[0];
+    const pat = f.q.slice(0, 31);
+    const k = pat.length >= 8 ? 2 : pat.length >= 4 ? 1 : 0;
+    if (k > 0) {
+      const patKana = f.qKana && f.qKana !== f.q ? f.qKana.slice(0, 31) : "";
+      const patRoma = f.qRoma ? f.qRoma.slice(0, 31) : "";
+      for (let i = 0; i < items.length; i++) {
+        if (
+          fuzzyIncludes(hay.title[i], pat, k) ||
+          (patKana && fuzzyIncludes(hay.title[i], patKana, k)) ||
+          (patRoma && fuzzyIncludes(hay.kanaRoma[i], patRoma, k))
+        ) {
+          out.set(items[i].slug, 5);
+        }
+      }
+      if (out.size > 0) {
+        _lastKey = "";
+        _lastIdx = null;
+        perfDiag.searchMs = since(_t0);
+        perfDiag.searchHits = out.size;
+        return out;
+      }
+    }
   }
 
   _lastKey = key;
