@@ -274,6 +274,10 @@ input[type="search"]::-webkit-search-decoration {
   border: 2px solid var(--color-accent) !important;
   font-weight: 900;
 }
+/* カテゴリアイコンの絵文字⇔SVG切替(D3のみSVG。ライトテーマ=絵文字のまま) */
+.cat-svg { display: none; }
+.theme-d3 .cat-svg { display: block; }
+.theme-d3 .cat-emoji { display: none; }
 /* D3マーキー帯 */
 @keyframes d3-marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 .d3-marquee { display: inline-block; white-space: nowrap; animation: d3-marquee 28s linear infinite; }

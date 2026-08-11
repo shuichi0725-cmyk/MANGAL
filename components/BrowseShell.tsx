@@ -1,4 +1,5 @@
 import Card from "@/components/ui/Card";
+import CatPict, { catKeyOf } from "@/components/CatPict";
 import type { IndexSummary } from "@/lib/schema";
 
 /**
@@ -88,9 +89,10 @@ export default function BrowseShell({ summary }: { summary: IndexSummary }) {
               <li key={c.label}>
                 <Card href={c.href} className="h-full px-1 py-2.5 text-center">
                   <span className="flex flex-col items-center justify-center gap-1">
-                    <span className="text-base leading-none" aria-hidden="true">
+                    <span className="cat-emoji text-base leading-none" aria-hidden="true">
                       {c.icon}
                     </span>
+                    {catKeyOf(c.label) && <CatPict k={catKeyOf(c.label)!} />}
                     <span className="text-[11px] font-semibold leading-tight">{c.label}</span>
                     <span className="text-[10px] font-medium leading-none tabular-nums text-ink/40">
                       {c.count.toLocaleString()}

@@ -2,6 +2,7 @@
 
 import { useSearchParams } from "next/navigation";
 import Card from "@/components/ui/Card";
+import CatPict, { catKeyOf } from "@/components/CatPict";
 import type { IndexSummary, ListBundle, MangaListItem } from "@/lib/schema";
 
 type Props = { data: ListBundle; filtered?: MangaListItem[]; summary?: IndexSummary | null };
@@ -84,9 +85,10 @@ export default function CategoryHub({ data, filtered, summary }: Props) {
                 }`}
               >
                 <span className="flex flex-col items-center justify-center gap-1">
-                  <span className="text-base leading-none" aria-hidden="true">
+                  <span className="cat-emoji text-base leading-none" aria-hidden="true">
                     {c.icon}
                   </span>
+                  {catKeyOf(c.label) && <CatPict k={catKeyOf(c.label)!} />}
                   <span className="text-[11px] font-semibold leading-tight">
                     {active ? "✓ " : ""}{c.label}
                   </span>
