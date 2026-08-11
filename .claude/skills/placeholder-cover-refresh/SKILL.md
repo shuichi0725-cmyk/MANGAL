@@ -30,7 +30,7 @@ description: 仮書影直して=発売前に付いた「文字だけの書影(.g
 ```
 python scripts/_placeholder-cover-refresh.py --limit 200   # 1バッチ(~4.5分)。再起動で続き
 python scripts/_placeholder-cover-refresh.py --stats       # 現在地
-python scripts/_placeholder-cover-refresh.py --build-queue # 月1でqueue再算出=★次の周回の起点(これはOpus作業)
+python scripts/_placeholder-cover-refresh.py --build-queue # ★週1でqueue再算出(週次蒸留に組込済 2026-08-12)=次の周回の起点
 ```
 
 - ★**1バッチ終わったら同じコマンドを再起動**して続きを回す(④⑤⑦⑨と同型)。
@@ -95,11 +95,11 @@ EOF
 - 楽天の呼び方を自分で組み直さない(★`Referer`+`Origin` ヘッダが無いと **403**。
   2026-08-02 に実際に踏んだ。script内の `rakuten_by_isbn` が正)。
 - 429 で待機しない(他の柱を回す。[[idle-run]] の共通ルール)。
-- `--build-queue` を毎バッチ走らせない(66k頁走査で数分かかる。月1でよい)。
+- `--build-queue` を毎バッチ走らせない(66k頁走査で数分かかる。週1=週次蒸留での実行で足りる)。
 - ★**「一巡完了」は終わりではない**(2026-08-03 ユーザ指摘で周回設計を実装): 実物への差し替わり時期は
   不定なので、「まだ仮のまま/no_item/error」だった巻も**次周回で全部引き直す**。--build-queue が
   done.json を自動rotateし、seed(cover-override.jsonl)在籍分だけを除外して再出発する(reflect前の
-  二重照会防止)。= 月1の --build-queue → queue枯れまでバッチ再起動、の繰り返しが恒常運転。
+  二重照会防止)。= 週1(週次蒸留)の --build-queue → queue枯れまでバッチ再起動、の繰り返しが恒常運転。
 - ★**プレースホルダは .gif だけではない**(2026-08-04 ユーザ発見で2型追加):
   ①**レーベルロゴ型**(LV999の村人21) = URL形式は本物と同じ `_1_6.jpg` なのに中身が出版社ロゴ。
     発売後に楽天が**新しい画像番号(_1_10等)で実物を追加**するため、URLパターンでは検出不能。

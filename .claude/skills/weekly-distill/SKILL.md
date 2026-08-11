@@ -27,7 +27,10 @@ python scripts/_build-calendar.py .preview-data/manga public/calendar <当月>  
 python scripts/_gen-corner-stocks.py         # 三世代/featured stock JSON
 python scripts/_gen-daily-feature.py         # 日替わり特集stock補充(+45日先まで。既存日は凍結=触らない)
 python scripts/_gen-corner-auto.py           # 周年/豪華版 JSON(66k走査 ~5分)
+python scripts/_tameshiyomi-harvest.py --limit 100          # ★週次収集(2026-08-12 ユーザ裁定=週1化): 新規アンカー発見(TinyFish~100検索・数分)
+python scripts/_tameshiyomi-harvest.py --expand --expand-limit 300  # 新規アンカーの全巻展開(HEAD検証・残はアイドル運転が消化)
 python scripts/_gen-tameshiyomi-map.py       # ★試し読みマップ(2026-08-06全結線。巻expandの増分をblmaxへ反映=~2秒)
+python scripts/_placeholder-cover-refresh.py --build-queue   # ★書影queue週次再算出(2026-08-12 ユーザ裁定: 旧=月1。消化はアイドル運転⑩)
 python scripts/_build-list-index.py data/manga.v2 data   # 本番索引(~10分)
 ```
 - ai-reviews 等 seed 由来はそのまま(生成不要)。
