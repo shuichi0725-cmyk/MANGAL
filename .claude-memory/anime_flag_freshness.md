@@ -22,8 +22,12 @@ metadata:
 
 ## 初回実測(2026-08-11)
 - dump104,887+delta85,164行 → アニメ化あり3,878 aid / enrichパッチ3,817件 / **フラグ立て漏れ821頁を適用**。
-- ★逆方向(頁true・dumpアニメ関係なし)=**1,700頁**は false化しない: 種3のAI fillが実写化を
-  アニメ化と誤記した型(21世紀少年/自衛隊1549)と AniList側の関係欠落が混在=機械で裁けない。残置。
+- ★逆方向1,700頁=**2026-08-11 裁定完了**(ユーザ指示「ここ直して」): 4層ゲートで機械裁定→
+  true維持1,052(直接関係725+franchise281+今期seed46) / HOLD19(題一致12+wiki7=真アニメだが
+  リンク先entryに関係なし=**リンク修理候補台帳** docs/production-diagnostics/anime-flag-holds.tsv) /
+  **false化629**(wiki実写のみ56/wiki無記述29/素材なし544。不確実な高人気2件=十字架のろくにん・
+  すべ破はWeb裏取りでアニメ無し確認)。false化= `data/seeds/anime-adapted-overrides.yml`(false_slugs)、
+  promoteで **enrichの前に適用=enrich後勝ち**なのでAniListに関係が付けば自動true復帰(自己修復)。
 - 標本10件全部に具体ANIMEノード(TV/OVA/ONA/TV_SHORT)を確認してから適用した(だろう運転をしない)。
 
 関連: [[monthly_distill_real_pipeline]] [[anilist_matching_state]] [[feedback_one_bug_means_a_class]]

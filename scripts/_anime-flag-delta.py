@@ -81,6 +81,13 @@ def main():
         from yaml import CSafeLoader as L
     except ImportError:
         from yaml import SafeLoader as L
+    # ★裁定済みの除外(2026-08-11): false化済みはcur=falseで自然に消えるが、HOLD(真アニメ疑い=
+    #   リンク修理候補)はtrue維持のため毎回revに再出現する→台帳在籍分はスキップ。
+    holds = set()
+    hp = os.path.join(ROOT, "docs", "production-diagnostics", "anime-flag-holds.tsv")
+    if os.path.exists(hp):
+        for ln in io.open(hp, encoding="utf-8").readlines()[1:]:
+            holds.add(ln.split("\t")[0])
     todo, rev = [], []
     for aid_s, slug in a2s.items():
         anime = aid_anime.get(int(aid_s))
@@ -93,7 +100,7 @@ def main():
         cur = bool(d.get("anime_adapted"))
         if anime and not cur:
             todo.append(slug)
-        elif cur and not anime:
+        elif cur and not anime and slug not in holds:
             rev.append(slug)
     with io.open(WORKLIST, "w", encoding="utf-8") as f:
         for s in sorted(todo):
