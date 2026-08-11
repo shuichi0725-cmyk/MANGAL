@@ -61,7 +61,7 @@ export default function DailyFeatureCorner() {
         <Link
           href="/tokushu"
           className="spring-press relative flex items-center gap-3 overflow-hidden rounded-lg border border-[var(--color-line)] p-3 shadow-[var(--shadow-lift)]"
-          style={{ borderLeft: `5px solid ${day.c.a}`, background: `linear-gradient(105deg,#fff 55%, ${day.c.a}14)` }}
+          style={{ borderLeft: `5px solid ${day.c.a}`, background: `linear-gradient(105deg,var(--color-surface) 55%, ${day.c.a}14)` }}
         >
           <div className="relative h-24 w-[104px] shrink-0">
             {covers.slice(0, 3).map((c, i) => (

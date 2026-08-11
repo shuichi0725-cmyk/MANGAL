@@ -43,15 +43,12 @@ function D3Nav() {
   ];
   return (
     <div className="flex items-center border-b-[3px] border-[var(--color-accent)] bg-[var(--color-paper)] px-3 py-1.5">
-      <Link href="/" aria-label="ホーム" className="spring-press flex items-baseline">
-        <span className="text-[19px] font-black tracking-tight">MANGAL</span>
-        <span className="text-[19px] font-black text-[var(--color-accent)]">.</span>
+      {/* ★ロゴは共通ヘッダー(layout)に一本化(2026-08-11 ユーザ指摘「ヘッダーが二つ」)。DesignNavと同配置=ホーム左固定 */}
+      <Link href="/" aria-label="ホーム" className={cell}>
+        <NavIcon d="M3 11L12 3l9 8M6 10v11h12V10" />
+        <span className="text-[9px] text-ink/55">ホーム</span>
       </Link>
       <div className="ml-auto flex items-center gap-3.5">
-        <Link href="/" aria-label="ホーム" className={cell}>
-          <NavIcon d="M3 11L12 3l9 8M6 10v11h12V10" />
-          <span className="text-[9px] text-ink/55">ホーム</span>
-        </Link>
         {right.map(([icon, label, href]) => (
           <Link key={label} href={href} aria-label={label} className={cell}>
             {icon}

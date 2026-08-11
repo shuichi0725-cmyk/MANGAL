@@ -35,7 +35,7 @@ export default function HeroD3({ total }: { total: number }) {
   const [l1, l2] = idx === 2 ? [`${totalStr}作品、`, "収蔵。"] : COPIES[idx];
   return (
     <section className="relative overflow-hidden border-b-[3px] border-[var(--color-accent)] px-4 pb-5 pt-7">
-      <div aria-hidden="true" className="pointer-events-none absolute -bottom-7 -right-8 select-none text-[120px] font-black leading-none text-white opacity-5">
+      <div aria-hidden="true" className="pointer-events-none absolute -right-6 top-3 select-none text-[118px] font-black leading-none text-white opacity-[0.06]">
         DB
       </div>
       {/* 装飾タイポ(h1ではない=リロード毎に変えてもSEOシグナル不変) */}
