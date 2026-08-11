@@ -77,6 +77,18 @@ def targets(limit):
     return out
 
 
+# ★分冊版並走の自動解決(2026-08-12 コインランドリー型=ユーザ発見): 本編と分冊版/単話/マイクロが
+#   両方 exact+au で並ぶと旧ロジックは複数候補=保留に落としていた(実測474件)。試し読みの底本は
+#   常に本編(単行本)なので、分冊系マーカー候補を除外して一意に絞れるなら採用する。
+BUNSATSU_RE = re.compile(r"分冊|単話|話売り|ばら売り|マイクロ|プチキス|プチデザ")
+
+def prefer_bound(strong, cand):
+    if len(strong) <= 1:
+        return strong
+    keep = [t for t in strong if not BUNSATSU_RE.search(cand[t].get("ev", ""))]
+    return keep if keep else strong
+
+
 def head_ok(cid):
     try:
         req = urllib.request.Request(f"https://booklive.jp/bviewer/s/?cid={cid}",
@@ -204,7 +216,7 @@ def harvest(limit):
                 cand[m.group(1)]["exact"] = True
             if au_ok:
                 cand[m.group(1)]["au"] = True
-        strong = [tid for tid, c in cand.items() if c["exact"] and c["au"]]
+        strong = prefer_bound([tid for tid, c in cand.items() if c["exact"] and c["au"]], cand)
         if len(strong) == 1 and head_ok(f"{strong[0]}_001"):
             rec = {"slug": slug, "title": title, "title_id": strong[0],
                    "cid1": f"{strong[0]}_001", "verified": "head200",
@@ -230,9 +242,50 @@ def main():
     ap.add_argument("--accept", help="slug=title_id 形式で保留を手動採用")
     ap.add_argument("--accept-file", help="一括採用TSV(slug<TAB>title_id)。裁定済み前提・HEADゲート同等")
     ap.add_argument("--stats", action="store_true")
+    ap.add_argument("--resolve-holds", action="store_true", help="保留(複数候補)へ分冊版除外規則を適用し一意化できた分を採用")
     ap.add_argument("--expand", action="store_true", help="アンカー済みシリーズを全巻展開(検索不要)")
     ap.add_argument("--expand-limit", type=int, default=50, help="--expand で処理するシリーズ数上限")
     a = ap.parse_args()
+    if a.resolve_holds:
+        anch = set()
+        if os.path.exists(SEED):
+            for l in open(SEED, encoding="utf-8"):
+                anch.add(json.loads(l)["slug"])
+        rows = open(HOLDS, encoding="utf-8").readlines() if os.path.exists(HOLDS) else []
+        seedf = open(SEED, "a", encoding="utf-8")
+        resolved = set()
+        n_try = n_ok2 = 0
+        for l in rows:
+            pcs = l.rstrip().split(chr(9))
+            if len(pcs) < 5 or pcs[3] != "複数候補" or pcs[0] in anch:
+                continue
+            try:
+                cand = json.loads(pcs[4])
+            except Exception:
+                continue
+            strong = prefer_bound([t for t, c in cand.items() if c.get("exact") and c.get("au")], cand)
+            if len(strong) != 1:
+                continue
+            n_try += 1
+            if head_ok(f"{strong[0]}_001"):
+                rec = {"slug": pcs[0], "title": pcs[1], "title_id": strong[0],
+                       "cid1": f"{strong[0]}_001", "verified": "head200",
+                       "evidence": cand[strong[0]].get("ev", "") + " [resolve-holds:分冊版除外]",
+                       "at": time.strftime("%Y-%m-%d")}
+                seedf.write(json.dumps(rec, ensure_ascii=False) + chr(10))
+                seedf.flush()
+                resolved.add(pcs[0])
+                n_ok2 += 1
+                if n_ok2 % 25 == 0:
+                    print(f"  …{n_ok2}件採用", flush=True)
+            time.sleep(0.2)
+        seedf.close()
+        if resolved:
+            keep = [l for l in rows if l.split(chr(9), 1)[0] not in resolved]
+            open(HOLDS, "w", encoding="utf-8").writelines(keep)
+        print(f"resolve-holds: 対象{n_try} → 採用{n_ok2}(HEAD検証済)。保留から{len(resolved)}行除去")
+        return
+
     if a.stats:
         done, holds = load_done()
         vol_done = load_volumes_done()
