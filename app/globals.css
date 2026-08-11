@@ -256,6 +256,8 @@ input[type="search"]::-webkit-search-decoration {
 /* bg-ink はライトテーマ前提の「黒地カード」= テーマでinkが明色化すると白地白字になる(ことばカード型)。
    テーマ内では黒地+ライムの細枠に固定して意味を保つ。bg-ink/80 等の派生も含めて捕まえる。 */
 .theme-d3 [class*="bg-ink"] { background-color: #050505 !important; box-shadow: inset 0 0 0 1px rgba(217, 248, 67, 0.4); }
+/* 一覧表の題名リンク(ライトでは紺#1f4e79固定) = テーマではライムに */
+.theme-d3 { --list-link: #d9f843; }
 /* D3マーキー帯 */
 @keyframes d3-marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 .d3-marquee { display: inline-block; white-space: nowrap; animation: d3-marquee 28s linear infinite; }

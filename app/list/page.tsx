@@ -19,7 +19,7 @@ export default function ListPage() {
   const masters = loadMasters();
   const data: ListBundle = { manga: [], artBooks: loadArtBooks(), ...masters };
   return (
-    <div className="min-h-screen bg-white pb-10">
+    <div className="min-h-screen bg-[var(--color-surface)] pb-10">
       <DesignNav current={11} />
       <header className="flex items-baseline justify-between border-b-2 border-ink px-3 py-3">
         <h1 className="text-base font-extrabold">📋 一覧表</h1>

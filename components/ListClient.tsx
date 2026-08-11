@@ -199,7 +199,7 @@ export default function ListClient({ data }: { data: ListBundle }) {
               if (e.target.value === "" && q) setQ(""); // 全消しは即解除(押し直し不要)
             }}
             placeholder="題名・よみ・著者で検索…"
-            className="min-w-0 flex-1 rounded-full border border-[var(--color-line)] bg-white px-3.5 py-1.5 text-[13px] outline-none focus:border-[var(--color-accent)]"
+            className="min-w-0 flex-1 rounded-full border border-[var(--color-line)] bg-[var(--color-surface)] px-3.5 py-1.5 text-[13px] outline-none focus:border-[var(--color-accent)]"
           />
           <button
             type="submit"
@@ -307,7 +307,7 @@ export default function ListClient({ data }: { data: ListBundle }) {
                     <Link
                       href={`/manga/${m.slug}`}
                       onClick={() => sessionStorage.setItem("mangal-list-scroll", String(window.scrollY))}
-                      className="spring-press block whitespace-nowrap font-medium text-[#1f4e79] active:underline"
+                      className="spring-press block whitespace-nowrap font-medium text-[var(--list-link,#1f4e79)] active:underline"
                     >
                       {m.title}
                     </Link>

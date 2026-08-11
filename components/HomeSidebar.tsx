@@ -39,7 +39,7 @@ export default function HomeSidebar({ genres }: { genres: Array<{ key: string; n
               value={q}
               onChange={(e) => setQ(e.target.value)}
               placeholder="題名・よみ・著者…"
-              className="w-full rounded-full border border-[var(--color-line)] bg-white px-3.5 py-1.5 text-[13px] outline-none focus:border-[var(--color-accent)]"
+              className="w-full rounded-full border border-[var(--color-line)] bg-[var(--color-surface)] px-3.5 py-1.5 text-[13px] outline-none focus:border-[var(--color-accent)]"
             />
             <button
               type="submit"
