@@ -7,7 +7,7 @@ description: 試し読み拾って=BookLiveの試し読みリンク(title_id)を
 
 MANGALの「📖 試し読み」ボタン用に、BookLiveの作品ID(title_id)を集めて
 `data/seeds/tameshiyomi-booklive.jsonl`(= シリーズ単位アンカー) と
-`data/seeds/tameshiyomi-booklive-volumes.jsonl`(= ★巻単位の実データ、ボタンが読むのはこっち) に貯める。
+`data/seeds/tameshiyomi-booklive-volumes.jsonl.gz`(= ★巻単位の実データ、ボタンが読むのはこっち) に貯める。
 **収集だけがこのskillの仕事**(ボタンUI/中継/via_cd注入は別作業=このskillでは触らない)。
 
 ## ★全巻展開の発見 (= 2026-07-12、ユーザ「ドラゴンボールなら42巻分取らないとダメよ？」で判明)
@@ -52,7 +52,7 @@ BookLiveのtitle_idは**シリーズ/版単位**。product頁の`vol_no`パス�
    - 確信なし/BookLiveに無い作品 → 保留のまま放置(それが正しい)
    - accept後は忘れず3を再実行(新規acceptしたslugも全巻展開する)
 6. commit+push:
-   git add data/seeds/tameshiyomi-booklive.jsonl data/seeds/tameshiyomi-booklive-volumes.jsonl docs/production-diagnostics/tameshiyomi-holds.tsv
+   git add data/seeds/tameshiyomi-booklive.jsonl data/seeds/tameshiyomi-booklive-volumes.jsonl.gz docs/production-diagnostics/tameshiyomi-holds.tsv
    git commit -m "試し読みharvest: +N件(保留M)/全巻展開+K巻" && git push
 ```
 
@@ -64,7 +64,7 @@ BookLiveのtitle_idは**シリーズ/版単位**。product頁の`vol_no`パス�
 - 出力=jsonl純粋追加(証拠snippet・検証日付き)・保留=tsv。再実行で重複しない
 - `--expand`=アンカー済み(title_id確定)シリーズについて、`data/manga-list-index.json`の
   `total_volumes`/`max_edition_volumes`を上限にcid各巻をHEAD検証、200のみ
-  `tameshiyomi-booklive-volumes.jsonl`に`{slug, volume, title_id, cid}`で純粋追加。
+  `tameshiyomi-booklive-volumes.jsonl.gz`に`{slug, volume, title_id, cid}`で純粋追加。
   既に検証済みの巻はskip(再開可能)。1シリーズ完了ごとに件数を表示
 
 ## 保留の典型と裁定のコツ

@@ -16,7 +16,7 @@ while :; do
   git commit -qm "試し読みharvest: idle $(date '+%m%d-%H%M')" 2>/dev/null && git push -q
   if [ $((i % 3)) -eq 0 ]; then
     python scripts/_tameshiyomi-harvest.py --expand --expand-limit 60 | tail -1
-    git add data/seeds/tameshiyomi-booklive-volumes.jsonl 2>/dev/null
+    git add data/seeds/tameshiyomi-booklive-volumes.jsonl.gz 2>/dev/null
     git commit -qm "試し読みharvest: idle-expand $(date '+%m%d-%H%M')" 2>/dev/null && git push -q
   fi
   if [ "$fails" -ge 3 ]; then echo "連続エラー3→終了"; break; fi

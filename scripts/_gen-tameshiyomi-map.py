@@ -11,6 +11,7 @@ data/seeds/tameshiyomi-booklive-volumes.jsonl(HEAD検証済み巻) から、
 - 表示側(components/VolumeCoverflow)は 選択巻<=max かつ not in missing でボタンを出す。
 - URLは保存しない(title_id+巻番号からクライアントで組む=容量最小)。
 """
+import gzip
 import io
 import json
 import os
@@ -19,7 +20,7 @@ import sys
 sys.stdout.reconfigure(encoding="utf-8")
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SEED = os.path.join(ROOT, "data", "seeds", "tameshiyomi-booklive.jsonl")
-VOLSEED = os.path.join(ROOT, "data", "seeds", "tameshiyomi-booklive-volumes.jsonl")
+VOLSEED = os.path.join(ROOT, "data", "seeds", "tameshiyomi-booklive-volumes.jsonl.gz")
 OUT = os.path.join(ROOT, "data", "tameshiyomi-map.json")
 
 anchors = {}
@@ -28,7 +29,7 @@ for ln in io.open(SEED, encoding="utf-8"):
     anchors[d["slug"]] = str(d["title_id"])
 
 vols = {}
-for ln in io.open(VOLSEED, encoding="utf-8"):
+for ln in gzip.open(VOLSEED, "rt", encoding="utf-8"):
     d = json.loads(ln)
     vols.setdefault(d["slug"], set()).add(int(d["volume"]))
 

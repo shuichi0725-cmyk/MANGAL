@@ -26,14 +26,15 @@
   python scripts/_tameshiyomi-harvest.py --accept slug=ID    # 保留を手動採用(裁定後)
   python scripts/_tameshiyomi-harvest.py --stats             # 進捗
 """
-import argparse, json, os, re, sys, time, unicodedata, urllib.request
+import argparse, gzip, json, os, re, sys, time, unicodedata, urllib.request
 from _idx_authors import au_name  # ★索引v2 authorsパック対応(2026-07-14)
 
 sys.stdout.reconfigure(encoding="utf-8")
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(ROOT, "scripts"))
 SEED = os.path.join(ROOT, "data", "seeds", "tameshiyomi-booklive.jsonl")
-VOLSEED = os.path.join(ROOT, "data", "seeds", "tameshiyomi-booklive-volumes.jsonl")
+# ★2026-08-12 gzip化(50.9MBがGitHub推奨50MB超え警告): 追記はgzipマルチメンバー(covers seedと同方式)。
+VOLSEED = os.path.join(ROOT, "data", "seeds", "tameshiyomi-booklive-volumes.jsonl.gz")
 HOLDS = os.path.join(ROOT, "docs", "production-diagnostics", "tameshiyomi-holds.tsv")
 
 
@@ -89,7 +90,7 @@ def load_volumes_done():
     """slug -> set(volume已検証)"""
     done = {}
     if os.path.exists(VOLSEED):
-        for line in open(VOLSEED, encoding="utf-8"):
+        for line in gzip.open(VOLSEED, "rt", encoding="utf-8"):
             r = json.loads(line)
             done.setdefault(r["slug"], set()).add(r["volume"])
     return done
@@ -151,7 +152,7 @@ def expand_volumes(expand_limit, workers=8):
     remaining = len(targets)
     targets = targets[:expand_limit]
     print(f"展開対象 {len(targets)} シリーズ(未チェック巻あり・残 {remaining}) / HEAD {workers}並列", flush=True)
-    out = open(VOLSEED, "a", encoding="utf-8")
+    out = gzip.open(VOLSEED, "at", encoding="utf-8")
     ckout = open(VOL_CHECKED, "a", encoding="utf-8")
     total_new = 0
     with ThreadPoolExecutor(max_workers=workers) as pool:
