@@ -2934,6 +2934,9 @@ def build_yml(
         if _eov.get("publisher"):
             o["publisher"] = _eov["publisher"]
             o["publishers"] = _eov.get("publishers") or [_eov["publisher"]]
+        if _eov.get("demographic"):
+            # ★分野(demographic)override(2026-08-10 赤と黒型: 種3のAI fillがBL/大人向け文学まんがを児童と誤付与)
+            o["demographic"] = _eov["demographic"]
         if _eov.get("authors"):
             o["authors"] = [enrich_author(a) for a in _eov["authors"]]
         if _eov.get("original_authors") is not None:
@@ -3467,6 +3470,10 @@ def main():
                     new_yml["popularity"] = en["popularity"]
                 if en.get("score"):
                     new_yml["score"] = en["score"]
+                # ★アニメ化フラグunion(2026-08-11): 種3は初回fill以降更新されない凍結値のため、
+                #   dump relations 由来(ADAPTATION×ANIME)を OR で重ねる。false化はしない(報告のみ)。
+                if en.get("anime") and not new_yml.get("anime_adapted"):
+                    new_yml["anime_adapted"] = True
                 enrich_pages += 1
                 # ★種a和訳 synopsis を anilist_id 経由で join(無ければ空のまま)
                 ja = synopsis_ja.get(str(en["anilist_id"]))

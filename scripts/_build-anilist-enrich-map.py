@@ -148,6 +148,13 @@ def main():
             ent = {"anilist_id": i, "synonyms": syns,
                    "genres_anilist": genres, "tags": tags,
                    "genres_trusted": sorted(gt)}
+            # ★アニメ化フラグ(2026-08-11): relations の ADAPTATION×ANIME ノードで判定。
+            #   種3の anime_adapted は初回AI fill以降更新されないため、dump由来を promote で union する。
+            for edge in ((e.get("relations") or {}).get("edges") or []):
+                nd = edge.get("node") or {}
+                if edge.get("relationType") == "ADAPTATION" and nd.get("type") == "ANIME":
+                    ent["anime"] = True
+                    break
             # ★人気/評価(discovery用、 コミュニティ不要)。 popularity=リスト登録ユーザ数 / averageScore=0-100
             if e.get("popularity"):
                 ent["popularity"] = int(e["popularity"])

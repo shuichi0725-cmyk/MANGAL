@@ -67,7 +67,7 @@ python scripts/_kobo-color-harvest.py --delta   # ⑪カラー版差分(Kobo新�
 - ③を無限ループ化しない(上記=NDL未収載の再照会浪費)
 
 ## セット構成 (= 将来増やせる)
-現在: ①試し読みexpand消化 ③NDLヨミ照合(1パス) ④完結判定 ⑤素材ハーベスト ⑥AniList鮮度維持 ⑦巻説明recheck ⑧数字kana素材 ⑨続巻逆照合 ⑩仮書影差し替え ⑪カラー版差分
+現在: ①試し読みexpand消化 ③NDLヨミ照合(1パス) ④完結判定 ⑤素材ハーベスト ⑥AniList鮮度維持+アニメ化フラグ差分(後段) ⑦巻説明recheck ⑧数字kana素材 ⑨続巻逆照合 ⑩仮書影差し替え ⑪カラー版差分
 (⑫JPROハーベスト=**同日退役** 2026-08-05 ユーザ裁定: 一括収穫→一括判定では偽穴・版取り違えを裁き切れず、
   成果は毎回Opusのper-case検死で出た。以後JPROは**Opusの検死道具**=skill jpro-harvest の per-case流を参照。
   収穫済み198slug分の素材=data/seeds/jpro-harvest.jsonl は温存・再収穫はしない)
@@ -109,6 +109,12 @@ python scripts/_kobo-color-harvest.py --delta   # ⑪カラー版差分(Kobo新�
 ⑥**AniList鮮度維持**(=`_anilist-delta.py` 2026-07-18新設。updatedAt降順でカーソルまで回収=ローリング再同期。
   ★収集のみ=deltaは.cacheに貯まるだけ。dumpへの`--merge`と enrichマップ再生成は蒸留時のOpus作業=アイドルでやらない。
   ③同様の自然停止型・セッション1回でよい[cap5,000/回])
+  ★⑥後段=**アニメ化フラグ差分**(=`_anime-flag-delta.py` 2026-08-11新設。ユーザ指摘「anime_adaptedが初回から更新されていない」の恒久対策):
+  ⑥完走後に `python scripts/_anime-flag-delta.py` → dump+deltaのrelations(ADAPTATION×ANIME)を再計算し
+  enrichマップへ anime:true をパッチ+未フラグ頁を `.cache/anime-flag-worklist.txt` に列挙。
+  worklistが出たら `_reflect-targeted.py --only <カンマ結合> --push -m "アニメ化フラグ差分適用N頁"` で適用
+  (多い時は~400頁/バッチに分割=コマンド行長対策)。判定は機械的(検証済みリンク×明示ADAPTATION関係)=Sonnet適用可。
+  ★false化はしない(頁true・dump無の逆方向は報告のみ=実写誤フラグ/AniList関係欠落の混在層)。初回2026-08-11: 821頁適用。
 ④**完結判定backlogスイープ**(=skill completion-judge。`--backlog --limit 300`→worksheet記入(明示文言のみtrue)→`--collect`→commit。
   ②③と違い記入判断があるが「captionに完結の引用があるか」だけ=Sonnet安全。適用(--apply)は絶対にやらない=Opus+専権)。
 ⑤**素材ハーベスト**(=skill material-harvest 2026-07-17新設。本番に書かず素材収集のみ):
