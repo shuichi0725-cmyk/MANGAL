@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { Metadata } from "next";
+import { DesignNav } from "@/lib/homeDesign";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/about" },
@@ -10,6 +11,8 @@ export const metadata: Metadata = {
 
 export default function AboutPage() {
   return (
+    <>
+    <DesignNav />
     <div className="mx-auto max-w-4xl px-4 py-8">
       <Link href="/" className="text-sm text-ink/60 hover:text-ink">
         ← トップへ戻る
@@ -153,5 +156,6 @@ export default function AboutPage() {
         </ul>
       </section>
     </div>
+    </>
   );
 }

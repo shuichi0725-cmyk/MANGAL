@@ -148,6 +148,28 @@ export function CoverTile({ m, sizes }: { m: Manga; sizes?: string }) {
   );
 }
 
+// ★D3トライアル(2026-08-11): previewビルドのみ絵文字→モノクロSVG線画(ユーザ裁定)。本番=絵文字のまま。
+const NAV_D3 = (process.env.MANGAL_DATA_DIR ?? "").includes("preview");
+
+function NavSvg({ d, circle }: { d: string; circle?: [number, number, number] }) {
+  return (
+    <svg viewBox="0 0 24 24" className="h-[18px] w-[18px]" style={{ stroke: "var(--color-accent)", fill: "none", strokeWidth: 1.9 }}>
+      {circle && <circle cx={circle[0]} cy={circle[1]} r={circle[2]} />}
+      <path d={d} />
+    </svg>
+  );
+}
+
+// SVG線画アイコン(ラベル→パス)。D3Nav(home)と同じ絵柄=サイト内で統一
+const NAV_SVG: Record<string, { d: string; circle?: [number, number, number] }> = {
+  "ホーム": { d: "M3 11L12 3l9 8M6 10v11h12V10" },
+  "一覧": { d: "M4 6h16M4 12h16M4 18h10" },
+  "検索": { d: "M15 15l6 6", circle: [10.5, 10.5, 6] },
+  "AI書評": { d: "M4 20l2-6L16 4l4 4L10 18l-6 2zM14 6l4 4" },
+  "過去ログ": { d: "M12 7v5l3.5 2", circle: [12, 12, 8.5] },
+  "使い方": { d: "M12 5c-2-1.6-5-1.6-8-.6V19c3-1 6-1 8 .6 2-1.6 5-1.6 8-.6V4.4c-3-1-6-1-8 .6zM12 5v14" },
+};
+
 export function DesignNav({ current: _current }: { current?: number }) {
   // ★2026-06-14: アイコン式の単一ナビ。 🏠ホームは左固定、 残りは右寄せクラスタ(≡メニュー含む)。
   //   全ページ共通。 旧テキスト行 + 旧 ScrollShortcutsMock を統合・廃止。
@@ -160,18 +182,24 @@ export function DesignNav({ current: _current }: { current?: number }) {
     ["🕘", "過去ログ", "/sansedai-archive"],
     ["🔰", "使い方", "/about"],
   ] as const;
+  const Icon = ({ emoji, label }: { emoji: string; label: string }) =>
+    NAV_D3 && NAV_SVG[label] ? (
+      <NavSvg d={NAV_SVG[label].d} circle={NAV_SVG[label].circle} />
+    ) : (
+      <span className="text-[18px] leading-none">{emoji}</span>
+    );
   return (
     <div className="flex items-center border-b border-[var(--color-line)] bg-[var(--color-surface)] px-3 py-1.5">
       {/* 左固定 = ホーム */}
       <Link href="/" aria-label="ホーム" className={cell}>
-        <span className="text-[18px] leading-none">🏠</span>
+        <Icon emoji="🏠" label="ホーム" />
         <span className="text-[9px] text-ink/55">ホーム</span>
       </Link>
       {/* 右寄せクラスタ */}
       <div className="ml-auto flex items-center gap-3.5">
         {right.map(([icon, label, href]) => (
           <Link key={label} href={href} aria-label={label} className={cell}>
-            <span className="text-[18px] leading-none">{icon}</span>
+            <Icon emoji={icon} label={label} />
             <span className="text-[9px] text-ink/55">{label}</span>
           </Link>
         ))}

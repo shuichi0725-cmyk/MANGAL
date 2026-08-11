@@ -1,4 +1,5 @@
 import ColorListClient from "./ColorListClient";
+import { DesignNav } from "@/lib/homeDesign";
 
 /** 電子カラー版で読める漫画の一覧(2026-07-30 柱化)。
  *  データ=public/data/color-editions.json(_color-editions-build.py 生成)。
@@ -12,6 +13,7 @@ export const metadata = {
 export default function ColorMangaPage() {
   return (
     <div className="min-h-screen bg-[var(--color-bg)]">
+      <DesignNav />
       <div className="px-4 pb-2 pt-6">
         <h1 className="text-[19px] font-extrabold">🎨 カラー版で読める漫画</h1>
         <p className="mt-1 text-[12px] leading-relaxed text-ink/60">
