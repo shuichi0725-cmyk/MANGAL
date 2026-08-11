@@ -230,3 +230,29 @@ input[type="search"]::-webkit-search-decoration {
   -webkit-appearance: none;
   appearance: none;
 }
+
+/* ★D3テーマ(2026-08-11 トップ見た目改装トライアル=/home-design-12 専用スコープ)。
+   黒地×アシッドライム×角丸ゼロ×ハードシャドウ。トークン差し替えなので既存コンポーネントは無改造。 */
+.theme-d3 {
+  --color-ink: #f2f2ec;
+  --color-paper: #0d0d0d;
+  --color-bg: #0d0d0d;
+  --color-accent: #d9f843;
+  --color-accent-warm: #d9f843;
+  --color-surface: #171717;
+  --color-surface-2: #21211a;
+  --color-line: rgba(242, 242, 236, 0.22);
+  --radius-card: 0;
+  --radius-tag: 0;
+  --radius-chip: 0;
+  --shadow-soft: 3px 3px 0 rgba(217, 248, 67, 0.14);
+  --shadow-lift: 6px 6px 0 rgba(217, 248, 67, 0.3);
+  --shadow-press: inset 0 1px 2px rgba(0, 0, 0, 0.5);
+  background: var(--color-paper);
+  color: var(--color-ink);
+}
+/* Tailwindの固定角丸をブルータル化(テーマ内のみ) */
+.theme-d3 :is(.rounded-xl, .rounded-2xl, .rounded-lg, .rounded-md, .rounded-card) { border-radius: 0 !important; }
+/* D3マーキー帯 */
+@keyframes d3-marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+.d3-marquee { display: inline-block; white-space: nowrap; animation: d3-marquee 28s linear infinite; }
