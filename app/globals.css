@@ -256,8 +256,16 @@ input[type="search"]::-webkit-search-decoration {
 /* bg-ink はライトテーマ前提の「黒地カード」= テーマでinkが明色化すると白地白字になる(ことばカード型)。
    テーマ内では黒地+ライムの細枠に固定して意味を保つ。bg-ink/80 等の派生も含めて捕まえる。 */
 .theme-d3 [class*="bg-ink"] { background-color: #050505 !important; box-shadow: inset 0 0 0 1px rgba(217, 248, 67, 0.4); }
-/* 一覧表の題名リンク(ライトでは紺#1f4e79固定) = テーマではライムに */
-.theme-d3 { --list-link: #d9f843; }
+/* 一覧表の題名リンク(ライトでは紺#1f4e79固定) = テーマでは著者列と同じ白系(2026-08-11 ユーザ裁定) */
+.theme-d3 { --list-link: var(--color-ink); }
+/* ★検索入力欄=検索ボタンと同スタイル(2026-08-11 ユーザ裁定: 黒地+ライム太枠) */
+.theme-d3 input[type="search"],
+.theme-d3 input[placeholder*="検索"] {
+  background-color: #050505 !important;
+  border: 2px solid var(--color-accent) !important;
+  color: var(--color-ink);
+}
+.theme-d3 :is(input[type="search"], input[placeholder*="検索"])::placeholder { color: rgba(217, 248, 67, 0.5); }
 /* ★検索ボタン等のaccent塗りは反転(2026-08-11 ユーザ裁定: ライム塗り+暗字が読みづらい →
    塗り=黒 / 文字=ライム / 枠=太ライム)。button/aのみ=バッジ(span)は塗りのまま。 */
 .theme-d3 :is(button, a)[class*="bg-[var(--color-accent)"] {
