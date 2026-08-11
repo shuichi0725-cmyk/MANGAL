@@ -3183,6 +3183,15 @@ def main():
     _synslug_path = ROOT / "data" / "seeds" / "synopsis-slug-ja.json"
     synslug_map = json.loads(_synslug_path.read_text(encoding="utf-8")) if _synslug_path.exists() else {}
     synslug_pages = 0
+    # ★アニメ化フラグ否定override(2026-08-11): 種3のAI fillが実写化等を誤ってtrueにした頁の打ち消し。
+    #   slugキー(=SRC stem)。適用は enrich union の直前=AniListに関係が登録されればtrueへ自動復帰(自己修復)。
+    _animeov_path = ROOT / "data" / "seeds" / "anime-adapted-overrides.yml"
+    try:
+        _animeov = yaml.safe_load(_animeov_path.read_text(encoding="utf-8")) or {}
+    except FileNotFoundError:
+        _animeov = {}
+    anime_override_false = set(_animeov.get("false_slugs") or [])
+    anime_override_pages = 0
     print(f"  catch コピー map: {len(catch_map):,} slug", file=sys.stderr)
 
     # 作品(work)Wikidata QID map = {anilist_id(str): {"qid","label"}}。
@@ -3448,6 +3457,11 @@ def main():
         if adult_us_keys and (page_keyset & adult_us_keys):
             new_yml["adult_us"] = True
             adult_us_pages += 1
+        # ★アニメ化フラグ否定override: 種3由来の誤true(実写化型)を打ち消す。この直後の
+        #   enrich union がより新しい証拠(dump relations)でtrueを再主張できる=override は enrich に負ける設計。
+        if slug in anime_override_false and new_yml.get("anime_adapted"):
+            new_yml.pop("anime_adapted", None)
+            anime_override_pages += 1
         # ★AniList enrich(productionization): main series_key 優先で anilist_id/synonyms/
         #   genres_anilist/tags を本番に付与(箱を埋める)。 種3不変・match-v14 由来。
         en = None

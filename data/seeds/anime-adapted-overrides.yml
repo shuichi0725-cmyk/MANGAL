@@ -1,0 +1,638 @@
+# アニメ化フラグ否定override(2026-08-11 逆方向1,700頁の裁定)。
+# 種3のAI fill(2026-05)が実写ドラマ/映画化や幻覚で anime_adapted:true にした頁の打ち消し。
+# ★promoteでの適用は enrich union の前=AniListにアニメ関係(ADAPTATION×ANIME)が登録されれば
+#   自動でtrue復帰する(自己修復)。ここに載せる基準=以下の全ゲートでアニメの痕跡なし:
+#   ①リンク先AniList entryに直接のANIME関係なし ②franchise一hop先にもなし ③今期アニメseedになし
+#   ④全ANIMEノード題と題不一致 ⑤wiki素材にアニメ記述なし(素材有る場合) ⑥高人気の不確実例はWeb裏取り済
+#   (十字架のろくにん/すべての人類を破壊する。=アニメ無し確認 2026-08-11)
+# 生成元 = scripts/_anime-flag-delta.py の逆方向リスト + triage(.cache/anime-rev-*.tsv)
+false_slugs:
+  - 10nenburi-ni-saikai-shita-kusogaki-wa-seijun-bishoujo-jk-ni-seichou-shiteita  # nowiki: 10年ぶりに再会したクソガキは清純美少女JKに成長していた
+  - 1549-jieitai-1549  # nowiki: 戦国自衛隊1549
+  - 2-jou-no-valkyria-2  # nowiki: 戦場のヴァルキュリア2
+  - 25ji-akasaka-de  # wiki_live: 25時、赤坂で
+  - 3-3ji-no-muhou-chitai  # nowiki: 午前3時の無法地帯
+  - 30sai-no-hoken-taiiku  # nowiki: 30歳の保健体育
+  - 33-sai-dokushin-onnakishi-taichou  # wiki_none: 33歳独身女騎士隊長。
+  - 5-ji-kara-9-ji-made  # nowiki: 5時から9時まで
+  - acma-game  # nowiki: ACMA:GAME
+  - adoribu-shine-club  # nowiki: あどりぶシネ倶楽部
+  - again-kubo-2011  # nowiki: アゲイン!!
+  - aisawa-riku  # nowiki: 逢沢りく
+  - aji-ichimonme  # nowiki: 味いちもんめ
+  - akabane-honeko-no-bodyguard  # wiki_live: 赤羽骨子のボディガード
+  - akanbo-shoujo  # nowiki: 赤んぼ少女
+  - akb0048-episode0  # nowiki: AKB0048 EPISODE0
+  - akuma-no-ororon  # nowiki: 悪魔のオロロン
+  - akuma-no-youna-aitsu  # nowiki: 悪魔のようなあいつ
+  - akuryoutou  # nowiki: 悪霊島
+  - amaizo-dango  # nowiki: あまいぞ!男吾
+  - amnesia-2003  # nowiki: アムネジア
+  - anagle-mole  # wiki_none: アナグルモール
+  - ane-dokitsu  # wiki_none: あねどきっ
+  - ankoku-joshi  # nowiki: 暗黒女子
+  - ano-ko-ni-kiss-to-shirayuri-o  # wiki_none: あの娘にキスと白百合を
+  - aoi-chan-panic  # nowiki: あおいちゃんパニック!
+  - aoi-honoo  # nowiki: アオイホノオ
+  - aoki-shinwa-mars  # nowiki: 蒼き神話マルス
+  - aozameta-uma  # nowiki: 蒼ざめた馬
+  - ashi-girl  # wiki_live: アシガール
+  - asobinin-wa-kenja-ni-tenshoku-dekiru-tte-shittemashita  # nowiki: 遊び人は賢者に転職できるって知ってました?
+  - astekaizer  # nowiki: アステカイザー
+  - asurazu-raasu-kai  # nowiki: アスラズラース～廻KAI～
+  - ato-happy-mania  # nowiki: 後ハッピーマニア
+  - azumi  # wiki_none: あずみ
+  - baatoretto-eiyuu-tan  # nowiki: バートレット英雄譚
+  - bambino  # wiki_live: バンビ～ノ！
+  - banchou-wakusei  # nowiki: 番長惑星
+  - barcode-fighter  # nowiki: バーコードファイター
+  - batman-and-justice-league  # wiki_live: バットマンアンドジャスティスリーグ
+  - bato-supi  # nowiki: バトスピ!
+  - battle-spirits-shounen-gekiha-dan  # nowiki: バトルスピリッツ 少年激覇ダン
+  - biohazard-heavenly-island  # nowiki: バイオハザード ヘヴンリーアイランド
+  - biohazard-marhawa-desire  # nowiki: バイオハザード～マルハワデザイア～
+  - black-jack-ni-yoroshiku  # nowiki: ブラックジャックによろしく
+  - blassreiter-genetic  # nowiki: ブラスレイター・ジェネティック
+  - bloody-monday-last-season  # nowiki: ブラッディ・マンデイ ラストシーズン
+  - blue-dragon-st  # nowiki: BLUE DRAGON ST
+  - blue-giant-momentum  # nowiki: BLUE GIANT MOMENTUM
+  - boku-no-hatsukoi-o-kimi-ni-sasagu  # wiki_live: 僕の初恋をキミに捧ぐ
+  - bokunchi  # nowiki: ぼくんち
+  - bokusatsu-tenshi-dokuro-chan  # nowiki: 撲殺天使ドクロちゃん
+  - bokutachi-ga-yarimashita  # nowiki: 僕たちがやりました
+  - bonkura-onmyouji-no-oniyome  # nowiki: ぼんくら陰陽師の鬼嫁
+  - bouken-ni-tsuitekonaide-okaa-san  # nowiki: 冒険に、ついてこないでお母さん!
+  - boukensha-no-fuku-tsukurimasu  # nowiki: 冒険者の服、作ります!
+  - boukensha-o-kubi-ni-natta-node-renkinjutsushi-to-shite-denaoshimasu  # nowiki: 冒険者をクビになったので、錬金術師として出直します!
+  - brothers-conflict-feat-natsume  # nowiki: BROTHERS CONFLICT feat.Natsume
+  - brothers-conflict-purupuru  # nowiki: ぶらざーずこんふりくとぷるぷる
+  - bungaku-shoujo-to-oishii-hanashi  # nowiki: 文学少女と美味しい噺
+  - bungaku-shoujo-to-shinitagari-no-douke  # nowiki: “文学少女”と死にたがりの道化
+  - bungaku-shoujo-to-ue-kawaku-yuurei  # nowiki: “文学少女”と飢え渇く幽霊
+  - bureiburuu-kimerikaru-complex  # nowiki: ブレイブルーキメリカルコンプレックス
+  - card-warrior-kamen-riders  # nowiki: 駈斗戦士 仮面ライダーズ
+  - charlotte-totsuki-2024  # nowiki: シャーロット
+  - chicchai-senpai-ga-kawaisugiru  # nowiki: ちっちゃい先輩が可愛すぎる。
+  - chikai-no-makyuu  # nowiki: ちかいの魔球
+  - chikansaresou-ni-natteiru-skyuu-bi-shoujo-o-tasuketara-tonari-no-seki-no-osananajimi-datta  # nowiki: 痴漢されそうになっているS級美少女を助けたら隣の席の幼馴染だった
+  - chikyuu-bouei-shoujo-iko-chan  # nowiki: 地球防衛少女イコちゃん
+  - chou-yo-hana-yo-shimabukuro-2019  # nowiki: 腸よ鼻よ
+  - choujin-sentai-jiettoman  # nowiki: 鳥人戦隊ジェットマン
+  - chouseimeitai-toransufoomaa-beast-wars-metarusu  # nowiki: 超生命体トランスフォーマービーストウォーズメタルス
+  - chouseishin-gransazer  # nowiki: 超星神グランセイザー
+  - chuushingura-sentaro-2014  # nowiki: 忠臣蔵
+  - citrus-ayuko-2011  # wiki_none: シトラス
+  - complex-age  # wiki_none: コンプレックス・エイジ
+  - cross-fight-biidaman-fenikkusu-densetsu  # nowiki: クロスファイトビーダマン フェニックス伝説
+  - culdcept  # wiki_none: Culdcept
+  - cyborg-009-vs-devilman  # nowiki: サイボーグ009VSデビルマン
+  - daichi-no-kaoyaku-bagi  # nowiki: 大地の顔役バギ
+  - daimajin-canon  # nowiki: 大魔神カノン
+  - daisuki  # nowiki: だいすき!!
+  - dansui  # nowiki: 男水!
+  - date-a-live-tooka-dead-end  # nowiki: デート・ア・ライブ 十香デッドエンド
+  - dear-boys-over-time  # nowiki: DEAR BOYS OVER TIME
+  - deatte-hitotsuki-de-zecchou-jorei-attomaaku-comic  # nowiki: 出会ってひと突きで絶頂除霊!@comic
+  - deep-love  # nowiki: Deep love
+  - deep-love-again  # nowiki: Deep Love Again
+  - deep-love-ayu-no-monogatari  # nowiki: Deep love アユの物語
+  - denjin-arrow  # nowiki: 電人アロー
+  - denjin-zaborger  # nowiki: 電人ザボーガー
+  - densetsu-no-yuusha-no-densetsu-revision  # nowiki: 伝説の勇者の伝説 Revision
+  - devil-survivor  # nowiki: デビルサバイバー
+  - diorama-boy-panorama-girl  # nowiki: ジオラマボーイ・パノラマガール
+  - disney-tou-no-ue-no-rapuntsueru  # nowiki: Disney塔の上のラプンツェル
+  - diver-sotai-sennyuuhan  # nowiki: DIVER-組対潜入班-
+  - doctor-white  # nowiki: ドクター・ホワイト
+  - dogesen-r  # nowiki: どげせんR
+  - dokutaa-kotoo-shinryoujo-tokubetsuhen  # nowiki: Dr. コトー診療所 特別編
+  - dooberumandeka  # nowiki: ドーベルマン刑事
+  - doragonzakura  # nowiki: ドラゴン桜
+  - dorei-tensei  # nowiki: 奴隷転生
+  - dosei-mansion  # nowiki: 土星マンション
+  - dr-kotoo-shinryoujo  # nowiki: Dr.コトー診療所
+  - dracula-yakin  # nowiki: ドラキュラやきん!
+  - drop  # nowiki: ドロップ
+  - durarara-3way-standoff-alley  # nowiki: デュラララ!! 3way standoff-alley-
+  - durarara-relay  # nowiki: デュラララ!! Relay
+  - eebiishii-satsujin-jiken  # nowiki: ABC殺人事件
+  - fake-mooshon-takkyuu-no-oushou  # nowiki: FAKE MOTION-卓球の王将-
+  - family-compo  # wiki_none: ファミリー・コンポ
+  - final-fantasy-1989  # nowiki: ファイナルファンタジー
+  - flyable-heart  # nowiki: Flyable Heart
+  - free-gan-2012  # nowiki: Free!
+  - fruits-takuhaibin  # nowiki: フルーツ宅配便
+  - fujimi-lovers  # nowiki: 不死身ラヴァーズ
+  - fujoshi-kanojo  # nowiki: 腐女子彼女。
+  - fukushuu-o-chikatta-shironeko-wa-ryuuou-no-hiza-no-ue-de-damin-o-musaboru  # nowiki: 復讐を誓った白猫は竜王の膝の上で惰眠をむさぼる
+  - fukushuu-o-koinegau-saikyou-yuusha-wa-yami-no-chikara-de-senmetsu-musou-suru  # nowiki: 復讐を希う最強勇者は、闇の力で殲滅無双する
+  - full-metal-panic-comic-mission  # nowiki: フルメタル・パニック!COMIC MISSION
+  - furajairu  # wiki_live: フラジャイル
+  - furefure-shoujo  # nowiki: フレフレ少女
+  - furumetaru-panic-0  # nowiki: フルメタル・パニック!0
+  - fushigi-tsuushin-toilet-no-hanako-san  # nowiki: ふしぎ通信 トイレの花子さん
+  - fushigina-shounen-tezuka-1978  # nowiki: ふしぎな少年
+  - fushigineko-no-kyuu-chan  # nowiki: ふしぎねこのきゅーちゃん
+  - fushisha-no-deshi  # nowiki: 不死者の弟子
+  - futari-beya  # wiki_none: ふたりべや
+  - future-is-wild  # nowiki: フューチャー・イズ・ワイルド
+  - gakkou-no-kaidan  # nowiki: 学校の怪談
+  - gakkou-no-kaidan-inoe-1995  # nowiki: 学校の怪談
+  - gakkou-no-kaidan-paja-1997  # nowiki: 学校の怪談
+  - gakuen-sousei-nekoten  # nowiki: 学園創世猫天!
+  - gal-gohan  # nowiki: ギャルごはん
+  - gal-no-haigo-ni-rei-ga-iru  # nowiki: ギャルの背後に霊がいる
+  - ganbare-robokon  # nowiki: がんばれロボコン
+  - gannibal  # wiki_live: ガンニバル
+  - garou-densetsu-kumocho-1996  # nowiki: 餓狼伝説
+  - gegege-no-kitarou-shin-youkai-senmonogatari  # nowiki: ゲゲゲの鬼太郎新妖怪千物語
+  - gekitou-exe-kyoudai-rokkumeen  # nowiki: 激闘!エグゼ兄弟ロックメーン!
+  - gekka-no-kishi  # wiki_live: 月下の棋士
+  - gekki  # nowiki: 月姫
+  - genji-monogatari-ai-to-tsumi-to  # nowiki: 源氏物語～愛と罪と～
+  - genjitsu-de-lovecome-dekinai-to-dare-ga-kimeta  # nowiki: 現実でラブコメできないとだれが決めた?
+  - go-kondo-2002  # nowiki: GO
+  - god-eater-2  # nowiki: GOD EATER 2
+  - god-eater-the-2nd-break  # nowiki: God eater-the 2nd break
+  - gokudou-heiki  # nowiki: 極道兵器
+  - gokudoumeshi  # wiki_live: 極道めし
+  - golden-boy  # nowiki: ゴールデンボーイ
+  - gooda-tetsugakudou-kuuki-doll  # nowiki: ゴーダ哲学堂空気人形
+  - gregory-horror-show-another-world  # nowiki: グレゴリーホラーショーアナザーワールド
+  - gundam-build-fighters-a  # nowiki: ガンダムビルドファイターズA
+  - gundam-build-fighters-a-r  # nowiki: ガンダムビルドファイターズAR
+  - gunparade-march  # nowiki: ガンパレード・マーチ
+  - gurizaia-phantom-trigger  # nowiki: グリザイア:ファントムトリガー
+  - gyuwanburaa-jiko-chuushinha  # nowiki: ぎゅわんぶらあ自己中心派
+  - hachinan-tte-sore-wa-nai-deshou-2020  # nowiki: 八男って、それはないでしょう!～はじまりの物語～
+  - hachiwan-diver  # nowiki: ハチワンダイバー
+  - hack-xxxx  # wiki_none: .hack//XXXX
+  - hajimete-no-aku  # nowiki: はじめてのあく
+  - hakatakko-junjou  # nowiki: 博多っ子純情
+  - hakugei  # nowiki: 白鯨
+  - hammer-session-in-high-school  # nowiki: ハンマーセッション! In High School
+  - hamon  # nowiki: 破門
+  - hamster-no-kenkyuu-report  # nowiki: ハムスターの研究レポート
+  - hana-no-zuborameshi  # nowiki: 花のズボラ飯
+  - hanakisou  # nowiki: 花帰葬
+  - hannintachi-no-file-kindaichi-shounen-no-file-gaiden  # nowiki: 犯人たちの事件簿
+  - haru-no-yuki  # nowiki: 春の雪
+  - haru-o-daiteita-afterward  # nowiki: 春を抱いていたafterward
+  - haru-to-ao-no-obentoubako  # wiki_live: ハルとアオのお弁当箱
+  - hatarakanai-futari  # nowiki: 働かないふたり
+  - hatsujouji-made-ato-1-jikan  # nowiki: 初情事まであと1時間
+  - hatsune-mikkusu  # nowiki: 初音みっくす
+  - heart-kiyatsuchi-izumichiyan  # nowiki: ハート❤キャッチいずみちゃん
+  - heavy-object-a  # nowiki: ヘヴィーオブジェクトA
+  - helter-skelter  # nowiki: ヘルター・スケルター
+  - henkyou-no-roukishi-bard-loen  # nowiki: 辺境の老騎士バルド・ローエン
+  - hero-mask  # nowiki: ヒーローマスク
+  - hibana  # nowiki: 火花
+  - higurashi-no-naku-koro-ni-kizuna  # nowiki: ひぐらしのなく頃に絆
+  - higurashi-no-naku-koro-ni-rei  # nowiki: ひぐらしのなく頃に令 鬼熾し編
+  - himitsu-sentai-gorenger  # nowiki: 秘密戦隊ゴレンジャー
+  - himitsu-sentai-gorenjaa-1975  # nowiki: 秘密戦隊ゴレンジャー1975
+  - hitsuji-to-hagane-no-mori  # nowiki: 羊と鋼の森
+  - hiyama-kentarou-no-ninshin  # wiki_live: ヒヤマケンタロウの妊娠
+  - hiyama-kentarou-no-ninshin-ikujihen  # nowiki: ヒヤマケンタロウの妊娠育児編
+  - hokusai-to-meshi  # nowiki: ホクサイと飯
+  - hokushin-denki  # nowiki: 北神伝綺
+  - holyland  # wiki_live: ホーリーランド
+  - homeroom  # nowiki: ホームルーム
+  - hotman  # wiki_live: ホットマン
+  - houchounin-ajihei  # wiki_live: 包丁人味平
+  - houkago-karte  # wiki_live: 放課後カルテ
+  - hyakkakyuu-no-osouji-gakari  # nowiki: 百花宮のお掃除係
+  - i-am-a-hero  # wiki_live: アイアムアヒーロー
+  - ichiokunen-bo-tan-o-renda-shita-ore-wa-kizuitara-saikyou-ni-natte-ita  # nowiki: 一億年ボタンを連打した俺は、気付いたら最強になっていた
+  - ikinari-full-metal-panic  # nowiki: いきなり!フルメタル・パニック!
+  - ikinokori-renkinjutsushi-wa-machi-de-shizuka-ni-kurashitai  # nowiki: 生き残り錬金術師は街で静かに暮らしたい
+  - ikusei-skill-wa-mou-iranai-to-yuusha-party-o-kaikosareta-node-taishokukin-gawari-ni-moratta-ryouchi  # nowiki: 育成スキルはもういらないと勇者パーティを解雇されたので、退職金がわりにもらった【領地】を強くしてみる
+  - inaka-no-home-center-otoko-no-jiyuu-na-isekai-seikatsu  # nowiki: 田舎のホームセンター男の自由な異世界生活
+  - inazuma-eleven-tanjou-monogatari  # nowiki: イナズマイレブン誕生物語
+  - inguresu-teki-nichijou  # nowiki: イングレス的日常
+  - inkya-no-boku-ni-batsugeemu-de-kokuhaku-shitekita-hazu-no-gal-ga-doumitemo-boku-ni-betabore-desu  # nowiki: 陰キャの僕に罰ゲームで告白してきたはずのギャルが、どう見ても僕にベタ惚れです
+  - inubaka  # nowiki: いぬばか
+  - inugami  # nowiki: 犬神
+  - irregular-hunter-rockman-x  # nowiki: イレギュラーハンター ロックマンX
+  - isekai-de-tochi-o-katte-noujou-o-tsukurou  # nowiki: 異世界で土地を買って農場を作ろう
+  - isekai-izakaya-nobu-shinobu-to-taishou-no-koto-gohan  # nowiki: 異世界居酒屋「のぶ」しのぶと大将の古都ごはん
+  - isekai-nonbiri-nouka-no-nichijou  # nowiki: 異世界のんびり農家の日常
+  - isshou-hatarakitakunai-ore-ga-classmate-no-dai-ninki-idol-ni-natsukaretara  # nowiki: 一生働きたくない俺が、クラスメイトの大人気アイドルに懐かれたら
+  - itsuka-tenma-no-kurousagi-koukouhen-kurenai-gekkou-no-seitokaishitsu  # nowiki: いつか天魔の黒ウサギ高校編 紅月光の生徒会室
+  - itsuka-tiffany-de-choushoku-o  # nowiki: いつかティファニーで朝食を
+  - itsumo-baka-ni-shitekuru-bishoujo-tachi-to-zetsuen-shitara-jitsuwa-ore-no-koto-ga-daisuki-datta-you  # nowiki: いつも馬鹿にしてくる美少女たちと絶縁したら、実は俺のことが大好きだったようだ。
+  - ixion-saga  # nowiki: イクシオンサーガ
+  - izu-no-odoriko  # nowiki: 伊豆の踊子
+  - jigoku-no-girl-friend  # nowiki: 地獄のガールフレンド
+  - jigoku-sensei-nube-s  # nowiki: 地獄先生ぬ～べ～S
+  - jin-2011  # nowiki: JIN-仁-
+  - jisatsu-circle  # nowiki: 自殺サークル
+  - jitsuwa-imouto-deshita  # nowiki: じつは義妹(いもうと)でした。
+  - joshikousei-ni-korosaretai  # wiki_live: 女子高生に殺されたい
+  - juon-juon  # nowiki: 呪怨/juon
+  - juugo-shounen-hyouryuuki  # nowiki: 十五少年漂流記
+  - juuhan-shuttai  # nowiki: 重版出来!
+  - juujika-no-rokunin  # nowiki: 十字架のろくにん
+  - kagen-no-tsuki  # wiki_live: 下弦の月
+  - kagetora  # wiki_none: KAGETORA
+  - kaiketsu-harimao  # nowiki: 快傑ハリマオ
+  - kaiketsu-raionmaru  # nowiki: 快傑ライオン丸
+  - kakusansei-million-arthur-gunjou-no-soosarii-road  # nowiki: 拡散性ミリオンアーサー 群青の守護者
+  - kakutou-komusume-juline  # nowiki: 格闘小娘JULINE
+  - kamakura-monogatari  # nowiki: 鎌倉ものがたり
+  - kamen-rider-2011  # nowiki: 仮面ライダー
+  - kamen-rider-amazons-gaiden-hotarubi  # nowiki: 仮面ライダーアマゾンズ外伝蛍火
+  - kamen-rider-kaiza  # nowiki: 仮面ライダー913(カイザ)
+  - kamen-rider-kuuga  # wiki_live: 仮面ライダークウガ
+  - kamen-rider-zx  # nowiki: 仮面ライダーZX
+  - kamenraidaa-rider-sd-bakusou-show-gakkou  # nowiki: 仮面ライダーSD爆走笑学校
+  - kanojo-ni-uwaki-sarete-ita-ore-ga-koakuma-na-kouhai-ni-natsukarete-imasu  # nowiki: カノジョに浮気されていた俺が、小悪魔な後輩に懐かれています
+  - kantai-collection-kancolle-4-koma-comic-fubuki-ganbarimasu  # nowiki: 艦隊これくしょん-艦これ-4コマコミック 吹雪、がんばります!
+  - kantai-collection-kancolle-itsuka-shizuka-na-umi-de  # nowiki: 艦隊これくしょん-艦これ- いつか静かな海で
+  - kantai-collection-kancolle-shimakaze-tsumujikaze-no-shoujo  # nowiki: 艦隊これくしょん-艦これ- 島風つむじ風の少女
+  - kao-dake-ja-suki-ni-narimasen  # nowiki: 顔だけじゃ好きになりません
+  - kaze-densetsu-bukkomi-no-taku  # nowiki: 疾風伝説特攻の拓
+  - kaze-no-matasaburou  # nowiki: 風の又三郎
+  - kazoku-hakkei  # nowiki: 家族八景
+  - kenja-no-deshi-o-nanoru-kenja-gaiden  # nowiki: 賢者の弟子を名乗る賢者外伝
+  - kenja-no-mago-short-stories  # nowiki: 賢者の孫SS(ショートストーリーズ)
+  - kenja-no-mago-special  # nowiki: 賢者の孫SP(スペシャル)
+  - kenkaku-shoubai  # nowiki: 剣客商売
+  - kenkou-de-bunkateki-na-saitei-gendo-no-seikatsu  # nowiki: 健康で文化的な最低限度の生活
+  - kenshi-o-mezashite-nyuugaku-shita-noni-mahou-tekisei-9999-nandesu-kedo  # nowiki: 剣士を目指して入学したのに魔法適性9999なんですけど!?
+  - kesshougarasu  # nowiki: 血笑鴉
+  - ketsugou-otoko  # nowiki: 結合男子
+  - kigunasu-no-otometachi  # nowiki: キグナスの乙女たち
+  - kimi-wa-pet  # wiki_live: きみはペット
+  - kingyozuma  # nowiki: 金魚妻
+  - kino-no-tabi  # nowiki: キノの旅
+  - kinou-nani-tabeta  # wiki_live: きのう何食べた?
+  - kinzoo-no-agatte-nanbo  # nowiki: キンゾーの上ってなンボ!!
+  - kiokuya  # nowiki: 記憶屋
+  - kishibe-no-album  # nowiki: 岸辺のアルバム
+  - kishiwada-hakase-no-kagakuteki-aijou  # nowiki: 岸和田博士の科学的愛情
+  - kitchen-no-ohime-sama  # wiki_none: キッチンのお姫さま
+  - kizuato  # nowiki: 痕
+  - kodomo-no-kodomo  # nowiki: コドモのコドモ
+  - kodomo-wa-wakatte-agenai  # nowiki: 子供はわかってあげない
+  - kogarashi-monjirou  # nowiki: 木枯し紋次郎
+  - koi-to-dangan  # nowiki: 恋と弾丸
+  - koibumi-hiyori  # nowiki: 恋文日和
+  - konintodoke-ni-han-o-oshitadakedesuga  # wiki_live: 婚姻届に判を捺しただけですが
+  - kono-kamen-no-akuma-ni-soudan-o  # nowiki: この仮面の悪魔に相談を!
+  - kono-subarashii-sekai-ni-nichijou-o  # nowiki: この素晴らしい世界に日常を!
+  - kono-subarashii-sekai-ni-shukufuku-o-kappore  # nowiki: この素晴らしい世界に祝福を!かっぽれ!
+  - kooritsuita-me  # wiki_none: 凍りついた瞳
+  - kootaroo-makaritooru  # nowiki: コータローまかりとおる!
+  - kore-wa-zombie-desu-ka-hai-anata-no-yome-desu  # nowiki: これはゾンビですか? はい、アナタの嫁です
+  - kouchuu-tar-mushikingu  # wiki_none: 甲虫王者ムシキング
+  - koufuku-no-ouji  # nowiki: 幸福の王子
+  - kouga-ninpouchou-aratame  # nowiki: 甲賀忍法帖・改
+  - koukyuu-no-kenshi-nyokan  # nowiki: 後宮の検屍女官
+  - kounodori  # nowiki: コウノドリ
+  - kozure-ookami  # wiki_live: 子連れ狼
+  - kui-tan  # wiki_live: 喰いタン
+  - kuma-kuma-kuma-bear-gaiden-yuna-no-yorimichi-techou  # nowiki: くまクマ熊ベアー外伝～ユナのよりみち手帖～
+  - kuma-kuma-kuma-bear-kyou-mo-kuma-kuma-hiyori  # nowiki: くまクマ熊ベアー～今日もくまクマ日和～
+  - kumokiri-nizaemon  # nowiki: 雲霧仁左衛門
+  - kurasugoto-shuudan-teni-shimashita-ga-ichiban-tsuyoi-ore-wa-saijaku-no-shounin-ni-gisouchuu-desu  # nowiki: クラスごと集団転移しましたが、一番強い俺は最弱の商人に偽装中です。
+  - kurosagi  # wiki_live: クロサギ
+  - kyou-no-nekomura-san  # nowiki: きょうの猫村さん
+  - kyou-wa-kaisha-yasumimasu  # nowiki: きょうは会社休みます。
+  - kyuuketsuki-hunter-dii-barahime  # nowiki: 吸血鬼ハンターD薔薇姫
+  - life  # wiki_live: ライフ
+  - little-busters-ecstasy-wonderbit-wandering  # nowiki: リトルバスターズ!EXワンダービットワンダリング
+  - log-horizon-kanami-go-east  # nowiki: ログ・ホライズンカナミ、ゴー!イースト!
+  - love-live-school-idol-diary-sekando-season  # nowiki: ラブライブ!School idol diaryセカンドシーズン
+  - love-live-school-idol-diary-special-edition  # nowiki: ラブライブ!School idol diary Special Edition
+  - love-rerun  # nowiki: ラブリラン
+  - lover-s-kiss  # nowiki: ラヴァーズキス
+  - lupin-iii-h  # nowiki: ルパン三世H
+  - lupin-iii-t  # nowiki: ルパン三世T
+  - m-to-n-no-shouzou  # nowiki: MとNの肖像
+  - macross-dynamite-7-mireenu-beat  # nowiki: マクロスダイナマイト7
+  - madara  # nowiki: MADARA
+  - maestro  # nowiki: マエストロ
+  - magatsu-vaaruhaito  # nowiki: 禍つヴァールハイト
+  - magica-no-kenshi-to-vasreus  # nowiki: 魔技科の剣士と召喚魔王
+  - mahou-senki-lyrical-nanoha-force-dimension  # nowiki: 魔法戦記リリカルなのはForce Dimension
+  - mahou-shoujo-lyrical-nanoha-innocent  # nowiki: 魔法少女リリカルなのはINNOCENT
+  - mahou-shoujo-lyrical-nanoha-innocents  # nowiki: 魔法少女リリカルなのはINNOCENTS
+  - mahouka-koukou-no-rettousei  # nowiki: 魔法科高校の劣等生 スティープルチェース編
+  - majutsushi-oofen-mubouhen  # nowiki: 魔術士オーフェン無謀編
+  - makaigaeri-no-rettou-nouryokusha  # nowiki: 魔界帰りの劣等能力者
+  - mamono-o-karu-na-to-iwareta-saikyou-hunter-ryouri-guild-ni-tenshoku-suru  # nowiki: 魔物を狩るなと言われた最強ハンター、料理ギルドに転職する
+  - mangamichi  # nowiki: まんが道
+  - mannen-dranku-no-chuunen-boukensha-yotta-ikioi-de-densetsu-no-ken-o-hikkonuku  # nowiki: 万年Dランクの中年冒険者、酔った勢いで伝説の剣を引っこ抜く
+  - manzai-gang  # nowiki: 漫才ギャング
+  - marinko-yumi  # wiki_none: まりんこゆみ
+  - meiyaku-no-rivaia-san  # nowiki: 盟約のリヴァイアサン
+  - mental-tsuyome-bijo-shirakawa-san  # nowiki: メンタル強め美女白川さん
+  - meshibanakeijitachibana  # nowiki: めしばな刑事タチバナ
+  - mielino-kashiwagi  # nowiki: ミエリーノ柏木
+  - minami-kun-no-koibito  # nowiki: 南くんの恋人
+  - minna-de-tamagotchi  # nowiki: みんなでたまごっち
+  - minna-esper-dayo  # nowiki: みんな!エスパーだよ!
+  - mirakyurasu  # nowiki: ミラキュラス
+  - mirror-twins  # nowiki: ミラー・ツインズ
+  - mirrorman-2d  # nowiki: ミラーマン2D
+  - misaki-nanbaawan  # nowiki: 美咲ナンバーワン!!
+  - missing  # nowiki: Missing
+  - misuteri-to-iu-nakare  # wiki_live: ミステリと言う勿れ
+  - mobile-suit-gundam-age-climax-hero  # nowiki: 機動戦士ガンダムage クライマックスヒーロー
+  - mobile-suit-gundam-age-treasure-star  # nowiki: 機動戦士ガンダムageトレジャースター
+  - mobile-suit-gundam-seed-asutorei-tenkuu-no-princess  # nowiki: 機動戦士ガンダムSEED ASTRAY天空の皇女
+  - mobile-suit-gundam-seed-destiny-za-edge-dezaia  # nowiki: 機動戦士ガンダムSEED DESTINY the edge desire
+  - mobile-suit-gundam-uc-bandeshine-episode-0  # nowiki: 機動戦士ガンダムUCバンデシネEpisode:0
+  - mobile-suit-gundam-uc-testament  # nowiki: 機動戦士ガンダムUCテスタメント
+  - mobile-suit-gundam-yuushii-bandeshine  # nowiki: 機動戦士ガンダムUCバンデシネ
+  - mobu-joshikousei-no-ore-demo-boukensha-ni-nareba-riajuu-ni-naremasu-ka  # nowiki: モブ高生の俺でも冒険者になればリア充になれますか?
+  - mogura-no-uta  # nowiki: 土竜の唄
+  - mondaijitachi-ga-isekai-kara-kuru-soudesuyo-zetto  # nowiki: 問題児たちが異世界から来るそうですよ?乙
+  - monster-hunter-orage  # wiki_none: モンスターハンターオラージュ
+  - moto-sekai-1-i-no-sabukyara-ikusei-nikki  # nowiki: 元・世界1位のサブキャラ育成日記
+  - mumurin  # nowiki: ムムリン
+  - murabito-tensei  # nowiki: 村人転生
+  - mushoku-tensei-4-koma-ni-nattemo-honki-dasu  # nowiki: 無職転生～4コマになっても本気だす～
+  - musuko-ga-kawaikute-shikata-ga-nai-mazoku-no-hahaoya  # wiki_none: 息子がかわいくて仕方がない魔族の母親
+  - musume-ja-nakute-mama-ga-suki-nano  # nowiki: 娘じゃなくて私(ママ)が好きなの!?
+  - muyounosuke  # nowiki: 無用ノ介
+  - mw  # nowiki: MW
+  - my-broken-mariko  # wiki_live: マイ・ブロークン・マリコ
+  - namuamidabutsu  # nowiki: なむあみだ仏っ!
+  - nanba-mg5  # nowiki: ナンバMG5
+  - naniwa-kinyuudou  # nowiki: ナニワ金融道
+  - naruhodo-kotowaza-gundam-san  # nowiki: なるほど・ことわざガンダムさん
+  - nekojiru-dango  # nowiki: ねこぢるだんご
+  - nekojiru-manjuu  # nowiki: ねこぢるまんじゅう
+  - nekojiru-senbei  # nowiki: ねこぢるせんべい
+  - nekojiru-shokudou  # nowiki: ねこぢる食堂
+  - nekonaughey  # nowiki: ネコノヒー
+  - neppuu-kairiku-bushilord-the-rising  # nowiki: 熱風海陸ブシロードthe rising
+  - nido-tensei-shounen-wa-s-rank-boukensha-to-shite-heion-ni-sugosu  # nowiki: 二度転生した少年はSランク冒険者として平穏に過ごす
+  - nigeru-wa-haji-daga-yaku-ni-tatsu  # wiki_live: 逃げるは恥だが役に立つ
+  - niji-o-yobu-ken  # wiki_none: 虹をよぶ拳
+  - ninokuni  # nowiki: 二ノ国
+  - noise  # nowiki: ノイズ
+  - nonoyu  # wiki_live: のの湯
+  - noumen-joshi-no-hanako-san  # nowiki: 能面女子の花子さん
+  - nourin-petit  # nowiki: のうりんプチ
+  - ns-aoi  # nowiki: Ns'あおい
+  - oda-nobuna-no-yabou-hime-sama-to-isshokenmei  # nowiki: 織田信奈の野望 ひめさまといっしょ
+  - ohenro  # nowiki: おへんろ。
+  - oishii-kankei  # nowiki: おいしい関係
+  - oji-sama-to-neko  # wiki_live: おじさまと猫
+  - omatsuri-piisu-denkiten  # nowiki: おまつり!ピース電器店
+  - onna-doushi-toka-arienaidesho-to-iiharu-onna-no-ko-o-hyakunichikan-de-tetteitekini-otosu-yuri-no  # nowiki: 女同士とかありえないでしょと言い張る女の子を、百日間で徹底的に落とす百合のお話
+  - onsen-musume  # nowiki: 温泉むすめ
+  - ore-no-kanojo-to-osananajimi-ga-4-yurabasugiru-4koma  # nowiki: 俺の彼女と幼なじみが修羅場すぎる4コマ
+  - ore-no-kanojo-to-osananajimi-ga-shurabasugiru-plus-h  # nowiki: 俺の彼女と幼なじみが修羅場すぎる + H
+  - ore-wa-mada-honki-o-dashite-inai-dx  # nowiki: 俺はまだ、本気を出していないDX
+  - osananajimi-ga-zettai-ni-makenai-rabukome-otonari-no-yonshimai-ga-zettai-ni-honobono-suru-nichijou  # nowiki: 幼なじみが絶対に負けないラブコメ お隣の四姉妹が絶対にほのぼのする日常
+  - osananajimi-kanojo-no-morahara-ga-hidoinde-zetsuen-sengen-shiteyatta  # nowiki: 幼馴染彼女のモラハラがひどいんで絶縁宣言してやった
+  - osen  # nowiki: おせん
+  - oshin  # nowiki: おしん
+  - otomen  # wiki_live: オトメン
+  - otou-san-wa-shinpaishou  # nowiki: お父さんは心配症
+  - otsu-san-boukensha-kein-no-zenkou  # nowiki: おっさん冒険者ケインの善行
+  - outaishi-ni-konyaku-haki-sareta-node-mou-baka-no-furi-wa-yameyou-to-omoimasu  # nowiki: 王太子に婚約破棄されたので、もうバカのふりはやめようと思います
+  - oyama-kikunosuke  # nowiki: オヤマ!菊之助
+  - pakupaku-desuwa-tsuihousareta-sareta-ojousama  # nowiki: 〈パクパクですわ〉追放されたお嬢様の『モンスターを食べるほど強くなる』スキルは、1食で1レベルアップする前代未聞の最強スキルでした。3日で人類最強になりましたわ～!
+  - papa-no-iu-koto-o-kikinasai-rojou-kansatsu-kenkyuu-nisshi  # nowiki: パパのいうことを聞きなさい! 路上観察研究日誌
+  - papa-no-iu-koto-o-kikinasai-sorairo-no-hibiki  # nowiki: パパのいうことを聞きなさい! 空色の響き
+  - papa-to-oyaji-no-uchinomi  # nowiki: パパと親父のウチ呑み
+  - paradise-residence  # wiki_none: パラダイスレジデンス
+  - pecoros  # nowiki: ペコロス
+  - perfect-world  # wiki_live: パーフェクトワールド
+  - persona-2-batsu  # nowiki: ペルソナ2罰
+  - persona-2-tsumi  # nowiki: ペルソナ2罪
+  - persona-4-ji-aruteimakkusu-ultra-suupurekkusu-hoorudo  # nowiki: ペルソナ4ジ・アルティマックスウルトラスープレックスホールド
+  - pirates-obu-karibian-jack-suparou-no-bouken  # nowiki: パイレーツ・オブ・カリビアン ジャック・スパロウの冒険
+  - plinivs  # wiki_none: プリニウス
+  - pocket-monster-chamo-chamo-pretty  # nowiki: ポケットモンスターチャモチャモ☆ぷりてぃ
+  - pocket-monster-platinum  # nowiki: ポケットモンスタープラチナ
+  - pocket-monsters-horizon  # nowiki: ポケットモンスターホライズン
+  - pokettomonsutaa-san-muunhen  # nowiki: ポケットモンスターサン・ムーン編
+  - pokkapoka  # nowiki: ぽっかぽか
+  - pornographer  # nowiki: ポルノグラファー
+  - potion-danomi-de-ikinobimasu-hanano-to-lotte-no-futari-tabi  # nowiki: ポーション頼みで生き延びます!ハナノとロッテのふたり旅
+  - princess-to-mahou-no-kiss  # nowiki: プリンセスと魔法のキス
+  - prism-ark  # nowiki: プリズム・アーク
+  - psychometrer  # nowiki: サイコメトラー
+  - psychometrer-eiji  # nowiki: サイコメトラーEiji
+  - q-e-d-univ  # nowiki: Q.E.D.UNIV
+  - rabuho-no-ueno-san  # nowiki: ラブホの上野さん
+  - raburaibu-school-idol-diary  # nowiki: ラブライブ! School idol diary
+  - rachetto-ando-kuranku  # nowiki: ラチェット＆クランク
+  - raionmaru-g  # nowiki: ライオン丸G
+  - raise-dewa-chanto-shimasu  # nowiki: 来世ではちゃんとします
+  - rajikon-boy  # nowiki: ラジコンボーイ
+  - rakuen-logic-paradox-twin  # nowiki: ラクエンロジックパラドクスツイン
+  - ratman  # wiki_none: RATMAN
+  - re-mizeraburu  # nowiki: レ・ミゼラブル
+  - real-account  # wiki_live: リアルアカウント
+  - rental-magica-from-solomon  # nowiki: レンタルマギカfrom Solomon
+  - repure  # nowiki: リピュア
+  - rettougan-no-tensei-majutsushi  # nowiki: 劣等眼の転生魔術師
+  - ribaazu-edge  # wiki_live: リバーズ・エッジ
+  - riezon  # wiki_live: リエゾン
+  - rika  # nowiki: リカ
+  - rinjin-13gou  # nowiki: 隣人13号
+  - rivers-edge-ookawabata-tanteisha  # nowiki: リバースエッジ大川端探偵社
+  - robot-ponkottsu  # nowiki: ロボットポンコッツ
+  - robottokeiji  # nowiki: ロボット刑事
+  - rockman-megamix  # nowiki: ロックマンメガミックス
+  - rogu-horizon-gaiden-honeymoon-roguzu  # nowiki: ログ・ホライズン外伝HoneyMoonLogs
+  - romeo-to-juliet  # nowiki: ロミオとジュリエット
+  - rookies  # wiki_live: Rookies
+  - rough  # wiki_live: ラフ
+  - roukyuubu-half-time  # nowiki: ロウきゅーぶ!は～ふたいむ
+  - ryuujin-to-iinazuke-no-akai-hana-jirushi  # nowiki: 龍神と許嫁の赤い花印
+  - s  # nowiki: S
+  - saboriiman-ametani-kantarou  # nowiki: さぼリーマン飴谷甘太朗
+  - sadako  # nowiki: 貞子
+  - saenai-heroine-no-sodatekata-girls-side  # nowiki: 冴えない彼女の育てかたGirls Side
+  - saikyou-onna-shishou-tachi-ga-ikusei-houshin-o-megutte-shuraba  # nowiki: 最強女師匠たちが育成方針を巡って修羅場
+  - saikyou-shoku-ryuukishi-kara-shokyuu-shoku-hakobiya-ni-natta-noni-naze-yuushatachi-kara  # nowiki: 最強職《竜騎士》から初級職《運び屋》になったのに、なぜか勇者達から頼られてます@comic
+  - saint-rosalind  # nowiki: 聖ロザリンド
+  - saitou-san  # nowiki: 斉藤さん
+  - sakura-no-sono  # nowiki: 櫻の園
+  - sakuran  # wiki_none: さくらん
+  - samehadaotokotomomojirionna  # nowiki: 鮫肌男と桃尻女
+  - samurai-sensei  # nowiki: サムライせんせい
+  - samurai-spirits-1994  # nowiki: サムライスピリッツ
+  - samurai-spirits-1995  # nowiki: SAMURAI SPIRITS
+  - saru-lock  # nowiki: 猿ロック
+  - sasori  # nowiki: さそり
+  - satorare  # nowiki: サトラレ
+  - scrapped-princess-sutepuri  # nowiki: スクラップド・プリンセス す・て・プ・リ
+  - sei-no-gekiyaku  # nowiki: 性の劇薬
+  - seibutsu-suisei-woo  # nowiki: 生物彗星WoO
+  - seijo-ja-nakatta-node-oukyuu-de-nonbiri-gohan-o-tsukuru-koto-ni-shimashita  # nowiki: 聖女じゃなかったので、王宮でのんびりご飯を作ることにしました
+  - seisen-cerberus  # nowiki: 聖戦ケルベロス
+  - senjou-no-valkyria-2-our-only-days  # nowiki: 戦場のヴァルキュリア2 our only days
+  - sennen-meikyuu-no-nanaouji  # nowiki: 千年迷宮の七王子
+  - setoutsumi  # nowiki: セトウツミ
+  - sexy-tanaka-san  # nowiki: セクシー田中さん
+  - shadows-of-spawn  # nowiki: SHADOWS OF SPAWN
+  - shakariki  # wiki_live: シャカリキ!
+  - shamo  # wiki_none: 軍鶏
+  - sherlock-holmes-series  # nowiki: シャーロック・ホームズ
+  - sheryl-kiss-in-the-galaxy  # nowiki: シェリル キス・イン・ザ・ギャラクシー
+  - shiawase-kanako-no-koroshiya-seikatsu  # wiki_live: 幸せカナコの殺し屋生活
+  - shiawase-wa-tabete-nete-mate  # wiki_live: しあわせは食べて寝て待て
+  - shibatora  # wiki_live: シバトラ
+  - shijou-saikyou-no-mahou-kenshi-efuranku-boukensha-ni-tensei-suru  # nowiki: 史上最強の魔法剣士、Fランク冒険者に転生する
+  - shin-henshin-ninja-arashi  # nowiki: 新・変身忍者嵐
+  - shin-koihime-musou  # nowiki: 真・恋姫・無双
+  - shin-mazinger-shougeki-etchihen  # nowiki: 真マジンガー衝撃!H編
+  - shin-pokkapoka  # nowiki: 新ぽっかぽか
+  - shin-seitokai-no-ichizon  # nowiki: 新生徒会の一存
+  - shinai-naru-boku-e-satsui-o-komete  # wiki_live: 親愛なる僕へ殺意をこめて
+  - shingeki-no-bahamut-misutarushia-saga  # nowiki: 神撃のバハムート ミスタルシアサーガ
+  - shingeki-no-kyojin-before-za-fall  # nowiki: 進撃の巨人 Before the fall
+  - shinigami-kun  # nowiki: 死神くん
+  - shinimodori-no-mahou-gakkou-seikatsu-o-moto-koibito-to-puroroogu-kara  # nowiki: 死に戻りの魔法学校生活を、元恋人とプロローグから
+  - shinizokonai-no-ao  # nowiki: 死にぞこないの青
+  - shinkyoku-soukai-porifonika  # nowiki: 神曲奏界ポリフォニカ
+  - shinmai-fukei-kiruko-san  # wiki_none: 新米婦警キルコさん
+  - shinmai-maou-no-testament-arashi  # nowiki: 新妹魔王の契約者・嵐!
+  - shinya-shokudou  # wiki_live: 深夜食堂
+  - shiroi-suit-yamato  # nowiki: 白い戦士ヤマト
+  - shisha-no-sho  # nowiki: 死者の書
+  - shitsuren-chocolatier  # wiki_live: 失恋ショコラティエ
+  - shokeisareta-kenja-wa-lich-ni-tenseishite-shinryaku-sensou-o-hajimeru  # nowiki: 処刑された賢者はリッチに転生して侵略戦争を始める
+  - shoku-no-gunshi  # nowiki: 食の軍師
+  - shomuni  # nowiki: ショムニ
+  - shop-skill-sae-areba-danjonka-shita-sekai-demo-rakushou-da  # nowiki: 『ショップ』スキルさえあれば、ダンジョン化した世界でも楽勝だ
+  - shoujiki-fudou-san  # nowiki: 正直不動産
+  - shukufuku-no-campanella-balzare-tortilla-sisters  # nowiki: 祝福のカンパネラバルツァーレ!トルティア姉妹!
+  - shurayukihime  # wiki_live: 修羅雪姫
+  - shuu-ni-ichido-classmate-o-kau-hanashi  # nowiki: 週に一度クラスメイトを買う話
+  - shuusen-no-lorelei  # nowiki: 終戦のローレライ
+  - sign-wa-ui  # nowiki: サインはV!
+  - siren-rebirth  # nowiki: SIREN ReBIRTH
+  - sky-high  # nowiki: スカイハイ
+  - skyhigh-h-v-n  # nowiki: スカイハイヘヴン
+  - skyhigh-karma  # nowiki: スカイハイ・カルマ
+  - skyhigh-shinshou  # nowiki: スカイハイ・新章
+  - slayers-light-magic  # nowiki: スレイヤーズ ライト・マジック
+  - smash-o-kimero  # nowiki: スマッシュをきめろ!
+  - sora-e  # nowiki: 地上へ…
+  - sora-o-kakeru-yodaka  # wiki_live: 宇宙を駆けるよだか
+  - soratobu-taiya  # nowiki: 空飛ぶタイヤ
+  - sorette-pakuri-janai-desuka  # nowiki: それってパクリじゃないですか?
+  - soreyukeisekaichiitomajutsushimajishan  # nowiki: それゆけ!異世界チート魔術師(マジシャン)
+  - souryuuden  # nowiki: 創竜伝
+  - soutarou-no-shutchou-botchimeshi  # nowiki: 創太郎の出張ぼっちめし
+  - spectreman  # nowiki: スペクトルマン
+  - spider-man-j  # nowiki: スパイダーマンJ
+  - spy-kyoushitsu-4-bu  # nowiki: スパイ教室4部
+  - spy-no-tsuma  # nowiki: スパイの妻
+  - star-wars-1998  # nowiki: スター・ウォーズ
+  - star-wars-hanranshatachi  # nowiki: STAR WARS反乱者たち
+  - street-fighter-ii-ryu  # nowiki: ストリートファイターⅡ RYU
+  - subete-no-jinrui-o-hakai-suru-sorera-wa-saisei-dekinai  # nowiki: すべての人類を破壊する。それらは再生できない。
+  - super-doctor-k  # wiki_none: スーパードクターK
+  - swan  # wiki_none: SWAN
+  - tadano-kougiyou-koukou-no-nichijou  # nowiki: 只野工業高校の日常
+  - taiho-shite-miina  # nowiki: タイホしてみ～な!
+  - takarakuji-de-40-oku-atattandakedo-isekai-ni-ijuu-suru  # nowiki: 宝くじで40億当たったんだけど異世界に移住する
+  - tales-obu-xillia-2  # nowiki: テイルズオブエクシリア2
+  - tales-of-destiny-director-cut-cut-toki-no-rion  # nowiki: テイルズオブデスティニーディレクターズカット 儚き刻のリオン
+  - tales-of-gureisesu-f  # nowiki: テイルズオブグレイセスエフ
+  - tales-of-xillia-side-mira  # nowiki: テイルズオブエクシリアSIDE;MILLA
+  - tanabata-no-kuni  # wiki_live: 七夕の国
+  - tantei-ga-hayasugiru  # nowiki: 探偵が早すぎる
+  - tantei-no-tantei  # nowiki: 探偵の探偵
+  - tate-no-yuusha-no-toaru-ichinichi  # nowiki: 盾の勇者のとある一日
+  - tatoeba-rasutodanjon-mae-no-mura-no-shounen-ga-joban-no-machi-no-shokudou-de-hataraku-nichijou  # nowiki: たとえばラストダンジョン前の村の少年が序盤の街の食堂で働く日常物語
+  - tatsumi  # nowiki: TATSUMI
+  - tenchi-o-kurau  # nowiki: 天地を喰らう
+  - tengen-toppa-gurenragan-kessen-otokogumihen  # nowiki: 天元突破グレンラガン決戦!男組編
+  - tengen-toppa-gurenragan-lagann-do-ahou-hen  # nowiki: 天元突破グレンラガン 男どアホウ!編
+  - tenkuu-no-hachi  # nowiki: 天空の蜂
+  - tensai-yanagisawa-kyouju-no-seikatsu  # wiki_live: 天才柳沢教授の生活
+  - tensei-kyuuketsuki-san-wa-ohirune-ga-shitai  # nowiki: 転生吸血鬼さんはお昼寝がしたい
+  - tensei-ouji-wa-renkinjutsushi-to-nari-koukokusuru  # nowiki: 転生王子は錬金術師となり興国する
+  - tensei-seijo-no-isekai-surooraifu  # nowiki: 転生聖女の異世界スローライフ
+  - tensei-shitara-slime-datta-ken-bangaihen  # nowiki: 転生したらスライムだった件番外編
+  - tensei-shitara-slime-datta-ken-clayman-revenge  # nowiki: 転生したらスライムだった件クレイマンREVENGE
+  - tenshi-no-3p-no-3p  # nowiki: 天使の3P!の3P!!
+  - the-idolm-ster-cinderella-girls-new-generations  # nowiki: アイドルマスターシンデレラガールズ ニュージェネレーションズ
+  - thunder-mask  # nowiki: サンダーマスク
+  - tinker-bell-to-yousei-no-ie  # nowiki: ティンカー・ベルと妖精の家
+  - toaru-hikuushi-e-no-tsuioku  # nowiki: とある飛空士への追憶
+  - tokkou-tennyo  # nowiki: 特攻天女
+  - tokusatsu-gagaga  # wiki_live: トクサツガガガ
+  - tokyo-akazukin  # nowiki: 東京赤ずきん
+  - tokyo-myuumyuu-2020-return  # nowiki: 東京ミュウミュウ2020り・たーん
+  - tokyo-ravens-sword-of-song  # nowiki: 東京レイヴンズSword of Song
+  - tokyo-salad-bowl  # wiki_live: 東京サラダボウル
+  - tokyo-shutter-girl  # nowiki: 東京シャッターガール
+  - tokyo-tarareba-musume-returns  # nowiki: 東京タラレバ娘リターンズ
+  - tokyo-xanadu  # nowiki: 東亰ザナドゥ
+  - tokyo-zombie  # nowiki: 東京ゾンビ
+  - tonari-wa-nani-o-kuu-hito-zo  # nowiki: トナリはなにを食う人ぞ
+  - tonda-couple  # nowiki: 翔んだカップル
+  - tosa-no-ipponzuri  # nowiki: 土佐の一本釣り
+  - toshishita-kareshi-no-love-kanriheki  # nowiki: 年下彼氏の恋愛管理癖
+  - touken-ranbu  # nowiki: 刀剣乱舞
+  - toumei-na-yurikago  # wiki_live: 透明なゆりかご
+  - toushin-toshi-3  # nowiki: 闘神都市 Ⅲ
+  - treasure-gausuto  # nowiki: トレジャーガウスト史上最強のハンターコンビ!!
+  - tsuihousareta-sareta-esukyuu-kanteishi-wa-saikyou-no-guild-o-tsukuru  # nowiki: 追放されたS級鑑定士は最強のギルドを創る
+  - tsuihousareta-sareta-no-de-ansatsu-ikka-jikiden-no-kage-mahou-de-joou-no-goei-hajimemashita  # nowiki: 追放されたので、暗殺一家直伝の影魔法で王女の護衛はじめました!
+  - tsukuritai-onna-to-tabetai-onna  # wiki_live: 作りたい女と食べたい女
+  - tsumi-no-koe  # nowiki: 罪の声
+  - tsuri-spirits  # nowiki: 釣りスピリッツ
+  - tsurumoku-dokushinryou  # nowiki: ツルモク独身寮
+  - tuxedo-gin  # wiki_none: タキシード銀
+  - uchi-no-musuko-wa-tabun-gay  # nowiki: うちの息子はたぶんゲイ
+  - ultraman  # nowiki: ウルトラマン
+  - ultraman-nexus  # nowiki: ウルトラマンネクサス
+  - umareta-chokugo-ni-suterareta-zense-ga-dai-kenja-datta-node-yoyuu-de-ikitemasu  # nowiki: 生まれた直後に捨てられたけど、前世が大賢者だったので余裕で生きてます
+  - umibe-no-onnanoko  # wiki_none: うみべの女の子
+  - umimachi-diary  # nowiki: 海街diary
+  - uramiya-honpo  # nowiki: 怨み屋本舗
+  - urenokori-no-dorei-elf-o-hirotta-no-de-musume-ni-suru-koto-ni-shita  # nowiki: 売れ残りの奴隷エルフを拾ったので、娘にすることにした
+  - utawareru-mono-itsuwari-no-kamen  # nowiki: うたわれるもの 偽りの仮面
+  - utsuro-naru-regalia  # nowiki: 虚ろなるレガリア
+  - vampire-master-dark-crimson  # nowiki: Vampire masterダーククリムゾン
+  - vampire-miyu-saku  # nowiki: 吸血姫(ヴァンパイア)美夕 朔
+  - vampire-seivaa  # nowiki: ヴァンパイアセイヴァー
+  - vampire-yui-saishuushou  # nowiki: 吸血姫(ヴァンパイア)夕維 最終章
+  - wakakusa-monogatari-kitajima-1989  # nowiki: 若草物語
+  - wakakusa-monogatari-nev-2011  # nowiki: 若草物語
+  - wakamono-no-kuromahou-banare-ga-shinkokudesu-ga-shuushoku-shitemitara-taiguu-iishi-shachou-mo  # nowiki: 若者の黒魔法離れが深刻ですが、就職してみたら待遇いいし、社長も使い魔もかわいくて最高です!
+  - warau-michael  # nowiki: 笑う大天使
+  - waru  # nowiki: 悪女
+  - watari  # nowiki: ワタリ
+  - watashi-no-otto-wa-reitouko-ni-nemutte-iru  # nowiki: 私の夫は冷凍庫に眠っている
+  - watashi-no-oyome-kun  # nowiki: わたしのお嫁くん
+  - watashitachi-wa-douka-shite-iru  # wiki_live: 私たちはどうかしている
+  - yae-no-sakura  # nowiki: 八重の桜
+  - yahari-4koma-demo-ore-no-seishun-rabukome-wa-machigatteiru  # nowiki: やはり4コマでも俺の青春ラブコメはまちがっている。
+  - yakushiji-ryouko-no-kaiki-file-kiri-no-houmonsha  # nowiki: 薬師寺涼子の怪奇事件簿 霧の訪問者
+  - yamada-tarou-monogatari  # nowiki: 山田太郎ものがたり
+  - yamegoku  # nowiki: ヤメゴク
+  - yamikin-ushijima-kun  # nowiki: 闇金ウシジマくん
+  - yane-no-nagai-kami  # nowiki: 屋根裏の長い髪
+  - yatterman  # nowiki: ヤッターマン
+  - yokokuhan  # wiki_live: 予告犯
+  - youjo-senki-shokudou  # nowiki: 幼女戦記食堂
+  - youkaidaisensou  # nowiki: 妖怪大戦争
+  - youkoso-jitsuryoku-shijou-shugi-no-kyoushitsu-e-route-horikita  # nowiki: ようこそ実力至上主義の教室へ√堀北
+  - young-shima-kousaku-shuninhen  # nowiki: ヤング島耕作 主任編
+  - yukemuri-sniper  # nowiki: 湯けむりスナイパー
+  - yurigokoro  # nowiki: ユリゴコロ
+  - yuujin-ni-500-en-kashitara-shakkin-no-kata-ni-imouto-o-yokoshitekita-nodakeredo-ore-ha-ittai  # nowiki: 友人に500円貸したら借金のカタに妹をよこしてきたのだけれど、俺は一体どうすればいいんだろう
+  - yuushibu  # nowiki: 勇しぶ。
+  - zebraman  # nowiki: ゼブラーマン
+  - zenigeba  # nowiki: 銭ゲバ
+  - zenikko  # nowiki: 銭っ子
+  - zero-kara-hajimeru-mahou-no-sho-nano  # nowiki: ゼロから始める魔法の書なの!
+  - zero-no-chukaima  # nowiki: ゼロのちゅかいま
+  - zero-no-tsukaima-chevalier  # nowiki: ゼロの使い魔シュヴァリエ
+  - zoids-planet-zi  # nowiki: ZOIDS惑星Zi
