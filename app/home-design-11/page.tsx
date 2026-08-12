@@ -15,6 +15,7 @@ import { loadAiReviews } from "@/lib/loadData";
 import AiLeagueTeaser from "@/components/AiLeagueTeaser";
 import AnimeSeasonCorner from "@/components/AnimeSeasonCorner";
 import ZenshuuCorner from "@/components/ZenshuuCorner";
+import ColorCorner from "@/components/ColorCorner";
 import DailyFeatureCorner from "@/components/DailyFeatureCorner";
 import { KotobaDaily, TriviaDaily, GenreRouletteDaily } from "@/components/DailyBits";
 
@@ -213,6 +214,8 @@ export default function Design11() {
         </Tile>
       </section>
 
+      {/* 8.15【中】カラー版コーナー(2026-08-12 ユーザ指定=全集コーナーの直上。案3ボタン+案B書影帯) */}
+      <ColorCorner />
       {/* 8.2【中】全集コーナー(★2026-08-03 ユーザ指定=運命の一冊の下へ移動。旧=アニメ化直下) */}
       <ZenshuuCorner />
       <section className="mt-5 px-4">

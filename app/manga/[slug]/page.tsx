@@ -5,7 +5,7 @@ import { notFound } from "next/navigation";
 import RelatedWorks, { computeRelated } from "@/components/RelatedWorks";
 import ShareButtons from "@/components/ShareButtons";
 import VolumeRow from "@/components/VolumeRow";
-import ColorEditionNote from "@/components/ColorEditionNote";
+// import ColorEditionNote from "@/components/ColorEditionNote"; // 帯=表示停止中(2026-08-02裁定。下のマウント跡を参照)
 import ArtBookCard from "@/components/ArtBookCard";
 import Badge from "@/components/ui/Badge";
 import { ChipLink } from "@/components/ui/Chip";
@@ -451,8 +451,10 @@ export default async function MangaDetailPage({
 
           <RelatedWorks items={related} />
 
-          {/* 電子カラー版(Kobo)。データ=public/data/color-editions.json(クライアントfetch=頁再生成不要) */}
-          <ColorEditionNote slug={manga.slug} />
+          {/* 電子カラー版帯=表示停止のまま(2026-08-02 ユーザ裁定「勝手につけられた」)。
+              2026-08-12 ホームのカラー版コーナー新設で color-editions.json を再充填したため、
+              データ側で止まっていた本帯が復活しないようマウント自体を外す(再開はユーザGOで)。
+          <ColorEditionNote slug={manga.slug} /> */}
 
           <VolumeRow manga={manga} />
 
