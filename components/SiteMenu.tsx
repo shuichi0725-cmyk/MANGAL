@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { createPortal } from "react-dom";
 import Link from "next/link";
 
 /** ≡メニュー(2026-08-12 案B採用=タイル型に全面刷新):
@@ -110,7 +111,10 @@ export default function SiteMenu() {
         </svg>
         <span className="text-[9px] text-ink/55">メニュー</span>
       </button>
-      {open && (
+      {/* ★portal必須(2026-08-12実踏): 設置先の共通ヘッダーが backdrop-blur 持ち。
+          backdrop-filterを持つ祖先は fixed の containing block になるため、直下に描くと
+          「全画面ドロワーがヘッダーの箱に閉じ込められ、ヘッダーより下が出ない」。body直下へ逃がす。 */}
+      {open && createPortal(
         <div className="fixed inset-0 z-50" role="dialog" aria-label="サイトメニュー">
           <button aria-label="閉じる" className="absolute inset-0 bg-black/45" onClick={close} />
           {/* 右からフルハイトのドロワー。左辺=accentの太線(案B) */}
@@ -191,7 +195,8 @@ export default function SiteMenu() {
               [PR] 本サイトの店舗リンクにはアフィリエイト広告を含みます。
             </p>
           </div>
-        </div>
+        </div>,
+        document.body,
       )}
     </>
   );
