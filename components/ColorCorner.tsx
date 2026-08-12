@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import CoverImage from "@/components/CoverImage";
-import { kindleSearchUrl, openKindleInBrowser } from "@/lib/kindleLink";
+import { kindleSearchUrl } from "@/lib/kindleLink";
 
 /** 🌈カラー版コーナー(2026-08-12 ユーザ採用: ボタン=案3「COLOR透かし」+中身=案B「書影だけの密な帯」)。
  *  設置=ホームの全集コーナー直上。ヘッダー=/color-manga(一覧)へ。
@@ -60,7 +60,6 @@ export default function ColorCorner() {
                   href={href}
                   target="_blank"
                   rel="nofollow sponsored noopener"
-                  onClick={(ev) => openKindleInBrowser(ev, href)}
                   aria-label={`${e.t ?? slug} をKindleで見る`}
                   className="spring-press block h-[92px] w-[62px] overflow-hidden border border-[var(--color-line)] bg-[var(--color-surface-2)]"
                 >

@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import CoverImage from "@/components/CoverImage";
-import { kindleSearchUrl, openKindleInBrowser } from "@/lib/kindleLink";
+import { kindleSearchUrl } from "@/lib/kindleLink";
 
 type ColorEntry = { v: number; u: string; c?: string | null; b?: string; t?: string };
 
@@ -30,7 +30,6 @@ export default function ColorListClient() {
               href={href}
               target="_blank"
               rel="nofollow sponsored noopener"
-              onClick={(ev) => openKindleInBrowser(ev, href)}
               aria-label={`${e.t ?? slug} をKindleで見る`}
               className="spring-press block"
             >
