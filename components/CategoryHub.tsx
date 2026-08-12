@@ -92,7 +92,7 @@ export default function CategoryHub({ data, filtered, summary }: Props) {
                   <span className="text-[11px] font-semibold leading-tight">
                     {active ? "✓ " : ""}{c.label}
                   </span>
-                  <span className={`text-[10px] font-medium leading-none tabular-nums ${active ? "text-white/75" : "text-ink/40"}`}>
+                  <span className={`cat-count text-[10px] font-medium leading-none tabular-nums ${active ? "text-white/75" : "text-ink/40"}`}>
                     {c.count.toLocaleString()}
                   </span>
                 </span>

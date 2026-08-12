@@ -278,6 +278,8 @@ input[type="search"]::-webkit-search-decoration {
 .cat-svg { display: none; }
 .theme-d3 .cat-svg { display: block; }
 .theme-d3 .cat-emoji { display: none; }
+/* カテゴリ件数の色をホーム(案12=ライム)に統一(2026-08-12 ユーザ指摘: 検索面だけ灰白だった) */
+.theme-d3 .cat-count { color: var(--color-accent) !important; }
 /* D3マーキー帯 */
 @keyframes d3-marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 .d3-marquee { display: inline-block; white-space: nowrap; animation: d3-marquee 28s linear infinite; }

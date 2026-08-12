@@ -94,7 +94,7 @@ export default function BrowseShell({ summary }: { summary: IndexSummary }) {
                     </span>
                     {catKeyOf(c.label) && <CatPict k={catKeyOf(c.label)!} />}
                     <span className="text-[11px] font-semibold leading-tight">{c.label}</span>
-                    <span className="text-[10px] font-medium leading-none tabular-nums text-ink/40">
+                    <span className="cat-count text-[10px] font-medium leading-none tabular-nums text-ink/40">
                       {c.count.toLocaleString()}
                     </span>
                   </span>
