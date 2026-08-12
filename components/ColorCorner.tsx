@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import CoverImage from "@/components/CoverImage";
+import { kindleSearchUrl, openKindleInBrowser } from "@/lib/kindleLink";
 
 /** 🌈カラー版コーナー(2026-08-12 ユーザ採用: ボタン=案3「COLOR透かし」+中身=案B「書影だけの密な帯」)。
  *  設置=ホームの全集コーナー直上。ヘッダー=/color-manga(一覧)へ。
@@ -14,24 +15,6 @@ import CoverImage from "@/components/CoverImage";
  *  色トークンは全部テーマ変数=ライト/D3両対応(COLOR透かしの4色グラデのみ固定色)。 */
 
 type Entry = { v: number; u: string; c?: string | null; b?: string; t?: string };
-
-function kindleSearchUrl(title: string): string {
-  const tag = process.env.NEXT_PUBLIC_AMAZON_ASSOCIATE_TAG ?? "";
-  const url = new URL("https://www.amazon.co.jp/s");
-  url.searchParams.set("k", title);
-  url.searchParams.set("i", "digital-text");
-  if (tag) url.searchParams.set("tag", tag);
-  return url.toString();
-}
-
-/** Kindleはブラウザで開く(AffiliateLinkと同じ: Amazonアプリ内ではKindle本が買えないIAP規約対策)。
- *  本番(Worker配下)は /go 中継、preview/開発は window.open 簡易版。 */
-function openKindle(e: React.MouseEvent, href: string) {
-  e.preventDefault();
-  const viaWorker =
-    window.location.hostname === "mangal-db.com" || window.location.hostname.endsWith("workers.dev");
-  window.open(viaWorker ? `/go?u=${encodeURIComponent(href)}` : href, "_blank", "noopener");
-}
 
 export default function ColorCorner() {
   const [data, setData] = useState<Record<string, Entry> | null>(null);
@@ -77,7 +60,7 @@ export default function ColorCorner() {
                   href={href}
                   target="_blank"
                   rel="nofollow sponsored noopener"
-                  onClick={(ev) => openKindle(ev, href)}
+                  onClick={(ev) => openKindleInBrowser(ev, href)}
                   aria-label={`${e.t ?? slug} をKindleで見る`}
                   className="spring-press block h-[92px] w-[62px] overflow-hidden border border-[var(--color-line)] bg-[var(--color-surface-2)]"
                 >
