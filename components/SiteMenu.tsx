@@ -55,9 +55,9 @@ const FIND: Tile[] = [
 ];
 
 const CORNERS: Tile[] = [
-  { icon: "book", label: "今日の一冊", href: "/", sub: "毎日更新" },
+  // ★今日の一冊のリンク先="/"は誤り(2026-08-12 ユーザ指摘)。過去ログ頁へ=旧・過去ログタイルと統合
+  { icon: "book", label: "今日の一冊 過去ログ", href: "/sansedai-archive", sub: "毎日更新" },
   { icon: "calendar", label: "日替わり特集", href: "/tokushu", sub: "毎日更新" },
-  { icon: "clock", label: "今日の一冊 過去ログ", href: "/sansedai-archive" },
   { icon: "pen", label: "AI書評家リーグ", href: "/column-ai-league", sub: "週刊" },
   { icon: "film", label: "アニメの原作漫画", href: "/anime" },
   { icon: "chart", label: "なんでもランキング", href: "/rankings" },
