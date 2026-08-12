@@ -33,6 +33,11 @@ description: カラー版して/カラー版続けて=電子カラー版柱(Kobo
   動的取得・.cacheに永続)へ再帰分割 → 葉でも超える時は8ソートの窓union(±releaseDate/±itemPrice/
   sales/standard/reviewCount/reviewAverage)。dedup=itemNumber・_rate_gate直列・429backoff吸収。
 - ★単話/分冊/合本のノイズ除去は**buildの仕事**(rawは全部持つ=[[acquire_all_obtainable_info]])。
+- ★build側も2026-08-13に対称修正(ユーザ指摘「収集が少なすぎない?」): harvestは{カラー版,フルカラー}なのに
+  buildの対象判定が「カラー版」substringのみ=**フルカラー(版なし)層4,705冊/511群を捨てていた**→FC_MARK解禁。
+  照合fallback追加=①第N部トークン除去(ジョジョ6部型) ②部題のみ(ジョジョリオン型) ③中間ー読みー除去
+  (To LOVEるダークネス型) ④第1〜5部→本題頁へ畳み込み+巻数合算(ジョジョ本編63巻型。N≤5限定=6部以降は別頁が正)。
+  166→209作。残unmatched=大半が紙の無いwebtoon/TL系(正当)+SBR(頁題STEEL BALL RUNのカタカナ不一致)+ジョジョランズ(頁未作成)。
 
 ## データの居場所
 
@@ -43,7 +48,7 @@ description: カラー版して/カラー版続けて=電子カラー版柱(Kobo
 | 頁表示用 | public/data/color-editions.json = {slug:{v巻数,u楽天affURL,c表紙,t表示題,b=BookLive title_id}} |
 | 試し読みseed | data/seeds/color-tameshiyomi.jsonl (**純粋追記のみ**・buildが読む) |
 | 未照合queue | docs/production-diagnostics/color-editions-unmatched.tsv (AI裁定→照合改善) |
-| 表示 | components/ColorEditionNote.tsx(頁ストリップ・クライアントfetch=頁再生成不要) + app/color-manga(一覧) |
+| 表示 | ★2026-08-12現行: components/ColorCorner.tsx(ホームのコーナー・全集直上) + app/color-manga(一覧)。両方とも書影タップ=**Kindle検索直行**(lib/kindleLink.ts。ASIN無しのためアプリ着地=PA-API解錠後に/dp直リンク化)。ColorEditionNote(頁ストリップ)は**マウント除去済み=停止中**(2026-08-02ユーザ裁定。再開はユーザGO) |
 
 ## 照合の鉄則 (= 同題decoy対策。巻抜けfill 2026-07-29 の教訓)
 

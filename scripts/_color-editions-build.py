@@ -31,6 +31,15 @@ UNMATCHED = ROOT / "docs" / "production-diagnostics" / "color-editions-unmatched
 
 NOISE = re.compile(r"分冊|単話|話売|合本|セット|巻セット|【期間限定|お試し|無料|よりぬき|傑作選|特別編集")
 COLOR_MARK = re.compile(r"[【\[（(［]?\s*(?:デジタル)?(?:フル|完全|オール|セミ|総)?カラー版\s*[】\])）］]?")
+# ★「フルカラー」等の版なし表記(2026-08-13): harvest側は検索語に入っていたのに本判定が
+#   「カラー版」substringのみで4,705冊/511群を丸ごと捨てていた。括弧付き【フルカラー】/(フルカラー)
+#   と末尾裸フルカラーだけをマーカー扱い(裸カラーの誤剥がしは避ける)。採否は従来どおり
+#   本番頁照合+著者ゲートが決める=紙の無いwebtoon/TL系は自然に落ちる。
+FC_MARK = re.compile(r"[【（(［\[]\s*(?:デジタル)?(?:フル|完全|オール|セミ|総)カラー\s*[】）)\]］]|(?:フル|完全|オール|セミ|総)カラー\s*$")
+
+
+def has_color_mark(s: str) -> bool:
+    return bool(s) and ("カラー版" in s or bool(FC_MARK.search(s)))
 VOL_PAT = re.compile(r"[（(【]?\s*(\d{1,3})\s*[)）】]?\s*(?:巻)?\s*$")
 LEAD_BRACKET = re.compile(r"^【[^】]{1,20}】")  # 誌名prefix(【花とゆめプチ】等)
 
@@ -61,8 +70,8 @@ def main():
         if NOISE.search(title) or NOISE.search(sname):
             dropped_noise += 1
             continue
-        if "カラー版" not in title and "カラー版" not in sname:
-            # genre内のsubstring外れ(サブタイトル側hit等)は対象外
+        if not (has_color_mark(title) or has_color_mark(sname)):
+            # カラー表記なし(サブタイトル側hit等)は対象外
             dropped_noise += 1
             continue
         base_t, vol = parse_vol(title)
@@ -114,6 +123,7 @@ def main():
     for gkey, g in sorted(groups.items()):
         items = g["items"]
         base = COLOR_MARK.sub("", g["display"])
+        base = FC_MARK.sub("", base)
         base = LEAD_BRACKET.sub("", base)
         base_n = norm(base)
         vols = [i["_vol"] for i in items if i["_vol"]]
@@ -130,6 +140,37 @@ def main():
             b2 = re.sub(r"[ー\-−–—]\s*[^ー\-−–—]{1,25}\s*[ー\-−–—]\s*$", "", unicodedata.normalize("NFKC", base)).strip()
             if b2 and norm(b2) != base_n:
                 cands = list(dict.fromkeys(by_title.get(norm(b2), [])))
+        part_no = None  # 「第N部」畳み込みで結線した時の部番号(=同一slug合算merge用)
+        if not cands:
+            # ★追加fallback(2026-08-13。誤候補は後段の著者ゲートが落とす):
+            #   ①「第N部」トークン除去 = ジョジョ第6部型(頁題=ジョジョの奇妙な冒険 ストーンオーシャン)
+            #   ②「第N部」より前を全部除去 = ジョジョリオン型(頁題=部題のみ)
+            #   ③中間の ー読みー 挿し込み除去 = To LOVEるーとらぶるーダークネス型(末尾でなく中間)
+            nf = unicodedata.normalize("NFKC", base)
+            for b3 in (
+                re.sub(r"\s*第[0-9一二三四五六七八九十]{1,3}部\s*", " ", nf),
+                re.sub(r"^.*?第[0-9一二三四五六七八九十]{1,3}部\s*", "", nf),
+                re.sub(r"ー[^ー]{1,25}ー", "", nf, count=1),
+            ):
+                b3 = b3.strip()
+                if b3 and norm(b3) != base_n:
+                    cands = list(dict.fromkeys(by_title.get(norm(b3), [])))
+                    if cands:
+                        break
+        if not cands:
+            # ④「第N部」より前=シリーズ本題で照合(ジョジョ第1〜5部型: 紙の本編頁は部をまたぐ1シリーズ)。
+            #   ★N≤5に限定=6部以降は別頁が正(ストーンオーシャン/SBR/ジョジョリオン)なので本編へ誤畳込しない。
+            #   同一slugに複数部が畳まれたら後段で巻数を合算し表示題を本題+カラー版に付け替える。
+            KJ = {"一": 1, "二": 2, "三": 3, "四": 4, "五": 5}
+            m = re.match(r"^(.{2,40}?)\s*第([0-9]{1,2}|[一二三四五])部", unicodedata.normalize("NFKC", base))
+            if m:
+                pn = KJ.get(m.group(2)) or int(m.group(2))
+                pref = m.group(1).strip()
+                if pn <= 5 and pref:
+                    cands = list(dict.fromkeys(by_title.get(norm(pref), [])))
+                    if cands:
+                        part_no = pn
+                        base = pref
         hit = None
         for slug in cands:
             if g_authors & slug_authors.get(slug, set()):
@@ -145,16 +186,26 @@ def main():
             "latest": max((str(i.get("salesDate") or "") for i in items), default=""),
             "authors": sorted(g_authors),
         }
+        if part_no is not None:
+            # 部畳み込み: 表示題=本題+カラー版(部題を出さない)。部番号は合算mergeのキー
+            rec["display"] = f"{base.strip()} カラー版"
+            rec["_part"] = part_no
         if hit:
             matched.append({"slug": hit, **rec})
         else:
             unmatched.append({**rec, "title_cands": "|".join(cands[:3])})
 
-    # slug重複(同作の表記揺れ群) → 巻数最大の群を採用
+    # slug重複(同作の表記揺れ群) → 巻数最大の群を採用。★部畳み込み同士(ジョジョ1〜5部型)は巻数を合算
     by_slug: dict[str, dict] = {}
     for m in matched:
         cur = by_slug.get(m["slug"])
-        if cur is None or m["volumes"] > cur["volumes"]:
+        if cur is not None and "_part" in m and "_part" in cur:
+            keep = m if m["_part"] < cur["_part"] else cur  # 表紙/URLは若い部(=1部の1巻)を採用
+            by_slug[m["slug"]] = {**keep,
+                                  "volumes": cur["volumes"] + m["volumes"],
+                                  "latest": max(cur["latest"], m["latest"]),
+                                  "_part": min(cur["_part"], m["_part"])}
+        elif cur is None or m["volumes"] > cur["volumes"]:
             by_slug[m["slug"]] = m
     print(f"照合: slug確定 {len(by_slug)}作 / unmatched {len(unmatched)}群")
 
