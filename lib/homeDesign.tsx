@@ -1,5 +1,4 @@
 import Link from "next/link";
-import SiteMenu from "@/components/SiteMenu";
 import CoverImage from "@/components/CoverImage";
 import MarqueeTitle from "@/components/MarqueeTitle";
 import { loadAllManga } from "@/lib/loadData";
@@ -203,8 +202,7 @@ export function DesignNav({ current: _current }: { current?: number }) {
             <span className="text-[9px] text-ink/55">{label}</span>
           </Link>
         ))}
-        {/* 三本線(メニュー) = 本実装(SiteMenu ドロワー 2026-07-03) */}
-        <SiteMenu />
+        {/* ≡メニューは共通ヘッダー右端へ移設(2026-08-12 ユーザ裁定)=ナビ行は使い方が右端 */}
       </div>
     </div>
   );
