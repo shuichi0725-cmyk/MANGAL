@@ -5,7 +5,7 @@ metadata:
   node_type: memory
   type: project
   originSessionId: ca601f45-de8a-4eda-b8ed-ed44ecdd9447
-  modified: 2026-08-11T00:23:15.645Z
+  modified: 2026-08-13T11:05:16.354Z
 ---
 
 2026-08-11 ユーザ指摘「アニメ化情報はanilistから最初作った後変わってない気がする。更新する仕組みが無いなら問題」→実際に無かった。
@@ -29,5 +29,17 @@ metadata:
   すべ破はWeb裏取りでアニメ無し確認)。false化= `data/seeds/anime-adapted-overrides.yml`(false_slugs)、
   promoteで **enrichの前に適用=enrich後勝ち**なのでAniListに関係が付けば自動true復帰(自己修復)。
 - 標本10件全部に具体ANIMEノード(TV/OVA/ONA/TV_SHORT)を確認してから適用した(だろう運転をしない)。
+
+## 空振り事故と根治(2026-08-13)
+- 症状(Sonnetアイドル報告): 適用したはずの17頁(atagoul/死角/Tokyo tribe等)が毎回worklistに再出現、
+  「反映して」も頁が変わらない空振り。
+- ★根因= worklistの元 `.cache/anilist-to-slug.json` が **7/12製の古マップ**(頁ymlのanilist_id逆引き)。
+  7/18のリンク検証で頁から剥がされた誤リンク(続編/外伝/画集/同名異作→親作品entryへの誤結線)が
+  マップにだけ残存 → 頁はaid無し=enrich非結線=promoteで何も起きないのにworklistに載り続けた。
+- 修正= `_anime-flag-delta.py` が実行時に必ず `--rebuild-map` を先行(組込済)。再構築後の正当worklist
+  34頁(SBR/魔探偵ロキ/ユーベルブラット/マシュマロ通信/藤丸立香はわからない等)を反映済=33頁フラグ確認。
+- 残per-case 1件: konpaira-fesuta(コンパイラフェスタ・麻宮騎亜全3巻1991-93)= 本編「コンパイラ」(aid32952)
+  との題ズレでenrich未結線。頁のaidは旧promoteの焼き残り。NDLで題を確定してから裁定。
+- 教訓: **.cacheの導出マップは使う直前に再構築**(seedでないキャッシュは黙って腐る)。
 
 関連: [[monthly_distill_real_pipeline]] [[anilist_matching_state]] [[feedback_one_bug_means_a_class]]
