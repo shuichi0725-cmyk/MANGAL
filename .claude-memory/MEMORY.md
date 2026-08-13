@@ -111,7 +111,7 @@
 - [【進行中】エンリッチ7k再開](enrich_7k_resume_state.md) — 「エンリッチ続き」 ／ [【重要】新しい順の鉱脈が枯れた](enrich_newest_seam_exhausted.md) — 残12,057頁は1〜2巻captionが0件。材料源を替えるか規律を緩めるかユーザ裁定待ち
 - [【残】鬼太郎本編の多版正規化](kitaro_honpen_multiedition_pending.md) — トリガー=鬼太郎本編やって
 - [TinyFish=WebFetch補完](tinyfish_web_fetch.md) — 正=skill tinyfish ／ [Cloudflareアクセス解析](cloudflare_analytics_access.md) — 正=skill cf-analytics ／ [CF請求=Workers Paid $5.50/月のみ・従量0](cloudflare_billing.md) — 27日〆・日割り$4.21は初回のみ
-- [進行中状態2026-08-13](inflight_state_2026_08_13.md) — 本番待ち=メニュー/カラー版コーナー/アニメ化34頁・D3本採用GO待ち・KindleはPA-API解錠待ちで様子見・PageSpeed2件指示待ち
+- [進行中状態2026-08-13](inflight_state_2026_08_13.md) — ★D3本採用済(公開=週次で全頁一括)・本番待ち=メニュー/カラー版コーナー/アニメ化34頁・KindleはPA-API解錠待ちで様子見・PageSpeed2件指示待ち
 - [新PCへ移行済み2026-07-17](pc_migration_2026_07_17.md) — pip/stub層/NDL SSL全解消。stub=最小結線層・D:に保険ミラー
 - [ソーサリアン統合=本番化済](sorcerian_consolidation_state.md) — 単巻読切連番の1頁統合の型見本(title_display/dedup/多人数ガード)
 - [【方針】1件のバグ=型と疑う](feedback_one_bug_means_a_class.md) — 署名化→全DB掃引(全件目視)→検出器script化→月次サニティ登録

@@ -147,8 +147,8 @@ export function CoverTile({ m, sizes }: { m: Manga; sizes?: string }) {
   );
 }
 
-// ★D3トライアル(2026-08-11): previewビルドのみ絵文字→モノクロSVG線画(ユーザ裁定)。本番=絵文字のまま。
-const NAV_D3 = (process.env.MANGAL_DATA_DIR ?? "").includes("preview");
+// ★D3本採用(2026-08-13 ユーザGO): ナビは全ビルドでモノクロSVG線画(絵文字廃止)。
+const NAV_D3 = true;
 
 function NavSvg({ d, circle }: { d: string; circle?: [number, number, number] }) {
   return (

@@ -5,14 +5,15 @@ metadata:
   node_type: memory
   type: project
   originSessionId: ca601f45-de8a-4eda-b8ed-ed44ecdd9447
-  modified: 2026-08-13T13:25:03.406Z
+  modified: 2026-08-13T13:28:48.175Z
 ---
 
 旧 [[inflight-state-2026-07-28]] を置換(生き残り保留は末尾へ引き継ぎ)。
 
 ## 本番待ち(次の週次蒸留/機能蒸留で公開。現在はpreviewのみ)
 - **UI刷新一式(2026-08-12〜13)**: ≡メニューを共通ヘッダー右端へ移設+案Bタイル型全26リンク化(portal必須=headerのbackdrop-blurがfixedを閉じ込める)/検索面カテゴリ件数色/ホームに**カラー版コーナー**(案3ボタン+案B書影帯・全集直上・Kindle検索直行)。★メニュー/コーナーは**本番ライトテーマにも効くコード変更**。
-- **D3テーマ(黒×ライム)はpreview限定トライアル**=本採用は別途ユーザGO(app/layout.tsxのPREVIEW_D3)。
+- ★**D3テーマ(黒×ライム)=2026-08-13ユーザGOで本採用**(PREVIEW_D3ゲート撤去=常時theme-d3+ホーム案12+ナビSVG)。
+  本番公開は**週次蒸留**で(theme classは全66k頁のHTML外殻に入るため、機能蒸留[非漫画面のみ]だと漫画頁だけライトの混在になる)。戻す時=bodyのtheme-d3を外すだけ。
 - アニメ化フラグ34頁(SBR等)=manga.v2反映済み・本番R2は週次待ち。
 - カラー版データ166→209作(フルカラー層解禁+照合fallback。詳細=skill color-editions)。
 

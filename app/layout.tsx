@@ -16,15 +16,14 @@ export const metadata: Metadata = {
     "出版年・著者・出版社・分野・ジャンルから日本の漫画を絞り込めるデータベース。全巻の発売日・ISBN・書影と、楽天ブックス等の購入リンクつき。",
 };
 
-// ★D3テーマ全ページトライアル(2026-08-11 ユーザ指示「全ページ変えたのを見たい」):
-//   previewビルド(MANGAL_DATA_DIR=.preview-data)だけ body にテーマを付与。
-//   本番ビルドは env 未設定=従来のライトテーマのまま(本採用はユーザGO後)。
-const PREVIEW_D3 = (process.env.MANGAL_DATA_DIR ?? "").includes("preview");
+// ★D3テーマ(黒×アシッドライム)= 2026-08-13 ユーザGOで本採用。全ビルドで常時付与。
+//   (経緯: 2026-08-11にpreview限定トライアル→全ページ検証→本採用。ライト時代の配色は
+//    globals.css の :root トークンとして残存=theme-d3クラスを外せば即戻せる)
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="ja">
-      <body className={`min-h-screen flex flex-col${PREVIEW_D3 ? " theme-d3" : ""}`}>
+      <body className="min-h-screen flex flex-col theme-d3">
         {/* PCマウスの横ドラッグを全横帯のスワイプ相当に変換(タッチは不介入) */}
         <GlobalDragScroll />
         <header className="border-b border-[var(--color-line)] bg-[var(--color-surface)]/80 backdrop-blur sticky top-0 z-20">
