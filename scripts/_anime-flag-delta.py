@@ -41,6 +41,14 @@ def has_anime(row):
 
 
 def main():
+    # ★aid→slugマップは必ず再構築してから使う(2026-08-13 実踏): 7/12製の古いマップを使い続けた結果、
+    #   7/18のリンク検証で頁から剥がされた誤リンク17件(atagoul/死角/Tokyo tribe等=親作品・同名異作への
+    #   誤結線)がworklistに再出現し続け、「反映しても頁が変わらない」空振りを起こした。
+    #   マップ=頁ymlのanilist_id逆引きなので、頁の現在形から作り直せば誤リンク層は自然に消える。
+    import subprocess
+    print("aid→slugマップ再構築(_anime-season-join.py --rebuild-map)…")
+    subprocess.run([sys.executable, os.path.join(ROOT, "scripts", "_anime-season-join.py"), "--rebuild-map"],
+                   check=True)
     aid_anime = {}
     with gzip.open(DUMP, "rt", encoding="utf-8") as f:
         for line in f:
