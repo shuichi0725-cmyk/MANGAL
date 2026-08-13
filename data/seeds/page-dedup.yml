@@ -1541,10 +1541,14 @@ dedup:
   canonical: kankanbiyori
   title: 艦々日和
   isbns: 11
-- drop: kanojo-no-hitorigurashi
-  canonical: kanojo-no-hitorigurashi-tsuu-out-manrui
-  title: 彼女のひとりぐらしツーアウト満塁
+- drop: kanojo-no-hitorigurashi-tsuu-out-manrui
+  canonical: kanojo-no-hitorigurashi
+  title: 彼女のひとりぐらし
   isbns: 2
+  note: |
+    向き反転 2026-08-14(ユーザ指摘「全四巻」)。最終巻の副題「ツーアウト満塁」で割れた
+    クラスタ(種2 sid=46112)を canonical にしていたため頁題が副題に化け巻番号も詰まっていた。
+    本題側(sid=46111)を canonical に戻し、全4巻は edition-canonical/kanojo-no-hitorigurashi.yml で再構築。
 - drop: kanpiooni-ara2026
   canonical: kanpiooni
   title: カンピオーニ

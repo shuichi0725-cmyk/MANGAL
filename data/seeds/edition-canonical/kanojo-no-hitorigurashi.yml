@@ -1,0 +1,33 @@
+slug: kanojo-no-hitorigurashi
+canonical_label: 通常版
+canonical_imprint: バーズコミックスデラックス
+canonical_publisher: 幻冬舎コミックス
+source: |
+  per-case再構築 2026-08-14(ユーザ指摘「全四巻」+ NDL SRU live + 楽天キャッシュ)。
+  玉置勉強『彼女のひとりぐらし』= 幻冬舎コミックス バーズコミックスデラックス 全4巻。
+  ★壊れ方: 最終巻の副題「ツーアウト満塁」が別クラスタ(種2 sid=46112)として立ち、
+    page-dedup が本題側(sid=46111)を drop して**副題クラスタを canonical にしていた**ため
+    頁題が『彼女のひとりぐらしツーアウト満塁』に化け、さらに巻番号が 3→1 に詰められていた。
+    加えて1巻(9784344819979)・2巻(9784344822719)は種2に存在せず本番のどこにも出ていなかった。
+  ★是正: page-dedup の向きを反転(drop=…-tsuu-out-manrui / canonical=kanojo-no-hitorigurashi)し、
+    本seedで全4巻を再構築。4巻は書影・書誌とも巻番号を持たない(NDL 巻=-)ので volume_label で副題表示。
+  ★「デラックス」はレーベル名で版種ではない(デラックス・レーベル割れ型)ため
+    type は standard、imprint だけ バーズコミックスデラックス とする。既存の deluxe タブは suppress。
+  ★『彼女のひとりぐらし大盛』(9784344839939 / バーズコミックススペシャル / 2017-05 / 1,320円)は
+    別レーベル・別価格で総集編か番外編か未確定のため**本seedでは触らない**(別頁のまま保留)。
+suppress_types:
+- deluxe
+volumes:
+- number: 1
+  isbn13: '9784344819979'
+  release_date: '2010-07'
+- number: 2
+  isbn13: '9784344822719'
+  release_date: '2011-07-23'
+- number: 3
+  isbn13: '9784344826052'
+  release_date: '2012-09-24'
+- number: 4
+  isbn13: '9784344839946'
+  release_date: '2017-05'
+  volume_label: ツーアウト満塁
