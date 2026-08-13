@@ -1,0 +1,24 @@
+slug: omega-j
+canonical_label: 通常版
+canonical_imprint: ヤングジャンプ・コミックス・ウルトラ
+canonical_publisher: 集英社
+source: |
+  per-case補完 2026-08-14(ユーザ提供 ja.wikipedia「オメガ7」+ NDL SRU live(creator=小林源文) + 楽天キャッシュ)。
+  『オメガJ』= オメガ7を一般漫画誌(ウルトラジャンプ)向けにリファインした版で、単行本は2社から出ている。
+  頁には集英社版(1997-09)しか無く、学習研究社の再版(2003-07 歴史群像コミックス 9784056031331)が
+  本番のどの頁にも未収録だった(_exists.py確認)ので別ブロックとして追加。
+  Wikipedia・NDL(4056031339=2003.7 学習研究社)・楽天(Gakken/歴史群像コミックス/書影有)の3ソース一致。
+  ★オメガ7本体とは別頁のまま(MANGALはシリーズ統括頁を作らず各単行本ラインを独立頁とする方針)。
+volumes:
+- number: 1
+  isbn13: '9784087820812'
+  release_date: '1997-09'
+extra_editions:
+- type: standard
+  label: 学研版
+  imprint: 歴史群像コミックス
+  publisher: 学習研究社
+  volumes:
+  - number: 1
+    isbn13: '9784056031331'
+    release_date: '2003-07'
