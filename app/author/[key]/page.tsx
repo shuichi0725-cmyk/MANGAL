@@ -16,7 +16,13 @@ const ORG_RE = /(社|書店|書房|出版|文庫|編集部|プロダクション
 export const dynamicParams = false;
 
 export async function generateStaticParams() {
-  return allAuthorKeys().map((key) => ({ key }));
+  const keys = allAuthorKeys().map((key) => ({ key }));
+  // ★空ガード(2026-08-15): output: export は params 0件のルートを「generateStaticParams が無い」
+  //   と見なしてビルドを落とす。著者keyは authors[].romaji がある頁からしか作れないので、
+  //   preview サブセットが日次ドラフトだけ(=romaji未付与)になると 0件になり preview ビルドが死ぬ
+  //   (2026-08-14 実害: preview を今回分102頁に入れ替えた途端に Deploy Preview が failure)。
+  //   manga/[slug] と同じく placeholder を返す(頁側は getAuthor→notFound で404にフォールバック)。
+  return keys.length > 0 ? keys : [{ key: "_empty" }];
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ key: string }> }) {
