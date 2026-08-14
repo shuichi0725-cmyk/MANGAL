@@ -180,6 +180,49 @@ def main():
     else:
         ok("R2 prune 待ち = なし")
 
+    # 8b. ★リダイレクト衛生(2026-08-14 新設・ユーザ指示「調査して間違いないようだったら週次蒸留時削除」):
+    #    slug-aliases.yml は per-case の drop/rename のたび増えるが、宛先が後で消えても誰も気付かない。
+    #    2026-08-14 の初回掃除で 死に転送422 + ★alias キーが実在の公開slugと衝突51 を検出した
+    #    (衝突は転送が効き出した瞬間に実頁を隠す=デビルマン等)。同じ腐り方を二度させないための番人。
+    #    3種を FAIL にする: ①連鎖解決後も宛先が非公開 ②キーが公開slugと衝突 ③自己参照。
+    try:
+        import re as _re
+        _idx = json.load(open(os.path.join(ROOT, "data", "manga-list-index.json"), encoding="utf-8"))
+        _si = _idx["f"].index("slug")
+        _pub = {r[_si] for r in _idx["d"]}
+        _al = {}
+        for _ln in open(os.path.join(ROOT, "data", "slug-aliases.yml"), encoding="utf-8"):
+            _m = _re.match(r"^(\S+):\s*(.+)$", _ln)
+            if _m:
+                _al[_m.group(1)] = _m.group(2).strip()
+
+        def _resolve(k, limit=10):
+            seen, cur = set(), _al[k]
+            while cur in _al and cur not in seen and limit > 0:
+                seen.add(cur)
+                cur = _al[cur]
+                limit -= 1
+            return cur
+
+        _dead = [k for k in _al if _resolve(k) not in _pub]
+        _clash = [k for k in _al if k in _pub]
+        _self = [k for k, v in _al.items() if k == v]
+        if _dead or _clash or _self:
+            _how = ""
+            if _dead:
+                _how += f"死に転送 {len(_dead)} 件(宛先が公開slugに無い): " + ", ".join(_dead[:10]) + "\n"
+            if _clash:
+                _how += f"★キーが実在の公開slugと衝突 {len(_clash)} 件(転送が効くと実頁が消える): " + ", ".join(_clash[:10]) + "\n"
+            if _self:
+                _how += f"自己参照 {len(_self)} 件: " + ", ".join(_self[:10]) + "\n"
+            _how += ("→ 宛先が rename/dedup で移っただけなら付け替え、頁ごと drop 済みなら行を削除。"
+                     "その後 python scripts/_gen-redirects.py で public/_redirects を再生成")
+            fail(f"リダイレクト衛生NG(死{len(_dead)}/衝突{len(_clash)}/自己{len(_self)})", _how)
+        else:
+            ok(f"リダイレクト衛生 = OK(alias {len(_al)} 件・死に転送0・衝突0)")
+    except Exception as _e:
+        warn(f"リダイレクト衛生チェックを実行できず: {_e}")
+
     # 9. ★ISBN消失監視(2026-08-08 新設・ユーザ裁定「本当にある物を消したときに私は気がつけない」):
     #    前回スナップショットから消えたISBNを台帳(non-manga-drop/deny/exclude/prune)と突合し、
     #    **理由なしの消失**を FAIL にする。変なslugはユーザが見つけられるが、
