@@ -86,7 +86,10 @@ python scripts/_gen-sitemap.py
 ### 4. R2 同期 (差分PUT + ★不要頁の削除)
 ```
 python scripts/_r2-sync.py --bucket mangal-site --prune
+python scripts/_kv-redirects-sync.py    # ★alias 301 全件を本番KVへ(数秒。2026-08-14 リダイレクト層復旧)
 ```
+- ★KV同期は**pruneと同じ週次で必ずセット**: 頁drop/slug renameの旧頁実体は`--prune`で消えるので、
+  同じタイミングでKVの301が引き継ぐ(=旧URLが404になる窓を作らない)。Worker側は6h TTLで自動再読込。
 - ★**workers/r2-serve.js を変更した週は Worker も deploy**(R2同期はファイルだけ=Workerコードは別デプロイ):
 ```
 npx wrangler deploy -c wrangler-r2.jsonc

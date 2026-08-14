@@ -41,6 +41,6 @@ yaml.safe_dump(pd, open(ROOT+"/data/seeds/page-dedup.yml", "w", encoding="utf-8"
 with open(ROOT+"/data/slug-aliases.yml", "a", encoding="utf-8") as f:
     for o, n in aliases: f.write(f"{o}: {n}\n")
 with open(ROOT+"/public/_redirects", "a", encoding="utf-8") as f:
-    for o, n in aliases: f.write(f"/{o} /{n} 301\n")
+    for o, n in aliases: f.write(f"/manga/{o} /manga/{n} 301\n")
 clog.close()
 print(f"適用: {cnt} / alias{len(aliases)}本追記", flush=True)

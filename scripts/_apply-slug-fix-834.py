@@ -37,6 +37,6 @@ yaml.safe_dump(so, open(sop, "w", encoding="utf-8"), allow_unicode=True, sort_ke
 with open(ROOT + "/data/slug-aliases.yml", "a", encoding="utf-8") as f:
     for old, new in clean.items(): f.write(f"{old}: {new}\n")
 with open(ROOT + "/public/_redirects", "a", encoding="utf-8") as f:
-    for old, new in clean.items(): f.write(f"/{old} /{new} 301\n")
+    for old, new in clean.items(): f.write(f"/manga/{old} /manga/{new} 301\n")
 clog.close()
 print(f"適用完了: rename={renamed} / slug-overrides+aliases+_redirects+changelog 更新", flush=True)

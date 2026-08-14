@@ -32,7 +32,7 @@ for a in AUTO:
                         f"  title: {a['title']}\n  isbns: {a['isbns']}\n  note: {note}({TODAY})\n")
         if d["slug"] != a["canonical_slug"]:
             alias_lines.append(f"{d['slug']}: {a['canonical_slug']}\n")
-            redir_lines.append(f"/{d['slug']} /{a['canonical_slug']} 301\n")
+            redir_lines.append(f"/manga/{d['slug']} /manga/{a['canonical_slug']} 301\n")
         log_lines.append(json.dumps({
             "slug": a["canonical_slug"], "op": "isbn-dup-dedup", "source": "_audit-isbn-dup-pages",
             "before": f"2頁分裂: {a['canonical']} + {d['stem']}(題={d['title']})",

@@ -1,6 +1,6 @@
 import { EmailMessage } from "cloudflare:email";
 /**
- * MANGAL R2配信 Worker(★ドラフト・未デプロイ。 R2移行時に使う)。
+ * MANGAL R2配信 Worker(★本番稼働中 mangal-db.com。 デプロイ= wrangler deploy -c wrangler-r2.jsonc)。
  *
  * 背景: 69k頁≈14万ファイルが Workers Static Assets / Pages のファイル数上限超え
  *   → アセットを R2(オブジェクトストレージ・ファイル数無制限・egress無料)から配信。
@@ -199,10 +199,11 @@ ${rec.body}`;
       return new Response("Method Not Allowed", { status: 405 });
     }
 
-    // ① _redirects(alias 301)。 env.REDIRECTS = {from: to} のJSON(KV or アセット)。
+    // ① alias 301。 env.REDIRECTS = KV(key "redirects.json" = {"/manga/旧": "/manga/新"})。
+    //    投入= scripts/_kv-redirects-sync.py(2026-08-14 リダイレクト層復旧)。末尾スラッシュも許容。
     if (env.REDIRECTS) {
       const r = await getRedirects(env);
-      const to = r[url.pathname];
+      const to = r[url.pathname] || r[url.pathname.replace(/\/+$/, "")];
       if (to) return Response.redirect(new URL(to, url.origin).toString(), 301);
     }
 
@@ -249,11 +250,15 @@ ${rec.body}`;
   },
 };
 
+// ★6h TTLで再読込(週次のKV更新をデプロイ無しでも拾う。KV読込は isolate×6hに1回=コスト微少)
 let _redirects = null;
+let _redirectsAt = 0;
 async function getRedirects(env) {
-  if (_redirects) return _redirects;
-  try { _redirects = JSON.parse(await env.REDIRECTS.get("redirects.json")) || {}; }
-  catch { _redirects = {}; }
+  if (_redirects && Date.now() - _redirectsAt < 6 * 3600 * 1000) return _redirects;
+  try {
+    _redirects = JSON.parse(await env.REDIRECTS.get("redirects.json")) || {};
+    _redirectsAt = Date.now();
+  } catch { _redirects = _redirects || {}; _redirectsAt = Date.now(); }
   return _redirects;
 }
 let _adultUs = null;

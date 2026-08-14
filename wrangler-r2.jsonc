@@ -15,17 +15,17 @@
   ],
   "kv_namespaces": [
     { "binding": "LIKES", "id": "751056d3bdc34407a93da3403b4591bd" },
-    { "binding": "CONTACT", "id": "fa55f7ff0035427f87db144a032be3e7" }
+    { "binding": "CONTACT", "id": "fa55f7ff0035427f87db144a032be3e7" },
+    // ★alias 301(2026-08-14 リダイレクト層復旧): key redirects.json = {"/manga/旧": "/manga/新"}
+    //   投入= python scripts/_kv-redirects-sync.py(週次のR2同期後)
+    { "binding": "REDIRECTS", "id": "eef1c88ee77340afa67bf78f7e4b9782" }
   ],
   "send_email": [
     { "name": "MAILER", "destination_address": "shuichi0725@gmail.com" }
   ],
   "vars": { "MAIL_TO": "shuichi0725@gmail.com" },
-  // ★任意: alias 301 と adult_us geo 用 KV(使うなら id を埋める)
-  // "kv_namespaces": [
-  //   { "binding": "REDIRECTS", "id": "<kv-id>" },
+  // ★任意: adult_us geo 用 KV(使うなら kv_namespaces に追加)
   //   { "binding": "ADULT_US_SLUGS", "id": "<kv-id>" }
-  // ],
   "workers_dev": true,
   "routes": [
     { "pattern": "mangal-db.com", "custom_domain": true },

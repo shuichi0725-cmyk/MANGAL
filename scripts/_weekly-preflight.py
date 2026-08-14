@@ -207,7 +207,16 @@ def main():
         _dead = [k for k in _al if _resolve(k) not in _pub]
         _clash = [k for k in _al if k in _pub]
         _self = [k for k, v in _al.items() if k == v]
-        if _dead or _clash or _self:
+        # ★形状番人(2026-08-14 リダイレクト層復旧): _redirects は /manga/<旧> /manga/<新> 301 形状で
+        #   yml と1:1 でなければならない(ルート直下形状は届かない=記憶 redirect_layer_inactive)。
+        _rd = {}
+        for _ln in open(os.path.join(ROOT, "public", "_redirects"), encoding="utf-8"):
+            _p = _ln.split()
+            if len(_p) >= 3 and _p[2] == "301":
+                _rd[_p[0]] = _p[1]
+        _shape = ([k for k, v in _al.items() if _rd.get(f"/manga/{k}") != f"/manga/{v}"]
+                  + [k for k in _rd if not k.startswith("/manga/")])
+        if _dead or _clash or _self or _shape:
             _how = ""
             if _dead:
                 _how += f"死に転送 {len(_dead)} 件(宛先が公開slugに無い): " + ", ".join(_dead[:10]) + "\n"
@@ -215,11 +224,15 @@ def main():
                 _how += f"★キーが実在の公開slugと衝突 {len(_clash)} 件(転送が効くと実頁が消える): " + ", ".join(_clash[:10]) + "\n"
             if _self:
                 _how += f"自己参照 {len(_self)} 件: " + ", ".join(_self[:10]) + "\n"
+            if _shape:
+                _how += (f"★_redirects 形状/同期NG {len(_shape)} 件(/manga/形状でyml未反映): "
+                         + ", ".join(_shape[:10]) + "\n")
             _how += ("→ 宛先が rename/dedup で移っただけなら付け替え、頁ごと drop 済みなら行を削除。"
-                     "その後 python scripts/_gen-redirects.py で public/_redirects を再生成")
-            fail(f"リダイレクト衛生NG(死{len(_dead)}/衝突{len(_clash)}/自己{len(_self)})", _how)
+                     "その後 python scripts/_gen-redirects.py で public/_redirects を再生成"
+                     "(本番KVは r2-sync 後に python scripts/_kv-redirects-sync.py)")
+            fail(f"リダイレクト衛生NG(死{len(_dead)}/衝突{len(_clash)}/自己{len(_self)}/形状{len(_shape)})", _how)
         else:
-            ok(f"リダイレクト衛生 = OK(alias {len(_al)} 件・死に転送0・衝突0)")
+            ok(f"リダイレクト衛生 = OK(alias {len(_al)} 件・死に転送0・衝突0・/manga/形状同期済)")
     except Exception as _e:
         warn(f"リダイレクト衛生チェックを実行できず: {_e}")
 

@@ -102,7 +102,7 @@ def do_alias():
         for o, nn in pairs:
             if f"/{o}" in rhave:
                 continue
-            f.write(f"/{o} /{nn} 301\n")
+            f.write(f"/manga/{o} /manga/{nn} 301\n")
             radd += 1
     print(f"slug-aliases.yml +{added} / _redirects +{radd}")
 
@@ -144,7 +144,7 @@ def do_hygiene():
     with (ROOT / "public/_redirects").open("w", encoding="utf-8", newline="") as f:
         f.write("# Auto-generated from data/slug-aliases.yml (hygiene済)\n")
         for o, nn in sorted(out.items()):
-            f.write(f"/{o} /{nn} 301\n")
+            f.write(f"/manga/{o} /manga/{nn} 301\n")
     print(f"hygiene: 有効alias {len(out)} / 現役slug衝突で削除 {len(drop_self)} / 連鎖解決 {len(retarget)} / 行き先消失 {len(dead)}")
     for o, nn in drop_self[:10]:
         print(f"  SELF-DROP: {o} -> {nn}")

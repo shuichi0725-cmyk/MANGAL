@@ -141,7 +141,7 @@
 - [【厳守】edition-canonicalのキー=SRC slug](edition_canonical_key_is_src_slug.md) — overrides(公開slug)と逆。取り違えると無警告で不適用
 - [SHADOW SKILL=4期の別作品群](shadow_skill_franchise_state.md) — 第1期を新規登録済。第2期/講談社再編集3冊が未登録
 - [ワイルド7=6作品×多版・接ぎ木3件](wild7_franchise_state.md) — 本編/新/続新/W7/飛葉 是正済。復刊ドットコム版の頁構成が未決
-- [【厳守】頁dropは既存リダイレクトも張り替える](drop_page_redirect_chain.md) — 死んだ連鎖+部分一致で追記漏れ。R2は週次--pruneで消す ／ [【重大・未修正】301リダイレクトは実質機能していない](redirect_layer_inactive.md) — KV未投入+パス形状が/manga/抜け。実測404
+- [【厳守】頁dropは既存リダイレクトも張り替える](drop_page_redirect_chain.md) — 死んだ連鎖+部分一致で追記漏れ。R2は週次--pruneで消す ／ [【✅修復済】301リダイレクト層=KV+/manga/形状で稼働](redirect_layer_inactive.md) — 週次でKV同期(_kv-redirects-sync.py)。preflight 8bが形状も番人
 - [R2 prune待ち台帳=週次preflightが表示](pending_r2_prune_ledger.md) — 頁drop/slug renameで積む。--prune後に消し込み
 - [ひぐらし=編ごとに別頁・掲載誌20頁誤り](higurashi_franchise_state.md) — 4作新規登録+令の3編混在分離。残=宙出版アンソロジー頁/雀・デイブレイク系
 - [【厳守】per-case修正は必ずpreviewに上げる](percase_fix_always_to_preview.md) — reflectだけでは未投入頁が素通り。明示cp+索引再構築
