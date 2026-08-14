@@ -206,6 +206,8 @@ core-magazine:
   name: コアマガジン
 cosmic-shuppan:
   name: コスミック出版
+culture-entertainment:
+  name: カルチュア・エンタテインメント
 cygames:
   name: Cygames
 d-visual:
@@ -259,9 +261,7 @@ du-books:
 dybooks:
   name: Dybooks
 earth-star:
-  aliases:
-  - 株式会社アース・スター エンターテイメント
-  - 株式会社アース・スターエンターテイメント
+  aliases: ['株式会社アース・スター エンターテイメント', '株式会社アース・スターエンターテイメント']
   name: アース・スターエンターテイメント
 east-press:
   name: イースト・プレス
@@ -662,7 +662,7 @@ kapukon:
 kasakura-shuppan:
   name: 笠倉出版社
 kaseitakesamurai:
-  name: '[加勢丈士]'
+  name: [加勢丈士]
 katatsumurisha:
   name: 蝸牛社
 kawade-shobo:
@@ -971,6 +971,8 @@ neko-paburisshingu:
   name: ネコ・パブリッシング
 nesuko:
   name: ネスコ
+next-f:
+  name: ネクストF
 nhk-shuppan-kyokai:
   name: 日本放送出版協会
 nhkshuppan:
@@ -1401,6 +1403,8 @@ sofutogareeji:
   name: ソフトガレージ
 sony-magazines:
   name: ソニー・マガジンズ
+sorajima:
+  name: ソラジマ
 soryusha:
   name: 蒼竜社
 soshiete:
@@ -1633,7 +1637,3 @@ zenbunkakenkyuusho:
   name: 禅文化研究所
 zitto:
   name: ZITTO
-next-f:
-  name: ネクストF
-culture-entertainment:
-  name: カルチュア・エンタテインメント
