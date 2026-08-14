@@ -128,7 +128,10 @@ def main():
         kata_blob = bool(re.search(r"[bcdfghjklmnpqrstvwz]?[aiueo](?:[bcdfghjkmnprstwz][aiueo]){2,}", slug))
         # CONTINUATION / NONMANGA = 最優先(誤ページそのもの)
         bt = base_title(title)
-        if bt and bt != title and bt in prod_bases:
+        # ★偽陽性簿は基底題ルートにも効かせる(2026-08-14): 従来は下の hard_norm ルートだけが
+        #   _CONT_FP を見ており、こちらは裁定済みでも毎回再フラグしてゲートが下りなかった
+        #   (貴族転生 〜外伝 14歳ノアの無双旅行〜 = 副題を落とすと基底題が本編と一致する外伝)。
+        if bt and bt != title and bt in prod_bases and (slug, prod_bases[bt]) not in _CONT_FP:
             rows.append(("CONTINUATION", slug, f"基底題『{bt}』=既存 {prod_bases[bt]}(続巻誤生成疑い→種4転送)", title))
         _hn = hard_norm(title)
         if _hn and _hn in prod_hard and prod_hard[_hn] != slug and (slug, prod_hard[_hn]) not in _CONT_FP:
