@@ -6008,6 +6008,10 @@ overrides:
     at: '2026-06-26'
     reason: フリガナ基点でハイフン区切り是正(slug-fix-834)
     slug: shinomiya-kun-ni-wa-wake-ga-aru
+  shinpan-himitsu-tantei-jieiei:
+    at: '2026-08-14'
+    reason: 頁が種2の「新版秘密探偵JA」クラスタから建ち slug/kana に『新版』が焼き付いていた。NDLのタイトルよみは大都社版=ヒミツ タンテイ ジェイエイ / ホーム社HMB版=ヒミツ タンテイ JA でいずれにも新版は無い。JAは字づら通りの英字読み(ジェイエイ)なので slug規則6により英字のまま ja。ユーザ裁定2026-08-14
+    slug: himitsu-tantei-ja
   shinpi-no-sekai-eruhazaado-tsubura-1996:
     at: '2026-08-10'
     reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)

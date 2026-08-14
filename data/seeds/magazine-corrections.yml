@@ -134,3 +134,8 @@ corrections:
     evidence: ja.wikipedia「ひぐらしのなく頃に」漫画一覧の掲載誌欄。怪 現壊し編=月刊コンプエース。旧値 gangan は誤り
     added_at: '2026-08-08'
     note: ★2026-08-08 slug変更(higurashi-no-naku-koro-ni-kai-2007-2→higurashi-no-naku-koro-ni-kai-utsutsukowashihen)によりキー付替。
+  himitsu-tantei-ja:
+    magazine: shonen-king
+    source: wiki-verified
+    evidence: ja.wikipedia「秘密探偵JA」= 週刊少年キング(少年画報社)1965-1969連載、望月三起也の初ヒット作。同誌はワイルド7と同じ shonen-king キー。種3は掲載誌を持っていなかった(magazine=None)
+    added_at: '2026-08-14'
