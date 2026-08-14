@@ -261,7 +261,9 @@ du-books:
 dybooks:
   name: Dybooks
 earth-star:
-  aliases: ['株式会社アース・スター エンターテイメント', '株式会社アース・スターエンターテイメント']
+  aliases:
+  - 株式会社アース・スター エンターテイメント
+  - 株式会社アース・スターエンターテイメント
   name: アース・スターエンターテイメント
 east-press:
   name: イースト・プレス
@@ -662,7 +664,7 @@ kapukon:
 kasakura-shuppan:
   name: 笠倉出版社
 kaseitakesamurai:
-  name: [加勢丈士]
+  name: '[加勢丈士]'
 katatsumurisha:
   name: 蝸牛社
 kawade-shobo:
