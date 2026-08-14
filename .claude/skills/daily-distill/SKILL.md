@@ -19,7 +19,11 @@ B=NDL新着回収(納本済み過去分)。毎日でなくてよい(間隔が空
 - **捏造禁止**: ヨミ/著者/genreを推測で埋めない。ヨミ=楽天仮確定+NDL照合キュー(下記)が正規ルート。
 - **単巻先行登録禁止**: 途中巻でページ無し(④)は全巻回収が成立した作品だけドラフト化。
 - **②③④は必ずpreview先行**(B裁定)。ユーザ確認GOなしに本番化しない。**previewは"今回のみ"**(増加分−過去draft−捏造kana)に絞る。ユーザは「前回見た」に敏感で正確=水増しを即見抜く。
-  ★2026-08-11 機械化: 手順4.5の `_preorder-preview-swap.py` が**前回ドラフトを黙って退場**させる(=追加でなく入れ替え。ユーザ裁定「何も言わないでも入れ替えを行ってほしい」)。飛ばすと前回分が混ざる。
+  ★2026-08-11 機械化: 手順4.5の `_preorder-preview-swap.py` が**previewの現掲示物を黙って退場**させる(=追加でなく入れ替え。ユーザ裁定「何も言わないでも入れ替えを行ってほしい」)。飛ばすと前回分が混ざる。
+  ★2026-08-15 是正(ユーザ指摘「入れ替えるようにskillしたはずだけどなってない?」): 旧実装は退場条件を
+  「日次ドラフトである AND data/manga.v2 に居ない」にしていたため**手作業でpreviewに入れた確認用コピーが1頁も退場せず**、
+  2026-08-14に巻抜けセット155頁が残ったまま日次102頁が足され preview 257頁で新旧が混ざった。
+  現在は**由来を問わず全部退場**(例外= 復元手段が無い頁[安全弁] と `data/seeds/preview-keep.txt` に明示した頁のみ)。
 - ★**1回のAPIで全フィールド捕捉**(2026-07-09 ユーザ指摘 [[acquire_all_obtainable_info]]): 楽天API/harvestは書影だけでなく **itemCaption(あらすじ=genre/catch/synopsis元)/booksGenreId/itemPrice/subTitle/affiliateUrl** を返す。**書影だけ取って捨てるな**。captionを`_preorder_draft.rakuten_caption`に保存→genre(master32・provisional)/catch/synopsisを生成(caption有れば発売前でも付く)。書影のためにAPIを叩くなら同じ応答からcaptionも必ず取る。
 - genre=closed vocabulary(master32)のみ+provisional。catch/synopsis=skill enrich-catch-synopsis の規律。
 - ★★**「壊れているから」で deny しない**(2026-08-08 実害=熱愛プリンス全68巻を誤って消した)。
@@ -52,7 +56,7 @@ B=NDL新着回収(納本済み過去分)。毎日でなくてよい(間隔が空
 | 2 | ★**増加分に絞る**(必須) | `python scripts/_preorder-increment.py`  ← prev差分+過去draft除外。飛ばすと水増し |
 | 3 | 分類 | `python scripts/_preorder-classify.py` |
 | 4 | ①続巻→種4+反映 | `python scripts/_preorder-apply-zokkan.py` → `python scripts/_reflect-targeted.py --only <touched> --commit-only` ★**--push禁止**=commit止め(最後にまとめて1回push) |
-| 4.5 | ★**preview入れ替え**(2026-08-11 ユーザ裁定=「追加でなく黙って入れ替え」) | `python scripts/_preorder-preview-swap.py` ← 前回までの未本番化ドラフトをpreviewから退場(drafts台帳は温存=increment網は生きる。手作業頁/本番化済みは三重ガードで残置)。**確認を取らず毎回実行** |
+| 4.5 | ★**preview入れ替え**(2026-08-11 ユーザ裁定=「追加でなく黙って入れ替え」/ 2026-08-15 範囲是正) | `python scripts/_preorder-preview-swap.py` ← **preview の現掲示物を由来を問わず全部退場**(日次ドラフト・手作業の確認用コピーとも)。データは消えない= ドラフトは `.cache/preorders/drafts/`、手作業コピーは `data/manga.v2` が実体。残したいセットは `data/seeds/preview-keep.txt` に1行1slugで明示。**確認を取らず毎回実行** |
 | 5 | ②③新作ドラフト | `python scripts/_preorder-gen-preview.py new1a` ; `new1b` |
 | 6 | ④途中巻ドラフト | `python scripts/_preorder-gen-midfill.py` |
 | 7 | genre付与(★worksheet化 2026-07-10) | `python scripts/_preorder-genre-worksheet.py --emit` → AIがworksheetのgenres[]にmaster32キー記入(確信なければ空) → `--apply`(master32外=abort・純粋追加・provisional自動)。caption無し頁は先に `_preorder-capture-captions.py` |
@@ -70,7 +74,10 @@ B=NDL新着回収(納本済み過去分)。毎日でなくてよい(間隔が空
 - □ **全巻に発売日**(回収先行巻=種2 db-v2から引く)+**書影**(実URL=harvest/covers seed/楽天API。★構築禁止)
 - □ **genre**=captionからprovisional・master32のみ(捏造なら空)
 - □ **作者kana**=楽天authorKana由来 or 空(捏造なし。漢字混入0を確認)
-- □ **preview=今回のみ**(増加分・前回draft混入0・捏造kana hold済。★手順4.5のswap実行済みか=`--list`で退場漏れ0を確認可)
+- □ **preview=今回のみ**(増加分・前回draft混入0・捏造kana hold済。★手順4.5のswap実行済みか=`--list`で退場漏れ0を確認可。
+  ★**頁数がその日のドラフト数と一致するか**を必ず数える= 一致しなければ前回分が残っている[2026-08-14実害])
+- □ ★**本番待ちper-caseを見たい時は preview に手で足さない**= 日次のswapが毎回流す。skill `prodwait-preview`(「本番待ちテストに出して」)で
+  週次前に一括投入するのが正規ルート。日次をまたいで残したい確認セットだけ `data/seeds/preview-keep.txt` に積む。
 - □ **索引skip 0**(Zod検証で落ちる頁=検索に載るが404)
 - □ **索引衛生** `python scripts/_audit-index-hygiene.py data`(cover slim全行/スキーマ/head/alt。2026-07-14新設ゲート)
 - □ **`--commit-prev` 実行済み**(処理完了後のみ。件数確認だけの日は実行しない)
