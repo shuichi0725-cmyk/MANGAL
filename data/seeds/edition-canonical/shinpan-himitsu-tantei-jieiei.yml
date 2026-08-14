@@ -1,0 +1,197 @@
+slug: shinpan-himitsu-tantei-jieiei
+canonical_label: 通常版
+canonical_imprint: Star comics
+canonical_publisher: 大都社
+source: |
+  per-case版再構築 2026-08-14(ユーザ提供のNDL書誌TSV + 種2(db-v2) + 楽天キャッシュ)。
+  ★壊れ方: 種2は**6版**持っているのに本番頁は2版に潰れ、しかも1版が2社の接ぎ木だった。
+    ①「文庫版(ぶんか社/秋田漫画文庫)」= 1〜9巻の実体が**ぶんか社コミック文庫(2009)**の
+      ISBN 4-8211-xxxx、11〜15巻が**秋田書店 秋田漫画文庫(1982-83)**の ISBN 4-253-xxxx。
+      publisher と imprint も食い違い(ぶんか社 / 秋田漫画文庫)。巻抜け仮想 bunkobon:[10] は
+      この**接ぎ目**が欠番に見えていただけで、実在しない巻を探していた。
+    ②「通常版(大都社/キング・コミックス)」= 中身は大都社の Star comics なのに
+      imprint が少年画報社のレーベル「キング・コミックス」になっていた。
+    ③ホーム社漫画文庫(HMB・2000・全13巻)が頁に丸ごと不在。
+  ★確定した4版(種2・楽天・NDLの3ソースで突合):
+    ①大都社 Star comics 全15巻 1984-10〜1985-04(ISBN 9784886530028〜165・NDLがv1-v3のISBNを裏付け)
+    ②秋田書店 秋田漫画文庫 全15巻 1982〜1983(ISBN 9784253016667〜016803 の連番。
+      種2が11-15を、NDLがv3を、楽天が全15巻を持ち両端で一致)
+    ③ホーム社 HMB(ホーム社漫画文庫) 全13巻 2000-07〜2000-12(種2・楽天・NDLが完全一致)
+    ④ぶんか社コミック文庫 全9巻 2009-02〜2009-08(種2・楽天が一致)
+  ★秋田漫画文庫の日付: 3巻=1982-04(種2/NDL/楽天) 4巻=1982-04-20(種2) 6巻=1982-06-20(楽天)
+    11-15巻=種2。1・2・5・7〜10巻は**どのソースも初版日を持たない**ため release_date を空にした。
+    楽天はこの8冊に一律「1992年04月」を返すが、11巻が1982-12である以上これは初版日ではない
+    (重版かプレースホルダ)ので採らない=捏造しない。
+  ★本seedに入れていない2版(要別途調査): 種2の
+    「キング・コミックス(少年画報社)」1-15 と「ヒット・コミックス(少年画報社)」1-10,13-15。
+    どちらもISBNが1件も無く、キング版は日付が 4巻=1967-12-15 なのに 1巻=1972-08-01 と矛盾し、
+    11・12巻が1973と1977で重複している= 初版/新版/重版が1クラスタに混ざっている疑い。
+    現状の本番頁にも出ていないので除外は後退ではない。
+suppress_types:
+- bunkobon
+volumes:
+- number: 1
+  isbn13: '9784886530028'
+  release_date: '1984-10-20'
+- number: 2
+  isbn13: '9784886530035'
+  release_date: '1984-10-20'
+- number: 3
+  isbn13: '9784886530042'
+  release_date: '1984-11-20'
+- number: 4
+  isbn13: '9784886530059'
+  release_date: '1984-11-20'
+- number: 5
+  isbn13: '9784886530066'
+  release_date: '1984-12-20'
+- number: 6
+  isbn13: '9784886530073'
+  release_date: '1984-12-20'
+- number: 7
+  isbn13: '9784886530080'
+  release_date: '1985-01-20'
+- number: 8
+  isbn13: '9784886530097'
+  release_date: '1985-01-20'
+- number: 9
+  isbn13: '9784886530103'
+  release_date: '1985-01-20'
+- number: 10
+  isbn13: '9784886530110'
+  release_date: '1985-02-20'
+- number: 11
+  isbn13: '9784886530127'
+  release_date: '1985-02-20'
+- number: 12
+  isbn13: '9784886530134'
+  release_date: '1985-03-20'
+- number: 13
+  isbn13: '9784886530141'
+  release_date: '1985-03-20'
+- number: 14
+  isbn13: '9784886530158'
+  release_date: '1985-04-20'
+- number: 15
+  isbn13: '9784886530165'
+  release_date: '1985-04-30'
+extra_editions:
+- type: bunkobon
+  label: 秋田漫画文庫
+  imprint: 秋田漫画文庫
+  publisher: 秋田書店
+  volumes:
+  - number: 1
+    isbn13: '9784253016667'
+  - number: 2
+    isbn13: '9784253016674'
+  - number: 3
+    isbn13: '9784253016681'
+    release_date: '1982-04'
+  - number: 4
+    isbn13: '9784253016698'
+    release_date: '1982-04-20'
+  - number: 5
+    isbn13: '9784253016704'
+  - number: 6
+    isbn13: '9784253016711'
+    release_date: '1982-06-20'
+  - number: 7
+    isbn13: '9784253016728'
+  - number: 8
+    isbn13: '9784253016735'
+  - number: 9
+    isbn13: '9784253016742'
+  - number: 10
+    isbn13: '9784253016759'
+  - number: 11
+    isbn13: '9784253016766'
+    release_date: '1982-12'
+  - number: 12
+    isbn13: '9784253016773'
+    release_date: '1983-02'
+  - number: 13
+    isbn13: '9784253016780'
+    release_date: '1983-03'
+  - number: 14
+    isbn13: '9784253016797'
+    release_date: '1983-04'
+  - number: 15
+    isbn13: '9784253016803'
+    release_date: '1983-04'
+- type: bunkobon
+  label: ホーム社漫画文庫
+  imprint: HMB
+  publisher: ホーム社
+  volumes:
+  - number: 1
+    isbn13: '9784834271515'
+    release_date: '2000-07'
+  - number: 2
+    isbn13: '9784834271522'
+    release_date: '2000-07'
+  - number: 3
+    isbn13: '9784834271560'
+    release_date: '2000-08'
+  - number: 4
+    isbn13: '9784834271577'
+    release_date: '2000-08'
+  - number: 5
+    isbn13: '9784834271591'
+    release_date: '2000-09'
+  - number: 6
+    isbn13: '9784834271607'
+    release_date: '2000-09'
+  - number: 7
+    isbn13: '9784834271638'
+    release_date: '2000-10'
+  - number: 8
+    isbn13: '9784834271645'
+    release_date: '2000-10'
+  - number: 9
+    isbn13: '9784834271676'
+    release_date: '2000-10'
+  - number: 10
+    isbn13: '9784834271706'
+    release_date: '2000-11'
+  - number: 11
+    isbn13: '9784834271713'
+    release_date: '2000-11'
+  - number: 12
+    isbn13: '9784834271768'
+    release_date: '2000-12'
+  - number: 13
+    isbn13: '9784834271775'
+    release_date: '2000-12'
+- type: bunkobon
+  label: ぶんか社コミック文庫
+  imprint: ぶんか社コミック文庫
+  publisher: ぶんか社
+  volumes:
+  - number: 1
+    isbn13: '9784821187355'
+    release_date: '2009-02'
+  - number: 2
+    isbn13: '9784821187362'
+    release_date: '2009-02'
+  - number: 3
+    isbn13: '9784821187997'
+    release_date: '2009-06'
+  - number: 4
+    isbn13: '9784821188000'
+    release_date: '2009-06'
+  - number: 5
+    isbn13: '9784821188338'
+    release_date: '2009-07'
+  - number: 6
+    isbn13: '9784821188345'
+    release_date: '2009-07'
+  - number: 7
+    isbn13: '9784821188529'
+    release_date: '2009-08'
+  - number: 8
+    isbn13: '9784821188536'
+    release_date: '2009-08'
+  - number: 9
+    isbn13: '9784821188543'
+    release_date: '2009-08'
