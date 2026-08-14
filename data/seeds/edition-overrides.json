@@ -36774,5 +36774,20 @@
 "year_started": 1965,
 "year_ended": 1969,
 "note": "2026-08-14 per-case(ユーザ裁定): ①ヨミから「シンパン(新版)」を除去=頁が種2の『新版秘密探偵JA』クラスタから建った焼き付き。NDLのタイトルよみは大都社版=ヒミツ タンテイ ジェイエイ/ホーム社HMB版=ヒミツ タンテイ JA でいずれにも新版は無い ②連載年を1965-1969に是正=ja.wikipedia『秘密探偵JA』(週刊少年キング1965-1969連載・望月三起也の初ヒット作)。旧値1982-1985は単行本(秋田漫画文庫/大都社Star comics)の刊行年に引きずられたもので、連載年は巻の刊行年から導けない(ワイルド7・朝太郎伝と同型) ③掲載誌 shonen-king は magazine-corrections.yml へ(edition-overridesはmagazine未対応=no-op)。★キーは公開slug=slug-overridesで shinpan-himitsu-tantei-jieiei → himitsu-tantei-ja に改名済のため新slug側に置く。版構成は edition-canonical/shinpan-himitsu-tantei-jieiei.yml(こちらはSRC slugがキー)が正。"
+},
+"bakemonogatari": {
+"authors": [
+{
+"name": "大暮維人",
+"role": "artist"
+}
+],
+"original_authors": [
+{
+"name": "西尾維新",
+"role": "writer"
+}
+],
+"note": "2026-08-14 per-case: 原作の西尾維新が抜けていた(本番は大暮維人(artist)単独・original_authors空)。楽天の責任表示は全巻『西尾 維新/大暮 維人』、NDLも著者=['西尾, 維新, 1981-','大暮維人']。★版構成(通常版22巻/特装版22巻の分離)は edition-canonical/bakemonogatari.yml が正。キャラクター原案のVOFANは役割が原案でcreditsの領域のため入れていない。"
 }
 }

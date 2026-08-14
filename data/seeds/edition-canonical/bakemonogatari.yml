@@ -1,0 +1,158 @@
+slug: bakemonogatari
+canonical_label: 通常版
+canonical_imprint: KCデラックス
+canonical_publisher: 講談社
+source: |
+  per-case版分離 2026-08-14(ユーザ指摘「化物語は通常版と特装版が同時発売。特装版しか載っていない」)。
+  ★実態は「特装版だけ」ではなく**2版が1つに混ざっていた**。本番22巻のISBNを1冊ずつ判定すると
+    通常版=3,4,5,6,7,8,9,11,13巻の9冊 / 特装版=1,2,10,12,14〜22巻の13冊 の混成で、
+    imprint は どちらでもない「Magazine KC box」になっていた。
+  ★原因: 種2が2クラスタに割れている。sid=92123(name:西尾維新|name:化物語)=特装版18冊、
+    sid=149401(name:VOFAN|name:化物語)=KCDX3冊+特装版1冊。promoteが両者をmergeし
+    巻番号でdedupした結果、巻ごとにどちらか片方が生き残って混成になった。
+  ★確定(楽天とNDLが両版とも全巻で一致):
+    通常版 = KCデラックス(NDL表記「KCDX週刊少年マガジン」)全22巻 2018-06-15〜2023-05-17
+    特装版 = 講談社キャラクターズA(NDL表記「講談社キャラクターズA. Magazine KC box」)全22巻・同日発売
+    価格でも別物と確認(1巻: 通常792円 / 特装1760円)。ISBNは全44点が互いに素。
+  ★著者: 楽天・NDLとも「西尾維新 / 大暮維人」。本番は大暮維人(artist)のみで原作が空だったので
+    edition-overrides.json で original_authors=西尾維新(writer) を付与。
+    キャラクター原案のVOFAN(種2 sid=149401のクラスタ名)は役割が原案でありcreditsの領域なので入れていない。
+volumes:
+- number: 1
+  isbn13: '9784065116173'
+  release_date: '2018-06-15'
+- number: 2
+  isbn13: '9784065123331'
+  release_date: '2018-08-17'
+- number: 3
+  isbn13: '9784065133132'
+  release_date: '2018-11-16'
+- number: 4
+  isbn13: '9784065139387'
+  release_date: '2019-01-17'
+- number: 5
+  isbn13: '9784065148891'
+  release_date: '2019-04-17'
+- number: 6
+  isbn13: '9784065153147'
+  release_date: '2019-07-17'
+- number: 7
+  isbn13: '9784065171660'
+  release_date: '2019-10-17'
+- number: 8
+  isbn13: '9784065181720'
+  release_date: '2020-02-17'
+- number: 9
+  isbn13: '9784065188538'
+  release_date: '2020-05-15'
+- number: 10
+  isbn13: '9784065203347'
+  release_date: '2020-08-17'
+- number: 11
+  isbn13: '9784065212561'
+  release_date: '2020-11-17'
+- number: 12
+  isbn13: '9784065220702'
+  release_date: '2021-02-17'
+- number: 13
+  isbn13: '9784065231425'
+  release_date: '2021-05-17'
+- number: 14
+  isbn13: '9784065244814'
+  release_date: '2021-08-17'
+- number: 15
+  isbn13: '9784065260050'
+  release_date: '2021-11-17'
+- number: 16
+  isbn13: '9784065268957'
+  release_date: '2022-02-17'
+- number: 17
+  isbn13: '9784065279120'
+  release_date: '2022-05-17'
+- number: 18
+  isbn13: '9784065286593'
+  release_date: '2022-08-17'
+- number: 19
+  isbn13: '9784065296356'
+  release_date: '2022-11-17'
+- number: 20
+  isbn13: '9784065303474'
+  release_date: '2023-01-17'
+- number: 21
+  isbn13: '9784065309216'
+  release_date: '2023-03-16'
+- number: 22
+  isbn13: '9784065315750'
+  release_date: '2023-05-17'
+extra_editions:
+- type: deluxe
+  label: 特装版
+  imprint: 講談社キャラクターズA
+  publisher: 講談社
+  volumes:
+  - number: 1
+    isbn13: '9784065120569'
+    release_date: '2018-06-15'
+  - number: 2
+    isbn13: '9784065123348'
+    release_date: '2018-08-17'
+  - number: 3
+    isbn13: '9784065133149'
+    release_date: '2018-11-16'
+  - number: 4
+    isbn13: '9784065139394'
+    release_date: '2019-01-17'
+  - number: 5
+    isbn13: '9784065148907'
+    release_date: '2019-04-17'
+  - number: 6
+    isbn13: '9784065153154'
+    release_date: '2019-07-17'
+  - number: 7
+    isbn13: '9784065171639'
+    release_date: '2019-10-17'
+  - number: 8
+    isbn13: '9784065181737'
+    release_date: '2020-02-17'
+  - number: 9
+    isbn13: '9784065188521'
+    release_date: '2020-05-15'
+  - number: 10
+    isbn13: '9784065203354'
+    release_date: '2020-08-17'
+  - number: 11
+    isbn13: '9784065212578'
+    release_date: '2020-11-17'
+  - number: 12
+    isbn13: '9784065220719'
+    release_date: '2021-02-17'
+  - number: 13
+    isbn13: '9784065231456'
+    release_date: '2021-05-17'
+  - number: 14
+    isbn13: '9784065245019'
+    release_date: '2021-08-17'
+  - number: 15
+    isbn13: '9784065260043'
+    release_date: '2021-11-17'
+  - number: 16
+    isbn13: '9784065268988'
+    release_date: '2022-02-17'
+  - number: 17
+    isbn13: '9784065279199'
+    release_date: '2022-05-17'
+  - number: 18
+    isbn13: '9784065286609'
+    release_date: '2022-08-17'
+  - number: 19
+    isbn13: '9784065296349'
+    release_date: '2022-11-17'
+  - number: 20
+    isbn13: '9784065303405'
+    release_date: '2023-01-17'
+  - number: 21
+    isbn13: '9784065309285'
+    release_date: '2023-03-16'
+  - number: 22
+    isbn13: '9784065315699'
+    release_date: '2023-05-17'
