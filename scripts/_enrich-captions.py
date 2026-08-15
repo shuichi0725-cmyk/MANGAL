@@ -66,10 +66,29 @@ if os.path.exists(pj):
 #   これを見ていなかったため --live 無しでは材料が **38,981頁中5頁** しか集まらず、
 #   「楽天に材料が無い」と誤認する状態だった。 既に手元にある内部データなので外部照会ゼロで使える。
 #   形は {"isbn": "...", "item": {楽天itemそのまま}}。
-rj = f"{ROOT}/.cache/rakuten-isbn.jsonl"
-if os.path.exists(rj):
+#   ★2026-08-15 追加: **delta も読む**。 rakuten-isbn.jsonl(2026-06-18)だけを見ていたため
+#   その後に収穫した rakuten-isbn-delta.jsonl(2026-06-28・828MB)の caption を丸ごと捨てていた。
+#   実測(本番 catch空×2巻以上 13,257頁): 旧=材料が取れるのは180頁 → delta込みで365頁(+185)。
+#   2026-07-26 の「キャッシュを見ていなかった」修正と同じ型の取りこぼし。
+#   D: は外付けで不在のことがある(= [[d_drive_external_flaky]])ので存在する物だけ読む。
+_CAP_SOURCES = [
+    f"{ROOT}/.cache/rakuten-isbn.jsonl",
+    f"{ROOT}/.cache/rakuten-isbn-delta.jsonl",
+    "D:/mangal-cache/rakuten-isbn.jsonl",
+    "D:/mangal-cache/rakuten-isbn-delta.jsonl",
+]
+_seen_src = set()
+for rj in _CAP_SOURCES:
+    if not os.path.exists(rj):
+        continue
+    _key = os.path.basename(rj)
+    if _key in _seen_src:      # 同名(C:とD:のミラー)は片方だけ
+        continue
+    _seen_src.add(_key)
     _n = 0
-    for l in open(rj, encoding="utf-8"):
+    for l in open(rj, encoding="utf-8", errors="replace"):
+        if '"itemCaption"' not in l:   # 高速スキップ(828MB×2を全部jsonl parseしない)
+            continue
         try:
             r = json.loads(l)
         except Exception:
@@ -79,7 +98,7 @@ if os.path.exists(rj):
         if ib and cap and ib not in pre:
             pre[ib] = cap
             _n += 1
-    print(f"  楽天ISBNキャッシュから caption {_n:,} 件")
+    print(f"  楽天ISBNキャッシュ({_key})から caption {_n:,} 件")
 
 targets = []
 files = glob.glob(os.path.join(ROOT, a.src, "*.yml"))
