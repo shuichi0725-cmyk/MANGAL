@@ -18,6 +18,9 @@ import ColorCorner from "@/components/ColorCorner";
 import DailyFeatureCorner from "@/components/DailyFeatureCorner";
 import { KotobaDaily, TriviaDaily, GenreRouletteDaily } from "@/components/DailyBits";
 import HeroD3 from "./HeroD3";
+import StatusDate from "./StatusDate";
+import SiteMenu from "@/components/SiteMenu";
+import { dotGothic } from "@/lib/fonts";
 
 export const metadata = { robots: { index: false, follow: false } };  // 実験頁=非索引
 
@@ -110,6 +113,17 @@ export default function Design12() {
 
   return (
     <div className="theme-d3 min-h-screen bg-[var(--color-bg)] pb-12">
+      {/* ★E型ステータスバー(2026-08-15 E融合型=ユーザ指示「ヘッダーから検索窓までEを」):
+          ホームでは共通ヘッダー(SiteHeader)が非表示になり、この行がヘッダーの役を担う。
+          右端=≡メニュー(ユーザ指示「右上のPRはメニューにして」。PR表記はメニュー内+フッターに存置)。 */}
+      <div className="sticky top-0 z-20 flex items-center justify-between gap-3 border-b border-[var(--color-line)] bg-[var(--color-paper)] px-3.5 py-1.5 text-[10px] tracking-[0.08em] text-ink/55">
+        <Link href="/" className={`${dotGothic.className} shrink-0 text-[13px] text-[var(--color-accent)]`}>
+          MANGAL_OS
+        </Link>
+        <span className="tabular-nums">DB:{manga.length.toLocaleString()}</span>
+        <StatusDate />
+        <SiteMenu />
+      </div>
       <D3Nav />
       {/* SEO用の固定見出し(視覚上は小さく。巨大タイポはHeroD3内の装飾p=ランダム可) */}
       <h1 className="sr-only">MANGAL — 日本の漫画データベース</h1>

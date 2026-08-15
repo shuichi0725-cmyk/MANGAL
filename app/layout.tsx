@@ -4,7 +4,7 @@ import Link from "next/link";
 import "./globals.css";
 import ScrollTopButton from "@/components/ScrollTopButton";
 import GlobalDragScroll from "@/components/GlobalDragScroll";
-import SiteMenu from "@/components/SiteMenu";
+import SiteHeader from "@/components/SiteHeader";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://mangal-db.com"),
@@ -26,24 +26,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="min-h-screen flex flex-col theme-d3">
         {/* PCマウスの横ドラッグを全横帯のスワイプ相当に変換(タッチは不介入) */}
         <GlobalDragScroll />
-        <header className="border-b border-[var(--color-line)] bg-[var(--color-surface)]/80 backdrop-blur sticky top-0 z-20">
-          <div className="mx-auto max-w-6xl px-4 py-3 flex items-center justify-between gap-3">
-            {/* 左 = ロゴ + 「日本の漫画データベース」。 ロゴ寄りに少し左へ。 */}
-            <div className="flex items-baseline gap-2 min-w-0">
-              <Link href="/" className="font-bold text-lg tracking-tight shrink-0">
-                MANGAL<span className="text-[var(--color-accent)]">.</span>
-              </Link>
-              <span className="text-xs sm:text-sm text-ink/55 truncate">日本の漫画データベース</span>
-            </div>
-            {/* 右端 = ≡メニュー(2026-08-12 ユーザ裁定: ナビ行右端から共通ヘッダー右端へ移設。
-                ホーム(D3Nav=メニュー無し)と他ページ(DesignNav)で位置が食い違っていたのを、
-                全ページ「使い方の上=ヘッダー右端」に統一。ナビ行は使い方が右端になる) */}
-            <SiteMenu />
-            {/* 購入モードトグルは廃止(2026-07-12 ユーザ裁定)。電子は将来「電子書籍で買う」ボタン
-                =ストアリスト方式で提供する([[store_affiliate_architecture]])。usePurchaseModeは
-                Provider外の安全既定=print で動作継続。 */}
-          </div>
-        </header>
+        {/* 共通ヘッダー(SiteHeader=client): ★ホームでは非表示 = Design12のE型ステータスバーが代替
+            (2026-08-15 E融合型)。購入モードトグルは廃止済(2026-07-12)。 */}
+        <SiteHeader />
         <main className="flex-1">{children}
         <SiteFooter /></main>
         <footer className="border-t border-[var(--color-line)] mt-12 py-8 text-center text-xs text-ink/50 space-y-3">

@@ -283,3 +283,9 @@ input[type="search"]::-webkit-search-decoration {
 /* D3マーキー帯 */
 @keyframes d3-marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 .d3-marquee { display: inline-block; white-space: nowrap; animation: d3-marquee 28s linear infinite; }
+
+/* ★E融合型ターミナル検索(2026-08-15): 点滅カーソル + 「枠はform側」のinput素通し化。
+   上の .theme-d3 input[type="search"] 強制枠(!important)と競合するため、同重み後勝ちで解除する。 */
+@keyframes d3-blink { 0%, 55% { opacity: 1; } 56%, 100% { opacity: 0; } }
+.d3-blink { animation: d3-blink 1.1s step-end infinite; }
+.theme-d3 input.d3-plain { background-color: transparent !important; border: none !important; }
