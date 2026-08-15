@@ -5520,3 +5520,12 @@ non_manga:
 - series_key: qid:Q55400|name:シュナの旅
   reason: not_manga_book
   note: 'ユーザ裁定2026-08-15: 絵物語(アニメージュ文庫1983・水彩画+地の文=コマ/フキダシの漫画でない)。ユーザ実物確認。AniList(2022英訳graphic novel)経由でenrich混入'
+- series_key: qid:Q55400|name:風の帰る場所
+  reason: not_manga_book
+  note: 'ユーザ裁定2026-08-15(シュナの旅型掃引): 宮崎駿インタビュー集(ロッキング・オン2002)=漫画でない'
+- series_key: qid:Q55400|name:トトロの住む家
+  reason: not_manga_book
+  note: 'ユーザ裁定2026-08-15(シュナの旅型掃引): 住宅画文集/エッセイ(朝日新聞社1991)=漫画でない'
+- series_key: name:ルーシー・モード・モンゴメリ|name:赤毛のアン
+  reason: film_comic_anime
+  note: 'ユーザ裁定2026-08-15(シュナの旅型掃引): 新潮社「名作シリーズ」全5巻(1992)=楽天叢書名「アニメブック」=世界名作劇場アニメのフィルムストーリー本。宮崎駿/高畑勲はアニメスタッフとしてのクレジット。漫画版(杉本啓子/まつざきあけみ)は別頁でkeep'
