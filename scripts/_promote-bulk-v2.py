@@ -3464,8 +3464,14 @@ def main():
             anime_override_pages += 1
         # ★AniList enrich(productionization): main series_key 優先で anilist_id/synonyms/
         #   genres_anilist/tags を本番に付与(箱を埋める)。 種3不変・match-v14 由来。
+        # ★per頁遮断(2026-08-17 ギャラ型): 同一クラスタに原作とリメイクが同居し頁分離した場合、
+        #   enrichはseries_key単位なので両頁に同じAniList(=リメイク側)が付き、原作頁の
+        #   synopsis/synonyms/popularity が別作品のものになる。edition-overrides の
+        #   `"anilist": false`(キー=公開slug)で当該頁だけ enrich/synopsis join を止める。
+        #   (genres_trusted は下の別loopでkey単位のまま=同一ストーリーのリメイク分離では共有が正)
         en = None
-        if enrich_map:
+        _eov_anilist_off = (_load_edition_overrides().get(_slug_override(slug)) or {}).get("anilist") is False
+        if enrich_map and not _eov_anilist_off:
             en = enrich_map.get(series["series_key"])
             if not en:  # main 未マッチなら merge 内の他 series_key から
                 for k in page_keys:
