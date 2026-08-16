@@ -1,0 +1,28 @@
+slug: asahi-no-koibito
+canonical_label: 通常版
+canonical_publisher: 秋田書店
+canonical_imprint: 少年チャンピオン・コミックス
+source: 'ギャラ型B(復刻接ぎ木)是正 2026-08-17: 初版=少年チャンピオン・コミックス(秋田書店)全4巻(MADB 1971-73・ISBN無) / 復刻=チクマ秀版社「もん・りいぶる」上下(2006・楽天一致)。旧頁は復刻の下巻がv3として初版3巻を潰していた(楽天題=朝日の恋人(上)/(下)で上下2冊構成を確定・v3→下巻に是正)'
+volumes:
+- number: 1
+  release_date: '1971-08'
+- number: 2
+  release_date: '1971-12'
+- number: 3
+  release_date: '1973-02'
+- number: 4
+  release_date: '1973-03'
+extra_editions:
+- type: shinsoban
+  label: 復刻版(もん・りいぶる)
+  imprint: もん・りいぶる
+  publisher: チクマ秀版社
+  volumes:
+  - number: 1
+    volume_label: 上
+    isbn13: '9784805004593'
+    release_date: '2006-07'
+  - number: 2
+    volume_label: 下
+    isbn13: '9784805004685'
+    release_date: '2006-12'

@@ -1,0 +1,31 @@
+slug: oozora-no-chikai
+canonical_label: 通常版
+canonical_publisher: 東邦図書出版社
+source: 'ギャラ型B(復刻接ぎ木)是正 2026-08-17: 初版=東邦図書出版社 全4巻(NDL一致 1963-64・ISBN無) / 完全版=マンガショップ上中下(2007・楽天×NDL一致)。旧頁は完全版1-3が初版1-3の枠を占有し4巻だけ1964が残る混成だった'
+volumes:
+- number: 1
+  release_date: '1963-04'
+- number: 2
+  release_date: '1963'
+- number: 3
+  release_date: '1964'
+- number: 4
+  release_date: '1964'
+extra_editions:
+- type: kanzenban
+  label: 完全版(マンガショップ)
+  imprint: マンガショップシリーズ
+  publisher: マンガショップ
+  volumes:
+  - number: 1
+    volume_label: 上
+    isbn13: '9784775911891'
+    release_date: '2007-10-02'
+  - number: 2
+    volume_label: 中
+    isbn13: '9784775911907'
+    release_date: '2007-10-02'
+  - number: 3
+    volume_label: 下
+    isbn13: '9784775911914'
+    release_date: '2007-10-02'

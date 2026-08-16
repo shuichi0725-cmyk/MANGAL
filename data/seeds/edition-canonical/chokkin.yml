@@ -1,0 +1,31 @@
+slug: chokkin
+canonical_label: 通常版
+canonical_publisher: 秋田書店
+canonical_imprint: 少年チャンピオン・コミックス
+source: 'ギャラ型B(復刻接ぎ木)是正 2026-08-17: 初版=少年チャンピオン・コミックス(秋田書店)全4巻(NDL一致 1977-78。v1/v3/v4のISBNはNDLから補完・v2はNDLもISBN無) / 完全版=復刊ドットコム全3巻(2014・楽天×NDL一致)'
+volumes:
+- number: 1
+  isbn13: '9784253034807'
+  release_date: '1977-10-10'
+- number: 2
+  release_date: '1978-02-10'
+- number: 3
+  isbn13: '9784253034821'
+  release_date: '1978-05-10'
+- number: 4
+  isbn13: '9784253034838'
+  release_date: '1978-07-25'
+extra_editions:
+- type: kanzenban
+  label: 完全版(復刊ドットコム)
+  publisher: 復刊ドットコム
+  volumes:
+  - number: 1
+    isbn13: '9784835451244'
+    release_date: '2014-10'
+  - number: 2
+    isbn13: '9784835451251'
+    release_date: '2014-11'
+  - number: 3
+    isbn13: '9784835451268'
+    release_date: '2014-12'
