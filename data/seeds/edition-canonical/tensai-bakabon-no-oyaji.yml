@@ -1,0 +1,48 @@
+slug: tensai-bakabon-no-oyaji
+canonical_label: 通常版
+canonical_publisher: 実業之日本社
+canonical_imprint: ホリデー・コミックス
+suppress_types:
+- bunkobon
+source: 'ギャラ型B是正 2026-08-17: 2005年の赤塚不二夫漫画大全集(小学館 全2巻)が通常版の1-2巻枠を占有し、初版ホリデー・コミックス(1970-71)は3巻だけが残っていた(頁の出版社も小学館表示に化けていた)。文庫タブも竹書房文庫(2007 全2巻)と曙文庫(1976 全3巻)が混ざり1巻2007/2巻2007/3巻1976になっていた。NDL SRU(creator=赤塚不二夫)で確定= 初版【ホリデー・コミックス】実業之日本社 1970-(v1は1970.8) / 【曙文庫】曙出版 全3巻 1976(3巻=1976.04.12) / 【竹書房文庫】竹書房 全2巻 2007.10 / 【赤塚不二夫漫画大全集】小学館 全2巻 2005.9(ISBN 4090017831ほか)。初版runを主版に、他はextra_editionsへ。曙文庫はMADB側が v0/v2重複/v3重複 の壊れ番号だったためNDLの1-3巻で作り直した。'
+volumes:
+- number: 1
+  release_date: '1970-08-10'
+- number: 2
+  release_date: '1970-10-20'
+- number: 3
+  release_date: '1971-08-25'
+extra_editions:
+- type: kanzenban
+  label: 赤塚不二夫漫画大全集(小学館)
+  imprint: 赤塚不二夫漫画大全集
+  publisher: 小学館
+  volumes:
+  - number: 1
+    isbn13: '9784090017834'
+    release_date: '2005-09'
+  - number: 2
+    isbn13: '9784090017841'
+    release_date: '2005-09'
+- type: bunkobon
+  label: 文庫版(曙文庫)
+  imprint: 曙文庫
+  publisher: 曙出版
+  volumes:
+  - number: 1
+    release_date: '1976'
+  - number: 2
+    release_date: '1976'
+  - number: 3
+    release_date: '1976-04-12'
+- type: bunkobon
+  label: 文庫版(竹書房文庫)
+  imprint: 竹書房文庫
+  publisher: 竹書房
+  volumes:
+  - number: 1
+    isbn13: '9784812432822'
+    release_date: '2007-10'
+  - number: 2
+    isbn13: '9784812432839'
+    release_date: '2007-10'

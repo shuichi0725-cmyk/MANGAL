@@ -1,0 +1,60 @@
+slug: zenigeba
+canonical_label: 通常版
+canonical_publisher: 若木書房
+canonical_imprint: Comic mate
+suppress_types:
+- bunkobon
+source: 'ギャラ型B是正 2026-08-17: 通常版タブに4run(初版Comic mate/SPコミックス/Magical comics)が混線し、1巻=2000年ソフトマジック・4巻=リイド社ISBN・2/3/5巻=1970-71年という接ぎ木状態(頁の出版社もソフトマジック表示)。文庫タブも幻冬舎文庫(上下)とソノラマ漫画文庫(全4巻)が1つに混ざり1巻2007/2巻1978/3巻2007/4巻1978と交互になっていた。NDL SRU(creator=ジョージ秋山)で確定= 初版【Comic mate】若木書房 全1-5巻 昭和45-46 / 【ソノラマ漫画文庫】朝日ソノラマ 全4巻 1978.1-3 / 【幻冬舎文庫】上下 2007.10 / 【SPコミックス】リイド社 4巻(ISBN 4845806541)。初版runを主版に、他はextra_editionsへ分離し文庫タブは suppress_types で作り直し。SPコミックス版・Magical comics版は両ソースとも1冊分しか記録が無いためその1冊のみで立てる(欠落を捏造しない)。'
+volumes:
+- number: 1
+  release_date: '1970-11-20'
+- number: 2
+  release_date: '1970-12-20'
+- number: 3
+  release_date: '1971-01-20'
+- number: 4
+  release_date: '1971-02-20'
+- number: 5
+  release_date: '1971-04-25'
+extra_editions:
+- type: shinsoban
+  label: SPコミックス版(リイド社)
+  imprint: SPコミックス
+  publisher: リイド社
+  volumes:
+  - number: 4
+    isbn13: '9784845806546'
+- type: shinsoban
+  label: Magical comics版(ソフトマジック)
+  imprint: Magical comics
+  publisher: ソフトマジック
+  volumes:
+  - number: 1
+    isbn13: '9784921181024'
+    release_date: '2000-05-01'
+- type: bunkobon
+  label: 文庫版(ソノラマ漫画文庫)
+  imprint: ソノラマ漫画文庫
+  publisher: 朝日ソノラマ
+  volumes:
+  - number: 1
+    release_date: '1978-01'
+  - number: 2
+    release_date: '1978-01'
+  - number: 3
+    release_date: '1978-02'
+  - number: 4
+    release_date: '1978-03'
+- type: bunkobon
+  label: 文庫版(幻冬舎文庫)
+  imprint: 幻冬舎文庫
+  publisher: 幻冬舎
+  volumes:
+  - number: 1
+    isbn13: '9784344410282'
+    release_date: '2007-10-10'
+    volume_label: 上
+  - number: 2
+    isbn13: '9784344410299'
+    release_date: '2007-10-10'
+    volume_label: 下

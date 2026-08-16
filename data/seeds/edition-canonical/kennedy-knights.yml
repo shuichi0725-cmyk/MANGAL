@@ -1,0 +1,80 @@
+slug: kennedy-knights
+canonical_label: 通常版
+canonical_publisher: 朝日ソノラマ
+canonical_imprint: サン・コミックス
+suppress_types:
+- bunkobon
+source: 'ギャラ型B是正 2026-08-17: 2005-06年のマンガショップ復刻(全4巻)が通常版の1-4巻枠を占有し、初版サンコミックス(1969-70)は5-8巻の残骸だけが見えていた(頁の出版社もパンローリング表示に化けていた)。しかも同じ通常版タブに若木書房Big action版(全8巻)まで混在。NDL SRU(creator=望月三起也)で3runを分離確定= ①サン・コミックス 朝日ソノラマ 全1-7巻 昭和44-45 ②Big actionシリーズ 若木書房 全1-8巻 1973-1974 ③マンガショップシリーズ 2005.12- 全4巻(ISBN)。初版run=①を主版に、②③はextra_editionsへ。Big actionの巻日付はMADB(v2 1973-08-20/v3 1973-09-20)を優先しそれ以外はNDLの月精度(NDLはv3を1973.7とするがMADBと矛盾するため採らず)。文庫タブ(ソノラマ漫画文庫 全7巻 1977)は巻構成に混在は無かったが、出版社が空欄表示だったのと work-level publisher が巻数多数決で若木書房に化けるのを直すため、suppress_types で作り直して朝日ソノラマを明示した。'
+volumes:
+- number: 1
+  release_date: '1969-08-30'
+- number: 2
+  release_date: '1969-09-30'
+- number: 3
+  release_date: '1969-11-08'
+- number: 4
+  release_date: '1969-12-20'
+- number: 5
+  release_date: '1970-01-20'
+- number: 6
+  release_date: '1970-03-02'
+- number: 7
+  release_date: '1970-03-10'
+extra_editions:
+- type: shinsoban
+  label: Big action版(若木書房)
+  imprint: Big actionシリーズ
+  publisher: 若木書房
+  volumes:
+  - number: 1
+    release_date: '1973-06'
+  - number: 2
+    release_date: '1973-08-20'
+  - number: 3
+    release_date: '1973-09-20'
+  - number: 4
+    release_date: '1973-11'
+  - number: 5
+    release_date: '1974-01'
+  - number: 6
+    release_date: '1974-07'
+  - number: 7
+    release_date: '1974-11'
+  - number: 8
+    release_date: '1974-12'
+- type: shinsoban
+  label: 復刻版(マンガショップ)
+  imprint: マンガショップシリーズ
+  publisher: マンガショップ
+  volumes:
+  - number: 1
+    isbn13: '9784775910672'
+    release_date: '2005-12-03'
+  - number: 2
+    isbn13: '9784775910689'
+    release_date: '2005-12-03'
+  - number: 3
+    isbn13: '9784775910696'
+    release_date: '2006-01-03'
+  - number: 4
+    isbn13: '9784775910702'
+    release_date: '2006-01-03'
+- type: bunkobon
+  label: 文庫版(ソノラマ漫画文庫)
+  imprint: ソノラマ漫画文庫
+  publisher: 朝日ソノラマ
+  volumes:
+  - number: 1
+    release_date: '1977-03-15'
+  - number: 2
+    release_date: '1977-03'
+  - number: 3
+    release_date: '1977-04'
+  - number: 4
+    release_date: '1977-04'
+  - number: 5
+    release_date: '1977-05-20'
+  - number: 6
+    release_date: '1977-05-20'
+  - number: 7
+    release_date: '1977-06-15'
