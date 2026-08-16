@@ -27,6 +27,9 @@ import { EmailMessage } from "cloudflare:email";
 //     60秒なら「デプロイ後すぐ最新」と「連続操作で再取得しない」を両立できる。
 //   ★コスト方針は不変: s-maxage=86400 でエッジが受け止めるので R2 読込(Class B)は増えない。
 //   デプロイ時は /api/purge でエッジを明示的に失効させるため、purge後の初回で最新に入れ替わる。
+// ★HSTS(2026-08-17 https一本化と同時): ブラウザに以後1年httpを踏ませない。
+//   サブドメイン運用が未確定のため includeSubDomains は付けない。
+const HSTS = "max-age=31536000";
 const HTML_CACHE = "public, max-age=60, s-maxage=86400";
 const IMMUTABLE = "public, max-age=31536000, immutable"; // /_next/static 等ハッシュ付き
 const ASSET = "public, max-age=86400, s-maxage=604800";
@@ -99,6 +102,12 @@ export default {
       !url.pathname.startsWith("/api/")
     ) {
       return Response.redirect("https://mangal-db.com" + url.pathname + url.search, 301);
+    }
+    // ★末尾スラッシュ301(2026-08-17): /manga/uzumaki/ 型を無スラッシュ正規URLへ
+    //   (next export=trailingSlash:false。従来は404だった=外部リンクの貼られ方対策)。ルート"/"は除外。
+    if (url.pathname.length > 1 && url.pathname.endsWith("/") && !url.pathname.startsWith("/api/")) {
+      return Response.redirect(
+        "https://mangal-db.com" + url.pathname.replace(/\/+$/, "") + url.search, 301);
     }
 
     // ★API共通CORS(previewサイト=別オリジンからも叩けるように)
@@ -230,13 +239,15 @@ ${rec.body}`;
     if (!obj) {
       const nf = await env.BUCKET.get("404.html");
       return new Response(nf ? nf.body : "Not Found", {
-        status: 404, headers: { "content-type": "text/html; charset=utf-8" },
+        status: 404,
+        headers: { "content-type": "text/html; charset=utf-8", "strict-transport-security": HSTS },
       });
     }
 
     const headers = new Headers();
     headers.set("content-type", contentType(key));
     headers.set("cache-control", cacheControl(key));
+    headers.set("strict-transport-security", HSTS);
     if (obj.httpEtag) headers.set("etag", obj.httpEtag);
 
     // ④ geo(adult_us): 非日本かつ adult_us ページは出さない(将来。 ADULT_US_SLUGS 必要)。

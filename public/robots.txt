@@ -1,3 +1,10 @@
 User-agent: *
 Allow: /
+# データJSON(索引25MB級・カレンダー・コーナーstock)はクロール不要 = 予算を頁に集中(2026-08-17)
+Disallow: /manga-list-index.json
+Disallow: /manga-list-head.json
+Disallow: /manga-catch-index.json
+Disallow: /manga-alt-index.json
+Disallow: /calendar/
+Disallow: /data/
 Sitemap: https://mangal-db.com/sitemap.xml
