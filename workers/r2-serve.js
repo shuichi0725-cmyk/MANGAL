@@ -88,8 +88,16 @@ export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
 
-    // ★正規ドメイン301(SEO重複対策 2026-07-04): workers.devアクセスは mangal-db.com へ。/api/は除外(ツール互換)
-    if (url.hostname.endsWith("workers.dev") && !url.pathname.startsWith("/api/")) {
+    // ★正規URL301(SEO正準化。2026-07-04 workers.dev→2026-08-17 www/httpにも拡張):
+    //   全入口(workers.dev / www.mangal-db.com / http)を https://mangal-db.com へ**1回の301**で一本化。
+    //   canonicalタグはヒント・301は指示。ホストは明示列挙=wrangler dev(localhost)を巻き込まない。
+    //   /api/は除外(ツール互換)
+    if (
+      (url.hostname.endsWith("workers.dev") ||
+        url.hostname === "www.mangal-db.com" ||
+        (url.hostname === "mangal-db.com" && url.protocol !== "https:")) &&
+      !url.pathname.startsWith("/api/")
+    ) {
       return Response.redirect("https://mangal-db.com" + url.pathname + url.search, 301);
     }
 
