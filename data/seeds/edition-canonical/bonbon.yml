@@ -1,0 +1,26 @@
+slug: bonbon
+canonical_label: 通常版
+canonical_publisher: 秋田書店
+canonical_imprint: サンデーコミックス
+source: 'ギャラ型B是正 2026-08-17: 1999年の Shotaro world 版(メディアファクトリー 全2巻)が通常版の1-2巻枠を占有し、初版サンデーコミックス(秋田書店)は3-4巻だけが残っていた(頁の出版社もメディアファクトリー表示に化けていた)。初版run= MADB の サンデーコミックス 全4巻 1966-12〜1971-04-10(NDLはこの年代の単行本を収録せず=不在≠不存在)。復刻run= NDL【Shotaro world】メディアファクトリー 1999.11 全2巻 ISBN 4889919317/4889919325 + 楽天 seriesName=Shotaro world で二重一致 → extra_editions へ分離。※MADBの「石ノ森章太郎萬画大全集」4冊・「青林堂オンデマンド」1冊は日付もISBNも無く元から非表示のため、本件では起こさない(NDLは萬画大全集の全4巻の存在のみ確認)。'
+volumes:
+- number: 1
+  release_date: '1966-12'
+- number: 2
+  release_date: '1967-06-15'
+- number: 3
+  release_date: '1967-11-30'
+- number: 4
+  release_date: '1971-04-10'
+extra_editions:
+- type: shinsoban
+  label: Shotaro world版
+  imprint: Shotaro world
+  publisher: メディアファクトリー
+  volumes:
+  - number: 1
+    isbn13: '9784889919318'
+    release_date: '1999-11-01'
+  - number: 2
+    isbn13: '9784889919325'
+    release_date: '1999-11-01'

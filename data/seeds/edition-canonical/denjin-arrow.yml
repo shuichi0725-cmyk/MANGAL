@@ -1,0 +1,30 @@
+slug: denjin-arrow
+canonical_label: 通常版
+canonical_publisher: 朝日ソノラマ
+canonical_imprint: サン・コミックス
+source: 'ギャラ型B是正 2026-08-17: 1999年の朝日ソノラマ復刻(全3巻)が通常版の1-3巻枠を占有し、初版サン・コミックス(1968)は4-5巻の残骸だけが見えていた。NDL SRU(creator=一峰大二)= サン・コミックス 朝日ソノラマ 全1〜5巻 昭和43年(1968) を初版と確定 / 1999年版は同社の別ISBN 3巻本(NDL 1999.2/1999.4/1999.6・楽天も朝日ソノラマ1999年で一致)→ extra_editions へ分離。v2/v5 の月日はMADB/NDLとも不明のため null のまま(NDLの年表記は昭和43=1968)。MADBのv0(1965-04・is_extra=1・雑誌付録系)は元から非表示のため不変。'
+volumes:
+- number: 1
+  release_date: '1968-04-27'
+- number: 2
+  release_date: null
+- number: 3
+  release_date: '1968-06'
+- number: 4
+  release_date: '1968-07'
+- number: 5
+  release_date: null
+extra_editions:
+- type: shinsoban
+  label: 復刻版(朝日ソノラマ 1999)
+  publisher: 朝日ソノラマ
+  volumes:
+  - number: 1
+    isbn13: '9784257903604'
+    release_date: '1999-02-28'
+  - number: 2
+    isbn13: '9784257903611'
+    release_date: '1999-04-20'
+  - number: 3
+    isbn13: '9784257903628'
+    release_date: '1999-06'
