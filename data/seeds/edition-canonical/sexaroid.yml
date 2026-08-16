@@ -1,0 +1,28 @@
+slug: sexaroid
+canonical_label: 通常版
+canonical_publisher: 朝日ソノラマ
+canonical_imprint: サンコミックス
+source: 'ギャラ型B是正 2026-08-17: 初版=サンコミックス(朝日ソノラマ)全4巻(1974・MADB×NDL一致) / 完全版=小学館 上下(2022・楽天×NDL一致。MADBはv1/v3の誤番だったのを上下に是正)。文庫3種(ソノラマ/扶桑社/朝日コミック文庫)タブは温存'
+volumes:
+- number: 1
+  isbn13: '9784257912804'
+  release_date: '1974-06-10'
+- number: 2
+  release_date: '1974-06-15'
+- number: 3
+  release_date: '1974-06-24'
+- number: 4
+  release_date: '1974-07-10'
+extra_editions:
+- type: kanzenban
+  label: 完全版(小学館)
+  publisher: 小学館
+  volumes:
+  - number: 1
+    volume_label: 上巻
+    isbn13: '9784091793676'
+    release_date: '2022-04-28'
+  - number: 2
+    volume_label: 下巻
+    isbn13: '9784091793683'
+    release_date: '2022-04-28'

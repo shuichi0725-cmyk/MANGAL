@@ -1,0 +1,53 @@
+slug: satsuma-gishiden
+canonical_label: 通常版
+canonical_publisher: 日本文芸社
+canonical_imprint: ゴラク・コミックス
+source: 'ギャラ型B是正 2026-08-17: 初版=ゴラク・コミックス(日本文芸社)全6巻(1979-82・NDL 1-4のISBNを補完・5-6はMADB) / リイド社SPポケットワイド上中下(2015)+SPコミックス平田弘史時代劇画選集上下(2022・MADBのv3=下巻誤番をNDLで是正)。NDLに年不詳のSPコミックス(1)-(5)旧版も在るがMADB外+日付不明のため見送り'
+volumes:
+- number: 1
+  isbn13: '9784537006810'
+  release_date: '1979-07'
+- number: 2
+  isbn13: '9784537006827'
+  release_date: '1979-07'
+- number: 3
+  isbn13: '9784537006841'
+  release_date: '1980-11'
+- number: 4
+  isbn13: '9784537006865'
+  release_date: '1981-08'
+- number: 5
+  release_date: '1982-01'
+- number: 6
+  release_date: '1982-08'
+extra_editions:
+- type: shinsoban
+  label: SPポケットワイド版
+  imprint: SP pocket wide
+  publisher: リイド社
+  volumes:
+  - number: 1
+    volume_label: 上
+    isbn13: '9784845847747'
+    release_date: '2015-11'
+  - number: 2
+    volume_label: 中
+    isbn13: '9784845847754'
+    release_date: '2015-12'
+  - number: 3
+    volume_label: 下
+    isbn13: '9784845847761'
+    release_date: '2015-12'
+- type: kanzenban
+  label: 時代劇画選集版(2022)
+  imprint: SPコミックス
+  publisher: リイド社
+  volumes:
+  - number: 1
+    volume_label: 上
+    isbn13: '9784845858897'
+    release_date: '2022-05'
+  - number: 2
+    volume_label: 下
+    isbn13: '9784845859146'
+    release_date: '2022-07'

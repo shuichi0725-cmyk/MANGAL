@@ -1,0 +1,39 @@
+slug: death-hunter
+canonical_label: 通常版
+canonical_publisher: 朝日ソノラマ
+canonical_imprint: サンコミックス
+source: 'ギャラ型B是正 2026-08-17: 初版=サンコミックス(朝日ソノラマ)全4巻(NDL 1-4=昭46。v2-v4はMADB初版日付、v1のMADB日付1974-03-10は1974年重版の混入なのでNDL初版年1971に是正) / サンワイド2冊(1985-86・ISBN NDL一致) / 復刻=マンガショップ上下(2005)'
+volumes:
+- number: 1
+  release_date: '1971'
+- number: 2
+  release_date: '1971-04-05'
+- number: 3
+  release_date: '1971-04-23'
+- number: 4
+  release_date: '1971-06-22'
+extra_editions:
+- type: wideban
+  label: サンワイド版
+  imprint: SUNWIDE COMICS
+  publisher: 朝日ソノラマ
+  volumes:
+  - number: 1
+    isbn13: '9784257960638'
+    release_date: '1985-12-25'
+  - number: 2
+    isbn13: '9784257960669'
+    release_date: '1986-01-25'
+- type: shinsoban
+  label: 復刻版(マンガショップ)
+  imprint: マンガショップシリーズ
+  publisher: マンガショップ
+  volumes:
+  - number: 1
+    volume_label: 上
+    isbn13: '9784775910191'
+    release_date: '2005-01-25'
+  - number: 2
+    volume_label: 下
+    isbn13: '9784775910207'
+    release_date: '2005-01-25'
