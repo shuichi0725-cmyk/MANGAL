@@ -3,38 +3,46 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import CoverImage from "@/components/CoverImage";
-import { kindleSearchUrl } from "@/lib/kindleLink";
 
 /** 🌈カラー版コーナー(2026-08-12 ユーザ採用: ボタン=案3「COLOR透かし」+中身=案B「書影だけの密な帯」)。
- *  設置=ホームの全集コーナー直上。ヘッダー=/color-manga(一覧)へ。
- *  ★書影タップ=Kindleストアの購入リンクへ直行(2026-08-12 ユーザ裁定。作品頁には飛ばさない=
- *    作品頁は紙の書誌でカラー版を出していないため)。ASIN無し=題名でKindle検索(i=digital-text)、
- *    アプリ起動回避の/go中継+[PR]表記は AffiliateLink と同じ流儀。
- *  データ=public/data/color-editions.json(_color-editions-build.py。8/2に{}で表示停止していたのを
- *  本コーナー新設に伴い再生成)。帯の並び=巻数の多い順=長期看板作の色表紙が先頭に来る。
+ *  設置=ホームの全集コーナー直上。
+ *  ★2026-08-17 ユーザ裁定で単純化: 帯のスクロール・個別タップ(旧=Kindle直行)を廃止し、
+ *    **コーナー全体がどこを押しても /color-manga へ飛ぶ1枚のリンク**に。
+ *    書影は表示のたびにカラー作品からランダム抽選(クライアント側=リロード毎に変わる)。
+ *  データ=public/data/color-editions.json(_color-editions-build.py)。
  *  色トークンは全部テーマ変数=ライト/D3両対応(COLOR透かしの4色グラデのみ固定色)。 */
 
 type Entry = { v: number; u: string; c?: string | null; b?: string; t?: string };
 
+const SHOW = 14;
+
 export default function ColorCorner() {
-  const [data, setData] = useState<Record<string, Entry> | null>(null);
+  const [rows, setRows] = useState<Array<[string, Entry]> | null>(null);
+  const [total, setTotal] = useState(0);
   useEffect(() => {
     fetch("/data/color-editions.json")
       .then((r) => (r.ok ? r.json() : {}))
-      .then(setData)
-      .catch(() => setData({}));
+      .then((data: Record<string, Entry>) => {
+        setTotal(Object.keys(data).length);
+        // ★毎回ランダム(2026-08-17): 書影ありからFisher-Yatesで抽選。マウント毎=リロード毎に変わる
+        const pool = Object.entries(data).filter(([, e]) => e.c);
+        for (let i = pool.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [pool[i], pool[j]] = [pool[j], pool[i]];
+        }
+        setRows(pool.slice(0, SHOW));
+      })
+      .catch(() => setRows([]));
   }, []);
-  if (data === null) return null;
-  const rows = Object.entries(data)
-    .filter(([, e]) => e.c)
-    .sort((a, b) => b[1].v - a[1].v)
-    .slice(0, 14);
-  if (rows.length === 0) return null;
-  const total = Object.keys(data).length;
+  if (rows === null || rows.length === 0) return null;
   return (
     <section className="mt-4 px-4">
-      <div className="overflow-hidden rounded-xl border border-[var(--color-line)] border-b-4 border-b-[var(--color-accent)] bg-[var(--color-surface)] shadow-sm">
-        <Link href="/color-manga" className="spring-press relative block overflow-hidden px-3.5 pb-2.5 pt-3.5">
+      {/* ★ブロック全体が1リンク=どこを押しても /color-manga(帯の書影は装飾=個別リンク無し) */}
+      <Link
+        href="/color-manga"
+        className="spring-press block overflow-hidden rounded-xl border border-[var(--color-line)] border-b-4 border-b-[var(--color-accent)] bg-[var(--color-surface)] shadow-sm"
+      >
+        <div className="relative overflow-hidden px-3.5 pb-2.5 pt-3.5">
           <span
             aria-hidden="true"
             className="pointer-events-none absolute -right-1 -top-3 bg-clip-text text-[52px] font-black leading-none tracking-[-0.04em] text-transparent opacity-50"
@@ -50,36 +58,23 @@ export default function ColorCorner() {
             カラー版で読める漫画 <span className="text-[var(--color-accent)]">→</span>
           </p>
           <p className="relative mt-0.5 text-[10.5px] text-ink/55">紙は白黒でも、電子はフルカラー。</p>
-        </Link>
-        <ul className="no-scrollbar flex snap-x gap-1 overflow-x-auto px-3 pb-3 scroll-pl-3">
-          {rows.map(([slug, e]) => {
-            const href = kindleSearchUrl(e.t ?? slug);
-            return (
-              <li key={slug} className="shrink-0 snap-start">
-                <a
-                  href={href}
-                  target="_blank"
-                  rel="nofollow sponsored noopener"
-                  aria-label={`${e.t ?? slug} をKindleで見る`}
-                  className="spring-press block h-[92px] w-[62px] overflow-hidden border border-[var(--color-line)] bg-[var(--color-surface-2)]"
-                >
-                  <CoverImage src={e.c!} alt={e.t ?? slug} sizes="62px" size="card" />
-                </a>
-              </li>
-            );
-          })}
-          <li className="shrink-0 snap-start">
-            <Link
-              href="/color-manga"
-              className="spring-press flex h-[92px] w-[62px] flex-col items-center justify-center gap-0.5 border border-[var(--color-accent)]"
+        </div>
+        <ul className="flex gap-1 overflow-hidden px-3 pb-3" aria-hidden="true">
+          {rows.map(([slug, e]) => (
+            <li
+              key={slug}
+              className="h-[92px] w-[62px] shrink-0 overflow-hidden border border-[var(--color-line)] bg-[var(--color-surface-2)]"
             >
-              <span className="text-[15px] font-black tabular-nums text-[var(--color-accent)]">{total}</span>
-              <span className="text-[8.5px] text-ink/60">作品</span>
-              <span className="text-[8.5px] font-black text-[var(--color-accent)]">→ 全部</span>
-            </Link>
+              <CoverImage src={e.c!} alt="" sizes="62px" size="card" />
+            </li>
+          ))}
+          <li className="flex h-[92px] w-[62px] shrink-0 flex-col items-center justify-center gap-0.5 border border-[var(--color-accent)]">
+            <span className="text-[15px] font-black tabular-nums text-[var(--color-accent)]">{total}</span>
+            <span className="text-[8.5px] text-ink/60">作品</span>
+            <span className="text-[8.5px] font-black text-[var(--color-accent)]">→ 全部</span>
           </li>
         </ul>
-      </div>
+      </Link>
     </section>
   );
 }
