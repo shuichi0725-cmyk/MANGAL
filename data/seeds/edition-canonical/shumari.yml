@@ -1,7 +1,9 @@
 slug: shumari
 canonical_label: 角川書店(1987)
-source: '奇子型per-case: 角川1987上中下を正・講談社手塚治虫漫画全集v4(9784061087002)混入除去。文庫3冊温存'
+source: '奇子型per-case: 角川1987上中下を正・講談社手塚治虫漫画全集v4(9784061087002)混入除去。文庫3冊温存。ギャラ型r5 2026-08-17: 全集v1の1995-11=楽天再版日→種2初版日1978-10-10へ是正(v2-4の1978-11..1979-01と整合)。文庫を角川文庫(1995上中下)と小学館文庫(1976 v1-4 ISBN無)に分離'
 publisher: 角川書店
+suppress_types:
+- bunkobon
 volumes:
 - number: 1
   isbn13: '9784048520768'
@@ -17,13 +19,13 @@ volumes:
   volume_label: 下
 # ★2026-07-21 全集版復活(ユーザ裁定=作品頁にも全集掲載。日付=楽天×NDL)
 extra_editions:
-- label: 手塚治虫漫画全集(1978–1995)
+- label: 手塚治虫漫画全集(1978–1979)
   type: standard
   publisher: 講談社
   volumes:
   - number: 1
     isbn13: '9784061086975'
-    release_date: '1995-11'
+    release_date: '1978-10-10'
   - number: 2
     isbn13: '9784061086982'
     release_date: '1978-11'
@@ -33,3 +35,49 @@ extra_editions:
   - number: 4
     isbn13: '9784061087002'
     release_date: '1979-01-10'
+- label: 角川文庫(1995)
+  type: bunkobon
+  imprint: 角川文庫
+  publisher: 角川書店
+  volumes:
+  - number: 1
+    isbn13: '9784041851265'
+    release_date: '1995-04'
+    volume_label: '上'
+  - number: 2
+    isbn13: '9784041851272'
+    release_date: '1995-04'
+    volume_label: '中'
+  - number: 3
+    isbn13: '9784041851289'
+    release_date: '1995-04'
+    volume_label: '下'
+- label: 小学館文庫(1976)
+  type: bunkobon
+  imprint: 小学館文庫
+  publisher: 小学館
+  volumes:
+  - number: 1
+    release_date: '1976-04'
+  - number: 2
+    release_date: '1976-04'
+  - number: 3
+    release_date: '1976-04'
+  - number: 4
+    release_date: '1976-07'
+- label: 復刻版(2025)
+  type: shinsoban
+  publisher: 復刊ドットコム
+  volumes:
+  - number: 1
+    isbn13: '9784835459592'
+    release_date: '2025-07-18'
+    volume_label: '上'
+  - number: 2
+    isbn13: '9784835459608'
+    release_date: '2025-09-13'
+    volume_label: '中'
+  - number: 3
+    isbn13: '9784835459615'
+    release_date: '2025-11-01'
+    volume_label: '下'

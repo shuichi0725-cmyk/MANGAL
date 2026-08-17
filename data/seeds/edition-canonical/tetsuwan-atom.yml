@@ -1,0 +1,432 @@
+slug: tetsuwan-atom
+canonical_label: サンデーコミックス版
+canonical_publisher: 秋田書店
+canonical_imprint: SUNDAY COMICS
+suppress_types:
+- bunkobon
+source: 'ギャラ型round5(手塚) 2026-08-17: stdに5run(1985年版/KCスペシャル1987/KC1993/オリジナル版2023/サンデーC)が畳まれ47年逆行→サンデーコミックス(秋田1999-2000)v1-20をmainに、光文社1956/カッパ・コミクス1964/ゴールデン1968/サンコミ1975/1985年版/KCSP1987/KC1993を版タブへ。文庫は光文社文庫(1995)と講談社漫画文庫(2002)に分離(全集タブ=extra-editions.yml側で温存)。オリジナル版(復刊2021-23)は種2に全16巻あり=タブ化、復刊2014年版v1-3もタブ化。アニメ系/えほん/KPC=対象外'
+volumes:
+- number: 1
+  isbn13: '9784253064798'
+  release_date: '1999-07'
+- number: 2
+  isbn13: '9784253064804'
+  release_date: '1999-07'
+- number: 3
+  isbn13: '9784253064811'
+  release_date: '1999-07'
+- number: 4
+  isbn13: '9784253064828'
+  release_date: '1999-08'
+- number: 5
+  isbn13: '9784253064835'
+  release_date: '1999-08'
+- number: 6
+  isbn13: '9784253064842'
+  release_date: '1999-09'
+- number: 7
+  isbn13: '9784253064859'
+  release_date: '1999-09'
+- number: 8
+  isbn13: '9784253064866'
+  release_date: '1999-10'
+- number: 9
+  isbn13: '9784253064873'
+  release_date: '1999-10'
+- number: 10
+  isbn13: '9784253064880'
+  release_date: '1999-11'
+- number: 11
+  isbn13: '9784253064897'
+  release_date: '1999-11'
+- number: 12
+  isbn13: '9784253064903'
+  release_date: '1999-12'
+- number: 13
+  isbn13: '9784253064910'
+  release_date: '1999-12'
+- number: 14
+  isbn13: '9784253064927'
+  release_date: '2000-01'
+- number: 15
+  isbn13: '9784253064934'
+  release_date: '2000-01'
+- number: 16
+  isbn13: '9784253064941'
+  release_date: '2000-02'
+- number: 17
+  isbn13: '9784253064958'
+  release_date: '2000-02'
+- number: 18
+  isbn13: '9784253064965'
+  release_date: '2000-03'
+- number: 19
+  isbn13: '9784253064972'
+  release_date: '2000-03'
+- number: 20
+  isbn13: '9784253064989'
+  release_date: '2000-04-23'
+extra_editions:
+- type: shinsoban
+  label: 光文社の漫画(1956)
+  publisher: 光文社
+  volumes:
+  - number: 1
+    release_date: '1956-06-01'
+  - number: 2
+    release_date: '1957-05-10'
+  - number: 3
+    release_date: '1957-12-15'
+- type: shinsoban
+  label: カッパ・コミクス(1964)
+  imprint: 光文社のカッパ・コミクス
+  publisher: 光文社
+  volumes:
+  - number: 1
+    release_date: '1964-01'
+  - number: 2
+    release_date: '1964-02'
+  - number: 3
+    release_date: '1964-03'
+  - number: 4
+    release_date: '1964-04-01'
+  - number: 5
+    release_date: '1964-05'
+  - number: 6
+    release_date: '1964-06'
+  - number: 7
+    release_date: '1964-07'
+  - number: 8
+    release_date: '1964-08'
+  - number: 9
+    release_date: '1964-09'
+  - number: 10
+    release_date: '1964-10'
+  - number: 11
+    release_date: '1964-11'
+  - number: 12
+    release_date: '1964-12'
+  - number: 13
+    release_date: '1965-12'
+- type: shinsoban
+  label: ゴールデン・コミックス(1968)
+  imprint: ゴールデン・コミックス
+  publisher: 小学館
+  volumes:
+  - number: 1
+    release_date: '1968-10-30'
+  - number: 2
+    release_date: '1968-10-30'
+  - number: 3
+    release_date: '1968-12-10'
+  - number: 4
+    release_date: '1968-12-10'
+  - number: 5
+    release_date: '1969-01-10'
+  - number: 6
+    release_date: '1969-01-10'
+  - number: 7
+    release_date: '1969-02-10'
+  - number: 8
+    release_date: '1969-02-10'
+  - number: 9
+    release_date: '1969-03-10'
+  - number: 10
+    release_date: '1969-03-25'
+  - number: 11
+    release_date: '1969-05-10'
+  - number: 12
+    release_date: '1969-06-10'
+  - number: 13
+    release_date: '1969-07-10'
+  - number: 14
+    release_date: '1969-08-10'
+  - number: 15
+    release_date: '1969-10-10'
+  - number: 16
+    release_date: '1969-11-10'
+  - number: 17
+    release_date: '1969-12-10'
+  - number: 18
+    release_date: '1970-01-10'
+  - number: 19
+    release_date: '1970-02-10'
+  - number: 20
+    release_date: '1970-03-20'
+- type: shinsoban
+  label: サンコミックス(1975)
+  imprint: サンコミックス
+  publisher: 朝日ソノラマ
+  volumes:
+  - number: 1
+    release_date: '1975-06-20'
+  - number: 2
+    release_date: '1975-06-20'
+  - number: 3
+    release_date: '1975-07-25'
+  - number: 4
+    release_date: '1975-07'
+  - number: 5
+    release_date: '1975-08-30'
+  - number: 6
+    release_date: '1975-08-30'
+  - number: 7
+    release_date: '1975-10'
+  - number: 8
+    release_date: '1975-10'
+  - number: 9
+    release_date: '1975-10-30'
+  - number: 10
+    release_date: '1975-10-30'
+  - number: 11
+    release_date: '1975-11-30'
+  - number: 12
+    release_date: '1975-11-30'
+  - number: 13
+    release_date: '1975-12-25'
+  - number: 14
+    release_date: '1976-01-30'
+  - number: 15
+    release_date: '1976-02-16'
+  - number: 16
+    release_date: '1976-03-05'
+  - number: 17
+    release_date: '1976-03-31'
+  - number: 18
+    release_date: '1976-04-30'
+  - number: 19
+    release_date: '1976-05-31'
+  - number: 20
+    release_date: '1976-06-10'
+  - number: 21
+    release_date: '1976-07-15'
+- type: shinsoban
+  label: 1985年版(講談社)
+  publisher: 講談社
+  volumes:
+  - number: 1
+    isbn13: '9784061907010'
+    release_date: '1985-05'
+  - number: 2
+    isbn13: '9784061907027'
+    release_date: '1985-06'
+  - number: 3
+    isbn13: '9784061907034'
+    release_date: '1985-09'
+- type: shinsoban
+  label: KCスペシャル(1987)
+  imprint: KCスペシャル
+  publisher: 講談社
+  volumes:
+  - number: 1
+    isbn13: '9784061013056'
+    release_date: '1987-03'
+  - number: 2
+    isbn13: '9784061013063'
+    release_date: '1987-04'
+  - number: 3
+    isbn13: '9784061013070'
+    release_date: '1987-05'
+  - number: 4
+    isbn13: '9784061013087'
+    release_date: '1987-06'
+  - number: 5
+    isbn13: '9784061013094'
+    release_date: '1987-07'
+  - number: 6
+    isbn13: '9784061013100'
+    release_date: '1987-08'
+  - number: 7
+    isbn13: '9784061013117'
+    release_date: '1987-09'
+- type: shinsoban
+  label: 講談社コミックス(1993)
+  imprint: 講談社コミックス
+  publisher: 講談社
+  volumes:
+  - number: 6
+    isbn13: '9784063133691'
+    release_date: '1993-03'
+  - number: 8
+    isbn13: '9784063133721'
+    release_date: '1993-05'
+  - number: 9
+    isbn13: '9784063133738'
+    release_date: '1993-06'
+  - number: 10
+    isbn13: '9784063133745'
+    release_date: '1993-07'
+  - number: 11
+    isbn13: '9784063133752'
+    release_date: '1993-08'
+  - number: 12
+    isbn13: '9784063133769'
+    release_date: '1993-09'
+  - number: 13
+    isbn13: '9784063133783'
+    release_date: '1993-10'
+  - number: 14
+    isbn13: '9784063133806'
+    release_date: '1993-11'
+  - number: 15
+    isbn13: '9784063133820'
+    release_date: '1993-12'
+- type: bunkobon
+  label: 光文社文庫(1995)
+  imprint: 光文社文庫コミックシリーズ
+  publisher: 光文社
+  volumes:
+  - number: 1
+    isbn13: '9784334770013'
+    release_date: '1995-10-15'
+  - number: 2
+    isbn13: '9784334770020'
+    release_date: '1995-10'
+  - number: 3
+    isbn13: '9784334770037'
+    release_date: '1995-10-15'
+  - number: 4
+    isbn13: '9784334770044'
+    release_date: '1995-10'
+  - number: 5
+    isbn13: '9784334770051'
+    release_date: '1995-10'
+  - number: 6
+    isbn13: '9784334770068'
+    release_date: '1995-11'
+  - number: 7
+    isbn13: '9784334770075'
+    release_date: '1995-11-15'
+  - number: 8
+    isbn13: '9784334770082'
+    release_date: '1995-11-15'
+  - number: 9
+    isbn13: '9784334770099'
+    release_date: '1995-11-15'
+  - number: 10
+    isbn13: '9784334770105'
+    release_date: '1995-11'
+  - number: 11
+    isbn13: '9784334770112'
+    release_date: '1995-12-15'
+  - number: 12
+    isbn13: '9784334770129'
+    release_date: '1995-12-15'
+  - number: 13
+    isbn13: '9784334770136'
+    release_date: '1995-12-15'
+  - number: 14
+    isbn13: '9784334770143'
+    release_date: '1995-12-15'
+  - number: 15
+    isbn13: '9784334770150'
+    release_date: '1995-12-15'
+- type: bunkobon
+  label: 講談社漫画文庫(2002)
+  imprint: 講談社漫画文庫
+  publisher: 講談社
+  volumes:
+  - number: 1
+    isbn13: '9784063602685'
+    release_date: '2002-06'
+  - number: 2
+    isbn13: '9784063602692'
+    release_date: '2002-06'
+  - number: 3
+    isbn13: '9784063603019'
+    release_date: '2002-07'
+  - number: 4
+    isbn13: '9784063603026'
+    release_date: '2002-07'
+  - number: 5
+    isbn13: '9784063603132'
+    release_date: '2002-08'
+  - number: 6
+    isbn13: '9784063603149'
+    release_date: '2002-08'
+  - number: 7
+    isbn13: '9784063603507'
+    release_date: '2002-09'
+  - number: 8
+    isbn13: '9784063603514'
+    release_date: '2002-09'
+  - number: 9
+    isbn13: '9784063603729'
+    release_date: '2002-10'
+  - number: 10
+    isbn13: '9784063603736'
+    release_date: '2002-10'
+  - number: 11
+    isbn13: '9784063604016'
+    release_date: '2002-11'
+  - number: 12
+    isbn13: '9784063604023'
+    release_date: '2002-11'
+  - number: 13
+    isbn13: '9784063604214'
+    release_date: '2002-12'
+- type: shinsoban
+  label: オリジナル版(2021-23)
+  publisher: 復刊ドットコム
+  volumes:
+  - number: 1
+    isbn13: '9784835458243'
+    release_date: '2021-10'
+  - number: 2
+    isbn13: '9784835458250'
+    release_date: '2021-11'
+  - number: 3
+    isbn13: '9784835458267'
+    release_date: '2021-12'
+  - number: 4
+    isbn13: '9784835458274'
+    release_date: '2022-01'
+  - number: 5
+    isbn13: '9784835458281'
+    release_date: '2022-02'
+  - number: 6
+    isbn13: '9784835458298'
+    release_date: '2022-03'
+  - number: 7
+    isbn13: '9784835458304'
+    release_date: '2022-04'
+  - number: 8
+    isbn13: '9784835458311'
+    release_date: '2022-05'
+  - number: 9
+    isbn13: '9784835458328'
+    release_date: '2022-06'
+  - number: 10
+    isbn13: '9784835458335'
+    release_date: '2022-07'
+  - number: 11
+    isbn13: '9784835458342'
+    release_date: '2022-08'
+  - number: 12
+    isbn13: '9784835458359'
+    release_date: '2022-09'
+  - number: 13
+    isbn13: '9784835458366'
+    release_date: '2022-10'
+  - number: 14
+    isbn13: '9784835458373'
+    release_date: '2022-11'
+  - number: 15
+    isbn13: '9784835458380'
+    release_date: '2022-12'
+  - number: 16
+    isbn13: '9784835458397'
+    release_date: '2023-01'
+- type: shinsoban
+  label: 復刊ドットコム版(2014)
+  publisher: 復刊ドットコム
+  volumes:
+  - number: 1
+    isbn13: '9784835451367'
+    release_date: '2014-12'
+  - number: 2
+    isbn13: '9784835451374'
+    release_date: '2015-02'
+  - number: 3
+    isbn13: '9784835451381'
+    release_date: '2015-04'

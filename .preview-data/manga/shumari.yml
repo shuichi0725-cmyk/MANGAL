@@ -47,15 +47,15 @@ editions:
     release_date: 1987-12
     volume_label: 下
 - type: standard
-  label: 手塚治虫漫画全集(1978–1995)
+  label: 手塚治虫漫画全集(1978–1979)
   publisher: 講談社
-  imprint: 手塚治虫漫画全集(1978–1995)
+  imprint: 手塚治虫漫画全集(1978–1979)
   volumes:
   - number: 1
     asin: null
     isbn13: '9784061086975'
     cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/6975/9784061086975.jpg?_ex=300x300
-    release_date: 1995-11
+    release_date: '1978-10-10'
   - number: 2
     asin: null
     isbn13: '9784061086982'
@@ -72,33 +72,76 @@ editions:
     cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/7002/9784061087002.jpg?_ex=300x300
     release_date: '1979-01-10'
 - type: bunkobon
-  label: 文庫版
+  label: 角川文庫(1995)
   publisher: 角川書店
-  imprint: 小学館文庫
+  imprint: 角川文庫
   volumes:
   - number: 1
-    volume_label: 上
     asin: null
     isbn13: '9784041851265'
     cover_url: null
     release_date: 1995-04
+    volume_label: 上
   - number: 2
-    volume_label: 中
     asin: null
     isbn13: '9784041851272'
     cover_url: null
     release_date: 1995-04
+    volume_label: 中
   - number: 3
-    volume_label: 下
     asin: null
     isbn13: '9784041851289'
     cover_url: null
     release_date: 1995-04
+    volume_label: 下
+- type: bunkobon
+  label: 小学館文庫(1976)
+  publisher: 小学館
+  imprint: 小学館文庫
+  volumes:
+  - number: 1
+    asin: null
+    isbn13: null
+    cover_url: null
+    release_date: 1976-04
+  - number: 2
+    asin: null
+    isbn13: null
+    cover_url: null
+    release_date: 1976-04
+  - number: 3
+    asin: null
+    isbn13: null
+    cover_url: null
+    release_date: 1976-04
   - number: 4
     asin: null
     isbn13: null
     cover_url: null
     release_date: 1976-07
+- type: shinsoban
+  label: 復刻版(2025)
+  publisher: 復刊ドットコム
+  imprint: 復刻版(2025)
+  volumes:
+  - number: 1
+    asin: null
+    isbn13: '9784835459592'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/9592/9784835459592_1_7.jpg?_ex=300x300
+    release_date: '2025-07-18'
+    volume_label: 上
+  - number: 2
+    asin: null
+    isbn13: '9784835459608'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/9608/9784835459608_1_7.jpg?_ex=300x300
+    release_date: '2025-09-13'
+    volume_label: 中
+  - number: 3
+    asin: null
+    isbn13: '9784835459615'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/9615/9784835459615_1_7.jpg?_ex=300x300
+    release_date: '2025-11-01'
+    volume_label: 下
 - type: bunkobon
   label: 手塚治虫文庫全集(2009)
   publisher: 講談社
@@ -117,6 +160,8 @@ editions:
     release_date: 2009-12
     title_display: 第2巻(BT-26)
 publishers:
+- fukkan-com
 - kadokawa
 - kodansha
+- shogakukan
 genres_provisional: true

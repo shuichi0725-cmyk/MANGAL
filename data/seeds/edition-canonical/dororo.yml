@@ -1,0 +1,61 @@
+slug: dororo
+canonical_label: サンデーコミックス版
+canonical_publisher: 秋田書店
+canonical_imprint: サンデーコミックス
+suppress_types:
+- bunkobon
+source: 'ギャラ型round5(手塚) 2026-08-17: v3枠を手塚治虫傑作選集(1990)が占有、文庫に秋田漫画文庫(1976)が同居し18年逆行→サンデーコミックス(1971-72)v1-4をmainに(v3=種2 ISBN無)、傑作選集/文庫2期を分離。ATC系=コンビニ判不収載。全集タブ=extra-editions.yml側で温存'
+volumes:
+- number: 1
+  isbn13: '9784253062572'
+  release_date: '1971-09-05'
+- number: 2
+  isbn13: '9784253062589'
+  release_date: '1971-11-05'
+- number: 3
+  release_date: '1972-01-15'
+- number: 4
+  isbn13: '9784253062602'
+  release_date: '1972-06-10'
+extra_editions:
+- type: shinsoban
+  label: 手塚治虫傑作選集(1990)
+  imprint: 手塚治虫傑作選集
+  publisher: 講談社
+  volumes:
+  - number: 1
+    isbn13: '9784253102193'
+    release_date: '1990-09'
+  - number: 2
+    isbn13: '9784253102209'
+    release_date: '1990-10'
+  - number: 3
+    isbn13: '9784253102216'
+    release_date: '1990-11'
+- type: bunkobon
+  label: 秋田漫画文庫(1976)
+  imprint: 秋田漫画文庫
+  publisher: 秋田書店
+  volumes:
+  - number: 1
+    release_date: '1976-08'
+  - number: 2
+    release_date: '1976-08'
+  - number: 3
+    release_date: '1976-09-20'
+  - number: 4
+    release_date: '1976'
+- type: bunkobon
+  label: 秋田文庫(1994)
+  imprint: 秋田文庫
+  publisher: 秋田書店
+  volumes:
+  - number: 1
+    isbn13: '9784253169974'
+    release_date: '1994-04'
+  - number: 2
+    isbn13: '9784253169981'
+    release_date: '1994-04'
+  - number: 3
+    isbn13: '9784253169998'
+    release_date: '1994-04'
