@@ -1,0 +1,176 @@
+slug: sasuke
+canonical_label: 初版
+canonical_publisher: 不明
+suppress_types:
+- bunkobon
+source: 'ギャラ型round4 2026-08-17: 初版run(1962-65 ISBN無)v1-20をmainに(小学館叢書1990がv1-8枠を占有していた)。叢書は楽天連番972217-972286で全8巻復元(v7枠の出所不明ISBN 9784091900876=不収載)。文庫は1977年版とコミック文庫(1995-96)の2期に分離'
+volumes:
+- number: 1
+  release_date: '1962-07-01'
+- number: 2
+  release_date: '1962-08-01'
+- number: 3
+  release_date: '1962-09-01'
+- number: 4
+  release_date: '1962-10-01'
+- number: 5
+  release_date: '1962-12-01'
+- number: 6
+  release_date: '1963-02-01'
+- number: 7
+  release_date: '1963-05-05'
+- number: 8
+  release_date: '1963-08-15'
+- number: 9
+  release_date: '1963-11'
+- number: 10
+  release_date: '1964-02'
+- number: 11
+  release_date: '1964-06-15'
+- number: 12
+  release_date: '1964-07'
+- number: 13
+  release_date: '1964-08'
+- number: 14
+  release_date: '1964-10'
+- number: 15
+  release_date: '1964-11'
+- number: 16
+  release_date: '1965-01'
+- number: 17
+  release_date: '1965-02'
+- number: 18
+  release_date: null
+- number: 19
+  release_date: '1965-05'
+- number: 20
+  release_date: null
+extra_editions:
+- type: shinsoban
+  label: コンパクトコミックス(1966)
+  imprint: コンパクトコミックス
+  publisher: 集英社
+  volumes:
+  - number: 4
+    release_date: '1966-10-31'
+  - number: 5
+    release_date: '1966-11-30'
+  - number: 6
+    release_date: '1966-11-30'
+  - number: 7
+    release_date: '1966-12-31'
+  - number: 8
+    release_date: '1966-12-31'
+  - number: 9
+    release_date: '1967-01-31'
+  - number: 10
+    release_date: '1967-01-31'
+  - number: 11
+    release_date: '1967-02-28'
+  - number: 12
+    release_date: '1967-02-28'
+  - number: 13
+    release_date: '1967-03-31'
+  - number: 14
+    release_date: '1967-03-31'
+- type: shinsoban
+  label: 小学館叢書(1990)
+  imprint: 小学館叢書
+  publisher: 小学館
+  volumes:
+  - number: 1
+    isbn13: '9784091972217'
+    release_date: '1990-05-10'
+  - number: 2
+    isbn13: '9784091972224'
+    release_date: '1990-06-10'
+  - number: 3
+    isbn13: '9784091972231'
+    release_date: '1990-07-10'
+  - number: 4
+    isbn13: '9784091972248'
+    release_date: '1990-08-10'
+  - number: 5
+    isbn13: '9784091972255'
+    release_date: '1990-09-10'
+  - number: 6
+    isbn13: '9784091972262'
+    release_date: '1990-10-10'
+  - number: 7
+    isbn13: '9784091972279'
+    release_date: '1990-10-19'
+  - number: 8
+    isbn13: '9784091972286'
+    release_date: '1990-12-10'
+- type: bunkobon
+  label: 小学館文庫(1977)
+  imprint: 小学館文庫
+  publisher: 小学館
+  volumes:
+  - number: 0
+    release_date: '1977-07-20'
+  - number: 1
+    release_date: '1977-02'
+  - number: 2
+    release_date: '1977-02-20'
+  - number: 3
+    release_date: '1977-03'
+  - number: 4
+    release_date: '1977-03'
+  - number: 5
+    release_date: '1977-04'
+  - number: 6
+    release_date: '1977-05-20'
+  - number: 7
+    release_date: '1977-06'
+  - number: 8
+    release_date: '1977-07-20'
+  - number: 9
+    release_date: '1977-08-20'
+  - number: 10
+    release_date: '1977-09-20'
+  - number: 11
+    release_date: '1977-10-20'
+  - number: 12
+    release_date: '1977-11-20'
+  - number: 13
+    release_date: '1977-12-20'
+  - number: 14
+    release_date: '1978-01-20'
+  - number: 15
+    release_date: '1978-02-20'
+- type: bunkobon
+  label: コミック文庫(1995)
+  imprint: 小学館コミック文庫
+  publisher: 小学館
+  volumes:
+  - number: 1
+    isbn13: '9784091921017'
+    release_date: '1995-12-10'
+  - number: 2
+    isbn13: '9784091921024'
+    release_date: '1995-12-10'
+  - number: 3
+    isbn13: '9784091921031'
+    release_date: '1996-01-10'
+  - number: 4
+    isbn13: '9784091921048'
+    release_date: '1996-01-10'
+  - number: 5
+    isbn13: '9784091921055'
+    release_date: '1996-02-10'
+  - number: 6
+    isbn13: '9784091921062'
+    release_date: '1996-02-10'
+  - number: 7
+    isbn13: '9784091921079'
+    release_date: '1996-03-10'
+  - number: 8
+    isbn13: '9784091921086'
+    release_date: '1996-03-10'
+  - number: 9
+    isbn13: '9784091921093'
+    release_date: '1996-04-10'
+  - number: 10
+    isbn13: '9784091921109'
+    release_date: '1996-04-10'

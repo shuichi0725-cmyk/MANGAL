@@ -1,0 +1,35 @@
+slug: kamen-rider
+canonical_label: Shotaro world版
+canonical_publisher: メディアファクトリー
+canonical_imprint: Shotaro world
+source: 'ギャラ型round4 2026-08-17: Shotaro world版(1999)v1-3をmainに(v1枠を中公愛蔵版単巻1989が占有していた=楽天でv1回収)。初版(1972 ISBN無)残存行をタブ保存。中公文庫タブは既存のまま'
+volumes:
+- number: 1
+  isbn13: '9784889918762'
+  release_date: '1999-07-01'
+- number: 2
+  isbn13: '9784889918779'
+  release_date: '1999-07-01'
+- number: 3
+  isbn13: '9784889918786'
+  release_date: '1999-07-01'
+extra_editions:
+- type: aizoban
+  label: 中公愛蔵版(1989)
+  publisher: 中央公論社
+  volumes:
+  - number: 1
+    isbn13: '9784120018848'
+    release_date: '1989-12-20'
+- type: shinsoban
+  label: 初版(1972)
+  publisher: 不明
+  volumes:
+  - number: 1
+    release_date: '1972-04'
+  - number: 2
+    release_date: '1971-12-03'
+  - number: 3
+    release_date: '1972-05-15'
+  - number: 4
+    release_date: '1972-06-01'

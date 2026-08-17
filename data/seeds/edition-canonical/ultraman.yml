@@ -1,0 +1,27 @@
+slug: ultraman
+canonical_label: サンワイドコミックス版
+canonical_publisher: 朝日ソノラマ
+canonical_imprint: Sun wide comics
+source: 'ギャラ型round4 2026-08-17: サンワイドコミックス(1984 全2巻)をmainに、初版(1968 v1-2)と1978年版(v3)の断片を各タブ保存(番号0の1979行=構成不明で不収載)。講談社漫画文庫(2011 上下)タブは既存のまま'
+volumes:
+- number: 1
+  isbn13: '9784257960089'
+  release_date: '1984-06-30'
+- number: 2
+  isbn13: '9784257960096'
+  release_date: '1984-07-20'
+extra_editions:
+- type: shinsoban
+  label: 初版(1968)
+  publisher: 不明
+  volumes:
+  - number: 1
+    release_date: '1968-02-20'
+  - number: 2
+    release_date: '1968-03-20'
+- type: shinsoban
+  label: 1978年版
+  publisher: 不明
+  volumes:
+  - number: 3
+    release_date: '1978-07-10'

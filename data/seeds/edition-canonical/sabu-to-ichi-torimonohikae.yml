@@ -1,0 +1,93 @@
+slug: sabu-to-ichi-torimonohikae
+canonical_label: 小学館叢書版
+canonical_publisher: 小学館
+canonical_imprint: 小学館叢書
+source: 'ギャラ型round4 2026-08-17: 小学館叢書(1988 全4巻)をmainに。stdに混在していた初版run(1968-73 ISBN無)と1981年版run(v7-17 ISBN無)を各タブへ保存(版元は両ソース無=不明)。小学館文庫タブは既存のまま'
+volumes:
+- number: 1
+  isbn13: '9784091970411'
+  release_date: '1988-07-01'
+- number: 2
+  isbn13: '9784091970428'
+  release_date: '1988-08'
+- number: 3
+  isbn13: '9784091970435'
+  release_date: '1988-09-10'
+- number: 4
+  isbn13: '9784091970442'
+  release_date: '1988-10-10'
+extra_editions:
+- type: shinsoban
+  label: 初版(1968-73)
+  publisher: 不明
+  volumes:
+  - number: 1
+    release_date: '1968-07-10'
+  - number: 2
+    release_date: '1969-03-10'
+  - number: 3
+    release_date: '1969-08'
+  - number: 4
+    release_date: '1969-10-10'
+  - number: 5
+    release_date: '1972'
+  - number: 6
+    release_date: '1973-09-20'
+  - number: 7
+    release_date: null
+  - number: 8
+    release_date: null
+  - number: 9
+    release_date: null
+  - number: 10
+    release_date: null
+  - number: 11
+    release_date: null
+  - number: 12
+    release_date: null
+  - number: 13
+    release_date: null
+  - number: 14
+    release_date: null
+  - number: 15
+    release_date: null
+  - number: 16
+    release_date: null
+  - number: 17
+    release_date: null
+  - number: 18
+    release_date: null
+- type: shinsoban
+  label: 1981年版
+  publisher: 不明
+  volumes:
+  - number: 3
+    release_date: '1981-01'
+  - number: 4
+    release_date: '1981-01'
+  - number: 5
+    release_date: '1981-01'
+  - number: 6
+    release_date: '1981-01'
+  - number: 7
+    release_date: '1981-02'
+  - number: 8
+    release_date: '1981-02'
+  - number: 9
+    release_date: '1981-03'
+  - number: 10
+    release_date: '1981-03'
+  - number: 11
+    release_date: '1981-04'
+  - number: 12
+    release_date: '1981-04'
+  - number: 13
+    release_date: '1981-05'
+  - number: 14
+    release_date: '1981-06-10'
+  - number: 15
+    release_date: '1981-07'
+  - number: 16
+    release_date: '1981-08'
+  - number: 17
+    release_date: '1981-09'

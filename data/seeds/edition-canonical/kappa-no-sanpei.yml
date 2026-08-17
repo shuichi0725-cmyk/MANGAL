@@ -1,0 +1,103 @@
+slug: kappa-no-sanpei
+canonical_label: 少年マガジンKC版
+canonical_publisher: 講談社
+canonical_imprint: 少年マガジンKC
+suppress_types:
+- bunkobon
+source: 'ギャラ型round4 2026-08-17: 少年マガジンKC(1986 全5巻=楽天完備)をmainに。stdに混在していたサンワイド(1984)/貸本漫画傑作選(2001 全4巻・v4のMADB日付1986は誤=楽天2001-11)/1975年版断片/1993年版断片を各タブへ。ちくま文庫単巻(1988)を文庫タブに再構築'
+volumes:
+- number: 1
+  isbn13: '9784061731417'
+  release_date: '1986-04-18'
+- number: 2
+  isbn13: '9784061731424'
+  release_date: '1986-04-18'
+- number: 3
+  isbn13: '9784061731431'
+  release_date: '1986-05-17'
+- number: 4
+  isbn13: '9784061731448'
+  release_date: '1986-05-17'
+- number: 5
+  isbn13: '9784061731455'
+  release_date: '1986-06-18'
+extra_editions:
+- type: shinsoban
+  label: サンワイドコミックス(1984)
+  imprint: Sun wide comics
+  publisher: 朝日ソノラマ
+  volumes:
+  - number: 1
+    isbn13: '9784257960010'
+    release_date: '1984-05-31'
+  - number: 2
+    isbn13: '9784257960034'
+    release_date: '1984-06-25'
+  - number: 3
+    isbn13: '9784257960058'
+    release_date: '1984-07-20'
+- type: shinsoban
+  label: 水木しげる貸本漫画傑作選(2001)
+  imprint: 水木しげる貸本漫画傑作選
+  publisher: 朝日ソノラマ
+  volumes:
+  - number: 1
+    isbn13: '9784257721260'
+    release_date: '2001-08'
+  - number: 2
+    isbn13: '9784257721291'
+    release_date: '2001-09'
+  - number: 3
+    isbn13: '9784257721345'
+    release_date: '2001-10'
+  - number: 4
+    isbn13: '9784257721352'
+    release_date: '2001-11'
+- type: shinsoban
+  label: 1975年版
+  publisher: 不明
+  volumes:
+  - number: 1
+    release_date: '1975-10-12'
+  - number: 2
+    release_date: '1975-10-12'
+  - number: 3
+    release_date: '1975-10-12'
+  - number: 4
+    release_date: '1975-10-12'
+  - number: 5
+    release_date: '1975-10-12'
+  - number: 6
+    release_date: '1975-10-12'
+  - number: 7
+    release_date: '1975-10-12'
+  - number: 8
+    release_date: '1975-10-12'
+- type: shinsoban
+  label: 1993年版
+  publisher: 不明
+  volumes:
+  - number: 1
+    release_date: '1993-10-22'
+  - number: 2
+    release_date: '1993-10-22'
+  - number: 3
+    release_date: '1993-10-22'
+  - number: 4
+    release_date: '1993-10-22'
+  - number: 5
+    release_date: '1993-10-22'
+  - number: 6
+    release_date: '1993-10-22'
+  - number: 7
+    release_date: '1993-10-22'
+  - number: 8
+    release_date: '1993-10-22'
+- type: bunkobon
+  label: ちくま文庫(1988)
+  imprint: ちくま文庫
+  publisher: 筑摩書房
+  volumes:
+  - number: 1
+    isbn13: '9784480022387'
+    release_date: '1988-06-28'

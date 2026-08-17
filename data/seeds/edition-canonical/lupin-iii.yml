@@ -1,0 +1,150 @@
+slug: lupin-iii
+canonical_label: 中公コミックスーリ版
+canonical_publisher: 中央公論社
+canonical_imprint: 中公コミックスーリ
+suppress_types:
+- bunkobon
+source: 'ギャラ型round4 2026-08-17: 中公コミックスーリ(1992-93 1巻上中下+2-12巻=14冊、楽天完備)を刊行順採番でmainに(v1枠を中公愛蔵1989が、v6/13/14枠を初版1974-76の行が占有)。愛蔵版v1-3/初版run全14冊(種2)をタブへ。文庫は中公文庫(1998 v1-8)と双葉文庫(1995 v9-10断片)に分離。編名単巻期(2000-08)は未収載'
+volumes:
+- number: 1
+  isbn13: '9784124103908'
+  release_date: '1992-06-05'
+  volume_label: '1巻・上'
+- number: 2
+  isbn13: '9784124103915'
+  release_date: '1992-07-04'
+  volume_label: '1巻・中'
+- number: 3
+  isbn13: '9784124103922'
+  release_date: '1992-08-05'
+  volume_label: '1巻・下'
+- number: 4
+  isbn13: '9784124104080'
+  release_date: '1992-11-05'
+  volume_label: '2巻'
+- number: 5
+  isbn13: '9784124104097'
+  release_date: '1992-12-05'
+  volume_label: '3巻'
+- number: 6
+  isbn13: '9784124104103'
+  release_date: '1993-01-07'
+  volume_label: '4巻'
+- number: 7
+  isbn13: '9784124104110'
+  release_date: '1993-02-05'
+  volume_label: '5巻'
+- number: 8
+  isbn13: '9784124104127'
+  release_date: '1993-03-05'
+  volume_label: '6巻'
+- number: 9
+  isbn13: '9784124104134'
+  release_date: '1993-04-05'
+  volume_label: '7巻'
+- number: 10
+  isbn13: '9784124104141'
+  release_date: '1993-05-20'
+  volume_label: '8巻'
+- number: 11
+  isbn13: '9784124104158'
+  release_date: '1993-06-07'
+  volume_label: '9巻'
+- number: 12
+  isbn13: '9784124104165'
+  release_date: '1993-07-05'
+  volume_label: '10巻'
+- number: 13
+  isbn13: '9784124104172'
+  release_date: '1993-08-05'
+  volume_label: '11巻'
+- number: 14
+  isbn13: '9784124104189'
+  release_date: '1993-09-04'
+  volume_label: '12巻'
+extra_editions:
+- type: aizoban
+  label: 中公愛蔵版(1989)
+  publisher: 中央公論社
+  volumes:
+  - number: 1
+    isbn13: '9784120018190'
+    release_date: '1989-07-05'
+  - number: 2
+    isbn13: '9784120018206'
+    release_date: '1989-08-05'
+  - number: 3
+    isbn13: '9784120018213'
+    release_date: '1989-09-05'
+- type: shinsoban
+  label: 初版(1974-76)
+  publisher: 不明
+  volumes:
+  - number: 1
+    release_date: '1974-09-25'
+  - number: 2
+    release_date: '1974-10-25'
+  - number: 3
+    release_date: '1974-11-25'
+  - number: 4
+    release_date: '1974-12-20'
+  - number: 5
+    release_date: '1975-07-10'
+  - number: 6
+    release_date: '1975-09-10'
+  - number: 7
+    release_date: '1976-02-10'
+  - number: 8
+    release_date: '1976-04-10'
+  - number: 9
+    release_date: '1976-06-10'
+  - number: 10
+    release_date: '1976-08-10'
+  - number: 11
+    release_date: '1976-09-10'
+  - number: 12
+    release_date: '1976-10-10'
+  - number: 13
+    release_date: '1976-11-10'
+  - number: 14
+    release_date: '1976-12-10'
+- type: bunkobon
+  label: 中公文庫コミック版(1998)
+  imprint: 中公文庫コミック版
+  publisher: 中央公論新社
+  volumes:
+  - number: 1
+    isbn13: '9784122030541'
+    release_date: '1998-01-01'
+  - number: 2
+    isbn13: '9784122030558'
+    release_date: '1998-01-01'
+  - number: 3
+    isbn13: '9784122030770'
+    release_date: '1998-02'
+  - number: 4
+    isbn13: '9784122030787'
+    release_date: '1998-02'
+  - number: 5
+    isbn13: '9784122031043'
+    release_date: '1998-03'
+  - number: 6
+    isbn13: '9784122031050'
+    release_date: '1998-03'
+  - number: 7
+    isbn13: '9784122031272'
+    release_date: '1998-04'
+  - number: 8
+    isbn13: '9784122031289'
+    release_date: '1998-04'
+- type: bunkobon
+  label: 双葉文庫(1995)
+  imprint: 双葉文庫
+  publisher: 双葉社
+  volumes:
+  - number: 9
+    isbn13: '9784575720204'
+    release_date: '1995-04'
+  - number: 10
+    isbn13: '9784575720211'
+    release_date: '1995-04'

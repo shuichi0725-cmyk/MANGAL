@@ -1,0 +1,22 @@
+slug: mangakenkanryuu
+canonical_label: 通常版
+canonical_publisher: 晋遊舎
+source: 'ギャラ型round4 2026-08-17: v1枠を文庫版(2011)が占有→文庫タブへ分離。原版v1(2005-07)は楽天資産に無くISBN未確定=空けたまま(NDL要)。v2-4はMADB日付を維持'
+volumes:
+- number: 2
+  isbn13: '9784883805167'
+  release_date: '2006-02'
+- number: 3
+  isbn13: '9784883806300'
+  release_date: '2007-10'
+- number: 4
+  isbn13: '9784883809448'
+  release_date: '2009-06'
+extra_editions:
+- type: bunkobon
+  label: 文庫版(2011)
+  publisher: 晋遊舎
+  volumes:
+  - number: 1
+    isbn13: '9784863912380'
+    release_date: '2011-04'
