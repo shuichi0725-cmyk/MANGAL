@@ -1,0 +1,52 @@
+slug: kaiketsu-harimao
+canonical_label: 通常版
+canonical_publisher: 虫プロ商事
+canonical_imprint: 虫コミックス
+source: 'ギャラ型B是正 2026-08-17: 通常版タブに1960-61年の初出単行本(全4巻)と1995年翔泳社の上下巻が混線し、1巻1995年/2巻1960年/3巻1995年/4巻1961年という35年逆行(頁の出版社も翔泳社表示)。虫コミックス全4巻(1971)と名作コミックSERIES AGAIN!(2000)は1冊も出ていなかった。NDL SRU(creator=石ノ森章太郎)で確定= 翔泳社 上下 1995.6(4881352520/4881352539) / モッツ出版 名作コミックSERIES AGAIN! 上下 2000.12 / 講談社漫画文庫 / 石ノ森章太郎萬画大全集 全4巻(角川) / 初出3巻「正義の挑戦の巻」1960.12。★主版は**版元まで確定できる完備最古**の虫コミックス(虫プロ商事 全4巻 1971)とした。1960-61年の初出単行本はMADB・NDLとも出版者を持たない(NDLの出版者欄が空で著者名が入る型)ため主版に据えられず、その他タブに置いてラベルで版元不明であることを明示した。この4冊は日付と巻番号は両ソースで確かなので消さない。'
+volumes:
+- number: 1
+  release_date: '1971-04-15'
+- number: 2
+  release_date: '1971-04-30'
+- number: 3
+  release_date: '1971-06-15'
+- number: 4
+  release_date: '1971-08-15'
+extra_editions:
+- type: other
+  label: 初出単行本(1960-61)
+  publisher: 不明
+  volumes:
+  - number: 1
+    release_date: '1960-07-30'
+  - number: 2
+    release_date: '1960-08-10'
+  - number: 3
+    release_date: '1960-12-15'
+  - number: 4
+    release_date: '1961-03-25'
+- type: shinsoban
+  label: 翔泳社版
+  publisher: 翔泳社
+  volumes:
+  - number: 1
+    isbn13: '9784881352526'
+    release_date: '1995-06'
+    volume_label: 上巻
+  - number: 2
+    isbn13: '9784881352533'
+    release_date: '1995-06'
+    volume_label: 下巻
+- type: shinsoban
+  label: 名作コミックSERIES AGAIN!(モッツ出版)
+  imprint: 名作コミックSERIES AGAIN!
+  publisher: モッツ出版
+  volumes:
+  - number: 1
+    isbn13: '9784944214112'
+    release_date: '2000-12-15'
+    volume_label: 上
+  - number: 2
+    isbn13: '9784944214129'
+    release_date: '2000-12-15'
+    volume_label: 下

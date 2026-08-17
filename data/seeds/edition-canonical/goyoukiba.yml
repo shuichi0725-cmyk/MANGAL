@@ -1,0 +1,146 @@
+slug: goyoukiba
+canonical_publisher: 少年画報社
+source: 'ギャラ型B是正 2026-08-17: 初出単行本(少年画報社 1971-11〜1977-04 全18巻)の1巻枠を2011年の小池書院「King series 漫画スーパーワイド」1冊目が占有し、40年逆行していた(頁の出版社も小池書院表示)。さらに復刻2種(King series 漫画スーパーワイド 全14巻・Comic魂別冊 全11巻)はMADB側で巻番号が全部v0/v1に潰れており、それぞれ1冊しか頁に出ていなかった。NDL SRU(creator=神田たけ志)で確定= 初出は**少年画報社** 1971.11- / King series 漫画スーパーワイド 小池書院 2011.6-2012.1(章題つき) / 主婦の友ヒットシリーズ Comic魂別冊 はちどり 2018.4-2019.12(章題つき) / 秋田漫画文庫 小池一夫選集 1976。初出run全18巻を主版に戻し、復刻2種は発売日順(ISBN連番と一致)に採番してextra_editionsへ。★初出のレーベル名はNDLに記載が無いため canonical_label/canonical_imprint を省略し、MADB側のimprint(コミック)をそのまま活かしている。'
+volumes:
+- number: 1
+  release_date: '1971-11'
+- number: 2
+  release_date: '1972-01'
+- number: 3
+  release_date: '1972-04'
+- number: 4
+  release_date: '1972-06-15'
+- number: 5
+  release_date: '1972-10'
+- number: 6
+  release_date: '1973-01'
+- number: 7
+  release_date: '1973-07'
+- number: 8
+  release_date: '1973-10'
+- number: 9
+  release_date: '1974-05'
+- number: 10
+  release_date: '1974-12'
+- number: 11
+  release_date: '1975-01'
+- number: 12
+  release_date: '1975-07'
+- number: 13
+  release_date: '1975-08'
+- number: 14
+  release_date: '1976-01'
+- number: 15
+  release_date: '1976-03'
+- number: 16
+  release_date: '1976-08'
+- number: 17
+  release_date: '1976-12'
+- number: 18
+  release_date: '1977-04'
+extra_editions:
+- type: shinsoban
+  label: King series 漫画スーパーワイド(小池書院)
+  imprint: King series 漫画スーパーワイド
+  publisher: 小池書院
+  volumes:
+  - number: 1
+    isbn13: '9784862257444'
+    release_date: '2011-06'
+    volume_label: かみそり半蔵編
+  - number: 2
+    isbn13: '9784862257451'
+    release_date: '2011-07'
+    volume_label: 激怒の壁編
+  - number: 3
+    isbn13: '9784862257468'
+    release_date: '2011-07'
+    volume_label: 大牢破り編
+  - number: 4
+    isbn13: '9784862257475'
+    release_date: '2011-08'
+    volume_label: さむらい虚空編
+  - number: 5
+    isbn13: '9784862257482'
+    release_date: '2011-08'
+    volume_label: こんちきしょう油編
+  - number: 6
+    isbn13: '9784862257499'
+    release_date: '2011-09'
+  - number: 7
+    isbn13: '9784862257505'
+    release_date: '2011-09'
+  - number: 8
+    isbn13: '9784862257512'
+    release_date: '2011-10'
+    volume_label: 牙政道の羅刹編
+  - number: 9
+    isbn13: '9784862257529'
+    release_date: '2011-10'
+    volume_label: 牙の嵐編
+  - number: 10
+    isbn13: '9784862257536'
+    release_date: '2011-10'
+  - number: 11
+    isbn13: '9784862257543'
+    release_date: '2011-11'
+    volume_label: かみそり復活編
+  - number: 12
+    isbn13: '9784862257550'
+    release_date: '2011-12'
+  - number: 13
+    isbn13: '9784862257567'
+    release_date: '2011-12'
+    volume_label: 虚実等分編
+  - number: 14
+    isbn13: '9784862257574'
+    release_date: '2012-01'
+    volume_label: 朝に汗褪せて編
+- type: shinsoban
+  label: Comic魂別冊(はちどり)
+  imprint: Comic魂別冊
+  publisher: はちどり
+  volumes:
+  - number: 1
+    isbn13: '9784074302550'
+    release_date: '2018-04'
+    volume_label: かみそり半蔵編
+  - number: 2
+    isbn13: '9784074305001'
+    release_date: '2018-06'
+  - number: 3
+    isbn13: '9784074306923'
+    release_date: '2018-08'
+    volume_label: まむしのお政編
+  - number: 4
+    isbn13: '9784074309184'
+    release_date: '2018-10'
+    volume_label: 大牢破り編
+  - number: 5
+    isbn13: '9784073400905'
+    release_date: '2018-12'
+    volume_label: きさぶの過去帳編
+  - number: 6
+    isbn13: '9784073402107'
+    release_date: '2019-02'
+    volume_label: 大江戸黒元結連編
+  - number: 7
+    isbn13: '9784073403975'
+    release_date: '2019-04'
+    volume_label: さむらい虚空編
+  - number: 8
+    isbn13: '9784073407188'
+    release_date: '2019-06'
+    volume_label: あた落あた棒編
+  - number: 9
+    isbn13: '9784073409311'
+    release_date: '2019-08'
+    volume_label: 石垣直角編
+  - number: 10
+    isbn13: '9784073411611'
+    release_date: '2019-10'
+    volume_label: こんちきしょう油編
+  - number: 11
+    isbn13: '9784073414001'
+    release_date: '2019-12'
+    volume_label: むくどり哀しや編
