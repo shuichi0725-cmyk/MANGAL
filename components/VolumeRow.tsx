@@ -50,6 +50,10 @@ function displayBlocks(editions: Edition[]): Edition[] {
     const fa = ca && a.volumes.length === maxVols ? 1 : 0;
     const fb = cb && b.volumes.length === maxVols ? 1 : 0;
     if (fa !== fb) return fb - fa;
+    // ★代表候補(書影あり×最大巻数)が複数ある時は最古=初版を先頭に(2026-08-17 AKIRA型:
+    //   通常版1984と新装版2003が両方full+coveredで新装が先頭に出ていた。裁定の意図は
+    //   「初版と同巻割りの代表」なので代表群内は古い順)。残り(非代表)は従来どおり新しい順。
+    if (fa && fb) return year(a) - year(b);
     return year(b) - year(a);
   });
 }
