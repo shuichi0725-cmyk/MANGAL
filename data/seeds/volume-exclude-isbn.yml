@@ -1,0 +1,211 @@
+# ISBN単位の非掲載理由台帳(2026-08-18新設)。_audit-isbn-loss.py が「消えてよい理由」として読む。
+# promote には未結線=純粋な監査用帳簿。頁単位の除去は volume-exclude.yml(excludes:)が正。
+exclude_isbn:
+- isbn13: '9784253245951'
+  slug: dokaben-puroyakyuuhen
+  reason: '秋田トップ/WIDE=コンビニ判(gyara-r3 canonical不収載)'
+  at: '2026-08-18'
+- isbn13: '9784253245968'
+  slug: dokaben-puroyakyuuhen
+  reason: '秋田トップ/WIDE=コンビニ判(gyara-r3 canonical不収載)'
+  at: '2026-08-18'
+- isbn13: '9784253245975'
+  slug: dokaben-puroyakyuuhen
+  reason: '秋田トップ/WIDE=コンビニ判(gyara-r3 canonical不収載)'
+  at: '2026-08-18'
+- isbn13: '9784253245999'
+  slug: dokaben-puroyakyuuhen
+  reason: '秋田トップ/WIDE=コンビニ判(gyara-r3 canonical不収載)'
+  at: '2026-08-18'
+- isbn13: '9784253246309'
+  slug: dokaben-puroyakyuuhen
+  reason: '秋田トップ/WIDE=コンビニ判(gyara-r3 canonical不収載)'
+  at: '2026-08-18'
+- isbn13: '9784253246323'
+  slug: dokaben-puroyakyuuhen
+  reason: '秋田トップ/WIDE=コンビニ判(gyara-r3 canonical不収載)'
+  at: '2026-08-18'
+- isbn13: '9784253246330'
+  slug: dokaben-puroyakyuuhen
+  reason: '秋田トップ/WIDE=コンビニ判(gyara-r3 canonical不収載)'
+  at: '2026-08-18'
+- isbn13: '9784253246347'
+  slug: dokaben-puroyakyuuhen
+  reason: '秋田トップ/WIDE=コンビニ判(gyara-r3 canonical不収載)'
+  at: '2026-08-18'
+- isbn13: '9784253246354'
+  slug: dokaben-puroyakyuuhen
+  reason: '秋田トップ/WIDE=コンビニ判(gyara-r3 canonical不収載)'
+  at: '2026-08-18'
+- isbn13: '9784253246361'
+  slug: dokaben-puroyakyuuhen
+  reason: '秋田トップ/WIDE=コンビニ判(gyara-r3 canonical不収載)'
+  at: '2026-08-18'
+- isbn13: '9784253246378'
+  slug: dokaben-puroyakyuuhen
+  reason: '秋田トップ/WIDE=コンビニ判(gyara-r3 canonical不収載)'
+  at: '2026-08-18'
+- isbn13: '9784253246385'
+  slug: dokaben-puroyakyuuhen
+  reason: '秋田トップ/WIDE=コンビニ判(gyara-r3 canonical不収載)'
+  at: '2026-08-18'
+- isbn13: '9784253246392'
+  slug: dokaben-puroyakyuuhen
+  reason: '秋田トップ/WIDE=コンビニ判(gyara-r3 canonical不収載)'
+  at: '2026-08-18'
+- isbn13: '9784253246408'
+  slug: dokaben-puroyakyuuhen
+  reason: '秋田トップ/WIDE=コンビニ判(gyara-r3 canonical不収載)'
+  at: '2026-08-18'
+- isbn13: '9784253246422'
+  slug: dokaben-puroyakyuuhen
+  reason: '秋田トップ/WIDE=コンビニ判(gyara-r3 canonical不収載)'
+  at: '2026-08-18'
+- isbn13: '9784253246477'
+  slug: dokaben-puroyakyuuhen
+  reason: '秋田トップ/WIDE=コンビニ判(gyara-r3 canonical不収載)'
+  at: '2026-08-18'
+- isbn13: '9784253246484'
+  slug: dokaben-puroyakyuuhen
+  reason: '秋田トップ/WIDE=コンビニ判(gyara-r3 canonical不収載)'
+  at: '2026-08-18'
+- isbn13: '9784253246491'
+  slug: dokaben-puroyakyuuhen
+  reason: '秋田トップ/WIDE=コンビニ判(gyara-r3 canonical不収載)'
+  at: '2026-08-18'
+- isbn13: '9784253246507'
+  slug: dokaben-puroyakyuuhen
+  reason: '秋田トップ/WIDE=コンビニ判(gyara-r3 canonical不収載)'
+  at: '2026-08-18'
+- isbn13: '9784862259288'
+  slug: shin-agatte-nanbo-taichiyo-nakuna
+  reason: '漫画スーパーワイド=編名廉価総集編(gyara-r2 不収載)'
+  at: '2026-08-18'
+- isbn13: '9784862259295'
+  slug: shin-agatte-nanbo-taichiyo-nakuna
+  reason: '漫画スーパーワイド=編名廉価総集編(gyara-r2 不収載)'
+  at: '2026-08-18'
+- isbn13: '9784862259301'
+  slug: shin-agatte-nanbo-taichiyo-nakuna
+  reason: '漫画スーパーワイド=編名廉価総集編(gyara-r2 不収載)'
+  at: '2026-08-18'
+- isbn13: '9784862259318'
+  slug: shin-agatte-nanbo-taichiyo-nakuna
+  reason: '漫画スーパーワイド=編名廉価総集編(gyara-r2 不収載)'
+  at: '2026-08-18'
+- isbn13: '9784862259325'
+  slug: shin-agatte-nanbo-taichiyo-nakuna
+  reason: '漫画スーパーワイド=編名廉価総集編(gyara-r2 不収載)'
+  at: '2026-08-18'
+- isbn13: '9784862259516'
+  slug: shin-agatte-nanbo-taichiyo-nakuna
+  reason: '漫画スーパーワイド=編名廉価総集編(gyara-r2 不収載)'
+  at: '2026-08-18'
+- isbn13: '9784063148053'
+  slug: tensai-bakabon
+  reason: '講談社のテレビまんがえほん=アニメ絵本・対象外(gyara-r2 不収載)'
+  at: '2026-08-18'
+- isbn13: '9784063148060'
+  slug: tensai-bakabon
+  reason: '講談社のテレビまんがえほん=アニメ絵本・対象外(gyara-r2 不収載)'
+  at: '2026-08-18'
+- isbn13: '9784063148077'
+  slug: tensai-bakabon
+  reason: '講談社のテレビまんがえほん=アニメ絵本・対象外(gyara-r2 不収載)'
+  at: '2026-08-18'
+- isbn13: '9784063148084'
+  slug: tensai-bakabon
+  reason: '講談社のテレビまんがえほん=アニメ絵本・対象外(gyara-r2 不収載)'
+  at: '2026-08-18'
+- isbn13: '9784770028181'
+  slug: ribon-no-kishi
+  reason: '講談社バイリンガル・コミックス=対象外(gyara-r5 不収載)'
+  at: '2026-08-18'
+- isbn13: '9784770028198'
+  slug: ribon-no-kishi
+  reason: '講談社バイリンガル・コミックス=対象外(gyara-r5 不収載)'
+  at: '2026-08-18'
+- isbn13: '9784770028204'
+  slug: ribon-no-kishi
+  reason: '講談社バイリンガル・コミックス=対象外(gyara-r5 不収載)'
+  at: '2026-08-18'
+- isbn13: '9784065104446'
+  slug: shura-no-mon-dai-ni-mon
+  reason: '講談社プラチナコミックス=コンビニ判(gyara-r3 不収載)'
+  at: '2026-08-18'
+- isbn13: '9784065104811'
+  slug: shura-no-mon-dai-ni-mon
+  reason: '講談社プラチナコミックス=コンビニ判(gyara-r3 不収載)'
+  at: '2026-08-18'
+- isbn13: '9784575997217'
+  slug: shin-ishu-kakutou-taisen
+  reason: 'Coinsアクションオリジナル上下=コンビニ総集編(gyara-r2 不収載)'
+  at: '2026-08-18'
+- isbn13: '9784575997224'
+  slug: shin-ishu-kakutou-taisen
+  reason: 'Coinsアクションオリジナル上下=コンビニ総集編(gyara-r2 不収載)'
+  at: '2026-08-18'
+- isbn13: '9784091900876'
+  slug: sasuke
+  reason: '出所不明ISBN(題・帯とも不整合のjunk行。gyara-r4 不収載)'
+  at: '2026-08-18'
+- isbn13: '9784575842821'
+  slug: ekiben-hitoritabi
+  reason: '駅弁ひとり旅ザ・ベスト=総集編(gyara-r3 不収載)'
+  at: '2026-08-18'
+- isbn13: '9784575995848'
+  slug: gokudoumeshi
+  reason: 'Coins=廉価編集本(gyara-r2 不収載)'
+  at: '2026-08-18'
+- isbn13: '9784594606473'
+  slug: damenzu-walker
+  reason: '扶桑社MOOK=ムック(gyara-r3 不収載)'
+  at: '2026-08-18'
+- isbn13: '9784785937386'
+  slug: gold-2004
+  reason: 'YKベスト編名=コンビニ総集編(gyara-r2 不収載)'
+  at: '2026-08-18'
+- isbn13: '9784796407342'
+  slug: gush-mania
+  reason: '別シリーズGUSH maniaEX(gyara-r2 不収載)'
+  at: '2026-08-18'
+- isbn13: '9784812453711'
+  slug: ten
+  reason: '天・麻雀東西決戦=別編集本(gyara-r2 不収載)'
+  at: '2026-08-18'
+- isbn13: '9784812453995'
+  slug: hontou-ni-atta-yukai-na-hanashi
+  reason: '爆笑スペシャル=番外編集本(gyara-r2 不収載)'
+  at: '2026-08-18'
+- isbn13: '9784832229495'
+  slug: onnakui
+  reason: '芳文社マイパルコミックス=コンビニ判(gyara-r2 不収載)'
+  at: '2026-08-18'
+- isbn13: '9784845826483'
+  slug: comic-inagawa-junji-no-sugooku-kowai-hanashi
+  reason: '副題単巻期(2005『夢の中の男』)=番号巻run外(gyara-r4 不収載)'
+  at: '2026-08-18'
+- isbn13: '9784408176505'
+  slug: asami-mitsuhiko-mystery-special
+  reason: '傑作選20=抜粋本(種4誤配を除去 2026-08-17)'
+  at: '2026-08-18'
+- isbn13: '9784766334067'
+  slug: bunchou-sama-to-watashi
+  reason: 'LGA新装(2009)v1-3=あおば原版復元に伴い退場(gyara-r3)'
+  at: '2026-08-18'
+- isbn13: '9784766334074'
+  slug: bunchou-sama-to-watashi
+  reason: 'LGA新装(2009)v1-3=あおば原版復元に伴い退場(gyara-r3)'
+  at: '2026-08-18'
+- isbn13: '9784766334111'
+  slug: bunchou-sama-to-watashi
+  reason: 'LGA新装(2009)v1-3=あおば原版復元に伴い退場(gyara-r3)'
+  at: '2026-08-18'
+- isbn13: '9784091622358'
+  slug: houchounin-ajihei
+  reason: '小学館文庫「ラーメン編 上巻」=編名再編集選集(抜粋本)。canonical再構築(2026-08-17 Opus)で不収載'
+  at: '2026-08-18'
+- isbn13: '9784197806218'
+  slug: sandarabotchi
+  reason: '「江戸吉原始末屋ばなし傑作選」=傑作選(抜粋本)。canonical再構築(2026-08-17 Opus)で不収載'
+  at: '2026-08-18'

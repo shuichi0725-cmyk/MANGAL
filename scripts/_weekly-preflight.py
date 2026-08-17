@@ -209,12 +209,14 @@ def main():
         _self = [k for k, v in _al.items() if k == v]
         # ★形状番人(2026-08-14 リダイレクト層復旧): _redirects は /manga/<旧> /manga/<新> 301 形状で
         #   yml と1:1 でなければならない(ルート直下形状は届かない=記憶 redirect_layer_inactive)。
+        #   ★比較先は連鎖の最終解決先(2026-08-18 修正: _gen-redirects は連鎖を平坦化して書くため、
+        #     yml の直接宛先と比べると連鎖alias 658件が全部偽NGになっていた)。
         _rd = {}
         for _ln in open(os.path.join(ROOT, "public", "_redirects"), encoding="utf-8"):
             _p = _ln.split()
             if len(_p) >= 3 and _p[2] == "301":
                 _rd[_p[0]] = _p[1]
-        _shape = ([k for k, v in _al.items() if _rd.get(f"/manga/{k}") != f"/manga/{v}"]
+        _shape = ([k for k in _al if _rd.get(f"/manga/{k}") != f"/manga/{_resolve(k)}"]
                   + [k for k in _rd if not k.startswith("/manga/")])
         if _dead or _clash or _self or _shape:
             _how = ""

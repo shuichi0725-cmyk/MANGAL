@@ -20,3 +20,15 @@ volumes:
 - number: 6
   isbn13: '9784915289057'
   release_date: '1986-06'
+# gyara前canonicalの再構築で落ちた小学館版2冊を復元(2026-08-18 ISBN消失監視で検出。日付は両ソース無=null)
+extra_editions:
+- type: shinsoban
+  label: 小学館版
+  publisher: 小学館
+  volumes:
+  - number: 1
+    isbn13: '9784093940818'
+    release_date: null
+  - number: 2
+    isbn13: '9784093940825'
+    release_date: null

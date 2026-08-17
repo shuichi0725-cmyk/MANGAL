@@ -69,7 +69,9 @@ def _load_reasons():
         p = os.path.join(ROOT, "data", "seeds", name)
         if os.path.exists(p):
             doc = yaml.load(open(p, encoding="utf-8"), Loader=L) or {}
-            for k in ("exclude", "exclude_isbn", "volumes"):
+            # ★"excludes" = volume-exclude.yml の実トップキー(2026-08-18 バグ修正: これを読んでおらず
+            #   exclude済みISBNが全部「理由なし」に化けていた)
+            for k in ("excludes", "exclude", "exclude_isbn", "volumes"):
                 for e in (doc.get(k) or []):
                     if isinstance(e, dict):
                         add(e.get("isbn13"), f"{name}(混入巻除去)")
