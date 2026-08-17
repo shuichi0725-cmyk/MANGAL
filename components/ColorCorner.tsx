@@ -63,7 +63,7 @@ export default function ColorCorner() {
           {rows.map(([slug, e]) => (
             <li
               key={slug}
-              className="h-[92px] w-[62px] shrink-0 overflow-hidden border border-[var(--color-line)] bg-[var(--color-surface-2)]"
+              className="relative h-[92px] w-[62px] shrink-0 overflow-hidden border border-[var(--color-line)] bg-[var(--color-surface-2)]"
             >
               <CoverImage src={e.c!} alt="" sizes="62px" size="card" />
             </li>
