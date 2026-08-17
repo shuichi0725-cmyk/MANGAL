@@ -2,16 +2,16 @@
 
 import { useEffect, useState } from "react";
 
-/** E型ステータスバーの日付(2026-08-15)。静的ビルドの焼き込み日付だと週次まで古いままなので
- *  クライアントで当日を出す。SSR/初回は空(hydration不一致回避=HeroD3のランダムコピーと同じ流儀)。 */
-const WD = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
+/** マーキー帯の先頭日付(2026-08-17 案D=ユーザ裁定「前のヘッダー+日付はマーキーに」)。
+ *  静的ビルドの焼き込みだと週次まで古いままなのでクライアントで当日を出す。
+ *  SSR/初回は空(hydration不一致回避)。形式=「8/17(月) ✺ 」(モックD準拠のコンパクト表記)。 */
+const WD = ["日", "月", "火", "水", "木", "金", "土"];
 
 export default function StatusDate() {
   const [s, setS] = useState("");
   useEffect(() => {
     const d = new Date();
-    const p = (n: number) => String(n).padStart(2, "0");
-    setS(`${d.getFullYear()}-${p(d.getMonth() + 1)}-${p(d.getDate())} ${WD[d.getDay()]}`);
+    setS(`${d.getMonth() + 1}/${d.getDate()}(${WD[d.getDay()]}) ✺ `);
   }, []);
   return <span className="tabular-nums">{s}</span>;
 }

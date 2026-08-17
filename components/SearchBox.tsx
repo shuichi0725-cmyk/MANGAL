@@ -34,12 +34,11 @@ export default function SearchBox({ value, onChange }: Props) {
         submit(local);
       }}
     >
-      <div className="relative min-w-0 flex-1">
-        <span
-          className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-ink/35"
-          aria-hidden="true"
-        >
-          🔍
+      {/* ★ターミナル式に統一(2026-08-17 ユーザ指示: ホームのE型 mangal> 検索窓と同じ見た目に)。
+          ボタン確定型の仕様(2026-07-11)は不変=ボタンだけD3調(黒地+ライム枠+ライム字)に。 */}
+      <div className="flex min-w-0 flex-1 items-center gap-2 border-2 border-[var(--color-accent)] bg-[#050505] px-3.5 py-2.5 shadow-[3px_3px_0_rgba(217,248,67,0.14)]">
+        <span className="shrink-0 text-[12px] font-bold text-[var(--color-accent)]" aria-hidden="true">
+          mangal&gt;
         </span>
         <input
           type="search"
@@ -54,7 +53,7 @@ export default function SearchBox({ value, onChange }: Props) {
           onCompositionEnd={() => {
             composing.current = false;
           }}
-          className="w-full rounded-card border border-[var(--color-line)] bg-[var(--color-surface)] shadow-[var(--shadow-soft)] pl-9 pr-10 py-2.5 text-sm transition focus:outline-none focus:border-[var(--color-accent)] focus:shadow-[var(--shadow-lift)]"
+          className="d3-plain min-w-0 flex-1 text-sm font-bold text-[var(--color-ink)] outline-none"
         />
         {(local || value) && (
           <button
@@ -63,16 +62,17 @@ export default function SearchBox({ value, onChange }: Props) {
               setLocal("");
               onChange("");
             }}
-            className="absolute right-2 top-1/2 -translate-y-1/2 flex h-6 w-6 items-center justify-center rounded-full text-ink/40 hover:bg-[var(--color-surface-2)] hover:text-ink transition-colors"
+            className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-ink/40 hover:bg-[var(--color-surface-2)] hover:text-ink transition-colors"
             aria-label="検索をクリア"
           >
             ×
           </button>
         )}
+        <span aria-hidden="true" className="d3-blink h-[14px] w-2 shrink-0 bg-[var(--color-accent)]" />
       </div>
       <button
         type="submit"
-        className="shrink-0 rounded-card bg-[var(--color-accent)] px-4 py-2.5 text-sm font-bold text-white shadow-[var(--shadow-soft)] active:scale-[0.97] transition"
+        className="shrink-0 border-2 border-[var(--color-accent)] bg-[#050505] px-4 py-2.5 text-sm font-black text-[var(--color-accent)] active:scale-[0.97] transition"
       >
         検索
       </button>

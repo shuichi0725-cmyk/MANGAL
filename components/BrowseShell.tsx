@@ -54,26 +54,25 @@ export default function BrowseShell({ summary }: { summary: IndexSummary }) {
         </div>
       </section>
 
-      {/* 素の GET フォーム = JS が来る前でも検索に飛べる */}
-      <form action="/browse" method="get" className="relative mb-6 flex items-center gap-2">
-        <div className="relative min-w-0 flex-1">
-          <span
-            className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-ink/35"
-            aria-hidden="true"
-          >
-            🔍
+      {/* 素の GET フォーム = JS が来る前でも検索に飛べる
+          ★ターミナル式に統一(2026-08-17): hydrate後のSearchBoxと同じ見た目(mangal>+点滅カーソル) */}
+      <form action="/browse" method="get" className="mb-6 flex items-center gap-2">
+        <div className="flex min-w-0 flex-1 items-center gap-2 border-2 border-[var(--color-accent)] bg-[#050505] px-3.5 py-2.5 shadow-[3px_3px_0_rgba(217,248,67,0.14)]">
+          <span className="shrink-0 text-[12px] font-bold text-[var(--color-accent)]" aria-hidden="true">
+            mangal&gt;
           </span>
           <input
             type="search"
             name="q"
             placeholder="タイトル・よみがな・ローマ字で検索"
             aria-label="作品を検索"
-            className="w-full rounded-card border border-[var(--color-line)] bg-[var(--color-surface)] shadow-[var(--shadow-soft)] pl-9 pr-10 py-2.5 text-sm transition focus:outline-none focus:border-[var(--color-accent)] focus:shadow-[var(--shadow-lift)]"
+            className="d3-plain min-w-0 flex-1 text-sm font-bold text-[var(--color-ink)] outline-none"
           />
+          <span aria-hidden="true" className="d3-blink h-[14px] w-2 shrink-0 bg-[var(--color-accent)]" />
         </div>
         <button
           type="submit"
-          className="shrink-0 rounded-card bg-[var(--color-accent)] px-4 py-2.5 text-sm font-semibold text-white"
+          className="shrink-0 border-2 border-[var(--color-accent)] bg-[#050505] px-4 py-2.5 text-sm font-black text-[var(--color-accent)]"
         >
           検索
         </button>

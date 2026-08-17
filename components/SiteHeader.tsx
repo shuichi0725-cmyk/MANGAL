@@ -1,16 +1,10 @@
-"use client";
-
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 import SiteMenu from "@/components/SiteMenu";
 
-/** 共通ヘッダー(2026-08-15 E融合型導入で client 化):
- *  ★ホーム("/")では描かない = ホームは Design12 側の「MANGAL_OS ステータスバー」が
- *  ヘッダーの役を担う(E融合型・ユーザ指示「ヘッダーから検索窓までEを取り入れる」)。
- *  他ページは従来のロゴ+≡メニューのまま。二重ヘッダー問題(2026-08-11)を再発させないための分岐。 */
+/** 共通ヘッダー(2026-08-17 案D採用でホームも復帰):
+ *  一時期ホームだけE型ステータスバー(MANGAL_OS)に差し替えたが、ユーザ裁定=案Dで
+ *  全ページ旧ヘッダーに統一。日付はホームのマーキー帯先頭が担う(MarqueeDate)。 */
 export default function SiteHeader() {
-  const pathname = usePathname();
-  if (pathname === "/") return null;
   return (
     <header className="border-b border-[var(--color-line)] bg-[var(--color-surface)]/80 backdrop-blur sticky top-0 z-20">
       <div className="mx-auto max-w-6xl px-4 py-3 flex items-center justify-between gap-3">
