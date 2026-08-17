@@ -1,53 +1,82 @@
 slug: old-boy-ruuzu-senki
 canonical_label: 通常版
 canonical_publisher: 双葉社
-canonical_imprint: ACTION COMICS
+canonical_imprint: アクションコミックス
 suppress_types:
 - bunkobon
-source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。'
+source: 'ギャラ型仕上げ 2026-08-17: 完備最古=初版アクションコミックス全8巻(1997-98・楽天でISBN/フル日付完備)を主版に(旧canonicalは2014新装版が主版で、旧版タブに1997年2冊とCoins2004年2冊が混成していた)。Coins(2004)は楽天で確認できた4冊のみ(5巻はキャッシュ未収=埋めない)。新装版(2014)全8巻・双葉文庫は既知のまま'
 volumes:
 - number: 1
-  isbn13: '9784575843750'
-  release_date: '2014-03'
+  isbn13: '9784575822403'
+  release_date: '1997-04-28'
 - number: 2
-  isbn13: '9784575843767'
-  release_date: '2014-03'
+  isbn13: '9784575822748'
+  release_date: '1997-08-12'
 - number: 3
-  isbn13: '9784575843774'
-  release_date: '2014-03'
+  isbn13: '9784575823202'
+  release_date: '1998-02-24'
 - number: 4
-  isbn13: '9784575843781'
-  release_date: '2014-03'
+  isbn13: '9784575823325'
+  release_date: '1998-04-24'
 - number: 5
-  isbn13: '9784575843927'
-  release_date: '2014-04'
+  isbn13: '9784575823530'
+  release_date: '1998-06-27'
 - number: 6
-  isbn13: '9784575843934'
-  release_date: '2014-04'
+  isbn13: '9784575823622'
+  release_date: '1998-07-28'
 - number: 7
-  isbn13: '9784575843941'
-  release_date: '2014-04'
+  isbn13: '9784575823691'
+  release_date: '1998-08-28'
 - number: 8
-  isbn13: '9784575843958'
-  release_date: '2014-04'
+  isbn13: '9784575823783'
+  release_date: '1998-09-28'
 extra_editions:
 - type: shinsoban
-  label: ACTION COMICS(1997)
-  imprint: ACTION COMICS
+  label: Coinsアクションオリジナル(2004)
+  imprint: アクションコミックス Coinsアクションオリジナル
   publisher: 双葉社
   volumes:
   - number: 1
     isbn13: '9784575992038'
-    release_date: '2004-11'
+    release_date: '2004-10'
   - number: 2
-    isbn13: '9784575822748'
-    release_date: '1997-09'
+    isbn13: '9784575992045'
+    release_date: '2004-10'
   - number: 3
-    isbn13: '9784575823202'
-    release_date: '1998-03'
+    isbn13: '9784575992120'
+    release_date: '2004-12'
   - number: 4
     isbn13: '9784575992137'
-    release_date: '2005-01'
+    release_date: '2004-12'
+- type: shinsoban
+  label: 新装版(2014)
+  imprint: アクションコミックス
+  publisher: 双葉社
+  volumes:
+  - number: 1
+    isbn13: '9784575843750'
+    release_date: '2014-03-28'
+  - number: 2
+    isbn13: '9784575843767'
+    release_date: '2014-03-28'
+  - number: 3
+    isbn13: '9784575843774'
+    release_date: '2014-03-28'
+  - number: 4
+    isbn13: '9784575843781'
+    release_date: '2014-03-28'
+  - number: 5
+    isbn13: '9784575843927'
+    release_date: '2014-04-19'
+  - number: 6
+    isbn13: '9784575843934'
+    release_date: '2014-04-19'
+  - number: 7
+    isbn13: '9784575843941'
+    release_date: '2014-04-19'
+  - number: 8
+    isbn13: '9784575843958'
+    release_date: '2014-04-19'
 - type: bunkobon
   label: 双葉文庫名作シリーズ
   imprint: 双葉文庫名作シリーズ

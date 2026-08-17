@@ -5,12 +5,41 @@ canonical_imprint: マーガレットコミックス
 suppress_types:
 - bunkobon
 - wideban
-source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。'
+source: 'ギャラ型仕上げ 2026-08-17: 楽天では全冊の叢書名がマーガレットコミックス=MADBの「ワイド版」2タブは架空の割れだった。主版=МC全8巻(1-6=1990-93、7-8=1997-98のアニメ化後続巻=刊行順は正史)に統合。1996-12の(1)は新装版1巻のみ既知=1冊タブ(欠落は埋めない)。集英社文庫(2003)存置。Shueisha girls remix(2004)はコンビニ判のため載せない'
 volumes:
 - number: 1
   isbn13: '9784088497143'
-  release_date: '1990-12-23'
+  release_date: '1990-12-18'
+- number: 2
+  isbn13: '9784088497242'
+  release_date: '1991-01-25'
+- number: 3
+  isbn13: '9784088497341'
+  release_date: '1991-02-25'
+- number: 4
+  isbn13: '9784088497815'
+  release_date: '1991-07-25'
+- number: 5
+  isbn13: '9784088498089'
+  release_date: '1991-10-25'
+- number: 6
+  isbn13: '9784088481043'
+  release_date: '1993-06-25'
+- number: 7
+  isbn13: '9784088486789'
+  release_date: '1997-07-25'
+- number: 8
+  isbn13: '9784088487939'
+  release_date: '1998-04-24'
 extra_editions:
+- type: shinsoban
+  label: 新装版(1996)
+  imprint: マーガレットコミックス
+  publisher: 集英社
+  volumes:
+  - number: 1
+    isbn13: '9784088485881'
+    release_date: '1996-12-16'
 - type: bunkobon
   label: 集英社文庫
   imprint: 集英社文庫
@@ -18,47 +47,13 @@ extra_editions:
   volumes:
   - number: 1
     isbn13: '9784086180283'
-    release_date: '2003-02'
+    release_date: '2003-02-23'
   - number: 2
     isbn13: '9784086180290'
-    release_date: '2003-02'
+    release_date: '2003-02-23'
   - number: 3
     isbn13: '9784086180306'
-    release_date: '2003-04'
+    release_date: '2003-04-23'
   - number: 4
     isbn13: '9784086180313'
-    release_date: '2003-04'
-- type: wideban
-  label: マーガレットコミックスワイド版
-  imprint: マーガレットコミックスワイド版
-  publisher: 集英社
-  volumes:
-  - number: 2
-    isbn13: '9784088497242'
-    release_date: '1991-01'
-  - number: 3
-    isbn13: '9784088497341'
-    release_date: '1991-02'
-  - number: 5
-    isbn13: '9784088498089'
-    release_date: '1991-10-30'
-  - number: 8
-    isbn13: '9784088487939'
-    release_date: '1998-04-29'
-- type: wideban
-  label: マーガレットコミックス ワイド版
-  imprint: マーガレットコミックス ワイド版
-  publisher: 集英社
-  volumes:
-  - number: 1
-    isbn13: '9784088485881'
-    release_date: '1996-12-21'
-  - number: 4
-    isbn13: '9784088497815'
-    release_date: '1991-07-30'
-  - number: 6
-    isbn13: '9784088481043'
-    release_date: '1993-06-30'
-  - number: 7
-    isbn13: '9784088486789'
-    release_date: '1997-07-30'
+    release_date: '2003-04-23'

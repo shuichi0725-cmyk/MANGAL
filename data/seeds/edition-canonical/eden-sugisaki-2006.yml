@@ -1,93 +1,19 @@
 slug: eden-sugisaki-2006
 canonical_label: 通常版
-canonical_publisher: 講談社
-canonical_imprint: アフタヌーンKC
-source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。'
+canonical_publisher: シュベール出版
+canonical_imprint: シュベールコミックス
+suppress_types: []
+source: 'ギャラ型仕上げ 2026-08-17: この頁=千之ナイフ『EDEN』。旧canonicalは5作品の混線だった: ①遠藤浩輝EDEN(アフタヌーンKC全18巻)=別頁edenと**ISBN重複**していたため除去 ②Patsy comics1990=定広美香/秋野こよみの別作(楽天で確認) ③アルファポリス2015-16=川津流一/鶴岡伸寿の別作(同) — いずれも除去。残る千之ナイフの実物=シュベールコミックス(1994・2巻のみ記録あり=1巻は両ソース無で載せない)+青林堂の編別再刊(2006・チャイニーズ姑娘編)。NDL×楽天一致'
 volumes:
-- number: 1
-  isbn13: '9784063141764'
-  release_date: '1998-04'
 - number: 2
-  isbn13: '9784063141917'
-  release_date: '1998-10'
-- number: 3
-  isbn13: '9784063142082'
-  release_date: '1999-05'
-- number: 4
-  isbn13: '9784063142334'
-  release_date: '2000-02'
-- number: 5
-  isbn13: '9784063142464'
-  release_date: '2000-07'
-- number: 6
-  isbn13: '9784063142747'
-  release_date: '2001-09'
-- number: 7
-  isbn13: '9784063142945'
-  release_date: '2002-05'
-- number: 8
-  isbn13: '9784063143072'
-  release_date: '2003-02'
-- number: 9
-  isbn13: '9784063143256'
-  release_date: '2003-07'
-- number: 10
-  isbn13: '9784063143348'
-  release_date: '2003-11'
-- number: 11
-  isbn13: '9784063143492'
-  release_date: '2004-07'
-- number: 12
-  isbn13: '9784063143706'
-  release_date: '2005-02'
-- number: 13
-  isbn13: '9784063143904'
-  release_date: '2005-09'
-- number: 14
-  isbn13: '9784063144079'
-  release_date: '2006-03'
-- number: 15
-  isbn13: '9784063144314'
-  release_date: '2006-10'
-- number: 16
-  isbn13: '9784063144543'
-  release_date: '2007-04'
-- number: 17
-  isbn13: '9784063144819'
-  release_date: '2007-12'
-- number: 18
-  isbn13: '9784063145151'
-  release_date: '2008-07'
+  isbn13: '9784883320257'
+  release_date: '1994-12-14'
 extra_editions:
 - type: shinsoban
-  label: standard版
+  label: 編別版(青林堂 2006)
   publisher: 青林堂
   volumes:
   - number: 1
+    volume_label: チャイニーズ姑娘編
     isbn13: '9784792603885'
     release_date: '2006-02'
-  - number: 2
-    isbn13: '9784883320257'
-    release_date: null
-- type: shinsoban
-  label: Patsy comics
-  imprint: Patsy comics
-  publisher: 不明
-  volumes:
-  - number: 1
-    isbn13: '9784882710349'
-    release_date: '1990-04'
-- type: shinsoban
-  label: アルファポリスCOMICS
-  imprint: アルファポリスCOMICS
-  publisher: 星雲社
-  volumes:
-  - number: 1
-    isbn13: '9784434203688'
-    release_date: '2015-03'
-  - number: 2
-    isbn13: '9784434212079'
-    release_date: '2015-11'
-  - number: 3
-    isbn13: '9784434219788'
-    release_date: '2016-06'

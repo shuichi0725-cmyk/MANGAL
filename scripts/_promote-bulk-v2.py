@@ -2900,7 +2900,11 @@ def build_yml(
     else:
         o["publishers"] = []
     # ★edition-override (= 教育系の年代版分離/NDL補完の本番durability。 最終確定 editions/著者を置換)
-    _eov = _load_edition_overrides().get(o["slug"])
+    # ★キーは公開slug(規約)。slug-override頁では o["slug"]=SRC stemのため _slug_override で
+    #   公開slugに変換してから引く(2026-08-17 ふしぎな少年-1978で実踏=3412行と同じ罠の別現場。
+    #   後方互換でSRC stem直キーもfallbackで引く)
+    _eov = (_load_edition_overrides().get(_slug_override(o["slug"]))
+            or _load_edition_overrides().get(o["slug"]))
     if _eov:
         if _eov.get("editions"):
             o["editions"] = [clean_edition(ed) for ed in _eov["editions"]]
@@ -3382,13 +3386,18 @@ def main():
                     _ver["volumes"] = [v for v in (_ver.get("volumes") or []) if _norm_isbn(v.get("isbn13")) not in _vex]
             new_yml["editions"] = [e for e in (new_yml.get("editions") or []) if (e.get("volumes") or e.get("versions"))]
             # ★除去で最終巻が消えたら出版年を残存巻から再計算(1(イチ)=アーク9混入除去後も年1993-2014に化けた 2026-07-08)
+            #   ★edition-overridesの年明示・status-corrections頁は上書きしない(2026-08-17 ふしぎな少年:
+            #     全集集約excludeのこの無条件再計算が連載年override(1961-62)を巻年(1969-2018)で踏み潰していた
+            #     =canonical枝(下)の同ガードと同じ扱いに揃える)
             _vy = [int(str(v["release_date"])[:4]) for e in new_yml["editions"]
                    for vs in [e.get("volumes") or []] + [vv.get("volumes") or [] for vv in (e.get("versions") or [])]
                    for v in vs if v.get("release_date") and str(v["release_date"])[:4].isdigit()]
-            if _vy:
+            _eov_yr0 = _load_edition_overrides().get(_slug_override(slug)) or {}
+            if _vy and _eov_yr0.get("year_started") is None:
                 new_yml["year_started"] = min(_vy)
-                if new_yml.get("year_ended") is not None:
-                    new_yml["year_ended"] = max(_vy)
+            if (_vy and new_yml.get("year_ended") is not None
+                    and _eov_yr0.get("year_ended") is None and slug not in _STATUS_CORR):
+                new_yml["year_ended"] = max(_vy)
             volume_exclude_pages += 1
         # ★版分離: canonical seed があれば standard/compact 版を権威データで再構築(版混在汚染の是正)
         if slug in edition_canonical:

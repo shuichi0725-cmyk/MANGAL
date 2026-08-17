@@ -1,0 +1,45 @@
+slug: 0-shinohara-1977
+canonical_label: 通常版
+canonical_publisher: リイド社
+canonical_imprint: SPコミックス
+suppress_types: []
+source: 'ギャラ型仕上げ 2026-08-17: 主版=SPコミックス全6巻(リイド社。NDL日付=MADBと完全一致。刊行順が巻順と異なる(2→3→6→1→4→5)のは正史)。旧頁は2017年のリイド・クラシック1冊が1巻枠を占有し40年逆行だった。リイド・クラシック(2017)=題名別3冊(悪徳市場/眠って殺れ/孤狼の部屋)。新装「警視庁0課の女」(1997)は6巻のみ既知=1冊収載'
+volumes:
+- number: 1
+  release_date: '1978-02-25'
+- number: 2
+  release_date: '1977-09-25'
+- number: 3
+  release_date: '1977-12-25'
+- number: 4
+  release_date: '1978-05-20'
+- number: 5
+  release_date: '1978-05-25'
+- number: 6
+  release_date: '1978-03-25'
+extra_editions:
+- type: shinsoban
+  label: リイド・クラシック(2017)
+  imprint: SPコミックス LEED CLASSIC SERIES
+  publisher: リイド社
+  volumes:
+  - number: 1
+    volume_label: 悪徳市場
+    isbn13: '9784845850402'
+    release_date: '2017-03-23'
+  - number: 2
+    volume_label: 眠って殺れ
+    isbn13: '9784845850426'
+    release_date: '2017-05'
+  - number: 3
+    volume_label: 孤狼の部屋
+    isbn13: '9784845850563'
+    release_date: '2017-09'
+- type: shinsoban
+  label: 新装版(警視庁0課の女 1997)
+  imprint: SPコミックス
+  publisher: リイド社
+  volumes:
+  - number: 6
+    isbn13: '9784845809950'
+    release_date: '1997-04'

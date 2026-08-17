@@ -75,15 +75,19 @@ extra_editions:
   - number: 0
     release_date: '1979-02'
 - type: shinsoban
-  label: standard版
+  label: 復刻版(小学館クリエイティブ)
   publisher: 小学館クリエイティブ
   volumes:
-  - number: 0
-    isbn13: '9784939138768'
-    release_date: '2015-04'
   - number: 1
     isbn13: '9784778030803'
-    release_date: '2008-07'
+    release_date: '2008-07-29'
+- type: shinsoban
+  label: 復刻版(フリースタイル)
+  publisher: フリースタイル
+  volumes:
+  - number: 1
+    isbn13: '9784939138768'
+    release_date: '2015-04'
 - type: shinsoban
   label: ALBA TROSS-VIEW
   imprint: ALBA TROSS-VIEW

@@ -1,0 +1,40 @@
+slug: tentoumushinouta
+canonical_label: 通常版
+canonical_publisher: 小学館
+canonical_imprint: てんとう虫コミックス
+suppress_types:
+- bunkobon
+source: 'ギャラ型仕上げ 2026-08-17: 主版=てんとう虫コミックス(NDL: v1=1974-09-01 TC-11/MADB: v3=1974-12・v4=1975-04。他巻は両ソースに記録なし=載せない)。旧頁はライブラリー2004の2冊が1-2巻枠を占有し30年逆行だった。ライブラリー(2004)・コロコロ文庫(1995)は楽天ISBNで各タブ化。ユニバーサルミュージック刊の18冊(2003-04)はコンビニ判のため不収載'
+volumes:
+- number: 1
+  release_date: '1974-09-01'
+- number: 3
+  release_date: '1974-12'
+- number: 4
+  release_date: '1975-04'
+extra_editions:
+- type: shinsoban
+  label: てんとう虫コミックスライブラリー(2004)
+  imprint: てんとう虫コミックスライブラリー
+  publisher: 小学館
+  volumes:
+  - number: 1
+    isbn13: '9784091498816'
+    release_date: '2004-04'
+  - number: 2
+    isbn13: '9784091498823'
+    release_date: '2004-04'
+- type: bunkobon
+  label: 小学館コロコロ文庫(1995)
+  imprint: 小学館コロコロ文庫
+  publisher: 小学館
+  volumes:
+  - number: 1
+    isbn13: '9784091940216'
+    release_date: '1995-02'
+  - number: 2
+    isbn13: '9784091940223'
+    release_date: '1995-02'
+  - number: 3
+    isbn13: '9784091940230'
+    release_date: '1995-02'

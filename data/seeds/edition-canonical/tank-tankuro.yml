@@ -1,0 +1,22 @@
+slug: tank-tankuro
+canonical_label: 通常版
+canonical_publisher: 大日本雄辯會講談社
+suppress_types: []
+source: 'ギャラ型仕上げ 2026-08-17: 主版=初版単行本(大日本雄辯會講談社 1935-10・NDL)。連載=幼年倶楽部1934-35。旧頁は復刻2005が1巻枠を占有し70年逆行+1935年の重複レコード×3だった。復刻=講談社(1970)と小学館クリエイティブ(2005・ISBNあり)を各1冊タブに。戦後の妙義出版(昭23)・札幌講談社(1949)の再刊はMADB外+日付不定のため見送り。講談社漫画文庫(1976)タブは種2のまま温存'
+volumes:
+- number: 1
+  release_date: '1935-10'
+extra_editions:
+- type: shinsoban
+  label: 復刻版(講談社 1970)
+  publisher: 講談社
+  volumes:
+  - number: 1
+    release_date: '1970'
+- type: shinsoban
+  label: 復刻版(小学館クリエイティブ 2005)
+  publisher: 小学館クリエイティブ
+  volumes:
+  - number: 1
+    isbn13: '9784778030148'
+    release_date: '2005-08-10'
