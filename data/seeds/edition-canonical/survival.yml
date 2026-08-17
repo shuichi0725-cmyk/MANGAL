@@ -1,0 +1,262 @@
+slug: survival
+canonical_label: 通常版
+canonical_publisher: 小学館
+canonical_imprint: 少年サンデーコミックス
+suppress_types:
+- bunkobon
+source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。'
+volumes:
+- number: 1
+  release_date: '1977-10-15'
+- number: 2
+  release_date: '1977-12-15'
+- number: 3
+  release_date: '1978-01-15'
+- number: 4
+  release_date: '1978-04-15'
+- number: 5
+  release_date: '1978-06-15'
+- number: 6
+  release_date: '1978-08-15'
+- number: 7
+  release_date: '1978-10-15'
+- number: 8
+  release_date: '1979-01-15'
+- number: 9
+  release_date: '1979-03-15'
+- number: 10
+  release_date: '1979-05-15'
+- number: 11
+  release_date: '1979-07-15'
+- number: 12
+  release_date: '1979-11-15'
+- number: 13
+  release_date: '1980-01-15'
+- number: 14
+  release_date: '1980-03-15'
+- number: 15
+  release_date: '1980-05-15'
+- number: 16
+  release_date: '1980-07-15'
+- number: 17
+  release_date: '1980-09-15'
+- number: 18
+  release_date: '1980-11-15'
+- number: 19
+  release_date: '1980-12-15'
+- number: 20
+  release_date: '1981-01-15'
+- number: 21
+  release_date: '1981-02-15'
+- number: 22
+  release_date: '1981-03-15'
+extra_editions:
+- type: shinsoban
+  label: SPコミックス(1988)
+  imprint: SPコミックス
+  publisher: リイド社
+  volumes:
+  - number: 1
+    isbn13: '9784845802722'
+    release_date: '1989-07-01'
+  - number: 2
+    isbn13: '9784845802739'
+    release_date: '1988-08'
+  - number: 3
+    isbn13: '9784845802746'
+    release_date: null
+  - number: 4
+    isbn13: '9784845802753'
+    release_date: '1989-09'
+  - number: 5
+    isbn13: '9784845802760'
+    release_date: '1992-06'
+  - number: 6
+    isbn13: '9784845802777'
+    release_date: '1990-11'
+  - number: 7
+    isbn13: '9784845802784'
+    release_date: '1990-11'
+  - number: 8
+    isbn13: '9784845802791'
+    release_date: '1989-02-23'
+  - number: 9
+    isbn13: '9784845802807'
+    release_date: '1991-12'
+  - number: 10
+    isbn13: '9784845802814'
+    release_date: '1990-08'
+  - number: 11
+    isbn13: '9784845802821'
+    release_date: '1989-05'
+  - number: 12
+    isbn13: '9784845802838'
+    release_date: '1989-06-23'
+  - number: 13
+    isbn13: '9784845802845'
+    release_date: '1989-07-23'
+  - number: 14
+    isbn13: '9784845802852'
+    release_date: '1989-08-21'
+  - number: 15
+    isbn13: '9784845802869'
+    release_date: '1989-09-22'
+  - number: 16
+    isbn13: '9784845802876'
+    release_date: '1989-10-22'
+- type: shinsoban
+  label: SPPocket
+  imprint: SPPocket
+  publisher: リイド社
+  volumes:
+  - number: 1
+    isbn13: '9784845818372'
+    release_date: '2000-07-06'
+  - number: 5
+    isbn13: '9784845818419'
+    release_date: '2000-09-08'
+  - number: 9
+    isbn13: '9784845818457'
+    release_date: '2000-11'
+  - number: 11
+    isbn13: '9784845818471'
+    release_date: '2000-12-07'
+  - number: 15
+    isbn13: '9784845818518'
+    release_date: '2001-02-09'
+  - number: 17
+    isbn13: '9784845818532'
+    release_date: '2001-03-06'
+- type: shinsoban
+  label: SPコミックス. SP pocket wide
+  imprint: SPコミックス. SP pocket wide
+  publisher: リイド社
+  volumes:
+  - number: 0
+    isbn13: '9784845869268'
+    release_date: '2025-07-11'
+  - number: 6
+    isbn13: '9784845870257'
+    release_date: '2025-12-22'
+  - number: 7
+    isbn13: '9784845870448'
+    release_date: '2026-01-09'
+  - number: 8
+    isbn13: '9784845870585'
+    release_date: '2026-02-02'
+  - number: 9
+    isbn13: '9784845870691'
+    release_date: '2026-03-23'
+  - number: 10
+    isbn13: '9784845870837'
+    release_date: '2026-04-04'
+  - number: 11
+    isbn13: '9784845870967'
+    release_date: '2026-05-01'
+  - number: 12
+    isbn13: '9784845871742'
+    release_date: '2026-06-22'
+- type: shinsoban
+  label: SPコミックス(1995)
+  imprint: SPコミックス
+  publisher: リイド社
+  volumes:
+  - number: 0
+    release_date: null
+  - number: 4
+    isbn13: '9784845801985'
+    release_date: '1995-03-09'
+  - number: 8
+    isbn13: '9784845818440'
+    release_date: '2000-10'
+  - number: 14
+    isbn13: '9784845818501'
+    release_date: null
+- type: shinsoban
+  label: SPコミックス(2019)
+  imprint: SPコミックス
+  publisher: リイド社
+  volumes:
+  - number: 5
+    isbn13: '9784845854325'
+    release_date: '2019-03'
+- type: shinsoban
+  label: 少年サンデーコミックス(1977)
+  imprint: 少年サンデーコミックス
+  publisher: 小学館
+  volumes:
+  - number: 0
+    release_date: null
+  - number: 2
+    release_date: '1977-12'
+  - number: 4
+    release_date: '1978-04'
+  - number: 7
+    release_date: '1978-10'
+  - number: 8
+    release_date: '1979-01'
+- type: shinsoban
+  label: standard版
+  publisher: リイド社
+  volumes:
+  - number: 1
+    isbn13: '9784845813117'
+    release_date: '1992-05'
+  - number: 2
+    isbn13: '9784845813124'
+    release_date: '1992-05-01'
+  - number: 3
+    isbn13: '9784845803002'
+    release_date: '1995-01-09'
+  - number: 5
+    isbn13: '9784845813155'
+    release_date: '1992-08'
+  - number: 6
+    isbn13: '9784845802005'
+    release_date: '1995-07-08'
+  - number: 8
+    isbn13: '9784845813186'
+    release_date: '1992-11'
+- type: bunkobon
+  label: リイド文庫
+  imprint: リイド文庫
+  publisher: リイド社
+  volumes:
+  - number: 1
+    isbn13: '9784845821365'
+    release_date: '2001-06'
+  - number: 2
+    isbn13: '9784845821372'
+    release_date: '2001-06'
+  - number: 3
+    isbn13: '9784845821389'
+    release_date: '2001-07'
+  - number: 4
+    isbn13: '9784845821396'
+    release_date: '2001-07'
+  - number: 5
+    isbn13: '9784845821402'
+    release_date: '2001-08'
+  - number: 6
+    isbn13: '9784845821419'
+    release_date: '2001-08'
+  - number: 7
+    isbn13: '9784845821426'
+    release_date: '2001-09'
+  - number: 8
+    isbn13: '9784845821433'
+    release_date: '2001-09'
+  - number: 9
+    isbn13: '9784845821440'
+    release_date: '2001-10'
+  - number: 10
+    isbn13: '9784845821457'
+    release_date: '2001-10'
+- type: shinsoban
+  label: SP pocket wide
+  imprint: SP pocket wide
+  publisher: リイド社
+  volumes:
+  - number: 0
+    isbn13: '9784845858712'
+    release_date: '2022-04'

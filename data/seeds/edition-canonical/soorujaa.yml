@@ -1,0 +1,57 @@
+slug: soorujaa
+canonical_label: 通常版
+canonical_publisher: 不明
+canonical_imprint: 劇画キングシリーズ
+source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。'
+volumes:
+- number: 1
+  release_date: '1985-04'
+- number: 2
+  release_date: '1985-05'
+- number: 3
+  release_date: '1985-06'
+- number: 4
+  release_date: '1985-07'
+- number: 5
+  release_date: '1985-08'
+- number: 6
+  release_date: '1985-09'
+- number: 7
+  release_date: '1985-10'
+- number: 8
+  release_date: '1985-11'
+- number: 9
+  release_date: '1985-12'
+- number: 10
+  release_date: '1986-01'
+- number: 11
+  release_date: '1986-02'
+extra_editions:
+- type: shinsoban
+  label: 漫画ゴラク・コミックス
+  imprint: 漫画ゴラク・コミックス
+  publisher: 不明
+  volumes:
+  - number: 1
+    release_date: '1973-05'
+- type: shinsoban
+  label: GORAKU COMICS
+  imprint: GORAKU COMICS
+  publisher: 不明
+  volumes:
+  - number: 1
+    release_date: '1974-05-05'
+- type: shinsoban
+  label: King series
+  imprint: King series
+  publisher: 小池書院
+  volumes:
+  - number: 1
+    isbn13: '9784862254252'
+    release_date: '2009-02'
+  - number: 3
+    isbn13: '9784862254320'
+    release_date: '2009-03'
+  - number: 4
+    isbn13: '9784862254337'
+    release_date: '2009-04'

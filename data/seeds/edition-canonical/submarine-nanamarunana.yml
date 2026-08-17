@@ -1,0 +1,99 @@
+slug: submarine-nanamarunana
+canonical_label: 通常版
+canonical_publisher: 秋田書店
+canonical_imprint: SUNDAY COMICS
+suppress_types:
+- bunkobon
+- deluxe
+source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。'
+volumes:
+- number: 1
+  release_date: '1967-04-15'
+- number: 2
+  release_date: '1967-05-05'
+- number: 3
+  release_date: '1967-05-20'
+extra_editions:
+- type: bunkobon
+  label: 秋田漫画文庫
+  imprint: 秋田漫画文庫
+  publisher: 秋田書店
+  volumes:
+  - number: 1
+    release_date: '1976-09'
+  - number: 2
+    release_date: '1976-09'
+  - number: 3
+    release_date: '1976-10'
+  - number: 4
+    release_date: '1976-10'
+  - number: 5
+    release_date: '1976-12'
+  - number: 6
+    release_date: '1976-12'
+  - number: 7
+    release_date: '1977-01'
+- type: shinsoban
+  label: サンデー・コミックス
+  imprint: サンデー・コミックス
+  publisher: 不明
+  volumes:
+  - number: 4
+    release_date: '1967-06-10'
+  - number: 5
+    release_date: '1967-07-10'
+  - number: 6
+    release_date: '1967-10-20'
+- type: shinsoban
+  label: 秋田コミックス・セレクト
+  imprint: 秋田コミックス・セレクト
+  publisher: 秋田書店
+  volumes:
+  - number: 2
+    isbn13: '9784253109246'
+    release_date: '1987-12-15'
+- type: deluxe
+  label: ラポートコミックスデラックス
+  imprint: ラポートコミックスデラックス
+  publisher: ラポート
+  volumes:
+  - number: 1
+    isbn13: '9784897990866'
+    release_date: '1993-04-25'
+  - number: 2
+    isbn13: '9784897990873'
+    release_date: '1993-04-25'
+  - number: 3
+    isbn13: '9784897990910'
+    release_date: '1993-05-25'
+  - number: 4
+    isbn13: '9784897990965'
+    release_date: '1993-07-10'
+  - number: 5
+    isbn13: '9784897990996'
+    release_date: '1993-08-25'
+  - number: 6
+    isbn13: '9784897991054'
+    release_date: '1993-10-10'
+- type: shinsoban
+  label: 秋田コミックスACセレクト
+  imprint: 秋田コミックスACセレクト
+  publisher: 秋田書店
+  volumes:
+  - number: 1
+    isbn13: '9784253108492'
+    release_date: '1985-10-20'
+- type: shinsoban
+  label: サブマリン707レジェンドBOX
+  imprint: サブマリン707レジェンドBOX
+  publisher: 小学館クリエイティブ
+  volumes:
+  - number: 3
+    isbn13: '9784778032470'
+    release_date: null
+- type: shinsoban
+  label: standard版
+  publisher: 不明
+  volumes:
+  - number: 1
+    release_date: null

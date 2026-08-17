@@ -1,0 +1,80 @@
+slug: fire
+canonical_label: 通常版
+canonical_publisher: 朝日ソノラマ
+canonical_imprint: サンコミックス
+suppress_types:
+- bunkobon
+source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。'
+volumes:
+- number: 1
+  release_date: '1973-08-16'
+- number: 2
+  release_date: '1973-08-16'
+- number: 3
+  release_date: '1973-08-24'
+- number: 4
+  release_date: '1973-08-24'
+extra_editions:
+- type: shinsoban
+  label: standard版
+  publisher: 文藝春秋
+  volumes:
+  - number: 0
+    release_date: '1972-12-18'
+  - number: 1
+    isbn13: '9784163916514'
+    release_date: '2023-01'
+    volume_label: '上'
+  - number: 3
+    isbn13: '9784163916521'
+    release_date: '2023-01'
+    volume_label: '下'
+- type: bunkobon
+  label: 小学館文庫
+  imprint: 小学館文庫
+  publisher: 小学館
+  volumes:
+  - number: 1
+    release_date: '1976-05-20'
+  - number: 2
+    release_date: '1976-05-20'
+  - number: 3
+    release_date: '1976-06-20'
+  - number: 4
+    release_date: '1976-06-20'
+- type: shinsoban
+  label: 創美社コミックス
+  imprint: 創美社コミックス
+  publisher: 不明
+  volumes:
+  - number: 1
+    isbn13: '9784420220057'
+    release_date: '1994-04-25'
+  - number: 2
+    isbn13: '9784420220071'
+    release_date: '1994-05-25'
+  - number: 3
+    isbn13: '9784420220095'
+    release_date: '1994-06-25'
+- type: bunkobon
+  label: 秋田文庫
+  imprint: 秋田文庫
+  publisher: 秋田書店
+  volumes:
+  - number: 1
+    isbn13: '9784253175289'
+    release_date: '1999-08'
+  - number: 2
+    isbn13: '9784253175296'
+    release_date: '1999-10'
+  - number: 3
+    isbn13: '9784253175302'
+    release_date: '1999-12'
+- type: aizoban
+  label: 愛蔵版シリーズ
+  imprint: 愛蔵版シリーズ
+  publisher: 中央公論社
+  volumes:
+  - number: 1
+    isbn13: '9784120017315'
+    release_date: '1988-10-25'

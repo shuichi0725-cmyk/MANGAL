@@ -26,6 +26,9 @@ volumes:
 - number: 9
   isbn13: '9784812452837'
   release_date: '1999-04'
+- number: 10
+  isbn13: '9784812454404'
+  release_date: '2000-11'
 - number: 11
   isbn13: '9784801960572'
   release_date: '2017-10'
@@ -71,9 +74,6 @@ volumes:
 - number: 22
   isbn13: '9784801972179'
   release_date: '2021-03'
-- number: 10
-  isbn13: '9784812454404'
-  release_date: '2000-11'
 extra_editions:
 - type: shinsoban
   label: バンブーコミックス(1998)

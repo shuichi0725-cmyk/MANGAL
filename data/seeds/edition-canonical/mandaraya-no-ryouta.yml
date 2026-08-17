@@ -1,0 +1,161 @@
+slug: mandaraya-no-ryouta
+canonical_label: 通常版
+canonical_publisher: 不明
+canonical_imprint: マンサンコミックス
+suppress_types:
+- bunkobon
+source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。'
+volumes:
+- number: 1
+  release_date: '1979-12-06'
+- number: 2
+  release_date: '1980-02-25'
+- number: 3
+  release_date: '1980-02-25'
+- number: 4
+  release_date: '1980-07-03'
+- number: 5
+  release_date: '1980-07-03'
+- number: 6
+  release_date: '1981-04'
+- number: 7
+  release_date: '1981-04-10'
+- number: 8
+  release_date: '1981-05-07'
+- number: 9
+  release_date: '1981-05-07'
+- number: 10
+  release_date: '1981-09-11'
+- number: 11
+  release_date: '1981-09-11'
+- number: 12
+  release_date: '1981-11-20'
+- number: 13
+  release_date: '1982-02-19'
+- number: 14
+  release_date: '1982-04-23'
+- number: 15
+  release_date: '1982-05-27'
+- number: 16
+  release_date: '1982-08-27'
+- number: 17
+  release_date: '1982-10-28'
+- number: 18
+  release_date: '1983-01'
+- number: 19
+  release_date: '1983-03-22'
+- number: 20
+  release_date: '1983-06-29'
+- number: 21
+  release_date: '1983-08-19'
+- number: 22
+  release_date: '1983-10-27'
+- number: 23
+  release_date: '1984-01-13'
+- number: 24
+  release_date: '1984-04-14'
+- number: 25
+  release_date: '1984-06-09'
+- number: 26
+  release_date: '1984-09-08'
+- number: 27
+  release_date: '1984-10-12'
+- number: 28
+  release_date: '1985-01'
+- number: 29
+  release_date: '1985-02-23'
+- number: 30
+  release_date: '1985-04-27'
+- number: 31
+  release_date: '1985-06'
+- number: 32
+  release_date: '1985-09'
+- number: 33
+  release_date: '1985-11-23'
+- number: 34
+  release_date: '1986-02'
+- number: 35
+  release_date: '1986-05-23'
+- number: 36
+  release_date: '1986-08'
+- number: 37
+  release_date: '1986-12-26'
+- number: 38
+  release_date: '1987-03-01'
+- number: 39
+  release_date: '1987-04'
+- number: 40
+  release_date: '1987-06-27'
+- number: 41
+  release_date: '1987-07-25'
+- number: 42
+  release_date: '1987-08-24'
+- number: 43
+  release_date: '1987-11-21'
+- number: 44
+  release_date: '1988-02'
+- number: 45
+  release_date: '1988-06'
+- number: 46
+  release_date: '1988-09-24'
+- number: 47
+  release_date: '1989-02-25'
+- number: 48
+  release_date: '1989-06'
+- number: 49
+  release_date: '1989-07-28'
+- number: 50
+  release_date: '1989-08-29'
+- number: 51
+  release_date: '1989-09-29'
+- number: 52
+  release_date: '1989-10'
+- number: 53
+  release_date: '1989-11'
+extra_editions:
+- type: shinsoban
+  label: Goma books
+  imprint: Goma books
+  publisher: ごま書房新社
+  volumes:
+  - number: 1
+    isbn13: '9784814917990'
+    release_date: '2018-07'
+    volume_label: '選集1'
+- type: bunkobon
+  label: 徳間コミック文庫
+  imprint: 徳間コミック文庫
+  publisher: 徳間書店
+  volumes:
+  - number: 1
+    isbn13: '9784199020506'
+    release_date: '1996-01'
+  - number: 2
+    isbn13: '9784199020520'
+    release_date: '1996-02'
+  - number: 3
+    isbn13: '9784199020537'
+    release_date: '1996-03'
+  - number: 4
+    isbn13: '9784199020551'
+    release_date: '1996-05'
+  - number: 5
+    isbn13: '9784199020575'
+    release_date: '1996-07'
+  - number: 6
+    isbn13: '9784199020599'
+    release_date: '1996-09'
+  - number: 7
+    isbn13: '9784199020612'
+    release_date: '1996-11'
+  - number: 8
+    isbn13: '9784199020636'
+    release_date: '1997-01'
+- type: shinsoban
+  label: マンサンQコミックス
+  imprint: マンサンQコミックス
+  publisher: 実業之日本社
+  volumes:
+  - number: 1
+    isbn13: '9784408167855'
+    release_date: '2004-01'

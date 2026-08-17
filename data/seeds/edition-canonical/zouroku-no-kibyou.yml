@@ -1,0 +1,33 @@
+slug: zouroku-no-kibyou
+canonical_label: 通常版
+canonical_publisher: 不明
+canonical_imprint: ヒットコミックス
+suppress_types:
+- bunkobon
+source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。'
+volumes:
+- number: 0
+  release_date: '1979-09'
+extra_editions:
+- type: bunkobon
+  label: リイド文庫
+  imprint: リイド文庫
+  publisher: リイド社
+  volumes:
+  - number: 1
+    isbn13: '9784845815791'
+    release_date: '1998-07'
+- type: shinsoban
+  label: standard版
+  publisher: 青林堂
+  volumes:
+  - number: 1
+    isbn13: '9784792603298'
+    release_date: '2000-10-20'
+- type: shinsoban
+  label: ジャンプ スーパー エース
+  imprint: ジャンプ スーパー エース
+  publisher: 不明
+  volumes:
+  - number: 0
+    release_date: '1991-02-13'

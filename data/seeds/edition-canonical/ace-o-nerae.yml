@@ -1,0 +1,229 @@
+slug: ace-o-nerae
+canonical_label: 通常版
+canonical_publisher: 集英社
+canonical_imprint: マーガレットコミックス
+suppress_types:
+- bunkobon
+source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。'
+volumes:
+- number: 1
+  release_date: '1973-09-20'
+- number: 2
+  release_date: '1973-10-20'
+- number: 3
+  release_date: '1974-01-20'
+- number: 4
+  release_date: '1974-04-20'
+- number: 5
+  release_date: '1974-10-20'
+- number: 6
+  release_date: '1975-01-20'
+- number: 7
+  release_date: '1975-05-20'
+- number: 9
+  release_date: '1975-07-21'
+- number: 10
+  release_date: '1975-08-20'
+- number: 11
+  release_date: '1979-01-20'
+- number: 12
+  release_date: '1979-02-20'
+- number: 13
+  release_date: '1980-01-30'
+- number: 14
+  release_date: '1980-02-28'
+- number: 15
+  release_date: '1980-03'
+- number: 16
+  release_date: '1980-04-30'
+- number: 17
+  release_date: '1980-05-30'
+- number: 18
+  release_date: '1980-06-30'
+extra_editions:
+- type: shinsoban
+  label: マーガレットコミックス(1975)
+  imprint: マーガレットコミックス
+  publisher: 集英社
+  volumes:
+  - number: 8
+    release_date: '1975-06-20'
+  - number: 11
+    release_date: '1979-01'
+    volume_label: '11 (宗方コーチの死の巻)'
+  - number: 12
+    release_date: '1979-02'
+    volume_label: '12 (たえよ!この悲しみに…の巻)'
+  - number: 13
+    release_date: '1980-01'
+    volume_label: '13 (日本縦断!トーナメントの巻)'
+  - number: 14
+    release_date: '1980-02'
+  - number: 16
+    release_date: '1980-04'
+  - number: 17
+    release_date: null
+  - number: 18
+    release_date: null
+- type: bunkobon
+  label: 集英社漫画文庫
+  imprint: 集英社漫画文庫
+  publisher: 集英社
+  volumes:
+  - number: 1
+    release_date: '1978-12-31'
+  - number: 2
+    release_date: '1978-12-31'
+  - number: 3
+    release_date: '1979-01-31'
+  - number: 4
+    release_date: '1979-01-31'
+  - number: 5
+    release_date: '1979-02-28'
+  - number: 6
+    release_date: '1979-02-28'
+  - number: 7
+    release_date: '1979-03-31'
+  - number: 8
+    release_date: '1979-03-31'
+  - number: 9
+    release_date: '1979-04-25'
+  - number: 10
+    release_date: '1979-04-25'
+  - number: 11
+    release_date: '1979-08'
+  - number: 12
+    release_date: '1979-08-25'
+  - number: 13
+    release_date: '1981-06-25'
+  - number: 14
+    release_date: '1981-06-25'
+  - number: 15
+    release_date: '1981-07-25'
+  - number: 16
+    release_date: '1981-07-25'
+  - number: 17
+    release_date: '1981-08-25'
+  - number: 18
+    release_date: '1981-08-25'
+- type: bunkobon
+  label: 中公文庫コミック版
+  imprint: 中公文庫コミック版
+  publisher: 中央公論社
+  volumes:
+  - number: 1
+    isbn13: '9784122021686'
+    release_date: '1995-10-18'
+  - number: 2
+    isbn13: '9784122021693'
+    release_date: '1994-10-18'
+  - number: 3
+    isbn13: '9784122021907'
+    release_date: '1994-11-18'
+  - number: 4
+    isbn13: '9784122021914'
+    release_date: '1994-11-18'
+  - number: 5
+    isbn13: '9784122022126'
+    release_date: '1994-12-18'
+  - number: 6
+    isbn13: '9784122022133'
+    release_date: '1994-12-18'
+  - number: 7
+    isbn13: '9784122022331'
+    release_date: '1995-01-18'
+  - number: 8
+    isbn13: '9784122022348'
+    release_date: '1995-01-18'
+  - number: 9
+    isbn13: '9784122022577'
+    release_date: '1995-02-18'
+  - number: 10
+    isbn13: '9784122022584'
+    release_date: '1995-02-18'
+  - number: 11
+    isbn13: '9784122022799'
+    release_date: '1995-03-18'
+  - number: 12
+    isbn13: '9784122022805'
+    release_date: '1995-03-18'
+  - number: 13
+    isbn13: '9784122023048'
+    release_date: '1995-04-18'
+  - number: 14
+    isbn13: '9784122023055'
+    release_date: '1995-04-18'
+- type: shinsoban
+  label: HMB
+  imprint: HMB
+  publisher: ホーム社
+  volumes:
+  - number: 1
+    isbn13: '9784834272291'
+    release_date: '2002-06'
+  - number: 2
+    isbn13: '9784834272307'
+    release_date: '2002-06'
+  - number: 3
+    isbn13: '9784834272314'
+    release_date: '2002-07'
+  - number: 4
+    isbn13: '9784834272321'
+    release_date: '2002-07'
+  - number: 5
+    isbn13: '9784834272338'
+    release_date: '2002-08'
+  - number: 6
+    isbn13: '9784834272345'
+    release_date: '2002-08'
+  - number: 7
+    isbn13: '9784834272352'
+    release_date: '2002-09'
+  - number: 8
+    isbn13: '9784834272369'
+    release_date: '2002-09'
+  - number: 9
+    isbn13: '9784834272376'
+    release_date: '2002-10'
+  - number: 10
+    isbn13: '9784834272383'
+    release_date: '2002-10'
+- type: aizoban
+  label: 中央公論社愛蔵版
+  imprint: 中央公論社愛蔵版
+  publisher: 中央公論社
+  volumes:
+  - number: 1
+    isbn13: '9784120018411'
+    release_date: '1989-07'
+  - number: 2
+    isbn13: '9784120018428'
+    release_date: '1989-08'
+  - number: 3
+    isbn13: '9784120018794'
+    release_date: '1989-11'
+  - number: 4
+    isbn13: '9784120018800'
+    release_date: '1989-12'
+- type: shinsoban
+  label: standard版
+  publisher: ホーム社
+  volumes:
+  - number: 1
+    isbn13: '9784834241273'
+    release_date: null
+  - number: 2
+    isbn13: '9784834241280'
+    release_date: null
+  - number: 3
+    isbn13: '9784834241297'
+    release_date: null
+  - number: 4
+    isbn13: '9784834241303'
+    release_date: null
+  - number: 5
+    isbn13: '9784834241310'
+    release_date: null
+  - number: 6
+    isbn13: '9784834241327'
+    release_date: null

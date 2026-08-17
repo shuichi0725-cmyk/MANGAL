@@ -4,7 +4,7 @@ title: 地球を呑む
 title_kana: チキュウヲノム
 title_romaji: chikyuuonomu
 year_started: 1970
-year_ended: 1996
+year_ended: 1970
 status: completed
 authors:
 - name: 手塚治虫
@@ -36,9 +36,9 @@ editions:
   volumes:
   - number: 1
     asin: null
-    isbn13: '9784091973535'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/3535/9784091973535.gif?_ex=300x300
-    release_date: '1994-09-01'
+    isbn13: null
+    cover_url: null
+    release_date: '1970-06-15'
   - number: 2
     asin: null
     isbn13: null
@@ -49,23 +49,40 @@ editions:
     isbn13: null
     cover_url: null
     release_date: '1970-12-10'
+- type: shinsoban
+  label: Comコミックス別冊
+  publisher: 不明
+  imprint: Comコミックス別冊
+  volumes:
+  - number: 1
+    asin: null
+    isbn13: null
+    cover_url: null
+    release_date: 1972-07
+    volume_label: 上
+  - number: 3
+    asin: null
+    isbn13: null
+    cover_url: null
+    release_date: 1972-08
+    volume_label: 下
 - type: bunkobon
-  label: 文庫版
+  label: 小学館文庫(1977)
   publisher: 小学館
   imprint: 小学館文庫
   volumes:
   - number: 1
     asin: null
-    isbn13: '9784091920065'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0065/9784091920065_1_3.jpg?_ex=300x300
-    release_date: '1996-12-10'
+    isbn13: null
+    cover_url: null
+    release_date: 1977-05
   - number: 2
     asin: null
     isbn13: '9784091902122'
     cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/rakutenkobo-ebooks/cabinet/8172/2000002958172.jpg?_ex=300x300
     release_date: 1977-06
-- type: standard
-  label: 手塚治虫漫画全集(1982)
+- type: shinsoban
+  label: 手塚治虫漫画全集
   publisher: 講談社
   imprint: 手塚治虫漫画全集
   volumes:
@@ -74,25 +91,43 @@ editions:
     isbn13: '9784061732599'
     cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0617/06173259.jpg?_ex=300x300
     release_date: '1982-11-20'
-    title_display: 第1巻(全集259)
   - number: 2
     asin: null
     isbn13: '9784061732605'
     cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0617/06173260.jpg?_ex=300x300
     release_date: '1982-12-20'
-    title_display: 第2巻(全集260)
-- type: bunkobon
-  label: 手塚治虫文庫全集(2012)
+- type: shinsoban
+  label: TEZUKA OSAMU THE COMPLETE WORKS
   publisher: 講談社
-  imprint: 手塚治虫文庫全集
+  imprint: TEZUKA OSAMU THE COMPLETE WORKS
   volumes:
   - number: 1
     asin: null
     isbn13: '9784063738865'
     cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/8865/9784063738865_1_3.jpg?_ex=300x300
     release_date: 2012-02
-    title_display: 文庫全集BT-186
+- type: shinsoban
+  label: 小学館叢書
+  publisher: 小学館
+  imprint: 小学館叢書
+  volumes:
+  - number: 1
+    asin: null
+    isbn13: '9784091973535'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/3535/9784091973535.gif?_ex=300x300
+    release_date: '1994-09-01'
+- type: bunkobon
+  label: 小学館文庫(1996)
+  publisher: 小学館
+  imprint: 小学館文庫
+  volumes:
+  - number: 1
+    asin: null
+    isbn13: '9784091920065'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0065/9784091920065_1_3.jpg?_ex=300x300
+    release_date: '1996-12-10'
 publishers:
+- kodansha
 - shogakukan
 catch: その女を見た男は、例外なく虜になる。謎の美女ゼフィルスは、やがて文明そのものを静かに呑み込んでいくのだった。
 genres_provisional: true

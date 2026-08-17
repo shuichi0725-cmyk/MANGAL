@@ -1,0 +1,67 @@
+slug: arion
+canonical_label: 通常版
+canonical_publisher: 不明
+canonical_imprint: アニメージュコミックス
+suppress_types:
+- bunkobon
+- deluxe
+source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。'
+volumes:
+- number: 1
+  release_date: '1980-11-10'
+- number: 2
+  release_date: '1981-06-05'
+- number: 3
+  release_date: '1982-06-05'
+- number: 4
+  release_date: '1983-07-10'
+- number: 5
+  release_date: '1985-01-10'
+extra_editions:
+- type: bunkobon
+  label: 中公文庫コミック版
+  imprint: 中公文庫コミック版
+  publisher: 中央公論社
+  volumes:
+  - number: 1
+    isbn13: '9784122028074'
+    release_date: '1997-02'
+  - number: 2
+    isbn13: '9784122028081'
+    release_date: '1997-02'
+  - number: 3
+    isbn13: '9784122028302'
+    release_date: '1997-03'
+  - number: 4
+    isbn13: '9784122028319'
+    release_date: '1997-03'
+- type: deluxe
+  label: アニメージュコミックスデラックス
+  imprint: アニメージュコミックスデラックス
+  publisher: 不明
+  volumes:
+  - number: 1
+    release_date: '1986-01-01'
+  - number: 2
+    release_date: '1986-01-01'
+  - number: 3
+    release_date: '1986-01-01'
+- type: shinsoban
+  label: アイランドコミックスPRIMO
+  imprint: アイランドコミックスPRIMO
+  publisher: 嶋中書店
+  volumes:
+  - number: 1
+    isbn13: '9784901819909'
+    release_date: null
+- type: shinsoban
+  label: ジ・アニメフィルムコミックス
+  imprint: ジ・アニメフィルムコミックス
+  publisher: 近代映画社
+  volumes:
+  - number: 1
+    isbn13: '9784764813304'
+    release_date: '1986-04'
+  - number: 2
+    isbn13: '9784764813311'
+    release_date: '1986-04'

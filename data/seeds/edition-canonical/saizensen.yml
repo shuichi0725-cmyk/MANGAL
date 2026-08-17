@@ -1,0 +1,60 @@
+slug: saizensen
+canonical_label: 通常版
+canonical_publisher: 少年画報社
+canonical_imprint: キング・コミックス
+source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。'
+volumes:
+- number: 1
+  release_date: '1968-08-20'
+- number: 2
+  release_date: '1968-08'
+- number: 3
+  release_date: '1969-10-31'
+- number: 4
+  release_date: '1971-08-01'
+extra_editions:
+- type: shinsoban
+  label: ヒットコミックス
+  imprint: ヒットコミックス
+  publisher: 不明
+  volumes:
+  - number: 1
+    release_date: '1974-07-15'
+  - number: 2
+    release_date: '1974-09-01'
+  - number: 4
+    release_date: '1975-03-01'
+- type: shinsoban
+  label: St comics
+  imprint: St comics
+  publisher: 大都社
+  volumes:
+  - number: 1
+    isbn13: '9784886530349'
+    release_date: '1993-09'
+  - number: 2
+    isbn13: '9784886530356'
+    release_date: '1993-09'
+  - number: 3
+    isbn13: '9784886530363'
+    release_date: '1993-09'
+- type: shinsoban
+  label: Star comics
+  imprint: Star comics
+  publisher: 不明
+  volumes:
+  - number: 1
+    release_date: '1983-07-08'
+  - number: 2
+    release_date: '1983-07-08'
+  - number: 3
+    release_date: '1983-07-08'
+  - number: 4
+    release_date: '1983-07-08'
+- type: shinsoban
+  label: シマムラ漫画シリーズ
+  imprint: シマムラ漫画シリーズ
+  publisher: 不明
+  volumes:
+  - number: 0
+    release_date: null

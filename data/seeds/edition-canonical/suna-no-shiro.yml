@@ -1,0 +1,82 @@
+slug: suna-no-shiro
+canonical_label: 通常版
+canonical_publisher: 集英社
+canonical_imprint: りぼんマスコットコミックス
+suppress_types:
+- bunkobon
+source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。'
+volumes:
+- number: 2
+  release_date: '1979-04-20'
+- number: 3
+  release_date: '1979-05'
+- number: 4
+  release_date: '1979-06-20'
+- number: 5
+  release_date: '1981-10-20'
+- number: 6
+  release_date: '1981-12-29'
+- number: 7
+  release_date: '1982-03-20'
+extra_editions:
+- type: shinsoban
+  label: RIBON MASCOT COMICS
+  imprint: RIBON MASCOT COMICS
+  publisher: 不明
+  volumes:
+  - number: 1
+    release_date: '1979-04-10'
+- type: shinsoban
+  label: SGコミックス
+  imprint: SGコミックス
+  publisher: 集英社
+  volumes:
+  - number: 1
+    isbn13: '9784088550015'
+    release_date: '1989-09-10'
+  - number: 2
+    isbn13: '9784088550107'
+    release_date: '1989-11-10'
+  - number: 3
+    isbn13: '9784088550183'
+    release_date: '1989-12-10'
+- type: shinsoban
+  label: Queen's comics premium
+  imprint: Queen's comics premium
+  publisher: 集英社
+  volumes:
+  - number: 1
+    isbn13: '9784088651880'
+    release_date: '2004-02'
+  - number: 2
+    isbn13: '9784088651958'
+    release_date: '2004-03'
+  - number: 3
+    isbn13: '9784088652092'
+    release_date: '2004-05'
+  - number: 4
+    isbn13: '9784088652153'
+    release_date: '2004-06'
+  - number: 5
+    isbn13: '9784088652214'
+    release_date: '2004-07'
+  - number: 6
+    isbn13: '9784088652368'
+    release_date: '2004-09'
+- type: bunkobon
+  label: 集英社文庫 コミック版
+  imprint: 集英社文庫 コミック版
+  publisher: 集英社
+  volumes:
+  - number: 1
+    isbn13: '9784086172080'
+    release_date: '1995-12-20'
+  - number: 2
+    isbn13: '9784086172097'
+    release_date: '1995-12-20'
+  - number: 3
+    isbn13: '9784086172103'
+    release_date: '1996-02-21'
+  - number: 4
+    isbn13: '9784086172110'
+    release_date: '1996-02-21'

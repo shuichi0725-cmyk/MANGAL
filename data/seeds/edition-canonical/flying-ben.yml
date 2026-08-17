@@ -1,0 +1,51 @@
+slug: flying-ben
+canonical_label: 通常版
+canonical_publisher: 講談社
+canonical_imprint: 手塚治虫漫画全集
+suppress_types:
+- bunkobon
+source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。'
+volumes:
+- number: 1
+  isbn13: '9784061087804'
+  release_date: '1979-11'
+- number: 2
+  isbn13: '9784061087811'
+  release_date: '1980-01'
+- number: 3
+  isbn13: '9784061087828'
+  release_date: '1980-02'
+extra_editions:
+- type: bunkobon
+  label: 手塚治虫文庫全集
+  imprint: 手塚治虫文庫全集
+  publisher: 講談社
+  volumes:
+  - number: 1
+    isbn13: '9784063737738'
+    release_date: '2010-06'
+  - number: 2
+    isbn13: '9784063737745'
+    release_date: '2010-06'
+- type: bunkobon
+  label: 秋田文庫
+  imprint: 秋田文庫
+  publisher: 秋田書店
+  volumes:
+  - number: 1
+    isbn13: '9784253178853'
+    release_date: '2005-08'
+  - number: 2
+    isbn13: '9784253178860'
+    release_date: '2005-11'
+- type: bunkobon
+  label: 集英社漫画文庫
+  imprint: 集英社漫画文庫
+  publisher: 集英社
+  volumes:
+  - number: 1
+    release_date: '1977-11-30'
+  - number: 2
+    release_date: '1977-12-31'
+  - number: 3
+    release_date: '1978-01-31'

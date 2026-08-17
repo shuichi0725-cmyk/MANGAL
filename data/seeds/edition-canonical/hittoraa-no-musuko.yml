@@ -1,0 +1,59 @@
+slug: hittoraa-no-musuko
+canonical_label: 通常版
+canonical_publisher: 徳間書店
+canonical_imprint: トクマコミックス
+suppress_types:
+- bunkobon
+source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。'
+volumes:
+- number: 1
+  release_date: '1987-09'
+- number: 2
+  release_date: '1987-09'
+- number: 3
+  release_date: '1987-10'
+- number: 4
+  isbn13: '9784197876013'
+  release_date: '1987-10'
+extra_editions:
+- type: shinsoban
+  label: キングシリーズ
+  imprint: キングシリーズ
+  publisher: 小池書院
+  volumes:
+  - number: 1
+    isbn13: '9784862256874'
+    release_date: '2011-01'
+  - number: 2
+    isbn13: '9784862256881'
+    release_date: '2011-02'
+- type: shinsoban
+  label: SP pocket wide
+  imprint: SP pocket wide
+  publisher: リイド社
+  volumes:
+  - number: 1
+    isbn13: '9784845850341'
+    release_date: '2017-01'
+- type: bunkobon
+  label: 秋田漫画文庫
+  imprint: 秋田漫画文庫
+  publisher: 秋田書店
+  volumes:
+  - number: 1
+    release_date: '1980-01-20'
+  - number: 2
+    release_date: '1980-01-20'
+  - number: 3
+    release_date: '1980-03-20'
+  - number: 4
+    release_date: '1980-03-20'
+- type: shinsoban
+  label: 劇画キングシリーズ
+  imprint: 劇画キングシリーズ
+  publisher: 不明
+  volumes:
+  - number: 1
+    release_date: '1983-03'
+  - number: 3
+    release_date: '1983-06'

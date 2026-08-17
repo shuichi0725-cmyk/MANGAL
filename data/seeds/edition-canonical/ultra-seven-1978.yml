@@ -1,0 +1,102 @@
+slug: ultra-seven-1978
+canonical_label: 通常版
+canonical_publisher: 朝日ソノラマ
+canonical_imprint: サンコミックス
+source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。'
+volumes:
+- number: 1
+  release_date: '1978-07'
+- number: 2
+  release_date: '1978-07'
+- number: 3
+  release_date: '1978-07'
+- number: 4
+  release_date: '1978-07'
+- number: 5
+  release_date: '1978-12'
+- number: 6
+  release_date: '1978-12'
+extra_editions:
+- type: shinsoban
+  label: MANGA Shop Series
+  imprint: MANGA Shop Series
+  publisher: マンガショップ
+  volumes:
+  - number: 1
+    isbn13: '9784775910160'
+    release_date: '2004-12-25'
+    volume_label: '上'
+  - number: 2
+    isbn13: '9784775910177'
+    release_date: '2004-12-25'
+    volume_label: '中'
+  - number: 3
+    isbn13: '9784775910184'
+    release_date: '2004-12-25'
+    volume_label: '下'
+- type: shinsoban
+  label: SUN SPECIAL COMICS
+  imprint: SUN SPECIAL COMICS
+  publisher: 朝日ソノラマ
+  volumes:
+  - number: 1
+    isbn13: '9784257901372'
+    release_date: '1991-09'
+- type: shinsoban
+  label: SUN WIDE COMICS
+  imprint: SUN WIDE COMICS
+  publisher: 朝日ソノラマ
+  volumes:
+  - number: 1
+    isbn13: '9784257960867'
+    release_date: '1986-07-18'
+  - number: 2
+    isbn13: '9784257960898'
+    release_date: '1986-08-20'
+- type: shinsoban
+  label: St comics
+  imprint: St comics
+  publisher: 大都社
+  volumes:
+  - number: 1
+    isbn13: '9784886531100'
+    release_date: '1998-09'
+  - number: 2
+    isbn13: '9784886531117'
+    release_date: '1998-09'
+- type: shinsoban
+  label: Comic's☆ウルトラ大全集
+  imprint: Comic's☆ウルトラ大全集
+  publisher: リム出版
+  volumes:
+  - number: 1
+    isbn13: '9784871203241'
+    release_date: '1992-12'
+- type: shinsoban
+  label: P-KC
+  imprint: P-KC
+  publisher: 講談社
+  volumes:
+  - number: 1
+    isbn13: '9784063420173'
+    release_date: '1998-02-23'
+- type: shinsoban
+  label: KCDX
+  imprint: KCDX
+  publisher: 講談社
+  volumes:
+  - number: 1
+    isbn13: '9784063774948'
+    release_date: '2016-06'
+    volume_label: '上'
+  - number: 3
+    isbn13: '9784063774955'
+    release_date: '2016-06'
+    volume_label: '下'
+- type: shinsoban
+  label: standard版
+  publisher: 朝日ソノラマ
+  volumes:
+  - number: 1
+    isbn13: '9784257903574'
+    release_date: '1998-12-25'

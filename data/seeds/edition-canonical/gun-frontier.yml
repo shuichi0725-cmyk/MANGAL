@@ -1,0 +1,52 @@
+slug: gun-frontier
+canonical_label: 通常版
+canonical_publisher: 秋田書店
+canonical_imprint: 秋田コミックス・セレクト
+suppress_types:
+- bunkobon
+source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。'
+volumes:
+- number: 1
+  isbn13: '9784253108300'
+  release_date: '1988-03-25'
+- number: 2
+  isbn13: '9784253108591'
+  release_date: '1988-05-25'
+extra_editions:
+- type: bunkobon
+  label: 秋田漫画文庫
+  imprint: 秋田漫画文庫
+  publisher: 秋田書店
+  volumes:
+  - number: 1
+    release_date: '1976-12-20'
+  - number: 2
+    release_date: '1977-01-20'
+  - number: 3
+    release_date: '1977-02-20'
+- type: bunkobon
+  label: 秋田文庫
+  imprint: 秋田文庫
+  publisher: 秋田書店
+  volumes:
+  - number: 1
+    isbn13: '9784253174619'
+    release_date: '1999-02'
+  - number: 2
+    isbn13: '9784253174626'
+    release_date: '1999-04'
+- type: shinsoban
+  label: TOPコミックスシリーズ
+  imprint: TOPコミックスシリーズ
+  publisher: 不明
+  volumes:
+  - number: 1
+    release_date: '1975-06-20'
+- type: shinsoban
+  label: チャンピオンREDコミックス
+  imprint: チャンピオンREDコミックス
+  publisher: 秋田書店
+  volumes:
+  - number: 1
+    isbn13: '9784253236324'
+    release_date: '2017-06'

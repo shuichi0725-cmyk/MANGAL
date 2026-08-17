@@ -1,0 +1,90 @@
+slug: shin-obake-no-qtarou
+canonical_label: 通常版
+canonical_publisher: 不明
+canonical_imprint: 中公コミックス
+source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。'
+volumes:
+- number: 1
+  isbn13: '9784124102307'
+  release_date: '1989-03-10'
+- number: 2
+  isbn13: '9784124102345'
+  release_date: '1989-04-14'
+- number: 3
+  isbn13: '9784124102383'
+  release_date: '1989-05-12'
+- number: 4
+  isbn13: '9784124102420'
+  release_date: '1989-06-09'
+- number: 5
+  isbn13: '9784124102468'
+  release_date: '1989-07-14'
+- number: 6
+  isbn13: '9784124102505'
+  release_date: '1989-08-11'
+- number: 7
+  isbn13: '9784124102543'
+  release_date: '1989-09-08'
+extra_editions:
+- type: shinsoban
+  label: てんとう虫コミックス(2018)
+  imprint: てんとう虫コミックス
+  publisher: 小学館
+  volumes:
+  - number: 1
+    isbn13: '9784091427052'
+    release_date: '2018-05'
+  - number: 2
+    isbn13: '9784091427069'
+    release_date: '2018-06'
+  - number: 3
+    isbn13: '9784091427076'
+    release_date: '2018-07'
+  - number: 4
+    isbn13: '9784091427083'
+    release_date: '2018-08'
+- type: shinsoban
+  label: 藤子・F・不二雄大全集
+  imprint: 藤子・F・不二雄大全集
+  publisher: 小学館
+  volumes:
+  - number: 1
+    isbn13: '9784091434708'
+    release_date: '2011-09-27'
+- type: shinsoban
+  label: The complete works of Fujiko・F・Fujio
+  imprint: The complete works of Fujiko・F・Fujio
+  publisher: 小学館
+  volumes:
+  - number: 2
+    isbn13: '9784091434814'
+    release_date: '2012-01-30'
+  - number: 3
+    isbn13: '9784091434920'
+    release_date: '2012-05-30'
+  - number: 4
+    isbn13: '9784091434975'
+    release_date: '2012-07-30'
+- type: shinsoban
+  label: standard版
+  publisher: 不明
+  volumes:
+  - number: 1
+    release_date: '2007-05-30'
+- type: shinsoban
+  label: てんとう虫コミックス(1975)
+  imprint: てんとう虫コミックス
+  publisher: 小学館
+  volumes:
+  - number: 1
+    isbn13: '9784091400611'
+    release_date: '1975-06-01'
+  - number: 2
+    isbn13: '9784091400628'
+    release_date: '1975-09-25'
+  - number: 3
+    isbn13: '9784091400635'
+    release_date: '1976-01-25'
+  - number: 4
+    isbn13: '9784091400642'
+    release_date: '1976-02-25'

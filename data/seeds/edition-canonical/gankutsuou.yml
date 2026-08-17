@@ -1,0 +1,66 @@
+slug: gankutsuou
+canonical_label: 通常版
+canonical_publisher: 講談社
+canonical_imprint: アフタヌーンKC
+suppress_types:
+- bunkobon
+source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。'
+volumes:
+- number: 1
+  isbn13: '9784063143997'
+  release_date: '2005-12'
+- number: 2
+  isbn13: '9784063144222'
+  release_date: '2006-07'
+- number: 3
+  isbn13: '9784063145168'
+  release_date: '2008-07'
+extra_editions:
+- type: bunkobon
+  label: 名作漫画文庫
+  imprint: 名作漫画文庫
+  publisher: 不明
+  volumes:
+  - number: 0
+    release_date: null
+- type: bunkobon
+  label: おもしろ漫画文庫
+  imprint: おもしろ漫画文庫
+  publisher: 不明
+  volumes:
+  - number: 0
+    release_date: null
+- type: shinsoban
+  label: 世界名作全集
+  imprint: 世界名作全集
+  publisher: 不明
+  volumes:
+  - number: 0
+    release_date: '1950-06-30'
+- type: shinsoban
+  label: グローバルコミックス
+  imprint: グローバルコミックス
+  publisher: 不明
+  volumes:
+  - number: 4
+    release_date: '1980-02'
+- type: shinsoban
+  label: standard版
+  publisher: 不明
+  volumes:
+  - number: 0
+    release_date: null
+- type: bunkobon
+  label: モンキー文庫
+  imprint: モンキー文庫
+  publisher: 不明
+  volumes:
+  - number: 0
+    release_date: '1977-11'
+- type: shinsoban
+  label: 名作マンガ
+  imprint: 名作マンガ
+  publisher: 不明
+  volumes:
+  - number: 0
+    release_date: null
