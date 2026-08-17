@@ -1,0 +1,87 @@
+slug: jikken-doll-dummy-oscar
+canonical_label: 通常版
+canonical_publisher: 不明
+canonical_imprint: 劇画キングシリーズ
+source: 'ギャラ型是正 2026-08-17(worksheetのA_SPLIT_WORK?判定だが実体はB型): 初出の劇画キングシリーズ(1979-1991 全19巻)がMADB上で2 sid × 4 editionに散らばり、そこへ2018-19年のComic魂別冊叶精作が食い込んで2巻2019-12→3巻1979-05の40年逆行になっていた。散在していた初出全19巻(18巻はISBN 9784883151103・19巻は9784883153558)を1本に統合して主版に戻し、Comic魂別冊叶精作(はちどり 2018-2019 8冊。MADBが巻番号を持たないので発売日順に1-8へ採番)とGoma books(2019 全2巻)はextra_editionsへ。★劇画キングシリーズの版元は両ソースに記載が無いため不明と明示。※11巻の発売日1980-05は前後(10巻1983-01/12巻1984-01)と矛盾するがMADB以外に出典が無いためそのまま残した(逆行は3年弱で検出閾値の5年未満)。'
+volumes:
+  - number: 1
+    release_date: '1979-06'
+  - number: 2
+    release_date: '1979-08'
+  - number: 3
+    release_date: '1979-10'
+  - number: 4
+    release_date: '1980-02'
+  - number: 5
+    release_date: '1980-09'
+  - number: 6
+    release_date: '1981-03'
+  - number: 7
+    release_date: '1981-09'
+  - number: 8
+    release_date: '1982-01'
+  - number: 9
+    release_date: '1982-08-10'
+  - number: 10
+    release_date: '1983-01'
+  - number: 11
+    release_date: '1980-05'
+  - number: 12
+    release_date: '1984-01-15'
+  - number: 13
+    release_date: '1984-08'
+  - number: 14
+    release_date: '1985-01'
+  - number: 15
+    release_date: '1989-12'
+  - number: 16
+    release_date: '1990-05'
+  - number: 17
+    release_date: '1990-11'
+- number: 18
+  isbn13: '9784883151103'
+  release_date: '1991-05'
+- number: 19
+  isbn13: '9784883153558'
+  release_date: null
+extra_editions:
+- type: shinsoban
+  label: Comic魂別冊叶精作(はちどり)
+  imprint: Comic魂別冊叶精作
+  publisher: はちどり
+  volumes:
+  - number: 1
+    isbn13: '9784074302499'
+    release_date: '2018-03'
+  - number: 2
+    isbn13: '9784074305223'
+    release_date: '2018-06'
+  - number: 3
+    isbn13: '9784074308125'
+    release_date: '2018-09'
+  - number: 4
+    isbn13: '9784073400844'
+    release_date: '2018-12'
+  - number: 5
+    isbn13: '9784073403166'
+    release_date: '2019-03'
+  - number: 6
+    isbn13: '9784073406938'
+    release_date: '2019-06'
+  - number: 7
+    isbn13: '9784073411550'
+    release_date: '2019-10'
+  - number: 8
+    isbn13: '9784073414162'
+    release_date: '2019-12'
+- type: shinsoban
+  label: Goma books版
+  imprint: Goma books
+  publisher: ごま書房新社
+  volumes:
+  - number: 1
+    isbn13: '9784814919352'
+    release_date: '2019-06'
+  - number: 2
+    isbn13: '9784814919369'
+    release_date: '2019-06'
