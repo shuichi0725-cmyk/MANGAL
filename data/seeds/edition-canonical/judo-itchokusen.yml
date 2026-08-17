@@ -1,0 +1,98 @@
+slug: judo-itchokusen
+canonical_label: 通常版
+canonical_publisher: 少年画報社
+canonical_imprint: キング・コミックス
+source: 'ギャラ型是正 2026-08-17(worksheetのA_SPLIT_WORK?判定だが実体はB型): 通常版タブの1-7巻枠を2004年の完全復刻版(ネコ・パブリッシング)が占有し、初出キング・コミックス(少年画報社 1968-1970)は8-13巻の残骸だけになっていた(1巻2004-02→8巻1970-04-01の34年逆行)。MADBは同じ作品を3 sidに割り、KCスペシャル全8巻も2 sidに分断していた。初出run(v1-v10とv13。11・12巻は両ソースに無く欠番のまま)を主版に戻し、サンケイコミックス版(1986。MADBはSCとサンケイコミックスの2 editionに分かれていたので統合)・KCスペシャル(講談社 1990-91 全8巻)・完全復刻版(ネコ・パブリッシング 2004 全7巻)はextra_editionsへ。2004年版の版元は楽天(ISBN 9784777050406=「柔道一直線（第1巻）完全復刻版」ネコ・パブリッシング 2004年02月)で確認。文庫タブ(光文社文庫comic series 全7巻 1998)は混在なしのため温存。'
+volumes:
+  - number: 1
+    release_date: '1968-03-15'
+  - number: 2
+    release_date: '1968-06-30'
+  - number: 3
+    release_date: null
+  - number: 4
+    release_date: null
+  - number: 5
+    release_date: '1969-07-15'
+  - number: 6
+    release_date: '1969-08-31'
+  - number: 7
+    release_date: '1969-11-30'
+  - number: 8
+    release_date: '1970-04-01'
+  - number: 9
+    release_date: '1970-06-01'
+  - number: 10
+    release_date: null
+  - number: 13
+    release_date: null
+extra_editions:
+- type: shinsoban
+  label: サンケイコミックス版
+  imprint: サンケイコミックス
+  publisher: サンケイ出版
+  volumes:
+  - number: 1
+    release_date: '1986-01-01'
+  - number: 3
+    release_date: '1986-01-01'
+  - number: 4
+    release_date: '1986-01-20'
+  - number: 5
+    release_date: '1986-01-20'
+  - number: 6
+    release_date: '1986-01-20'
+  - number: 7
+    release_date: '1986-03-01'
+  - number: 8
+    release_date: '1986-03-01'
+  - number: 9
+    release_date: '1986-04-01'
+  - number: 10
+    release_date: '1986-04-01'
+- type: shinsoban
+  label: KCスペシャル(講談社)
+  imprint: KCスペシャル
+  publisher: 講談社
+  volumes:
+  - number: 1
+    release_date: '1990-11-06'
+  - number: 2
+    release_date: '1990-11-06'
+  - number: 3
+    release_date: '1990-12-06'
+  - number: 4
+    release_date: '1990-12-06'
+  - number: 5
+    release_date: '1991-01-08'
+  - number: 6
+    release_date: '1991-01-08'
+  - number: 7
+    release_date: '1991-02-06'
+  - number: 8
+    release_date: '1991-02-06'
+- type: shinsoban
+  label: 完全復刻版(ネコ・パブリッシング)
+  publisher: ネコ・パブリッシング
+  volumes:
+  - number: 1
+    isbn13: '9784777050406'
+    release_date: '2004-02'
+  - number: 2
+    isbn13: '9784777050413'
+    release_date: '2004-02'
+  - number: 3
+    isbn13: '9784777050420'
+    release_date: '2004-05'
+  - number: 4
+    isbn13: '9784777050437'
+    release_date: '2004-05'
+  - number: 5
+    isbn13: '9784777050444'
+    release_date: '2004-07'
+  - number: 6
+    isbn13: '9784777050451'
+    release_date: '2004-07'
+  - number: 7
+    isbn13: '9784777050468'
+    release_date: '2004-07'

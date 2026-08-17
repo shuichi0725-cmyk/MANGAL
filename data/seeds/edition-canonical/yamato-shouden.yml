@@ -1,0 +1,23 @@
+slug: yamato-shouden
+canonical_label: 通常版
+canonical_publisher: さいとう・プロダクション
+source: 'ギャラ型C型是正 2026-08-17: MADBが1 edition行に初出(さいとう・プロダクション 1963)と2009年の小学館クリエイティブ復刻を同居させ、1巻2009-08-08→3巻1963-08の46年逆行になっていた。NDL SRU(creator=さいとう・たかを)で確定= 初出は**さいとう・プロダクション** 第2-6巻(第3巻1963.08/第4巻1963.09/第5巻1963.10。第2巻・第6巻は日付なし) / 復刻は小学館クリエイティブ 2009.8(ISBN 9784778031268)。★第1巻は両ソースとも初出runの記録が無いため巻を作らない(MADBの1巻は復刻のISBNが入っていただけ)。'
+volumes:
+- number: 2
+  release_date: null
+- number: 3
+  release_date: '1963-08'
+- number: 4
+  release_date: '1963-09'
+- number: 5
+  release_date: '1963-10'
+- number: 6
+  release_date: null
+extra_editions:
+- type: shinsoban
+  label: 小学館クリエイティブ版
+  publisher: 小学館クリエイティブ
+  volumes:
+  - number: 1
+    isbn13: '9784778031268'
+    release_date: '2009-08-08'
