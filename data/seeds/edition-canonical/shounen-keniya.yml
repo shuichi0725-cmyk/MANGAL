@@ -1,0 +1,116 @@
+slug: shounen-keniya
+canonical_label: 通常版
+canonical_publisher: 不明
+canonical_imprint: サンケイ・ジュニア ブックス
+suppress_types:
+- bunkobon
+source: 'ギャラ型是正 2026-08-17(worksheetのA_SPLIT_WORK?判定だが実体はB型): 通常版タブに2005年MANGA Shop Series・1962-63年の単行本・1976年サンケイ・ジュニア ブックスが混線し、1巻2005-11-03→2巻1962-02-20の43年逆行になっていた。文庫タブも1953-55年サンケイ児童文庫と角川文庫が混在。★主版は**巻が連番で揃い日付も全部ある最古**のサンケイ・ジュニア ブックス(全10巻 1976)とし、他はextra_editionsへ。文庫は suppress_types でサンケイ児童文庫(全13巻 1953-1955。MADBの重複行は巻ごとに最も精度の高い日付へ寄せた)と角川文庫に分けた。★NDL SRU(creator=山川惣治)は2回ともタイムアウトして取得できなかったため、**版元を断定できる材料が無いrunは publisher を不明**にしてある(レーベル名はMADBの記録どおり)。富士見コミックス・アニメ版(1984)はアニメ版のため掲載対象外。'
+volumes:
+  - number: 1
+    release_date: '1976-03-23'
+  - number: 2
+    release_date: '1976-03-24'
+  - number: 3
+    release_date: '1976-04'
+  - number: 4
+    release_date: '1976-04'
+  - number: 5
+    release_date: '1976-05'
+  - number: 6
+    release_date: '1976-05'
+  - number: 7
+    release_date: '1976-06'
+  - number: 8
+    release_date: '1976-06'
+  - number: 9
+    release_date: '1976-07'
+  - number: 10
+    release_date: '1976-07-02'
+extra_editions:
+- type: other
+  label: 単行本(1962-63・版元不明)
+  publisher: 不明
+  volumes:
+  - number: 2
+    release_date: '1962-02-20'
+  - number: 3
+    release_date: '1962-08'
+  - number: 5
+    release_date: '1963-01'
+  - number: 6
+    release_date: '1963-03-30'
+- type: shinsoban
+  label: 絵物語名作館(アース出版局)
+  imprint: 絵物語名作館
+  publisher: アース出版局
+  volumes:
+  - number: 1
+    isbn13: '9784872700657'
+    release_date: '1996-07'
+- type: shinsoban
+  label: 復刻版(マンガショップ)
+  imprint: マンガショップシリーズ
+  publisher: マンガショップ
+  volumes:
+  - number: 1
+    isbn13: '9784775910528'
+    release_date: '2005-11-03'
+  - number: 2
+    isbn13: '9784775910535'
+    release_date: '2005-11-03'
+- type: bunkobon
+  label: 文庫版(サンケイ児童文庫)
+  imprint: サンケイ児童文庫
+  publisher: 不明
+  volumes:
+  - number: 1
+    release_date: '1953-07-20'
+  - number: 2
+    release_date: '1953-09-25'
+  - number: 3
+    release_date: '1953-11-30'
+  - number: 4
+    release_date: '1953-12-28'
+  - number: 5
+    release_date: '1954-03-10'
+  - number: 6
+    release_date: '1954-05-25'
+  - number: 7
+    release_date: '1954-07-05'
+  - number: 8
+    release_date: '1954-09-25'
+  - number: 9
+    release_date: '1954-11-20'
+  - number: 10
+    release_date: '1955-01-25'
+  - number: 11
+    release_date: '1955-04-10'
+  - number: 12
+    release_date: '1955-06-30'
+  - number: 13
+    release_date: '1955-11-01'
+- type: bunkobon
+  label: 文庫版(角川文庫)
+  imprint: 角川文庫
+  publisher: 角川書店
+  volumes:
+  - number: 4
+    release_date: null
+  - number: 5
+    isbn13: '9784041547052'
+    release_date: null
+  - number: 13
+    isbn13: '9784041547137'
+    release_date: null
+  - number: 14
+    isbn13: '9784041547144'
+    release_date: null
+  - number: 15
+    isbn13: '9784041547151'
+    release_date: null
+  - number: 16
+    isbn13: '9784041547168'
+    release_date: null
+  - number: 18
+    isbn13: '9784041547182'
+    release_date: '1984-02'

@@ -1,0 +1,116 @@
+slug: akadou-suzunosuke
+canonical_label: 通常版
+canonical_publisher: 少年画報社
+canonical_imprint: ヒット・コミックス
+source: 'ギャラ型是正 2026-08-17(worksheetのA_SPLIT_WORK?判定だが実体はB型): 通常版タブに1957-59年の初出・1969-71年ヒット・コミックス・1991-92年漫画名作館・2007-08年小学館クリエイティブ復刻が混線し、12巻1992-01-22→14巻1957-12の34年逆行になっていた。MADBは初出runをレーベル無しの1 editionに v0や重複込みで詰め込んでいた。★主版は**巻が連番で揃い日付も全部ある最古**のヒット・コミックス(少年画報社 全8巻 1969-10-15〜1971-03-15)とし、1957-59年の初出(巻番号が飛び飛びで版元も両ソースに無い)はその他タブに版元不明で残した。漫画名作館(アース出版局 全13巻)と小学館クリエイティブ復刻(全5巻)もextra_editionsへ。※初出タブの日付は巻番号順に単調でないが、MADBの記録どおりで他の出典が無いため触らない。'
+volumes:
+  - number: 1
+    release_date: '1969-10-15'
+  - number: 2
+    release_date: '1970-01-01'
+  - number: 3
+    release_date: '1970-04-01'
+  - number: 4
+    release_date: '1970-07-15'
+  - number: 5
+    release_date: '1970-08-15'
+  - number: 6
+    release_date: '1970-12-01'
+  - number: 7
+    release_date: '1971-01-15'
+  - number: 8
+    release_date: '1971-03-15'
+extra_editions:
+- type: other
+  label: 初出単行本(1957-59・版元不明)
+  publisher: 不明
+  volumes:
+  - number: 1
+    release_date: '1957-07-01'
+  - number: 3
+    release_date: '1957-04'
+  - number: 5
+    release_date: '1957-07'
+  - number: 6
+    release_date: '1957-07'
+  - number: 9
+    release_date: '1957-03'
+  - number: 10
+    release_date: '1957-07'
+  - number: 11
+    release_date: '1957-07'
+  - number: 12
+    release_date: '1957-07'
+  - number: 13
+    release_date: '1957-10'
+  - number: 14
+    release_date: '1957-12'
+  - number: 15
+    release_date: '1958-01'
+  - number: 17
+    release_date: '1958-09'
+  - number: 19
+    release_date: '1959-02'
+- type: shinsoban
+  label: 漫画名作館(アース出版局)
+  imprint: 漫画名作館
+  publisher: アース出版局
+  volumes:
+  - number: 1
+    isbn13: '9784795298040'
+    release_date: '1991-07'
+  - number: 2
+    isbn13: '9784795298057'
+    release_date: '1991-08-07'
+  - number: 3
+    isbn13: '9784795298064'
+    release_date: '1991-08-07'
+  - number: 4
+    isbn13: '9784795298071'
+    release_date: '1991-09-20'
+  - number: 5
+    isbn13: '9784795298088'
+    release_date: '1991-09-20'
+  - number: 6
+    isbn13: '9784795298095'
+    release_date: '1991-10-16'
+  - number: 7
+    isbn13: '9784795298101'
+    release_date: '1991-10-16'
+  - number: 8
+    isbn13: '9784795298118'
+    release_date: '1991-11-19'
+  - number: 9
+    isbn13: '9784795298125'
+    release_date: '1991-11-19'
+  - number: 10
+    isbn13: '9784795298132'
+    release_date: '1991-12-18'
+  - number: 11
+    isbn13: '9784795298149'
+    release_date: '1991-12-18'
+  - number: 12
+    isbn13: '9784795298156'
+    release_date: '1992-01-22'
+  - number: 13
+    isbn13: '9784795298163'
+    release_date: '1992-01-22'
+- type: shinsoban
+  label: 小学館クリエイティブ復刻
+  publisher: 小学館クリエイティブ
+  volumes:
+  - number: 1
+    isbn13: '9784778030490'
+    release_date: '2007-11-04'
+  - number: 2
+    isbn13: '9784778030506'
+    release_date: '2007-11'
+  - number: 3
+    isbn13: '9784778030513'
+    release_date: '2007-11'
+  - number: 4
+    isbn13: '9784778030599'
+    release_date: '2008-01'
+  - number: 5
+    isbn13: '9784778030629'
+    release_date: '2008-02'
