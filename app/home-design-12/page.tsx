@@ -126,7 +126,7 @@ export default function Design12() {
       </div>
       <D3Nav />
       {/* SEO用の固定見出し(視覚上は小さく。巨大タイポはHeroD3内の装飾p=ランダム可) */}
-      <h1 className="sr-only">MANGAL — 日本の漫画データベース</h1>
+      <h1 className="sr-only">MANGAL — 漫画を探す・全巻一覧がわかる日本の漫画データベース</h1>
       <div className="overflow-hidden whitespace-nowrap border-b-[3px] border-[#0d0d0d] bg-[var(--color-accent)] py-1 text-[11px] font-black tracking-[0.14em] text-[#0d0d0d]">
         <span className="d3-marquee">{banner}{banner}</span>
       </div>
