@@ -1,0 +1,37 @@
+slug: kaze-no-saburou
+canonical_label: 通常版
+canonical_publisher: 小学館
+canonical_imprint: マンガくんコミックス
+source: 'ギャラ型是正 2026-08-17(20-29年帯): 通常版タブで後年の復刻が初版の巻枠を占有していたので、種2が持つimprintどおりに版を分離し初出runを主版に戻した。版元はISBN出版者記号から解決(記号が引けないrunは不明と明示)。'
+volumes:
+- number: 1
+  release_date: '1980-08'
+- number: 2
+  release_date: '1980-11'
+- number: 3
+  isbn13: '9784091501837'
+  release_date: '1981-03-05'
+- number: 4
+  isbn13: '9784091501844'
+  release_date: '1981-07-05'
+- number: 5
+  isbn13: '9784091501851'
+  release_date: '1981-08-05'
+extra_editions:
+- type: shinsoban
+  label: ビッグコミックス版
+  imprint: ビッグコミックス
+  publisher: 小学館
+  volumes:
+  - number: 1
+    isbn13: '9784091876218'
+    release_date: '2005-11'
+  - number: 2
+    isbn13: '9784091876225'
+    release_date: '2005-12'
+  - number: 3
+    isbn13: '9784091876232'
+    release_date: '2006-01'
+  - number: 4
+    isbn13: '9784091876249'
+    release_date: '2006-02'

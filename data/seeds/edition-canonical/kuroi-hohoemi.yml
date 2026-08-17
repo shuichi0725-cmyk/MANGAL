@@ -1,0 +1,26 @@
+slug: kuroi-hohoemi
+canonical_label: 通常版
+canonical_publisher: 秋田書店
+canonical_imprint: プリンセス・コミックス
+source: 'ギャラ型是正 2026-08-17(20-29年帯): 通常版タブで後年の復刻が初版の巻枠を占有していたので、種2が持つimprintどおりに版を分離し初出runを主版に戻した。版元はISBN出版者記号から解決(記号が引けないrunは不明と明示)。'
+volumes:
+- number: 1
+  release_date: '1982-11-25'
+- number: 2
+  isbn13: '9784253072151'
+  release_date: '1985-07'
+- number: 3
+  isbn13: '9784253072168'
+  release_date: '1985-09-05'
+- number: 4
+  isbn13: '9784253072175'
+  release_date: '1985-12-01'
+extra_editions:
+- type: shinsoban
+  label: プリンセスコミックス(2011)
+  imprint: Princess comics = プリンセスコミックス
+  publisher: 秋田書店
+  volumes:
+  - number: 1
+    isbn13: '9784253072144'
+    release_date: '2011-08-06'

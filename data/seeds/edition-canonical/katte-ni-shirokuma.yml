@@ -1,0 +1,37 @@
+slug: katte-ni-shirokuma
+canonical_label: 通常版
+canonical_publisher: 双葉社
+canonical_imprint: ACTION COMICS
+source: 'ギャラ型是正 2026-08-17(20-29年帯): 通常版タブで後年の復刻が初版の巻枠を占有していたので、種2が持つimprintどおりに版を分離し初出runを主版に戻した。版元はISBN出版者記号から解決(記号が引けないrunは不明と明示)。 かってにシロクマは1つのedition内に1987-89年の初版runと2015年の新装2冊が同居していたので発売日で切り分けた。'
+volumes:
+- number: 1
+  release_date: '1987-04'
+- number: 2
+  isbn13: '9784575930962'
+  release_date: '1987-09-28'
+- number: 3
+  isbn13: '9784575931075'
+  release_date: '1988-01-16'
+- number: 4
+  isbn13: '9784575931181'
+  release_date: '1988-05-23'
+- number: 5
+  isbn13: '9784575931372'
+  release_date: '1988-12'
+- number: 6
+  isbn13: '9784575931594'
+  release_date: '1989-05'
+extra_editions:
+- type: shinsoban
+  label: ACTION COMICS(2015新装)
+  imprint: ACTION COMICS
+  publisher: 双葉社
+  volumes:
+  - number: 1
+    isbn13: '9784575997132'
+    release_date: '2015-01'
+    volume_label: '上'
+  - number: 2
+    isbn13: '9784575997149'
+    release_date: '2015-01'
+    volume_label: '下'

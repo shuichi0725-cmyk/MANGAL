@@ -14,7 +14,7 @@ original_authors:
   role: writer
   kana: カジワライッキ
   romaji: kajiwaraikki
-publisher: pan-rolling
+publisher: futabasha
 magazine: null
 demographic: shounen
 genres:
@@ -27,27 +27,24 @@ wikidata_qid: Q11537576
 editions:
 - type: standard
   label: 通常版
-  publisher: パンローリング
+  publisher: 双葉社
   imprint: パワァコミックス
   volumes:
   - number: 1
-    volume_label: 上
     asin: null
-    isbn13: '9784775910085'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/7759/77591008.jpg?_ex=300x300
-    release_date: '2004-11-05'
+    isbn13: null
+    cover_url: null
+    release_date: 1979-05
   - number: 2
-    volume_label: 中
     asin: null
-    isbn13: '9784775910092'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/7759/77591009.jpg?_ex=300x300
-    release_date: '2004-11-05'
+    isbn13: null
+    cover_url: null
+    release_date: 1979-06
   - number: 3
-    volume_label: 下
     asin: null
-    isbn13: '9784775910108'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/7759/77591010.jpg?_ex=300x300
-    release_date: '2004-11-05'
+    isbn13: null
+    cover_url: null
+    release_date: 1979-07
   - number: 4
     asin: null
     isbn13: null
@@ -58,6 +55,29 @@ editions:
     isbn13: null
     cover_url: null
     release_date: 1979-11
+- type: shinsoban
+  label: 復刻版(マンガショップ)
+  publisher: マンガショップ
+  imprint: MANGA Shop Series
+  volumes:
+  - number: 1
+    asin: null
+    isbn13: '9784775910085'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/7759/77591008.jpg?_ex=300x300
+    release_date: '2004-11-05'
+    volume_label: 上
+  - number: 2
+    asin: null
+    isbn13: '9784775910092'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/7759/77591009.jpg?_ex=300x300
+    release_date: '2004-11-05'
+    volume_label: 中
+  - number: 3
+    asin: null
+    isbn13: '9784775910108'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/7759/77591010.jpg?_ex=300x300
+    release_date: '2004-11-05'
+    volume_label: 下
 publishers:
-- pan-rolling
+- futabasha
 catch: 狙撃されて命を落としたカラテ家が、父の科学で蘇る。だがその肉体は、人間の常識を遥かに超えてしまっていた。

@@ -1,0 +1,28 @@
+slug: tetsu-chan
+canonical_label: 通常版
+canonical_publisher: 秋田書店
+canonical_imprint: 少年チャンピオン・コミックス
+source: 'ギャラ型是正 2026-08-17(20-29年帯): 通常版タブで後年の復刻が初版の巻枠を占有していたので、種2が持つimprintどおりに版を分離し初出runを主版に戻した。版元はISBN出版者記号から解決。ISBNを持たない初出runの版元は、本セッションでNDLにより確認済みのレーベル対応(少年サンデーコミックス=小学館 / 少年チャンピオン・コミックス=秋田書店[がきデカ] / パワァコミックス=双葉社[戦国獅子伝] / Comic mate=若木書房[銭ゲバ])に限って明示し、根拠の無いものは不明のままにしている。'
+volumes:
+- number: 1
+  release_date: '1976-04'
+- number: 2
+  release_date: '1976-09'
+- number: 3
+  release_date: '1977-02'
+- number: 4
+  release_date: '1977-04'
+- number: 5
+  release_date: '1977-07-30'
+extra_editions:
+- type: shinsoban
+  label: さくらコミックス版
+  imprint: さくらコミックス
+  publisher: さくら出版
+  volumes:
+  - number: 1
+    isbn13: '9784916085351'
+    release_date: '1999-07'
+  - number: 2
+    isbn13: '9784916085511'
+    release_date: '1999-08-09'

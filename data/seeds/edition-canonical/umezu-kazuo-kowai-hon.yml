@@ -1,0 +1,118 @@
+slug: umezu-kazuo-kowai-hon
+canonical_label: 通常版
+canonical_publisher: 朝日ソノラマ
+suppress_types:
+- bunkobon
+source: 'ギャラ型是正 2026-08-17(20-29年帯): 1つのedition内に1981-82年の初版runと2003-04年の再刊run(いずれも朝日ソノラマ)が同居し、1巻2003-07→4巻1981-09-26の22年逆行になっていた。発売日で切り分けて初版runを主版に戻した。文庫タブ(楳図かずお恐怖文庫 2007-10)はMADB側の巻番号が全部1か2に潰れていて14冊中2冊しか出ていなかったので、suppress_types で作り直しISBN順に1-14へ採番した。'
+volumes:
+- number: 1
+  release_date: '1981-08'
+- number: 2
+  release_date: '1981-08'
+- number: 3
+  release_date: '1981-09'
+- number: 4
+  release_date: '1981-09-26'
+- number: 6
+  isbn13: '9784257900382'
+  release_date: '1982-07'
+- number: 7
+  isbn13: '9784257900399'
+  release_date: '1982-07'
+- number: 8
+  isbn13: '9784257900405'
+  release_date: '1982-08-16'
+- number: 9
+  isbn13: '9784257900412'
+  release_date: '1982-09'
+- number: 10
+  isbn13: '9784257900429'
+  release_date: '1982-10-28'
+extra_editions:
+- type: shinsoban
+  label: 2003-04年版
+  publisher: 朝日ソノラマ
+  volumes:
+  - number: 1
+    isbn13: '9784257904748'
+    release_date: '2003-07'
+  - number: 2
+    isbn13: '9784257904755'
+    release_date: '2003-07'
+  - number: 3
+    isbn13: '9784257904762'
+    release_date: '2003-08'
+  - number: 5
+    isbn13: '9784257904786'
+    release_date: '2003-09'
+  - number: 7
+    isbn13: '9784257904809'
+    release_date: '2003-10'
+  - number: 8
+    isbn13: '9784257904816'
+    release_date: '2003-11'
+  - number: 9
+    isbn13: '9784257904823'
+    release_date: '2003-12'
+  - number: 10
+    isbn13: '9784257904830'
+    release_date: '2004-01'
+  - number: 11
+    isbn13: '9784257904847'
+    release_date: '2004-02'
+  - number: 12
+    isbn13: '9784257904854'
+    release_date: '2004-03'
+  - number: 13
+    isbn13: '9784257904861'
+    release_date: '2004-04'
+  - number: 14
+    isbn13: '9784257904878'
+    release_date: '2004-05'
+- type: bunkobon
+  label: 文庫版(楳図かずお恐怖文庫)
+  imprint: 楳図かずお恐怖文庫
+  publisher: 朝日新聞社
+  volumes:
+  - number: 1
+    isbn13: '9784022671370'
+    release_date: '2007-10'
+  - number: 2
+    isbn13: '9784022671387'
+    release_date: '2007-10'
+  - number: 3
+    isbn13: '9784022671394'
+    release_date: '2007-10'
+  - number: 4
+    isbn13: '9784022671400'
+    release_date: '2007-10'
+  - number: 5
+    isbn13: '9784022671417'
+    release_date: '2007-10'
+  - number: 6
+    isbn13: '9784022671424'
+    release_date: '2007-10'
+  - number: 7
+    isbn13: '9784022671431'
+    release_date: '2007-10'
+  - number: 8
+    isbn13: '9784022671448'
+    release_date: '2007-10'
+  - number: 9
+    isbn13: '9784022671455'
+    release_date: '2007-10'
+  - number: 10
+    isbn13: '9784022671462'
+    release_date: '2007-10'
+  - number: 11
+    isbn13: '9784022671479'
+    release_date: '2007-10'
+  - number: 12
+    isbn13: '9784022671486'
+    release_date: '2007-10'
+  - number: 13
+    isbn13: '9784022671493'
+    release_date: '2007-10'
+  - number: 14
+    isbn13: '9784022671509'
+    release_date: '2007-10'
