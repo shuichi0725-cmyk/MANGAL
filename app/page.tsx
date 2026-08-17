@@ -5,6 +5,26 @@ export const metadata = { alternates: { canonical: "/" } };
 
 /** ホーム = 案12「D3ダークブルータル」(★2026-08-13 ユーザGO=本番採用。previewトライアル卒業)。
  *  旧=案11(2026-06-13採用、/home-design-11 に温存)。旧フィルター付きグリッドは /browse へ。 */
+
+// ★WebSite構造化データ(2026-08-17): Googleの「サイト名」表示(検索結果でドメインでなくMANGALと出す)用。
+//   Googleの要件=ホームページにのみ設置。作品頁のComicSeries/BreadcrumbListは実装済(2026-08-06)。
+//   SearchAction(サイトリンク検索ボックス)は2024年にGoogleが廃止済みのため付けない。
+const WEBSITE_LD = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "MANGAL",
+  alternateName: "MANGAL 日本の漫画データベース",
+  url: "https://mangal-db.com/",
+};
+
 export default function HomePage() {
-  return <Design12 />;
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(WEBSITE_LD) }}
+      />
+      <Design12 />
+    </>
+  );
 }
