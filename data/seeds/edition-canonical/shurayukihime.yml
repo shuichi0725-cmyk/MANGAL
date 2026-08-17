@@ -1,0 +1,75 @@
+slug: shurayukihime
+canonical_label: 通常版
+canonical_publisher: スタジオ・シップ
+canonical_imprint: 劇画KING SERIES
+source: 'ギャラ型B是正 2026-08-17: 通常版タブに1973年劇画KING SERIES・1985年バンブーコミックス・2001年角川単行本コミックス・2018-19年Comic魂別冊が混線し、1巻2018年/2巻1973年/3巻2001年/4-5巻1985年という45年逆行(頁の出版社も主婦の友社表示)。NDL SRU(creator=上村一夫)で分離確定= ①【King series】1973 復讐之章(オリオン出版)/斬流之章(スタジオ・シップ)/殺愛之章(スタジオ・シップ)=初出全3巻 ②バンブーコミックス 竹書房 1985 ③【単行本コミックス】角川書店 上下 2001.12(ISBN 4048534467/4048534475) ④小池書院「復活之章」上下 2006.12 ⑤【主婦の友ヒットシリーズ Comic魂別冊】はちどり 全4巻 2018.12-2019.3(修羅の怨念編/決意編/執念編/因果編)。①を主版に、他はextra_editionsへ。MADBが巻番号0/2/3や全部v1で持っていた分を発売日順に1..nへ採番しvolume_labelで章題を保持。★①の版元はNDL上1巻がオリオン出版・2-3巻がスタジオ・シップの併記だが、多数側のスタジオ・シップを版元に採った。バンブーコミックスは3巻が両ソースに無く欠番のまま。文庫タブ(秋田漫画文庫 小池一夫選集 1976)は混在なしのため温存。'
+volumes:
+- number: 1
+  release_date: '1973-06-25'
+  volume_label: 復讐之章
+- number: 2
+  release_date: '1973-07-30'
+  volume_label: 斬流之章
+- number: 3
+  release_date: '1973-08-30'
+  volume_label: 殺愛之章
+extra_editions:
+- type: other
+  label: バンブーコミックス版(竹書房)
+  imprint: バンブーコミックス
+  publisher: 竹書房
+  volumes:
+  - number: 1
+    release_date: '1985-06-20'
+  - number: 2
+    release_date: '1985-06-20'
+  - number: 4
+    release_date: '1985-08-20'
+  - number: 5
+    release_date: '1985-09-20'
+- type: shinsoban
+  label: 単行本コミックス(角川書店)
+  imprint: 単行本コミックス
+  publisher: 角川書店
+  volumes:
+  - number: 1
+    isbn13: '9784048534468'
+    release_date: '2001-12'
+    volume_label: 上巻
+  - number: 2
+    isbn13: '9784048534475'
+    release_date: '2001-12'
+    volume_label: 下巻
+- type: shinsoban
+  label: 復活之章(小池書院)
+  publisher: 小池書院
+  volumes:
+  - number: 1
+    isbn13: '9784862250612'
+    release_date: '2006-12'
+    volume_label: 上
+  - number: 2
+    isbn13: '9784862250629'
+    release_date: '2006-12'
+    volume_label: 下
+- type: shinsoban
+  label: Comic魂別冊(はちどり)
+  imprint: Comic魂別冊
+  publisher: はちどり
+  volumes:
+  - number: 1
+    isbn13: '9784073401094'
+    release_date: '2018-12'
+    volume_label: 修羅の怨念編
+  - number: 2
+    isbn13: '9784073401735'
+    release_date: '2019-01'
+    volume_label: 修羅の決意編
+  - number: 3
+    isbn13: '9784073402626'
+    release_date: '2019-02'
+    volume_label: 修羅の執念編
+  - number: 4
+    isbn13: '9784073403227'
+    release_date: '2019-03'
+    volume_label: 修羅の因果編

@@ -1,0 +1,41 @@
+slug: douchuushi
+canonical_label: 通常版
+canonical_publisher: オリオン出版
+canonical_imprint: 劇画KING SERIES
+source: 'ギャラ型B是正 2026-08-17: 通常版タブに1973-75年劇画KING SERIES・1984年劇画キングシリーズ・2012年小池書院King seriesが混線し、1巻2012年/2巻1975年/3巻2012年/4巻1984年という39年逆行(頁の出版社も小池書院表示)。NDL SRU(creator=小島剛夕)で分離確定= ①【劇画KING SERIES ; 6】オリオン出版 1973.10.30 /【King series】東海道編 スタジオ・シップ 1973 /【劇画king series ; 20】中仙道編 オリオン出版 1975.6 = 初出run(MADBの4冊 1973-06-20/1973-10-30/1975-01-31/1975-06 と対応) ②劇画キングシリーズ 1984.4-6 全4巻(MADBが2 sidに分裂していた分を統合) ③King series 小池書院 上下 2012.5-6 ④秋田漫画文庫 小池一夫選集 1976。①を主版に発売日順で1..4に採番、他はextra_editionsへ。★東海道編がMADBのどの日付に当たるかはNDLが月を持たないため断定できないので volume_label は MADB が明記している中仙道編(1975-06)にだけ付けた。文庫タブは混在なしのため温存。'
+volumes:
+- number: 1
+  release_date: '1973-06-20'
+- number: 2
+  release_date: '1973-10-30'
+- number: 3
+  release_date: '1975-01-31'
+- number: 4
+  release_date: '1975-06'
+  volume_label: 中仙道編
+extra_editions:
+- type: shinsoban
+  label: 劇画キングシリーズ版(1984)
+  imprint: 劇画キングシリーズ
+  volumes:
+  - number: 1
+    release_date: '1984-04'
+  - number: 2
+    release_date: '1984-04'
+  - number: 3
+    release_date: '1984-05'
+  - number: 4
+    release_date: '1984-06'
+- type: shinsoban
+  label: King series(小池書院)
+  imprint: King series
+  publisher: 小池書院
+  volumes:
+  - number: 1
+    isbn13: '9784862258250'
+    release_date: '2012-05'
+    volume_label: 上
+  - number: 2
+    isbn13: '9784862258267'
+    release_date: '2012-06'
+    volume_label: 下
