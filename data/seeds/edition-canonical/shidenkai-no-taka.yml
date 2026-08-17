@@ -1,0 +1,134 @@
+slug: shidenkai-no-taka
+canonical_label: 通常版
+canonical_publisher: 虫プロ商事
+canonical_imprint: 虫コミックス
+suppress_types:
+- bunkobon
+source: 'ギャラ型(ISBN消えるクラス) 2026-08-17: 虫コミックス全5巻(1971)をmainに。KC1990年版4冊は楽天題で『豪華愛蔵版』と判明→愛蔵版タブ。KCスペシャル(1987)は種2v1+楽天v2/v3で3冊。講談社漫画文庫は1976年版と2000年版(ISBN 7964-7995連番)に分離。My first big special=コンビニ判で不収載'
+volumes:
+- number: 5
+  release_date: '1971-10'
+- number: 4
+  release_date: '1971-09'
+- number: 3
+  release_date: '1971-08'
+- number: 2
+  release_date: '1971-07'
+- number: 1
+  release_date: '1971-06'
+extra_editions:
+- type: aizoban
+  label: 豪華愛蔵版(1990)
+  publisher: 講談社
+  volumes:
+  - number: 1
+    isbn13: '9784063133080'
+    release_date: '1990-08-17'
+  - number: 2
+    isbn13: '9784063133097'
+    release_date: '1990-09-17'
+  - number: 3
+    isbn13: '9784063133103'
+    release_date: '1990-10-17'
+  - number: 4
+    isbn13: '9784063133110'
+    release_date: '1990-11-17'
+- type: shinsoban
+  label: KCスペシャル(1987)
+  imprint: KCスペシャル
+  publisher: 講談社
+  volumes:
+  - number: 1
+    isbn13: '9784061013513'
+    release_date: '1987-10-06'
+  - number: 2
+    isbn13: '9784061013520'
+    release_date: '1987-11-06'
+  - number: 3
+    isbn13: '9784061013537'
+    release_date: '1987-12-05'
+- type: shinsoban
+  label: ちばてつや全集(1995)
+  imprint: ちばてつや全集
+  publisher: ホーム社
+  volumes:
+  - number: 4
+    isbn13: '9784834282290'
+    release_date: '1995-07'
+  - number: 3
+    isbn13: '9784834282283'
+    release_date: '1995-06-24'
+  - number: 2
+    isbn13: '9784834282276'
+    release_date: '1995-05'
+  - number: 1
+    isbn13: '9784834282269'
+    release_date: '1995-05'
+- type: bunkobon
+  label: 講談社漫画文庫(1976)
+  imprint: 講談社漫画文庫
+  publisher: 講談社
+  volumes:
+  - number: 6
+    release_date: '1976-11-26'
+  - number: 5
+    release_date: '1976-10-28'
+  - number: 4
+    release_date: '1976-09-24'
+  - number: 3
+    release_date: '1976-08-16'
+  - number: 2
+    release_date: '1976-07-05'
+  - number: 1
+    release_date: '1976-06-01'
+- type: bunkobon
+  label: 講談社漫画文庫(2000)
+  imprint: 講談社漫画文庫
+  publisher: 講談社
+  volumes:
+  - number: 4
+    isbn13: '9784062607995'
+    release_date: '2000-09'
+  - number: 3
+    isbn13: '9784062607988'
+    release_date: '2000-09'
+  - number: 2
+    isbn13: '9784062607971'
+    release_date: '2000-08'
+  - number: 1
+    isbn13: '9784062607964'
+    release_date: '2000-08'
+- type: bunkobon
+  label: ちばてつや漫画文庫(1978)
+  imprint: ちばてつや漫画文庫
+  publisher: 講談社
+  volumes:
+  - number: 6
+    release_date: '1978-11'
+  - number: 5
+    release_date: '1978-10'
+  - number: 4
+    release_date: '1978-10'
+  - number: 3
+    release_date: '1978-09'
+  - number: 2
+    release_date: '1978-08'
+  - number: 1
+    release_date: '1978-07'
+- type: bunkobon
+  label: 中公文庫コミック版(2006)
+  imprint: 中公文庫コミック版
+  publisher: 中央公論新社
+  volumes:
+  - number: 4
+    isbn13: '9784122047198'
+    release_date: '2006-07'
+  - number: 3
+    isbn13: '9784122047051'
+    release_date: '2006-06'
+  - number: 2
+    isbn13: '9784122046955'
+    release_date: '2006-05'
+  - number: 1
+    isbn13: '9784122046757'
+    release_date: '2006-04'

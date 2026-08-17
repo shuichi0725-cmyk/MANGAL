@@ -1,0 +1,63 @@
+slug: nagareita-ryuuji
+canonical_label: 通常版
+canonical_publisher: 実業之日本社
+canonical_imprint: マンサンコミックス
+source: 'ギャラ型(ISBN消えるクラス) 2026-08-17: マンサン原版v1-17(1984-88、v7-11は日付無)をmainに。v1/v2枠を占有していた1996-97年の新装2冊(ISBN 163789/163826連番・楽天確認)をタブへ分離'
+volumes:
+- number: 1
+  release_date: '1984-12'
+- number: 2
+  release_date: '1985-02'
+- number: 3
+  release_date: '1985-05'
+- number: 4
+  release_date: '1985-08'
+- number: 5
+  release_date: '1985-11'
+- number: 6
+  release_date: '1986-02'
+- number: 7
+  release_date: null
+- number: 8
+  release_date: null
+- number: 9
+  release_date: null
+- number: 10
+  release_date: null
+- number: 11
+  release_date: null
+- number: 12
+  release_date: '1987-05'
+- number: 13
+  release_date: '1987-09'
+- number: 14
+  release_date: '1987-11'
+- number: 15
+  release_date: '1988-03'
+- number: 16
+  release_date: '1988-05'
+- number: 17
+  release_date: '1988-05'
+extra_editions:
+- type: shinsoban
+  label: 新装版(1996)
+  imprint: マンサンコミックス
+  publisher: 実業之日本社
+  volumes:
+  - number: 1
+    isbn13: '9784408163789'
+    release_date: '1996-12-18'
+  - number: 2
+    isbn13: '9784408163826'
+    release_date: '1997-01-29'
+- type: shinsoban
+  label: 小池書院版(2009)
+  imprint: King series
+  publisher: 小池書院
+  volumes:
+  - number: 2
+    isbn13: '9784862255129'
+    release_date: '2009-09'
+  - number: 1
+    isbn13: '9784862255112'
+    release_date: '2009-09'

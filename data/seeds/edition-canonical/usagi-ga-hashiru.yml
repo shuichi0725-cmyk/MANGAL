@@ -1,0 +1,25 @@
+slug: usagi-ga-hashiru
+canonical_label: 通常版
+canonical_publisher: スタジオ・シップ
+canonical_imprint: 劇画キングシリーズ
+source: 'ギャラ型(ISBN消えるクラス) 2026-08-17: 初版(1980)v1-3と小池書院の上下2冊(1992)が同一editionに同居し逆行→上下版タブへ分離'
+volumes:
+- number: 1
+  release_date: '1980-05'
+- number: 2
+  release_date: '1980-08'
+- number: 3
+  release_date: '1980-11'
+extra_editions:
+- type: shinsoban
+  label: 上下版(1992)
+  publisher: 小池書院
+  volumes:
+  - number: 1
+    isbn13: '9784883151660'
+    release_date: '1992-07'
+    volume_label: '上'
+  - number: 2
+    isbn13: '9784883151707'
+    release_date: '1992-08'
+    volume_label: '下'

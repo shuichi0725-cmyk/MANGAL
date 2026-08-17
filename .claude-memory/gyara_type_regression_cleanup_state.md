@@ -1,6 +1,6 @@
 ---
 name: gyara_type_regression_cleanup_state
-description: ギャラ型(巻×発売日の大逆行)是正。検出器 573→100版。残=gyara-anomalies.tsv(reason: 済/正史/未了を追記済)。トリガー「ギャラ型続けて」
+description: ギャラ型(巻×発売日の大逆行)是正。検出器 573→67版。残=gyara-anomalies.tsv(reason: 済/正史/未了を追記済)。トリガー「ギャラ型続けて」
 metadata: 
   node_type: memory
   type: project
@@ -8,12 +8,20 @@ metadata:
   modified: 2026-08-17T08:37:04.216Z
 ---
 
-**トリガー「ギャラ型続けて」**。全帯一巡(Opus)で 573→130版、仕上げラウンド(Fable 2026-08-17)で ring17全消化→115版、種2外seed起因クラス14件+ムダヅモPoJ新頁分離で **→100版**(未了4件=NDL要: 俺の剣道/そして子連れ狼/新々上ってなンボ/嫌韓流=ledgerに理由つき)。残りは全部 **理由つきで台帳**にしてある。
+**トリガー「ギャラ型続けて」**。全帯一巡(Opus)で 573→130版、仕上げラウンド(Fable 2026-08-17)で ring17全消化→115版、種2外seed起因クラス14件+ムダヅモPoJ新頁分離で→100版、**「ISBN消える」クラス33頁+ふくふくNEW新頁分離で →67版**(2026-08-17)。残りは全部 **理由つきで台帳**にしてある。
 
 ## ★仕上げラウンド済(2026-08-17 Fable): ring17クラス全消化+三国恋戦記
 - 「自動生成は通るが鳴る」17頁を全裁定: 俊平(初版YMKC全11巻復元・4run完備)/オールド・ボーイ/AKIRA(架空27巻main修理+volume-exclude誤同定645057撤回+アニメコミック2種除去)/日本沈没(小説カッパ・ノベルス除去)/SWAN(МC全21巻再建+completed1981)/クイーンエメラルダス/タンク・タンクロー(1935初版)/ピカドンくん/ふしぎな少年(連載年1961-62)/てんとう虫の歌/0課の女/保健室のオバさん(架空ワイド2タブ解消)/光る風/花も嵐も(別作品1956断片除去)/EDEN千之ナイフ(**5作品混線・遠藤EDEN18巻の頁間ISBN重複解消**)/永遠の野原=**正史(許容)**確定(ワイド1-2巻の1995後追い=NDLレーベル番号#363/364)
 - 三国恋戦記=頁実体がとこしえの華墨と確定→ **rename**(sangoku-rensenki-tokoshie-no-kaboku)+オトメの兵法!頁へv5返却・ISBN重複×4解消
 - ★promote恒久修正2件: build_ymlのedition-overrides参照に公開slug変換(3412と同じ罠の別現場) / volume-exclude枝の無条件年再計算にoverrides年・status-corrガード(連載年が踏まれる)
+
+## ★ISBN消えるクラス済(2026-08-17 Fable): 33頁+新頁1で100→67版
+- 型=頁の孤児ISBN(種4/harvest由来)をcanonicalが消すため自動生成不可だった層。**楽天全量資産(isbn-title-map+rakuten-isbn.jsonl)の題名逆引き**で孤児を裁定し、canonicalに明示組込して解決
+- 全巻復元: GOLD(YKC全16巻)/だめんず(SPA!20+文庫15)/愉快な話(田島みるく版10)/さすらいのギャンブラー(よみうり10)/真・異種格闘(10)/修羅の門弐門(月マガKC18)/女喰い(10)/Sleeping beauty(オークラ4)
+- 続編分離の新頁: **ふくふくふにゃーんNEW**(全8巻2005-13、PoJ型=stub+canonical+overrides(anilist:false)+status)
+- 発見済の型: ①後年新装はISBN連番ブロックで見抜く(1987アリエス/1998物陰/2002ラブパック文庫/1995巨人の星文庫/2000紫電改文庫→別タブ) ②KC1990紫電改=楽天題で「豪華愛蔵版」判明 ③種4誤配(浅見光彦v20=傑作選)を除去 ④コンビニ判退場: スーパーワイド/Coins/YKベスト/プラチナ/マイパル/MFB/KPC/remix/ATCW/MOOK/Gコミ/テレビまんがえほん
+- ★罠: scratchpadのbuilder(build_wave1.py)はimportでも全再生成=手Edit後にimportすると上書きで戻る(実踏)。手直しはbuilder側に反映するか再Edit
+- 未了持ち越し: サスケ(1960年代run混線=NDL要)/魔界転生×2頁(とみ新蔵vs石川賢が同一内容=franchise分離要)/さすらい文庫v1・バカボンKC原版の刷日付(NDL要)
 
 ## いまの状態(2026-08-17)
 - 検出器 = `scripts/_audit-vol-date-regression.py`
@@ -21,7 +29,7 @@ metadata:
   (years / slug / stem / title / authors / edition / worst_pair / canonical有 / **reason**)
 - canonical seed は **589本**。健全性は `scripts/_check-edition-canonical.py` で常時検査
 
-### 残122頁の内訳(reasonごと)
+### 残の内訳(2026-08-17時点=67版。reasonは台帳が正)
 | 理由 | 頁 | どうすべきか |
 |---|---|---|
 | 自動生成すると本番から巻(ISBN)が消える | 36 | 種2から辿れない版が頁に載っている。種4/別seed由来を人が突合 |

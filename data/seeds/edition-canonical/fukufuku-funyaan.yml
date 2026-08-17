@@ -1,0 +1,96 @@
+slug: fukufuku-funyaan
+canonical_label: 通常版
+canonical_publisher: 講談社
+suppress_types:
+- bunkobon
+source: 'ギャラ型(ISBN消えるクラス) 2026-08-17: 本編=いの巻〜をの巻の12冊(はの巻=楽天ISBN 3492・日付は両ソース無)。v1-8枠に食い込んでいた『ふくふくふにゃーんNEW』(2005-13)は続編別作品のため新頁へ分離。文庫は巻名再編集6冊(2004-06)を刊行順採番'
+volumes:
+- number: 1
+  isbn13: '9784061783164'
+  release_date: '1990-08-11'
+  volume_label: 'いの巻'
+- number: 2
+  isbn13: '9784061783362'
+  release_date: '1991-05-13'
+  volume_label: 'ろの巻'
+- number: 3
+  isbn13: '9784061783492'
+  release_date: null
+  volume_label: 'はの巻'
+- number: 4
+  isbn13: '9784061783584'
+  release_date: '1993-08-10'
+  volume_label: 'にの巻'
+- number: 5
+  isbn13: '9784063177084'
+  release_date: '1995-07-13'
+  volume_label: 'ほの巻'
+- number: 6
+  isbn13: '9784063177749'
+  release_date: '1996-10-11'
+  volume_label: 'への巻'
+- number: 7
+  isbn13: '9784063178401'
+  release_date: '1998-01-13'
+  volume_label: 'との巻'
+- number: 8
+  isbn13: '9784063179378'
+  release_date: '1999-10-13'
+  volume_label: 'ちの巻'
+- number: 9
+  isbn13: '9784063189896'
+  release_date: '2000-10-13'
+  volume_label: 'りの巻'
+- number: 10
+  isbn13: '9784063190434'
+  release_date: '2002-02'
+  volume_label: 'ぬの巻'
+- number: 11
+  isbn13: '9784063191011'
+  release_date: '2003-05'
+  volume_label: 'るの巻'
+- number: 12
+  isbn13: '9784063191431'
+  release_date: '2004-08'
+  volume_label: 'をの巻'
+extra_editions:
+- type: shinsoban
+  label: ワイドKC(1999)
+  imprint: ワイドKC Be・love
+  publisher: 講談社
+  volumes:
+  - number: 2
+    isbn13: '9784063374100'
+    release_date: '1999-07'
+  - number: 1
+    isbn13: '9784063374094'
+    release_date: '1999-07'
+- type: bunkobon
+  label: 講談社漫画文庫(2004)
+  imprint: 講談社漫画文庫
+  publisher: 講談社
+  volumes:
+  - number: 1
+    isbn13: '9784063608656'
+    release_date: '2004-12'
+    volume_label: 'こたつの巻'
+  - number: 2
+    isbn13: '9784063608663'
+    release_date: '2004-12'
+    volume_label: 'ごはんの巻'
+  - number: 3
+    isbn13: '9784063609264'
+    release_date: '2005-05'
+    volume_label: '縁側の巻'
+  - number: 4
+    isbn13: '9784063609271'
+    release_date: '2005-05'
+    volume_label: '原っぱの巻'
+  - number: 5
+    isbn13: '9784063609950'
+    release_date: '2006-01'
+    volume_label: 'じろりの巻'
+  - number: 6
+    isbn13: '9784063609967'
+    release_date: '2006-01'
+    volume_label: 'にんまりの巻'

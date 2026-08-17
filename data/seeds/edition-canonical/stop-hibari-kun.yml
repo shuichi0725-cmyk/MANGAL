@@ -1,0 +1,55 @@
+slug: stop-hibari-kun
+canonical_label: 通常版
+canonical_publisher: 集英社
+canonical_imprint: ジャンプコミックス
+source: 'ギャラ型(ISBN消えるクラス) 2026-08-17: ジャンプコミックス初版v1-4をmainに。無レーベルeditionの正体=双葉社版(1991・楽天確認)と小学館クリエイティブ復刻(2009-10)の2runで分離。Rare mix comics=コンビニremixで不収載'
+volumes:
+- number: 1
+  release_date: '1982-11-15'
+- number: 2
+  isbn13: '9784088513928'
+  release_date: '1983-03-15'
+- number: 3
+  isbn13: '9784088513935'
+  release_date: '1983-06-15'
+- number: 4
+  isbn13: '9784088513942'
+  release_date: '1984-01-15'
+extra_editions:
+- type: shinsoban
+  label: 双葉社版(1991)
+  publisher: 双葉社
+  volumes:
+  - number: 1
+    isbn13: '9784575281132'
+    release_date: '1991-07-01'
+  - number: 2
+    isbn13: '9784575281149'
+    release_date: '1991-07'
+  - number: 3
+    isbn13: '9784575281156'
+    release_date: '1991-07-01'
+- type: shinsoban
+  label: 復刻版(2009)
+  publisher: 小学館クリエイティブ
+  volumes:
+  - number: 1
+    isbn13: '9784778031190'
+    release_date: '2009-07'
+  - number: 2
+    isbn13: '9784778031206'
+    release_date: '2009-10'
+  - number: 3
+    isbn13: '9784778031213'
+    release_date: '2010-03'
+- type: bunkobon
+  label: ホーム社漫画文庫(2004)
+  imprint: ホーム社漫画文庫
+  publisher: ホーム社
+  volumes:
+  - number: 2
+    isbn13: '9784834272901'
+    release_date: '2004-01'
+  - number: 1
+    isbn13: '9784834272895'
+    release_date: '2004-01'

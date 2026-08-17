@@ -1,0 +1,66 @@
+slug: love-pack
+canonical_label: 通常版
+canonical_publisher: 講談社
+canonical_imprint: 講談社コミックスフレンド
+suppress_types:
+- bunkobon
+- deluxe
+source: 'ギャラ型(ISBN消えるクラス) 2026-08-17: 文庫editionに1978初版と2002新装(ISBN 4306/4313連番)が同居し逆行→2タブへ分離'
+volumes:
+- number: 3
+  isbn13: '9784061096035'
+  release_date: '1974-03'
+- number: 2
+  isbn13: '9784061096028'
+  release_date: '1974-02'
+- number: 1
+  isbn13: '9784061096011'
+  release_date: '1974-02'
+extra_editions:
+- type: shinsoban
+  label: KCスペシャル(1985)
+  imprint: KCスペシャル
+  publisher: 講談社
+  volumes:
+  - number: 2
+    isbn13: '9784061011410'
+    release_date: '1985-07-06'
+  - number: 1
+    isbn13: '9784061011403'
+    release_date: '1985-06-06'
+- type: deluxe
+  label: KCデラックス(1997)
+  imprint: KCデラックス
+  publisher: 講談社
+  volumes:
+  - number: 3
+    isbn13: '9784063198188'
+    release_date: '1997-06-13'
+  - number: 2
+    isbn13: '9784063198171'
+    release_date: '1997-06-13'
+  - number: 1
+    isbn13: '9784063198164'
+    release_date: '1997-06-13'
+- type: bunkobon
+  label: 講談社漫画文庫(1978)
+  imprint: 講談社漫画文庫
+  publisher: 講談社
+  volumes:
+  - number: 3
+    release_date: '1978-05-25'
+  - number: 2
+    release_date: '1978-04-10'
+  - number: 1
+    release_date: '1978-03-31'
+- type: bunkobon
+  label: 講談社漫画文庫(2002)
+  imprint: 講談社漫画文庫
+  publisher: 講談社
+  volumes:
+  - number: 2
+    isbn13: '9784063604313'
+    release_date: '2002-12'
+  - number: 1
+    isbn13: '9784063604306'
+    release_date: '2002-12'

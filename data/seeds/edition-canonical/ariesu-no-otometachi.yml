@@ -1,0 +1,114 @@
+slug: ariesu-no-otometachi
+canonical_label: 通常版
+canonical_publisher: 講談社
+canonical_imprint: 講談社コミックスフレンド
+suppress_types:
+- bunkobon
+source: 'ギャラ型(ISBN消えるクラス) 2026-08-17: フレンド版editionに1974-75初版(ISBN無)と1987新装一括(ISBN 1315-1360連番)が同居し逆行→新装をタブへ分離。文庫2種もタブ化'
+volumes:
+- number: 6
+  release_date: '1975-03-05'
+- number: 7
+  release_date: '1975-04-10'
+- number: 5
+  release_date: '1974-12'
+- number: 4
+  release_date: '1974-08'
+- number: 3
+  release_date: '1974-06'
+- number: 2
+  release_date: '1974-05'
+- number: 1
+  release_date: '1974-05'
+extra_editions:
+- type: shinsoban
+  label: 新装版(1987)
+  imprint: 講談社コミックスフレンド
+  publisher: 講談社
+  volumes:
+  - number: 6
+    isbn13: '9784061761360'
+    release_date: '1987-06'
+  - number: 4
+    isbn13: '9784061761346'
+    release_date: '1987-05-14'
+  - number: 3
+    isbn13: '9784061761339'
+    release_date: '1987-04-14'
+  - number: 5
+    isbn13: '9784061761353'
+    release_date: '1987-05-14'
+  - number: 2
+    isbn13: '9784061761322'
+    release_date: '1987-04-14'
+  - number: 1
+    isbn13: '9784061761315'
+    release_date: '1987-04'
+- type: shinsoban
+  label: KCスペシャル(1983)
+  imprint: KCスペシャル
+  publisher: 講談社
+  volumes:
+  - number: 4
+    isbn13: '9784061010574'
+    release_date: '1983-10'
+  - number: 3
+    isbn13: '9784061010567'
+    release_date: '1983-10'
+  - number: 2
+    isbn13: '9784061010550'
+    release_date: '1983-09'
+  - number: 1
+    isbn13: '9784061010543'
+    release_date: '1983-09'
+- type: shinsoban
+  label: NTT出版マンガ傑作選(1996)
+  imprint: NTT出版マンガ傑作選
+  publisher: NTT出版
+  volumes:
+  - number: 4
+    isbn13: '9784871884303'
+    release_date: '1996-03-28'
+  - number: 3
+    isbn13: '9784871884297'
+    release_date: '1996-03-28'
+  - number: 2
+    isbn13: '9784871884266'
+    release_date: '1996-01-25'
+  - number: 1
+    isbn13: '9784871884259'
+    release_date: '1996-01-25'
+- type: bunkobon
+  label: 講談社漫画文庫(1998)
+  imprint: 講談社漫画文庫
+  publisher: 講談社
+  volumes:
+  - number: 4
+    isbn13: '9784062604437'
+    release_date: '1998-06-12'
+  - number: 3
+    isbn13: '9784062604420'
+    release_date: '1998-06-12'
+  - number: 2
+    isbn13: '9784062604413'
+    release_date: '1998-06-12'
+  - number: 1
+    isbn13: '9784062604406'
+    release_date: '1998-06-12'
+- type: bunkobon
+  label: 中公文庫コミック版(2005)
+  imprint: 中公文庫コミック版
+  publisher: 中央公論新社
+  volumes:
+  - number: 4
+    isbn13: '9784122046061'
+    release_date: '2005-10'
+  - number: 3
+    isbn13: '9784122045903'
+    release_date: '2005-09'
+  - number: 2
+    isbn13: '9784122045750'
+    release_date: '2005-08'
+  - number: 1
+    isbn13: '9784122045620'
+    release_date: '2005-07'

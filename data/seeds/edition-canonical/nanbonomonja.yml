@@ -1,0 +1,29 @@
+slug: nanbonomonja
+canonical_label: 通常版
+canonical_publisher: 日本文華社
+canonical_imprint: 文華コミックス
+source: 'ギャラ型(ISBN消えるクラス) 2026-08-17: 初版(1985)v1-4を主版に、1990年の再版2冊(ISBN 3011/3080連番)をタブへ分離'
+volumes:
+- number: 1
+  isbn13: '9784821191208'
+  release_date: '1985-05'
+- number: 2
+  release_date: '1985-06-25'
+- number: 3
+  isbn13: '9784821191253'
+  release_date: '1985-08-01'
+- number: 4
+  isbn13: '9784821191284'
+  release_date: '1985-11'
+extra_editions:
+- type: shinsoban
+  label: 文華コミックス(1990)
+  imprint: 文華コミックス
+  publisher: 日本文華社
+  volumes:
+  - number: 1
+    isbn13: '9784821193011'
+    release_date: '1990-04'
+  - number: 2
+    isbn13: '9784821193080'
+    release_date: '1990-05'
