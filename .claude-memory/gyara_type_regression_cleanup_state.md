@@ -1,14 +1,19 @@
 ---
 name: gyara_type_regression_cleanup_state
-description: ギャラ型(巻×発売日の大逆行)是正。検出器 573→130版まで到達。残122頁は理由つきで gyara-anomalies.tsv に台帳化。トリガー「ギャラ型続けて」
+description: ギャラ型(巻×発売日の大逆行)是正。検出器 573→115版。残=gyara-anomalies.tsv(reason: 済/正史/未了を追記済)。トリガー「ギャラ型続けて」
 metadata: 
   node_type: memory
   type: project
   originSessionId: 11f90ab9-a3a1-4cd0-b8a8-b5174b421920
-  modified: 2026-08-17T07:43:03.509Z
+  modified: 2026-08-17T08:37:04.216Z
 ---
 
-**トリガー「ギャラ型続けて」**。全帯を一巡し **573版 → 130版**(122頁)。残りは全部 **理由つきで台帳**にしてある。
+**トリガー「ギャラ型続けて」**。全帯一巡(Opus)で 573→130版、仕上げラウンド(Fable 2026-08-17)で **→115版**。残りは全部 **理由つきで台帳**にしてある。
+
+## ★仕上げラウンド済(2026-08-17 Fable): ring17クラス全消化+三国恋戦記
+- 「自動生成は通るが鳴る」17頁を全裁定: 俊平(初版YMKC全11巻復元・4run完備)/オールド・ボーイ/AKIRA(架空27巻main修理+volume-exclude誤同定645057撤回+アニメコミック2種除去)/日本沈没(小説カッパ・ノベルス除去)/SWAN(МC全21巻再建+completed1981)/クイーンエメラルダス/タンク・タンクロー(1935初版)/ピカドンくん/ふしぎな少年(連載年1961-62)/てんとう虫の歌/0課の女/保健室のオバさん(架空ワイド2タブ解消)/光る風/花も嵐も(別作品1956断片除去)/EDEN千之ナイフ(**5作品混線・遠藤EDEN18巻の頁間ISBN重複解消**)/永遠の野原=**正史(許容)**確定(ワイド1-2巻の1995後追い=NDLレーベル番号#363/364)
+- 三国恋戦記=頁実体がとこしえの華墨と確定→ **rename**(sangoku-rensenki-tokoshie-no-kaboku)+オトメの兵法!頁へv5返却・ISBN重複×4解消
+- ★promote恒久修正2件: build_ymlのedition-overrides参照に公開slug変換(3412と同じ罠の別現場) / volume-exclude枝の無条件年再計算にoverrides年・status-corrガード(連載年が踏まれる)
 
 ## いまの状態(2026-08-17)
 - 検出器 = `scripts/_audit-vol-date-regression.py`
