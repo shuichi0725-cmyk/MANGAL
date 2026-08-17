@@ -1,55 +1,49 @@
 ---
 name: gyara_type_regression_cleanup_state
-description: ギャラ型(巻×発売日の大逆行)是正。worksheet 80件中74件完了・残6件は理由つき保留。トリガー「ギャラ型続けて」
+description: ギャラ型(巻×発売日の大逆行)是正。検出器 573→130版まで到達。残122頁は理由つきで gyara-anomalies.tsv に台帳化。トリガー「ギャラ型続けて」
 metadata: 
   node_type: memory
   type: project
   originSessionId: 11f90ab9-a3a1-4cd0-b8a8-b5174b421920
-  modified: 2026-08-17T02:13:27.844Z
+  modified: 2026-08-17T07:43:03.509Z
 ---
 
-**トリガー「ギャラ型続けて」**。worksheet(30年+の80頁)は **74件是正済 / 残6件**。次は残6件か、30年未満の層へ広げるかをユーザに確認する。
+**トリガー「ギャラ型続けて」**。全帯を一巡し **573版 → 130版**(122頁)。残りは全部 **理由つきで台帳**にしてある。
 
-## 状態(2026-08-17 一巡完了)
-- 検出器 = `scripts/_audit-vol-date-regression.py`(月次サニティ登録済)。flag **489版**(初回573)
-- worksheet = `docs/production-diagnostics/vol-date-regression-worksheet.tsv`
-  - B_REPRINT_MIX 49件 → 残5 / A_SPLIT_WORK? 28件 → 残1 / C_INTERNAL_MIX 3件 → 残0
-  - ★**A_SPLIT_WORK?はほぼ誤分類**だった。複数sidに見えたのはクラスタリングの副作用(著者欄に「白泉社」「花とゆめコミックス編集部」等が混入して副次sidができる)で、実体は復刻混在(B型)。真に別作品が同居していたのは銭形平次だけ
-- 是正内容は `data/seeds/edition-canonical/*.yml` の source: と `edition-fix-changelog.jsonl` に全部書いてある
+## いまの状態(2026-08-17)
+- 検出器 = `scripts/_audit-vol-date-regression.py`
+- ★**残りの一次ソース = `docs/production-diagnostics/gyara-anomalies.tsv`**
+  (years / slug / stem / title / authors / edition / worst_pair / canonical有 / **reason**)
+- canonical seed は **589本**。健全性は `scripts/_check-edition-canonical.py` で常時検査
 
-### 残6件(理由つき保留)
-- **鉄腕アトム** = 最難関。9 sid / 33 edition / volume行267。うち ed42075 が「レーベル名なし42冊」でISBN接頭辞で4 runに割れる。専用の腰を据えた回が要る
-- **SWAN** = 続編『ドイツ編』『モスクワ編』(平凡社)が同一頁に混在=A型判断が要る。初出はマーガレット・コミックス全21巻(集英社1977-81)
-- **クイーンエメラルダス** = 初出の講談社コミックス全4巻がMADBに無く4run混線
-- **流れ星五十三次** = サンコミックスのv5だけ1968-07-25でv1-4の1973から5年逆行。NDLに当該runが無く裁定不能
-- **ピカドンくん / タンク・タンクロー** = MADBの巻が全てv0=巻番号不明
+### 残122頁の内訳(reasonごと)
+| 理由 | 頁 | どうすべきか |
+|---|---|---|
+| 自動生成すると本番から巻(ISBN)が消える | 36 | 種2から辿れない版が頁に載っている。種4/別seed由来を人が突合 |
+| 種2のrunが1本以下 | 18 | 頁の混線が種2起因でない(別seedが作っている)。seed側を見る |
+| 自動生成は通るが検出器がまだ鳴る | 17 | extraタブ側の混在。切り分け粒度を上げる |
+| 連載中の可能性(直近18ヶ月に新刊) | 14 | ★canonicalは巻を固定するので使わない。`release-date-override.jsonl` で日付だけ直す |
+| 主版候補の中で既に逆行(1 edition内が混成) | 22 | MADB行自体が混成。発売日ギャップで切れないもの |
+| 版が14〜31本 | 17 | 手塚/横山クラスの多版頁。人手 |
 
-### 別頁として登録すべき候補(canonical化で各頁から外れた別作品)
-- 女帝エカテリーナ ← 榎本由美『世界美女秘話シリーズ』(9784792604035 2007-09)
-- サハラ ← 高口里純 Emerald comics(2014-02)
-- 春が来た ← 新田真子 ワールドコミックススペシャル(9784765903783 1993-10)
-- 沙漠の魔王 ← 林よしお『砂漠の魔王』(新生閣漫画絵本)
-- 銭形平次捕物控 = 同一原作の3社別コミカライズが同居(石森章太郎プロ/大石賢一/さとう勝己)。頁分離が本来の解
+## 道具(この柱の資産)
+- `scripts/_gyara-worksheet.py --min N --max M` = 帯ごとの作業台帳(頁の版タブ構成 + 種2クラスタを1行に)
+- `scripts/_check-edition-canonical.py` = canonical seed の番人(後述の罠を全部見る)
+- `.cache/gyara/canon.py` = 種2のeditionからcanonicalを組み立てる。版元は**本番66k頁から学習したISBN出版者記号→社名表**(1,629記号)+NDL確認済みレーベル表から解決。引けなければ「不明」
+- `.cache/gyara/autofix.py` = 1頁分を全自動で組み立て。**判断が要る形は作らずに理由を返す**
+- `.cache/gyara/run_tier.py <worksheet> <tier>` = 帯を丸ごと処理(生成→反映→ISBN差分検証→減っていたら差し戻して台帳に記録)
 
-## レシピ
-1. worksheetから候補 → `python .cache/gyara/dumpvol.py <sid...>` で種2の巻明細dump
-2. **NDL SRU**で裏取り= `python scripts/_lookup.py --title X --creator Y --live`(1.2秒/req。`--creator`が無いとNDLを叩かず楽天になる。タイムアウトしたら1回リトライ)
-3. **edition-canonical/*.yml**(キー=SRC slug)で再構築: volumes=**完備最古**run / 他は全て extra_editions
-4. ★**`python scripts/_check-edition-canonical.py`** を必ず走らせる(下記の番人)
-5. changelog1行 → `_reflect-targeted.py --only <slugs>` → **「消えたISBN」警告を必ず検分** → 検出器再走 → preview cp+索引 → commit/push
+## 厳守(実踏済みの罠。全部 _check-edition-canonical.py が見る)
+- ★**壊れたcanonicalは無警告でskip**される(promoteが`except: continue`)。reflectは成功と表示する
+- ★**canonicalは種4(volumes-supplement)を上書きして消す**。NDL裏取り済みの取込もれ巻が黙って落ちる。既存589本を掃引して5頁15巻を検出・4頁復帰済み。残5件(golgo-13/kinpeibai/majima-kun×2/puroresu-super-star-rendetsu)は**種4とcanonicalが別の版のISBNを主張**していて機械的に決められない=人の裁定待ち
+- ★**連載中作品にcanonicalを当てるな**(巻が固定され続刊が出ない)。日付1件だけの問題は `release-date-override.jsonl`
+- ★**同名レーベルでも巻番号が重なる版は統合するな**。講談社漫画文庫の1990年代版と2001年版のような別セットを束ねると dedup が実在巻をISBNごと潰す(14頁で実踏)
+- ★**1 editionの中に年代違いの2runが同居**する。巻番号順に5年以上逆行するrunは発売日ギャップ8年超で切る
+- ★**既存seedを再dumpするな**。`compact_edition`/`routing`/`versions` 等の未知キーを落とす(ゴルゴ13で173巻を消して差し戻した)。1巻足すだけなら該当行だけをテキストで挿す
+- ★**反映の「消えたISBN N件」は必ず追う**。生成前後で頁のISBN集合を比較するのが確実
+- ★**文庫タブの混在は suppress_types:[bunkobon] + bunkobonのextra_editions** でしか直らない
+- ★**extra_editions は既存タブを消さない** → 種2側に同じ版が居ると二重タブ
+- ★**canonicalのキーは SRC slug(ファイル名)**。検出器が出すのは公開slugなので必ず引き直す(ymlの`slug:`フィールドで逆引き)
+- **捏造しない**: 両ソースに無い巻は入れない/欠番は空けたまま/版元が不明なら「不明」と書く
 
-## 厳守(実踏済みの罠)
-- ★★**壊れたcanonicalは無警告でskipされる**: promoteの get_edition_canonical() が `except: continue`。YAMLが壊れていてもreflectは「再生成N/検証ゲートOK」と成功を返す。→ **新設した番人 `scripts/_check-edition-canonical.py`**(パース/slug一致/死にキー/巻番号重複/release_dateが文字列か/isbn13が13桁)を毎回走らせる。実験人形ダミー・オスカーで実踏(volumes配下のインデント2スペースと0スペースの混在)
-- ★**反映の「消えたISBN N件」は必ず追う**。少年ケニヤ(角川文庫11/12/17巻)とダミー・オスカー(漫画スーパーワイド5巻)はこの警告だけが取りこぼしのサインだった
-- ★**連載中の作品にcanonicalを使うな**(巻が固定され続巻が出なくなる)。1巻だけ重版日で逆行しているような型は **`data/seeds/release-date-override.jsonl`**(isbn13→date の強制上書き)で直す。キン肉マン(93巻)で実証
-- ★**文庫タブの混在は canonical では直らない** → `suppress_types: [bunkobon]` + bunkobonのextra_editionsで作り直す(canonicalが自動で作り直すのは standard/aizoban だけ)
-- ★**extra_editions は既存タブを消さない** → 種2側に同じ版が居ると**二重タブ**になる(black-angels)。extraを足す時は suppress_types をセットで
-- ★**版元が両ソースに無い版は `publisher: 不明`** と明示してよい(pub_key_of が解決せず publishers[] を汚さない)
-- ★**レーベル名が不明な主版は `canonical_label` と `canonical_imprint` を両方省略**(labelだけ書くとレーベル欄に「通常版」が出る)
-- ★**古いvolume-excludeが版分離の邪魔をする**(2026-07-04の「激マン型混入」67件)。canonical新設時は該当ISBNが除外入りしていないか見る
-- ★**work-level publisher は最多巻の社の多数決**(canonical後に再導出)。温存タブのpublisherが空だと化ける
-- **捏造しない**: 両ソースに無い巻は入れない/欠番は空けたまま/1冊しか記録の無い版はその1冊だけで立てる。NDL不在≠不存在
-- release_dateは**必ず引用符**(裸のフル日付はYAMLがdate型にする= shumariで実踏)
-- **A型(別作品混在)はギャラ式**: 同_skeyのstub×2 + edition-overrides(公開slugキー)+ `"anilist": false`
-
-関連: [[edition_canonical_mechanism]] [[edition_mix_same_author_ayako]] [[never_delete_because_broken]] [[merge_needs_external_proof]]
+関連: [[edition_canonical_mechanism]] [[never_delete_because_broken]] [[merge_needs_external_proof]]
