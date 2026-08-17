@@ -1,0 +1,102 @@
+slug: yuuyake-banchiyou
+canonical_label: 通常版
+canonical_publisher: 秋田書店
+canonical_imprint: サンデーコミックス
+source: 'ギャラ型是正 2026-08-17(worksheetのA_SPLIT_WORK?判定だが実体はB型): 初出のサンデーコミックス(秋田書店 全17巻 1968-1971)がMADB上で3 sid × SUNDAY COMICS/サンデーコミックスの表記ゆらぎに散らばり、そこへ1999-2000年の漫画名作館スペシャル(アース出版局 全7巻)が1-7巻枠として食い込み、14巻には1986年サンケイコミックスの日付が入っていた(3巻2000-01→8巻1969-08-30の31年逆行)。散らばっていた初出全17巻を1本に統合して主版に戻し、サンケイコミックス版(全15巻 1986)と漫画名作館スペシャル(全7巻 1999-2000)はextra_editionsへ。NDL SRU(creator=荘司としお)は本作の版元が秋田書店であることを裏づける(小説夕やけ番長 昭和44 秋田書店 / 冒険王付録 1968.8 秋田書店)。2巻と14巻の発売日は両ソースに無いので空のまま。'
+volumes:
+- number: 1
+  release_date: '1968-04-25'
+- number: 2
+  release_date: null
+- number: 3
+  release_date: '1968-09-20'
+- number: 4
+  release_date: '1968-12-30'
+- number: 5
+  release_date: '1969-02-25'
+- number: 6
+  release_date: '1969-03-25'
+- number: 7
+  release_date: '1969-05-30'
+- number: 8
+  release_date: '1969-08-30'
+- number: 9
+  release_date: '1969-12-30'
+- number: 10
+  release_date: '1970-03-31'
+- number: 11
+  release_date: '1970-08-10'
+- number: 12
+  release_date: '1970-09-10'
+- number: 13
+  release_date: '1970-10-05'
+- number: 14
+  release_date: null
+- number: 15
+  release_date: '1970-12-05'
+- number: 16
+  release_date: '1971-02-05'
+- number: 17
+  release_date: '1971-04-05'
+extra_editions:
+- type: shinsoban
+  label: サンケイコミックス版
+  imprint: サンケイコミックス
+  publisher: サンケイ出版
+  volumes:
+  - number: 1
+    release_date: '1986-05-01'
+  - number: 2
+    release_date: '1986-05-01'
+  - number: 3
+    release_date: '1986-05-01'
+  - number: 4
+    release_date: '1986-06-01'
+  - number: 5
+    release_date: '1986-06-01'
+  - number: 6
+    release_date: '1986-07-01'
+  - number: 7
+    release_date: '1986-07-01'
+  - number: 8
+    release_date: '1986-08'
+  - number: 9
+    release_date: '1986-08'
+  - number: 10
+    release_date: '1986-09-01'
+  - number: 11
+    release_date: '1986-09-01'
+  - number: 12
+    release_date: '1986-10'
+  - number: 13
+    release_date: '1986-10'
+  - number: 14
+    release_date: '1986-11'
+  - number: 15
+    release_date: '1986-11'
+- type: shinsoban
+  label: 漫画名作館スペシャル(アース出版局)
+  imprint: 漫画名作館スペシャル
+  publisher: アース出版局
+  volumes:
+  - number: 1
+    isbn13: '9784872700862'
+    release_date: '1999-10'
+  - number: 2
+    isbn13: '9784872700879'
+    release_date: '1999-11'
+  - number: 3
+    isbn13: '9784872700886'
+    release_date: '2000-01'
+  - number: 4
+    isbn13: '9784872700893'
+    release_date: '2000-02'
+  - number: 5
+    isbn13: '9784872700909'
+    release_date: '2000-03'
+  - number: 6
+    isbn13: '9784872700916'
+    release_date: '2000-04'
+  - number: 7
+    isbn13: '9784872700923'
+    release_date: '2000-05'

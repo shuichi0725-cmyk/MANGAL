@@ -1,0 +1,60 @@
+slug: haru-ga-kita
+canonical_label: 通常版
+canonical_publisher: 双葉社
+canonical_imprint: アクション・コミックス
+source: 'ギャラ型是正 2026-08-17(worksheetのA_SPLIT_WORK?判定。実体はB型+別作品1冊): 通常版タブの1-6巻枠を2012年の小池書院King seriesが占有し、初出アクション・コミックス(双葉社 全10巻 1976-01〜1978-10)は7-10巻の残骸だけになっていた(36年逆行)。初出run全10巻を主版に戻し、劇画キングシリーズ(1990。MADBが2 sidに割っていた1巻と3巻を統合)とKing series全6巻(2012)はextra_editionsへ。My first big special(2022-23 全6冊)はコンビニ本のため掲載対象外。★MADBが同じクラスタに入れていた「ワールドコミックススペシャル」1冊(9784765903783・1993-10・著者=新田真子)は**別人の別作品「春が来た」**なので本seedには含めない=この頁から外れる。別頁として登録すべき候補として記録する。'
+volumes:
+- number: 1
+  release_date: '1976-01'
+- number: 2
+  release_date: '1977-04'
+- number: 3
+  release_date: '1977-06'
+- number: 4
+  release_date: '1977-09'
+- number: 5
+  release_date: '1978-01'
+- number: 6
+  release_date: '1978-03'
+- number: 7
+  release_date: '1978-05'
+- number: 8
+  release_date: '1978-07'
+- number: 9
+  release_date: '1978-09'
+- number: 10
+  release_date: '1978-10'
+extra_editions:
+- type: other
+  label: 劇画キングシリーズ版
+  imprint: 劇画キングシリーズ
+  publisher: 不明
+  volumes:
+  - number: 1
+    release_date: '1990-10'
+  - number: 3
+    isbn13: '9784883150854'
+    release_date: '1990-12'
+- type: shinsoban
+  label: King series(小池書院)
+  imprint: King series
+  publisher: 小池書院
+  volumes:
+  - number: 1
+    isbn13: '9784862258144'
+    release_date: '2012-03'
+  - number: 2
+    isbn13: '9784862258151'
+    release_date: '2012-04'
+  - number: 3
+    isbn13: '9784862258168'
+    release_date: '2012-05'
+  - number: 4
+    isbn13: '9784862258175'
+    release_date: '2012-06'
+  - number: 5
+    isbn13: '9784862258182'
+    release_date: '2012-07'
+  - number: 6
+    isbn13: '9784862258199'
+    release_date: '2012-08'
