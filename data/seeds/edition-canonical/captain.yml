@@ -1,0 +1,278 @@
+slug: captain
+canonical_label: 通常版
+canonical_publisher: 集英社
+canonical_imprint: ジャンプ・コミックス
+suppress_types:
+- bunkobon
+source: 'ギャラ型是正 2026-08-17(worksheetのA_SPLIT_WORK?判定だが実体はB型): 初出のジャンプ・コミックス(集英社 全26巻 1974-04-30〜1980-06-15)がMADB上で別sid(著者欄に白泉社が混入したクラスタ)に丸ごと落ちており、頁の1-18巻枠を1986年ジャンプコミックスセレクションと2010年ホームコミックスが占有していた(16巻2010-04→19巻1978-05の32年逆行)。初出全26巻を主版に戻し、ホーム社系3run(セレクション1986-87 全15巻/ホーム社1991-92 全15巻/ホームコミックス2009-10 全18巻)と集英社ホームリミックス(2022 全2巻)はextra_editionsへ。文庫タブは集英社文庫の1・3巻が別edition(集英社文庫 コミック版)に分かれていたので suppress_types で全15巻を1本に作り直した。NDL SRU(creator=ちばあきお)でホーム社版のISBNと版元を確認。アクションコミックスアニメ版(1980)はアニメ版のため掲載対象外。'
+volumes:
+  - number: 1
+    release_date: '1974-04-30'
+  - number: 2
+    release_date: '1974-06-30'
+  - number: 3
+    release_date: '1974-08-31'
+  - number: 4
+    release_date: '1974-10-31'
+  - number: 5
+    release_date: '1974-11-30'
+  - number: 6
+    release_date: '1975-01-31'
+  - number: 7
+    release_date: '1975-03-31'
+  - number: 8
+    release_date: '1975-05-31'
+  - number: 9
+    release_date: '1975-07-31'
+  - number: 10
+    release_date: '1975-10-31'
+  - number: 11
+    release_date: '1976-01-31'
+  - number: 12
+    release_date: '1976-06'
+  - number: 13
+    release_date: '1976-10-31'
+  - number: 14
+    release_date: '1977-02-28'
+  - number: 15
+    release_date: '1977-05'
+  - number: 16
+    release_date: '1977-08-31'
+  - number: 17
+    release_date: '1977-11-30'
+  - number: 18
+    release_date: '1978-02-28'
+  - number: 19
+    release_date: '1978-05'
+  - number: 20
+    release_date: '1978-08-31'
+  - number: 21
+    release_date: '1978-11'
+  - number: 22
+    release_date: '1979-05-15'
+  - number: 23
+    release_date: '1979-08-15'
+  - number: 24
+    release_date: '1979-11-15'
+  - number: 25
+    release_date: '1980-03-15'
+  - number: 26
+    release_date: '1980-06-15'
+extra_editions:
+- type: shinsoban
+  label: ジャンプコミックスセレクション(ホーム社)
+  imprint: ジャンプコミックスセレクション
+  publisher: ホーム社
+  volumes:
+  - number: 1
+    isbn13: '9784834210019'
+    release_date: '1986-03-24'
+  - number: 2
+    isbn13: '9784834210026'
+    release_date: '1986-04-24'
+  - number: 3
+    isbn13: '9784834210033'
+    release_date: '1986-05-24'
+  - number: 4
+    isbn13: '9784834210040'
+    release_date: '1986-06-24'
+  - number: 5
+    isbn13: '9784834210057'
+    release_date: '1986-07-24'
+  - number: 6
+    release_date: '1986-08-24'
+  - number: 7
+    isbn13: '9784834210071'
+    release_date: '1986-09-24'
+  - number: 8
+    isbn13: '9784834210088'
+    release_date: '1986-10-24'
+  - number: 9
+    release_date: '1986-11-24'
+  - number: 10
+    isbn13: '9784834210101'
+    release_date: '1986-12-17'
+  - number: 11
+    isbn13: '9784834210118'
+    release_date: '1987-01-24'
+  - number: 12
+    release_date: '1987-02-24'
+  - number: 13
+    isbn13: '9784834210132'
+    release_date: '1987-03-24'
+  - number: 14
+    release_date: '1987-04-24'
+  - number: 15
+    isbn13: '9784834210156'
+    release_date: '1987-05-24'
+- type: shinsoban
+  label: ホーム社版(1991-92)
+  publisher: ホーム社
+  volumes:
+  - number: 1
+    isbn13: '9784834280517'
+    release_date: '1991-09'
+  - number: 2
+    isbn13: '9784834280524'
+    release_date: '1991-10'
+  - number: 3
+    isbn13: '9784834280531'
+    release_date: '1991-11'
+  - number: 4
+    isbn13: '9784834280548'
+    release_date: '1991-12'
+  - number: 5
+    isbn13: '9784834280555'
+    release_date: '1992-01'
+  - number: 6
+    isbn13: '9784834280562'
+    release_date: '1992-02'
+  - number: 7
+    isbn13: '9784834280579'
+    release_date: '1992-03'
+  - number: 8
+    isbn13: '9784834280586'
+    release_date: null
+  - number: 9
+    isbn13: '9784834280593'
+    release_date: '1992-05'
+  - number: 10
+    isbn13: '9784834280609'
+    release_date: null
+  - number: 11
+    isbn13: '9784834280616'
+    release_date: null
+  - number: 12
+    isbn13: '9784834280623'
+    release_date: null
+  - number: 13
+    isbn13: '9784834280630'
+    release_date: null
+  - number: 14
+    isbn13: '9784834280647'
+    release_date: null
+  - number: 15
+    isbn13: '9784834280654'
+    release_date: null
+- type: shinsoban
+  label: ホームコミックス(ホーム社)
+  imprint: ホームコミックス
+  publisher: ホーム社
+  volumes:
+  - number: 1
+    isbn13: '9784834283983'
+    release_date: '2009-10'
+  - number: 2
+    isbn13: '9784834283990'
+    release_date: '2009-10'
+  - number: 3
+    isbn13: '9784834284003'
+    release_date: '2009-11'
+  - number: 4
+    isbn13: '9784834284010'
+    release_date: '2009-11'
+  - number: 5
+    isbn13: '9784834284027'
+    release_date: '2009-12'
+  - number: 6
+    isbn13: '9784834284034'
+    release_date: '2009-12'
+  - number: 7
+    isbn13: '9784834284041'
+    release_date: '2010-01'
+  - number: 8
+    isbn13: '9784834284058'
+    release_date: '2010-01'
+  - number: 9
+    isbn13: '9784834284065'
+    release_date: '2010-02'
+  - number: 10
+    isbn13: '9784834284072'
+    release_date: '2010-02'
+  - number: 11
+    isbn13: '9784834284089'
+    release_date: '2010-03'
+  - number: 12
+    isbn13: '9784834284096'
+    release_date: '2010-03'
+  - number: 13
+    isbn13: '9784834284119'
+    release_date: '2010-04'
+  - number: 14
+    isbn13: '9784834284126'
+    release_date: '2010-04'
+  - number: 15
+    isbn13: '9784834284164'
+    release_date: '2010-04'
+  - number: 16
+    isbn13: '9784834284171'
+    release_date: '2010-04'
+  - number: 17
+    isbn13: '9784834284188'
+    release_date: '2010-06'
+  - number: 18
+    isbn13: '9784834284195'
+    release_date: '2010-06'
+- type: other
+  label: 集英社ホームリミックス
+  imprint: 集英社ホームリミックス
+  publisher: ホーム社
+  volumes:
+  - number: 1
+    isbn13: '9784834244915'
+    release_date: '2022-03'
+    volume_label: 谷口タカオ伝説編 上巻
+  - number: 2
+    isbn13: '9784834244922'
+    release_date: '2022-04'
+    volume_label: 谷口タカオ伝説編 下巻
+- type: bunkobon
+  label: 文庫版(集英社文庫)
+  imprint: 集英社文庫
+  publisher: 集英社
+  volumes:
+  - number: 1
+    isbn13: '9784086170611'
+    release_date: '1995-08-23'
+  - number: 2
+    isbn13: '9784086170628'
+    release_date: '1995-08-23'
+  - number: 3
+    isbn13: '9784086170635'
+    release_date: '1995-10-23'
+  - number: 4
+    isbn13: '9784086170642'
+    release_date: '1995-10-23'
+  - number: 5
+    isbn13: '9784086170659'
+    release_date: '1995-11-22'
+  - number: 6
+    isbn13: '9784086170666'
+    release_date: '1995-11-22'
+  - number: 7
+    isbn13: '9784086170673'
+    release_date: '1995-12-20'
+  - number: 8
+    isbn13: '9784086170680'
+    release_date: '1995-12-20'
+  - number: 9
+    isbn13: '9784086170697'
+    release_date: '1996-01-23'
+  - number: 10
+    isbn13: '9784086170703'
+    release_date: '1996-01-23'
+  - number: 11
+    isbn13: '9784086170710'
+    release_date: '1996-02-21'
+  - number: 12
+    isbn13: '9784086170727'
+    release_date: '1996-02-21'
+  - number: 13
+    isbn13: '9784086170734'
+    release_date: '1996-03-20'
+  - number: 14
+    isbn13: '9784086170741'
+    release_date: '1996-03-20'
+  - number: 15
+    isbn13: '9784086170758'
+    release_date: '1996-03-20'

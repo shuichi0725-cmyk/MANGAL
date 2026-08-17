@@ -1,0 +1,126 @@
+slug: houchounin-ajihei
+canonical_label: 通常版
+canonical_publisher: 集英社
+canonical_imprint: ジャンプコミックス
+suppress_types:
+- bunkobon
+source: 'ギャラ型是正 2026-08-17(worksheetのA_SPLIT_WORK?判定だが実体はB型): 初出のジャンプコミックス(集英社 1974-1977)の1-3巻枠を 2020年のMy first wide と2026年のリイド社 SPコミックス SP pocket wide が占有し、2巻2026-03-23→4巻1974の52年逆行になっていた。初出run(MADBが持つv1-v16。13巻は両ソースに無く欠番のまま)を主版に戻し、Bamboo comics(竹書房 2014 3冊。MADBは全部v1だったので発売日順に1-3へ採番)と SP pocket wide(リイド社 2026 全3巻)はextra_editionsへ。文庫タブは集英社漫画文庫(1979 全5巻)と集英社文庫コミック版(1995-96 全12巻)が1本に混ざっていたので suppress_types で版ごとに作り直した。デラックスタブ(ジャンプ・コミックスデラックス 全12巻 1983-85)は混在なしのため温存。★My first big / My first big special / My first wide はコンビニ本のため掲載対象外。★注意: SP pocket wide は2026年に刊行中の版なので、続巻が出たらこのseedに追記しないと頁に出ない(canonicalは巻を固定する)。'
+volumes:
+  - number: 1
+    release_date: '1974'
+  - number: 2
+    release_date: '1974'
+  - number: 3
+    release_date: '1974'
+  - number: 4
+    release_date: '1974'
+  - number: 5
+    release_date: '1975-02-28'
+  - number: 6
+    release_date: '1975-03-31'
+  - number: 7
+    release_date: '1974'
+  - number: 8
+    release_date: '1975-07-31'
+  - number: 9
+    release_date: '1974'
+  - number: 10
+    release_date: '1974'
+  - number: 11
+    release_date: '1976-03-31'
+  - number: 12
+    release_date: '1976-05'
+  - number: 14
+    release_date: '1976-10'
+  - number: 15
+    release_date: '1976-12'
+  - number: 16
+    release_date: '1977-03-31'
+extra_editions:
+- type: shinsoban
+  label: Bamboo comics(竹書房)
+  imprint: Bamboo comics
+  publisher: 竹書房
+  volumes:
+  - number: 1
+    isbn13: '9784812486405'
+    release_date: '2014-07'
+  - number: 2
+    isbn13: '9784812486474'
+    release_date: '2014-08'
+  - number: 3
+    isbn13: '9784812486580'
+    release_date: '2014-09'
+- type: wideban
+  label: SP pocket wide(リイド社)
+  imprint: SPコミックス SP pocket wide
+  publisher: リイド社
+  volumes:
+  - number: 1
+    isbn13: '9784845870561'
+    release_date: '2026-01-02'
+    volume_label: 包丁試しは受けた編
+  - number: 2
+    isbn13: '9784845870677'
+    release_date: '2026-03-23'
+    volume_label: 砂料理コーチ編
+  - number: 3
+    isbn13: '9784845870929'
+    release_date: '2026-04-01'
+    volume_label: アイスの壺揚げ!?編
+- type: bunkobon
+  label: 文庫版(集英社漫画文庫)
+  imprint: 集英社漫画文庫
+  publisher: 集英社
+  volumes:
+  - number: 1
+    release_date: '1979-03-31'
+  - number: 2
+    release_date: '1979-04-25'
+  - number: 3
+    release_date: '1979-05-25'
+  - number: 4
+    release_date: '1979-06'
+  - number: 5
+    release_date: '1979-07'
+- type: bunkobon
+  label: 文庫版(集英社文庫コミック版)
+  imprint: 集英社文庫
+  publisher: 集英社
+  volumes:
+  - number: 1
+    isbn13: '9784086171816'
+    release_date: '1995-12'
+  - number: 2
+    isbn13: '9784086171823'
+    release_date: '1995-12'
+  - number: 3
+    isbn13: '9784086171830'
+    release_date: '1996-02-21'
+  - number: 4
+    isbn13: '9784086171847'
+    release_date: '1996-02-21'
+  - number: 5
+    isbn13: '9784086171854'
+    release_date: '1996-04'
+  - number: 6
+    isbn13: '9784086171861'
+    release_date: '1996-04-23'
+  - number: 7
+    isbn13: '9784086171878'
+    release_date: '1996-05-22'
+  - number: 8
+    isbn13: '9784086171885'
+    release_date: '1996-05'
+  - number: 9
+    isbn13: '9784086171892'
+    release_date: '1996-06-23'
+  - number: 10
+    isbn13: '9784086171908'
+    release_date: '1996-06-23'
+  - number: 11
+    isbn13: '9784086171915'
+    release_date: '1996-07'
+  - number: 12
+    isbn13: '9784086171922'
+    release_date: '1996-07'
