@@ -1,0 +1,72 @@
+slug: kei-no-seishun
+canonical_label: 通常版
+canonical_publisher: 双葉社
+canonical_imprint: アクション・コミックス
+source: 'ギャラ型B是正 2026-08-17: 通常版タブの1-5巻を2013年の小池書院King series 漫画スーパーワイドが占有し、初出のアクション・コミックス(双葉社 1978-11〜1981-03 全14巻)は6-14巻の残骸だけになっていた(頁の出版社も小池書院表示)。NDL SRU(creator=小島剛夕)で初出が【アクションコミックス】双葉社(第1/第10/第11/第12巻を確認)であることを確定。★MADBが「King series 漫画スーパーワイド」(v1-5)と「King series」(v6-8)の2 editionに割っていた2013年の小池書院版は、ISBN 9784862259103〜172 が連番・発売日も2013-05〜2013-12で連続するので1つの版として統合した。劇画キングシリーズの13巻(1995)は1冊だけの記録なのでその1冊で立てる。デラックスタブ(アクション・コミックス・デラックス 全10巻 1989)は混在なしのため温存。※初出9巻の発売日1979-03はMADB上3巻と同値で前後(8巻1980-01/10巻1980-05)と矛盾するが、正しい値がどちらのソースにも無いためMADBのまま残した。'
+volumes:
+- number: 1
+  release_date: '1978-11'
+- number: 2
+  release_date: '1978-12'
+- number: 3
+  release_date: '1979-03'
+- number: 4
+  release_date: '1979-05'
+- number: 5
+  release_date: '1979-07'
+- number: 6
+  release_date: '1979-09'
+- number: 7
+  release_date: '1979-11'
+- number: 8
+  release_date: '1980-01'
+- number: 9
+  release_date: '1979-03'
+- number: 10
+  release_date: '1980-05'
+- number: 11
+  release_date: '1980-07'
+- number: 12
+  release_date: '1980-10'
+- number: 13
+  release_date: '1980-12'
+- number: 14
+  release_date: '1981-03'
+extra_editions:
+- type: shinsoban
+  label: King series(小池書院)
+  imprint: King series 漫画スーパーワイド
+  publisher: 小池書院
+  volumes:
+  - number: 1
+    isbn13: '9784862259103'
+    release_date: '2013-05'
+  - number: 2
+    isbn13: '9784862259110'
+    release_date: '2013-06'
+  - number: 3
+    isbn13: '9784862259127'
+    release_date: '2013-07'
+  - number: 4
+    isbn13: '9784862259134'
+    release_date: '2013-08'
+  - number: 5
+    isbn13: '9784862259141'
+    release_date: '2013-09'
+  - number: 6
+    isbn13: '9784862259158'
+    release_date: '2013-10'
+  - number: 7
+    isbn13: '9784862259165'
+    release_date: '2013-11'
+  - number: 8
+    isbn13: '9784862259172'
+    release_date: '2013-12'
+- type: other
+  label: 劇画キングシリーズ版
+  imprint: 劇画キングシリーズ
+  publisher: 不明
+  volumes:
+  - number: 13
+    isbn13: '9784883153565'
+    release_date: '1995-05'
