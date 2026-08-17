@@ -1,0 +1,55 @@
+slug: sanada-kenryuu
+canonical_label: 通常版
+canonical_publisher: コダマプレス
+canonical_imprint: KODAMA DIAMOND COMICS
+source: 'ギャラ型是正 2026-08-17(worksheetのA_SPLIT_WORK?判定だが実体はB型): 通常版タブに1996年小学館叢書・1968年コンパクト・コミックス・1966年コダマダイヤモンドコミックスが混線し30年逆行、文庫タブも1999年小学館文庫と1978年ホーム・コミックス系が混ざっていた。NDL SRU(creator=白土三平・忍者旋風の照会で同時取得)で確定= 【小学館叢書 忍者旋風シリーズ】小学館 真田剣流1 4091973671 1996.1 / 2 1996.2 / 【小学館文庫 忍者旋風シリーズ】小学館 1 4091921493 / 2 4091921507 1999.6 / 1961.10 東邦漫画出版社「眞田剣流」。★主版は**巻が揃い日付も全部ある最古**の KODAMA DIAMOND COMICS 全3巻 1966(コダマプレス)とした。1961年の Series of Ninja(東邦漫画出版社)は2冊目の日付が無く不完備なのでその他タブへ。My first big special(2007)はコンビニ本のため掲載対象外。'
+volumes:
+- number: 1
+  release_date: '1966-05-10'
+- number: 2
+  release_date: '1966-06-15'
+- number: 3
+  release_date: '1966-06-30'
+extra_editions:
+- type: other
+  label: Series of Ninja(東邦漫画出版社)
+  imprint: Series of Ninja
+  publisher: 東邦漫画出版社
+  volumes:
+  - number: 1
+    release_date: '1961-10'
+  - number: 2
+    release_date: null
+- type: other
+  label: コンパクト・コミックス版(集英社)
+  imprint: コンパクト・コミックス
+  publisher: 集英社
+  volumes:
+  - number: 1
+    release_date: '1968-03-31'
+  - number: 2
+    release_date: '1968-03-31'
+  - number: 3
+    release_date: '1968-04-30'
+- type: shinsoban
+  label: ホーム・コミックス版(汐文社)
+  imprint: ホーム・コミックス
+  publisher: 汐文社
+  volumes:
+  - number: 1
+    release_date: '1975-10-05'
+  - number: 2
+    release_date: '1975-10-05'
+  - number: 3
+    release_date: '1975-11-20'
+- type: other
+  label: 小学館叢書版
+  imprint: 小学館叢書
+  publisher: 小学館
+  volumes:
+  - number: 1
+    isbn13: '9784091973672'
+    release_date: '1996-01'
+  - number: 2
+    isbn13: '9784091973689'
+    release_date: '1996-02'

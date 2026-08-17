@@ -1,0 +1,73 @@
+slug: yuka-o-yobu-umi
+canonical_label: 通常版
+canonical_publisher: 曙出版
+source: 'ギャラ型是正 2026-08-17(worksheetのA_SPLIT_WORK?判定だが実体はB型): 通常版タブに1997年ちばてつや全集・1988年母と娘でみる漫画名作館・1976年ホーム・コミックス・1963年初出が混線し、1巻1997-07-23→4巻1963-10の34年逆行になっていた。NDL SRU(creator=ちばてつや)で確定= 初出は**曙出版** 第2集1963.08 / 第4集1963.10(第1集のみ文華書房) / 【母と娘でみる漫画名作館】草の根出版会 上中下 1988.7(中のISBN 4876480451 をNDLから補完) / ちばてつや全集 ホーム社 全3巻 1997。初出run(2-6巻)を主版に、他はextra_editionsへ。★1巻はMADBに無く、NDLでも第1集だけ版元が文華書房=この曙出版runとは別なので巻を作らない(欠番のまま)。文庫タブ(ちばてつや漫画文庫 全4巻 1978)は混在なしのため温存。'
+volumes:
+- number: 2
+  release_date: '1963-08'
+- number: 3
+  release_date: null
+- number: 4
+  release_date: '1963-10'
+- number: 5
+  release_date: '1963-11'
+- number: 6
+  release_date: '1963-12'
+extra_editions:
+- type: other
+  label: 虫コミックス版(虫プロ商事)
+  imprint: 虫コミックス
+  publisher: 虫プロ商事
+  volumes:
+  - number: 1
+    release_date: null
+  - number: 2
+    release_date: '1968-08-25'
+  - number: 3
+    release_date: null
+  - number: 4
+    release_date: null
+- type: shinsoban
+  label: ホーム・コミックス版(汐文社)
+  imprint: ホーム・コミックス
+  publisher: 汐文社
+  volumes:
+  - number: 1
+    release_date: '1976-05-15'
+  - number: 2
+    release_date: '1976-05'
+  - number: 3
+    release_date: '1976-05-31'
+  - number: 4
+    release_date: '1976-06-15'
+- type: other
+  label: 母と娘でみる漫画名作館(草の根出版会)
+  imprint: 母と娘でみる漫画名作館
+  publisher: 草の根出版会
+  volumes:
+  - number: 1
+    isbn13: '9784876480449'
+    release_date: '1988-07'
+    volume_label: 上
+  - number: 2
+    isbn13: '9784876480456'
+    release_date: '1988-07'
+    volume_label: 中
+  - number: 3
+    isbn13: '9784876480463'
+    release_date: '1988-07'
+    volume_label: 下
+- type: kanzenban
+  label: ちばてつや全集(ホーム社)
+  imprint: ちばてつや全集
+  publisher: ホーム社
+  volumes:
+  - number: 1
+    isbn13: '9784834283549'
+    release_date: '1997-07-23'
+  - number: 2
+    isbn13: '9784834283556'
+    release_date: '1997-08-24'
+  - number: 3
+    isbn13: '9784834283563'
+    release_date: '1997-09-24'
