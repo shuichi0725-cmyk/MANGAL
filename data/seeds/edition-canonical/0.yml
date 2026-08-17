@@ -1,0 +1,56 @@
+slug: '0'
+canonical_label: 通常版
+canonical_publisher: 朝日ソノラマ
+canonical_imprint: サン・コミックス
+source: 'ギャラ型B是正 2026-08-17: 2005年マンガショップ復刻(上下)が通常版の1巻・3巻枠を占有し、残りは1968年サンコミックスと1965年少年コミックスの残骸という接ぎ木(頁の出版社もパンローリング表示)。NDL SRU(creator=辻なおき)で4runを分離確定= ①少年コミックス 少年画報社 1964-1965(v1 1964.04.01/v2 1964.5/v3 1964.07.01/v5 1965.01.01。v4は両ソース不在) ②サン・コミックス 朝日ソノラマ 全1-5巻 昭和43-44 ③辻なおき0戦シリーズ 若木書房 1973-1974(v1/v3/v4/v5。v2は両ソース不在) ④マンガショップシリーズ 上下 2005.6(ISBN 4775910426/4775910434)。主版は**完備最古**の②(全5巻そろい)とし、初出単行本の①はその他タブで残す(あかつき戦闘隊と同じ扱い)。マンガショップ版はMADBが上=1巻/下=3巻と誤番号だったので1・2に是正しvolume_labelで上下を保持。'
+volumes:
+- number: 1
+  release_date: '1968-04-15'
+- number: 2
+  release_date: '1968-05-28'
+- number: 3
+  release_date: '1968-07-29'
+- number: 4
+  release_date: '1968-10-01'
+- number: 5
+  release_date: null
+extra_editions:
+- type: other
+  label: 少年コミックス版(少年画報社)
+  imprint: 少年コミックス
+  publisher: 少年画報社
+  volumes:
+  - number: 1
+    release_date: '1964-04-01'
+  - number: 2
+    release_date: '1964-05'
+  - number: 3
+    release_date: '1964-07-01'
+  - number: 5
+    release_date: '1965-01-01'
+- type: shinsoban
+  label: 辻なおき0戦シリーズ(若木書房)
+  imprint: 辻なおき0戦シリーズ
+  publisher: 若木書房
+  volumes:
+  - number: 1
+    release_date: '1973'
+  - number: 3
+    release_date: '1973'
+  - number: 4
+    release_date: '1973'
+  - number: 5
+    release_date: '1974'
+- type: shinsoban
+  label: 復刻版(マンガショップ)
+  imprint: マンガショップシリーズ
+  publisher: マンガショップ
+  volumes:
+  - number: 1
+    isbn13: '9784775910429'
+    release_date: '2005-06-04'
+    volume_label: 上
+  - number: 2
+    isbn13: '9784775910436'
+    release_date: '2005-06-04'
+    volume_label: 下

@@ -1,0 +1,78 @@
+slug: chiisana-ochakai
+canonical_label: 通常版
+canonical_publisher: 白泉社
+canonical_imprint: 花とゆめコミックス
+source: 'ギャラ型B是正 2026-08-17: 2025年の「このマンガがすごい!comics」版(上中)が通常版の1-2巻枠を占有し、初版花とゆめコミックスの1巻・2巻が頁から消えていた(3-7巻だけが残り、2025年の上→中→1983年3巻という逆行)。さらに扶桑社版4巻・宝島社版2巻・2025年版の「下」は巻番号衝突で1冊も出ていなかった。NDL SRU(creator=猫十字社)で5runを分離確定= ①花とゆめコミックス 白泉社 全7巻 1981.2-1988.8(v1のISBN 9784592113416 はNDLから補完・v2はNDLもMADBもISBN無し) ②白泉社文庫 全2巻 2000 ③扶桑社 全4巻 2004.3-4 ④宝島社 全2巻 2012.11/2013.2(副題つき) ⑤このマンガがすごい!comics 上中下 2025.10-11。①を主版に、③④⑤と1980年の白泉社単行本「ぷりんともっぷの四季」をextra_editionsへ。文庫タブ(白泉社文庫)は混在なしのため温存。★2026-07-04の volume-exclude 2件(9784594045470/9784594045487 を「激マン型混入」として除去)は、扶桑社版を別タブに分けた今は扶桑社版1-2巻を消すだけの副作用になるため解除した。'
+volumes:
+- number: 1
+  isbn13: '9784592113416'
+  release_date: '1981-02-25'
+- number: 2
+  release_date: '1981-12-25'
+- number: 3
+  isbn13: '9784592113430'
+  release_date: '1983-02-19'
+- number: 4
+  isbn13: '9784592113447'
+  release_date: '1984-09-22'
+- number: 5
+  isbn13: '9784592113454'
+  release_date: '1985-07-25'
+- number: 6
+  isbn13: '9784592113461'
+  release_date: '1986-09-25'
+- number: 7
+  isbn13: '9784592113478'
+  release_date: '1988-08-25'
+extra_editions:
+- type: other
+  label: ぷりんともっぷの四季(1980・白泉社)
+  publisher: 白泉社
+  volumes:
+  - number: 1
+    release_date: '1980-05'
+- type: shinsoban
+  label: 扶桑社版
+  publisher: 扶桑社
+  volumes:
+  - number: 1
+    isbn13: '9784594045470'
+    release_date: '2004-03'
+  - number: 2
+    isbn13: '9784594045487'
+    release_date: '2004-03'
+  - number: 3
+    isbn13: '9784594045654'
+    release_date: '2004-04'
+  - number: 4
+    isbn13: '9784594045661'
+    release_date: '2004-04'
+- type: shinsoban
+  label: 宝島社版
+  publisher: 宝島社
+  volumes:
+  - number: 1
+    isbn13: '9784800204721'
+    release_date: '2012-11'
+    volume_label: 猫星の木の下で
+  - number: 2
+    isbn13: '9784800206510'
+    release_date: '2013-02'
+    volume_label: 雪の降るはなのめ村で
+- type: shinsoban
+  label: このマンガがすごい!comics版
+  imprint: このマンガがすごい!comics
+  publisher: 宝島社
+  volumes:
+  - number: 1
+    isbn13: '9784299071873'
+    release_date: '2025-10-13'
+    volume_label: 上
+  - number: 2
+    isbn13: '9784299072597'
+    release_date: '2025-11-17'
+    volume_label: 中
+  - number: 3
+    isbn13: '9784299072627'
+    release_date: '2025-11-10'
+    volume_label: 下

@@ -1,0 +1,20 @@
+slug: shounen-doumei
+canonical_label: 通常版
+canonical_publisher: 虫プロ商事
+canonical_imprint: 虫コミックス
+source: 'ギャラ型B是正 2026-08-17: 2015年の復刊ドットコム版(1冊)が通常版の1巻枠を占有し、初版虫コミックス(1968-69)は2-3巻だけが残っていた(頁の出版社も復刊ドットコム表示に化けていた)。NDL SRU(creator=石ノ森章太郎)で確定= 初版【MUSHI COMICS】虫プロ商事 全1-3巻 / 【双葉文庫名作シリーズ】双葉社 全2巻 2001.10 / 復刊ドットコム 2015.7 1冊(ISBN 9784835452319)。初版runを主版に、復刊ドットコム版はextra_editionsへ。文庫タブは混在なしのため温存。※MADBの「石ノ森章太郎萬画大全集」4冊は日付もISBNも無く元から非表示のため起こさない。'
+volumes:
+- number: 1
+  release_date: '1968-08-25'
+- number: 2
+  release_date: '1968-12-20'
+- number: 3
+  release_date: '1969-05-30'
+extra_editions:
+- type: shinsoban
+  label: 復刻版(復刊ドットコム)
+  publisher: 復刊ドットコム
+  volumes:
+  - number: 1
+    isbn13: '9784835452319'
+    release_date: '2015-07'
