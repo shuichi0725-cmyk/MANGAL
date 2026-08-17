@@ -1,6 +1,12 @@
-"""alias 301 の全件map を本番KV(REDIRECTS)へ投入する。週次蒸留 手順4(R2同期)の後に実行。
+"""alias 301 の全件map を本番KV(REDIRECTS)へ投入する。★週次蒸留 手順4(R2同期)の後に**のみ**実行。
 
-処理: ①_gen-redirects.py 再実行(.cache/redirects.json 再生成) ②検証(形状/件数)
+★★週の途中で実行するな(2026-08-17実害): aliasの宛先(rename後の新slug)は週次のR2同期まで
+本番に存在しない。途中でKVだけ更新すると「旧URL→未deploy新slug」の301が生まれ、
+以前は旧頁が見えていたURLが404に化ける(実測=7/20以降のrename約900件が404化→
+本番生存probe(★ブラウザUA必須。素のUAはCloudflareが403で弾く)で dead宛先を除外した
+縮小mapを投入して応急復旧した)。週次でr2-sync→本script、の順なら宛先は必ず実在する。
+
+処理: ①_gen-redirects.py 再実行(.cache/redirects.json 再生成・連鎖は平坦化済み) ②検証(形状/件数)
      ③wrangler kv key put(認証=OAuth `wrangler login` 済み前提)
 本番Worker(workers/r2-serve.js)は KV `REDIRECTS` の key `redirects.json` を読む。
 Worker側は isolate 内 6h TTL キャッシュ=投入後は最長6hで全エッジに行き渡る
