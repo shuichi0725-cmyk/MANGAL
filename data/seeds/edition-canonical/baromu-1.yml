@@ -1,0 +1,30 @@
+slug: baromu-1
+canonical_label: 愛蔵復刻版
+canonical_publisher: リイド社
+suppress_types:
+- bunkobon
+source: 'ギャラ型round3 2026-08-17: 愛蔵復刻版上下(1998)とリイド文庫(2003 v1-3)が混在→分離。文庫v3=楽天回収'
+volumes:
+- number: 1
+  isbn13: '9784845814725'
+  release_date: '1998-05-28'
+  volume_label: '上'
+- number: 2
+  isbn13: '9784845814732'
+  release_date: '1998-05-28'
+  volume_label: '下'
+extra_editions:
+- type: bunkobon
+  label: リイド文庫(2003)
+  imprint: リイド文庫
+  publisher: リイド社
+  volumes:
+  - number: 1
+    isbn13: '9784845824397'
+    release_date: '2003-01-27'
+  - number: 2
+    isbn13: '9784845824403'
+    release_date: '2003-02'
+  - number: 3
+    isbn13: '9784845824410'
+    release_date: '2003-03'

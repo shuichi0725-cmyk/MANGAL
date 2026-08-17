@@ -1,0 +1,37 @@
+slug: nagareboshi-gojuusantsugi
+canonical_label: Shotaro world版
+canonical_publisher: メディアファクトリー
+canonical_imprint: Shotaro world
+source: 'ギャラ型round3 2026-08-17: Shotaro world版(1998 全4巻)をmainに。種2の旧版行は1973年版v1-4と1968年版v5の2runと判明→別タブに分離保存(版元は両ソース無=不明)'
+volumes:
+- number: 1
+  isbn13: '9784889915655'
+  release_date: '1998-06'
+- number: 2
+  isbn13: '9784889915754'
+  release_date: '1998-07'
+- number: 3
+  isbn13: '9784889915761'
+  release_date: '1998-07'
+- number: 4
+  isbn13: '9784889915891'
+  release_date: '1998-08'
+extra_editions:
+- type: shinsoban
+  label: 1973年版
+  publisher: 不明
+  volumes:
+  - number: 1
+    release_date: '1973-04-16'
+  - number: 2
+    release_date: '1973-05-10'
+  - number: 3
+    release_date: '1973-06-15'
+  - number: 4
+    release_date: '1973-06-30'
+- type: shinsoban
+  label: 初版(1968)
+  publisher: 不明
+  volumes:
+  - number: 5
+    release_date: '1968-07-25'

@@ -1,0 +1,68 @@
+slug: makai-tenshou
+canonical_label: 通常版
+canonical_publisher: リイド社
+canonical_imprint: SPコミックス
+source: 'ギャラ型round3 2026-08-17: とみ新蔵版。SP版(2002-03 魔/界/転/生/魔界/転生之巻=全6冊)をmainに刊行順採番、ワイド上下(1999)/新装(2016)/2020年版をタブへ(全て楽天で著者=とみ新蔵確認)'
+volumes:
+- number: 1
+  isbn13: '9784845822430'
+  release_date: '2002-03-26'
+  volume_label: '魔之巻'
+- number: 2
+  isbn13: '9784845822447'
+  release_date: '2002-03-26'
+  volume_label: '界之巻'
+- number: 3
+  isbn13: '9784845822560'
+  release_date: '2002-04-26'
+  volume_label: '転之巻'
+- number: 4
+  isbn13: '9784845822577'
+  release_date: '2002-04-26'
+  volume_label: '生之巻'
+- number: 5
+  isbn13: '9784845823185'
+  release_date: '2003-04-10'
+  volume_label: '魔界之巻'
+- number: 6
+  isbn13: '9784845823192'
+  release_date: '2003-04-10'
+  volume_label: '転生之巻'
+extra_editions:
+- type: aizoban
+  label: ワイド版(1999)
+  imprint: SPコミックス
+  publisher: リイド社
+  volumes:
+  - number: 1
+    isbn13: '9784845819515'
+    release_date: '1999-05-27'
+    volume_label: '上'
+  - number: 2
+    isbn13: '9784845819522'
+    release_date: '1999-06-25'
+    volume_label: '下'
+- type: shinsoban
+  label: 新装版(2016)
+  imprint: SPコミックス
+  publisher: リイド社
+  volumes:
+  - number: 1
+    isbn13: '9784845847884'
+    release_date: '2016-02-25'
+  - number: 2
+    isbn13: '9784845847891'
+    release_date: '2016-02-25'
+- type: shinsoban
+  label: 2020年版
+  imprint: SP comics
+  publisher: リイド社
+  volumes:
+  - number: 1
+    isbn13: '9784845856794'
+    release_date: '2020-12'
+    volume_label: '上 魔人襲来編'
+  - number: 2
+    isbn13: '9784845856800'
+    release_date: '2020-12'
+    volume_label: '下 (魔剣激突編)'

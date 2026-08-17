@@ -1,0 +1,36 @@
+slug: yabou
+canonical_label: 初版
+canonical_publisher: 不明
+source: 'ギャラ型round3 2026-08-17: 初版(1977-78)v1-7をmainに(種2の日付つき行でdedup)、v1-3枠を占有していた道出版復刻(2000)をタブへ'
+volumes:
+- number: 1
+  release_date: '1977-11-02'
+- number: 2
+  release_date: '1977-12-02'
+- number: 3
+  release_date: '1977-12-27'
+- number: 4
+  release_date: '1978-01-09'
+- number: 5
+  release_date: '1978-01-26'
+- number: 6
+  release_date: '1978-02-08'
+- number: 7
+  release_date: '1978-02'
+extra_editions:
+- type: shinsoban
+  label: 道出版版(2000)
+  publisher: 道出版
+  volumes:
+  - number: 1
+    isbn13: '9784944154173'
+    release_date: '2000-04'
+    volume_label: '殺戮への序曲'
+  - number: 2
+    isbn13: '9784944154180'
+    release_date: '2000-05'
+    volume_label: '終わりなき戦い'
+  - number: 3
+    isbn13: '9784944154197'
+    release_date: '2000-06'
+    volume_label: '若い狼の飛翔'

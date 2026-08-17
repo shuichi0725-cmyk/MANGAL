@@ -1,0 +1,35 @@
+slug: zansatsusha
+canonical_label: 1979年版
+canonical_publisher: 不明
+source: 'ギャラ型round3 2026-08-17: 1979年版v1-6(種2 ISBN無・版元不明)をmainに、KCスペシャル(1990)v1-4(楽天でv4回収)をタブへ。1973年断片(v0/v2)は構成を確定できず不収載'
+volumes:
+- number: 1
+  release_date: '1979-04'
+- number: 2
+  release_date: '1979-04'
+- number: 3
+  release_date: '1979-05'
+- number: 4
+  release_date: '1979-05'
+- number: 5
+  release_date: '1979-06'
+- number: 6
+  release_date: '1979-06'
+extra_editions:
+- type: shinsoban
+  label: KCスペシャル(1990)
+  imprint: KCスペシャル
+  publisher: 講談社
+  volumes:
+  - number: 1
+    isbn13: '9784061014749'
+    release_date: '1990-07-06'
+  - number: 2
+    isbn13: '9784061014756'
+    release_date: '1990-08-06'
+  - number: 3
+    isbn13: '9784061014763'
+    release_date: '1990-09-06'
+  - number: 4
+    isbn13: '9784061014770'
+    release_date: '1990-10-06'

@@ -1,0 +1,100 @@
+slug: mazinger-z
+canonical_label: 通常版
+canonical_publisher: 双葉社
+canonical_imprint: アクションコミックス
+source: 'ギャラ型round3 2026-08-17: 桜多吾作版。KCDX改訂版(2013-14)のISBNにアクション版(1998)の日付が付くねじれ→アクション版v1-5(楽天5646-5721)をmainに、改訂版/SunWide1987/マンガショップ/トクマ/2025復刻を版タブへ。文庫タブ(講談社漫画文庫)は永井豪原作版=受け頁未設のため温存'
+volumes:
+- number: 1
+  isbn13: '9784575935646'
+  release_date: '1998-05-28'
+- number: 2
+  isbn13: '9784575935653'
+  release_date: '1998-05-28'
+- number: 3
+  isbn13: '9784575935691'
+  release_date: '1998-06-27'
+- number: 4
+  isbn13: '9784575935707'
+  release_date: '1998-06-27'
+- number: 5
+  isbn13: '9784575935721'
+  release_date: '1998-07-09'
+extra_editions:
+- type: deluxe
+  label: KCデラックス改訂版(2013)
+  imprint: KCデラックス
+  publisher: 講談社
+  volumes:
+  - number: 1
+    isbn13: '9784063769050'
+    release_date: '2013-10-04'
+  - number: 2
+    isbn13: '9784063769081'
+    release_date: '2013-11'
+  - number: 3
+    isbn13: '9784063769142'
+    release_date: '2013-12'
+  - number: 4
+    isbn13: '9784063769326'
+    release_date: '2014-01'
+- type: shinsoban
+  label: Sun wide comics(1987)
+  imprint: Sun wide comics
+  publisher: 朝日ソノラマ
+  volumes:
+  - number: 1
+    isbn13: '9784257961369'
+    release_date: '1987-11-01'
+  - number: 2
+    isbn13: '9784257961383'
+    release_date: '1987-12-01'
+  - number: 3
+    isbn13: '9784257961390'
+    release_date: '1988-01-01'
+- type: shinsoban
+  label: マンガショップ版(2012)
+  imprint: マンガショップシリーズ
+  publisher: マンガショップ
+  volumes:
+  - number: 1
+    isbn13: '9784775914601'
+    release_date: '2012-09'
+    volume_label: '上'
+  - number: 2
+    isbn13: '9784775914618'
+    release_date: '2012-09'
+    volume_label: '中'
+  - number: 3
+    isbn13: '9784775914625'
+    release_date: '2012-09'
+    volume_label: '下'
+- type: shinsoban
+  label: トクマコミックス(2018)
+  imprint: トクマコミックス
+  publisher: 徳間書店
+  volumes:
+  - number: 1
+    isbn13: '9784197806164'
+    release_date: '2018-01-10'
+  - number: 2
+    isbn13: '9784197806171'
+    release_date: '2018-01-10'
+  - number: 3
+    isbn13: '9784197806188'
+    release_date: '2018-01-10'
+- type: shinsoban
+  label: 復刻版(2025)
+  publisher: 不明
+  volumes:
+  - number: 1
+    isbn13: '9784768331057'
+    release_date: '2025-12-22'
+    volume_label: '起動編'
+  - number: 2
+    isbn13: '9784768331064'
+    release_date: '2025-12-22'
+    volume_label: '激闘編'
+  - number: 3
+    isbn13: '9784768331071'
+    release_date: '2025-12-22'
+    volume_label: '完結編'
