@@ -81,7 +81,7 @@ export default function CategoryHub({ data, filtered, summary }: Props) {
               <Card
                 href={hrefFor(c.params, active)}
                 className={`h-full px-1 py-2.5 text-center ${
-                  active ? "!bg-[var(--color-accent)] !text-white ring-2 ring-[var(--color-accent)]" : ""
+                  active ? "!bg-[var(--color-accent)] !text-[var(--color-on-accent)] ring-2 ring-[var(--color-accent)]" : ""
                 }`}
               >
                 <span className="flex flex-col items-center justify-center gap-1">

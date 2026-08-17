@@ -48,7 +48,7 @@ export function GenreRouletteDaily({ genres }: { genres: Array<{ key: string; na
   return (
     <Link
       href={`/browse?genre=${encodeURIComponent(g.key)}`}
-      className="block rounded-xl bg-gradient-to-r from-[var(--color-accent)] to-[var(--color-accent)]/80 px-4 py-3.5 text-white shadow-md spring-press"
+      className="block rounded-xl bg-gradient-to-r from-[var(--color-accent)] to-[var(--color-accent)]/80 px-4 py-3.5 text-[var(--color-on-accent)] shadow-md spring-press"
     >
       <p className="text-[13px] font-bold leading-snug">
         🎡 今日のジャンルルーレット: <span className="text-[16px] whitespace-nowrap">{g.name}</span>

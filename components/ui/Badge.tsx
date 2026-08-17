@@ -11,9 +11,9 @@ type Props = {
 export default function Badge({ tone = "neutral", className = "", children }: Props) {
   const skin =
     tone === "accent"
-      ? "bg-[var(--color-accent)] text-white"
+      ? "bg-[var(--color-accent)] text-[var(--color-on-accent)]"
       : tone === "warm"
-        ? "bg-[var(--color-accent-warm)] text-white"
+        ? "bg-[var(--color-accent-warm)] text-[var(--color-on-accent)]"
         : "bg-[var(--color-surface-2)] text-ink/70 border border-[var(--color-line)]";
   return (
     <span

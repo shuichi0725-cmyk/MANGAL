@@ -111,7 +111,7 @@ export default function EditionVolumes({
                         paddingBottom: "0.15rem",
                         background: "var(--color-accent-warm)",
                         borderColor: "var(--color-accent-warm)",
-                        color: "#fff",
+                        color: "var(--color-on-accent)",
                       }
                     : { minHeight: "2.1rem", paddingTop: "0.15rem", paddingBottom: "0.15rem" }
                 }

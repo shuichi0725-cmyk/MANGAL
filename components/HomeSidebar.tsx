@@ -43,7 +43,7 @@ export default function HomeSidebar({ genres }: { genres: Array<{ key: string; n
             />
             <button
               type="submit"
-              className="spring-press mt-2 w-full rounded-full bg-[var(--color-accent)] py-1.5 text-[12px] font-bold text-white"
+              className="spring-press mt-2 w-full rounded-full bg-[var(--color-accent)] py-1.5 text-[12px] font-bold text-[var(--color-on-accent)]"
             >
               検索
             </button>

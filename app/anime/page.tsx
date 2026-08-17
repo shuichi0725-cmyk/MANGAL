@@ -38,7 +38,7 @@ export default function AnimeSeasonsIndexPage() {
 
       <Link
         href={`/anime/${current}`}
-        className="mt-4 block rounded-xl bg-[var(--color-accent-warm)] px-4 py-3.5 text-white shadow-md spring-press"
+        className="mt-4 block rounded-xl bg-[var(--color-accent-warm)] px-4 py-3.5 text-[var(--color-on-accent)] shadow-md spring-press"
       >
         <p className="text-[14px] font-bold">今季: {seasonLabel(current)}アニメの原作を見る →</p>
       </Link>
@@ -54,7 +54,7 @@ export default function AnimeSeasonsIndexPage() {
                   href={`/anime/${k}`}
                   className={`rounded-[var(--radius-tag)] border px-2.5 py-1 text-xs font-medium ${
                     k === current
-                      ? "border-[var(--color-accent-warm)] bg-[var(--color-accent-warm)] text-white"
+                      ? "border-[var(--color-accent-warm)] bg-[var(--color-accent-warm)] text-[var(--color-on-accent)]"
                       : "border-[var(--color-line)] bg-[var(--color-surface-2)] text-ink/70"
                   }`}
                 >

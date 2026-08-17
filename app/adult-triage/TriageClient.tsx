@@ -63,7 +63,7 @@ export default function TriageClient({ targets }: { targets: Target[] }) {
           <input type="checkbox" checked={onlyPending} onChange={(e) => setOnlyPending(e.target.checked)} />
           未判定のみ
         </label>
-        <button onClick={copy} className="spring-press ml-auto rounded-full bg-[var(--color-accent)] px-3 py-1 font-bold text-white">
+        <button onClick={copy} className="spring-press ml-auto rounded-full bg-[var(--color-accent)] px-3 py-1 font-bold text-[var(--color-on-accent)]">
           {copied ? "コピーしました" : `コピー(${done})`}
         </button>
       </div>

@@ -8,6 +8,8 @@
   --color-paper: #f6f4ee;
   --color-accent: #d23f3f;
   --color-accent-warm: #e0892e;
+  /* ★accent地の上の文字色(2026-08-18): ライト系=白 / D3=黒。黄緑accentに白文字が読めない件の恒久トークン */
+  --color-on-accent: #ffffff;
 
   /* ソフト触感 = 面色 / 境界 / 影 / 角丸 (= 押せる感の土台) */
   --color-surface: #ffffff;
@@ -239,6 +241,7 @@ input[type="search"]::-webkit-search-decoration {
   --color-bg: #0d0d0d;
   --color-accent: #d9f843;
   --color-accent-warm: #d9f843;
+  --color-on-accent: #0d0d0d;
   --color-surface: #171717;
   --color-surface-2: #21211a;
   --color-line: rgba(242, 242, 236, 0.22);

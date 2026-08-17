@@ -353,7 +353,7 @@ export default function HomeClient({ data, summary }: Props) {
             type="button"
             onClick={() => setNoCover((v) => !v)}
             className={`tactile-chip rounded-card px-3 py-1.5 font-medium transition active:scale-95 ${
-              noCover ? "bg-[var(--color-accent)] text-white" : ""
+              noCover ? "bg-[var(--color-accent)] text-[var(--color-on-accent)]" : ""
             }`}
           >
             画像なし{noCover ? " ✓" : ""}（{noCoverCount}）
@@ -362,7 +362,7 @@ export default function HomeClient({ data, summary }: Props) {
             type="button"
             onClick={() => setSoloNonfirst((v) => !v)}
             className={`tactile-chip rounded-card px-3 py-1.5 font-medium transition active:scale-95 ${
-              soloNonfirst ? "bg-[var(--color-accent)] text-white" : ""
+              soloNonfirst ? "bg-[var(--color-accent)] text-[var(--color-on-accent)]" : ""
             }`}
             title="1冊しか無いのに その巻が1巻でない(統合失敗/取りこぼし)"
           >
@@ -372,7 +372,7 @@ export default function HomeClient({ data, summary }: Props) {
             type="button"
             onClick={() => setMultiVol((v) => !v)}
             className={`tactile-chip rounded-card px-3 py-1.5 font-medium transition active:scale-95 ${
-              multiVol ? "bg-[var(--color-accent)] text-white" : ""
+              multiVol ? "bg-[var(--color-accent)] text-[var(--color-on-accent)]" : ""
             }`}
             title="複数巻ある作品(今回統合した型1の検証用)"
           >
@@ -382,7 +382,7 @@ export default function HomeClient({ data, summary }: Props) {
             type="button"
             onClick={() => setNoAuthor((v) => !v)}
             className={`tactile-chip rounded-card px-3 py-1.5 font-medium transition active:scale-95 ${
-              noAuthor ? "bg-[var(--color-accent)] text-white" : ""
+              noAuthor ? "bg-[var(--color-accent)] text-[var(--color-on-accent)]" : ""
             }`}
             title="著者が(unknown)/空(アンソロ/非漫画の疑い)"
           >
@@ -392,7 +392,7 @@ export default function HomeClient({ data, summary }: Props) {
             type="button"
             onClick={() => setMv2026((v) => !v)}
             className={`tactile-chip rounded-card px-3 py-1.5 font-medium transition active:scale-95 ${
-              mv2026 ? "bg-[var(--color-accent)] text-white" : ""
+              mv2026 ? "bg-[var(--color-accent)] text-[var(--color-on-accent)]" : ""
             }`}
             title="複数巻あるのに開始年が2026(年繰上げ漏れ/巻誤統合の疑い・要確認)"
           >
@@ -402,7 +402,7 @@ export default function HomeClient({ data, summary }: Props) {
             type="button"
             onClick={() => setVolGap((v) => !v)}
             className={`tactile-chip rounded-card px-3 py-1.5 font-medium transition active:scale-95 ${
-              volGap ? "bg-[var(--color-accent)] text-white" : ""
+              volGap ? "bg-[var(--color-accent)] text-[var(--color-on-accent)]" : ""
             }`}
             title="複数巻あるのに途中の巻が抜けている(fill漏れ/欠番・要確認)"
           >
@@ -412,7 +412,7 @@ export default function HomeClient({ data, summary }: Props) {
             type="button"
             onClick={() => setCoverGap((v) => !v)}
             className={`tactile-chip rounded-card px-3 py-1.5 font-medium transition active:scale-95 ${
-              coverGap ? "bg-[var(--color-accent)] text-white" : ""
+              coverGap ? "bg-[var(--color-accent)] text-[var(--color-on-accent)]" : ""
             }`}
             title="複数巻あるのに途中の巻が抜けている(fill漏れ/欠番・要確認)"
           >
@@ -422,7 +422,7 @@ export default function HomeClient({ data, summary }: Props) {
             type="button"
             onClick={() => setAnthology((v) => !v)}
             className={`tactile-chip rounded-card px-3 py-1.5 font-medium transition active:scale-95 ${
-              anthology ? "bg-[var(--color-accent)] text-white" : ""
+              anthology ? "bg-[var(--color-accent)] text-[var(--color-on-accent)]" : ""
             }`}
             title="アンソロジー統合ページ(本番化前の点検用)"
           >
@@ -571,7 +571,7 @@ export default function HomeClient({ data, summary }: Props) {
             <button
               type="button"
               onClick={() => setOpen(false)}
-              className="w-full rounded-card bg-[var(--color-accent)] text-white font-semibold py-2.5 active:scale-[0.98] transition"
+              className="w-full rounded-card bg-[var(--color-accent)] text-[var(--color-on-accent)] font-semibold py-2.5 active:scale-[0.98] transition"
             >
               結果を見る（{filtered.length}）
             </button>

@@ -203,7 +203,7 @@ export default function ListClient({ data }: { data: ListBundle }) {
           />
           <button
             type="submit"
-            className="spring-press shrink-0 rounded-full bg-[var(--color-accent)] px-3.5 py-1.5 text-[12px] font-bold text-white"
+            className="spring-press shrink-0 rounded-full bg-[var(--color-accent)] px-3.5 py-1.5 text-[12px] font-bold text-[var(--color-on-accent)]"
           >
             検索
           </button>
@@ -211,7 +211,7 @@ export default function ListClient({ data }: { data: ListBundle }) {
             type="button"
             onClick={() => setOpen(true)}
             className={`spring-press shrink-0 rounded-full px-3 py-1.5 text-[12px] font-bold ${
-              nActive > 0 ? "bg-[var(--color-accent)] text-white" : "border border-[var(--color-line)] bg-[var(--color-surface)] text-ink/75"
+              nActive > 0 ? "bg-[var(--color-accent)] text-[var(--color-on-accent)]" : "border border-[var(--color-line)] bg-[var(--color-surface)] text-ink/75"
             }`}
           >
             ⚙ フィルター{nActive > 0 ? ` (${nActive})` : ""}
@@ -243,7 +243,7 @@ export default function ListClient({ data }: { data: ListBundle }) {
           <button
             onClick={() => setSlugfixOnly((v) => !v)}
             className={`spring-press shrink-0 rounded-full px-2.5 py-1 text-[11px] font-bold ${
-              slugfixOnly ? "bg-[var(--color-accent)] text-white" : "border border-[var(--color-accent)]/40 bg-[var(--color-surface)] text-[var(--color-accent)]"
+              slugfixOnly ? "bg-[var(--color-accent)] text-[var(--color-on-accent)]" : "border border-[var(--color-accent)]/40 bg-[var(--color-surface)] text-[var(--color-accent)]"
             }`}
           >
             slug修正のみ

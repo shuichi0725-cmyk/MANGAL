@@ -107,7 +107,7 @@ export default function Design12() {
     <div className={`rounded-xl border border-[var(--color-line)] bg-[var(--color-surface)] shadow-sm ${className}`}>{children}</div>
   );
 
-  const banner = "日本の漫画 " + manga.length.toLocaleString() + "作品 ✺ 全巻・全版・全発売日 ✺ NEW ARRIVALS EVERY WEEK ✺ ";
+  const banner = "日本の漫画 " + manga.length.toLocaleString() + "作品を収録 ✺ 全巻一覧・発売日・出版社がすぐわかる ✺ 今週も新刊入荷中 ✺ ";
 
   return (
     <div className="theme-d3 min-h-screen bg-[var(--color-bg)] pb-12">

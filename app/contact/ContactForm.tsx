@@ -74,7 +74,7 @@ export default function ContactForm() {
       <button
         type="submit"
         disabled={state === "sending"}
-        className="spring-press w-full rounded-full bg-[var(--color-accent)] py-2.5 text-sm font-bold text-white disabled:opacity-50"
+        className="spring-press w-full rounded-full bg-[var(--color-accent)] py-2.5 text-sm font-bold text-[var(--color-on-accent)] disabled:opacity-50"
       >
         {state === "sending" ? "送信中…" : "送信する"}
       </button>

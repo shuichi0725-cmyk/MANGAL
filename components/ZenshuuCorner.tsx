@@ -16,7 +16,7 @@ export default function ZenshuuCorner() {
     <section className="mt-4 px-4">
       <div className="rounded-xl border border-[var(--color-line)] bg-[var(--color-surface)] p-3.5 shadow-sm">
       <div className="flex items-baseline gap-2">
-        <span className="rounded bg-[var(--color-accent)] px-1.5 py-0.5 text-[10px] font-bold tracking-wider text-white">全集</span>
+        <span className="rounded bg-[var(--color-accent)] px-1.5 py-0.5 text-[10px] font-bold tracking-wider text-[var(--color-on-accent)]">全集</span>
         <h2 className="text-[16px] font-black">📚 作家の全仕事、まるごと</h2>
       </div>
       <p className="pt-0.5 text-[10.5px] text-ink/55">巨匠の全集を一棚に。タップでその全集の全巻へ。</p>
