@@ -1,0 +1,75 @@
+slug: jinmu
+canonical_label: 通常版
+canonical_publisher: 徳間書店
+canonical_imprint: 徳間描き下しコミック叢書
+suppress_types:
+- bunkobon
+source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。'
+volumes:
+- number: 1
+  isbn13: '9784194449050'
+  release_date: '1992-06-30'
+- number: 2
+  isbn13: '9784194450292'
+  release_date: '1992-12'
+- number: 3
+  isbn13: '9784194452432'
+  release_date: '1993-07-31'
+- number: 4
+  isbn13: '9784198600914'
+  release_date: '1994-03-31'
+- number: 5
+  isbn13: '9784198602512'
+  release_date: '1995-03'
+extra_editions:
+- type: shinsoban
+  label: 古事記
+  imprint: 古事記
+  publisher: 不明
+  volumes:
+  - number: 1
+    isbn13: '9784041209134'
+    release_date: '2013-11'
+  - number: 2
+    isbn13: '9784041209141'
+    release_date: '2013-11'
+  - number: 3
+    isbn13: '9784041209493'
+    release_date: '2013-12'
+  - number: 4
+    isbn13: '9784041209509'
+    release_date: '2013-12'
+- type: shinsoban
+  label: Chukoコミックlite
+  imprint: Chukoコミックlite
+  publisher: 不明
+  volumes:
+  - number: 1
+    isbn13: '9784124105759'
+    release_date: '2003-10'
+  - number: 2
+    isbn13: '9784124105766'
+    release_date: '2003-11'
+  - number: 3
+    isbn13: '9784124105773'
+    release_date: '2003-12'
+  - number: 4
+    isbn13: '9784124105780'
+    release_date: '2004-01'
+- type: bunkobon
+  label: 中公文庫コミック版
+  imprint: 中公文庫コミック版
+  publisher: 不明
+  volumes:
+  - number: 1
+    isbn13: '9784122030053'
+    release_date: '1997-11'
+  - number: 2
+    isbn13: '9784122030060'
+    release_date: '1997-11'
+  - number: 3
+    isbn13: '9784122030305'
+    release_date: '1997-12'
+  - number: 4
+    isbn13: '9784122030312'
+    release_date: '1997-12'

@@ -1,0 +1,123 @@
+slug: dameoyaji
+canonical_label: 通常版
+canonical_publisher: 不明
+canonical_imprint: Akebono-Comics
+suppress_types:
+- bunkobon
+source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。'
+volumes:
+- number: 1
+  release_date: '1973-01'
+- number: 2
+  release_date: '1972-02-29'
+- number: 3
+  release_date: null
+- number: 4
+  release_date: null
+- number: 5
+  release_date: '1973-01-31'
+- number: 6
+  release_date: null
+- number: 7
+  release_date: null
+- number: 8
+  release_date: null
+- number: 9
+  release_date: null
+- number: 10
+  release_date: '1974-08-26'
+- number: 12
+  release_date: null
+- number: 13
+  release_date: null
+- number: 14
+  release_date: null
+- number: 15
+  release_date: null
+- number: 18
+  release_date: '1976-07'
+- number: 19
+  release_date: null
+- number: 20
+  release_date: null
+- number: 21
+  release_date: null
+extra_editions:
+- type: shinsoban
+  label: 少年サンデーコミックス
+  imprint: 少年サンデーコミックス
+  publisher: 小学館
+  volumes:
+  - number: 1
+    release_date: '1978-08'
+  - number: 2
+    release_date: '1978-10-15'
+  - number: 3
+    release_date: '1978-12'
+  - number: 4
+    release_date: '1979-02'
+  - number: 5
+    release_date: '1979-04-15'
+  - number: 6
+    release_date: '1979-06-15'
+  - number: 7
+    release_date: '1979-09-15'
+  - number: 8
+    release_date: '1980-03-15'
+  - number: 9
+    release_date: '1980-05'
+  - number: 10
+    release_date: '1980-07'
+  - number: 11
+    release_date: '1980-10'
+  - number: 12
+    release_date: '1981-01-15'
+  - number: 13
+    release_date: '1981-07'
+  - number: 14
+    release_date: '1981-08'
+  - number: 15
+    release_date: '1981-10'
+  - number: 16
+    release_date: '1982-03'
+  - number: 17
+    release_date: '1982-08'
+  - number: 18
+    release_date: '1982-09'
+- type: shinsoban
+  label: AkeBono Comics
+  imprint: AkeBono Comics
+  publisher: 不明
+  volumes:
+  - number: 11
+    release_date: null
+  - number: 16
+    release_date: null
+  - number: 17
+    release_date: '1976-05'
+- type: bunkobon
+  label: 双葉文庫
+  imprint: 双葉文庫
+  publisher: 双葉社
+  volumes:
+  - number: 1
+    isbn13: '9784575721058'
+    release_date: '1998-06'
+  - number: 2
+    isbn13: '9784575721065'
+    release_date: '1998-06'
+  - number: 3
+    isbn13: '9784575721072'
+    release_date: '1998-06'
+  - number: 4
+    isbn13: '9784575721096'
+    release_date: '1998-07'
+  - number: 5
+    isbn13: '9784575721102'
+    release_date: '1998-07'
+  - number: 6
+    isbn13: '9784575721119'
+    release_date: '1998-07'
+  - number: 7
+    isbn13: '9784575721126'
+    release_date: '1998-07'

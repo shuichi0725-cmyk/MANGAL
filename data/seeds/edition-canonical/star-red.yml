@@ -1,0 +1,47 @@
+slug: star-red
+canonical_label: 通常版
+canonical_publisher: 小学館
+canonical_imprint: フラワーコミックス
+suppress_types:
+- bunkobon
+source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。'
+volumes:
+- number: 1
+  isbn13: '9784091305817'
+  release_date: '1980-03-20'
+- number: 2
+  release_date: '1980-06-20'
+- number: 3
+  isbn13: '9784091305831'
+  release_date: '1980-08-20'
+extra_editions:
+- type: shinsoban
+  label: PETIT COMICS
+  imprint: PETIT COMICS
+  publisher: 小学館
+  volumes:
+  - number: 1
+    isbn13: '9784091780232'
+    release_date: '1985-12-20'
+  - number: 2
+    isbn13: '9784091780249'
+    release_date: '1986-02-20'
+- type: bunkobon
+  label: 小学館文庫
+  imprint: 小学館文庫
+  publisher: 小学館
+  volumes:
+  - number: 1
+    isbn13: '9784091907172'
+    release_date: '1983-07'
+  - number: 2
+    isbn13: '9784091907189'
+    release_date: '1983-10'
+- type: shinsoban
+  label: Flower comics special
+  imprint: Flower comics special
+  publisher: 小学館
+  volumes:
+  - number: 1
+    isbn13: '9784091312235'
+    release_date: '2008-01-30'

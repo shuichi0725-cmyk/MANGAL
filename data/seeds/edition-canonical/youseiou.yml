@@ -1,0 +1,72 @@
+slug: youseiou
+canonical_label: 通常版
+canonical_publisher: 白泉社
+canonical_imprint: 花とゆめコミックス
+suppress_types:
+- bunkobon
+source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。'
+volumes:
+- number: 1
+  release_date: '1977-09'
+- number: 2
+  release_date: '1977-12'
+- number: 3
+  release_date: '1978-04'
+- number: 4
+  release_date: '1978-10-20'
+- number: 5
+  release_date: '1978-12-20'
+extra_editions:
+- type: shinsoban
+  label: あすかコミックス・スペシャル
+  imprint: あすかコミックス・スペシャル
+  publisher: 角川書店
+  volumes:
+  - number: 1
+    isbn13: '9784049230185'
+    release_date: '1986-12'
+  - number: 2
+    isbn13: '9784049230192'
+    release_date: '1987-01'
+  - number: 3
+    isbn13: '9784049230208'
+    release_date: '1987-02'
+  - number: 4
+    isbn13: '9784049230215'
+    release_date: '1987-03'
+- type: bunkobon
+  label: 白泉社文庫
+  imprint: 白泉社文庫
+  publisher: 白泉社
+  volumes:
+  - number: 1
+    isbn13: '9784592881711'
+    release_date: '1995-09-19'
+  - number: 2
+    isbn13: '9784592881728'
+    release_date: '1995-09-19'
+  - number: 3
+    isbn13: '9784592881735'
+    release_date: '1995-09-19'
+- type: shinsoban
+  label: 山岸凉子スペシャルセレクション
+  imprint: 山岸凉子スペシャルセレクション
+  publisher: 潮出版社
+  volumes:
+  - number: 1
+    isbn13: '9784267905681'
+    release_date: '2011-06'
+  - number: 2
+    isbn13: '9784267905698'
+    release_date: '2011-08'
+  - number: 3
+    isbn13: '9784267905704'
+    release_date: '2011-10'
+- type: shinsoban
+  label: SUN SPECIAL COMICS
+  imprint: SUN SPECIAL COMICS
+  publisher: 朝日ソノラマ
+  volumes:
+  - number: 1
+    isbn13: '9784257901419'
+    release_date: '1992-01'

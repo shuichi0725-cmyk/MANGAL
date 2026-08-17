@@ -1,0 +1,38 @@
+slug: daisannogokudou
+canonical_label: 通常版
+canonical_publisher: 竹書房
+canonical_imprint: Bamboo comics
+source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。'
+volumes:
+- number: 2
+  isbn13: '9784884754976'
+  release_date: '1991-04-25'
+- number: 3
+  release_date: '1991-11-30'
+- number: 5
+  release_date: '1993-08'
+- number: 6
+  isbn13: '9784884757151'
+  release_date: '1994-06'
+- number: 7
+  isbn13: '9784884757854'
+  release_date: '2005-03-27'
+- number: 8
+  isbn13: '9784884758486'
+  release_date: '2005-11'
+extra_editions:
+- type: shinsoban
+  label: バンブーコミックス
+  imprint: バンブーコミックス
+  publisher: 竹書房
+  volumes:
+  - number: 1
+    release_date: '1991-03-25'
+  - number: 4
+    release_date: '1992-10-28'
+  - number: 9
+    isbn13: '9784812450802'
+    release_date: '1996-06'
+  - number: 10
+    isbn13: '9784812451359'
+    release_date: '1997-06'

@@ -1,0 +1,131 @@
+slug: akagi
+canonical_label: 通常版
+canonical_publisher: 竹書房
+canonical_imprint: 近代麻雀コミックス
+source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。'
+volumes:
+- number: 1
+  isbn13: '9784884755744'
+  release_date: '1992-05'
+- number: 2
+  isbn13: '9784884756208'
+  release_date: '1993-01'
+- number: 3
+  isbn13: '9784884756734'
+  release_date: '1993-10'
+- number: 4
+  isbn13: '9784884757236'
+  release_date: '1994-07'
+- number: 5
+  isbn13: '9784884757991'
+  release_date: '1995-05'
+- number: 6
+  isbn13: '9784812450055'
+  release_date: '1996-02'
+- number: 7
+  isbn13: '9784812451380'
+  release_date: '1997-08'
+- number: 8
+  isbn13: '9784812451939'
+  release_date: '1998-05'
+- number: 9
+  isbn13: '9784812452813'
+  release_date: '1999-03'
+- number: 10
+  isbn13: '9784812453339'
+  release_date: '1999-12'
+- number: 11
+  isbn13: '9784812455449'
+  release_date: '2001-09'
+- number: 12
+  isbn13: '9784812456163'
+  release_date: '2002-02'
+- number: 13
+  isbn13: '9784812456705'
+  release_date: '2002-07'
+- number: 14
+  isbn13: '9784812457924'
+  release_date: '2003-04'
+- number: 15
+  isbn13: '9784812459171'
+  release_date: '2004-03'
+- number: 16
+  isbn13: '9784812460221'
+  release_date: '2004-10'
+- number: 17
+  isbn13: '9784812461877'
+  release_date: '2005-07'
+- number: 18
+  isbn13: '9784812464366'
+  release_date: '2006-03'
+- number: 19
+  isbn13: '9784812465493'
+  release_date: '2007-02'
+- number: 20
+  isbn13: '9784812467114'
+  release_date: '2007-08'
+- number: 21
+  isbn13: '9784812468203'
+  release_date: '2008-05'
+- number: 22
+  isbn13: '9784812470350'
+  release_date: '2009-03'
+- number: 23
+  isbn13: '9784812471654'
+  release_date: '2009-10'
+- number: 24
+  isbn13: '9784812472873'
+  release_date: '2010-06'
+- number: 25
+  isbn13: '9784812476406'
+  release_date: '2011-08'
+- number: 26
+  isbn13: '9784812479315'
+  release_date: '2012-07'
+- number: 27
+  isbn13: '9784812483442'
+  release_date: '2013-07'
+- number: 28
+  isbn13: '9784812484692'
+  release_date: '2013-12'
+- number: 29
+  isbn13: '9784801952027'
+  release_date: '2015-03'
+- number: 30
+  isbn13: '9784801953352'
+  release_date: '2015-08'
+- number: 31
+  isbn13: '9784801955219'
+  release_date: '2016-05'
+- number: 32
+  isbn13: '9784801956360'
+  release_date: '2016-10'
+- number: 33
+  isbn13: '9784801957046'
+  release_date: '2016-12'
+- number: 34
+  isbn13: '9784801959088'
+  release_date: '2017-04'
+- number: 35
+  isbn13: '9784801960947'
+  release_date: '2017-11'
+- number: 36
+  isbn13: '9784801963085'
+  release_date: '2018-07'
+extra_editions:
+- type: shinsoban
+  label: バンブーコミックス
+  imprint: バンブーコミックス
+  publisher: 竹書房
+  volumes:
+  - number: 1
+    isbn13: '9784812453773'
+    release_date: '2000-10'
+- type: shinsoban
+  label: Bamboo comics
+  imprint: Bamboo comics
+  publisher: 竹書房
+  volumes:
+  - number: 1
+    isbn13: '9784812463352'
+    release_date: '2006-04'

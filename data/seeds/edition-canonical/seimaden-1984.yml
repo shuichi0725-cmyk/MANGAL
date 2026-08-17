@@ -1,0 +1,100 @@
+slug: seimaden-1984
+canonical_label: 通常版
+canonical_publisher: 角川書店
+canonical_imprint: あすかコミックスDX
+suppress_types:
+- bunkobon
+source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。'
+volumes:
+- number: 1
+  isbn13: '9784048525305'
+  release_date: '1994-12'
+- number: 2
+  isbn13: '9784048525633'
+  release_date: '1995-04-01'
+- number: 3
+  isbn13: '9784048525640'
+  release_date: '1995-08-01'
+- number: 4
+  isbn13: '9784048526265'
+  release_date: '1995-11'
+- number: 5
+  isbn13: '9784048526760'
+  release_date: '1996-05'
+- number: 6
+  isbn13: '9784048527675'
+  release_date: '1996-12-01'
+- number: 7
+  isbn13: '9784048528535'
+  release_date: '1997-08'
+- number: 8
+  isbn13: '9784048529372'
+  release_date: '1998-05'
+- number: 9
+  isbn13: '9784048530552'
+  release_date: '1999-03'
+- number: 10
+  isbn13: '9784048531139'
+  release_date: '1999-08'
+extra_editions:
+- type: bunkobon
+  label: 幻冬舎コミックス漫画文庫
+  imprint: 幻冬舎コミックス漫画文庫
+  publisher: 不明
+  volumes:
+  - number: 1
+    isbn13: '9784344811201'
+    release_date: '2007-09'
+  - number: 2
+    isbn13: '9784344811218'
+    release_date: '2007-09'
+  - number: 3
+    isbn13: '9784344811829'
+    release_date: '2007-12'
+  - number: 4
+    isbn13: '9784344811836'
+    release_date: '2007-12'
+  - number: 5
+    isbn13: '9784344813007'
+    release_date: '2008-03'
+  - number: 6
+    isbn13: '9784344813014'
+    release_date: '2008-03'
+  - number: 7
+    isbn13: '9784344813625'
+    release_date: '2008-06'
+- type: shinsoban
+  label: サンコミックス
+  imprint: サンコミックス
+  publisher: 朝日ソノラマ
+  volumes:
+  - number: 1
+    release_date: '1977-10'
+  - number: 2
+    release_date: '1977-12'
+  - number: 3
+    release_date: '1978-10'
+  - number: 4
+    release_date: '1979-01-25'
+- type: shinsoban
+  label: SUN SPECIAL COMICS
+  imprint: SUN SPECIAL COMICS
+  publisher: 朝日ソノラマ
+  volumes:
+  - number: 1
+    isbn13: '9784257901440'
+    release_date: '1992-02'
+- type: shinsoban
+  label: SUN WIDE COMICS
+  imprint: SUN WIDE COMICS
+  publisher: 朝日ソノラマ
+  volumes:
+  - number: 1
+    isbn13: '9784257960027'
+    release_date: '1984-05-31'
+  - number: 2
+    isbn13: '9784257960041'
+    release_date: '1984-06-25'
+  - number: 3
+    isbn13: '9784257960065'
+    release_date: '1984-07'

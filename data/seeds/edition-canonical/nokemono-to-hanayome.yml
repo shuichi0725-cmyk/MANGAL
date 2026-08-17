@@ -1,0 +1,52 @@
+slug: nokemono-to-hanayome
+canonical_label: 通常版
+canonical_publisher: 幻冬舎
+source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。'
+volumes:
+- number: 1
+  isbn13: '9784757305984'
+  release_date: '2009-12'
+- number: 2
+  isbn13: '9784757306066'
+  release_date: '2011-06'
+- number: 3
+  isbn13: '9784757306073'
+  release_date: '2012-06'
+- number: 4
+  isbn13: '9784908158018'
+  release_date: '2014-12'
+- number: 5
+  isbn13: '9784908158087'
+  release_date: '2016-05'
+- number: 6
+  isbn13: '9784344841451'
+  release_date: '2018-01'
+extra_editions:
+- type: shinsoban
+  label: BIRZ EXTRA
+  imprint: BIRZ EXTRA
+  publisher: 幻冬舎
+  volumes:
+  - number: 7
+    isbn13: '9784344842229'
+    release_date: '2018-04'
+  - number: 8
+    isbn13: '9784344847187'
+    release_date: '2020-09'
+- type: shinsoban
+  label: バーズコミックススペシャル
+  imprint: バーズコミックススペシャル
+  publisher: 幻冬舎
+  volumes:
+  - number: 1
+    isbn13: '9784344850392'
+    release_date: '2022-05'
+  - number: 2
+    isbn13: '9784344850606'
+    release_date: '2022-06'
+  - number: 3
+    isbn13: '9784344850729'
+    release_date: '2022-07'
+  - number: 4
+    isbn13: '9784344850798'
+    release_date: '2022-08'

@@ -1,0 +1,52 @@
+slug: nankin-road-ni-hanafubuki
+canonical_label: 通常版
+canonical_publisher: 角川書店
+canonical_imprint: あすかコミックスDX
+suppress_types:
+- bunkobon
+source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。'
+volumes:
+- number: 1
+  isbn13: '9784048521628'
+  release_date: '1989-07-17'
+- number: 2
+  isbn13: '9784048521635'
+  release_date: '1989-09-17'
+- number: 3
+  isbn13: '9784048521642'
+  release_date: '1989-11'
+extra_editions:
+- type: shinsoban
+  label: 花とゆめコミックス
+  imprint: 花とゆめコミックス
+  publisher: 白泉社
+  volumes:
+  - number: 1
+    release_date: '1982-02-25'
+  - number: 2
+    release_date: '1982-09-25'
+- type: shinsoban
+  label: 花とゆめCOMICS
+  imprint: 花とゆめCOMICS
+  publisher: 白泉社
+  volumes:
+  - number: 3
+    isbn13: '9784592114338'
+    release_date: '1983-04-25'
+  - number: 4
+    isbn13: '9784592114345'
+    release_date: '1983-12'
+- type: bunkobon
+  label: 白泉社文庫
+  imprint: 白泉社文庫
+  publisher: 白泉社
+  volumes:
+  - number: 1
+    isbn13: '9784592882213'
+    release_date: '1996-09'
+  - number: 2
+    isbn13: '9784592882220'
+    release_date: '1996-09'
+  - number: 3
+    isbn13: '9784592882237'
+    release_date: '1996-09'

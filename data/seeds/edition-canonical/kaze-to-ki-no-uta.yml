@@ -1,0 +1,208 @@
+slug: kaze-to-ki-no-uta
+canonical_label: 通常版
+canonical_publisher: 小学館
+canonical_imprint: フラワーコミックス
+suppress_types:
+- bunkobon
+source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。'
+volumes:
+- number: 1
+  isbn13: '9784091302212'
+  release_date: '1977-05-20'
+- number: 2
+  isbn13: '9784091302229'
+  release_date: '1977-07-20'
+- number: 3
+  release_date: '1977-08-20'
+- number: 4
+  release_date: '1977-09'
+- number: 5
+  release_date: '1977-10-20'
+- number: 6
+  release_date: '1977-12-20'
+- number: 7
+  isbn13: '9784091302274'
+  release_date: '1978-03-20'
+- number: 8
+  release_date: '1978-08-20'
+- number: 9
+  release_date: '1978-11-20'
+- number: 10
+  isbn13: '9784091302304'
+  release_date: '1979-03-20'
+- number: 11
+  release_date: '1979-08-20'
+- number: 12
+  isbn13: '9784091304421'
+  release_date: '1980-08-20'
+- number: 13
+  isbn13: '9784091304438'
+  release_date: '1981-01-20'
+- number: 14
+  isbn13: '9784091304445'
+  release_date: '1981-09-20'
+- number: 15
+  isbn13: '9784091304452'
+  release_date: '1982-06-20'
+- number: 17
+  isbn13: '9784091304476'
+  release_date: '1984-08'
+extra_editions:
+- type: shinsoban
+  label: 小学館叢書
+  imprint: 小学館叢書
+  publisher: 小学館
+  volumes:
+  - number: 1
+    isbn13: '9784091970510'
+    release_date: '1988-07'
+  - number: 2
+    isbn13: '9784091970527'
+    release_date: '1988-08-10'
+  - number: 3
+    isbn13: '9784091970534'
+    release_date: '1988-09'
+  - number: 4
+    isbn13: '9784091970541'
+    release_date: '1988-10'
+  - number: 5
+    isbn13: '9784091970558'
+    release_date: '1988-11'
+  - number: 6
+    isbn13: '9784091970565'
+    release_date: '1988-12'
+  - number: 7
+    isbn13: '9784091970572'
+    release_date: '1989-01-10'
+  - number: 8
+    isbn13: '9784091970589'
+    release_date: '1989-02'
+  - number: 9
+    isbn13: '9784091970596'
+    release_date: '1989-03'
+- type: shinsoban
+  label: あすかコミックスDX
+  imprint: あすかコミックスDX
+  publisher: 角川書店
+  volumes:
+  - number: 1
+    isbn13: '9784048521390'
+    release_date: '1990-08-17'
+  - number: 2
+    isbn13: '9784048521406'
+    release_date: '1990-08-17'
+  - number: 3
+    isbn13: '9784048521413'
+    release_date: '1990-09-17'
+  - number: 4
+    isbn13: '9784048521420'
+    release_date: '1990-10-17'
+  - number: 5
+    isbn13: '9784048521437'
+    release_date: '1990-11-17'
+  - number: 6
+    isbn13: '9784048521444'
+    release_date: '1990-12-17'
+  - number: 7
+    isbn13: '9784048521451'
+    release_date: '1991-01-17'
+  - number: 8
+    isbn13: '9784048521468'
+    release_date: '1991-02-17'
+  - number: 9
+    isbn13: '9784048521475'
+    release_date: '1991-03-17'
+- type: bunkobon
+  label: 中公文庫
+  imprint: 中公文庫
+  publisher: 中央公論新社
+  volumes:
+  - number: 1
+    isbn13: '9784122040649'
+    release_date: '2002-07'
+  - number: 2
+    isbn13: '9784122040656'
+    release_date: '2002-07'
+  - number: 3
+    isbn13: '9784122040793'
+    release_date: '2002-08'
+  - number: 4
+    isbn13: '9784122040991'
+    release_date: '2002-09'
+- type: bunkobon
+  label: 中公文庫コミック版
+  imprint: 中公文庫コミック版
+  publisher: 中央公論新社
+  volumes:
+  - number: 5
+    isbn13: '9784122041196'
+    release_date: '2002-10'
+  - number: 6
+    isbn13: '9784122041325'
+    release_date: '2002-11'
+  - number: 7
+    isbn13: '9784122041448'
+    release_date: '2002-12'
+  - number: 8
+    isbn13: '9784122041615'
+    release_date: '2003-01'
+- type: shinsoban
+  label: Chuko comics
+  imprint: Chuko comics
+  publisher: 中央公論社
+  volumes:
+  - number: 1
+    isbn13: '9784120022210'
+    release_date: '1993-08-20'
+  - number: 2
+    isbn13: '9784120022227'
+    release_date: '1993-09-20'
+  - number: 3
+    isbn13: '9784120022234'
+    release_date: '1993-10-20'
+  - number: 4
+    isbn13: '9784120022241'
+    release_date: '1993-11-20'
+- type: bunkobon
+  label: 白泉社文庫
+  imprint: 白泉社文庫
+  publisher: 白泉社
+  volumes:
+  - number: 1
+    isbn13: '9784592881513'
+    release_date: '1995-03'
+  - number: 2
+    isbn13: '9784592881520'
+    release_date: '1995-03'
+  - number: 3
+    isbn13: '9784592881537'
+    release_date: '1995-03'
+  - number: 4
+    isbn13: '9784592881544'
+    release_date: '1995-03'
+  - number: 5
+    isbn13: '9784592881551'
+    release_date: '1995-06'
+  - number: 6
+    isbn13: '9784592881568'
+    release_date: '1995-06'
+  - number: 7
+    isbn13: '9784592881575'
+    release_date: '1995-06'
+  - number: 8
+    isbn13: '9784592881582'
+    release_date: '1995-09'
+  - number: 9
+    isbn13: '9784592881599'
+    release_date: '1995-09'
+  - number: 10
+    isbn13: '9784592881605'
+    release_date: '1995-09'
+- type: shinsoban
+  label: フラワーコミックスFC
+  imprint: フラワーコミックスFC
+  publisher: 小学館
+  volumes:
+  - number: 16
+    isbn13: '9784091304469'
+    release_date: '1983-08-20'

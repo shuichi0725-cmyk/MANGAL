@@ -1,0 +1,51 @@
+slug: baddodaneyoshiokun
+canonical_label: 通常版
+canonical_publisher: 集英社
+canonical_imprint: ジャンプ・コミックス
+suppress_types:
+- bunkobon
+source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。'
+volumes:
+- number: 1
+  isbn13: '9784088715810'
+  release_date: '1989-07-15'
+- number: 2
+  isbn13: '9784088715827'
+  release_date: '1989-12-10'
+- number: 3
+  release_date: '1990-07-15'
+- number: 4
+  isbn13: '9784088715841'
+  release_date: '1990-11-15'
+- number: 5
+  isbn13: '9784088715858'
+  release_date: '1991-01-15'
+extra_editions:
+- type: bunkobon
+  label: 集英社文庫
+  imprint: 集英社文庫
+  publisher: 集英社
+  volumes:
+  - number: 1
+    isbn13: '9784086190015'
+    release_date: '2009-06'
+  - number: 2
+    isbn13: '9784086190022'
+    release_date: '2009-07'
+  - number: 3
+    isbn13: '9784086190039'
+    release_date: '2009-08'
+- type: shinsoban
+  label: ジャンプ・コミックス(1999)
+  imprint: ジャンプ・コミックス
+  publisher: 集英社
+  volumes:
+  - number: 1
+    isbn13: '9784088727431'
+    release_date: '1999-07'
+  - number: 2
+    isbn13: '9784088727691'
+    release_date: '1999-09'
+  - number: 3
+    isbn13: '9784088727707'
+    release_date: '1999-09'

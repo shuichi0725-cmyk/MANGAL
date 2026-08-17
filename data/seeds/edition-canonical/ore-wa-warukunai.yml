@@ -1,0 +1,19 @@
+slug: ore-wa-warukunai
+canonical_label: 通常版
+canonical_publisher: 芳文社
+canonical_imprint: 花音コミックス
+source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。'
+volumes:
+- number: 2
+  isbn13: '9784832281370'
+  release_date: '2000-11'
+  volume_label: 'scene 2'
+extra_editions:
+- type: shinsoban
+  label: Hanaoto comics mini
+  imprint: Hanaoto comics mini
+  publisher: 芳文社
+  volumes:
+  - number: 1
+    isbn13: '9784832284319'
+    release_date: '2006-12'

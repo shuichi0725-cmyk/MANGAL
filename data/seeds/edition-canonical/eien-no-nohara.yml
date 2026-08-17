@@ -1,0 +1,101 @@
+slug: eien-no-nohara
+canonical_label: 通常版
+canonical_publisher: 集英社
+canonical_imprint: ぶ～けコミックス
+suppress_types:
+- bunkobon
+- wideban
+source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。'
+volumes:
+- number: 1
+  isbn13: '9784088601779'
+  release_date: '1989-05-20'
+- number: 2
+  isbn13: '9784088601939'
+  release_date: '1989-12-13'
+extra_editions:
+- type: wideban
+  label: ぶ～けコミックスワイド版
+  imprint: ぶ～けコミックスワイド版
+  publisher: 集英社
+  volumes:
+  - number: 1
+    isbn13: '9784088603636'
+    release_date: '1995-10'
+  - number: 2
+    isbn13: '9784088603643'
+    release_date: '1995-10'
+  - number: 3
+    isbn13: '9784088602110'
+    release_date: '1990-07'
+  - number: 4
+    isbn13: '9784088602301'
+    release_date: '1991-01'
+  - number: 5
+    isbn13: '9784088602417'
+    release_date: '1991-06'
+  - number: 6
+    isbn13: '9784088602592'
+    release_date: '1992-01'
+  - number: 7
+    isbn13: '9784088602691'
+    release_date: '1992-05'
+  - number: 8
+    isbn13: '9784088602820'
+    release_date: '1992-11'
+  - number: 9
+    isbn13: '9784088602967'
+    release_date: '1993-04'
+  - number: 10
+    isbn13: '9784088603117'
+    release_date: '1993-09'
+  - number: 11
+    isbn13: '9784088603445'
+    release_date: '1994-08'
+  - number: 12
+    isbn13: '9784088603568'
+    release_date: '1995-02'
+  - number: 13
+    isbn13: '9784088603650'
+    release_date: '1995-11'
+  - number: 14
+    isbn13: '9784088603704'
+    release_date: '1996-07'
+  - number: 15
+    isbn13: '9784088603766'
+    release_date: '1997-05'
+  - number: 16
+    isbn13: '9784088603780'
+    release_date: '1998-03'
+- type: bunkobon
+  label: 集英社文庫 コミック版
+  imprint: 集英社文庫 コミック版
+  publisher: 集英社
+  volumes:
+  - number: 1
+    isbn13: '9784086177238'
+    release_date: '2001-06'
+  - number: 2
+    isbn13: '9784086177245'
+    release_date: '2001-06'
+  - number: 3
+    isbn13: '9784086177252'
+    release_date: '2001-08'
+  - number: 4
+    isbn13: '9784086177269'
+    release_date: '2001-08'
+  - number: 5
+    isbn13: '9784086177276'
+    release_date: '2001-09'
+  - number: 6
+    isbn13: '9784086177283'
+    release_date: '2001-09-23'
+  - number: 7
+    isbn13: '9784086177290'
+    release_date: '2001-10'
+  - number: 8
+    isbn13: '9784086177306'
+    release_date: '2001-10'
+  - number: 9
+    isbn13: '9784086177313'
+    release_date: '2001-10'

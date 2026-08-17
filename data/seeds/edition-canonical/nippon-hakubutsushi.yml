@@ -1,0 +1,48 @@
+slug: nippon-hakubutsushi
+canonical_label: 通常版
+canonical_publisher: 小学館
+canonical_imprint: 少年サンデーコミックス
+suppress_types:
+- bunkobon
+source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。'
+volumes:
+- number: 1
+  release_date: '1980-02-15'
+- number: 2
+  release_date: '1980-09-15'
+- number: 3
+  release_date: '1980-11-15'
+- number: 4
+  release_date: '1982-02-15'
+extra_editions:
+- type: shinsoban
+  label: NTT出版マンガ傑作選
+  imprint: NTT出版マンガ傑作選
+  publisher: NTT出版
+  volumes:
+  - number: 1
+    isbn13: '9784871884327'
+    release_date: '1996-03-28'
+  - number: 2
+    isbn13: '9784871884563'
+    release_date: '1996-06'
+    volume_label: 'PART 2'
+- type: shinsoban
+  label: KCスペシャル
+  imprint: KCスペシャル
+  publisher: 講談社
+  volumes:
+  - number: 1
+    isbn13: '9784061012462'
+    release_date: '1986-08-06'
+  - number: 2
+    isbn13: '9784061012479'
+    release_date: '1986-09-06'
+- type: bunkobon
+  label: ヤマケイ文庫
+  imprint: ヤマケイ文庫
+  publisher: 山と溪谷社
+  volumes:
+  - number: 0
+    isbn13: '9784635048798'
+    release_date: '2020-07'

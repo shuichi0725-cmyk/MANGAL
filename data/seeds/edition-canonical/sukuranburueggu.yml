@@ -1,0 +1,60 @@
+slug: sukuranburueggu
+canonical_label: 通常版
+canonical_publisher: 少年画報社
+canonical_imprint: ヒット・コミックス
+source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。'
+volumes:
+- number: 1
+  release_date: '1978-01'
+  volume_label: '1 (ひとりぐらしのバラード)'
+- number: 2
+  release_date: '1978-04'
+  volume_label: '2 (アウトサイダーブルース)'
+- number: 3
+  release_date: '1978-08-01'
+- number: 4
+  release_date: '1978-09-15'
+- number: 5
+  release_date: '1978-12-15'
+- number: 6
+  release_date: '1979-05-01'
+- number: 7
+  release_date: '1979-08-15'
+- number: 8
+  release_date: '1979-10-01'
+- number: 9
+  release_date: '1980-01-15'
+- number: 10
+  release_date: '1980-04-15'
+- number: 11
+  release_date: '1980-08-15'
+- number: 12
+  release_date: '1981-01-15'
+extra_editions:
+- type: shinsoban
+  label: Star comics
+  imprint: Star comics
+  publisher: 大都社
+  volumes:
+  - number: 1
+    isbn13: '9784886533364'
+    release_date: '1986-11-30'
+  - number: 2
+    isbn13: '9784886533371'
+    release_date: '1986-11-30'
+  - number: 3
+    isbn13: '9784886533388'
+    release_date: '1986-12-30'
+  - number: 4
+    isbn13: '9784886533395'
+    release_date: '1986-12-30'
+  - number: 5
+    release_date: '1987-01-30'
+  - number: 6
+    release_date: '1987-01-30'
+  - number: 7
+    isbn13: '9784886533432'
+    release_date: '1987-02-20'
+  - number: 8
+    isbn13: '9784886533449'
+    release_date: '1987-02-20'
