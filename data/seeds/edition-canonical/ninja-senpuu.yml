@@ -1,0 +1,46 @@
+slug: ninja-senpuu
+canonical_label: 通常版
+canonical_publisher: 集英社
+canonical_imprint: コンパクト・コミックス
+source: 'ギャラ型B是正 2026-08-17: 通常版タブに1995年小学館叢書(全2巻)・1967年コンパクト・コミックス・1959年東邦漫画が混線し、1-2巻が1995年で4-5巻が1959年という36年逆行。NDL SRU(creator=白土三平)で確定= 【コンパクトコミックス】集英社「忍者旋風 : 風魔忍風伝」全1-4巻 昭和42(1967)=完備最古 / 小学館叢書 全2巻 1995.11-12 / 小学館クリエイティブ「未復刻集成」2010.9(ISBN 9784778031473) / 小学館文庫 全2巻 1999.5。東邦漫画版(1959)はMADBが3-6巻しか持たず1-2巻が両ソースに無いため主版にせずその他タブへ(巻番号はMADBのまま)。★NDLの「小学館叢書/小学館文庫 忍者旋風シリーズ」は別題『真田剣流』で別ISBNのため本作の版ではない。文庫タブ(小学館文庫 全2巻)は混在なしのため温存。'
+volumes:
+- number: 1
+  release_date: '1967-12-31'
+- number: 2
+  release_date: '1967-12-31'
+- number: 3
+  release_date: '1967-12-31'
+- number: 4
+  release_date: '1967-12-31'
+extra_editions:
+- type: other
+  label: 東邦漫画版(1959)
+  imprint: 東邦漫画
+  publisher: 東邦漫画出版社
+  volumes:
+  - number: 3
+    release_date: null
+  - number: 4
+    release_date: '1959-10'
+  - number: 5
+    release_date: '1959-12'
+  - number: 6
+    release_date: null
+- type: other
+  label: 小学館叢書版
+  imprint: 小学館叢書
+  publisher: 小学館
+  volumes:
+  - number: 1
+    isbn13: '9784091973658'
+    release_date: '1995-11'
+  - number: 2
+    isbn13: '9784091973665'
+    release_date: '1995-12'
+- type: other
+  label: 未復刻集成(小学館クリエイティブ)
+  publisher: 小学館クリエイティブ
+  volumes:
+  - number: 1
+    isbn13: '9784778031473'
+    release_date: '2010-09'
