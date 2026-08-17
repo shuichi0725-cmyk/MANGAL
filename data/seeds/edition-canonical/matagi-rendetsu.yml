@@ -1,0 +1,96 @@
+slug: matagi-rendetsu
+canonical_label: 通常版
+canonical_publisher: 青林堂
+canonical_imprint: 現代漫画家自選シリーズ
+suppress_types:
+- bunkobon
+source: 'ギャラ型B是正 2026-08-17: 1985年のKCスペシャル(講談社)1冊が通常版の3巻枠を占有し、初版現代漫画家自選シリーズ(1973-75)の3巻が頁から消えていた(頁の出版社も講談社表示に化けていた)。文庫タブも中公文庫コミック版(2007 全5巻)と講談社漫画文庫(1977)が混ざり6巻だけ1977になっていた。NDL SRU(creator=矢口高雄)で5runを分離確定= ①現代漫画家自選シリーズ **青林堂** 1973-(巻之1/巻之2を確認。全6巻の日付はMADB) ②講談社漫画文庫 全6巻 1977.3-6 ③サンコミックス 朝日ソノラマ 全6巻 1979.10-12 ④中公文庫コミック版 全5巻 2007.5-9 ⑤中公文庫 新装版 上下 2019.4.25。①を主版に、他はextra_editionsへ。文庫は3種あるので suppress_types で作り直した。'
+volumes:
+- number: 1
+  release_date: '1973-03'
+- number: 2
+  release_date: '1973-08'
+- number: 3
+  release_date: '1974-02'
+- number: 4
+  release_date: '1974-09'
+- number: 5
+  release_date: '1975-06'
+- number: 6
+  release_date: '1975-09'
+extra_editions:
+- type: shinsoban
+  label: サンコミックス版(朝日ソノラマ)
+  imprint: サンコミックス
+  publisher: 朝日ソノラマ
+  volumes:
+  - number: 1
+    release_date: '1979-10-25'
+  - number: 2
+    release_date: '1979-10'
+  - number: 3
+    release_date: '1979-11-26'
+  - number: 4
+    release_date: '1979-11'
+  - number: 5
+    release_date: '1979-12'
+  - number: 6
+    release_date: '1979-12'
+- type: shinsoban
+  label: KCスペシャル版(講談社)
+  imprint: KCスペシャル
+  publisher: 講談社
+  volumes:
+  - number: 3
+    isbn13: '9784061011762'
+    release_date: '1985-12-06'
+- type: bunkobon
+  label: 文庫版(講談社漫画文庫)
+  imprint: 講談社漫画文庫
+  publisher: 講談社
+  volumes:
+  - number: 1
+    release_date: '1977-03'
+  - number: 2
+    release_date: '1977-03'
+  - number: 3
+    release_date: '1977-04-20'
+  - number: 4
+    release_date: '1977-05-30'
+  - number: 5
+    release_date: '1977-06-30'
+  - number: 6
+    release_date: '1977-06'
+- type: bunkobon
+  label: 文庫版(中公文庫コミック版)
+  imprint: 中公文庫コミック版
+  publisher: 中央公論新社
+  volumes:
+  - number: 1
+    isbn13: '9784122048676'
+    release_date: '2007-05'
+  - number: 2
+    isbn13: '9784122048805'
+    release_date: '2007-06'
+  - number: 3
+    isbn13: '9784122048942'
+    release_date: '2007-07'
+  - number: 4
+    isbn13: '9784122049062'
+    release_date: '2007-08'
+  - number: 5
+    isbn13: '9784122049192'
+    release_date: '2007-09'
+- type: bunkobon
+  label: 文庫版(中公文庫・新装版)
+  imprint: 中公文庫
+  publisher: 中央公論新社
+  volumes:
+  - number: 1
+    isbn13: '9784122067288'
+    release_date: '2019-04-25'
+    volume_label: 上
+  - number: 2
+    isbn13: '9784122067295'
+    release_date: '2019-04-25'
+    volume_label: 下

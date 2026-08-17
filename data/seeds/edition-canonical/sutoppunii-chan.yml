@@ -1,0 +1,118 @@
+slug: sutoppunii-chan
+canonical_label: 通常版
+canonical_publisher: 虫プロ商事
+canonical_imprint: 虫コミックス
+source: 'ギャラ型B是正 2026-08-17: 2008年のマンガショップ完全版(一学期 上中下)が通常版の1-3巻枠を占有し、初版虫コミックス(1968-70)の1-3巻が頁から消えていた(頁の出版社もパンローリング・レーベルもカッパ・コミックス表示に化けていた)。さらにマンガショップ版は9冊あるのに巻番号が1/2/3の3重複で6冊が不可視だった。NDL SRU(creator=関谷ひさし)でマンガショップシリーズ v.264-272 = 一学期(上中下)/2学期(上中下)/3学期(上中下)の全9巻と確認し1-9に採番(volume_labelに学期と副題を保持)。初版run= 虫コミックス 全13巻 1968-05〜1970-12(MADB単独。NDLは虫プロ商事の1968.7/1969.3を巻番号なしで収録=不在≠不存在)。他run= カッパ・コミックス 光文社 1964 / ホーム・コミックス 汐文社 1975.10 全5巻 / サンコミックス 朝日ソノラマ 1981-82 全3巻 / 漫画名作館 アース出版局 1992.9。'
+volumes:
+- number: 1
+  release_date: '1968-05'
+- number: 2
+  release_date: '1968-07'
+- number: 3
+  release_date: '1968-09'
+- number: 4
+  release_date: '1968-11'
+- number: 5
+  release_date: '1969-03'
+- number: 6
+  release_date: '1969-06'
+- number: 7
+  release_date: '1969-09'
+- number: 8
+  release_date: '1970-05-30'
+- number: 9
+  release_date: '1970-06'
+- number: 10
+  release_date: '1970-08'
+- number: 11
+  release_date: '1970-09'
+- number: 12
+  release_date: '1970-11'
+- number: 13
+  release_date: '1970-12'
+extra_editions:
+- type: other
+  label: カッパ・コミックス版(光文社)
+  imprint: カッパ・コミックス
+  publisher: 光文社
+  volumes:
+  - number: 1
+    release_date: '1964-10-01'
+- type: shinsoban
+  label: ホーム・コミックス版(汐文社)
+  imprint: ホーム・コミックス
+  publisher: 汐文社
+  volumes:
+  - number: 1
+    release_date: '1975-10-30'
+  - number: 2
+    release_date: '1975-10-30'
+  - number: 3
+    release_date: '1975-10-30'
+  - number: 4
+    release_date: '1975-10'
+  - number: 5
+    release_date: '1975-10-30'
+- type: shinsoban
+  label: サンコミックス版(朝日ソノラマ)
+  imprint: サンコミックス
+  publisher: 朝日ソノラマ
+  volumes:
+  - number: 1
+    isbn13: '9784257916703'
+    release_date: '1981-11'
+  - number: 2
+    isbn13: '9784257916710'
+    release_date: '1981-12'
+  - number: 3
+    isbn13: '9784257916727'
+    release_date: '1982-01'
+- type: shinsoban
+  label: 漫画名作館(アース出版局)
+  imprint: 漫画名作館
+  publisher: アース出版局
+  volumes:
+  - number: 1
+    isbn13: '9784795298231'
+    release_date: '1992-09-18'
+- type: kanzenban
+  label: 完全版(マンガショップ)
+  imprint: マンガショップシリーズ
+  publisher: マンガショップ
+  volumes:
+  - number: 1
+    isbn13: '9784775912645'
+    release_date: '2008-09-15'
+    volume_label: 一学期 上
+  - number: 2
+    isbn13: '9784775912652'
+    release_date: '2008-09-15'
+    volume_label: 一学期 中
+  - number: 3
+    isbn13: '9784775912669'
+    release_date: '2008-09-15'
+    volume_label: 一学期 下
+  - number: 4
+    isbn13: '9784775912676'
+    release_date: '2008-10-15'
+    volume_label: 2学期 上
+  - number: 5
+    isbn13: '9784775912683'
+    release_date: '2008-10-15'
+    volume_label: 2学期 中
+  - number: 6
+    isbn13: '9784775912690'
+    release_date: '2008-10-15'
+    volume_label: 2学期 下
+  - number: 7
+    isbn13: '9784775912706'
+    release_date: '2008-11-15'
+    volume_label: 3学期 上
+  - number: 8
+    isbn13: '9784775912713'
+    release_date: '2008-11-15'
+    volume_label: 3学期 中
+  - number: 9
+    isbn13: '9784775912720'
+    release_date: '2008-11-15'
+    volume_label: 3学期 下
