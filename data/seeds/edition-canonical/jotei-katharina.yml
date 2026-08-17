@@ -1,0 +1,48 @@
+slug: jotei-katharina
+canonical_label: 通常版
+canonical_publisher: 中央公論社
+canonical_imprint: 中公コミックス
+source: 'ギャラ型是正 2026-08-17(worksheetのA_SPLIT_WORK?判定だが実体はB型=復刻混在): 初出の中公コミックス(1982-1984 全5巻)がMADB上で2 editionに割れ、そこへ2014年KCDXが食い込んで1巻2014-11→4巻1984-03-20の30年逆行になっていた。NDL SRU(creator=池田理代子)で全5巻のISBNを確定= 第1巻9784120011368 1982.9 / 第2巻9784120011733 1983.3 / 第3巻9784120012259 1983.9 / 第4巻4120012786 1984 / 第5巻4120013197 1984.9(日付はMADBの方が精度が高いのでMADB優先)。中公愛蔵版(1987)・KCDX(2014 全4巻)はextra_editionsへ。文庫タブ(中公文庫コミック版 全3巻 1994)は混在なしのため温存。★MADBが同じクラスタに入れていた「世界美女秘話シリーズ」1冊(ISBN 9784792604035・2007-09・著者=榎本由美)は**池田理代子の本作とは別人の別作品**なので本seedには含めない=この頁から外れる。別頁として登録すべき候補として changelog に記録した(消してよいと判断したのではない)。'
+volumes:
+- number: 1
+  isbn13: '9784120011368'
+  release_date: '1982-09-20'
+- number: 2
+  isbn13: '9784120011733'
+  release_date: '1983-03'
+- number: 3
+  isbn13: '9784120012259'
+  release_date: '1983-09-20'
+- number: 4
+  isbn13: '9784120012785'
+  release_date: '1984-03-20'
+- number: 5
+  isbn13: '9784120013195'
+  release_date: '1984-09-20'
+extra_editions:
+- type: aizoban
+  label: 中公愛蔵版
+  imprint: 中公愛蔵版
+  publisher: 中央公論社
+  volumes:
+  - number: 1
+    isbn13: '9784120015878'
+    release_date: '1987-07'
+    volume_label: 全1巻
+- type: shinsoban
+  label: KCDX版(講談社)
+  imprint: KCDX
+  publisher: 講談社
+  volumes:
+  - number: 1
+    isbn13: '9784063769562'
+    release_date: '2014-11'
+  - number: 2
+    isbn13: '9784063769579'
+    release_date: '2014-11'
+  - number: 3
+    isbn13: '9784063769753'
+    release_date: '2014-11'
+  - number: 4
+    isbn13: '9784063769760'
+    release_date: '2014-11'

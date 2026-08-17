@@ -1,0 +1,32 @@
+slug: katamezaru
+canonical_label: 通常版
+canonical_publisher: 集英社
+canonical_imprint: コンパクトコミックス
+suppress_types:
+- bunkobon
+source: 'ギャラ型是正 2026-08-17(worksheetのA_SPLIT_WORK?判定だが実体はB型=復刻混在): 通常版タブに1968年コンパクトコミックス(前後編)と2008年講談社漫画文庫が混線し40年逆行、文庫タブも小学館文庫(1976)と講談社漫画文庫(2008)が混ざっていた。NDL SRU(creator=横山光輝)で確定= 【コンパクトコミックス】集英社 前編/後編 昭和43(1968) / 【小学館文庫 ; 381】小学館 1・2巻 1976.04.20 / 【講談社漫画文庫】講談社 2008.1(ISBN 9784063705157)。初出のコンパクトコミックスを主版に、文庫2種は suppress_types で版ごとに作り直した。'
+volumes:
+- number: 1
+  release_date: '1968-02-29'
+  volume_label: 前編
+- number: 2
+  release_date: '1968-02-29'
+  volume_label: 後編
+extra_editions:
+- type: bunkobon
+  label: 文庫版(小学館文庫)
+  imprint: 小学館文庫
+  publisher: 小学館
+  volumes:
+  - number: 1
+    release_date: '1976-04-20'
+  - number: 2
+    release_date: '1976-04-20'
+- type: bunkobon
+  label: 文庫版(講談社漫画文庫)
+  imprint: 講談社漫画文庫
+  publisher: 講談社
+  volumes:
+  - number: 1
+    isbn13: '9784063705157'
+    release_date: '2008-01'

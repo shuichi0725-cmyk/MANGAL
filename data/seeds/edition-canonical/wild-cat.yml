@@ -1,0 +1,29 @@
+slug: wild-cat
+canonical_label: 通常版
+canonical_publisher: 朝日ソノラマ
+canonical_imprint: サンコミックス
+source: 'ギャラ型是正 2026-08-17(worksheetのA_SPLIT_WORK?判定だが実体はB型=復刻混在): 通常版タブに2010年の秋田書店プレイコミック・シリーズが1巻枠として入り、初出サンコミックス(朝日ソノラマ 全3巻 1971)と39年逆行していた。SUN WIDE COMICS(1986)も巻番号衝突で不可視。初出run= サンコミックス v1 1971-07-10 / v2 1971-08-20 / v3 1971-09-16。他はextra_editionsへ。文庫タブ(双葉文庫名作シリーズ 全2巻 2002)は混在なしのため温存。※石ノ森章太郎萬画大全集の2冊は日付もISBNも無く元から非表示のため起こさない。'
+volumes:
+- number: 1
+  release_date: '1971-07-10'
+- number: 2
+  release_date: '1971-08-20'
+- number: 3
+  release_date: '1971-09-16'
+extra_editions:
+- type: wideban
+  label: SUN WIDE COMICS版
+  imprint: SUN WIDE COMICS
+  publisher: 朝日ソノラマ
+  volumes:
+  - number: 2
+    isbn13: '9784257960782'
+    release_date: '1986-05'
+- type: other
+  label: プレイコミック・シリーズ(秋田書店)
+  imprint: プレイコミック・シリーズ
+  publisher: 秋田書店
+  volumes:
+  - number: 1
+    isbn13: '9784253250252'
+    release_date: '2010-09'

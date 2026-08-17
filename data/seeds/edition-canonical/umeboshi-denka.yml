@@ -1,0 +1,80 @@
+slug: umeboshi-denka
+canonical_label: 通常版
+canonical_publisher: 小学館
+canonical_imprint: てんとう虫コミックス
+source: 'ギャラ型是正 2026-08-17(worksheetのA_SPLIT_WORK?判定だが実体はB型=復刻混在): 通常版タブで2018年のてんとう虫コミックス新装(ISBN 97840914267xx/97840914268xx)が1-3巻枠を占有し、1977年の初出と41年逆行していた。中公コミックス(1987 全5巻)・ぴっかぴかコミックス・藤子・F・不二雄大全集(2011-12 全4巻)は巻番号衝突で頁に出ていなかった。初出run= てんとう虫コミックス 小学館 全3巻 1977-05-25/06-25/07-25。他はextra_editionsへ分離。文庫タブ(小学館コロコロ文庫 全2巻 1998)は混在なしのため温存。※中公コミックスの版元は ISBN出版者記号 4-124 = 中央公論社。'
+volumes:
+- number: 1
+  release_date: '1977-05-25'
+- number: 2
+  release_date: '1977-06-25'
+- number: 3
+  release_date: '1977-07-25'
+extra_editions:
+- type: shinsoban
+  label: てんとう虫コミックス(2018新装)
+  imprint: てんとう虫コミックス
+  publisher: 小学館
+  volumes:
+  - number: 1
+    isbn13: '9784091426789'
+    release_date: '2018-03'
+  - number: 2
+    isbn13: '9784091426796'
+    release_date: '2018-04'
+  - number: 3
+    isbn13: '9784091426802'
+    release_date: '2018-05'
+- type: other
+  label: 中公コミックス 藤子不二雄ランド
+  imprint: 中公コミックス
+  publisher: 中央公論社
+  volumes:
+  - number: 1
+    isbn13: '9784124101553'
+    release_date: '1987-08-21'
+  - number: 2
+    isbn13: '9784124101591'
+    release_date: '1987-09'
+  - number: 3
+    isbn13: '9784124101638'
+    release_date: '1987-10-16'
+  - number: 4
+    isbn13: '9784124101676'
+    release_date: '1987-11-20'
+  - number: 5
+    isbn13: '9784124101713'
+    release_date: '1987-12-11'
+- type: other
+  label: ぴっかぴかコミックス
+  imprint: ぴっかぴかコミックス
+  publisher: 小学館
+  volumes:
+  - number: 2
+    isbn13: '9784091480255'
+    release_date: '2006-02-05'
+- type: other
+  label: ぴっかぴかコミックス カラー版
+  imprint: ぴっかぴかコミックス カラー版
+  publisher: 小学館
+  volumes:
+  - number: 1
+    isbn13: '9784091482310'
+    release_date: '2006-01-05'
+- type: kanzenban
+  label: 藤子・F・不二雄大全集
+  imprint: 藤子・F・不二雄大全集
+  publisher: 小学館
+  volumes:
+  - number: 1
+    isbn13: '9784091434739'
+    release_date: '2011-10-30'
+  - number: 2
+    isbn13: '9784091434791'
+    release_date: '2011-12-27'
+  - number: 3
+    isbn13: '9784091434845'
+    release_date: '2012-02-29'
+  - number: 4
+    isbn13: '9784091434876'
+    release_date: '2012-03-28'

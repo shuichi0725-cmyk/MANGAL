@@ -1,0 +1,22 @@
+slug: nyankororin
+canonical_label: 通常版
+canonical_publisher: 集英社
+canonical_imprint: マーガレットコミックス
+source: 'ギャラ型是正 2026-08-17(worksheetのA_SPLIT_WORK?判定だが実体はB型=復刻混在): 2014年の復刊ドットコム版(1冊)が通常版の1巻枠を占有し、初出のマーガレットコミックス(集英社 1974-1979)は2-4巻の残骸だけになっていた。MADBは3巻だけを別sid(著者に白泉社が混入したクラスタ)に落としていたので統合。初出run= v1 1974-07-20 / v2 1976-04-20 / v3 1978-04 / v4 1979-03-20 の全4巻。復刻(ISBN 9784835450414 = 出版者記号4-8354 復刊ドットコム 2014.3)はextra_editionsへ。'
+volumes:
+- number: 1
+  release_date: '1974-07-20'
+- number: 2
+  release_date: '1976-04-20'
+- number: 3
+  release_date: '1978-04'
+- number: 4
+  release_date: '1979-03-20'
+extra_editions:
+- type: shinsoban
+  label: 復刻版(復刊ドットコム)
+  publisher: 復刊ドットコム
+  volumes:
+  - number: 1
+    isbn13: '9784835450414'
+    release_date: '2014-03'

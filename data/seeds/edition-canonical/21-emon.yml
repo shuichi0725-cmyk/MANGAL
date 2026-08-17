@@ -1,0 +1,77 @@
+slug: 21-emon
+canonical_label: 通常版
+canonical_publisher: 虫プロ商事
+canonical_imprint: 虫コミックス
+source: 'ギャラ型是正 2026-08-17(worksheetのA_SPLIT_WORK?判定だが実体はB型=復刻混在): 通常版タブで2018年のてんとう虫コミックス新装(ISBN 97840914275xx)が1巻枠を占有し、1977-78年の初出てんとう虫コミックスと41年逆行していた。さらに虫コミックス(1971-72 全3巻)・中公コミックス(1984 全5巻)・藤子・F・不二雄大全集(2010)は巻番号衝突で頁に出ていなかった。NDL SRU(creator=藤子不二雄)で確定= 【てんとう虫コミックス】小学館 第1巻1977.8(ISBN 4091401716)/第2巻1977.11(9784091401724)/第3巻1978.2(9784091401731) / 【中公コミックス 藤子不二雄ランド】中央公論社 全5巻 1984。★主版は「完備最古」の規則どおり虫コミックス(虫プロ商事 全3巻 1971-10-30〜1972-01-30・MADB単独だがNDL未収録層)とし、てんとう虫コミックス全4巻はNDLのISBNを補完した上で別タブに置いた。'
+volumes:
+- number: 1
+  release_date: '1971-10-30'
+- number: 2
+  release_date: '1971-11-30'
+- number: 3
+  release_date: '1972-01-30'
+extra_editions:
+- type: other
+  label: てんとう虫コミックス(初版)
+  imprint: てんとう虫コミックス
+  publisher: 小学館
+  volumes:
+  - number: 1
+    isbn13: '9784091401717'
+    release_date: '1977-08-25'
+  - number: 2
+    isbn13: '9784091401724'
+    release_date: '1977-11-25'
+  - number: 3
+    isbn13: '9784091401731'
+    release_date: '1978-02-25'
+  - number: 4
+    release_date: '1978-04-25'
+- type: shinsoban
+  label: てんとう虫コミックス(2018新装)
+  imprint: てんとう虫コミックス
+  publisher: 小学館
+  volumes:
+  - number: 1
+    isbn13: '9784091427540'
+    release_date: '2018-08'
+  - number: 2
+    isbn13: '9784091427557'
+    release_date: '2018-09'
+  - number: 3
+    isbn13: '9784091427564'
+    release_date: '2018-10'
+  - number: 4
+    isbn13: '9784091427571'
+    release_date: '2018-10'
+- type: other
+  label: 中公コミックス 藤子不二雄ランド
+  imprint: 中公コミックス
+  publisher: 中央公論社
+  volumes:
+  - number: 1
+    isbn13: '9784124100037'
+    release_date: '1984-06-15'
+  - number: 2
+    isbn13: '9784124100075'
+    release_date: '1984-07'
+  - number: 3
+    isbn13: '9784124100112'
+    release_date: '1984-08-17'
+  - number: 4
+    isbn13: '9784124100150'
+    release_date: '1984-09'
+  - number: 5
+    isbn13: '9784124100198'
+    release_date: '1984-10'
+- type: kanzenban
+  label: 藤子・F・不二雄大全集
+  imprint: 藤子・F・不二雄大全集
+  publisher: 小学館
+  volumes:
+  - number: 1
+    isbn13: '9784091434371'
+    release_date: '2010-08-30'
+  - number: 2
+    isbn13: '9784091434470'
+    release_date: '2010-12-29'

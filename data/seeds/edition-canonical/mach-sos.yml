@@ -1,0 +1,36 @@
+slug: mach-sos
+canonical_label: 通常版
+canonical_publisher: 双葉社
+canonical_imprint: 100てんランドコミックス
+source: 'ギャラ型是正 2026-08-17(worksheetのA_SPLIT_WORK?判定だが実体はB型=復刻混在): 2014年マンガショップ復刻(全4巻)が通常版の1-4巻枠を占有し、初出の100てんランドコミックス(1981-83 全6巻)は5-6巻の残骸だけになっていた。NDL SRU(creator=桜多吾作)で確定= 【100てんランドコミックス】双葉社 全1-6巻 1981.12.30-1983.02.20(MADBと日付完全一致) / 【マンガショップシリーズ ; vol.470】2014.2-。初出runを主版に、復刻はextra_editionsへ。'
+volumes:
+- number: 1
+  release_date: '1981-12-30'
+- number: 2
+  release_date: '1982-02-19'
+- number: 3
+  release_date: '1982-03-24'
+- number: 4
+  release_date: '1982-04-24'
+- number: 5
+  release_date: '1982-08-19'
+- number: 6
+  release_date: '1983-02-20'
+extra_editions:
+- type: shinsoban
+  label: 復刻版(マンガショップ)
+  imprint: マンガショップシリーズ
+  publisher: マンガショップ
+  volumes:
+  - number: 1
+    isbn13: '9784775914748'
+    release_date: '2014-02-02'
+  - number: 2
+    isbn13: '9784775914755'
+    release_date: '2014-03-02'
+  - number: 3
+    isbn13: '9784775914762'
+    release_date: '2014-04-02'
+  - number: 4
+    isbn13: '9784775914779'
+    release_date: '2014-04-02'

@@ -1,0 +1,52 @@
+slug: hana-buranko-yurete
+canonical_label: 通常版
+canonical_publisher: 集英社
+canonical_imprint: りぼんマスコットコミックス
+suppress_types:
+- bunkobon
+source: 'ギャラ型是正 2026-08-17(worksheetのA_SPLIT_WORK?判定だが実体はB型=復刻混在): 通常版タブに1990年SGコミックス・2026年このマンガがすごい!comics・1980年りぼんマスコットコミックスの4巻だけが混線し46年逆行。しかも初出りぼんマスコットコミックスの1-3巻はMADBが別sid(著者に白泉社が混入したクラスタ)に落としていて頁に出ていなかった。NDL SRU(creator=太刀掛秀子)で確定= 【りぼんマスコットコミックス ; 169/172】集英社 1巻1980.03.20 / 2巻1980.04.20 / 【SGコミックス ; 34】集英社 1990.04 / 【集英社文庫 コミック版】1997.2 全2巻 / 【このマンガがすごい!comics】宝島社 上下 2026.5。初出全4巻(3巻1980-05-20・4巻1980-06はMADB)を主版に統合し、他はextra_editionsへ。'
+volumes:
+- number: 1
+  release_date: '1980-03-20'
+- number: 2
+  release_date: '1980-04-20'
+- number: 3
+  release_date: '1980-05-20'
+- number: 4
+  release_date: '1980-06'
+extra_editions:
+- type: shinsoban
+  label: SGコミックス版
+  imprint: SGコミックス
+  publisher: 集英社
+  volumes:
+  - number: 1
+    isbn13: '9784088550343'
+    release_date: '1990-04'
+  - number: 2
+    isbn13: '9784088550404'
+    release_date: '1990-05'
+- type: shinsoban
+  label: このマンガがすごい!comics版
+  imprint: このマンガがすごい!comics
+  publisher: 宝島社
+  volumes:
+  - number: 1
+    isbn13: '9784299077929'
+    release_date: '2026-05-25'
+    volume_label: 上
+  - number: 2
+    isbn13: '9784299077943'
+    release_date: '2026-05-25'
+    volume_label: 下
+- type: bunkobon
+  label: 文庫版(集英社文庫コミック版)
+  imprint: 集英社文庫
+  publisher: 集英社
+  volumes:
+  - number: 1
+    isbn13: '9784086172813'
+    release_date: '1997-02-23'
+  - number: 2
+    isbn13: '9784086172820'
+    release_date: '1997-02-23'
