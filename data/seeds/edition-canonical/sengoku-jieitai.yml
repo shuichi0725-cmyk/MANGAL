@@ -1,0 +1,103 @@
+slug: sengoku-jieitai
+canonical_label: 通常版
+canonical_publisher: リイド社
+canonical_imprint: SPコミックス
+suppress_types:
+- bunkobon
+source: 'ギャラ型是正 2026-08-17(worksheetのA_SPLIT_WORK?判定だが実体はB型): 通常版タブに1998年Sebunコミックス・2002年アリババコミックス・2022年パーフェクト・メモワールが混線し、2巻2022-04-13→3巻2002-04の20年逆行になっていた。文庫タブも2008年セブン文庫と1976年秋田漫画文庫が混在。MADBは同作を4 sidに割り、リイド社の3run(SPコミックス2014-17/SP pocket wide 2018/パーフェクト・メモワール2022)も分散していた。★本作は1976年の初出が秋田漫画文庫(文庫)で、通常版として完備している最古のrunが無い。そこで**巻が最も揃っているSPコミックス全4巻(リイド社 2014-2017)**を主版に据え、他のrunは全てextra_editionsへ分けた(初出の秋田漫画文庫は文庫タブに独立させて温存)。★アリババコミックス(世界文化社)の2011-10・2016-01の2冊はMADBが巻番号を持たない(v0)ため、発売日順に3・4巻として同じタブに並べた。'
+volumes:
+- number: 1
+  isbn13: '9784845846689'
+  release_date: '2014-11'
+- number: 2
+  isbn13: '9784845846696'
+  release_date: '2015-10'
+- number: 3
+  isbn13: '9784845846702'
+  release_date: '2016-07'
+- number: 4
+  isbn13: '9784845846719'
+  release_date: '2017-05'
+extra_editions:
+- type: other
+  label: 秋田コミックス・セレクト
+  imprint: 秋田コミックス・セレクト
+  publisher: 秋田書店
+  volumes:
+  - number: 1
+    isbn13: '9784253108225'
+    release_date: '1985-07-15'
+- type: other
+  label: Sebunコミックス(世界文化社)
+  imprint: Sebunコミックス
+  publisher: 世界文化社
+  volumes:
+  - number: 1
+    isbn13: '9784418985135'
+    release_date: '1998-07'
+- type: other
+  label: アリババコミックス(世界文化社)
+  imprint: アリババコミックス
+  publisher: 世界文化社
+  volumes:
+  - number: 1
+    isbn13: '9784418021123'
+    release_date: '2002-04'
+    volume_label: 上巻
+  - number: 2
+    isbn13: '9784418021130'
+    release_date: '2002-04'
+    volume_label: 下巻
+  - number: 3
+    isbn13: '9784418111510'
+    release_date: '2011-10'
+  - number: 4
+    isbn13: '9784418151448'
+    release_date: '2016-01'
+- type: wideban
+  label: SP pocket wide(リイド社)
+  imprint: SP pocket wide
+  publisher: リイド社
+  volumes:
+  - number: 1
+    isbn13: '9784845853601'
+    release_date: '2018-09'
+    volume_label: 上
+  - number: 2
+    isbn13: '9784845853892'
+    release_date: '2018-10'
+    volume_label: 下
+- type: shinsoban
+  label: パーフェクト・メモワール(リイド社)
+  imprint: パーフェクト・メモワール
+  publisher: リイド社
+  volumes:
+  - number: 1
+    isbn13: '9784845863983'
+    release_date: '2022-03'
+  - number: 2
+    isbn13: '9784845864010'
+    release_date: '2022-04'
+  - number: 3
+    isbn13: '9784845864027'
+    release_date: '2022-05'
+  - number: 4
+    isbn13: '9784845864065'
+    release_date: '2022-06'
+- type: bunkobon
+  label: 文庫版(秋田漫画文庫)
+  imprint: 秋田漫画文庫
+  publisher: 秋田書店
+  volumes:
+  - number: 1
+    release_date: '1976-07-20'
+  - number: 2
+    release_date: '1976-07-20'
+- type: bunkobon
+  label: 文庫版(セブン文庫)
+  imprint: セブン文庫
+  publisher: 世界文化社
+  volumes:
+  - number: 1
+    isbn13: '9784418085040'
+    release_date: '2008-03'

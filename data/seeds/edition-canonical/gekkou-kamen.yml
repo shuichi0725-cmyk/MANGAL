@@ -1,0 +1,132 @@
+slug: gekkou-kamen
+canonical_label: 通常版
+canonical_publisher: 不明
+suppress_types:
+- bunkobon
+source: 'ギャラ型是正 2026-08-17(worksheetのA_SPLIT_WORK?判定。実体はB型+ISBN取り違え): 通常版タブに1958-59年の初出・1992-93年の漫画名作館・2009年のマンガショップ完全版が混線し、5巻1993-08→7巻1959-02の34年逆行になっていた。★さらにNDL SRU(creator=桑田次郎)で**ISBNの取り違え**が判明= 頁の1-3巻に入っていた 9784775913246/253/260 は漫画名作館(1992)のものではなく【マンガショップシリーズ 325-329】「月光仮面 完全版」2009.7-8(正義の章 上中下/慈愛の章 上中下)のISBN。漫画名作館(アース出版局)の正しいISBNは 9784795298248/255/262/279/415/422 の全6巻。両者を別タブに分けて是正した。初出run= MADBがUSAGI BOOKSとレーベル無しの2 editionに割っていた全7巻(1巻1958-09-01/7巻1959-02。2-6巻は日付なし)を統合して主版に。初出の版元は両ソースに記載が無いため publisher は不明と明示する。文庫タブは講談社漫画文庫(1976 上中下)と講談社の特選漫画文庫が混ざっていたのでsuppress_types で版ごとに作り直した。'
+volumes:
+- number: 1
+  release_date: '1958-09-01'
+- number: 2
+  release_date: null
+- number: 3
+  release_date: null
+- number: 4
+  release_date: null
+- number: 5
+  release_date: null
+- number: 6
+  release_date: null
+- number: 7
+  release_date: '1959-02'
+extra_editions:
+- type: other
+  label: エコーコミックス版
+  imprint: エコーコミックス
+  publisher: 不明
+  volumes:
+  - number: 1
+    release_date: '1976-04-20'
+  - number: 2
+    release_date: '1976-04-20'
+- type: other
+  label: Star comics版
+  imprint: Star comics
+  publisher: 不明
+  volumes:
+  - number: 1
+    isbn13: '9784886533852'
+    release_date: '1990-11-20'
+- type: shinsoban
+  label: 漫画名作館(アース出版局)
+  imprint: 漫画名作館
+  publisher: アース出版局
+  volumes:
+  - number: 1
+    isbn13: '9784795298248'
+    release_date: '1992-10-04'
+  - number: 2
+    isbn13: '9784795298255'
+    release_date: '1992-11-02'
+  - number: 3
+    isbn13: '9784795298262'
+    release_date: '1992-12-12'
+  - number: 4
+    isbn13: '9784795298279'
+    release_date: '1992-12-18'
+  - number: 5
+    isbn13: '9784795298415'
+    release_date: '1993-08-19'
+  - number: 6
+    isbn13: '9784795298422'
+    release_date: '1993-08-28'
+- type: kanzenban
+  label: 完全版(マンガショップ)
+  imprint: マンガショップシリーズ
+  publisher: マンガショップ
+  volumes:
+  - number: 1
+    isbn13: '9784775913246'
+    release_date: '2009-07'
+    volume_label: 正義の章 上
+  - number: 2
+    isbn13: '9784775913253'
+    release_date: '2009-07'
+    volume_label: 正義の章 中
+  - number: 3
+    isbn13: '9784775913260'
+    release_date: '2009-07'
+    volume_label: 正義の章 下
+  - number: 4
+    isbn13: '9784775913277'
+    release_date: '2009-08'
+    volume_label: 慈愛の章 上
+  - number: 5
+    isbn13: '9784775913284'
+    release_date: '2009-08'
+    volume_label: 慈愛の章 中
+  - number: 6
+    isbn13: '9784775913291'
+    release_date: '2009-08'
+    volume_label: 慈愛の章 下
+- type: other
+  label: マンガショップシリーズ(2014)
+  imprint: マンガショップシリーズ
+  publisher: マンガショップ
+  volumes:
+  - number: 1
+    isbn13: '9784775914809'
+    release_date: '2014-10'
+- type: bunkobon
+  label: 文庫版(講談社漫画文庫)
+  imprint: 講談社漫画文庫
+  publisher: 講談社
+  volumes:
+  - number: 1
+    release_date: '1976-06-01'
+    volume_label: 上
+  - number: 2
+    release_date: '1976-09-28'
+    volume_label: 中
+  - number: 3
+    release_date: '1976-07-05'
+    volume_label: 下
+- type: bunkobon
+  label: 文庫版(講談社の特選漫画文庫)
+  imprint: 講談社の特選漫画文庫
+  publisher: 講談社
+  volumes:
+  - number: 1
+    release_date: null
+  - number: 2
+    release_date: null
+  - number: 3
+    release_date: null
+  - number: 4
+    release_date: null
+  - number: 5
+    release_date: null
+  - number: 6
+    release_date: null
+  - number: 7
+    release_date: null
