@@ -1,0 +1,30 @@
+slug: yojigen-sekai
+canonical_label: 通常版
+canonical_publisher: 小学館
+canonical_imprint: 小学館叢書
+suppress_types:
+- bunkobon
+source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。'
+volumes:
+- number: 1
+  isbn13: '9784091972644'
+  release_date: '1992-12-10'
+extra_editions:
+- type: bunkobon
+  label: 小学館文庫(1995)
+  imprint: 小学館文庫
+  publisher: 小学館
+  volumes:
+  - number: 1
+    isbn13: '9784091920744'
+    release_date: '1995-10'
+- type: bunkobon
+  label: 小学館文庫(1977)
+  imprint: 小学館文庫
+  publisher: 小学館
+  volumes:
+  - number: 1
+    release_date: '1977-06'
+  - number: 2
+    isbn13: '9784091903525'
+    release_date: '1977-07-20'

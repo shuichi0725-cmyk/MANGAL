@@ -1,0 +1,107 @@
+slug: spider-man
+canonical_label: 通常版
+canonical_publisher: 朝日ソノラマ
+canonical_imprint: サンコミックス
+suppress_types:
+- bunkobon
+source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。'
+volumes:
+- number: 1
+  release_date: '1976-04-30'
+- number: 2
+  release_date: '1976-04-30'
+- number: 3
+  release_date: '1976-05-20'
+- number: 4
+  release_date: '1976-05-30'
+- number: 5
+  release_date: '1976-06-10'
+- number: 6
+  release_date: '1976-07-20'
+- number: 7
+  release_date: '1976-07-30'
+- number: 8
+  release_date: '1976-08-25'
+extra_editions:
+- type: shinsoban
+  label: standard版(1995)
+  publisher: 朝日ソノラマ
+  volumes:
+  - number: 1
+    isbn13: '9784257902522'
+    release_date: '1995-10'
+  - number: 2
+    isbn13: '9784257902539'
+    release_date: '1995-10'
+  - number: 3
+    isbn13: '9784257902546'
+    release_date: '1995-11-15'
+  - number: 4
+    isbn13: '9784257902553'
+    release_date: '1995-12'
+  - number: 5
+    isbn13: '9784257902560'
+    release_date: '1996-01'
+- type: bunkobon
+  label: MF文庫
+  imprint: MF文庫
+  publisher: メディアファクトリー
+  volumes:
+  - number: 1
+    isbn13: '9784840103565'
+    release_date: '2002-05'
+  - number: 2
+    isbn13: '9784840105712'
+    release_date: '2002-05'
+  - number: 3
+    isbn13: '9784840105859'
+    release_date: '2002-06'
+  - number: 4
+    isbn13: '9784840105866'
+    release_date: '2002-06'
+  - number: 5
+    isbn13: '9784840105941'
+    release_date: '2002-07'
+- type: shinsoban
+  label: SUN WIDE COMICS
+  imprint: SUN WIDE COMICS
+  publisher: 朝日ソノラマ
+  volumes:
+  - number: 4
+    isbn13: '9784257961192'
+    release_date: '1987-03-20'
+  - number: 5
+    isbn13: '9784257961239'
+    release_date: '1987-04-20'
+- type: shinsoban
+  label: サン ワイド コミックス
+  imprint: サン ワイド コミックス
+  publisher: 朝日ソノラマ
+  volumes:
+  - number: 1
+    isbn13: '9784257961109'
+    release_date: '1986-12-20'
+- type: shinsoban
+  label: SUNWIDE COMICS
+  imprint: SUNWIDE COMICS
+  publisher: 朝日ソノラマ
+  volumes:
+  - number: 2
+    isbn13: '9784257961130'
+    release_date: '1987-01-20'
+  - number: 3
+    isbn13: '9784257961161'
+    release_date: '1987-02-20'
+- type: shinsoban
+  label: マーベルグラフィックノベル・コレクション
+  imprint: マーベルグラフィックノベル・コレクション
+  publisher: 不明
+  volumes:
+  - number: 0
+    release_date: null
+- type: shinsoban
+  label: standard版(1978)
+  publisher: 不明
+  volumes:
+  - number: 1
+    release_date: '1978-05'

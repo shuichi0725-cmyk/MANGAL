@@ -1,0 +1,95 @@
+slug: ningen-shikkaku-ito-2010
+canonical_label: 通常版
+canonical_publisher: 新潮社
+canonical_imprint: Bunch comics
+suppress_types:
+- bunkobon
+source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。'
+volumes:
+- number: 1
+  isbn13: '9784107714862'
+  release_date: '2009-06'
+- number: 2
+  isbn13: '9784107715425'
+  release_date: '2010-02'
+- number: 3
+  isbn13: '9784107716217'
+  release_date: '2011-06'
+extra_editions:
+- type: shinsoban
+  label: マイコミックス
+  imprint: マイコミックス
+  publisher: 不明
+  volumes:
+  - number: 0
+    release_date: '1980-03-10'
+- type: bunkobon
+  label: 学研コミック文庫
+  imprint: 学研コミック文庫
+  publisher: 不明
+  volumes:
+  - number: 1
+    isbn13: '9784059006152'
+    release_date: '2010-01'
+- type: shinsoban
+  label: ビッグコミックス
+  imprint: ビッグコミックス
+  publisher: 小学館
+  volumes:
+  - number: 1
+    isbn13: '9784091897183'
+    release_date: '2017-11'
+  - number: 2
+    isbn13: '9784091898265'
+    release_date: '2018-04'
+  - number: 3
+    isbn13: '9784098600564'
+    release_date: '2018-08'
+- type: shinsoban
+  label: MANGA BUNGOシリーズ
+  imprint: MANGA BUNGOシリーズ
+  publisher: ホーム社
+  volumes:
+  - number: 1
+    isbn13: '9784834263107'
+    release_date: '2010-07'
+- type: shinsoban
+  label: マンガでBUNGAKU
+  imprint: マンガでBUNGAKU
+  publisher: 不明
+  volumes:
+  - number: 1
+    isbn13: '9784779636745'
+    release_date: '2018-08'
+- type: shinsoban
+  label: まんがで読破(2007)
+  imprint: まんがで読破
+  publisher: イースト・プレス
+  volumes:
+  - number: 1
+    isbn13: '9784872578102'
+    release_date: '2007-08'
+- type: shinsoban
+  label: まんがで読破(2020)
+  imprint: まんがで読破
+  publisher: イースト・プレス
+  volumes:
+  - number: 0
+    isbn13: '9784781686318'
+    release_date: '2020-11'
+- type: shinsoban
+  label: Home comics
+  imprint: Home comics
+  publisher: ホーム社
+  volumes:
+  - number: 1
+    isbn13: '9784834284140'
+    release_date: '2010-04'
+- type: shinsoban
+  label: まんがで読破(2023)
+  imprint: まんがで読破
+  publisher: 不明
+  volumes:
+  - number: 0
+    isbn13: '9784054069268'
+    release_date: '2023-09'

@@ -1,0 +1,189 @@
+slug: dooberumandeka
+canonical_label: 通常版
+canonical_publisher: 集英社
+canonical_imprint: ジャンプコミックス
+suppress_types:
+- bunkobon
+source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。'
+volumes:
+- number: 1
+  release_date: '1976-09-30'
+- number: 2
+  release_date: '1976-11-30'
+- number: 3
+  release_date: '1977-01-31'
+- number: 4
+  release_date: '1977-02-28'
+- number: 5
+  release_date: '1977-04-30'
+- number: 6
+  release_date: '1977-06-30'
+- number: 7
+  release_date: '1977-07-31'
+- number: 8
+  release_date: '1977-10-31'
+- number: 9
+  release_date: '1977-12-31'
+- number: 10
+  release_date: '1978-03-31'
+- number: 11
+  release_date: '1978-05'
+- number: 12
+  release_date: '1978-07-31'
+- number: 13
+  release_date: '1978-10-31'
+- number: 14
+  release_date: '1978-12-31'
+- number: 15
+  release_date: '1979-02'
+- number: 16
+  release_date: '1979-05-15'
+- number: 17
+  release_date: '1979-08-15'
+- number: 18
+  release_date: '1979-10-15'
+- number: 19
+  release_date: '1979-12-15'
+- number: 20
+  release_date: '1980-01-15'
+- number: 21
+  release_date: '1980-03'
+- number: 22
+  release_date: '1980-05'
+- number: 23
+  release_date: '1980-07-15'
+- number: 24
+  release_date: '1980-09-15'
+- number: 25
+  release_date: '1980-10'
+- number: 26
+  release_date: '1980-12-15'
+- number: 27
+  release_date: '1981-03'
+- number: 28
+  release_date: '1981-06-15'
+- number: 29
+  release_date: '1981-08-05'
+extra_editions:
+- type: shinsoban
+  label: ジャンプコミックセレクション
+  imprint: ジャンプコミックセレクション
+  publisher: ホーム社
+  volumes:
+  - number: 5
+    isbn13: '9784834210859'
+    release_date: '1987-10'
+- type: shinsoban
+  label: ジャンプ コミックス セレクション
+  imprint: ジャンプ コミックス セレクション
+  publisher: ホーム社
+  volumes:
+  - number: 1
+    isbn13: '9784834210811'
+    release_date: '1987-06'
+  - number: 2
+    isbn13: '9784834210828'
+    release_date: '1987-07'
+  - number: 4
+    isbn13: '9784834210842'
+    release_date: '1987-09'
+  - number: 6
+    isbn13: '9784834210866'
+    release_date: '1987-11-24'
+  - number: 7
+    isbn13: '9784834210873'
+    release_date: null
+  - number: 8
+    isbn13: '9784834210880'
+    release_date: '1988-01'
+  - number: 9
+    isbn13: '9784834210897'
+    release_date: null
+  - number: 10
+    isbn13: '9784834210903'
+    release_date: '1988-03'
+  - number: 11
+    isbn13: '9784834210910'
+    release_date: '1988-04'
+  - number: 12
+    isbn13: '9784834210927'
+    release_date: '1988-05'
+  - number: 13
+    isbn13: '9784834210934'
+    release_date: null
+  - number: 14
+    isbn13: '9784834210941'
+    release_date: '1988-07'
+  - number: 15
+    isbn13: '9784834210958'
+    release_date: '1988-08'
+  - number: 16
+    isbn13: '9784834210965'
+    release_date: null
+  - number: 17
+    isbn13: '9784834210972'
+    release_date: '1988-10'
+- type: bunkobon
+  label: 集英社文庫コミック版
+  imprint: 集英社文庫コミック版
+  publisher: 集英社
+  volumes:
+  - number: 1
+    isbn13: '9784086176712'
+    release_date: '2001-02-21'
+  - number: 2
+    isbn13: '9784086176729'
+    release_date: '2001-02-21'
+  - number: 3
+    isbn13: '9784086176736'
+    release_date: '2001-04-23'
+  - number: 4
+    isbn13: '9784086176743'
+    release_date: '2001-04-23'
+  - number: 5
+    isbn13: '9784086176750'
+    release_date: '2001-05-23'
+  - number: 9
+    isbn13: '9784086176798'
+    release_date: '2001-07'
+  - number: 10
+    isbn13: '9784086176804'
+    release_date: '2001-07'
+  - number: 11
+    isbn13: '9784086176811'
+    release_date: '2001-08'
+  - number: 12
+    isbn13: '9784086176828'
+    release_date: '2001-08'
+  - number: 14
+    isbn13: '9784086176842'
+    release_date: '2001-09'
+  - number: 15
+    isbn13: '9784086176859'
+    release_date: '2001-10'
+  - number: 16
+    isbn13: '9784086176866'
+    release_date: '2001-10'
+  - number: 17
+    isbn13: '9784086176873'
+    release_date: '2001-11'
+  - number: 18
+    isbn13: '9784086176880'
+    release_date: '2001-11'
+- type: bunkobon
+  label: 集英社文庫
+  imprint: 集英社文庫
+  publisher: 集英社
+  volumes:
+  - number: 6
+    isbn13: '9784086176767'
+    release_date: '2001-05'
+  - number: 7
+    isbn13: '9784086176774'
+    release_date: '2001-06'
+  - number: 8
+    isbn13: '9784086176781'
+    release_date: '2001-06'
+  - number: 13
+    isbn13: '9784086176835'
+    release_date: '2001-09'

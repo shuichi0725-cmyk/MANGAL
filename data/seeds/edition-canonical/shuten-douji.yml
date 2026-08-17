@@ -1,0 +1,151 @@
+slug: shuten-douji
+canonical_label: 通常版
+canonical_publisher: 不明
+canonical_imprint: 少年マガジンコミックス
+suppress_types:
+- bunkobon
+source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。'
+volumes:
+- number: 1
+  release_date: '1977-04-05'
+- number: 2
+  release_date: '1977-05-10'
+- number: 3
+  release_date: '1977-07-20'
+- number: 4
+  release_date: '1977-08-20'
+- number: 5
+  release_date: '1978-03'
+- number: 6
+  release_date: '1978-06-25'
+- number: 7
+  release_date: '1978-07-25'
+- number: 8
+  release_date: '1978-09-20'
+- number: 9
+  release_date: '1978-11-25'
+extra_editions:
+- type: bunkobon
+  label: 講談社漫画文庫
+  imprint: 講談社漫画文庫
+  publisher: 講談社
+  volumes:
+  - number: 1
+    isbn13: '9784063600971'
+    release_date: '2001-10'
+  - number: 2
+    isbn13: '9784063600988'
+    release_date: '2001-10'
+  - number: 3
+    isbn13: '9784063600995'
+    release_date: '2001-11'
+  - number: 4
+    isbn13: '9784063601008'
+    release_date: '2001-11'
+- type: shinsoban
+  label: standard版(1984)
+  publisher: 講談社
+  volumes:
+  - number: 1
+    isbn13: '9784061011526'
+    release_date: null
+  - number: 2
+    isbn13: '9784061011533'
+    release_date: '1984-08'
+  - number: 3
+    isbn13: '9784061011540'
+    release_date: '1985-09'
+  - number: 5
+    isbn13: '9784061011564'
+    release_date: '1985-11'
+- type: shinsoban
+  label: KCスペシャル
+  imprint: KCスペシャル
+  publisher: 講談社
+  volumes:
+  - number: 4
+    isbn13: '9784061011557'
+    release_date: '1985-10'
+- type: bunkobon
+  label: 扶桑社文庫
+  imprint: 扶桑社文庫
+  publisher: 扶桑社
+  volumes:
+  - number: 1
+    isbn13: '9784594020538'
+    release_date: '1996-08-30'
+  - number: 2
+    isbn13: '9784594020750'
+    release_date: '1996-09-30'
+  - number: 3
+    isbn13: '9784594021047'
+    release_date: '1996-10-30'
+  - number: 4
+    isbn13: '9784594021207'
+    release_date: '1996-11-30'
+  - number: 5
+    isbn13: '9784594021474'
+    release_date: '1996-12'
+  - number: 6
+    isbn13: '9784594021719'
+    release_date: '1997-01-30'
+- type: shinsoban
+  label: standard版(2020)
+  publisher: 復刊ドットコム
+  volumes:
+  - number: 1
+    isbn13: '9784835457864'
+    release_date: '2020-11'
+  - number: 2
+    isbn13: '9784835457871'
+    release_date: null
+  - number: 3
+    isbn13: '9784835457888'
+    release_date: '2021-01'
+  - number: 4
+    isbn13: '9784835457895'
+    release_date: '2021-02'
+- type: shinsoban
+  label: standard版(1998)
+  publisher: 扶桑社
+  volumes:
+  - number: 1
+    isbn13: '9784594024581'
+    release_date: '1998-04'
+  - number: 2
+    isbn13: '9784594024598'
+    release_date: '1998-04'
+  - number: 3
+    isbn13: '9784594024697'
+    release_date: '1998-05'
+  - number: 4
+    isbn13: '9784594024703'
+    release_date: '1998-06'
+  - number: 5
+    isbn13: '9784594025069'
+    release_date: '1998-07'
+  - number: 6
+    isbn13: '9784594025076'
+    release_date: '1998-08'
+- type: shinsoban
+  label: standard版(1988)
+  publisher: 講談社
+  volumes:
+  - number: 1
+    isbn13: '9784061769083'
+    release_date: '1988-09'
+  - number: 2
+    isbn13: '9784061769090'
+    release_date: '1988-09'
+  - number: 3
+    isbn13: '9784061769113'
+    release_date: '1988-10'
+  - number: 4
+    isbn13: '9784061769120'
+    release_date: '1988-11'
+  - number: 5
+    isbn13: '9784061769137'
+    release_date: '1988-12'
+  - number: 6
+    isbn13: '9784061769144'
+    release_date: '1989-01'

@@ -1,0 +1,74 @@
+slug: dororon-enma-kun
+canonical_label: 通常版
+canonical_publisher: 若木書房
+canonical_imprint: COMIC MATE
+suppress_types:
+- bunkobon
+source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。'
+volumes:
+- number: 1
+  release_date: '1979-03-25'
+- number: 2
+  release_date: '1979-03'
+- number: 3
+  release_date: '1979-03'
+extra_editions:
+- type: shinsoban
+  label: 永井豪華版
+  imprint: 永井豪華版
+  publisher: メディアファクトリー
+  volumes:
+  - number: 1
+    isbn13: '9784889918298'
+    release_date: '1999-05'
+  - number: 2
+    isbn13: '9784889918304'
+    release_date: '1999-05'
+- type: bunkobon
+  label: 中公文庫コミック版
+  imprint: 中公文庫コミック版
+  publisher: 中央公論社
+  volumes:
+  - number: 1
+    isbn13: '9784122025714'
+    release_date: '1996-03'
+  - number: 2
+    isbn13: '9784122025721'
+    release_date: '1996-03-18'
+- type: shinsoban
+  label: KPC
+  imprint: KPC
+  publisher: 講談社
+  volumes:
+  - number: 1
+    isbn13: '9784063530988'
+    release_date: '2003-08'
+  - number: 2
+    isbn13: '9784063531114'
+    release_date: '2003-09'
+- type: shinsoban
+  label: 角川コミックス・エース
+  imprint: 角川コミックス・エース
+  publisher: 不明
+  volumes:
+  - number: 1
+    isbn13: '9784047157248'
+    release_date: '2011-06-04'
+- type: shinsoban
+  label: standard版
+  publisher: 中央公論社
+  volumes:
+  - number: 1
+    isbn13: '9784120020278'
+    release_date: '1991-07'
+- type: shinsoban
+  label: SUNWIDE COMICS
+  imprint: SUNWIDE COMICS
+  publisher: 朝日ソノラマ
+  volumes:
+  - number: 1
+    isbn13: '9784257960522'
+    release_date: '1985-09-20'
+  - number: 2
+    isbn13: '9784257960553'
+    release_date: '1985-10-25'

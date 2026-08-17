@@ -1,0 +1,41 @@
+slug: denpa-odyssey
+canonical_label: 通常版
+canonical_publisher: 復刊ドットコム
+source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。'
+volumes:
+- number: 1
+  isbn13: '9784835445809'
+  release_date: '2011-03'
+- number: 2
+  isbn13: '9784835445816'
+  release_date: '2011-05'
+- number: 3
+  isbn13: '9784835445823'
+  release_date: '2011-07'
+extra_editions:
+- type: shinsoban
+  label: アスペクトコミックス
+  imprint: アスペクトコミックス
+  publisher: アスペクト
+  volumes:
+  - number: 4
+    isbn13: '9784757206274'
+    release_date: '2000-01'
+- type: shinsoban
+  label: ASPECT COMIX
+  imprint: ASPECT COMIX
+  publisher: アスペクト
+  volumes:
+  - number: 2
+    isbn13: '9784893669537'
+    release_date: '1998-03-09'
+  - number: 3
+    isbn13: '9784757202771'
+    release_date: '1999-01-04'
+- type: shinsoban
+  label: Ascii comix
+  imprint: Ascii comix
+  publisher: 不明
+  volumes:
+  - number: 1
+    release_date: '1997-01-22'

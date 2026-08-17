@@ -1,0 +1,52 @@
+slug: ricky-typhoon
+canonical_label: 通常版
+canonical_publisher: 集英社
+canonical_imprint: ジャンプ・コミックス
+source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。'
+volumes:
+- number: 1
+  release_date: '1981-01'
+- number: 2
+  release_date: '1981-03'
+- number: 3
+  release_date: '1981-06'
+- number: 4
+  release_date: '1981-09'
+- number: 5
+  release_date: '1981-12-15'
+- number: 6
+  release_date: '1982-03'
+- number: 7
+  release_date: '1982-05'
+- number: 8
+  release_date: '1982-08-15'
+- number: 9
+  release_date: '1982-11-15'
+extra_editions:
+- type: shinsoban
+  label: ジャンプコミックスセレクション
+  imprint: ジャンプコミックスセレクション
+  publisher: ホーム社
+  volumes:
+  - number: 1
+    isbn13: '9784834212617'
+    release_date: '1991-10'
+  - number: 2
+    isbn13: '9784834212624'
+    release_date: '1991-11'
+  - number: 3
+    isbn13: '9784834212631'
+    release_date: '1991-12'
+  - number: 4
+    release_date: '1992-01-22'
+  - number: 5
+    isbn13: '9784834212655'
+    release_date: '1992-02'
+- type: shinsoban
+  label: Gコミックス
+  imprint: Gコミックス
+  publisher: 日本文芸社
+  volumes:
+  - number: 1
+    isbn13: '9784537161236'
+    release_date: '2014-12'

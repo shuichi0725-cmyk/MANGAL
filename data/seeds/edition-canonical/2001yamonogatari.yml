@@ -1,0 +1,67 @@
+slug: 2001yamonogatari
+canonical_label: 通常版
+canonical_publisher: 双葉社
+canonical_imprint: ACTION COMICS
+suppress_types:
+- bunkobon
+source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。'
+volumes:
+- number: 1
+  release_date: '1985-08-18'
+- number: 2
+  release_date: '1985-12-28'
+- number: 3
+  isbn13: '9784575930764'
+  release_date: '1991-07'
+extra_editions:
+- type: shinsoban
+  label: 光文社コミック叢書「signal」
+  imprint: 光文社コミック叢書「signal」
+  publisher: 光文社
+  volumes:
+  - number: 3
+    isbn13: '9784334901455'
+    release_date: '2007-10'
+    volume_label: '下巻'
+- type: shinsoban
+  label: Signal special edition high-end
+  imprint: Signal special edition high-end
+  publisher: 光文社
+  volumes:
+  - number: 1
+    isbn13: '9784334901424'
+    release_date: '2007-10'
+    volume_label: '上巻'
+- type: shinsoban
+  label: アイランドコミックスPRIMO
+  imprint: アイランドコミックスPRIMO
+  publisher: 嶋中書店
+  volumes:
+  - number: 1
+    isbn13: '9784901819756'
+    release_date: '2003-12'
+  - number: 2
+    isbn13: '9784901819794'
+    release_date: '2004-01'
+- type: bunkobon
+  label: 双葉文庫
+  imprint: 双葉文庫
+  publisher: 双葉社
+  volumes:
+  - number: 1
+    isbn13: '9784575720303'
+    release_date: '1995-11'
+  - number: 2
+    isbn13: '9784575720310'
+    release_date: '1995-11'
+  - number: 3
+    isbn13: '9784575720327'
+    release_date: '1995-11'
+- type: shinsoban
+  label: Chuko★comics
+  imprint: Chuko★comics
+  publisher: 中央公論社
+  volumes:
+  - number: 1
+    isbn13: '9784120024382'
+    release_date: '1995-04-25'

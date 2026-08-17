@@ -1,0 +1,87 @@
+slug: game-center-arashi
+canonical_label: 通常版
+canonical_publisher: 小学館
+canonical_imprint: てんとう虫コミックス
+suppress_types:
+- bunkobon
+source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。'
+volumes:
+- number: 1
+  release_date: '1980-02'
+- number: 2
+  release_date: '1980-08'
+- number: 3
+  release_date: '1980-11-25'
+- number: 4
+  release_date: '1981-03-25'
+- number: 5
+  release_date: '1981-06-25'
+- number: 6
+  isbn13: '9784091403766'
+  release_date: '1981-09-25'
+- number: 7
+  release_date: '1982-01-25'
+- number: 8
+  release_date: '1982-04-25'
+- number: 9
+  release_date: '1982-05-25'
+- number: 10
+  release_date: '1982-07-25'
+- number: 11
+  release_date: '1982-09-25'
+- number: 12
+  isbn13: '9784091405524'
+  release_date: '1982-11-25'
+- number: 13
+  release_date: '1983-01-25'
+- number: 14
+  isbn13: '9784091405548'
+  release_date: '1983-06-25'
+- number: 15
+  isbn13: '9784091405555'
+  release_date: '1983-09-25'
+- number: 16
+  isbn13: '9784091405562'
+  release_date: '1983-11-25'
+- number: 17
+  isbn13: '9784091405579'
+  release_date: '1983-12-25'
+extra_editions:
+- type: shinsoban
+  label: standard版
+  publisher: 大空社
+  volumes:
+  - number: 1
+    isbn13: '9784872335125'
+    release_date: '2000-04-02'
+  - number: 2
+    isbn13: '9784872335187'
+    release_date: '2000-05-01'
+  - number: 3
+    isbn13: '9784872335279'
+    release_date: '2000-07-07'
+  - number: 4
+    isbn13: '9784872335286'
+    release_date: '2000-08-04'
+- type: bunkobon
+  label: 小学館コロコロ文庫
+  imprint: 小学館コロコロ文庫
+  publisher: 小学館
+  volumes:
+  - number: 1
+    isbn13: '9784091940612'
+    release_date: '1995-12'
+  - number: 2
+    isbn13: '9784091940629'
+    release_date: '1995-12'
+  - number: 3
+    isbn13: '9784091940636'
+    release_date: '1995-12'
+- type: shinsoban
+  label: もう一度読みたい!名作コミックシリーズ
+  imprint: もう一度読みたい!名作コミックシリーズ
+  publisher: 不明
+  volumes:
+  - number: 1
+    isbn13: '9784779622519'
+    release_date: '2014-08'

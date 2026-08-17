@@ -1,0 +1,40 @@
+slug: yakyuu-doahou-den
+canonical_label: 通常版
+canonical_publisher: 小学館
+canonical_imprint: 少年サンデーコミックス
+source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。'
+volumes:
+- number: 1
+  release_date: '1975-06-01'
+- number: 2
+  release_date: '1975-08'
+- number: 3
+  release_date: '1975-09'
+- number: 4
+  release_date: '1975-11'
+- number: 5
+  release_date: '1976-04'
+extra_editions:
+- type: shinsoban
+  label: 少年サンデーコミックス. 水島新司傑作まんが選
+  imprint: 少年サンデーコミックス. 水島新司傑作まんが選
+  publisher: 不明
+  volumes:
+  - number: 1
+    release_date: '1975-06-09'
+  - number: 4
+    release_date: '1975-11-09'
+- type: shinsoban
+  label: スーパービジュアル・コミックス
+  imprint: スーパービジュアル・コミックス
+  publisher: 小学館
+  volumes:
+  - number: 1
+    isbn13: '9784091602213'
+    release_date: '1992-08'
+  - number: 2
+    isbn13: '9784091602220'
+    release_date: '1992-09-15'
+  - number: 3
+    isbn13: '9784091602237'
+    release_date: '1992-10'

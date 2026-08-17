@@ -1,0 +1,69 @@
+slug: kyoufu
+canonical_label: 通常版
+canonical_publisher: 秋田書店
+canonical_imprint: サンデーコミックス
+suppress_types:
+- bunkobon
+source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。'
+volumes:
+- number: 1
+  release_date: '1971-11-10'
+- number: 2
+  release_date: null
+- number: 3
+  release_date: '1969-07'
+extra_editions:
+- type: bunkobon
+  label: 秋田漫画文庫
+  imprint: 秋田漫画文庫
+  publisher: 秋田書店
+  volumes:
+  - number: 1
+    release_date: '1976-08'
+  - number: 2
+    release_date: '1976-08'
+  - number: 3
+    release_date: '1976-08'
+- type: bunkobon
+  label: 秋田文庫
+  imprint: 秋田文庫
+  publisher: 秋田書店
+  volumes:
+  - number: 1
+    isbn13: '9784253171533'
+    release_date: '1995-10-10'
+  - number: 2
+    isbn13: '9784253171540'
+    release_date: '1995-10-10'
+- type: shinsoban
+  label: standard版
+  publisher: 秋田書店
+  volumes:
+  - number: 1
+    isbn13: '9784253103152'
+    release_date: '1990-02-20'
+  - number: 2
+    isbn13: '9784253103169'
+    release_date: '1990-03'
+- type: shinsoban
+  label: BIG COMICS SPECIAL
+  imprint: BIG COMICS SPECIAL
+  publisher: 小学館
+  volumes:
+  - number: 1
+    isbn13: '9784091802774'
+    release_date: '2006-05'
+  - number: 2
+    isbn13: '9784091802781'
+    release_date: '2006-05'
+- type: shinsoban
+  label: 秋田コミックス・セレクト
+  imprint: 秋田コミックス・セレクト
+  publisher: 秋田書店
+  volumes:
+  - number: 1
+    isbn13: '9784253108201'
+    release_date: '1985-05-20'
+  - number: 2
+    isbn13: '9784253108218'
+    release_date: '1985-06-20'

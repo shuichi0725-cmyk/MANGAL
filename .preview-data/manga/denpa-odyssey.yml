@@ -3,8 +3,8 @@ slug: denpa-odyssey
 title: 電波オデッセイ
 title_kana: デンパオデッセイ
 title_romaji: denpa odessei
-year_started: 2000
-year_ended: 2000
+year_started: 1997
+year_ended: 2011
 status: completed
 authors:
 - name: 永野のりこ
@@ -25,7 +25,7 @@ editions:
 - type: standard
   label: 通常版
   publisher: 復刊ドットコム
-  imprint: Ascii comix
+  imprint: 通常版
   volumes:
   - number: 1
     asin: null
@@ -42,13 +42,43 @@ editions:
     isbn13: '9784835445823'
     cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/5823/9784835445823.jpg?_ex=300x300
     release_date: 2011-07
+- type: shinsoban
+  label: アスペクトコミックス
+  publisher: アスペクト
+  imprint: アスペクトコミックス
+  volumes:
   - number: 4
     asin: null
     isbn13: '9784757206274'
     cover_url: null
     release_date: 2000-01
-    publisher: アスペクト
+- type: shinsoban
+  label: ASPECT COMIX
+  publisher: アスペクト
+  imprint: ASPECT COMIX
+  volumes:
+  - number: 2
+    asin: null
+    isbn13: '9784893669537'
+    cover_url: null
+    release_date: '1998-03-09'
+  - number: 3
+    asin: null
+    isbn13: '9784757202771'
+    cover_url: null
+    release_date: '1999-01-04'
+- type: shinsoban
+  label: Ascii comix
+  publisher: 不明
+  imprint: Ascii comix
+  volumes:
+  - number: 1
+    asin: null
+    isbn13: null
+    cover_url: null
+    release_date: '1997-01-22'
 publishers:
+- aspect
 - fukkan-com
 catch: 学校からも社会からも消えかけていた少女に、オデッセイと名乗る何かが生きる力を与えていった。再生の物語。
 anilist_id: 152117

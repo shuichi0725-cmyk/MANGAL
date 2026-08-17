@@ -1,0 +1,169 @@
+slug: nanairo-inko
+canonical_label: 通常版
+canonical_publisher: 講談社
+canonical_imprint: 手塚治虫漫画全集
+suppress_types:
+- bunkobon
+source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。'
+volumes:
+- number: 1
+  isbn13: '9784061759411'
+  release_date: '1994-04-16'
+- number: 2
+  isbn13: '9784061759428'
+  release_date: '1994-05-17'
+- number: 3
+  isbn13: '9784061759435'
+  release_date: '1994-06-17'
+- number: 4
+  isbn13: '9784061759442'
+  release_date: '1994-08-17'
+- number: 5
+  isbn13: '9784061759459'
+  release_date: '1994-10-17'
+- number: 6
+  isbn13: '9784061759466'
+  release_date: '1994-11-17'
+- number: 7
+  isbn13: '9784061759473'
+  release_date: '1994-12-14'
+extra_editions:
+- type: shinsoban
+  label: Shōnen champion comics = 少年チャンピオン・コミックス. 演劇ロマンコミックス
+  imprint: Shōnen champion comics = 少年チャンピオン・コミックス. 演劇ロマンコミックス
+  publisher: 秋田書店
+  volumes:
+  - number: 5
+    isbn13: '9784253038133'
+    release_date: '2024-02-06'
+- type: shinsoban
+  label: standard版
+  publisher: 復刊ドットコム
+  volumes:
+  - number: 1
+    isbn13: '9784835457130'
+    release_date: '2020-01'
+  - number: 2
+    isbn13: '9784835457147'
+    release_date: '2020-03'
+  - number: 3
+    isbn13: '9784835457154'
+    release_date: '2020-05'
+  - number: 4
+    isbn13: '9784835457161'
+    release_date: '2020-07'
+- type: bunkobon
+  label: 手塚治虫文庫全集
+  imprint: 手塚治虫文庫全集
+  publisher: 講談社
+  volumes:
+  - number: 1
+    isbn13: '9784063738445'
+    release_date: '2011-08'
+  - number: 2
+    isbn13: '9784063738452'
+    release_date: '2011-08'
+  - number: 3
+    isbn13: '9784063738469'
+    release_date: '2011-08'
+- type: shinsoban
+  label: Akita top comics wide
+  imprint: Akita top comics wide
+  publisher: 秋田書店
+  volumes:
+  - number: 1
+    isbn13: '9784253247146'
+    release_date: '2016-08'
+    volume_label: '第1幕'
+  - number: 2
+    isbn13: '9784253247153'
+    release_date: '2016-09'
+    volume_label: '第2幕'
+- type: shinsoban
+  label: 少年チャンピオン・コミックス
+  imprint: 少年チャンピオン・コミックス
+  publisher: 秋田書店
+  volumes:
+  - number: 7
+    isbn13: '9784253038157'
+    release_date: '1982-10'
+- type: shinsoban
+  label: SHONEN CHAMPION COMICS
+  imprint: SHONEN CHAMPION COMICS
+  publisher: 秋田書店
+  volumes:
+  - number: 1
+    release_date: '1981-09'
+  - number: 2
+    isbn13: '9784253038102'
+    release_date: '1981-11-05'
+  - number: 3
+    isbn13: '9784253038119'
+    release_date: '1982-01'
+  - number: 4
+    isbn13: '9784253038126'
+    release_date: '1982-04'
+  - number: 6
+    isbn13: '9784253038140'
+    release_date: '1982-08'
+- type: shinsoban
+  label: Akita Bunko
+  imprint: Akita Bunko
+  publisher: 秋田書店
+  volumes:
+  - number: 1
+    isbn13: '9784253173377'
+    release_date: '1997-03-31'
+  - number: 3
+    isbn13: '9784253173391'
+    release_date: '1997-08-10'
+  - number: 4
+    isbn13: '9784253173407'
+    release_date: '1997-10-10'
+  - number: 5
+    isbn13: '9784253173414'
+    release_date: '1997-12-10'
+- type: shinsoban
+  label: 手塚治虫・傑作選集
+  imprint: 手塚治虫・傑作選集
+  publisher: 秋田書店
+  volumes:
+  - number: 1
+    isbn13: '9784253102223'
+    release_date: '1990-12'
+  - number: 2
+    isbn13: '9784253103350'
+    release_date: '1991-02'
+  - number: 3
+    isbn13: '9784253103367'
+    release_date: '1991-03'
+  - number: 4
+    isbn13: '9784253103374'
+    release_date: '1992-06-30'
+  - number: 5
+    isbn13: '9784253103381'
+    release_date: '1992-07-30'
+- type: bunkobon
+  label: 秋田文庫
+  imprint: 秋田文庫
+  publisher: 秋田書店
+  volumes:
+  - number: 2
+    isbn13: '9784253173384'
+    release_date: '1997-06'
+- type: shinsoban
+  label: Goma books
+  imprint: Goma books
+  publisher: ごま書房新社
+  volumes:
+  - number: 0
+    isbn13: '9784814919055'
+    release_date: '2019-02'
+- type: shinsoban
+  label: Akita top comics
+  imprint: Akita top comics
+  publisher: 秋田書店
+  volumes:
+  - number: 1
+    isbn13: '9784253188425'
+    release_date: '2004-02'

@@ -1,0 +1,169 @@
+slug: cobra
+canonical_label: 通常版
+canonical_publisher: 集英社
+canonical_imprint: ジャンプ・コミックス
+suppress_types:
+- bunkobon
+- deluxe
+source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。'
+volumes:
+- number: 1
+  release_date: '1979-08-15'
+- number: 2
+  release_date: '1979-11-15'
+- number: 3
+  release_date: '1980-03-15'
+- number: 4
+  release_date: '1980-07-15'
+- number: 5
+  release_date: '1980-09-15'
+- number: 6
+  release_date: '1980-11-15'
+- number: 7
+  release_date: '1981-02-15'
+- number: 8
+  release_date: '1981-05-15'
+- number: 9
+  release_date: '1981-09-15'
+- number: 10
+  release_date: '1982-07-15'
+- number: 11
+  release_date: '1982-09-15'
+- number: 12
+  release_date: '1982-12-15'
+- number: 13
+  isbn13: '9784088510439'
+  release_date: '1983-07-05'
+- number: 14
+  isbn13: '9784088510446'
+  release_date: '1983-11-15'
+- number: 15
+  isbn13: '9784088510453'
+  release_date: '1984-03-15'
+- number: 16
+  isbn13: '9784088510460'
+  release_date: '1984-11'
+- number: 17
+  isbn13: '9784088510477'
+  release_date: '1985-06-15'
+- number: 18
+  isbn13: '9784088510484'
+  release_date: '1985-08-15'
+extra_editions:
+- type: bunkobon
+  label: 集英社文庫
+  imprint: 集英社文庫
+  publisher: 集英社
+  volumes:
+  - number: 1
+    isbn13: '9784086175418'
+    release_date: '2000-03'
+  - number: 2
+    isbn13: '9784086175425'
+    release_date: '2000-03'
+  - number: 3
+    isbn13: '9784086175432'
+    release_date: '2000-05-23'
+  - number: 4
+    isbn13: '9784086175449'
+    release_date: '2000-05'
+  - number: 5
+    isbn13: '9784086175456'
+    release_date: '2000-06'
+  - number: 6
+    isbn13: '9784086175463'
+    release_date: '2000-06-21'
+  - number: 7
+    isbn13: '9784086175470'
+    release_date: '2000-07-23'
+  - number: 8
+    isbn13: '9784086175487'
+    release_date: '2000-07-23'
+  - number: 9
+    isbn13: '9784086175494'
+    release_date: '2000-08-16'
+  - number: 10
+    isbn13: '9784086175500'
+    release_date: '2000-08'
+  - number: 11
+    isbn13: '9784086175517'
+    release_date: '2000-09'
+  - number: 12
+    isbn13: '9784086175524'
+    release_date: '2000-09'
+- type: deluxe
+  label: ジャンプ・コミックスデラックス
+  imprint: ジャンプ・コミックスデラックス
+  publisher: 集英社
+  volumes:
+  - number: 1
+    isbn13: '9784088582016'
+    release_date: '1988-02'
+  - number: 2
+    isbn13: '9784088582023'
+    release_date: '1988-03'
+  - number: 3
+    isbn13: '9784088582030'
+    release_date: '1988-04'
+  - number: 4
+    isbn13: '9784088582047'
+    release_date: null
+  - number: 5
+    isbn13: '9784088582054'
+    release_date: '1988-06'
+  - number: 6
+    isbn13: '9784088582061'
+    release_date: '1988-07'
+  - number: 7
+    isbn13: '9784088582078'
+    release_date: '1988-08'
+  - number: 8
+    isbn13: '9784088582085'
+    release_date: '1988-09'
+  - number: 9
+    isbn13: '9784088582092'
+    release_date: '1988-10'
+  - number: 10
+    isbn13: '9784088582108'
+    release_date: '1988-11'
+- type: shinsoban
+  label: 創美社コミックス
+  imprint: 創美社コミックス
+  publisher: 不明
+  volumes:
+  - number: 1
+    isbn13: '9784420220040'
+    release_date: '1994-03'
+  - number: 2
+    isbn13: '9784420220064'
+    release_date: '1994-04'
+  - number: 3
+    isbn13: '9784420220088'
+    release_date: '1994-05'
+  - number: 4
+    isbn13: '9784420220101'
+    release_date: '1994-06'
+  - number: 5
+    isbn13: '9784420220132'
+    release_date: '1994-07'
+  - number: 6
+    isbn13: '9784420220156'
+    release_date: '1994-08'
+  - number: 7
+    isbn13: '9784420220163'
+    release_date: '1994-09'
+  - number: 8
+    isbn13: '9784420220170'
+    release_date: '1994-10'
+  - number: 9
+    isbn13: '9784420220187'
+    release_date: '1994-11'
+  - number: 10
+    isbn13: '9784420220194'
+    release_date: '1994-12'
+  - number: 11
+    isbn13: '9784420220200'
+    release_date: '1995-01'
+  - number: 12
+    isbn13: '9784420220217'
+    release_date: '1995-02'

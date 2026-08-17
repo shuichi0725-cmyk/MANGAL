@@ -1,0 +1,47 @@
+slug: the-rapeman
+canonical_label: 通常版
+canonical_publisher: リイド社
+canonical_imprint: SPコミックス
+source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。'
+volumes:
+- number: 1
+  release_date: '1986-05-05'
+- number: 2
+  release_date: null
+- number: 3
+  release_date: null
+- number: 4
+  release_date: null
+- number: 5
+  release_date: null
+- number: 6
+  release_date: '1987-08'
+- number: 7
+  release_date: null
+- number: 8
+  release_date: null
+- number: 9
+  release_date: null
+- number: 10
+  isbn13: '9784845805501'
+  release_date: null
+- number: 11
+  isbn13: '9784845805518'
+  release_date: null
+- number: 12
+  isbn13: '9784845805525'
+  release_date: null
+- number: 13
+  isbn13: '9784845805532'
+  release_date: null
+extra_editions:
+- type: shinsoban
+  label: standard版
+  publisher: シュベール出版
+  volumes:
+  - number: 1
+    isbn13: '9784883321636'
+    release_date: '1999-06-24'
+  - number: 2
+    isbn13: '9784883321667'
+    release_date: '1999-07-23'

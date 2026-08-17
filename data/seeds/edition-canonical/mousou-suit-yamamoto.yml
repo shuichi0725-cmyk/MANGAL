@@ -1,0 +1,40 @@
+slug: mousou-suit-yamamoto
+canonical_label: 通常版
+canonical_publisher: 少年画報社
+canonical_imprint: YKコミックス
+source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。'
+volumes:
+- number: 1
+  isbn13: '9784785921033'
+  release_date: '2001-08'
+- number: 2
+  isbn13: '9784785921903'
+  release_date: '2002-07'
+- number: 5
+  isbn13: '9784785926137'
+  release_date: '2006-04'
+extra_editions:
+- type: shinsoban
+  label: YKコミックス(2015)
+  imprint: YKコミックス
+  publisher: 少年画報社
+  volumes:
+  - number: 1
+    isbn13: '9784785954895'
+    release_date: '2015-03'
+    volume_label: '上'
+  - number: 3
+    isbn13: '9784785954901'
+    release_date: '2015-03'
+    volume_label: '下'
+- type: shinsoban
+  label: YKコミックス(2004)
+  imprint: YKコミックス
+  publisher: 少年画報社
+  volumes:
+  - number: 3
+    isbn13: '9784785924010'
+    release_date: '2004-04-01'
+  - number: 4
+    isbn13: '9784785925246'
+    release_date: '2005-05-01'

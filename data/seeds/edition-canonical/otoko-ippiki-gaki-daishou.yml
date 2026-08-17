@@ -1,0 +1,162 @@
+slug: otoko-ippiki-gaki-daishou
+canonical_label: 通常版
+canonical_publisher: 集英社
+canonical_imprint: ジャンプコミックス
+suppress_types:
+- bunkobon
+- deluxe
+source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。'
+volumes:
+- number: 1
+  release_date: '1969-11-30'
+- number: 2
+  release_date: '1969-12-31'
+- number: 3
+  release_date: '1970-01-31'
+- number: 4
+  release_date: '1970-02-28'
+- number: 5
+  release_date: '1970-03-31'
+- number: 6
+  release_date: '1970-06-30'
+- number: 7
+  release_date: '1970-10-31'
+- number: 8
+  release_date: '1970-11-30'
+- number: 9
+  release_date: '1971-01-31'
+- number: 10
+  release_date: '1971-03'
+- number: 11
+  release_date: '1971-05'
+- number: 12
+  release_date: '1971-07'
+- number: 13
+  release_date: '1971-10-31'
+- number: 14
+  release_date: '1972-01-31'
+- number: 15
+  release_date: '1972-02'
+- number: 16
+  release_date: '1972-05-31'
+- number: 17
+  release_date: '1972-10-31'
+- number: 18
+  release_date: '1973-01-31'
+- number: 19
+  release_date: '1973-03-31'
+- number: 20
+  release_date: '1973-07-31'
+extra_editions:
+- type: bunkobon
+  label: 集英社漫画文庫
+  imprint: 集英社漫画文庫
+  publisher: 集英社
+  volumes:
+  - number: 1
+    release_date: '1976-11'
+  - number: 2
+    release_date: '1976-11-30'
+  - number: 3
+    release_date: '1976-11-30'
+  - number: 4
+    release_date: '1976-11'
+  - number: 5
+    release_date: '1976-11'
+  - number: 6
+    release_date: '1976-12-31'
+  - number: 7
+    release_date: '1976-12-31'
+  - number: 8
+    release_date: '1976-12-31'
+  - number: 9
+    release_date: '1976-12-31'
+  - number: 10
+    release_date: '1977-01-21'
+  - number: 11
+    release_date: '1977-01'
+  - number: 12
+    release_date: '1977-02-28'
+  - number: 13
+    release_date: '1977-02-28'
+  - number: 14
+    release_date: '1977-03-31'
+  - number: 15
+    release_date: '1977-04-30'
+  - number: 16
+    release_date: '1977-05-31'
+  - number: 17
+    release_date: '1977-06-30'
+  - number: 18
+    release_date: '1977-07-31'
+  - number: 19
+    release_date: '1977-08-31'
+  - number: 20
+    release_date: '1977-09-30'
+- type: deluxe
+  label: ジャンプ・コミックス デラックス
+  imprint: ジャンプ・コミックス デラックス
+  publisher: 集英社
+  volumes:
+  - number: 1
+    isbn13: '9784088581316'
+    release_date: '1985-04-15'
+  - number: 2
+    isbn13: '9784088581323'
+    release_date: '1985-05-15'
+  - number: 3
+    isbn13: '9784088581330'
+    release_date: '1985-06-15'
+  - number: 4
+    isbn13: '9784088581347'
+    release_date: '1985-07'
+  - number: 5
+    isbn13: '9784088581354'
+    release_date: '1985-08'
+  - number: 6
+    isbn13: '9784088581361'
+    release_date: '1985-09'
+  - number: 7
+    isbn13: '9784088581378'
+    release_date: '1985-10-15'
+  - number: 8
+    isbn13: '9784088581385'
+    release_date: '1985-11'
+  - number: 9
+    isbn13: '9784088581392'
+    release_date: '1985-12'
+  - number: 10
+    isbn13: '9784088581408'
+    release_date: '1986-01'
+  - number: 11
+    isbn13: '9784088581415'
+    release_date: '1986-02-15'
+  - number: 12
+    isbn13: '9784088581422'
+    release_date: '1986-03'
+- type: bunkobon
+  label: 集英社文庫コミック版
+  imprint: 集英社文庫コミック版
+  publisher: 集英社
+  volumes:
+  - number: 1
+    isbn13: '9784086170116'
+    release_date: '1995-07'
+  - number: 2
+    isbn13: '9784086170123'
+    release_date: '1995-07'
+  - number: 3
+    isbn13: '9784086170130'
+    release_date: '1995-09-19'
+  - number: 4
+    isbn13: '9784086170147'
+    release_date: '1995-09-19'
+  - number: 5
+    isbn13: '9784086170154'
+    release_date: '1995-10-23'
+  - number: 6
+    isbn13: '9784086170161'
+    release_date: '1995-10-23'
+  - number: 7
+    isbn13: '9784086170178'
+    release_date: '1995-10-23'

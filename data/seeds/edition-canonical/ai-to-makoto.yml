@@ -1,0 +1,254 @@
+slug: ai-to-makoto
+canonical_label: 通常版
+canonical_publisher: 講談社
+canonical_imprint: 講談社コミックス
+suppress_types:
+- bunkobon
+- deluxe
+source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。'
+volumes:
+- number: 1
+  release_date: '1973-11'
+- number: 2
+  release_date: '1973-11'
+- number: 3
+  release_date: null
+- number: 4
+  release_date: '1974-04'
+- number: 5
+  release_date: '1974-07-04'
+- number: 6
+  release_date: '1974-09-05'
+- number: 7
+  release_date: '1974-10-15'
+- number: 8
+  release_date: '1974-12-10'
+- number: 9
+  release_date: '1975-02-25'
+- number: 10
+  release_date: '1975-05-10'
+- number: 11
+  release_date: '1975-07-25'
+- number: 12
+  release_date: '1975-10-05'
+- number: 13
+  release_date: '1975-12-10'
+- number: 14
+  release_date: '1976-04-20'
+- number: 15
+  release_date: '1976-07'
+- number: 16
+  release_date: '1976-09-15'
+extra_editions:
+- type: shinsoban
+  label: 講談社コミックススペシャル
+  imprint: 講談社コミックススペシャル
+  publisher: 講談社
+  volumes:
+  - number: 1
+    isbn13: '9784061012011'
+    release_date: '1986-02-06'
+  - number: 2
+    isbn13: '9784061012028'
+    release_date: '1986-02-06'
+  - number: 4
+    isbn13: '9784061012042'
+    release_date: '1986-03-06'
+- type: bunkobon
+  label: 講談社漫画文庫(1977)
+  imprint: 講談社漫画文庫
+  publisher: 講談社
+  volumes:
+  - number: 1
+    release_date: '1977-08'
+  - number: 2
+    release_date: '1977-09'
+  - number: 3
+    release_date: '1977-09'
+  - number: 4
+    release_date: '1977-10'
+  - number: 5
+    release_date: '1977-11'
+  - number: 6
+    release_date: '1977-12'
+  - number: 7
+    release_date: '1978-01'
+  - number: 8
+    release_date: '1978-02'
+  - number: 9
+    release_date: '1978-03'
+  - number: 10
+    release_date: '1978-03'
+  - number: 11
+    release_date: '1978-04'
+  - number: 12
+    release_date: '1978-04'
+  - number: 13
+    release_date: '1978-05'
+  - number: 14
+    release_date: '1978-05'
+  - number: 15
+    release_date: '1978-06'
+  - number: 16
+    release_date: '1978-06'
+- type: bunkobon
+  label: 講談社漫画文庫(2001)
+  imprint: 講談社漫画文庫
+  publisher: 講談社
+  volumes:
+  - number: 1
+    isbn13: '9784062609852'
+    release_date: '2001-05'
+  - number: 2
+    isbn13: '9784062609869'
+    release_date: '2001-05'
+  - number: 3
+    isbn13: '9784063600100'
+    release_date: '2001-06'
+  - number: 4
+    isbn13: '9784063600117'
+    release_date: '2001-06'
+  - number: 5
+    isbn13: '9784063600452'
+    release_date: '2001-07'
+  - number: 6
+    isbn13: '9784063600469'
+    release_date: '2001-07'
+  - number: 7
+    isbn13: '9784063600759'
+    release_date: '2001-08'
+  - number: 8
+    isbn13: '9784063600766'
+    release_date: '2001-08'
+  - number: 9
+    isbn13: '9784063600858'
+    release_date: '2001-09'
+  - number: 10
+    isbn13: '9784063600865'
+    release_date: '2001-09'
+- type: shinsoban
+  label: KCスペシャル
+  imprint: KCスペシャル
+  publisher: 講談社
+  volumes:
+  - number: 3
+    isbn13: '9784061012035'
+    release_date: null
+  - number: 5
+    isbn13: '9784061012059'
+    release_date: '1986-04-05'
+  - number: 6
+    isbn13: '9784061012066'
+    release_date: '1986-04-05'
+  - number: 7
+    isbn13: '9784061012073'
+    release_date: '1986-05'
+  - number: 8
+    isbn13: '9784061012080'
+    release_date: '1986-05'
+  - number: 9
+    isbn13: '9784061012097'
+    release_date: '1986-06-06'
+  - number: 10
+    isbn13: '9784061012103'
+    release_date: '1986-06-06'
+- type: shinsoban
+  label: 講談社プラチナコミックス
+  imprint: 講談社プラチナコミックス
+  publisher: 講談社
+  volumes:
+  - number: 1
+    isbn13: '9784063750652'
+    release_date: '2012-05'
+  - number: 2
+    isbn13: '9784063750669'
+    release_date: '2012-05'
+  - number: 3
+    isbn13: '9784063750744'
+    release_date: '2012-06'
+  - number: 4
+    isbn13: '9784063750775'
+    release_date: '2012-06'
+  - number: 5
+    isbn13: '9784063750836'
+    release_date: '2012-06'
+  - number: 6
+    isbn13: '9784063750898'
+    release_date: '2012-07'
+- type: deluxe
+  label: KCデラックス
+  imprint: KCデラックス
+  publisher: 講談社
+  volumes:
+  - number: 2
+    isbn13: '9784063195729'
+    release_date: '1995-04-21'
+  - number: 3
+    isbn13: '9784063195736'
+    release_date: '1995-05-23'
+  - number: 4
+    isbn13: '9784063195743'
+    release_date: '1995-06'
+  - number: 5
+    isbn13: '9784063195750'
+    release_date: '1995-07-21'
+  - number: 6
+    isbn13: '9784063195767'
+    release_date: '1995-08-23'
+  - number: 7
+    isbn13: '9784063195774'
+    release_date: '1995-09-21'
+  - number: 8
+    isbn13: '9784063195781'
+    release_date: '1995-10-23'
+  - number: 9
+    isbn13: '9784063195798'
+    release_date: '1995-11-22'
+  - number: 10
+    isbn13: '9784063195804'
+    release_date: '1995-12-18'
+- type: shinsoban
+  label: KPC
+  imprint: KPC
+  publisher: 講談社
+  volumes:
+  - number: 1
+    isbn13: '9784063531879'
+    release_date: '2004-03'
+    volume_label: '1弾'
+  - number: 2
+    isbn13: '9784063531954'
+    release_date: '2004-03'
+    volume_label: '2弾'
+  - number: 3
+    isbn13: '9784063532081'
+    release_date: '2004-04'
+    volume_label: '3弾'
+  - number: 4
+    isbn13: '9784063532142'
+    release_date: '2004-04'
+    volume_label: '4弾'
+  - number: 5
+    isbn13: '9784063532302'
+    release_date: '2004-05'
+    volume_label: '5弾'
+  - number: 6
+    isbn13: '9784063532401'
+    release_date: '2004-05'
+    volume_label: '6弾'
+  - number: 7
+    isbn13: '9784063532562'
+    release_date: '2004-06'
+    volume_label: '7弾'
+  - number: 8
+    isbn13: '9784063532685'
+    release_date: '2004-06'
+    volume_label: '8弾'
+- type: deluxe
+  label: デラックスコミックス
+  imprint: デラックスコミックス
+  publisher: 講談社
+  volumes:
+  - number: 1
+    isbn13: '9784063195712'
+    release_date: null

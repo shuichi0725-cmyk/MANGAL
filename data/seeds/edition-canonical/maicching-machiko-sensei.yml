@@ -1,0 +1,85 @@
+slug: maicching-machiko-sensei
+canonical_label: 通常版
+canonical_publisher: 学習研究社
+canonical_imprint: 少年チャレンジ・コミックス
+source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。'
+volumes:
+- number: 1
+  isbn13: '9784050043316'
+  release_date: '1981-10'
+- number: 2
+  release_date: '1981-10'
+- number: 3
+  release_date: '1981-10'
+- number: 4
+  isbn13: '9784050045204'
+  release_date: '1981-12-25'
+- number: 5
+  isbn13: '9784051001063'
+  release_date: '1982-03-15'
+- number: 6
+  isbn13: '9784051001933'
+  release_date: '1982-09-20'
+- number: 7
+  isbn13: '9784051004934'
+  release_date: '1982-12-25'
+extra_editions:
+- type: shinsoban
+  label: GKコミックス
+  imprint: GKコミックス
+  publisher: 学習研究社
+  volumes:
+  - number: 8
+    isbn13: '9784051006747'
+    release_date: '1983-06-05'
+- type: shinsoban
+  label: standard版(1998)
+  publisher: 青林工藝舎
+  volumes:
+  - number: 1
+    isbn13: '9784883770670'
+    release_date: '1998-12'
+  - number: 2
+    isbn13: '9784883770687'
+    release_date: '1998-12'
+  - number: 3
+    isbn13: '9784883770717'
+    release_date: '1999-02'
+  - number: 4
+    isbn13: '9784883770724'
+    release_date: '1999-02'
+  - number: 5
+    isbn13: '9784883770809'
+    release_date: '1999-03'
+  - number: 6
+    isbn13: '9784883770816'
+    release_date: '1999-03'
+- type: shinsoban
+  label: マンサンQコミックス
+  imprint: マンサンQコミックス
+  publisher: 実業之日本社
+  volumes:
+  - number: 1
+    isbn13: '9784408167466'
+    release_date: '2003-07'
+- type: shinsoban
+  label: 青林堂オンデマンド
+  imprint: 青林堂オンデマンド
+  publisher: 不明
+  volumes:
+  - number: 6
+    release_date: null
+  - number: 7
+    release_date: null
+  - number: 8
+    release_date: null
+- type: shinsoban
+  label: standard版(2018)
+  publisher: 復刊ドットコム
+  volumes:
+  - number: 1
+    isbn13: '9784835455785'
+    release_date: '2018-06'
+  - number: 2
+    isbn13: '9784835455792'
+    release_date: '2018-07'

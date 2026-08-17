@@ -1,0 +1,265 @@
+slug: eroika-yori-ai-o-komete
+canonical_label: 通常版
+canonical_publisher: 秋田書店
+canonical_imprint: プリンセス・コミックス
+suppress_types:
+- bunkobon
+- deluxe
+source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。'
+volumes:
+- number: 1
+  isbn13: '9784253071093'
+  release_date: '1978-10'
+- number: 2
+  release_date: '1980-05'
+- number: 3
+  isbn13: '9784253071116'
+  release_date: '1981-01-20'
+- number: 4
+  isbn13: '9784253071123'
+  release_date: '1981-06-01'
+- number: 5
+  isbn13: '9784253071130'
+  release_date: '1981-11-05'
+- number: 7
+  release_date: '1982-07-05'
+- number: 8
+  release_date: '1982-10-20'
+- number: 9
+  isbn13: '9784253071178'
+  release_date: '1983-01-05'
+- number: 10
+  isbn13: '9784253071185'
+  release_date: '1983-05-01'
+- number: 11
+  isbn13: '9784253071192'
+  release_date: '1983-09-30'
+- number: 12
+  isbn13: '9784253071208'
+  release_date: '1984-11-05'
+- number: 13
+  isbn13: '9784253071215'
+  release_date: '1985-05-30'
+- number: 14
+  isbn13: '9784253071222'
+  release_date: '1985-10-01'
+- number: 15
+  isbn13: '9784253071239'
+  release_date: '1986-10-01'
+- number: 16
+  isbn13: '9784253071246'
+  release_date: '1987-05'
+- number: 17
+  isbn13: '9784253071253'
+  release_date: '1987-11'
+- number: 18
+  isbn13: '9784253071260'
+  release_date: '1988-08'
+- number: 19
+  isbn13: '9784253071277'
+  release_date: '1988-11'
+extra_editions:
+- type: shinsoban
+  label: PRINCESS COMICS
+  imprint: PRINCESS COMICS
+  publisher: 秋田書店
+  volumes:
+  - number: 7
+    release_date: '1982-07'
+  - number: 20
+    isbn13: '9784253071284'
+    release_date: '1996-08'
+  - number: 21
+    isbn13: '9784253071291'
+    release_date: '1997-03'
+  - number: 22
+    isbn13: '9784253071307'
+    release_date: '1997-11'
+  - number: 23
+    isbn13: '9784253071314'
+    release_date: '1998-06'
+  - number: 24
+    isbn13: '9784253071321'
+    release_date: '1999-01-20'
+  - number: 25
+    isbn13: '9784253074605'
+    release_date: '1999-07-20'
+  - number: 26
+    isbn13: '9784253074612'
+    release_date: '2000-10-20'
+  - number: 27
+    isbn13: '9784253074629'
+    release_date: '2002-01'
+  - number: 28
+    isbn13: '9784253074773'
+    release_date: '2003-04-15'
+  - number: 29
+    isbn13: '9784253074803'
+    release_date: '2003-12-20'
+  - number: 30
+    isbn13: '9784253074810'
+    release_date: '2004-05-20'
+  - number: 31
+    isbn13: '9784253194518'
+    release_date: '2005-03-15'
+  - number: 32
+    isbn13: '9784253194525'
+    release_date: '2005-10-15'
+  - number: 33
+    isbn13: '9784253194532'
+    release_date: '2006-07-15'
+  - number: 34
+    isbn13: '9784253194549'
+    release_date: '2007-01-15'
+  - number: 35
+    isbn13: '9784253194556'
+    release_date: '2009-06-30'
+  - number: 36
+    isbn13: '9784253194563'
+    release_date: '2010-02-28'
+  - number: 37
+    isbn13: '9784253194570'
+    release_date: '2010-12-30'
+  - number: 38
+    isbn13: '9784253194587'
+    release_date: '2011-08'
+  - number: 39
+    isbn13: '9784253194594'
+    release_date: '2012-08-30'
+- type: bunkobon
+  label: 秋田文庫
+  imprint: 秋田文庫
+  publisher: 秋田書店
+  volumes:
+  - number: 1
+    isbn13: '9784253173599'
+    release_date: '1997-10'
+  - number: 2
+    isbn13: '9784253173605'
+    release_date: '1997-12'
+  - number: 6
+    isbn13: '9784253173643'
+    release_date: '1998-08'
+  - number: 7
+    isbn13: '9784253173650'
+    release_date: '1998-10'
+  - number: 8
+    isbn13: '9784253173667'
+    release_date: '1998-12'
+  - number: 9
+    isbn13: '9784253173674'
+    release_date: '1999-02'
+  - number: 10
+    isbn13: '9784253173681'
+    release_date: '1999-04'
+  - number: 11
+    isbn13: '9784253173698'
+    release_date: '1999-06'
+  - number: 12
+    isbn13: '9784253173704'
+    release_date: '1999-08'
+  - number: 13
+    isbn13: '9784253173711'
+    release_date: '1999-10'
+  - number: 14
+    isbn13: '9784253173728'
+    release_date: '2001-04'
+  - number: 15
+    isbn13: '9784253173735'
+    release_date: '2001-06'
+  - number: 16
+    isbn13: '9784253173766'
+    release_date: '2001-08'
+  - number: 17
+    isbn13: '9784253173810'
+    release_date: '2003-02'
+  - number: 18
+    isbn13: '9784253178372'
+    release_date: '2003-04'
+  - number: 19
+    isbn13: '9784253178389'
+    release_date: '2005-05'
+  - number: 20
+    isbn13: '9784253178396'
+    release_date: '2005-08'
+  - number: 21
+    isbn13: '9784253178402'
+    release_date: '2008-02'
+  - number: 22
+    isbn13: '9784253178419'
+    release_date: '2008-05'
+  - number: 23
+    isbn13: '9784253178426'
+    release_date: '2012-07'
+- type: deluxe
+  label: プリンセスコミックス デラックス
+  imprint: プリンセスコミックス デラックス
+  publisher: 秋田書店
+  volumes:
+  - number: 1
+    isbn13: '9784253153447'
+    release_date: '1995-04'
+  - number: 2
+    isbn13: '9784253153454'
+    release_date: '1995-04-30'
+  - number: 3
+    isbn13: '9784253153461'
+    release_date: '1995-05-25'
+  - number: 4
+    isbn13: '9784253153478'
+    release_date: '1995-05'
+  - number: 5
+    isbn13: '9784253153485'
+    release_date: '1995-06-25'
+  - number: 6
+    isbn13: '9784253153492'
+    release_date: '1995-06-25'
+  - number: 7
+    isbn13: '9784253153508'
+    release_date: '1995-07-30'
+  - number: 8
+    isbn13: '9784253153515'
+    release_date: '1995-07-30'
+  - number: 9
+    isbn13: '9784253153522'
+    release_date: '1995-08-25'
+  - number: 10
+    isbn13: '9784253153539'
+    release_date: '1995-08-25'
+  - number: 11
+    isbn13: '9784253153546'
+    release_date: '1995-09-25'
+  - number: 12
+    isbn13: '9784253153553'
+    release_date: '1995-09-25'
+  - number: 13
+    isbn13: '9784253153560'
+    release_date: '1995-10-30'
+  - number: 14
+    isbn13: '9784253153577'
+    release_date: '1999-12'
+  - number: 15
+    isbn13: '9784253153584'
+    release_date: '2000-02'
+- type: shinsoban
+  label: Akita Bunko
+  imprint: Akita Bunko
+  publisher: 秋田書店
+  volumes:
+  - number: 3
+    isbn13: '9784253173612'
+    release_date: '1998-02-10'
+  - number: 4
+    isbn13: '9784253173629'
+    release_date: '1998-04-10'
+  - number: 5
+    isbn13: '9784253173636'
+    release_date: '1998-06-10'
+- type: shinsoban
+  label: PRINCES COMICS
+  imprint: PRINCES COMICS
+  publisher: 秋田書店
+  volumes:
+  - number: 6
+    isbn13: '9784253071147'
+    release_date: '1982-03-05'

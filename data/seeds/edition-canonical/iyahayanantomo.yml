@@ -1,0 +1,79 @@
+slug: iyahayanantomo
+canonical_label: 通常版
+canonical_publisher: 講談社
+canonical_imprint: 講談社コミックス
+suppress_types:
+- bunkobon
+source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。'
+volumes:
+- number: 1
+  release_date: '1976-06-25'
+- number: 2
+  release_date: '1976-06-25'
+- number: 3
+  release_date: '1976-06-25'
+- number: 4
+  release_date: '1976-06-25'
+- number: 5
+  release_date: '1976-06-25'
+- number: 6
+  release_date: '1976-06-25'
+- number: 7
+  release_date: '1976-07-20'
+extra_editions:
+- type: shinsoban
+  label: SUNWIDE COMICS
+  imprint: SUNWIDE COMICS
+  publisher: 朝日ソノラマ
+  volumes:
+  - number: 1
+    isbn13: '9784257960799'
+    release_date: '1986-05-20'
+  - number: 2
+    isbn13: '9784257960812'
+    release_date: '1986-06-20'
+  - number: 3
+    isbn13: '9784257960843'
+    release_date: '1986-07-18'
+  - number: 4
+    isbn13: '9784257960874'
+    release_date: '1986-08-20'
+- type: shinsoban
+  label: パワァコミックス
+  imprint: パワァコミックス
+  publisher: 双葉社
+  volumes:
+  - number: 1
+    release_date: '1980-02'
+  - number: 2
+    release_date: '1980-04'
+  - number: 3
+    release_date: '1980-06'
+  - number: 4
+    release_date: '1980-08'
+  - number: 5
+    release_date: '1981-02'
+  - number: 6
+    release_date: '1981-04'
+  - number: 7
+    release_date: '1981-06'
+- type: bunkobon
+  label: 扶桑社文庫
+  imprint: 扶桑社文庫
+  publisher: 扶桑社
+  volumes:
+  - number: 1
+    isbn13: '9784594017996'
+    release_date: '1995-08-30'
+  - number: 2
+    isbn13: '9784594018252'
+    release_date: '1995-09'
+  - number: 3
+    isbn13: '9784594018429'
+    release_date: '1995-10'
+  - number: 4
+    isbn13: '9784594018634'
+    release_date: '1995-11'
+  - number: 5
+    isbn13: '9784594018788'
+    release_date: '1995-12'

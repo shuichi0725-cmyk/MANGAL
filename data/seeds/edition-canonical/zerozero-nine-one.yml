@@ -1,0 +1,108 @@
+slug: zerozero-nine-one
+canonical_label: 通常版
+canonical_publisher: 不明
+canonical_imprint: 石ノ森章太郎萬画大全集
+suppress_types:
+- bunkobon
+source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。'
+volumes:
+- number: 1
+  release_date: null
+- number: 2
+  release_date: null
+- number: 3
+  release_date: null
+- number: 4
+  release_date: null
+- number: 5
+  release_date: null
+extra_editions:
+- type: shinsoban
+  label: 単行本コミックス
+  imprint: 単行本コミックス
+  publisher: 角川書店
+  volumes:
+  - number: 1
+    isbn13: '9784048540544'
+    release_date: '2006-11'
+    volume_label: '上巻'
+  - number: 3
+    isbn13: '9784048540551'
+    release_date: '2006-11'
+    volume_label: '下巻'
+- type: bunkobon
+  label: ソノラマ漫画文庫
+  imprint: ソノラマ漫画文庫
+  publisher: 不明
+  volumes:
+  - number: 1
+    release_date: '1976-12'
+  - number: 2
+    release_date: '1976-12'
+  - number: 3
+    release_date: '1977-01'
+  - number: 4
+    release_date: '1977-01'
+  - number: 5
+    release_date: '1977-02'
+- type: bunkobon
+  label: 中公文庫コミック版
+  imprint: 中公文庫コミック版
+  publisher: 中央公論社
+  volumes:
+  - number: 1
+    isbn13: '9784122025295'
+    release_date: '1996-01-18'
+  - number: 2
+    isbn13: '9784122025301'
+    release_date: '1996-01-18'
+  - number: 3
+    isbn13: '9784122025509'
+    release_date: '1996-02-18'
+  - number: 4
+    isbn13: '9784122025516'
+    release_date: '1996-02-18'
+- type: shinsoban
+  label: 秋田コミックス・セレクト
+  imprint: 秋田コミックス・セレクト
+  publisher: 秋田書店
+  volumes:
+  - number: 1
+    isbn13: '9784253108386'
+    release_date: '1985-08'
+  - number: 2
+    isbn13: '9784253108393'
+    release_date: '1985-10'
+- type: shinsoban
+  label: standard版
+  publisher: 中央公論社
+  volumes:
+  - number: 1
+    isbn13: '9784120016882'
+    release_date: '1988-05'
+  - number: 2
+    isbn13: '9784120016899'
+    release_date: '1988-06'
+- type: shinsoban
+  label: Akita top comics wide
+  imprint: Akita top comics wide
+  publisher: 秋田書店
+  volumes:
+  - number: 1
+    isbn13: '9784253244497'
+    release_date: '2013-09'
+- type: shinsoban
+  label: サン・コミックス
+  imprint: サン・コミックス
+  publisher: 朝日ソノラマ
+  volumes:
+  - number: 1
+    release_date: null
+  - number: 2
+    release_date: null
+  - number: 3
+    release_date: null
+  - number: 4
+    release_date: null
+  - number: 5
+    release_date: null

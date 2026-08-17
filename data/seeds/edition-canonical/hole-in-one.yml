@@ -1,0 +1,100 @@
+slug: hole-in-one
+canonical_label: 通常版
+canonical_publisher: 集英社
+canonical_imprint: ジャンプ・コミックス
+suppress_types:
+- bunkobon
+source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。'
+volumes:
+- number: 7
+  release_date: '1980-02-15'
+- number: 8
+  release_date: '1980-05-15'
+- number: 9
+  release_date: '1980-08'
+- number: 10
+  release_date: '1980-10'
+- number: 11
+  release_date: '1980-12'
+- number: 12
+  release_date: '1981-04'
+- number: 13
+  release_date: '1981-07'
+extra_editions:
+- type: shinsoban
+  label: ジャンプコミックス
+  imprint: ジャンプコミックス
+  publisher: 集英社
+  volumes:
+  - number: 1
+    release_date: '1978-07-31'
+  - number: 2
+    release_date: '1978-09'
+  - number: 3
+    release_date: '1978-11-30'
+  - number: 4
+    release_date: '1979-04-15'
+  - number: 5
+    release_date: '1979-07-15'
+  - number: 6
+    release_date: '1979-11-15'
+- type: bunkobon
+  label: 集英社文庫コミック版
+  imprint: 集英社文庫コミック版
+  publisher: 集英社
+  volumes:
+  - number: 3
+    isbn13: '9784086178037'
+    release_date: '2002-05'
+  - number: 4
+    isbn13: '9784086178044'
+    release_date: '2002-05'
+  - number: 5
+    isbn13: '9784086178051'
+    release_date: '2002-06'
+  - number: 6
+    isbn13: '9784086178068'
+    release_date: '2002-06'
+  - number: 7
+    isbn13: '9784086178075'
+    release_date: '2002-07'
+  - number: 8
+    isbn13: '9784086178082'
+    release_date: '2002-07'
+- type: shinsoban
+  label: Goma.comics
+  imprint: Goma.comics
+  publisher: ゴマブックス
+  volumes:
+  - number: 2
+    isbn13: '9784777190027'
+    release_date: '2005-07'
+- type: shinsoban
+  label: ジャンプ コミックス セレクション
+  imprint: ジャンプ コミックス セレクション
+  publisher: ホーム社
+  volumes:
+  - number: 1
+    isbn13: '9784834212310'
+    release_date: '1990-07'
+  - number: 2
+    isbn13: '9784834212327'
+    release_date: '1990-08'
+  - number: 3
+    isbn13: '9784834212334'
+    release_date: '1990-09'
+  - number: 4
+    isbn13: '9784834212341'
+    release_date: '1990-10'
+  - number: 5
+    isbn13: '9784834212358'
+    release_date: '1990-11'
+  - number: 6
+    isbn13: '9784834212365'
+    release_date: '1990-12'
+  - number: 7
+    isbn13: '9784834212372'
+    release_date: '1991-01'
+  - number: 8
+    isbn13: '9784834212389'
+    release_date: '1991-02'

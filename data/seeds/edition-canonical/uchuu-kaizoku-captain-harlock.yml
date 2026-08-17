@@ -1,0 +1,105 @@
+slug: uchuu-kaizoku-captain-harlock
+canonical_label: 通常版
+canonical_publisher: 秋田書店
+canonical_imprint: サンデーコミックス
+suppress_types:
+- bunkobon
+source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。'
+volumes:
+- number: 1
+  release_date: '1977-11'
+- number: 2
+  release_date: '1978-01'
+- number: 3
+  release_date: '1978-05'
+- number: 5
+  isbn13: '9784253063678'
+  release_date: '1979-10-05'
+extra_editions:
+- type: shinsoban
+  label: standard版
+  publisher: 秋田書店
+  volumes:
+  - number: 1
+    isbn13: '9784253103800'
+    release_date: '1992-06'
+  - number: 2
+    isbn13: '9784253103817'
+    release_date: '1992-08'
+  - number: 3
+    isbn13: '9784253103824'
+    release_date: '1992-10'
+- type: shinsoban
+  label: チャンピオン・グラフィック
+  imprint: チャンピオン・グラフィック
+  publisher: 不明
+  volumes:
+  - number: 1
+    release_date: '1980-09-25'
+  - number: 2
+    release_date: '1981-01-20'
+  - number: 3
+    release_date: '1981-05-15'
+  - number: 4
+    release_date: '1981-08-20'
+- type: bunkobon
+  label: 秋田文庫
+  imprint: 秋田文庫
+  publisher: 秋田書店
+  volumes:
+  - number: 1
+    isbn13: '9784253170055'
+    release_date: '1994-04-30'
+  - number: 2
+    isbn13: '9784253170062'
+    release_date: '1994-04'
+  - number: 3
+    isbn13: '9784253170079'
+    release_date: '1994-04'
+- type: shinsoban
+  label: Akita top comics wide
+  imprint: Akita top comics wide
+  publisher: 秋田書店
+  volumes:
+  - number: 1
+    isbn13: '9784253242288'
+    release_date: '2009-09'
+    volume_label: '上巻'
+  - number: 3
+    isbn13: '9784253242295'
+    release_date: '2009-10'
+    volume_label: '下巻'
+- type: shinsoban
+  label: Akita top comics
+  imprint: Akita top comics
+  publisher: 秋田書店
+  volumes:
+  - number: 1
+    isbn13: '9784253189750'
+    release_date: '2003-08'
+  - number: 2
+    isbn13: '9784253189767'
+    release_date: '2003-10'
+  - number: 3
+    isbn13: '9784253189774'
+    release_date: '2003-11'
+  - number: 4
+    isbn13: '9784253189941'
+    release_date: '2003-12'
+  - number: 5
+    isbn13: '9784253189958'
+    release_date: '2004-01'
+- type: shinsoban
+  label: SUNDAY COMICS
+  imprint: SUNDAY COMICS
+  publisher: 秋田書店
+  volumes:
+  - number: 1
+    release_date: '1977-11-20'
+  - number: 2
+    release_date: '1978-01-05'
+  - number: 3
+    release_date: '1978-05-10'
+  - number: 4
+    isbn13: '9784253063661'
+    release_date: '1978-11-15'
