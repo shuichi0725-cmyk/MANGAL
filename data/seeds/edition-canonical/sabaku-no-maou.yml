@@ -1,0 +1,47 @@
+slug: sabaku-no-maou
+canonical_label: 通常版
+canonical_publisher: 不明
+source: 'ギャラ型C型是正 2026-08-17: MADBが1 edition行に1952年の原著・1978年秋田書店の長篇繪物語・2012年秋田書店の復刻を同居させ、2巻2012-08→3巻1952-11の60年逆行になっていた。しかも別sidに林よしおの『砂漠の魔王』(新生閣漫画絵本)まで同じqidで抱えていた。NDL SRU(creator=福島鉄次)で確定= 1978.08 秋田書店「沙漠の魔王 : 長篇繪物語」1冊 / 2012.8 秋田書店「秋田書店創立65周年記念特別企画」全1-10巻(セットのISBNが 9784253102018)。原著run(MADBのv1・v2・v3・v5・v7。3巻だけ1952-11の日付があり、他は日付なし)を主版に、1978年版と2012年復刻はextra_editionsへ分離した。★原著の版元は両ソースに記載が無いため publisher は「不明」と明示する。★4巻・6巻は両ソースに無いので作らない(欠番のまま)。★林よしおの『砂漠の魔王』は別人の別作品なので本seedに含めない=この頁から外れる。別頁として登録すべき候補。'
+volumes:
+- number: 1
+  release_date: null
+- number: 2
+  release_date: null
+- number: 3
+  release_date: '1952-11'
+- number: 5
+  release_date: null
+- number: 7
+  release_date: null
+extra_editions:
+- type: other
+  label: 長篇繪物語(秋田書店 1978)
+  publisher: 秋田書店
+  volumes:
+  - number: 1
+    release_date: '1978-08'
+- type: shinsoban
+  label: 秋田書店創立65周年記念特別企画(2012復刻)
+  publisher: 秋田書店
+  volumes:
+  - number: 1
+    isbn13: '9784253102018'
+    release_date: '2012-08'
+  - number: 2
+    release_date: '2012-08'
+  - number: 3
+    release_date: '2012-08'
+  - number: 4
+    release_date: '2012-08'
+  - number: 5
+    release_date: '2012-08'
+  - number: 6
+    release_date: '2012-08'
+  - number: 7
+    release_date: '2012-08'
+  - number: 8
+    release_date: '2012-08'
+  - number: 9
+    release_date: '2012-08'
+  - number: 10
+    release_date: '2012-08'
