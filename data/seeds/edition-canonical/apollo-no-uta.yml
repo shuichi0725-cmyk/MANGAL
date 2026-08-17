@@ -1,0 +1,66 @@
+slug: apollo-no-uta
+canonical_label: 通常版
+canonical_publisher: 虫プロ商事
+canonical_imprint: COM別冊
+suppress_types:
+- bunkobon
+source: 'ギャラ型B是正 2026-08-17: 通常版タブに1971年COM別冊(上下)・1977年手塚治虫漫画全集(全3巻)・2019年立東舎オリジナル版が混線し、48年の日付逆行。文庫タブも集英社文庫・秋田文庫・手塚治虫文庫全集の3種が1本に混ざっていた。NDL SRU(creator=手塚治虫)で分離確定= ①【COM別冊】虫プロ商事 上 1971.09.15 / 下 1971.10.15(初出単行本・完備) ②手塚治虫漫画全集 講談社 全3巻 1977.8-11 ③立東舎「オリジナル版」2019.4 ④集英社文庫 手塚治虫名作集 全2巻 1995.9(v1のISBN 4087483037 はNDLから補完・MADBはv2のみ) ⑤秋田文庫 全2巻 2007.11 ⑥手塚治虫文庫全集 2010.11。①を主版に、他はextra_editionsへ。MADBの上下は巻番号1/3だったので1・2に採番しvolume_labelで上下を保持。COM名作コミックスの1冊はMADB側がv0(巻番号不明)で元から非表示のため起こさない。'
+volumes:
+- number: 1
+  release_date: '1971-09-15'
+  volume_label: 上
+- number: 2
+  release_date: '1971-10-15'
+  volume_label: 下
+extra_editions:
+- type: kanzenban
+  label: 手塚治虫漫画全集(講談社)
+  imprint: 手塚治虫漫画全集
+  publisher: 講談社
+  volumes:
+  - number: 1
+    isbn13: '9784061086357'
+    release_date: '1977-08-18'
+  - number: 2
+    isbn13: '9784061086364'
+    release_date: '1977-10'
+  - number: 3
+    isbn13: '9784061086371'
+    release_date: '1977-11'
+- type: other
+  label: オリジナル版(立東舎)
+  publisher: 立東舎
+  volumes:
+  - number: 1
+    isbn13: '9784845633715'
+    release_date: '2019-04'
+- type: bunkobon
+  label: 文庫版(集英社文庫 手塚治虫名作集)
+  imprint: 集英社文庫
+  publisher: 集英社
+  volumes:
+  - number: 1
+    isbn13: '9784087483031'
+    release_date: '1995-09'
+  - number: 2
+    isbn13: '9784087483048'
+    release_date: '1995-09'
+- type: bunkobon
+  label: 文庫版(秋田文庫)
+  imprint: 秋田文庫
+  publisher: 秋田書店
+  volumes:
+  - number: 1
+    isbn13: '9784253171113'
+    release_date: '2007-11'
+  - number: 2
+    isbn13: '9784253171120'
+    release_date: '2007-11'
+- type: bunkobon
+  label: 文庫版(手塚治虫文庫全集)
+  imprint: 手塚治虫文庫全集
+  publisher: 講談社
+  volumes:
+  - number: 1
+    isbn13: '9784063737967'
+    release_date: '2010-11'

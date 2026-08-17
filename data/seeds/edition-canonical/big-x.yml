@@ -1,0 +1,90 @@
+slug: big-x
+canonical_label: 通常版
+canonical_publisher: 秋田書店
+canonical_imprint: サンデーコミックス
+suppress_types:
+- bunkobon
+source: 'ギャラ型B是正 2026-08-17: 通常版タブに1972年サンデーコミックス(全4巻・MADB側でSUNDAY COMICSとサンデーコミックスの表記ゆらぎで2分割)・1981年手塚治虫漫画全集(全4巻)・2008年手塚治虫全集・2023年復刊ドットコム オリジナル版(全5巻)が混線し51年の逆行。文庫タブも秋田文庫と手塚治虫文庫全集が混在。NDL SRU(creator=手塚治虫)で分離確定= ①SUNDAY COMICS 秋田書店 第1巻 4253062873 1972.9 / 第2巻 4253062881 1972.10(残る3-4巻のISBN 9784253062893/909 はMADB。ISBN列が4253062873→881→893→909と連番で同一run) ②手塚治虫漫画全集 講談社 全4巻 1981.7-10 ③手塚治虫全集(金の星社・ISBN出版者記号4-323) 2008.1 ④復刊ドットコム オリジナル版 全5巻 2023.3-11 ⑤秋田文庫 全3巻 2004-2005 ⑥手塚治虫文庫全集 全2巻 2011.1。①を主版に、他はextra_editionsへ。'
+volumes:
+- number: 1
+  isbn13: '9784253062879'
+  release_date: '1972-09-15'
+- number: 2
+  isbn13: '9784253062886'
+  release_date: '1972-10-20'
+- number: 3
+  isbn13: '9784253062893'
+  release_date: '1972-11-15'
+- number: 4
+  isbn13: '9784253062909'
+  release_date: '1972-11-30'
+extra_editions:
+- type: kanzenban
+  label: 手塚治虫漫画全集(講談社)
+  imprint: 手塚治虫漫画全集
+  publisher: 講談社
+  volumes:
+  - number: 1
+    isbn13: '9784061732438'
+    release_date: '1981-07-20'
+  - number: 2
+    isbn13: '9784061732445'
+    release_date: '1981-08-20'
+  - number: 3
+    isbn13: '9784061732452'
+    release_date: '1981-09-20'
+  - number: 4
+    isbn13: '9784061732469'
+    release_date: '1981-10-20'
+- type: other
+  label: 手塚治虫全集(金の星社)
+  imprint: 手塚治虫全集
+  publisher: 金の星社
+  volumes:
+  - number: 1
+    isbn13: '9784323071091'
+    release_date: '2008-01'
+- type: shinsoban
+  label: オリジナル版(復刊ドットコム)
+  publisher: 復刊ドットコム
+  volumes:
+  - number: 1
+    isbn13: '9784835458885'
+    release_date: '2023-03'
+  - number: 2
+    isbn13: '9784835458892'
+    release_date: '2023-05'
+  - number: 3
+    isbn13: '9784835458908'
+    release_date: '2023-07'
+  - number: 4
+    isbn13: '9784835458915'
+    release_date: '2023-09'
+  - number: 5
+    isbn13: '9784835458922'
+    release_date: '2023-11'
+- type: bunkobon
+  label: 文庫版(秋田文庫)
+  imprint: 秋田文庫
+  publisher: 秋田書店
+  volumes:
+  - number: 1
+    isbn13: '9784253179393'
+    release_date: '2004-11'
+  - number: 2
+    isbn13: '9784253179409'
+    release_date: '2005-02'
+  - number: 3
+    isbn13: '9784253179416'
+    release_date: '2005-05'
+- type: bunkobon
+  label: 文庫版(手塚治虫文庫全集)
+  imprint: 手塚治虫文庫全集
+  publisher: 講談社
+  volumes:
+  - number: 1
+    isbn13: '9784063738049'
+    release_date: '2011-01'
+  - number: 2
+    isbn13: '9784063738056'
+    release_date: '2011-01'

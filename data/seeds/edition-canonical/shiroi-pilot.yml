@@ -1,0 +1,67 @@
+slug: shiroi-pilot
+canonical_label: 通常版
+canonical_publisher: 小学館
+canonical_imprint: ゴールデン・コミックス
+suppress_types:
+- bunkobon
+source: 'ギャラ型B是正 2026-08-17: 通常版タブに1962-63年手塚治虫漫画選集・1969年ゴールデン・コミックス・1978-79年手塚治虫漫画全集・2011年文庫全集・2012年小学館クリエイティブ限定版BOXが混線し49年の逆行。NDL SRU(creator=手塚治虫)で分離確定= ①【手塚治虫漫画選集 ; 22/24】鈴木出版 第1部 1962.11 / 第3部 1963.01(第2部は両ソース不在=欠番のまま) ②【ゴールデン・コミックス】小学館 全2巻 1969.10.10/1969.11.10(完備最古) ③手塚治虫漫画全集 講談社 全2巻 1978.10.10/1979.2 ④小学館クリエイティブ「少年サンデー版 限定版box」2012.3 ⑤手塚治虫文庫全集 2011.12 ⑥小学館文庫 1997.11.10 ⑦秋田文庫 2006.11。完備最古の②を主版に、他はextra_editionsへ。★④はNDL上「第1巻(ふたごの秘密の巻)」と「第2巻(ハリケーン号の巻)」が**同一ISBN 9784778032128**=BOX1点なので1件にまとめた。⑤はMADBが通常版扱いだがNDLで手塚治虫文庫全集(BT-177)と判明したため文庫に置いた。'
+volumes:
+- number: 1
+  release_date: '1969-10-10'
+- number: 2
+  release_date: '1969-11-10'
+extra_editions:
+- type: other
+  label: 手塚治虫漫画選集版(鈴木出版)
+  imprint: 手塚治虫漫画選集
+  publisher: 鈴木出版
+  volumes:
+  - number: 1
+    release_date: '1962-11'
+    volume_label: 第1部
+  - number: 3
+    release_date: '1963-01'
+    volume_label: 第3部
+- type: kanzenban
+  label: 手塚治虫漫画全集(講談社)
+  imprint: 手塚治虫漫画全集
+  publisher: 講談社
+  volumes:
+  - number: 1
+    isbn13: '9784061086272'
+    release_date: '1978-10-10'
+  - number: 2
+    isbn13: '9784061086289'
+    release_date: '1979-02'
+- type: other
+  label: 少年サンデー版 限定版BOX(小学館クリエイティブ)
+  publisher: 小学館クリエイティブ
+  volumes:
+  - number: 1
+    isbn13: '9784778032128'
+    release_date: '2012-03'
+    volume_label: 全2巻BOX(ふたごの秘密の巻/ハリケーン号の巻)
+- type: bunkobon
+  label: 文庫版(手塚治虫文庫全集)
+  imprint: 手塚治虫文庫全集
+  publisher: 講談社
+  volumes:
+  - number: 1
+    isbn13: '9784063738773'
+    release_date: '2011-12'
+- type: bunkobon
+  label: 文庫版(小学館文庫)
+  imprint: 小学館文庫
+  publisher: 小学館
+  volumes:
+  - number: 1
+    isbn13: '9784091920607'
+    release_date: '1997-11-10'
+- type: bunkobon
+  label: 文庫版(秋田文庫)
+  imprint: 秋田文庫
+  publisher: 秋田書店
+  volumes:
+  - number: 1
+    isbn13: '9784253179447'
+    release_date: '2006-11'
