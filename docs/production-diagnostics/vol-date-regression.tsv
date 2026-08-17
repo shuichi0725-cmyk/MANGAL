@@ -27,7 +27,6 @@ regress_years	slug	title	authors	edition	n_vols	worst_pair	isbn_pattern
 19	sasuke	サスケ	白土三平	bunkobon	15	3巻(1996-01-10)→11巻(1977-10-20)	有→無
 19	shidenkai-no-taka	紫電改のタカ	ちばてつや	standard	5	2巻(1990-09-17)→5巻(1971-10)	有→無
 19	shumari	シュマリ	手塚治虫	bunkobon	4	1巻(1995-04)→4巻(1976-07)	有→無
-19	za-sanbiki-no-samurai	THE三匹の侍	土山しげる	standard	4	1巻(2005-06)→4巻(1986-01)	有→無
 18	dororo	どろろ	手塚治虫	standard	4	3巻(1990-11)→4巻(1972-06-10)	有→有
 18	dororo	どろろ	手塚治虫	bunkobon	4	1巻(1994-04)→4巻(1976)	有→無
 18	lupin-iii	ルパン三世	モンキー・パンチ	standard	14	4巻(1993-01-10)→6巻(1975-09-10)	有→無
@@ -36,7 +35,6 @@ regress_years	slug	title	authors	edition	n_vols	worst_pair	isbn_pattern
 17	shumari	シュマリ	手塚治虫	standard	4	1巻(1995-11)→2巻(1978-11)	有→有
 16	aa-hana-no-ouendan	嗚呼!!花の応援団	どおくまん	standard	15	4巻(1995-01-19)→13巻(1979-01-08)	有→無
 16	ekiben-hitoritabi	駅弁ひとり旅	はやせ淳	standard	17	8巻(2026-07-24)→9巻(2010-04)	有→有
-16	hiko-densetsu	火子伝説	古城武司	standard	5	1巻(2002-10)→3巻(1986-07-05)	有→有
 16	sabu-to-ichi-torimonohikae	佐武と市捕物控	石ノ森章太郎・滝瀬源一	standard	17	1巻(1988-07-01)→5巻(1972)	有→無
 15	black-jack	ブラック・ジャック	手塚治虫	standard	25	15巻(1994-04-12)→17巻(1979-03-30)	有→有
 15	mazinger-z	マジンガーZ	桜多吾作・ダイナミック・プロ・編著	standard	5	1巻(2013-10-04)→2巻(1998-05-28)	有→有
@@ -65,8 +63,6 @@ regress_years	slug	title	authors	edition	n_vols	worst_pair	isbn_pattern
 9	genji-monogatari-shin	源氏物語	臣新蔵	standard	3	1巻(1991-12)→2巻(1982-08)	有→無
 9	kira-kira	キラキラ!	安達哲	standard	8	1巻(1998-04-17)→2巻(1989-05-17)	有→有
 9	kurobee-2002	黒ベエ	藤子不二雄Ⓐ	standard	3	2巻(2011-11)→3巻(2002-09)	有→有
-9	kyou-mo-otenki	今日もお天気	桜沢エリカ	standard	8	1巻(2012-06)→2巻(2003-03)	有→有
-9	mudazumo-naki-kaikaku	ムダヅモ無き改革	大和田秀樹	standard	16	13巻(2023-01)→14巻(2014-12-01)	有→有
 9	munekata-kyouju-denkikou	宗像教授伝奇考	星野之宣	standard	8	3巻(2008-03)→6巻(1999-10-30)	有→有
 9	ore-no-kendo	俺の剣道	左近士諒	standard	20	4巻(1993-04)→6巻(1984-03)	有→無
 8	damenzu-walker	だめんず・うぉ～か～	倉田真由美	standard	19	1巻(2009-12)→2巻(2001-12-20)	有→有
@@ -80,37 +76,26 @@ regress_years	slug	title	authors	edition	n_vols	worst_pair	isbn_pattern
 7	comic-inagawa-junji-no-sugooku-kowai-hanashi	コミック稲川淳二のすごーく恐い話	琴川彩・風忍・洋介犬・河原達弘・瀬河美紀・井上芳之助・稲川淳二・桜水樹・ダイナミックプロダクション・野口千里・津上柊子・河村万理・鯖玉弓・黒百合姫・こきま大	standard	4	1巻(2005-07)→3巻(1998-07-26)	有→無
 7	genji-monogatari-yanagawa	源氏物語	柳川創造	standard	3	1巻(1989-10-30)→3巻(1982-10)	有→無
 7	golgo-13	ゴルゴ13	さいとう・たかを・さいとうプロダクション	standard	220	138巻(2013-03-14)→140巻(2006-05-05)	有→有
-7	momoiro-anzuiro-sakurairo	ももいろあんずいろさくらいろ	咲	standard	3	1巻(2021-03-05)→2巻(2014-11)	有→有
 7	shouwa-gokudoushi	昭和極道史	村上和彦	standard	33	1巻(1984-01)→4巻(1977-12-31)	有→有
 7	sleeping-beauty	Sleeping beauty	芳崎せいむ	standard	4	1巻(2009-10-26)→3巻(2002-02-12)	有→有
 7	tetsuwan-atom	鉄腕アトム	手塚治虫	bunkobon	15	1巻(2002-06)→14巻(1995-12-15)	有→有
-7	wild-life	WILD LIFE	藤崎聖人	standard	27	20巻(2007-01-15)→23巻(2000-08-15)	有→有
-6	bolt-and-nut	ボルト＆ナット	田中むねよし	standard	16	2巻(2004-08)→4巻(1998-04)	有→有
 6	bunchou-sama-to-watashi	文鳥様と私	今市子	standard	26	1巻(2009-02-06)→4巻(2003-04)	有→有
-6	double-call	Double call	緋色れーいち	standard	5	2巻(2004-10-09)→4巻(1998-11-10)	有→有
 6	enueichikee-darwin-ga-kita	NHKダーウィンが来た!	講談社・日本放送協会・戸井原和巳	standard	5	1巻(2014-12-11)→2巻(2008-05-30)	有→有
 6	jinrou-game	人狼ゲーム	小独活	standard	4	1巻(2021-08)→3巻(2015-07)	有→有
 6	kamurobamura-e	かむろば村へ	いがらしみきお	standard	4	2巻(2014-05)→3巻(2008-11)	有→有
-6	kounodori	コウノドリ	鈴ノ木ユウ	standard	32	26巻(2019-03-22)→30巻(2013-06)	有→有
-6	ooi-yamabiko	オーイ!!やまびこ	矢口高雄	standard	7	5巻(1996-08-21)→6巻(1990-07-30)	有→有
 6	saishoukan-sareta-yuusha-wa-ippanjin-to-shite-ikite-iku	再召喚された勇者は一般人として生きていく?	濱﨑真代	standard	11	1巻(2026-07-24)→2巻(2020-08-07)	有→有
 6	shura-no-mon-dai-ni-mon	修羅の門 第弐門	川原正敏	standard	18	2巻(2017-10-25)→4巻(2011-12-16)	有→有
 6	ultraman	ウルトラマン	楳図かずお	standard	3	1巻(1984-06-30)→3巻(1978-07-10)	有→無
 6	yokubou-pandora	欲望パンドラ	緋月アキラ	standard	5	1巻(2025-08-11)→2巻(2019-12)	有→有
 5	akumagari	悪魔狩り	戸土野正内郎	standard	7	1巻(2009-01)→4巻(2004-02-10)	有→有
-5	asami-mitsuhiko-mystery-special	浅見光彦ミステリースペシャル	日下部拓海・羽柴麟・千村青	standard	25	20巻(2020-09-16)→21巻(2015-04)	有→有
 5	baromu-1	バロム・1	さいとう・たかを	standard	3	2巻(2003-02)→3巻(1998-05-28)	有→有
 5	eien-no-nohara	永遠の野原	逢坂みえこ	wideban	16	1巻(1995-10-25)→3巻(1990-07)	有→有
 5	g-defend	G・defend	森本秀	standard	76	25巻(2015-02)→37巻(2010-08)	有→有
-5	gokudoumeshi	極道めし	土山しげる	standard	10	1巻(2012-03)→2巻(2007-10-27)	有→有
 5	hontou-ni-atta-yukai-na-hanashi	本当にあった愉快な話	田島みるく	standard	10	1巻(2000-06)→2巻(1995-07-27)	有→有
 5	houchou-mushuku	包丁無宿	たがわ靖之	standard	45	21巻(1995-01)→22巻(1990-06)	有→有
 5	jigyaku-no-uta	自虐の詩	業田良家	standard	5	1巻(1992-04)→2巻(1987-12-25)	有→無
-5	keibu-zenigata	警部銭形	岡田鯛	standard	10	1巻(2017-09-28)→2巻(2012-06)	有→有
 5	manga-kenkanryu	マンガ嫌韓流	山野車輪	standard	4	1巻(2011-04)→2巻(2006-02)	有→有
 5	nanbonomonja	なんぼのもんじゃ	さだやす圭	standard	4	2巻(1990-05-01)→3巻(1985-08-01)	有→有
 5	okashina-tensei	おかしな転生	古流望・飯田せりこ・富沢みどり	standard	14	1巻(2023-10)→2巻(2018-12)	有→有
 5	sabaku-no-usagi	砂漠のウサギ	M.Wolverine	standard	3	1巻(2017-09)→2巻(2012-12)	有→有
-5	sangoku-rensenki	三国恋戦記	あず真矢	shinsoban	3	2巻(2019-01-15)→5巻(2014-05)	有→有
 5	sasurai-no-gambler	さすらいのギャンブラー	園山俊二	bunkobon	4	1巻(1981-12-01)→2巻(1976-12-01)	無→無
-5	take-moon	TAKE MOON	武梨えり	standard	2	1巻(2011-12)→2巻(2006-09-01)	有→有

@@ -1,0 +1,44 @@
+slug: ooi-yamabiko
+canonical_label: 通常版
+canonical_publisher: 毎日新聞社
+suppress_types: []
+source: 'ギャラ型(種2外seed起因) 2026-08-17: 主版=毎日新聞社版(1988-90)。v5枠に講談社版(1996)の第5巻が座り6年逆行していた=講談社で全5巻の再版runが存在(楽天で全5冊確認)。毎日版v5(9784620770451と推定)は楽天・NDLに記録なし=載せない(捏造しない)'
+volumes:
+- number: 1
+  isbn13: '9784620770413'
+  release_date: '1988-09-05'
+- number: 2
+  isbn13: '9784620770420'
+  release_date: '1988-12'
+- number: 3
+  isbn13: '9784620770437'
+  release_date: '1989-12'
+- number: 4
+  isbn13: '9784620770444'
+  release_date: '1990-06'
+- number: 6
+  isbn13: '9784620770468'
+  release_date: '1990-07-30'
+- number: 7
+  isbn13: '9784620770475'
+  release_date: '1990-09-05'
+extra_editions:
+- type: shinsoban
+  label: 講談社版(1996)
+  publisher: 講談社
+  volumes:
+  - number: 1
+    isbn13: '9784063300130'
+    release_date: '1996-04'
+  - number: 2
+    isbn13: '9784063300147'
+    release_date: '1996-05'
+  - number: 3
+    isbn13: '9784063300178'
+    release_date: '1996-06'
+  - number: 4
+    isbn13: '9784063300185'
+    release_date: '1996-07-19'
+  - number: 5
+    isbn13: '9784063300222'
+    release_date: '1996-08-21'

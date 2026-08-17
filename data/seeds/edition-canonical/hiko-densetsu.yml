@@ -1,0 +1,37 @@
+slug: hiko-densetsu
+canonical_label: 復刻版
+canonical_imprint: 鹿砦社復刻版
+canonical_publisher: 鹿砦社
+suppress_types: []
+source: 'ギャラ型(種2外seed起因) 2026-08-17: 頁の5冊は鹿砦社「復刻版」(2002・楽天で編名つき全5冊確認)なのに、v3-5に初版(1986-87)の日付が貼られて16年逆行していた。復刻の正しい日付(2002-10/11)に是正し、初版の日付は別タブ(版元不明・ISBN無・v3-5のみ記録あり)として保存'
+volumes:
+- number: 1
+  volume_label: 火子誕生編
+  isbn13: '9784846304713'
+  release_date: '2002-10'
+- number: 2
+  volume_label: 流転編
+  isbn13: '9784846304720'
+  release_date: '2002-10'
+- number: 3
+  volume_label: 青雲編
+  isbn13: '9784846304737'
+  release_date: '2002-11'
+- number: 4
+  volume_label: 激動編
+  isbn13: '9784846304744'
+  release_date: '2002-11'
+- number: 5
+  volume_label: 諸行無情編
+  isbn13: '9784846304751'
+  release_date: '2002-11'
+extra_editions:
+- type: shinsoban
+  label: 初版(1986-87)
+  volumes:
+  - number: 3
+    release_date: '1986-07-05'
+  - number: 4
+    release_date: '1987-02-10'
+  - number: 5
+    release_date: '1987-03-25'

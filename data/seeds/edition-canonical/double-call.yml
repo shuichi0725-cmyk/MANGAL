@@ -1,0 +1,27 @@
+slug: double-call
+canonical_label: 通常版
+canonical_publisher: ラポート
+suppress_types: []
+source: 'ギャラ型(種2外seed起因) 2026-08-17: 初版=ラポート(1996-99: v1/v4/v5のみ記録あり。v2・v3は両ソース無=載せない)。v2-v3枠に海王社GUSH COMICS新装版(2004)が座り6年逆行していた→新装版タブへ分離(楽天確認)'
+volumes:
+- number: 1
+  isbn13: '9784756703972'
+  release_date: '1996-11-08'
+- number: 4
+  isbn13: '9784756712189'
+  release_date: '1998-11-10'
+- number: 5
+  isbn13: '9784756712851'
+  release_date: '1999-11-09'
+extra_editions:
+- type: shinsoban
+  label: 新装版(海王社)
+  imprint: KAIOHSHA COMICS GUSH COMICS
+  publisher: 海王社
+  volumes:
+  - number: 2
+    isbn13: '9784877243739'
+    release_date: '2004-10-09'
+  - number: 3
+    isbn13: '9784877243777'
+    release_date: '2004-10-20'
