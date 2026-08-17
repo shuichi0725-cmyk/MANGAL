@@ -1,0 +1,53 @@
+slug: wasure-kuhee
+canonical_label: 通常版
+canonical_publisher: 不明
+canonical_imprint: 劇画キングシリーズ
+source: 'ギャラ型是正 2026-08-17(20-29年帯): 通常版/文庫タブで後年の復刻が初出runの巻枠を占有し日付が逆行していた。種2が持つimprintどおりに版を分離し、完備最古のrunを主版に戻した。版元はISBN出版者記号から解決し、ISBNを持たないrunは本セッションでNDL確認済みのレーベル対応にある社だけ明示、他は不明。★MADB側で巻番号が全部1に潰れていた復刻runは、発売日→ISBN順に1..nへ採番し直した。'
+volumes:
+- number: 1
+  release_date: '1982-07'
+- number: 2
+  release_date: '1982-10'
+- number: 3
+  release_date: '1982-12'
+- number: 4
+  release_date: '1983-04'
+- number: 5
+  release_date: '1983-07'
+- number: 6
+  release_date: '1983-10'
+extra_editions:
+- type: wideban
+  label: King series 漫画スーパーワイド
+  imprint: King series 漫画スーパーワイド
+  publisher: 小池書院
+  volumes:
+  - number: 1
+    isbn13: '9784862257727'
+    release_date: '2011-09'
+  - number: 2
+    isbn13: '9784862257734'
+    release_date: '2011-09'
+  - number: 3
+    isbn13: '9784862257741'
+    release_date: '2011-10'
+  - number: 4
+    isbn13: '9784862257772'
+    release_date: '2011-10'
+- type: shinsoban
+  label: King series(小池書院)
+  imprint: King series
+  publisher: 小池書院
+  volumes:
+  - number: 1
+    isbn13: '9784862259530'
+    release_date: '2013-11'
+  - number: 2
+    isbn13: '9784862259547'
+    release_date: '2013-12'
+  - number: 3
+    isbn13: '9784862259554'
+    release_date: '2014-01'
+  - number: 4
+    isbn13: '9784862259561'
+    release_date: '2014-02'

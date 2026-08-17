@@ -15,6 +15,9 @@ reflect は「再生成N / 検証ゲートOK」と成功を返すので、頁が
   3. data/manga.v2/<slug>.yml が実在するか (= 死にキー検出)
   4. volumes が空でないか / number が重複していないか
   5. release_date が文字列か (裸の日付は YAML が date 型にしてしまう)
+  6. ★種4(volumes-supplement)の巻を取りこぼしていないか
+     canonical は standard 版を丸ごと差し替えるので、NDL/楽天で裏取り済みの
+     取込もれ巻(種4)が黙って頁から消える(2026-08-17 エデンの東北ほか5頁で実踏)。
 
 使い方: python scripts/_check-edition-canonical.py   (異常があれば終了コード1)
 """
@@ -27,6 +30,27 @@ import yaml
 ROOT = Path(__file__).resolve().parent.parent
 SEED_DIR = ROOT / "data" / "seeds" / "edition-canonical"
 SRC_DIR = ROOT / "data" / "manga.v2"
+SUPP = ROOT / "data" / "seeds" / "volumes-supplement.yml"
+
+
+def _seed4_by_title():
+    """種4を『作品名 → [(isbn13, 巻)]』に畳む(series_keys の name: 部分で引く)。"""
+    out = {}
+    if not SUPP.exists():
+        return out
+    with SUPP.open(encoding="utf-8") as f:
+        d = yaml.safe_load(f) or {}
+    for v in d.get("volumes") or []:
+        i = v.get("isbn13")
+        if not i:
+            continue
+        for k in v.get("series_keys") or []:
+            nm = str(k).split("name:")[-1].split("|")[0]
+            out.setdefault(nm, set()).add((str(i), v.get("number")))
+    return out
+
+
+_S4 = None
 
 
 def check_volumes(where, vols, problems):
@@ -75,6 +99,32 @@ def main() -> int:
             if not (SRC_DIR / (slug + ".yml")).exists():
                 problems.append("data/manga.v2/%s.yml が無い(= 死にキー)" % slug)
             check_volumes("volumes", seed.get("volumes"), problems)
+            # ★種4の取りこぼし
+            global _S4
+            if _S4 is None:
+                _S4 = _seed4_by_title()
+            title = None
+            f2 = SRC_DIR / (slug + ".yml")
+            if f2.exists():
+                try:
+                    with f2.open(encoding="utf-8") as fh:
+                        title = (yaml.safe_load(fh) or {}).get("title")
+                except Exception:
+                    pass
+            if title and title in _S4:
+                have = set()
+                for v in seed.get("volumes") or []:
+                    if v.get("isbn13"):
+                        have.add(str(v["isbn13"]))
+                for xe in seed.get("extra_editions") or []:
+                    for v in xe.get("volumes") or []:
+                        if v.get("isbn13"):
+                            have.add(str(v["isbn13"]))
+                miss = [(i, n) for i, n in _S4[title] if i not in have]
+                if miss:
+                    problems.append(
+                        "種4(取込もれ巻)がseedに入っていない %s = canonicalが上書きして頁から消す"
+                        % sorted(miss)[:6])
             for i, xe in enumerate(seed.get("extra_editions") or []):
                 check_volumes("extra_editions[%d](%s)" % (i, xe.get("label")),
                               xe.get("volumes"), problems)

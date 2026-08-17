@@ -1,0 +1,44 @@
+slug: gin-no-hanabira
+canonical_label: 通常版
+canonical_publisher: 朝日ソノラマ
+canonical_imprint: サン・コミックス
+suppress_types:
+- bunkobon
+source: 'ギャラ型是正 2026-08-17(20-29年帯): 通常版/文庫タブで後年の復刻が初出runの巻枠を占有し日付が逆行していた。種2が持つimprintどおりに版を分離し、完備最古のrunを主版に戻した。版元はISBN出版者記号から解決し、ISBNを持たないrunは本セッションでNDL確認済みのレーベル対応にある社だけ明示、他は不明。'
+volumes:
+- number: 1
+  release_date: '1969-02-27'
+- number: 2
+  release_date: '1969-02-27'
+- number: 3
+  release_date: '1969-03-31'
+- number: 4
+  release_date: '1969-04'
+extra_editions:
+- type: bunkobon
+  label: 文庫版(ソノラマ漫画文庫)
+  imprint: ソノラマ漫画文庫
+  publisher: 朝日ソノラマ
+  volumes:
+  - number: 1
+    release_date: '1977-01-30'
+  - number: 2
+    release_date: '1977-01-30'
+  - number: 3
+    release_date: '1977-02-20'
+  - number: 4
+    release_date: '1977-02-20'
+- type: bunkobon
+  label: 文庫版(講談社漫画文庫)
+  imprint: 講談社漫画文庫
+  publisher: 講談社
+  volumes:
+  - number: 1
+    isbn13: '9784063602623'
+    release_date: '2002-06'
+  - number: 2
+    isbn13: '9784063602630'
+    release_date: '2002-06'
+  - number: 3
+    isbn13: '9784063602647'
+    release_date: '2002-06'

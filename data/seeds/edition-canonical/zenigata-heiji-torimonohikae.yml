@@ -1,7 +1,7 @@
 slug: zenigata-heiji-torimonohikae
 canonical_label: 通常版
 canonical_publisher: 不明
-source: 'ギャラ型是正 2026-08-17: 通常版タブに2009年の小池書院King series(大石賢一版 上下)が1巻・3巻枠として入り、1958年からの17巻run(MADBがレーベル名なしで持つ分)と51年逆行していた。まず日付逆行を解くため、17巻runを主版に据え、他のrunをextra_editionsへ分けた。★この頁は本来**同じ原作(野村胡堂)の別々のコミカライズが同居している真のA型**(石森章太郎プロ版 Jump comics deluxe 2004 / 大石賢一版 King series 2009 / さとう勝己『銭形平次事件帳』Kibo comics 2018)。頁分離は別作業として残す。今回は版タブへの切り分けと日付逆行の解消のみ。★17巻runの版元と各巻の発売日は両ソースに無い(13巻の1958-12だけMADBにある)ため publisher は不明のままにした。'
+source: '★2026-08-17追記: 種4(volumes-supplement)がNDL/楽天で確定していた Jump comics deluxe の2巻(9784088594774)をseedに取り込んだ。canonicalはstandard版を丸ごと差し替えるので、入れないと頁から消える。 ギャラ型是正 2026-08-17: 通常版タブに2009年の小池書院King series(大石賢一版 上下)が1巻・3巻枠として入り、1958年からの17巻run(MADBがレーベル名なしで持つ分)と51年逆行していた。まず日付逆行を解くため、17巻runを主版に据え、他のrunをextra_editionsへ分けた。★この頁は本来**同じ原作(野村胡堂)の別々のコミカライズが同居している真のA型**(石森章太郎プロ版 Jump comics deluxe 2004 / 大石賢一版 King series 2009 / さとう勝己『銭形平次事件帳』Kibo comics 2018)。頁分離は別作業として残す。今回は版タブへの切り分けと日付逆行の解消のみ。★17巻runの版元と各巻の発売日は両ソースに無い(13巻の1958-12だけMADBにある)ため publisher は不明のままにした。'
 volumes:
 - number: 1
   release_date: null
@@ -46,6 +46,9 @@ extra_editions:
   - number: 1
     isbn13: '9784088594231'
     release_date: '2004-06'
+  - number: 2
+    isbn13: '9784088594774'
+    release_date: null
   - number: 3
     isbn13: '9784088594996'
     release_date: '2005-04'

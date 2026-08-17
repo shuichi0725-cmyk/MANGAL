@@ -1,0 +1,44 @@
+slug: yakekuso-tenshi
+canonical_label: 通常版
+canonical_publisher: 秋田書店
+canonical_imprint: PLAYCOMIC SERIES SPECIAL
+suppress_types:
+- bunkobon
+source: 'ギャラ型是正 2026-08-17(20-29年帯): 通常版/文庫タブで後年の復刻が初出runの巻枠を占有し日付が逆行していた。種2が持つimprintどおりに版を分離し、完備最古のrunを主版に戻した。版元はISBN出版者記号から解決し、ISBNを持たないrunは本セッションでNDL確認済みのレーベル対応にある社だけ明示、他は不明。'
+volumes:
+- number: 1
+  isbn13: '9784253026079'
+  release_date: '1986-02-15'
+- number: 2
+  isbn13: '9784253026086'
+  release_date: '1986-04-20'
+extra_editions:
+- type: bunkobon
+  label: 文庫版(秋田漫画文庫)
+  imprint: 秋田漫画文庫
+  publisher: 秋田書店
+  volumes:
+  - number: 1
+    release_date: '1977-10-20'
+  - number: 2
+    release_date: '1978-02-20'
+  - number: 3
+    release_date: '1978-10-20'
+  - number: 4
+    release_date: '1978-12-20'
+  - number: 5
+    release_date: '1980-05-20'
+- type: bunkobon
+  label: 文庫版(秋田文庫)
+  imprint: 秋田文庫
+  publisher: 秋田書店
+  volumes:
+  - number: 1
+    isbn13: '9784253175500'
+    release_date: '2000-02-10'
+  - number: 2
+    isbn13: '9784253175517'
+    release_date: '2000-04-10'
+  - number: 3
+    isbn13: '9784253175524'
+    release_date: '2000-06-10'

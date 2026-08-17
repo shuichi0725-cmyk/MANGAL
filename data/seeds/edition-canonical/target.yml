@@ -1,0 +1,43 @@
+slug: target
+canonical_label: 通常版
+canonical_publisher: 徳間書店
+canonical_imprint: トクマコミックス
+source: 'ギャラ型是正 2026-08-17(20-29年帯): 通常版/文庫タブで後年の復刻が初出runの巻枠を占有し日付が逆行していた。種2が持つimprintどおりに版を分離し、完備最古のrunを主版に戻した。版元はISBN出版者記号から解決し、ISBNを持たないrunは本セッションでNDL確認済みのレーベル対応にある社だけ明示、他は不明。'
+volumes:
+- number: 2
+  release_date: '1985-10'
+- number: 3
+  release_date: '1985-10-01'
+- number: 4
+  release_date: '1985-11-01'
+- number: 5
+  release_date: '1985-11-01'
+extra_editions:
+- type: other
+  label: COMIC MATE版
+  imprint: COMIC MATE
+  publisher: 不明
+  volumes:
+  - number: 1
+    release_date: null
+  - number: 2
+    release_date: null
+  - number: 3
+    release_date: null
+  - number: 4
+    release_date: null
+  - number: 5
+    release_date: null
+- type: shinsoban
+  label: 復刻版(マンガショップ)
+  imprint: MANGA Shop Series
+  publisher: マンガショップ
+  volumes:
+  - number: 1
+    isbn13: '9784775910238'
+    release_date: '2005-02-05'
+    volume_label: '上'
+  - number: 3
+    isbn13: '9784775910245'
+    release_date: '2005-02-05'
+    volume_label: '下'

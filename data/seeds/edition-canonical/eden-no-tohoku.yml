@@ -1,0 +1,93 @@
+slug: eden-no-tohoku
+canonical_label: 通常版
+canonical_publisher: 竹書房
+canonical_imprint: Bamboo comics
+source: '★2026-08-17: canonical は standard 版を丸ごと差し替えるため、種4(volumes-supplement=NDL/楽天で裏取り済みのMADB取込もれ巻)がこの頁から消えていた。該当巻をseedに取り込んで復帰させた。 ギャラ型是正 2026-08-17(20-29年帯): 通常版/文庫タブで後年の復刻が初出runの巻枠を占有し日付が逆行していた。種2が持つimprintどおりに版を分離し、完備最古のrunを主版に戻した。版元はISBN出版者記号から解決し、ISBNを持たないrunは本セッションでNDL確認済みのレーベル対応にある社だけ明示、他は不明。'
+volumes:
+- number: 1
+  isbn13: '9784884755560'
+  release_date: '1991-12'
+- number: 2
+  release_date: '1992-07'
+- number: 3
+  release_date: '1993-05'
+- number: 4
+  isbn13: '9784884757113'
+  release_date: '1994-06'
+- number: 5
+  isbn13: '9784884758059'
+  release_date: '1995-07'
+- number: 6
+  isbn13: '9784812450093'
+  release_date: '1996-02-27'
+- number: 7
+  isbn13: '9784812451045'
+  release_date: '1996-12'
+- number: 9
+  isbn13: '9784812452837'
+  release_date: '1999-04'
+- number: 11
+  isbn13: '9784801960572'
+  release_date: '2017-10'
+- number: 12
+  isbn13: '9784801960824'
+  release_date: '2017-11'
+- number: 13
+  isbn13: '9784801961913'
+  release_date: '2018-03'
+  volume_label: '13 volume'
+- number: 14
+  isbn13: '9784801962705'
+  release_date: '2018-06'
+  volume_label: '14 volume'
+- number: 15
+  isbn13: '9784801963900'
+  release_date: '2018-10'
+  volume_label: '15 volume'
+- number: 16
+  isbn13: '9784801964693'
+  release_date: '2018-12'
+  volume_label: '16 volume'
+- number: 17
+  isbn13: '9784801965645'
+  release_date: '2019-04'
+  volume_label: '17 volume'
+- number: 18
+  isbn13: '9784801967212'
+  release_date: '2019-09'
+  volume_label: '18 volume'
+- number: 19
+  isbn13: '9784801968042'
+  release_date: '2019-12'
+  volume_label: '19 volume'
+- number: 20
+  isbn13: '9784801969261'
+  release_date: '2020-05'
+  volume_label: '20 volume'
+- number: 21
+  isbn13: '9784801970847'
+  release_date: '2020-10'
+  volume_label: '21 volume'
+- number: 22
+  isbn13: '9784801972179'
+  release_date: '2021-03'
+- number: 10
+  isbn13: '9784812454404'
+  release_date: '2000-11'
+extra_editions:
+- type: shinsoban
+  label: バンブーコミックス(1998)
+  imprint: バンブーコミックス
+  publisher: 竹書房
+  volumes:
+  - number: 8
+    isbn13: '9784812451816'
+    release_date: '1998-03-17'
+- type: other
+  label: BB collection
+  imprint: BB collection
+  publisher: 竹書房
+  volumes:
+  - number: 1
+    isbn13: '9784812481776'
+    release_date: '2013-06'

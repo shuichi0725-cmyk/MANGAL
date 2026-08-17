@@ -1,0 +1,32 @@
+slug: 99-suikan-super-99
+canonical_label: 通常版
+canonical_publisher: 秋田書店
+canonical_imprint: SUNDAY COMICS
+suppress_types:
+- bunkobon
+source: 'ギャラ型是正 2026-08-17(20-29年帯): 通常版/文庫タブで後年の復刻が初出runの巻枠を占有し日付が逆行していた。種2が持つimprintどおりに版を分離し、完備最古のrunを主版に戻した。版元はISBN出版者記号から解決し、ISBNを持たないrunは本セッションでNDL確認済みのレーベル対応にある社だけ明示、他は不明。'
+volumes:
+- number: 1
+  isbn13: '9784253064279'
+  release_date: '1997-08-05'
+- number: 2
+  isbn13: '9784253064286'
+  release_date: '1997-09-01'
+extra_editions:
+- type: bunkobon
+  label: 文庫版(秋田漫画文庫)
+  imprint: 秋田漫画文庫
+  publisher: 秋田書店
+  volumes:
+  - number: 1
+    release_date: '1977-10'
+  - number: 2
+    release_date: '1977-11'
+- type: bunkobon
+  label: 文庫版(秋田文庫)
+  imprint: 秋田文庫
+  publisher: 秋田書店
+  volumes:
+  - number: 1
+    isbn13: '9784253170086'
+    release_date: '2002-08'

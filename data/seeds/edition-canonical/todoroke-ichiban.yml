@@ -1,0 +1,41 @@
+slug: todoroke-ichiban
+canonical_label: 通常版
+canonical_publisher: 小学館
+canonical_imprint: てんとう虫コミックス
+source: 'ギャラ型是正 2026-08-17(20-29年帯): 通常版/文庫タブで後年の復刻が初出runの巻枠を占有し日付が逆行していた。種2が持つimprintどおりに版を分離し、完備最古のrunを主版に戻した。版元はISBN出版者記号から解決し、ISBNを持たないrunは本セッションでNDL確認済みのレーベル対応にある社だけ明示、他は不明。'
+volumes:
+- number: 1
+  release_date: '1980-10-25'
+- number: 2
+  release_date: '1981-01-25'
+- number: 3
+  release_date: '1981-07-25'
+- number: 4
+  release_date: '1981-12'
+- number: 5
+  release_date: '1982-06'
+- number: 6
+  release_date: '1982-11'
+- number: 7
+  isbn13: '9784091404473'
+  release_date: '1983-05-25'
+extra_editions:
+- type: shinsoban
+  label: トラウママンガブックス
+  imprint: トラウママンガブックス
+  publisher: 英知出版
+  volumes:
+  - number: 1
+    isbn13: '9784754232047'
+    release_date: '2002-01'
+    volume_label: '上'
+  - number: 3
+    isbn13: '9784754232078'
+    release_date: '2002-02'
+    volume_label: '下'
+- type: other
+  label: 2007年版
+  publisher: 不明
+  volumes:
+  - number: 1
+    release_date: '2007-08-30'
