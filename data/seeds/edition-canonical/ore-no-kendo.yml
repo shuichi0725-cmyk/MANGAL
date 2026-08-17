@@ -2,7 +2,7 @@ slug: ore-no-kendo
 canonical_label: SPコミックス版
 canonical_publisher: リイド社
 canonical_imprint: SPコミックス
-source: 'ギャラ型round4 2026-08-17: リイドSPコミックス(1992-93 全5巻=楽天完備・v3回収)をmainに、初版(1984-86 ISBN無 v6-20等)を初版タブへ保存(版元はNDL要=不明のまま)'
+source: 'ギャラ型round4 2026-08-17: リイドSPコミックス(1992-93 全5巻=楽天完備・v3回収)をmainに、初版(1984-86 ISBN無)=NDLでリイド社SPコミックス全20巻と確定(1992-93は同レーベル再版)'
 volumes:
 - number: 1
   isbn13: '9784845809738'
@@ -22,7 +22,8 @@ volumes:
 extra_editions:
 - type: shinsoban
   label: 初版(1984-86)
-  publisher: 不明
+  imprint: SPコミックス
+  publisher: リイド社
   volumes:
   - number: 1
     release_date: '1984-04'
