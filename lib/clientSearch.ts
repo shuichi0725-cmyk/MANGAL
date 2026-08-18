@@ -214,6 +214,12 @@ function fetchAlt(): void {
     });
 }
 
+/** alt索引(別名)を取得中か(=題名ヒット0の直後、別名での再照合がまだ終わっていない)。
+ *  検索UIが「0件」と断言してよいかの判定に使う(2026-08-18 偽0件対策=B案)。 */
+export function isAltLoading(): boolean {
+  return _altInflight && _alt === null;
+}
+
 /** テスト用: alt索引を直接注入(fetch不要)。nullで未ロード状態に戻す。 */
 export function __setAltIndexForTest(raw: Record<string, string[]> | null): void {
   if (raw === null) {

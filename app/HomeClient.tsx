@@ -19,7 +19,7 @@ import {
   authorsWithKana,
   yearBounds,
 } from "@/lib/filters";
-import { onAltLoaded, prewarmSearch, searchWithTiers } from "@/lib/clientSearch";
+import { isAltLoading, onAltLoaded, prewarmSearch, searchWithTiers } from "@/lib/clientSearch";
 import { ensureFullIndex, isFullIndexLoaded } from "@/lib/useMangaIndex";
 import { perfDiag } from "@/lib/perfDiag";
 import type { IndexSummary, ArtBook, ListBundle, MangaListItem } from "@/lib/schema";
@@ -129,6 +129,11 @@ export default function HomeClient({ data, summary }: Props) {
     if (hasQuery) ensureFullIndex(); // 検索確定=フル索引を即時要求(head 200件だけの誤答窓を閉じる)
   }, [hasQuery]);
   const searchLoading = hasQuery && mangaIndex === null;
+  // ★偽0件対策=B案(2026-08-18 ユーザ裁定): フル索引が届く前(head100件だけ)や、題名ヒット0で
+  //   別名(alt)照合がまだの間は「検索が確定していない」。この間は
+  //   ①0件と断言しない(検索中表示に差し替え) ②部分結果には「検索中」バッジを重ねる。
+  //   再計算タイミング: full到着=_indexListeners→再レンダー / alt到着=altTick で担保される。
+  const searchPending = hasQuery && (!isFullIndexLoaded() || isAltLoading());
   const searchTiers = useMemo(
     () => (hasQuery ? searchWithTiers(state.query, manga) : null),
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -498,20 +503,34 @@ export default function HomeClient({ data, summary }: Props) {
                 </li>
               ))}
             </ul>
-          ) : indexLoading || searchLoading ? (
+          ) : indexLoading || searchLoading || (searchPending && paged.length === 0) ? (
+            /* ★検索確定前(フル索引/alt照合待ち)にヒット0でも「0件」と断言しない(B案) */
             <div className="tactile rounded-card py-16 text-center">
-              <p className="text-2xl animate-pulse" aria-hidden="true">{searchLoading ? "🔍" : "📚"}</p>
+              <p className="text-2xl animate-pulse" aria-hidden="true">{hasQuery ? "🔍" : "📚"}</p>
               <p className="mt-2 text-sm text-ink/55">
-                {searchLoading ? "検索しています…" : "作品データを読み込み中…"}
+                {hasQuery
+                  ? summary?.total
+                    ? `検索しています…(全${summary.total.toLocaleString()}作品を照合中)`
+                    : "検索しています…"
+                  : "作品データを読み込み中…"}
               </p>
             </div>
           ) : (
-            <MangaGrid
-              items={paged as MangaListItem[]}
-              publishers={data.publishers}
-              genres={data.genres}
-              demographics={data.demographics}
-            />
+            <>
+              {searchPending && (
+                /* ★フル索引到着前の途中結果バッジ(B案: 部分ヒットは見せるが「まだ途中」と明示) */
+                <p className="mb-3 flex items-center gap-1.5 text-[12px] text-ink/55">
+                  <span className="animate-pulse" aria-hidden="true">🔍</span>
+                  検索中…{summary?.total ? ` 全${summary.total.toLocaleString()}作品を照合しています` : ""}(ここまでの途中結果)
+                </p>
+              )}
+              <MangaGrid
+                items={paged as MangaListItem[]}
+                publishers={data.publishers}
+                genres={data.genres}
+                demographics={data.demographics}
+              />
+            </>
           )}
           <Pager page={curPage} totalPages={totalPages} onChange={goPage} />
           {filtered.length > 0 && (
