@@ -553,6 +553,14 @@ for _i, _a in enumerate(sys.argv):
         if not ONLY_SLUGS:
             print("[abort] --only が空(シェル変数の展開ミス?)。フルpromoteに落とさず終了。", file=sys.stderr)
             sys.exit(2)
+    if _a == "--only-file" and _i + 1 < len(sys.argv):
+        # ★大量ターゲット用(2026-08-18 連載中再検査 約3,800頁): 1行1slugのファイルで受ける
+        #   (= Windowsのコマンドライン長上限32kをカンマ列挙が超えるため)。空なら同様にabort。
+        _pf = Path(sys.argv[_i + 1])
+        ONLY_SLUGS = {s.strip() for s in _pf.read_text(encoding="utf-8").splitlines() if s.strip()}
+        if not ONLY_SLUGS:
+            print("[abort] --only-file が空。フルpromoteに落とさず終了。", file=sys.stderr)
+            sys.exit(2)
 
 
 def _entry_sids(entry: dict, key_to_sid: dict) -> list[int]:
@@ -2063,6 +2071,58 @@ def _load_status_corrections() -> dict:
 _STATUS_CORR = _load_status_corrections()
 
 
+_ANILIST_STATUS = None
+
+
+def _load_anilist_status() -> dict:
+    """★AniList連載状態map (2026-08-18 連載中再検査)。{anilist_id(str): [status, endYear]}。
+    dump(v3)から `scripts/_gen-anilist-status-map.py` で再生成可能なため .cache 置き(=永続化しない原則)。
+    無ければ空= AniList層skip(降格はBookLive/機械判定のみで動く)。"""
+    global _ANILIST_STATUS
+    if _ANILIST_STATUS is None:
+        p = ROOT / ".cache" / "anilist-status-map.json"
+        _ANILIST_STATUS = json.loads(p.read_text(encoding="utf-8")) if p.exists() else {}
+    return _ANILIST_STATUS
+
+
+_BOOKLIVE_COMPLETED = None
+
+
+def _load_booklive_completed() -> dict:
+    """★BookLive最終巻照会の完結証拠 seed (2026-08-18、`scripts/_harvest-booklive-status.py` が収穫)。
+    タグ=完結(tag_kanketsu) / あらすじ強文言(desc_strong=「堂々の完結編」「全N巻」等) のみ採用。
+    弱文言(desc_weak)・部分完結(desc_part)は自動適用しない(保留=人が裁く)。
+    形式: {slug: evidence文字列}。外部照会が高価なのでgit追跡seed(synopsis-jaと同格)。"""
+    global _BOOKLIVE_COMPLETED
+    if _BOOKLIVE_COMPLETED is None:
+        _BOOKLIVE_COMPLETED = {}
+        p = ROOT / "data" / "seeds" / "status-booklive.jsonl"
+        if p.exists():
+            for _line in p.read_text(encoding="utf-8").splitlines():
+                try:
+                    _r = json.loads(_line)
+                except Exception:
+                    continue
+                if _r.get("verdict") in ("tag_kanketsu", "desc_strong"):
+                    _BOOKLIVE_COMPLETED[_r["slug"]] = _r.get("evidence") or _r["verdict"]
+    return _BOOKLIVE_COMPLETED
+
+
+def _latest_first_print(yml: dict) -> str:
+    """頁ymlから「最新巻番号の初版日」を取る(= status機械判定の軸。新装/復刻は各巻minで無害化)。"""
+    eds = yml.get("editions") or []
+    std = [e for e in eds if e.get("type") == "standard"] or eds
+    per: dict = {}
+    for e in std:
+        for v in e.get("volumes") or []:
+            n, d = v.get("number"), str(v.get("release_date") or "")
+            if not n or not d:
+                continue
+            if n not in per or d < per[n]:
+                per[n] = d
+    return max(per.values()) if per else ""
+
+
 def _load_magazine_corrections() -> dict:
     """★掲載誌の per-case 是正(2026-08-07 夢幻の如く=スーパージャンプをヤングジャンプと誤記)。
     magazine は種3のAI fill由来で根拠のない推定が混じるが、種3は純粋追加onlyで直せない。
@@ -3134,6 +3194,7 @@ def main():
     # AniList enrich(productionization)= series_key → {anilist_id, synonyms, genres_anilist, tags}
     enrich_map = _load_anilist_enrich_map()
     enrich_pages = 0
+    status_demote_pages = {"anilist": 0, "booklive": 0, "stale24": 0}
     print(f"  anilist enrich map: {len(enrich_map):,} series_key", file=sys.stderr)
     # synopsis 和訳 map = {anilist_id(str): ja}。 種a description の日本語要約。
     # ★git追跡 seed(高価なAI生成物=種3と同格で永続化。 旧.cache から移行 2026-06-02)。
@@ -3525,6 +3586,40 @@ def main():
                     if af.get("original_authors") and not new_yml.get("original_authors"):
                         new_yml["original_authors"] = [{"name": n, "role": "writer"} for n in af["original_authors"]]
                     author_fill_pages += 1
+        # ★連載状態の外部権威層 (2026-08-18 連載中再検査GO。 [[ongoing-recheck]]):
+        #   従来は種3(AI推測)のongoingが一度も降格されず、30年前完結作が「連載中」のまま残る
+        #   非対称があった(ぎゅわんぶらあ型 11,285頁中約3,800頁)。優先順:
+        #     status-corrections(builder内で適用済=ここでは触らない) >
+        #     AniList FINISHED/CANCELLED → completed >
+        #     BookLive最終巻証拠(タグ完結/強文言) → completed >
+        #     AniList RELEASING → ongoing維持(HxH型の長期休載を保護) >
+        #     機械判定: 最新巻の初版が直近24ヶ月に無い → completed。
+        #   一方向(ongoing→completed)のみ。新刊が出れば builder の recency で ongoing に戻る可逆設計。
+        if new_yml.get("status") == "ongoing" and not (
+            _STATUS_CORR.get(slug) or _STATUS_CORR.get(new_yml.get("slug") or "")
+        ):
+            _ast = _load_anilist_status().get(str(new_yml.get("anilist_id") or ""))
+            _blev = _load_booklive_completed().get(slug) or _load_booklive_completed().get(new_yml.get("slug") or "")
+            _lf = _latest_first_print(new_yml)
+            _recent24 = bool(_lf) and _lf[:10] >= (
+                datetime.date.today() - datetime.timedelta(days=730)
+            ).isoformat()[: len(_lf[:10])]
+            _demote = None
+            if _ast and _ast[0] in ("FINISHED", "CANCELLED"):
+                _demote = ("anilist", _ast[1])
+            elif _blev:
+                _demote = ("booklive", None)
+            elif _ast and _ast[0] == "RELEASING":
+                _demote = None
+            elif not _recent24:
+                _demote = ("stale24", None)
+            if _demote:
+                new_yml["status"] = "completed"
+                # year_ended は builder と同じ意味論(=最新巻初版の年)を第一に。日付ゼロ頁のみ
+                # AniList endYear → year_started の順で fallback(捏造せず既知の実データから)。
+                _lfy = int(_lf[:4]) if _lf[:4].isdigit() else None
+                new_yml["year_ended"] = _lfy or _demote[1] or new_yml.get("year_started")
+                status_demote_pages[_demote[0]] += 1
         # ★ジャンル trusted優先マージ(2026-06-13、 [[genre_quality_improvement]]):
         #   trusted = AniList(genres+themes=genres_trusted) ∪ Wiki/手動(genre-additions+genre-wiki)。
         #   trusted有→それを採用(AIノイズ=drama乱発を落とす)。 trusted空→AI fallback+provisional印。
@@ -3796,6 +3891,8 @@ def main():
         print(f"  {k}: {v}", file=sys.stderr)
     print(f"  adult_us(米基準=非日本geoで非表示): {adult_us_pages}", file=sys.stderr)
     print(f"  anilist enrich(id/synonyms/genres/tags 付与): {enrich_pages}", file=sys.stderr)
+    print(f"  連載中→完結 降格(外部権威層): anilist={status_demote_pages['anilist']} "
+          f"booklive={status_demote_pages['booklive']} stale24={status_demote_pages['stale24']}", file=sys.stderr)
     print(f"  synopsis 種a和訳 付与: {synopsis_pages}(残りは空=種3 AI文不使用)", file=sys.stderr)
     print(f"  catch コピー付与: {catch_pages}", file=sys.stderr)
     print(f"  synopsis(slug seed)付与: {synslug_pages}", file=sys.stderr)
