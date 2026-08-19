@@ -1436,3 +1436,4 @@
 {"slug": "shirasunamura", "vol": 7, "op": "seed4_gap_fill", "isbn13": "9784758062862", "release_date": "2011-11", "at": "2026-08-08", "note": "ユーザ提供ISBN。v1-3とv8-10しか無くv4-7が欠番。ja.wikipedia「今井神」で全10巻(月刊ComicREX 2006-05〜2014-02)確定、巻/著者/出版社/月は楽天ISBN直引きで確認。NDLは4冊とも未収録。あわせて掲載誌をweekly-young-jump→comic-rexに是正、連載開始年2007→2006"}
 {"slug": "gaki-deka", "op": "isbn-fill", "detail": "SCC1-4+双葉社版1-3のISBN充填(Wiki×楽天2ソース一致)。書影=SCC1-4はcovers seed自動、双葉/豪華版は楽天noimage=なしが正", "at": "2026-08-19", "backup": "isbn-fill.json追記=可逆(キー削除で戻る)"}
 {"slug": "gaki-deka", "op": "isbn-fill-retract+canonical-write", "detail": "canonical結線頁のためisbn-fillは無効=撤去し、edition-canonical/gaki-deka.yml本体にv1-4+双葉社版3冊のISBNを書いた", "at": "2026-08-19", "backup": "git履歴で可逆"}
+{"slug": "(bulk-669)", "op": "partial-isbn-gap-fill", "detail": "がきデカ型一括: 289頁669巻のISBN充填(帯内挿171/外挿136/楽天逆引き362、全件楽天題+巻+帯+未使用の4検証)。書影193巻自動付与。canonical頁560巻+未解決945巻はTSVへ", "at": "2026-08-19", "backup": "isbn-fill.json追記=可逆"}
