@@ -28,6 +28,9 @@ metadata:
 - 検査器 = _audit-tameshiyomi-ln.py(危険集合=アンカー∩原作クレジット4,163頁の商品頁カテゴリ検査・台帳再開可)。campaign完了後に再実行して新アンカーも検査する
 - 旧ゲートで保留落ちした3,389件はattempted台帳から削除済=新ゲートで再試行中
 
+## 改善1-5適用済(2026-08-20 ユーザGO)
+- 差替31件=155巻展開済 / 候補0は題のみ第2クエリ(商品頁ゲートが精度担保) / ループ完走時にresolve-holds+stats+LN差分検査を自動実行 / LN検査 --all(全アンカー)実行済 / 週次step1にLN差分検査+AniList statusマップ再生成を組込済
+
 ## 後続
 - アンカー→全巻展開→map化は**週次蒸留のstep1**(harvest/expand/map)が自動でやる=ここでは集めるだけ
 - 新規保留(再held)は既存の保留裁定フロー([[tameshiyomi_adjudication_state]])へ
