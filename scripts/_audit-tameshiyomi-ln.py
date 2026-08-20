@@ -64,26 +64,33 @@ def main() -> None:
     todo = [(s, t) for s, t in risk if t not in checked]
     print(f"危険集合 {len(risk)} / 検査済 {len(risk) - len(todo)} / 残 {len(todo)}", flush=True)
     os.makedirs(os.path.dirname(LEDGER), exist_ok=True)
-    errs = 0
-    with io.open(LEDGER, "a", encoding="utf-8", newline="\n") as w:
-        for i, (slug, tid) in enumerate(todo):
-            try:
-                catgen, ptitle = category_of(tid)
-                errs = 0
-            except Exception as e:
-                errs += 1
-                print(f"  ERR {slug} {type(e).__name__}", flush=True)
-                if errs >= 5:
-                    print("連続エラー5 → abort(再開可)", flush=True)
-                    sys.exit(1)
-                time.sleep(5)
+    # ★8並列(2026-08-20 ユーザ「長くない？」): expandの8並列HEADと同じ相手(BookLive CDN)の
+    #   軽いGETなので並列可。90分→10分台。失敗はfailカウントのみ(台帳未記載=次回再試行)。
+    from concurrent.futures import ThreadPoolExecutor
+
+    def probe(item):
+        slug, tid = item
+        try:
+            catgen, ptitle = category_of(tid)
+            return slug, tid, catgen, ptitle
+        except Exception as e:
+            return slug, tid, None, type(e).__name__
+
+    fails = 0
+    with io.open(LEDGER, "a", encoding="utf-8", newline="\n") as w, \
+            ThreadPoolExecutor(max_workers=8) as pool:
+        for i, (slug, tid, catgen, ptitle) in enumerate(pool.map(probe, todo)):
+            if catgen is None:
+                fails += 1
+                print(f"  ERR {slug} {ptitle}", flush=True)
                 continue
             w.write(json.dumps({"tid": tid, "slug": slug, "cat": catgen, "ptitle": ptitle,
                                 "at": time.strftime("%Y-%m-%d")}, ensure_ascii=False) + "\n")
             w.flush()
-            if (i + 1) % 200 == 0:
+            if (i + 1) % 500 == 0:
                 print(f"  {i + 1}/{len(todo)}", flush=True)
-            time.sleep(1.3)
+    if fails:
+        print(f"取得失敗 {fails}(台帳未記載=再実行で再試行)", flush=True)
     # 集計(全台帳から)
     flagged = []
     for line in io.open(LEDGER, encoding="utf-8"):
