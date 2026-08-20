@@ -96,14 +96,14 @@ def main() -> None:
                 print(f"  {i + 1}/{len(todo)}", flush=True)
     if fails:
         print(f"取得失敗 {fails}(台帳未記載=再実行で再試行)", flush=True)
-    # 集計(全台帳から)
+    # 集計(全台帳から)。★現アンカーと一致する行のみflag(是正済みの旧title_id行を除外=偽陽性防止)
     flagged = []
     for line in io.open(LEDGER, encoding="utf-8"):
         try:
             r = json.loads(line)
         except Exception:
             continue
-        if NOVEL_CAT.search(r.get("cat") or ""):
+        if NOVEL_CAT.search(r.get("cat") or "") and anchors.get(r["slug"]) == r["tid"]:
             flagged.append(r)
     with io.open(OUT, "w", encoding="utf-8", newline="\n") as w:
         w.write("slug\ttitle_id\tカテゴリ\t商品題\n")
