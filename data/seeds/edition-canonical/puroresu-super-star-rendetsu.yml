@@ -54,3 +54,36 @@ volumes:
 - number: 17
   isbn13: '9784091207975'
   release_date: '1983-10-15'
+extra_editions:
+- type: shinsoban
+  label: KCスペシャル(1989)
+  imprint: KCスペシャル
+  publisher: 講談社
+  volumes:
+  - number: 1
+    isbn13: '9784061014275'
+    release_date: '1989-02-06'
+  - number: 2
+    isbn13: '9784061014282'
+    release_date: '1989-03-06'
+  - number: 3
+    isbn13: '9784061014299'
+    release_date: '1989-04-06'
+  - number: 4
+    isbn13: '9784061014305'
+    release_date: '1989-05-08'
+  - number: 5
+    isbn13: '9784061014312'
+    release_date: '1989-06-06'
+  - number: 6
+    isbn13: '9784061014329'
+    release_date: '1989-07-06'
+  - number: 7
+    isbn13: '9784061014336'
+    release_date: '1989-08-05'
+  - number: 8
+    isbn13: '9784061014343'
+    release_date: '1989-09-06'
+  - number: 9
+    isbn13: '9784061014350'
+    release_date: '1989-10-06'

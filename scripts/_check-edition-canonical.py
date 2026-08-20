@@ -107,6 +107,23 @@ def _claimed_isbns():
     return s
 
 
+_IDX = None  # ISBN→頁slug索引(.cache/isbn-page-index.json) | False(=無し)
+
+
+def _isbn_page_index():
+    """本番ISBN索引(あれば)。無ければ None = 索引による除外はしない(保守側=flagを残す)。"""
+    global _IDX
+    if _IDX is None:
+        p = ROOT / ".cache" / "isbn-page-index.json"
+        if p.exists():
+            import json
+            with p.open(encoding="utf-8") as f:
+                _IDX = json.load(f)
+        else:
+            _IDX = False
+    return _IDX if _IDX is not False else None
+
+
 def _db():
     """種2への接続(1回だけ)。無ければ False = 続巻検査をskip。"""
     global _DB
@@ -263,9 +280,28 @@ def main() -> int:
                         if v.get("isbn13"):
                             have.add(str(v["isbn13"]))
                 miss = [(i, n) for i, n in _S4[title] if i not in have]
+                # ★偽陽性2型を頁実体で除外(2026-08-20):
+                #   ①種4は同名別頁(kinpeibai-watanabe-1995/ultraman-kazumine-1968型)を
+                #     狙っていることがある(title照合はslugを区別できない)→ISBN索引で
+                #     どこかの頁に生きていればOK
+                #   ②seedに無くても頁には載る経路がある(golgo v173=compact/routing型、
+                #     種4のshinsoban等はcanonicalが触らない)→自頁ファイルに在ればOK
+                if miss:
+                    page_txt = ""
+                    if f2.exists():
+                        try:
+                            page_txt = f2.read_text(encoding="utf-8")
+                        except Exception:
+                            pass
+                    idx = _isbn_page_index()
+                    miss = [(i, n) for i, n in miss
+                            if i not in page_txt
+                            and i not in _claimed_isbns()  # 別seedが収載済(索引stale対策)
+                            and (idx is None or i not in idx)]
                 if miss:
                     problems.append(
-                        "種4(取込もれ巻)がseedに入っていない %s = canonicalが上書きして頁から消す"
+                        "種4(取込もれ巻)がどの頁にも出ていない %s = canonicalが上書きして消している疑い"
+                        "(索引が古い可能性もある→ python scripts/_exists.py --build で再確認)"
                         % sorted(miss)[:6])
             for i, xe in enumerate(seed.get("extra_editions") or []):
                 check_volumes("extra_editions[%d](%s)" % (i, xe.get("label")),
