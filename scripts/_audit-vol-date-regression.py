@@ -13,7 +13,13 @@
 ISBNパターン: 逆行境界の前後でISBN有無が反転していれば接ぎ木の傍証(ギャラ=有→無)。
 
 月次: 新規増加分を見る。是正はギャラ式(edition-overridesで2頁分離+anilist:false)。
+
+★帯絞り込み(2026-08-20 新設。既定の挙動は不変=無指定なら従来どおり全件):
+  --min-years N       逆行N年以上だけを表示(例: 10 = 5-9年帯[正史が混じる]を外す)
+  --isbn-pattern 有→無  ISBNパターンで絞る(有→無=接ぎ木の強シグナル)
+  ※絞り込みは**stdout表示のみ**。TSV台帳は常に全件で書く(台帳の連続性を壊さない)。
 """
+import argparse
 import glob
 import os
 import re
@@ -22,6 +28,13 @@ import sys
 sys.stdout.reconfigure(encoding="utf-8")
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 THRESHOLD = 5  # 年
+
+ap = argparse.ArgumentParser()
+ap.add_argument("--min-years", type=int, default=0,
+                help="逆行N年以上だけをstdout表示(TSVは常に全件)")
+ap.add_argument("--isbn-pattern", default="",
+                help="ISBNパターン(有→無 等)でstdout表示を絞る(TSVは常に全件)")
+ARGS = ap.parse_args()
 
 try:
     import yaml
@@ -81,3 +94,16 @@ print(f"\nflag {len(rows)} 件(edition単位) → {out}")
 from collections import Counter
 print("逆行年数分布:", dict(sorted(Counter(min(r[0] // 10 * 10, 40) for r in rows).items())))
 print("ISBNパターン:", dict(Counter(r[7] for r in rows)))
+
+# ★帯絞り込み表示(TSVは上で全件書き済み=台帳不変。ここはstdoutのビューだけ)
+if ARGS.min_years or ARGS.isbn_pattern:
+    sel = [r for r in rows
+           if r[0] >= ARGS.min_years and (not ARGS.isbn_pattern or r[7] == ARGS.isbn_pattern)]
+    lbl = []
+    if ARGS.min_years:
+        lbl.append(f"逆行{ARGS.min_years}年以上")
+    if ARGS.isbn_pattern:
+        lbl.append(f"ISBN {ARGS.isbn_pattern}")
+    print(f"\n絞り込み({' × '.join(lbl)}): {len(sel)} 件")
+    for r in sel:
+        print("  " + "\t".join(str(x) for x in r))
