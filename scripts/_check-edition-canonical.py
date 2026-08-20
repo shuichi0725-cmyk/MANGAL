@@ -18,19 +18,32 @@ reflect は「再生成N / 検証ゲートOK」と成功を返すので、頁が
   6. ★種4(volumes-supplement)の巻を取りこぼしていないか
      canonical は standard 版を丸ごと差し替えるので、NDL/楽天で裏取り済みの
      取込もれ巻(種4)が黙って頁から消える(2026-08-17 エデンの東北ほか5頁で実踏)。
+  7. ★連載中の続巻を取りこぼしていないか(2026-08-20 新設)
+     canonical は巻を列挙して固定するため、連載中作品は蒸留で種2に続巻が入っても
+     頁には永久に出ない(鬼平犯科帳/釣りバカ日誌/ゴルゴ13ほか5頁で実踏)。
+     判定 = seed主版(volumes)のISBNで種2 editionを逆引きし(同一imprintに限定)、
+     seed最大巻より後の巻番号 かつ seed最終日以降の発売日 の巻が種2に在れば NG。
+     ※.cache/db-v2.sqlite が無い環境ではこの検査だけ skip(他は従来どおり)。
 
-使い方: python scripts/_check-edition-canonical.py   (異常があれば終了コード1)
+使い方:
+  python scripts/_check-edition-canonical.py                # 全seed検査(異常があれば終了コード1)
+  python scripts/_check-edition-canonical.py --slugs a,b,c  # 指定slug(=SRC slug/ファイル名)だけ検査
+                                                            # (reflect の canonical ゲートが使う高速経路)
 """
+import argparse
 import io
 import sys
 from pathlib import Path
 
 import yaml
 
+sys.stdout.reconfigure(encoding="utf-8")
+
 ROOT = Path(__file__).resolve().parent.parent
 SEED_DIR = ROOT / "data" / "seeds" / "edition-canonical"
 SRC_DIR = ROOT / "data" / "manga.v2"
 SUPP = ROOT / "data" / "seeds" / "volumes-supplement.yml"
+DB = ROOT / ".cache" / "db-v2.sqlite"
 
 
 def _seed4_by_title():
@@ -51,6 +64,128 @@ def _seed4_by_title():
 
 
 _S4 = None
+_DB = None  # sqlite3.Connection | False(=無し)
+_CLAIMED = None  # 全canonical seed + volume-exclude が既に帰属を確定しているISBN集合
+
+
+def _claimed_isbns():
+    """全seedが主張するISBN + volume-exclude(除外確定)のISBN。
+    ★続巻検査の偽陽性対策: franchise分割頁(人狼ゲーム型)では、種2の汚染クラスタに
+    「別頁の巻」が高番号で同居する。そのISBNが別のcanonicalに収載済みなら
+    帰属は確定している=この頁の続巻ではない。"""
+    global _CLAIMED
+    if _CLAIMED is not None:
+        return _CLAIMED
+    s = set()
+
+    def _walk(o):
+        if isinstance(o, dict):
+            i = o.get("isbn13")
+            if i:
+                s.add(str(i))
+            for v in o.values():
+                _walk(v)
+        elif isinstance(o, list):
+            for v in o:
+                _walk(v)
+
+    for p in SEED_DIR.glob("*.yml"):
+        try:
+            with p.open(encoding="utf-8") as f:
+                _walk(yaml.safe_load(f))
+        except Exception:
+            continue
+    for name in ("volume-exclude.yml", "volume-exclude-isbn.yml"):
+        p = ROOT / "data" / "seeds" / name
+        if p.exists():
+            try:
+                with p.open(encoding="utf-8") as f:
+                    _walk(yaml.safe_load(f))
+            except Exception:
+                pass
+    _CLAIMED = s
+    return s
+
+
+def _db():
+    """種2への接続(1回だけ)。無ければ False = 続巻検査をskip。"""
+    global _DB
+    if _DB is None:
+        if DB.exists():
+            import sqlite3
+            _DB = sqlite3.connect(str(DB))
+        else:
+            _DB = False
+    return _DB
+
+
+def check_open_tail(seed, problems):
+    """★検査7: 連載中canonicalの続巻取りこぼし。
+    seed主版(volumes)のISBNで種2 editionを逆引きし、最多一致editionと同じimprintの
+    edition群に「seed最大巻より後 かつ seed最終発売日以降」の巻が在れば NG。
+    imprint一致に限定するのは、種2クラスタには別版/別時代のrunが同居するため
+    (=そもそも canonical が要る理由)。日付条件で旧runの接ぎ木も弾く。"""
+    con = _db()
+    if not con:
+        return
+    main = [v for v in (seed.get("volumes") or []) if isinstance(v, dict)]
+    main_isbns = [str(v["isbn13"]) for v in main if v.get("isbn13")]
+    nums = [v["number"] for v in main if isinstance(v.get("number"), int)]
+    dates = [str(v["release_date"]) for v in main if v.get("release_date")]
+    if not main_isbns or not nums or not dates:
+        return  # ISBN/巻番号/日付の無いseedは逆引き不能=対象外(古典など)
+    max_num, max_date = max(nums), max(dates)
+    # seed全体(versions/extra/compact含む)の既収載ISBN
+    have = set(main_isbns)
+    def _grab(vols):
+        for v in vols or []:
+            if isinstance(v, dict) and v.get("isbn13"):
+                have.add(str(v["isbn13"]))
+    for vv in seed.get("versions") or []:
+        _grab(vv.get("volumes"))
+    for xe in seed.get("extra_editions") or []:
+        _grab(xe.get("volumes"))
+    _grab((seed.get("compact_edition") or {}).get("volumes"))
+    # 逆引き: seed ISBN → 種2 edition(重なりの多い順)
+    from collections import Counter
+    hits = Counter()
+    CH = 400
+    for i in range(0, len(main_isbns), CH):
+        chunk = main_isbns[i:i + CH]
+        q = ("SELECT edition_id FROM volumes WHERE isbn13 IN (%s)"
+             % ",".join("?" * len(chunk)))
+        for (eid,) in con.execute(q, chunk):
+            hits[eid] += 1
+    if not hits:
+        return
+    best_eid, best_n = hits.most_common(1)[0]
+    if best_n < min(2, len(main_isbns)):
+        return  # アンカー弱すぎ(1冊一致のみ)=誤editionを掴む危険
+    row = con.execute("SELECT imprint FROM editions WHERE id=?", (best_eid,)).fetchone()
+    imp = (row[0] or "") if row else ""
+    # 同imprintの一致edition群から続巻候補を拾う
+    cand = []
+    for eid, n in hits.items():
+        r = con.execute("SELECT imprint FROM editions WHERE id=?", (eid,)).fetchone()
+        if not r or (r[0] or "") != imp:
+            continue
+        for num, isbn, rd in con.execute(
+                "SELECT number, isbn13, release_date FROM volumes WHERE edition_id=?", (eid,)):
+            if not isinstance(num, int) or num <= max_num:
+                continue
+            if not isbn or str(isbn) in have:
+                continue
+            if str(isbn) in _claimed_isbns():
+                continue  # 別頁のcanonical/volume-excludeが帰属確定済(人狼ゲーム型の番号衝突)
+            if not rd or str(rd) < max_date:
+                continue  # 旧run(接ぎ木)の高番号は日付で弾く
+            cand.append((num, str(isbn), str(rd)))
+    if cand:
+        cand = sorted(set(cand))
+        problems.append(
+            "★連載中の続巻が種2に在るのにseed未収載(imprint=%s) %s%s"
+            " = canonicalが巻を固定し頁に出ない → seedへ種2の値で追記する"
+            % (imp or "?", cand[:8], " …計%d巻" % len(cand) if len(cand) > 8 else ""))
 
 
 def check_volumes(where, vols, problems):
@@ -78,7 +213,14 @@ def check_volumes(where, vols, problems):
 
 
 def main() -> int:
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--slugs", default="",
+                    help="検査対象を絞る(カンマ区切りのSRC slug=seedファイル名)。reflect用高速経路")
+    a = ap.parse_args()
     files = sorted(SEED_DIR.glob("*.yml"))
+    if a.slugs:
+        want = {s.strip() for s in a.slugs.split(",") if s.strip()}
+        files = [p for p in files if p.stem in want]
     bad = 0
     for p in files:
         problems = []
@@ -128,6 +270,8 @@ def main() -> int:
             for i, xe in enumerate(seed.get("extra_editions") or []):
                 check_volumes("extra_editions[%d](%s)" % (i, xe.get("label")),
                               xe.get("volumes"), problems)
+            # ★検査7: 連載中の続巻取りこぼし(種2が無い環境ではskip)
+            check_open_tail(seed, problems)
         if problems:
             print("NG %s" % p.name)
             for m in problems:
