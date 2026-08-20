@@ -22,6 +22,12 @@ metadata:
   - ★ps1は**ASCIIのみ**(PS5.1がANSI読みで日本語入りps1は構文崩壊=実踏)
 - 全体 ~6,857件×2.7秒≈5-6時間+quota待ち。**中断してもattempted台帳で再開可**(ループ再起動=Start-Process)
 
+## ラノベ誤アンカー型(2026-08-20 ユーザ発見=領民0人)+ゲート強化
+- 型: ラノベ原作コミカライズ頁で検索が小説版title_idを拾う(領民0人=556239ラノベ→正621456)。是正=anchor/volumes/vol-checkedの3点差し替え+map再生成
+- ★収穫ゲート強化済: 採用直前に**商品頁JSON-LD照会**(category=ラノベ/小説なら保留・著者最終確認)+題suffix剥ぎ(「題 - 著者」473件型/上下巻型)+exact一意なら著者snippet不要(609件型)
+- 検査器 = _audit-tameshiyomi-ln.py(危険集合=アンカー∩原作クレジット4,163頁の商品頁カテゴリ検査・台帳再開可)。campaign完了後に再実行して新アンカーも検査する
+- 旧ゲートで保留落ちした3,389件はattempted台帳から削除済=新ゲートで再試行中
+
 ## 後続
 - アンカー→全巻展開→map化は**週次蒸留のstep1**(harvest/expand/map)が自動でやる=ここでは集めるだけ
 - 新規保留(再held)は既存の保留裁定フロー([[tameshiyomi_adjudication_state]])へ
