@@ -30,6 +30,8 @@ python scripts/_gen-corner-auto.py           # 周年/豪華版 JSON(66k走査 ~
 python scripts/_tameshiyomi-harvest.py --limit 100          # ★週次収集(2026-08-12 ユーザ裁定=週1化): 新規アンカー発見(TinyFish~100検索・数分)
 python scripts/_tameshiyomi-harvest.py --expand --expand-limit 300  # 新規アンカーの全巻展開(HEAD検証・残はアイドル運転が消化)
 python scripts/_gen-tameshiyomi-map.py       # ★試し読みマップ(2026-08-06全結線。巻expandの増分をblmaxへ反映=~2秒)
+python scripts/_audit-tameshiyomi-ln.py      # ★LN混入検査(2026-08-20 領民0人型): 新アンカーのラノベ/小説カテゴリを差分検査(台帳skip=数分)。flag増=誤アンカー→差替
+python scripts/_gen-anilist-status-map.py    # ★AniList statusマップ再生成(2026-08-20 連載状態層): dump据置なら数十秒で同値。promoteの連載中→完結降格の鮮度維持
 python scripts/_placeholder-cover-refresh.py --build-queue   # ★書影queue週次再算出(2026-08-12 ユーザ裁定: 旧=月1。消化はアイドル運転⑩)
 python scripts/_build-list-index.py data/manga.v2 data   # 本番索引(~10分)
 ```

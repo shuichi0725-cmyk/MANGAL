@@ -286,8 +286,18 @@ def harvest(limit, list_file=None, retry_holds=False):
             print(f"★検索失敗で中断(再実行で再開可): {e}")
             break
         tn = norm(title)
+        hits = list(res.get("results") or [])
+        # ★第2クエリ(2026-08-20 ユーザGO②): 「題+著者」がtitle_id候補0なら題のみで再検索。
+        #   precisionは商品頁ゲート(カテゴリ=マンガ+著者JSON-LD照合)が担保する。
+        if not any(re.search(r"title_id/(\d+)", h.get("url", "")) for h in hits):
+            try:
+                res2 = search(f"site:booklive.jp {title}")
+                hits += list(res2.get("results") or [])
+            except Exception as e:
+                print(f"★検索失敗で中断(再実行で再開可): {e}")
+                break
         cand = {}
-        for h in (res.get("results") or []):
+        for h in hits:
             m = re.search(r"title_id/(\d+)", h.get("url", ""))
             if not m:
                 continue

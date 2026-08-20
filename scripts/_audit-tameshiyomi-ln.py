@@ -45,14 +45,19 @@ def main() -> None:
             continue
         if r.get("title_id"):
             anchors[r["slug"]] = r["title_id"]
-    pat = re.compile(r"(?m)^original_authors:\n- name")
-    risk = []
-    for f in glob.glob(os.path.join(ROOT, "data", "manga.v2", "*.yml")):
-        t = io.open(f, encoding="utf-8").read()
-        m = re.search(r"(?m)^slug: (.+)", t)
-        slug = m.group(1).strip() if m else ""
-        if slug in anchors and pat.search(t):
-            risk.append((slug, anchors[slug]))
+    # ★--all(2026-08-20 ユーザGO①): 全アンカーを検査(原作クレジット欠け頁の取り漏らしを消す)。
+    #   無印=危険集合(原作クレジット持ち)のみ。台帳はtitle_id単位なので--allでも検査済みはskip。
+    if "--all" in sys.argv:
+        risk = sorted(anchors.items())
+    else:
+        pat = re.compile(r"(?m)^original_authors:\n- name")
+        risk = []
+        for f in glob.glob(os.path.join(ROOT, "data", "manga.v2", "*.yml")):
+            t = io.open(f, encoding="utf-8").read()
+            m = re.search(r"(?m)^slug: (.+)", t)
+            slug = m.group(1).strip() if m else ""
+            if slug in anchors and pat.search(t):
+                risk.append((slug, anchors[slug]))
     checked = {}
     if os.path.exists(LEDGER):
         for line in io.open(LEDGER, encoding="utf-8"):
