@@ -115,6 +115,7 @@
 - [新PCへ移行済み2026-07-17](pc_migration_2026_07_17.md) — pip/stub層/NDL SSL全解消。stub=最小結線層・D:に保険ミラー
 - [ソーサリアン統合=本番化済](sorcerian_consolidation_state.md) — 単巻読切連番の1頁統合の型見本(title_display/dedup/多人数ガード)
 - [【方針】1件のバグ=型と疑う](feedback_one_bug_means_a_class.md) — 署名化→全DB掃引(全件目視)→検出器script化→月次サニティ登録
+- [【進行中】試し読み再検査アイドルループ](tameshiyomi_recheck_idle_loop.md) — 2020年以降6,857頁を古い順再検索中。log=.cache/tameshiyomi-recheck-loop.log
 - [kobo見直しセット復元](kobo_review_preview_set.md) — トリガー「kobo見直ししたい」=302作をpreviewへ(slug一覧=preview-sets/)
 - [Gemini API運用実測](gemini_api_ops.md) — ~500req/日・JST16時リセット・flash-lite主力・グラウンディング枠外
 - [M5_Ultra=家庭内ファイルサーバー構成](m5ultra_file_server_setup.md) — 固定IP.146/E:共有/share1認証/スリープ無効 ／ [見えるが書けない=SMB共有レベル許可を疑う](smb_share_level_readonly_gotcha.md) — Grant-SmbShareAccessで直す
