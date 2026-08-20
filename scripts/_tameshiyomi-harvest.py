@@ -56,6 +56,55 @@ def load_done():
     return done, holds
 
 
+# ★再検査campaign(2026-08-20 ユーザ指示「古い順に調べ直したい・アイドル運転」):
+#   --list-file = slugリスト(1行1slug、ファイル順に処理=呼び手が古い順に並べる)。
+#   --retry-holds = 保留済みslugも再検索(BookLive在庫は増えるので過去の候補0が今は在ることがある)。
+#   attempted台帳(.cache) = このcampaignで試行済みのslug。再held分の無限再試行を防ぐ収束カーソル。
+ATTEMPTED = os.path.join(ROOT, ".cache", "tameshiyomi", "recheck-attempted.txt")
+
+
+def load_attempted():
+    if os.path.exists(ATTEMPTED):
+        return {l.strip() for l in open(ATTEMPTED, encoding="utf-8") if l.strip()}
+    return set()
+
+
+def targets_from_file(limit, list_file, retry_holds):
+    li = json.load(open(os.path.join(ROOT, "data", "manga-list-index.json"), encoding="utf-8"))
+    f = li["f"]
+    isl, it, ia = f.index("slug"), f.index("title"), f.index("authors")
+    rowmap = {r[isl]: (r[it], [au_name(a) for a in (r[ia] or [])]) for r in li["d"]}
+    done, holds = load_done()
+    attempted = load_attempted()
+    out = []
+    for line in open(list_file, encoding="utf-8"):
+        s = line.strip()
+        if not s or len(out) >= limit:
+            if len(out) >= limit:
+                break
+            continue
+        if s in done or s in attempted:
+            continue
+        if s in holds and not retry_holds:
+            continue
+        if s not in rowmap:
+            continue
+        out.append((s, rowmap[s][0], rowmap[s][1]))
+    return out
+
+
+def dedupe_holds_keep_last():
+    """再検索で同一slugの保留行が積み上がるのを防ぐ(最後の結果だけ残す)。"""
+    if not os.path.exists(HOLDS):
+        return
+    rows = open(HOLDS, encoding="utf-8").readlines()
+    last = {}
+    for l in rows:
+        last[l.split("\t", 1)[0]] = l
+    if len(last) < len(rows):
+        open(HOLDS, "w", encoding="utf-8").writelines(last.values())
+
+
 def targets(limit):
     # ★デルタ恒常化(2026-08-06 ユーザ指示「日々増える新作を取得」):
     #   ①popularity=0の足切りを廃止(新作・マイナー作はpop0=旧ゲートだと永久に収集されなかった)
@@ -186,11 +235,18 @@ def expand_volumes(expand_limit, workers=8):
     print(f"展開完了 +{total_new}巻 hit (seed={os.path.relpath(VOLSEED, ROOT)})")
 
 
-def harvest(limit):
+def harvest(limit, list_file=None, retry_holds=False):
     from _tinyfish import search
     done, _ = load_done()
-    todo = targets(limit)
-    print(f"対象 {len(todo)} 作(人気順・未収集)", flush=True)
+    if list_file:
+        todo = targets_from_file(limit, list_file, retry_holds)
+        os.makedirs(os.path.dirname(ATTEMPTED), exist_ok=True)
+        att = open(ATTEMPTED, "a", encoding="utf-8")
+        print(f"対象 {len(todo)} 作(リスト順・campaign未試行)", flush=True)
+    else:
+        att = None
+        todo = targets(limit)
+        print(f"対象 {len(todo)} 作(人気順・未収集)", flush=True)
     seed = open(SEED, "a", encoding="utf-8")
     holds = open(HOLDS, "a", encoding="utf-8")
     n_ok = n_hold = 0
@@ -231,7 +287,12 @@ def harvest(limit):
             holds.write(f"{slug}\t{title}\t{au}\t{reason}\t{json.dumps(cand, ensure_ascii=False).replace(chr(9),' ').replace(chr(10),' ')}\n")
             holds.flush()
             n_hold += 1
+        if att:  # ★試行完了後に記録(検索失敗breakの取りこぼしを防ぐ)
+            att.write(slug + "\n")
+            att.flush()
         time.sleep(1.0)
+    if list_file:
+        dedupe_holds_keep_last()
     print(f"収集 {n_ok} / 保留 {n_hold} (seed={os.path.relpath(SEED, ROOT)})")
 
 
@@ -245,6 +306,8 @@ def main():
     ap.add_argument("--resolve-holds", action="store_true", help="保留(複数候補)へ分冊版除外規則を適用し一意化できた分を採用")
     ap.add_argument("--expand", action="store_true", help="アンカー済みシリーズを全巻展開(検索不要)")
     ap.add_argument("--expand-limit", type=int, default=50, help="--expand で処理するシリーズ数上限")
+    ap.add_argument("--list-file", help="対象slugリスト(1行1slug、ファイル順=呼び手が並べる)。索引順選定を使わない")
+    ap.add_argument("--retry-holds", action="store_true", help="--list-file時、保留済みも再検索(古い保留行は最終結果で置換)")
     a = ap.parse_args()
     if a.resolve_holds:
         anch = set()
@@ -357,7 +420,7 @@ def main():
             open(HOLDS, "w", encoding="utf-8").writelines(lines)
         print("採用:", slug, tid)
         return
-    harvest(a.limit)
+    harvest(a.limit, list_file=a.list_file, retry_holds=a.retry_holds)
 
 
 if __name__ == "__main__":
