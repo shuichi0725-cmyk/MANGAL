@@ -100,6 +100,26 @@ def main():
             if os.path.exists(fp):
                 os.remove(fp); print(f"  削除 {os.path.relpath(fp, ROOT)}", flush=True)
 
+    # 1.5 ★canonicalゲート(2026-08-20 新設): 対象に edition-canonical 結線slugが含まれる時は
+    #     番人(_check-edition-canonical.py)を先に通す。★壊れたcanonicalはpromoteが
+    #     `except: continue` で無警告skipし、reflectは「成功」と表示する(実験人形
+    #     ダミー・オスカーで実踏)ため、promoteに入る前に止めるのが唯一確実な位置。
+    #     連載中の続巻取りこぼし(検査7)もここで鳴る。
+    _canon_dir0 = os.path.join(ROOT, "data", "seeds", "edition-canonical")
+    _gate_slugs = []
+    if only and os.path.isdir(_canon_dir0):
+        for st in only:
+            for cand in dict.fromkeys([st, internal_slug(st, MV2)]):
+                if os.path.exists(os.path.join(_canon_dir0, cand + ".yml")):
+                    _gate_slugs.append(cand)
+    if _gate_slugs:
+        print(f"  canonicalゲート: {len(_gate_slugs)}slug を番人で検査", flush=True)
+        rc = run([PY, "scripts/_check-edition-canonical.py", "--slugs", ",".join(_gate_slugs)])
+        if rc != 0:
+            print("★canonicalゲートNG(反映中止): 上のNGを直してから再実行。"
+                  "壊れたまま進めるとpromoteが無警告skipし頁が直らない/巻が消える", file=sys.stderr)
+            sys.exit(4)
+
     # 2. promote --only (書影統合済)
     if only:
         run([PY, "scripts/_promote-bulk-v2.py", "--only", ",".join(only)])

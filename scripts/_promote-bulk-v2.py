@@ -458,6 +458,44 @@ def apply_edition_canonical(slug: str, editions: list, canon: dict) -> list:
         out[0]["versions"] = [
             {"label": vv.get("label") or "別刷", "volumes": [_vv(v) for v in (vv.get("volumes") or [])]}
             for vv in s["versions"]]
+    # ★open_tail(2026-08-20 opt-in): 連載中作品のcanonicalは巻を固定するため、蒸留で
+    #   種2に続巻が入っても頁に永久に出ない(鬼平/釣りバカ/ゴルゴ13ほか5頁で実踏)。
+    #   seedに open_tail: true がある時だけ、頁の既存standard版(=種2由来)から
+    #   「seed最大巻より後・seed最終日以降・ISBN持ち・どのcanonical/volume-excludeも
+    #   主張していない」巻を自動追随で末尾に足す。既存693本は誰もこのキーを持たない
+    #   = キー無しの挙動は従来と完全同一(このifに入らない)。
+    if s.get("open_tail") and cur_std:
+        _seed_nums = [v.get("number") for v in (s.get("volumes") or [])
+                      if isinstance(v.get("number"), int)]
+        _seed_dates = [str(v["release_date"]) for v in (s.get("volumes") or [])
+                       if v.get("release_date")]
+        if _seed_nums and _seed_dates:
+            _mxn, _mxd = max(_seed_nums), max(_seed_dates)
+            # 全canonical seedが主張するISBN(=帰属確定済。人狼ゲーム型の番号衝突を弾く)
+            _claimed = {str(v.get("isbn13"))
+                        for _sd in canon.values()
+                        for _lst in ([_sd.get("volumes") or []]
+                                     + [x.get("volumes") or [] for x in (_sd.get("extra_editions") or [])]
+                                     + [x.get("volumes") or [] for x in (_sd.get("versions") or [])]
+                                     + [(_sd.get("compact_edition") or {}).get("volumes") or []])
+                        for v in _lst if v.get("isbn13")}
+            _have = {str(v.get("isbn13")) for v in out[0]["volumes"] if v.get("isbn13")}
+            _tail = []
+            for v in (cur_std.get("volumes") or []):
+                _n, _i, _d = v.get("number"), v.get("isbn13"), v.get("release_date")
+                if not (isinstance(_n, int) and _n > _mxn and _i and _d):
+                    continue
+                if str(_i) in _have or str(_i) in _claimed or _norm_isbn(str(_i)) in _all_excluded_isbns():
+                    continue
+                if str(_d) < _mxd:
+                    continue  # 旧run(接ぎ木)の高番号は日付で弾く
+                _o = {"number": _n, "asin": None, "isbn13": _i,
+                      "cover_url": None, "release_date": _d}
+                if v.get("volume_label"):
+                    _o["volume_label"] = v["volume_label"]
+                _tail.append(_o)
+            if _tail:
+                out[0]["volumes"] = out[0]["volumes"] + sorted(_tail, key=lambda o: o["number"])
     if s.get("compact_edition"):
         ce = s["compact_edition"]
         out.append(mk(ce.get("volumes"), ce.get("label") or "コンパクト版", pub, ce.get("label"), "aizoban"))
