@@ -39,11 +39,22 @@ metadata:
 - ★残3版(意図的保留): バカボンKC刷日付6年(NDL per-vol要=費用対効果低)/永遠の野原(正史)/G・defend(連載中、新装v1-36と旧版同居=完結後にcanonical化)
 - 以後は月次サニティで検出器の新規増加分だけ見る
 
-## いまの状態(2026-08-17)
-- 検出器 = `scripts/_audit-vol-date-regression.py`
+## いまの状態(2026-08-20 後片付け完了)
+- 検出器 = `scripts/_audit-vol-date-regression.py`(3版=意図的保留のみ。**reason列**を台帳に持ち再走で引き継ぐ)
 - ★**残りの一次ソース = `docs/production-diagnostics/gyara-anomalies.tsv`**
   (years / slug / stem / title / authors / edition / worst_pair / canonical有 / **reason**)
-- canonical seed は **589本**。健全性は `scripts/_check-edition-canonical.py` で常時検査
+- canonical seed は **691本・番人NG 0**。健全性は `scripts/_check-edition-canonical.py` で常時検査
+
+## ★後片付け回(2026-08-20 Fable): 機構の穴7件を封鎖
+- **検査7=連載中の続巻取りこぼし**を番人に新設: seed主版ISBNで種2 editionを逆引き(同imprint限定)し、seed最大巻より後×seed最終日以降の巻を検出。★偽陽性ガード2枚=①全canonical+volume-excludeの収載ISBNは帰属確定として除外(人狼ゲーム型: 汚染クラスタに別頁の巻が高番号同居) ②日付条件で旧runの接ぎ木を弾く。実鳴り=新しいゲーム@COMIC v4のみ(鬼平/釣りバカ/ゴルゴ/マギレコはgyaraラウンドで既にtop-up済だった)→seed追記・反映済
+- **reflectにcanonicalゲート組込**: 対象にcanonical結線slugが居たら**promoteの前に**番人`--slugs`を走らせNGで反映中止(exit4)。壊れseed無警告skip事故(ダミー・オスカー型)の恒久封鎖
+- **open_tail opt-in実装済・未採用**: promoteの`apply_edition_canonical`にseed側`open_tail: true`で「seed最大巻より後の同頁standard巻を自動追随」(claimed/exclude/日付ガード同梱)。既存seedはキー無し=挙動不変を実測確認(tsuribaka diff無変化+atarashii-gameで機能確認)。**採否はユーザ判断待ち**
+- **記号表seed化**: `data/seeds/isbn-publisher-prefix.json`(1,629記号)が一次資産。`scripts/gyara/canon.py`がここを読む(無ければ再学習して書き出す)。★**gyaraツールはscripts/gyara/が正**(.cacheの.py複製は撤去済・dumpvol.pyも収容)
+- ★**新しい罠=種4検査のtitle照合偽陽性**: 種4のseries_keysは`name:題`なので**同名別頁を区別できない**(kinpeibai-watanabe-1995/ultraman-kazumine-1968の種4が無関係のkinpeibai/ultraman canonicalに鳴った)。golgo v173もcompact/routing経由で頁には出ていた。→番人は「自頁ファイル+全seed収載+ISBN索引(.cache/isbn-page-index.json)のどこにも無い」時だけNG(頁実体ゲート)
+- ★**新しい罠=頁rename/統合でcanonicalが死にキー化し頁が壊れたまま**になる(bakuchan=旧mugichan: renameでseed失効→standardがv3のみに退化していた)。**頁をrename/統合したらcanonicalキーも付け替える**。死にキー3件処理: bakuchan=キー付替+v3追加で復元 / sherlock-berugureebia=削除(2019年版の正体は**バイリンガル版**=scope外をNDL+楽天で確定) / yappari-majime=削除(seed自体が2作品混線)
+- 種4×canonical衝突の真の欠落2件を裁定: 真島クン=**宙出版ミッシィコミックス2005全7巻**(楽天7/7・にわのまこと)をextraで復元 / プロレススーパースター列伝=**KCスペシャル1989全9巻**(楽天9/9・種2はISBN無しv6-9のみ)をextraで復元
+- 検出器に`--min-years`/`--isbn-pattern`追加(stdout絞り込みのみ・TSV台帳と既定は不変)。reason列方式はREADME化(`docs/production-diagnostics/README.md`)しvol-date-regression/author-not-in-volumesへ適用
+- **残ワークリスト(未着手・ユーザ判断/別柱)**: ①やっぱりまじめに!男女交際(桃伊いづみ・全2巻1995・Q11536967)=孤児、復活は新規登録protocolマター ②Nichibun2010新装v1-5(9784537126235..6716)がjinnairyuu頁とmajima-kun-suttobasu頁の**両方に載るISBN重複**(2010-11年10巻runが種2で2sidに割れたまま)=再刊か続編かの外部確証待ち・isbn-dup領域
 
 ### 残の内訳(2026-08-17時点=67版。reasonは台帳が正)
 | 理由 | 頁 | どうすべきか |
