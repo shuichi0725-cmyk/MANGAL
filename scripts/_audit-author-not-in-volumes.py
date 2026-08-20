@@ -127,11 +127,24 @@ def main() -> int:
                              " / ".join(sorted(found))[:70]])
 
     os.makedirs(os.path.dirname(OUT), exist_ok=True)
+    # ★reason列(2026-08-20 gyara-anomalies方式): 裁定済み行の「なぜ触らない/何をした」を
+    #   末尾列に持ち、再実行しても消えない(旧TSVから slug+著者名 キーで引き継ぐ)。
+    #   空 = 未裁定。書式は docs/production-diagnostics/README.md を参照。
+    old_reason = {}
+    if os.path.exists(OUT):
+        with io.open(OUT, encoding="utf-8") as fh:
+            head = fh.readline().rstrip("\n").split("\t")
+            if "reason" in head:
+                i_sl, i_au, i_rs = head.index("slug"), head.index("巻書誌に無い著者"), head.index("reason")
+                for line in fh:
+                    c = line.rstrip("\n").split("\t")
+                    if len(c) > i_rs and c[i_rs]:
+                        old_reason[(c[i_sl], c[i_au])] = c[i_rs]
     with io.open(OUT, "w", encoding="utf-8", newline="\n") as fh:
         fh.write("\t".join(["slug", "題", "巻書誌に無い著者", "頁の巻数",
-                            "照合できた巻数", "巻書誌にある著者"]) + "\n")
+                            "照合できた巻数", "巻書誌にある著者", "reason"]) + "\n")
         for r in sorted(rows):
-            fh.write("\t".join(r) + "\n")
+            fh.write("\t".join(r) + "\t" + old_reason.get((r[0], r[2]), "") + "\n")
     print(f"\n★巻の書誌に一度も現れない著者 = {len(rows)}件 / {len({r[0] for r in rows})}頁"
           f" → {os.path.relpath(OUT, ROOT)}")
     print("★自動削除しない。原作者・企画・別名義は巻書誌に載らないことがある(要人手裁定)。")

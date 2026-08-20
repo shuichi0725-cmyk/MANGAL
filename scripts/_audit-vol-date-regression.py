@@ -86,10 +86,24 @@ for i, p in enumerate(files):
 
 rows.sort(key=lambda r: -r[0])
 out = os.path.join(ROOT, "docs", "production-diagnostics", "vol-date-regression.tsv")
+
+# ★reason列(2026-08-20 gyara-anomalies方式の横展開): 「なぜ自動で触らない/残すのか」を
+#   台帳自身が持つ。再実行しても消えない(旧TSVから slug+edition キーで引き継ぐ)。
+#   空 = 新規・未裁定。書式は docs/production-diagnostics/README.md を参照。
+old_reason = {}
+if os.path.exists(out):
+    with open(out, encoding="utf-8") as f:
+        head = f.readline().rstrip("\n").split("\t")
+        if "reason" in head:
+            i_sl, i_ed, i_rs = head.index("slug"), head.index("edition"), head.index("reason")
+            for line in f:
+                c = line.rstrip("\n").split("\t")
+                if len(c) > i_rs and c[i_rs]:
+                    old_reason[(c[i_sl], c[i_ed])] = c[i_rs]
 with open(out, "w", encoding="utf-8", newline="\n") as f:
-    f.write("regress_years\tslug\ttitle\tauthors\tedition\tn_vols\tworst_pair\tisbn_pattern\n")
+    f.write("regress_years\tslug\ttitle\tauthors\tedition\tn_vols\tworst_pair\tisbn_pattern\treason\n")
     for r in rows:
-        f.write("\t".join(str(x) for x in r) + "\n")
+        f.write("\t".join(str(x) for x in r) + "\t" + old_reason.get((r[1], r[4]), "") + "\n")
 print(f"\nflag {len(rows)} 件(edition単位) → {out}")
 from collections import Counter
 print("逆行年数分布:", dict(sorted(Counter(min(r[0] // 10 * 10, 40) for r in rows).items())))

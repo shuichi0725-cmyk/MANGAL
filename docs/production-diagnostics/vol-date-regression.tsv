@@ -1,4 +1,4 @@
-regress_years	slug	title	authors	edition	n_vols	worst_pair	isbn_pattern
-6	tensai-bakabon	天才バカボン	赤塚不二夫	standard	15	3巻(1975-05-30)→5巻(1969-07)	無→無
-5	eien-no-nohara	永遠の野原	逢坂みえこ	wideban	16	1巻(1995-10-25)→3巻(1990-07)	有→有
-5	g-defend	G・defend	森本秀	standard	76	25巻(2015-02)→37巻(2010-08)	有→有
+regress_years	slug	title	authors	edition	n_vols	worst_pair	isbn_pattern	reason
+6	tensai-bakabon	天才バカボン	赤塚不二夫	standard	15	3巻(1975-05-30)→5巻(1969-07)	無→無	保留: KC原版の刷日付混在(6年)=NDL per-vol照会が要る・費用対効果低(2026-08-17裁定)
+5	eien-no-nohara	永遠の野原	逢坂みえこ	wideban	16	1巻(1995-10-25)→3巻(1990-07)	有→有	正史: ワイド版1-2巻の1995後追いが正しい(NDLレーベル番号#363/364で確認済 2026-08-17)=許容
+5	g-defend	G・defend	森本秀	standard	76	25巻(2015-02)→37巻(2010-08)	有→有	保留: 連載中BL・新装v1-36と旧版が同居=canonicalは巻を固定するので不可・完結後に版再構築(2026-08-17裁定)
