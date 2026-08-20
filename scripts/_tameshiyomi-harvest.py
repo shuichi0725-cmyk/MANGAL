@@ -147,6 +147,34 @@ def head_ok(cid):
         return False
 
 
+# ★商品頁照会ゲート(2026-08-20 ユーザGO=領民0人型): 検索snippet頼みを卒業し、採用直前に
+#   BookLive商品頁(vol1)のJSON-LDから category/genre/author を直接読む。
+#   ①カテゴリ検証 = ライトノベル/文芸/小説なら不採用(→保留 reason=ラノベ/小説)。
+#     ラノベ原作コミカライズで検索が小説版を拾う誤アンカーを構造的に遮断。
+#   ②著者検証 = snippetに著者が出ないだけの偽保留(早野先生型609件)を商品頁著者で救済。
+NOVEL_CAT = re.compile(r"ライトノベル|ラノベ|文芸|小説|BLノベル|TLノベル")
+
+
+def product_gate(tid, au):
+    """→ (verdict, detail)。verdict: 'ok' / 'novel' / 'author_ng' / 'fetch_ng'"""
+    try:
+        req = urllib.request.Request(f"https://booklive.jp/product/index/title_id/{tid}/vol_no/001",
+                                     headers={"User-Agent": "Mozilla/5.0"})
+        html = urllib.request.urlopen(req, timeout=30).read().decode("utf-8", "ignore")
+    except Exception as e:
+        return "fetch_ng", type(e).__name__
+    cat = re.search(r'"category":\s*"([^"]+)"', html)
+    gen = re.search(r'"genre":\s*"([^"]+)"', html)
+    catgen = (cat.group(1) if cat else "") + "/" + (gen.group(1) if gen else "")
+    if NOVEL_CAT.search(catgen):
+        return "novel", catgen
+    # 著者: JSON-LD author name(複数可)を平坦に集める
+    prod_au = " ".join(re.findall(r'"@type":\s*"Person",\s*"name":\s*"([^"]+)"', html))
+    if au and norm(au)[:4] and norm(au)[:4] not in norm(prod_au):
+        return "author_ng", prod_au[:60]
+    return "ok", catgen
+
+
 def load_volumes_done():
     """slug -> set(volume已検証)"""
     done = {}
@@ -263,8 +291,12 @@ def harvest(limit, list_file=None, retry_holds=False):
             m = re.search(r"title_id/(\d+)", h.get("url", ""))
             if not m:
                 continue
-            ht = norm(re.sub(r"[|｜].*$", "", h.get("title", "")))
+            raw = re.sub(r"[|｜].*$", "", h.get("title", ""))
+            # ★型1(2026-08-20): 検索結果題の「 - 著者名」等の末尾セグメントを剥ぐ(473件が偽保留だった)
+            raw = re.sub(r"\s+[-–]\s+[^-–]*$", "", raw)
+            ht = norm(raw)
             ht = re.sub(r"(【[^】]*】|\d+巻?$|第\d+巻)", "", ht)
+            ht = re.sub(r"(上|中|下)巻?$", "", ht)  # ★型2: 上/下/中巻suffix
             exact = (ht == tn) or ht.startswith(tn + "1") or (tn == re.sub(r"\d+$", "", ht))
             au_ok = (not au) or (norm(au)[:4] and norm(au)[:4] in norm(h.get("title", "") + h.get("snippet", "")))
             cand.setdefault(m.group(1), {"exact": False, "au": False, "ev": h.get("title", "")[:60]})
@@ -273,14 +305,34 @@ def harvest(limit, list_file=None, retry_holds=False):
             if au_ok:
                 cand[m.group(1)]["au"] = True
         strong = prefer_bound([tid for tid, c in cand.items() if c["exact"] and c["au"]], cand)
+        # ★型3(2026-08-20): exact一意だがsnippetに著者が出ないだけの候補は商品頁著者で裁定する
+        gate_note = ""
+        if not strong:
+            ex_only = prefer_bound([tid for tid, c in cand.items() if c["exact"]], cand)
+            if len(ex_only) == 1:
+                strong = ex_only
+                gate_note = "+au未確認(商品頁で裁定)"
         if len(strong) == 1 and head_ok(f"{strong[0]}_001"):
-            rec = {"slug": slug, "title": title, "title_id": strong[0],
-                   "cid1": f"{strong[0]}_001", "verified": "head200",
-                   "evidence": cand[strong[0]]["ev"], "at": time.strftime("%Y-%m-%d")}
-            seed.write(json.dumps(rec, ensure_ascii=False) + "\n")
-            seed.flush()
-            n_ok += 1
-            print(f"  OK {slug} → {strong[0]}", flush=True)
+            # ★商品頁ゲート: ラノベ/小説カテゴリ排除(領民0人型)+著者最終確認
+            gv, gd = product_gate(strong[0], au)
+            if gv == "ok":
+                rec = {"slug": slug, "title": title, "title_id": strong[0],
+                       "cid1": f"{strong[0]}_001", "verified": f"head200+category({gd})",
+                       "evidence": cand[strong[0]]["ev"] + gate_note, "at": time.strftime("%Y-%m-%d")}
+                seed.write(json.dumps(rec, ensure_ascii=False) + "\n")
+                seed.flush()
+                n_ok += 1
+                print(f"  OK {slug} → {strong[0]} ({gd})", flush=True)
+            else:
+                reason = {"novel": "ラノベ/小説", "author_ng": "著者不一致(商品頁)", "fetch_ng": "商品頁取得失敗"}[gv]
+                holds.write(f"{slug}\t{title}\t{au}\t{reason}\t{json.dumps(cand, ensure_ascii=False).replace(chr(9),' ').replace(chr(10),' ')} gate={gd}\n")
+                holds.flush()
+                n_hold += 1
+            if att:
+                att.write(slug + "\n")
+                att.flush()
+            time.sleep(1.0)
+            continue
         else:
             reason = "候補0" if not cand else ("完全一致なし" if not strong else ("複数候補" if len(strong) > 1 else "HEAD失敗"))
             # ★[:200]切り詰め禁止(2026-07-18実害: 9,674保留の候補が評価不能化していた)。タブ/改行だけ潰して全量書く
