@@ -23,7 +23,10 @@ import glob
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
 DB = os.path.join(ROOT, ".cache", "db-v2.sqlite")
 CANON_DIR = os.path.join(ROOT, "data", "seeds", "edition-canonical")
-PREFIX_CACHE = os.path.join(os.path.dirname(__file__), "_isbn_prefix_pub.json")
+# ★記号表は git 追跡 seed が一次資産(2026-08-20)。本番66k頁から学習した
+#   「ISBN出版者記号→出版社名」1,629記号は再学習に~数分かかる上、.cache 置きだと
+#   gitignore で消える・別PCで使えない。無ければ従来どおり学習して seed へ書き出す。
+PREFIX_CACHE = os.path.join(ROOT, "data", "seeds", "isbn-publisher-prefix.json")
 
 _db = sqlite3.connect(DB)
 _db.row_factory = sqlite3.Row
@@ -69,8 +72,8 @@ def prefix_table():
         tot = sum(c.values())
         if tot >= 8 and n / tot >= 0.9:
             table[pf] = top
-    with io.open(PREFIX_CACHE, "w", encoding="utf-8") as f:
-        json.dump(table, f, ensure_ascii=False)
+    with io.open(PREFIX_CACHE, "w", encoding="utf-8", newline="\n") as f:
+        f.write(json.dumps(table, ensure_ascii=False, indent=0, sort_keys=True) + "\n")
     return table
 
 
