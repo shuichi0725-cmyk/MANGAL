@@ -126,6 +126,7 @@
 - [【厳守】週次蒸留=「週次蒸留して」のみで発動](feedback_weekly_distill_exact_trigger_only.md) — 類語解釈での代行起動禁止
 - [【✅】著者名の空白=authorKeyで照合吸収](author_name_space_conventions_conflict.md) — 表記不変・新規照合は必ずauthorKey経由
 - [【最重要・未決】promoteは元頁駆動=新規シリーズが出ない](orphan_series_promote_is_srcpage_driven.md) — 未掲載46,874。著者マスター起点の副作用
+- [2026-08 月次蒸留 MADB1.2.19=完了](distill_2026_08_1219.md) — series+431/頁化93(preview)/保留54/数値ペンネーム罠
 - [2026-07 月次蒸留 MADB1.2.18](distill_2026_07_1218.md) — series+292/vol+1,124取込済・検証green・synopsis9,421未訳残
 - [【未決】本番R2に孤児HTML1,041頁](r2_orphan_pages_prune_missing.md) — r2-syncは--prune無し=dropしても公開され続ける
 - [【戒め】seed機械追記=「: 」必ずquote](seed_yaml_colon_quoting.md) — 未quoteでreflectするとsilent注入漏れ
