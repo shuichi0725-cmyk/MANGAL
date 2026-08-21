@@ -1,3 +1,5 @@
 # R2 prune 待ちの公開slug。週次蒸留の preflight が必ず表示する。
 # r2-sync --prune 実行後、.cache/r2-pruned-<日時>.txt に載った行をここから消し込む。
 # 2026-08-10 週次: 台帳15件すべて .cache/r2-pruned-20260810-020427.txt に載ったのを確認し消し込み。
+{"slug": "konpaira-fesuta", "reason": "アニメKC(アニメコミック)=scope外。8/15フィルムコミック掃引パターンの初フル適用で退場", "at": "2026-08-21"}
+{"slug": "dare-ni-mo-ienai-hi-uwaki-suru-onna-dekiaisareru-onna", "reason": "松文館ガールズポップコレクション=18禁TL(ユーザ裁定8/5)の初フル適用で退場", "at": "2026-08-21"}
