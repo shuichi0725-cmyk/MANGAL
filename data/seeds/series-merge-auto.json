@@ -18,6 +18,14 @@
 "note": "auto: subset-author + (clean-title|kana) (_gen-author-set-merges.py)"
 },
 {
+"main": "総長さま、溺愛中につき。",
+"merge_keys": [
+"name:*あいら*|name:総長さま、溺愛中につき。",
+"name:あいら|name:総長さま、溺愛中につき。"
+],
+"note": "auto: subset-author + (clean-title|kana) (_gen-author-set-merges.py)"
+},
+{
 "main": "サイバラ式",
 "merge_keys": [
 "name:,山崎一夫|name:サイバラ式",
@@ -670,6 +678,14 @@
 "merge_keys": [
 "name:AdamsNeal|name:X-men",
 "name:Arnold Drake|name:X-men|sub:twilight of the mutants"
+],
+"note": "auto: subset-author + (clean-title|kana) (_gen-author-set-merges.py)"
+},
+{
+"main": "アベンジャーズ",
+"merge_keys": [
+"name:AdamsNeal|name:アベンジャーズ",
+"name:BuscemaSal|name:アベンジャーズ"
 ],
 "note": "auto: subset-author + (clean-title|kana) (_gen-author-set-merges.py)"
 },
@@ -2773,14 +2789,6 @@
 "merge_keys": [
 "name:Charlotte Lamb|name:鏡の中の女",
 "qid:Q8062652|name:鏡の中の女"
-],
-"note": "auto: subset-author + (clean-title|kana) (_gen-author-set-merges.py)"
-},
-{
-"main": "アベンジャーズ",
-"merge_keys": [
-"name:CheungJim|name:アベンジャーズ",
-"name:カート・ビュシーク|name:アベンジャーズ"
 ],
 "note": "auto: subset-author + (clean-title|kana) (_gen-author-set-merges.py)"
 },
@@ -6964,6 +6972,14 @@
 "note": "auto: subset-author + (clean-title|kana) (_gen-author-set-merges.py)"
 },
 {
+"main": "公爵子息の執着から逃げられそうにないので、逃げないことにしました",
+"merge_keys": [
+"name:NRMEN|name:公爵子息の執着から逃げられそうにないので、逃げないことにしました",
+"name:さき|name:公爵子息の執着から逃げられそうにないので、逃げないことにしました"
+],
+"note": "auto: subset-author + (clean-title|kana) (_gen-author-set-merges.py)"
+},
+{
 "main": "出稼ぎ令嬢の婚約騒動",
 "merge_keys": [
 "name:NRMEN|name:出稼ぎ令嬢の婚約騒動",
@@ -9169,6 +9185,16 @@
 "merge_keys": [
 "name:Susan Mallery|name:愛のアラベスク",
 "qid:Q11523517|name:愛のアラベスク"
+],
+"note": "auto: subset-author + (clean-title|kana) (_gen-author-set-merges.py)"
+},
+{
+"main": "異世界で愛されすぎて困ってます!",
+"merge_keys": [
+"name:SyeriKaie|name:異世界で愛されすぎて困ってます!",
+"name:コオリ|name:異世界で愛されすぎて困ってます!",
+"name:山森ぽてと|name:異世界で愛されすぎて困ってます!",
+"name:山森ぽてと|name:異世界で愛されすぎて困ってます!|sub:異世界BLアンソロジー"
 ],
 "note": "auto: subset-author + (clean-title|kana) (_gen-author-set-merges.py)"
 },
@@ -13580,6 +13606,14 @@
 "note": "auto: subset-author + (clean-title|kana) (_gen-author-set-merges.py)"
 },
 {
+"main": "万年2位だからと勘当された少年、無自覚に無双する",
+"merge_keys": [
+"name:あざね|name:万年2位だからと勘当された少年、無自覚に無双する",
+"name:大慈|name:万年2位だからと勘当された少年、無自覚に無双する"
+],
+"note": "auto: subset-author + (clean-title|kana) (_gen-author-set-merges.py)"
+},
+{
 "main": "東京レイヴンズ",
 "merge_keys": [
 "name:あざの耕平|name:東京レイヴンズ",
@@ -16049,6 +16083,15 @@
 "note": "auto: subset-author + (clean-title|kana) (_gen-author-set-merges.py)"
 },
 {
+"main": "ウィッチ・ハンド・クラフト",
+"merge_keys": [
+"name:おちゃ芥|name:ウィッチ・ハンド・クラフト",
+"name:珠梨やすゆき|name:ウィッチ・ハンド・クラフト",
+"name:珠梨やすゆき|name:ウィッチ・ハンド・クラフト|sub:追放された王女ですが雑貨屋さん始めました"
+],
+"note": "auto: subset-author + (clean-title|kana) (_gen-author-set-merges.py)"
+},
+{
 "main": "しれっとすげぇこと言ってるギャル。",
 "merge_keys": [
 "name:おつじ|name:しれっとすげぇこと言ってるギャル。",
@@ -16503,6 +16546,14 @@
 "note": "auto: subset-author + (clean-title|kana) (_gen-author-set-merges.py)"
 },
 {
+"main": "劣等人の魔剣使い",
+"merge_keys": [
+"name:かのう寛人|name:劣等人の魔剣使い",
+"name:かやはら|name:劣等人の魔剣使い"
+],
+"note": "auto: subset-author + (clean-title|kana) (_gen-author-set-merges.py)"
+},
+{
 "main": "アブノーマル・スイッチ",
 "merge_keys": [
 "name:かのこ|name:アブノーマル・スイッチ|sub:誘惑の誤算",
@@ -16950,6 +17001,14 @@
 "merge_keys": [
 "name:きはらゆりこ|name:大粒!かいのこちゃんのHAKKO日和",
 "name:きはらゆりこ|name:大粒!かいのこちゃんのHAKKO日和."
+],
+"note": "auto: subset-author + (clean-title|kana) (_gen-author-set-merges.py)"
+},
+{
+"main": "黒豹くんは食べちゃいたい。",
+"merge_keys": [
+"name:きみど莉央|name:黒豹くんは食べちゃいたい。",
+"qid:Q24873996|name:黒豹くんは食べちゃいたい。"
 ],
 "note": "auto: subset-author + (clean-title|kana) (_gen-author-set-merges.py)"
 },
@@ -21657,6 +21716,14 @@
 "note": "auto: subset-author + (clean-title|kana) (_gen-author-set-merges.py)"
 },
 {
+"main": "前世は人魚姫ですが、どうしても王子の執着から逃げられません",
+"merge_keys": [
+"name:なおやみか|name:前世は人魚姫ですが、どうしても王子の執着から逃げられません",
+"name:要まりこ|name:前世は人魚姫ですが、どうしても王子の執着から逃げられません"
+],
+"note": "auto: subset-author + (clean-title|kana) (_gen-author-set-merges.py)"
+},
+{
 "main": "トスカーナの甘い夏",
 "merge_keys": [
 "name:なかお樹莉|name:トスカーナの甘い夏",
@@ -22214,13 +22281,15 @@
 "name:説話社|name:心霊実況中継スペシャル|sub:甦る怨霊",
 "name:説話社|name:心霊実況中継スペシャル|sub:超次元の誘惑",
 "name:説話社|name:心霊実況中継スペシャル|sub:闇に潜む怪",
-"name:説話社|name:心霊実況中継スペシャル|sub:霊魂の継承"
+"name:説話社|name:心霊実況中継スペシャル|sub:霊魂の継承",
+"qid:Q18226168|name:心霊実況中継スペシャル"
 ],
 "note": "auto: subset-author + (clean-title|kana) (_gen-author-set-merges.py)"
 },
 {
 "main": "ガベージブレイブ",
 "merge_keys": [
+"name:なんじゃもんじゃ|name:ガベージブレイブ",
 "name:なんじゃもんじゃ|name:ガベージブレイブ|sub:異世界に召喚され捨てられた勇者の復讐物語",
 "name:珠梨やすゆき|name:ガベージブレイブ|sub:異世界に召喚され捨てられた勇者の復讐物語"
 ],
@@ -25781,6 +25850,14 @@
 "merge_keys": [
 "name:みよしあやと|name:息をするよりキスがしたい",
 "name:櫛野ゆい|name:息をするよりキスがしたい"
+],
+"note": "auto: subset-author + (clean-title|kana) (_gen-author-set-merges.py)"
+},
+{
+"main": "百合SMでふたりの気持ちはつながりますか?",
+"merge_keys": [
+"name:みら|name:百合SMでふたりの気持ちはつながりますか?",
+"name:みら漫画家|name:百合SMでふたりの気持ちはつながりますか?"
 ],
 "note": "auto: subset-author + (clean-title|kana) (_gen-author-set-merges.py)"
 },
@@ -36506,15 +36583,6 @@
 "note": "auto: subset-author + (clean-title|kana) (_gen-author-set-merges.py)"
 },
 {
-"main": "異世界で愛されすぎて困ってます!",
-"merge_keys": [
-"name:コオリ|name:異世界で愛されすぎて困ってます!",
-"name:山森ぽてと|name:異世界で愛されすぎて困ってます!",
-"name:山森ぽてと|name:異世界で愛されすぎて困ってます!|sub:異世界BLアンソロジー"
-],
-"note": "auto: subset-author + (clean-title|kana) (_gen-author-set-merges.py)"
-},
-{
 "main": "4コマ妖怪ウォッチゲラゲラマンガ劇場",
 "merge_keys": [
 "name:ココナス☆ルンバ|name:4コマ妖怪ウォッチゲラゲラマンガ劇場",
@@ -43951,6 +44019,14 @@
 "name:ゾウノセ|name:勘違いの工房主(アトリエマイスター)|sub:英雄パーティの元雑用係が、実は戦闘以外がSSSランクだったというよくある話",
 "name:古川奈春|name:勘違いの工房主",
 "name:時野洋輔|name:勘違いの工房主(アトリエマイスター)|sub:英雄パーティの元雑用係が、実は戦闘以外がSSSランクだったというよくある話"
+],
+"note": "auto: subset-author + (clean-title|kana) (_gen-author-set-merges.py)"
+},
+{
+"main": "ゾゾゾ(変)",
+"merge_keys": [
+"name:ゾゾゾ|name:ゾゾゾ(変)",
+"name:タダノなつ|name:ゾゾゾ(変)"
 ],
 "note": "auto: subset-author + (clean-title|kana) (_gen-author-set-merges.py)"
 },
@@ -83562,6 +83638,14 @@
 "note": "auto: subset-author + (clean-title|kana) (_gen-author-set-merges.py)"
 },
 {
+"main": "ニュース探偵コナン",
+"merge_keys": [
+"name:太田勝|name:ニュース探偵コナン",
+"qid:Q313945|name:ニュース探偵コナン"
+],
+"note": "auto: subset-author + (clean-title|kana) (_gen-author-set-merges.py)"
+},
+{
 "main": "マンガ歴史人物に学ぶ大人になるまでに身につけたい大切な心",
 "merge_keys": [
 "name:太田寿|name:マンガ 歴史人物に学ぶ大人になるまでに身につけたい大切な心",
@@ -104291,6 +104375,14 @@
 "note": "auto: subset-author + (clean-title|kana) (_gen-author-set-merges.py)"
 },
 {
+"main": "あの島の海音荘",
+"merge_keys": [
+"name:瀬尾公治|name:あの島の海音荘",
+"qid:Q3089616|name:あの島の海音荘"
+],
+"note": "auto: subset-author + (clean-title|kana) (_gen-author-set-merges.py)"
+},
+{
 "main": "カスタマスカレード",
 "merge_keys": [
 "name:瀬戸うみこ|name:カスタマスカレード!",
@@ -105184,14 +105276,6 @@
 "name:玖米|name:家族に役立たずと言われ続けたわたしが、魔性の公爵騎士様の最愛になるまで",
 "name:鈴ノ助|name:家族に役立たずと言われ続けたわたしが、魔性の公爵騎士様の最愛になるまで",
 "name:鈴ノ助|name:家族に役立たずと言われ続けたわたしが、魔性の公爵騎士様の最愛になるまで."
-],
-"note": "auto: subset-author + (clean-title|kana) (_gen-author-set-merges.py)"
-},
-{
-"main": "ウィッチ・ハンド・クラフト",
-"merge_keys": [
-"name:珠梨やすゆき|name:ウィッチ・ハンド・クラフト",
-"name:珠梨やすゆき|name:ウィッチ・ハンド・クラフト|sub:追放された王女ですが雑貨屋さん始めました"
 ],
 "note": "auto: subset-author + (clean-title|kana) (_gen-author-set-merges.py)"
 },
@@ -112879,6 +112963,14 @@
 "note": "auto: subset-author + (clean-title|kana) (_gen-author-set-merges.py)"
 },
 {
+"main": "転生魔女の気ままなグルメ旅@COMIC",
+"merge_keys": [
+"name:茨木野1991-|name:転生魔女の気ままなグルメ旅@COMIC",
+"name:長浜めぐみ|name:転生魔女の気ままなグルメ旅@COMIC"
+],
+"note": "auto: subset-author + (clean-title|kana) (_gen-author-set-merges.py)"
+},
+{
 "main": "下町銭湯家族",
 "merge_keys": [
 "name:茶柱渋吉|name:下町銭湯家族",
@@ -113293,6 +113385,14 @@
 "merge_keys": [
 "name:萩尾望都,吉田秋生,田村由美,吉野朔実,波津彬子,西炯子,吉村明美,奈知未佐子|name:家族の情景",
 "qid:Q265061|name:家族の情景"
+],
+"note": "auto: subset-author + (clean-title|kana) (_gen-author-set-merges.py)"
+},
+{
+"main": "最弱冒険者が【完全ドロップ】で現代最強",
+"merge_keys": [
+"name:萩鵜アキ|name:最弱冒険者が【完全ドロップ】で現代最強|sub:自分だけのレアスキルとカスタムアビリティを駆使して他の誰より強くなる!",
+"qid:Q16263946|name:最弱冒険者が【完全ドロップ】で現代最強"
 ],
 "note": "auto: subset-author + (clean-title|kana) (_gen-author-set-merges.py)"
 },
@@ -123585,6 +123685,14 @@
 "note": "auto: subset-author + (clean-title|kana) (_gen-author-set-merges.py)"
 },
 {
+"main": "処女姫",
+"merge_keys": [
+"qid:Q11278817|name:処女姫",
+"qid:Q11278817|name:処女姫|sub:なぜか童貞しか勇者になれない異世界から来たんですけど"
+],
+"note": "auto: subset-author + (clean-title|kana) (_gen-author-set-merges.py)"
+},
+{
 "main": "ササキ様に願いを",
 "merge_keys": [
 "qid:Q11278887|name:ササキ様に願いを +",
@@ -128945,6 +129053,14 @@
 "note": "auto: subset-author + (clean-title|kana) (_gen-author-set-merges.py)"
 },
 {
+"main": "JOE",
+"merge_keys": [
+"qid:Q11543790|name:JOE",
+"qid:Q11543790|name:Joe"
+],
+"note": "auto: subset-author + (clean-title|kana) (_gen-author-set-merges.py)"
+},
+{
 "main": "中二病狂詩曲",
 "merge_keys": [
 "qid:Q11543804|name:中二病狂詩曲",
@@ -132363,6 +132479,14 @@
 "merge_keys": [
 "qid:Q11677589|name:ノンキナ、トウサン",
 "qid:Q11677589|name:ノンキナトウサン"
+],
+"note": "auto: subset-author + (clean-title|kana) (_gen-author-set-merges.py)"
+},
+{
+"main": "変幻戦忍アスカ❤",
+"merge_keys": [
+"qid:Q11678103|name:変幻戦忍アスカ",
+"qid:Q11678103|name:変幻戦忍アスカ❤"
 ],
 "note": "auto: subset-author + (clean-title|kana) (_gen-author-set-merges.py)"
 },
