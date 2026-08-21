@@ -2868,7 +2868,8 @@ def build_yml(
     def _dedup_authors(lst):
         seen, out = set(), []
         for a in lst:
-            nk = re.sub(r"[\s　・.,]", "", a.get("name") or "").lower()
+            # ★数値ペンネーム(「296」型)がYAML/DB経由でintになるとre.subが落ちる→str化(2026-08-21実踏)
+            nk = re.sub(r"[\s　・.,]", "", str(a.get("name") or "")).lower()
             if nk in seen:
                 continue
             seen.add(nk); out.append(a)
