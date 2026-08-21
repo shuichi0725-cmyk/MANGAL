@@ -24,8 +24,8 @@ def main():
             continue
         if not isinstance(d, dict):
             continue
-        t = (d.get("title") or "").strip()
-        auth = [(a.get("name") or "").strip() for a in (d.get("authors") or [])]
+        t = str(d.get("title") or "").strip()
+        auth = [str(a.get("name") or "").strip() for a in (d.get("authors") or [])]
         if t and t in auth:
             eds = d.get("editions") or []
             nvol = sum(len(e.get("volumes") or []) for e in eds)

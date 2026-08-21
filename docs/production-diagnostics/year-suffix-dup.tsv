@@ -1,10 +1,10 @@
 class	slug	base	title	base_title	isbn_overlap	n_slug	n_base
-CLUSTER_SPLIT	shiori-experience-2021	shiori-experience	SHIORI EXPERIENCE ジミなわたしとヘンなおじさん	シオリエクスペリエンス	14	22	15
-CLUSTER_SPLIT	uchuu-senkan-yamato-2005	uchuu-senkan-yamato	宇宙戦艦ヤマト 完結編	宇宙戦艦ヤマト	3	3	9
 FILE_MISSING	shounan-graffiti-1989	shounan-graffiti	湘南グラフティ	湘南グラフィティ	-1	0	2
 FILE_MISSING	nijiiro-no-trotsky-1992	nijiiro-no-trotsky	虹色のトロッキー	虹色のトロツキー	-1	0	16
 FILE_MISSING	shiritsu-kiwamemichi-koukou-2011	shiritsu-kiwamemichi-koukou	私立極道高校2011	私立極道高校	-1	0	2
+NO_OVERLAP	uchuu-senkan-yamato-2005	uchuu-senkan-yamato	宇宙戦艦ヤマト 完結編	宇宙戦艦ヤマト	0	3	6
 NO_OVERLAP	seito-sho-kun-1984	seito-sho-kun	生徒諸君!外伝	生徒諸君!	0	1	36
+NO_OVERLAP	shadow-skill-okada1992	shadow-skill	影技 SHADOW SKILL	SHADOW SKILL	0	8	11
 NO_OVERLAP	asunaro-hakusho-1993	asunaro-hakusho	あすなろ白書 第2部	あすなろ白書	0	3	7
 NO_OVERLAP	cobra-1995	cobra	COBRA	コブラ	0	26	40
 NO_OVERLAP	sakura-no-sono-1994	sakura-no-sono	桜の園	櫻の園	0	1	1
@@ -16,31 +16,28 @@ NO_OVERLAP	mugen-shinshi-1998	mugen-shinshi	夢幻紳士 マンガ少年版	夢�
 NO_OVERLAP	kodomo-no-mori-kanketsuhen-1999	kodomo-no-mori-kanketsuhen	子供の森・完結編	子供の森	0	1	1
 NO_OVERLAP	garla-2000	garla	ガルラ 電送人バルバー	ガルラ	0	1	1
 NO_OVERLAP	jiji-oyaji-2000	jiji-oyaji	時事おやじ:2000	時事おやじ	0	1	2
-NO_OVERLAP	birth-2002	birth	BIRTH	バース	0	9	6
+NO_OVERLAP	birth-2002	birth	BIRTH	バース	0	2	6
 NO_OVERLAP	asunaro-hakusho-2002	asunaro-hakusho	あすなろ白書 学生編	あすなろ白書	0	3	7
 NO_OVERLAP	tanimura-hitoshi-no-bakuretsu-tabiuchi-special-2002	tanimura-hitoshi-no-bakuretsu-tabiuchi-special	谷村ひとしの爆裂旅打ちスペシャル2002	谷村ひとしの爆裂旅打ちスペシャル	0	1	1
 NO_OVERLAP	hotman-2003	hotman	ホットマン2003	ホットマン	0	1	25
 NO_OVERLAP	milk-crown-2003	milk-crown	ミルククラウンrs	ミルククラウン	0	2	4
 NO_OVERLAP	shouta-no-sushi-2003	shouta-no-sushi	将太の寿司 全国大会編	将太の寿司	0	8	40
 NO_OVERLAP	mind-game-2004	mind-game	マインド・ゲーム	Mind game	0	1	3
-NO_OVERLAP	yuugo-akana2011	yuugo	勇午 the negotiator	勇午	0	6	24
 NO_OVERLAP	ginga-sengoku-gunyuuden-rai-2004	ginga-sengoku-gunyuuden-rai	銀河戦国群雄伝ライ 異聞	銀河戦国群雄伝ライ	0	1	27
 NO_OVERLAP	elite-yankee-saburou-2005	elite-yankee-saburou	エリートヤンキー三郎 第2部	エリートヤンキー三郎	0	25	26
 NO_OVERLAP	kaa-chan-no-1-1994	kaa-chan-no-1	母ちゃんNO.1 1994	母ちゃんNO.1	0	1	3
 NO_OVERLAP	satorare-2006	satorare	サトラレneo	サトラレ	0	2	8
 NO_OVERLAP	azumania-2006	azumania	ネオ・アズマニア	アズマニア	0	3	3
 NO_OVERLAP	seikimatsu-darling-2006	seikimatsu-darling	世紀末☆ダーリン	世紀末・ダーリン	0	7	11
-NO_OVERLAP	shinshin-agatte-nanbo-taichi-yo-nakuna-2006	shinshin-agatte-nanbo-taichi-yo-nakuna	新々上がってなンボ!!太一よ泣くな	新々上ってなンボ!!太一よ泣くな	0	1	4
+NO_OVERLAP	shinshin-agatte-nanbo-taichi-yo-nakuna-2006	shinshin-agatte-nanbo-taichi-yo-nakuna	新々上がってなンボ!!太一よ泣くな	新々上ってなンボ!!太一よ泣くな	0	1	3
 NO_OVERLAP	kingdom-hearts-2007	kingdom-hearts	キングダムハーツ FINAL MIX	キングダムハーツ	0	3	4
 NO_OVERLAP	zaaruburugu-no-renkinjutsushi-2007	zaaruburugu-no-renkinjutsushi	ザールブルグの錬金術士　second season	ザールブルグの錬金術士	0	3	5
-NO_OVERLAP	ryuurouden-yamahara2007	ryuurouden	龍狼伝 中原繚乱編	龍狼伝	0	17	47
 NO_OVERLAP	spiral-alive-2008	spiral-alive	SPIRAL ALIVE	スパイラル・アライヴ	0	1	5
 NO_OVERLAP	arukasaru-oujou-2008	arukasaru-oujou	アルカサル-王城-外伝	アルカサル-王城-	0	1	20
 NO_OVERLAP	arakure-knight-2008	arakure-knight	荒くれKNIGHT 黒い残響完結編	荒くれKNIGHT	0	20	28
 NO_OVERLAP	macross-7-trash-2009	macross-7-trash	マクロス7trash	マクロス7トラッシュ	0	4	8
 NO_OVERLAP	sora-chan-no-koi-2009	sora-chan-no-koi	空ちゃんの恋	お振るいあそばせ!	0	1	1
 NO_OVERLAP	wani-bunsho-2010	wani-bunsho	82分署	ワニ分署	0	1	3
-NO_OVERLAP	saijou-no-meii-hashiguchi2011	saijou-no-meii	最上の明医	最上の命医	0	19	11
 NO_OVERLAP	ikiru-2010	ikiru	生きる2010	生きる	0	1	2
 NO_OVERLAP	sket-dance-2011	sket-dance	SKET DANCE ファースト・ダンス	SKET DANCE	0	1	48
 NO_OVERLAP	winning-ticket-2011	winning-ticket	ウイニング・チケットⅡ	ウイニング・チケット	0	4	21
@@ -59,10 +56,9 @@ NO_OVERLAP	card-kyaputaa-sakura-2016	card-kyaputaa-sakura	カードキャプタ�
 NO_OVERLAP	kamen-rider-amazon-1974	kamen-rider-amazon	仮面ライダーアマゾン1974	仮面ライダーアマゾン	0	1	1
 NO_OVERLAP	karura-mau-2017	karura-mau	カルラ舞う! 湖国幻影城	カルラ舞う!	0	1	26
 NO_OVERLAP	duel-masters-2017	duel-masters	デュエル・マスターズ（2017年）	デュエル・マスターズ	0	11	17
-NO_OVERLAP	naki-no-ryuu-2017	naki-no-ryuu	哭きの竜 外伝	哭きの竜	0	5	9
+NO_OVERLAP	naki-no-ryuu-2017	naki-no-ryuu	哭きの竜 外伝	哭きの竜	0	5	12
 NO_OVERLAP	yokohama-hyakunen-shokudou-2017	yokohama-hyakunen-shokudou	続横浜百年食堂	横浜百年食堂	0	1	1
 NO_OVERLAP	u12-2018	u12	U12(アンダートゥエルブ)	U12	0	3	6
-NO_OVERLAP	bakidou-itagaki2019	bakidou	バキ道	刃牙道	0	17	22
 NO_OVERLAP	kyou-kara-city-hunter-2021	kyou-kara-city-hunter	今日から City hunter	今日からシティハンター	0	18	5
 NO_OVERLAP	animagear-2022	animagear	アニマギアダブルエッジ	アニマギア	0	2	2
 NO_OVERLAP	kao-ni-denai-kashiwada-san-to-kao-ni-deru-oota-kun-2024	kao-ni-denai-kashiwada-san-to-kao-ni-deru-oota-kun	顔に出ない柏田さんと顔に出る太田君+	顔に出ない柏田さんと顔に出る太田君	0	3	10
