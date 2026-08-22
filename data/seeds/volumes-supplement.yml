@@ -42380,3 +42380,39 @@ volumes:
   source: rakuten
   added_at: '2026-08-18'
   note: 'ISBN消失監視: 8/10のpage-dedup(ultraman-tsuburaya-1997→kazumine)で1997年サンデーコミックス新装2冊が落ちていた→新装editionとして復元(楽天日付)'
+  - series_keys:
+    - qid:Q11623724|name:Xinobi|sub:乱世のアウトローたち
+    number: 2
+    isbn13: '9784088935393'
+    release_date: '2025-02-18'
+    publisher: 集英社
+    edition_type: standard
+    title_display: Xinobi 2 -乱世のアウトローたちー
+    source: ndl
+    added_at: '2026-08-22'
+    note: |
+      日次蒸留レビュー(CONTINUATION裁定): 新刊4巻の予約で既存頁の2-4巻欠落が発覚。NDL(藤堂裕束縛)で全巻確定、日付=楽天。
+  - series_keys:
+    - qid:Q11623724|name:Xinobi|sub:乱世のアウトローたち
+    number: 3
+    isbn13: '9784088938455'
+    release_date: '2025-12-18'
+    publisher: 集英社
+    edition_type: standard
+    title_display: Xinobi 3 -乱世のアウトローたちー
+    source: ndl
+    added_at: '2026-08-22'
+    note: |
+      同上(3巻)。
+  - series_keys:
+    - qid:Q11623724|name:Xinobi|sub:乱世のアウトローたち
+    number: 4
+    isbn13: '9784088942377'
+    release_date: '2026-10-19'
+    publisher: 集英社
+    edition_type: standard
+    title_display: Xinobi 4 -乱世のアウトローたちー
+    source: ndl
+    added_at: '2026-08-22'
+    note: |
+      同上(4巻=今回予約)。誤新作ドラフトから種4転送。
