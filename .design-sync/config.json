@@ -1,0 +1,76 @@
+{
+  "projectId": "7da8b80c-765b-42b9-836d-fac3a0feca0d",
+  "shape": "package",
+  "pkg": "mangal",
+  "globalName": "Mangal",
+  "srcDir": "components",
+  "tsconfig": ".design-sync/tsconfig.sync.json",
+  "cssEntry": "out/_next/static/css/2bebe2671023ca37.css",
+  "guidelinesGlob": [],
+  "componentSrcMap": {
+    "Badge": "components/ui/Badge.tsx",
+    "Card": "components/ui/Card.tsx",
+    "ChipButton": "components/ui/Chip.tsx",
+    "ChipLink": "components/ui/Chip.tsx",
+    "TagLink": "components/ui/Chip.tsx",
+    "Pager": "components/ui/Pager.tsx",
+    "CatPict": "components/CatPict.tsx",
+    "MarqueeTitle": "components/MarqueeTitle.tsx",
+    "CoverImage": "components/CoverImage.tsx",
+    "ColorEditionNote": "components/ColorEditionNote.tsx",
+    "CoverLightbox": "components/CoverLightbox.tsx",
+    "LikeButton": "components/LikeButton.tsx",
+    "LikeButtonMock": "components/LikeButtonMock.tsx",
+    "ScrollTopButton": "components/ScrollTopButton.tsx",
+    "SearchBox": "components/SearchBox.tsx",
+    "ShareButtons": "components/ShareButtons.tsx",
+    "MangaCard": "components/MangaCard.tsx",
+    "MangaGrid": "components/MangaGrid.tsx",
+    "VolumeTile": "components/VolumeTile.tsx",
+    "ArtBookCard": "components/ArtBookCard.tsx",
+    "EditionVolumes": "components/EditionVolumes.tsx",
+    "AffiliateLink": "components/AffiliateLink.tsx"
+  },
+  "dtsPropsFor": {
+    "Badge": "  /** Colour role. Default \"neutral\". */\n  tone?: \"neutral\" | \"accent\" | \"warm\";\n  className?: string;\n  children: React.ReactNode;",
+    "Card": "  /** When set the card renders as a link and gains the pressable affordance. */\n  href?: string;\n  className?: string;\n  children: React.ReactNode;",
+    "ChipButton": "  /** Accent-filled when true. Default false. */\n  active?: boolean;\n  onClick: () => void;\n  className?: string;\n  children: React.ReactNode;",
+    "ChipLink": "  /** Accent-filled when true. Default false. */\n  active?: boolean;\n  href: string;\n  className?: string;\n  children: React.ReactNode;",
+    "TagLink": "  href: string;\n  className?: string;\n  children: React.ReactNode;",
+    "Pager": "  /** 1-based current page. */\n  page: number;\n  totalPages: number;\n  onChange: (page: number) => void;",
+    "CatPict": "  /** Icon key: \"anime\" | \"done\" | \"ongoing\" | \"kodomo\" | \"shounen\" | \"seinen\" | \"shoujo\" | \"josei\". Unknown keys render nothing. */\n  k: string;\n  className?: string;",
+    "MarqueeTitle": "  text: string;\n  className?: string;",
+    "CoverImage": "  /** Renders nothing when null or when the image fails to load. */\n  src: string | null;\n  alt: string;\n  sizes?: string;\n  /** Kept for API compatibility; does not affect rendering. */\n  size?: \"card\" | \"detail\";",
+    "CoverLightbox": "  src: string | null | undefined;\n  label?: string;\n  className?: string;\n  children: React.ReactNode;",
+    "ColorEditionNote": "  /** Work slug; the note is looked up in /data/color-editions.json at runtime. */\n  slug: string;",
+    "LikeButton": "  /** Work id; the count is fetched from /api/like. */\n  id: string;",
+    "LikeButtonMock": "  id: string;\n  /** Starting count, incremented locally. */\n  base: number;",
+    "ScrollTopButton": "  // No props. Visibility is driven by window scroll position (appears past 400px).",
+    "SearchBox": "  value: string;\n  onChange: (value: string) => void;",
+    "ShareButtons": "  title: string;\n  url: string;\n  /** Computes the URL at click time, overriding `url`. */\n  getUrl?: () => string;\n  className?: string;\n  /** Append the site suffix to the shared title. Default true. */\n  titleSuffix?: boolean;",
+    "MangaCard": "  manga: { slug: string; title: string; title_kana: string; subtitle?: string | null; cover: string | null; year_started: number; year_ended: number | null; status: \"ongoing\" | \"completed\" | \"hiatus\"; catch?: string; authors: { name: string; role?: string; kana?: string }[]; original_authors: { name: string; kana?: string }[]; genres: string[]; themes?: string[]; demographic: string; publisher: string; publishers: string[]; magazine?: string | null; awards?: string[]; anime_adapted?: boolean; total_volumes: number; max_edition_volumes: number; latest_date?: string | null; first_volume_date?: string | null; popularity?: number; score?: number };\n  publishers: { key: string; name: string }[];\n  genres: { key: string; name: string }[];\n  demographics: { key: string; name: string }[];",
+    "MangaGrid": "  items: { slug: string; title: string; title_kana: string; subtitle?: string | null; cover: string | null; year_started: number; year_ended: number | null; status: \"ongoing\" | \"completed\" | \"hiatus\"; catch?: string; authors: { name: string; role?: string; kana?: string }[]; original_authors: { name: string; kana?: string }[]; genres: string[]; themes?: string[]; demographic: string; publisher: string; publishers: string[]; magazine?: string | null; awards?: string[]; anime_adapted?: boolean; total_volumes: number; max_edition_volumes: number; latest_date?: string | null; first_volume_date?: string | null; popularity?: number; score?: number }[];\n  publishers: { key: string; name: string }[];\n  genres: { key: string; name: string }[];\n  demographics: { key: string; name: string }[];",
+    "VolumeTile": "  manga: { slug: string; title: string; editions: { label: string; publisher?: string | null; imprint?: string | null; volumes: { number: number; volume_label?: string | null; release_date?: string | null; cover_url?: string | null; isbn13?: string | null; asin?: string | null; kindle_asin?: string | null; publisher?: string | null; artists?: string[]; supervisors?: string[]; description?: string | null }[]; versions?: { label: string; volumes: { number: number; volume_label?: string | null; release_date?: string | null; cover_url?: string | null; isbn13?: string | null; asin?: string | null; kindle_asin?: string | null; publisher?: string | null; artists?: string[]; supervisors?: string[]; description?: string | null }[] }[] }[] };\n  volume: { number: number; volume_label?: string | null; release_date?: string | null; cover_url?: string | null; isbn13?: string | null; asin?: string | null; kindle_asin?: string | null; publisher?: string | null; artists?: string[]; supervisors?: string[]; description?: string | null };\n  edition?: { label: string; publisher?: string | null; imprint?: string | null; volumes: { number: number; volume_label?: string | null; release_date?: string | null; cover_url?: string | null; isbn13?: string | null; asin?: string | null; kindle_asin?: string | null; publisher?: string | null; artists?: string[]; supervisors?: string[]; description?: string | null }[]; versions?: { label: string; volumes: { number: number; volume_label?: string | null; release_date?: string | null; cover_url?: string | null; isbn13?: string | null; asin?: string | null; kindle_asin?: string | null; publisher?: string | null; artists?: string[]; supervisors?: string[]; description?: string | null }[] }[] };",
+    "ArtBookCard": "  artBook: { slug: string; title: string; artist: string; publisher?: string | null; year?: number | null; volumes: { cover_url?: string | null }[] };",
+    "EditionVolumes": "  manga: { slug: string; title: string; editions: { label: string; publisher?: string | null; imprint?: string | null; volumes: { number: number; volume_label?: string | null; release_date?: string | null; cover_url?: string | null; isbn13?: string | null; asin?: string | null; kindle_asin?: string | null; publisher?: string | null; artists?: string[]; supervisors?: string[]; description?: string | null }[]; versions?: { label: string; volumes: { number: number; volume_label?: string | null; release_date?: string | null; cover_url?: string | null; isbn13?: string | null; asin?: string | null; kindle_asin?: string | null; publisher?: string | null; artists?: string[]; supervisors?: string[]; description?: string | null }[] }[] }[] };\n  edition: { label: string; publisher?: string | null; imprint?: string | null; volumes: { number: number; volume_label?: string | null; release_date?: string | null; cover_url?: string | null; isbn13?: string | null; asin?: string | null; kindle_asin?: string | null; publisher?: string | null; artists?: string[]; supervisors?: string[]; description?: string | null }[]; versions?: { label: string; volumes: { number: number; volume_label?: string | null; release_date?: string | null; cover_url?: string | null; isbn13?: string | null; asin?: string | null; kindle_asin?: string | null; publisher?: string | null; artists?: string[]; supervisors?: string[]; description?: string | null }[] }[] };\n  /** Volume-gap annotation for the shelf. */\n  bl?: { id: string; max: number; miss?: number[] } | null;\n  /** Start collapsed behind the header. Default false. */\n  defaultCollapsed?: boolean;",
+    "AffiliateLink": "  manga: { slug: string; title: string; editions: { label: string; publisher?: string | null; imprint?: string | null; volumes: { number: number; volume_label?: string | null; release_date?: string | null; cover_url?: string | null; isbn13?: string | null; asin?: string | null; kindle_asin?: string | null; publisher?: string | null; artists?: string[]; supervisors?: string[]; description?: string | null }[]; versions?: { label: string; volumes: { number: number; volume_label?: string | null; release_date?: string | null; cover_url?: string | null; isbn13?: string | null; asin?: string | null; kindle_asin?: string | null; publisher?: string | null; artists?: string[]; supervisors?: string[]; description?: string | null }[] }[] }[] };\n  /** Defaults to the work's primary volume. */\n  volume?: { number: number; volume_label?: string | null; release_date?: string | null; cover_url?: string | null; isbn13?: string | null; asin?: string | null; kindle_asin?: string | null; publisher?: string | null; artists?: string[]; supervisors?: string[]; description?: string | null };\n  className?: string;\n  /** aria-label prefix; the store name is appended from the purchase mode. */\n  labelPrefix?: string;"
+  },
+  "overrides": {
+    "EditionVolumes": {
+      "cardMode": "column"
+    },
+    "MangaCard": {
+      "cardMode": "column"
+    },
+    "MangaGrid": {
+      "cardMode": "column"
+    },
+    "ArtBookCard": {
+      "cardMode": "column"
+    },
+    "VolumeTile": {
+      "cardMode": "column"
+    }
+  },
+  "readmeHeader": ".design-sync/conventions.md"
+}
