@@ -48,3 +48,10 @@ metadata:
   = 「その著者の他の作品群と題名で全く繋がらない」を足す案。未実装
 
 関連 [[author_pollution_overlay_fix]] [[author_roles_state]] [[author_data_map]]
+
+## 訳者型=掃引済(2026-08-22 GTO発端・ユーザGO)
+- ★一次証拠を発見: **raw metadata101のcreatorは[訳]/[共訳]等の役割マーカー付き**(3,107出現)。cleanが剥がして著者化していた
+- 検出器 = scripts/_sweep-translator-authors.py(rawマーカー→ISBN→series_key、著者兼訳ガード、本番実在のみ)
+- 実績: 536key/543名を remove+credits(翻訳)へ、647頁再生成。谷川俊太郎(スヌーピー訳)/さくらももこ(訳書のみ)等はper-key設計で自作品は不変
+- ★残: 訳者しか著者記録が無い10頁(dog-man/中国劇画系/superman)=差し戻し済み。keyに原著者名があるものは正著者addのper-case候補(translator-author-sweep.tsv)
+- 月次: 蒸留後に再実行すれば新規流入を差分掃引できる(corrections済みはskip)
