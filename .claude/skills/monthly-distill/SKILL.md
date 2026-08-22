@@ -23,6 +23,7 @@ description: 月次蒸留して=MADB取込→フルpromote→enrich→AI fill。
 9. 最終summary(全件数+削除0確認+次月予測)
 
 ## 罠
+- ★**cleanの正規パス=`.cache/madb/metadata101-clean.json`**(2026-08-22実踏): promoteの出版社導出(ISBN→schema:publisher)がこのパスを読む。新cleanを別ディレクトリに置いてintakeを回すと**新刊全部が出版社(unknown)**になる(1.2.19で1,182頁再生成の実害)。temp buildにはenv override、正規パスは**intake前に必ず差し替える**
 - 再登録の別MADB-ID二重化(虚構推理vol23型)→ISBN dedup+監査
 - 種4は触らない(手動add only)。retire hygiene だけ(MADB追いつき分の除去)
 - ★canonical結線頁(edition-canonical/*.yml)は **overridesも種4も後負けで無効**=巻修正はcanonical本体へ(QP外伝4巻 2026-07-27実踏)
