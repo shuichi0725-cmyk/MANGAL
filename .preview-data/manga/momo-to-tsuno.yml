@@ -7,12 +7,10 @@ year_started: 2025
 year_ended: null
 status: ongoing
 authors:
-- name: 明日かかん
+- name: 白井慶太
   role: writer_artist
-  kana: アスカカン
-  romaji: asukakan
 original_authors: []
-publisher: (unknown)
+publisher: shogakukan-creative
 magazine: null
 demographic: shounen
 genres: []
@@ -20,6 +18,7 @@ synopsis: ''
 editions:
 - type: standard
   label: 通常版
+  publisher: 小学館クリエイティブ
   imprint: HCヒーローズコミックス
   volumes:
   - number: 1
@@ -32,5 +31,6 @@ editions:
     isbn13: '9784868051862'
     cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/1862/9784868051862_1_2.jpg?_ex=300x300
     release_date: '2026-06-27'
-publishers: []
+publishers:
+- shogakukan-creative
 genres_provisional: true

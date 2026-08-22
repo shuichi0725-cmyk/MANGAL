@@ -11,7 +11,7 @@ authors:
   role: writer_artist
   kana: スピカフ
 original_authors: []
-publisher: (unknown)
+publisher: kadokawa
 magazine: null
 demographic: shounen
 genres: []
@@ -19,6 +19,7 @@ synopsis: ''
 editions:
 - type: standard
   label: 通常版
+  publisher: KADOKAWA
   imprint: MFC
   volumes:
   - number: 1
@@ -26,5 +27,6 @@ editions:
     isbn13: '9784046855527'
     cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/5527/9784046855527_1_11.jpg?_ex=300x300
     release_date: '2026-06-27'
-publishers: []
+publishers:
+- kadokawa
 genres_provisional: true

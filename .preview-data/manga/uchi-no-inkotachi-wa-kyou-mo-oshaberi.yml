@@ -11,7 +11,7 @@ authors:
   role: writer_artist
   kana: スターツシュッパン
 original_authors: []
-publisher: (unknown)
+publisher: starts-shuppan
 magazine: null
 demographic: shounen
 genres: []
@@ -19,6 +19,7 @@ synopsis: ''
 editions:
 - type: standard
   label: 通常版
+  publisher: スターツ出版
   imprint: OZ comics
   volumes:
   - number: 1
@@ -26,5 +27,6 @@ editions:
     isbn13: '9784813796176'
     cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/6176/9784813796176_1_4.jpg?_ex=300x300
     release_date: '2026-06-10'
-publishers: []
+publishers:
+- starts-shuppan
 genres_provisional: true

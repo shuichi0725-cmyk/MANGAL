@@ -11,7 +11,7 @@ authors:
   role: writer_artist
   kana: オサキエリシロ
 original_authors: []
-publisher: (unknown)
+publisher: libre
 magazine: null
 demographic: shounen
 genres: []
@@ -19,6 +19,7 @@ synopsis: ''
 editions:
 - type: standard
   label: 通常版
+  publisher: リブレ
   imprint: ビボピーコミックス
   volumes:
   - number: 1
@@ -26,5 +27,6 @@ editions:
     isbn13: '9784799777831'
     cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/7831/9784799777831_1_2.jpg?_ex=300x300
     release_date: '2026-06-10'
-publishers: []
+publishers:
+- libre
 genres_provisional: true

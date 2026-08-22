@@ -15,10 +15,8 @@ authors:
   role: writer_artist
   kana: さいとうたかを
   romaji: saitoutakao
-- name: とみ新蔵
+- name: 臣新蔵
   role: writer_artist
-  kana: トミシンゾウ
-  romaji: tomishinzou
 - name: 篁千夏
   role: writer_artist
   kana: タカムラチナツ
@@ -32,7 +30,7 @@ authors:
   kana: クボタセンタロウ
   romaji: kubotasentarou
 original_authors: []
-publisher: (unknown)
+publisher: leed
 magazine: null
 demographic: shounen
 genres: []
@@ -41,6 +39,7 @@ wikidata_qid: Q128840778
 editions:
 - type: standard
   label: 通常版
+  publisher: リイド社
   imprint: SPコミックス
   volumes:
   - number: 1
@@ -48,5 +47,6 @@ editions:
     isbn13: '9784845871872'
     cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/1872/9784845871872_1_3.jpg?_ex=300x300
     release_date: '2026-07-27'
-publishers: []
+publishers:
+- leed
 genres_provisional: true

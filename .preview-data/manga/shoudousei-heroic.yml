@@ -11,7 +11,7 @@ authors:
   role: writer_artist
   kana: ニクイ
 original_authors: []
-publisher: (unknown)
+publisher: g-walk
 magazine: null
 demographic: shounen
 genres: []
@@ -19,6 +19,7 @@ synopsis: ''
 editions:
 - type: standard
   label: 通常版
+  publisher: ジーウォーク
   imprint: Moog comics. Canelé
   volumes:
   - number: 1
@@ -26,5 +27,6 @@ editions:
     isbn13: '9784868490548'
     cover_url: null
     release_date: null
-publishers: []
+publishers:
+- g-walk
 genres_provisional: true

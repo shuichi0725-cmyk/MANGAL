@@ -11,16 +11,14 @@ authors:
   role: writer_artist
   kana: トコロケメコ
   romaji: tokorokemeko
-- name: 甘酒縞
+- name: 有海とよこ
   role: writer_artist
-  kana: アマザケシマ
-  romaji: amazakeshima
 - name: 花瀬はる
   role: writer_artist
   kana: ハナセハル
   romaji: hanaseharu
 original_authors: []
-publisher: (unknown)
+publisher: kadokawa
 magazine: null
 demographic: shounen
 genres: []
@@ -28,6 +26,7 @@ synopsis: ''
 editions:
 - type: standard
   label: 通常版
+  publisher: KADOKAWA
   imprint: フロースコミック
   volumes:
   - number: 1
@@ -35,5 +34,6 @@ editions:
     isbn13: '9784046602374'
     cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/2374/9784046602374_1_8.jpg?_ex=300x300
     release_date: '2026-06-20'
-publishers: []
+publishers:
+- kadokawa
 genres_provisional: true

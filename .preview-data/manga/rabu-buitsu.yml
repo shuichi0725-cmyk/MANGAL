@@ -11,7 +11,7 @@ authors:
   role: writer_artist
   kana: メルモ
 original_authors: []
-publisher: (unknown)
+publisher: kadokawa
 magazine: shonen-ace
 demographic: shounen
 genres: []
@@ -19,6 +19,7 @@ synopsis: ''
 editions:
 - type: standard
   label: 通常版
+  publisher: KADOKAWA
   imprint: 角川コミックス・エース
   volumes:
   - number: 1
@@ -26,5 +27,6 @@ editions:
     isbn13: '9784041174791'
     cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/4791/9784041174791_1_18.jpg?_ex=300x300
     release_date: '2026-06-03'
-publishers: []
+publishers:
+- kadokawa
 genres_provisional: true

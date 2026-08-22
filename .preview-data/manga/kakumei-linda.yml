@@ -11,7 +11,7 @@ authors:
   role: writer_artist
   kana: カワイブンガク
 original_authors: []
-publisher: (unknown)
+publisher: akita
 magazine: champion
 demographic: shounen
 genres: []
@@ -19,6 +19,7 @@ synopsis: ''
 editions:
 - type: standard
   label: 通常版
+  publisher: 秋田書店
   imprint: SHŌNEN CHAMPION COMICS
   volumes:
   - number: 1
@@ -26,5 +27,6 @@ editions:
     isbn13: '9784253013956'
     cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/3956/9784253013956_1_25.jpg?_ex=300x300
     release_date: '2026-06-03'
-publishers: []
+publishers:
+- akita
 genres_provisional: true

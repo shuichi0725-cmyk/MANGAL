@@ -11,12 +11,10 @@ authors:
   role: writer_artist
   kana: タジマヨシカズ
   romaji: tajimayoshikazu
-- name: 大多喜たぬた
+- name: にゃ藻
   role: writer_artist
-  kana: オオタキタヌタ
-  romaji: ootakitanuta
 original_authors: []
-publisher: (unknown)
+publisher: akita
 magazine: null
 demographic: shounen
 genres: []
@@ -24,6 +22,7 @@ synopsis: ''
 editions:
 - type: standard
   label: 通常版
+  publisher: 秋田書店
   imprint: ヤングチャンピオン・コミックス
   volumes:
   - number: 1
@@ -31,5 +30,6 @@ editions:
     isbn13: '9784253017855'
     cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/7855/9784253017855_1_34.jpg?_ex=300x300
     release_date: '2026-07-03'
-publishers: []
+publishers:
+- akita
 genres_provisional: true

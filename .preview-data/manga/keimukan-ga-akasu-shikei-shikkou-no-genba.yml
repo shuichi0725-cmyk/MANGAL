@@ -7,12 +7,10 @@ year_started: 2026
 year_ended: null
 status: ongoing
 authors:
-- name: 杉山なお
+- name: 一之瀬はち
   role: writer_artist
-  kana: スギヤマナオ
-  romaji: sugiyamanao
 original_authors: []
-publisher: (unknown)
+publisher: takeshobo
 magazine: null
 demographic: shounen
 genres: []
@@ -20,6 +18,7 @@ synopsis: ''
 editions:
 - type: standard
   label: 通常版
+  publisher: 竹書房
   imprint: Bamboo comics
   volumes:
   - number: 1
@@ -27,5 +26,6 @@ editions:
     isbn13: '9784801977754'
     cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/7754/9784801977754_1_5.jpg?_ex=300x300
     release_date: '2026-07-20'
-publishers: []
+publishers:
+- takeshobo
 genres_provisional: true

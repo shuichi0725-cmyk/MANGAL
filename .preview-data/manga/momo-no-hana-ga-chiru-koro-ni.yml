@@ -7,12 +7,10 @@ year_started: 2026
 year_ended: null
 status: ongoing
 authors:
-- name: ふかみん
+- name: 午子
   role: writer_artist
-  kana: フカミン
-  romaji: fukamin
 original_authors: []
-publisher: (unknown)
+publisher: kadokawa
 magazine: null
 demographic: shounen
 genres: []
@@ -20,6 +18,7 @@ synopsis: ''
 editions:
 - type: standard
   label: 通常版
+  publisher: KADOKAWA
   imprint: 電撃コミックスNEXT
   volumes:
   - number: 1
@@ -27,5 +26,6 @@ editions:
     isbn13: '9784049522846'
     cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/2846/9784049522846_1_12.jpg?_ex=300x300
     release_date: '2026-06-03'
-publishers: []
+publishers:
+- kadokawa
 genres_provisional: true

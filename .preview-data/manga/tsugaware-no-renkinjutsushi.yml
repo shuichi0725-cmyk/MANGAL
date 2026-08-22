@@ -11,7 +11,7 @@ authors:
   role: writer_artist
   kana: トキワアオ
 original_authors: []
-publisher: (unknown)
+publisher: kadokawa
 magazine: null
 demographic: shounen
 genres: []
@@ -19,6 +19,7 @@ synopsis: ''
 editions:
 - type: standard
   label: 通常版
+  publisher: KADOKAWA
   imprint: B's LOVEY comics
   volumes:
   - number: 1
@@ -26,5 +27,6 @@ editions:
     isbn13: '9784045001529'
     cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/1529/9784045001529_1_15.jpg?_ex=300x300
     release_date: '2026-06-03'
-publishers: []
+publishers:
+- kadokawa
 genres_provisional: true

@@ -7,12 +7,10 @@ year_started: 2026
 year_ended: null
 status: ongoing
 authors:
-- name: 鳴海みわ
+- name: ふじもとまめ
   role: writer_artist
-  kana: ナルミミワ
-  romaji: narumimiwa
 original_authors: []
-publisher: (unknown)
+publisher: hakusensha
 magazine: null
 demographic: shounen
 genres: []
@@ -20,6 +18,7 @@ synopsis: ''
 editions:
 - type: standard
   label: 通常版
+  publisher: 白泉社
   imprint: HC Special
   volumes:
   - number: 1
@@ -27,5 +26,6 @@ editions:
     isbn13: '9784592231370'
     cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/1370/9784592231370_1_23.jpg?_ex=300x300
     release_date: '2026-06-20'
-publishers: []
+publishers:
+- hakusensha
 genres_provisional: true
