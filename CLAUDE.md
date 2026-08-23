@@ -48,7 +48,7 @@
 
 ### Phase 1: 差分 report + Go サイン待ち
 
-1. MADB latest release を GitHub API で取得 (= `MangaDataBaseLab/MADB-Lab-Bot-public` 等の確定 repo)
+1. MADB latest release を GitHub API で取得 (= ★`mediaarts-db/dataset` が正。 旧記載の MADB-Lab-Bot-public は404 = 2026-08-21実踏)
 2. 前回取込 tag と比較し、 各層の差分件数を表示:
    - 種1: 新 ISBN N 件 / 新 mangaka 推定 件数
    - 種2: 新 series M 件 (= 4 層 adult filter 後)

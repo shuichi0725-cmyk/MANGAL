@@ -38,6 +38,11 @@ B=NDL新着回収(納本済み過去分)。毎日でなくてよい(間隔が空
   - `docs/production-diagnostics/preorder-review.tsv` の各行をAIが1行ずつ裁定:
     - **CONTINUATION**(最優先)=既存作の続巻を誤ってドラフト化。`_lookup.py --creator`で新シリーズ(第二章/龍を継ぐ男型=別頁が正)か
       続巻(千年狐十四/KATANA23型=種4転送)かを確認→種4転送 or 「新シリーズなので正」でpending該当行削除。
+      ★続巻確定時は**NDLで全巻を見る**(Xinobi型 2026-08-22: 新刊4巻の裏で既存頁に2-3巻も欠けていた=1巻だけ転送して終わらない)。
+      ★同名別コミカライズ(佐々木とピーちゃん型)は別頁が正=衝突slugは`-姓+年`suffix。
+    - **SLUG_MUSH**(2026-08-23新設・ブロッキング)=無分割塊(ハイフン無しrun15字超)/78字超の語中切り。
+      根因=短縮前のフル楽天題からslug生成。**題(短縮後)の意味の切れ目でrename**(本編句まで。副題は捨てる:
+      isekai-rakuraku-mujintou-life / fushi-no-dungeon-master 型)。誤読(星間=seikan)・辞書語(exorcist/daily-mission/try)も同時に正す。
     - **NONMANGA**(最優先)=図鑑/写真集/再編集本。deny台帳(preorder-deny.jsonl)へ+ドラフト除去(preview+drafts両方)。
     - **MISREAD**=漢字誤読疑い。題を読んでslug綴りが読みと合うか確認。誤りはrename(preview+drafts両方)、
       正しければ`slug-gate-pending.tsv`の該当行を消す(nidaime/shinzou型=既に正=偽陽性)。

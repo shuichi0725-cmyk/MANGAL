@@ -147,7 +147,13 @@ def main():
         # KATA_UNCONV = 未変換カナ塊が残る時のみ(造語で英語綴りが無いのは正)
         if slug in kata and kata_blob:
             rows.append(("KATA_UNCONV", slug, "辞書未収載カタカナ(未変換)", title))
-        if len(slug) >= 64:
+        # ★SLUG_MUSH(2026-08-23 ユーザ発見30件=isekairakuraku型): 無分割塊(ハイフン無し15字超run)
+        #   or 78字超(80capの語中切断痕)は機械検出できる実問題=ブロッキング。
+        #   根因は「短縮前のフル楽天題からslug生成」= 是正は題の意味の切れ目で再命名(rename)。
+        _maxrun = max((len(x) for x in slug.split("-")), default=0)
+        if _maxrun >= 15 or len(slug) >= 78:
+            rows.append(("SLUG_MUSH", slug, f"無分割塊(run={_maxrun})/語中切り(len={len(slug)})→題の切れ目でrename", title))
+        elif len(slug) >= 64:
             rows.append(("LONG_CHECK", slug, f"len={len(slug)} cap近=意味の切れ目か目視", title))
 
     os.makedirs(os.path.dirname(OUT), exist_ok=True)
@@ -160,7 +166,7 @@ def main():
     n_draft = sum(1 for p in glob.glob(os.path.join(ROOT, a.src, "*.yml"))
                   if (yaml.safe_load(io.open(p, encoding="utf-8")) or {}).get("_preorder_draft"))
     # ★LONG_CHECK は情報(語境界cut済=大半は正当な長題)。push阻止は実問題4種のみ。
-    BLOCK = {"CONTINUATION", "NONMANGA", "MISREAD", "KATA_UNCONV"}
+    BLOCK = {"CONTINUATION", "NONMANGA", "MISREAD", "KATA_UNCONV", "SLUG_MUSH"}
     n_block = sum(1 for r in rows if r[0] in BLOCK)
     print(f"予約ドラフト {n_draft}頁 / 要裁定 {n_block}件(ブロッキング) + LONG_CHECK {c.get('LONG_CHECK', 0)}件(情報) {dict(c)}")
     print(f"→ {os.path.relpath(OUT, ROOT)}")
