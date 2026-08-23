@@ -4,37 +4,38 @@ canonical_publisher: 潮出版社
 canonical_imprint: 希望コミックス
 suppress_types:
 - bunkobon
-source: 'ギャラ型round4 2026-08-17: 希望コミックス(1969-76 第1-8部)main。文庫は潮漫画文庫(2002 全6巻・巻題つき)と1978年版断片(v7-10 ISBN無)の2期に分離'
+source: 'ギャラ型round4 2026-08-17: 希望コミックス(1969-76 第1-8部)main。文庫は潮漫画文庫(2002 全6巻・巻題つき)と1978年版断片(v7-10 ISBN無)の2期に分離 ★ISBN補充1巻 2026-08-24(partial-isbn-gap半自動: 帯/楽天題/巻番号/未使用の4検証)'
 volumes:
 - number: 1
   isbn13: '9784267900013'
-  release_date: '1969-12'
-  volume_label: '第1部'
+  release_date: 1969-12
+  volume_label: 第1部
 - number: 2
   isbn13: '9784267900020'
-  release_date: '1970-03'
-  volume_label: '第2部'
+  release_date: 1970-03
+  volume_label: 第2部
 - number: 3
   isbn13: '9784267900037'
-  release_date: '1970-06'
-  volume_label: '第3部'
+  release_date: 1970-06
+  volume_label: 第3部
 - number: 4
-  release_date: '1970-10'
-  volume_label: '第4部'
+  release_date: 1970-10
+  volume_label: 第4部
 - number: 5
-  release_date: '1970-12'
-  volume_label: '第5部'
+  release_date: 1970-12
+  volume_label: 第5部
 - number: 6
   isbn13: '9784267900068'
-  release_date: '1971-07'
-  volume_label: '第6部'
+  release_date: 1971-07
+  volume_label: 第6部
 - number: 7
   isbn13: '9784267900075'
-  release_date: '1972-01'
-  volume_label: '第7部'
+  release_date: 1972-01
+  volume_label: 第7部
 - number: 8
-  release_date: '1976-05'
-  volume_label: '第8部'
+  release_date: 1976-05
+  volume_label: 第8部
+  isbn13: '9784267900082'
 extra_editions:
 - type: bunkobon
   label: 潮漫画文庫(2002)
@@ -44,27 +45,27 @@ extra_editions:
   - number: 1
     isbn13: '9784267016219'
     release_date: '2002-01-25'
-    volume_label: '百八星飛翔の巻'
+    volume_label: 百八星飛翔の巻
   - number: 2
     isbn13: '9784267016226'
     release_date: '2002-03-25'
-    volume_label: '風雲!!梁山泊の巻'
+    volume_label: 風雲!!梁山泊の巻
   - number: 3
     isbn13: '9784267016233'
     release_date: '2002-05-25'
-    volume_label: '好漢危機一髪の巻'
+    volume_label: 好漢危機一髪の巻
   - number: 4
     isbn13: '9784267016240'
     release_date: '2002-07-25'
-    volume_label: '激闘梁山泊軍の巻'
+    volume_label: 激闘梁山泊軍の巻
   - number: 5
     isbn13: '9784267016257'
     release_date: '2002-09-25'
-    volume_label: '謎の秘密軍団の巻'
+    volume_label: 謎の秘密軍団の巻
   - number: 6
     isbn13: '9784267016264'
     release_date: '2002-11-25'
-    volume_label: '大宋国平定の巻'
+    volume_label: 大宋国平定の巻
 - type: bunkobon
   label: 文庫版(1978)
   publisher: 潮出版社

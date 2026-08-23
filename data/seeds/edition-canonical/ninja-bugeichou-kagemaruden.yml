@@ -4,7 +4,7 @@ canonical_publisher: 小学館
 canonical_imprint: ゴールデン・コミックス
 suppress_types:
 - bunkobon
-source: 'ギャラ型(ISBN消えるクラス) 2026-08-17: ゴールデン・コミックス全12巻(1966-67)をmainに。小学館文庫は1976年版(v1-17)と1997年版(v1-8)の2期が同居し逆行→分離'
+source: 'ギャラ型(ISBN消えるクラス) 2026-08-17: ゴールデン・コミックス全12巻(1966-67)をmainに。小学館文庫は1976年版(v1-17)と1997年版(v1-8)の2期が同居し逆行→分離 ★ISBN補充11巻 2026-08-24(partial-isbn-gap半自動: 帯/楽天題/巻番号/未使用の4検証)'
 volumes:
 - number: 12
   release_date: '1967-01-10'
@@ -38,28 +38,37 @@ extra_editions:
   volumes:
   - number: 12
     release_date: '1976-09-20'
+    isbn13: '9784091900128'
   - number: 15
     release_date: '1976-10-20'
+    isbn13: '9784091900159'
   - number: 3
     release_date: '1976-04-20'
+    isbn13: '9784091900036'
   - number: 2
     release_date: '1976-04-20'
+    isbn13: '9784091900029'
   - number: 1
     isbn13: '9784091900012'
     release_date: '1976-04-20'
   - number: 17
     release_date: '1976-12-20'
+    isbn13: '9784091900173'
   - number: 16
     release_date: '1976-11-20'
+    isbn13: '9784091900166'
   - number: 13
     release_date: '1976-09-20'
+    isbn13: '9784091900135'
   - number: 14
     release_date: '1976-10-20'
+    isbn13: '9784091900142'
   - number: 11
     isbn13: '9784091900111'
     release_date: '1976-08-20'
   - number: 10
     release_date: '1976-08-20'
+    isbn13: '9784091900104'
   - number: 9
     isbn13: '9784091900098'
     release_date: '1976-07-20'
@@ -68,11 +77,13 @@ extra_editions:
     release_date: '1976-07-20'
   - number: 7
     release_date: '1976-05-20'
+    isbn13: '9784091900074'
   - number: 6
     isbn13: '9784091900067'
     release_date: '1976-05-20'
   - number: 4
     release_date: '1976-04-20'
+    isbn13: '9784091900043'
   - number: 5
     isbn13: '9784091900050'
     release_date: '1976-04-20'
@@ -83,22 +94,22 @@ extra_editions:
   volumes:
   - number: 1
     isbn13: '9784091922014'
-    release_date: '1997-06'
+    release_date: 1997-06
   - number: 2
     isbn13: '9784091922021'
-    release_date: '1997-06'
+    release_date: 1997-06
   - number: 3
     isbn13: '9784091922038'
-    release_date: '1997-07'
+    release_date: 1997-07
   - number: 4
     isbn13: '9784091922045'
-    release_date: '1997-07'
+    release_date: 1997-07
   - number: 5
     isbn13: '9784091922052'
     release_date: '1997-08-10'
   - number: 6
     isbn13: '9784091922069'
-    release_date: '1997-09'
+    release_date: 1997-09
   - number: 7
     isbn13: '9784091922076'
     release_date: '1997-10-10'

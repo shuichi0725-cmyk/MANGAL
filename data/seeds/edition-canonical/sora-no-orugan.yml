@@ -2,26 +2,32 @@ slug: sora-no-orugan
 canonical_label: 通常版
 canonical_publisher: 集英社
 canonical_imprint: ぶーけコミックス
-source: 'ギャラ型(ISBN消えるクラス) 2026-08-17: ぶーけコミックス v1-8 完備(v7=頁孤児ISBN・楽天『空のオルガン(7)』確認)。stdに混じっていたホーム社漫画文庫(2007-08)を文庫タブへ分離'
+source: 'ギャラ型(ISBN消えるクラス) 2026-08-17: ぶーけコミックス v1-8 完備(v7=頁孤児ISBN・楽天『空のオルガン(7)』確認)。stdに混じっていたホーム社漫画文庫(2007-08)を文庫タブへ分離 ★ISBN補充6巻 2026-08-24(partial-isbn-gap半自動: 帯/楽天題/巻番号/未使用の4検証)'
 volumes:
 - number: 1
   isbn13: '9784088601472'
   release_date: '1988-03-20'
 - number: 2
   release_date: '1988-09-19'
+  isbn13: '9784088601588'
 - number: 3
   release_date: '1989-03-20'
+  isbn13: '9784088601717'
 - number: 4
   release_date: '1989-08-16'
+  isbn13: '9784088601823'
 - number: 5
   release_date: '1990-02-20'
+  isbn13: '9784088601977'
 - number: 6
   release_date: '1990-08-15'
+  isbn13: '9784088602165'
 - number: 7
   isbn13: '9784088602226'
   release_date: '1990-10-15'
 - number: 8
   release_date: '1990-12-15'
+  isbn13: '9784088602295'
 extra_editions:
 - type: bunkobon
   label: 文庫版(ホーム社漫画文庫)
@@ -30,13 +36,13 @@ extra_editions:
   volumes:
   - number: 4
     isbn13: '9784834274073'
-    release_date: '2008-01'
+    release_date: 2008-01
   - number: 3
     isbn13: '9784834274066'
-    release_date: '2008-01'
+    release_date: 2008-01
   - number: 2
     isbn13: '9784834274028'
-    release_date: '2007-11'
+    release_date: 2007-11
   - number: 1
     isbn13: '9784834274011'
-    release_date: '2007-11'
+    release_date: 2007-11

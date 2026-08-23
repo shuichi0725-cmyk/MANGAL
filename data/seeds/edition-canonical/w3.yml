@@ -4,7 +4,7 @@ canonical_publisher: 講談社
 canonical_imprint: 手塚治虫漫画全集
 suppress_types:
 - bunkobon
-source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。'
+source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。 ★ISBN補充2巻 2026-08-24(partial-isbn-gap半自動: 帯/楽天題/巻番号/未使用の4検証)'
 volumes:
 - number: 1
   isbn13: '9784061087392'
@@ -23,11 +23,13 @@ extra_editions:
   volumes:
   - number: 1
     release_date: '1977-01-20'
+    isbn13: '9784253014731'
   - number: 2
     isbn13: '9784253014748'
     release_date: '1977-02-20'
   - number: 3
     release_date: '1977-03-20'
+    isbn13: '9784253014755'
 - type: shinsoban
   label: 手塚治虫傑作選集
   imprint: 手塚治虫傑作選集
@@ -35,7 +37,7 @@ extra_editions:
   volumes:
   - number: 1
     isbn13: '9784253103480'
-    release_date: '1993-06'
+    release_date: 1993-06
   - number: 2
     isbn13: '9784253103497'
     release_date: '1993-07-25'
@@ -46,10 +48,10 @@ extra_editions:
   volumes:
   - number: 1
     isbn13: '9784063737158'
-    release_date: '2009-10'
+    release_date: 2009-10
   - number: 2
     isbn13: '9784063737165'
-    release_date: '2009-10'
+    release_date: 2009-10
 - type: bunkobon
   label: 秋田文庫
   imprint: 秋田文庫
@@ -57,10 +59,10 @@ extra_editions:
   volumes:
   - number: 1
     isbn13: '9784253171229'
-    release_date: '1995-04'
+    release_date: 1995-04
   - number: 2
     isbn13: '9784253171236'
-    release_date: '1995-04'
+    release_date: 1995-04
 - type: shinsoban
   label: SUNDAY COMICS
   imprint: SUNDAY COMICS
@@ -78,7 +80,7 @@ extra_editions:
   volumes:
   - number: 1
     isbn13: '9784336054739'
-    release_date: '2012-03'
+    release_date: 2012-03
 - type: shinsoban
   label: P-KC
   imprint: P-KC
@@ -94,4 +96,4 @@ extra_editions:
   volumes:
   - number: 1
     isbn13: '9784061907157'
-    release_date: '1985-11'
+    release_date: 1985-11

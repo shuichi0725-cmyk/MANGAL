@@ -4,11 +4,11 @@ canonical_publisher: 秋田書店
 canonical_imprint: サンデーコミックス
 suppress_types:
 - bunkobon
-source: 'ギャラ型B是正 2026-08-17: 通常版タブにサンデーコミックス(1969-1976 全15巻)・秋田コミックス・セレクト(1985-87)・KCDX(2008)が混線し、9巻2008-12→10巻1976-03-20という32年逆行(レーベル名も横山光輝漫画全集に化けていた)。文庫タブも1995-99年の秋田文庫と1977-78年の秋田漫画文庫が1本に混ざり、1巻1995/2巻1977/3巻1995/4巻1977…と交互になっていた。NDL SRU(creator=横山光輝)で確定= サンデーコミックス 秋田書店 第1巻 ISBN 9784253061223 1969.03 / Akita top comics 秋田書店 上 4253188656 2001.11 / 小学館クリエイティブ 限定版BOX は 貸本版(2010.6)・由比正雪の巻(2010.10)・闇一族の巻(2011.11)・七つの影法師(2013.4) の**各BOXが1 ISBN**。サンデーコミックス全15巻を主版に戻し、他の版は全てextra_editionsへ分離した。★MADBが「Akita top comics」に混ぜていた ISBN 9784253240857(2006-03)は 42532408xx のワイド版連番に属するので Akita top comics wide 側へ寄せた。★「Akita Bunko」の1冊(9784253171076 1996-06-10)は秋田文庫の欠けていた8巻なので秋田文庫に統合した。★横山光輝漫画全集は版元が両ソースに無いため publisher を不明とした。My first big special(2015)はコンビニ本のため掲載対象外。'
+source: 'ギャラ型B是正 2026-08-17: 通常版タブにサンデーコミックス(1969-1976 全15巻)・秋田コミックス・セレクト(1985-87)・KCDX(2008)が混線し、9巻2008-12→10巻1976-03-20という32年逆行(レーベル名も横山光輝漫画全集に化けていた)。文庫タブも1995-99年の秋田文庫と1977-78年の秋田漫画文庫が1本に混ざり、1巻1995/2巻1977/3巻1995/4巻1977…と交互になっていた。NDL SRU(creator=横山光輝)で確定= サンデーコミックス 秋田書店 第1巻 ISBN 9784253061223 1969.03 / Akita top comics 秋田書店 上 4253188656 2001.11 / 小学館クリエイティブ 限定版BOX は 貸本版(2010.6)・由比正雪の巻(2010.10)・闇一族の巻(2011.11)・七つの影法師(2013.4) の**各BOXが1 ISBN**。サンデーコミックス全15巻を主版に戻し、他の版は全てextra_editionsへ分離した。★MADBが「Akita top comics」に混ぜていた ISBN 9784253240857(2006-03)は 42532408xx のワイド版連番に属するので Akita top comics wide 側へ寄せた。★「Akita Bunko」の1冊(9784253171076 1996-06-10)は秋田文庫の欠けていた8巻なので秋田文庫に統合した。★横山光輝漫画全集は版元が両ソースに無いため publisher を不明とした。My first big special(2015)はコンビニ本のため掲載対象外。 ★ISBN補充2巻 2026-08-24(partial-isbn-gap半自動: 帯/楽天題/巻番号/未使用の4検証)'
 volumes:
 - number: 1
   isbn13: '9784253061223'
-  release_date: '1969-03'
+  release_date: 1969-03
 - number: 2
   release_date: '1969-04-30'
 - number: 3
@@ -34,7 +34,7 @@ volumes:
 - number: 13
   release_date: '1976-06-20'
 - number: 14
-  release_date: '1976-07'
+  release_date: 1976-07
 - number: 15
   release_date: '1976-08-05'
 extra_editions:
@@ -44,11 +44,11 @@ extra_editions:
   publisher: 不明
   volumes:
   - number: 1
-    release_date: '1963-03'
+    release_date: 1963-03
   - number: 3
     release_date: null
   - number: 4
-    release_date: '1964-04'
+    release_date: 1964-04
   - number: 5
     release_date: '1964'
 - type: other
@@ -101,16 +101,16 @@ extra_editions:
   volumes:
   - number: 1
     isbn13: '9784091972415'
-    release_date: '1990-05'
+    release_date: 1990-05
   - number: 2
     isbn13: '9784091972422'
-    release_date: '1990-06'
+    release_date: 1990-06
   - number: 3
     isbn13: '9784091972439'
-    release_date: '1990-07'
+    release_date: 1990-07
   - number: 4
     isbn13: '9784091972446'
-    release_date: '1990-08'
+    release_date: 1990-08
 - type: shinsoban
   label: Akita top comics
   imprint: Akita top comics
@@ -118,11 +118,11 @@ extra_editions:
   volumes:
   - number: 1
     isbn13: '9784253188654'
-    release_date: '2001-11'
+    release_date: 2001-11
     volume_label: 邪鬼秘帳の巻 上
   - number: 2
     isbn13: '9784253188661'
-    release_date: '2001-12'
+    release_date: 2001-12
     volume_label: 邪鬼秘帳の巻 下
 - type: wideban
   label: Akita top comics wide
@@ -131,29 +131,29 @@ extra_editions:
   volumes:
   - number: 1
     isbn13: '9784253240833'
-    release_date: '2006-01'
+    release_date: 2006-01
   - number: 2
     isbn13: '9784253240840'
-    release_date: '2006-02'
+    release_date: 2006-02
   - number: 3
     isbn13: '9784253240857'
-    release_date: '2006-03'
+    release_date: 2006-03
   - number: 4
     isbn13: '9784253240864'
-    release_date: '2006-04'
+    release_date: 2006-04
   - number: 5
     isbn13: '9784253240888'
-    release_date: '2006-08'
+    release_date: 2006-08
   - number: 6
     isbn13: '9784253240895'
-    release_date: '2006-11'
+    release_date: 2006-11
   - number: 7
     isbn13: '9784253240901'
-    release_date: '2006-12'
+    release_date: 2006-12
     volume_label: 上
   - number: 8
     isbn13: '9784253240918'
-    release_date: '2007-01'
+    release_date: 2007-01
     volume_label: 下
 - type: shinsoban
   label: KCDX版(講談社)
@@ -162,50 +162,50 @@ extra_editions:
   volumes:
   - number: 1
     isbn13: '9784063754780'
-    release_date: '2008-04'
+    release_date: 2008-04
   - number: 2
     isbn13: '9784063754995'
-    release_date: '2008-05'
+    release_date: 2008-05
   - number: 3
     isbn13: '9784063755145'
-    release_date: '2008-06'
+    release_date: 2008-06
   - number: 4
     isbn13: '9784063755329'
-    release_date: '2008-07'
+    release_date: 2008-07
   - number: 5
     isbn13: '9784063755503'
-    release_date: '2008-08'
+    release_date: 2008-08
   - number: 6
     isbn13: '9784063755510'
-    release_date: '2008-09'
+    release_date: 2008-09
   - number: 7
     isbn13: '9784063755671'
-    release_date: '2008-10'
+    release_date: 2008-10
   - number: 8
     isbn13: '9784063755688'
-    release_date: '2008-11'
+    release_date: 2008-11
   - number: 9
     isbn13: '9784063755695'
-    release_date: '2008-12'
+    release_date: 2008-12
 - type: other
   label: 限定版BOX(小学館クリエイティブ)
   publisher: 小学館クリエイティブ
   volumes:
   - number: 1
     isbn13: '9784778031404'
-    release_date: '2010-06'
+    release_date: 2010-06
     volume_label: 貸本版BOX
   - number: 2
     isbn13: '9784778031497'
-    release_date: '2010-10'
+    release_date: 2010-10
     volume_label: 由比正雪の巻BOX
   - number: 3
     isbn13: '9784778031954'
-    release_date: '2011-11'
+    release_date: 2011-11
     volume_label: 闇一族の巻BOX
   - number: 4
     isbn13: '9784778032418'
-    release_date: '2013-04'
+    release_date: 2013-04
     volume_label: 七つの影法師BOX
 - type: other
   label: Rare mix comics(小学館クリエイティブ)
@@ -214,7 +214,7 @@ extra_editions:
   volumes:
   - number: 1
     isbn13: '9784778060312'
-    release_date: '2011-11'
+    release_date: 2011-11
   - number: 2
     isbn13: '9784778060329'
     release_date: null
@@ -244,16 +244,18 @@ extra_editions:
     release_date: '1977-03-02'
   - number: 2
     isbn13: '9784253014953'
-    release_date: '1977-04'
+    release_date: 1977-04
   - number: 3
-    release_date: '1977-07'
+    release_date: 1977-07
+    isbn13: '9784253014960'
   - number: 4
     isbn13: '9784253014977'
     release_date: '1977-09-20'
   - number: 5
     release_date: '1977-10-20'
+    isbn13: '9784253014984'
   - number: 6
-    release_date: '1978-03'
+    release_date: 1978-03
   - number: 7
     isbn13: '9784253015004'
     release_date: '1978-07-20'
@@ -290,10 +292,10 @@ extra_editions:
     release_date: '1996-06-10'
   - number: 9
     isbn13: '9784253171083'
-    release_date: '1999-02'
+    release_date: 1999-02
   - number: 10
     isbn13: '9784253171090'
-    release_date: '1999-08'
+    release_date: 1999-08
   - number: 11
     isbn13: '9784253171106'
-    release_date: '1999-10'
+    release_date: 1999-10

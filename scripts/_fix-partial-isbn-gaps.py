@@ -93,6 +93,7 @@ def main() -> None:
     print(f"頁 {len(pages):,} / 使用済みISBN {len(used):,}", file=sys.stderr)
 
     fills: dict = {}
+    canonical_fixes: dict = {}
     regen_stems: set = set()
     unresolved = []
     stats = Counter()
@@ -116,10 +117,9 @@ def main() -> None:
             global_linear = len(diffs) == 1
             for n in sorted(lack):
                 stats["欠け巻"] += 1
-                if stem in canonical_slugs:
-                    unresolved.append((stem, ed.get("type"), n, "canonical結線頁=fill無効(canonical本体へ)", ""))
-                    stats["canonical除外"] += 1
-                    continue
+                # ★canonical頁も候補生成する(2026-08-24 ユーザGO): sinkだけ isbn-fill でなく
+                #   edition-canonical/<stem>.yml 本体(後勝ちの正位置)。--apply-canonical で書く。
+                _is_canon = stem in canonical_slugs
                 cands = []
                 # 経路1: 内挿/外挿
                 below = [(k, c) for k, c in pairs if k < n]
@@ -154,14 +154,20 @@ def main() -> None:
                     break
                 if chosen:
                     method, cand, rt = chosen
-                    _fillkey = y.get("slug") or stem  # ★キー=公開slug(SRC stemは死にキー)
                     regen_stems.add(stem)
-                    fills.setdefault(_fillkey, []).append({
-                        "edition": ed.get("type"), "number": n, "isbn13": cand,
-                        "source": f"partial-isbn-gap {method}+楽天題『{rt}』 2026-08-19",
-                    })
+                    if _is_canon:
+                        canonical_fixes.setdefault(stem, []).append({
+                            "type": ed.get("type"), "label": ed.get("label"), "number": n,
+                            "isbn13": cand, "evidence": f"{method}+楽天題『{rt}』"})
+                        stats[f"canonical確定:{method}"] += 1
+                    else:
+                        _fillkey = y.get("slug") or stem  # ★キー=公開slug(SRC stemは死にキー)
+                        fills.setdefault(_fillkey, []).append({
+                            "edition": ed.get("type"), "number": n, "isbn13": cand,
+                            "source": f"partial-isbn-gap {method}+楽天題『{rt}』 2026-08-19",
+                        })
+                        stats[f"確定:{method}"] += 1
                     used.add(cand)
-                    stats[f"確定:{method}"] += 1
                 else:
                     why = []
                     if not cands:
@@ -173,7 +179,9 @@ def main() -> None:
                     stats["未解決"] += 1
 
     print("=== stats ===", dict(stats))
-    print(f"確定 {sum(len(v) for v in fills.values())}巻 / {len(fills)}頁, 未解決 {len(unresolved)}巻")
+    print(f"確定 {sum(len(v) for v in fills.values())}巻 / {len(fills)}頁"
+          f" + canonical確定 {sum(len(v) for v in canonical_fixes.values())}巻 / {len(canonical_fixes)}頁"
+          f", 未解決 {len(unresolved)}巻")
 
     out_un = ROOT / "docs" / "production-diagnostics" / "partial-isbn-gap-unresolved.tsv"
     with io.open(out_un, "w", encoding="utf-8", newline="\n") as w:
@@ -202,6 +210,58 @@ def main() -> None:
             added += 1
     io.open(p, "w", encoding="utf-8", newline="\n").write(json.dumps(d, ensure_ascii=False, indent=1))
     print(f"isbn-fill.json += {added}巻 / {len(fills)}頁")
+    # ★canonical本体への直書き(2026-08-24 ユーザGO): edition-canonical/<SRC stem>.yml の
+    #   該当巻entryに isbn13 を挿入。main volumes=canonical主版(通常standard) /
+    #   extra_editions=type一致で探す。#コメント入りファイルはyaml往復で消えるためskip報告。
+    canon_dir = ROOT / "data" / "seeds" / "edition-canonical"
+    n_canon, skipped_canon = 0, []
+    for stem, fixes in canonical_fixes.items():
+        cp = canon_dir / f"{stem}.yml"
+        if not cp.exists():
+            skipped_canon.append((stem, "canonical file無し"))
+            continue
+        raw = cp.read_text(encoding="utf-8")
+        if re.search(r"(?m)^\s*#", raw):
+            skipped_canon.append((stem, "#コメント入り=手動対象"))
+            continue
+        doc = yaml.safe_load(raw)
+        changed = 0
+        main_type = "standard"  # canonical主版はstandard相当として組まれる
+        for fx in fixes:
+            placed = False
+            # 1) 主版(main volumes): 巻一致かつisbn13無し
+            if fx["type"] == main_type or (doc.get("canonical_label") and fx["label"] == doc.get("canonical_label")):
+                for v in doc.get("volumes") or []:
+                    if v.get("number") == fx["number"] and not v.get("isbn13"):
+                        v["isbn13"] = fx["isbn13"]
+                        placed = True
+                        break
+            # 2) extra_editions: type一致
+            if not placed:
+                for ee in doc.get("extra_editions") or []:
+                    if ee.get("type") != fx["type"]:
+                        continue
+                    for v in ee.get("volumes") or []:
+                        if v.get("number") == fx["number"] and not v.get("isbn13"):
+                            v["isbn13"] = fx["isbn13"]
+                            placed = True
+                            break
+                    if placed:
+                        break
+            if placed:
+                changed += 1
+            else:
+                skipped_canon.append((stem, f"巻{fx['number']}({fx['type']})の空スロットがcanonicalに無い"))
+        if changed:
+            note = f" ★ISBN補充{changed}巻 2026-08-24(partial-isbn-gap半自動: 帯/楽天題/巻番号/未使用の4検証)"
+            doc["source"] = (str(doc.get("source") or "").rstrip() + note)
+            cp.write_text(yaml.safe_dump(doc, allow_unicode=True, sort_keys=False, width=1000), encoding="utf-8")
+            yaml.safe_load(cp.read_text(encoding="utf-8"))  # 追記後parse検証(月次skill罠)
+            n_canon += changed
+    print(f"canonical直書き: {n_canon}巻 / {len(canonical_fixes)}頁 (skip {len(skipped_canon)})")
+    for s in skipped_canon[:10]:
+        print("  skip:", s)
+
     regen = ROOT / ".cache" / "isbn-gap-regen-list.txt"
     io.open(regen, "w", encoding="utf-8", newline="\n").write("\n".join(sorted(regen_stems)))
     print("regen list(SRC stems):", regen)

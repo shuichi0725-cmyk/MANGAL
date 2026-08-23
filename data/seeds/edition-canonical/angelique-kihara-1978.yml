@@ -4,16 +4,20 @@ canonical_publisher: 秋田書店
 canonical_imprint: プリンセス・コミックス
 suppress_types:
 - bunkobon
-source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。'
+source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。 ★ISBN補充4巻 2026-08-24(partial-isbn-gap半自動: 帯/楽天題/巻番号/未使用の4検証)'
 volumes:
 - number: 1
-  release_date: '1978-07'
+  release_date: 1978-07
+  isbn13: '9784253071000'
 - number: 2
-  release_date: '1978-08'
+  release_date: 1978-08
+  isbn13: '9784253071017'
 - number: 3
-  release_date: '1978-12'
+  release_date: 1978-12
+  isbn13: '9784253071024'
 - number: 4
   release_date: '1979-06-05'
+  isbn13: '9784253071031'
 - number: 5
   isbn13: '9784253071048'
   release_date: '1979-08-20'
@@ -33,16 +37,16 @@ extra_editions:
   volumes:
   - number: 1
     isbn13: '9784253102933'
-    release_date: '1989-10'
+    release_date: 1989-10
   - number: 2
     isbn13: '9784253102940'
-    release_date: '1989-12'
+    release_date: 1989-12
   - number: 3
     isbn13: '9784253102957'
-    release_date: '1990-02'
+    release_date: 1990-02
   - number: 4
     isbn13: '9784253102964'
-    release_date: '1990-04'
+    release_date: 1990-04
 - type: bunkobon
   label: 秋田文庫
   imprint: 秋田文庫
@@ -50,13 +54,13 @@ extra_editions:
   volumes:
   - number: 1
     isbn13: '9784253171281'
-    release_date: '1995-06'
+    release_date: 1995-06
   - number: 2
     isbn13: '9784253171298'
-    release_date: '1995-06'
+    release_date: 1995-06
   - number: 3
     isbn13: '9784253171304'
-    release_date: '1995-06'
+    release_date: 1995-06
 - type: shinsoban
   label: Princess comics alpha
   imprint: Princess comics alpha
@@ -64,13 +68,13 @@ extra_editions:
   volumes:
   - number: 1
     isbn13: '9784253195478'
-    release_date: '2014-05'
+    release_date: 2014-05
   - number: 2
     isbn13: '9784253195485'
-    release_date: '2014-06'
+    release_date: 2014-06
   - number: 3
     isbn13: '9784253195492'
-    release_date: '2014-07'
+    release_date: 2014-07
   - number: 4
     isbn13: '9784253195508'
-    release_date: '2014-08'
+    release_date: 2014-08

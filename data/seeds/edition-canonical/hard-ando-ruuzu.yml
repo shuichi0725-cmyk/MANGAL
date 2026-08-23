@@ -2,19 +2,20 @@ slug: hard-ando-ruuzu
 canonical_label: 通常版
 canonical_publisher: 双葉社
 canonical_imprint: アクション・コミックス
-source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。'
+source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。 ★ISBN補充1巻 2026-08-24(partial-isbn-gap半自動: 帯/楽天題/巻番号/未使用の4検証)'
 volumes:
 - number: 1
   release_date: '1984-05-19'
+  isbn13: '9784575810837'
 - number: 2
   isbn13: '9784575810844'
-  release_date: '1985-02'
+  release_date: 1985-02
 - number: 3
   isbn13: '9784575810851'
-  release_date: '1985-10'
+  release_date: 1985-10
 - number: 6
   isbn13: '9784575810882'
-  release_date: '1987-03'
+  release_date: 1987-03
 extra_editions:
 - type: shinsoban
   label: アクションコミックス
@@ -23,16 +24,16 @@ extra_editions:
   volumes:
   - number: 1
     isbn13: '9784575818680'
-    release_date: '1993-05'
+    release_date: 1993-05
   - number: 2
     isbn13: '9784575818758'
-    release_date: '1993-06'
+    release_date: 1993-06
   - number: 4
     isbn13: '9784575818895'
-    release_date: '1993-08'
+    release_date: 1993-08
   - number: 7
     isbn13: '9784575819106'
-    release_date: '1993-11'
+    release_date: 1993-11
 - type: shinsoban
   label: アリババコミックス
   imprint: アリババコミックス
@@ -40,16 +41,16 @@ extra_editions:
   volumes:
   - number: 1
     isbn13: '9784418031672'
-    release_date: '2004-01'
+    release_date: 2004-01
   - number: 2
     isbn13: '9784418041015'
-    release_date: '2004-02'
+    release_date: 2004-02
   - number: 3
     isbn13: '9784418041084'
-    release_date: '2004-03'
+    release_date: 2004-03
   - number: 4
     isbn13: '9784418041176'
-    release_date: '2004-04'
+    release_date: 2004-04
 - type: shinsoban
   label: Sebunコミックス
   imprint: Sebunコミックス
@@ -57,16 +58,16 @@ extra_editions:
   volumes:
   - number: 1
     isbn13: '9784418995196'
-    release_date: '1999-06'
+    release_date: 1999-06
   - number: 2
     isbn13: '9784418995202'
-    release_date: '1999-07'
+    release_date: 1999-07
   - number: 3
     isbn13: '9784418995257'
-    release_date: '1999-08'
+    release_date: 1999-08
   - number: 4
     isbn13: '9784418995301'
-    release_date: '1999-09'
+    release_date: 1999-09
 - type: shinsoban
   label: アクション・コミックス(1984)
   imprint: アクション・コミックス
@@ -76,9 +77,9 @@ extra_editions:
     release_date: '1984-05-19'
   - number: 4
     isbn13: '9784575810868'
-    release_date: '1986-05'
+    release_date: 1986-05
   - number: 5
-    release_date: '1986-09'
+    release_date: 1986-09
   - number: 7
     isbn13: '9784575813999'
-    release_date: '1987-08'
+    release_date: 1987-08

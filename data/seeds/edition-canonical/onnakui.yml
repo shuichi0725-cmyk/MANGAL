@@ -2,7 +2,7 @@ slug: onnakui
 canonical_label: 通常版
 canonical_publisher: 芳文社
 canonical_imprint: 芳文社コミックス
-source: 'ギャラ型(ISBN消えるクラス) 2026-08-17: 芳文社コミックス v1-10(種2+頁孤児v9+楽天日付で完備)。v2枠を占有していた芳文社マイパルコミックス(2003)=コンビニ判で不収載'
+source: 'ギャラ型(ISBN消えるクラス) 2026-08-17: 芳文社コミックス v1-10(種2+頁孤児v9+楽天日付で完備)。v2枠を占有していた芳文社マイパルコミックス(2003)=コンビニ判で不収載 ★ISBN補充1巻 2026-08-24(partial-isbn-gap半自動: 帯/楽天題/巻番号/未使用の4検証)'
 volumes:
 - number: 1
   isbn13: '9784832227132'
@@ -18,7 +18,7 @@ volumes:
   release_date: '1995-09-19'
 - number: 5
   isbn13: '9784832227392'
-  release_date: '1995-12'
+  release_date: 1995-12
 - number: 6
   isbn13: '9784832227422'
   release_date: '1996-01-19'
@@ -27,9 +27,10 @@ volumes:
   release_date: '1996-03-29'
 - number: 8
   isbn13: '9784832227514'
-  release_date: '1996-06'
+  release_date: 1996-06
 - number: 9
   isbn13: '9784832227545'
   release_date: '1996-08-23'
 - number: 10
   release_date: '1996-11-05'
+  isbn13: '9784832227569'

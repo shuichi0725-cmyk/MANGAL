@@ -2,12 +2,14 @@ slug: monokage-ni-ashibyoushi
 canonical_label: 通常版
 canonical_publisher: 実業之日本社
 canonical_imprint: マンサンコミックス
-source: 'ギャラ型(ISBN消えるクラス) 2026-08-17: マンサン原版(1989-91)v1-4をmainに。同一editionの1998年新装4冊(ISBN 4618-4649連番)をタブへ分離。マンサンQコミックス(2005)=コンビニ判で不収載'
+source: 'ギャラ型(ISBN消えるクラス) 2026-08-17: マンサン原版(1989-91)v1-4をmainに。同一editionの1998年新装4冊(ISBN 4618-4649連番)をタブへ分離。マンサンQコミックス(2005)=コンビニ判で不収載 ★ISBN補充2巻 2026-08-24(partial-isbn-gap半自動: 帯/楽天題/巻番号/未使用の4検証)'
 volumes:
 - number: 1
   release_date: '1989-03-20'
+  isbn13: '9784408160979'
 - number: 2
   release_date: '1989-02-25'
+  isbn13: '9784408160986'
 - number: 3
   isbn13: '9784408160993'
   release_date: '1990-01-12'
@@ -22,13 +24,13 @@ extra_editions:
   volumes:
   - number: 3
     isbn13: '9784408164632'
-    release_date: '1998-12'
+    release_date: 1998-12
   - number: 4
     isbn13: '9784408164649'
-    release_date: '1998-12'
+    release_date: 1998-12
   - number: 2
     isbn13: '9784408164625'
-    release_date: '1998-12'
+    release_date: 1998-12
   - number: 1
     isbn13: '9784408164618'
-    release_date: '1998-12'
+    release_date: 1998-12

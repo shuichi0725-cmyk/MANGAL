@@ -2,26 +2,35 @@ slug: the-rapeman
 canonical_label: 通常版
 canonical_publisher: リイド社
 canonical_imprint: SPコミックス
-source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。'
+source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。 ★ISBN補充9巻 2026-08-24(partial-isbn-gap半自動: 帯/楽天題/巻番号/未使用の4検証)'
 volumes:
 - number: 1
   release_date: '1986-05-05'
+  isbn13: '9784845805419'
 - number: 2
   release_date: null
+  isbn13: '9784845805426'
 - number: 3
   release_date: null
+  isbn13: '9784845805433'
 - number: 4
   release_date: null
+  isbn13: '9784845805440'
 - number: 5
   release_date: null
+  isbn13: '9784845805457'
 - number: 6
-  release_date: '1987-08'
+  release_date: 1987-08
+  isbn13: '9784845805464'
 - number: 7
   release_date: null
+  isbn13: '9784845805471'
 - number: 8
   release_date: null
+  isbn13: '9784845805488'
 - number: 9
   release_date: null
+  isbn13: '9784845805495'
 - number: 10
   isbn13: '9784845805501'
   release_date: null

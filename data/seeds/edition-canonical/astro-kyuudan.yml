@@ -4,7 +4,7 @@ canonical_publisher: 集英社
 canonical_imprint: ジャンプ・コミックス
 suppress_types:
 - bunkobon
-source: 'ギャラ型(ISBN消えるクラス) 2026-08-17: ジャンプ・コミックス原版(1973-76・ISBN無)v1-19をmainに復元(v4枠にJCセレクション1986が食い込み逆行)。孤児v4 ISBN=セレクション帯連番(0330-0354の間)で同runへ添付。太田出版版(1999)・集英社漫画文庫(1978-79)をタブ化'
+source: 'ギャラ型(ISBN消えるクラス) 2026-08-17: ジャンプ・コミックス原版(1973-76・ISBN無)v1-19をmainに復元(v4枠にJCセレクション1986が食い込み逆行)。孤児v4 ISBN=セレクション帯連番(0330-0354の間)で同runへ添付。太田出版版(1999)・集英社漫画文庫(1978-79)をタブ化 ★ISBN補充4巻 2026-08-24(partial-isbn-gap半自動: 帯/楽天題/巻番号/未使用の4検証)'
 volumes:
 - number: 1
   release_date: '1973-11-30'
@@ -19,11 +19,11 @@ volumes:
 - number: 6
   release_date: '1974-09-30'
 - number: 7
-  release_date: '1974-10'
+  release_date: 1974-10
 - number: 8
   release_date: '1974-12-31'
 - number: 9
-  release_date: '1975-02'
+  release_date: 1975-02
 - number: 10
   release_date: '1975-04-30'
 - number: 11
@@ -37,11 +37,11 @@ volumes:
 - number: 15
   release_date: '1976-03-31'
 - number: 16
-  release_date: '1976-06'
+  release_date: 1976-06
 - number: 17
-  release_date: '1976-08'
+  release_date: 1976-08
 - number: 18
-  release_date: '1976-10'
+  release_date: 1976-10
 - number: 19
   release_date: '1976-12-31'
 extra_editions:
@@ -67,70 +67,74 @@ extra_editions:
     release_date: '1986-07-24'
   - number: 6
     release_date: '1986-08-24'
+    isbn13: '9784834210361'
   - number: 7
     release_date: '1986-09-24'
+    isbn13: '9784834210378'
   - number: 8
     release_date: '1986-10-24'
+    isbn13: '9784834210385'
   - number: 11
     release_date: '1987-01-24'
+    isbn13: '9784834210415'
 - type: shinsoban
   label: 太田出版版(1999)
   publisher: 太田出版
   volumes:
   - number: 4
     isbn13: '9784872334616'
-    release_date: '1999-07'
+    release_date: 1999-07
   - number: 3
     isbn13: '9784872334609'
-    release_date: '1999-06'
+    release_date: 1999-06
   - number: 2
     isbn13: '9784872334555'
     release_date: '1999-04-24'
   - number: 1
     isbn13: '9784872334456'
-    release_date: '1999-03'
+    release_date: 1999-03
 - type: bunkobon
   label: 集英社漫画文庫(1978)
   imprint: 集英社漫画文庫
   publisher: 集英社
   volumes:
   - number: 1
-    release_date: '1978-03'
+    release_date: 1978-03
   - number: 2
-    release_date: '1978-04'
+    release_date: 1978-04
   - number: 3
-    release_date: '1978-05'
+    release_date: 1978-05
   - number: 4
-    release_date: '1978-05'
+    release_date: 1978-05
   - number: 5
-    release_date: '1978-06'
+    release_date: 1978-06
   - number: 6
-    release_date: '1978-06'
+    release_date: 1978-06
   - number: 7
-    release_date: '1978-07'
+    release_date: 1978-07
   - number: 8
-    release_date: '1978-07'
+    release_date: 1978-07
   - number: 9
-    release_date: '1978-08'
+    release_date: 1978-08
   - number: 10
-    release_date: '1978-08'
+    release_date: 1978-08
   - number: 11
-    release_date: '1978-09'
+    release_date: 1978-09
   - number: 12
-    release_date: '1978-09'
+    release_date: 1978-09
   - number: 13
-    release_date: '1978-10'
+    release_date: 1978-10
   - number: 14
-    release_date: '1978-10'
+    release_date: 1978-10
   - number: 15
-    release_date: '1978-11'
+    release_date: 1978-11
   - number: 16
-    release_date: '1978-11'
+    release_date: 1978-11
   - number: 17
-    release_date: '1978-12'
+    release_date: 1978-12
   - number: 18
-    release_date: '1978-12'
+    release_date: 1978-12
   - number: 19
-    release_date: '1979-01'
+    release_date: 1979-01
   - number: 20
-    release_date: '1979-01'
+    release_date: 1979-01

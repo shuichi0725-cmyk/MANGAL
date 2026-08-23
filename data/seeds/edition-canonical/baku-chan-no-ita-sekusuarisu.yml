@@ -4,22 +4,23 @@ canonical_publisher: 集英社
 canonical_imprint: SGコミックス
 suppress_types:
 - bunkobon
-source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。'
+source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。 ★ISBN補充1巻 2026-08-24(partial-isbn-gap半自動: 帯/楽天題/巻番号/未使用の4検証)'
 volumes:
 - number: 1
   isbn13: '9784088550046'
-  release_date: '1989-09'
+  release_date: 1989-09
 - number: 2
   isbn13: '9784088550121'
-  release_date: '1989-11'
+  release_date: 1989-11
 - number: 3
   isbn13: '9784088550190'
-  release_date: '1989-12'
+  release_date: 1989-12
 - number: 4
   isbn13: '9784088550244'
-  release_date: '1990-01'
+  release_date: 1990-01
 - number: 5
   release_date: '1990-02-10'
+  isbn13: '9784088550282'
 extra_editions:
 - type: bunkobon
   label: 集英社文庫
@@ -27,9 +28,9 @@ extra_editions:
   publisher: 集英社
   volumes:
   - number: 1
-    release_date: '1980-09'
+    release_date: 1980-09
   - number: 2
-    release_date: '1980-09'
+    release_date: 1980-09
   - number: 3
     release_date: '1981-06-15'
   - number: 4
@@ -52,7 +53,7 @@ extra_editions:
     release_date: '1997-07-28'
   - number: 2
     isbn13: '9784087850314'
-    release_date: '1997-07'
+    release_date: 1997-07
   - number: 3
     isbn13: '9784087850338'
     release_date: '1997-08-27'

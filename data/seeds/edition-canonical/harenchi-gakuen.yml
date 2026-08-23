@@ -4,34 +4,34 @@ canonical_publisher: 集英社
 canonical_imprint: ジャンプ・コミックス
 suppress_types:
 - bunkobon
-source: 'ギャラ型是正 2026-08-17(worksheetのA_SPLIT_WORK?判定だが実体はB型): 通常版タブに1969-74年の初出ジャンプ・コミックス(全13巻)・1986年KCスペシャル・2003年KPC・2007-08年ヤングジャンプ・コミックスBJ・2018年BIG COMICS SPECIALが混線し、1巻2018-07→7巻1970-12-31の48年逆行になっていた。初出全13巻を主版に戻し、他はextra_editionsへ。文庫タブは集英社漫画文庫(1976-77 全12巻)と徳間コミック文庫(1995 3巻)が混ざっていたので suppress_types で版ごとに作り直した。'
+source: 'ギャラ型是正 2026-08-17(worksheetのA_SPLIT_WORK?判定だが実体はB型): 通常版タブに1969-74年の初出ジャンプ・コミックス(全13巻)・1986年KCスペシャル・2003年KPC・2007-08年ヤングジャンプ・コミックスBJ・2018年BIG COMICS SPECIALが混線し、1巻2018-07→7巻1970-12-31の48年逆行になっていた。初出全13巻を主版に戻し、他はextra_editionsへ。文庫タブは集英社漫画文庫(1976-77 全12巻)と徳間コミック文庫(1995 3巻)が混ざっていたので suppress_types で版ごとに作り直した。 ★ISBN補充6巻 2026-08-24(partial-isbn-gap半自動: 帯/楽天題/巻番号/未使用の4検証)'
 volumes:
-  - number: 1
-    release_date: '1969-11'
-  - number: 2
-    release_date: '1969-11-30'
-  - number: 3
-    release_date: '1970-01-31'
-  - number: 4
-    release_date: '1970-05-31'
-  - number: 5
-    release_date: '1970-08-31'
-  - number: 6
-    release_date: '1970-09-30'
-  - number: 7
-    release_date: '1970-12-31'
-  - number: 8
-    release_date: '1971-02-28'
-  - number: 9
-    release_date: '1971-04-30'
-  - number: 10
-    release_date: '1972-06-30'
-  - number: 11
-    release_date: '1972-08-31'
-  - number: 12
-    release_date: '1972-12-30'
-  - number: 13
-    release_date: '1974-12-31'
+- number: 1
+  release_date: 1969-11
+- number: 2
+  release_date: '1969-11-30'
+- number: 3
+  release_date: '1970-01-31'
+- number: 4
+  release_date: '1970-05-31'
+- number: 5
+  release_date: '1970-08-31'
+- number: 6
+  release_date: '1970-09-30'
+- number: 7
+  release_date: '1970-12-31'
+- number: 8
+  release_date: '1971-02-28'
+- number: 9
+  release_date: '1971-04-30'
+- number: 10
+  release_date: '1972-06-30'
+- number: 11
+  release_date: '1972-08-31'
+- number: 12
+  release_date: '1972-12-30'
+- number: 13
+  release_date: '1974-12-31'
 extra_editions:
 - type: shinsoban
   label: KCスペシャル(講談社)
@@ -40,19 +40,25 @@ extra_editions:
   volumes:
   - number: 1
     release_date: '1986-03-06'
+    isbn13: '9784061012110'
   - number: 2
     isbn13: '9784061012127'
     release_date: '1986-04-05'
   - number: 3
     release_date: '1986-05-06'
+    isbn13: '9784061012134'
   - number: 4
     release_date: '1986-06-06'
+    isbn13: '9784061012141'
   - number: 5
     release_date: '1986-07-05'
+    isbn13: '9784061012158'
   - number: 6
     release_date: '1986-08-06'
+    isbn13: '9784061012165'
   - number: 7
     release_date: '1986-09-06'
+    isbn13: '9784061012172'
 - type: other
   label: KPC(講談社)
   imprint: KPC
@@ -60,10 +66,10 @@ extra_editions:
   volumes:
   - number: 1
     isbn13: '9784063530551'
-    release_date: '2003-05'
+    release_date: 2003-05
   - number: 2
     isbn13: '9784063530698'
-    release_date: '2003-06'
+    release_date: 2003-06
 - type: other
   label: ヤングジャンプ・コミックスBJ
   imprint: ヤングジャンプ・コミックスBJ
@@ -71,13 +77,13 @@ extra_editions:
   volumes:
   - number: 1
     isbn13: '9784088773162'
-    release_date: '2007-08'
+    release_date: 2007-08
   - number: 2
     isbn13: '9784088773995'
-    release_date: '2008-02'
+    release_date: 2008-02
   - number: 3
     isbn13: '9784088774497'
-    release_date: '2008-06'
+    release_date: 2008-06
 - type: shinsoban
   label: BIG COMICS SPECIAL(小学館)
   imprint: BIG COMICS SPECIAL
@@ -85,51 +91,51 @@ extra_editions:
   volumes:
   - number: 1
     isbn13: '9784098600243'
-    release_date: '2018-07'
+    release_date: 2018-07
   - number: 2
     isbn13: '9784098600250'
-    release_date: '2018-07'
+    release_date: 2018-07
   - number: 3
     isbn13: '9784098600267'
-    release_date: '2018-08'
+    release_date: 2018-08
   - number: 4
     isbn13: '9784098600274'
-    release_date: '2018-08'
+    release_date: 2018-08
   - number: 5
     isbn13: '9784098600281'
-    release_date: '2018-09'
+    release_date: 2018-09
   - number: 6
     isbn13: '9784098600298'
-    release_date: '2018-09'
+    release_date: 2018-09
 - type: bunkobon
   label: 文庫版(集英社漫画文庫)
   imprint: 集英社漫画文庫
   publisher: 集英社
   volumes:
   - number: 1
-    release_date: '1976-11'
+    release_date: 1976-11
   - number: 2
-    release_date: '1976-11'
+    release_date: 1976-11
   - number: 3
-    release_date: '1976-11'
+    release_date: 1976-11
   - number: 4
-    release_date: '1976-11'
+    release_date: 1976-11
   - number: 5
-    release_date: '1976-12'
+    release_date: 1976-12
   - number: 6
     release_date: '1976-12-31'
   - number: 7
-    release_date: '1977-01'
+    release_date: 1977-01
   - number: 8
-    release_date: '1977-01'
+    release_date: 1977-01
   - number: 9
-    release_date: '1977-02'
+    release_date: 1977-02
   - number: 10
-    release_date: '1977-03'
+    release_date: 1977-03
   - number: 11
-    release_date: '1977-04'
+    release_date: 1977-04
   - number: 12
-    release_date: '1977-05'
+    release_date: 1977-05
 - type: bunkobon
   label: 文庫版(徳間コミック文庫)
   imprint: 徳間コミック文庫
@@ -137,4 +143,4 @@ extra_editions:
   volumes:
   - number: 3
     isbn13: '9784199020230'
-    release_date: '1995-05'
+    release_date: 1995-05

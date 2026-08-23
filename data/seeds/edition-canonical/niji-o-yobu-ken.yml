@@ -2,23 +2,29 @@ slug: niji-o-yobu-ken
 canonical_label: 通常版
 canonical_publisher: 秋田書店
 canonical_imprint: サンデー・コミックス
-source: 'ギャラ型B是正 2026-08-17: サンデー・コミックス(秋田書店)。1-5はNDL一致(v1のISBNをNDLから補完)、6-7はMADBのみ(同日1977-04-30・NDL不在だが不在≠不存在で保守的に保持) / 復刻=マンガショップ全4巻(2007)'
+source: 'ギャラ型B是正 2026-08-17: サンデー・コミックス(秋田書店)。1-5はNDL一致(v1のISBNをNDLから補完)、6-7はMADBのみ(同日1977-04-30・NDL不在だが不在≠不存在で保守的に保持) / 復刻=マンガショップ全4巻(2007) ★ISBN補充6巻 2026-08-24(partial-isbn-gap半自動: 帯/楽天題/巻番号/未使用の4検証)'
 volumes:
 - number: 1
   isbn13: '9784253061629'
   release_date: '1970-02-05'
 - number: 2
   release_date: '1970-06-10'
+  isbn13: '9784253061636'
 - number: 3
   release_date: '1970-09-10'
+  isbn13: '9784253061643'
 - number: 4
   release_date: '1971-03-05'
+  isbn13: '9784253061650'
 - number: 5
   release_date: '1972-05-10'
+  isbn13: '9784253061667'
 - number: 6
   release_date: '1977-04-30'
+  isbn13: '9784253061674'
 - number: 7
   release_date: '1977-04-30'
+  isbn13: '9784253061681'
 extra_editions:
 - type: shinsoban
   label: 復刻版(マンガショップ)

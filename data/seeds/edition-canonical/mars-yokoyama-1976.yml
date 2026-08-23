@@ -4,21 +4,23 @@ canonical_publisher: 秋田書店
 canonical_imprint: SHONEN CHAMPION COMICS
 suppress_types:
 - bunkobon
-source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。'
+source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。 ★ISBN補充2巻 2026-08-24(partial-isbn-gap半自動: 帯/楽天題/巻番号/未使用の4検証)'
 volumes:
 - number: 1
   release_date: '1976-05-10'
+  isbn13: '9784253033930'
 - number: 2
   isbn13: '9784253033947'
-  release_date: '1976-12'
+  release_date: 1976-12
 - number: 3
-  release_date: '1977-02'
+  release_date: 1977-02
+  isbn13: '9784253033954'
 - number: 4
   isbn13: '9784253033961'
-  release_date: '1977-03'
+  release_date: 1977-03
 - number: 5
   isbn13: '9784253033978'
-  release_date: '1977-04'
+  release_date: 1977-04
 extra_editions:
 - type: shinsoban
   label: standard版
@@ -26,13 +28,13 @@ extra_editions:
   volumes:
   - number: 1
     isbn13: '9784253103008'
-    release_date: '1993-09'
+    release_date: 1993-09
   - number: 2
     isbn13: '9784253103015'
-    release_date: '1993-10'
+    release_date: 1993-10
   - number: 3
     isbn13: '9784253103022'
-    release_date: '1993-11'
+    release_date: 1993-11
 - type: shinsoban
   label: Akita top comics wide
   imprint: Akita top comics wide
@@ -40,12 +42,12 @@ extra_editions:
   volumes:
   - number: 1
     isbn13: '9784253240802'
-    release_date: '2005-11'
-    volume_label: '前編'
+    release_date: 2005-11
+    volume_label: 前編
   - number: 2
     isbn13: '9784253240819'
-    release_date: '2005-12'
-    volume_label: '後編'
+    release_date: 2005-12
+    volume_label: 後編
 - type: bunkobon
   label: 秋田文庫
   imprint: 秋田文庫

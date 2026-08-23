@@ -4,7 +4,7 @@ canonical_publisher: 講談社
 canonical_imprint: 手塚治虫漫画全集
 suppress_types:
 - bunkobon
-source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。'
+source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。 ★ISBN補充1巻 2026-08-24(partial-isbn-gap半自動: 帯/楽天題/巻番号/未使用の4検証)'
 volumes:
 - number: 1
   isbn13: '9784061759411'
@@ -42,16 +42,16 @@ extra_editions:
   volumes:
   - number: 1
     isbn13: '9784835457130'
-    release_date: '2020-01'
+    release_date: 2020-01
   - number: 2
     isbn13: '9784835457147'
-    release_date: '2020-03'
+    release_date: 2020-03
   - number: 3
     isbn13: '9784835457154'
-    release_date: '2020-05'
+    release_date: 2020-05
   - number: 4
     isbn13: '9784835457161'
-    release_date: '2020-07'
+    release_date: 2020-07
 - type: bunkobon
   label: 手塚治虫文庫全集
   imprint: 手塚治虫文庫全集
@@ -59,13 +59,13 @@ extra_editions:
   volumes:
   - number: 1
     isbn13: '9784063738445'
-    release_date: '2011-08'
+    release_date: 2011-08
   - number: 2
     isbn13: '9784063738452'
-    release_date: '2011-08'
+    release_date: 2011-08
   - number: 3
     isbn13: '9784063738469'
-    release_date: '2011-08'
+    release_date: 2011-08
 - type: shinsoban
   label: Akita top comics wide
   imprint: Akita top comics wide
@@ -73,12 +73,12 @@ extra_editions:
   volumes:
   - number: 1
     isbn13: '9784253247146'
-    release_date: '2016-08'
-    volume_label: '第1幕'
+    release_date: 2016-08
+    volume_label: 第1幕
   - number: 2
     isbn13: '9784253247153'
-    release_date: '2016-09'
-    volume_label: '第2幕'
+    release_date: 2016-09
+    volume_label: 第2幕
 - type: shinsoban
   label: 少年チャンピオン・コミックス
   imprint: 少年チャンピオン・コミックス
@@ -86,26 +86,27 @@ extra_editions:
   volumes:
   - number: 7
     isbn13: '9784253038157'
-    release_date: '1982-10'
+    release_date: 1982-10
 - type: shinsoban
   label: SHONEN CHAMPION COMICS
   imprint: SHONEN CHAMPION COMICS
   publisher: 秋田書店
   volumes:
   - number: 1
-    release_date: '1981-09'
+    release_date: 1981-09
+    isbn13: '9784253038096'
   - number: 2
     isbn13: '9784253038102'
     release_date: '1981-11-05'
   - number: 3
     isbn13: '9784253038119'
-    release_date: '1982-01'
+    release_date: 1982-01
   - number: 4
     isbn13: '9784253038126'
-    release_date: '1982-04'
+    release_date: 1982-04
   - number: 6
     isbn13: '9784253038140'
-    release_date: '1982-08'
+    release_date: 1982-08
 - type: shinsoban
   label: Akita Bunko
   imprint: Akita Bunko
@@ -130,13 +131,13 @@ extra_editions:
   volumes:
   - number: 1
     isbn13: '9784253102223'
-    release_date: '1990-12'
+    release_date: 1990-12
   - number: 2
     isbn13: '9784253103350'
-    release_date: '1991-02'
+    release_date: 1991-02
   - number: 3
     isbn13: '9784253103367'
-    release_date: '1991-03'
+    release_date: 1991-03
   - number: 4
     isbn13: '9784253103374'
     release_date: '1992-06-30'
@@ -150,7 +151,7 @@ extra_editions:
   volumes:
   - number: 2
     isbn13: '9784253173384'
-    release_date: '1997-06'
+    release_date: 1997-06
 - type: shinsoban
   label: Goma books
   imprint: Goma books
@@ -158,7 +159,7 @@ extra_editions:
   volumes:
   - number: 0
     isbn13: '9784814919055'
-    release_date: '2019-02'
+    release_date: 2019-02
 - type: shinsoban
   label: Akita top comics
   imprint: Akita top comics
@@ -166,4 +167,4 @@ extra_editions:
   volumes:
   - number: 1
     isbn13: '9784253188425'
-    release_date: '2004-02'
+    release_date: 2004-02
