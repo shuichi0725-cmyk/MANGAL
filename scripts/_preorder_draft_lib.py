@@ -391,6 +391,13 @@ def make_slug(base, kana_raw=None, existing=None):
                 #   ラテン混じり題はヨミ経由で綴りが劣化する(「THE COMIC」→ザコミック→zakomikku /
                 #   「BanG Dream!」→バンドリ…)。その場合は題基点を残し、候補は下の簿に併記して人が裁く。
                 _has_latin = bool(re.search(r"[A-Za-z]", str(base)))
+                # ★2026-08-24 根治(ユーザ発見SLUG_MUSH30件): _fix側にも題側と同じ長さガードを通す
+                #   (それまでヨミ再構成slugは70字カット・語境界検査を素通りして80字塊が出荷されていた)。
+                if len(_fix) > 70:
+                    _cut = _fix[:70]
+                    if "-" in _cut[1:]:
+                        _cut = _cut[:_cut.rfind("-")]
+                    _fix = _cut.rstrip("-")
                 if len(_fix) >= 2 and not _has_latin and (existing is None or _fix not in existing):
                     slug = _fix
                 elif _fix != slug:
@@ -403,6 +410,11 @@ def make_slug(base, kana_raw=None, existing=None):
                             _f.write(f"{slug}\t{_fix}\t{base}\t{_k}\n")
                     except Exception:
                         pass
+    # ★無分割塊ガード最終形(2026-08-24 SLUG_MUSH根治): 全体無ハイフンだけでなく、
+    #   **ハイフン無しrunが15字以上**なら語境界消失(janome未知語連結)=自動で決められない→hold。
+    #   (isekairakurakumujintouraifu…型=先頭33字塊が後半のハイフンで旧ガードをすり抜けた)
+    if max((len(x) for x in slug.split("-")), default=0) >= 15:
+        return None
     if existing is not None and slug in existing:
         return None                             # 衝突=hold(-2026で誤魔化さない)
     return slug

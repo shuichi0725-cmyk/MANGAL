@@ -251,6 +251,42 @@ def main():
         fail("★理由なくISBNが本番から消えている(実在する巻を消した疑い)", _o9)
     print("       ※週次の最後に `python scripts/_audit-isbn-loss.py --snapshot` で基準を取り直す")
 
+    # 10. ★品質ベースライン番人(2026-08-24 ユーザGO⑤): publisher(unknown)とslug無分割塊の
+    #     **増加**を公開前に止める(蒸留以外の経路=per-case作業で入った同型も捕まえる)。
+    #     基準 = data/seeds/preflight-baselines.json(git)。改善で減った時は基準を自動で下げる。
+    try:
+        import json as _json
+        _bp = os.path.join(ROOT, "data", "seeds", "preflight-baselines.json")
+        _base = _json.load(open(_bp, encoding="utf-8")) if os.path.exists(_bp) else {}
+        _li = _json.load(open(os.path.join(ROOT, "data", "manga-list-index.json"), encoding="utf-8"))
+        _isl = _li["f"].index("slug")
+        _mush = sorted(s for s in (str(r[_isl]) for r in _li["d"])
+                       if max((len(x) for x in s.split("-")), default=0) >= 15 or len(s) >= 78)
+        import glob as _glob
+        _unk = 0
+        for _f in _glob.glob(os.path.join(ROOT, "data", "manga.v2", "*.yml")):
+            for _ln in open(_f, encoding="utf-8"):
+                if _ln.startswith("publisher:"):
+                    if "(unknown)" in _ln:
+                        _unk += 1
+                    break
+        _changed = False
+        for _k, _v in (("slug_mush", len(_mush)), ("publisher_unknown", _unk)):
+            _b = _base.get(_k)
+            if _b is None or _v < _b:
+                _base[_k] = _v
+                _changed = True
+                ok(f"品質基準 {_k} = {_v}(基準を{'初期化' if _b is None else '更新'})")
+            elif _v > _b:
+                fail(f"★{_k} が増加 {_b} → {_v}(公開前に是正する)",
+                     "slug_mush=題の切れ目でrename / publisher_unknown=cleanの正規パス差し替え漏れを疑う(月次skill罠)")
+            else:
+                ok(f"品質基準 {_k} = {_v}(基準内)")
+        if _changed:
+            _json.dump(_base, open(_bp, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
+    except Exception as _e:
+        warn(f"品質ベースライン番人を実行できず: {_e}")
+
     print(f"\n結果: FAIL {len(fails)} / WARN {len(warns)}")
     if fails:
         print("★ビルド開始禁止。上のFAILを直してから再実行。")

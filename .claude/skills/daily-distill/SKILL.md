@@ -69,6 +69,8 @@ B=NDL新着回収(納本済み過去分)。毎日でなくてよい(間隔が空
 | 9 | **検査**(下記チェックリスト) | 欠け>0なら原因調査 |
 | 10 | ★**prev確定**(処理完了の宣言) | `python scripts/_preorder-increment.py --commit-prev` ← full→prev昇格。**これ以外の方法でprevを触るな**。飛ばすと次回差分が壊れる |
 | 10.5 | ★**出荷前レビュー(ゲート)** | `python scripts/_preorder-review.py` ← **exit 0 まで push禁止**。下記で各行裁定 |
+| 10.7 | ★**保留頁の自動再訪**(2026-08-24新設③) | `python scripts/_preorder-refresh-held.py --limit 30` ← demographic/caption待ちで索引保留の予約由来頁を楽天再照会で埋める(捏造なし=返った時だけ)。touchedが出たら `_reflect-targeted.py --only <touched> --commit-only` |
+| 10.8 | ★**レビューシート生成→ユーザへ**(2026-08-24新設①) | `python scripts/_gen-review-sheet.py` → `.cache/review-sheet.html` をユーザに送付(SendUserFile render)。書影/出版社/slug/ジャンル/再録疑いを一覧色付け=1頁ずつ開かせない |
 | 11 | 索引+暦(**commit止め**) | `python scripts/_build-list-index.py .preview-data/manga .preview-data` ; `python scripts/_build-calendar.py .preview-data/manga public/calendar <当月>` ; `git add .preview-data public/calendar && git commit`(★**pushしない**) |
 | 12 | B NDL新着(任意) | `python scripts/_distill_daily.py --discover`→`--plan`→`--emit` ★**push前に済ませる**(Bもpreviewドラフトを作る=最後の1pushに同梱) |
 | 13 | ★**最後に1回だけpush** | `git push` ← 全工程(①〜B)完了後にここで**初めてpush**。Pagesビルドは1回だけ発火=追いpush回避([[reflect_protocol_fast]] NEVER)。中間で絶対pushしない |
