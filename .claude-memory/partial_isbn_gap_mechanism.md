@@ -27,3 +27,9 @@ SRC stemは死にキー=無警告不適用。slug-override頁11件が不着→�
 [[edition-overrides-key-is-public-slug]] と同族。edition-canonicalだけがSRC slugキーで逆。
 
 書影なしの正当ケース: 楽天noimage(双葉社がきデカ/豪華版)=アフィ元画像のみ原則で書影なしが正。
+## canonical層も適用済(2026-08-24 ユーザGO)
+- fixerに--applyのcanonical直書きを実装(sink=edition-canonical/<SRC stem>.yml本体・yaml往復+parse検証・#コメント入り4fileはskip対象)
+- 実績: **188巻/61ファイル**+通常fill10巻。クラス全体 2,179→**1,322巻**(528頁)
+- 書影は楽天live補充hit10のみ=残りは1970-80年代書で楽天に画像なし(アフィ元のみ原則=無書影が正)
+- 残1,322巻=帯非線形+楽天不在(ISBN制度以前の古書が主)+golgo文庫等の構造ずれ7巻(canonicalに空スロット無し=手動対象)
+
