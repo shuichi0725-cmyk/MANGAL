@@ -55,3 +55,4 @@ metadata:
 - 実績: 536key/543名を remove+credits(翻訳)へ、647頁再生成。谷川俊太郎(スヌーピー訳)/さくらももこ(訳書のみ)等はper-key設計で自作品は不変
 - ★残: 訳者しか著者記録が無い10頁(dog-man/中国劇画系/superman)=差し戻し済み。keyに原著者名があるものは正著者addのper-case候補(translator-author-sweep.tsv)
 - 月次: 蒸留後に再実行すれば新規流入を差分掃引できる(corrections済みはskip)
+- 監修/構成/編集マーカー掃引も完了(2026-08-24 汎用器=_sweep-role-authors.py・275key/276名・唯一著者ガードで(unknown)化0・dog-man=ピルキー復元)。残=解説者型226(マーカー無し=per-case)と[編]7,456(アンソロ編者=正当著者混在で未掃引)
