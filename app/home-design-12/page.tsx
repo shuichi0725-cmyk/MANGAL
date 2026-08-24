@@ -177,7 +177,10 @@ export default function Design12() {
 
       <section className="mt-4 px-4">
         <Tile className="p-3.5">
-          <h2 className="dot-heading text-[14px] font-bold">📦 今月の新刊</h2>
+          <div className="flex items-baseline justify-between">
+            <h2 className="dot-heading text-[14px] font-bold">📦 今月の新刊</h2>
+            <Link href="/shinkan" className="spring-press text-[11px] font-bold text-[var(--color-accent)]">全部見る →</Link>
+          </div>
           <MonthReleasesClient
             pool={thisMonthReleases(manga, byNew, 60).map((r) => ({
               slug: r.m.slug,
