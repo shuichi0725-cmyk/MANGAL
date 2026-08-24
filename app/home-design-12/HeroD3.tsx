@@ -16,6 +16,9 @@ function warmIndex(): void {
   fetch("/manga-list-index.json").then((r) => r.blob()).catch(() => {
     _warmed = false; // 失敗時は再試行可
   });
+  // ★/browse文書も先読み(2026-08-24): GETフォーム遷移=フルページロードなので、
+  //   HTML自体をHTTP/エッジキャッシュに温めておく(索引JSONだけでは遷移の初手が冷えたまま)。
+  fetch("/browse").then((r) => r.blob()).catch(() => {});
 }
 function warmIndexIdle(): void {
   type NetInfo = { saveData?: boolean; effectiveType?: string };
