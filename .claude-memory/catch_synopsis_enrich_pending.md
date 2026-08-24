@@ -22,3 +22,7 @@ metadata:
 
 ## 関連
 [[genre_from_rakuten_story_plan]](楽天あらすじ→ジャンル生成の前例)/[[tagless_coverage_next]]/[[monthly_intake_reality]]。
+
+## 追補2026-08-24: 「synopsis未訳9千件」の正体判明+和訳エンリッチskill新設
+- 未訳9,158の内訳=素材ゼロ(AniList desc無/短)8,808+注記のみ222+**和訳可はわずか128**。巨大バックログではなく月次dump更新後の小さなdelta仕事だった
+- skill **wayaku-enrich**(「和訳エンリッチして」)新設・初回117件適用済(seed 39,703・上書き0)。楽天caption柱(エンリッチして)とは別柱
