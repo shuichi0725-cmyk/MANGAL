@@ -24,6 +24,7 @@ python scripts/_build-calendar.py data/manga.v2 data/calendar <当月YYYY-MM>   
 python scripts/_build-calendar.py .preview-data/manga public/calendar <当月>  # preview版(src=preview自身)
 # ★引数なし実行は禁止(2026-07-13実害): 既定out=public/calendarにフル版が書かれ、本番overlay元のdata/calendarは古いまま
 #   =本番カレンダーが前週のまま stale。しかも生成器は古い月ファイルを消さないので、srcを替える時は out を rm -rf してから。
+python scripts/_gen-shinkan-data.py          # ★/shinkan(新刊全冊一覧頁 2026-08-25新設)の月別データ5ヶ月分(カレンダー再生成の後に)
 python scripts/_gen-corner-stocks.py         # 三世代/featured stock JSON
 python scripts/_gen-daily-feature.py         # 日替わり特集stock補充(+45日先まで。既存日は凍結=触らない)
 python scripts/_gen-corner-auto.py           # 周年/豪華版 JSON(66k走査 ~5分)
