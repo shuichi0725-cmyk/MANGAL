@@ -33,7 +33,7 @@ export default function AnniversaryDaily() {
   return (
     <section className="mt-4 px-4">
       <div className="rounded-xl border border-[var(--color-line)] bg-[var(--color-surface)] p-3.5 shadow-sm">
-        <h2 className="text-[14px] font-extrabold">
+        <h2 className="dot-heading text-[14px] font-extrabold">
           🎂 今日で{pick.n}周年
           <span className="ml-1.5 text-[10px] font-semibold text-ink/45">1巻発売 {pick.y}年{mmdd.replace("-", "月")}日</span>
         </h2>

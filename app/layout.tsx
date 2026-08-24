@@ -5,6 +5,7 @@ import "./globals.css";
 import ScrollTopButton from "@/components/ScrollTopButton";
 import GlobalDragScroll from "@/components/GlobalDragScroll";
 import SiteHeader from "@/components/SiteHeader";
+import { dotGothic } from "@/lib/fonts";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://mangal-db.com"),
@@ -23,7 +24,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="ja">
-      <body className="min-h-screen flex flex-col theme-d3">
+      <body className={`min-h-screen flex flex-col theme-d3 ${dotGothic.variable}`}>
         {/* PCマウスの横ドラッグを全横帯のスワイプ相当に変換(タッチは不介入) */}
         <GlobalDragScroll />
         {/* 共通ヘッダー(SiteHeader=client): ★ホームでは非表示 = Design12のE型ステータスバーが代替

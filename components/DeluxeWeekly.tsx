@@ -25,7 +25,7 @@ export default function DeluxeWeekly() {
   return (
     <section className="mt-4 px-4">
       <div className="rounded-xl border border-[var(--color-line)] bg-[var(--color-surface)] p-3.5 shadow-sm">
-        <h2 className="text-[14px] font-extrabold">
+        <h2 className="dot-heading text-[14px] font-extrabold">
           🎁 今週の特装版・限定版
           <span className="ml-1.5 text-[10px] font-semibold text-ink/45">週替わり</span>
         </h2>

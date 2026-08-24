@@ -7,4 +7,5 @@ export const dotGothic = DotGothic16({
   subsets: ["latin"],
   display: "swap",
   preload: false,
+  variable: "--font-dot",  // ★2026-08-24 ユーザ指示「無理なく適応できる所に展開」: .dot-heading(globals)が参照
 });

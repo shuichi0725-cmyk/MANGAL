@@ -129,7 +129,7 @@ export default function Design12() {
       {/* カテゴリ8枚(SVG線画・/browseのカテゴリカードと同じ行き先) */}
       <section className="mt-5 px-4">
         <div className="flex items-baseline gap-2.5">
-          <h2 className="text-[18px] font-black">カテゴリ</h2>
+          <h2 className="dot-heading text-[18px] font-black">カテゴリ</h2>
           <span className="text-[9px] font-extrabold tracking-[0.26em] text-ink/45">BROWSE BY</span>
         </div>
         <div className="mt-2.5 grid grid-cols-4 border-[3px] border-[var(--color-ink)] bg-[var(--color-surface)]">
@@ -177,7 +177,7 @@ export default function Design12() {
 
       <section className="mt-4 px-4">
         <Tile className="p-3.5">
-          <h2 className="text-[14px] font-bold">📦 今月の新刊</h2>
+          <h2 className="dot-heading text-[14px] font-bold">📦 今月の新刊</h2>
           <MonthReleasesClient
             pool={thisMonthReleases(manga, byNew, 60).map((r) => ({
               slug: r.m.slug,
@@ -194,7 +194,7 @@ export default function Design12() {
       <section className="mt-4 px-4">
         <Tile className="p-3.5">
           <div className="mb-1 flex items-baseline justify-between">
-            <h2 className="text-[14px] font-extrabold">📅 カレンダー</h2>
+            <h2 className="dot-heading text-[14px] font-extrabold">📅 カレンダー</h2>
             <span className="text-[10px] text-ink/45">今月〜3ヶ月先+未定</span>
           </div>
           <CalendarView />
@@ -228,7 +228,7 @@ export default function Design12() {
 
       <section className="mt-4 px-4">
         <Tile className="p-3.5">
-          <h2 className="border-l-4 border-[var(--color-accent)] pl-2.5 text-[14px] font-extrabold">
+          <h2 className="dot-heading border-l-4 border-[var(--color-accent)] pl-2.5 text-[14px] font-extrabold">
             特集: 週末で読み切る、全5巻以内の完結作
             <span className="ml-1.5 text-[10px] font-semibold text-ink/45">週替わり</span>
           </h2>

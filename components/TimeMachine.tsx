@@ -35,7 +35,7 @@ export default function TimeMachine() {
   return (
     <section className="mt-4 px-4">
       <div className="rounded-xl border border-[var(--color-line)] bg-[var(--color-surface)] p-3.5 shadow-sm">
-        <h2 className="text-[14px] font-extrabold">
+        <h2 className="dot-heading text-[14px] font-extrabold">
           🕰️ タイムマシン
           <span className="ml-1.5 text-[10px] font-semibold text-ink/45">◯年前の今日、発売</span>
         </h2>

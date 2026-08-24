@@ -29,7 +29,7 @@ export default function FeaturedDaily({ slot = 0 }: { slot?: number }) {
     <section className="mt-4 px-4">
       <div className="rounded-xl border border-[var(--color-line)] bg-[var(--color-surface)] p-3.5 shadow-sm">
         <div className="flex items-baseline justify-between">
-          <h2 className="text-[14px] font-extrabold">
+          <h2 className="dot-heading text-[14px] font-extrabold">
             📖 今日の一冊
             {isFirst && <span className="ml-1.5 text-[10px] font-semibold text-ink/45">{date}・毎日更新</span>}
           </h2>

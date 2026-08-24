@@ -283,6 +283,10 @@ input[type="search"]::-webkit-search-decoration {
 .theme-d3 .cat-emoji { display: none; }
 /* カテゴリ件数の色をホーム(案12=ライム)に統一(2026-08-12 ユーザ指摘: 検索面だけ灰白だった) */
 .theme-d3 .cat-count { color: var(--color-accent) !important; }
+/* ★ドット見出し(2026-08-24 ユーザ指示: ヒーローのDotGothicを無理なく展開)。
+   対象=ホームのセクション見出しに限定(本文/小さな文字には使わない=可読性優先)。 */
+.dot-heading { font-family: var(--font-dot), sans-serif; letter-spacing: 0.03em; }
+
 /* D3マーキー帯 */
 @keyframes d3-marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 .d3-marquee { display: inline-block; white-space: nowrap; animation: d3-marquee 28s linear infinite; }
