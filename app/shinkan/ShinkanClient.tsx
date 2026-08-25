@@ -108,7 +108,7 @@ export default function ShinkanClient() {
             )}
           </span>
           <span className="min-w-0">
-            <span className="line-clamp-2 text-[14px] font-bold leading-snug">
+            <span className="block text-[14px] font-bold leading-snug">
               {title}
               {vol ? <span className="ml-1 bg-[var(--color-accent)] px-1 text-[9.5px] font-black text-[#0d0d0d] align-[1px]">{vol}巻</span> : null}
               {vol === 1 ? <span className="ml-1 border border-[var(--color-accent)] px-1 text-[9px] font-black text-[var(--color-accent)] align-[1px]">新刊1巻</span> : null}
