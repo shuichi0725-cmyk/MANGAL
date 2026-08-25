@@ -92,26 +92,28 @@ export default function ShinkanClient() {
     const [slug, vol, title, cover, isbn, authors, publisher, imprint] = it;
     const amz = (isbn && amazonDpUrlFromIsbn13(isbn, AMZ_TAG)) ||
       amazonSearchUrl(`${title} ${vol ?? ""}`.trim(), AMZ_TAG);
+    // 表示150px高に合わせ楽天サムネイルを300x300へ格上げ(120/200のままだとぼやける)
+    const coverHi = cover ? cover.replace(/_ex=(120x120|200x200)/, "_ex=300x300") : null;
     const pubLine = [publisher, imprint].filter(Boolean).join("・");
     return (
-      <div className="flex items-center gap-2.5 border-b border-[#1d1d1d] px-3 py-1.5">
-        {/* 書影+題 → Amazon(参考サイト同型・アフィ) */}
-        <a href={amz} target="_blank" rel="nofollow sponsored noopener" className="spring-press flex min-w-0 flex-1 items-center gap-2.5" title={`${title} をAmazonで見る`}>
-          <span className="relative block h-[64px] w-[45px] shrink-0 overflow-hidden bg-[#1a1a1a]">
-            {cover ? (
+      <div className="flex items-center gap-3 border-b border-[#1d1d1d] px-3 py-2">
+        {/* 書影+題 → Amazon(参考サイト同型・アフィ。サイズも参考サイトの_SL160_相当=約105×150) */}
+        <a href={amz} target="_blank" rel="nofollow sponsored noopener" className="spring-press flex min-w-0 flex-1 items-center gap-3" title={`${title} をAmazonで見る`}>
+          <span className="relative block h-[150px] w-[105px] shrink-0 overflow-hidden bg-[#1a1a1a]">
+            {coverHi ? (
               // eslint-disable-next-line @next/next/no-img-element
-              <img src={cover} alt={title} loading="lazy" className="h-full w-full object-cover" />
+              <img src={coverHi} alt={title} loading="lazy" className="h-full w-full object-cover" />
             ) : (
-              <span className="flex h-full w-full items-center justify-center text-[8px] font-bold text-ink/40">NO IMG</span>
+              <span className="flex h-full w-full items-center justify-center text-[10px] font-bold text-ink/40">NO IMG</span>
             )}
           </span>
           <span className="min-w-0">
-            <span className="block truncate text-[13px] font-bold leading-snug">
+            <span className="line-clamp-2 text-[14px] font-bold leading-snug">
               {title}
               {vol ? <span className="ml-1 bg-[var(--color-accent)] px-1 text-[9.5px] font-black text-[#0d0d0d] align-[1px]">{vol}巻</span> : null}
               {vol === 1 ? <span className="ml-1 border border-[var(--color-accent)] px-1 text-[9px] font-black text-[var(--color-accent)] align-[1px]">新刊1巻</span> : null}
             </span>
-            <span className="mt-0.5 block truncate text-[10.5px] text-ink/55">
+            <span className="mt-1 block text-[11.5px] leading-relaxed text-ink/55">
               {authors}
               {authors && pubLine ? <span className="text-ink/30">|</span> : null}
               {pubLine ? <span className="ml-1 text-ink/45">{pubLine}</span> : null}
