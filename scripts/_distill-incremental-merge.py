@@ -18,11 +18,24 @@ import sys, os, sqlite3, shutil, json, importlib.util
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # 旧PCパス→動的導出(2026-07-21一括是正)
 APPLY = "--apply" in sys.argv
-AT = "2026-07-24"
+# ★AT/MANIFEST は実行時導出 (2026-08-26 是正: 旧=日付・release名の固定リテラルで、次回蒸留が
+#   前回の revert 用 manifest を上書きして消していた=保護策「単独commitで後revert可」の実データ喪失)
+import datetime as _dt
+AT = _dt.date.today().isoformat()
+_relf = f"{ROOT}/.cache/madb-last-release.txt"
+_rel = (open(_relf, encoding="utf-8").read().strip() if os.path.exists(_relf) else "unknown").replace("/", "-")
 args = [a for a in sys.argv[1:] if not a.startswith("--")]
 TEMP_DB = args[0] if args else f"{ROOT}/.cache/db-v2-1217-temp.sqlite"
 REAL_DB = f"{ROOT}/.cache/db-v2.sqlite"
-MANIFEST = f"{ROOT}/.cache/madb-distill/merge-manifest-1.2.18.json"
+MANIFEST = f"{ROOT}/.cache/madb-distill/merge-manifest-{_rel}-{AT}.json"
+# 同名manifestが既に在れば連番退避(同日・同release再実行でも前回分を消さない)
+if APPLY and os.path.exists(MANIFEST):
+    for _i in range(1, 99):
+        _alt = MANIFEST.replace(".json", f".prev{_i}.json")
+        if not os.path.exists(_alt):
+            shutil.move(MANIFEST, _alt)
+            print(f"既存manifest退避: {os.path.basename(_alt)}")
+            break
 
 
 def _load(modname, path):
@@ -44,7 +57,7 @@ def main():
     if not os.path.exists(TEMP_DB):
         print(f"✗ temp db 無: {TEMP_DB}"); sys.exit(1)
     if APPLY:
-        bak = f"{REAL_DB}.bak-distill-{AT}"
+        bak = f"{REAL_DB}.bak-distill-{_dt.datetime.now():%Y%m%d-%H%M%S}"
         shutil.copy2(REAL_DB, bak)
         print(f"backup: {bak}", flush=True)
     real = sqlite3.connect(REAL_DB); real.row_factory = sqlite3.Row

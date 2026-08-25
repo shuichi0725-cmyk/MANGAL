@@ -45,6 +45,9 @@ PY = sys.executable
 
 # stage 定義: (name, group, 説明, コマンド(scriptからの相対), mutates_db)
 STAGES = [
+    # ★先頭 = seed lint (2026-08-26 新設): parse死/台帳減少/巻台帳フィールド不正を入口で止める
+    ("seedlint", "madb", "seed健全性lint (parse死・純粋追加台帳の減少・種4フィールド不正 = abort)",
+        ["_check-seeds.py"], False),
     # --- 種2 (MADB) 派生層 ---
     ("volnum",  "madb", "巻番号復元 (cm101 schema:position から number=0 を正す、 1冊目消失防止)",
         ["_patch-volnum-from-cm101.py"], True),

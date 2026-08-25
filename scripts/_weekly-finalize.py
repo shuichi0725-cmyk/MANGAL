@@ -86,6 +86,84 @@ def main():
     if r.returncode != 0:
         die("疎通確認にFAILあり")
 
+    # 3.5 ★prune実証+台帳消し込み (2026-08-26 新設。旧=目視突合+手編集で、prune忘れ/消し込み忘れ
+    #     がWARN止まりだった): pending-r2-prune.jsonl の各slugを本番に実プローブし、
+    #     404/301=消えた→行を自動消し込み / 200=まだ生きている→prune未実施として abort。
+    import urllib.request, urllib.error
+
+    class _NoRedirect(urllib.request.HTTPRedirectHandler):
+        def redirect_request(self, *a, **k):
+            return None
+    _opener = urllib.request.build_opener(_NoRedirect)
+    _pp = os.path.join(ROOT, "data", "seeds", "pending-r2-prune.jsonl")
+    if os.path.exists(_pp):
+        _lines = open(_pp, encoding="utf-8").read().splitlines()
+        _rows = [(i, json.loads(l)) for i, l in enumerate(_lines)
+                 if l.strip() and not l.lstrip().startswith("#")]
+        _gone_idx, _alive = [], []
+        for _i, _d in _rows:
+            _slug = _d.get("slug")
+            if not _slug:
+                continue
+            try:
+                _rq = urllib.request.Request(f"https://mangal-db.com/manga/{_slug}",
+                                             headers={"User-Agent": "Mozilla/5.0 (mangal-finalize)"})
+                _st = _opener.open(_rq, timeout=30).status
+            except urllib.error.HTTPError as _e:
+                _st = _e.code
+            except Exception:
+                _st = None
+            if _st == 200:
+                _alive.append(_slug)
+            elif _st in (301, 302, 404, 410):
+                _gone_idx.append(_i)
+        if _alive:
+            die(f"prune待ち {len(_alive)} 頁がまだ本番200: {_alive[:5]} "
+                f"(r2-sync に --prune を付けたか/中止されていないか確認して再実行)")
+        if _gone_idx:
+            _keep = [l for i, l in enumerate(_lines) if i not in set(_gone_idx)]
+            open(_pp, "w", encoding="utf-8", newline="\n").write("\n".join(_keep) + ("\n" if _keep else ""))
+            print(f"  OK   prune実証: {len(_gone_idx)} 頁が本番から消滅 → 台帳から自動消し込み"
+                  f"(残 {len(_rows) - len(_gone_idx)})")
+        else:
+            print("  OK   prune待ち台帳: 消化対象なし")
+
+    # 3.7 ★edge cache purge (2026-08-26 機械化。旧=worker /api/purge を手で叩く前提で
+    #     「忘れると最長1週間前のまま配信」): 索引4本+data/*.json+calendar/*.json を購読purge。
+    _env = {}
+    for _name in (".env.local", ".env"):
+        _p = os.path.join(ROOT, _name)
+        if os.path.exists(_p):
+            for _ln in open(_p, encoding="utf-8"):
+                if "=" in _ln and not _ln.startswith("#"):
+                    _k, _v = _ln.split("=", 1)
+                    _env[_k.strip()] = _v.strip().strip('"').strip("'")
+    _token = _env.get("R2_PURGE_TOKEN", "")
+    if _token:
+        _paths = ["/manga-list-index.json", "/manga-list-head.json",
+                  "/manga-alt-index.json", "/manga-catch-index.json"]
+        for _sub in ("data", "calendar"):
+            _dirp = os.path.join(ROOT, "out", _sub)
+            if os.path.isdir(_dirp):
+                _paths += [f"/{_sub}/{f}" for f in os.listdir(_dirp) if f.endswith(".json")]
+        import time as _t
+        _purged, _pfail = 0, 0
+        for _i in range(0, len(_paths), 10):
+            try:
+                _rq = urllib.request.Request("https://mangal-db.com/api/purge", method="POST",
+                                             data=json.dumps({"paths": _paths[_i:_i + 10],
+                                                              "token": _token}).encode(),
+                                             headers={"content-type": "application/json",
+                                                      "User-Agent": "Mozilla/5.0"})
+                _purged += json.load(urllib.request.urlopen(_rq, timeout=60)).get("purged", 0)
+            except Exception:
+                _pfail += 1
+            _t.sleep(0.3)
+        print(f"  OK   edge purge: {len(_paths)}パス / purged {_purged} / 失敗batch {_pfail}"
+              + ("(失敗分は≤1日で自然失効)" if _pfail else ""))
+    else:
+        print("  WARN R2_PURGE_TOKEN 未設定 → purge省略(索引/カレンダーの旧キャッシュが最長1日残る)")
+
     # 4. marker
     h = subprocess.run(["git", "rev-parse", "HEAD"], capture_output=True, text=True).stdout.strip()
     if not h:
@@ -98,7 +176,15 @@ def main():
     if r.returncode != 0:
         die("_init-pages-manifest.py 失敗(markerは書いたがmanifest欠け=diff-deployが過剰検出する。再実行を)")
     print("  OK   pages-manifest初期化")
-    print("\n→ 週次蒸留finalize完了(marker+manifest確定。以後の差分反映はこの時点が基準)")
+
+    # 6. ★ISBN消失snapshot取り直し (2026-08-26 機械化。旧=skill散文で忘れると次週の監視が
+    #     先週消えた分を延々と報告し続ける): smoke全PASS後=本番確定後にここで基準を取る。
+    r = subprocess.run([sys.executable, os.path.join(ROOT, "scripts", "_audit-isbn-loss.py"), "--snapshot"])
+    if r.returncode != 0:
+        print("  WARN isbn-loss --snapshot 失敗(次週の監視基準が古いまま。手動で再実行を)")
+    else:
+        print("  OK   ISBN消失snapshot更新(次週の監視基準)")
+    print("\n→ 週次蒸留finalize完了(marker+manifest+snapshot確定。以後の差分反映はこの時点が基準)")
 
 
 if __name__ == "__main__":

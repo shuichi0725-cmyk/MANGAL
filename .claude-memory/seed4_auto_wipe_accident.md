@@ -12,7 +12,10 @@ metadata:
 
 **Why:** 種4-autoは「派生seed(再生成可能)」ではなく**蓄積資産**(日次の楽天予約zokkanの唯一の記録)。月次のintakeが派生seed再生成と一緒に扱うと消える。消失は誰にも見えない=監視だけが頼り。
 
-**How to apply:**
+**How to apply:** (★2026-08-26 GO実装で全部機械化済み)
+- 封鎖4層: ①_register-seed4-ndl.py=merge書込(縮小abort/backup/空入力保持) ②intake末尾isbnloss stage ③preflight seed4_auto_volumes減少FAIL ④clean鮮度ガード(Phase0+intake)
+- 汎用番人: _check-seeds.py(parse死/台帳減少/種4フィールド)=intake先頭stage+reflectゲート結線済
+- 完了判定: _monthly-postflight.py(週次側はfinalizeがprune実証+purge+snapshot自動)
 - 月次で種4-autoを全消し/再生成しない。retireは「ISBNが種2に実在する巻だけ」個別除去
 - 大きな蒸留後は `python scripts/_audit-isbn-loss.py` で理由なし消失0を確認(preflightに組込済)
 - 同事故の副産物として発見した型: ①**number=0の1巻が続巻到着で不可視化**(promoteの「number=0はnumbered巻があればskip」規則。泣かせたくて/エロゲ世界=種4巻1で復元) ②**スペシャルプライスパック(廉価再録)が主枠を奪う**(猫と竜=volume-exclude) ③続巻が著者名違いの別クラスタに落ちる(アラフォー賢者15-18=[[series_fragmentation_rootcause]])

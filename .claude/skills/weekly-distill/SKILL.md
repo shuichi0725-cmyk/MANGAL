@@ -99,31 +99,21 @@ npx wrangler deploy -c wrangler-r2.jsonc
   ②`--prune-max 3000` = 削除候補がこれを超えたら**削除中止**して報告のみ
   ③削除キーは実行前に `.cache/r2-pruned-<日時>.txt` へ必ず記録
 - 中止された時は一覧を確認し、意図した削除なら `--prune --prune-max <件数+100>` で再実行。
-- ★★**ISBN消失監視の締め**(2026-08-08 新設): R2同期まで終わったら最後に
-  `python scripts/_audit-isbn-loss.py --snapshot` で基準を取り直す。これを忘れると次週の監視が
-  「先週消えた分」を延々と報告し続ける。preflight(手順2)が前回基準との差分を見て、
-  **台帳に理由の無い消失を FAIL** にする(=実在する巻を黙って消した事故の検出)。
-- ★★**prune待ち台帳 `data/seeds/pending-r2-prune.jsonl` を必ず突合**(2026-08-08 新設・ユーザ指示
-  「週次蒸留するときにわかるように」)。per-case作業で**頁をdrop / slugをrename**すると、データ側は消えても
-  **R2の実体フォルダは残る**ので、その公開slugをこの台帳に積んである。preflight(手順2)が件数と一覧を
-  WARN で必ず表示するので、**r2-sync 後に `.cache/r2-pruned-<日時>.txt` に載ったか1件ずつ照合し、
-  載った行を台帳から消し込む**(載っていない=まだ公開されている)。台帳が空なら何もしなくてよい。
+- ★★**ISBN消失snapshot / prune待ち台帳の突合は finalize が自動実行**(2026-08-26 機械化):
+  finalize が ①台帳の各slugを本番へ実プローブ(200=prune未実施→**abort** / 404・301=消滅→**行を自動消し込み**)
+  ②smoke全PASS後に `_audit-isbn-loss.py --snapshot` で基準取り直し、まで面倒を見る。手動突合・手動snapshotは廃止。
 - ★**初回(2026-07-26以降の最初の週次)は約2,100キー削除**の見込み(孤児1,041頁×html+txt)= 正常。
 - 起動直後に**生存確認**(python の CPU 時間が伸びているか)。ログ0バイトでもハッシュ照合中は無言(10-25分)が正常。
 - スクリプトが .env.local から R2_* 自動読込・**本番索引 overlay(out/ ルートへ)+5MBガード**内蔵。
 - レイアウト級の変更(全頁共通部)があった週は全量PUT=正常。
-- ★**同期後にJSONのedge cache purge必須**(2026-07-13実害): workerのASSET系は `s-maxage=604800`=**エッジ7日**。
-  purgeしないと calendar/*.json・data/*-stock.json 等が最長1週間前のまま配信される(ユーザ画面が更新されない)。
-  purge = worker `/api/purge`(R2_PURGE_TOKEN認証、_deploy-differential.py step6 と同機構)。最低限
-  `/calendar/manifest.json`+`/calendar/release/*.json`(当月〜3ヶ月+beyond)+`/data/*.json` を対象に。
-  ★**ルート索引4本も必須**(2026-07-22追記: ASSET=エッジ7日。忘れると検索改善・新頁が最長1週間出ない):
-  `/manga-list-index.json` `/manga-list-head.json` `/manga-catch-index.json` `/manga-alt-index.json`
+- ★**JSONのedge cache purge(索引4本+data/*.json+calendar/*.json)は finalize が自動実行**
+  (2026-08-26 機械化。旧=手でworker /api/purgeを叩く前提で忘れると最長1週間前のまま配信)。
 
-### 5+6. ★finalize (= 2026-07-10 script化。疎通→marker→manifestをゲート連鎖で1本化)
+### 5+6. ★finalize (= 2026-07-10 script化+2026-08-26 締め残務を全部内蔵)
 ```
 python scripts/_weekly-finalize.py
 ```
-- 内蔵順序: ①ビルド完了判定(log『✓ Exporting』+out/manga≥120k枚) → ②sitemap存在 → ③疎通確認(`_prod-smoke.py`=主要頁200/索引ルート直下+5MBガード/¥非含有/contact POST) → ④marker更新 → ⑤`_init-pages-manifest.py`。
+- 内蔵順序: ①ビルド完了判定(log『✓ Exporting』+out/manga≥120k枚) → ②sitemap存在 → ③疎通確認(`_prod-smoke.py`=主要頁200/索引ルート直下+5MBガード/¥非含有/**301追跡**/contact POST) → ③.5 **prune実証+台帳自動消し込み**(pending slugが本番200なら**abort**=prune忘れ検出) → ③.7 **edge purge自動実行**(索引4本+data+calendar) → ④marker更新 → ⑤`_init-pages-manifest.py` → ⑥ **isbn-loss --snapshot**。
 - ★**①〜③のどれかがFAILならmarkerを書かずabort**(=diff-deployは前回基準のまま安全側)。手動one-liner写経は廃止。
 - 疎通だけ単独で回す時: `python scripts/_prod-smoke.py`(検証練習は `--no-post`)。URL正解はscriptに焼き込み済(索引は**ルート直下**=/data/ではない。2026-07-04誤検証の教訓)。
 

@@ -120,6 +120,15 @@ def main():
                   "壊れたまま進めるとpromoteが無警告skipし頁が直らない/巻が消える", file=sys.stderr)
             sys.exit(4)
 
+    # 1.7 ★seed lintゲート(2026-08-26 新設): parse死/純粋追加台帳の減少/種4フィールド不正を
+    #     promote前に止める(2スペsilent不着・全消しの汎用番人。~数秒)
+    rc = run([PY, "scripts/_check-seeds.py"])
+    if rc != 0:
+        print("★seed lintゲートNG(反映中止): 上のFAILを直してから再実行。"
+              "正当な台帳退役なら _check-seeds.py --allow-shrink を単独実行して確認後、"
+              "該当seedをcommitしてから反映する", file=sys.stderr)
+        sys.exit(5)
+
     # 2. promote --only (書影統合済)
     if only:
         run([PY, "scripts/_promote-bulk-v2.py", "--only", ",".join(only)])

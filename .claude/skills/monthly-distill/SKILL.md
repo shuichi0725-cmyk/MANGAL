@@ -16,7 +16,7 @@ description: 月次蒸留して=MADB取込→フルpromote→enrich→AI fill。
    metadata101_json.zip + metadata504_json.zip をDL(cm103/104/105は2024-11凍結=再DL無駄)。
    差分計測は新旧metadata101のID/ISBN集合diff(旧rawは`-<旧tag>`名で温存)
 3. `clean-madb-seed` → `_build-series-v2` → `_populate-v2`(temp) → **`_distill-incremental-merge`**(series_key突合の安全純粋追加・INSERT only)
-4. `python scripts/intake.py --run`(roles→merge→seed4→matcher v9→v13→v14→adult_us→trailing→foreigndrop→promote。matcher~20分・promote~110分。**Windows: promote完了後プロセス居座り=ログ最終行/ファイル数で判定しkill**)
+4. `python scripts/intake.py --run`(★**seedlint**→roles→merge→seed4→matcher v9→v13→v14→adult_us→trailing→foreigndrop→promote→…→**isbnloss**。2026-08-26で入口=seed lint/出口=ISBN消失監視が自動abortゲート化。clean鮮度ガードもpromote前に内蔵。matcher~20分・promote~110分。**Windows: promote完了後プロセス居座り=ログ最終行/ファイル数で判定しkill**)
 5. enrich: ★AniList再フェッチ=**フルダンプ**(2026-08-21確立: backup→progress消去→`_anilist-dump-v3.py`(~2.5h)→
    `_build-anilist-enrich-map.py`→`_gen-anilist-status-map.py`)。deltaは5,000capで月次には不足。
    synopsis和訳delta(新規増分のみ。9千件級バックログはエンリッチ柱=蒸留で飲み込まない)・作品QID(QLever)
@@ -27,7 +27,7 @@ description: 月次蒸留して=MADB取込→フルpromote→enrich→AI fill。
    - **書影live補充**: 新規頁のISBNはcovers seed未収録が普通(1.2.19実測47/93頁欠け)→楽天live by ISBN(`rakuten_live_retry`・noimage除外)→cover-override.jsonl追記→再promote
    - **slugレビュー→公開前rename**: 生成器はヘボンfallback=外来語英綴り化(strawberry-cake型)と促音バグ(otsu-san型)が出る。previewレビューで裁定し**未公開のうちにrename**(alias不要)
    - **コンビニ/再録の目視**(コミック乱セレクション型): レーベル名題・故人作家の新刊=再録の決定的証拠→non-manga-drop
-7. **月次サニティ監査**: _coverage-audit(前月差分flag)・_audit-volume-numbering(AUTO_FIXED急増=新型signal)・_furigana-audit・_audit-title-eq-author・_audit-foreign-editions・publisher新キーflag・**特装検出(新刊特装→special-edition seed追記=ベルセルク43型)**・★**_audit-solo-truncated(頁化を行った月は必須。新規頁に「途中巻だけの孤立頁」が1件でもあれば6bの裁定に戻る=2026-07-27に17頁流出した型)**
+7. **月次サニティ監査**: _coverage-audit(前月差分flag)・_audit-volume-numbering(AUTO_FIXED急増=新型signal)・_furigana-audit・_audit-title-eq-author・_audit-foreign-editions・publisher新キーflag・**特装検出(新刊特装→special-edition seed追記=ベルセルク43型)**・★**_audit-solo-truncated(頁化を行った月は必須。新規頁に「途中巻だけの孤立頁」が1件でもあれば6bの裁定に戻る=2026-07-27に17頁流出した型)**・★**_audit-price-pack(猫と竜型=metadata101のalternativeHeadline/ISBN(set)走査。本番掲載の新規増加を裁定)**・★**_audit-vol0-hidden-first(泣かせたくて型=0巻の1巻が続巻到着で不可視化。HIDDEN_FIXの新規増加→--applyで楽天題ゲート適用)**
 8. **stale生成物の再生成**: _build-calendar / _gen-corner-stocks / _gen-corner-auto / 本番索引
 9. 最終summary(全件数+削除0確認+次月予測)
 
@@ -43,15 +43,16 @@ description: 月次蒸留して=MADB取込→フルpromote→enrich→AI fill。
 
 ## 罠(追補 2026-08-21/23)
 - ★**seed機械追記後は必ず `yaml.safe_load` 検証**(種4はlist itemが**カラム0**=2スペで書くとparse死。1.2.19でXinobi種4が silent不着→索引まで壊れた実踏)
-- merge-manifestのファイル名/tagは実行時last-release値=1つ前の名になる(中身は正・混乱しない)
+- merge-manifest/バックアップ名は★2026-08-26に実行時導出へ是正済(release+日付名・既存は.prevN退避=前回のrevert用manifestを上書きしない)
 - 数値ペンネーム(「296」型)がint化してre.sub系がクラッシュ→promote/監査はstr()防御済。新規scriptでも `str(name)` を徹底
 
-## ★成功判定 (= 完了主張の前にこの数字を全部言えること)
-- Phase0 exit 0 / **Goサイン受領の発話引用**(無しにPhase2へ進んだら違反)
-- 種1/2/3 とも **削除0・上書き0**(各取込ログの `applied=N, missing=0, overwrites=0`)
-- 種2 series数 = **増加のみ**(減少=即abort案件) / promote後 manga.v2 ≈ **66k+ files**(激減=事故)
-- ★**表示カタログslug集合diff**(git HEAD索引 vs 新索引): 消失は**全件説明可能**であること(裁定済フィルタの初適用等)。説明できない消失=事故
-- ★**新規頁のpublisher (unknown)=0**(clean正規パス差し替え漏れのsignal=1.2.19で1,182頁実害)
-- 頁化した月は **新規頁の途中巻断片(solo-truncated)=0** と **ゲート保留の裁定結果**(件数+型)を報告
-- tsc/vitest **green維持**(赤転落=abort) / サニティ監査の flag件数(0でなくてよい=報告する)
+## ★成功判定 (= ★2026-08-26 script化: `python scripts/_monthly-postflight.py` exit 0 が条件)
+- ★**postflight = `python scripts/_monthly-postflight.py`**(Phase0と対の完了側。seed lint/manga.v2≥66k/
+  ISBN消失=理由なし0/種4-auto不減/publisher unknown不増/**頁化した月は新規頁のsolo-truncated=0** を機械判定。
+  **exit 0 + 出力数値の引用**が完了主張の条件=自己申告の散文判定は廃止)
+- postflight対象外で引き続き言うこと:
+  - **Goサイン受領の発話引用**(無しにPhase2へ進んだら違反)
+  - 種1/2/3 とも **削除0・上書き0**(各取込ログの `applied=N, missing=0, overwrites=0`) / 種2 series数=増加のみ
+  - ★**表示カタログslug集合diff**(git HEAD索引 vs 新索引): 消失は**全件説明可能**であること
+  - 頁化した月は **ゲート保留の裁定結果**(件数+型) / tsc/vitest green / サニティ監査flag件数の報告
 - どれかが言えない=完了していない
