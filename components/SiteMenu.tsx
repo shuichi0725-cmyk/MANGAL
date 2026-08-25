@@ -18,6 +18,7 @@ const IC: Record<string, Ic> = {
   list: { d: "M4 6h16M4 12h16M4 18h10" },
   author: { d: "M5.5 20c.8-4.5 3.4-7 6.5-7s5.7 2.5 6.5 7", c: [12, 8, 3.6] },
   book: { d: "M12 6c-2-1.6-5-1.6-8-.6V19c3-1 6-1 8 .6 2-1.6 5-1.6 8-.6V5.4c-3-1-6-1-8 .6zM12 6v14" },
+  box: { d: "M21 8l-9-5-9 5v8l9 5 9-5zM3 8l9 5 9-5M12 13v8" },
   calendar: { d: "M4 6h16v15H4zM4 10h16M8 3v4M16 3v4" },
   clock: { d: "M12 7v5l3.5 2", c: [12, 12, 8.5] },
   pen: { d: "M4 20l2-6L16 4l4 4L10 18l-6 2zM14 6l4 4" },
@@ -56,6 +57,7 @@ const FIND: Tile[] = [
 
 const CORNERS: Tile[] = [
   // ★今日の一冊のリンク先="/"は誤り(2026-08-12 ユーザ指摘)。過去ログ頁へ=旧・過去ログタイルと統合
+  { icon: "box", label: "今月の新刊一覧", href: "/shinkan", sub: "発売日ごと" },
   { icon: "book", label: "今日の一冊 過去ログ", href: "/sansedai-archive", sub: "毎日更新" },
   { icon: "calendar", label: "日替わり特集", href: "/tokushu", sub: "毎日更新" },
   { icon: "pen", label: "AI書評家リーグ", href: "/column-ai-league", sub: "週刊" },
