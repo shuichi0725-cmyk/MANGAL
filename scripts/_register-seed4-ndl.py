@@ -9,8 +9,16 @@
 - 「取り込めなかった物」= NDL未確認(progress の miss) + validate失敗 を
   data/seeds/volumes-pending.yml に追跡記録 (将来 NDL更新/別ソースで再訪用)。
 
+★★ merge書き込み (2026-08-26 全消し事故の恒久修正):
+  volumes-supplement-auto.yml は 2026-07 以降、日次蒸留(zokkan)/巻抜けfill が純粋追加する
+  **蓄積台帳**に転用された(source: rakuten-preorder/rakuten-local/rakuten-live 等)。
+  旧実装は自分の出力だけで全文上書きし、2026-08-21 の月次蒸留(intake.py --run の seed4 stage)で
+  staleドラフト0件 → volumes: [] を書き 916巻を全消し(種2未収録883巻が本番から消失)。
+  現実装: 既存を読み source != 'ndl-auto' の entry を全部保存 + ndl-auto 分だけ差し替え。
+  既存が読めない時は abort(壊れたparseで全消ししない)。書込前に .cache へバックアップ。
+
 入力: .cache/seed4-drafts.yml (hit) + .cache/seed4-progress.jsonl (miss)
-出力: data/seeds/volumes-supplement-auto.yml / data/seeds/volumes-pending.yml
+出力: data/seeds/volumes-supplement-auto.yml (merge) / data/seeds/volumes-pending.yml
 """
 from __future__ import annotations
 import json
@@ -142,19 +150,69 @@ def main():
         print("\n(--apply で書き込み)", file=sys.stderr)
         return
 
-    OUT_AUTO.write_text(
-        "# 【自動生成】NDL 確認済 MADB取込もれ巻 (= 種4 auto)。 生成元 _register-seed4-ndl.py。\n"
+    # ★★ merge: 既存の非 ndl-auto entry(日次zokkan/巻抜けfillの蓄積台帳)は必ず保存する。
+    #   全消し事故(2026-08-21, 916巻)の恒久修正。既存が読めない時は上書きせず abort。
+    preserved = []
+    n_prev_total = n_prev_ndl = 0
+    if OUT_AUTO.exists():
+        try:
+            prev = yaml.safe_load(OUT_AUTO.read_text(encoding="utf-8")) or {}
+            prev_vols = prev.get("volumes") or []
+        except Exception as e:
+            print(f"\n★abort: 既存 {OUT_AUTO.name} が parse できない ({e})。"
+                  f"壊れたまま上書き=全消しになるので書き込まない。先にファイルを直すこと。", file=sys.stderr)
+            sys.exit(1)
+        n_prev_total = len(prev_vols)
+        prev_ndl = []
+        for v in prev_vols:
+            if (v or {}).get("source") == "ndl-auto":
+                n_prev_ndl += 1
+                prev_ndl.append(v)
+            else:
+                preserved.append(v)
+        # ★安全弁: 新 ndl-auto が0件(=staleドラフト/空cache)の時は旧 ndl-auto を消さず保持。
+        #   「登録するものが無い」と「全部退役」は別物=空入力で削らない。
+        if not entries and prev_ndl:
+            print(f"  新ndl-auto 0件 → 旧ndl-auto {n_prev_ndl} 件を保持(空入力で削らない)", file=sys.stderr)
+            preserved += prev_ndl
+            n_prev_ndl = 0
+    # 保存分と新 ndl-auto の ISBN 重複は保存分(蓄積台帳)を優先
+    kept_isbns = {isbn_norm(v.get("isbn13")) for v in preserved if v.get("isbn13")}
+    entries = [e for e in entries if isbn_norm(e.get("isbn13")) not in kept_isbns]
+    merged = preserved + entries
+    # 縮小ガード: 保存対象(非ndl-auto)が1件でも落ちる書き込みは構造上あり得ない=起きたらバグ。
+    if len(preserved) != n_prev_total - n_prev_ndl or len(merged) < len(preserved):
+        print(f"\n★abort: merge結果が不整合 (既存{n_prev_total}=非ndl{n_prev_total - n_prev_ndl}+ndl{n_prev_ndl} "
+              f"/ 保存{len(preserved)} / merge後{len(merged)})。書き込まない。", file=sys.stderr)
+        sys.exit(1)
+    # 書込前バックアップ (可逆)
+    if OUT_AUTO.exists():
+        import datetime as _dt
+        import shutil as _sh
+        bak = ROOT / ".cache" / f"volumes-supplement-auto.yml.bak-{_dt.datetime.now():%Y%m%d-%H%M%S}"
+        _sh.copyfile(OUT_AUTO, bak)
+        print(f"  backup: {bak}", file=sys.stderr)
+
+    out_text = (
+        "# 種4 auto = MADB取込もれ巻の**蓄積台帳** (日次zokkan/巻抜けfill/NDL確認の合流先)。\n"
         "# 手動版 data/seeds/volumes-supplement.yml は不変。 promote/audit が両方 load。\n"
-        "# ★ db-v2 再build / NDL再取得時は再生成。\n"
-        + yaml.dump({"schema_version": 1, "generator": "ndl-auto", "volumes": entries},
-                    allow_unicode=True, sort_keys=False, width=200),
-        encoding="utf-8")
+        "# ★全消し禁止: _register-seed4-ndl.py は source: ndl-auto の entry だけを差し替え、\n"
+        "#   他 source (rakuten-preorder/rakuten-local/rakuten-live 等) は必ず保存する (2026-08-26恒久修正)。\n"
+        + yaml.dump({"schema_version": 1, "generator": "ndl-auto", "volumes": merged},
+                    allow_unicode=True, sort_keys=False, width=200))
+    # 書き戻し検証 (silent不着防止)
+    if len((yaml.safe_load(out_text) or {}).get("volumes") or []) != len(merged):
+        print("\n★abort: 出力の再parse件数が一致しない。書き込まない。", file=sys.stderr)
+        sys.exit(1)
+    OUT_AUTO.write_text(out_text, encoding="utf-8")
+    print(f"  merge: 保存(非ndl-auto) {len(preserved)} + ndl-auto {len(entries)}"
+          f" (旧ndl-auto {n_prev_ndl} を差替) = {len(merged)}", file=sys.stderr)
     OUT_PENDING.write_text(
         "# 取り込めなかった巻の追跡 (= 将来 NDL更新/別ソースで再訪用)。\n"
         "# reason: NDL未確認(実在不明orラグ) / bind不可 / 重複。 生成元 _register-seed4-ndl.py。\n"
         + yaml.dump({"pending": pending}, allow_unicode=True, sort_keys=False, width=200),
         encoding="utf-8")
-    print(f"\n  wrote {OUT_AUTO} ({n_ok} entries)", file=sys.stderr)
+    print(f"\n  wrote {OUT_AUTO} ({len(merged)} entries)", file=sys.stderr)
     print(f"  wrote {OUT_PENDING} ({len(pending)} entries)", file=sys.stderr)
 
 

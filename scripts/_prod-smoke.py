@@ -67,6 +67,33 @@ def main():
     st, _, _ = req("/data/anniversaries.json")
     check("GET /data/anniversaries.json = 200", st == 200, f"got {st}")
 
+    # ★301リダイレクト追跡 (2026-08-26 新設): KV `REDIRECTS` の陳腐化検出。
+    #   slug-aliases.yml の1件を実プローブし「旧URL→200 かつ 最終URLが新slug」を確認。
+    #   KV同期忘れ/失敗だと旧URLが404(=2026-08-17型の窓)でここが鳴る。
+    try:
+        import os as _os
+        _root = _os.path.dirname(_os.path.dirname(_os.path.abspath(__file__)))
+        _al, _to = None, None
+        for _ln in open(_os.path.join(_root, "data", "slug-aliases.yml"), encoding="utf-8"):
+            _ln = _ln.strip()
+            if _ln and not _ln.startswith("#") and ": " in _ln:
+                _al, _to = (x.strip() for x in _ln.split(": ", 1))
+                break
+        if _al:
+            _r2 = urllib.request.Request(BASE + f"/manga/{_al}", headers={"User-Agent": "mangal-smoke"})
+            try:
+                with urllib.request.urlopen(_r2, timeout=60) as _resp:
+                    _fin, _stat = _resp.geturl(), _resp.status
+            except urllib.error.HTTPError as _e:
+                _fin, _stat = "", _e.code
+            check(f"301追跡 /manga/{_al[:30]} → /manga/{_to[:30]} (KVリダイレクト生存)",
+                  _stat == 200 and f"/manga/{_to}" in _fin,
+                  f"got {_stat} final={_fin[:80]}(KV未同期なら python scripts/_kv-redirects-sync.py)")
+        else:
+            print("  SKIP 301追跡 (slug-aliases.yml から alias を取れず)")
+    except Exception as _e:
+        print(f"  SKIP 301追跡 ({_e})")
+
     if do_post:
         st, body, _ = req("/api/contact", method="POST", body={"body": "smoke"})
         okj = False

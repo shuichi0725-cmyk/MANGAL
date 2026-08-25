@@ -282,6 +282,28 @@ def main():
                      "slug_mush=題の切れ目でrename / publisher_unknown=cleanの正規パス差し替え漏れを疑う(月次skill罠)")
             else:
                 ok(f"品質基準 {_k} = {_v}(基準内)")
+        # ★逆向きベースライン(2026-08-26 種4-auto全消し事故883巻の最安の網): 蓄積台帳は
+        #   **減少=FAIL**(増加が正常)。全消し/大量退役が公開前に鳴る。
+        try:
+            import yaml as _yaml
+            _s4 = len((_yaml.safe_load(open(os.path.join(ROOT, "data", "seeds",
+                       "volumes-supplement-auto.yml"), encoding="utf-8")) or {}).get("volumes") or [])
+        except Exception:
+            _s4 = -1
+        if _s4 < 0:
+            fail("★種4-auto(volumes-supplement-auto.yml)が読めない", "parse死=全消し前兆。先に直す")
+        else:
+            _b4 = _base.get("seed4_auto_volumes")
+            if _b4 is None or _s4 > _b4:
+                _base["seed4_auto_volumes"] = _s4
+                _changed = True
+                ok(f"品質基準 seed4_auto_volumes = {_s4}(基準を{'初期化' if _b4 is None else '更新'})")
+            elif _s4 < _b4:
+                fail(f"★種4-auto台帳が減少 {_b4} → {_s4}(蓄積台帳=全消し/誤退役の疑い)",
+                     "正当な退役(種2追いつき分の個別除去)なら data/seeds/preflight-baselines.json の"
+                     " seed4_auto_volumes を手で下げて通す(理由をcommitメッセージに書く)")
+            else:
+                ok(f"品質基準 seed4_auto_volumes = {_s4}(基準内)")
         if _changed:
             _json.dump(_base, open(_bp, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
     except Exception as _e:

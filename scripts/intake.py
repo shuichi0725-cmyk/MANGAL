@@ -88,6 +88,10 @@ STAGES = [
     # 書影 (promote は cover_url=null で出す) を seed から貼り直す。 ★最後 = 新版/特装の ISBN も拾う
     ("coverfill", "madb", "書影を seed(covers.jsonl.gz=楽天紙+Kobo電子) から再適用 (再promoteで書影が消えない)",
         ["_apply-covers-stage.py"], False),
+    # ★ISBN消失監視 (2026-08-26 新設): 前回snapshot比で「理由なし消失」があれば exit 1 = pipeline abort。
+    #   種4-auto全消し事故(8/21、883巻消失が週次preflightまで5日潜伏)の恒久網。snapshot未作成時は素通り。
+    ("isbnloss", "madb", "ISBN消失監視 (理由なし消失>0 = abort。実在する巻を黙って消していないか)",
+        ["_audit-isbn-loss.py"], False),
 ]
 
 
@@ -133,6 +137,19 @@ def main():
     if not DB.exists():
         print(f"ABORT: {DB} が無い (= 種2 rebuild が先)")
         sys.exit(1)
+
+    # ★clean鮮度ガード (2026-08 実害: cleanが旧releaseのままpromote→新刊1,182頁 publisher (unknown)。
+    #   promoteはexists()しか見ず silent に空mapで走るため、実行直前のここで止める)
+    _raw = ROOT / ".cache" / "madb" / "metadata101.json"
+    _clean = ROOT / ".cache" / "madb" / "metadata101-clean.json"
+    if any(n == "promote" for n, *_ in plan):
+        if not _clean.exists():
+            print(f"ABORT: {_clean} が無い (promoteのpublisher導出が読む正規パス。clean-madb-seed後に差し替えること)")
+            sys.exit(1)
+        if _raw.exists() and _clean.stat().st_mtime < _raw.stat().st_mtime:
+            print(f"ABORT: metadata101-clean.json が raw より古い = clean差し替え漏れ"
+                  f" (このままpromoteすると新規ISBNが全部 publisher (unknown) になる)")
+            sys.exit(1)
 
     # db変更ステージがあれば事前backup
     if any(mut for _, _, _, _, mut in plan):

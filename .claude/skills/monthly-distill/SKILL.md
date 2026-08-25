@@ -35,7 +35,7 @@ description: 月次蒸留して=MADB取込→フルpromote→enrich→AI fill。
 - ★**cleanの正規パス=`.cache/madb/metadata101-clean.json`**(2026-08-22実踏): promoteの出版社導出(ISBN→schema:publisher)がこのパスを読む。新cleanを別ディレクトリに置いてintakeを回すと**新刊全部が出版社(unknown)**になる(1.2.19で1,182頁再生成の実害)。temp buildにはenv override、正規パスは**intake前に必ず差し替える**
 - 再登録の別MADB-ID二重化(虚構推理vol23型)→ISBN dedup+監査
 - 種4は触らない(手動add only)。retire hygiene だけ(MADB追いつき分の除去)
-- ★★**種4-auto(volumes-supplement-auto.yml)を全消し/再生成するな**(2026-08-21実害: 1.2.19で916巻を全消し→種2未収録883巻が本番から黙って消失、8/26のpreflight ISBN消失監視で発覚し復元)。このファイルは**日次蒸留の続巻台帳=蓄積资产**であり派生seedではない。retireは「ISBNが種2に実在する巻だけ」を1件ずつ除去(全消し禁止)。蒸留後は `python scripts/_audit-isbn-loss.py` で理由なし消失0を確認
+- ★★**種4-auto(volumes-supplement-auto.yml)は蓄積台帳=全消し禁止**(2026-08-21実害: 1.2.19で916巻全消し→種2未収録883巻が本番から消失。根本原因=`_register-seed4-ndl.py --apply` が既存を読まず全上書き)。★2026-08-26 **機械封鎖済**: ①同scriptはmerge書き込み化(非ndl-auto entryを必ず保存・parse不能なら書かずabort・.cacheへbackup) ②intake.py末尾に isbnloss stage(理由なし消失>0=abort) ③週次preflightベースラインに seed4_auto_volumes(減少=FAIL) ④clean鮮度ガード(Phase0+intake=metadata101-cleanがrawより古いとabort)。retireは「ISBNが種2に実在する巻だけ」個別除去
 - ★canonical結線頁(edition-canonical/*.yml)は **overridesも種4も後負けで無効**=巻修正はcanonical本体へ(QP外伝4巻 2026-07-27実踏)
 - ★コンビニ廉価再録レーベルは頁化しない(秋田トップコミックス=DROP_IMPRINT封鎖済。「◯◯スペシャル」型はtitle単位。パーフェクト・メモワール=未裁定候補)
 - ★頁のdropは必ず `_reflect-targeted.py --drop` 経由(手でyml消すと索引・ストックに残骸=検索404。2026-07-27にホームズ4頁分の索引除去コミット漏れを回収した型)

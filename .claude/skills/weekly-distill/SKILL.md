@@ -18,25 +18,16 @@ description: 週次蒸留=本番フルビルド+R2フルアップ。トリガー
 
 ## 手順
 
-### 1. 事前再生成 (= stale生成物クラスを全部焼き直す)
+### 1. 事前再生成 (= stale生成物クラスを全部焼き直す。★2026-08-26 ラッパ化)
 ```
-python scripts/_build-calendar.py data/manga.v2 data/calendar <当月YYYY-MM>   # ★本番フル(r2-syncがこれをoverlay)
-python scripts/_build-calendar.py .preview-data/manga public/calendar <当月>  # preview版(src=preview自身)
-# ★引数なし実行は禁止(2026-07-13実害): 既定out=public/calendarにフル版が書かれ、本番overlay元のdata/calendarは古いまま
-#   =本番カレンダーが前週のまま stale。しかも生成器は古い月ファイルを消さないので、srcを替える時は out を rm -rf してから。
-python scripts/_cover-release-refresh.py --days 45   # ★発売後の書影差し替え追従(2026-08-25: 発売済みの47%が旧書影だった。楽天は発売前後に画像更新=URL版数が上がる)。~40分・touched出たらpromote --only-file .cache/cover-refresh-touched.txt
-python scripts/_gen-shinkan-data.py          # ★/shinkan(新刊全冊一覧頁 2026-08-25新設)の月別データ(2026-06〜+3。カレンダー・書影refreshの後に)
-python scripts/_gen-corner-stocks.py         # 三世代/featured stock JSON
-python scripts/_gen-daily-feature.py         # 日替わり特集stock補充(+45日先まで。既存日は凍結=触らない)
-python scripts/_gen-corner-auto.py           # 周年/豪華版 JSON(66k走査 ~5分)
-python scripts/_tameshiyomi-harvest.py --limit 100          # ★週次収集(2026-08-12 ユーザ裁定=週1化): 新規アンカー発見(TinyFish~100検索・数分)
-python scripts/_tameshiyomi-harvest.py --expand --expand-limit 300  # 新規アンカーの全巻展開(HEAD検証・残はアイドル運転が消化)
-python scripts/_gen-tameshiyomi-map.py       # ★試し読みマップ(2026-08-06全結線。巻expandの増分をblmaxへ反映=~2秒)
-python scripts/_audit-tameshiyomi-ln.py      # ★LN混入検査(2026-08-20 領民0人型): 新アンカーのラノベ/小説カテゴリを差分検査(台帳skip=数分)。flag増=誤アンカー→差替
-python scripts/_gen-anilist-status-map.py    # ★AniList statusマップ再生成(2026-08-20 連載状態層): dump据置なら数十秒で同値。promoteの連載中→完結降格の鮮度維持
-python scripts/_placeholder-cover-refresh.py --build-queue   # ★書影queue週次再算出(2026-08-12 ユーザ裁定: 旧=月1。消化はアイドル運転⑩)
-python scripts/_build-list-index.py data/manga.v2 data   # 本番索引(~10分)
+python scripts/_weekly-step1.py        # 生成器14step順次(失敗で即exit 1。--from <step>で再開・--listで計画)
 ```
+- ★**生成器リストの正本は `scripts/_weekly-step1.py` の STEPS**。新しい生成器はそこへ足す
+  (旧=skillの散文リストに人手追記→追記漏れ=恒久stale化、の構造を廃止)。
+- 内容: calendar本番/preview(当月自動・引数なし事故根絶) → cover-release-refresh --days 45
+  (touched非空→promote自動連鎖) → shinkan → corner-stocks → daily-feature → corner-auto →
+  tameshiyomi(harvest/expand/map/LN検査) → anilist-status-map → placeholder --build-queue →
+  本番索引(最後)。~1時間(書影refresh ~40分含む)。
 - ai-reviews 等 seed 由来はそのまま(生成不要)。
 - ★**art-books昇格**(2026-07-29新設・ユーザ発見「.v2に居るのに公開されない」INTRON DEPOT型):
   ビルドが読むのは `data/art-books`(公開側)で、promoteの再生成は `data/art-books.v2`(中間物)に出る=
@@ -90,10 +81,11 @@ python scripts/_gen-sitemap.py
 ### 4. R2 同期 (差分PUT + ★不要頁の削除)
 ```
 python scripts/_r2-sync.py --bucket mangal-site --prune
-python scripts/_kv-redirects-sync.py    # ★alias 301 全件を本番KVへ(数秒。2026-08-14 リダイレクト層復旧)
 ```
-- ★KV同期は**pruneと同じ週次で必ずセット**: 頁drop/slug renameの旧頁実体は`--prune`で消えるので、
-  同じタイミングでKVの301が引き継ぐ(=旧URLが404になる窓を作らない)。Worker側は6h TTLで自動再読込。
+- ★**KV同期(_kv-redirects-sync.py)は r2-sync 成功時に自動連鎖**(2026-08-26機械化。旧=手動2コマンド
+  で忘れると「pruneで頁を消したのに301が付いてこない=404の窓」)。自動連鎖が失敗すると exit 4 で
+  名指しされるので単独再実行。抑止は `--no-kv`。Worker側は6h TTLで自動再読込。
+- 疎通確認(_prod-smoke.py)に **301追跡テスト**が入っており(alias 1件を実プローブ)、KV陳腐化はそこでも鳴る。
 - ★**workers/r2-serve.js を変更した週は Worker も deploy**(R2同期はファイルだけ=Workerコードは別デプロイ):
 ```
 npx wrangler deploy -c wrangler-r2.jsonc

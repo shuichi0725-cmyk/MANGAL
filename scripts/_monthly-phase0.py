@@ -17,6 +17,7 @@ REQUIRED = [
     (".cache/db-v2.sqlite", "種2 現行DB"),
     ("data/seeds/series-supplement-v2.yml", "種3 現行(AI fill蓄積)"),
     (".cache/madb/metadata101.json", "種1 raw(MADB dump。CLAUDE.md表記cm101.csvの実体はこれ)"),
+    (".cache/madb/metadata101-clean.json", "種1 clean(promoteのpublisher導出が読む正規パス)"),
     ("data/seed/mangaka.csv", "漫画家マスター"),
     ("scripts/clean-madb-seed.ts", "パイプライン(1)"),
     ("scripts/_build-series-v2.py", "パイプライン(2)"),
@@ -39,6 +40,17 @@ def main():
         else:
             missing.append((rel, desc))
             print(f"  FAIL {rel} ({desc}) が無い")
+
+    # ★clean鮮度 (2026-08 実害: cleanが旧releaseのままpromote→新刊全部publisher (unknown) 1,182頁):
+    #   clean(正規パス)が raw より古い = 差し替え漏れ。Phase0時点(=新DL前)は同世代のはず。
+    raw_p = os.path.join(ROOT, ".cache/madb/metadata101.json")
+    clean_p = os.path.join(ROOT, ".cache/madb/metadata101-clean.json")
+    if os.path.exists(raw_p) and os.path.exists(clean_p):
+        if os.path.getmtime(clean_p) < os.path.getmtime(raw_p):
+            missing.append(("metadata101-clean.json", "raw より古い=clean差し替え漏れ(publisher unknown事故の入口)"))
+            print("  FAIL metadata101-clean.json が metadata101.json より古い(clean差し替え漏れ)")
+        else:
+            print("  OK   metadata101-clean.json 鮮度(raw以上)")
 
     r = subprocess.run(["git", "status", "--porcelain"], capture_output=True, text=True, encoding="utf-8")
     dirty = [l for l in (r.stdout or "").splitlines() if l.strip()]

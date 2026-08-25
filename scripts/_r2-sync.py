@@ -72,6 +72,8 @@ def main():
     ap.add_argument("--prune-floor", type=float, default=0.9,
                     help="prune を許す最低ビルド率(既定0.9)。 out/ の manga頁数 < 前回×これ なら削除中止")
     ap.add_argument("--dry", action="store_true")
+    ap.add_argument("--no-kv", action="store_true",
+                    help="同期成功後の _kv-redirects-sync.py 自動連鎖を抑止(既定=mangal-siteなら実行)")
     ap.add_argument("--no-reconcile", action="store_true",
                     help="manifest 欠損キーの ETag 照合補完をしない(= 欠損は全て PUT し直す)")
     ap.add_argument("--workers", type=int, default=32)
@@ -231,6 +233,18 @@ def main():
     os.makedirs(os.path.dirname(MANIFEST), exist_ok=True)
     json.dump(nextm, open(MANIFEST, "w", encoding="utf-8"))
     print(f"完了: put {len(to_put)} / manifest更新 {MANIFEST}")
+
+    # ★KVリダイレクト自動連鎖 (2026-08-26 恒久化): _kv-redirects-sync.py は「r2-sync直後のみ実行可」
+    #   (途中実行=未deploy宛先への301で404化、2026-08-17実害900件)という一点タイミングを人が
+    #   覚える構造だった。同期成功のここで自動実行=タイミング制約をコードで強制。--no-kv で抑止可。
+    if a.bucket == "mangal-site" and not a.no_kv:
+        print("\n→ KVリダイレクト同期(_kv-redirects-sync.py 自動連鎖)")
+        import subprocess as _sp
+        _r = _sp.run([sys.executable, os.path.join(ROOT, "scripts", "_kv-redirects-sync.py")], cwd=ROOT)
+        if _r.returncode != 0:
+            print("★KVリダイレクト同期 失敗: R2は同期済みだが301が旧mapのまま"
+                  "(rename頁の旧URLが404の窓)。`python scripts/_kv-redirects-sync.py` を単独で再実行すること")
+            sys.exit(4)
 
 if __name__ == "__main__":
     main()
