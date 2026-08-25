@@ -899,7 +899,9 @@ DROP_IMPRINT_PATTERNS = ["My first big", "コンビニ", "増刊", "同人", "�
 # bilingual / 英訳版 imprint は drop (= 翻訳版 は 別 product)
 # ★"remix" = コンビニ廉価再録レーベル全variant(Shueisha jump remix/ガンガンコミックスremix/
 #   G fantasy comics remix/My first big special remix等)。種2実測で全てコンビニ再録・正規版に'remix'無し。
-DROP_IMPRINT_LOWER_PATTERNS = ["bilingual", "english", "novel", "novels", "remix"]
+# ★"collection box" = 全巻BOXセットの構成員レコード(単品流通なし・ISBN無しが常。
+#   多重人格探偵サイコcollection box:愛蔵版 が幽霊vol10-12の別editionとして本番に出た 2026-08-26実踏)。
+DROP_IMPRINT_LOWER_PATTERNS = ["bilingual", "english", "novel", "novels", "remix", "collection box"]
 # 'complete works' は 英訳 全集 で 多用 (= 「TEZUKA OSAMU THE COMPLETE WORKS」、
 # 「The complete works of Fujiko・F・Fujio」 等)。 但し 日本語 imprint で 「= English」
 # 並列表記 cases (= 「藤子・F・不二雄大全集 = The Complete Works of Fujiko・F・Fujio」)

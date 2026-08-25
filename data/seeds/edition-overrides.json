@@ -880,6 +880,10 @@
   ],
   "note": " / ★死にキー是正2026-08-05(abashiriikka→abashiri-ikka) / 死にキー是正時の回帰復元2026-08-05 / JPRO照会2026-08-05: 角川文庫=全5巻完結(JPRO一致)・幽霊巻v7は秋田漫画文庫線→版分離(偽穴v6の根治)"
  },
+ "adoribu-ouji-kun": {
+  "note": "title_kana補完2026-08-10(索引skip8の是正。確証=楽天titleKana『アドリブ オウジ クン』)",
+  "title_kana": "アドリブオウジクン"
+ },
  "agapes-1999": {
   "title": "アガペイズ",
   "title_kana": "アガペイズ"
@@ -1059,6 +1063,14 @@
    }
   ],
   "note": "2026-07-19 デラックス・レーベル割れ一括統合(バーテンダー型・厳格ゲート): dx6+st13→通常版1..19"
+ },
+ "aka-to-kuro": {
+  "demographic": "josei",
+  "note": "分野是正2026-08-10: kodomo→josei(世界文化社『マンガ世界の文学』(里中満智子)=大人向け名作シリーズ。児童は誤り)"
+ },
+ "aka-to-kuro-komachi": {
+  "demographic": "josei",
+  "note": "分野是正2026-08-10: kodomo→josei(GUSH comics(海王社BLレーベル)の任侠BL。種3が児童と誤付与)"
  },
  "akai-fuushiya": {
   "authors": [
@@ -1621,6 +1633,14 @@
  "arakure-knight-2008": {
   "title_kana": "アラクレナイトクロイザンキョウカンケツヘン"
  },
+ "arakure-naito-koukou-bakusouhen": {
+  "note": "title_kana補完2026-08-10(索引skip8の是正。確証=楽天titleKana『アラクレ ナイト コウコウ バクソウヘン』)",
+  "title_kana": "アラクレナイトコウコウバクソウヘン"
+ },
+ "arashigaoka": {
+  "demographic": "josei",
+  "note": "分野是正2026-08-10: kodomo→josei(同『マンガ世界の文学』シリーズ)"
+ },
  "arashino-champion": {
   "authors": [
    {
@@ -1684,9 +1704,22 @@
  "arms-1988": {
   "title_kana": "アームス"
  },
+ "arumi-chan-no-gakushuuchou": {
+  "demographic": "seinen",
+  "note": "分野是正2026-08-10: kodomo→seinen(レーベル確証=ヤングジャンプ・コミックス)"
+ },
  "as-you-wish-sister": {
   "title": "シスター様の仰せの魔々に",
   "title_kana": "シスターサマノオオセノママニ"
+ },
+ "asatarou-den": {
+  "note": "2026-08-14 per-case: 連載年を1977-1979に是正(ja.wikipedia『朝太郎伝』= 週刊少年ジャンプ 1977年8号〜1979年15号・全108話)。旧値1979-1980は単行本の刊行年に引きずられたもの(連載年は巻の刊行年からは導けない=ワイルド7と同型)。版構成は edition-canonical/asatarou-den.yml で再構築。",
+  "year_ended": 1979,
+  "year_started": 1977
+ },
+ "ashita-e-hashire-eikou-e-no-michi-no-maki": {
+  "note": "title_kana補完2026-08-10(索引skip8の是正。確証=楽天titleKana『エイコウ エノ ミチ』(副題部確証)+主題は標準読み(奔れ=ハシレ))",
+  "title_kana": "アシタエハシレエイコウエノミチノマキ"
  },
  "ashita-no-joe": {
   "editions": [
@@ -2163,6 +2196,21 @@
  },
  "bad-girl-1989": {
   "title_kana": "バッドガール"
+ },
+ "bakemonogatari": {
+  "authors": [
+   {
+    "name": "大暮維人",
+    "role": "artist"
+   }
+  ],
+  "note": "2026-08-14 per-case: 原作の西尾維新が抜けていた(本番は大暮維人(artist)単独・original_authors空)。楽天の責任表示は全巻『西尾 維新/大暮 維人』、NDLも著者=['西尾, 維新, 1981-','大暮維人']。★版構成(通常版22巻/特装版22巻の分離)は edition-canonical/bakemonogatari.yml が正。キャラクター原案のVOFANは役割が原案でcreditsの領域のため入れていない。",
+  "original_authors": [
+   {
+    "name": "西尾維新",
+    "role": "writer"
+   }
+  ]
  },
  "bakudan-kisha-fudoumaru": {
   "authors": [
@@ -3183,6 +3231,10 @@
   ],
   "note": "2026-07-19 デラックス・レーベル割れ一括統合(バーテンダー型・厳格ゲート): dx1+st1→通常版1..2"
  },
+ "bokkonrinri": {
+  "demographic": "shoujo",
+  "note": "分野是正2026-08-10: kodomo→shoujo(レーベル確証=KCデザート)"
+ },
  "boku-no-raidiin": {
   "authors": [
    {
@@ -3238,8 +3290,66 @@
  "brains-1997": {
   "title_kana": "ブレインズ"
  },
+ "buraian-kunno-kiyuuka": {
+  "demographic": "shoujo",
+  "note": "分野是正2026-08-10: kodomo→shoujo(レーベル確証=花とゆめCOMICS)"
+ },
  "buzzer-beater": {
   "title_kana": "ブザービーター"
+ },
+ "byakuyou-no-musume": {
+  "_note": "2026-08-26 パック/BOX監査: 9784087920918=『完全版 白妖の娘 上巻+下巻』セット商品(5,390円・楽天確認)が愛蔵版vol3として誤番号で座っていた→完全版タブv1(セット明記)に是正。通常版1-4は現状凍結(完結作)",
+  "editions": [
+   {
+    "imprint": "PRINCESS COMICS",
+    "label": "通常版",
+    "type": "standard",
+    "volumes": [
+     {
+      "asin": null,
+      "cover_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/7064/9784253077064.jpg?_ex=200x200",
+      "isbn13": "9784253077064",
+      "number": 1,
+      "release_date": "2016-03-25"
+     },
+     {
+      "asin": null,
+      "cover_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/3993/9784253193993.jpg?_ex=200x200",
+      "isbn13": "9784253193993",
+      "number": 2,
+      "release_date": "2017-02-25"
+     },
+     {
+      "asin": null,
+      "cover_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/4006/9784253194006.jpg?_ex=200x200",
+      "isbn13": "9784253194006",
+      "number": 3,
+      "release_date": "2018-02-16"
+     },
+     {
+      "asin": null,
+      "cover_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/4075/9784253194075.jpg?_ex=200x200",
+      "isbn13": "9784253194075",
+      "number": 4,
+      "release_date": "2019-04-16"
+     }
+    ]
+   },
+   {
+    "imprint": "愛蔵版コミックス",
+    "label": "完全版(上巻+下巻セット)",
+    "type": "kanzenban",
+    "volumes": [
+     {
+      "asin": null,
+      "cover_url": null,
+      "isbn13": "9784087920918",
+      "number": 1,
+      "release_date": "2023-12-25"
+     }
+    ]
+   }
+  ]
  },
  "c": {
   "title_kana": "シー"
@@ -7061,9 +7171,20 @@
    }
   ]
  },
+ "dokkiri-angel": {
+  "demographic": "shounen",
+  "note": "2026-08-08 per-case: ①題の感嘆符を全角に(書影の実物ロゴとKoboの流通題がいずれも全角。NDLだけ半角) ②ヨミをドッキリエンジェルに(NDL transcription「ドツキリ エンジエル」は旧式の大文字表記。書影上部のローマ字「KAZUKI MOTOYAMA / DOKKIRI ANGEL」が裏付け) ③あわせて slug を dotsukiri-angel → dokkiri-angel に是正。 / 分野是正2026-08-10: kodomo→shounen(レーベル確証=講談社コミックス(少年KC))",
+  "title": "どっきり！エンジェル",
+  "title_kana": "ドッキリエンジェル",
+  "title_romaji": "dokkiri angel"
+ },
  "doll-master-2012": {
   "title": "DOLLMASTER彷徨の六花",
   "title_kana": "ドールマスターホウコウノリッカ"
+ },
+ "dora-q": {
+  "demographic": "seinen",
+  "note": "分野是正2026-08-10: kodomo→seinen(レーベル確証=ヤンマガKC)"
  },
  "doraemon": {
   "authors": [
@@ -8460,6 +8581,11 @@
   "year_ended": null,
   "year_started": 2017
  },
+ "final-mission": {
+  "note": "2026-08-08 per-case: 題がラテン「Final Mission」だったが、NDL(4403617581)も楽天も表題は「ファイナル・ミッション」。兄弟頁のカタカナ表記に揃えた。",
+  "title": "ファイナル・ミッション",
+  "title_kana": "ファイナルミッション"
+ },
  "finding-dory": {
   "editions": [
    {
@@ -8534,6 +8660,10 @@
    }
   ]
  },
+ "football-taka-amerikan-football-comics": {
+  "note": "title_kana補完2026-08-10(索引skip8の是正。確証=楽天titleKana『フツトボ-ル タカ』(欧文副題は読み対象外))",
+  "title_kana": "フットボールタカ"
+ },
  "fujouri-nikki": {
   "authors": [
    {
@@ -8559,6 +8689,15 @@
   ],
   "year_ended": 1979,
   "year_started": 1979
+ },
+ "fukufuku-funyaan-new": {
+  "anilist": false,
+  "note": "2026-08-17 ギャラ型: 本編頁のv1-8枠に食い込んでいた続編NEW全8巻(2005-13 KCDX)を分離した新頁",
+  "title": "ふくふくふにゃーんNEW",
+  "title_kana": "フクフクフニャーンニュー",
+  "title_romaji": "fukufuku funyaan new",
+  "year_ended": 2013,
+  "year_started": 2005
  },
  "fullmetal-alchemist": {
   "title_kana": "フルメタルアルケミスト"
@@ -8703,6 +8842,11 @@
   "note": "版再構築(2026-07-12 ユーザ報告=ISBN無し巻): AC版全11巻をキャッシュ帯で完全化(v1-4欠け+v6,7,9-11のISBN無し解消)、中公愛蔵版は誤って1984とされていた刊行年を1989に是正(NDL)、文庫全8巻。連載1983-85(Wiki)",
   "year_ended": 1985,
   "year_started": 1983
+ },
+ "fushigina-shounen-tezuka": {
+  "note": "2026-08-17 連載年明示: ふしぎな少年=少年クラブ連載1961-62(NDL付録記録1962-08)",
+  "year_ended": 1962,
+  "year_started": 1961
  },
  "futago-saien": {
   "editions": [
@@ -10126,6 +10270,60 @@
  "gift-hirose-2003": {
   "title_kana": "ギフト"
  },
+ "ginga-tetsudou-no-yoru": {
+  "editions": [
+   {
+    "label": "最終形(風呂猫)",
+    "publisher": "風呂猫",
+    "type": "standard",
+    "volumes": [
+     {
+      "asin": null,
+      "cover_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/2816/9784904732816.jpg?_ex=300x300",
+      "isbn13": "9784904732816",
+      "number": 1,
+      "release_date": "2020-10"
+     },
+     {
+      "asin": null,
+      "cover_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/2830/9784904732830.jpg?_ex=200x200",
+      "isbn13": "9784904732830",
+      "number": 2,
+      "release_date": "2021-05"
+     }
+    ]
+   },
+   {
+    "label": "扶桑社版",
+    "publisher": "扶桑社",
+    "type": "shinsoban",
+    "volumes": [
+     {
+      "asin": null,
+      "cover_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/5048/9784594095048_1_3.jpg?_ex=300x300",
+      "isbn13": "9784594095048",
+      "number": 1,
+      "release_date": "2023-06-02"
+     }
+    ]
+   },
+   {
+    "label": "扶桑社文庫",
+    "publisher": "扶桑社",
+    "type": "bunkobon",
+    "volumes": [
+     {
+      "asin": null,
+      "cover_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/rakutenkobo-ebooks/cabinet/5837/2000013135837.jpg?_ex=300x300",
+      "isbn13": "9784594016982",
+      "number": 1,
+      "release_date": "1995-03-30"
+     }
+    ]
+   }
+  ],
+  "note": "year_suffix#2バッチ2026-08-10: ますむらひろし版がslugハイフン揺れで2頁に分裂(風呂猫最終形/扶桑社)。版タブ統合"
+ },
  "gingatetsudou-no-yoru": {
   "authors": [
    {
@@ -10147,6 +10345,10 @@
  },
  "go-west-2004": {
   "title_kana": "ゴーウェスト"
+ },
+ "goaisatsu": {
+  "demographic": "seinen",
+  "note": "分野是正2026-08-10: kodomo→seinen(レーベル確証=モーニングKC)"
  },
  "going-to-hell": {
   "title_kana": "ゴーイングトゥヘル"
@@ -12945,6 +13147,10 @@
    }
   ]
  },
+ "golgo-13-series": {
+  "note": "title_kana補完2026-08-10(本編golgo-13のkana=ゴルゴサーティーン確定済+シリーズ)",
+  "title_kana": "ゴルゴサーティーンシリーズ"
+ },
  "gou-himetachi-no-sengoku": {
   "editions": [
    {
@@ -13046,6 +13252,11 @@
    }
   ]
  },
+ "green-paradise": {
+  "note": "2026-08-08 per-case: 題がラテン「GREEN PARADISE」だったが、NDL(4403612539)も楽天(ISBN直引き)も表題は「グリーン・パラダイス」。同シリーズの兄弟頁(ムーン・ファンタジー/ドリーム・プレイング・ゲーム/シャーロキアン・コンピュータ)もカタカナ表記なので揃えた。",
+  "title": "グリーン・パラダイス",
+  "title_kana": "グリーンパラダイス"
+ },
  "green-requiem": {
   "authors": [
    {
@@ -13064,6 +13275,14 @@
     "romaji": "araimotoko"
    }
   ]
+ },
+ "guri-gura": {
+  "demographic": "josei",
+  "note": "分野是正2026-08-10: kodomo→josei(レーベル確証=ビーボーイコミックスデラックス(BL))"
+ },
+ "guruguru-pon-chan-okawaritsu": {
+  "demographic": "shoujo",
+  "note": "分野是正2026-08-10: kodomo→shoujo(レーベル確証=講談社コミックスフレンドB(別冊フレンド))"
  },
  "guts-jun": {
   "authors": [
@@ -13116,6 +13335,131 @@
   ],
   "year_ended": 1976,
   "year_started": 1976
+ },
+ "gyara": {
+  "anilist": false,
+  "authors": [
+   {
+    "name": "ジョージ秋山",
+    "role": "writer_artist"
+   }
+  ],
+  "editions": [
+   {
+    "imprint": "ヒットコミックス",
+    "label": "通常版",
+    "publisher": "少年画報社",
+    "type": "standard",
+    "volumes": [
+     {
+      "asin": null,
+      "cover_url": null,
+      "isbn13": null,
+      "number": 1,
+      "release_date": "1980-05-15"
+     },
+     {
+      "asin": null,
+      "cover_url": null,
+      "isbn13": null,
+      "number": 2,
+      "release_date": "1980-08-01"
+     },
+     {
+      "asin": null,
+      "cover_url": null,
+      "isbn13": null,
+      "number": 3,
+      "release_date": "1980-10-01"
+     },
+     {
+      "asin": null,
+      "cover_url": null,
+      "isbn13": null,
+      "number": 4,
+      "release_date": "1980-12-15"
+     },
+     {
+      "asin": null,
+      "cover_url": null,
+      "isbn13": null,
+      "number": 5,
+      "release_date": "1981-02-15"
+     },
+     {
+      "asin": null,
+      "cover_url": null,
+      "isbn13": null,
+      "number": 6,
+      "release_date": "1981-04-01"
+     },
+     {
+      "asin": null,
+      "cover_url": null,
+      "isbn13": null,
+      "number": 7,
+      "release_date": "1981-06-01"
+     },
+     {
+      "asin": null,
+      "cover_url": null,
+      "isbn13": null,
+      "number": 8,
+      "release_date": "1981-07-15"
+     }
+    ]
+   }
+  ],
+  "note": "2026-08-17 per-case: ユーザ指摘「三巻以降別物」。種2 sid=42570(qid:Q3778019|name:ギャラ)に原作(ヒットコミックス1980-81)とリメイク(YK2019-20)の2 editionが同居し1頁に接ぎ木されていた(原作1-2巻は番号衝突でdedup負け=不可視)。本頁=ジョージ秋山原作『ギャラ』全8巻(NDL HC286-362、日付NDL×MADB一致、1980-81年=ISBN無し)。リメイクは gyara-aku-e-no-shoutai へ分離。anilist:false=AniList 175230はリメイク側のため遮断(新設フラグ)。",
+  "original_authors": [],
+  "title": "ギャラ",
+  "title_kana": "ギャラ",
+  "year_ended": 1981,
+  "year_started": 1980
+ },
+ "gyara-aku-e-no-shoutai": {
+  "authors": [
+   {
+    "name": "小林拓己",
+    "role": "artist"
+   }
+  ],
+  "editions": [
+   {
+    "imprint": "YKコミックス",
+    "label": "通常版",
+    "publisher": "少年画報社",
+    "type": "standard",
+    "volumes": [
+     {
+      "asin": null,
+      "cover_url": null,
+      "isbn13": "9784785965020",
+      "number": 1,
+      "release_date": "2019-08-26"
+     },
+     {
+      "asin": null,
+      "cover_url": null,
+      "isbn13": "9784785966331",
+      "number": 2,
+      "release_date": "2020-03-23"
+     }
+    ]
+   }
+  ],
+  "note": "2026-08-17 per-case: gyara(原作)から分離したリメイク頁。正式題=NDL『ギャラ = GUARANTEE : 悪への招待』/楽天『ギャラ 〜悪への招待〜』。小林拓己(画)×ジョージ秋山(原作)、YKコミックス全2巻(9784785965020=2019-08-26 / 9784785966331=2020-03-23、日付=楽天・NDLは2019.9/2020.4の奥付月)。title_kanaは本題ヨミのみ(ひぐらし礼の先例)。AniList 175230/synopsis和訳はこちらの頁に帰属(skey共有だがgyara側をanilist:falseで遮断)。",
+  "original_authors": [
+   {
+    "name": "ジョージ秋山",
+    "role": "writer"
+   }
+  ],
+  "title": "ギャラ 〜悪への招待〜",
+  "title_kana": "ギャラ",
+  "title_romaji": "gyara aku e no shoutai",
+  "year_ended": 2020,
+  "year_started": 2019
  },
  "gyouten-ningen-batsealer": {
   "editions": [
@@ -14326,6 +14670,10 @@
   ],
   "note": "JPRO判定初回2026-08-05: 種2在のpromote不達巻をoverridesで挿入(楽天実物裏取り済)"
  },
+ "heart-kyatchi-izumi-chan-zenbu": {
+  "demographic": "shounen",
+  "note": "分野是正2026-08-10: kodomo→shounen(レーベル確証=原連載=少年サンデー(復刊ドットコム復刻))"
+ },
  "heaven-2005": {
   "title_kana": "ヘヴン"
  },
@@ -14388,11 +14736,78 @@
  "hero-1985": {
   "title_kana": "ヒーロー"
  },
+ "hiba": {
+  "note": "2026-08-08 per-case: 連載開始年を2002に是正(Wikipedia『飛葉』発表号 2002年2月8日号-2003年11月29日号)。旧値2003は単行本第1巻の刊行年に引きずられたもの。",
+  "year_ended": 2003,
+  "year_started": 2002
+ },
  "hideout": {
   "title_kana": "ハイドアウト"
  },
  "high-life-1999": {
   "title_kana": "ハイライフ"
+ },
+ "higurashi-no-naku-koro-ni-itagaki-hako-senshuu": {
+  "authors": [
+   {
+    "name": "板垣ハコ",
+    "role": "artist"
+   }
+  ],
+  "note": "2026-08-08 per-case: 著者が『オンディ』になっていた(種2 sid69511 の series_authors が誤り。オンディは別作『オンディ撰集』の作家)。NDL責任表示「板垣ハコ 漫画 , 竜騎士07, 07th Expansion」×楽天著者「板垣ハコ/竜騎士07」で是正。巻構成は edition-canonical。",
+  "original_authors": [
+   {
+    "name": "竜騎士07",
+    "role": "writer"
+   }
+  ],
+  "year_ended": 2012,
+  "year_started": 2011
+ },
+ "higurashi-no-naku-koro-ni-kai-utsutsukowashihen": {
+  "note": "★2026-08-08 連載年を2006-2007に是正(ja.wikipedia「ひぐらしのなく頃に怪 現壊し編」= 月刊コンプエース 2006年12月26日-2007年12月21日。旧値2007は単行本の刊行年に引きずられたもの)。読みは記事冒頭の「ひぐらしのなくころにかい うつつこわしへん」で確定し slug を -2007-2 から編名ベースへ。",
+  "title_kana": "ヒグラシノナクコロニカイ",
+  "year_ended": 2007,
+  "year_started": 2006
+ },
+ "higurashi-no-naku-koro-ni-onikakushihen": {
+  "authors": [
+   {
+    "name": "鈴羅木かりん",
+    "role": "artist"
+   }
+  ],
+  "note": "2026-08-08 per-case: 著者から『方条ゆとり』を除去。NDLの責任表示は2巻とも「竜騎士07 原作・監修, 鈴羅木かりん 作画」で、ja.wikipedia の漫画一覧も鬼隠し編=鈴羅木かりん。方條ゆとりは綿流し編・解 目明し編の作画者で、この頁への誤混入だった。",
+  "original_authors": [
+   {
+    "name": "竜騎士07",
+    "role": "writer"
+   }
+  ]
+ },
+ "higurashi-no-naku-koro-ni-rei": {
+  "authors": [
+   {
+    "name": "夏海ケイ",
+    "role": "artist"
+   }
+  ],
+  "note": "2026-08-08 per-case: 3編混在頁を『令 鬼熾し編』に確定(ja.wikipedia=夏海ケイ/ガンガンONLINE/2021年11月-2022年8月/全2巻)。刻夜セイゴは星渡し編の作画者なのでこの頁から外し別頁へ。巻構成は edition-canonical/higurashi-no-naku-koro-ni-rei.yml。",
+  "original_authors": [
+   {
+    "name": "竜騎士07",
+    "role": "writer"
+   }
+  ],
+  "title": "ひぐらしのなく頃に令 鬼熾し編",
+  "title_kana": "ヒグラシノナクコロニレイ",
+  "year_ended": 2022,
+  "year_started": 2021
+ },
+ "higurashi-no-naku-koro-ni-rei-saikoroshihen": {
+  "note": "2026-08-08 per-case: 題に編名が欠けていた。ja.wikipedia=『ひぐらしのなく頃に礼 賽殺し編』鈴羅木かりん/月刊ガンガンJOKER/全1巻。NDLも「ひぐらしのなく頃に礼 : 賽殺し編」(ヨミ ヒグラシ ノ ナク コロ ニ レイ : サイコロシヘン)で収録。title_kana は既存の編別頁と同じく本題のヨミのみ。 ★2026-08-08 slug変更(higurashi-no-naku-koro-ni-rei-ryukishi-2011→higurashi-no-naku-koro-ni-rei-saikoroshihen)によりキー付替。",
+  "title": "ひぐらしのなく頃に礼 賽殺し編",
+  "title_kana": "ヒグラシノナクコロニレイ"
  },
  "hijikata-toshizou-kanda": {
   "title": "鬼の副長 土方歳三",
@@ -14623,6 +15038,11 @@
   "year_ended": 1979,
   "year_started": 1979
  },
+ "hime-kishi-ga-classmate": {
+  "note": "2026-08-08 per-case: 10巻(9784799222256 / 2026-10-08予定)を種4で追加したため出版年の下限を2026に。旧値の完結(2025)は9巻までしか無かったことによる。",
+  "year_ended": 2026,
+  "year_started": 2016
+ },
  "himegimi-no-tou-kizukurugan": {
   "_note": "誤番号是正(NDL=巻表記なし単巻/題中数字・完全版等を巻番号と誤認)。solo-truncated証拠なし監査 2026-07-27",
   "editions": [
@@ -14668,6 +15088,13 @@
   "year_ended": 1984,
   "year_started": 1984
  },
+ "himitsu-tantei-ja": {
+  "note": "2026-08-14 per-case(ユーザ裁定): ①ヨミから「シンパン(新版)」を除去=頁が種2の『新版秘密探偵JA』クラスタから建った焼き付き。NDLのタイトルよみは大都社版=ヒミツ タンテイ ジェイエイ/ホーム社HMB版=ヒミツ タンテイ JA でいずれにも新版は無い ②連載年を1965-1969に是正=ja.wikipedia『秘密探偵JA』(週刊少年キング1965-1969連載・望月三起也の初ヒット作)。旧値1982-1985は単行本(秋田漫画文庫/大都社Star comics)の刊行年に引きずられたもので、連載年は巻の刊行年から導けない(ワイルド7・朝太郎伝と同型) ③掲載誌 shonen-king は magazine-corrections.yml へ(edition-overridesはmagazine未対応=no-op)。★キーは公開slug=slug-overridesで shinpan-himitsu-tantei-jieiei → himitsu-tantei-ja に改名済のため新slug側に置く。版構成は edition-canonical/shinpan-himitsu-tantei-jieiei.yml(こちらはSRC slugがキー)が正。",
+  "title_kana": "ヒミツタンテイジェイエイ",
+  "title_romaji": "himitsu tantei jeiei",
+  "year_ended": 1969,
+  "year_started": 1965
+ },
  "hinomaru-gekijou": {
   "authors": [
    {
@@ -14693,6 +15120,55 @@
   ],
   "year_ended": 1982,
   "year_started": 1982
+ },
+ "hiyaku-monogatari": {
+  "_note": "2026-08-26 パック/BOX監査: 幽霊vol2(ISBN無/日付無=手塚ファウストBOX構成員の残骸)除去+原版ジャンプ・コミックス1971復元。復刊ドットコム《オリジナル版》(7150円)は実在単品=愛蔵版タブでkeep。単巻作品(連載1971)",
+  "editions": [
+   {
+    "imprint": "ジャンプ・コミックス",
+    "label": "通常版",
+    "type": "standard",
+    "volumes": [
+     {
+      "asin": null,
+      "cover_url": null,
+      "isbn13": null,
+      "number": 1,
+      "release_date": "1971-12-31"
+     }
+    ]
+   },
+   {
+    "imprint": "集英社漫画文庫",
+    "label": "文庫版",
+    "type": "bunkobon",
+    "volumes": [
+     {
+      "asin": null,
+      "cover_url": null,
+      "isbn13": null,
+      "number": 1,
+      "release_date": "1976-11-30"
+     }
+    ]
+   },
+   {
+    "imprint": "復刊ドットコム",
+    "label": "復刻オリジナル版",
+    "type": "aizoban",
+    "volumes": [
+     {
+      "asin": null,
+      "cover_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/9578/9784835459578_1_4.jpg?_ex=200x200",
+      "isbn13": "9784835459578",
+      "number": 1,
+      "release_date": "2025-06-13"
+     }
+    ]
+   }
+  ],
+  "year_ended": 1971,
+  "year_started": 1971
  },
  "home-nakamura-2022": {
   "title_kana": "ホーム"
@@ -15531,6 +16007,10 @@
    }
   ]
  },
+ "iruka-chan-yoroshiku": {
+  "demographic": "shoujo",
+  "note": "分野是正2026-08-10: kodomo→shoujo(レーベル確証=りぼんマスコットコミックス)"
+ },
  "is-2010": {
   "title": "IS＜インフィニット・ストラトス＞",
   "title_kana": "インフィニットストラトス"
@@ -15751,6 +16231,42 @@
   "title": "JIN-仁-",
   "title_kana": "ジン"
  },
+ "jinrou-game-beast-side": {
+  "anilist": false,
+  "note": "2026-08-17 ギャラ型r6: 人狼ゲーム本編頁からシリーズ分離した新頁",
+  "title": "人狼ゲーム ビーストサイド",
+  "title_kana": "ジンロウゲームビーストサイド",
+  "title_romaji": "jinrou game beast side",
+  "year_ended": 2017,
+  "year_started": 2016
+ },
+ "jinrou-game-crazy-fox": {
+  "anilist": false,
+  "note": "2026-08-17 ギャラ型r6: 人狼ゲーム本編頁からシリーズ分離した新頁",
+  "title": "人狼ゲーム クレイジーフォックス",
+  "title_kana": "ジンロウゲームクレイジーフォックス",
+  "title_romaji": "jinrou game crazy fox",
+  "year_ended": 2019,
+  "year_started": 2017
+ },
+ "jinrou-game-lost-eden": {
+  "anilist": false,
+  "authors": [
+   {
+    "name": "麗太朗",
+    "role": "artist"
+   },
+   {
+    "name": "川上亮",
+    "role": "writer"
+   }
+  ],
+  "note": "2026-08-17 ギャラ型r6: 人狼ゲーム本編頁からシリーズ分離した新頁(作画=麗太朗=NDL/楽天確認)",
+  "title": "人狼ゲーム ロスト・エデン",
+  "title_kana": "ジンロウゲームロストエデン",
+  "title_romaji": "jinrou game lost eden",
+  "year_started": 2021
+ },
  "jinzou-ningen-kikaider": {
   "authors": [
    {
@@ -15836,6 +16352,68 @@
     ]
    }
   ]
+ },
+ "joker": {
+  "authors": [
+   {
+    "name": "道原かつみ",
+    "role": "artist"
+   }
+  ],
+  "editions": [
+   {
+    "imprint": "ウィングス・コミック文庫",
+    "label": "文庫版",
+    "publisher": "新書館",
+    "type": "bunkobon",
+    "volumes": [
+     {
+      "asin": null,
+      "cover_url": null,
+      "isbn13": "9784403500169",
+      "number": 1,
+      "release_date": "1998-11"
+     },
+     {
+      "asin": null,
+      "cover_url": null,
+      "isbn13": "9784403500176",
+      "number": 2,
+      "release_date": "1998-11"
+     },
+     {
+      "asin": null,
+      "cover_url": null,
+      "isbn13": "9784403500213",
+      "number": 3,
+      "release_date": "1999-05"
+     },
+     {
+      "asin": null,
+      "cover_url": null,
+      "isbn13": "9784403500480",
+      "number": 4,
+      "release_date": "2004-10"
+     },
+     {
+      "asin": null,
+      "cover_url": null,
+      "isbn13": "9784403501227",
+      "number": 5,
+      "release_date": "2008-10"
+     }
+    ]
+   }
+  ],
+  "note": "2026-08-08 per-case: 3つの別物が1頁に混ざっていた。①通常版v1=9784403613227は『Joker 道原かつみ・画集』(画集で漫画ではない)→art-booksへ ②通常版v3-v7=『JOKER REBOOT』3-7巻→joker-reboot頁へ戻した ③文庫版5巻だけが本来の中身(ウィングス・コミック文庫=旧『ジョーカー・シリーズ』の再編集・全5巻)。原作の麻城ゆうが欠落していたので追加し、連載年をWINGS連載期間1986-2004に是正。",
+  "original_authors": [
+   {
+    "name": "麻城ゆう",
+    "role": "writer"
+   }
+  ],
+  "year_ended": 2004,
+  "year_started": 1986
  },
  "joker-1998": {
   "title_kana": "ジョーカー"
@@ -16072,6 +16650,12 @@
   "year_ended": 1978,
   "year_started": 1978
  },
+ "kai-no-utagoe": {
+  "note": "2026-08-08 per-case: 題の1文字目はラテンXではなく**ギリシャ文字χ(カイ)**。ja.wikipedia「ジョーカー・シリーズ (漫画)」の作品リストが「χの歌声」と表記し、楽天のtitleKanaが「X ノ ウタゴエ カイ ノ ウタゴエ」と2読みを併記していて当て字読み『カイ』が確認できる。NDLと楽天の表題がXなのは書誌DBがギリシャ文字をラテンXに正規化する定型。ヨミをカイノウタゴエに、slugを ekkusu-no-utagoe → kai-no-utagoe に是正。",
+  "title": "χの歌声",
+  "title_kana": "カイノウタゴエ",
+  "title_romaji": "kai no utagoe"
+ },
  "kaijakuou": {
   "authors": [
    {
@@ -16123,6 +16707,10 @@
   ],
   "year_ended": 1986,
   "year_started": 1986
+ },
+ "kaiketsu-shirano": {
+  "demographic": "shounen",
+  "note": "分野是正2026-08-10: kodomo→shounen(レーベル確証=手塚治虫の少年誌作品(オリジナル版復刻))"
  },
  "kaiki-shinsatsushitsu": {
   "authors": [
@@ -16387,6 +16975,10 @@
  },
  "kaleidoscope-1994": {
   "title": "カレイドスコープ"
+ },
+ "kamen-rider-stronger": {
+  "note": "title_kana補完2026-08-10(索引skip8の是正。確証=NDL題ヨミ『カメン ライダー ストロンガー』+楽天一致)",
+  "title_kana": "カメンライダーストロンガー"
  },
  "kamui-den": {
   "authors": [
@@ -18719,6 +19311,59 @@
   "year_ended": 1985,
   "year_started": 1985
  },
+ "kibun-wa-mou-sensou": {
+  "editions": [
+   {
+    "label": "アクションコミックス",
+    "publisher": "双葉社",
+    "type": "standard",
+    "volumes": [
+     {
+      "asin": null,
+      "cover_url": null,
+      "isbn13": "9784575930313",
+      "number": 1,
+      "release_date": "1982-01-24"
+     }
+    ]
+   },
+   {
+    "label": "角川新装版(2000)",
+    "publisher": "角川書店",
+    "type": "shinsoban",
+    "volumes": [
+     {
+      "asin": null,
+      "cover_url": null,
+      "isbn13": "9784047133877",
+      "number": 1,
+      "release_date": "2000-12-25"
+     }
+    ]
+   }
+  ],
+  "note": "year_suffix HOLD解消2026-08-10: Wiki+NDLで本編=全1巻確定(双葉AC 1982-01-24 9784575930313/角川新装2000-12-25 9784047133877)。旧構成のISBN無し幽霊2巻は誤り=撤去"
+ },
+ "kibun-wa-mou-sensou-2002": {
+  "editions": [
+   {
+    "label": "角川コミックス・エース・エクストラ",
+    "publisher": "角川書店",
+    "type": "standard",
+    "volumes": [
+     {
+      "asin": null,
+      "cover_url": null,
+      "isbn13": "9784047134942",
+      "number": 1,
+      "release_date": "2002-05"
+     }
+    ]
+   }
+  ],
+  "note": "year_suffix HOLD解消2026-08-10: 藤原カムイ版=続編『気分はもう戦争2.1』単行本1冊(NDL 2002.5 4047134945)。頁題を2.1に是正・大友版幽霊巻2冊の残骸を撤去",
+  "title": "気分はもう戦争2.1"
+ },
  "kiiroi-tebukuro-ekkusu": {
   "authors": [
    {
@@ -19259,6 +19904,37 @@
    }
   ]
  },
+ "kokurikozaka-kara": {
+  "authors": [
+   {
+    "name": "高橋千鶴",
+    "role": "artist"
+   }
+  ],
+  "editions": [
+   {
+    "label": "角川文庫",
+    "publisher": "角川書店",
+    "type": "bunkobon",
+    "volumes": [
+     {
+      "asin": null,
+      "cover_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/4446/9784043944446.jpg?_ex=200x200",
+      "isbn13": "9784043944446",
+      "number": 1,
+      "release_date": "2011-06-25"
+     }
+    ]
+   }
+  ],
+  "note": "フィルムコミック掃引2026-08-10: 映画版4冊除去・原作漫画(高橋千鶴/原作佐山哲郎・角川文庫)を主役に。著者を作画者へ是正 / 原作クレジット是正: 映画側(宮崎駿/丹羽圭子)を除去し原作=佐山哲郎のみ",
+  "original_authors": [
+   {
+    "name": "佐山哲郎",
+    "role": "writer"
+   }
+  ]
+ },
  "konnichiwa-maikon": {
   "_note": "2026-07-25 NDL照会で是正。1巻に2002-06(=英知出版『こんにちはマイコン 完全版』トラウママンガブックス ISBN4754232143 の発売日)が誤って入り、1巻ISBNも欠落していた。NDL: 4091041019=ワンダーライフコミックス:1 / 4091041027=同2。1巻日付は種2(MADB M508378)とNDLの1982.11.01を採用。★2002完全版(別出版社)と1985.5の4091041043の扱いは未裁定=別途",
   "editions": [
@@ -19340,6 +20016,14 @@
    }
   ],
   "note": "2026-07-19 バーテンダー型: 「デラックス」=ビーボーイコミックスデラックス(レーベル名)割れを統合(1-6完備・6巻=2026-08新刊)"
+ },
+ "koufuku-no-ouji": {
+  "demographic": "josei",
+  "note": "分野是正2026-08-10: kodomo→josei(biblos=BLレーベル(要素ボーイズラブ)。児童は誤り)"
+ },
+ "kounai-shasei-sutoresu-furiiku": {
+  "note": "title_kana補完2026-08-10(索引skip8の是正。確証=楽天titleKana『コウナイ シヤセイ アンド ストレス フリーク』)",
+  "title_kana": "コウナイシャセイアンドストレスフリーク"
  },
  "koushi-ankoku-den": {
   "authors": [
@@ -20183,6 +20867,10 @@
   ],
   "note": "2026-07-19 デラックス・レーベル割れ一括統合(バーテンダー型・厳格ゲート): dx4+st4→通常版1..8"
  },
+ "machikoromatchi-plus": {
+  "demographic": "shounen",
+  "note": "分野是正2026-08-10: kodomo→shounen(レーベル確証=ジャンプ+(JUMP COMICS+))"
+ },
  "macross-7-trash-2009": {
   "title_kana": "マクロスセブントラッシュ"
  },
@@ -20596,6 +21284,10 @@
   ],
   "title": "魔法少女リリカルなのはMOVIE 1st THE COMICS",
   "title_kana": "マホウショウジョリリカルナノハムービーファーストザコミックス"
+ },
+ "magiis-inu-jr": {
+  "demographic": "seinen",
+  "note": "分野是正2026-08-10: kodomo→seinen(レーベル確証=Nichibun comics(日本文芸社=青年))"
  },
  "mahouka-koukou-no-rettousei-double-seven-hen": {
   "authors": [
@@ -22071,6 +22763,32 @@
   "year_ended": 1978,
   "year_started": 1978
  },
+ "mimi-o-sumaseba": {
+  "authors": [
+   {
+    "name": "柊あおい",
+    "role": "writer_artist"
+   }
+  ],
+  "editions": [
+   {
+    "label": "集英社文庫コミック版",
+    "publisher": "集英社",
+    "type": "bunkobon",
+    "volumes": [
+     {
+      "asin": null,
+      "cover_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/3383/9784086183383.jpg?_ex=200x200",
+      "isbn13": "9784086183383",
+      "number": 1,
+      "release_date": "2005-07-15"
+     }
+    ]
+   }
+  ],
+  "note": "フィルムコミック掃引2026-08-10: 映画版4冊除去・原作漫画(柊あおい)を主役に。旧著者=近藤喜文(映画監督)は誤り",
+  "original_authors": []
+ },
  "mine-blue": {
   "title_kana": "マインブルー"
  },
@@ -22377,6 +23095,17 @@
  "monkey-peak-the-rock-2020": {
   "title_kana": "モンキーピークザロック"
  },
+ "moon-fantasy": {
+  "note": "2026-08-08 per-case: title_kana に区切り文字『/』が混入していた(ムーン/ファンタジー)。CLAUDE.mdの規約どおりスペース・記号なしの連結形に是正。NDL/楽天のヨミも「ムーン ファンタジー」。",
+  "title_kana": "ムーンファンタジー"
+ },
+ "mudazumo-naki-kaikaku-princess-of-zipang": {
+  "note": "2026-08-17 ギャラ型: 本編頁から続編PoJ全13巻(2018-22)を分離した新頁",
+  "title": "ムダヅモ無き改革 プリンセスオブジパング",
+  "title_romaji": "mudazumo naki kaikaku princess of zipang",
+  "year_ended": 2022,
+  "year_started": 2018
+ },
  "muhai-no-futari": {
   "editions": [
    {
@@ -22662,6 +23391,10 @@
     ]
    }
   ]
+ },
+ "naiki-komori-no-hikikomogomo-seikatsu": {
+  "demographic": "seinen",
+  "note": "分野是正2026-08-10: kodomo→seinen(レーベル確証=FUZ comics(芳文社))"
  },
  "nakayoshi-techiyou": {
   "authors": [
@@ -25028,6 +25761,10 @@
  "odessey-1966-2003": {
   "title_kana": "オデッセイセンキュウヒャクロクジュウロクニセンサン"
  },
+ "ohana-no-moufu": {
+  "demographic": "shoujo",
+  "note": "分野是正2026-08-10: kodomo→shoujo(レーベル確証=マーガレットコミックス)"
+ },
  "ojama-yuurei-kun": {
   "authors": [
    {
@@ -25104,6 +25841,36 @@
   ],
   "year_ended": 1978,
   "year_started": 1978
+ },
+ "omega-7": {
+  "note": "2026-08-14 ユーザ裁定: 頁題を『オメガ7』に。旧値 'Omega 7' は1994年初版(オメガ7)でも2014年SB版(OMEGA7)でもない中間形で、どの版の表記とも一致しなかった。ja.wikipediaの記事名・NDL『オメガ7 : 自衛隊特殊コマンド部隊』(1994 日本出版社)に合わせる。英字表記は alternative_titles.en='Omega 7' に既存で保持されるため検索性は落ちない。ヨミ(オメガセブン)とslug(omega-7)は不変。版構成は edition-canonical/omega-7.yml が正。",
+  "title": "オメガ7"
+ },
+ "omoide-poroporo": {
+  "editions": [
+   {
+    "label": "集英社文庫コミック版",
+    "publisher": "集英社",
+    "type": "bunkobon",
+    "volumes": [
+     {
+      "asin": null,
+      "cover_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/1793/9784086171793.jpg?_ex=200x200",
+      "isbn13": "9784086171793",
+      "number": 1,
+      "release_date": "1996-10"
+     },
+     {
+      "asin": null,
+      "cover_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/1809/9784086171809.jpg?_ex=200x200",
+      "isbn13": "9784086171809",
+      "number": 2,
+      "release_date": "1996-10"
+     }
+    ]
+   }
+  ],
+  "note": "フィルムコミック掃引2026-08-10: 映画版4冊(ISBN無し幽霊1含む)除去・原作漫画(作:岡本螢/画:刀根夕子)文庫2冊を主役に"
  },
  "one-form": {
   "title_kana": "ワンフォーム"
@@ -25602,6 +26369,10 @@
   "year_ended": 2007,
   "year_started": 1990
  },
+ "osakana-march": {
+  "demographic": "seinen",
+  "note": "分野是正2026-08-10: kodomo→seinen(レーベル確証=ノーラコミックス(学研NORA=青年))"
+ },
  "oshigoto": {
   "authors": [
    {
@@ -25639,6 +26410,10 @@
     ]
    }
   ]
+ },
+ "otasuke-miko-miko-chan": {
+  "demographic": "seinen",
+  "note": "分野是正2026-08-10: kodomo→seinen(レーベル確証=Waai! comics(一迅社・青年向け))"
  },
  "otoko-no-jouken": {
   "authors": [
@@ -25741,6 +26516,10 @@
   ],
   "year_ended": 1978,
   "year_started": 1978
+ },
+ "ouji-to-kojiki": {
+  "demographic": "josei",
+  "note": "分野是正2026-08-10: kodomo→josei(レーベル確証=ビーボーイコミックスデラックス(BL))"
  },
  "panchirasshu-jieikee-tara-chan": {
   "editions": [
@@ -26842,6 +27621,10 @@
    }
   ]
  },
+ "peter-to-ookami": {
+  "demographic": "shoujo",
+  "note": "分野是正2026-08-10: kodomo→shoujo(レーベル確証=いち好き・コミックス(冬水社=女性向け))"
+ },
  "pilot-a": {
   "authors": [
    {
@@ -26916,6 +27699,10 @@
    }
   ]
  },
+ "pineapple-army-eikou-e-no-ofusaido": {
+  "note": "title_kana補完2026-08-10(索引skip8の是正。確証=楽天titleKana『パイナツプル ア-ミ- エイコウ エノ オフサイド』)",
+  "title_kana": "パイナップルアーミーエイコウエノオフサイド"
+ },
  "pink": {
   "authors": [
    {
@@ -26967,6 +27754,10 @@
   ],
   "year_ended": 1985,
   "year_started": 1985
+ },
+ "pipedon": {
+  "demographic": "seinen",
+  "note": "分野是正2026-08-10: kodomo→seinen(レーベル確証=ビッグコミックス)"
  },
  "pit-bull": {
   "editions": [
@@ -27488,6 +28279,81 @@
   "year_ended": 2016,
   "year_started": 2011
  },
+ "rakushou-hyper-doll": {
+  "authors": [
+   {
+    "name": "伊藤伸平",
+    "role": "writer_artist"
+   }
+  ],
+  "editions": [
+   {
+    "label": "通常版",
+    "publisher": "徳間書店",
+    "type": "standard",
+    "volumes": [
+     {
+      "asin": null,
+      "cover_url": null,
+      "isbn13": "9784198300463",
+      "number": 1,
+      "release_date": "1995-02"
+     },
+     {
+      "asin": null,
+      "cover_url": null,
+      "isbn13": "9784198300944",
+      "number": 2,
+      "release_date": "1995-10"
+     },
+     {
+      "asin": null,
+      "cover_url": null,
+      "isbn13": "9784198301286",
+      "number": 3,
+      "release_date": "1996-04"
+     },
+     {
+      "asin": null,
+      "cover_url": null,
+      "isbn13": "9784198301507",
+      "number": 4,
+      "release_date": "1996-12-25"
+     },
+     {
+      "asin": null,
+      "cover_url": null,
+      "isbn13": "9784198301729",
+      "number": 5,
+      "release_date": "1997-10-10"
+     }
+    ]
+   },
+   {
+    "label": "英知出版版(2002)",
+    "publisher": "英知出版",
+    "type": "shinsoban",
+    "volumes": [
+     {
+      "asin": null,
+      "cover_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/7542/75423213.jpg?_ex=200x200",
+      "isbn13": "9784754232139",
+      "number": 1,
+      "release_date": "2002-06"
+     },
+     {
+      "asin": null,
+      "cover_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/7542/75423216.jpg?_ex=200x200",
+      "isbn13": "9784754232160",
+      "number": 2,
+      "release_date": "2002-07"
+     }
+    ]
+   }
+  ],
+  "note": "year_suffix#2バッチ2026-08-10: 同一作者(伊藤伸平=伊東は表記揺れ)の3頁分裂を統合。徳間1-5(base1-3+1996頁4-5)+英知2002版1-2を版タブ化",
+  "title": "楽勝!ハイパードール"
+ },
  "real-love": {
   "title_kana": "リアルラブ"
  },
@@ -27788,6 +28654,10 @@
  },
  "rising-sun-1998": {
   "title_kana": "ライジングサン"
+ },
+ "romeo-to-juliet": {
+  "demographic": "josei",
+  "note": "分野是正2026-08-10: kodomo→josei(同『マンガ世界の文学』シリーズ)"
  },
  "rosumarin-no-densetsu": {
   "authors": [
@@ -28374,6 +29244,13 @@
     ]
    }
   ]
+ },
+ "sangoku-rensenki-tokoshie-no-kaboku": {
+  "note": "2026-08-17 ギャラ型: 頁実体=とこしえの華墨全2巻(2018-19)。題・年を確定(kanaは本題ヨミのみ=既存サンゴクレンセンキ据置)",
+  "title": "三国恋戦記〜とこしえの華墨〜",
+  "title_romaji": "sangoku rensenki tokoshie no kaboku",
+  "year_ended": 2019,
+  "year_started": 2018
  },
  "sarutobi-sasuke": {
   "authors": [
@@ -29151,6 +30028,14 @@
   "year_ended": 1980,
   "year_started": 1980
  },
+ "shin-ekiben-hitoritabi": {
+  "anilist": false,
+  "note": "2026-08-17 ギャラ型r3: 本編v1-8枠を占有していた続編(2019-)を分離した新頁。連載中",
+  "title": "新・駅弁ひとり旅〜撮り鉄・菜々編〜",
+  "title_kana": "シンエキベンヒトリタビトリテツナナヘン",
+  "title_romaji": "shin ekiben hitoritabi",
+  "year_started": 2019
+ },
  "shin-goyoukiba": {
   "authors": [
    {
@@ -29357,6 +30242,11 @@
     ]
    }
   ]
+ },
+ "shin-wild-7": {
+  "note": "2026-08-08 per-case: 連載開始年を1986に是正(Wikipedia『新ワイルド7 野獣伝説』コミックバンバン 1986年12月17日号-)。旧値1989は単行本の刊行年に引きずられたもの。year_ended=1991は最終巻(v14 1991-02-20)の年であり連載終了年ではない(終了号がWikipediaに無く確定できない)。版構成は edition-canonical/7-nwairudo7.yml で再構築。 ★2026-08-08 slug を 7-nwairudo7 → shin-wild-7 に変更したためキーを付け替え(edition-overridesのキー=公開slug)。",
+  "year_ended": 1991,
+  "year_started": 1986
  },
  "shin-yajikita-douchuuki": {
   "authors": [
@@ -29609,6 +30499,11 @@
  "shiori-experience-2021": {
   "title": "SHIORI EXPERIENCE ジミなわたしとヘンなおじさん",
   "title_kana": "シオリエクスペリエンスジミナワタシトヘンナオジサン"
+ },
+ "shirasunamura": {
+  "note": "2026-08-08 per-case: 連載開始年を2006に是正(ja.wikipedia「今井神」=『月刊ComicREX』2006年5月号-2014年2月号)。旧値2007は単行本第1巻の刊行年に引きずられたもの。",
+  "year_ended": 2014,
+  "year_started": 2006
  },
  "shiritsu-kiwamemichi-koukou": {
   "editions": [
@@ -30928,6 +31823,10 @@
    }
   ]
  },
+ "sora-meshi": {
+  "demographic": "seinen",
+  "note": "分野是正2026-08-10: kodomo→seinen(レーベル確証=ビッグコミックス)"
+ },
  "sotsugyou-m-1998": {
   "title_kana": "ソツギョウエムプラス"
  },
@@ -31387,6 +32286,11 @@
   "title_kana": "スーパーマリオクン",
   "year_started": 1991
  },
+ "swan": {
+  "note": "2026-08-17 連載年明示: SWAN連載1976-81(МC全21巻=1981-09完結)",
+  "year_ended": 1981,
+  "year_started": 1976
+ },
  "sweet-home-2002": {
   "title_kana": "スイートホーム"
  },
@@ -31468,8 +32372,17 @@
   "year_ended": 1985,
   "year_started": 1985
  },
+ "tamanyan": {
+  "demographic": "shounen",
+  "note": "分野是正2026-08-10: kodomo→shounen(レーベル確証=ドラゴンコミックスエイジ)"
+ },
  "tanimura-hitoshi-no-bakuretsu-cr-umi-monogatari-kouryaku-2002": {
   "title_kana": "タニムラヒトシノバクレツシーアールウミモノガタリコウリャクニセンニ"
+ },
+ "tank-tankuro": {
+  "note": "2026-08-17 連載年明示: タンク・タンクロー=幼年倶楽部連載1934-35(NDL単行本1934-04/1935-10)",
+  "year_ended": 1935,
+  "year_started": 1934
  },
  "tanpopo-chan-wa-sub-kamo-shirenai": {
   "editions": [
@@ -33897,6 +34810,104 @@
    }
   ]
  },
+ "ultraman-kazumine-1968": {
+  "editions": [
+   {
+    "label": "サンデーコミックス(1997復刻)",
+    "publisher": "秋田書店",
+    "type": "standard",
+    "volumes": [
+     {
+      "asin": null,
+      "cover_url": null,
+      "isbn13": "9784253064293",
+      "number": 1,
+      "release_date": "1997-08"
+     },
+     {
+      "asin": null,
+      "cover_url": null,
+      "isbn13": "9784253064309",
+      "number": 2,
+      "release_date": "1997-09-01"
+     }
+    ]
+   },
+   {
+    "label": "秋田コミックス・セレクト(1986)",
+    "publisher": "秋田書店",
+    "type": "wideban",
+    "volumes": [
+     {
+      "asin": null,
+      "cover_url": null,
+      "isbn13": "9784253108546",
+      "number": 1,
+      "release_date": "1986-03-15"
+     }
+    ]
+   },
+   {
+    "label": "名作manga選集(翔泳社1995)",
+    "publisher": "翔泳社",
+    "type": "deluxe",
+    "volumes": [
+     {
+      "asin": null,
+      "cover_url": null,
+      "isbn13": "9784881351796",
+      "number": 1,
+      "release_date": "1995-04-10"
+     },
+     {
+      "asin": null,
+      "cover_url": null,
+      "isbn13": "9784881351802",
+      "number": 2,
+      "release_date": "1995-04-10"
+     }
+    ]
+   },
+   {
+    "label": "最終決定版(2018)",
+    "publisher": "秋田書店",
+    "type": "shinsoban",
+    "volumes": [
+     {
+      "asin": null,
+      "cover_url": null,
+      "isbn13": "9784253107648",
+      "number": 1,
+      "release_date": "2018-11",
+      "title_display": "最終決定版 上"
+     },
+     {
+      "asin": null,
+      "cover_url": null,
+      "isbn13": "9784253107655",
+      "number": 2,
+      "release_date": "2018-11",
+      "title_display": "最終決定版 下"
+     }
+    ]
+   },
+   {
+    "label": "秋田文庫",
+    "publisher": "秋田書店",
+    "type": "bunkobon",
+    "volumes": [
+     {
+      "asin": null,
+      "cover_url": null,
+      "isbn13": "9784253176743",
+      "number": 1,
+      "release_date": "2001-12-10"
+     }
+    ]
+   }
+  ],
+  "note": "year_suffix HOLD解消2026-08-10(ユーザ提供NDL一覧TSV): 1997サンデーC2冊の責任表示=円谷プロ監修+一峰大二=一峰版復刻と確定(混在頁ではなく著者ラベル誤り)。一峰版の全刷を版タブ化: サンデーC復刻/セレクト1986/翔泳社1995(part1追加)/最終決定版2018(上を追加)/秋田文庫。旧構成は別刷を番号巻に直列した汚染だった"
+ },
  "ultras": {
   "title_kana": "ウルトラス"
  },
@@ -34717,6 +35728,11 @@
  "voice-1991": {
   "title": "ヴォイス"
  },
+ "w7": {
+  "note": "2026-08-08 per-case: 初出2014年版をcanonicalで復元したため出版年を2014に是正(旧値2017はモノクローム版だけが載っていたことによる)。Wikipedia『W7』発売日2014年11月28日。",
+  "year_ended": 2014,
+  "year_started": 2014
+ },
  "wadachi": {
   "authors": [
    {
@@ -34850,6 +35866,17 @@
  },
  "water-2011": {
   "title_kana": "ウォーター"
+ },
+ "wild-7": {
+  "authors": [
+   {
+    "name": "望月三起也",
+    "role": "writer_artist"
+   }
+  ],
+  "note": "2026-08-08 per-case: (1)著者から雨蘭を除去= 望月三起也の単独作なのに別作家(無邪気の楽園等)が第一著者として混入していた。NDL/MADB/楽天の責任表示はすべて「望月三起也 著」のみ。(2)連載年を1969-1979に是正(Wikipedia: 少年キング 1969年9月21日号-1979年7月16日号。旧値1974-1979は少年画報社版の巻19以降の刊行年に引きずられたもの)。版構成は edition-canonical/wild-7.yml で再構築。",
+  "year_ended": 1979,
+  "year_started": 1969
  },
  "wings": {
   "title_kana": "ウイングス"
@@ -35785,6 +36812,10 @@
    }
   ]
  },
+ "yumemiru-angel-blue": {
+  "demographic": "shoujo",
+  "note": "分野是正2026-08-10: kodomo→shoujo(レーベル確証=なかよし系ブランドコミカライズ(KCDX))"
+ },
  "yuubijin": {
   "authors": [
    {
@@ -36010,6 +37041,11 @@
   "year_ended": 1968,
   "year_started": 1968
  },
+ "zoku-shin-wild-7": {
+  "note": "2026-08-08 per-case: 連載開始年を1994に是正(Wikipedia『続・新ワイルド7 野獣の紋章』発表期間1994年5月15日-)。旧値1995は単行本刊行年。year_ended=1995は最終巻の年であり連載終了年ではない。 ★2026-08-08 slug を zoku-7-n-wairudo7 → zoku-shin-wild-7 に変更したためキーを付け替え(edition-overridesのキー=公開slug)。",
+  "year_ended": 1995,
+  "year_started": 1994
+ },
  "zootopia": {
   "editions": [
    {
@@ -36063,938 +37099,5 @@
   ],
   "year_ended": 1976,
   "year_started": 1976
- },
- "wild-7": {
-  "authors": [
-   {
-    "name": "望月三起也",
-    "role": "writer_artist"
-   }
-  ],
-  "year_started": 1969,
-  "year_ended": 1979,
-  "note": "2026-08-08 per-case: (1)著者から雨蘭を除去= 望月三起也の単独作なのに別作家(無邪気の楽園等)が第一著者として混入していた。NDL/MADB/楽天の責任表示はすべて「望月三起也 著」のみ。(2)連載年を1969-1979に是正(Wikipedia: 少年キング 1969年9月21日号-1979年7月16日号。旧値1974-1979は少年画報社版の巻19以降の刊行年に引きずられたもの)。版構成は edition-canonical/wild-7.yml で再構築。"
- },
- "w7": {
-  "year_started": 2014,
-  "year_ended": 2014,
-  "note": "2026-08-08 per-case: 初出2014年版をcanonicalで復元したため出版年を2014に是正(旧値2017はモノクローム版だけが載っていたことによる)。Wikipedia『W7』発売日2014年11月28日。"
- },
- "hiba": {
-  "year_started": 2002,
-  "year_ended": 2003,
-  "note": "2026-08-08 per-case: 連載開始年を2002に是正(Wikipedia『飛葉』発表号 2002年2月8日号-2003年11月29日号)。旧値2003は単行本第1巻の刊行年に引きずられたもの。"
- },
- "shin-wild-7": {
-  "year_started": 1986,
-  "year_ended": 1991,
-  "note": "2026-08-08 per-case: 連載開始年を1986に是正(Wikipedia『新ワイルド7 野獣伝説』コミックバンバン 1986年12月17日号-)。旧値1989は単行本の刊行年に引きずられたもの。year_ended=1991は最終巻(v14 1991-02-20)の年であり連載終了年ではない(終了号がWikipediaに無く確定できない)。版構成は edition-canonical/7-nwairudo7.yml で再構築。 ★2026-08-08 slug を 7-nwairudo7 → shin-wild-7 に変更したためキーを付け替え(edition-overridesのキー=公開slug)。"
- },
- "zoku-shin-wild-7": {
-  "year_started": 1994,
-  "year_ended": 1995,
-  "note": "2026-08-08 per-case: 連載開始年を1994に是正(Wikipedia『続・新ワイルド7 野獣の紋章』発表期間1994年5月15日-)。旧値1995は単行本刊行年。year_ended=1995は最終巻の年であり連載終了年ではない。 ★2026-08-08 slug を zoku-7-n-wairudo7 → zoku-shin-wild-7 に変更したためキーを付け替え(edition-overridesのキー=公開slug)。"
- },
- "shirasunamura": {
-  "year_started": 2006,
-  "year_ended": 2014,
-  "note": "2026-08-08 per-case: 連載開始年を2006に是正(ja.wikipedia「今井神」=『月刊ComicREX』2006年5月号-2014年2月号)。旧値2007は単行本第1巻の刊行年に引きずられたもの。"
- },
- "higurashi-no-naku-koro-ni-rei": {
-  "title": "ひぐらしのなく頃に令 鬼熾し編",
-  "title_kana": "ヒグラシノナクコロニレイ",
-  "authors": [
-   {
-    "name": "夏海ケイ",
-    "role": "artist"
-   }
-  ],
-  "original_authors": [
-   {
-    "name": "竜騎士07",
-    "role": "writer"
-   }
-  ],
-  "year_started": 2021,
-  "year_ended": 2022,
-  "note": "2026-08-08 per-case: 3編混在頁を『令 鬼熾し編』に確定(ja.wikipedia=夏海ケイ/ガンガンONLINE/2021年11月-2022年8月/全2巻)。刻夜セイゴは星渡し編の作画者なのでこの頁から外し別頁へ。巻構成は edition-canonical/higurashi-no-naku-koro-ni-rei.yml。"
- },
- "higurashi-no-naku-koro-ni-onikakushihen": {
-  "authors": [
-   {
-    "name": "鈴羅木かりん",
-    "role": "artist"
-   }
-  ],
-  "original_authors": [
-   {
-    "name": "竜騎士07",
-    "role": "writer"
-   }
-  ],
-  "note": "2026-08-08 per-case: 著者から『方条ゆとり』を除去。NDLの責任表示は2巻とも「竜騎士07 原作・監修, 鈴羅木かりん 作画」で、ja.wikipedia の漫画一覧も鬼隠し編=鈴羅木かりん。方條ゆとりは綿流し編・解 目明し編の作画者で、この頁への誤混入だった。"
- },
- "higurashi-no-naku-koro-ni-itagaki-hako-senshuu": {
-  "authors": [
-   {
-    "name": "板垣ハコ",
-    "role": "artist"
-   }
-  ],
-  "original_authors": [
-   {
-    "name": "竜騎士07",
-    "role": "writer"
-   }
-  ],
-  "year_started": 2011,
-  "year_ended": 2012,
-  "note": "2026-08-08 per-case: 著者が『オンディ』になっていた(種2 sid69511 の series_authors が誤り。オンディは別作『オンディ撰集』の作家)。NDL責任表示「板垣ハコ 漫画 , 竜騎士07, 07th Expansion」×楽天著者「板垣ハコ/竜騎士07」で是正。巻構成は edition-canonical。"
- },
- "dokkiri-angel": {
-  "title": "どっきり！エンジェル",
-  "title_kana": "ドッキリエンジェル",
-  "title_romaji": "dokkiri angel",
-  "note": "2026-08-08 per-case: ①題の感嘆符を全角に(書影の実物ロゴとKoboの流通題がいずれも全角。NDLだけ半角) ②ヨミをドッキリエンジェルに(NDL transcription「ドツキリ エンジエル」は旧式の大文字表記。書影上部のローマ字「KAZUKI MOTOYAMA / DOKKIRI ANGEL」が裏付け) ③あわせて slug を dotsukiri-angel → dokkiri-angel に是正。 / 分野是正2026-08-10: kodomo→shounen(レーベル確証=講談社コミックス(少年KC))",
-  "demographic": "shounen"
- },
- "joker": {
-  "authors": [
-   {
-    "name": "道原かつみ",
-    "role": "artist"
-   }
-  ],
-  "original_authors": [
-   {
-    "name": "麻城ゆう",
-    "role": "writer"
-   }
-  ],
-  "year_started": 1986,
-  "year_ended": 2004,
-  "editions": [
-   {
-    "type": "bunkobon",
-    "label": "文庫版",
-    "publisher": "新書館",
-    "imprint": "ウィングス・コミック文庫",
-    "volumes": [
-     {
-      "number": 1,
-      "asin": null,
-      "isbn13": "9784403500169",
-      "cover_url": null,
-      "release_date": "1998-11"
-     },
-     {
-      "number": 2,
-      "asin": null,
-      "isbn13": "9784403500176",
-      "cover_url": null,
-      "release_date": "1998-11"
-     },
-     {
-      "number": 3,
-      "asin": null,
-      "isbn13": "9784403500213",
-      "cover_url": null,
-      "release_date": "1999-05"
-     },
-     {
-      "number": 4,
-      "asin": null,
-      "isbn13": "9784403500480",
-      "cover_url": null,
-      "release_date": "2004-10"
-     },
-     {
-      "number": 5,
-      "asin": null,
-      "isbn13": "9784403501227",
-      "cover_url": null,
-      "release_date": "2008-10"
-     }
-    ]
-   }
-  ],
-  "note": "2026-08-08 per-case: 3つの別物が1頁に混ざっていた。①通常版v1=9784403613227は『Joker 道原かつみ・画集』(画集で漫画ではない)→art-booksへ ②通常版v3-v7=『JOKER REBOOT』3-7巻→joker-reboot頁へ戻した ③文庫版5巻だけが本来の中身(ウィングス・コミック文庫=旧『ジョーカー・シリーズ』の再編集・全5巻)。原作の麻城ゆうが欠落していたので追加し、連載年をWINGS連載期間1986-2004に是正。"
- },
- "kai-no-utagoe": {
-  "title": "χの歌声",
-  "title_kana": "カイノウタゴエ",
-  "title_romaji": "kai no utagoe",
-  "note": "2026-08-08 per-case: 題の1文字目はラテンXではなく**ギリシャ文字χ(カイ)**。ja.wikipedia「ジョーカー・シリーズ (漫画)」の作品リストが「χの歌声」と表記し、楽天のtitleKanaが「X ノ ウタゴエ カイ ノ ウタゴエ」と2読みを併記していて当て字読み『カイ』が確認できる。NDLと楽天の表題がXなのは書誌DBがギリシャ文字をラテンXに正規化する定型。ヨミをカイノウタゴエに、slugを ekkusu-no-utagoe → kai-no-utagoe に是正。"
- },
- "green-paradise": {
-  "title": "グリーン・パラダイス",
-  "title_kana": "グリーンパラダイス",
-  "note": "2026-08-08 per-case: 題がラテン「GREEN PARADISE」だったが、NDL(4403612539)も楽天(ISBN直引き)も表題は「グリーン・パラダイス」。同シリーズの兄弟頁(ムーン・ファンタジー/ドリーム・プレイング・ゲーム/シャーロキアン・コンピュータ)もカタカナ表記なので揃えた。"
- },
- "final-mission": {
-  "title": "ファイナル・ミッション",
-  "title_kana": "ファイナルミッション",
-  "note": "2026-08-08 per-case: 題がラテン「Final Mission」だったが、NDL(4403617581)も楽天も表題は「ファイナル・ミッション」。兄弟頁のカタカナ表記に揃えた。"
- },
- "moon-fantasy": {
-  "title_kana": "ムーンファンタジー",
-  "note": "2026-08-08 per-case: title_kana に区切り文字『/』が混入していた(ムーン/ファンタジー)。CLAUDE.mdの規約どおりスペース・記号なしの連結形に是正。NDL/楽天のヨミも「ムーン ファンタジー」。"
- },
- "higurashi-no-naku-koro-ni-rei-saikoroshihen": {
-  "title": "ひぐらしのなく頃に礼 賽殺し編",
-  "title_kana": "ヒグラシノナクコロニレイ",
-  "note": "2026-08-08 per-case: 題に編名が欠けていた。ja.wikipedia=『ひぐらしのなく頃に礼 賽殺し編』鈴羅木かりん/月刊ガンガンJOKER/全1巻。NDLも「ひぐらしのなく頃に礼 : 賽殺し編」(ヨミ ヒグラシ ノ ナク コロ ニ レイ : サイコロシヘン)で収録。title_kana は既存の編別頁と同じく本題のヨミのみ。 ★2026-08-08 slug変更(higurashi-no-naku-koro-ni-rei-ryukishi-2011→higurashi-no-naku-koro-ni-rei-saikoroshihen)によりキー付替。"
- },
- "higurashi-no-naku-koro-ni-kai-utsutsukowashihen": {
-  "title_kana": "ヒグラシノナクコロニカイ",
-  "year_started": 2006,
-  "year_ended": 2007,
-  "note": "★2026-08-08 連載年を2006-2007に是正(ja.wikipedia「ひぐらしのなく頃に怪 現壊し編」= 月刊コンプエース 2006年12月26日-2007年12月21日。旧値2007は単行本の刊行年に引きずられたもの)。読みは記事冒頭の「ひぐらしのなくころにかい うつつこわしへん」で確定し slug を -2007-2 から編名ベースへ。"
- },
- "hime-kishi-ga-classmate": {
-  "year_started": 2016,
-  "year_ended": 2026,
-  "note": "2026-08-08 per-case: 10巻(9784799222256 / 2026-10-08予定)を種4で追加したため出版年の下限を2026に。旧値の完結(2025)は9巻までしか無かったことによる。"
- },
- "rakushou-hyper-doll": {
-  "title": "楽勝!ハイパードール",
-  "authors": [
-   {
-    "name": "伊藤伸平",
-    "role": "writer_artist"
-   }
-  ],
-  "editions": [
-   {
-    "type": "standard",
-    "label": "通常版",
-    "publisher": "徳間書店",
-    "volumes": [
-     {
-      "number": 1,
-      "asin": null,
-      "isbn13": "9784198300463",
-      "cover_url": null,
-      "release_date": "1995-02"
-     },
-     {
-      "number": 2,
-      "asin": null,
-      "isbn13": "9784198300944",
-      "cover_url": null,
-      "release_date": "1995-10"
-     },
-     {
-      "number": 3,
-      "asin": null,
-      "isbn13": "9784198301286",
-      "cover_url": null,
-      "release_date": "1996-04"
-     },
-     {
-      "number": 4,
-      "asin": null,
-      "isbn13": "9784198301507",
-      "cover_url": null,
-      "release_date": "1996-12-25"
-     },
-     {
-      "number": 5,
-      "asin": null,
-      "isbn13": "9784198301729",
-      "cover_url": null,
-      "release_date": "1997-10-10"
-     }
-    ]
-   },
-   {
-    "type": "shinsoban",
-    "label": "英知出版版(2002)",
-    "publisher": "英知出版",
-    "volumes": [
-     {
-      "number": 1,
-      "asin": null,
-      "isbn13": "9784754232139",
-      "cover_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/7542/75423213.jpg?_ex=200x200",
-      "release_date": "2002-06"
-     },
-     {
-      "number": 2,
-      "asin": null,
-      "isbn13": "9784754232160",
-      "cover_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/7542/75423216.jpg?_ex=200x200",
-      "release_date": "2002-07"
-     }
-    ]
-   }
-  ],
-  "note": "year_suffix#2バッチ2026-08-10: 同一作者(伊藤伸平=伊東は表記揺れ)の3頁分裂を統合。徳間1-5(base1-3+1996頁4-5)+英知2002版1-2を版タブ化"
- },
- "ginga-tetsudou-no-yoru": {
-  "editions": [
-   {
-    "type": "standard",
-    "label": "最終形(風呂猫)",
-    "publisher": "風呂猫",
-    "volumes": [
-     {
-      "number": 1,
-      "asin": null,
-      "isbn13": "9784904732816",
-      "cover_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/2816/9784904732816.jpg?_ex=300x300",
-      "release_date": "2020-10"
-     },
-     {
-      "number": 2,
-      "asin": null,
-      "isbn13": "9784904732830",
-      "cover_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/2830/9784904732830.jpg?_ex=200x200",
-      "release_date": "2021-05"
-     }
-    ]
-   },
-   {
-    "type": "shinsoban",
-    "label": "扶桑社版",
-    "publisher": "扶桑社",
-    "volumes": [
-     {
-      "number": 1,
-      "asin": null,
-      "isbn13": "9784594095048",
-      "cover_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/5048/9784594095048_1_3.jpg?_ex=300x300",
-      "release_date": "2023-06-02"
-     }
-    ]
-   },
-   {
-    "type": "bunkobon",
-    "label": "扶桑社文庫",
-    "publisher": "扶桑社",
-    "volumes": [
-     {
-      "number": 1,
-      "asin": null,
-      "isbn13": "9784594016982",
-      "cover_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/rakutenkobo-ebooks/cabinet/5837/2000013135837.jpg?_ex=300x300",
-      "release_date": "1995-03-30"
-     }
-    ]
-   }
-  ],
-  "note": "year_suffix#2バッチ2026-08-10: ますむらひろし版がslugハイフン揺れで2頁に分裂(風呂猫最終形/扶桑社)。版タブ統合"
- },
- "kibun-wa-mou-sensou": {
-  "editions": [
-   {
-    "type": "standard",
-    "label": "アクションコミックス",
-    "publisher": "双葉社",
-    "volumes": [
-     {
-      "number": 1,
-      "asin": null,
-      "isbn13": "9784575930313",
-      "cover_url": null,
-      "release_date": "1982-01-24"
-     }
-    ]
-   },
-   {
-    "type": "shinsoban",
-    "label": "角川新装版(2000)",
-    "publisher": "角川書店",
-    "volumes": [
-     {
-      "number": 1,
-      "asin": null,
-      "isbn13": "9784047133877",
-      "cover_url": null,
-      "release_date": "2000-12-25"
-     }
-    ]
-   }
-  ],
-  "note": "year_suffix HOLD解消2026-08-10: Wiki+NDLで本編=全1巻確定(双葉AC 1982-01-24 9784575930313/角川新装2000-12-25 9784047133877)。旧構成のISBN無し幽霊2巻は誤り=撤去"
- },
- "kibun-wa-mou-sensou-2002": {
-  "title": "気分はもう戦争2.1",
-  "editions": [
-   {
-    "type": "standard",
-    "label": "角川コミックス・エース・エクストラ",
-    "publisher": "角川書店",
-    "volumes": [
-     {
-      "number": 1,
-      "asin": null,
-      "isbn13": "9784047134942",
-      "cover_url": null,
-      "release_date": "2002-05"
-     }
-    ]
-   }
-  ],
-  "note": "year_suffix HOLD解消2026-08-10: 藤原カムイ版=続編『気分はもう戦争2.1』単行本1冊(NDL 2002.5 4047134945)。頁題を2.1に是正・大友版幽霊巻2冊の残骸を撤去"
- },
- "ultraman-kazumine-1968": {
-  "editions": [
-   {
-    "type": "standard",
-    "label": "サンデーコミックス(1997復刻)",
-    "publisher": "秋田書店",
-    "volumes": [
-     {
-      "number": 1,
-      "asin": null,
-      "isbn13": "9784253064293",
-      "cover_url": null,
-      "release_date": "1997-08"
-     },
-     {
-      "number": 2,
-      "asin": null,
-      "isbn13": "9784253064309",
-      "cover_url": null,
-      "release_date": "1997-09-01"
-     }
-    ]
-   },
-   {
-    "type": "wideban",
-    "label": "秋田コミックス・セレクト(1986)",
-    "publisher": "秋田書店",
-    "volumes": [
-     {
-      "number": 1,
-      "asin": null,
-      "isbn13": "9784253108546",
-      "cover_url": null,
-      "release_date": "1986-03-15"
-     }
-    ]
-   },
-   {
-    "type": "deluxe",
-    "label": "名作manga選集(翔泳社1995)",
-    "publisher": "翔泳社",
-    "volumes": [
-     {
-      "number": 1,
-      "asin": null,
-      "isbn13": "9784881351796",
-      "cover_url": null,
-      "release_date": "1995-04-10"
-     },
-     {
-      "number": 2,
-      "asin": null,
-      "isbn13": "9784881351802",
-      "cover_url": null,
-      "release_date": "1995-04-10"
-     }
-    ]
-   },
-   {
-    "type": "shinsoban",
-    "label": "最終決定版(2018)",
-    "publisher": "秋田書店",
-    "volumes": [
-     {
-      "number": 1,
-      "asin": null,
-      "isbn13": "9784253107648",
-      "cover_url": null,
-      "release_date": "2018-11",
-      "title_display": "最終決定版 上"
-     },
-     {
-      "number": 2,
-      "asin": null,
-      "isbn13": "9784253107655",
-      "cover_url": null,
-      "release_date": "2018-11",
-      "title_display": "最終決定版 下"
-     }
-    ]
-   },
-   {
-    "type": "bunkobon",
-    "label": "秋田文庫",
-    "publisher": "秋田書店",
-    "volumes": [
-     {
-      "number": 1,
-      "asin": null,
-      "isbn13": "9784253176743",
-      "cover_url": null,
-      "release_date": "2001-12-10"
-     }
-    ]
-   }
-  ],
-  "note": "year_suffix HOLD解消2026-08-10(ユーザ提供NDL一覧TSV): 1997サンデーC2冊の責任表示=円谷プロ監修+一峰大二=一峰版復刻と確定(混在頁ではなく著者ラベル誤り)。一峰版の全刷を版タブ化: サンデーC復刻/セレクト1986/翔泳社1995(part1追加)/最終決定版2018(上を追加)/秋田文庫。旧構成は別刷を番号巻に直列した汚染だった"
- },
- "adoribu-ouji-kun": {
-  "title_kana": "アドリブオウジクン",
-  "note": "title_kana補完2026-08-10(索引skip8の是正。確証=楽天titleKana『アドリブ オウジ クン』)"
- },
- "arakure-naito-koukou-bakusouhen": {
-  "title_kana": "アラクレナイトコウコウバクソウヘン",
-  "note": "title_kana補完2026-08-10(索引skip8の是正。確証=楽天titleKana『アラクレ ナイト コウコウ バクソウヘン』)"
- },
- "ashita-e-hashire-eikou-e-no-michi-no-maki": {
-  "title_kana": "アシタエハシレエイコウエノミチノマキ",
-  "note": "title_kana補完2026-08-10(索引skip8の是正。確証=楽天titleKana『エイコウ エノ ミチ』(副題部確証)+主題は標準読み(奔れ=ハシレ))"
- },
- "football-taka-amerikan-football-comics": {
-  "title_kana": "フットボールタカ",
-  "note": "title_kana補完2026-08-10(索引skip8の是正。確証=楽天titleKana『フツトボ-ル タカ』(欧文副題は読み対象外))"
- },
- "kamen-rider-stronger": {
-  "title_kana": "カメンライダーストロンガー",
-  "note": "title_kana補完2026-08-10(索引skip8の是正。確証=NDL題ヨミ『カメン ライダー ストロンガー』+楽天一致)"
- },
- "kounai-shasei-sutoresu-furiiku": {
-  "title_kana": "コウナイシャセイアンドストレスフリーク",
-  "note": "title_kana補完2026-08-10(索引skip8の是正。確証=楽天titleKana『コウナイ シヤセイ アンド ストレス フリーク』)"
- },
- "pineapple-army-eikou-e-no-ofusaido": {
-  "title_kana": "パイナップルアーミーエイコウエノオフサイド",
-  "note": "title_kana補完2026-08-10(索引skip8の是正。確証=楽天titleKana『パイナツプル ア-ミ- エイコウ エノ オフサイド』)"
- },
- "golgo-13-series": {
-  "title_kana": "ゴルゴサーティーンシリーズ",
-  "note": "title_kana補完2026-08-10(本編golgo-13のkana=ゴルゴサーティーン確定済+シリーズ)"
- },
- "aka-to-kuro": {
-  "demographic": "josei",
-  "note": "分野是正2026-08-10: kodomo→josei(世界文化社『マンガ世界の文学』(里中満智子)=大人向け名作シリーズ。児童は誤り)"
- },
- "romeo-to-juliet": {
-  "demographic": "josei",
-  "note": "分野是正2026-08-10: kodomo→josei(同『マンガ世界の文学』シリーズ)"
- },
- "arashigaoka": {
-  "demographic": "josei",
-  "note": "分野是正2026-08-10: kodomo→josei(同『マンガ世界の文学』シリーズ)"
- },
- "koufuku-no-ouji": {
-  "demographic": "josei",
-  "note": "分野是正2026-08-10: kodomo→josei(biblos=BLレーベル(要素ボーイズラブ)。児童は誤り)"
- },
- "aka-to-kuro-komachi": {
-  "demographic": "josei",
-  "note": "分野是正2026-08-10: kodomo→josei(GUSH comics(海王社BLレーベル)の任侠BL。種3が児童と誤付与)"
- },
- "tamanyan": {
-  "demographic": "shounen",
-  "note": "分野是正2026-08-10: kodomo→shounen(レーベル確証=ドラゴンコミックスエイジ)"
- },
- "heart-kyatchi-izumi-chan-zenbu": {
-  "demographic": "shounen",
-  "note": "分野是正2026-08-10: kodomo→shounen(レーベル確証=原連載=少年サンデー(復刊ドットコム復刻))"
- },
- "machikoromatchi-plus": {
-  "demographic": "shounen",
-  "note": "分野是正2026-08-10: kodomo→shounen(レーベル確証=ジャンプ+(JUMP COMICS+))"
- },
- "kaiketsu-shirano": {
-  "demographic": "shounen",
-  "note": "分野是正2026-08-10: kodomo→shounen(レーベル確証=手塚治虫の少年誌作品(オリジナル版復刻))"
- },
- "osakana-march": {
-  "demographic": "seinen",
-  "note": "分野是正2026-08-10: kodomo→seinen(レーベル確証=ノーラコミックス(学研NORA=青年))"
- },
- "magiis-inu-jr": {
-  "demographic": "seinen",
-  "note": "分野是正2026-08-10: kodomo→seinen(レーベル確証=Nichibun comics(日本文芸社=青年))"
- },
- "pipedon": {
-  "demographic": "seinen",
-  "note": "分野是正2026-08-10: kodomo→seinen(レーベル確証=ビッグコミックス)"
- },
- "arumi-chan-no-gakushuuchou": {
-  "demographic": "seinen",
-  "note": "分野是正2026-08-10: kodomo→seinen(レーベル確証=ヤングジャンプ・コミックス)"
- },
- "otasuke-miko-miko-chan": {
-  "demographic": "seinen",
-  "note": "分野是正2026-08-10: kodomo→seinen(レーベル確証=Waai! comics(一迅社・青年向け))"
- },
- "goaisatsu": {
-  "demographic": "seinen",
-  "note": "分野是正2026-08-10: kodomo→seinen(レーベル確証=モーニングKC)"
- },
- "sora-meshi": {
-  "demographic": "seinen",
-  "note": "分野是正2026-08-10: kodomo→seinen(レーベル確証=ビッグコミックス)"
- },
- "dora-q": {
-  "demographic": "seinen",
-  "note": "分野是正2026-08-10: kodomo→seinen(レーベル確証=ヤンマガKC)"
- },
- "naiki-komori-no-hikikomogomo-seikatsu": {
-  "demographic": "seinen",
-  "note": "分野是正2026-08-10: kodomo→seinen(レーベル確証=FUZ comics(芳文社))"
- },
- "iruka-chan-yoroshiku": {
-  "demographic": "shoujo",
-  "note": "分野是正2026-08-10: kodomo→shoujo(レーベル確証=りぼんマスコットコミックス)"
- },
- "ohana-no-moufu": {
-  "demographic": "shoujo",
-  "note": "分野是正2026-08-10: kodomo→shoujo(レーベル確証=マーガレットコミックス)"
- },
- "buraian-kunno-kiyuuka": {
-  "demographic": "shoujo",
-  "note": "分野是正2026-08-10: kodomo→shoujo(レーベル確証=花とゆめCOMICS)"
- },
- "peter-to-ookami": {
-  "demographic": "shoujo",
-  "note": "分野是正2026-08-10: kodomo→shoujo(レーベル確証=いち好き・コミックス(冬水社=女性向け))"
- },
- "bokkonrinri": {
-  "demographic": "shoujo",
-  "note": "分野是正2026-08-10: kodomo→shoujo(レーベル確証=KCデザート)"
- },
- "guruguru-pon-chan-okawaritsu": {
-  "demographic": "shoujo",
-  "note": "分野是正2026-08-10: kodomo→shoujo(レーベル確証=講談社コミックスフレンドB(別冊フレンド))"
- },
- "yumemiru-angel-blue": {
-  "demographic": "shoujo",
-  "note": "分野是正2026-08-10: kodomo→shoujo(レーベル確証=なかよし系ブランドコミカライズ(KCDX))"
- },
- "guri-gura": {
-  "demographic": "josei",
-  "note": "分野是正2026-08-10: kodomo→josei(レーベル確証=ビーボーイコミックスデラックス(BL))"
- },
- "ouji-to-kojiki": {
-  "demographic": "josei",
-  "note": "分野是正2026-08-10: kodomo→josei(レーベル確証=ビーボーイコミックスデラックス(BL))"
- },
- "kokurikozaka-kara": {
-  "editions": [
-   {
-    "type": "bunkobon",
-    "label": "角川文庫",
-    "publisher": "角川書店",
-    "volumes": [
-     {
-      "number": 1,
-      "asin": null,
-      "isbn13": "9784043944446",
-      "cover_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/4446/9784043944446.jpg?_ex=200x200",
-      "release_date": "2011-06-25"
-     }
-    ]
-   }
-  ],
-  "authors": [
-   {
-    "name": "高橋千鶴",
-    "role": "artist"
-   }
-  ],
-  "note": "フィルムコミック掃引2026-08-10: 映画版4冊除去・原作漫画(高橋千鶴/原作佐山哲郎・角川文庫)を主役に。著者を作画者へ是正 / 原作クレジット是正: 映画側(宮崎駿/丹羽圭子)を除去し原作=佐山哲郎のみ",
-  "original_authors": [
-   {
-    "name": "佐山哲郎",
-    "role": "writer"
-   }
-  ]
- },
- "mimi-o-sumaseba": {
-  "editions": [
-   {
-    "type": "bunkobon",
-    "label": "集英社文庫コミック版",
-    "publisher": "集英社",
-    "volumes": [
-     {
-      "number": 1,
-      "asin": null,
-      "isbn13": "9784086183383",
-      "cover_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/3383/9784086183383.jpg?_ex=200x200",
-      "release_date": "2005-07-15"
-     }
-    ]
-   }
-  ],
-  "authors": [
-   {
-    "name": "柊あおい",
-    "role": "writer_artist"
-   }
-  ],
-  "original_authors": [],
-  "note": "フィルムコミック掃引2026-08-10: 映画版4冊除去・原作漫画(柊あおい)を主役に。旧著者=近藤喜文(映画監督)は誤り"
- },
- "omoide-poroporo": {
-  "editions": [
-   {
-    "type": "bunkobon",
-    "label": "集英社文庫コミック版",
-    "publisher": "集英社",
-    "volumes": [
-     {
-      "number": 1,
-      "asin": null,
-      "isbn13": "9784086171793",
-      "cover_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/1793/9784086171793.jpg?_ex=200x200",
-      "release_date": "1996-10"
-     },
-     {
-      "number": 2,
-      "asin": null,
-      "isbn13": "9784086171809",
-      "cover_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/1809/9784086171809.jpg?_ex=200x200",
-      "release_date": "1996-10"
-     }
-    ]
-   }
-  ],
-  "note": "フィルムコミック掃引2026-08-10: 映画版4冊(ISBN無し幽霊1含む)除去・原作漫画(作:岡本螢/画:刀根夕子)文庫2冊を主役に"
- },
- "asatarou-den": {
-  "year_started": 1977,
-  "year_ended": 1979,
-  "note": "2026-08-14 per-case: 連載年を1977-1979に是正(ja.wikipedia『朝太郎伝』= 週刊少年ジャンプ 1977年8号〜1979年15号・全108話)。旧値1979-1980は単行本の刊行年に引きずられたもの(連載年は巻の刊行年からは導けない=ワイルド7と同型)。版構成は edition-canonical/asatarou-den.yml で再構築。"
- },
- "omega-7": {
-  "title": "オメガ7",
-  "note": "2026-08-14 ユーザ裁定: 頁題を『オメガ7』に。旧値 'Omega 7' は1994年初版(オメガ7)でも2014年SB版(OMEGA7)でもない中間形で、どの版の表記とも一致しなかった。ja.wikipediaの記事名・NDL『オメガ7 : 自衛隊特殊コマンド部隊』(1994 日本出版社)に合わせる。英字表記は alternative_titles.en='Omega 7' に既存で保持されるため検索性は落ちない。ヨミ(オメガセブン)とslug(omega-7)は不変。版構成は edition-canonical/omega-7.yml が正。"
- },
- "himitsu-tantei-ja": {
-  "title_kana": "ヒミツタンテイジェイエイ",
-  "title_romaji": "himitsu tantei jeiei",
-  "year_started": 1965,
-  "year_ended": 1969,
-  "note": "2026-08-14 per-case(ユーザ裁定): ①ヨミから「シンパン(新版)」を除去=頁が種2の『新版秘密探偵JA』クラスタから建った焼き付き。NDLのタイトルよみは大都社版=ヒミツ タンテイ ジェイエイ/ホーム社HMB版=ヒミツ タンテイ JA でいずれにも新版は無い ②連載年を1965-1969に是正=ja.wikipedia『秘密探偵JA』(週刊少年キング1965-1969連載・望月三起也の初ヒット作)。旧値1982-1985は単行本(秋田漫画文庫/大都社Star comics)の刊行年に引きずられたもので、連載年は巻の刊行年から導けない(ワイルド7・朝太郎伝と同型) ③掲載誌 shonen-king は magazine-corrections.yml へ(edition-overridesはmagazine未対応=no-op)。★キーは公開slug=slug-overridesで shinpan-himitsu-tantei-jieiei → himitsu-tantei-ja に改名済のため新slug側に置く。版構成は edition-canonical/shinpan-himitsu-tantei-jieiei.yml(こちらはSRC slugがキー)が正。"
- },
- "bakemonogatari": {
-  "authors": [
-   {
-    "name": "大暮維人",
-    "role": "artist"
-   }
-  ],
-  "original_authors": [
-   {
-    "name": "西尾維新",
-    "role": "writer"
-   }
-  ],
-  "note": "2026-08-14 per-case: 原作の西尾維新が抜けていた(本番は大暮維人(artist)単独・original_authors空)。楽天の責任表示は全巻『西尾 維新/大暮 維人』、NDLも著者=['西尾, 維新, 1981-','大暮維人']。★版構成(通常版22巻/特装版22巻の分離)は edition-canonical/bakemonogatari.yml が正。キャラクター原案のVOFANは役割が原案でcreditsの領域のため入れていない。"
- },
- "gyara": {
-  "title": "ギャラ",
-  "title_kana": "ギャラ",
-  "authors": [
-   {
-    "name": "ジョージ秋山",
-    "role": "writer_artist"
-   }
-  ],
-  "original_authors": [],
-  "year_started": 1980,
-  "year_ended": 1981,
-  "anilist": false,
-  "editions": [
-   {
-    "type": "standard",
-    "label": "通常版",
-    "publisher": "少年画報社",
-    "imprint": "ヒットコミックス",
-    "volumes": [
-     {
-      "number": 1,
-      "isbn13": null,
-      "asin": null,
-      "cover_url": null,
-      "release_date": "1980-05-15"
-     },
-     {
-      "number": 2,
-      "isbn13": null,
-      "asin": null,
-      "cover_url": null,
-      "release_date": "1980-08-01"
-     },
-     {
-      "number": 3,
-      "isbn13": null,
-      "asin": null,
-      "cover_url": null,
-      "release_date": "1980-10-01"
-     },
-     {
-      "number": 4,
-      "isbn13": null,
-      "asin": null,
-      "cover_url": null,
-      "release_date": "1980-12-15"
-     },
-     {
-      "number": 5,
-      "isbn13": null,
-      "asin": null,
-      "cover_url": null,
-      "release_date": "1981-02-15"
-     },
-     {
-      "number": 6,
-      "isbn13": null,
-      "asin": null,
-      "cover_url": null,
-      "release_date": "1981-04-01"
-     },
-     {
-      "number": 7,
-      "isbn13": null,
-      "asin": null,
-      "cover_url": null,
-      "release_date": "1981-06-01"
-     },
-     {
-      "number": 8,
-      "isbn13": null,
-      "asin": null,
-      "cover_url": null,
-      "release_date": "1981-07-15"
-     }
-    ]
-   }
-  ],
-  "note": "2026-08-17 per-case: ユーザ指摘「三巻以降別物」。種2 sid=42570(qid:Q3778019|name:ギャラ)に原作(ヒットコミックス1980-81)とリメイク(YK2019-20)の2 editionが同居し1頁に接ぎ木されていた(原作1-2巻は番号衝突でdedup負け=不可視)。本頁=ジョージ秋山原作『ギャラ』全8巻(NDL HC286-362、日付NDL×MADB一致、1980-81年=ISBN無し)。リメイクは gyara-aku-e-no-shoutai へ分離。anilist:false=AniList 175230はリメイク側のため遮断(新設フラグ)。"
- },
- "gyara-aku-e-no-shoutai": {
-  "title": "ギャラ 〜悪への招待〜",
-  "title_kana": "ギャラ",
-  "authors": [
-   {
-    "name": "小林拓己",
-    "role": "artist"
-   }
-  ],
-  "original_authors": [
-   {
-    "name": "ジョージ秋山",
-    "role": "writer"
-   }
-  ],
-  "year_started": 2019,
-  "year_ended": 2020,
-  "editions": [
-   {
-    "type": "standard",
-    "label": "通常版",
-    "publisher": "少年画報社",
-    "imprint": "YKコミックス",
-    "volumes": [
-     {
-      "number": 1,
-      "isbn13": "9784785965020",
-      "asin": null,
-      "cover_url": null,
-      "release_date": "2019-08-26"
-     },
-     {
-      "number": 2,
-      "isbn13": "9784785966331",
-      "asin": null,
-      "cover_url": null,
-      "release_date": "2020-03-23"
-     }
-    ]
-   }
-  ],
-  "note": "2026-08-17 per-case: gyara(原作)から分離したリメイク頁。正式題=NDL『ギャラ = GUARANTEE : 悪への招待』/楽天『ギャラ 〜悪への招待〜』。小林拓己(画)×ジョージ秋山(原作)、YKコミックス全2巻(9784785965020=2019-08-26 / 9784785966331=2020-03-23、日付=楽天・NDLは2019.9/2020.4の奥付月)。title_kanaは本題ヨミのみ(ひぐらし礼の先例)。AniList 175230/synopsis和訳はこちらの頁に帰属(skey共有だがgyara側をanilist:falseで遮断)。",
-  "title_romaji": "gyara aku e no shoutai"
- },
- "swan": {
-  "year_started": 1976,
-  "year_ended": 1981,
-  "note": "2026-08-17 連載年明示: SWAN連載1976-81(МC全21巻=1981-09完結)"
- },
- "fushigina-shounen-tezuka": {
-  "year_started": 1961,
-  "year_ended": 1962,
-  "note": "2026-08-17 連載年明示: ふしぎな少年=少年クラブ連載1961-62(NDL付録記録1962-08)"
- },
- "tank-tankuro": {
-  "year_started": 1934,
-  "year_ended": 1935,
-  "note": "2026-08-17 連載年明示: タンク・タンクロー=幼年倶楽部連載1934-35(NDL単行本1934-04/1935-10)"
- },
- "sangoku-rensenki-tokoshie-no-kaboku": {
-  "title": "三国恋戦記〜とこしえの華墨〜",
-  "title_romaji": "sangoku rensenki tokoshie no kaboku",
-  "year_started": 2018,
-  "year_ended": 2019,
-  "note": "2026-08-17 ギャラ型: 頁実体=とこしえの華墨全2巻(2018-19)。題・年を確定(kanaは本題ヨミのみ=既存サンゴクレンセンキ据置)"
- },
- "mudazumo-naki-kaikaku-princess-of-zipang": {
-  "title": "ムダヅモ無き改革 プリンセスオブジパング",
-  "title_romaji": "mudazumo naki kaikaku princess of zipang",
-  "year_started": 2018,
-  "year_ended": 2022,
-  "note": "2026-08-17 ギャラ型: 本編頁から続編PoJ全13巻(2018-22)を分離した新頁"
- },
- "fukufuku-funyaan-new": {
-  "title": "ふくふくふにゃーんNEW",
-  "title_kana": "フクフクフニャーンニュー",
-  "title_romaji": "fukufuku funyaan new",
-  "year_started": 2005,
-  "year_ended": 2013,
-  "anilist": false,
-  "note": "2026-08-17 ギャラ型: 本編頁のv1-8枠に食い込んでいた続編NEW全8巻(2005-13 KCDX)を分離した新頁"
- },
- "shin-ekiben-hitoritabi": {
-  "title": "新・駅弁ひとり旅〜撮り鉄・菜々編〜",
-  "title_kana": "シンエキベンヒトリタビトリテツナナヘン",
-  "title_romaji": "shin ekiben hitoritabi",
-  "year_started": 2019,
-  "anilist": false,
-  "note": "2026-08-17 ギャラ型r3: 本編v1-8枠を占有していた続編(2019-)を分離した新頁。連載中"
- },
- "jinrou-game-beast-side": {
-  "title": "人狼ゲーム ビーストサイド",
-  "title_kana": "ジンロウゲームビーストサイド",
-  "title_romaji": "jinrou game beast side",
-  "year_started": 2016,
-  "year_ended": 2017,
-  "anilist": false,
-  "note": "2026-08-17 ギャラ型r6: 人狼ゲーム本編頁からシリーズ分離した新頁"
- },
- "jinrou-game-crazy-fox": {
-  "title": "人狼ゲーム クレイジーフォックス",
-  "title_kana": "ジンロウゲームクレイジーフォックス",
-  "title_romaji": "jinrou game crazy fox",
-  "year_started": 2017,
-  "year_ended": 2019,
-  "anilist": false,
-  "note": "2026-08-17 ギャラ型r6: 人狼ゲーム本編頁からシリーズ分離した新頁"
- },
- "jinrou-game-lost-eden": {
-  "title": "人狼ゲーム ロスト・エデン",
-  "title_kana": "ジンロウゲームロストエデン",
-  "title_romaji": "jinrou game lost eden",
-  "year_started": 2021,
-  "anilist": false,
-  "authors": [
-   {
-    "name": "麗太朗",
-    "role": "artist"
-   },
-   {
-    "name": "川上亮",
-    "role": "writer"
-   }
-  ],
-  "note": "2026-08-17 ギャラ型r6: 人狼ゲーム本編頁からシリーズ分離した新頁(作画=麗太朗=NDL/楽天確認)"
  }
 }

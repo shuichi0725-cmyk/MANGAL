@@ -1,7 +1,3 @@
-# 種4 auto = MADB取込もれ巻の**蓄積台帳** (日次zokkan/巻抜けfill/NDL確認の合流先)。
-# 手動版 data/seeds/volumes-supplement.yml は不変。 promote/audit が両方 load。
-# ★全消し禁止: _register-seed4-ndl.py は source: ndl-auto の entry だけを差し替え、
-#   他 source (rakuten-preorder/rakuten-local/rakuten-live 等) は必ず保存する (2026-08-26恒久修正)。
 schema_version: 1
 generator: ndl-auto
 volumes:
@@ -13668,3 +13664,509 @@ volumes:
   source: rakuten-preorder
   added_at: '2026-08-14'
   note: 楽天予約ハーベスト① slug=under-3
+- series_keys:
+  - qid:Q11520170|name:スーパーマリオランド
+  number: 1
+  isbn13: '9784063131031'
+  release_date: 1989-08
+  publisher: ''
+  edition_type: standard
+  title_display: スーパーマリオランド（1）
+  source: vol0-first
+  added_at: '2026-08-26'
+  note: number=0の1巻が続巻到着で不可視化(泣かせたくて型)。0巻1989-08<最古numbered。楽天題一致ゲート通過→巻1として復元
+- series_keys:
+  - qid:Q193300|name:リボンの騎士
+  number: 1
+  isbn13: '9784835449029'
+  release_date: 2012-11
+  publisher: ''
+  edition_type: standard
+  title_display: リボンの騎士
+  source: vol0-first
+  added_at: '2026-08-26'
+  note: number=0の1巻が続巻到着で不可視化(泣かせたくて型)。0巻2012-11<最古numbered。楽天題一致ゲート通過→巻1として復元
+- series_keys:
+  - qid:Q3431787|name:西原理恵子の人生一年生
+  number: 1
+  isbn13: '9784091060044'
+  release_date: '2001-12-01'
+  publisher: ''
+  edition_type: standard
+  title_display: 西原理恵子の人生一年生
+  source: vol0-first
+  added_at: '2026-08-26'
+  note: number=0の1巻が続巻到着で不可視化(泣かせたくて型)。0巻2001-12-01<最古numbered。楽天題一致ゲート通過→巻1として復元
+- series_keys:
+  - qid:Q465645|name:テイクイットイージー
+  number: 1
+  isbn13: '9784789782432'
+  release_date: 2000-02
+  publisher: ''
+  edition_type: standard
+  title_display: テイクイットイージー
+  source: vol0-first
+  added_at: '2026-08-26'
+  note: number=0の1巻が続巻到着で不可視化(泣かせたくて型)。0巻2000-02<最古numbered。楽天題一致ゲート通過→巻1として復元
+- series_keys:
+  - qid:Q723853|name:孤独のグルメ
+  number: 1
+  isbn13: '9784594028565'
+  release_date: '2000-02-29'
+  publisher: ''
+  edition_type: standard
+  title_display: 孤独のグルメ
+  source: vol0-first
+  added_at: '2026-08-26'
+  note: number=0の1巻が続巻到着で不可視化(泣かせたくて型)。0巻2000-02-29<最古numbered。楽天題一致ゲート通過→巻1として復元
+- series_keys:
+  - qid:Q9124165|name:クラリオンの子供たち
+  number: 1
+  isbn13: '9784893931337'
+  release_date: '1993-12-25'
+  publisher: ''
+  edition_type: standard
+  title_display: クラリオンの子供たち
+  source: vol0-first
+  added_at: '2026-08-26'
+  note: number=0の1巻が続巻到着で不可視化(泣かせたくて型)。0巻1993-12-25<最古numbered。楽天題一致ゲート通過→巻1として復元
+- series_keys:
+  - name:猫宮なお|name:ちっぱい女子と雄っぱい男子
+  number: 1
+  isbn13: '9784821138524'
+  release_date: 2019-10
+  publisher: ''
+  edition_type: standard
+  title_display: ちっぱい女子と雄っぱい男子
+  source: vol0-first
+  added_at: '2026-08-26'
+  note: number=0の1巻が続巻到着で不可視化(泣かせたくて型)。0巻2019-10<最古numbered。楽天題一致ゲート通過→巻1として復元
+- series_keys:
+  - name:松本ウル子|name:オジサマ紳士はケダモノ上司
+  number: 1
+  isbn13: '9784821138166'
+  release_date: 2019-08
+  publisher: ''
+  edition_type: standard
+  title_display: オジサマ紳士はケダモノ上司
+  source: vol0-first
+  added_at: '2026-08-26'
+  note: number=0の1巻が続巻到着で不可視化(泣かせたくて型)。0巻2019-08<最古numbered。楽天題一致ゲート通過→巻1として復元
+- series_keys:
+  - name:嶋永のの|name:俺を、たたせてみろよ
+  number: 1
+  isbn13: '9784909699145'
+  release_date: 2019-05
+  publisher: ''
+  edition_type: standard
+  title_display: 俺を、たたせてみろよ
+  source: vol0-first
+  added_at: '2026-08-26'
+  note: number=0の1巻が続巻到着で不可視化(泣かせたくて型)。0巻2019-05<最古numbered。楽天題一致ゲート通過→巻1として復元
+- series_keys:
+  - name:マミタ|name:40までにしたい10のこと
+  number: 1
+  isbn13: '9784799761328'
+  release_date: 2023-02
+  publisher: ''
+  edition_type: standard
+  title_display: 40までにしたい10のこと
+  source: vol0-first
+  added_at: '2026-08-26'
+  note: number=0の1巻が続巻到着で不可視化(泣かせたくて型)。0巻2023-02<最古numbered。楽天題一致ゲート通過→巻1として復元
+- series_keys:
+  - name:PMGL|name:HARUKI MURAKAMI MANGA STORIES
+  number: 1
+  isbn13: '9784805317648'
+  release_date: '2023'
+  publisher: ''
+  edition_type: standard
+  title_display: Haruki Murakami Manga Stories
+  source: vol0-first
+  added_at: '2026-08-26'
+  note: number=0の1巻が続巻到着で不可視化(泣かせたくて型)。0巻2023<最古numbered。楽天題一致ゲート通過→巻1として復元
+- series_keys:
+  - name:Hitotori|name:Hate my Mia!
+  number: 1
+  isbn13: '9784865896596'
+  release_date: 2021-09
+  publisher: ''
+  edition_type: standard
+  title_display: Hate　My　MIA！
+  source: vol0-first
+  added_at: '2026-08-26'
+  note: number=0の1巻が続巻到着で不可視化(泣かせたくて型)。0巻2021-09<最古numbered。楽天題一致ゲート通過→巻1として復元
+- series_keys:
+  - name:やまもとりえ|name:うちらはマブダチ
+  number: 1
+  isbn13: '9784046827753'
+  release_date: 2023-07
+  publisher: ''
+  edition_type: standard
+  title_display: うちらはマブダチ
+  source: vol0-first
+  added_at: '2026-08-26'
+  note: number=0の1巻が続巻到着で不可視化(泣かせたくて型)。0巻2023-07<最古numbered。楽天題一致ゲート通過→巻1として復元
+- series_keys:
+  - name:世迷い|name:かわいいきみ|sub:美人な幼馴染と平凡な僕
+  number: 1
+  isbn13: '9784864956277'
+  release_date: 2023-11
+  publisher: ''
+  edition_type: standard
+  title_display: かわいいきみ
+  source: vol0-first
+  added_at: '2026-08-26'
+  note: number=0の1巻が続巻到着で不可視化(泣かせたくて型)。0巻2023-11<最古numbered。楽天題一致ゲート通過→巻1として復元
+- series_keys:
+  - name:ぺこまる|name:これはきっと、運命の恋
+  number: 1
+  isbn13: '9784776754923'
+  release_date: 2024-03
+  publisher: ''
+  edition_type: standard
+  title_display: これはきっと、運命の恋
+  source: vol0-first
+  added_at: '2026-08-26'
+  note: number=0の1巻が続巻到着で不可視化(泣かせたくて型)。0巻2024-03<最古numbered。楽天題一致ゲート通過→巻1として復元
+- series_keys:
+  - name:清水アイ|name:ねこまたとあさごはん
+  number: 1
+  isbn13: '9784781621241'
+  release_date: 2022-10
+  publisher: ''
+  edition_type: standard
+  title_display: ねこまたとあさごはん
+  source: vol0-first
+  added_at: '2026-08-26'
+  note: number=0の1巻が続巻到着で不可視化(泣かせたくて型)。0巻2022-10<最古numbered。楽天題一致ゲート通過→巻1として復元
+- series_keys:
+  - name:おまゆ|name:まって、好き。
+  number: 1
+  isbn13: '9784799766040'
+  release_date: 2024-02
+  publisher: ''
+  edition_type: standard
+  title_display: まって、好き。
+  source: vol0-first
+  added_at: '2026-08-26'
+  note: number=0の1巻が続巻到着で不可視化(泣かせたくて型)。0巻2024-02<最古numbered。楽天題一致ゲート通過→巻1として復元
+- series_keys:
+  - name:Pt|name:みことちゃんは嫌われたくない!
+  number: 1
+  isbn13: '9784046830821'
+  release_date: 2024-01
+  publisher: ''
+  edition_type: standard
+  title_display: みことちゃんは嫌われたくない！
+  source: vol0-first
+  added_at: '2026-08-26'
+  note: number=0の1巻が続巻到着で不可視化(泣かせたくて型)。0巻2024-01<最古numbered。楽天題一致ゲート通過→巻1として復元
+- series_keys:
+  - name:松本あやか|name:やたらやらしい深見くん
+  number: 1
+  isbn13: '9784434328015'
+  release_date: 2024-01
+  publisher: ''
+  edition_type: standard
+  title_display: やたらやらしい深見くん
+  source: vol0-first
+  added_at: '2026-08-26'
+  note: number=0の1巻が続巻到着で不可視化(泣かせたくて型)。0巻2024-01<最古numbered。楽天題一致ゲート通過→巻1として復元
+- series_keys:
+  - name:尾羊英|name:ゆかいな神統記
+  number: 1
+  isbn13: '9784047382787'
+  release_date: '2025-03-03'
+  publisher: ''
+  edition_type: standard
+  title_display: ゆかいな神統記
+  source: vol0-first
+  added_at: '2026-08-26'
+  note: number=0の1巻が続巻到着で不可視化(泣かせたくて型)。0巻2025-03-03<最古numbered。楽天題一致ゲート通過→巻1として復元
+- series_keys:
+  - name:花田祐実|name:わたしは憧れの恋人
+  number: 1
+  isbn13: '9784253137454'
+  release_date: 2022-03
+  publisher: ''
+  edition_type: standard
+  title_display: わたしは憧れの恋人
+  source: vol0-first
+  added_at: '2026-08-26'
+  note: number=0の1巻が続巻到着で不可視化(泣かせたくて型)。0巻2022-03<最古numbered。楽天題一致ゲート通過→巻1として復元
+- series_keys:
+  - name:脳みそ海綿隊|name:インキュバスだって純愛したい
+  number: 1
+  isbn13: '9784434336607'
+  release_date: 2024-06
+  publisher: ''
+  edition_type: standard
+  title_display: インキュバスだって純愛したい
+  source: vol0-first
+  added_at: '2026-08-26'
+  note: number=0の1巻が続巻到着で不可視化(泣かせたくて型)。0巻2024-06<最古numbered。楽天題一致ゲート通過→巻1として復元
+- series_keys:
+  - name:ブライアン・マイケル・ベンディス|name:インビンシブル・アイアンマン:アイアンハート
+  number: 1
+  isbn13: '9784796878883'
+  release_date: 2022-08
+  publisher: ''
+  edition_type: standard
+  title_display: インビンシブル・アイアンマン：アイアンハート
+  source: vol0-first
+  added_at: '2026-08-26'
+  note: number=0の1巻が続巻到着で不可視化(泣かせたくて型)。0巻2022-08<最古numbered。楽天題一致ゲート通過→巻1として復元
+- series_keys:
+  - name:ゆあみ|name:コアラ絵日記
+  number: 1
+  isbn13: '9784046809193'
+  release_date: 2022-03
+  publisher: ''
+  edition_type: standard
+  title_display: コアラ絵日記
+  source: vol0-first
+  added_at: '2026-08-26'
+  note: number=0の1巻が続巻到着で不可視化(泣かせたくて型)。0巻2022-03<最古numbered。楽天題一致ゲート通過→巻1として復元
+- series_keys:
+  - name:ニシハラハコ|name:ニシハラさんのわかりにくい恋
+  number: 1
+  isbn13: '9784824003287'
+  release_date: 2022-12
+  publisher: ''
+  edition_type: standard
+  title_display: ニシハラさんのわかりにくい恋
+  source: vol0-first
+  added_at: '2026-08-26'
+  note: number=0の1巻が続巻到着で不可視化(泣かせたくて型)。0巻2022-12<最古numbered。楽天題一致ゲート通過→巻1として復元
+- series_keys:
+  - name:七緒|name:ノンケ上司、30日の開発メソッド
+  number: 1
+  isbn13: '9784434293245'
+  release_date: 2021-11
+  publisher: ''
+  edition_type: standard
+  title_display: ノンケ上司、30日の開発メソッド
+  source: vol0-first
+  added_at: '2026-08-26'
+  note: number=0の1巻が続巻到着で不可視化(泣かせたくて型)。0巻2021-11<最古numbered。楽天題一致ゲート通過→巻1として復元
+- series_keys:
+  - name:三上志乃|name:ピットスポルム
+  number: 1
+  isbn13: '9784823603747'
+  release_date: 2022-11
+  publisher: ''
+  edition_type: standard
+  title_display: ピットスポルム 一葉
+  source: vol0-first
+  added_at: '2026-08-26'
+  note: number=0の1巻が続巻到着で不可視化(泣かせたくて型)。0巻2022-11<最古numbered。楽天題一致ゲート通過→巻1として復元
+- series_keys:
+  - name:三上志乃|name:ピットスポルム
+  number: 1
+  isbn13: '9784823603754'
+  release_date: 2022-11
+  publisher: ''
+  edition_type: standard
+  title_display: ピットスポルム 二葉
+  source: vol0-first
+  added_at: '2026-08-26'
+  note: number=0の1巻が続巻到着で不可視化(泣かせたくて型)。0巻2022-11<最古numbered。楽天題一致ゲート通過→巻1として復元
+- series_keys:
+  - name:三上志乃|name:ピットスポルム
+  number: 1
+  isbn13: '9784823605833'
+  release_date: 2023-12
+  publisher: ''
+  edition_type: standard
+  title_display: ピットスポルム 三葉
+  source: vol0-first
+  added_at: '2026-08-26'
+  note: number=0の1巻が続巻到着で不可視化(泣かせたくて型)。0巻2023-12<最古numbered。楽天題一致ゲート通過→巻1として復元
+- series_keys:
+  - name:すずり街|name:前世で殺した相手の担当編集になりました
+  number: 1
+  isbn13: '9784801976818'
+  release_date: 2022-08
+  publisher: ''
+  edition_type: standard
+  title_display: 前世で殺した相手の担当編集になりました
+  source: vol0-first
+  added_at: '2026-08-26'
+  note: number=0の1巻が続巻到着で不可視化(泣かせたくて型)。0巻2022-08<最古numbered。楽天題一致ゲート通過→巻1として復元
+- series_keys:
+  - name:参号ミツル|name:友達はキスしない!
+  number: 1
+  isbn13: '9784813033073'
+  release_date: 2022-01
+  publisher: ''
+  edition_type: standard
+  title_display: 友達はキスしない！
+  source: vol0-first
+  added_at: '2026-08-26'
+  note: number=0の1巻が続巻到着で不可視化(泣かせたくて型)。0巻2022-01<最古numbered。楽天題一致ゲート通過→巻1として復元
+- series_keys:
+  - name:ラララ・ホリディ|name:回覧板のエッチなルールは絶対です。
+  number: 1
+  isbn13: '9784434339615'
+  release_date: 2024-08
+  publisher: ''
+  edition_type: standard
+  title_display: 回覧板のエッチなルールは絶対です。
+  source: vol0-first
+  added_at: '2026-08-26'
+  note: number=0の1巻が続巻到着で不可視化(泣かせたくて型)。0巻2024-08<最古numbered。楽天題一致ゲート通過→巻1として復元
+- series_keys:
+  - name:藤咲ゆう|name:塩対応な私の旦那様はハイスペックな幼馴染!?
+  number: 1
+  isbn13: '9784773062830'
+  release_date: 2024-02
+  publisher: ''
+  edition_type: standard
+  title_display: 塩対応な私の旦那様はハイスペックな幼馴染！？
+  source: vol0-first
+  added_at: '2026-08-26'
+  note: number=0の1巻が続巻到着で不可視化(泣かせたくて型)。0巻2024-02<最古numbered。楽天題一致ゲート通過→巻1として復元
+- series_keys:
+  - name:林檎めい|name:夜10時からは素直に溺れて
+  number: 1
+  isbn13: '9784776754077'
+  release_date: 2022-10
+  publisher: ''
+  edition_type: standard
+  title_display: 夜10時からは素直に溺れて
+  source: vol0-first
+  added_at: '2026-08-26'
+  note: number=0の1巻が続巻到着で不可視化(泣かせたくて型)。0巻2022-10<最古numbered。楽天題一致ゲート通過→巻1として復元
+- series_keys:
+  - name:花好なぽ|name:好きだよグッドボーイ
+  number: 1
+  isbn13: '9784799762448'
+  release_date: 2023-05
+  publisher: ''
+  edition_type: standard
+  title_display: 好きだよグッドボーイ
+  source: vol0-first
+  added_at: '2026-08-26'
+  note: number=0の1巻が続巻到着で不可視化(泣かせたくて型)。0巻2023-05<最古numbered。楽天題一致ゲート通過→巻1として復元
+- series_keys:
+  - name:結城アオ|name:当て馬キャラのくせして、スパダリ王子に寵愛されています。
+  number: 1
+  isbn13: '9784434319587'
+  release_date: 2023-07
+  publisher: ''
+  edition_type: standard
+  title_display: 当て馬キャラのくせして、スパダリ王子に寵愛されています。
+  source: vol0-first
+  added_at: '2026-08-26'
+  note: number=0の1巻が続巻到着で不可視化(泣かせたくて型)。0巻2023-07<最古numbered。楽天題一致ゲート通過→巻1として復元
+- series_keys:
+  - name:岡野く仔|name:悪役令嬢に転生したら理想の部屋が手に入りました!
+  number: 1
+  isbn13: '9784781624839'
+  release_date: '2025-09-29'
+  publisher: ''
+  edition_type: standard
+  title_display: 悪役令嬢に転生したら理想の部屋が手に入りました！
+  source: vol0-first
+  added_at: '2026-08-26'
+  note: number=0の1巻が続巻到着で不可視化(泣かせたくて型)。0巻2025-09-29<最古numbered。楽天題一致ゲート通過→巻1として復元
+- series_keys:
+  - name:町田とまと|name:抱かせてください古高主任
+  number: 1
+  isbn13: '9784065282304'
+  release_date: 2022-07
+  publisher: ''
+  edition_type: standard
+  title_display: 抱かせてください古高主任
+  source: vol0-first
+  added_at: '2026-08-26'
+  note: number=0の1巻が続巻到着で不可視化(泣かせたくて型)。0巻2022-07<最古numbered。楽天題一致ゲート通過→巻1として復元
+- series_keys:
+  - name:季田ビスコ|name:星空を見つめたそのあとで
+  number: 1
+  isbn13: '9784046812780'
+  release_date: 2022-03
+  publisher: ''
+  edition_type: standard
+  title_display: 星空を見つめたそのあとで
+  source: vol0-first
+  added_at: '2026-08-26'
+  note: number=0の1巻が続巻到着で不可視化(泣かせたくて型)。0巻2022-03<最古numbered。楽天題一致ゲート通過→巻1として復元
+- series_keys:
+  - name:新本浦子|name:次の空白を埋めよ。
+  number: 1
+  isbn13: '9784799766057'
+  release_date: 2024-06
+  publisher: ''
+  edition_type: standard
+  title_display: 次の空白を埋めよ。
+  source: vol0-first
+  added_at: '2026-08-26'
+  note: number=0の1巻が続巻到着で不可視化(泣かせたくて型)。0巻2024-06<最古numbered。楽天題一致ゲート通過→巻1として復元
+- series_keys:
+  - name:ナス子|name:深山と七瀬はまだ友達?
+  number: 1
+  isbn13: '9784046068705'
+  release_date: '2024-12-27'
+  publisher: ''
+  edition_type: standard
+  title_display: 深山と七瀬はまだ友達？
+  source: vol0-first
+  added_at: '2026-08-26'
+  note: number=0の1巻が続巻到着で不可視化(泣かせたくて型)。0巻2024-12-27<最古numbered。楽天題一致ゲート通過→巻1として復元
+- series_keys:
+  - name:稲空穂|name:特別じゃない日
+  number: 1
+  isbn13: '9784408640372'
+  release_date: 2021-12
+  publisher: ''
+  edition_type: standard
+  title_display: 特別じゃない日
+  source: vol0-first
+  added_at: '2026-08-26'
+  note: number=0の1巻が続巻到着で不可視化(泣かせたくて型)。0巻2021-12<最古numbered。楽天題一致ゲート通過→巻1として復元
+- series_keys:
+  - name:山田ぱすた|name:異世界からエルフさんが落ちてきたのですが!?
+  number: 1
+  isbn13: '9784434334863'
+  release_date: 2024-02
+  publisher: ''
+  edition_type: standard
+  title_display: 異世界からエルフさんが落ちてきたのですが!?
+  source: vol0-first
+  added_at: '2026-08-26'
+  note: number=0の1巻が続巻到着で不可視化(泣かせたくて型)。0巻2024-02<最古numbered。楽天題一致ゲート通過→巻1として復元
+- series_keys:
+  - name:水稀たま|name:育休魔王とニセ勇者
+  number: 1
+  isbn13: '9784832292253'
+  release_date: 2023-02
+  publisher: ''
+  edition_type: standard
+  title_display: 育休魔王とニセ勇者
+  source: vol0-first
+  added_at: '2026-08-26'
+  note: number=0の1巻が続巻到着で不可視化(泣かせたくて型)。0巻2023-02<最古numbered。楽天題一致ゲート通過→巻1として復元
+- series_keys:
+  - name:茸太|name:英くんはおくちがお上手
+  number: 1
+  isbn13: '9784434322242'
+  release_date: 2023-09
+  publisher: ''
+  edition_type: standard
+  title_display: 英くんはおくちがお上手
+  source: vol0-first
+  added_at: '2026-08-26'
+  note: number=0の1巻が続巻到着で不可視化(泣かせたくて型)。0巻2023-09<最古numbered。楽天題一致ゲート通過→巻1として復元
+- series_keys:
+  - name:佐久本あゆ|name:転生アイドルとドルオタの騎士
+  number: 1
+  isbn13: '9784866576497'
+  release_date: 2023-03
+  publisher: ''
+  edition_type: standard
+  title_display: 転生アイドルとドルオタの騎士
+  source: vol0-first
+  added_at: '2026-08-26'
+  note: number=0の1巻が続巻到着で不可視化(泣かせたくて型)。0巻2023-03<最古numbered。楽天題一致ゲート通過→巻1として復元
