@@ -96,9 +96,9 @@ export default function ShinkanClient() {
     const coverHi = cover ? cover.replace(/_ex=(120x120|200x200)/, "_ex=300x300") : null;
     const pubLine = [publisher, imprint].filter(Boolean).join("・");
     return (
-      <div className="flex items-center gap-3 border-b border-[#1d1d1d] px-3 py-2">
+      <div className="flex items-start gap-3 border-b border-[#1d1d1d] px-3 py-2">
         {/* 書影+題 → Amazon(参考サイト同型・アフィ。サイズも参考サイトの_SL160_相当=約105×150) */}
-        <a href={amz} target="_blank" rel="nofollow sponsored noopener" className="spring-press flex min-w-0 flex-1 items-center gap-3" title={`${title} をAmazonで見る`}>
+        <a href={amz} target="_blank" rel="nofollow sponsored noopener" className="spring-press flex min-w-0 flex-1 items-start gap-3" title={`${title} をAmazonで見る`}>
           <span className="relative block h-[150px] w-[105px] shrink-0 overflow-hidden bg-[#1a1a1a]">
             {coverHi ? (
               // eslint-disable-next-line @next/next/no-img-element
