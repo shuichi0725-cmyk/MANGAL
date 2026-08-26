@@ -191,8 +191,19 @@ def main():
     done = [0]
     def put(item):
         key, p = item
-        with open(p, "rb") as f:
-            s3.put_object(Bucket=a.bucket, Key=key, Body=f.read(), ContentType=content_type(key))
+        # ★個別リトライ(2026-08-26 実害: 18万PUT中1-2件がServiceUnavailable
+        #   「Reduce your concurrent request rate for the same object」でrun全体が失敗し、
+        #   manifest未保存→再走=全量PUTのループに。R2の一時エラーはbackoffで即回復する)
+        for _try in range(4):
+            try:
+                with open(p, "rb") as f:
+                    s3.put_object(Bucket=a.bucket, Key=key, Body=f.read(), ContentType=content_type(key))
+                break
+            except Exception as _e:
+                if _try == 3 or not any(t in str(_e) for t in
+                        ("ServiceUnavailable", "SlowDown", "Reduce your concurrent", "InternalError", "RequestTimeout")):
+                    raise
+                time.sleep(2 ** _try + 1)
         done[0] += 1
         if done[0] % 500 == 0:
             print(f"  ...{done[0]}/{len(to_put)} put")
