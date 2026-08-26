@@ -153,3 +153,4 @@
 - [【✅】連載中再検査=外部権威降格層](ongoing_status_recheck_mechanism.md) — 4,001頁完結化。AniList/BookLive/24ヶ月。保留24件
 - [アニメ化フラグ更新機構=柱⑥後段](anime_flag_freshness.md) — 種3凍結で不変だった→dump relations union。逆方向1,700頁はfalse化しない
 - [【事故復元済】月次が種4-auto全消し=883巻消失](seed4_auto_wipe_accident.md) — 種4-autoは蓄積資産・再生成禁止。ISBN消失監視が番人
+- [【復元済】源なしmanga.v2頁258件](orphan_source_pages_restored.md) — promoteは元頁駆動=源消失で頁が消える。復元手法+数値ペンネームquote
