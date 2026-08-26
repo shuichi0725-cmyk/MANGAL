@@ -199,6 +199,17 @@ def main():
         to_put = [it for it in to_put if it[0] not in skip]
         print(f"  同一 {len(skip)} キー(PUT省略) / 要PUT {len(to_put)}")
 
+    # ★PUT開始前の予算予告 (2026-08-26): 今回のPUT予定を今期累計に足した見込みを先に言う。
+    #   超過見込みでも中断はしない(週次は必ず出す=ユーザ裁定)が、驚き請求を根絶する。
+    try:
+        import _r2_ops_ledger as _rl
+        _used = _rl.period_total()
+        _after = _used + len(to_put) + n_list_ops
+        print(f"予算予告: 今期Class A {_used:,} + 今回予定 {len(to_put) + n_list_ops:,} = {_after:,} / 枠 1,000,000"
+              + ("  ★★この同期で超過見込み($4.50)。中断するなら今(Ctrl+C=PUT開始前)" if _after > 1_000_000 else ""))
+    except Exception:
+        pass
+
     done = [0]
     def put(item):
         key, p = item
@@ -256,29 +267,11 @@ def main():
     json.dump(nextm, open(MANIFEST, "w", encoding="utf-8"))
     print(f"完了: put {len(to_put)} / manifest更新 {MANIFEST}")
 
-    # ★Class A 使用量の簿記+予算番人 (2026-08-26 ユーザ裁定: 無料枠1M/月の予算内運用が前提。
-    #   超過$4.50の実害を受けて、毎同期で今期(27日〆)累計を表示し 800k 超で名指し警告する)
-    #   Class A = PUT + LIST(DELETEはR2では無料)。
+    # ★Class A 使用量の簿記+予算番人 (2026-08-26 ユーザ裁定「週次は絶対毎週やる」=共通module化)
     try:
-        import datetime as _dt
-        _ops = len(to_put) + n_list_ops
-        _led = os.path.join(ROOT, "data", "seeds", "r2-ops-ledger.jsonl")
-        _today = _dt.date.today()
-        with open(_led, "a", encoding="utf-8", newline="\n") as _f:
-            _f.write(json.dumps({"at": _dt.datetime.now().strftime("%Y-%m-%d %H:%M"),
-                                 "put": len(to_put), "list": n_list_ops, "class_a": _ops}) + "\n")
-        _start = _today.replace(day=27) if _today.day >= 27 else \
-            (_today.replace(day=1) - _dt.timedelta(days=1)).replace(day=27)
-        _sum = 0
-        for _ln in open(_led, encoding="utf-8"):
-            try:
-                _r = json.loads(_ln)
-                if _r.get("at", "")[:10] >= _start.isoformat():
-                    _sum += int(_r.get("class_a") or 0)
-            except Exception:
-                pass
-        print(f"Class A 今期({_start.isoformat()}〆起点)累計 ≈ {_sum:,} / 無料枠 1,000,000"
-              + ("  ★★80万超=残り同期は要注意(全頁週をもう1回やると超過)" if _sum > 800_000 else ""))
+        import _r2_ops_ledger as _rl
+        _rl.record(len(to_put), n_list_ops, "r2-sync")
+        print(_rl.report())
     except Exception as _e:
         print(f"(ops簿記スキップ: {_e})")
 

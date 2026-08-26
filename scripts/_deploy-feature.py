@@ -315,6 +315,12 @@ def main():
         json.dump(manifest, open(MANIFEST, "w", encoding="utf-8"))
         sys.exit(4)
     print(f"PUT {len(to_put)} 完了")
+    try:
+        import _r2_ops_ledger as _rl
+        _rl.record(len(to_put), 0, "feature-distill")
+        print(_rl.report())
+    except Exception:
+        pass
 
     # --- 7. manifest(増分) + marker(feature_commit) ---
     json.dump(manifest, open(MANIFEST, "w", encoding="utf-8"))

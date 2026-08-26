@@ -239,6 +239,12 @@ def main():
         s3.put_object(Bucket=BUCKET, Key=key, Body=body, ContentType=CT.get(ext, "application/octet-stream"))
         manifest[key] = hashlib.sha256(body).hexdigest()[:20]
     print(f"PUT {len(puts)} (頁{len(inner)}×2 + 索引3)")
+    try:
+        import _r2_ops_ledger as _rl
+        _rl.record(len(puts), 0, "diff-deploy")
+        print(_rl.report())
+    except Exception:
+        pass
     del_keys = []
     for st in dropped:
         for ext in (".html", ".txt"):

@@ -309,6 +309,20 @@ def main():
     except Exception as _e:
         warn(f"品質ベースライン番人を実行できず: {_e}")
 
+    # 11. ★R2 Class A 予算予測 (2026-08-26 ユーザ裁定「週次は絶対毎週やる」: 27日〆期に週次が
+    #     5回入る月は全頁週×5=95万で枠1Mに肉薄する。ビルド開始前に着地見込みを必ず見せる)
+    try:
+        sys.path.insert(0, os.path.join(ROOT, "scripts"))
+        import _r2_ops_ledger as _rl
+        _used, _wl, _proj = _rl.projection()
+        _line = f"R2予算: 今期Class A {_used:,} / 週次あと{_wl}回 → 着地見込み {_proj:,} / 枠 1,000,000"
+        if _proj > 1_000_000:
+            warn(_line + " ★超過見込み=今週のUI共通部変更を見送れば全頁週→差分週になり収まる")
+        else:
+            ok(_line)
+    except Exception as _e:
+        warn(f"R2予算予測を実行できず: {_e}")
+
     print(f"\n結果: FAIL {len(fails)} / WARN {len(warns)}")
     if fails:
         print("★ビルド開始禁止。上のFAILを直してから再実行。")
