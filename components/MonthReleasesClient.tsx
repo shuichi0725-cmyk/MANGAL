@@ -55,22 +55,26 @@ export default function MonthReleasesClient({ pool }: { pool: MonthPick[] }) {
         if (dead) return;
         const known = index ? new Set(index.map((it) => it.slug)) : null;
         const days = d?.days ?? {};
-        const usable = (n: number) => {
-          const items = (days[String(n).padStart(2, "0")] ?? days[String(n)] ?? []).filter(
-            (it) => it[3] && (!known || known.has(it[0])),
-          );
-          return items.length >= 1 ? items : null;
+        const pick = (guard: boolean) => {
+          const usable = (n: number) => {
+            const items = (days[String(n).padStart(2, "0")] ?? days[String(n)] ?? []).filter(
+              (it) => it[3] && (!guard || !known || known.has(it[0])),
+            );
+            return items.length >= 1 ? items : null;
+          };
+          // 今日→過去へ遡り→(月初で無ければ)未来へ、最初に発売のある日
+          for (let n = day; n >= 1; n--) {
+            const items = usable(n);
+            if (items) return { n, items };
+          }
+          for (let n = day + 1; n <= 31; n++) {
+            const items = usable(n);
+            if (items) return { n, items };
+          }
+          return null;
         };
-        // 今日→過去へ遡り→(月初で無ければ)未来へ、最初に発売のある日
-        let hit: { n: number; items: ShinkanItem[] } | null = null;
-        for (let n = day; n >= 1 && !hit; n--) {
-          const items = usable(n);
-          if (items) hit = { n, items };
-        }
-        for (let n = day + 1; n <= 31 && !hit; n++) {
-          const items = usable(n);
-          if (items) hit = { n, items };
-        }
+        // 索引guardで全滅(=preview subset等)の時だけguard無しで再選定(本番はguard付きで確定)
+        const hit = pick(true) ?? pick(false);
         if (!hit) {
           setPicks(shuffle(pool.slice()).slice(0, SHOW));
           return;
