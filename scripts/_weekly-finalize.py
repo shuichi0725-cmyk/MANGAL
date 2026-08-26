@@ -140,8 +140,9 @@ def main():
                     _env[_k.strip()] = _v.strip().strip('"').strip("'")
     _token = _env.get("R2_PURGE_TOKEN", "")
     if _token:
-        _paths = ["/manga-list-index.json", "/manga-list-head.json",
+        _paths = ["/", "/manga-list-index.json", "/manga-list-head.json",
                   "/manga-alt-index.json", "/manga-catch-index.json"]
+        # ★"/"=トップHTML(2026-08-27追記: コーナー変更週にホームだけ最長1日古いまま=ユーザ発見)
         for _sub in ("data", "calendar", "shinkan"):
             _dirp = os.path.join(ROOT, "out", _sub)
             if os.path.isdir(_dirp):
