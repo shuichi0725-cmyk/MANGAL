@@ -176,17 +176,28 @@ def main():
     # ★対象は manifest に記録の無いキーだけ。記録が在るキーの差分判定(sha256)には触らない。
     # ★一致が保証するのは内容だけ。Content-Type は前回この同じスクリプトが PUT 時に付けている前提。
     missing = [(k, p) for (k, p) in to_put if k not in prev]
-    if missing and not a.no_reconcile:
-        print(f"manifest 欠損 {len(missing)} キー(manifest={mstatus}) → R2 の ETag と照合して補完")
+    # ★ETag実物照合の適用範囲を拡大 (2026-08-26 ユーザ裁定「こういうのは困る」):
+    #   旧=「manifestに記録の無いキー」だけ照合。前回runが最後の1件失敗でmanifest未保存だと
+    #   全キーが「記録あり・hash不一致(先週manifest比)」になり、R2に既に上がっている18万件を
+    #   まるごと再PUTした(2026-08-26実害=Class A 37万回の無駄・$4.50超過)。
+    #   新=要PUTが大きい時(>5,000)は全to_putをETag照合し、実物と同一なら省く。
+    #   LISTは~1,000key/回=18万objでも約190回のClass A(PUT18万回の1/1000)。
+    _recon = missing
+    if len(to_put) > 5000 and not a.no_reconcile:
+        _recon = to_put
+    n_list_ops = 0
+    if _recon and not a.no_reconcile:
+        print(f"ETag実物照合 {len(_recon)} キー(manifest={mstatus}) → R2と同一内容はPUT省略")
         etags = {}
         for page in s3.get_paginator("list_objects_v2").paginate(Bucket=a.bucket):
+            n_list_ops += 1
             for o in page.get("Contents", []):
                 et = o["ETag"].strip('"')
                 if "-" not in et:   # multipart の ETag は MD5 でない = 照合不可 → PUT 対象のまま残す
                     etags[o["Key"]] = et
-        skip = {k for k, p in missing if etags.get(k) == md5(p)}
+        skip = {k for k, p in _recon if etags.get(k) == md5(p)}
         to_put = [it for it in to_put if it[0] not in skip]
-        print(f"  補完 {len(skip)} キー(本番と同一 = PUT 省略) / 要PUT {len(missing) - len(skip)}")
+        print(f"  同一 {len(skip)} キー(PUT省略) / 要PUT {len(to_put)}")
 
     done = [0]
     def put(item):
@@ -244,6 +255,32 @@ def main():
     os.makedirs(os.path.dirname(MANIFEST), exist_ok=True)
     json.dump(nextm, open(MANIFEST, "w", encoding="utf-8"))
     print(f"完了: put {len(to_put)} / manifest更新 {MANIFEST}")
+
+    # ★Class A 使用量の簿記+予算番人 (2026-08-26 ユーザ裁定: 無料枠1M/月の予算内運用が前提。
+    #   超過$4.50の実害を受けて、毎同期で今期(27日〆)累計を表示し 800k 超で名指し警告する)
+    #   Class A = PUT + LIST(DELETEはR2では無料)。
+    try:
+        import datetime as _dt
+        _ops = len(to_put) + n_list_ops
+        _led = os.path.join(ROOT, "data", "seeds", "r2-ops-ledger.jsonl")
+        _today = _dt.date.today()
+        with open(_led, "a", encoding="utf-8", newline="\n") as _f:
+            _f.write(json.dumps({"at": _dt.datetime.now().strftime("%Y-%m-%d %H:%M"),
+                                 "put": len(to_put), "list": n_list_ops, "class_a": _ops}) + "\n")
+        _start = _today.replace(day=27) if _today.day >= 27 else \
+            (_today.replace(day=1) - _dt.timedelta(days=1)).replace(day=27)
+        _sum = 0
+        for _ln in open(_led, encoding="utf-8"):
+            try:
+                _r = json.loads(_ln)
+                if _r.get("at", "")[:10] >= _start.isoformat():
+                    _sum += int(_r.get("class_a") or 0)
+            except Exception:
+                pass
+        print(f"Class A 今期({_start.isoformat()}〆起点)累計 ≈ {_sum:,} / 無料枠 1,000,000"
+              + ("  ★★80万超=残り同期は要注意(全頁週をもう1回やると超過)" if _sum > 800_000 else ""))
+    except Exception as _e:
+        print(f"(ops簿記スキップ: {_e})")
 
     # ★KVリダイレクト自動連鎖 (2026-08-26 恒久化): _kv-redirects-sync.py は「r2-sync直後のみ実行可」
     #   (途中実行=未deploy宛先への301で404化、2026-08-17実害900件)という一点タイミングを人が
