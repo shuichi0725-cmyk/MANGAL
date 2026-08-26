@@ -142,7 +142,7 @@ def main():
     if _token:
         _paths = ["/manga-list-index.json", "/manga-list-head.json",
                   "/manga-alt-index.json", "/manga-catch-index.json"]
-        for _sub in ("data", "calendar"):
+        for _sub in ("data", "calendar", "shinkan"):
             _dirp = os.path.join(ROOT, "out", _sub)
             if os.path.isdir(_dirp):
                 _paths += [f"/{_sub}/{f}" for f in os.listdir(_dirp) if f.endswith(".json")]
