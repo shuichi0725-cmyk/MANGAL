@@ -153,8 +153,24 @@ def main():
         _maxrun = max((len(x) for x in slug.split("-")), default=0)
         if _maxrun >= 15 or len(slug) >= 78:
             rows.append(("SLUG_MUSH", slug, f"無分割塊(run={_maxrun})/語中切り(len={len(slug)})→題の切れ目でrename", title))
+        elif _maxrun >= 11:
+            # ★2026-08-26 転生聖女型(tenseiseijo/risurooraifu/koisuruhonnou=11-14字run)が15閾値を
+            #   すり抜けた→11+は情報行で毎回目視(正当長語 namerareteru 等の偽陽性があるので非ブロッキング)
+            rows.append(("LONG_CHECK", slug, f"run={_maxrun} 分かち漏れ疑い(語中切り/mushか目視)", title))
         elif len(slug) >= 64:
             rows.append(("LONG_CHECK", slug, f"len={len(slug)} cap近=意味の切れ目か目視", title))
+        # ★KANA_VOLNUM(2026-08-26 転生聖女3型=ブロッキング): kana末尾が**その頁の巻数の読み**で
+        #   終わるのに題末尾が数字でない = 巻数読みの混入(vol3頁の…メザシタイ「サン」/vol2頁の…デス「ニ」)。
+        #   ★裸の数詞regexだと ハナシ/メシ の「シ」等が偽陽性=実巻数と突合して精密化。
+        kana_v = str(d.get("title_kana") or "")
+        _vols = [v.get("number") for e in (d.get("editions") or []) for v in (e.get("volumes") or [])]
+        _NUMR = {1: ("イチ",), 2: ("ニ",), 3: ("サン",), 4: ("ヨン", "シ"), 5: ("ゴ",),
+                 6: ("ロク",), 7: ("ナナ", "シチ"), 8: ("ハチ",), 9: ("キュウ", "ク"), 10: ("ジュウ",)}
+        _maxv = max((v for v in _vols if isinstance(v, int)), default=0)
+        _tails = _NUMR.get(_maxv, ())
+        _hit = next((t for t in _tails if kana_v.endswith(t)), None)
+        if _hit and _maxv >= 2 and not re.search(r"[0-9０-９]\s*[!！?？。]*$", title):
+            rows.append(("KANA_VOLNUM", slug, f"kana末尾『{_hit}』=巻数{_maxv}の読み混入疑い(題末尾は非数字)→kana/romaji/slugから剥離", title))
 
     os.makedirs(os.path.dirname(OUT), exist_ok=True)
     with io.open(OUT, "w", encoding="utf-8") as f:
@@ -166,7 +182,7 @@ def main():
     n_draft = sum(1 for p in glob.glob(os.path.join(ROOT, a.src, "*.yml"))
                   if (yaml.safe_load(io.open(p, encoding="utf-8")) or {}).get("_preorder_draft"))
     # ★LONG_CHECK は情報(語境界cut済=大半は正当な長題)。push阻止は実問題4種のみ。
-    BLOCK = {"CONTINUATION", "NONMANGA", "MISREAD", "KATA_UNCONV", "SLUG_MUSH"}
+    BLOCK = {"CONTINUATION", "NONMANGA", "MISREAD", "KATA_UNCONV", "SLUG_MUSH", "KANA_VOLNUM"}
     n_block = sum(1 for r in rows if r[0] in BLOCK)
     print(f"予約ドラフト {n_draft}頁 / 要裁定 {n_block}件(ブロッキング) + LONG_CHECK {c.get('LONG_CHECK', 0)}件(情報) {dict(c)}")
     print(f"→ {os.path.relpath(OUT, ROOT)}")
