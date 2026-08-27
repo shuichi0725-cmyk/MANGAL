@@ -32,6 +32,12 @@ python scripts/_enrich-captions.py --slugs a,b,c --live                         
 - 楽天itemCaptionを**予約キャッシュ→liveの順で全巻分**集める(1.2s/req・429即中断)。
 - ★1巻だけでなく**在る巻ぜんぶ読む**(2026-07-06 ユーザ裁定)。ただし書く内容の縛りは下記。
 - 出力 `.cache/enrich/materials.jsonl`(AI生成バッチの入力)。
+- ★★**BookLive紹介文 = 第2材料源**(2026-08-27 新設。楽天鉱脈枯れ=手つかず3,026作の楽天caption実測0.6%):
+  `python scripts/_booklive-desc-harvest.py --targets <対象json>` = tameshiyomi-mapのtitle_idで
+  商品頁(vol1)のJSON-LD descriptionを回収(出版社公式の1巻紹介文・初回実測**1,076/1,086=99%良材料**・
+  中央値151字・1.1s/req・resumable)。出力 `.cache/booklive-desc.jsonl`。
+  **1巻基点の規律にそのまま合う**(ネタバレなし公式文)。楽天caption不在の頁はこちらを材料にする。
+  未結線頁は試し読みharvest(週次+アイドル)がアンカーを増やす度に対象が広がる。
 
 ## Step2: AI生成の規律 (= キャッチと詳細を書き分ける・最重要)
 材料(全巻captions)を読んだ上で:
