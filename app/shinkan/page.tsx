@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import ShinkanClient from "./ShinkanClient";
+import { DesignNav } from "@/lib/homeDesign";
 
 export const metadata: Metadata = {
   title: "今月の新刊一覧 | MANGAL",
@@ -8,5 +9,10 @@ export const metadata: Metadata = {
 };
 
 export default function ShinkanPage() {
-  return <ShinkanClient />;
+  return (
+    <>
+      <DesignNav />
+      <ShinkanClient />
+    </>
+  );
 }

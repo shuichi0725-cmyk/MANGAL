@@ -1,4 +1,5 @@
 import ContactForm from "./ContactForm";
+import { DesignNav } from "@/lib/homeDesign";
 
 /** お問い合わせフォーム(2026-07-03)。 送信先メールアドレスはソースに含めない
  *  (= Worker /api/contact が受信箱へ中継。 スクレイピング耐性)。 */
@@ -7,6 +8,8 @@ export const metadata = {
 
 export default function ContactPage() {
   return (
+    <>
+    <DesignNav />
     <div className="mx-auto max-w-xl px-4 py-8">
       <div className="rounded-2xl border border-[var(--color-line)] bg-[var(--color-surface)]/75 p-5 shadow-[var(--shadow-soft)] backdrop-blur-md">
         <h1 className="text-xl font-bold">お問い合わせ</h1>
@@ -19,5 +22,6 @@ export default function ContactPage() {
         <ContactForm />
       </div>
     </div>
+    </>
   );
 }
