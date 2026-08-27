@@ -139,7 +139,6 @@ export default function ShinkanClient() {
       amazonSearchUrl(`${title} ${vol ?? ""}`.trim(), AMZ_TAG);
     // 表示150px高に合わせ楽天サムネイルを300x300へ格上げ(120/200のままだとぼやける)
     const coverHi = cover ? cover.replace(/_ex=(120x120|200x200)/, "_ex=300x300") : null;
-    const pubLine = [publisher, imprint].filter(Boolean).join("・");
     return (
       <div className="flex items-start gap-3 border-b border-[#1d1d1d] px-3 py-2">
         {/* 書影+題 → Amazon(参考サイト同型・アフィ。サイズも参考サイトの_SL160_相当=約105×150) */}
@@ -158,11 +157,10 @@ export default function ShinkanClient() {
               {vol ? <span className="ml-1 bg-[var(--color-accent)] px-1 text-[9.5px] font-black text-[#0d0d0d] align-[1px]">{vol}巻</span> : null}
               {vol === 1 ? <span className="ml-1 border border-[var(--color-accent)] px-1 text-[9px] font-black text-[var(--color-accent)] align-[1px]">新刊1巻</span> : null}
             </span>
-            <span className="mt-1 block text-[11.5px] leading-relaxed text-ink/55">
-              {authors}
-              {authors && pubLine ? <span className="text-ink/30">|</span> : null}
-              {pubLine ? <span className="ml-1 text-ink/45">{pubLine}</span> : null}
-            </span>
+            {/* ★2026-08-27 ユーザ要望: 作者(複数でも1行)/会社/レーベル を1行ずつ */}
+            {authors ? <span className="mt-1 block truncate text-[11.5px] leading-snug text-ink/60">{authors}</span> : null}
+            {publisher ? <span className="mt-0.5 block truncate text-[10.5px] leading-snug text-ink/45">{publisher}</span> : null}
+            {imprint ? <span className="mt-0.5 block truncate text-[10.5px] leading-snug text-ink/45">{imprint}</span> : null}
           </span>
         </a>
         {known.has(slug) && (
