@@ -47,17 +47,42 @@ function weekday(ym: string, day: string): string {
   return WEEK[new Date(`${ym}-${day.padStart(2, "0")}T12:00:00+09:00`).getUTCDay()];
 }
 
+function jstDay(): number {
+  return new Date(Date.now() + 9 * 3600 * 1000).getUTCDate();
+}
+
+/** 高速スムーススクロール(既定のsmoothは長距離で遅い→~8px/msの短時間アニメ。ユーザ要望「高速スクロールする感じ」) */
+function fastScrollTo(el: HTMLElement) {
+  const target = el.getBoundingClientRect().top + window.scrollY;
+  const start = window.scrollY;
+  const dist = target - start;
+  const dur = Math.min(900, Math.max(300, Math.abs(dist) / 8));
+  const t0 = performance.now();
+  const ease = (t: number) => 1 - Math.pow(1 - t, 3);
+  const step = (now: number) => {
+    const p = Math.min(1, (now - t0) / dur);
+    window.scrollTo(0, start + dist * ease(p));
+    if (p < 1) requestAnimationFrame(step);
+  };
+  requestAnimationFrame(step);
+}
+
 export default function ShinkanClient() {
   const [ym, setYmState] = useState(jstYm());
   const [data, setData] = useState<Record<string, MonthData | null>>({});
   const index = useMangaIndex();
   const known = useMemo(() => new Set((index ?? []).map((it) => it.slug)), [index]);
 
+  const [goToday, setGoToday] = useState(false);
+
   // ★月はURLで共有可能に(?m=YYYY-MM)。初回=URLから復元、切替=replaceState
   useEffect(() => {
     try {
-      const m = new URLSearchParams(location.search).get("m");
+      const sp = new URLSearchParams(location.search);
+      const m = sp.get("m");
       if (m && /^\d{4}-\d{2}$/.test(m)) setYmState(m);
+      // ★?go=today = ホーム「全部見る」からの遷移: 今日の日付へ高速スクロール(2026-08-27 ユーザ要望)
+      if (sp.get("go") === "today") setGoToday(true);
     } catch {}
   }, []);
   const setYm = (m: string) => {
@@ -77,6 +102,26 @@ export default function ShinkanClient() {
   const days = month ? Object.keys(month.days).sort((a, b) => Number(a) - Number(b)) : [];
   const total = month ? days.reduce((s, d) => s + month.days[d].length, 0) + (month.unknown?.length ?? 0) : 0;
   const monthLabel = `${ym.slice(0, 4)}年${Number(ym.slice(5))}月`;
+
+  // ★go=today: 当月データ描画後に「今日(無ければ直近の前の発売日)」のセクションへ高速スクロール
+  useEffect(() => {
+    if (!goToday || !month || ym !== jstYm()) return;
+    const today = jstDay();
+    const nums = days.map(Number);
+    const target = [...nums].reverse().find((n) => n <= today) ?? nums[0];
+    if (target == null) return;
+    setGoToday(false);
+    requestAnimationFrame(() => {
+      const el = document.getElementById(`day-${target}`);
+      if (el) fastScrollTo(el);
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [goToday, month, ym]);
+
+  const scrollToDay = (d: string) => {
+    const el = document.getElementById(`day-${Number(d)}`);
+    if (el) fastScrollTo(el);
+  };
 
   const share = () => {
     const url = `https://mangal-db.com/shinkan?m=${ym}`;
@@ -132,17 +177,22 @@ export default function ShinkanClient() {
   return (
     <div className="mx-auto w-full max-w-[720px] pb-12">
       <div className="border-b-[3px] border-[var(--color-accent)] px-4 py-3">
-        <div className="flex items-center justify-between">
+        <div className="flex items-center gap-2">
           <h1 className={`${dotGothic.className} text-[22px] font-black`}>
             📦 {monthLabel}の新刊
           </h1>
+          {total > 0 && (
+            <span className="border border-[var(--color-line)] px-2 py-0.5 text-[12px] font-black text-ink/75">
+              全{total.toLocaleString()}冊
+            </span>
+          )}
           <button onClick={share} aria-label="この月を共有"
-            className="spring-press border-2 border-[var(--color-accent)] px-2.5 py-1 text-[11px] font-black text-[var(--color-accent)]">
+            className="spring-press ml-auto border-2 border-[var(--color-accent)] px-2.5 py-1 text-[11px] font-black text-[var(--color-accent)]">
             共有
           </button>
         </div>
         <p className="mt-0.5 text-[11px] text-ink/55">
-          発売日ごとに全{total.toLocaleString()}冊。スクロールだけで全部見られます。書影・題はAmazonへ、「詳細」で作品ページへ。
+          発売日ごとに全冊掲載。スクロールだけで全部見られます。書影・題はAmazonへ、「詳細」で作品ページへ。
         </p>
         <div className="mt-2 flex gap-1.5 overflow-x-auto pb-0.5">
           {monthRange().map((t) => (
@@ -160,14 +210,29 @@ export default function ShinkanClient() {
         <p className="p-6 text-[12px] text-ink/50">この月のデータはまだありません。</p>
       ) : (
         <>
-          {days.map((d) => (
-            <section key={d}>
-              <div className="sticky top-0 z-10 flex items-baseline gap-2 border-b-2 border-[var(--color-accent)] bg-[color-mix(in_srgb,var(--color-bg)_92%,transparent)] px-3.5 pb-1.5 pt-2 backdrop-blur-[2px]">
-                <span className={`${dotGothic.className} text-[19px] font-black text-[var(--color-accent)]`}>
+          {days.map((d, di) => (
+            <section key={d} id={`day-${Number(d)}`}>
+              <div className="sticky top-0 z-10 flex items-center gap-2 border-b-2 border-[var(--color-accent)] bg-[color-mix(in_srgb,var(--color-bg)_92%,transparent)] px-3.5 pb-1.5 pt-2 backdrop-blur-[2px]">
+                <span className={`${dotGothic.className} text-[19px] font-black leading-none text-[var(--color-accent)]`}>
                   {Number(ym.slice(5))}/{d.padStart(2, "0")}
                 </span>
                 <span className="text-[11px] text-ink/55">({weekday(ym, d)})</span>
-                <span className="ml-auto text-[11px] text-ink/45">{month.days[d].length}冊</span>
+                {/* ★日送りボタン(2026-08-27 ユーザ要望: 日付と冊数の間に前の日/次の日) */}
+                <span className="mx-auto flex items-center gap-1.5">
+                  {di > 0 && (
+                    <button onClick={() => scrollToDay(days[di - 1])}
+                      className="spring-press border border-[var(--color-line)] px-2 py-0.5 text-[10.5px] font-bold text-ink/65">
+                      ↑前の日
+                    </button>
+                  )}
+                  {di < days.length - 1 && (
+                    <button onClick={() => scrollToDay(days[di + 1])}
+                      className="spring-press border border-[var(--color-line)] px-2 py-0.5 text-[10.5px] font-bold text-ink/65">
+                      ↓次の日
+                    </button>
+                  )}
+                </span>
+                <span className="text-[11px] text-ink/45">{month.days[d].length}冊</span>
               </div>
               {month.days[d].map((it, i) => (
                 <Row key={`${it[0]}-${i}`} it={it} />
