@@ -47,7 +47,19 @@ python scripts/_weekly-preflight.py --fix     # FAILが1つでもあればビル
 - 内蔵: コード未コミット検査(2026-07-04実害)/timeout=300/D:空き20GB+/out・.next junction再作成(★実体dirは絶対に自動削除しない=中身有りは手動退避を指示)/staging junction+masters6+索引3本の同期/生成物鮮度WARN。
 - 下の「ディスク事前確認」の手動PowerShellはpreflightが代替(復旧手順のみ手動参照)。
 
-### 3. フルビルド (★実測2.5〜3.5h、バックグラウンド+Monitor)
+### 2.5 ★モード判定 (= ハイブリッド週次 2026-08-27 ユーザ裁定。R2費用と3hビルドの節約)
+```
+python scripts/_weekly-mode.py    # exit 0=DATA / 1=SURFACE / 2=CODE (根拠ファイルと次コマンドを表示)
+```
+- **DATA週**(コード変更なし): 手順3〜6の代わりに**差分ルート**(数分・数千ops):
+  `_deploy-differential.py --weekly-json`(変更頁の部分ビルド+索引+calendar/shinkan/data/idxのJSON面PUT+prune+purge)
+  → `_kv-redirects-sync.py` → `_weekly-finalize.py --data-week`(疎通+prune実証+snapshot)。
+  ★制約: トップ等の**面HTMLは先週のまま**(サーバ埋込の統計数値が1週古い。コーナーはclient fetchなので中身は新しい)。
+- **SURFACE週**(非漫画面コードのみ): DATA週手順+ `_deploy-feature.py`(機能蒸留)を1)と2)の間に。
+- **CODE週**(app/manga・layout・components・lib等): 従来どおり手順3〜6のフルビルド。
+- 判定の正=script(CODE_SCOPEはdiff-deployと同一定義)。迷ったらCODE週(フル)に倒す。
+
+### 3. フルビルド (★CODE週のみ。実測2.5〜3.5h、バックグラウンド+Monitor)
 ★**preflight全通過(exit 0)を確認してから開始**。
 ★**2026-07-17 C:完結に全面改訂(ユーザ裁定)**: ジャンクション全廃・staging=`.cache/proddata`(実体コピー)・
 out/.next=C:実体。**D:はバックアップ倉庫のみでビルド経路に入れない**(外付けD:はストールしやすく、

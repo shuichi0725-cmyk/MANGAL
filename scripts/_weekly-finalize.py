@@ -29,54 +29,61 @@ def die(msg):
 
 def main():
     os.chdir(ROOT)
-    # 1. ビルド完了判定
-    if not os.path.exists(LOG):
-        die(f"{os.path.relpath(LOG, ROOT)} が無い(ビルドを回していない?)")
-    # ★PowerShell の Out-File は既定で **UTF-16LE(BOM付き)** を書く(PS 5.1)。
-    #   utf-8固定で読むと本文が「?」だらけになり「✓ Exporting」が見つからず、
-    #   ★**ビルドは成功しているのに finalize が abort する**(2026-07-27 実害)。
-    #   BOM を見て復号を切り替える(utf-16 → utf-8-sig → utf-8 の順)。
-    _raw = open(LOG, "rb").read()
-    for _enc in ("utf-16", "utf-8-sig", "utf-8"):
-        if _enc == "utf-16" and not _raw[:2] in (b"\xff\xfe", b"\xfe\xff"):
-            continue
-        try:
-            log = _raw.decode(_enc, errors="replace")
-            break
-        except Exception:
-            continue
-    else:
-        log = _raw.decode("utf-8", errors="replace")
-    if "Export encountered" in log or "Build error" in log:
-        die("build logにエラー(Export encountered/Build error)。ログを調査")
-    if "Exporting" not in log:
-        die("build logに『✓ Exporting』が無い=ビルド未完了")
-    out_manga = os.path.join(ROOT, "out", "manga")
-    if not os.path.isdir(out_manga):
-        die("out/manga が無い")
-    n = sum(1 for _ in os.scandir(out_manga))
-    if n < MIN_PAGES:
-        die(f"out/manga = {n:,} < {MIN_PAGES:,}(欠損ビルド疑い。頁数×2≈132kが正常)")
-    print(f"  OK   ビルド完了(out/manga {n:,} files・log正常)")
+    # ★--data-week (2026-08-27 ハイブリッド週次): フルビルド無し週(diff-deployルート)の締め。
+    #   out/は先週のまま=ビルド系検査(1/1.5/2)とmarker/manifest(diff-deployが更新済)はskipし、
+    #   ③疎通 → ③.5 prune実証+台帳消し込み → ⑥snapshot だけを回す。
+    data_week = "--data-week" in sys.argv
+    if data_week:
+        print("(--data-week: ビルド検査/marker/pages-manifestはskip=diff-deployが担当済)")
+    # 1. ビルド完了判定 (★data_week=skip: フルビルド無し週はout/が先週のまま=検査対象外)
+    if not data_week:
+        if not os.path.exists(LOG):
+            die(f"{os.path.relpath(LOG, ROOT)} が無い(ビルドを回していない?)")
+        # ★PowerShell の Out-File は既定で **UTF-16LE(BOM付き)** を書く(PS 5.1)。
+        #   utf-8固定で読むと本文が「?」だらけになり「✓ Exporting」が見つからず、
+        #   ★**ビルドは成功しているのに finalize が abort する**(2026-07-27 実害)。
+        #   BOM を見て復号を切り替える(utf-16 → utf-8-sig → utf-8 の順)。
+        _raw = open(LOG, "rb").read()
+        for _enc in ("utf-16", "utf-8-sig", "utf-8"):
+            if _enc == "utf-16" and not _raw[:2] in (b"\xff\xfe", b"\xfe\xff"):
+                continue
+            try:
+                log = _raw.decode(_enc, errors="replace")
+                break
+            except Exception:
+                continue
+        else:
+            log = _raw.decode("utf-8", errors="replace")
+        if "Export encountered" in log or "Build error" in log:
+            die("build logにエラー(Export encountered/Build error)。ログを調査")
+        if "Exporting" not in log:
+            die("build logに『✓ Exporting』が無い=ビルド未完了")
+        out_manga = os.path.join(ROOT, "out", "manga")
+        if not os.path.isdir(out_manga):
+            die("out/manga が無い")
+        n = sum(1 for _ in os.scandir(out_manga))
+        if n < MIN_PAGES:
+            die(f"out/manga = {n:,} < {MIN_PAGES:,}(欠損ビルド疑い。頁数×2≈132kが正常)")
+        print(f"  OK   ビルド完了(out/manga {n:,} files・log正常)")
 
-    # 1.5 ★索引⊆生成頁の実測照合(2026-07-29 ユーザ発見「作品数がズレてる」の恒久ゲート):
-    #   一覧索引に載るslugのHTMLが out/manga に無い=「検索に出るのに404」。過去3回再発した型
-    #   ([[search_404_build_skip_validation]])なので、件数でなく集合差そのものをFAIL条件にする。
-    _idx_p = os.path.join(ROOT, "data", "manga-list-index.json")
-    _idx = json.load(open(_idx_p, encoding="utf-8"))
-    _si = _idx["f"].index("slug")
-    _out_slugs = {f[:-5] for f in os.listdir(out_manga) if f.endswith(".html")}
-    _missing = sorted({str(r[_si]) for r in _idx["d"]} - _out_slugs)
-    if _missing:
-        die(f"索引に居るのに未生成 {len(_missing)}頁(=検索に出るのに404): {_missing[:8]}"
-            f"{' …' if len(_missing) > 8 else ''}(ビルドskipと索引ガードの不整合。両方を揃えてから再実行)")
-    print(f"  OK   索引⊆生成頁(索引 {len(_idx['d']):,} 行すべてHTMLあり)")
+        # 1.5 ★索引⊆生成頁の実測照合(2026-07-29 ユーザ発見「作品数がズレてる」の恒久ゲート):
+        #   一覧索引に載るslugのHTMLが out/manga に無い=「検索に出るのに404」。過去3回再発した型
+        #   ([[search_404_build_skip_validation]])なので、件数でなく集合差そのものをFAIL条件にする。
+        _idx_p = os.path.join(ROOT, "data", "manga-list-index.json")
+        _idx = json.load(open(_idx_p, encoding="utf-8"))
+        _si = _idx["f"].index("slug")
+        _out_slugs = {f[:-5] for f in os.listdir(out_manga) if f.endswith(".html")}
+        _missing = sorted({str(r[_si]) for r in _idx["d"]} - _out_slugs)
+        if _missing:
+            die(f"索引に居るのに未生成 {len(_missing)}頁(=検索に出るのに404): {_missing[:8]}"
+                f"{' …' if len(_missing) > 8 else ''}(ビルドskipと索引ガードの不整合。両方を揃えてから再実行)")
+        print(f"  OK   索引⊆生成頁(索引 {len(_idx['d']):,} 行すべてHTMLあり)")
 
-    # 2. sitemap
-    if os.path.exists(os.path.join(ROOT, "out", "sitemap.xml")):
-        print("  OK   sitemap.xml あり")
-    else:
-        print("  WARN sitemap.xml が無い(手順3.5 _gen-sitemap.py を忘れていないか)")
+        # 2. sitemap
+        if os.path.exists(os.path.join(ROOT, "out", "sitemap.xml")):
+            print("  OK   sitemap.xml あり")
+        else:
+            print("  WARN sitemap.xml が無い(手順3.5 _gen-sitemap.py を忘れていないか)")
 
     # 3. 疎通(全PASSでないと先に進まない)
     args = [sys.executable, os.path.join(ROOT, "scripts", "_prod-smoke.py")]
@@ -165,18 +172,19 @@ def main():
     else:
         print("  WARN R2_PURGE_TOKEN 未設定 → purge省略(索引/カレンダーの旧キャッシュが最長1日残る)")
 
-    # 4. marker
-    h = subprocess.run(["git", "rev-parse", "HEAD"], capture_output=True, text=True).stdout.strip()
-    if not h:
-        die("git rev-parse HEAD 失敗")
-    json.dump({"code_commit": h, "data_commit": h, "note": "週次蒸留"}, open(MARKER, "w"), indent=1)
-    print(f"  OK   marker更新: {h[:12]}")
+    # 4. marker (★data_week=skip: diff-deployが data_commit を更新済・code_commit は前回フル基準のまま)
+    if not data_week:
+        h = subprocess.run(["git", "rev-parse", "HEAD"], capture_output=True, text=True).stdout.strip()
+        if not h:
+            die("git rev-parse HEAD 失敗")
+        json.dump({"code_commit": h, "data_commit": h, "note": "週次蒸留"}, open(MARKER, "w"), indent=1)
+        print(f"  OK   marker更新: {h[:12]}")
 
-    # 5. pages-manifest
-    r = subprocess.run([sys.executable, os.path.join(ROOT, "scripts", "_init-pages-manifest.py")])
-    if r.returncode != 0:
-        die("_init-pages-manifest.py 失敗(markerは書いたがmanifest欠け=diff-deployが過剰検出する。再実行を)")
-    print("  OK   pages-manifest初期化")
+        # 5. pages-manifest
+        r = subprocess.run([sys.executable, os.path.join(ROOT, "scripts", "_init-pages-manifest.py")])
+        if r.returncode != 0:
+            die("_init-pages-manifest.py 失敗(markerは書いたがmanifest欠け=diff-deployが過剰検出する。再実行を)")
+        print("  OK   pages-manifest初期化")
 
     # 6. ★ISBN消失snapshot取り直し (2026-08-26 機械化。旧=skill散文で忘れると次週の監視が
     #     先週消えた分を延々と報告し続ける): smoke全PASS後=本番確定後にここで基準を取る。

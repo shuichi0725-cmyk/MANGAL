@@ -79,6 +79,8 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--only", help="SRC stemカンマ区切り(省略=markerから自動検出)")
     ap.add_argument("--dry", action="store_true")
+    ap.add_argument("--weekly-json", action="store_true",
+                    help="週次データ週モード: calendar/shinkan/data/idx のJSON面もhash差分PUT+purge(+トップpurge)")
     a = ap.parse_args()
 
     if not os.path.exists(MARKER):
@@ -255,11 +257,44 @@ def main():
             manifest.pop(k, None)
         print(f"DELETE {len(del_keys)}")
 
+    # --- 5.5 ★JSON面同期 (--weekly-json = 週次データ週モード 2026-08-27 ハイブリッド化) ---
+    #   フルビルド無し週は out/ が先週のままなので、step1が再生成した JSON面
+    #   (calendar本番フル/shinkan/コーナーstock/軽量idx)をソースから直接hash差分PUTする。
+    json_synced = []
+    if a.weekly_json:
+        SURFACES = [(os.path.join(ROOT, "data", "calendar"), "calendar"),
+                    (os.path.join(ROOT, "public", "shinkan"), "shinkan"),
+                    (os.path.join(ROOT, "public", "data"), "data"),
+                    (os.path.join(ROOT, "public", "idx"), "idx")]
+        for src_dir, prefix in SURFACES:
+            if not os.path.isdir(src_dir):
+                continue
+            for dirpath, _, files in os.walk(src_dir):
+                for fn in files:
+                    if not fn.endswith(".json"):
+                        continue
+                    p = os.path.join(dirpath, fn)
+                    rel = os.path.relpath(p, src_dir).replace("\\", "/")
+                    key = f"{prefix}/{rel}"
+                    body = open(p, "rb").read()
+                    h = hashlib.sha256(body).hexdigest()[:20]
+                    if manifest.get(key) == h:
+                        continue
+                    s3.put_object(Bucket=BUCKET, Key=key, Body=body, ContentType="application/json")
+                    manifest[key] = h
+                    json_synced.append(key)
+        print(f"JSON面同期: PUT {len(json_synced)} (calendar/shinkan/data/idx のhash差分)")
+        try:
+            import _r2_ops_ledger as _rl2
+            _rl2.record(len(json_synced), 0, "diff-deploy-json")
+        except Exception:
+            pass
+
     # --- 6. edge cache purge ---
     token = env.get("R2_PURGE_TOKEN", "")
     if token:
         paths = [f"/manga/{s}" for s in inner.values()] + [f"/manga/{s}" for s in dropped] + \
-                [f"/{n}" for n in IDX]
+                [f"/{n}" for n in IDX] + [f"/{k}" for k in json_synced] + (["/"] if a.weekly_json else [])
         # ★10/batch(実測: ≤10成功/≥50はworker CPU上限500)。UA必須(無し=CF 403)。失敗は致命でない(≤1日で自然失効)
         import time as _t
         purged, pfail = 0, 0
