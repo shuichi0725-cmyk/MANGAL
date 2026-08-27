@@ -218,6 +218,21 @@ def load_vol_checked():
     return ck
 
 
+def load_blmax():
+    """slug -> HEAD200確認済みの最大volume(volumes seedから)。★尾の再訪判定用(2026-08-28)。"""
+    mx = {}
+    if os.path.exists(VOLSEED):
+        for line in gzip.open(VOLSEED, "rt", encoding="utf-8"):
+            try:
+                r = json.loads(line)
+                v = int(r.get("volume") or 0)
+                if v > mx.get(r["slug"], 0):
+                    mx[r["slug"]] = v
+            except Exception:
+                pass
+    return mx
+
+
 def expand_volumes(expand_limit, workers=8):
     """アンカー済み(title_id確定)シリーズを対象に、TinyFish検索なしでHEADのみ全巻展開する。
     ★HEADは並列8本(2026-07-13)。BookLive=大手CDNの軽いHEADのみなので安全。
@@ -228,6 +243,7 @@ def expand_volumes(expand_limit, workers=8):
     anchors, _ = load_done()
     n_by_slug = volume_target_n()
     checked = load_vol_checked()
+    blmax = load_blmax()
     os.makedirs(os.path.dirname(VOL_CHECKED), exist_ok=True)
     targets = []
     for slug, rec in anchors.items():
@@ -235,6 +251,12 @@ def expand_volumes(expand_limit, workers=8):
         if not n:
             continue
         ck = checked.get(slug, set())
+        # ★尾の自動再訪(2026-08-28 ユーザ指示「新刊が追加されたら試し読みも追加」):
+        #   「最終HEAD200巻より上」の404チェック済みは checked 扱いにしない=再訪する。
+        #   発売前(日次zokkanの予約巻)にHEADして404→checked固定→発売後もボタンが永久に付かない穴の封鎖。
+        #   最終200巻以下の404=真の配信欠け(中抜け)は従来どおり再チェックしない(スラッシング防止)。
+        bl = blmax.get(slug, 0)
+        ck = {v for v in ck if v <= bl}
         if all(v in ck for v in range(1, n + 1)):
             continue  # 全巻チェック済み(200/404問わず)=完了
         targets.append((slug, rec["title_id"], n, ck))
