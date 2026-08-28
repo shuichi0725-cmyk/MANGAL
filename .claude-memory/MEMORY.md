@@ -61,7 +61,7 @@
 - [publisher設計=版ごと当時社名](publisher_model_edition_level.md) — families不採用。ISBN10/13正規化必須
 - [【台帳】全データ資産地図](data_assets_inventory.md) ／ [【必読】著者データ全源](author_data_map.md) — mangaka/metadata504/author-yomi.yml。表記揺れ注意
 - [【戒め】全データ揃えてから載せる](feedback_complete_data_before_ship.md) — ship-first抑制
-- [【戒め】効率を先に考える](feedback_efficiency_first.md) — 複数案比較→低コスト選択 ／ [書き出しはCSVでなくTSV](feedback_tsv_not_csv.md) — ユーザ明示
+- [【戒め】効率を先に考える](feedback_efficiency_first.md) — 複数案比較→低コスト選択 ／ [【戒め】全件を同じ濃度でAIに投げるな](feedback_agent_fanout_token_cost.md) — 機械証拠を一括算出→割れた分だけエージェント。202体590万トークンの反省 ／ [書き出しはCSVでなくTSV](feedback_tsv_not_csv.md) — ユーザ明示
 - [【最重要】クラスタ単位=シリーズ](clustering_unit_is_series.md) — 同一題+巻連続のみ統合。著者軸禁止
 - [著者汚染overlay修正](author_pollution_overlay_fix.md) — author-role-corrections.yml(20,959)本番適用済
 - [promote完了後プロセス居座り](promote_hangs_on_exit_windows.md) — 正=skill long-job-ops
