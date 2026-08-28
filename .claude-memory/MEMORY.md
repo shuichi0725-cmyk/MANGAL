@@ -96,6 +96,7 @@
 - [【調査済・未着手】年サフィックスslug全洗い出し](year_suffix_slug_survey.md) — 1,976頁。ISBN交差=確定4/同題要判定106。★ファイル名≠公開slugに注意
 - [【新設】掲載誌のper-case上書き=magazine-corrections](magazine_corrections_mechanism.md) — 種3のmagazineは根拠なし。スーパージャンプ調査=空欄106/別誌20が未着手
 - [版混在恒久是正=edition-canonical](edition_canonical_mechanism.md) — Wiki確定vol→promote結線済 ／ [アオアシ型=原版+ジュニア版再版](edition_dedup_aoashi.md) — 最古日付dedupが正しく原版を選ぶ
+- [【型】ARMS型=レーベル表記ゆれ版分裂](imprint_split_arms_type.md) — 真因は種2クラスタ分裂+ギャラ型是正の焼き込み。14件中9統合/1正当/3別問題。検出器あり
 - [巻補完=NDL title検索が強い](ndl_volume_completion_better_than_rakuten.md) — 書影は楽天ISBN直引き
 - [【最重要】目的は正確さ](feedback_accuracy_is_the_goal.md) — 推測/ダミーで埋めない。怪しければ止めて確認
 - [著者回収の罠=監修者混入](author_recovery_supervisor_false_positive.md) — NDL役割で監修と作画を分離
