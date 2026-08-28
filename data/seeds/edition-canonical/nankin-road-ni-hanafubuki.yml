@@ -4,7 +4,7 @@ canonical_publisher: 角川書店
 canonical_imprint: あすかコミックスDX
 suppress_types:
 - bunkobon
-source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。'
+source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。　/ 2026-08-28 刊行run分裂の是正(ARMSワイド版型): MADBのレーベル表記ゆれ(英字↔和名・略称↔正式名・中黒)や種2のクラスタ分裂で、1本の刊行runが複数の版タブに割れていた。楽天seriesName・MADBのシリーズ容器ID(schema:isPartOf)・ISBN連番・刊行リストで同一runと確認できた分だけ、既存の巻を版間で移して統合した(調査エージェント+反証エージェントの二段で裁定)。巻・ISBN・発売日の新規追加や改変はしていない。'
 volumes:
 - number: 1
   isbn13: '9784048521628'
@@ -14,7 +14,7 @@ volumes:
   release_date: '1989-09-17'
 - number: 3
   isbn13: '9784048521642'
-  release_date: '1989-11'
+  release_date: 1989-11
 extra_editions:
 - type: shinsoban
   label: 花とゆめコミックス
@@ -25,17 +25,12 @@ extra_editions:
     release_date: '1982-02-25'
   - number: 2
     release_date: '1982-09-25'
-- type: shinsoban
-  label: 花とゆめCOMICS
-  imprint: 花とゆめCOMICS
-  publisher: 白泉社
-  volumes:
   - number: 3
     isbn13: '9784592114338'
     release_date: '1983-04-25'
   - number: 4
     isbn13: '9784592114345'
-    release_date: '1983-12'
+    release_date: 1983-12
 - type: bunkobon
   label: 白泉社文庫
   imprint: 白泉社文庫
@@ -43,10 +38,10 @@ extra_editions:
   volumes:
   - number: 1
     isbn13: '9784592882213'
-    release_date: '1996-09'
+    release_date: 1996-09
   - number: 2
     isbn13: '9784592882220'
-    release_date: '1996-09'
+    release_date: 1996-09
   - number: 3
     isbn13: '9784592882237'
-    release_date: '1996-09'
+    release_date: 1996-09

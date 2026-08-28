@@ -4,14 +4,83 @@ canonical_publisher: 集英社
 canonical_imprint: SJ
 suppress_types:
 - deluxe
-source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。'
+source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。　/ 2026-08-28 刊行run分裂の是正(ARMSワイド版型): MADBのレーベル表記ゆれ(英字↔和名・略称↔正式名・中黒)や種2のクラスタ分裂で、1本の刊行runが複数の版タブに割れていた。楽天seriesName・MADBのシリーズ容器ID(schema:isPartOf)・ISBN連番・刊行リストで同一runと確認できた分だけ、既存の巻を版間で移して統合した(調査エージェント+反証エージェントの二段で裁定)。巻・ISBN・発売日の新規追加や改変はしていない。'
 volumes:
 - number: 1
   isbn13: '9784088586915'
-  release_date: '1997-11'
+  release_date: 1997-11
 - number: 2
   isbn13: '9784088590196'
   release_date: '1998-05-06'
+- number: 3
+  isbn13: '9784088590417'
+  release_date: 1998-10
+- number: 4
+  isbn13: '9784088590615'
+  release_date: 1999-02
+- number: 5
+  isbn13: '9784088590721'
+  release_date: 1999-05
+- number: 6
+  isbn13: '9784088590912'
+  release_date: 1999-10
+- number: 7
+  isbn13: '9784088591087'
+  release_date: 2000-02
+- number: 8
+  isbn13: '9784088591322'
+  release_date: 2000-07
+- number: 9
+  isbn13: '9784088591513'
+  release_date: 2000-11
+- number: 10
+  isbn13: '9784088591704'
+  release_date: 2001-03
+- number: 11
+  isbn13: '9784088592152'
+  release_date: 2001-07
+- number: 12
+  isbn13: '9784088592428'
+  release_date: 2001-11
+- number: 13
+  isbn13: '9784088592800'
+  release_date: 2002-03
+- number: 14
+  isbn13: '9784088593098'
+  release_date: 2002-07
+- number: 15
+  isbn13: '9784088593296'
+  release_date: 2002-11
+- number: 16
+  isbn13: '9784088593449'
+  release_date: 2003-03
+- number: 17
+  isbn13: '9784088593654'
+  release_date: 2003-07
+- number: 18
+  isbn13: '9784088593869'
+  release_date: 2003-11
+- number: 19
+  isbn13: '9784088594057'
+  release_date: 2004-03
+- number: 20
+  isbn13: '9784088594323'
+  release_date: 2004-08
+- number: 21
+  isbn13: '9784088594453'
+  release_date: 2004-11
+- number: 22
+  isbn13: '9784088594880'
+  release_date: 2005-03
+- number: 23
+  isbn13: '9784088595153'
+  release_date: 2005-07
+- number: 24
+  isbn13: '9784088595399'
+  release_date: 2005-12
+- number: 25
+  isbn13: '9784088595764'
+  release_date: 2006-05
 extra_editions:
 - type: deluxe
   label: ジャンプコミックスデラックス
@@ -20,96 +89,22 @@ extra_editions:
   volumes:
   - number: 1
     isbn13: '9784088596280'
-    release_date: '2007-03'
+    release_date: 2007-03
   - number: 2
     isbn13: '9784088596679'
-    release_date: '2007-09'
+    release_date: 2007-09
   - number: 3
     isbn13: '9784088596952'
-    release_date: '2008-03'
+    release_date: 2008-03
   - number: 4
     isbn13: '9784088597294'
-    release_date: '2008-09'
+    release_date: 2008-09
   - number: 5
     isbn13: '9784088597645'
-    release_date: '2009-04'
+    release_date: 2009-04
   - number: 6
     isbn13: '9784088598031'
-    release_date: '2009-10'
+    release_date: 2009-10
   - number: 7
     isbn13: '9784088598383'
-    release_date: '2010-04'
-- type: deluxe
-  label: ジャンプ・コミックスデラックス
-  imprint: ジャンプ・コミックスデラックス
-  publisher: 集英社
-  volumes:
-  - number: 3
-    isbn13: '9784088590417'
-    release_date: '1998-10'
-  - number: 4
-    isbn13: '9784088590615'
-    release_date: '1999-02'
-  - number: 5
-    isbn13: '9784088590721'
-    release_date: '1999-05'
-  - number: 6
-    isbn13: '9784088590912'
-    release_date: '1999-10'
-  - number: 7
-    isbn13: '9784088591087'
-    release_date: '2000-02'
-  - number: 8
-    isbn13: '9784088591322'
-    release_date: '2000-07'
-  - number: 9
-    isbn13: '9784088591513'
-    release_date: '2000-11'
-  - number: 10
-    isbn13: '9784088591704'
-    release_date: '2001-03'
-  - number: 11
-    isbn13: '9784088592152'
-    release_date: '2001-07'
-  - number: 12
-    isbn13: '9784088592428'
-    release_date: '2001-11'
-  - number: 13
-    isbn13: '9784088592800'
-    release_date: '2002-03'
-  - number: 14
-    isbn13: '9784088593098'
-    release_date: '2002-07'
-  - number: 15
-    isbn13: '9784088593296'
-    release_date: '2002-11'
-  - number: 16
-    isbn13: '9784088593449'
-    release_date: '2003-03'
-  - number: 17
-    isbn13: '9784088593654'
-    release_date: '2003-07'
-  - number: 18
-    isbn13: '9784088593869'
-    release_date: '2003-11'
-  - number: 19
-    isbn13: '9784088594057'
-    release_date: '2004-03'
-  - number: 20
-    isbn13: '9784088594323'
-    release_date: '2004-08'
-  - number: 21
-    isbn13: '9784088594453'
-    release_date: '2004-11'
-  - number: 22
-    isbn13: '9784088594880'
-    release_date: '2005-03'
-  - number: 23
-    isbn13: '9784088595153'
-    release_date: '2005-07'
-  - number: 24
-    isbn13: '9784088595399'
-    release_date: '2005-12'
-  - number: 25
-    isbn13: '9784088595764'
-    release_date: '2006-05'
+    release_date: 2010-04

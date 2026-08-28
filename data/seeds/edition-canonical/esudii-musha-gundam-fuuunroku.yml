@@ -2,7 +2,7 @@ slug: esudii-musha-gundam-fuuunroku
 canonical_label: 通常版
 canonical_publisher: 講談社
 canonical_imprint: ワイドKCボンボン
-source: 'ギャラ型是正 2026-08-17(20-29年帯): 通常版/文庫タブで後年の復刻が初出runの巻枠を占有し日付が逆行していた。種2が持つimprintどおりに版を分離し、完備最古のrunを主版に戻した。版元はISBN出版者記号から解決し、ISBNを持たないrunは本セッションでNDL確認済みのレーベル対応にある社だけ明示、他は不明。★MADB側で巻番号が全部1に潰れていた復刻runは、発売日→ISBN順に1..nへ採番し直した。'
+source: 'ギャラ型是正 2026-08-17(20-29年帯): 通常版/文庫タブで後年の復刻が初出runの巻枠を占有し日付が逆行していた。種2が持つimprintどおりに版を分離し、完備最古のrunを主版に戻した。版元はISBN出版者記号から解決し、ISBNを持たないrunは本セッションでNDL確認済みのレーベル対応にある社だけ明示、他は不明。★MADB側で巻番号が全部1に潰れていた復刻runは、発売日→ISBN順に1..nへ採番し直した。　/ 2026-08-28 刊行run分裂の是正(ARMSワイド版型): MADBのレーベル表記ゆれ(英字↔和名・略称↔正式名・中黒)や種2のクラスタ分裂で、1本の刊行runが複数の版タブに割れていた。楽天seriesName・MADBのシリーズ容器ID(schema:isPartOf)・ISBN連番・刊行リストで同一runと確認できた分だけ、既存の巻を版間で移して統合した(調査エージェント+反証エージェントの二段で裁定)。巻・ISBN・発売日の新規追加や改変はしていない。'
 volumes:
 - number: 1
   release_date: '1990-02-17'
@@ -10,6 +10,9 @@ volumes:
   release_date: '1990-09-17'
 - number: 3
   release_date: '1991-03-06'
+- number: 4
+  isbn13: '9784061766136'
+  release_date: 1991-10
 - number: 5
   release_date: '1992-06-06'
 - number: 6
@@ -21,14 +24,6 @@ volumes:
 - number: 9
   release_date: '1994-02-05'
 extra_editions:
-- type: wideban
-  label: ワイドKC版
-  imprint: ワイドKC
-  publisher: 講談社
-  volumes:
-  - number: 4
-    isbn13: '9784061766136'
-    release_date: '1991-10'
 - type: shinsoban
   label: KCDX版
   imprint: KCDX
@@ -42,4 +37,4 @@ extra_editions:
     release_date: '2012-12-21'
   - number: 3
     isbn13: '9784063767728'
-    release_date: '2013-01'
+    release_date: 2013-01

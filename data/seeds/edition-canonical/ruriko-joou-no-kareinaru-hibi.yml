@@ -4,29 +4,24 @@ canonical_publisher: 集英社
 canonical_imprint: SJ
 suppress_types:
 - deluxe
-source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。'
+source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。　/ 2026-08-28 刊行run分裂の是正(ARMSワイド版型): MADBのレーベル表記ゆれ(英字↔和名・略称↔正式名・中黒)や種2のクラスタ分裂で、1本の刊行runが複数の版タブに割れていた。楽天seriesName・MADBのシリーズ容器ID(schema:isPartOf)・ISBN連番・刊行リストで同一runと確認できた分だけ、既存の巻を版間で移して統合した(調査エージェント+反証エージェントの二段で裁定)。巻・ISBN・発売日の新規追加や改変はしていない。'
 volumes:
+- number: 1
+  isbn13: '9784088583631'
+  release_date: 1996-08
 - number: 2
   isbn13: '9784088583648'
   release_date: '1997-03-09'
+- number: 3
+  isbn13: '9784088583655'
+  release_date: 1997-11
+- number: 4
+  isbn13: '9784088590103'
+  release_date: 1998-03
+- number: 5
+  isbn13: '9784088590288'
+  release_date: 1998-07
 extra_editions:
-- type: deluxe
-  label: ジャンプ・コミックスデラックス
-  imprint: ジャンプ・コミックスデラックス
-  publisher: 集英社
-  volumes:
-  - number: 1
-    isbn13: '9784088583631'
-    release_date: '1996-08'
-  - number: 3
-    isbn13: '9784088583655'
-    release_date: '1997-11'
-  - number: 4
-    isbn13: '9784088590103'
-    release_date: '1998-03'
-  - number: 5
-    isbn13: '9784088590288'
-    release_date: '1998-07'
 - type: shinsoban
   label: SP pocket wide
   imprint: SP pocket wide
@@ -34,4 +29,4 @@ extra_editions:
   volumes:
   - number: 1
     isbn13: '9784845848836'
-    release_date: '2016-07'
+    release_date: 2016-07

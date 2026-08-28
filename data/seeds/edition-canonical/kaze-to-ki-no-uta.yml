@@ -4,7 +4,7 @@ canonical_publisher: 小学館
 canonical_imprint: フラワーコミックス
 suppress_types:
 - bunkobon
-source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。 ★ISBN補充7巻 2026-08-24(partial-isbn-gap半自動: 帯/楽天題/巻番号/未使用の4検証)'
+source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。 ★ISBN補充7巻 2026-08-24(partial-isbn-gap半自動: 帯/楽天題/巻番号/未使用の4検証)　/ 2026-08-28 刊行run分裂の是正(ARMSワイド版型): MADBのレーベル表記ゆれ(英字↔和名・略称↔正式名・中黒)や種2のクラスタ分裂で、1本の刊行runが複数の版タブに割れていた。楽天seriesName・MADBのシリーズ容器ID(schema:isPartOf)・ISBN連番・刊行リストで同一runと確認できた分だけ、既存の巻を版間で移して統合した(調査エージェント+反証エージェントの二段で裁定)。巻・ISBN・発売日の新規追加や改変はしていない。'
 volumes:
 - number: 1
   isbn13: '9784091302212'
@@ -51,6 +51,9 @@ volumes:
 - number: 15
   isbn13: '9784091304452'
   release_date: '1982-06-20'
+- number: 16
+  isbn13: '9784091304469'
+  release_date: '1983-08-20'
 - number: 17
   isbn13: '9784091304476'
   release_date: 1984-08
@@ -136,11 +139,6 @@ extra_editions:
   - number: 4
     isbn13: '9784122040991'
     release_date: 2002-09
-- type: bunkobon
-  label: 中公文庫コミック版
-  imprint: 中公文庫コミック版
-  publisher: 中央公論新社
-  volumes:
   - number: 5
     isbn13: '9784122041196'
     release_date: 2002-10
@@ -205,11 +203,3 @@ extra_editions:
   - number: 10
     isbn13: '9784592881605'
     release_date: 1995-09
-- type: shinsoban
-  label: フラワーコミックスFC
-  imprint: フラワーコミックスFC
-  publisher: 小学館
-  volumes:
-  - number: 16
-    isbn13: '9784091304469'
-    release_date: '1983-08-20'

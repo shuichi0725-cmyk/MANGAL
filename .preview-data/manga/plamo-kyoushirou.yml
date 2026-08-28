@@ -40,6 +40,11 @@ editions:
     cover_url: null
     release_date: '1982-08-10'
     volume_label: pt.1
+  - number: 2
+    asin: null
+    isbn13: '9784061004030'
+    cover_url: null
+    release_date: '1982-10-20'
   - number: 3
     asin: null
     isbn13: '9784061004078'
@@ -140,16 +145,6 @@ editions:
     isbn13: '9784063340921'
     cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0633/06334092.jpg?_ex=300x300
     release_date: '1999-07-06'
-- type: shinsoban
-  label: コミックボンボン
-  publisher: 講談社
-  imprint: コミックボンボン
-  volumes:
-  - number: 2
-    asin: null
-    isbn13: '9784061004030'
-    cover_url: null
-    release_date: '1982-10-20'
 - type: deluxe
   label: KCデラックス
   publisher: 不明

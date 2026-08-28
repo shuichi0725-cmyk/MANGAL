@@ -4,7 +4,7 @@ canonical_publisher: 小学館
 canonical_imprint: ビッグコミックス
 suppress_types:
 - bunkobon
-source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。 ★ISBN補充15巻 2026-08-24(partial-isbn-gap半自動: 帯/楽天題/巻番号/未使用の4検証)'
+source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。 ★ISBN補充15巻 2026-08-24(partial-isbn-gap半自動: 帯/楽天題/巻番号/未使用の4検証)　/ 2026-08-28 刊行run分裂の是正(ARMSワイド版型): MADBのレーベル表記ゆれ(英字↔和名・略称↔正式名・中黒)や種2のクラスタ分裂で、1本の刊行runが複数の版タブに割れていた。楽天seriesName・MADBのシリーズ容器ID(schema:isPartOf)・ISBN連番・刊行リストで同一runと確認できた分だけ、既存の巻を版間で移して統合した(調査エージェント+反証エージェントの二段で裁定)。巻・ISBN・発売日の新規追加や改変はしていない。'
 volumes:
 - number: 1
   release_date: 1981-06
@@ -153,6 +153,9 @@ volumes:
 - number: 50
   isbn13: '9784091814906'
   release_date: 1990-04
+- number: 51
+  isbn13: '9784091823113'
+  release_date: null
 - number: 52
   isbn13: '9784091823120'
   release_date: 1990-10
@@ -344,13 +347,6 @@ extra_editions:
     isbn13: '9784074307814'
     release_date: 2018-09
     volume_label: ひげ鶴走る編
-- type: shinsoban
-  label: standard版
-  publisher: 小学館
-  volumes:
-  - number: 51
-    isbn13: '9784091823113'
-    release_date: null
 - type: shinsoban
   label: Comic魂別冊
   imprint: Comic魂別冊

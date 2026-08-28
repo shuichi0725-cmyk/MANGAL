@@ -4,64 +4,64 @@ canonical_publisher: 双葉社
 canonical_imprint: アクション・コミックス
 suppress_types:
 - bunkobon
-source: 'ギャラ型是正 2026-08-17(worksheetのA_SPLIT_WORK?判定だが実体はB型): 初出アクション・コミックス(双葉社 全28巻 1972-05-15〜1976-05)がMADB上で2 sidに割れ、そこへ2011-13年の小池書院King series(全20巻)と1990年劇画キングシリーズが食い込んで16巻2013-01-10→21巻1975-04の38年逆行になっていた。文庫タブも1995-96年の道草文庫と1976/1979年の小学館文庫が混在。初出run(ed69891の28巻)を主版に戻し、1982-83年のアクション・コミックス重版(14冊)/1971年の漫画アクション・コミックス(2冊)/King series(2011-13 全20巻)/Comic魂別冊(2018-19 11冊。MADBが巻番号を持たないので発売日順に採番)/劇画キングシリーズ/Goma books(2019 全8巻)はextra_editionsへ。文庫は suppress_types で道草文庫(全28巻)・小学館文庫1976・小学館文庫1979に分けた。★4巻はed69891に無く、別editionの1972-02は3巻(1972-06)・5巻(1972-08)と矛盾するため日付なしで置いた。'
+source: 'ギャラ型是正 2026-08-17(worksheetのA_SPLIT_WORK?判定だが実体はB型): 初出アクション・コミックス(双葉社 全28巻 1972-05-15〜1976-05)がMADB上で2 sidに割れ、そこへ2011-13年の小池書院King series(全20巻)と1990年劇画キングシリーズが食い込んで16巻2013-01-10→21巻1975-04の38年逆行になっていた。文庫タブも1995-96年の道草文庫と1976/1979年の小学館文庫が混在。初出run(ed69891の28巻)を主版に戻し、1982-83年のアクション・コミックス重版(14冊)/1971年の漫画アクション・コミックス(2冊)/King series(2011-13 全20巻)/Comic魂別冊(2018-19 11冊。MADBが巻番号を持たないので発売日順に採番)/劇画キングシリーズ/Goma books(2019 全8巻)はextra_editionsへ。文庫は suppress_types で道草文庫(全28巻)・小学館文庫1976・小学館文庫1979に分けた。★4巻はed69891に無く、別editionの1972-02は3巻(1972-06)・5巻(1972-08)と矛盾するため日付なしで置いた。　/ 2026-08-28 刊行run分裂の是正(ARMSワイド版型): MADBのレーベル表記ゆれ(英字↔和名・略称↔正式名・中黒)や種2のクラスタ分裂で、1本の刊行runが複数の版タブに割れていた。楽天seriesName・MADBのシリーズ容器ID(schema:isPartOf)・ISBN連番・刊行リストで同一runと確認できた分だけ、既存の巻を版間で移して統合した(調査エージェント+反証エージェントの二段で裁定)。巻・ISBN・発売日の新規追加や改変はしていない。'
 volumes:
-  - number: 1
-    release_date: '1972-05-15'
-  - number: 2
-    release_date: '1972-05-15'
-  - number: 3
-    release_date: '1972-06'
-  - number: 4
-    release_date: null
-  - number: 5
-    release_date: '1972-08'
-  - number: 6
-    release_date: '1972-10'
-  - number: 7
-    release_date: '1972-11'
-  - number: 8
-    release_date: '1973-01'
-  - number: 9
-    release_date: '1973-02'
-  - number: 10
-    release_date: '1973-04'
-  - number: 11
-    release_date: '1973-06'
-  - number: 12
-    release_date: '1973-08'
-  - number: 13
-    release_date: '1973-10'
-  - number: 14
-    release_date: '1973-10'
-  - number: 15
-    release_date: '1973-12'
-  - number: 16
-    release_date: '1974-01'
-  - number: 17
-    release_date: '1974-06'
-  - number: 18
-    release_date: '1974-11'
-  - number: 19
-    release_date: '1974-12'
-  - number: 20
-    release_date: '1975-01'
-  - number: 21
-    release_date: '1975-04'
-  - number: 22
-    release_date: '1975-06'
-  - number: 23
-    release_date: '1975-08'
-  - number: 24
-    release_date: '1975-10'
-  - number: 25
-    release_date: '1976-01'
-  - number: 26
-    release_date: '1976-02'
-  - number: 27
-    release_date: '1976-03'
-  - number: 28
-    release_date: '1976-05'
+- number: 1
+  release_date: '1972-05-15'
+- number: 2
+  release_date: '1972-05-15'
+- number: 3
+  release_date: 1972-06
+- number: 4
+  release_date: null
+- number: 5
+  release_date: 1972-08
+- number: 6
+  release_date: 1972-10
+- number: 7
+  release_date: 1972-11
+- number: 8
+  release_date: 1973-01
+- number: 9
+  release_date: 1973-02
+- number: 10
+  release_date: 1973-04
+- number: 11
+  release_date: 1973-06
+- number: 12
+  release_date: 1973-08
+- number: 13
+  release_date: 1973-10
+- number: 14
+  release_date: 1973-10
+- number: 15
+  release_date: 1973-12
+- number: 16
+  release_date: 1974-01
+- number: 17
+  release_date: 1974-06
+- number: 18
+  release_date: 1974-11
+- number: 19
+  release_date: 1974-12
+- number: 20
+  release_date: 1975-01
+- number: 21
+  release_date: 1975-04
+- number: 22
+  release_date: 1975-06
+- number: 23
+  release_date: 1975-08
+- number: 24
+  release_date: 1975-10
+- number: 25
+  release_date: 1976-01
+- number: 26
+  release_date: 1976-02
+- number: 27
+  release_date: 1976-03
+- number: 28
+  release_date: 1976-05
 extra_editions:
 - type: other
   label: 漫画アクション・コミックス(1971)
@@ -69,7 +69,7 @@ extra_editions:
   publisher: 双葉社
   volumes:
   - number: 2
-    release_date: '1971-06'
+    release_date: 1971-06
   - number: 3
     release_date: '1971-09-01'
 - type: shinsoban
@@ -111,16 +111,16 @@ extra_editions:
   publisher: 不明
   volumes:
   - number: 1
-    release_date: '1990-08'
+    release_date: 1990-08
   - number: 9
     isbn13: '9784883150830'
-    release_date: '1990-12'
+    release_date: 1990-12
   - number: 10
     isbn13: '9784883150847'
-    release_date: '1990-12'
+    release_date: 1990-12
   - number: 28
     isbn13: '9784883151271'
-    release_date: '1991-09'
+    release_date: 1991-09
 - type: shinsoban
   label: King series(小池書院)
   imprint: King series
@@ -128,64 +128,64 @@ extra_editions:
   volumes:
   - number: 1
     isbn13: '9784862257994'
-    release_date: '2011-12'
+    release_date: 2011-12
   - number: 2
     isbn13: '9784862258007'
-    release_date: '2012-01'
+    release_date: 2012-01
   - number: 3
     isbn13: '9784862258014'
-    release_date: '2012-01'
+    release_date: 2012-01
   - number: 4
     isbn13: '9784862258021'
-    release_date: '2012-02'
+    release_date: 2012-02
   - number: 5
     isbn13: '9784862258038'
-    release_date: '2012-02'
+    release_date: 2012-02
   - number: 6
     isbn13: '9784862258045'
-    release_date: '2012-03'
+    release_date: 2012-03
   - number: 7
     isbn13: '9784862258052'
-    release_date: '2012-04'
+    release_date: 2012-04
   - number: 8
     isbn13: '9784862258069'
-    release_date: '2012-05'
+    release_date: 2012-05
   - number: 9
     isbn13: '9784862258076'
-    release_date: '2012-06'
+    release_date: 2012-06
   - number: 10
     isbn13: '9784862258083'
-    release_date: '2012-07'
+    release_date: 2012-07
   - number: 11
     isbn13: '9784862258397'
-    release_date: '2012-08'
+    release_date: 2012-08
   - number: 12
     isbn13: '9784862258403'
-    release_date: '2012-09'
+    release_date: 2012-09
   - number: 13
     isbn13: '9784862258410'
-    release_date: '2012-10'
+    release_date: 2012-10
   - number: 14
     isbn13: '9784862258427'
-    release_date: '2012-11'
+    release_date: 2012-11
   - number: 15
     isbn13: '9784862258434'
-    release_date: '2012-12'
+    release_date: 2012-12
   - number: 16
     isbn13: '9784862258441'
-    release_date: '2013-01'
+    release_date: 2013-01
   - number: 17
     isbn13: '9784862258458'
-    release_date: '2013-02'
+    release_date: 2013-02
   - number: 18
     isbn13: '9784862258465'
-    release_date: '2013-03'
+    release_date: 2013-03
   - number: 19
     isbn13: '9784862258472'
-    release_date: '2013-04'
+    release_date: 2013-04
   - number: 20
     isbn13: '9784862258489'
-    release_date: '2013-05'
+    release_date: 2013-05
 - type: shinsoban
   label: Comic魂別冊(はちどり)
   imprint: Comic魂別冊
@@ -193,48 +193,48 @@ extra_editions:
   volumes:
   - number: 1
     isbn13: '9784074303380'
-    release_date: '2018-05'
-    volume_label: '一殺五百両編'
+    release_date: 2018-05
+    volume_label: 一殺五百両編
   - number: 2
     isbn13: '9784074305742'
-    release_date: '2018-07'
-    volume_label: '冥府魔道編'
+    release_date: 2018-07
+    volume_label: 冥府魔道編
   - number: 3
     isbn13: '9784074308064'
-    release_date: '2018-09'
-    volume_label: '二河白道編'
+    release_date: 2018-09
+    volume_label: 二河白道編
   - number: 4
     isbn13: '9784073400264'
-    release_date: '2018-11'
-    volume_label: '刺客街道編'
+    release_date: 2018-11
+    volume_label: 刺客街道編
   - number: 5
     isbn13: '9784073401803'
-    release_date: '2019-01'
-    volume_label: '乞胸お雪編'
+    release_date: 2019-01
+    volume_label: 乞胸お雪編
   - number: 6
     isbn13: '9784073403005'
-    release_date: '2019-03'
-    volume_label: '首斬り朝右衛門編'
+    release_date: 2019-03
+    volume_label: 首斬り朝右衛門編
   - number: 7
     isbn13: '9784073405818'
-    release_date: '2019-05'
-    volume_label: '干城殺陣編'
+    release_date: 2019-05
+    volume_label: 干城殺陣編
   - number: 8
     isbn13: '9784073408079'
-    release_date: '2019-07'
-    volume_label: 'どさ御用編'
+    release_date: 2019-07
+    volume_label: どさ御用編
   - number: 9
     isbn13: '9784073410669'
-    release_date: '2019-09'
-    volume_label: '御定書七十九条編'
+    release_date: 2019-09
+    volume_label: 御定書七十九条編
   - number: 10
     isbn13: '9784073412809'
-    release_date: '2019-11'
-    volume_label: '六道無辺編'
+    release_date: 2019-11
+    volume_label: 六道無辺編
   - number: 11
     isbn13: '9784073414452'
-    release_date: '2020-01'
-    volume_label: '可の字無残編'
+    release_date: 2020-01
+    volume_label: 可の字無残編
 - type: shinsoban
   label: Goma books版
   imprint: Goma books
@@ -242,36 +242,36 @@ extra_editions:
   volumes:
   - number: 1
     isbn13: '9784814918812'
-    release_date: '2019-01'
-    volume_label: '1 (子を貸し腕貸しつかまつる編)'
+    release_date: 2019-01
+    volume_label: 1 (子を貸し腕貸しつかまつる編)
   - number: 2
     isbn13: '9784814918829'
-    release_date: '2019-01'
-    volume_label: '2 (お末無情編)'
+    release_date: 2019-01
+    volume_label: 2 (お末無情編)
   - number: 3
     isbn13: '9784814918904'
-    release_date: '2019-02'
-    volume_label: '3 (咫尺の地編)'
+    release_date: 2019-02
+    volume_label: 3 (咫尺の地編)
   - number: 4
     isbn13: '9784814918911'
-    release_date: '2019-02'
-    volume_label: '4 (首丘編)'
+    release_date: 2019-02
+    volume_label: 4 (首丘編)
   - number: 5
     isbn13: '9784814919079'
-    release_date: '2019-03'
-    volume_label: '5 (干城殺陣編)'
+    release_date: 2019-03
+    volume_label: 5 (干城殺陣編)
   - number: 6
     isbn13: '9784814919086'
-    release_date: '2019-03'
-    volume_label: '6 (雁書編)'
+    release_date: 2019-03
+    volume_label: 6 (雁書編)
   - number: 7
     isbn13: '9784814919239'
-    release_date: '2019-05'
-    volume_label: '7 (新陰流山彦編)'
+    release_date: 2019-05
+    volume_label: 7 (新陰流山彦編)
   - number: 8
     isbn13: '9784814919307'
-    release_date: '2019-06'
-    volume_label: '8 (さぶる子編)'
+    release_date: 2019-06
+    volume_label: 8 (さぶる子編)
 - type: bunkobon
   label: 文庫版(小学館文庫 1976)
   imprint: 小学館文庫
@@ -289,16 +289,11 @@ extra_editions:
     release_date: '1976-10-20'
   - number: 6
     release_date: '1976-11-20'
-- type: bunkobon
-  label: 文庫版(小学館文庫 1979)
-  imprint: 小学館文庫
-  publisher: 小学館
-  volumes:
   - number: 7
     isbn13: '9784091904072'
     release_date: '1979-05-20'
   - number: 8
-    release_date: '1979-07'
+    release_date: 1979-07
   - number: 9
     release_date: '1979-09-20'
 - type: bunkobon
@@ -308,85 +303,85 @@ extra_editions:
   volumes:
   - number: 1
     isbn13: '9784883156412'
-    release_date: '1995-03'
+    release_date: 1995-03
   - number: 2
     isbn13: '9784883156429'
-    release_date: '1995-03'
+    release_date: 1995-03
   - number: 3
     isbn13: '9784883156474'
-    release_date: '1995-04'
+    release_date: 1995-04
   - number: 4
     isbn13: '9784883156481'
-    release_date: '1995-04'
+    release_date: 1995-04
   - number: 5
     isbn13: '9784883156511'
-    release_date: '1995-05'
+    release_date: 1995-05
   - number: 6
     isbn13: '9784883156528'
-    release_date: '1995-05'
+    release_date: 1995-05
   - number: 7
     isbn13: '9784883156573'
-    release_date: '1995-06'
+    release_date: 1995-06
   - number: 8
     isbn13: '9784883156580'
-    release_date: '1995-06'
+    release_date: 1995-06
   - number: 9
     isbn13: '9784883156610'
-    release_date: '1995-07'
+    release_date: 1995-07
   - number: 10
     isbn13: '9784883156627'
-    release_date: '1995-07'
+    release_date: 1995-07
   - number: 11
     isbn13: '9784883156665'
-    release_date: '1995-08'
+    release_date: 1995-08
   - number: 12
     isbn13: '9784883156672'
-    release_date: '1995-08'
+    release_date: 1995-08
   - number: 13
     isbn13: '9784883156719'
-    release_date: '1995-08'
+    release_date: 1995-08
   - number: 14
     isbn13: '9784883156726'
-    release_date: '1995-08'
+    release_date: 1995-08
   - number: 15
     isbn13: '9784883156733'
-    release_date: '1995-09'
+    release_date: 1995-09
   - number: 16
     isbn13: '9784883156740'
-    release_date: '1995-09'
+    release_date: 1995-09
   - number: 17
     isbn13: '9784883156771'
-    release_date: '1995-10'
+    release_date: 1995-10
   - number: 18
     isbn13: '9784883156788'
-    release_date: '1995-10'
+    release_date: 1995-10
   - number: 19
     isbn13: '9784883156818'
-    release_date: '1995-11'
+    release_date: 1995-11
   - number: 20
     isbn13: '9784883156825'
-    release_date: '1995-11'
+    release_date: 1995-11
   - number: 21
     isbn13: '9784883156856'
-    release_date: '1995-12'
+    release_date: 1995-12
   - number: 22
     isbn13: '9784883156863'
-    release_date: '1995-12'
+    release_date: 1995-12
   - number: 23
     isbn13: '9784883156894'
-    release_date: '1996-01'
+    release_date: 1996-01
   - number: 24
     isbn13: '9784883156900'
-    release_date: '1996-01'
+    release_date: 1996-01
   - number: 25
     isbn13: '9784883156931'
-    release_date: '1996-02'
+    release_date: 1996-02
   - number: 26
     isbn13: '9784883156948'
-    release_date: '1996-02'
+    release_date: 1996-02
   - number: 27
     isbn13: '9784883156979'
-    release_date: '1996-03'
+    release_date: 1996-03
   - number: 28
     isbn13: '9784883156986'
-    release_date: '1996-03'
+    release_date: 1996-03

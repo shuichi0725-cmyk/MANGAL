@@ -1,0 +1,23 @@
+slug: syd-lid
+canonical_label: 文庫版
+canonical_publisher: 幻冬舎
+canonical_imprint: 幻冬舎コミックス漫画文庫
+suppress_types:
+- bunkobon
+volumes:
+- number: 1
+  isbn13: '9784344824218'
+  release_date: 2012-01
+- number: 2
+  isbn13: '9784344825055'
+  release_date: 2012-04
+- number: 3
+  isbn13: '9784344825734'
+  release_date: 2012-07
+- number: 4
+  isbn13: '9784344826472'
+  release_date: 2012-10
+- number: 5
+  isbn13: '9784344827257'
+  release_date: 2013-01
+source: '刊行run分裂の是正(ARMSワイド版型) 2026-08-28: 1本の刊行runが版タブに割れていた頁を、本番頁が既に持っている巻をそのまま組み替えて1版に戻した。分裂の真因はMADBのレーベル表記ゆれ(英字↔和名・略称↔正式名)・schema:brandの欠落/混入・種2のクラスタ分裂で、同一runであることはMADBのシリーズ容器ID(schema:isPartOf)・楽天seriesName・ISBN連番・刊行ペース・外部の刊行リストで裏取りした(調査エージェント+反証エージェントの二段裁定)。巻・ISBN・発売日の新規追加や値の改変はしていない。'
