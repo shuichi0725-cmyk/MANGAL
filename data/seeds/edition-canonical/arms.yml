@@ -67,6 +67,9 @@ volumes:
 - number: 20
   isbn13: '9784091267504'
   release_date: '2002-02-15'
+- number: 21
+  isbn13: '9784091268211'
+  release_date: '2002-04-15'
 - number: 22
   isbn13: '9784091268228'
   release_date: '2002-07-15'
@@ -167,11 +170,4 @@ extra_editions:
   - number: 8
     isbn13: '9784091211446'
     release_date: '2008-01-23'
-- type: shinsoban
-  label: 少年サンデーコミツクススペシャル
-  imprint: 少年サンデーコミツクススペシャル
-  publisher: 小学館
-  volumes:
-  - number: 21
-    isbn13: '9784091268211'
     release_date: '2002-04-15'

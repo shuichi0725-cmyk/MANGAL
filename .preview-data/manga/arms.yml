@@ -149,6 +149,11 @@ editions:
     isbn13: '9784091267504'
     cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/7504/9784091267504.gif?_ex=300x300
     release_date: '2002-02-15'
+  - number: 21
+    asin: null
+    isbn13: '9784091268211'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/8211/9784091268211.gif?_ex=300x300
+    release_date: '2002-04-15'
   - number: 22
     asin: null
     isbn13: '9784091268228'
@@ -303,16 +308,6 @@ editions:
     asin: null
     isbn13: '9784091211446'
     cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0912/09121144.jpg?_ex=300x300
-    release_date: '2008-01-23'
-- type: shinsoban
-  label: 少年サンデーコミツクススペシャル
-  publisher: 小学館
-  imprint: 少年サンデーコミツクススペシャル
-  volumes:
-  - number: 21
-    asin: null
-    isbn13: '9784091268211'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/8211/9784091268211.gif?_ex=300x300
     release_date: '2002-04-15'
 publishers:
 - shogakukan
@@ -327,7 +322,7 @@ genres_anilist:
 tags:
 - name: Shounen
   category: Demographic
-  rank: 50
-popularity: 1217
+  rank: 60
+popularity: 1249
 score: 64
 work_wikidata_qid: Q688960
