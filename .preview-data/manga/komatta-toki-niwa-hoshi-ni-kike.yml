@@ -33,7 +33,17 @@ editions:
     isbn13: '9784887411562'
     cover_url: null
     release_date: 1997-11
+  - number: 2
+    asin: null
+    isbn13: '9784887411722'
+    cover_url: null
+    release_date: 1998-01
   - number: 3
+    asin: null
+    isbn13: '9784887412071'
+    cover_url: null
+    release_date: 1998-06
+  - number: 4
     asin: null
     isbn13: '9784887412330'
     cover_url: null
@@ -148,16 +158,6 @@ editions:
     isbn13: '9784887416482'
     cover_url: null
     release_date: 2005-05
-- type: shinsoban
-  label: いち好き・コミックス no.74
-  publisher: 冬水社
-  imprint: いち好き・コミックス no.74
-  volumes:
-  - number: 2
-    asin: null
-    isbn13: '9784887411722'
-    cover_url: null
-    release_date: 1998-01
 - type: bunkobon
   label: 冬水社文庫
   publisher: 冬水社
@@ -265,5 +265,5 @@ tags:
 - name: Found Family
   category: Theme-Other
   rank: 60
-popularity: 1254
+popularity: 1268
 score: 71
