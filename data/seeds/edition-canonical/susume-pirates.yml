@@ -4,12 +4,14 @@ canonical_publisher: 集英社
 canonical_imprint: ジャンプ・コミックス
 suppress_types:
 - bunkobon
-source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。'
+source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。　/ 2026-08-28 レーベル表記ゆれ版分裂の是正(ARMS型): MADBが同一レーベルを表記ゆれ(中黒の有無・小書きカナ・英字/カナ)で別edition行として持っていたため、2026-08-17の一括是正が同一の刊行runを複数の版タブに割ってしまっていた。外部裏取り(MADB cm104のシリーズ容器ID・楽天seriesName・Wikipedia/公式の刊行リスト)で同一runと確認できた分だけ、既存の巻を版間で移して統合した。巻・ISBN・発売日の新規追加や値の改変は一切していない。'
 volumes:
 - number: 1
   release_date: '1979-01-31'
 - number: 2
   release_date: '1979-05-15'
+- number: 3
+  release_date: '1979-09-15'
 - number: 4
   release_date: '1979-12-15'
 - number: 5
@@ -18,10 +20,14 @@ volumes:
   release_date: '1980-05-15'
 - number: 7
   release_date: '1980-08-15'
+- number: 8
+  release_date: '1980-10-15'
 - number: 9
   release_date: '1980-12-15'
 - number: 10
   release_date: '1981-04-15'
+- number: 11
+  release_date: '1981-07-15'
 extra_editions:
 - type: bunkobon
   label: 集英社漫画文庫
@@ -29,41 +35,27 @@ extra_editions:
   publisher: 集英社
   volumes:
   - number: 1
-    release_date: '1979-05'
+    release_date: 1979-05
   - number: 2
-    release_date: '1979-05'
+    release_date: 1979-05
   - number: 3
-    release_date: '1979-09'
+    release_date: 1979-09
   - number: 4
     release_date: '1979-12-25'
   - number: 5
-    release_date: '1980-03'
+    release_date: 1980-03
   - number: 6
-    release_date: '1980-05'
+    release_date: 1980-05
   - number: 7
-    release_date: '1980-08'
+    release_date: 1980-08
   - number: 8
-    release_date: '1980-10'
+    release_date: 1980-10
   - number: 9
-    release_date: '1980-12'
+    release_date: 1980-12
   - number: 10
-    release_date: '1981-04'
+    release_date: 1981-04
   - number: 11
-    release_date: '1981-07'
-- type: shinsoban
-  label: ジャンプコミックス
-  imprint: ジャンプコミックス
-  publisher: 集英社
-  volumes:
-  - number: 3
-    release_date: '1979-09-15'
-  - number: 5
-    release_date: '1980-03'
-    volume_label: '第5巻 (極道ドラフト会議の巻)'
-  - number: 8
-    release_date: '1980-10-15'
-  - number: 11
-    release_date: '1981-07-15'
+    release_date: 1981-07
 - type: shinsoban
   label: ジャンプ コミックス セレクション
   imprint: ジャンプ コミックス セレクション
@@ -71,16 +63,16 @@ extra_editions:
   volumes:
   - number: 1
     isbn13: '9784834210613'
-    release_date: '1986-09'
+    release_date: 1986-09
   - number: 4
     isbn13: '9784834210644'
-    release_date: '1986-12'
+    release_date: 1986-12
   - number: 5
     isbn13: '9784834210651'
-    release_date: '1987-01'
+    release_date: 1987-01
   - number: 6
     isbn13: '9784834210668'
-    release_date: '1987-02'
+    release_date: 1987-02
 - type: bunkobon
   label: 角川文庫
   imprint: 角川文庫
@@ -91,10 +83,10 @@ extra_editions:
     release_date: '1996-04-25'
   - number: 2
     isbn13: '9784041977026'
-    release_date: '1996-04'
+    release_date: 1996-04
   - number: 3
     isbn13: '9784041977033'
-    release_date: '1996-04'
+    release_date: 1996-04
   - number: 4
     isbn13: '9784041977040'
     release_date: '1996-08-25'
@@ -113,10 +105,10 @@ extra_editions:
     release_date: '2008-09-15'
   - number: 2
     isbn13: '9784778030902'
-    release_date: '2008-10'
+    release_date: 2008-10
   - number: 3
     isbn13: '9784778030919'
-    release_date: '2008-10'
+    release_date: 2008-10
   - number: 4
     isbn13: '9784778030940'
     release_date: '2008-11-04'
@@ -127,7 +119,7 @@ extra_editions:
   volumes:
   - number: 1
     isbn13: '9784778011802'
-    release_date: '2009-01'
+    release_date: 2009-01
 - type: shinsoban
   label: Rare mix comics
   imprint: Rare mix comics
@@ -135,4 +127,4 @@ extra_editions:
   volumes:
   - number: 1
     isbn13: '9784778060374'
-    release_date: '2012-09'
+    release_date: 2012-09

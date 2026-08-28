@@ -2,7 +2,7 @@ slug: hard-ando-ruuzu
 canonical_label: 通常版
 canonical_publisher: 双葉社
 canonical_imprint: アクション・コミックス
-source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。 ★ISBN補充1巻 2026-08-24(partial-isbn-gap半自動: 帯/楽天題/巻番号/未使用の4検証)'
+source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。 ★ISBN補充1巻 2026-08-24(partial-isbn-gap半自動: 帯/楽天題/巻番号/未使用の4検証)　/ 2026-08-28 レーベル表記ゆれ版分裂の是正(ARMS型): MADBが同一レーベルを表記ゆれ(中黒の有無・小書きカナ・英字/カナ)で別edition行として持っていたため、2026-08-17の一括是正が同一の刊行runを複数の版タブに割ってしまっていた。外部裏取り(MADB cm104のシリーズ容器ID・楽天seriesName・Wikipedia/公式の刊行リスト)で同一runと確認できた分だけ、既存の巻を版間で移して統合した。巻・ISBN・発売日の新規追加や値の改変は一切していない。'
 volumes:
 - number: 1
   release_date: '1984-05-19'
@@ -13,9 +13,17 @@ volumes:
 - number: 3
   isbn13: '9784575810851'
   release_date: 1985-10
+- number: 4
+  isbn13: '9784575810868'
+  release_date: 1986-05
+- number: 5
+  release_date: 1986-09
 - number: 6
   isbn13: '9784575810882'
   release_date: 1987-03
+- number: 7
+  isbn13: '9784575813999'
+  release_date: 1987-08
 extra_editions:
 - type: shinsoban
   label: アクションコミックス
@@ -68,18 +76,3 @@ extra_editions:
   - number: 4
     isbn13: '9784418995301'
     release_date: 1999-09
-- type: shinsoban
-  label: アクション・コミックス(1984)
-  imprint: アクション・コミックス
-  publisher: 双葉社
-  volumes:
-  - number: 1
-    release_date: '1984-05-19'
-  - number: 4
-    isbn13: '9784575810868'
-    release_date: 1986-05
-  - number: 5
-    release_date: 1986-09
-  - number: 7
-    isbn13: '9784575813999'
-    release_date: 1987-08
