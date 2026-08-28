@@ -5544,3 +5544,9 @@ non_manga:
 - series_key: "qid:Q4022589|name:蔵出し選集!!コミック乱創刊20周年記念特別編集"
   reason: konbini_reprint
   note: "ユーザ裁定2026-08-22(同型掃引): 蔵出し選集=既刊再録アンソロジー(傑作集型)。別クラスタで二重頁化もしていた"
+- series_key: "name:たにぐち千賀|name:近親相姦＆SM体験"
+  reason: anthology_magazine
+  note: "ユーザ裁定2026-08-29: サニー出版(Sunny comic)の成人向け実話系アンソロジー。同題が著者違いで2クラスタ(たにぐち千賀/たかみしほ)に分かれており、巻番号1/11/12は号数。価値なしとしてdrop"
+- series_key: "name:たかみしほ|name:近親相姦＆SM体験"
+  reason: anthology_magazine
+  note: "ユーザ裁定2026-08-29(同頁の対クラスタ): サニー出版の成人向け実話系アンソロジー。著者が号ごとに違う=アンソロジー。価値なしとしてdrop"
