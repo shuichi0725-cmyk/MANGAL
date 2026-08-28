@@ -43,17 +43,24 @@ function displayBlocks(editions: Edition[]): Edition[] {
     const y = d ? parseInt(String(d).slice(0, 4), 10) : 0;
     return Number.isFinite(y) ? y : 0;
   };
+  // ★代表版(=その作品の基本巻割りを持つ版)。書影は「本物の版」の代理指標として使っているが、
+  //   ISBN普及前(概ね1980年以前)の作品は初版に書影が付きようがなく、代理指標が逆に働いて
+  //   初版が最下段へ沈む(2026-08-29 ユーザ報告 すすめ!!パイレーツ: ジャンプ・コミックス全11巻が
+  //   1巻だけの廉価版より下に出ていた)。そこで最大巻数を満たす版は type==="standard"(=初版)
+  //   でも代表として扱う。書影ありの版が最大巻数に満たない時だけ順位が入れ替わる。
+  const rep = (b: Edition) =>
+    b.volumes.length === maxVols && (covered(b) || b.type === "standard");
   return blocks.slice().sort((a, b) => {
+    const ra = rep(a) ? 1 : 0;
+    const rb = rep(b) ? 1 : 0;
+    if (ra !== rb) return rb - ra;
     const ca = covered(a) ? 1 : 0;
     const cb = covered(b) ? 1 : 0;
     if (ca !== cb) return cb - ca;
-    const fa = ca && a.volumes.length === maxVols ? 1 : 0;
-    const fb = cb && b.volumes.length === maxVols ? 1 : 0;
-    if (fa !== fb) return fb - fa;
-    // ★代表候補(書影あり×最大巻数)が複数ある時は最古=初版を先頭に(2026-08-17 AKIRA型:
+    // ★代表が複数ある時は最古=初版を先頭に(2026-08-17 AKIRA型:
     //   通常版1984と新装版2003が両方full+coveredで新装が先頭に出ていた。裁定の意図は
     //   「初版と同巻割りの代表」なので代表群内は古い順)。残り(非代表)は従来どおり新しい順。
-    if (fa && fb) return year(a) - year(b);
+    if (ra && rb) return year(a) - year(b);
     return year(b) - year(a);
   });
 }
