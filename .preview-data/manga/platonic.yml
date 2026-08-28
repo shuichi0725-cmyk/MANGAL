@@ -16,6 +16,7 @@ publisher: tousuisha
 magazine: null
 demographic: josei
 genres:
+- bl
 - romance
 synopsis: 氷のように冷静なサラリーマン・寺山は、目の前の仕事に集中するばかりで、昔のことはほとんど覚えていない。だがオリンピックの長距離走者である八木にとって、寺山はただの先輩ではない。長年追いかけてきた相手なのだ。同じ会社で再会した二人の恋を描く物語。
 anime_adapted: false
@@ -24,7 +25,7 @@ alternative_titles:
 editions:
 - type: standard
   label: 通常版
-  imprint: ラキッシュ・コミックス no.1
+  imprint: ラキッシュ・コミックス
   volumes:
   - number: 1
     asin: null
@@ -72,4 +73,8 @@ catch: 昔をほとんど覚えていない冷静なサラリーマンと、彼�
 anilist_id: 44500
 genres_anilist:
 - Romance
+tags:
+- name: Boys' Love
+  category: Theme-Romance
+  rank: 79
 popularity: 10

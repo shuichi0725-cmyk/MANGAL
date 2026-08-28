@@ -2654,6 +2654,25 @@ def _mark_volume_publishers(ed: dict) -> None:
             v["publisher"] = nm
 
 
+_IMPRINT_SERIAL_RE = re.compile(r"\s*(?:[;；]\s*)?[NnＮｎ][OoＯｏ][.．]\s*[0-9０-９]+\s*$")
+
+
+def _norm_imprint(s):
+    """レーベル名末尾の**叢書通し番号**(「… no.74」「…; no.142」)を落として表示名に戻す。
+
+    ★2026-08-29 「困った時には星に聞け!」型: MADB(cm101)はレーベル名に叢書番号まで
+    含めて持つ巻があり(いち好き・コミックス no.74 / ラキッシュ・コミックス no.9 …)、
+    同一レーベルなのに巻ごとに別 edition 行として割れる=版タブ分裂の元になる。
+    番号は「そのレーベルの何冊目か」であってレーベル名の一部ではないので表示から外す。
+    ★実データ検査(種2 の該当268 edition・全72レーベル)で「名前自体がNo.数字で終わる
+    レーベル」は存在しないことを確認済み。表示のみの正規化で巻/ISBNには触れない。
+    """
+    if not s:
+        return s
+    out = _IMPRINT_SERIAL_RE.sub("", str(s)).rstrip(" ;；")
+    return out or s
+
+
 def clean_edition(ed: dict) -> dict:
     out = {
         "type": ed["type"],
@@ -2666,7 +2685,7 @@ def clean_edition(ed: dict) -> dict:
         ed["publisher"] = _pub          # ★巻差分の基準にする
     _mark_volume_publishers(ed)
     if ed.get("imprint"):
-        out["imprint"] = ed["imprint"]
+        out["imprint"] = _norm_imprint(ed["imprint"])
     if ed.get("year_started"):
         out["year_started"] = ed["year_started"]
     if ed.get("year_ended"):
