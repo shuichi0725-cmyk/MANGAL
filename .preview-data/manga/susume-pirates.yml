@@ -147,15 +147,25 @@ editions:
     cover_url: null
     release_date: 1981-07
 - type: shinsoban
-  label: ジャンプ コミックス セレクション
+  label: ジャンプコミックスセレクション
   publisher: ホーム社
-  imprint: ジャンプ コミックス セレクション
+  imprint: ジャンプコミックスセレクション
   volumes:
   - number: 1
     asin: null
     isbn13: '9784834210613'
     cover_url: null
     release_date: 1986-09
+  - number: 2
+    asin: null
+    isbn13: '9784834210620'
+    cover_url: null
+    release_date: 1986-10
+  - number: 3
+    asin: null
+    isbn13: '9784834210637'
+    cover_url: null
+    release_date: 1986-11
   - number: 4
     asin: null
     isbn13: '9784834210644'
@@ -206,10 +216,10 @@ editions:
     isbn13: '9784041977064'
     cover_url: null
     release_date: '1996-08-25'
-- type: shinsoban
-  label: standard版
+- type: kanzenban
+  label: 完全版
   publisher: 小学館クリエイティブ
-  imprint: standard版
+  imprint: 小学館クリエイティブ
   volumes:
   - number: 1
     asin: null
@@ -240,7 +250,22 @@ editions:
     asin: null
     isbn13: '9784778011802'
     cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/1802/9784778011802_1_3.jpg?_ex=300x300
-    release_date: 2009-01
+    release_date: '2009-01-06'
+  - number: 2
+    asin: null
+    isbn13: '9784778011819'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/1819/9784778011819_1_3.jpg?_ex=300x300
+    release_date: '2009-02-20'
+  - number: 3
+    asin: null
+    isbn13: '9784778011826'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/1826/9784778011826_1_3.jpg?_ex=300x300
+    release_date: '2009-03-19'
+  - number: 4
+    asin: null
+    isbn13: '9784778011833'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/1833/9784778011833_1_3.jpg?_ex=300x300
+    release_date: '2009-04-17'
 - type: shinsoban
   label: Rare mix comics
   publisher: 小学館クリエイティブ
@@ -250,7 +275,26 @@ editions:
     asin: null
     isbn13: '9784778060374'
     cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0374/9784778060374.jpg?_ex=300x300
-    release_date: 2012-09
+    release_date: '2012-09-12'
+    volume_label: パイレーツ結成の巻
+  - number: 2
+    asin: null
+    isbn13: '9784778060381'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0381/9784778060381.jpg?_ex=300x300
+    release_date: '2012-10-17'
+    volume_label: かれとかの女の巻
+  - number: 3
+    asin: null
+    isbn13: '9784778060398'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0398/9784778060398.jpg?_ex=300x300
+    release_date: '2012-11-14'
+    volume_label: 泉ちゃんがわらったの巻
+  - number: 4
+    asin: null
+    isbn13: '9784778060404'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0404/9784778060404.jpg?_ex=300x300
+    release_date: '2012-12-12'
+    volume_label: パイレーツフォーエバーの巻
 publishers:
 - home-sha
 - kadokawa

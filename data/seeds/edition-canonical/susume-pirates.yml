@@ -4,7 +4,9 @@ canonical_publisher: 集英社
 canonical_imprint: ジャンプ・コミックス
 suppress_types:
 - bunkobon
-source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。　/ 2026-08-28 レーベル表記ゆれ版分裂の是正(ARMS型): MADBが同一レーベルを表記ゆれ(中黒の有無・小書きカナ・英字/カナ)で別edition行として持っていたため、2026-08-17の一括是正が同一の刊行runを複数の版タブに割ってしまっていた。外部裏取り(MADB cm104のシリーズ容器ID・楽天seriesName・Wikipedia/公式の刊行リスト)で同一runと確認できた分だけ、既存の巻を版間で移して統合した。巻・ISBN・発売日の新規追加や値の改変は一切していない。'
+- shinsoban
+- kanzenban
+source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。　/ 2026-08-28 レーベル表記ゆれ版分裂の是正(ARMS型): MADBが同一レーベルを表記ゆれ(中黒の有無・小書きカナ・英字/カナ)で別edition行として持っていたため、2026-08-17の一括是正が同一の刊行runを複数の版タブに割ってしまっていた。外部裏取り(MADB cm104のシリーズ容器ID・楽天seriesName・Wikipedia/公式の刊行リスト)で同一runと確認できた分だけ、既存の巻を版間で移して統合した。巻・ISBN・発売日の新規追加や値の改変は一切していない。 / ★2026-08-29 ユーザ報告「掲載順番と巻抜け」の是正。裏取り=NDL SRU(creator="江口寿史" AND title="パイレーツ" 全44件)+ja.wikipedia 書誌節 + 楽天books ISBN直引き。 ①タブ名「standard版」= 2026-08-17の一括処理がimprint欠落のrunにtypeの英字名をそのまま貼っていた壊れラベル。NDL「すすめ!!パイレーツ : 完全版. 1〜4」に従い 完全版(kanzenban / 小学館クリエイティブ 全4巻)へ是正。 ②ジャンプコミックスセレクション(ホーム社)は2巻・3巻が欠落していた。ISBN=9784834210620/9784834210637 を楽天books(題「すすめ！！パイレーツ（2）/（3）」・著者 江口寿史・seriesName ジャンプコミックスセレクション)と紀伊國屋書店(dsg-01-9784834210620=「すすめ！！パイレーツ〈２〉/ジャンプコミックスセレクション」)で確認して追加。★発売日は外部に無い(楽天/紀伊國屋は全6巻とも「1990年7月」を返すが、これはNDLが1986.09/1986.12/1987.01/1987.02と記録している巻にも同じ値を返す取次データの一括登録値=実発売日ではない)。Wikipediaの「全6巻 1986年9月-1987年2月」とNDLの4巻分の月から、残り2巻が入る月は1986-10と1986-11しかない(6巻/6か月・両端と中3点が確定)ためその2値を採った=推測でなく一意確定。 ③Judy comics wide(小学館クリエイティブ)は1巻しか無かった。楽天booksで2-4巻(9784778011819/9784778011826/9784778011833、いずれも著者 江口寿史・seriesName ジュディーコミックス・書影あり)を確認して追加=全4巻。 ④Rare mix comics(小学館クリエイティブ)は1巻しか無かった。NDLに全4巻(パイレーツ結成の巻/かれとかの女の巻/泉ちゃんがわらったの巻/パイレーツフォーエバーの巻)があり楽天の書影・発売日とも一致するので追加=全4巻。★Wikipediaは「全2巻」とするがNDLの書誌4件(ISBN付)が優先。巻題はvolume_labelとして保持。 ⑤レーベル表記を「ジャンプ コミックス セレクション」→「ジャンプコミックスセレクション」に統一(Wikipedia/楽天表記)。 ⑥『江口寿史Jump works』2-3巻(集英社インターナショナル2005、Wikipediaが本作の版として挙げる)は既に別頁 eguchi-hisashi-jump-works が持っているため二重登録しない。'
 volumes:
 - number: 1
   release_date: '1979-01-31'
@@ -57,13 +59,19 @@ extra_editions:
   - number: 11
     release_date: 1981-07
 - type: shinsoban
-  label: ジャンプ コミックス セレクション
-  imprint: ジャンプ コミックス セレクション
+  label: ジャンプコミックスセレクション
+  imprint: ジャンプコミックスセレクション
   publisher: ホーム社
   volumes:
   - number: 1
     isbn13: '9784834210613'
     release_date: 1986-09
+  - number: 2
+    isbn13: '9784834210620'
+    release_date: 1986-10
+  - number: 3
+    isbn13: '9784834210637'
+    release_date: 1986-11
   - number: 4
     isbn13: '9784834210644'
     release_date: 1986-12
@@ -96,8 +104,9 @@ extra_editions:
   - number: 6
     isbn13: '9784041977064'
     release_date: '1996-08-25'
-- type: shinsoban
-  label: standard版
+- type: kanzenban
+  label: 完全版
+  imprint: 小学館クリエイティブ
   publisher: 小学館クリエイティブ
   volumes:
   - number: 1
@@ -105,10 +114,10 @@ extra_editions:
     release_date: '2008-09-15'
   - number: 2
     isbn13: '9784778030902'
-    release_date: 2008-10
+    release_date: '2008-10-04'
   - number: 3
     isbn13: '9784778030919'
-    release_date: 2008-10
+    release_date: '2008-10-15'
   - number: 4
     isbn13: '9784778030940'
     release_date: '2008-11-04'
@@ -119,7 +128,16 @@ extra_editions:
   volumes:
   - number: 1
     isbn13: '9784778011802'
-    release_date: 2009-01
+    release_date: '2009-01-06'
+  - number: 2
+    isbn13: '9784778011819'
+    release_date: '2009-02-20'
+  - number: 3
+    isbn13: '9784778011826'
+    release_date: '2009-03-19'
+  - number: 4
+    isbn13: '9784778011833'
+    release_date: '2009-04-17'
 - type: shinsoban
   label: Rare mix comics
   imprint: Rare mix comics
@@ -127,4 +145,17 @@ extra_editions:
   volumes:
   - number: 1
     isbn13: '9784778060374'
-    release_date: 2012-09
+    release_date: '2012-09-12'
+    volume_label: パイレーツ結成の巻
+  - number: 2
+    isbn13: '9784778060381'
+    release_date: '2012-10-17'
+    volume_label: かれとかの女の巻
+  - number: 3
+    isbn13: '9784778060398'
+    release_date: '2012-11-14'
+    volume_label: 泉ちゃんがわらったの巻
+  - number: 4
+    isbn13: '9784778060404'
+    release_date: '2012-12-12'
+    volume_label: パイレーツフォーエバーの巻
