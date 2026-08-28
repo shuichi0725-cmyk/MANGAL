@@ -4,7 +4,7 @@ canonical_publisher: 双葉社
 canonical_imprint: アクションコミックス
 suppress_types:
 - bunkobon
-source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。'
+source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。 / ★2026-08-29 壊れラベル是正: 2026-08-17の一括処理が、種2でimprintが空だったrunにtype名(standard)をそのまま貼って『standard版』という実在しないタブ名を作っていた。NDL by-ISBNの叢書名(dcndl:seriesTitle)→楽天seriesName→出版社名 の順で実名に戻した。どれも取れないrunは『別版』とし、巻・ISBN・発売日には一切触れていない。'
 volumes:
 - number: 1
   release_date: '1984-12-14'
@@ -21,7 +21,7 @@ extra_editions:
   - number: 0
     release_date: '1976-07-20'
   - number: 1
-    release_date: '1976-08'
+    release_date: 1976-08
 - type: bunkobon
   label: 講談社+α文庫
   imprint: 講談社+α文庫
@@ -29,24 +29,24 @@ extra_editions:
   volumes:
   - number: 1
     isbn13: '9784062562201'
-    release_date: '1997-09'
-    volume_label: '上'
+    release_date: 1997-09
+    volume_label: 上
   - number: 3
     isbn13: '9784062562218'
-    release_date: '1997-09'
-    volume_label: '下'
+    release_date: 1997-09
+    volume_label: 下
 - type: shinsoban
-  label: standard版
-  publisher: 不明
+  label: フリースタイル版
+  publisher: フリースタイル
   volumes:
   - number: 1
     isbn13: '9784939138164'
-    release_date: '2004-07'
-    volume_label: '上巻'
+    release_date: 2004-07
+    volume_label: 上巻
   - number: 3
     isbn13: '9784939138171'
     release_date: '2004-08-20'
-    volume_label: '下巻'
+    volume_label: 下巻
 - type: shinsoban
   label: 現代漫画家自選シリーズ
   imprint: 現代漫画家自選シリーズ

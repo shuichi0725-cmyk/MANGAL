@@ -2,37 +2,33 @@ slug: sutegoma-ichi
 canonical_label: 通常版
 canonical_publisher: 集英社
 canonical_imprint: ヤングジャンプ・コミックス
-source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。'
+source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。 / ★2026-08-29 壊れラベル是正: 2026-08-17の一括処理が、種2でimprintが空だったrunにtype名(standard)をそのまま貼って『standard版』という実在しないタブ名を作っていた。NDL by-ISBNの叢書名(dcndl:seriesTitle)→楽天seriesName→出版社名 の順で実名に戻した。どれも取れないrunは『別版』とし、巻・ISBN・発売日には一切触れていない。 / ★2026-08-29 壊れラベル是正の続き: 『standard版』の run は**別々の2冊が1版に混ざっていた**。1巻(9784061013292)は楽天books で「捨て駒いち（1）」seriesName=KCスペシャル・講談社・1987-06-06 → 既存KCスペシャル(2巻1987-07-06)へ統合。7巻(9784088610177)は NDL by-ISBN で「捨て駒いち : 港警察署特捜要員 7」集英社 → 主版(ヤングジャンプ・コミックス、1/2/3/4/6/8を保有)の欠番7に該当するため主版へ移した。発売日は楽天にもNDLにも無いので null のまま(推測で入れない)。'
 volumes:
 - number: 1
-  release_date: '1982-01'
+  release_date: 1982-01
 - number: 2
-  release_date: '1982-04'
+  release_date: 1982-04
 - number: 3
-  release_date: '1982-06'
+  release_date: 1982-06
 - number: 4
-  release_date: '1982-09'
+  release_date: 1982-09
 - number: 6
-  release_date: '1983-01'
+  release_date: 1983-01
+- number: 7
+  isbn13: '9784088610177'
+  release_date: null
 - number: 8
   isbn13: '9784088610184'
-  release_date: '1983-06'
+  release_date: 1983-06
 extra_editions:
-- type: shinsoban
-  label: standard版
-  publisher: 講談社
-  volumes:
-  - number: 1
-    isbn13: '9784061013292'
-    release_date: '1987-06'
-  - number: 7
-    isbn13: '9784088610177'
-    release_date: null
 - type: shinsoban
   label: KCスペシャル
   imprint: KCスペシャル
   publisher: 講談社
   volumes:
+  - number: 1
+    isbn13: '9784061013292'
+    release_date: '1987-06-06'
   - number: 2
     isbn13: '9784061013308'
     release_date: '1987-07-06'
@@ -42,4 +38,4 @@ extra_editions:
   publisher: 不明
   volumes:
   - number: 5
-    release_date: '1982-11'
+    release_date: 1982-11

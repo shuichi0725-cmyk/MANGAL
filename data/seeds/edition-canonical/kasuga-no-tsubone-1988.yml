@@ -5,29 +5,29 @@ canonical_imprint: 文春コミックス
 suppress_types:
 - bunkobon
 - deluxe
-source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。'
+source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。 / ★2026-08-29 壊れラベル是正: 2026-08-17の一括処理が、種2でimprintが空だったrunにtype名(standard)をそのまま貼って『standard版』という実在しないタブ名を作っていた。NDL by-ISBNの叢書名(dcndl:seriesTitle)→楽天seriesName→出版社名 の順で実名に戻した。どれも取れないrunは『別版』とし、巻・ISBN・発売日には一切触れていない。'
 volumes:
 - number: 1
-  release_date: '1988-09'
+  release_date: 1988-09
 - number: 2
-  release_date: '1988-11'
+  release_date: 1988-11
 - number: 3
-  release_date: '1989-01'
+  release_date: 1989-01
 - number: 4
-  release_date: '1989-03'
+  release_date: 1989-03
 extra_editions:
 - type: shinsoban
-  label: standard版(1988)
+  label: 講談社版(1988)
   publisher: 講談社
   volumes:
   - number: 1
     isbn13: '9784063049022'
-    release_date: '1988-10'
-    volume_label: '上'
+    release_date: 1988-10
+    volume_label: 上
   - number: 3
     isbn13: '9784063049039'
-    release_date: '1988-12'
-    volume_label: '下'
+    release_date: 1988-12
+    volume_label: 下
 - type: bunkobon
   label: 中公文庫コミック版
   imprint: 中公文庫コミック版
@@ -35,13 +35,13 @@ extra_editions:
   volumes:
   - number: 1
     isbn13: '9784122036420'
-    release_date: '2000-04'
+    release_date: 2000-04
   - number: 2
     isbn13: '9784122036598'
-    release_date: '2000-05'
+    release_date: 2000-05
   - number: 3
     isbn13: '9784122036758'
-    release_date: '2000-06'
+    release_date: 2000-06
 - type: shinsoban
   label: アイランド・コミックスprimo select
   imprint: アイランド・コミックスprimo select
@@ -49,10 +49,10 @@ extra_editions:
   volumes:
   - number: 1
     isbn13: '9784861560385'
-    release_date: '2005-01'
+    release_date: 2005-01
   - number: 2
     isbn13: '9784861560408'
-    release_date: '2005-02'
+    release_date: 2005-02
 - type: shinsoban
   label: 中公漫画叢書
   imprint: 中公漫画叢書
@@ -68,28 +68,29 @@ extra_editions:
     isbn13: '9784120017995'
     release_date: '1989-11-25'
 - type: shinsoban
-  label: standard版(1988)
+  label: 角川書店版(1988)
   publisher: 角川書店
   volumes:
   - number: 1
     isbn13: '9784048521550'
-    release_date: '1988-12'
+    release_date: 1988-12
 - type: shinsoban
-  label: standard版(1989)
+  label: NHK大河ドラマ・コミック(1989)
   publisher: 日本放送出版協会
   volumes:
   - number: 1
     isbn13: '9784140051399'
-    release_date: '1989-01'
-    volume_label: '上'
+    release_date: 1989-01
+    volume_label: 上
   - number: 2
     isbn13: '9784140051405'
-    release_date: '1989-05'
-    volume_label: '中'
+    release_date: 1989-05
+    volume_label: 中
   - number: 3
     isbn13: '9784140051412'
-    release_date: '1989-10'
-    volume_label: '下'
+    release_date: 1989-10
+    volume_label: 下
+  imprint: NHK大河ドラマ・コミック
 - type: deluxe
   label: Youコミックスデラックス
   imprint: Youコミックスデラックス
@@ -104,8 +105,8 @@ extra_editions:
   volumes:
   - number: 1
     isbn13: '9784777119721'
-    release_date: '2017-11'
-    volume_label: '生い立ち編'
+    release_date: 2017-11
+    volume_label: 生い立ち編
 - type: shinsoban
   label: わたなべまさこ名作集
   imprint: わたなべまさこ名作集
@@ -113,7 +114,7 @@ extra_editions:
   volumes:
   - number: 1
     isbn13: '9784834281897'
-    release_date: '1999-04'
+    release_date: 1999-04
   - number: 2
     isbn13: '9784834281903'
-    release_date: '1999-06'
+    release_date: 1999-06

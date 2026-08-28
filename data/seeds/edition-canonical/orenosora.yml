@@ -3,32 +3,32 @@ canonical_label: 通常版
 canonical_publisher: 不明
 suppress_types:
 - bunkobon
-source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。'
+source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。 / ★2026-08-29 壊れラベル是正: 2026-08-17の一括処理が、種2でimprintが空だったrunにtype名(standard)をそのまま貼って『standard版』という実在しないタブ名を作っていた。NDL by-ISBNの叢書名(dcndl:seriesTitle)→楽天seriesName→出版社名 の順で実名に戻した。どれも取れないrunは『別版』とし、巻・ISBN・発売日には一切触れていない。'
 volumes:
 - number: 1
-  release_date: '1976-11'
+  release_date: 1976-11
 - number: 2
-  release_date: '1977-02'
+  release_date: 1977-02
 - number: 3
-  release_date: '1977-03'
+  release_date: 1977-03
 - number: 4
-  release_date: '1977-08'
+  release_date: 1977-08
 - number: 5
-  release_date: '1978-01'
+  release_date: 1978-01
 - number: 6
-  release_date: '1978-08'
+  release_date: 1978-08
 - number: 7
-  release_date: '1978-12'
+  release_date: 1978-12
 - number: 8
-  release_date: '1979-02'
+  release_date: 1979-02
 extra_editions:
 - type: shinsoban
-  label: standard版(2003)
+  label: 別版(2003)
   publisher: 不明
   volumes:
   - number: 0
-    release_date: '2003-12'
-    volume_label: '巨悪天誅編'
+    release_date: 2003-12
+    volume_label: 巨悪天誅編
 - type: shinsoban
   label: スーパー・プレイボーイ・コミックス
   imprint: スーパー・プレイボーイ・コミックス
@@ -36,13 +36,13 @@ extra_editions:
   volumes:
   - number: 1
     isbn13: '9784088573519'
-    release_date: '1989-12'
+    release_date: 1989-12
   - number: 3
     isbn13: '9784088573533'
-    release_date: '1990-01'
+    release_date: 1990-01
   - number: 4
     isbn13: '9784088573540'
-    release_date: '1990-01'
+    release_date: 1990-01
 - type: shinsoban
   label: プレイボーイ COMICS
   imprint: プレイボーイ COMICS
@@ -53,17 +53,17 @@ extra_editions:
   - number: 2
     release_date: '1977-06-30'
   - number: 3
-    release_date: '1977-08'
+    release_date: 1977-08
   - number: 4
     release_date: '1977-11-05'
   - number: 5
-    release_date: '1978-04'
+    release_date: 1978-04
   - number: 6
-    release_date: '1978-10'
+    release_date: 1978-10
   - number: 7
-    release_date: '1979-01'
+    release_date: 1979-01
   - number: 8
-    release_date: '1979-03'
+    release_date: 1979-03
   - number: 9
     release_date: '1979-04-20'
 - type: shinsoban
@@ -90,7 +90,7 @@ extra_editions:
     release_date: '1997-01-22'
   - number: 4
     isbn13: '9784086170338'
-    release_date: '1997-01'
+    release_date: 1997-01
   - number: 5
     isbn13: '9784086170345'
     release_date: '1997-02-23'
@@ -102,16 +102,16 @@ extra_editions:
     release_date: '1997-02-23'
   - number: 8
     isbn13: '9784086170376'
-    release_date: '1997-03'
+    release_date: 1997-03
   - number: 9
     isbn13: '9784086170383'
     release_date: '1997-03-17'
   - number: 10
     isbn13: '9784086170390'
-    release_date: '1997-04'
+    release_date: 1997-04
   - number: 11
     isbn13: '9784086170406'
-    release_date: '1997-04'
+    release_date: 1997-04
 - type: shinsoban
   label: SCオールマン
   imprint: SCオールマン
@@ -119,13 +119,13 @@ extra_editions:
   volumes:
   - number: 1
     isbn13: '9784088783307'
-    release_date: '2001-03'
+    release_date: 2001-03
   - number: 2
     isbn13: '9784088783451'
-    release_date: '2001-08'
+    release_date: 2001-08
   - number: 3
     isbn13: '9784088783536'
-    release_date: '2001-12'
+    release_date: 2001-12
 - type: shinsoban
   label: ヤングジャンプ・コミックスGJ
   imprint: ヤングジャンプ・コミックスGJ
@@ -133,10 +133,10 @@ extra_editions:
   volumes:
   - number: 1
     isbn13: '9784088792651'
-    release_date: '2012-01'
+    release_date: 2012-01
   - number: 2
     isbn13: '9784088793429'
-    release_date: '2012-05'
+    release_date: 2012-05
 - type: shinsoban
   label: ヤングジャンプ・コミックス・スペシャル(1993)
   imprint: ヤングジャンプ・コミックス・スペシャル
@@ -144,28 +144,28 @@ extra_editions:
   volumes:
   - number: 1
     isbn13: '9784088751146'
-    release_date: '1993-06'
+    release_date: 1993-06
   - number: 2
     isbn13: '9784088751153'
-    release_date: '1993-07'
+    release_date: 1993-07
   - number: 3
     isbn13: '9784088751160'
-    release_date: '1993-08'
+    release_date: 1993-08
   - number: 4
     isbn13: '9784088751177'
-    release_date: '1993-09'
+    release_date: 1993-09
   - number: 5
     isbn13: '9784088751757'
-    release_date: '1993-10'
+    release_date: 1993-10
   - number: 6
     isbn13: '9784088751191'
-    release_date: '1993-11'
+    release_date: 1993-11
   - number: 7
     isbn13: '9784088751771'
-    release_date: '1994-04'
+    release_date: 1994-04
   - number: 8
     isbn13: '9784088751788'
-    release_date: '1994-05'
+    release_date: 1994-05
 - type: shinsoban
   label: ヤングジャンプ・コミックスSPECIAL
   imprint: ヤングジャンプ・コミックスSPECIAL
@@ -186,9 +186,9 @@ extra_editions:
   - number: 3
     release_date: '1981-03-25'
   - number: 4
-    release_date: '1981-06'
+    release_date: 1981-06
   - number: 5
-    release_date: '1981-08'
+    release_date: 1981-08
   - number: 6
     release_date: '1981-10-25'
   - number: 7
@@ -199,7 +199,7 @@ extra_editions:
   publisher: 不明
   volumes:
   - number: 0
-    release_date: '1980-07'
+    release_date: 1980-07
 - type: shinsoban
   label: ヤングジャンプ・コミックス・スペシャル(1993)
   imprint: ヤングジャンプ・コミックス・スペシャル
@@ -207,7 +207,7 @@ extra_editions:
   volumes:
   - number: 2
     isbn13: '9784088751726'
-    release_date: '1993-02'
+    release_date: 1993-02
   - number: 3
     isbn13: '9784088751733'
-    release_date: '1993-04'
+    release_date: 1993-04

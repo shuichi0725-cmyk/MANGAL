@@ -4,30 +4,30 @@ canonical_publisher: 竹書房
 canonical_imprint: Bamboo comics
 suppress_types:
 - bunkobon
-source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。'
+source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。 / ★2026-08-29 壊れラベル是正: 2026-08-17の一括処理が、種2でimprintが空だったrunにtype名(standard)をそのまま貼って『standard版』という実在しないタブ名を作っていた。NDL by-ISBNの叢書名(dcndl:seriesTitle)→楽天seriesName→出版社名 の順で実名に戻した。どれも取れないrunは『別版』とし、巻・ISBN・発売日には一切触れていない。'
 volumes:
 - number: 1
   isbn13: '9784884755614'
-  release_date: '1991-01'
+  release_date: 1991-01
 - number: 2
   isbn13: '9784884756932'
-  release_date: '1994-01'
+  release_date: 1994-01
 - number: 3
   isbn13: '9784812450185'
-  release_date: '1996-03'
+  release_date: 1996-03
 extra_editions:
 - type: shinsoban
-  label: standard版
+  label: 竹書房版
   publisher: 竹書房
   volumes:
   - number: 1
     isbn13: '9784812410516'
-    release_date: '2002-12'
-    volume_label: '上巻'
+    release_date: 2002-12
+    volume_label: 上巻
   - number: 3
     isbn13: '9784812410523'
-    release_date: '2002-12'
-    volume_label: '下巻'
+    release_date: 2002-12
+    volume_label: 下巻
 - type: bunkobon
   label: 新潮文庫
   imprint: 新潮文庫
@@ -35,9 +35,9 @@ extra_editions:
   volumes:
   - number: 1
     isbn13: '9784101303925'
-    release_date: '2010-10'
-    volume_label: '上巻'
+    release_date: 2010-10
+    volume_label: 上巻
   - number: 3
     isbn13: '9784101303932'
-    release_date: '2010-10'
-    volume_label: '下巻'
+    release_date: 2010-10
+    volume_label: 下巻

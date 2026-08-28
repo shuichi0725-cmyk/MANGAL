@@ -5,7 +5,7 @@ canonical_imprint: 講談社コミックス
 suppress_types:
 - bunkobon
 - deluxe
-source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。'
+source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。 / ★2026-08-29 壊れラベル是正: 2026-08-17の一括処理が、種2でimprintが空だったrunにtype名(standard)をそのまま貼って『standard版』という実在しないタブ名を作っていた。NDL by-ISBNの叢書名(dcndl:seriesTitle)→楽天seriesName→出版社名 の順で実名に戻した。どれも取れないrunは『別版』とし、巻・ISBN・発売日には一切触れていない。 / ★2026-08-29 壊れラベル是正の続き(ARMS型統合): 『standard版』だった run は KCデラックス の3・4巻だった(楽天books: 9784063131376=「野球狂の詩（愛蔵版）（3）」/9784063131383=(4)、いずれも seriesName=KCデラックス・講談社。ISBN も 1352(1)/1369(2)/1376(3)/1383(4)/1390(5)/1406(6) と連番で欠けが埋まる)。既存KCデラックスへ統合し、発売日は楽天の 1990-05-23 / 1990-06-23 を採用(既存巻も23日刊行で整合)。'
 volumes:
 - number: 1
   release_date: '1973-05-10'
@@ -30,7 +30,7 @@ volumes:
 - number: 11
   release_date: '1976-06-05'
 - number: 12
-  release_date: '1976-08'
+  release_date: 1976-08
 - number: 13
   release_date: '1976-10-20'
 - number: 14
@@ -40,7 +40,7 @@ volumes:
 - number: 16
   release_date: '1977-06-20'
 - number: 17
-  release_date: '1977-07'
+  release_date: 1977-07
 extra_editions:
 - type: deluxe
   label: KCデラックス
@@ -53,6 +53,12 @@ extra_editions:
   - number: 2
     isbn13: '9784063131369'
     release_date: '1990-04-23'
+  - number: 3
+    isbn13: '9784063131376'
+    release_date: '1990-05-23'
+  - number: 4
+    isbn13: '9784063131383'
+    release_date: '1990-06-23'
   - number: 5
     isbn13: '9784063131390'
     release_date: '1990-07-23'
@@ -66,19 +72,19 @@ extra_editions:
   volumes:
   - number: 1
     isbn13: '9784062600903'
-    release_date: '1995-07'
+    release_date: 1995-07
   - number: 2
     isbn13: '9784062600910'
-    release_date: '1995-07'
+    release_date: 1995-07
   - number: 3
     isbn13: '9784062600927'
-    release_date: '1995-07'
+    release_date: 1995-07
   - number: 4
     isbn13: '9784062600934'
-    release_date: '1995-07'
+    release_date: 1995-07
   - number: 5
     isbn13: '9784062600941'
-    release_date: '1995-08'
+    release_date: 1995-08
   - number: 6
     isbn13: '9784062600958'
     release_date: '1995-08-10'
@@ -87,22 +93,22 @@ extra_editions:
     release_date: '1995-08-10'
   - number: 8
     isbn13: '9784062600972'
-    release_date: '1995-09'
+    release_date: 1995-09
   - number: 9
     isbn13: '9784062600989'
-    release_date: '1995-09'
+    release_date: 1995-09
   - number: 10
     isbn13: '9784062600996'
-    release_date: '1995-09'
+    release_date: 1995-09
   - number: 11
     isbn13: '9784062601009'
-    release_date: '1995-10'
+    release_date: 1995-10
   - number: 12
     isbn13: '9784062601016'
-    release_date: '1995-10'
+    release_date: 1995-10
   - number: 13
     isbn13: '9784062601023'
-    release_date: '1995-10'
+    release_date: 1995-10
 - type: shinsoban
   label: KPC mini
   imprint: KPC mini
@@ -110,7 +116,7 @@ extra_editions:
   volumes:
   - number: 1
     isbn13: '9784063715293'
-    release_date: '2005-04'
+    release_date: 2005-04
 - type: shinsoban
   label: KPC
   imprint: KPC
@@ -118,17 +124,7 @@ extra_editions:
   volumes:
   - number: 1
     isbn13: '9784063530759'
-    release_date: '2003-06'
-- type: shinsoban
-  label: standard版
-  publisher: 講談社
-  volumes:
-  - number: 3
-    isbn13: '9784063131376'
-    release_date: null
-  - number: 4
-    isbn13: '9784063131383'
-    release_date: null
+    release_date: 2003-06
 - type: shinsoban
   label: KCスペシャル
   imprint: KCスペシャル
@@ -154,7 +150,7 @@ extra_editions:
     release_date: null
   - number: 7
     isbn13: '9784061010741'
-    release_date: '1984-06'
+    release_date: 1984-06
   - number: 8
     isbn13: '9784061010758'
     release_date: null

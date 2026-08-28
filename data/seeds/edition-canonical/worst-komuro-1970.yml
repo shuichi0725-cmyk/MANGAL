@@ -2,7 +2,7 @@ slug: worst-komuro-1970
 canonical_label: 通常版
 canonical_publisher: 集英社
 canonical_imprint: ジャンプコミックス
-source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。'
+source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。 / ★2026-08-29 壊れラベル是正: 2026-08-17の一括処理が、種2でimprintが空だったrunにtype名(standard)をそのまま貼って『standard版』という実在しないタブ名を作っていた。NDL by-ISBNの叢書名(dcndl:seriesTitle)→楽天seriesName→出版社名 の順で実名に戻した。どれも取れないrunは『別版』とし、巻・ISBN・発売日には一切触れていない。'
 volumes:
 - number: 1
   release_date: '1970-10-31'
@@ -23,22 +23,22 @@ extra_editions:
   - number: 2
     release_date: '1977-02-20'
   - number: 3
-    release_date: '1977-02'
+    release_date: 1977-02
   - number: 4
     release_date: '1977-02-28'
 - type: shinsoban
-  label: standard版
+  label: アース出版局版
   publisher: アース出版局
   volumes:
   - number: 1
     isbn13: '9784795229211'
-    release_date: '1989-04'
-    volume_label: '上'
+    release_date: 1989-04
+    volume_label: 上
   - number: 2
     isbn13: '9784795229228'
-    release_date: '1989-05'
-    volume_label: '中巻'
+    release_date: 1989-05
+    volume_label: 中巻
   - number: 3
     isbn13: '9784795229242'
-    release_date: '1989-08'
-    volume_label: '下巻'
+    release_date: 1989-08
+    volume_label: 下巻

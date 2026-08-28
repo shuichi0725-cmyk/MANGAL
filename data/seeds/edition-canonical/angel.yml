@@ -3,7 +3,7 @@ canonical_label: 通常版
 canonical_publisher: 不明
 suppress_types:
 - bunkobon
-source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。'
+source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。 / ★2026-08-29 壊れラベル是正: 2026-08-17の一括処理が、種2でimprintが空だったrunにtype名(standard)をそのまま貼って『standard版』という実在しないタブ名を作っていた。NDL by-ISBNの叢書名(dcndl:seriesTitle)→楽天seriesName→出版社名 の順で実名に戻した。どれも取れないrunは『別版』とし、巻・ISBN・発売日には一切触れていない。'
 volumes:
 - number: 1
   isbn13: '9784915858758'
@@ -34,13 +34,13 @@ extra_editions:
   volumes:
   - number: 1
     isbn13: '9784091511416'
-    release_date: '1989-07'
+    release_date: 1989-07
   - number: 2
     isbn13: '9784091511423'
-    release_date: '1990-01'
+    release_date: 1990-01
   - number: 3
     isbn13: '9784091511430'
-    release_date: '1990-05'
+    release_date: 1990-05
 - type: bunkobon
   label: シュベール文庫
   imprint: シュベール文庫
@@ -48,22 +48,22 @@ extra_editions:
   volumes:
   - number: 1
     isbn13: '9784883324019'
-    release_date: '1996-05'
+    release_date: 1996-05
   - number: 2
     isbn13: '9784883324057'
-    release_date: '1995-12'
+    release_date: 1995-12
   - number: 3
     isbn13: '9784883324071'
-    release_date: '1996-01'
+    release_date: 1996-01
   - number: 4
     isbn13: '9784883324118'
-    release_date: '1996-03'
+    release_date: 1996-03
   - number: 5
     isbn13: '9784883324132'
-    release_date: '1996-04'
+    release_date: 1996-04
   - number: 6
     isbn13: '9784883324156'
-    release_date: '1996-05'
+    release_date: 1996-05
 - type: shinsoban
   label: Nichibun comics
   imprint: Nichibun comics
@@ -71,32 +71,32 @@ extra_editions:
   volumes:
   - number: 1
     isbn13: '9784537105551'
-    release_date: '2006-12'
+    release_date: 2006-12
   - number: 2
     isbn13: '9784537106541'
-    release_date: '2007-06'
+    release_date: 2007-06
   - number: 3
     isbn13: '9784537107081'
-    release_date: '2007-10'
+    release_date: 2007-10
   - number: 4
     isbn13: '9784537107906'
-    release_date: '2008-03'
+    release_date: 2008-03
   - number: 5
     isbn13: '9784537108392'
-    release_date: '2008-07'
+    release_date: 2008-07
 - type: shinsoban
-  label: standard版(2007)
+  label: 宙出版版(2007)
   publisher: 宙出版
   volumes:
   - number: 1
     isbn13: '9784776793946'
-    release_date: '2007-11'
+    release_date: 2007-11
   - number: 2
     isbn13: '9784776793953'
-    release_date: '2007-11'
+    release_date: 2007-11
   - number: 3
     isbn13: '9784776794127'
-    release_date: '2007-12'
+    release_date: 2007-12
 - type: shinsoban
   label: CHOCOLAT COMICS
   imprint: CHOCOLAT COMICS
@@ -104,4 +104,4 @@ extra_editions:
   volumes:
   - number: 1
     isbn13: '9784778104207'
-    release_date: '2007-09'
+    release_date: 2007-09

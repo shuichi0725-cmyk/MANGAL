@@ -5,7 +5,7 @@ canonical_imprint: SUNDAY COMICS
 suppress_types:
 - bunkobon
 - deluxe
-source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。'
+source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。 / ★2026-08-29 壊れラベル是正: 2026-08-17の一括処理が、種2でimprintが空だったrunにtype名(standard)をそのまま貼って『standard版』という実在しないタブ名を作っていた。NDL by-ISBNの叢書名(dcndl:seriesTitle)→楽天seriesName→出版社名 の順で実名に戻した。どれも取れないrunは『別版』とし、巻・ISBN・発売日には一切触れていない。'
 volumes:
 - number: 1
   release_date: '1967-04-15'
@@ -20,19 +20,19 @@ extra_editions:
   publisher: 秋田書店
   volumes:
   - number: 1
-    release_date: '1976-09'
+    release_date: 1976-09
   - number: 2
-    release_date: '1976-09'
+    release_date: 1976-09
   - number: 3
-    release_date: '1976-10'
+    release_date: 1976-10
   - number: 4
-    release_date: '1976-10'
+    release_date: 1976-10
   - number: 5
-    release_date: '1976-12'
+    release_date: 1976-12
   - number: 6
-    release_date: '1976-12'
+    release_date: 1976-12
   - number: 7
-    release_date: '1977-01'
+    release_date: 1977-01
 - type: shinsoban
   label: サンデー・コミックス
   imprint: サンデー・コミックス
@@ -92,7 +92,7 @@ extra_editions:
     isbn13: '9784778032470'
     release_date: null
 - type: shinsoban
-  label: standard版
+  label: 別版
   publisher: 不明
   volumes:
   - number: 1

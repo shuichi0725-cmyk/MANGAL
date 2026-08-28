@@ -2,36 +2,37 @@ slug: go-west-2004
 canonical_label: 通常版
 canonical_publisher: 不明
 canonical_imprint: Out comics
-source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。'
+source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。 / ★2026-08-29 壊れラベル是正: 2026-08-17の一括処理が、種2でimprintが空だったrunにtype名(standard)をそのまま貼って『standard版』という実在しないタブ名を作っていた。NDL by-ISBNの叢書名(dcndl:seriesTitle)→楽天seriesName→出版社名 の順で実名に戻した。どれも取れないrunは『別版』とし、巻・ISBN・発売日には一切触れていない。'
 volumes:
 - number: 1
   isbn13: '9784896020311'
-  release_date: '1992-08'
+  release_date: 1992-08
 - number: 2
   isbn13: '9784896020328'
-  release_date: '1992-08'
+  release_date: 1992-08
 - number: 3
-  release_date: '1991-12'
+  release_date: 1991-12
 - number: 4
   release_date: '1992-06-28'
 extra_editions:
 - type: shinsoban
-  label: standard版(1993)
+  label: ムービック版(1993)
   publisher: ムービック
   volumes:
   - number: 5
     isbn13: '9784896010770'
-    release_date: '1993-10'
+    release_date: 1993-10
   - number: 6
     isbn13: '9784896010787'
-    release_date: '1993-11'
+    release_date: 1993-11
 - type: shinsoban
-  label: standard版(2004)
+  label: Fukkan.com(2004)
   publisher: 復刊ドットコム
   volumes:
   - number: 1
     isbn13: '9784835440828'
-    release_date: '2004-01'
+    release_date: 2004-01
+  imprint: Fukkan.com
 - type: shinsoban
   label: fukkan.com
   imprint: fukkan.com
@@ -39,7 +40,7 @@ extra_editions:
   volumes:
   - number: 2
     isbn13: '9784835440873'
-    release_date: '2004-02'
+    release_date: 2004-02
   - number: 3
     isbn13: '9784835441016'
-    release_date: '2004-04'
+    release_date: 2004-04

@@ -4,7 +4,7 @@ canonical_publisher: 不明
 canonical_imprint: 少年マガジンコミックス
 suppress_types:
 - bunkobon
-source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。'
+source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。 / ★2026-08-29 壊れラベル是正: 2026-08-17の一括処理が、種2でimprintが空だったrunにtype名(standard)をそのまま貼って『standard版』という実在しないタブ名を作っていた。NDL by-ISBNの叢書名(dcndl:seriesTitle)→楽天seriesName→出版社名 の順で実名に戻した。どれも取れないrunは『別版』とし、巻・ISBN・発売日には一切触れていない。 / ★2026-08-29 続き: 壊れラベルの実名がNDL叢書名「KCスペシャル ; 152」(152は叢書通し番号)で、既に在った「KCスペシャル」タブ(4巻のみ)と同一レーベルだった。ISBN-10の芯が 4-06-101152(1巻)/101153(2)/101154(3)/101155(4)/101156(5) と完全連番で欠けが埋まるため同一runと確定し統合(1-5巻)。'
 volumes:
 - number: 1
   release_date: '1977-04-05'
@@ -15,7 +15,7 @@ volumes:
 - number: 4
   release_date: '1977-08-20'
 - number: 5
-  release_date: '1978-03'
+  release_date: 1978-03
 - number: 6
   release_date: '1978-06-25'
 - number: 7
@@ -32,18 +32,19 @@ extra_editions:
   volumes:
   - number: 1
     isbn13: '9784063600971'
-    release_date: '2001-10'
+    release_date: 2001-10
   - number: 2
     isbn13: '9784063600988'
-    release_date: '2001-10'
+    release_date: 2001-10
   - number: 3
     isbn13: '9784063600995'
-    release_date: '2001-11'
+    release_date: 2001-11
   - number: 4
     isbn13: '9784063601008'
-    release_date: '2001-11'
+    release_date: 2001-11
 - type: shinsoban
-  label: standard版(1984)
+  label: KCスペシャル
+  imprint: KCスペシャル
   publisher: 講談社
   volumes:
   - number: 1
@@ -51,21 +52,16 @@ extra_editions:
     release_date: null
   - number: 2
     isbn13: '9784061011533'
-    release_date: '1984-08'
+    release_date: 1984-08
   - number: 3
     isbn13: '9784061011540'
-    release_date: '1985-09'
-  - number: 5
-    isbn13: '9784061011564'
-    release_date: '1985-11'
-- type: shinsoban
-  label: KCスペシャル
-  imprint: KCスペシャル
-  publisher: 講談社
-  volumes:
+    release_date: 1985-09
   - number: 4
     isbn13: '9784061011557'
-    release_date: '1985-10'
+    release_date: 1985-10
+  - number: 5
+    isbn13: '9784061011564'
+    release_date: 1985-11
 - type: bunkobon
   label: 扶桑社文庫
   imprint: 扶桑社文庫
@@ -85,67 +81,67 @@ extra_editions:
     release_date: '1996-11-30'
   - number: 5
     isbn13: '9784594021474'
-    release_date: '1996-12'
+    release_date: 1996-12
   - number: 6
     isbn13: '9784594021719'
     release_date: '1997-01-30'
 - type: shinsoban
-  label: standard版(2020)
+  label: 復刊ドットコム版(2020)
   publisher: 復刊ドットコム
   volumes:
   - number: 1
     isbn13: '9784835457864'
-    release_date: '2020-11'
+    release_date: 2020-11
   - number: 2
     isbn13: '9784835457871'
     release_date: null
   - number: 3
     isbn13: '9784835457888'
-    release_date: '2021-01'
+    release_date: 2021-01
   - number: 4
     isbn13: '9784835457895'
-    release_date: '2021-02'
+    release_date: 2021-02
 - type: shinsoban
-  label: standard版(1998)
+  label: 扶桑社版(1998)
   publisher: 扶桑社
   volumes:
   - number: 1
     isbn13: '9784594024581'
-    release_date: '1998-04'
+    release_date: 1998-04
   - number: 2
     isbn13: '9784594024598'
-    release_date: '1998-04'
+    release_date: 1998-04
   - number: 3
     isbn13: '9784594024697'
-    release_date: '1998-05'
+    release_date: 1998-05
   - number: 4
     isbn13: '9784594024703'
-    release_date: '1998-06'
+    release_date: 1998-06
   - number: 5
     isbn13: '9784594025069'
-    release_date: '1998-07'
+    release_date: 1998-07
   - number: 6
     isbn13: '9784594025076'
-    release_date: '1998-08'
+    release_date: 1998-08
 - type: shinsoban
-  label: standard版(1988)
+  label: 講談社版(1988)
   publisher: 講談社
   volumes:
   - number: 1
     isbn13: '9784061769083'
-    release_date: '1988-09'
+    release_date: 1988-09
   - number: 2
     isbn13: '9784061769090'
-    release_date: '1988-09'
+    release_date: 1988-09
   - number: 3
     isbn13: '9784061769113'
-    release_date: '1988-10'
+    release_date: 1988-10
   - number: 4
     isbn13: '9784061769120'
-    release_date: '1988-11'
+    release_date: 1988-11
   - number: 5
     isbn13: '9784061769137'
-    release_date: '1988-12'
+    release_date: 1988-12
   - number: 6
     isbn13: '9784061769144'
-    release_date: '1989-01'
+    release_date: 1989-01
