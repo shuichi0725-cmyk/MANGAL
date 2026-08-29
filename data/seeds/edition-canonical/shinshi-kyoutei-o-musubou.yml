@@ -2,14 +2,14 @@ slug: shinshi-kyoutei-o-musubou
 canonical_label: 通常版
 canonical_publisher: 角川書店
 canonical_imprint: あすかコミックスCL-DX
-source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。'
+source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。 / ★2026-08-29 上下分冊の番号是正: 上下2冊本が「1巻と3巻」として焼かれており2巻が欠番に見えていた(MADB系統の 上=1/中=2/下=3 固定割当を2026-08-17の一括処理がそのまま取り込んだもの)。揃っている分冊だけを 1..N に振り直した(片側欠落=真の取りこぼしは触っていない)。'
 volumes:
 - number: 2
   isbn13: '9784048544337'
-  release_date: '2010-03'
+  release_date: 2010-03
 - number: 3
   isbn13: '9784041206935'
-  release_date: '2013-05'
+  release_date: 2013-05
 extra_editions:
 - type: shinsoban
   label: あすかコミックスCL-DX(2022)
@@ -18,9 +18,9 @@ extra_editions:
   volumes:
   - number: 1
     isbn13: '9784041122150'
-    release_date: '2022-03'
-    volume_label: '上'
-  - number: 3
+    release_date: 2022-03
+    volume_label: 上
+  - number: 2
     isbn13: '9784041122167'
-    release_date: '2022-03'
-    volume_label: '下'
+    release_date: 2022-03
+    volume_label: 下

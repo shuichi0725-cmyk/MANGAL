@@ -42539,3 +42539,39 @@ volumes:
   source: rakuten
   added_at: '2026-08-29'
   note: テスト環境の巻抜け点検。1巻(2016-06)と3巻(2018-05)の間が欠けていた。楽天booksキャッシュ 9784253107921「CREWでございます！」御前モカ/秋田書店 2017-06-16 で確定。ISBNが 10791-4(1)/10792-1(2)/10793-8(3)/10795-2(4) と連番、発売日も年1冊の刊行ペースに合う
+- series_keys:
+  - qid:Q11359703|name:バロック
+  number: 1
+  isbn13: '9784835454436'
+  release_date: '2017-01-25'
+  publisher: 復刊ドットコム
+  edition_type: standard
+  title_display: バロック
+  source: rakuten
+  added_at: '2026-08-29'
+  volume_label: 上
+  note: 上下分冊の上巻が欠けていた。楽天books 9784835454436「バロック（上巻）」復刊ドットコム 2017-01-25。下巻9784835454443と隣接ISBN
+- series_keys:
+  - qid:Q11571159|name:なんでもツルカメ
+  number: 1
+  isbn13: '9784344400627'
+  release_date: 2001-02
+  publisher: 幻冬舎
+  edition_type: bunkobon
+  title_display: なんでもツルカメ
+  source: rakuten
+  added_at: '2026-08-29'
+  volume_label: 上
+  note: 幻冬舎文庫の上巻が欠けていた。楽天books 9784344400627「なんでもツルカメ（上）」幻冬舎文庫 2001-02。下巻=9784344400917(2001-04)
+- series_keys:
+  - qid:Q11529220|name:東京デビュー
+  number: 1
+  isbn13: '9784792602093'
+  release_date: '1991-10-01'
+  publisher: 青林堂
+  edition_type: standard
+  title_display: 東京デビュー
+  source: rakuten
+  added_at: '2026-08-29'
+  volume_label: 上
+  note: 上下分冊の上巻が欠けていた。楽天books 9784792602093「東京デビュー（上）」青林堂 1991-10-01。下巻=9784792602109と隣接ISBN

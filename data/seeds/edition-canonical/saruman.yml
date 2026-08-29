@@ -2,23 +2,27 @@ slug: saruman
 canonical_label: 通常版
 canonical_publisher: 小学館
 canonical_imprint: Big spirits comics
-source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。'
+source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。 / ★2026-08-29 上下分冊の番号是正: 上下2冊本が「1巻と3巻」として焼かれており2巻が欠番に見えていた(MADB系統の 上=1/中=2/下=3 固定割当を2026-08-17の一括処理がそのまま取り込んだもの)。揃っている分冊だけを 1..N に振り直した(片側欠落=真の取りこぼしは触っていない)。 / ★2026-08-29 上下分冊の『上』を補完(ローカル楽天キャッシュ・live照会なし)。下巻だけが在って上巻が欠けていた版に、同じ出版社・同じ叢書名・隣接ISBNの上巻を追加した。 9784091848611「サルまん（上）新装版」スピリッツ青春プレイバックコミックス 1997-07-19。'
 volumes:
 - number: 1
   isbn13: '9784091790095'
-  release_date: '2006-09'
-  volume_label: '上'
-- number: 3
+  release_date: 2006-09
+  volume_label: 上
+- number: 2
   isbn13: '9784091790101'
-  release_date: '2006-09'
-  volume_label: '下'
+  release_date: 2006-09
+  volume_label: 下
 extra_editions:
 - type: shinsoban
   label: スピリッツ青春プレイバックコミックス
   imprint: スピリッツ青春プレイバックコミックス
   publisher: 小学館
   volumes:
-  - number: 3
+  - number: 1
+    isbn13: '9784091848611'
+    release_date: '1997-07-19'
+    volume_label: 上
+  - number: 2
     isbn13: '9784091848628'
-    release_date: '1997-09'
-    volume_label: '下'
+    release_date: 1997-09
+    volume_label: 下

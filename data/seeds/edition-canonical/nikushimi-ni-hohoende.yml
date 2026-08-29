@@ -1,0 +1,19 @@
+slug: nikushimi-ni-hohoende
+canonical_label: 通常版
+canonical_publisher: スコラ
+canonical_imprint: スコラSC
+suppress_types:
+- deluxe
+source: '★2026-08-29 上下分冊の分裂を是正。上巻(9784796296076)が「デラックス版」タブ(種2 imprint=スコラSCデラックス)、
+  下巻(9784796296120)が「通常版」タブに分かれ、通常版が 1巻と3巻=2巻欠番に見えていた。楽天books では
+  9784796296076「憎しみに微笑んで（上）」/9784796296120「同（下）」がいずれも スコラ・seriesName=スコラSC で、
+  ISBNも同一帯。1タブの上下(1-2)へ統合した。巻・ISBN・発売日は不変。'
+volumes:
+- number: 1
+  isbn13: '9784796296076'
+  release_date: '1993-12-17'
+  volume_label: 上
+- number: 2
+  isbn13: '9784796296120'
+  release_date: '1994-02-28'
+  volume_label: 下

@@ -427,8 +427,14 @@ def apply_edition_canonical(slug: str, editions: list, canon: dict) -> list:
             if v.get("volume_label"):  # ★上下巻対応(2026-07-04): seedのvolume_labelを搬送
                 o["volume_label"] = v["volume_label"]
             return o
+        _vs = [_v(v) for v in (vols or [])]
+        # ★上下/上中下が完全に揃うのに番号が 1..N でない版を canonical 側でも是正
+        #   (2026-08-29 妄想戦士ヤマモトHDリマスターで実踏: 上=1/下=3 で2巻が欠番に見えていた)。
+        #   _fix_complete_sequence_numbers は 2543行の組み立て時に走るが、canonical は
+        #   その**後**に editions を丸ごと置換するため、seed に焼かれた誤番号が復活していた。
+        _fix_complete_sequence_numbers(_vs)
         return {"type": etype, "label": label, "publisher": publisher, "imprint": imprint,
-                "volumes": [_v(v) for v in (vols or [])]}
+                "volumes": _vs}
     # 既存 standard の publisher を継承(無ければ seed/None)
     cur_std = next((e for e in editions if e.get("type") == "standard"), None)
     pub = (cur_std or {}).get("publisher") or s.get("publisher")
@@ -735,7 +741,10 @@ def load_volumes_supplement(con: sqlite3.Connection) -> dict[int, list[dict]]:
                 continue
             vol_dict = {
                 "number": entry["number"],
-                "volume_label": None,
+                # ★volume_label の搬送(2026-08-29): 上下分冊の欠け巻を種4で補う時に「上」を
+                #   運べないと、_fix_complete_sequence_numbers が『上下が揃った』と判定できず
+                #   下巻が number=3 のまま残って欠番に見え続ける(バロック/東京デビューで実踏)。
+                "volume_label": entry.get("volume_label"),
                 "isbn13": entry.get("isbn13"),
                 "release_date": entry.get("release_date"),
                 "cover_url": None,
