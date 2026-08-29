@@ -42597,3 +42597,27 @@ volumes:
   source: rakuten
   added_at: '2026-08-29'
   note: ユーザ提供のISBN。楽天books/NDL とも「断罪された悪役令嬢は、逆行して完璧な悪女を目指す＠COMIC 第9巻」TOブックス Celicaコミックス 2026-10-01。★頁の9巻枠には原作ラノベ(9784867947340)が入っていたので volume-exclude で除去した上で追加
+- series_keys:
+  - qid:Q11469541|name:バード BLACK MARKET
+  - qid:Q11469541|name:バード
+  number: 1
+  isbn13: '9784801957794'
+  release_date: '2017-03-15'
+  publisher: 竹書房
+  edition_type: standard
+  title_display: バード BLACK MARKET
+  source: rakuten-cache-local
+  added_at: '2026-08-29'
+  note: 頁の1巻枠に2000年の別作品『バード』(青山広美単独)が入っていたので volume-exclude で除去し、真の1巻を追加。楽天books「バードBLACK　MARKET（1）」竹書房 近代麻雀コミックス 青山広美/山根和俊 2017-03-15
+- series_keys:
+  - qid:Q11469541|name:バード BLACK MARKET
+  - qid:Q11469541|name:バード
+  number: 2
+  isbn13: '9784801960237'
+  release_date: '2017-09-01'
+  publisher: 竹書房
+  edition_type: standard
+  title_display: バード BLACK MARKET
+  source: rakuten-cache-local
+  added_at: '2026-08-29'
+  note: 同上=真の2巻。楽天books「バードBLACK　MARKET（2）」2017-09-01。3巻(9784801961814)以降と連番
