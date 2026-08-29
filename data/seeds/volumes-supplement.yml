@@ -42575,3 +42575,25 @@ volumes:
   added_at: '2026-08-29'
   volume_label: 上
   note: 上下分冊の上巻が欠けていた。楽天books 9784792602093「東京デビュー（上）」青林堂 1991-10-01。下巻=9784792602109と隣接ISBN
+- series_keys:
+  - name:えびすし|name:断罪された悪役令嬢は、逆行して完璧な悪女を目指す|sub:@COMIC
+  number: 5
+  isbn13: '9784867943823'
+  release_date: '2024-12-14'
+  publisher: TOブックス
+  edition_type: standard
+  title_display: 断罪された悪役令嬢は、逆行して完璧な悪女を目指す@COMIC
+  source: ndl
+  added_at: '2026-08-29'
+  note: '4巻(2024-08)と6巻(2025-06)の間が欠けていた。ユーザ提供のNDL TSV に 978-4-86794-382-3「断罪された悪役令嬢は、逆行して完璧な悪女を目指す : @COMIC. 5」TOブックス コロナ・コミックス 2025.1 があり、楽天books も同ISBNで「＠COMIC 第5巻」2024年12月14日・seriesName=コロナ・コミックス。発売日は楽天(実発売日)を採用'
+- series_keys:
+  - name:えびすし|name:断罪された悪役令嬢は、逆行して完璧な悪女を目指す|sub:@COMIC
+  number: 9
+  isbn13: '9784868541370'
+  release_date: '2026-10-01'
+  publisher: TOブックス
+  edition_type: standard
+  title_display: 断罪された悪役令嬢は、逆行して完璧な悪女を目指す@COMIC
+  source: rakuten
+  added_at: '2026-08-29'
+  note: ユーザ提供のISBN。楽天books/NDL とも「断罪された悪役令嬢は、逆行して完璧な悪女を目指す＠COMIC 第9巻」TOブックス Celicaコミックス 2026-10-01。★頁の9巻枠には原作ラノベ(9784867947340)が入っていたので volume-exclude で除去した上で追加

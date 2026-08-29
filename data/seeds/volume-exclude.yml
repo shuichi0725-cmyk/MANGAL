@@ -2700,3 +2700,7 @@ excludes:
   isbn13: '9784824004185'
   reason: 原作小説の巻(ラノベレーベル)がコミック頁に誤マッチ(6/21 offset fill NDL著者strict=無職転生21型)。実コミックISBNへ置換済み=小説ISBNの再流入防止
   at: '2026-08-26'
+- slug: danzai-sareta-akuyaku-reijou-wa-gyakkou-shite-kanpeki-na-akujo-o-mezasu
+  isbn13: '9784867947340'
+  reason: 原作ラノベ(小説)の第9巻がコミック頁の9巻枠に混入(ユーザ報告「9巻だけラノベ汚染」)。楽天books=「断罪された悪役令嬢は、逆行して完璧な悪女を目指す9」著者 楢山幕府(=原作者)・1399円・seriesName空、NDL=「…. 9」2025.11 で @COMIC 表記なし。コミック第9巻は 9784868541370(Celicaコミックス 2026-10)が正
+  at: '2026-08-29'
