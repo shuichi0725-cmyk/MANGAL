@@ -4,7 +4,9 @@ canonical_publisher: 小学館
 canonical_imprint: 少年サンデーコミックス
 suppress_types:
 - bunkobon
-source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。 / ★2026-08-29 壊れラベル是正: 2026-08-17の一括処理が、種2でimprintが空だったrunにtype名(standard)をそのまま貼って『standard版』という実在しないタブ名を作っていた。NDL by-ISBNの叢書名(dcndl:seriesTitle)→楽天seriesName→出版社名 の順で実名に戻した。どれも取れないrunは『別版』とし、巻・ISBN・発売日には一切触れていない。'
+- shinsoban
+- wideban
+source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。 / ★2026-08-29 壊れラベル是正: 2026-08-17の一括処理が、種2でimprintが空だったrunにtype名(standard)をそのまま貼って『standard版』という実在しないタブ名を作っていた。NDL by-ISBNの叢書名(dcndl:seriesTitle)→楽天seriesName→出版社名 の順で実名に戻した。どれも取れないrunは『別版』とし、巻・ISBN・発売日には一切触れていない。 / ★2026-08-29 ユーザ報告「サバイバルもだいぶ分裂してる」の全面是正。裏取り = NDL SRU(creator="さいとう・たかを" AND title="サバイバル" 全137件) + ja.wikipedia 書誌情報節。 ①同一レーベルが4タブに割れていた: SPコミックスが (1988)/(1995)/(2019)/無印 に散り、少年サンデーコミックスとSP pocket wideも各2タブ。NDLの叢書名+巻+ISBNで刊行runごとに束ね直した。 ②**ワイド版(全6巻+Another Story)が版として存在していなかった**。3・4・6巻だけが他タブに紛れ込み、1・2・5・Another Story は頁に無かった。Wikipedia書誌節のISBN(4845802988/2996/3003/1981/199X/2007/1973)とNDL「サバイバル : ワイド版. N」の一致で確定し1版として復元。発売日はWikipediaの初版発行日。 ③SP Pocket(2000-01)が 6巻 + 別タブの2巻(8・14)に割れていた → 統合(1/5/8/9/11/14/15/17)。 ④SP pocket wide(2025-26)は先頭巻が「0巻」になり、2-5・13巻が欠けていた → NDLのVol.表記で1-13に是正。 ⑤リイド文庫に Another Story(9784845821525)を追加。発売日はWikipediaの正確な日付へ。 ⑥★**別作品の混入を除去**: 9784845854325 と 9784845858712 は NDL で「サバイバル : 少年Sの記録」(宮川輝作画のリメイク)。本編頁から外し survival-shounen-s-no-kiroku へ移設した。 ⑦種2の重複レコード由来だった「少年サンデーコミックス(1977)」「SPコミックス(1995)」の断片タブはsuppress_types で除去(中身は上のrunに全て含まれている)。'
 volumes:
 - number: 1
   release_date: '1977-10-15'
@@ -104,9 +106,53 @@ extra_editions:
   - number: 16
     isbn13: '9784845802876'
     release_date: '1989-10-22'
+- type: wideban
+  label: ワイド版
+  imprint: SPコミックス ワイド版
+  publisher: リイド社
+  volumes:
+  - number: 1
+    isbn13: '9784845802982'
+    release_date: '1994-08-06'
+  - number: 2
+    isbn13: '9784845802999'
+    release_date: '1994-10-07'
+  - number: 3
+    isbn13: '9784845803002'
+    release_date: '1994-12-09'
+  - number: 4
+    isbn13: '9784845801985'
+    release_date: '1995-02-09'
+  - number: 5
+    isbn13: '9784845801992'
+    release_date: '1995-04-16'
+  - number: 6
+    isbn13: '9784845802005'
+    release_date: '1995-06-08'
+  - number: 7
+    isbn13: '9784845801978'
+    release_date: '1995-06-23'
+    volume_label: Another Story
 - type: shinsoban
-  label: SPPocket
-  imprint: SPPocket
+  label: SPコミックス(1992)
+  imprint: SPコミックス
+  publisher: リイド社
+  volumes:
+  - number: 1
+    isbn13: '9784845813117'
+    release_date: 1992-05
+  - number: 2
+    isbn13: '9784845813124'
+    release_date: '1992-05-01'
+  - number: 5
+    isbn13: '9784845813155'
+    release_date: 1992-08
+  - number: 8
+    isbn13: '9784845813186'
+    release_date: 1992-11
+- type: shinsoban
+  label: SP Pocket
+  imprint: SPコミックス SP Pocket
   publisher: リイド社
   volumes:
   - number: 1
@@ -115,26 +161,83 @@ extra_editions:
   - number: 5
     isbn13: '9784845818419'
     release_date: '2000-09-08'
+  - number: 8
+    isbn13: '9784845818440'
+    release_date: 2000-10
   - number: 9
     isbn13: '9784845818457'
     release_date: 2000-11
   - number: 11
     isbn13: '9784845818471'
     release_date: '2000-12-07'
+  - number: 14
+    isbn13: '9784845818501'
+    release_date: null
   - number: 15
     isbn13: '9784845818518'
     release_date: '2001-02-09'
   - number: 17
     isbn13: '9784845818532'
     release_date: '2001-03-06'
-- type: shinsoban
-  label: SPコミックス. SP pocket wide
-  imprint: SPコミックス. SP pocket wide
+- type: bunkobon
+  label: リイド文庫
+  imprint: リイド文庫
   publisher: リイド社
   volumes:
-  - number: 0
+  - number: 1
+    isbn13: '9784845821365'
+    release_date: '2001-06-11'
+  - number: 2
+    isbn13: '9784845821372'
+    release_date: '2001-06-11'
+  - number: 3
+    isbn13: '9784845821389'
+    release_date: '2001-07-10'
+  - number: 4
+    isbn13: '9784845821396'
+    release_date: '2001-07-10'
+  - number: 5
+    isbn13: '9784845821402'
+    release_date: '2001-08-09'
+  - number: 6
+    isbn13: '9784845821419'
+    release_date: '2001-08-09'
+  - number: 7
+    isbn13: '9784845821426'
+    release_date: '2001-09-07'
+  - number: 8
+    isbn13: '9784845821433'
+    release_date: '2001-09-07'
+  - number: 9
+    isbn13: '9784845821440'
+    release_date: '2001-10-09'
+  - number: 10
+    isbn13: '9784845821457'
+    release_date: '2001-10-09'
+  - number: 11
+    isbn13: '9784845821525'
+    release_date: '2001-11-08'
+    volume_label: Another Story
+- type: shinsoban
+  label: SP pocket wide
+  imprint: SPコミックス SP pocket wide
+  publisher: リイド社
+  volumes:
+  - number: 1
     isbn13: '9784845869268'
     release_date: '2025-07-11'
+  - number: 2
+    isbn13: '9784845869381'
+    release_date: 2025-08
+  - number: 3
+    isbn13: '9784845869503'
+    release_date: 2025-09
+  - number: 4
+    isbn13: '9784845870042'
+    release_date: 2025-10
+  - number: 5
+    isbn13: '9784845870141'
+    release_date: 2025-11
   - number: 6
     isbn13: '9784845870257'
     release_date: '2025-12-22'
@@ -156,108 +259,6 @@ extra_editions:
   - number: 12
     isbn13: '9784845871742'
     release_date: '2026-06-22'
-- type: shinsoban
-  label: SPコミックス(1995)
-  imprint: SPコミックス
-  publisher: リイド社
-  volumes:
-  - number: 0
-    release_date: null
-  - number: 4
-    isbn13: '9784845801985'
-    release_date: '1995-03-09'
-  - number: 8
-    isbn13: '9784845818440'
-    release_date: 2000-10
-  - number: 14
-    isbn13: '9784845818501'
-    release_date: null
-- type: shinsoban
-  label: SPコミックス(2019)
-  imprint: SPコミックス
-  publisher: リイド社
-  volumes:
-  - number: 5
-    isbn13: '9784845854325'
-    release_date: 2019-03
-- type: shinsoban
-  label: 少年サンデーコミックス(1977)
-  imprint: 少年サンデーコミックス
-  publisher: 小学館
-  volumes:
-  - number: 0
-    release_date: null
-  - number: 2
-    release_date: 1977-12
-  - number: 4
-    release_date: 1978-04
-  - number: 7
-    release_date: 1978-10
-  - number: 8
-    release_date: 1979-01
-- type: shinsoban
-  label: SPコミックス
-  publisher: リイド社
-  volumes:
-  - number: 1
-    isbn13: '9784845813117'
-    release_date: 1992-05
-  - number: 2
-    isbn13: '9784845813124'
-    release_date: '1992-05-01'
-  - number: 3
-    isbn13: '9784845803002'
-    release_date: '1995-01-09'
-  - number: 5
-    isbn13: '9784845813155'
-    release_date: 1992-08
-  - number: 6
-    isbn13: '9784845802005'
-    release_date: '1995-07-08'
-  - number: 8
-    isbn13: '9784845813186'
-    release_date: 1992-11
-  imprint: SPコミックス
-- type: bunkobon
-  label: リイド文庫
-  imprint: リイド文庫
-  publisher: リイド社
-  volumes:
-  - number: 1
-    isbn13: '9784845821365'
-    release_date: 2001-06
-  - number: 2
-    isbn13: '9784845821372'
-    release_date: 2001-06
-  - number: 3
-    isbn13: '9784845821389'
-    release_date: 2001-07
-  - number: 4
-    isbn13: '9784845821396'
-    release_date: 2001-07
-  - number: 5
-    isbn13: '9784845821402'
-    release_date: 2001-08
-  - number: 6
-    isbn13: '9784845821419'
-    release_date: 2001-08
-  - number: 7
-    isbn13: '9784845821426'
-    release_date: 2001-09
-  - number: 8
-    isbn13: '9784845821433'
-    release_date: 2001-09
-  - number: 9
-    isbn13: '9784845821440'
-    release_date: 2001-10
-  - number: 10
-    isbn13: '9784845821457'
-    release_date: 2001-10
-- type: shinsoban
-  label: SP pocket wide
-  imprint: SP pocket wide
-  publisher: リイド社
-  volumes:
-  - number: 0
-    isbn13: '9784845858712'
-    release_date: 2022-04
+  - number: 13
+    isbn13: '9784845871889'
+    release_date: 2026-07

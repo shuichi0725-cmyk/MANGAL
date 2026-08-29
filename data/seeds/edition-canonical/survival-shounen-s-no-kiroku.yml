@@ -1,0 +1,38 @@
+slug: survival-shounen-s-no-kiroku
+canonical_label: 通常版
+canonical_publisher: リイド社
+canonical_imprint: SPコミックス
+suppress_types:
+- shinsoban
+- bunkobon
+source: ★2026-08-29 新設。本編頁 survival に混入していた本作の巻を引き取り、欠けていた巻を足した。裏取り = NDL SRU(creator="さいとう・たかを" AND title="サバイバル" 全137件)。SPコミックス全5巻(9784845848683/48690/48706/52826/54325)のうち、頁は1-3しか持たず4巻はどの頁にも無く、5巻は本編頁 survival に誤って入っていた。SP pocket wide版2冊(生存確認一名 9784845858712 / 壊滅都市東京 9784845858859)も同様で、前者は本編頁に混入・後者はどこにも無かった。★原作=さいとう・たかを / 作画=宮川輝(ja.wikipedia)。頁の著者は作画のみなので原作クレジットは別途要検討。
+volumes:
+- number: 1
+  isbn13: '9784845848683'
+  release_date: 2016-01
+- number: 2
+  isbn13: '9784845848690'
+  release_date: 2016-09
+- number: 3
+  isbn13: '9784845848706'
+  release_date: 2017-07
+- number: 4
+  isbn13: '9784845852826'
+  release_date: 2018-03
+- number: 5
+  isbn13: '9784845854325'
+  release_date: 2019-03
+extra_editions:
+- type: shinsoban
+  label: SP pocket wide
+  imprint: SPコミックス SP pocket wide
+  publisher: リイド社
+  volumes:
+  - number: 1
+    isbn13: '9784845858712'
+    release_date: 2022-04
+    volume_label: 生存確認一名
+  - number: 2
+    isbn13: '9784845858859'
+    release_date: 2022-05
+    volume_label: 壊滅都市東京

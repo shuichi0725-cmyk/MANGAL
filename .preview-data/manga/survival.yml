@@ -3,7 +3,7 @@ slug: survival
 title: サバイバル
 title_kana: サバイバル
 title_romaji: sabaibaru
-year_started: 1977
+year_started: 1976
 year_ended: 1980
 status: completed
 authors:
@@ -222,10 +222,76 @@ editions:
     isbn13: '9784845802876'
     cover_url: null
     release_date: '1989-10-22'
-- type: shinsoban
-  label: SPPocket
+- type: wideban
+  label: ワイド版
   publisher: リイド社
-  imprint: SPPocket
+  imprint: SPコミックス ワイド版
+  volumes:
+  - number: 1
+    asin: null
+    isbn13: '9784845802982'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/2982/9784845802982.jpg?_ex=300x300
+    release_date: '1994-08-06'
+  - number: 2
+    asin: null
+    isbn13: '9784845802999'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/2999/9784845802999.jpg?_ex=300x300
+    release_date: '1994-10-07'
+  - number: 3
+    asin: null
+    isbn13: '9784845803002'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/3002/9784845803002.jpg?_ex=300x300
+    release_date: '1994-12-09'
+  - number: 4
+    asin: null
+    isbn13: '9784845801985'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/1985/9784845801985.jpg?_ex=300x300
+    release_date: '1995-02-09'
+  - number: 5
+    asin: null
+    isbn13: '9784845801992'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/1992/9784845801992.jpg?_ex=300x300
+    release_date: '1995-04-16'
+  - number: 6
+    asin: null
+    isbn13: '9784845802005'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/2005/9784845802005.jpg?_ex=300x300
+    release_date: '1995-06-08'
+  - number: 7
+    asin: null
+    isbn13: '9784845801978'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/1978/9784845801978.jpg?_ex=300x300
+    release_date: '1995-06-23'
+    volume_label: Another Story
+- type: shinsoban
+  label: SPコミックス(1992)
+  publisher: リイド社
+  imprint: SPコミックス
+  volumes:
+  - number: 1
+    asin: null
+    isbn13: '9784845813117'
+    cover_url: null
+    release_date: 1992-05
+  - number: 2
+    asin: null
+    isbn13: '9784845813124'
+    cover_url: null
+    release_date: '1992-05-01'
+  - number: 5
+    asin: null
+    isbn13: '9784845813155'
+    cover_url: null
+    release_date: 1992-08
+  - number: 8
+    asin: null
+    isbn13: '9784845813186'
+    cover_url: null
+    release_date: 1992-11
+- type: shinsoban
+  label: SP Pocket
+  publisher: リイド社
+  imprint: SPコミックス SP Pocket
   volumes:
   - number: 1
     asin: null
@@ -237,6 +303,11 @@ editions:
     isbn13: '9784845818419'
     cover_url: null
     release_date: '2000-09-08'
+  - number: 8
+    asin: null
+    isbn13: '9784845818440'
+    cover_url: null
+    release_date: 2000-10
   - number: 9
     asin: null
     isbn13: '9784845818457'
@@ -247,6 +318,11 @@ editions:
     isbn13: '9784845818471'
     cover_url: null
     release_date: '2000-12-07'
+  - number: 14
+    asin: null
+    isbn13: '9784845818501'
+    cover_url: null
+    release_date: null
   - number: 15
     asin: null
     isbn13: '9784845818518'
@@ -257,16 +333,97 @@ editions:
     isbn13: '9784845818532'
     cover_url: null
     release_date: '2001-03-06'
-- type: shinsoban
-  label: SPコミックス. SP pocket wide
+- type: bunkobon
+  label: リイド文庫
   publisher: リイド社
-  imprint: SPコミックス. SP pocket wide
+  imprint: リイド文庫
   volumes:
-  - number: 0
+  - number: 1
+    asin: null
+    isbn13: '9784845821365'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/1365/9784845821365.jpg?_ex=300x300
+    release_date: '2001-06-11'
+  - number: 2
+    asin: null
+    isbn13: '9784845821372'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/1372/9784845821372.jpg?_ex=300x300
+    release_date: '2001-06-11'
+  - number: 3
+    asin: null
+    isbn13: '9784845821389'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/1389/9784845821389.jpg?_ex=300x300
+    release_date: '2001-07-10'
+  - number: 4
+    asin: null
+    isbn13: '9784845821396'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/1396/9784845821396.jpg?_ex=300x300
+    release_date: '2001-07-10'
+  - number: 5
+    asin: null
+    isbn13: '9784845821402'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/1402/9784845821402.jpg?_ex=300x300
+    release_date: '2001-08-09'
+  - number: 6
+    asin: null
+    isbn13: '9784845821419'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/1419/9784845821419.jpg?_ex=300x300
+    release_date: '2001-08-09'
+  - number: 7
+    asin: null
+    isbn13: '9784845821426'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/1426/9784845821426.jpg?_ex=300x300
+    release_date: '2001-09-07'
+  - number: 8
+    asin: null
+    isbn13: '9784845821433'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/1433/9784845821433.jpg?_ex=300x300
+    release_date: '2001-09-07'
+  - number: 9
+    asin: null
+    isbn13: '9784845821440'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/1440/9784845821440.jpg?_ex=300x300
+    release_date: '2001-10-09'
+  - number: 10
+    asin: null
+    isbn13: '9784845821457'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/1457/9784845821457.jpg?_ex=300x300
+    release_date: '2001-10-09'
+  - number: 11
+    asin: null
+    isbn13: '9784845821525'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/1525/9784845821525.jpg?_ex=300x300
+    release_date: '2001-11-08'
+    volume_label: Another Story
+- type: shinsoban
+  label: SP pocket wide
+  publisher: リイド社
+  imprint: SPコミックス SP pocket wide
+  volumes:
+  - number: 1
     asin: null
     isbn13: '9784845869268'
     cover_url: null
     release_date: '2025-07-11'
+  - number: 2
+    asin: null
+    isbn13: '9784845869381'
+    cover_url: null
+    release_date: 2025-08
+  - number: 3
+    asin: null
+    isbn13: '9784845869503'
+    cover_url: null
+    release_date: 2025-09
+  - number: 4
+    asin: null
+    isbn13: '9784845870042'
+    cover_url: null
+    release_date: 2025-10
+  - number: 5
+    asin: null
+    isbn13: '9784845870141'
+    cover_url: null
+    release_date: 2025-11
   - number: 6
     asin: null
     isbn13: '9784845870257'
@@ -302,171 +459,11 @@ editions:
     isbn13: '9784845871742'
     cover_url: null
     release_date: '2026-06-22'
-- type: shinsoban
-  label: SPコミックス(1995)
-  publisher: リイド社
-  imprint: SPコミックス
-  volumes:
-  - number: 0
+  - number: 13
     asin: null
-    isbn13: null
+    isbn13: '9784845871889'
     cover_url: null
-    release_date: null
-  - number: 4
-    asin: null
-    isbn13: '9784845801985'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/1985/9784845801985.jpg?_ex=300x300
-    release_date: '1995-03-09'
-  - number: 8
-    asin: null
-    isbn13: '9784845818440'
-    cover_url: null
-    release_date: 2000-10
-  - number: 14
-    asin: null
-    isbn13: '9784845818501'
-    cover_url: null
-    release_date: null
-- type: shinsoban
-  label: SPコミックス(2019)
-  publisher: リイド社
-  imprint: SPコミックス
-  volumes:
-  - number: 5
-    asin: null
-    isbn13: '9784845854325'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/4325/9784845854325.jpg?_ex=300x300
-    release_date: 2019-03
-- type: shinsoban
-  label: 少年サンデーコミックス(1977)
-  publisher: 小学館
-  imprint: 少年サンデーコミックス
-  volumes:
-  - number: 0
-    asin: null
-    isbn13: null
-    cover_url: null
-    release_date: null
-  - number: 2
-    asin: null
-    isbn13: null
-    cover_url: null
-    release_date: 1977-12
-  - number: 4
-    asin: null
-    isbn13: null
-    cover_url: null
-    release_date: 1978-04
-  - number: 7
-    asin: null
-    isbn13: null
-    cover_url: null
-    release_date: 1978-10
-  - number: 8
-    asin: null
-    isbn13: null
-    cover_url: null
-    release_date: 1979-01
-- type: shinsoban
-  label: SPコミックス
-  publisher: リイド社
-  imprint: SPコミックス
-  volumes:
-  - number: 1
-    asin: null
-    isbn13: '9784845813117'
-    cover_url: null
-    release_date: 1992-05
-  - number: 2
-    asin: null
-    isbn13: '9784845813124'
-    cover_url: null
-    release_date: '1992-05-01'
-  - number: 3
-    asin: null
-    isbn13: '9784845803002'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/3002/9784845803002.jpg?_ex=300x300
-    release_date: '1995-01-09'
-  - number: 5
-    asin: null
-    isbn13: '9784845813155'
-    cover_url: null
-    release_date: 1992-08
-  - number: 6
-    asin: null
-    isbn13: '9784845802005'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/2005/9784845802005.jpg?_ex=300x300
-    release_date: '1995-07-08'
-  - number: 8
-    asin: null
-    isbn13: '9784845813186'
-    cover_url: null
-    release_date: 1992-11
-- type: bunkobon
-  label: リイド文庫
-  publisher: リイド社
-  imprint: リイド文庫
-  volumes:
-  - number: 1
-    asin: null
-    isbn13: '9784845821365'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/1365/9784845821365.jpg?_ex=300x300
-    release_date: 2001-06
-  - number: 2
-    asin: null
-    isbn13: '9784845821372'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/1372/9784845821372.jpg?_ex=300x300
-    release_date: 2001-06
-  - number: 3
-    asin: null
-    isbn13: '9784845821389'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/1389/9784845821389.jpg?_ex=300x300
-    release_date: 2001-07
-  - number: 4
-    asin: null
-    isbn13: '9784845821396'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/1396/9784845821396.jpg?_ex=300x300
-    release_date: 2001-07
-  - number: 5
-    asin: null
-    isbn13: '9784845821402'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/1402/9784845821402.jpg?_ex=300x300
-    release_date: 2001-08
-  - number: 6
-    asin: null
-    isbn13: '9784845821419'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/1419/9784845821419.jpg?_ex=300x300
-    release_date: 2001-08
-  - number: 7
-    asin: null
-    isbn13: '9784845821426'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/1426/9784845821426.jpg?_ex=300x300
-    release_date: 2001-09
-  - number: 8
-    asin: null
-    isbn13: '9784845821433'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/1433/9784845821433.jpg?_ex=300x300
-    release_date: 2001-09
-  - number: 9
-    asin: null
-    isbn13: '9784845821440'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/1440/9784845821440.jpg?_ex=300x300
-    release_date: 2001-10
-  - number: 10
-    asin: null
-    isbn13: '9784845821457'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/1457/9784845821457.jpg?_ex=300x300
-    release_date: 2001-10
-- type: shinsoban
-  label: SP pocket wide
-  publisher: リイド社
-  imprint: SP pocket wide
-  volumes:
-  - number: 0
-    asin: null
-    isbn13: '9784845858712'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/8712/9784845858712_1_3.jpg?_ex=300x300
-    release_date: 2022-04
+    release_date: 2026-07
 publishers:
 - leed
 - shogakukan
