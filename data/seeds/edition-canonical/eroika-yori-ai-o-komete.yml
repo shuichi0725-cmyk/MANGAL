@@ -5,7 +5,7 @@ canonical_imprint: プリンセス・コミックス
 suppress_types:
 - bunkobon
 - deluxe
-source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。 ★ISBN補充3巻 2026-08-24(partial-isbn-gap半自動: 帯/楽天題/巻番号/未使用の4検証)　/ 2026-08-28 刊行run分裂の是正(ARMSワイド版型): MADBのレーベル表記ゆれ(英字↔和名・略称↔正式名・中黒)や種2のクラスタ分裂で、1本の刊行runが複数の版タブに割れていた。楽天seriesName・MADBのシリーズ容器ID(schema:isPartOf)・ISBN連番・刊行リストで同一runと確認できた分だけ、既存の巻を版間で移して統合した(調査エージェント+反証エージェントの二段で裁定)。巻・ISBN・発売日の新規追加や改変はしていない。'
+source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。 ★ISBN補充3巻 2026-08-24(partial-isbn-gap半自動: 帯/楽天題/巻番号/未使用の4検証)　/ 2026-08-28 刊行run分裂の是正(ARMSワイド版型): MADBのレーベル表記ゆれ(英字↔和名・略称↔正式名・中黒)や種2のクラスタ分裂で、1本の刊行runが複数の版タブに割れていた。楽天seriesName・MADBのシリーズ容器ID(schema:isPartOf)・ISBN連番・刊行リストで同一runと確認できた分だけ、既存の巻を版間で移して統合した(調査エージェント+反証エージェントの二段で裁定)。巻・ISBN・発売日の新規追加や改変はしていない。 / ★2026-08-30 ユーザ報告「巻抜け・前に対応したのにまた抜けた」の是正。1本のプリンセス・コミックス(全39巻)が「通常版(1-19)」と「PRINCESS COMICS(20-39)」の2タブに割れていた(和名↔英名の表記ゆれ=ARMS型)。ja.wikipedia が「このリストの単行本とは**プリンセス・コミックス基準**」「電子配信版プリンセス・コミックス**既刊39巻**」と明記し、19巻(1988・小銭王ジェイムズI世伝)→20巻(1995・ノスフェラトゥ)は**7年の連載中断**を挟むだけの同一run。ISBNも 9784253071277(19巻) → 9784253071284(20巻) と連番。よって1版へ統合し1-39巻とした。 ★同時に、PRINCESS COMICS側にあった **ISBN無しの幽霊7巻(1982-07)** を落とした(通常版の実7巻 9784253071154 1982-07-05 の重複。実体は残るので消失しない)。★2026-08-28のARMS掃引がこの頁を拾えなかったのは、この幽霊7巻が「巻番号が重複する=別run」と判定させていたため。検出器側も是正した。'
 volumes:
 - number: 1
   isbn13: '9784253071093'
@@ -64,74 +64,67 @@ volumes:
 - number: 19
   isbn13: '9784253071277'
   release_date: 1988-11
+- number: 20
+  isbn13: '9784253071284'
+  release_date: 1996-08
+- number: 21
+  isbn13: '9784253071291'
+  release_date: 1997-03
+- number: 22
+  isbn13: '9784253071307'
+  release_date: 1997-11
+- number: 23
+  isbn13: '9784253071314'
+  release_date: 1998-06
+- number: 24
+  isbn13: '9784253071321'
+  release_date: '1999-01-20'
+- number: 25
+  isbn13: '9784253074605'
+  release_date: '1999-07-20'
+- number: 26
+  isbn13: '9784253074612'
+  release_date: '2000-10-20'
+- number: 27
+  isbn13: '9784253074629'
+  release_date: 2002-01
+- number: 28
+  isbn13: '9784253074773'
+  release_date: '2003-04-15'
+- number: 29
+  isbn13: '9784253074803'
+  release_date: '2003-12-20'
+- number: 30
+  isbn13: '9784253074810'
+  release_date: '2004-05-20'
+- number: 31
+  isbn13: '9784253194518'
+  release_date: '2005-03-15'
+- number: 32
+  isbn13: '9784253194525'
+  release_date: '2005-10-15'
+- number: 33
+  isbn13: '9784253194532'
+  release_date: '2006-07-15'
+- number: 34
+  isbn13: '9784253194549'
+  release_date: '2007-01-15'
+- number: 35
+  isbn13: '9784253194556'
+  release_date: '2009-06-30'
+- number: 36
+  isbn13: '9784253194563'
+  release_date: '2010-02-28'
+- number: 37
+  isbn13: '9784253194570'
+  release_date: '2010-12-30'
+- number: 38
+  isbn13: '9784253194587'
+  release_date: 2011-08
+- number: 39
+  isbn13: '9784253194594'
+  release_date: '2012-08-30'
 extra_editions:
-- type: shinsoban
-  label: PRINCESS COMICS
-  imprint: PRINCESS COMICS
-  publisher: 秋田書店
-  volumes:
-  - number: 7
-    release_date: 1982-07
-  - number: 20
-    isbn13: '9784253071284'
-    release_date: 1996-08
-  - number: 21
-    isbn13: '9784253071291'
-    release_date: 1997-03
-  - number: 22
-    isbn13: '9784253071307'
-    release_date: 1997-11
-  - number: 23
-    isbn13: '9784253071314'
-    release_date: 1998-06
-  - number: 24
-    isbn13: '9784253071321'
-    release_date: '1999-01-20'
-  - number: 25
-    isbn13: '9784253074605'
-    release_date: '1999-07-20'
-  - number: 26
-    isbn13: '9784253074612'
-    release_date: '2000-10-20'
-  - number: 27
-    isbn13: '9784253074629'
-    release_date: 2002-01
-  - number: 28
-    isbn13: '9784253074773'
-    release_date: '2003-04-15'
-  - number: 29
-    isbn13: '9784253074803'
-    release_date: '2003-12-20'
-  - number: 30
-    isbn13: '9784253074810'
-    release_date: '2004-05-20'
-  - number: 31
-    isbn13: '9784253194518'
-    release_date: '2005-03-15'
-  - number: 32
-    isbn13: '9784253194525'
-    release_date: '2005-10-15'
-  - number: 33
-    isbn13: '9784253194532'
-    release_date: '2006-07-15'
-  - number: 34
-    isbn13: '9784253194549'
-    release_date: '2007-01-15'
-  - number: 35
-    isbn13: '9784253194556'
-    release_date: '2009-06-30'
-  - number: 36
-    isbn13: '9784253194563'
-    release_date: '2010-02-28'
-  - number: 37
-    isbn13: '9784253194570'
-    release_date: '2010-12-30'
-  - number: 38
-    isbn13: '9784253194587'
-    release_date: 2011-08
-  - number: 39
-    isbn13: '9784253194594'
-    release_date: '2012-08-30'
 - type: bunkobon
   label: 秋田文庫
   imprint: 秋田文庫

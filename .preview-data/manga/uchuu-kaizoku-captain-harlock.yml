@@ -43,6 +43,11 @@ editions:
     isbn13: '9784253063654'
     cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/3654/9784253063654.jpg?_ex=300x300
     release_date: 1978-05
+  - number: 4
+    asin: null
+    isbn13: '9784253063661'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/3661/9784253063661.jpg?_ex=300x300
+    release_date: '1978-11-15'
   - number: 5
     asin: null
     isbn13: '9784253063678'
@@ -160,30 +165,5 @@ editions:
     isbn13: '9784253189958'
     cover_url: null
     release_date: 2004-01
-- type: shinsoban
-  label: SUNDAY COMICS
-  publisher: 秋田書店
-  imprint: SUNDAY COMICS
-  volumes:
-  - number: 1
-    asin: null
-    isbn13: null
-    cover_url: null
-    release_date: '1977-11-20'
-  - number: 2
-    asin: null
-    isbn13: null
-    cover_url: null
-    release_date: '1978-01-05'
-  - number: 3
-    asin: null
-    isbn13: null
-    cover_url: null
-    release_date: '1978-05-10'
-  - number: 4
-    asin: null
-    isbn13: '9784253063661'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/3661/9784253063661.jpg?_ex=300x300
-    release_date: '1978-11-15'
 publishers:
 - akita

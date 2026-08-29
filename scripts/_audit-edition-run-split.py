@@ -9,6 +9,8 @@
 判定(名前を一切見ない):
   同一頁の2版が
    ①出版社が一致(またはISBN出版者記号が共通) ②巻番号が重複しない
+     ★②の重複判定は **ISBNを持つ巻だけ**で行う(2026-08-30)。ISBN無しの幽霊巻が1つ在るだけで
+       1本のrunが「別run」と判定され、分裂が丸ごと隠れる(エロイカより愛をこめて=20巻ぶんが不可視だった)。
    ③合わせると連番になる(欠番なし) ④合わせて巻順に並べると発売日が単調増加
   を全て満たす = 1本の刊行runが2つに割れている強い疑い。
   ★新装版/復刻版は巻番号が重複するか日付が単調にならないので、この4条件でほぼ落ちる。
@@ -60,6 +62,18 @@ def main() -> None:
             ib = {(v.get("isbn13") or "")[:8] for v in vb if v.get("isbn13")}
             if not ((pa and pa == pb) or (ia and ib and (ia & ib))):
                 continue
+            # ★幽霊巻(ISBN無し)は重複判定から外す(2026-08-30 エロイカより愛をこめてで実踏)。
+            #   PRINCESS COMICS側にISBN無しの「7巻」が1つ在っただけで、通常版(1-19)と
+            #   PRINCESS COMICS(20-39)という**全39巻の1本のrun**が「巻番号が重複=別run」と
+            #   判定され、20巻ぶんの分裂が丸ごと見えなくなっていた。
+            #   promote の種4マージも同じ考え方(ISBNの無い行は番号を占有しない)。
+            iso_a = {v["number"] for v in va if v.get("isbn13")}
+            iso_b = {v["number"] for v in vb if v.get("isbn13")}
+            ghosts = [v for v in va if not v.get("isbn13") and v["number"] in iso_b] +                      [v for v in vb if not v.get("isbn13") and v["number"] in iso_a]
+            va = [v for v in va if v.get("isbn13") or v["number"] not in iso_b]
+            vb = [v for v in vb if v.get("isbn13") or v["number"] not in iso_a]
+            if not va or not vb:
+                continue
             na = [v["number"] for v in va]
             nb = [v["number"] for v in vb]
             if set(na) & set(nb):
@@ -76,7 +90,8 @@ def main() -> None:
                 continue
             tier = "A" if nk(a.get("imprint")) == nk(b.get("imprint")) else "B"
             rows.append((tier, os.path.basename(p)[:-4], d.get("title") or "",
-                         a.get("imprint") or "(空)", str(na), b.get("imprint") or "(空)", str(nb)))
+                         a.get("imprint") or "(空)", str(na), b.get("imprint") or "(空)", str(nb),
+                         str([v["number"] for v in ghosts]) if ghosts else ""))
     rows.sort()
     dst = os.path.join(ROOT, "docs", "production-diagnostics", "edition-run-split.tsv")
     with io.open(dst, "w", encoding="utf-8") as f:
