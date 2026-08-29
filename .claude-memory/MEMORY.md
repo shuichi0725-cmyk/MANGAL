@@ -7,6 +7,7 @@
 - [【番人】検索スナップショットゲート](search_snapshot_gate.md) — 固定コーパスで件数/表示順/tierを焼く。機能蒸留の前検査に組込済 ／ [検索が遅い実測内訳](search_perf_hotspots_2026_08.md) — カナ数詞fold 86%/alt到着で全再構築/巨大単一タスク。是正済 ／ [軽量索引=検索v2/本番軽量化v2(配列化)](lightweight_index_architecture.md) — 検索索引廃止・authorsパック・索引51→26MB{f,d}配列・共通デコーダ(_idx_authors.py/listIndexDecode.ts)必須
 - [【✅】死蔵検索索引11.3MB=廃止済](dead_search_index_retire_pending.md) — 2026-08-03全撤去。残=次回週次でR2実体削除 ／ [【厳守】索引形式変更=ファイル名バンプ](index_format_change_versioned_filename.md) — 同名で契約変更禁止。旧ファイルは残す ／ [【計画】本番軽量化(索引スリム)](index_lightening_plan.md) — Kobo完走後再生成
 - [【再発厳禁】キャッシュが修正を隠した事故](deploy_cache_swr_hid_the_fix.md) — HTMLのSWRでデプロイが1回遅れ、直った物を誤診。届いたか先に確認 ／ [/browse がサーバ描画0だった(白紙+SEO)](browse_ssr_shell_and_seo.md) — Suspense fallback=null が本文を捨てていた。静的シェルで是正
+- [【型】コミック頁に原作ラノベ/本編が混入](novel_in_manga_page.md) — 入口=柱⑨の帯救済。ゲート追加済+事後検出器あり
 - [【宿題】著者誤混入=巻書誌に出ない著者](author_not_in_volumes_audit.md) — 8,680件。メカドックだけ是正済、残りは未着手 ／ [【8件是正済・残226】解説者が著者欄に混入](author_kaisetsu_contamination.md) — 新検出器=1冊の書誌にだけ出る著者。集英社文庫と水木大全集が二大発生源
 - [【必ず使う】統合台帳](intake_manifest_ledger_live.md) — data/seeds/intake-manifest/=操作集約+holes。新cleanup前に参照
 - [NDL漫画判定=NDC726.1](ndl_manga_filter_ndc726.md) — 権威判定。小説/画集/雑誌除外 ／ [【厳守】NDL=1.2秒/req](ndl_access_rate_method.md) — burst=429/IP遮断実踏。discovery=_ndl-discovery.py ／ [NDL discoveryの非漫画偽陽性](ndl_discovery_nonmanga_false_positives.md) — caption/著者で漫画性検証 ／ [NDL非漫画一掃の罠](ndl_nonmanga_sweep.md) — 混在本(ファンブックに漫画等)注意

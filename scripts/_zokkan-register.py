@@ -13,6 +13,10 @@
   ⑤SRC実在(data/manga or source-pages。preorder頁=種4経路が効かない層は見送り)
   ⑥種2キー結線 = 頁の既存ISBN→db-v2逆引き(解決不可=canonical結線頁の疑い→見送り報告)
 
+★著者/小説の判定は**収集側**(_check-recent-ongoing-volumes.py)が持つ(ここには楽天のauthorが来ない)。
+  2026-08-29に「原作者名義のみ=原作小説の疑い」ゲートを収集側へ追加した。
+  それ以前に登録された分は scripts/_audit-novel-in-manga-page.py で事後検出する。
+
 出力: 種4(volumes-supplement.yml)純粋追加 + volume-gaps-changelog.jsonl + .cache/zokkan-stems.txt
 反映: reflect --only を .cache/zokkan-stems.txt から~170個ずつチャンク(コマンドライン長制限)。
 usage: python scripts/_zokkan-register.py [--apply]   (無印=dry-run)

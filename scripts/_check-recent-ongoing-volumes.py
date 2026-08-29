@@ -12,6 +12,10 @@
   ② same_series ゲート     … 「白竜」に対する「白竜HADOU」等の続編シリーズを弾く
   ③ セット/合本/分冊版 除外  … 既刊の詰め合わせ・電子の話売りを弾く
   ④ 著者一致ゲート          … 同名別作を弾く
+  ⑤ 原作者名義のみゲート     … ★2026-08-29追加。 候補の著者が**全員 原作者**(作画者が1人も居ない)なら
+                            小説の疑いとして弾く。 ①のsizeゲートと④の著者ゲートは
+                            **帯救済(ISBN出版者記号一致)**で貫通するが、原作小説は同じ版元から出るので
+                            帯では区別できなかった(断罪された悪役令嬢の9巻=原作ラノベ が通ってしまった)。
 
 出力2種:
   TRAIL = 当方最大巻より大きい巻が実在(末尾の取りこぼし)
@@ -55,6 +59,58 @@ L = C.L
 import re as _re
 
 _PAREN = _re.compile(r"[(（][^)）]{1,12}[)）]")
+# 楽天の著者欄の区切り(「原作者/作画者」形式)
+_AUSPLIT = _re.compile(r"[/／、,，・･]| ")
+
+
+_ORIG_CACHE = {}
+
+
+def _orig_authors_of(slug):
+    """頁の original_authors を読む(queueに無い時のfallback)。"""
+    if slug in _ORIG_CACHE:
+        return _ORIG_CACHE[slug]
+    out = []
+    p = ROOT / "data" / "manga.v2" / f"{slug}.yml"
+    if slug and p.exists():
+        try:
+            import yaml as _y
+            d = _y.safe_load(p.open(encoding="utf-8")) or {}
+            out = [a.get("name") for a in (d.get("original_authors") or []) if a.get("name")]
+        except Exception:
+            out = []
+    _ORIG_CACHE[slug] = out
+    return out
+
+
+def novel_suspect(row, author_str):
+    """★原作小説の巻を続刊と誤認しないゲート (2026-08-29 新設)。
+
+    実害: 「断罪された悪役令嬢は、逆行して完璧な悪女を目指す」の9巻枠に**原作ラノベ**が入った
+      (ユーザ報告「9巻だけラノベ汚染」)。原因は下の**帯救済**=「ISBN出版者記号が一致すれば
+      著者不一致でも通す(作画交代型の救済)」で、小説は同じ版元から出るので帯が一致してしまう。
+
+    判定: 頁が**原作者と作画者を別々に**持つ時、候補の著者欄に載っている人が
+      **全員が原作者**(=作画者が1人も居ない)なら小説の疑い → 帯が一致しても通さない。
+      ★作画交代型は「原作者 + **新しい**作画者」の2名以上になるので、このゲートには当たらない。
+    """
+    ors = row.get("orig_authors")
+    if ors is None:
+        # ★旧queue(2026-08-29以前に --build-queue した .cache/recent-ongoing.json)は
+        #   orig_authors を持たない。 queue再算出を待たずに効かせるため頁から読み直す。
+        ors = _orig_authors_of(row.get("slug"))
+        row["orig_authors"] = ors
+    ors = [x for x in (ors or []) if x]
+    aus = [x for x in (row.get("authors") or []) if x]
+    if not ors or not aus:
+        return False
+    if C.author_ok(aus, author_str):
+        return False                     # 作画者が載っている = 正常
+    names = [n for n in _AUSPLIT.split(str(author_str or "")) if n.strip()]
+    if not names:
+        return False
+    # 載っている人が全員「原作者」なら小説疑い
+    return all(C.author_ok(ors, n) for n in names)
 
 
 def strip_paren(s):
@@ -113,7 +169,9 @@ def build_queue():
         if not vols:
             continue
         aus = [a.get("name") for a in (d.get("authors") or []) if a.get("name")]
-        rows.append({"slug": slug, "title": title, "authors": aus,
+        # ★原作者(2026-08-29): 原作小説の巻を続刊と誤認しないゲート用。 [[novel_in_manga_page]]
+        ors = [a.get("name") for a in (d.get("original_authors") or []) if a.get("name")]
+        rows.append({"slug": slug, "title": title, "authors": aus, "orig_authors": ors,
                      "vols": sorted(vols), "last_year": max(years) if years else "",
                      "bands": sorted(bands), "isbns": sorted(isbns)})
     if OUT.exists():
@@ -187,7 +245,11 @@ def main():
                 band_ok = bool(bands) and ib[:8] in bands
                 size = str(it.get("size") or "")
                 why = None
-                if size != "コミック" and not (size == "単行本" and band_ok):
+                if novel_suspect(r, au):
+                    # ★帯救済より前に置く(帯一致でも通さない)。 小説は同じ版元から出るため
+                    #   帯だけでは原作小説と作画交代を区別できない(2026-08-29 断罪…で実踏)。
+                    why = f"原作者名義のみ({au[:16]})"
+                elif size != "コミック" and not (size == "単行本" and band_ok):
                     why = f"size({size})"        # ★帯一致の単行本は救済(B6判コミックス型)
                 elif not C.author_ok(r["authors"], au) and not band_ok:
                     why = f"著者({au[:16]})"      # ★帯一致なら著者不一致でも通す(作画交代型)

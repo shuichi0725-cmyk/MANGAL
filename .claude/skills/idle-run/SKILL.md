@@ -18,7 +18,7 @@ python scripts/_material-harvest.py wiki-fetch --limit 500  # ⑤素材ハーベ
 python scripts/_anilist-delta.py   # ⑥AniList鮮度維持(直近更新~5,000件回収・~5分で自然停止・★セッション1回のみ)
 python scripts/_voldesc-material.py --recheck-nomaterial 300   # ⑦巻説明・材料なし台帳のlive再照会救済(偽陰性~10%回収・冪等・逐次保存・429はbackoff吸収。詳細=skill volume-desc)
 python scripts/_kana-digit-harvest.py --limit 30   # ⑧数字kana素材(フリガナに数字が残る~528頁のwiki+楽天live読み収集)
-python scripts/_check-recent-ongoing-volumes.py --limit 200   # ⑨続巻逆照合(連載中頁→楽天題検索。★2026-08-05巻抜け教訓4点移植済=剥き題/truncatedプローブ/帯救済/near記録)
+python scripts/_check-recent-ongoing-volumes.py --limit 200   # ⑨続巻逆照合(連載中頁→楽天題検索。★2026-08-05巻抜け教訓4点移植済=剥き題/truncatedプローブ/帯救済/near記録。★2026-08-29「原作者名義のみ=原作小説」ゲート追加=帯救済の穴を封鎖)
 python scripts/_placeholder-cover-refresh.py --all   # ⑩仮書影→実物の差し替え(★--all=queueが尽きるまで自走・再起動不要 2026-08-04。詳細=skill placeholder-cover-refresh)
 python scripts/_kobo-color-harvest.py --delta   # ⑪カラー版差分(Kobo新着だけ追記・数分で自然停止・詳細=skill color-editions)
 ```
