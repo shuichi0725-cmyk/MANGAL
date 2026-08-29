@@ -1,0 +1,31 @@
+slug: dogs-sato-2023
+canonical_label: 通常版
+canonical_publisher: 大洋図書
+canonical_imprint: H＆C Comics CRAFTシリーズ
+suppress_types: []
+source: '★2026-08-29 新設。ユーザ発見の「巻番号でなく語で区切られた続巻」型(マショウのあほすたさんW)の掃引で
+  FIT_GAP として浮上し、per-caseで裏取りしたところ**2巻が丸ごと欠落**していた。
+  裏取り= NDL SRU(creator="里つばめ" AND title="Dogs" 全4件) + 楽天books。
+  NDLの叢書番号が 81 → 105 → 135 → 136 と単調で、ISBNも 31352 → 32328 → 33646 → 33653 と連番。
+  ①2巻『Dogs infight』(9784813032328 / 2019-07)は種2に別series(sid58465・number=0)として切り出され、
+  本番のどの頁にも出ていなかった。
+  ②3巻『Dogs : dog eat dog 上』(9784813033646)は種2 sid131118 に在ったが、頁は同sidの「下」だけを
+  巻3として取り込み、上は本番のどこにも出ていなかった。
+  ③その「下」は種2で number=3(上=1/下=3 の上下分冊型の誤番号)だったため、4巻へ是正した。
+  巻題はNDL/楽天の書名どおり volume_label に入れた。発売日は楽天の実発売日。'
+volumes:
+- number: 1
+  isbn13: '9784813031352'
+  release_date: '2016-12-01'
+- number: 2
+  isbn13: '9784813032328'
+  release_date: '2019-07-01'
+  volume_label: infight
+- number: 3
+  isbn13: '9784813033646'
+  release_date: '2023-11-01'
+  volume_label: dog eat dog(上)
+- number: 4
+  isbn13: '9784813033653'
+  release_date: '2023-11-01'
+  volume_label: dog eat dog(下)
