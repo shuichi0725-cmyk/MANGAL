@@ -42621,3 +42621,15 @@ volumes:
   source: rakuten-cache-local
   added_at: '2026-08-29'
   note: 同上=真の2巻。楽天books「バードBLACK　MARKET（2）」2017-09-01。3巻(9784801961814)以降と連番
+- series_keys:
+  - qid:Q111111979|name:マショウのあほすたさん
+  number: 2
+  isbn13: '9784776991809'
+  release_date: 2020-03
+  publisher: 三和出版
+  edition_type: standard
+  volume_label: W(ういんぐ)
+  title_display: マショウのあほすたさんW (ういんぐ)
+  source: ndl
+  added_at: '2026-08-29'
+  note: 'ユーザ指摘「2巻ではなくWなので抜けたと思われ」。2巻にあたる本の題が「マショウのあほすたさんW (ういんぐ)」で**巻番号を持たない**ため、種2が別seriesとして切り出し(sid120744・number=0・日付なし)、親頁に合流しなかった。ユーザ提供のNDL TSV: 978-4-7769-9180-9 / 三和出版 Sanwa comics / あほすたさん著 / 2020.3。ISBNも 9141-0(1巻2018-10) → 9180-9(W) → 9209-7(3巻2021-12) と同一帯で単調。'
