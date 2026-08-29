@@ -1,0 +1,152 @@
+rule	family	now_severity	should_be	slug	ed_idx	date	n	why
+A_RK_MONTH_BOUNDARY	date-outlier	確実	要確認	captain	3	2010-04	4	楽天の散りが隣接月のみ(RAKUTEN_SPREAD(2種:2010-03,2010-04))でDBの月もその範囲内=月末発売の翌月表記。確実の根拠にならない
+A_RK_MONTH_BOUNDARY	date-outlier	確実	要確認	mitsumegatooru	3	2012-06	4	楽天の散りが隣接月のみ(RAKUTEN_SPREAD(2種:2012-05,2012-06))でDBの月もその範囲内=月末発売の翌月表記。確実の根拠にならない
+A_RK_MONTH_BOUNDARY	date-outlier	確実	要確認	samurai-giants	3	2002-04	4	楽天の散りが隣接月のみ(RAKUTEN_SPREAD(2種:2002-03,2002-04))でDBの月もその範囲内=月末発売の翌月表記。確実の根拠にならない
+A_RK_MONTH_BOUNDARY	date-outlier	確実	要確認	taiman-buruusu	0	1993-12	7	楽天の散りが隣接月のみ(RAKUTEN_SPREAD(2種:1993-11,1993-12))でDBの月もその範囲内=月末発売の翌月表記。確実の根拠にならない
+A_RK_MONTH_BOUNDARY	date-outlier	確実	要確認	taraobannai	1	1997-12	4	楽天の散りが隣接月のみ(RAKUTEN_SPREAD(2種:1997-11,1997-12))でDBの月もその範囲内=月末発売の翌月表記。確実の根拠にならない
+B_PRECISION_MULTI	date-outlier	要確認	情報	death-hunter	0	1971	1	1971年=当時のMADB記録の粒度(年のみ)であって値の異常でない
+B_PRECISION_MULTI	date-outlier	要確認	情報	dororo	2	1976	1	1976年=当時のMADB記録の粒度(年のみ)であって値の異常でない
+B_PRECISION_MULTI	date-outlier	要確認	情報	kamui-den	0	1967	1	同一版に年のみ巻が3件=detailの『この巻だけ』が事実に反する / 1967年=当時のMADB記録の粒度(年のみ)であって値の異常でない
+B_PRECISION_MULTI	date-outlier	要確認	情報	kamui-den	0	1968	1	同一版に年のみ巻が3件=detailの『この巻だけ』が事実に反する / 1968年=当時のMADB記録の粒度(年のみ)であって値の異常でない
+B_PRECISION_MULTI	date-outlier	要確認	情報	kamui-den	0	1968	1	同一版に年のみ巻が3件=detailの『この巻だけ』が事実に反する / 1968年=当時のMADB記録の粒度(年のみ)であって値の異常でない
+B_PRECISION_MULTI	date-outlier	要確認	情報	muyounosuke	5	1976	1	同一版に年のみ巻が2件=detailの『この巻だけ』が事実に反する / 1976年=当時のMADB記録の粒度(年のみ)であって値の異常でない
+B_PRECISION_MULTI	date-outlier	要確認	情報	muyounosuke	5	1976	1	同一版に年のみ巻が2件=detailの『この巻だけ』が事実に反する / 1976年=当時のMADB記録の粒度(年のみ)であって値の異常でない
+B_PRECISION_MULTI	date-outlier	要確認	情報	norainu-no-oka	0	1971	1	1971年=当時のMADB記録の粒度(年のみ)であって値の異常でない
+B_PRECISION_MULTI	date-outlier	要確認	情報	sabu-to-ichi-torimonohikae	1	1972	1	1972年=当時のMADB記録の粒度(年のみ)であって値の異常でない
+B_PRECISION_MULTI	date-outlier	要確認	情報	sanada-juuyuushi	0	1975	1	同一版に年のみ巻が2件=detailの『この巻だけ』が事実に反する / 1975年=当時のMADB記録の粒度(年のみ)であって値の異常でない
+B_PRECISION_MULTI	date-outlier	要確認	情報	sanada-juuyuushi	0	1975	1	同一版に年のみ巻が2件=detailの『この巻だけ』が事実に反する / 1975年=当時のMADB記録の粒度(年のみ)であって値の異常でない
+B_PRECISION_MULTI	date-outlier	要確認	情報	shiawase-san	0	1978	1	1978年=当時のMADB記録の粒度(年のみ)であって値の異常でない
+B_PRECISION_MULTI	date-outlier	要確認	情報	shiki-sentaro-1979	0	1983	1	同一版に年のみ巻が3件=detailの『この巻だけ』が事実に反する / 1983年=当時のMADB記録の粒度(年のみ)であって値の異常でない
+B_PRECISION_MULTI	date-outlier	要確認	情報	shiki-sentaro-1979	0	1983	1	同一版に年のみ巻が3件=detailの『この巻だけ』が事実に反する / 1983年=当時のMADB記録の粒度(年のみ)であって値の異常でない
+B_PRECISION_MULTI	date-outlier	要確認	情報	shiki-sentaro-1979	0	1983	1	同一版に年のみ巻が3件=detailの『この巻だけ』が事実に反する / 1983年=当時のMADB記録の粒度(年のみ)であって値の異常でない
+B_PRECISION_MULTI	date-outlier	要確認	情報	shounen-shoujo-jinbutsu-nippon-no-rekishi	0	1984	1	1984年=当時のMADB記録の粒度(年のみ)であって値の異常でない
+B_PRECISION_MULTI	date-outlier	要確認	情報	shouwa-gokudoushi	0	1974	1	同一版に年のみ巻が3件=detailの『この巻だけ』が事実に反する / 1974年=当時のMADB記録の粒度(年のみ)であって値の異常でない
+B_PRECISION_MULTI	date-outlier	要確認	情報	shouwa-gokudoushi	0	1974	1	同一版に年のみ巻が3件=detailの『この巻だけ』が事実に反する / 1974年=当時のMADB記録の粒度(年のみ)であって値の異常でない
+B_PRECISION_MULTI	date-outlier	要確認	情報	shouwa-gokudoushi	0	1974	1	同一版に年のみ巻が3件=detailの『この巻だけ』が事実に反する / 1974年=当時のMADB記録の粒度(年のみ)であって値の異常でない
+B_PRECISION_MULTI	date-outlier	要確認	情報	sign-wa-ui	4	1976	1	1976年=当時のMADB記録の粒度(年のみ)であって値の異常でない
+B_PRECISION_MULTI	date-outlier	要確認	情報	yuuyake-no-uta	0	1975	1	1975年=当時のMADB記録の粒度(年のみ)であって値の異常でない
+C_RK_CONFIRMS_SIMUL	date-bulk-registered	BROKEN	LOW	aikoku-sensou	0	1990-08-01	4	楽天が独立に1種類の日付を返しズレ0ヶ月=同日一斉刊行を外部が裏書き (1:1990年08月01日頃 2:1990年08月01日頃 3:1990年08月01日頃 4:1990年08月01日頃)
+C_RK_CONFIRMS_SIMUL	date-bulk-registered	BROKEN	LOW	banana-fish	1	1997-06	3	楽天が独立に1種類の日付を返しズレ-1ヶ月=同日一斉刊行を外部が裏書き (9:1997年05月16日頃 10:1997年05月16日頃 11:1997年05月16日頃)
+C_RK_CONFIRMS_SIMUL	date-bulk-registered	MED	LOW	bell-epoque	1	1998-04	3	楽天が独立に1種類の日付を返しズレ0ヶ月=同日一斉刊行を外部が裏書き (2:1998年04月 3:1998年04月 4:1998年04月)
+C_RK_CONFIRMS_SIMUL	date-bulk-registered	MED	LOW	bonobono	1	2003-01	5	楽天が独立に1種類の日付を返しズレ0ヶ月=同日一斉刊行を外部が裏書き (6:2003年01月 7:2003年01月 8:2003年01月 9:2003年01月 10:2003年01月)
+C_RK_CONFIRMS_SIMUL	date-bulk-registered	MED	LOW	e-s	0	2003-03	3	楽天が独立に1種類の日付を返しズレ0ヶ月=同日一斉刊行を外部が裏書き (1:2003年03月 2:2003年03月 3:2003年03月)
+C_RK_CONFIRMS_SIMUL	date-bulk-registered	MED	LOW	eikyuu-shimei-onegai-shimasu	0	2020-04-30	6	楽天が独立に1種類の日付を返しズレ0ヶ月=同日一斉刊行を外部が裏書き (1:2020年04月30日 2:2020年04月30日 3:2020年04月30日 4:2020年04月30日 5:2020年04月30日 )
+C_RK_CONFIRMS_SIMUL	date-bulk-registered	MED	LOW	glass-no-kamen	1	1994-03	3	楽天が独立に1種類の日付を返しズレ0ヶ月=同日一斉刊行を外部が裏書き (3:1994年03月 4:1994年03月 5:1994年03月)
+C_RK_CONFIRMS_SIMUL	date-bulk-registered	MED	LOW	hatenkou-yuugi	0	2002-09	3	楽天が独立に1種類の日付を返しズレ-1ヶ月=同日一斉刊行を外部が裏書き (1:2002年08月 2:2002年08月 3:2002年08月)
+C_RK_CONFIRMS_SIMUL	date-bulk-registered	MED	LOW	hitman-2013	0	2017-05-18	3	楽天が独立に1種類の日付を返しズレ0ヶ月=同日一斉刊行を外部が裏書き (3:2017年05月18日頃 4:2017年05月18日頃 5:2017年05月18日頃)
+C_RK_CONFIRMS_SIMUL	date-bulk-registered	MED	LOW	isshokenmei-hajime-hajime-kun	4	1990-07-27	4	楽天が独立に1種類の日付を返しズレ0ヶ月=同日一斉刊行を外部が裏書き (3:1990年07月27日頃 4:1990年07月27日頃 5:1990年07月27日頃 6:1990年07月27日頃)
+C_RK_CONFIRMS_SIMUL	date-bulk-registered	MED	LOW	joshi-joshikousei-girls-hai	1	2006-02	6	楽天が独立に1種類の日付を返しズレ-1ヶ月=同日一斉刊行を外部が裏書き (1:2006年01月 2:2006年01月 3:2006年01月 4:2006年01月 5:2006年01月 6:2006年01月)
+C_RK_CONFIRMS_SIMUL	date-bulk-registered	MED	LOW	kamigami-no-itadaki	2	2016-02-02	3	楽天が独立に1種類の日付を返しズレ0ヶ月=同日一斉刊行を外部が裏書き (1:2016年02月02日頃 2:2016年02月02日頃 3:2016年02月02日頃)
+C_RK_CONFIRMS_SIMUL	date-bulk-registered	MED	LOW	kimi-ni-aisarete-itakatta	0	2023-03	6	楽天が独立に1種類の日付を返しズレ-1ヶ月=同日一斉刊行を外部が裏書き (1:2023年02月20日 2:2023年02月20日 3:2023年02月20日 4:2023年02月20日 5:2023年02月20日 )
+C_RK_CONFIRMS_SIMUL	date-bulk-registered	MED	LOW	kyou-kara-city-hunter-2021	0	2020-04-01	5	楽天が独立に1種類の日付を返しズレ0ヶ月=同日一斉刊行を外部が裏書き (1:2020年04月01日 2:2020年04月01日 3:2020年04月01日 4:2020年04月01日 5:2020年04月01日)
+C_RK_CONFIRMS_SIMUL	date-bulk-registered	MED	LOW	marou-ou-reppuu-den	0	1994-04	3	楽天が独立に1種類の日付を返しズレ0ヶ月=同日一斉刊行を外部が裏書き (1:1994年04月 2:1994年04月 3:1994年04月)
+C_RK_CONFIRMS_SIMUL	date-bulk-registered	MED	LOW	mibu-gishiden	1	2014-04-17	4	楽天が独立に1種類の日付を返しズレ0ヶ月=同日一斉刊行を外部が裏書き (1:2014年04月17日頃 2:2014年04月17日頃 3:2014年04月17日頃 4:2014年04月17日頃)
+C_RK_CONFIRMS_SIMUL	date-bulk-registered	MED	LOW	mierundesu	0	2018-07	4	楽天が独立に1種類の日付を返しズレ0ヶ月=同日一斉刊行を外部が裏書き (1:2018年07月 2:2018年07月 3:2018年07月 4:2018年07月)
+C_RK_CONFIRMS_SIMUL	date-bulk-registered	HIGH	LOW	nekomeewaku	0	2007-10	5	楽天が独立に1種類の日付を返しズレ0ヶ月=同日一斉刊行を外部が裏書き (1:2007年10月 2:2007年10月 3:2007年10月 4:2007年10月 5:2007年10月)
+C_RK_CONFIRMS_SIMUL	date-bulk-registered	MED	LOW	netsuai-prince	0	2023-09-08	8	楽天が独立に1種類の日付を返しズレ0ヶ月=同日一斉刊行を外部が裏書き (13:2023年09月08日 14:2023年09月08日 15:2023年09月08日 16:2023年09月08日 17:2023年09)
+C_RK_CONFIRMS_SIMUL	date-bulk-registered	MED	LOW	netsuai-prince-oniichan-wa-kimi-ga-suki	0	2020-06-26	12	楽天が独立に1種類の日付を返しズレ0ヶ月=同日一斉刊行を外部が裏書き (1:2020年06月26日 2:2020年06月26日 3:2020年06月26日 4:2020年06月26日 5:2020年06月26日 )
+C_RK_CONFIRMS_SIMUL	date-bulk-registered	MED	LOW	nukarumi-no-shokutaku	0	2023-10-06	4	楽天が独立に1種類の日付を返しズレ0ヶ月=同日一斉刊行を外部が裏書き (2:2023年10月06日頃 3:2023年10月06日頃 4:2023年10月06日頃 5:2023年10月06日頃)
+C_RK_CONFIRMS_SIMUL	date-bulk-registered	MED	LOW	onmyouji	1	1999-07-17	3	楽天が独立に1種類の日付を返しズレ0ヶ月=同日一斉刊行を外部が裏書き (1:1999年07月 2:1999年07月 3:1999年07月)
+C_RK_CONFIRMS_SIMUL	date-bulk-registered	MED	LOW	onmyouji	1	1999-09-01	3	楽天が独立に1種類の日付を返しズレ-1ヶ月=同日一斉刊行を外部が裏書き (4:1999年08月 5:1999年08月 6:1999年08月)
+C_RK_CONFIRMS_SIMUL	date-bulk-registered	MED	LOW	oruchuban-ebichu	1	1997-07-17	4	楽天が独立に1種類の日付を返しズレ0ヶ月=同日一斉刊行を外部が裏書き (1:1997年07月17日頃 2:1997年07月17日頃 3:1997年07月17日頃 4:1997年07月17日頃)
+C_RK_CONFIRMS_SIMUL	date-bulk-registered	MED	LOW	pachipro-hyena	0	1999-09	7	楽天が独立に1種類の日付を返しズレ-1ヶ月=同日一斉刊行を外部が裏書き (1:1999年08月20日頃 2:1999年08月20日頃 3:1999年08月20日頃 4:1999年08月20日頃 5:1999年08月)
+C_RK_CONFIRMS_SIMUL	date-bulk-registered	MED	LOW	perman	0	2003-04	3	楽天が独立に1種類の日付を返しズレ-1ヶ月=同日一斉刊行を外部が裏書き (1:2003年03月 2:2003年03月 3:2003年03月)
+C_RK_CONFIRMS_SIMUL	date-bulk-registered	MED	LOW	princess	0	2003-01-01	5	楽天が独立に1種類の日付を返しズレ-1ヶ月=同日一斉刊行を外部が裏書き (1:2002年12月25日 2:2002年12月25日 3:2002年12月25日 4:2002年12月25日 5:2002年12月25日)
+C_RK_CONFIRMS_SIMUL	date-bulk-registered	MED	LOW	richou-suikoden	0	1989-11	6	楽天が独立に1種類の日付を返しズレ0ヶ月=同日一斉刊行を外部が裏書き (1:1989年11月 2:1989年11月 4:1989年11月 5:1989年11月 7:1989年11月 8:1989年11月)
+C_RK_CONFIRMS_SIMUL	date-bulk-registered	MED	LOW	sazae-san	0	1995-07	8	楽天が独立に1種類の日付を返しズレ0ヶ月=同日一斉刊行を外部が裏書き (16:1995年07月 17:1995年07月 18:1995年07月 19:1995年07月 27:1995年07月 28:1995年07)
+C_RK_CONFIRMS_SIMUL	date-bulk-registered	MED	LOW	sazae-san	0	1995-09	7	楽天が独立に1種類の日付を返しズレ0ヶ月=同日一斉刊行を外部が裏書き (20:1995年09月 21:1995年09月 22:1995年09月 23:1995年09月 24:1995年09月 25:1995年09)
+C_RK_CONFIRMS_SIMUL	date-bulk-registered	MED	LOW	sazae-san	0	1994-09	4	楽天が独立に1種類の日付を返しズレ0ヶ月=同日一斉刊行を外部が裏書き (1:1994年09月 2:1994年09月 44:1994年09月 45:1994年09月)
+C_RK_CONFIRMS_SIMUL	date-bulk-registered	MED	LOW	sazae-san	0	1995-02	4	楽天が独立に1種類の日付を返しズレ0ヶ月=同日一斉刊行を外部が裏書き (6:1995年02月 7:1995年02月 39:1995年02月 40:1995年02月)
+C_RK_CONFIRMS_SIMUL	date-bulk-registered	MED	LOW	sazae-san	0	1995-03	4	楽天が独立に1種類の日付を返しズレ0ヶ月=同日一斉刊行を外部が裏書き (8:1995年03月 9:1995年03月 37:1995年03月 38:1995年03月)
+C_RK_CONFIRMS_SIMUL	date-bulk-registered	MED	LOW	sazae-san	0	1995-04	4	楽天が独立に1種類の日付を返しズレ0ヶ月=同日一斉刊行を外部が裏書き (10:1995年04月 11:1995年04月 35:1995年04月 36:1995年04月)
+C_RK_CONFIRMS_SIMUL	date-bulk-registered	MED	LOW	sazae-san	0	1995-05	4	楽天が独立に1種類の日付を返しズレ0ヶ月=同日一斉刊行を外部が裏書き (12:1995年05月 13:1995年05月 33:1995年05月 34:1995年05月)
+C_RK_CONFIRMS_SIMUL	date-bulk-registered	MED	LOW	sazae-san	0	1995-06	4	楽天が独立に1種類の日付を返しズレ0ヶ月=同日一斉刊行を外部が裏書き (14:1995年06月 15:1995年06月 31:1995年06月 32:1995年06月)
+C_RK_CONFIRMS_SIMUL	date-bulk-registered	MED	LOW	shiawase-no-katachi	0	1992-02	3	楽天が独立に1種類の日付を返しズレ-1ヶ月=同日一斉刊行を外部が裏書き (1:1992年01月22日頃 2:1992年01月22日頃 3:1992年01月22日頃)
+C_RK_CONFIRMS_SIMUL	date-bulk-registered	MED	LOW	silent-m-bius	0	2001-01	3	楽天が独立に1種類の日付を返しズレ-1ヶ月=同日一斉刊行を外部が裏書き (13:2000年12月26日 14:2000年12月26日 15:2000年12月26日)
+C_RK_CONFIRMS_SIMUL	date-bulk-registered	MED	LOW	sore-ga-seiyuu	0	2015-07-08	3	楽天が独立に1種類の日付を返しズレ0ヶ月=同日一斉刊行を外部が裏書き (1:2015年07月08日頃 2:2015年07月08日頃 3:2015年07月08日頃)
+C_RK_CONFIRMS_SIMUL	date-bulk-registered	BROKEN	LOW	soukaikessen	0	2012-03	3	楽天が独立に1種類の日付を返しズレ0ヶ月=同日一斉刊行を外部が裏書き (5:2012年03月 6:2012年03月 7:2012年03月)
+C_RK_CONFIRMS_SIMUL	date-bulk-registered	MED	LOW	sousei-no-taiga	0	2024-03	11	楽天が独立に1種類の日付を返しズレ-1ヶ月=同日一斉刊行を外部が裏書き (1:2024年02月29日 2:2024年02月29日 3:2024年02月29日 4:2024年02月29日 5:2024年02月29日 )
+C_RK_CONFIRMS_SIMUL	date-bulk-registered	BROKEN	LOW	sprite-arimura-1995	0	1997-04-15	5	楽天が独立に1種類の日付を返しズレ0ヶ月=同日一斉刊行を外部が裏書き (2:1997年04月15日頃 3:1997年04月15日頃 4:1997年04月15日頃 5:1997年04月15日頃 6:1997年04月)
+C_RK_CONFIRMS_SIMUL	date-bulk-registered	HIGH	LOW	star-wars-1998	0	1998-05	4	楽天が独立に1種類の日付を返しズレ0ヶ月=同日一斉刊行を外部が裏書き (3:1998年05月 4:1998年05月 5:1998年05月 6:1998年05月)
+C_RK_CONFIRMS_SIMUL	date-bulk-registered	MED	LOW	taimashin	0	1999-07-29	8	楽天が独立に1種類の日付を返しズレ0ヶ月=同日一斉刊行を外部が裏書き (1:1999年07月29日頃 2:1999年07月29日頃 3:1999年07月29日頃 4:1999年07月29日頃 5:1999年07月)
+C_RK_CONFIRMS_SIMUL	date-bulk-registered	MED	LOW	the-morgue	1	2005-09	3	楽天が独立に1種類の日付を返しズレ0ヶ月=同日一斉刊行を外部が裏書き (1:2005年09月 2:2005年09月 3:2005年09月)
+C_RK_CONFIRMS_SIMUL	date-bulk-registered	MED	LOW	uryuudou-yumebanashi	0	2007-10	11	楽天が独立に1種類の日付を返しズレ0ヶ月=同日一斉刊行を外部が裏書き (1:2007年10月 2:2007年10月 3:2007年10月 4:2007年10月 5:2007年10月 6:2007年10月 7:20)
+C_RK_CONFIRMS_SIMUL	date-bulk-registered	MED	LOW	uryuudou-yumebanashi	1	2007-10	6	楽天が独立に1種類の日付を返しズレ0ヶ月=同日一斉刊行を外部が裏書き (1:2007年10月 2:2007年10月 3:2007年10月 4:2007年10月 5:2007年10月 6:2007年10月)
+C_RK_CONFIRMS_SIMUL	date-bulk-registered	MED	LOW	usagiotoko-toraotoko	0	2020-02-27	3	楽天が独立に1種類の日付を返しズレ0ヶ月=同日一斉刊行を外部が裏書き (1:2020年02月27日頃 2:2020年02月27日頃 3:2020年02月27日頃)
+C_RK_CONFIRMS_SIMUL	date-bulk-registered	MED	LOW	watashi-wa-shadow	0	2011-09	3	楽天が独立に1種類の日付を返しズレ0ヶ月=同日一斉刊行を外部が裏書き (4:2011年09月 5:2011年09月 6:2011年09月)
+C_RK_CONFIRMS_SIMUL	date-bulk-registered	MED	LOW	zone-00	0	2007-05-23	3	楽天が独立に1種類の日付を返しズレ0ヶ月=同日一斉刊行を外部が裏書き (1:2007年05月23日頃 2:2007年05月23日頃 3:2007年05月23日頃)
+D_PRE_SERIAL_BAD_YS	date-bulk-registered	BROKEN	別family(種3)	aikoku-sensou	0	1990-08-01	4	頁の最古巻=1989年 < year_started=2000 = 誤っているのは日付でなくyear_started。outlier側は同型をBEFORE_SERIES_STARTとして情報段に落としている
+E_DEGENERATE_ED_BATCH	date-bulk-registered	LOW	再検査	0man	1	2008-01	7	塊が版全体(n=7=ed_vols)なので ed_batch が自明に n と等しくなり降格が無条件発火。まとめ配本体質の証明になっていない
+E_DEGENERATE_ED_BATCH	date-bulk-registered	LOW	再検査	again	1	1976	5	塊が版全体(n=5=ed_vols)なので ed_batch が自明に n と等しくなり降格が無条件発火。まとめ配本体質の証明になっていない
+E_DEGENERATE_ED_BATCH	date-bulk-registered	LOW	再検査	ai-ga-mau-basho	0	1997-03-30	5	塊が版全体(n=5=ed_vols)なので ed_batch が自明に n と等しくなり降格が無条件発火。まとめ配本体質の証明になっていない
+E_DEGENERATE_ED_BATCH	date-bulk-registered	LOW	再検査	akatsuki-sentoutai	0	1971	5	塊が版全体(n=5=ed_vols)なので ed_batch が自明に n と等しくなり降格が無条件発火。まとめ配本体質の証明になっていない
+E_DEGENERATE_ED_BATCH	date-bulk-registered	LOW	再検査	alien-street	1	1995-12-19	4	塊が版全体(n=4=ed_vols)なので ed_batch が自明に n と等しくなり降格が無条件発火。まとめ配本体質の証明になっていない
+E_DEGENERATE_ED_BATCH	date-bulk-registered	LOW	再検査	arabesque-dai1bu	0	1975-06-20	4	塊が版全体(n=4=ed_vols)なので ed_batch が自明に n と等しくなり降格が無条件発火。まとめ配本体質の証明になっていない
+E_DEGENERATE_ED_BATCH	date-bulk-registered	LOW	再検査	asaki-yume-mishi	1	2001-08	7	塊が版全体(n=7=ed_vols)なので ed_batch が自明に n と等しくなり降格が無条件発火。まとめ配本体質の証明になっていない
+E_DEGENERATE_ED_BATCH	date-bulk-registered	LOW	再検査	dark-crimson	0	2010-10	4	塊が版全体(n=4=ed_vols)なので ed_batch が自明に n と等しくなり降格が無条件発火。まとめ配本体質の証明になっていない
+E_DEGENERATE_ED_BATCH	date-bulk-registered	LOW	再検査	finding-nemo	0	2004-01	4	塊が版全体(n=4=ed_vols)なので ed_batch が自明に n と等しくなり降格が無条件発火。まとめ配本体質の証明になっていない
+E_DEGENERATE_ED_BATCH	date-bulk-registered	LOW	再検査	fuji-santarou	2	1976	5	塊が版全体(n=5=ed_vols)なので ed_batch が自明に n と等しくなり降格が無条件発火。まとめ配本体質の証明になっていない
+E_DEGENERATE_ED_BATCH	date-bulk-registered	LOW	再検査	gakken-manga-new-sekai-no-rekishi	0	2016-02-23	12	塊が版全体(n=12=ed_vols)なので ed_batch が自明に n と等しくなり降格が無条件発火。まとめ配本体質の証明になっていない
+E_DEGENERATE_ED_BATCH	date-bulk-registered	LOW	再検査	hakaba-kitarou	0	1997-07-31	6	塊が版全体(n=6=ed_vols)なので ed_batch が自明に n と等しくなり降格が無条件発火。まとめ配本体質の証明になっていない
+E_DEGENERATE_ED_BATCH	date-bulk-registered	LOW	再検査	hanayoi-douchuu	1	2015-08-06	6	塊が版全体(n=6=ed_vols)なので ed_batch が自明に n と等しくなり降格が無条件発火。まとめ配本体質の証明になっていない
+E_DEGENERATE_ED_BATCH	date-bulk-registered	LOW	再検査	hi-no-matsuei	1	1996-04	5	塊が版全体(n=5=ed_vols)なので ed_batch が自明に n と等しくなり降格が無条件発火。まとめ配本体質の証明になっていない
+E_DEGENERATE_ED_BATCH	date-bulk-registered	LOW	再検査	hidarikiki-no-eren-nifuni-2020	0	2020-04-06	5	塊が版全体(n=5=ed_vols)なので ed_batch が自明に n と等しくなり降格が無条件発火。まとめ配本体質の証明になっていない
+E_DEGENERATE_ED_BATCH	date-bulk-registered	LOW	再検査	high-score-girl-continue	0	2016-07-25	5	塊が版全体(n=5=ed_vols)なので ed_batch が自明に n と等しくなり降格が無条件発火。まとめ配本体質の証明になっていない
+E_DEGENERATE_ED_BATCH	date-bulk-registered	LOW	再検査	hypno-travel	0	2007-10	5	塊が版全体(n=5=ed_vols)なので ed_batch が自明に n と等しくなり降格が無条件発火。まとめ配本体質の証明になっていない
+E_DEGENERATE_ED_BATCH	date-bulk-registered	LOW	再検査	idol-master-cinderella-girls-after-20	0	2026-08-14	4	塊が版全体(n=4=ed_vols)なので ed_batch が自明に n と等しくなり降格が無条件発火。まとめ配本体質の証明になっていない
+E_DEGENERATE_ED_BATCH	date-bulk-registered	LOW	再検査	idol-master-cinderella-girls-u-149	0	2026-08-14	4	塊が版全体(n=4=ed_vols)なので ed_batch が自明に n と等しくなり降格が無条件発火。まとめ配本体質の証明になっていない
+E_DEGENERATE_ED_BATCH	date-bulk-registered	LOW	再検査	jungle-shounen-jan-bangaihen	0	2000-08	3	塊が版全体(n=3=ed_vols)なので ed_batch が自明に n と等しくなり降格が無条件発火。まとめ配本体質の証明になっていない
+E_DEGENERATE_ED_BATCH	date-bulk-registered	LOW	再検査	kaiketsu-harimao	4	1976	5	塊が版全体(n=5=ed_vols)なので ed_batch が自明に n と等しくなり降格が無条件発火。まとめ配本体質の証明になっていない
+E_DEGENERATE_ED_BATCH	date-bulk-registered	LOW	再検査	kamuidendainibu	1	1999-06-26	10	塊が版全体(n=10=ed_vols)なので ed_batch が自明に n と等しくなり降格が無条件発火。まとめ配本体質の証明になっていない
+E_DEGENERATE_ED_BATCH	date-bulk-registered	LOW	再検査	kantouheiya	2	1996-07	4	塊が版全体(n=4=ed_vols)なので ed_batch が自明に n と等しくなり降格が無条件発火。まとめ配本体質の証明になっていない
+E_DEGENERATE_ED_BATCH	date-bulk-registered	LOW	再検査	kappa-no-sanpei	3	1975-10-12	8	塊が版全体(n=8=ed_vols)なので ed_batch が自明に n と等しくなり降格が無条件発火。まとめ配本体質の証明になっていない
+E_DEGENERATE_ED_BATCH	date-bulk-registered	LOW	再検査	kappa-no-sanpei	4	1993-10-22	8	塊が版全体(n=8=ed_vols)なので ed_batch が自明に n と等しくなり降格が無条件発火。まとめ配本体質の証明になっていない
+E_DEGENERATE_ED_BATCH	date-bulk-registered	LOW	再検査	karuizawa-syndrome	1	1995-01	5	塊が版全体(n=5=ed_vols)なので ed_batch が自明に n と等しくなり降格が無条件発火。まとめ配本体質の証明になっていない
+E_DEGENERATE_ED_BATCH	date-bulk-registered	LOW	再検査	kashimashi-house	1	2005-07	4	塊が版全体(n=4=ed_vols)なので ed_batch が自明に n と等しくなり降格が無条件発火。まとめ配本体質の証明になっていない
+E_DEGENERATE_ED_BATCH	date-bulk-registered	LOW	再検査	kawaite-sourou	0	1995-01	7	塊が版全体(n=7=ed_vols)なので ed_batch が自明に n と等しくなり降格が無条件発火。まとめ配本体質の証明になっていない
+E_DEGENERATE_ED_BATCH	date-bulk-registered	LOW	再検査	kimi-no-te-ga-sasayaiteiru	1	2000-09	5	塊が版全体(n=5=ed_vols)なので ed_batch が自明に n と等しくなり降格が無条件発火。まとめ配本体質の証明になっていない
+E_DEGENERATE_ED_BATCH	date-bulk-registered	LOW	再検査	kizuoibito	1	1995-01	8	塊が版全体(n=8=ed_vols)なので ed_batch が自明に n と等しくなり降格が無条件発火。まとめ配本体質の証明になっていない
+E_DEGENERATE_ED_BATCH	date-bulk-registered	LOW	再検査	klan	0	2012-02	3	塊が版全体(n=3=ed_vols)なので ed_batch が自明に n と等しくなり降格が無条件発火。まとめ配本体質の証明になっていない
+E_DEGENERATE_ED_BATCH	date-bulk-registered	LOW	再検査	let-goutokuji	1	1996-05-10	4	塊が版全体(n=4=ed_vols)なので ed_batch が自明に n と等しくなり降格が無条件発火。まとめ配本体質の証明になっていない
+E_DEGENERATE_ED_BATCH	date-bulk-registered	LOW	再検査	majo-tenshi	0	1979-07	5	塊が版全体(n=5=ed_vols)なので ed_batch が自明に n と等しくなり降格が無条件発火。まとめ配本体質の証明になっていない
+E_DEGENERATE_ED_BATCH	date-bulk-registered	LOW	再検査	manga-de-gakushuu-nippon-no-rekishi	0	2002-08-10	5	塊が版全体(n=5=ed_vols)なので ed_batch が自明に n と等しくなり降格が無条件発火。まとめ配本体質の証明になっていない
+E_DEGENERATE_ED_BATCH	date-bulk-registered	LOW	再検査	manga-de-nabigeeto	0	2001-04-05	5	塊が版全体(n=5=ed_vols)なので ed_batch が自明に n と等しくなり降格が無条件発火。まとめ配本体質の証明になっていない
+E_DEGENERATE_ED_BATCH	date-bulk-registered	LOW	再検査	manga-hyakunin-isshu-monogatari	0	2014-02-16	8	塊が版全体(n=8=ed_vols)なので ed_batch が自明に n と等しくなり降格が無条件発火。まとめ配本体質の証明になっていない
+E_DEGENERATE_ED_BATCH	date-bulk-registered	LOW	再検査	manga-saiensu	1	2004-02-13	8	塊が版全体(n=8=ed_vols)なので ed_batch が自明に n と等しくなり降格が無条件発火。まとめ配本体質の証明になっていない
+E_DEGENERATE_ED_BATCH	date-bulk-registered	LOW	再検査	me-o-tojite-daite	1	2003-01	5	塊が版全体(n=5=ed_vols)なので ed_batch が自明に n と等しくなり降格が無条件発火。まとめ配本体質の証明になっていない
+E_DEGENERATE_ED_BATCH	date-bulk-registered	LOW	再検査	minmin	1	1997-12-11	4	塊が版全体(n=4=ed_vols)なので ed_batch が自明に n と等しくなり降格が無条件発火。まとめ配本体質の証明になっていない
+E_DEGENERATE_ED_BATCH	date-bulk-registered	LOW	再検査	monogatari-yunbo-kun	0	2009-05	4	塊が版全体(n=4=ed_vols)なので ed_batch が自明に n と等しくなり降格が無条件発火。まとめ配本体質の証明になっていない
+E_DEGENERATE_ED_BATCH	date-bulk-registered	LOW	再検査	monokage-ni-ashibyoushi	1	1998-12	4	塊が版全体(n=4=ed_vols)なので ed_batch が自明に n と等しくなり降格が無条件発火。まとめ配本体質の証明になっていない
+E_DEGENERATE_ED_BATCH	date-bulk-registered	LOW	再検査	mononoke-ranchiki-wars	0	1994-02	4	塊が版全体(n=4=ed_vols)なので ed_batch が自明に n と等しくなり降格が無条件発火。まとめ配本体質の証明になっていない
+E_DEGENERATE_ED_BATCH	date-bulk-registered	LOW	再検査	mugibaa-no-shima	0	2017-11	4	塊が版全体(n=4=ed_vols)なので ed_batch が自明に n と等しくなり降格が無条件発火。まとめ配本体質の証明になっていない
+E_DEGENERATE_ED_BATCH	date-bulk-registered	LOW	再検査	muumin-no-bouken	0	1999-12	4	塊が版全体(n=4=ed_vols)なので ed_batch が自明に n と等しくなり降格が無条件発火。まとめ配本体質の証明になっていない
+E_DEGENERATE_ED_BATCH	date-bulk-registered	LOW	再検査	namuji	3	1994-05-20	5	塊が版全体(n=5=ed_vols)なので ed_batch が自明に n と等しくなり降格が無条件発火。まとめ配本体質の証明になっていない
+E_DEGENERATE_ED_BATCH	date-bulk-registered	LOW	再検査	netsuai-prince-oniichan-wa-kimi-ga-suki	2	2026-10-13	25	塊が版全体(n=25=ed_vols)なので ed_batch が自明に n と等しくなり降格が無条件発火。まとめ配本体質の証明になっていない
+E_DEGENERATE_ED_BATCH	date-bulk-registered	LOW	再検査	netsuai-prince-oniichan-wa-kimi-ga-suki	1	2023-09-08	19	塊が版全体(n=19=ed_vols)なので ed_batch が自明に n と等しくなり降格が無条件発火。まとめ配本体質の証明になっていない
+E_DEGENERATE_ED_BATCH	date-bulk-registered	LOW	再検査	nihonnorekishi	0	2016-10	20	塊が版全体(n=20=ed_vols)なので ed_batch が自明に n と等しくなり降格が無条件発火。まとめ配本体質の証明になっていない
+E_DEGENERATE_ED_BATCH	date-bulk-registered	LOW	再検査	nippon-no-rekishi-2015-9	0	2015-06-30	15	塊が版全体(n=15=ed_vols)なので ed_batch が自明に n と等しくなり降格が無条件発火。まとめ配本体質の証明になっていない
+E_DEGENERATE_ED_BATCH	date-bulk-registered	LOW	再検査	nyuuyooku-komachi	1	1997-02-12	4	塊が版全体(n=4=ed_vols)なので ed_batch が自明に n と等しくなり降格が無条件発火。まとめ配本体質の証明になっていない
+E_DEGENERATE_ED_BATCH	date-bulk-registered	LOW	再検査	ofurodemoyomerusarari-kun	0	2006-07-01	5	塊が版全体(n=5=ed_vols)なので ed_batch が自明に n と等しくなり降格が無条件発火。まとめ配本体質の証明になっていない
+E_DEGENERATE_ED_BATCH	date-bulk-registered	LOW	再検査	omocha-tachi-no-yume	1	1997-07-28	4	塊が版全体(n=4=ed_vols)なので ed_batch が自明に n と等しくなり降格が無条件発火。まとめ配本体質の証明になっていない
+E_DEGENERATE_ED_BATCH	date-bulk-registered	LOW	再検査	ouji-to-kojiki	0	2023-10-10	3	塊が版全体(n=3=ed_vols)なので ed_batch が自明に n と等しくなり降格が無条件発火。まとめ配本体質の証明になっていない
+E_DEGENERATE_ED_BATCH	date-bulk-registered	LOW	再検査	ps-genki-desu-shunpei	3	1999-06-22	9	塊が版全体(n=9=ed_vols)なので ed_batch が自明に n と等しくなり降格が無条件発火。まとめ配本体質の証明になっていない
+E_DEGENERATE_ED_BATCH	date-bulk-registered	LOW	再検査	retsupuu	1	2002-08-01	4	塊が版全体(n=4=ed_vols)なので ed_batch が自明に n と等しくなり降格が無条件発火。まとめ配本体質の証明になっていない
+E_DEGENERATE_ED_BATCH	date-bulk-registered	LOW	再検査	sabaku-no-maou	2	2012-08	10	塊が版全体(n=10=ed_vols)なので ed_batch が自明に n と等しくなり降格が無条件発火。まとめ配本体質の証明になっていない
+E_DEGENERATE_ED_BATCH	date-bulk-registered	LOW	再検査	saizensen	3	1983-07-08	4	塊が版全体(n=4=ed_vols)なので ed_batch が自明に n と等しくなり降格が無条件発火。まとめ配本体質の証明になっていない
+E_DEGENERATE_ED_BATCH	date-bulk-registered	LOW	再検査	sekigan-no-ryuu	0	1994-12-17	5	塊が版全体(n=5=ed_vols)なので ed_batch が自明に n と等しくなり降格が無条件発火。まとめ配本体質の証明になっていない
+E_DEGENERATE_ED_BATCH	date-bulk-registered	LOW	再検査	shiki	1	2001-08	11	塊が版全体(n=11=ed_vols)なので ed_batch が自明に n と等しくなり降格が無条件発火。まとめ配本体質の証明になっていない
+E_DEGENERATE_ED_BATCH	date-bulk-registered	LOW	再検査	shimakko	1	1975-09	4	塊が版全体(n=4=ed_vols)なので ed_batch が自明に n と等しくなり降格が無条件発火。まとめ配本体質の証明になっていない
+E_DEGENERATE_ED_BATCH	date-bulk-registered	LOW	再検査	shoichi	1	2021-06	24	塊が版全体(n=24=ed_vols)なので ed_batch が自明に n と等しくなり降格が無条件発火。まとめ配本体質の証明になっていない
+E_DEGENERATE_ED_BATCH	date-bulk-registered	LOW	再検査	sugiurashigeruondemandosenshuu	0	2009-02	5	塊が版全体(n=5=ed_vols)なので ed_batch が自明に n と等しくなり降格が無条件発火。まとめ配本体質の証明になっていない
+E_DEGENERATE_ED_BATCH	date-bulk-registered	LOW	再検査	sukuuru-days	1	1998-03-13	4	塊が版全体(n=4=ed_vols)なので ed_batch が自明に n と等しくなり降格が無条件発火。まとめ配本体質の証明になっていない
+E_DEGENERATE_ED_BATCH	date-bulk-registered	LOW	再検査	t-e-lawrence	1	1998-02	4	塊が版全体(n=4=ed_vols)なので ed_batch が自明に n と等しくなり降格が無条件発火。まとめ配本体質の証明になっていない
+E_DEGENERATE_ED_BATCH	date-bulk-registered	LOW	再検査	taiman-buruusu	0	1993-12	7	塊が版全体(n=7=ed_vols)なので ed_batch が自明に n と等しくなり降格が無条件発火。まとめ配本体質の証明になっていない
+E_DEGENERATE_ED_BATCH	date-bulk-registered	LOW	再検査	taraobannai	1	1997-12	4	塊が版全体(n=4=ed_vols)なので ed_batch が自明に n と等しくなり降格が無条件発火。まとめ配本体質の証明になっていない
+E_DEGENERATE_ED_BATCH	date-bulk-registered	LOW	再検査	tonda-couple	1	1994-10	10	塊が版全体(n=10=ed_vols)なので ed_batch が自明に n と等しくなり降格が無条件発火。まとめ配本体質の証明になっていない
+E_DEGENERATE_ED_BATCH	date-bulk-registered	LOW	再検査	umezu-kazuo-kowai-hon	2	2007-10	14	塊が版全体(n=14=ed_vols)なので ed_batch が自明に n と等しくなり降格が無条件発火。まとめ配本体質の証明になっていない
+E_DEGENERATE_ED_BATCH	date-bulk-registered	LOW	再検査	vampire	2	1988-03	4	塊が版全体(n=4=ed_vols)なので ed_batch が自明に n と等しくなり降格が無条件発火。まとめ配本体質の証明になっていない
+E_DEGENERATE_ED_BATCH	date-bulk-registered	LOW	再検査	watashi-o-tsuki-made-tsuretette	2	1995-07-10	4	塊が版全体(n=4=ed_vols)なので ed_batch が自明に n と等しくなり降格が無条件発火。まとめ配本体質の証明になっていない
+E_DEGENERATE_ED_BATCH	date-bulk-registered	LOW	再検査	yokohama-monogatari	1	1996-04-11	4	塊が版全体(n=4=ed_vols)なので ed_batch が自明に n と等しくなり降格が無条件発火。まとめ配本体質の証明になっていない
+E_DEGENERATE_ED_BATCH	date-bulk-registered	LOW	再検査	youkai-manga-de-tanoshii-koten	0	2016-02-23	5	塊が版全体(n=5=ed_vols)なので ed_batch が自明に n と等しくなり降格が無条件発火。まとめ配本体質の証明になっていない
+F_RK_STAGGERED_IN_LOW	date-bulk-registered	LOW	昇格候補	jungle-shounen-jan-bangaihen	0	2000-08	3	LOWだが楽天が3種以上を巻順単調増加で返す=本物の刊行列 (1:2000年06月30日 2:2000年07月 3:2000年08月)
+F_RK_STAGGERED_IN_LOW	date-bulk-registered	LOW	昇格候補	wata-no-kunihoshi	2	1994-06-22	4	LOWだが楽天が3種以上を巻順単調増加で返す=本物の刊行列 (1:1994年06月22日頃 2:1994年06月 3:1994年06月20日頃 4:1994年06月)

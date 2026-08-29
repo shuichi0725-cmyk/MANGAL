@@ -1,0 +1,102 @@
+class	severity	slug	title	isbn13	isbn_ok	n_rows	n_editions	numbers	ed_idx	ed_types	ed_labels	ed_imprints	release_dates	ed_overlap	flags	slot_conflict	note
+NUM_INFLATION	確実な破損	ginga-densetsu-weed	銀牙伝説Weed	9789784537100	0	17	1	43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59	0	standard	通常版	通常版	2007-01-12|2007-03-09|2007-05-10|2007-07-09|2007-09-07|2007-11-09|2008-01-11|2008-03-10|2008-05-10|2008-07-10|2008-09-08|2008-11-07|2008-12-08|2009-01-19|2009-03-09|2009-05-09|2009-07-09		ISBN_BAD,DATE_DIFF		ISBN自体が不正(チェックディジット/桁) ; 同一版の巻43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59に同じ本 = 巻数水増し
+NUM_INFLATION	確実な破損	shima-kousaku-zenshuu	島耕作全集	9784063647181	1	7	1	1,2,3,4,6,7,8	0	standard	通常版	弘兼憲史叢書	2008-05-15|2008-05		JOGE,DATE_DIFF		同一版の巻1,2,3,4,6,7,8に同じ本 = 巻数水増し
+NUM_INFLATION	確実な破損	bakemono-no-hanayome	バケモノの花嫁	9784861239113	1	2	1	1,2	0	standard	通常版	Tulle Comics	2021-12-17				同一版の巻1,2に同じ本 = 巻数水増し
+NUM_INFLATION	確実な破損	boku-wa-chikyuu-toutau	ぼくは地球と歌う	9784592214816	1	2	1	1,2	0	standard	通常版	花とゆめCOMICS	2016-02|2016-12		DATE_DIFF		同一版の巻1,2に同じ本 = 巻数水増し
+NUM_INFLATION	確実な破損	bokura-no-koi-to-seishun-no-subete-hokenshitsu-no-bokura	【僕らの恋と青春のすべて】保健室の僕ら	9784758022477	1	2	1	1,2	0	standard	通常版	Gateau comics	2021-06-15				同一版の巻1,2に同じ本 = 巻数水増し
+NUM_INFLATION	確実な破損	chocolat-no-mahou	ショコラの魔法	9784091348272	1	2	1	8,9	0	standard	通常版	ちゃおホラーコミックス	2012-12				同一版の巻8,9に同じ本 = 巻数水増し
+NUM_INFLATION	確実な破損	golgo-13	ゴルゴ13	9784845801275	1	2	1	127,129	0	standard	SPコミックス	SPコミックス	2003-01-05|2003-08-05		DATE_DIFF		同一版の巻127,129に同じ本 = 巻数水増し
+NUM_INFLATION	確実な破損	kenban-no-ue-no-caress	鍵盤の上のカレス	9784864363730	1	2	1	1,2	0	standard	通常版	Drap comics	2011-01|2012-12		DATE_DIFF		同一版の巻1,2に同じ本 = 巻数水増し
+NUM_INFLATION	確実な破損	kiss-de-goukaku	Kissで合格	9784088623559	1	2	1	2,3	0	standard	通常版	ユーコミックス	1996-10-23		JOGE		同一版の巻2,3に同じ本 = 巻数水増し
+NUM_INFLATION	確実な破損	koi-ga-michitara	恋が満ちたら	9784866535838	1	2	1	1,2	0	standard	通常版	drap COMICS DX	2021-12-02				同一版の巻1,2に同じ本 = 巻数水増し
+NUM_INFLATION	確実な破損	kudan-no-folklore	クダンノフォークロア	9784758022217	1	2	1	1,2	0	standard	通常版	Yurihime comics	2021-04				同一版の巻1,2に同じ本 = 巻数水増し
+NUM_INFLATION	確実な破損	kusattemo-neko-nanode	くさっても猫なので	9784065330104	1	2	1	2,3	0	standard	通常版	ヤンマガKC	2023-09-06		JOGE		同一版の巻2,3に同じ本 = 巻数水増し
+NUM_INFLATION	確実な破損	kuso-joushi-wa-yari-mederu-mono-to-kokoroeyo	クソ上司はヤリ愛でるものと心得よ	9784434295362	1	2	1	1,2	0	standard	通常版	Glanz BLcomics	2022-01-18				同一版の巻1,2に同じ本 = 巻数水増し
+NUM_INFLATION	確実な破損	nonnon-hiyori-remember	のんのんびよりりめんばー	9784046811615	1	2	1	1,2	0	standard	通常版	MFコミックス	2022-03-23				同一版の巻1,2に同じ本 = 巻数水増し
+NUM_INFLATION	確実な破損	off-stage-love-side	オフステージラブサイド	9784866537726	1	2	1	1,2	0	standard	通常版	drap COMICS DX	2023-12-04				同一版の巻1,2に同じ本 = 巻数水増し
+NUM_INFLATION	確実な破損	otokuyou-mainichi-kaa-san	お徳用毎日かあさん	9784620780108	1	2	1	7,8	0	standard	通常版		2015-08|2015-08-15		JOGE,DATE_DIFF		同一版の巻7,8に同じ本 = 巻数水増し
+NUM_INFLATION	確実な破損	romanshingu-saga	ロマンシング サ・ガ2	9784197900060	1	2	1	1,2	0	standard	通常版	トクマインターメデイアコミックス	1994-12-15|1995-01-15		DATE_DIFF		同一版の巻1,2に同じ本 = 巻数水増し
+NUM_INFLATION	確実な破損	samurai-deeper-kyo	SAMURAI DEEPER KYO	9784063636079	1	2	1	35,36	0	standard	通常版	SHONEN MAGAZINE COMICS	2005-12|2005-12-16		DATE_DIFF		同一版の巻35,36に同じ本 = 巻数水増し
+NUM_INFLATION	確実な破損	shinshin-agatte-nanbo-taichi-yo-nakuna	新々上ってなンボ!!太一よ泣くな	9784862256560	1	2	1	1,9	0	standard	通常版	キングシリーズ	2010-10|2010-10-15		DATE_DIFF		同一版の巻1,9に同じ本 = 巻数水増し
+NUM_INFLATION	確実な破損	shouta-no-sushi	将太の寿司	9784063121872	1	2	1	17,18	0	standard	講談社コミックス	講談社コミックス	1995-10-09|1996-01-13		DATE_DIFF		同一版の巻17,18に同じ本 = 巻数水増し
+NUM_INFLATION	確実な破損	shusse-no-hanamichi	出世の花道	9784910803005	1	2	1	1,2	0	standard	通常版	BLANKET	2022-09-16				同一版の巻1,2に同じ本 = 巻数水増し
+NUM_INFLATION	確実な破損	yadamon	ヤダモン	9784197700134	1	2	1	2,3	0	standard	通常版	アニメージュコミックス	1994-05-29|1994-06		DATE_DIFF		同一版の巻2,3に同じ本 = 巻数水増し
+NUM_INFLATION	確実な破損	yuukyuu-omega-sansankudo	有休オメガ三三九度	9784865896503	1	2	1	1,2	0	standard	通常版	Poe backs	2021-05				同一版の巻1,2に同じ本 = 巻数水増し
+NUM_INFLATION	確実な破損	zenryaku-onii-chan-wa-seijo-ni-narimashita	前略、お兄ちゃんは聖女になりました。	9784434377327	1	2	1	1,4	0	standard	通常版	Glanz BLcomics	2026-07-17|2026-07-10		DATE_DIFF		同一版の巻1,4に同じ本 = 巻数水増し
+EDITION_DOUBLE	確実な破損	12-no-kekkon-monogatari	12の結婚物語	9784063198225	1	2	2	4	0,1	standard|deluxe	通常版|デラックス版	|KCデラックス	1997-07-11	100%			版まるごと複製(共有率100%)
+EDITION_DOUBLE	確実な破損	2001yamonogatari	2001夜物語	9784334901424	1	2	2	1	1,2	shinsoban	光文社コミック叢書「signal」|Signal special edition high-end	光文社コミック叢書「signal」|Signal special edition high-end	2007-10	100%	JOGE		版まるごと複製(共有率100%)
+EDITION_DOUBLE	確実な破損	captain-kid	キャプテンキッド	9784063193039	1	2	2	7	0,1	deluxe|standard	デラックス版|通常版	KCデラックス|KCDX	1992-07-17	30%			版の大半が重複(共有率30%)
+EDITION_DOUBLE	確実な破損	captain-kid	キャプテンキッド	9784063193879	1	2	2	8	0,1	deluxe|standard	デラックス版|通常版	KCデラックス|KCDX	1993-05-17	30%			版の大半が重複(共有率30%)
+EDITION_DOUBLE	確実な破損	captain-kid	キャプテンキッド	9784063193978	1	2	2	9	0,1	deluxe|standard	デラックス版|通常版	KCデラックス|KCDX	1993-07-17	30%			版の大半が重複(共有率30%)
+EDITION_DOUBLE	確実な破損	clamp-premium-collection-chobittsu	CLAMP PREMIUM COLLECTIONちょびっツ	9784063343830	1	2	2	1	0,1	standard|deluxe	KCキャラクターブックス（2001–2002）|デラックスKC（2001–2002）	KCキャラクターブックス|デラックスKC	2001-02-16	80%			版まるごと複製(共有率80%)
+EDITION_DOUBLE	確実な破損	clamp-premium-collection-chobittsu	CLAMP PREMIUM COLLECTIONちょびっツ	9784063344271	1	2	2	2	0,1	standard|deluxe	KCキャラクターブックス（2001–2002）|デラックスKC（2001–2002）	KCキャラクターブックス|デラックスKC	2001-06-29	80%			版まるごと複製(共有率80%)
+EDITION_DOUBLE	確実な破損	clamp-premium-collection-chobittsu	CLAMP PREMIUM COLLECTIONちょびっツ	9784063344837	1	2	2	4	0,1	standard|deluxe	KCキャラクターブックス（2001–2002）|デラックスKC（2001–2002）	KCキャラクターブックス|デラックスKC	2001-12	80%			版まるごと複製(共有率80%)
+EDITION_DOUBLE	確実な破損	clamp-premium-collection-chobittsu	CLAMP PREMIUM COLLECTIONちょびっツ	9784063345278	1	2	2	5	0,1	standard|deluxe	KCキャラクターブックス（2001–2002）|デラックスKC（2001–2002）	KCキャラクターブックス|デラックスKC	2002-04	80%			版まるごと複製(共有率80%)
+EDITION_DOUBLE	確実な破損	golden-boy-1993	Golden boy	9784088587219	1	2	2	1	0,1	standard|deluxe	通常版|デラックス版	集英社|ジャンプ・コミックスデラックス	1993-06-04|1993-06-09	100%	DATE_DIFF		版まるごと複製(共有率100%)
+EDITION_DOUBLE	確実な破損	golden-boy-1993	Golden boy	9784088587226	1	2	2	2	0,1	standard|deluxe	通常版|デラックス版	集英社|ジャンプ・コミックスデラックス	1993-12-02	100%			版まるごと複製(共有率100%)
+EDITION_DOUBLE	確実な破損	golden-boy-1993	Golden boy	9784088587233	1	2	2	3	0,1	standard|deluxe	通常版|デラックス版	集英社|ジャンプ・コミックスデラックス	1994-05-10|1994-05-15	100%	DATE_DIFF		版まるごと複製(共有率100%)
+EDITION_DOUBLE	確実な破損	golden-boy-1993	Golden boy	9784088587240	1	2	2	4	0,1	standard|deluxe	通常版|デラックス版	集英社|ジャンプ・コミックスデラックス	1994-12-02|1994-12-07	100%	DATE_DIFF		版まるごと複製(共有率100%)
+EDITION_DOUBLE	確実な破損	golden-boy-1993	Golden boy	9784088587257	1	2	2	5	0,1	standard|deluxe	通常版|デラックス版	集英社|ジャンプ・コミックスデラックス	1995-06-02|1995-06-07	100%	DATE_DIFF		版まるごと複製(共有率100%)
+EDITION_DOUBLE	確実な破損	golden-boy-1993	Golden boy	9784088587264	1	2	2	6	0,1	standard|deluxe	通常版|デラックス版	集英社|ジャンプ・コミックスデラックス	1995-12-01|1995-12-06	100%	DATE_DIFF		版まるごと複製(共有率100%)
+EDITION_DOUBLE	確実な破損	golden-boy-1993	Golden boy	9784088587271	1	2	2	7	0,1	standard|deluxe	通常版|デラックス版	集英社|ジャンプ・コミックスデラックス	1996-06-04|1996-06-09	100%	DATE_DIFF		版まるごと複製(共有率100%)
+EDITION_DOUBLE	確実な破損	golden-boy-1993	Golden boy	9784088587288	1	2	2	8	0,1	standard|deluxe	通常版|デラックス版	集英社|ジャンプ・コミックスデラックス	1996-12-02|1996-12-07	100%	DATE_DIFF		版まるごと複製(共有率100%)
+EDITION_DOUBLE	確実な破損	golden-boy-1993	Golden boy	9784088587295	1	2	2	9	0,1	standard|deluxe	通常版|デラックス版	集英社|ジャンプ・コミックスデラックス	1997-07-04|1997-07-09	100%	DATE_DIFF		版まるごと複製(共有率100%)
+EDITION_DOUBLE	確実な破損	golden-boy-1993	Golden boy	9784088590011	1	2	2	10	0,1	standard|deluxe	通常版|デラックス版	集英社|ジャンプ・コミックスデラックス	1998-01-09|1998-01-14	100%	DATE_DIFF		版まるごと複製(共有率100%)
+EDITION_DOUBLE	確実な破損	green-no-kifujin	芝の貴婦人	9784061037984	1	2	2	2	0,1	deluxe|standard	デラックス版|通常版	KCデラックス|	1989-06-23	100%			版まるごと複製(共有率100%)
+EDITION_DOUBLE	確実な破損	inasaku	稲作	9784063344295	1	2	2	1	0,1	standard|deluxe	通常版|デラックス版	キャラクターブックス|KCデラックス	2001-07	100%			版まるごと複製(共有率100%)
+EDITION_DOUBLE	確実な破損	kishibe-no-uta	岸辺の唄	9784834275087	1	2	2	2	0,1	standard|bunkobon	通常版|文庫版	Eyes comics|[ホーム社漫画文庫]	2013-10-18	100%			版まるごと複製(共有率100%)
+EDITION_DOUBLE	確実な破損	kishibe-no-uta	岸辺の唄	9784834275124	1	2	2	3	0,1	standard|bunkobon	通常版|文庫版	Eyes comics|[ホーム社漫画文庫]	2017-04-18	100%			版まるごと複製(共有率100%)
+EDITION_DOUBLE	確実な破損	kizuguchi-to-houtai	傷口と包帯	9784065440797	1	2	2	5	0,1	deluxe|standard	デラックス版|通常版	講談社コミックスデラックス. 月刊少年マガジン|講談社	2026-07-03|2026-07-16	100%	DATE_DIFF		版まるごと複製(共有率100%)
+EDITION_DOUBLE	確実な破損	kousaka-shachou-wa-gaman-dekinai	高坂社長は我慢できない	9784065372364	1	2	2	5	0,1	deluxe|standard	デラックス版|通常版	KCデラックス|	2024-10-11	100%	PHANTOM_ED		版まるごと複製(共有率100%)
+EDITION_DOUBLE	確実な破損	myououden-rei	明王伝レイ	9784063131437	1	2	2	8	0,1	standard|deluxe	通常版|デラックス版	KCDX|KCデラックス	1990-07-23	50%			版の大半が重複(共有率50%)
+EDITION_DOUBLE	確実な破損	myououden-rei	明王伝レイ	9784063131444	1	2	2	9	0,1	standard|deluxe	通常版|デラックス版	KCDX|KCデラックス	1990-11-22	50%			版の大半が重複(共有率50%)
+EDITION_DOUBLE	確実な破損	myououden-rei	明王伝レイ	9784063132113	1	2	2	10	0,1	standard|deluxe	通常版|デラックス版	KCDX|KCデラックス	1991-03-16	50%			版の大半が重複(共有率50%)
+EDITION_DOUBLE	確実な破損	nanahan-rider	750ライダー	9784253171977	1	2	2	3	0,1	standard|bunkobon	通常版|文庫版	Akita Bunko|秋田文庫	1976-07|1996-06-10	33%	DATE_DIFF		版の大半が重複(共有率33%)
+EDITION_DOUBLE	確実な破損	neo-devilman	ネオデビルマン	9784063600087	1	2	2	1	2,3	shinsoban|bunkobon	講談社漫画ブンコ|講談社漫画文庫	講談社漫画ブンコ|講談社漫画文庫	2001-06|2001-06-12	100%	JOGE,DATE_DIFF		版まるごと複製(共有率100%)
+EDITION_DOUBLE	確実な破損	otoko-do-ahou-koshien	男どアホウ甲子園	9784253172684	1	2	2	3	0,1	standard|bunkobon	通常版|文庫版	SUNDAY COMICS|秋田文庫	1972-02|1996-10-10	73%	DATE_DIFF		版の大半が重複(共有率73%)
+EDITION_DOUBLE	確実な破損	otoko-do-ahou-koshien	男どアホウ甲子園	9784253172691	1	2	2	4	0,1	standard|bunkobon	通常版|文庫版	SUNDAY COMICS|秋田文庫	1972-08|1996-12	73%	DATE_DIFF		版の大半が重複(共有率73%)
+EDITION_DOUBLE	確実な破損	otoko-do-ahou-koshien	男どアホウ甲子園	9784253172714	1	2	2	6	0,1	standard|bunkobon	通常版|文庫版	SUNDAY COMICS|秋田文庫	1973-08|1997-02-10	73%	DATE_DIFF		版の大半が重複(共有率73%)
+EDITION_DOUBLE	確実な破損	otoko-do-ahou-koshien	男どアホウ甲子園	9784253172721	1	2	2	7	0,1	standard|bunkobon	通常版|文庫版	SUNDAY COMICS|秋田文庫	1973-12|1997-02-10	73%	DATE_DIFF		版の大半が重複(共有率73%)
+EDITION_DOUBLE	確実な破損	otoko-do-ahou-koshien	男どアホウ甲子園	9784253172738	1	2	2	8	0,1	standard|bunkobon	通常版|文庫版	SUNDAY COMICS|秋田文庫	1974-05|1997-03-31	73%	DATE_DIFF		版の大半が重複(共有率73%)
+EDITION_DOUBLE	確実な破損	otoko-do-ahou-koshien	男どアホウ甲子園	9784253172745	1	2	2	9	0,1	standard|bunkobon	通常版|文庫版	SUNDAY COMICS|秋田文庫	1974-07|1997-06-10	73%	DATE_DIFF		版の大半が重複(共有率73%)
+EDITION_DOUBLE	確実な破損	otoko-do-ahou-koshien	男どアホウ甲子園	9784253172752	1	2	2	10	0,1	standard|bunkobon	通常版|文庫版	SUNDAY COMICS|秋田文庫	1974-09|1997-08-10	73%	DATE_DIFF		版の大半が重複(共有率73%)
+EDITION_DOUBLE	確実な破損	otoko-do-ahou-koshien	男どアホウ甲子園	9784253172776	1	2	2	12	0,1	standard|bunkobon	通常版|文庫版	SUNDAY COMICS|秋田文庫	1974-11|1997-12-10	73%	DATE_DIFF		版の大半が重複(共有率73%)
+EDITION_DOUBLE	確実な破損	otoko-do-ahou-koshien	男どアホウ甲子園	9784253172783	1	2	2	13	0,1	standard|bunkobon	通常版|文庫版	SUNDAY COMICS|秋田文庫	1974-12|1998-02-10	73%	DATE_DIFF		版の大半が重複(共有率73%)
+EDITION_DOUBLE	確実な破損	otoko-do-ahou-koshien	男どアホウ甲子園	9784253172790	1	2	2	14	0,1	standard|bunkobon	通常版|文庫版	SUNDAY COMICS|秋田文庫	1974-12|1998-04-10	73%	DATE_DIFF		版の大半が重複(共有率73%)
+EDITION_DOUBLE	確実な破損	otoko-do-ahou-koshien	男どアホウ甲子園	9784253172806	1	2	2	15	0,1	standard|bunkobon	通常版|文庫版	SUNDAY COMICS|秋田文庫	1975-02|1998-06-10	73%	DATE_DIFF		版の大半が重複(共有率73%)
+EDITION_DOUBLE	確実な破損	ouji-sama-no-dakimakura	王子さまの抱きまくら	9784799767122	1	2	2	2	0,1	deluxe|standard	デラックス版|通常版	ビーボーイコミックスデラックス|	2024-05-10	100%	PHANTOM_ED		版まるごと複製(共有率100%)
+EDITION_DOUBLE	確実な破損	raise-dewa-chanto-shimasu	来世ではちゃんとします	9784087928228	1	2	2	16	0,1	aizoban|standard	愛蔵版|通常版	グランドジャンプ愛蔵版コミックス|集英社	2026-07-03|2026-07-17	100%	DATE_DIFF		版まるごと複製(共有率100%)
+EDITION_DOUBLE	確実な破損	rinta-no-momoiro-comic	りん太のももいろコミック	9784764817586	1	2	2	2	0,1	standard|deluxe	通常版|デラックス版	エルティーンbooks|デラックス近代映画 エルティーンBOOKS	1995-04	100%			版まるごと複製(共有率100%)
+EDITION_DOUBLE	確実な破損	saikyou-de-saisoku-no-mugen-level-appu	最強で最速の無限レベルアップ	9784065378830	1	2	2	6	0,1	standard|deluxe	通常版|デラックス版	月刊少年マガジン|講談社コミックスデラックス. 月刊少年マガジン	2025-01-08|2025-01-03	86%	JOGE,DATE_DIFF		版まるごと複製(共有率86%)
+EDITION_DOUBLE	確実な破損	saikyou-de-saisoku-no-mugen-level-appu	最強で最速の無限レベルアップ	9784065392669	1	2	2	7	0,1	standard|deluxe	通常版|デラックス版	月刊少年マガジン|講談社コミックスデラックス. 月刊少年マガジン	2025-04-09|2025-04-02	86%	JOGE,DATE_DIFF		版まるごと複製(共有率86%)
+EDITION_DOUBLE	確実な破損	saikyou-de-saisoku-no-mugen-level-appu	最強で最速の無限レベルアップ	9784065399187	1	2	2	8	0,1	standard|deluxe	通常版|デラックス版	月刊少年マガジン|講談社コミックスデラックス. 月刊少年マガジン	2025-07-09|2025-07-04	86%	JOGE,DATE_DIFF		版まるごと複製(共有率86%)
+EDITION_DOUBLE	確実な破損	saikyou-de-saisoku-no-mugen-level-appu	最強で最速の無限レベルアップ	9784065409251	1	2	2	9	0,1	standard|deluxe	通常版|デラックス版	月刊少年マガジン|講談社コミックスデラックス. 月刊少年マガジン	2025-10-09|2025-10-10	86%	JOGE,DATE_DIFF		版まるごと複製(共有率86%)
+EDITION_DOUBLE	確実な破損	saikyou-de-saisoku-no-mugen-level-appu	最強で最速の無限レベルアップ	9784065420980	1	2	2	10	0,1	standard|deluxe	通常版|デラックス版	月刊少年マガジン|講談社コミックスデラックス. 月刊少年マガジン	2026-01-08|2026-01-26	86%	JOGE,DATE_DIFF		版まるごと複製(共有率86%)
+EDITION_DOUBLE	確実な破損	saikyou-de-saisoku-no-mugen-level-appu	最強で最速の無限レベルアップ	9784065431658	1	2	2	11	0,1	standard|deluxe	通常版|デラックス版	月刊少年マガジン|講談社コミックスデラックス. 月刊少年マガジン	2026-04-09|2026-04-04	86%	JOGE,DATE_DIFF		版まるごと複製(共有率86%)
+EDITION_DOUBLE	確実な破損	shi-no-white-magic	死のホワイトマジック	9784063131680	1	2	2	2	0,1	standard|deluxe	通常版|デラックス版	KCDX|KCデラックス	1990-09-22	100%			版まるごと複製(共有率100%)
+EDITION_DOUBLE	確実な破損	shippo-ga-tomodachi	シッポがともだち	9784088622460	1	2	2	3	0,1	standard|deluxe	通常版|デラックス版	|Youコミックスデラックス	1993-04-22	50%			版の大半が重複(共有率50%)
+EDITION_DOUBLE	確実な破損	tasokare-no-yume	たそかれの夢	9784088590752	1	2	2	2	0,1	deluxe|standard	デラックス版|通常版	JUMP COMICSDELUXE|SJ	1999-05|1999-05-05	100%	DATE_DIFF		版まるごと複製(共有率100%)
+EDITION_DOUBLE	確実な破損	tenka-musou	天下無双	9784088594514	1	2	2	3	0,1	deluxe|standard	デラックス版|通常版	ジャンプ・コミックスデラックス|	2004-12	100%	PHANTOM_ED		版まるごと複製(共有率100%)
+EDITION_DOUBLE	確実な破損	tensai-choukoushi-houjou-mika	天才調香師宝条ミカ	9784575723199	1	2	2	1	0,1	standard|bunkobon	通常版|文庫版	ダイソーコミックシリーズ|双葉文庫名作シリーズ	2001-06	100%			版まるごと複製(共有率100%)
+EDITION_DOUBLE	確実な破損	tokugawa-kun-ga-komarasetekuru	十九川くんが困らせてくる!	9784065442272	1	2	2	6	0,1	standard|deluxe	通常版|デラックス版	講談社|KCデラックス	2026-07-13|2026-07-27	50%	DATE_DIFF		版の大半が重複(共有率50%)
+EDITION_DOUBLE	確実な破損	tsuihousareta-sareta-cheat-fuyo-majutsushi-wa-kimama-na-sekando-life-o-ouka-suru	追放されたチート付与魔術師は気ままなセカンドライフを謳歌する。	9784065372777	1	2	2	11	0,1	standard|deluxe	通常版|デラックス版	月刊少年マガジン|講談社コミックスデラックス. 月刊少年マガジン	2024-09-09|2024-09-06	100%	DATE_DIFF		版まるごと複製(共有率100%)
+EDITION_DOUBLE	確実な破損	tsuihousareta-sareta-cheat-fuyo-majutsushi-wa-kimama-na-sekando-life-o-ouka-suru	追放されたチート付与魔術師は気ままなセカンドライフを謳歌する。	9784065378045	1	2	2	12	0,1	standard|deluxe	通常版|デラックス版	月刊少年マガジン|講談社コミックスデラックス. 月刊少年マガジン	2024-11-08	100%			版まるごと複製(共有率100%)
+EDITION_DOUBLE	確実な破損	tsuihousareta-sareta-cheat-fuyo-majutsushi-wa-kimama-na-sekando-life-o-ouka-suru	追放されたチート付与魔術師は気ままなセカンドライフを謳歌する。	9784065379349	1	2	2	13	0,1	standard|deluxe	通常版|デラックス版	月刊少年マガジン|講談社コミックスデラックス. 月刊少年マガジン	2025-01-08|2025-01-03	100%	DATE_DIFF		版まるごと複製(共有率100%)
+EDITION_DOUBLE	確実な破損	tsuihousareta-sareta-cheat-fuyo-majutsushi-wa-kimama-na-sekando-life-o-ouka-suru	追放されたチート付与魔術師は気ままなセカンドライフを謳歌する。	9784065391013	1	2	2	14	0,1	standard|deluxe	通常版|デラックス版	月刊少年マガジン|講談社コミックスデラックス. 月刊少年マガジン	2025-04-09|2025-04-02	100%	DATE_DIFF		版まるごと複製(共有率100%)
+EDITION_DOUBLE	確実な破損	tsuihousareta-sareta-cheat-fuyo-majutsushi-wa-kimama-na-sekando-life-o-ouka-suru	追放されたチート付与魔術師は気ままなセカンドライフを謳歌する。	9784065400937	1	2	2	15	0,1	standard|deluxe	通常版|デラックス版	月刊少年マガジン|講談社コミックスデラックス. 月刊少年マガジン	2025-07-09|2025-07-04	100%	DATE_DIFF		版まるごと複製(共有率100%)
+EDITION_DOUBLE	確実な破損	tsuihousareta-sareta-cheat-fuyo-majutsushi-wa-kimama-na-sekando-life-o-ouka-suru	追放されたチート付与魔術師は気ままなセカンドライフを謳歌する。	9784065401576	1	2	2	16	0,1	standard|deluxe	通常版|デラックス版	月刊少年マガジン|講談社コミックスデラックス. 月刊少年マガジン	2025-08-07|2025-08-01	100%	DATE_DIFF		版まるごと複製(共有率100%)
+EDITION_DOUBLE	確実な破損	tsuihousareta-sareta-cheat-fuyo-majutsushi-wa-kimama-na-sekando-life-o-ouka-suru	追放されたチート付与魔術師は気ままなセカンドライフを謳歌する。	9784065411179	1	2	2	17	0,1	standard|deluxe	通常版|デラックス版	月刊少年マガジン|講談社コミックスデラックス. 月刊少年マガジン	2025-10-09|2025-10-10	100%	DATE_DIFF		版まるごと複製(共有率100%)
+EDITION_DOUBLE	確実な破損	tsuihousareta-sareta-cheat-fuyo-majutsushi-wa-kimama-na-sekando-life-o-ouka-suru	追放されたチート付与魔術師は気ままなセカンドライフを謳歌する。	9784065414347	1	2	2	18	0,1	standard|deluxe	通常版|デラックス版	月刊少年マガジン|講談社コミックスデラックス. 月刊少年マガジン	2025-11-07|2025-11-01	100%	DATE_DIFF		版まるごと複製(共有率100%)
+EDITION_DOUBLE	確実な破損	tsuihousareta-sareta-cheat-fuyo-majutsushi-wa-kimama-na-sekando-life-o-ouka-suru	追放されたチート付与魔術師は気ままなセカンドライフを謳歌する。	9784065423127	1	2	2	19	0,1	standard|deluxe	通常版|デラックス版	月刊少年マガジン|講談社コミックスデラックス. 月刊少年マガジン	2026-02-09|2026-02-23	100%	DATE_DIFF		版まるごと複製(共有率100%)
+EDITION_DOUBLE	確実な破損	tsuihousareta-sareta-cheat-fuyo-majutsushi-wa-kimama-na-sekando-life-o-ouka-suru	追放されたチート付与魔術師は気ままなセカンドライフを謳歌する。	9784065434352	1	2	2	20	0,1	standard|deluxe	通常版|デラックス版	月刊少年マガジン|講談社コミックスデラックス. 月刊少年マガジン	2026-05-08|2026-05-01	100%	DATE_DIFF		版まるごと複製(共有率100%)
+EDITION_DOUBLE	確実な破損	tsuma-to-boku-no-shoukibo-na-ikuji	妻と僕の小規模な育児	9784065372722	1	2	2	11	0,1	deluxe|standard	デラックス版|通常版	KCデラックス|	2024-10-18	100%	PHANTOM_ED		版まるごと複製(共有率100%)
+EDITION_DOUBLE	確実な破損	tsuma-to-boku-no-shoukibo-na-ikuji	妻と僕の小規模な育児	9784065392362	1	2	2	12	0,1	deluxe|standard	デラックス版|通常版	KCデラックス|	2025-04-18	100%	PHANTOM_ED		版まるごと複製(共有率100%)
+EDITION_DOUBLE	確実な破損	watari	ワタリ	9784091900470	1	2	2	7	1,4	bunkobon	小学館文庫(1983)|講談社漫画文庫	小学館文庫|講談社漫画文庫	1984-10-20|1977-11	100%	DATE_DIFF,PUB_DIFF		版まるごと複製(共有率100%)
+EDITION_DOUBLE	確実な破損	yappa-ningen-yamete-seikai-dawa	やっぱ人間やめて正解だわ	9784065382059	1	2	2	2	0,1	deluxe|standard	デラックス版|通常版	講談社コミックスデラックス. 月刊少年マガジン|	2025-03-17	100%	PHANTOM_ED		版まるごと複製(共有率100%)
+EDITION_DOUBLE	要確認	g-defend	G・defend	9784864233149	1	2	2	26	0,1	bunkobon|standard	文庫版|通常版	冬水社文庫|ラキッシュ・コミックス	2015-02	7%			1〜数冊だけ別版に混入(共有率7%)
+EDITION_DOUBLE	要確認	g-defend	G・defend	9784864233156	1	2	2	27	0,1	bunkobon|standard	文庫版|通常版	冬水社文庫|ラキッシュ・コミックス	2015-02	7%			1〜数冊だけ別版に混入(共有率7%)
+EDITION_DOUBLE	要確認	koigakubo-kun-ni-hajimete-o-ubawaremashita-2023	恋ヶ窪くんにはじめてを奪われました	9784065438749	1	2	2	10	0,1	standard|deluxe	通常版|デラックス版	講談社|KCデラックス	2026-06-12|2026-06-06	25%	DATE_DIFF		1〜数冊だけ別版に混入(共有率25%)
+EDITION_DOUBLE	要確認	noragami	ノラガミ	9784065382158	1	2	2	9	0,1	standard|deluxe	通常版|デラックス版	MONTHLY SHONEN MAGAZINE COMICS|講談社コミックスデラックス. 月刊少年マガジン	2013-12|2025-04-02	21%	DATE_DIFF		1〜数冊だけ別版に混入(共有率21%)
+EDITION_DOUBLE	要確認	noragami	ノラガミ	9784065382097	1	2	2	10	0,1	standard|deluxe	通常版|デラックス版	MONTHLY SHONEN MAGAZINE COMICS|講談社コミックスデラックス. 月刊少年マガジン	2014-02|2025-05-09	21%	DATE_DIFF		1〜数冊だけ別版に混入(共有率21%)
+EDITION_DOUBLE	要確認	noragami	ノラガミ	9784065382110	1	2	2	11	0,1	standard|deluxe	通常版|デラックス版	MONTHLY SHONEN MAGAZINE COMICS|講談社コミックスデラックス. 月刊少年マガジン	2014-07|2025-05-09	21%	DATE_DIFF		1〜数冊だけ別版に混入(共有率21%)
+EDITION_DOUBLE	要確認	watashi-ga-mama-yo	わたしがママよ	9784088623184	1	2	2	4	0,1	deluxe|standard	デラックス版|通常版	Youコミックスデラックス|	1995-05-23	25%			1〜数冊だけ別版に混入(共有率25%)
