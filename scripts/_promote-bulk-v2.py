@@ -2602,11 +2602,19 @@ def _fix_complete_sequence_numbers(volumes: list[dict]) -> None:
     volumes.sort(key=lambda v: v["number"])
 
 
+_REDUNDANT_VOLLABEL = re.compile(r"^[\[\(（【]?\s*(\d{1,4})\s*[\]\)）】]?$")
+
+
 def clean_vol(v: dict) -> dict:
     """yml に出力する volume dict を 作る (= null を 適切に省略)"""
     o = {"number": v["number"]}
     if v.get("volume_label"):
-        o["volume_label"] = v["volume_label"]
+        # ★巻番号をそのまま書いただけの volume_label は捨てる(2026-08-29 CREWでございます!で実踏)。
+        #   MADBに「[4]」のような値が入っている巻があり、既定表示「第4巻」を潰して『[4]』と出ていた。
+        #   数字が巻番号と食い違う時は意味のある値なので残す(分冊の通し番号など)。
+        _m = _REDUNDANT_VOLLABEL.match(str(v["volume_label"]).strip())
+        if not (_m and int(_m.group(1)) == v["number"]):
+            o["volume_label"] = v["volume_label"]
     if v.get("title_display"):
         # ★巻個別題の搬送(renumber統合の元クラスタ題=ソーサリアン方式 2026-07-27)
         o["title_display"] = v["title_display"]

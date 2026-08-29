@@ -4,7 +4,7 @@ canonical_publisher: 朝日ソノラマ
 canonical_imprint: サンコミックス
 suppress_types:
 - bunkobon
-source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。 / ★2026-08-29 壊れラベル是正: 2026-08-17の一括処理が、種2でimprintが空だったrunにtype名(standard)をそのまま貼って『standard版』という実在しないタブ名を作っていた。NDL by-ISBNの叢書名(dcndl:seriesTitle)→楽天seriesName→出版社名 の順で実名に戻した。どれも取れないrunは『別版』とし、巻・ISBN・発売日には一切触れていない。'
+source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。 / ★2026-08-29 壊れラベル是正: 2026-08-17の一括処理が、種2でimprintが空だったrunにtype名(standard)をそのまま貼って『standard版』という実在しないタブ名を作っていた。NDL by-ISBNの叢書名(dcndl:seriesTitle)→楽天seriesName→出版社名 の順で実名に戻した。どれも取れないrunは『別版』とし、巻・ISBN・発売日には一切触れていない。 / ★2026-08-29 偽の巻抜けを是正: 文藝春秋版は2巻本(上・下)なのに 1巻と**3巻**として持っており、2巻が欠番に見えていた。楽天books キャッシュで 9784163916514=「復刻版 ファイヤー！ 上」/9784163916521=「同 下」(いずれも文藝春秋 2023-01-27)と確認 → 1(上)/2(下)へ是正。タブ名も実体に合わせ「復刻版(文藝春秋)」に(旧「文藝春秋版」はレーベル名ではなかった)。'
 volumes:
 - number: 1
   release_date: '1973-08-16'
@@ -16,7 +16,7 @@ volumes:
   release_date: '1973-08-24'
 extra_editions:
 - type: shinsoban
-  label: 文藝春秋版
+  label: 復刻版(文藝春秋)
   publisher: 文藝春秋
   volumes:
   - number: 0
@@ -25,7 +25,7 @@ extra_editions:
     isbn13: '9784163916514'
     release_date: 2023-01
     volume_label: 上
-  - number: 3
+  - number: 2
     isbn13: '9784163916521'
     release_date: 2023-01
     volume_label: 下

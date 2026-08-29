@@ -2,35 +2,35 @@ slug: x-men
 canonical_label: 通常版
 canonical_publisher: 竹書房
 canonical_imprint: Bamboo comics
-source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。'
+source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。 / ★2026-08-29 巻抜け補完: ShoPro Books(2024)版の2巻が欠けていた。楽天books キャッシュに 9784796873925「X-MEN Vol.2：徒花」小学館集英社プロダクション 2024-09-12 があり、ISBN も 87391-8(1巻)/87392-5(2巻)/87393-2(3巻) と連番で確定。'
 volumes:
 - number: 1
   isbn13: '9784884757090'
-  release_date: '1994-06'
+  release_date: 1994-06
 - number: 4
   isbn13: '9784884757311'
-  release_date: '1994-08'
+  release_date: 1994-08
 - number: 5
   isbn13: '9784884757328'
-  release_date: '1994-08'
+  release_date: 1994-08
 - number: 6
   isbn13: '9784884757380'
-  release_date: '1994-09'
+  release_date: 1994-09
 - number: 7
   isbn13: '9784884757397'
-  release_date: '1994-09'
+  release_date: 1994-09
 - number: 8
   isbn13: '9784884757403'
-  release_date: '1994-10'
+  release_date: 1994-10
 - number: 9
   isbn13: '9784884757410'
-  release_date: '1994-10'
+  release_date: 1994-10
 - number: 10
   isbn13: '9784884757427'
-  release_date: '1994-11'
+  release_date: 1994-11
 - number: 13
   isbn13: '9784884757458'
-  release_date: '1995-01'
+  release_date: 1995-01
 extra_editions:
 - type: shinsoban
   label: バンブーコミックス
@@ -39,7 +39,7 @@ extra_editions:
   volumes:
   - number: 3
     isbn13: '9784884757304'
-    release_date: '1994-08'
+    release_date: 1994-08
   - number: 11
     isbn13: '9784884757434'
     release_date: '1994-12-28'
@@ -67,7 +67,10 @@ extra_editions:
   volumes:
   - number: 1
     isbn13: '9784796873918'
-    release_date: '2024-05'
+    release_date: 2024-05
+  - number: 2
+    isbn13: '9784796873925'
+    release_date: '2024-09-12'
   - number: 3
     isbn13: '9784796873932'
     release_date: '2025-03-31'
@@ -78,10 +81,10 @@ extra_editions:
   volumes:
   - number: 1
     isbn13: '9784796873123'
-    release_date: '2022-11'
+    release_date: 2022-11
   - number: 2
     isbn13: '9784796873390'
-    release_date: '2023-02'
+    release_date: 2023-02
   - number: 3
     isbn13: '9784796873406'
-    release_date: '2023-09'
+    release_date: 2023-09

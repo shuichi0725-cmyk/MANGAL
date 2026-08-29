@@ -42506,3 +42506,36 @@ volumes:
   source: madb
   added_at: '2026-08-26'
   note: 同上=number=0の1巻が巻3到着で不可視化→種4で巻1復元
+- series_keys:
+  - name:鈴穂ほたる|name:異世界じゃスローライフはままならない|sub:聖獣の主人は島育ち
+  number: 4
+  isbn13: '9784434344978'
+  release_date: '2024-09-19'
+  publisher: アルファポリス
+  edition_type: standard
+  title_display: 異世界じゃスローライフはままならない
+  source: rakuten
+  added_at: '2026-08-29'
+  note: テスト環境の巻抜け点検(最終発売日2020以降)。3巻(2024-03)と5巻(2025-05)の間が欠けていた。楽天booksキャッシュ 9784434344978「異世界じゃスローライフはままならない〜聖獣の主人は島育ち〜（4）」アルファポリスCOMICS 2024-09-19 で確定。ISBN帯・レーベル・著者とも既存巻と一致
+- series_keys:
+  - qid:Q17572|name:藤子・F・不二雄SF短編コンプリート・ワークス
+  number: 7
+  isbn13: '9784091794154'
+  release_date: '2023-12-01'
+  publisher: 小学館
+  edition_type: standard
+  title_display: 藤子・F・不二雄SF短編コンプリート・ワークス
+  source: rakuten
+  added_at: '2026-08-29'
+  note: テスト環境の巻抜け点検。頁は愛蔵版の1-10巻を持つが7巻だけ欠けていた。楽天booksキャッシュ 9784091794154「藤子・F・不二雄SF短編コンプリート・ワークス 愛蔵版（7）」2023-12-01 で確定。ISBNが 94147(6)/94154(7)/94161(8) と連番
+- series_keys:
+  - name:御前モカ|name:CREWでございます!
+  number: 2
+  isbn13: '9784253107921'
+  release_date: '2017-06-16'
+  publisher: 秋田書店
+  edition_type: standard
+  title_display: CREWでございます!
+  source: rakuten
+  added_at: '2026-08-29'
+  note: テスト環境の巻抜け点検。1巻(2016-06)と3巻(2018-05)の間が欠けていた。楽天booksキャッシュ 9784253107921「CREWでございます！」御前モカ/秋田書店 2017-06-16 で確定。ISBNが 10791-4(1)/10792-1(2)/10793-8(3)/10795-2(4) と連番、発売日も年1冊の刊行ペースに合う

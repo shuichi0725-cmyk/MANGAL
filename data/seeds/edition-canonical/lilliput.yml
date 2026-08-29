@@ -5,7 +5,6 @@ source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(r
 volumes:
 - number: 1
   release_date: '1987-07-10'
-  volume_label: '[1]'
 - number: 2
   release_date: '1987-10-05'
 - number: 3
@@ -30,11 +29,11 @@ extra_editions:
   volumes:
   - number: 1
     isbn13: '9784812487594'
-    release_date: '2014-08'
+    release_date: 2014-08
 - type: shinsoban
   label: Belle-comic-special
   imprint: Belle-comic-special
   publisher: 不明
   volumes:
   - number: 3
-    release_date: '1987-11'
+    release_date: 1987-11
