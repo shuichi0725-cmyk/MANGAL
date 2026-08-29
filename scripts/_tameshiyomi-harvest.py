@@ -26,7 +26,7 @@
   python scripts/_tameshiyomi-harvest.py --accept slug=ID    # 保留を手動採用(裁定後)
   python scripts/_tameshiyomi-harvest.py --stats             # 進捗
 """
-import argparse, gzip, json, os, re, sys, time, unicodedata, urllib.request
+import argparse, datetime, gzip, json, os, re, sys, time, unicodedata, urllib.error, urllib.request
 from _idx_authors import au_name  # ★索引v2 authorsパック対応(2026-07-14)
 
 sys.stdout.reconfigure(encoding="utf-8")
@@ -138,12 +138,96 @@ def prefer_bound(strong, cand):
     return keep if keep else strong
 
 
-def head_ok(cid):
+# ============================================================================
+# ★BookLive アクセス規約 (2026-08-29 制定。 規制を受けた事故の再発防止)
+#   事故: 2026-08-28に入れた「尾の自動再訪」が、最終配信巻より上の404を毎回未チェック扱いに
+#   戻すため **同じシリーズを永久に叩き直す無限ループ**になり、60シリーズに 231万リクエストを
+#   投げてBookLiveに規制された(名探偵コナン単独で38万回)。命中率は途中から0%のまま。
+#   ★以後はこの4本を必ず守る。ゆるめる時はユーザ裁定を取る。
+#     ① 直列1本・最短間隔 REQ_INTERVAL 秒 (並列禁止)
+#     ② 1回の実行で MAX_REQ_PER_RUN 件まで。超えたら正常終了して次回に回す
+#     ③ 200/404 以外(429/403/5xx/timeout/接続断)は **1件でも即中断**。台帳に書かない
+#        = 「規制されている」を「試し読みが無い」と誤記録しない(偽404の永久固定を防ぐ)
+#     ④ 連続 MAX_CONSEC_MISS 件ヒット無しでも中断(静かな規制=200で別頁を返す型の保険)
+# ============================================================================
+REQ_INTERVAL = 2.0          # 秒/リクエスト(直列)。NDLの1.3秒より更に保守的にする
+MAX_REQ_PER_RUN = 1500      # 1実行あたりの上限
+MAX_REQ_PER_DAY = 5000      # 1日あたりの上限(プロセスをまたいで数える)
+MAX_CONSEC_MISS = 300       # 連続ヒット無しでの打ち切り
+UA = "MangalBot/1.0 (+https://mangal.shuichi0725.workers.dev; contact shuichi0725@gmail.com)"
+DAYCOUNT = os.path.join(ROOT, ".cache", "tameshiyomi", "booklive-daycount.json")
+BLOCK_FLAGS = (os.path.join(ROOT, "docs", "production-diagnostics", "BOOKLIVE-BLOCKED.md"),
+               os.path.join(ROOT, ".cache", "tameshiyomi", "BLOCKED"))
+_req_count = [0]
+
+
+class Blocked(Exception):
+    """規制/障害が疑われる応答。台帳に書かずに即中断するための例外。"""
+
+
+def _assert_not_blocked():
+    """★停止札があるうちは1リクエストも出さない(規制中の再突入防止)。"""
+    for f in BLOCK_FLAGS:
+        if os.path.exists(f):
+            raise SystemExit(
+                "停止札あり(%s) = BookLive規制中。リクエストを出さずに終了する。\n"
+                "解除はユーザが『復帰した』と言った時だけ。手順は札の中身。" % os.path.relpath(f, ROOT))
+
+
+def _day_bump():
+    """日次カウンタ(プロセス間)。上限を超えたら Blocked 相当で止める。"""
+    today = time.strftime("%Y-%m-%d")
+    d = {"date": today, "n": 0}
     try:
-        req = urllib.request.Request(f"https://booklive.jp/bviewer/s/?cid={cid}",
-                                     headers={"User-Agent": "Mozilla/5.0"})
-        return urllib.request.urlopen(req, timeout=20).status == 200
+        d = json.load(open(DAYCOUNT, encoding="utf-8"))
+        if d.get("date") != today:
+            d = {"date": today, "n": 0}
     except Exception:
+        pass
+    d["n"] = int(d.get("n") or 0) + 1
+    try:
+        os.makedirs(os.path.dirname(DAYCOUNT), exist_ok=True)
+        json.dump(d, open(DAYCOUNT, "w", encoding="utf-8"))
+    except OSError:
+        pass
+    if d["n"] > MAX_REQ_PER_DAY:
+        raise Blocked("1日の上限%d件に到達(明日以降に回す)" % MAX_REQ_PER_DAY)
+
+
+def _throttle():
+    """★BookLive宛は _rate_gate でプロセス間グローバル直列化する(楽天/NDL/wikiと同じ機構)。
+    per-プロセスの間隔だけでは、柱を2本起動した瞬間に合算レートが倍になる = 事故の元。"""
+    _assert_not_blocked()
+    _day_bump()
+    try:
+        import _rate_gate
+        _rate_gate.wait("booklive", REQ_INTERVAL)
+    except Exception:
+        time.sleep(REQ_INTERVAL)
+    _req_count[0] += 1
+
+
+def check_cid(cid):
+    """試し読みcidの存否を返す。 True=あり / False=無い(404だけ)。
+    ★404以外の異常は Blocked を投げる(呼び手は台帳に書かずに中断すること)。"""
+    _throttle()
+    req = urllib.request.Request(f"https://booklive.jp/bviewer/s/?cid={cid}",
+                                 headers={"User-Agent": UA}, method="HEAD")
+    try:
+        return urllib.request.urlopen(req, timeout=20).status == 200
+    except urllib.error.HTTPError as e:
+        if e.code == 404:
+            return False            # ★これだけが「本当に試し読みが無い」
+        raise Blocked(f"HTTP {e.code} cid={cid}")
+    except Exception as e:
+        raise Blocked(f"{type(e).__name__} cid={cid}")
+
+
+def head_ok(cid):
+    """旧API(--accept 等の単発検証用)。 例外は False に潰す。"""
+    try:
+        return check_cid(cid)
+    except Blocked:
         return False
 
 
@@ -157,9 +241,10 @@ NOVEL_CAT = re.compile(r"ライトノベル|ラノベ|文芸|小説|BLノベル|
 
 def product_gate(tid, au):
     """→ (verdict, detail)。verdict: 'ok' / 'novel' / 'author_ng' / 'fetch_ng'"""
+    _throttle()   # ★2026-08-29: 商品頁GETも同じレート規約に乗せる
     try:
         req = urllib.request.Request(f"https://booklive.jp/product/index/title_id/{tid}/vol_no/001",
-                                     headers={"User-Agent": "Mozilla/5.0"})
+                                     headers={"User-Agent": UA})
         html = urllib.request.urlopen(req, timeout=30).read().decode("utf-8", "ignore")
     except Exception as e:
         return "fetch_ng", type(e).__name__
@@ -233,56 +318,126 @@ def load_blmax():
     return mx
 
 
-def expand_volumes(expand_limit, workers=8):
-    """アンカー済み(title_id確定)シリーズを対象に、TinyFish検索なしでHEADのみ全巻展開する。
-    ★HEADは並列8本(2026-07-13)。BookLive=大手CDNの軽いHEADのみなので安全。
-    ★2026-07-20: checked台帳で200/404両方を記録。完了=全1..nがchecked(ヒット数でなく)。
-    これで404欠け巻の無限再チェックと後方飢餓を解消し、ループが実際に枯れる。"""
-    from concurrent.futures import ThreadPoolExecutor
+# ★掃引済み台帳(2026-08-29 新設): シリーズごとに「巻数nまで全部チェックし終えた日」を記録する。
+#   これが無いと、下の「尾の自動再訪」がそのシリーズを毎バッチ叩き直す無限ループになる(=規制事故)。
+SWEPT = os.path.join(ROOT, ".cache", "tameshiyomi", "expand-swept.jsonl")
+TAIL_RECHECK_DAYS = 30      # 尾(最終配信巻より上)を再訪する間隔。 n が増えた時は日数に関係なく再訪
 
+
+def load_swept():
+    """slug -> {'n': 掃引時の巻数, 'at': 'YYYY-MM-DD'}"""
+    sw = {}
+    if os.path.exists(SWEPT):
+        for line in open(SWEPT, encoding="utf-8"):
+            try:
+                r = json.loads(line)
+                sw[r["slug"]] = r
+            except Exception:
+                pass
+    return sw
+
+
+def _days_since(d):
+    try:
+        y, m, dd = (int(x) for x in str(d).split("-"))
+        return (datetime.date.today() - datetime.date(y, m, dd)).days
+    except Exception:
+        return 10 ** 6
+
+
+def expand_volumes(expand_limit, workers=1):
+    """アンカー済み(title_id確定)シリーズを、直列HEADで全巻展開する。
+
+    ★2026-08-29 全面改訂(BookLive規制事故の是正)。workers は互換のため残すが常に直列。
+      1. 完了判定は **掃引済み台帳(SWEPT)**。「1..n を全部チェックした」を1行残す。
+      2. 尾の再訪(新刊で試し読みが増える件)は **n が増えた時** か **前回掃引から
+         TAIL_RECHECK_DAYS 日以上経った時** だけ。毎バッチ再訪しない(=無限ループの根)。
+      3. 404以外の応答が1件でも来たら Blocked で即中断。台帳に書かずに抜ける
+         (= 規制中の応答を「試し読み無し」として永久固定しない)。
+      4. レート = REQ_INTERVAL 秒/件、1実行 MAX_REQ_PER_RUN 件まで。
+    """
     anchors, _ = load_done()
     n_by_slug = volume_target_n()
     checked = load_vol_checked()
     blmax = load_blmax()
+    swept = load_swept()
     os.makedirs(os.path.dirname(VOL_CHECKED), exist_ok=True)
     targets = []
     for slug, rec in anchors.items():
         n = n_by_slug.get(slug)
         if not n:
             continue
-        ck = checked.get(slug, set())
-        # ★尾の自動再訪(2026-08-28 ユーザ指示「新刊が追加されたら試し読みも追加」):
-        #   「最終HEAD200巻より上」の404チェック済みは checked 扱いにしない=再訪する。
-        #   発売前(日次zokkanの予約巻)にHEADして404→checked固定→発売後もボタンが永久に付かない穴の封鎖。
-        #   最終200巻以下の404=真の配信欠け(中抜け)は従来どおり再チェックしない(スラッシング防止)。
-        bl = blmax.get(slug, 0)
-        ck = {v for v in ck if v <= bl}
-        if all(v in ck for v in range(1, n + 1)):
-            continue  # 全巻チェック済み(200/404問わず)=完了
-        targets.append((slug, rec["title_id"], n, ck))
+        ck = set(checked.get(slug, set()))
+        sw = swept.get(slug)
+        if sw:
+            grew = n > int(sw.get("n") or 0)
+            stale = _days_since(sw.get("at")) >= TAIL_RECHECK_DAYS
+            if not grew and not stale:
+                continue                      # 掃引済み・巻も増えていない = 触らない
+            # 再訪は「最終配信巻より上」だけ(下の404=真の配信欠けは叩き直さない)
+            bl = blmax.get(slug, 0)
+            ck = {v for v in ck if v <= bl}
+        todo = [v for v in range(1, n + 1) if v not in ck]
+        targets.append((slug, rec["title_id"], n, todo))
     remaining = len(targets)
     targets = targets[:expand_limit]
-    print(f"展開対象 {len(targets)} シリーズ(未チェック巻あり・残 {remaining}) / HEAD {workers}並列", flush=True)
+    print("展開対象 %d シリーズ(未チェック巻あり・残 %d) / 直列 %.1f秒/件・上限%d件"
+          % (len(targets), remaining, REQ_INTERVAL, MAX_REQ_PER_RUN), flush=True)
     out = gzip.open(VOLSEED, "at", encoding="utf-8")
     ckout = open(VOL_CHECKED, "a", encoding="utf-8")
-    total_new = 0
-    with ThreadPoolExecutor(max_workers=workers) as pool:
-        for slug, tid, n, ck in targets:
-            todo = [v for v in range(1, n + 1) if v not in ck]
-            results = list(pool.map(lambda v: (v, head_ok(f"{tid}_{v:03d}")), todo))
-            added = 0
-            for vol, ok in results:
-                ckout.write(json.dumps({"slug": slug, "v": vol}, ensure_ascii=False) + "\n")  # 200も404も記録
+    swout = open(SWEPT, "a", encoding="utf-8")
+    total_new, consec_miss, stopped = 0, 0, None
+    try:
+        for slug, tid, n, todo in targets:
+            if _req_count[0] >= MAX_REQ_PER_RUN:
+                stopped = "1実行の上限%d件に到達(続きは次回)" % MAX_REQ_PER_RUN
+                break
+            added, done_all = 0, True
+            for vol in todo:
+                if _req_count[0] >= MAX_REQ_PER_RUN:
+                    done_all = False
+                    stopped = "1実行の上限%d件に到達(続きは次回)" % MAX_REQ_PER_RUN
+                    break
+                ok = check_cid("%s_%03d" % (tid, vol))       # ★Blockedは投げさせる
+                ckout.write(json.dumps({"slug": slug, "v": vol}, ensure_ascii=False) + "\n")
                 if ok:
-                    rec = {"slug": slug, "volume": vol, "title_id": tid, "cid": f"{tid}_{vol:03d}",
-                           "verified": "head200", "at": time.strftime("%Y-%m-%d")}
-                    out.write(json.dumps(rec, ensure_ascii=False) + "\n")
+                    rec2 = {"slug": slug, "volume": vol, "title_id": tid,
+                            "cid": "%s_%03d" % (tid, vol),
+                            "verified": "head200", "at": time.strftime("%Y-%m-%d")}
+                    out.write(json.dumps(rec2, ensure_ascii=False) + "\n")
                     added += 1
-            out.flush(); ckout.flush()
+                    consec_miss = 0
+                else:
+                    consec_miss += 1
+                    if consec_miss >= MAX_CONSEC_MISS:
+                        done_all = False
+                        stopped = "連続%d件ヒット無し(静かな規制の疑い)" % MAX_CONSEC_MISS
+                        break
+            out.flush()
+            ckout.flush()
             total_new += added
-            print(f"  {slug}: +{added}hit/{len(todo)}chk (n={n})", flush=True)
-            time.sleep(0.2)
-    print(f"展開完了 +{total_new}巻 hit (seed={os.path.relpath(VOLSEED, ROOT)})")
+            if done_all:
+                swout.write(json.dumps({"slug": slug, "n": n,
+                                        "at": time.strftime("%Y-%m-%d")}, ensure_ascii=False) + "\n")
+                swout.flush()
+            print("  %s: +%dhit/%dchk (n=%d)" % (slug, added, len(todo), n), flush=True)
+            if stopped:
+                break
+    except Blocked as e:
+        print("★中断: BookLiveから 200/404 以外の応答 (%s)。台帳には書いていない。" % e,
+              file=sys.stderr, flush=True)
+        out.close()
+        ckout.close()
+        swout.close()
+        print("展開中断 +%d巻 hit / 送信%d件" % (total_new, _req_count[0]))
+        sys.exit(2)
+    out.close()
+    ckout.close()
+    swout.close()
+    if stopped:
+        print("打ち切り: %s" % stopped, flush=True)
+    print("展開完了 +%d巻 hit / 送信%d件 (seed=%s)"
+          % (total_new, _req_count[0], os.path.relpath(VOLSEED, ROOT)))
 
 
 def harvest(limit, list_file=None, retry_holds=False):
@@ -457,7 +612,6 @@ def main():
     if a.accept_file:
         # ★一括採用(2026-07-18 保留裁定バッチ用): TSV(slug<TAB>title_id)を1行ずつ --accept と同じ保証で処理
         #   (HEAD200ゲート/seed追記/保留行除去)。裁定自体はAIが済ませた前提=このscriptは検証と簿記のみ。
-        import concurrent.futures as _cf
         pairs = []
         seen_seed = set()
         if os.path.exists(SEED):
@@ -470,14 +624,15 @@ def main():
                 pairs.append((c[0], c[1]))
         print(f"一括採用: 対象{len(pairs)}(seed既存はskip済)")
         ok_pairs, ng = [], 0
-        with _cf.ThreadPoolExecutor(max_workers=8) as ex:
-            futs = {ex.submit(head_ok, f"{t}_001"): (s, t) for s, t in pairs}
-            for fu in _cf.as_completed(futs):
-                s, t = futs[fu]
-                try:
-                    if fu.result(): ok_pairs.append((s, t))
-                    else: ng += 1
-                except Exception: ng += 1
+        # ★2026-08-29: 8並列HEADをやめ直列に(BookLive規制事故の是正。 check_cid が間隔を守る)
+        for s, t in pairs:
+            try:
+                if check_cid(f"{t}_001"): ok_pairs.append((s, t))
+                else: ng += 1
+            except Blocked as e:
+                print(f"★中断: BookLiveから200/404以外の応答 ({e})。ここまでの分だけ採用する。",
+                      file=sys.stderr)
+                break
         with open(SEED, "a", encoding="utf-8") as f:
             for s, t in ok_pairs:
                 f.write(json.dumps({"slug": s, "title_id": t, "cid1": f"{t}_001",

@@ -10,7 +10,7 @@ description: アイドル運転して=手すき時間の常設柱(試し読みex
 
 ## 起動 (= ★下記の柱を全部、同時にbackgroundへ。3本で止めない)
 ```
-bash scripts/_idle-tameshiyomi-expand-loop.sh   # ①試し読みexpand消化(無限・バッチごとcommit+push)
+bash scripts/_idle-tameshiyomi-expand-loop.sh   # ①試し読みexpand消化(★2026-08-29改訂=有限。停止札があれば起動拒否)
 # ②Geminiジャンル検品=退役(2026-07-20)。不一致の76%が幻覚テンプレ→常設から外す。下記「退役」参照
 python scripts/_verify-kana-pending.py --limit 300   # ③ヨミ照合(★1パスのみ=ループ禁止、下記)
 python scripts/_completion-judge.py --backlog --limit 300   # ④完結判定backlog(→worksheet記入→--collect→commit、詳細=skill completion-judge)
@@ -22,6 +22,20 @@ python scripts/_check-recent-ongoing-volumes.py --limit 200   # ⑨続巻逆照�
 python scripts/_placeholder-cover-refresh.py --all   # ⑩仮書影→実物の差し替え(★--all=queueが尽きるまで自走・再起動不要 2026-08-04。詳細=skill placeholder-cover-refresh)
 python scripts/_kobo-color-harvest.py --delta   # ⑪カラー版差分(Kobo新着だけ追記・数分で自然停止・詳細=skill color-editions)
 ```
+
+## ★★ 柱①(BookLive試し読み)は 2026-08-29 に規制事故を起こした = 触る前に必読
+
+無限ループ+8並列で **231万リクエスト**を投げ、BookLive!からアクセス規制を受けた。
+現在 **停止札**(`docs/production-diagnostics/BOOKLIVE-BLOCKED.md`)が置いてあり、
+ループも本体scriptも**1リクエストも出さずに終了する**。
+
+- **札を消してよいのはユーザが「BookLiveが復帰した」と言った時だけ。** 自分で試し打ちしない。
+- 規約(直列2秒/件・1実行1500件・1日5000件・200/404以外は即中断・収穫ゼロ3回で停止)は
+  skill **tameshiyomi-harvest** の「BookLiveアクセス規約」が正本。
+- BookLive宛も `scripts/_rate_gate.py` の `wait("booklive", 2.0)` を通す
+  = 柱を何本並走させても host単位で1本のストリームになる(楽天/NDL/wikiと同じ)。
+- ★そもそも**このキューは枯れている**(掃引済み33,080シリーズ / 残36 = 41リクエスト)。
+  復帰しても長時間回す仕事は無い。「何時間も回り続けている」のを見たら**それは異常**。
 
 ## ★429/冷却の共通ルール (= 2026-07-24 ユーザ指摘で機械化。運転者の判断ゼロ)
 - ⑤⑧(wikiホスト)は **script自身が排他ロック+冷却タイマーを持つ**(`scripts/_wiki_host.py`):
