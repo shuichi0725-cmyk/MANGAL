@@ -32291,6 +32291,21 @@
   "year_ended": 1980,
   "year_started": 1976
  },
+ "survival-shounen-s-no-kiroku": {
+  "authors": [
+   {
+    "name": "宮川輝",
+    "role": "artist"
+   }
+  ],
+  "note": "2026-08-29 ユーザ提供のNDL TSVで確定: 全7冊すべて責任表示が「宮川輝 著 , さいとう・たかを 原作」。宮川輝の role を writer_artist → artist に是正し、原作クレジットを明示した。★editionsは edition-canonical/survival-shounen-s-no-kiroku.yml が正(通常版 全5巻)。",
+  "original_authors": [
+   {
+    "name": "さいとう・たかを",
+    "role": "writer"
+   }
+  ]
+ },
  "swan": {
   "note": "2026-08-17 連載年明示: SWAN連載1976-81(МC全21巻=1981-09完結)",
   "year_ended": 1981,
