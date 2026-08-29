@@ -47,15 +47,16 @@ def main() -> None:
         for key, group in by.items():
             if len(group) < 2:
                 continue
-            if len({(e.get("imprint") or "") for e in group}) < 2:
-                continue  # 完全同名(=別sid分離)は対象外
+            # ★2026-08-29: 完全同名も対象に含める(旧版は「別sid分離だから」とskipしていたが、
+            #   読者には同じ名前のタブが2つ並ぶ=不具合。orenosora で実踏)。型で区別して出す。
+            kind = "表記ゆれ" if len({(e.get("imprint") or "") for e in group}) >= 2 else "同名"
             nums = [[v.get("number") for v in (e.get("volumes") or [])] for e in group]
             flat = [n for g in nums for n in g]
             overlap = len(flat) != len(set(flat))
             desc = " || ".join(
                 "%s/%s/%d巻%s" % (e.get("type"), e.get("imprint"), len(e.get("volumes") or []), g)
                 for e, g in zip(group, nums))
-            out.append((stem, d.get("title") or "", 
+            out.append((stem, d.get("title") or "", kind,
                         "有" if os.path.exists(os.path.join(ROOT, "data", "seeds", "edition-canonical", stem + ".yml")) else "無",
                         key, "重複" if overlap else "相補", desc))
     dst = os.path.join(ROOT, "docs", "production-diagnostics", "canonical-imprint-split.tsv")
@@ -64,8 +65,9 @@ def main() -> None:
         for r in out:
             f.write("\t".join(map(str, r)) + "\n")
     print("表記ゆれで版が割れた頁: %d 件 → %s" % (len(out), dst))
-    print("  巻番号:", dict(Counter(r[4] for r in out)))
-    print("  canonical:", dict(Counter(r[2] for r in out)))
+    print("  型:", dict(Counter(r[2] for r in out)))
+    print("  巻番号:", dict(Counter(r[5] for r in out)))
+    print("  canonical:", dict(Counter(r[3] for r in out)))
 
 
 if __name__ == "__main__":

@@ -5,7 +5,7 @@ canonical_imprint: 少年サンデーコミックス
 suppress_types:
 - bunkobon
 - wideban
-source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。'
+source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。 / ★2026-08-29 同レーベル分裂の統合: 小学館文庫の1巻だけが別タブ「小学館文庫(2011)」に割れていた。ISBN 9784091933713(1)〜9784091933805(10) が完全連番で同一runと確定。発売日は seed の2011-12-20でなく楽天books の 2001年12月14日 を採用(2011は重版の登録値)。タブ名は年サフィックス不要になったので「小学館文庫」に戻した。'
 volumes:
 - number: 1
   isbn13: '9784091222718'
@@ -18,7 +18,7 @@ volumes:
   release_date: '1989-09-15'
 - number: 4
   isbn13: '9784091222749'
-  release_date: '1989-11'
+  release_date: 1989-11
 - number: 5
   isbn13: '9784091222756'
   release_date: '1990-01-15'
@@ -27,7 +27,7 @@ volumes:
   release_date: '1990-04-15'
 - number: 7
   isbn13: '9784091222770'
-  release_date: '1990-06'
+  release_date: 1990-06
 - number: 8
   isbn13: '9784091222787'
   release_date: '1990-08-15'
@@ -48,7 +48,7 @@ volumes:
   release_date: '1991-10-15'
 - number: 14
   isbn13: '9784091225641'
-  release_date: '1991-12'
+  release_date: 1991-12
 - number: 15
   isbn13: '9784091225658'
   release_date: '1992-02-15'
@@ -66,10 +66,10 @@ volumes:
   release_date: '1992-12-15'
 - number: 20
   isbn13: '9784091225702'
-  release_date: '1993-03'
+  release_date: 1993-03
 - number: 21
   isbn13: '9784091232311'
-  release_date: '1993-06'
+  release_date: 1993-06
 - number: 22
   isbn13: '9784091232328'
   release_date: '1993-08-15'
@@ -81,45 +81,40 @@ volumes:
   release_date: '1994-03-15'
 extra_editions:
 - type: bunkobon
-  label: 小学館文庫(2002)
-  imprint: 小学館文庫
-  publisher: 小学館
-  volumes:
-  - number: 2
-    isbn13: '9784091933720'
-    release_date: '2002-01'
-  - number: 3
-    isbn13: '9784091933737'
-    release_date: '2002-03'
-  - number: 4
-    isbn13: '9784091933744'
-    release_date: '2002-03'
-  - number: 5
-    isbn13: '9784091933751'
-    release_date: '2002-05'
-  - number: 6
-    isbn13: '9784091933768'
-    release_date: '2002-05'
-  - number: 7
-    isbn13: '9784091933775'
-    release_date: '2002-07'
-  - number: 8
-    isbn13: '9784091933782'
-    release_date: '2002-07'
-  - number: 9
-    isbn13: '9784091933799'
-    release_date: '2002-09'
-  - number: 10
-    isbn13: '9784091933805'
-    release_date: '2002-09'
-- type: bunkobon
-  label: 小学館文庫(2011)
+  label: 小学館文庫
   imprint: 小学館文庫
   publisher: 小学館
   volumes:
   - number: 1
     isbn13: '9784091933713'
-    release_date: '2011-12-20'
+    release_date: 2001-12
+  - number: 2
+    isbn13: '9784091933720'
+    release_date: 2002-01
+  - number: 3
+    isbn13: '9784091933737'
+    release_date: 2002-03
+  - number: 4
+    isbn13: '9784091933744'
+    release_date: 2002-03
+  - number: 5
+    isbn13: '9784091933751'
+    release_date: 2002-05
+  - number: 6
+    isbn13: '9784091933768'
+    release_date: 2002-05
+  - number: 7
+    isbn13: '9784091933775'
+    release_date: 2002-07
+  - number: 8
+    isbn13: '9784091933782'
+    release_date: 2002-07
+  - number: 9
+    isbn13: '9784091933799'
+    release_date: 2002-09
+  - number: 10
+    isbn13: '9784091933805'
+    release_date: 2002-09
 - type: wideban
   label: 少年サンデーコミックスワイド版
   imprint: 少年サンデーコミックスワイド版
@@ -127,37 +122,37 @@ extra_editions:
   volumes:
   - number: 1
     isbn13: '9784091247018'
-    release_date: '1995-11'
+    release_date: 1995-11
   - number: 2
     isbn13: '9784091247025'
-    release_date: '1996-01'
+    release_date: 1996-01
   - number: 3
     isbn13: '9784091247032'
-    release_date: '1996-03'
+    release_date: 1996-03
   - number: 4
     isbn13: '9784091247049'
-    release_date: '1996-05'
+    release_date: 1996-05
   - number: 5
     isbn13: '9784091247056'
-    release_date: '1996-07'
+    release_date: 1996-07
   - number: 6
     isbn13: '9784091247063'
-    release_date: '1996-09'
+    release_date: 1996-09
   - number: 7
     isbn13: '9784091247070'
-    release_date: '1996-11'
+    release_date: 1996-11
   - number: 8
     isbn13: '9784091247087'
-    release_date: '1997-01'
+    release_date: 1997-01
   - number: 9
     isbn13: '9784091247094'
-    release_date: '1997-03'
+    release_date: 1997-03
   - number: 10
     isbn13: '9784091247100'
-    release_date: '1997-05'
+    release_date: 1997-05
   - number: 11
     isbn13: '9784091247117'
-    release_date: '1997-07'
+    release_date: 1997-07
   - number: 12
     isbn13: '9784091247124'
-    release_date: '1997-09'
+    release_date: 1997-09

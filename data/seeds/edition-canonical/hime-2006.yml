@@ -3,7 +3,7 @@ canonical_label: 通常版
 canonical_publisher: 不明
 suppress_types:
 - bunkobon
-source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。'
+source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。 / ★2026-08-29 レーベル表記ゆれの統合(ARMS型): 同じ双葉社アクション・コミックスが中黒の有無で「アクションコミックス」(1・3巻)と「アクション・コミックス」(2・4巻)に割れ、巻が相補だったため1タブに統合(1-4巻)。中黒ありの表記に寄せた。巻・発売日は不変。'
 volumes:
 - number: 0
   release_date: '1975-08-10'
@@ -20,11 +20,11 @@ extra_editions:
   - number: 1
     isbn13: '9784916124227'
     release_date: '1997-05-03'
-    volume_label: 'I'
+    volume_label: I
   - number: 2
     isbn13: '9784916124302'
-    release_date: '1997-07'
-    volume_label: 'II'
+    release_date: 1997-07
+    volume_label: II
 - type: shinsoban
   label: YKコミックス
   imprint: YKコミックス
@@ -38,7 +38,7 @@ extra_editions:
     release_date: '1992-01-15'
   - number: 3
     isbn13: '9784785913168'
-    release_date: '1992-04'
+    release_date: 1992-04
 - type: bunkobon
   label: ソノラマコミック文庫
   imprint: ソノラマコミック文庫
@@ -46,7 +46,7 @@ extra_editions:
   volumes:
   - number: 1
     isbn13: '9784257723837'
-    release_date: '2006-09'
+    release_date: 2006-09
 - type: shinsoban
   label: キュン!Comics
   imprint: キュン!Comics
@@ -57,21 +57,16 @@ extra_editions:
   - number: 2
     release_date: '1998-09-20'
 - type: shinsoban
-  label: アクションコミックス
-  imprint: アクションコミックス
-  publisher: 双葉社
-  volumes:
-  - number: 1
-    release_date: '1984-01-10'
-  - number: 3
-    release_date: '1984-01-20'
-- type: shinsoban
   label: アクション・コミックス
   imprint: アクション・コミックス
   publisher: 双葉社
   volumes:
+  - number: 1
+    release_date: '1984-01-10'
   - number: 2
     release_date: '1976-07-30'
+  - number: 3
+    release_date: '1984-01-20'
   - number: 4
     release_date: '1983-01-10'
 - type: shinsoban
@@ -81,4 +76,4 @@ extra_editions:
   volumes:
   - number: 1
     isbn13: '9784088491868'
-    release_date: '1986-07'
+    release_date: 1986-07
