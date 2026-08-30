@@ -98,6 +98,7 @@
 - [【新設】掲載誌のper-case上書き=magazine-corrections](magazine_corrections_mechanism.md) — 種3のmagazineは根拠なし。スーパージャンプ調査=空欄106/別誌20が未着手
 - [版混在恒久是正=edition-canonical](edition_canonical_mechanism.md) — Wiki確定vol→promote結線済 ／ [アオアシ型=原版+ジュニア版再版](edition_dedup_aoashi.md) — 最古日付dedupが正しく原版を選ぶ
 - [【型】ARMS型=レーベル表記ゆれ版分裂](imprint_split_arms_type.md) — 真因は種2クラスタ分裂+ギャラ型是正の焼き込み。14件中9統合/1正当/3別問題。検出器あり
+- [【残228頁】同type合流で別出版社の版が消える](edition_typemerge_hides_volumes.md) — promoteがtypeだけで畳む。976巻が不可視・検出器あり
 - [【型・57頁適用済】ARMSワイド版型=刊行run分裂](edition_run_split_arms_wide_type.md) — 名前非依存検出器で59頁全数裁定。真因3層(★種4のedition_type既定値が幻の版を作る)
 - [巻補完=NDL title検索が強い](ndl_volume_completion_better_than_rakuten.md) — 書影は楽天ISBN直引き
 - [【最重要】目的は正確さ](feedback_accuracy_is_the_goal.md) — 推測/ダミーで埋めない。怪しければ止めて確認
