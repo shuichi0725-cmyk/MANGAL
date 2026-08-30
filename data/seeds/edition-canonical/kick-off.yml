@@ -2,65 +2,39 @@ slug: kick-off
 canonical_label: 通常版
 canonical_publisher: 集英社
 canonical_imprint: ジャンプ・コミックス
-source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。'
+source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。 / ★2026-08-30 コンビニ廉価/抜粋版の除去(bucket A の取りこぼし分)。レーベル表記が「ジャンプ コミックス セレクション」(中黒なし・語間スペース)で、初回の判定正規表現が拾えていなかった。楽天books で叢書名=ジャンプコミックスセレクション・641円・判型コミック と確認。同頁に主版が残り、巻数も主版より少ない(=抜粋)。 除去= ジャンプ コミックス セレクション(7巻)'
 volumes:
 - number: 1
   release_date: '1982-09-15'
 - number: 2
-  release_date: '1982-11'
+  release_date: 1982-11
 - number: 3
   release_date: '1983-02-15'
 - number: 4
   isbn13: '9784088515243'
-  release_date: '1983-05'
+  release_date: 1983-05
 - number: 5
   isbn13: '9784088515250'
-  release_date: '1983-08'
+  release_date: 1983-08
 - number: 6
   isbn13: '9784088515267'
-  release_date: '1983-11'
+  release_date: 1983-11
 - number: 7
   isbn13: '9784088515274'
-  release_date: '1984-01'
+  release_date: 1984-01
 - number: 8
   isbn13: '9784088515281'
-  release_date: '1984-03'
+  release_date: 1984-03
 - number: 9
   isbn13: '9784088515298'
-  release_date: '1984-04'
+  release_date: 1984-04
 - number: 10
   isbn13: '9784088515304'
-  release_date: '1984-05'
+  release_date: 1984-05
 - number: 11
   isbn13: '9784088515311'
-  release_date: '1984-07'
+  release_date: 1984-07
 - number: 12
   isbn13: '9784088515328'
-  release_date: '1984-09'
-extra_editions:
-- type: shinsoban
-  label: ジャンプ コミックス セレクション
-  imprint: ジャンプ コミックス セレクション
-  publisher: ホーム社
-  volumes:
-  - number: 1
-    isbn13: '9784834212518'
-    release_date: '1991-03'
-  - number: 2
-    isbn13: '9784834212525'
-    release_date: '1991-04'
-  - number: 3
-    isbn13: '9784834212532'
-    release_date: '1991-05'
-  - number: 4
-    isbn13: '9784834212549'
-    release_date: '1991-06'
-  - number: 5
-    isbn13: '9784834212556'
-    release_date: '1991-07-24'
-  - number: 6
-    isbn13: '9784834212563'
-    release_date: '1991-08'
-  - number: 7
-    isbn13: '9784834212570'
-    release_date: '1991-09'
+  release_date: 1984-09
+extra_editions: []
