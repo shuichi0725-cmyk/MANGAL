@@ -2,7 +2,7 @@ slug: black-angels
 canonical_label: ジャンプ・コミックス
 suppress_types:
 - shinsoban
-source: '奇子型集成(NDL平松伸二典拠+楽天確定 2026-07-05): 混線通常版を原JC全20巻(v1-3欠け是正)/JCセレクション全12巻(1989)/文庫全12巻の3版に分離。1989別版9784834の混入除去+原JC v1=515014/v2=515021/v3=515038補完 / ★2026-08-17追記: extra_editions で作った「ジャンプC・セレクション(1989)」と、種2由来の同名 shinsoban タブが**二重表示**になっていた(後者は volume-exclude で2巻が欠けた11冊版)。suppress_types:[shinsoban] で種2側を落として1本化。あわせて用済みの volume-exclude(9784834212020)も解除。'
+source: '奇子型集成(NDL平松伸二典拠+楽天確定 2026-07-05): 混線通常版を原JC全20巻(v1-3欠け是正)/JCセレクション全12巻(1989)/文庫全12巻の3版に分離。1989別版9784834の混入除去+原JC v1=515014/v2=515021/v3=515038補完 / ★2026-08-17追記: extra_editions で作った「ジャンプC・セレクション(1989)」と、種2由来の同名 shinsoban タブが**二重表示**になっていた(後者は volume-exclude で2巻が欠けた11冊版)。suppress_types:[shinsoban] で種2側を落として1本化。あわせて用済みの volume-exclude(9784834212020)も解除。 / ★2026-08-30 ユーザ裁定: 「ジャンプC・セレクション(1989)」を除去。ジャンプコミックスセレクション=集英社のコンビニ廉価再録レーベルで、掲載除外の方針(①成年誌 ②コンビニ本 ③纏められないもの)に該当。本編は主版のジャンプ・コミックス全20巻が持つ。'
 publisher: 集英社
 volumes:
 - number: 1
@@ -65,44 +65,4 @@ volumes:
 - number: 20
   isbn13: '9784088515205'
   release_date: 1986-08
-extra_editions:
-- type: shinsoban
-  label: ジャンプC・セレクション(1989)
-  publisher: 集英社
-  volumes:
-  - number: 1
-    isbn13: '9784834212013'
-    release_date: null
-  - number: 2
-    isbn13: '9784834212020'
-    release_date: null
-  - number: 3
-    isbn13: '9784834212037'
-    release_date: null
-  - number: 4
-    isbn13: '9784834212044'
-    release_date: null
-  - number: 5
-    isbn13: '9784834212051'
-    release_date: null
-  - number: 6
-    isbn13: '9784834212068'
-    release_date: null
-  - number: 7
-    isbn13: '9784834212075'
-    release_date: null
-  - number: 8
-    isbn13: '9784834212082'
-    release_date: null
-  - number: 9
-    isbn13: '9784834212099'
-    release_date: null
-  - number: 10
-    isbn13: '9784834212105'
-    release_date: null
-  - number: 11
-    isbn13: '9784834212112'
-    release_date: null
-  - number: 12
-    isbn13: '9784834212129'
-    release_date: null
+extra_editions: []
