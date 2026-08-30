@@ -4,7 +4,7 @@ canonical_publisher: 集英社
 canonical_imprint: ジャンプ・コミックス
 suppress_types:
 - bunkobon
-source: 'ギャラ型是正 2026-08-17(worksheetのA_SPLIT_WORK?判定だが実体はB型): 通常版タブに1969-74年の初出ジャンプ・コミックス(全13巻)・1986年KCスペシャル・2003年KPC・2007-08年ヤングジャンプ・コミックスBJ・2018年BIG COMICS SPECIALが混線し、1巻2018-07→7巻1970-12-31の48年逆行になっていた。初出全13巻を主版に戻し、他はextra_editionsへ。文庫タブは集英社漫画文庫(1976-77 全12巻)と徳間コミック文庫(1995 3巻)が混ざっていたので suppress_types で版ごとに作り直した。 ★ISBN補充6巻 2026-08-24(partial-isbn-gap半自動: 帯/楽天題/巻番号/未使用の4検証)'
+source: 'ギャラ型是正 2026-08-17(worksheetのA_SPLIT_WORK?判定だが実体はB型): 通常版タブに1969-74年の初出ジャンプ・コミックス(全13巻)・1986年KCスペシャル・2003年KPC・2007-08年ヤングジャンプ・コミックスBJ・2018年BIG COMICS SPECIALが混線し、1巻2018-07→7巻1970-12-31の48年逆行になっていた。初出全13巻を主版に戻し、他はextra_editionsへ。文庫タブは集英社漫画文庫(1976-77 全12巻)と徳間コミック文庫(1995 3巻)が混ざっていたので suppress_types で版ごとに作り直した。 ★ISBN補充6巻 2026-08-24(partial-isbn-gap半自動: 帯/楽天題/巻番号/未使用の4検証) / ★2026-08-30 別作品の移設: 「ヤングジャンプ・コミックスBJ」3巻は2007年の別作品『ハレンチ学園 ザ・カンパニー』(有賀照人作画・永井豪原作)なので本頁から外し、独立頁 harenchi-gakuen-the-company へ移した(ギャラ式頁分離)。'
 volumes:
 - number: 1
   release_date: 1969-11
@@ -70,20 +70,6 @@ extra_editions:
   - number: 2
     isbn13: '9784063530698'
     release_date: 2003-06
-- type: other
-  label: ヤングジャンプ・コミックスBJ
-  imprint: ヤングジャンプ・コミックスBJ
-  publisher: 集英社
-  volumes:
-  - number: 1
-    isbn13: '9784088773162'
-    release_date: 2007-08
-  - number: 2
-    isbn13: '9784088773995'
-    release_date: 2008-02
-  - number: 3
-    isbn13: '9784088774497'
-    release_date: 2008-06
 - type: shinsoban
   label: BIG COMICS SPECIAL(小学館)
   imprint: BIG COMICS SPECIAL
