@@ -2,92 +2,54 @@ slug: gattsu-ranpei
 canonical_label: 通常版
 canonical_publisher: 集英社
 canonical_imprint: ジャンプ・コミックス
-source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。'
+source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。 / ★2026-08-30 ユーザ裁定「機械的に処理できそうな物は処理して」。コンビニ廉価/抜粋レーベル × 同頁に他版が残る × 主版より巻数が少ない、の3条件をすべて満たす版だけを落とした(作品が消えないことを機械で保証)。 除去= ジャンプ・コミックス・セレクション(11巻)'
 volumes:
 - number: 1
-  release_date: '1980-03'
+  release_date: 1980-03
 - number: 2
-  release_date: '1980-06'
+  release_date: 1980-06
 - number: 3
-  release_date: '1980-08'
+  release_date: 1980-08
 - number: 4
-  release_date: '1980-11'
+  release_date: 1980-11
 - number: 5
-  release_date: '1981-03'
+  release_date: 1981-03
 - number: 6
   release_date: '1981-08-15'
 - number: 7
-  release_date: '1982-01'
+  release_date: 1982-01
 - number: 8
-  release_date: '1982-06'
+  release_date: 1982-06
 - number: 9
-  release_date: '1982-10'
+  release_date: 1982-10
 - number: 10
   isbn13: '9784088511603'
-  release_date: '1983-04'
+  release_date: 1983-04
 - number: 11
   isbn13: '9784088511610'
-  release_date: '1983-10'
+  release_date: 1983-10
 - number: 12
   isbn13: '9784088511627'
-  release_date: '1984-02'
+  release_date: 1984-02
 - number: 13
   isbn13: '9784088511634'
-  release_date: '1984-09'
+  release_date: 1984-09
 - number: 14
   isbn13: '9784088511641'
   release_date: '1985-05-15'
 - number: 15
   isbn13: '9784088511658'
-  release_date: '1985-11'
+  release_date: 1985-11
 - number: 16
   isbn13: '9784088511665'
-  release_date: '1986-03'
+  release_date: 1986-03
 - number: 17
   isbn13: '9784088511672'
-  release_date: '1986-06'
+  release_date: 1986-06
 - number: 18
   isbn13: '9784088511689'
   release_date: '1986-09-15'
 - number: 19
   isbn13: '9784088511696'
-  release_date: '1986-12'
-extra_editions:
-- type: shinsoban
-  label: ジャンプ・コミックス・セレクション
-  imprint: ジャンプ・コミックス・セレクション
-  publisher: ホーム社
-  volumes:
-  - number: 1
-    isbn13: '9784834213317'
-    release_date: '1994-08'
-  - number: 2
-    isbn13: '9784834213324'
-    release_date: '1994-09'
-  - number: 3
-    isbn13: '9784834213331'
-    release_date: '1994-10-24'
-  - number: 4
-    isbn13: '9784834213348'
-    release_date: '1994-11-23'
-  - number: 5
-    isbn13: '9784834213355'
-    release_date: '1994-12'
-  - number: 6
-    isbn13: '9784834213362'
-    release_date: '1995-01'
-  - number: 7
-    isbn13: '9784834213379'
-    release_date: '1995-02-22'
-  - number: 8
-    isbn13: '9784834213386'
-    release_date: '1995-03-22'
-  - number: 9
-    isbn13: '9784834213393'
-    release_date: '1995-04-24'
-  - number: 10
-    isbn13: '9784834213409'
-    release_date: '1995-05'
-  - number: 11
-    isbn13: '9784834213416'
-    release_date: '1995-06'
+  release_date: 1986-12
+extra_editions: []

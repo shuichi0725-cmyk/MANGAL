@@ -60,23 +60,6 @@ editions:
     isbn13: '9784063134094'
     cover_url: null
     release_date: '1990-07-23'
-- type: shinsoban
-  label: KPC(2004)
-  publisher: 講談社
-  imprint: KPC
-  volumes:
-  - number: 1
-    asin: null
-    isbn13: '9784063532579'
-    cover_url: null
-    release_date: 2004-06
-    volume_label: 大宇宙の魔女
-  - number: 2
-    asin: null
-    isbn13: '9784063532852'
-    cover_url: null
-    release_date: 2004-07
-    volume_label: トチローと黒衣の戦士
 - type: bunkobon
   label: 講談社漫画文庫(1996)
   publisher: 講談社
@@ -142,6 +125,6 @@ tags:
 - name: Shounen
   category: Demographic
   rank: 50
-popularity: 993
+popularity: 1017
 score: 64
 work_wikidata_qid: Q567373

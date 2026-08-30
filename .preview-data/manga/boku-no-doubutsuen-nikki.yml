@@ -66,36 +66,6 @@ editions:
     cover_url: null
     release_date: '1973'
 - type: shinsoban
-  label: ジャンプ・コミックスセレクション
-  publisher: ホーム社
-  imprint: ジャンプ・コミックスセレクション
-  volumes:
-  - number: 1
-    asin: null
-    isbn13: '9784834211504'
-    cover_url: null
-    release_date: '1989-04-19'
-  - number: 2
-    asin: null
-    isbn13: '9784834211511'
-    cover_url: null
-    release_date: '1989-05-24'
-  - number: 3
-    asin: null
-    isbn13: '9784834211528'
-    cover_url: null
-    release_date: '1989-06-24'
-  - number: 4
-    asin: null
-    isbn13: '9784834211535'
-    cover_url: null
-    release_date: '1989-07-24'
-  - number: 5
-    asin: null
-    isbn13: '9784834211542'
-    cover_url: null
-    release_date: '1989-08-24'
-- type: shinsoban
   label: Jump comics
   publisher: 不明
   imprint: Jump comics
@@ -126,7 +96,6 @@ editions:
     cover_url: null
     release_date: null
 publishers:
-- home-sha
 - shueisha
 anilist_id: 161058
 genres_anilist:

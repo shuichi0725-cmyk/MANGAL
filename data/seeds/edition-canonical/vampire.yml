@@ -4,7 +4,7 @@ canonical_publisher: 講談社
 canonical_imprint: 手塚治虫漫画全集
 suppress_types:
 - bunkobon
-source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。'
+source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。 / ★2026-08-30 ユーザ裁定「機械的に処理できそうな物は処理して」。コンビニ廉価/抜粋レーベル × 同頁に他版が残る × 主版より巻数が少ない、の3条件をすべて満たす版だけを落とした(作品が消えないことを機械で保証)。 除去= Akita top comics wide(1巻) / 秋田トップコミックス(1巻)'
 volumes:
 - number: 1
   isbn13: '9784061087422'
@@ -17,7 +17,7 @@ volumes:
   release_date: '1979-06-30'
 - number: 4
   isbn13: '9784061759206'
-  release_date: '1993-06'
+  release_date: 1993-06
 extra_editions:
 - type: shinsoban
   label: サンデー・コミックス(1968)
@@ -28,7 +28,7 @@ extra_editions:
     release_date: '1968-05-10'
   - number: 3
     isbn13: '9784253062022'
-    release_date: '1972-10'
+    release_date: 1972-10
 - type: shinsoban
   label: サンデー・コミックス(1988)
   imprint: サンデー・コミックス
@@ -36,16 +36,16 @@ extra_editions:
   volumes:
   - number: 1
     isbn13: '9784253063906'
-    release_date: '1988-03'
+    release_date: 1988-03
   - number: 2
     isbn13: '9784253063913'
-    release_date: '1988-03'
+    release_date: 1988-03
   - number: 3
     isbn13: '9784253063920'
-    release_date: '1988-03'
+    release_date: 1988-03
   - number: 4
     isbn13: '9784253063937'
-    release_date: '1988-03'
+    release_date: 1988-03
 - type: shinsoban
   label: Goma books
   imprint: Goma books
@@ -53,10 +53,10 @@ extra_editions:
   volumes:
   - number: 1
     isbn13: '9784814919123'
-    release_date: '2019-03'
+    release_date: 2019-03
   - number: 2
     isbn13: '9784814919185'
-    release_date: '2019-04'
+    release_date: 2019-04
 - type: shinsoban
   label: 手塚治虫トレジャー・ボックス
   imprint: 手塚治虫トレジャー・ボックス
@@ -64,7 +64,7 @@ extra_editions:
   volumes:
   - number: 3
     isbn13: '9784336054746'
-    release_date: '2012-07'
+    release_date: 2012-07
 - type: bunkobon
   label: 秋田文庫
   imprint: 秋田文庫
@@ -72,13 +72,13 @@ extra_editions:
   volumes:
   - number: 1
     isbn13: '9784253170932'
-    release_date: '1995-02'
+    release_date: 1995-02
   - number: 2
     isbn13: '9784253170949'
     release_date: '1995-02-25'
   - number: 3
     isbn13: '9784253170956'
-    release_date: '1995-02'
+    release_date: 1995-02
 - type: shinsoban
   label: 手塚治虫・傑作選集
   imprint: 手塚治虫・傑作選集
@@ -86,10 +86,10 @@ extra_editions:
   volumes:
   - number: 1
     isbn13: '9784253103398'
-    release_date: '1992-04'
+    release_date: 1992-04
   - number: 2
     isbn13: '9784253103404'
-    release_date: '1992-05'
+    release_date: 1992-05
 - type: bunkobon
   label: 手塚治虫文庫全集
   imprint: 手塚治虫文庫全集
@@ -97,10 +97,10 @@ extra_editions:
   volumes:
   - number: 1
     isbn13: '9784063737820'
-    release_date: '2010-09'
+    release_date: 2010-09
   - number: 2
     isbn13: '9784063737837'
-    release_date: '2010-09'
+    release_date: 2010-09
 - type: shinsoban
   label: SUNDAY COMICS
   imprint: SUNDAY COMICS
@@ -108,19 +108,3 @@ extra_editions:
   volumes:
   - number: 2
     release_date: '1968-06-10'
-- type: shinsoban
-  label: Akita top comics wide
-  imprint: Akita top comics wide
-  publisher: 秋田書店
-  volumes:
-  - number: 1
-    isbn13: '9784253243971'
-    release_date: '2016-06'
-- type: shinsoban
-  label: 秋田トップコミックス
-  imprint: 秋田トップコミックス
-  publisher: 秋田書店
-  volumes:
-  - number: 1
-    isbn13: '9784253188845'
-    release_date: '2002-11'

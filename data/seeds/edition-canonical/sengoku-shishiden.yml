@@ -2,7 +2,7 @@ slug: sengoku-shishiden
 canonical_label: 通常版
 canonical_publisher: 双葉社
 canonical_imprint: パワァコミックス
-source: 'ギャラ型B是正 2026-08-17: 通常版タブに1974-77年パワァコミックス(全8巻)と2011年小学館クリエイティブ版(全4巻)が混線し、1巻2011年/2巻1974年…という37年逆行(頁の出版社も小学館クリエイティブ表示)。アクション・コミックスの1980年版・1990-91年版、KPC、Rare mix comicsは巻番号衝突で1冊も出ていなかった。NDL SRU(creator=横山光輝)で確定= 【アクションコミックス】双葉社 1974.03.01 / 1980.06.30 v1 / 1990.11.30 v1(4575816795)・v2(4575816809)・1990.12.28 v3(4575816841) / 【KPC】講談社 2007.8-10 春秋烈風篇・暴虎震撼篇・竜虎飛翔篇 / 【Rare mix comics】小学館クリエイティブ 2011.7-9 飛竜編・風雲編・血刀編 / 小学館クリエイティブ 2011.2-4 全4巻。★初出のパワァコミックス自体はNDL未収録だが、同じ1974年に双葉社が本作を刊行していることがNDLで確認でき(1974.03.01のアクションコミックス記録)、後続の再版も全て双葉社なので版元を双葉社とした。1990-91年版の5巻は両ソースに無く欠番のまま。文庫タブ(講談社漫画文庫 全5巻 2001)とデラックスタブは混在なしのため温存。'
+source: 'ギャラ型B是正 2026-08-17: 通常版タブに1974-77年パワァコミックス(全8巻)と2011年小学館クリエイティブ版(全4巻)が混線し、1巻2011年/2巻1974年…という37年逆行(頁の出版社も小学館クリエイティブ表示)。アクション・コミックスの1980年版・1990-91年版、KPC、Rare mix comicsは巻番号衝突で1冊も出ていなかった。NDL SRU(creator=横山光輝)で確定= 【アクションコミックス】双葉社 1974.03.01 / 1980.06.30 v1 / 1990.11.30 v1(4575816795)・v2(4575816809)・1990.12.28 v3(4575816841) / 【KPC】講談社 2007.8-10 春秋烈風篇・暴虎震撼篇・竜虎飛翔篇 / 【Rare mix comics】小学館クリエイティブ 2011.7-9 飛竜編・風雲編・血刀編 / 小学館クリエイティブ 2011.2-4 全4巻。★初出のパワァコミックス自体はNDL未収録だが、同じ1974年に双葉社が本作を刊行していることがNDLで確認でき(1974.03.01のアクションコミックス記録)、後続の再版も全て双葉社なので版元を双葉社とした。1990-91年版の5巻は両ソースに無く欠番のまま。文庫タブ(講談社漫画文庫 全5巻 2001)とデラックスタブは混在なしのため温存。 / ★2026-08-30 ユーザ裁定「機械的に処理できそうな物は処理して」。コンビニ廉価/抜粋レーベル × 同頁に他版が残る × 主版より巻数が少ない、の3条件をすべて満たす版だけを落とした(作品が消えないことを機械で保証)。 除去= KPC版(講談社)(3巻)'
 volumes:
 - number: 1
   release_date: '1974'
@@ -17,9 +17,9 @@ volumes:
 - number: 6
   release_date: '1976'
 - number: 7
-  release_date: '1977-01'
+  release_date: 1977-01
 - number: 8
-  release_date: '1977-02'
+  release_date: 1977-02
 extra_editions:
 - type: shinsoban
   label: アクション・コミックス版(1980)
@@ -29,17 +29,17 @@ extra_editions:
   - number: 1
     release_date: '1980-06-30'
   - number: 2
-    release_date: '1980-06'
+    release_date: 1980-06
   - number: 3
-    release_date: '1980-07'
+    release_date: 1980-07
   - number: 4
-    release_date: '1980-07'
+    release_date: 1980-07
   - number: 5
-    release_date: '1980-08'
+    release_date: 1980-08
   - number: 6
-    release_date: '1980-08'
+    release_date: 1980-08
   - number: 7
-    release_date: '1980-09'
+    release_date: 1980-09
 - type: shinsoban
   label: アクション・コミックス版(1990-91)
   imprint: アクション・コミックス
@@ -64,38 +64,21 @@ extra_editions:
     isbn13: '9784575816976'
     release_date: '1991-02-16'
 - type: shinsoban
-  label: KPC版(講談社)
-  imprint: KPC
-  publisher: 講談社
-  volumes:
-  - number: 1
-    isbn13: '9784063740110'
-    release_date: '2007-08'
-    volume_label: 春秋烈風篇
-  - number: 2
-    isbn13: '9784063740288'
-    release_date: '2007-09'
-    volume_label: 暴虎震撼篇
-  - number: 3
-    isbn13: '9784063740448'
-    release_date: '2007-10'
-    volume_label: 竜虎飛翔篇
-- type: shinsoban
   label: 小学館クリエイティブ版
   publisher: 小学館クリエイティブ
   volumes:
   - number: 1
     isbn13: '9784778031695'
-    release_date: '2011-02'
+    release_date: 2011-02
   - number: 2
     isbn13: '9784778031701'
-    release_date: '2011-03'
+    release_date: 2011-03
   - number: 3
     isbn13: '9784778031718'
-    release_date: '2011-03'
+    release_date: 2011-03
   - number: 4
     isbn13: '9784778031725'
-    release_date: '2011-04'
+    release_date: 2011-04
 - type: shinsoban
   label: Rare mix comics(小学館クリエイティブ)
   imprint: Rare mix comics
@@ -103,13 +86,13 @@ extra_editions:
   volumes:
   - number: 1
     isbn13: '9784778060275'
-    release_date: '2011-07'
+    release_date: 2011-07
     volume_label: 飛竜編
   - number: 2
     isbn13: '9784778060282'
-    release_date: '2011-08'
+    release_date: 2011-08
     volume_label: 風雲編
   - number: 3
     isbn13: '9784778060299'
-    release_date: '2011-09'
+    release_date: 2011-09
     volume_label: 血刀編

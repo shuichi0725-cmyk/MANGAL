@@ -3,22 +3,22 @@ canonical_label: 通常版
 canonical_publisher: 講談社
 suppress_types:
 - bunkobon
-source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。'
+source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。 / ★2026-08-30 ユーザ裁定「機械的に処理できそうな物は処理して」。コンビニ廉価/抜粋レーベル × 同頁に他版が残る × 主版より巻数が少ない、の3条件をすべて満たす版だけを落とした(作品が消えないことを機械で保証)。 除去= KPC(1巻)'
 volumes:
 - number: 0
   release_date: '1954-11-10'
 - number: 1
   isbn13: '9784061769403'
-  release_date: '1989-10'
+  release_date: 1989-10
 - number: 2
   isbn13: '9784061769410'
-  release_date: '1989-11'
+  release_date: 1989-11
 - number: 3
   isbn13: '9784061769427'
-  release_date: '1989-12'
+  release_date: 1989-12
 - number: 4
   isbn13: '9784061769434'
-  release_date: '1990-01'
+  release_date: 1990-01
 extra_editions:
 - type: bunkobon
   label: 新潮文庫
@@ -34,15 +34,15 @@ extra_editions:
   publisher: 講談社
   volumes:
   - number: 1
-    release_date: '1977-02'
+    release_date: 1977-02
   - number: 2
-    release_date: '1977-03'
+    release_date: 1977-03
   - number: 3
-    release_date: '1977-04'
+    release_date: 1977-04
   - number: 4
-    release_date: '1977-07'
+    release_date: 1977-07
   - number: 5
-    release_date: '1977-09'
+    release_date: 1977-09
 - type: shinsoban
   label: KCスペシャル
   imprint: KCスペシャル
@@ -50,16 +50,16 @@ extra_editions:
   volumes:
   - number: 1
     isbn13: '9784061010819'
-    release_date: '1984-08'
+    release_date: 1984-08
   - number: 2
     isbn13: '9784061010826'
-    release_date: '1984-08'
+    release_date: 1984-08
   - number: 3
     isbn13: '9784061010833'
     release_date: null
   - number: 4
     isbn13: '9784061010840'
-    release_date: '1984-09'
+    release_date: 1984-09
 - type: shinsoban
   label: 少年マガジンコミックス
   imprint: 少年マガジンコミックス
@@ -76,18 +76,10 @@ extra_editions:
   volumes:
   - number: 1
     isbn13: '9784063600018'
-    release_date: '2001-06'
+    release_date: 2001-06
   - number: 2
     isbn13: '9784063600025'
-    release_date: '2001-06'
+    release_date: 2001-06
   - number: 3
     isbn13: '9784063600032'
-    release_date: '2001-06'
-- type: shinsoban
-  label: KPC
-  imprint: KPC
-  publisher: 講談社
-  volumes:
-  - number: 1
-    isbn13: '9784063740790'
-    release_date: '2007-12'
+    release_date: 2001-06

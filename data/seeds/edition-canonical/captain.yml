@@ -4,7 +4,7 @@ canonical_publisher: 集英社
 canonical_imprint: ジャンプ・コミックス
 suppress_types:
 - bunkobon
-source: 'ギャラ型是正 2026-08-17(worksheetのA_SPLIT_WORK?判定だが実体はB型): 初出のジャンプ・コミックス(集英社 全26巻 1974-04-30〜1980-06-15)がMADB上で別sid(著者欄に白泉社が混入したクラスタ)に丸ごと落ちており、頁の1-18巻枠を1986年ジャンプコミックスセレクションと2010年ホームコミックスが占有していた(16巻2010-04→19巻1978-05の32年逆行)。初出全26巻を主版に戻し、ホーム社系3run(セレクション1986-87 全15巻/ホーム社1991-92 全15巻/ホームコミックス2009-10 全18巻)と集英社ホームリミックス(2022 全2巻)はextra_editionsへ。文庫タブは集英社文庫の1・3巻が別edition(集英社文庫 コミック版)に分かれていたので suppress_types で全15巻を1本に作り直した。NDL SRU(creator=ちばあきお)でホーム社版のISBNと版元を確認。アクションコミックスアニメ版(1980)はアニメ版のため掲載対象外。 ★ISBN補充4巻 2026-08-24(partial-isbn-gap半自動: 帯/楽天題/巻番号/未使用の4検証)'
+source: 'ギャラ型是正 2026-08-17(worksheetのA_SPLIT_WORK?判定だが実体はB型): 初出のジャンプ・コミックス(集英社 全26巻 1974-04-30〜1980-06-15)がMADB上で別sid(著者欄に白泉社が混入したクラスタ)に丸ごと落ちており、頁の1-18巻枠を1986年ジャンプコミックスセレクションと2010年ホームコミックスが占有していた(16巻2010-04→19巻1978-05の32年逆行)。初出全26巻を主版に戻し、ホーム社系3run(セレクション1986-87 全15巻/ホーム社1991-92 全15巻/ホームコミックス2009-10 全18巻)と集英社ホームリミックス(2022 全2巻)はextra_editionsへ。文庫タブは集英社文庫の1・3巻が別edition(集英社文庫 コミック版)に分かれていたので suppress_types で全15巻を1本に作り直した。NDL SRU(creator=ちばあきお)でホーム社版のISBNと版元を確認。アクションコミックスアニメ版(1980)はアニメ版のため掲載対象外。 ★ISBN補充4巻 2026-08-24(partial-isbn-gap半自動: 帯/楽天題/巻番号/未使用の4検証) / ★2026-08-30 ユーザ裁定「機械的に処理できそうな物は処理して」。コンビニ廉価/抜粋レーベル × 同頁に他版が残る × 主版より巻数が少ない、の3条件をすべて満たす版だけを落とした(作品が消えないことを機械で保証)。 除去= ジャンプコミックスセレクション(ホーム社)(15巻) / 集英社ホームリミックス(2巻)'
 volumes:
 - number: 1
   release_date: '1974-04-30'
@@ -59,56 +59,6 @@ volumes:
 - number: 26
   release_date: '1980-06-15'
 extra_editions:
-- type: shinsoban
-  label: ジャンプコミックスセレクション(ホーム社)
-  imprint: ジャンプコミックスセレクション
-  publisher: ホーム社
-  volumes:
-  - number: 1
-    isbn13: '9784834210019'
-    release_date: '1986-03-24'
-  - number: 2
-    isbn13: '9784834210026'
-    release_date: '1986-04-24'
-  - number: 3
-    isbn13: '9784834210033'
-    release_date: '1986-05-24'
-  - number: 4
-    isbn13: '9784834210040'
-    release_date: '1986-06-24'
-  - number: 5
-    isbn13: '9784834210057'
-    release_date: '1986-07-24'
-  - number: 6
-    release_date: '1986-08-24'
-    isbn13: '9784834210064'
-  - number: 7
-    isbn13: '9784834210071'
-    release_date: '1986-09-24'
-  - number: 8
-    isbn13: '9784834210088'
-    release_date: '1986-10-24'
-  - number: 9
-    release_date: '1986-11-24'
-    isbn13: '9784834210095'
-  - number: 10
-    isbn13: '9784834210101'
-    release_date: '1986-12-17'
-  - number: 11
-    isbn13: '9784834210118'
-    release_date: '1987-01-24'
-  - number: 12
-    release_date: '1987-02-24'
-    isbn13: '9784834210125'
-  - number: 13
-    isbn13: '9784834210132'
-    release_date: '1987-03-24'
-  - number: 14
-    release_date: '1987-04-24'
-    isbn13: '9784834210149'
-  - number: 15
-    isbn13: '9784834210156'
-    release_date: '1987-05-24'
 - type: shinsoban
   label: ホーム社版(1991-92)
   publisher: ホーム社
@@ -217,19 +167,6 @@ extra_editions:
   - number: 18
     isbn13: '9784834284195'
     release_date: 2010-06
-- type: other
-  label: 集英社ホームリミックス
-  imprint: 集英社ホームリミックス
-  publisher: ホーム社
-  volumes:
-  - number: 1
-    isbn13: '9784834244915'
-    release_date: 2022-03
-    volume_label: 谷口タカオ伝説編 上巻
-  - number: 2
-    isbn13: '9784834244922'
-    release_date: 2022-04
-    volume_label: 谷口タカオ伝説編 下巻
 - type: bunkobon
   label: 文庫版(集英社文庫)
   imprint: 集英社文庫

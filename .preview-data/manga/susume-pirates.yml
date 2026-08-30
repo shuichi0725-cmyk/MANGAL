@@ -146,41 +146,6 @@ editions:
     isbn13: null
     cover_url: null
     release_date: 1981-07
-- type: shinsoban
-  label: ジャンプコミックスセレクション
-  publisher: ホーム社
-  imprint: ジャンプコミックスセレクション
-  volumes:
-  - number: 1
-    asin: null
-    isbn13: '9784834210613'
-    cover_url: null
-    release_date: 1986-09
-  - number: 2
-    asin: null
-    isbn13: '9784834210620'
-    cover_url: null
-    release_date: 1986-10
-  - number: 3
-    asin: null
-    isbn13: '9784834210637'
-    cover_url: null
-    release_date: 1986-11
-  - number: 4
-    asin: null
-    isbn13: '9784834210644'
-    cover_url: null
-    release_date: 1986-12
-  - number: 5
-    asin: null
-    isbn13: '9784834210651'
-    cover_url: null
-    release_date: 1987-01
-  - number: 6
-    asin: null
-    isbn13: '9784834210668'
-    cover_url: null
-    release_date: 1987-02
 - type: bunkobon
   label: 角川文庫
   publisher: 角川書店
@@ -296,7 +261,6 @@ editions:
     release_date: '2012-12-12'
     volume_label: パイレーツフォーエバーの巻
 publishers:
-- home-sha
 - kadokawa
 - shogakukan-creative
 - shueisha

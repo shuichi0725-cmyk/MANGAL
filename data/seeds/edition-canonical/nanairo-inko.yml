@@ -4,7 +4,7 @@ canonical_publisher: 講談社
 canonical_imprint: 手塚治虫漫画全集
 suppress_types:
 - bunkobon
-source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。 ★ISBN補充1巻 2026-08-24(partial-isbn-gap半自動: 帯/楽天題/巻番号/未使用の4検証)　/ 2026-08-28 刊行run分裂の是正(ARMSワイド版型): MADBのレーベル表記ゆれ(英字↔和名・略称↔正式名・中黒)や種2のクラスタ分裂で、1本の刊行runが複数の版タブに割れていた。楽天seriesName・MADBのシリーズ容器ID(schema:isPartOf)・ISBN連番・刊行リストで同一runと確認できた分だけ、既存の巻を版間で移して統合した(調査エージェント+反証エージェントの二段で裁定)。巻・ISBN・発売日の新規追加や改変はしていない。 / ★2026-08-29 壊れラベル是正: 2026-08-17の一括処理が、種2でimprintが空だったrunにtype名(standard)をそのまま貼って『standard版』という実在しないタブ名を作っていた。NDL by-ISBNの叢書名(dcndl:seriesTitle)→楽天seriesName→出版社名 の順で実名に戻した。どれも取れないrunは『別版』とし、巻・ISBN・発売日には一切触れていない。'
+source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。 ★ISBN補充1巻 2026-08-24(partial-isbn-gap半自動: 帯/楽天題/巻番号/未使用の4検証)　/ 2026-08-28 刊行run分裂の是正(ARMSワイド版型): MADBのレーベル表記ゆれ(英字↔和名・略称↔正式名・中黒)や種2のクラスタ分裂で、1本の刊行runが複数の版タブに割れていた。楽天seriesName・MADBのシリーズ容器ID(schema:isPartOf)・ISBN連番・刊行リストで同一runと確認できた分だけ、既存の巻を版間で移して統合した(調査エージェント+反証エージェントの二段で裁定)。巻・ISBN・発売日の新規追加や改変はしていない。 / ★2026-08-29 壊れラベル是正: 2026-08-17の一括処理が、種2でimprintが空だったrunにtype名(standard)をそのまま貼って『standard版』という実在しないタブ名を作っていた。NDL by-ISBNの叢書名(dcndl:seriesTitle)→楽天seriesName→出版社名 の順で実名に戻した。どれも取れないrunは『別版』とし、巻・ISBN・発売日には一切触れていない。 / ★2026-08-30 ユーザ裁定「機械的に処理できそうな物は処理して」。コンビニ廉価/抜粋レーベル × 同頁に他版が残る × 主版より巻数が少ない、の3条件をすべて満たす版だけを落とした(作品が消えないことを機械で保証)。 除去= Akita top comics wide(2巻) / Akita top comics(1巻)'
 volumes:
 - number: 1
   isbn13: '9784061759411'
@@ -66,19 +66,6 @@ extra_editions:
   - number: 3
     isbn13: '9784063738469'
     release_date: 2011-08
-- type: shinsoban
-  label: Akita top comics wide
-  imprint: Akita top comics wide
-  publisher: 秋田書店
-  volumes:
-  - number: 1
-    isbn13: '9784253247146'
-    release_date: 2016-08
-    volume_label: 第1幕
-  - number: 2
-    isbn13: '9784253247153'
-    release_date: 2016-09
-    volume_label: 第2幕
 - type: shinsoban
   label: 少年チャンピオン・コミックス
   imprint: 少年チャンピオン・コミックス
@@ -155,11 +142,3 @@ extra_editions:
   - number: 0
     isbn13: '9784814919055'
     release_date: 2019-02
-- type: shinsoban
-  label: Akita top comics
-  imprint: Akita top comics
-  publisher: 秋田書店
-  volumes:
-  - number: 1
-    isbn13: '9784253188425'
-    release_date: 2004-02

@@ -4,7 +4,7 @@ canonical_publisher: 集英社
 canonical_imprint: ジャンプ・コミックス
 suppress_types:
 - bunkobon
-source: 'ギャラ型(ISBN消えるクラス) 2026-08-17: ジャンプ・コミックス原版(1973-76・ISBN無)v1-19をmainに復元(v4枠にJCセレクション1986が食い込み逆行)。孤児v4 ISBN=セレクション帯連番(0330-0354の間)で同runへ添付。太田出版版(1999)・集英社漫画文庫(1978-79)をタブ化 ★ISBN補充4巻 2026-08-24(partial-isbn-gap半自動: 帯/楽天題/巻番号/未使用の4検証)'
+source: 'ギャラ型(ISBN消えるクラス) 2026-08-17: ジャンプ・コミックス原版(1973-76・ISBN無)v1-19をmainに復元(v4枠にJCセレクション1986が食い込み逆行)。孤児v4 ISBN=セレクション帯連番(0330-0354の間)で同runへ添付。太田出版版(1999)・集英社漫画文庫(1978-79)をタブ化 ★ISBN補充4巻 2026-08-24(partial-isbn-gap半自動: 帯/楽天題/巻番号/未使用の4検証) / ★2026-08-30 ユーザ裁定「機械的に処理できそうな物は処理して」。コンビニ廉価/抜粋レーベル × 同頁に他版が残る × 主版より巻数が少ない、の3条件をすべて満たす版だけを落とした(作品が消えないことを機械で保証)。 除去= ジャンプコミックスセレクション(1986)(9巻)'
 volumes:
 - number: 1
   release_date: '1973-11-30'
@@ -45,38 +45,6 @@ volumes:
 - number: 19
   release_date: '1976-12-31'
 extra_editions:
-- type: shinsoban
-  label: ジャンプコミックスセレクション(1986)
-  imprint: ジャンプコミックスセレクション
-  publisher: 集英社
-  volumes:
-  - number: 1
-    isbn13: '9784834210316'
-    release_date: '1986-03-24'
-  - number: 2
-    isbn13: '9784834210323'
-    release_date: '1986-04-24'
-  - number: 3
-    isbn13: '9784834210330'
-    release_date: '1986-05-24'
-  - number: 4
-    isbn13: '9784834210347'
-    release_date: '1986-06-24'
-  - number: 5
-    isbn13: '9784834210354'
-    release_date: '1986-07-24'
-  - number: 6
-    release_date: '1986-08-24'
-    isbn13: '9784834210361'
-  - number: 7
-    release_date: '1986-09-24'
-    isbn13: '9784834210378'
-  - number: 8
-    release_date: '1986-10-24'
-    isbn13: '9784834210385'
-  - number: 11
-    release_date: '1987-01-24'
-    isbn13: '9784834210415'
 - type: shinsoban
   label: 太田出版版(1999)
   publisher: 太田出版

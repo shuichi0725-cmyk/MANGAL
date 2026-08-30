@@ -4,12 +4,12 @@ canonical_publisher: 講談社
 canonical_imprint: 講談社コミックス
 suppress_types:
 - bunkobon
-source: 'ギャラ型仕上げ 2026-08-17: 主版=初版講談社コミックス(NDL: v1=1978-12/v2=1979-01・v4=1979-02-25はMADB。v3は両ソースに日付記録なし=載せない)。旧頁はGC1990+復刻決定版2020+初版が1タブに混成し41年逆行だった。復刻決定版(復刊ドットコム2020)はNDL・楽天とも全3巻で完結。KPCの2冊は題名巻(volume_label)。文庫2種は自前タブ化(suppress bunkobon)'
+source: 'ギャラ型仕上げ 2026-08-17: 主版=初版講談社コミックス(NDL: v1=1978-12/v2=1979-01・v4=1979-02-25はMADB。v3は両ソースに日付記録なし=載せない)。旧頁はGC1990+復刻決定版2020+初版が1タブに混成し41年逆行だった。復刻決定版(復刊ドットコム2020)はNDL・楽天とも全3巻で完結。KPCの2冊は題名巻(volume_label)。文庫2種は自前タブ化(suppress bunkobon) / ★2026-08-30 ユーザ裁定「機械的に処理できそうな物は処理して」。コンビニ廉価/抜粋レーベル × 同頁に他版が残る × 主版より巻数が少ない、の3条件をすべて満たす版だけを落とした(作品が消えないことを機械で保証)。 除去= KPC(2004)(2巻)'
 volumes:
 - number: 1
-  release_date: '1978-12'
+  release_date: 1978-12
 - number: 2
-  release_date: '1979-01'
+  release_date: 1979-01
 - number: 4
   release_date: '1979-02-25'
 extra_editions:
@@ -24,19 +24,6 @@ extra_editions:
   - number: 2
     isbn13: '9784063134094'
     release_date: '1990-07-23'
-- type: shinsoban
-  label: KPC(2004)
-  imprint: KPC
-  publisher: 講談社
-  volumes:
-  - number: 1
-    volume_label: 大宇宙の魔女
-    isbn13: '9784063532579'
-    release_date: '2004-06'
-  - number: 2
-    volume_label: トチローと黒衣の戦士
-    isbn13: '9784063532852'
-    release_date: '2004-07'
 - type: bunkobon
   label: 講談社漫画文庫(1996)
   imprint: 講談社漫画文庫
@@ -44,10 +31,10 @@ extra_editions:
   volumes:
   - number: 1
     isbn13: '9784062602549'
-    release_date: '1996-08'
+    release_date: 1996-08
   - number: 2
     isbn13: '9784062602556'
-    release_date: '1996-08'
+    release_date: 1996-08
 - type: bunkobon
   label: 新装完全版文庫(2009)
   imprint: 講談社漫画文庫
@@ -55,10 +42,10 @@ extra_editions:
   volumes:
   - number: 1
     isbn13: '9784063706840'
-    release_date: '2009-11'
+    release_date: 2009-11
   - number: 2
     isbn13: '9784063706857'
-    release_date: '2009-11'
+    release_date: 2009-11
 - type: shinsoban
   label: 復刻決定版(2020)
   publisher: 復刊ドットコム

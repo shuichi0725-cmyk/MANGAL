@@ -2,7 +2,7 @@ slug: boku-no-doubutsuen-nikki
 canonical_label: 通常版
 canonical_publisher: 集英社
 canonical_imprint: ジャンプ・コミックス
-source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。　/ 2026-08-28 刊行run分裂の是正(ARMSワイド版型): MADBのレーベル表記ゆれ(英字↔和名・略称↔正式名・中黒)や種2のクラスタ分裂で、1本の刊行runが複数の版タブに割れていた。楽天seriesName・MADBのシリーズ容器ID(schema:isPartOf)・ISBN連番・刊行リストで同一runと確認できた分だけ、既存の巻を版間で移して統合した(調査エージェント+反証エージェントの二段で裁定)。巻・ISBN・発売日の新規追加や改変はしていない。'
+source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。　/ 2026-08-28 刊行run分裂の是正(ARMSワイド版型): MADBのレーベル表記ゆれ(英字↔和名・略称↔正式名・中黒)や種2のクラスタ分裂で、1本の刊行runが複数の版タブに割れていた。楽天seriesName・MADBのシリーズ容器ID(schema:isPartOf)・ISBN連番・刊行リストで同一runと確認できた分だけ、既存の巻を版間で移して統合した(調査エージェント+反証エージェントの二段で裁定)。巻・ISBN・発売日の新規追加や改変はしていない。 / ★2026-08-30 ユーザ裁定「機械的に処理できそうな物は処理して」。コンビニ廉価/抜粋レーベル × 同頁に他版が残る × 主版より巻数が少ない、の3条件をすべて満たす版だけを落とした(作品が消えないことを機械で保証)。 除去= ジャンプ・コミックスセレクション(5巻)'
 volumes:
 - number: 1
   release_date: 1973-04
@@ -21,26 +21,6 @@ volumes:
 - number: 10
   release_date: '1973'
 extra_editions:
-- type: shinsoban
-  label: ジャンプ・コミックスセレクション
-  imprint: ジャンプ・コミックスセレクション
-  publisher: ホーム社
-  volumes:
-  - number: 1
-    isbn13: '9784834211504'
-    release_date: 1989-04
-  - number: 2
-    isbn13: '9784834211511'
-    release_date: '1989-05-24'
-  - number: 3
-    isbn13: '9784834211528'
-    release_date: '1989-06-24'
-  - number: 4
-    isbn13: '9784834211535'
-    release_date: '1989-07-24'
-  - number: 5
-    isbn13: '9784834211542'
-    release_date: '1989-08-24'
 - type: shinsoban
   label: Jump comics
   imprint: Jump comics

@@ -4,12 +4,12 @@ canonical_publisher: 秋田書店
 canonical_imprint: 少年チャンピオン・コミックス
 suppress_types:
 - bunkobon
-source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。'
+source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。 / ★2026-08-30 ユーザ裁定「機械的に処理できそうな物は処理して」。コンビニ廉価/抜粋レーベル × 同頁に他版が残る × 主版より巻数が少ない、の3条件をすべて満たす版だけを落とした(作品が消えないことを機械で保証)。 除去= Akita top comics wide(1巻)'
 volumes:
 - number: 1
   release_date: '1980-03-05'
 - number: 2
-  release_date: '1980-04'
+  release_date: 1980-04
 - number: 3
   release_date: '1980-05-10'
 extra_editions:
@@ -20,10 +20,10 @@ extra_editions:
   volumes:
   - number: 1
     isbn13: '9784063738285'
-    release_date: '2011-05'
+    release_date: 2011-05
   - number: 2
     isbn13: '9784063738292'
-    release_date: '2011-05'
+    release_date: 2011-05
 - type: bunkobon
   label: 秋田文庫
   imprint: 秋田文庫
@@ -31,7 +31,7 @@ extra_editions:
   volumes:
   - number: 1
     isbn13: '9784253173315'
-    release_date: '1997-02'
+    release_date: 1997-02
   - number: 2
     isbn13: '9784253173322'
     release_date: '1997-02-10'
@@ -49,11 +49,3 @@ extra_editions:
   - number: 3
     isbn13: '9784061732506'
     release_date: '1982-06-20'
-- type: shinsoban
-  label: Akita top comics wide
-  imprint: Akita top comics wide
-  publisher: 秋田書店
-  volumes:
-  - number: 1
-    isbn13: '9784253242479'
-    release_date: '2007-08'

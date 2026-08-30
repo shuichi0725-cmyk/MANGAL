@@ -4,14 +4,14 @@ canonical_publisher: 集英社
 canonical_imprint: ジャンプコミックス
 suppress_types:
 - bunkobon
-source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。'
+source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。 / ★2026-08-30 ユーザ裁定「機械的に処理できそうな物は処理して」。コンビニ廉価/抜粋レーベル × 同頁に他版が残る × 主版より巻数が少ない、の3条件をすべて満たす版だけを落とした(作品が消えないことを機械で保証)。 除去= ジャンプコミックスセレクション(9巻)'
 volumes:
 - number: 1
-  release_date: '1980-06'
+  release_date: 1980-06
 - number: 2
-  release_date: '1980-08'
+  release_date: 1980-08
 - number: 3
-  release_date: '1980-10'
+  release_date: 1980-10
 - number: 4
   release_date: '1980-12-15'
 - number: 5
@@ -21,53 +21,21 @@ volumes:
 - number: 7
   release_date: '1981-10-15'
 - number: 8
-  release_date: '1982-02'
+  release_date: 1982-02
 - number: 9
-  release_date: '1982-06'
+  release_date: 1982-06
 - number: 10
-  release_date: '1982-08'
+  release_date: 1982-08
 - number: 11
   release_date: '1982-10-15'
 - number: 12
-  release_date: '1982-12'
+  release_date: 1982-12
 - number: 13
   release_date: '1983-02-15'
 - number: 14
   isbn13: '9784088512143'
-  release_date: '1983-04'
+  release_date: 1983-04
 extra_editions:
-- type: shinsoban
-  label: ジャンプコミックスセレクション
-  imprint: ジャンプコミックスセレクション
-  publisher: ホーム社
-  volumes:
-  - number: 1
-    isbn13: '9784834212211'
-    release_date: '1989-10'
-  - number: 2
-    isbn13: '9784834212228'
-    release_date: '1989-11'
-  - number: 3
-    isbn13: '9784834212235'
-    release_date: '1989-12'
-  - number: 4
-    isbn13: '9784834212242'
-    release_date: '1990-01'
-  - number: 5
-    isbn13: '9784834212259'
-    release_date: '1990-02'
-  - number: 6
-    isbn13: '9784834212266'
-    release_date: '1990-03'
-  - number: 7
-    isbn13: '9784834212273'
-    release_date: '1990-04'
-  - number: 8
-    isbn13: '9784834212280'
-    release_date: '1990-05'
-  - number: 9
-    isbn13: '9784834212297'
-    release_date: '1990-06'
 - type: bunkobon
   label: 集英社文庫コミック版
   imprint: 集英社文庫コミック版
@@ -81,10 +49,10 @@ extra_editions:
     release_date: '2000-10-23'
   - number: 3
     isbn13: '9784086175920'
-    release_date: '2000-12'
+    release_date: 2000-12
   - number: 4
     isbn13: '9784086175937'
-    release_date: '2000-12'
+    release_date: 2000-12
   - number: 5
     isbn13: '9784086175944'
     release_date: '2001-01-23'
