@@ -69,9 +69,17 @@ def main() -> None:
             #   promote の種4マージも同じ考え方(ISBNの無い行は番号を占有しない)。
             iso_a = {v["number"] for v in va if v.get("isbn13")}
             iso_b = {v["number"] for v in vb if v.get("isbn13")}
-            ghosts = [v for v in va if not v.get("isbn13") and v["number"] in iso_b] +                      [v for v in vb if not v.get("isbn13") and v["number"] in iso_a]
-            va = [v for v in va if v.get("isbn13") or v["number"] not in iso_b]
-            vb = [v for v in vb if v.get("isbn13") or v["number"] not in iso_a]
+            # ★ISBNを1つも持たない版は「ISBN普及前(概ね1981年以前)の版」なので、
+            #   巻にISBNが無いのは正常。丸ごと幽霊扱いしてはいけない
+            #   (2026-08-30: 天才バカボンで実踏。1977年の講談社漫画文庫[1-16]が
+            #    1999年の講談社コミックスの幽霊にされ、別レーベルが同一runに見えた)。
+            gh_a = bool(iso_a) and [v for v in va if not v.get("isbn13") and v["number"] in iso_b]
+            gh_b = bool(iso_b) and [v for v in vb if not v.get("isbn13") and v["number"] in iso_a]
+            ghosts = (gh_a or []) + (gh_b or [])
+            if iso_a:
+                va = [v for v in va if v.get("isbn13") or v["number"] not in iso_b]
+            if iso_b:
+                vb = [v for v in vb if v.get("isbn13") or v["number"] not in iso_a]
             if not va or not vb:
                 continue
             na = [v["number"] for v in va]

@@ -1,0 +1,22 @@
+slug: sora-no-kairou
+canonical_label: 通常版
+canonical_publisher: 集英社
+canonical_imprint: ユーコミックスデラックス
+suppress_types:
+- deluxe
+- shinsoban
+- bunkobon
+source: ★2026-08-30 新設(エロイカ型の掃引で判明)。1本のユーコミックス(全4巻)が「通常版(Personal you)」と「デラックス版(ユーコミックスデラックス)」に割れていた。楽天books で 4巻とも seriesName=YOUコミックス・集英社・1987-09-22/10-23/11-20/12-14 と確認、ISBNも 62084-8/62085-5/62087-9/62089-3 と同一帯で単調。NDL も「ユーコミックスデラックス ; 85」=2巻、同3巻・4巻を記録している。 ★同時に、通常版側にあったISBN無しの「2巻」(1987-04)を外した。これは NDL の【Personal you】「天の回廊. 第2部・総集編」1987.4 に一致する**総集編**で、CLAUDE.mdの掲載scope上そもそも掲載対象外(既刊の再編)。巻ではないので巻枠から外す。
+volumes:
+- number: 1
+  isbn13: '9784088620848'
+  release_date: '1987-09-22'
+- number: 2
+  isbn13: '9784088620855'
+  release_date: '1987-10-23'
+- number: 3
+  isbn13: '9784088620879'
+  release_date: '1987-11-20'
+- number: 4
+  isbn13: '9784088620893'
+  release_date: '1987-12-14'
