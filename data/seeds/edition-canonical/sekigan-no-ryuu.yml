@@ -1,0 +1,65 @@
+slug: sekigan-no-ryuu
+canonical_label: 通常版
+canonical_publisher: リイド社
+canonical_imprint: SPコミックス
+suppress_types:
+- standard
+- bunkobon
+source: ★2026-08-30 版の再構築。コンビニ掃引(bucket B)で「Akita top comics wide が6巻で主版5巻を上回る」として挙がったが、調べると**コンビニ案件ではなく版の取り違え**だった。種2(MADB)は SPコミックス(リイド社1991-92 全6巻) / Akita top comics wide(秋田書店2007 2巻) / リイド文庫(1994 全5巻) / 秋田文庫(2005-06 全4巻) の4版を持つが、promoteの既定は同typeの版を1タブに畳むため standard 2版・bunkobon 2版がそれぞれ合流し、★巻番号の衝突で **秋田文庫4巻と秋田版2巻が丸ごと不可視**になっていた。表示上もSPコミックスの6巻がimprint「Akita top comics wide」を名乗る状態だった。separate_editions は sid 単位の分離で4版とも同一sidのため効かず、(type×imprint)への変更は X の「あすかコミックス/ASUKA COMICS」(表記ゆれ)を誤って割るため採らず、canonical で4版を明示的に組み直した。出版社は楽天books(SPコミックス=リイド社416円 / 秋田文庫=秋田書店)とISBN出版者記号(978-4-8458=リイド社 / 978-4-253=秋田書店)の両方で確認。★Akita top comics wide(2007・2巻のみ)はコンビニ廉価のワイド再刊で、原版6巻+文庫2種が残るため載せない。情報は追加していない。
+volumes:
+- number: 1
+  isbn13: '9784845803613'
+  release_date: '1991-07-13'
+- number: 2
+  isbn13: '9784845803620'
+  release_date: '1991-09-19'
+- number: 3
+  isbn13: '9784845803637'
+  release_date: '1991-11-14'
+- number: 4
+  isbn13: '9784845803644'
+  release_date: '1992-01-17'
+- number: 5
+  isbn13: '9784845803651'
+  release_date: '1992-03-19'
+- number: 6
+  isbn13: '9784845803668'
+  release_date: '1992-05-18'
+extra_editions:
+- type: bunkobon
+  label: リイド文庫
+  imprint: リイド文庫
+  publisher: リイド社
+  volumes:
+  - number: 1
+    isbn13: '9784845811656'
+    release_date: '1994-12-17'
+  - number: 2
+    isbn13: '9784845811670'
+    release_date: '1994-12-17'
+  - number: 3
+    isbn13: '9784845811687'
+    release_date: '1994-12-17'
+  - number: 4
+    isbn13: '9784845811694'
+    release_date: '1994-12-17'
+  - number: 5
+    isbn13: '9784845811700'
+    release_date: '1994-12-17'
+- type: bunkobon
+  label: 秋田文庫
+  imprint: 秋田文庫
+  publisher: 秋田書店
+  volumes:
+  - number: 1
+    isbn13: '9784253179478'
+    release_date: 2005-11
+  - number: 2
+    isbn13: '9784253179485'
+    release_date: 2006-02
+  - number: 3
+    isbn13: '9784253179492'
+    release_date: 2006-05
+  - number: 4
+    isbn13: '9784253179508'
+    release_date: 2006-08

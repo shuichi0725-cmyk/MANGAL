@@ -4,7 +4,7 @@ canonical_publisher: 秋田書店
 canonical_imprint: サンデーコミックス
 suppress_types:
 - bunkobon
-source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。 ★ISBN補充2巻 2026-08-24(partial-isbn-gap半自動: 帯/楽天題/巻番号/未使用の4検証)'
+source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。 ★ISBN補充2巻 2026-08-24(partial-isbn-gap半自動: 帯/楽天題/巻番号/未使用の4検証) / ★2026-08-30 コンビニ廉価/抜粋版の除去(bucket B=巻数が主版以上のため個別に裏取りした分)。楽天で価格・叢書名・巻の実題を確認し、テーマ別の再編集(=抜粋)であることを確定した。 除去=「Akita top comics」(4巻)。2003年刊・**314円**。巻の実題が「トリトンの誕生編」「ターリンの逆襲編」「ポセイドンの要塞編」「ブルーの成長編」＝**テーマ別の再編集**。原版サンデーコミックス(1972-73・全4巻)が残る。'
 volumes:
 - number: 1
   release_date: '1972-12-25'
@@ -19,23 +19,6 @@ volumes:
   isbn13: '9784253062992'
   release_date: '1973-04-20'
 extra_editions:
-- type: shinsoban
-  label: Akita top comics
-  imprint: Akita top comics
-  publisher: 秋田書店
-  volumes:
-  - number: 1
-    isbn13: '9784253189712'
-    release_date: 2003-03
-  - number: 2
-    isbn13: '9784253189729'
-    release_date: 2003-03
-  - number: 3
-    isbn13: '9784253189736'
-    release_date: 2003-05
-  - number: 4
-    isbn13: '9784253189743'
-    release_date: 2003-06
 - type: shinsoban
   label: 手塚治虫漫画全集
   imprint: 手塚治虫漫画全集
