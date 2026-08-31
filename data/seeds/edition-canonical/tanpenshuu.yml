@@ -1,0 +1,23 @@
+slug: tanpenshuu
+canonical_label: 通常版
+canonical_publisher: ホーム社
+canonical_imprint: ジャンプコミックスセレクション
+source: 'コンビニ掃引第2波 2026-08-31: ジャンプコミックスセレクション「ちばあきお名作集 短編集」全3巻のうち
+  3巻『気になるあの子』(9784834214007・1995.7)が頁から欠落していた(NDL creator=ちばあきお×title=短編集で確定。
+  楽天delta無し=絶版・書影なし)。各巻は独立題を持つためvolume_labelで保持:
+  1『モウちゃんは強かった!』2『磯ガラス』3『気になるあの子』。
+  ★この頁はセレクション版が唯一の単行本化(=コンビニ再刊ではなく初収録の短編集=keep対象)。
+  ★別件: title=「短編集」(総称)・title_kana=モウチャンワツヨカッタ(1巻題の読み)は破損データ=改名はユーザ裁定待ち。'
+volumes:
+- number: 1
+  volume_label: モウちゃんは強かった!
+  isbn13: '9784834213980'
+  release_date: '1995-05-24'
+- number: 2
+  volume_label: 磯ガラス
+  isbn13: '9784834213997'
+  release_date: '1995-06-24'
+- number: 3
+  volume_label: 気になるあの子
+  isbn13: '9784834214007'
+  release_date: '1995-07'

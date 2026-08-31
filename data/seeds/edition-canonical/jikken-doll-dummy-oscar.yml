@@ -46,35 +46,6 @@ volumes:
   release_date: null
 extra_editions:
 - type: shinsoban
-  label: Comic魂別冊叶精作(はちどり)
-  imprint: Comic魂別冊叶精作
-  publisher: はちどり
-  volumes:
-  - number: 1
-    isbn13: '9784074302499'
-    release_date: '2018-03'
-  - number: 2
-    isbn13: '9784074305223'
-    release_date: '2018-06'
-  - number: 3
-    isbn13: '9784074308125'
-    release_date: '2018-09'
-  - number: 4
-    isbn13: '9784073400844'
-    release_date: '2018-12'
-  - number: 5
-    isbn13: '9784073403166'
-    release_date: '2019-03'
-  - number: 6
-    isbn13: '9784073406938'
-    release_date: '2019-06'
-  - number: 7
-    isbn13: '9784073411550'
-    release_date: '2019-10'
-  - number: 8
-    isbn13: '9784073414162'
-    release_date: '2019-12'
-- type: shinsoban
   label: Goma books版
   imprint: Goma books
   publisher: ごま書房新社
@@ -85,11 +56,3 @@ extra_editions:
   - number: 2
     isbn13: '9784814919369'
     release_date: '2019-06'
-- type: other
-  label: 漫画スーパーワイド版
-  imprint: 漫画スーパーワイド
-  publisher: 小池書院
-  volumes:
-  - number: 5
-    isbn13: '9784883158003'
-    release_date: '2003-03-01'

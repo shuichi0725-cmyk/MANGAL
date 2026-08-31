@@ -12,30 +12,6 @@ volumes:
   release_date: 2009-07
 extra_editions:
 - type: shinsoban
-  label: はちどり版
-  publisher: はちどり
-  volumes:
-  - number: 1
-    isbn13: '9784074309825'
-    release_date: 2018-11
-    volume_label: 上
-  - number: 2
-    isbn13: '9784074309993'
-    release_date: 2018-11
-    volume_label: 下
-- type: shinsoban
-  label: Comic魂別冊
-  imprint: Comic魂別冊
-  publisher: はちどり
-  volumes:
-  - number: 0
-    isbn13: '9784074306862'
-    release_date: 2018-08
-    volume_label: 隠密狩り編
-  - number: 1
-    isbn13: '9784074300778'
-    release_date: 2018-01
-- type: shinsoban
   label: King series
   imprint: King series
   publisher: 小池書院

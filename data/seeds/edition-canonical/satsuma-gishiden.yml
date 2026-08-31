@@ -21,23 +21,6 @@ volumes:
 - number: 6
   release_date: '1982-08'
 extra_editions:
-- type: shinsoban
-  label: SPポケットワイド版
-  imprint: SP pocket wide
-  publisher: リイド社
-  volumes:
-  - number: 1
-    volume_label: 上
-    isbn13: '9784845847747'
-    release_date: '2015-11'
-  - number: 2
-    volume_label: 中
-    isbn13: '9784845847754'
-    release_date: '2015-12'
-  - number: 3
-    volume_label: 下
-    isbn13: '9784845847761'
-    release_date: '2015-12'
 - type: kanzenban
   label: 時代劇画選集版(2022)
   imprint: SPコミックス

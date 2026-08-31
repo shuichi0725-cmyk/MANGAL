@@ -1,0 +1,55 @@
+slug: senrei
+canonical_label: 通常版
+canonical_publisher: 小学館
+canonical_imprint: フラワーコミックス
+source: 'コンビニ掃引第2波 2026-08-31: 種2のstandard版が同type合流で3版混在していた(imprint=My first
+  wide表示・1976年フラワーコミックス全6巻の枠に、My first wide上下(2002・コンビニ廉価682円)のISBNが1/3巻へ、楳図パーフェクション2巻(2009)のISBNが2巻へ接ぎ木)。NDL(creator=楳図かずお×title=洗礼・8版20件)で解体=
+  初出フラワーコミックス全6巻(1976・v1-3,5のISBNはNDL、v4/v6はNDL側ISBN無し・日付はMADBの隔月刊行をkeep) /
+  楳図パーフェクション!(Big comics special)全3巻(2008.12-2009.3)を復元 / 秋田コミックス・セレクト全3巻(1985)を追加。
+  My first wide上下はコンビニ廉価のため非掲載(9784091621306/9784091621313)。小学館文庫全4巻(1995)は種2のまま。'
+volumes:
+- number: 1
+  isbn13: '9784091301116'
+  release_date: '1976-01-28'
+- number: 2
+  isbn13: '9784091301123'
+  release_date: '1976-03-13'
+- number: 3
+  isbn13: '9784091301130'
+  release_date: '1976-05-14'
+- number: 4
+  release_date: '1976-08'
+- number: 5
+  isbn13: '9784091301154'
+  release_date: '1976-10'
+- number: 6
+  release_date: '1976-12'
+extra_editions:
+- type: shinsoban
+  label: 楳図パーフェクション!(2008-09)
+  imprint: Big comics special
+  publisher: 小学館
+  volumes:
+  - number: 1
+    isbn13: '9784091823083'
+    release_date: '2008-12'
+  - number: 2
+    isbn13: '9784091823090'
+    release_date: '2009-02'
+  - number: 3
+    isbn13: '9784091823106'
+    release_date: '2009-03'
+- type: shinsoban
+  label: 秋田コミックス・セレクト版(1985)
+  imprint: 秋田コミックス・セレクト
+  publisher: 秋田書店
+  volumes:
+  - number: 1
+    isbn13: '9784253108164'
+    release_date: '1985-01'
+  - number: 2
+    isbn13: '9784253108171'
+    release_date: '1985-02-15'
+  - number: 3
+    isbn13: '9784253108188'
+    release_date: '1985-03-10'

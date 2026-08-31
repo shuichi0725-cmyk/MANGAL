@@ -335,27 +335,6 @@ volumes:
   release_date: 2005-04
 extra_editions:
 - type: shinsoban
-  label: Comic魂別冊神江里見
-  imprint: Comic魂別冊神江里見
-  publisher: はちどり
-  volumes:
-  - number: 0
-    isbn13: '9784073410898'
-    release_date: 2019-09
-    volume_label: 坊主請け編
-  - number: 1
-    isbn13: '9784074307814'
-    release_date: 2018-09
-    volume_label: ひげ鶴走る編
-- type: shinsoban
-  label: Comic魂別冊
-  imprint: Comic魂別冊
-  publisher: はちどり
-  volumes:
-  - number: 1
-    isbn13: '9784074302260'
-    release_date: 2018-03
-- type: shinsoban
   label: セレクト
   imprint: セレクト
   publisher: 小学館
@@ -436,11 +415,3 @@ extra_editions:
   - number: 1
     isbn13: '9784862253491'
     release_date: 2008-10
-- type: shinsoban
-  label: King series 漫画スーパーワイド
-  imprint: King series 漫画スーパーワイド
-  publisher: 小池書院
-  volumes:
-  - number: 1
-    isbn13: '9784862257000'
-    release_date: 2011-06
