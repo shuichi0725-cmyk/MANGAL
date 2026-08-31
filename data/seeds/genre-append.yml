@@ -9394,3 +9394,9 @@ additions:
   - slug: dokaben-super-sutaazuhen
     add: [baseball]
     source: "manual:enrich-web-9401 (野球漫画=sports+baseball併記の規約)"
+  - slug: kinkon-tosa-nikki
+    add: [4-koma]
+    source: "manual:enrich-web-94xx (新聞連載4コマ(Wikipedia・高知新聞))"
+  - slug: maido-urayasu-tekkin-kazoku
+    add: [gag]
+    source: "manual:enrich-web-94xx (ドタバタ系ギャグ漫画(Wikipedia))"
