@@ -9,7 +9,8 @@ import { amazonDpUrlFromIsbn13, amazonSearchUrl } from "@/lib/amazon";
 /** 今月の新刊・全冊一覧 (2026-08-25 ユーザ改修指示で1行リスト型へ):
  *  - 漫画ごとに1行: 書影+題(→Amazon)+巻数+著者+出版社・レーベル+「詳細」(→自サイト作品頁)
  *  - 横スクロール/展開ボタン無し=上下スクロールだけで月の全冊
- *  - 月はURLに持つ(/shinkan?m=2026-07)。2026-06まで遡り可・未来は+2ヶ月
+ *  - 月はURLに持つ(/shinkan?m=2026-07)。2025-01まで遡り可・未来は+2ヶ月
+ *    (2026-08-31 ユーザ要望: 月タブが増え指定しにくい→年チップ+月チップの2段ナビへ)
  *  - 共有ボタンは月に1つ(ヘッダー)。Web Share API→X intent fallback
  *  - データ: /shinkan/{ym}.json ([slug,vol,title,cover,isbn13,authors,publisher,imprint])
  *  - 死リンク防止: 「詳細」リンクは一覧索引に居る作品のみ(preview=subsetでも安全) */
@@ -17,7 +18,7 @@ type Item = [string, number | null, string, string | null, string | null, string
 type MonthData = { days: Record<string, Item[]>; unknown: Item[] };
 
 const WEEK = ["日", "月", "火", "水", "木", "金", "土"];
-const FLOOR = "2026-06";
+const FLOOR = "2025-01";
 const AMZ_TAG = process.env.NEXT_PUBLIC_AMAZON_ASSOCIATE_TAG ?? "";
 
 function jstYm(offset = 0): string {
@@ -27,18 +28,20 @@ function jstYm(offset = 0): string {
   return `${y}-${String(((m % 12) + 12) % 12 + 1).padStart(2, "0")}`;
 }
 
-function monthRange(): string[] {
-  // FLOOR(2026-06)〜当月+2
-  const out: string[] = [];
+function yearRange(): number[] {
+  // FLOOR(2025-01)の年〜(当月+2)の年
+  const out: number[] = [];
+  for (let y = Number(FLOOR.slice(0, 4)); y <= Number(jstYm(2).slice(0, 4)); y++) out.push(y);
+  return out;
+}
+
+function monthsOfYear(year: number): string[] {
+  // その年のうち FLOOR〜当月+2 に収まる月だけ(YYYY-MM は文字列比較で正しく順序づく)
   const end = jstYm(2);
-  let y = Number(FLOOR.slice(0, 4));
-  let m = Number(FLOOR.slice(5));
-  for (let i = 0; i < 48; i++) {
-    const ym = `${y}-${String(m).padStart(2, "0")}`;
-    out.push(ym);
-    if (ym === end) break;
-    m++;
-    if (m > 12) { m = 1; y++; }
+  const out: string[] = [];
+  for (let m = 1; m <= 12; m++) {
+    const ym = `${year}-${String(m).padStart(2, "0")}`;
+    if (ym >= FLOOR && ym <= end) out.push(ym);
   }
   return out;
 }
@@ -88,6 +91,15 @@ export default function ShinkanClient() {
   const setYm = (m: string) => {
     setYmState(m);
     try { history.replaceState(null, "", `/shinkan?m=${m}`); } catch {}
+  };
+  // ★年チップ: 同じ月番号を保って年だけ替える(その年に無い月なら端へ寄せる)
+  const curYear = Number(ym.slice(0, 4));
+  const setYear = (y: number) => {
+    if (y === curYear) return;
+    const ms = monthsOfYear(y);
+    if (!ms.length) return;
+    const want = `${y}-${ym.slice(5)}`;
+    setYm(ms.includes(want) ? want : y < curYear ? ms[ms.length - 1] : ms[0]);
   };
 
   useEffect(() => {
@@ -192,11 +204,20 @@ export default function ShinkanClient() {
         <p className="mt-0.5 text-[11px] text-ink/55">
           発売日ごとに全冊掲載。スクロールだけで全部見られます。書影・題はAmazonへ、「詳細」で作品ページへ。
         </p>
+        {/* ★年×月の2段ナビ(2026-08-31): 年を選ぶ→その年の月チップ。月が増えても指定しやすい */}
         <div className="mt-2 flex gap-1.5 overflow-x-auto pb-0.5">
-          {monthRange().map((t) => (
+          {yearRange().map((y) => (
+            <button key={y} onClick={() => setYear(y)}
+              className={`shrink-0 px-2.5 py-1 text-[11.5px] font-black ${y === curYear ? "bg-[var(--color-accent)] text-[#0d0d0d]" : "border border-[var(--color-line)] text-ink/70"}`}>
+              {y}年
+            </button>
+          ))}
+        </div>
+        <div className="mt-1.5 flex gap-1.5 overflow-x-auto pb-0.5">
+          {monthsOfYear(curYear).map((t) => (
             <button key={t} onClick={() => setYm(t)}
               className={`shrink-0 px-2.5 py-1 text-[11.5px] font-black ${t === ym ? "bg-[var(--color-accent)] text-[#0d0d0d]" : "border border-[var(--color-line)] text-ink/70"}`}>
-              {t.slice(0, 4) !== jstYm().slice(0, 4) ? `${t.slice(2, 4)}/${Number(t.slice(5))}` : `${Number(t.slice(5))}月`}
+              {Number(t.slice(5))}月
             </button>
           ))}
         </div>

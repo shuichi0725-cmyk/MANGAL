@@ -3,7 +3,8 @@
 
 data/calendar/release/{ym}.json([slug,vol,title]) に巻の書影/ISBN/著者/出版社/レーベルを足した
 [slug, vol, title, cover|null, isbn13|null, authors, publisher, imprint] を
-public/shinkan/{ym}.json へ書く(★2026-06固定床〜当月+3。1行リスト表示+Amazonリンク用 2026-08-25拡張)。
+public/shinkan/{ym}.json へ書く(★2025-01固定床〜当月+3。1行リスト表示+Amazonリンク用 2026-08-25拡張。
+2026-08-31 ユーザ指示で床を2026-06→2025-01へ遡行=年×月ナビ対応)。
 - 書影はページyml(data/manga.v2)の該当巻cover_url。無ければnull=頁側が題字タイル表示。
 - ★フィルタしない(全冊)。死リンク防止は頁側が「一覧索引に居る作品のみリンク化」で担保
   (preview=subset索引でも安全、本番=ほぼ全部リンク)。
@@ -64,8 +65,8 @@ def main() -> None:
         cov, isbn, pub, imp = rec if rec else (None, None, "", "")
         return cov, (str(isbn) if isbn else None), info["authors"], str(pub or ""), str(imp or "")
 
-    # ★2026-06固定床(ユーザ指定=遡り開始月)〜当月+3
-    floor = datetime.date(2026, 6, 1)
+    # ★2025-01固定床(ユーザ指定=遡り開始月 2026-08-31)〜当月+3
+    floor = datetime.date(2025, 1, 1)
     center = jst_now.date()
     lo = (floor.year - center.year) * 12 + (floor.month - center.month)
     for ym in months(center, lo, 3):
