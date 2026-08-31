@@ -1,5 +1,13 @@
-import { afterEach, describe, expect, it } from "vitest";
-import { __setAltIndexForTest, searchSlugs, searchWithTiers } from "./clientSearch";
+import { afterEach, describe, expect, it, vi } from "vitest";
+import {
+  __setAltIndexForTest,
+  isAltLoading,
+  onAltLoaded,
+  prewarmAlt,
+  prewarmSearch,
+  searchSlugs,
+  searchWithTiers,
+} from "./clientSearch";
 import type { MangaListItem } from "./schema";
 
 // ★2026-07-19 実害の回帰テスト: 作家名が題に入る作家(高橋留美子劇場型)で
@@ -171,5 +179,42 @@ describe("曖昧フォールバック(2026-08-12 ぎゃわんぶらー型)", () 
   });
   it("全く別の語は曖昧でも拾わない", () => {
     expect(searchWithTiers("ドラゴンボール", fz).size).toBe(0);
+  });
+});
+
+describe("ホームwarm×alt到着の競合(2026-08-31 週次前レビュー)", () => {
+  afterEach(() => {
+    vi.unstubAllGlobals();
+    __setAltIndexForTest(null);
+  });
+
+  it("alt到着がidle充填より先でも二重畳み込みしない(継ぎ目偽ヒットの再発防止)", async () => {
+    __setAltIndexForTest(null);
+    // 継ぎ目検査: alt「abc」が二重連結されると「abcabc」になり「cab」が偽ヒットする
+    const raceItems = [
+      { slug: "s1", title: "ぺけ", title_kana: "ペケ", authors: [] },
+    ] as unknown as MangaListItem[];
+    vi.stubGlobal("fetch", vi.fn().mockResolvedValue({ ok: true, json: async () => ({ s1: ["abc"] }) }));
+    prewarmSearch(raceItems); // 器alloc(fillはsetTimeout(0)待ち)
+    prewarmAlt(); // fetchはmicrotaskで即到着=fillより先(旧バグの再現順序)
+    await new Promise((r) => setTimeout(r, 10)); // alt then連鎖+fill step消化
+    expect(searchSlugs("cab", raceItems).size).toBe(0); // 二重連結時のみ当たる継ぎ目
+    expect(searchSlugs("abc", raceItems).has("s1")).toBe(true); // alt自体は当たる
+  });
+
+  it("alt取得失敗はリスナー通知+未ロード復帰+cooldown(バッジ固着と無限再試行の防止)", async () => {
+    __setAltIndexForTest(null);
+    const rejectMock = vi.fn().mockRejectedValue(new Error("net"));
+    vi.stubGlobal("fetch", rejectMock);
+    let notified = 0;
+    const off = onAltLoaded(() => notified++);
+    prewarmAlt();
+    expect(isAltLoading()).toBe(true);
+    await new Promise((r) => setTimeout(r, 5));
+    expect(notified).toBe(1); // 失敗でも通知=「検索中」表示が固着しない
+    expect(isAltLoading()).toBe(false);
+    prewarmAlt(); // cooldown中は再fetchしない(オフライン時のリクエストループ封鎖)
+    expect(rejectMock).toHaveBeenCalledTimes(1);
+    off();
   });
 });

@@ -39,7 +39,12 @@ export default function HomeClient({ data, summary }: Props) {
   const searchParams = useSearchParams();
   const router = useRouter();
   const pathname = usePathname();
-  const [state, setState] = useState(emptyFilterState());
+  // ★初期stateはURLから同期で組む(2026-08-31 週次前レビュー): ホームwarm+SPA遷移だと
+  //   マウント時点でフル索引が手元に在るため、旧 emptyFilterState() 初期化は
+  //   「q未適用の全67k件を絞り込み+ソートして一瞬描画→effectでqを当てて作り直し」
+  //   という無駄な全件計算+全件グリッドのフラッシュを毎回踏んでいた(MPA時代は
+  //   索引到着がeffectより後だったので実害が無かった穴)。
+  const [state, setState] = useState(() => ({ ...emptyFilterState(), ...filtersFromSearchParams(searchParams) }));
   const [open, setOpen] = useState(false);
   // ★画面幅に合わないフィルターを外す(2026-08-01)。
   //   旧: PC用サイドバー(hidden md:block)とモバイル用抽斗(md:hidden)の両方が
@@ -92,7 +97,15 @@ export default function HomeClient({ data, summary }: Props) {
     return p.toString();
   }, [searchParams]);
 
+  // ★初回マウントはskip(2026-08-31): useState初期化が同じsearchParamsから組んだ直後なので、
+  //   ここで同内容のsetStateを打つと state の参照が替わり filteredManga(67k絞り込み)を
+  //   もう一度払う。URL変化(back/forward・CategoryHub)時だけ組み直す。
+  const filterKeyInitRef = useRef(true);
   useEffect(() => {
+    if (filterKeyInitRef.current) {
+      filterKeyInitRef.current = false;
+      return;
+    }
     // URL の検索 params が source of truth。 emptyFilterState + URL params で
     // 毎回 fresh に組み直す(CategoryHub click や back/forward で filter が累積しない)。
     const patch = filtersFromSearchParams(searchParams);

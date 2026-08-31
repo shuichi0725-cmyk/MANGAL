@@ -58,6 +58,7 @@ let _hayHasAlt = false; // 現hayに別名を畳み込み済みか(=追記だけ
 let _alt: Record<string, string[]> | null = null; // slug → 別名リスト(正規化済み)
 let _altV = 0; // altが届く/差し替わる度に+1(=hay再構築の合図)
 let _altInflight = false;
+let _altFailedAt = 0; // 直近の取得失敗時刻(=再試行cooldown。0=失敗なし)
 const _altListeners = new Set<() => void>();
 
 /** hayの器だけ用意する(中身は fillHay が埋める)。 */
@@ -119,7 +120,14 @@ function scheduleFill(items: MangaListItem[]): void {
   _fillScheduled = true;
   const step = (deadline?: { timeRemaining: () => number }) => {
     _fillScheduled = false;
-    if (!_hay || _hayOf !== items) return; // 索引が差し替わった=この前計算は用済み
+    if (!_hay || _hayOf !== items) {
+      // ★索引差し替え(head→full等)を跨いだ古いstep(2026-08-31 週次前レビュー):
+      //   予約中(_fillScheduled=true)に新itemsのscheduleFillが空振りしていると、
+      //   ここでただreturnすると誰も再予約せず前計算が黙って死ぬ(次の検索が67k同期fillを踏む)。
+      //   現行hayが未完なら引き継いで再予約する。
+      if (_hay && _hayOf && _hayFilled < _hayOf.length) scheduleFill(_hayOf);
+      return;
+    }
     const t0 = nowMs();
     const from0 = _hayFilled;
     do {
@@ -151,6 +159,8 @@ function ensureHay(items: MangaListItem[]): Hay {
     //   出た直後にまた固まる」体感の主因。alt は題名系の照合材料を★増やす方向にしか
     //   働かない★ので、未畳み込みのhayには文字列追記だけで等価な結果になる。
     //   まだ埋めていない行は fillHay が最新の _alt を見て畳み込むので触らなくてよい。
+    //   ★fetch到着は foldAltIntoHay が到着時に処理済(2026-08-31)= ここに来るのは
+    //     テスト注入(__setAltIndexForTest)経路のみ。二重追記はしない(注入時点の充填状態が前提)。
     if (!_hayHasAlt && _alt) {
       for (let i = 0; i < _hayFilled; i++) {
         const alts = _alt[items[i].slug];
@@ -195,22 +205,56 @@ export function prewarmSearch(items: MangaListItem[]): void {
   scheduleFill(items);
 }
 
+/** ★alt到着をその場でhaystackへ確定させる(2026-08-31 週次前レビューで発見した競合の是正):
+ *  ホームwarm(prewarmSearch+prewarmAlt並走 = c74fa2f6b)ではidle充填の途中にaltが届く。
+ *  旧実装は「既充填行=alt無し」を前提に次回検索のensureHayで[0,_hayFilled)へ全行追記していたため、
+ *  到着後にfillHayがalt込みで埋めた行に二重追記され、継ぎ目を跨ぐ部分一致の偽ヒットが出得た。
+ *  到着時に既充填行へ追記して _hayAltV を確定=未充填行はfillHayが最新_altを畳む(二重なし)。 */
+function foldAltIntoHay(): void {
+  if (!_hay || !_hayOf || !_alt || _hayAltV === _altV) return;
+  if (_hayHasAlt) return; // 差し替え(テスト注入等)は追記で表せない=ensureHayの作り直しに任せる
+  for (let i = 0; i < _hayFilled; i++) {
+    const alts = _alt[_hayOf[i].slug];
+    if (alts && alts.length) _hay.title[i] += alts.join("");
+  }
+  _hayHasAlt = true;
+  _hayAltV = _altV;
+  _lastKey = ""; // 照合材料が増えた=絞り込みキャッシュ破棄(ensureHay追記ブランチと同じ)
+  _lastIdx = null;
+}
+
 function fetchAlt(): void {
   if (_alt || _altInflight) return;
+  // ★失敗後30秒は再試行しない(2026-08-31): 失敗通知→再レンダー→再検索→再fetchの
+  //   無限ループ防止(オフライン時に毎レンダー1リクエストが回り続けるのを封鎖)。
+  if (_altFailedAt && nowMs() - _altFailedAt < 30_000) return;
   _altInflight = true;
   const _tAlt = nowMs();
   fetch("/manga-alt-index.json")
     .then((r) => (r.ok ? r.json() : {}))
-    .then((raw: Record<string, string[]>) => {
+    .then(async (raw: Record<string, string[]>) => {
+      // ★正規化はチャンクで(2026-08-31): 82k本を1タスクで回すと中位モバイルで数百msの
+      //   ロングタスク。8,000 slugごとに主スレッドを返す(到着はどうせ非同期=等価)。
       const norm: Record<string, string[]> = {};
-      for (const [slug, alts] of Object.entries(raw)) norm[slug] = alts.map(normalizeForSearch);
+      let n = 0;
+      for (const [slug, alts] of Object.entries(raw)) {
+        norm[slug] = alts.map(normalizeForSearch);
+        if (++n % 8000 === 0) await new Promise((r) => setTimeout(r, 0));
+      }
       _alt = norm;
       _altV++;
+      _altInflight = false;
+      _altFailedAt = 0;
+      foldAltIntoHay(); // 充填中/充填済みのhayへ即畳み込み(次回検索での後追い追記を廃止)
       perfDiag.altFetchMs = since(_tAlt);
       _altListeners.forEach((fn) => fn());
     })
     .catch(() => {
-      _alt = {};
+      // ★旧 `_alt = {}` は ①再fetch永久不可 ②リスナー非発火で「検索中」バッジが
+      //   次の操作まで固着、の2穴(2026-08-31是正)。未ロードに戻し+通知+cooldown再試行に。
+      _altInflight = false;
+      _altFailedAt = nowMs();
+      _altListeners.forEach((fn) => fn());
     });
 }
 
@@ -227,6 +271,8 @@ export function isAltLoading(): boolean {
 
 /** テスト用: alt索引を直接注入(fetch不要)。nullで未ロード状態に戻す。 */
 export function __setAltIndexForTest(raw: Record<string, string[]> | null): void {
+  _altInflight = false;
+  _altFailedAt = 0;
   if (raw === null) {
     _alt = null;
   } else {
