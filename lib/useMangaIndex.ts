@@ -95,6 +95,22 @@ export function isFullIndexLoaded(): boolean {
   return _cacheIsFull;
 }
 
+/** フル索引が揃った時に items を一度だけ渡す(既に揃っていれば即時)。
+ *  ホームの検索ウォーム(到着時にhaystack前計算まで済ませる 2026-08-31)用。 */
+export function onFullIndex(fn: (items: MangaListItem[]) => void): void {
+  if (_cacheIsFull && _cache) {
+    fn(_cache);
+    return;
+  }
+  const h = () => {
+    if (_cacheIsFull && _cache) {
+      _indexListeners.delete(h);
+      fn(_cache);
+    }
+  };
+  _indexListeners.add(h);
+}
+
 function scheduleIdle(fn: () => void, timeout = 2000): void {
   if (typeof requestIdleCallback === "function") requestIdleCallback(fn, { timeout });
   else setTimeout(fn, 800);

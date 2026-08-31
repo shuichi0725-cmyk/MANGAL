@@ -214,6 +214,11 @@ function fetchAlt(): void {
     });
 }
 
+/** ホーム到着ウォーム用(2026-08-31): 別名索引を先読みし、初回検索後の後追い再照合を無くす。冪等。 */
+export function prewarmAlt(): void {
+  fetchAlt();
+}
+
 /** alt索引(別名)を取得中か(=題名ヒット0の直後、別名での再照合がまだ終わっていない)。
  *  検索UIが「0件」と断言してよいかの判定に使う(2026-08-18 偽0件対策=B案)。 */
 export function isAltLoading(): boolean {
