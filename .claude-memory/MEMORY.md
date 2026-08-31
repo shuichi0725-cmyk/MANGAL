@@ -12,7 +12,7 @@
 - [【必ず使う】統合台帳](intake_manifest_ledger_live.md) — data/seeds/intake-manifest/=操作集約+holes。新cleanup前に参照
 - [NDL漫画判定=NDC726.1](ndl_manga_filter_ndc726.md) — 権威判定。小説/画集/雑誌除外 ／ [【厳守】NDL=1.2秒/req](ndl_access_rate_method.md) — burst=429/IP遮断実踏。discovery=_ndl-discovery.py ／ [NDL discoveryの非漫画偽陽性](ndl_discovery_nonmanga_false_positives.md) — caption/著者で漫画性検証 ／ [NDL非漫画一掃の罠](ndl_nonmanga_sweep.md) — 混在本(ファンブックに漫画等)注意
 - [synopsis和訳=git追跡seed](synopsis_ja_seed.md) — data/seeds/synopsis-ja.json(anilist_id key)。種3に焼かない ／ [【残】キャッチ/説明欠落補完](catch_synopsis_enrich_pending.md) — 19,750件。Web取得法実証済 ／ [catch側にも別作品混入の型](catch_side_wrong_work_class.md) — 検出器=_catch-audit.py。裁けない時はdrop ／ [【✅】短キャッチ/短あらすじrequeue 完了](synopsis_short_requeue_done.md) — 残2,413は素材ゼロで書き直さない。次層=空頁4,509
-- [掲載scope=日本出版漫画](mangal_inclusion_scope.md) — manhwa日本語版も対象。EMPTY slug≠junk
+- [掲載scope=日本出版漫画](mangal_inclusion_scope.md) — manhwa日本語版も対象。EMPTY slug≠junk ／ [分冊版/合本=非掲載が基本](bunsatsu_gappon_exclusion.md) — NDLヨミ「ブンサツバン/ガッポン」が信号。denyで抑止・通常版は月次で入る
 - [巻割れ統合(renumber)](volume_split_merge.md) — orphanを著者+題merge→発売日順renumber ／ [MADB誤番号(下=3型)是正](madb_volume_misnumber_fix.md) — ~1,677件promoteで1..N振り直し
 - [【進行中】抜粋本=楽天副題にしか無い層](excerpt_subtitle_hidden_layer.md) — promoteの副題dropが構造的に見えない。250頁を3分類済 ／ [非掲載drop list](non_manga_drop_cleanup.md) — non-manga-drop.yml=外国版/編集本/画集/アンソロ ／ [promote mergeがdrop list尊重](promote_merge_respects_drop.md) — drop済はmerge除外
 - [掲載境界ルール](inclusion_edge_rules.md) — 映画コミカライズkeep/フィルムdrop/KPCコンビニdrop ／ [コナン映画 判別法](conan_movie_filmcomic_method.md) — 楽天seriesName+wiki rawで判別 ／ [フィルムコミック=imprintだけがアニメ物の穴](film_comic_imprint_hole.md) — 網をすり抜け45頁 ／ [コンビニ判一掃=148drop/16hold](konbini_reprint_sweep.md) — imprint一律drop不可(オリジナル実在)

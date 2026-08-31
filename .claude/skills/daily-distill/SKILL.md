@@ -169,7 +169,7 @@ python scripts/_preorder-increment.py   # ①latest-prev差分(新ISBN) ②過�
 
 1. **続巻の誤新作化**: 分離器vol≥2 or suspect≥2 → 既存頁一意一致+巻連続(max+1..+3)なら種4 / 一致なし=1巻から無い→保留(単巻先行登録禁止)
 2. **上下巻**: ペア=1頁統合(上=v1,下=v2・題から上下除去) / 下巻単独=保留(上巻の全巻回収要)
-3. **scope外**: 特装/限定版・アンソロ・傑作選/再編・コンビニ本(★題でなくimprint判定=集英社リミックス/プラチナコミックス/Gコミックス)・画集/ガイド/BOX・雑誌/別冊・アメコミ翻訳・(仮)
+3. **scope外**: 特装/限定版・アンソロ・傑作選/再編・コンビニ本(★題でなくimprint判定=集英社リミックス/プラチナコミックス/Gコミックス)・画集/ガイド/BOX・雑誌/別冊・アメコミ翻訳・(仮)・★**分冊版/合本**(2026-08-31 ユーザ裁定=非掲載が基本。下C参照)
 4. **Zodスキーマ検証**: `loadAllManga`でskip 0確認(year_ended/authors.role/demographic enum=shounen/shoujo…。索引はPython製で検証なし=「検索に載るが404」の既知クラス)
 5. **slug品質**: ★**正規装置 `_slug_kana_lib.make_slug` を使う**(2026-07-09 ユーザ指摘=pykakasi再発明禁止)。janome分かち+**`data/seeds/katakana-english.yml` 貪欲辞書変換**(サマーブレンド→summer-blend/デュエルマスターズ→duel-masters/ビューティーポップ→beauty-pop)+ヘボン(は=wa/長音保持)。**英語綴りが出ない語は辞書に追加して強化**(カタカナ→英単語)。`_preorder_draft_lib.make_slug`は装置に委譲済。rename時は**made lists+rakuten-kana-pending+staging三点同期**
 6. 作者の法人クレジット(Magica Quartet/バンダイナムコ型)は既存DB慣行どおり正当=触らない
@@ -204,6 +204,11 @@ python scripts/_verify-kana-pending.py --limit 200
   題自体は「ふたりぼっちの失楽園」で楽天と一致)。**題が一致していてヨミだけ人名になっていたらNDL側の異常**=
   楽天ヨミが正。[[audit_title_eq_author]] の「title==著者名」型がヨミ側にも出る、と理解する。
   他の偽陽性型= 巻マーカー(「〜 イチ」「(001)」「アットコミックダイニカン」)/ NDLヨミが副題込みで長い、は従来どおり対応不要。
+  ★**分冊版/合本型**(2026-08-31 ユーザ裁定): NDLヨミ末尾に「**ブンサツバン**(分冊版)」「**ガッポン**(合本)」が付く巻は、
+  楽天題が通常巻(1)に見えても実体は分冊版/合本 = **非掲載が基本**(分冊のみしか刊行が無い作品のみ掲載だが、多分それはない)。
+  → deny(preorder-deny.jsonl・理由に「分冊版」と明記)+ドラフト除去(preview+drafts両方)+kana-pending/kana-mismatch消し込み。
+  denyはpreorder経路のみのゲートなので、後日通常単行本が刊行されればMADB月次で正規に入る(その旨をreasonに書く)。
+  実例= 死に戻り聖女は毒家族と決別する / 極悪令嬢は仁義を貫く(講談社KCx 2026-10-29。楽天seriesName=KCxが分冊版印刷の暗示)。
 
 ## D. 締め: カレンダー/新刊データ更新
 
