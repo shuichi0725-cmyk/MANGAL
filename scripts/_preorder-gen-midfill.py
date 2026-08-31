@@ -133,7 +133,8 @@ for r in cls["ex_mid"]:
     ns = sorted(vols_map)
     if not ns or ns[0] != 1 or len(ns) < 0.8 * ns[-1] or len(ns) < 2:
         holds.append((r.get("isbn"), title, f"全巻回収不成立 vols={ns[:6]}{'..' if len(ns)>6 else ''}")); continue
-    slug = _make_slug(base, r.get("titleKana"))
+    # ★slugはclean済みkanaから作る(生titleKanaは末尾巻数読み「イチ」等が残る=channel-vampire-ichi型 2026-08-31)
+    slug = _make_slug(base, kana)
     if not slug:
         holds.append((r.get("isbn"), title, "slug生成不可")); continue
     romaji = slug.replace("-", " ")

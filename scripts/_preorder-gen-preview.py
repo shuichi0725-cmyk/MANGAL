@@ -152,9 +152,10 @@ for klass, r in targets:
         holds.append((klass, isbn, base, "楽天ヨミ無し/汚染=捏造回避hold(NDL照合キューへ)")); continue
     if not (title and ym and isbn and len(isbn) == 13 and auths):
         holds.append((klass, isbn, title, "必須欠け(author/ym)")); continue
-    slug = _make_slug(base, r.get("titleKana"), existing)
+    # ★slugはclean済みkanaから作る(生titleKanaは末尾に巻数読み「イチ」等が残りslug汚染=channel-vampire-ichi型 2026-08-31)
+    slug = _make_slug(base, kana, existing)
     if not slug:
-        slug = _make_slug(base, r.get("titleKana"))
+        slug = _make_slug(base, kana)
         if not slug:
             holds.append((klass, isbn, title, "slug生成不可")); continue
         # ★同名異作品の衝突=規則「-姓+発売年」(chuka-ichiban-manabe1993型)。裸の-西暦は禁止(shion-2026事故 2026-07-14)
