@@ -113,3 +113,4 @@
 - [【戒め】ビルド入力の結線3箇所](build_input_wiring_three_places.md) — STEPS/preflight staging/消費者。titles空ビルド実踏
 - [部分ビルド合流の復旧型](partial_rebuild_merge_recovery.md) — out退避→FEATURE_BUILD→_next union。全再ビルド回避
 - [【戒め】script警告は検算してから報告](feedback_sanity_check_tool_warnings.md) — R2予算「あと8回」を鵜呑みにした反省
+- [SEO title方針=サフィックス「漫画・コミックのMANGAL」](seo_title_suffix_decision.md) — 2026-08-31 GO済・B案(頁title直挿し)は見送り・二重サフィックス7頁是正
