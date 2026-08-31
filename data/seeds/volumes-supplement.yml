@@ -42633,3 +42633,15 @@ volumes:
   source: ndl
   added_at: '2026-08-29'
   note: 'ユーザ指摘「2巻ではなくWなので抜けたと思われ」。2巻にあたる本の題が「マショウのあほすたさんW (ういんぐ)」で**巻番号を持たない**ため、種2が別seriesとして切り出し(sid120744・number=0・日付なし)、親頁に合流しなかった。ユーザ提供のNDL TSV: 978-4-7769-9180-9 / 三和出版 Sanwa comics / あほすたさん著 / 2020.3。ISBNも 9141-0(1巻2018-10) → 9180-9(W) → 9209-7(3巻2021-12) と同一帯で単調。'
+- series_keys:
+  - qid:Q1195859|name:賭博黙示録カイジ
+  qid: null
+  number: 1
+  isbn13: '9784065452967'
+  release_date: '2026-10-15'
+  publisher: 講談社
+  edition_type: bunkobon
+  title_display: 文庫版 賭博黙示録カイジ(1)
+  source: rakuten-preorder
+  added_at: '2026-08-31'
+  note: '日次蒸留2026-08-31: 楽天予約で文庫版1巻を発見(2026-10-15刊)。新作誤ドラフトから既存頁tobaku-mokushirokukaijiへ種4転送。'
