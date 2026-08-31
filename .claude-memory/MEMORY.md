@@ -97,7 +97,7 @@
 - [【✅】派生ジャンル規則=promote恒久層](genre_derive_rules_layer.md) — 枯れキー自動給水(_genre_rules.py)。rank≥60・war等タグのみ・バックフィル2,301頁済
 - [クエリ側の題正規化=怪物事変22巻型](query_side_title_normalization.md) — 照合側だけ直しても生題クエリは候補ゼロ=門前払い。剥き題でも投げる
 - [JPRO出版権検索=新書誌源](jpro_pubrights_search.md) — ログイン不要POST。題名→全巻ISBN+発行元が一発(7巻欠け即解決の実証)
-- [【厳守】edition-overridesのキー=公開slug](edition_overrides_key_is_public_slug.md) — SRC stemは死にキー(無警告)。15件発掘・是正済 ／ [【厳守】edition-canonicalのキー=SRC slug](edition_canonical_key_is_src_slug.md) — overrides(公開slug)と逆。取り違えると無警告で不適用
+- [【厳守】edition-overridesのキー=公開slug](edition_overrides_key_is_public_slug.md) — SRC stemは死にキー(無警告)。15件発掘・是正済 ／ [【厳守】edition-canonicalのキー=SRC slug](edition_canonical_key_is_src_slug.md) — overrides(公開slug)と逆。取り違えると無警告で不適用 ／ [【型】生成器がmanga.v2を公開slug直引き=改名頁全欠け](pubslug_src_stem_generator_trap.md) — pub2stem逆引き必須。実装見本=_gen-shinkan-data.py
 - [【宿題】電子書籍ストア一覧シート](ebook_store_sheet_homework.md) — 紫パネル根治=マンバ風シート。各ストアのアフィ申請通過後に着手。試し読みボタン(検証済み)とカラー版コーナーも同梱
 - [【確認待ち】魔術士オーフェン見直し](oofen_franchise_state.md) — 本編canonical是正+欠落3作を新規登録。preview9頁セット ／ [SHADOW SKILL=4期の別作品群](shadow_skill_franchise_state.md) — 第1期登録済・第2期/講談社再編集3冊が未登録 ／ [ワイルド7=6作品×多版・接ぎ木3件](wild7_franchise_state.md) — 復刊ドットコム版の頁構成が未決 ／ [ひぐらし=編ごとに別頁・掲載誌20頁誤り](higurashi_franchise_state.md) — 残=宙出版アンソロジー頁/雀・デイブレイク系
 - [【厳守】頁dropは既存リダイレクトも張り替える](drop_page_redirect_chain.md) — 死んだ連鎖+部分一致で追記漏れ。R2は週次--pruneで消す ／ [【✅修復済】301リダイレクト層=KV+/manga/形状で稼働](redirect_layer_inactive.md) — 週次でKV同期(_kv-redirects-sync.py)。preflight 8bが形状も番人
