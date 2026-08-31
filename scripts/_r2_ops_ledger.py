@@ -48,7 +48,10 @@ def projection(today=None):
     """(今期累計, 期末までの残り週次回数, 全頁週前提の着地見込み)"""
     t = today or datetime.date.today()
     start = period_start(t)
-    end = (start + datetime.timedelta(days=35)).replace(day=27)
+    # ★期末=翌月27日。旧 `start+35日→replace(27)` は 8月(31日)+9月(30日)等で月を2つ跨ぎ
+    #   期末が1ヶ月先に化けて「あと8回」と倍の悲観推計を出していた(2026-08-31 ユーザ指摘で実踏)。
+    #   day=1 に戻して+32日なら必ず翌月に着地する。
+    end = (start.replace(day=1) + datetime.timedelta(days=32)).replace(day=27)
     used = period_total(t)
     weeks_left = max(0, ((end - t).days) // 7)
     return used, weeks_left, used + weeks_left * FULL_WEEK_COST
