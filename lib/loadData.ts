@@ -330,3 +330,28 @@ export function loadAllManga(): DataBundle {
   cached = { manga, artBooks, publishers, magazines, genres, demographics };
   return cached;
 }
+
+// 題名索引ハブ(/titles)= _gen-titles-pages.py の出力(2026-08-31 SEO)。
+// ★50音分類・頁割りは Python 側が単一ソース(sitemap と共有)。TS では再計算しない。
+export type TitlesEntry = [
+  slug: string, title: string, kana: string | null,
+  authors: string, year: number | null, vols: number | null,
+];
+export type TitlesPages = {
+  page_size: number;
+  gyo: Array<{ key: string; label: string; pages: number; count: number }>;
+  parts: Record<string, TitlesEntry[]>;
+};
+let _titlesPages: TitlesPages | null = null;
+export function loadTitlesPages(): TitlesPages {
+  if (_titlesPages) return _titlesPages;
+  const p = path.join(DATA_DIR, "titles-pages.json");
+  // 無い環境(データ準備中)でも build を通す空フォールバック(索引ローダと同じ流儀)
+  if (!fs.existsSync(p)) {
+    console.warn(`[loadData] 題名索引ハブが無い (${p}) → 空。 _gen-titles-pages.py 要実行`);
+    _titlesPages = { page_size: 0, gyo: [], parts: {} };
+    return _titlesPages;
+  }
+  _titlesPages = JSON.parse(fs.readFileSync(p, "utf8")) as TitlesPages;
+  return _titlesPages;
+}

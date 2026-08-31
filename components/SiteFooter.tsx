@@ -7,6 +7,7 @@ export default function SiteFooter() {
     ["一覧", "/list"],
     ["検索", "/browse"],
     ["著者一覧", "/authors"],
+    ["題名索引", "/titles"],
     ["今日の一冊 過去ログ", "/sansedai-archive"],
     ["AI書評家リーグ", "/column-ai-league"],
     ["画集", "/art-books"],

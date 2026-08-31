@@ -17,7 +17,8 @@ f = idx["f"]; si = f.index("slug")
 slugs = [r[si] for r in idx["d"]]
 fixed = ["", "list", "browse", "about", "terms", "privacy", "contact",
          "column-ai-league", "sansedai-archive", "art-books",
-         "tokushu", "rankings", "anime"]  # ★2026-08-04 見直しで追加(日替わり特集ほか)
+         "tokushu", "rankings", "anime",  # ★2026-08-04 見直しで追加(日替わり特集ほか)
+         "authors", "titles"]  # ★2026-08-31 SEO(索引ハブ2本=クロール導線)
 # ★動的ランディング面(2026-08-04 見直しで追加: canonical持ちの索引対象なのにsitemap漏れだった)
 import yaml
 dyn = []
@@ -41,6 +42,25 @@ try:
     dyn += [f"column-ai-league/{s['setsu']}" for s in secs if isinstance(s, dict) and s.get("setsu")]
 except OSError:
     pass
+# ★著者頁(≈40k 2026-08-31 SEO): build成果物 out/author/*.html の実在一覧が正
+#   (lib/authors.ts のキー計算をPythonで再実装しない=ドリフトでsitemapが404を撒く型の根絶。
+#    sitemap生成は build後・sync前の工程なので out/ は必ず在る)。
+auth_dir = os.path.join(OUT, "author")
+n_auth = 0
+if os.path.isdir(auth_dir):
+    for fn in sorted(os.listdir(auth_dir)):
+        if fn.endswith(".html") and fn != "_empty.html":
+            dyn.append(f"author/{fn[:-5]}")
+            n_auth += 1
+if n_auth == 0:
+    print("★WARN: out/author が空 → 著者頁をsitemapに載せられない(build後に実行しているか?)")
+# ★題名索引ハブ(2026-08-31 SEO): 頁割りは titles-pages.json が単一ソース(app/titles と共有)
+try:
+    tp = json.load(open(os.path.join(ROOT, "data", "titles-pages.json"), encoding="utf-8"))
+    dyn += [f"titles/{k}" for k in tp.get("parts", {})]
+except OSError:
+    print("★WARN: data/titles-pages.json 無し → 題名索引をsitemapに載せられない")
+
 urls = [f"{SITE}/{p}" if p else SITE for p in fixed] + [f"{SITE}/{p}" for p in dyn] + \
     [f"{SITE}/manga/{s}" for s in slugs]
 

@@ -54,7 +54,9 @@ STEPS = [
     ("placeholder-queue", ["_placeholder-cover-refresh.py", "--build-queue"],
      "書影queue週次再算出(消化=アイドル運転⑩)"),
     ("list-index",        ["_build-list-index.py", "data/manga.v2", "data"],
-     "本番索引(~10分。★必ず最後=上のstepの変更を焼き込む)"),
+     "本番索引(~10分。★生成物stepの最後=上の変更を焼き込む。索引から導出するstepだけこの後)"),
+    ("titles-pages",      ["_gen-titles-pages.py"],
+     "題名索引ハブJSON(/titles 50音×200件頁+sitemapの単一ソース。★索引から導出=list-indexの後)"),
 ]
 
 # ★BookLive停止札(2026-08-31): 規制中はBookLive宛stepを自動skipして週次を完走させる。
