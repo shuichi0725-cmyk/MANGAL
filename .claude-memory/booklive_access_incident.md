@@ -5,7 +5,7 @@ metadata:
   node_type: memory
   type: feedback
   originSessionId: 67f252b0-69de-42f4-a3e7-b5588d8fc68d
-  modified: 2026-08-29T01:00:41.620Z
+  modified: 2026-08-30T22:23:52.776Z
 ---
 
 # BookLive! アクセス規制事故 (2026-08-29)
@@ -45,5 +45,20 @@ metadata:
 - 規制されたら**停止札**を置く: `docs/production-diagnostics/BOOKLIVE-BLOCKED.md`(git追跡)。
   ループも本体も札があれば1リクエストも出さない。**消してよいのはユーザが復帰を告げた時だけ**。
 
-規約の正本 = skill [[tameshiyomi_harvest]] の「BookLiveアクセス規約」節。
+## 2026-08-31 見直し = 共通ゲート化 (ユーザ「ルールを見直したい」→「全部お願い」で全穴封鎖)
+
+8/29改訂は expand 経路にしか効いていなかった。BookLiveを叩くscriptは**6本**あり、
+ln-audit(★8並列・札無視・**週次step1に自動配線**)/adjudicate(6並列+err行が「取得済」永久固定)/
+検索パス(Blockedを「HEAD失敗」偽保留+attempted焼き込みに潰して続行)/直列3本(札・rate_gate非対応)が規約外だった。是正:
+
+- **`scripts/_booklive.py` 新設** = 札+`_rate_gate("booklive",2.0)`+日次上限+正直UA+Blocked/CapReached。
+  6本全部これ経由。**生urlopenでBookLiveを叩くコードを書かない・並列化しない**。
+- 並列2本を直列化 / 検索パスも Blocked=exit 2 化 / 429等の負記録を全廃(404のみ台帳に書く)
+- **日次上限=CapReached(正常打ち切り・exit 0)に分離**(旧は上限到達もBlocked→exit 2→停止札が置かれ
+  ユーザ介入まで柱が凍る誤動作があった)
+- 週次step1は札があれば tameshiyomi 3step を自動skipして完走(旧=途中ABORT→--skip回避が8並列lnへの導線)。
+  BookLive宛stepの exit 2 では自動で札を置く
+- expand台帳(.cacheのvol-checked/swept)消失時はgit追跡seedから自動再構築(100万req級の再掃引防止)
+
+規約の正本 = skill [[tameshiyomi_harvest]] の「BookLiveアクセス規約」節(適用範囲=6script表も同節)。
 関連: [[ndl_access_rate_method]] [[rakuten_long_job_needs_retry]] [[feedback_efficiency_first]]

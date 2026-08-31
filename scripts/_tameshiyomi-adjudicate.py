@@ -3,28 +3,29 @@
 """試し読み保留の裁定装置 (= 2026-07-18。snippet頼みをやめ、BookLive商品ページの実題・実著者で突合)
 
 ユーザ裁定「枯れるまでやって。無理にマッチはしなくてよいけどきちんと調べて」の実装:
-  1. fetch-meta  保留の全候補tidの商品頁(vol_no/001)を直GET→実題+著者を .cache に貯める(再開可能・6並列)
+  1. fetch-meta  保留の全候補tidの商品頁(vol_no/001)をGET→実題+著者を .cache に貯める
+     (再開可能。★2026-08-31: 旧6並列を廃止し _booklive 共通ゲート=札・直列2.0秒・日次上限)
   2. compare     実題×頁題+著者で決定的突合 → accept/mismatch(調査済み台帳)/ambiguous(AI目視行き) に三分
   3. (採用は既存の _tameshiyomi-harvest.py --accept-file で。HEADゲート込み)
 
 ★無理マッチ防止: 完全一致(巻尾のみ許容)+著者一致だけを accept。分冊版/カラー版/お試し版は自動採用しない。
 ★調査済み台帳 .cache/tameshiyomi-adjudication.jsonl = mismatch確定slugを記録(次回round はskip=枯れ判定に使う)。
 """
-import concurrent.futures as cf
 import io
 import json
 import os
 import re
 import sys
 import time
-import urllib.request
+
+import _booklive
+from _booklive import Blocked, CapReached
 
 sys.stdout.reconfigure(encoding="utf-8")
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 HOLDS = os.path.join(ROOT, "docs", "production-diagnostics", "tameshiyomi-holds.tsv")
 META = os.path.join(ROOT, ".cache", "tameshiyomi-tid-meta.jsonl")
 LEDGER = os.path.join(ROOT, ".cache", "tameshiyomi-adjudication.jsonl")
-UA = {"User-Agent": "Mozilla/5.0"}
 
 BAD_EDITION = re.compile(r"分冊|カラー版|モノクロ版|無料お試し|期間限定|合本|セット|【単話】|話売り|フルカラー")
 
@@ -59,12 +60,11 @@ def strip_vol_tail(t):
 
 
 def fetch_one(tid):
-    url = f"https://booklive.jp/product/index/title_id/{tid}/vol_no/001"
-    try:
-        req = urllib.request.Request(url, headers=UA)
-        html = urllib.request.urlopen(req, timeout=25).read().decode("utf-8", "replace")
-    except Exception as e:
-        return {"tid": tid, "http": f"err:{str(e)[:40]}"}
+    """★Blocked/CapReachedは投げる(2026-08-31是正: 旧は429等をerr行として台帳に焼き、
+    以後「取得済」扱いで永久に再取得されない=失敗の負記録固定化になっていた)。404だけ定まった否定。"""
+    st, html = _booklive.request(f"https://booklive.jp/product/index/title_id/{tid}/vol_no/001", timeout=25)
+    if st != 200:
+        return {"tid": tid, "http": "404"}
     m = re.search(r'property="og:title" content="([^"]+)"', html) or re.search(r"<title>([^<]+)</title>", html)
     title = (m.group(1) if m else "").strip()
     authors = []
@@ -76,7 +76,17 @@ def fetch_one(tid):
 
 
 def cmd_fetch_meta(limit=0):
-    have = {json.loads(l)["tid"] for l in io.open(META, encoding="utf-8")} if os.path.exists(META) else set()
+    _booklive.assert_not_blocked()
+    # ★have=定まった結果(200/404)のみ(2026-08-31)。旧err行(429等を焼いた失敗)は再取得対象に戻す。
+    have = set()
+    if os.path.exists(META):
+        for l in io.open(META, encoding="utf-8"):
+            try:
+                d = json.loads(l)
+            except Exception:
+                continue
+            if str(d.get("http")) in ("200", "404"):
+                have.add(d["tid"])
     tids = []
     for r in load_holds():
         for tid in r["cand"]:
@@ -87,12 +97,22 @@ def cmd_fetch_meta(limit=0):
         tids = tids[:limit]
     print(f"fetch-meta: 未取得 {len(tids):,} (取得済 {len(have):,})")
     n = 0
-    with io.open(META, "a", encoding="utf-8") as f, cf.ThreadPoolExecutor(max_workers=6) as ex:
-        for res in ex.map(fetch_one, tids):
+    # ★直列(2026-08-31是正): 旧6並列を廃止。_booklive共通ゲート(札・2.0秒・日次上限)を通す。
+    with io.open(META, "a", encoding="utf-8") as f:
+        for tid in tids:
+            try:
+                res = fetch_one(tid)
+            except CapReached as e:
+                print(f"★打ち切り: {e}(進捗は逐次保存済み・続きは次回)")
+                break
+            except Blocked as e:
+                print(f"★中断: BookLiveから200/404以外の応答 ({e})。台帳には書かない。", file=sys.stderr)
+                sys.exit(2)
             f.write(json.dumps(res, ensure_ascii=False) + "\n")
+            f.flush()
             n += 1
-            if n % 500 == 0:
-                f.flush(); print(f"  ...{n}/{len(tids)}")
+            if n % 200 == 0:
+                print(f"  ...{n}/{len(tids)}")
     print(f"fetch-meta 完了: +{n}")
 
 

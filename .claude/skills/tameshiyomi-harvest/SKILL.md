@@ -58,16 +58,39 @@ BookLiveのtitle_idは**シリーズ/版単位**。product頁の`vol_no`パス�
 
 ### 以後の規約(ゆるめる時はユーザ裁定を取る)
 1. **直列のみ。並列は禁止**。最短間隔 2.0秒/リクエスト(NDLの1.3秒より保守的に)。
-   `check_cid()` が強制する。BookLive宛の生 urlopen をその場で書かない。
-2. **1実行1,500件まで**。超えたら正常終了して次回に回す。
-3. **200/404以外は1件でも即中断**(429/403/5xx/timeout/接続断)。★台帳に書かない。
+   ★実装の正本 = **`scripts/_booklive.py` 共通ゲート**(2026-08-31制定) = 札チェック+
+   `_rate_gate("booklive", 2.0)` プロセス間直列化+日次カウンタ+正直UA(MangalBot・Mozilla偽装禁止)。
+   **BookLive宛の生urlopenを書かない**(必ず `_booklive.request/head200` 経由)。
+2. **1実行1,500件・1日5,000件まで**。到達は CapReached=**正常な打ち切り**(exit 0・次回に続き。
+   ★停止札は置かない。旧実装は日次上限もBlocked→exit 2→札が置かれ柱が凍る誤動作=2026-08-31是正)。
+3. **200/404以外は1件でも即中断**(429/403/5xx/timeout/接続断)= Blocked。★台帳に書かない。
    = 「規制されている」を「試し読みが無い」と誤記録して**偽404を永久固定する**のが最悪の副作用。
-   本体は exit 2 を返し、ループが**停止札**を置いて二度と起動しなくなる。
+   exit 2 を返し、ループ/週次step1が**停止札**を置いて二度と起動しなくなる。
+   ★検索パス(harvest)・resolve-holds も同じ扱い(2026-08-31是正。旧はBlockedを「HEAD失敗」保留に
+   潰して続行+attempted焼き込みしていた=規約③が expand にしか効いていなかった)。
 4. **連続300件ヒット無しでも中断**(200で別頁を返す「静かな規制」の保険)。
 5. **完了は掃引済み台帳(`.cache/tameshiyomi/expand-swept.jsonl`)で判定**。
    尾の再訪は「巻数nが増えた時」か「前回掃引から30日経った時」だけ。毎バッチ再訪しない。
+   ★台帳(.cache)が消えていたらexpandが**git追跡seedから自動再構築**(2026-08-31。別PC/クリーンアップで
+   全巻再掃引100万req級に落ちない=2026-08-29手動復旧の自動化)。
 6. **収穫ゼロが3バッチ続いたらループ停止**(無限ループの最終防波堤)。
 7. アイドル運転は **1起動12バッチ・バッチ間300秒** が既定。
+
+### ★規約の適用範囲 = BookLiveを叩く全6 script (= 2026-08-31 共通ゲート化。見直しで発覚した穴を全封鎖)
+
+規約①③は当初 `_tameshiyomi-harvest.py` のexpand経路にしか効いておらず、他5本+検索パスが規約外だった。
+以後**全部が `_booklive.py` 経由**=札・直列2.0秒・上限・Blocked semantics が自動で効く:
+| script | 用途 | 2026-08-31是正 |
+|---|---|---|
+| _tameshiyomi-harvest.py | 検索/expand/accept | 検索パスのBlocked→「HEAD失敗」誤記録を廃止(exit 2化) |
+| _audit-tameshiyomi-ln.py | LN混入検査(週次) | ★旧8並列・間隔なし・札無視 → 直列化 |
+| _tameshiyomi-adjudicate.py | 保留裁定 fetch-meta | ★旧6並列 → 直列化+err行の「取得済」永久固定を是正 |
+| _booklive-desc-harvest.py | 紹介文(エンリッチ材料) | 429等をerr行に焼く穴を是正(404のみ記録) |
+| _harvest-booklive-status.py | 完結証拠 | 共通ゲート化(404=verdict http404で照会済化) |
+| _color-tameshiyomi.py | カラー版試し読み | 全例外→False(偽HEAD失敗保留)を是正 |
+- 週次蒸留step1(`_weekly-step1.py`)は札があれば tameshiyomi 3step(harvest/expand/ln)を**自動skip**
+  して週次を完走させ(旧=途中ABORT)、BookLive宛stepが exit 2 なら**自動で札を置いて続行**する。
+- ★新しくBookLiveを叩くコードを書く時も必ず `_booklive` を使う。並列化は禁止(ゆるめる時はユーザ裁定)。
 
 ### 停止札 (= 規制中の再突入防止)
 - `docs/production-diagnostics/BOOKLIVE-BLOCKED.md`(git追跡=別PCにも効く)

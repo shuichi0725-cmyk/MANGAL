@@ -57,12 +57,42 @@ STEPS = [
      "本番索引(~10分。★必ず最後=上のstepの変更を焼き込む)"),
 ]
 
+# ★BookLive停止札(2026-08-31): 規制中はBookLive宛stepを自動skipして週次を完走させる。
+#   旧挙動は該当stepの失敗で週次全体がABORTし、--skipで避けると次のln検査(旧8並列)に突っ込む罠だった。
+#   BookLive宛stepが exit 2(=200/404以外の応答を検知)を返したら、idle-expandループと同様に
+#   停止札を置いて以降のBookLive stepをskip・週次自体は続行する(ユーザ報告必須)。
+BOOKLIVE_STEPS = {"tameshiyomi-harvest", "tameshiyomi-expand", "tameshiyomi-ln"}
+BL_FLAGS = [ROOT / "docs" / "production-diagnostics" / "BOOKLIVE-BLOCKED.md",
+            ROOT / ".cache" / "tameshiyomi" / "BLOCKED"]
 
-def run_step(name: str, argv: list[str]) -> None:
+
+def _booklive_blocked() -> bool:
+    return any(p.exists() for p in BL_FLAGS)
+
+
+def _place_booklive_flags(note: str) -> None:
+    body = (f"at: {datetime.now(timezone(timedelta(hours=9))).strftime('%Y-%m-%d %H:%M')} JST\n"
+            f"reason: 週次step1中にBookLiveから200/404以外の応答(exit 2)。{note}\n"
+            "解除はユーザが『復帰した』と言った時だけ(手順=skill tameshiyomi-harvest の停止札節)。\n")
+    for p in BL_FLAGS:
+        p.parent.mkdir(parents=True, exist_ok=True)
+        p.write_text(body, encoding="utf-8")
+
+
+def run_step(name: str, argv: list[str], booklive: bool = False) -> None:
     t0 = time.time()
     print(f"\n{'=' * 70}\n▶ [{name}] {' '.join(argv)}\n{'=' * 70}", flush=True)
     r = subprocess.run([PY, str(ROOT / "scripts" / argv[0])] + argv[1:], cwd=str(ROOT))
     if r.returncode != 0:
+        if booklive and r.returncode == 2:
+            _place_booklive_flags(f"step [{name}] が検知。")
+            print(f"\n★[{name}] BookLive異常応答(exit 2) → 停止札を置いた。以降のBookLive stepは"
+                  f"skipして週次は続行。★ユーザに報告すること。", flush=True)
+            return
+        if booklive:
+            print(f"\n△[{name}] 失敗(exit {r.returncode})。BookLive stepはskip扱いで週次を続行"
+                  f"(停止札による自己終了 or 個別バグ=ログ確認)。", flush=True)
+            return
         print(f"\n✗ ABORT: step [{name}] failed (exit {r.returncode})。"
               f"直してから `--from {name}` で再開。")
         sys.exit(r.returncode or 1)
@@ -91,12 +121,16 @@ def main() -> None:
             plan.append((name, argv, desc))
     print(f"週次 手順1 事前再生成 (当月={YM} / {len(plan)}/{len(STEPS)} step)")
     for name, argv, desc in plan:
-        print(f"  [{name:<19}] {desc}")
+        mark = " ←skip予定(BookLive停止札)" if name in BOOKLIVE_STEPS and _booklive_blocked() else ""
+        print(f"  [{name:<19}] {desc}{mark}")
     if a.list:
         return
 
     for name, argv, desc in plan:
-        run_step(name, argv)
+        if name in BOOKLIVE_STEPS and _booklive_blocked():
+            print(f"\n△ skip [{name}]: BookLive停止札あり(規制中)。解除はユーザ裁定のみ。", flush=True)
+            continue
+        run_step(name, argv, booklive=(name in BOOKLIVE_STEPS))
         if name == "cover-refresh":
             touched = ROOT / ".cache" / "cover-refresh-touched.txt"
             slugs = [l for l in touched.read_text(encoding="utf-8").splitlines() if l.strip()] \

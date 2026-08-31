@@ -32,8 +32,10 @@ python scripts/_kobo-color-harvest.py --delta   # ⑪カラー版差分(Kobo新�
 - **札を消してよいのはユーザが「BookLiveが復帰した」と言った時だけ。** 自分で試し打ちしない。
 - 規約(直列2秒/件・1実行1500件・1日5000件・200/404以外は即中断・収穫ゼロ3回で停止)は
   skill **tameshiyomi-harvest** の「BookLiveアクセス規約」が正本。
-- BookLive宛も `scripts/_rate_gate.py` の `wait("booklive", 2.0)` を通す
-  = 柱を何本並走させても host単位で1本のストリームになる(楽天/NDL/wikiと同じ)。
+- BookLive宛は **`scripts/_booklive.py` 共通ゲート**(★2026-08-31 全script化: 札チェック+
+  `_rate_gate` の `wait("booklive", 2.0)`+日次上限)を通す = 柱を何本並走させても host単位で
+  1本のストリーム(楽天/NDL/wikiと同じ)。対象6script一覧=skill tameshiyomi-harvest「規約の適用範囲」。
+  生urlopenでBookLiveを叩くコードを書かない・並列化しない。
 - ★そもそも**このキューは枯れている**(掃引済み33,080シリーズ / 残36 = 41リクエスト)。
   復帰しても長時間回す仕事は無い。「何時間も回り続けている」のを見たら**それは異常**。
 

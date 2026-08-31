@@ -14,15 +14,18 @@
   4. 無し = none
 
 出力 = data/seeds/status-booklive.jsonl へ逐次追記(再開時は照会済slugをskip)。
-レート = 1.3秒/req 厳守。連続エラー5でabort。
+★レート = _booklive 共通ゲート(2026-08-31: 札・直列2.0秒・日次上限)。
+  429等の異常はBlocked=台帳に書かず即中断(exit 2)。404=verdict http404 として記録(=照会済)。
 """
 import io
 import json
 import re
 import sys
 import time
-import urllib.request
 from pathlib import Path
+
+import _booklive
+from _booklive import Blocked, CapReached
 
 ROOT = Path(__file__).resolve().parent.parent
 TSV = ROOT / "docs" / "production-diagnostics" / "ongoing-recheck.tsv"
@@ -37,14 +40,11 @@ WEAK = re.compile(r"終幕|フィナーレ|ファイナル|最終回|最終決�
 PART = re.compile(r"第[一二三四五六七八九十\d０-９]+部、?完結|[一二三四五六七八九十\d０-９]+章、?完結")
 
 
-def fetch(tid: str, vol: int) -> str:
-    url = f"https://booklive.jp/product/index/title_id/{tid}/vol_no/{vol:03d}"
-    req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
-    return urllib.request.urlopen(req, timeout=30).read().decode("utf-8", "ignore")
-
-
 def probe(tid: str, vol: int) -> dict:
-    html = fetch(tid, vol)
+    """★Blocked/CapReachedは投げる(呼び手が中断)。404=verdict http404(定まった否定=照会済扱い)。"""
+    st, html = _booklive.request(f"https://booklive.jp/product/index/title_id/{tid}/vol_no/{vol:03d}")
+    if st != 200:
+        return {"tag": "", "verdict": "http404", "evidence": "", "desc_tail": ""}
     m = re.search(r'product_series_tag tag_left[^"]*"><span>([^<]+)</span>', html)
     tag = m.group(1) if m else ""
     dm = re.search(r'name="description" content="【試し読み無料】([^"]*)"', html)
@@ -99,28 +99,25 @@ def main() -> None:
     todo = [(s, g) for s, g in targets if s not in done]
     print(f"対象 {len(targets)} / 照会済 {len(done)} / 残 {len(todo)}", flush=True)
 
-    errs = 0
+    _booklive.assert_not_blocked()
     with io.open(OUT, "a", encoding="utf-8", newline="\n") as w:
         for i, (slug, grp) in enumerate(todo):
             tid, mx = tmap[slug][0], tmap[slug][1]  # 3要素形([tid, max, 欠番リスト])も先頭2つで良い
             try:
                 r = probe(str(tid), int(mx))
-                errs = 0
-            except Exception as e:
-                errs += 1
-                print(f"  ERR {slug} {type(e).__name__}: {e}", flush=True)
-                if errs >= 5:
-                    print("連続エラー5 → abort(再開可)", flush=True)
-                    sys.exit(1)
-                time.sleep(5.0)
-                continue
+            except CapReached as e:
+                print(f"★打ち切り: {e}(逐次保存済み・続きは次回)", flush=True)
+                break
+            except Blocked as e:
+                print(f"★中断: BookLiveから200/404以外の応答 ({e})。台帳には書かない。",
+                      file=sys.stderr, flush=True)
+                sys.exit(2)
             rec = {"slug": slug, "title_id": str(tid), "last_vol": int(mx), "group": grp,
-                   **r, "at": "2026-08-18"}
+                   **r, "at": time.strftime("%Y-%m-%d")}
             w.write(json.dumps(rec, ensure_ascii=False) + "\n")
             w.flush()
             if (i + 1) % 100 == 0:
                 print(f"  {i + 1}/{len(todo)}", flush=True)
-            time.sleep(1.3)
     print("完了", flush=True)
 
 

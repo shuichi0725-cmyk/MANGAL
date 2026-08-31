@@ -8,7 +8,8 @@
 処理: 対象slug(.cache/enrich5-targets.json 等)× tameshiyomi-map の title_id →
   https://booklive.jp/product/index/title_id/{tid}/vol_no/001 の JSON-LD description を抽出。
 出力: .cache/booklive-desc.jsonl (slug/title_id/desc/at。逐次追記=resumable)
-レート: 1.1s/req(商品頁は直接GET実証済み。429等は即中断)。
+★レート = _booklive 共通ゲート(2026-08-31: 札・直列2.0秒・日次上限)。
+  429等の異常はBlocked=台帳に書かず即中断(旧実装は429以外のHTTPエラーをerr行として焼いていた)。
 
   python scripts/_booklive-desc-harvest.py [--targets .cache/enrich5-targets.json] [--limit N]
 """
@@ -19,8 +20,9 @@ import json
 import os
 import re
 import sys
-import time
-import urllib.request
+
+import _booklive
+from _booklive import Blocked, CapReached
 
 sys.stdout.reconfigure(encoding="utf-8")
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -32,15 +34,20 @@ def main() -> None:
     ap.add_argument("--targets", default=os.path.join(ROOT, ".cache", "enrich5-targets.json"))
     ap.add_argument("--limit", type=int, default=0)
     a = ap.parse_args()
+    _booklive.assert_not_blocked()
     targets = json.load(io.open(a.targets, encoding="utf-8"))
     tm = json.load(io.open(os.path.join(ROOT, "data", "tameshiyomi-map.json"), encoding="utf-8"))
     done = set()
     if os.path.exists(OUT):
         for ln in io.open(OUT, encoding="utf-8"):
             try:
-                done.add(json.loads(ln)["slug"])
+                d = json.loads(ln)
             except Exception:
-                pass
+                continue
+            # ★err行のうち404以外(旧実装が403/5xx等を焼いた分)は再取得対象に戻す(2026-08-31)
+            if "err" in d and d.get("err") != 404:
+                continue
+            done.add(d["slug"])
     todo = [t for t in targets if t["slug"] in tm and t["slug"] not in done]
     if a.limit:
         todo = todo[: a.limit]
@@ -51,20 +58,19 @@ def main() -> None:
         tid = tm[t["slug"]][0]
         url = f"https://booklive.jp/product/index/title_id/{tid}/vol_no/001"
         try:
-            req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
-            html = urllib.request.urlopen(req, timeout=30).read().decode("utf-8", "replace")
-        except urllib.error.HTTPError as e:
-            if e.code == 429:
-                print("★429 → 即中断(進捗は逐次保存済み)", flush=True)
-                break
+            st, html = _booklive.request(url)
+        except CapReached as e:
+            print(f"★打ち切り: {e}(進捗は逐次保存済み)", flush=True)
+            break
+        except Blocked as e:
+            print(f"★中断: BookLiveから200/404以外の応答 ({e})。台帳には書かない。",
+                  file=sys.stderr, flush=True)
+            sys.exit(2)
+        if st != 200:   # ★404=定まった否定のみ記録(商品頁が無い=紹介文なし確定)
             n_err += 1
-            f.write(json.dumps({"slug": t["slug"], "title_id": tid, "desc": "", "err": e.code,
+            f.write(json.dumps({"slug": t["slug"], "title_id": tid, "desc": "", "err": 404,
                                 "at": datetime.date.today().isoformat()}, ensure_ascii=False) + "\n")
-            time.sleep(1.1)
-            continue
-        except Exception as e:
-            n_err += 1
-            time.sleep(1.1)
+            f.flush()
             continue
         desc = ""
         for m in re.finditer(r'<script type="application/ld\+json">(.*?)</script>', html, re.S):
@@ -90,9 +96,8 @@ def main() -> None:
         else:
             n_empty += 1
         if (i + 1) % 100 == 0:
-            print(f"  {i + 1}/{len(todo)} 良材料{n_ok} 薄/無{n_empty} err{n_err}", flush=True)
-        time.sleep(1.1)
-    print(f"\n完了: 良材料(40字+) {n_ok} / 薄・無し {n_empty} / err {n_err} → {os.path.relpath(OUT, ROOT)}")
+            print(f"  {i + 1}/{len(todo)} 良材料{n_ok} 薄/無{n_empty} 404 {n_err}", flush=True)
+    print(f"\n完了: 良材料(40字+) {n_ok} / 薄・無し {n_empty} / 404 {n_err} → {os.path.relpath(OUT, ROOT)}")
 
 
 if __name__ == "__main__":

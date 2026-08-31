@@ -8,7 +8,8 @@
 JSON-LD category/genre を読み、ライトノベル/文芸/小説ならflag。
 - 台帳 = .cache/tameshiyomi/ln-audit.jsonl (title_id単位・再開可能・campaign後の再実行は差分だけ)
 - 出力 = docs/production-diagnostics/tameshiyomi-ln-anchors.tsv
-- レート 1.3秒/req。是正はflagを見て別途(検索し直し=作画者クエリ+category=マンガ検証)。
+- ★レート = _booklive 共通ゲート(2026-08-31: 札・直列2.0秒・日次上限。旧8並列は規制事故と同型なので廃止)。
+  是正はflagを見て別途(検索し直し=作画者クエリ+category=マンガ検証)。
 """
 import glob
 import io
@@ -17,7 +18,9 @@ import os
 import re
 import sys
 import time
-import urllib.request
+
+import _booklive
+from _booklive import Blocked, CapReached
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 LEDGER = os.path.join(ROOT, ".cache", "tameshiyomi", "ln-audit.jsonl")
@@ -26,9 +29,10 @@ NOVEL_CAT = re.compile(r"ライトノベル|ラノベ|文芸|小説|BLノベル|
 
 
 def category_of(tid: str):
-    url = f"https://booklive.jp/product/index/title_id/{tid}/vol_no/001"
-    req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
-    html = urllib.request.urlopen(req, timeout=30).read().decode("utf-8", "ignore")
+    """→ (catgen, ptitle)。404は("(404)","")=定まった否定として台帳に書く。他の異常はBlocked。"""
+    st, html = _booklive.request(f"https://booklive.jp/product/index/title_id/{tid}/vol_no/001")
+    if st != 200:
+        return "(404)", ""
     cat = re.search(r'"category":\s*"([^"]+)"', html)
     gen = re.search(r'"genre":\s*"([^"]+)"', html)
     t = re.search(r'property="og:title" content="([^"|]+)', html)
@@ -37,6 +41,7 @@ def category_of(tid: str):
 
 
 def main() -> None:
+    _booklive.assert_not_blocked()   # ★入口でも見る=66k走査を始める前に落とす
     anchors = {}
     for line in io.open(os.path.join(ROOT, "data", "seeds", "tameshiyomi-booklive.jsonl"), encoding="utf-8"):
         try:
@@ -69,33 +74,25 @@ def main() -> None:
     todo = [(s, t) for s, t in risk if t not in checked]
     print(f"危険集合 {len(risk)} / 検査済 {len(risk) - len(todo)} / 残 {len(todo)}", flush=True)
     os.makedirs(os.path.dirname(LEDGER), exist_ok=True)
-    # ★8並列(2026-08-20 ユーザ「長くない？」): expandの8並列HEADと同じ相手(BookLive CDN)の
-    #   軽いGETなので並列可。90分→10分台。失敗はfailカウントのみ(台帳未記載=次回再試行)。
-    from concurrent.futures import ThreadPoolExecutor
-
-    def probe(item):
-        slug, tid = item
-        try:
-            catgen, ptitle = category_of(tid)
-            return slug, tid, catgen, ptitle
-        except Exception as e:
-            return slug, tid, None, type(e).__name__
-
-    fails = 0
-    with io.open(LEDGER, "a", encoding="utf-8", newline="\n") as w, \
-            ThreadPoolExecutor(max_workers=8) as pool:
-        for i, (slug, tid, catgen, ptitle) in enumerate(pool.map(probe, todo)):
-            if catgen is None:
-                fails += 1
-                print(f"  ERR {slug} {ptitle}", flush=True)
-                continue
+    # ★直列のみ(2026-08-31 是正): 旧実装は「BookLive CDNだから軽いGETなので並列可」の思い込みで
+    #   8並列・間隔なし=2026-08-29規制事故と同型だった。以後 _booklive 共通ゲートを通す
+    #   (札・2.0秒/件・日次上限)。Blocked=台帳に書かず即中断(exit 2)、上限到達=正常打ち切り。
+    with io.open(LEDGER, "a", encoding="utf-8", newline="\n") as w:
+        for i, (slug, tid) in enumerate(todo):
+            try:
+                catgen, ptitle = category_of(tid)
+            except CapReached as e:
+                print(f"★打ち切り: {e}(台帳は逐次保存済み・続きは次回)", flush=True)
+                break
+            except Blocked as e:
+                print(f"★中断: BookLiveから200/404以外の応答 ({e})。台帳には書かない。",
+                      file=sys.stderr, flush=True)
+                sys.exit(2)
             w.write(json.dumps({"tid": tid, "slug": slug, "cat": catgen, "ptitle": ptitle,
                                 "at": time.strftime("%Y-%m-%d")}, ensure_ascii=False) + "\n")
             w.flush()
-            if (i + 1) % 500 == 0:
+            if (i + 1) % 100 == 0:
                 print(f"  {i + 1}/{len(todo)}", flush=True)
-    if fails:
-        print(f"取得失敗 {fails}(台帳未記載=再実行で再試行)", flush=True)
     # 集計(全台帳から)。★現アンカーと一致する行のみflag(是正済みの旧title_id行を除外=偽陽性防止)
     flagged = []
     for line in io.open(LEDGER, encoding="utf-8"):
