@@ -65,6 +65,14 @@ def main():
         if n < MIN_PAGES:
             die(f"out/manga = {n:,} < {MIN_PAGES:,}(欠損ビルド疑い。頁数×2≈132kが正常)")
         print(f"  OK   ビルド完了(out/manga {n:,} files・log正常)")
+        # ★題名索引ハブ(2026-08-31 実踏): staging に titles-pages.json が未同期だと
+        #   /titles が _empty のみ(2 files)の空ビルドになり sitemap が404を351件撒く。恒久番人。
+        out_titles = os.path.join(ROOT, "out", "titles")
+        tn = sum(1 for _ in os.scandir(out_titles)) if os.path.isdir(out_titles) else 0
+        if tn < 100:
+            die(f"out/titles = {tn} files(空ビルド疑い=titles-pages.json の staging 同期を確認。"
+                "復旧= FEATURE_BUILD部分ビルド合流 [[partial_rebuild_merge_recovery]])")
+        print(f"  OK   題名索引ハブ(out/titles {tn} files)")
 
         # 1.5 ★索引⊆生成頁の実測照合(2026-07-29 ユーザ発見「作品数がズレてる」の恒久ゲート):
         #   一覧索引に載るslugのHTMLが out/manga に無い=「検索に出るのに404」。過去3回再発した型
@@ -154,6 +162,9 @@ def main():
             _dirp = os.path.join(ROOT, "out", _sub)
             if os.path.isdir(_dirp):
                 _paths += [f"/{_sub}/{f}" for f in os.listdir(_dirp) if f.endswith(".json")]
+        # ★sitemap(2026-08-31): 毎週変わるのに purge 漏れで最長1日旧配信だった(手動purgeで是正した週の恒久化)
+        _paths += [f"/{f}" for f in os.listdir(os.path.join(ROOT, "out"))
+                   if f.startswith("sitemap") and f.endswith(".xml")]
         import time as _t
         _purged, _pfail = 0, 0
         for _i in range(0, len(_paths), 10):

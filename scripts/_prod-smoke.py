@@ -67,6 +67,16 @@ def main():
     st, _, _ = req("/data/anniversaries.json")
     check("GET /data/anniversaries.json = 200", st == 200, f"got {st}")
 
+    # ★索引ハブ(2026-08-31 新設面): /titles空ビルド事故(staging未同期→_emptyのみ)の恒久番人。
+    #   a-1(あ行1頁目)は作品が存在する限り必ず在る安定キー。
+    st, body, _ = req("/titles/a-1", bypass=True)
+    check("GET /titles/a-1 = 200(題名索引ハブ)", st == 200, f"got {st}")
+    if st == 200:
+        check("題名索引に作品リンクがある", b'href="/manga/' in body,
+              "空ビルド疑い(titles-pages.json のstaging同期を確認)")
+    st, _, _ = req("/authors", bypass=True)
+    check("GET /authors = 200(著者索引)", st == 200, f"got {st}")
+
     # ★301リダイレクト追跡 (2026-08-26 新設): KV `REDIRECTS` の陳腐化検出。
     #   slug-aliases.yml の1件を実プローブし「旧URL→200 かつ 最終URLが新slug」を確認。
     #   KV同期忘れ/失敗だと旧URLが404(=2026-08-17型の窓)でここが鳴る。
