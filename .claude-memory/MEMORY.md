@@ -108,3 +108,4 @@
 - [【事故復元済】月次が種4-auto全消し=883巻消失](seed4_auto_wipe_accident.md) — 種4-autoは蓄積資産・再生成禁止。ISBN消失監視が番人 ／ [【復元済】源なしmanga.v2頁258件](orphan_source_pages_restored.md) — promoteは元頁駆動=源消失で頁が消える。復元手法+数値ペンネームquote
 - [【未決】版違い統合](multi_edition_unification_pending.md) — うる星モデル。edition key(publisher×type)化要 ／ [版/刷タブ・在庫・電子割引](version_tabs_stock_ebook.md) — 版タブ実装済。電子=割引率表示 ／ [うる星=版/巻/刷タブ正規ルール](urusei_version_display_rules.md) — 完備最古/type×冊数/versions[]
 - [コンビニ掃引2026-08=完了・裁定待ち3件](konbini_sweep_2026_08_state.md) — 検出器が正本。A/B/D=0。花田秀治郎/短編集の改名+日本沈没頁分離がGO待ち
+- [SEO: インデックス未登録6.65万対策=ハブ3点実装済](seo_index_coverage_state.md) — 公開は週次待ち・残=外部被リンク
