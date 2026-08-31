@@ -1,3 +1,8 @@
 # R2 prune 待ちの公開slug。週次蒸留の preflight が必ず表示する。
 # r2-sync --prune 実行後、.cache/r2-pruned-<日時>.txt に載った行をここから消し込む。
 # 2026-08-10 週次: 台帳15件すべて .cache/r2-pruned-20260810-020427.txt に載ったのを確認し消し込み。
+{"slug": "yabamori-hontou-ni-atta-nama-koko-dake-no-hanashi-kiwami-ultra", "reason": "non_manga_drop(anthology/コンビニ廉価再編集)", "at": "2026-09-01", "source": "percase-enrich-review-2026-09-01"}
+{"slug": "sugomori-hontou-ni-atta-nama-koko-dake-no-hanashi-kiwami-ultra", "reason": "non_manga_drop(anthology/コンビニ廉価再編集)", "at": "2026-09-01", "source": "percase-enrich-review-2026-09-01"}
+{"slug": "niigata-manga-taishou-sakuhinshuu", "reason": "non_manga_drop(anthology/コンビニ廉価再編集)", "at": "2026-09-01", "source": "percase-enrich-review-2026-09-01"}
+{"slug": "souta-no-houchou-special", "reason": "non_manga_drop(anthology/コンビニ廉価再編集)", "at": "2026-09-01", "source": "percase-enrich-review-2026-09-01"}
+{"slug": "comic-asami-mitsuhiko-honkaku-ryojou-mystery", "reason": "non_manga_drop(anthology/コンビニ廉価再編集)", "at": "2026-09-01", "source": "percase-enrich-review-2026-09-01"}
