@@ -31,16 +31,38 @@ def months(center: datetime.date, lo: int, hi: int):
         yield f"{y}-{mm:02d}"
 
 
+def load_pub2stem() -> dict:
+    """公開slug→SRC stem の逆引き (= slug-overrides.yml。改名頁はカレンダー=公開slug、
+    manga.v2ファイル名=SRC stem のズレがあり、公開slug直引きだと書影/ISBN/著者が全部落ちる。
+    2026-08-31 実踏: 2026-06で93頁=書影欠の主因だった)。"""
+    m: dict = {}
+    p = os.path.join(ROOT, "data", "seeds", "slug-overrides.yml")
+    if os.path.exists(p):
+        d = yaml.safe_load(io.open(p, encoding="utf-8")) or {}
+        ov = d.pop("overrides", {}) or {}
+        for stem, pub in d.items():
+            if isinstance(pub, str) and pub != stem:
+                m[pub] = stem
+        for stem, rec in ov.items():
+            pub = (rec or {}).get("slug")
+            if pub and pub != stem:
+                m[pub] = stem
+    return m
+
+
 def main() -> None:
     os.makedirs(OUT, exist_ok=True)
     jst_now = datetime.datetime.now(datetime.timezone.utc) + datetime.timedelta(hours=9)
     page_cache: dict = {}
+    pub2stem = load_pub2stem()
 
     def page_info(slug: str, num):
         """→ (cover, isbn13, authors文字列, publisher表示名, imprint)。無い項目はNone/空。"""
         if slug not in page_cache:
             info = {"vols": {}, "authors": "", "pub_by_ed": {}}
             p = os.path.join(ROOT, "data", "manga.v2", slug + ".yml")
+            if not os.path.exists(p) and slug in pub2stem:
+                p = os.path.join(ROOT, "data", "manga.v2", pub2stem[slug] + ".yml")
             if os.path.exists(p):
                 try:
                     y = yaml.safe_load(io.open(p, encoding="utf-8"))
