@@ -2,7 +2,7 @@ import { loadAllManga } from "@/lib/loadData";
 import { DesignNav } from "@/lib/homeDesign";
 import TriageClient from "./TriageClient";
 
-export const metadata = { title: "成年3分けレビュー | MANGAL(テスト専用)", robots: { index: false } };
+export const metadata = { title: "成年3分けレビュー(テスト専用)", robots: { index: false } };
 
 /** 成年3分けレビューUI(2026-07-07 残タスク着手): adult_us付き作品を人が4状態で確定する。
  *  判定はlocalStorage→「コピー」でJSONを書き出し→Claudeがseed化(adult-overrides)する運用。

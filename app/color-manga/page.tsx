@@ -6,7 +6,7 @@ import { DesignNav } from "@/lib/homeDesign";
  *  クライアントfetch方式なのでJSON差し替えだけで一覧も追随する(sansedai-archiveと同型)。 */
 export const metadata = {
   alternates: { canonical: "/color-manga" },
-  title: "カラー版で読める漫画 | MANGAL",
+  title: "カラー版で読める漫画",
   description: "電子書籍(楽天Kobo)でフルカラー版が配信されている漫画の一覧。巻数・ストアリンクつき。",
 };
 

@@ -4,7 +4,7 @@ import type { Manga } from "@/lib/schema";
 
 export const metadata = {
   alternates: { canonical: "/rankings" },
-  title: "なんでもランキング | MANGAL",
+  title: "なんでもランキング",
   description: "巻数・連載年数・完結大作…データベースだから作れる切り口ランキング。",
 };
 

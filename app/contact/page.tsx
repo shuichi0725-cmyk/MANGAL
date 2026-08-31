@@ -4,7 +4,7 @@ import { DesignNav } from "@/lib/homeDesign";
 /** お問い合わせフォーム(2026-07-03)。 送信先メールアドレスはソースに含めない
  *  (= Worker /api/contact が受信箱へ中継。 スクレイピング耐性)。 */
 export const metadata = {
-  alternates: { canonical: "/contact" }, title: "お問い合わせ | MANGAL" };
+  alternates: { canonical: "/contact" }, title: "お問い合わせ" };
 
 export default function ContactPage() {
   return (
