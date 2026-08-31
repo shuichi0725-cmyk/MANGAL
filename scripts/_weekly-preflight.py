@@ -24,7 +24,10 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 STAGE = os.path.join(ROOT, ".cache", "proddata")
 MASTERS = ["demographics.yml", "genres.yml", "magazines.yml",
            "publisher-aliases.yml", "publishers.yml", "slug-aliases.yml"]
-INDEXES = ["manga-list-index.json", "manga-catch-index.json"]
+INDEXES = ["manga-list-index.json", "manga-catch-index.json",
+           # ★titles-pages(2026-08-31): /titles静的ルートの単一ソース。staging未同期だと
+           #   ビルドが空フォールバックで351頁が _empty だけになる(初回週次で実踏)
+           "titles-pages.json"]
 
 fails, warns = [], []
 
