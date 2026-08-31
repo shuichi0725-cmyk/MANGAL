@@ -5,7 +5,7 @@ metadata:
   node_type: memory
   type: project
   originSessionId: 9e4afa8a-543a-4b77-966f-1cb6d5cb07d4
-  modified: 2026-08-01T00:36:59.442Z
+  modified: 2026-08-31T09:22:03.146Z
 ---
 
 ★**検索スナップショット・ゲート**(2026-08-01 新設)。「蒸留のたびに検索がデグレしないか」への答え。
@@ -20,5 +20,9 @@ metadata:
 - ★**機能蒸留エンジン `scripts/_deploy-feature.py` の前検査に組込済**(型検査+`npm test`、失敗で abort)。
   理由=このルートの疎通検査は頁の HTTP 200 しか見ないため検索の退行が構造的に素通りしていた。`--skip-tests` は使わない。
 - 既知: クエリ `seasonII` は実コーパスで0件(`clientSearch.test.ts` の自前fixtureでは当たる)。**未修正・仕様判断待ち**として記録だけしてある。
+- ★**盲点=非同期競合**(2026-08-31 実証): スナップショットは alt を `__setAltIndexForTest` で**決定的に注入**するため、
+  「fetch到着×idle充填の順序」で出る競合バグは**構造的に検出できない**(alt二重畳み込みが全緑のまま本番だけ踏む構図だった)。
+  ウォーム/遅延fetch系(prewarm・alt・head→full差替)を触る変更は、ゲート緑でも**競合レンズのレビューを別途かける**。
+  実例と教訓 → [[search_warm_race_2026_08_31]]
 
 関連 [[search_perf_hotspots_2026_08]] [[lightweight_index_architecture]] [[index_format_change_versioned_filename]]
