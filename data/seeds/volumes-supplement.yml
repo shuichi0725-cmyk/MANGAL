@@ -42645,3 +42645,36 @@ volumes:
   source: rakuten-preorder
   added_at: '2026-08-31'
   note: '日次蒸留2026-08-31: 楽天予約で文庫版1巻を発見(2026-10-15刊)。新作誤ドラフトから既存頁tobaku-mokushirokukaijiへ種4転送。'
+- series_keys:
+  - 'name:松本しげのぶ|name:デュエル・マスターズ : 愛蔵版'
+  qid: null
+  number: 2
+  isbn13: '9784091542892'
+  release_date: '2026-06-26'
+  publisher: 小学館
+  edition_type: standard
+  source: rakuten
+  added_at: '2026-08-31'
+  note: '彼岸島型: 種2で本編クラスタ(qid:Q11530791 sid19214 ed185625)に紛れ、本編vol2と番号衝突でdedup負け=非表示だった。volume-exclude(duel-masters)とセットで愛蔵版頁へ移設。日付=楽天発売日(NDL 2026.7=奥付表記)。NDL 034783271/MADB M1115496/楽天の3源一致'
+- series_keys:
+  - 'name:松本しげのぶ|name:デュエル・マスターズ : 愛蔵版'
+  qid: null
+  number: 3
+  isbn13: '9784091542946'
+  release_date: '2026-07-28'
+  publisher: 小学館
+  edition_type: standard
+  source: rakuten
+  added_at: '2026-08-31'
+  note: '種2未収。NDL 034839141(2026.8=奥付)+楽天(発売日2026-07-28)の2源一致。ユーザ提供NDL TSV: 978-4-09-154294-6'
+- series_keys:
+  - 'name:松本しげのぶ|name:デュエル・マスターズ : 愛蔵版'
+  qid: null
+  number: 4
+  isbn13: '9784091543424'
+  release_date: '2026-08-28'
+  publisher: 小学館
+  edition_type: standard
+  source: rakuten
+  added_at: '2026-08-31'
+  note: '種2未収・NDL未納本。楽天live: 2026-08-28刊・小学館・松本しげのぶ・書影実物有(ISBN帯154xxxが1-5巻で単調=整合)。ユーザ指示「四巻は楽天で探して」で発見'

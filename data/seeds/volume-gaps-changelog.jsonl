@@ -1437,3 +1437,5 @@
 {"slug": "gaki-deka", "op": "isbn-fill", "detail": "SCC1-4+双葉社版1-3のISBN充填(Wiki×楽天2ソース一致)。書影=SCC1-4はcovers seed自動、双葉/豪華版は楽天noimage=なしが正", "at": "2026-08-19", "backup": "isbn-fill.json追記=可逆(キー削除で戻る)"}
 {"slug": "gaki-deka", "op": "isbn-fill-retract+canonical-write", "detail": "canonical結線頁のためisbn-fillは無効=撤去し、edition-canonical/gaki-deka.yml本体にv1-4+双葉社版3冊のISBNを書いた", "at": "2026-08-19", "backup": "git履歴で可逆"}
 {"slug": "(bulk-669)", "op": "partial-isbn-gap-fill", "detail": "がきデカ型一括: 289頁669巻のISBN充填(帯内挿171/外挿136/楽天逆引き362、全件楽天題+巻+帯+未使用の4検証)。書影193巻自動付与。canonical頁560巻+未解決945巻はTSVへ", "at": "2026-08-19", "backup": "isbn-fill.json追記=可逆"}
+{"slug": "deyueru-masutaazu-aizouban", "op": "volgap-fill+cluster-split-fix", "detail": "ユーザ報告(NDL TSV添付)の分裂+巻抜け: vol2=彼岸島型(本編クラスタ混入dedup負け→exclude+種4移設)/vol3-4=種2未収を種4補完(vol4は楽天liveで発見9784091543424)。vol1日付精密化2026-05-28。書影2件実物化。1-5巻完備へ", "at": "2026-08-31", "backup": "全seed純粋追加=可逆"}
+{"slug": "deyueru-masutaazu-aizouban", "op": "note", "detail": "vol1日付精密化は撤回: 2026-06(MADB+NDL=奥付月)→2026-05-28(楽天のみ)は月替えで2ソース一致せず、promoteのprefixガードも正しく拒否。2026-06維持", "at": "2026-08-31"}
