@@ -57,7 +57,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const authors = (m.authors ?? []).map((a) => a.name).join("・");
   let title = `${m.title}${authors ? ` | ${authors}` : ""} - 全巻一覧・発売日`;
   let desc = (m.catch || m.synopsis ||
-    `${m.title}(${authors})の巻一覧・発売日・ISBN・出版社情報。楽天ブックス等の購入リンクつき。`)
+    `${m.title}(${authors})の漫画全巻一覧・発売日・ISBN・出版社情報。楽天ブックス等の購入リンクつき。`)
     .slice(0, 120);
   if (SEO_TEST(m.slug)) {
     // ★①: 「何巻まで/完結/最新刊いつ」クエリ対応(2026-08-06 テスト=チェンソーマン)

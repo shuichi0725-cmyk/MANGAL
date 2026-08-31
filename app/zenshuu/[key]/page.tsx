@@ -16,7 +16,7 @@ export async function generateMetadata({ params }: { params: Promise<{ key: stri
   const { key } = await params;
   const c = V.find((x) => x.key === key);
   return {
-    title: c ? `${c.name}(全${c.total}巻) | MANGAL` : "全集 | MANGAL",
+    title: c ? `${c.name}(全${c.total}巻)` : "全集",
     alternates: { canonical: `/zenshuu/${key}` },
   };
 }
