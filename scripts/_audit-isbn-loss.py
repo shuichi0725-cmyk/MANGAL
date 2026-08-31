@@ -10,9 +10,13 @@
 
 判定:
   消えたISBN を「消えてよい理由の台帳」と突合し、**理由の無い消失だけ**を FAIL として出す。
-  理由の台帳 = non-manga-drop.yml / preorder-deny.jsonl / volume-exclude*.yml / page-dedup.yml /
+  理由の台帳 = preorder-deny.jsonl / volume-exclude*.yml /
                art-book-exclude-isbn.yml / pending-r2-prune.jsonl(頁ごと廃止) /
+               ★isbn-loss-acknowledged.jsonl(2026-08-31新設: 裁定済み削除の消し込み台帳。
+                 {isbn13, reason, commit, at} = 根拠コミット必須。promote挙動には一切影響しない純簿記) /
                ★**別頁へ移設**(= 同じISBNが今も本番のどこかに在る)は消失でない。
+  ※non-manga-drop.yml は series_key キーで slug/ISBN と直接突合できないため読まない
+    (頁dropの消し込みは acknowledged 台帳に根拠コミットを書く)。
 出力: docs/production-diagnostics/isbn-loss.tsv
 """
 import os, sys, json, gzip, glob, argparse
@@ -77,6 +81,17 @@ def _load_reasons():
                         add(e.get("isbn13"), f"{name}(混入巻除去)")
                     else:
                         add(e, f"{name}(混入巻除去)")
+    # ★消し込み台帳(2026-08-31): 裁定済み削除の純簿記。reason に根拠コミットを含める運用。
+    p = os.path.join(ROOT, "data", "seeds", "isbn-loss-acknowledged.jsonl")
+    if os.path.exists(p):
+        for ln in open(p, encoding="utf-8"):
+            ln = ln.strip()
+            if ln.startswith("{"):
+                try:
+                    d = json.loads(ln)
+                    add(d.get("isbn13"), f"acknowledged({str(d.get('reason', ''))[:60]})")
+                except Exception:
+                    pass
     return isbns, notes
 
 
