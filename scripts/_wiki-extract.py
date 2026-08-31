@@ -6,7 +6,7 @@ import json, sys, urllib.parse, urllib.request
 sys.stdout.reconfigure(encoding='utf-8')
 UA = {'User-Agent': 'MANGAL-research/1.0 (shuichi0725@gmail.com)'}
 N = 2200
-args = [a for a in sys.argv[1:] if not a.startswith('--')]
+args = [a for i, a in enumerate(sys.argv[1:]) if not a.startswith("--") and sys.argv[i] != "--chars"]
 for i, a in enumerate(sys.argv):
     if a == '--chars':
         N = int(sys.argv[i+1])
