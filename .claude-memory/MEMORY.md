@@ -109,3 +109,7 @@
 - [【未決】版違い統合](multi_edition_unification_pending.md) — うる星モデル。edition key(publisher×type)化要 ／ [版/刷タブ・在庫・電子割引](version_tabs_stock_ebook.md) — 版タブ実装済。電子=割引率表示 ／ [うる星=版/巻/刷タブ正規ルール](urusei_version_display_rules.md) — 完備最古/type×冊数/versions[]
 - [コンビニ掃引2026-08=完了・裁定待ち3件](konbini_sweep_2026_08_state.md) — 検出器が正本。A/B/D=0。花田秀治郎/短編集の改名+日本沈没頁分離がGO待ち
 - [SEO: インデックス未登録6.65万対策=ハブ3点実装済](seo_index_coverage_state.md) — 公開は週次待ち・残=外部被リンク
+- [ISBN消失FAILの消し込みフロー](weekly_isbn_loss_acknowledge_flow.md) — 機械帰属→acknowledged.jsonl(根拠コミット必須)
+- [【戒め】ビルド入力の結線3箇所](build_input_wiring_three_places.md) — STEPS/preflight staging/消費者。titles空ビルド実踏
+- [部分ビルド合流の復旧型](partial_rebuild_merge_recovery.md) — out退避→FEATURE_BUILD→_next union。全再ビルド回避
+- [【戒め】script警告は検算してから報告](feedback_sanity_check_tool_warnings.md) — R2予算「あと8回」を鵜呑みにした反省

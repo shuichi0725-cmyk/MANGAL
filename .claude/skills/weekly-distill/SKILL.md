@@ -45,6 +45,10 @@ python scripts/_weekly-step1.py        # 生成器14step順次(失敗で即exit 
 python scripts/_weekly-preflight.py --fix     # FAILが1つでもあればビルド開始禁止(exit 1)
 ```
 - 内蔵: コード未コミット検査(2026-07-04実害)/timeout=300/D:空き20GB+/out・.next junction再作成(★実体dirは絶対に自動削除しない=中身有りは手動退避を指示)/staging junction+masters6+索引3本の同期/生成物鮮度WARN。
+- ★ISBN消失FAIL(理由なしN件)の標準対応(2026-08-31確立): 1件ずつ調べる前に**機械帰属**=
+  snapshot日以降の `git log -p -- data/seeds/` の -行ISBN net集合と突合(大半が裁定済み作業の正当削除)。
+  残りは `git log -S <isbn>`。全件コミットに紐付いたら `data/seeds/isbn-loss-acknowledged.jsonl` へ
+  根拠コミット付きで記帳(監査が読む・純簿記)→preflight再実行。紐付かない分だけが真の事故候補。
 - 下の「ディスク事前確認」の手動PowerShellはpreflightが代替(復旧手順のみ手動参照)。
 
 ### 2.5 ★モード判定 (= ハイブリッド週次 2026-08-27 ユーザ裁定。R2費用と3hビルドの節約)
