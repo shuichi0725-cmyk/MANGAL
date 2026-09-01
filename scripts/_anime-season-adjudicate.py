@@ -211,6 +211,18 @@ def main():
                 if hit:
                     cand_slugs.update(hit)
             if not cand_slugs:
+                # ★包含フォールバック(2026-09-01): 完全一致ゼロの時だけ、正規化題の包含
+                #   (ジョジョの奇妙な冒険ファントムブラッド ⊃ 頁題ジョジョの奇妙な冒険 /
+                #    頁題まどか☆マギカ魔獣編 ⊃ 題まどか☆マギカ)を候補化。短題の誤爆は
+                #    len≥6ガード+著者ゲートで防ぐ。ACCEPTは常に著者一致必須。
+                for t in expand:
+                    nt = norm(t)
+                    if len(nt) < 6:
+                        continue
+                    for pk, slugs2 in t2s.items():
+                        if len(pk) >= 6 and (nt in pk or pk in nt):
+                            cand_slugs.update(slugs2)
+            if not cand_slugs:
                 stay_info.append(("NO_PAGE", f"{aid} {d.get('title', {}).get('native')}"))
                 continue
             surs = surname_candidates((d.get("staff") or {}).get("edges"))
