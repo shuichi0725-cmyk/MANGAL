@@ -5,7 +5,7 @@ metadata:
   node_type: memory
   type: project
   originSessionId: 191494c6-0eb5-4cbb-817a-a2afd70f0a40
-  modified: 2026-09-01T07:31:29.311Z
+  modified: 2026-09-01T07:58:04.555Z
 ---
 
 2026-09-01 ユーザ持込(animatetimes.com/tag/details.php?id=5947=2026秋)から新設。「今後は週次で変更があるか見て更新」がユーザ指定の運用。
@@ -32,6 +32,12 @@ metadata:
 - **歴史保留裁定**: adjudicateに`--deep`新設(**LN2ホップ**=NOVELノードのrelationsからコミカライズを辿りa2s直結線 or 題+著者ゲート)→自動97+per-case10(IS→is-2010[姓名順+＜＞字種]/ローゼン2013[U+2010字種]/左きき)+null確定8(SWビジョンズ/しょうたいむ=きりきり舞未収載・show-time頁は吉河美希の同名別作/ポケモン2023/だんでらいおん=空知英秋読切/DARK MOON)。**保留756→627・結線3,405・view3,323作品**。
 - 残627の内訳(=anime-season-stays.tsv): **NO_PAGE 304**(参照漫画が本番に無い=新規登録の鉱脈。GATE自衛隊コミカライズ[竿尾悟]/雪女さんと呪いの指輪[ぷぅ崎ぷぅ奈]等)/NO_CAND 44/GATE_FAIL 3(意図的leave: GATE×2・アークザラッド)/relation無し題only 276(リメイク・キッズ・再編集)。
 - norm強化: join/adjudicateの剥ぎ字種に 【】〈〉《》<>‐‑ を追加(リボ払い/IS/ローゼンの素通し封じ)。
+
+## ★両載せ方針(2026-09-01 ユーザ裁定・やはり俺型)
+- **1アニメに複数コミカライズ頁を載せてよい**: やはり俺の青春ラブコメ=「LNの漫画化(妄言録=佳月玲茅・ビッグガンガン)」と「アニメ化の漫画化(@comic=伊緒直道・サンデーGX)」の並立レアケース。ユーザ「両方載せるべき」。
+- 実装= joinのaccepts読みを**同一anime_idの複数行accumulate**に変更(複数slug=複数行出力・view側は(season,slug)dedupで自然対応)。3季×2頁=accepts6行。
+- やはり俺も薬屋型だった: 妄言録頁の題から「-妄言録-」欠落=素のLN題と同名→title-matchが**偶然**そこへ着地していた。是正= 題復元+★**kana=…モノローグ**(NDL確証・妄言録の読みは当て字「モノローグ」)+aid75447relink+誌2件(妄言録=big-gangan/@comic=monthly-sunday-gx)。
+- ★薬屋(ねこクラゲ版のみ結線中)も両載せにするかは**未裁定**=ユーザに要確認。
 
 ## 初回gap実測(refresh後)
 - 非掲載601作(漫画原作候補=MANGA? 122 / 対象外44 / 不明435)。2026秋の真の残り=鳴海の平日/タヌキとキツネ/ガルパンもっとらぶらぶ/紫禁・御猫房/Duel Masters LOSTの5件。
