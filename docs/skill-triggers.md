@@ -23,6 +23,7 @@ skill 実体 = `.claude/skills/<name>/SKILL.md`(git追跡。Opus 4.8 等でも�
 | **「帯混入直して/激マン型見て」** | band-intruder-fix | 少数帯×日付逆行の混入巻をNDL×楽天でスワップ是正 | 数分〜 |
 | **「和訳エンリッチして」** | wayaku-enrich | AniList英語descの60-120字和訳要約→synopsis-ja.json純粋追加。★未訳カウントの大半は素材ゼロ=対象外、実仕事は月次dump更新後の小さなdelta | ~100件/batch |
 | **「エンリッチして」** | enrich-catch-synopsis | キャッチ(一覧惹句20-40字)と詳細(頁あらすじ60-120字)を全巻紹介文から役割分担生成+ジャンル要素付与 | 100件/batch |
+| **「外部エンリッチして/外部エンリッチ続けて」** | external-enrich | 楽天captionが枯れた旧作層に Wikipedia+魚(TinyFish) の一次情報でキャッチ/詳細を付与。**掲載境界(アンソロ/傑作選/コンビニ廉価/ムック/合本)と材料なしは書かずに hold台帳へ**。Opus運転前提 | 18-20件/回 |
 | **「あらすじ検品して/あらすじ検品続けて」** | synopsis-audit | synopsis-ja.json(3.9万)の「別作品の内容」型を機械flag(語彙交差)→AI裁定→--fix是正。スワップはペアで直す。**Opus運転前提** | 20-40件/回 |
 | **「巻説明つくって」「単行本説明つくって」** | volume-desc | 単行本(巻)単位の説明文を楽天itemCaptionから生成→seed純粋追加(表示結線は未定)。**Opus 4.8運転前提** | 100巻/batch |
 | **「Wiki蒸留して」** | wiki-distill | Wikipedia書誌(巻別ISBN+日付)で壊れた長期連載をcanonical復元(釣りキチ65巻等で実証・fail-closedゲート) | 10作/回 数分 |
