@@ -19,7 +19,7 @@ metadata:
 - **更新**= `UPDATE_SEARCH_SNAPSHOT=1 npx vitest run lib/searchSnapshot.test.ts` → **git diff を目視してから commit**。黙って焼き直さない。
 - ★**機能蒸留エンジン `scripts/_deploy-feature.py` の前検査に組込済**(型検査+`npm test`、失敗で abort)。
   理由=このルートの疎通検査は頁の HTTP 200 しか見ないため検索の退行が構造的に素通りしていた。`--skip-tests` は使わない。
-- 既知: クエリ `seasonII` は実コーパスで0件(`clientSearch.test.ts` の自前fixtureでは当たる)。**未修正・仕様判断待ち**として記録だけしてある。
+- ~~既知: クエリ `seasonII` は実コーパスで0件~~ → **解消済**(2026-09-01確認: PIN_SLUGSにrosario-to-vampire-season-2が入っておりスナップショットは`seasonII`=7件・先頭ロザリオ。古い記録に引きずられて再調査しないこと)。
 - ★**盲点=非同期競合**(2026-08-31 実証): スナップショットは alt を `__setAltIndexForTest` で**決定的に注入**するため、
   「fetch到着×idle充填の順序」で出る競合バグは**構造的に検出できない**(alt二重畳み込みが全緑のまま本番だけ踏む構図だった)。
   ウォーム/遅延fetch系(prewarm・alt・head→full差替)を触る変更は、ゲート緑でも**競合レンズのレビューを別途かける**。

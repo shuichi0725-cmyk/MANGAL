@@ -1,6 +1,6 @@
 ---
 name: search_warm_race_2026_08_31
-description: ホーム検索warm化(c74fa2f6b)の週次前レビューで出た競合型と是正・残務(/list着地フラッシュ)
+description: ホーム検索warm化(c74fa2f6b)の週次前レビューで出た競合型と是正。残務(/list着地フラッシュ+サイドバー片肺warm)は2026-09-01に解消済
 metadata: 
   node_type: memory
   type: project
@@ -20,7 +20,9 @@ metadata:
 3. **URL→stateをeffectで反映する初期化は、warm+SPA時代に「q未適用の全件計算+フラッシュ」を生む**
    (MPA時代は索引到着がeffectより後で見えなかった穴)。是正=初期stateをURLから同期構築+初回effect skip。
 
-**残務**: ★`components/ListClient.tsx`(/list)に**同型の着地フラッシュが残っている**
+**残務→✅解消(2026-09-01 64cac8eda)**: ListClientをuseSearchParams同期初期化+初回effect skip+Suspense境界(app/list/page.tsx)に移植。同時に**HomeSidebar(本番ホーム=design-12の左サイドバー)が索引しか先読みしておらず、/list着地後の初回検索がhaystack同期構築に落ちる片肺**もHeroD3と同型(onFullIndex→prewarmSearch/prewarmAlt)に揃えた。本番反映は機能蒸留/週次待ち。
+
+(旧記録) `components/ListClient.tsx`(/list)に同型の着地フラッシュが残っていた
 (state=empty初期化→effectでURL反映。サイドバー検索が /list?q= へSPA pushするので踏み得る)。
 HomeClient(d8eff7ce6)の直し方を移植すれば良い。急ぎではない(ユーザ体感報告なし)。
 
