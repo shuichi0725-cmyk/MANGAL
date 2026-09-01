@@ -2027,8 +2027,10 @@ def find_related_series_ids(con: sqlite3.Connection, main: dict) -> list[int]:
     # ★ merge.yml の merge_sids 強制統合 (= 個別判断、 既存 logic で 漏れる
     # 表記揺れ / 著者振り分け差異 等 を ユーザ明示で 統合)
     merge_sids_map = get_merge_sids(con)
+    _forced: set = set()          # ★ユーザ明示mergeで足した sid(下のhomonym guardより優先させる)
     for sid in list(ids):
         if sid in merge_sids_map:
+            _forced |= set(merge_sids_map[sid])   # ★群の全員(既にidsに居る分も含む)
             ids.update(merge_sids_map[sid])
     # ★ drop済(非掲載)series を merge cluster から除外。
     #   同題auto-mergeで フィルムコミック等(non-manga-drop登録済)が 実ページ(コミカライズ
@@ -2045,9 +2047,13 @@ def find_related_series_ids(con: sqlite3.Connection, main: dict) -> list[int]:
     # ★homonym guard(実行時): main と「共通著者なし＋巻番号重複」の候補をclusterから除外。
     #   JIPANG(速水翼)≠ジパング(かわぐち)等の読み/題衝突mergeを構造的に阻止。
     #   FULL SWING型(同名別qid)=共通著者ありでmerge維持(regression無し)。原作/作画=相補巻でmerge維持。
+    #   ★ただし series-merge.yml で**ユーザが明示的に足した sid** はガードの対象外
+    #     (2026-09-01 デビルマンレディー実踏: 本編『永井豪』と文庫版『永井豪＆ダイナミックプロ』は
+    #      著者行が別なので「共通著者なし＋巻番号重複」に当たり、明示mergeが機械ガードで打ち消されていた)。
     if len(ids) > 1:
         _build_author_vol_index(con)
-        ids = {i for i in ids if i == main["id"] or not _is_homonym(main["id"], i)}
+        ids = {i for i in ids
+               if i == main["id"] or i in _forced or not _is_homonym(main["id"], i)}
     # ★merge例外seed(2026-07-03 ドカベン発): 同qidスピンオフ(プロ野球編/スーパースターズ編)が
     #   本編clusterに吸われ番号衝突で不可視化する型を、明示ペアでblock(git追跡・対称)。
     global _MERGE_EXC
