@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import ListClient from "@/components/ListClient";
 import { DesignNav } from "@/lib/homeDesign";
 import { loadMasters, loadArtBooks } from "@/lib/loadData";
@@ -25,7 +26,11 @@ export default function ListPage() {
         <h1 className="text-base font-extrabold">📋 一覧表</h1>
         <span className="text-[11px] text-ink/55">フィルター×並び順は自由に掛け算</span>
       </header>
-      <ListClient data={data} />
+      {/* ★ListClient は useSearchParams を使うため Suspense 境界が要る(静的書き出しではここまでCSR)。
+          fallback は null にしない(2026-08-01 /browse の教訓: 本文が丸ごと消える) */}
+      <Suspense fallback={<div className="px-3 py-8 text-sm text-ink/55">一覧表を読み込み中…</div>}>
+        <ListClient data={data} />
+      </Suspense>
     </div>
   );
 }

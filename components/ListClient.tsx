@@ -1,7 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import FilterPanel from "@/components/FilterPanel";
 import ShareButtons from "@/components/ShareButtons";
 import {
@@ -42,27 +43,45 @@ export default function ListClient({ data }: { data: ListBundle }) {
     const h = window.location.hostname;
     setIsPreview(h.includes("preview") || h === "localhost" || h === "127.0.0.1" || localStorage.getItem("mangal-diag") === "1");
   }, []);
-  const [state, setState] = useState<FilterState>(emptyFilterState());
+  // ★初期stateはURLから同期で組む(2026-09-01: HomeClient d8eff7ce6 の移植)。
+  //   旧= emptyFilterState()で初期化→mount effectでURL反映。ホームのサイドバー検索が
+  //   SPA遷移(/list?q=)で着地すると索引が手元に在るため「q未適用の全件を絞込+ソートして
+  //   一瞬描画→effectでqを当てて作り直し」= 全件二重計算+人気順一覧のフラッシュを毎回踏んでいた
+  //   (MPA時代は索引到着がeffectより後で見えなかった穴)。useSearchParams は静的書き出しで
+  //   Suspense境界までCSRに落ちる(app/list/page.tsx)ので、旧window.location初期化にあった
+  //   水和不一致の芽も同時に消える。
+  //   ★q は FilterState.query に写さない: filtersFromSearchParams は q を query にも写す(browse用)が、
+  //   ここで消さないと検索+絞り込みの二重適用になり「?q=で着地するとフィルター(1)が立って0件」
+  //   (2026-07-29 ユーザ報告=サイドバー検索全滅の根因。書き込み側 applyState の params.delete("q") と対)。
+  const searchParams = useSearchParams();
+  const stateFromParams = (sp: { get(k: string): string | null; toString(): string }): FilterState => {
+    const patch = filtersFromSearchParams(sp as unknown as URLSearchParams);
+    delete (patch as { query?: string }).query;
+    return { ...emptyFilterState(), ...patch };
+  };
+  const [state, setState] = useState<FilterState>(() => stateFromParams(searchParams));
   const [open, setOpen] = useState(false);
-  const [q, setQ] = useState("");             // 確定済み検索語(=絞込に効く)
-  const [qInput, setQInput] = useState("");   // 入力中の文字(★ボタン/Enterまで検索しない 2026-07-11 ユーザ仕様)
-  // ★URL ?q= を初期値に(2026-07-06 PCサイドバー検索からの遷移受け)
-  //   +★フィルタ全体もURLから復元(2026-07-22: 詳細→戻るでフィルタが消える問題の恒久修正)
+  const [q, setQ] = useState(() => searchParams.get("q") ?? "");             // 確定済み検索語(=絞込に効く)
+  const [qInput, setQInput] = useState(() => searchParams.get("q") ?? "");   // 入力中の文字(★ボタン/Enterまで検索しない 2026-07-11 ユーザ仕様)
+  // ★URL変化(ホーム→/list?q=a→ホーム→/list?q=b のSPA再着地・back/forward)だけ組み直す。
+  //   初回はuseState初期化と同内容なのでskip(同内容のsetStateでも参照が替わり67k絞込を払い直すため)。
+  //   自前の history.replaceState 書き戻しも searchParams に映る(Next14.1+)ので、値が同じなら触らない。
+  const spKey = searchParams.toString();
+  const spInitRef = useRef(true);
   useEffect(() => {
-    const sp = new URLSearchParams(window.location.search);
-    const uq = sp.get("q");
-    if (uq) {
+    if (spInitRef.current) {
+      spInitRef.current = false;
+      return;
+    }
+    const uq = searchParams.get("q") ?? "";
+    if (uq !== q) {
       setQ(uq);
       setQInput(uq);
     }
-    const patch = filtersFromSearchParams(sp);
-    // ★q は上の setQ(検索state)が担当。filtersFromSearchParams は q を FilterState.query にも
-    //   写すため(browse用)、ここで消さないと検索+絞り込みの二重適用になり「?q=で着地すると
-    //   フィルター(1)が立って0件」(2026-07-29 ユーザ報告=ホーム左サイドバー検索が全滅していた根因。
-    //   書き込み側L77の params.delete("q") と対になる読み側の除外)。
-    delete (patch as { query?: string }).query;
-    if (Object.keys(patch).length) setState({ ...emptyFilterState(), ...patch });
-  }, []);
+    const next = stateFromParams(searchParams);
+    if (JSON.stringify(next) !== JSON.stringify(state)) setState(next);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [spKey]);
   // ★フィルタ変更をURLへ書き戻し(q/n/sと同機構。replaceで履歴を汚さない)
   const applyState = (next: FilterState) => {
     setState(next);

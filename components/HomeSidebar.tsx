@@ -3,7 +3,8 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { ensureFullIndex } from "@/lib/useMangaIndex";
+import { ensureFullIndex, onFullIndex } from "@/lib/useMangaIndex";
+import { prewarmAlt, prewarmSearch } from "@/lib/clientSearch";
 
 /** PC専用の左サイドバー(2026-07-06 ユーザ要望「PCは左に検索常駐」)。
  *  lg未満では非表示(モバイルは従来の1カラム)。sticky常駐。
@@ -13,12 +14,25 @@ import { ensureFullIndex } from "@/lib/useMangaIndex";
  *    22MB索引の再デコード+検索前処理が検索のたびに走っていた。
  *  ②PC(lg以上)のみホーム表示中にフル索引をidle先読み — 検索押下時には手元に揃っている。
  *    モバイルはサイドバー非表示+回線コスト配慮で先読みしない(CSS非表示でもJSは動くためmatchMediaで判定)。 */
+let _warmHooked = false; // onFullIndex の二重登録防止(HeroD3 と同型)
+
 export default function HomeSidebar({ genres }: { genres: Array<{ key: string; name: string }> }) {
   const [q, setQ] = useState("");
   const router = useRouter();
   useEffect(() => {
     if (!window.matchMedia("(min-width: 1024px)").matches) return;
-    const t = setTimeout(() => ensureFullIndex(), 2500);
+    const t = setTimeout(() => {
+      ensureFullIndex();
+      // ★haystack+別名まで前計算(2026-09-01): 旧=索引DLだけ先読みで、/list着地後の初回検索が
+      //   「未構築のhaystackをその場で同期構築」に落ちていた(ヒーロー検索HeroD3と同じ形に揃える)
+      if (!_warmHooked) {
+        _warmHooked = true;
+        onFullIndex((items) => {
+          prewarmSearch(items);
+          prewarmAlt();
+        });
+      }
+    }, 2500);
     return () => clearTimeout(t);
   }, []);
   return (
