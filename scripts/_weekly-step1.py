@@ -31,6 +31,8 @@ YM = datetime.now(timezone(timedelta(hours=9))).strftime("%Y-%m")
 
 # (name, argv, 説明)。順序=依存順(カレンダー→書影refresh→shinkan、索引は最後)。
 STEPS = [
+    ("animatetimes-weekly", ["_animatetimes-season-crawl.py", "--weekly"],
+     "アニメイトタイムズ季節まとめの差分チェック(最新2季+次季探索→gap TSV更新。fail-soft=網断でも続行)"),
     ("calendar-prod",     ["_build-calendar.py", "data/manga.v2", "data/calendar", YM],
      "本番フルカレンダー(r2-syncがoverlay。引数なし実行=preview先に書く事故の根絶)"),
     ("calendar-preview",  ["_build-calendar.py", ".preview-data/manga", "public/calendar", YM],

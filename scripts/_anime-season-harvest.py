@@ -111,6 +111,8 @@ def main():
     ap.add_argument("--from", dest="y_from", type=int)
     ap.add_argument("--to", dest="y_to", type=int)
     ap.add_argument("--season", help="YYYY-SEASON 形式で1季だけ")
+    ap.add_argument("--refresh", action="store_true",
+                    help="対象季の既存行を捨てて再収穫(凍結解消。当季+次季の鮮度維持用)")
     ap.add_argument("--stats", action="store_true")
     a = ap.parse_args()
 
@@ -131,8 +133,21 @@ def main():
     else:
         ap.error("--from/--to か --season を指定")
 
-    done = load_done()
-    targets = [(y, s) for y, s in targets if f"{y}-{s}" not in done]
+    if a.refresh:
+        # 対象季の既存行を除去してから再収穫(季単位replace。他季は不変)
+        drop = {f"{y}-{s}" for y, s in targets}
+        keep = []
+        if os.path.exists(SEED):
+            for line in open(SEED, encoding="utf-8"):
+                line = line.strip()
+                if line and json.loads(line).get("season_key") not in drop:
+                    keep.append(line)
+        with open(SEED, "w", encoding="utf-8") as f:
+            f.write("\n".join(keep) + ("\n" if keep else ""))
+        print(f"--refresh: {', '.join(sorted(drop))} の既存行を除去して再収穫", flush=True)
+    else:
+        done = load_done()
+        targets = [(y, s) for y, s in targets if f"{y}-{s}" not in done]
     print(f"対象 {len(targets)}季 (収穫済skip込み)", flush=True)
     out = open(SEED, "a", encoding="utf-8")
     for k, (y, s) in enumerate(targets):
