@@ -100,6 +100,8 @@ def harvest_season(y, s, out):
             break
         p += 1
         time.sleep(2.6)
+    if out is None:
+        return rows  # refreshモード: 呼び元が成功時のみ置換する
     for row in rows:
         out.write(json.dumps(row, ensure_ascii=False) + "\n")
     out.flush()
@@ -112,7 +114,9 @@ def main():
     ap.add_argument("--to", dest="y_to", type=int)
     ap.add_argument("--season", help="YYYY-SEASON 形式で1季だけ")
     ap.add_argument("--refresh", action="store_true",
-                    help="対象季の既存行を捨てて再収穫(凍結解消。当季+次季の鮮度維持用)")
+                    help="対象季を再収穫して置換(凍結解消。季ごとに成功時のみ置換=中断安全)")
+    ap.add_argument("--latest", action="store_true",
+                    help="当季+次2季を対象にする(週次の鮮度維持用。--refreshと併用)")
     ap.add_argument("--stats", action="store_true")
     a = ap.parse_args()
 
@@ -123,7 +127,14 @@ def main():
         return
 
     targets = []
-    if a.season:
+    if a.latest:
+        # 当季+次2季 (WINTER=1-3月/SPRING=4-6/SUMMER=7-9/FALL=10-12)
+        from datetime import datetime, timedelta, timezone
+        now = datetime.now(timezone(timedelta(hours=9)))
+        si = (now.month - 1) // 3
+        for k in range(3):
+            targets.append((now.year + (si + k) // 4, SEASONS[(si + k) % 4]))
+    elif a.season:
         y, s = a.season.split("-")
         targets = [(int(y), s.upper())]
     elif a.y_from and a.y_to:
@@ -134,20 +145,32 @@ def main():
         ap.error("--from/--to か --season を指定")
 
     if a.refresh:
-        # 対象季の既存行を除去してから再収穫(季単位replace。他季は不変)
-        drop = {f"{y}-{s}" for y, s in targets}
-        keep = []
-        if os.path.exists(SEED):
-            for line in open(SEED, encoding="utf-8"):
-                line = line.strip()
-                if line and json.loads(line).get("season_key") not in drop:
-                    keep.append(line)
-        with open(SEED, "w", encoding="utf-8") as f:
-            f.write("\n".join(keep) + ("\n" if keep else ""))
-        print(f"--refresh: {', '.join(sorted(drop))} の既存行を除去して再収穫", flush=True)
-    else:
-        done = load_done()
-        targets = [(y, s) for y, s in targets if f"{y}-{s}" not in done]
+        # 季ごとに再収穫→★成功した季だけ置換(中断してもseedは欠けない)
+        print(f"--refresh対象: {', '.join(f'{y}-{s}' for y, s in targets)}", flush=True)
+        for k, (y, s) in enumerate(targets):
+            try:
+                rows = harvest_season(y, s, None)
+            except Exception as e:
+                print(f"★中断 {y}-{s}: {e} (この季は旧行のまま。再実行で再試行)")
+                break
+            keep = []
+            if os.path.exists(SEED):
+                for line in open(SEED, encoding="utf-8"):
+                    line = line.strip()
+                    if line and json.loads(line).get("season_key") != f"{y}-{s}":
+                        keep.append(line)
+            with open(SEED, "w", encoding="utf-8") as f:
+                for line in keep:
+                    f.write(line + "\n")
+                for row in rows:
+                    f.write(json.dumps(row, ensure_ascii=False) + "\n")
+            print(f"  {y}-{s}: {len(rows)}作品で置換 [{k + 1}/{len(targets)}]", flush=True)
+            time.sleep(2.6)
+        print("done")
+        return
+
+    done = load_done()
+    targets = [(y, s) for y, s in targets if f"{y}-{s}" not in done]
     print(f"対象 {len(targets)}季 (収穫済skip込み)", flush=True)
     out = open(SEED, "a", encoding="utf-8")
     for k, (y, s) in enumerate(targets):

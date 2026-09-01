@@ -33,6 +33,10 @@ YM = datetime.now(timezone(timedelta(hours=9))).strftime("%Y-%m")
 STEPS = [
     ("animatetimes-weekly", ["_animatetimes-season-crawl.py", "--weekly"],
      "アニメイトタイムズ季節まとめの差分チェック(最新2季+次季探索→gap TSV更新。fail-soft=網断でも続行)"),
+    ("anime-season-refresh", ["_anime-season-harvest.py", "--latest", "--refresh"],
+     "AniList当季+次2季の再収穫(季単位置換・成功時のみ。旧=7/12凍結でコーナーが増えなかった)"),
+    ("anime-season-join",  ["_anime-season-join.py", "--rebuild-map"],
+     "アニメ季節→頁join(★マップ必ず再構築=stale事故の型対策)"),
     ("calendar-prod",     ["_build-calendar.py", "data/manga.v2", "data/calendar", YM],
      "本番フルカレンダー(r2-syncがoverlay。引数なし実行=preview先に書く事故の根絶)"),
     ("calendar-preview",  ["_build-calendar.py", ".preview-data/manga", "public/calendar", YM],
@@ -59,6 +63,8 @@ STEPS = [
      "本番索引(~10分。★生成物stepの最後=上の変更を焼き込む。索引から導出するstepだけこの後)"),
     ("titles-pages",      ["_gen-titles-pages.py"],
      "題名索引ハブJSON(/titles 50音×200件頁+sitemapの単一ソース。★索引から導出=list-indexの後)"),
+    ("anime-season-view", ["_build-anime-season-view.py"],
+     "/anime 季節ビューJSON(links+索引→anime-seasons-view.json。★索引から導出=list-indexの後。旧=未配線で凍結)"),
 ]
 
 # ★BookLive停止札(2026-08-31): 規制中はBookLive宛stepを自動skipして週次を完走させる。

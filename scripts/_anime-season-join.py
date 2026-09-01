@@ -33,7 +33,7 @@ ACCEPTS = os.path.join(ROOT, "data", "seeds", "anime-season-accepts.jsonl")
 
 def norm(t):
     t = unicodedata.normalize("NFKC", str(t or "")).lower()
-    return re.sub(r"[\s　・!！?？:：〜~ー\-。、．.「」『』()（）☆★♥&＆]", "", t)
+    return re.sub(r"[\s　・!！?？:：〜~ー\-。、．.「」『』()（）【】〈〉《》☆★♥&＆]", "", t)
 
 
 def build_map():

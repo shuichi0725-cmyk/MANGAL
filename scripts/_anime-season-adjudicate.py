@@ -40,7 +40,7 @@ query ($ids: [Int]) {
 
 def norm(t):
     t = unicodedata.normalize("NFKC", str(t or "")).lower()
-    return re.sub(r"[\s　・!！?？:：〜~ー\-。、．.「」『』()（）☆★♥&＆]", "", t)
+    return re.sub(r"[\s　・!！?？:：〜~ー\-。、．.「」『』()（）【】〈〉《》☆★♥&＆]", "", t)
 
 
 def gql(ids):
