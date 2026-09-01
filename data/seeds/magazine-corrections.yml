@@ -139,3 +139,13 @@ corrections:
     source: wiki-verified
     evidence: ja.wikipedia「秘密探偵JA」= 週刊少年キング(少年画報社)1965-1969連載、望月三起也の初ヒット作。同誌はワイルド7と同じ shonen-king キー。種3は掲載誌を持っていなかった(magazine=None)
     added_at: '2026-08-14'
+  kusuriya-no-hitorigoto:
+    magazine: monthly-sunday-gx
+    source: rakuten-verified
+    evidence: '倉田三ノ路版(小学館)。楽天series=サンデーGXコミックス(9784091575159)。旧big-gangan誤記=ねこクラゲ版(スクエニ)の値が混線していた'
+    added_at: '2026-09-01'
+  kusuriya-no-hitorigoto-shino:
+    magazine: big-gangan
+    source: rakuten-verified
+    evidence: 'ねこクラゲ版(スクエニ・ビッグガンガンコミックス 9784757554894)。頁のmagazineが空だった'
+    added_at: '2026-09-01'
