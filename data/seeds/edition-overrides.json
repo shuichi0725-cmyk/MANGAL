@@ -10105,34 +10105,6 @@
   "year_ended": 1982,
   "year_started": 1982
  },
- "genji-monogatari-miyagi-2010": {
-  "authors": [
-   {
-    "name": "真崎春望",
-    "role": "artist"
-   }
-  ],
-  "editions": [
-   {
-    "imprint": "Akebono-Comics",
-    "label": "通常版",
-    "type": "standard",
-    "volumes": [
-     {
-      "asin": null,
-      "cover_url": null,
-      "isbn13": "9784059006145",
-      "number": 1,
-      "release_date": "2010-01"
-     }
-    ]
-   }
-  ],
-  "year_ended": 1982,
-  "year_started": 1982,
-  "anilist": false,
-  "note": " / 2026-09-01 anilist:false(真崎春望版=AniList帰属不明。源氏物語系keyのfallback付着を遮断)"
- },
  "genji-monogatari-shin-1991": {
   "authors": [
    {
@@ -37202,5 +37174,33 @@
  "makai-tenshou": {
   "anilist": false,
   "note": " / 2026-09-01 anilist:false(とみ新蔵版=AniList未収載。石川賢版95124のfallback付着を遮断)"
+ },
+ "genji-monogatari-miyagi": {
+  "authors": [
+   {
+    "name": "真崎春望",
+    "role": "artist"
+   }
+  ],
+  "editions": [
+   {
+    "imprint": "Akebono-Comics",
+    "label": "通常版",
+    "type": "standard",
+    "volumes": [
+     {
+      "asin": null,
+      "cover_url": null,
+      "isbn13": "9784059006145",
+      "number": 1,
+      "release_date": "2010-01"
+     }
+    ]
+   }
+  ],
+  "year_ended": 1982,
+  "year_started": 1982,
+  "anilist": false,
+  "note": " / 2026-09-01 anilist:false(真崎春望版=AniList帰属不明。源氏物語系keyのfallback付着を遮断)"
  }
 }
