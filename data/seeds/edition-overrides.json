@@ -10129,7 +10129,9 @@
    }
   ],
   "year_ended": 1982,
-  "year_started": 1982
+  "year_started": 1982,
+  "anilist": false,
+  "note": " / 2026-09-01 anilist:false(真崎春望版=AniList帰属不明。源氏物語系keyのfallback付着を遮断)"
  },
  "genji-monogatari-shin-1991": {
   "authors": [
@@ -37192,5 +37194,13 @@
   "title": "やはり俺の青春ラブコメはまちがっている。-妄言録-",
   "title_kana": "ヤハリオレノセイシュンラブコメワマチガッテイルモノローグ",
   "note": " / 2026-09-01 副題復元: NDL(9784757539259)題=『〜。: 妄言録』ヨミ=モノローグ。素のLN題と同名でアニメjoinが偶然着地していた薬屋型"
+ },
+ "last-order-2000": {
+  "anilist": false,
+  "note": " / 2026-09-01 anilist:false(高田裕三版2000=AniList未収載。dropしてもfallbackで松葉版140559が付くためenrich遮断)"
+ },
+ "makai-tenshou": {
+  "anilist": false,
+  "note": " / 2026-09-01 anilist:false(とみ新蔵版=AniList未収載。石川賢版95124のfallback付着を遮断)"
  }
 }
