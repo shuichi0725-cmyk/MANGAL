@@ -5586,3 +5586,51 @@ non_manga:
 - series_key: "name:DONKEY|name:リリパット"
   reason: anthology_magazine
   note: "ユーザ裁定2026-09-01。東京三世社『リリパット』全9巻(1987-1988)は**巻ごとに著者が全部違う同題アンソロジー(叢書)**で単一作品ではない。裏取り=NDL SRU title=\"リリパット\"で全巻を確認: 1上総志摩/2番外地貢/3阿乱霊(別レコードで飯田哲章・叢書Belle-comic-special)/4中総もも/5真弓大介/6阿乱霊/7DONKEY/8阿乱霊/9中総もも、全巻ISBN無し・版元は全て東京三世社。本頁 lilliput は本来 竹書房『リリパット』松崎司(Bamboo comics Qpa collection・2014・ISBN9784812487594)の頁であり、同題mergeでこのアンソロジー7クラスタが合流していた。該当巻: 7巻(1988-07-10)DONKEY"
+- series_key: "qid:Q2661273|name:泣ける!ゴルゴ13"
+  reason: konbini_reprint
+  note: "楽天の seriesName が全巻 My First BIG SPECIAL / My First BIG SUPER(小学館のコンビニ廉価レーベル)。CLAUDE.mdの drop imprint patterns に「My first big」が明記されており本来この網で落ちるはずが、本番側のimprintが「Golgo 13 special」に化けていたため素通りしていた。中身はテーマ別セレクション(泣ける!ラブストーリー/ハードボイルド/ミステリー/サバイバル…)=既刊再編集。本編頁 golgo-13(437巻)は存置 [slug=nakeru-golgo-13]"
+- series_key: "qid:Q2661273|name:Epic of ゴルゴ13"
+  reason: excerpt_selection
+  note: "SPコミックス ポケットワイドのテーマ別セレクション(カーニバルの終焉/ナチスの亡霊/復讐と報恩/昭和の妖怪/メディアからの挑戦/大国の狭間で)=既刊再編集の抜粋本。同レーベル棚に「ゴルゴ13 SPECIAL SELECTION」も並ぶ。本編頁 golgo-13(437巻)は存置 [slug=epic-of-golgo-13]"
+- series_key: "qid:Q17161092|name:旅情ミステリースペシャル|sub:名探偵浅見光彦&警視庁十津川警部"
+  reason: anthology_magazine
+  note: "楽天の著者欄に「アンソロジー」が現れる巻があり(3巻)、他の巻も著者=内田康夫/西村京太郎(=原作者)。subTitleは全巻「名探偵浅見光彦＆警視庁十津川警部」で、2つの原作シリーズのコミカライズ読切を寄せ集めた本。既にdrop済の『コミック浅見光彦本格旅情ミステリー』(ぶんか社)と同型 [slug=ryojou-mystery-special-2020]"
+- series_key: "qid:Q8967541|name:浅見光彦ミステリー&旅愁サスペンス"
+  reason: anthology_magazine
+  note: "楽天 seriesName=秋田トップコミックスWIDE(コンビニ廉価)、著者欄は全巻「内田康夫」=原作者のみ。浅見光彦もののコミカライズを寄せ集めた廉価アンソロジー [slug=asami-mitsuhiko-mystery-ando-ryoshuu-sasupensu]"
+- series_key: "name:あさみさとる|name:コミック名探偵浅見光彦"
+  reason: anthology_magazine
+  note: "書店の著者表記が「アンソロジー/内田康夫」。内容も「内田康夫原作小説の人気シリーズをコミカライズで複数収録(佐渡伝説殺人事件・伊香保殺人事件・耳なし芳一からの手紙 等)」。既にdrop済の『コミック浅見光彦本格旅情ミステリー』と同レーベル同型 [slug=comic-mei-tantei-asami-mitsuhiko]"
+- series_key: "name:中原まい|name:コミック赤川次郎ミステリー"
+  reason: anthology_magazine
+  note: "書店の著者表記が「アンソロジー/赤川次郎」。内容は「『怪異名所巡り』『幽霊シリーズ』『三毛猫ホームズ』の人気シリーズ一挙10話収録」=複数作家のコミカライズ寄せ集め [slug=comic-akagawa-jirou-mystery]"
+- series_key: "qid:Q11671864|name:読者投稿心霊体験"
+  reason: excerpt_selection
+  note: "楽天 subTitle=「高港基資ホラー傑作選」、seriesName=「YK best 高港基資他ホラー傑作選」。ヤングキングベスト=廉価版レーベルで、複数作家の既発表作を集めた再録集 [slug=dokusha-toukou-shinrei-taiken]"
+- series_key: "qid:Q11477877|name:ワタシの川原泉"
+  reason: excerpt_selection
+  note: "楽天 subTitle=「川原泉傑作集」、caption=「読者投票により収録作を決定した前代未聞の傑作集」。既刊短編の再録集で、CLAUDE.mdの抜粋本パターン(傑作選/傑作集)に該当 [slug=watashi-no-kawahara-izumi]"
+- series_key: "qid:Q3431787|name:お徳用毎日かあさん"
+  reason: gappon
+  note: "楽天の巻題が「(1＋2巻)」「(3＋4巻)」「(5＋6巻)」「(7＋8巻)」=2冊分を1冊にした合本。caption「2冊分入って1冊分以下のお値段!」。合本は非掲載が基本。本編頁 mainichi-kaa-san(14巻)は存置 [slug=otokuyou-mainichi-kaa-san]"
+- series_key: "qid:Q11519792|name:蒼太の包丁deluxe"
+  reason: konbini_reprint
+  note: "マンサンQコミックス=実業之日本社のコンビニコミック。商品説明が「マンサンコミックス『蒼太の包丁』全42巻の豊富なコンテンツからメニュー(季節感)重視で作品を厳選、編集した美味しい1冊」=既刊の再編集抜粋本。既にdrop済の『蒼太の包丁 special』と同型。本編頁 souta-no-houchou(41巻)は存置 [slug=souta-no-houchou-derakkusu]"
+- series_key: "name:ゆでたまご|name:キン肉マンジャンプ"
+  reason: anthology_magazine
+  note: "楽天 seriesName=集英社ムック。巻題も「ベストバウトTOP10 完璧超人始祖編」「超人総選挙2019 TOP10の…」で、captionは「TOP10超人の名シーンを厳選」+旧作リメイク+対談企画。雑誌形式のムック(総集編)。本編頁 kinnikuman(112巻)は存置 [slug=kinnikuman-jump]"
+- series_key: "name:講談社|name:GIANT KILLING extra ジャイアントキリング発サッカーエンターテインメントマガジン"
+  reason: anthology_magazine
+  note: "楽天 seriesName=講談社mook、著者=講談社、subTitle=「ジャイアントキリング発サッカーエンターテインメント」。誌名どおりのサッカー雑誌ムックで単一漫画作品ではない。本編頁 giant-killing(70巻)は存置 [slug=giant-killing-extra-giant-killing-hatsu-sakkaa-entaateinmento-magazine]"
+- series_key: "name:ジャンプSQ.編集部|name:ジャンプSQ.Comic Selection"
+  reason: anthology_magazine
+  note: "楽天の著者が全巻「ジャンプSQ.編集部」「ジャンプスクエア編集部」=編集部名義の作品セレクション(アンソロジー)。単一作品ではない [slug=jump-sq-comic-selection]"
+- series_key: "name:マジキューコミックス編集部|name:マジキュー4コマ STEINS;GATE"
+  reason: anthology_magazine
+  note: "楽天の著者が「エンターブレイン/5pb.」=版元/原作社名義の4コマアンソロジー(複数作家)。単一作品ではない [slug=majikyuu-4-koma-steins-gate]"
+- series_key: "qid:Q7500116|name:HAL'S MOTO"
+  reason: excerpt_selection
+  note: "楽天 seriesName=Motor Magazine Mook。1・2巻が同日(2025-08-28)、3・4巻も同日(2025-11-13)の同時刊行で、商品説明は「東本昌平氏が描いたイラストや漫画を、車両メーカー別にまとめた」総集編(RIDEXシリーズのベスト版) [slug=hal-s-moto]"
+- series_key: "name:ブライアン・マイケル・ベンディス|name:インビンシブル・アイアンマン:アイアンハート"
+  reason: out_of_scope
+  note: "ユーザ裁定2026-09-01。マーベルコミックスの邦訳(原作ブライアン・マイケル・ベンディス/作画ステファノ・カセッリ、ShoPro Books)。MANGALの掲載scopeは「日本で出版された漫画」(韓国manhwa/中華manhuaの日本語版は対象)で、アメコミ邦訳はscope外 [slug=invincible-iron-man-ironheart]"
