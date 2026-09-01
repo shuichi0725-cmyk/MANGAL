@@ -24,6 +24,14 @@ for s, v in D.items():
     c = (v.get('catch') or '').strip(); y = (v.get('synopsis') or '').strip(); src = v.get('src') or ''
     if not os.path.exists(os.path.join(ROOT, 'data', 'manga.v2', s + '.yml')):
         bad.append((s, 'NOFILE(SRC stemで指定する)'))
+    # ★promote の catch/synopsis join キーは **源頁(data/manga/<stem>.yml)の slug** であって
+    #   ファイル名ではない。 両者がズレている頁に stem キーで書くと **無警告で頁に出ない**
+    #   (2026-09-01 実踏: tales-of-the-abyss-rei2006 の源頁slugは tales-of-the-abyss-rei)。
+    _sp = os.path.join(ROOT, 'data', 'manga', s + '.yml')
+    if os.path.exists(_sp):
+        _m = re.search(r'^slug: (.*)$', io.open(_sp, encoding='utf-8').read(400), re.M)
+        if _m and _m.group(1).strip() != s:
+            bad.append((s, 'KEY不一致(源頁slug=%s で書くこと)' % _m.group(1).strip()))
     if c and not (48 <= len(c) <= 74):
         bad.append((s, 'catch%d' % len(c)))
     if y and not (78 <= len(y) <= 114):
