@@ -37,14 +37,30 @@ query ($ids: [Int]) {
 }
 """
 
+# --deep 用: format(NOVEL判定)と relations(LN→コミカライズの2ホップ) も取る
+QUERY_DEEP = """
+query ($ids: [Int]) {
+  Page(perPage: 50) {
+    media(id_in: $ids, type: MANGA) {
+      id
+      format
+      title { native romaji }
+      synonyms
+      staff { edges { role node { name { full native } } } }
+      relations { edges { relationType node { id type format title { native } } } }
+    }
+  }
+}
+"""
+
 
 def norm(t):
     t = unicodedata.normalize("NFKC", str(t or "")).lower()
-    return re.sub(r"[\s　・!！?？:：〜~ー\-。、．.「」『』()（）【】〈〉《》☆★♥&＆]", "", t)
+    return re.sub(r"[\s　・!！?？:：〜~ー\-‐‑。、．.「」『』()（）【】〈〉《》<>☆★♥&＆]", "", t)
 
 
-def gql(ids):
-    body = json.dumps({"query": QUERY, "variables": {"ids": ids}}).encode()
+def gql(ids, query=None):
+    body = json.dumps({"query": query or QUERY, "variables": {"ids": ids}}).encode()
     for attempt in range(4):
         req = urllib.request.Request("https://graphql.anilist.co", data=body,
                                      headers={"Content-Type": "application/json",
@@ -81,6 +97,9 @@ def surname_candidates(staff_edges):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--dry", action="store_true")
+    ap.add_argument("--deep", action="store_true",
+                    help="LN原作型の2ホップ裁定: relationノードの実体がNOVEL(AniListはLNもtype=MANGA)の時、"
+                         "そのLNのrelationsからコミカライズ(format MANGA/ONE_SHOT)を辿って結線(薬屋/塩対応型)")
     a = ap.parse_args()
 
     # 保留対象 = seasons - links - 既accepts のうち漫画relationあり
@@ -100,14 +119,42 @@ def main():
 
     # 原作ノードid → AniList詳細
     need_ids = sorted({c["anilist_id"] for _, nodes in holds for c in nodes})
+    q = QUERY_DEEP if a.deep else QUERY
     print(f"AniList取得: {len(need_ids)}ノード ({(len(need_ids) + 49) // 50}req)", flush=True)
     details = {}
     for i in range(0, len(need_ids), 50):
         chunk = need_ids[i:i + 50]
-        r = gql(chunk)
+        r = gql(chunk, q)
         for m in r["data"]["Page"]["media"]:
             details[m["id"]] = m
         time.sleep(2.6)
+
+    # --deep: NOVELノードのrelationsからコミカライズ(2ホップ先)を集め、詳細を追加取得
+    hop2 = {}  # ln_aid -> [comicalize node dict]
+    if a.deep:
+        hop2_ids = set()
+        for aid, d in details.items():
+            if d.get("format") != "NOVEL":
+                continue
+            for e in (d.get("relations") or {}).get("edges") or []:
+                nd = e.get("node") or {}
+                if nd.get("type") == "MANGA" and nd.get("format") in ("MANGA", "ONE_SHOT") \
+                        and e.get("relationType") in ("ADAPTATION", "ALTERNATIVE"):
+                    hop2.setdefault(aid, []).append(nd["id"])
+                    hop2_ids.add(nd["id"])
+        hop2_ids -= set(details)
+        print(f"--deep: LNノード{len(hop2)}件 → コミカライズ候補{len(hop2_ids)}ノード追加取得", flush=True)
+        for i in range(0, len(sorted(hop2_ids)), 50):
+            chunk = sorted(hop2_ids)[i:i + 50]
+            r = gql(chunk, QUERY_DEEP)
+            for m in r["data"]["Page"]["media"]:
+                details[m["id"]] = m
+            time.sleep(2.6)
+
+    # a2s: 頁のanilist_id逆引き(joinと同じmap。2ホップ先aidの直結線判定に使う)
+    a2s = {}
+    if os.path.exists(MAP):
+        a2s = (json.load(open(MAP, encoding="utf-8")) or {}).get("anilist") or {}
 
     # DB側: 題名index + slug→著者
     li = json.load(open(INDEX, encoding="utf-8"))
@@ -124,12 +171,30 @@ def main():
 
     n_acc = n_stay = 0
     out_rows = []
+    stays = []  # (season, anime_title, 型, 詳細)
     for r, nodes in holds:
         verdict = None
+        stay_info = []
+        # --deep: NOVELノードはコミカライズ(2ホップ先)に差し替えて判定
+        cand_aids = []
         for c in nodes:
-            d = details.get(c["anilist_id"])
+            aid = c["anilist_id"]
+            if a.deep and (details.get(aid) or {}).get("format") == "NOVEL":
+                cand_aids.extend(hop2.get(aid, []))
+            else:
+                cand_aids.append(aid)
+        for aid in dict.fromkeys(cand_aids):
+            # 2ホップ先aidが既に頁へ結線済(a2s)なら最強証拠で即accept
+            if a.deep and str(aid) in a2s:
+                verdict = {"anime_anilist_id": r["anime_anilist_id"], "slug": a2s[str(aid)],
+                           "via": "adjudicate:ln-deep-aid",
+                           "evidence": f"{r.get('anime_title')} ← LN relations経由 comicalize {aid}(頁aid直結線)",
+                           "at": time.strftime("%Y-%m-%d")}
+                break
+            d = details.get(aid)
             if not d:
                 continue
+            c = {"anilist_id": aid}
             titles = [d.get("title", {}).get("native"), d.get("title", {}).get("romaji")] + (d.get("synonyms") or [])
             # 副題切り落とし形も試す(無職転生~サブタイトル~型)
             expand = list(titles)
@@ -146,6 +211,7 @@ def main():
                 if hit:
                     cand_slugs.update(hit)
             if not cand_slugs:
+                stay_info.append(("NO_PAGE", f"{aid} {d.get('title', {}).get('native')}"))
                 continue
             surs = surname_candidates((d.get("staff") or {}).get("edges"))
             ok = []
@@ -153,6 +219,10 @@ def main():
                 au = authors.get(s) or set()
                 if any(sur and any(sur in a for a in au) for sur in surs):
                     ok.append(s)
+            if not ok:
+                stay_info.append(("GATE_FAIL", f"{aid} {d.get('title', {}).get('native')} 候補={sorted(cand_slugs)[:3]}"))
+            elif len(ok) > 1:
+                stay_info.append(("AMBIG", f"{aid} ok={sorted(ok)[:4]}"))
             if len(ok) == 1:
                 verdict = {"anime_anilist_id": r["anime_anilist_id"], "slug": ok[0],
                            "via": "adjudicate:title+author",
@@ -166,7 +236,18 @@ def main():
             print(f"  ACCEPT {verdict['evidence']} → {verdict['slug']}")
         else:
             n_stay += 1
+            kind = stay_info[0][0] if stay_info else "NO_CAND"
+            stays.append((r["season_key"], r.get("anime_title") or "", kind,
+                          " / ".join(f"{k}:{v}" for k, v in stay_info[:2])))
     print(f"自動裁定 ACCEPT {n_acc} / 保留のまま {n_stay}")
+    stays_p = os.path.join(ROOT, "docs", "production-diagnostics", "anime-season-stays.tsv")
+    with open(stays_p, "w", encoding="utf-8", newline="") as fo:
+        fo.write("season\tanime_title\tkind\tdetail\n")
+        for row in sorted(stays, reverse=True):
+            fo.write("\t".join(str(x) for x in row) + "\n")
+    from collections import Counter
+    print("保留の型内訳:", dict(Counter(s[2] for s in stays)))
+    print(f"→ {os.path.relpath(stays_p, ROOT)}")
     if not a.dry and out_rows:
         with open(ACCEPTS, "a", encoding="utf-8") as fo:
             for row in out_rows:
