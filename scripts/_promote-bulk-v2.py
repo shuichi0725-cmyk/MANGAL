@@ -643,6 +643,28 @@ def load_merge_sids(con: sqlite3.Connection) -> dict[int, list[int]]:
     return sid_to_group
 
 
+_HAND_MERGE = None
+
+
+def get_hand_merge_sids(con: sqlite3.Connection) -> dict[int, list[int]]:
+    """★**手書き(series-merge.yml)のみ**の merge 群。 auto(series-merge-auto.json)は含めない。
+    homonym guard の免除に使う = ユーザが明示した統合だけをガードより優先させるため
+    (2026-09-01: auto込みで免除したら同題別作品(BOY マーガレット版)が本編頁に合流し
+     ジャンプ版/文庫版のISBNが消える事故。ISBN消失ゲートが検知)。"""
+    global _HAND_MERGE
+    if _HAND_MERGE is None:
+        m: dict[int, list[int]] = {}
+        if MERGE_YML.exists():
+            key_to_sid = {sk: sid for sid, sk in con.execute("SELECT id, series_key FROM series")}
+            with MERGE_YML.open(encoding="utf-8") as f:
+                for entry in (_yload(f) or []):
+                    sids = _entry_sids(entry, key_to_sid)
+                    for sid in sids:
+                        m[sid] = sids
+        _HAND_MERGE = m
+    return _HAND_MERGE
+
+
 def load_merge_edition_types(con: sqlite3.Connection) -> set[int]:
     """merge_edition_types: true の cluster の 全 sid set を 返す (= shinsoban→standard 統合対象)。
     edition-type 統合は hand 版のみ。 ★STEP6: merge_keys/merge_sids 両対応。"""
@@ -2030,8 +2052,11 @@ def find_related_series_ids(con: sqlite3.Connection, main: dict) -> list[int]:
     _forced: set = set()          # ★ユーザ明示mergeで足した sid(下のhomonym guardより優先させる)
     for sid in list(ids):
         if sid in merge_sids_map:
-            _forced |= set(merge_sids_map[sid])   # ★群の全員(既にidsに居る分も含む)
             ids.update(merge_sids_map[sid])
+    _hand = get_hand_merge_sids(con)          # ★免除は手書きseedの群だけ(autoは対象外)
+    for sid in list(ids):
+        if sid in _hand:
+            _forced |= set(_hand[sid])
     # ★ drop済(非掲載)series を merge cluster から除外。
     #   同題auto-mergeで フィルムコミック等(non-manga-drop登録済)が 実ページ(コミカライズ
     #   /本編)に巻として混入するのを防ぐ。 main自身はmain loopでdrop判定通過済なので必ず保持。
