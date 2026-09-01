@@ -5704,3 +5704,6 @@ non_manga:
 - series_key: name:プロジェクト=デューク|name:ゴルゴと呼ばれた男
   reason: non_manga
   note: golgo-to-yobareta-otoko / ゴルゴと呼ばれた男(著者=プロジェクト＝デューク、政策時報社/パワーソフト 1993)。漫画ではない書籍 = scope外。ユーザ裁定 2026-09-02
+- series_key: qid:Q2661273|name:ゴルゴ13シリーズ
+  reason: junk_fragment_cluster
+  note: golgo-13-series / ゴルゴ13シリーズ。巻52,59,65,68,103,104,112,122,123,124,140 の11巻がISBN0件で並ぶ本編golgo-13からの分裂断片。本編 standard(SPコミックス)1-220 が全巻番号をカバー済みで固有情報の消失なし。作品ではない。ユーザ裁定 2026-09-02
