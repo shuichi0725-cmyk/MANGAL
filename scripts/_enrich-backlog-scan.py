@@ -24,6 +24,7 @@ RE_NUM = re.compile(r'^\s+- number: (\d+)')
 ap = argparse.ArgumentParser()
 ap.add_argument('--min-vols', type=int, default=2)
 ap.add_argument('--since', type=int, default=0)
+ap.add_argument('--until', type=int, default=0, help='basis の年が YYYY 以下(=それ以前の作品だけ)')
 ap.add_argument('--basis', choices=['first', 'latest', 'any'], default='first')
 ap.add_argument('--missing', choices=['both', 'any'], default='both')
 ap.add_argument('-o', '--out', default=os.path.join(ROOT, '.cache', 'enrich-backlog.tsv'))
@@ -73,9 +74,13 @@ for fn in sorted(os.listdir(SRC)):
     if len(nums) < a.min_vols or not dates:
         continue
     first, latest = min(dates), max(dates)
+    yf, yl = int(first[:4]), int(latest[:4])
     if a.since:
-        yf, yl = int(first[:4]), int(latest[:4])
         ok = {'first': yf >= a.since, 'latest': yl >= a.since, 'any': (yf >= a.since or yl >= a.since)}[a.basis]
+        if not ok:
+            continue
+    if a.until:
+        ok = {'first': yf <= a.until, 'latest': yl <= a.until, 'any': (yf <= a.until and yl <= a.until)}[a.basis]
         if not ok:
             continue
     missing = 'both' if (not has_catch and not has_syn) else ('catch' if not has_catch else 'syn')
