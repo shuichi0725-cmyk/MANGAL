@@ -67,12 +67,14 @@ def main():
         maps = json.load(open(MAP, encoding="utf-8"))
     a2s, t2s = maps["anilist"], maps["titles"]
 
+    # ★1アニメ複数頁対応(2026-09-01 やはり俺型=ラノベ漫画化×アニメ漫画化の並立):
+    #   同一anime_anilist_idのaccept行を全部集める。slug=None行=結線不能確定(holdsに出さない)
     accepts = {}
     if os.path.exists(ACCEPTS):
         for l in open(ACCEPTS, encoding="utf-8"):
             try:
                 d = json.loads(l)
-                accepts[d["anime_anilist_id"]] = d.get("slug")  # None=結線不能確定(holdsに出さない)
+                accepts.setdefault(d["anime_anilist_id"], []).append(d.get("slug"))
             except Exception:
                 pass
 
@@ -81,10 +83,9 @@ def main():
     holds = open(HOLDS, "w", encoding="utf-8")
     n_join = n_hold = n_skip = n_acc = 0
     for r in rows:
-        # 0) 裁定済み(最優先)
+        # 0) 裁定済み(最優先。複数slug=複数行出力=1アニメに複数コミカライズ頁)
         if r["anime_anilist_id"] in accepts:
-            slug0 = accepts[r["anime_anilist_id"]]
-            if slug0:
+            for slug0 in dict.fromkeys(s for s in accepts[r["anime_anilist_id"]] if s):
                 out.write(json.dumps({"season_key": r["season_key"], "anime_anilist_id": r["anime_anilist_id"],
                                       "anime_title": r.get("anime_title"), "source": r.get("source"),
                                       "popularity": r.get("popularity"), "slug": slug0, "via": "accept"},
