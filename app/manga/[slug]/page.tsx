@@ -43,9 +43,14 @@ function seoVolPhrase(m: import("@/lib/schema").Manga): { phrase: string; nVols:
   const nVols = nums.size ? Math.max(...nums) : 0;
   const parts: string[] = [];
   if (nVols) parts.push(m.status === "completed" ? `全${nVols}巻で完結。` : `既刊${nVols}巻・連載中。`);
-  if (latest && latest.n && latest.date.length >= 10 && m.status !== "completed") {
+  if (latest && latest.n && latest.date.length >= 10) {
     const [y, mo, dy] = latest.date.split("-").map(Number);
-    parts.push(`最新刊${latest.n}巻は${y}年${mo}月${dy}日発売。`);
+    // ★2026-09-01 SEO(発売日の意図): 未来日は「発売予定」、完結作は「最終巻」の発売日を出す
+    //   (「作品名 最新刊 発売日」「作品名 最終巻 いつ」のロングテール)。
+    const todayJst = new Date(Date.now() + 9 * 3600 * 1000).toISOString().slice(0, 10);
+    const verb = latest.date > todayJst ? "発売予定" : "発売";
+    const label = m.status === "completed" ? "最終巻" : "最新刊";
+    parts.push(`${label}${latest.n}巻は${y}年${mo}月${dy}日${verb}。`);
   }
   return { phrase: parts.join(""), nVols, latest };
 }

@@ -5,7 +5,7 @@
 66k URL > 1ファイル上限(5万) → sitemapインデックス + 分割(4万URL/file)。
 URL源 = data/manga-list-index.json(本番索引=掲載中の全slug) + 主要固定頁。
 """
-import json, os, sys, math
+import json, re, os, sys, math
 sys.stdout.reconfigure(encoding="utf-8")
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SITE = "https://mangal-db.com"
@@ -18,10 +18,15 @@ slugs = [r[si] for r in idx["d"]]
 fixed = ["", "list", "browse", "about", "terms", "privacy", "contact",
          "column-ai-league", "sansedai-archive", "art-books",
          "tokushu", "rankings", "anime",  # ★2026-08-04 見直しで追加(日替わり特集ほか)
-         "authors", "titles"]  # ★2026-08-31 SEO(索引ハブ2本=クロール導線)
+         "authors", "titles",  # ★2026-08-31 SEO(索引ハブ2本=クロール導線)
+         "shinkan", "shinkan/this-week", "shinkan/next-month"]  # ★2026-09-01 SEO(発売日の着地面)
 # ★動的ランディング面(2026-08-04 見直しで追加: canonical持ちの索引対象なのにsitemap漏れだった)
 import yaml
 dyn = []
+# ★月別の新刊発売日ページ(2026-09-01 SEO): public/shinkan/{ym}.json が実在する月だけ(app/shinkan/[ym] と同じ源)
+sk_dir = os.path.join(ROOT, "public", "shinkan")
+if os.path.isdir(sk_dir):
+    dyn += [f"shinkan/{fn[:-5]}" for fn in sorted(os.listdir(sk_dir)) if re.fullmatch(r"\d{4}-\d{2}\.json", fn)]
 gy = yaml.safe_load(open(os.path.join(ROOT, "data", "genres.yml"), encoding="utf-8")) or {}
 dyn += [f"genre/{k}" for k in gy]  # ジャンル32面
 try:
