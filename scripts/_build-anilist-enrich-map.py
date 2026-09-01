@@ -37,19 +37,28 @@ THEME_RANK = 70
 
 def load_link_overrides():
     """anilist-link-overrides.yml → (drop集合, relink辞書 key→to_id)。
-    drop=enrichから除外 / relink=a_id を本編idへ付け替え。"""
+    drop=enrichから除外 / relink=a_id を本編idへ付け替え。
+    ★同一キー複数行は**後勝ち**(2026-09-01恒久化): ファイルは追記裁定の台帳なので、
+    後から追記した是正(drop/relink)が旧行(誤relink等)を常に上書きする。
+    旧実装は drops集合∧relinks辞書 が独立で「旧relink+新drop」だとdropが死んだ(A型21組是正で実踏)。"""
     drops, relinks = set(), {}
     if not OVERRIDES.exists():
         return drops, relinks
     import yaml
     doc = yaml.safe_load(OVERRIDES.read_text(encoding="utf-8")) or {}
+    last = {}  # key -> ('drop', None) | ('relink', to_id)  ファイル順で後勝ち
     for o in (doc.get("overrides") or []):
         if not isinstance(o, dict) or not o.get("key"):
             continue
         if o.get("action") == "drop":
-            drops.add(o["key"])
+            last[o["key"]] = ("drop", None)
         elif o.get("action") == "relink" and o.get("to_id"):
-            relinks[o["key"]] = int(o["to_id"])
+            last[o["key"]] = ("relink", int(o["to_id"]))
+    for k, (act, to_id) in last.items():
+        if act == "drop":
+            drops.add(k)
+        else:
+            relinks[k] = to_id
     return drops, relinks
 
 USEFUL = re.compile(r"[A-Za-z0-9一-鿿぀-ヿ가-힣]")  # latin/CJK/かな/hangul
