@@ -5,7 +5,7 @@ metadata:
   node_type: memory
   type: project
   originSessionId: 191494c6-0eb5-4cbb-817a-a2afd70f0a40
-  modified: 2026-09-01T08:34:40.976Z
+  modified: 2026-09-01T09:23:22.174Z
 ---
 
 2026-09-01 ユーザ持込(animatetimes.com/tag/details.php?id=5947=2026秋)から新設。「今後は週次で変更があるか見て更新」がユーザ指定の運用。
@@ -38,6 +38,13 @@ metadata:
 - 実装= joinのaccepts読みを**同一anime_idの複数行accumulate**に変更(複数slug=複数行出力・view側は(season,slug)dedupで自然対応)。3季×2頁=accepts6行。
 - やはり俺も薬屋型だった: 妄言録頁の題から「-妄言録-」欠落=素のLN題と同名→title-matchが**偶然**そこへ着地していた。是正= 題復元+★**kana=…モノローグ**(NDL確証・妄言録の読みは当て字「モノローグ」)+aid75447relink+誌2件(妄言録=big-gangan/@comic=monthly-sunday-gx)。
 - 薬屋も両載せ**適用済**(2026-09-01ユーザ「適用」): 4季×(ねこクラゲ版+倉田三ノ路版)。★以後、並立コミカライズは両載せが既定方針。
+
+## ★2026-09-01夜: 「1から順に全部」4タスク完了(結線3,440・保留599)
+1. **aid重複A型21組**: relink5/confirmed15/drop13適用。★builderの`load_link_overrides`を**後勝ち化**(旧relink行が新dropを殺す穴を恒久修正=渡航→70171小説への旧誤relinkも発掘)。残6=意図的leave5(男弐=再販/Holy=アンソロ巻割れ/宮沢賢治漫画館=巻割れdedup候補/バケルくん=同一作の版分裂で共有正当/人間失格=クラスタ汚染per-case)+★**makai-tenshou=promote不達**(db-v2でseries not found・8/21から再生成不能=源なし類縁の要検死。anilist:false済だが届かない)。
+2. **NO_PAGE台帳**=`anime-nopage-works.tsv`(194件・人気順)。★adjudicateに**包含一致+著者ゲート**追加→偽NO_PAGE 22件自動解消(ジョジョ各部→統合頁jojo-no-kimyouna-bouken/プリズマイリヤ/citrus等)+per-case(**まどマギ頁の題が魔獣編に汚染**→是正(実体=本編コミカライズ全3巻2011)/ツバサ・クロニクル→tsubasa/東京喰種:re→tokyo-ghoul-re)。上位残=神之塔(KR)/GREAT PRETENDER/アクダマドライブ/ゾンビランドサガ(外伝頁のみ)等。
+3. **animatetimes gap 122作triage**=`animatetimes-gap-triage.tsv`: A偽gap83(AL別表記)/B頁有りアニメ行なし13(★岸辺露伴=OVA形式がharvest対象外の型。短題len<6ガードの偽Bも混在=キングダム/スプリガン)/C頁なし26。
+4. **題only保留276切り分け**=`anime-titleonly-triage.tsv`: MANGA?41の大半=**ぷち/ミニアニメ型**(親は結線済=放置可)。本編未結線2件accept(真ストレンジ・プラス/DML忘却の太陽)。AT無し181=2010以前。
+- 次の鉱脈: nopage194の登録(雪女さん/GATE竿尾悟/ちるらんにぶんの壱/乱歩奇譚/VTuber伝説/透明な夜…)/ B13の手動アニメ行機構(OVA形式込みharvest?)。
 
 ## 初回gap実測(refresh後)
 - 非掲載601作(漫画原作候補=MANGA? 122 / 対象外44 / 不明435)。2026秋の真の残り=鳴海の平日/タヌキとキツネ/ガルパンもっとらぶらぶ/紫禁・御猫房/Duel Masters LOSTの5件。
