@@ -5497,26 +5497,42 @@ non_manga:
   note: 'ユーザ裁定2026-08-10(ハウル発見→型掃引): 押井守の評論書(アニメージュ叢書)=漫画でない'
 - series_key: name:石田貴子|name:ねこぷに
   reason: anthology_magazine
-  note: |
-    ユーザ裁定2026-08-14「纏められないアンソロジーなのでドロップ」。裏取り=楽天書誌で
+  note: 'ユーザ裁定2026-08-14「纏められないアンソロジーなのでドロップ」。裏取り=楽天書誌で
+
     巻が号立て(「6(2008実りの秋号)」「7(2009年もふもふ冬号)」「8(2周年カンパイ号)」
+
     「ふわねこだいすき号」)、著者欄は空または「アンソロジー」。メディアックスMDコミックスの
+
     猫コミック・アンソロジー誌(ムック)で、『別冊ねこぷに』も同型が10冊以上ある。
+
     「ねこぷに」自体は誌名で、そこから個人作家の単行本が別レーベル「ねこぷにコミックス」
+
     (シゲチヨ日記/まつうらゆうこ 等)として出ている。本番頁は単一著者=石田貴子に化けており
+
     実体と合わない。巻抜け仮想では standard:[10-25] の16欠として出ていたが、号立ての
+
     アンソロジーなので埋める対象ではない。
+
+    '
 - series_key: qid:Q11538067|name:本当にあったちび笑える話
   reason: anthology_magazine
-  note: |
-    ユーザ裁定2026-08-14。ぶんか社の実話系4コマ誌『本当にあった笑える話』の
+  note: 'ユーザ裁定2026-08-14。ぶんか社の実話系4コマ誌『本当にあった笑える話』の
+
     コンビニコミック版(ja.wikipedia が「ちび本当にあった笑える話（コンビニコミック版）」と明記)。
+
     裏取り=楽天に同題が130件あり、著者は全て「アンソロジー」または空、号数は
+
     109号(2014-08)〜210号(2023-01)の月刊連番で、以後は号数を捨てて
+
     「病院のヤバい話」「やっちまったGP」等のテーマ号に移行(2025-03まで継続)。
+
     本番頁は 204/205/207/208 の4冊だけを掴んでおり、巻抜け仮想には standard:[206] と
+
     出ていたが、これは巻番号でなく**雑誌の号数**なので埋める対象ではない。
+
     ★頁題も「本当にあったちび笑える話」と語順が壊れていた(実題=ちび本当にあった笑える話)。
+
+    '
 - series_key: qid:Q55400|name:シュナの旅
   reason: not_manga_book
   note: 'ユーザ裁定2026-08-15: 絵物語(アニメージュ文庫1983・水彩画+地の文=コマ/フキダシの漫画でない)。ユーザ実物確認。AniList(2022英訳graphic novel)経由でenrich混入'
@@ -5529,108 +5545,153 @@ non_manga:
 - series_key: name:ルーシー・モード・モンゴメリ|name:赤毛のアン
   reason: film_comic_anime
   note: 'ユーザ裁定2026-08-15(シュナの旅型掃引): 新潮社「名作シリーズ」全5巻(1992)=楽天叢書名「アニメブック」=世界名作劇場アニメのフィルムストーリー本。宮崎駿/高畑勲はアニメスタッフとしてのクレジット。漫画版(杉本啓子/まつざきあけみ)は別頁でkeep'
-- series_key: "name:Stamaty|name:Alia's mission|sub:saving the books of Iraq : inspired by a true story Mark Alan Stamaty."
+- series_key: 'name:Stamaty|name:Alia''s mission|sub:saving the books of Iraq : inspired by a true story Mark Alan Stamaty.'
   reason: foreign_language_edition
-  note: "(蒸留)外国版(英米・全2巻非9784・latin題): Alia's mission"
-- series_key: "qid:Q128840778|name:コミック乱セレクション鎧袖一触"
+  note: '(蒸留)外国版(英米・全2巻非9784・latin題): Alia''s mission'
+- series_key: qid:Q128840778|name:コミック乱セレクション鎧袖一触
   reason: konbini_reprint
   note: 'ユーザ裁定2026-08-22: コミック乱セレクション=リイド社のコンビニ廉価再録レーベル(鎧袖一触=既存時代劇の再録)。1.2.19取りこぼし頁化93のレビューで発見'
-- series_key: "qid:Q2661273|name:コミック乱セレクション射石飲羽"
+- series_key: qid:Q2661273|name:コミック乱セレクション射石飲羽
   reason: konbini_reprint
-  note: "ユーザ裁定2026-08-22(鎧袖一触と同型): コミック乱セレクション=リイド社コンビニ廉価再録。故人作家(さいとう・たかを/荻野真)の2026年刊=再録の決定的証拠"
-- series_key: "qid:Q11273362|name:蔵出し選集!!コミック乱創刊20周年記念特別編集"
+  note: 'ユーザ裁定2026-08-22(鎧袖一触と同型): コミック乱セレクション=リイド社コンビニ廉価再録。故人作家(さいとう・たかを/荻野真)の2026年刊=再録の決定的証拠'
+- series_key: qid:Q11273362|name:蔵出し選集!!コミック乱創刊20周年記念特別編集
   reason: konbini_reprint
-  note: "ユーザ裁定2026-08-22(同型掃引): 蔵出し選集=既刊再録アンソロジー(傑作集型)。別クラスタで二重頁化もしていた"
-- series_key: "qid:Q4022589|name:蔵出し選集!!コミック乱創刊20周年記念特別編集"
+  note: 'ユーザ裁定2026-08-22(同型掃引): 蔵出し選集=既刊再録アンソロジー(傑作集型)。別クラスタで二重頁化もしていた'
+- series_key: qid:Q4022589|name:蔵出し選集!!コミック乱創刊20周年記念特別編集
   reason: konbini_reprint
-  note: "ユーザ裁定2026-08-22(同型掃引): 蔵出し選集=既刊再録アンソロジー(傑作集型)。別クラスタで二重頁化もしていた"
-- series_key: "name:たにぐち千賀|name:近親相姦＆SM体験"
+  note: 'ユーザ裁定2026-08-22(同型掃引): 蔵出し選集=既刊再録アンソロジー(傑作集型)。別クラスタで二重頁化もしていた'
+- series_key: name:たにぐち千賀|name:近親相姦＆SM体験
   reason: anthology_magazine
-  note: "ユーザ裁定2026-08-29: サニー出版(Sunny comic)の成人向け実話系アンソロジー。同題が著者違いで2クラスタ(たにぐち千賀/たかみしほ)に分かれており、巻番号1/11/12は号数。価値なしとしてdrop"
-- series_key: "name:たかみしほ|name:近親相姦＆SM体験"
+  note: 'ユーザ裁定2026-08-29: サニー出版(Sunny comic)の成人向け実話系アンソロジー。同題が著者違いで2クラスタ(たにぐち千賀/たかみしほ)に分かれており、巻番号1/11/12は号数。価値なしとしてdrop'
+- series_key: name:たかみしほ|name:近親相姦＆SM体験
   reason: anthology_magazine
-  note: "ユーザ裁定2026-08-29(同頁の対クラスタ): サニー出版の成人向け実話系アンソロジー。著者が号ごとに違う=アンソロジー。価値なしとしてdrop"
-- series_key: "qid:Q17349658|name:ヤバ盛!本当にあった(生)ここだけの話極 (ウルトラ)"
+  note: 'ユーザ裁定2026-08-29(同頁の対クラスタ): サニー出版の成人向け実話系アンソロジー。著者が号ごとに違う=アンソロジー。価値なしとしてdrop'
+- series_key: qid:Q17349658|name:ヤバ盛!本当にあった(生)ここだけの話極 (ウルトラ)
   reason: anthology_magazine
-  note: "ユーザ裁定2026-09-01。裏取り=ja.wikipedia『本当にあった(生)ここだけの話』は芳文社の**実話系の月刊4コマ漫画雑誌**(2015年6月まで月刊、後継が「超 本当にあった(生)ここだけの話」)。本頁はその増刊・派生ムック「極(ウルトラ)」で、単一著者=安斎かなえの表記は実体(号ごとに作家が入れ替わる実話系アンソロジー)と不一致。巻番号は号数"
-- series_key: "qid:Q17349658|name:スゴ盛!本当にあった(生)ここだけの話極 (ウルトラ)"
+  note: ユーザ裁定2026-09-01。裏取り=ja.wikipedia『本当にあった(生)ここだけの話』は芳文社の**実話系の月刊4コマ漫画雑誌**(2015年6月まで月刊、後継が「超 本当にあった(生)ここだけの話」)。本頁はその増刊・派生ムック「極(ウルトラ)」で、単一著者=安斎かなえの表記は実体(号ごとに作家が入れ替わる実話系アンソロジー)と不一致。巻番号は号数
+- series_key: qid:Q17349658|name:スゴ盛!本当にあった(生)ここだけの話極 (ウルトラ)
   reason: anthology_magazine
-  note: "ユーザ裁定2026-09-01(ヤバ盛と同型・同じqid)。裏取り=同上、芳文社の実話系4コマ雑誌の増刊・派生ムック"
-- series_key: "name:ガタケット事務局|name:にいがたマンガ大賞作品集"
+  note: ユーザ裁定2026-09-01(ヤバ盛と同型・同じqid)。裏取り=同上、芳文社の実話系4コマ雑誌の増刊・派生ムック
+- series_key: name:ガタケット事務局|name:にいがたマンガ大賞作品集
   reason: anthology_magazine
-  note: "ユーザ裁定2026-09-01。公募賞(にいがたマンガ大賞)の受賞作を集めた**アンソロジー作品集**。著者は(unknown)=巻ごとに受賞者が異なる。刊行元はガタケット事務局。単一作品ではないので掲載対象外"
-- series_key: "qid:Q11519792|name:蒼太の包丁 special"
+  note: ユーザ裁定2026-09-01。公募賞(にいがたマンガ大賞)の受賞作を集めた**アンソロジー作品集**。著者は(unknown)=巻ごとに受賞者が異なる。刊行元はガタケット事務局。単一作品ではないので掲載対象外
+- series_key: qid:Q11519792|name:蒼太の包丁 special
   reason: anthology_magazine
-  note: "ユーザ裁定2026-09-01。マンサンQコミックス=実業之日本社の**コンビニコミック(廉価版)**レーベル。同レーベルの姉妹企画「蒼太の包丁 Deluxe」の商品説明が「マンサンコミックス『蒼太の包丁』全42巻の豊富なコンテンツからメニュー(季節感)重視で作品を厳選、編集した美味しい1冊」と明記=既刊の再編集抜粋本。本編頁 souta-no-houchou は存置"
-- series_key: "name:あさみさとる|name:コミック浅見光彦本格旅情ミステリー"
+  note: ユーザ裁定2026-09-01。マンサンQコミックス=実業之日本社の**コンビニコミック(廉価版)**レーベル。同レーベルの姉妹企画「蒼太の包丁 Deluxe」の商品説明が「マンサンコミックス『蒼太の包丁』全42巻の豊富なコンテンツからメニュー(季節感)重視で作品を厳選、編集した美味しい1冊」と明記=既刊の再編集抜粋本。本編頁 souta-no-houchou は存置
+- series_key: name:あさみさとる|name:コミック浅見光彦本格旅情ミステリー
   reason: anthology_magazine
-  note: "ユーザ裁定2026-09-01。内田康夫『浅見光彦』シリーズのコミカライズ**アンソロジー**。ブックオフの商品表記が「【廉価版】…アンソロジー(著者),内田康夫(原作)」、浅見光彦記念館の告知も「主にコンビニエンスストアで販売される廉価版コミックスです」と明記。単一著者=あさみさとるの表記は実体と不一致"
-- series_key: "name:上総志摩|name:リリパット"
+  note: ユーザ裁定2026-09-01。内田康夫『浅見光彦』シリーズのコミカライズ**アンソロジー**。ブックオフの商品表記が「【廉価版】…アンソロジー(著者),内田康夫(原作)」、浅見光彦記念館の告知も「主にコンビニエンスストアで販売される廉価版コミックスです」と明記。単一著者=あさみさとるの表記は実体と不一致
+- series_key: name:上総志摩|name:リリパット
   reason: anthology_magazine
-  note: "ユーザ裁定2026-09-01。東京三世社『リリパット』全9巻(1987-1988)は**巻ごとに著者が全部違う同題アンソロジー(叢書)**で単一作品ではない。裏取り=NDL SRU title=\"リリパット\"で全巻を確認: 1上総志摩/2番外地貢/3阿乱霊(別レコードで飯田哲章・叢書Belle-comic-special)/4中総もも/5真弓大介/6阿乱霊/7DONKEY/8阿乱霊/9中総もも、全巻ISBN無し・版元は全て東京三世社。本頁 lilliput は本来 竹書房『リリパット』松崎司(Bamboo comics Qpa collection・2014・ISBN9784812487594)の頁であり、同題mergeでこのアンソロジー7クラスタが合流していた。該当巻: 1巻(1987-07-10)上総志摩"
-- series_key: "name:番外地貢|name:リリパット"
+  note: 'ユーザ裁定2026-09-01。東京三世社『リリパット』全9巻(1987-1988)は**巻ごとに著者が全部違う同題アンソロジー(叢書)**で単一作品ではない。裏取り=NDL SRU title="リリパット"で全巻を確認: 1上総志摩/2番外地貢/3阿乱霊(別レコードで飯田哲章・叢書Belle-comic-special)/4中総もも/5真弓大介/6阿乱霊/7DONKEY/8阿乱霊/9中総もも、全巻ISBN無し・版元は全て東京三世社。本頁 lilliput は本来 竹書房『リリパット』松崎司(Bamboo comics Qpa collection・2014・ISBN9784812487594)の頁であり、同題mergeでこのアンソロジー7クラスタが合流していた。該当巻: 1巻(1987-07-10)上総志摩'
+- series_key: name:番外地貢|name:リリパット
   reason: anthology_magazine
-  note: "ユーザ裁定2026-09-01。東京三世社『リリパット』全9巻(1987-1988)は**巻ごとに著者が全部違う同題アンソロジー(叢書)**で単一作品ではない。裏取り=NDL SRU title=\"リリパット\"で全巻を確認: 1上総志摩/2番外地貢/3阿乱霊(別レコードで飯田哲章・叢書Belle-comic-special)/4中総もも/5真弓大介/6阿乱霊/7DONKEY/8阿乱霊/9中総もも、全巻ISBN無し・版元は全て東京三世社。本頁 lilliput は本来 竹書房『リリパット』松崎司(Bamboo comics Qpa collection・2014・ISBN9784812487594)の頁であり、同題mergeでこのアンソロジー7クラスタが合流していた。該当巻: 2巻(1987-10-05)番外地貢"
-- series_key: "qid:Q11657197|name:リリパット"
+  note: 'ユーザ裁定2026-09-01。東京三世社『リリパット』全9巻(1987-1988)は**巻ごとに著者が全部違う同題アンソロジー(叢書)**で単一作品ではない。裏取り=NDL SRU title="リリパット"で全巻を確認: 1上総志摩/2番外地貢/3阿乱霊(別レコードで飯田哲章・叢書Belle-comic-special)/4中総もも/5真弓大介/6阿乱霊/7DONKEY/8阿乱霊/9中総もも、全巻ISBN無し・版元は全て東京三世社。本頁 lilliput は本来 竹書房『リリパット』松崎司(Bamboo comics Qpa collection・2014・ISBN9784812487594)の頁であり、同題mergeでこのアンソロジー7クラスタが合流していた。該当巻: 2巻(1987-10-05)番外地貢'
+- series_key: qid:Q11657197|name:リリパット
   reason: anthology_magazine
-  note: "ユーザ裁定2026-09-01。東京三世社『リリパット』全9巻(1987-1988)は**巻ごとに著者が全部違う同題アンソロジー(叢書)**で単一作品ではない。裏取り=NDL SRU title=\"リリパット\"で全巻を確認: 1上総志摩/2番外地貢/3阿乱霊(別レコードで飯田哲章・叢書Belle-comic-special)/4中総もも/5真弓大介/6阿乱霊/7DONKEY/8阿乱霊/9中総もも、全巻ISBN無し・版元は全て東京三世社。本頁 lilliput は本来 竹書房『リリパット』松崎司(Bamboo comics Qpa collection・2014・ISBN9784812487594)の頁であり、同題mergeでこのアンソロジー7クラスタが合流していた。該当巻: 3・6・8巻(1987-11〜1988-09)阿乱霊"
-- series_key: "name:飯田哲章|name:リリパット"
+  note: 'ユーザ裁定2026-09-01。東京三世社『リリパット』全9巻(1987-1988)は**巻ごとに著者が全部違う同題アンソロジー(叢書)**で単一作品ではない。裏取り=NDL SRU title="リリパット"で全巻を確認: 1上総志摩/2番外地貢/3阿乱霊(別レコードで飯田哲章・叢書Belle-comic-special)/4中総もも/5真弓大介/6阿乱霊/7DONKEY/8阿乱霊/9中総もも、全巻ISBN無し・版元は全て東京三世社。本頁 lilliput は本来 竹書房『リリパット』松崎司(Bamboo comics Qpa collection・2014・ISBN9784812487594)の頁であり、同題mergeでこのアンソロジー7クラスタが合流していた。該当巻: 3・6・8巻(1987-11〜1988-09)阿乱霊'
+- series_key: name:飯田哲章|name:リリパット
   reason: anthology_magazine
-  note: "ユーザ裁定2026-09-01。東京三世社『リリパット』全9巻(1987-1988)は**巻ごとに著者が全部違う同題アンソロジー(叢書)**で単一作品ではない。裏取り=NDL SRU title=\"リリパット\"で全巻を確認: 1上総志摩/2番外地貢/3阿乱霊(別レコードで飯田哲章・叢書Belle-comic-special)/4中総もも/5真弓大介/6阿乱霊/7DONKEY/8阿乱霊/9中総もも、全巻ISBN無し・版元は全て東京三世社。本頁 lilliput は本来 竹書房『リリパット』松崎司(Bamboo comics Qpa collection・2014・ISBN9784812487594)の頁であり、同題mergeでこのアンソロジー7クラスタが合流していた。該当巻: 3巻(1987-11 Belle-comic-special)飯田哲章"
-- series_key: "name:中総もも|name:リリパット"
+  note: 'ユーザ裁定2026-09-01。東京三世社『リリパット』全9巻(1987-1988)は**巻ごとに著者が全部違う同題アンソロジー(叢書)**で単一作品ではない。裏取り=NDL SRU title="リリパット"で全巻を確認: 1上総志摩/2番外地貢/3阿乱霊(別レコードで飯田哲章・叢書Belle-comic-special)/4中総もも/5真弓大介/6阿乱霊/7DONKEY/8阿乱霊/9中総もも、全巻ISBN無し・版元は全て東京三世社。本頁 lilliput は本来 竹書房『リリパット』松崎司(Bamboo comics Qpa collection・2014・ISBN9784812487594)の頁であり、同題mergeでこのアンソロジー7クラスタが合流していた。該当巻: 3巻(1987-11 Belle-comic-special)飯田哲章'
+- series_key: name:中総もも|name:リリパット
   reason: anthology_magazine
-  note: "ユーザ裁定2026-09-01。東京三世社『リリパット』全9巻(1987-1988)は**巻ごとに著者が全部違う同題アンソロジー(叢書)**で単一作品ではない。裏取り=NDL SRU title=\"リリパット\"で全巻を確認: 1上総志摩/2番外地貢/3阿乱霊(別レコードで飯田哲章・叢書Belle-comic-special)/4中総もも/5真弓大介/6阿乱霊/7DONKEY/8阿乱霊/9中総もも、全巻ISBN無し・版元は全て東京三世社。本頁 lilliput は本来 竹書房『リリパット』松崎司(Bamboo comics Qpa collection・2014・ISBN9784812487594)の頁であり、同題mergeでこのアンソロジー7クラスタが合流していた。該当巻: 4・9巻(1988-01/1988-11)中総もも"
-- series_key: "name:真弓大介|name:リリパット"
+  note: 'ユーザ裁定2026-09-01。東京三世社『リリパット』全9巻(1987-1988)は**巻ごとに著者が全部違う同題アンソロジー(叢書)**で単一作品ではない。裏取り=NDL SRU title="リリパット"で全巻を確認: 1上総志摩/2番外地貢/3阿乱霊(別レコードで飯田哲章・叢書Belle-comic-special)/4中総もも/5真弓大介/6阿乱霊/7DONKEY/8阿乱霊/9中総もも、全巻ISBN無し・版元は全て東京三世社。本頁 lilliput は本来 竹書房『リリパット』松崎司(Bamboo comics Qpa collection・2014・ISBN9784812487594)の頁であり、同題mergeでこのアンソロジー7クラスタが合流していた。該当巻: 4・9巻(1988-01/1988-11)中総もも'
+- series_key: name:真弓大介|name:リリパット
   reason: anthology_magazine
-  note: "ユーザ裁定2026-09-01。東京三世社『リリパット』全9巻(1987-1988)は**巻ごとに著者が全部違う同題アンソロジー(叢書)**で単一作品ではない。裏取り=NDL SRU title=\"リリパット\"で全巻を確認: 1上総志摩/2番外地貢/3阿乱霊(別レコードで飯田哲章・叢書Belle-comic-special)/4中総もも/5真弓大介/6阿乱霊/7DONKEY/8阿乱霊/9中総もも、全巻ISBN無し・版元は全て東京三世社。本頁 lilliput は本来 竹書房『リリパット』松崎司(Bamboo comics Qpa collection・2014・ISBN9784812487594)の頁であり、同題mergeでこのアンソロジー7クラスタが合流していた。該当巻: 5巻(1988-03-10)真弓大介"
-- series_key: "name:DONKEY|name:リリパット"
+  note: 'ユーザ裁定2026-09-01。東京三世社『リリパット』全9巻(1987-1988)は**巻ごとに著者が全部違う同題アンソロジー(叢書)**で単一作品ではない。裏取り=NDL SRU title="リリパット"で全巻を確認: 1上総志摩/2番外地貢/3阿乱霊(別レコードで飯田哲章・叢書Belle-comic-special)/4中総もも/5真弓大介/6阿乱霊/7DONKEY/8阿乱霊/9中総もも、全巻ISBN無し・版元は全て東京三世社。本頁 lilliput は本来 竹書房『リリパット』松崎司(Bamboo comics Qpa collection・2014・ISBN9784812487594)の頁であり、同題mergeでこのアンソロジー7クラスタが合流していた。該当巻: 5巻(1988-03-10)真弓大介'
+- series_key: name:DONKEY|name:リリパット
   reason: anthology_magazine
-  note: "ユーザ裁定2026-09-01。東京三世社『リリパット』全9巻(1987-1988)は**巻ごとに著者が全部違う同題アンソロジー(叢書)**で単一作品ではない。裏取り=NDL SRU title=\"リリパット\"で全巻を確認: 1上総志摩/2番外地貢/3阿乱霊(別レコードで飯田哲章・叢書Belle-comic-special)/4中総もも/5真弓大介/6阿乱霊/7DONKEY/8阿乱霊/9中総もも、全巻ISBN無し・版元は全て東京三世社。本頁 lilliput は本来 竹書房『リリパット』松崎司(Bamboo comics Qpa collection・2014・ISBN9784812487594)の頁であり、同題mergeでこのアンソロジー7クラスタが合流していた。該当巻: 7巻(1988-07-10)DONKEY"
-- series_key: "qid:Q2661273|name:泣ける!ゴルゴ13"
+  note: 'ユーザ裁定2026-09-01。東京三世社『リリパット』全9巻(1987-1988)は**巻ごとに著者が全部違う同題アンソロジー(叢書)**で単一作品ではない。裏取り=NDL SRU title="リリパット"で全巻を確認: 1上総志摩/2番外地貢/3阿乱霊(別レコードで飯田哲章・叢書Belle-comic-special)/4中総もも/5真弓大介/6阿乱霊/7DONKEY/8阿乱霊/9中総もも、全巻ISBN無し・版元は全て東京三世社。本頁 lilliput は本来 竹書房『リリパット』松崎司(Bamboo comics Qpa collection・2014・ISBN9784812487594)の頁であり、同題mergeでこのアンソロジー7クラスタが合流していた。該当巻: 7巻(1988-07-10)DONKEY'
+- series_key: qid:Q2661273|name:泣ける!ゴルゴ13
   reason: konbini_reprint
-  note: "楽天の seriesName が全巻 My First BIG SPECIAL / My First BIG SUPER(小学館のコンビニ廉価レーベル)。CLAUDE.mdの drop imprint patterns に「My first big」が明記されており本来この網で落ちるはずが、本番側のimprintが「Golgo 13 special」に化けていたため素通りしていた。中身はテーマ別セレクション(泣ける!ラブストーリー/ハードボイルド/ミステリー/サバイバル…)=既刊再編集。本編頁 golgo-13(437巻)は存置 [slug=nakeru-golgo-13]"
-- series_key: "qid:Q2661273|name:Epic of ゴルゴ13"
+  note: 楽天の seriesName が全巻 My First BIG SPECIAL / My First BIG SUPER(小学館のコンビニ廉価レーベル)。CLAUDE.mdの drop imprint patterns に「My first big」が明記されており本来この網で落ちるはずが、本番側のimprintが「Golgo 13 special」に化けていたため素通りしていた。中身はテーマ別セレクション(泣ける!ラブストーリー/ハードボイルド/ミステリー/サバイバル…)=既刊再編集。本編頁 golgo-13(437巻)は存置 [slug=nakeru-golgo-13]
+- series_key: qid:Q2661273|name:Epic of ゴルゴ13
   reason: excerpt_selection
-  note: "SPコミックス ポケットワイドのテーマ別セレクション(カーニバルの終焉/ナチスの亡霊/復讐と報恩/昭和の妖怪/メディアからの挑戦/大国の狭間で)=既刊再編集の抜粋本。同レーベル棚に「ゴルゴ13 SPECIAL SELECTION」も並ぶ。本編頁 golgo-13(437巻)は存置 [slug=epic-of-golgo-13]"
-- series_key: "qid:Q17161092|name:旅情ミステリースペシャル|sub:名探偵浅見光彦&警視庁十津川警部"
+  note: SPコミックス ポケットワイドのテーマ別セレクション(カーニバルの終焉/ナチスの亡霊/復讐と報恩/昭和の妖怪/メディアからの挑戦/大国の狭間で)=既刊再編集の抜粋本。同レーベル棚に「ゴルゴ13 SPECIAL SELECTION」も並ぶ。本編頁 golgo-13(437巻)は存置 [slug=epic-of-golgo-13]
+- series_key: qid:Q17161092|name:旅情ミステリースペシャル|sub:名探偵浅見光彦&警視庁十津川警部
   reason: anthology_magazine
-  note: "楽天の著者欄に「アンソロジー」が現れる巻があり(3巻)、他の巻も著者=内田康夫/西村京太郎(=原作者)。subTitleは全巻「名探偵浅見光彦＆警視庁十津川警部」で、2つの原作シリーズのコミカライズ読切を寄せ集めた本。既にdrop済の『コミック浅見光彦本格旅情ミステリー』(ぶんか社)と同型 [slug=ryojou-mystery-special-2020]"
-- series_key: "qid:Q8967541|name:浅見光彦ミステリー&旅愁サスペンス"
+  note: 楽天の著者欄に「アンソロジー」が現れる巻があり(3巻)、他の巻も著者=内田康夫/西村京太郎(=原作者)。subTitleは全巻「名探偵浅見光彦＆警視庁十津川警部」で、2つの原作シリーズのコミカライズ読切を寄せ集めた本。既にdrop済の『コミック浅見光彦本格旅情ミステリー』(ぶんか社)と同型 [slug=ryojou-mystery-special-2020]
+- series_key: qid:Q8967541|name:浅見光彦ミステリー&旅愁サスペンス
   reason: anthology_magazine
-  note: "楽天 seriesName=秋田トップコミックスWIDE(コンビニ廉価)、著者欄は全巻「内田康夫」=原作者のみ。浅見光彦もののコミカライズを寄せ集めた廉価アンソロジー [slug=asami-mitsuhiko-mystery-ando-ryoshuu-sasupensu]"
-- series_key: "name:あさみさとる|name:コミック名探偵浅見光彦"
+  note: 楽天 seriesName=秋田トップコミックスWIDE(コンビニ廉価)、著者欄は全巻「内田康夫」=原作者のみ。浅見光彦もののコミカライズを寄せ集めた廉価アンソロジー [slug=asami-mitsuhiko-mystery-ando-ryoshuu-sasupensu]
+- series_key: name:あさみさとる|name:コミック名探偵浅見光彦
   reason: anthology_magazine
-  note: "書店の著者表記が「アンソロジー/内田康夫」。内容も「内田康夫原作小説の人気シリーズをコミカライズで複数収録(佐渡伝説殺人事件・伊香保殺人事件・耳なし芳一からの手紙 等)」。既にdrop済の『コミック浅見光彦本格旅情ミステリー』と同レーベル同型 [slug=comic-mei-tantei-asami-mitsuhiko]"
-- series_key: "name:中原まい|name:コミック赤川次郎ミステリー"
+  note: 書店の著者表記が「アンソロジー/内田康夫」。内容も「内田康夫原作小説の人気シリーズをコミカライズで複数収録(佐渡伝説殺人事件・伊香保殺人事件・耳なし芳一からの手紙 等)」。既にdrop済の『コミック浅見光彦本格旅情ミステリー』と同レーベル同型 [slug=comic-mei-tantei-asami-mitsuhiko]
+- series_key: name:中原まい|name:コミック赤川次郎ミステリー
   reason: anthology_magazine
-  note: "書店の著者表記が「アンソロジー/赤川次郎」。内容は「『怪異名所巡り』『幽霊シリーズ』『三毛猫ホームズ』の人気シリーズ一挙10話収録」=複数作家のコミカライズ寄せ集め [slug=comic-akagawa-jirou-mystery]"
-- series_key: "qid:Q11671864|name:読者投稿心霊体験"
+  note: 書店の著者表記が「アンソロジー/赤川次郎」。内容は「『怪異名所巡り』『幽霊シリーズ』『三毛猫ホームズ』の人気シリーズ一挙10話収録」=複数作家のコミカライズ寄せ集め [slug=comic-akagawa-jirou-mystery]
+- series_key: qid:Q11671864|name:読者投稿心霊体験
   reason: excerpt_selection
-  note: "楽天 subTitle=「高港基資ホラー傑作選」、seriesName=「YK best 高港基資他ホラー傑作選」。ヤングキングベスト=廉価版レーベルで、複数作家の既発表作を集めた再録集 [slug=dokusha-toukou-shinrei-taiken]"
-- series_key: "qid:Q11477877|name:ワタシの川原泉"
+  note: 楽天 subTitle=「高港基資ホラー傑作選」、seriesName=「YK best 高港基資他ホラー傑作選」。ヤングキングベスト=廉価版レーベルで、複数作家の既発表作を集めた再録集 [slug=dokusha-toukou-shinrei-taiken]
+- series_key: qid:Q11477877|name:ワタシの川原泉
   reason: excerpt_selection
-  note: "楽天 subTitle=「川原泉傑作集」、caption=「読者投票により収録作を決定した前代未聞の傑作集」。既刊短編の再録集で、CLAUDE.mdの抜粋本パターン(傑作選/傑作集)に該当 [slug=watashi-no-kawahara-izumi]"
-- series_key: "qid:Q3431787|name:お徳用毎日かあさん"
+  note: 楽天 subTitle=「川原泉傑作集」、caption=「読者投票により収録作を決定した前代未聞の傑作集」。既刊短編の再録集で、CLAUDE.mdの抜粋本パターン(傑作選/傑作集)に該当 [slug=watashi-no-kawahara-izumi]
+- series_key: qid:Q3431787|name:お徳用毎日かあさん
   reason: gappon
-  note: "楽天の巻題が「(1＋2巻)」「(3＋4巻)」「(5＋6巻)」「(7＋8巻)」=2冊分を1冊にした合本。caption「2冊分入って1冊分以下のお値段!」。合本は非掲載が基本。本編頁 mainichi-kaa-san(14巻)は存置 [slug=otokuyou-mainichi-kaa-san]"
-- series_key: "qid:Q11519792|name:蒼太の包丁deluxe"
+  note: 楽天の巻題が「(1＋2巻)」「(3＋4巻)」「(5＋6巻)」「(7＋8巻)」=2冊分を1冊にした合本。caption「2冊分入って1冊分以下のお値段!」。合本は非掲載が基本。本編頁 mainichi-kaa-san(14巻)は存置 [slug=otokuyou-mainichi-kaa-san]
+- series_key: qid:Q11519792|name:蒼太の包丁deluxe
   reason: konbini_reprint
-  note: "マンサンQコミックス=実業之日本社のコンビニコミック。商品説明が「マンサンコミックス『蒼太の包丁』全42巻の豊富なコンテンツからメニュー(季節感)重視で作品を厳選、編集した美味しい1冊」=既刊の再編集抜粋本。既にdrop済の『蒼太の包丁 special』と同型。本編頁 souta-no-houchou(41巻)は存置 [slug=souta-no-houchou-derakkusu]"
-- series_key: "name:ゆでたまご|name:キン肉マンジャンプ"
+  note: マンサンQコミックス=実業之日本社のコンビニコミック。商品説明が「マンサンコミックス『蒼太の包丁』全42巻の豊富なコンテンツからメニュー(季節感)重視で作品を厳選、編集した美味しい1冊」=既刊の再編集抜粋本。既にdrop済の『蒼太の包丁 special』と同型。本編頁 souta-no-houchou(41巻)は存置 [slug=souta-no-houchou-derakkusu]
+- series_key: name:ゆでたまご|name:キン肉マンジャンプ
   reason: anthology_magazine
-  note: "楽天 seriesName=集英社ムック。巻題も「ベストバウトTOP10 完璧超人始祖編」「超人総選挙2019 TOP10の…」で、captionは「TOP10超人の名シーンを厳選」+旧作リメイク+対談企画。雑誌形式のムック(総集編)。本編頁 kinnikuman(112巻)は存置 [slug=kinnikuman-jump]"
-- series_key: "name:講談社|name:GIANT KILLING extra ジャイアントキリング発サッカーエンターテインメントマガジン"
+  note: 楽天 seriesName=集英社ムック。巻題も「ベストバウトTOP10 完璧超人始祖編」「超人総選挙2019 TOP10の…」で、captionは「TOP10超人の名シーンを厳選」+旧作リメイク+対談企画。雑誌形式のムック(総集編)。本編頁 kinnikuman(112巻)は存置 [slug=kinnikuman-jump]
+- series_key: name:講談社|name:GIANT KILLING extra ジャイアントキリング発サッカーエンターテインメントマガジン
   reason: anthology_magazine
-  note: "楽天 seriesName=講談社mook、著者=講談社、subTitle=「ジャイアントキリング発サッカーエンターテインメント」。誌名どおりのサッカー雑誌ムックで単一漫画作品ではない。本編頁 giant-killing(70巻)は存置 [slug=giant-killing-extra-giant-killing-hatsu-sakkaa-entaateinmento-magazine]"
-- series_key: "name:ジャンプSQ.編集部|name:ジャンプSQ.Comic Selection"
+  note: 楽天 seriesName=講談社mook、著者=講談社、subTitle=「ジャイアントキリング発サッカーエンターテインメント」。誌名どおりのサッカー雑誌ムックで単一漫画作品ではない。本編頁 giant-killing(70巻)は存置 [slug=giant-killing-extra-giant-killing-hatsu-sakkaa-entaateinmento-magazine]
+- series_key: name:ジャンプSQ.編集部|name:ジャンプSQ.Comic Selection
   reason: anthology_magazine
-  note: "楽天の著者が全巻「ジャンプSQ.編集部」「ジャンプスクエア編集部」=編集部名義の作品セレクション(アンソロジー)。単一作品ではない [slug=jump-sq-comic-selection]"
-- series_key: "name:マジキューコミックス編集部|name:マジキュー4コマ STEINS;GATE"
+  note: 楽天の著者が全巻「ジャンプSQ.編集部」「ジャンプスクエア編集部」=編集部名義の作品セレクション(アンソロジー)。単一作品ではない [slug=jump-sq-comic-selection]
+- series_key: name:マジキューコミックス編集部|name:マジキュー4コマ STEINS;GATE
   reason: anthology_magazine
-  note: "楽天の著者が「エンターブレイン/5pb.」=版元/原作社名義の4コマアンソロジー(複数作家)。単一作品ではない [slug=majikyuu-4-koma-steins-gate]"
-- series_key: "qid:Q7500116|name:HAL'S MOTO"
+  note: 楽天の著者が「エンターブレイン/5pb.」=版元/原作社名義の4コマアンソロジー(複数作家)。単一作品ではない [slug=majikyuu-4-koma-steins-gate]
+- series_key: qid:Q7500116|name:HAL'S MOTO
   reason: excerpt_selection
-  note: "楽天 seriesName=Motor Magazine Mook。1・2巻が同日(2025-08-28)、3・4巻も同日(2025-11-13)の同時刊行で、商品説明は「東本昌平氏が描いたイラストや漫画を、車両メーカー別にまとめた」総集編(RIDEXシリーズのベスト版) [slug=hal-s-moto]"
-- series_key: "name:ブライアン・マイケル・ベンディス|name:インビンシブル・アイアンマン:アイアンハート"
+  note: 楽天 seriesName=Motor Magazine Mook。1・2巻が同日(2025-08-28)、3・4巻も同日(2025-11-13)の同時刊行で、商品説明は「東本昌平氏が描いたイラストや漫画を、車両メーカー別にまとめた」総集編(RIDEXシリーズのベスト版) [slug=hal-s-moto]
+- series_key: name:ブライアン・マイケル・ベンディス|name:インビンシブル・アイアンマン:アイアンハート
   reason: out_of_scope
-  note: "ユーザ裁定2026-09-01。マーベルコミックスの邦訳(原作ブライアン・マイケル・ベンディス/作画ステファノ・カセッリ、ShoPro Books)。MANGALの掲載scopeは「日本で出版された漫画」(韓国manhwa/中華manhuaの日本語版は対象)で、アメコミ邦訳はscope外 [slug=invincible-iron-man-ironheart]"
+  note: ユーザ裁定2026-09-01。マーベルコミックスの邦訳(原作ブライアン・マイケル・ベンディス/作画ステファノ・カセッリ、ShoPro Books)。MANGALの掲載scopeは「日本で出版された漫画」(韓国manhwa/中華manhuaの日本語版は対象)で、アメコミ邦訳はscope外 [slug=invincible-iron-man-ironheart]
+- series_key: qid:Q2661273|name:ゴルゴ13 shorty
+  reason: excerpt_selection
+  note: golgo-13-shorty / 本編既刊のテーマ別再録(SPコミックス ポケットワイド)。楽天題「ゴルゴ13 SHORTY 特殊条件下の狙撃」等 (adjudicated 2026-09-02)
+- series_key: qid:Q2661273|name:ゴルゴ13 characters
+  reason: excerpt_selection
+  note: golgo-13-characters / 本編既刊の登場人物別再録。楽天題「ゴルゴ13 CHARACTERS ゴルゴ13を追う男」等 (adjudicated 2026-09-02)
+- series_key: qid:Q2661273|name:ゴルゴ13 best of 200
+  reason: excerpt_selection
+  note: golgo-13-best-of-200 / 200巻到達記念の傑作選。楽天題「ゴルゴ13 BEST OF 200 不可能へ」等 (adjudicated 2026-09-02)
+- series_key: qid:Q2661273|name:ゴルゴ13 SPECIAL EDITION|sub:さいとう・プロ作品
+  reason: excerpt_selection
+  note: golgo-13-special-edition / 既刊の再編集集大成。楽天CAP「大人気のルーツ編を集大成するシリーズ」「沖吾郎作品を全て収録」 (adjudicated 2026-09-02)
+- series_key: qid:Q2661273|name:現代史の中のゴルゴ13
+  reason: excerpt_selection
+  note: gendaishi-no-naka-no-golgo-13 / 現代史テーマ別の再録。副題「第二次世界大戦の亡霊」「燻る火種と中東情勢」 (adjudicated 2026-09-02)
+- series_key: qid:Q2661273|name:Legend ofゴルゴ13 black
+  reason: excerpt_selection
+  note: legend-of-golgo-13-black / リイド社SP系のテーマ別再録シリーズ(NDL 2021.4) (adjudicated 2026-09-02)
+- series_key: qid:Q2661273|name:Legend ofゴルゴ13 white
+  reason: excerpt_selection
+  note: legend-of-golgo-13-white / リイド社SP系のテーマ別再録シリーズ(2021.4) (adjudicated 2026-09-02)
+- series_key: qid:Q2661273|name:Legend of ゴルゴ13 アサシン・ローズ
+  reason: excerpt_selection
+  note: legend-of-golgo-13-assassin-rose / リイド社SP pocket wideのテーマ別再録シリーズ (adjudicated 2026-09-02)
+- series_key: qid:Q2661273|name:Legend ofゴルゴ13クロス・オブ・アイアン
+  reason: excerpt_selection
+  note: legend-of-golgo-13-cross-of-iron / リイド社SP pocket wideのテーマ別再録シリーズ (adjudicated 2026-09-02)
+- series_key: qid:Q2661273|name:Legend ofゴルゴ13ザ・ベスト4
+  reason: excerpt_selection
+  note: legend-of-golgo-13-the-best-4 / 題に「ザ・ベスト」。リイド社の再録選集(NDL 2022.9) (adjudicated 2026-09-02)
+- series_key: qid:Q2661273|name:Legend ofゴルゴ13ザ・レッドスター
+  reason: excerpt_selection
+  note: legend-of-golgo-13-the-red-star / リイド社SP pocket wideのテーマ別再録シリーズ(2022.9) (adjudicated 2026-09-02)
+- series_key: qid:Q2661273|name:リーダーズ・チョイスbest 13 ofゴルゴ13
+  reason: excerpt_selection
+  note: readers-choice-best-13-of-golgo-13 / 読者投票で選ばれた13作の傑作選(2002年版) (adjudicated 2026-09-02)
+- series_key: qid:Q2661273|name:ゴルゴ13リーダーズ・チョイスBEST 13 OF“G”
+  reason: excerpt_selection
+  note: golgo-13-readers-choice-best-13-of-g / ★楽天題「改訂版「ゴルゴ13」リーダーズ・チョイス」= 上の2018年改訂版。実質同一作品の二重頁 (adjudicated 2026-09-02)
+- series_key: name:さいとう・たかを|name:ゴルゴ1983
+  reason: konbini_reprint
+  note: gorugo1983 / ★楽天題「ゴルゴ13クロニクル(18)」seriesName=My First BIG SPECIAL = コンビニ廉価再録。頁題も実題でない (adjudicated 2026-09-02)
+- series_key: name:さいとう・たかを|name:ゴルゴ1987
+  reason: konbini_reprint
+  note: gorugo1987 / ★楽天題「ゴルゴ13クロニクル(17)」seriesName=My First BIG SPECIAL = コンビニ廉価再録。頁題も実題でない (adjudicated 2026-09-02)
