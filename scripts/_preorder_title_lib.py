@@ -8,6 +8,10 @@
   C. かな数詞: 「題 その六」(題側は途切れも)      ← 悪役令嬢99型(ヨミ照合で検出)
   D. 上下巻: 「題 上/下」「題(上)」             ← vol=1/2相当(ペア統合は呼び出し側)
 検出しないもの: 題の一部の数字(レベル99/U149/After20=直前が英数字)。
+★2026-09-02 追加(日次蒸留で続巻が skip に落ちた型):
+  A2. 閉じ記号直後の裸数字「〜副題〜9」「』3」= 巻数(確定)。副題の閉じの後に数字だけが続くのは巻数しかない。
+  A3. 英字語+空白+裸数字「GOLD RUSH　8」「S-WITCH　2」= suspect(vol_suspect)。題の一部(Area 88型)かもしれないので
+      確定せず、分類器が suspect>=2 を巻扱いにして頁一致(著者+題)/全巻回収で確定する既存の安全網に乗せる。
 """
 import re
 import unicodedata
@@ -75,6 +79,18 @@ def split_title(raw):
                 if m and m.group(1).strip() and not re.search(r"[A-Za-z0-9]$", m.group(1).rstrip()):
                     base, vol = m.group(1).strip(), int(m.group(2))
                     matched = "tail"
+            # A2. 閉じ記号直後の裸数字(〜副題〜9 / 』3 型 2026-09-02): 副題の閉じの後の数字は巻数しかない=確定
+            if matched is None:
+                m = re.search(r"^(.{3,}?[〜~」』】〉》])(\d{1,3})[\s　]*$", t)
+                if m and m.group(1).strip():
+                    base, vol = m.group(1).strip(), int(m.group(2))
+                    matched = "tail_after_close"
+            # A3. 英字語+空白+裸数字(GOLD RUSH 8 / S-WITCH 2 型 2026-09-02): 題の一部かも(Area 88)なので suspect
+            if matched is None:
+                m = re.search(r"^(.*?[A-Za-z])[\s　]+([2-9]|[1-9][0-9]{1,2})[\s　]*(?:[（(]完[)）])?$", t)
+                if m and m.group(1).strip():
+                    return {"base": m.group(1).strip(), "vol": None, "part": None, "subtitle": "",
+                            "clean": t, "matched": None, "vol_suspect": int(m.group(2))}
             # A'. 直結裸数字(サンダー3=題の一部かも/鬼平犯科帳128=巻かも)→確定せずsuspect
             if matched is None:
                 m = re.search(r"^(.{3,}?[ぁ-ん一-龯ァ-ヶ])(\d{1,3})[\s　]*$", t)
