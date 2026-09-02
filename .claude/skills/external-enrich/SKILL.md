@@ -114,6 +114,13 @@ applier に任せる(slug側だけ直しても頁に出ない = [[synopsis_ja_se
 
 ## 罠(実踏)
 
+- ★**`_enrich-web-batch.py` は `PYTHONUTF8=1` を付けて走らせる**。stdin リダイレクトだと Windows の
+  既定コーデック(cp932)で読まれ、**全件が字数違反・頭20字一致に化ける**(2026-09-02 実踏。
+  build 側は c53 y99 と出しているのに web-batch が catch97 と言い出したら、まずこれを疑う)。
+  `_apply-enrich-batch.py` / `_reflect-targeted.py` も同様に付けておくと安全。
+- ★**既存ジャンルが明らかに誤りでも genre-append では消せない**(union only)。誤りは `source:` 欄に
+  「既存 X はAI推定の誤りの疑い」と書き残し、ユーザへ報告する(除去機構は現状なし)。
+
 - ★**catch/syn の join キーは「源頁 `data/manga/<stem>.yml` の slug」**。ファイル名と違う頁がある
   (`tales-of-the-abyss-rei2006` の源頁slugは `tales-of-the-abyss-rei`)。stemキーで書くと**無警告で頁に出ない**。
   `_enrich-web-batch.py` がこの不一致を検査するので、そこで止まったら指示どおりのキーに直す。
