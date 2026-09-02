@@ -14,6 +14,21 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 TODAY = datetime.date.today().isoformat()
 
+# ★手動slug seed(2026-09-02): 装置が「自動で決められない」(slug生成不可)と保留した題を人がヨミ基準で裁いた答え。
+#   data/seeds/preorder-slug-manual.tsv = isbn13<TAB>slug<TAB>根拠。make_slug の前に参照する。
+MANUAL_SLUG = {}
+try:
+    for _l in open(os.path.join(ROOT, "data", "seeds", "preorder-slug-manual.tsv"), encoding="utf-8"):
+        if _l.startswith("#") or not _l.strip():
+            continue
+        _p = _l.rstrip("\r\n").split("\t")
+        if len(_p) >= 2 and _p[0].strip() and _p[1].strip():
+            MANUAL_SLUG[_p[0].strip()] = _p[1].strip()
+except FileNotFoundError:
+    pass
+# ★--isbn a,b,c = そのISBNだけ処理(保留分の再生成用。無指定の再実行は既生成と衝突するので使わない)
+ONLY_ISBN = set(sys.argv[sys.argv.index("--isbn") + 1].split(",")) if "--isbn" in sys.argv else None
+
 # gen-previewのローマ字化/strip関数を流用(import)
 import importlib.util
 spec = importlib.util.spec_from_file_location("genprev", os.path.join(ROOT, "scripts", "_preorder-gen-preview.py"))
@@ -110,7 +125,7 @@ def _old_strip_vol_disp(t):
 
 # ★2026-07-09 整形は _preorder_draft_lib に一本化(gen-previewと同じ規律=捏造回避)
 from _preorder_draft_lib import clean_title as _clean_title, clean_kana as _clean_kana, make_slug as _make_slug, scope_out as _scope_out
-for r in cls["ex_mid"]:
+for r in [x for x in cls["ex_mid"] if ONLY_ISBN is None or str(x.get("isbn")) in ONLY_ISBN]:
     if _scope_out(r.get("title")):
         holds.append((r.get("isbn"), r.get("title"), "scope外(非漫画)")); continue
     _bt, _sub, _prov = _clean_title(r.get("title"))
@@ -134,7 +149,7 @@ for r in cls["ex_mid"]:
     if not ns or ns[0] != 1 or len(ns) < 0.8 * ns[-1] or len(ns) < 2:
         holds.append((r.get("isbn"), title, f"全巻回収不成立 vols={ns[:6]}{'..' if len(ns)>6 else ''}")); continue
     # ★slugはclean済みkanaから作る(生titleKanaは末尾巻数読み「イチ」等が残る=channel-vampire-ichi型 2026-08-31)
-    slug = _make_slug(base, kana)
+    slug = MANUAL_SLUG.get(str(r.get("isbn"))) or _make_slug(base, kana)
     if not slug:
         holds.append((r.get("isbn"), title, "slug生成不可")); continue
     romaji = slug.replace("-", " ")

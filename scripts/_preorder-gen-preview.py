@@ -25,6 +25,21 @@ TRIAGE = os.path.join(ROOT, "docs", "production-diagnostics", "preorder-triage.t
 WHICH = sys.argv[1] if len(sys.argv) > 1 else "both"
 LIMIT = int(sys.argv[sys.argv.index("--limit") + 1]) if "--limit" in sys.argv else 10**9
 
+# ★手動slug seed(2026-09-02): 装置が「自動で決められない」(slug生成不可)と保留した題を人がヨミ基準で裁いた答え。
+#   data/seeds/preorder-slug-manual.tsv = isbn13<TAB>slug<TAB>根拠。make_slug の前に参照する。
+MANUAL_SLUG = {}
+try:
+    for _l in open(os.path.join(ROOT, "data", "seeds", "preorder-slug-manual.tsv"), encoding="utf-8"):
+        if _l.startswith("#") or not _l.strip():
+            continue
+        _p = _l.rstrip("\r\n").split("\t")
+        if len(_p) >= 2 and _p[0].strip() and _p[1].strip():
+            MANUAL_SLUG[_p[0].strip()] = _p[1].strip()
+except FileNotFoundError:
+    pass
+# ★--isbn a,b,c = そのISBNだけ処理(保留分の再生成用。無指定の再実行は既生成と衝突するので使わない)
+ONLY_ISBN = set(sys.argv[sys.argv.index("--isbn") + 1].split(",")) if "--isbn" in sys.argv else None
+
 # --- カナ→ローマ字: ★正本は scripts/_kana_romaji.py(2026-07-25 切り出し。取りこぼし頁化と共用) ---
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from _kana_romaji import kana2romaji, _K2R  # noqa: E402
@@ -115,6 +130,8 @@ if WHICH in ("new1a", "both"):
     targets += [("new1a", r) for r in cls["new1a"]]
 if WHICH in ("new1b", "both"):
     targets += [("new1b", r) for r in cls["new1b"]]
+if ONLY_ISBN is not None:
+    targets = [(k, r) for k, r in targets if str(r.get("isbn")) in ONLY_ISBN]
 targets = targets[:LIMIT]
 
 made = []
@@ -152,12 +169,19 @@ for klass, r in targets:
         holds.append((klass, isbn, base, "楽天ヨミ無し/汚染=捏造回避hold(NDL照合キューへ)")); continue
     if not (title and ym and isbn and len(isbn) == 13 and auths):
         holds.append((klass, isbn, title, "必須欠け(author/ym)")); continue
+    # ★著者=出版社名(2026-09-02 みにくい小鳥の婚約=楽天 author「小学館」型): 楽天が著者未登録時に出版社名を入れてくる。
+    #   著者不明=捏造せず hold(発売後の楽天再訪/NDLで埋まってから通す)。
+    _pubn = _ud.normalize("NFKC", str(r.get("publisher") or "")).replace(" ", "")
+    if all(_pubkey(a) or _ud.normalize("NFKC", a).replace(" ", "") == _pubn for a in auths):
+        holds.append((klass, isbn, title, f"著者=出版社名({'/'.join(auths)})=著者不明(楽天placeholder)→保留")); continue
     # ★slugはclean済みkanaから作る(生titleKanaは末尾に巻数読み「イチ」等が残りslug汚染=channel-vampire-ichi型 2026-08-31)
-    slug = _make_slug(base, kana, existing)
+    slug = MANUAL_SLUG.get(str(isbn)) or _make_slug(base, kana, existing)
+    if MANUAL_SLUG.get(str(isbn)) and slug in existing:
+        holds.append((klass, isbn, title, f"手動slug衝突 {slug}")); continue
     if not slug:
         slug = _make_slug(base, kana)
         if not slug:
-            holds.append((klass, isbn, title, "slug生成不可")); continue
+            holds.append((klass, isbn, title, "slug生成不可(→ data/seeds/preorder-slug-manual.tsv に人が裁いたslugを置いて --isbn 再生成)")); continue
         # ★同名異作品の衝突=規則「-姓+発売年」(chuka-ichiban-manabe1993型)。裸の-西暦は禁止(shion-2026事故 2026-07-14)
         _ak = author_names(r.get("authorKana"))
         _sr = re.sub(r"[^a-z0-9]", "", kana2romaji(_ak[0].split()[0])) if _ak else ""
