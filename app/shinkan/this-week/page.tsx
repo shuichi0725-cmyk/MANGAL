@@ -41,7 +41,7 @@ export default function ShinkanThisWeekPage() {
         </header>
         <ShinkanWeekList initialStart={start} initialEnd={end} initialRows={rows} knownSlugs={knownArr} />
       </div>
-      <ShinkanMonthNav months={listShinkanMonths()} />
+      <ShinkanMonthNav months={listShinkanMonths()} focus={jstYm(0)} />
       <ShinkanAbout />
     </>
   );

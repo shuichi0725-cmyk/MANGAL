@@ -18,3 +18,5 @@ metadata:
 ## 未決・宿題
 - makai-tenshou(魔界転生とみ新蔵版)= promote が db-v2 で series not found → 8/21から再生成不能(anilist:false が届かない)。要検死。
 - アニメ nopage台帳194件(登録候補)/ B13(OVA形式がハーベスト対象外=岸辺露伴型)。
+
+## 追記 2026-09-02: /shinkan 年月ナビの固定2行化(年チップ1行+月行横スクロール+当月へ初期スクロール)= preview確認待ち→機能蒸留で本番へ(コードのみ: components/ShinkanMonthNav.tsx, app/shinkan/this-week/page.tsx)
