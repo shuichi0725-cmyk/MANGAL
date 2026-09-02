@@ -26,3 +26,5 @@ Bashツールが `bash: -c: line 90: unexpected EOF while looking for matching '
 追記 2026-09-02(夜): **バックスラッシュも化ける**。heredoc本文の `.replace('\\','/')` が実行時に
 `unterminated string literal` になった(ツール側ラップで `\\` が `\` に潰れる)。シングルクォートと同じく
 **Writeでscratchpadに書いて実行**が正解。関連: [[process_kill_commandline_self_match]]
+
+- ★**ログ/生成物の読み出しで UnicodeEncodeError**(2026-09-02 2回踏んだ): `python -c "print(open(log,"rb").read().decode(...))"` は stdout が cp932 のままだと `\uFFFD`(replace文字)や絵文字で落ちる。**必ず `sys.stdout.reconfigure(encoding="utf-8")` か `export PYTHONIOENCODING=utf-8`** を先に付け、bytes は `decode("utf-8","replace")` で読む(reflect/promote のログは utf-8 と cp932 が混在)。
