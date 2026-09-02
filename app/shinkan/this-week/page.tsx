@@ -11,7 +11,7 @@ import { dateLabel, itemsInRange, knownSlugs, listShinkanMonths, shinkanJsonLd, 
 const SITE = "https://mangal-db.com";
 
 export const metadata: Metadata = {
-  title: "今週の漫画・コミック新刊発売日一覧",
+  title: "今週の新刊発売日一覧(漫画・コミック)",
   description:
     "今週発売の漫画・コミック新刊を発売日ごとに全冊掲載(月曜〜日曜)。書影・巻数・著者・出版社つきで、Amazonでの予約・購入と作品ページ(全巻の発売日)へ移動できます。毎週更新。",
   alternates: { canonical: `${SITE}/shinkan/this-week` },
@@ -23,7 +23,7 @@ export default function ShinkanThisWeekPage() {
   const rows = itemsInRange(start, end);
   const known = knownSlugs();
   const knownArr = [...new Set(rows.flatMap((r) => r.items.map((it) => it[0])))].filter((s) => known.has(s));
-  const jsonLd = shinkanJsonLd("今週の漫画・コミック新刊発売日一覧", `${SITE}/shinkan/this-week`, rows);
+  const jsonLd = shinkanJsonLd("今週の漫画・コミック新刊発売日一覧", `${SITE}/shinkan/this-week`, rows, known);
   return (
     <>
       <DesignNav />

@@ -2,14 +2,15 @@
 
 import { useEffect, useState, type ReactNode } from "react";
 import { ShinkanMonthList } from "@/components/ShinkanRow";
-import { KNOWN_ALL, monthSignature, type ShinkanMonth } from "@/lib/shinkanDates";
+import { monthSignature, type ShinkanMonth } from "@/lib/shinkanDates";
 
 /** 鮮度保険(2026-09-01 静的化に伴う): build 時に焼いた本文(children)を出しつつ、
  *  閲覧時に /shinkan/{ym}.json を1回取り、署名が違えば(=データ週にJSONだけ更新された等)
  *  その場で本文を差し替える。同じなら何もしない(children のまま=二重描画なし)。
- *  ★取り直し分の「詳細」は全作品に出す(本番は全slugが索引に居る。preview subset でも実害は404のみ)。 */
-export default function ShinkanLive({ ym, sig, children }: { ym: string; sig: string; children: ReactNode }) {
+ *  ★取り直し分の「詳細」は build 時に索引に居た slug だけに出す(新規slugは次のビルドまで無し=404を撒かない)。 */
+export default function ShinkanLive({ ym, sig, knownSlugs, children }: { ym: string; sig: string; knownSlugs: string[]; children: ReactNode }) {
   const [fresh, setFresh] = useState<ShinkanMonth | null>(null);
+  const known = new Set(knownSlugs);
   useEffect(() => {
     let alive = true;
     (async () => {
@@ -30,7 +31,7 @@ export default function ShinkanLive({ ym, sig, children }: { ym: string; sig: st
   return (
     <>
       <p className="px-4 pt-2 text-[10.5px] text-ink/45">(最新のデータに更新しました)</p>
-      <ShinkanMonthList ym={ym} data={fresh} known={KNOWN_ALL} />
+      <ShinkanMonthList ym={ym} data={fresh} known={known} />
     </>
   );
 }

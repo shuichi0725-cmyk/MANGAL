@@ -10,7 +10,7 @@ import { jstYm, knownSlugs, listShinkanMonths, loadShinkanMonth, shinkanJsonLd, 
 const SITE = "https://mangal-db.com";
 
 export const metadata: Metadata = {
-  title: "来月発売予定の漫画・コミック新刊一覧",
+  title: "来月の新刊発売予定一覧(漫画・コミック)",
   description:
     "来月に発売予定の漫画・コミック新刊を発売予定日ごとに全冊掲載。書影・巻数・著者・出版社つきで、Amazonでの予約と作品ページ(全巻の発売日)へ移動できます。毎週更新。",
   alternates: { canonical: `${SITE}/shinkan/next-month` },
@@ -22,7 +22,8 @@ export default function ShinkanNextMonthPage() {
   const d = loadShinkanMonth(ym) ?? { days: {}, unknown: [] };
   const months = listShinkanMonths();
   const rows = sortedDays(d).map((day) => ({ date: `${ym}-${day.padStart(2, "0")}`, items: d.days[day] }));
-  const jsonLd = shinkanJsonLd(`${ymLabel(ym)}発売予定の漫画・コミック新刊一覧`, `${SITE}/shinkan/next-month`, rows);
+  const known = knownSlugs();
+  const jsonLd = shinkanJsonLd(`${ymLabel(ym)}発売予定の漫画・コミック新刊一覧`, `${SITE}/shinkan/next-month`, rows, known);
   return (
     <>
       <DesignNav />
@@ -31,7 +32,7 @@ export default function ShinkanNextMonthPage() {
         ym={ym}
         data={d}
         months={months}
-        known={knownSlugs()}
+        known={known}
         heading={`来月(${ymLabel(ym)})の新刊発売予定`}
         lead="発売予定日ごとに全冊掲載。予約はAmazonへ、「詳細」は作品ページへ。発売日は変更されることがあります。"
         pageUrl={`${SITE}/shinkan/next-month`}

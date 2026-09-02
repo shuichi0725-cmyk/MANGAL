@@ -38,6 +38,8 @@ export default function ShinkanMonthView({
   const days = sortedDays(data);
   const n = monthCount(data);
   const list = <ShinkanMonthList ym={ym} data={data} known={known} />;
+  // 鮮度差し替え時の「詳細」ゲート用: build 時点で索引に居た slug(当月分だけ・重複除去)
+  const knownSlugs = [...new Set([...days.flatMap((d) => data.days[d]), ...(data.unknown ?? [])].map((it) => it[0]).filter((s) => known.has(s)))];
   return (
     <div className="mx-auto w-full max-w-[720px] pb-12">
       <header className="border-b-[3px] border-[var(--color-accent)] px-4 py-3">
@@ -71,7 +73,7 @@ export default function ShinkanMonthView({
       {notice}
       <ShinkanPageEffects ym={ym} days={days.map(Number)} />
       {live ? (
-        <ShinkanLive ym={ym} sig={monthSignature(data)}>
+        <ShinkanLive ym={ym} sig={monthSignature(data)} knownSlugs={knownSlugs}>
           {list}
         </ShinkanLive>
       ) : (

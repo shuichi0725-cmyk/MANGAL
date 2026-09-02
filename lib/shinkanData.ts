@@ -1,7 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { loadMangaListIndex } from "./loadData";
-import { monthsCovering, rowsInRange, type ShinkanItem, type ShinkanMonth } from "./shinkanDates";
+import { KNOWN_ALL, monthsCovering, rowsInRange, type KnownSet, type ShinkanItem, type ShinkanMonth } from "./shinkanDates";
 
 export * from "./shinkanDates";
 
@@ -42,16 +42,20 @@ export function knownSlugs(): Set<string> {
   return _known;
 }
 
-/** 構造化データ: ItemList(Book+datePublished)。上限で頭を切る(頁重量) */
+/** 構造化データ: ItemList(Book+datePublished)。上限で頭を切る(頁重量)。
+ *  ★author は出さない(2026-09-01 レビュー指摘: JSONの著者欄は「・」連結の表示用文字列で、
+ *    名前自体に「・」を含む著者(ジョージ・ルーカス等)が別人に割れる+60字切詰めで欠ける。作品頁のJSON-LDが正)。
+ *  ★url は一覧索引に居る slug だけ(索引外=本番404 になる頁をGoogleに配らない)。 */
 export function shinkanJsonLd(
   name: string,
   url: string,
   rows: Array<{ date: string | null; items: ShinkanItem[] }>,
+  known: KnownSet = KNOWN_ALL,
   limit = 300,
 ): Record<string, unknown> {
   const els: Record<string, unknown>[] = [];
   for (const r of rows) {
-    for (const [slug, vol, title, cover, isbn, authors, publisher] of r.items) {
+    for (const [slug, vol, title, cover, isbn, , publisher] of r.items) {
       if (els.length >= limit) break;
       els.push({
         "@type": "ListItem",
@@ -61,10 +65,9 @@ export function shinkanJsonLd(
           name: vol ? `${title} ${vol}巻` : title,
           ...(isbn ? { isbn } : {}),
           ...(r.date ? { datePublished: r.date } : {}),
-          ...(authors ? { author: authors.split("・").map((n) => ({ "@type": "Person", name: n })) } : {}),
           ...(publisher ? { publisher: { "@type": "Organization", name: publisher } } : {}),
           ...(cover ? { image: cover } : {}),
-          url: `https://mangal-db.com/manga/${slug}`,
+          ...(known.has(slug) ? { url: `https://mangal-db.com/manga/${slug}` } : {}),
         },
       });
     }
