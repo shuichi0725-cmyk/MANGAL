@@ -19,7 +19,7 @@ export function ShinkanRow({ it, known }: { it: ShinkanItem; known: boolean }) {
         <span className="relative block h-[150px] w-[105px] shrink-0 overflow-hidden bg-[#1a1a1a]">
           {coverHi ? (
             // eslint-disable-next-line @next/next/no-img-element
-            <img src={coverHi} alt={vol ? `${title} ${vol}巻` : title} loading="lazy" className="h-full w-full object-cover" />
+            <img src={coverHi} alt={vol ? `${title} ${vol}巻` : title} loading="lazy" className="h-full w-full bg-white object-cover" />
           ) : (
             <span className="flex h-full w-full items-center justify-center text-[10px] font-bold text-ink/40">NO IMG</span>
           )}

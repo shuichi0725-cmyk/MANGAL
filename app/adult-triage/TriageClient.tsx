@@ -74,7 +74,7 @@ export default function TriageClient({ targets }: { targets: Target[] }) {
               <div className="relative w-[72px] shrink-0 overflow-hidden rounded border border-[var(--color-line)] bg-[var(--color-surface-2)]" style={{ aspectRatio: "2/3" }}>
                 {t.cover ? (
                   // eslint-disable-next-line @next/next/no-img-element
-                  <img src={t.cover} alt="" className="h-full w-full object-cover" loading="lazy" />
+                  <img src={t.cover} alt="" className="h-full w-full bg-white object-cover" loading="lazy" />
                 ) : (
                   <span className="flex h-full items-center justify-center text-[9px] text-ink/40">no image</span>
                 )}

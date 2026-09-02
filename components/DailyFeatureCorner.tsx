@@ -71,7 +71,7 @@ export default function DailyFeatureCorner() {
                 src={c}
                 alt=""
                 loading="lazy"
-                className="absolute h-[86px] w-[60px] rounded-[3px] border-2 border-white object-cover shadow-[0_3px_8px_rgba(15,17,21,.28)]"
+                className="absolute h-[86px] w-[60px] rounded-[3px] border-2 border-white bg-white object-cover shadow-[0_3px_8px_rgba(15,17,21,.28)]"
                 style={{ left: i * 24, top: [6, 2, 7][i], transform: `rotate(${[-8, 1, 9][i]}deg)`, zIndex: i + 1 }}
               />
             ))}
@@ -101,7 +101,7 @@ export default function DailyFeatureCorner() {
           <div className="flex gap-1">
             {covers.slice(0, 4).map((c, i) => (
               // eslint-disable-next-line @next/next/no-img-element
-              <img key={i} src={c} alt="" loading="lazy" className="h-12 w-[34px] rounded-[2px] border border-[var(--color-line)] object-cover" />
+              <img key={i} src={c} alt="" loading="lazy" className="h-12 w-[34px] rounded-[2px] border border-[var(--color-line)] bg-white object-cover" />
             ))}
             <span className="flex h-12 w-[34px] items-center justify-center rounded-[2px] bg-[var(--color-surface-2)] text-[10px] font-extrabold text-ink/50">
               +{Math.max(0, day.n - 4)}

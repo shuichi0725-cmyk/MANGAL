@@ -117,7 +117,7 @@ export default function TokushuClient() {
                 </span>
                 {it[3] && (
                   // eslint-disable-next-line @next/next/no-img-element
-                  <img src={it[3]} alt="" loading="lazy" className="h-[116px] w-[82px] rounded border border-[var(--color-line)] object-cover" />
+                  <img src={it[3]} alt="" loading="lazy" className="h-[116px] w-[82px] rounded border border-[var(--color-line)] bg-white object-cover" />
                 )}
                 <div className="min-w-0 pt-1.5">
                   <h3 className="text-[16px] font-black leading-snug">{it[1]}</h3>
@@ -130,7 +130,7 @@ export default function TokushuClient() {
                 <span className="w-7 shrink-0 text-center text-[16px] font-black italic text-ink/35">{i + 1}</span>
                 {it[3] && (
                   // eslint-disable-next-line @next/next/no-img-element
-                  <img src={it[3]} alt="" loading="lazy" className="h-12 w-[34px] rounded-[2px] border border-[var(--color-line)] object-cover" />
+                  <img src={it[3]} alt="" loading="lazy" className="h-12 w-[34px] rounded-[2px] border border-[var(--color-line)] bg-white object-cover" />
                 )}
                 <div className="min-w-0">
                   <p className="truncate text-[13px] font-bold leading-snug">{it[1]}</p>

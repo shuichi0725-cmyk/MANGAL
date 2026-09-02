@@ -29,7 +29,8 @@ export default function CoverImage({ src, alt, sizes }: Props) {
       alt={alt}
       fill
       sizes={sizes}
-      className="object-cover"
+      // 透明PNG(楽天の .gif 由来)がダーク背景を透かして斑点に見えるのを防ぐ = 書影は必ず白地の上に置く
+      className="bg-white object-cover"
       unoptimized
       onError={() => setErrored(true)}
     />

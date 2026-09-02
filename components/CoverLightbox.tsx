@@ -63,7 +63,7 @@ export default function CoverLightbox({
           <img
             src={hi}
             alt={label ?? "書影"}
-            className="max-h-[88vh] max-w-[94vw] rounded object-contain shadow-[0_20px_60px_rgba(0,0,0,.6)]"
+            className="max-h-[88vh] max-w-[94vw] rounded bg-white object-contain shadow-[0_20px_60px_rgba(0,0,0,.6)]"
             onClick={(e) => e.stopPropagation()}
           />
           {label && <p className="mt-3 text-[13px] font-bold text-white/85">{label}</p>}
