@@ -32,8 +32,12 @@ python scripts/_weekly-step1.py        # 生成器14step順次(失敗で即exit 
 - 内容: calendar本番/preview(当月自動・引数なし事故根絶) → cover-release-refresh --days 45
   (touched非空→promote自動連鎖) → shinkan → corner-stocks → daily-feature → corner-auto →
   tameshiyomi(harvest/expand/map/LN検査) → anilist-status-map → placeholder --build-queue →
-  本番索引(最後)。~1時間(書影refresh ~40分含む)。
+  本番索引(最後)。~1時間(書影refresh ~40分含む)。★2026-09-02実測(リハーサル): 19step 計1h50m(cover-refresh 58分=1,454巻照会・57頁差替)。
 - ai-reviews 等 seed 由来はそのまま(生成不要)。
+- ★**アイドル運転⑩(placeholder-cover-refresh)が seed に足した書影は頁再生成が挟まらない**(2026-09-02リハーサルで実踏: cover-override.jsonl の
+  最終行/ISBN の URL が data/manga.v2 に無い頁 = **337頁**、うち当日追記239)。step1の cover-refresh は自分の差替分しか promote しない。
+  週次前に未反映 slug を算出→ `python scripts/_promote-bulk-v2.py --only-file <slug一覧>` で反映してからビルド(恒久策=step1にstage追加、未実装)。
+  算出法= cover-override.jsonl を ISBN で最終行勝ちに畳み、URL(?より前)が該当 slug の yml に無く ISBN は在る行 = 未反映。
 - ★**art-books昇格**(2026-07-29新設・ユーザ発見「.v2に居るのに公開されない」INTRON DEPOT型):
   ビルドが読むのは `data/art-books`(公開側)で、promoteの再生成は `data/art-books.v2`(中間物)に出る=
   **昇格コピーが無いと新規画集は永遠に出ない**。週次前に diff を確認し、検証(kana非空・yaml parse)して
@@ -65,7 +69,7 @@ python scripts/_weekly-mode.py    # exit 0=DATA / 1=SURFACE / 2=CODE (根拠フ�
 - **CODE週**(app/manga・layout・components・lib等): 従来どおり手順3〜6のフルビルド。
 - 判定の正=script(CODE_SCOPEはdiff-deployと同一定義)。迷ったらCODE週(フル)に倒す。
 
-### 3. フルビルド (★CODE週のみ。実測2.5〜3.5h、バックグラウンド+Monitor)
+### 3. フルビルド (★CODE週のみ。実測2.5〜3.5h→★2026-09-02実測42分[新PC・Defender除外・90,269ルート・初回300s超過120件は全て2回目で通過]、バックグラウンド+Monitor)
 ★**preflight全通過(exit 0)を確認してから開始**。
 ★**2026-07-17 C:完結に全面改訂(ユーザ裁定)**: ジャンクション全廃・staging=`.cache/proddata`(実体コピー)・
 out/.next=C:実体。**D:はバックアップ倉庫のみでビルド経路に入れない**(外付けD:はストールしやすく、
@@ -105,6 +109,8 @@ python scripts/_gen-sitemap.py
 ```
 python scripts/_r2-sync.py --bucket mangal-site --prune
 ```
+- ★**アップ無しのリハーサル= `--dry --prune`**(認証不要。索引/カレンダー overlay+差分計算+prune判定だけで終了。
+  2026-09-02実測: ハッシュ照合~10分、PUT 180,880 / 削除136 と出た=CODE週の全量PUT見込みが事前に分かる)。
 - ★**KV同期(_kv-redirects-sync.py)は r2-sync 成功時に自動連鎖**(2026-08-26機械化。旧=手動2コマンド
   で忘れると「pruneで頁を消したのに301が付いてこない=404の窓」)。自動連鎖が失敗すると exit 4 で
   名指しされるので単独再実行。抑止は `--no-kv`。Worker側は6h TTLで自動再読込。
@@ -168,6 +174,8 @@ python scripts/_weekly-finalize.py
   ★**-Fileのパスは引用符を引数の内側に埋め込む**(2026-07-22実害: ArgumentListは空白joinされるため
   「chiba shuichi」の空白で `-File 'C:\Users\chiba'` に分断→無音起動失敗。症状=ログ0バイト+node無し):
   `Start-Process powershell -ArgumentList '-NoProfile','-ExecutionPolicy','Bypass','-File','"C:\Users\chiba shuichi\code\MANGAL\.cache\_wkbuild.ps1"' -WindowStyle Hidden`
+- ★**ps1ラッパの先頭に `[Console]::OutputEncoding=[System.Text.Encoding]::UTF8` / `$OutputEncoding=同` / `$env:PYTHONUTF8="1"` を置く**
+  (2026-09-02実踏: 無いと python の UTF-8 出力を PS がCP932解釈→Out-File で二重変換され日本語ログが読めない。ログを読む側も `PYTHONUTF8=1`+`utf-8-sig`)。
 - **r2-syncも同様にscript file経由でデタッチ**(`.cache\_r2sync.ps1`・同じ引用符埋め込み起動)。PSの`|Out-File`パイプ直渡しは空ログ即死する
 - ★**デタッチしたpythonの生死はMSYSのpsでなく`tasklist`で判定**(2026-07-22実害: 隠しウィンドウ起動の
   プロセスをMSYSのpsが間欠的に見失い「終了」と誤検知×2回。`tasklist //FI "IMAGENAME eq python.exe"`
