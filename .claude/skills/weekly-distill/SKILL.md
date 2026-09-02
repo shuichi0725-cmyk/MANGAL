@@ -54,6 +54,8 @@ python scripts/_weekly-preflight.py --fix     # FAILが1つでもあればビル
 ### 2.5 ★モード判定 (= ハイブリッド週次 2026-08-27 ユーザ裁定。R2費用と3hビルドの節約)
 ```
 python scripts/_weekly-mode.py    # exit 0=DATA / 1=SURFACE / 2=CODE (根拠ファイルと次コマンドを表示)
+# ★2026-09-02: /shinkan 月別頁のHTMLが本番R2(manifest)に無い月(= step1 が当月+3 の窓を進めて生んだ新月)が在れば
+#   コード変更が無くても SURFACE週に格上げする(データ週はJSON面だけPUTで頁が建たず、サイトマップだけに載って404になる穴)。
 ```
 - **DATA週**(コード変更なし): 手順3〜6の代わりに**差分ルート**(数分・数千ops):
   `_deploy-differential.py --weekly-json`(変更頁の部分ビルド+索引+calendar/shinkan/data/idxのJSON面PUT+prune+purge)
