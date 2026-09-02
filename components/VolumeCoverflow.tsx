@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import CoverImage from "./CoverImage";
 import CoverLightbox from "./CoverLightbox";
 import { amazonDpUrlFromIsbn13, amazonSearchUrl } from "@/lib/amazon";
+import { isEbookCover } from "@/lib/coverSlim";
 import type { Volume } from "@/lib/schema";
 
 /**
@@ -320,6 +321,15 @@ export default function VolumeCoverflow({
               </div>
             )}
           </dl>
+          {/* ★電子書籍版の書影を借りている巻の注意書き(2026-09-03 ユーザ裁定)。
+              紙の書影がどこにも公開されていない旧作(ハードボイルド・ダディ等)は、
+              楽天Koboの電子版書影で埋めている。復刻レーベルが独自装丁を付けている
+              ことがあるので、黙って出さずにここで断る。 */}
+          {isEbookCover(cur.cover_url) && (
+            <p className="mt-2 text-[10.5px] leading-snug text-ink/45">
+              ※この書影は電子書籍版のものです。紙の書籍とは装丁が異なる場合があります。
+            </p>
+          )}
         </div>
       </div>
 
