@@ -15,6 +15,11 @@ usage:
   python _distill-incremental-merge.py <temp_db> [--apply]
 """
 import sys, os, sqlite3, shutil, json, importlib.util
+for _s in (sys.stdout, sys.stderr):
+    try:
+        _s.reconfigure(encoding="utf-8")  # cp932 コンソールで日本語/記号 print が落ちない
+    except Exception:
+        pass
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # 旧PCパス→動的導出(2026-07-21一括是正)
 APPLY = "--apply" in sys.argv
@@ -24,10 +29,25 @@ import datetime as _dt
 AT = _dt.date.today().isoformat()
 _relf = f"{ROOT}/.cache/madb-last-release.txt"
 _rel = (open(_relf, encoding="utf-8").read().strip() if os.path.exists(_relf) else "unknown").replace("/", "-")
-args = [a for a in sys.argv[1:] if not a.startswith("--")]
-TEMP_DB = args[0] if args else f"{ROOT}/.cache/db-v2-1217-temp.sqlite"
+# ★--tag <取込先release> (2026-09-02): manifest の名前と中身の tag を取込先にする。無指定だと
+#   last-release(=1つ前の tag)の名になり、頁化(_torikoboshi-genpages)が別月の manifest を
+#   掴む罠(1.2.19 実踏: manifest名が 1.2.18 だった)。_monthly-distill.py は必ず付けて呼ぶ。
+_argv = sys.argv[1:]
+TAG = None
+if "--tag" in _argv:
+    _i = _argv.index("--tag")
+    if _i + 1 < len(_argv):
+        TAG = _argv[_i + 1].strip()
+        del _argv[_i:_i + 2]
+if not TAG:
+    print(f"! --tag 無指定: manifest名は前回release({_rel})の名になる(次回は --tag <取込先tag> を付ける)")
+    TAG = _rel
+args = [a for a in _argv if not a.startswith("--")]
+if not args:
+    print("✗ temp db を第1引数で指定する(例 .cache/madb-distill/db-v2-1.2.20-temp.sqlite)。旧既定(db-v2-1217-temp)は廃止"); sys.exit(2)
+TEMP_DB = args[0]
 REAL_DB = f"{ROOT}/.cache/db-v2.sqlite"
-MANIFEST = f"{ROOT}/.cache/madb-distill/merge-manifest-{_rel}-{AT}.json"
+MANIFEST = f"{ROOT}/.cache/madb-distill/merge-manifest-{TAG}-{AT}.json"
 # 同名manifestが既に在れば連番退避(同日・同release再実行でも前回分を消さない)
 if APPLY and os.path.exists(MANIFEST):
     for _i in range(1, 99):
@@ -179,7 +199,7 @@ def main():
     if APPLY:
         real.commit()
         json.dump({"new_series_ids": new_series_ids, "appended_vol_ids": appended_vol_ids,
-                   "at": AT, "tag": "1.2.18", "stats": st},
+                   "at": AT, "tag": TAG, "prev_tag": _rel, "temp_db": TEMP_DB, "stats": st},
                   open(MANIFEST, "w", encoding="utf-8"), ensure_ascii=False)
         print(f"\n適用commit済 / manifest: {MANIFEST}")
     else:

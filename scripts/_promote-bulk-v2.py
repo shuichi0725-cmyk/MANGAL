@@ -18,6 +18,7 @@ filter (= step A/B、 「本編以外は極力表示しない」):
 
 import datetime
 import json
+import os
 import re
 import sqlite3
 import sys
@@ -4186,3 +4187,9 @@ def main():
 
 if __name__ == "__main__":
     main()
+    # ★Windows: 1.9GB級 heap の解放でプロセスが完了後も数分〜居座る(見かけ上ハング=[[promote_hangs_on_exit_windows]])。
+    #   出力は全部 with で閉じ済み・スレッド/atexit 無し → flush して即終了(intake.py 経由の終了待ちも消える)。
+    #   main() 内の sys.exit(2) 等は SystemExit がここより先に伝播するので終了コードは保たれる。
+    sys.stdout.flush()
+    sys.stderr.flush()
+    os._exit(0)

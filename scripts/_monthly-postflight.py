@@ -94,6 +94,28 @@ def main() -> None:
     else:
         ok(f"publisher (unknown) = {unk} (基準 {bu})")
 
+    # 5b. マーカー整合 (phase2 が両方書く。食い違い=途中失敗の痕跡)
+    import re as _re
+    mk_p = os.path.join(ROOT, ".cache", "madb-last-release.txt")
+    st_p = os.path.join(ROOT, "data", "madb-intake-state.yml")
+    mk = open(mk_p, encoding="utf-8").read().strip() if os.path.exists(mk_p) else None
+    _m = _re.search(r'^\s*release_tag:\s*"?([0-9][0-9.]*)"?', io.open(st_p, encoding="utf-8").read(), _re.M) if os.path.exists(st_p) else None
+    st = _m.group(1) if _m else None
+    if mk and st and mk == st:
+        ok(f"取込マーカー整合 {mk} (.cache = data/madb-intake-state.yml)")
+    else:
+        fail(f"取込マーカー不一致 .cache={mk} / intake-state.yml={st}", "phase2 が途中で止まった? 台帳 data/madb-distill-ledger.jsonl で正を確認")
+
+    # 5c. 源なし manga.v2 頁 (情報のみ。promote は元頁駆動=源が無い頁は次のフルpromoteで黙って消える
+    #     [[orphan_source_pages_restored]]。2026-09-02 時点の既知 2 件から増えたら頁化フローの源永続化漏れ)
+    _v2 = {os.path.basename(p)[:-4] for p in glob.glob(os.path.join(ROOT, "data", "manga.v2", "*.yml"))}
+    _src = set()
+    for _d in ("data/manga", "data/seeds/source-pages", "data/seeds/preorder-pages"):
+        _src |= {os.path.basename(p)[:-4] for p in glob.glob(os.path.join(ROOT, _d, "*.yml"))}
+    _orph = sorted(_v2 - _src)
+    print(f"  INFO 源なし manga.v2 頁 = {len(_orph)} (既知2: shikakenin-fujieda-baian-saitou / tales-of-the-abyss-rei。増加=源永続化漏れ)"
+          + (f": {', '.join(_orph[:8])}" if _orph else ""))
+
     # 6. solo-truncated (頁化した月のみブロッキング)
     r = subprocess.run([PY, "scripts/_audit-solo-truncated.py"], capture_output=True, text=True, encoding="utf-8")
     tsv = os.path.join(ROOT, "docs", "production-diagnostics", "solo-truncated.tsv")

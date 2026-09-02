@@ -17,7 +17,8 @@ promote は元頁駆動([[orphan_series_promote_is_srcpage_driven]])なので、
 usage:
   python scripts/_torikoboshi-genpages.py --list                 # 対象と可否だけ出す
   python scripts/_torikoboshi-genpages.py --run [--limit N]      # 源頁を書く(NDL照会あり)
-  対象の既定 = 1.2.18 の新規series(=今月の新刊)。 --keys-file で任意のseries_keyリストも可。
+  対象の既定 = **最新の merge-manifest**(mtime)の新規series(=今月の新刊)。 --manifest <path> で指定可、
+  --keys-file で任意のseries_keyリストも可。(旧=1.2.18固定で翌月以降は前月分を掴む罠 → 2026-09-02 是正)
 """
 import argparse
 import collections
@@ -43,7 +44,13 @@ DB = ROOT / ".cache" / "db-v2.sqlite"
 #   そこに書くと git clean/別PCで消える(2026-07-25)。 promote は両方をスキャンする。
 SRC = ROOT / "data" / "seeds" / "source-pages"
 SRC_LEGACY = ROOT / "data" / "manga"
-MANIFEST = ROOT / ".cache" / "madb-distill" / "merge-manifest-1.2.18.json"
+MANIFEST_DIR = ROOT / ".cache" / "madb-distill"
+
+
+def _latest_manifest():
+    """既定 = 最新 mtime の merge-manifest(2026-09-02。旧=1.2.18固定)。"""
+    c = sorted(MANIFEST_DIR.glob("merge-manifest-*.json"), key=lambda p: p.stat().st_mtime)
+    return c[-1] if c else None
 LIVE_ISBN = ROOT / ".cache" / "isbn-page-index.json"
 HARVEST = ROOT / ".cache" / "torikoboshi" / "harvest.jsonl"
 IDX = ROOT / "data" / "manga-list-index.json"
@@ -158,6 +165,7 @@ def main():
     ap.add_argument("--run", action="store_true")
     ap.add_argument("--limit", type=int, default=0)
     ap.add_argument("--keys-file", default=None)
+    ap.add_argument("--manifest", default=None, help="merge-manifest json(既定=最新mtime)")
     a = ap.parse_args()
 
     con = sqlite3.connect(DB)
@@ -166,7 +174,13 @@ def main():
         want = {l.strip() for l in open(a.keys_file, encoding="utf-8") if l.strip()}
         sids = [r[0] for r in con.execute("SELECT id, series_key FROM series") if r[1] in want]
     else:
-        sids = json.loads(MANIFEST.read_text(encoding="utf-8"))["new_series_ids"]
+        _mp = Path(a.manifest) if a.manifest else _latest_manifest()
+        if not _mp or not _mp.exists():
+            print("✗ merge-manifest が無い(--manifest か --keys-file を指定)"); sys.exit(2)
+        _mj = json.loads(_mp.read_text(encoding="utf-8"))
+        print(f"manifest: {_mp.name} (tag={_mj.get('tag')} at={_mj.get('at')}) "
+              f"new_series_ids={len(_mj.get('new_series_ids') or [])}  ★取込先tagと一致するか確認")
+        sids = _mj["new_series_ids"]
     sids = set(sids)
 
     meta = {i: (k, t) for i, k, t in con.execute("SELECT id, series_key, title FROM series") if i in sids}

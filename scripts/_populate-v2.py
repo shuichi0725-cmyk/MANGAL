@@ -17,6 +17,11 @@ from collections import defaultdict, Counter
 from pathlib import Path
 
 import os as _os
+for _s in (sys.stdout, sys.stderr):
+    try:
+        _s.reconfigure(encoding="utf-8")  # cp932 コンソールで日本語/記号 print が落ちない
+    except Exception:
+        pass
 ROOT = Path(__file__).resolve().parent.parent
 # ★path override (月次蒸留の temp build 用、 既定は従来通り = 後方互換)
 DB = Path(_os.environ.get("MADB_DB", str(ROOT / ".cache" / "db-v2.sqlite")))
@@ -294,6 +299,14 @@ def extract_volume_number(label: str, vol_field: str) -> tuple[int | None, str |
 
 
 def main():
+    # ★正規 db-v2 への誤爆ガード (2026-09-02): この script は series/editions/volumes を DELETE して
+    #   全再投入する(= cover_url / release_date override / enrichment を失う)。月次蒸留は
+    #   MADB_DB=<temp copy> で回す設計(_monthly-distill.py)。正規DBには明示フラグ無しで触らない。
+    if DB.resolve() == (ROOT / ".cache" / "db-v2.sqlite").resolve() and "--wipe-real-db" not in sys.argv:
+        print("ABORT: 正規 .cache/db-v2.sqlite を全再投入しようとしている(series/volumes を DELETE→再INSERT、"
+              "cover/enrichment 喪失)。月次蒸留は MADB_DB=<temp copy> を使う。本当に全再構築するなら --wipe-real-db",
+              file=sys.stderr)
+        sys.exit(2)
     print(f"loading {SERIES_V2} ...", file=sys.stderr)
     with SERIES_V2.open("r", encoding="utf-8") as f:
         v2 = json.load(f)
