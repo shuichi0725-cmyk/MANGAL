@@ -9415,3 +9415,42 @@ additions:
   - slug: reboot
     add: [soccer, sports]
     source: "manual:enrich-web-9424 (サッカー漫画=作品紹介で確認。既存のsci-fi/actionはAI推定の誤りの疑い)"
+  - slug: seishun-hakusho
+    add: [sports]
+    source: "manual:enrich-web-9453 (アイスホッケー→フィギュアスケート(fukkan/note 作品紹介))"
+  - slug: buruu-piitaa
+    add: [romance, slice-of-life]
+    source: "manual:enrich-web-9453 (学生寮の恋愛青春群像(Wikipedia)。既存 fantasy はAI推定の誤りの疑い)"
+  - slug: shiritsu-otokojuku
+    add: [historical, samurai]
+    source: "manual:enrich-web-9453 (幕末・鍋島藩の進学塾(Wikipedia))"
+  - slug: retsutsu-goo-nana
+    add: [romcom, supernatural]
+    source: "manual:enrich-web-9453 (落雷で怪力になった少女と婚約者のラブコメ(cmoa/ピッコマ 作品紹介))"
+  - slug: kita-kaikisen
+    add: [romance]
+    source: "manual:enrich-web-9453 (国際線CAの恋愛レディコミ(bookwalker 作品紹介・日経インタビュー)。既存 historical はAI推定の誤りの疑い)"
+  - slug: oh-takarazuka
+    add: [comedy, school, ecchi]
+    source: "manual:enrich-web-9453 (女子高赴任の男性教師お色気コメディ(moviewalker/Wikipedia)。既存 music はAI推定の誤りの疑い=宝塚歌劇とは無関係)"
+  - slug: sugar-baby
+    add: [fantasy, comedy]
+    source: "manual:enrich-web-9453 (お菓子から生まれた少女と天使のメルヘン・ギャグ(花とゆめコミックス 作品かいせつ)。既存 ecchi はAI推定の誤りの疑い)"
+  - slug: nonki-kun
+    add: [gag]
+    source: "manual:enrich-web-9453 (学年誌・コロコロのギャグ漫画(Wikipedia))"
+  - slug: tensai-donbe
+    add: [school]
+    source: "manual:enrich-web-9453 (エリート小学校が舞台のドタバタ学園コメディ(小学館 作品紹介))"
+  - slug: yayoi
+    add: [comedy, action]
+    source: "manual:enrich-web-9453 (涙と笑いのバイオレンスコメディ(出版社内容情報))"
+  - slug: 4spirits
+    add: [school, music, drama]
+    source: "manual:enrich-web-9453 (四天王高校のバンド青春群像(少年キング連載)。既存 fantasy/supernatural はAI推定の誤りの疑い)"
+  - slug: katte-ni-alive
+    add: [school]
+    source: "manual:enrich-web-9453 (高校が舞台のバイク学園コメディ(少年コミック大全)。既存 supernatural はAI推定の誤りの疑い)"
+  - slug: nagasaremono
+    add: [historical, samurai]
+    source: "manual:enrich-web-9453 (幕末の八丈島が舞台の劇画(Wikipedia))"
