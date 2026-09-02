@@ -27,3 +27,10 @@ metadata:
 - 残レバー: 外部被リンク(ユーザ側)/Search Consoleでの /shinkan 系URL登録リクエスト。
 
 関連: [[seo_index_coverage_state]] [[seo_title_suffix_decision]] [[browse_ssr_shell_and_seo]]
+
+## ★静的化完了(2026-09-01 午後・ユーザ裁定「静的ページのみで問題ない」→commit 7a2f85dad/f6fc99556/26918912b)
+- ShinkanClient(client fetch描画)は**退役**。/shinkan=当月分をbuild時に焼く(可視492字→46,185字)。共通server部品 `components/ShinkanMonthView.tsx`(=/shinkan・/shinkan/[ym]・/next-month が共有)。
+- 旧UXは client 小部品で維持: `ShinkanDayHeader`(sticky日付+日送り+fastScrollTo)/`ShinkanShare`/`ShinkanPageEffects`(?m=→月別頁へ置換遷移・?go=today今日ジャンプ=ホーム「全部見る」互換)/`ShinkanLive`(鮮度保険=JSON署名 `monthSignature` 比較で差し替え。差し替え時の「詳細」はbuild時既知slugのみ=404を撒かない)/`ShinkanStaleNotice`(月跨ぎ案内)。
+- **canonical規則**: 常設URLが正(当月頁→/shinkan、翌月頁→/shinkan/next-month、過去月=自己)。JSON-LDは author を出さない(著者欄が「・」連結の表示文字列で分割不能)・urlは索引内slugのみ。robots: `Disallow: /shinkan/*.json$`。
+- レビュー(ワークフロー): 1回目はSEOレンズのみ完走(残りはセッション上限で失敗)、2回目は2レンズ完走で**ユーザの使用量懸念により停止**→残りは手元確認。★教訓: サブエージェント多発は上限を食う(1回目709k tok)。以後この規模の変更はレンズ1〜2本+反証1体で足りる。
+- 検証: dry-run(_deploy-feature.py --dry)3回とも build OK。★本番公開は「機能蒸留して」待ち(sitemapは週次)。
