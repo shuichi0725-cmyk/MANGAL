@@ -69,7 +69,7 @@ export function monthCount(d: ShinkanMonth): number {
   return Object.values(d.days).reduce((s, v) => s + v.length, 0) + (d.unknown?.length ?? 0);
 }
 
-/** 月データの署名(冊数+slug/巻/ISBN/日のハッシュ)。build 時のHTMLと閲覧時のJSONの差分検知に使う。 */
+/** 月データの署名(冊数+日/slug/巻/題/書影/ISBN/著者のハッシュ)。build 時のHTMLと閲覧時のJSONの差分検知に使う。 */
 export function monthSignature(d: ShinkanMonth): string {
   let h = 5381;
   let n = 0;
@@ -79,12 +79,12 @@ export function monthSignature(d: ShinkanMonth): string {
   for (const day of sortedDays(d)) {
     for (const it of d.days[day]) {
       n++;
-      feed(`${Number(day)}|${it[0]}|${it[1] ?? ""}|${it[4] ?? ""}`);
+      feed(`${Number(day)}|${it[0]}|${it[1] ?? ""}|${it[2]}|${it[3] ?? ""}|${it[4] ?? ""}|${it[5]}`);
     }
   }
   for (const it of d.unknown ?? []) {
     n++;
-    feed(`u|${it[0]}|${it[1] ?? ""}|${it[4] ?? ""}`);
+    feed(`u|${it[0]}|${it[1] ?? ""}|${it[2]}|${it[3] ?? ""}|${it[4] ?? ""}|${it[5]}`);
   }
   return `${n}:${h.toString(16)}`;
 }

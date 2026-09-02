@@ -4,7 +4,7 @@ import { DesignNav } from "@/lib/homeDesign";
 import ShinkanAbout from "@/components/ShinkanAbout";
 import ShinkanMonthNav from "@/components/ShinkanMonthNav";
 import ShinkanWeekList from "@/components/ShinkanWeekList";
-import { dateLabel, itemsInRange, knownSlugs, listShinkanMonths, shinkanJsonLd, weekRange } from "@/lib/shinkanData";
+import { dateLabel, itemsInRange, jstYm, knownSlugs, listShinkanMonths, shinkanJsonLd, weekRange } from "@/lib/shinkanData";
 
 /** 今週の新刊発売日(固定URL・2026-09-01 SEO)。build 時の今週(月〜日・JST)を静的に焼き、
  *  閲覧時に週が進んでいれば client が JSON から差し替える(ShinkanWeekList)。 */
@@ -35,7 +35,7 @@ export default function ShinkanThisWeekPage() {
             今週({dateLabel(start)}〜{dateLabel(end)})に発売される新刊を日ごとに全冊。毎週更新。
           </p>
           <nav className="mt-2 flex flex-wrap gap-x-4 gap-y-1 text-[12px] font-bold" aria-label="関連ページ">
-            <Link href={`/shinkan/${start.slice(0, 7)}`} className="underline">今月の新刊一覧</Link>
+            <Link href={`/shinkan/${jstYm(0)}`} className="underline">今月の新刊一覧</Link>
             <Link href="/shinkan/next-month" className="underline">来月の新刊</Link>
           </nav>
         </header>
