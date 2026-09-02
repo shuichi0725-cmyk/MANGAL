@@ -107,23 +107,34 @@ def fetch_live(isbn):
 
 def emit_targets(targets, live_budget, mark_nocaption):
     """targets=[(slug, vol_no, isbn, date)] → worksheet追記+no-hit/judged記帳"""
+    from _lookup import Throttled
     done = load_ledger()
     targets = [t for t in targets if t[2] not in done]
     if not targets:
         print("対象0(全て判定済み)"); return 0
     caps = caption_sources({t[2] for t in targets})
     ws_rows, live_used = [], 0
+    throttled = False
     for slug, vol, isbn, date in targets:
         cap = caps.get(isbn)
+        queried = cap is not None          # ローカルcaption源に在った=判定材料あり
         if cap is None and live_budget and live_used < live_budget:
             try:
                 cap = fetch_live(isbn); live_used += 1
-            except SystemExit:
-                print("★楽天429→中断(進捗は保存済)"); break
-            except Exception:
-                cap = None
+                queried = True             # live照会が成立(200でcaption無しも含む)
+            except Throttled:
+                # ★連続429=実スロットル→即中断(2026-09-02 BookLive事故の教訓を全柱へ):
+                #   旧は汎用exceptに落ちて「nocaption」を永久記帳し、次のISBNも叩き続けていた
+                print("★楽天429が連続(実スロットル)→中断(記帳済み分は保存済・次の手すきで再開)")
+                throttled = True
+                break
+            except Exception as e:
+                # ★失敗を「caption無し」に変換しない: 記帳せずskip=次回再照会
+                print(f"  ✗ live失敗 {isbn} {str(e)[:60]} (記帳せずskip)")
+                continue
         if not cap:
-            if mark_nocaption:
+            # ★live予算切れで照会していないISBNは記帳しない(旧: 上限超過分が未照会のまま「nocaption」固定)
+            if mark_nocaption and queried:
                 mark(isbn, "nocaption")
             continue
         if not KEYW.search(cap):
@@ -138,6 +149,8 @@ def emit_targets(targets, live_budget, mark_nocaption):
     print(f"worksheet追記 {len(ws_rows)} / no-hit記帳 {len(targets)-len(ws_rows)}件相当 / live照会 {live_used}")
     if ws_rows:
         print(f"→ Sonnet: {WS} のTODOを記入(明示文言のみtrue・quote必須) → --collect")
+    if throttled:
+        raise SystemExit(2)   # 実スロットル=次の手すきで同コマンド再開(worksheetは書き出し済)
     return len(ws_rows)
 
 

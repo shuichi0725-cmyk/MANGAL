@@ -293,8 +293,15 @@ def main():
                                 break
                         miss = 0 if hit else miss + 1
                         v += 1
+            except L.Throttled:
+                # ★連続429=実スロットル→即中断(exit 2)。旧は汎用exceptで握って次のslugも叩き続けた(2026-09-02)
+                print("★楽天429が連続(実スロットル)→中断(記録済み分は保存済・次の手すきで再開)", flush=True)
+                sys.exit(2)
             except Exception as e:
-                print(f"    ✗ {r['slug']} {str(e)[:60]}", flush=True)
+                # ★失敗を「続巻なし」に変換しない(BookLive事故の教訓): 結果行を書かずskip=次バッチで再照会
+                #   (旧: 空のtrail/gapで記録され、月次--build-queueまで「既済・異常なし」に固定されていた)
+                print(f"    ✗ {r['slug']} {str(e)[:60]} (記録せずskip)", flush=True)
+                continue
             if trail:
                 ntr += 1
             if gap:

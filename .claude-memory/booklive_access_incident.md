@@ -62,3 +62,21 @@ ln-audit(★8並列・札無視・**週次step1に自動配線**)/adjudicate(6�
 
 規約の正本 = skill [[tameshiyomi_harvest]] の「BookLiveアクセス規約」節(適用範囲=6script表も同節)。
 関連: [[ndl_access_rate_method]] [[rakuten_long_job_needs_retry]] [[feedback_efficiency_first]]
+
+## 2026-09-02 非BookLive柱への全適用 (ユーザ「BookLive以外も見直して」→「お願い」)
+
+サブエージェント無し・grepと部分読みだけで全柱を検査(前回はサブエージェントで大量消費した反省)。
+BookLive経由6本は **AST検査**(ヘルパ関数経由も推移的に追跡)で「Blocked/CapReached を汎用exceptで握る箇所ゼロ」を確認、
+生urlopenゼロ・並列ゼロ・入口の `assert_not_blocked` 全本あり。
+
+非BookLive側で同じ型が5箇所残っていて是正(詳細= skill idle-run「失敗→否定記録の禁止」節):
+- ④完結判定 `_completion-judge.py`: 失敗(連続429含む)→`nocaption`永久記帳+止まらない+live予算超過分も記帳
+- ⑨続巻逆照合 `_check-recent-ongoing-volumes.py`: 例外でも結果行を書き「既済・続巻なし」に固定
+- `_lookup.ndl_live`+③ `_verify-kana-pending.py`: **NDLのHTTP 429が汎用exceptで`[]`=「不在」に化け**、規制中も叩き続けた
+- ⑤fish-residue: TinyFish quota切れ(SystemExit)を握ってドメイン`blocked`永久固定(既存379件を`error:2`へ降格・失敗3回制)
+- ⑧kana-digit: wiki瞬断でslugをdone確定
+- 旧 `_idle-tameshiyomi-loop.sh`(`while :`+札無し+日次上限exit0で空回り)は本体撤去=即exit 1
+
+**残り(設計判断・未変更)**: `_booklive.request` は 404 以外の全応答を Blocked にする fail-closed。
+timeout 1回でも停止札が置かれユーザ介入まで柱が凍るが、事故後の意図的な設計なので据置。
+もし規制が **HTTP 200のソフトブロック頁**で返る型に変わったらゲートは見抜けない(本文マーカー検査が要る)=要観察。

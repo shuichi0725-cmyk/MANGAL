@@ -382,10 +382,12 @@ def cmd_fish_residue(a):
         if pick:
             try:
                 fr = tf_fetch(pick)
-            except SystemExit as e:
-                fr = {"results": [], "errors": [{"url": u, "error": str(e)[:80]} for u in pick]}
+            except SystemExit:
+                # ★TinyFishのquota切れ/HTTPエラーは中断(searchと同じ)。旧は握り潰して対象ドメインを
+                #   「blocked」永久記帳+slugを素材空で完了扱いにしていた(BookLive事故と同型 2026-09-02)
+                raise
             except Exception as e:
-                fr = {"results": [], "errors": [{"url": u, "error": str(e)[:80]} for u in pick]}
+                print(f"★fetch失敗({str(e)[:60]}) = 中断(記帳せず・次回再試行)"); return
             for ok in (fr or {}).get("results") or []:
                 dom = urllib.parse.urlparse(ok.get("url", "")).netloc
                 body = (ok.get("text") or ok.get("markdown") or "")[:4000]
@@ -395,7 +397,12 @@ def cmd_fish_residue(a):
                     texts.append({"url": ok.get("url"), "text": body})
             for er in (fr or {}).get("errors") or []:
                 dom = urllib.parse.urlparse(er.get("url", "")).netloc
-                ledger.setdefault(dom, "blocked")
+                # ★1回の失敗で「blocked」永久固定しない: 失敗3回でblocked(一度okのサイトは落とさない)
+                cur = ledger.get(dom)
+                if not dom or cur == "ok":
+                    continue
+                n = int(cur.split(":")[1]) + 1 if isinstance(cur, str) and cur.startswith("error:") else 1
+                ledger[dom] = "blocked" if n >= 3 else f"error:{n}"
         _jsonl_append(out, [{"slug": r["slug"], "title": r["title"], "query": qy,
                              "snippets": [{"url": x.get("url"), "snippet": x.get("snippet")} for x in results[:5]],
                              "pages": texts, "at": time.strftime("%Y-%m-%d")}])

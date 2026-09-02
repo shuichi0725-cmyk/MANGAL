@@ -10,7 +10,7 @@ data/seeds/rakuten-kana-pending.jsonl の status=pending を古い順に NDL SRU
 使い方: python scripts/_verify-kana-pending.py [--limit 200]
 レート: 1.2s/req・429即中断。
 """
-import json, os, re, sys, time, html, unicodedata, urllib.request, urllib.parse, datetime
+import json, os, re, sys, time, html, unicodedata, urllib.request, urllib.parse, urllib.error, datetime
 sys.stdout.reconfigure(encoding="utf-8")
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -33,9 +33,16 @@ def ndl_title_kana(isbn):
     req = urllib.request.Request("https://ndlsearch.ndl.go.jp/api/sru?" + urllib.parse.urlencode(p))
     req.add_header("User-Agent", "Mozilla/5.0")
     _rate_gate.wait("ndl", 1.3)  # ★NDLグローバル間隔(_lookup.ndl_live等と共有=並走合算429を防ぐ)
-    xml = html.unescape(urllib.request.urlopen(req, timeout=30).read().decode("utf-8"))
+    try:
+        xml = html.unescape(urllib.request.urlopen(req, timeout=30).read().decode("utf-8"))
+    except urllib.error.HTTPError as e:
+        # ★HTTP 429=実スロットルは即中断(2026-09-02): 旧は呼び側の汎用exceptで握られ
+        #   pending継続のまま規制中に残り全件を叩き続けていた(NDLはIP遮断の実績あり)
+        if e.code == 429:
+            print("★NDL429→中断(このバッチの確定分は書き戻す・1時間単位で休ませる)"); sys.exit(2)
+        raise
     if "Too Many Requests" in xml:
-        print("★429→中断(進捗は保存済)"); sys.exit(2)
+        print("★NDL429(本文)→中断"); sys.exit(2)
     m = re.search(r"<dc:title>.*?<dcndl:transcription>([^<]+)</dcndl:transcription>", xml, re.S)
     return m.group(1).strip() if m else None
 
@@ -47,13 +54,15 @@ targets = pending_idx[:LIMIT]
 print(f"キュー総数 {len(lines)} / pending {len(pending_idx)} / 今回照合 {len(targets)}")
 
 confirmed = mismatched = still = 0
+aborted = False
 mm_rows = []
 for i in targets:
     r = lines[i]
     try:
         ndl = ndl_title_kana(r["isbn"])
     except SystemExit:
-        raise
+        aborted = True   # ★429中断でもこのバッチの確定/不一致は捨てない(下で書き戻してから exit 2)
+        break
     except Exception:
         ndl = None
     # NDL間隔は ndl_title_kana内の _rate_gate が担保(ここでの追加sleepは二重=削除)
@@ -95,3 +104,5 @@ if mm_rows:
         for row in mm_rows:
             f.write("\t".join(str(x) for x in row) + "\n")
 print(f"確定 {confirmed} / 不一致 {mismatched}(→kana-mismatch.tsv) / NDL未収載 {still}(pending継続)")
+if aborted:
+    sys.exit(2)

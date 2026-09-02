@@ -116,3 +116,4 @@
 - [部分ビルド合流の復旧型](partial_rebuild_merge_recovery.md)
 - [【戒め】script警告は検算してから報告](feedback_sanity_check_tool_warnings.md)
 - [SEO title方針=サフィックス「漫画・コミックのMANGAL」](seo_title_suffix_decision.md) — GO済
+- [Bashツールheredoc+シングルクォート罠](bash_tool_heredoc_quote_pitfall.md) — 複数行scriptはWriteでscratchpadに書いて実行・repoの.pyはCRLF/LF混在

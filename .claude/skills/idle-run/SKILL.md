@@ -13,12 +13,12 @@ description: アイドル運転して=手すき時間の常設柱(試し読みex
 bash scripts/_idle-tameshiyomi-expand-loop.sh   # ①試し読みexpand消化(★2026-08-29改訂=有限。停止札があれば起動拒否)
 # ②Geminiジャンル検品=退役(2026-07-20)。不一致の76%が幻覚テンプレ→常設から外す。下記「退役」参照
 python scripts/_verify-kana-pending.py --limit 300   # ③ヨミ照合(★1パスのみ=ループ禁止、下記)
-python scripts/_completion-judge.py --backlog --limit 300   # ④完結判定backlog(→worksheet記入→--collect→commit、詳細=skill completion-judge)
+python scripts/_completion-judge.py --backlog --limit 300   # ④完結判定backlog(→worksheet記入→--collect→commit、詳細=skill completion-judge。★2026-09-02: 連続429=exit 2/瞬断=記帳せずskip/live上限(--live 100)超過分は未照会=記帳しない)
 python scripts/_material-harvest.py wiki-fetch --limit 500  # ⑤素材ハーベスト(在庫切れ後は fish-residue --limit 50、詳細=skill material-harvest)
 python scripts/_anilist-delta.py   # ⑥AniList鮮度維持(直近更新~5,000件回収・~5分で自然停止・★セッション1回のみ)
 python scripts/_voldesc-material.py --recheck-nomaterial 300   # ⑦巻説明・材料なし台帳のlive再照会救済(偽陰性~10%回収・冪等・逐次保存・429はbackoff吸収。詳細=skill volume-desc)
 python scripts/_kana-digit-harvest.py --limit 30   # ⑧数字kana素材(フリガナに数字が残る~528頁のwiki+楽天live読み収集)
-python scripts/_check-recent-ongoing-volumes.py --limit 200   # ⑨続巻逆照合(連載中頁→楽天題検索。★2026-08-05巻抜け教訓4点移植済=剥き題/truncatedプローブ/帯救済/near記録。★2026-08-29「原作者名義のみ=原作小説」ゲート追加=帯救済の穴を封鎖)
+python scripts/_check-recent-ongoing-volumes.py --limit 200   # ⑨続巻逆照合(連載中頁→楽天題検索。★2026-08-05巻抜け教訓4点移植済=剥き題/truncatedプローブ/帯救済/near記録。★2026-08-29「原作者名義のみ=原作小説」ゲート追加=帯救済の穴を封鎖。★2026-09-02: 例外時は結果行を書かない(旧=空trailで「既済」固定)/連続429=exit 2)
 python scripts/_placeholder-cover-refresh.py --all   # ⑩仮書影→実物の差し替え(★--all=queueが尽きるまで自走・再起動不要 2026-08-04。詳細=skill placeholder-cover-refresh)
 python scripts/_kobo-color-harvest.py --delta   # ⑪カラー版差分(Kobo新着だけ追記・数分で自然停止・詳細=skill color-editions)
 ```
@@ -67,6 +67,16 @@ python scripts/_kobo-color-harvest.py --delta   # ⑪カラー版差分(Kobo新�
   終了後 `git add data/seeds/rakuten-kana-pending.jsonl docs/production-diagnostics/kana-mismatch.tsv && commit && push`。
 - ①③はBookLive/NDL、②はGoogle=**ホストが別なので並走が基本形**。ただし①と③は両方gitにcommitするので
   ③の終了commitは①のバッチcommitと重ならないタイミングで(pushが弾かれたら pull --rebase して再push)。
+
+## ★失敗→否定記録の禁止 (= 2026-09-02 BookLive事故の教訓を非BookLive柱にも全適用。ユーザ「BookLive以外も見直して」)
+- 外部照会の**失敗(瞬断/5xx/timeout/連続429)を「無い」に変換して台帳に書かない**。書いてよい否定は**200で空**(楽天Items空・wiki missing・NDL 0件)だけ。
+- 連続429(`_lookup.Throttled`)= **即 exit 2**(次の手すきで同コマンド再開)。瞬断= **記帳せずskip**(次回再照会)。
+- 2026-09-02 是正5点: ④(`nocaption`永久記帳+429で止まらず+live予算超過分の未照会記帳) / ⑨(例外でも「続巻なし」行を記録=月次build-queueまで固定) /
+  ⑧(wiki瞬断でdone確定=build-queueでもdoneは残る) / ⑤fish-residue(TinyFish quota切れでドメイン`blocked`永久固定→失敗3回制・既存379件は`error:2`に降格) /
+  ③+`_lookup.ndl_live`(NDLの**HTTP 429が汎用exceptで`[]`=「不在」に化け**、`ndl_live_retry`のbackoffも効かず規制中も叩き続けた→429は即中断。③は中断時もバッチ確定分を書き戻す)。
+- 問題なしと確認した柱: ⑥⑦⑩⑪(⑦⑩は「瞬断=台帳に残す/次周回で引き直す」の正しい型)。並列ゼロ・rate_gate直列化・無限ループなしは全柱で確認。
+- ★検査法(次に柱を足す時も同じ): `except Exception` の直後に**台帳書込/done追加/結果行書出**が続くか、と `Throttled` を個別に受けているか、の2点。目grepでなくスクリプトのその箇所だけ読む(サブエージェント不要)。
+- 旧アンカーループ `_idle-tameshiyomi-loop.sh` は**本体撤去=即exit 1**(`while :`無限+札チェック無し+日次上限=exit 0で空回りする構造だった)。
 
 ## 停止 (=「やめて」)
 - 控えたタスクIDを **TaskStop で kill**(全部)。commit/jsonl済みの成果は全部残る。

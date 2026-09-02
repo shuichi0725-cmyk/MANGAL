@@ -79,9 +79,9 @@ def wiki_lead(title):
     except urllib.error.HTTPError as e:
         if e.code == 429:
             cooldown_set(_retry_after_min(e, 30), by="kana-digit"); sys.exit(2)  # ★Retry-After尊重・既定30分
-        return "", ""
+        return None   # ★失敗=「読み無し」に変換しない(呼び側でdoneに入れずskip 2026-09-02)
     except Exception:
-        return "", ""
+        return None
     best_lead = ""
     for pg in (d.get("query") or {}).get("pages") or []:
         if pg.get("missing"):
@@ -119,15 +119,27 @@ def _run_locked(limit):
         print("queue枯れ=完了(全対象収集済)。裁定は上位モデルへ"); return
     print(f"残 {sum(1 for it in q if it['slug'] not in done)} / 今回 {len(todo)}頁")
     for it in todo:
-        lead, yomi = wiki_lead(it["title"])
+        got = wiki_lead(it["title"])
+        if got is None:
+            # ★wiki瞬断/非429エラー=doneに入れずskip(旧: 空結果でdone確定=永久の偽陰性。build-queueでもdoneは残る)
+            print(f"  {it['title'][:24]}: ✗ wiki取得失敗(skip・次回再照会)"); continue
+        lead, yomi = got
         rk = []
+        failed = False
         for ib in it["isbns"]:
-            items = _lookup.rakuten_live_retry(env, isbn=ib, hits=3)  # ★長時間柱=429をbackoff吸収(即exitさせない)
+            try:
+                items = _lookup.rakuten_live_retry(env, isbn=ib, hits=3)  # ★長時間柱=429をbackoff吸収(即exitさせない)
+            except _lookup.Throttled:
+                print("★楽天429が連続(実スロットル)→中断(保存済み分は残る・次の手すきで再開)"); sys.exit(2)
+            except Exception as e:
+                print(f"  {it['title'][:24]}: ✗ 楽天失敗 {str(e)[:50]}(skip・次回再照会)"); failed = True; break
             for x in items:
                 tk = (x.get("titleKana") or "").strip()
                 if tk:
                     rk.append({"isbn": ib, "titleKana": tk})
                 break
+        if failed:
+            continue
         rec = {"slug": it["slug"], "title": it["title"], "kana": it["kana"],
                "wiki_yomi": yomi, "wiki_lead": lead if yomi == "" else "", "rakuten": rk}
         with open(FOUND, "a", encoding="utf-8") as f:

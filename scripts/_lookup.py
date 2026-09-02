@@ -172,6 +172,16 @@ def ndl_live(query, maximum=30, start=1, exit_on_429=True):
     _rate_gate.wait("ndl", RATE)  # ★グローバル間隔(全NDL呼出で共有)
     try:
         xml = html.unescape(urllib.request.urlopen(req, timeout=30).read().decode("utf-8"))
+    except urllib.error.HTTPError as e:
+        # ★HTTP 429 は汎用exceptに落とさない(2026-09-02): NDLの429はHTTPステータスで返る
+        #   (ndl_access_rate_method 実測)のに、旧実装は [] を返して呼び側に「NDL不在」と見せ、
+        #   ndl_live_retry のbackoffも効かず、規制中も叩き続けていた。
+        if e.code == 429:
+            if exit_on_429:
+                print("★NDL429 → 即中断。回復するので慌てず休ませる(1時間単位)"); sys.exit(2)
+            raise Throttled("ndl 429")
+        print(f"  NDL query失敗(続行可): HTTP {e.code}")
+        return []
     except Exception as e:
         print(f"  NDL query失敗(続行可): {e}")
         return []

@@ -1,26 +1,8 @@
 #!/bin/bash
-# アイドル運転の試し読み無限ループ(2026-07-14): バッチごとcommit+push=「やめて」でいつ殺しても損失≤1バッチ
-# 自然停止: 対象枯れ / 連続エラー3
-cd "$(dirname "$0")/.." || exit 1
-i=1; fails=0
-while :; do
-  echo "=== $(date '+%m-%d %H:%M') idle-batch $i ==="
-  if out=$(python scripts/_tameshiyomi-harvest.py --limit 100 2>&1); then
-    fails=0
-  else
-    fails=$((fails+1))
-  fi
-  echo "$out" | tail -2
-  if echo "$out" | grep -q "^対象 0 作"; then echo "queue空→終了"; break; fi
-  git add data/seeds/tameshiyomi-booklive.jsonl docs/production-diagnostics/tameshiyomi-holds.tsv 2>/dev/null
-  git commit -qm "試し読みharvest: idle $(date '+%m%d-%H%M')" 2>/dev/null && git push -q
-  if [ $((i % 3)) -eq 0 ]; then
-    python scripts/_tameshiyomi-harvest.py --expand --expand-limit 60 | tail -1
-    git add data/seeds/tameshiyomi-booklive-volumes.jsonl.gz 2>/dev/null
-    git commit -qm "試し読みharvest: idle-expand $(date '+%m%d-%H%M')" 2>/dev/null && git push -q
-  fi
-  if [ "$fails" -ge 3 ]; then echo "連続エラー3→終了"; break; fi
-  i=$((i+1))
-done
-echo "=== idle-tameshiyomi 終了 ==="
-python scripts/_tameshiyomi-harvest.py --stats
+# ★退役(2026-09-02): 旧アイドル運転の試し読みアンカー無限ループ。
+#   対象は2026-07-15に枯れ、かつ本体は `while :` 無限 + 停止札チェック無し + 日次上限(CapReached=exit 0)で
+#   空回りし続ける構造だった(リクエストは出ないが止まらない)。誤起動防止のため本体を撤去し即終了にする。
+#   現行の柱①は scripts/_idle-tameshiyomi-expand-loop.sh(停止札/収穫ゼロ停止/MAX_BATCH/exit 2で札設置)。
+#   アンカー収集(--limit 100)は週次step1が1回だけ回す。
+echo "退役済み: 旧アンカー無限ループは起動しない。柱①は _idle-tameshiyomi-expand-loop.sh / アンカー収集は週次step1。"
+exit 1
