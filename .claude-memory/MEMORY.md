@@ -1,6 +1,7 @@
 - [【保留TODO】巻説明=次スライスから再開](voldesc_next_slice_todo.md) — 「巻説明つくって」で次へ ／ [巻説明=着手作は全巻終わらせる](voldesc_finish_started_series.md)
 - [seeds pyramid=全体構造](project_architecture_seeds.md) — 種1=MADB raw/種2=sqlite/種3=AI fill/種4=巻補完 ／ [種1→種2脱落=大半アンソロジー](seed1_to_seed2_loss_is_mostly_anthology.md) — 再ビルド不要
 - [【戒め】人気順で優先するな](feedback_no_popularity_priority.md) — 端から全件 ／ [【戒め】勝手に仕事を増やすな](feedback_dont_inflate_work.md) ／ [ユーザ最新指示を自己解釈で上書きしない](feedback_user_directive_supremacy.md)
+- [【型・是正済】王様の仕立て屋=1頁に4部同居→頁分割](ousama_shitateya_4part_split.md) — 頁分割手順一式・subtitle override新設 ／ [【封鎖済】巻抜け仮想の偽陽性2種](volgap_virtual_false_positives.md) — 適用後>適用前は正常
 - [巻抜け仮想](volgap_virtual_tool_trigger.md) — 正=skill volgap-audit ／ [【手順】巻抜けは4型=種2在否を先に判定](volgap_diagnosis_order.md) ／ [巻抜け大半=under-merge](volgap_mostly_undermerge.md) — 種4は真の取込もれのみ ／ [【進行中】巻抜けper-case仕上げ](volgap_per_case_cleanup_state.md) — 1417・推測で触らない
 - [【再利用】2026新刊蒸留フロー](distill_2026_pipeline.md)
 - [preview実測+stale事故史](preview_deploy_pitfalls.md) — 正=skill test-deploy ／ [preview反映=GitHub Actions実体](preview_deploy_github_actions.md)
