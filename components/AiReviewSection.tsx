@@ -20,6 +20,7 @@ function Avatar({ c, size = 40 }: { c: AiCharacter; size?: number }) {
     >
       {c.img ? (
         // eslint-disable-next-line @next/next/no-img-element
+        // not-a-cover: AI書評家のドット絵アバター(書影ではないので白地バックドロップ不要)
         <img src={c.img} alt="" width={size} height={size} style={{ imageRendering: "pixelated" }} />
       ) : (
         c.face
