@@ -80,10 +80,12 @@ python scripts/_monthly-distill.py promote-made         # 作った頁だけ pro
 
 ### 6. 月次サニティ
 ```
-python scripts/_monthly-distill.py run sanity            # 検出器を順に回し前回比Δ(結果= .cache/madb-distill/sanity-<ts>.json)
+python scripts/_monthly-distill.py run sanity            # 検出器17本を順に回し前回比Δ(~15分。結果= docs/production-diagnostics/sanity-runs/sanity-<ts>.json=git追跡)
 python scripts/_monthly-distill.py sanity --heavy        # 楽天キャッシュ走査3本(excerpt-subtitle/edition-mix/author-not-in-volumes)も
 ```
-- Δ>0 の検出器 = 今月増えた型 → CLAUDE.md「月次サニティ監査」節の該当型で裁定。rc≠0 = 検出器自体の故障(直してから)。
+- Δ>0 の検出器 = 今月増えた型 → CLAUDE.md「月次サニティ監査」節の該当型で裁定。結果JSONと更新されたTSVは commit(次回のΔ基準)。
+- rc≠0 の読み分け: ①検出器自体の故障(traceback=直してから) / ②「該当あり」を exit 1 で表す検出器= **isbn-loss(理由なし消失あり=裁定・消し込み台帳へ) / price-pack(本番掲載あり=新規増分を裁定) / edition-canonical(異常あり=seedへ追記)**。tail で区別。
+- 2026-09-02 ベースライン実走: 17本 計~15分(title-eq-author 252s・kana-from-other-volume 228s、他は70s以下)。
 - 必ず見る: solo-truncated(頁化した月は新規頁ヒット0) / AUTO_FIXED急増(新誤番号型) / price-pack・vol0-hidden-first の本番掲載増 / edition-canonical NG=0 / isbn-loss 理由なし0 / 表示カタログslug集合diff(git HEAD索引 vs 新索引。消失は全件説明可能)。
 - 対象外(手動): `_furigana-audit`(NDL照会) / `_gen-publisher-keys`(publishers.yml を書く=読み取り専用でない) / `_coverage-audit`(旧 .cache 依存)。
 

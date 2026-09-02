@@ -26,6 +26,7 @@
   .cache/madb-distill/merge-manifest-<tag>-<date>.json (merge --apply が書く・revert用)
   .cache/madb-distill/run-<stage>-<ts>.log (末尾 `# … EXIT=n` が完了印) / run-<stage>.pid
   data/madb-intake-state.yml (git追跡マーカー) / data/madb-distill-ledger.jsonl (取込台帳・純追記)
+  docs/production-diagnostics/sanity-runs/sanity-<ts>.json (サニティ結果=前回比Δの基準。git追跡)
 """
 from __future__ import annotations
 
@@ -751,9 +752,12 @@ def tsv_rows(name: str | None) -> int | None:
         return max(0, sum(1 for l in f if l.strip()) - 1)
 
 
+SANITY_DIR = DIAG / "sanity-runs"   # ★git追跡(前回比の基準を .cache に置かない=「あるはずなのに無い」事故の型を避ける)
+
+
 def sanity(a) -> None:
-    DIST.mkdir(parents=True, exist_ok=True)
-    prev_files = sorted(DIST.glob("sanity-*.json"))
+    SANITY_DIR.mkdir(parents=True, exist_ok=True)
+    prev_files = sorted(SANITY_DIR.glob("sanity-*.json"))
     prev = json.loads(prev_files[-1].read_text(encoding="utf-8")) if prev_files else {}
     prev_res = prev.get("results", {})
     res = {}
@@ -772,26 +776,31 @@ def sanity(a) -> None:
         lines = [l for l in out.splitlines() if l.strip()]
         rows = tsv_rows(tsv)
         extra = {}
-        m = re.search(r"AUTO_FIXED\D{0,20}?([\d,]+)", out)
-        if m:
-            extra["auto_fixed"] = int(m.group(1).replace(",", ""))
-        m = re.search(r"\bNG\D{0,10}?(\d+)", out)
-        if name == "edition-canonical" and m:
-            extra["ng"] = int(m.group(1))
+        # 行末の数値を取る(「AUTO_FIXED (…下=3型…): 1,696」の途中の 3 を掴まない)
+        for key, label in (("auto_fixed", "AUTO_FIXED"), ("missing_half", "MISSING_HALF"), ("gap_other", "GAP_OTHER")):
+            m = re.search(label + r"[^\n]*:\s*([\d,]+)\s*$", out, re.M)
+            if m:
+                extra[key] = int(m.group(1).replace(",", ""))
+        if name == "edition-canonical":
+            m = re.search(r"NG[^\n]*?(\d+)", out)
+            if m:
+                extra["ng"] = int(m.group(1))
         res[name] = {"rc": r.returncode, "rows": rows, "secs": round(time.time() - t0, 1),
                      "tail": [l.strip()[:160] for l in lines[-2:]], **extra}
         pr = prev_res.get(name) or {}
         d = None if rows is None or pr.get("rows") is None else rows - pr["rows"]
         flag = "" if r.returncode == 0 else "  ★rc≠0"
+        ex = " ".join(f"{k}={v}" for k, v in extra.items())
         print(f"  {name:<24} rc={r.returncode} rows={fmt(rows) if rows is not None else '-':>7} Δ={('%+d' % d) if d is not None else '-':>6} "
-              f"{res[name]['secs']:>6.0f}s {('AUTO_FIXED=' + str(extra['auto_fixed'])) if 'auto_fixed' in extra else ''}"
-              f"{('NG=' + str(extra['ng'])) if 'ng' in extra else ''}{flag}", flush=True)
+              f"{res[name]['secs']:>6.0f}s {ex}{flag}", flush=True)
         for l in res[name]["tail"]:
             print(f"      {l}")
-    outp = DIST / f"sanity-{ts()}.json"
+    outp = SANITY_DIR / f"sanity-{ts()}.json"
     outp.write_text(json.dumps({"at": now(), "tag": marker_tag(), "results": res}, ensure_ascii=False, indent=1), encoding="utf-8")
-    print(f"\n保存: {outp}  (次回この結果が前回比の基準になる)")
-    print("読み方: Δ>0 の検出器 = 今月増えた型 → 該当skill/CLAUDE.md月次サニティ節の是正へ。rc≠0 は検出器自体の故障。")
+    print(f"\n保存: {outp}  (git追跡。次回この結果が前回比の基準になる → TSV と一緒に commit)")
+    print("読み方: Δ>0 の検出器 = 今月増えた型 → 該当skill/CLAUDE.md月次サニティ節の是正へ。")
+    print("  rc≠0 = ①検出器自体の故障(traceback) か ②「該当あり」を exit 1 で表す検出器(isbn-loss=理由なし消失 / price-pack=本番掲載あり /"
+          " edition-canonical=異常あり)。tail を読んで区別する。")
 
 
 # ---------------------------------------------------------------- main
