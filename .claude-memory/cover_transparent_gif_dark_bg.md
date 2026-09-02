@@ -36,6 +36,17 @@ CoverImage / CoverLightbox / ArtBookCard / DailyFeatureCorner(2箇所) / Shinkan
 TokushuClient(2箇所) / adult-triage に適用。
 ★データ側の差し替えは**不可**(`_1_2.jpg` `_1_5.jpg` 等の非透過variantは該当ISBNで404)。
 
+## 今後の書影が増えた時 (= ユーザ質問 2026-09-02)
+
+- **データ側は無対策でよい**。bg-white は**描画側**の対策なので、今後 `.gif` だろうが透過PNGだろうが
+  どんな書影URLが増えても自動で効く。cover_url を選ぶ側(promote の `_cover_for` / covers.jsonl.gz)は
+  一切触らなくてよい = 恒久策。
+- **残っていた唯一の穴 = 新しいコンポーネントで bg-white を書き忘れる**。
+  → ★番人 `lib/coverBackdrop.test.ts` を追加(commit c1a528381)。`components/**`・`app/**` の
+  `<img>`/`<Image>` を全部数え上げ、`bg-white` が無ければ落とす。書影でない画像は
+  タグ内か直前行に **`not-a-cover`** と書いて明示除外する(現状の除外=AiReviewSectionのアバター1件)。
+  `npx vitest run` に乗るので deploy-cloudflare / 機能蒸留 / 週次 の前検査で自動的に効く。
+
 ## 反映経路(重要)
 
 - **preview** = `components/**` が deploy-preview.yml の trigger に入っているので **push で自動反映**(15-20分)。
