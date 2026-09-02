@@ -162,8 +162,9 @@ function NavSvg({ d, circle }: { d: string; circle?: [number, number, number] })
 // SVG線画アイコン(ラベル→パス)。D3Nav(home)と同じ絵柄=サイト内で統一
 const NAV_SVG: Record<string, { d: string; circle?: [number, number, number] }> = {
   "ホーム": { d: "M3 11L12 3l9 8M6 10v11h12V10" },
-  "一覧": { d: "M4 6h16M4 12h16M4 18h10" },
   "検索": { d: "M15 15l6 6", circle: [10.5, 10.5, 6] },
+  // 新作=今月の新刊一覧(/shinkan)。≡メニューの「今月の新刊一覧」タイル(box)と同じ絵柄
+  "新作": { d: "M21 8l-9-5-9 5v8l9 5 9-5zM3 8l9 5 9-5M12 13v8" },
   "AI書評": { d: "M4 20l2-6L16 4l4 4L10 18l-6 2zM14 6l4 4" },
   "過去ログ": { d: "M12 7v5l3.5 2", circle: [12, 12, 8.5] },
   "使い方": { d: "M12 5c-2-1.6-5-1.6-8-.6V19c3-1 6-1 8 .6 2-1.6 5-1.6 8-.6V4.4c-3-1-6-1-8 .6zM12 5v14" },
@@ -172,11 +173,13 @@ const NAV_SVG: Record<string, { d: string; circle?: [number, number, number] }> 
 export function DesignNav({ current: _current }: { current?: number }) {
   // ★2026-06-14: アイコン式の単一ナビ。 🏠ホームは左固定、 残りは右寄せクラスタ(≡メニュー含む)。
   //   全ページ共通。 旧テキスト行 + 旧 ScrollShortcutsMock を統合・廃止。
+  // ★2026-09-02 ユーザ裁定: 「一覧」を外し、検索を先頭に・その右に「新作」(=今月の新刊一覧 /shinkan)。
+  //   /list 自体は ≡メニュー「一覧表(全作品)」とフッターから引き続き到達可。home の D3Nav も同順に揃える。
   const cell =
     "spring-press flex flex-col items-center gap-0.5 active:scale-90";
   const right = [
-    ["📋", "一覧", "/list"],
     ["🔍", "検索", "/browse"],
+    ["🆕", "新作", "/shinkan"],
     ["📝", "AI書評", "/column-ai-league"],
     ["🕘", "過去ログ", "/sansedai-archive"],
     ["🔰", "使い方", "/about"],

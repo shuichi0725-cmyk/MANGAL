@@ -25,7 +25,8 @@ export const metadata = { robots: { index: false, follow: false } };  // 実験�
 /** 案12(2026-08-11): D3「ダークブルータル」 — 案11の中身・データ・コーナー構成は完全同一、
  *  ガワだけ黒×アシッドライム×角丸ゼロへ(.theme-d3 トークン差し替え)。
  *  追加はD3外殻のみ: マーキー帯 / ランダムコピーのヒーロー+検索 / カテゴリ8枚(SVG線画アイコン)。
- *  ヘッダーは現行DesignNavと同一6リンクのSVG版。フッターは共通SiteFooter(layout側)のまま。 */
+ *  ヘッダーは現行DesignNavと同一6リンクのSVG版(2026-09-02: 一覧→新作に差し替え・検索を先頭へ。DesignNavと同順)。
+ *  フッターは共通SiteFooter(layout側)のまま。 */
 
 const NavIcon = ({ d, circle }: { d: string; circle?: [number, number, number] }) => (
   <svg viewBox="0 0 24 24" className="h-[19px] w-[19px]" style={{ stroke: "var(--color-accent)", fill: "none", strokeWidth: 1.9 }}>
@@ -37,8 +38,9 @@ const NavIcon = ({ d, circle }: { d: string; circle?: [number, number, number] }
 function D3Nav() {
   const cell = "spring-press flex flex-col items-center gap-0.5 active:scale-90";
   const right: Array<[React.ReactNode, string, string]> = [
-    [<NavIcon key="l" d="M4 6h16M4 12h16M4 18h10" />, "一覧", "/list"],
     [<NavIcon key="s" d="M15 15l6 6" circle={[10.5, 10.5, 6]} />, "検索", "/browse"],
+    // 新作=今月の新刊一覧。≡メニューの box アイコンと同じ絵柄
+    [<NavIcon key="n" d="M21 8l-9-5-9 5v8l9 5 9-5zM3 8l9 5 9-5M12 13v8" />, "新作", "/shinkan"],
     [<NavIcon key="p" d="M4 20l2-6L16 4l4 4L10 18l-6 2zM14 6l4 4" />, "AI書評", "/column-ai-league"],
     [<NavIcon key="c" d="M12 7v5l3.5 2" circle={[12, 12, 8.5]} />, "過去ログ", "/sansedai-archive"],
     [<NavIcon key="g" d="M12 5c-2-1.6-5-1.6-8-.6V19c3-1 6-1 8 .6 2-1.6 5-1.6 8-.6V4.4c-3-1-6-1-8 .6zM12 5v14" />, "使い方", "/about"],
