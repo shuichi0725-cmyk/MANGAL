@@ -58,7 +58,7 @@
 - [MADBに完全版/新装版ほぼ無し](madb_missing_reprint_editions.md) — 補完=楽天題検索→種4 ／ [巻補完=NDL title検索が強い](ndl_volume_completion_better_than_rakuten.md)
 - [蒸留定期運転の実態](monthly_intake_reality.md) ／ [2026-08 月次蒸留 MADB1.2.19=完了](distill_2026_08_1219.md) — 保留54/数値ペンネーム罠 ／ [2026-07 月次蒸留 MADB1.2.18](distill_2026_07_1218.md)
 - [三世代/今週ストック未配線](sansedai_featured_stock_state.md) ／ [今日の一冊 過去ログ=凍結ログが正](sansedai_archive_frozen_log.md) — 純粋追記 ／ [日替わり特集コーナー(/tokushu)](daily_feature_corner.md)
-- [【計画】書影harvest3段](cover_harvest_plan.md) ／ [楽天書影資産(noimage罠)](rakuten_cover_data_asset.md) ／ [書影=アフィ元画像のみ](cover_source_affiliate_only.md) — NDL不可 ／ [【後で判断】Kobo書影が旧印刷版で誤カバー](kobo_cover_wrong_for_old_print.md) ／ [【注意信号】書影の違和感=上流誤りの症状](feedback_cover_oddity_signal.md)
+- [【計画】書影harvest3段](cover_harvest_plan.md) ／ [楽天書影資産(noimage罠)](rakuten_cover_data_asset.md) ／ [書影=アフィ元画像のみ](cover_source_affiliate_only.md) — NDL不可 ／ [【後で判断】Kobo書影が旧印刷版で誤カバー](kobo_cover_wrong_for_old_print.md) ／ [【注意信号】書影の違和感=上流誤りの症状](feedback_cover_oddity_signal.md) ／ [【型・是正済】書影の黒い斑点=透過GIF×ダーク背景](cover_transparent_gif_dark_bg.md) — 楽天では正常に見えるので上流を疑うと外す
 - [【戒め】再グルーピング誤り繰り返すな](feedback_dont_repeat_regrouping_error.md)
 - [【最難関】奇子型=版違い混在](edition_mix_same_author_ayako.md) ／ [奇子型の経験則検出](kiko_multiedition_mixing_heuristic.md) ／ [版混在恒久是正=edition-canonical](edition_canonical_mechanism.md) ／ [アオアシ型=原版+ジュニア版再版](edition_dedup_aoashi.md)
 - [【型】ARMS型=レーベル表記ゆれ版分裂](imprint_split_arms_type.md) — 検出器あり ／ [【型】ARMSワイド版型=刊行run分裂(57頁適用済)](edition_run_split_arms_wide_type.md) — 真因3層(種4のedition_type既定値が幻の版)
