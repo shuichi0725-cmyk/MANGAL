@@ -2100,20 +2100,8 @@ volumes:
   source: rakuten-preorder
   added_at: '2026-07-27'
   note: 楽天予約ハーベスト① slug=bouryoku-banzai
-- series_keys: &id002
+- series_keys:
   - name:KimSuji|name:オークの樹の下
-  qid: null
-  number: 6
-  isbn13: '9784046607188'
-  release_date: '2026-12-17'
-  pages: null
-  publisher: KADOKAWA
-  edition_type: standard
-  title_display: オークの樹の下　6　ペアアクリルキーホルダー＆ミニカレンダー付き特装版
-  source: rakuten-preorder
-  added_at: '2026-07-27'
-  note: 楽天予約ハーベスト① slug=orc-no-ki-no-shita
-- series_keys: *id002
   qid: null
   number: 6
   isbn13: '9784046607195'
@@ -3641,7 +3629,7 @@ volumes:
   source: rakuten-local
   added_at: '2026-08-04'
   note: 巻抜けローカル楽天種fill slug=bija-no-joou gate=題完全一致+版prefix9784845+日付整合+著者OK
-- series_keys: &id003
+- series_keys: &id002
   - name:Re岳|name:「美人でお金持ちの彼女が欲しい」と言ったら、ワケあり女子がやってきた件。
   - name:小宮地千々|name:「美人でお金持ちの彼女が欲しい」と言ったら、ワケあり女子がやってきた件。
   qid: null
@@ -3655,7 +3643,7 @@ volumes:
   source: rakuten-local
   added_at: '2026-08-04'
   note: 巻抜けローカル楽天種fill slug=bijin-de-okanemochi-no-kanojo-ga-hoshii-to-ittara-wake-ari-joshi-ga-yattekita-ken gate=題完全一致+版prefix9784040+日付整合+著者OK
-- series_keys: *id003
+- series_keys: *id002
   qid: null
   number: 6
   isbn13: '9784040761848'
@@ -3667,7 +3655,7 @@ volumes:
   source: rakuten-local
   added_at: '2026-08-04'
   note: 巻抜けローカル楽天種fill slug=bijin-de-okanemochi-no-kanojo-ga-hoshii-to-ittara-wake-ari-joshi-ga-yattekita-ken gate=題完全一致+版prefix9784040+日付整合+著者OK
-- series_keys: &id004
+- series_keys: &id003
   - name:企画者104|name:ビックリマンおもしろランド
   qid: null
   number: 6
@@ -3680,7 +3668,7 @@ volumes:
   source: rakuten-local
   added_at: '2026-08-04'
   note: 巻抜けローカル楽天種fill slug=bikkuriman-omoshiro-land gate=題完全一致+版prefix9784253+日付整合+著者OK
-- series_keys: *id004
+- series_keys: *id003
   qid: null
   number: 7
   isbn13: '9784253099356'
@@ -3692,7 +3680,7 @@ volumes:
   source: rakuten-local
   added_at: '2026-08-04'
   note: 巻抜けローカル楽天種fill slug=bikkuriman-omoshiro-land gate=題完全一致+版prefix9784253+日付整合+著者OK
-- series_keys: *id004
+- series_keys: *id003
   qid: null
   number: 8
   isbn13: '9784253099363'
@@ -3704,7 +3692,7 @@ volumes:
   source: rakuten-local
   added_at: '2026-08-04'
   note: 巻抜けローカル楽天種fill slug=bikkuriman-omoshiro-land gate=題完全一致+版prefix9784253+日付整合+著者OK
-- series_keys: &id005
+- series_keys: &id004
   - qid:Q9075138|name:BIRTH
   qid: null
   number: 2
@@ -3717,7 +3705,7 @@ volumes:
   source: rakuten-local
   added_at: '2026-08-04'
   note: 巻抜けローカル楽天種fill slug=birth-2002 gate=題完全一致+版prefix9784344+日付整合+著者OK
-- series_keys: *id005
+- series_keys: *id004
   qid: null
   number: 3
   isbn13: '9784344801226'
@@ -3729,7 +3717,7 @@ volumes:
   source: rakuten-local
   added_at: '2026-08-04'
   note: 巻抜けローカル楽天種fill slug=birth-2002 gate=題完全一致+版prefix9784344+日付整合+著者OK
-- series_keys: *id005
+- series_keys: *id004
   qid: null
   number: 4
   isbn13: '9784344801646'
@@ -3741,7 +3729,7 @@ volumes:
   source: rakuten-local
   added_at: '2026-08-04'
   note: 巻抜けローカル楽天種fill slug=birth-2002 gate=題完全一致+版prefix9784344+日付整合+著者OK
-- series_keys: *id005
+- series_keys: *id004
   qid: null
   number: 5
   isbn13: '9784344801868'
@@ -3753,7 +3741,7 @@ volumes:
   source: rakuten-local
   added_at: '2026-08-04'
   note: 巻抜けローカル楽天種fill slug=birth-2002 gate=題完全一致+版prefix9784344+日付整合+著者OK
-- series_keys: *id005
+- series_keys: *id004
   qid: null
   number: 6
   isbn13: '9784344802179'
@@ -3765,7 +3753,7 @@ volumes:
   source: rakuten-local
   added_at: '2026-08-04'
   note: 巻抜けローカル楽天種fill slug=birth-2002 gate=題完全一致+版prefix9784344+日付整合+著者OK
-- series_keys: *id005
+- series_keys: *id004
   qid: null
   number: 7
   isbn13: '9784344800298'
@@ -3777,7 +3765,7 @@ volumes:
   source: rakuten-local
   added_at: '2026-08-04'
   note: 巻抜けローカル楽天種fill slug=birth-2002 gate=題完全一致+版prefix9784344+日付整合+著者OK
-- series_keys: *id005
+- series_keys: *id004
   qid: null
   number: 8
   isbn13: '9784344801578'
@@ -4487,7 +4475,7 @@ volumes:
   source: rakuten-local
   added_at: '2026-08-04'
   note: 巻抜けローカル楽天種fill slug=fool-night gate=題完全一致+版prefix9784098+日付整合+著者OK
-- series_keys: &id006
+- series_keys: &id005
   - qid:Q11590692|name:不沈戦艦紀伊
   qid: null
   number: 3
@@ -4500,7 +4488,7 @@ volumes:
   source: rakuten-local
   added_at: '2026-08-04'
   note: 巻抜けローカル楽天種fill slug=fuchin-senkan-kii gate=題完全一致+版prefix9784056+日付整合+著者OK
-- series_keys: *id006
+- series_keys: *id005
   qid: null
   number: 4
   isbn13: '9784056023695'
@@ -4659,7 +4647,7 @@ volumes:
   source: rakuten-local
   added_at: '2026-08-04'
   note: 巻抜けローカル楽天種fill slug=gekidou gate=題完全一致+版prefix9784088+日付整合+著者OK
-- series_keys: &id007
+- series_keys: &id006
   - qid:Q7677523|name:劇光仮面
   qid: null
   number: 6
@@ -4672,7 +4660,7 @@ volumes:
   source: rakuten-local
   added_at: '2026-08-04'
   note: 巻抜けローカル楽天種fill slug=gekikou-kamen gate=題完全一致+版prefix9784098+日付整合+著者OK
-- series_keys: *id007
+- series_keys: *id006
   qid: null
   number: 8
   isbn13: '9784098637379'
@@ -4818,7 +4806,7 @@ volumes:
   source: rakuten-local
   added_at: '2026-08-04'
   note: 巻抜けローカル楽天種fill slug=goukon-ni-ittara-onna-ga-inakatta-hanashi gate=題完全一致+版prefix9784757+日付整合+著者OK
-- series_keys: &id008
+- series_keys: &id007
   - name:門馬司|name:ギルティサークル
   - qid:Q126005398|name:ギルティサークル
   qid: null
@@ -4832,7 +4820,7 @@ volumes:
   source: rakuten-local
   added_at: '2026-08-04'
   note: 巻抜けローカル楽天種fill slug=guilty-circle gate=題完全一致+版prefix9784065+日付整合+著者OK
-- series_keys: *id008
+- series_keys: *id007
   qid: null
   number: 21
   isbn13: '9784065446492'
@@ -4978,7 +4966,7 @@ volumes:
   source: rakuten-local
   added_at: '2026-08-04'
   note: 巻抜けローカル楽天種fill slug=hanabi-chan-wa-okuregachi gate=題完全一致+版prefix9784864+日付整合+著者OK
-- series_keys: &id009
+- series_keys: &id008
   - qid:Q11513052|name:花ざかり大黒屋本舗
   qid: null
   number: 2
@@ -4991,7 +4979,7 @@ volumes:
   source: rakuten-local
   added_at: '2026-08-04'
   note: 巻抜けローカル楽天種fill slug=hanazakari-daikokuya-honpo gate=題完全一致+版prefix9784575+日付整合+著者OK
-- series_keys: *id009
+- series_keys: *id008
   qid: null
   number: 3
   isbn13: '9784575333756'
@@ -5003,7 +4991,7 @@ volumes:
   source: rakuten-local
   added_at: '2026-08-04'
   note: 巻抜けローカル楽天種fill slug=hanazakari-daikokuya-honpo gate=題完全一致+版prefix9784575+日付整合+著者OK
-- series_keys: *id009
+- series_keys: *id008
   qid: null
   number: 4
   isbn13: '9784575334395'
@@ -5299,7 +5287,7 @@ volumes:
   source: rakuten-local
   added_at: '2026-08-04'
   note: 巻抜けローカル楽天種fill slug=hitori-camp-shitara-isekai-ni-teni-shita-hanashi gate=題完全一致+版prefix9784575+日付整合+著者OK
-- series_keys: &id010
+- series_keys: &id009
   - qid:Q17217827|name:ハニーレモンソーダ
   qid: null
   number: 28
@@ -5312,7 +5300,7 @@ volumes:
   source: rakuten-local
   added_at: '2026-08-04'
   note: 巻抜けローカル楽天種fill slug=honey-lemon-soda gate=題完全一致+版prefix9784088+日付整合+著者OK
-- series_keys: *id010
+- series_keys: *id009
   qid: null
   number: 30
   isbn13: '9784088678283'
@@ -6918,7 +6906,7 @@ volumes:
   source: rakuten-local
   added_at: '2026-08-04'
   note: 巻抜けローカル楽天種fill slug=mato-seihei-no-slave gate=題完全一致+版prefix9784088+日付整合+著者OK
-- series_keys: &id011
+- series_keys: &id010
   - qid:Q1048873|name:女神の標的
   qid: null
   number: 3
@@ -6931,7 +6919,7 @@ volumes:
   source: rakuten-local
   added_at: '2026-08-04'
   note: 巻抜けローカル楽天種fill slug=megami-no-hyouteki gate=題完全一致+版prefix9784098+日付整合+著者OK
-- series_keys: *id011
+- series_keys: *id010
   qid: null
   number: 7
   isbn13: '9784098636655'
@@ -7049,7 +7037,7 @@ volumes:
   source: rakuten-local
   added_at: '2026-08-04'
   note: 巻抜けローカル楽天種fill slug=mobile-suit-gundam-akai-san-kyosei gate=題完全一致+版prefix9784041+日付整合+著者OK
-- series_keys: &id012
+- series_keys: &id011
   - qid:Q1062486|name:機動戦士ガンダムラストホライズン
   qid: null
   number: 4
@@ -7062,7 +7050,7 @@ volumes:
   source: rakuten-local
   added_at: '2026-08-04'
   note: 巻抜けローカル楽天種fill slug=mobile-suit-gundam-last-horizon gate=題完全一致+版prefix9784088+日付整合+著者OK
-- series_keys: *id012
+- series_keys: *id011
   qid: null
   number: 6
   isbn13: '9784088940366'
@@ -7673,7 +7661,7 @@ volumes:
   source: rakuten-local
   added_at: '2026-08-04'
   note: 巻抜けローカル楽天種fill slug=omae-imouto-janakute-iinazuke-datta-no-kayo gate=題完全一致+版prefix9784049+日付整合+著者OK
-- series_keys: &id013
+- series_keys: &id012
   - qid:Q17230522|name:お姉ちゃんの翠くん
   qid: null
   number: 7
@@ -7686,7 +7674,7 @@ volumes:
   source: rakuten-local
   added_at: '2026-08-04'
   note: 巻抜けローカル楽天種fill slug=onee-chan-no-midori-kun gate=題完全一致+版prefix9784088+日付整合+著者OK
-- series_keys: *id013
+- series_keys: *id012
   qid: null
   number: 10
   isbn13: '9784088432144'
@@ -8143,7 +8131,7 @@ volumes:
   source: rakuten-local
   added_at: '2026-08-04'
   note: 巻抜けローカル楽天種fill slug=ryokuin-no-kanmuri gate=題完全一致+版prefix9784758+日付整合+著者OK
-- series_keys: &id014
+- series_keys: &id013
   - name:epina|name:竜に育てられた最強
   - name:epina|name:竜に育てられた最強|sub:全てを極めた少年は人間界を無双する
   - name:epina|name:竜に育てられた最強|sub:全てを極めた少年は人間界を無双する.
@@ -8158,7 +8146,7 @@ volumes:
   source: rakuten-local
   added_at: '2026-08-04'
   note: 巻抜けローカル楽天種fill slug=ryuu-ni-sodaterareta-saikyou gate=題完全一致+版prefix9784408+日付整合+著者OK
-- series_keys: *id014
+- series_keys: *id013
   qid: null
   number: 7
   isbn13: '9784408642161'
@@ -8575,7 +8563,7 @@ volumes:
   source: rakuten-local
   added_at: '2026-08-04'
   note: 巻抜けローカル楽天種fill slug=smoke-blue-no-ame-nochi-hare gate=題完全一致+版prefix9784046+日付整合+著者OK
-- series_keys: &id015
+- series_keys: &id014
   - name:辻次夕日郎|name:スノウボールアース
   qid: null
   number: 8
@@ -8588,7 +8576,7 @@ volumes:
   source: rakuten-local
   added_at: '2026-08-04'
   note: 巻抜けローカル楽天種fill slug=snowball-earth gate=題完全一致+版prefix9784098+日付整合+著者OK
-- series_keys: *id015
+- series_keys: *id014
   qid: null
   number: 10
   isbn13: '9784098636600'
@@ -8681,7 +8669,7 @@ volumes:
   source: rakuten-local
   added_at: '2026-08-04'
   note: 巻抜けローカル楽天種fill slug=subete-no-jinrui-o-hakai-suru-sorera-wa-saisei-dekinai gate=題完全一致+版prefix9784041+日付整合+著者OK
-- series_keys: &id016
+- series_keys: &id015
   - name:SAHA|name:末っ子皇女殿下
   qid: null
   number: 6
@@ -8694,7 +8682,7 @@ volumes:
   source: rakuten-local
   added_at: '2026-08-04'
   note: 巻抜けローカル楽天種fill slug=suekko-koujo-denka gate=題完全一致+版prefix9784046+日付整合+著者OK
-- series_keys: *id016
+- series_keys: *id015
   qid: null
   number: 8
   isbn13: '9784046854551'
@@ -9068,7 +9056,7 @@ volumes:
   source: rakuten-local
   added_at: '2026-08-04'
   note: 巻抜けローカル楽天種fill slug=tokyo-hinkon-joshi gate=題完全一致+版prefix9784098+日付整合+著者OK
-- series_keys: &id017
+- series_keys: &id016
   - qid:Q11259209|name:東京物語
   qid: null
   number: 7
@@ -9081,7 +9069,7 @@ volumes:
   source: rakuten-local
   added_at: '2026-08-04'
   note: 巻抜けローカル楽天種fill slug=tokyo-monogatari gate=題完全一致+版prefix9784088+日付整合+著者OK
-- series_keys: *id017
+- series_keys: *id016
   qid: null
   number: 8
   isbn13: '9784088572888'
@@ -9872,7 +9860,7 @@ volumes:
   source: rakuten-live
   added_at: '2026-08-04'
   note: 巻抜けローカル楽天種fill slug=doctor-hankotsui gate=題完全一致+版prefix9784537+日付整合+著者OK
-- series_keys: &id018
+- series_keys: &id017
   - qid:Q11260369|name:ファイアーエムブレム 聖戦の系譜
   - qid:Q11260369|name:ファイアーエムブレム聖戦の系譜
   qid: null
@@ -9886,7 +9874,7 @@ volumes:
   source: rakuten-live
   added_at: '2026-08-04'
   note: 巻抜けローカル楽天種fill slug=fire-emblem-seisen-no-keifu gate=題完全一致+版prefix9784889+日付整合+著者OK
-- series_keys: *id018
+- series_keys: *id017
   qid: null
   number: 9
   isbn13: '9784889917482'
@@ -9898,7 +9886,7 @@ volumes:
   source: rakuten-live
   added_at: '2026-08-04'
   note: 巻抜けローカル楽天種fill slug=fire-emblem-seisen-no-keifu gate=題完全一致+版prefix9784889+日付整合+著者OK
-- series_keys: *id018
+- series_keys: *id017
   qid: null
   number: 10
   isbn13: '9784889917543'
@@ -9910,7 +9898,7 @@ volumes:
   source: rakuten-live
   added_at: '2026-08-04'
   note: 巻抜けローカル楽天種fill slug=fire-emblem-seisen-no-keifu gate=題完全一致+版prefix9784889+日付整合+著者OK
-- series_keys: *id018
+- series_keys: *id017
   qid: null
   number: 11
   isbn13: '9784889917642'
@@ -9922,7 +9910,7 @@ volumes:
   source: rakuten-live
   added_at: '2026-08-04'
   note: 巻抜けローカル楽天種fill slug=fire-emblem-seisen-no-keifu gate=題完全一致+版prefix9784889+日付整合+著者OK
-- series_keys: &id019
+- series_keys: &id018
   - name:高橋三千綱|name:元祖Dr.タイフーン
   qid: null
   number: 7
@@ -9935,7 +9923,7 @@ volumes:
   source: rakuten-live
   added_at: '2026-08-04'
   note: 巻抜けローカル楽天種fill slug=ganso-doku-typhoon gate=題完全一致+版prefix9784575+日付整合+著者MISMATCH
-- series_keys: *id019
+- series_keys: *id018
   qid: null
   number: 11
   isbn13: '9784575824582'
@@ -9960,7 +9948,7 @@ volumes:
   source: rakuten-live
   added_at: '2026-08-04'
   note: 巻抜けローカル楽天種fill slug=horikou-hanemono-ranger gate=題完全一致+版prefix9784253+日付整合+著者OK
-- series_keys: &id020
+- series_keys: &id019
   - qid:Q967455|name:小池一夫のザ・シビゴルフ
   qid: null
   number: 3
@@ -9973,7 +9961,7 @@ volumes:
   source: rakuten-live
   added_at: '2026-08-04'
   note: 巻抜けローカル楽天種fill slug=koike-kazuo-no-za-shibi-golf gate=題完全一致+版prefix9784915+日付整合+著者MISMATCH
-- series_keys: *id020
+- series_keys: *id019
   qid: null
   number: 4
   isbn13: '9784915289033'
@@ -9985,7 +9973,7 @@ volumes:
   source: rakuten-live
   added_at: '2026-08-04'
   note: 巻抜けローカル楽天種fill slug=koike-kazuo-no-za-shibi-golf gate=題完全一致+版prefix9784915+日付整合+著者MISMATCH
-- series_keys: *id020
+- series_keys: *id019
   qid: null
   number: 5
   isbn13: '9784915289040'
@@ -11498,20 +11486,8 @@ volumes:
   source: rakuten-preorder
   added_at: '2026-08-08'
   note: 楽天予約ハーベスト① slug=shirando
-- series_keys: &id021
+- series_keys:
   - name:CHACHA KIM|name:この結婚はどうせうまくいかない
-  qid: null
-  number: 7
-  isbn13: '9784046607232'
-  release_date: '2027-01-15'
-  pages: null
-  publisher: KADOKAWA
-  edition_type: standard
-  title_display: この結婚はどうせうまくいかない　7　飾れるクリアスタンド＆線画集付き特装版
-  source: rakuten-preorder
-  added_at: '2026-08-08'
-  note: 楽天予約ハーベスト① slug=kono-kekkon-wa-douse-umaku-ikanai
-- series_keys: *id021
   qid: null
   number: 7
   isbn13: '9784046607225'
@@ -12085,7 +12061,7 @@ volumes:
   source: rakuten-preorder
   added_at: '2026-08-08'
   note: 楽天予約ハーベスト① slug=mobile-zekki-gundam-sequel
-- series_keys: &id022
+- series_keys: &id020
   - name:ソラジマ|name:愛されてる場合じゃないの
   qid: null
   number: 5
@@ -12098,7 +12074,7 @@ volumes:
   source: rakuten-preorder
   added_at: '2026-08-08'
   note: 楽天予約ハーベスト① slug=aisareteru-baai-ja-nai-no
-- series_keys: *id022
+- series_keys: *id020
   qid: null
   number: 4
   isbn13: '9784046604910'
@@ -12587,7 +12563,7 @@ volumes:
   source: rakuten-preorder
   added_at: '2026-08-14'
   note: 楽天予約ハーベスト① slug=tensei-yuusha-no-kimama-tabi
-- series_keys: &id023
+- series_keys:
   - qid:Q9097377|name:ゆるゆり
   qid: null
   number: 25
@@ -12600,32 +12576,8 @@ volumes:
   source: rakuten-preorder
   added_at: '2026-08-14'
   note: 楽天予約ハーベスト① slug=yuru-yuri
-- series_keys: *id023
-  qid: null
-  number: 25
-  isbn13: '9784825101760'
-  release_date: '2026-10-28'
-  pages: null
-  publisher: 一迅社
-  edition_type: standard
-  title_display: ゆるゆり (25) 特装版
-  source: rakuten-preorder
-  added_at: '2026-08-14'
-  note: 楽天予約ハーベスト① slug=yuru-yuri
-- series_keys: &id024
+- series_keys:
   - qid:Q9097377|name:大室家
-  qid: null
-  number: 9
-  isbn13: '9784825101784'
-  release_date: '2026-10-28'
-  pages: null
-  publisher: 一迅社
-  edition_type: standard
-  title_display: 大室家 (9) 特装版
-  source: rakuten-preorder
-  added_at: '2026-08-14'
-  note: 楽天予約ハーベスト① slug=oomuroke
-- series_keys: *id024
   qid: null
   number: 9
   isbn13: '9784825101777'
@@ -12742,7 +12694,7 @@ volumes:
   source: rakuten-preorder
   added_at: '2026-08-14'
   note: 楽天予約ハーベスト① slug=tsuihousareta-yuusha-no-yuugana-seikatsu
-- series_keys: &id030
+- series_keys:
   - name:まつたけうめ|name:玉川さん出てました?
   qid: null
   number: 5
@@ -12848,7 +12800,7 @@ volumes:
   source: rakuten-preorder
   added_at: '2026-08-14'
   note: 楽天予約ハーベスト① slug=toppuu-gp
-- series_keys: &id025
+- series_keys: &id021
   - name:吉谷光平|name:今どきの若いモンは
   qid: null
   number: 4
@@ -12861,7 +12813,7 @@ volumes:
   source: rakuten-preorder
   added_at: '2026-08-14'
   note: 楽天予約ハーベスト① slug=imadoki-no-wakai-mon-wa
-- series_keys: *id025
+- series_keys: *id021
   qid: null
   number: 2
   isbn13: '9784868660491'
@@ -12873,7 +12825,7 @@ volumes:
   source: rakuten-preorder
   added_at: '2026-08-14'
   note: 楽天予約ハーベスト① slug=imadoki-no-wakai-mon-wa
-- series_keys: *id025
+- series_keys: *id021
   qid: null
   number: 1
   isbn13: '9784868660484'
@@ -12885,7 +12837,7 @@ volumes:
   source: rakuten-preorder
   added_at: '2026-08-14'
   note: 楽天予約ハーベスト① slug=imadoki-no-wakai-mon-wa
-- series_keys: *id025
+- series_keys: *id021
   qid: null
   number: 6
   isbn13: '9784868660538'
@@ -12897,7 +12849,7 @@ volumes:
   source: rakuten-preorder
   added_at: '2026-08-14'
   note: 楽天予約ハーベスト① slug=imadoki-no-wakai-mon-wa
-- series_keys: *id025
+- series_keys: *id021
   qid: null
   number: 5
   isbn13: '9784868660521'
@@ -12909,7 +12861,7 @@ volumes:
   source: rakuten-preorder
   added_at: '2026-08-14'
   note: 楽天予約ハーベスト① slug=imadoki-no-wakai-mon-wa
-- series_keys: *id025
+- series_keys: *id021
   qid: null
   number: 3
   isbn13: '9784868660507'
@@ -12921,7 +12873,7 @@ volumes:
   source: rakuten-preorder
   added_at: '2026-08-14'
   note: 楽天予約ハーベスト① slug=imadoki-no-wakai-mon-wa
-- series_keys: &id026
+- series_keys:
   - qid:Q96273465|name:BanG Dream!It's MyGO!!!!!雨にそよいで晴れを請う
   qid: null
   number: 4
@@ -12931,18 +12883,6 @@ volumes:
   publisher: ブシロードワークス
   edition_type: standard
   title_display: BanG Dream! It's MyGO!!!!! 雨にそよいで晴れを請う 4
-  source: rakuten-preorder
-  added_at: '2026-08-14'
-  note: 楽天予約ハーベスト① slug=bandori-ittsu-maigoo-ame-ni-soyoide-hare-o-kou
-- series_keys: *id026
-  qid: null
-  number: 4
-  isbn13: '9784049211962'
-  release_date: '2026-12-08'
-  pages: null
-  publisher: ブシロードワークス
-  edition_type: standard
-  title_display: BanG Dream! It's MyGO!!!!! 雨にそよいで晴れを請う 4 特装版
   source: rakuten-preorder
   added_at: '2026-08-14'
   note: 楽天予約ハーベスト① slug=bandori-ittsu-maigoo-ame-ni-soyoide-hare-o-kou
@@ -12999,7 +12939,7 @@ volumes:
   source: rakuten-preorder
   added_at: '2026-08-14'
   note: 楽天予約ハーベスト① slug=mizu-mahou-nante-tsukaenai-to-tsuihousareta-saretakedo-mizu-ga-bannou-dato-kigatsuki-mizu-no-kenja
-- series_keys: &id027
+- series_keys: &id022
   - qid:Q11398666|name:スリースター
   qid: null
   number: 1
@@ -13012,7 +12952,7 @@ volumes:
   source: rakuten-preorder
   added_at: '2026-08-14'
   note: 楽天予約ハーベスト① slug=three-star
-- series_keys: *id027
+- series_keys: *id022
   qid: null
   number: 2
   isbn13: '9784868660422'
@@ -13306,7 +13246,7 @@ volumes:
   source: rakuten-preorder
   added_at: '2026-08-14'
   note: 楽天予約ハーベスト① slug=ato-wa-go-jiyuu-ni-douzo
-- series_keys: &id028
+- series_keys: &id023
   - qid:Q2696742|name:電撃デイジー
   qid: null
   number: 2
@@ -13319,7 +13259,7 @@ volumes:
   source: rakuten-preorder
   added_at: '2026-08-14'
   note: 楽天予約ハーベスト① slug=dengeki-daisy
-- series_keys: *id028
+- series_keys: *id023
   qid: null
   number: 1
   isbn13: '9784091795250'
@@ -13414,7 +13354,7 @@ volumes:
   source: rakuten-preorder
   added_at: '2026-08-14'
   note: 楽天予約ハーベスト① slug=kanjou-ga-tenkou-ni-hanei-dekiaisareru-tokushu-nouryoku-mochi-reijou-wa-konyaku-kaishou-sareta-node
-- series_keys: &id029
+- series_keys:
   - name:あきのこ|name:となりの猫と恋知らず
   qid: null
   number: 7
@@ -13427,30 +13367,6 @@ volumes:
   source: rakuten-preorder
   added_at: '2026-08-14'
   note: 楽天予約ハーベスト① slug=tonari-no-neko-to-koishirazu
-- series_keys: *id029
-  qid: null
-  number: 7
-  isbn13: '9784301008378'
-  release_date: '2026-10-23'
-  pages: null
-  publisher: スクウェア・エニックス
-  edition_type: standard
-  title_display: となりの猫と恋知らず（7）特装版　小冊子付き
-  source: rakuten-preorder
-  added_at: '2026-08-14'
-  note: 楽天予約ハーベスト① slug=tonari-no-neko-to-koishirazu
-- series_keys: *id030
-  qid: null
-  number: 5
-  isbn13: '9784301008323'
-  release_date: '2026-10-23'
-  pages: null
-  publisher: スクウェア・エニックス
-  edition_type: standard
-  title_display: 玉川さん 出てました？（5）特装版　小冊子付き
-  source: rakuten-preorder
-  added_at: '2026-08-14'
-  note: 楽天予約ハーベスト① slug=tamagawa-san-detemashita
 - series_keys:
   - name:大堀ユタカ|name:父は英雄、母は精霊、娘の私は転生者。
   qid: null
@@ -13624,19 +13540,6 @@ volumes:
   source: rakuten-preorder
   added_at: '2026-08-14'
   note: 楽天予約ハーベスト① slug=oni-joushi-no-dekiai-ga-tomarimasen
-- series_keys:
-  - name:田中芳樹|name:アルスラーン戦記
-  qid: null
-  number: 25
-  isbn13: '9784065449455'
-  release_date: '2026-10-08'
-  pages: null
-  publisher: 講談社
-  edition_type: standard
-  title_display: アルスラーン戦記（25）クリアしおり付き特装版
-  source: rakuten-preorder
-  added_at: '2026-08-14'
-  note: 楽天予約ハーベスト① slug=arslan-senki
 - series_keys:
   - name:七谷レン|name:超難関ダンジョンで10万年修行した結果、世界最強に
   - name:瑠奈璃亜|name:超難関ダンジョンで10万年修行した結果、世界最強に|sub:最弱無能の下剋上
@@ -15028,7 +14931,7 @@ volumes:
   source: rakuten-live
   added_at: '2026-08-27'
   note: '巻抜け見直し(最新刊2026年層96頁): 楽天live 5ゲート(size/レーベル/著者/ISBN帯/日付)+目視精査'
-- series_keys: &id031
+- series_keys: &id024
   - qid:Q460877|name:秘密 season0
   - qid:Q460877|name:秘密season0
   number: 11
@@ -15040,7 +14943,7 @@ volumes:
   source: rakuten-live
   added_at: '2026-08-27'
   note: '巻抜け見直し(最新刊2026年層96頁): 楽天live 5ゲート(size/レーベル/著者/ISBN帯/日付)+目視精査'
-- series_keys: *id031
+- series_keys: *id024
   number: 12
   isbn13: '9784592222927'
   release_date: '2025-02-20'
@@ -15185,7 +15088,7 @@ volumes:
   source: rakuten-live
   added_at: '2026-08-27'
   note: '巻抜け見直し(最新刊2026年層96頁): 楽天live 5ゲート(size/レーベル/著者/ISBN帯/日付)+目視精査'
-- series_keys: &id032
+- series_keys: &id025
   - name:蒼木スピカ|name:乙女怪獣キャラメリゼ
   number: 8
   isbn13: '9784046841001'
@@ -15196,7 +15099,7 @@ volumes:
   source: rakuten-live
   added_at: '2026-08-27'
   note: '巻抜け見直し(最新刊2026年層96頁): 楽天live 5ゲート(size/レーベル/著者/ISBN帯/日付)+目視精査'
-- series_keys: *id032
+- series_keys: *id025
   number: 9
   isbn13: '9784046852137'
   release_date: '2025-12-23'
@@ -15206,7 +15109,7 @@ volumes:
   source: rakuten-live
   added_at: '2026-08-27'
   note: '巻抜け見直し(最新刊2026年層96頁): 楽天live 5ゲート(size/レーベル/著者/ISBN帯/日付)+目視精査'
-- series_keys: &id033
+- series_keys: &id026
   - qid:Q11675407|name:ラーメン大好き小泉さん
   number: 14
   isbn13: '9784253004343'
@@ -15217,7 +15120,7 @@ volumes:
   source: rakuten-live
   added_at: '2026-08-27'
   note: '巻抜け見直し(最新刊2026年層96頁): 楽天live 5ゲート(size/レーベル/著者/ISBN帯/日付)+目視精査'
-- series_keys: *id033
+- series_keys: *id026
   number: 15
   isbn13: '9784253013475'
   release_date: '2026-05-08'
@@ -15315,7 +15218,7 @@ volumes:
   source: rakuten-live
   added_at: '2026-08-27'
   note: '巻抜け見直し(最新刊2026年層96頁): 楽天live 5ゲート(size/レーベル/著者/ISBN帯/日付)+目視精査'
-- series_keys: &id034
+- series_keys: &id027
   - name:秋ひろな|name:社内ビッチちゃんは今日もときめきが止められない
   number: 1
   isbn13: '9784098730063'
@@ -15326,7 +15229,7 @@ volumes:
   source: rakuten-live
   added_at: '2026-08-27'
   note: '巻抜け見直し(最新刊2026年層96頁): 楽天live 5ゲート(size/レーベル/著者/ISBN帯/日付)+目視精査'
-- series_keys: *id034
+- series_keys: *id027
   number: 2
   isbn13: '9784098730070'
   release_date: '2024-11-26'
@@ -15413,7 +15316,7 @@ volumes:
   source: rakuten-live
   added_at: '2026-08-27'
   note: '巻抜け見直し(最新刊2026年層96頁): 楽天live 5ゲート(size/レーベル/著者/ISBN帯/日付)+目視精査'
-- series_keys: &id035
+- series_keys: &id028
   - qid:Q997953|name:Wジュリエット2
   number: 4
   isbn13: '9784592214441'
@@ -15424,7 +15327,7 @@ volumes:
   source: rakuten-live
   added_at: '2026-08-27'
   note: '巻抜け見直し(最新刊2026年層96頁): 楽天live 5ゲート(size/レーベル/著者/ISBN帯/日付)+目視精査'
-- series_keys: *id035
+- series_keys: *id028
   number: 5
   isbn13: '9784592214458'
   release_date: '2016-04-20'
@@ -15538,7 +15441,7 @@ volumes:
   source: rakuten-preorder
   added_at: '2026-08-31'
   note: 楽天予約ハーベスト① slug=kuroiwa-medaka-ni-watashi-no-kawaii-ga-tsuujinai
-- series_keys: &id036
+- series_keys:
   - qid:Q313945|name:名探偵コナン
   qid: null
   number: 109
@@ -16071,18 +15974,6 @@ volumes:
   source: rakuten-preorder
   added_at: '2026-08-31'
   note: 楽天予約ハーベスト① slug=yume-neko-nekuto
-- series_keys: *id036
-  qid: null
-  number: 109
-  isbn13: '9784099432478'
-  release_date: '2026-10-16'
-  pages: null
-  publisher: 小学館
-  edition_type: standard
-  title_display: 名探偵コナン 109 絵コンテカードセット付き特装版
-  source: rakuten-preorder
-  added_at: '2026-08-31'
-  note: 楽天予約ハーベスト① slug=meitantei-conan
 - series_keys:
   - qid:Q17686916|name:その町の一文字さんが笑うとき
   qid: null
@@ -16228,20 +16119,6 @@ volumes:
   added_at: '2026-09-02'
   note: 楽天予約ハーベスト① slug=brother-jingi
 - series_keys:
-  - name:バンダイナムコエンターテインメント|name:学園アイドルマスターGOLD RUSH
-  - name:バンダイナムコエンターテインメント|name:学園アイドルマスターgold rush
-  qid: null
-  number: 8
-  isbn13: '9784253020640'
-  release_date: '2026-11-06'
-  pages: null
-  publisher: 秋田書店
-  edition_type: standard
-  title_display: 学園アイドルマスター　GOLD　RUSH　特装版　8
-  source: rakuten-preorder
-  added_at: '2026-09-02'
-  note: 楽天予約ハーベスト① slug=gakuen-aidorumasutaa-gold-rush
-- series_keys:
   - name:中村たつおき|name:かいじゅうたん、現る。
   qid: null
   number: 7
@@ -16282,7 +16159,7 @@ volumes:
   source: rakuten-preorder
   added_at: '2026-09-02'
   note: 楽天予約ハーベスト① slug=yuu-m-ee-mikakunin-sougou-kakutougi
-- series_keys: &id042
+- series_keys: &id033
   - qid:Q3509589|name:史上最強の弟子ケンイチ
   qid: null
   number: 4
@@ -16321,7 +16198,7 @@ volumes:
   source: rakuten-preorder
   added_at: '2026-09-02'
   note: 楽天予約ハーベスト① slug=fushigi-yuugi-byakko-senki
-- series_keys: &id037
+- series_keys: &id029
   - qid:Q16770337|name:名探偵マーニー
   qid: null
   number: 10
@@ -16334,7 +16211,7 @@ volumes:
   source: rakuten-preorder
   added_at: '2026-09-02'
   note: 楽天予約ハーベスト① slug=meitantei-maanii
-- series_keys: *id037
+- series_keys: *id029
   qid: null
   number: 11
   isbn13: '9784253021074'
@@ -16346,7 +16223,7 @@ volumes:
   source: rakuten-preorder
   added_at: '2026-09-02'
   note: 楽天予約ハーベスト① slug=meitantei-maanii
-- series_keys: *id037
+- series_keys: *id029
   qid: null
   number: 9
   isbn13: '9784253021050'
@@ -16358,7 +16235,7 @@ volumes:
   source: rakuten-preorder
   added_at: '2026-09-02'
   note: 楽天予約ハーベスト① slug=meitantei-maanii
-- series_keys: &id039
+- series_keys:
   - name:田中まい|name:妖怪学校の先生はじめました!
   qid: null
   number: 22
@@ -16371,7 +16248,7 @@ volumes:
   source: rakuten-preorder
   added_at: '2026-09-02'
   note: 楽天予約ハーベスト① slug=youkai-gakkou-no-sensei-hajimemashita
-- series_keys: *id037
+- series_keys: *id029
   qid: null
   number: 6
   isbn13: '9784253021029'
@@ -16383,7 +16260,7 @@ volumes:
   source: rakuten-preorder
   added_at: '2026-09-02'
   note: 楽天予約ハーベスト① slug=meitantei-maanii
-- series_keys: *id037
+- series_keys: *id029
   qid: null
   number: 5
   isbn13: '9784253021012'
@@ -16395,7 +16272,7 @@ volumes:
   source: rakuten-preorder
   added_at: '2026-09-02'
   note: 楽天予約ハーベスト① slug=meitantei-maanii
-- series_keys: *id037
+- series_keys: *id029
   qid: null
   number: 7
   isbn13: '9784253021036'
@@ -16407,7 +16284,7 @@ volumes:
   source: rakuten-preorder
   added_at: '2026-09-02'
   note: 楽天予約ハーベスト① slug=meitantei-maanii
-- series_keys: *id037
+- series_keys: *id029
   qid: null
   number: 8
   isbn13: '9784253021043'
@@ -16498,7 +16375,7 @@ volumes:
   source: rakuten-preorder
   added_at: '2026-09-02'
   note: 楽天予約ハーベスト① slug=mou-yamete-kaifuku-shinaide-kenja-sama
-- series_keys: &id038
+- series_keys: &id030
   - qid:Q11280478|name:馬賭け
   qid: null
   number: 7
@@ -16511,7 +16388,7 @@ volumes:
   source: rakuten-preorder
   added_at: '2026-09-02'
   note: 楽天予約ハーベスト① slug=umakake
-- series_keys: *id037
+- series_keys: *id029
   qid: null
   number: 1
   isbn13: '9784253020824'
@@ -16523,7 +16400,7 @@ volumes:
   source: rakuten-preorder
   added_at: '2026-09-02'
   note: 楽天予約ハーベスト① slug=meitantei-maanii
-- series_keys: *id037
+- series_keys: *id029
   qid: null
   number: 3
   isbn13: '9784253020848'
@@ -16561,7 +16438,7 @@ volumes:
   source: rakuten-preorder
   added_at: '2026-09-02'
   note: 楽天予約ハーベスト① slug=zange
-- series_keys: *id037
+- series_keys: *id029
   qid: null
   number: 2
   isbn13: '9784253020831'
@@ -16586,7 +16463,7 @@ volumes:
   source: rakuten-preorder
   added_at: '2026-09-02'
   note: 楽天予約ハーベスト① slug=shounan-bakusouzoku-first-flag
-- series_keys: *id038
+- series_keys: *id030
   qid: null
   number: 6
   isbn13: '9784253020916'
@@ -16598,7 +16475,7 @@ volumes:
   source: rakuten-preorder
   added_at: '2026-09-02'
   note: 楽天予約ハーベスト① slug=umakake
-- series_keys: *id037
+- series_keys: *id029
   qid: null
   number: 4
   isbn13: '9784253020855'
@@ -16702,18 +16579,6 @@ volumes:
   source: rakuten-preorder
   added_at: '2026-09-02'
   note: 楽天予約ハーベスト① slug=radical-hospital
-- series_keys: *id039
-  qid: null
-  number: 22
-  isbn13: '9784301008460'
-  release_date: '2026-12-25'
-  pages: null
-  publisher: スクウェア・エニックス
-  edition_type: standard
-  title_display: 妖怪学校の先生はじめました！ （22）特装版　小冊子付き
-  source: rakuten-preorder
-  added_at: '2026-09-02'
-  note: 楽天予約ハーベスト① slug=youkai-gakkou-no-sensei-hajimemashita
 - series_keys:
   - name:をのひなお|name:パーフェクト グリッター
   - name:をのひなお|name:パーフェクトグリッター
@@ -16728,7 +16593,7 @@ volumes:
   source: rakuten-preorder
   added_at: '2026-09-02'
   note: 楽天予約ハーベスト① slug=perfect-glitter
-- series_keys: &id040
+- series_keys: &id031
   - name:いちかわ壱|name:ただいま、おかえり
   qid: null
   number: 2
@@ -16741,7 +16606,7 @@ volumes:
   source: rakuten-preorder
   added_at: '2026-09-02'
   note: 楽天予約ハーベスト① slug=tadaima-okaeri
-- series_keys: *id040
+- series_keys: *id031
   qid: null
   number: 1
   isbn13: '9784867871966'
@@ -16896,7 +16761,7 @@ volumes:
   source: rakuten-preorder
   added_at: '2026-09-02'
   note: 楽天予約ハーベスト① slug=mizudako-chan-kara-wa-nigerarenai
-- series_keys: &id041
+- series_keys: &id032
   - name:Gae|name:枯れた花に涙を
   qid: null
   number: 7
@@ -16936,7 +16801,7 @@ volumes:
   source: rakuten-preorder
   added_at: '2026-09-02'
   note: 楽天予約ハーベスト① slug=nekoneko-youjo-no-aijou-gohan
-- series_keys: *id041
+- series_keys: *id032
   qid: null
   number: 8
   isbn13: '9784813766858'
@@ -16962,7 +16827,7 @@ volumes:
   source: rakuten-preorder
   added_at: '2026-09-02'
   note: 楽天予約ハーベスト① slug=hodonaku-owakare-desu
-- series_keys: *id042
+- series_keys: *id033
   qid: null
   number: 2
   isbn13: '9784098548613'
@@ -16974,7 +16839,7 @@ volumes:
   source: rakuten-preorder
   added_at: '2026-09-02'
   note: 楽天予約ハーベスト① slug=shijou-saikyou-no-deshi-kenichi
-- series_keys: &id043
+- series_keys: &id034
   - name:Neno|name:お嬢の愛は俺のもの
   qid: null
   number: 4
@@ -16987,7 +16852,7 @@ volumes:
   source: rakuten-preorder
   added_at: '2026-09-02'
   note: 楽天予約ハーベスト① slug=ojou-no-ai-wa-ore-no-mono
-- series_keys: *id043
+- series_keys: *id034
   qid: null
   number: 5
   isbn13: '9784813766711'
@@ -17065,3 +16930,111 @@ volumes:
   source: rakuten-preorder
   added_at: '2026-09-02'
   note: 楽天予約ハーベスト① slug=kedamono-ouji-no-nise-koi-hanayome stem=kedamonooujinonisekoihanayome
+- series_keys:
+  - name:夢枕獏|name:漫画ゆうえんち
+  - name:夢枕獏|name:漫画ゆうえんち|sub:バキ外伝
+  - name:夢枕獏|name:漫画ゆうえんち|sub:バキ外伝.
+  qid: null
+  number: 11
+  isbn13: '9784253020671'
+  release_date: '2026-11-06'
+  pages: null
+  publisher: 秋田書店
+  edition_type: standard
+  title_display: 漫画　ゆうえんち　-バキ外伝ー　11
+  source: rakuten-preorder
+  added_at: '2026-09-02'
+  note: 楽天予約ハーベスト① slug=manga-yuuenchi
+- series_keys:
+  - name:内場悠月|name:チェリー勇者とせいなる剣
+  qid: null
+  number: 10
+  isbn13: '9784253020664'
+  release_date: '2026-11-06'
+  pages: null
+  publisher: 秋田書店
+  edition_type: standard
+  title_display: チェリー勇者と“せい”なる剣　10
+  source: rakuten-preorder
+  added_at: '2026-09-02'
+  note: 楽天予約ハーベスト① slug=cherry-yuusha-to-sei-naru-tsurugi
+- series_keys:
+  - name:草下シンヤ|name:半グレ|sub:六本木摩天楼のレクイエム
+  qid: null
+  number: 16
+  isbn13: '9784253020893'
+  release_date: '2026-11-19'
+  pages: null
+  publisher: 秋田書店
+  edition_type: standard
+  title_display: 半グレー六本木　摩天楼のレクイエムー　16
+  source: rakuten-preorder
+  added_at: '2026-09-02'
+  note: 楽天予約ハーベスト① slug=hangure
+- series_keys:
+  - qid:Q88725863|name:ちいかわ|sub:なんか小さくてかわいいやつ
+  qid: null
+  number: 9
+  isbn13: '9784065455531'
+  release_date: '2026-11-20'
+  pages: null
+  publisher: 講談社
+  edition_type: standard
+  title_display: ちいかわ　なんか小さくてかわいいやつ（9）
+  source: rakuten-preorder
+  added_at: '2026-09-02'
+  note: 楽天予約ハーベスト① slug=chiikawa
+- series_keys:
+  - name:たかし♂|name:ヤクザにお風呂で働かされてます。
+  qid: null
+  number: 5
+  isbn13: '9784253020701'
+  release_date: '2026-11-16'
+  pages: null
+  publisher: 秋田書店
+  edition_type: standard
+  title_display: ヤクザにお風呂で働かされてます。　5
+  source: rakuten-preorder
+  added_at: '2026-09-02'
+  note: 楽天予約ハーベスト① slug=yakuza-ni-ofuro-de-hatarakasaretemasu
+- series_keys:
+  - name:白石新|name:追放された転生貴族、外れスキルで内政無双
+  - name:転|name:追放された転生貴族、外れスキルで内政無双|sub:気ままに領地運営するはずが、スキル『ガチャ』のお陰で最強領地を作り上げてしまった
+  - name:雪月佳|name:追放された転生貴族、外れスキルで内政無双|sub:気ままに領地運営するはずが、スキル『ガチャ』のお陰で最強領地を作り上げてしまった
+  qid: null
+  number: 9
+  isbn13: '9784813766834'
+  release_date: '2026-10-23'
+  pages: null
+  publisher: スターツ出版
+  edition_type: standard
+  title_display: 追放された転生貴族、外れスキルで内政無双 〜気ままに領地運営するはずが、スキル『ガチャ』のお陰で最強領地を作り上げてしまった〜9
+  source: rakuten-preorder
+  added_at: '2026-09-02'
+  note: 楽天予約ハーベスト① slug=tsuihousareta-sareta-tensei-kizoku-hazure-skill-de-naisei-musou
+- series_keys:
+  - name:はれよし|name:ちょっと留守にしていたら家が没落していました
+  qid: null
+  number: 3
+  isbn13: '9784813766780'
+  release_date: '2026-10-23'
+  pages: null
+  publisher: スターツ出版
+  edition_type: standard
+  title_display: ちょっと留守にしていたら家が没落していました 転生令嬢は前世知識と聖魔法で大事な家族を救います　3
+  source: rakuten-preorder
+  added_at: '2026-09-02'
+  note: 楽天予約ハーベスト① slug=chotto-rusu-ni-shiteitara-ie-ga-botsuraku-shite-imashita
+- series_keys:
+  - name:紅月りと|name:捨てられた妃
+  qid: null
+  number: 4
+  isbn13: '9784813766766'
+  release_date: '2026-10-23'
+  pages: null
+  publisher: スターツ出版
+  edition_type: standard
+  title_display: 捨てられた妃　めでたく離縁が成立したので出ていったら、竜国の王太子からの溺愛が待っていました　4
+  source: rakuten-preorder
+  added_at: '2026-09-02'
+  note: 楽天予約ハーベスト① slug=suterareta-kisaki
