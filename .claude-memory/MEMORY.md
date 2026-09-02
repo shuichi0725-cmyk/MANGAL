@@ -125,3 +125,4 @@
 - [【罠】CommandLine正規表現killで自分のシェルを殺す](process_kill_commandline_self_match.md) — Name -eq python.exe で絞る・自分のコマンド行に載る語で探さない
 - [【宿題】著者欄が出版社名の本番頁9件](author_is_publisher_name_pages.md) — 楽天placeholder型・予約経路はゲート済
 - [【未決・構造穴】日次の保留ISBNは二度と増加分に出ない](daily_distill_hold_not_requeued.md) — hold再投入をincrementに焼くまで triage簿を人が消化・2026-09-02時点9件
+- [【型・是正済】騎士ガンダム型=新装版が編ごとに別頁へ散る+特別版が番号衝突で不可視](kishi_gundam_shinsoban_consolidation.md) — 楽天captionで収録対応確定→版タブ統合・新頁2・drop5→301・次週次で R2 --prune
