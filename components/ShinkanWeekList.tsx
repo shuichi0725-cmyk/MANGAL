@@ -2,7 +2,17 @@
 
 import { useEffect, useState } from "react";
 import { ShinkanDayBlock } from "@/components/ShinkanRow";
-import { dateLabel, monthsCovering, rowsInRange, weekRange, type ShinkanItem, type ShinkanMonth } from "@/lib/shinkanDates";
+import {
+  KNOWN_ALL,
+  dateLabel,
+  monthsCovering,
+  rowsInRange,
+  weekRange,
+  weekdayOf,
+  type KnownSet,
+  type ShinkanItem,
+  type ShinkanMonth,
+} from "@/lib/shinkanDates";
 
 type Rows = Array<{ date: string; items: ShinkanItem[] }>;
 
@@ -22,7 +32,7 @@ export default function ShinkanWeekList({
 }) {
   const [range, setRange] = useState({ start: initialStart, end: initialEnd });
   const [rows, setRows] = useState<Rows>(initialRows);
-  const [known, setKnown] = useState<Set<string> | null>(() => new Set(knownSlugs));
+  const [known, setKnown] = useState<KnownSet>(() => new Set(knownSlugs));
   const [refreshed, setRefreshed] = useState(false);
   useEffect(() => {
     const now = weekRange();
@@ -38,7 +48,7 @@ export default function ShinkanWeekList({
         if (!alive) return;
         setRows(rowsInRange(months, now.start, now.end));
         setRange(now);
-        setKnown(null); // 取り直し分は全作品に「詳細」を出す(本番は全slugが索引に居る)
+        setKnown(KNOWN_ALL); // 取り直し分は全作品に「詳細」を出す(本番は全slugが索引に居る)
         setRefreshed(true);
       } catch {
         /* 失敗時は build 時の内容のまま */
@@ -49,18 +59,27 @@ export default function ShinkanWeekList({
     };
   }, [initialStart]);
   const total = rows.reduce((s, r) => s + r.items.length, 0);
-  const isKnown = (slug: string) => (known ? known.has(slug) : true);
-  const knownSet = { has: isKnown } as Set<string>;
+  const ids = rows.map((r) => `day-${Number(r.date.slice(8))}`);
   return (
     <>
       <p className="px-4 pb-2 text-[12px] text-ink/65">
         {dateLabel(range.start, true)}〜{dateLabel(range.end)} の発売分 全{total.toLocaleString()}冊
         {refreshed ? <span className="ml-2 text-[10.5px] text-ink/45">(最新の週に更新)</span> : null}
       </p>
-      {rows.map((r) => (
-        <ShinkanDayBlock key={r.date} id={`d${r.date.slice(8)}`} heading={dateLabel(r.date, true)} items={r.items} known={knownSet} />
+      {rows.map((r, i) => (
+        <ShinkanDayBlock
+          key={r.date}
+          id={ids[i]}
+          label={`${Number(r.date.slice(5, 7))}/${r.date.slice(8)}`}
+          sub={weekdayOf(r.date)}
+          items={r.items}
+          known={known}
+          prevId={i > 0 ? ids[i - 1] : undefined}
+          nextId={i < rows.length - 1 ? ids[i + 1] : undefined}
+        />
       ))}
       {total === 0 && <p className="px-4 py-8 text-[13px] text-ink/60">この週の新刊はまだ登録されていません。</p>}
+      <p className="px-4 pt-3 text-[10px] text-ink/40">[PR] Amazonリンクにはアフィリエイト広告を含みます</p>
     </>
   );
 }

@@ -25,9 +25,8 @@ export function loadShinkanMonth(ym: string): ShinkanMonth | null {
   return JSON.parse(fs.readFileSync(p, "utf8")) as ShinkanMonth;
 }
 
-export function monthTotal(d: ShinkanMonth): number {
-  return Object.values(d.days).reduce((s, v) => s + v.length, 0) + (d.unknown?.length ?? 0);
-}
+/** @deprecated monthCount(shinkanDates) を使う */
+export { monthCount as monthTotal } from "./shinkanDates";
 
 /** 範囲内の発売日→冊リスト(発売日順)。跨る月のJSONを全部見る。 */
 export function itemsInRange(start: string, end: string): Array<{ date: string; items: ShinkanItem[] }> {
