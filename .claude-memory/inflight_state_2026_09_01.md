@@ -20,3 +20,9 @@ metadata:
 - アニメ nopage台帳194件(登録候補)/ B13(OVA形式がハーベスト対象外=岸辺露伴型)。
 
 ## 追記 2026-09-02: /shinkan 年月ナビの固定2行化(年チップ1行+月行横スクロール+当月へ初期スクロール)= preview確認待ち→機能蒸留で本番へ(コードのみ: components/ShinkanMonthNav.tsx, app/shinkan/this-week/page.tsx)
+
+
+## 追記 2026-09-02(夜): アップ直前リハーサル済み([[weekly_rehearsal_2026_09_02]])
+- step1→preflight→CODE週判定→フルビルド42分→sitemap→`_r2-sync.py --dry --prune`(PUT 180,880/削除136)まで通した。**R2/KV/finalizeは未実行**=上記1-3は依然「本番待ち」。
+- 本物の「週次蒸留して」の前にやること: ①未反映書影337頁の反映(`docs/production-diagnostics/cover-override-unreflected-2026-09-02.txt` を `_promote-bulk-v2.py --only-file`) ②アイドル書影ジョブ(`_placeholder-cover-refresh.py --all`)を止める ③`--prune` 必須(台帳41件・実削除40頁)。
+- 連鎖alias3本(スゴ盛)は是正済(8de66d807)。ps1ラッパはUTF-8化済。

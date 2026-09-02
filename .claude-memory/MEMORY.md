@@ -119,3 +119,6 @@
 - [Bashツールheredoc+シングルクォート罠](bash_tool_heredoc_quote_pitfall.md) — 複数行scriptはWriteでscratchpadに書いて実行・repoの.pyはCRLF/LF混在
 - [【戒め・全外部照会共通】失敗を否定記録にしない](feedback_no_negative_record_on_failure.md) — 200で空だけが否定・連続429=exit 2・検査2点(except直後の記帳/Throttled先行捕捉)
 - [週次リハーサル2026-09-02=アップ直前まで実測+穴](weekly_rehearsal_2026_09_02.md) — step1 1h50m/ビルド42分/PUT18万・アイドル書影seed未反映337頁(要反映)・連鎖alias是正済・ps1 UTF-8化
+
+- [【許容】週次のアップ無しリハーサル](feedback_weekly_rehearsal_no_upload.md) — 「アップしない」明示なら step1→preflight→build→sitemap→r2-sync --dry まで可。R2/KV/finalize/wranglerは不可侵
+- [【罠】CommandLine正規表現killで自分のシェルを殺す](process_kill_commandline_self_match.md) — Name -eq python.exe で絞る・自分のコマンド行に載る語で探さない

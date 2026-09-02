@@ -22,3 +22,7 @@ Bashツールが `bash: -c: line 90: unexpected EOF while looking for matching '
 `_material-harvest.py` はLF)。機械置換は改行を正規化してから照合し、元の改行で書き戻す。
 
 関連: [[feedback_agent_fanout_token_cost]](同じ見直しをサブエージェント無しで済ませた回)
+
+追記 2026-09-02(夜): **バックスラッシュも化ける**。heredoc本文の `.replace('\\','/')` が実行時に
+`unterminated string literal` になった(ツール側ラップで `\\` が `\` に潰れる)。シングルクォートと同じく
+**Writeでscratchpadに書いて実行**が正解。関連: [[process_kill_commandline_self_match]]
