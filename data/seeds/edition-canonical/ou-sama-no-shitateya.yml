@@ -1,241 +1,105 @@
 slug: ou-sama-no-shitateya
 canonical_label: 通常版
 canonical_publisher: 集英社
-canonical_imprint: ヤングジャンプコミックスGJ
+canonical_imprint: ジャンプ・コミックスデラックス
 suppress_types:
 - deluxe
-source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。'
+- shinsoban
+source: '王様の仕立て屋 4部分割 2026-09-03: NDL書誌(77行)+ja.wikipedia で確定。1頁に第1部サルト・フィニート(全32)/第2部サルトリア・ナポレターナ(全13)/第3部フィオリ・ディ・ジラソーレ(全7)/第4部下町テーラー(全19)/傑作選集 the special edition が同居し版タブ6本に散乱していたのを、部ごとの頁へ分けた。真因=種2のクラスタキーが原案協力・監修の片瀬平太で、sub「下町テーラー」と「下町テーラー.」(末尾ピリオド)、「片瀬平太協力・監修」、qid:Q11437087 に割れていた。巻は1冊も追加していない(配置換えのみ)。 本頁=第1部サルト・フィニート全32巻(スーパージャンプ 2003-2011)。deluxe/shinsobanタブは第2〜4部と傑作選の残骸なので全suppress。'
 volumes:
 - number: 1
-  isbn13: '9784088911816'
-  release_date: '2018-12'
+  isbn13: '9784088593999'
+  release_date: 2004-01
 - number: 2
-  isbn13: '9784088912448'
-  release_date: '2019-03'
+  isbn13: '9784088594125'
+  release_date: '2004-04-17'
 - number: 3
-  isbn13: '9784088913292'
-  release_date: '2019-07'
+  isbn13: '9784088594309'
+  release_date: 2004-07
 - number: 4
-  isbn13: '9784088914145'
-  release_date: '2019-12'
+  isbn13: '9784088594422'
+  release_date: '2004-10-09'
 - number: 5
-  isbn13: '9784088915159'
-  release_date: '2020-03'
+  isbn13: '9784088594859'
+  release_date: '2005-02-09'
 - number: 6
-  isbn13: '9784088915876'
-  release_date: '2020-07'
+  isbn13: '9784088595054'
+  release_date: '2005-05-07'
 - number: 7
-  isbn13: '9784088917030'
-  release_date: '2020-10'
+  isbn13: '9784088595207'
+  release_date: '2005-08-09'
 - number: 8
-  isbn13: '9784088917900'
-  release_date: '2021-02'
+  isbn13: '9784088595412'
+  release_date: '2005-11-09'
 - number: 9
-  isbn13: '9784088918792'
-  release_date: '2021-05'
+  isbn13: '9784088595597'
+  release_date: '2006-03-08'
 - number: 10
-  isbn13: '9784088920641'
-  release_date: '2021-09'
+  isbn13: '9784088595740'
+  release_date: 2006-05
 - number: 11
-  isbn13: '9784088921761'
-  release_date: '2021-12'
+  isbn13: '9784088595924'
+  release_date: '2006-08-09'
 - number: 12
-  isbn13: '9784088922867'
-  release_date: '2022-04'
+  isbn13: '9784088596044'
+  release_date: '2006-11-07'
 - number: 13
-  isbn13: '9784088924175'
-  release_date: '2022-09'
+  isbn13: '9784088596198'
+  release_date: '2007-01-09'
 - number: 14
-  isbn13: '9784088925523'
-  release_date: '2022-12'
+  isbn13: '9784088596419'
+  release_date: '2007-05-07'
 - number: 15
-  isbn13: '9784088927022'
-  release_date: '2023-05'
+  isbn13: '9784088596594'
+  release_date: '2007-08-08'
 - number: 16
-  isbn13: '9784088928067'
-  release_date: '2023-08'
+  isbn13: '9784088596792'
+  release_date: '2007-11-07'
+- number: 17
+  isbn13: '9784088596877'
+  release_date: '2008-02-09'
 - number: 18
-  isbn13: '9784088932187'
-  release_date: '2024-04'
+  isbn13: '9784088597041'
+  release_date: 2008-05
 - number: 19
-  isbn13: '9784088933153'
-  release_date: '2024-08'
-extra_editions:
-- type: deluxe
-  label: ジャンプ・コミックスデラックス(2004)
-  imprint: ジャンプ・コミックスデラックス
-  publisher: 集英社
-  volumes:
-  - number: 1
-    isbn13: '9784088593999'
-    release_date: '2004-01'
-  - number: 3
-    isbn13: '9784088594309'
-    release_date: '2004-07'
-- type: shinsoban
-  label: SJ
-  imprint: SJ
-  publisher: 集英社
-  volumes:
-  - number: 4
-    isbn13: '9784088594422'
-    release_date: '2004-10-09'
-  - number: 5
-    isbn13: '9784088594859'
-    release_date: '2005-02-09'
-  - number: 6
-    isbn13: '9784088595054'
-    release_date: '2005-05-07'
-  - number: 7
-    isbn13: '9784088595207'
-    release_date: '2005-08-09'
-  - number: 8
-    isbn13: '9784088595412'
-    release_date: '2005-11-09'
-  - number: 9
-    isbn13: '9784088595597'
-    release_date: '2006-03-08'
-  - number: 11
-    isbn13: '9784088595924'
-    release_date: '2006-08-09'
-- type: deluxe
-  label: ジャンプ・コミックスデラックス(2004)
-  imprint: ジャンプ・コミックスデラックス
-  publisher: 集英社
-  volumes:
-  - number: 1
-    isbn13: '9784088597249'
-    release_date: '2008-08'
-  - number: 2
-    isbn13: '9784088594125'
-    release_date: '2004-04-17'
-  - number: 3
-    isbn13: '9784088597362'
-    release_date: '2008-10'
-  - number: 4
-    isbn13: '9784088597423'
-    release_date: '2008-11'
-  - number: 10
-    isbn13: '9784088595740'
-    release_date: '2006-05'
-  - number: 12
-    isbn13: '9784088596044'
-    release_date: '2006-11-07'
-  - number: 13
-    isbn13: '9784088596198'
-    release_date: '2007-01-09'
-  - number: 14
-    isbn13: '9784088596419'
-    release_date: '2007-05-07'
-  - number: 15
-    isbn13: '9784088596594'
-    release_date: '2007-08-08'
-  - number: 16
-    isbn13: '9784088596792'
-    release_date: '2007-11-07'
-  - number: 17
-    isbn13: '9784088596877'
-    release_date: '2008-02-09'
-  - number: 18
-    isbn13: '9784088597041'
-    release_date: '2008-05'
-  - number: 19
-    isbn13: '9784088597195'
-    release_date: '2008-08'
-  - number: 20
-    isbn13: '9784088597393'
-    release_date: '2008-11'
-  - number: 21
-    isbn13: '9784088597560'
-    release_date: '2009-02'
-  - number: 22
-    isbn13: '9784088597737'
-    release_date: '2009-05'
-  - number: 23
-    isbn13: '9784088597874'
-    release_date: '2009-08'
-  - number: 24
-    isbn13: '9784088598055'
-    release_date: '2009-11'
-  - number: 25
-    isbn13: '9784088598222'
-    release_date: '2010-02'
-  - number: 26
-    isbn13: '9784088598376'
-    release_date: '2010-04'
-  - number: 27
-    isbn13: '9784088598468'
-    release_date: '2010-07'
-  - number: 28
-    isbn13: '9784088598604'
-    release_date: '2010-11'
-  - number: 29
-    isbn13: '9784088598697'
-    release_date: '2010-12'
-  - number: 30
-    isbn13: '9784088598819'
-    release_date: '2011-04'
-  - number: 31
-    isbn13: '9784088598888'
-    release_date: '2011-07'
-  - number: 32
-    isbn13: '9784088587738'
-    release_date: '2011-11'
-- type: shinsoban
-  label: ヤングジャンプ・コミックスGJ
-  imprint: ヤングジャンプ・コミックスGJ
-  publisher: 集英社
-  volumes:
-  - number: 1
-    isbn13: '9784088793436'
-    release_date: '2012-05'
-  - number: 2
-    isbn13: '9784088794501'
-    release_date: '2012-10'
-  - number: 3
-    isbn13: '9784088795430'
-    release_date: '2013-03'
-  - number: 4
-    isbn13: '9784088796215'
-    release_date: '2013-07'
-  - number: 5
-    isbn13: '9784088797151'
-    release_date: '2013-10'
-  - number: 6
-    isbn13: '9784088797625'
-    release_date: '2014-03'
-  - number: 7
-    isbn13: '9784088798769'
-    release_date: '2014-07'
-  - number: 8
-    isbn13: '9784088900667'
-    release_date: '2014-12'
-  - number: 9
-    isbn13: '9784088901381'
-    release_date: '2015-03'
-  - number: 10
-    isbn13: '9784088902388'
-    release_date: '2015-07'
-  - number: 11
-    isbn13: '9784088902807'
-    release_date: '2015-11'
-  - number: 12
-    isbn13: '9784088903682'
-    release_date: '2016-02'
-  - number: 13
-    isbn13: '9784088904085'
-    release_date: '2016-04'
-- type: shinsoban
-  label: ヤングジャンプコミックスGJ(2018)
-  imprint: ヤングジャンプコミックスGJ
-  publisher: 集英社
-  volumes:
-  - number: 6
-    isbn13: '9784088908878'
-    release_date: '2018-03'
-  - number: 7
-    isbn13: '9784088910598'
-    release_date: '2018-07'
-  - number: 17
-    isbn13: '9784088930442'
-    release_date: '2023-12'
+  isbn13: '9784088597195'
+  release_date: 2008-08
+- number: 20
+  isbn13: '9784088597393'
+  release_date: 2008-11
+- number: 21
+  isbn13: '9784088597560'
+  release_date: 2009-02
+- number: 22
+  isbn13: '9784088597737'
+  release_date: 2009-05
+- number: 23
+  isbn13: '9784088597874'
+  release_date: 2009-08
+- number: 24
+  isbn13: '9784088598055'
+  release_date: 2009-11
+- number: 25
+  isbn13: '9784088598222'
+  release_date: 2010-02
+- number: 26
+  isbn13: '9784088598376'
+  release_date: 2010-04
+- number: 27
+  isbn13: '9784088598468'
+  release_date: 2010-07
+- number: 28
+  isbn13: '9784088598604'
+  release_date: 2010-11
+- number: 29
+  isbn13: '9784088598697'
+  release_date: 2010-12
+- number: 30
+  isbn13: '9784088598819'
+  release_date: 2011-04
+- number: 31
+  isbn13: '9784088598888'
+  release_date: 2011-07
+- number: 32
+  isbn13: '9784088587738'
+  release_date: 2011-11

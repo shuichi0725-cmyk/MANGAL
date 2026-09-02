@@ -47,6 +47,14 @@ group=defaultdict(list)
 for k in list(parent): group[find(k)].append(k)
 key2group={k:find(k) for k in parent}
 
+# --- edition-canonical 結線slug(= 巻を確定。open_tail 頁だけ続巻追随を許す) ---
+canon_fixed=set()
+for _p in sorted(os.listdir(f"{ROOT}/data/seeds/edition-canonical")):
+    if not _p.endswith(".yml"): continue
+    try: _s=yaml.safe_load(open(f"{ROOT}/data/seeds/edition-canonical/{_p}",encoding="utf-8")) or {}
+    except Exception: continue
+    if not _s.get("open_tail"): canon_fixed.add(_p[:-4])
+
 # --- 種4 (manual + auto): series_keys -> numbers (with edition_type) ---
 seed4=defaultdict(list)  # frozenset(series_keys) handled per-key: key -> [(type,number)]
 def load_seed4(path):
@@ -94,14 +102,26 @@ for slug in slugs:
     tv=[(e.get("type") or "standard",v.get("number")) for e in eds for v in (e.get("volumes") or []) if v.get("number")]
     bg,_=has_gap(tv)
     # edition-overrides(奇子型)= 版を完全置換して仮想適用
-    if slug in edov:
-        oeds=edov[slug].get("editions") or []
+    # ★editions を持つ entry の時だけ置換する(2026-09-03): edition-overrides には
+    #   title/kana/year/subtitle だけの entry が 287 件あり、それを空 editions と解釈して
+    #   頁の巻を全消ししていた(= 仮想適用で穴が開いたように見える偽陽性。監査対象1417作のうち17件が該当)。
+    if slug in edov and (edov[slug].get("editions")):
+        oeds=edov[slug]["editions"]
         tv=[(e.get("type") or "standard",v.get("number")) for e in oeds for v in (e.get("volumes") or []) if v.get("number")]
     if bg: before_gap+=1
     # virtual apply
     isbns=[i for i in (norm(v.get("isbn13")) for e in eds for v in (e.get("volumes") or []) if v.get("isbn13")) if i]
     skeys=isbn_keys(isbns)
     tv2=list(tv)
+    # ★canonical 結線頁は仮想適用しない(2026-09-03): edition-canonical は standard を丸ごと
+    #   置換し suppress_types で他版も消すため、種4/merge partner の巻は**頁に出られない**。
+    #   足すと在りもしない穴が出る(王様の仕立て屋 4部分割で実踏 = deluxe:[10] の偽陽性)。
+    #   open_tail(=続巻の自動追随を許した頁)だけは従来どおり仮想適用する。
+    if slug in canon_fixed:
+        ag,by2=has_gap(tv2)
+        if ag: after_gap+=1; remain.append((slug,d.get("title",""),gap_detail(by2)))
+        elif bg: closed.append((slug,d.get("title","")))
+        continue
     # 種4
     seen4=set()
     for k in skeys:

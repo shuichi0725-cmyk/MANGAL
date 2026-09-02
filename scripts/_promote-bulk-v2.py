@@ -3104,6 +3104,18 @@ def build_yml(
             o["title_kana"] = _eov["title_kana"]
         if _eov.get("title_romaji"):
             o["title_romaji"] = _eov["title_romaji"]
+        # ★subtitle override(2026-09-03 王様の仕立て屋 4部分割): 副題は種3curate/種2代表行由来のため、
+        #   1頁に複数シリーズが同居していた頁を部ごとに分けると**別の部の副題が残る**
+        #   (第1部の頁に第2部「サルトリア・ナポレターナ」が出ていた)。空文字=副題を消す
+        #   (題名側に部名を含める頁=フィオリ式で二重表示になるため)。title override と同型の opt-in。
+        if "subtitle" in _eov:
+            if _eov["subtitle"]:
+                o["subtitle"] = _eov["subtitle"]
+                if _eov.get("subtitle_kana"):
+                    o["subtitle_kana"] = re.sub(r"[\s　]+", "", _eov["subtitle_kana"])
+            else:
+                o.pop("subtitle", None)
+                o.pop("subtitle_kana", None)
         if _eov.get("publisher"):
             o["publisher"] = _eov["publisher"]
             o["publishers"] = _eov.get("publishers") or [_eov["publisher"]]

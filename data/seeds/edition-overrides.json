@@ -10105,6 +10105,34 @@
   "year_ended": 1982,
   "year_started": 1982
  },
+ "genji-monogatari-miyagi": {
+  "anilist": false,
+  "authors": [
+   {
+    "name": "真崎春望",
+    "role": "artist"
+   }
+  ],
+  "editions": [
+   {
+    "imprint": "Akebono-Comics",
+    "label": "通常版",
+    "type": "standard",
+    "volumes": [
+     {
+      "asin": null,
+      "cover_url": null,
+      "isbn13": "9784059006145",
+      "number": 1,
+      "release_date": "2010-01"
+     }
+    ]
+   }
+  ],
+  "note": " / 2026-09-01 anilist:false(真崎春望版=AniList帰属不明。源氏物語系keyのfallback付着を遮断)",
+  "year_ended": 1982,
+  "year_started": 1982
+ },
  "genji-monogatari-shin-1991": {
   "authors": [
    {
@@ -20692,6 +20720,10 @@
   "title": "ラヴィアンローズ",
   "title_kana": "ラヴィアンローズ"
  },
+ "last-order-2000": {
+  "anilist": false,
+  "note": " / 2026-09-01 anilist:false(高田裕三版2000=AniList未収載。dropしてもfallbackで松葉版140559が付くためenrich遮断)"
+ },
  "last-shot": {
   "authors": [
    {
@@ -21331,6 +21363,10 @@
   "demographic": "seinen",
   "note": "分野是正2026-08-10: kodomo→seinen(レーベル確証=Nichibun comics(日本文芸社=青年))"
  },
+ "mahou-shoujo-madoka-magica": {
+  "note": " / 2026-09-01 題是正: 中身=本編コミカライズ全3巻(v1 9784832279902=楽天題・ハノカゲ2011)なのに題が魔獣編(別作)に化けていた薬屋型",
+  "title": "魔法少女まどか☆マギカ"
+ },
  "mahouka-koukou-no-rettousei-double-seven-hen": {
   "authors": [
    {
@@ -21793,6 +21829,10 @@
   ],
   "year_ended": 1982,
   "year_started": 1982
+ },
+ "makai-tenshou": {
+  "anilist": false,
+  "note": " / 2026-09-01 anilist:false(とみ新蔵版=AniList未収載。石川賢版95124のfallback付着を遮断)"
  },
  "maki-no-kuchibue": {
   "authors": [
@@ -26480,6 +26520,38 @@
     ]
    }
   ]
+ },
+ "ou-sama-no-shitateya": {
+  "note": "2026-09-03 王様の仕立て屋 4部分割(NDL+Wikipedia確定): 本頁=第1部サルト・フィニート全32巻。副題が第2部のものに化けていたので是正",
+  "subtitle": "サルト・フィニート",
+  "subtitle_kana": "サルトフィニート",
+  "year_ended": 2011,
+  "year_started": 2004
+ },
+ "ou-sama-no-shitateya-fiori-di-jirasoore": {
+  "note": "2026-09-03 王様の仕立て屋 4部分割(NDL+Wikipedia確定): 第3部。6・7巻を主頁から回収し全7巻に",
+  "year_ended": 2018,
+  "year_started": 2016
+ },
+ "ou-sama-no-shitateya-sartoria-napoletana": {
+  "anilist": false,
+  "note": "2026-09-03 王様の仕立て屋 4部分割(NDL+Wikipedia確定): 第2部を分離した新頁",
+  "subtitle": "",
+  "title": "王様の仕立て屋 サルトリア・ナポレターナ",
+  "title_kana": "オウサマノシタテヤサルトリアナポレターナ",
+  "title_romaji": "ousama no shitateya sartoria napoletana",
+  "year_ended": 2016,
+  "year_started": 2012
+ },
+ "ou-sama-no-shitateya-shitamachi-tailor": {
+  "anilist": false,
+  "note": "2026-09-03 王様の仕立て屋 4部分割(NDL+Wikipedia確定): 第4部を分離した新頁",
+  "subtitle": "",
+  "title": "王様の仕立て屋 下町テーラー",
+  "title_kana": "オウサマノシタテヤシタマチテーラー",
+  "title_romaji": "ousama no shitateya shitamachi tailor",
+  "year_ended": 2024,
+  "year_started": 2018
  },
  "ougon-no-trunk": {
   "authors": [
@@ -36094,6 +36166,11 @@
   "year_ended": 1995,
   "year_started": 1994
  },
+ "yahari-ore-no-seishun-rabukome-wa-machigatteiru": {
+  "note": " / 2026-09-01 副題復元: NDL(9784757539259)題=『〜。: 妄言録』ヨミ=モノローグ。素のLN題と同名でアニメjoinが偶然着地していた薬屋型",
+  "title": "やはり俺の青春ラブコメはまちがっている。-妄言録-",
+  "title_kana": "ヤハリオレノセイシュンラブコメワマチガッテイルモノローグ"
+ },
  "yaiba-2013": {
   "authors": [
    {
@@ -37161,50 +37238,5 @@
   ],
   "year_ended": 1976,
   "year_started": 1976
- },
- "yahari-ore-no-seishun-rabukome-wa-machigatteiru": {
-  "title": "やはり俺の青春ラブコメはまちがっている。-妄言録-",
-  "title_kana": "ヤハリオレノセイシュンラブコメワマチガッテイルモノローグ",
-  "note": " / 2026-09-01 副題復元: NDL(9784757539259)題=『〜。: 妄言録』ヨミ=モノローグ。素のLN題と同名でアニメjoinが偶然着地していた薬屋型"
- },
- "last-order-2000": {
-  "anilist": false,
-  "note": " / 2026-09-01 anilist:false(高田裕三版2000=AniList未収載。dropしてもfallbackで松葉版140559が付くためenrich遮断)"
- },
- "makai-tenshou": {
-  "anilist": false,
-  "note": " / 2026-09-01 anilist:false(とみ新蔵版=AniList未収載。石川賢版95124のfallback付着を遮断)"
- },
- "genji-monogatari-miyagi": {
-  "authors": [
-   {
-    "name": "真崎春望",
-    "role": "artist"
-   }
-  ],
-  "editions": [
-   {
-    "imprint": "Akebono-Comics",
-    "label": "通常版",
-    "type": "standard",
-    "volumes": [
-     {
-      "asin": null,
-      "cover_url": null,
-      "isbn13": "9784059006145",
-      "number": 1,
-      "release_date": "2010-01"
-     }
-    ]
-   }
-  ],
-  "year_ended": 1982,
-  "year_started": 1982,
-  "anilist": false,
-  "note": " / 2026-09-01 anilist:false(真崎春望版=AniList帰属不明。源氏物語系keyのfallback付着を遮断)"
- },
- "mahou-shoujo-madoka-magica": {
-  "title": "魔法少女まどか☆マギカ",
-  "note": " / 2026-09-01 題是正: 中身=本編コミカライズ全3巻(v1 9784832279902=楽天題・ハノカゲ2011)なのに題が魔獣編(別作)に化けていた薬屋型"
  }
 }

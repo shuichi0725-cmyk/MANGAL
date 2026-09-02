@@ -1,88 +1,77 @@
 corrections:
-  yume-maboroshi-no-gotoku:
-    magazine: super-jump
+  higurashi-no-naku-koro-ni-gou:
+    magazine: young-ace-up
     source: wiki-verified
-    evidence: ja.wikipedia「スーパージャンプ」掲載作品一覧に「夢幻の如く(本宮ひろ志) 1991年12号 - 1995年15号」と明記。種3は weekly-young-jump と誤記していた
-    added_at: '2026-08-07'
-  jin:
-    magazine: super-jump
-    source: wiki-verified
-    evidence: ja.wikipedia「JIN-仁-」に「『スーパージャンプ』(集英社)に2000年9号から2010年24号まで連載」と明記。種3は同一qidに3エントリあり、うち2つが weekly-young-jump と誤記していた(正しい super-jump のエントリも併存するが頁は誤記側を拾っていた)
-    added_at: '2026-08-08'
-  shadow-skill:
-    magazine: afternoon
-    source: wiki-verified
-    evidence: ja.wikipedia「SHADOW SKILL」に第三期の掲載誌が「アフタヌーン・シーズン増刊→月刊アフタヌーン」(2000年2月-2014年3月)と明記。この頁は講談社版=第三期。種3は monthly-shonen-magazine と誤記していた
-    added_at: '2026-08-08'
-  wild-7:
-    magazine: shonen-king
-    source: wiki-verified
-    evidence: ja.wikipedia「ワイルド7」掲載誌=少年キング、発表号 1969年9月21日号-1979年7月16日号。雑誌側 ja.wikipedia「週刊少年キング」(少年画報社 1963-1988)でも裏取り
-    added_at: '2026-08-08'
-  shin-wild-7:
-    magazine: comic-banban
-    source: wiki-verified
-    evidence: ja.wikipedia「ワイルド7」の続編一覧で『新ワイルド7 野獣伝説』掲載誌=コミックバンバン(徳間書店)と明記。雑誌単独のWikipedia記事は無いが増刊号の実物書誌(コミックバンバン平成元年4月5日増刊号ほか)で実在確認
-    added_at: '2026-08-08'
-  shirasunamura:
-    magazine: comic-rex
-    source: wiki-verified
-    evidence: ja.wikipedia「今井神」に『白砂村』一迅社〈REXコミックス〉全10巻(『月刊ComicREX』2006年5月号-2014年2月号)と明記。種3は weekly-young-jump(集英社)と誤記していた=一迅社作品なのであり得ない
-    added_at: '2026-08-08'
-  higurashi-no-naku-koro-ni-onikakushihen:
-    magazine: gangan-powered
-    source: wiki-verified
-    evidence: ja.wikipedia「ひぐらしのなく頃に」漫画一覧の掲載誌欄。鬼隠し編=ガンガンパワード。旧値 gangan(月刊少年ガンガン)は誤り
-    added_at: '2026-08-08'
-  higurashi-no-naku-koro-ni-mennagashihen:
-    magazine: gangan-wing
-    source: wiki-verified
-    evidence: ja.wikipedia「ひぐらしのなく頃に」漫画一覧の掲載誌欄。綿流し編=月刊ガンガンWING。旧値は空
-    added_at: '2026-08-08'
-  higurashi-no-naku-koro-ni-tatarikoroshihen:
-    magazine: gfantasy
-    source: wiki-verified
-    evidence: ja.wikipedia「ひぐらしのなく頃に」漫画一覧の掲載誌欄。祟殺し編=月刊Gファンタジー。旧値は空
-    added_at: '2026-08-08'
-  higurashi-no-naku-koro-ni-kai-tsumihoroboshihen:
-    magazine: gangan-powered
-    source: wiki-verified
-    evidence: ja.wikipedia「ひぐらしのなく頃に」漫画一覧の掲載誌欄。解 罪滅し編=ガンガンパワード(新規登録頁)
+    evidence: ja.wikipedia「ひぐらしのなく頃に」漫画一覧の掲載誌欄。業=ヤングエースUP。旧値 shonen-ace は誤り
     added_at: '2026-08-08'
   higurashi-no-naku-koro-ni-hirukowashihen:
     magazine: gangan-online
     source: wiki-verified
     evidence: ja.wikipedia「ひぐらしのなく頃に」漫画一覧の掲載誌欄。昼壊し編=ガンガンONLINE。旧値は空
     added_at: '2026-08-08'
-  higurashi-no-naku-koro-ni-onisarashihen:
-    magazine: comp-ace
+  higurashi-no-naku-koro-ni-kai-matsuribayashihen:
+    magazine: gangan-powered
     source: wiki-verified
-    evidence: ja.wikipedia「ひぐらしのなく頃に」漫画一覧の掲載誌欄。鬼曝し編=月刊コンプエース。旧値 shonen-ace(月刊少年エース)は別誌で誤り
+    evidence: ja.wikipedia「ひぐらしのなく頃に」漫画一覧の掲載誌欄。解 祭囃し編=ガンガンパワード→月刊ガンガンJOKER。初出誌を採用。旧値 gangan は誤り
     added_at: '2026-08-08'
-  higurashi-no-naku-koro-ni-yoigoshihen:
+    note: ★2026-08-08 slug変更(higurashi-no-naku-koro-ni-kai→higurashi-no-naku-koro-ni-kai-matsuribayashihen)によりキー付替。
+  higurashi-no-naku-koro-ni-kai-meakashihen:
+    magazine: gangan-wing
+    source: wiki-verified
+    evidence: ja.wikipedia「ひぐらしのなく頃に」漫画一覧の掲載誌欄。解 目明し編=月刊ガンガンWING。旧値 gangan は誤り
+    added_at: '2026-08-08'
+    note: ★2026-08-08 slug変更(higurashi-no-naku-koro-ni-kai-2007→higurashi-no-naku-koro-ni-kai-meakashihen)によりキー付替。
+  higurashi-no-naku-koro-ni-kai-minagoroshihen:
     magazine: gfantasy
     source: wiki-verified
-    evidence: ja.wikipedia「ひぐらしのなく頃に」漫画一覧の掲載誌欄。宵越し編=月刊Gファンタジー。旧値は空
+    evidence: ja.wikipedia「ひぐらしのなく頃に」漫画一覧の掲載誌欄。解 皆殺し編=月刊Gファンタジー。★旧値 monthly-shonen-magazine(講談社)は他社誌で明白な誤り
+    added_at: '2026-08-08'
+    note: ★2026-08-08 slug変更(higurashi-no-naku-koro-ni-kai-2009→higurashi-no-naku-koro-ni-kai-minagoroshihen)によりキー付替。
+  higurashi-no-naku-koro-ni-kai-tsumihoroboshihen:
+    magazine: gangan-powered
+    source: wiki-verified
+    evidence: ja.wikipedia「ひぐらしのなく頃に」漫画一覧の掲載誌欄。解 罪滅し編=ガンガンパワード(新規登録頁)
+    added_at: '2026-08-08'
+  higurashi-no-naku-koro-ni-kai-utsutsukowashihen:
+    magazine: comp-ace
+    source: wiki-verified
+    evidence: ja.wikipedia「ひぐらしのなく頃に」漫画一覧の掲載誌欄。怪 現壊し編=月刊コンプエース。旧値 gangan は誤り
+    added_at: '2026-08-08'
+    note: ★2026-08-08 slug変更(higurashi-no-naku-koro-ni-kai-2007-2→higurashi-no-naku-koro-ni-kai-utsutsukowashihen)によりキー付替。
+  higurashi-no-naku-koro-ni-kizuna:
+    magazine: comp-ace
+    source: wiki-verified
+    evidence: ja.wikipedia「ひぐらしのなく頃に」漫画一覧の掲載誌欄。絆=月刊コンプエース。旧値 shonen-ace は別誌で誤り
     added_at: '2026-08-08'
   higurashi-no-naku-koro-ni-kokoroiyashihen:
     magazine: comp-ace
     source: wiki-verified
     evidence: ja.wikipedia「ひぐらしのなく頃に」漫画一覧の掲載誌欄。心癒し編=月刊コンプエース(新規登録頁)
     added_at: '2026-08-08'
-  higurashi-no-naku-koro-ni-kizuna:
-    magazine: comp-ace
-    source: wiki-verified
-    evidence: ja.wikipedia「ひぐらしのなく頃に」漫画一覧の掲載誌欄。絆=月刊コンプエース。旧値 shonen-ace は別誌で誤り
-    added_at: '2026-08-08'
-  higurashi-no-naku-koro-ni-gou:
-    magazine: young-ace-up
-    source: wiki-verified
-    evidence: ja.wikipedia「ひぐらしのなく頃に」漫画一覧の掲載誌欄。業=ヤングエースUP。旧値 shonen-ace は誤り
-    added_at: '2026-08-08'
   higurashi-no-naku-koro-ni-meguri:
     magazine: young-ace-up
     source: wiki-verified
     evidence: ja.wikipedia「ひぐらしのなく頃に」漫画一覧の掲載誌欄。巡=ヤングエースUP。旧値 shonen-ace は誤り
+    added_at: '2026-08-08'
+  higurashi-no-naku-koro-ni-mennagashihen:
+    magazine: gangan-wing
+    source: wiki-verified
+    evidence: ja.wikipedia「ひぐらしのなく頃に」漫画一覧の掲載誌欄。綿流し編=月刊ガンガンWING。旧値は空
+    added_at: '2026-08-08'
+  higurashi-no-naku-koro-ni-oni:
+    magazine: monthly-action
+    source: wiki-verified
+    evidence: ja.wikipedia「ひぐらしのなく頃に」漫画一覧の掲載誌欄。鬼=月刊アクション→webアクション。旧値 manga-action(漫画アクション)は別誌で誤り
+    added_at: '2026-08-08'
+  higurashi-no-naku-koro-ni-onikakushihen:
+    magazine: gangan-powered
+    source: wiki-verified
+    evidence: ja.wikipedia「ひぐらしのなく頃に」漫画一覧の掲載誌欄。鬼隠し編=ガンガンパワード。旧値 gangan(月刊少年ガンガン)は誤り
+    added_at: '2026-08-08'
+  higurashi-no-naku-koro-ni-onisarashihen:
+    magazine: comp-ace
+    source: wiki-verified
+    evidence: ja.wikipedia「ひぐらしのなく頃に」漫画一覧の掲載誌欄。鬼曝し編=月刊コンプエース。旧値 shonen-ace(月刊少年エース)は別誌で誤り
     added_at: '2026-08-08'
   higurashi-no-naku-koro-ni-rei:
     magazine: gangan-online
@@ -99,63 +88,89 @@ corrections:
     source: wiki-verified
     evidence: ja.wikipedia「ひぐらしのなく頃に」漫画一覧の掲載誌欄。令 色尊し編=ガンガンONLINE(新規登録頁)
     added_at: '2026-08-08'
-  higurashi-no-naku-koro-ni-oni:
-    magazine: monthly-action
-    source: wiki-verified
-    evidence: ja.wikipedia「ひぐらしのなく頃に」漫画一覧の掲載誌欄。鬼=月刊アクション→webアクション。旧値 manga-action(漫画アクション)は別誌で誤り
-    added_at: '2026-08-08'
-  higurashi-no-naku-koro-ni-kai-meakashihen:
-    magazine: gangan-wing
-    source: wiki-verified
-    evidence: ja.wikipedia「ひぐらしのなく頃に」漫画一覧の掲載誌欄。解 目明し編=月刊ガンガンWING。旧値 gangan は誤り
-    added_at: '2026-08-08'
-    note: ★2026-08-08 slug変更(higurashi-no-naku-koro-ni-kai-2007→higurashi-no-naku-koro-ni-kai-meakashihen)によりキー付替。
-  higurashi-no-naku-koro-ni-kai-minagoroshihen:
-    magazine: gfantasy
-    source: wiki-verified
-    evidence: ja.wikipedia「ひぐらしのなく頃に」漫画一覧の掲載誌欄。解 皆殺し編=月刊Gファンタジー。★旧値 monthly-shonen-magazine(講談社)は他社誌で明白な誤り
-    added_at: '2026-08-08'
-    note: ★2026-08-08 slug変更(higurashi-no-naku-koro-ni-kai-2009→higurashi-no-naku-koro-ni-kai-minagoroshihen)によりキー付替。
-  higurashi-no-naku-koro-ni-kai-matsuribayashihen:
-    magazine: gangan-powered
-    source: wiki-verified
-    evidence: ja.wikipedia「ひぐらしのなく頃に」漫画一覧の掲載誌欄。解 祭囃し編=ガンガンパワード→月刊ガンガンJOKER。初出誌を採用。旧値 gangan は誤り
-    added_at: '2026-08-08'
-    note: ★2026-08-08 slug変更(higurashi-no-naku-koro-ni-kai→higurashi-no-naku-koro-ni-kai-matsuribayashihen)によりキー付替。
   higurashi-no-naku-koro-ni-rei-saikoroshihen:
     magazine: gangan-joker
     source: wiki-verified
     evidence: ja.wikipedia「ひぐらしのなく頃に」漫画一覧の掲載誌欄。礼 賽殺し編=月刊ガンガンJOKER。旧値は空
     added_at: '2026-08-08'
     note: ★2026-08-08 slug変更(higurashi-no-naku-koro-ni-rei-ryukishi-2011→higurashi-no-naku-koro-ni-rei-saikoroshihen)によりキー付替。
-  higurashi-no-naku-koro-ni-kai-utsutsukowashihen:
-    magazine: comp-ace
+  higurashi-no-naku-koro-ni-tatarikoroshihen:
+    magazine: gfantasy
     source: wiki-verified
-    evidence: ja.wikipedia「ひぐらしのなく頃に」漫画一覧の掲載誌欄。怪 現壊し編=月刊コンプエース。旧値 gangan は誤り
+    evidence: ja.wikipedia「ひぐらしのなく頃に」漫画一覧の掲載誌欄。祟殺し編=月刊Gファンタジー。旧値は空
     added_at: '2026-08-08'
-    note: ★2026-08-08 slug変更(higurashi-no-naku-koro-ni-kai-2007-2→higurashi-no-naku-koro-ni-kai-utsutsukowashihen)によりキー付替。
+  higurashi-no-naku-koro-ni-yoigoshihen:
+    magazine: gfantasy
+    source: wiki-verified
+    evidence: ja.wikipedia「ひぐらしのなく頃に」漫画一覧の掲載誌欄。宵越し編=月刊Gファンタジー。旧値は空
+    added_at: '2026-08-08'
   himitsu-tantei-ja:
     magazine: shonen-king
     source: wiki-verified
     evidence: ja.wikipedia「秘密探偵JA」= 週刊少年キング(少年画報社)1965-1969連載、望月三起也の初ヒット作。同誌はワイルド7と同じ shonen-king キー。種3は掲載誌を持っていなかった(magazine=None)
     added_at: '2026-08-14'
+  jin:
+    magazine: super-jump
+    source: wiki-verified
+    evidence: ja.wikipedia「JIN-仁-」に「『スーパージャンプ』(集英社)に2000年9号から2010年24号まで連載」と明記。種3は同一qidに3エントリあり、うち2つが weekly-young-jump と誤記していた(正しい super-jump のエントリも併存するが頁は誤記側を拾っていた)
+    added_at: '2026-08-08'
   kusuriya-no-hitorigoto:
     magazine: monthly-sunday-gx
     source: rakuten-verified
-    evidence: '倉田三ノ路版(小学館)。楽天series=サンデーGXコミックス(9784091575159)。旧big-gangan誤記=ねこクラゲ版(スクエニ)の値が混線していた'
+    evidence: 倉田三ノ路版(小学館)。楽天series=サンデーGXコミックス(9784091575159)。旧big-gangan誤記=ねこクラゲ版(スクエニ)の値が混線していた
     added_at: '2026-09-01'
   kusuriya-no-hitorigoto-shino:
     magazine: big-gangan
     source: rakuten-verified
-    evidence: 'ねこクラゲ版(スクエニ・ビッグガンガンコミックス 9784757554894)。頁のmagazineが空だった'
+    evidence: ねこクラゲ版(スクエニ・ビッグガンガンコミックス 9784757554894)。頁のmagazineが空だった
     added_at: '2026-09-01'
-  yahari-ore-no-seishun-rabukome-wa-machigatteiru:
-    magazine: big-gangan
-    source: rakuten-verified
-    evidence: '妄言録版(佳月玲茅)。楽天series=ビッグガンガンコミックス(9784757539259)'
-    added_at: '2026-09-01'
+  ou-sama-no-shitateya-fiori-di-jirasoore:
+    magazine: grand-jump
+    source: wiki-verified
+    evidence: 'ja.wikipedia「王様の仕立て屋」: 第2部サルトリア・ナポレターナ=グランドジャンプPREMIUM創刊号〜(4巻以降グランドジャンプ)、第3部フィオリ・ディ・ジラソーレ/第4部下町テーラー=グランドジャンプ連載。種2代表行は第1部のスーパージャンプを継いでいた'
+    added_at: '2026-09-03'
+  ou-sama-no-shitateya-sartoria-napoletana:
+    magazine: grand-jump
+    source: wiki-verified
+    evidence: 'ja.wikipedia「王様の仕立て屋」: 第2部サルトリア・ナポレターナ=グランドジャンプPREMIUM創刊号〜(4巻以降グランドジャンプ)、第3部フィオリ・ディ・ジラソーレ/第4部下町テーラー=グランドジャンプ連載。種2代表行は第1部のスーパージャンプを継いでいた'
+    added_at: '2026-09-03'
+  ou-sama-no-shitateya-shitamachi-tailor:
+    magazine: grand-jump
+    source: wiki-verified
+    evidence: 'ja.wikipedia「王様の仕立て屋」: 第2部サルトリア・ナポレターナ=グランドジャンプPREMIUM創刊号〜(4巻以降グランドジャンプ)、第3部フィオリ・ディ・ジラソーレ/第4部下町テーラー=グランドジャンプ連載。種2代表行は第1部のスーパージャンプを継いでいた'
+    added_at: '2026-09-03'
+  shadow-skill:
+    magazine: afternoon
+    source: wiki-verified
+    evidence: ja.wikipedia「SHADOW SKILL」に第三期の掲載誌が「アフタヌーン・シーズン増刊→月刊アフタヌーン」(2000年2月-2014年3月)と明記。この頁は講談社版=第三期。種3は monthly-shonen-magazine と誤記していた
+    added_at: '2026-08-08'
+  shin-wild-7:
+    magazine: comic-banban
+    source: wiki-verified
+    evidence: ja.wikipedia「ワイルド7」の続編一覧で『新ワイルド7 野獣伝説』掲載誌=コミックバンバン(徳間書店)と明記。雑誌単独のWikipedia記事は無いが増刊号の実物書誌(コミックバンバン平成元年4月5日増刊号ほか)で実在確認
+    added_at: '2026-08-08'
+  shirasunamura:
+    magazine: comic-rex
+    source: wiki-verified
+    evidence: ja.wikipedia「今井神」に『白砂村』一迅社〈REXコミックス〉全10巻(『月刊ComicREX』2006年5月号-2014年2月号)と明記。種3は weekly-young-jump(集英社)と誤記していた=一迅社作品なのであり得ない
+    added_at: '2026-08-08'
+  wild-7:
+    magazine: shonen-king
+    source: wiki-verified
+    evidence: ja.wikipedia「ワイルド7」掲載誌=少年キング、発表号 1969年9月21日号-1979年7月16日号。雑誌側 ja.wikipedia「週刊少年キング」(少年画報社 1963-1988)でも裏取り
+    added_at: '2026-08-08'
   yahari-ore-no-seishun-love-wa-machigatte-iru-comic:
     magazine: monthly-sunday-gx
     source: rakuten-verified
     evidence: '@comic版(伊緒直道)。楽天series=サンデーGXコミックス(9784091573490)'
     added_at: '2026-09-01'
+  yahari-ore-no-seishun-rabukome-wa-machigatteiru:
+    magazine: big-gangan
+    source: rakuten-verified
+    evidence: 妄言録版(佳月玲茅)。楽天series=ビッグガンガンコミックス(9784757539259)
+    added_at: '2026-09-01'
+  yume-maboroshi-no-gotoku:
+    magazine: super-jump
+    source: wiki-verified
+    evidence: ja.wikipedia「スーパージャンプ」掲載作品一覧に「夢幻の如く(本宮ひろ志) 1991年12号 - 1995年15号」と明記。種3は weekly-young-jump と誤記していた
+    added_at: '2026-08-07'
