@@ -23,7 +23,7 @@ metadata:
 
 ## 運用
 - 源JSONは週次step1 `shinkan` stepが再生成→月別頁は**フルビルド/機能ビルドで焼き直し**。データ週は面HTMLが前週のまま(this-weekはclient保険あり)。
-- 検証= `_deploy-feature.py --dry`(staging+機能ビルド)。★detach起動のps1をbash printfで書くとバックスラッシュ+U / バックスラッシュ+f がエスケープ扱いで壊れる=Writeツールで書く。
+- 検証= `_deploy-feature.py --dry`(staging+機能ビルド)。★detach起動のps1をbash printfで書くとバックスラッシュ+U / バックスラッシュ+f がエスケープ扱いで壊れる=Writeツールで書く。 ★Git Bash の heredoc も内容次第で「unexpected EOF while looking for matching quote」で丸ごと落ちる(2回実踏)=長い編集スクリプトは Write でファイル化して python 実行。
 - 残レバー: 外部被リンク(ユーザ側)/Search Consoleでの /shinkan 系URL登録リクエスト。
 
 関連: [[seo_index_coverage_state]] [[seo_title_suffix_decision]] [[browse_ssr_shell_and_seo]]
