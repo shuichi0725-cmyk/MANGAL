@@ -19,4 +19,6 @@ metadata:
 - 起動前の二重起動チェックも同じフィルタで(`Name -eq 'python.exe' -and CommandLine -match 'weekly-step1'`)。
 - 生死判定は MSYS の ps でなく `tasklist //FI "IMAGENAME eq python.exe"`([[long_job_ops]] の既知事項)。
 
-関連: [[bash_tool_heredoc_quote_pitfall]] [[weekly_rehearsal_2026_09_02]]
+- ★**Windows の `os.kill(pid, 0)` は生存確認ではなく TerminateProcess**(Python 公式仕様: CTRL_C/CTRL_BREAK 以外の sig は無条件 kill)。生存確認は ctypes `OpenProcess(0x1000)`+`GetExitCodeProcess==259`(`_monthly-distill.py alive()` に実装済)か tasklist。2026-09-02 デタッチ runner 実装時に回避。
+
+関連: [[bash_tool_heredoc_quote_pitfall]] [[weekly_rehearsal_2026_09_02]] [[monthly_distill_orchestrator]]

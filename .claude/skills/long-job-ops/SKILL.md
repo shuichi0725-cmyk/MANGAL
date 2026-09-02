@@ -10,7 +10,8 @@ description: 長時間ジョブ(build/promote/sync/harvest)の運転法。生存
 2. 60秒超のジョブは `run_in_background` + **Monitor**。事前に1行で予告
 3. Monitorの通知は**節目だけに絞る**(1万頁ごと・致命エラー・完了)。2分毎の進捗通知は過多→作り直す
 4. Monitorのフィルタは**失敗シグナルも網羅**(成功語だけgrepすると crash が沈黙=進行中と区別つかない)。buildなら `attempt 3 of 3|Export encountered|Build error` を必ず入れる
-5. **完了判定は成果物とログ末尾**で行い、プロセス終了を待たない: promote=ログ最終「art-books」/manga.v2ファイル数→kill([[promote_hangs_on_exit_windows]])。next build=`✓ Exporting (2/2)`+out/manga件数。node/pythonの居座りはWindows仕様
+5. **完了判定は成果物とログ末尾**で行い、プロセス終了を待たない: next build=`✓ Exporting (2/2)`+out/manga件数。node の居座りはWindows仕様。
+   ★promote は 2026-09-02 から**自力終了**(末尾 os._exit。[[promote_hangs_on_exit_windows]])= 居座りが見えたらまず待つ。**intake.py 経由(月次 `run intake`)では絶対 kill しない**(promote を kill すると intake が abort し durability stage が走らない)。旧: ログ最終「art-books」/manga.v2ファイル数→kill
 6. 実行中に出力ディレクトリを覗かない(ロック競合)
 
 ## 監視コマンド型(実証済み)

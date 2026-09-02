@@ -1,11 +1,15 @@
 ---
 name: monthly-intake-reality
-description: "蒸留の定期運転の実態。月間流入≈1,000〜1,300冊。★月次は2026-06-27に1.2.17実施済み(『2ヶ月停止』は過去の話=もう言わない)。次回=1.2.18公開検知(毎月17-22日頃)"
+description: "蒸留の定期運転の実態(2026-06の調査記録=歴史)。月間流入≈1,000〜1,300冊。★取込は1.2.19(2026-08-21)まで済・実行の正本=_monthly-distill.py。下の『未実装』『再fetch要』は解消済"
 metadata: 
   node_type: memory
   type: project
   originSessionId: 8f5c881f-9859-490c-b682-bd1969ec515c
 ---
+
+## ★【2026-09-02】実行の正本= `scripts/_monthly-distill.py`(status→phase1→Go→phase2→run intake)。[[monthly_distill_orchestrator]]
+- 取込は 1.2.17(6/27)・1.2.18(7/24)・1.2.19(8/21)と毎月実施済み。下にある「差分script未実装」「種1 raw が .cache に無い」「日次は無意味」等は**2026-06時点の調査記録=全て解消済**(読んでも行動に使わない)。
+- 「新releaseなし」の月は何も回さない([[feedback_idle_month_rehearsal]])。
 
 ## ★【最重要訂正 2026-07-16】月次蒸留は運転中=「停止の崖」は過去の話
 - **2026-06-27に月次蒸留 1.2.17 実施済み**(commit「月次蒸留 1.2.17: 種4退役掃除(MADB追いつき251件除去)」)。

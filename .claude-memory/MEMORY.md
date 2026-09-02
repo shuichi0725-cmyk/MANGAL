@@ -47,8 +47,8 @@
 - [publisher設計=版ごと当時社名](publisher_model_edition_level.md) — ISBN10/13正規化必須
 - [【台帳】全データ資産地図](data_assets_inventory.md) ／ [【必読】著者データ全源](author_data_map.md) — 表記揺れ注意
 - [【最重要】目的は正確さ](feedback_accuracy_is_the_goal.md) — 推測/ダミーで埋めない ／ [【戒め】全データ揃えてから載せる](feedback_complete_data_before_ship.md)
-- [【戒め】効率を先に考える](feedback_efficiency_first.md) ／ [【戒め】全件を同じ濃度でAIに投げるな](feedback_agent_fanout_token_cost.md) — 機械証拠を一括算出→割れた分だけ。202体590万tokの反省 ／ [書き出しはCSVでなくTSV](feedback_tsv_not_csv.md)
-- [promote完了後プロセス居座り](promote_hangs_on_exit_windows.md) — 正=skill long-job-ops ／ [【戒め】promote空--only全消し事故](promote_empty_only_wipe_accident.md) — ガード済
+- [【方針】空振り月=手順の検算と機械封鎖に使う](feedback_idle_month_rehearsal.md) — Opus運転前提(scriptに畳む・Go引用必須・自己申告禁止) ／ [【戒め】効率を先に考える](feedback_efficiency_first.md) ／ [【戒め】全件を同じ濃度でAIに投げるな](feedback_agent_fanout_token_cost.md) — 機械証拠を一括算出→割れた分だけ。202体590万tokの反省 ／ [書き出しはCSVでなくTSV](feedback_tsv_not_csv.md)
+- [promote完了後プロセス居座り=os._exitで解消済](promote_hangs_on_exit_windows.md) — intake経由では絶対killしない ／ [【戒め】promote空--only全消し事故](promote_empty_only_wipe_accident.md) — ガード済
 - [重複ページdedup完了](page_dedup_2026_06.md) — 同名別作品952は正当 ／ [分裂・過統合クリーンアップ](fragmentation_overmerge_cleanup.md) ／ [過剰統合スイープ=稀](overmerge_sweep_conclusion.md) — 機械一括除去禁止
 - [公開=Worker+R2(Pages不可)](hosting_worker_r2_architecture.md) ／ [公開環境2系統](deploy_environments_state.md) — 本番=workers.dev/テスト=mangal-preview
 - [AI書評家リーグ運用](ai_review_league_operation.md) ／ [manba観察](manba_design_learnings.md)
@@ -56,7 +56,7 @@
 - [【残】ジャンル品質改善4段](genre_quality_improvement.md) — タクソノミー増やさない ／ [【厳守】AIジャンル=master32のみ](ai_genre_closed_vocabulary.md) ／ [ジャンル不一致514全裁定](genre_disagree_adjudication_state.md) — 保留391=Gemini幻覚注意
 - [【✅】Kindleはブラウザで開く=解決](kindle_link_browser_not_app.md)
 - [MADBに完全版/新装版ほぼ無し](madb_missing_reprint_editions.md) — 補完=楽天題検索→種4 ／ [巻補完=NDL title検索が強い](ndl_volume_completion_better_than_rakuten.md)
-- [蒸留定期運転の実態](monthly_intake_reality.md) ／ [2026-08 月次蒸留 MADB1.2.19=完了](distill_2026_08_1219.md) — 保留54/数値ペンネーム罠 ／ [2026-07 月次蒸留 MADB1.2.18](distill_2026_07_1218.md)
+- [蒸留定期運転の実態(2026-06調査=歴史)](monthly_intake_reality.md) — 未実装/再fetchの記述は解消済 ／ [2026-08 月次蒸留 MADB1.2.19=完了](distill_2026_08_1219.md) — 保留54/数値ペンネーム罠 ／ [2026-07 月次蒸留 MADB1.2.18](distill_2026_07_1218.md)
 - [三世代/今週ストック未配線](sansedai_featured_stock_state.md) ／ [今日の一冊 過去ログ=凍結ログが正](sansedai_archive_frozen_log.md) — 純粋追記 ／ [日替わり特集コーナー(/tokushu)](daily_feature_corner.md)
 - [【計画】書影harvest3段](cover_harvest_plan.md) ／ [楽天書影資産(noimage罠)](rakuten_cover_data_asset.md) ／ [書影=アフィ元画像のみ](cover_source_affiliate_only.md) — NDL不可 ／ [【後で判断】Kobo書影が旧印刷版で誤カバー](kobo_cover_wrong_for_old_print.md) ／ [【注意信号】書影の違和感=上流誤りの症状](feedback_cover_oddity_signal.md) ／ [【型・是正済】書影の黒い斑点=透過GIF×ダーク背景](cover_transparent_gif_dark_bg.md) — 楽天では正常に見えるので上流を疑うと外す
 - [【戒め】再グルーピング誤り繰り返すな](feedback_dont_repeat_regrouping_error.md)
