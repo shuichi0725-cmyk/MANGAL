@@ -122,3 +122,4 @@
 
 - [【許容】週次のアップ無しリハーサル](feedback_weekly_rehearsal_no_upload.md) — 「アップしない」明示なら step1→preflight→build→sitemap→r2-sync --dry まで可。R2/KV/finalize/wranglerは不可侵
 - [【罠】CommandLine正規表現killで自分のシェルを殺す](process_kill_commandline_self_match.md) — Name -eq python.exe で絞る・自分のコマンド行に載る語で探さない
+- [【宿題】著者欄が出版社名の本番頁9件](author_is_publisher_name_pages.md) — 楽天placeholder型・予約経路はゲート済
