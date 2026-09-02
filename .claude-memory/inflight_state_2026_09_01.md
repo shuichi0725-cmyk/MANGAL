@@ -26,3 +26,8 @@ metadata:
 - step1→preflight→CODE週判定→フルビルド42分→sitemap→`_r2-sync.py --dry --prune`(PUT 180,880/削除136)まで通した。**R2/KV/finalizeは未実行**=上記1-3は依然「本番待ち」。
 - 本物の「週次蒸留して」の前にやること: ①未反映書影337頁の反映(`docs/production-diagnostics/cover-override-unreflected-2026-09-02.txt` を `_promote-bulk-v2.py --only-file`) ②アイドル書影ジョブ(`_placeholder-cover-refresh.py --all`)を止める ③`--prune` 必須(台帳41件・実削除40頁)。
 - 連鎖alias3本(スゴ盛)は是正済(8de66d807)。ps1ラッパはUTF-8化済。
+
+## 追記 2026-09-02(夜): ヘッダーナビ改訂も本番待ち(コードのみ=機能蒸留で出る)
+- ユーザ裁定: 「一覧」アイコン廃止、右クラスタを **検索→新作(/shinkan 今月の新刊一覧)→AI書評→過去ログ→使い方** に(ホームは左端固定のまま)。≡メニューの中身は不変。
+- 実体は**2か所**(片方だけ直すとホームと他頁でズレる): ホーム=`app/home-design-12/page.tsx` の D3Nav / 他全頁=`lib/homeDesign.tsx` の DesignNav。コミット 227a3077f。preview で両方の並びを実配信HTMLで確認済。
+- /list はメニュー「一覧表(全作品)」とフッターに残置(頁自体は削除していない)。

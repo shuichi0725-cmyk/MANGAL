@@ -80,7 +80,7 @@
 - [【進行中】エンリッチ7k再開](enrich_7k_resume_state.md) — 「エンリッチ続き」 ／ [【重要】新しい順の鉱脈が枯れた](enrich_newest_seam_exhausted.md) — ユーザ裁定待ち ／ [【✅完走】BookLive紹介文=第2材料源](enrich_booklive_seam_done.md) — 次は増加分だけ
 - [【残】鬼太郎本編の多版正規化](kitaro_honpen_multiedition_pending.md) ／ [【進行中】ギャラ型=巻×日付大逆行の是正](gyara_type_regression_cleanup_state.md) — 「ギャラ型続けて」残557版
 - [TinyFish=WebFetch補完](tinyfish_web_fetch.md) — 正=skill tinyfish ／ [Cloudflareアクセス解析](cloudflare_analytics_access.md) — 正=skill cf-analytics ／ [CF請求=Workers Paid $5.50/月のみ](cloudflare_billing.md)
-- [本番待ち2026-09-01=検索残務+発売日SEO面+アニメ季節](inflight_state_2026_09_01.md) — 機能蒸留待ち・公開後GSC手順
+- [本番待ち2026-09-01=検索残務+発売日SEO面+アニメ季節](inflight_state_2026_09_01.md) — 機能蒸留待ち(ヘッダーナビ改訂 一覧→新作 も含む)・公開後GSC手順
 - [進行中状態2026-08-13](inflight_state_2026_08_13.md) — 本番待ち=メニュー/カラー版/アニメ化34頁・Kindle様子見
 - [新PCへ移行済み2026-07-17](pc_migration_2026_07_17.md) ／ [M5_Ultra=家庭内ファイルサーバー](m5ultra_file_server_setup.md) ／ [見えるが書けない=SMB共有レベル許可](smb_share_level_readonly_gotcha.md) ／ [起動bat3本=モデル別resume](launcher_bats_session_namespaces.md)
 - [ソーサリアン統合=本番化済](sorcerian_consolidation_state.md) — 単巻読切連番の1頁統合の型見本
