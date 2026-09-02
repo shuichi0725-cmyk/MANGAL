@@ -117,3 +117,4 @@
 - [【戒め】script警告は検算してから報告](feedback_sanity_check_tool_warnings.md)
 - [SEO title方針=サフィックス「漫画・コミックのMANGAL」](seo_title_suffix_decision.md) — GO済
 - [Bashツールheredoc+シングルクォート罠](bash_tool_heredoc_quote_pitfall.md) — 複数行scriptはWriteでscratchpadに書いて実行・repoの.pyはCRLF/LF混在
+- [【戒め・全外部照会共通】失敗を否定記録にしない](feedback_no_negative_record_on_failure.md) — 200で空だけが否定・連続429=exit 2・検査2点(except直後の記帳/Throttled先行捕捉)
