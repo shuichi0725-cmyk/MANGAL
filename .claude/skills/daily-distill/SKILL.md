@@ -125,6 +125,29 @@ B=NDL新着回収(納本済み過去分)。毎日でなくてよい(間隔が空
    同名別作品の偽陽性は `data/seeds/continuation-false-positive.tsv` に登録して再フラグを止める。
 4. **ISBNでない商品コードを弾く**(上のチェックリスト参照)。
 
+### ★2026-09-02 の恒久修正(日次蒸留で実踏した6型・全部scriptに焼いた)
+1. **改名頁の続巻が「series_key逆引き不可」で保留**: 分類器の `_slug` は公開slug、manga.v2 のファイル名は SRC stem。
+   `_preorder-apply-zokkan.py` に slug-overrides.yml の pub2stem 逆引きを追加(氷舞のアウフギーサー2 等4件)。touched も SRC stem で出す。
+2. **特装版/限定版が続巻として種4に入り、通常版と同巻番号で二重化**(ゆるゆり25/大室家9/コナン109/アルスラーン25 等**11件**が本番に出ていた):
+   分類器が `SPECIAL_ED`(特装版|限定版|小冊子付|しおり付|ポストカード…)を**続巻でも skip**、apply-zokkan に**同巻番号既在ゲート**
+   (頁standard版 or 種4-auto に同番号があれば保留。既在が特装版entryなら通常版で置換=退役記帳)。既存11件は退役済
+   (`volumes-supplement-retire-changelog.jsonl` op=retire_special_edition・backup付き)。★種4-autoの退役は seed lint が
+   「台帳縮小」で反映を止める → `_check-seeds.py --allow-shrink volumes-supplement-auto.yml` で確認→seed commit→反映。
+3. **副題付き続巻が ex_mid に漏れる**(ちいかわ なんか小さくてかわいいやつ(9)/捨てられた妃 めでたく…4/半グレ-六本木…-16/
+   漫画 ゆうえんち -バキ外伝-11): 分類器③次マッチ=頁題が harvest題の**先頭セグメント**に一致+著者overlap+★巻連続(頁max+1..+3)。
+   スピンオフ(僕ヤバ ラブコメディが始まらない2)は巻連続で落ちて ex_mid(全巻回収)に残る=正。
+   併せて norm に引用符“”(チェリー勇者と“せい”なる剣10)、著者末尾♂♀(たかし♂)の正規化。
+4. **分離器の巻数取り逃し**: 「〜副題〜9」(閉じ記号直後の数字=確定) / 「GOLD RUSH　8」(英字語+空白+数字=suspect)。
+   それまで「裸数字末尾=続巻疑い」skip に落ちて**簿にも出ず消えていた**→ reason付き skip を triage に出すようにした。
+5. **slug生成不可(装置が自動で決められない題)の通し方**: `data/seeds/preorder-slug-manual.tsv`(isbn13→slug→根拠)に人がヨミ基準で
+   裁いた slug を置き、`_preorder-gen-preview.py new1a --isbn <isbn,...>` / `_preorder-gen-midfill.py --isbn …` で**保留分だけ**再生成。
+   ★`--isbn` 無しの再実行は既生成ドラフトと衝突して suffix 付き二重ドラフトを作るので禁止。
+6. **rename の同期は script**: `python scripts/_preorder-rename-draft.py old=new ...`(preview/drafts/made lists/kana-pending/pending簿の5点同期
+   +衝突チェック+来歴 rename-log.jsonl)。手で mv しない。
+7. **著者=出版社名ゲート**(みにくい小鳥の婚約(1)=楽天 author「小学館」): 楽天は著者未登録時に出版社名を返す。生成器が hold
+   (著者不明を捏造しない)。★本番にも同型が9頁ある(NHKダーウィンが来た!/放課後ペダル/クローズ海賊版 等)=別途是正待ち。
+8. **手塚マンガで憲法九条を読む** = 既刊短編7編の再編集本(解説付き)=抜粋本規則で deny。
+
 ### ★今日の学び(runbookに焼いた恒久修正・再発防止)
 - 増加分ゲート(過去draft再カウント防止) / kana捏造hold / slug辞書装置 / 発売日=種2引き当て / 書影=実URL(構築禁止) / 1API全フィールド捕捉(caption→genre) / preview今回のみ。
 
