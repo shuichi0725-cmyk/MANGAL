@@ -14,7 +14,7 @@ skill 実体 = `.claude/skills/<name>/SKILL.md`(git追跡。Opus 4.8 等でも�
 | **「機能蒸留して」** | feature-distill | **コードのみ**本番反映=非漫画の面(ホーム/検索/AI書評/コーナー/ジャンル面)+共有チャンクだけPUT。漫画66k頁・索引・calendar不変。データ凍結staging+コーナーJSONガード内蔵 | ~30分 |
 | **「日次蒸留して」** | daily-distill | 2本立て=楽天予約ハーベスト(未来・カレンダー供給)+NDL新着回収+ヨミ照合キュー+カレンダー更新 | 数分〜 |
 | **「後退蒸留して 〈年〉」** | backward-distill | 過去年をNDL発見→仕分け→掲載ゲート→preview生成(被覆台帳更新) | 年次第 |
-| **「月次蒸留して」** | monthly-distill | MADB取込→フルpromote→enrich→AI fill→月次サニティ監査(Phase0確認→**Goサイン必須**) | ~3時間+ |
+| **「月次蒸留して」** | monthly-distill | `_monthly-distill.py status`→新releaseなしなら終了 / phase1(読み取り専用の差分report)→**Goサイン必須**→phase2(--go引用)→run intake(デタッチ)→頁化→run sanity→postflight | ~3時間+ |
 | **作品名+リンク(Wiki/NDL)を貼る** | percase-fix | per-case是正(イアラ式): 汚染除去/版分離/巻補完/variants。型別seed早見表つき | 1作数分〜 |
 | **「新規追加」「新刊入れて」** | new-manga-register | 新規マンガ登録(順番固定: 全巻回収→題→ヨミ→一括→enrich→欠落表)。テスト先行→GO→本番 | 件数次第 |
 | **「取りこぼしして/取りこぼし続けて」** | torikoboshi-harvest | サイトに出ていない孤児作品44,533件の書誌をISBNで楽天回収(cache→liveの2段・resumable・429はbackoff吸収)。頁化はしない=素材収集 | 500件/回 |

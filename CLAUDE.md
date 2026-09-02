@@ -33,66 +33,66 @@
 - **種1 / 種2 / 種3 は壊さない**。 差分追加 = **純粋追加 only**、 既存への上書き / 削除 / 編集 は禁止。
 - 上書き / 削除 / 既存破壊が一件でも検出された時点で **即 abort + ユーザ通知**。
 
+★**手順の正本 = skill `monthly-distill`** (`.claude/skills/monthly-distill/SKILL.md`)、 実体 = **`scripts/_monthly-distill.py`** (= 2026-09-02 一括化: `status` → `phase1` (読み取り専用) → Go サイン → `phase2 --go` → `run intake` …)。 ここは原則と abort 条件。 ★最初に `python scripts/_monthly-distill.py status` を打ち、 「新releaseなし」 なら**何も回さず終了**して報告する (= 最新 = 取込済 tag なら蒸留しても種2は不変)。
+
 ### Phase 0: 前提確認 (= 1 つでも欠ければ即 abort + ユーザ通知、 実行に進まない)
 
-以下のいずれかが存在しない場合、 「**対象 X が無いので蒸留できない**」 とユーザに報告して終了。 自動 fallback / 自動作成 はしない。
+★実体 = `python scripts/_monthly-phase0.py` (= 2026-07-10 script化。 目視チェックリストで代替しない、 phase1 が先頭で自動実行)。 exit 1 なら 「**対象 X が無いので蒸留できない**」 とユーザに報告して終了。 自動 fallback / 自動作成 はしない。 検査内容:
 
-- `.cache/madb-last-release.txt` (= 前回取込 MADB release tag)
+- `.cache/madb-last-release.txt` (= 前回取込 MADB release tag) と `data/madb-intake-state.yml` (= git追跡バックアップ、 phase2 が両方書く) の**一致**
 - `.cache/db-v2.sqlite` (= ★種2 現行 = 派生 DB。 旧 `db.sqlite` は前世代)
 - `data/seeds/series-supplement-v2.yml` (= ★種3 現行 = AI fill 蓄積。 旧 `-v2`無しは前世代)
-- 種1 raw (= MADB release zip 由来の `cm101.csv` / `metadata101.json`、 `.cache/` 配下に unzip される想定)
-- `data/seed/mangaka.csv` (= 漫画家マスター = 6,751 名、 種1 とは別 input)
-- `scripts/clean-madb-seed.ts` / `scripts/_build-series-v2.py` / `scripts/_populate-v2.py` / `scripts/_distill-incremental-merge.py` (= ★実パイプライン。 [[monthly_distill_real_pipeline]]。 旧 `_diff-madb.ts` 等の .ts 差分3種は**廃止済=存在しない**、 チェックするな)
-- `scripts/intake.py` (= 派生層+matcher+promote の一括 runner)
-- `git status` clean (= dirty なら abort)
+- 種1 raw = `.cache/madb/metadata101.json` (= MADB release zip 由来。 旧表記の cm101.csv は無い) + `metadata101-clean.json` (= raw より新しいこと) + `metadata104.json` / `metadata504.json`
+- `data/seed/mangaka.csv` (= 漫画家マスター、 種1 とは別 input)
+- `scripts/clean-madb-seed.ts` / `_build-series-v2.py` / `_populate-v2.py` / `_distill-incremental-merge.py` / `intake.py` / ★`_monthly-distill.py` (= 実パイプライン。 [[monthly_distill_real_pipeline]]。 旧 `_diff-madb.ts` 等の .ts 差分3種は**廃止済=存在しない**、 チェックするな)
+- `git status` clean (= **tracked の変更**が在れば abort。 untracked は警告のみ・混ぜない= `git add -A` 禁止)
 
-### Phase 1: 差分 report + Go サイン待ち
+### Phase 1: 差分 report + Go サイン待ち (= ★読み取り専用)
 
-1. MADB latest release を GitHub API で取得 (= ★`mediaarts-db/dataset` が正。 旧記載の MADB-Lab-Bot-public は404 = 2026-08-21実踏)
-2. 前回取込 tag と比較し、 各層の差分件数を表示:
-   - 種1: 新 ISBN N 件 / 新 mangaka 推定 件数
-   - 種2: 新 series M 件 (= 4 層 adult filter 後)
-   - 種3: 未 fill K 件 (= series-supplement.yml に未存在の key)
-3. AI fill 予想 cost: K/100 batch、 J セッション分、 概算金額
-4. 削除予測 = 0 件 を明示 (= 0 でなければ Phase 2 に進まず別途協議)
-5. 「**進めて OK？**」 でユーザ確認、 Go サイン (= 「OK」 / 「進めて」 / 「ゴー」 等の明示的肯定) 受領まで Phase 2 に進まない。
+★実体 = `python scripts/_monthly-distill.py phase1` (= db-v2 も正規パス `.cache/madb/metadata101*.json` も**一切書かない**。 成果物は `-<tag>` 名で旧を上書きしない → 何度でも再実行可)。 内容:
+
+1. MADB latest release を GitHub API で取得 (= ★`mediaarts-db/dataset` が正。 旧記載の MADB-Lab-Bot-public は404 = 2026-08-21実踏)。 ★最新 = 取込済 tag なら 「新releaseなし」 で**終了** (= 回さない)
+2. metadata101/504 zip DL → unzip → clean → temp build → **merge dry-run** で各層の差分件数を表示:
+   - 種1: 新ID / 新ISBN / 上流消失 (= 取込には無関係、 情報のみ) / 新 C-id (= 作者)
+   - 種2: 新 series M 件 / 既存 series 追記 / ★純増 volume 件数 (= **merge dry-run が正**。 旧 `_monthly-diff-report.py` / `_distill_delta.py` は生レコード級で過大 = 使わない)
+   - 種3: AI fill = ★**v2 機構では不要** (= kana は頁化時 NDL 確定、 genre/synopsis は enrich 系) → 予想 cost 0
+3. 削除予測 = 0 件 を明示 (= merge は INSERT only 設計。 0 でなければ Phase 2 に進まず別途協議)
+4. script 出力の 「Phase1 差分report」 をそのまま引用して 「**進めて OK？**」 でユーザ確認、 Go サイン (= 「OK」 / 「進めて」 / 「ゴー」 等の明示的肯定) 受領まで Phase 2 に進まない。
 
 ### Phase 2: Go サイン後の実行
 
 順序厳守:
 
-1. **種1 取込** (= cm101.csv 取得 → 新 ISBN のみ追記、 既存行不変)
-2. **種2 差分反映** (= fetch-madb incremental、 INSERT only、 削除禁止)
-3. **派生層 + matcher + 本番 再生成** = `python scripts/intake.py --run`
-   (= roles→merge→seed4→detect → **matcher v9→v13→v14** → **adult_us map** →
-    trailing → **foreigndrop(外国版自動drop)** → **promote(adult_us付与)**。 種2/種a 更新で全派生が古くならないよう一括再生成。
-    ※matcher は ~20分。 終了後 git diff で本番yml確認 → commit/push)
-4. **種a productionization の種3書込** (= deliberate、 match-v14 確定後):
-   - **en-fill** = `_apply-en-fills-surgical.py`(S180×種3_en空 の AniList英題を `alternative_titles.en` に純粋追加。 `.new`検証→置換)
-   - (将来) **anilist_id 結線** = 同手法で id/synonyms/genres_anilist を純粋追加
-5. **種3 diff 元生成** (= select-supplement-diff で未 fill key list 出力)
-6. **AI fill batch loop** = `MEMORY.md` 末尾 「種3 fill 作り方 (= 再利用 guide)」 セクションの protocol を厳密に踏襲 (= dict 形式 JSON、 100 entry/batch、 `_apply-fills.ts` 適用、 PUA 文字混入時は Python 経由で生キー書き出し、 JST 時刻付き block 単位報告、 commit + push)
-7. **最終 summary** (= 全件数 + 削除 0 確認 + 次月予測)
+1. **種1 + 種2 取込** = `python scripts/_monthly-distill.py phase2 --tag <tag> --go "<Go サイン発話の引用>"`
+   (= dry-run 再計算 → Phase 1 と一致確認 → db-v2 backup → merge --apply (INSERT only) → 件数検証 (= 不一致は backup から**自動復元**) → 正規パス差替 (= 旧は `-<旧tag>` 温存・削除しない) → マーカー2本 + 台帳 `data/madb-distill-ledger.jsonl`。 ★`--go` 無しでは動かない。 終了後にマーカー/台帳を単独 commit + push)
+2. **派生層 + matcher + 本番 再生成** = `python scripts/_monthly-distill.py run intake` (= `intake.py --run` を**デタッチ起動**。 seedlint→volnum→roles→merge→seed4→detect → **matcher v9→v13→v14** → adult_us → enrich → trailing → **foreigndrop** → **promote(adult_us付与)** → durability (edisup/special/volnumoverride/coverfill) → **isbnloss**。 ~2.5h。 ★Bash の timeout で殺さない・完了は `status` の `EXIT=0`。 終了後 git diff で派生 seed / 本番yml を確認 → commit/push)
+3. **enrich** = `python scripts/_monthly-distill.py run anilist` (= AniList フルダンプ ~2.5h、 任意・並走可。 backup → 再取得 → enrich map → status map) / synopsis 和訳 delta = skill `wayaku-enrich`
+4. **取りこぼし頁化** = `_torikoboshi-genpages.py --list` → `--run` (= 最新 merge-manifest 自動、 3ゲート保留は人が裁定) → `_monthly-distill.py promote-made` → preview 確認 → 後始末3点 (= skill 6b/6c)
+5. **月次サニティ** = `python scripts/_monthly-distill.py run sanity` (= 検出器を順に回し前回比 Δ) → Δ>0 の型を裁定
+6. **成功判定** = `python scripts/_monthly-postflight.py` exit 0 → **最終 summary** (= 全件数 + 削除 0 確認 + 次月予測)。 本番 R2 公開は別途 「週次蒸留して」
+
+※ 旧手順の 「種3 diff 元生成 / AI fill batch loop (= 100 entry/batch、 `_apply-fills.ts`)」 は v2 機構で**不要** (= 種3 スキーマ変更時のみ復活)。 en-fill / anilist_id 結線 (= 種3 書込) は deliberate に別途。
 
 ### 保護策 (= 5 層)
 
-1. 取込前 `.cache/db.sqlite` を `.cache/db.sqlite.bak-YYYYMMDD-HHMMSS` に backup
-2. 種1 / 種2 / 種3 の各取込は **単独 commit で分離** (= 後 revert 可能)
-3. 各 batch 後に `applied=N, missing=0, overwrites=0` を強制 log 出力
+1. 取込前 `.cache/db-v2.sqlite` を `.cache/db-v2.sqlite.bak-distill-<ts>` に backup (= phase2 が自動。 旧記載の `db.sqlite` は前世代)
+2. 種2 取込 (merge) は manifest (= `merge-manifest-<tag>-<日付>.json`、 挿入 id 記録) で可逆、 マーカー/台帳は **単独 commit** (= 後 revert 可能)
+3. merge は `新series N / 純増volume M / skip 内訳` を強制 log 出力し、 phase2 が DB 件数の増分と突合 (= 旧 `applied=N, missing=0, overwrites=0` 相当)
 4. tsc / vitest が以前緑なのに赤転落で abort
-5. 想定外 delete / overwrite 検出で abort
+5. 想定外 delete / overwrite 検出で abort (= intake 末尾 isbnloss + postflight)
 
 ### Abort 条件 (= 検出したら即停止 + ユーザ通知)
 
-- 種1 既存行が変更された (= MADB が過去 ISBN を訂正したケース)
-- 種2 series 数が **減った** (= 削除発生、 異常)
+- 種2 series 数が **減った** (= 削除発生、 異常) / phase2 の件数検証 NG (= 自動復元して停止)
 - 種3 既存 key の content が変わった (= 上書き発生、 異常)
 - typecheck / test の green → red 転落
+- ※ 種1 上流の消失/訂正 (= MADB が過去 ISBN を訂正したケース) は INSERT only 取込に影響しない = 件数を報告するのみ (abort しない)
 
 ### 報告形式
 
-- 100 batch ごとに `🎉 Batch NNN/MMM 完了 (= X/Y = Z%) [JST YYYY-MM-DD HH:MM:SS]` 形式
-- 完了時に累計件数 + 残件数 + 次月予測
+- Phase 1 = script の 「差分report」 を引用 → 「進めて OK？」
+- Phase 2 以降 = 各段の script 出力 (= merge 件数検証行 / intake `EXIT=0` / postflight の数値) を引用。 散文の自己申告で代替しない
+- 完了時に累計件数 + 削除 0 + 保留件数 + 次月予測
 
 ---
 

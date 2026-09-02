@@ -1,58 +1,120 @@
 ---
 name: monthly-distill
-description: 月次蒸留して=MADB取込→フルpromote→enrich→AI fill。Phase0前提確認→差分報告→Goサイン必須の大工程(~3時間+)
+description: 月次蒸留して=MADB取込→intake(フルpromote)→enrich→頁化→サニティ→postflight。status→phase1(読み取り専用)→Goサイン→phase2(--go引用)→run intake の1本道(~3時間+)。新releaseなしなら何も回さず終了
 ---
 
 # 月次蒸留して
 
-トリガー語: **「月次蒸留して」**(完全一致)。CLAUDE.md「月次蒸留 protocol」が正本——**必ず併読**。ここは運用の実体メモ。
+トリガー語: **「月次蒸留して」**(完全一致)。原則(純粋追加・abort条件)は CLAUDE.md「月次蒸留 protocol」、
+**手順の正本はこの skill**。実体 = **`scripts/_monthly-distill.py`**(2026-09-02 一括化。それまでの env override 手打ち列は廃止)。
 
 ## 大原則
 種1/種2/種3は壊さない。純粋追加only。上書き/削除検出=即abort+報告。**Phase1の差分報告→ユーザGoサイン受領までPhase2に進まない**。
+★db-v2 を書くのは `phase2` の merge --apply だけ。それ以外の全コマンドは読み取り専用(何度打ち直しても壊れない)。
 
-## 実パイプライン ([[monthly_distill_real_pipeline]])
-1. Phase0 前提確認 = ★`python scripts/_monthly-phase0.py`(2026-07-10 script化。前提10項+git cleanを機械確認・欠け=exit 1=「対象Xが無いので蒸留できない」とユーザ報告して終了。目視チェックリストで代替しない)
-2. MADB差分取得: ★release repo = **`mediaarts-db/dataset`**(CLAUDE.md旧記載のMADB-Lab-Bot-publicは404=2026-08-21実踏)。
-   metadata101_json.zip + metadata504_json.zip をDL(cm103/104/105は2024-11凍結=再DL無駄)。
-   差分計測は新旧metadata101のID/ISBN集合diff(旧rawは`-<旧tag>`名で温存)
-3. `clean-madb-seed` → `_build-series-v2` → `_populate-v2`(temp) → **`_distill-incremental-merge`**(series_key突合の安全純粋追加・INSERT only)
-4. `python scripts/intake.py --run`(★**seedlint**→roles→merge→seed4→matcher v9→v13→v14→adult_us→trailing→foreigndrop→promote→…→**isbnloss**。2026-08-26で入口=seed lint/出口=ISBN消失監視が自動abortゲート化。clean鮮度ガードもpromote前に内蔵。matcher~20分・promote~110分。**Windows: promote完了後プロセス居座り=ログ最終行/ファイル数で判定しkill**)
-5. enrich: ★AniList再フェッチ=**フルダンプ**(2026-08-21確立: backup→progress消去→`_anilist-dump-v3.py`(~2.5h)→
-   `_build-anilist-enrich-map.py`→`_gen-anilist-status-map.py`)。deltaは5,000capで月次には不足。
-   synopsis和訳delta(新規増分のみ。9千件級バックログはエンリッチ柱=蒸留で飲み込まない)・作品QID(QLever)
-6. 種3 AI fill = ★**v2機構では原則不要**(2026-08-21確認: kana=頁化時NDL確定/genre・synopsis=enrich系。
-   新seriesは種3未登録のままpromote無依存)。旧v1手順(batch fill)は種3スキーマ変更時のみ復活
-6b. **取りこぼし頁化**(新規seriesの頁作成)= 必ず `_torikoboshi-genpages.py` 経由(★2026-07-27 3ゲート内蔵: ISBN既在skip/**vol1不在→保留**/**近似題(既存頁と包含一致)→保留**)。★**ゲート保留は自動頁化しない**——種2横断(`_ledger`/`_exists --isbn`)で彼岸島型(残巻が別clusterでdedup負け)/分裂(誤題typo・表記揺れ)/コンビニ断片を裁定し、ユーザ報告してから。手書きで源頁を作ってゲートを迂回するのは禁止
-6c. ★**頁化の後始末3点**(2026-08-22 ユーザ発見2件から確立):
-   - **書影live補充**: 新規頁のISBNはcovers seed未収録が普通(1.2.19実測47/93頁欠け)→楽天live by ISBN(`rakuten_live_retry`・noimage除外)→cover-override.jsonl追記→再promote
-   - **slugレビュー→公開前rename**: 生成器はヘボンfallback=外来語英綴り化(strawberry-cake型)と促音バグ(otsu-san型)が出る。previewレビューで裁定し**未公開のうちにrename**(alias不要)
-   - **コンビニ/再録の目視**(コミック乱セレクション型): レーベル名題・故人作家の新刊=再録の決定的証拠→non-manga-drop
-7. **月次サニティ監査**: _coverage-audit(前月差分flag)・_audit-volume-numbering(AUTO_FIXED急増=新型signal)・_furigana-audit・_audit-title-eq-author・_audit-foreign-editions・publisher新キーflag・**特装検出(新刊特装→special-edition seed追記=ベルセルク43型)**・★**_audit-solo-truncated(頁化を行った月は必須。新規頁に「途中巻だけの孤立頁」が1件でもあれば6bの裁定に戻る=2026-07-27に17頁流出した型)**・★**_audit-price-pack(猫と竜型=metadata101のalternativeHeadline/ISBN(set)走査。本番掲載の新規増加を裁定)**・★**_audit-vol0-hidden-first(泣かせたくて型=0巻の1巻が続巻到着で不可視化。HIDDEN_FIXの新規増加→--applyで楽天題ゲート適用)**
-8. **stale生成物の再生成**: _build-calendar / _gen-corner-stocks / _gen-corner-auto / 本番索引
-9. 最終summary(全件数+削除0確認+次月予測)
+## NEVER
+- `status` が「新releaseなし」なのに何かを回す(種2は不変・~5時間の無駄。「差分なし」と報告して終了)
+- Goサインの引用なしに `phase2` を打つ(`--go` 無しでは動かない設計。「いいね/なるほど」は肯定ではない)
+- `intake.py --run` / フルpromote を **Bash の timeout 付きで直接回す・途中で kill する**(フルpromoteは開始時に manga.v2 を全消し→再生成。途中killは半端状態=2026-07-06型)。必ず `run intake`(デタッチ)
+- `_populate-v2.py` / `_build-series-v2.py` を env 無しで手打ちする(populate は正規db-v2への全再投入ガードで止まるが、手打ち自体をしない)
+- 種4-auto(`volumes-supplement-auto.yml`)を全消し/再生成する(蓄積台帳。2026-08-21実害883巻消失)
+- 頁化ゲートの保留を手書きの源頁で迂回する
+- 本番R2へ出す(=「週次蒸留して」の領分)
 
-## 罠
-- ★**cleanの正規パス=`.cache/madb/metadata101-clean.json`**(2026-08-22実踏): promoteの出版社導出(ISBN→schema:publisher)がこのパスを読む。新cleanを別ディレクトリに置いてintakeを回すと**新刊全部が出版社(unknown)**になる(1.2.19で1,182頁再生成の実害)。temp buildにはenv override、正規パスは**intake前に必ず差し替える**
-- 再登録の別MADB-ID二重化(虚構推理vol23型)→ISBN dedup+監査
-- 種4は触らない(手動add only)。retire hygiene だけ(MADB追いつき分の除去)
-- ★★**種4-auto(volumes-supplement-auto.yml)は蓄積台帳=全消し禁止**(2026-08-21実害: 1.2.19で916巻全消し→種2未収録883巻が本番から消失。根本原因=`_register-seed4-ndl.py --apply` が既存を読まず全上書き)。★2026-08-26 **機械封鎖済**: ①同scriptはmerge書き込み化(非ndl-auto entryを必ず保存・parse不能なら書かずabort・.cacheへbackup) ②intake.py末尾に isbnloss stage(理由なし消失>0=abort) ③週次preflightベースラインに seed4_auto_volumes(減少=FAIL) ④clean鮮度ガード(Phase0+intake=metadata101-cleanがrawより古いとabort)。retireは「ISBNが種2に実在する巻だけ」個別除去
-- ★canonical結線頁(edition-canonical/*.yml)は **overridesも種4も後負けで無効**=巻修正はcanonical本体へ(QP外伝4巻 2026-07-27実踏)
-- ★コンビニ廉価再録レーベルは頁化しない(秋田トップコミックス=DROP_IMPRINT封鎖済。「◯◯スペシャル」型はtitle単位。パーフェクト・メモワール=未裁定候補)
-- ★頁のdropは必ず `_reflect-targeted.py --drop` 経由(手でyml消すと索引・ストックに残骸=検索404。2026-07-27にホームズ4頁分の索引除去コミット漏れを回収した型)
-- 本番R2への反映は別途「週次蒸留して」
+## 手順(1本道)
 
-## 罠(追補 2026-08-21/23)
-- ★**seed機械追記後は必ず `yaml.safe_load` 検証**(種4はlist itemが**カラム0**=2スペで書くとparse死。1.2.19でXinobi種4が silent不着→索引まで壊れた実踏)
-- merge-manifest/バックアップ名は★2026-08-26に実行時導出へ是正済(release+日付名・既存は.prevN退避=前回のrevert用manifestを上書きしない)
-- 数値ペンネーム(「296」型)がint化してre.sub系がクラッシュ→promote/監査はstr()防御済。新規scriptでも `str(name)` を徹底
+### 0. 最初に必ず(30秒)
+```
+python scripts/_monthly-distill.py status
+```
+- 「★新releaseなし(X = 取込済)」→ **ここで終了**。ユーザに「取込済 X = GitHub最新 X。今回は差分なし。次リリースは毎月17〜22日頃」と報告。
+- マーカー不一致/Phase0 FAIL は**直さず報告**(自動fallback禁止の思想)。job 行に RUNNING があれば前回の続き=そちらを先に見る。
+- `/clear` 後の再開もこのコマンド(成果物の有無から次の一手を出す)。
 
-## ★成功判定 (= ★2026-08-26 script化: `python scripts/_monthly-postflight.py` exit 0 が条件)
-- ★**postflight = `python scripts/_monthly-postflight.py`**(Phase0と対の完了側。seed lint/manga.v2≥66k/
-  ISBN消失=理由なし0/種4-auto不減/publisher unknown不増/**頁化した月は新規頁のsolo-truncated=0** を機械判定。
-  **exit 0 + 出力数値の引用**が完了主張の条件=自己申告の散文判定は廃止)
-- postflight対象外で引き続き言うこと:
-  - **Goサイン受領の発話引用**(無しにPhase2へ進んだら違反)
-  - 種1/2/3 とも **削除0・上書き0**(各取込ログの `applied=N, missing=0, overwrites=0`) / 種2 series数=増加のみ
-  - ★**表示カタログslug集合diff**(git HEAD索引 vs 新索引): 消失は**全件説明可能**であること
-  - 頁化した月は **ゲート保留の裁定結果**(件数+型) / tsc/vitest green / サニティ監査flag件数の報告
-- どれかが言えない=完了していない
+### 1. Phase1 = 差分report(★読み取り専用・~5分)
+```
+python scripts/_monthly-distill.py run custom -- python scripts/_monthly-distill.py phase1
+python scripts/_monthly-distill.py status        # job custom … EXIT=0 まで待つ(ログ末尾)
+```
+- 中身: Phase0 → zip DL(101+504) → unzip → clean(~5分) → 種1diff(15秒) → temp build(build-series/populate) → merge dry-run。
+  成果物は全部 `-<tag>` 名(`.cache/madb/metadata101-<tag>.json` 等)= 正規パスも db-v2 も**一切変わらない**。再実行は済んだ段をskip。
+- ログ末尾の「**月次蒸留 Phase1 差分report**」ブロックを**そのまま引用**してユーザに提示し、「進めて OK？」で止まる。
+  (種1=新ID/新ISBN/上流消失、504=新C-id、種2=新series/純増volume(★これが正)、種3=AI fill不要、削除予測0)
+- ★旧 `_monthly-diff-report.py` / `_distill_delta.py` は使わない(生レコード級で過大: 11,732 vs 真値1,124の実績)。
+
+### 2. Goサイン → Phase2(数分)
+```
+python scripts/_monthly-distill.py phase2 --tag <tag> --go "<ユーザの発話をそのまま>"
+```
+- 中身: dry-run再計算→phase1と一致確認(不一致=abort) → db-v2 backup → merge --apply(INSERT only) → **件数検証**(series/editions/volumesの増分がmerge出力と一致・quick_check。NGは backup から自動復元して停止) → 正規パス差替(`.cache/madb/metadata101.json`/`-clean`/`metadata504.json` ← 新tag、旧は `-<旧tag>` 温存) → `.cache/madb-last-release.txt` + `data/madb-intake-state.yml` + 台帳 `data/madb-distill-ledger.jsonl`。
+- 終了メッセージの `git add … && git commit … && git push` を実行(マーカー/台帳の単独commit)。
+- 出力の「検証 ✓ series +N / editions +E / volumes +M」行を報告に引用(=削除0・上書き0の根拠)。
+
+### 3. intake(~2.5h・デタッチ)
+```
+python scripts/_monthly-distill.py run intake
+python scripts/_monthly-distill.py status        # job intake … RUNNING → EXIT=0
+```
+- 実体= `intake.py --run`: seedlint→volnum→roles→merge→seed4→detect→match v9→v13→v14→adultus→enrich→trailing→foreigndrop→**promote**→edisup/special/volnumoverride/coverfill→**isbnloss**。ログ= `.cache/madb-distill/run-intake-<ts>.log`。
+- 60秒超は Monitor で節目だけ(1万頁ごと/ABORT/EXIT)。promote の完了後居座りは **os._exit で解消済(2026-09-02)**=待てば終わる。killしない。
+- EXIT≠0 はログ末尾の `✗ ABORT: stage [名]` で判断: seedlint=seed壊れ(yaml.safe_load検証) / clean鮮度=phase2の差替漏れ / isbnloss=理由なし消失(`docs/production-diagnostics/isbn-loss.tsv` を1件ずつ裁定・台帳記帳) / それ以外=当該scriptの traceback を読む(1.2.18で trailing の merge_keys / foreigndrop の2スペ追記を直した型)。
+- 終了後: `git status` → 派生seed(`series-merge-auto.json` / `non-manga-drop.yml` 等)の diff を確認 → commit/push。manga.v2 は gitignore(ディスク上で再生成済)。
+
+### 4. enrich(任意・並走可)
+```
+python scripts/_monthly-distill.py run anilist   # ~2.5h: dump backup→progress消去→フル再取得→enrich map→status map(縮小なら自動復元+abort)
+```
+- deltaは5,000capで月次には不足=フルダンプが正(2026-08-21確立)。synopsis和訳delta= skill wayaku-enrich。
+- ★種3 AI fill(旧v1の100件batch)は **v2機構では不要**(kana=頁化時NDL確定 / genre・synopsis=enrich系。新seriesは種3未登録のままpromote無依存=1.2.19確認)。種3スキーマ変更時のみ復活。
+
+### 5. 頁化(新規seriesの源頁生成)
+```
+python scripts/_torikoboshi-genpages.py --list          # 1行目 "manifest: … tag=<tag>" が取込先と一致するか確認
+python scripts/_torikoboshi-genpages.py --run           # 源頁 → data/seeds/source-pages(git追跡)。NDL照会あり(1.2秒/req)
+python scripts/_monthly-distill.py promote-made         # 作った頁だけ promote --only-file
+```
+- manifest既定=最新mtime(旧=1.2.18固定で翌月以降は前月分を掴む罠→2026-09-02是正)。
+- **3ゲート保留は自動頁化しない**(ISBN既在skip / vol1不在→保留 / 近似題→保留)。種2横断(`_ledger` / `_exists --isbn`)で彼岸島型・分裂・コンビニ断片を裁定しユーザ報告してから。前回1.2.19の保留54件= `docs/production-diagnostics/torikoboshi-1219-holds.tsv`(未消化=持ち越し)。
+- ★後始末3点(2026-08-22確立): ①**書影live補充**(新規ISBNはcovers seed未収録が普通。楽天live by ISBN→cover-override.jsonl→再promote) ②**slugレビュー→公開前rename**(ヘボンfallbackの外来語英綴り化/促音バグ。未公開ならalias不要) ③**コンビニ/再録の目視**(レーベル名題・故人作家の新刊=再録→non-manga-drop)。
+- preview投入= skill test-deploy(セット入替→索引→push→15-20分待ち)。★源頁は `data/seeds/source-pages/` にあることを確認(data/mangaはgitignore=消えると次のフルpromoteで頁が黙って消える。2026-08-26に源なし258頁復元)。
+
+### 6. 月次サニティ
+```
+python scripts/_monthly-distill.py run sanity            # 検出器を順に回し前回比Δ(結果= .cache/madb-distill/sanity-<ts>.json)
+python scripts/_monthly-distill.py sanity --heavy        # 楽天キャッシュ走査3本(excerpt-subtitle/edition-mix/author-not-in-volumes)も
+```
+- Δ>0 の検出器 = 今月増えた型 → CLAUDE.md「月次サニティ監査」節の該当型で裁定。rc≠0 = 検出器自体の故障(直してから)。
+- 必ず見る: solo-truncated(頁化した月は新規頁ヒット0) / AUTO_FIXED急増(新誤番号型) / price-pack・vol0-hidden-first の本番掲載増 / edition-canonical NG=0 / isbn-loss 理由なし0 / 表示カタログslug集合diff(git HEAD索引 vs 新索引。消失は全件説明可能)。
+- 対象外(手動): `_furigana-audit`(NDL照会) / `_gen-publisher-keys`(publishers.yml を書く=読み取り専用でない) / `_coverage-audit`(旧 .cache 依存)。
+
+### 7. 成功判定
+```
+python scripts/_monthly-postflight.py     # exit 0 が完了条件(seed lint/manga.v2≥66k/ISBN消失0/種4-auto不減/publisher unknown不増/マーカー整合/頁化月のsolo-truncated 0)
+```
+- 併せて言うこと: **Goサイン受領の発話引用** / phase2 の「検証 ✓」行 / intake の `EXIT=0` / 頁化件数+ゲート保留の裁定結果 / サニティΔ / tsc・vitest green。どれかが言えない=完了していない。
+- 最終summary= 累計件数+削除0+保留件数+次月予測。本番R2公開は別途「週次蒸留して」(ここでは出さない)。
+
+## 所要の目安(新PC実測)
+Phase1: **~5分**(2026-09-02 リハーサル実測 4分16秒 = clean 150s / build-series 53s / populate 25s / dry-run 11s / 種1diff 14s。次回は DL 50MB が乗る) / phase2: 数分 / intake: ~2.5h(matcher~20分・promote~40-110分) / AniList: ~2.5h / 頁化: 件数×NDL1.2秒+レビュー / サニティ: 数十分。
+
+## 罠(型)= 機械封鎖済みでも知っておく
+- **cleanの正規パス**= `.cache/madb/metadata101-clean.json`(promoteの出版社導出が読む)。旧手順で別ディレクトリに置いて**新刊全部が出版社(unknown)**(1.2.19実害1,182頁)。→ phase2 が差替・Phase0/intake の鮮度ガードが二重封鎖。
+- **manifest名のtagズレ**: merge の manifest 名/中身が「1つ前のtag」だった(中身 "1.2.18" 固定リテラルも)→ `--tag` 必須化(phase1/2が付ける)。genpages はこの manifest を掴むので**ズレると別月を頁化**する。
+- **populate の正規DB誤爆**: `MADB_DB` 無しで打つと series/volumes を DELETE→全再投入(cover/enrichment喪失)→ `--wipe-real-db` 無しは abort に封鎖。
+- **種4-auto全消し**(2026-08-21): `_register-seed4-ndl.py --apply` が既存を読まず全上書き→merge書込化+intake末尾isbnloss+preflight減少FAIL+clean鮮度ガードの4層。retireは「ISBNが種2に実在する巻だけ」個別除去。
+- **promote完了後の居座り**: 巨大heap解放でプロセスが残る→ `os._exit(0)`(2026-09-02)。intake経由の終了待ちも消えた。
+- **数値ペンネーム**(「296」/「359」型)= YAML/DBのintが re.sub でクラッシュ・Zodでビルドskip→promote/監査は str() 防御済。新規scriptでも `str(name)`+quote。
+- **seed機械追記後は必ず yaml.safe_load 検証**(種4はlist itemが**カラム0**。2スペで書くとparse死=silent不着。「: 」を含む値は必ずquote)。
+- **canonical結線頁**(edition-canonical/*.yml)は overrides も種4も後負けで無効=巻修正はcanonical本体へ。
+- **コンビニ廉価再録レーベルは頁化しない**(秋田トップコミックス=DROP_IMPRINT封鎖済。「◯◯スペシャル」型はtitle単位)。
+- **頁のdropは必ず `_reflect-targeted.py --drop` 経由**(手でyml消すと索引・ストックに残骸=検索404)。源頁ミラー `data/seeds/source-pages/` も消す。
+- **再登録の別MADB-ID二重化**(虚構推理vol23型)→ merge の ISBN/madb_book dedup guard + 監査。
+- **Bashツールの heredoc は `'` と `\` が化ける**→ 複数行scriptは Write で scratchpad に書いて実行。ログ読みは utf-8 で(cp932混在)。
+- **Windowsの os.kill(pid, 0) はプロセスを殺す**→ 生死判定は ctypes OpenProcess(status が実装済)。CommandLine正規表現で殺すと自分のシェルも死ぬ。
+
+## 検算(リハーサル)= 取込済tagで手順だけ通す
+```
+python scripts/_monthly-distill.py phase1 --tag <取込済tag> --rehearsal     # 期待: 新series 0 / 純増volume 0(phase2は不要)
+python scripts/_monthly-distill.py seed1-diff --old .cache/madb/metadata101-<旧tag>.json --new .cache/madb/metadata101.json
+```
+- 2026-09-02 実測(1.2.19で検算): seed1-diff 1.2.18→1.2.19 = 新ID+1,541/新ISBN+1,479/上流消失0(記憶の+1,546/+1,481/消失7は算出法差)。Phase1リハーサル = **新series 0/純増volume 0(冪等性実証)・正規パスとdb-v2不変・4分16秒**。詳細= 記憶 [[monthly_distill_orchestrator]]。

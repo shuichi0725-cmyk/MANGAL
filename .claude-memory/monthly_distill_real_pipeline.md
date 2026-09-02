@@ -8,6 +8,7 @@ metadata:
 ---
 
 ★運用手順の正 = **skill monthly-distill**(2026-07-04 skill化。トリガー/順序/監査はそちら)。
+★2026-09-02: 下の手打ち列(env override付き build/populate/merge)は **`scripts/_monthly-distill.py` に一括化**(phase1=読み取り専用/phase2=--go引用必須)。手で打たない。[[monthly_distill_orchestrator]]
 本fileは配管の実体・1.2.17実績・検証方式の**記録**(skillの根拠)として保持。
 
 月次蒸留の**実体**(2026-06-28に1.2.17取込で確立)。★CLAUDE.md記載の旧protocol(`_diff-madb.ts`/`_diff-series.ts`/`_select-supplement-diff.ts`/db.sqlite)は**廃止済**。実scriptは下記。

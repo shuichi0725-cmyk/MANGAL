@@ -68,7 +68,7 @@
 - [アンソロジー統合状態](anthology_consolidation_state.md) — promote結線未実装
 - [新刊著者の連結バグ是正](new_manga_author_reparse.md) — 蒸留で再発しうる
 - [発売日逆行515件リスト](volume_date_disorder_list.md) ／ [幽霊巻がvol1より前=多版混在](ghost_vol_date_disorder.md) ／ [楽天harvest→題+巻照合機構](harvest_based_fix_mechanism.md) ／ [【✅】題+巻→楽天照合適用済](harvest_match_mechanism_applied.md)
-- [【実体】月次蒸留パイプライン](monthly_distill_real_pipeline.md) ／ [取込オーケストレーション=scripts/intake.py](intake_pipeline.md)
+- [【正本】月次蒸留=_monthly-distill.py 1本道](monthly_distill_orchestrator.md) — status→phase1(読取専用)→Go→phase2(--go)→run intake。新releaseなしは終了 ／ [【実体】月次蒸留パイプライン(配管記録)](monthly_distill_real_pipeline.md) ／ [取込オーケストレーション=scripts/intake.py](intake_pipeline.md)
 - [【調査済・未着手】年サフィックスslug全洗い出し](year_suffix_slug_survey.md) — ファイル名≠公開slugに注意 ／ [掲載誌のper-case上書き=magazine-corrections](magazine_corrections_mechanism.md)
 - [教育系年代版の分離=NDL補完](edu_multiedition_disentangle_ndl.md)
 - [検索に出るのに404=ビルドskip](search_404_build_skip_validation.md)

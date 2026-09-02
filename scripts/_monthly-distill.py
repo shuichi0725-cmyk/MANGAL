@@ -16,6 +16,7 @@
   python scripts/_monthly-distill.py run intake|anilist|sanity   # 長時間ジョブをデタッチ起動(Bashのtimeoutで殺されない)
   python scripts/_monthly-distill.py run custom -- <cmd...>      # 任意コマンドを同様にデタッチ起動
   python scripts/_monthly-distill.py sanity [--heavy]        # 月次サニティ検出器を順に回し、前回比(Δ)を表で出す(前景)
+  python scripts/_monthly-distill.py promote-made            # 頁化(genpages --run)で作った源頁だけ promote --only-file
   python scripts/_monthly-distill.py seed1-diff --old A --new B   # 種1差分だけ(検算用)
 
 成果物の置き場(全部 tag 付き名 = 旧成果物を上書きしない):
@@ -718,6 +719,28 @@ DETECTORS = [
 ]
 
 
+def promote_made(a) -> None:
+    """頁化(_torikoboshi-genpages --run)で作った源頁だけ promote --only-file で本番yml化(手打ちの --only 連結を廃止)。"""
+    gp = ROOT / ".cache" / "torikoboshi" / "genpages-last.json"
+    if not gp.exists():
+        die("genpages-last.json が無い(先に _torikoboshi-genpages.py --run)")
+    j = json.loads(gp.read_text(encoding="utf-8")) or {}
+    made = [s for s in (j.get("made") or []) if s]
+    if not made:
+        die("genpages-last.json の made が空(今回の頁化なし)")
+    lst = gp.with_suffix(".slugs")
+    lst.write_text("\n".join(made) + "\n", encoding="utf-8")
+    age_h = (time.time() - gp.stat().st_mtime) / 3600
+    print(f"頁化 {len(made)} 頁 (genpages-last.json {age_h:.1f}h前) → promote --only-file {lst.name}")
+    r = run([PY, SCRIPTS / "_promote-bulk-v2.py", "--only-file", lst])
+    if r.returncode != 0:
+        die(f"promote exit {r.returncode}")
+    missing = [s for s in made if not (ROOT / "data" / "manga.v2" / f"{s}.yml").exists()]
+    print(f"✓ 生成 {len(made) - len(missing)} / 未生成 {len(missing)}" + (f": {', '.join(missing[:8])}" if missing else ""))
+    print("次(skill test-deploy): .preview-data/manga へ copy → _build-list-index.py .preview-data/manga .preview-data → commit/push →"
+          " レビュー(slug英綴り/書影/コンビニ再録)→ 公開前rename。本番公開は週次蒸留。")
+
+
 def tsv_rows(name: str | None) -> int | None:
     if not name:
         return None
@@ -793,6 +816,7 @@ def main() -> None:
     sd.add_argument("--old", required=True)
     sd.add_argument("--new", required=True)
     sp.add_parser("anilist-seq")
+    sp.add_parser("promote-made")
     pc = sp.add_parser("_child")
     pc.add_argument("--log", required=True)
     pc.add_argument("rest", nargs=argparse.REMAINDER)
@@ -824,6 +848,8 @@ def main() -> None:
         print(json.dumps(d, ensure_ascii=False, indent=1))
     elif a.cmd == "anilist-seq":
         anilist_seq()
+    elif a.cmd == "promote-made":
+        promote_made(a)
     elif a.cmd == "_child":
         child_main(Path(a.log), [x for x in a.rest if x != "--"])
 
