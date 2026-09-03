@@ -126,4 +126,4 @@
 - [【宿題】著者欄が出版社名の本番頁9件](author_is_publisher_name_pages.md) — 楽天placeholder型・予約経路はゲート済
 - [【未決・構造穴】日次の保留ISBNは二度と増加分に出ない](daily_distill_hold_not_requeued.md) — hold再投入をincrementに焼くまで triage簿を人が消化・2026-09-02時点9件
 - [【型・是正済】騎士ガンダム型=新装版が編ごとに別頁へ散る+特別版が番号衝突で不可視](kishi_gundam_shinsoban_consolidation.md) — 楽天captionで収録対応確定→版タブ統合・新頁2・drop5→301・次週次で R2 --prune
-- [【型・検出器あり・4段適用済】Sugar&Spice型=巻題を題として別sid登録→末尾巻欠け](subtitle_orphan_volume_split_sugar_spice.md) — _audit-subtitle-orphan-volume.py。2026-09-03 override8頁/別sid195巻62頁/取込もれ643+371巻(レーベル経験別名表)を適用。残153=subtitle-orphan-volume-review.tsv(日付逆行=頁側後刷り/canonical再構築/別版)
+- [【型・検出器+apply正式化・8段適用済】Sugar&Spice型=巻題を題として別sid登録→末尾巻欠け](subtitle_orphan_volume_split_sugar_spice.md) — _audit/_apply-subtitle-orphan-volume.py。2026-09-03 に別sid195巻/取込もれ1,021巻/版分離canonical 46頁/0巻opt-in(vol0-show.yml)/under-merge4/レーベル違い等を適用。残=review.tsv(発売未確定・原版1巻不明のみ)
