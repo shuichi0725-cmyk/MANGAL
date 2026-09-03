@@ -5,7 +5,7 @@ metadata:
   node_type: memory
   type: project
   originSessionId: f8fa63b4-3ce7-45e1-b2ab-f3f4fbab02f4
-  modified: 2026-09-03T08:33:14.040Z
+  modified: 2026-09-03T09:56:27.842Z
 ---
 
 **型 (2026-09-03 ユーザ発見 sugar-spice)**: 各巻に固有の巻題を持つシリーズ(Sugar & Spice=全巻ジャズ標準曲題)で、MADBが
@@ -58,5 +58,13 @@ number=0 の頁)、真のレーベル違い17(花の慶次19-21=Bunch world新�
 ★canonical で release_date 不明の巻は `null`(空文字はreflect検証ゲートNG)。extra_editions は type 明示(既定は kanzenban)。
 見送り= 独眼竜伊達政宗/太陽が呼んでいる/紅丸ぼたん(原版1巻がNDL・楽天のどちらにも無い)、日付空の末尾8巻(未発売か楽天未登録=日次蒸留の予約ハーベスト待ち)。
 
-**次**: 0巻表示方針(ドラえもん以外15作)、canonical頁(第三の極道/幸せの時間/Eden)のrun再構築、レーベル違い17巻の別版化。
+**7段目(同日「真のレーベル違い20巻と0巻は全部漫画なら出してok」)**: 0巻= **`data/seeds/vol0-show.yml`**(opt-in、promote `get_vol0_show()` を新設。
+13作: ハヤテ/花子くん/ジュン/彼女のカレラRS/ケンガンアシュラ/KIMURA/禁猟六区/KOBAN/政宗くん/松田優作物語/パラダイスレジデンス/そろえてちょうだい?/ラインバレル)
++別sidの0巻3作(東京トイボックス/蜜談/CLUSTER)は種4 number=0。SAME_SIDの正体は3型= 真の0巻 / **page-dedup残骸**(落とした頁のsidが
+本編に結線されない: Bird/ホヒンダ村/Ψchic/Wジュリエット2 → series-merge.yml merge_keys で結線) / **MADB誤番号**(number=0/1 extra=1: 熱中!コボちゃん6-14等 → 種4)。
+レーベル違い18巻は種4 standard(同社後継レーベル/表記違い/移籍)、花の慶次 Bunch world版(新潮社 全21巻)は extra-editions の版タブ。
+非漫画として除外= スマグラー+4(プラチナコミックス=コンビニ)/あずきちゃんメディアブックス(アニメ)/ガンダムSEEDアニメKC(フィルムコミック)/おまもりひまり0(ガイドブック)。
+合計 47頁反映(commit 42a0e8749)。
+
+**次**: canonical頁(第三の極道/幸せの時間/Eden)のrun再構築、原版1巻が見つからない3頁(独眼竜/太陽が呼んでいる/紅丸ぼたん)。
 [[volume_split_merge]] [[series_fragmentation_rootcause]] [[feedback_one_bug_means_a_class]] [[harvest_match_mechanism_applied]]

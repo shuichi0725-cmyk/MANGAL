@@ -324,6 +324,30 @@ def get_release_date_override() -> dict:
     return _REL_DATE_OVERRIDE
 
 
+_VOL0_SHOW = None
+
+
+def get_vol0_show() -> set:
+    """★真の0巻を出す opt-in seed (= data/seeds/vol0-show.yml の volumes[].isbn13 集合)。
+    promote は number=0 を「巻号抽出失敗」として numbered 巻があれば捨てる(偽#1 dedup 弊害除去)が、
+    前日譚/短編集として商業流通した本物の0巻も同じ規則で消える。列挙した ISBN だけ number=0 で出す
+    (2026-09-03 ユーザ裁定。ドラえもん0巻は override 直書きで先行)。純粋追加・種2不変・可逆。"""
+    global _VOL0_SHOW
+    if _VOL0_SHOW is None:
+        _VOL0_SHOW = set()
+        p = ROOT / "data" / "seeds" / "vol0-show.yml"
+        if p.exists():
+            try:
+                with p.open(encoding="utf-8") as f:
+                    d = _yload(f) or {}
+                for v in d.get("volumes") or []:
+                    if v.get("isbn13"):
+                        _VOL0_SHOW.add(_norm_isbn(str(v["isbn13"])))
+            except Exception:
+                pass
+    return _VOL0_SHOW
+
+
 _COVER_OVERRIDE = None
 
 
@@ -2440,10 +2464,26 @@ def get_editions_with_volumes(con: sqlite3.Connection, series_ids: list[int] | i
         primary_vols = []
         if nonzero_exists:
             by_n: dict[int, list] = defaultdict(list)
+            _vol0_show = get_vol0_show()
             for v in vols:
                 sn = _sanitize_volnum(v["number"], v["release_date"], v["volume_label"])
                 if sn:
                     by_n[sn].append(v)
+                elif v["number"] == 0 and v["isbn13"] and _norm_isbn(v["isbn13"]) in _vol0_show:
+                    # ★真の0巻を出す opt-in(2026-09-03 ユーザ裁定「0巻は全部漫画なら出してok」):
+                    #   number=0 は「巻号抽出失敗=偽#1」として捨ててきたが、前日譚/短編集の商業0巻
+                    #   (ハヤテのごとく!0/地縛少年花子くん0/ケンガンアシュラ0…)が同じ規則で消えていた。
+                    #   seed data/seeds/vol0-show.yml に ISBN を列挙した巻だけ number=0 のまま出す。
+                    primary_vols.append(
+                        {
+                            "number": 0,
+                            "volume_label": v["volume_label"],
+                            "isbn13": v["isbn13"],
+                            "release_date": _eff_date(v["isbn13"], v["release_date"]),
+                            "cover_url": v["cover_url"],
+                            "asin": v["asin"],
+                        }
+                    )
             for n in sorted(by_n):
                 v = min(by_n[n], key=lambda r: _dedup_key(r["isbn13"], r["release_date"]))
                 primary_vols.append(
