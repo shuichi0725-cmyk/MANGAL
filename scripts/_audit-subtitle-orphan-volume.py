@@ -88,6 +88,29 @@ def norm(t: str) -> str:
     return _PUNCT.sub("", s)
 
 
+def jp_registrant(isbn13: str) -> str:
+    """978-4(日本) の出版者記号を桁数表(2〜7桁)で切り出す。先頭N桁固定だと2桁社(KADOKAWA=04/講談社=06)で
+    題番号の1桁目まで含んで別社扱いになる(魔法科よんこま編 9784048/9784049 で実踏)。"""
+    s = str(isbn13 or "")
+    if not s.startswith("9784") or len(s) != 13:
+        return s[:8]
+    body = s[4:]  # 出版者記号+書名記号+チェック
+    n = int(body[:2])
+    if n <= 19:
+        ln = 2
+    elif int(body[:3]) <= 699:
+        ln = 3
+    elif int(body[:4]) <= 8499:
+        ln = 4
+    elif int(body[:5]) <= 89999:
+        ln = 5
+    elif int(body[:6]) <= 949999:
+        ln = 6
+    else:
+        ln = 7
+    return "9784" + body[:ln]
+
+
 def norm_author(a: str) -> str:
     s = unicodedata.normalize("NFKC", str(a or ""))
     s = re.sub(r"[\[\(（【].*?[\]\)）】]", "", s)  # 役割注記 [原作] (著) 等
@@ -221,8 +244,7 @@ def main() -> int:
     for isbn, slugs in idx.items():
         hit = s2.get(isbn)
         for s in (slugs if isinstance(slugs, list) else [slugs]):
-            page_prefix[s].add(isbn[:7])
-            page_prefix[s].add(isbn[:8])
+            page_prefix[s].add(jp_registrant(isbn))
             if hit:
                 page_sids[s].add(hit[0])
 
@@ -329,7 +351,7 @@ def main() -> int:
                         flags.append("DROPIMPRINT")
                     # 頁の既存ISBNと出版者記号が交差しない = 別版/別社の可能性(移籍は正当なので flag 止まり)
                     _pp = page_prefix.get(slug)
-                    if _pp and isbn[:7] not in _pp and isbn[:8] not in _pp:
+                    if _pp and jp_registrant(isbn) not in _pp:
                         flags.append("PUBMISMATCH")
                     if isbn in preview_isbns:
                         flags.append("PREVIEW")
@@ -393,6 +415,11 @@ def main() -> int:
         by_sid = collections.defaultdict(list)
         for isbn, (sid, num, extra, etype, rd) in s2.items():
             by_sid[sid].append((isbn, num, extra, etype, rd))
+        # 巻ラベルが抜粋本/アニメ物(うちの3姉妹「傑作選 17」型)は promote が落とすのが正 = 対象外
+        _drop_label = {}
+        for isbn, lab in con.execute("SELECT isbn13, volume_label FROM volumes WHERE volume_label IS NOT NULL"):
+            if lab and re.search(r"傑作選|傑作集|総集編|選集|アニメ|ガイド|ファンブック", str(lab)):
+                _drop_label[str(isbn).replace("-", "")] = lab
         ohits = []
         for slug in (ovr.keys() if isinstance(ovr, dict) else []):
             m = meta.get(slug)
@@ -401,7 +428,7 @@ def main() -> int:
             pmax = m["max"] or 0
             for sid in page_sids.get(slug, ()):
                 for isbn, num, extra, etype, rd in by_sid.get(sid, ()):
-                    if isbn in idx or etype not in keep or not num or extra:
+                    if isbn in idx or etype not in keep or not num or extra or isbn in _drop_label:
                         continue
                     if num > pmax:
                         ohits.append((slug, m["title"], pmax, num, isbn, rd or "", s2title.get(sid, "")))
