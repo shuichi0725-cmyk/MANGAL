@@ -80,7 +80,7 @@
 - [【厳守】本番デプロイはトリガー待ち](feedback_production_deploy_gate.md) ／ [【厳守】価格の静的表示は絶対禁止](feedback_no_static_prices.md) ／ [【厳守】週次蒸留=「週次蒸留して」のみで発動](feedback_weekly_distill_exact_trigger_only.md)
 - [【進行中】外部エンリッチ=Wikipedia+魚で旧作にキャッチ/詳細](external_enrich_state.md) — 正=skill external-enrich。pre2010リスト1,285件の37行目から再開・次バッチ9436 ／ [2026-09-01 drop16頁](drop_batch_2026_09_01.md) — ★本番imprintは化ける=楽天seriesNameで判定
 - [【進行中】エンリッチ7k再開](enrich_7k_resume_state.md) — 「エンリッチ続き」 ／ [【重要】新しい順の鉱脈が枯れた](enrich_newest_seam_exhausted.md) — ユーザ裁定待ち ／ [【✅完走】BookLive紹介文=第2材料源](enrich_booklive_seam_done.md) — 次は増加分だけ
-- [【残】鬼太郎本編の多版正規化](kitaro_honpen_multiedition_pending.md) ／ [【進行中】ギャラ型=巻×日付大逆行の是正](gyara_type_regression_cleanup_state.md) — 「ギャラ型続けて」残557版
+- [【残】鬼太郎本編の多版正規化](kitaro_honpen_multiedition_pending.md) ／ [【✅完遂】ギャラ型=巻×日付大逆行の是正](gyara_type_regression_cleanup_state.md) — 573→3版。★8/17一括の「最多run=主版」規則は再刊を主版に据える副作用(幸せの時間型)=extra最古<主版最古で検出可
 - [TinyFish=WebFetch補完](tinyfish_web_fetch.md) — 正=skill tinyfish ／ [Cloudflareアクセス解析](cloudflare_analytics_access.md) — 正=skill cf-analytics ／ [CF請求=Workers Paid $5.50/月のみ](cloudflare_billing.md)
 - [本番待ち2026-09-01=検索残務+発売日SEO面+アニメ季節](inflight_state_2026_09_01.md) — 機能蒸留待ち(ヘッダーナビ改訂 一覧→新作 も含む)・公開後GSC手順
 - [進行中状態2026-08-13](inflight_state_2026_08_13.md) — 本番待ち=メニュー/カラー版/アニメ化34頁・Kindle様子見
@@ -128,3 +128,4 @@
 - [【未決・構造穴】日次の保留ISBNは二度と増加分に出ない](daily_distill_hold_not_requeued.md) — hold再投入をincrementに焼くまで triage簿を人が消化・2026-09-02時点9件
 - [【型・是正済】騎士ガンダム型=新装版が編ごとに別頁へ散る+特別版が番号衝突で不可視](kishi_gundam_shinsoban_consolidation.md) — 楽天captionで収録対応確定→版タブ統合・新頁2・drop5→301・次週次で R2 --prune
 - [【型・検出器+apply正式化・8段適用済】Sugar&Spice型=巻題を題として別sid登録→末尾巻欠け](subtitle_orphan_volume_split_sugar_spice.md) — _audit/_apply-subtitle-orphan-volume.py。2026-09-03 に別sid195巻/取込もれ1,021巻/版分離canonical 46頁/0巻opt-in(vol0-show.yml)/under-merge4/レーベル違い等を適用。残=review.tsv(発売未確定・原版1巻不明のみ)
+- [【道具の罠】_lookup.py --isbn --live はキャッシュ済だとliveを叩かない](lookup_isbn_live_cached_skip.md) — NDLはndl_live直叩き・楽天が年だけの巻は載せない・旧キャッシュは誤記録あり
