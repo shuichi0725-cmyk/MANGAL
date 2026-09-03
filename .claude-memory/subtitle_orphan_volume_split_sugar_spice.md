@@ -5,7 +5,7 @@ metadata:
   node_type: memory
   type: project
   originSessionId: f8fa63b4-3ce7-45e1-b2ab-f3f4fbab02f4
-  modified: 2026-09-03T04:51:50.910Z
+  modified: 2026-09-03T05:51:24.811Z
 ---
 
 **型 (2026-09-03 ユーザ発見 sugar-spice)**: 各巻に固有の巻題を持つシリーズ(Sugar & Spice=全巻ジャズ標準曲題)で、MADBが
@@ -32,5 +32,14 @@ is_extra=1)に落とした。本編頁は「17巻欠け+18巻で終わり」に�
 (rakuten-isbn.jsonl)は誤記録あり=delta優先 ③種2の版種は当てにならない(新潮文庫がstandard) ④SAME_SIDの内訳=真の0巻(表示方針
 マター)/page-dedup残骸/override固定/MADB誤番号 ⑤override が editions を持たなければ種4は効く(is-2010は題だけのoverride)。
 
-**次**: REVIEW一覧の消化(レーベルalias表→再ゲート)、0巻表示方針、フリガナ等は別件。
+**4段目(同日「524巻、見送り理由つきを確認して」)**: レーベル別名を**経験表**で解いた= 同一ISBNを種2 imprint と楽天 seriesName が
+別名で呼ぶペアを全DBで数え(8,388ペア、sid≥3の強ペア1,916。actioncomics⇔アクション/bamboocomics⇔バンブー/kiraramenu⇔まんがタイムKR…)、
+対象版の既存巻の楽天seriesName一致(自頁証拠)も可。日付比較は「日付を持つ巻」基準に修正(最終巻が無日付で誤逆行していた)。
+→ **371巻/236頁を追加**(rakuten-title-tail)。override固定4巻は手で追記(ジェノサイド2/下駄を履くまで2/ピン!ピン!ピン!新装版2-3)。
+**残153巻**(理由つき `subtitle-orphan-volume-review.tsv`): 日付逆行55(頁側が新装/後刷り日付=版の付け直しが要る per-case)、
+canonical/override固定の複合41(第三の極道11/幸せの時間13-19/Eden3-5 は canonical の run 再構築が要る)、G1 版なし13(頁の巻が全部
+number=0 の頁)、真のレーベル違い17(花の慶次19-21=Bunch world新潮社版/悪魔くん千年王国=KCスペシャル等=別版で却下が正)、step2見送り8。
+★alias表は scratchpad 生成物(label_alias.py)で seed 化していない=次回は検出器に組み込む価値あり。
+★銀魂3年Z組銀八先生 の候補2巻は JUMP j BOOKS(小説)= 正しく却下。検出器の DROPIMPRINT に j books/文庫/ノベル を追加済。
+**次**: 0巻表示方針(ドラえもん以外15作)、G3の頁側日付是正、canonical頁のrun再構築。
 [[volume_split_merge]] [[series_fragmentation_rootcause]] [[feedback_one_bug_means_a_class]] [[harvest_match_mechanism_applied]]

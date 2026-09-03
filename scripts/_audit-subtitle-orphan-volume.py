@@ -80,7 +80,7 @@ _RX_SPINOFF = re.compile(
     r"外伝|番外|スピンオフ|another|side|アナザー|エピソード|episode|前日譚|後日譚|アンソロジー|anthology|"
     r"公式|ガイド|ファンブック|イラスト|画集|illustration|設定|資料|データ|ノベル|novel|小説", re.I)
 _RX_LABEL = re.compile(r"傑作集|全集|選集|コレクション|作家編|シリーズ|library|ライブラリ", re.I)
-_RX_DROPIMP = re.compile(r"my first big|コンビニ|増刊|同人|remix|リミックス|bilingual|novels?\b", re.I)
+_RX_DROPIMP = re.compile(r"my first big|コンビニ|増刊|同人|remix|リミックス|bilingual|novels?\b|j\s*books|文庫|ノベル", re.I)
 
 
 def norm(t: str) -> str:
