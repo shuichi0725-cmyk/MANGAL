@@ -145,8 +145,7 @@ overrides:
     slug: '5'
   7-nwairudo7:
     at: '2026-08-08'
-    reason: 数字始まり題の機械生成slugが破損(「新ワイルド7」→7-nwairudo7)。読みシンワイルドセブン基点で本編 wild-7 と整合する形に是正(ユーザ裁定
-      2026-08-08)
+    reason: 数字始まり題の機械生成slugが破損(「新ワイルド7」→7-nwairudo7)。読みシンワイルドセブン基点で本編 wild-7 と整合する形に是正(ユーザ裁定 2026-08-08)
     slug: shin-wild-7
   aahananoouendan:
     at: '2026-06-26'
@@ -1330,9 +1329,7 @@ overrides:
     slug: doshaburi-no-hi-ni
   dotsukiri-angel:
     at: '2026-08-08'
-    reason: NDLのtranscriptionが旧式の大文字表記「ドツキリ エンジエル」で、そこから機械生成されたslugが dotsukiri-angel
-      になっていた。実際の読みはドッキリエンジェル(書影上部のローマ字クレジット「KAZUKI MOTOYAMA / DOKKIRI ANGEL」が裏付け)。ユーザ発見
-      2026-08-08
+    reason: NDLのtranscriptionが旧式の大文字表記「ドツキリ エンジエル」で、そこから機械生成されたslugが dotsukiri-angel になっていた。実際の読みはドッキリエンジェル(書影上部のローマ字クレジット「KAZUKI MOTOYAMA / DOKKIRI ANGEL」が裏付け)。ユーザ発見 2026-08-08
     slug: dokkiri-angel
   dotsukiri-maikuroon:
     at: '2026-07-02'
@@ -1396,8 +1393,7 @@ overrides:
     slug: drop-yuki
   drsuranpu:
     at: '2026-07-27'
-    reason: '外来語title=元綴りDr.Slump(規則4=種a音写)。分裂断片頁dr-slump(愛蔵版5巻のみ)の統合と同時にrename(ユーザ裁定:
-      分裂側slugが正)'
+    reason: '外来語title=元綴りDr.Slump(規則4=種a音写)。分裂断片頁dr-slump(愛蔵版5巻のみ)の統合と同時にrename(ユーザ裁定: 分裂側slugが正)'
     slug: dr-slump
   dungeon-ni-deai-o-motomeru-nowa-machigatteirudarouka-familia-chronicle:
     at: '2026-06-26'
@@ -1433,8 +1429,7 @@ overrides:
     slug: eighth-izu
   ekkusu-no-utagoe:
     at: '2026-08-08'
-    reason: 題の1文字目がギリシャ文字χ(カイ)。書誌DBがラテンXに正規化した表題からslugが ekkusu- になっていた。楽天titleKanaの2読み併記「X
-      ノ ウタゴエ カイ ノ ウタゴエ」とja.wikipediaの「χの歌声」で確認
+    reason: 題の1文字目がギリシャ文字χ(カイ)。書誌DBがラテンXに正規化した表題からslugが ekkusu- になっていた。楽天titleKanaの2読み併記「X ノ ウタゴエ カイ ノ ウタゴエ」とja.wikipediaの「χの歌声」で確認
     slug: kai-no-utagoe
   elisabeth-miyano2026:
     at: '2026-08-10'
@@ -2279,28 +2274,23 @@ overrides:
     slug: high-score-aruko
   higurashi-no-naku-koro-ni-kai:
     at: '2026-08-08'
-    reason: 「解」「怪」「礼」がすべて kai/rei に潰れた衝突回避で西暦suffix(-2007/-2009/-2007-2/-2011)が付いていたが、他の編別頁(-onikakushihen
-      等)と不揃いで内容も分からない。編名を入れて一意化。祭囃し編=マツリバヤシヘン(楽天titleKana)
+    reason: 「解」「怪」「礼」がすべて kai/rei に潰れた衝突回避で西暦suffix(-2007/-2009/-2007-2/-2011)が付いていたが、他の編別頁(-onikakushihen 等)と不揃いで内容も分からない。編名を入れて一意化。祭囃し編=マツリバヤシヘン(楽天titleKana)
     slug: higurashi-no-naku-koro-ni-kai-matsuribayashihen
   higurashi-no-naku-koro-ni-kai-2007:
     at: '2026-08-08'
-    reason: 「解」「怪」「礼」がすべて kai/rei に潰れた衝突回避で西暦suffix(-2007/-2009/-2007-2/-2011)が付いていたが、他の編別頁(-onikakushihen
-      等)と不揃いで内容も分からない。編名を入れて一意化。目明し編=メアカシヘン(楽天titleKana「ヒグラシ ノ ナク コロ ニ カイ メアカシヘン」)
+    reason: 「解」「怪」「礼」がすべて kai/rei に潰れた衝突回避で西暦suffix(-2007/-2009/-2007-2/-2011)が付いていたが、他の編別頁(-onikakushihen 等)と不揃いで内容も分からない。編名を入れて一意化。目明し編=メアカシヘン(楽天titleKana「ヒグラシ ノ ナク コロ ニ カイ メアカシヘン」)
     slug: higurashi-no-naku-koro-ni-kai-meakashihen
   higurashi-no-naku-koro-ni-kai-2007-2:
     at: '2026-08-08'
-    reason: 「解」「怪」がどちらも kai に潰れる衝突回避で -2007-2 という数字suffixが付いていた。ja.wikipedia「ひぐらしのなく頃に怪
-      現壊し編」の冒頭よみがな『ひぐらしのなくころにかい うつつこわしへん』で編名の読みを確定し、他の編別頁と同じ編名ベースに是正。NDL(本題まで)・楽天(本題まで)・KADOKAWA公式(ふりがな無し)では取れなかった読み。
+    reason: 「解」「怪」がどちらも kai に潰れる衝突回避で -2007-2 という数字suffixが付いていた。ja.wikipedia「ひぐらしのなく頃に怪 現壊し編」の冒頭よみがな『ひぐらしのなくころにかい うつつこわしへん』で編名の読みを確定し、他の編別頁と同じ編名ベースに是正。NDL(本題まで)・楽天(本題まで)・KADOKAWA公式(ふりがな無し)では取れなかった読み。
     slug: higurashi-no-naku-koro-ni-kai-utsutsukowashihen
   higurashi-no-naku-koro-ni-kai-2009:
     at: '2026-08-08'
-    reason: 「解」「怪」「礼」がすべて kai/rei に潰れた衝突回避で西暦suffix(-2007/-2009/-2007-2/-2011)が付いていたが、他の編別頁(-onikakushihen
-      等)と不揃いで内容も分からない。編名を入れて一意化。皆殺し編=ミナゴロシヘン(楽天titleKana)
+    reason: 「解」「怪」「礼」がすべて kai/rei に潰れた衝突回避で西暦suffix(-2007/-2009/-2007-2/-2011)が付いていたが、他の編別頁(-onikakushihen 等)と不揃いで内容も分からない。編名を入れて一意化。皆殺し編=ミナゴロシヘン(楽天titleKana)
     slug: higurashi-no-naku-koro-ni-kai-minagoroshihen
   higurashi-no-naku-koro-ni-rei-ryukishi-2011:
     at: '2026-08-08'
-    reason: 「解」「怪」「礼」がすべて kai/rei に潰れた衝突回避で西暦suffix(-2007/-2009/-2007-2/-2011)が付いていたが、他の編別頁(-onikakushihen
-      等)と不揃いで内容も分からない。編名を入れて一意化。賽殺し編=サイコロシヘン(NDL2レコードが一致。楽天は「サイゴロシヘン」だが、賽=サイコロの掛詞で濁らないNDL側を採用)
+    reason: 「解」「怪」「礼」がすべて kai/rei に潰れた衝突回避で西暦suffix(-2007/-2009/-2007-2/-2011)が付いていたが、他の編別頁(-onikakushihen 等)と不揃いで内容も分からない。編名を入れて一意化。賽殺し編=サイコロシヘン(NDL2レコードが一致。楽天は「サイゴロシヘン」だが、賽=サイコロの掛詞で濁らないNDL側を採用)
     slug: higurashi-no-naku-koro-ni-rei-saikoroshihen
   hijikatatoshizou:
     at: '2026-06-26'
@@ -4279,8 +4269,7 @@ overrides:
     slug: manga-bocchan
   mangakasan-to-ashisutantosan-to-2:
     at: '2026-07-27'
-    reason: 規則4(明白な辞書英単語=assistant)+敬称-san分離。本編slug mangaka-san-to-assistant-san-to
-      と家族整合(ユーザ照会「二巻疑い」の調査時に発見。疑い自体はWiki全1巻続編で白)
+    reason: 規則4(明白な辞書英単語=assistant)+敬称-san分離。本編slug mangaka-san-to-assistant-san-to と家族整合(ユーザ照会「二巻疑い」の調査時に発見。疑い自体はWiki全1巻続編で白)
     slug: mangaka-san-to-assistant-san-to-2
   mangakenkanryuu:
     at: '2026-06-26'
@@ -5556,6 +5545,10 @@ overrides:
     at: '2026-08-10'
     reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
     slug: rising-sun-matsumoto
+  robotics-notes-2012:
+    at: '2026-09-03'
+    reason: 年サフィックス誤適用の差し戻し。実体は同名別作ではなく別題作品『Robotics;Notes REVIVAL LEGACY』(集英社/シヒラ竜也 全3巻)。裸の西暦サフィックスはslug規約違反でもある(規約=姓+年)
+    slug: robotics-notes-revival-legacy
   robottodouwa:
     at: '2026-07-02'
     reason: ハイフン規則違反是正(楽天分かち書き「ロボット ドウワ」整列・綴り既存保持)
@@ -6025,9 +6018,7 @@ overrides:
     slug: shinomiya-kun-ni-wa-wake-ga-aru
   shinpan-himitsu-tantei-jieiei:
     at: '2026-08-14'
-    reason: 頁が種2の「新版秘密探偵JA」クラスタから建ち slug/kana に『新版』が焼き付いていた。NDLのタイトルよみは大都社版=ヒミツ タンテイ
-      ジェイエイ / ホーム社HMB版=ヒミツ タンテイ JA でいずれにも新版は無い。JAは字づら通りの英字読み(ジェイエイ)なので slug規則6により英字のまま
-      ja。ユーザ裁定2026-08-14
+    reason: 頁が種2の「新版秘密探偵JA」クラスタから建ち slug/kana に『新版』が焼き付いていた。NDLのタイトルよみは大都社版=ヒミツ タンテイ ジェイエイ / ホーム社HMB版=ヒミツ タンテイ JA でいずれにも新版は無い。JAは字づら通りの英字読み(ジェイエイ)なので slug規則6により英字のまま ja。ユーザ裁定2026-08-14
     slug: himitsu-tantei-ja
   shinpi-no-sekai-eruhazaado-tsubura-1996:
     at: '2026-08-10'
@@ -7138,8 +7129,7 @@ overrides:
     slug: yoru-no-salesman
   yoshida-akimi:
     at: '2026-07-01'
-    reason: '同名homonym是正: 夜明ケ(しりあがり寿1990)が主版=無印、吉田秋生「夜明け」2012は姓+年suffix。旧slugは著者名で不適
-      / C類年サフィックス無印化2026-08-10'
+    reason: '同名homonym是正: 夜明ケ(しりあがり寿1990)が主版=無印、吉田秋生「夜明け」2012は姓+年suffix。旧slugは著者名で不適 / C類年サフィックス無印化2026-08-10'
     slug: yoake-yoshida
   yoshiwara-hanaoboro:
     at: '2026-07-02'
@@ -7235,8 +7225,7 @@ overrides:
     slug: zeus-komori
   zoku-7-n-wairudo7:
     at: '2026-08-08'
-    reason: 数字始まり題の機械生成slugが破損(「新ワイルド7」→7-nwairudo7)。読みシンワイルドセブン基点で本編 wild-7 と整合する形に是正(ユーザ裁定
-      2026-08-08)
+    reason: 数字始まり題の機械生成slugが破損(「新ワイルド7」→7-nwairudo7)。読みシンワイルドセブン基点で本編 wild-7 と整合する形に是正(ユーザ裁定 2026-08-08)
     slug: zoku-shin-wild-7
   zokutoshishitanoanchikushou:
     at: '2026-06-26'
