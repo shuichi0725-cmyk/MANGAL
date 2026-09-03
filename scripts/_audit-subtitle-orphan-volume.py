@@ -88,6 +88,11 @@ def norm(t: str) -> str:
     return _PUNCT.sub("", s)
 
 
+def _imp_norm(t: str) -> str:
+    """レーベル名の正規化(末尾の「コミック(ス)」を落とす。apply 側と同一実装)"""
+    return re.sub(r"コミックス?$", "", norm(t))
+
+
 def jp_registrant(isbn13: str) -> str:
     """978-4(日本) の出版者記号を桁数表(2〜7桁)で切り出す。先頭N桁固定だと2桁社(KADOKAWA=04/講談社=06)で
     題番号の1桁目まで含んで別社扱いになる(魔法科よんこま編 9784048/9784049 で実踏)。"""
@@ -228,14 +233,24 @@ def main() -> int:
             pass
     print(f"preview頁のISBN {len(preview_isbns)}件", flush=True)
 
-    # 種2: isbn→(sid, number, is_extra, edition type, release_date) / sid→title
+    # 種2: isbn→(sid, number, is_extra, edition type, release_date) / sid→title / isbn→imprint
     con = sqlite3.connect(DB)
     s2 = {}
-    for isbn, sid, num, extra, etype, rd in con.execute(
-            "SELECT v.isbn13, e.series_id, v.number, v.is_extra, e.type, v.release_date "
+    s2imp = {}
+    for isbn, sid, num, extra, etype, rd, imp in con.execute(
+            "SELECT v.isbn13, e.series_id, v.number, v.is_extra, e.type, v.release_date, e.imprint "
             "FROM volumes v JOIN editions e ON e.id=v.edition_id "
             "WHERE v.isbn13 IS NOT NULL AND v.isbn13!=''"):
-        s2.setdefault(isbn.replace("-", ""), (sid, num, extra, etype, rd))
+        k = isbn.replace("-", "")
+        s2.setdefault(k, (sid, num, extra, etype, rd))
+        if imp:
+            s2imp.setdefault(k, imp)
+    # ★レーベル経験別名表(2026-09-03 4段目): 同一ISBNを 種2 imprint と 楽天 seriesName が別名で呼ぶペアを数える
+    #   (actioncomics⇔アクション / kiraramenu⇔まんがタイムKR …)。apply 側の「レーベル整合」ゲートが使う。
+    #   再生成可能物なので seed 化せず .cache に落とす(検出器を回すたび更新)。
+    alias_pairs = collections.defaultdict(set)
+    alias_n = collections.Counter()
+    rk_series = {}   # 本番ISBN → 楽天 seriesName(正規化) = 「自頁の既存巻と同レーベル」証拠
     s2title = dict(con.execute("SELECT id, title FROM series"))
     print(f"種2 ISBN {len(s2)}件", flush=True)
     # 頁→sid集合(頁のISBNから逆引き) / 頁→出版者記号集合(先頭7桁・8桁)
@@ -286,6 +301,16 @@ def main() -> int:
             if not it:
                 continue
             seen.add(isbn)
+            _ser = _imp_norm(it.get("seriesName") or "")
+            if _ser:
+                if isbn in idx:
+                    rk_series[isbn] = _ser
+                _h = s2.get(isbn)
+                if _h and isbn in s2imp:
+                    _ni = _imp_norm(s2imp[isbn])
+                    if _ni and _ni != _ser:
+                        alias_pairs[(_ni, _ser)].add(_h[0])
+                        alias_n[(_ni, _ser)] += 1
             if isbn in idx:
                 continue  # 本番に在る = 対象外
             gid = str(it.get("booksGenreId") or "")
@@ -366,6 +391,15 @@ def main() -> int:
                     break  # 1ISBN=1信号(副題優先)
         nlines += n
         print(f"  {os.path.basename(fn)}: {n}行走査 / 累計 候補{len(rows)}件", flush=True)
+
+    # レーベル経験別名表 + 本番ISBNの楽天seriesName を .cache に落とす(apply が読む)
+    _ap = os.path.join(ROOT, ".cache", "label-alias-pairs.json")
+    json.dump({f"{a}||{b}": [len(s), alias_n[(a, b)]] for (a, b), s in alias_pairs.items()},
+              io.open(_ap, "w", encoding="utf-8"), ensure_ascii=False)
+    json.dump(rk_series, io.open(os.path.join(ROOT, ".cache", "rakuten-series-by-isbn.json"), "w", encoding="utf-8"),
+              ensure_ascii=False)
+    print(f"レーベル経験別名表: {len(alias_pairs)}ペア(sid>=3: {sum(1 for s in alias_pairs.values() if len(s) >= 3)}) → .cache/label-alias-pairs.json"
+          f" / 本番ISBNの楽天seriesName {len(rk_series)}件 → .cache/rakuten-series-by-isbn.json", flush=True)
 
     order = {"MISSING_TAIL": 0, "MISSING_GAP": 1, "OTHER_ISBN": 2}
     rows.sort(key=lambda r: (order.get(r[0], 9), r[2], r[1], r[7], r[16]))

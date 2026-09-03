@@ -5,7 +5,7 @@ metadata:
   node_type: memory
   type: project
   originSessionId: f8fa63b4-3ce7-45e1-b2ab-f3f4fbab02f4
-  modified: 2026-09-03T05:51:24.811Z
+  modified: 2026-09-03T08:04:00.684Z
 ---
 
 **型 (2026-09-03 ユーザ発見 sugar-spice)**: 各巻に固有の巻題を持つシリーズ(Sugar & Spice=全巻ジャズ標準曲題)で、MADBが
@@ -41,5 +41,13 @@ canonical/override固定の複合41(第三の極道11/幸せの時間13-19/Eden3
 number=0 の頁)、真のレーベル違い17(花の慶次19-21=Bunch world新潮社版/悪魔くん千年王国=KCスペシャル等=別版で却下が正)、step2見送り8。
 ★alias表は scratchpad 生成物(label_alias.py)で seed 化していない=次回は検出器に組み込む価値あり。
 ★銀魂3年Z組銀八先生 の候補2巻は JUMP j BOOKS(小説)= 正しく却下。検出器の DROPIMPRINT に j books/文庫/ノベル を追加済。
-**次**: 0巻表示方針(ドラえもん以外15作)、G3の頁側日付是正、canonical頁のrun再構築。
+**5段目(同日「進めて」)**: 判定を **`scripts/_apply-subtitle-orphan-volume.py`** に正式化(検出器が別名表を `.cache/label-alias-pairs.json` に
+同時生成→apply がゲート→種4-auto→stems)。CLAUDE.md登録済。日付逆行55巻を検分した結論: **頁側の後刷り日付は1件だけ**
+(セイシュンの食卓3巻 MADB 1991-05→楽天 1989-11-01+ISBN序列で override)。大半は頁が**新装版/ポケットワイド/スペシャル版/合本**
+(SP pocket wide=リイド社の廉価再刊、バーズコミックススペシャル版 上下、新装合本版…)しか持たず、候補=原版の続巻という**版の欠落**
+=版分離案件(edition-canonical/extra-editions)。ラベル一致の取り違え2型を是正: 'yk'⊂'ykコミックデラックス'(短い包含)、
+'ホラーm'⊂'ホラーmコミック文庫'(文庫版に吸われる)→ 包含はstandard版のみ・4字以上。1か月許容(奥付月vs発売日)で3巻救済。
+残194巻(SAME_SID56含む)。ドラえもん0巻はユーザ裁定で表示(override直書き+year 1974-1996明示)。
+
+**次**: 0巻表示方針(ドラえもん以外15作)、原版が欠けている頁(漂流ネットカフェ/ルパン三世M/オトコのいる部屋…)の版分離、canonical頁のrun再構築。
 [[volume_split_merge]] [[series_fragmentation_rootcause]] [[feedback_one_bug_means_a_class]] [[harvest_match_mechanism_applied]]
