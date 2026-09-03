@@ -126,4 +126,4 @@
 - [【宿題】著者欄が出版社名の本番頁9件](author_is_publisher_name_pages.md) — 楽天placeholder型・予約経路はゲート済
 - [【未決・構造穴】日次の保留ISBNは二度と増加分に出ない](daily_distill_hold_not_requeued.md) — hold再投入をincrementに焼くまで triage簿を人が消化・2026-09-02時点9件
 - [【型・是正済】騎士ガンダム型=新装版が編ごとに別頁へ散る+特別版が番号衝突で不可視](kishi_gundam_shinsoban_consolidation.md) — 楽天captionで収録対応確定→版タブ統合・新頁2・drop5→301・次週次で R2 --prune
-- [【型・検出器候補】Sugar&Spice型=巻題を題として別sid登録→本編頁から末尾巻が欠ける](subtitle_orphan_volume_split_sugar_spice.md) — 楽天subTitle「親題+巻番号」が信号・是正は種4結線
+- [【型・検出器あり・GO待ち】Sugar&Spice型=巻題を題として別sid登録→末尾巻欠け](subtitle_orphan_volume_split_sugar_spice.md) — _audit-subtitle-orphan-volume.py 芯1,365巻/809頁(SPLIT69頁=種4結線候補)+第2部=override固定頁の続巻取りこぼし25巻(現役3頁)
