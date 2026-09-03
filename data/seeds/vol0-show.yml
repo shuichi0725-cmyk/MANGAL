@@ -1,0 +1,59 @@
+# ★真の0巻を出す opt-in (2026-09-03 ユーザ裁定「0巻は全部漫画なら出してok」)
+# promote は number=0 を「巻号抽出失敗=偽#1」として numbered 巻があれば捨てる。前日譚/短編集として
+# 商業流通した本物の0巻もその規則で消えていたので、ここに ISBN を列挙した巻だけ number=0 のまま出す。
+# 読む側= scripts/_promote-bulk-v2.py get_vol0_show()。純粋追加・種2不変・可逆(行削除で戻る)。
+# ★載せる前に「漫画か」を確認する(オフィシャルガイドブック/小説/フィルムコミックの0巻は載せない)。
+# ドラえもん0巻(9784091431561)は override 直書きで先行済(override頁はこのseedを通らない)。
+volumes:
+- isbn13: '9784091237361'
+  slug: hayate-no-gotoku
+  title: ハヤテのごとく！（0）
+  note: 2012-05-18 少年サンデーコミックス 畑健二郎。単行本未収録短編集の0巻
+- isbn13: '9784757564541'
+  slug: jibaku-shounen-hanako-kun
+  title: 地縛少年花子くん（0）
+  note: 2019-12-27 Gファンタジーコミックス あいだいろ。前日譚0巻
+- isbn13: '9784780801644'
+  slug: jun-ishinomori
+  title: ジュン（0）
+  note: 2011-09-14 ポット出版 石ノ森章太郎。復刻全集の0巻(実験作「ジュン」)
+- isbn13: '9784344828254'
+  slug: kanojo-no-karera-rs
+  title: 彼女のカレラRS（0）
+  note: 2013-05 バーズコミックス 麻宮騎亜。0巻
+- isbn13: '9784091270108'
+  slug: kengan-ashura
+  title: ケンガンアシュラ 0
+  note: 2016-01-12 裏少年サンデーコミックス。0巻
+- isbn13: '9784575305814'
+  slug: kimura
+  title: KIMURA（vol.0）木村政彦はなぜ力道山を殺さなかったのか
+  note: 2013-10 双葉社 原田久仁信/増田俊也。vol.0
+- isbn13: '9784864684798'
+  slug: kinryou-rokku
+  title: 禁猟六区（0）
+  note: 2016-11-05 ヒーローズコミックス。0巻
+- isbn13: '9784344826328'
+  slug: koban
+  title: KOBAN（0）
+  note: 2012-10-24 バーズコミックスデラックス 石川ちか。0巻(種2 type=deluxe→standard統合後に0巻規則で消えていた)
+- isbn13: '9784758066501'
+  slug: masamune-kun-no-revenge
+  title: 政宗くんのリベンジ（0）
+  note: 2017-04 IDコミックス REXコミックス。0巻
+- isbn13: '9784253146401'
+  slug: matsuda-yuusaku-monogatari
+  title: 松田優作物語（0）ふりかえればアイツがいた！
+  note: 2000-11-29 ヤングチャンピオンコミックス 高岩ヨシヒロ。0巻
+- isbn13: '9784063880304'
+  slug: paradise-residence
+  title: パラダイスレジデンス 0
+  note: 2015-02-23 アフタヌーンKC 藤島康介。0巻
+- isbn13: '9784396766863'
+  slug: soroete-choudai
+  title: そろえてちょうだい？ 0
+  note: 2016-11-08 フィールコミックス いくえみ綾。0巻
+- isbn13: '9784253231602'
+  slug: tetsu-no-linebarrels
+  title: 鉄のラインバレル（0）
+  note: 2006-12-20 チャンピオンREDコミックス。0巻
