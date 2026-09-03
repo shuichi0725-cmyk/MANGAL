@@ -76,6 +76,7 @@
 - [【方針】掲載除外の優先度](exclusion_priority_policy.md) — ①成年誌②コンビニ本③纏められないもの
 - [反映=targeted](reflect_protocol_fast.md) — 正=skill reflect-targeted ／ [新規登録の戒め](new_manga_registration_order.md) — 正=skill new-manga-register
 - [【必ず使う】記憶をgit永続化](memory_git_mirror.md) — _sync-memory.py+push ／ [【方針】記憶とskillの棲み分け](feedback_memory_vs_skill_policy.md)
+- [【方針】Wikipediaの発売日は採用](wikipedia_release_date_is_authoritative.md) — 種2は奥付日で1か月ずれる・機構=release-date-override.jsonl
 - [【厳守】本番デプロイはトリガー待ち](feedback_production_deploy_gate.md) ／ [【厳守】価格の静的表示は絶対禁止](feedback_no_static_prices.md) ／ [【厳守】週次蒸留=「週次蒸留して」のみで発動](feedback_weekly_distill_exact_trigger_only.md)
 - [【進行中】外部エンリッチ=Wikipedia+魚で旧作にキャッチ/詳細](external_enrich_state.md) — 正=skill external-enrich。pre2010リスト1,285件の37行目から再開・次バッチ9436 ／ [2026-09-01 drop16頁](drop_batch_2026_09_01.md) — ★本番imprintは化ける=楽天seriesNameで判定
 - [【進行中】エンリッチ7k再開](enrich_7k_resume_state.md) — 「エンリッチ続き」 ／ [【重要】新しい順の鉱脈が枯れた](enrich_newest_seam_exhausted.md) — ユーザ裁定待ち ／ [【✅完走】BookLive紹介文=第2材料源](enrich_booklive_seam_done.md) — 次は増加分だけ
