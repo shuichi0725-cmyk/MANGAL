@@ -1,0 +1,22 @@
+slug: rosumarin-no-densetsu
+canonical_label: 通常版
+canonical_publisher: 講談社
+canonical_imprint: 別冊フレンドKC
+suppress_types: []
+source: '残86巻の裁定 2026-09-03(Sugar&Spice型検出の見送り群): overrideは1986年KCスペシャル再刊を通常版1巻にしていた。原版別冊フレンドKC全2巻(1978)を主版に。巻・ISBN・日付は楽天キャッシュ(検出器TSV)+種2+既存seed、情報は追加していない'
+volumes:
+- number: 1
+  isbn13: '9784061064331'
+  release_date: '1978-02-10'
+- number: 2
+  isbn13: '9784061064348'
+  release_date: '1978-03-10'
+extra_editions:
+- type: shinsoban
+  label: 'KCスペシャル(1986)'
+  imprint: 'KCスペシャル'
+  publisher: 講談社
+  volumes:
+  - number: 1
+    isbn13: '9784061011878'
+    release_date: '1986-06'

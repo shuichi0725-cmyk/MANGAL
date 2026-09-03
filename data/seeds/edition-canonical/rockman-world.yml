@@ -1,0 +1,15 @@
+slug: rockman-world
+canonical_label: 通常版
+canonical_publisher: 講談社
+canonical_imprint: コミックボンボンKC
+suppress_types:
+- deluxe
+source: '残86巻の裁定 2026-09-03(Sugar&Spice型検出の見送り群): 頁はKCデラックスボンボン表記の1巻だけ(deluxe扱い)。コミックボンボンKCの3巻を楽天で復元し1巻と同じ通常版に(2巻は未発見)。巻・ISBN・日付は楽天キャッシュ(検出器TSV)+種2+既存seed、情報は追加していない'
+volumes:
+- number: 1
+  isbn13: '9784063193022'
+  release_date: '1992-07'
+- number: 3
+  isbn13: '9784063216738'
+  release_date: '1993-06-04'
+extra_editions: []

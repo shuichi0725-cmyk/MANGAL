@@ -1,0 +1,34 @@
+slug: susanoou
+canonical_label: 通常版
+canonical_publisher: 講談社
+canonical_imprint: 少年マガジンKC
+suppress_types: []
+source: '残86巻の裁定 2026-09-03(Sugar&Spice型検出の見送り群): 頁は講談社漫画文庫1-6だけ。楽天にあった原版少年マガジンKCの8・9巻(1981)を主版に、フェニックスKC版(1996)2-6巻は別版(原版1-7・フェニックス1巻は未発見=巻抜け仮想で追う)。巻・ISBN・日付は楽天キャッシュ(検出器TSV)+種2+既存seed、情報は追加していない'
+volumes:
+- number: 8
+  isbn13: '9784061727373'
+  release_date: '1981-03-10'
+- number: 9
+  isbn13: '9784061727441'
+  release_date: '1981-05-10'
+extra_editions:
+- type: shinsoban
+  label: 'フェニックスKC(1996)'
+  imprint: 'フェニックスKC'
+  publisher: 講談社
+  volumes:
+  - number: 2
+    isbn13: '9784063290110'
+    release_date: '1996-07-23'
+  - number: 3
+    isbn13: '9784063290127'
+    release_date: '1996-08-23'
+  - number: 4
+    isbn13: '9784063290134'
+    release_date: '1996-09-20'
+  - number: 5
+    isbn13: '9784063290141'
+    release_date: '1996-10-23'
+  - number: 6
+    isbn13: '9784063290158'
+    release_date: '1996-11-22'

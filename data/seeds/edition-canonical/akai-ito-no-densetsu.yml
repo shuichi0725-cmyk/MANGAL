@@ -1,0 +1,41 @@
+slug: akai-ito-no-densetsu
+canonical_label: 通常版
+canonical_publisher: 集英社
+canonical_imprint: セブンティーン・コミックス
+suppress_types: []
+source: '残86巻の裁定 2026-09-03(Sugar&Spice型検出の見送り群): overrideは1986年集英社漫画文庫の1冊を通常版1巻にしていた。原版セブンティーン・コミックス全2巻(種2の日付1975-08/09、ISBNは後刷り表記)を主版に、文庫/SG/集英社文庫は別版。巻・ISBN・日付は楽天キャッシュ(検出器TSV)+種2+既存seed、情報は追加していない'
+volumes:
+- number: 1
+  isbn13: '9784088540498'
+  release_date: '1975-08'
+- number: 2
+  isbn13: '9784088540504'
+  release_date: '1975-09'
+extra_editions:
+- type: bunkobon
+  label: '集英社漫画文庫(1986)'
+  imprint: '集英社漫画文庫'
+  publisher: 集英社
+  volumes:
+  - number: 1
+    isbn13: '9784086122610'
+    release_date: '1986-10'
+  - number: 2
+    isbn13: '9784086122627'
+    release_date: '1986-10'
+- type: shinsoban
+  label: 'SGコミックス(1990)'
+  imprint: 'SGコミックス'
+  publisher: 集英社
+  volumes:
+  - number: 1
+    isbn13: '9784088550459'
+    release_date: '1990-07'
+- type: bunkobon
+  label: '集英社文庫コミック版(1998)'
+  imprint: '集英社文庫 コミック版'
+  publisher: 集英社
+  volumes:
+  - number: 1
+    isbn13: '9784087850437'
+    release_date: '1998-03'

@@ -1,0 +1,30 @@
+slug: mickey
+canonical_label: 通常版
+canonical_publisher: 集英社
+canonical_imprint: りぼんマスコットコミックス
+suppress_types: []
+source: '残86巻の裁定 2026-09-03(Sugar&Spice型検出の見送り群): overrideは1997年集英社文庫の1冊を通常版1巻にしていた。りぼんマスコットコミックス全2巻を主版に(楽天日付1990-08は後刷りの可能性、種2は1981-08)、SG/文庫は別版。巻・ISBN・日付は楽天キャッシュ(検出器TSV)+種2+既存seed、情報は追加していない'
+volumes:
+- number: 1
+  isbn13: '9784088531939'
+  release_date: '1990-08-01'
+- number: 2
+  isbn13: '9784088532097'
+  release_date: '1990-08-01'
+extra_editions:
+- type: shinsoban
+  label: 'SGコミックス(1989)'
+  imprint: 'SGコミックス'
+  publisher: 集英社
+  volumes:
+  - number: 1
+    isbn13: '9784088550091'
+    release_date: '1989-11'
+- type: bunkobon
+  label: '集英社文庫コミック版(1997)'
+  imprint: '集英社文庫 コミック版'
+  publisher: 集英社
+  volumes:
+  - number: 1
+    isbn13: '9784086171441'
+    release_date: '1997-09'

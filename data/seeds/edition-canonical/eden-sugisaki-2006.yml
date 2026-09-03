@@ -3,17 +3,30 @@ canonical_label: 通常版
 canonical_publisher: シュベール出版
 canonical_imprint: シュベールコミックス
 suppress_types: []
-source: 'ギャラ型仕上げ 2026-08-17: この頁=千之ナイフ『EDEN』。旧canonicalは5作品の混線だった: ①遠藤浩輝EDEN(アフタヌーンKC全18巻)=別頁edenと**ISBN重複**していたため除去 ②Patsy comics1990=定広美香/秋野こよみの別作(楽天で確認) ③アルファポリス2015-16=川津流一/鶴岡伸寿の別作(同) — いずれも除去。残る千之ナイフの実物=シュベールコミックス(1994・2巻のみ記録あり=1巻は両ソース無で載せない)+青林堂の編別再刊(2006・チャイニーズ姑娘編)。NDL×楽天一致'
+source: '残86巻の裁定 2026-09-03(Sugar&Spice型検出の見送り群): 千之ナイフ『EDEN』シュベールコミックス全5巻(1994-97)のうち2巻しか無かった。1・3・4・5巻を楽天から復元。巻・ISBN・日付は楽天キャッシュ(検出器TSV)+種2+既存seed、情報は追加していない'
 volumes:
+- number: 1
+  isbn13: '9784883320028'
+  release_date: '1994-04-07'
 - number: 2
   isbn13: '9784883320257'
   release_date: '1994-12-14'
+- number: 3
+  isbn13: '9784883320578'
+  release_date: '1995-10-25'
+- number: 4
+  isbn13: '9784883320912'
+  release_date: '1996-10-24'
+- number: 5
+  isbn13: '9784883320998'
+  release_date: '1997-01-20'
 extra_editions:
 - type: shinsoban
-  label: 編別版(青林堂 2006)
+  label: '編別版(青林堂 2006)'
+  imprint: null
   publisher: 青林堂
   volumes:
   - number: 1
-    volume_label: チャイニーズ姑娘編
     isbn13: '9784792603885'
     release_date: '2006-02'
+    volume_label: 'チャイニーズ姑娘編'

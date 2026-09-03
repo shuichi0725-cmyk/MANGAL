@@ -1,0 +1,28 @@
+slug: eei-kendo
+canonical_label: 通常版
+canonical_publisher: 小学館
+canonical_imprint: 少年サンデーコミックス
+suppress_types: []
+source: '残86巻の裁定 2026-09-03(Sugar&Spice型検出の見送り群): overrideは1992年SVコミックス再刊1-2を通常版にしていた。原版少年サンデーコミックス全3巻(1980)を主版に(1・2巻はISBN無し=種2の日付のみ)、SV版は別版。巻・ISBN・日付は楽天キャッシュ(検出器TSV)+種2+既存seed、情報は追加していない'
+volumes:
+- number: 1
+  isbn13: null
+  release_date: '1980-08'
+- number: 2
+  isbn13: null
+  release_date: '1980-09'
+- number: 3
+  isbn13: '9784091204530'
+  release_date: '1980-10-20'
+extra_editions:
+- type: shinsoban
+  label: 'SVコミックス(1992)'
+  imprint: 'スーパービジュアル・コミックス'
+  publisher: ビズコミュニケーションズジャパン
+  volumes:
+  - number: 1
+    isbn13: '9784091602114'
+    release_date: '1992-06'
+  - number: 2
+    isbn13: '9784091602121'
+    release_date: '1992-07'

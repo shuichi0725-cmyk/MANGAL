@@ -1,47 +1,54 @@
 slug: shin-piihyoro-ikka
 canonical_label: 通常版
-canonical_publisher: ホーム社
-canonical_imprint: HMB
-source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。　/ 2026-08-28 レーベル表記ゆれ版分裂の是正(ARMS型): MADBが同一レーベルを表記ゆれ(中黒の有無・小書きカナ・英字/カナ)で別edition行として持っていたため、2026-08-17の一括是正が同一の刊行runを複数の版タブに割ってしまっていた。外部裏取り(MADB cm104のシリーズ容器ID・楽天seriesName・Wikipedia/公式の刊行リスト)で同一runと確認できた分だけ、既存の巻を版間で移して統合した。巻・ISBN・発売日の新規追加や値の改変は一切していない。'
+canonical_publisher: 宙出版
+canonical_imprint: ミッシィコミックス
+suppress_types: []
+source: '残86巻の裁定 2026-09-03(Sugar&Spice型検出の見送り群): 旧canonicalは2005年ホーム社HMB版(4巻)を主版に据え、原版ミッシィコミックス(宙出版 1996-98 全6巻)は2版に割れて1・6巻が無かった。楽天で1・6巻を復元し原版を主版に。主婦と生活社の同レーベル(978-4-391)2冊は別版。巻・ISBN・日付は楽天キャッシュ(検出器TSV)+種2+既存seed、情報は追加していない'
 volumes:
 - number: 1
-  isbn13: '9784834273281'
-  release_date: 2005-10
+  isbn13: '9784872871470'
+  release_date: '1996-10-05'
 - number: 2
-  isbn13: '9784834273298'
-  release_date: 2005-11
+  isbn13: '9784872871616'
+  release_date: '1997-03'
 - number: 3
-  isbn13: '9784834273311'
-  release_date: 2005-12
+  isbn13: '9784872871890'
+  release_date: '1997-10'
 - number: 4
-  isbn13: '9784834273335'
-  release_date: 2006-01
+  isbn13: '9784872872064'
+  release_date: '1998-02'
+- number: 5
+  isbn13: '9784872872286'
+  release_date: '1998-05-06'
+- number: 6
+  isbn13: '9784872872545'
+  release_date: '1998-09-05'
 extra_editions:
 - type: shinsoban
-  label: ミッシィコミックスDX
-  imprint: ミッシィコミックスDX
-  publisher: 不明
+  label: 'ミッシィコミックス(主婦と生活社 1996-97)'
+  imprint: 'ミッシィコミックス'
+  publisher: 主婦と生活社
   volumes:
   - number: 1
     isbn13: '9784391916171'
-    release_date: 1996-11
-  - number: 2
-    isbn13: '9784872871616'
-    release_date: 1997-03
-  - number: 3
-    isbn13: '9784872871890'
-    release_date: 1997-10
-  - number: 4
-    isbn13: '9784872872064'
-    release_date: 1998-02
-- type: shinsoban
-  label: ミッシィコミックス
-  imprint: ミッシィコミックス
-  publisher: 主婦と生活社
-  volumes:
+    release_date: '1996-11'
   - number: 2
     isbn13: '9784391916294'
-    release_date: null
-  - number: 5
-    isbn13: '9784872872286'
-    release_date: null
+    release_date: '1997-02-06'
+- type: shinsoban
+  label: 'HMB(ホーム社 2005-06)'
+  imprint: 'HMB'
+  publisher: ホーム社
+  volumes:
+  - number: 1
+    isbn13: '9784834273281'
+    release_date: '2005-10'
+  - number: 2
+    isbn13: '9784834273298'
+    release_date: '2005-11'
+  - number: 3
+    isbn13: '9784834273311'
+    release_date: '2005-12'
+  - number: 4
+    isbn13: '9784834273335'
+    release_date: '2006-01'

@@ -2,7 +2,8 @@ slug: sasaki-sama-ni-negai-o
 canonical_label: 通常版
 canonical_publisher: 竹書房
 canonical_imprint: Bamboo comics
-source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。'
+suppress_types: []
+source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。 ／ 2026-09-03 6巻(9784812453810 2000-04-27 バンブーコミックス)を楽天から追記(主版1-5の続き)'
 volumes:
 - number: 1
   isbn13: '9784884757960'
@@ -19,10 +20,13 @@ volumes:
 - number: 5
   isbn13: '9784812452882'
   release_date: '1999-05'
+- number: 6
+  isbn13: '9784812453810'
+  release_date: '2000-04-27'
 extra_editions:
 - type: shinsoban
-  label: Bamboo comics(2004)
-  imprint: Bamboo comics
+  label: 'Bamboo comics(2004)'
+  imprint: 'Bamboo comics'
   publisher: 竹書房
   volumes:
   - number: 1

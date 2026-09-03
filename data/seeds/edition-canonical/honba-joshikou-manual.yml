@@ -1,18 +1,29 @@
 slug: honba-joshikou-manual
 canonical_label: 通常版
 canonical_publisher: 講談社
+canonical_imprint: ワイドKC
 suppress_types:
 - deluxe
-source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。'
+source: '残86巻の裁定 2026-09-03(Sugar&Spice型検出の見送り群): 旧canonicalは2巻のみ。楽天でワイドKC 1・3・4巻を復元(全4巻 1987-90)。巻・ISBN・日付は楽天キャッシュ(検出器TSV)+種2+既存seed、情報は追加していない'
 volumes:
+- number: 1
+  isbn13: '9784061765269'
+  release_date: '1987-02-26'
 - number: 2
   isbn13: '9784061765474'
-  release_date: null
+  release_date: '1988-12'
+- number: 3
+  isbn13: '9784061765764'
+  release_date: '1990-01-17'
+- number: 4
+  isbn13: '9784061765931'
+  release_date: '1990-10-17'
 extra_editions:
 - type: deluxe
-  label: KCデラックス
-  imprint: KCデラックス
-  publisher: 不明
+  label: 'KCデラックス(2004)'
+  imprint: 'KCデラックス'
+  publisher: 講談社
   volumes:
   - number: 0
+    isbn13: null
     release_date: '2004-06-08'

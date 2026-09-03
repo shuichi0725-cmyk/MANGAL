@@ -1,40 +1,41 @@
 slug: daisannogokudou
 canonical_label: 通常版
 canonical_publisher: 竹書房
-canonical_imprint: Bamboo comics
-source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。 ★ISBN補充2巻 2026-08-24(partial-isbn-gap半自動: 帯/楽天題/巻番号/未使用の4検証)'
+canonical_imprint: バンブーコミックス
+suppress_types: []
+source: '残86巻の裁定 2026-09-03(Sugar&Spice型検出の見送り群): 旧canonicalはMADBのレーベル表記(Bamboo comics/バンブーコミックス)で同一runを2版に割り、1・4巻をISBN無しで持っていた。楽天で1・4・11巻のISBNが揃ったので全11巻を1本の通常版に。7・8巻のMADB日付2005年は後刷り奥付で、楽天の初版日(1995-02/1995-10)に是正。巻・ISBN・日付は楽天キャッシュ(検出器TSV)+種2+既存seed、情報は追加していない'
 volumes:
+- number: 1
+  isbn13: '9784884754969'
+  release_date: '1991-02'
 - number: 2
   isbn13: '9784884754976'
   release_date: '1991-04-25'
 - number: 3
-  release_date: '1991-11-30'
   isbn13: '9784884755492'
+  release_date: '1991-11-30'
+- number: 4
+  isbn13: '9784884756079'
+  release_date: '1992-09'
 - number: 5
-  release_date: 1993-08
   isbn13: '9784884756598'
+  release_date: '1993-08'
 - number: 6
   isbn13: '9784884757151'
-  release_date: 1994-06
+  release_date: '1994-06'
 - number: 7
   isbn13: '9784884757854'
-  release_date: '2005-03-27'
+  release_date: '1995-02'
 - number: 8
   isbn13: '9784884758486'
-  release_date: 2005-11
-extra_editions:
-- type: shinsoban
-  label: バンブーコミックス
-  imprint: バンブーコミックス
-  publisher: 竹書房
-  volumes:
-  - number: 1
-    release_date: '1991-03-25'
-  - number: 4
-    release_date: '1992-10-28'
-  - number: 9
-    isbn13: '9784812450802'
-    release_date: 1996-06
-  - number: 10
-    isbn13: '9784812451359'
-    release_date: 1997-06
+  release_date: '1995-10'
+- number: 9
+  isbn13: '9784812450802'
+  release_date: '1996-06'
+- number: 10
+  isbn13: '9784812451359'
+  release_date: '1997-06'
+- number: 11
+  isbn13: '9784812452103'
+  release_date: '1998-06'
+extra_editions: []

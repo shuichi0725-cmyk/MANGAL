@@ -1,0 +1,33 @@
+slug: ekurea-kibun
+canonical_label: 通常版
+canonical_publisher: 光文社
+canonical_imprint: 光文社コミックス
+suppress_types: []
+source: '残86巻の裁定 2026-09-03(Sugar&Spice型検出の見送り群): overrideは1994年改装愛蔵版の下巻(MADB番号3)を通常版1巻にしていた。原版光文社コミックス全4巻(1989-92)を主版に、改装愛蔵版上下(楽天題で確認)は別版。巻・ISBN・日付は楽天キャッシュ(検出器TSV)+種2+既存seed、情報は追加していない'
+volumes:
+- number: 1
+  isbn13: '9784334800673'
+  release_date: '1989-04-06'
+- number: 2
+  isbn13: '9784334800932'
+  release_date: '1990-01-11'
+- number: 3
+  isbn13: '9784334801250'
+  release_date: '1991-04-15'
+- number: 4
+  isbn13: '9784334801489'
+  release_date: '1992-01-09'
+extra_editions:
+- type: aizoban
+  label: '改装愛蔵版(1994 上下)'
+  imprint: '光文社コミックス'
+  publisher: 光文社
+  volumes:
+  - number: 1
+    isbn13: '9784334802431'
+    release_date: '1994-11-21'
+    volume_label: '上'
+  - number: 2
+    isbn13: '9784334802448'
+    release_date: '1994-11-21'
+    volume_label: '下'
