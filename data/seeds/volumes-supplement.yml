@@ -42692,3 +42692,39 @@ volumes:
   note: 'MADB取込もれ(種2に当該ISBN無し)。頁 hardboiled-daddy は1巻と3巻だけで2巻が欠けていた(巻抜け仮想 standard:[2])。根拠3点: (1) ISBNが連番ブロック
     9784088634418(1巻)/9784088634425(2巻)/9784088634432(3巻) (2) 楽天= 石原浩平/棟居仁・集英社・ビジネスジャンプコミックス・491円・1989-09-29
     と1巻(1989-04-03)3巻(1990-03-30)に価格/レーベル/著者が一致し日付も間に入る (3) NDL 作者束縛検索= 紙のヤングジャンプ・コミックスBJ版は1巻(4088634411)と3巻(4088634438)しか納本されていないが、電子復刻【マンガの金字塔】(グループ・ゼロ)に1・2・3巻が揃っており2巻の実在が裏付けられる。書影は楽天にも無し(1・3巻も同様に書影無)。★楽天の題「ハードボールド・ダディ」は楽天側の誤字で、NDL題は「ハードボイルド・ダディ」'
+- series_keys:
+  - name:オトヨシクレヲ|name:Sugar ＆ Spice
+  qid: null
+  number: 17
+  isbn13: '9784773098952'
+  release_date: '2016-05-16'
+  publisher: 笠倉出版社
+  edition_type: standard
+  title_display: "Somethin' Stupid（Sugar & Spice 17）"
+  source: rakuten+ndl
+  added_at: '2026-09-03'
+  note: "分裂cluster型(種2には在るが別sid): MADB M806951 が巻題「Somethin' stupid」を題として sid=61048(number=0,is_extra=1)に単独登録し、本編 sid=61125(Sugar ＆ Spice 1-16,18)と結線されず頁から欠落。楽天= 題「Somethin' Stupid」副題「Suger ＆ Spice 17」オトヨシクレヲ/笠倉出版社/カルトコミックス Sweet Selection/2016-05-16。NDL 作者束縛検索= 『Cult comics. Sweet selection. Sugar & spice ; 17』2016.7(奥付月)。全20巻完結(NDL 1-20 全件一致)。ユーザ提供ISBN 978-4773098952"
+- series_keys:
+  - name:オトヨシクレヲ|name:Sugar ＆ Spice
+  qid: null
+  number: 19
+  isbn13: '9784773072174'
+  release_date: '2019-05-16'
+  publisher: 笠倉出版社
+  edition_type: standard
+  title_display: "Rose & Beast（Sugar & Spice 19）"
+  source: rakuten+ndl
+  added_at: '2026-09-03'
+  note: "分裂cluster型: MADB M527476 が「Rose ＆ beast」を題として sid=60710(number=1,is_extra=1)に単独登録。楽天= 題「Rose＆Beast Sugar＆Spice19」オトヨシクレヲ/笠倉出版社/カルトコミックス sweetセレクション/2019-05-16。NDL= 『Sugar & spice ; 19』2019.7(奥付月)。ユーザ提供ISBN 978-4773072174"
+- series_keys:
+  - name:オトヨシクレヲ|name:Sugar ＆ Spice
+  qid: null
+  number: 20
+  isbn13: '9784773062793'
+  release_date: '2023-11-09'
+  publisher: 笠倉出版社
+  edition_type: standard
+  title_display: "Over the Rainbow（Sugar & Spice 20）"
+  source: rakuten+ndl
+  added_at: '2026-09-03'
+  note: "分裂cluster型: MADB M945481 が「Over the rainbow」を題として sid=132160(number=0,is_extra=1)に単独登録。楽天live= 題「Sugar & Spice20〜Over the Rainbow〜」オトヨシクレヲ/笠倉出版社/2023-11-09。NDL live= 『Sugar & spice ; 20』2023.12(奥付月)= 最終巻(NDLの同作者全20件中最大巻)。ユーザ提供ISBN 978-4773062793"
