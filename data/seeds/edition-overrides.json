@@ -7201,6 +7201,13 @@
     "type": "standard",
     "volumes": [
      {
+      "asin": null,
+      "cover_url": null,
+      "isbn13": "9784091431561",
+      "number": 0,
+      "release_date": "2019-11-27"
+     },
+     {
       "cover_url": null,
       "isbn13": "9784091400017",
       "number": 1,
@@ -7489,7 +7496,8 @@
   ],
   "related_pin": [
    "daichouhen-doraemon"
-  ]
+  ],
+  "note": "2026-09-03 0巻(9784091431561, 2019-11-27, てんとう虫コミックス「ドラえもん 0巻」=誕生50周年・6種類の第1話収録)を追記。promoteの0巻skip規則(種2経路)の対象外にするため override に直書き。ユーザ裁定「ドラえもんの0巻は出してok」"
  },
  "dr-2025": {
   "title": "Dr.アシュラ",
