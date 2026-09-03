@@ -5,7 +5,7 @@ metadata:
   node_type: memory
   type: project
   originSessionId: f8fa63b4-3ce7-45e1-b2ab-f3f4fbab02f4
-  modified: 2026-09-03T08:04:00.684Z
+  modified: 2026-09-03T08:33:14.040Z
 ---
 
 **型 (2026-09-03 ユーザ発見 sugar-spice)**: 各巻に固有の巻題を持つシリーズ(Sugar & Spice=全巻ジャズ標準曲題)で、MADBが
@@ -49,5 +49,14 @@ number=0 の頁)、真のレーベル違い17(花の慶次19-21=Bunch world新�
 'ホラーm'⊂'ホラーmコミック文庫'(文庫版に吸われる)→ 包含はstandard版のみ・4字以上。1か月許容(奥付月vs発売日)で3巻救済。
 残194巻(SAME_SID56含む)。ドラえもん0巻はユーザ裁定で表示(override直書き+year 1974-1996明示)。
 
-**次**: 0巻表示方針(ドラえもん以外15作)、原版が欠けている頁(漂流ネットカフェ/ルパン三世M/オトコのいる部屋…)の版分離、canonical頁のrun再構築。
+**6段目(同日「原版が欠けている頁の版分離進めて」)**: 日付逆行群の**頁側が再刊しか持たない**型を edition-canonical で
+「原版run=主版 / 再刊=別版タブ(shinsoban/wideban)」に分離、**20頁**(scratchpad/split_canonical.py の SPEC から生成)。
+材料= 検出器TSVの全候補(OTHER_ISBN含む=原版1..Nが揃う)+種2の不可視巻(同番号で負けた再刊/単発)+NDL作者束縛検索で全巻数確認。
+★NDLで原版が更に古いと判明した例: 柳生十兵衛死す(頁=リイド社2015ポケットワイド→SPコミックス2008も再刊→**原版は集英社YJC BJ全5巻2001-02**)、
+水滸伝さいとう版(1996 世界文化社Sebun 巻ノ1-3 を別版で復元)、なぎら健壱バチ当たりの昼間酒(本編=思い出食堂コミックス その1-5、頁は
+ぐる漫特別編集1冊だけ)。球道くん=原版マンガくんコミックス/少年ビッグコミックス全20巻(MADBはSV再刊ISBNに原版日付を付けていた)。
+★canonical で release_date 不明の巻は `null`(空文字はreflect検証ゲートNG)。extra_editions は type 明示(既定は kanzenban)。
+見送り= 独眼竜伊達政宗/太陽が呼んでいる/紅丸ぼたん(原版1巻がNDL・楽天のどちらにも無い)、日付空の末尾8巻(未発売か楽天未登録=日次蒸留の予約ハーベスト待ち)。
+
+**次**: 0巻表示方針(ドラえもん以外15作)、canonical頁(第三の極道/幸せの時間/Eden)のrun再構築、レーベル違い17巻の別版化。
 [[volume_split_merge]] [[series_fragmentation_rootcause]] [[feedback_one_bug_means_a_class]] [[harvest_match_mechanism_applied]]
