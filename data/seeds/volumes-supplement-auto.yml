@@ -29335,3 +29335,87 @@ volumes:
   source: rakuten-title-tail
   added_at: '2026-09-03'
   note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは空。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻1巻の後/穴の間)。楽天= やまさき拓味/飛鳥新社/デイリーアスカコミックス/1994-06'
+- series_keys:
+  - 'qid:Q43425298|name:一太郎ウオッ!'
+  qid: null
+  number: 2
+  isbn13: '9784821195459'
+  release_date: '1997-01-21'
+  publisher: 'ぶんか社'
+  edition_type: standard
+  title_display: '一太郎ウオッ！（2）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・レーベル=経験別名表(bunkashacomicsyoungteiohseries⇔ぶんか社:6sid)・発売日順(頁最終巻1巻の後/穴の間)。楽天= のんた丸孝/ぶんか社/ぶんか社コミックス/1997-01-21'
+- series_keys:
+  - 'qid:Q11280549|name:カムナガラ'
+  qid: null
+  number: 7
+  isbn13: '9784785924362'
+  release_date: '2004-06'
+  publisher: '少年画報社'
+  edition_type: standard
+  title_display: 'カムナガラ（7）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・レーベル=経験別名表(yk⇔ヤングキング:351sid)・発売日順(頁最終巻4巻の後/穴の間)。楽天= やまむらはじめ/少年画報社/ヤングキングコミックス/2004-06'
+- series_keys:
+  - 'qid:Q11280549|name:カムナガラ'
+  qid: null
+  number: 8
+  isbn13: '9784785925260'
+  release_date: '2005-04'
+  publisher: '少年画報社'
+  edition_type: standard
+  title_display: 'カムナガラ（8）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・レーベル=経験別名表(yk⇔ヤングキング:351sid)・発売日順(頁最終巻4巻の後/穴の間)。楽天= やまむらはじめ/少年画報社/ヤングキングコミックス/2005-04'
+- series_keys:
+  - 'qid:Q11280549|name:カムナガラ'
+  qid: null
+  number: 9
+  isbn13: '9784785926090'
+  release_date: '2006-02'
+  publisher: '少年画報社'
+  edition_type: standard
+  title_display: 'カムナガラ（9）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・レーベル=経験別名表(yk⇔ヤングキング:351sid)・発売日順(頁最終巻4巻の後/穴の間)。楽天= やまむらはじめ/少年画報社/ヤングキングコミックス/2006-02'
+- series_keys:
+  - 'qid:Q11280549|name:カムナガラ'
+  qid: null
+  number: 10
+  isbn13: '9784785926359'
+  release_date: '2006-04'
+  publisher: '少年画報社'
+  edition_type: standard
+  title_display: 'カムナガラ（10）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・レーベル=経験別名表(yk⇔ヤングキング:351sid)・発売日順(頁最終巻4巻の後/穴の間)。楽天= やまむらはじめ/少年画報社/ヤングキングコミックス/2006-04'
+- series_keys:
+  - 'name:たけだみりこと東京ブリタニアン|name:セイシュンの食卓'
+  qid: null
+  number: 4
+  isbn13: '9784889912159'
+  release_date: '1991-04-01'
+  publisher: 'リクル-ト'
+  edition_type: standard
+  title_display: 'セイシュンの食卓（4）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・レーベル=空・発売日順(頁最終巻3巻の後/穴の間)。楽天= たけだみりこ/リクル-ト//1991-04-01'
+- series_keys:
+  - 'qid:Q67498310|name:別れたら好きな人'
+  qid: null
+  number: 2
+  isbn13: '9784575824049'
+  release_date: '1999-01-11'
+  publisher: '双葉社'
+  edition_type: standard
+  title_display: '別れたら好きな人（2）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・レーベル=経験別名表(actioncomics⇔アクション:837sid)・発売日順(頁最終巻1巻の後/穴の間)。楽天= 赤星たみこ/双葉社/アクションコミックス/1999-01-11'
