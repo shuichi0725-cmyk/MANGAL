@@ -20245,6 +20245,48 @@
   ],
   "note": "2026-07-19 デラックス・レーベル割れ一括統合(バーテンダー型・厳格ゲート): dx1+st1→通常版1..2"
  },
+ "kurabete-kemishite": {
+  "editions": [
+   {
+    "imprint": "",
+    "label": "通常版",
+    "publisher": "新潮社",
+    "type": "standard",
+    "volumes": [
+     {
+      "asin": null,
+      "cover_url": null,
+      "isbn13": "9784103553915",
+      "number": 1,
+      "release_date": "2023-12-20"
+     },
+     {
+      "asin": null,
+      "cover_url": null,
+      "isbn13": "9784103553922",
+      "number": 2,
+      "release_date": "2025-02-19"
+     }
+    ]
+   },
+   {
+    "imprint": "新潮文庫",
+    "label": "文庫版",
+    "publisher": "新潮社",
+    "type": "bunkobon",
+    "volumes": [
+     {
+      "asin": null,
+      "cover_url": null,
+      "isbn13": "9784101068817",
+      "number": 1,
+      "release_date": "2026-05-28"
+     }
+    ]
+   }
+  ],
+  "note": "2026-09-03 Sugar&Spice型(分裂cluster)是正: 種2は原本1巻をnumber=0(sid135081)/2巻を別sid(135080)に分裂させ、新潮文庫1巻(9784101068817, 978-4-10-106881=新潮文庫・楽天seriesName=新潮文庫・2026-05-28)を通常版number=1として登録していたため、種4で原本1巻を足しても同番号ガードで弾かれた。楽天= こいしゆうか/新潮社: 原本1巻 2023-12-20 / 2巻 2025-02-19。版を通常版(1-2)と文庫版(1)に分離して固定。続巻は _audit-subtitle-orphan-volume.py 第2部が監視"
+ },
  "kurekure-tama-chan": {
   "authors": [
    {
