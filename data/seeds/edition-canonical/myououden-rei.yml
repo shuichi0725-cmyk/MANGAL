@@ -1,0 +1,71 @@
+slug: myououden-rei
+canonical_label: 通常版
+canonical_publisher: 講談社
+canonical_imprint: KCデラックス
+suppress_types:
+- deluxe
+source: '明王伝レイ 是正 2026-09-03(ユーザ提供 ja.wikipedia で確定): 頁が KCDX(1-12) と KCデラックス(8,9,10,13,14,15) の2タブに割れ、★**8・9・10巻が同一ISBNで二重掲載**、13-15巻は別タブに孤立していた。実体は KCデラックス 全15巻の1本のrun(1988-11〜1993-04)= レーベル略記ゆれによる版分裂。Wikipediaの刊行リスト15巻のISBNは頁の15冊と完全一致(過不足なし)。さらに ★KCフェニックス版(復刻・第一部のみ全4巻 2000年)が種2に在るのに同type合流で本番から消えていたので、版タブとして復活させた。'
+volumes:
+- number: 1
+  isbn13: '9784061037854'
+  release_date: '1988-11-22'
+- number: 2
+  isbn13: '9784061037861'
+  release_date: '1988-12-17'
+- number: 3
+  isbn13: '9784061037878'
+  release_date: '1989-03-23'
+- number: 4
+  isbn13: '9784061037885'
+  release_date: '1989-06-23'
+- number: 5
+  isbn13: '9784061037892'
+  release_date: '1989-09-22'
+- number: 6
+  isbn13: '9784063131208'
+  release_date: '1989-12-19'
+- number: 7
+  isbn13: '9784063131420'
+  release_date: '1990-04-23'
+- number: 8
+  isbn13: '9784063131437'
+  release_date: '1990-07-23'
+- number: 9
+  isbn13: '9784063131444'
+  release_date: '1990-11-22'
+- number: 10
+  isbn13: '9784063132113'
+  release_date: '1991-03-16'
+- number: 11
+  isbn13: '9784063132366'
+  release_date: '1991-07-17'
+- number: 12
+  isbn13: '9784063132588'
+  release_date: '1991-11-16'
+- number: 13
+  isbn13: '9784063132809'
+  release_date: '1992-06-17'
+- number: 14
+  isbn13: '9784063193411'
+  release_date: '1992-12-14'
+- number: 15
+  isbn13: '9784063193817'
+  release_date: '1993-04-17'
+extra_editions:
+- type: shinsoban
+  label: KCフェニックス版
+  imprint: KCフェニックス
+  publisher: 講談社
+  volumes:
+  - number: 1
+    isbn13: '9784063290356'
+    release_date: '2000-02-23'
+  - number: 2
+    isbn13: '9784063290363'
+    release_date: '2000-02-23'
+  - number: 3
+    isbn13: '9784063290370'
+    release_date: '2000-03-23'
+  - number: 4
+    isbn13: '9784063290387'
+    release_date: '2000-03-23'
