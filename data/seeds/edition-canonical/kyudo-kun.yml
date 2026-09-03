@@ -1,0 +1,100 @@
+slug: kyudo-kun
+canonical_label: 通常版
+canonical_publisher: 小学館
+canonical_imprint: 少年ビッグコミックス
+suppress_types: []
+source: '原版欠落の版分離 2026-09-03(Sugar&Spice型検出の日付逆行群): 原版少年ビッグコミックス全20巻(1977-1981)のうち大半が頁に無く、1993年SVコミックス版のISBNに原版の日付が付いた状態で混在していた(MADBの日付誤り)。小学館文庫1-11は温存。原版の巻・ISBN・日付は楽天キャッシュ(検出器TSV)+種2、全巻数はNDL作者束縛検索で確認。情報は追加していない'
+volumes:
+- number: 1
+  isbn13: '9784091500014'
+  release_date: '1977-11-05'
+- number: 2
+  isbn13: '9784091500021'
+  release_date: '1977-11-05'
+- number: 3
+  isbn13: '9784091500038'
+  release_date: '1977-12-05'
+- number: 4
+  isbn13: '9784091500045'
+  release_date: '1978-03-07'
+- number: 5
+  isbn13: '9784091500052'
+  release_date: '1978-05-08'
+- number: 6
+  isbn13: '9784091500069'
+  release_date: '1978-07-06'
+- number: 7
+  isbn13: '9784091500076'
+  release_date: '1978-09-06'
+- number: 8
+  isbn13: '9784091500083'
+  release_date: '1978-11-06'
+- number: 9
+  isbn13: '9784091500090'
+  release_date: '1979-03-07'
+- number: 10
+  isbn13: '9784091500106'
+  release_date: '1979-06-05'
+- number: 11
+  isbn13: '9784091500113'
+  release_date: '1979-09-05'
+- number: 12
+  isbn13: '9784091500120'
+  release_date: '1979-12-05'
+- number: 13
+  isbn13: '9784091500137'
+  release_date: '1980-04-05'
+- number: 14
+  isbn13: '9784091500144'
+  release_date: '1980-07-05'
+- number: 15
+  isbn13: '9784091500151'
+  release_date: '1980-09-05'
+- number: 16
+  isbn13: '9784091500168'
+  release_date: '1980-11-07'
+- number: 17
+  isbn13: '9784091500175'
+  release_date: '1981-01-10'
+- number: 18
+  isbn13: '9784091500182'
+  release_date: '1981-02-05'
+- number: 19
+  isbn13: '9784091500199'
+  release_date: '1981-03-05'
+- number: 20
+  isbn13: '9784091500205'
+  release_date: null
+extra_editions:
+- type: shinsoban
+  label: 'SVコミックス(1993-94)'
+  imprint: 'スーパービジュアル・コミックス'
+  publisher: 小学館
+  volumes:
+  - number: 1
+    isbn13: '9784091602312'
+    release_date: '1993-05-15'
+  - number: 2
+    isbn13: '9784091602329'
+    release_date: '1993-06-16'
+  - number: 3
+    isbn13: '9784091602336'
+    release_date: '1993-07-16'
+  - number: 4
+    isbn13: '9784091602343'
+    release_date: '1993-08-21'
+  - number: 5
+    isbn13: '9784091602350'
+    release_date: '1993-09-16'
+  - number: 6
+    isbn13: '9784091602367'
+    release_date: '1993-10-16'
+  - number: 7
+    isbn13: '9784091602374'
+    release_date: '1993-11-16'
+  - number: 8
+    isbn13: '9784091602381'
+    release_date: '1993-12-11'
+  - number: 9
+    isbn13: '9784091602398'
+    release_date: '1994-01-14'

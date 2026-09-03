@@ -1,0 +1,41 @@
+slug: oda-nobunaga-2016
+canonical_label: 通常版
+canonical_publisher: リイド社
+canonical_imprint: SPコミックス
+suppress_types: []
+source: '原版欠落の版分離 2026-09-03(Sugar&Spice型検出の日付逆行群): 原版SPコミックス全3巻(2007)が頁に無く、2016年ポケットワイド版1-2が通常版として載っていた。2023年ポケットワイド版2冊(種2 number=0 extra=1)も別版に。原版の巻・ISBN・日付は楽天キャッシュ(検出器TSV)+種2、全巻数はNDL作者束縛検索で確認。情報は追加していない'
+volumes:
+- number: 1
+  isbn13: '9784845833764'
+  release_date: '2007-04'
+- number: 2
+  isbn13: '9784845833771'
+  release_date: '2007-05'
+- number: 3
+  isbn13: '9784845833788'
+  release_date: '2007-06'
+extra_editions:
+- type: wideban
+  label: 'SPポケットワイド(2016)'
+  imprint: 'SPコミックス ポケットワイド'
+  publisher: リイド社
+  volumes:
+  - number: 1
+    isbn13: '9784845847921'
+    release_date: '2016-04-15'
+  - number: 2
+    isbn13: '9784845847938'
+    release_date: '2016-04-15'
+- type: wideban
+  label: 'SPポケットワイド(2023)'
+  imprint: 'SPコミックス ポケットワイド'
+  publisher: リイド社
+  volumes:
+  - number: 1
+    isbn13: '9784845862672'
+    release_date: '2023-08-08'
+    volume_label: '濃姫、野望の女'
+  - number: 2
+    isbn13: '9784845862931'
+    release_date: '2023-10-13'
+    volume_label: '本能寺、夢の終わり'

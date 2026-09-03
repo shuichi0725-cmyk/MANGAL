@@ -1,0 +1,22 @@
+slug: futari-wa-precure
+canonical_label: 通常版
+canonical_publisher: 講談社
+canonical_imprint: なかよしKCDX
+suppress_types: []
+source: '原版欠落の版分離 2026-09-03(Sugar&Spice型検出の日付逆行群): 上北ふたご版: KCDX(2005)1巻に、2014年プリキュアコレクション(ワイドKC)の2巻が通常版2巻として混在。コレクション1巻は種2に在るが不可視。アニメKC 1-3(2005)はフィルムコミック=対象外。原版の巻・ISBN・日付は楽天キャッシュ(検出器TSV)+種2、全巻数はNDL作者束縛検索で確認。情報は追加していない'
+volumes:
+- number: 1
+  isbn13: '9784063349719'
+  release_date: '2005-02'
+extra_editions:
+- type: shinsoban
+  label: 'プリキュアコレクション(2014 ワイドKC)'
+  imprint: 'ワイドKC'
+  publisher: 講談社
+  volumes:
+  - number: 1
+    isbn13: '9784063378139'
+    release_date: '2014-12-01'
+  - number: 2
+    isbn13: '9784063378146'
+    release_date: '2014-12-01'

@@ -1,0 +1,50 @@
+slug: yagyuu-juubei-shisu-2015
+canonical_label: 通常版
+canonical_publisher: 集英社
+canonical_imprint: ヤングジャンプ・コミックスBJ
+suppress_types: []
+source: '原版欠落の版分離 2026-09-03(Sugar&Spice型検出の日付逆行群): NDL作者束縛検索で原版=集英社ヤングジャンプ・コミックスBJ全5巻(2001-2002)と判明。頁はリイド社2015年ポケットワイド上下だけで、リイド社SPコミックス版(2008 全3巻)も別版として復元。原版の巻・ISBN・日付は楽天キャッシュ(検出器TSV)+種2、全巻数はNDL作者束縛検索で確認。情報は追加していない'
+volumes:
+- number: 1
+  isbn13: '9784088761510'
+  release_date: '2001-04-19'
+- number: 2
+  isbn13: '9784088761954'
+  release_date: '2001-08'
+- number: 3
+  isbn13: '9784088762494'
+  release_date: '2001-12'
+- number: 4
+  isbn13: '9784088762876'
+  release_date: '2002-04'
+- number: 5
+  isbn13: '9784088763620'
+  release_date: '2002-10'
+extra_editions:
+- type: shinsoban
+  label: 'SPコミックス(2008 リイド社)'
+  imprint: 'SPコミックス'
+  publisher: リイド社
+  volumes:
+  - number: 1
+    isbn13: '9784845836314'
+    release_date: '2008-03'
+  - number: 2
+    isbn13: '9784845836321'
+    release_date: '2008-04'
+  - number: 3
+    isbn13: '9784845836338'
+    release_date: '2008-05'
+- type: wideban
+  label: 'SPポケットワイド(2015 上下)'
+  imprint: 'SPコミックス ポケットワイド'
+  publisher: リイド社
+  volumes:
+  - number: 1
+    isbn13: '9784845847709'
+    release_date: '2015-09-16'
+    volume_label: '上'
+  - number: 2
+    isbn13: '9784845847716'
+    release_date: '2015-09-16'
+    volume_label: '下'

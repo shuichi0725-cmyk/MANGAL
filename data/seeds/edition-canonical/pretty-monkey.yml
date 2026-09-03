@@ -1,0 +1,22 @@
+slug: pretty-monkey
+canonical_label: 通常版
+canonical_publisher: 飛鳥新社
+canonical_imprint: デイリーアスカコミックス
+suppress_types: []
+source: '原版欠落の版分離 2026-09-03(Sugar&Spice型検出の日付逆行群): 原版全2巻(1994)のうち1巻は種2に在るが1998年新装版(同じ number=1)に同番号で負けて不可視、2巻は種2不在。原版の巻・ISBN・日付は楽天キャッシュ(検出器TSV)+種2、全巻数はNDL作者束縛検索で確認。情報は追加していない'
+volumes:
+- number: 1
+  isbn13: '9784870311695'
+  release_date: '1994-03'
+- number: 2
+  isbn13: '9784870311824'
+  release_date: '1994-06'
+extra_editions:
+- type: shinsoban
+  label: '新装版(1998)'
+  imprint: 'デイリーアスカコミックス'
+  publisher: 飛鳥新社
+  volumes:
+  - number: 1
+    isbn13: '9784870313385'
+    release_date: '1998-06'

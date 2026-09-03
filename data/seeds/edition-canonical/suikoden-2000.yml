@@ -1,0 +1,58 @@
+slug: suikoden-2000
+canonical_label: 通常版
+canonical_publisher: リイド社
+canonical_imprint: SPコミックス
+suppress_types: []
+source: '原版欠落の版分離 2026-09-03(Sugar&Spice型検出の日付逆行群): SPコミックス全4巻(2003)が頁に無く、2013年ポケットワイド版1冊+2019年天地版が通常版として載っていた。NDLで判明した1996年世界文化社Sebunコミックス版(マンガ水滸伝 巻ノ1-3)も別版として復元。中公文庫コミック版1-3は温存。原版の巻・ISBN・日付は楽天キャッシュ(検出器TSV)+種2、全巻数はNDL作者束縛検索で確認。情報は追加していない'
+volumes:
+- number: 1
+  isbn13: '9784845822027'
+  release_date: '2003-03'
+- number: 2
+  isbn13: '9784845822034'
+  release_date: '2003-04'
+- number: 3
+  isbn13: '9784845822041'
+  release_date: '2003-05'
+- number: 4
+  isbn13: '9784845822058'
+  release_date: '2003-06'
+extra_editions:
+- type: shinsoban
+  label: 'Sebunコミックス(1996 世界文化社 巻ノ1-3)'
+  imprint: 'Sebunコミックス'
+  publisher: 世界文化社
+  volumes:
+  - number: 1
+    isbn13: '9784418965151'
+    release_date: '1996-09'
+    volume_label: '巻ノ1'
+  - number: 2
+    isbn13: '9784418965168'
+    release_date: '1996-10'
+    volume_label: '巻ノ2'
+  - number: 3
+    isbn13: '9784418965175'
+    release_date: '1996-11'
+    volume_label: '巻ノ3'
+- type: wideban
+  label: 'SPポケットワイド(2013)'
+  imprint: 'SPコミックス ポケットワイド'
+  publisher: リイド社
+  volumes:
+  - number: 1
+    isbn13: '9784845840960'
+    release_date: '2013-08-12'
+- type: shinsoban
+  label: 'SPコミックス(2019 天地)'
+  imprint: 'SPコミックス'
+  publisher: リイド社
+  volumes:
+  - number: 1
+    isbn13: '9784845855001'
+    release_date: '2019-08-20'
+    volume_label: '天'
+  - number: 2
+    isbn13: '9784845855018'
+    release_date: '2019-08-20'
+    volume_label: '地'

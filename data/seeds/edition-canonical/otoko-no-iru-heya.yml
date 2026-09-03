@@ -1,0 +1,36 @@
+slug: otoko-no-iru-heya
+canonical_label: 通常版
+canonical_publisher: 宙出版
+canonical_imprint: エメラルドコミックス
+suppress_types: []
+source: '原版欠落の版分離 2026-09-03(Sugar&Spice型検出の日付逆行群): 原版エメラルドコミックス全5巻(2002-2005)が頁に無く、2016年新装版上下が通常版として載っていた(1巻は宙出版の旧ISBN記号978-4-87287)。原版の巻・ISBN・日付は楽天キャッシュ(検出器TSV)+種2、全巻数はNDL作者束縛検索で確認。情報は追加していない'
+volumes:
+- number: 1
+  isbn13: '9784872877632'
+  release_date: '2002-12'
+- number: 2
+  isbn13: '9784776710486'
+  release_date: '2003-05'
+- number: 3
+  isbn13: '9784776712589'
+  release_date: '2004-04'
+- number: 4
+  isbn13: '9784776714934'
+  release_date: '2004-12'
+- number: 5
+  isbn13: '9784776717829'
+  release_date: '2005-10'
+extra_editions:
+- type: shinsoban
+  label: '新装版(2016 上下)'
+  imprint: 'エメラルドコミックス'
+  publisher: 宙出版
+  volumes:
+  - number: 1
+    isbn13: '9784776741695'
+    release_date: '2016-01'
+    volume_label: '上'
+  - number: 2
+    isbn13: '9784776741701'
+    release_date: '2016-01'
+    volume_label: '下'

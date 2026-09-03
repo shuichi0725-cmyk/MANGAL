@@ -1,0 +1,33 @@
+slug: obake
+canonical_label: 通常版
+canonical_publisher: 講談社
+canonical_imprint: モーニングKC
+suppress_types: []
+source: '原版欠落の版分離 2026-09-03(Sugar&Spice型検出の日付逆行群): 原版モーニングKC全4巻(1992)のうち3-4が頁に無く、2008年光文社版の下巻が3巻の枠に座っていた(上巻は種2に在るが不可視)。原版の巻・ISBN・日付は楽天キャッシュ(検出器TSV)+種2、全巻数はNDL作者束縛検索で確認。情報は追加していない'
+volumes:
+- number: 1
+  isbn13: '9784061027879'
+  release_date: '1992-04-23'
+- number: 2
+  isbn13: '9784061027947'
+  release_date: '1992-07-23'
+- number: 3
+  isbn13: '9784063283037'
+  release_date: '1992-10-23'
+- number: 4
+  isbn13: '9784063283099'
+  release_date: '1992-12-18'
+extra_editions:
+- type: shinsoban
+  label: '光文社コミック叢書signal(2008 上下)'
+  imprint: '光文社コミック叢書signal'
+  publisher: 光文社
+  volumes:
+  - number: 1
+    isbn13: '9784334901547'
+    release_date: '2008-09'
+    volume_label: '上'
+  - number: 2
+    isbn13: '9784334901554'
+    release_date: '2008-10'
+    volume_label: '下'

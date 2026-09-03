@@ -1,0 +1,39 @@
+slug: nagai-gou-world
+canonical_label: 通常版
+canonical_publisher: ゴマブックス
+canonical_imprint: Goma comics
+suppress_types: []
+source: '原版欠落の版分離 2026-09-03(Sugar&Spice型検出の日付逆行群): 原版Goma comics全6巻(2006)が頁に無く、2008年のテーマ編1冊が通常版1巻として載っていた。原版の巻・ISBN・日付は楽天キャッシュ(検出器TSV)+種2、全巻数はNDL作者束縛検索で確認。情報は追加していない'
+volumes:
+- number: 1
+  isbn13: '9784777190430'
+  release_date: '2006-05-15'
+- number: 2
+  isbn13: '9784777190447'
+  release_date: '2006-06-15'
+- number: 3
+  isbn13: '9784777190454'
+  release_date: '2006-07-15'
+- number: 4
+  isbn13: '9784777190461'
+  release_date: '2006-08-12'
+- number: 5
+  isbn13: '9784777190478'
+  release_date: '2006-09-15'
+- number: 6
+  isbn13: '9784777190485'
+  release_date: '2006-10-14'
+extra_editions:
+- type: shinsoban
+  label: 'テーマ編(2008)'
+  imprint: 'Goma comics'
+  publisher: ゴマブックス
+  volumes:
+  - number: 1
+    isbn13: '9784777110681'
+    release_date: '2008-09-01'
+    volume_label: 'SFバイオレンス編'
+  - number: 2
+    isbn13: '9784777111350'
+    release_date: '2008-10-31'
+    volume_label: 'EROTICギャグ編'

@@ -1,0 +1,30 @@
+slug: soul-drop-no-yuutai-kenkyuu
+canonical_label: 通常版
+canonical_publisher: 幻冬舎コミックス
+canonical_imprint: バーズコミックス
+suppress_types: []
+source: '原版欠落の版分離 2026-09-03(Sugar&Spice型検出の日付逆行群): 原版バーズコミックス全3巻(2005-2006)が頁に無く、2015年スペシャル版上下が通常版として載っていた。原版の巻・ISBN・日付は楽天キャッシュ(検出器TSV)+種2、全巻数はNDL作者束縛検索で確認。情報は追加していない'
+volumes:
+- number: 1
+  isbn13: '9784344806757'
+  release_date: '2005-12-24'
+- number: 2
+  isbn13: '9784344807839'
+  release_date: '2006-07-24'
+- number: 3
+  isbn13: '9784344808843'
+  release_date: '2006-12-22'
+extra_editions:
+- type: shinsoban
+  label: 'スペシャル版(2015 上下)'
+  imprint: 'バーズコミックススペシャル'
+  publisher: 幻冬舎コミックス
+  volumes:
+  - number: 1
+    isbn13: '9784344834248'
+    release_date: '2015-05-23'
+    volume_label: '上'
+  - number: 2
+    isbn13: '9784344834255'
+    release_date: '2015-05-23'
+    volume_label: '下'

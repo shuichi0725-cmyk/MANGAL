@@ -1,0 +1,37 @@
+slug: lupin-iii-m-neo
+canonical_label: 通常版
+canonical_publisher: 双葉社
+canonical_imprint: アクションコミックス
+suppress_types: []
+source: '原版欠落の版分離 2026-09-03(Sugar&Spice型検出の日付逆行群): 原版全4巻(2009-2011)が頁に無く、2012年の単発が通常版1巻として載っていた。2014年『ラブリーオールドメン編』はNDLで発見(種2不在)。原版の巻・ISBN・日付は楽天キャッシュ(検出器TSV)+種2、全巻数はNDL作者束縛検索で確認。情報は追加していない'
+volumes:
+- number: 1
+  isbn13: '9784575836639'
+  release_date: '2009-08'
+- number: 2
+  isbn13: '9784575836981'
+  release_date: '2009-11-28'
+- number: 3
+  isbn13: '9784575838565'
+  release_date: '2011-01'
+- number: 4
+  isbn13: '9784575838572'
+  release_date: '2011-01'
+extra_editions:
+- type: shinsoban
+  label: '単発(2012-2014)'
+  imprint: 'アクションコミックス'
+  publisher: 双葉社
+  volumes:
+  - number: 1
+    isbn13: '9784575840148'
+    release_date: '2012-01-12'
+    volume_label: 'ピレネーの峠を越えろ！編'
+  - number: 2
+    isbn13: '9784575841640'
+    release_date: '2012-11'
+    volume_label: '相棒編'
+  - number: 3
+    isbn13: '9784575844764'
+    release_date: '2014-08-28'
+    volume_label: 'ラブリーオールドメン編'

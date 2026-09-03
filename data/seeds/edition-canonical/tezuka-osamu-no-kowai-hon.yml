@@ -1,0 +1,29 @@
+slug: tezuka-osamu-no-kowai-hon
+canonical_label: 通常版
+canonical_publisher: KADOKAWA
+canonical_imprint: MFRシリーズ
+suppress_types: []
+source: '原版欠落の版分離 2026-09-03(Sugar&Spice型検出の日付逆行群): 1-4巻(2015)が頁に無く、2016年のテーマ版『女』が通常版1巻として載っていた。原版の巻・ISBN・日付は楽天キャッシュ(検出器TSV)+種2、全巻数はNDL作者束縛検索で確認。情報は追加していない'
+volumes:
+- number: 1
+  isbn13: '9784040675640'
+  release_date: '2015-07-25'
+- number: 2
+  isbn13: '9784040675862'
+  release_date: '2015-08-08'
+- number: 3
+  isbn13: '9784040675886'
+  release_date: '2015-08-22'
+- number: 4
+  isbn13: '9784040678177'
+  release_date: '2015-09-12'
+extra_editions:
+- type: shinsoban
+  label: 'テーマ版(2016)'
+  imprint: 'MFRシリーズ'
+  publisher: KADOKAWA
+  volumes:
+  - number: 1
+    isbn13: '9784040685854'
+    release_date: '2016-11-26'
+    volume_label: '女'

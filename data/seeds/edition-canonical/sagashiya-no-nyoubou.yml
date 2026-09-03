@@ -1,0 +1,33 @@
+slug: sagashiya-no-nyoubou
+canonical_label: 通常版
+canonical_publisher: リイド社
+canonical_imprint: SPコミックス
+suppress_types: []
+source: '原版欠落の版分離 2026-09-03(Sugar&Spice型検出の日付逆行群): 原版SPコミックス全4巻(2003-2005)が頁に無く、2013年ポケットワイド版(2冊、種2では number=1 extra=1)の1冊だけが通常版として載っていた。原版の巻・ISBN・日付は楽天キャッシュ(検出器TSV)+種2、全巻数はNDL作者束縛検索で確認。情報は追加していない'
+volumes:
+- number: 1
+  isbn13: '9784845824199'
+  release_date: '2003-05-23'
+- number: 2
+  isbn13: '9784845824205'
+  release_date: '2003-11-25'
+- number: 3
+  isbn13: '9784845824212'
+  release_date: '2004-09-24'
+- number: 4
+  isbn13: '9784845824229'
+  release_date: '2005-02-24'
+extra_editions:
+- type: wideban
+  label: 'SPポケットワイド(2013)'
+  imprint: 'SPコミックス ポケットワイド'
+  publisher: リイド社
+  volumes:
+  - number: 1
+    isbn13: '9784845843756'
+    release_date: '2013-03'
+    volume_label: 'お江戸で東奔西走編'
+  - number: 2
+    isbn13: '9784845843763'
+    release_date: '2013-04'
+    volume_label: 'お江戸で日々是好日編'

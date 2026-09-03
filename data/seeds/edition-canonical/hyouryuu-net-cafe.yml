@@ -1,0 +1,43 @@
+slug: hyouryuu-net-cafe
+canonical_label: 通常版
+canonical_publisher: 双葉社
+canonical_imprint: アクションコミックス
+suppress_types: []
+source: '原版欠落の版分離 2026-09-03(Sugar&Spice型検出の日付逆行群): 原版アクションコミックス全7巻(2009-2011)が頁に無く、2013年の廉価版Coins 1-3だけが通常版として載っていた。原版の巻・ISBN・日付は楽天キャッシュ(検出器TSV)+種2、全巻数はNDL作者束縛検索で確認。情報は追加していない'
+volumes:
+- number: 1
+  isbn13: '9784575835830'
+  release_date: '2009-02'
+- number: 2
+  isbn13: '9784575836233'
+  release_date: '2009-05'
+- number: 3
+  isbn13: '9784575836967'
+  release_date: '2009-11'
+- number: 4
+  isbn13: '9784575837605'
+  release_date: '2010-04'
+- number: 5
+  isbn13: '9784575838152'
+  release_date: '2010-09'
+- number: 6
+  isbn13: '9784575838640'
+  release_date: '2011-01'
+- number: 7
+  isbn13: '9784575839197'
+  release_date: '2011-06'
+extra_editions:
+- type: shinsoban
+  label: '廉価版(アクションコミックス Coins 2013)'
+  imprint: 'アクションコミックス Coins'
+  publisher: 双葉社
+  volumes:
+  - number: 1
+    isbn13: '9784575996531'
+    release_date: '2013-08'
+  - number: 2
+    isbn13: '9784575996548'
+    release_date: '2013-08'
+  - number: 3
+    isbn13: '9784575996586'
+    release_date: '2013-09'

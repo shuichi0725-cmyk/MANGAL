@@ -1,0 +1,51 @@
+slug: lupin-iii-h
+canonical_label: 通常版
+canonical_publisher: 双葉社
+canonical_imprint: アクションコミックス
+suppress_types: []
+source: '原版欠落の版分離 2026-09-03(Sugar&Spice型検出の日付逆行群): 原版全2巻(2010-2011)が頁に無く、2012年以降の単発(種2で number=0/1 extra=1 の7冊)のうち1冊だけが通常版1巻として載っていた。原版の巻・ISBN・日付は楽天キャッシュ(検出器TSV)+種2、全巻数はNDL作者束縛検索で確認。情報は追加していない'
+volumes:
+- number: 1
+  isbn13: '9784575838213'
+  release_date: '2010-10'
+- number: 2
+  isbn13: '9784575838671'
+  release_date: '2011-02'
+extra_editions:
+- type: shinsoban
+  label: '単発(2012-2016)'
+  imprint: 'アクションコミックス'
+  publisher: 双葉社
+  volumes:
+  - number: 1
+    isbn13: '9784575840421'
+    release_date: '2012-03'
+    volume_label: 'ルパンは燃えているか…？！編'
+  - number: 2
+    isbn13: '9784575842364'
+    release_date: '2013-05-28'
+    volume_label: '大泥棒VS女怪盗編'
+  - number: 3
+    isbn13: '9784575996609'
+    release_date: '2013-09'
+    volume_label: '逮捕と逃走は、一瞬のチャンスを(Coins)'
+  - number: 4
+    isbn13: '9784575843125'
+    release_date: '2013-11-28'
+    volume_label: '血の刻印〜永遠のmermaid〜編'
+  - number: 5
+    isbn13: '9784575844429'
+    release_date: '2014-06-27'
+    volume_label: 'さらば愛しき魔女編'
+  - number: 6
+    isbn13: '9784575845587'
+    release_date: '2014-12-27'
+    volume_label: '星を盗む男編'
+  - number: 7
+    isbn13: '9784575846034'
+    release_date: '2015-03-27'
+    volume_label: 'World is mine編'
+  - number: 8
+    isbn13: '9784575847581'
+    release_date: '2016-02-12'
+    volume_label: '華麗なる挑戦編'
