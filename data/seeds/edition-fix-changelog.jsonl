@@ -201,3 +201,4 @@
 {"slug": "yami-kagishi", "op": "override-strip-editions", "removed": ["editions", "year_started", "year_ended"], "reason": "canonical へ移行", "at": "2026-09-03", "reversible": true}
 {"slug": "yuuhi-yo-nobore", "op": "override-strip-editions", "removed": ["editions", "year_started", "year_ended"], "reason": "canonical へ移行", "at": "2026-09-03", "reversible": true}
 {"slug": "chikyu-number-v-7", "op": "override-strip-editions", "removed": ["editions", "year_started", "year_ended"], "reason": "canonical へ移行", "at": "2026-09-03", "reversible": true}
+{"slugs": ["akai-ito-no-densetsu", "chikyu-number-v-7", "mickey", "yuuhi-yo-nobore"], "op": "canonical-suppress-bunkobon", "reason": "canonical の extra(文庫)と種2由来の文庫版タブが同ISBNで二重化していたため suppress_types: [bunkobon]", "at": "2026-09-03", "reversible": true}
