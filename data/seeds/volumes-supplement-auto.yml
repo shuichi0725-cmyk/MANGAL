@@ -24860,3 +24860,4478 @@ volumes:
   source: rakuten-title-tail
   added_at: '2026-09-03'
   note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT: 楽天題が頁題+巻番号を名乗る(完全一致)・著者一致・出版者記号一致・レーベル整合・発売日順(頁最終巻4巻の後/穴の間)。楽天= ゾゾゾ/タダノなつ/幻冬舎コミックス/バーズコミックス/2025-02-21'
+- series_keys:
+  - 'qid:Q11273243|name:0からはじめましょう'
+  qid: null
+  number: 2
+  isbn13: '9784832277717'
+  release_date: '2009-01'
+  publisher: '芳文社'
+  edition_type: standard
+  title_display: '0からはじめましょう！（2）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(kiraramenu⇔まんがタイムkr: 472sid/1159isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻1巻の後/穴の間)。楽天= ととねみぎ/芳文社/まんがタイムKRコミックス/2009-01'
+- series_keys:
+  - 'qid:Q11261304|name:1・2の3K'
+  qid: null
+  number: 2
+  isbn13: '9784575818253'
+  release_date: '1992-10-12'
+  publisher: '双葉社'
+  edition_type: standard
+  title_display: '1・2の3K（2）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(actioncomics⇔アクション: 837sid/2014isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻1巻の後/穴の間)。楽天= おおつぼマキ/双葉社/アクションコミックス/1992-10-12'
+- series_keys:
+  - 'qid:Q11261304|name:1・2の3K'
+  qid: null
+  number: 3
+  isbn13: '9784575818444'
+  release_date: '1993-01-12'
+  publisher: '双葉社'
+  edition_type: standard
+  title_display: '1・2の3K（3）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(actioncomics⇔アクション: 837sid/2014isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻1巻の後/穴の間)。楽天= おおつぼマキ/双葉社/アクションコミックス/1993-01-12'
+- series_keys:
+  - 'name:HIKARI|name:37セカンズ'
+  qid: null
+  number: 3
+  isbn13: '9784107727565'
+  release_date: '2024-10-08'
+  publisher: '新潮社'
+  edition_type: standard
+  title_display: '37セカンズ 3'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(bunchcomics⇔バンチ: 322sid/1190isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻2巻の後/穴の間)。楽天= 栗原 陽平/HIKARI/新潮社/バンチコミックス/2024-10-08'
+- series_keys:
+  - 'qid:Q11256860|name:アドリブ王子くん'
+  qid: null
+  number: 2
+  isbn13: '9784893679895'
+  release_date: '2004-12-24'
+  publisher: '白夜書房'
+  edition_type: standard
+  title_display: 'アドリブ王子くん（2）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは空。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻1巻の後/穴の間)。楽天= あかつきけいいち/白夜書房/白夜コミックス/2004-12-24'
+- series_keys:
+  - 'qid:Q11367003|name:愛 DON''T 恋'
+  - 'qid:Q11367003|name:愛don''t恋'
+  qid: null
+  number: 11
+  isbn13: '9784785923280'
+  release_date: '2003-07'
+  publisher: '少年画報社'
+  edition_type: standard
+  title_display: '愛don’t恋（11）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(yk⇔ヤングキング: 351sid/1095isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻10巻の後/穴の間)。楽天= 中西やすひろ/少年画報社/ヤングキングコミックス/2003-07'
+- series_keys:
+  - 'qid:Q11367003|name:愛 DON''T 恋'
+  - 'qid:Q11367003|name:愛don''t恋'
+  qid: null
+  number: 12
+  isbn13: '9784785923501'
+  release_date: '2003-09'
+  publisher: '少年画報社'
+  edition_type: standard
+  title_display: '愛don’t恋（12）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(yk⇔ヤングキング: 351sid/1095isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻10巻の後/穴の間)。楽天= 中西やすひろ/少年画報社/ヤングキングコミックス/2003-09'
+- series_keys:
+  - 'qid:Q11262850|name:あい・ターン'
+  qid: null
+  number: 7
+  isbn13: '9784821158768'
+  release_date: '2024-11-25'
+  publisher: 'ぶんか社'
+  edition_type: standard
+  title_display: 'あい・ターン（7）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(bunkashacomics⇔ぶんか社: 449sid/923isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻6巻の後/穴の間)。楽天= おーはしるい/ぶんか社/ぶんか社コミックス/2024-11-25'
+- series_keys:
+  - 'name:ねこうめ|name:#アイトラ'
+  qid: null
+  number: 2
+  isbn13: '9784065369432'
+  release_date: '2024-10-17'
+  publisher: '講談社'
+  edition_type: deluxe
+  title_display: '＃アイトラ（2）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(講談社コミックスデラックス月刊少年マガジン⇔kcデラックス: 46sid/195isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻3巻の後/穴の間)。楽天= ねこうめ/講談社/KCデラックス/2024-10-17'
+- series_keys:
+  - 'name:ガジェット通信|name:あかがみんは脱出できない'
+  qid: null
+  number: 4
+  isbn13: '9784065372142'
+  release_date: '2024-11-15'
+  publisher: '講談社'
+  edition_type: standard
+  title_display: 'あかがみんは脱出できない（4）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(月刊少年マガジン⇔講談社コミックス月刊マガジン: 28sid/111isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻3巻の後/穴の間)。楽天= 青柳 碧人/矢崎 えり/赤髪のとも/ガジェット通信/講談社/講談社コミックス月刊マガジン/2024-11-15'
+- series_keys:
+  - 'qid:Q11280502|name:あこがれ先生ション'
+  qid: null
+  number: 2
+  isbn13: '9784754602871'
+  release_date: '1991-04-19'
+  publisher: '廣済堂出版'
+  edition_type: standard
+  title_display: 'あこがれ先生ション（2）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(firstcomic⇔ファースト: 5sid/7isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻1巻の後/穴の間)。楽天= やまだ三平/廣済堂出版/ファーストコミック/1991-04-19'
+- series_keys:
+  - 'qid:Q11280502|name:あこがれ先生ション'
+  qid: null
+  number: 3
+  isbn13: '9784754602895'
+  release_date: '1991-11-02'
+  publisher: '廣済堂出版'
+  edition_type: standard
+  title_display: 'あこがれ先生ション（3）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(firstcomic⇔ファースト: 5sid/7isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻1巻の後/穴の間)。楽天= やまだ三平/廣済堂出版/ファーストコミック/1991-11-02'
+- series_keys:
+  - 'qid:Q11271746|name:あんぐら'
+  qid: null
+  number: 2
+  isbn13: '9784758080927'
+  release_date: '2010-07'
+  publisher: '一迅社'
+  edition_type: standard
+  title_display: 'あんぐら（2）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(4コマkingsぱれっとcomics⇔idコミックス4コマkingsぱれっと: 90sid/201isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻1巻の後/穴の間)。楽天= ちざきゃ/一迅社/IDコミックス　4コマKINGSぱれっとコミックス/2010-07'
+- series_keys:
+  - 'qid:Q1578169|name:あの人は昨日と同じ空を見上げてる'
+  qid: null
+  number: 12
+  isbn13: '9784420154789'
+  release_date: '2024-09-25'
+  publisher: '集英社クリエイティブ'
+  edition_type: standard
+  title_display: 'あの人は昨日と同じ空を見上げてる 12'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(officeyoucomics⇔オフィスユー: 153sid/442isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻11巻の後/穴の間)。楽天= 宮川 匡代/集英社クリエイティブ/オフィスユーコミックス/2024-09-25'
+- series_keys:
+  - 'name:かわばたひろみ|name:あにゃんがポン'
+  qid: null
+  number: 4
+  isbn13: '9784832260740'
+  release_date: '1995-08-25'
+  publisher: '芳文社'
+  edition_type: standard
+  title_display: 'あにゃんがポン（4）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(mangatimecomics⇔マンガタイム: 20sid/44isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻3巻の後/穴の間)。楽天= かわばたひろみ/芳文社/マンガタイムコミックス/1995-08-25'
+- series_keys:
+  - 'qid:Q6455150|name:青空にとおく酒浸り'
+  qid: null
+  number: 7
+  isbn13: '9784199503023'
+  release_date: '2012-10'
+  publisher: '徳間書店'
+  edition_type: standard
+  title_display: '青空にとおく酒浸り（7）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(ryucomics⇔リュウ: 175sid/628isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻6巻の後/穴の間)。楽天= 安永航一郎/徳間書店/リュウコミックス/2012-10'
+- series_keys:
+  - 'qid:Q11414072|name:荒くれKNIGHT高校爆走編'
+  qid: null
+  number: 10
+  isbn13: '9784785927080'
+  release_date: '2006-11'
+  publisher: '少年画報社'
+  edition_type: standard
+  title_display: '荒くれKNIGHT　高校爆走編（10）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは空。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻9巻の後/穴の間)。楽天= 吉田聡/少年画報社/ヤングキングコミックス/2006-11'
+- series_keys:
+  - 'qid:Q11414072|name:荒くれKNIGHT高校爆走編'
+  qid: null
+  number: 11
+  isbn13: '9784785927325'
+  release_date: '2006-12'
+  publisher: '少年画報社'
+  edition_type: standard
+  title_display: '荒くれKNIGHT　高校爆走編（11）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは空。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻9巻の後/穴の間)。楽天= 吉田聡/少年画報社/ヤングキングコミックス/2006-12'
+- series_keys:
+  - 'name:丹沢|name:あしたもゲンキ!'
+  - 'qid:Q11368544|name:あしたもゲンキ!'
+  qid: null
+  number: 5
+  isbn13: '9784812455425'
+  release_date: '2001-08'
+  publisher: '竹書房'
+  edition_type: standard
+  title_display: 'あしたもゲンキ！（5）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(bamboocomics⇔バンブー: 1053sid/2501isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻4巻の後/穴の間)。楽天= 丹沢恵/竹書房/バンブーコミックス/2001-08'
+- series_keys:
+  - 'qid:Q11394193|name:ぼくはこのまま帰らない'
+  qid: null
+  number: 6
+  isbn13: '9784391916126'
+  release_date: '1996-09-06'
+  publisher: '主婦と生活社'
+  edition_type: standard
+  title_display: 'ぼくはこのまま帰らない（6）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(ミッシィコミックスdx⇔missycomics: 118sid/171isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻5巻の後/穴の間)。楽天= 内田一奈/主婦と生活社/MISSYCOMICS/1996-09-06'
+- series_keys:
+  - 'qid:Q47583146|name:キャッチミー'
+  qid: null
+  number: 2
+  isbn13: '9784832261648'
+  release_date: '2000-03-03'
+  publisher: '芳文社'
+  edition_type: standard
+  title_display: 'キャッチ・ミー（2）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(mangatimecomics⇔まんがタイム: 295sid/884isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻1巻の後/穴の間)。楽天= こだま学/芳文社/まんがタイムコミックス/2000-03-03'
+- series_keys:
+  - 'qid:Q15304371|name:カリスマ'
+  qid: null
+  number: 3
+  isbn13: '9784575831559'
+  release_date: '2005-10'
+  publisher: '双葉社'
+  edition_type: standard
+  title_display: 'カリスマ（3）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(actioncomics⇔アクション: 837sid/2014isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻2巻の後/穴の間)。楽天= 西崎泰正/新堂冬樹/双葉社/アクションコミックス/2005-10'
+- series_keys:
+  - 'qid:Q15304371|name:カリスマ'
+  qid: null
+  number: 4
+  isbn13: '9784575832013'
+  release_date: '2006-02'
+  publisher: '双葉社'
+  edition_type: standard
+  title_display: 'カリスマ（4）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(actioncomics⇔アクション: 837sid/2014isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻2巻の後/穴の間)。楽天= 西崎泰正/新堂冬樹/双葉社/アクションコミックス/2006-02'
+- series_keys:
+  - 'qid:Q11457913|name:ちびでびっ!'
+  qid: null
+  number: 3
+  isbn13: '9784832277908'
+  release_date: '2009-03-26'
+  publisher: '芳文社'
+  edition_type: standard
+  title_display: 'ちびでびっ！（3）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(kiraramenu⇔mangatimekrcomicskirarame: 10sid/15isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻2巻の後/穴の間)。楽天= 寺本薫/芳文社/Ｍａｎｇａ　ｔｉｍｅ　ＫＲ　ｃｏｍｉｃｓ　Ｋｉｒａｒａ　ｍｅ/2009-03-26'
+- series_keys:
+  - 'name:二宮香乃|name:珍獣のお医者さん'
+  qid: null
+  number: 5
+  isbn13: '9784045001178'
+  release_date: '2026-07-15'
+  publisher: 'KADOKAWA'
+  edition_type: standard
+  title_display: '珍獣のお医者さん　5巻'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(hartacomix⇔ハルタ: 150sid/385isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻4巻の後/穴の間)。楽天= 二宮香乃/KADOKAWA/ハルタコミックス/2026-07-15'
+- series_keys:
+  - 'qid:Q11576031|name:CHO-BAD!'
+  qid: null
+  number: 2
+  isbn13: '9784821195619'
+  release_date: '1997-04-21'
+  publisher: 'ぶんか社'
+  edition_type: standard
+  title_display: 'CHO-BAD！（2）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(bunkashacomicsyoungteiohseries⇔ぶんか社: 6sid/10isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻1巻の後/穴の間)。楽天= 田中雅人/ぶんか社/ぶんか社コミックス/1997-04-21'
+- series_keys:
+  - 'qid:Q11373393|name:超常機動サイレーン'
+  qid: null
+  number: 3
+  isbn13: '9784840236744'
+  release_date: '2006-11-27'
+  publisher: 'KADOKAWA'
+  edition_type: standard
+  title_display: '超常機動サイレーン（3）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(dengekicomics⇔電撃: 195sid/472isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻2巻の後/穴の間)。楽天= 井原　裕士/KADOKAWA/電撃コミックス/2006-11-27'
+- series_keys:
+  - 'qid:Q11373393|name:超常機動サイレーン'
+  qid: null
+  number: 4
+  isbn13: '9784840240567'
+  release_date: '2007-09-27'
+  publisher: 'KADOKAWA'
+  edition_type: standard
+  title_display: '超常機動サイレーン（4）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(dengekicomics⇔電撃: 195sid/472isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻2巻の後/穴の間)。楽天= 井原　裕士/KADOKAWA/電撃コミックス/2007-09-27'
+- series_keys:
+  - 'qid:Q11385285|name:コミックマスターJ'
+  qid: null
+  number: 7
+  isbn13: '9784785920913'
+  release_date: '2001-05-25'
+  publisher: '少年画報社'
+  edition_type: standard
+  title_display: 'コミックマスターJ（7）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(youngkingcomics⇔ヤングキング: 23sid/120isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻6巻の後/穴の間)。楽天= 余湖裕輝/田畑由秋/少年画報社/ヤングキングコミックス/2001-05-25'
+- series_keys:
+  - 'qid:Q11385285|name:コミックマスターJ'
+  qid: null
+  number: 8
+  isbn13: '9784785921606'
+  release_date: '2002-01'
+  publisher: '少年画報社'
+  edition_type: standard
+  title_display: 'コミックマスターJ（8）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(youngkingcomics⇔ヤングキング: 23sid/120isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻6巻の後/穴の間)。楽天= 余湖裕輝/田畑由秋/少年画報社/ヤングキングコミックス/2002-01'
+- series_keys:
+  - 'qid:Q11385285|name:コミックマスターJ'
+  qid: null
+  number: 9
+  isbn13: '9784785922269'
+  release_date: '2002-08'
+  publisher: '少年画報社'
+  edition_type: standard
+  title_display: 'コミックマスターJ（9）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(youngkingcomics⇔ヤングキング: 23sid/120isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻6巻の後/穴の間)。楽天= 余湖裕輝/田畑由秋/少年画報社/ヤングキングコミックス/2002-08'
+- series_keys:
+  - 'qid:Q11385285|name:コミックマスターJ'
+  qid: null
+  number: 10
+  isbn13: '9784785923266'
+  release_date: '2003-06'
+  publisher: '少年画報社'
+  edition_type: standard
+  title_display: 'コミックマスターJ（10）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(youngkingcomics⇔ヤングキング: 23sid/120isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻6巻の後/穴の間)。楽天= 余湖裕輝/田畑由秋/少年画報社/ヤングキングコミックス/2003-06'
+- series_keys:
+  - 'qid:Q11385285|name:コミックマスターJ'
+  qid: null
+  number: 11
+  isbn13: '9784785924133'
+  release_date: '2004-04'
+  publisher: '少年画報社'
+  edition_type: standard
+  title_display: 'コミックマスターJ（11）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(youngkingcomics⇔ヤングキング: 23sid/120isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻6巻の後/穴の間)。楽天= 余湖裕輝/田畑由秋/少年画報社/ヤングキングコミックス/2004-04'
+- series_keys:
+  - 'qid:Q11385285|name:コミックマスターJ'
+  qid: null
+  number: 12
+  isbn13: '9784785925314'
+  release_date: '2005-04'
+  publisher: '少年画報社'
+  edition_type: standard
+  title_display: 'コミックマスターJ（12）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(youngkingcomics⇔ヤングキング: 23sid/120isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻6巻の後/穴の間)。楽天= 余湖裕輝/田畑由秋/少年画報社/ヤングキングコミックス/2005-04'
+- series_keys:
+  - 'qid:Q11385285|name:コミックマスターJ'
+  qid: null
+  number: 13
+  isbn13: '9784785925888'
+  release_date: '2005-11'
+  publisher: '少年画報社'
+  edition_type: standard
+  title_display: 'コミックマスターJ（13）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(youngkingcomics⇔ヤングキング: 23sid/120isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻6巻の後/穴の間)。楽天= 余湖裕輝/田畑由秋/少年画報社/ヤングキングコミックス/2005-11'
+- series_keys:
+  - 'qid:Q64996143|name:Cross'
+  qid: null
+  number: 3
+  isbn13: '9784785923099'
+  release_date: '2003-05'
+  publisher: '少年画報社'
+  edition_type: standard
+  title_display: 'Cross（3）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは自頁の既存巻の楽天seriesNameと一致。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻2巻の後/穴の間)。楽天= 群りゅうせい/少年画報社/ヤングコミックコミックス/2003-05'
+- series_keys:
+  - 'qid:Q17161397|name:第七女子会彷徨'
+  qid: null
+  number: 9
+  isbn13: '9784199504785'
+  release_date: '2015-11-13'
+  publisher: '徳間書店'
+  edition_type: standard
+  title_display: '第七女子会彷徨　9'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(ryucomics⇔リュウ: 175sid/628isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻8巻の後/穴の間)。楽天= つばな/徳間書店/リュウコミックス/2015-11-13'
+- series_keys:
+  - 'qid:Q17161397|name:第七女子会彷徨'
+  qid: null
+  number: 10
+  isbn13: '9784199505188'
+  release_date: '2016-07-13'
+  publisher: '徳間書店'
+  edition_type: standard
+  title_display: '第七女子会彷徨（10）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(ryucomics⇔リュウ: 175sid/628isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻8巻の後/穴の間)。楽天= つばな/徳間書店/リュウコミックス/2016-07-13'
+- series_keys:
+  - 'qid:Q27917480|name:ででんがデンスケ'
+  qid: null
+  number: 3
+  isbn13: '9784575823172'
+  release_date: '1998-02-12'
+  publisher: '双葉社'
+  edition_type: standard
+  title_display: 'ででんがデンスケ（3）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(actioncomics⇔アクション: 837sid/2014isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻2巻の後/穴の間)。楽天= 市川智茂/双葉社/アクションコミックス/1998-02-12'
+- series_keys:
+  - 'qid:Q27917480|name:ででんがデンスケ'
+  qid: null
+  number: 4
+  isbn13: '9784575823257'
+  release_date: '1998-03-12'
+  publisher: '双葉社'
+  edition_type: standard
+  title_display: 'ででんがデンスケ（4）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(actioncomics⇔アクション: 837sid/2014isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻2巻の後/穴の間)。楽天= 市川智茂/双葉社/アクションコミックス/1998-03-12'
+- series_keys:
+  - 'qid:Q3478624|name:出かけ親|sub:漫画家屋外活動覚え帳'
+  qid: null
+  number: 5
+  isbn13: '9784098634613'
+  release_date: '2025-04-30'
+  publisher: '小学館'
+  edition_type: standard
+  title_display: '出かけ親（5）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(bigcomicsspecial⇔ビッグ: 148sid/389isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻4巻の後/穴の間)。楽天= 吉田 戦車/小学館/ビッグ コミックス/2025-04-30'
+- series_keys:
+  - 'name:望月和臣|name:でらぐい'
+  qid: null
+  number: 3
+  isbn13: '9784758081320'
+  release_date: '2011-07'
+  publisher: '一迅社'
+  edition_type: standard
+  title_display: 'でらぐい（3）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(4コマkingsぱれっとcomics⇔idコミックス4コマkingsぱれっと: 90sid/201isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻2巻の後/穴の間)。楽天= 望月和臣/一迅社/IDコミックス　4コマKINGSぱれっとコミックス/2011-07'
+- series_keys:
+  - 'qid:Q11425578|name:ドメスティック'
+  qid: null
+  number: 3
+  isbn13: '9784832230477'
+  release_date: '2006-03'
+  publisher: '芳文社'
+  edition_type: standard
+  title_display: 'ドメスティック（3）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは空。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻2巻の後/穴の間)。楽天= 坂辺周一/芳文社/芳文社コミックス/2006-03'
+- series_keys:
+  - 'qid:Q11425578|name:ドメスティック'
+  qid: null
+  number: 4
+  isbn13: '9784832230576'
+  release_date: '2006-06'
+  publisher: '芳文社'
+  edition_type: standard
+  title_display: 'ドメスティック（4）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは空。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻2巻の後/穴の間)。楽天= 坂辺周一/芳文社/芳文社コミックス/2006-06'
+- series_keys:
+  - 'qid:Q11425578|name:ドメスティック'
+  qid: null
+  number: 5
+  isbn13: '9784832230651'
+  release_date: '2006-09'
+  publisher: '芳文社'
+  edition_type: standard
+  title_display: 'ドメスティック（5）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは空。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻2巻の後/穴の間)。楽天= 坂辺周一/芳文社/芳文社コミックス/2006-09'
+- series_keys:
+  - 'name:中尾雄吉|name:どんと我太郎'
+  qid: null
+  number: 5
+  isbn13: '9784575816006'
+  release_date: '1989-12-08'
+  publisher: '双葉社'
+  edition_type: standard
+  title_display: 'どんと我太郎（5）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(actioncomics⇔アクション: 837sid/2014isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻4巻の後/穴の間)。楽天= 中尾雄吉/双葉社/アクションコミックス/1989-12-08'
+- series_keys:
+  - 'name:中尾雄吉|name:どんと我太郎'
+  qid: null
+  number: 6
+  isbn13: '9784575816068'
+  release_date: '1990-01-09'
+  publisher: '双葉社'
+  edition_type: standard
+  title_display: 'どんと我太郎（6）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(actioncomics⇔アクション: 837sid/2014isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻4巻の後/穴の間)。楽天= 中尾雄吉/双葉社/アクションコミックス/1990-01-09'
+- series_keys:
+  - 'name:中尾雄吉|name:どんと我太郎'
+  qid: null
+  number: 7
+  isbn13: '9784575816310'
+  release_date: '1990-04-13'
+  publisher: '双葉社'
+  edition_type: standard
+  title_display: 'どんと我太郎（7）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(actioncomics⇔アクション: 837sid/2014isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻4巻の後/穴の間)。楽天= 中尾雄吉/双葉社/アクションコミックス/1990-04-13'
+- series_keys:
+  - 'name:中尾雄吉|name:どんと我太郎'
+  qid: null
+  number: 8
+  isbn13: '9784575816389'
+  release_date: '1990-05-17'
+  publisher: '双葉社'
+  edition_type: standard
+  title_display: 'どんと我太郎（8）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(actioncomics⇔アクション: 837sid/2014isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻4巻の後/穴の間)。楽天= 中尾雄吉/双葉社/アクションコミックス/1990-05-17'
+- series_keys:
+  - 'name:中尾雄吉|name:どんと我太郎'
+  qid: null
+  number: 9
+  isbn13: '9784575816457'
+  release_date: '1990-06-14'
+  publisher: '双葉社'
+  edition_type: standard
+  title_display: 'どんと我太郎（9）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(actioncomics⇔アクション: 837sid/2014isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻4巻の後/穴の間)。楽天= 中尾雄吉/双葉社/アクションコミックス/1990-06-14'
+- series_keys:
+  - 'qid:Q97031697|name:道産子ギャルはなまらめんこい'
+  - 'qid:Q97031697|name:道産子ギャルはなまらめんこい.'
+  qid: null
+  number: 14
+  isbn13: '9784088842639'
+  release_date: '2024-11-01'
+  publisher: '集英社'
+  edition_type: standard
+  title_display: '道産子ギャルはなまらめんこい 14'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(jumpcomics⇔ジャンプ: 284sid/1212isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻13巻の後/穴の間)。楽天= 伊科田 海/集英社/ジャンプコミックス/2024-11-01'
+- series_keys:
+  - 'name:船津早稲|name:ダブルハピネス'
+  qid: null
+  number: 2
+  isbn13: '9784776736837'
+  release_date: '2014-02-01'
+  publisher: '宙出版'
+  edition_type: standard
+  title_display: 'ダブルハピネス（2）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(missycomics⇔ミッシィコミックスnextcomicsf: 70sid/232isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻1巻の後/穴の間)。楽天= 船津早稲/宙出版/ミッシィコミックスNextcomicsF/2014-02-01'
+- series_keys:
+  - 'name:三ッ葉稔|name:童貞勇者のハーレム魔王討伐記'
+  qid: null
+  number: 4
+  isbn13: '9784801990418'
+  release_date: '2026-08-06'
+  publisher: '竹書房'
+  edition_type: standard
+  title_display: '童貞勇者のハーレム魔王討伐記（4）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは自頁の既存巻の楽天seriesNameと一致。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻3巻の後/穴の間)。楽天= 三ッ葉稔/竹書房/バンブーコミックス 異世界BC/2026-08-06'
+- series_keys:
+  - 'qid:Q11268113|name:江戸前の旬'
+  qid: null
+  number: 133
+  isbn13: '9784537174168'
+  release_date: '2026-07-29'
+  publisher: '日本文芸社'
+  edition_type: standard
+  title_display: '江戸前の旬 （133）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(nichibuncomics⇔ニチブン: 736sid/2874isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻132巻の後/穴の間)。楽天= 原案　九十九 森/さとう 輝/日本文芸社/ニチブンコミックス/2026-07-29'
+- series_keys:
+  - 'name:青mori|name:エッチな××漏れてます…っ!'
+  qid: null
+  number: 3
+  isbn13: '9784758028073'
+  release_date: '2024-11-29'
+  publisher: '一迅社'
+  edition_type: standard
+  title_display: 'エッチな××漏れてます…っ！（3）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(lbcomics⇔lovebites: 52sid/94isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻2巻の後/穴の間)。楽天= 青mori/一迅社/LOVEBITESコミックス/2024-11-29'
+- series_keys:
+  - 'qid:Q131746095|name:えぶりでいホスト'
+  qid: null
+  number: 5
+  isbn13: '9784041173671'
+  release_date: '2026-07-24'
+  publisher: 'KADOKAWA'
+  edition_type: standard
+  title_display: 'えぶりでいホスト 5'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(asukacomicsdx⇔あすかコミックスdx: 130sid/252isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻4巻の後/穴の間)。楽天= ごとうにも/KADOKAWA/あすかコミックスDX/2026-07-24'
+- series_keys:
+  - 'qid:Q11624904|name:EXIT'
+  - 'qid:Q11624904|name:Exit'
+  qid: null
+  number: 12
+  isbn13: '9784344821828'
+  release_date: '2011-04'
+  publisher: '幻冬舎コミックス'
+  edition_type: standard
+  title_display: 'EXIT（12）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは自頁の既存巻の楽天seriesNameと一致。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻11巻の後/穴の間)。楽天= 藤田貴美/幻冬舎コミックス/バーズコミックス・ガールズコレクション/2011-04'
+- series_keys:
+  - 'qid:Q11279641|name:ファニーランドの鬼ババア'
+  qid: null
+  number: 2
+  isbn13: '9784821159512'
+  release_date: '2024-11-25'
+  publisher: 'ぶんか社'
+  edition_type: standard
+  title_display: 'ファニーランドの鬼ババア（2）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(bunkashacomics⇔ぶんか社: 449sid/923isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻1巻の後/穴の間)。楽天= むんこ/ぶんか社/ぶんか社コミックス/2024-11-25'
+- series_keys:
+  - 'name:坂木原レム|name:フルイドラット'
+  qid: null
+  number: 1
+  isbn13: '9784199501067'
+  release_date: '2008-12'
+  publisher: '徳間書店'
+  edition_type: standard
+  title_display: 'フルイドラット（1）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(ryucomics⇔リュウ: 175sid/628isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻3巻の後/穴の間)。楽天= 坂木原レム/徳間書店/リュウコミックス/2008-12'
+- series_keys:
+  - 'qid:Q11274926|name:ふまんたれブー'
+  qid: null
+  number: 2
+  isbn13: '9784575332902'
+  release_date: '2003-05'
+  publisher: '双葉社'
+  edition_type: standard
+  title_display: 'ふまんたれブー（2）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは空。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻1巻の後/穴の間)。楽天= ぬまじりよしみ/双葉社/ジュールコミックス/2003-05'
+- series_keys:
+  - 'qid:Q11274926|name:ふまんたれブー'
+  qid: null
+  number: 3
+  isbn13: '9784575333152'
+  release_date: '2005-10'
+  publisher: '双葉社'
+  edition_type: standard
+  title_display: 'ふまんたれブー（3）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは空。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻1巻の後/穴の間)。楽天= ぬまじりよしみ/双葉社/ジュールコミックス/2005-10'
+- series_keys:
+  - 'qid:Q17220221|name:ふたつのゲシュペンスト'
+  qid: null
+  number: 2
+  isbn13: '9784592231080'
+  release_date: '2025-12-19'
+  publisher: '白泉社'
+  edition_type: standard
+  title_display: 'ふたつのゲシュペンスト 2'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(花とゆめcomicsspecial⇔花とゆめコミックススペシャル: 16sid/38isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻1巻の後/穴の間)。楽天= 友藤 結/白泉社/花とゆめコミックススペシャル/2025-12-19'
+- series_keys:
+  - 'qid:Q11453576|name:G線上の猫'
+  qid: null
+  number: 2
+  isbn13: '9784813050070'
+  release_date: '2005-07'
+  publisher: '大洋図書'
+  edition_type: standard
+  title_display: 'G線上の猫（2）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(craftseries⇔ミリオンコミックスcraftシリーズ: 6sid/7isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻1巻の後/穴の間)。楽天= 宮城とおこ/大洋図書/ミリオンコミックス　ＣＲＡＦＴシリーズ/2005-07'
+- series_keys:
+  - 'qid:Q126005314|name:学校でいちばん地味な2人が付き合う話'
+  qid: null
+  number: 3
+  isbn13: '9784537148664'
+  release_date: '2024-08-07'
+  publisher: '日本文芸社'
+  edition_type: standard
+  title_display: '学校でいちばん地味な2人が付き合う話 （　3）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(chcomics⇔ニチブンコミックスch: 40sid/88isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻2巻の後/穴の間)。楽天= てぃーろんたろん/日本文芸社/ニチブンコミックス　CHコミックス/2024-08-07'
+- series_keys:
+  - 'name:小笠原篤|name:がくえんゆーとぴあ まなびストレート!'
+  qid: null
+  number: 3
+  isbn13: '9784840239660'
+  release_date: '2007-07-27'
+  publisher: 'KADOKAWA'
+  edition_type: standard
+  title_display: 'がくえんゆーとぴあまなびストレート！（3）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(dengekicomics⇔電撃: 195sid/472isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻2巻の後/穴の間)。楽天= たあたんちぇっく/ufotable/小笠原　篤/KADOKAWA/電撃コミックス/2007-07-27'
+- series_keys:
+  - 'name:小笠原篤|name:がくえんゆーとぴあ まなびストレート!'
+  qid: null
+  number: 4
+  isbn13: '9784840242271'
+  release_date: '2008-02-27'
+  publisher: 'KADOKAWA'
+  edition_type: standard
+  title_display: 'がくえんゆーとぴあまなびストレート！（4）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(dengekicomics⇔電撃: 195sid/472isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻2巻の後/穴の間)。楽天= たあたんちぇっく/ufotable/小笠原　篤/KADOKAWA/電撃コミックス/2008-02-27'
+- series_keys:
+  - 'name:安藤昇|name:餓狼の系譜'
+  qid: null
+  number: 5
+  isbn13: '9784812456293'
+  release_date: '2002-03'
+  publisher: '竹書房'
+  edition_type: standard
+  title_display: '餓狼の系譜（5） 実録・安藤組'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(bamboocomics⇔バンブー: 1053sid/2501isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻4巻の後/穴の間)。楽天= 神田たけ志/竹書房/バンブーコミックス/2002-03'
+- series_keys:
+  - 'name:安藤昇|name:餓狼の系譜'
+  qid: null
+  number: 6
+  isbn13: '9784812456408'
+  release_date: '2002-04'
+  publisher: '竹書房'
+  edition_type: standard
+  title_display: '餓狼の系譜（6） 実録・安藤組'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(bamboocomics⇔バンブー: 1053sid/2501isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻4巻の後/穴の間)。楽天= 神田たけ志/竹書房/バンブーコミックス/2002-04'
+- series_keys:
+  - 'name:浦野ウララ|name:ガーリーデビュー'
+  qid: null
+  number: 4
+  isbn13: '9784253017961'
+  release_date: '2026-07-08'
+  publisher: '秋田書店'
+  edition_type: standard
+  title_display: 'ガーリーデビュー　4'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(shōnenchampioncomics⇔少年チャンピオン: 393sid/1986isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻3巻の後/穴の間)。楽天= 浦野ウララ/秋田書店/少年チャンピオン・コミックス/2026-07-08'
+- series_keys:
+  - 'name:コナミ|name:極上生徒会'
+  qid: null
+  number: 3
+  isbn13: '9784840237918'
+  release_date: '2007-02-27'
+  publisher: 'KADOKAWA'
+  edition_type: standard
+  title_display: '極上生徒会（3）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(dengekicomics⇔電撃: 195sid/472isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻2巻の後/穴の間)。楽天= まったくモー助/コナミ株式会社/KADOKAWA/電撃コミックス/2007-02-27'
+- series_keys:
+  - 'name:陣ノ内康暉|name:GURU'
+  qid: null
+  number: 3
+  isbn13: '9784065446218'
+  release_date: '2026-08-07'
+  publisher: '講談社'
+  edition_type: standard
+  title_display: 'GURU（3）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(kcdx週刊少年マガジン⇔kcデラックス: 72sid/281isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻2巻の後/穴の間)。楽天= 陣ノ内 康暉/講談社/KCデラックス/2026-08-07'
+- series_keys:
+  - 'qid:Q11267196|name:はい、チーズ!!!'
+  qid: null
+  number: 2
+  isbn13: '9784061754553'
+  release_date: '1987-05-06'
+  publisher: '講談社'
+  edition_type: standard
+  title_display: 'はい、チーズ！！（2）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは空。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻1巻の後/穴の間)。楽天= ごとう和/講談社/BE　LOVE　KC/1987-05-06'
+- series_keys:
+  - 'name:Shinobu|name:ハイガクラ'
+  - 'qid:Q3482283|name:ハイガクラ'
+  qid: null
+  number: 17
+  isbn13: '9784758086004'
+  release_date: '2024-10-31'
+  publisher: '一迅社'
+  edition_type: standard
+  title_display: 'ハイガクラ 17巻'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(id⇔zerosum: 183sid/537isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻16巻の後/穴の間)。楽天= 高山 しのぶ/一迅社/ZERO-SUMコミックス/2024-10-31'
+- series_keys:
+  - 'qid:Q11354991|name:羽虫のヘルツ'
+  qid: null
+  number: 2
+  isbn13: '9784047387287'
+  release_date: '2025-12-12'
+  publisher: 'KADOKAWA'
+  edition_type: standard
+  title_display: '羽虫のヘルツ 2'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(beamcomix⇔ビーム: 405sid/753isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻1巻の後/穴の間)。楽天= 三宅　乱丈/KADOKAWA/ビームコミックス/2025-12-12'
+- series_keys:
+  - 'qid:Q11368544|name:花咲け乙女!'
+  qid: null
+  number: 2
+  isbn13: '9784832261556'
+  release_date: '1999-12-03'
+  publisher: '芳文社'
+  edition_type: standard
+  title_display: '花咲け乙女（2）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(mangatimecomics⇔マンガタイム: 20sid/44isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻1巻の後/穴の間)。楽天= 丹沢恵/芳文社/マンガタイムコミックス/1999-12-03'
+- series_keys:
+  - 'name:きたむらましゅう|name:ハネる君をトメる僕'
+  qid: null
+  number: 3
+  isbn13: '9784408641546'
+  release_date: '2024-10-17'
+  publisher: '実業之日本社'
+  edition_type: standard
+  title_display: 'ハネる君をトメる僕（3）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(jardincomics⇔ジャルダン: 34sid/78isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻2巻の後/穴の間)。楽天= きたむら　ましゅう/実業之日本社/ジャルダンコミックス/2024-10-17'
+- series_keys:
+  - 'name:ユウキHB|name:ハーレムきゃんぷっ!'
+  qid: null
+  number: 10
+  isbn13: '9784434383700'
+  release_date: '2026-11-18'
+  publisher: '彗星社'
+  edition_type: standard
+  title_display: 'ハーレムきゃんぷっ！10'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(夜暇⇔ナイトマ: 26sid/60isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻9巻の後/穴の間)。楽天= ユウキHB/彗星社/ナイトマ/2026-11-18'
+- series_keys:
+  - 'qid:Q11594901|name:はるなちゃん参上!'
+  qid: null
+  number: 5
+  isbn13: '9784832261532'
+  release_date: '1999-11-02'
+  publisher: '芳文社'
+  edition_type: standard
+  title_display: 'はるなちゃん参上（5）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(mangatimecomics⇔マンガタイム: 20sid/44isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻4巻の後/穴の間)。楽天= 秋吉由美子/芳文社/マンガタイムコミックス/1999-11-02'
+- series_keys:
+  - 'qid:Q11594901|name:はるなちゃん参上!'
+  qid: null
+  number: 6
+  isbn13: '9784832262065'
+  release_date: '2001-05-01'
+  publisher: '芳文社'
+  edition_type: standard
+  title_display: 'はるなちゃん参上（6）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(mangatimecomics⇔まんがタイム: 295sid/884isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻4巻の後/穴の間)。楽天= 秋吉由美子/芳文社/まんがタイムコミックス/2001-05-01'
+- series_keys:
+  - 'name:ともだ秀和|name:へい!お待ちっ!'
+  qid: null
+  number: 5
+  isbn13: '9784575821376'
+  release_date: '1996-03-28'
+  publisher: '双葉社'
+  edition_type: standard
+  title_display: 'へい！お待ちっ！（5）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(actioncomicspizazz⇔アクション: 8sid/10isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻4巻の後/穴の間)。楽天= ともだ秀和/双葉社/アクションコミックス/1996-03-28'
+- series_keys:
+  - 'name:ともだ秀和|name:へい!お待ちっ!'
+  qid: null
+  number: 6
+  isbn13: '9784575821765'
+  release_date: '1996-08-07'
+  publisher: '双葉社'
+  edition_type: standard
+  title_display: 'へい！お待ちっ！（6）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(actioncomicspizazz⇔アクション: 8sid/10isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻4巻の後/穴の間)。楽天= ともだ秀和/双葉社/アクションコミックス/1996-08-07'
+- series_keys:
+  - 'name:ともだ秀和|name:へい!お待ちっ!'
+  qid: null
+  number: 7
+  isbn13: '9784575822014'
+  release_date: '1996-11-28'
+  publisher: '双葉社'
+  edition_type: standard
+  title_display: 'へい！お待ちっ！（7）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(actioncomicspizazz⇔アクション: 8sid/10isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻4巻の後/穴の間)。楽天= ともだ秀和/双葉社/アクションコミックス/1996-11-28'
+- series_keys:
+  - 'name:ともだ秀和|name:へい!お待ちっ!'
+  qid: null
+  number: 8
+  isbn13: '9784575822427'
+  release_date: '1997-04-28'
+  publisher: '双葉社'
+  edition_type: standard
+  title_display: 'へい！お待ちっ！（8）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(actioncomicspizazz⇔アクション: 8sid/10isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻4巻の後/穴の間)。楽天= ともだ秀和/双葉社/アクションコミックス/1997-04-28'
+- series_keys:
+  - 'name:ともだ秀和|name:へい!お待ちっ!'
+  qid: null
+  number: 9
+  isbn13: '9784575822670'
+  release_date: '1997-07-10'
+  publisher: '双葉社'
+  edition_type: standard
+  title_display: 'へい！お待ちっ！（9）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(actioncomicspizazz⇔アクション: 8sid/10isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻4巻の後/穴の間)。楽天= ともだ秀和/双葉社/アクションコミックス/1997-07-10'
+- series_keys:
+  - 'name:ともだ秀和|name:へい!お待ちっ!'
+  qid: null
+  number: 10
+  isbn13: '9784575823745'
+  release_date: '1998-09-12'
+  publisher: '双葉社'
+  edition_type: standard
+  title_display: 'へい！お待ちっ！（10）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(actioncomicspizazz⇔アクション: 8sid/10isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻4巻の後/穴の間)。楽天= ともだ秀和/双葉社/アクションコミックス/1998-09-12'
+- series_keys:
+  - 'name:津々浦|name:並行世界の君君僕僕'
+  qid: null
+  number: 3
+  isbn13: '9784832204515'
+  release_date: '2024-11-05'
+  publisher: '芳文社'
+  edition_type: standard
+  title_display: '並行世界の君君僕僕　3'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(fuzcomics⇔芳文社コミックスfuz: 94sid/228isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻2巻の後/穴の間)。楽天= 津々浦/芳文社/芳文社コミックス　FUZコミックス/2024-11-05'
+- series_keys:
+  - 'qid:Q17129767|name:平穏世代の韋駄天達'
+  - 'qid:Q17129767|name:平穏世代の韋駄天達.'
+  qid: null
+  number: 9
+  isbn13: '9784592163299'
+  release_date: '2024-10-29'
+  publisher: '白泉社'
+  edition_type: standard
+  title_display: '平穏世代の韋駄天達 9'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(younganimalcomics⇔ヤングアニマル: 239sid/756isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻8巻の後/穴の間)。楽天= クール教信者/天原/白泉社/ヤングアニマルコミックス/2024-10-29'
+- series_keys:
+  - 'qid:Q304953|name:姫様の花束'
+  qid: null
+  number: 2
+  isbn13: '9784344808263'
+  release_date: '2006-10'
+  publisher: '幻冬舎コミックス'
+  edition_type: standard
+  title_display: '姫様の花束（2）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは自頁の既存巻の楽天seriesNameと一致。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻1巻の後/穴の間)。楽天= 碧也ぴんく/幻冬舎コミックス/バーズコミックス　ガールズコレクション/2006-10'
+- series_keys:
+  - 'qid:Q304953|name:姫様の花束'
+  qid: null
+  number: 3
+  isbn13: '9784344810143'
+  release_date: '2007-06'
+  publisher: '幻冬舎コミックス'
+  edition_type: standard
+  title_display: '姫様の花束（3）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは自頁の既存巻の楽天seriesNameと一致。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻1巻の後/穴の間)。楽天= 碧也ぴんく/幻冬舎コミックス/バーズコミックス　ガールズコレクション/2007-06'
+- series_keys:
+  - 'qid:Q11469496|name:ヒミツの保健室'
+  qid: null
+  number: 5
+  isbn13: '9784785927851'
+  release_date: '2007-05'
+  publisher: '少年画報社'
+  edition_type: standard
+  title_display: 'ヒミツの保健室（5）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(yk⇔ヤングキング: 351sid/1095isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻4巻の後/穴の間)。楽天= 山東ユカ/少年画報社/ヤングキングコミックス/2007-05'
+- series_keys:
+  - 'qid:Q11654937|name:ひなたCafeへようこそ'
+  qid: null
+  number: 2
+  isbn13: '9784758081672'
+  release_date: '2013-03-22'
+  publisher: '一迅社'
+  edition_type: standard
+  title_display: 'ひなたCafeへようこそ（2）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(4コマkingsぱれっとcomics⇔idコミックス4コマkingsぱれっと: 90sid/201isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻1巻の後/穴の間)。楽天= 門井亜矢/一迅社/IDコミックス　4コマKINGSぱれっとコミックス/2013-03-22'
+- series_keys:
+  - 'qid:Q18817680|name:ひっつきもっつきねこもぐれ'
+  qid: null
+  number: 2
+  isbn13: '9784834233360'
+  release_date: '2025-02-25'
+  publisher: 'ホーム社'
+  edition_type: standard
+  title_display: 'ひっつきもっつき ねこもぐれ 2'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(オギャー⇔集英社ホーム: 13sid/19isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻1巻の後/穴の間)。楽天= 新久 千映/ホーム社/集英社ホームコミックス/2025-02-25'
+- series_keys:
+  - 'qid:Q1016880|name:北斗の拳'
+  qid: null
+  number: 31
+  isbn13: '9784107701152'
+  release_date: '2002-03-27'
+  publisher: '新潮社'
+  edition_type: standard
+  title_display: '北斗の拳（31（さらば愛しき者たちよ…そ）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは自頁の既存巻の楽天seriesNameと一致。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻30巻の後/穴の間)。楽天= 原哲夫/武論尊/新潮社/Ｂｕｎｃｈ　ｗｏｒｌｄ/2002-03-27'
+- series_keys:
+  - 'name:CLAMP|name:×××HOLiC・戻'
+  qid: null
+  number: 5
+  isbn13: '9784065414224'
+  release_date: '2025-11-29'
+  publisher: '講談社'
+  edition_type: standard
+  title_display: '×××HOLiC・戻（5）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(ヤンマガkcdx⇔kcデラックス: 21sid/55isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻4巻の後/穴の間)。楽天= CLAMP/講談社/KCデラックス/2025-11-29'
+- series_keys:
+  - 'qid:Q11522652|name:ほんまでっせお客さん'
+  qid: null
+  number: 3
+  isbn13: '9784812458082'
+  release_date: '2003-05'
+  publisher: '竹書房'
+  edition_type: standard
+  title_display: 'ほんまでっせお客さん（3） 実録！たかし＆佳代の'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(bamboocomics⇔バンブー: 1053sid/2501isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻2巻の後/穴の間)。楽天= 村上たかし/竹書房/バンブーコミックス/2003-05'
+- series_keys:
+  - 'qid:Q18458173|name:Idol × idol story!'
+  qid: null
+  number: 11
+  isbn13: '9784832206373'
+  release_date: '2026-08-03'
+  publisher: '芳文社'
+  edition_type: standard
+  title_display: 'IDOL×IDOL STORY！　11'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(fuzcomics⇔芳文社コミックスfuz: 94sid/228isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻10巻の後/穴の間)。楽天= 得能正太郎/芳文社/芳文社コミックス　FUZコミックス/2026-08-03'
+- series_keys:
+  - 'qid:Q11266340|name:Ikenai!いんびテーション'
+  qid: null
+  number: 12
+  isbn13: '9784063234121'
+  release_date: '1993-07-06'
+  publisher: '講談社'
+  edition_type: standard
+  title_display: 'IKENAI！いんびテーション（12）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(ヤンマガkcスペシャル⇔ヤングマガジンkcスペシャル: 123sid/728isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻11巻の後/穴の間)。楽天= こしばてつや/講談社/ヤングマガジンKCスペシャル/1993-07-06'
+- series_keys:
+  - 'qid:Q11384930|name:イケてる刑事'
+  qid: null
+  number: 5
+  isbn13: '9784785922450'
+  release_date: '2002-10'
+  publisher: '少年画報社'
+  edition_type: standard
+  title_display: 'イケてる刑事（5）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(youngkingcomics⇔ヤングキング: 23sid/120isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻4巻の後/穴の間)。楽天= 佐野タカシ/少年画報社/ヤングキングコミックス/2002-10'
+- series_keys:
+  - 'qid:Q11384930|name:イケてる刑事'
+  qid: null
+  number: 6
+  isbn13: '9784785923273'
+  release_date: '2003-07'
+  publisher: '少年画報社'
+  edition_type: standard
+  title_display: 'イケてる刑事（6）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(youngkingcomics⇔ヤングキング: 23sid/120isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻4巻の後/穴の間)。楽天= 佐野タカシ/少年画報社/ヤングキングコミックス/2003-07'
+- series_keys:
+  - 'qid:Q11384930|name:イケてる刑事'
+  qid: null
+  number: 7
+  isbn13: '9784785923860'
+  release_date: '2004-01'
+  publisher: '少年画報社'
+  edition_type: standard
+  title_display: 'イケてる刑事（7）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(youngkingcomics⇔ヤングキング: 23sid/120isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻4巻の後/穴の間)。楽天= 佐野タカシ/少年画報社/ヤングキングコミックス/2004-01'
+- series_keys:
+  - 'qid:Q11384930|name:イケてる刑事'
+  qid: null
+  number: 8
+  isbn13: '9784785924812'
+  release_date: '2004-11'
+  publisher: '少年画報社'
+  edition_type: standard
+  title_display: 'イケてる刑事（8）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(youngkingcomics⇔ヤングキング: 23sid/120isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻4巻の後/穴の間)。楽天= 佐野タカシ/少年画報社/ヤングキングコミックス/2004-11'
+- series_keys:
+  - 'qid:Q11384930|name:イケてる刑事'
+  qid: null
+  number: 9
+  isbn13: '9784785926366'
+  release_date: '2006-04'
+  publisher: '少年画報社'
+  edition_type: standard
+  title_display: 'イケてる刑事（9）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(youngkingcomics⇔ヤングキング: 23sid/120isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻4巻の後/穴の間)。楽天= 佐野タカシ/少年画報社/ヤングキングコミックス/2006-04'
+- series_keys:
+  - 'qid:Q11639709|name:いにしえの緑深き地に'
+  qid: null
+  number: 2
+  isbn13: '9784056016208'
+  release_date: '1997-09-26'
+  publisher: 'Gakken'
+  edition_type: standard
+  title_display: 'いにしえの緑深き地に（2）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(ノーラ⇔ピチ: 5sid/10isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻1巻の後/穴の間)。楽天= 速水翼/Gakken/ピチコミックス/1997-09-26'
+- series_keys:
+  - 'name:やまだごまち|name:インコでも青春したい'
+  qid: null
+  number: 3
+  isbn13: '9784832206397'
+  release_date: '2026-08-03'
+  publisher: '芳文社'
+  edition_type: standard
+  title_display: 'インコでも青春したい　3'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(fuzcomics⇔芳文社コミックスfuz: 94sid/228isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻2巻の後/穴の間)。楽天= やまだごまち/芳文社/芳文社コミックス　FUZコミックス/2026-08-03'
+- series_keys:
+  - 'name:梅ノ木びの|name:インク色の欲を吐く'
+  qid: null
+  number: 3
+  isbn13: '9784047381216'
+  release_date: '2024-11-15'
+  publisher: 'KADOKAWA'
+  edition_type: standard
+  title_display: 'インク色の欲を吐く　3'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(hartacomix⇔ハルタ: 150sid/385isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻2巻の後/穴の間)。楽天= 梅ノ木　びの/KADOKAWA/ハルタコミックス/2024-11-15'
+- series_keys:
+  - 'name:熊谷くにを|name:実録レイプ裁判'
+  qid: null
+  number: 4
+  isbn13: '9784575828405'
+  release_date: '2003-05'
+  publisher: '双葉社'
+  edition_type: standard
+  title_display: '実録レイプ裁判（4）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(actioncomics⇔アクション: 837sid/2014isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻3巻の後/穴の間)。楽天= 熊谷くにを/宇野津光緒/双葉社/アクションコミックス/2003-05'
+- series_keys:
+  - 'name:熊谷くにを|name:実録レイプ裁判'
+  qid: null
+  number: 5
+  isbn13: '9784575829518'
+  release_date: '2004-03'
+  publisher: '双葉社'
+  edition_type: standard
+  title_display: '実録レイプ裁判（5）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(actioncomics⇔アクション: 837sid/2014isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻3巻の後/穴の間)。楽天= 熊谷くにを/宇野津光緒/双葉社/アクションコミックス/2004-03'
+- series_keys:
+  - 'name:熊谷くにを|name:実録レイプ裁判'
+  qid: null
+  number: 6
+  isbn13: '9784575829945'
+  release_date: '2004-07'
+  publisher: '双葉社'
+  edition_type: standard
+  title_display: '実録レイプ裁判（6）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(actioncomics⇔アクション: 837sid/2014isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻3巻の後/穴の間)。楽天= 熊谷くにを/宇野津光緒/双葉社/アクションコミックス/2004-07'
+- series_keys:
+  - 'name:熊谷くにを|name:実録レイプ裁判'
+  qid: null
+  number: 7
+  isbn13: '9784575833089'
+  release_date: '2006-11'
+  publisher: '双葉社'
+  edition_type: standard
+  title_display: '実録レイプ裁判（7）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(actioncomics⇔アクション: 837sid/2014isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻3巻の後/穴の間)。楽天= 熊谷くにを/宇野津光緒/双葉社/アクションコミックス/2006-11'
+- series_keys:
+  - 'name:熊谷くにを|name:実録レイプ裁判'
+  qid: null
+  number: 8
+  isbn13: '9784575833218'
+  release_date: '2007-01'
+  publisher: '双葉社'
+  edition_type: standard
+  title_display: '実録レイプ裁判（8）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(actioncomics⇔アクション: 837sid/2014isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻3巻の後/穴の間)。楽天= 熊谷くにを/宇野津光緒/双葉社/アクションコミックス/2007-01'
+- series_keys:
+  - 'qid:Q11664780|name:実在ニョーボよしえサン日記'
+  qid: null
+  number: 3
+  isbn13: '9784812470190'
+  release_date: '2008-12'
+  publisher: '竹書房'
+  edition_type: standard
+  title_display: '実在ニョーボよしえサン日記（3）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(bamboocomics⇔バンブー: 1053sid/2501isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻2巻の後/穴の間)。楽天= 須賀原洋行/竹書房/バンブーコミックス/2008-12'
+- series_keys:
+  - 'qid:Q11664780|name:実在ニョーボよしえサン日記'
+  qid: null
+  number: 4
+  isbn13: '9784812472224'
+  release_date: '2010-01'
+  publisher: '竹書房'
+  edition_type: standard
+  title_display: '実在ニョーボよしえサン日記（4）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(bamboocomics⇔バンブー: 1053sid/2501isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻2巻の後/穴の間)。楽天= 須賀原洋行/竹書房/バンブーコミックス/2010-01'
+- series_keys:
+  - 'qid:Q11664780|name:実在ニョーボよしえサン日記'
+  qid: null
+  number: 5
+  isbn13: '9784812476345'
+  release_date: '2011-07'
+  publisher: '竹書房'
+  edition_type: standard
+  title_display: '実在ニョーボよしえサン日記（5）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(bamboocomics⇔バンブー: 1053sid/2501isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻2巻の後/穴の間)。楽天= 須賀原洋行/竹書房/バンブーコミックス/2011-07'
+- series_keys:
+  - 'name:まめ猫|name:純情エッチング'
+  qid: null
+  number: 4
+  isbn13: '9784832297425'
+  release_date: '2026-08-10'
+  publisher: '芳文社'
+  edition_type: standard
+  title_display: '純情エッチング　4'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(mangatimekrcomicskiraramenu⇔まんがタイムkrコミックスフォワード: 22sid/41isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻3巻の後/穴の間)。楽天= まめ猫/芳文社/まんがタイムKRコミックス　フォワードコミックス/2026-08-10'
+- series_keys:
+  - 'qid:Q11425578|name:ジュッポン!お姉さま'
+  qid: null
+  number: 2
+  isbn13: '9784575822342'
+  release_date: '1997-04-14'
+  publisher: '双葉社'
+  edition_type: standard
+  title_display: 'ジュッポン！お姉さま（2）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(actioncomics⇔アクション: 837sid/2014isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻1巻の後/穴の間)。楽天= 坂辺周一/双葉社/アクションコミックス/1997-04-14'
+- series_keys:
+  - 'qid:Q7850395|name:かいしゃいんのメロディー'
+  qid: null
+  number: 5
+  isbn13: '9784812454077'
+  release_date: '2000-06-27'
+  publisher: '竹書房'
+  edition_type: standard
+  title_display: 'かいしゃいんのメロディー（5）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(bamboocomics⇔バンブー: 1053sid/2501isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻2巻の後/穴の間)。楽天= 大橋ツヨシ/竹書房/バンブーコミックス/2000-06-27'
+- series_keys:
+  - 'qid:Q7850395|name:かいしゃいんのメロディー'
+  qid: null
+  number: 6
+  isbn13: '9784812456255'
+  release_date: '2002-02'
+  publisher: '竹書房'
+  edition_type: standard
+  title_display: 'かいしゃいんのメロディー（6）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(bamboocomics⇔バンブー: 1053sid/2501isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻2巻の後/穴の間)。楽天= 大橋ツヨシ/竹書房/バンブーコミックス/2002-02'
+- series_keys:
+  - 'qid:Q7850395|name:かいしゃいんのメロディー'
+  qid: null
+  number: 7
+  isbn13: '9784812458297'
+  release_date: '2003-07'
+  publisher: '竹書房'
+  edition_type: standard
+  title_display: 'かいしゃいんのメロディー（7）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(bamboocomics⇔バンブー: 1053sid/2501isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻2巻の後/穴の間)。楽天= 大橋ツヨシ/竹書房/バンブーコミックス/2003-07'
+- series_keys:
+  - 'name:池田みゆ|name:看護師みさき!'
+  qid: null
+  number: 3
+  isbn13: '9784420150798'
+  release_date: '2006-01'
+  publisher: '創美社'
+  edition_type: standard
+  title_display: '看護師みさき！　3'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(officeyoucomics⇔オフィスユー: 153sid/442isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻2巻の後/穴の間)。楽天= 池田　みゆ/創美社/オフィスユーコミックス/2006-01'
+- series_keys:
+  - 'qid:Q9300355|name:かんぱち'
+  qid: null
+  number: 9
+  isbn13: '9784758065320'
+  release_date: '2015-07-27'
+  publisher: '一迅社'
+  edition_type: standard
+  title_display: 'かんぱち（9）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(rexcomics⇔idコミックスrex: 16sid/32isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻8巻の後/穴の間)。楽天= 結城心一/武梨えり/一迅社/IDコミックス　REXコミックス/2015-07-27'
+- series_keys:
+  - 'qid:Q9300355|name:かんぱち'
+  qid: null
+  number: 10
+  isbn13: '9784758066075'
+  release_date: '2016-07-27'
+  publisher: '一迅社'
+  edition_type: standard
+  title_display: 'かんぱち（10）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(rexcomics⇔idコミックスrex: 16sid/32isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻8巻の後/穴の間)。楽天= 結城心一/武梨えり/一迅社/IDコミックス　REXコミックス/2016-07-27'
+- series_keys:
+  - 'qid:Q104538840|name:KARAN'
+  qid: null
+  number: 2
+  isbn13: '9784091691934'
+  release_date: '2001-08'
+  publisher: '小学館'
+  edition_type: standard
+  title_display: 'Karan（2）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(judycomics⇔ジュディー: 144sid/327isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻1巻の後/穴の間)。楽天= 石塚夢見/小学館/ジュディーコミックス/2001-08'
+- series_keys:
+  - 'qid:Q3290846|name:かしましめし'
+  qid: null
+  number: 7
+  isbn13: '9784396750626'
+  release_date: '2024-12-06'
+  publisher: '祥伝社'
+  edition_type: standard
+  title_display: 'かしましめし（7）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(fc⇔feel: 44sid/86isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻6巻の後/穴の間)。楽天= おかざき 真里/祥伝社/FEEL　コミックス/2024-12-06'
+- series_keys:
+  - 'qid:Q17239549|name:仮想回廊'
+  qid: null
+  number: 2
+  isbn13: '9784403670084'
+  release_date: '2001-02'
+  publisher: '新書館'
+  edition_type: standard
+  title_display: '仮想回廊（2）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(wingscomics⇔ウイングス: 81sid/116isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻1巻の後/穴の間)。楽天= 沢田翔/新書館/ウイングスコミックス/2001-02'
+- series_keys:
+  - 'qid:Q22129863|name:家庭教師Miki'
+  qid: null
+  number: 2
+  isbn13: '9784575826593'
+  release_date: '2002-03'
+  publisher: '双葉社'
+  edition_type: standard
+  title_display: '家庭教師Miki（2）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(actioncomics⇔アクション: 837sid/2014isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻1巻の後/穴の間)。楽天= 梅谷ケンヂ/双葉社/アクションコミックス/2002-03'
+- series_keys:
+  - 'qid:Q17350012|name:勝手にしやがれ'
+  qid: null
+  number: 2
+  isbn13: '9784796241656'
+  release_date: '1992-06-16'
+  publisher: 'スコラ'
+  edition_type: deluxe
+  title_display: '勝手にしやがれ（2）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(scdeluxe⇔バーガーsc: 14sid/31isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻1巻の後/穴の間)。楽天= 末松正博/スコラ/バーガーSC/1992-06-16'
+- series_keys:
+  - 'qid:Q24876376|name:可愛い上司を困らせたい'
+  qid: null
+  number: 8
+  isbn13: '9784832259546'
+  release_date: '2024-10-07'
+  publisher: '芳文社'
+  edition_type: standard
+  title_display: '可愛い上司を困らせたい　8'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(mangatimecomics⇔まんがタイム: 295sid/884isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻7巻の後/穴の間)。楽天= タチバナロク/芳文社/まんがタイムコミックス/2024-10-07'
+- series_keys:
+  - 'qid:Q11577369|name:風花の賦'
+  qid: null
+  number: 2
+  isbn13: '9784253091466'
+  release_date: '1988-05-27'
+  publisher: '秋田書店'
+  edition_type: standard
+  title_display: '風花の賦（2）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(bonitacomics⇔ボニータ: 268sid/712isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻1巻の後/穴の間)。楽天= 田辺真由美/秋田書店/ボニータコミックス/1988-05-27'
+- series_keys:
+  - 'qid:Q11620400|name:結婚×レンアイ。'
+  qid: null
+  number: 10
+  isbn13: '9784592156000'
+  release_date: '2024-12-05'
+  publisher: '白泉社'
+  edition_type: standard
+  title_display: '結婚×レンアイ。 10'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(hlcsilkypresents⇔白泉社レディース: 25sid/74isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻9巻の後/穴の間)。楽天= 萩尾 彬/白泉社/白泉社レディース・コミックス/2024-12-05'
+- series_keys:
+  - 'qid:Q11278887|name:けものとチャット'
+  qid: null
+  number: 7
+  isbn13: '9784812476871'
+  release_date: '2011-11'
+  publisher: '竹書房'
+  edition_type: standard
+  title_display: 'けものとチャット（7）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは自頁の既存巻の楽天seriesNameと一致。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻6巻の後/穴の間)。楽天= みずしな孝之/竹書房/バンブーコミックス/2011-11'
+- series_keys:
+  - 'qid:Q27151108|name:君に愛されて痛かった'
+  qid: null
+  number: 10
+  isbn13: '9784253013048'
+  release_date: '2026-07-17'
+  publisher: '秋田書店'
+  edition_type: standard
+  title_display: '君に愛されて痛かった　10'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは自頁の既存巻の楽天seriesNameと一致。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻9巻の後/穴の間)。楽天= 知るかバカうどん/秋田書店/ヤングチャンピオン・コミックス/2026-07-17'
+- series_keys:
+  - 'qid:Q1050794|name:金瓶梅'
+  qid: null
+  number: 12
+  isbn13: '9784575940985'
+  release_date: '2007-06'
+  publisher: '双葉社'
+  edition_type: standard
+  title_display: '金瓶梅（12）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは自頁の既存巻の楽天seriesNameと一致。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻8巻の後/穴の間)。楽天= わたなべまさこ/双葉社/アクションコミックス/2007-06'
+- series_keys:
+  - 'qid:Q1050794|name:金瓶梅'
+  qid: null
+  number: 13
+  isbn13: '9784575941098'
+  release_date: '2007-07'
+  publisher: '双葉社'
+  edition_type: standard
+  title_display: '金瓶梅（13）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは自頁の既存巻の楽天seriesNameと一致。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻8巻の後/穴の間)。楽天= わたなべまさこ/双葉社/アクションコミックス/2007-07'
+- series_keys:
+  - 'qid:Q11516716|name:キラキラフィズ'
+  qid: null
+  number: 2
+  isbn13: '9784812456347'
+  release_date: '2002-04'
+  publisher: '竹書房'
+  edition_type: standard
+  title_display: 'キラキラフィズ（2）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(bamboocomics⇔バンブー: 1053sid/2501isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻1巻の後/穴の間)。楽天= 有間しのぶ/竹書房/バンブーコミックス/2002-04'
+- series_keys:
+  - 'qid:Q11425021|name:きりん'
+  qid: null
+  number: 4
+  isbn13: '9784821195749'
+  release_date: '1997-05-21'
+  publisher: 'ぶんか社'
+  edition_type: standard
+  title_display: 'きりん（4）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(bunkashacomicsyoungteiohseries⇔ぶんか社: 6sid/10isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻3巻の後/穴の間)。楽天= 坂口いく/ぶんか社/ぶんか社コミックス/1997-05-21'
+- series_keys:
+  - 'qid:Q11628163|name:器用貧乏おじさんの異世界再冒険'
+  qid: null
+  number: 2
+  isbn13: '9784592166740'
+  release_date: '2024-10-29'
+  publisher: '白泉社'
+  edition_type: standard
+  title_display: '器用貧乏おじさんの異世界再冒険 2'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(younganimalcomics⇔ヤングアニマル: 239sid/756isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻1巻の後/穴の間)。楽天= 西川 秀明/白泉社/ヤングアニマルコミックス/2024-10-29'
+- series_keys:
+  - 'name:七井海星|name:傷口と包帯'
+  qid: null
+  number: 1
+  isbn13: '9784065376928'
+  release_date: '2024-11-15'
+  publisher: '講談社'
+  edition_type: deluxe
+  title_display: '傷口と包帯（1）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(講談社コミックスデラックス月刊少年マガジン⇔kcデラックス: 46sid/195isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻5巻の後/穴の間)。楽天= 七井 海星/講談社/KCデラックス/2024-11-15'
+- series_keys:
+  - 'name:七井海星|name:傷口と包帯'
+  qid: null
+  number: 2
+  isbn13: '9784065388273'
+  release_date: '2025-04-16'
+  publisher: '講談社'
+  edition_type: deluxe
+  title_display: '傷口と包帯（2）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(講談社コミックスデラックス月刊少年マガジン⇔kcデラックス: 46sid/195isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻5巻の後/穴の間)。楽天= 七井 海星/講談社/KCデラックス/2025-04-16'
+- series_keys:
+  - 'name:松幸かほ|name:こぎつね、わらわら稲荷神のまかない飯いただきますっ!'
+  - 'name:西実さく|name:こぎつね、わらわら稲荷神のまかない飯いただきますっ!'
+  qid: null
+  number: 6
+  isbn13: '9784758086073'
+  release_date: '2024-10-31'
+  publisher: '一迅社'
+  edition_type: standard
+  title_display: 'こぎつね、わらわら　稲荷神のまかない飯　いただきますっ！ 　6巻'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(id⇔zerosum: 183sid/537isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻5巻の後/穴の間)。楽天= 西実 さく/松幸 かほ/テクノサマタ/一迅社/ZERO-SUMコミックス/2024-10-31'
+- series_keys:
+  - 'qid:Q11279033|name:こはるびより'
+  qid: null
+  number: 6
+  isbn13: '9784048687836'
+  release_date: '2010-07-27'
+  publisher: 'KADOKAWA'
+  edition_type: standard
+  title_display: 'こはるびより（6）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(dengekicomics⇔電撃: 195sid/472isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻5巻の後/穴の間)。楽天= みづき　たけひと/KADOKAWA/電撃コミックス/2010-07-27'
+- series_keys:
+  - 'qid:Q11279033|name:こはるびより'
+  qid: null
+  number: 7
+  isbn13: '9784048861717'
+  release_date: '2011-12-17'
+  publisher: 'KADOKAWA'
+  edition_type: standard
+  title_display: 'こはるびより（7）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(dengekicomics⇔電撃: 195sid/472isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻5巻の後/穴の間)。楽天= みづき　たけひと/KADOKAWA/電撃コミックス/2011-12-17'
+- series_keys:
+  - 'qid:Q67498310|name:恋はいつもアマンドピンク'
+  qid: null
+  number: 5
+  isbn13: '9784575931266'
+  release_date: '1988-07-19'
+  publisher: '双葉社'
+  edition_type: standard
+  title_display: '恋はいつもアマンドピンク（5）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(actioncomics⇔アクション: 837sid/2014isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻4巻の後/穴の間)。楽天= 赤星たみこ/双葉社/アクションコミックス/1988-07-19'
+- series_keys:
+  - 'name:羽田伊吹|name:恋空'
+  qid: null
+  number: 4
+  isbn13: '9784575333565'
+  release_date: '2008-03'
+  publisher: '双葉社'
+  edition_type: standard
+  title_display: '恋空（4） 切ナイ恋物語'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは自頁の既存巻の楽天seriesNameと一致。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻3巻の後/穴の間)。楽天= 羽田伊吹/美嘉/双葉社/ジュールコミックス　ｃｏｍｉｃ魔法のｉらんど/2008-03'
+- series_keys:
+  - 'name:羽田伊吹|name:恋空'
+  qid: null
+  number: 5
+  isbn13: '9784575333626'
+  release_date: '2008-06'
+  publisher: '双葉社'
+  edition_type: standard
+  title_display: '恋空（5） 切ナイ恋物語'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは自頁の既存巻の楽天seriesNameと一致。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻3巻の後/穴の間)。楽天= 羽田伊吹/美嘉/双葉社/ジュールコミックス　ｃｏｍｉｃ魔法のｉらんど/2008-06'
+- series_keys:
+  - 'name:羽田伊吹|name:恋空'
+  qid: null
+  number: 6
+  isbn13: '9784575333688'
+  release_date: '2008-08'
+  publisher: '双葉社'
+  edition_type: standard
+  title_display: '恋空（6） 切ナイ恋物語'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは自頁の既存巻の楽天seriesNameと一致。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻3巻の後/穴の間)。楽天= 羽田伊吹/美嘉/双葉社/ジュールコミックス　ｃｏｍｉｃ魔法のｉらんど/2008-08'
+- series_keys:
+  - 'name:羽田伊吹|name:恋空'
+  qid: null
+  number: 7
+  isbn13: '9784575333787'
+  release_date: '2008-12'
+  publisher: '双葉社'
+  edition_type: standard
+  title_display: '恋空（7） 切ナイ恋物語'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは自頁の既存巻の楽天seriesNameと一致。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻3巻の後/穴の間)。楽天= 羽田伊吹/美嘉/双葉社/ジュールコミックス　ｃｏｍｉｃ魔法のｉらんど/2008-12'
+- series_keys:
+  - 'name:羽田伊吹|name:恋空'
+  qid: null
+  number: 8
+  isbn13: '9784575333817'
+  release_date: '2009-02'
+  publisher: '双葉社'
+  edition_type: standard
+  title_display: '恋空（8） 切ナイ恋物語'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは自頁の既存巻の楽天seriesNameと一致。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻3巻の後/穴の間)。楽天= 羽田伊吹/美嘉/双葉社/ジュールコミックス　ｃｏｍｉｃ魔法のｉらんど/2009-02'
+- series_keys:
+  - 'name:羽田伊吹|name:恋空'
+  qid: null
+  number: 9
+  isbn13: '9784575333886'
+  release_date: '2009-06'
+  publisher: '双葉社'
+  edition_type: standard
+  title_display: '恋空（9） 切ナイ恋物語'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは自頁の既存巻の楽天seriesNameと一致。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻3巻の後/穴の間)。楽天= 羽田伊吹/美嘉/双葉社/ジュールコミックス　ｃｏｍｉｃ魔法のｉらんど/2009-06'
+- series_keys:
+  - 'name:羽田伊吹|name:恋空'
+  qid: null
+  number: 10
+  isbn13: '9784575333947'
+  release_date: '2009-08'
+  publisher: '双葉社'
+  edition_type: standard
+  title_display: '恋空（10） 切ナイ恋物語'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは自頁の既存巻の楽天seriesNameと一致。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻3巻の後/穴の間)。楽天= 羽田伊吹/美嘉/双葉社/ジュールコミックス　ｃｏｍｉｃ魔法のｉらんど/2009-08'
+- series_keys:
+  - 'name:なじみ|name:コンビニ夜勤のあくまちゃん'
+  qid: null
+  number: 3
+  isbn13: '9784832295841'
+  release_date: '2024-10-25'
+  publisher: '芳文社'
+  edition_type: standard
+  title_display: 'コンビニ夜勤のあくまちゃん　3'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(kiraramenu⇔まんがタイムkr: 472sid/1159isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻2巻の後/穴の間)。楽天= なじみ/芳文社/まんがタイムKRコミックス/2024-10-25'
+- series_keys:
+  - 'qid:Q8952464|name:今月のわんこ生活'
+  qid: null
+  number: 2
+  isbn13: '9784886534903'
+  release_date: '2011-09'
+  publisher: '秋水社'
+  edition_type: standard
+  title_display: '今月のわんこ生活（2）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(daitocomics⇔ダイト: 21sid/28isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻3巻の後/穴の間)。楽天= 遠藤淑子/秋水社/ダイトコミックス/2011-09'
+- series_keys:
+  - 'name:SORAJIMA|name:婚約を破棄された悪役令嬢は荒野に生きる。'
+  qid: null
+  number: 4
+  isbn13: '9784824203205'
+  release_date: '2024-11-05'
+  publisher: '一二三書房'
+  edition_type: standard
+  title_display: '婚約を破棄された悪役令嬢は荒野に生きる。（4）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(lavarecomicsplus⇔ラワーレ: 15sid/27isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻3巻の後/穴の間)。楽天= 吉井あん/中野るり/SORAJIMA/一二三書房/ラワーレコミックス＋/2024-11-05'
+- series_keys:
+  - 'qid:Q47581235|name:コスちゅ!'
+  qid: null
+  number: 2
+  isbn13: '9784758080804'
+  release_date: '2010-05'
+  publisher: '一迅社'
+  edition_type: standard
+  title_display: 'コスちゅ！（2）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(4コマkingsぱれっとcomics⇔idコミックス4コマkingsぱれっと: 90sid/201isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻1巻の後/穴の間)。楽天= 一葵さやか/一迅社/IDコミックス　4コマKINGSぱれっとコミックス/2010-05'
+- series_keys:
+  - 'qid:Q47581235|name:コスちゅ!'
+  qid: null
+  number: 3
+  isbn13: '9784758081160'
+  release_date: '2011-03-25'
+  publisher: '一迅社'
+  edition_type: standard
+  title_display: 'コスちゅ！（3）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(4コマkingsぱれっとcomics⇔idコミックス4コマkingsぱれっと: 90sid/201isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻1巻の後/穴の間)。楽天= 一葵さやか/一迅社/IDコミックス　4コマKINGSぱれっとコミックス/2011-03-25'
+- series_keys:
+  - 'qid:Q3433097|name:幸福のススメ'
+  qid: null
+  number: 5
+  isbn13: '9784812451540'
+  release_date: '1997-11-27'
+  publisher: '竹書房'
+  edition_type: standard
+  title_display: '幸福のススメ（5）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(bamboocomics⇔バンブー: 1053sid/2501isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻4巻の後/穴の間)。楽天= 伊藤理佐/竹書房/バンブーコミックス/1997-11-27'
+- series_keys:
+  - 'qid:Q418603|name:クラッシュ!正宗'
+  qid: null
+  number: 11
+  isbn13: '9784575823370'
+  release_date: '1998-05-12'
+  publisher: '双葉社'
+  edition_type: standard
+  title_display: 'クラッシュ！正宗（11）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(actioncomics⇔アクション: 837sid/2014isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻10巻の後/穴の間)。楽天= たなか亜希夫/小林信也/双葉社/アクションコミックス/1998-05-12'
+- series_keys:
+  - 'qid:Q418603|name:クラッシュ!正宗'
+  qid: null
+  number: 12
+  isbn13: '9784575823462'
+  release_date: '1998-06-10'
+  publisher: '双葉社'
+  edition_type: standard
+  title_display: 'クラッシュ！正宗（12）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(actioncomics⇔アクション: 837sid/2014isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻10巻の後/穴の間)。楽天= たなか亜希夫/小林信也/双葉社/アクションコミックス/1998-06-10'
+- series_keys:
+  - 'qid:Q360638|name:クレヨンしんちゃんの楽しいゾ英会話'
+  qid: null
+  number: 1
+  isbn13: '9784575933550'
+  release_date: '1994-03-28'
+  publisher: '双葉社'
+  edition_type: standard
+  title_display: 'クレヨンしんちゃんの楽しいゾ英会話（1）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(actioncomics⇔アクション: 837sid/2014isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻3巻の後/穴の間)。楽天= 臼井儀人/トム・ステイブルフォード/双葉社/アクションコミックス/1994-03-28'
+- series_keys:
+  - 'qid:Q360638|name:クレヨンしんちゃんの楽しいゾ英会話'
+  qid: null
+  number: 4
+  isbn13: '9784575934588'
+  release_date: '1996-07-18'
+  publisher: '双葉社'
+  edition_type: standard
+  title_display: 'クレヨンしんちゃんの楽しいゾ英会話（4）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(actioncomics⇔アクション: 837sid/2014isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻3巻の後/穴の間)。楽天= 臼井儀人/トム・ステイブルフォード/双葉社/アクションコミックス/1996-07-18'
+- series_keys:
+  - 'qid:Q11470587|name:LOAN WOLF'
+  qid: null
+  number: 2
+  isbn13: '9784785920555'
+  release_date: '2001-01-22'
+  publisher: '少年画報社'
+  edition_type: standard
+  title_display: 'LOAN　WOLF（2）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(yk⇔ヤングキング: 351sid/1095isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻1巻の後/穴の間)。楽天= 山田秋太郎/少年画報社/ヤングキングコミックス/2001-01-22'
+- series_keys:
+  - 'qid:Q11470587|name:LOAN WOLF'
+  qid: null
+  number: 3
+  isbn13: '9784785921576'
+  release_date: '2002-01'
+  publisher: '少年画報社'
+  edition_type: standard
+  title_display: 'LOAN　WOLF（3）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(yk⇔ヤングキング: 351sid/1095isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻1巻の後/穴の間)。楽天= 山田秋太郎/少年画報社/ヤングキングコミックス/2002-01'
+- series_keys:
+  - 'qid:Q11355017|name:ろんぐらいだぁすとーりーず!'
+  qid: null
+  number: 2
+  isbn13: '9784048996358'
+  release_date: '2024-09-06'
+  publisher: 'ブシロードワークス'
+  edition_type: standard
+  title_display: 'ろんぐらいだぁすとーりーず！ 2'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは自頁の既存巻の楽天seriesNameと一致。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻1巻の後/穴の間)。楽天= 三宅　大志/ブシロードワークス/ブシロードコミックス/2024-09-06'
+- series_keys:
+  - 'name:茶乃ひなの|name:ループ10回目の公爵令嬢は王太子に溺愛されています'
+  qid: null
+  number: 3
+  isbn13: '9784813763680'
+  release_date: '2024-10-24'
+  publisher: 'スターツ出版'
+  edition_type: standard
+  title_display: 'ループ10回目の公爵令嬢は王太子に溺愛されています　3'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(bfcomics⇔ベリーズファンタジー: 58sid/103isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻2巻の後/穴の間)。楽天= 三鼓とわ/ 真崎奈南/スターツ出版/ベリーズファンタジーコミックス/2024-10-24'
+- series_keys:
+  - 'name:渡井亘|name:恋愛感情のまるでない幼馴染漫画'
+  qid: null
+  number: 8
+  isbn13: '9784801990562'
+  release_date: '2026-08-20'
+  publisher: '竹書房'
+  edition_type: standard
+  title_display: '恋愛感情のまるでない幼馴染漫画（8）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(bamboocomics⇔バンブー: 1053sid/2501isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻7巻の後/穴の間)。楽天= 渡井亘/竹書房/バンブーコミックス/2026-08-20'
+- series_keys:
+  - 'qid:Q6359803|name:Love sync dream'
+  qid: null
+  number: 2
+  isbn13: '9784199502668'
+  release_date: '2011-09-13'
+  publisher: '徳間書店'
+  edition_type: standard
+  title_display: 'LOVE　SYNC　DREAM（2）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(ryucomics⇔リュウ: 175sid/628isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻1巻の後/穴の間)。楽天= 藤原カムイ/徳間書店/リュウコミックス/2011-09-13'
+- series_keys:
+  - 'name:Papa|name:マギア☆レポート'
+  - 'qid:Q28682983|name:マギア☆レポート'
+  qid: null
+  number: 7
+  isbn13: '9784832295827'
+  release_date: '2024-10-25'
+  publisher: '芳文社'
+  edition_type: standard
+  title_display: 'マギア☆レポート　7'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(kiraramenu⇔まんがタイムkr: 472sid/1159isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻6巻の後/穴の間)。楽天= Magica Quartet/PAPA/芳文社/まんがタイムKRコミックス/2024-10-25'
+- series_keys:
+  - 'qid:Q11315075|name:マンガで分かる心療内科'
+  qid: null
+  number: 16
+  isbn13: '9784785962289'
+  release_date: '2018-06-25'
+  publisher: '少年画報社'
+  edition_type: standard
+  title_display: 'マンガで分かる心療内科（16）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(yk⇔ヤングキング: 351sid/1095isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻26巻の後/穴の間)。楽天= ゆうきゆう/ソウ/少年画報社/ヤングキングコミックス/2018-06-25'
+- series_keys:
+  - 'name:下吉田本郷|name:万福児'
+  qid: null
+  number: 6
+  isbn13: '9784088656366'
+  release_date: '2011-07'
+  publisher: '集英社'
+  edition_type: standard
+  title_display: '万福児（6）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(queenscomics⇔クイーンズ: 126sid/244isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻5巻の後/穴の間)。楽天= 下吉田本郷/集英社/クイーンズコミックス/2011-07'
+- series_keys:
+  - 'qid:Q17239549|name:魔狼王烈風伝'
+  qid: null
+  number: 10
+  isbn13: '9784840217729'
+  release_date: '2001-03-27'
+  publisher: 'KADOKAWA'
+  edition_type: standard
+  title_display: '魔狼王烈風伝（10）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(dengekicomicsex⇔電撃コミックスex: 238sid/417isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻9巻の後/穴の間)。楽天= 沢田　翔/KADOKAWA/電撃コミックスEX/2001-03-27'
+- series_keys:
+  - 'qid:Q11575168|name:マル暴鑑識官'
+  qid: null
+  number: 2
+  isbn13: '9784537103564'
+  release_date: '2004-11'
+  publisher: '日本文芸社'
+  edition_type: standard
+  title_display: 'マル暴鑑識官（2）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(nichibuncomics⇔ニチブン: 736sid/2874isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻1巻の後/穴の間)。楽天= 田中つかさ/黒沢哲哉/日本文芸社/ニチブンコミックス/2004-11'
+- series_keys:
+  - 'qid:Q11501487|name:またたび荘は猫屋敷'
+  qid: null
+  number: 1
+  isbn13: '9784821197286'
+  release_date: '1999-02-20'
+  publisher: 'ぶんか社'
+  edition_type: standard
+  title_display: 'またたび荘は猫屋敷（1）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(bunkashacomics⇔ぶんか社: 449sid/923isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻3巻の後/穴の間)。楽天= 新名あき/ぶんか社/ぶんか社コミックス/1999-02-20'
+- series_keys:
+  - 'qid:Q11501487|name:またたび荘は猫屋敷'
+  qid: null
+  number: 4
+  isbn13: '9784821199112'
+  release_date: '2002-01'
+  publisher: 'ぶんか社'
+  edition_type: standard
+  title_display: 'またたび荘は猫屋敷（4）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(bunkashacomics⇔ぶんか社: 449sid/923isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻3巻の後/穴の間)。楽天= 新名あき/ぶんか社/ぶんか社コミックス/2002-01'
+- series_keys:
+  - 'qid:Q11372142|name:めいわく荘の人々'
+  qid: null
+  number: 23
+  isbn13: '9784785918385'
+  release_date: '1998-05-09'
+  publisher: '少年画報社'
+  edition_type: standard
+  title_display: 'めいわく荘の人々（23）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(yk⇔ヤングキング: 351sid/1095isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻22巻の後/穴の間)。楽天= 五十嵐浩一/少年画報社/ヤングキングコミックス/1998-05-09'
+- series_keys:
+  - 'qid:Q11342349|name:メルヘン課長とノンケ後輩くんseason2'
+  qid: null
+  number: 2
+  isbn13: '9784199508769'
+  release_date: '2024-10-11'
+  publisher: '徳間書店'
+  edition_type: standard
+  title_display: 'メルヘン課長とノンケ後輩くんSeason2（2）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(ryucomics⇔リュウ: 175sid/628isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻1巻の後/穴の間)。楽天= ミナモトカズキ/徳間書店/リュウコミックス/2024-10-11'
+- series_keys:
+  - 'qid:Q11280504|name:飯盛り侍'
+  qid: null
+  number: 3
+  isbn13: '9784575831566'
+  release_date: '2005-10'
+  publisher: '双葉社'
+  edition_type: standard
+  title_display: '飯盛り侍（3）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは正規化一致。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻2巻の後/穴の間)。楽天= やまだ浩一/井川公彦/双葉社/アクションコミックス/2005-10'
+- series_keys:
+  - 'qid:Q11280504|name:飯盛り侍'
+  qid: null
+  number: 4
+  isbn13: '9784575832150'
+  release_date: '2006-03'
+  publisher: '双葉社'
+  edition_type: standard
+  title_display: '飯盛り侍（4）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは正規化一致。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻2巻の後/穴の間)。楽天= やまだ浩一/井川公彦/双葉社/アクションコミックス/2006-03'
+- series_keys:
+  - 'qid:Q11280504|name:飯盛り侍'
+  qid: null
+  number: 5
+  isbn13: '9784575832631'
+  release_date: '2006-07'
+  publisher: '双葉社'
+  edition_type: standard
+  title_display: '飯盛り侍（5）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは正規化一致。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻2巻の後/穴の間)。楽天= やまだ浩一/井川公彦/双葉社/アクションコミックス/2006-07'
+- series_keys:
+  - 'qid:Q11280504|name:飯盛り侍'
+  qid: null
+  number: 6
+  isbn13: '9784575833188'
+  release_date: '2007-01'
+  publisher: '双葉社'
+  edition_type: standard
+  title_display: '飯盛り侍（6）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは正規化一致。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻2巻の後/穴の間)。楽天= やまだ浩一/井川公彦/双葉社/アクションコミックス/2007-01'
+- series_keys:
+  - 'qid:Q11472796|name:メタル・バック'
+  qid: null
+  number: 3
+  isbn13: '9784056015140'
+  release_date: '1997-01-11'
+  publisher: 'Gakken'
+  edition_type: deluxe
+  title_display: 'メタル・バック（3）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(ノーラコミックスdeluxe⇔nora: 24sid/40isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻2巻の後/穴の間)。楽天= 岡崎つぐお/Gakken/NORAコミックス/1997-01-11'
+- series_keys:
+  - 'name:秋ヨシカ|name:みどりの台所'
+  - 'name:秋ヨシカ|name:みどりの台所.'
+  qid: null
+  number: 4
+  isbn13: '9784832204393'
+  release_date: '2024-10-01'
+  publisher: '芳文社'
+  edition_type: standard
+  title_display: 'みどりの台所　4'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(fuzcomics⇔芳文社コミックスfuz: 94sid/228isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻3巻の後/穴の間)。楽天= 秋ヨシカ/芳文社/芳文社コミックス　FUZコミックス/2024-10-01'
+- series_keys:
+  - 'name:桑沢あつお|name:緑山高校'
+  - 'name:桑沢篤夫|name:緑山高校'
+  - 'name:桑澤篤夫|name:緑山高校'
+  qid: null
+  number: 20
+  isbn13: '9784088614601'
+  release_date: '1988-09-19'
+  publisher: '集英社'
+  edition_type: standard
+  title_display: '緑山高校（20）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(youngjumpcomics⇔ヤングジャンプ: 17sid/75isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻19巻の後/穴の間)。楽天= 桑沢篤夫/集英社/ヤングジャンプコミックス/1988-09-19'
+- series_keys:
+  - 'qid:Q11573868|name:ミルククラウン・プリンセス'
+  qid: null
+  number: 5
+  isbn13: '9784860561727'
+  release_date: '2005-12-05'
+  publisher: '平和出版'
+  edition_type: standard
+  title_display: 'ミルキ-・ハニ- ミルククラウン・プリンセス５'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(ハートフル⇔ハトフル: 8sid/11isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻4巻の後/穴の間)。楽天= 瑞垣みずほ/平和出版/ハ-トフルコミックス/2005-12-05'
+- series_keys:
+  - 'qid:Q9008430|name:ミリオンガール'
+  qid: null
+  number: 3
+  isbn13: '9784063642780'
+  release_date: '2010-09'
+  publisher: '講談社'
+  edition_type: standard
+  title_display: 'ミリオンガール（3）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(講談社コミックスなかよし⇔なかよしkc: 489sid/963isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻2巻の後/穴の間)。楽天= 桃雪琴梨/講談社/なかよしKC/2010-09'
+- series_keys:
+  - 'name:トヨ|name:悶えてよ、アダムくん'
+  - 'name:トヨ|name:悶えてよ、アダムくん.'
+  qid: null
+  number: 8
+  isbn13: '9784434378713'
+  release_date: '2026-08-18'
+  publisher: '彗星社'
+  edition_type: standard
+  title_display: '悶えてよ、アダムくん8'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(夜暇⇔ナイトマ: 26sid/60isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻7巻の後/穴の間)。楽天= トヨ/彗星社/ナイトマ/2026-08-18'
+- series_keys:
+  - 'name:グミマル|name:MOGAKU'
+  qid: null
+  number: 10
+  isbn13: '9784253017947'
+  release_date: '2026-07-08'
+  publisher: '秋田書店'
+  edition_type: standard
+  title_display: 'MOGAKU　10'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(shōnenchampioncomics⇔少年チャンピオン: 393sid/1986isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻9巻の後/穴の間)。楽天= グミマル/秋田書店/少年チャンピオン・コミックス/2026-07-08'
+- series_keys:
+  - 'qid:Q11278381|name:もっと極上生徒会'
+  qid: null
+  number: 2
+  isbn13: '9784840233705'
+  release_date: '2006-02-27'
+  publisher: 'KADOKAWA'
+  edition_type: standard
+  title_display: 'もっと極上生徒会（2）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(dengekicomics⇔電撃: 195sid/472isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻1巻の後/穴の間)。楽天= まったくモー助/コナミ株式会社/KADOKAWA/電撃コミックス/2006-02-27'
+- series_keys:
+  - 'name:おくまろ|name:マウスカーソルで現実を操作できるようになったので、女の子をいっぱいクリックしまーす'
+  qid: null
+  number: 4
+  isbn13: '9784434380259'
+  release_date: '2026-09-18'
+  publisher: '彗星社'
+  edition_type: standard
+  title_display: 'マウスカーソルで現実を操作できるようになったので、女の子をいっぱいクリックしまーす4'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(夜暇⇔ナイトマ: 26sid/60isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻3巻の後/穴の間)。楽天= おくまろ/彗星社/ナイトマ/2026-09-18'
+- series_keys:
+  - 'qid:Q11607491|name:マブラヴアンリミテッド'
+  qid: null
+  number: 3
+  isbn13: '9784840237901'
+  release_date: '2007-02-27'
+  publisher: 'KADOKAWA'
+  edition_type: standard
+  title_display: 'マブラヴ　アンリミテッド（3）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(dengekicomics⇔電撃: 195sid/472isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻2巻の後/穴の間)。楽天= 緋呂河　とも/アージュ/KADOKAWA/電撃コミックス/2007-02-27'
+- series_keys:
+  - 'qid:Q11607491|name:マブラヴアンリミテッド'
+  qid: null
+  number: 4
+  isbn13: '9784840238328'
+  release_date: '2007-03-27'
+  publisher: 'KADOKAWA'
+  edition_type: standard
+  title_display: 'マブラヴ　アンリミテッド（4）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(dengekicomics⇔電撃: 195sid/472isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻2巻の後/穴の間)。楽天= 緋呂河　とも/アージュ/KADOKAWA/電撃コミックス/2007-03-27'
+- series_keys:
+  - 'qid:Q11611778|name:なにわ女子大生倶楽部'
+  qid: null
+  number: 3
+  isbn13: '9784812452479'
+  release_date: '1998-12-07'
+  publisher: '竹書房'
+  edition_type: standard
+  title_display: 'なにわ女子大生倶楽部（3）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(bamboocomics⇔バンブー: 1053sid/2501isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻2巻の後/穴の間)。楽天= 胡桃ちの/竹書房/バンブーコミックス/1998-12-07'
+- series_keys:
+  - 'qid:Q11611778|name:なにわOL奮戦記'
+  qid: null
+  number: 5
+  isbn13: '9784812459478'
+  release_date: '2004-04'
+  publisher: '竹書房'
+  edition_type: standard
+  title_display: 'なにわOL奮戦記（5）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(bamboocomics⇔バンブー: 1053sid/2501isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻4巻の後/穴の間)。楽天= 胡桃ちの/竹書房/バンブーコミックス/2004-04'
+- series_keys:
+  - 'qid:Q47583146|name:ナオミだもん'
+  qid: null
+  number: 15
+  isbn13: '9784832261730'
+  release_date: '2000-06-02'
+  publisher: '芳文社'
+  edition_type: standard
+  title_display: 'ナオミだもん（15）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは自頁の既存巻の楽天seriesNameと一致。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻16巻の後/穴の間)。楽天= こだま学/芳文社/マンガタイムコミックス/2000-06-02'
+- series_keys:
+  - 'name:ナヲコ|name:なずなのねいろ'
+  qid: null
+  number: 3
+  isbn13: '9784199502309'
+  release_date: '2011-02'
+  publisher: '徳間書店'
+  edition_type: standard
+  title_display: 'なずなのねいろ（3）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(ryucomics⇔リュウ: 175sid/628isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻2巻の後/穴の間)。楽天= ナヲコ/徳間書店/リュウコミックス/2011-02'
+- series_keys:
+  - 'qid:Q11268613|name:猫の手貸します!'
+  qid: null
+  number: 3
+  isbn13: '9784812455555'
+  release_date: '2001-09'
+  publisher: '竹書房'
+  edition_type: standard
+  title_display: '猫の手貸します！（3）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは自頁の既存巻の楽天seriesNameと一致。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻2巻の後/穴の間)。楽天= さんりようこ/竹書房/バンブーコミックス/2001-09'
+- series_keys:
+  - 'qid:Q11268613|name:猫の手貸します!'
+  qid: null
+  number: 4
+  isbn13: '9784812458839'
+  release_date: '2003-11'
+  publisher: '竹書房'
+  edition_type: standard
+  title_display: '猫の手貸します！（4）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは自頁の既存巻の楽天seriesNameと一致。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻2巻の後/穴の間)。楽天= さんりようこ/竹書房/バンブーコミックス/2003-11'
+- series_keys:
+  - 'qid:Q11268613|name:猫の手貸します!'
+  qid: null
+  number: 5
+  isbn13: '9784812460207'
+  release_date: '2004-09'
+  publisher: '竹書房'
+  edition_type: standard
+  title_display: '猫の手貸します！（5）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは自頁の既存巻の楽天seriesNameと一致。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻2巻の後/穴の間)。楽天= さんりようこ/竹書房/バンブーコミックス/2004-09'
+- series_keys:
+  - 'qid:Q11268613|name:猫の手貸します!'
+  qid: null
+  number: 6
+  isbn13: '9784812460306'
+  release_date: '2004-10'
+  publisher: '竹書房'
+  edition_type: standard
+  title_display: '猫の手貸します！（6）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは自頁の既存巻の楽天seriesNameと一致。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻2巻の後/穴の間)。楽天= さんりようこ/竹書房/バンブーコミックス/2004-10'
+- series_keys:
+  - 'qid:Q9127303|name:ねこまた印の染物屋さん'
+  qid: null
+  number: 2
+  isbn13: '9784801990432'
+  release_date: '2026-08-17'
+  publisher: '竹書房'
+  edition_type: standard
+  title_display: 'ねこまた印の染物屋さん（2）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(bamboocomics⇔バンブー: 1053sid/2501isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻1巻の後/穴の間)。楽天= 宇仁田ゆみ/竹書房/バンブーコミックス/2026-08-17'
+- series_keys:
+  - 'qid:Q11491151|name:虹子ララバイ'
+  qid: null
+  number: 10
+  isbn13: '9784796286831'
+  release_date: '1994-02-16'
+  publisher: 'スコラ'
+  edition_type: standard
+  title_display: '虹子ララバイ（10）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(スコラレディース⇔スコラレディス: 50sid/70isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻9巻の後/穴の間)。楽天= 志賀公江/スコラ/スコラ・レディス・コミックス/1994-02-16'
+- series_keys:
+  - 'qid:Q11491151|name:虹子ララバイ'
+  qid: null
+  number: 11
+  isbn13: '9784796286978'
+  release_date: '1994-09-16'
+  publisher: 'スコラ'
+  edition_type: standard
+  title_display: '虹子ララバイ（11）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(スコラレディース⇔スコラレディス: 50sid/70isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻9巻の後/穴の間)。楽天= 志賀公江/スコラ/スコラ・レディス・コミックス/1994-09-16'
+- series_keys:
+  - 'qid:Q11491151|name:虹子ララバイ'
+  qid: null
+  number: 12
+  isbn13: '9784796287012'
+  release_date: '1994-12-19'
+  publisher: 'スコラ'
+  edition_type: standard
+  title_display: '虹子ララバイ（12）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(スコラレディース⇔スコラレディス: 50sid/70isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻9巻の後/穴の間)。楽天= 志賀公江/スコラ/スコラ・レディス・コミックス/1994-12-19'
+- series_keys:
+  - 'qid:Q11458108|name:人間倶楽部'
+  qid: null
+  number: 15
+  isbn13: '9784872872132'
+  release_date: '1998-01-09'
+  publisher: '宙出版'
+  edition_type: standard
+  title_display: '人間倶楽部（15）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは自頁の既存巻の楽天seriesNameと一致。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻14巻の後/穴の間)。楽天= 寺館和子/宙出版/エメラルドコミックス/1998-01-09'
+- series_keys:
+  - 'qid:Q8140707|name:忍闘炎伝'
+  qid: null
+  number: 2
+  isbn13: '9784056019261'
+  release_date: '1998-06-26'
+  publisher: 'Gakken'
+  edition_type: standard
+  title_display: '忍闘炎伝（2）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(ノーラ⇔nora: 79sid/174isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻1巻の後/穴の間)。楽天= 長谷川裕一（漫画家）/Gakken/NORAコミックス/1998-06-26'
+- series_keys:
+  - 'qid:Q8140707|name:忍闘炎伝'
+  qid: null
+  number: 3
+  isbn13: '9784056019612'
+  release_date: '1998-09-07'
+  publisher: 'Gakken'
+  edition_type: standard
+  title_display: '忍闘炎伝（3）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(ノーラ⇔nora: 79sid/174isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻1巻の後/穴の間)。楽天= 長谷川裕一（漫画家）/Gakken/NORAコミックス/1998-09-07'
+- series_keys:
+  - 'name:歪牙龍尾|name:呪われ公爵と捨てられた花嫁の最愛婚'
+  qid: null
+  number: 2
+  isbn13: '9784910617756'
+  release_date: '2026-06-17'
+  publisher: 'ファンギルド'
+  edition_type: standard
+  title_display: '呪われ公爵と捨てられた花嫁の最愛婚2'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(spiracomics⇔comicスピラ: 8sid/13isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻1巻の後/穴の間)。楽天= 汀よしの/歪牙龍尾/ファンギルド/comic スピラ/2026-06-17'
+- series_keys:
+  - 'qid:Q11427600|name:オバタリアン'
+  qid: null
+  number: 13
+  isbn13: '9784812451908'
+  release_date: '1998-03-27'
+  publisher: '竹書房'
+  edition_type: standard
+  title_display: 'オバタリアン（13）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(bamboocomics⇔バンブー: 1053sid/2501isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻12巻の後/穴の間)。楽天= 堀田かつひこ/竹書房/バンブーコミックス/1998-03-27'
+- series_keys:
+  - 'qid:Q11410412|name:おちこぼれフルーツタルト'
+  qid: null
+  number: 9
+  isbn13: '9784832297432'
+  release_date: '2026-08-27'
+  publisher: '芳文社'
+  edition_type: standard
+  title_display: 'おちこぼれフルーツタルト　9'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(kiraramenu⇔まんがタイムkr: 472sid/1159isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻8巻の後/穴の間)。楽天= 浜弓場 双/芳文社/まんがタイムKRコミックス/2026-08-27'
+- series_keys:
+  - 'qid:Q6410148|name:おいしい水'
+  qid: null
+  number: 5
+  isbn13: '9784821196517'
+  release_date: '1998-02-13'
+  publisher: 'ぶんか社'
+  edition_type: standard
+  title_display: 'おいしい水（5）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(bunkacomics⇔ぶんか社: 10sid/19isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻4巻の後/穴の間)。楽天= 柳沢きみお/ぶんか社/ぶんか社コミックス/1998-02-13'
+- series_keys:
+  - 'qid:Q6410148|name:おいしい水'
+  qid: null
+  number: 6
+  isbn13: '9784821196852'
+  release_date: '1998-07-15'
+  publisher: 'ぶんか社'
+  edition_type: standard
+  title_display: 'おいしい水（6）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(bunkacomics⇔ぶんか社: 10sid/19isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻4巻の後/穴の間)。楽天= 柳沢きみお/ぶんか社/ぶんか社コミックス/1998-07-15'
+- series_keys:
+  - 'qid:Q6410148|name:おいしい水'
+  qid: null
+  number: 7
+  isbn13: '9784821196968'
+  release_date: '1998-09-18'
+  publisher: 'ぶんか社'
+  edition_type: standard
+  title_display: 'おいしい水（7）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(bunkacomics⇔ぶんか社: 10sid/19isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻4巻の後/穴の間)。楽天= 柳沢きみお/ぶんか社/ぶんか社コミックス/1998-09-18'
+- series_keys:
+  - 'qid:Q6410148|name:おいしい水'
+  qid: null
+  number: 8
+  isbn13: '9784821197330'
+  release_date: '1999-03-03'
+  publisher: 'ぶんか社'
+  edition_type: standard
+  title_display: 'おいしい水（8）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(bunkacomics⇔ぶんか社: 10sid/19isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻4巻の後/穴の間)。楽天= 柳沢きみお/ぶんか社/ぶんか社コミックス/1999-03-03'
+- series_keys:
+  - 'qid:Q11480848|name:お気に召すまま'
+  qid: null
+  number: 4
+  isbn13: '9784063175813'
+  release_date: '1992-11-13'
+  publisher: '講談社'
+  edition_type: standard
+  title_display: 'お気に召すまま（4）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(講談社コミックスビーラブ⇔belovekc: 164sid/681isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻2巻の後/穴の間)。楽天= 布浦翼/講談社/BE　LOVE　KC/1992-11-13'
+- series_keys:
+  - 'qid:Q11480848|name:お気に召すまま'
+  qid: null
+  number: 5
+  isbn13: '9784063175899'
+  release_date: '1993-01-13'
+  publisher: '講談社'
+  edition_type: standard
+  title_display: 'お気に召すまま（5）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(講談社コミックスビーラブ⇔belovekc: 164sid/681isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻2巻の後/穴の間)。楽天= 布浦翼/講談社/BE　LOVE　KC/1993-01-13'
+- series_keys:
+  - 'qid:Q11480848|name:お気に召すまま'
+  qid: null
+  number: 6
+  isbn13: '9784063175967'
+  release_date: '1993-03-13'
+  publisher: '講談社'
+  edition_type: standard
+  title_display: 'お気に召すまま（6）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(講談社コミックスビーラブ⇔belovekc: 164sid/681isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻2巻の後/穴の間)。楽天= 布浦翼/講談社/BE　LOVE　KC/1993-03-13'
+- series_keys:
+  - 'qid:Q11473385|name:OL狂騒曲'
+  qid: null
+  number: 2
+  isbn13: '9784575937800'
+  release_date: '2002-05'
+  publisher: '双葉社'
+  edition_type: standard
+  title_display: 'OL狂騒曲（2）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(actioncomics⇔アクション: 837sid/2014isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻1巻の後/穴の間)。楽天= 岡田がる/双葉社/アクションコミックス/2002-05'
+- series_keys:
+  - 'qid:Q11473385|name:OL狂騒曲'
+  qid: null
+  number: 3
+  isbn13: '9784575938890'
+  release_date: '2004-04'
+  publisher: '双葉社'
+  edition_type: standard
+  title_display: 'OL狂騒曲（3）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(actioncomics⇔アクション: 837sid/2014isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻1巻の後/穴の間)。楽天= 岡田がる/双葉社/アクションコミックス/2004-04'
+- series_keys:
+  - 'qid:Q11473385|name:OL狂騒曲'
+  qid: null
+  number: 4
+  isbn13: '9784575939910'
+  release_date: '2006-01'
+  publisher: '双葉社'
+  edition_type: standard
+  title_display: 'OL狂騒曲（4）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(actioncomics⇔アクション: 837sid/2014isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻1巻の後/穴の間)。楽天= 岡田がる/双葉社/アクションコミックス/2006-01'
+- series_keys:
+  - 'name:夢枕獏|name:陰陽師 瀧夜叉姫'
+  qid: null
+  number: 7
+  isbn13: '9784199504853'
+  release_date: '2016-01-13'
+  publisher: '徳間書店'
+  edition_type: standard
+  title_display: '陰陽師瀧夜叉姫（7）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(ryucomics⇔リュウ: 175sid/628isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻6巻の後/穴の間)。楽天= 睦月ムンク/夢枕獏/徳間書店/リュウコミックス/2016-01-13'
+- series_keys:
+  - 'name:夢枕獏|name:陰陽師 瀧夜叉姫'
+  qid: null
+  number: 8
+  isbn13: '9784199504860'
+  release_date: '2016-01-13'
+  publisher: '徳間書店'
+  edition_type: standard
+  title_display: '陰陽師瀧夜叉姫（8）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(ryucomics⇔リュウ: 175sid/628isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻6巻の後/穴の間)。楽天= 睦月ムンク/夢枕獏/徳間書店/リュウコミックス/2016-01-13'
+- series_keys:
+  - 'name:二目|name:狼くんの愛はちょっと不機嫌'
+  qid: null
+  number: 3
+  isbn13: '9784801990593'
+  release_date: '2026-08-28'
+  publisher: '竹書房'
+  edition_type: standard
+  title_display: '狼くんの愛はちょっと不機嫌3-アイドル編ー'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(bamboocomics⇔バンブーコミックスmoment: 86sid/108isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻2巻の後/穴の間)。楽天= 二目/竹書房/バンブーコミックス moment/2026-08-28'
+- series_keys:
+  - 'name:中村夏寿紀|name:オレだけはマトモくん'
+  qid: null
+  number: 5
+  isbn13: '9784091497963'
+  release_date: '2024-11-28'
+  publisher: '小学館'
+  edition_type: standard
+  title_display: 'オレだけはマトモくん（5）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(コロコロ⇔てんとう虫コミックス少年: 28sid/60isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻4巻の後/穴の間)。楽天= 中村 夏寿紀/小学館/てんとう虫コミックス（少年）/2024-11-28'
+- series_keys:
+  - 'qid:Q5973592|name:オリエント'
+  qid: null
+  number: 22
+  isbn13: '9784065374177'
+  release_date: '2024-11-08'
+  publisher: '講談社'
+  edition_type: standard
+  title_display: 'オリエント（22）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(shonenmagazinecomics⇔講談社: 229sid/1449isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻21巻の後/穴の間)。楽天= 大高 忍/講談社/講談社コミックス/2024-11-08'
+- series_keys:
+  - 'name:睦月pub.|name:おサボり上手な小向井さんは俺を逃さない!!'
+  - 'name:睦月|name:おサボり上手な小向井さんは俺を逃さない!!'
+  qid: null
+  number: 4
+  isbn13: '9784801989696'
+  release_date: '2026-09-16'
+  publisher: '竹書房'
+  edition_type: standard
+  title_display: 'おサボり上手な小向井さんは俺を逃さない!!（4）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(bamboocomics⇔バンブー: 1053sid/2501isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻3巻の後/穴の間)。楽天= 睦月/竹書房/バンブーコミックス/2026-09-16'
+- series_keys:
+  - 'qid:Q109287462|name:おさかなマーチ'
+  qid: null
+  number: 3
+  isbn13: '9784056015157'
+  release_date: '1997-02-07'
+  publisher: 'Gakken'
+  edition_type: standard
+  title_display: 'おさかなマーチ（3）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(ノーラ⇔nora: 79sid/174isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻2巻の後/穴の間)。楽天= 都築和彦/Gakken/NORAコミックス/1997-02-07'
+- series_keys:
+  - 'qid:Q11461282|name:おサルでワン!'
+  qid: null
+  number: 2
+  isbn13: '9784821198221'
+  release_date: '2000-05-11'
+  publisher: 'ぶんか社'
+  edition_type: standard
+  title_display: 'おサルでワン！（2）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(bunkashacomics⇔ぶんか社: 449sid/923isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻1巻の後/穴の間)。楽天= 小林じんこ/ぶんか社/ぶんか社コミックス/2000-05-11'
+- series_keys:
+  - 'qid:Q11275642|name:おそとごはんをご一緒に'
+  - 'qid:Q11275642|name:おそとごはんをご一緒に.'
+  qid: null
+  number: 3
+  isbn13: '9784758027984'
+  release_date: '2024-11-18'
+  publisher: '一迅社'
+  edition_type: standard
+  title_display: 'おそとごはんをご一緒に(3)'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(id⇔百合姫: 94sid/251isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻2巻の後/穴の間)。楽天= はづき/一迅社/百合姫コミックス/2024-11-18'
+- series_keys:
+  - 'name:名波誠|name:パチスロひとり旅'
+  qid: null
+  number: 16
+  isbn13: '9784865352924'
+  release_date: '2015-09'
+  publisher: 'ガイドワークス'
+  edition_type: standard
+  title_display: 'パチスロひとり旅（16）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは自頁の既存巻の楽天seriesNameと一致。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻15巻の後/穴の間)。楽天= 奥田渓竜/名波誠/ガイドワークス/GWコミックス/2015-09'
+- series_keys:
+  - 'qid:Q11626418|name:白龍'
+  qid: null
+  number: 1
+  isbn13: '9784056016574'
+  release_date: '1997-06-06'
+  publisher: 'Gakken'
+  edition_type: standard
+  title_display: '白龍（1）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(ノーラ⇔nora: 79sid/174isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻3巻の後/穴の間)。楽天= 衣谷遊/和田慎二/Gakken/NORAコミックス/1997-06-06'
+- series_keys:
+  - 'qid:Q11470805|name:パパはなんだかわからない'
+  qid: null
+  number: 2
+  isbn13: '9784812455371'
+  release_date: '2001-07'
+  publisher: '竹書房'
+  edition_type: standard
+  title_display: 'パパはなんだかわからない（2）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(bamboocomics⇔バンブー: 1053sid/2501isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻1巻の後/穴の間)。楽天= 山科けいすけ/竹書房/バンブーコミックス/2001-07'
+- series_keys:
+  - 'name:麻乃真純|name:パートナー'
+  qid: null
+  number: 7
+  isbn13: '9784091690470'
+  release_date: '2001-08-23'
+  publisher: '小学館'
+  edition_type: standard
+  title_display: 'パートナー 7 進め！ソラ'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(judycomics⇔ジュディー: 144sid/327isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻6巻の後/穴の間)。楽天= 麻乃 真純/小学館/ジュディー コミックス/2001-08-23'
+- series_keys:
+  - 'name:森谷幸子|name:ピンクのうさぎ'
+  qid: null
+  number: 7
+  isbn13: '9784061755062'
+  release_date: '1990-01-08'
+  publisher: '講談社'
+  edition_type: standard
+  title_display: 'ピンクのうさぎ（7）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(blkc⇔belovekc: 39sid/57isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻6巻の後/穴の間)。楽天= 森谷幸子/講談社/BE　LOVE　KC/1990-01-08'
+- series_keys:
+  - 'name:森谷幸子|name:ピンクのうさぎ'
+  qid: null
+  number: 8
+  isbn13: '9784061755079'
+  release_date: '1990-02-06'
+  publisher: '講談社'
+  edition_type: standard
+  title_display: 'ピンクのうさぎ（8）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(blkc⇔belovekc: 39sid/57isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻6巻の後/穴の間)。楽天= 森谷幸子/講談社/BE　LOVE　KC/1990-02-06'
+- series_keys:
+  - 'name:森谷幸子|name:ピンクのうさぎ'
+  qid: null
+  number: 9
+  isbn13: '9784061755086'
+  release_date: '1990-03-06'
+  publisher: '講談社'
+  edition_type: standard
+  title_display: 'ピンクのうさぎ（9）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(blkc⇔belovekc: 39sid/57isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻6巻の後/穴の間)。楽天= 森谷幸子/講談社/BE　LOVE　KC/1990-03-06'
+- series_keys:
+  - 'name:森谷幸子|name:ピンクのうさぎ'
+  qid: null
+  number: 10
+  isbn13: '9784061755093'
+  release_date: '1990-04-06'
+  publisher: '講談社'
+  edition_type: standard
+  title_display: 'ピンクのうさぎ（10）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(blkc⇔belovekc: 39sid/57isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻6巻の後/穴の間)。楽天= 森谷幸子/講談社/BE　LOVE　KC/1990-04-06'
+- series_keys:
+  - 'qid:Q11575167|name:ポッキーくん'
+  qid: null
+  number: 13
+  isbn13: '9784884756987'
+  release_date: '1994-02'
+  publisher: '竹書房'
+  edition_type: standard
+  title_display: 'ポッキーくん　13'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(bamboocomics⇔バンブー: 1053sid/2501isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻12巻の後/穴の間)。楽天= 田中　しょう/竹書房/バンブー・コミックス/1994-02'
+- series_keys:
+  - 'name:海原ゆた|name:ポンコツ王太子のモブ姉王女らしいけど、悪役令嬢が可哀想なので助けようと思います～王女ルートがない!?なら作ればいいのよ!～@COMIC'
+  - 'name:諏訪ぺこ|name:ポンコツ王太子のモブ姉王女らしいけど、悪役令嬢が可哀想なので助けようと思います|sub:王女ルートがない!?なら作ればいいのよ! : @comic'
+  - 'name:諏訪ぺこ|name:ポンコツ王太子のモブ姉王女らしいけど、悪役令嬢が可哀想なので助けようと思います～王女ルートがない!?なら作ればいいのよ!～@COMIC'
+  qid: null
+  number: 5
+  isbn13: '9784867949856'
+  release_date: '2026-05-01'
+  publisher: 'TOブックス'
+  edition_type: standard
+  title_display: 'ポンコツ王太子のモブ姉王女らしいけど、悪役令嬢が可哀想なので助けようと思います?王女ルートがない！？なら作ればいいのよ！?＠COMIC 第5巻'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(コロナ⇔celica: 3sid/3isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻4巻の後/穴の間)。楽天= 海原ゆた/TOブックス/Celicaコミックス/2026-05-01'
+- series_keys:
+  - 'name:高橋由太|name:雷獣びりびり'
+  qid: null
+  number: 6
+  isbn13: '9784199504686'
+  release_date: '2015-08-12'
+  publisher: '徳間書店'
+  edition_type: standard
+  title_display: '雷獣びりびり　6'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(ryucomics⇔リュウ: 175sid/628isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻5巻の後/穴の間)。楽天= 高橋由太/亜沙美/徳間書店/リュウコミックス/2015-08-12'
+- series_keys:
+  - 'name:神堂潤|name:rights'
+  qid: null
+  number: 3
+  isbn13: '9784065372203'
+  release_date: '2024-11-15'
+  publisher: '講談社'
+  edition_type: standard
+  title_display: 'rights（3）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(月刊少年マガジン⇔kcデラックス: 68sid/208isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻2巻の後/穴の間)。楽天= 神堂 潤/講談社/KCデラックス/2024-11-15'
+- series_keys:
+  - 'name:琴子|name:離婚予定の契約婚なのに、冷酷公爵様に執着されています'
+  qid: null
+  number: 5
+  isbn13: '9784821112029'
+  release_date: '2026-07-16'
+  publisher: 'ぶんか社'
+  edition_type: standard
+  title_display: '離婚予定の契約婚なのに、冷酷公爵様に執着されています（5）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(bunkashacomics⇔ぶんか社コミックスprimocomics: 13sid/25isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻4巻の後/穴の間)。楽天= 紡木すあ/琴子/ぶんか社/ぶんか社コミックス　PRIMO　COMICS/2026-07-16'
+- series_keys:
+  - 'qid:Q11384990|name:理想のおとなりさん'
+  qid: null
+  number: 2
+  isbn13: '9784821159505'
+  release_date: '2024-11-25'
+  publisher: 'ぶんか社'
+  edition_type: standard
+  title_display: '理想のおとなりさん（2）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(bunkashacomics⇔ぶんか社: 449sid/923isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻1巻の後/穴の間)。楽天= 佐野妙/ぶんか社/ぶんか社コミックス/2024-11-25'
+- series_keys:
+  - 'qid:Q9036516|name:龍の砦'
+  qid: null
+  number: 2
+  isbn13: '9784056019841'
+  release_date: '1998-10-26'
+  publisher: 'Gakken'
+  edition_type: standard
+  title_display: '龍の砦（2）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(ノーラ⇔nora: 79sid/174isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻1巻の後/穴の間)。楽天= 柴田昌弘/Gakken/NORAコミックス/1998-10-26'
+- series_keys:
+  - 'name:暁|name:催淫毒～シスターとヴァンパイア～'
+  qid: null
+  number: 3
+  isbn13: '9784592156239'
+  release_date: '2024-10-04'
+  publisher: '白泉社'
+  edition_type: standard
+  title_display: '催淫毒〜シスターとヴァンパイア〜 3'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(hlcsilkypresents⇔白泉社レディース: 25sid/74isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻2巻の後/穴の間)。楽天= 暁/白泉社/白泉社レディース・コミックス/2024-10-04'
+- series_keys:
+  - 'name:アオエナ|name:最弱職が前世の知識で世界最強'
+  - 'name:相野仁|name:最弱職が前世の知識で世界最強|sub:俺だけレベル限界がないので無限に強くなる無双ライフ'
+  - 'name:相野仁|name:最弱職が前世の知識で世界最強|sub:俺だけレベル限界がないので無限に強くなる無双ライフ.'
+  qid: null
+  number: 5
+  isbn13: '9784408642444'
+  release_date: '2026-08-20'
+  publisher: '実業之日本社'
+  edition_type: standard
+  title_display: '最弱職が前世の知識で世界最強（5） 〜俺だけレベル限界がないので無限に強くなる無双ライフ〜'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(jardincomics⇔ジャルダン: 34sid/78isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻4巻の後/穴の間)。楽天= 相野　仁/アオエナ/実業之日本社/ジャルダンコミックス/2026-08-20'
+- series_keys:
+  - 'qid:Q11462894|name:斉藤さん'
+  qid: null
+  number: 14
+  isbn13: '9784420152273'
+  release_date: '2011-03-18'
+  publisher: '集英社クリエイティブ'
+  edition_type: standard
+  title_display: '斉藤さん（14）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(officeyoucomics⇔オフィスユー: 153sid/442isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻13巻の後/穴の間)。楽天= 小田ゆうあ/集英社クリエイティブ/オフィスユーコミックス/2011-03-18'
+- series_keys:
+  - 'qid:Q24899966|name:さくらよろしく'
+  qid: null
+  number: 2
+  isbn13: '9784088751122'
+  release_date: '1992-04-17'
+  publisher: '集英社'
+  edition_type: standard
+  title_display: 'さくらよろしく（2）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは自頁の既存巻の楽天seriesNameと一致。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻1巻の後/穴の間)。楽天= 八潮路つとむ/集英社/ヤングジャンプコミックス/1992-04-17'
+- series_keys:
+  - 'qid:Q24899966|name:さくらよろしく'
+  qid: null
+  number: 3
+  isbn13: '9784088751139'
+  release_date: '1992-05-19'
+  publisher: '集英社'
+  edition_type: standard
+  title_display: 'さくらよろしく（3）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは自頁の既存巻の楽天seriesNameと一致。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻1巻の後/穴の間)。楽天= 八潮路つとむ/集英社/ヤングジャンプコミックス/1992-05-19'
+- series_keys:
+  - 'qid:Q11669300|name:サクセス辰平'
+  qid: null
+  number: 6
+  isbn13: '9784575817072'
+  release_date: '1991-03-12'
+  publisher: '双葉社'
+  edition_type: standard
+  title_display: 'サクセス辰平（6）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(actioncomics⇔アクション: 837sid/2014isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻5巻の後/穴の間)。楽天= 石井さだよし/鏡丈二/双葉社/アクションコミックス/1991-03-12'
+- series_keys:
+  - 'qid:Q11669300|name:サクセス辰平'
+  qid: null
+  number: 7
+  isbn13: '9784575817379'
+  release_date: '1991-08-08'
+  publisher: '双葉社'
+  edition_type: standard
+  title_display: 'サクセス辰平（7）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(actioncomics⇔アクション: 837sid/2014isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻5巻の後/穴の間)。楽天= 石井さだよし/鏡丈二/双葉社/アクションコミックス/1991-08-08'
+- series_keys:
+  - 'qid:Q11644873|name:真田魂'
+  qid: null
+  number: 5
+  isbn13: '9784592162506'
+  release_date: '2025-04-28'
+  publisher: '白泉社'
+  edition_type: standard
+  title_display: '真田魂 5'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(jetscomics⇔ヤングアニマル: 5sid/11isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻4巻の後/穴の間)。楽天= 重野 なおき/白泉社/ヤングアニマルコミックス/2025-04-28'
+- series_keys:
+  - 'qid:Q9036516|name:サライ'
+  qid: null
+  number: 4
+  isbn13: '9784785919641'
+  release_date: '1999-12-18'
+  publisher: '少年画報社'
+  edition_type: standard
+  title_display: 'サライ（4）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(yk⇔ヤングキング: 351sid/1095isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻3巻の後/穴の間)。楽天= 柴田昌弘/少年画報社/ヤングキングコミックス/1999-12-18'
+- series_keys:
+  - 'qid:Q9036516|name:サライ'
+  qid: null
+  number: 5
+  isbn13: '9784785919955'
+  release_date: '2000-05-24'
+  publisher: '少年画報社'
+  edition_type: standard
+  title_display: 'サライ（5）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(yk⇔ヤングキング: 351sid/1095isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻3巻の後/穴の間)。楽天= 柴田昌弘/少年画報社/ヤングキングコミックス/2000-05-24'
+- series_keys:
+  - 'qid:Q9036516|name:サライ'
+  qid: null
+  number: 6
+  isbn13: '9784785920647'
+  release_date: '2001-03-03'
+  publisher: '少年画報社'
+  edition_type: standard
+  title_display: 'サライ（6）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(yk⇔ヤングキング: 351sid/1095isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻3巻の後/穴の間)。楽天= 柴田昌弘/少年画報社/ヤングキングコミックス/2001-03-03'
+- series_keys:
+  - 'qid:Q9036516|name:サライ'
+  qid: null
+  number: 7
+  isbn13: '9784785921125'
+  release_date: '2001-08'
+  publisher: '少年画報社'
+  edition_type: standard
+  title_display: 'サライ（7）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(yk⇔ヤングキング: 351sid/1095isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻3巻の後/穴の間)。楽天= 柴田昌弘/少年画報社/ヤングキングコミックス/2001-08'
+- series_keys:
+  - 'qid:Q9036516|name:サライ'
+  qid: null
+  number: 8
+  isbn13: '9784785921736'
+  release_date: '2002-03'
+  publisher: '少年画報社'
+  edition_type: standard
+  title_display: 'サライ（8）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(yk⇔ヤングキング: 351sid/1095isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻3巻の後/穴の間)。楽天= 柴田昌弘/少年画報社/ヤングキングコミックス/2002-03'
+- series_keys:
+  - 'qid:Q9036516|name:サライ'
+  qid: null
+  number: 9
+  isbn13: '9784785922320'
+  release_date: '2002-09'
+  publisher: '少年画報社'
+  edition_type: standard
+  title_display: 'サライ（9）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(yk⇔ヤングキング: 351sid/1095isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻3巻の後/穴の間)。楽天= 柴田昌弘/少年画報社/ヤングキングコミックス/2002-09'
+- series_keys:
+  - 'qid:Q9036516|name:サライ'
+  qid: null
+  number: 10
+  isbn13: '9784785922788'
+  release_date: '2003-02'
+  publisher: '少年画報社'
+  edition_type: standard
+  title_display: 'サライ（10）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(yk⇔ヤングキング: 351sid/1095isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻3巻の後/穴の間)。楽天= 柴田昌弘/少年画報社/ヤングキングコミックス/2003-02'
+- series_keys:
+  - 'qid:Q9036516|name:サライ'
+  qid: null
+  number: 11
+  isbn13: '9784785923785'
+  release_date: '2003-11'
+  publisher: '少年画報社'
+  edition_type: standard
+  title_display: 'サライ（11）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(yk⇔ヤングキング: 351sid/1095isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻3巻の後/穴の間)。楽天= 柴田昌弘/少年画報社/ヤングキングコミックス/2003-11'
+- series_keys:
+  - 'qid:Q9036516|name:サライ'
+  qid: null
+  number: 12
+  isbn13: '9784785924324'
+  release_date: '2004-06'
+  publisher: '少年画報社'
+  edition_type: standard
+  title_display: 'サライ（12）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(yk⇔ヤングキング: 351sid/1095isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻3巻の後/穴の間)。楽天= 柴田昌弘/少年画報社/ヤングキングコミックス/2004-06'
+- series_keys:
+  - 'qid:Q9036516|name:サライ'
+  qid: null
+  number: 13
+  isbn13: '9784785925048'
+  release_date: '2005-01'
+  publisher: '少年画報社'
+  edition_type: standard
+  title_display: 'サライ（13）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(yk⇔ヤングキング: 351sid/1095isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻3巻の後/穴の間)。楽天= 柴田昌弘/少年画報社/ヤングキングコミックス/2005-01'
+- series_keys:
+  - 'qid:Q9036516|name:サライ'
+  qid: null
+  number: 14
+  isbn13: '9784785925505'
+  release_date: '2005-06'
+  publisher: '少年画報社'
+  edition_type: standard
+  title_display: 'サライ（14）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(yk⇔ヤングキング: 351sid/1095isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻3巻の後/穴の間)。楽天= 柴田昌弘/少年画報社/ヤングキングコミックス/2005-06'
+- series_keys:
+  - 'qid:Q9036516|name:サライ'
+  qid: null
+  number: 15
+  isbn13: '9784785925918'
+  release_date: '2005-12'
+  publisher: '少年画報社'
+  edition_type: standard
+  title_display: 'サライ（15）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(yk⇔ヤングキング: 351sid/1095isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻3巻の後/穴の間)。楽天= 柴田昌弘/少年画報社/ヤングキングコミックス/2005-12'
+- series_keys:
+  - 'qid:Q9036516|name:サライ'
+  qid: null
+  number: 16
+  isbn13: '9784785926717'
+  release_date: '2006-08'
+  publisher: '少年画報社'
+  edition_type: standard
+  title_display: 'サライ（16）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(yk⇔ヤングキング: 351sid/1095isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻3巻の後/穴の間)。楽天= 柴田昌弘/少年画報社/ヤングキングコミックス/2006-08'
+- series_keys:
+  - 'qid:Q9036516|name:サライ'
+  qid: null
+  number: 17
+  isbn13: '9784785927622'
+  release_date: '2007-04'
+  publisher: '少年画報社'
+  edition_type: standard
+  title_display: 'サライ（17）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(yk⇔ヤングキング: 351sid/1095isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻3巻の後/穴の間)。楽天= 柴田昌弘/少年画報社/ヤングキングコミックス/2007-04'
+- series_keys:
+  - 'qid:Q9036516|name:サライ'
+  qid: null
+  number: 18
+  isbn13: '9784785929060'
+  release_date: '2008-01'
+  publisher: '少年画報社'
+  edition_type: standard
+  title_display: 'サライ（18）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(yk⇔ヤングキング: 351sid/1095isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻3巻の後/穴の間)。楽天= 柴田昌弘/少年画報社/ヤングキングコミックス/2008-01'
+- series_keys:
+  - 'qid:Q9036516|name:サライ'
+  qid: null
+  number: 19
+  isbn13: '9784785929541'
+  release_date: '2008-05'
+  publisher: '少年画報社'
+  edition_type: standard
+  title_display: 'サライ（19）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(yk⇔ヤングキング: 351sid/1095isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻3巻の後/穴の間)。楽天= 柴田昌弘/少年画報社/ヤングキングコミックス/2008-05'
+- series_keys:
+  - 'qid:Q11270850|name:聖なる者へ'
+  qid: null
+  number: 2
+  isbn13: '9784575821581'
+  release_date: '1996-06-12'
+  publisher: '双葉社'
+  edition_type: standard
+  title_display: '聖なる者へ（2）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(actioncomics⇔アクション: 837sid/2014isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻1巻の後/穴の間)。楽天= たかもちげん/双葉社/アクションコミックス/1996-06-12'
+- series_keys:
+  - 'qid:Q11270850|name:聖なる者へ'
+  qid: null
+  number: 3
+  isbn13: '9784575821666'
+  release_date: '1996-07-11'
+  publisher: '双葉社'
+  edition_type: standard
+  title_display: '聖なる者へ（3）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(actioncomics⇔アクション: 837sid/2014isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻1巻の後/穴の間)。楽天= たかもちげん/双葉社/アクションコミックス/1996-07-11'
+- series_keys:
+  - 'name:笑平|name:青少年アシベ'
+  qid: null
+  number: 9
+  isbn13: '9784575860627'
+  release_date: '2025-02-27'
+  publisher: '双葉社'
+  edition_type: standard
+  title_display: '青少年アシベ（9）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(actioncomics⇔アクション: 837sid/2014isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻8巻の後/穴の間)。楽天= 笑平/森下裕美/双葉社/アクションコミックス/2025-02-27'
+- series_keys:
+  - 'qid:Q6380064|name:青春ビンタ!'
+  qid: null
+  number: 4
+  isbn13: '9784785923228'
+  release_date: '2003-06'
+  publisher: '少年画報社'
+  edition_type: standard
+  title_display: '青春ビンタ！（4）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(youngkingcomics⇔ヤングキング: 23sid/120isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻3巻の後/穴の間)。楽天= 私屋カヲル/少年画報社/ヤングキングコミックス/2003-06'
+- series_keys:
+  - 'qid:Q6380064|name:青春ビンタ!'
+  qid: null
+  number: 5
+  isbn13: '9784785924164'
+  release_date: '2004-04'
+  publisher: '少年画報社'
+  edition_type: standard
+  title_display: '青春ビンタ！（5）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(youngkingcomics⇔ヤングキング: 23sid/120isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻3巻の後/穴の間)。楽天= 私屋カヲル/少年画報社/ヤングキングコミックス/2004-04'
+- series_keys:
+  - 'qid:Q6380064|name:青春ビンタ!'
+  qid: null
+  number: 6
+  isbn13: '9784785924713'
+  release_date: '2004-09'
+  publisher: '少年画報社'
+  edition_type: standard
+  title_display: '青春ビンタ！（6）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(youngkingcomics⇔ヤングキング: 23sid/120isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻3巻の後/穴の間)。楽天= 私屋カヲル/少年画報社/ヤングキングコミックス/2004-09'
+- series_keys:
+  - 'qid:Q11575167|name:セッカチくん'
+  qid: null
+  number: 2
+  isbn13: '9784575933000'
+  release_date: '1992-06-12'
+  publisher: '双葉社'
+  edition_type: standard
+  title_display: 'セッカチくん（2）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(actioncomics⇔アクション: 837sid/2014isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻1巻の後/穴の間)。楽天= 田中しょう/双葉社/アクションコミックス/1992-06-12'
+- series_keys:
+  - 'qid:Q11463368|name:せんせいとわたし'
+  qid: null
+  number: 2
+  isbn13: '9784812457221'
+  release_date: '2002-10'
+  publisher: '竹書房'
+  edition_type: standard
+  title_display: 'せんせいとわたし（2）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(bamboocomics⇔バンブー: 1053sid/2501isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻1巻の後/穴の間)。楽天= 小笠原朋子/竹書房/バンブーコミックス/2002-10'
+- series_keys:
+  - 'name:渡辺敏|name:上海ラプソディー'
+  qid: null
+  number: 3
+  isbn13: '9784575829426'
+  release_date: '2004-02'
+  publisher: '双葉社'
+  edition_type: standard
+  title_display: '上海ラプソディー（3） 男の純情'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(actioncomics⇔アクション: 837sid/2014isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻2巻の後/穴の間)。楽天= 渡辺敏（漫画家）/大城一晃/双葉社/アクションコミックス/2004-02'
+- series_keys:
+  - 'name:ゆうき未来|name:シーバス1-2-3'
+  qid: null
+  number: 7
+  isbn13: '9784840214018'
+  release_date: '1999-12-16'
+  publisher: 'KADOKAWA'
+  edition_type: standard
+  title_display: 'シーバス1-2-3（7）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(dengekicomics⇔電撃: 195sid/472isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻6巻の後/穴の間)。楽天= あかほり　さとる/KADOKAWA/電撃コミックス/1999-12-16'
+- series_keys:
+  - 'name:三卜和貴|name:屍介護'
+  qid: null
+  number: 3
+  isbn13: '9784045002236'
+  release_date: '2026-08-20'
+  publisher: 'KADOKAWA'
+  edition_type: standard
+  title_display: '屍介護　3'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(aokishicomix⇔青騎士: 13sid/34isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻2巻の後/穴の間)。楽天= 三卜　和貴/三浦　晴海/香魚子/KADOKAWA/青騎士コミックス/2026-08-20'
+- series_keys:
+  - 'qid:Q8495163|name:新逆八犬伝アウトカラーズ'
+  qid: null
+  number: 2
+  isbn13: '9784785931520'
+  release_date: '2009-04'
+  publisher: '少年画報社'
+  edition_type: standard
+  title_display: '新逆八犬伝アウトカラーズ（2）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(yk⇔ヤングキング: 351sid/1095isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻1巻の後/穴の間)。楽天= 石田敦子/少年画報社/ヤングキングコミックス/2009-04'
+- series_keys:
+  - 'qid:Q8495163|name:新逆八犬伝アウトカラーズ'
+  qid: null
+  number: 3
+  isbn13: '9784785932367'
+  release_date: '2009-10'
+  publisher: '少年画報社'
+  edition_type: standard
+  title_display: '新逆八犬伝アウトカラーズ（3）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(yk⇔ヤングキング: 351sid/1095isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻1巻の後/穴の間)。楽天= 石田敦子/少年画報社/ヤングキングコミックス/2009-10'
+- series_keys:
+  - 'qid:Q11577369|name:新 華夜叉'
+  qid: null
+  number: 4
+  isbn13: '9784253097246'
+  release_date: '2007-05'
+  publisher: '秋田書店'
+  edition_type: standard
+  title_display: '新華夜叉（4） 安倍晴明異聞'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(bonitacomics⇔ボニータ: 268sid/712isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻3巻の後/穴の間)。楽天= 田辺真由美/秋田書店/ボニータコミックス/2007-05'
+- series_keys:
+  - 'qid:Q11519792|name:新・蒼太の包丁'
+  - 'qid:Q11520276|name:新・蒼太の包丁'
+  qid: null
+  number: 8
+  isbn13: '9784821112005'
+  release_date: '2026-07-16'
+  publisher: 'ぶんか社'
+  edition_type: standard
+  title_display: '新・蒼太の包丁（8）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(bunkashacomics⇔ぶんか社: 449sid/923isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻7巻の後/穴の間)。楽天= 本庄敬/桜小路むつみ/末田雄一郎/ぶんか社/ぶんか社コミックス/2026-07-16'
+- series_keys:
+  - 'name:山崎光佑|name:新・匠のふんどし'
+  - 'name:山崎大紀|name:新・匠のふんどし'
+  qid: null
+  number: 10
+  isbn13: '9784575829525'
+  release_date: '2004-03'
+  publisher: '双葉社'
+  edition_type: standard
+  title_display: '新・匠のふんどし（10）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(actioncomicspizazz⇔アクションコミックスアクションピザッツ: 3sid/7isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻9巻の後/穴の間)。楽天= 山崎大紀/双葉社/アクションコミックス　アクションピザッツ/2004-03'
+- series_keys:
+  - 'name:高遠静|name:新選組疾風伝'
+  qid: null
+  number: 6
+  isbn13: '9784537103908'
+  release_date: '2005-03'
+  publisher: '日本文芸社'
+  edition_type: standard
+  title_display: '新選組疾風伝（6） 群狼の星'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(nichibuncomics⇔ニチブン: 736sid/2874isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻5巻の後/穴の間)。楽天= 高遠静/池辺かつみ/日本文芸社/ニチブンコミックス/2005-03'
+- series_keys:
+  - 'name:橘あゆん|name:疾風可憐迅雷狐娘!'
+  qid: null
+  number: 3
+  isbn13: '9784758050586'
+  release_date: '2004-01'
+  publisher: '一迅社'
+  edition_type: standard
+  title_display: '疾風可憐迅雷狐娘！（3）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(zerosumcomics⇔idコミックスzerosum: 21sid/37isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻2巻の後/穴の間)。楽天= 橘あゆん/一迅社/IDコミックス　ZERO-SUMコミックス/2004-01'
+- series_keys:
+  - 'name:橘あゆん|name:疾風可憐迅雷狐娘!'
+  qid: null
+  number: 4
+  isbn13: '9784758050876'
+  release_date: '2004-07'
+  publisher: '一迅社'
+  edition_type: standard
+  title_display: '疾風可憐迅雷狐娘！（4）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(zerosumcomics⇔idコミックスzerosum: 21sid/37isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻2巻の後/穴の間)。楽天= 橘あゆん/一迅社/IDコミックス　ZERO-SUMコミックス/2004-07'
+- series_keys:
+  - 'name:橘あゆん|name:疾風可憐迅雷狐娘!'
+  qid: null
+  number: 5
+  isbn13: '9784758051347'
+  release_date: '2005-03'
+  publisher: '一迅社'
+  edition_type: standard
+  title_display: '疾風可憐迅雷狐娘！（5）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(zerosumcomics⇔idコミックスzerosum: 21sid/37isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻2巻の後/穴の間)。楽天= 橘あゆん/一迅社/IDコミックス　ZERO-SUMコミックス/2005-03'
+- series_keys:
+  - 'name:石田衣良|name:娼年'
+  qid: null
+  number: 3
+  isbn13: '9784420151320'
+  release_date: '2007-09'
+  publisher: '集英社クリエイティブ'
+  edition_type: standard
+  title_display: '娼年（3）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(officeyoucomics⇔オフィスユー: 153sid/442isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻2巻の後/穴の間)。楽天= 幸田育子/石田衣良/集英社クリエイティブ/オフィスユーコミックス/2007-09'
+- series_keys:
+  - 'qid:Q11270830|name:主任がゆく!'
+  qid: null
+  number: 30
+  isbn13: '9784821159499'
+  release_date: '2024-11-25'
+  publisher: 'ぶんか社'
+  edition_type: standard
+  title_display: '主任がゆく！（30）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(bunkashacomics⇔ぶんか社: 449sid/923isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻29巻の後/穴の間)。楽天= たかの宗美/ぶんか社/ぶんか社コミックス/2024-11-25'
+- series_keys:
+  - 'qid:Q11473603|name:出動!!ミニスカポリス'
+  qid: null
+  number: 4
+  isbn13: '9784821197415'
+  release_date: '1999-04-20'
+  publisher: 'ぶんか社'
+  edition_type: standard
+  title_display: '出動！ミニスカポリス（4）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(bunkacomics⇔ぶんか社: 10sid/19isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻3巻の後/穴の間)。楽天= 岡田正尚/ぶんか社/ぶんか社コミックス/1999-04-20'
+- series_keys:
+  - 'qid:Q11473603|name:出動!!ミニスカポリス'
+  qid: null
+  number: 5
+  isbn13: '9784821197835'
+  release_date: '1999-11-20'
+  publisher: 'ぶんか社'
+  edition_type: standard
+  title_display: '出動！ミニスカポリス（5）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(bunkacomics⇔ぶんか社: 10sid/19isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻3巻の後/穴の間)。楽天= 岡田正尚/ぶんか社/ぶんか社コミックス/1999-11-20'
+- series_keys:
+  - 'qid:Q11473603|name:出動!!ミニスカポリス'
+  qid: null
+  number: 6
+  isbn13: '9784821198337'
+  release_date: '2000-07-21'
+  publisher: 'ぶんか社'
+  edition_type: standard
+  title_display: '出動！ミニスカポリス（6）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(bunkacomics⇔ぶんか社: 10sid/19isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻3巻の後/穴の間)。楽天= 岡田正尚/ぶんか社/ぶんか社コミックス/2000-07-21'
+- series_keys:
+  - 'qid:Q9318872|name:そら'
+  qid: null
+  number: 2
+  isbn13: '9784832278110'
+  release_date: '2009-05'
+  publisher: '芳文社'
+  edition_type: standard
+  title_display: 'そら（2）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは自頁の既存巻の楽天seriesNameと一致。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻1巻の後/穴の間)。楽天= 白雪しおん/芳文社/Ｍａｎｇａ　ｔｉｍｅ　ＫＲ　ｃｏｍｉｃｓ　Ｋｉｒａｒａ　ｍｅ/2009-05'
+- series_keys:
+  - 'qid:Q11275808|name:外へ出ようヨ!'
+  qid: null
+  number: 4
+  isbn13: '9784575934939'
+  release_date: '1997-04-14'
+  publisher: '双葉社'
+  edition_type: standard
+  title_display: '外へ出ようヨ！（4）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(actioncomics⇔アクション: 837sid/2014isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻3巻の後/穴の間)。楽天= はやせ淳/双葉社/アクションコミックス/1997-04-14'
+- series_keys:
+  - 'qid:Q11275808|name:外へ出ようヨ!'
+  qid: null
+  number: 5
+  isbn13: '9784575935059'
+  release_date: '1997-06-11'
+  publisher: '双葉社'
+  edition_type: standard
+  title_display: '外へ出ようヨ！（5）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(actioncomics⇔アクション: 837sid/2014isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻3巻の後/穴の間)。楽天= はやせ淳/双葉社/アクションコミックス/1997-06-11'
+- series_keys:
+  - 'qid:Q11275808|name:外へ出ようヨ!'
+  qid: null
+  number: 6
+  isbn13: '9784575935301'
+  release_date: '1997-10-28'
+  publisher: '双葉社'
+  edition_type: standard
+  title_display: '外へ出ようヨ！（6）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(actioncomics⇔アクション: 837sid/2014isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻3巻の後/穴の間)。楽天= はやせ淳/双葉社/アクションコミックス/1997-10-28'
+- series_keys:
+  - 'name:有村しのぶ|name:SPRITE'
+  - 'name:望月照子|name:私はカジノガール'
+  qid: null
+  number: 10
+  isbn13: '9784785918286'
+  release_date: '1998-03-09'
+  publisher: '少年画報社'
+  edition_type: standard
+  title_display: 'Sprite（10）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(yk⇔ヤングキング: 351sid/1095isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻9巻の後/穴の間)。楽天= 有村しのぶ/少年画報社/ヤングキングコミックス/1998-03-09'
+- series_keys:
+  - 'qid:Q48762179|name:サクセス'
+  qid: null
+  number: 3
+  isbn13: '9784592154839'
+  release_date: '1990-10-05'
+  publisher: '白泉社'
+  edition_type: standard
+  title_display: 'サクセス（3）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(hakusenshaladyscomics⇔白泉社レディース: 73sid/104isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻2巻の後/穴の間)。楽天= まさき輝/白泉社/白泉社レディースコミックス/1990-10-05'
+- series_keys:
+  - 'qid:Q17215561|name:杉雪カコと見たい明日'
+  qid: null
+  number: 4
+  isbn13: '9784253018777'
+  release_date: '2026-08-06'
+  publisher: '秋田書店'
+  edition_type: standard
+  title_display: '杉雪カコと見たい明日　4'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(shōnenchampioncomics⇔少年チャンピオン: 393sid/1986isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻3巻の後/穴の間)。楽天= ノッツ/秋田書店/少年チャンピオン・コミックス/2026-08-06'
+- series_keys:
+  - 'qid:Q11354044|name:すこあら!'
+  qid: null
+  number: 2
+  isbn13: '9784758080781'
+  release_date: '2010-04'
+  publisher: '一迅社'
+  edition_type: standard
+  title_display: 'すこあら！（2）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(4コマkingsぱれっとcomics⇔idコミックス4コマkingsぱれっと: 90sid/201isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻1巻の後/穴の間)。楽天= 三ツ雪柚菜/一迅社/IDコミックス　4コマKINGSぱれっとコミックス/2010-04'
+- series_keys:
+  - 'qid:Q11431904|name:すみれ先生は料理したくない'
+  qid: null
+  number: 3
+  isbn13: '9784821159161'
+  release_date: '2024-09-13'
+  publisher: 'ぶんか社'
+  edition_type: standard
+  title_display: 'すみれ先生は料理したくない（3）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(bunkashacomics⇔ぶんか社: 449sid/923isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻2巻の後/穴の間)。楽天= 大久保ヒロミ/ぶんか社/ぶんか社コミックス/2024-09-13'
+- series_keys:
+  - 'qid:Q11431904|name:すみれ先生は料理したくない'
+  qid: null
+  number: 4
+  isbn13: '9784821159178'
+  release_date: '2024-09-13'
+  publisher: 'ぶんか社'
+  edition_type: standard
+  title_display: 'すみれ先生は料理したくない（4）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(bunkashacomics⇔ぶんか社: 449sid/923isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻2巻の後/穴の間)。楽天= 大久保ヒロミ/ぶんか社/ぶんか社コミックス/2024-09-13'
+- series_keys:
+  - 'qid:Q11520170|name:スーパーマリオランド3 ワリオランド'
+  qid: null
+  number: 3
+  isbn13: '9784063195897'
+  release_date: '1995-05-06'
+  publisher: '講談社'
+  edition_type: deluxe
+  title_display: 'スーパーマリオランド3　ワリオランド（3）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(講談社コミックスボンボンデラックス⇔kcデラックス: 5sid/9isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻2巻の後/穴の間)。楽天= 本山一城/講談社/KCデラックス/1995-05-06'
+- series_keys:
+  - 'qid:Q17220412|name:SWIFT!'
+  qid: null
+  number: 3
+  isbn13: '9784199504761'
+  release_date: '2015-10-13'
+  publisher: '徳間書店'
+  edition_type: standard
+  title_display: 'SWIFT！　3'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(ryucomics⇔リュウ: 175sid/628isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻2巻の後/穴の間)。楽天= 松田未来/徳間書店/リュウコミックス/2015-10-13'
+- series_keys:
+  - 'qid:Q106478538|name:高嶺のハナさん'
+  qid: null
+  number: 13
+  isbn13: '9784537173390'
+  release_date: '2025-12-18'
+  publisher: '日本文芸社'
+  edition_type: standard
+  title_display: '高嶺のハナさん （13）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(nichibuncomics⇔ニチブン: 736sid/2874isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻12巻の後/穴の間)。楽天= ムラタ コウジ/日本文芸社/ニチブンコミックス/2025-12-18'
+- series_keys:
+  - 'qid:Q106478538|name:高嶺のハナさん'
+  qid: null
+  number: 14
+  isbn13: '9784537174106'
+  release_date: '2026-07-17'
+  publisher: '日本文芸社'
+  edition_type: standard
+  title_display: '高嶺のハナさん （14）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(nichibuncomics⇔ニチブン: 736sid/2874isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻12巻の後/穴の間)。楽天= ムラタ コウジ/日本文芸社/ニチブンコミックス/2026-07-17'
+- series_keys:
+  - 'qid:Q11614539|name:鷹月助教授の淫靡な日々'
+  qid: null
+  number: 5
+  isbn13: '9784575826906'
+  release_date: '2002-05'
+  publisher: '双葉社'
+  edition_type: standard
+  title_display: '鷹月助教授の淫靡な日々（5）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(actioncomics⇔アクション: 837sid/2014isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻4巻の後/穴の間)。楽天= 艶々/双葉社/アクションコミックス/2002-05'
+- series_keys:
+  - 'qid:Q11614539|name:鷹月助教授の淫靡な日々'
+  qid: null
+  number: 6
+  isbn13: '9784575827286'
+  release_date: '2002-08'
+  publisher: '双葉社'
+  edition_type: standard
+  title_display: '鷹月助教授の淫靡な日々（6）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(actioncomics⇔アクション: 837sid/2014isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻4巻の後/穴の間)。楽天= 艶々/双葉社/アクションコミックス/2002-08'
+- series_keys:
+  - 'qid:Q958412|name:タケちゃんとパパ'
+  qid: null
+  number: 3
+  isbn13: '9784796288415'
+  release_date: '1997-12-13'
+  publisher: 'スコラ'
+  edition_type: standard
+  title_display: 'タケちゃんとパパ（3）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(スコラレディース⇔スコラレディス: 50sid/70isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻2巻の後/穴の間)。楽天= 江川達也/スコラ/スコラ・レディス・コミックス/1997-12-13'
+- series_keys:
+  - 'qid:Q11632959|name:谷村ひとしのパチンコオカルト爆勝塾'
+  qid: null
+  number: 3
+  isbn13: '9784812456804'
+  release_date: '2002-07-11'
+  publisher: '竹書房'
+  edition_type: standard
+  title_display: '谷村ひとしのパチンコオカルト爆勝塾（3）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(bamboocomics⇔バンブ: 5sid/7isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻2巻の後/穴の間)。楽天= 谷村ひとし/竹書房/バンブ-コミックス/2002-07-11'
+- series_keys:
+  - 'qid:Q11632959|name:谷村ひとしと勝つ!!'
+  qid: null
+  number: 2
+  isbn13: '9784537097825'
+  release_date: '1998-04-18'
+  publisher: '日本文芸社'
+  edition_type: standard
+  title_display: '谷村ひとしと勝つ！！（2） オカルト教祖のパチンコ必勝宣言'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(nichibuncomics⇔ニチブン: 736sid/2874isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻1巻の後/穴の間)。楽天= 谷村ひとし/日本文芸社/ニチブンコミックス/1998-04-18'
+- series_keys:
+  - 'qid:Q11632959|name:谷村ひとしと勝つ!!'
+  qid: null
+  number: 3
+  isbn13: '9784537098396'
+  release_date: '1999-05-18'
+  publisher: '日本文芸社'
+  edition_type: standard
+  title_display: '谷村ひとしと勝つ！！（3） オカルト教祖のパチンコ必勝宣言'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(nichibuncomics⇔ニチブン: 736sid/2874isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻1巻の後/穴の間)。楽天= 谷村ひとし/日本文芸社/ニチブンコミックス/1999-05-18'
+- series_keys:
+  - 'qid:Q11632959|name:谷村ひとしと勝つ!!'
+  qid: null
+  number: 4
+  isbn13: '9784537099263'
+  release_date: '2000-06-19'
+  publisher: '日本文芸社'
+  edition_type: standard
+  title_display: '谷村ひとしと勝つ！！（4） オカルト教祖のパチンコ必勝宣言'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(nichibuncomics⇔ニチブン: 736sid/2874isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻1巻の後/穴の間)。楽天= 谷村ひとし/日本文芸社/ニチブンコミックス/2000-06-19'
+- series_keys:
+  - 'name:峰岸とおる|name:探偵 力豪'
+  qid: null
+  number: 3
+  isbn13: '9784253068901'
+  release_date: '1986-10-24'
+  publisher: '秋田書店'
+  edition_type: standard
+  title_display: '探偵力豪（3）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(playcomicseries⇔プレイコミックシリーズ: 46sid/106isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻2巻の後/穴の間)。楽天= 峰岸とおる/秋田書店/プレイコミックシリーズ/1986-10-24'
+- series_keys:
+  - 'name:西野つぐみ|name:戦うメイドさん!'
+  qid: null
+  number: 4
+  isbn13: '9784821198252'
+  release_date: '2000-05-22'
+  publisher: 'ぶんか社'
+  edition_type: standard
+  title_display: '戦うメイドさん！（4）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(bunkashacomics⇔ぶんか社: 449sid/923isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻3巻の後/穴の間)。楽天= 西野つぐみ/ぶんか社/ぶんか社コミックス/2000-05-22'
+- series_keys:
+  - 'name:西野つぐみ|name:戦うメイドさん!'
+  qid: null
+  number: 5
+  isbn13: '9784821198788'
+  release_date: '2001-04-21'
+  publisher: 'ぶんか社'
+  edition_type: standard
+  title_display: '戦うメイドさん！（5）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(bunkashacomics⇔ぶんか社: 449sid/923isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻3巻の後/穴の間)。楽天= 西野つぐみ/ぶんか社/ぶんか社コミックス/2001-04-21'
+- series_keys:
+  - 'name:西野つぐみ|name:戦うメイドさん!'
+  qid: null
+  number: 6
+  isbn13: '9784821199327'
+  release_date: '2002-03'
+  publisher: 'ぶんか社'
+  edition_type: standard
+  title_display: '戦うメイドさん！（6）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(bunkashacomics⇔ぶんか社: 449sid/923isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻3巻の後/穴の間)。楽天= 西野つぐみ/ぶんか社/ぶんか社コミックス/2002-03'
+- series_keys:
+  - 'qid:Q11614539|name:たとえば母が'
+  qid: null
+  number: 6
+  isbn13: '9784575834710'
+  release_date: '2008-03'
+  publisher: '双葉社'
+  edition_type: standard
+  title_display: 'たとえば母が（6）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(actioncomics⇔アクション: 837sid/2014isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻4巻の後/穴の間)。楽天= 艶々/双葉社/アクションコミックス/2008-03'
+- series_keys:
+  - 'name:Gainax|name:天元突破グレンラガン'
+  qid: null
+  number: 6
+  isbn13: '9784048689953'
+  release_date: '2010-11-27'
+  publisher: 'KADOKAWA'
+  edition_type: standard
+  title_display: '天元突破グレンラガン（6）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(dengekicomics⇔電撃: 195sid/472isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻5巻の後/穴の間)。楽天= 森　小太郎/GAINAX/中島　かずき/KADOKAWA/電撃コミックス/2010-11-27'
+- series_keys:
+  - 'name:Gainax|name:天元突破グレンラガン'
+  qid: null
+  number: 7
+  isbn13: '9784048706278'
+  release_date: '2011-06-27'
+  publisher: 'KADOKAWA'
+  edition_type: standard
+  title_display: '天元突破グレンラガン（7）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(dengekicomics⇔電撃: 195sid/472isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻5巻の後/穴の間)。楽天= 森　小太郎/GAINAX/中島　かずき/KADOKAWA/電撃コミックス/2011-06-27'
+- series_keys:
+  - 'name:Gainax|name:天元突破グレンラガン'
+  qid: null
+  number: 8
+  isbn13: '9784048862844'
+  release_date: '2012-01-27'
+  publisher: 'KADOKAWA'
+  edition_type: standard
+  title_display: '天元突破グレンラガン（8）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(dengekicomics⇔電撃: 195sid/472isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻5巻の後/穴の間)。楽天= 森　小太郎/GAINAX/中島　かずき/KADOKAWA/電撃コミックス/2012-01-27'
+- series_keys:
+  - 'name:Gainax|name:天元突破グレンラガン'
+  qid: null
+  number: 9
+  isbn13: '9784048910248'
+  release_date: '2012-09-27'
+  publisher: 'KADOKAWA'
+  edition_type: standard
+  title_display: '天元突破グレンラガン（9）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(dengekicomics⇔電撃: 195sid/472isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻5巻の後/穴の間)。楽天= 森　小太郎/GAINAX/中島　かずき/KADOKAWA/電撃コミックス/2012-09-27'
+- series_keys:
+  - 'name:Gainax|name:天元突破グレンラガン'
+  qid: null
+  number: 10
+  isbn13: '9784048917711'
+  release_date: '2013-06-27'
+  publisher: 'KADOKAWA'
+  edition_type: standard
+  title_display: '天元突破グレンラガン（10）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(dengekicomics⇔電撃: 195sid/472isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻5巻の後/穴の間)。楽天= 森小太郎/GAINAX/KADOKAWA/電撃コミックス/2013-06-27'
+- series_keys:
+  - 'qid:Q302859|name:THE BAND'
+  qid: null
+  number: 1
+  isbn13: '9784065389461'
+  release_date: '2025-04-16'
+  publisher: '講談社'
+  edition_type: deluxe
+  title_display: 'THE　BAND（1）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(講談社コミックスデラックス月刊少年マガジン⇔kcデラックス: 46sid/195isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻5巻の後/穴の間)。楽天= ハロルド作石/講談社/KCデラックス/2025-04-16'
+- series_keys:
+  - 'qid:Q11410412|name:ToHeart2 AnotherDays'
+  qid: null
+  number: 2
+  isbn13: '9784048705271'
+  release_date: '2011-04-27'
+  publisher: 'KADOKAWA'
+  edition_type: standard
+  title_display: 'ToHeart2　AnotherDays（2）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(dengekicomics⇔電撃: 195sid/472isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻1巻の後/穴の間)。楽天= 双/Leaf/KADOKAWA/電撃コミックス/2011-04-27'
+- series_keys:
+  - 'qid:Q11539657|name:特攻!アルテミス'
+  qid: null
+  number: 20
+  isbn13: '9784785920203'
+  release_date: '2000-08-26'
+  publisher: '少年画報社'
+  edition_type: standard
+  title_display: '特攻アルテミス（20）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(youngkingcomics⇔ヤングキング: 23sid/120isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻19巻の後/穴の間)。楽天= 森左智/少年画報社/ヤングキングコミックス/2000-08-26'
+- series_keys:
+  - 'qid:Q11466610|name:トモダチゲーム'
+  - 'qid:Q11466610|name:トモダチゲーム.'
+  qid: null
+  number: 26
+  isbn13: '9784065370186'
+  release_date: '2024-10-08'
+  publisher: '講談社'
+  edition_type: standard
+  title_display: 'トモダチゲーム（26）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(shonenmagazinecomics⇔講談社: 229sid/1449isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻25巻の後/穴の間)。楽天= 佐藤 友生/山口 ミコト/講談社/講談社コミックス/2024-10-08'
+- series_keys:
+  - 'name:江渡ピリカ|name:ともだちづくり'
+  qid: null
+  number: 3
+  isbn13: '9784065418918'
+  release_date: '2026-08-07'
+  publisher: '講談社'
+  edition_type: standard
+  title_display: 'ともだちづくり（3）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(kcdx週刊少年マガジン⇔kcデラックス: 72sid/281isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻2巻の後/穴の間)。楽天= 江渡 ピリカ/講談社/KCデラックス/2026-08-07'
+- series_keys:
+  - 'qid:Q97031321|name:となりの信國さんは俺のことが好きな気がする'
+  qid: null
+  number: 7
+  isbn13: '9784592166474'
+  release_date: '2024-10-29'
+  publisher: '白泉社'
+  edition_type: standard
+  title_display: 'となりの信國さんは俺のことが好きな気がする 7'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(younganimalcomics⇔ヤングアニマル: 239sid/756isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻6巻の後/穴の間)。楽天= 安田 剛助/白泉社/ヤングアニマルコミックス/2024-10-29'
+- series_keys:
+  - 'name:美波はるこ|name:隣の男はよく食べる'
+  qid: null
+  number: 7
+  isbn13: '9784420154833'
+  release_date: '2025-02-25'
+  publisher: '集英社クリエイティブ'
+  edition_type: standard
+  title_display: '隣の男はよく食べる 7'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(officeyoucomics⇔オフィスユー: 153sid/442isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻6巻の後/穴の間)。楽天= 美波 はるこ/集英社クリエイティブ/オフィスユーコミックス/2025-02-25'
+- series_keys:
+  - 'qid:Q11546035|name:とっておきMaxion'
+  qid: null
+  number: 2
+  isbn13: '9784056017717'
+  release_date: '1997-11-07'
+  publisher: 'Gakken'
+  edition_type: standard
+  title_display: 'とっておきMAXION（2）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(ノーラ⇔nora: 79sid/174isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻1巻の後/穴の間)。楽天= 武林武士/Gakken/NORAコミックス/1997-11-07'
+- series_keys:
+  - 'qid:Q11546035|name:とっておきMaxion'
+  qid: null
+  number: 3
+  isbn13: '9784056019223'
+  release_date: '1998-05-14'
+  publisher: 'Gakken'
+  edition_type: standard
+  title_display: 'とっておきMAXION（3）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(ノーラ⇔nora: 79sid/174isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻1巻の後/穴の間)。楽天= 武林武士/Gakken/NORAコミックス/1998-05-14'
+- series_keys:
+  - 'qid:Q11546035|name:とっておきMaxion'
+  qid: null
+  number: 4
+  isbn13: '9784056019629'
+  release_date: '1998-08-26'
+  publisher: 'Gakken'
+  edition_type: standard
+  title_display: 'とっておきMAXION（4）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(ノーラ⇔nora: 79sid/174isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻1巻の後/穴の間)。楽天= 武林武士/Gakken/NORAコミックス/1998-08-26'
+- series_keys:
+  - 'name:ヒーター|name:追放された悪役令嬢と転生男爵のスローで不思議な結婚生活'
+  qid: null
+  number: 3
+  isbn13: '9784821159291'
+  release_date: '2024-10-18'
+  publisher: 'ぶんか社'
+  edition_type: standard
+  title_display: '追放された悪役令嬢と転生男爵のスローで不思議な結婚生活（3）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(bkcomicsf⇔bkコミックスf: 24sid/36isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻2巻の後/穴の間)。楽天= 郁橋むいこ/ヒーター/ぶんか社/BKコミックスf/2024-10-18'
+- series_keys:
+  - 'qid:Q360638|name:スーパー主婦 月美さん'
+  qid: null
+  number: 5
+  isbn13: '9784812454619'
+  release_date: '2000-12'
+  publisher: '竹書房'
+  edition_type: standard
+  title_display: 'スーパー主婦月美さん（5）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(bamboocomics⇔バンブー: 1053sid/2501isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻4巻の後/穴の間)。楽天= 臼井儀人/竹書房/バンブーコミックス/2000-12'
+- series_keys:
+  - 'qid:Q3778019|name:通勤脳内覚醒電車'
+  qid: null
+  number: 2
+  isbn13: '9784870311770'
+  release_date: '1994-06'
+  publisher: '飛鳥新社'
+  edition_type: standard
+  title_display: '通勤脳内覚醒電車（2）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは空。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻1巻の後/穴の間)。楽天= ジョージ秋山/飛鳥新社/デイリーアスカコミックス/1994-06'
+- series_keys:
+  - 'qid:Q11671440|name:トルコで私も考えた'
+  qid: null
+  number: 2
+  isbn13: '9784088644394'
+  release_date: '1999-06'
+  publisher: '集英社'
+  edition_type: standard
+  title_display: 'トルコで私も考えた（2）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは空。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻1巻の後/穴の間)。楽天= 高橋由佳利/集英社/YOUNG　YOUコミックスワイド版/1999-06'
+- series_keys:
+  - 'qid:Q11671440|name:トルコで私も考えた'
+  qid: null
+  number: 3
+  isbn13: '9784088645797'
+  release_date: '2002-08'
+  publisher: '集英社'
+  edition_type: standard
+  title_display: 'トルコで私も考えた（3）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは空。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻1巻の後/穴の間)。楽天= 高橋由佳利/集英社/YOUNG　YOUコミックスワイド版/2002-08'
+- series_keys:
+  - 'qid:Q11671440|name:トルコで私も考えた'
+  qid: null
+  number: 4
+  isbn13: '9784088646145'
+  release_date: '2005-04'
+  publisher: '集英社'
+  edition_type: standard
+  title_display: 'トルコで私も考えた（4）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは空。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻1巻の後/穴の間)。楽天= 高橋由佳利/集英社/ヤングユーコミックスワイド版/2005-04'
+- series_keys:
+  - 'qid:Q11611778|name:うちの子に日々大爆show'
+  qid: null
+  number: 2
+  isbn13: '9784812464694'
+  release_date: '2006-05'
+  publisher: '竹書房'
+  edition_type: standard
+  title_display: 'うちの子に日々大爆SHOW（2）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(bamboocomics⇔バンブー: 1053sid/2501isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻1巻の後/穴の間)。楽天= 胡桃ちの/竹書房/バンブーコミックス/2006-05'
+- series_keys:
+  - 'qid:Q11611778|name:うちの子に日々大爆show'
+  qid: null
+  number: 3
+  isbn13: '9784812468500'
+  release_date: '2008-07'
+  publisher: '竹書房'
+  edition_type: standard
+  title_display: 'うちの子に日々大爆SHOW（3）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(bamboocomics⇔バンブー: 1053sid/2501isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻1巻の後/穴の間)。楽天= 胡桃ちの/竹書房/バンブーコミックス/2008-07'
+- series_keys:
+  - 'qid:Q11347037|name:美味い話にゃ肴あり'
+  qid: null
+  number: 14
+  isbn13: '9784821159239'
+  release_date: '2024-10-17'
+  publisher: 'ぶんか社'
+  edition_type: standard
+  title_display: '美味い話にゃ肴あり（14）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(bunkashacomics⇔ぶんか社: 449sid/923isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻13巻の後/穴の間)。楽天= ラズウェル細木/ぶんか社/ぶんか社コミックス/2024-10-17'
+- series_keys:
+  - 'qid:Q11347037|name:美味い話にゃ肴あり'
+  qid: null
+  number: 15
+  isbn13: '9784821112081'
+  release_date: '2026-08-17'
+  publisher: 'ぶんか社'
+  edition_type: standard
+  title_display: '美味い話にゃ肴あり（15）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(bunkashacomics⇔ぶんか社: 449sid/923isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻13巻の後/穴の間)。楽天= ラズウェル細木/ぶんか社/ぶんか社コミックス/2026-08-17'
+- series_keys:
+  - 'qid:Q51574625|name:ウシミツガオ'
+  qid: null
+  number: 3
+  isbn13: '9784253018784'
+  release_date: '2026-08-06'
+  publisher: '秋田書店'
+  edition_type: standard
+  title_display: 'ウシミツガオ　3'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(shōnenchampioncomics⇔少年チャンピオン: 393sid/1986isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻2巻の後/穴の間)。楽天= 板垣巴留/秋田書店/少年チャンピオン・コミックス/2026-08-06'
+- series_keys:
+  - 'qid:Q21281412|name:嘘つき花嫁と同性結婚論'
+  qid: null
+  number: 2
+  isbn13: '9784758027618'
+  release_date: '2024-10-18'
+  publisher: '一迅社'
+  edition_type: standard
+  title_display: '嘘つき花嫁と同性結婚論(2)'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(id⇔百合姫: 94sid/251isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻1巻の後/穴の間)。楽天= コダマ ナオコ/一迅社/百合姫コミックス/2024-10-18'
+- series_keys:
+  - 'qid:Q11560718|name:う・た・ひ・め'
+  qid: null
+  number: 8
+  isbn13: '9784785914844'
+  release_date: '1995-09-22'
+  publisher: '少年画報社'
+  edition_type: standard
+  title_display: 'う・た・ひ・め（8）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(youngkingcomics⇔ヤングキング: 23sid/120isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻7巻の後/穴の間)。楽天= 清水としみつ/少年画報社/ヤングキングコミックス/1995-09-22'
+- series_keys:
+  - 'qid:Q11560718|name:う・た・ひ・め'
+  qid: null
+  number: 9
+  isbn13: '9784785915209'
+  release_date: '1996-04-24'
+  publisher: '少年画報社'
+  edition_type: standard
+  title_display: 'う・た・ひ・め（9）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(youngkingcomics⇔ヤングキング: 23sid/120isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻7巻の後/穴の間)。楽天= 清水としみつ/少年画報社/ヤングキングコミックス/1996-04-24'
+- series_keys:
+  - 'qid:Q11560718|name:う・た・ひ・め'
+  qid: null
+  number: 10
+  isbn13: '9784785915391'
+  release_date: '1996-10-09'
+  publisher: '少年画報社'
+  edition_type: standard
+  title_display: 'う・た・ひ・め（10）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(youngkingcomics⇔ヤングキング: 23sid/120isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻7巻の後/穴の間)。楽天= 清水としみつ/少年画報社/ヤングキングコミックス/1996-10-09'
+- series_keys:
+  - 'qid:Q11560718|name:う・た・ひ・め'
+  qid: null
+  number: 11
+  isbn13: '9784785915711'
+  release_date: '1997-05-23'
+  publisher: '少年画報社'
+  edition_type: standard
+  title_display: 'う・た・ひ・め（11）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(youngkingcomics⇔ヤングキング: 23sid/120isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻7巻の後/穴の間)。楽天= 清水としみつ/少年画報社/ヤングキングコミックス/1997-05-23'
+- series_keys:
+  - 'qid:Q11560718|name:う・た・ひ・め'
+  qid: null
+  number: 12
+  isbn13: '9784785915834'
+  release_date: '1997-07-09'
+  publisher: '少年画報社'
+  edition_type: standard
+  title_display: 'う・た・ひ・め（12）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(youngkingcomics⇔ヤングキング: 23sid/120isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻7巻の後/穴の間)。楽天= 清水としみつ/少年画報社/ヤングキングコミックス/1997-07-09'
+- series_keys:
+  - 'qid:Q11398480|name:うつろ舟|sub:Enfant ne colffe'
+  qid: null
+  number: 2
+  isbn13: '9784758051002'
+  release_date: '2004-09'
+  publisher: '一迅社'
+  edition_type: standard
+  title_display: 'うつろ舟（2）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(zerosumcomics⇔idコミックスzerosum: 21sid/37isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻1巻の後/穴の間)。楽天= 加倉井ミサイル/一迅社/IDコミックス　ZERO-SUMコミックス/2004-09'
+- series_keys:
+  - 'qid:Q11398480|name:うつろ舟|sub:Enfant ne colffe'
+  qid: null
+  number: 3
+  isbn13: '9784758051699'
+  release_date: '2005-08'
+  publisher: '一迅社'
+  edition_type: standard
+  title_display: 'うつろ舟（3）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(zerosumcomics⇔idコミックスzerosum: 21sid/37isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻1巻の後/穴の間)。楽天= 加倉井ミサイル/一迅社/IDコミックス　ZERO-SUMコミックス/2005-08'
+- series_keys:
+  - 'qid:Q11398480|name:うつろ舟|sub:Enfant ne colffe'
+  qid: null
+  number: 4
+  isbn13: '9784758051705'
+  release_date: '2005-08'
+  publisher: '一迅社'
+  edition_type: standard
+  title_display: 'うつろ舟（4）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(zerosumcomics⇔idコミックスzerosum: 21sid/37isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻1巻の後/穴の間)。楽天= 加倉井ミサイル/一迅社/IDコミックス　ZERO-SUMコミックス/2005-08'
+- series_keys:
+  - 'qid:Q4817832|name:Venus Versus Virus'
+  qid: null
+  number: 3
+  isbn13: '9784840236287'
+  release_date: '2006-10-27'
+  publisher: 'KADOKAWA'
+  edition_type: standard
+  title_display: 'Venus　Versus　Virus（3）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(dengekicomics⇔電撃: 195sid/472isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻2巻の後/穴の間)。楽天= 鈴見　敦/KADOKAWA/電撃コミックス/2006-10-27'
+- series_keys:
+  - 'qid:Q4817832|name:Venus Versus Virus'
+  qid: null
+  number: 4
+  isbn13: '9784840237444'
+  release_date: '2007-01-27'
+  publisher: 'KADOKAWA'
+  edition_type: standard
+  title_display: 'Venus　Versus　Virus（4）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(dengekicomics⇔電撃: 195sid/472isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻2巻の後/穴の間)。楽天= 鈴見　敦/KADOKAWA/電撃コミックス/2007-01-27'
+- series_keys:
+  - 'qid:Q4817832|name:Venus Versus Virus'
+  qid: null
+  number: 5
+  isbn13: '9784840238670'
+  release_date: '2007-04-27'
+  publisher: 'KADOKAWA'
+  edition_type: standard
+  title_display: 'Venus　Versus　Virus（5）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(dengekicomics⇔電撃: 195sid/472isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻2巻の後/穴の間)。楽天= 鈴見　敦/KADOKAWA/電撃コミックス/2007-04-27'
+- series_keys:
+  - 'qid:Q4817832|name:Venus Versus Virus'
+  qid: null
+  number: 6
+  isbn13: '9784840241335'
+  release_date: '2007-11-27'
+  publisher: 'KADOKAWA'
+  edition_type: standard
+  title_display: 'Venus　Versus　Virus（6）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(dengekicomics⇔電撃: 195sid/472isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻2巻の後/穴の間)。楽天= 鈴見　敦/KADOKAWA/電撃コミックス/2007-11-27'
+- series_keys:
+  - 'qid:Q4817832|name:Venus Versus Virus'
+  qid: null
+  number: 7
+  isbn13: '9784840242479'
+  release_date: '2008-03-27'
+  publisher: 'KADOKAWA'
+  edition_type: standard
+  title_display: 'Venus　Versus　Virus（7）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(dengekicomics⇔電撃: 195sid/472isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻2巻の後/穴の間)。楽天= 鈴見　敦/KADOKAWA/電撃コミックス/2008-03-27'
+- series_keys:
+  - 'qid:Q56348889|name:ヴラド・ドラクラ'
+  qid: null
+  number: 10
+  isbn13: '9784045001154'
+  release_date: '2026-07-15'
+  publisher: 'KADOKAWA'
+  edition_type: standard
+  title_display: 'ヴラド・ドラクラ　10'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(hartacomix⇔ハルタ: 150sid/385isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻9巻の後/穴の間)。楽天= 大窪　晶与/KADOKAWA/ハルタコミックス/2026-07-15'
+- series_keys:
+  - 'qid:Q11414061|name:若奥様はテスト中'
+  qid: null
+  number: 2
+  isbn13: '9784812456453'
+  release_date: '2002-04'
+  publisher: '竹書房'
+  edition_type: standard
+  title_display: '若奥様はテスト中（2）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(bamboocomics⇔バンブー: 1053sid/2501isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻1巻の後/穴の間)。楽天= 吉田美紀子/竹書房/バンブーコミックス/2002-04'
+- series_keys:
+  - 'qid:Q11517272|name:山田タコ丸くん'
+  qid: null
+  number: 3
+  isbn13: '9784575933109'
+  release_date: '1992-09-28'
+  publisher: '双葉社'
+  edition_type: standard
+  title_display: '山田タコ丸くん（3）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(actioncomics⇔アクション: 837sid/2014isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻2巻の後/穴の間)。楽天= 朝倉世界一/双葉社/アクションコミックス/1992-09-28'
+- series_keys:
+  - 'qid:Q11669817|name:山田と加瀬さん。'
+  qid: null
+  number: 5
+  isbn13: '9784403671944'
+  release_date: '2025-12-26'
+  publisher: '新書館'
+  edition_type: standard
+  title_display: '山田と加瀬さん。（5）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(hiraricomics⇔ひらり: 7sid/10isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻4巻の後/穴の間)。楽天= 高嶋ひろみ/新書館/ひらり、コミックス/2025-12-26'
+- series_keys:
+  - 'name:中川勝海|name:夜叉鬼想伝'
+  qid: null
+  number: 7
+  isbn13: '9784049249927'
+  release_date: '2005-03'
+  publisher: 'KADOKAWA'
+  edition_type: standard
+  title_display: '夜叉鬼想伝　7'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは自頁の既存巻の楽天seriesNameと一致。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻6巻の後/穴の間)。楽天= 中川　勝海/KADOKAWA/あすかコミックス/2005-03'
+- series_keys:
+  - 'name:中川勝海|name:夜叉鬼想伝'
+  qid: null
+  number: 8
+  isbn13: '9784049249934'
+  release_date: '2005-03'
+  publisher: 'KADOKAWA'
+  edition_type: standard
+  title_display: '夜叉鬼想伝　8'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは自頁の既存巻の楽天seriesNameと一致。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻6巻の後/穴の間)。楽天= 中川　勝海/KADOKAWA/あすかコミックス/2005-03'
+- series_keys:
+  - 'name:スイカ|name:よあそびぐらしっ!'
+  qid: null
+  number: 6
+  isbn13: '9784434380266'
+  release_date: '2026-09-18'
+  publisher: '彗星社'
+  edition_type: standard
+  title_display: 'よあそびぐらしっ!6'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(夜暇⇔ナイトマ: 26sid/60isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻5巻の後/穴の間)。楽天= スイカ/彗星社/ナイトマ/2026-09-18'
+- series_keys:
+  - 'qid:Q3776935|name:夜のメルヘン'
+  qid: null
+  number: 3
+  isbn13: '9784334803087'
+  release_date: '1996-01-29'
+  publisher: '光文社'
+  edition_type: standard
+  title_display: '夜のメルヘン（3）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(vc⇔kobunshacomic: 13sid/19isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻2巻の後/穴の間)。楽天= 里中満智子/光文社/KOBUNSHA　COMIC/1996-01-29'
+- series_keys:
+  - 'qid:Q11459393|name:よそじとふたごのメシ事情'
+  qid: null
+  number: 2
+  isbn13: '9784801984868'
+  release_date: '2024-11-25'
+  publisher: '竹書房'
+  edition_type: standard
+  title_display: 'よそじとふたごのメシ事情（2）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(bamboocomics⇔バンブー: 1053sid/2501isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻1巻の後/穴の間)。楽天= 小坂俊史/竹書房/バンブーコミックス/2024-11-25'
+- series_keys:
+  - 'qid:Q11459393|name:よそじとふたごのメシ事情'
+  qid: null
+  number: 3
+  isbn13: '9784801990449'
+  release_date: '2026-08-17'
+  publisher: '竹書房'
+  edition_type: standard
+  title_display: 'よそじとふたごのメシ事情（3）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(bamboocomics⇔バンブー: 1053sid/2501isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻1巻の後/穴の間)。楽天= 小坂俊史/竹書房/バンブーコミックス/2026-08-17'
+- series_keys:
+  - 'qid:Q10875796|name:妖怪仕置人'
+  qid: null
+  number: 17
+  isbn13: '9784785924737'
+  release_date: '2004-10'
+  publisher: '少年画報社'
+  edition_type: standard
+  title_display: '妖怪仕置人（17） エニグマ・パニッシャー'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(youngkingcomics⇔ヤングキング: 23sid/120isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻16巻の後/穴の間)。楽天= 中津賢也/少年画報社/ヤングキングコミックス/2004-10'
+- series_keys:
+  - 'qid:Q10875796|name:妖怪仕置人'
+  qid: null
+  number: 18
+  isbn13: '9784785925222'
+  release_date: '2005-03'
+  publisher: '少年画報社'
+  edition_type: standard
+  title_display: '妖怪仕置人（18）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(youngkingcomics⇔ヤングキング: 23sid/120isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻16巻の後/穴の間)。楽天= 中津賢也/少年画報社/ヤングキングコミックス/2005-03'
+- series_keys:
+  - 'qid:Q11480848|name:ゆるして・ダーリン'
+  qid: null
+  number: 3
+  isbn13: '9784063175196'
+  release_date: '1991-06-13'
+  publisher: '講談社'
+  edition_type: standard
+  title_display: 'ゆるしてダーリン（3）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(講談社コミックスビーラブ⇔belovekc: 164sid/681isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻2巻の後/穴の間)。楽天= 布浦翼/講談社/BE　LOVE　KC/1991-06-13'
+- series_keys:
+  - 'name:ミルクマン|name:U.M.A～未確認総合格闘技～'
+  qid: null
+  number: 5
+  isbn13: '9784253018012'
+  release_date: '2026-07-08'
+  publisher: '秋田書店'
+  edition_type: standard
+  title_display: 'U．M．A〜未確認総合格闘技〜　5'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは経験別名表(shōnenchampioncomics⇔少年チャンピオン: 393sid/1986isbn)。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻6巻の後/穴の間)。楽天= ミルクマン/秋田書店/少年チャンピオン・コミックス/2026-07-08'
+- series_keys:
+  - 'qid:Q11280478|name:優駿記'
+  qid: null
+  number: 2
+  isbn13: '9784870311817'
+  release_date: '1994-06'
+  publisher: '飛鳥新社'
+  edition_type: standard
+  title_display: '優駿記（2）'
+  source: rakuten-title-tail
+  added_at: '2026-09-03'
+  note: 'MADB取込もれ(種2に当該ISBN無し)。検出=_audit-subtitle-orphan-volume.py 芯ABSENT の再ゲート(step4): レーベルは空。楽天題が頁題+巻番号(完全一致)・著者一致・出版者記号一致・発売日順(頁最終巻1巻の後/穴の間)。楽天= やまさき拓味/飛鳥新社/デイリーアスカコミックス/1994-06'
