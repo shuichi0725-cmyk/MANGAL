@@ -130,3 +130,4 @@
 - [【型・是正済】騎士ガンダム型=新装版が編ごとに別頁へ散る+特別版が番号衝突で不可視](kishi_gundam_shinsoban_consolidation.md) — 楽天captionで収録対応確定→版タブ統合・新頁2・drop5→301・次週次で R2 --prune
 - [【型・検出器+apply正式化・8段適用済】Sugar&Spice型=巻題を題として別sid登録→末尾巻欠け](subtitle_orphan_volume_split_sugar_spice.md) — _audit/_apply-subtitle-orphan-volume.py。2026-09-03 に別sid195巻/取込もれ1,021巻/版分離canonical 46頁/0巻opt-in(vol0-show.yml)/under-merge4/レーベル違い等を適用。残=review.tsv(発売未確定・原版1巻不明のみ)
 - [【道具の罠】_lookup.py --isbn --live はキャッシュ済だとliveを叩かない](lookup_isbn_live_cached_skip.md) — NDLはndl_live直叩き・楽天が年だけの巻は載せない・旧キャッシュは誤記録あり
+- [【禁止】BOOK☆WALKERは試し読み収集不可](bookwalker_harvest_forbidden.md) — robots.txtがClaudeBot全面Disallow+/de*/?sample=*も全crawler禁止。新情報源はまずrobots.txtを取る
