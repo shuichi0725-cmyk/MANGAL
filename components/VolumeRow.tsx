@@ -63,7 +63,7 @@ function displayBlocks(editions: Edition[]): Edition[] {
     const ds = vs.map((v) => String(v.release_date || "")).filter(Boolean).sort();
     return ds[0] || "9999";
   };
-  return blocks.slice().sort((a, b) => {
+  const sorted = blocks.slice().sort((a, b) => {
     const ta = coverTier(a);
     const tb = coverTier(b);
     if (ta !== tb) return tb - ta;
@@ -72,6 +72,30 @@ function displayBlocks(editions: Edition[]): Edition[] {
     if (da !== db) return da < db ? -1 : 1;
     return b.volumes.length - a.volumes.length;   // 同着は巻数が多い方を上に
   });
+
+  // ★2026-09-04 追補(ユーザ報告=うる星やつら): 上の tier 順だけだと、書影ゼロの旧初版が
+  //   最下段に沈んだ結果、**巻割りの違う版**(うる星=ワイド版15巻)が先頭に来てしまう。
+  //   ユーザ裁定: 「最初に発売された物の書影が無い場合は、**おなじ巻数**で書影がある物が一番上。
+  //   無ければ書影がある物を上から発売された順」。
+  //   = 最古の版に絵が無いときだけ、その版と**同じ冊数**(=同じ巻割りの新装版/復刻等)で
+  //     書影が揃っている版を先頭に引き上げる。同じ冊数の代替が無ければ上の順(書影あり×発売順)のまま。
+  if (blocks.length > 1) {
+    const oldest = blocks.reduce((m, b) => (firstDate(b) < firstDate(m) ? b : m), blocks[0]);
+    if (coverTier(oldest) < 2) {
+      const sameShape = blocks.filter(
+        (b) => b !== oldest && b.volumes.length === oldest.volumes.length && coverTier(b) === 2,
+      );
+      if (sameShape.length) {
+        const pin = sameShape.reduce((m, b) => (firstDate(b) < firstDate(m) ? b : m), sameShape[0]);
+        const i = sorted.indexOf(pin);
+        if (i > 0) {
+          sorted.splice(i, 1);
+          sorted.unshift(pin);
+        }
+      }
+    }
+  }
+  return sorted;
 }
 
 export default function VolumeRow({ manga }: Props) {
