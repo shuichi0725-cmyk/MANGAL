@@ -1,11 +1,11 @@
 ---
 name: seo-structure-gaps-2026-09-04
-description: 2026-09-04 アクセス向上の構造相談=実測(28日訪問230・Google20/Bing30閲覧)と穴7点の順位。1〜4は適用済(機能蒸留待ち)=ジャンル面title/作品頁チップ/雑誌・出版社・年ハブ850面/ジャンル下位面219。5以降は未着手
+description: 2026-09-04 アクセス向上の構造相談=実測(28日訪問230・Google20/Bing30閲覧)と穴7点の順位。1〜4と6は適用済(機能蒸留待ち)=ジャンル面title/作品頁チップ/雑誌・出版社・年ハブ850面/ジャンル下位面219/anime二重サフィックス/list静的シェル。残=5(著者頁の薄さ)と7(頁の重さ)
 metadata: 
   node_type: memory
   type: project
   originSessionId: 981cfdce-d412-49dd-a505-855ea2bffe35
-  modified: 2026-09-04T06:16:35.974Z
+  modified: 2026-09-04T06:41:01.312Z
 ---
 
 ユーザ相談「mangalの構造でアクセスを上げるためにやっておいた方が良いこと」(2026-09-04)。
@@ -22,7 +22,7 @@ metadata:
    - `_gen-sitemap.py` は **out/ の実在HTML**から拾う(閾値をPythonに再実装しない=titles-pagesと同じ原則)。実測 ハブ850 URL。sitemap反映は週次。
 4. ✅ **ジャンル面の肉付け**(同commit): `/genre/<key>/completed` と `/genre/<key>/<yyyy>s`(10作以上の組=**219面**、人気順上位120のグリッド) / グリッドの著者名→著者頁リンク(`components/GenreGrid.tsx`、<a>入れ子回避で著者行を分離) / 主な連載誌→雑誌ハブ(8本) / 他31ジャンル横リンク。preview実測: /genre/action に著者120・雑誌8・他ジャンル31・下位面6。
 5. ⬜ **著者頁2万枚の薄さ**(サンプル=作品3本+索引1本)。sitemap を2作以上に絞るか文脈を足すか、要裁定。
-6. ⬜ 細部: `app/anime/page.tsx` と `app/anime/[season]/page.tsx` の title が `- MANGAL` 自書きで**二重サフィックス**(08-31是正の取りこぼし)。`/list` は静的HTMLに作品リンク0本+汎用title のまま sitemap/フッターに残置。
+6. ✅ 細部(commit 6a82c40b2): `app/anime/page.tsx` と `app/anime/[season]/page.tsx` の title 末尾「- MANGAL」を除去(二重サフィックス。08-31是正の取りこぼし2頁、grepで他に残りなし)。`/list` は generateMetadata「漫画 全作品一覧表（N作品）」+ description、サーバ描画の説明文と常設「索引から探す」(題名/著者/雑誌/出版社/年/新刊/アニメ+ジャンル32+主な連載誌8)=可視401字・作品導線0本の穴を塞いだ。sitemap には残す。
 7. ⬜ 作品頁の重さ: ★実測訂正= 本番 one-piece 生HTML **341KB**(br圧縮後32KB)、JS 563KB。RSCペイロード重複は Next app router の構造(ハブ面でも66%)。中期。
 
 ## ユーザ側スイッチ(未実施)
