@@ -28,3 +28,10 @@ Bashツールが `bash: -c: line 90: unexpected EOF while looking for matching '
 **Writeでscratchpadに書いて実行**が正解。関連: [[process_kill_commandline_self_match]]
 
 - ★**ログ/生成物の読み出しで UnicodeEncodeError**(2026-09-02 2回踏んだ): `python -c "print(open(log,"rb").read().decode(...))"` は stdout が cp932 のままだと `\uFFFD`(replace文字)や絵文字で落ちる。**必ず `sys.stdout.reconfigure(encoding="utf-8")` か `export PYTHONIOENCODING=utf-8`** を先に付け、bytes は `decode("utf-8","replace")` で読む(reflect/promote のログは utf-8 と cp932 が混在)。
+
+- ★**引数の `/` が `C:/Program Files/Git/` に化ける**(2026-09-04 実害): Git Bash(MSYS)は
+  スラッシュで始まる引数をWindowsパスへ自動変換する。 `python scripts/_indexnow.py --urls /,/about` が
+  **トップページでなく `https://mangal-db.com/C:/Program Files/Git/` を検索エンジンに送っていた**
+  (ログの sample で発覚)。 回避= `MSYS_NO_PATHCONV=1` を付ける / PowerShell で叩く /
+  `python -c` から関数を直接呼ぶ。 ★根治は**受け手側で形を検査**すること
+  (`_indexnow.sanitize_urls` = パス以外[空白・`:`・`\`・`//`]を送信の一点で破棄)。

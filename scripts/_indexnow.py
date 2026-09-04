@@ -328,6 +328,20 @@ def _post(key, urls, timeout=60):
         return 0, str(e)[:200]
 
 
+# ★送ってよいパスの形 (2026-09-04 実害): Git Bash(MSYS)は引数の `/` を `C:/Program Files/Git/` に
+#   書き換えるため、`--urls /,/about` がトップでなく `https://mangal-db.com/C:/Program Files/Git/` を
+#   送っていた(初回送信で実際に混入)。 呼び手側の事故を送信の一点で止める。
+_URL_OK_RE = re.compile(r"^/(?![/\\])[^\s:\\]*$")
+
+
+def sanitize_urls(urls):
+    """(送ってよいURL, 弾いたURL)。 パス以外(Windows絶対パス・空白・スキーム混入)を落とす。"""
+    ok, bad = [], []
+    for u in urls:
+        (ok if _URL_OK_RE.match(u or "") else bad).append(u)
+    return ok, bad
+
+
 def submit(urls, dry=False, verify=True):
     """URL(パス)群を ≤10,000 ずつ POST。 戻り = (受理したURLのlist, 失敗URL数, 人向け要約)。
     鍵未配信なら送らず ([], len, 理由) を返す(呼び手は pending に留める)。
@@ -337,8 +351,12 @@ def submit(urls, dry=False, verify=True):
       受理URLは先頭から連続とは限らない。 件数で前方一致削除すると
       「失敗したURLを消して成功したURLを残す」取り違えが起きる(再現テストで実証)。"""
     urls = list(dict.fromkeys(urls))
+    urls, junk = sanitize_urls(urls)
+    if junk:
+        _log({"ev": "junk_url", "n": len(junk), "sample": junk[:3]})
+        print(f"★IndexNow: URLの形が不正な {len(junk)} 件を送らず破棄: {junk[:3]}")
     if not urls:
-        return [], 0, "IndexNow: 送るURLなし"
+        return [], 0, "IndexNow: 送るURLなし" + (f"(不正 {len(junk)} 件を破棄)" if junk else "")
     key = find_key()
     if not key:
         return [], len(urls), "IndexNow: 鍵ファイル(public/<32hex>.txt)が無い → 送信せず"
@@ -474,6 +492,12 @@ def selftest():
     assert h1 != h4, "見出し/JSON-LD の変化を取り逃している"
     assert b"ld+json" in content_bytes(page("aaaa1111", "ワンピース")), "JSON-LD は残すこと"
     assert b"__next_f" not in content_bytes(page("aaaa1111", "ワンピース")), "RSC flight は落とすこと"
+
+    # ★URLの形の番人(Git Bash の `/` → `C:/Program Files/Git/` 化を送信の一点で止める)
+    ok, bad = sanitize_urls(["/", "/manga/one-piece", "/genre/action/completed",
+                             "/C:/Program Files/Git/", "/a b", "//evil.com", "https://x/y", "", "/x\\y"])
+    assert ok == ["/", "/manga/one-piece", "/genre/action/completed"], ok
+    assert len(bad) == 6, bad
     print("selftest OK")
 
 

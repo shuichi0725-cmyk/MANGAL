@@ -1,6 +1,6 @@
 ---
 name: indexnow-self-submit
-description: IndexNow 自前送信=scripts/_indexnow.py。r2-sync→pending→finalize(purge後)drain / feature・diff-deploy は即drain。鍵=public/efa08…txt。★欠陥3件は 2026-09-04 に修正済(本文ハッシュ層/公開slug/purge失敗で送らない)・鍵は本番未配信で未送信
+description: IndexNow 自前送信=scripts/_indexnow.py(2026-09-04 稼働開始・鍵200・初回送信済)。r2-sync→pending→finalize(purge後)drain / feature・diff-deploy は即drain。鍵=public/efa08…txt。★欠陥3件は 2026-09-04 に修正済(本文ハッシュ層/公開slug/purge失敗で送らない)
 metadata: 
   node_type: memory
   type: project
@@ -36,10 +36,17 @@ metadata:
 - 応答: 200/202=受理(202はキー検証が非同期=API応答でキー有効性は判定できない)、400/403/422/429。1POST ≤ 10,000 URL。
 - **Google は IndexNow 不参加**。Google 向けは sitemap + 内部リンクのまま([[seo_structure_gaps_2026_09_04]])。
 
-## 現在の状態(2026-09-04)
+## 現在の状態(2026-09-04 夜 = 稼働開始)
 
-- **まだ一度も送信していない**。`public/<key>.txt` は本番で **404**(次の機能蒸留/週次で R2 に上がる)。
-  それまで送信は `key_file_live` で止まり pending に溜まる設計。
+- ★**鍵ファイルを本番R2へ単独PUT済み**(ユーザ裁定「1で」)。`https://mangal-db.com/efa08a89….txt` = **200**、
+  `--status` の「本番配信」= OK。 ★`_r2-sync.py` は使っていない(当時の `out/` は機能ビルドの残骸で
+  **漫画66k頁が無く**、フル同期すると本番を壊すため boto3 で1オブジェクトだけ PUT した)。
+  ★`.cache/r2-manifest.json` には入れていない = 次の週次でもう一度PUTされる(1 Class A・無害)。
+- ★**初回送信 実施済み**: `/about` と `/` を送信 → **HTTP 202 と 200**(200=鍵検証も通った証拠)。
+  = 鍵設置から送信までの配管が実地で通ることを確認。
+- ★同時に踏んだ罠: Git Bash が引数 `/` を `C:/Program Files/Git/` に化かし、
+  **トップの代わりに存在しないURLを1件送った**。 恒久対策として `sanitize_urls()` を submit の一点に置き、
+  パス以外(空白・`:`・`\`・`//`)は送らず破棄+警告するようにした([[bash_tool_heredoc_quote_pitfall]])。
 - Cloudflare Crawler Hints = **有効化済み**(無害なので残す。当てにはしない)。
 - Bing Webmaster Tools = **登録済み + sitemap 送信済み**(`https://mangal-db.com/sitemap.xml`)。
   ★BWT のキー生成ボタンは**ブラウザ内のUUID生成**で、鍵の自己ホストは依然必須。BWT の IndexNow 機能は Insights(レポート)。
