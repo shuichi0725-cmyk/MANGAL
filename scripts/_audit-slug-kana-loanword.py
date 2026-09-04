@@ -32,8 +32,9 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(ROOT, "scripts"))
 sys.stdout.reconfigure(encoding="utf-8")
 
-from _slug_kana_lib import make_slug as dev, DIC, KEYS   # noqa: E402
+from _slug_kana_lib import make_slug as dev, kana2romaji, DIC, KEYS   # noqa: E402
 
+TITLE_OF = {}
 OUT = os.path.join(ROOT, "docs", "production-diagnostics", "slug-kana-loanword.tsv")
 
 
@@ -41,11 +42,69 @@ def tokens(slug):
     return set(str(slug or "").split("-"))
 
 
+def run_fully_covered(title, k):
+    """★語 k を含む**カタカナ連**が、辞書語だけで丸ごと覆えるか(2026-09-05)。
+    覆えない = 辞書が長い外来語の頭だけを食っている(ディアナ->ディア+ナ / マリーン->マリー+ン /
+    メトロノーム->メトロ+ノーム)。この形で英語に差し替えると別語になるので CLEAR にしない。
+    """
+    t = str(title or "")
+    runs = re.findall(r"[\u30a1-\u30f6\u30fc]+", t)
+    runs = [r for r in runs if k in r]
+    if not runs:
+        return False
+    for run in runs:
+        i = 0
+        while i < len(run):
+            for key in KEYS:                 # KEYS は長い順=最長一致
+                if key and run.startswith(key, i):
+                    i += len(key)
+                    break
+            else:
+                return False                 # 辞書で覆えない断片が残る
+    return True
+
+def tier_of(pub, cand, hits):
+    """★明白な層(CLEAR)の判定(2026-09-05)。
+    装置案の**英語だけをカナのローマ字へ逆置換**して現公開slugに戻れば、2つの差は
+    「外来語の綴り」だけ = 機械適用してよい。戻らなければ語境界の解釈が変わっている
+    (choujin-locke->choujin-rock / short-arabesque->show-to-arabesuku 型)ので人が裁く。
+
+    2通り認める:
+      (a) トークン単位: 公開slugのトークンが丸ごと辞書語のローマ字で、そこだけ英語に化ける
+          (mimoza-kan-de-tsukamaete -> mimosa-kan-de-tsukamaete)
+      (b) 全体一致: 逆置換した文字列がハイフンを除いて公開slugと完全一致
+          (rosutowaarudo -> lost-world / shoufumarii -> shoufu-mary)
+    """
+    if not all(run_fully_covered(TITLE_OF.get(pub, ""), k) for k in hits):
+        return "REVIEW"                  # ★長い外来語の頭だけを食っている
+    ptok = str(pub).split("-")
+    ctok = str(cand).split("-")
+    if len(ptok) == len(ctok):
+        diff = [(p, c) for p, c in zip(ptok, ctok) if p != c]
+        if diff and all(any(DIC.get(k) == c and kana2romaji(k) == p for k in hits)
+                        for p, c in diff):
+            return "CLEAR"
+    back = cand
+    for k in sorted(hits, key=lambda x: -len(DIC.get(x, "") or "")):
+        e = DIC.get(k)
+        if e:
+            back = back.replace(e, kana2romaji(k))
+    # ★日本語側の区切りを変える案は CLEAR にしない(himitsu-de-naito -> hi-mitsude-night 型)。
+    #   公開slugにハイフンが在るならハイフン込みで一致を要求する。1トークンなら保存しようが
+    #   無いのでハイフンを除いて比べる。
+    if "-" in str(pub):
+        return "CLEAR" if back == str(pub) else "REVIEW"
+    if back.replace("-", "") == str(pub):
+        return "CLEAR"
+    return "REVIEW"
+
+
 def main():
     idx = json.load(io.open(os.path.join(ROOT, "data", "manga-list-index.json"), encoding="utf-8"))
     F = {n: i for i, n in enumerate(idx["f"])}
     rows = idx["d"]
     pub2title = {r[F["slug"]]: r[F["title"]] for r in rows}
+    TITLE_OF.update(pub2title)
     published = set(pub2title)
 
     # ---- 層1: slug-overrides.yml の平坦形(死にエントリ) ----
@@ -105,7 +164,8 @@ def main():
         if len(tokens(cand) & ENG) <= len(tokens(pub) & ENG):
             continue
         note = "装置案が既存slugと衝突" if cand in published else ""
-        out.append(("DEVICE_DIFF", pub, cand, title, ",".join(ev[:4]), note))
+        _t = "REVIEW" if note else tier_of(pub, cand, hits)
+        out.append(("DEVICE_DIFF_" + _t, pub, cand, title, ",".join(ev[:4]), note))
 
     os.makedirs(os.path.dirname(OUT), exist_ok=True)
     with io.open(OUT, "w", encoding="utf-8", newline="") as f:

@@ -141,6 +141,17 @@ def main() -> None:
     if os.path.exists(_sop):
         try:
             _doc = _load_yml(io.open(_sop, encoding="utf-8").read()) or {}
+            # ★重複キー検出(2026-09-05): YAMLは後勝ちなので、同じキーを2度書くと
+            #   先に書いた方が**黙って無効**になる(oirangaaru で実踏= oiran-girl が oiran-gaaru に負けた)。
+            #   yaml.safe_load では潰れて見えないので**行を数える**。
+            import collections as _c
+            _ls = io.open(_sop, encoding="utf-8").read().split(chr(10))
+            _keys = [x.strip()[:-1] for x in _ls
+                     if x.startswith("  ") and not x.startswith("    ") and x.rstrip().endswith(":")]
+            _dupk = [x for x, c in _c.Counter(_keys).items() if c > 1]
+            if _dupk:
+                fails.append("slug-overrides.yml 重複キー %d件(YAMLは後勝ち=先の指定が黙って消える): %s"
+                             % (len(_dupk), ", ".join(_dupk[:5])))
             _dead = [k for k, v in _doc.items() if k != "overrides" and isinstance(v, str)]
             _dead += ["overrides/" + k for k, v in (_doc.get("overrides") or {}).items()
                       if not (isinstance(v, dict) and v.get("slug"))]
@@ -154,7 +165,6 @@ def main() -> None:
                 print("  OK   slug-overrides.yml: 死に形なし")
         except Exception as _e:
             fails.append("slug-overrides.yml 検査失敗: %s" % _e)
-
     print(f"\nseed lint: parse OK {n_ok} / FAIL {len(fails)}")
     for f in fails:
         print(f"  FAIL {f}")
