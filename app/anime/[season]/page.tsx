@@ -22,7 +22,7 @@ export async function generateMetadata({ params }: { params: Promise<{ season: s
   if (!V.seasons[season]) return {};
   const label = seasonLabel(season);
   return {
-    title: `${label}アニメの原作漫画一覧 - MANGAL`,
+    title: `${label}アニメの原作漫画一覧`,  // ★サフィックスは layout template が付ける(2026-09-04 二重是正)
     description: `${label}放送アニメの原作漫画・コミカライズ ${V.seasons[season].length}作品。巻一覧・発売日つき。`,
     alternates: { canonical: `${SITE}/anime/${season}` },
   };
