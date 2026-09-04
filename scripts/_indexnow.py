@@ -174,20 +174,26 @@ def _post(key, urls, timeout=60):
 
 
 def submit(urls, dry=False, verify=True):
-    """URL(パス)群を ≤10,000 ずつ POST。 戻り = (受理URL数, 失敗URL数, 人向け要約)。
-    鍵未配信なら送らず (0, len, 理由) を返す(呼び手は pending に留める)。"""
+    """URL(パス)群を ≤10,000 ずつ POST。 戻り = (受理したURLのlist, 失敗URL数, 人向け要約)。
+    鍵未配信なら送らず ([], len, 理由) を返す(呼び手は pending に留める)。
+
+    ★戻りが「件数」でなく「受理したURLそのもの」なのは意図的 (2026-09-04 修正):
+      非429の失敗(403/422/400/ネットワーク断)では break せず次チャンクへ進むため、
+      受理URLは先頭から連続とは限らない。 件数で前方一致削除すると
+      「失敗したURLを消して成功したURLを残す」取り違えが起きる(再現テストで実証)。"""
     urls = list(dict.fromkeys(urls))
     if not urls:
-        return 0, 0, "IndexNow: 送るURLなし"
+        return [], 0, "IndexNow: 送るURLなし"
     key = find_key()
     if not key:
-        return 0, len(urls), "IndexNow: 鍵ファイル(public/<32hex>.txt)が無い → 送信せず"
+        return [], len(urls), "IndexNow: 鍵ファイル(public/<32hex>.txt)が無い → 送信せず"
     if verify and not key_file_live(key):
-        return 0, len(urls), (f"IndexNow: https://{HOST}/{key}.txt が本番未配信(200+中身一致でない) → 送信せず pending に保持"
-                              "(鍵ファイルは次の機能蒸留/週次で R2 に上がる)")
+        return [], len(urls), (f"IndexNow: https://{HOST}/{key}.txt が本番未配信(200+中身一致でない) → 送信せず pending に保持"
+                               "(鍵ファイルは次の機能蒸留/週次で R2 に上がる)")
     if dry:
-        return 0, 0, f"IndexNow --dry: {len(urls):,} URL を {(len(urls) + CHUNK - 1) // CHUNK} POST で送る予定(未送信)"
-    ok = bad = 0
+        return [], 0, f"IndexNow --dry: {len(urls):,} URL を {(len(urls) + CHUNK - 1) // CHUNK} POST で送る予定(未送信)"
+    ok_urls = []
+    bad = 0
     notes = []
     for i in range(0, len(urls), CHUNK):
         part = urls[i:i + CHUNK]
@@ -198,14 +204,16 @@ def submit(urls, dry=False, verify=True):
         accepted = code in (200, 202)
         _log({"ev": "post", "n": len(part), "code": code, "msg": msg, "sample": part[:3]})
         if accepted:
-            ok += len(part)
+            ok_urls.extend(part)
         else:
             bad += len(part)
             notes.append(f"HTTP {code} {msg}".strip())
-            if code == 429:
-                break  # 以降も弾かれる = 残りは pending に残す
-    summary = f"IndexNow: 受理 {ok:,} / 失敗 {bad:,} URL" + (f" ({'; '.join(notes[:2])})" if notes else "")
-    return ok, bad, summary
+            if code in (403, 429):
+                # 403=鍵が無効(全チャンクで同じ結果) / 429=送りすぎ。 残りを投げても無駄なので中断し pending に残す
+                bad += len(urls) - (i + len(part))
+                break
+    summary = f"IndexNow: 受理 {len(ok_urls):,} / 失敗 {bad:,} URL" + (f" ({'; '.join(notes[:2])})" if notes else "")
+    return ok_urls, bad, summary
 
 
 def drain(dry=False, verify=True):
@@ -214,10 +222,10 @@ def drain(dry=False, verify=True):
     urls = list(d["urls"].keys())
     if not urls:
         return "IndexNow: pending なし"
-    ok, bad, summary = submit(urls, dry=dry, verify=verify)
-    if ok:
-        # 受理は先頭から ok 件(POST は順序通り・失敗チャンクで break するので前方一致で消せる)
-        for u in urls[:ok]:
+    ok_urls, bad, summary = submit(urls, dry=dry, verify=verify)
+    if ok_urls:
+        # ★受理された URL そのものだけを消す(件数での前方一致削除は取り違える。 submit の docstring 参照)
+        for u in ok_urls:
             d["urls"].pop(u, None)
         _save_pending(d)
     return summary + (f" / 残 {len(d['urls']):,}" if d["urls"] else "")
