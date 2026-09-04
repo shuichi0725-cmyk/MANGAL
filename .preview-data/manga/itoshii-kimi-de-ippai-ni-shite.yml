@@ -13,7 +13,10 @@ year_ended: null
 year_started: 2026
 status: ongoing
 demographic: null
-genres: []
+genres:
+- bl
+- romance
+- ecchi
 editions:
 - type: standard
   label: 通常版
@@ -31,3 +34,4 @@ _preorder_draft:
   source: rakuten-preorder
   rakuten_caption: 陽斗と蒼緒は恋人同士。だけど、ある理由でいまだ最後までできずにいた。焦る蒼緒はカラダを張った“えっちな挑発”を仕掛けて…!?
   note: 予約②③previewドラフト。本番化はユーザ確認後。ヨミ=楽天仮(NDL照合待ち)。genre=captionからprovisional付与
+genres_provisional: true

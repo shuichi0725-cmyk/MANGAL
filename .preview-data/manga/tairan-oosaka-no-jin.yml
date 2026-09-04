@@ -13,7 +13,10 @@ year_ended: null
 year_started: 2026
 status: ongoing
 demographic: null
-genres: []
+genres:
+- historical
+- samurai
+- war
 editions:
 - type: standard
   label: 通常版
@@ -31,3 +34,4 @@ _preorder_draft:
   source: rakuten-preorder
   rakuten_caption: 大乱は終わらず！「関ヶ原」終戦後の徳川と豊臣、関係性の変化が導くものは？戦国の終焉と新時代の幕開けを壮大に描く単行本第1巻！
   note: 予約②③previewドラフト。本番化はユーザ確認後。ヨミ=楽天仮(NDL照合待ち)。genre=captionからprovisional付与
+genres_provisional: true
