@@ -41,6 +41,6 @@ overrides:
 **残**: 検出器 `scripts/_audit-slug-kana-loanword.py` の DEVICE_DIFF 834件
 (台帳に無く、装置なら英語綴りを出す頁)。★suggest列は答えではない = 装置が語境界を
 取り違え `choujin-locke`→`choujin-rock` のように現状の方が正しい行が残るので per-case 裁定が要る。
-別件の負債として **多段/切れリダイレクト649件**(短母音表記ゆれ由来)も在る=未着手。
+★**多段リダイレクトは問題ではない**(2026-09-05 検算で自分の誤報を訂正): `_gen-redirects.py` が出力側で連鎖を平坦化する設計で、`slug-aliases.yml` は改名の**来歴**として連鎖のまま残すのが正しい。生成物(public/_redirects・KV redirects.json)は 宛先未公開0・多段0 で健全だった。ymlを畳もうとすると来歴を壊すのでやらないこと。
 
 関連: [[slug_cluster_fix_and_changelog]] / [[drop_page_redirect_chain]] / [[feedback_one_bug_means_a_class]]
