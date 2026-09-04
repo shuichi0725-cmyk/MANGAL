@@ -137,6 +137,15 @@ def patch_years(path: str):
     return chg or None
 
 
+def _daydiff(a, b):
+    """b - a の日数(どちらかがYYYY-MM-DD形式でなければ None)。保留理由の型分けに使う。"""
+    import datetime as _dt
+    try:
+        return (_dt.date.fromisoformat(b) - _dt.date.fromisoformat(a)).days
+    except Exception:
+        return None
+
+
 def _origin_is_rakuten(stem: str, isbn: str) -> bool:
     """現在値が楽天由来か(= 同一源リフレッシュとして扱ってよいか)を seed の実物で確認する。
     PREORDER: preorder-pages/<stem>.yml の _note_origin が rakuten-preorder
@@ -216,11 +225,19 @@ def main():
                 else:
                     why = "NDLに記録なし かつ 現在値が楽天由来と確認できない"
             elif any(h.get("issued") == ours for h in hits):
-                # ★NDL が **現在値** を支持している = 楽天だけが違う。
-                #   実測(2026-09-04): KADOKAWA/秋田の ±1日 19件が全部この型。
-                #   NDL/MADB = 奥付の発行日、 楽天 = 店頭に並ぶ日 で 1日ずれるのが正常。
-                #   = ドリフト(古い値)ではないので **変更しない**。 月次で毎回浮くのを防ぐため型名を付ける。
-                why = "奥付日vs店頭日(NDL=現在値%s / 楽天=%s)= 既知の仕様差・変更しない" % (ours, theirs)
+                # ★NDL が **現在値** を支持している = 楽天だけが違う。ここから先は **差の大きさで分ける**
+                #   (2026-09-04 是正: 旧実装は差を見ずに全部「奥付日vs店頭日」にしていたため、
+                #    61日の延期が ±1日の仕様差22件と同じラベルで保留表に埋もれた)。
+                #   ・±2日以内 = NDL/MADB は奥付の発行日、 楽天は店頭に並ぶ日、という既知の仕様差。
+                #     ドリフト(古い値)ではないので **変更しない**。 毎回浮くのを防ぐため型名を付ける。
+                #   ・それ超 = 楽天が先に延期を掴み NDL の出版予定日がまだ古い、の疑い。
+                #     どちらが正かは機械で決められないので **人が裁定**する行として立てる(自動適用はしない)。
+                _gap = _daydiff(ours, theirs)
+                if _gap is not None and abs(_gap) <= 2:
+                    why = "奥付日vs店頭日(NDL=現在値%s / 楽天=%s)= 既知の仕様差・変更しない" % (ours, theirs)
+                else:
+                    why = "★NDL未更新の疑い(NDL=現在値%s / 楽天=%s / 差%s日)= 人が裁定" % (
+                        ours, theirs, ("%+d" % _gap) if _gap is not None else "?")
             elif not any(h.get("issued") == theirs for h in hits):
                 why = "NDL(%s)と楽天(%s)が食い違う(どちらも現在値と別)" % (
                     "/".join(sorted({h.get("issued", "") for h in hits})), theirs)
@@ -275,7 +292,7 @@ def main():
     with io.open(OVR, "a", encoding="utf-8", newline="") as fh:
         for ln in ovr_lines:
             fh.write(ln + "\n")
-    io.open(STEMS, "w", encoding="utf-8").write("\n".join(sorted(stems)))
+    io.open(STEMS, "w", encoding="utf-8").write("\n".join(sorted(stems)) + "\n")  # ★末尾改行必須(無いと読み手が最終行を落とす=2026-09-04実害)
 
     print("\n=== 適用 ===")
     print("  release-date-override.jsonl に %d 行追記" % len(ovr_lines))

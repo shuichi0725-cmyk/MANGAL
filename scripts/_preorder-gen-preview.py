@@ -151,15 +151,87 @@ def _old_strip_vol_disp(t):
     return t2 if t2 else str(t or "").strip()
 
 # ★2026-07-09 全面作り直し: 整形は _preorder_draft_lib に一本化(副題分離/kana=楽天のみ捏造hold/pykakasi slug/@COMIC/英語保持)
-from _preorder_draft_lib import clean_title as _clean_title, clean_kana as _clean_kana, make_slug as _make_slug, scope_out as _scope_out
+from _preorder_draft_lib import clean_title as _clean_title, clean_kana as _clean_kana, make_slug as _make_slug, scope_out as _scope_out, looks_like_criticism as _criticism
+# ★上下巻ペアの1頁統合(2026-09-04 ひみつー佐世保事件型)。skill A2-2 の規定だが実装が無く、
+#   同日発売の上下巻が new1b(上=1巻の新作) と ex_mid(下=全巻回収不成立) に割れて散っていた。
+#   兄弟は増加分の**全class**から集める(下は ex_mid/skip 側に落ちているため)。
+_JOGE_ORDER = {"上": 1, "前編": 1, "中": 2, "下": 3, "後編": 2}
+_JOGE_LABEL = {"上": "上巻", "中": "中巻", "下": "下巻", "前編": "前編", "後編": "後編"}
+_JOGE_RE = re.compile(r"(?:[\s　]+|[\s　]*[（(])(上|中|下|前編|後編)(?:巻)?[)）]?\s*$")
+
+
+def _joge_mark(title):
+    """題末尾の上/中/下・前後編マーカー(無ければ None)。"""
+    m = _JOGE_RE.search(unicodedata.normalize("NFKC", str(title or "")).strip())
+    return m.group(1) if m else None
+
+
+def _joge_key(r):
+    """兄弟のグループキー = 巻表示を剥いだ題 + 著者 + 出版社。"""
+    base, _sub, _p = _clean_title(r.get("title"))
+    return (base, str(r.get("author") or ""), str(r.get("publisher") or ""))
+
+
+_joge_sibs = {}
+for _k in ("new1a", "new1b", "ex_mid", "skip"):
+    for _r in cls.get(_k, []):
+        _m = _joge_mark(_r.get("title"))
+        if _m:
+            _joge_sibs.setdefault(_joge_key(_r), {})[_m] = _r
+
+
+def joge_volumes(r):
+    """このrowが上下巻セットの一員なら [(number, label, row), ...] を返す。単独/非該当は None。
+    ★上(前編)が揃っていなければ None=従来どおり保留(単巻先行登録禁止)。"""
+    if not _joge_mark(r.get("title")):
+        return None
+    sibs = _joge_sibs.get(_joge_key(r)) or {}
+    if len(sibs) < 2 or not ({"上", "前編"} & set(sibs)):
+        return None
+    order = sorted(sibs.items(), key=lambda kv: _JOGE_ORDER[kv[0]])
+    return [(i + 1, _JOGE_LABEL[mk], rr) for i, (mk, rr) in enumerate(order)]
+
+
+def _vol_entry(num, isbn_, rd_, cover_raw, label=None):
+    o = {"number": num, "asin": None, "isbn13": isbn_,
+         "cover_url": (cover_raw if "noimage" not in str(cover_raw or "") else None) or _real_cover(isbn_, _COVERS, _rk_live, _RKENV),
+         "release_date": rd_}
+    if label:
+        o["volume_label"] = label      # ★上下巻の表示名(lib/schema.ts 対応済・promoteが搬送)
+    return o
+
+
+def _volumes_for(r, isbn, rd):
+    """★上下巻セットなら兄弟を1頁にまとめる(2026-09-04)。単独なら従来どおり1巻。"""
+    js = joge_volumes(r)
+    if not js:
+        return [_vol_entry(r.get("_vol") or 1, isbn, rd, r.get("cover"))]
+    out = []
+    for num, label, rr in js:
+        _ym = str(rr.get("ym") or "")
+        _rd = (_ym + (f"-{rr['day']:02d}" if rr.get("day") else "")) or None
+        out.append(_vol_entry(num, str(rr.get("isbn")), _rd, rr.get("cover"), label))
+    return out
+
+
+_joge_done = set()
 for klass, r in targets:
     raw_title = r.get("title")
+    # ★上下セットは代表行(上/前編)だけ生成する。他の兄弟は同じ頁の巻として入るのでskip(2026-09-04)
+    _js = joge_volumes(r)
+    if _js:
+        _gk = _joge_key(r)
+        if _gk in _joge_done or str(r.get("isbn")) != str(_js[0][2].get("isbn")):
+            continue
+        _joge_done.add(_gk)
     ym = r.get("ym")
     isbn = r.get("isbn")
     auths = author_names(r.get("author"))
     akanas = author_names(r.get("authorKana"))
     if _scope_out(raw_title):                                     # カレンダー/画集/グッズ=掲載外
         holds.append((klass, isbn, raw_title, "scope外(非漫画)")); continue
+    if _criticism(r):                                             # ★評論/研究書疑い(2026-09-04 手塚SFの世界型)
+        holds.append((klass, isbn, raw_title, "評論/研究書疑い(コミックレーベル無し+章立てcaption)→人裁定")); continue
     base, subtitle, prov = _clean_title(raw_title)
     if prov:                                                      # (仮)=題未確定
         holds.append((klass, isbn, raw_title, "(仮)題未確定")); continue
@@ -214,9 +286,7 @@ for klass, r in targets:
         "genres": [],
         "editions": [{
             "type": "standard", "label": "通常版", "publisher": (_pubkey(r.get("publisher")) or r.get("publisher")), "imprint": r.get("seriesName") or "",
-            "volumes": [{"number": r.get("_vol") or 1, "asin": None, "isbn13": isbn,
-                         "cover_url": (r.get("cover") if "noimage" not in str(r.get("cover") or "") else None) or _real_cover(isbn, _COVERS, _rk_live, _RKENV),  # ★harvest空→covers seed/楽天API実URL(構築禁止 2026-07-09)
-                         "release_date": rd}],
+            "volumes": _volumes_for(r, isbn, rd),
         }],
         "_preorder_draft": {"class": klass, "added_at": TODAY, "source": "rakuten-preorder",
                             "rakuten_caption": (r.get("caption") or None),  # ★あらすじ捕捉(genre/catch/synopsis元・書影と同じharvestで取れる=捨てない 2026-07-09)

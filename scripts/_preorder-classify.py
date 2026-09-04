@@ -66,6 +66,28 @@ def norm_strip(t):
     return re.sub(r"[\s　・!！?？:：〜~\-＆&。、．.『』「」]", "", t).lower()
 
 
+def norm_loose(t):
+    """★緩和正規化(④次マッチ専用・2026-09-04)。norm より強く畳むので**単独では使わない**=
+    「候補が1件」+「巻連続(頁max+1..+3)」ゲートと必ず併用する。畳むのは実踏した3型だけ:
+      - ルビ注記のカナ括弧を除去   旗(フラグ)を叩き折る ⇔ 旗を叩き折る
+      - 角括弧の揺れを除去          [Heaven's Feel] ⇔ 〈Heaven's Feel〉
+      - 長音符ーを除去              ハンドレッドノートーホークアイズー ⇔ ハンドレッドノート-ホークアイズ-
+        (楽天が段落ダッシュに「ー」を使う型。カナ語中のーも一緒に落ちるので緩い=上のゲートが要る)"""
+    t = unicodedata.normalize("NFKC", str(t or ""))
+    t = re.sub(r"[（(][ぁ-んァ-ヶー]{1,12}[)）]", "", t)      # ルビ注記(数字の巻表記は落ちない)
+    t = re.sub(r"[〈〉《》\[\]<>【】]", "", t)                 # 角括弧の揺れ
+    return norm(t).replace("ー", "")
+
+
+def auth_is_publisher(r):
+    """★楽天の author が出版社名になっている(=著者未登録のplaceholder)か。2026-09-04 廻天のアルバス型。
+    これを著者集合として扱うと①の著者一致ゲートが必ず外れ、続巻が④(途中巻)へ落ちて頁が更新されない。
+    判定は「著者名が全部 publisher と同じ」に限定(=だろう運転をしない)。"""
+    auths = [x.strip() for x in re.split(r"[/,、;；]", str(r.get("author") or "")) if x.strip()]
+    pub = norm(r.get("publisher"))
+    return bool(auths) and bool(pub) and all(norm(a) == pub for a in auths)
+
+
 # ★scope外ゲート(2026-07-06 ユーザ指摘=特装版/アンソロ/N巻誤1巻化): これらは新作1巻(new1a/b)にしない
 import re as _re
 SCOPE_BAN = _re.compile(r"特装版|限定版|初回限定|豪華版|特別版|特典付|小冊子付|ドラマCD|CD付き?|DVD付|Blu-?ray|OAD|アンソロジ|総集編|選集|傑作|名作選|セレクション|新装版|愛蔵版|完全版|画集|イラスト集|ファンブック|設定資料|ガイドブック|公式ガイド|コミックガイド|データブック|ビジュアルブック|原画|ぬりえ|ムック|フィギュア付|BOXセット|ボックス|スターターセット|スペシャルプライス|語辞典|第?\s*[2-9２-９][0-9０-９]*\s*巻|第[二三四五六七八九十]+[集部]|(?:II|Ⅱ|III|Ⅲ|IV|Ⅳ|V|Ⅴ|VI|Ⅵ|VII|Ⅶ)\s*$|シーズン\s*[2-9]|[2-9]nd\s|3rd\s|第\d+号|別冊|【楽天ブックス限定特典】", _re.I)
@@ -93,10 +115,12 @@ mvi = f.index("max_edition_volumes") if "max_edition_volumes" in f else None
 tvi = f.index("total_volumes") if "total_volumes" in f else None
 page_by_title = {}
 page_by_stripped = {}   # ★設計台帳準拠の②次索引(特装版/サブ剥がし)
+page_by_loose = {}      # ★④次索引(緩和正規化。巻連続ゲート必須) 2026-09-04
 known_authors = set()
 for r in idx["d"]:
     page_by_title.setdefault(norm(r[ti]), []).append(r)
     page_by_stripped.setdefault(norm_strip(r[ti]), []).append(r)
+    page_by_loose.setdefault(norm_loose(r[ti]), []).append(r)
     for a in (r[ai] or []):
         known_authors.add(norm_author(au_name(a)))
 
@@ -155,6 +179,25 @@ for r in rows:
             r["_slug"] = hit[si]
             r["reason"] = f"③先頭セグメント一致(頁max{hit_mx}→巻{vol})"
             out["zokkan"].append(r); continue
+    # ★④次マッチ(2026-09-04): ①〜③が「題の表記揺れ」「著者=出版社placeholder」で外れた続巻を拾う。
+    #   緩和キーは畳みが強いので、★候補1件 かつ ★巻連続(頁max+1..+3) を必須ゲートにし同題別作の誤結線を防ぐ。
+    #   著者は overlap があるか、楽天placeholder(著者=出版社名)のときだけ免除する。
+    if mvi is not None and vol is not None and vol >= 2:
+        _pl = auth_is_publisher(r)
+        _lc = page_by_loose.get(norm_loose(_split_title(r["title"])["base"]), [])
+        if len(_lc) == 1:
+            c = _lc[0]
+            p_auth = {norm_author(au_name(a)) for a in (c[ai] or [])}
+            if (r_auth & p_auth) or _pl or not r_auth:
+                try:
+                    mx = max(int(c[mvi] or 0), int(c[tvi] or 0) if tvi is not None else 0)
+                except Exception:
+                    mx = 0
+                if mx >= 1 and mx + 1 <= vol <= mx + 3:
+                    r["_slug"] = c[si]
+                    _why = "著者=出版社placeholder免除" if (_pl and not (r_auth & p_auth)) else "題の表記揺れ"
+                    r["reason"] = f"④緩和一致({_why}, 頁max{mx}→巻{vol})"
+                    out["zokkan"].append(r); continue
     if vol is not None and vol >= 2:
         out["ex_mid"].append(r); continue
     # ★裸数字N>=2末尾=続巻(2026-07-06 VOLSTRIP事故クラス): 題の一部数字(レベル99/U149=直前が英数字)は除く

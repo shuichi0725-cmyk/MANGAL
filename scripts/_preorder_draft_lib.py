@@ -34,8 +34,9 @@ _VOL_TAIL = re.compile(
     r"|第\s*\d{1,3}\s*巻"                               # 第1巻
     r"|[\s　]+全?\d{1,3}"                               # 空白+1 / 空白+全1
     r"|(?<=[ぁ-んァ-ヶ一-鿿])\d{1,3}"                   # かな漢字の直後の裸数字(既存)
-    r"|[\s　]*[（(](?:上|下|中|前編|後編)[)）]"          # ★括弧付きの上下中・前後編
-    r"|[\s　]+(?:上|下|中|前編|後編)"                    # ★空白+上下中・前後編
+    r"|[\s　]*[（(](?:(?:上|下|中)巻?|前編|後編)[)）]"     # ★括弧付きの上下中(巻付き可)・前後編
+    r"|[\s　]+(?:(?:上|下|中)巻|前編|後編)"                # ★空白+上下中巻・前後編
+    r"|[\s　]+(?:上|下|中)"                              # ★空白+上下中(裸)
     r")\s*$")
 # ★**ラテン/記号の直後の裸数字は剥がさない**(2026-08-08 検討して却下)。
 #   「THE COMIC10」型は剥がしたいが、同じ規則が「ワイルド7」「AKIRA1」型の**題に含まれる数字**を壊す。
@@ -53,6 +54,30 @@ _SCOPE_OUT = re.compile(r"めくり|カレンダー|ぬりえ|塗り絵|写真�
 def scope_out(title):
     """漫画でない(カレンダー/画集/グッズ等)=Trueなら掲載対象外。"""
     return bool(_SCOPE_OUT.search(str(title or "")))
+
+
+# ★評論/研究書ゲート(2026-09-04 手塚SFの世界型)。漫画作品名を含む題は _SCOPE_OUT を素通りするので
+#   題でなく **caption の語彙** で見る。①コミックレーベル(seriesName)が無い ②評論の語がある
+#   ③caption が自分を漫画だと名乗っていない、の3条件AND。
+#   ★③が要る: ②だけだと「グルメコミックエッセイ」「夕暮宇宙船短編集(あとがき/解説付き)」など
+#   本物の漫画まで拾う(2026-09-04 実測で2件誤検出→③を足して0件に)。
+#   実測: 楽天予約2,823件中3件のみ発火(手塚SF評論/地球の歩き方Dr.STONE/手塚マンガで憲法九条を読む)= 全て真陽性。
+#   ★deny でなく hold(人が裁定)にする [[never_delete_because_broken]]。
+_CRITICISM_CAPTION = re.compile(
+    r"読み解く|読み解き|論じ|考察|評論|研究書|入門の決定版|にせまる一冊|に迫る一冊|作品解説|評伝|の全貌に迫")
+_SELF_DECLARED_MANGA = re.compile(r"コミック|漫画|マンガ|まんが|画・|作画")
+
+
+def looks_like_criticism(rec):
+    """★評論/研究書の疑い(=hold にして人が裁く)。deny はしない。
+    rec = 楽天harvestの1レコード。実例: 『アトム』と『火の鳥』手塚SFの世界(鳥影社・レーベル無し・
+    caption に「読み解く」「作品解説を超えた」)。本番66k頁で鳥影社の漫画は0件だった。"""
+    if str(rec.get("seriesName") or "").strip():
+        return False                      # コミックレーベルが付いている=漫画側として扱う
+    cap = str(rec.get("caption") or rec.get("itemCaption") or "")
+    if not cap or not _CRITICISM_CAPTION.search(cap):
+        return False
+    return not _SELF_DECLARED_MANGA.search(cap)   # 自分を漫画だと名乗る紹介文は除外
 
 
 def clean_title(title):
@@ -138,18 +163,52 @@ def kana_tail_trim(base, kana):
         tgt = _letters(dev(base))
     except Exception:
         return kana
+    # ★第2の照合先(2026-09-04 Code;OSINT型): 題にラテンが混じると装置読みが一致せずトリムが
+    #   不発になる。題からカタカナだけを抜いた文字列との**完全一致**なら安全にトリムできる
+    #   (推測でなく題に実在するカタカナとの一致なので捏造にならない)。
+    tgt_kata = re.sub(r"[^ァ-ヶー]", "", unicodedata.normalize("NFKC", str(base)))
+    if len(tgt_kata) < 3:
+        tgt_kata = None
     if not tgt or _letters(dev(kana)) == tgt:
         return kana
     for i in range(len(kana) - 1, max(2, len(kana) // 2) - 1, -1):
         tail = kana[i:]
         if not _KANA_NUM_TAIL.match(tail):
             continue
+        if tgt_kata and kana[:i] == tgt_kata:
+            return kana[:i]
         try:
             if _letters(dev(kana[:i])) == tgt:
                 return kana[:i]
         except Exception:
             return kana
     return kana
+
+
+def _kana_dict_reading(base, kana):
+    """★辞書英語化の差でヨミ一致ゲートが誤flagしないための第2読み(2026-09-04 #介護ロボット型)。
+    janome はヨミ側の長いカタカナ連を1語(未知語)として扱うため katakana-english.yml の変換が効かず、
+    題側だけ英語綴り(robot)・ヨミ側はカナ転写(robotto)になって「不一致」に見える。
+    ★題に**実在する**辞書見出し語だけをヨミ側にも空白で切り出し、同じ装置に通して比べる
+    (推測で語を足さない=捏造にならない)。該当語が無ければ None。"""
+    try:
+        from _slug_kana_lib import KEYS as _KEYS, make_slug as _dev
+    except Exception:
+        return None
+    b, k = str(base or ""), str(kana or "")
+    hits = [x for x in _KEYS if x and len(x) >= 2 and x in b and x in k]
+    if not hits:
+        return None
+    seg = k
+    for x in hits:                       # KEYS は長い順=最長一致から切る
+        seg = seg.replace(x, " " + x + " ")
+    seg = re.sub(r"[\s　]+", " ", seg).strip()
+    if seg == k:
+        return None
+    try:
+        return _dev(seg)
+    except Exception:
+        return None
 
 
 def slug_kana_gate(base, kana, slug, out_tsv="docs/production-diagnostics/slug-gate-pending.tsv"):
@@ -161,6 +220,10 @@ def slug_kana_gate(base, kana, slug, out_tsv="docs/production-diagnostics/slug-g
         return True
     try:
         if _letters(slug) == _letters(dev(kana)):
+            return True
+        # ★辞書英語化の差は誤flagにしない(2026-09-04): 題に在る辞書語でヨミを切って比べ直す
+        _alt = _kana_dict_reading(base, kana)
+        if _alt and _letters(slug) == _letters(_alt):
             return True
     except Exception:
         return True
@@ -184,6 +247,10 @@ def clean_kana(kana, subtitle=None, base=None):
         return None
     k = unicodedata.normalize("NFKC", str(kana)).strip()
     k = _hira2kata(k)
+    # ★カナに挟まれた波ダッシュ=長音符の装飾表記(と〜ふのあわこ→ト〜フノアワコ 2026-09-04)。
+    #   ヨミ欄でカナとカナの間に来る〜/～は長音以外に意味を持てないので「ー」へ正規化する。
+    #   (カナ以外に挟まれた〜は範囲記号のことがあるので触らない)
+    k = re.sub(r"(?<=[ァ-ヶー])[〜～](?=[ァ-ヶー])", "ー", k)
     k = re.sub(r"[\s　（）()・:：!！?？、。,\.]+", "", k)   # 空白=語境界→除去・記号除去
     # 末尾の @COMIC読み/巻読み/裸数字 をループ除去
     for _ in range(4):
