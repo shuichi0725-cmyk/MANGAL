@@ -4702,6 +4702,10 @@ overrides:
     at: '2026-08-10'
     reason: C類年サフィックス無印化(基底空き検証済・年のみ剥ぐ)
     slug: neko-banashi-pandania
+  neko-to-shinshi-no-teiiruumu:
+    at: '2026-09-05'
+    reason: ティールーム=辞書英単語(tea room)なのにヘボン転写 teiiruumu のままだった(ユーザ指摘 2026-09-05)。alternative_titles.en も "Cat and Gentleman's Tea Room" で裏取り済み。現行のslug装置は neko-to-shinshi-no-tea-room を出す
+    slug: neko-to-shinshi-no-tea-room
   nekofujin:
     at: '2026-07-02'
     reason: ハイフン規則違反是正(楽天分かち書き「ネコ フジン」整列・綴り既存保持)
