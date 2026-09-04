@@ -36,6 +36,7 @@
 - [NDLクラスタリング設計](ndl_clustering_design.md) — 典拠ID+主題 ／ [NDL巻構造で分断確定](ndl_volume_structure_resolves_fragmentation.md)
 - [NDL option2再クラスタ](ndl_option2_recluster.md) ／ [NDL slug-fix手法](ndl_slug_fix_method.md) ／ [NDL典拠IDで同名異人分離](ndl_authority_homonym_state.md) — DB適用は要GO
 - [【保留】slug生成器](pending_slug_generator.md) — GO待ち ／ [slug衝突調査の結論](collision_slug_investigation.md) ／ [slug衝突=姓+年・裸西暦禁止](slug_collision_year_rule.md) ／ [slug主版消失修正+来歴ログ](slug_cluster_fix_and_changelog.md) — slug-overrides.yml機構
+- [【✅是正済】slug-overridesの平坦形は効かない](slug_override_deadform_flat.md) — 116件が旧slugのまま公開中だった。移行済+FAILで封鎖。残=DEVICE_DIFF 834/多段リダイレクト649
 - [作品QID=P8731/QLever](work_qid_enrichment.md) ／ [MADB入手2経路](madb_data_acquisition.md) ／ [MADB cm104/105凍結](madb_cm104_frozen.md) — cm101のみ月次
 - [【設計済】型別マニフェスト+出荷ゲート](intake_manifest_gate_design.md) ／ [日次蒸留の分類器=型1/型4に従う](daily_distill_classifier_gate.md)
 - [【厳守】Driveはcodeのみ](gdrive_code_folder_only.md) ／ [D:外付け認識外れ→挿し直し待ちのみ](d_drive_external_flaky.md) — レター探索/変更は絶対しない
