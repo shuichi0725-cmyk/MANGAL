@@ -49,6 +49,7 @@
 - [【台帳】全データ資産地図](data_assets_inventory.md) ／ [【必読】著者データ全源](author_data_map.md) — 表記揺れ注意
 - [【最重要】目的は正確さ](feedback_accuracy_is_the_goal.md) — 推測/ダミーで埋めない ／ [【戒め】全データ揃えてから載せる](feedback_complete_data_before_ship.md)
 - [【方針】空振り月=手順の検算と機械封鎖に使う](feedback_idle_month_rehearsal.md) — Opus運転前提(scriptに畳む・Go引用必須・自己申告禁止) ／ [【戒め】効率を先に考える](feedback_efficiency_first.md) ／ [【戒め】全件を同じ濃度でAIに投げるな](feedback_agent_fanout_token_cost.md) — 機械証拠を一括算出→割れた分だけ。202体590万tokの反省 ／ [書き出しはCSVでなくTSV](feedback_tsv_not_csv.md)
+- [【戒め】skillの規定=実装の保証ではない](skill_rule_without_implementation.md) — 規定に頼る前にgrepで実体を確認(上下巻統合が未実装だった)
 - [promote完了後プロセス居座り=os._exitで解消済](promote_hangs_on_exit_windows.md) — intake経由では絶対killしない ／ [【戒め】promote空--only全消し事故](promote_empty_only_wipe_accident.md) — ガード済
 - [重複ページdedup完了](page_dedup_2026_06.md) — 同名別作品952は正当 ／ [分裂・過統合クリーンアップ](fragmentation_overmerge_cleanup.md) ／ [過剰統合スイープ=稀](overmerge_sweep_conclusion.md) — 機械一括除去禁止
 - [公開=Worker+R2(Pages不可)](hosting_worker_r2_architecture.md) ／ [公開環境2系統](deploy_environments_state.md) — 本番=workers.dev/テスト=mangal-preview
