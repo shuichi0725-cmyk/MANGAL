@@ -131,3 +131,4 @@
 - [【型・検出器+apply正式化・8段適用済】Sugar&Spice型=巻題を題として別sid登録→末尾巻欠け](subtitle_orphan_volume_split_sugar_spice.md) — _audit/_apply-subtitle-orphan-volume.py。2026-09-03 に別sid195巻/取込もれ1,021巻/版分離canonical 46頁/0巻opt-in(vol0-show.yml)/under-merge4/レーベル違い等を適用。残=review.tsv(発売未確定・原版1巻不明のみ)
 - [【道具の罠】_lookup.py --isbn --live はキャッシュ済だとliveを叩かない](lookup_isbn_live_cached_skip.md) — NDLはndl_live直叩き・楽天が年だけの巻は載せない・旧キャッシュは誤記録あり
 - [【禁止】BOOK☆WALKERは試し読み収集不可](bookwalker_harvest_forbidden.md) — robots.txtがClaudeBot全面Disallow+/de*/?sample=*も全crawler禁止。新情報源はまずrobots.txtを取る
+- [SEO構造相談2026-09-04=穴7点の順位・1,2適用済(機能蒸留待ち)](seo_structure_gaps_2026_09_04.md) — 次は雑誌/年ハブ・ジャンル面サブ面・anime二重サフィックス。ユーザ側=Crawler Hints+Bing
