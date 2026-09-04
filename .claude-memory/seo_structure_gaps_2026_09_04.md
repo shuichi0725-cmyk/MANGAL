@@ -26,7 +26,7 @@ metadata:
 7. ⬜ 作品頁の重さ: ★実測訂正= 本番 one-piece 生HTML **341KB**(br圧縮後32KB)、JS 563KB。RSCペイロード重複は Next app router の構造(ハブ面でも66%)。中期。
 
 ## ユーザ側スイッチ(未実施)
-- Cloudflare **Crawler Hints**(IndexNow自動通知・無料・1クリック)+ Bing Webmaster Tools に sitemap。Bing流入>Google の現状では即効。
+- ~~Cloudflare Crawler Hints~~ → **IndexNow は自前送信に切替**(2026-09-04 ユーザ裁定。Worker+R2 では Crawler Hints が発火しない疑い。[[indexnow_self_submit]])。残るユーザ側= Bing Webmaster Tools に sitemap 登録。
 - 本番待ちの機能蒸留(/shinkan静的化・ナビ改訂・本件1〜4)を出し、GSCで /shinkan 系と /magazine /publisher /year のURL登録リクエスト。
 
 ## 実装時の罠(実踏)

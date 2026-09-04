@@ -76,6 +76,8 @@ def main():
                     help="同期成功後の _kv-redirects-sync.py 自動連鎖を抑止(既定=mangal-siteなら実行)")
     ap.add_argument("--no-reconcile", action="store_true",
                     help="manifest 欠損キーの ETag 照合補完をしない(= 欠損は全て PUT し直す)")
+    ap.add_argument("--no-indexnow", action="store_true",
+                    help="変更/削除した頁URLを IndexNow pending に積まない(既定=mangal-siteなら積む。送信は finalize)")
     ap.add_argument("--workers", type=int, default=32)
     a = ap.parse_args()
 
@@ -266,6 +268,16 @@ def main():
     os.makedirs(os.path.dirname(MANIFEST), exist_ok=True)
     json.dump(nextm, open(MANIFEST, "w", encoding="utf-8"))
     print(f"完了: put {len(to_put)} / manifest更新 {MANIFEST}")
+
+    # ★IndexNow (2026-09-04): 変更/削除した頁URLを pending に積む。 送信は _weekly-finalize.py の
+    #   edge purge 後(= エンジンが取りに来た時に旧キャッシュを掴ませない)。 失敗しても同期は止めない。
+    if a.bucket == "mangal-site" and not a.no_indexnow:
+        try:
+            import _indexnow
+            _dels = to_del if (a.prune and to_del and not prune_block) else []
+            print(_indexnow.pending_add([k for k, _ in to_put], _dels, "r2-sync"))
+        except Exception as _e:
+            print(f"(IndexNow pending 積み skip: {_e})")
 
     # ★Class A 使用量の簿記+予算番人 (2026-08-26 ユーザ裁定「週次は絶対毎週やる」=共通module化)
     try:

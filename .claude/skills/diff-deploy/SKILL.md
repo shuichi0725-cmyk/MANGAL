@@ -31,3 +31,6 @@ python scripts/_deploy-differential.py --only a,b,c   # 明示指定(SRC stem)
 ## 事後
 - 疎通出力(疎通 n/3 OK)を確認・ユーザに 更新頁数/削除数/purge結果 を報告
 - 新規頁が index guard(schema検証)で out に無い→abort(exit 7)。先に頁を直す
+
+## ★IndexNow 自動通知 (2026-09-04)
+- PUT+purge+疎通の後、変更頁(公開slug)と削除頁のURLを `_indexnow.py` で IndexNow へ即送信(`--no-indexnow` で抑止)。`--weekly-json` のデータ週も同じ。状態= `python scripts/_indexnow.py --status`。

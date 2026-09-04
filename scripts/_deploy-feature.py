@@ -112,6 +112,7 @@ def main():
     ap.add_argument("--skip-tests", action="store_true",
                     help="★非推奨: 検索スナップショット等の前検査を飛ばす(退行がそのまま本番に出る)")
     ap.add_argument("--workers", type=int, default=16)
+    ap.add_argument("--no-indexnow", action="store_true", help="変更した面のURLを IndexNow へ送らない")
     a = ap.parse_args()
 
     # --- 0. 前提(fail-closed) ---
@@ -370,6 +371,15 @@ def main():
         except Exception as e:
             print(f"  疎通 {label}: FAIL {path} ({e})")
     print(f"疎通: {ok}/{len(checks)} OK")
+
+    # --- 10. ★IndexNow (2026-09-04): 自前 purge 済みなので、変更した面のURLを積んで即送信 ---
+    if not a.no_indexnow:
+        try:
+            import _indexnow
+            print(_indexnow.pending_add([k for k, _, _ in to_put], [], "feature-distill"))
+            print(_indexnow.drain())
+        except Exception as _e:
+            print(f"(IndexNow skip: {_e}) → 手動: python scripts/_indexnow.py --drain")
     print("=== 機能蒸留 完了 ===")
 
 

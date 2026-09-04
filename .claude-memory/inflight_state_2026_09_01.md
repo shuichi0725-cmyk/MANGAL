@@ -37,3 +37,6 @@ metadata:
 
 ## 追記 2026-09-04(午後): 雑誌/出版社/年ハブ850面+ジャンル下位面219も本番待ち(コードのみ=機能蒸留で出る、sitemap反映は週次)
 - commit 4a916dec1。詳細=[[seo_structure_gaps_2026_09_04]]。機能蒸留の同期は out/ から manga/calendar/索引/sitemap を除く全ファイル=新ディレクトリ magazine/ publisher/ year/ genre/<key>/ も自動で載る。
+
+## 追記 2026-09-04(夕): IndexNow 自前送信を配管(scripts/_indexnow.py + r2-sync/finalize/feature/differential にフック)
+- 鍵ファイル public/efa08…txt は本番404のまま(次の機能蒸留/週次で R2 に上がる)。上がるまで送信は pending 保持。上がった後の最初の finalize/機能蒸留で自動送信が始まる。[[indexnow_self_submit]]

@@ -132,3 +132,4 @@
 - [【道具の罠】_lookup.py --isbn --live はキャッシュ済だとliveを叩かない](lookup_isbn_live_cached_skip.md) — NDLはndl_live直叩き・楽天が年だけの巻は載せない・旧キャッシュは誤記録あり
 - [【禁止】BOOK☆WALKERは試し読み収集不可](bookwalker_harvest_forbidden.md) — robots.txtがClaudeBot全面Disallow+/de*/?sample=*も全crawler禁止。新情報源はまずrobots.txtを取る
 - [SEO構造相談2026-09-04=穴7点・1〜4,6適用済(ジャンルtitle/チップ/雑誌・出版社・年ハブ850面/ジャンル下位219/anime二重サフィックス/list静的シェル)](seo_structure_gaps_2026_09_04.md) — 機能蒸留待ち。残=5著者頁の薄さ・7頁の重さ。ユーザ側=Crawler Hints+Bing。★ls -l第5列はgroup id/素のnext buildはdata/manga旧世代
+- [IndexNow自前送信=_indexnow.py(r2-sync→pending→finalize purge後drain / feature・diff-deployは即drain)](indexnow_self_submit.md) — 鍵=public/efa08…txt(公開・非秘密)。Google非対応=sitemapが正。--status/--drain/--no-indexnow

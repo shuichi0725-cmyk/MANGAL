@@ -79,6 +79,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--only", help="SRC stemカンマ区切り(省略=markerから自動検出)")
     ap.add_argument("--dry", action="store_true")
+    ap.add_argument("--no-indexnow", action="store_true", help="変更/削除した頁URLを IndexNow へ送らない")
     ap.add_argument("--weekly-json", action="store_true",
                     help="週次データ週モード: calendar/shinkan/data/idx のJSON面もhash差分PUT+purge(+トップpurge)")
     a = ap.parse_args()
@@ -343,6 +344,16 @@ def main():
         except Exception:
             pass
     print(f"疎通: {ok}/{min(3, len(inner))} OK")
+
+    # --- 9. ★IndexNow (2026-09-04): 自前 purge 済みなので、変更頁(公開slug)と削除頁を積んで即送信 ---
+    if not a.no_indexnow:
+        try:
+            import _indexnow
+            print(_indexnow.pending_add([f"manga/{s}.html" for s in inner.values()],
+                                        [f"manga/{s}.html" for s in dropped], "diff-deploy"))
+            print(_indexnow.drain())
+        except Exception as _e:
+            print(f"(IndexNow skip: {_e}) → 手動: python scripts/_indexnow.py --drain")
     print("=== 差分反映 完了 ===")
 
 

@@ -204,6 +204,14 @@ def main():
         print("  WARN isbn-loss --snapshot 失敗(次週の監視基準が古いまま。手動で再実行を)")
     else:
         print("  OK   ISBN消失snapshot更新(次週の監視基準)")
+    # 7. ★IndexNow drain (2026-09-04): r2-sync / diff-deploy が積んだ変更・削除URLを、edge purge 後の
+    #    ここで送る(Bing/Yandex 系の即時クロール)。 --no-indexnow で抑止。 失敗は WARN 止まり。
+    if "--no-indexnow" not in sys.argv:
+        try:
+            import _indexnow
+            print("  " + _indexnow.drain().replace("\n", "\n  "))
+        except Exception as _e:
+            print(f"  WARN IndexNow 送信 skip({_e}) → 手動: python scripts/_indexnow.py --drain")
     print("\n→ 週次蒸留finalize完了(marker+manifest+snapshot確定。以後の差分反映はこの時点が基準)")
 
 

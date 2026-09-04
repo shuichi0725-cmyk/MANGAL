@@ -76,3 +76,6 @@ python scripts/_deploy-feature.py
 ## 関連
 - 本番フル=skill weekly-distill / データのみ=skill diff-deploy / テスト確認=skill test-deploy
 - 索引形式変更の規約=[[index_format_change_versioned_filename]] / 長時間ジョブ運転=skill long-job-ops
+
+## ★IndexNow 自動通知 (2026-09-04)
+- PUT+purge+疎通の後、変更した面のURLを `_indexnow.py` で IndexNow へ即送信(`--no-indexnow` で抑止、`--dry` は到達しない)。鍵ファイルが本番未配信なら pending に保持し次回送る。状態= `python scripts/_indexnow.py --status`。

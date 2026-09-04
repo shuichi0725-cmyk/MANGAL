@@ -181,3 +181,7 @@ python scripts/_weekly-finalize.py
   プロセスをMSYSのpsが間欠的に見失い「終了」と誤検知×2回。`tasklist //FI "IMAGENAME eq python.exe"`
   +10秒後の2段確認が確実。ログ無言でもpythonのCPU時間が伸びていれば稼働中=ハッシュ照合フェーズ)
 - ps1 2本は `.cache/` 置き(C:)。中身のパスはこのPCの絶対パス=PC移行時は書き直す。
+
+## ★IndexNow 自動通知 (2026-09-04 ユーザ裁定「自前で直接叩く」)
+- `_r2-sync.py` が差分PUT/prune の頁URLを `.cache/indexnow-pending.json` に積み、`_weekly-finalize.py` が **edge purge 後**に送信(drain)する(Bing/Yandex/Naver 系の即時クロール。Google は読まない=sitemapが正)。
+- 鍵 = `public/efa08a89a5e7a14dc0bde143738fae20.txt`(公開ファイル・秘密ではない)。本番の鍵ファイルが200でないと送らず pending に保持。抑止は各スクリプト `--no-indexnow`、状態は `python scripts/_indexnow.py --status`、手動送信は `--drain`。
