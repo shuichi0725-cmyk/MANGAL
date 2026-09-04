@@ -76,6 +76,7 @@
 - [【方針】掲載除外の優先度](exclusion_priority_policy.md) — ①成年誌②コンビニ本③纏められないもの
 - [反映=targeted](reflect_protocol_fast.md) — 正=skill reflect-targeted ／ [新規登録の戒め](new_manga_registration_order.md) — 正=skill new-manga-register
 - [【必ず使う】記憶をgit永続化](memory_git_mirror.md) — _sync-memory.py+push ／ [【方針】記憶とskillの棲み分け](feedback_memory_vs_skill_policy.md)
+- [【型・検出器+適用器】すてごろブッチ型=予約巻の発売日が延期されても追随しない](preorder_date_drift_sutegoro_type.md) — 根因=予約頁合流にoverride未結線(穴の5件目)・適用は楽天×NDL一致のみ。残=year_started 211頁
 - [【型】発売日を変えるとISBNが入れ替わる/overrideが効かない経路](release_date_change_side_effects.md) — 日付を触る全作業の前提・検算の型つき
 - [【方針】Wikipediaの発売日は採用](wikipedia_release_date_is_authoritative.md) — 種2は奥付日で1か月ずれる・機構=release-date-override.jsonl
 - [【厳守】本番デプロイはトリガー待ち](feedback_production_deploy_gate.md) ／ [【厳守】価格の静的表示は絶対禁止](feedback_no_static_prices.md) ／ [【厳守】週次蒸留=「週次蒸留して」のみで発動](feedback_weekly_distill_exact_trigger_only.md)

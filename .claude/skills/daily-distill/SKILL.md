@@ -69,6 +69,7 @@ B=NDL新着回収(納本済み過去分)。毎日でなくてよい(間隔が空
 | 9 | **検査**(下記チェックリスト) | 欠け>0なら原因調査 |
 | 10 | ★**prev確定**(処理完了の宣言) | `python scripts/_preorder-increment.py --commit-prev` ← full→prev昇格。**これ以外の方法でprevを触るな**。飛ばすと次回差分が壊れる |
 | 10.5 | ★**出荷前レビュー(ゲート)** | `python scripts/_preorder-review.py` ← **exit 0 まで push禁止**。下記で各行裁定 |
+| 10.6 | ★**発売日ドリフト**(2026-09-04新設・すてごろブッチ型) | `python scripts/_audit-preorder-date-drift.py` → `python scripts/_apply-preorder-date-drift.py`(dry-run で保留理由を読む) → `--apply` → `_reflect-targeted.py --only $(cat .cache/preorder-date-drift-stems.txt \| tr '\n' ',') --commit-only`。★**予約巻は後から発売日が動く**(延期/前倒し)。この日のharvestが最新スナップショットなので**ここで突合するのが一番安い**(live不要)。適用は**楽天とNDLが一致した行だけ**=±1日の「奥付日 vs 店頭日」は保留に落ちる(変更しないのが正解)。日付が動いた月は `_build-calendar.py data/manga.v2 data/calendar <当月>` も回す(暦は本番フル版) |
 | 10.7 | ★**保留頁の自動再訪**(2026-08-24新設③) | `python scripts/_preorder-refresh-held.py --limit 30` ← demographic/caption待ちで索引保留の予約由来頁を楽天再照会で埋める(捏造なし=返った時だけ)。touchedが出たら `_reflect-targeted.py --only <touched> --commit-only` |
 | 10.8 | ★**レビューシート生成→ユーザへ**(2026-08-24新設①) | `python scripts/_gen-review-sheet.py` → `.cache/review-sheet.html` をユーザに送付(SendUserFile render)。書影/出版社/slug/ジャンル/再録疑いを一覧色付け=1頁ずつ開かせない |
 | 11 | 索引+暦(**commit止め**) | `python scripts/_build-list-index.py .preview-data/manga .preview-data` ; `python scripts/_build-calendar.py .preview-data/manga public/calendar <当月>` ; `git add .preview-data public/calendar && git commit`(★**pushしない**) |
@@ -85,6 +86,9 @@ B=NDL新着回収(納本済み過去分)。毎日でなくてよい(間隔が空
   ★**頁数がその日のドラフト数と一致するか**を必ず数える= 一致しなければ前回分が残っている[2026-08-14実害])
 - □ ★**本番待ちper-caseを見たい時は preview に手で足さない**= 日次のswapが毎回流す。skill `prodwait-preview`(「本番待ちテストに出して」)で
   週次前に一括投入するのが正規ルート。日次をまたいで残したい確認セットだけ `data/seeds/preview-keep.txt` に積む。
+- □ ★**発売日ドリフト(手順10.6)の芯が消化済み**(2026-09-04新設)。★**「もう発売済のはずなのに書影が仮のまま」は
+  延期のサイン**= 書影を疑う前に発売日を疑う。`preorder-date-drift.tsv` の POSTPONED/ADVANCED が芯、
+  `-review.tsv` の「奥付日vs店頭日」は**変更しないのが正解**(NDL=こちらの値)。NOT_LISTED(楽天からも消えた)は人が裁定
 - □ **索引skip 0**(Zod検証で落ちる頁=検索に載るが404)
 - □ **索引衛生** `python scripts/_audit-index-hygiene.py data`(cover slim全行/スキーマ/head/alt。2026-07-14新設ゲート)
 - □ **`--commit-prev` 実行済み**(処理完了後のみ。件数確認だけの日は実行しない)
