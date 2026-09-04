@@ -79,3 +79,5 @@ python scripts/_deploy-feature.py
 
 ## ★IndexNow 自動通知 (2026-09-04)
 - PUT+purge+疎通の後、変更した面のURLを `_indexnow.py` で IndexNow へ即送信(`--no-indexnow` で抑止、`--dry` は到達しない)。鍵ファイルが本番未配信なら pending に保持し次回送る。状態= `python scripts/_indexnow.py --status`。
+- ★機能蒸留は定義上コード変更なので、byte 差分には「チャンク名が変わっただけの面」が必ず全部入る。`pending_add_files` の**本文ハッシュ**で実質無変更を落としてから積む(2026-09-04)。
+- ★**purge 失敗分・疎通 0 の時は送らない**(pending に残す)。

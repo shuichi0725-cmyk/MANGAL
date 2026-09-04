@@ -34,3 +34,5 @@ python scripts/_deploy-differential.py --only a,b,c   # 明示指定(SRC stem)
 
 ## ★IndexNow 自動通知 (2026-09-04)
 - PUT+purge+疎通の後、変更頁(公開slug)と削除頁のURLを `_indexnow.py` で IndexNow へ即送信(`--no-indexnow` で抑止)。`--weekly-json` のデータ週も同じ。状態= `python scripts/_indexnow.py --status`。
+- ★**purge に失敗したURL / 疎通 0 の時は送らない**(2026-09-04)。pending に残り次の週次で送られる。旧は「旧キャッシュが残る」と表示しながらクローラを呼んでいた。
+- ★**削除頁は公開slugで消す**(2026-09-04)。検出キーは SRC stem で、公開slugとは 1,759頁/69,223頁 食い違う。解決順= `.cache/prod-page-slugs.json`(週次が生成)→ `data/seeds/slug-overrides.yml`(頁を消しても残る)→ 本番manifestの実在。旧は stem で DELETE/purge/通知していたため **R2に本物が残る孤児頁**になっていた。

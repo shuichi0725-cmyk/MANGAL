@@ -206,12 +206,15 @@ def main():
         print("  OK   ISBN消失snapshot更新(次週の監視基準)")
     # 7. ★IndexNow drain (2026-09-04): r2-sync / diff-deploy が積んだ変更・削除URLを、edge purge 後の
     #    ここで送る(Bing/Yandex 系の即時クロール)。 --no-indexnow で抑止。 失敗は WARN 止まり。
+    #    ★送る直前に **そのURL自身を purge** する(2026-09-04): 上の purge は索引/JSON/sitemap だけで、
+    #      変更した漫画頁を落としていなかった。 HTML は s-maxage=86400 = 落とさずに呼ぶと
+    #      クローラに旧HTMLを掴ませる。 purge に失敗したURLは今回送らず pending に残す。
     if "--no-indexnow" not in sys.argv:
         try:
             import _indexnow
-            print("  " + _indexnow.drain().replace("\n", "\n  "))
+            print("  " + _indexnow.drain(purge=True).replace("\n", "\n  "))
         except Exception as _e:
-            print(f"  WARN IndexNow 送信 skip({_e}) → 手動: python scripts/_indexnow.py --drain")
+            print(f"  WARN IndexNow 送信 skip({_e}) → 手動: python scripts/_indexnow.py --drain --purge")
     print("\n→ 週次蒸留finalize完了(marker+manifest+snapshot確定。以後の差分反映はこの時点が基準)")
 
 

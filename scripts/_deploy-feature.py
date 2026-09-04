@@ -331,6 +331,8 @@ def main():
 
     # --- 8. edge cache purge(変更した面のみ) ---
     token = env.get("R2_PURGE_TOKEN", "")
+    page_urls = ["/" if k == "index.html" else "/" + k[:-5] for k, _, _ in to_put if k.endswith(".html")]
+    purge_failed = set()   # ★purge できなかった面は IndexNow に流さない(旧HTMLを掴ませないため)
     if token:
         paths = []
         for key, _, _ in to_put:
@@ -348,10 +350,12 @@ def main():
                 purged += json.load(urllib.request.urlopen(req, timeout=60)).get("purged", 0)
             except Exception:
                 pfail += 1
+                purge_failed.update(paths[i:i + 10])
             time.sleep(0.3)
         print(f"cache purge: {len(paths)}パス / purged {purged} / 失敗batch {pfail}")
     else:
         print("purge token未設定 → 旧キャッシュは最長1日(HTML)/7日(JSON)残る")
+        purge_failed.update(page_urls)
 
     # --- 9. 疎通(新しい面 + 旧漫画頁の生存) ---
     checks = [("/", "ホーム")]
@@ -379,7 +383,11 @@ def main():
         try:
             import _indexnow
             print(_indexnow.pending_add_files([(k, p) for k, p, _ in to_put], [], "feature-distill"))
-            print(_indexnow.drain())
+            # ★purge 失敗分は送らない / 疎通が全滅なら送らない(pending に残るので次の週次で送る)
+            if ok == 0:
+                print("IndexNow: 疎通が 0 → 送信見送り(pending に保持)")
+            else:
+                print(_indexnow.drain(exclude=purge_failed))
         except Exception as _e:
             print(f"(IndexNow skip: {_e}) → 手動: python scripts/_indexnow.py --drain")
     print("=== 機能蒸留 完了 ===")

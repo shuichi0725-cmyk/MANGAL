@@ -254,6 +254,46 @@ def pending_add_files(put_pairs, del_keys=(), source="?", seed_pairs=(), dry=Fal
     return head + "\n" + detail
 
 
+def purge_token():
+    """R2_PURGE_TOKEN を env / .env.local から。 無ければ ""(= purge できない)。"""
+    t = os.environ.get("R2_PURGE_TOKEN", "")
+    if t:
+        return t.strip()
+    for name in (".env.local", ".env"):
+        p = os.path.join(ROOT, name)
+        if os.path.exists(p):
+            for ln in open(p, encoding="utf-8"):
+                if ln.startswith("R2_PURGE_TOKEN=") and "=" in ln:
+                    return ln.split("=", 1)[1].strip().strip('"').strip("'")
+    return ""
+
+
+def purge_urls(urls, token=None, batch=10, sleep=0.2, log_every=100, timeout=60):
+    """★通知する前に、そのURLの edge cache を落とす (2026-09-04)。 戻り = (purged, 失敗したURLの集合)。
+
+    なぜ: HTML は `s-maxage=86400`(エッジ1日)。 purge せずにクローラを呼ぶと **旧HTMLを掴ませる**
+    = IndexNow を打つ意味が消える。 週次 finalize の purge は索引/JSON/sitemap だけで
+    **変更した漫画頁を落としていなかった**(= 設計意図と実装のズレ)。
+    ★batch=10 は worker の CPU 上限(≥50 で落ちる)に合わせた実測値。"""
+    token = token if token is not None else purge_token()
+    if not token:
+        return 0, set(urls)
+    purged, failed = 0, set()
+    for i in range(0, len(urls), batch):
+        part = urls[i:i + batch]
+        try:
+            rq = urllib.request.Request(f"https://{HOST}/api/purge", method="POST",
+                                        data=json.dumps({"paths": part, "token": token}).encode(),
+                                        headers={"content-type": "application/json", "User-Agent": UA})
+            purged += json.load(urllib.request.urlopen(rq, timeout=timeout)).get("purged", 0)
+        except Exception:
+            failed.update(part)
+        if log_every and (i // batch) % log_every == 0 and i:
+            print(f"    purge {i:,}/{len(urls):,} (失敗 {len(failed):,})", flush=True)
+        time.sleep(sleep)
+    return purged, failed
+
+
 def key_file_live(key, timeout=20):
     """本番の鍵ファイルが 200 かつ中身一致か。"""
     try:
@@ -329,21 +369,45 @@ def submit(urls, dry=False, verify=True):
     return ok_urls, bad, summary
 
 
-def drain(dry=False, verify=True, max_urls=MAX_PER_DRAIN):
+def drain(dry=False, verify=True, max_urls=MAX_PER_DRAIN, exclude=None, purge=False):
     """pending を送信し、受理分だけ pending から消す。 戻り=人向け要約。
 
     ★max_urls = 1回で送る上限(既定 10,000 = 1 POST)。 本文ハッシュ層(pending_add_files)を抜けて
       なお巨大になる唯一の場合 = テンプレート改修等で**本当に全頁の内容が変わった**時。
       その時も一度に9万を投げず、古い順に上限まで送って残りは pending に留める(= 次の drain で継続)。
-      黙って切り捨てず、必ず残数を表示する。"""
+      黙って切り捨てず、必ず残数を表示する。
+    ★exclude = 今回は送らないURL(= edge purge に失敗した分)。 pending には残るので次回送られる。
+    ★purge=True で、送る直前に自分でそのURLを purge する(週次 finalize 用。
+      finalize の purge は索引/JSONだけで、変更した漫画頁を落としていなかった)。"""
     d = _load_pending()
     urls = list(d["urls"].keys())
     if not urls:
         return "IndexNow: pending なし"
+    skipped_purge = 0
+    if exclude:
+        ex = set(exclude)
+        urls = [u for u in urls if u not in ex]
+        skipped_purge = len(d["urls"]) - len(urls)
+        if not urls:
+            return (f"IndexNow: 送信見送り(edge purge 未完了 {skipped_purge:,} URL)。 pending に保持 = "
+                    f"次回のデプロイ/週次で送る")
     held = 0
     if max_urls and len(urls) > max_urls:
         held = len(urls) - max_urls
         urls = urls[:max_urls]           # dict は挿入順 = 古いものから送る
+    if purge and not dry:
+        # ★送る前に自分で落とす。 失敗したURLは今回送らない(旧HTMLを掴ませないため pending に残す)
+        tok = purge_token()
+        if not tok:
+            return ("IndexNow: 送信見送り(R2_PURGE_TOKEN 未設定 = edge の旧HTMLを落とせない)。 "
+                    f"pending {len(d['urls']):,} は保持")
+        n_purged, pfail = purge_urls(urls, tok)
+        print(f"    IndexNow前 purge: {len(urls):,} URL / purged {n_purged:,} / 失敗 {len(pfail):,}", flush=True)
+        if pfail:
+            urls = [u for u in urls if u not in pfail]
+            skipped_purge += len(pfail)
+            if not urls:
+                return f"IndexNow: 送信見送り(purge が全滅 {len(pfail):,})。 pending {len(d['urls']):,} は保持"
     ok_urls, bad, summary = submit(urls, dry=dry, verify=verify)
     if ok_urls:
         # ★受理された URL そのものだけを消す(件数での前方一致削除は取り違える。 submit の docstring 参照)
@@ -352,6 +416,8 @@ def drain(dry=False, verify=True, max_urls=MAX_PER_DRAIN):
         _save_pending(d)
     if held:
         summary += f" / 上限 {max_urls:,}/回 のため {held:,} URL は次回 drain に持ち越し"
+    if skipped_purge:
+        summary += f" / edge purge 未完了で見送り {skipped_purge:,}(pending に保持)"
     return summary + (f" / 残 {len(d['urls']):,}" if d["urls"] else "")
 
 
@@ -417,6 +483,8 @@ def main():
     ap.add_argument("--add-keys-file", help="R2キー一覧(1行1キー)を pending に積む")
     ap.add_argument("--clear", action="store_true", help="pending を捨てる")
     ap.add_argument("--dry", action="store_true")
+    ap.add_argument("--purge", action="store_true",
+                    help="送る直前に対象URLの edge cache を落とす(失敗分は送らず pending に残す)")
     ap.add_argument("--max", type=int, default=MAX_PER_DRAIN,
                     help=f"1回の drain で送る上限(既定 {MAX_PER_DRAIN:,}。 超過分は pending に残る)")
     ap.add_argument("--no-verify", action="store_true", help="鍵ファイルの本番生存確認を省く")
@@ -434,7 +502,7 @@ def main():
         urls = [u if u.startswith("/") else "/" + u for u in urls]
         _, _, s = submit(urls, dry=a.dry, verify=not a.no_verify); print(s); return
     if a.drain:
-        print(drain(dry=a.dry, verify=not a.no_verify, max_urls=a.max)); return
+        print(drain(dry=a.dry, verify=not a.no_verify, max_urls=a.max, purge=a.purge)); return
     print(status())
 
 

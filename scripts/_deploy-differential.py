@@ -23,7 +23,7 @@
   python scripts/_deploy-differential.py --dry           # 検出と計画のみ
 marker 初期化/更新は本スクリプトが成功時に自動。週次蒸留後は weekly 側が更新する。
 """
-import argparse, hashlib, json, os, shutil, subprocess, sys, urllib.request
+import argparse, hashlib, json, os, re, shutil, subprocess, sys, urllib.request
 sys.stdout.reconfigure(encoding="utf-8")
 import yaml
 
@@ -35,6 +35,8 @@ OUT = os.path.join(ROOT, "out")
 DIFFDATA = os.path.join(ROOT, ".cache", "diffdata")  # ★2026-07-17 C:化(ユーザ裁定=D:はバックアップ倉庫のみ・ビルド経路に入れない)
 MARKER = os.path.join(ROOT, ".cache", "prod-deploy-marker.json")
 MANIFEST = os.path.join(ROOT, ".cache", "r2-manifest.json")
+PAGE_SLUGS = os.path.join(ROOT, ".cache", "prod-page-slugs.json")   # stem → 公開slug(消えた頁用)
+SLUG_RE = re.compile(rb"^slug:\s*(.+?)\s*$", re.M)
 BUCKET = "mangal-site"
 WORKER = "https://mangal-db.com"  # 2026-07-04 カスタムドメイン開通(workers.devも並行稼働)
 # 漫画頁のHTML/チャンクに影響するコード面(ここが動いたら部分ビルド禁止)
@@ -73,6 +75,63 @@ def s3_client(env):
 
 CT = {".html": "text/html; charset=utf-8", ".txt": "text/plain; charset=utf-8",
       ".json": "application/json"}
+
+
+def load_slug_ledger(root):
+    """stem → 公開slug の台帳。 2源を重ねる:
+       ① data/seeds/slug-overrides.yml = **頁を消しても残る**恒久記録(改名の来歴。 flat と入れ子の2形あり)
+       ② .cache/prod-page-slugs.json   = 週次/差分反映が残す「本番に出した時の対応表」(新しい方=優先)"""
+    led = {}
+    p = os.path.join(root, "data", "seeds", "slug-overrides.yml")
+    if os.path.exists(p):
+        try:
+            # ★2形が同居する: 素の `stem: slug`(142件) と `overrides:` 配下の
+            #   `stem: {slug:, at:, reason:}`(1,788件)。 片方だけ読むと静かに取り逃す。
+            def _absorb(d):
+                for st, v in (d or {}).items():
+                    if isinstance(v, str):
+                        led[str(st)] = v
+                    elif isinstance(v, dict) and v.get("slug"):
+                        led[str(st)] = str(v["slug"])
+            top = yaml.safe_load(open(p, encoding="utf-8")) or {}
+            _absorb(top)
+            for k, v in top.items():          # `overrides:` 等のまとめキーを1段だけ潜る
+                if isinstance(v, dict) and not v.get("slug"):
+                    _absorb(v)
+        except Exception:
+            pass
+    p2 = os.path.join(root, ".cache", "prod-page-slugs.json")
+    if os.path.exists(p2):
+        try:
+            led.update(json.load(open(p2, encoding="utf-8")))
+        except Exception:
+            pass
+    return led
+
+
+def resolve_pub_slug(stem, ledger, manifest):
+    """SRC stem → 公開slug。 消えた頁は yml が無いので台帳で引き、本番manifestの実在で検算する。
+    台帳が無い/古い時は「本番に実在する方」を採り、どちらも無ければ台帳(無ければstem)を返す。"""
+    cand = ledger.get(stem, stem)
+    if f"manga/{cand}.html" in manifest:
+        return cand
+    if f"manga/{stem}.html" in manifest:
+        return stem
+    return cand
+
+
+def _selftest():
+    man = {"manga/yoake-yoshida.html": "h", "manga/one-piece.html": "h"}
+    led = load_slug_ledger(ROOT)
+    assert led.get("devilman-lady-2000") == "devilman-lady", "入れ子形の slug-overrides を読めていない"
+    assert led.get("100-mandoru-naito") == "100-mandoru-night", "flat形の slug-overrides を読めていない"
+    led = {"yoshida-akimi": "yoake-yoshida"}
+    assert resolve_pub_slug("yoshida-akimi", led, man) == "yoake-yoshida"   # 台帳どおり
+    assert resolve_pub_slug("one-piece", led, man) == "one-piece"           # stem=slug
+    assert resolve_pub_slug("one-piece", {"one-piece": "zzz"}, man) == "one-piece"  # 台帳が古い→実在優先
+    assert resolve_pub_slug("nowhere", {}, man) == "nowhere"                # どちらも無し
+    assert SLUG_RE.search(b"# c\nslug: yoake-yoshida\ntitle: x\n").group(1) == b"yoake-yoshida"
+    print("selftest OK")
 
 
 def main():
@@ -123,13 +182,19 @@ def main():
             print("★abort: prod-pages-manifest無し。週次蒸留後に scripts/_init-pages-manifest.py で初期化。")
             sys.exit(3)
         prev_pm = json.load(open(pm_path, encoding="utf-8"))
-        cur = {}
+        cur, cur_slugs = {}, {}
         for p in _g.glob(os.path.join(ROOT, "data", "manga.v2", "*.yml")):
             st = os.path.basename(p)[:-4]
-            cur[st] = hashlib.sha1(open(p, "rb").read()).hexdigest()[:16]
+            raw = open(p, "rb").read()
+            cur[st] = hashlib.sha1(raw).hexdigest()[:16]
+            _m = SLUG_RE.search(raw)
+            _sl = _m.group(1).decode("utf-8", "replace").strip().strip('"').strip("'") if _m else ""
+            if _sl and _sl != st:
+                cur_slugs[st] = _sl
         stems = [st for st, h in sorted(cur.items()) if prev_pm.get(st) != h]
         dropped = [st for st in sorted(prev_pm) if st not in cur]
         globals()["_CUR_PM"] = cur
+        globals()["_CUR_SLUGS"] = cur_slugs
     if not stems and not dropped:
         print("差分なし(marker以降 data/manga.v2 に変更がない)。")
         return
@@ -248,10 +313,24 @@ def main():
         print(_rl.report())
     except Exception:
         pass
+    # ★消す頁は **公開slug** で消す (2026-09-04 修正)。 manifest/検出のキーは SRC stem で、
+    #   公開URLの slug とは 1,759頁/69,223頁 で食い違う([[pubslug_src_stem_generator_trap]])。
+    #   PUT 側は slug なのに DELETE/purge/IndexNow だけ stem を使っていたため、
+    #   stem≠slug の頁を消すと **R2 に本物が残り(孤児頁)、存在しないURLを purge/通知**していた。
+    #   消えた頁は yml が無いので、週次が残す台帳(_init-pages-manifest.py)+ 本番manifestの実在で決める。
+    _slug_led = load_slug_ledger(ROOT)
+    if dropped and not os.path.exists(PAGE_SLUGS):
+        print("  ※ prod-page-slugs.json が無い(週次未実行) → slug-overrides と本番manifestで解決")
+
+    drop_slugs = [resolve_pub_slug(st, _slug_led, manifest) for st in dropped]
+    _renamed = [(st, sl) for st, sl in zip(dropped, drop_slugs) if st != sl]
+    if _renamed:
+        print(f"  削除頁の stem→公開slug 解決: {len(_renamed)}件 " +
+              ", ".join(f"{s}→{l}" for s, l in _renamed[:5]) + (" …" if len(_renamed) > 5 else ""))
     del_keys = []
-    for st in dropped:
+    for sl in drop_slugs:
         for ext in (".html", ".txt"):
-            del_keys.append(f"manga/{st}{ext}")
+            del_keys.append(f"manga/{sl}{ext}")
     if del_keys:
         s3.delete_objects(Bucket=BUCKET, Delete={"Objects": [{"Key": k} for k in del_keys]})
         for k in del_keys:
@@ -293,8 +372,10 @@ def main():
 
     # --- 6. edge cache purge ---
     token = env.get("R2_PURGE_TOKEN", "")
+    page_urls = [f"/manga/{s}" for s in inner.values()] + [f"/manga/{s}" for s in drop_slugs]
+    purge_failed = set()   # ★purge できなかった頁は IndexNow に流さない(旧HTMLを掴ませないため)
     if token:
-        paths = [f"/manga/{s}" for s in inner.values()] + [f"/manga/{s}" for s in dropped] + \
+        paths = page_urls + \
                 [f"/{n}" for n in IDX] + [f"/{k}" for k in json_synced] + (["/"] if a.weekly_json else [])
         # ★10/batch(実測: ≤10成功/≥50はworker CPU上限500)。UA必須(無し=CF 403)。失敗は致命でない(≤1日で自然失効)
         import time as _t
@@ -308,10 +389,12 @@ def main():
                 purged += json.load(urllib.request.urlopen(req, timeout=60)).get("purged", 0)
             except Exception:
                 pfail += 1
+                purge_failed.update(paths[_i:_i + 10])   # ★このバッチのURLは今回 IndexNow に流さない
             _t.sleep(0.3)
         print(f"cache purge: {len(paths)}パス / purged {purged} / 失敗batch {pfail}")
     else:
         print("purge token未設定 → 旧キャッシュは最長1日残る")
+        purge_failed.update(page_urls)   # 落とせないので今回は IndexNow を打たない(pending に残す)
 
     # --- 7. manifest + marker 更新 ---
     json.dump(manifest, open(MANIFEST, "w", encoding="utf-8"))
@@ -322,7 +405,8 @@ def main():
     pm_path = os.path.join(ROOT, ".cache", "prod-pages-manifest.json")
     if "_CUR_PM" in globals():
         json.dump(globals()["_CUR_PM"], open(pm_path, "w"))
-        print("pages-manifest全更新")
+        json.dump(globals().get("_CUR_SLUGS", {}), open(PAGE_SLUGS, "w"))
+        print("pages-manifest全更新 / 公開slug台帳全更新")
     elif os.path.exists(pm_path):
         pm = json.load(open(pm_path, encoding="utf-8"))
         for st in inner:
@@ -332,7 +416,23 @@ def main():
         for st in dropped:
             pm.pop(st, None)
         json.dump(pm, open(pm_path, "w"))
-        print("pages-manifest部分更新")
+        # ★公開slug台帳も同じ歩調で(次に消える時のために stem→slug を残す)。
+        #   書くのは sidecar 自身の内容だけ(解決用に重ねた slug-overrides は混ぜない)
+        _sc = {}
+        if os.path.exists(PAGE_SLUGS):
+            try:
+                _sc = json.load(open(PAGE_SLUGS, encoding="utf-8"))
+            except Exception:
+                _sc = {}
+        for st, sl in inner.items():
+            if sl != st:
+                _sc[st] = sl
+            else:
+                _sc.pop(st, None)
+        for st in dropped:
+            _sc.pop(st, None)
+        json.dump(_sc, open(PAGE_SLUGS, "w"))
+        print("pages-manifest部分更新 / 公開slug台帳部分更新")
 
     # --- 8. 疎通 ---
     ok = 0
@@ -346,16 +446,25 @@ def main():
     print(f"疎通: {ok}/{min(3, len(inner))} OK")
 
     # --- 9. ★IndexNow (2026-09-04): 自前 purge 済みなので、変更頁(公開slug)と削除頁を積んで即送信 ---
+    # ★purge に失敗したURL・疎通が全滅した時は **送らない**(pending には残るので次の週次で送る)。
+    #   旧: pfail を数えて print するだけで無条件に drain = 「旧HTMLが残る」と表示しながらクローラを呼んでいた。
     if not a.no_indexnow:
         try:
             import _indexnow
             print(_indexnow.pending_add([f"manga/{s}.html" for s in inner.values()],
-                                        [f"manga/{s}.html" for s in dropped], "diff-deploy"))
-            print(_indexnow.drain())
+                                        [f"manga/{s}.html" for s in drop_slugs], "diff-deploy"))
+            if inner and ok == 0:
+                print("IndexNow: 疎通が 0/3 → 送信見送り(pending に保持。 本番が応答しない状態で"
+                      "クローラを呼ばない)")
+            else:
+                print(_indexnow.drain(exclude=purge_failed))
         except Exception as _e:
             print(f"(IndexNow skip: {_e}) → 手動: python scripts/_indexnow.py --drain")
     print("=== 差分反映 完了 ===")
 
 
 if __name__ == "__main__":
-    main()
+    if "--selftest" in sys.argv:
+        _selftest()
+    else:
+        main()
