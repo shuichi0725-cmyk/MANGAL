@@ -34,8 +34,9 @@ overrides:
 `data/manga.v2` は出力側なので混同しない([[edition_canonical_key_is_src_slug]] と同じ注意)。
 
 **改名に必ず付いてくる3点**:
-1. `data/slug-aliases.yml` と `public/_redirects` に 旧slug→新slug
-2. ★**既に旧slugを指していたリダイレクトは新slugへ張り替える**(Cloudflareはチェーンを辿らない=多段は404)
+1. **`data/slug-aliases.yml` に 旧slug→新slug を足す**(★ここが正本。連鎖はそのまま残してよい=来歴)
+2. `public/_redirects` と `.cache/redirects.json` は **`python scripts/_gen-redirects.py` で再生成**する
+   (手で書き足さない。生成器が終端まで畳んで1ホップにするので、Cloudflareがチェーンを辿らない問題は起きない)
 3. 掲載外(non-manga-drop)の頁は promote が出力しないので `--only` に入れない(検証ゲートが止まる)
 
 **残**: 検出器 `scripts/_audit-slug-kana-loanword.py` の DEVICE_DIFF 834件
