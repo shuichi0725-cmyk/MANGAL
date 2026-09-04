@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { DesignNav } from "@/lib/homeDesign";
 import { authorKeyFor } from "@/lib/authors";
+import { hubHrefIfExists } from "@/lib/hubs";
 import { notFound } from "next/navigation";
 import RelatedWorks, { computeRelated } from "@/components/RelatedWorks";
 import ShareButtons from "@/components/ShareButtons";
@@ -256,8 +257,13 @@ export default async function MangaDetailPage({
           <dl className="mt-6 grid grid-cols-[5.5em_1fr] gap-y-2.5 items-start text-sm">
             <dt className="font-semibold text-ink/65 pt-1">出版年</dt>
             <dd className="flex flex-wrap gap-1.5">
+              {/* ★SEO(2026-09-04): 年別/出版社別/連載誌別ハブ(/year /publisher /magazine)が在る時はそこへ。
+                  無い時(閾値未満)は従来の /browse? フィルタへフォールバック。 */}
               <FilterLink
-                href={`/browse?yearMin=${manga.year_started}&yearMax=${manga.year_started}`}
+                href={
+                  hubHrefIfExists("year", manga.year_started) ??
+                  `/browse?yearMin=${manga.year_started}&yearMax=${manga.year_started}`
+                }
               >
                 {yearStatusLabel(manga)}
               </FilterLink>
@@ -315,7 +321,9 @@ export default async function MangaDetailPage({
             )}
             <dt className="font-semibold text-ink/65 pt-1">出版社</dt>
             <dd className="flex flex-wrap gap-1.5">
-              <FilterLink href={`/browse?publisher=${encodeURIComponent(manga.publisher)}`}>
+              <FilterLink
+                href={hubHrefIfExists("publisher", manga.publisher) ?? `/browse?publisher=${encodeURIComponent(manga.publisher)}`}
+              >
                 {publisher?.name ?? manga.publisher}
               </FilterLink>
             </dd>
@@ -323,7 +331,9 @@ export default async function MangaDetailPage({
               <>
                 <dt className="font-semibold text-ink/65 pt-1">連載誌</dt>
                 <dd className="flex flex-wrap gap-1.5">
-                  <FilterLink href={`/browse?magazine=${encodeURIComponent(magazine.key)}`}>
+                  <FilterLink
+                    href={hubHrefIfExists("magazine", magazine.key) ?? `/browse?magazine=${encodeURIComponent(magazine.key)}`}
+                  >
                     {magazine.name}
                   </FilterLink>
                 </dd>

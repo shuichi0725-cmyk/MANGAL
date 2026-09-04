@@ -66,6 +66,34 @@ try:
 except OSError:
     print("★WARN: data/titles-pages.json 無し → 題名索引をsitemapに載せられない")
 
+# ★ハブ面(2026-09-04 SEO): 雑誌別/出版社別/年別(索引+各キー+分割頁) と ジャンル下位面(完結/年代)。
+#   対象・閾値・頁割りは lib/hubs.ts が単一ソース → build成果物 out/ の実在HTMLから拾う(Pythonに再実装しない)。
+def _walk_html(sub):
+    base = os.path.join(OUT, sub)
+    found = []
+    if os.path.isfile(base + ".html"):
+        found.append(sub)  # 索引頁 (/magazine 等)
+    if os.path.isdir(base):
+        for root, _dirs, files in os.walk(base):
+            for fn in sorted(files):
+                if fn.endswith(".html") and fn != "_empty.html":
+                    rel = os.path.relpath(os.path.join(root, fn[:-5]), OUT).replace(os.sep, "/")
+                    found.append(rel)
+    return found
+n_hub = 0
+for sub in ("magazine", "publisher", "year"):
+    got = _walk_html(sub)
+    dyn += got
+    n_hub += len(got)
+# ジャンル下位面 = out/genre/<key>/<sub>.html (genre/<key>.html 自体は上で genres.yml から載せ済)
+gsub = [u for u in _walk_html("genre") if u.count("/") >= 2]
+dyn += gsub
+n_hub += len(gsub)
+if n_hub == 0:
+    print("★WARN: out/ にハブ面(magazine/publisher/year/ジャンル下位)が無い → sitemapに載せられない(build後に実行しているか?)")
+else:
+    print(f"ハブ面 {n_hub} URL(雑誌/出版社/年/ジャンル下位)")
+
 urls = [f"{SITE}/{p}" if p else SITE for p in fixed] + [f"{SITE}/{p}" for p in dyn] + \
     [f"{SITE}/manga/{s}" for s in slugs]
 

@@ -8,6 +8,9 @@ export default function SiteFooter() {
     ["検索", "/browse"],
     ["著者一覧", "/authors"],
     ["題名索引", "/titles"],
+    ["雑誌別", "/magazine"],  // ★2026-09-04 SEO ハブ面(雑誌/出版社/年)の入口を全頁から張る
+    ["出版社別", "/publisher"],
+    ["年別", "/year"],
     ["今日の一冊 過去ログ", "/sansedai-archive"],
     ["AI書評家リーグ", "/column-ai-league"],
     ["画集", "/art-books"],
