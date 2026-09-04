@@ -6,9 +6,35 @@ import { loadListBundle, loadGenreIntros } from "@/lib/loadData";
 import { DesignNav } from "@/lib/homeDesign";
 import { type MangaListItem } from "@/lib/schema";
 
+const SITE = "https://mangal-db.com";
+
+/** ★SEO(2026-09-04): ジャンル面32頁が全て既定title「MANGAL — 日本の漫画データベース」で
+ *  Googleに同一頁に見えていた穴を塞ぐ。 title/description を頁ごとに焼く(件数・完結数・代表作)。
+ *  ★「| 漫画・コミックのMANGAL」は layout の template が付けるのでここでは書かない。 */
 export async function generateMetadata({ params }: { params: Promise<{ key: string }> }) {
   const { key } = await params;
-  return { alternates: { canonical: `/genre/${key}` } };
+  const data = loadListBundle();
+  const genre = data.genres.find((g) => g.key === key);
+  if (!genre) return { alternates: { canonical: `${SITE}/genre/${key}` } };
+  const items = data.manga
+    .filter((m) => (m.genres || []).includes(key))
+    .sort((a, b) => pop(b) - pop(a) || (b.score ?? 0) - (a.score ?? 0));
+  const n = items.length.toLocaleString();
+  const completed = items.filter((m) => m.status === "completed").length.toLocaleString();
+  const top = items.filter((m) => pop(m) > 0).slice(0, 3).map((m) => m.title.slice(0, 20));
+  // 「4コマ漫画」「エッセイ漫画」は名前自体が「漫画」で終わる = 二重にしない
+  const label = genre.name.endsWith("漫画") ? genre.name : `${genre.name}漫画`;
+  const title = `${label} おすすめ一覧（人気順・${n}作品）`;
+  const description =
+    `${genre.name}ジャンルの漫画${n}作品を人気順に掲載（完結${completed}作）。` +
+    (top.length > 0 ? `『${top.join("』『")}』など。` : "") +
+    "各作品の全巻一覧・発売日・ISBN・購入リンクつき。";
+  return {
+    title,
+    description,
+    alternates: { canonical: `${SITE}/genre/${key}` },
+    openGraph: { title, description, url: `${SITE}/genre/${key}`, type: "website", siteName: "MANGAL" },
+  };
 }
 
 /** ジャンル別ランディング = 「自動生成まとめ記事」の土台(discovery + SEO + アフィの集約)。

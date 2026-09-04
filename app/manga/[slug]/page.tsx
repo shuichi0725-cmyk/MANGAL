@@ -398,7 +398,9 @@ export default async function MangaDetailPage({
                   <dd className="flex flex-wrap gap-1.5">
                     {genreItems.map((it) =>
                       it.key ? (
-                        <ChipLink key={it.name} href={`/browse?genre=${encodeURIComponent(it.key)}`}>
+                        // ★SEO(2026-09-04): /browse?genre= はクライアント描画の行き止まり。 実在する
+                        //   ジャンル面 /genre/[key] へ向け、 66k頁→32ハブの内部リンクにする(元は可視0本)。
+                        <ChipLink key={it.name} href={`/genre/${encodeURIComponent(it.key)}`}>
                           {it.name}
                         </ChipLink>
                       ) : (
