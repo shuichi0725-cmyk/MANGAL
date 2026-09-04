@@ -33,3 +33,10 @@ metadata:
 - ★**2026-07-27の初回prune実績 = 322キー削除**(見込み2,100は上記の照合ミス由来の過大見積り)。
   もののけ姫/となりのトトロ/千と千尋/十二国記 が本番で404化したのを実地確認済み。
   中止された時はログを確認し `--prune-max <件数+100>` で再実行する。
+
+## ★孤児の第2の発生源 = 差分反映のDELETEがstem指定だった (2026-09-04 発見・是正済)
+prune 漏れとは別に、`_deploy-differential.py` の DELETE が **SRC stem** キーを消していた
+(PUT は公開slug)。 stem≠slug の 1,759頁/69,223頁 では**空振りして本物がR2に残る**。
+= 「週次で prune すれば拾える」ので恒久的な穴ではないが、**差分反映では消えない**ことになる。
+実測4頁が該当。 是正= `resolve_pub_slug()` で公開slugに解決してから DELETE/purge/IndexNow通知。
+詳細と実装見本は [[pubslug_src_stem_generator_trap]] / [[indexnow_self_submit]]。
