@@ -250,7 +250,9 @@ def pending_add_files(put_pairs, del_keys=(), source="?", seed_pairs=(), dry=Fal
               + (f" / 新規 {fresh:,}" if fresh else "")
               + (f" / 読めず {unreadable:,}" if unreadable else "")
               + (" ★初回=台帳作成のみ(通知なし)" if bootstrap else "")
-              + f" / 台帳 {len(cm):,} キー")
+              + f" / 台帳 {len(cm):,} キー"
+              + ("\n  ※初回は基準が無いので1件も通知しない。 今回の変更を通知したい時だけ手動で: "
+                 "python scripts/_indexnow.py --add-keys-file <R2キー一覧> → --drain" if bootstrap else ""))
     return head + "\n" + detail
 
 
