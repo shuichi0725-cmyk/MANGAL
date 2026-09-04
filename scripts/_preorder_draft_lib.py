@@ -31,6 +31,7 @@ except Exception:
 #   ★巻表示は題ではないので必ず剥がす。剥がし忘れると「よけいな文字」として表示に出る。
 _VOL_TAIL = re.compile(
     r"(?:[（(]\s*全?\s*\d{1,3}\s*巻?\s*[)）]"          # (1) (全1) (1巻) (全1巻)
+    r"|[（(]\s*第?\s*[一二三四五六七八九十百]+\s*巻\s*[)）]"  # ★漢数字の巻表示(一巻)(第三巻) 2026-09-04
     r"|第\s*\d{1,3}\s*巻"                               # 第1巻
     r"|[\s　]+全?\d{1,3}"                               # 空白+1 / 空白+全1
     r"|(?<=[ぁ-んァ-ヶ一-鿿])\d{1,3}"                   # かな漢字の直後の裸数字(既存)
@@ -196,13 +197,22 @@ def _kana_dict_reading(base, kana):
     except Exception:
         return None
     b, k = str(base or ""), str(kana or "")
-    hits = [x for x in _KEYS if x and len(x) >= 2 and x in b and x in k]
-    if not hits:
+    keys = [x for x in _KEYS if x and len(x) >= 2 and x in b]   # 題に実在する見出し語だけ
+    if not keys:
         return None
-    seg = k
-    for x in hits:                       # KEYS は長い順=最長一致から切る
-        seg = seg.replace(x, " " + x + " ")
-    seg = re.sub(r"[\s　]+", " ", seg).strip()
+    # ★左から最長一致で1回だけ走査する(2026-09-04)。単純な replace の繰り返しだと
+    #   部分一致キーが既に切った語の内側をさらに割る(シャーロック→シャー+ロック / ホームズ→ホーム+ズ)。
+    out, i = [], 0
+    while i < len(k):
+        for x in keys:                   # _KEYS は長い順
+            if k.startswith(x, i):
+                out.append(" " + x + " ")
+                i += len(x)
+                break
+        else:
+            out.append(k[i])
+            i += 1
+    seg = re.sub(r"[\s　]+", " ", "".join(out)).strip()
     if seg == k:
         return None
     try:

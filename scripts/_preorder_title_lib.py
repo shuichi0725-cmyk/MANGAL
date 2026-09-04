@@ -19,6 +19,22 @@ import unicodedata
 _KANJI_NUM = {"一": 1, "二": 2, "三": 3, "四": 4, "五": 5, "六": 6, "七": 7, "八": 8, "九": 9, "十": 10}
 _SUB_OPEN = r"[〜~\-−ー―《〈「『]"
 
+def _kanji_int(g):
+    """漢数字(一〜九十九)→int。読めなければ None。巻表示の解釈だけに使う。"""
+    g = str(g or "")
+    if not g or any(c not in _KANJI_NUM for c in g):
+        return None
+    if "十" not in g:
+        return _KANJI_NUM.get(g) if len(g) == 1 else None
+    i = g.index("十")
+    tens = _KANJI_NUM[g[i - 1]] if i > 0 else 1
+    ones = _KANJI_NUM[g[i + 1]] if i + 1 < len(g) else 0
+    if i > 1 or len(g) - i > 2:
+        return None
+    n = tens * 10 + ones
+    return n if 1 <= n <= 99 else None
+
+
 def _nfkc(t):
     return unicodedata.normalize("NFKC", str(t or "")).strip()
 
@@ -47,6 +63,15 @@ def split_title(raw):
         clean = (base + ("　" + sub if sub else "")).strip()
         return {"base": base, "vol": vol, "part": None, "subtitle": sub, "clean": clean,
                 "matched": "paren_kan", "vol_suspect": None, "zen": bool(m.group(2))}
+    # B0k. ★漢数字の巻表示(2026-09-04 寿司銀捕物帖（三巻）型): 題(一巻)/(第三巻)/第三巻/(全五巻)。
+    #   B0 は算用数字しか見ておらず、C' は空白区切りの裸漢数字だけだったので、この形は
+    #   どの規則にも当たらず vol=None → **3巻の本が新作1巻として登録されかける**事故になった。
+    m = re.search(r"^(.*?)[\s　]*(?:[（(]\s*)?(全\s*)?第?\s*([一二三四五六七八九十]{1,4})\s*巻\s*(?:[)）])?[\s　]*$", t)
+    if m and m.group(1).strip() and _kanji_int(m.group(3)):
+        base = m.group(1).strip()
+        return {"base": base, "vol": _kanji_int(m.group(3)), "part": None, "subtitle": "",
+                "clean": base, "matched": "kanji_kan", "vol_suspect": None, "zen": bool(m.group(2))}
+
     # B. 中間括弧: 題(N) 副題
     m = re.match(r"^(.{3,}?)[\s　]*[（(]\s*(\d{1,3})\s*[)）][\s　]*(\S.*)$", t)
     if m:
