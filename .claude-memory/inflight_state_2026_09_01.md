@@ -34,3 +34,6 @@ metadata:
 
 ## 追記 2026-09-04: SEO構造是正2点も本番待ち(コードのみ=機能蒸留で出る)
 - ジャンル面32頁の頁別title/description + 作品頁ジャンルチップ→/genre/[key](commit c44360ea9)。詳細と残レバー=[[seo_structure_gaps_2026_09_04]]。
+
+## 追記 2026-09-04(午後): 雑誌/出版社/年ハブ850面+ジャンル下位面219も本番待ち(コードのみ=機能蒸留で出る、sitemap反映は週次)
+- commit 4a916dec1。詳細=[[seo_structure_gaps_2026_09_04]]。機能蒸留の同期は out/ から manga/calendar/索引/sitemap を除く全ファイル=新ディレクトリ magazine/ publisher/ year/ genre/<key>/ も自動で載る。

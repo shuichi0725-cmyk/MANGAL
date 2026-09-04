@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import GenreGrid from "@/components/GenreGrid";
 import { loadListBundle, loadGenreIntros } from "@/lib/loadData";
 import { DesignNav } from "@/lib/homeDesign";
-import { genreItems, genreMagazines, genreSubs, hubHref, pop } from "@/lib/hubs";
+import { genreItems, genreMagazines, genreSubs, hubHref, pop, repTitle } from "@/lib/hubs";
 
 const SITE = "https://mangal-db.com";
 
@@ -18,7 +18,7 @@ export async function generateMetadata({ params }: { params: Promise<{ key: stri
   const items = genreItems(key);
   const n = items.length.toLocaleString();
   const completed = items.filter((m) => m.status === "completed").length.toLocaleString();
-  const top = items.filter((m) => pop(m) > 0).slice(0, 3).map((m) => m.title.slice(0, 20));
+  const top = items.filter((m) => pop(m) > 0).slice(0, 3).map((m) => repTitle(m.title));
   // 「4コマ漫画」「エッセイ漫画」は名前自体が「漫画」で終わる = 二重にしない
   const label = genre.name.endsWith("漫画") ? genre.name : `${genre.name}漫画`;
   const title = `${label} おすすめ一覧（人気順・${n}作品）`;

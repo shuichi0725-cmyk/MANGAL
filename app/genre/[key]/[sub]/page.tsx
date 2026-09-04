@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import GenreGrid from "@/components/GenreGrid";
 import { loadListBundle } from "@/lib/loadData";
 import { DesignNav } from "@/lib/homeDesign";
-import { genreSubItems, genreSubStaticParams, genreSubs, hasGenreSub, pop, subLabel } from "@/lib/hubs";
+import { genreSubItems, genreSubStaticParams, genreSubs, hasGenreSub, pop, repTitle, subLabel } from "@/lib/hubs";
 
 /** ジャンル下位面(2026-09-04 SEO): /genre/<key>/completed(完結済み) と /genre/<key>/<yyyy>s(年代)。
  *  「完結済み ファンタジー漫画」「1990年代 少女漫画」型の長尾の着地面。 閾値(GENRE_SUB_MIN)以上の組だけ生成。
@@ -38,7 +38,7 @@ export async function generateMetadata({ params }: P) {
   const r = resolve(key, sub);
   if (!r) return {};
   const n = r.items.length.toLocaleString();
-  const top = r.items.filter((m) => pop(m) > 0).slice(0, 3).map((m) => m.title.slice(0, 20));
+  const top = r.items.filter((m) => pop(m) > 0).slice(0, 3).map((m) => repTitle(m.title));
   const title = `${headingOf(r.label, r.genre.name)} おすすめ一覧（人気順・${n}作品）`;
   const what = sub === "completed" ? "完結済みの" : `${r.label}に始まった`;
   const description =

@@ -205,6 +205,12 @@ export function demographicName(key: string | null | undefined): string | null {
   return key ? (names().demographic.get(key) ?? null) : null;
 }
 
+/** description の代表作名: 長題は途中で切らず「…」を付ける(『僕のヒーローアカデミアチームアップミッシ』型の
+ *  中途半端な切れ方を避ける。 preview実測 2026-09-04) */
+export function repTitle(t: string, max = 22): string {
+  return t.length > max ? `${t.slice(0, max)}…` : t;
+}
+
 /** 見出し・title・description(ハブ種別ごとの文言を1か所に) */
 export function hubHeading(def: HubDef): string {
   if (def.kind === "magazine") return `${def.name} 連載作品一覧`;
@@ -216,7 +222,7 @@ export function hubMeta(def: HubDef, page: number): { title: string; description
   const n = def.count.toLocaleString();
   const c = def.completed.toLocaleString();
   const pageSfx = page > 1 ? `（${page}/${def.pages}ページ）` : "";
-  const rep = hubTop(def.kind, def.key, 3).map((m) => m.title.slice(0, 20));
+  const rep = hubTop(def.kind, def.key, 3).map((m) => repTitle(m.title));
   const repText = rep.length > 0 ? `『${rep.join("』『")}』など。` : "";
   const tail = "各作品の全巻一覧・発売日・ISBN・購入リンクつき。";
   if (def.kind === "magazine") {
