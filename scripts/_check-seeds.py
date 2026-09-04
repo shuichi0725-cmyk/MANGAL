@@ -132,6 +132,30 @@ def main() -> None:
         else:
             print(f"  OK   {base}: フィールド検査 {len(vols)}巻")
 
+    # 4. ★slug-overrides.yml の**死に形**検出(2026-09-05 新設)。
+    #    promote の _slug_override は `doc["overrides"]` 配下の **入れ子dict(slugキー付き)しか読まない**。
+    #    トップレベルの平坦形 `old: new` と、overrides配下でも値がstrのものは **永久に効かない**。
+    #    書いた人は直したつもりでいるので silent。実測 2026-09-05: 平坦形143件のうち116件が
+    #    旧slugのまま公開され続けていた(ティールーム=teiiruumu をユーザに指摘されて発覚)。
+    _sop = os.path.join(SEEDS, "slug-overrides.yml")
+    if os.path.exists(_sop):
+        try:
+            _doc = _load_yml(io.open(_sop, encoding="utf-8").read()) or {}
+            _dead = [k for k, v in _doc.items() if k != "overrides" and isinstance(v, str)]
+            _dead += ["overrides/" + k for k, v in (_doc.get("overrides") or {}).items()
+                      if not (isinstance(v, dict) and v.get("slug"))]
+            if _dead:
+                # ★WARN止まり(FAILにしない): 142件は**既存の負債**で、FAILにすると reflect と intake が
+                #   全部止まる。移行(overrides配下の入れ子形へ書き換え=116頁の改名を伴う)は user 裁定マター。
+                #   移行が済んだら FAIL に格上げして再発を封じること。
+                print("  WARN slug-overrides.yml 死に形 %d件(promoteが読まない形式=書いても効かない)。" % len(_dead))
+                print("       overrides: 配下に {slug:, reason:, at:} で書く。一覧= python scripts/_audit-slug-kana-loanword.py")
+                print("       例: %s" % ", ".join(_dead[:5]))
+            else:
+                print("  OK   slug-overrides.yml: 死に形なし")
+        except Exception as _e:
+            fails.append("slug-overrides.yml 検査失敗: %s" % _e)
+
     print(f"\nseed lint: parse OK {n_ok} / FAIL {len(fails)}")
     for f in fails:
         print(f"  FAIL {f}")
