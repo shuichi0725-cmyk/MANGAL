@@ -373,10 +373,12 @@ def main():
     print(f"疎通: {ok}/{len(checks)} OK")
 
     # --- 10. ★IndexNow (2026-09-04): 自前 purge 済みなので、変更した面のURLを積んで即送信 ---
+    # ★積むのは pending_add_files = **本文が変わった面だけ**(案A-2)。 機能蒸留は定義上コード変更なので、
+    #   ここの to_put(byte差分)には「チャンク名が変わっただけの面」が必ず全部入る = 素で積むと空振りになる。
     if not a.no_indexnow:
         try:
             import _indexnow
-            print(_indexnow.pending_add([k for k, _, _ in to_put], [], "feature-distill"))
+            print(_indexnow.pending_add_files([(k, p) for k, p, _ in to_put], [], "feature-distill"))
             print(_indexnow.drain())
         except Exception as _e:
             print(f"(IndexNow skip: {_e}) → 手動: python scripts/_indexnow.py --drain")

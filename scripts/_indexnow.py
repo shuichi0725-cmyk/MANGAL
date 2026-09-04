@@ -16,9 +16,16 @@
   _deploy-differential.py → 自前 purge 後に積んで即 drain
   各スクリプト --no-indexnow で抑止。 --dry では到達しない。
 
+★本文ハッシュ層 (2026-09-04 ユーザ裁定「案A-2」= pending_add_files):
+  全頁HTMLに `_next/static/chunks/<contenthash>.js` が埋まるため、コードを1行直すだけで
+  **全頁の sha256 が変わり**「変更頁」として全件が流れる(実測: 送信対象 90,281頁 に対し
+  本当に内容が変わったのは 4,067頁 = 有効 4.5%)。 IndexNow FAQ は無変更URLの再送信を
+  クロール枠の浪費と明記。 → PUT の判定(byte)とは別に **「クローラが読む部分」だけのハッシュ**を
+  `.cache/indexnow-content.json` に持ち、実質無変更の頁は通知しない。
+
 手動:
   python scripts/_indexnow.py --status           # pending 件数・鍵ファイルの本番生存
-  python scripts/_indexnow.py --drain [--dry]    # pending を送信
+  python scripts/_indexnow.py --drain [--dry] [--max N]   # pending を送信(既定 10,000/回)
   python scripts/_indexnow.py --urls /a,/b       # 任意URL(パス)を即送信
   python scripts/_indexnow.py --clear            # pending を捨てる(422等が続く時の人手リセット)
   python scripts/_indexnow.py --selftest
@@ -30,6 +37,7 @@
 記録: .cache/indexnow-pending.json(未送信) / .cache/indexnow-log.jsonl(送信履歴)。
 """
 import argparse
+import hashlib
 import json
 import os
 import re
@@ -43,8 +51,10 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 HOST = "mangal-db.com"
 ENDPOINT = "https://api.indexnow.org/indexnow"
 PENDING = os.path.join(ROOT, ".cache", "indexnow-pending.json")
+CONTENT = os.path.join(ROOT, ".cache", "indexnow-content.json")   # R2キー → 本文ハッシュ
 LOG = os.path.join(ROOT, ".cache", "indexnow-log.jsonl")
-CHUNK = 10000
+CHUNK = 10000            # 1 POST の上限(仕様)
+MAX_PER_DRAIN = 10000    # 1回の drain で送る上限(超過分は pending に残して次回。 黙って捨てない)
 UA = "Mozilla/5.0 (compatible; MANGAL-deploy/1.0; +https://mangal-db.com/about)"
 
 # 送らない頁: 開発用の面(sitemap にも載せていない)・404・placeholder
@@ -116,6 +126,54 @@ def _save_pending(d):
     json.dump(d, open(PENDING, "w", encoding="utf-8"), ensure_ascii=False, indent=0)
 
 
+# ★本文ハッシュ (案A-2): ビルド由来のローダを落として「エンジンが実際に読む中身」だけ残す。
+#   落とす = <script src>/インライン script(RSC flight = self.__next_f.push)/preload・stylesheet の <link>。
+#     ハッシュ付きチャンク名だけをマスクする案(A-1)では、RSC flight の参照番号($L9→$Ld)が
+#     木の変化で総振り直しになるため空振りが残る(live↔local 実測: A-1=差分60ブロック / A-2=4ブロックで全部が本物)。
+#   残す   = <title>/<meta>/JSON-LD/本文マークアップ。
+#   速度   = 128MB/s。 byte変化した .html だけに掛けるので、コード無変更の週はほぼ0秒。
+_SCRIPT_RE = re.compile(rb"<script\b([^>]*)>.*?</script>", re.S)
+# 落とす rel = ローダ/資材(preload…)と アイコン類。 アイコンの href は `?<16hex>` の
+# キャッシュバスタ付きなので、差し替えれば全頁が「変更」になる。 canonical/alternate は SEO の中身なので残す。
+_LINK_RE = re.compile(
+    rb"<link\b[^>]*\brel=\"(?:[^\"]*\s)?"
+    rb"(?:preload|stylesheet|modulepreload|prefetch|preconnect|dns-prefetch|icon|apple-touch-icon|manifest)"
+    rb"(?:\s[^\"]*)?\"[^>]*>", re.S)
+
+
+def content_bytes(data):
+    """HTML(bytes) → 比較用の本文(bytes)。"""
+    def _script(m):
+        if b"application/ld+json" in m.group(1).lower():   # 構造化データ = 内容なので残す
+            return m.group(0)
+        return b"<script/>"
+    return _LINK_RE.sub(b"", _SCRIPT_RE.sub(_script, data))
+
+
+def content_hash(path):
+    """ローカルHTMLの本文ハッシュ。 読めなければ None(= 判定不能 → 呼び手は送る側に倒す)。"""
+    try:
+        with open(path, "rb") as f:
+            return hashlib.sha256(content_bytes(f.read())).hexdigest()
+    except Exception:
+        return None
+
+
+def _load_content():
+    try:
+        d = json.load(open(CONTENT, encoding="utf-8"))
+        return d if isinstance(d, dict) else {}
+    except Exception:
+        return {}
+
+
+def _save_content(d):
+    os.makedirs(os.path.dirname(CONTENT), exist_ok=True)
+    tmp = CONTENT + ".tmp"
+    json.dump(d, open(tmp, "w", encoding="utf-8"))
+    os.replace(tmp, CONTENT)   # 7MB級なので途中終了で壊さないよう原子的に置換
+
+
 def _log(ev):
     os.makedirs(os.path.dirname(LOG), exist_ok=True)
     ev = dict(ev, at=time.strftime("%Y-%m-%dT%H:%M:%S"))
@@ -139,6 +197,61 @@ def pending_add(put_keys, del_keys=(), source="?"):
     _save_pending(d)
     _log({"ev": "pending_add", "src": source, "put": n_put, "del": n_del, "total": len(d["urls"])})
     return f"IndexNow pending: +{n_put} 変更 / +{n_del} 削除 → 未送信 {len(d['urls']):,} URL ({source})"
+
+
+def pending_add_files(put_pairs, del_keys=(), source="?", seed_pairs=(), dry=False):
+    """★byte差分でなく「本文が変わった頁」だけを pending に積む入口 (2026-09-04)。
+
+    put_pairs  = [(R2キー, ローカルpath)] = 実際に PUT した(= byte が変わった)キー。
+                 .html は本文ハッシュを台帳と比べ、実質無変更(= チャンク名/RSC番号だけの差)は積まない。
+    seed_pairs = 通知はしないが台帳には記録するキー(= ETag照合で PUT を省いた分。 台帳の穴を残さない)。
+    del_keys   = 削除キー(そのまま積む。 404/410 の通知は仕様上の推奨動作)。
+
+    ★初回(台帳が空)は「台帳を作るだけで一切通知しない」。 台帳消失時も同じ挙動 =
+      いきなり9万URLを送りつける事故を構造的に封じる(1週分の通知を捨てる方に倒す)。
+    """
+    cm = _load_content()
+    bootstrap = not cm
+    notify, unchanged, fresh, unreadable = [], 0, 0, 0
+    for key, path in put_pairs or ():
+        if key_to_url(key) is None:      # 送信対象外(.txt / _next/ / 除外面)は台帳にも積まない
+            continue
+        h = content_hash(path)
+        if h is None:
+            unreadable += 1
+            notify.append(key)           # 判定不能は送る側に倒す(台帳には書かない=次回再判定)
+            continue
+        old = cm.get(key)
+        cm[key] = h
+        if old == h:
+            unchanged += 1
+        elif old is None:
+            if bootstrap:
+                unchanged += 1           # 初回 = 既存頁の記録だけ
+            else:
+                fresh += 1
+                notify.append(key)       # 台帳に無い = 新規URL
+        else:
+            notify.append(key)
+    for key, path in seed_pairs or ():
+        if key_to_url(key) is None:
+            continue
+        h = content_hash(path)
+        if h:
+            cm[key] = h
+    for k in del_keys or ():
+        cm.pop(k, None)
+    if not dry:
+        _save_content(cm)
+    _log({"ev": "content_gate", "src": source, "notify": len(notify), "unchanged": unchanged,
+          "new": fresh, "unreadable": unreadable, "bootstrap": bootstrap, "ledger": len(cm)})
+    head = pending_add(notify, del_keys, source)
+    detail = (f"  本文ハッシュ判定: 通知 {len(notify):,} / 実質無変更 {unchanged:,} は送らず"
+              + (f" / 新規 {fresh:,}" if fresh else "")
+              + (f" / 読めず {unreadable:,}" if unreadable else "")
+              + (" ★初回=台帳作成のみ(通知なし)" if bootstrap else "")
+              + f" / 台帳 {len(cm):,} キー")
+    return head + "\n" + detail
 
 
 def key_file_live(key, timeout=20):
@@ -216,18 +329,29 @@ def submit(urls, dry=False, verify=True):
     return ok_urls, bad, summary
 
 
-def drain(dry=False, verify=True):
-    """pending を送信し、受理分だけ pending から消す。 戻り=人向け要約。"""
+def drain(dry=False, verify=True, max_urls=MAX_PER_DRAIN):
+    """pending を送信し、受理分だけ pending から消す。 戻り=人向け要約。
+
+    ★max_urls = 1回で送る上限(既定 10,000 = 1 POST)。 本文ハッシュ層(pending_add_files)を抜けて
+      なお巨大になる唯一の場合 = テンプレート改修等で**本当に全頁の内容が変わった**時。
+      その時も一度に9万を投げず、古い順に上限まで送って残りは pending に留める(= 次の drain で継続)。
+      黙って切り捨てず、必ず残数を表示する。"""
     d = _load_pending()
     urls = list(d["urls"].keys())
     if not urls:
         return "IndexNow: pending なし"
+    held = 0
+    if max_urls and len(urls) > max_urls:
+        held = len(urls) - max_urls
+        urls = urls[:max_urls]           # dict は挿入順 = 古いものから送る
     ok_urls, bad, summary = submit(urls, dry=dry, verify=verify)
     if ok_urls:
         # ★受理された URL そのものだけを消す(件数での前方一致削除は取り違える。 submit の docstring 参照)
         for u in ok_urls:
             d["urls"].pop(u, None)
         _save_pending(d)
+    if held:
+        summary += f" / 上限 {max_urls:,}/回 のため {held:,} URL は次回 drain に持ち越し"
     return summary + (f" / 残 {len(d['urls']):,}" if d["urls"] else "")
 
 
@@ -238,9 +362,11 @@ def status():
     ops = {}
     for v in d["urls"].values():
         ops[v.get("op", "?")] = ops.get(v.get("op", "?"), 0) + 1
+    cm = _load_content()
     return (f"鍵: {key or '(無し)'} / 本番配信: {'OK' if live else 'NG(未配信 or 不一致)'}\n"
-            f"pending: {len(d['urls']):,} URL {ops}\n"
-            f"pending={PENDING}\nlog={LOG}")
+            f"pending: {len(d['urls']):,} URL {ops} (1回の送信上限 {MAX_PER_DRAIN:,})\n"
+            f"本文ハッシュ台帳: {len(cm):,} キー" + ("  ★空 = 次回は台帳作成のみで通知なし" if not cm else "") + "\n"
+            f"pending={PENDING}\ncontent={CONTENT}\nlog={LOG}")
 
 
 def selftest():
@@ -261,6 +387,25 @@ def selftest():
     bad = [(k, v, key_to_url(k)) for k, v in cases.items() if key_to_url(k) != v]
     assert not bad, bad
     assert keys_to_urls(["a.html", "a.html", "b.txt"]) == ["/a"]
+
+    # ★本文ハッシュ: ビルド由来の差(チャンク名・RSC flight・css link)は同一、本文の差は別。
+    def page(chunk, body, extra=""):
+        return (f'<html><head><title>T</title><meta name="description" content="D">'
+                f'<link rel="stylesheet" href="/_next/static/css/{chunk}.css"/>'
+                f'<script src="/_next/static/chunks/main-app-{chunk}.js" async=""></script>'
+                f'<script type="application/ld+json">{{"@type":"Book","name":"{body}"}}</script>'
+                f'</head><body><h1>{body}</h1>{extra}'
+                f'<script>self.__next_f.push([1,"3:I[6534,[\\"2619\\",\\"static/chunks/{chunk}.js\\"]]\\n{body}"])</script>'
+                f'</body></html>').encode()
+    h1 = hashlib.sha256(content_bytes(page("aaaa1111", "ワンピース"))).hexdigest()
+    h2 = hashlib.sha256(content_bytes(page("bbbb2222", "ワンピース"))).hexdigest()
+    h3 = hashlib.sha256(content_bytes(page("aaaa1111", "ワンピース", "<p>103巻</p>"))).hexdigest()
+    h4 = hashlib.sha256(content_bytes(page("aaaa1111", "ナルト"))).hexdigest()
+    assert h1 == h2, "チャンク名だけの差で本文ハッシュが変わってはいけない"
+    assert h1 != h3, "本文の追加を取り逃している"
+    assert h1 != h4, "見出し/JSON-LD の変化を取り逃している"
+    assert b"ld+json" in content_bytes(page("aaaa1111", "ワンピース")), "JSON-LD は残すこと"
+    assert b"__next_f" not in content_bytes(page("aaaa1111", "ワンピース")), "RSC flight は落とすこと"
     print("selftest OK")
 
 
@@ -272,6 +417,8 @@ def main():
     ap.add_argument("--add-keys-file", help="R2キー一覧(1行1キー)を pending に積む")
     ap.add_argument("--clear", action="store_true", help="pending を捨てる")
     ap.add_argument("--dry", action="store_true")
+    ap.add_argument("--max", type=int, default=MAX_PER_DRAIN,
+                    help=f"1回の drain で送る上限(既定 {MAX_PER_DRAIN:,}。 超過分は pending に残る)")
     ap.add_argument("--no-verify", action="store_true", help="鍵ファイルの本番生存確認を省く")
     ap.add_argument("--selftest", action="store_true")
     a = ap.parse_args()
@@ -287,7 +434,7 @@ def main():
         urls = [u if u.startswith("/") else "/" + u for u in urls]
         _, _, s = submit(urls, dry=a.dry, verify=not a.no_verify); print(s); return
     if a.drain:
-        print(drain(dry=a.dry, verify=not a.no_verify)); return
+        print(drain(dry=a.dry, verify=not a.no_verify, max_urls=a.max)); return
     print(status())
 
 

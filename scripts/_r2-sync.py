@@ -188,6 +188,7 @@ def main():
     if len(to_put) > 5000 and not a.no_reconcile:
         _recon = to_put
     n_list_ops = 0
+    _seed_pairs = []   # ETag照合でPUTを省いたキー(= R2に既に同内容が居る)。 通知しないが本文台帳には記録する
     if _recon and not a.no_reconcile:
         print(f"ETag実物照合 {len(_recon)} キー(manifest={mstatus}) → R2と同一内容はPUT省略")
         etags = {}
@@ -198,6 +199,7 @@ def main():
                 if "-" not in et:   # multipart の ETag は MD5 でない = 照合不可 → PUT 対象のまま残す
                     etags[o["Key"]] = et
         skip = {k for k, p in _recon if etags.get(k) == md5(p)}
+        _seed_pairs = [it for it in to_put if it[0] in skip]
         to_put = [it for it in to_put if it[0] not in skip]
         print(f"  同一 {len(skip)} キー(PUT省略) / 要PUT {len(to_put)}")
 
@@ -271,11 +273,14 @@ def main():
 
     # ★IndexNow (2026-09-04): 変更/削除した頁URLを pending に積む。 送信は _weekly-finalize.py の
     #   edge purge 後(= エンジンが取りに来た時に旧キャッシュを掴ませない)。 失敗しても同期は止めない。
+    # ★積むのは pending_add_files = **本文が変わった頁だけ**(2026-09-04 案A-2)。 全頁HTMLに
+    #   ハッシュ付きチャンク名が埋まる以上、ここの to_put(byte差分)は「コードを直した週=全頁」になる。
+    #   PUT は全部要る(byteが違う)が、IndexNow に流すのは中身が変わった頁だけ。
     if a.bucket == "mangal-site" and not a.no_indexnow:
         try:
             import _indexnow
             _dels = to_del if (a.prune and to_del and not prune_block) else []
-            print(_indexnow.pending_add([k for k, _ in to_put], _dels, "r2-sync"))
+            print(_indexnow.pending_add_files(to_put, _dels, "r2-sync", seed_pairs=_seed_pairs))
         except Exception as _e:
             print(f"(IndexNow pending 積み skip: {_e})")
 
