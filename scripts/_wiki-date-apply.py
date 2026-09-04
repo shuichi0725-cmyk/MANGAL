@@ -14,6 +14,7 @@
   BLOCK_PROD  楽天が本番を支持           → ★頁ごと見送り
   BLOCK_SPLIT 三者バラバラ / 楽天に日付なしで判定不能 → ★頁ごと見送り
   NOT_IN_WIKI 本番の巻が記事に無い        → ★頁ごと見送り(基準が混ざるため)
+  ALREADY_OVERRIDDEN 既にoverride行がある(過去の意図ある是正) → ★頁ごと見送り
 
 出力:
   docs/production-diagnostics/wikipedia-date-sweep.tsv        全頁の判定(人が見る)
@@ -74,6 +75,23 @@ def wiki_pairs(body):
     return out
 
 
+def load_existing_override():
+    """★過去に人/per-case作業が意図して置いた override は絶対に上書きしない。
+    (実測: date-disorder 是正39巻を掃引が9-11年ずらして潰しかけた = 2026-09-04)"""
+    ex = {}
+    if os.path.exists(OVR):
+        for line in io.open(OVR, encoding="utf-8"):
+            if not line.strip():
+                continue
+            try:
+                d = json.loads(line)
+            except Exception:
+                continue
+            if d.get("isbn13") and d.get("date"):
+                ex[d["isbn13"]] = d["date"]
+    return ex
+
+
 def load_rakuten():
     rkt = {}
     for f in ("rakuten-isbn.jsonl", "rakuten-isbn-delta.jsonl"):
@@ -126,6 +144,8 @@ def main():
     ap.add_argument("--apply", action="store_true")
     a = ap.parse_args()
 
+    exist = load_existing_override()
+    print("既存override ISBN:", len(exist), flush=True)
     rkt = load_rakuten()
     print("楽天日付索引:", len(rkt), flush=True)
     rows = json.load(io.open(CAND, encoding="utf-8"))
@@ -174,13 +194,15 @@ def main():
 
         judged = {}
         for i, pr in prod.items():
-            if i not in wp:
+            if i in exist:
+                judged[i] = ("ALREADY_OVERRIDDEN", None)   # 既存是正を潰さない
+            elif i not in wp:
                 judged[i] = ("NOT_IN_WIKI", None)
             else:
                 judged[i] = judge(wp[i], pr, rkt.get(i))
         codes = collections.Counter(c for c, _ in judged.values())
         adopt = {i: dt for i, (c, dt) in judged.items() if dt}
-        blocked = sum(codes[k] for k in ("BLOCK_PROD", "BLOCK_SPLIT", "NOT_IN_WIKI"))
+        blocked = sum(codes[k] for k in ("BLOCK_PROD", "BLOCK_SPLIT", "NOT_IN_WIKI", "ALREADY_OVERRIDDEN"))
 
         if blocked:
             verdict = "SKIP_PAGE"
@@ -202,13 +224,14 @@ def main():
         out_rows.append((verdict, stem, ti, wname, len(prod), len(wp), len(adopt),
                          codes["SAME"], codes["ADOPT_MONTH"], codes["ADOPT_DAY"],
                          codes["ADOPT_GAIN"], codes["BLOCK_PROD"], codes["BLOCK_SPLIT"],
-                         codes["NOT_IN_WIKI"]))
+                         codes["NOT_IN_WIKI"], codes["ALREADY_OVERRIDDEN"]))
 
     order = {"APPLY": 0, "SKIP_PAGE": 1, "NO_CHANGE": 2}
     out_rows.sort(key=lambda r: (order.get(r[0], 9), -r[6]))
     with io.open(TSV, "w", encoding="utf-8", newline="") as f:
         f.write("verdict\tslug\ttitle\twiki_article\t本番巻\twiki対\t採用巻\t"
-                "SAME\tADOPT_MONTH\tADOPT_DAY\tADOPT_GAIN\tBLOCK_PROD\tBLOCK_SPLIT\tNOT_IN_WIKI\n")
+                "SAME\tADOPT_MONTH\tADOPT_DAY\tADOPT_GAIN\tBLOCK_PROD\tBLOCK_SPLIT\t"
+                "NOT_IN_WIKI\tALREADY_OVERRIDDEN\n")
         for r in out_rows:
             f.write("\t".join(str(x) for x in r) + "\n")
     io.open(NEWJL, "w", encoding="utf-8").write("\n".join(new_lines) + ("\n" if new_lines else ""))
