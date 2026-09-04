@@ -145,12 +145,11 @@ def main() -> None:
             _dead += ["overrides/" + k for k, v in (_doc.get("overrides") or {}).items()
                       if not (isinstance(v, dict) and v.get("slug"))]
             if _dead:
-                # ★WARN止まり(FAILにしない): 142件は**既存の負債**で、FAILにすると reflect と intake が
-                #   全部止まる。移行(overrides配下の入れ子形へ書き換え=116頁の改名を伴う)は user 裁定マター。
-                #   移行が済んだら FAIL に格上げして再発を封じること。
-                print("  WARN slug-overrides.yml 死に形 %d件(promoteが読まない形式=書いても効かない)。" % len(_dead))
-                print("       overrides: 配下に {slug:, reason:, at:} で書く。一覧= python scripts/_audit-slug-kana-loanword.py")
-                print("       例: %s" % ", ".join(_dead[:5]))
+                # ★2026-09-05 に既存142件を移行済み(残0)。以後は**新たに死に形を書いたら止める**。
+                #   移行しなかった既裁定は not_applied: に退避してある(dict値なのでここには掛からない)。
+                fails.append("slug-overrides.yml 死に形 %d件(promoteが読まない形式=書いても効かない。"
+                             "overrides: 配下に {slug:, reason:, at:} で書く): %s"
+                             % (len(_dead), ", ".join(_dead[:5])))
             else:
                 print("  OK   slug-overrides.yml: 死に形なし")
         except Exception as _e:
