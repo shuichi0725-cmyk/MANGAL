@@ -132,6 +132,10 @@ def judge(wiki, prod, rkt):
         if rkt and len(rkt) == 10:
             return "BLOCK_SPLIT", None       # 楽天が別日を主張
         return "ADOPT_GAIN", wiki            # 楽天は月まで=反証にならない
+    if len(prod) == 10 and len(wiki) == 7:
+        # ★同月で本番の方が細かい = 日を落とすだけの情報損失。採らない
+        # (実測 2026-09-04: これで144巻/50頁の粒度を落としかけた)
+        return "SAME", None
     if rkt and rkt == wiki:
         return "ADOPT_DAY", wiki
     if rkt and rkt == prod:
