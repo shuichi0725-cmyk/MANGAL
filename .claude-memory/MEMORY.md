@@ -132,4 +132,7 @@
 - [【道具の罠】_lookup.py --isbn --live はキャッシュ済だとliveを叩かない](lookup_isbn_live_cached_skip.md) — NDLはndl_live直叩き・楽天が年だけの巻は載せない・旧キャッシュは誤記録あり
 - [【禁止】BOOK☆WALKERは試し読み収集不可](bookwalker_harvest_forbidden.md) — robots.txtがClaudeBot全面Disallow+/de*/?sample=*も全crawler禁止。新情報源はまずrobots.txtを取る
 - [SEO構造相談2026-09-04=穴7点・1〜4,6適用済(ジャンルtitle/チップ/雑誌・出版社・年ハブ850面/ジャンル下位219/anime二重サフィックス/list静的シェル)](seo_structure_gaps_2026_09_04.md) — 機能蒸留待ち。残=5著者頁の薄さ・7頁の重さ。ユーザ側=Crawler Hints+Bing。★ls -l第5列はgroup id/素のnext buildはdata/manga旧世代
-- [IndexNow自前送信=_indexnow.py(r2-sync→pending→finalize purge後drain / feature・diff-deployは即drain)](indexnow_self_submit.md) — 鍵=public/efa08…txt(公開・非秘密)。Google非対応=sitemapが正。--status/--drain/--no-indexnow
+- [IndexNow自前送信=_indexnow.py(r2-sync→pending→finalize purge後drain / feature・diff-deployは即drain)](indexnow_self_submit.md) — ★未修正欠陥3件(無変更66k頁の大量送信/削除URLがSRC stem/purge失敗でも送る)・鍵は本番未配信で未送信。鍵は仕様上「公開必須だが推測困難性が根拠」
+- [Crawler HintsはWorkers+R2で発火しない公算](crawler_hints_ineffective_on_workers_r2.md) — 発火条件=ゾーンcache MISS・Workerはzoneless。有効化済だが当てにしない
+- [【前提】GitHubリポジトリはpublic](repo_is_public_github.md) — 鍵/トークンはコミット前に公開可否を判断。認証情報は.gitignore済で漏れなし
+- [【罠】記憶は正本に書く](memory_write_to_canonical_not_mirror.md) — .claude-memory/に書いて_sync-memory.pyを回すと消える。書いた後にgrepで検算
