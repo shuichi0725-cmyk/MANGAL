@@ -43,7 +43,7 @@
 - [【残】OTOMO全集補完](otomo_complete_works_pending.md) — ユーザ資料待ち ／ [全集コーナー=素材収集済み](zenshuu_corner_state.md) — まとめGO待ち
 - [収益設計=ストア連動](store_affiliate_architecture.md) — PR表記必須
 - [画集=別カテゴリ掲載](art_book_inclusion.md)
-- [【着手待ち・クリア跨ぎ】検索フィルターUI改善5点](filter_ui_todo_2026_09_05.md) — 「フィルターの続き」で再開。見出しが黒/件数計算のソート撤去/適用中チップの穴/0件と読込中の区別/並べ替え+アコーディオン。機能追加はしない
+- [【実装済・preview確認待ち】検索フィルターUI改善5点](filter_ui_todo_2026_09_05.md) — 5点とも実装+push済(1ec45e2d2)。残=preview目視→「機能蒸留して」。filterItems新設で件数6パス153→78ms。内部スクロール全廃・並び順は最下部
 - [【✅】FilterPanel件数表示](filterpanel_show_counts.md) ／ [【残】表示データ磨き](display_data_polish_tasks.md) ／ [【残】著者50音索引+透過フィルター](author_kana_index_and_mobile_filter.md) ／ [著者kana完埋め済](author_kana_fill_state.md) — unresolved372=ユーザ調査中
 - [【手法】AI一括生成+Web検証](method_ai_generate_plus_webverify.md) ／ [【原則】取れる情報は全部取る](acquire_all_obtainable_info.md) ／ [【戒め】リンクは要約でなく全明細を抜く](feedback_extract_full_source_data.md)
 - [【保留】機能ロードマップ/Wikiジャンル(GO待ち)](feature_roadmap_post_db.md) ／ [電子限定版はスコープ外](ebook_only_editions_out_of_scope.md) — 楽天Koboには在る
