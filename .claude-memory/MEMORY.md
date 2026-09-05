@@ -18,7 +18,7 @@
 - [【進行中】抜粋本=楽天副題にしか無い層](excerpt_subtitle_hidden_layer.md) — 250頁3分類済 ／ [非掲載drop list](non_manga_drop_cleanup.md) ／ [promote mergeがdrop list尊重](promote_merge_respects_drop.md)
 - [掲載境界ルール](inclusion_edge_rules.md) — 映画コミカライズkeep/フィルムdrop ／ [コナン映画 判別法](conan_movie_filmcomic_method.md) ／ [フィルムコミック=imprintだけがアニメ物の穴](film_comic_imprint_hole.md) ／ [コンビニ判一掃=148drop/16hold](konbini_reprint_sweep.md) — imprint一律drop不可
 - [【✅】楽天あらすじ→genre/tag](genre_from_rakuten_story_plan.md) ／ [【残】タグなし32,609作](tagless_coverage_next.md)
-- [【再発防止】楽天outOfStockFlag=1必須](rakuten_out_of_stock_flag.md) ／ [楽天長時間ジョブは rakuten_live_retry](rakuten_long_job_needs_retry.md)
+- [【再発防止】楽天outOfStockFlag=1必須](rakuten_out_of_stock_flag.md) ／ [楽天長時間ジョブは rakuten_live_retry](rakuten_long_job_needs_retry.md) ／ [【戒め】完了待ちは文字列マーカーでなくプロセス終了で](feedback_wait_on_exit_not_marker.md) — マーカー不一致で64分空回りさせた
 - [【残3】特装版混入是正](special_edition_fix_state.md) — 種1 schema:version=版名権威
 - [【最重要】クラスタ単位=シリーズ](clustering_unit_is_series.md) — 著者軸禁止 ／ [【最重要】mergeは外部確証必須](merge_needs_external_proof.md) — 同一anilist_id≠同一作 ／ [shared-ISBN過merge guard](shared_isbn_overmerge_homonym_guard.md)
 - [【未適用】4軸監査候補](preproduction_review.md) — GO待ち ／ [_extract-top-completed=audit用](extract_top_completed_audit_purpose.md)
@@ -121,6 +121,7 @@
 - [【戒め】ビルド入力の結線3箇所](build_input_wiring_three_places.md) — STEPS/preflight staging/消費者
 - [部分ビルド合流の復旧型](partial_rebuild_merge_recovery.md)
 - [【戒め】script警告は検算してから報告](feedback_sanity_check_tool_warnings.md)
+- [【戒め】診断簿は掃除してから読む](diag_log_prune_before_reading.md) — 追記型は腐る(3本で676→38行・94%残骸)。書き手にdedup必須・新設は監査型に寄せる。★「本番に無いslug率」での一括判定は誤読の元
 - [SEO title方針=サフィックス「漫画・コミックのMANGAL」](seo_title_suffix_decision.md) — GO済
 - [Bashツールheredoc+シングルクォート罠](bash_tool_heredoc_quote_pitfall.md) — 複数行scriptはWriteでscratchpadに書いて実行・repoの.pyはCRLF/LF混在
 - [【戒め・全外部照会共通】失敗を否定記録にしない](feedback_no_negative_record_on_failure.md) — 200で空だけが否定・連続429=exit 2・検査2点(except直後の記帳/Throttled先行捕捉)
