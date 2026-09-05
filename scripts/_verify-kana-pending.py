@@ -98,11 +98,20 @@ with open(tmp, "w", encoding="utf-8") as f:
 os.replace(tmp, PEND)
 if mm_rows:
     new = not os.path.exists(MISS)
+    # ★追記dedup(2026-09-05): 再照会のたびに同じ不一致が積み上がるのを止める。
+    _seen = set()
+    if not new:
+        with open(MISS, encoding="utf-8") as _f:
+            _seen = {ln.rstrip("\r\n") for ln in _f}
     with open(MISS, "a", encoding="utf-8") as f:
         if new:
             f.write("slug\tisbn\ttitle\trakuten_kana\tndl_kana\n")
         for row in mm_rows:
-            f.write("\t".join(str(x) for x in row) + "\n")
+            _r = "\t".join(str(x) for x in row)
+            if _r in _seen:
+                continue
+            _seen.add(_r)
+            f.write(_r + "\n")
 print(f"確定 {confirmed} / 不一致 {mismatched}(→kana-mismatch.tsv) / NDL未収載 {still}(pending継続)")
 if aborted:
     sys.exit(2)

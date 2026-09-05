@@ -240,8 +240,15 @@ def slug_kana_gate(base, kana, slug, out_tsv="docs/production-diagnostics/slug-g
     try:
         import os
         os.makedirs(os.path.dirname(out_tsv), exist_ok=True)
+        # ★追記dedup(2026-09-05): 同じ頁を何度検査しても行が積み上がり、簿が膨らんで
+        #   誰も読まなくなっていた(実測 346行中143行が重複)。既存と同じ行は書かない。
+        _row = f"{slug}\t{base}\t{kana}"
+        if os.path.exists(out_tsv):
+            with open(out_tsv, encoding="utf-8") as _f:
+                if any(ln.rstrip("\r\n") == _row for ln in _f):
+                    return False
         with open(out_tsv, "a", encoding="utf-8") as f:
-            f.write(f"{slug}\t{base}\t{kana}\n")
+            f.write(_row + "\n")
     except Exception:
         pass
     return False
