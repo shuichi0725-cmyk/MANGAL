@@ -147,6 +147,9 @@ export default function HomeClient({ data, summary }: Props) {
   //   ①0件と断言しない(検索中表示に差し替え) ②部分結果には「検索中」バッジを重ねる。
   //   再計算タイミング: full到着=_indexListeners→再レンダー / alt到着=altTick で担保される。
   const searchPending = hasQuery && (!isFullIndexLoaded() || isAltLoading());
+  // ★フィルターパネルへ渡す「まだ確定していない」signal(2026-09-05)。
+  //   索引未到着/検索確定前は全facetが0になり、絞り込んで0件になった廃墟と区別が付かなかった。
+  const panelLoading = indexLoading || searchLoading || searchPending;
   const searchTiers = useMemo(
     () => (hasQuery ? searchWithTiers(state.query, manga) : null),
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -503,6 +506,8 @@ export default function HomeClient({ data, summary }: Props) {
               yearBounds={bounds}
               authorEntries={authors}
               matchedSlugs={matchedSlugs}
+              loading={panelLoading}
+              stickyTop="top-14"
             />
           </div>
         )}
@@ -570,13 +575,14 @@ export default function HomeClient({ data, summary }: Props) {
         }`}
         aria-hidden={!open}
       >
-        {/* パネル: 下(ボタン側)から徐々に全画面へ拡大。 ★半透過(frosted glass)で
-            背後の漫画リストがうっすら透ける。 backdrop-blur で文字も読める。 */}
+        {/* パネル: 下(ボタン側)から徐々に全画面へ拡大。
+            ★地の不透明度(2026-09-05): 旧 28%(=72%透過)は背後の一覧が透けて見出し・件数が
+            読めなかった(ユーザ報告)。frosted glass の意匠は blur で保ち、地は 94% へ寄せる。 */}
         <div
           className={`absolute inset-3 flex flex-col overflow-hidden rounded-[26px] border-4 border-white ring-1 ring-black/30 shadow-2xl backdrop-blur-sm origin-bottom transition-[transform,opacity] duration-300 ease-out ${
             open ? "scale-100 opacity-100" : "scale-90 opacity-0"
           }`}
-          style={{ background: "color-mix(in srgb, var(--color-surface) 28%, transparent)" }}
+          style={{ background: "color-mix(in srgb, var(--color-surface) 94%, transparent)" }}
         >
           <header className="flex items-center justify-between px-4 py-3 border-b border-[var(--color-line)] shrink-0">
             <h2 className="font-bold text-base">フィルター</h2>
@@ -597,6 +603,7 @@ export default function HomeClient({ data, summary }: Props) {
               yearBounds={bounds}
               authorEntries={authors}
               matchedSlugs={matchedSlugs}
+              loading={panelLoading}
             />
           </div>
           <div className="shrink-0 border-t border-[var(--color-line)] p-3">

@@ -7,7 +7,7 @@ import {
   __setAltIndexForTest,
   searchWithTiers,
 } from "./clientSearch";
-import { applyFilters, emptyFilterState, type FilterState } from "./filters";
+import { applyFilters, filterItems, emptyFilterState, type FilterState } from "./filters";
 import { sortRows } from "./listSort";
 import type { MangaListItem } from "./schema";
 
@@ -95,10 +95,11 @@ function shotFor(q: string): QueryShot {
   return { n: tiers.size, top: sorted.slice(0, 25).map((m) => m.slug), tierHist };
 }
 
-/** FilterPanel の counts 相当(7ファセット)。 */
+/** FilterPanel の counts 相当(7ファセット)。
+ *  ★本体と同じく並べ替え抜きの filterItems を使う(2026-09-05。件数は順序に依らない)。 */
 function facetCounts(state: FilterState): Record<string, Record<string, number>> {
   const tally = (clear: Partial<FilterState>, values: (m: MangaListItem) => string[]) => {
-    const rows = applyFilters(items, { ...state, ...clear });
+    const rows = filterItems(items, { ...state, ...clear });
     const map: Record<string, number> = {};
     for (const m of rows) for (const v of values(m)) map[v] = (map[v] ?? 0) + 1;
     return Object.fromEntries(Object.entries(map).sort(([a], [b]) => (a < b ? -1 : 1)));

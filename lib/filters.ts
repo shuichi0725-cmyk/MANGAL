@@ -123,12 +123,25 @@ export function applyFilters(
   state: FilterState,
   matchedSlugs: Set<string> | null = null,
 ): MangaListItem[] {
+  return sortItems(filterItems(items, state, matchedSlugs), effectiveSort(state));
+}
+
+/**
+ * ★並べ替え抜きの絞り込みだけ(2026-09-05)。 ファセット件数の集計はこちらを使う。
+ * 件数は順序に依らないのに applyFilters を通すと末尾で必ず sortItems(既定=人気順)が走り、
+ * FilterPanel は1タップにつき 69,236件の配列コピー+ソートを6回払っていた。
+ */
+export function filterItems(
+  items: MangaListItem[],
+  state: FilterState,
+  matchedSlugs: Set<string> | null = null,
+): MangaListItem[] {
   // ★選択侧の正規化はループの外で1回だけ(2026-08-01)。
   //   旧: 68,749行のそれぞれで state.authors.map(authorKey) を作り直していた
   //   (配列確保 + 選択人数分の正規表現置換 × 68,749)。値は行に依らない。
   const selAuthors = state.authors.length ? state.authors.map(authorKey) : null;
   const selOriginal = state.originalAuthors.length ? state.originalAuthors.map(authorKey) : null;
-  const filtered = items.filter((m) => {
+  return items.filter((m) => {
     if (state.query && (!matchedSlugs || !matchedSlugs.has(m.slug))) return false;
     if (!inRange(m.year_started, state.yearMin, state.yearMax)) return false;
     if (state.launch) {
@@ -173,7 +186,6 @@ export function applyFilters(
     if (state.statuses.length && !state.statuses.includes(m.status)) return false;
     return true;
   });
-  return sortItems(filtered, effectiveSort(state));
 }
 
 /**

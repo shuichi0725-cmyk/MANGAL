@@ -199,13 +199,14 @@ export default function AuthorKanaIndex({ authors, selected, onToggle }: Props) 
         </div>
       )}
 
-      {/* 第3段: 著者一覧 */}
+      {/* 第3段: 著者一覧。 ★内部スクロール(旧 max-h-56)は廃止(2026-09-05):
+          全画面モーダル/抽斗のスクロールと競合し「親が動くか子が動くか指で分からない」ため。 */}
       {shownAuthors.length > 0 && (
-        <div className="max-h-56 overflow-y-auto rounded-card border border-[var(--color-line)] p-1.5 space-y-0.5">
+        <div className="rounded-card border border-[var(--color-line)] p-1.5 space-y-0.5">
           {shownAuthors.map((a) => (
             <label
               key={a.name}
-              className="flex items-center gap-2 cursor-pointer px-1 py-0.5 rounded hover:bg-black/5"
+              className="flex items-center gap-2 cursor-pointer px-1 py-0.5 rounded hover:bg-[var(--color-surface-2)]"
             >
               <input
                 type="checkbox"

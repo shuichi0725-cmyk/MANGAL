@@ -1,7 +1,7 @@
 "use client";
 
-import { useMemo } from "react";
-import { applyFilters, emptyFilterState, type FilterState, type SortKey } from "@/lib/filters";
+import { useMemo, useState } from "react";
+import { filterItems, emptyFilterState, type FilterState, type SortKey } from "@/lib/filters";
 import type { ListBundle, MangaListItem, StatusT } from "@/lib/schema";
 import { ChipButton } from "@/components/ui/Chip";
 import AuthorKanaIndex from "@/components/AuthorKanaIndex";
@@ -15,6 +15,12 @@ type Props = {
   /** ★検索中の一致slug集合(2026-08-01)。渡さないと applyFilters が state.query で全行を弾き、
    *  ファセット件数が全部0になる(68,724行を6回走査して0を出していた)。 */
   matchedSlugs?: Set<string> | null;
+  /** ★索引/検索がまだ確定していない(2026-09-05)。全facet 0 の「廃墟」を
+   *  「0件」と誤読させないための明示signal。 未指定なら索引の有無から推定。 */
+  loading?: boolean;
+  /** ★「適用中の絞り込み」ブロックの sticky 位置(2026-09-05)。
+   *  モバイル全画面モーダル/一覧抽斗 = "top-0"、 PCサイドバーは共通ヘッダー(sticky)の下 = "top-14"。 */
+  stickyTop?: string;
 };
 
 function toggle<T>(arr: T[], v: T): T[] {
@@ -26,8 +32,12 @@ export default function FilterPanel({
   state,
   setState,
   yearBounds,
-  authorEntries, matchedSlugs }: Props) {
+  authorEntries, matchedSlugs, loading, stickyTop = "top-0" }: Props) {
   const update = (patch: Partial<FilterState>) => setState({ ...state, ...patch });
+
+  // ★索引未到着 = 全facetが0になる(69,236件の索引は idle 遅延ロード)。
+  //   「絞り込んで0件」と見分けが付かない廃墟になるので、ここで確定させて表示を分ける。
+  const isLoading = loading ?? data.manga.length === 0;
 
   // ★動的件数(2026-06-13): 各facetの値ごとに「その値を選んだら何件」を表示。
   //   faceted-search の定石 = 当該facetだけ解除した state で絞り、 残った作品を値で集計。
@@ -36,12 +46,15 @@ export default function FilterPanel({
     // ★同じ解除条件の絞り込みは1回だけ走らせる(2026-08-01)。
     //   ジャンルと要素はどちらも解除なし(={})で、本番67k件に対する applyFilters を
     //   まったく同じ引数で2回やっていた。7パス→6パスに減る。
+    // ★並べ替えなしの filterItems を使う(2026-09-05)。数えるだけなのに applyFilters を
+    //   通すと末尾で必ず sortItems(既定=人気順) が走り、69,236件の配列コピー+ソートを
+    //   1タップにつき6回払っていた(件数は順序に依らない=結果は完全に同じ)。
     const rowsCache = new Map<string, MangaListItem[]>();
     const rowsFor = (clear: Partial<FilterState>) => {
       const k = JSON.stringify(clear);
       let rows = rowsCache.get(k);
       if (!rows) {
-        rows = applyFilters(data.manga, { ...state, ...clear }, matchedSlugs ?? null);
+        rows = filterItems(data.manga, { ...state, ...clear }, matchedSlugs ?? null);
         rowsCache.set(k, rows);
       }
       return rows;
@@ -74,11 +87,15 @@ export default function FilterPanel({
         if (fvd.length >= 7) keys.push(fvd.slice(0, 7));
         return keys;
       }),
+      // 現在の絞り込み全体でのヒット数(=0件の説明に使う。rowsCache に相乗り)
+      total: rowsFor({}).length,
     };
   }, [data.manga, state, matchedSlugs]);
   // ★出版社/連載誌リストの並び(2026-08-10 ユーザ要望): 絞り込み中は 0件の行を隠し、
   //   現在の交差件数の多い順に並べ替える(件数は counts で再計算済み=それを並びにも使う)。
   //   選択中の行は 0件でも先頭に残す(=外せなくなるのを防ぐ)。
+  //   ★読み込み中は 0件落としをしない(2026-09-05): 索引が届く前に全行を消すと
+  //   「出版社が1社も無い」という嘘の廃墟になる(件数バッジも出さない)。
   const facetList = <T extends { key: string; name: string }>(
     items: T[],
     cnt: Map<string, number>,
@@ -86,17 +103,17 @@ export default function FilterPanel({
   ) =>
     items
       .map((it) => ({ ...it, n: cnt.get(it.key) ?? 0, on: selected.includes(it.key) }))
-      .filter((it) => it.on || it.n > 0)
+      .filter((it) => isLoading || it.on || it.n > 0)
       .sort((a, b) => Number(b.on) - Number(a.on) || b.n - a.n || a.name.localeCompare(b.name, "ja"));
   const publisherList = useMemo(
     () => facetList(data.publishers, counts.publisher, state.publishers),
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [data.publishers, counts.publisher, state.publishers],
+    [data.publishers, counts.publisher, state.publishers, isLoading],
   );
   const magazineList = useMemo(
     () => facetList(data.magazines, counts.magazine, state.magazines),
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [data.magazines, counts.magazine, state.magazines],
+    [data.magazines, counts.magazine, state.magazines, isLoading],
   );
   // 要素タグの一覧 = 出現する全タグを件数降順(同数は名前順)で。 master が無いのでデータから導出。
   const themeList = useMemo(
@@ -106,12 +123,13 @@ export default function FilterPanel({
         .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0], "ja")),
     [counts.theme],
   );
-  // 件数バッジ(0は淡色)
-  const Cnt = ({ n }: { n: number }) => (
-    <span className={`ml-1 tabular-nums text-[10px] ${n ? "text-ink/40" : "text-ink/20"}`}>
-      {n.toLocaleString()}
-    </span>
-  );
+  // 件数バッジ(0は淡色)。 ★読み込み中は数字を出さない(全部0=嘘になるため)
+  const Cnt = ({ n }: { n: number }) =>
+    isLoading ? null : (
+      <span className={`ml-1 tabular-nums text-[10px] ${n ? "text-ink/60" : "text-ink/30"}`}>
+        {n.toLocaleString()}
+      </span>
+    );
 
   const STATUS_LABELS: Record<StatusT, string> = {
     completed: "完結",
@@ -128,25 +146,52 @@ export default function FilterPanel({
 
   // ★適用中チップ(2026-08-10 ユーザ裁定・案A): カテゴリカードとフィルターが同じ状態を見る
   //   「2つの窓」であることを可視化。個別×で解除できる。
+  //   ★2026-09-05: 要素/出版社/連載誌/画集/検索語/並び順 が入っておらず、
+  //   「出版社で0件にしたのに画面に痕跡が無く解除もできない」穴になっていたので全条件を列挙する。
   const DEMO_JA: Record<string, string> = { shounen: "少年", shoujo: "少女", seinen: "青年", josei: "女性", kodomo: "児童" };
-  const active: { label: string; clear: Partial<FilterState> }[] = [];
-  if (state.anime) active.push({ label: "アニメ化", clear: { anime: false } });
-  if (state.hasAwards) active.push({ label: "受賞", clear: { hasAwards: false } });
-  for (const st of state.statuses) active.push({ label: STATUS_LABELS[st] ?? st, clear: { statuses: state.statuses.filter((x) => x !== st) } });
-  for (const d of state.demographics) active.push({ label: DEMO_JA[d] ?? d, clear: { demographics: state.demographics.filter((x) => x !== d) } });
-  for (const g of state.genres) active.push({ label: data.genres.find((x) => x.key === g)?.name ?? g, clear: { genres: state.genres.filter((x) => x !== g) } });
-  if (state.launch) active.push({ label: String(state.launch).replace("s", "年代"), clear: { launch: null } });
-  for (const a of state.authors) active.push({ label: a, clear: { authors: state.authors.filter((x) => x !== a) } });
+  const active: { id: string; label: string; clear: Partial<FilterState> }[] = [];
+  if (state.query.trim()) active.push({ id: "q", label: `「${state.query.trim()}」`, clear: { query: "" } });
+  if (state.anime) active.push({ id: "anime", label: "アニメ化", clear: { anime: false } });
+  if (state.hasAwards) active.push({ id: "awards", label: "受賞", clear: { hasAwards: false } });
+  for (const st of state.statuses) active.push({ id: `st:${st}`, label: STATUS_LABELS[st] ?? st, clear: { statuses: state.statuses.filter((x) => x !== st) } });
+  for (const d of state.demographics) active.push({ id: `de:${d}`, label: DEMO_JA[d] ?? d, clear: { demographics: state.demographics.filter((x) => x !== d) } });
+  for (const g of state.genres) active.push({ id: `ge:${g}`, label: data.genres.find((x) => x.key === g)?.name ?? g, clear: { genres: state.genres.filter((x) => x !== g) } });
+  for (const t of state.themes) active.push({ id: `th:${t}`, label: t, clear: { themes: state.themes.filter((x) => x !== t) } });
+  if (state.launch) active.push({ id: "launch", label: String(state.launch).replace("s", "年代"), clear: { launch: null } });
+  for (const p of state.publishers) active.push({ id: `pu:${p}`, label: p === "(unknown)" ? "出版社未設定" : data.publishers.find((x) => x.key === p)?.name ?? p, clear: { publishers: state.publishers.filter((x) => x !== p) } });
+  for (const mg of state.magazines) active.push({ id: `ma:${mg}`, label: data.magazines.find((x) => x.key === mg)?.name ?? mg, clear: { magazines: state.magazines.filter((x) => x !== mg) } });
+  for (const a of state.authors) active.push({ id: `au:${a}`, label: a, clear: { authors: state.authors.filter((x) => x !== a) } });
+  if (state.artBooks) active.push({ id: "art", label: "🎨 画集", clear: { artBooks: false } });
+  if (state.sort !== "default") active.push({ id: "sort", label: `並び: ${SORT_OPTIONS.find((o) => o.key === state.sort)?.label ?? state.sort}`, clear: { sort: "default" } });
+
+  // ★アコーディオン(2026-09-05): 上位4つ(種類/連載状態/分野/ジャンル)は開いたまま、
+  //   下の重い5つ(創刊/要素/出版社/連載誌/著者)だけ開閉。選択が入っている節は自動で開く
+  //   (=閉じた節の中に条件が隠れない)。 明示的に開閉したらその値が勝つ。
+  const [openMap, setOpenMap] = useState<Record<string, boolean>>({});
+  const isOpen = (key: string, hasSel: boolean) => openMap[key] ?? hasSel;
+  const toggleSection = (key: string, hasSel: boolean) =>
+    setOpenMap((m) => ({ ...m, [key]: !(m[key] ?? hasSel) }));
 
   return (
     <aside className="space-y-6 text-sm">
       {active.length > 0 && (
-        <div className="rounded-xl border border-[var(--color-accent)]/40 bg-[var(--color-accent)]/5 p-2.5">
-          <div className="text-[11px] font-bold text-ink/55">適用中の絞り込み</div>
+        <div className={`sticky ${stickyTop} z-10 -mx-1 rounded-xl border border-[var(--color-accent)]/40 bg-[var(--color-surface)] p-2.5 shadow-[0_4px_10px_rgba(0,0,0,0.28)]`}>
+          <div className="flex items-baseline justify-between gap-2">
+            <div className="text-[11px] font-bold text-ink/70">適用中の絞り込み</div>
+            {/* ★0件になった時にリセットが最下部で遠い問題(2026-09-05): ここでも解除できる。
+                挙動は最下部の「条件をリセット」と同一(検索語は残す=検索語チップの×で消す) */}
+            <button
+              type="button"
+              onClick={() => setState({ ...emptyFilterState(), query: state.query })}
+              className="shrink-0 rounded-full border border-[var(--color-line)] px-2 py-0.5 text-[10px] font-semibold text-ink/70"
+            >
+              条件をリセット
+            </button>
+          </div>
           <div className="mt-1.5 flex flex-wrap gap-1.5">
             {active.map((c) => (
               <button
-                key={c.label}
+                key={c.id}
                 type="button"
                 onClick={() => update(c.clear)}
                 className="inline-flex items-center gap-1 rounded-full border border-[var(--color-accent)] bg-[var(--color-surface)] px-2.5 py-0.5 text-[12px] font-semibold text-[var(--color-accent)]"
@@ -158,6 +203,42 @@ export default function FilterPanel({
           </div>
         </div>
       )}
+
+      {/* ★読み込み中/0件の区別(2026-09-05): 全facetが0の廃墟には3つの原因があるのに
+          UIが区別していなかった(①索引未到着 ②検索0ヒット ③ANDの絞りすぎ)。 */}
+      {isLoading ? (
+        <p className="flex items-center gap-2 rounded-xl border border-[var(--color-line)] bg-[var(--color-surface)]/60 px-3 py-2.5 text-[12px] text-ink/70">
+          <span className="animate-pulse" aria-hidden="true">⏳</span>
+          作品データを読み込み中… 件数は届き次第出ます
+        </p>
+      ) : counts.total === 0 ? (
+        <div className="rounded-xl border border-[var(--color-accent)]/50 bg-[var(--color-surface)] px-3 py-2.5 text-[12px]">
+          {matchedSlugs && matchedSlugs.size === 0 ? (
+            <>
+              <p className="text-ink/75">「{state.query.trim()}」に一致する作品がありません。</p>
+              <button
+                type="button"
+                onClick={() => update({ query: "" })}
+                className="mt-2 rounded-full border border-[var(--color-accent)] px-3 py-1 text-[11px] font-bold text-[var(--color-accent)]"
+              >
+                検索語を消す
+              </button>
+            </>
+          ) : (
+            <>
+              <p className="text-ink/75">この条件に当てはまる作品はありません(条件の絞りすぎ)。</p>
+              <button
+                type="button"
+                onClick={() => setState({ ...emptyFilterState(), query: state.query })}
+                className="mt-2 rounded-full border border-[var(--color-accent)] px-3 py-1 text-[11px] font-bold text-[var(--color-accent)]"
+              >
+                条件をリセット
+              </button>
+            </>
+          )}
+        </div>
+      ) : null}
+
       <Section title="種類">
         <label className="flex items-center gap-2 cursor-pointer">
           <input
@@ -193,26 +274,55 @@ export default function FilterPanel({
         </div>
       </Section>
 
-      <Section title="並び順">
-        <select
-          value={state.sort}
-          onChange={(e) => update({ sort: e.target.value as SortKey })}
-          className="w-full rounded-card border border-[var(--color-line)] px-2.5 py-1.5 transition focus:outline-none focus:border-[var(--color-accent)]"
-        >
-          {SORT_OPTIONS.map((o) => (
-            <option key={o.key} value={o.key}>
-              {o.label}
-            </option>
+      <Section title="分野">
+        <div className="flex flex-wrap gap-1.5">
+          {data.demographics.map((d) => (
+            <ChipButton
+              key={d.key}
+              active={state.demographics.includes(d.key)}
+              onClick={() => update({ demographics: toggle(state.demographics, d.key) })}
+            >
+              {d.name}<Cnt n={counts.demographic.get(d.key) ?? 0} />
+            </ChipButton>
           ))}
-        </select>
+        </div>
       </Section>
 
-      <Section title="創刊(1巻発売)">
+      {/* ★AND固定(2026-07-22 ユーザ裁定: ORは不要=絞り込み用途に交差のみ)。トグル撤去 */}
+      <Section title="ジャンル">
+        <div className="flex flex-wrap gap-1.5">
+          {data.genres.map((g) => (
+            <ChipButton
+              key={g.key}
+              active={state.genres.includes(g.key)}
+              onClick={() => update({ genres: toggle(state.genres, g.key) })}
+              className={!state.genres.includes(g.key) && !isLoading && (counts.genre.get(g.key) ?? 0) === 0 ? "opacity-40" : ""}
+            >
+              {g.name}<Cnt n={counts.genre.get(g.key) ?? 0} />
+            </ChipButton>
+          ))}
+          {/* ★画集 = ジャンルでなく別カテゴリだが、 ここで選ぶと一覧を全画集に切替 */}
+          <ChipButton
+            active={state.artBooks}
+            onClick={() => update({ artBooks: !state.artBooks })}
+          >
+            🎨 画集（{data.artBooks.length}）
+          </ChipButton>
+        </div>
+      </Section>
+
+      <Section
+        title="創刊(1巻発売)"
+        collapsible
+        open={isOpen("launch", !!state.launch)}
+        onToggle={() => toggleSection("launch", !!state.launch)}
+        badge={state.launch ? 1 : 0}
+      >
         {/* ★年代→年→月ドリルダウン(2026-07-07 Q3-A裁定)。件数付きチップ・タップで展開 */}
         <div className="space-y-1.5">
           <div className="flex flex-wrap gap-1.5">
             {Array.from({ length: 11 }, (_, i) => `${1920 + i * 10}s`)
-              .filter((dec) => (counts.launch.get(dec) ?? 0) > 0)
+              .filter((dec) => isLoading || (counts.launch.get(dec) ?? 0) > 0)
               .map((dec) => {
                 const on = state.launch === dec || (state.launch ?? "").startsWith(dec.slice(0, 3));
                 return (
@@ -271,46 +381,18 @@ export default function FilterPanel({
         </div>
       </Section>
 
-      <Section title="分野">
-        <div className="flex flex-wrap gap-1.5">
-          {data.demographics.map((d) => (
-            <ChipButton
-              key={d.key}
-              active={state.demographics.includes(d.key)}
-              onClick={() => update({ demographics: toggle(state.demographics, d.key) })}
-            >
-              {d.name}<Cnt n={counts.demographic.get(d.key) ?? 0} />
-            </ChipButton>
-          ))}
-        </div>
-      </Section>
-
-      {/* ★AND固定(2026-07-22 ユーザ裁定: ORは不要=絞り込み用途に交差のみ)。トグル撤去 */}
-      <Section title="ジャンル">
-        <div className="flex flex-wrap gap-1.5">
-          {data.genres.map((g) => (
-            <ChipButton
-              key={g.key}
-              active={state.genres.includes(g.key)}
-              onClick={() => update({ genres: toggle(state.genres, g.key) })}
-              className={!state.genres.includes(g.key) && (counts.genre.get(g.key) ?? 0) === 0 ? "opacity-40" : ""}
-            >
-              {g.name}<Cnt n={counts.genre.get(g.key) ?? 0} />
-            </ChipButton>
-          ))}
-          {/* ★画集 = ジャンルでなく別カテゴリだが、 ここで選ぶと一覧を全画集に切替 */}
-          <ChipButton
-            active={state.artBooks}
-            onClick={() => update({ artBooks: !state.artBooks })}
-          >
-            🎨 画集（{data.artBooks.length}）
-          </ChipButton>
-        </div>
-      </Section>
-
       {themeList.length > 0 && (
-        <Section title="要素">
-          <div className="flex flex-wrap gap-1.5 max-h-60 overflow-y-auto">
+        <Section
+          title="要素"
+          collapsible
+          open={isOpen("themes", state.themes.length > 0)}
+          onToggle={() => toggleSection("themes", state.themes.length > 0)}
+          badge={state.themes.length}
+          total={themeList.length}
+        >
+          {/* ★内部スクロール(旧 max-h-60)は廃止(2026-09-05): 全画面モーダルのスクロールと
+              競合し「親が動くか子が動くか指で分からない」= 縦の長さより悪い。展開=全高。 */}
+          <div className="flex flex-wrap gap-1.5">
             {themeList.map(([name, n]) => (
               <ChipButton
                 key={name}
@@ -324,9 +406,16 @@ export default function FilterPanel({
         </Section>
       )}
 
-      <Section title="出版社">
-        {/* ★連載誌と同じ縦圧縮(2026-07-06 ユーザ要望): 長リストはスクロール */}
-        <div className="space-y-1 max-h-48 overflow-y-auto">
+      <Section
+        title="出版社"
+        collapsible
+        open={isOpen("publishers", state.publishers.length > 0)}
+        onToggle={() => toggleSection("publishers", state.publishers.length > 0)}
+        badge={state.publishers.length}
+        total={publisherList.length}
+      >
+        {/* ★内部スクロール(旧 max-h-48)は廃止(2026-09-05。上の「要素」と同じ理由) */}
+        <div className="space-y-1">
           {/* ★出版社未設定(=要補完)を絞り込む QAボタン。 (unknown)キーで applyFilters の
               フォールバック(publishers空→[publisher])に乗る */}
           {(state.publishers.includes("(unknown)") || (counts.publisher.get("(unknown)") ?? 0) > 0) && (
@@ -353,8 +442,16 @@ export default function FilterPanel({
         </div>
       </Section>
 
-      <Section title="連載誌">
-        <div className="space-y-1 max-h-48 overflow-y-auto">
+      <Section
+        title="連載誌"
+        collapsible
+        open={isOpen("magazines", state.magazines.length > 0)}
+        onToggle={() => toggleSection("magazines", state.magazines.length > 0)}
+        badge={state.magazines.length}
+        total={magazineList.length}
+      >
+        {/* ★内部スクロール(旧 max-h-48)は廃止(2026-09-05。上の「要素」と同じ理由) */}
+        <div className="space-y-1">
           {magazineList.map((m) => (
             <label key={m.key} className="flex items-center gap-2 cursor-pointer">
               <input
@@ -368,12 +465,34 @@ export default function FilterPanel({
         </div>
       </Section>
 
-      <Section title="著者(五十音)">
+      <Section
+        title="著者(五十音)"
+        collapsible
+        open={isOpen("authors", state.authors.length > 0)}
+        onToggle={() => toggleSection("authors", state.authors.length > 0)}
+        badge={state.authors.length}
+      >
         <AuthorKanaIndex
           authors={authorEntries}
           selected={state.authors}
           onToggle={(name) => update({ authors: toggle(state.authors, name) })}
         />
+      </Section>
+
+      {/* ★並び順は絞り込みではないので最下部へ(2026-09-05): 旧は3番目に居て、
+          ジャンルに着くまで5セクション分スクロールさせていた。 */}
+      <Section title="並び順">
+        <select
+          value={state.sort}
+          onChange={(e) => update({ sort: e.target.value as SortKey })}
+          className="w-full rounded-card border border-[var(--color-line)] px-2.5 py-1.5 transition focus:outline-none focus:border-[var(--color-accent)]"
+        >
+          {SORT_OPTIONS.map((o) => (
+            <option key={o.key} value={o.key}>
+              {o.label}
+            </option>
+          ))}
+        </select>
       </Section>
 
       <button
@@ -391,21 +510,60 @@ function Section({
   title,
   right,
   children,
+  collapsible = false,
+  open = true,
+  onToggle,
+  badge = 0,
+  total,
 }: {
   title: string;
   right?: React.ReactNode;
   children: React.ReactNode;
+  /** 折りたたみ可能(下の重いセクション)。 false = 常時展開(上位4つ) */
+  collapsible?: boolean;
+  open?: boolean;
+  onToggle?: () => void;
+  /** 選択中の件数(見出しに出す = 閉じていても条件が入っていることが分かる) */
+  badge?: number;
+  /** 選択肢の総数(閉じている時のヒント = 何が入っているか分かる) */
+  total?: number;
 }) {
+  // ★見出しは text-ink(テーマ変数)で(2026-09-05): 旧 text-black/60 はベタ書きで
+  //   ダークテーマ(theme-d3=黒地)に黒文字となり、見出しが全部沈んでいた。
+  const heading = (
+    <h3 className="font-semibold text-xs tracking-wider uppercase text-ink/70">{title}</h3>
+  );
+  if (!collapsible) {
+    return (
+      <section>
+        <header className="flex items-center justify-between mb-2">
+          {heading}
+          {right}
+        </header>
+        {children}
+      </section>
+    );
+  }
   return (
     <section>
-      <header className="flex items-center justify-between mb-2">
-        <h3 className="font-semibold text-xs tracking-wider uppercase text-black/60">
-          {title}
-        </h3>
-        {right}
-      </header>
-      {children}
+      <button
+        type="button"
+        onClick={onToggle}
+        aria-expanded={open}
+        className="mb-2 flex w-full items-center gap-2 rounded-card border border-[var(--color-line)] bg-[var(--color-surface)]/50 px-2.5 py-2 text-left"
+      >
+        <span className="text-[10px] text-ink/60" aria-hidden="true">{open ? "▼" : "▶"}</span>
+        {heading}
+        {badge > 0 && (
+          <span className="rounded-full bg-[var(--color-accent)] px-1.5 text-[10px] font-bold text-[var(--color-on-accent)]">
+            {badge}
+          </span>
+        )}
+        {badge === 0 && total !== undefined && (
+          <span className="tabular-nums text-[10px] text-ink/45">{total.toLocaleString()}</span>
+        )}
+      </button>
+      {open && children}
     </section>
   );
 }
-
