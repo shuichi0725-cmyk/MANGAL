@@ -12,6 +12,8 @@ description: テスト環境に出して=対象頁を.preview-dataへ投入/入�
 1. 入替なら先に空にする: `rm -f .preview-data/manga/*.yml`(ユーザが「消した上で」と言った時のみ)
 2. 対象を copy: `cp data/manga.v2/<stem>.yml .preview-data/manga/`(複数可)
 3. preview索引再構築: `python scripts/_build-list-index.py .preview-data/manga .preview-data`(~20秒/500頁)
+3b. ★**題名索引ハブ**: `python scripts/_gen-titles-pages.py`(引数なし=data と .preview-data の両方を作る)。
+   ★忘れると `/titles` が**旧セット時代の題名**を並べ存在しない頁へリンクする(2026-09-06 実踏: 982頁時代の702頁分が残っていた)
 4. masters が変わっていたら同期: `cp data/publishers.yml .preview-data/publishers.yml` 等
    ★**schema(lib/schema.ts)のenum等を変えた時は必ず全masters(demographics/genres/publishers/magazines)をdiff確認**。
    2026-07-14実害: demographics.ymlからother削除時にpreviewミラー未同期→enum backstopがbuildを止め、preview deploy3連続failure(ユーザにエラーメール)
@@ -23,6 +25,8 @@ description: テスト環境に出して=対象頁を.preview-dataへ投入/入�
 - UI変更は .preview-data 不要(コード push だけで preview に出る)
 - デプロイ確認は Actions REST API か時間経過。反映されない時はビルドcancelを疑う
 - 本番R2へはこのskillでは**絶対出さない**(週次蒸留のみ)
+- ★**容量の天井 = Cloudflare Pages の無料枠 20,000ファイル**。漫画1頁=2ファイル(.html+.txt)+固定約4,200〜5,000
+  → **約7,000頁が上限**(3,000頁≒11,000=枠の55%)。本番69k頁は約138,500で有料枠でも入らない。詳細= [[preview_deploy_pitfalls]]
 
 
 ## ★previewセット管理 (= 2026-07-06 「元々入っていた漫画が消えない」事故から)

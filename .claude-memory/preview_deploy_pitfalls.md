@@ -13,6 +13,26 @@ metadata:
 - 確認はActions REST API。一覧=/browse(HomeClient)・ホーム=home-design-11。grid item は min-w-0 でヘッダーズレ封鎖済。
 - previewの索引はsubset=カレンダー等の照合失敗は正常。
 
+## ★容量の天井 = Cloudflare Pages のファイル数(2026-09-06 実測+公式)
+
+preview は本番(Workers+R2)と違い **Cloudflare Pages**(`wrangler pages deploy out`)。
+- **無料プラン 20,000ファイル/サイト**(有料 100,000。1ファイル25MiB)。
+- ★「Pagesビルドは20分でタイムアウト」は**無関係**= うちは GitHub Actions で焼いて上げるだけ。
+- 実測: **漫画1頁 = 2ファイル**(`.html` + `.txt`=RSCペイロード)。漫画0頁時の固定分が **約4,200〜5,000**。
+- → 3,000頁≒11,000(枠の55%) / 5,000頁≒15,000 / **無料枠の天井は約7,000頁**。
+- ★**本番69,242頁は約138,500ファイルで有料枠でも Pages に入らない**(= 本番が Workers+R2 な理由と整合)。
+- ★頁を増やしても**ファセットは本番に届かない**: 無作為7,000頁でも出版社298社(本番793)。
+  出版社リストの長さ等は preview では判断不能=本番で見るしかない。
+
+## ★セット入替時に再生成する3点(2026-09-06。前回1つ忘れた)
+
+1. `python scripts/_build-list-index.py .preview-data/manga .preview-data`
+2. ★`python scripts/_gen-titles-pages.py`(引数なしで data と .preview-data の両方を作る)
+   = 忘れると `/titles` が旧セット時代の題名を並べ、存在しない頁へリンクする(実際982頁時代の702頁分が残っていた)
+3. `rm -rf public/calendar && python scripts/_build-calendar.py .preview-data/manga public/calendar <当月>`
+   = ★**古い月を消してから**。ビルダーは上書きのみで消さないので、旧セットの月ファイルが死にリンクとして残る。
+   本番は `_r2-sync.py` が `data/calendar` で out/calendar を丸ごと差し替えるので不影響。
+
 ## 2026-07-03 stale生成物クラスの教訓(カレンダー)
 - public/calendar(6/26製)がslug改名後も残置→①launch表示が別作品に化ける(1968-08のK幽霊=実体はこんにちは先生) ②一覧が生slug表示 ③current月が古い。
 - 恒久策: 生成物(public/calendar・public/data/*-stock.json等)は週次/月次蒸留で必ず再生成(`_build-calendar.py`+`_gen-corner-stocks.py`+`_gen-corner-auto.py`)。発売日カレンダーは全期間化済(release 832ヶ月・月戻り可)。カレンダーは title 埋め込み式に変更済(索引join非依存)。
