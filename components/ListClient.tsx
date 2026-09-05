@@ -11,7 +11,6 @@ import {
   emptyFilterState,
   filtersFromSearchParams,
   filtersToSearchParams,
-  yearBounds,
   type FilterState,
 } from "@/lib/filters";
 
@@ -139,7 +138,6 @@ export default function ListClient({ data }: { data: ListBundle }) {
   const manga = useMemo(() => mangaIndex ?? [], [mangaIndex]);
   const indexLoading = mangaIndex === null;
   const liveData = useMemo(() => ({ ...data, manga }), [data, manga]);
-  const bounds = useMemo(() => yearBounds(manga), [manga]);
   // ★著者50音リストはフィルター抽斗を開くまで作らない(2026-08-01)。
   //   一覧の FilterPanel は open の時だけマウントされるのに、この useMemo は索引到着と同時に
   //   走っていた(67k件×著者を Map に畳んで日本語ソート。実測166ms)。抽斗を一度も開かない
@@ -387,7 +385,6 @@ export default function ListClient({ data }: { data: ListBundle }) {
               data={liveData}
               state={state}
               setState={applyState}
-              yearBounds={bounds}
               authorEntries={authors}
               matchedSlugs={matchedSlugs}
               loading={indexLoading || (!!needle && (!isFullIndexLoaded() || isAltLoading()))}

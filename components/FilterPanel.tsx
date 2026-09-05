@@ -17,7 +17,6 @@ type Props = {
   data: ListBundle;
   state: FilterState;
   setState: (next: FilterState) => void;
-  yearBounds: [number, number];
   authorEntries: { name: string; kana: string }[];
   /** ★検索中の一致slug集合(2026-08-01)。渡さないと applyFilters が state.query で全行を弾き、
    *  ファセット件数が全部0になる(68,724行を6回走査して0を出していた)。 */
@@ -41,7 +40,6 @@ export default function FilterPanel({
   data,
   state,
   setState,
-  yearBounds,
   authorEntries, matchedSlugs, loading, showSort = true, stickyTop = "top-0" }: Props) {
   const update = (patch: Partial<FilterState>) => setState({ ...state, ...patch });
 

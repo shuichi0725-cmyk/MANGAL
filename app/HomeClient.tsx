@@ -17,7 +17,6 @@ import {
   filtersToSearchParams,
   type FilterState,
   authorsWithKana,
-  yearBounds,
 } from "@/lib/filters";
 import { isAltLoading, onAltLoaded, prewarmSearch, searchWithTiers } from "@/lib/clientSearch";
 import { ensureFullIndex, isFullIndexLoaded } from "@/lib/useMangaIndex";
@@ -160,7 +159,6 @@ export default function HomeClient({ data, summary }: Props) {
     [searchTiers],
   );
 
-  const bounds = useMemo(() => yearBounds(manga), [manga]);
   const authors = useMemo(() => authorsWithKana(manga, true), [manga]);
   // ★画集モード = 一覧を画集に切替(ジャンル欄「画集」チップ)。 漫画用フィルタは非適用。
   const showArt = state.artBooks;
@@ -503,7 +501,6 @@ export default function HomeClient({ data, summary }: Props) {
               data={liveData}
               state={state}
               setState={applyState}
-              yearBounds={bounds}
               authorEntries={authors}
               matchedSlugs={matchedSlugs}
               loading={panelLoading}
@@ -600,7 +597,6 @@ export default function HomeClient({ data, summary }: Props) {
               data={liveData}
               state={state}
               setState={applyState}
-              yearBounds={bounds}
               authorEntries={authors}
               matchedSlugs={matchedSlugs}
               loading={panelLoading}
