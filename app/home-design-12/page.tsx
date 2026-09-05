@@ -152,8 +152,13 @@ export default function Design12() {
       {/* ここから下は案11と完全同一(コーナー順・データ・リンク不変) */}
       {(() => {
         const books = totalBooks;
-        const ongoing = manga.filter((m) => m.status !== "completed").length;
-        const done = manga.length - ongoing;
+        // ★上のカテゴリタイルと同じ数を使う(2026-09-05 ユーザ報告「連載中の数に相違がある」)。
+        //   旧: ここだけ status !== "completed" で数えており、休載(hiatus=7作。ガラスの仮面/
+        //   HUNTER×HUNTER/NANA 等)を連載中に含めていた。結果、タイル 7,431 に対しこの帯が 7,438、
+        //   しかも両方のリンク先 /browse?status=ongoing は厳密一致で 7,431 を出す = 数がリンク先と
+        //   食い違っていた。定義を2か所に持たず nOn/nDone を共有する。
+        const ongoing = nOn;
+        const done = nDone;
         const S = ({ href, label, n }: { href: string; label: string; n: number }) => (
           <Link href={href} className="spring-press whitespace-nowrap">
             <span className="text-ink/50">{label}</span>{" "}
