@@ -27,8 +27,10 @@ export function ChipButton({
   className = "",
   children,
 }: BaseProps & { onClick: () => void }) {
+  // ★aria-pressed(2026-09-05): フィルタ・カテゴリ・著者50音のチップは全部トグルなのに
+  //   「押されている」が支援技術へ伝わっていなかった。見た目(accent塗り)だけが状態表現だった。
   return (
-    <button type="button" onClick={onClick} className={chipClass(active, className)}>
+    <button type="button" aria-pressed={active} onClick={onClick} className={chipClass(active, className)}>
       {children}
     </button>
   );
@@ -41,7 +43,8 @@ export function ChipLink({
   children,
 }: BaseProps & { href: string }) {
   return (
-    <Link href={href} className={chipClass(active, className)}>
+    // ★リンクは押しボタンではないので aria-pressed でなく aria-current(2026-09-05)
+    <Link href={href} aria-current={active ? "page" : undefined} className={chipClass(active, className)}>
       {children}
     </Link>
   );

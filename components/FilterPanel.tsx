@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 import {
+  applyArtBookFilters,
   filterItems,
   emptyFilterState,
   volumeBucket,
@@ -138,6 +139,13 @@ export default function FilterPanel({
         .filter(([, n]) => n > 0)
         .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0], "ja")),
     [counts.theme],
+  );
+  // ★画集の件数(2026-09-05): 旧 data.artBooks.length は定数161だった。画集モードは漫画用の
+  //   絞り込みを受けないが、検索語と年は applyArtBookFilters が効かせるので、検索中は
+  //   「161」と出ているのに押すと数件、という不一致になっていた。161件なので毎回数えても無料。
+  const artBookCount = useMemo(
+    () => applyArtBookFilters(data.artBooks, state).length,
+    [data.artBooks, state],
   );
   // 件数バッジ(0は淡色)。 ★読み込み中は数字を出さない(全部0=嘘になるため)
   const Cnt = ({ n }: { n: number }) =>
@@ -343,7 +351,7 @@ export default function FilterPanel({
               active={state.artBooks}
               onClick={() => update({ artBooks: !state.artBooks })}
             >
-              🎨 画集（{data.artBooks.length}）
+              🎨 画集（{artBookCount.toLocaleString()}）
             </ChipButton>
           )}
         </div>
