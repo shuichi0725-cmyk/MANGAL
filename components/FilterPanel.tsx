@@ -24,6 +24,9 @@ type Props = {
   /** ★索引/検索がまだ確定していない(2026-09-05)。全facet 0 の「廃墟」を
    *  「0件」と誤読させないための明示signal。 未指定なら索引の有無から推定。 */
   loading?: boolean;
+  /** ★画集チップを出すか(2026-09-05)。 一覧表(/list)は state.artBooks を一度も読まない
+   *  (列が 巻/著者/最新刊日 の漫画専用表)ので、押しても表が変わらない死んだUIだった。 */
+  showArtBooks?: boolean;
   /** ★並び順セレクトを出すか(2026-09-05)。 一覧表(/list)は上部に本物の並び順チップが在り、
    *  そちらが最後に必ず sortRows で並べ直すため、ここのセレクトは押しても効かない死んだUIだった。 */
   showSort?: boolean;
@@ -40,7 +43,7 @@ export default function FilterPanel({
   data,
   state,
   setState,
-  authorEntries, matchedSlugs, loading, showSort = true, stickyTop = "top-0" }: Props) {
+  authorEntries, matchedSlugs, loading, showSort = true, showArtBooks = true, stickyTop = "top-0" }: Props) {
   const update = (patch: Partial<FilterState>) => setState({ ...state, ...patch });
 
   // ★索引未到着 = 全facetが0になる(69,236件の索引は idle 遅延ロード)。
@@ -175,7 +178,7 @@ export default function FilterPanel({
   for (const p of state.publishers) active.push({ id: `pu:${p}`, label: p === "(unknown)" ? "出版社未設定" : data.publishers.find((x) => x.key === p)?.name ?? p, clear: { publishers: state.publishers.filter((x) => x !== p) } });
   for (const mg of state.magazines) active.push({ id: `ma:${mg}`, label: data.magazines.find((x) => x.key === mg)?.name ?? mg, clear: { magazines: state.magazines.filter((x) => x !== mg) } });
   for (const a of state.authors) active.push({ id: `au:${a}`, label: a, clear: { authors: state.authors.filter((x) => x !== a) } });
-  if (state.artBooks) active.push({ id: "art", label: "🎨 画集", clear: { artBooks: false } });
+  if (showArtBooks && state.artBooks) active.push({ id: "art", label: "🎨 画集", clear: { artBooks: false } });
   if (showSort && state.sort !== "default") active.push({ id: "sort", label: `並び: ${SORT_OPTIONS.find((o) => o.key === state.sort)?.label ?? state.sort}`, clear: { sort: "default" } });
 
   // ★アコーディオン(2026-09-05): 上位4つ(種類/連載状態/分野/ジャンル)は開いたまま、
@@ -333,13 +336,16 @@ export default function FilterPanel({
               {g.name}<Cnt n={counts.genre.get(g.key) ?? 0} />
             </ChipButton>
           ))}
-          {/* ★画集 = ジャンルでなく別カテゴリだが、 ここで選ぶと一覧を全画集に切替 */}
-          <ChipButton
-            active={state.artBooks}
-            onClick={() => update({ artBooks: !state.artBooks })}
-          >
-            🎨 画集（{data.artBooks.length}）
-          </ChipButton>
+          {/* ★画集 = ジャンルでなく別カテゴリだが、 ここで選ぶと一覧を全画集に切替。
+              ★/list では出さない(showArtBooks=false): あちらは漫画専用の表で切替を受けない。 */}
+          {showArtBooks && (
+            <ChipButton
+              active={state.artBooks}
+              onClick={() => update({ artBooks: !state.artBooks })}
+            >
+              🎨 画集（{data.artBooks.length}）
+            </ChipButton>
+          )}
         </div>
       </Section>
 

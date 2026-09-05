@@ -56,6 +56,10 @@ export default function ListClient({ data }: { data: ListBundle }) {
   const stateFromParams = (sp: { get(k: string): string | null; toString(): string }): FilterState => {
     const patch = filtersFromSearchParams(sp as unknown as URLSearchParams);
     delete (patch as { query?: string }).query;
+    // ★artBooks も落とす(2026-09-05): 一覧表は画集を扱わない(列が巻/著者/最新刊日の漫画専用表で
+    //   state.artBooks を一度も読まない)。落とさないと ?artBooks=true 着地で「フィルター(1)」だけが
+    //   立ち、対応するチップも表示の変化も無い幽霊条件になる。
+    delete (patch as { artBooks?: boolean }).artBooks;
     return { ...emptyFilterState(), ...patch };
   };
   const [state, setState] = useState<FilterState>(() => stateFromParams(searchParams));
@@ -373,7 +377,10 @@ export default function ListClient({ data }: { data: ListBundle }) {
             <div className="mb-3 flex items-center justify-between">
               <p className="text-sm font-bold">フィルター</p>
               <div className="flex gap-2">
-                <button onClick={() => setState(emptyFilterState())} className="spring-press rounded-full border border-[var(--color-line)] px-3 py-1 text-[11px] text-ink/65">
+                {/* ★applyState を通す(2026-09-05): 旧 setState は state だけ消して URL を残したため、
+                    解除したはずの ?genre=... が残り、リロード・共有・戻るで条件が復活していた
+                    (上部の「✕ リセット」は元から applyState = 2つのリセットで挙動が違った)。 */}
+                <button onClick={() => applyState(emptyFilterState())} className="spring-press rounded-full border border-[var(--color-line)] px-3 py-1 text-[11px] text-ink/65">
                   リセット
                 </button>
                 <button onClick={() => setOpen(false)} className="spring-press rounded-full bg-ink px-3 py-1 text-[11px] font-bold text-white">
@@ -389,6 +396,7 @@ export default function ListClient({ data }: { data: ListBundle }) {
               matchedSlugs={matchedSlugs}
               loading={indexLoading || (!!needle && (!isFullIndexLoaded() || isAltLoading()))}
               showSort={false}
+              showArtBooks={false}
             />
           </div>
         </div>
