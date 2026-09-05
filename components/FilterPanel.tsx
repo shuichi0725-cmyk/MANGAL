@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useDeferredValue, useMemo, useState } from "react";
 import {
   applyArtBookFilters,
   filterItems,
@@ -51,6 +51,13 @@ export default function FilterPanel({
   //   「絞り込んで0件」と見分けが付かない廃墟になるので、ここで確定させて表示を分ける。
   const isLoading = loading ?? data.manga.length === 0;
 
+  // ★件数だけ1フレーム遅らせる(2026-09-05)。チップの押下表示は state を直接見るので即座に、
+  //   重い集計(69,236件×7パス=実測100ms、モバイルは3〜5倍)は低優先で追いつく。
+  //   一覧側の絞り込み+ソートは22msなので、タップ後の待ちはほぼこの集計が作っていた。
+  //   計算量は減らない=「先に色が変わる」ための並べ替え。
+  const deferredState = useDeferredValue(state);
+  const countsStale = deferredState !== state;
+
   // ★動的件数(2026-06-13): 各facetの値ごとに「その値を選んだら何件」を表示。
   //   faceted-search の定石 = 当該facetだけ解除した state で絞り、 残った作品を値で集計。
   //   静的(R2)のままブラウザJSで計算 = サーバ化しない([[hosting_worker_r2_architecture]])。
@@ -66,7 +73,7 @@ export default function FilterPanel({
       const k = JSON.stringify(clear);
       let rows = rowsCache.get(k);
       if (!rows) {
-        rows = filterItems(data.manga, { ...state, ...clear }, matchedSlugs ?? null);
+        rows = filterItems(data.manga, { ...deferredState, ...clear }, matchedSlugs ?? null);
         rowsCache.set(k, rows);
       }
       return rows;
@@ -107,7 +114,7 @@ export default function FilterPanel({
       // 現在の絞り込み全体でのヒット数(=0件の説明に使う。rowsCache に相乗り)
       total: rowsFor({}).length,
     };
-  }, [data.manga, state, matchedSlugs]);
+  }, [data.manga, deferredState, matchedSlugs]);
   // ★出版社/連載誌リストの並び(2026-08-10 ユーザ要望): 絞り込み中は 0件の行を隠し、
   //   現在の交差件数の多い順に並べ替える(件数は counts で再計算済み=それを並びにも使う)。
   //   選択中の行は 0件でも先頭に残す(=外せなくなるのを防ぐ)。
@@ -236,7 +243,7 @@ export default function FilterPanel({
           <span className="animate-pulse" aria-hidden="true">⏳</span>
           作品データを読み込み中… 件数は届き次第出ます
         </p>
-      ) : counts.total === 0 ? (
+      ) : counts.total === 0 && !countsStale ? (
         <div className="rounded-xl border border-[var(--color-accent)]/50 bg-[var(--color-surface)] px-3 py-2.5 text-[12px]">
           {matchedSlugs && matchedSlugs.size === 0 ? (
             <>
