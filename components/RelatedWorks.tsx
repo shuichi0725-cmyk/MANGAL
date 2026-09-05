@@ -28,7 +28,7 @@ export default function RelatedWorks({
               <Link href={`/manga/${m.slug}`} className="block group">
                 <div className="relative aspect-[2/3] rounded overflow-hidden bg-[var(--color-surface-2)] border border-[var(--color-line)]">
                   {cover ? (
-                    <CoverImage src={cover} alt={m.title} sizes="104px" size="card" />
+                    <CoverImage src={cover} alt={m.title} sizes="104px" />
                   ) : (
                     <div className="absolute inset-0 flex items-center justify-center p-1.5 text-center text-[10px] leading-tight text-ink/45">
                       {m.title.slice(0, 24)}

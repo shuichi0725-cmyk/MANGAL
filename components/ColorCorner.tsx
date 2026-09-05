@@ -65,7 +65,7 @@ export default function ColorCorner() {
               key={slug}
               className="relative h-[92px] w-[62px] shrink-0 overflow-hidden border border-[var(--color-line)] bg-[var(--color-surface-2)]"
             >
-              <CoverImage src={e.c!} alt="" sizes="62px" size="card" />
+              <CoverImage src={e.c!} alt="" sizes="62px" />
             </li>
           ))}
           <li className="flex h-[92px] w-[62px] shrink-0 flex-col items-center justify-center gap-0.5 border border-[var(--color-accent)]">

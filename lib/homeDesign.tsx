@@ -121,7 +121,7 @@ export function Cover({ m, sizes = "120px", src }: { m: Manga; sizes?: string; s
   return (
     <div className="relative aspect-[2/3] w-full overflow-hidden rounded bg-[var(--color-surface-2)] border border-[var(--color-line)]">
       {c ? (
-        <CoverImage src={c} alt={m.title} sizes={sizes} size="card" />
+        <CoverImage src={c} alt={m.title} sizes={sizes} />
       ) : (
         <div className="absolute inset-0 flex items-center justify-center p-2 text-center text-[11px] leading-tight text-ink/45">
           {m.title.slice(0, 28)}

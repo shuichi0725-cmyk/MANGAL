@@ -46,7 +46,7 @@ function VolCell({ v }: { v: ZenshuuWork["vols"][number] }) {
   const body = (
     <div className={`relative aspect-[5/7] w-full overflow-hidden rounded border border-[var(--color-line)] bg-[var(--color-surface-2)] ${v.nm ? "opacity-75" : ""}`}>
       {v.c ? (
-        <CoverImage src={v.c} alt={v.t} sizes="80px" size="card" />
+        <CoverImage src={v.c} alt={v.t} sizes="80px" />
       ) : (
         <div className="absolute inset-0 flex items-center justify-center p-1.5 text-center text-[9px] leading-tight text-ink/50">{v.t.slice(0, 24)}</div>
       )}
@@ -89,7 +89,7 @@ export default async function ZenshuuPage({ params }: { params: Promise<{ key: s
             <section key={s.n} className="overflow-hidden rounded-xl border border-[var(--color-line)] bg-[var(--color-surface)]">
               <div className="flex items-center gap-3 p-3">
                 <div className="relative h-[64px] w-[46px] shrink-0 overflow-hidden rounded border border-black/10 bg-[var(--color-surface-2)]">
-                  <CoverImage src={s.cover ?? null} alt={s.name} sizes="46px" size="card" />
+                  <CoverImage src={s.cover ?? null} alt={s.name} sizes="46px" />
                 </div>
                 <div>
                   <h2 className="text-[13px] font-extrabold">{s.name}</h2>

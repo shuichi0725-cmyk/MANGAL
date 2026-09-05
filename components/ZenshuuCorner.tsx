@@ -32,7 +32,7 @@ export default function ZenshuuCorner() {
                       className="absolute h-[78px] w-[56px] overflow-hidden rounded border border-black/10 bg-[var(--color-surface-2)] shadow"
                       style={{ left: i * 26 + 2, top: [6, 2, 7][i], transform: `rotate(${[-4, 3, 8][i]}deg)`, zIndex: i + 1 }}
                     >
-                      <CoverImage src={u} alt={c.name} sizes="56px" size="card" />
+                      <CoverImage src={u} alt={c.name} sizes="56px" />
                     </div>
                   ) : null,
                 )}

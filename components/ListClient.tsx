@@ -18,7 +18,11 @@ function activeCount(s: FilterState): number {
   const e = emptyFilterState() as Record<string, unknown>;
   let n = 0;
   for (const k of Object.keys(e)) {
-    if (k === "sortKey") continue;
+    // ★"sortKey" は FilterState に存在しない旧名(2026-09-06 是正)。実際のキーは "sort" で、
+    //   この continue は一度も発火せず並び順が「絞り込み1件」に数えられていた。
+    //   /list は ?sort= が付いただけで ⚙フィルター(1) が点灯し「✕リセット」まで出るのに、
+    //   並び順は上部チップが本物=対応するUIも表示の変化も無い幽霊条件になっていた。
+    if (k === "sort") continue;
     if (JSON.stringify((s as Record<string, unknown>)[k]) !== JSON.stringify(e[k])) n++;
   }
   return n;
@@ -130,9 +134,15 @@ export default function ListClient({ data }: { data: ListBundle }) {
 
   useEffect(() => {
     if (!open) return;
+    // ★Escで閉じる(2026-09-06): 全画面/抽斗のモーダルは書影ライトボックスと同じ作法に揃える
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpen(false);
+    };
+    document.addEventListener("keydown", onKey);
     const prev = document.body.style.overflow;
     document.body.style.overflow = "hidden";
     return () => {
+      document.removeEventListener("keydown", onKey);
       document.body.style.overflow = prev;
     };
   }, [open]);
@@ -373,7 +383,12 @@ export default function ListClient({ data }: { data: ListBundle }) {
         <div className="fixed inset-0 z-50">
           {/* ★透過オーバーレイ(ユーザ裁定): 背景の一覧がうっすら見える=どこに居るか分かる */}
           <div className="absolute inset-0 bg-black/15" onClick={() => setOpen(false)} />
-          <div className="absolute inset-y-0 right-0 w-[86%] max-w-sm overflow-y-auto border-l border-[var(--color-line)] bg-[var(--color-surface)]/80 p-4 shadow-2xl backdrop-blur-md">
+          <div
+            role="dialog"
+            aria-modal="true"
+            aria-label="フィルター"
+            className="absolute inset-y-0 right-0 w-[86%] max-w-sm overflow-y-auto border-l border-[var(--color-line)] bg-[var(--color-surface)]/80 p-4 shadow-2xl backdrop-blur-md"
+          >
             <div className="mb-3 flex items-center justify-between">
               <p className="text-sm font-bold">フィルター</p>
               <div className="flex gap-2">

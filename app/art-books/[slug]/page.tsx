@@ -43,7 +43,7 @@ export default async function ArtBookDetailPage({
       <div className="mt-6 grid gap-8 md:grid-cols-[260px_1fr]">
         <div className="relative aspect-[2/3] bg-[var(--color-surface-2)] rounded overflow-hidden">
           {cover ? (
-            <CoverImage src={cover} alt={`${ab.title} 表紙`} sizes="260px" size="detail" />
+            <CoverImage src={cover} alt={`${ab.title} 表紙`} sizes="260px" />
           ) : (
             <span className="flex h-full items-center justify-center text-5xl text-ink/15" aria-hidden="true">
               🎨

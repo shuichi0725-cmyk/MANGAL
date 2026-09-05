@@ -6,9 +6,13 @@ import { useState } from "react";
 type Props = {
   src: string | null;
   alt: string;
+  /** ★next/image の標準prop = 「どの解像度をダウンロードするか」のヒント(表示サイズではない)。
+   *  いまは images.unoptimized=true(静的書き出し+外部ホスト直リンク)で srcset を作らないため
+   *  出力されないが、最適化を有効にすれば効き始める = ★消さない(2026-09-06 確認)。
+   *  実際に落ちてくる解像度は URL の ?_ex=300x300(lib/coverSlim.ts)が決めている。
+   *  ★300 は高DPI端末で64〜120px枠を潰さないための意図的な値。下げない(ユーザ裁定)。
+   *  拡大表示(CoverLightbox)だけが ?_ex= を外してマスター原寸を読む。 */
   sizes?: string;
-  /** 画面幅小さめ枠か大きめ枠か。 (現状は描画ロジックに影響しないが API 互換のため残す) */
-  size?: "card" | "detail";
 };
 
 /**

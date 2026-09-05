@@ -115,9 +115,15 @@ export default function HomeClient({ data, summary }: Props) {
   // ★フィルターオーバーレイ表示中は背景スクロールを止める(モバイル)
   useEffect(() => {
     if (!open) return;
+    // ★Escで閉じる(2026-09-06): 全画面モーダルは書影ライトボックスと同じ作法に揃える
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpen(false);
+    };
+    document.addEventListener("keydown", onKey);
     const prev = document.body.style.overflow;
     document.body.style.overflow = "hidden";
     return () => {
+      document.removeEventListener("keydown", onKey);
       document.body.style.overflow = prev;
     };
   }, [open]);
@@ -576,6 +582,9 @@ export default function HomeClient({ data, summary }: Props) {
             ★地の不透明度(2026-09-05): 旧 28%(=72%透過)は背後の一覧が透けて見出し・件数が
             読めなかった(ユーザ報告)。frosted glass の意匠は blur で保ち、地は 94% へ寄せる。 */}
         <div
+          role="dialog"
+          aria-modal="true"
+          aria-label="フィルター"
           className={`absolute inset-3 flex flex-col overflow-hidden rounded-[26px] border-4 border-white ring-1 ring-black/30 shadow-2xl backdrop-blur-sm origin-bottom transition-[transform,opacity] duration-300 ease-out ${
             open ? "scale-100 opacity-100" : "scale-90 opacity-0"
           }`}

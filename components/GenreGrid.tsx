@@ -17,7 +17,7 @@ export default function GenreGrid({ items, limit = 120 }: { items: MangaListItem
             <Link href={`/manga/${m.slug}`} className="block group spring-press">
               <div className="relative aspect-[2/3] w-full overflow-hidden rounded bg-[var(--color-surface-2)] border border-[var(--color-line)]">
                 {c ? (
-                  <CoverImage src={c} alt={m.title} sizes="120px" size="card" />
+                  <CoverImage src={c} alt={m.title} sizes="120px" />
                 ) : (
                   <div className="absolute inset-0 flex items-center justify-center p-2 text-center text-[11px] leading-tight text-ink/45">
                     {m.title.slice(0, 28)}

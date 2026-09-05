@@ -119,7 +119,7 @@ export default function MonthReleasesClient({ pool }: { pool: MonthPick[] }) {
             >
               <div className="relative aspect-[2/3] w-full overflow-hidden rounded border border-[var(--color-line)] bg-[var(--color-surface-2)]">
                 {r.cover ? (
-                  <CoverImage src={r.cover} alt={r.title} sizes="96px" size="card" />
+                  <CoverImage src={r.cover} alt={r.title} sizes="96px" />
                 ) : (
                   <div className="absolute inset-0 flex items-center justify-center p-2 text-center text-[11px] leading-tight text-ink/45">
                     {r.title.slice(0, 28)}
