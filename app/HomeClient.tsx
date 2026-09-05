@@ -16,13 +16,11 @@ import {
   filtersFromSearchParams,
   filtersToSearchParams,
   type FilterState,
-  authorsWithKana,
 } from "@/lib/filters";
-import { isAltLoading, onAltLoaded, prewarmSearch, searchWithTiers } from "@/lib/clientSearch";
-import { ensureFullIndex, isFullIndexLoaded } from "@/lib/useMangaIndex";
+import { isFullIndexLoaded } from "@/lib/useMangaIndex";
+import { useFilterPanelData } from "@/lib/useFilterPanelData";
 import { perfDiag } from "@/lib/perfDiag";
 import type { IndexSummary, ArtBook, ListBundle, MangaListItem } from "@/lib/schema";
-import { useMangaIndex } from "@/lib/useMangaIndex";
 
 type Props = {
   data: ListBundle;
@@ -128,44 +126,20 @@ export default function HomeClient({ data, summary }: Props) {
     };
   }, [open]);
 
-  // ★一覧 manga は軽量索引をクライアント遅延ロード (= SSR props で 65k を送らない)。
-  //   master/画集は props(軽量)。 索引到着までは loading。
-  const mangaIndex = useMangaIndex({ withCatch: true }); // カード表示=キャッチ文が要る
-  const manga = useMemo(() => mangaIndex ?? [], [mangaIndex]);
+  // ★索引ロード・検索・著者50音は /list と共通の配線(2026-09-06 lib/useFilterPanelData.ts)。
+  //   同じ FilterPanel を2画面が別々に手配線して3回ズレた反省で1本化した。
+  const {
+    manga,
+    indexLoading,
+    hasQuery,
+    searchTiers,
+    matchedSlugs,
+    searchLoading,
+    searchPending,
+    panelLoading,
+    authorEntries: authors,
+  } = useFilterPanelData({ query: state.query, withCatch: true }); // カード表示=キャッチ文が要る
   const liveData = useMemo(() => ({ ...data, manga }), [data, manga]);
-  const indexLoading = mangaIndex === null;
-
-  // ★検索v2(2026-07-14): 検索専用索引を廃止し一覧索引を共有(前計算haystack+逐次絞り込み+2段照合)。
-  //   alt(別名)は題名ヒット0の時だけ遅延fetch → 到着したら altTick で再検索。
-  const hasQuery = state.query.trim().length > 0;
-  const [altTick, setAltTick] = useState(0);
-  useEffect(() => onAltLoaded(() => setAltTick((v) => v + 1)), []);
-  useEffect(() => {
-    if (mangaIndex) prewarmSearch(mangaIndex); // 手すきで前計算(検索開始時のワンショット遅延を消す)
-  }, [mangaIndex]);
-  useEffect(() => {
-    if (hasQuery) ensureFullIndex(); // 検索確定=フル索引を即時要求(head 200件だけの誤答窓を閉じる)
-  }, [hasQuery]);
-  const searchLoading = hasQuery && mangaIndex === null;
-  // ★偽0件対策=B案(2026-08-18 ユーザ裁定): フル索引が届く前(head100件だけ)や、題名ヒット0で
-  //   別名(alt)照合がまだの間は「検索が確定していない」。この間は
-  //   ①0件と断言しない(検索中表示に差し替え) ②部分結果には「検索中」バッジを重ねる。
-  //   再計算タイミング: full到着=_indexListeners→再レンダー / alt到着=altTick で担保される。
-  const searchPending = hasQuery && (!isFullIndexLoaded() || isAltLoading());
-  // ★フィルターパネルへ渡す「まだ確定していない」signal(2026-09-05)。
-  //   索引未到着/検索確定前は全facetが0になり、絞り込んで0件になった廃墟と区別が付かなかった。
-  const panelLoading = indexLoading || searchLoading || searchPending;
-  const searchTiers = useMemo(
-    () => (hasQuery ? searchWithTiers(state.query, manga) : null),
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [hasQuery, state.query, manga, altTick],
-  );
-  const matchedSlugs = useMemo(
-    () => (searchTiers ? new Set(searchTiers.keys()) : null),
-    [searchTiers],
-  );
-
-  const authors = useMemo(() => authorsWithKana(manga, true), [manga]);
   // ★画集モード = 一覧を画集に切替(ジャンル欄「画集」チップ)。 漫画用フィルタは非適用。
   const showArt = state.artBooks;
   // ★空状態(フィルタ無し・検索無し)の結果はキャッシュ(2026-07-22): 検索×リセット時に

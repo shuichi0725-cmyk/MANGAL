@@ -7,7 +7,6 @@ import FilterPanel from "@/components/FilterPanel";
 import ShareButtons from "@/components/ShareButtons";
 import {
   applyFilters,
-  authorsWithKana,
   emptyFilterState,
   filtersFromSearchParams,
   filtersToSearchParams,
@@ -27,10 +26,10 @@ function activeCount(s: FilterState): number {
   }
   return n;
 }
-import type { ListBundle, MangaListItem } from "@/lib/schema";
-import { isAltLoading, onAltLoaded, prewarmSearch, searchWithTiers } from "@/lib/clientSearch";
+import type { ListBundle } from "@/lib/schema";
 import { SORTS, sortRows, volCount, latestDate, type SortId } from "@/lib/listSort";
-import { useMangaIndex, ensureFullIndex, isFullIndexLoaded } from "@/lib/useMangaIndex";
+import { isFullIndexLoaded } from "@/lib/useMangaIndex";
+import { useFilterPanelData } from "@/lib/useFilterPanelData";
 
 /** 一覧表クライアント: 絞り込み=既存の多窓フィルター(トップと同じ)、並び順=独立チップ。
  *  「完結×ジャンル×作者×開始が古い順」のような自由なAND合成が成立する。 */
@@ -147,13 +146,8 @@ export default function ListClient({ data }: { data: ListBundle }) {
     };
   }, [open]);
 
-  // ★manga は軽量索引をクライアント遅延ロード (= SSR props で 65k を送らない)
-  const mangaIndex = useMangaIndex();
-  const manga = useMemo(() => mangaIndex ?? [], [mangaIndex]);
-  const indexLoading = mangaIndex === null;
-  const liveData = useMemo(() => ({ ...data, manga }), [data, manga]);
   // ★著者50音リストはフィルター抽斗を開くまで作らない(2026-08-01)。
-  //   一覧の FilterPanel は open の時だけマウントされるのに、この useMemo は索引到着と同時に
+  //   一覧の FilterPanel は open の時だけマウントされるのに、旧実装は索引到着と同時に
   //   走っていた(67k件×著者を Map に畳んで日本語ソート。実測166ms)。抽斗を一度も開かない
   //   閲覧者はこの費用を丸ごと払わされ、しかも初期表示直後という一番効く瞬間に固まっていた。
   //   一度開いたら以後は manga 依存で保持する(開閉のたびに作り直さない)。
@@ -161,10 +155,19 @@ export default function ListClient({ data }: { data: ListBundle }) {
   useEffect(() => {
     if (open) setFilterUsed(true);
   }, [open]);
-  const authors = useMemo(
-    () => (filterUsed ? authorsWithKana(manga, true) : []),
-    [manga, filterUsed],
-  );
+  // ★索引ロード・検索・著者50音は /browse と共通の配線(2026-09-06 lib/useFilterPanelData.ts)。
+  //   同じ FilterPanel を2画面が別々に手配線して3回ズレた反省で1本化した。
+  //   ここは検索語が FilterState でなく独立state(q)なので query に q を渡す。
+  const {
+    manga,
+    indexLoading,
+    needle,
+    searchTiers,
+    matchedSlugs,
+    panelLoading,
+    authorEntries: authors,
+  } = useFilterPanelData({ query: q, authorsReady: filterUsed });
+  const liveData = useMemo(() => ({ ...data, manga }), [data, manga]);
   const nActive = activeCount(state);
 
   // ★スクロール位置の復元(詳細→戻る): 遷移時にsessionStorageへ保存(下のLink onClick)→
@@ -183,32 +186,8 @@ export default function ListClient({ data }: { data: ListBundle }) {
     });
   }, [indexLoading, manga]);
 
-  // ★検索はトップと同じ本体(clientSearch)に統一(2026-07-21。旧: 素朴なincludes照合が
-  //   ここだけ残り、かな/ローマ字/別名/複数語が効かず「トップで出るのに一覧表で出ない」非対称)
-  useEffect(() => {
-    if (mangaIndex) prewarmSearch(mangaIndex);
-  }, [mangaIndex]);
-  // ★検索クエリがある間はフル索引を即時要求(2026-07-31 ユーザ報告「検索押してから表示まで
-  //   めっちゃ時間かかる」)。旧: idleの2秒待ちに乗るだけで、?q=着地(PCサイドバー検索)は
-  //   head100件に対する誤答→数秒後にフル置換、という体感だった。
-  useEffect(() => {
-    if (q.trim()) ensureFullIndex();
-  }, [q]);
-  const [altTick, setAltTick] = useState(0);
-  useEffect(() => onAltLoaded(() => setAltTick((v) => v + 1)), []);
-  // ★検索の一致集合は rows の外へ出す(2026-09-05): フィルターパネルへ matchedSlugs として
-  //   渡すため。旧: rows の内側に閉じていたので渡せず、パネルの件数だけが検索を無視した
-  //   全件基準(ONE PIECE 15件のときに「完結 61,726」)で出ていた(/browse は元から渡していた)。
-  const needle = q.trim();
-  const searchTiers = useMemo(
-    () => (needle ? searchWithTiers(needle, manga) : null),
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [needle, manga, altTick],
-  );
-  const matchedSlugs = useMemo(
-    () => (searchTiers ? new Set(searchTiers.keys()) : null),
-    [searchTiers],
-  );
+  // (検索の配線=prewarm/フル索引要求/alt再計算/一致集合 は useFilterPanelData に集約。
+  //  トップと同じ本体(clientSearch)を使う統一は 2026-07-21、matchedSlugs の外出しは 2026-09-05)
   const rows = useMemo(() => {
     let r = applyFilters(manga, state);
     if (slugfixOnly) r = r.filter((m) => m._slugfix);
@@ -409,7 +388,7 @@ export default function ListClient({ data }: { data: ListBundle }) {
               setState={applyState}
               authorEntries={authors}
               matchedSlugs={matchedSlugs}
-              loading={indexLoading || (!!needle && (!isFullIndexLoaded() || isAltLoading()))}
+              loading={panelLoading}
               showSort={false}
               showArtBooks={false}
             />
