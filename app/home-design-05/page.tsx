@@ -7,8 +7,11 @@ export const metadata = { robots: { index: false, follow: false } };  // 実験�
 export default function Design05() {
   const { manga, byNew } = bundle();
   const random1 = seeded(manga, (m) => m.slug, 1, 23)[0];
-  const serializing = manga.filter((m) => m.status !== "completed").length;
-  const completed = manga.length - serializing;
+  // ★休載(hiatus)は「連載中」に数えない(2026-09-05 ユーザ裁定)。リンク先 /browse?status=ongoing が
+  //   厳密一致で絞るため、数字と飛び先を一致させる。完結も引き算でなく直接数える
+  //   (引き算のままだと連載中を厳密化した瞬間に完結が休載7件を吸う)。
+  const serializing = manga.filter((m) => m.status === "ongoing").length;
+  const completed = manga.filter((m) => m.status === "completed").length;
   const Tile = ({ children, className = "" }: { children: React.ReactNode; className?: string }) => (
     <div className={`rounded-xl border border-[var(--color-line)] bg-[var(--color-surface)] p-3.5 shadow-sm ${className}`}>{children}</div>
   );

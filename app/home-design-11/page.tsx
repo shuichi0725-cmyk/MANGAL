@@ -64,8 +64,11 @@ export default function Design11() {
       {/* 0.【極小】統計ストリップ: 場所を取らない1行、各数字タップでフィルター絞り込みへ */}
       {(() => {
         const books = manga.reduce((s, m) => s + m.editions.reduce((x, e) => x + e.volumes.length, 0), 0);
-        const ongoing = manga.filter((m) => m.status !== "completed").length;
-        const done = manga.length - ongoing;
+        // ★休載(hiatus)は「連載中」に数えない(2026-09-05 ユーザ裁定)。リンク先 /browse?status=ongoing が
+        //   厳密一致で絞るため、数字と飛び先を一致させる。完結も引き算でなく直接数える
+        //   (引き算のままだと連載中を厳密化した瞬間に完結が休載7件を吸う)。
+        const ongoing = manga.filter((m) => m.status === "ongoing").length;
+        const done = manga.filter((m) => m.status === "completed").length;
         const S = ({ href, label, n }: { href: string; label: string; n: number }) => (
           <Link href={href} className="spring-press whitespace-nowrap">
             <span className="text-ink/50">{label}</span>{" "}

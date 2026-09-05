@@ -14,6 +14,12 @@ export default function RankingsPage() {
   const { manga } = bundle();
   const year = new Date(Date.now() + 9 * 3600 * 1000).getUTCFullYear();
 
+  // ★ランキングの「連載中/現役」は status !== "completed" = ★休載(hiatus)を含める
+  //   (2026-09-05 ユーザ裁定)。ホームの件数タイル/帯は逆に厳密一致(status === "ongoing")で、
+  //   あちらは数字がリンク先 /browse?status=ongoing と一致しなければならないため。ここは
+  //   「いま追いかけられるか」の軸なので休載も現役に数える(実データの hiatus は7作。
+  //   ガラスの仮面111巻/HUNTER×HUNTER/NANA 等が該当し、巻数最長top10にも実際に入っている)。
+  //   ★ここを厳密一致に「揃える」のは退行。触らないこと。
   const axes: Array<{ icon: string; title: string; note: string; items: Manga[]; value: (m: Manga) => string }> = [
     {
       icon: "📚", title: "巻数最長(連載中)", note: "いま追いかけられる最長シリーズ",
