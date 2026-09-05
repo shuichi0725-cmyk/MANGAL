@@ -35,6 +35,34 @@ const m = (over: Partial<MangaListItem> = {}): MangaListItem => ({
 //  長音符・中黒などの正規化吸収は現行検索の実体 lib/clientSearch.ts +
 //  検索スナップショットゲート(searchSnapshot.test.ts)側で担保。)
 
+// ★matchedSlugs は「渡されたら常に効く」(2026-09-05)。 一覧表(/list)は検索語を FilterState に
+//   写さない設計なので、state.query に依存させると渡しても無視され、フィルターの件数だけが
+//   全件基準になる(= 実際そうなっていた)。
+describe("matchedSlugs(検索の一致集合)", () => {
+  const items: MangaListItem[] = [
+    m({ slug: "hit" }),
+    m({ slug: "miss" }),
+  ];
+
+  it("query が空でも matchedSlugs だけで絞れる(/list の経路)", () => {
+    const r = applyFilters(items, emptyFilterState(), new Set(["hit"]));
+    expect(r.map((x) => x.slug)).toEqual(["hit"]);
+  });
+
+  it("query 有り + matchedSlugs で絞れる(/browse の経路)", () => {
+    const r = applyFilters(items, { ...emptyFilterState(), query: "x" }, new Set(["hit"]));
+    expect(r.map((x) => x.slug)).toEqual(["hit"]);
+  });
+
+  it("query 有り + 一致集合が未着(null)は空 = 0件と断言しないため", () => {
+    expect(applyFilters(items, { ...emptyFilterState(), query: "x" }, null)).toEqual([]);
+  });
+
+  it("どちらも無ければ全件", () => {
+    expect(applyFilters(items, emptyFilterState()).length).toBe(2);
+  });
+});
+
 // ★巻数バケツ(2026-09-05 ユーザ裁定)。 基準は max_edition_volumes(= 一番巻数の多い版1本)。
 //   total_volumes(全版合算)ではない = 文庫版/完全版を足した数で分類しないための番人。
 describe("巻数バケツ", () => {

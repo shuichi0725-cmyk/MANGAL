@@ -25,6 +25,9 @@ type Props = {
   /** ★索引/検索がまだ確定していない(2026-09-05)。全facet 0 の「廃墟」を
    *  「0件」と誤読させないための明示signal。 未指定なら索引の有無から推定。 */
   loading?: boolean;
+  /** ★並び順セレクトを出すか(2026-09-05)。 一覧表(/list)は上部に本物の並び順チップが在り、
+   *  そちらが最後に必ず sortRows で並べ直すため、ここのセレクトは押しても効かない死んだUIだった。 */
+  showSort?: boolean;
   /** ★「適用中の絞り込み」ブロックの sticky 位置(2026-09-05)。
    *  モバイル全画面モーダル/一覧抽斗 = "top-0"、 PCサイドバーは共通ヘッダー(sticky)の下 = "top-14"。 */
   stickyTop?: string;
@@ -39,7 +42,7 @@ export default function FilterPanel({
   state,
   setState,
   yearBounds,
-  authorEntries, matchedSlugs, loading, stickyTop = "top-0" }: Props) {
+  authorEntries, matchedSlugs, loading, showSort = true, stickyTop = "top-0" }: Props) {
   const update = (patch: Partial<FilterState>) => setState({ ...state, ...patch });
 
   // ★索引未到着 = 全facetが0になる(69,236件の索引は idle 遅延ロード)。
@@ -175,7 +178,7 @@ export default function FilterPanel({
   for (const mg of state.magazines) active.push({ id: `ma:${mg}`, label: data.magazines.find((x) => x.key === mg)?.name ?? mg, clear: { magazines: state.magazines.filter((x) => x !== mg) } });
   for (const a of state.authors) active.push({ id: `au:${a}`, label: a, clear: { authors: state.authors.filter((x) => x !== a) } });
   if (state.artBooks) active.push({ id: "art", label: "🎨 画集", clear: { artBooks: false } });
-  if (state.sort !== "default") active.push({ id: "sort", label: `並び: ${SORT_OPTIONS.find((o) => o.key === state.sort)?.label ?? state.sort}`, clear: { sort: "default" } });
+  if (showSort && state.sort !== "default") active.push({ id: "sort", label: `並び: ${SORT_OPTIONS.find((o) => o.key === state.sort)?.label ?? state.sort}`, clear: { sort: "default" } });
 
   // ★アコーディオン(2026-09-05): 上位4つ(種類/連載状態/分野/ジャンル)は開いたまま、
   //   下の重い5つ(創刊/要素/出版社/連載誌/著者)だけ開閉。選択が入っている節は自動で開く
@@ -511,7 +514,9 @@ export default function FilterPanel({
       </Section>
 
       {/* ★並び順は絞り込みではないので最下部へ(2026-09-05): 旧は3番目に居て、
-          ジャンルに着くまで5セクション分スクロールさせていた。 */}
+          ジャンルに着くまで5セクション分スクロールさせていた。
+          ★/list では出さない(showSort=false): あちらは上部チップが本物で、ここは効かない。 */}
+      {showSort && (
       <Section title="並び順">
         <select
           value={state.sort}
@@ -525,6 +530,7 @@ export default function FilterPanel({
           ))}
         </select>
       </Section>
+      )}
 
       <button
         type="button"

@@ -171,7 +171,16 @@ export function filterItems(
   const selAuthors = state.authors.length ? state.authors.map(authorKey) : null;
   const selOriginal = state.originalAuthors.length ? state.originalAuthors.map(authorKey) : null;
   return items.filter((m) => {
-    if (state.query && (!matchedSlugs || !matchedSlugs.has(m.slug))) return false;
+    // ★matchedSlugs は「渡されたら常に効く」(2026-09-05)。
+    //   旧: state.query が非空の時だけ見ていた。一覧表(/list)は検索語を FilterState に
+    //   写さない設計(= 検索と絞り込みの二重適用を避けるため)なので、渡しても無視され、
+    //   フィルターの件数だけが検索を無視した全件基準(完結61,726…)のまま出ていた。
+    //   呼び出し側は「検索語がある時だけ非nullを渡す」規約なので、ホーム(/browse)の挙動は不変。
+    if (matchedSlugs) {
+      if (!matchedSlugs.has(m.slug)) return false;
+    } else if (state.query) {
+      return false; // 検索語はあるが一致集合が未着 = まだ確定していない(呼び出し側で loading 表示)
+    }
     if (!inRange(m.year_started, state.yearMin, state.yearMax)) return false;
     if (state.launch) {
       const fvd = m.first_volume_date || (m.year_started ? String(m.year_started) : "");

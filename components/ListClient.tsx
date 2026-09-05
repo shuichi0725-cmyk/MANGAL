@@ -25,7 +25,7 @@ function activeCount(s: FilterState): number {
   return n;
 }
 import type { ListBundle, MangaListItem } from "@/lib/schema";
-import { onAltLoaded, prewarmSearch, searchWithTiers } from "@/lib/clientSearch";
+import { isAltLoading, onAltLoaded, prewarmSearch, searchWithTiers } from "@/lib/clientSearch";
 import { SORTS, sortRows, volCount, latestDate, type SortId } from "@/lib/listSort";
 import { useMangaIndex, ensureFullIndex, isFullIndexLoaded } from "@/lib/useMangaIndex";
 
@@ -184,21 +184,31 @@ export default function ListClient({ data }: { data: ListBundle }) {
   }, [q]);
   const [altTick, setAltTick] = useState(0);
   useEffect(() => onAltLoaded(() => setAltTick((v) => v + 1)), []);
+  // ★検索の一致集合は rows の外へ出す(2026-09-05): フィルターパネルへ matchedSlugs として
+  //   渡すため。旧: rows の内側に閉じていたので渡せず、パネルの件数だけが検索を無視した
+  //   全件基準(ONE PIECE 15件のときに「完結 61,726」)で出ていた(/browse は元から渡していた)。
+  const needle = q.trim();
+  const searchTiers = useMemo(
+    () => (needle ? searchWithTiers(needle, manga) : null),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [needle, manga, altTick],
+  );
+  const matchedSlugs = useMemo(
+    () => (searchTiers ? new Set(searchTiers.keys()) : null),
+    [searchTiers],
+  );
   const rows = useMemo(() => {
     let r = applyFilters(manga, state);
     if (slugfixOnly) r = r.filter((m) => m._slugfix);
-    const needle = q.trim();
-    let tiers: Map<string, number> | null = null;
-    if (needle) {
-      tiers = searchWithTiers(needle, manga);
-      const hit = tiers;
+    if (searchTiers) {
+      const hit = searchTiers;
       r = r.filter((m) => hit.has(m.slug));
     }
     // ★検索時の既定=人気順(2026-07-05 ユーザ要望: 検索したら人気順で出る)。手動選択があればそれを尊重
-    const effSort: SortId = q.trim() && !sortTouched ? "popularity" : sort;
-    return sortRows(r, effSort, tiers, sortTouched);
+    const effSort: SortId = needle && !sortTouched ? "popularity" : sort;
+    return sortRows(r, effSort, searchTiers, sortTouched);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [manga, state, q, sort, sortTouched, slugfixOnly, altTick]);
+  }, [manga, state, needle, searchTiers, sort, sortTouched, slugfixOnly]);
 
   return (
     <div>
@@ -373,7 +383,16 @@ export default function ListClient({ data }: { data: ListBundle }) {
                 </button>
               </div>
             </div>
-            <FilterPanel data={liveData} state={state} setState={applyState} yearBounds={bounds} authorEntries={authors} />
+            <FilterPanel
+              data={liveData}
+              state={state}
+              setState={applyState}
+              yearBounds={bounds}
+              authorEntries={authors}
+              matchedSlugs={matchedSlugs}
+              loading={indexLoading || (!!needle && (!isFullIndexLoaded() || isAltLoading()))}
+              showSort={false}
+            />
           </div>
         </div>
       )}
