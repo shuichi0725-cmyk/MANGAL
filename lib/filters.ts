@@ -29,6 +29,13 @@ export type FilterState = {
   anime: boolean;                // true = アニメ化作品のみ
   hasAwards: boolean;            // true = 受賞作品のみ
   statuses: StatusT[];           // 空配列 = 全て、 完結/連載中/休載 のサブセット
+  /** ★巻数バケツ(2026-09-05 ユーザ裁定)。 空配列 = 全て。 選択は OR (= 1巻 or 21+)。
+   *  基準は ★max_edition_volumes (= 一番巻数の多い版1本) = カードの「全N巻」表示と同じ数。
+   *  total_volumes(全版合算)は使わない (= 文庫版/完全版を足し算した数になるため。
+   *  SLAM DUNK が 75 巻になる)。 「初出版の巻数」も採らない (= 「最古の発売日を持つ版」は
+   *  日付が数巻ぶんしか入っていない別版を拾い、子連れ狼=2巻/鉄腕アトム=3巻/餓狼伝=1巻に化ける
+   *  実測105頁。 max の方がこの105頁でも正解に落ちる)。 */
+  volumes: string[];
   sort: SortKey;                 // ソートキー
   // ★画集モード: true = 一覧を漫画でなく画集(別カテゴリ)に切替。 ジャンル欄の
   //   「画集」チップで toggle。 他の漫画用フィルタは画集には適用しない(query/年のみ)。
@@ -52,6 +59,7 @@ export const emptyFilterState = (): FilterState => ({
   anime: false,
   hasAwards: false,
   statuses: [],
+  volumes: [],
   sort: "default",
   artBooks: false,
 });
@@ -75,8 +83,29 @@ function containsAll<T>(needles: T[], haystack: T[]): boolean {
   return needles.every((n) => haystack.includes(n));
 }
 
+/** ★巻数 = max_edition_volumes (= 一番巻数の多い版1本)。 2026-09-05 ユーザ裁定で統一。
+ *  旧: この関数だけ total_volumes(全版合算)を返しており、ホームの「巻数(多い順)」だけが
+ *  カード表示(HubRow の 全N巻)や /list の巻数ソート(listSort.volCount)と別の数で並んでいた。 */
 function totalVolumes(m: MangaListItem): number {
-  return m.total_volumes;
+  return m.max_edition_volumes;
+}
+
+/** 巻数バケツ (= フィルタのチップ。 key は URL params にもそのまま出る)。 */
+export const VOLUME_BUCKETS: { key: string; label: string; min: number; max: number }[] = [
+  { key: "1", label: "1巻のみ", min: 1, max: 1 },
+  { key: "2-5", label: "2〜5巻", min: 2, max: 5 },
+  { key: "6-10", label: "6〜10巻", min: 6, max: 10 },
+  { key: "11-15", label: "11〜15巻", min: 11, max: 15 },
+  { key: "16-20", label: "16〜20巻", min: 16, max: 20 },
+  { key: "21+", label: "21巻以上", min: 21, max: Number.POSITIVE_INFINITY },
+];
+
+/** 作品 → 巻数バケツの key。 巻数が取れない(0)ときは null (= どのバケツにも入らない)。 */
+export function volumeBucket(m: MangaListItem): string | null {
+  const n = m.max_edition_volumes;
+  if (!n || n < 1) return null;
+  for (const b of VOLUME_BUCKETS) if (n >= b.min && n <= b.max) return b.key;
+  return null;
 }
 
 // ★共有Collator(2026-07-22): localeCompare都度呼びはロケール機構を毎回起こし67kソートで重い
@@ -184,6 +213,10 @@ export function filterItems(
     if (state.anime && !m.anime_adapted) return false;
     if (state.hasAwards && (!m.awards || m.awards.length === 0)) return false;
     if (state.statuses.length && !state.statuses.includes(m.status)) return false;
+    if (state.volumes.length) {
+      const b = volumeBucket(m);
+      if (!b || !state.volumes.includes(b)) return false;
+    }
     return true;
   });
 }
@@ -310,6 +343,7 @@ export function filtersToSearchParams(s: FilterState, base?: URLSearchParams): U
   setIf("artBooks", s.artBooks, "true");
   setIf("hasAwards", s.hasAwards, "true");
   setList("status", s.statuses);
+  setList("volume", s.volumes);
   setIf("sort", s.sort !== "default", s.sort);
   return p;
 }
@@ -361,6 +395,12 @@ export function filtersFromSearchParams(p: ParamsLike | null | undefined): Parti
       (s): s is StatusT => s === "ongoing" || s === "completed" || s === "hiatus",
     );
     if (valid.length > 0) out.statuses = valid;
+  }
+  const volumes = pickList("volume");
+  if (volumes) {
+    const keys = new Set(VOLUME_BUCKETS.map((b) => b.key));
+    const valid = volumes.filter((v) => keys.has(v));
+    if (valid.length > 0) out.volumes = valid;
   }
   const sort = p.get("sort");
   if (

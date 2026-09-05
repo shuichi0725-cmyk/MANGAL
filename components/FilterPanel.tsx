@@ -1,7 +1,14 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { filterItems, emptyFilterState, type FilterState, type SortKey } from "@/lib/filters";
+import {
+  filterItems,
+  emptyFilterState,
+  volumeBucket,
+  VOLUME_BUCKETS,
+  type FilterState,
+  type SortKey,
+} from "@/lib/filters";
 import type { ListBundle, MangaListItem, StatusT } from "@/lib/schema";
 import { ChipButton } from "@/components/ui/Chip";
 import AuthorKanaIndex from "@/components/AuthorKanaIndex";
@@ -78,6 +85,11 @@ export default function FilterPanel({
         m.publishers?.length ? m.publishers : m.publisher ? [m.publisher] : [],
       ),
       magazine: tally({ magazines: [] }, (m) => (m.magazine ? [m.magazine] : [])),
+      // ★巻数バケツ(2026-09-05): 基準は max_edition_volumes = カードの「全N巻」と同じ数
+      volume: tally({ volumes: [] }, (m) => {
+        const b = volumeBucket(m);
+        return b ? [b] : [];
+      }),
       // ★創刊ドリルダウン(Q3-A): 各作品から[年代,年,年-月]の3階層キーをemit
       launch: tally({ launch: null }, (m) => {
         const fvd = m.first_volume_date || (m.year_started ? String(m.year_started) : "");
@@ -154,6 +166,7 @@ export default function FilterPanel({
   if (state.anime) active.push({ id: "anime", label: "アニメ化", clear: { anime: false } });
   if (state.hasAwards) active.push({ id: "awards", label: "受賞", clear: { hasAwards: false } });
   for (const st of state.statuses) active.push({ id: `st:${st}`, label: STATUS_LABELS[st] ?? st, clear: { statuses: state.statuses.filter((x) => x !== st) } });
+  for (const v of state.volumes) active.push({ id: `vo:${v}`, label: VOLUME_BUCKETS.find((b) => b.key === v)?.label ?? v, clear: { volumes: state.volumes.filter((x) => x !== v) } });
   for (const d of state.demographics) active.push({ id: `de:${d}`, label: DEMO_JA[d] ?? d, clear: { demographics: state.demographics.filter((x) => x !== d) } });
   for (const g of state.genres) active.push({ id: `ge:${g}`, label: data.genres.find((x) => x.key === g)?.name ?? g, clear: { genres: state.genres.filter((x) => x !== g) } });
   for (const t of state.themes) active.push({ id: `th:${t}`, label: t, clear: { themes: state.themes.filter((x) => x !== t) } });
@@ -269,6 +282,24 @@ export default function FilterPanel({
               }
             >
               {STATUS_LABELS[s]}<Cnt n={counts.status.get(s) ?? 0} />
+            </ChipButton>
+          ))}
+        </div>
+      </Section>
+
+      {/* ★巻数(2026-09-05 ユーザ裁定): 基準は max_edition_volumes = 一番巻数の多い版1本
+          (= カードの「全N巻」と同じ数)。total_volumes(全版合算)では文庫版/完全版が足されて
+          SLAM DUNK が75巻になる。区切りは 1のみ/2-5/6-10/11-15/16-20/21+ (単巻が38%あるので
+          「1巻のみ」を独立させている)。選択は OR。 */}
+      <Section title="巻数">
+        <div className="flex flex-wrap gap-1.5">
+          {VOLUME_BUCKETS.map((b) => (
+            <ChipButton
+              key={b.key}
+              active={state.volumes.includes(b.key)}
+              onClick={() => update({ volumes: toggle(state.volumes, b.key) })}
+            >
+              {b.label}<Cnt n={counts.volume.get(b.key) ?? 0} />
             </ChipButton>
           ))}
         </div>

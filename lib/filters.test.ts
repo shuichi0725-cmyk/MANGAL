@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 import {
   applyFilters,
   authorKey,
+  volumeBucket,
   filtersFromSearchParams,
   filtersToSearchParams,
   authorsWithKana,
@@ -33,6 +34,60 @@ const m = (over: Partial<MangaListItem> = {}): MangaListItem => ({
 // (旧 matchText のテスト群は 2026-08-03 の検索索引廃止で削除。
 //  長音符・中黒などの正規化吸収は現行検索の実体 lib/clientSearch.ts +
 //  検索スナップショットゲート(searchSnapshot.test.ts)側で担保。)
+
+// ★巻数バケツ(2026-09-05 ユーザ裁定)。 基準は max_edition_volumes(= 一番巻数の多い版1本)。
+//   total_volumes(全版合算)ではない = 文庫版/完全版を足した数で分類しないための番人。
+describe("巻数バケツ", () => {
+  it("境界が 1 / 2-5 / 6-10 / 11-15 / 16-20 / 21+ になっている", () => {
+    const b = (n: number) => volumeBucket(m({ max_edition_volumes: n, total_volumes: n }));
+    expect([1, 2, 5, 6, 10, 11, 15, 16, 20, 21, 110].map(b)).toEqual([
+      "1", "2-5", "2-5", "6-10", "6-10", "11-15", "11-15", "16-20", "16-20", "21+", "21+",
+    ]);
+  });
+
+  it("巻数が取れない(0)頁はどのバケツにも入らない", () => {
+    expect(volumeBucket(m({ max_edition_volumes: 0, total_volumes: 0 }))).toBeNull();
+  });
+
+  it("全版合算(total_volumes)ではなく max_edition_volumes で分類する", () => {
+    // SLAM DUNK型: 通常31 + 完全版24 + 新装再編20 → total=75 だが 巻数は31 = 21+
+    const slam = m({ slug: "slam", max_edition_volumes: 31, total_volumes: 75 });
+    // 文庫版で水増しされた単巻: total=4 でも 巻数は2 = 2-5
+    const solo = m({ slug: "solo", max_edition_volumes: 2, total_volumes: 4 });
+    expect(volumeBucket(slam)).toBe("21+");
+    expect(volumeBucket(solo)).toBe("2-5");
+    const r = applyFilters([slam, solo], { ...emptyFilterState(), volumes: ["21+"] });
+    expect(r.map((x) => x.slug)).toEqual(["slam"]);
+  });
+
+  it("複数バケツの選択は OR", () => {
+    const items = [
+      m({ slug: "one", max_edition_volumes: 1 }),
+      m({ slug: "mid", max_edition_volumes: 8 }),
+      m({ slug: "long", max_edition_volumes: 40 }),
+    ];
+    const r = applyFilters(items, { ...emptyFilterState(), volumes: ["1", "21+"] });
+    expect(r.map((x) => x.slug).sort()).toEqual(["long", "one"]);
+  });
+
+  it("URL params と往復できる", () => {
+    const st = { ...emptyFilterState(), volumes: ["2-5", "21+"] };
+    const p = filtersToSearchParams(st);
+    expect(p.get("volume")).toBe("2-5,21+");
+    expect(filtersFromSearchParams(p).volumes).toEqual(["2-5", "21+"]);
+    // master 外のキーは捨てる
+    expect(filtersFromSearchParams(new URLSearchParams("volume=999")).volumes).toBeUndefined();
+  });
+
+  it("並び順「巻数」は max_edition_volumes 降順(全版合算ではない)", () => {
+    const items = [
+      m({ slug: "sum", max_edition_volumes: 10, total_volumes: 99 }),
+      m({ slug: "real", max_edition_volumes: 40, total_volumes: 40 }),
+    ];
+    const r = applyFilters(items, { ...emptyFilterState(), sort: "volumes" });
+    expect(r.map((x) => x.slug)).toEqual(["real", "sum"]);
+  });
+});
 
 describe("applyFilters", () => {
   const items: MangaListItem[] = [
