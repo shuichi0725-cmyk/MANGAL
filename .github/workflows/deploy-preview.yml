@@ -19,6 +19,9 @@ on:
       #   data/ 変更でも preview を建て直すため trigger に含める(2026-07-23: これが無く
       #   書影同期commitがリビルドを起こさず「preview に画像出ない」事故)。
       - "data/art-books/**"
+      # ★試し読みマップはビルド時joinの入力(lib/tameshiyomi.ts が data/ から読む)。
+      #   ここに無いと map を更新しても preview が建て直らない(2026-09-06)。
+      - "data/tameshiyomi-map.json"
       - ".github/workflows/deploy-preview.yml"
       - "wrangler.jsonc"
       - "worker.js"

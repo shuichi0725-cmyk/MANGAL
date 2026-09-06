@@ -114,8 +114,11 @@ export default function VolumeCoverflow({
   bl?: { id: string; max: number; miss?: number[] } | null;
 }) {
   // ★試し読み(BookLive bviewer直開き) 全結線(2026-08-06 テスト成功→ユーザGO)。
-  //   bl = ビルド時join(lib/tameshiyomi + data/tameshiyomi-map.json)。25,149作×382k巻HEAD検証済み。
-  //   cid = title_id + 巻番号3桁。選択巻が検証済み範囲(<=max かつ not missing)の時だけ出す=fail-safe。
+  //   bl = ビルド時join(lib/tameshiyomi + data/tameshiyomi-map.json)。
+  //   cid = title_id + 巻番号3桁。★URLは**構築**であって取得ではない(保存もしていない)。
+  //   2026-09-06 ユーザ裁定「BookLiveは憶測でかけるはず。試す必要なし」で、末尾は本番頁の巻数まで
+  //   構築で伸ばす方針に変更(旧= HEAD検証済みの巻だけ表示 → 2,528作品で末尾が出ていなかった)。
+  //   max/missing は残す= 健全時に実測した範囲内の穴だけ塞ぐ。
   const vols = [...volumes]
     .filter((v) => v.number != null)
     .sort((a, b) => (a.number as number) - (b.number as number));

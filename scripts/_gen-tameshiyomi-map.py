@@ -33,12 +33,36 @@ for ln in gzip.open(VOLSEED, "rt", encoding="utf-8"):
     d = json.loads(ln)
     vols.setdefault(d["slug"], set()).add(int(d["volume"]))
 
+# ★2026-09-06 ユーザ裁定「BookLive!は憶測でかけるはず。試す必要なし」:
+#   試し読みURLは保存しておらず **title_id + 巻番号(3桁0詰め)** から client が組み立てる
+#   (components/VolumeCoverflow の `bviewer/s/?cid=<tid>_<vol>`)。つまりリンクを**作るのに検証は要らない**。
+#   HEAD検証は「ボタンをどこまで出すか」を決めるためだけのもので、その検証が2026-08-29の
+#   278万リクエスト規制事故を生んだ([[booklive_access_incident]])。しかも規制中は
+#   **正解の巻すら403**を返すので検証自体が成立しない(2026-09-06に3件で実測)。
+#   → 末尾は**本番頁の巻数まで構築で伸ばす**。検証済みの範囲内の穴(missing)だけは
+#     サイトが健全だった時期の実測なのでそのまま残す。
+_pagemax = {}
+try:
+    _idx = json.load(io.open(os.path.join(ROOT, "data", "manga-list-index.json"), encoding="utf-8"))
+    _f = {k: i for i, k in enumerate(_idx["f"])}
+    for _r in _idx["d"]:
+        _pagemax[_r[_f["slug"]]] = _r[_f["max_edition_volumes"]] or 0
+except Exception:
+    pass
+
 out = {}
 n_miss = 0
+n_ext = 0
+n_extvol = 0
 for slug, tid in anchors.items():
     vs = vols.get(slug) or {1}   # アンカー時点で _001 はHEAD200済み
     mx = max(vs)
     missing = [n for n in range(1, mx + 1) if n not in vs]
+    _pm = _pagemax.get(slug, 0)
+    if _pm > mx:
+        n_ext += 1
+        n_extvol += _pm - mx
+        mx = _pm
     if missing:
         n_miss += 1
         out[slug] = [tid, mx, missing]
@@ -48,3 +72,4 @@ for slug, tid in anchors.items():
 json.dump(out, io.open(OUT, "w", encoding="utf-8"), ensure_ascii=False, separators=(",", ":"))
 sz = os.path.getsize(OUT) / 1024
 print(f"tameshiyomi-map: {len(out):,}作 (missing持ち{n_miss}) → {OUT} ({sz:.0f}KB)")
+print(f"  ★構築で末尾を延長: {n_ext:,}作品 / {n_extvol:,}巻(検証せずtitle_id+巻番号で組む)")
