@@ -3,7 +3,10 @@
 build-list-index と同じ vol_gap 判定(=ある版で max-min+1 > 巻数 の穴)を再計算。
 promote(~90分)を待たず「修正後に巻抜けが何件残るか・どの作のどの巻か」を素早く出す。
 冪等: 既promote反映分の種4/mergeは no-op(既に巻が在る)、新規分だけ穴を埋める。
-使用: _volgap-virtual.py [--list] [--limit N]  (--list=残gapを全部TSV出力)"""
+使用: _volgap-virtual.py [--list] [--limit N] [--from-tsv]
+  --list     = 残gapを全部TSV出力
+  --from-tsv = 候補を旧 vol_gap.tsv から取る(既定は現在の索引の vol_gap フラグ。
+               旧TSVは2026-07-16で凍結していて新しい巻抜けが出てこなかった)"""
 import sys,os,re,json,sqlite3,yaml
 from collections import defaultdict
 sys.stdout.reconfigure(encoding="utf-8")
@@ -74,15 +77,48 @@ edov=json.load(open(f"{ROOT}/data/seeds/edition-overrides.json",encoding="utf-8"
 _pd=yaml.safe_load(open(f"{ROOT}/data/seeds/page-dedup.yml",encoding="utf-8")) or {}
 dedup_drop={e["drop"] for e in _pd.get("dedup",[]) if e.get("drop")}
 
-slugs=[l.rstrip("\n").split("\t")[0] for l in open(f"{ROOT}/docs/production-diagnostics/vol_gap.tsv",encoding="utf-8")][1:]
+# ★候補の作り方(2026-09-06 是正): 以前は docs/production-diagnostics/vol_gap.tsv を読んでいたが、
+#   このTSVは **2026-07-16 で止まっており誰も再生成していない**(読むscript5本 / 書くscript0本)。
+#   当時の1,417頁を再チェックするだけなので、以後に生まれた巻抜けが永久に出てこなかった
+#   (『皆様の玩具です』= standard 4..9 が出ない、とユーザが発見)。
+#   → 毎回 **現在の一覧索引の vol_gap フラグ**から作り直す。--from-tsv で旧挙動。
+def _load_slugs():
+    if "--from-tsv" in sys.argv:
+        return [l.rstrip("\n").split("\t")[0]
+                for l in open(f"{ROOT}/docs/production-diagnostics/vol_gap.tsv", encoding="utf-8")][1:]
+    ix = json.load(open(f"{ROOT}/data/manga-list-index.json", encoding="utf-8"))
+    f = ix["f"]; si = f.index("slug"); fi = f.index("fl") if "fl" in f else None
+    pubs = [r[si] for r in ix["d"] if fi is not None and (r[fi] or 0) & 2]
+    # ★索引は公開slug、 manga.v2 のファイル名は SRC stem。 逆引きしないと開けない頁が出る。
+    pub2stem = {}
+    try:
+        for stem, pub in json.load(open(f"{ROOT}/.cache/prod-page-slugs.json", encoding="utf-8")).items():
+            pub2stem[pub] = stem
+    except Exception:
+        pass
+    return [pub2stem.get(p, p) for p in pubs]
+
+slugs=_load_slugs()
+print(f"候補 {len(slugs):,}頁 ({'旧TSV' if '--from-tsv' in sys.argv else '現在の索引 vol_gap'})")
 if LIMIT: slugs=slugs[:LIMIT]
 
+def _no_vol1(by):
+    """★頁全体に1巻が無いか(2026-09-06『皆様の玩具です』= standard 4..9 で 1,2,3 欠け)。
+
+    旧実装は max-min+1>巻数 = **minとmaxの間の穴**しか見ず、先頭がごっそり無い頁を素通りしていた。
+    ★版単位で見ると 新装版/文庫が途中巻からの刊行という正当例288版を巻き込むので、
+      **頁全体の最小巻**で判定する(本番実測 275頁がこれに該当)。
+    """
+    alln=[n for ns in by.values() for n in ns]
+    ints=[n for n in alln if float(n).is_integer()]
+    return bool(ints) and min(ints)>1
 def has_gap(typevols):
     by=defaultdict(set)
     for t,n in typevols: by[t].add(n)
     for t,ns in by.items():
         ns=sorted(ns)
         if len(ns)>=2 and ns[-1]-ns[0]+1>len(ns): return True,by
+    if _no_vol1(by): return True,by
     return False,by
 def gap_detail(by):
     out=[]
@@ -91,6 +127,9 @@ def gap_detail(by):
         if len(ns)>=2 and ns[-1]-ns[0]+1>len(ns):
             miss=[n for n in range(ns[0],ns[-1]+1) if n not in ns]
             out.append((t,miss))
+    if _no_vol1(by) and not out:
+        alln=sorted(n for ns in by.values() for n in ns if float(n).is_integer())
+        out.append(("(1巻が無い)",list(range(1,int(alln[0])))))
     return out
 
 before_gap=0; after_gap=0; closed=[]; remain=[]

@@ -201,6 +201,17 @@ for f in _files:
         _vn = sorted({v.get("number") for v in (_e.get("volumes") or []) if v.get("number")})
         if len(_vn) >= 2 and _vn[-1] - _vn[0] + 1 > len(_vn):
             vol_gap = True; break
+    # ★★「1巻が無い」も巻抜け(2026-09-06 ユーザ発見『皆様の玩具です』= standard 4..9 で 1,2,3 欠け)。
+    #   旧実装は max-min+1>巻数 = **minとmaxの間の穴**しか見ないので、先頭がごっそり無い頁は素通りしていた。
+    #   ★判定は **頁全体の最小巻**で見る(版単位で見ると、新装版/文庫が途中巻からの刊行という
+    #   正当なケース288版を巻き込む。 頁のどこにも1巻が無い275頁だけが本当の取りこぼし)。
+    #   小数巻(15.5型)は先頭判定に使わない = 番外編が1巻の代わりにならないため int だけで見る。
+    _alln = [float(v.get("number")) for _e in eds for v in (_e.get("volumes") or [])
+             if v.get("number") is not None]
+    _intn = [x for x in _alln if float(x).is_integer()]
+    no_vol1 = bool(_intn) and min(_intn) > 1
+    if no_vol1:
+        vol_gap = True
     # ★1冊でも書影欠け(= Kobo補完worklist用 2026-07-05)
     cover_gap = any(not v.get("cover_url") for _e in eds for v in (_e.get("volumes") or []))
     latest = ""
@@ -242,8 +253,10 @@ for f in _files:
         "popularity": d.get("popularity"), "score": d.get("score"),
         # ★診断フラグはビットフィールド1列に圧縮(2026-07-14。復元=listIndexDecode。null列5本の水増し解消)
         **({"fl": (1 if solo_nonfirst else 0) | (2 if vol_gap else 0) | (4 if cover_gap else 0)
+                   | (32 if no_vol1 else 0)
                   | (8 if d.get("_anthology") else 0) | (16 if d.get("_slugfix") else 0)}
-           if (solo_nonfirst or vol_gap or cover_gap or d.get("_anthology") or d.get("_slugfix")) else {}),
+           if (solo_nonfirst or vol_gap or cover_gap or no_vol1
+               or d.get("_anthology") or d.get("_slugfix")) else {}),
         **({"_slugfix_new": d.get("_slugfix_new")} if d.get("_slugfix") else {}),
     })
     # ② alt索引の材料(別名・synonyms・巻別題)。旧検索索引は2026-08-03廃止=ここはalt専用

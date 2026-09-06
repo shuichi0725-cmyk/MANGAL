@@ -252,6 +252,8 @@ export type MangaListItem = {
   cover_gap?: boolean;
   /** 複数巻あるのに途中の巻が抜けている(= fill漏れ/欠番 signal。 テスト診断用) */
   vol_gap?: boolean;
+  /** 1巻が無い(= 先頭がごっそり欠け)。vol_gap にも立つが内側の穴と区別するための別旗 */
+  no_vol1?: boolean;
   /** アンソロジー統合ページ(= テスト点検用。 本番化前の確認) */
   _anthology?: boolean;
   /** slug修正対象(= テスト点検用。 現slug→_slugfix_new の目視確認) */

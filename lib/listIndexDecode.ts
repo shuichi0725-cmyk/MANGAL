@@ -14,6 +14,9 @@ const FL_VOL_GAP = 2;
 const FL_COVER_GAP = 4;
 const FL_ANTHOLOGY = 8;
 const FL_SLUGFIX = 16;
+// ★1巻が無い(= 先頭がごっそり欠け。 2026-09-06『皆様の玩具です』4..9 で発覚)。
+//   vol_gap にも立つが、内側の穴と区別できるよう別ビットで持つ。
+const FL_NO_VOL1 = 32;
 
 type AuthorLike = { name: string; kana?: string; role?: string };
 
@@ -45,6 +48,7 @@ export function decodeListIndex(raw: unknown): MangaListItem[] {
       if (fl & FL_COVER_GAP) o.cover_gap = true;
       if (fl & FL_ANTHOLOGY) o._anthology = true;
       if (fl & FL_SLUGFIX) o._slugfix = true;
+      if (fl & FL_NO_VOL1) o.no_vol1 = true;
       delete o.fl;
     }
     if (o.authors) o.authors = unpackAuthors(o.authors);

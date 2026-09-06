@@ -45245,3 +45245,42 @@ volumes:
   source: ndl+rakuten
   added_at: '2026-09-06'
   note: '楽天題「範馬刃牙（10．5）」少年チャンピオンコミックス・460円(通常巻499円=比0.92)。NDL題は「ピクル」だが単独頁は本番に無い(『ピクルス街異聞』は別作者の別作品)= 範馬刃牙の番外巻として本編頁に置く'
+# ★皆様の玩具です 1-3巻(2026-09-06 ユーザ発見「123がない」)。 本番頁は standard 4..9 で先頭が欠けていた。
+#   NDL全件(ユーザ提供TSV)で 01-09 の9冊・全て NDC 726.1「漫画」・責任表示=石井康之 著・講談社 を確認。
+#   楽天も4冊とも同レーベル(講談社コミックス)で日付一致。 種2には在るが別クラスタに落ちていて頁に出ていなかった。
+- series_keys:
+  - 'name:石井康之|name:皆様の玩具(オモチャ)です'
+  number: 1
+  isbn13: '9784065102312'
+  release_date: '2017-10-06'
+  publisher: '講談社'
+  imprint: 'SHONEN MAGAZINE COMICS'
+  edition_type: standard
+  title_display: '皆様の玩具です 1'
+  source: ndl+rakuten
+  added_at: '2026-09-06'
+  note: 'NDL 978-4-06-510231-2 / 2017.10 / 187p / NDC726.1 / 講談社コミックスマガジン KCM6029。楽天=2017年10月06日・471円・講談社コミックス'
+- series_keys:
+  - 'name:石井康之|name:皆様の玩具(オモチャ)です'
+  number: 2
+  isbn13: '9784065107218'
+  release_date: '2018-01-09'
+  publisher: '講談社'
+  imprint: 'SHONEN MAGAZINE COMICS'
+  edition_type: standard
+  title_display: '皆様の玩具です 2'
+  source: ndl+rakuten
+  added_at: '2026-09-06'
+  note: 'NDL 978-4-06-510721-8 / 2018.1 / NDC726.1 / 講談社コミックス。楽天=2018年01月09日・471円'
+- series_keys:
+  - 'name:石井康之|name:皆様の玩具(オモチャ)です'
+  number: 3
+  isbn13: '9784065114681'
+  release_date: '2018-04-09'
+  publisher: '講談社'
+  imprint: 'SHONEN MAGAZINE COMICS'
+  edition_type: standard
+  title_display: '皆様の玩具です 3'
+  source: ndl+rakuten
+  added_at: '2026-09-06'
+  note: 'NDL 978-4-06-511468-1 / 2018.4 / 186p / NDC726.1 / 講談社コミックス SHONEN MAGAZINE COMICS。楽天=2018年04月09日・484円'
