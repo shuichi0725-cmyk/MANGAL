@@ -141,6 +141,12 @@
 ### ★月次サニティ監査 (= silent 例外の安全網)
 
 個別例外を全部予見できない前提で、 ★**取込後に前月差分で異常を機械 flag** する:
+- ★**登録の番人** = `scripts/_check-sanity-registry.py` (= 2026-09-06 新設。 **この節に書いた検出器が
+  `_monthly-distill.py` の DETECTORS に載っているか**を突合する。 節に書いただけで登録し忘れると
+  その検出器は二度と回らない = 規定は実装の保証ではない [[skill_rule_without_implementation]]。
+  実測でこの日 4本(subtitle-orphan-volume / furigana / anilist-verify-gate / seed1-lost)が漏れていた。
+  回さない理由が在る検出器は script 内 `EXEMPT` に**理由つき**で書く。 `run sanity` の先頭で自動実行)。
+- ★ISBN消失層 = `scripts/_audit-isbn-loss.py` (= 前回本番に在ったISBNが理由なく消えていないか。 intake 末尾 + 週次でも回る)。
 - 巻番号の外れ値 (= 年誤 parse「2022巻」型) / 著者ゼロ急増 / 重複ページ / **新レーベルの成年カバー率** / 新雑誌候補 / 文字化け PUA / 分裂スパイク / **外国版流入 (= ISBN国コード非9784)**。
 - 土台 = `scripts/_coverage-audit.py` (= 真の公開数・被覆・品質 flag)。 ★**前月との差分**で「今月だけ急増した異常」を浮かせる。
 - ★巻番号層 = `scripts/_audit-volume-numbering.py` (= merge解決後 page×edition で巻番号異常を3分類): **AUTO_FIXED**(上下完全揃い+gap=下=3型水増し、 promoteの`_fix_complete_sequence_numbers`が自動是正済=件数監視。 ~1,677件) / **MISSING_HALF**(片側欠落=取りこぼし=種4領域) / **GAP_OTHER**(真の欠番・外れ値1000等)。 ★AUTO_FIXEDが急増したら新たな誤番号型のsignal。

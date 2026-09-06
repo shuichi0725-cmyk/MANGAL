@@ -53,6 +53,9 @@ SOURCES = [os.path.join(ROOT, ".cache", "rakuten-isbn-delta.jsonl"),
            os.path.join(ROOT, ".cache", "rakuten-isbn.jsonl")]
 V2_DIR = os.path.join(ROOT, "data", "manga.v2")
 OUT = os.path.join(ROOT, "docs", "production-diagnostics", "subtitle-orphan-volume.tsv")
+# ★芯 = 月次サニティが行数を見る対象(全件23,957は疑フラグ/tierB/OTHER_ISBNが主体で仕事の量ではない。
+#   [[feedback_raw_count_is_not_worklist]])。 2026-09-06 に全件TSVと別に書き出すようにした。
+OUT_CORE = os.path.join(ROOT, "docs", "production-diagnostics", "subtitle-orphan-volume-core.tsv")
 
 COLS = ["巻状態", "種2", "tier", "信号", "一致", "残差", "疑", "slug", "頁題", "頁著者", "頁最大巻", "頁巻数",
         "isbn", "楽天題", "楽天副題", "抽出親題", "抽出巻", "楽天著者", "出版社", "レーベル",
@@ -424,6 +427,11 @@ def main() -> int:
             and not r[6] and r[-1] != "Y"]
     print(f"\n★芯(MISSING × tierA × EXACT × 疑なし × 除外seed外) {len(core)}件 / 頁{len({r[7] for r in core})}:",
           dict(collections.Counter(r[1] for r in core)))
+    with io.open(OUT_CORE, "w", encoding="utf-8", newline="\n") as fh:
+        fh.write("\t".join(COLS) + "\n")
+        for r in core:
+            fh.write("\t".join(str(x) for x in r) + "\n")
+    print(f"  → ★芯 {os.path.relpath(OUT_CORE, ROOT)} (月次サニティはこの行数を見る)")
     by_slug = collections.defaultdict(list)
     for r in core:
         if r[1] == "SPLIT":

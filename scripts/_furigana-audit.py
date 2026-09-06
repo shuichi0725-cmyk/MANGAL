@@ -106,7 +106,7 @@ def ndl_yomi(isbn: str, cache: dict):
     except Exception:
         val = None
     cache[isbn] = val
-    time.sleep(0.4)  # NDL へ礼儀正しく
+    time.sleep(1.2)  # ★NDL は 1.2秒/req が規約 ([[ndl_access_rate_method]]。burst=IP遮断。2026-09-06 に0.4→1.2)
     return val
 
 

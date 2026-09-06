@@ -80,7 +80,9 @@ python scripts/_monthly-distill.py promote-made         # 作った頁だけ pro
 
 ### 6. 月次サニティ
 ```
-python scripts/_monthly-distill.py run sanity            # 検出器17本を順に回し前回比Δ(~15分。結果= docs/production-diagnostics/sanity-runs/sanity-<ts>.json=git追跡)
+python scripts/_monthly-distill.py run sanity            # 検出器18本を順に回し前回比Δ(~15分。結果= docs/production-diagnostics/sanity-runs/sanity-<ts>.json=git追跡)
+# ★先頭で登録の番人 `_check-sanity-registry.py` が自動で走る(CLAUDE.md月次サニティ節 ⇔ DETECTORS の突合。差が出たら表示して続行)
+# ★heavy 7本(excerpt-subtitle / edition-mix / author-not-in-volumes / subtitle-orphan-volume / seed1-lost / anilist-verify-gate / furigana)は `--heavy` を付けた時だけ
 python scripts/_monthly-distill.py sanity --heavy        # 楽天キャッシュ走査3本(excerpt-subtitle/edition-mix/author-not-in-volumes)も
 ```
 - Δ>0 の検出器 = 今月増えた型 → CLAUDE.md「月次サニティ監査」節の該当型で裁定。結果JSONと更新されたTSVは commit(次回のΔ基準)。

@@ -721,6 +721,13 @@ DETECTORS = [
     ("excerpt-subtitle", ["_audit-excerpt-subtitle.py"], "excerpt-subtitle.tsv", True),
     ("edition-mix", ["_audit-edition-mix.py"], "edition-mix.tsv", True),
     ("author-not-in-volumes", ["_audit-author-not-in-volumes.py"], "author-not-in-volumes.tsv", True),
+    # ★2026-09-06 追加 = CLAUDE.md の月次サニティ節に在るのに DETECTORS に無く、
+    #   「型化したのに一度も回らない」状態だった4本(番人 = _check-sanity-registry.py)。
+    #   いずれも重い(楽天キャッシュ1.2GB / 種1 raw 668MB / AniList dump / NDL live)ので heavy。
+    ("subtitle-orphan-volume", ["_audit-subtitle-orphan-volume.py"], "subtitle-orphan-volume-core.tsv", True),
+    ("seed1-lost", ["_audit-seed1-lost.py"], "seed1-lost-groups.tsv", True),
+    ("anilist-verify-gate", ["_anilist-verify-gate.py"], None, True),
+    ("furigana", ["_furigana-audit.py"], None, True),   # ★NDL live を叩く = --heavy の時だけ
 ]
 
 
@@ -768,6 +775,12 @@ def sanity(a) -> None:
     print("=" * 72)
     print(f"月次サニティ  [{now()}]  前回={prev_files[-1].name if prev_files else '無し'}  ★全detector read-only")
     print("=" * 72)
+    # ★登録漏れ番人: CLAUDE.md 月次サニティ節に在るのに DETECTORS に無い検出器を先に炙る
+    #   (= 型化して節に書いただけで一度も回らない、を機構で封じる。 2026-09-06 新設)
+    reg_ng = run([PY, SCRIPTS / "_check-sanity-registry.py"], capture=True)
+    if reg_ng.returncode != 0:
+        print((reg_ng.stdout or "") + (reg_ng.stderr or ""), flush=True)
+        print("★↑ 登録突合で差が出ている(検出器は続行する。 直してから次月に臨む)\n", flush=True)
     for name, cmd, tsv, heavy in DETECTORS:
         if heavy and not a.heavy:
             res[name] = {"skipped": "heavy(--heavy で実行)"}
