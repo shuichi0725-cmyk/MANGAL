@@ -1,8 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import Link from "next/link";
-import CoverImage from "@/components/CoverImage";
+import EditionRow from "@/components/EditionRow";
 import KanaShelf from "@/components/KanaShelf";
 import { TYPE_JA, type AizItem } from "@/components/EditionCorners";
 import { jaCollator } from "@/lib/collator";
@@ -10,7 +9,8 @@ import { jaCollator } from "@/lib/collator";
 /** 愛蔵版・合本の一覧(/aizouban)。版種チップで絞り込み、並びは**50音順**
  *  (2026-09-06 ユーザ指示「名前の順に。フリガナを参考に」= title_kana キー。
  *   一覧表の「50音順」= lib/listSort と同じ比較で揃える)。
- *  ★同日: 本屋ふうの50音索引+1件1行に変更(旧=書影3列びっしり)= KanaShelf。 */
+ *  ★同日: 本屋ふうの50音索引(KanaShelf)+ 今月の新刊と同じ行(EditionRow=
+ *    書影105×150を押すとAmazon / 小さい「詳細」で作品ページ)に統一。 */
 const ORDER = ["aizoban", "kanzenban", "wideban", "shinsoban", "deluxe", "other"];
 
 export default function AizoubanListClient() {
@@ -70,33 +70,25 @@ export default function AizoubanListClient() {
         keyOf={(e) => `${e.s}-${e.e}-${e.v}`}
         caption={<>{list.length}点・フリガナの50音順。頭文字をタップでその棚へ。</>}
         render={(e) => (
-          <Link
-            href={`/manga/${e.s}`}
-            className="spring-press flex gap-2.5 rounded-lg border border-[var(--color-line)] bg-[var(--color-surface)] p-2 hover:border-[var(--color-accent)]"
-          >
-            <div
-              className="relative w-[52px] shrink-0 overflow-hidden rounded border border-[var(--color-line)] bg-[var(--color-surface-2)]"
-              style={{ aspectRatio: "2 / 3" }}
-            >
-              <CoverImage src={e.c} alt={`${e.t} ${TYPE_JA[e.e] ?? e.e}`} sizes="52px" />
-            </div>
-            <div className="min-w-0 flex-1">
-              <p className="line-clamp-2 text-[12.5px] font-bold leading-snug">{e.t}</p>
-              <p className="mt-0.5 truncate text-[10.5px] text-ink/55">{e.a}</p>
-              <p className="mt-1 flex items-center gap-1.5">
-                <span className="shrink-0 rounded bg-[var(--color-accent)] px-1 py-[1px] text-[9.5px] font-bold text-[var(--color-on-accent)]">
-                  {TYPE_JA[e.e] ?? e.e}
-                </span>
-                <span className="truncate text-[10.5px] tabular-nums text-ink/60">
-                  全{e.sv}巻 → <b className="text-ink/80">{e.v}巻</b>
-                  {e.d ? <span className="text-ink/35"> ・{e.d}年</span> : null}
-                </span>
-              </p>
-              {e.l ? <p className="truncate text-[10px] text-ink/40">{e.l}</p> : null}
-            </div>
-          </Link>
+          <EditionRow
+            slug={e.s}
+            title={e.t}
+            authors={e.a}
+            cover={e.c}
+            isbn={e.i}
+            badge={TYPE_JA[e.e] ?? e.e}
+            query={`${e.t} ${TYPE_JA[e.e] ?? ""}`.trim()}
+            meta={
+              <>
+                全{e.sv}巻 → <b className="text-ink/85">{e.v}巻</b>
+                {e.d ? <span className="text-ink/35"> ・{e.d}年</span> : null}
+              </>
+            }
+            note={e.l}
+          />
         )}
       />
+      <p className="mt-5 text-[10px] text-ink/40">[PR] Amazonリンクにはアフィリエイト広告を含みます</p>
     </div>
   );
 }

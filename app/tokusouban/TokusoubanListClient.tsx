@@ -1,15 +1,15 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import Link from "next/link";
-import CoverImage from "@/components/CoverImage";
+import EditionRow from "@/components/EditionRow";
 import KanaShelf from "@/components/KanaShelf";
 import type { TksItem } from "@/components/EditionCorners";
 import { jaCollator } from "@/lib/collator";
 
 /** 特装版・限定版の一覧(/tokusouban)。並びは**50音順**(2026-09-06 ユーザ指示「名前の順に。
  *  フリガナを参考に」= title_kana キー)。同じ作品の特装版が隣り合う。
- *  ★同日: 本屋ふうの50音索引+1件1行に変更(旧=書影3列びっしり)= KanaShelf。
+ *  ★同日: 本屋ふうの50音索引(KanaShelf)+ 今月の新刊と同じ行(EditionRow=
+ *    書影105×150を押すとAmazon / 小さい「詳細」で作品ページ)に統一。
  *  「新しい順」も残す(こちらは索引なしの通し表示=時系列が切れないように)。 */
 type Sort = "kana" | "new";
 
@@ -38,30 +38,21 @@ export default function TokusoubanListClient() {
   const works = new Set(rows.map((r) => r.s)).size;
 
   const Row = (e: TksItem) => (
-    <Link
-      href={`/manga/${e.s}`}
-      className="spring-press flex gap-2.5 rounded-lg border border-[var(--color-line)] bg-[var(--color-surface)] p-2 hover:border-[var(--color-accent)]"
-    >
-      <div
-        className="relative w-[52px] shrink-0 overflow-hidden rounded border border-[var(--color-line)] bg-[var(--color-surface-2)]"
-        style={{ aspectRatio: "2 / 3" }}
-      >
-        <CoverImage src={e.c} alt={`${e.t} ${e.l}`} sizes="52px" />
-      </div>
-      <div className="min-w-0 flex-1">
-        <p className="line-clamp-2 text-[12.5px] font-bold leading-snug">{e.t}</p>
-        <p className="mt-0.5 truncate text-[10.5px] text-ink/55">{e.a}</p>
-        <p className="mt-1 flex items-center gap-1.5">
-          <span className="max-w-[60%] shrink-0 truncate rounded bg-[var(--color-accent)] px-1 py-[1px] text-[9.5px] font-bold text-[var(--color-on-accent)]">
-            {e.l}
-          </span>
-          <span className="truncate text-[10.5px] tabular-nums text-ink/60">
-            {e.v ? `${e.v}巻` : "特装"}
-            {e.d ? <span className="text-ink/35"> ・{e.d}年</span> : null}
-          </span>
-        </p>
-      </div>
-    </Link>
+    <EditionRow
+      slug={e.s}
+      title={e.t}
+      authors={e.a}
+      cover={e.c}
+      isbn={e.i}
+      badge={e.l}
+      query={`${e.t} ${e.v ?? ""} ${e.l}`.trim()}
+      meta={
+        <>
+          {e.v ? `${e.v}巻` : "特装"}
+          {e.d ? <span className="text-ink/35"> ・{e.d}年</span> : null}
+        </>
+      }
+    />
   );
 
   return (
@@ -104,6 +95,7 @@ export default function TokusoubanListClient() {
           ))}
         </ul>
       )}
+      <p className="mt-5 text-[10px] text-ink/40">[PR] Amazonリンクにはアフィリエイト広告を含みます</p>
     </div>
   );
 }

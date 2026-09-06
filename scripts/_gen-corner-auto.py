@@ -29,8 +29,8 @@ DAY_RE = re.compile(r"^(\d{4})-(\d{2})-(\d{2})$")
 
 ann = {}   # "MM-DD" -> [{s,t,y,c}]
 dlx = []   # [{s,t,v,l,c}]
-aiz = []   # [{s,t,k,a,e,l,v,sv,c,d}] = 愛蔵版コーナー(合本のみ)
-tks = []   # [{s,t,k,a,v,l,c,d}] = 特装版コーナー(巻のvariant=特装/限定)
+aiz = []   # [{s,t,k,a,e,l,v,sv,c,i,d}] = 愛蔵版コーナー(合本のみ)
+tks = []   # [{s,t,k,a,v,l,c,i,d}] = 特装版コーナー(巻のvariant=特装/限定)
 AIZ_MIN, AIZ_MAX = 0.30, 0.70   # 通常版比の巻数(下限=登録もれ除け / 上限=同数の普通再版除け)
 n = 0
 for p in glob.glob(os.path.join(ROOT, "data", "manga.v2", "*.yml")):
@@ -71,6 +71,7 @@ for p in glob.glob(os.path.join(ROOT, "data", "manga.v2", "*.yml")):
                 continue  # 1巻書影が無いとコーナーの見た目が崩れる
             aiz.append({"s": slug, "t": title, "k": kana, "a": authors, "e": t, "l": e.get("imprint") or "",
                         "v": c, "sv": std_vols, "c": v1["cover_url"],
+                        "i": str(v1.get("isbn13") or ""),   # ★Amazon /dp/ 直リンク用(1巻)
                         "d": str(v1.get("release_date") or "")[:4]})
 
     for e in eds:
@@ -90,6 +91,8 @@ for p in glob.glob(os.path.join(ROOT, "data", "manga.v2", "*.yml")):
                                 "l": vr.get("label") or "特装版", "c": vr["cover_url"]})
                     tks.append({"s": slug, "t": title, "k": kana, "a": authors, "v": v.get("number"),
                                 "l": vr.get("label") or "特装版", "c": vr["cover_url"],
+                                # ★特装版はvariant自身のISBNが正(無ければ元巻)= Amazonで別商品
+                                "i": str(vr.get("isbn13") or v.get("isbn13") or ""),
                                 "d": str(v.get("release_date") or "")[:4]})
 
 # 周年: 各日 古い順cap12(古い=周年数が大きく話題性が高い)

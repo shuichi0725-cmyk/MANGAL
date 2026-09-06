@@ -11,10 +11,10 @@ import CoverImage from "./CoverImage";
  *  ★価格は絶対に表示しない(静的価格=規約違反+誤データ [[feedback-no-static-prices]])。
  *  データ= public/data/aizouban-stock.json / tokusouban-stock.json(_gen-corner-auto.py・週次再生成)。 */
 export type AizItem = {
-  s: string; t: string; k?: string; a?: string; e: string; l: string; v: number; sv: number; c: string; d?: string;
+  s: string; t: string; k?: string; a?: string; e: string; l: string; v: number; sv: number; c: string; i?: string; d?: string;
 };
 export type TksItem = {
-  s: string; t: string; k?: string; a?: string; v: number | null; l: string; c: string; d?: string;
+  s: string; t: string; k?: string; a?: string; v: number | null; l: string; c: string; i?: string; d?: string;
 };
 
 export const TYPE_JA: Record<string, string> = {

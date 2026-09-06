@@ -106,7 +106,7 @@ export default function KanaShelf<T>({ items, kanaOf, keyOf, render, caption }: 
               ↑ 索引
             </a>
           </div>
-          <ul className="mt-2 grid grid-cols-1 gap-x-4 gap-y-2 sm:grid-cols-2 lg:grid-cols-3">
+          <ul className="mt-2 grid grid-cols-1 gap-x-4 gap-y-2 md:grid-cols-2 xl:grid-cols-3">
             {list.map((t) => (
               <li key={keyOf(t)}>{render(t)}</li>
             ))}
