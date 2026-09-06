@@ -102,6 +102,24 @@ slugs=_load_slugs()
 print(f"候補 {len(slugs):,}頁 ({'旧TSV' if '--from-tsv' in sys.argv else '現在の索引 vol_gap'})")
 if LIMIT: slugs=slugs[:LIMIT]
 
+def _edvols(eds):
+    """★版(edition)単位のキーで巻を返す。 索引(_build-list-index.py の vol_gap)は版ごとに
+    穴を見るのに、旧実装は type 単位で複数版を合算していて偽の穴を作っていた
+    (子連れ狼: other が2版[2,3]と[1,9,10,28] → 合算すると 4..8 が欠けて見える)。"""
+    out=[]
+    for i,e in enumerate(eds):
+        t=e.get("type") or "standard"
+        lists=[e.get("volumes") or []]+[vv.get("volumes") or [] for vv in (e.get("versions") or [])]
+        for vs in lists:
+            for v in vs:
+                if v.get("number") is not None: out.append(((t,i), v["number"]))
+    return out
+def _seedkey(tv, tn):
+    """種4/merge partner の (type, number) を、promote と同じ **その型の最初の版** に付ける
+    (promote は by_type[type] の ed_group[0] に append する)。 その型が頁に無ければ新規版扱い。"""
+    t,n = tn if isinstance(tn, tuple) else (tn[0], tn[1])
+    idxs=[k[1] for k,_ in tv if k[0]==t]
+    return ((t, min(idxs) if idxs else -1), n)
 def _no_vol1(by):
     """★頁全体に1巻が無いか(2026-09-06『皆様の玩具です』= standard 4..9 で 1,2,3 欠け)。
 
@@ -126,7 +144,7 @@ def gap_detail(by):
         ns=sorted(ns)
         if len(ns)>=2 and ns[-1]-ns[0]+1>len(ns):
             miss=[n for n in range(ns[0],ns[-1]+1) if n not in ns]
-            out.append((t,miss))
+            out.append(("{}#{}".format(t[0], t[1]) if isinstance(t, tuple) else t, miss))
     if _no_vol1(by) and not out:
         alln=sorted(n for ns in by.values() for n in ns if float(n).is_integer())
         out.append(("(1巻が無い)",list(range(1,int(alln[0])))))
@@ -138,7 +156,7 @@ for slug in slugs:
     p=f"{ROOT}/data/manga.v2/{slug}.yml"
     if not os.path.exists(p): continue
     d=yaml.safe_load(open(p,encoding="utf-8")); eds=d.get("editions") or []
-    tv=[(e.get("type") or "standard",v.get("number")) for e in eds for v in (e.get("volumes") or []) if v.get("number")]
+    tv=_edvols(eds)
     bg,_=has_gap(tv)
     # edition-overrides(奇子型)= 版を完全置換して仮想適用
     # ★editions を持つ entry の時だけ置換する(2026-09-03): edition-overrides には
@@ -146,7 +164,7 @@ for slug in slugs:
     #   頁の巻を全消ししていた(= 仮想適用で穴が開いたように見える偽陽性。監査対象1417作のうち17件が該当)。
     if slug in edov and (edov[slug].get("editions")):
         oeds=edov[slug]["editions"]
-        tv=[(e.get("type") or "standard",v.get("number")) for e in oeds for v in (e.get("volumes") or []) if v.get("number")]
+        tv=_edvols(oeds)
     if bg: before_gap+=1
     # virtual apply
     isbns=[i for i in (norm(v.get("isbn13")) for e in eds for v in (e.get("volumes") or []) if v.get("isbn13")) if i]
@@ -165,7 +183,7 @@ for slug in slugs:
     seen4=set()
     for k in skeys:
         for tn in seed4.get(k,[]):
-            if (k,tn) not in seen4: seen4.add((k,tn)); tv2.append(tn)
+            if (k,tn) not in seen4: seen4.add((k,tn)); tv2.append(_seedkey(tv, tn))
     # merge partners
     groups={key2group[k] for k in skeys if k in key2group}
     partner_keys=set()
@@ -174,9 +192,9 @@ for slug in slugs:
     partner_keys-=skeys
     for k in partner_keys:
         sid=key2sid.get(k)
-        if sid: tv2.extend(sid_typevols(sid))
+        if sid: tv2.extend(_seedkey(tv, tn) for tn in sid_typevols(sid))
         # 種4 on partner keys too
-        for tn in seed4.get(k,[]): tv2.append(tn)
+        for tn in seed4.get(k,[]): tv2.append(_seedkey(tv, tn))
     ag,by2=has_gap(tv2)
     if ag: after_gap+=1; remain.append((slug,d.get("title",""),gap_detail(by2)))
     elif bg: closed.append((slug,d.get("title","")))
