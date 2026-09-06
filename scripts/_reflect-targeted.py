@@ -231,6 +231,13 @@ def main():
     if remove_slugs: idx_data += ["--remove", rem]
     if only or remove_slugs: run(idx_data)
 
+    # 3b. ★コーナーstockの増分更新(2026-09-06 ユーザ発見「さっき消した2巻がコーナーに残ってる」)。
+    #     public/data/{anniversaries,deluxe-stock,aizouban-stock,tokusouban-stock}.json は
+    #     manga.v2 から作る**生成物**なので、per-case修正のたびに古くなる(週次まで直らなかった)。
+    #     --only で該当頁の行だけ差し替える(66k再走査 ~5分 → 数秒)。
+    if only:
+        run([PY, "scripts/_gen-corner-auto.py", "--only", upd])
+
     # 4. preview同期 (changed頁が.preview-dataに在れば新版で上書き) + preview索引
     #    ★内部slug≠SRC名の罠対応: preview側ファイル名はSRC名/内部slug名の両方があり得る→両方試す
     pv_changed = []
@@ -265,7 +272,11 @@ def main():
         run(["git", "add", ".preview-data", "data/manga-catch-index.json", "data/seeds",
              "data/slug-aliases.yml", "public/_redirects",
              "data/manga-alt-index.json", "data/manga-list-head.json",
-             "data/manga-list-index.json"])
+             "data/manga-list-index.json",
+             # ★コーナーstock(3b で増分更新した生成物)も必ずadd。addし忘れると本番/previewに
+             #   古いstockが出続ける(2026-09-06 特装版コーナーに削除済みの巻が残っていた)。
+             "public/data/anniversaries.json", "public/data/deluxe-stock.json",
+             "public/data/aizouban-stock.json", "public/data/tokusouban-stock.json"])
         run(["git", "commit", "-q", "-m", a.msg])
         if a.push:
             run(["git", "push"])

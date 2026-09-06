@@ -14,7 +14,7 @@
   ★「◯◯デラックス」レーベル名だけの版(KCデラックス等=中身は普通の単行本)は①で自動的に落ちる。
 週次再生成対象(カレンダー/stock JSONと同じstale生成物クラス)。
 """
-import glob, json, os, re, sys
+import argparse, glob, json, os, re, sys
 sys.stdout.reconfigure(encoding="utf-8")
 import yaml
 try:
@@ -27,13 +27,26 @@ OUTD = os.path.join(ROOT, "public", "data")
 os.makedirs(OUTD, exist_ok=True)
 DAY_RE = re.compile(r"^(\d{4})-(\d{2})-(\d{2})$")
 
+TOUCHED = set()   # --only 時に触った公開slug(既存JSONから当該行を除いて差し替える)
 ann = {}   # "MM-DD" -> [{s,t,y,c}]
 dlx = []   # [{s,t,v,l,c}]
 aiz = []   # [{s,t,k,a,e,l,v,sv,c,i,d}] = 愛蔵版コーナー(合本のみ)
 tks = []   # [{s,t,k,a,v,l,c,i,d}] = 特装版コーナー(巻のvariant=特装/限定)
 AIZ_MIN, AIZ_MAX = 0.30, 0.70   # 通常版比の巻数(下限=登録もれ除け / 上限=同数の普通再版除け)
+
+# ★--only(2026-09-06 ユーザ発見「さっき消した2巻がコーナーに残ってる」): per-case修正のあと
+#   66k再走査(~5分)をせずに、その頁の分だけ既存JSONへ差し替える。reflect(targeted)から呼ぶ。
+_ap = argparse.ArgumentParser()
+_ap.add_argument("--only", default="", help="このstem(manga.v2のファイル名)だけ再計算し既存JSONへ差替")
+_A = _ap.parse_args()
+ONLY = [x.strip() for x in _A.only.split(",") if x.strip()]
+
+_files = ([os.path.join(ROOT, "data", "manga.v2", x + ".yml") for x in ONLY] if ONLY
+          else sorted(glob.glob(os.path.join(ROOT, "data", "manga.v2", "*.yml"))))
 n = 0
-for p in glob.glob(os.path.join(ROOT, "data", "manga.v2", "*.yml")):
+for p in _files:
+    if ONLY and not os.path.exists(p):
+        continue
     n += 1
     try:
         d = yaml.load(open(p, encoding="utf-8"), Loader=L)
@@ -43,6 +56,7 @@ for p in glob.glob(os.path.join(ROOT, "data", "manga.v2", "*.yml")):
         continue
     slug = d.get("slug") or os.path.basename(p)[:-4]
     title = d.get("title") or ""
+    TOUCHED.add(slug)
     kana = d.get("title_kana") or ""   # ★一覧頁の50音順に使う(lib/listSort と同じキー)
     authors = "・".join(a.get("name") or "" for a in (d.get("authors") or []) if a.get("name"))
     eds = d.get("editions") or []
@@ -94,6 +108,23 @@ for p in glob.glob(os.path.join(ROOT, "data", "manga.v2", "*.yml")):
                                 # ★特装版はvariant自身のISBNが正(無ければ元巻)= Amazonで別商品
                                 "i": str(vr.get("isbn13") or v.get("isbn13") or ""),
                                 "d": str(v.get("release_date") or "")[:4]})
+
+def _load(name, default):
+    try:
+        return json.load(open(os.path.join(OUTD, name), encoding="utf-8"))
+    except Exception:
+        return default
+
+
+if ONLY:
+    # ★既存JSONから触った頁の行を落として、今回の計算結果を差し込む(全体の並びは保つ)
+    _old_ann = _load("anniversaries.json", {})
+    for _k, _v in _old_ann.items():
+        keep = [x for x in _v if x["s"] not in TOUCHED]
+        ann[_k] = keep + [x for x in ann.get(_k, []) if x["s"] in TOUCHED]
+    dlx = [x for x in _load("deluxe-stock.json", []) if x["s"] not in TOUCHED] + dlx
+    aiz = [x for x in _load("aizouban-stock.json", []) if x["s"] not in TOUCHED] + aiz
+    tks = [x for x in _load("tokusouban-stock.json", []) if x["s"] not in TOUCHED] + tks
 
 # 周年: 各日 古い順cap12(古い=周年数が大きく話題性が高い)
 for k in ann:
