@@ -62,6 +62,7 @@
 - [【✅】Kindleはブラウザで開く=解決](kindle_link_browser_not_app.md)
 - [MADBに完全版/新装版ほぼ無し](madb_missing_reprint_editions.md) — 補完=楽天題検索→種4 ／ [巻補完=NDL title検索が強い](ndl_volume_completion_better_than_rakuten.md)
 - [蒸留定期運転の実態(2026-06調査=歴史)](monthly_intake_reality.md) — 未実装/再fetchの記述は解消済 ／ [2026-08 月次蒸留 MADB1.2.19=完了](distill_2026_08_1219.md) — 保留54/数値ペンネーム罠 ／ [2026-07 月次蒸留 MADB1.2.18](distill_2026_07_1218.md)
+- [【裁定・preview投入済】愛蔵版コーナー=豪華本は版種名でなく「通常版比の巻数圧縮」で決める](aizouban_corner_compression_rule.md) — 385版/350作品・旧「特装版・限定版」を置換・本番GO待ち
 - [三世代/今週ストック未配線](sansedai_featured_stock_state.md) ／ [今日の一冊 過去ログ=凍結ログが正](sansedai_archive_frozen_log.md) — 純粋追記 ／ [日替わり特集コーナー(/tokushu)](daily_feature_corner.md)
 - [【計画】書影harvest3段](cover_harvest_plan.md) ／ [楽天書影資産(noimage罠)](rakuten_cover_data_asset.md) ／ [書影=アフィ元画像のみ](cover_source_affiliate_only.md) — NDL不可 ／ [【裁定済】Kobo電子書影=注意書きを添えて出す](kobo_cover_wrong_for_old_print.md) ／ [【注意信号】書影の違和感=上流誤りの症状](feedback_cover_oddity_signal.md) ／ [【型・是正済】書影の黒い斑点=透過GIF×ダーク背景](cover_transparent_gif_dark_bg.md) — 楽天では正常に見えるので上流を疑うと外す
 - [【戒め】再グルーピング誤り繰り返すな](feedback_dont_repeat_regrouping_error.md)

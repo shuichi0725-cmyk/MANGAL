@@ -1,0 +1,30 @@
+---
+name: aizouban-corner-compression-rule
+description: 【裁定・preview投入済】豪華本の判定は版種名でなく「通常版比の巻数圧縮」。愛蔵版コーナー(385版/350作品)が旧「特装版・限定版」を置換
+metadata: 
+  node_type: memory
+  type: feedback
+  originSessionId: fa3eed2c-bf86-4ffe-b701-6b416a249bdb
+  modified: 2026-09-06T01:10:36.990Z
+---
+
+★**「新装版は冊数が通常版と一緒ならだめ。普通という意味」**(2026-09-06 ユーザ裁定)。
+豪華本かどうかは**版種名では決まらない**。合本されて冊数が減っているかどうかで決まる。
+
+- 実装 = `scripts/_gen-corner-auto.py` が `public/data/aizouban-stock.json` を生成(周年/旧豪華版と同じ66k走査の1パス)。
+  ゲート4枚 = ①**通常版比 0.30〜0.70**(同数=普通の再版 / 0.3未満=巻の登録もれ疑い を両方除外)
+  ②巻番号が連番完備 ③1巻に書影 ④成人除外 → **385版/350作品**。
+- ★この数値ゲートだけで「KCデラックス/ジャンプ・コミックスデラックス」等**レーベル名由来のdeluxe 947版が全部落ちる**
+  (名前で除外リストを書く必要が無い)。同様に「愛蔵版コミックス」「ヤングジャンプ愛蔵版」レーベルの
+  新作単行本(=通常版が無く合本の証拠が無い92版)も落ちる。
+- 表示 = `components/AizoubanWeekly.tsx`(週替わり4点・版種バッジ・「全48巻→18巻」・価格は出さない)。
+  ホーム案11/12の `<DeluxeWeekly />` を置換。旧 `DeluxeWeekly.tsx` と `deluxe-stock.json` は温存(1行でrevert可)。
+- ★**並びは生成器が散らす**: slug順で窓4件を切ると旧コーナーは**31%の週が「4点とも同じ作品」**だった。
+  決定的ハッシュ+貪欲入替で同一作品が窓4件に入らないようにしてある(違反0を検算)。
+- 状態: 2026-09-06 preview へ投入済(commit bb9362337、deploy success、chunk 9085に結線確認)。
+  **本番反映はユーザGO待ち**。今週/来週に出る8作品を `.preview-data` に入れてリンク切れ回避済。
+
+**Why:** 版種ラベル(deluxe/aizoban)はMADB由来でレーベル名の混入が多く、名前では豪華本を判別できない。
+巻数の圧縮は書誌事実なので機械で切れる。
+**How to apply:** 「豪華版/愛蔵版/特装」系のコーナーや抽出を作る時は、版種名でなく**通常版比の巻数**を見る。
+[[sansedai_featured_stock_state]] [[imprint_split_arms_type]] [[feedback_no_static_prices]]
