@@ -108,6 +108,9 @@
 - [試し読み裁定=枯れ達成](tameshiyomi_adjudication_state.md)
 - [【裁定・恒久】試し読みURLは構築=BookLive検証は不要](tameshiyomi_url_is_constructed.md) — 規制中は正解巻すら403で検証が成立しない。末尾を本番巻数まで延長し2,528作品/5,448巻を復活・expand柱は退役
 - [【✅】著者名の空白=authorKeyで照合吸収](author_name_space_conventions_conflict.md) — 新規照合は必ずauthorKey経由
+- [【手法】番外巻か資料本かの見分け=NDL題×楽天価格比](method_bangai_vs_shiryouhon.md) — 1.5倍以上は資料本。31件→7件
+- [【進行中】①の裁定=見なおし表72頁中2頁済み](unlisted_volumes_review_state.md) — previewは①セット。残70頁
+- [【戒め】検出器の素の件数は仕事の量ではない](feedback_raw_count_is_not_worklist.md) — 実測で2〜3桁縮む。数字を提案に出す前に中身を割る
 - [【型・検出器】トリニティ15.5型=頁は在るのに巻だけ出ていない](unlisted_volumes_trinity_type.md) — 種2駆動の芯107巻/72頁 + x.5題の直撃41件
 - [【機構】.5の半端巻(番外編)を通す](half_volume_number_mechanism.md) — 番人4か所を揃える。★Zodのint()だけは失敗が「頁が消える」形で出る
 - [【裁定済=出さない】孤児series 45,606は頁化対象でない](orphan_series_promote_is_srcpage_driven.md) — ★改善提案に挙げるな(3回蒸し返した)。98%単巻・多巻は既存頁の分裂/コンビニ本/外国語版
