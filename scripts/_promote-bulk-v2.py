@@ -412,6 +412,27 @@ def get_extra_editions() -> dict:
     return doc.get("extra") or {}
 
 
+# ★版ラベル(= タブ名)を レーベル名 として使わない番人 (2026-09-06)。
+#   seed に imprint が無い時 label で代用する経路が3つ(extra-editions / canonical / compact)在り、
+#   label が「通常版」「愛蔵版」等の**版ラベル**だと imprint にそれが焼かれていた。
+#   実害2つ: ①頁の出版社行が「小学館 / 通常版」と出る(VolumeCoverflow は publisher と imprint を
+#   " / " で連結する。 /shinkan の行にも出る) ②imprint を鍵にする検出器(canonical-imprint-split /
+#   edition-run-split / shu2-unlisted の目安)が **プレースホルダを実在レーベルとして比較**する。
+#   実測 160頁(通常版147 / 愛蔵版11 / 完全版3)。 レーベル名らしい label(「KCデラックス」等)の
+#   代用は従来どおり効かせる = 完全一致の版ラベルだけ弾く(保守的)。
+_LABEL_NOT_IMPRINT = {"通常版", "ワイド版", "文庫版", "完全版", "新装版", "愛蔵版", "デラックス版",
+                      "別版", "コンパクト版", "復刻版"}
+
+
+def _imprint_from_label(imprint, label, fallback=None):
+    """imprint が在ればそれ。 無ければ label で代用するが、 label が版ラベルなら代用しない。"""
+    if imprint:
+        return imprint
+    if label and label not in _LABEL_NOT_IMPRINT:
+        return label
+    return fallback or None
+
+
 def apply_extra_editions(slug: str, editions: list, extra: dict) -> tuple[list, bool]:
     """slug の extra-editions を editions 末尾へ追加。既存ISBNと重複する巻はskip。"""
     xes = extra.get(slug)
@@ -434,7 +455,8 @@ def apply_extra_editions(slug: str, editions: list, extra: dict) -> tuple[list, 
         if vols:
             editions.append({"type": xe.get("type") or "standard", "label": xe.get("label") or "別版",
                              "publisher": xe.get("publisher"),
-                             "imprint": xe.get("imprint") or xe.get("label"), "volumes": vols})
+                             "imprint": _imprint_from_label(xe.get("imprint"), xe.get("label")),
+                             "volumes": vols})
             added = True
     return editions, added
 
@@ -475,8 +497,8 @@ def apply_edition_canonical(slug: str, editions: list, canon: dict) -> list:
     #   =通常版、という頁がある(デラックス・レーベル割れ型)。タブ名は「通常版」のまま
     #   レーベルだけ正しく出したいので、label と imprint を分けられるようにする(opt-in)。
     out.append(mk(s.get("volumes"), s.get("canonical_label") or "通常版", pub,
-                  s.get("canonical_imprint") or s.get("canonical_label")
-                  or (cur_std or {}).get("imprint"), "standard"))
+                  _imprint_from_label(s.get("canonical_imprint"), s.get("canonical_label"),
+                                      (cur_std or {}).get("imprint")), "standard"))
     # ★刷タブ(2026-07-04 うる星復旧): 同冊数の別カバー刷(新装版等)を standard の versions[] に畳む
     #   ([[urusei_version_display_rules]]。 旧 _regroup-versions.py 直接パッチは非durableで消えた→canonical結線)
     if s.get("versions"):
@@ -529,14 +551,16 @@ def apply_edition_canonical(slug: str, editions: list, canon: dict) -> list:
                 out[0]["volumes"] = out[0]["volumes"] + sorted(_tail, key=lambda o: o["number"])
     if s.get("compact_edition"):
         ce = s["compact_edition"]
-        out.append(mk(ce.get("volumes"), ce.get("label") or "コンパクト版", pub, ce.get("label"), "aizoban"))
+        out.append(mk(ce.get("volumes"), ce.get("label") or "コンパクト版", pub,
+                      _imprint_from_label(ce.get("imprint"), ce.get("label")), "aizoban"))
     # ★extra_editions(2026-07-04 激マン型=完全版侵食の版分離用): 任意type/labelの追加版を並べる
     for xe in (s.get("extra_editions") or []):
         # ★imprint は seed に明示があればそれを使う(無ければ従来どおり label で代用)。
         #   label=版タブ名(「文庫版(集英社文庫コミック版)」等)と imprint=レーベル名(「集英社文庫」)は
         #   別物で、label 代用だとタブ名がそのまま奥付レーベルとして出てしまう(2026-08-08 JIN で実踏)。
         out.append(mk(xe.get("volumes"), xe.get("label") or "別版", xe.get("publisher") or pub,
-                      xe.get("imprint") or xe.get("label"), xe.get("type") or "kanzenban"))
+                      _imprint_from_label(xe.get("imprint"), xe.get("label")),
+                      xe.get("type") or "kanzenban"))
     # standard/aizoban 以外の既存版(文庫等)は温存
     # ★suppress_types(2026-07-05 009): canonicalのextraと重複する既存タブを明示除去(opt-in)
     _sup = set(s.get("suppress_types") or [])
@@ -3913,6 +3937,15 @@ def main():
         ) & set(valid_gens)
         if _drv - set(new_yml.get("genres") or []):
             new_yml["genres"] = sorted(set(new_yml.get("genres") or []) | _drv)
+        # ★imprint最終pass(2026-09-06): imprint が **その版自身のタブ名(版ラベル)と同じ** なら落とす。
+        #   種2(MADB)のレーベル欄に「愛蔵版」とだけ入っている行が17件あり、頁の出版社行が
+        #   「講談社 / 愛蔵版」と出ていた(VolumeCoverflow は publisher と imprint を " / " で連結)。
+        #   ★情報がゼロで、しかも imprint を鍵にする検出器がこれを実在レーベルとして比較してしまう。
+        #   seed 側の label 代用は _imprint_from_label で止めてある = ここは種2由来の分の受け皿。
+        for _ce in (new_yml.get("editions") or []):
+            _im, _lb = (_ce.get("imprint") or "").strip(), (_ce.get("label") or "").strip()
+            if _im and _im in _LABEL_NOT_IMPRINT and (_lb == _im or _lb.startswith(_im)):
+                _ce["imprint"] = None
         # ★著者ヨミ最終pass(2026-07-04 join漏れ659名/974頁の根治): どの経路で入った著者でも
         #   kana欠け×seed有りなら充填(冪等)。個別経路のenrich漏れを構造的にカバー
         for _ak in ("authors", "original_authors"):
