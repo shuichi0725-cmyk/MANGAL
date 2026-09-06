@@ -5,7 +5,7 @@ metadata:
   node_type: memory
   type: feedback
   originSessionId: 74b7cb9b-8792-4d9b-a5f5-6e0efb70e9e8
-  modified: 2026-09-04T14:43:56.474Z
+  modified: 2026-09-06T13:28:13.297Z
 ---
 
 skill や CLAUDE.md に書いてある**運用規定が、実際にはコードのどこにも実装されていない**ことがある。
@@ -27,5 +27,18 @@ skillは人が読む手順書なので、実装より先に書かれる/実装�
 - 未実装を見つけたら手作業で埋めず**scriptに焼いてから**進む([[feedback_efficiency_first]] と同じ理由=次回消える)。
 - 逆に、実装を直したら skill 側の記述も更新して「規定だけが残る」状態を作らない。
 
+## ★機構で封鎖した分 (2026-09-06)
+
+同じ型が **月次サニティ**でも起きていた: CLAUDE.md の月次サニティ節に「月次=新規増加を見る」と
+書いた検出器のうち **4本**(`_audit-subtitle-orphan-volume.py` = Sugar&Spice型で適用器まで在る /
+`_furigana-audit.py` / `_anilist-verify-gate.py` / `_audit-seed1-lost.py`)が
+`_monthly-distill.py` の `DETECTORS` に登録されておらず、**一度も回っていなかった**。
+
+→ ★**`scripts/_check-sanity-registry.py`** を新設(節 ⇔ DETECTORS を突合。未登録/実体なしで exit 1。
+`run sanity` の先頭で自動実行)。 回さない理由が在る検出器は script 内 `EXEMPT` に**理由つき**で書く。
+以後「節に書いたのに回らない」は機械が鳴る = grep で確かめる手間が要らない。
+DETECTORS は 25本(既定18 + heavy 7)。
+
 関連: [[daily_distill_hold_not_requeued]](簿に出るのに消化されない型) /
-[[feedback_sanity_check_tool_warnings]](script出力を鵜呑みにしない)
+[[feedback_sanity_check_tool_warnings]](script出力を鵜呑みにしない) /
+[[feedback_raw_count_is_not_worklist]](登録する時は行数を**芯**TSVに向ける)
