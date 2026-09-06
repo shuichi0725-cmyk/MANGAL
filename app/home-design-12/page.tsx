@@ -1,7 +1,7 @@
 import Link from "next/link";
 import FeaturedDaily from "@/components/FeaturedDaily";
 import AnniversaryDaily from "@/components/AnniversaryDaily";
-import DeluxeWeekly from "@/components/DeluxeWeekly";
+import AizoubanWeekly from "@/components/AizoubanWeekly";
 import TimeMachine from "@/components/TimeMachine";
 import DestinyPickMock from "@/components/DestinyPickMock";
 import MonthReleasesClient from "@/components/MonthReleasesClient";
@@ -215,7 +215,7 @@ export default function Design12() {
       <KotobaDaily pool={kotobaPool} />
       <AnniversaryDaily />
       <TimeMachine />
-      <DeluxeWeekly />
+      <AizoubanWeekly />
 
       {trivia.length > 0 && (
         <section className="mt-4 px-4">

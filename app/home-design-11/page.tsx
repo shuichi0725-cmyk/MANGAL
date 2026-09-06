@@ -2,7 +2,7 @@ import Link from "next/link";
 import LikeButtonMock from "@/components/LikeButtonMock";
 import FeaturedDaily from "@/components/FeaturedDaily";
 import AnniversaryDaily from "@/components/AnniversaryDaily";
-import DeluxeWeekly from "@/components/DeluxeWeekly";
+import AizoubanWeekly from "@/components/AizoubanWeekly";
 import TimeMachine from "@/components/TimeMachine";
 import DestinyPickMock from "@/components/DestinyPickMock";
 import MonthReleasesClient from "@/components/MonthReleasesClient";
@@ -140,8 +140,8 @@ export default function Design11() {
       {/* 3.6【新・自動】タイムマシン: N年前の今日発売(全期間カレンダー流用) */}
       <TimeMachine />
 
-      {/* 3.7【新・自動】豪華版: 特装・限定版の週替わりshowcase(価格表示禁止) */}
-      <DeluxeWeekly />
+      {/* 3.7【新・自動】愛蔵版・合本の週替わりshowcase(2026-09-06 旧「特装・限定版」から置換。価格表示禁止) */}
+      <AizoubanWeekly />
 
       {/* 4.【小・新】数字トリビア(2026-08-04 client日替わり化=DailyBits) */}
       {trivia.length > 0 && (
