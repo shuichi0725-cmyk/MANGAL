@@ -3889,6 +3889,7 @@ def main():
                     enrich_author(_a)
         # ★特装版是正 最終pass(standardのみ): special ISBN→通常版差替+variants併存(書影無し補正はskip=空タイル回避)
         _sfm = _special_fix_map()
+        _sef_rewritten = []   # ★置換した巻(下の重複つぶしで使う)= (edition, volume)
         for _ce in (new_yml.get("editions") or []):
             if _ce.get("type") != "standard":
                 continue
@@ -3902,6 +3903,31 @@ def main():
                     _v["release_date"] = _c["normal_date"]
                 _var = _c.get("variant") or {}
                 _v["variants"] = [{k: _var.get(k) for k in ("label", "isbn13", "cover_url", "price")}]
+                _sef_rewritten.append((_ce, _v))
+        # ★★置換で生まれた同ISBN二重巻を潰す(2026-09-06 ユーザ発見「1と2のisbnが一緒」= 保健室の僕ら型)。
+        #   種2が「通常版と特装版を別々の無番号巻(number=0/is_extra)」として持つ作品では、promoteが
+        #   両方を連番に振ってから上の置換が走るため、**同じ本が2巻に化ける**(実測23頁中12頁がこの型)。
+        #   → 置換した巻の新ISBNが同じ版の他の巻と衝突したら、置換した側を落として本物へvariantを寄せる。
+        #   ★落とすのは「置換した行」だけ(元から在る巻は触らない)= ゴルゴ13型の別要因の重複は対象外。
+        for _ce, _v in _sef_rewritten:
+            _vols = _ce.get("volumes") or []
+            if _v not in _vols:
+                continue  # 既に落とした
+            _twin = next((x for x in _vols
+                          if x is not _v and str(x.get("isbn13") or "") == str(_v.get("isbn13") or "")), None)
+            if _twin is None:
+                continue
+            if not _twin.get("variants") and _v.get("variants"):
+                _twin["variants"] = _v["variants"]
+            if not _twin.get("cover_url") and _v.get("cover_url"):
+                _twin["cover_url"] = _v["cover_url"]
+            _nums_before = [x.get("number") for x in _vols]
+            _ce["volumes"] = [x for x in _vols if x is not _v]
+            # 連番が 1..N で完全だった版だけ詰め直す(= 番号は種2の無番号巻から機械導出されたもの)。
+            # 歯抜け/不規則な版は番号を触らない(実在の巻番号かもしれないため)。
+            if _nums_before == list(range(1, len(_nums_before) + 1)):
+                for _i, _x in enumerate(_ce["volumes"], 1):
+                    _x["number"] = _i
         # ★通常版が既に主枠の巻にも特装variantを添付(2026-07-03拡張: 落語心中/ろこどる型)
         _sbn = _special_by_normal()
         for _ce in (new_yml.get("editions") or []):
