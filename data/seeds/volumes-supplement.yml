@@ -45156,3 +45156,92 @@ volumes:
   source: ndl+rakuten
   added_at: '2026-09-06'
   note: 'ユーザ裁定「のせてok」(2026-09-06)。NDL by-ISBN で volume=15.5 / dc:title=トリニティセブン : 七人の魔道士と日常風景 / ヨミ=トリニティ セブン : セブン メイガス ト デイリー ライフ / creator=サイトウケンジ(原作)・奈央晃徳(作画) / 叢書=ドラゴンコミックスエイジ な-3-2-5 を確認。楽天=2017年01月07日・682円・書影有。★ja.wikipediaの書誌情報には載っていない巻。種2では別クラスタ(qid:Q11444957|name:トリニティセブン)に number=15 で入り本編15巻と衝突するため本編頁に出ていなかった。'
+# ★x.5 の番外巻 7件(2026-09-06)。 検出= _audit-shu2-unlisted-volumes.py の第2パス(half-volume-candidates.tsv)。
+#   ★裁定の型: NDL by-ISBN で題を確認(公式ファンブック/ガイドブック/イラスト集/調査報告書は非掲載)し、
+#   残りを **楽天価格が通常巻の何倍か** で切った。 資料本は1.5倍以上に出る(青春×機関銃7.5=1.50 /
+#   不機嫌なモノノケ庵6.5=1.50 / 恋愛ラボ8.5=1.66 は除外)。 下の7件は 0.76〜1.00 = 通常巻と同水準。
+#   imprint は頁の既存standard版に合わせる(合わせないと promote が幻の版を作る)。
+- series_keys:
+  - 'qid:Q11578427|name:30禁'
+  number: 5.5
+  isbn13: '9784098711192'
+  release_date: '2020-08-07'
+  publisher: '小学館'
+  imprint: 'プチコミックフラワーコミックスα'
+  edition_type: standard
+  title_display: '30禁 5.5'
+  source: ndl+rakuten
+  added_at: '2026-09-06'
+  note: 'NDL題「30禁」vol=5.5。楽天caption=「愛を育む年の差夫婦の日常番外編、志乃と有川の過去番外編のほか…」= 番外編漫画。価格499円=通常巻中央値499円と同額(比1.00)'
+- series_keys:
+  - 'qid:Q42899689|name:アカメが斬る!'
+  number: 1.5
+  isbn13: '9784757555662'
+  release_date: '2017-12-25'
+  publisher: 'スクウェア・エニックス'
+  imprint: 'GANGAN COMICS JOKER'
+  edition_type: standard
+  title_display: 'アカメが斬る! 1.5'
+  source: ndl+rakuten
+  added_at: '2026-09-06'
+  note: 'NDL題「アカメが斬る!」vol=1.5・160p。楽天caption=「知られざる彼らの活躍を描く短編集と、本編のその後を描くエピローグを収録」= 漫画。618円/通常巻628円(比0.98)'
+- series_keys:
+  - 'qid:Q11431308|name:兄に愛されすぎて困ってます'
+  number: 4.5
+  isbn13: '9784091388193'
+  release_date: '2016-12-26'
+  publisher: '小学館'
+  imprint: 'Sho-Comiフラワーコミックス'
+  edition_type: standard
+  title_display: '兄に愛されすぎて困ってます 4.5'
+  source: ndl+rakuten
+  added_at: '2026-09-06'
+  note: 'NDL題「兄に愛されすぎて困ってます」vol=4.5・155p。楽天caption=「コミックス未収録の番外編を集めた初サイドストーリー集」= 漫画。471円/通常巻471円(比1.00)'
+- series_keys:
+  - 'qid:Q11355017|name:ろんぐらいだぁす!'
+  number: 6.5
+  isbn13: '9784758065863'
+  release_date: '2016-05-27'
+  publisher: 'KADOKAWA'
+  imprint: '単行本コミックス'
+  edition_type: standard
+  title_display: 'ろんぐらいだぁす! 6.5'
+  source: ndl+rakuten
+  added_at: '2026-09-06'
+  note: 'NDL題「ろんぐらいだぁす!」vol=6.5・128p(REX COMICS 2016)。631円/通常巻699円(比0.90)= 通常巻と同水準。★新装版 9784048994651(2020・KADOKAWA)は同じ6.5だが caption が「販促用描き下ろし+ツーリングガイド出張版+イラストラフ」= 資料寄り かつ 番号重複になるので採らない'
+- series_keys:
+  - 'name:ぴい|name:過剰妄想少年'
+  number: 2.5
+  isbn13: '9784865895308'
+  release_date: '2018-12-22'
+  publisher: 'ふゅーじょんぷろだくと'
+  imprint: 'Baby comics'
+  edition_type: standard
+  title_display: '過剰妄想少年 2.5'
+  source: ndl+rakuten
+  added_at: '2026-09-06'
+  note: 'NDL題「過剰妄想少年」vol=2.5巻・126p。742円/通常巻756円(比0.98)= 通常巻と同水準。NDL題に資料本の語なし'
+- series_keys:
+  - 'qid:Q11368952|name:モテキ'
+  number: 4.5
+  isbn13: '9784063523270'
+  release_date: '2010-09'
+  publisher: '講談社'
+  imprint: 'イブニングKC'
+  edition_type: standard
+  title_display: 'モテキ 4.5'
+  source: ndl+rakuten
+  added_at: '2026-09-06'
+  note: 'NDL題「モテキ」vol=4.5・127p。502円/通常巻660円(比0.76)= 通常巻と同水準。NDL題に資料本の語なし'
+- series_keys:
+  - 'qid:Q3045424|name:範馬刃牙'
+  number: 10.5
+  isbn13: '9784253209823'
+  release_date: '2008-01'
+  publisher: '秋田書店'
+  imprint: '少年チャンピオン・コミックス'
+  edition_type: standard
+  title_display: '範馬刃牙 10.5 ピクル'
+  source: ndl+rakuten
+  added_at: '2026-09-06'
+  note: '楽天題「範馬刃牙（10．5）」少年チャンピオンコミックス・460円(通常巻499円=比0.92)。NDL題は「ピクル」だが単独頁は本番に無い(『ピクルス街異聞』は別作者の別作品)= 範馬刃牙の番外巻として本編頁に置く'
