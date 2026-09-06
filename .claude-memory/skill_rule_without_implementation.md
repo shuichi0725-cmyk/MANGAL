@@ -39,6 +39,10 @@ skillは人が読む手順書なので、実装より先に書かれる/実装�
 以後「節に書いたのに回らない」は機械が鳴る = grep で確かめる手間が要らない。
 DETECTORS は 25本(既定18 + heavy 7)。
 
+★同日、 検出器カタログの**本文**を `docs/monthly-sanity-detectors.md` へ逃がした(CLAUDE.md の 39.7% = 17,404字を占めており毎セッション読む必要が無い)。 CLAUDE.md 側は**29行の索引表**。
+番人はこれに合わせて **3点突合**(索引=CLAUDE.md ⇔ 本文=docs ⇔ DETECTORS)になった。
+★**新しい型を足す時は 本文・索引・DETECTORS の3つを揃える**(揃わないと番人が exit 1 で鳴る)。
+
 関連: [[daily_distill_hold_not_requeued]](簿に出るのに消化されない型) /
 [[feedback_sanity_check_tool_warnings]](script出力を鵜呑みにしない) /
 [[feedback_raw_count_is_not_worklist]](登録する時は行数を**芯**TSVに向ける)

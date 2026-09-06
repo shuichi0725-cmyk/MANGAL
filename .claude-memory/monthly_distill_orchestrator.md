@@ -12,7 +12,7 @@ metadata:
 MADB 最新 = 1.2.19(2026-08-21 公開)= 取込済なので実蒸留はせず、**手順の一括化+罠つぶし+リハーサル(検算)**を行った。
 
 ## 正本
-- 手順 = `.claude/skills/monthly-distill/SKILL.md`(全面改訂・1本道の runbook)。原則/abort = CLAUDE.md「月次蒸留 protocol」(Phase0/1/2 を script 実体に合わせて改訂・旧 AI fill batch/select-supplement-diff/db.sqlite の記述を除去)。
+- 手順 = `.claude/skills/monthly-distill/SKILL.md`(全面改訂・1本道の runbook)。原則/abort = CLAUDE.md「月次蒸留 protocol」(★2026-09-06 に Phase0/1/2 手順・保護策5層・報告形式は skill へ寄せ、CLAUDE.md は原則と abort だけになった)(Phase0/1/2 を script 実体に合わせて改訂・旧 AI fill batch/select-supplement-diff/db.sqlite の記述を除去)。
 - 実体 = **`scripts/_monthly-distill.py`**: `status` / `phase1 [--tag] [--rehearsal] [--force]` / `phase2 --tag --go "<発話>"` / `run intake|anilist|sanity|custom -- …`(デタッチ起動・ログ末尾 `EXIT=n`・二重起動ガード) / `sanity [--heavy]`(read-only 検出器20本=heavy 3含む+前回比Δ) / `promote-made` / `seed1-diff` / `anilist-seq`。
 - マーカー2本 = `.cache/madb-last-release.txt` と git 追跡 `data/madb-intake-state.yml`(phase2 が両方書く。1.2.16 のまま陳腐化していたのを 1.2.19+履歴に更新)。台帳 = `data/madb-distill-ledger.jsonl`(純追記)。
 
