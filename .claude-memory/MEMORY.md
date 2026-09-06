@@ -69,6 +69,7 @@
 - [【最難関】奇子型=版違い混在](edition_mix_same_author_ayako.md) ／ [奇子型の経験則検出](kiko_multiedition_mixing_heuristic.md) ／ [版混在恒久是正=edition-canonical](edition_canonical_mechanism.md) ／ [アオアシ型=原版+ジュニア版再版](edition_dedup_aoashi.md)
 - [【型】ARMS型=レーベル表記ゆれ版分裂](imprint_split_arms_type.md) — 検出器あり ／ [【型】ARMSワイド版型=刊行run分裂(57頁適用済)](edition_run_split_arms_wide_type.md) — 真因3層(種4のedition_type既定値が幻の版)
 - [【残228頁】同type合流で別出版社の版が消える](edition_typemerge_hides_volumes.md) — 検出器あり
+- [【型・是正済】保健室の僕ら型=特装版パスの置換で同ISBN二重巻](isbn_dup_special_edition_pass.md) — promoteに衝突つぶし結線・12頁是正・検出器あり・残11頁は別要因
 - [ISBN/巻数是正の進捗](data_quality_cleanup_state.md) — 多数決・可逆・dry-run必須 ／ [【進行中】ISBNダブリ潰し](isbn_dup_cleanup_state.md) — 残250群 ／ [【残】巻番号残40件](volnum_remaining_merge_collection.md)
 - [巻出力監査検出器](audit_volume_output_detector.md) ／ [【残務】広域監査修正queue](audit_fix_queue_post_kobo.md)
 - [アンソロジー統合状態](anthology_consolidation_state.md) — promote結線未実装
