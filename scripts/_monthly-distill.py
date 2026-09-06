@@ -709,6 +709,11 @@ DETECTORS = [
     ("orphan-new-series", ["_audit-orphan-new-series.py", "--rebuild"], "orphan-new-series-core.tsv", False),
     # ★頁は在るのに巻だけ出ていない層(トリニティセブン15.5型)。 行数は芯(MISSING×強照合)を見る。
     ("shu2-unlisted-volumes", ["_audit-shu2-unlisted-volumes.py"], "shu2-unlisted-volumes-core.tsv", False),
+    # ★版タブ先頭欠け層(鉄腕アトム型 2026-09-07): 版が途中巻から始まり頁が分裂して見える。
+    #   増えたら --emit-targets → 充填チェーン(_volgap-local-fill-v2 → adjudicate → apply-fill)へ。
+    ("edition-lead-gap", ["_audit-edition-lead-gap.py"], "edition-lead-gap.tsv", False),
+    # ★漫画内分裂層(2026-09-07): 1本の刊行runが同一頁の版タブに割れている。★自動統合禁止。
+    ("intra-page-run-split", ["_audit-intra-page-run-split.py"], "intra-page-run-split.tsv", False),
     ("edition-canonical", ["_check-edition-canonical.py"], None, False),
     ("year-suffix-dup", ["_audit-year-suffix-dup.py"], "year-suffix-dup.tsv", False),
     ("canonical-imprint-split", ["_audit-canonical-imprint-split.py"], "canonical-imprint-split.tsv", False),

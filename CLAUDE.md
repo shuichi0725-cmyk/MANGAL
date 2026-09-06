@@ -94,6 +94,8 @@
 | 26 | 刊行run分裂層 (ARMSワイド版型・名前非依存) | `scripts/_audit-edition-run-split.py` | edition-run-split.tsv | tierA/B の新規 (★自動統合禁止・反証役を別に立てる) |
 | 27 | 楽天題が「親題+巻番号」を名乗る未掲載巻層 (Sugar&Spice型) | `scripts/_audit-subtitle-orphan-volume.py` | -core.tsv (★芯) / overrides-frozen-tail.tsv | 芯の新規増加 + 第2部(overrides固定頁)の連載中頁。 適用 = `scripts/_apply-subtitle-orphan-volume.py` |
 | 28 | 発売日ドリフト層 (すてごろブッチ型) | `scripts/_audit-preorder-date-drift.py` | preorder-date-drift.tsv / -review.tsv | ★**日次蒸留で回す**(skill daily-distill 手順10.6)= 月次サニティでは回さない |
+| 29 | 版タブ先頭欠け層 (鉄腕アトム型) | `scripts/_audit-edition-lead-gap.py` | edition-lead-gap.tsv | 版が途中巻から始まり頁が分裂して見える。 `--emit-targets` で充填ターゲット |
+| 30 | 漫画内分裂層 (刊行runが同一頁で割れる) | `scripts/_audit-intra-page-run-split.py` | intra-page-run-split.tsv | 重なり<=2冊かつ<=20%のペア (★自動統合禁止・AKIRA型の正当な別版は除外済) |
 
 - 既知の例外型: 再登録の別 ID 二重化 / MADB 形式変更 (= タグ消失・年→巻番号) / 成年誤 flag (= 新レーベル未カバー) / 雑誌漏れ (= cm105 凍結) / 巻番号水増し (= 下=3型)。
 

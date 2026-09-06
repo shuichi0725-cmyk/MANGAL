@@ -5,6 +5,7 @@
 - [【型・是正済】俺の空=4作品が1頁に同居→3頁分割](oresora_4way_split.md)
 - [【是正済】巻抜け検出の穴2つ=先頭欠け見逃し+入力TSV凍結](volgap_leading_gap_and_frozen_input.md)
 - [【戒め】裁定表は生成器から出す+鮮度を見る](worklist_needs_generator_and_freshness.md) — 「書き手0本」はgrepで判定不可(動的名) — 256→505頁。入力は索引のvol_gapフラグへ
+- [【型・検出器#29】鉄腕アトム型=版タブ先頭欠けが「漫画内分裂」に見える](edition_lead_gap_atom_type.md) — 統合でなく充填が正解
 - [【機構】巻抜け充填3段=楽天ローカル→NDL→under-merge結線](volgap_fill_pipeline_2026_09.md) — 決定打はISBN連番ゲート・128巻補完 ／ [【型・封鎖済】刊行run分裂頁に巻を足すと二重表示](volgap_edition_split_double_add.md)
 - [【裁定・恒久】巻抜けはISBN無し版の穴を数えない](volgap_skip_isbnless_edition.md) — ISBN以前は確認も充填も不可・446→394頁
 - [【是正済】巻抜け仮想のgap判定=索引と同じ版単位に](volgap_virtual_edition_unit.md) — 旧はtype単位で複数版を合算
