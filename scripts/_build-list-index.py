@@ -127,6 +127,17 @@ def cover_of(d):
 #   別クエリ付き(?)だけ例外でフル保持。
 _RK_PRE = "https://thumbnail.image.rakuten.co.jp/@0_mall/"
 _RK_SUF = "?_ex=200x200"
+def _card_vol_count(e):
+    """版の「巻数」= volumes の数。 ただし小数番号(15.5 等の番外編)は数えない。"""
+    n = 0
+    for v in (e.get("volumes") or []):
+        num = v.get("number")
+        if isinstance(num, float) and not float(num).is_integer():
+            continue
+        n += 1
+    return n
+
+
 def slim_cover(c):
     if not c or not c.startswith(_RK_PRE):
         return c
@@ -177,7 +188,10 @@ for f in _files:
     if not eds or any(not (e.get("volumes") or []) for e in eds):
         skipped += 1; continue
     tv = sum(len(e.get("volumes") or []) for e in eds)
-    maxev = max((len(e.get("volumes") or []) for e in eds), default=0)
+    # ★カードの「全N巻」= 最大単一版の巻数。 小数巻(= 番外編。 トリニティセブン
+    #   『七人の魔道士と日常風景 15.5』型)は本編の巻数に数えない
+    #   (数えると 34巻の作品が『全35巻』と出て事実と食い違う)。 番号が無い巻は従来どおり数える。
+    maxev = max((_card_vol_count(e) for e in eds), default=0)
     # ★1冊しか無いのに その巻が1巻でない(= 統合失敗/取りこぼしの signal。 おーばーふろぉ[8]型)
     _nums = [v.get("number") for e in eds for v in (e.get("volumes") or []) if v.get("number")]
     solo_nonfirst = tv == 1 and bool(_nums) and _nums[0] != 1

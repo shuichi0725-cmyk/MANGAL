@@ -40,7 +40,13 @@ export type Credit = z.infer<typeof CreditSchema>;
 export const VolumeSchema = z.object({
   // ★0巻は実在する(前日譚の商業化等。可哀想な君は僕だけの甘やかな傷(0)=楽天題も(0)。
   //   2026-07-29: min(1)が0巻頁をビルドskipさせ「索引に居るのに404」の一因になった)
-  number: z.number().int().min(0),
+  // ★.5 の半端巻も実在する(番外編。トリニティセブン『七人の魔道士と日常風景 15.5』
+  //   9784040721446 = NDL の dcndl:volume も "15.5"。2026-09-06)。int() のままだと
+  //   その頁が丸ごとビルドskip=404になる。.5 以外の小数は誤記なので従来どおり弾く。
+  //   規則は種4 seed lint(_check-seeds.py)と反映ゲート(_reflect-targeted.py)と同一。
+  number: z.number().min(0).refine((n) => Number.isInteger(n * 2), {
+    message: "巻番号は整数か .5 のみ",
+  }),
   /** 巻ラベル (= 「上」「下」「特装版」等、 数字以外の表示文字。 既定 `第${number}巻` を上書きする) */
   volume_label: z.string().optional(),
   /** 巻の個別題 (= 単巻読切の連番シリーズ統合頁で 「副題(著者)」 を巻詳細に表示。 ソーサリアン型) */

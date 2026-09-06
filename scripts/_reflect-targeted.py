@@ -200,7 +200,12 @@ def main():
                 for v in vs:
                     n = v.get("number")
                     # ★0巻は実在する(前日譚の商業化等。可哀想な君は僕だけの甘やかな傷(0)=楽天題も(0) 2026-07-28実踏)
-                    if not (isinstance(n, int) and n >= 0):
+                    # ★.5 の半端巻も実在する(番外編。 トリニティセブン『七人の魔道士と日常風景 15.5』
+                    #   9784040721446 = NDL dcndl:volume も "15.5" 2026-09-06実踏)。
+                    #   規則は種4 seed lint(_check-seeds.py)と同一 = .5 以外の小数は誤記として弾く。
+                    if not ((isinstance(n, int) and n >= 0) or
+                            (isinstance(n, float) and n >= 0 and (n * 2) == int(n * 2)
+                             and not float(n).is_integer())):
                         _errs.append(f"{st}: 不正number={n!r}")
                     rd = v.get("release_date")
                     if rd is not None and not _DATE.match(str(rd)):

@@ -45143,3 +45143,16 @@ volumes:
   source: ndl
   added_at: '2026-09-06'
   note: '頁内ISBN重複の是正で1巻行を除去した後の正データ。旧行は4巻のISBN(9784434377327)を持つ誤補完だった。NDL creator=由依子で確定= 9784434305009 / 2022.9 / 彗星社 Glanz BLcomics(1巻は題に巻番号が無いためNDLの巻欄は空)'
+- series_keys:
+  - 'qid:Q11444957|name:トリニティセブン 7人の魔書使い'
+  - 'qid:Q11444957|name:トリニティセブン'
+  qid: 'Q11444957'
+  number: 15.5
+  isbn13: '9784040721446'
+  release_date: '2017-01-07'
+  publisher: 'KADOKAWA'
+  edition_type: standard
+  title_display: 'トリニティセブン 七人の魔道士と日常風景 15.5'
+  source: ndl+rakuten
+  added_at: '2026-09-06'
+  note: 'ユーザ裁定「のせてok」(2026-09-06)。NDL by-ISBN で volume=15.5 / dc:title=トリニティセブン : 七人の魔道士と日常風景 / ヨミ=トリニティ セブン : セブン メイガス ト デイリー ライフ / creator=サイトウケンジ(原作)・奈央晃徳(作画) / 叢書=ドラゴンコミックスエイジ な-3-2-5 を確認。楽天=2017年01月07日・682円・書影有。★ja.wikipediaの書誌情報には載っていない巻。種2では別クラスタ(qid:Q11444957|name:トリニティセブン)に number=15 で入り本編15巻と衝突するため本編頁に出ていなかった。'

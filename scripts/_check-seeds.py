@@ -123,7 +123,15 @@ def main() -> None:
             if len(ib) != 13:
                 bad.append(f"#{i} {str(v.get('title_display'))[:20]}: isbn13不正={v.get('isbn13')!r}")
             n = v.get("number")
-            if not (isinstance(n, int) and n >= 0):
+            # ★非負整数 か、 **.5 の半端巻**(= 番外編)のみ許す。
+            #   実例= トリニティセブン『七人の魔道士と日常風景 15.5』(9784040721446)。
+            #   NDL の dcndl:volume も "15.5"、 楽天題も末尾15.5 = 本編15巻と16巻の間に入る番外編。
+            #   promote は number をそのまま運び、 sort は int() で潰すので 15 と 16 の間に着く(実測)。
+            #   ★.5 以外の小数(15.3 等)は誤記なので従来どおり弾く。 小数巻はカードの「全N巻」に
+            #   数えない(_build-list-index.py の _card_vol_count)。
+            _ok_num = (isinstance(n, int) and n >= 0) or (
+                isinstance(n, float) and n >= 0 and (n * 2) == int(n * 2) and not float(n).is_integer())
+            if not _ok_num:
                 bad.append(f"#{i}: number不正={n!r}")
             if not v.get("series_keys"):
                 bad.append(f"#{i}: series_keys空")

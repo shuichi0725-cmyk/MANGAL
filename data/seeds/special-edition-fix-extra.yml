@@ -161,3 +161,16 @@ corrections:
     isbn13: '9784091590992'
     cover_url: null
     price: null
+# ★トリニティセブン 11巻 ブルーレイ付き限定版(2026-09-06 ユーザ裁定「のせてok」)。
+#   ja.wikipedia 書誌情報に記載(ISBN 978-4-04-070350-3 / 2015年3月25日発売)。★種2(db-v2)には不在、
+#   NDLもヒット0(限定版は納本されないことがある)、楽天キャッシュに 4950円・書影あり で実在確認。
+#   通常版11巻(9784040703497)は既に本番に在るので _special_by_normal 経路で variant を添付する。
+- special_isbn: '9784040703503'
+  normal_isbn: '9784040703497'
+  normal_cover: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/3497/9784040703497.jpg?_ex=300x300
+  normal_date: null
+  variant:
+    label: ブルーレイ付き限定版
+    isbn13: '9784040703503'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/3503/9784040703503.jpg?_ex=300x300
+    price: 4950
