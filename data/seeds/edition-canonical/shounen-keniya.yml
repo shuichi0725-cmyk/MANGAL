@@ -4,28 +4,28 @@ canonical_publisher: 不明
 canonical_imprint: サンケイ・ジュニア ブックス
 suppress_types:
 - bunkobon
-source: 'ギャラ型是正 2026-08-17(worksheetのA_SPLIT_WORK?判定だが実体はB型): 通常版タブに2005年MANGA Shop Series・1962-63年の単行本・1976年サンケイ・ジュニア ブックスが混線し、1巻2005-11-03→2巻1962-02-20の43年逆行になっていた。文庫タブも1953-55年サンケイ児童文庫と角川文庫が混在。★主版は**巻が連番で揃い日付も全部ある最古**のサンケイ・ジュニア ブックス(全10巻 1976)とし、他はextra_editionsへ。文庫は suppress_types でサンケイ児童文庫(全13巻 1953-1955。MADBの重複行は巻ごとに最も精度の高い日付へ寄せた)と角川文庫に分けた。★NDL SRU(creator=山川惣治)は2回ともタイムアウトして取得できなかったため、**版元を断定できる材料が無いrunは publisher を不明**にしてある(レーベル名はMADBの記録どおり)。富士見コミックス・アニメ版(1984)はアニメ版のため掲載対象外。★角川文庫の11・12・17巻(9784041547113/120/175)は現行の種2に無く既存の本番頁にだけ載っていた分。ISBNが 404154711/712/717 と巻番号に連番なので巻番号を確定して復帰させた(反映の「消えたISBN」警告で気づいた)。'
+source: 'ギャラ型是正 2026-08-17(worksheetのA_SPLIT_WORK?判定だが実体はB型): 通常版タブに2005年MANGA Shop Series・1962-63年の単行本・1976年サンケイ・ジュニア ブックスが混線し、1巻2005-11-03→2巻1962-02-20の43年逆行になっていた。文庫タブも1953-55年サンケイ児童文庫と角川文庫が混在。★主版は**巻が連番で揃い日付も全部ある最古**のサンケイ・ジュニア ブックス(全10巻 1976)とし、他はextra_editionsへ。文庫は suppress_types でサンケイ児童文庫(全13巻 1953-1955。MADBの重複行は巻ごとに最も精度の高い日付へ寄せた)と角川文庫に分けた。★NDL SRU(creator=山川惣治)は2回ともタイムアウトして取得できなかったため、**版元を断定できる材料が無いrunは publisher を不明**にしてある(レーベル名はMADBの記録どおり)。富士見コミックス・アニメ版(1984)はアニメ版のため掲載対象外。★角川文庫の11・12・17巻(9784041547113/120/175)は現行の種2に無く既存の本番頁にだけ載っていた分。ISBNが 404154711/712/717 と巻番号に連番なので巻番号を確定して復帰させた(反映の「消えたISBN」警告で気づいた)。 / ★2026-09-07 巻抜け充填: ローカル楽天種とNDLで欠番巻を確認し 5 巻を追加(題完全一致+版元+ISBN連番+発売日+著者の5ゲート)'
 volumes:
-  - number: 1
-    release_date: '1976-03-23'
-  - number: 2
-    release_date: '1976-03-24'
-  - number: 3
-    release_date: '1976-04'
-  - number: 4
-    release_date: '1976-04'
-  - number: 5
-    release_date: '1976-05'
-  - number: 6
-    release_date: '1976-05'
-  - number: 7
-    release_date: '1976-06'
-  - number: 8
-    release_date: '1976-06'
-  - number: 9
-    release_date: '1976-07'
-  - number: 10
-    release_date: '1976-07-02'
+- number: 1
+  release_date: '1976-03-23'
+- number: 2
+  release_date: '1976-03-24'
+- number: 3
+  release_date: 1976-04
+- number: 4
+  release_date: 1976-04
+- number: 5
+  release_date: 1976-05
+- number: 6
+  release_date: 1976-05
+- number: 7
+  release_date: 1976-06
+- number: 8
+  release_date: 1976-06
+- number: 9
+  release_date: 1976-07
+- number: 10
+  release_date: '1976-07-02'
 extra_editions:
 - type: other
   label: 単行本(1962-63・版元不明)
@@ -34,9 +34,9 @@ extra_editions:
   - number: 2
     release_date: '1962-02-20'
   - number: 3
-    release_date: '1962-08'
+    release_date: 1962-08
   - number: 5
-    release_date: '1963-01'
+    release_date: 1963-01
   - number: 6
     release_date: '1963-03-30'
 - type: shinsoban
@@ -46,7 +46,7 @@ extra_editions:
   volumes:
   - number: 1
     isbn13: '9784872700657'
-    release_date: '1996-07'
+    release_date: 1996-07
 - type: shinsoban
   label: 復刻版(マンガショップ)
   imprint: マンガショップシリーズ
@@ -99,6 +99,21 @@ extra_editions:
   - number: 5
     isbn13: '9784041547052'
     release_date: null
+  - number: 6
+    isbn13: '9784041547069'
+    release_date: 1983-10
+  - number: 7
+    isbn13: '9784041547076'
+    release_date: 1983-10
+  - number: 8
+    isbn13: '9784041547083'
+    release_date: 1983-09
+  - number: 9
+    isbn13: '9784041547090'
+    release_date: 1983-11
+  - number: 10
+    isbn13: '9784041547106'
+    release_date: 1983-11
   - number: 11
     isbn13: '9784041547113'
     release_date: null
@@ -122,4 +137,4 @@ extra_editions:
     release_date: null
   - number: 18
     isbn13: '9784041547182'
-    release_date: '1984-02'
+    release_date: 1984-02

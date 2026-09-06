@@ -694,16 +694,41 @@ editions:
     isbn13: null
     cover_url: null
     release_date: 1987-03
+  - number: 5
+    asin: null
+    isbn13: '9784197875405'
+    cover_url: null
+    release_date: '1987-02-28'
   - number: 6
     asin: null
     isbn13: null
     cover_url: null
     release_date: '1987-04-01'
+  - number: 8
+    asin: null
+    isbn13: '9784197875436'
+    cover_url: null
+    release_date: '1987-03-20'
   - number: 9
     asin: null
     isbn13: null
     cover_url: null
     release_date: 1987-05
+  - number: 10
+    asin: null
+    isbn13: '9784197875542'
+    cover_url: null
+    release_date: '1987-05-18'
+  - number: 11
+    asin: null
+    isbn13: '9784197875634'
+    cover_url: null
+    release_date: '1987-05-15'
+  - number: 12
+    asin: null
+    isbn13: '9784197875641'
+    cover_url: null
+    release_date: '1987-05-15'
   - number: 13
     asin: null
     isbn13: null
@@ -724,6 +749,21 @@ editions:
     isbn13: null
     cover_url: null
     release_date: 1987-08
+  - number: 18
+    asin: null
+    isbn13: '9784197875924'
+    cover_url: null
+    release_date: '1987-08-13'
+  - number: 19
+    asin: null
+    isbn13: '9784197876020'
+    cover_url: null
+    release_date: '1987-09-14'
+  - number: 20
+    asin: null
+    isbn13: '9784197876037'
+    cover_url: null
+    release_date: '1987-09-14'
   - number: 21
     asin: null
     isbn13: null
@@ -739,6 +779,11 @@ editions:
     isbn13: null
     cover_url: null
     release_date: 1987-12
+  - number: 24
+    asin: null
+    isbn13: '9784197876235'
+    cover_url: null
+    release_date: '1987-11-14'
   - number: 25
     asin: null
     isbn13: null
@@ -932,4 +977,4 @@ tags:
 - name: Shounen
   category: Demographic
   rank: 50
-popularity: 199
+popularity: 211
