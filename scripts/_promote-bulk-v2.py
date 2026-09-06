@@ -3206,6 +3206,19 @@ def build_yml(
                         _ck2 = _norm_isbn(_v["isbn13"])
                         _v["cover_url"] = ((_cov2[_ck2] if _ck2 in _cov2 else _cover_for(_v["isbn13"]))
                                            or None)
+    # ★単独版の deluxe 降格(2026-09-06 ユーザ指摘「BLで、1つしか無いのに"デラックス版"を自称する
+    #   通常版がある」)。実体は **レーベル名**(KCデラックス/ビーボーイコミックスデラックス/
+    #   ジャンプ・コミックスデラックスなど)で、豪華版ではない。版が1本しか無い頁でこれを
+    #   「デラックス版」タブとして出すと、読者は「どこかに通常版がある」と誤解する(実測787頁)。
+    #   ★★必ず isbn-fill の**後**に置く: isbn-fill.json のキーは (edition_type, number) で、
+    #     これらの頁の既存エントリは edition="deluxe" で書かれている。先に降格するとキーが外れて
+    #     **補充済みのISBNが13冊消えた**(2026-09-06 reflectの減少ゲートが検出)。
+    #   ★版が1本だけの時だけ降格する= 何も隠せない(比較対象が無い)ので安全。imprint(実レーベル名)は残す。
+    _eds1 = o.get("editions") or []
+    if len(_eds1) == 1 and _eds1[0].get("type") == "deluxe":
+        _eds1[0]["type"] = "standard"
+        if not _eds1[0].get("label") or _eds1[0].get("label") == "デラックス版":
+            _eds1[0]["label"] = "通常版"
     return o
 
 
