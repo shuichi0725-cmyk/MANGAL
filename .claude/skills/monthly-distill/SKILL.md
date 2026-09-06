@@ -21,6 +21,13 @@ description: 月次蒸留して=MADB取込→intake(フルpromote)→enrich→�
 - 頁化ゲートの保留を手書きの源頁で迂回する
 - 本番R2へ出す(=「週次蒸留して」の領分)
 
+## 保護策(5層)= どれかが鳴ったら止まる
+1. 取込前に `.cache/db-v2.sqlite` → `.bak-distill-<ts>` へ backup(phase2 が自動)
+2. merge は manifest(`merge-manifest-<tag>-<日付>.json` = 挿入id記録)で可逆。マーカー/台帳は**単独 commit**(後で revert 可)
+3. merge は「新series N / 純増volume M / skip内訳」を強制 log し、phase2 が DB 件数の増分と突合(NG=backup から自動復元して停止)
+4. tsc / vitest が以前 green なのに red 転落で abort
+5. 想定外の delete / overwrite 検出で abort(intake 末尾 isbnloss + `_monthly-postflight.py`)
+
 ## 手順(1本道)
 
 ### 0. 最初に必ず(30秒)
@@ -30,6 +37,11 @@ python scripts/_monthly-distill.py status
 - 「★新releaseなし(X = 取込済)」→ **ここで終了**。ユーザに「取込済 X = GitHub最新 X。今回は差分なし。次リリースは毎月17〜22日頃」と報告。
 - マーカー不一致/Phase0 FAIL は**直さず報告**(自動fallback禁止の思想)。job 行に RUNNING があれば前回の続き=そちらを先に見る。
 - `/clear` 後の再開もこのコマンド(成果物の有無から次の一手を出す)。
+- ★**Phase 0(前提確認)の実体 = `python scripts/_monthly-phase0.py`**(phase1 が先頭で自動実行。目視チェックリストで代替しない)。
+  見るもの= 取込済マーカー2本の一致(`.cache/madb-last-release.txt` ⇔ `data/madb-intake-state.yml`) / 種2 `.cache/db-v2.sqlite` /
+  種3 `data/seeds/series-supplement-v2.yml` / 種1 raw(`metadata101.json` + `-clean`(rawより新しい) + `metadata104/504`) /
+  `data/seed/mangaka.csv` / パイプライン script 一式 / **git status clean**(tracked変更が在れば abort。untrackedは警告のみ=`git add -A` 禁止)。
+  exit 1 なら「**対象 X が無いので蒸留できない**」と報告して終了。★自動 fallback / 自動作成はしない。
 
 ### 1. Phase1 = 差分report(★読み取り専用・~5分)
 ```
@@ -81,11 +93,11 @@ python scripts/_monthly-distill.py promote-made         # 作った頁だけ pro
 ### 6. 月次サニティ
 ```
 python scripts/_monthly-distill.py run sanity            # 検出器18本を順に回し前回比Δ(~15分。結果= docs/production-diagnostics/sanity-runs/sanity-<ts>.json=git追跡)
-# ★先頭で登録の番人 `_check-sanity-registry.py` が自動で走る(CLAUDE.md月次サニティ節 ⇔ DETECTORS の突合。差が出たら表示して続行)
+# ★先頭で登録の番人 `_check-sanity-registry.py` が自動で走る(索引=CLAUDE.md ⇔ 本文=docs/monthly-sanity-detectors.md ⇔ DETECTORS の3点突合。差が出たら表示して続行)
 # ★heavy 7本(excerpt-subtitle / edition-mix / author-not-in-volumes / subtitle-orphan-volume / seed1-lost / anilist-verify-gate / furigana)は `--heavy` を付けた時だけ
 python scripts/_monthly-distill.py sanity --heavy        # 楽天キャッシュ走査3本(excerpt-subtitle/edition-mix/author-not-in-volumes)も
 ```
-- Δ>0 の検出器 = 今月増えた型 → CLAUDE.md「月次サニティ監査」節の該当型で裁定。結果JSONと更新されたTSVは commit(次回のΔ基準)。
+- Δ>0 の検出器 = 今月増えた型 → **`docs/monthly-sanity-detectors.md`**(本文=経緯/実測値/是正手順・自動適用してよいか)の該当型で裁定。索引はCLAUDE.md。結果JSONと更新されたTSVは commit(次回のΔ基準)。
 - rc≠0 の読み分け: ①検出器自体の故障(traceback=直してから) / ②「該当あり」を exit 1 で表す検出器= **isbn-loss(理由なし消失あり=裁定・消し込み台帳へ) / price-pack(本番掲載あり=新規増分を裁定) / edition-canonical(異常あり=seedへ追記)**。tail で区別。
 - 2026-09-02 ベースライン実走: 17本 計~15分(title-eq-author 252s・kana-from-other-volume 228s、他は70s以下)。
 - 必ず見る: solo-truncated(頁化した月は新規頁ヒット0) / AUTO_FIXED急増(新誤番号型) / price-pack・vol0-hidden-first の本番掲載増 / edition-canonical NG=0 / isbn-loss 理由なし0 / 表示カタログslug集合diff(git HEAD索引 vs 新索引。消失は全件説明可能)。

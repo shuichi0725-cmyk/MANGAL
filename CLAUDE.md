@@ -28,58 +28,16 @@
 
 ユーザが `月次蒸留して` (= トリガー語、 完全一致) と発話したら、 以下を厳密に実行する。
 
+★**手順の正本 = skill `monthly-distill`** (`.claude/skills/monthly-distill/SKILL.md`)、 実体 = **`scripts/_monthly-distill.py`** (= `status` → `phase1` (読み取り専用) → Go サイン → `phase2 --go` → `run intake` …)。 ★最初に `python scripts/_monthly-distill.py status` を打ち、 「新releaseなし」 なら**何も回さず終了**して報告する (= 最新 = 取込済 tag なら蒸留しても種2は不変)。
+★**ここに残すのは「壊してはいけない原則」と「abort 条件」だけ**。 Phase 0/1/2 の手順・保護策5層・報告形式は **skill が正本**(2026-09-06 に二重管理を解消。 CLAUDE.md 側に古い手順が残って skill と食い違う事故を防ぐ)。
+
 ### 大原則 (= 絶対遵守)
 
 - **種1 / 種2 / 種3 は壊さない**。 差分追加 = **純粋追加 only**、 既存への上書き / 削除 / 編集 は禁止。
 - 上書き / 削除 / 既存破壊が一件でも検出された時点で **即 abort + ユーザ通知**。
-
-★**手順の正本 = skill `monthly-distill`** (`.claude/skills/monthly-distill/SKILL.md`)、 実体 = **`scripts/_monthly-distill.py`** (= 2026-09-02 一括化: `status` → `phase1` (読み取り専用) → Go サイン → `phase2 --go` → `run intake` …)。 ここは原則と abort 条件。 ★最初に `python scripts/_monthly-distill.py status` を打ち、 「新releaseなし」 なら**何も回さず終了**して報告する (= 最新 = 取込済 tag なら蒸留しても種2は不変)。
-
-### Phase 0: 前提確認 (= 1 つでも欠ければ即 abort + ユーザ通知、 実行に進まない)
-
-★実体 = `python scripts/_monthly-phase0.py` (= 2026-07-10 script化。 目視チェックリストで代替しない、 phase1 が先頭で自動実行)。 exit 1 なら 「**対象 X が無いので蒸留できない**」 とユーザに報告して終了。 自動 fallback / 自動作成 はしない。 検査内容:
-
-- `.cache/madb-last-release.txt` (= 前回取込 MADB release tag) と `data/madb-intake-state.yml` (= git追跡バックアップ、 phase2 が両方書く) の**一致**
-- `.cache/db-v2.sqlite` (= ★種2 現行 = 派生 DB。 旧 `db.sqlite` は前世代)
-- `data/seeds/series-supplement-v2.yml` (= ★種3 現行 = AI fill 蓄積。 旧 `-v2`無しは前世代)
-- 種1 raw = `.cache/madb/metadata101.json` (= MADB release zip 由来。 旧表記の cm101.csv は無い) + `metadata101-clean.json` (= raw より新しいこと) + `metadata104.json` / `metadata504.json`
-- `data/seed/mangaka.csv` (= 漫画家マスター、 種1 とは別 input)
-- `scripts/clean-madb-seed.ts` / `_build-series-v2.py` / `_populate-v2.py` / `_distill-incremental-merge.py` / `intake.py` / ★`_monthly-distill.py` (= 実パイプライン。 [[monthly_distill_real_pipeline]]。 旧 `_diff-madb.ts` 等の .ts 差分3種は**廃止済=存在しない**、 チェックするな)
-- `git status` clean (= **tracked の変更**が在れば abort。 untracked は警告のみ・混ぜない= `git add -A` 禁止)
-
-### Phase 1: 差分 report + Go サイン待ち (= ★読み取り専用)
-
-★実体 = `python scripts/_monthly-distill.py phase1` (= db-v2 も正規パス `.cache/madb/metadata101*.json` も**一切書かない**。 成果物は `-<tag>` 名で旧を上書きしない → 何度でも再実行可)。 内容:
-
-1. MADB latest release を GitHub API で取得 (= ★`mediaarts-db/dataset` が正。 旧記載の MADB-Lab-Bot-public は404 = 2026-08-21実踏)。 ★最新 = 取込済 tag なら 「新releaseなし」 で**終了** (= 回さない)
-2. metadata101/504 zip DL → unzip → clean → temp build → **merge dry-run** で各層の差分件数を表示:
-   - 種1: 新ID / 新ISBN / 上流消失 (= 取込には無関係、 情報のみ) / 新 C-id (= 作者)
-   - 種2: 新 series M 件 / 既存 series 追記 / ★純増 volume 件数 (= **merge dry-run が正**。 旧 `_monthly-diff-report.py` / `_distill_delta.py` は生レコード級で過大 = 使わない)
-   - 種3: AI fill = ★**v2 機構では不要** (= kana は頁化時 NDL 確定、 genre/synopsis は enrich 系) → 予想 cost 0
-3. 削除予測 = 0 件 を明示 (= merge は INSERT only 設計。 0 でなければ Phase 2 に進まず別途協議)
-4. script 出力の 「Phase1 差分report」 をそのまま引用して 「**進めて OK？**」 でユーザ確認、 Go サイン (= 「OK」 / 「進めて」 / 「ゴー」 等の明示的肯定) 受領まで Phase 2 に進まない。
-
-### Phase 2: Go サイン後の実行
-
-順序厳守:
-
-1. **種1 + 種2 取込** = `python scripts/_monthly-distill.py phase2 --tag <tag> --go "<Go サイン発話の引用>"`
-   (= dry-run 再計算 → Phase 1 と一致確認 → db-v2 backup → merge --apply (INSERT only) → 件数検証 (= 不一致は backup から**自動復元**) → 正規パス差替 (= 旧は `-<旧tag>` 温存・削除しない) → マーカー2本 + 台帳 `data/madb-distill-ledger.jsonl`。 ★`--go` 無しでは動かない。 終了後にマーカー/台帳を単独 commit + push)
-2. **派生層 + matcher + 本番 再生成** = `python scripts/_monthly-distill.py run intake` (= `intake.py --run` を**デタッチ起動**。 seedlint→volnum→roles→merge→seed4→detect → **matcher v9→v13→v14** → adult_us → enrich → trailing → **foreigndrop** → **promote(adult_us付与)** → durability (edisup/special/volnumoverride/coverfill) → **isbnloss**。 ~2.5h。 ★Bash の timeout で殺さない・完了は `status` の `EXIT=0`。 終了後 git diff で派生 seed / 本番yml を確認 → commit/push)
-3. **enrich** = `python scripts/_monthly-distill.py run anilist` (= AniList フルダンプ ~2.5h、 任意・並走可。 backup → 再取得 → enrich map → status map) / synopsis 和訳 delta = skill `wayaku-enrich`
-4. **取りこぼし頁化** = `_torikoboshi-genpages.py --list` → `--run` (= 最新 merge-manifest 自動、 3ゲート保留は人が裁定) → `_monthly-distill.py promote-made` → preview 確認 → 後始末3点 (= skill 6b/6c)
-5. **月次サニティ** = `python scripts/_monthly-distill.py run sanity` (= 検出器を順に回し前回比 Δ) → Δ>0 の型を裁定
-6. **成功判定** = `python scripts/_monthly-postflight.py` exit 0 → **最終 summary** (= 全件数 + 削除 0 確認 + 次月予測)。 本番 R2 公開は別途 「週次蒸留して」
-
-※ 旧手順の 「種3 diff 元生成 / AI fill batch loop (= 100 entry/batch、 `_apply-fills.ts`)」 は v2 機構で**不要** (= 種3 スキーマ変更時のみ復活)。 en-fill / anilist_id 結線 (= 種3 書込) は deliberate に別途。
-
-### 保護策 (= 5 層)
-
-1. 取込前 `.cache/db-v2.sqlite` を `.cache/db-v2.sqlite.bak-distill-<ts>` に backup (= phase2 が自動。 旧記載の `db.sqlite` は前世代)
-2. 種2 取込 (merge) は manifest (= `merge-manifest-<tag>-<日付>.json`、 挿入 id 記録) で可逆、 マーカー/台帳は **単独 commit** (= 後 revert 可能)
-3. merge は `新series N / 純増volume M / skip 内訳` を強制 log 出力し、 phase2 が DB 件数の増分と突合 (= 旧 `applied=N, missing=0, overwrites=0` 相当)
-4. tsc / vitest が以前緑なのに赤転落で abort
-5. 想定外 delete / overwrite 検出で abort (= intake 末尾 isbnloss + postflight)
+- Phase 0 (前提確認) が 1 つでも欠ければ **即 abort + ユーザ通知**。 自動 fallback / 自動作成 はしない。
+- Phase 1 は **読み取り専用**。 Go サイン (= 「OK」 / 「進めて」 / 「ゴー」 等の明示的肯定) 受領まで Phase 2 に進まない。
+- `phase2` は **`--go "<Go サイン発話の引用>"` 無しでは動かない**。 散文の自己申告で報告を代替しない (= script 出力の数値行を引用する)。
 
 ### Abort 条件 (= 検出したら即停止 + ユーザ通知)
 
@@ -88,96 +46,56 @@
 - typecheck / test の green → red 転落
 - ※ 種1 上流の消失/訂正 (= MADB が過去 ISBN を訂正したケース) は INSERT only 取込に影響しない = 件数を報告するのみ (abort しない)
 
-### 報告形式
-
-- Phase 1 = script の 「差分report」 を引用 → 「進めて OK？」
-- Phase 2 以降 = 各段の script 出力 (= merge 件数検証行 / intake `EXIT=0` / postflight の数値) を引用。 散文の自己申告で代替しない
-- 完了時に累計件数 + 削除 0 + 保留件数 + 次月予測
-
 ---
 
-## 月次蒸留: データ実態と運用補強 (= 2026-06 確定。 詳細は MEMORY.md 各項)
+## 月次蒸留: データ実態 (= 2026-06 確定。 ★本文は記憶に在る、 ここは指し先)
 
-### MADB データ入手 = 2 経路
+- **MADB 入手 = 2 経路**: GitHub 全件 JSON (= 全件 snapshot・`madbdata:dateModified` で変更検知) / MADB サイト月次 CSV (= 登録日基準の差分・未来の発売前予約も載るが更新日列が無い)。 運用 = **全件 re-sync で訂正回収 + 月次差分で新刊 top-up** → [[madb_data_acquisition]]
+- ★**cm104 (シリーズ master) / cm105 (雑誌) / cm103 は 2024-11-25 で凍結**。 更新は **cm101 (巻) + cm504 (作者)** のみ = シリーズ層は空・著者役割は AniList 補完が恒久策で gap は毎月増える → [[madb_cm104_frozen]] [[author_roles_state]]
+- **取込の必須 2 策**: ★MADB-ID で upsert + ISBN/巻番号で dedup (= 冪等) / ★GitHub 全件 JSON の `dateModified` を定期比較して訂正を回収。 危険型 = 「別 MADB-ID + 別 ISBN での再登録」(虚構推理 vol23 型) → 監査で検知
+- **enrich = 毎月の必須ステップ** (= master が埋めないため): AniList 照合 → 著者補完 / synopsis 和訳 / 作品 QID / 種4 trailing 補完。 ★凍結で新作 gap が累積するので**毎蒸留で再フェッチ**
+- ★**synopsis 和訳 = git 追跡 seed** `data/seeds/synopsis-ja.json` (= key は anilist_id。 種3 には焼かない。 純粋追加 only。 手順は skill `wayaku-enrich`) → [[synopsis_ja_seed]]
+- **種4 の自己 retire**: render 時ガード実装済 = 同番号が種2 に在れば種4 を skip (= MADB 追いつき時の二重表示防止・種2 優先)。 退役 hygiene は月次で
 
-- **GitHub 全件 JSON** (`github.com/mediaarts-db/dataset`) = その日までの **全件 snapshot** (= baseline)。 重い・MADB 認知用。 ★`madbdata:dateModified` を持つので **変更検知に使える**。
-- **MADB サイト** (`s-db.artmuseums.go.jp` 詳細検索) = **項目 (cm101/104 等) × 月単位** の CSV (= **登録日基準の差分**)。 軽い・新鮮・★**未来の発売前予約も載る** (= STEP4 末尾検出に直結)。 ただし ★**更新日列が無い** = 修正に気付けない。 列 52・複数著者は `＼＼` 区切り。
-- ★運用: **GitHub 全件を定期 re-sync して訂正を回収 + 月次サイト差分で新刊 top-up**。
+### ★月次サニティ監査 (= silent 例外の安全網) — **索引**
 
-### master 凍結の実態 (= [[madb-cm104-frozen]])
+個別例外を全部予見できない前提で、 ★**取込後に前月差分で異常を機械 flag** する。 実行 = `python scripts/_monthly-distill.py run sanity [--heavy]` (= 前回比 Δ を表で出す)。
+★**本文(各型の経緯・実測値・是正手順・自動適用してよいか) = `docs/monthly-sanity-detectors.md`**。 ここは 1 行索引 (= 不具合報告を受けた時に 「既知の型か / 検出器が既に在るか」 を引く入口)。 [[feedback_one_bug_means_a_class]]
+★**索引 ⇔ 本文 ⇔ `_monthly-distill.py` の DETECTORS は `scripts/_check-sanity-registry.py` が 3 点突合**する (= run sanity の先頭で自動。 節に書いたのに回らない/索引だけ腐る、を機構で封じる)。
 
-- ★**cm104 (シリーズ master) / cm105 (雑誌) / cm103 は 2024-11-25 で凍結**。 最新リリースでも同じ = **再 DL 無駄**。 更新は **cm101 (巻) + cm504 (作者)** のみ。
-- 帰結: 新刊は「マンガ単行本シリーズ」链 **0%** = シリーズ層は空。 ★著者役割 ([原作]/[漫画]) は cm104 にしか無く、 新作は AniList 補完が **恒久策**。 gap は毎月増える。
+| # | 層 (型) | 検出器 | 出力 | 月次で見るもの |
+|---|---|---|---|---|
+| 0 | 登録の番人 | `scripts/_check-sanity-registry.py` | stdout | 未登録・実体なし = **0** |
+| 1 | 被覆の土台 | `scripts/_coverage-audit.py` | stdout | 前月差分で急増した異常 (= 巻番号外れ値・著者ゼロ急増・重複頁・新レーベルの成年カバー率・新雑誌候補・PUA 文字化け・分裂スパイク) |
+| 2 | ISBN消失層 | `scripts/_audit-isbn-loss.py` | isbn-loss.tsv | 理由なく消えたISBN = 0 |
+| 3 | 巻番号層 | `scripts/_audit-volume-numbering.py` | stdout | **AUTO_FIXED の急増** = 新しい誤番号型の signal / MISSING_HALF=種4領域 / GAP_OTHER=真の欠番 |
+| 4 | フリガナ層 | `scripts/_furigana-audit.py` | .cache/furigana-audit-proposed.json | NDL ヨミと食い違う読み (★heavy = NDL live) |
+| 5 | ヨミ取り違え層 (坊っちゃん型) | `scripts/_audit-kana-from-other-volume.py` | kana-from-other-volume.tsv | 新規増加 (当て字注記付き巻題は既知の偽陽性) |
+| 6 | title化け層 (夜明け型) | `scripts/_audit-title-eq-author.py` | title-eq-author.tsv | title==著者名 の新規 |
+| 7 | デラックス・レーベル割れ層 (バーテンダー型) | `scripts/_audit-deluxe-label-split.py` | deluxe-label-split.tsv | SPLIT/DUP の新規 (★PARALLEL は正当2版の可能性= 自動統合禁止) |
+| 8 | 頁内書影重複層 (関東平野型) | `scripts/_audit-cover-dup.py` | cover-dup.tsv | 新規増加 |
+| 9 | 著者誤混入層 (よろしくメカドック型) | `scripts/_audit-author-not-in-volumes.py` | author-not-in-volumes.tsv | 新規増加分 (★自動削除禁止= 原作/スタジオ/解説者が混ざる) |
+| 10 | 版混在層 (ベルサイユのばら型) | `scripts/_audit-edition-mix.py` | edition-mix.tsv | **SERIES高**の新規増加 |
+| 11 | 抜粋本層 (Papa told me型) | `scripts/_audit-excerpt-subtitle.py` | excerpt-subtitle.tsv | 新規増加分だけ (★自動drop禁止= レーベル名のことがある) |
+| 12 | 種1→種2 脱落層 | `scripts/_audit-seed1-lost.py` | seed1-lost.tsv / -groups.tsv | 脱落の新規 (★大半はアンソロジー= 救済は要判断) |
+| 13 | 孤児series層 | `scripts/_audit-orphan-new-series.py` | orphan-new-series-core.tsv (★芯) | ★**芯の直近12か月だけ**。 全件は「出さない」で裁定済み [[orphan_series_promote_is_srcpage_driven]] |
+| 14 | 頁は在るのに巻だけ出ていない層 (トリニティ15.5型) | `scripts/_audit-shu2-unlisted-volumes.py` | -core.tsv (★芯) / half-volume-candidates.tsv | 芯の新規増加。 裁定表は `scripts/_gen-shu2-unlisted-review.py` で作る |
+| 15 | 外国版層 | `scripts/_audit-foreign-editions.py` | stdout | 非9784 の新規流入 (★単巻のみ非9784は報告のみ) |
+| 16 | AniListリンク層 | `scripts/_anilist-verify-gate.py` | .cache/anilist-gate.tsv | FAIL/SUSPECT の新規 |
+| 17 | publisher層 | `scripts/_gen-publisher-keys.py` | stdout | **新規の未キー社名**を巻数順に (★alias追加はISBN出版者記号一致を確認した時だけ) |
+| 18 | 途中巻断片層 | `scripts/_audit-solo-truncated.py` | solo-truncated.tsv | ★**新規頁を作った後は必ず**回す (vol1不在の孤立頁) |
+| 19 | 年サフィックス二重頁層 (HxH型) | `scripts/_audit-year-suffix-dup.py` | year-suffix-dup.tsv | 新規増加 **0** を確認 |
+| 20 | 巻×発売日の大逆行層 (ギャラ型) | `scripts/_audit-vol-date-regression.py` | vol-date-regression.tsv | 新規増加分 |
+| 21 | canonical seed健全性層 | `scripts/_check-edition-canonical.py` | stdout | **NG 0** を確認 (鳴ったら seed へ種2の値で追記 or `open_tail: true`) |
+| 22 | 数字表記揺れ分裂層 (ロザリオとバンパイア型) | `scripts/_audit-numeral-variant-split.py` | numeral-variant-split.tsv | SPLIT/DUP (★SEQ? は続編の正当例が在るので報告のみ) |
+| 23 | 廉価パック/BOX構成員層 (猫と竜型) | `scripts/_audit-price-pack.py` | price-pack.tsv | **本番掲載**の新規増加を裁定 |
+| 24 | number=0 の1巻不可視化層 (泣かせたくてどうしよう型) | `scripts/_audit-vol0-hidden-first.py` | vol0-hidden-first.tsv | HIDDEN_FIX の新規増加 → `--apply` |
+| 25 | レーベル表記ゆれ版分裂層 (ARMS型) | `scripts/_audit-canonical-imprint-split.py` | canonical-imprint-split.tsv | 新規増加分 (★自動統合禁止= 新装版/復刻版が正当に別版のことがある) |
+| 26 | 刊行run分裂層 (ARMSワイド版型・名前非依存) | `scripts/_audit-edition-run-split.py` | edition-run-split.tsv | tierA/B の新規 (★自動統合禁止・反証役を別に立てる) |
+| 27 | 楽天題が「親題+巻番号」を名乗る未掲載巻層 (Sugar&Spice型) | `scripts/_audit-subtitle-orphan-volume.py` | -core.tsv (★芯) / overrides-frozen-tail.tsv | 芯の新規増加 + 第2部(overrides固定頁)の連載中頁。 適用 = `scripts/_apply-subtitle-orphan-volume.py` |
+| 28 | 発売日ドリフト層 (すてごろブッチ型) | `scripts/_audit-preorder-date-drift.py` | preorder-date-drift.tsv / -review.tsv | ★**日次蒸留で回す**(skill daily-distill 手順10.6)= 月次サニティでは回さない |
 
-### 取込の必須 2 策
-
-- ★**重複**: **MADB-ID で upsert** + **ISBN/巻番号で dedup** (= 冪等、 経路が重なっても安全)。 ★危険型 = 「別 MADB-ID + 別 ISBN での再登録」(= 虚構推理 vol23 型) → 別 cluster に落ちると二重ページ。 監査で検知。
-- ★**変更検知**: 月次 CSV は更新日列が無く修正を見逃す → **GitHub 全件 JSON の `madbdata:dateModified` を定期比較**して訂正を回収。
-
-### enrich = 毎月の必須ステップ (= master が埋めないため)
-
-- AniList 照合 → ★**著者補完** (原作/作画分離。 [[author-roles-state]]) / synopsis 和訳 / 作品 QID / 種4 trailing 補完。
-- ★凍結で新作 gap が累積 → **毎蒸留で再フェッチ** (= 一度きりでない)。
-
-#### ★synopsis 和訳 = git 追跡 seed (= 2026-06-02 確定、 永続化の正規ルート)
-
-- **何**: AniList の英語 description を **AI が 60-120字の日本語あらすじに要約**したもの (= 逐語訳でなく要約・言い換え。 著作権配慮)。 key = **anilist_id**(作品単位。 series_key でない)。
-- **どこ**: ★**`data/seeds/synopsis-ja.json`** (= git追跡 seed、 {anilist_id(str): ja} の単純 map)。 旧 `.cache/synopsis-ja-map.json` から移行済 (= .cache は gitignore で消える)。 `_apply-synopsis.py`(純粋追加) と promote(L1280 付近で join) の両方がこの seed を読む。
-- **なぜ seed 化**: ★**synopsis だけが「高価な AI 生成物」**なので種3と同格で git 永続化。 他の enrich (= synonyms/genres/tags/anilist_id/QID) は **dump + match から毎 promote タダで再 join** できるので **git に焼かない**(= 再生成可能なものは永続化しない原則)。 種3 本体には**焼き込まない**(key が series_key で match 変更時に別作品へ貼り付くため + 33MB 巨大編集の freeze 回避 + 種3不変原則)。
-- **蒸留での扱い** (= 純粋追加 only):
-  1. enrich (= match-v14) で新規 anilist_id が増える → `_build-anilist-enrich-map.py`
-  2. ★未訳 delta 抽出: enrich の aid のうち synopsis-ja.json に**未存在 かつ AniList desc 有**を todo 化 (= `.cache/syn-batches/batch-NNN.json` に 100件/batch 分割)
-  3. ★**分散 workflow** で各 batch を AI 要約 → `.cache/syn-out/batch-NNN.json` に書出 (= 中断耐性)
-  4. 全 syn-out を merge → `_apply-synopsis.py` で `data/seeds/synopsis-ja.json` へ**純粋追加**(新規 N / 上書き 0 を確認)
-  5. ★**commit + push**(= git 永続化。 これで別PC・モバイルでも消えない)
-  6. 本番反映は **全DB promote 時**に manga.v2 へ焼かれて確定 (= seed commit だけでは本番に出ない)
-- **成人 (isAdult)**: 露骨な性描写は要約に含めない/中立化。 成人作の synopsis も同じ seed に入れる (= 表示は adult_us/geo で出し分け)。 当初 deferred 分は別途追加。
-
-### 種4 の自己 retire + 退役
-
-- ★render 時ガード (実装済): 同番号が種2 に在れば種4 を skip = MADB 追いつき時の **二重表示防止**・種2 優先。
-- 退役 hygiene: MADB が追いついた種4 entry を月次で除去 = lean 維持。
-
-### ★月次サニティ監査 (= silent 例外の安全網)
-
-個別例外を全部予見できない前提で、 ★**取込後に前月差分で異常を機械 flag** する:
-- ★**登録の番人** = `scripts/_check-sanity-registry.py` (= 2026-09-06 新設。 **この節に書いた検出器が
-  `_monthly-distill.py` の DETECTORS に載っているか**を突合する。 節に書いただけで登録し忘れると
-  その検出器は二度と回らない = 規定は実装の保証ではない [[skill_rule_without_implementation]]。
-  実測でこの日 4本(subtitle-orphan-volume / furigana / anilist-verify-gate / seed1-lost)が漏れていた。
-  回さない理由が在る検出器は script 内 `EXEMPT` に**理由つき**で書く。 `run sanity` の先頭で自動実行)。
-- ★ISBN消失層 = `scripts/_audit-isbn-loss.py` (= 前回本番に在ったISBNが理由なく消えていないか。 intake 末尾 + 週次でも回る)。
-- 巻番号の外れ値 (= 年誤 parse「2022巻」型) / 著者ゼロ急増 / 重複ページ / **新レーベルの成年カバー率** / 新雑誌候補 / 文字化け PUA / 分裂スパイク / **外国版流入 (= ISBN国コード非9784)**。
-- 土台 = `scripts/_coverage-audit.py` (= 真の公開数・被覆・品質 flag)。 ★**前月との差分**で「今月だけ急増した異常」を浮かせる。
-- ★巻番号層 = `scripts/_audit-volume-numbering.py` (= merge解決後 page×edition で巻番号異常を3分類): **AUTO_FIXED**(上下完全揃い+gap=下=3型水増し、 promoteの`_fix_complete_sequence_numbers`が自動是正済=件数監視。 ~1,677件) / **MISSING_HALF**(片側欠落=取りこぼし=種4領域) / **GAP_OTHER**(真の欠番・外れ値1000等)。 ★AUTO_FIXEDが急増したら新たな誤番号型のsignal。
-- ★フリガナ層 = `scripts/_furigana-audit.py` (= NDL公式読みground-truthで誤フリガナ検出。 [[furigana-ndl-audit]])。
-- ★ヨミ取り違え層 = `scripts/_audit-kana-from-other-volume.py` (= **坊っちゃん型**: 部題・テーマ題シリーズで頁ヨミが「自頁の別巻題の読み」に化ける[『坊っちゃん』の時代のヨミ=アキノマイヒメ=第2部題で発見 2026-07-10]。 ★当て字情報に非依存=比較を「自頁の巻真題集合の機械読み」に閉じ、頁題読みと犯人読みの類似度<0.5の別物のみflag。 出力=`docs/production-diagnostics/kana-from-other-volume.tsv`。 当て字読み注記付き巻題[T・Pぼん/EYES金銀妖瞳型]は既知の許容偽陽性)。
-- ★title化け層 = `scripts/_audit-title-eq-author.py` (= **title==著者名** の壊れレコード検出。 MADBクラスタリングで実タイトル/副題が脱落し series.title が著者名に化けた「夜明け」型。 kana も著者読みになり誤る。 出力=`docs/production-diagnostics/title-eq-author.tsv`。 該当は NDL by-ISBN で実題確認 → title/kana是正 or 抜粋本drop)。
-- ★デラックス・レーベル割れ層 = `scripts/_audit-deluxe-label-split.py` (= **バーテンダー型** 2026-07-19に4連発で型化: 「◯◯デラックス」(KCデラックス/ジャンプ・コミックスデラックス/ビーボーイ…)は**レーベル名**なのに版種deluxeとしてstandardと分裂。SPLIT=巻相補(統合候補)/DUP=ISBN重複(汚染)/PARALLEL=別ISBNフル並走(**旧版×新装の正当2版の可能性=自動統合禁止**、3×3 EYES型)。出力=`docs/production-diagnostics/deluxe-label-split.tsv`。初回2026-07-19: SPLIT245/DUP24/PARALLEL181。是正はedition-overrides統合(バーテンダー/red Eyes/スピカ/これから俺は=適用済の型見本))。
-- ★頁内書影重複層 = `scripts/_audit-cover-dup.py` (= **関東平野型** 2026-07-13: 同一頁の複数版に同じcover_url。 ★別ISBN×同一画像=Kobo補完の誤配置[同巻数ゲートが汚染で巻数一致した版を通す型]→Kobo再照会で出版社×巻数構成から帰属判定・タイは新しい版に残す。 同一ISBN×複数版=ISBN構造ダブリ[isbn-dup-cleanup領域・書影は症状]。 出力=`docs/production-diagnostics/cover-dup.tsv`。 versionsミラー[edition.volumes==versions[0]]は既知偽陽性=検出器で除外済)。
-- ★**著者誤混入層** = `scripts/_audit-author-not-in-volumes.py` (= **よろしくメカドック型** 2026-08-02 ユーザ発見: 次原隆二の単独作に**秋本治**が著者として入っていた。秋本治の紐付き先は他が全て「こち亀」関連で1作だけ浮いていた。★判定= 頁の著者が**その頁のどの巻の書誌にも現れない**か。突合元は**楽天のauthor**(種1 metadata101 は古い書籍を収録しておらず、メカドックのジャンプ・コミックス12巻は1件も無く判定不能だった)。★他のsignalが駄目だった実測: series_key の qid と著者 qid の不一致=8,625件・「両方 writer_artist」で絞っても4,784件で、大半が**正当な原作+作画**(武論尊×池上遼一/原哲夫、アンソロジー、原作小説家 阿刀田高/橋田壽賀子/デュマ・フィス)。役割データが粗い([[author_roles_state]])ので**巻の書誌に載っているか**という一次情報でしか切れない。初回実測 **8,680件/5,120頁**。★自動削除禁止= 原作クレジット(矢立肇/富野由悠季)・スタジオ(さいとうプロダクション/ダイナミックプロ)・企画・解説者は表紙に出ないので大量に混じる。出力=`docs/production-diagnostics/author-not-in-volumes.tsv`。是正は `author-role-corrections.yml` の **remove**(誤クレジット人物の完全除去)。月次=新規増加分を見る)
-- ★**版混在層** = `scripts/_audit-edition-mix.py` (= **ベルサイユのばら型** 2026-08-01 ユーザ発見: 「愛蔵版の書影が通常版に出ている」を追うと**版の取り違え**だった。中公愛蔵版2巻(9784120015601)が通常版(中公コミックスーリ)の2巻スロットに座り、**本当の2巻(9784124104257)は同巻番号に押し出されてどの頁にも出ていなかった**。同版に集英社の13/14巻まで混在し、発売日は元祖マーガレットコミックスのもの、しかも**元祖MC版は頁に存在しなかった**。★2signalを独立に見る: ①ISBN出版者記号の混在(TAIL=移籍で正当/HEAD/SCATTERED) ②★**楽天 seriesName(叢書名)の混在**=本命(愛蔵版もスーリも出版者記号は同じ978412なので①では捕まらない)。叢書名は表記ゆらぎが激しく(ジャンプコミックス/ジャンプ・コミックス、NICHIBUN COMICS/ニチブンコミックス)、**多数派と包含関係なら SERIES低、非包含なら SERIES高**に分けて優先度を付ける。初回実測: SERIES高1,241 / TAIL1,138 / HEAD448 / SERIES低411 / SCATTERED119。出力=`docs/production-diagnostics/edition-mix.tsv`。是正は `edition-canonical/*.yml` で版を再構築(★`suppress_types` に既存typeを列挙しないと旧版が残って**ISBNが重複**する。null だけでは bunkobon 等が残る=実踏)。月次=SERIES高の新規増加を見る)
-- ★**楽天副題だけに出る抜粋本層** = `scripts/_audit-excerpt-subtitle.py` (= **Papa told me型** 2026-08-01 ユーザ発見: promoteの`DROP_SUBTITLE_PATTERNS`は**頁自身(種2)のsubtitle**しか見ないが、抜粋本の決定的証拠が**楽天のsubTitleにしか無い**ことがある。実例=『Papa told me（春/夏/秋/冬）』副題「シーズンセレクション」= 既刊の季節別選集(1996-11に4冊同時刊行)なのに本編と別頁化し、春だけ本編へ統合されて**4冊が3か所に割れ冬は欠落**。初回実測: **本番250頁/324巻**が該当。★**自動dropは禁止**= 副題の「〜セレクション/傑作集」は**レーベル名/叢書名**のことがあり(叶精作セレクション/クマのプー太郎セレクション/カプコン・セレクション型)、その頁の題は実在作品=消すと本物が死ぬ([[konbini_reprint_sweep]]と同じ教訓)。出力=`docs/production-diagnostics/excerpt-subtitle.tsv`(著者・巻数・レーベル・同著者他頁数つき=人が裁ける形)。月次=**新規増加分だけ**を見る)。
-- ★**種1→種2 脱落層** = `scripts/_audit-seed1-lost.py` (= MADB(metadata101)に在るのに **種2に入らなかった**巻。 ★孤児series監査は「種2→本番」しか見ないので**この層は構造的に検出できない**[2026-07-26 ユーザ指摘]。 実測 **9,797巻**、脱落理由は**全件 `no_creator`**(schema:creator が空)= `_build-series-v2.py` のクラスタキーが「著者+題」のため著者不明の本を捨てる[[series_fragmentation_rootcause]]。 ★内訳: 成年1,339 / 非成年8,458。 題×レーベルで**2巻以上に纏まるのは1,168シリーズ**だが、その多くは**アンソロジー213 / 雑誌・ムック254 / オムニバス誌28**(著者が巻ごとに違う=著者空は正しい挙動)。 救済候補は実質**673シリーズ前後**(サムライキッズ33巻/メイドイン星矢26巻/集英社版学習漫画 日本の歴史19巻 等)。 出力=`seed1-lost.tsv` + `seed1-lost-groups.tsv`。 ★救済は種2再ビルドを伴うので未着手)。
-- ★**孤児series層** = `scripts/_audit-orphan-new-series.py` (= **種2に在るのにサイトに1巻も出ていない** series。 ★根因: promote は**元頁駆動**(`SRC_DIR.glob('*.yml')` = data/manga + preorder-pages)で **DB駆動でない** → 種2に足しただけでは新規シリーズは出ない[新頁は予約ルートと取りこぼし頁化だけが作る]。 ★★**2026-09-06 裁定 = 全件の数字(47,631)を『未掲載の取りこぼし』として読むな**(Fable 5 が「出すものではない」と判断し、Opus 5 が実測で検算。 Opus 5 が3回 改善提案に挙げてユーザに指摘された経緯あり)。 実体= **98%が単巻**(BL/TL/レディコミ/ハーレクインの単発読切が主体)で **6割は楽天caption すら無く genre を確定できない**= 新規登録protocolの必須メタが揃わない = 載せない。 多巻はごく僅かで、中身は **既存頁の分裂クラスタ**(ラテン表記/新装版/別レーベル= ONE PIECE・幽遊白書・シティーハンター・CROWS…)、コンビニ廉価再録、外国語版、アンソロ/ムック、**裁定済みdropの再出現**。 → 頁化案件ではなく「除外」+「既存頁への統合」、頁化すると二重頁を量産する(HxH型/ARMS型の再生産)。 ★そこで検出器が **class列で機械照合**する: 題の正規化一致(ルビ括弧除去つき)/ ラテン題→本番slug一致 / 外国語版(ISBN非9784) / 裁定済みdrop題。 ★**著者ゲート**つき= 題が一致しても著者が1人も重ならなければ `同題別著者(要確認)` として**芯に残す**(同名別作品952件が正当に併存= 隠さない。 実例 剣客商売=さいとう版/大島やすいち版)。 ★あいまい一致(著者×題の包含)は class を動かさず **注記列 `類似頁`** に留める(呪術廻戦≡・東京卍リベンジャーズ〜場地圭介〜・デッドマウント外伝 のような本物の別作品を親作品に吸わせて隠していたため)。 出力= 全件 `orphan-new-series.tsv`(情報は落とさない) + ★**芯 `orphan-new-series-core.tsv`**(= 2巻以上 × class∈{未掲載, 同題別著者}。 実測 47,631→**844**、直近12か月 **515**)。 **月次は芯の直近12か月だけ見る**。 `--core-min-vols N` で閾値可変)。
-- ★**頁は在るのに巻だけ出ていない層** = `scripts/_audit-shu2-unlisted-volumes.py` (= **トリニティセブン15.5型** 2026-09-06 ユーザ発見。 『七人の魔道士と日常風景 15.5』(9784040721446)は種2に在り本編頁も在るのに、 種2側で別クラスタに **number=15** で入っていて本編15巻と番号衝突し、どの頁にも出ていなかった。 ★既存監査の死角3つ: 孤児series監査=「そのseriesの巻が**1本も**出ていない」が条件で部分掲載は対象外 / Sugar&Spice型=**楽天題**が「親題+巻番号」を名乗るのが条件 / 巻抜け仮想=番号の**穴**を見るので15と16の間は穴にならない。 ★本検出器は**楽天非依存・種2駆動**= 本番に出ていないISBNを全部見て、持ち主の頁が既に在るものだけ残す(照合= SIBLING[同seriesの別巻が本番に在る] / TITLE[正規化題一致・ルビ括弧除去] / SLUG[ラテン題→本番slug] / NEAR[題の包含=弱い・芯外]、 いずれも**著者ゲート**つき)。 さらに**番号状態**で4分割: **MISSING**(番号ごと欠け=★芯) / DUP(同番号が別ISBNで既在=特装版・重版・別版の1巻。実測は別版が主で薄い) / VOL0(→`_audit-vol0-hidden-first.py`の領域) / YEARNUM(西暦が巻番号に化けた誤番号)。 初回実測 候補21,111巻→**芯107巻/72頁**(ドラベース1-11/蒼竜の側用人1-4/魔法科 侵攻編4-6/皆様の玩具です1-3/うちの3姉妹17-19…)。 ★**第2の鉱脈= x.5 の番外巻直撃**: 種2駆動だとトリニティ15.5自身はDUPに埋まるので、 ISBN題マップを1パス掃いて「題がx.5を名乗るのに本番に無い本」を出す(ガイドブック/ファンブック/公式ガイド/設定資料/特装版・同梱/「2.5次元」は除外)。 初回 **41件/親頁特定31件**(ホリミヤ10.5・青春×機関銃7.5と18.5・範馬刃牙10.5・テニプリ30.5・終わりのセラフ8.5・モテキ4.5・うさぎドロップ9.5・繰繰れ！コックリさん5.5と8.5・田中くん5.5と13.5…)。 ★.5巻を足す機構は[[half_volume_number_mechanism]](番人4か所を揃える。 **Zodのint()だけは失敗が頁ごとビルドskip=404**)。 出力= `shu2-unlisted-volumes.tsv` / ★芯 `-core.tsv` / ★`half-volume-candidates.tsv`。 ★索引の陳腐化を自動検知して作り直す(古い索引は解決済みの巻を復活させる=実踏)。 月次=芯の新規増加を見る)。
-- ★外国版層 = `scripts/_audit-foreign-editions.py` (= ★**複数証拠**で scope外の外国語版を検出: ①latin題 ②シリーズ全ISBN非9784[978-4=日本] ③複数巻[typo説明不可]。 intakeの`foreigndrop`stageで`--apply`=純粋追加。 ★単巻のみ非9784はtypo懸念で報告のみ。 旧filterの穴=クリーンlatin題[Akira/Naruto外国版]がEMPTYslug/credit文字列依存をすり抜けていた、 を ISBN国コードで恒久封鎖)。
-- ★AniListリンク層 = `scripts/_anilist-verify-gate.py` (= enrich全リンクをmatcher非依存の証拠合議[T題完全一致/W=P8731ラベル/R骨格/著者/年/巻/読切format]で採点。 FAIL/SUSPECTは `_anilist-adjudicate-gate.py`(dump native完全一致+著者ゲートでrelink/drop機械裁定)→残りAIスライス→`_gen-gate-overrides.py` で `anilist-link-overrides.yml` へ畳込=enrich除外/付替。 ★確認済みkeepは `data/seeds/anilist-link-confirmed.json`(key→a_idペア)で再フラグ抑止。 2026-07-18初回: 51,505リンク→drop813/relink616/FAIL 0化)。
-- ★publisher層 = 各版の出版社は **種2 ISBN→metadata101 schema:publisher** から promote が自動導出 (= edition.publisher=当時社名、 work.publishers[]=社キー集合。 [[publisher_model_edition_level]])。 ★月次=**新規の未キー社名**(norm未解決)を巻数順に flag → 主要なら `data/publishers.yml` にキー追加。 alias追加は **ISBN出版者記号(帯)一致で同一実体を確認した時のみ**(だろう運転禁止)。 families/企業グループ畳みは**不採用**(実体=ISBN帯=統廃合に不変)。 生成器 `scripts/_gen-publisher-keys.py`。 ★ISBN-10/13混在を `_to_isbn13` で正規化必須。
-- ★**途中巻断片層** = `scripts/_audit-solo-truncated.py` (= **蒸留で新規頁を作った後に必ず走らせる**。「5巻だけの頁」等=vol1不在の孤立頁を検出。正体は大半が①**彼岸島型**=残巻が別cluster(本編/親作)に番号衝突で眠りdedup負け ②**分裂cluster**=誤題typo(ちちょっと型)/表記揺れ(第二部vs第2部型) ③コンビニ廉価断片(凍牌竜凰位戦=秋田トップコミックス型)。2026-07-27実測: ユーザ発見17頁→種4+53巻/page-dedup2頁/canonical2で全数是正。★入口側は `_torikoboshi-genpages.py` の**3ゲート**(ISBN既在skip/★vol1不在→保留/★近似題(既存頁と包含一致)→保留)が頁化前に堰き止める=**保留リストは人が裁定してから頁化**。頁化ゲートと事後監査の両輪)。
-- ★**年サフィックス二重頁層** = `scripts/_audit-year-suffix-dup.py` (= **ハンター×ハンター型** 2026-07-28ユーザ発見: slug衝突解決の`-姓+西暦`suffixが「同名別作品」でなく**同一作品の別クラスタ**(MADB別ID再登録/表記揺れ/頁化やり直し残骸)にも機械適用され二重頁化。同著者229組中ISBN交差165=REDO_LEFTOVER145(同一_skey残骸)+CLUSTER_SPLIT20(HxH/弐十手/バキ道…)。★入口ゲート= `_torikoboshi-genpages.py` に 同_skey既出skip+**衝突×同著者=保留**(著者未確認も保留=検査してから登録)を実装済。月次=本監査の新規増加0を確認)。
-- ★**巻×発売日の大逆行層** = `scripts/_audit-vol-date-regression.py` (= **ギャラ型** 2026-08-17 ユーザ発見「三巻以降別物」: 同一edition内で巻番号が進むのに発売日が**5年以上逆行**=同一クラスタに別作品/別時代の版が同居し番号衝突で接ぎ木された頁。ギャラ=リメイク1-2巻2019-20+原作3-8巻1980-81[原作1-2巻はdedup負けで不可視]。★ISBN有→無の境界が強シグナル。初回実測 **541頁/573版**(30年+86/20-29年116/10-19年199/5-9年172)、主流は「復刻・新装の先頭巻が旧初版の枠を占有」する逆ギャラ型[タンク・タンクロー/鉄腕アトム/ハレンチ学園]。出力=`docs/production-diagnostics/vol-date-regression.tsv`。是正2通り: 別作品=**ギャラ式頁分離**(同_skeyのstub×2+edition-overrides+★新設`anilist:false`でenrich混線遮断) / 同一作品の版違い=edition-canonical版再構築。月次=新規増加分を見る)。
-- ★**canonical seed健全性層** = `scripts/_check-edition-canonical.py` (= **版canonical(693本)の番人**: ★壊れたseedはpromoteが`except: continue`で**無警告skip**しreflectは成功と表示する(実験人形ダミー・オスカーで実踏)ため専用検査が要る。見るもの= YAMLパース/slugとファイル名の一致/死にキー(manga.v2不在)/巻番号重複/release_dateが文字列か/種4取りこぼし(canonicalが裏取り済み巻を上書きして消す)/★**連載中の続巻取りこぼし**(検査7 2026-08-20新設=seed主版ISBNで種2を逆引きし同imprint・seed最終日以降の後続巻を検出。canonicalは巻を固定するので連載中は続巻が永久に頁へ出ない)。★reflectのcanonicalゲートに組込済(対象slugだけ`--slugs`で検査しNGなら反映中止)。月次=NG 0 を確認、鳴ったらseedへ種2の値で追記 or opt-in `open_tail: true`)。
-- ★**数字表記揺れ分裂層** = `scripts/_audit-numeral-variant-split.py` (= **ロザリオとバンパイアseasonⅡ vs season2型** 2026-07-27ユーザ発見: ローマ数字/漢数字/カナ数詞(ツー)の揺れで同一作品のクラスタが割れ、後年の巻が別頁化する。正規化=共有 `scripts/_title_numnorm.py`(ゲート `_torikoboshi-genpages.py` と同一実装=直すなら両方に効く)。SPLIT=巻相補(統合候補・初回3件全適用済) / DUP=巻交差(二重頁疑い・初回16件=worklist) / SEQ?=題末尾数字の単巻(続編正当例[マンガ家さんと2]があるため**報告のみ・自動統合禁止**)。出力=`docs/production-diagnostics/numeral-variant-split.tsv`)。
-- ★**廉価パック/BOX構成員層** = `scripts/_audit-price-pack.py` (= **猫と竜型** 2026-08-26型化: スペシャルプライスパック(2026-07宝島社)が正規巻と同題・同巻番号でMADBに入り、1.2.19で猫と竜1-3巻の主枠を2018原版から奪った。★署名はseries/edition層に無く **metadata101のschema:alternativeHeadline / description内ISBN(set)** にのみ在る=種1 raw直接走査。初回100件・本番掲載15件は全裁定済(是正2=サイコ幽霊愛蔵版[imprint'collection box'恒久drop]+白妖の娘セットISBN / 正当13)。出力=`docs/production-diagnostics/price-pack.tsv`。月次=本番掲載の新規増加を裁定)。
-- ★**number=0の1巻不可視化層** = `scripts/_audit-vol0-hidden-first.py` (= **泣かせたくてどうしよう型** 2026-08-26型化: promoteの「同editionにnumbered巻があればnumber=0をskip」規則が、無番号登録の**真の1巻**を続巻到着の瞬間に本番から消す。★is_extraは99.95%が1で番外編と区別不能=唯一の機械信号は「0巻日付<全numbered巻」。初回877件→HIDDEN_FIX66を**楽天題ゲート**(副題/アンソロ/限定版=HOLD)で46巻適用[孤独のグルメ/リボンの騎士等44頁vol1復元]。sink=種4-auto(source:vol0-first)。出力=`docs/production-diagnostics/vol0-hidden-first.tsv`。月次=HIDDEN_FIXの新規増加→--apply)。
-- ★**レーベル表記ゆれ版分裂層** = `scripts/_audit-canonical-imprint-split.py` (= **ARMS型** 2026-08-28ユーザ発見「21巻が同じ箇所に分裂」: MADBのレーベル誤記(少年サンデーコミ**ツ**クススペシャル / 正=コミ**ッ**クス)を種2が別edition行として持ち、2026-08-17の「ギャラ型是正」一括処理がその区切りをそのまま `edition-canonical` へ焼き込んだため、21巻だけが別版タブへ分裂し**主版は21巻抜け**になっていた(=巻抜け仮想にも現れる)。判定= imprintを正規化(小書きカナ→大書き/中黒・空白除去)して一致する版が同一頁に2つ以上。★**自動統合は禁止**(新装版/復刻版が正当に別版な場合がある。トラジマのミーめ=2025復刻版が実例)。**巻番号が相補**なら統合候補、**重複**なら別run濃厚。裏取りは楽天seriesName(キャッシュ1パス走査で足りる)+Wikipedia刊行リスト。出力=`docs/production-diagnostics/canonical-imprint-split.tsv`。初回13件[ARMS是正済]。月次=新規増加分を見る)。
-- ★**刊行run分裂層(名前非依存)** = `scripts/_audit-edition-run-split.py` (= **ARMSワイド版型** 2026-08-28ユーザ発見: 上の表記ゆれ検出器は imprint 文字列の近さで探すため、**英字レーベル名vs和名**(SHONEN SUNDAY COMICS WIDE EDITION ⇔ 少年サンデーコミックスワイド版)や**略称vs正式名**(KCスペシャル ⇔ 講談社コミックススペシャル)を取り逃す。そこで名前を一切見ず、①出版社一致(orISBN出版者記号共通) ②巻番号が重複しない ③合わせると連番 ④巻順で発売日が単調増加 の4条件で「1本のrunが2版に割れている」を検出する。★新装版/復刻版は②か④で落ちるので混ざりにくい。tierA=imprint正規化で一致(ほぼ確実) / tierB=名前が違う(要外部裏取り)。初回 **65ペア/59頁**(A8/B57) → 2026-08-28に全数裁定し **57頁を統合適用済(残7)**。★裁定の型: merge56/keep_separate2/other_issue1、うち**反証で1件が覆った**(biba-usagi-kozou=ノーラコミックスdeluxe→無印は真のレーベル変更の可能性。決着にはNDL by-ISBNで5巻の奥付シリーズ表示が要る)。★真因は3層あった: ①レーベル表記ゆれ ②**種2のクラスタ分裂**(編集クレジット混入・著者名の大小文字) ③★**種4(volumes-supplement)の `edition_type` 既定値 standard**(2026-07-28の続巻ハーベストが既定値で投入し、種2側に該当typeが無いため promote が『通常版/imprint=出版社名』という**実在しない幻の版**を作る型。the-band/hata-manjirou/hi-ni-nagarete/ennead/sekai-no-hate で実踏 = **canonicalを起こすのではなく種4のedition_typeを直すのが根本**)。出力=`docs/production-diagnostics/edition-run-split.tsv`。★自動統合禁止=楽天seriesName(キャッシュ1パス)+MADB容器ID `schema:isPartOf` +ISBN連番+刊行ペース+外部刊行リストで1件ずつ裏取りし、**反証役を別に立てる**(容器IDは*作品*容器で版容器ではない=単独では同一run証明にならない。243容器中81本が複数brandを含む))。
-- ★**楽天題が「親題+巻番号」を名乗る未掲載巻層** = `scripts/_audit-subtitle-orphan-volume.py` (= **Sugar&Spice型** 2026-09-03 ユーザ発見「完結してるが抜けているし足りない」: 各巻が固有の巻題を持つ作品で、MADBが17/19/20巻を巻題(Somethin' stupid等)を**題として**別IDで登録→種2の著者+題キーが別sid(0巻/extra)に落とし、本編頁は「17巻欠け+18巻で終わり」に見えた。★既存監査の死角= 孤児sidは単巻・未頁化なので solo-truncated(孤立**頁**)の対象外、巻抜け仮想は内側の穴しか見えず**末尾巻**は「無い」ことが分からない。唯一の機械信号は楽天側(subTitle「Suger ＆ Spice 17」/ title「Rose＆Beast Sugar＆Spice19」)。★実装= 楽天キャッシュ2本(delta 828MB+旧373MB)を1パスし、副題/題末尾/題中の「親題+番号」を抽出→正規化題で既存頁と完全/接尾/接頭一致→そのISBNが本番page-indexに無い巻を列挙。列= 巻状態(MISSING_TAIL/MISSING_GAP/OTHER_ISBN=同番号が別ISBNで既在) × 種2(SPLIT=別sidに眠る/SAME_SID=同sidなのに未表示/ABSENT=真の取込もれ) × tier(A=著者一致) × 一致(EXACT/SUFFIX/PREFIX) × **疑**(YEARLIKE/EDITION/SPINOFF/LABEL/SEQTITLE/DROPIMPRINT/PUBMISMATCH/PREVIEW=偽陽性の型を落とさず立てる)。★芯= MISSING×A×EXACT×疑なし。初回= 候補23,957/芯**1,365巻・809頁**(ABSENT 1,134 / SPLIT 172[69頁: トリニティセブン19-34/六道の悪女たち9-26/ドカベンDT編32-34/Papa told me cocohana6-14…] / SAME_SID 59[0巻規則で隠れた真の0巻=ドラえもん/ハヤテ等・page-dedup残骸・override固定])。★**自動適用禁止**(SEQTITLE=リング2/トイ・ストーリー2型の続編題と番号入り巻題は機械で割れない・LABEL=本宮ひろ志傑作集7型の叢書番号)。是正はSPLIT=種4結線 or merge / ABSENT=既存の`_register-seed4-ndl.py`ゲート経由 / SAME_SID=per-case。出力=`docs/production-diagnostics/subtitle-orphan-volume.tsv`。★**第2部(楽天非依存)= edition-overrides固定頁の続巻取りこぼし**: overridesは巻を固定するので連載中は種2に続巻が来ても永久に出ない(canonical側の検査7に当たる番人がoverrides側に無かった)。初回**25巻/10頁**(フェルマーの料理8巻 2026-06 / 聖女に嘘は通じない6巻 / 壁抜けバグ12巻 2026-07 = 現役連載3頁)。出力=`overrides-frozen-tail.tsv`。月次= 芯の新規増加+第2部の連載中頁を見る。先に `_exists.py --build`)。★**適用は `scripts/_apply-subtitle-orphan-volume.py`**(2026-09-03 正式化。芯を機械ゲート= レーベル整合[正規化一致/**経験別名表**=同一ISBNを種2 imprintと楽天seriesNameが別名で呼ぶペア sid≥3(検出器が `.cache/label-alias-pairs.json` に同時生成)/自頁の既存巻の楽天seriesName一致/包含はstandard版のみ4字以上] × 対象版[楽天seriesNameに合う版>standard最大巻版、文庫・完全版だけの頁は見送り] × 発売日順[「日付を持つ巻」基準・1か月許容] × 同番号無し × ISBN未在 × series_key bind × override(editions固定)・canonical外。SPLITは種2版種keep/番号整合/アニメ系除外/0巻除外+**同クラスタ掃引**(採択sidの兄弟巻=楽天キャッシュに無い巻も拾う)。通過分を `volumes-supplement-auto.yml` へ純粋追加(source: seed2-split-auto / rakuten-title-tail)→ `.cache/subtitle-orphan-apply-stems.txt` を reflect --only へ。見送りは理由列つきで `subtitle-orphan-volume-review.tsv`(人はここだけ見る。日付逆行=頁側が新装/後刷り=版の付け直し案件が主、canonical頁は run 再構築案件)。初回累計= override 8頁 / 別sid 195巻・62頁 / 取込もれ 643+371+7巻。★SAME_SIDは apply では触らない= 人が裁く3型: ①**真の0巻** → ユーザ裁定(2026-09-03「0巻は全部漫画なら出してok」)で **`data/seeds/vol0-show.yml`**(ISBN列挙のopt-in。promoteの `get_vol0_show()` が number=0 のまま出す。載せる前に漫画か確認=ガイドブック/小説/フィルムコミックは載せない。ドラえもん0巻はoverride直書き) ②**page-dedup残骸**(dedupで落とした頁のsidが本編頁に結線されず巻が消える: Bird 3-8/ホヒンダ村1-8/Ψchic 10-11/Wジュリエット2 1-3,6-7) → `series-merge.yml` の merge_keys(非renumber)で結線 ③**MADB誤番号**(number=0/1 extra=1 に巻が畳まれる: 熱中!コボちゃん6-14型) → 楽天題の巻番号で種4。★レーベル違いも同裁定で「漫画なら出す」= 同社後継レーベル/表記違い/移籍は種4 standard、別社の別版(花の慶次 Bunch world版=新潮社全21巻)は `extra-editions.yml` の版タブ。除外した非漫画= スマグラー+4(プラチナコミックス=コンビニ)/あずきちゃん メディアブックス(アニメ)/ガンダムSEED アニメKC(フィルムコミック)])。
-- ★**発売日ドリフト層** = `scripts/_audit-preorder-date-drift.py` (= **すてごろブッチ型** 2026-09-04 ユーザ発見「画像が古いままだと思ったら発売日が違う」: 予約(未発売)の巻は**後から発売日が動く**(延期/前倒し)のに、こちらはハーベストした日の値を握ったままで**追随する機構がどこにも無かった**。実例=すてごろブッチ!(9784091543295) 本番2026-08-28 / 楽天・NDL 2026-09-28 の1か月延期。★根因は2層: ①追随機構が無い ②★**promoteの予約頁合流ブロックに release-date-override が通っていない**(= cover/genre/genre-append/magazine に続く「予約頁は本流を通らない」穴の**5件目**。override seedに書いても永久に届かなかった) → 2026-09-04 に結線済(日付が動けば頁の出版年レンジも追随。★現在値が巻から導ける時だけ)。★証拠は**日次の楽天予約ハーベスト**(`.cache/preorders/preorders-latest-full.jsonl`)を1パス突合するだけで出る=liveを叩かない。★適用ゲート(`_apply-preorder-date-drift.py`)= 楽天が日単位 × **NDL(ISBN直引きの出版予定日)が一致** × 同ISBNが1頁1巻 × 未発売 × 層がPREORDER/SEED4/SEED2(canonical/overridesは保留)。★**NDL照合が要る理由**= ±1日のズレは「**NDL/MADB=奥付の発行日 / 楽天=店頭に並ぶ日**」の既知の仕様差で、機械的に楽天へ寄せると誤って書き換える(初回実測19件が該当=**変更しないのが正解**)。★楽天 salesDate の「**頃**」= 楽天も日付を確定していない印(ハーベストの43%)。単独では棄却しない(NDLが同じ日を持てば実在)。初回2026-09-04: 芯30 → **36巻/30頁を適用**(すてごろブッチ/さくらいろダイアローグ2=124日/おせん和な女7=212日/諸星大二郎短編集成=配本順変更で7巻分が1枠ずつ移動)。日次の手順10.6に組込済。出力=`docs/production-diagnostics/preorder-date-drift.tsv` + `-review.tsv`)。
 - 既知の例外型: 再登録の別 ID 二重化 / MADB 形式変更 (= タグ消失・年→巻番号) / 成年誤 flag (= 新レーベル未カバー) / 雑誌漏れ (= cm105 凍結) / 巻番号水増し (= 下=3型)。
-
----
 
 ## 一般 protocol
 

@@ -721,7 +721,7 @@ DETECTORS = [
     ("excerpt-subtitle", ["_audit-excerpt-subtitle.py"], "excerpt-subtitle.tsv", True),
     ("edition-mix", ["_audit-edition-mix.py"], "edition-mix.tsv", True),
     ("author-not-in-volumes", ["_audit-author-not-in-volumes.py"], "author-not-in-volumes.tsv", True),
-    # ★2026-09-06 追加 = CLAUDE.md の月次サニティ節に在るのに DETECTORS に無く、
+    # ★2026-09-06 追加 = 月次サニティの索引/本文に在るのに DETECTORS に無く、
     #   「型化したのに一度も回らない」状態だった4本(番人 = _check-sanity-registry.py)。
     #   いずれも重い(楽天キャッシュ1.2GB / 種1 raw 668MB / AniList dump / NDL live)ので heavy。
     ("subtitle-orphan-volume", ["_audit-subtitle-orphan-volume.py"], "subtitle-orphan-volume-core.tsv", True),
@@ -775,7 +775,7 @@ def sanity(a) -> None:
     print("=" * 72)
     print(f"月次サニティ  [{now()}]  前回={prev_files[-1].name if prev_files else '無し'}  ★全detector read-only")
     print("=" * 72)
-    # ★登録漏れ番人: CLAUDE.md 月次サニティ節に在るのに DETECTORS に無い検出器を先に炙る
+    # ★登録漏れ番人: 索引(CLAUDE.md) ⇔ 本文(docs/monthly-sanity-detectors.md) ⇔ DETECTORS を3点突合
     #   (= 型化して節に書いただけで一度も回らない、を機構で封じる。 2026-09-06 新設)
     reg_ng = run([PY, SCRIPTS / "_check-sanity-registry.py"], capture=True)
     if reg_ng.returncode != 0:
@@ -815,7 +815,7 @@ def sanity(a) -> None:
     outp = SANITY_DIR / f"sanity-{ts()}.json"
     outp.write_text(json.dumps({"at": now(), "tag": marker_tag(), "results": res}, ensure_ascii=False, indent=1), encoding="utf-8")
     print(f"\n保存: {outp}  (git追跡。次回この結果が前回比の基準になる → TSV と一緒に commit)")
-    print("読み方: Δ>0 の検出器 = 今月増えた型 → 該当skill/CLAUDE.md月次サニティ節の是正へ。")
+    print("読み方: Δ>0 の検出器 = 今月増えた型 → docs/monthly-sanity-detectors.md の該当型で裁定。")
     print("  rc≠0 = ①検出器自体の故障(traceback) か ②「該当あり」を exit 1 で表す検出器(isbn-loss=理由なし消失 / price-pack=本番掲載あり /"
           " edition-canonical=異常あり)。tail を読んで区別する。")
 
