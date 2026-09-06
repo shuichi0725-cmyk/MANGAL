@@ -1,0 +1,100 @@
+slug: fushigi-na-melmo
+title: ふしぎなメルモ
+title_kana: フシギナメルモ
+title_romaji: fushigi na merumo
+year_started: 1984
+year_ended: 2004
+status: completed
+authors:
+- name: 手塚治虫
+  role: writer_artist
+  kana: テズカオサム
+  romaji: tezukaosamu
+original_authors: []
+publisher: shogakukan
+magazine: null
+demographic: kodomo
+genres:
+- fantasy
+synopsis: ''
+anime_adapted: true
+alternative_titles:
+  en: Marvelous Melmo
+wikidata_qid: Q193300
+editions:
+- type: standard
+  label: 通常版（全2巻）
+  publisher: null
+  volumes: &id001
+  - number: 1
+    asin: null
+    isbn13: '9784097273318'
+    cover_url: null
+    release_date: 1994-01
+  - number: 2
+    asin: null
+    isbn13: '9784097273325'
+    cover_url: null
+    release_date: 1994-05
+  versions:
+  - label: 手塚治虫まんが絵本館
+    year_started: 1994
+    volumes: *id001
+  - label: ぴっかぴかコミックス カラー版
+    year_started: 2005
+    volumes:
+    - number: 1
+      asin: null
+      isbn13: '9784091480880'
+      cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0880/9784091480880.gif?_ex=300x300
+      release_date: '2005-12-05'
+    - number: 2
+      asin: null
+      isbn13: '9784091480200'
+      cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0914/09148020.jpg?_ex=300x300
+      release_date: '2006-02-05'
+- type: standard
+  label: サンデーコミックス
+  publisher: 秋田書店
+  imprint: サンデーコミックス
+  volumes:
+  - number: 1
+    asin: null
+    isbn13: '9784253064545'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/4545/9784253064545.jpg?_ex=300x300
+    release_date: 2000-08
+- type: bunkobon
+  label: 文庫版（全1巻）
+  publisher: null
+  volumes: &id002
+  - number: 1
+    asin: null
+    isbn13: '9784253171496'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/2531/25317149.jpg?_ex=300x300
+    release_date: 2004-08
+  versions:
+  - label: 秋田文庫
+    year_started: 2004
+    volumes: *id002
+  - label: 手塚治虫文庫全集
+    year_started: 2012
+    volumes:
+    - number: 1
+      asin: null
+      isbn13: '9784063738988'
+      cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/8988/9784063738988.jpg?_ex=300x300
+      release_date: 2012-04
+- type: aizoban
+  label: 手塚治虫漫画全集
+  publisher: 講談社
+  imprint: 手塚治虫漫画全集
+  volumes:
+  - number: 1
+    asin: null
+    isbn13: '9784061732803'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0617/06173280.jpg?_ex=300x300
+    release_date: '1984-10-03'
+publishers:
+- akita
+- shogakukan
+genres_provisional: true

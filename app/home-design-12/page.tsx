@@ -1,7 +1,7 @@
 import Link from "next/link";
 import FeaturedDaily from "@/components/FeaturedDaily";
 import AnniversaryDaily from "@/components/AnniversaryDaily";
-import AizoubanWeekly from "@/components/AizoubanWeekly";
+import { AizoubanCorner, TokusoubanCorner } from "@/components/EditionCorners";
 import TimeMachine from "@/components/TimeMachine";
 import DestinyPickMock from "@/components/DestinyPickMock";
 import MonthReleasesClient from "@/components/MonthReleasesClient";
@@ -215,7 +215,7 @@ export default function Design12() {
       <KotobaDaily pool={kotobaPool} />
       <AnniversaryDaily />
       <TimeMachine />
-      <AizoubanWeekly />
+      <AizoubanCorner />
 
       {trivia.length > 0 && (
         <section className="mt-4 px-4">
@@ -283,6 +283,8 @@ export default function Design12() {
       </section>
 
       {/* カラー版コーナー(2026-08-12 ユーザ指定=全集コーナーの直上) */}
+      {/* 8.1【中】特装版・限定版コーナー(2026-09-06 新設。愛蔵版と同型=毎回ランダム4点+全部見る) */}
+      <TokusoubanCorner />
       <ColorCorner />
       <ZenshuuCorner />
       <section className="mt-5 px-4">

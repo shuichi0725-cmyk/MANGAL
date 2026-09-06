@@ -2,7 +2,7 @@ import Link from "next/link";
 import LikeButtonMock from "@/components/LikeButtonMock";
 import FeaturedDaily from "@/components/FeaturedDaily";
 import AnniversaryDaily from "@/components/AnniversaryDaily";
-import AizoubanWeekly from "@/components/AizoubanWeekly";
+import { AizoubanCorner, TokusoubanCorner } from "@/components/EditionCorners";
 import TimeMachine from "@/components/TimeMachine";
 import DestinyPickMock from "@/components/DestinyPickMock";
 import MonthReleasesClient from "@/components/MonthReleasesClient";
@@ -140,8 +140,8 @@ export default function Design11() {
       {/* 3.6【新・自動】タイムマシン: N年前の今日発売(全期間カレンダー流用) */}
       <TimeMachine />
 
-      {/* 3.7【新・自動】愛蔵版・合本の週替わりshowcase(2026-09-06 旧「特装・限定版」から置換。価格表示禁止) */}
-      <AizoubanWeekly />
+      {/* 3.7【新・自動】愛蔵版・合本(2026-09-06 旧「特装・限定版」から置換。毎回ランダム4点+全部見る。価格表示禁止) */}
+      <AizoubanCorner />
 
       {/* 4.【小・新】数字トリビア(2026-08-04 client日替わり化=DailyBits) */}
       {trivia.length > 0 && (
@@ -218,6 +218,8 @@ export default function Design11() {
       </section>
 
       {/* 8.15【中】カラー版コーナー(2026-08-12 ユーザ指定=全集コーナーの直上。案3ボタン+案B書影帯) */}
+      {/* 8.1【中】特装版・限定版コーナー(2026-09-06 新設。愛蔵版と同型=毎回ランダム4点+全部見る) */}
+      <TokusoubanCorner />
       <ColorCorner />
       {/* 8.2【中】全集コーナー(★2026-08-03 ユーザ指定=運命の一冊の下へ移動。旧=アニメ化直下) */}
       <ZenshuuCorner />

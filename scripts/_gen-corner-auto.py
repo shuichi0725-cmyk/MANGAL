@@ -29,7 +29,8 @@ DAY_RE = re.compile(r"^(\d{4})-(\d{2})-(\d{2})$")
 
 ann = {}   # "MM-DD" -> [{s,t,y,c}]
 dlx = []   # [{s,t,v,l,c}]
-aiz = []   # [{s,t,e,l,v,sv,c,d}] = 愛蔵版コーナー(合本のみ)
+aiz = []   # [{s,t,a,e,l,v,sv,c,d}] = 愛蔵版コーナー(合本のみ)
+tks = []   # [{s,t,a,v,l,c,d}] = 特装版コーナー(巻のvariant=特装/限定)
 AIZ_MIN, AIZ_MAX = 0.30, 0.70   # 通常版比の巻数(下限=登録もれ除け / 上限=同数の普通再版除け)
 n = 0
 for p in glob.glob(os.path.join(ROOT, "data", "manga.v2", "*.yml")):
@@ -42,6 +43,7 @@ for p in glob.glob(os.path.join(ROOT, "data", "manga.v2", "*.yml")):
         continue
     slug = d.get("slug") or os.path.basename(p)[:-4]
     title = d.get("title") or ""
+    authors = "・".join(a.get("name") or "" for a in (d.get("authors") or []) if a.get("name"))
     eds = d.get("editions") or []
 
     # ★愛蔵版コーナー(2026-09-06 ユーザ裁定): 「通常版と冊数が同じ版」は判型も値段も普通の
@@ -66,7 +68,7 @@ for p in glob.glob(os.path.join(ROOT, "data", "manga.v2", "*.yml")):
             v1 = next((v for v in vols if v.get("number") == 1), None)
             if not (v1 and v1.get("cover_url")):
                 continue  # 1巻書影が無いとコーナーの見た目が崩れる
-            aiz.append({"s": slug, "t": title, "e": t, "l": e.get("imprint") or "",
+            aiz.append({"s": slug, "t": title, "a": authors, "e": t, "l": e.get("imprint") or "",
                         "v": c, "sv": std_vols, "c": v1["cover_url"],
                         "d": str(v1.get("release_date") or "")[:4]})
 
@@ -85,6 +87,9 @@ for p in glob.glob(os.path.join(ROOT, "data", "manga.v2", "*.yml")):
                 if vr.get("cover_url"):
                     dlx.append({"s": slug, "t": title, "v": v.get("number"),
                                 "l": vr.get("label") or "特装版", "c": vr["cover_url"]})
+                    tks.append({"s": slug, "t": title, "a": authors, "v": v.get("number"),
+                                "l": vr.get("label") or "特装版", "c": vr["cover_url"],
+                                "d": str(v.get("release_date") or "")[:4]})
 
 # 周年: 各日 古い順cap12(古い=周年数が大きく話題性が高い)
 for k in ann:
@@ -95,29 +100,47 @@ dlx.sort(key=lambda x: (x["s"], x["v"] or 0))
 json.dump(dlx, open(os.path.join(OUTD, "deluxe-stock.json"), "w", encoding="utf-8"),
           ensure_ascii=False, separators=(",", ":"))
 
-# ★愛蔵版: 並びが命(週の窓=連続4件)。 slug順のままだと旧豪華版コーナーと同じ
-#   「4点とも同じ作品」事故になる(実測31%の週)。 → ハッシュで決定的に散らし、さらに
-#   同一作品が窓4件の中に入らないよう貪欲に入替える(= 再実行しても同じ並び)。
-def _h(x):
-    v = 2166136261
-    for ch in (x["s"] + "|" + x["e"]):
-        v = ((v ^ ord(ch)) * 16777619) & 0xFFFFFFFF
-    return v
+# ★並びは決定的に散らす: slug順のままだと連続4件が同じ作品になり(旧豪華版コーナーの実測31%)、
+#   コーナーの見た目が壊れる。ハッシュで散らし、同一作品が窓4件に入らないよう貪欲に入替える
+#   (= 再実行しても同じ並び。コーナー側がランダム抽選でも、一覧頁の既定順として意味がある)。
+def _spread(rows, kf, W=4):
+    def _h(x):
+        v = 2166136261
+        for ch in kf(x):
+            v = ((v ^ ord(ch)) * 16777619) & 0xFFFFFFFF
+        return v
+
+    out, pending = [], sorted(rows, key=_h)
+    while pending:
+        recent = {r["s"] for r in out[-(W - 1):]}
+        i = next((j for j, r in enumerate(pending) if r["s"] not in recent), 0)
+        out.append(pending.pop(i))
+    return out
 
 
-aiz.sort(key=_h)
-W = 4
-spread, pending = [], list(aiz)
-while pending:
-    recent = {r["s"] for r in spread[-(W - 1):]}
-    i = next((j for j, r in enumerate(pending) if r["s"] not in recent), 0)
-    spread.append(pending.pop(i))
-json.dump(spread, open(os.path.join(OUTD, "aizouban-stock.json"), "w", encoding="utf-8"),
+aiz_out = _spread(aiz, lambda x: x["s"] + "|" + x["e"])
+json.dump(aiz_out, open(os.path.join(OUTD, "aizouban-stock.json"), "w", encoding="utf-8"),
+          ensure_ascii=False, separators=(",", ":"))
+
+# ★特装版(2026-09-06 新設 = 愛蔵版と同型のコーナー+一覧頁 /tokusouban)。
+#   実体は旧 deluxe-stock と同じ「巻のvariant(特装版/限定版)で書影があるもの」だが、
+#   一覧頁のために著者・発売年を足した別ファイル(= 同名で契約を変えない [[index_format_change_versioned_filename]])。
+seen = set()
+tks_uniq = []
+for r in tks:
+    k = (r["s"], r["v"], r["l"], r["c"])
+    if k in seen:
+        continue
+    seen.add(k)
+    tks_uniq.append(r)
+tks_out = _spread(tks_uniq, lambda x: x["s"] + "|" + str(x["v"]) + "|" + x["l"])
+json.dump(tks_out, open(os.path.join(OUTD, "tokusouban-stock.json"), "w", encoding="utf-8"),
           ensure_ascii=False, separators=(",", ":"))
 
 days = len(ann)
 bytype = {}
 for r in aiz:
     bytype[r["e"]] = bytype.get(r["e"], 0) + 1
-print(f"走査{n} → 周年: {sum(len(v) for v in ann.values())}件/{days}日分 / 豪華版: {len(dlx)}件 / "
-      f"愛蔵版: {len(spread)}版/{len({r['s'] for r in aiz})}作品 {bytype}")
+print(f"走査{n} → 周年: {sum(len(v) for v in ann.values())}件/{days}日分 / 豪華版(旧): {len(dlx)}件 / "
+      f"愛蔵版: {len(aiz_out)}版/{len({r['s'] for r in aiz})}作品 {bytype} / "
+      f"特装版: {len(tks_out)}点/{len({r['s'] for r in tks_out})}作品")

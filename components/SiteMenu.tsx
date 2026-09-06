@@ -64,6 +64,8 @@ const CORNERS: Tile[] = [
   { icon: "film", label: "アニメの原作漫画", href: "/anime" },
   { icon: "chart", label: "なんでもランキング", href: "/rankings" },
   { icon: "drop", label: "カラー版で読める漫画", href: "/color-manga" },
+  { icon: "book", label: "愛蔵版・合本", href: "/aizouban", sub: "冊数が減った版" },
+  { icon: "box", label: "特装版・限定版", href: "/tokusouban", sub: "特別仕様" },
   { icon: "picture", label: "画集", href: "/art-books" },
 ];
 
