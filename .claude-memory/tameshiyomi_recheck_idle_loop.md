@@ -1,6 +1,6 @@
 ---
 name: tameshiyomi-recheck-idle-loop
-description: "【進行中】試し読み再検査アイドルループ=2020年以降6,857頁を古い順に再検索(保留含む)"
+description: "【退役 2026-09-06】試し読み再検査アイドルループ。URLは構築式でHEAD検証が不要になったため終了(旧=2020年以降6,857頁を古い順に再検索)"
 metadata: 
   node_type: memory
   type: project
@@ -8,7 +8,11 @@ metadata:
   modified: 2026-08-20T04:47:24.899Z
 ---
 
-# 試し読み再検査 アイドル運転 (2026-08-20 起動)
+# 試し読み再検査 アイドル運転 (2026-08-20 起動 → ★2026-09-06 退役)
+
+★**退役**: ユーザ裁定「BookLiveは憶測でかけるはず。試す必要なし」により、試し読みURLは
+`title_id+巻番号` から**構築**する方式に統一した。HEAD再検査そのものが不要になったのでこのループは回さない。
+経緯と根拠= [[tameshiyomi_url_is_constructed]]。BookLiveの停止札はそのままでよい。
 
 対象 = 最終発売日2020年以降×試し読み不在 **6,857頁**(うち6,684は過去保留・173未着手)。
 リスト = `docs/production-diagnostics/no-tameshiyomi-2020plus.tsv` / 古い順slug列 = `.cache/tameshiyomi-recheck-list.txt`。

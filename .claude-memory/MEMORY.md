@@ -2,6 +2,7 @@
 - [seeds pyramid=全体構造](project_architecture_seeds.md) — 種1=MADB raw/種2=sqlite/種3=AI fill/種4=巻補完 ／ [種1→種2脱落=大半アンソロジー](seed1_to_seed2_loss_is_mostly_anthology.md) — 再ビルド不要
 - [【戒め】人気順で優先するな](feedback_no_popularity_priority.md) — 端から全件 ／ [【戒め】勝手に仕事を増やすな](feedback_dont_inflate_work.md) ／ [ユーザ最新指示を自己解釈で上書きしない](feedback_user_directive_supremacy.md)
 - [【型・是正済】王様の仕立て屋=1頁に4部同居→頁分割](ousama_shitateya_4part_split.md) — 頁分割手順一式・subtitle override新設 ／ [【封鎖済】巻抜け仮想の偽陽性2種](volgap_virtual_false_positives.md) — 適用後>適用前は正常
+- [【型・是正済】俺の空=4作品が1頁に同居→3頁分割](oresora_4way_split.md) — ★ISBN帯の連番から候補を作り楽天キャッシュで裏取りする手。2012年GJ版の扱いは保留
 - [巻抜け仮想](volgap_virtual_tool_trigger.md) — 正=skill volgap-audit ／ [【手順】巻抜けは4型=種2在否を先に判定](volgap_diagnosis_order.md) ／ [巻抜け大半=under-merge](volgap_mostly_undermerge.md) — 種4は真の取込もれのみ ／ [【進行中】巻抜けper-case仕上げ](volgap_per_case_cleanup_state.md) — 1417・推測で触らない
 - [【再利用】2026新刊蒸留フロー](distill_2026_pipeline.md)
 - [preview実測+stale事故史](preview_deploy_pitfalls.md) — 正=skill test-deploy ／ [preview反映=GitHub Actions実体](preview_deploy_github_actions.md)
@@ -103,6 +104,7 @@
 - [kobo見直しセット復元](kobo_review_preview_set.md) — 「kobo見直ししたい」
 - [Gemini API運用実測](gemini_api_ops.md) — ~500req/日・JST16時リセット
 - [試し読み裁定=枯れ達成](tameshiyomi_adjudication_state.md)
+- [【裁定・恒久】試し読みURLは構築=BookLive検証は不要](tameshiyomi_url_is_constructed.md) — 規制中は正解巻すら403で検証が成立しない。末尾を本番巻数まで延長し2,528作品/5,448巻を復活・expand柱は退役
 - [【✅】著者名の空白=authorKeyで照合吸収](author_name_space_conventions_conflict.md) — 新規照合は必ずauthorKey経由
 - [【最重要・未決】promoteは元頁駆動=新規シリーズが出ない](orphan_series_promote_is_srcpage_driven.md) — 未掲載46,874
 - [【未決】本番R2に孤児HTML1,041頁](r2_orphan_pages_prune_missing.md) ／ [R2 prune待ち台帳=週次preflightが表示](pending_r2_prune_ledger.md)

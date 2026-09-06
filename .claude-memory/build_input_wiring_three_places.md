@@ -10,6 +10,9 @@ metadata:
 
 data/ 直下に**新しいビルド入力ファイル**(生成JSON等)を増やしたら、結線は最低3箇所:
 ①`_weekly-step1.py` の STEPS(再生成) ②★`_weekly-preflight.py` の INDEXES/MASTERS(**staging同期**) ③消費者(Nextルート/sitemap等)。
+★**4箇所目= `.github/workflows/deploy-preview.yml` の paths**(2026-09-06 実踏)。`data/tameshiyomi-map.json` は
+ビルド時joinの入力(lib/tameshiyomi.ts が data/ から読む)なのにトリガーに無く、**mapを更新しても
+previewが建て直らなかった**。data/ 配下の入力は既定でトリガー外なので明示追加が要る。
 
 **Why**: 2026-08-31 の /titles 新設で ②を忘れ、フルビルドが staging(.cache/proddata)を読むため
 titles-pages.json 不在→ローダが空フォールバック→**351頁が `_empty` だけの空ビルド**になった
