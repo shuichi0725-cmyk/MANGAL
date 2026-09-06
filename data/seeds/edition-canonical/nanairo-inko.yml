@@ -1,100 +1,110 @@
 slug: nanairo-inko
 canonical_label: 通常版
-canonical_publisher: 講談社
-canonical_imprint: 手塚治虫漫画全集
+canonical_publisher: 秋田書店
+canonical_imprint: 少年チャンピオン・コミックス
 suppress_types:
+- shinsoban
 - bunkobon
-source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。 ★ISBN補充1巻 2026-08-24(partial-isbn-gap半自動: 帯/楽天題/巻番号/未使用の4検証)　/ 2026-08-28 刊行run分裂の是正(ARMSワイド版型): MADBのレーベル表記ゆれ(英字↔和名・略称↔正式名・中黒)や種2のクラスタ分裂で、1本の刊行runが複数の版タブに割れていた。楽天seriesName・MADBのシリーズ容器ID(schema:isPartOf)・ISBN連番・刊行リストで同一runと確認できた分だけ、既存の巻を版間で移して統合した(調査エージェント+反証エージェントの二段で裁定)。巻・ISBN・発売日の新規追加や改変はしていない。 / ★2026-08-29 壊れラベル是正: 2026-08-17の一括処理が、種2でimprintが空だったrunにtype名(standard)をそのまま貼って『standard版』という実在しないタブ名を作っていた。NDL by-ISBNの叢書名(dcndl:seriesTitle)→楽天seriesName→出版社名 の順で実名に戻した。どれも取れないrunは『別版』とし、巻・ISBN・発売日には一切触れていない。 / ★2026-08-30 ユーザ裁定「機械的に処理できそうな物は処理して」。コンビニ廉価/抜粋レーベル × 同頁に他版が残る × 主版より巻数が少ない、の3条件をすべて満たす版だけを落とした(作品が消えないことを機械で保証)。 除去= Akita top comics wide(2巻) / Akita top comics(1巻)'
+source: 'ARMS型(レーベル表記ゆれ版分裂)の是正 2026-09-06(ユーザ「よく見直してほしい」):
+  原典の少年チャンピオン・コミックス全7巻が、種2で **3つのedition**に割れていた
+  (「SHONEN CHAMPION COMICS」1-4,6巻 / 「少年チャンピオン・コミックス」7巻 /
+  「Shōnen champion comics = 少年チャンピオン・コミックス. 演劇ロマンコミックス」5巻)。
+  ISBNが 9784253038096→8157 の連番で1本の刊行と確定(NDL 少年チャンピオン・コミックス
+  第1巻=9784253038096 1981.9 とも一致)。さらに原典がどれも shinsoban に落ち、
+  通常版タブを1994年の講談社「手塚治虫漫画全集」が占めていたため、頁の主版が全集になっていた。
+  → 主版=少年チャンピオン・コミックス全7巻(秋田書店1981-1982)に戻し、全集ほかは版タブへ。
+  ★秋田文庫も種2で2つに割れていた(「Akita Bunko」standard 1,3,4,5巻 /「秋田文庫」bunkobon 2巻)ため
+  bunkobonも suppress し、秋田文庫5巻・手塚治虫文庫全集3巻を版タブとして明示し直した。
+  ★5巻の発売日: 種1(MADB)にこのISBNは **2024-02-06 の再版レコード**としてしか無く(原典の登録が無い)、
+  楽天も1991-12-05(重版)。原刊行はNDLの「七色いんこ. ５ / 秋田書店 / １９８２.」しか根拠が無いため
+  **1982**(年精度)で置く。推測の月日は入れない。'
 volumes:
 - number: 1
-  isbn13: '9784061759411'
-  release_date: '1994-04-16'
+  isbn13: '9784253038096'
+  release_date: '1981-09'
 - number: 2
-  isbn13: '9784061759428'
-  release_date: '1994-05-17'
+  isbn13: '9784253038102'
+  release_date: '1981-11-05'
 - number: 3
-  isbn13: '9784061759435'
-  release_date: '1994-06-17'
+  isbn13: '9784253038119'
+  release_date: '1982-01'
 - number: 4
-  isbn13: '9784061759442'
-  release_date: '1994-08-17'
+  isbn13: '9784253038126'
+  release_date: '1982-04'
 - number: 5
-  isbn13: '9784061759459'
-  release_date: '1994-10-17'
+  isbn13: '9784253038133'
+  release_date: '1982'
 - number: 6
-  isbn13: '9784061759466'
-  release_date: '1994-11-17'
+  isbn13: '9784253038140'
+  release_date: '1982-08'
 - number: 7
-  isbn13: '9784061759473'
-  release_date: '1994-12-14'
+  isbn13: '9784253038157'
+  release_date: '1982-10'
 extra_editions:
-- type: shinsoban
-  label: Shōnen champion comics = 少年チャンピオン・コミックス. 演劇ロマンコミックス
-  imprint: Shōnen champion comics = 少年チャンピオン・コミックス. 演劇ロマンコミックス
-  publisher: 秋田書店
+- type: standard
+  label: 手塚治虫漫画全集
+  imprint: 手塚治虫漫画全集
+  publisher: 講談社
   volumes:
+  - number: 1
+    isbn13: '9784061759411'
+    release_date: '1994-04-16'
+  - number: 2
+    isbn13: '9784061759428'
+    release_date: '1994-05-17'
+  - number: 3
+    isbn13: '9784061759435'
+    release_date: '1994-06-17'
+  - number: 4
+    isbn13: '9784061759442'
+    release_date: '1994-08-17'
   - number: 5
-    isbn13: '9784253038133'
-    release_date: '2024-02-06'
+    isbn13: '9784061759459'
+    release_date: '1994-10-17'
+  - number: 6
+    isbn13: '9784061759466'
+    release_date: '1994-11-17'
+  - number: 7
+    isbn13: '9784061759473'
+    release_date: '1994-12-14'
 - type: shinsoban
-  label: 復刊ドットコム版
+  label: 復刊ドットコム《オリジナル版》大全集
+  imprint: 復刊ドットコム
   publisher: 復刊ドットコム
   volumes:
   - number: 1
     isbn13: '9784835457130'
-    release_date: 2020-01
+    release_date: '2020-01'
   - number: 2
     isbn13: '9784835457147'
-    release_date: 2020-03
+    release_date: '2020-03'
   - number: 3
     isbn13: '9784835457154'
-    release_date: 2020-05
+    release_date: '2020-05'
   - number: 4
     isbn13: '9784835457161'
-    release_date: 2020-07
-- type: bunkobon
-  label: 手塚治虫文庫全集
-  imprint: 手塚治虫文庫全集
-  publisher: 講談社
-  volumes:
-  - number: 1
-    isbn13: '9784063738445'
-    release_date: 2011-08
-  - number: 2
-    isbn13: '9784063738452'
-    release_date: 2011-08
-  - number: 3
-    isbn13: '9784063738469'
-    release_date: 2011-08
+    release_date: '2020-07'
 - type: shinsoban
-  label: 少年チャンピオン・コミックス
-  imprint: 少年チャンピオン・コミックス
-  publisher: 秋田書店
-  volumes:
-  - number: 7
-    isbn13: '9784253038157'
-    release_date: 1982-10
-- type: shinsoban
-  label: SHONEN CHAMPION COMICS
-  imprint: SHONEN CHAMPION COMICS
+  label: 手塚治虫・傑作選集
+  imprint: 手塚治虫・傑作選集
   publisher: 秋田書店
   volumes:
   - number: 1
-    release_date: 1981-09
-    isbn13: '9784253038096'
+    isbn13: '9784253102223'
+    release_date: '1990-12'
   - number: 2
-    isbn13: '9784253038102'
-    release_date: '1981-11-05'
+    isbn13: '9784253103350'
+    release_date: '1991-02'
   - number: 3
-    isbn13: '9784253038119'
-    release_date: 1982-01
+    isbn13: '9784253103367'
+    release_date: '1991-03'
   - number: 4
-    isbn13: '9784253038126'
-    release_date: 1982-04
-  - number: 6
-    isbn13: '9784253038140'
-    release_date: 1982-08
-- type: shinsoban
+    isbn13: '9784253103374'
+    release_date: '1992-06-30'
+  - number: 5
+    isbn13: '9784253103381'
+    release_date: '1992-07-30'
+- type: bunkobon
   label: 秋田文庫
   imprint: 秋田文庫
   publisher: 秋田書店
@@ -104,7 +114,7 @@ extra_editions:
     release_date: '1997-03-31'
   - number: 2
     isbn13: '9784253173384'
-    release_date: 1997-06
+    release_date: '1997-06-10'
   - number: 3
     isbn13: '9784253173391'
     release_date: '1997-08-10'
@@ -115,30 +125,24 @@ extra_editions:
     isbn13: '9784253173414'
     release_date: '1997-12-10'
 - type: shinsoban
-  label: 手塚治虫・傑作選集
-  imprint: 手塚治虫・傑作選集
-  publisher: 秋田書店
+  label: ゴマブックス版
+  imprint: ゴマブックス
+  publisher: ゴマブックス
   volumes:
   - number: 1
-    isbn13: '9784253102223'
-    release_date: 1990-12
-  - number: 2
-    isbn13: '9784253103350'
-    release_date: 1991-02
-  - number: 3
-    isbn13: '9784253103367'
-    release_date: 1991-03
-  - number: 4
-    isbn13: '9784253103374'
-    release_date: '1992-06-30'
-  - number: 5
-    isbn13: '9784253103381'
-    release_date: '1992-07-30'
-- type: shinsoban
-  label: Goma books
-  imprint: Goma books
-  publisher: ごま書房新社
-  volumes:
-  - number: 0
     isbn13: '9784814919055'
-    release_date: 2019-02
+    release_date: '2019-02'
+- type: bunkobon
+  label: 手塚治虫文庫全集
+  imprint: 手塚治虫文庫全集
+  publisher: 講談社
+  volumes:
+  - number: 1
+    isbn13: '9784063738445'
+    release_date: '2011-08'
+  - number: 2
+    isbn13: '9784063738452'
+    release_date: '2011-08'
+  - number: 3
+    isbn13: '9784063738469'
+    release_date: '2011-08'
