@@ -29,8 +29,8 @@ DAY_RE = re.compile(r"^(\d{4})-(\d{2})-(\d{2})$")
 
 ann = {}   # "MM-DD" -> [{s,t,y,c}]
 dlx = []   # [{s,t,v,l,c}]
-aiz = []   # [{s,t,a,e,l,v,sv,c,d}] = 愛蔵版コーナー(合本のみ)
-tks = []   # [{s,t,a,v,l,c,d}] = 特装版コーナー(巻のvariant=特装/限定)
+aiz = []   # [{s,t,k,a,e,l,v,sv,c,d}] = 愛蔵版コーナー(合本のみ)
+tks = []   # [{s,t,k,a,v,l,c,d}] = 特装版コーナー(巻のvariant=特装/限定)
 AIZ_MIN, AIZ_MAX = 0.30, 0.70   # 通常版比の巻数(下限=登録もれ除け / 上限=同数の普通再版除け)
 n = 0
 for p in glob.glob(os.path.join(ROOT, "data", "manga.v2", "*.yml")):
@@ -43,6 +43,7 @@ for p in glob.glob(os.path.join(ROOT, "data", "manga.v2", "*.yml")):
         continue
     slug = d.get("slug") or os.path.basename(p)[:-4]
     title = d.get("title") or ""
+    kana = d.get("title_kana") or ""   # ★一覧頁の50音順に使う(lib/listSort と同じキー)
     authors = "・".join(a.get("name") or "" for a in (d.get("authors") or []) if a.get("name"))
     eds = d.get("editions") or []
 
@@ -68,7 +69,7 @@ for p in glob.glob(os.path.join(ROOT, "data", "manga.v2", "*.yml")):
             v1 = next((v for v in vols if v.get("number") == 1), None)
             if not (v1 and v1.get("cover_url")):
                 continue  # 1巻書影が無いとコーナーの見た目が崩れる
-            aiz.append({"s": slug, "t": title, "a": authors, "e": t, "l": e.get("imprint") or "",
+            aiz.append({"s": slug, "t": title, "k": kana, "a": authors, "e": t, "l": e.get("imprint") or "",
                         "v": c, "sv": std_vols, "c": v1["cover_url"],
                         "d": str(v1.get("release_date") or "")[:4]})
 
@@ -87,7 +88,7 @@ for p in glob.glob(os.path.join(ROOT, "data", "manga.v2", "*.yml")):
                 if vr.get("cover_url"):
                     dlx.append({"s": slug, "t": title, "v": v.get("number"),
                                 "l": vr.get("label") or "特装版", "c": vr["cover_url"]})
-                    tks.append({"s": slug, "t": title, "a": authors, "v": v.get("number"),
+                    tks.append({"s": slug, "t": title, "k": kana, "a": authors, "v": v.get("number"),
                                 "l": vr.get("label") or "特装版", "c": vr["cover_url"],
                                 "d": str(v.get("release_date") or "")[:4]})
 

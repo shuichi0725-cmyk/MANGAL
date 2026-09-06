@@ -4,9 +4,10 @@ import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import CoverImage from "@/components/CoverImage";
 import type { TksItem } from "@/components/EditionCorners";
+import { jaCollator } from "@/lib/collator";
 
-/** 特装版・限定版の一覧(/tokusouban)。既定は作品50音順=同じ作品の特装版が隣り合う。
- *  「新しい順」に切替可(発売年降順)。 */
+/** 特装版・限定版の一覧(/tokusouban)。既定は**50音順**(2026-09-06 ユーザ指示「名前の順に。
+ *  フリガナを参考に」= title_kana キー)。同じ作品の特装版が隣り合う。「新しい順」に切替可。 */
 type Sort = "title" | "new";
 
 export default function TokusoubanListClient() {
@@ -21,10 +22,13 @@ export default function TokusoubanListClient() {
 
   const list = useMemo(() => {
     const src = [...(rows ?? [])];
+    // ★50音順=フリガナ(title_kana)基準。無い頁だけ題名で代替(lib/listSort の kana と同式)
+    const byKana = (a: TksItem, b: TksItem) =>
+      jaCollator.compare(a.k || a.t, b.k || b.t) || (a.v ?? 0) - (b.v ?? 0);
     if (sort === "new") {
-      return src.sort((a, b) => (b.d ?? "").localeCompare(a.d ?? "") || a.t.localeCompare(b.t, "ja") || (a.v ?? 0) - (b.v ?? 0));
+      return src.sort((a, b) => (b.d ?? "").localeCompare(a.d ?? "") || byKana(a, b));
     }
-    return src.sort((a, b) => a.t.localeCompare(b.t, "ja") || (a.v ?? 0) - (b.v ?? 0));
+    return src.sort(byKana);
   }, [rows, sort]);
 
   if (rows === null) return <p className="px-4 text-[13px] text-ink/60">読み込み中…</p>;
@@ -37,7 +41,7 @@ export default function TokusoubanListClient() {
           {rows.length}点 / {works}作品
         </p>
         <div className="flex gap-1.5">
-          {([["title", "作品順"], ["new", "新しい順"]] as Array<[Sort, string]>).map(([k, label]) => (
+          {([["title", "50音順"], ["new", "新しい順"]] as Array<[Sort, string]>).map(([k, label]) => (
             <button
               key={k}
               type="button"

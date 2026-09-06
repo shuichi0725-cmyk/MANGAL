@@ -4,9 +4,11 @@ import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import CoverImage from "@/components/CoverImage";
 import { TYPE_JA, type AizItem } from "@/components/EditionCorners";
+import { jaCollator } from "@/lib/collator";
 
-/** 愛蔵版・合本の一覧(/aizouban)。版種チップで絞り込み、既定は「通常版の巻数が多い順」
- *  = 長い作品ほど合本の恩恵が大きいので上に来る。 */
+/** 愛蔵版・合本の一覧(/aizouban)。版種チップで絞り込み、並びは**50音順**
+ *  (2026-09-06 ユーザ指示「名前の順に。フリガナを参考に」= title_kana キー。
+ *   一覧表の「50音順」= lib/listSort と同じ比較で揃える)。 */
 const ORDER = ["aizoban", "kanzenban", "wideban", "shinsoban", "deluxe", "other"];
 
 export default function AizoubanListClient() {
@@ -27,7 +29,10 @@ export default function AizoubanListClient() {
 
   const list = useMemo(() => {
     const src = (rows ?? []).filter((r) => type === "all" || r.e === type);
-    return [...src].sort((a, b) => b.sv - a.sv || a.t.localeCompare(b.t, "ja"));
+    // ★50音順=フリガナ(title_kana)基準。無い頁だけ題名で代替(lib/listSort の kana と同式)
+    return [...src].sort(
+      (a, b) => jaCollator.compare(a.k || a.t, b.k || b.t) || a.v - b.v,
+    );
   }, [rows, type]);
 
   if (rows === null) return <p className="px-4 text-[13px] text-ink/60">読み込み中…</p>;
@@ -57,7 +62,7 @@ export default function AizoubanListClient() {
         ))}
       </div>
       <p className="mb-2 text-[11px] text-ink/50">
-        {list.length}点 <span className="text-ink/35">・通常版の巻数が多い順</span>
+        {list.length}点 <span className="text-ink/35">・50音順(フリガナ)</span>
       </p>
       <ul className="grid grid-cols-3 gap-3 sm:grid-cols-4 md:grid-cols-6">
         {list.map((e) => (
