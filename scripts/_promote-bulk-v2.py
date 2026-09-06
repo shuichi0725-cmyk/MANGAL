@@ -3172,9 +3172,28 @@ def build_yml(
         if _eov.get("related_pin"):
             o["related_pin"] = list(_eov["related_pin"])
     # ★isbn-fill (= ガラスの仮面型: ISBN欠け巻へ確証済み現行刷ISBNを補充。空欄のみ・上書き禁止)
+    #   ★2026-09-06 拡張(ユーザ発見の同ISBN二重巻の是正用。どちらも**現在値を名指しした時だけ**効く=だろう運転禁止):
+    #     replaces: '<いまの誤ISBN>'    … 一致した時だけ isbn13 を上書き(空欄禁止の例外)
+    #     drop_if_isbn: '<いまのISBN>'  … 一致した時だけその巻行を削除(他巻とISBNが重複した幽霊行の始末)
     _fills = _load_isbn_fill().get(o["slug"])
     if _fills:
         _fmap = {(f["edition"], f["number"]): f for f in _fills}
+        for _ed in o.get("editions") or []:
+            _keep = []
+            for _v in _ed.get("volumes") or []:
+                _f = _fmap.get((_ed.get("type"), _v.get("number")))
+                _cur = str(_v.get("isbn13") or "")
+                if _f and _f.get("drop_if_isbn") and _cur == str(_f["drop_if_isbn"]):
+                    continue  # 幽霊行(同ISBNが別巻に在る)を落とす
+                if _f and _f.get("replaces") and _cur == str(_f["replaces"]):
+                    _v["isbn13"] = str(_f["isbn13"])
+                    if _f.get("release_date"):
+                        _v["release_date"] = _norm_date(_f["release_date"])
+                    _cov3 = get_cover_override()
+                    _ck3 = _norm_isbn(_v["isbn13"])
+                    _v["cover_url"] = ((_cov3[_ck3] if _ck3 in _cov3 else _cover_for(_v["isbn13"])) or None)
+                _keep.append(_v)
+            _ed["volumes"] = _keep
         for _ed in o.get("editions") or []:
             for _v in _ed.get("volumes") or []:
                 _f = _fmap.get((_ed.get("type"), _v.get("number")))

@@ -45131,3 +45131,15 @@ volumes:
   source: wikipedia+rakuten
   added_at: '2026-09-03'
   note: 'MADB取込もれ(種1・種2とも不在)。ja.wikipedia 単行本節=11巻(最終巻) 2012年4月17日 ISBN978-4-8124-7763-2、連載は2012年4月号で完結。楽天キャッシュ=『ういういdays（11）（完）』2012年04月。頁のstatusは既にcompleted'
+- series_keys:
+  - 'name:由依子|name:前略、お兄ちゃんは聖女になりました。'
+  qid: null
+  number: 1
+  isbn13: '9784434305009'
+  release_date: '2022-09'
+  publisher: '彗星社'
+  edition_type: standard
+  title_display: '前略、お兄ちゃんは聖女になりました。'
+  source: ndl
+  added_at: '2026-09-06'
+  note: '頁内ISBN重複の是正で1巻行を除去した後の正データ。旧行は4巻のISBN(9784434377327)を持つ誤補完だった。NDL creator=由依子で確定= 9784434305009 / 2022.9 / 彗星社 Glanz BLcomics(1巻は題に巻番号が無いためNDLの巻欄は空)'

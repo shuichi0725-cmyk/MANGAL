@@ -4971,12 +4971,12 @@ volumes:
 - series_keys:
   - name:面堂かずき|name:ロマンシング サ・ガ2
   number: 1
-  isbn13: '9784197900060'
-  release_date: '1994-12-15'
+  isbn13: '9784197900046'
+  release_date: '1994-07-16'
   edition_type: standard
   source: rakuten
   added_at: '2026-06-21'
-  note: OFFSET/GAP低巻・内部欠け補完。romanshingu-saga
+  note: 'OFFSET/GAP低巻・内部欠け補完。romanshingu-saga (★2026-09-06是正: 旧値9784197900060は楽天題「ロマンシングサガ2」=2巻のISBNで1巻と重複していた。正=「ロマンシングサガ2（1）」9784197900046 1994-07-16)'
 - series_keys:
   - qid:Q11108013|name:陵辱!潜入捜査官
   number: 1
@@ -18891,15 +18891,6 @@ volumes:
   source: ndl
   added_at: '2026-06-21'
   note: B/C群 欠け巻補完(NDL著者strict)。zennin-no-otsu-san-boukensha-o-intai-shite-kojiin-no-sensei-ni-naru
-- series_keys:
-  - name:由依子|name:前略、お兄ちゃんは聖女になりました。
-  number: 1
-  isbn13: '9784434377327'
-  release_date: null
-  edition_type: standard
-  source: ndl
-  added_at: '2026-06-21'
-  note: B/C群 欠け巻補完(NDL著者strict)。zenryaku-onii-chan-wa-seijo-ni-narimashita
 - series_keys:
   - name:真坂|name:絶倫ヤクザの極上愛撫|sub:逃れられない契約結婚
   number: 1

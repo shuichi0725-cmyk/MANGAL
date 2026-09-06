@@ -228,9 +228,14 @@ editions:
     release_date: 2005-12
   - number: 36
     asin: null
-    isbn13: '9784063636079'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/6079/9784063636079.jpg?_ex=200x200
-    release_date: '2005-12-16'
+    isbn13: '9784063636277'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/6277/9784063636277.jpg?_ex=300x300
+    release_date: '2006-02-17'
+    variants:
+    - label: 限定版
+      isbn13: '9784063620535'
+      cover_url: null
+      price: null
   - number: 37
     asin: null
     isbn13: '9784063636536'
@@ -351,6 +356,6 @@ tags:
 - name: Shounen
   category: Demographic
   rank: 79
-popularity: 4396
+popularity: 4486
 score: 72
 work_wikidata_qid: Q621603

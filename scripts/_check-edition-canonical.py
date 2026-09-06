@@ -224,9 +224,29 @@ def check_volumes(where, vols, problems):
         i = v.get("isbn13")
         if i is not None and not (isinstance(i, str) and len(i) == 13 and i.isdigit()):
             problems.append("%s: isbn13 が13桁文字列でない (%r)" % (where, i))
+        # ★検査8(2026-09-06 新設): ISBNとして成立しているか。
+        #   銀牙伝説Weedのcanonicalに **9789784537100(978が二重の作り物)が17巻分**焼かれていた
+        #   = Wiki蒸留で日付は取れたがISBNが無く、埋め草が入ったまま番人を素通りしていた。
+        elif isinstance(i, str) and len(i) == 13 and i.isdigit():
+            if not i.startswith(("978", "979")):
+                problems.append("%s: isbn13 の接頭辞が978/979でない (%s)" % (where, i))
+            else:
+                _s = sum((1 if k % 2 == 0 else 3) * int(c) for k, c in enumerate(i[:12]))
+                if (10 - _s % 10) % 10 != int(i[12]):
+                    problems.append("%s: isbn13 のチェックディジットが合わない (%s)" % (where, i))
+                elif i.startswith(("9789", "9799")):
+                    # 978+9784… の二重接頭辞は形式上は通るので別途flag(実在ISBNならレアなので確認する)
+                    problems.append("%s: isbn13 が978/979の二重接頭辞に見える (%s) = 要確認" % (where, i))
     dup = {n for n in nums if nums.count(n) > 1}
     if dup:
         problems.append("%s: 巻番号の重複 %s" % (where, sorted(dup)))
+    # ★検査9(2026-09-06 新設): 同じ版の中で同じISBNが複数の巻に付いていないか。
+    #   canonicalは頁の巻を確定させるseedなので、ここの重複がそのまま本番頁の二重巻になる
+    #   (ゴルゴ13 127/129・将太の寿司 17/18 で実害)。
+    _is = [str(v.get("isbn13")) for v in vols if isinstance(v, dict) and v.get("isbn13")]
+    _idup = sorted({i for i in _is if _is.count(i) > 1})
+    if _idup:
+        problems.append("%s: 同一ISBNが複数の巻に付いている %s" % (where, _idup))
 
 
 def main() -> int:
