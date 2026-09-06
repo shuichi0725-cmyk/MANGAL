@@ -704,7 +704,9 @@ DETECTORS = [
     ("foreign-editions", ["_audit-foreign-editions.py"], None, False),
     ("price-pack", ["_audit-price-pack.py"], "price-pack.tsv", False),
     ("vol0-hidden-first", ["_audit-vol0-hidden-first.py"], "vol0-hidden-first.tsv", False),
-    ("orphan-new-series", ["_audit-orphan-new-series.py", "--rebuild"], "orphan-new-series.tsv", False),
+    # ★行数は「芯」を見る(全件47,631は単巻の読切/既存頁の分身/scope外が主体= 2026-09-06 裁定。
+    #   全件TSVも同時に出るので情報は落ちない)。
+    ("orphan-new-series", ["_audit-orphan-new-series.py", "--rebuild"], "orphan-new-series-core.tsv", False),
     ("edition-canonical", ["_check-edition-canonical.py"], None, False),
     ("year-suffix-dup", ["_audit-year-suffix-dup.py"], "year-suffix-dup.tsv", False),
     ("canonical-imprint-split", ["_audit-canonical-imprint-split.py"], "canonical-imprint-split.tsv", False),
