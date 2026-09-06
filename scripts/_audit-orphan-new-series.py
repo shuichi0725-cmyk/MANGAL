@@ -27,7 +27,9 @@
     芯 = N巻以上 かつ 既存頁に照合できない かつ 外国語版でない かつ 裁定済みdrop題でない
 usage: python scripts/_audit-orphan-new-series.py [--since YYYY-MM] [--rebuild] [--core-min-vols N]
   --since = その発売日以降の巻を持つseriesに限る(既定=全件)
-  --rebuild = 本番掲載ISBN索引(.cache/live-isbn-index.json)を作り直す(promote後は必須)
+  --rebuild = 本番掲載ISBN索引(.cache/live-isbn-index.json)を強制的に作り直す
+              ★付け忘れても、 本番ymlが索引より新しければ**自動で**作り直す(古い索引は
+                解決済みの案件を孤児として復活させるため。 2026-09-06 トリニティセブンで実踏)
   --core-min-vols = 芯の最小巻数(既定2。 単巻は材料が無く登録protocolを通せないので既定で芯から外す)
 """
 import datetime
@@ -131,6 +133,19 @@ def build_index():
     return seen
 
 
+def newest_src_mtime():
+    """本番出力 data/manga.v2 の最新更新時刻(中身は読まない= 速い)。"""
+    newest, n = 0.0, 0
+    with os.scandir(ROOT / "data" / "manga.v2") as it:
+        for e in it:
+            if e.name.endswith(".yml"):
+                m = e.stat().st_mtime
+                n += 1
+                if m > newest:
+                    newest = m
+    return newest, n
+
+
 def _imprint_dropped(P, imp):
     """promote の imprint drop 条件(= L1216付近と同一)を1つの版について判定。"""
     imp = imp or ""
@@ -159,12 +174,24 @@ def main():
         core_min_vols = int(sys.argv[sys.argv.index("--core-min-vols") + 1])
     _today = datetime.date.today()
     recent_cut = "%04d-%02d" % (_today.year - 1, _today.month)
-    if "--rebuild" in sys.argv or not IDX.exists():
+    # ★索引の陳腐化を自動検知する。 古い索引は **解決済みの案件を孤児として復活させる**
+    #   (2026-09-06 実害: 09-02の索引のまま回して、 09-03に本編頁へ結線済みの
+    #    トリニティセブン19〜34巻を「まだ出ていない」と誤って上げた = ユーザ発見)。
+    #   注意書き「promote後は --rebuild」だけでは付け忘れが静かに数字を膨らませるので機械で見る。
+    stale = False
+    if IDX.exists():
+        newest, npages = newest_src_mtime()
+        if newest > IDX.stat().st_mtime:
+            stale = True
+            age = (newest - IDX.stat().st_mtime) / 3600
+            print(f"[1/3] ★索引が古い(本番ymlの方が {age:.1f}h 新しい / {npages:,}頁) → 自動で作り直す",
+                  flush=True)
+    if "--rebuild" in sys.argv or not IDX.exists() or stale:
         print("[1/3] 本番掲載ISBN索引を構築 ...", flush=True)
         live = build_index()
     else:
         live = set(json.loads(IDX.read_text(encoding="utf-8")))
-        print(f"[1/3] 本番掲載ISBN索引(既存) {len(live):,} ★promote後は --rebuild", flush=True)
+        print(f"[1/3] 本番掲載ISBN索引(既存・鮮度OK) {len(live):,}", flush=True)
 
     print("[2/3] promote の drop条件を読み込み ...", flush=True)
     P = _promote()
