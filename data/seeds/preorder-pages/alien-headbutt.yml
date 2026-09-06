@@ -21,6 +21,15 @@ editions:
     isbn13: '9784088850931'
     cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0931/9784088850931_1_8.jpg?_ex=200x200
     release_date: '2026-07-03'
+  # ★2巻(2026-09-06 追加): 巻抜け見なおし表で発見。予約ドラフト出身の頁は種2に series_key が無く
+  #   種4(volumes-supplement)が効かないので、ここへ直接追記するのが正 [[preorder_page_zokkan_direct_append]]。
+  #   裏取り= NDL by-ISBN「エイリアンヘッドバット」巻次2 / 2026.7、種2(MADB) 9784088851761 / 2026-07-27 /
+  #   ジャンプコミックス。楽天キャッシュの 2026-07-03 は発売前の予約ハーベスト値(価格・書影とも空)なので採らない。
+  - number: 2
+    asin: null
+    isbn13: '9784088851761'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/1761/9784088851761_1_8.jpg?_ex=300x300
+    release_date: '2026-07-27'
 publisher: shueisha
 year_ended: null
 _note_origin: rakuten-preorder new1b promoted=2026-07-14 kana=mismatch

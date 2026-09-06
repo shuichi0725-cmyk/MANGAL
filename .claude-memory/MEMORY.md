@@ -16,6 +16,7 @@
 - [NDL漫画判定=NDC726.1](ndl_manga_filter_ndc726.md) ／ [【厳守】NDL=1.2秒/req](ndl_access_rate_method.md) — burst=IP遮断 ／ [NDL discoveryの非漫画偽陽性](ndl_discovery_nonmanga_false_positives.md) ／ [NDL非漫画一掃の罠](ndl_nonmanga_sweep.md) — 混在本注意
 - [synopsis和訳=git追跡seed](synopsis_ja_seed.md) — anilist_id key・種3に焼かない ／ [【残】キャッチ/説明欠落補完](catch_synopsis_enrich_pending.md) — 19,750件 ／ [catch側にも別作品混入の型](catch_side_wrong_work_class.md) — _catch-audit.py ／ [【✅】短キャッチrequeue完了](synopsis_short_requeue_done.md)
 - [掲載scope=日本出版漫画](mangal_inclusion_scope.md) — manhwa日本語版も対象 ／ [分冊版/合本=非掲載が基本](bunsatsu_gappon_exclusion.md) — NDLヨミが信号
+- [【罠】series-mergeは後勝ち=別entryを足すと先の結線が消える](series_merge_last_entry_wins.md) — 既存entryにキーを足す。悪役令嬢で4巻が落ちた
 - [巻割れ統合(renumber)](volume_split_merge.md) ／ [MADB誤番号(下=3型)是正](madb_volume_misnumber_fix.md) — promoteで振り直し
 - [【進行中】抜粋本=楽天副題にしか無い層](excerpt_subtitle_hidden_layer.md) — 250頁3分類済 ／ [非掲載drop list](non_manga_drop_cleanup.md) ／ [promote mergeがdrop list尊重](promote_merge_respects_drop.md)
 - [掲載境界ルール](inclusion_edge_rules.md) — 映画コミカライズkeep/フィルムdrop ／ [コナン映画 判別法](conan_movie_filmcomic_method.md) ／ [フィルムコミック=imprintだけがアニメ物の穴](film_comic_imprint_hole.md) ／ [コンビニ判一掃=148drop/16hold](konbini_reprint_sweep.md) — imprint一律drop不可
