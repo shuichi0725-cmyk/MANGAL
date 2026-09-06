@@ -1,84 +1,62 @@
 slug: vampire
 canonical_label: 通常版
-canonical_publisher: 講談社
-canonical_imprint: 手塚治虫漫画全集
+canonical_publisher: 秋田書店
+canonical_imprint: サンデー・コミックス
 suppress_types:
-- bunkobon
-source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。 / ★2026-08-30 ユーザ裁定「機械的に処理できそうな物は処理して」。コンビニ廉価/抜粋レーベル × 同頁に他版が残る × 主版より巻数が少ない、の3条件をすべて満たす版だけを落とした(作品が消えないことを機械で保証)。 除去= Akita top comics wide(1巻) / 秋田トップコミックス(1巻)'
+- shinsoban
+source: 'ARMS型(レーベル表記ゆれ版分裂)の是正 2026-09-06(七色いんこと同型・ユーザ依頼):
+  原典の秋田書店サンデー・コミックス版が種2で分断され、1巻(1968-05-10)と3巻(1972-10)が
+  「サンデー・コミックス」に、2巻(1968-06-10)だけが英字表記の「SUNDAY COMICS」に落ちて別タブになっていた。
+  NDLで原典は全3巻と確認(【SUNDAY COMICS】バンパイヤ 1 = 1968.5 / 第3巻 = 1972.10、
+  【サンデーコミックス】【サンディコミックス】等の表記ゆれ記録も同一書誌)。
+  さらに通常版タブを1979/1993年の講談社「手塚治虫漫画全集」が占めていたため主版が全集になっていた。
+  → 主版=サンデー・コミックス全3巻(秋田書店1968-1972)、1988年の新装4巻(9784253063906-937。
+  NDL「サンデー・コミックス 第1巻 ISBN=425306390 1988.3」)は別タブへ。
+  ★1・2巻はISBN以前の本のためISBN無し(NDLも無しで一致)。3巻の9784253062022は種2(MADB)由来の
+  重版ISBNで楽天/NDLには無いが書影seedに実物があるため温存する。'
 volumes:
 - number: 1
-  isbn13: '9784061087422'
-  release_date: '1979-03-30'
+  release_date: '1968-05-10'
 - number: 2
-  isbn13: '9784061087439'
-  release_date: '1979-04-30'
+  release_date: '1968-06-10'
 - number: 3
-  isbn13: '9784061087446'
-  release_date: '1979-06-30'
-- number: 4
-  isbn13: '9784061759206'
-  release_date: 1993-06
+  isbn13: '9784253062022'
+  release_date: '1972-10'
 extra_editions:
 - type: shinsoban
-  label: サンデー・コミックス(1968)
-  imprint: サンデー・コミックス
-  publisher: 秋田書店
-  volumes:
-  - number: 1
-    release_date: '1968-05-10'
-  - number: 3
-    isbn13: '9784253062022'
-    release_date: 1972-10
-- type: shinsoban
-  label: サンデー・コミックス(1988)
+  label: サンデー・コミックス(1988年版)
   imprint: サンデー・コミックス
   publisher: 秋田書店
   volumes:
   - number: 1
     isbn13: '9784253063906'
-    release_date: 1988-03
+    release_date: '1988-03'
   - number: 2
     isbn13: '9784253063913'
-    release_date: 1988-03
+    release_date: '1988-03'
   - number: 3
     isbn13: '9784253063920'
-    release_date: 1988-03
+    release_date: '1988-03'
   - number: 4
     isbn13: '9784253063937'
-    release_date: 1988-03
-- type: shinsoban
-  label: Goma books
-  imprint: Goma books
-  publisher: ごま書房新社
+    release_date: '1988-03'
+- type: standard
+  label: 手塚治虫漫画全集
+  imprint: 手塚治虫漫画全集
+  publisher: 講談社
   volumes:
   - number: 1
-    isbn13: '9784814919123'
-    release_date: 2019-03
+    isbn13: '9784061087422'
+    release_date: '1979-03-30'
   - number: 2
-    isbn13: '9784814919185'
-    release_date: 2019-04
-- type: shinsoban
-  label: 手塚治虫トレジャー・ボックス
-  imprint: 手塚治虫トレジャー・ボックス
-  publisher: 国書刊行会
-  volumes:
+    isbn13: '9784061087439'
+    release_date: '1979-04-30'
   - number: 3
-    isbn13: '9784336054746'
-    release_date: 2012-07
-- type: bunkobon
-  label: 秋田文庫
-  imprint: 秋田文庫
-  publisher: 秋田書店
-  volumes:
-  - number: 1
-    isbn13: '9784253170932'
-    release_date: 1995-02
-  - number: 2
-    isbn13: '9784253170949'
-    release_date: '1995-02-25'
-  - number: 3
-    isbn13: '9784253170956'
-    release_date: 1995-02
+    isbn13: '9784061087446'
+    release_date: '1979-06-30'
+  - number: 4
+    isbn13: '9784061759206'
+    release_date: '1993-06'
 - type: shinsoban
   label: 手塚治虫・傑作選集
   imprint: 手塚治虫・傑作選集
@@ -86,25 +64,26 @@ extra_editions:
   volumes:
   - number: 1
     isbn13: '9784253103398'
-    release_date: 1992-04
+    release_date: '1992-04'
   - number: 2
     isbn13: '9784253103404'
-    release_date: 1992-05
-- type: bunkobon
-  label: 手塚治虫文庫全集
-  imprint: 手塚治虫文庫全集
-  publisher: 講談社
+    release_date: '1992-05'
+- type: shinsoban
+  label: 手塚治虫トレジャー・ボックス
+  imprint: 手塚治虫トレジャー・ボックス
+  publisher: 国書刊行会
+  volumes:
+  - number: 3
+    isbn13: '9784336054746'
+    release_date: '2012-07'
+- type: shinsoban
+  label: ゴマブックス版
+  imprint: ゴマブックス
+  publisher: ゴマブックス
   volumes:
   - number: 1
-    isbn13: '9784063737820'
-    release_date: 2010-09
+    isbn13: '9784814919123'
+    release_date: '2019-03'
   - number: 2
-    isbn13: '9784063737837'
-    release_date: 2010-09
-- type: shinsoban
-  label: SUNDAY COMICS
-  imprint: SUNDAY COMICS
-  publisher: 秋田書店
-  volumes:
-  - number: 2
-    release_date: '1968-06-10'
+    isbn13: '9784814919185'
+    release_date: '2019-04'
