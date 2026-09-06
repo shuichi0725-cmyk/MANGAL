@@ -1,30 +1,36 @@
 slug: rokkuboukenki
 canonical_label: 通常版
-canonical_publisher: 講談社
-canonical_imprint: 手塚治虫漫画全集
+canonical_publisher: 鈴木出版
+canonical_imprint: 初出単行本(鈴木出版)
 suppress_types:
-- bunkobon
-source: 'ギャラ型B是正 2026-08-17: 通常版タブに1955年鈴木出版の初出単行本・1966-67年コダマダイヤモンドコミックス(MADB側で3通りの表記ゆらぎに分裂)・1977年手塚治虫漫画全集・1992年小学館叢書・2011年小学館クリエイティブ限定版BOXが混線し56年の逆行。NDL SRU(creator=手塚治虫)で確定= ①鈴木出版 前編 1955.02 / 第3集 1956.10(第2集は両ソース不在=欠番) ②手塚治虫漫画全集 講談社 全2巻 1977.7/1977.9.20 ③小学館叢書 手塚治虫初期傑作集6 1992.11(ISBN 4091972160) ④小学館クリエイティブ 限定版BOX 2011.10(第1部デイモンの嵐編/第2部鳥人の反乱編/付録が**同一ISBN 9784778031893**=BOX1点) ⑤角川文庫 1994.11 ⑥手塚治虫文庫全集 2010.4。★主版は「完備最古」の規則に従い②(全2巻そろい)とした。①は巻構成が前編/第3集で不完備、コダマ版はMADBがv1を1966-10-30と1967-02-10、v2を1967-02-10と1967-10-30の二重に持ち初版/重版の判別が両ソースからできないため、各巻の最古日付だけを採ってタブ化した(1967-02-10のv1と1967-10-30のv2は重版とみなす。デスハンターv1と同じ扱い)。虫コミックス・手塚治虫漫画選集のレコードはMADB側がv0(巻番号不明)で元から非表示。'
+- other
+source: 'ja.wikipedia「ロック冒険記」の単行本節(2026-09-06 ユーザ提示)で版構成が確定したため再構築。
+  ★この記事にISBNは無いが、**版ごとの「全何巻」**が書かれており、ISBN以前(1955-1971)の版しか無い本作では
+  それが唯一の全巻数の根拠になる:
+  鈴木出版 全3巻 / 手塚治虫漫画選集(鈴木出版) 全1巻 / ダイヤモンドコミックス(コダマプレス) 全2巻 /
+  虫コミックス(虫プロ商事) 全1巻 / 手塚治虫漫画全集(講談社) 全2巻 / 小学館叢書 全1巻 /
+  角川文庫 全1巻 / 手塚治虫文庫全集 全1巻 / 限定版BOX 全1巻。
+  これで判ったこと= ①通常版タブを1977年の講談社全集が占めていたが、初出は鈴木出版(1955-1956)。
+  ②鈴木出版は全3巻で、当方は1巻(前編1955-02)と3巻(第3集1956-10)しか持っていない=**2巻は真の欠落**
+  (NDLに「巻表示なし・1956.10.15・鈴木出版」の記録があるが第3集と同月で中編と断定できないため入れない)。
+  ③コダマプレス版は全2巻が正しく、種2にある3つ目のレーベル表記(コダマダイヤモンドコミクス 2巻 1967-10-30)は
+  重複記録=出さないのが正。 ④種2にあるのに頁へ出ていなかった虫コミックス(1971)は実在の版なので版タブへ復活。'
 volumes:
 - number: 1
-  isbn13: '9784061086074'
-  release_date: '1977-07'
-- number: 2
-  isbn13: '9784061086081'
-  release_date: '1977-09-20'
+  release_date: '1955-02'
+  volume_label: 前編
+- number: 3
+  release_date: '1956-10'
+  volume_label: 第3集
 extra_editions:
 - type: other
-  label: 初出単行本(鈴木出版)
+  label: 手塚治虫漫画選集
+  imprint: 手塚治虫漫画選集
   publisher: 鈴木出版
   volumes:
   - number: 1
-    release_date: '1955-02'
-    volume_label: 前編
-  - number: 3
-    release_date: '1956-10'
-    volume_label: 第3集
 - type: other
-  label: コダマダイヤモンドコミックス版
+  label: ダイヤモンドコミックス
   imprint: コダマダイヤモンドコミックス
   publisher: コダマプレス
   volumes:
@@ -33,7 +39,25 @@ extra_editions:
   - number: 2
     release_date: '1967-02-10'
 - type: other
-  label: 小学館叢書 手塚治虫初期傑作集
+  label: 虫コミックス
+  imprint: 虫コミックス
+  publisher: 虫プロ商事
+  volumes:
+  - number: 1
+    release_date: '1971-10-15'
+- type: standard
+  label: 手塚治虫漫画全集
+  imprint: 手塚治虫漫画全集
+  publisher: 講談社
+  volumes:
+  - number: 1
+    isbn13: '9784061086074'
+    release_date: '1977-07'
+  - number: 2
+    isbn13: '9784061086081'
+    release_date: '1977-09-20'
+- type: other
+  label: 小学館叢書(手塚治虫初期傑作集6)
   imprint: 小学館叢書
   publisher: 小学館
   volumes:
@@ -42,25 +66,10 @@ extra_editions:
     release_date: '1992-11-10'
 - type: other
   label: 限定版BOX(小学館クリエイティブ)
+  imprint: 限定版BOX
   publisher: 小学館クリエイティブ
   volumes:
   - number: 1
     isbn13: '9784778031893'
     release_date: '2011-10'
     volume_label: 全2部BOX(デイモンの嵐編/鳥人の反乱編)
-- type: bunkobon
-  label: 文庫版(角川文庫)
-  imprint: 角川文庫
-  publisher: 角川書店
-  volumes:
-  - number: 1
-    isbn13: '9784041851166'
-    release_date: '1994-11'
-- type: bunkobon
-  label: 文庫版(手塚治虫文庫全集)
-  imprint: 手塚治虫文庫全集
-  publisher: 講談社
-  volumes:
-  - number: 1
-    isbn13: '9784063737530'
-    release_date: '2010-04'
