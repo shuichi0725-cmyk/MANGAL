@@ -23,6 +23,10 @@ import re
 import json
 from collections import Counter, defaultdict
 
+
+def nisbn(x):
+    return re.sub(r"[^0-9X]", "", str(x or "").upper())
+
 import yaml
 
 sys.stdout.reconfigure(encoding="utf-8")
@@ -98,6 +102,11 @@ def main():
                 for v in vs:
                     if v.get("number") is not None:
                         nums.add(v["number"])
+            isbns = set()
+            for vs in [e.get("volumes") or []] + [vv.get("volumes") or [] for vv in (e.get("versions") or [])]:
+                for v in vs:
+                    if v.get("isbn13"):
+                        isbns.add(nisbn(v["isbn13"]))
             dates = {}
             for vs in [e.get("volumes") or []] + [vv.get("volumes") or [] for vv in (e.get("versions") or [])]:
                 for v in vs:
@@ -105,7 +114,7 @@ def main():
                         dates[v["number"]] = str(v["release_date"])
             eds.append({"type": e.get("type") or "standard", "label": e.get("label") or "",
                         "imprint": e.get("imprint") or "", "publisher": e.get("publisher") or "",
-                        "nums": nums, "dates": dates})
+                        "nums": nums, "dates": dates, "isbns": isbns})
         pageinfo[stem] = {"eds": eds, "title": d.get("title", "")}
 
     out = []
@@ -127,6 +136,17 @@ def main():
                 if norm_label(e.get("imprint") or e.get("label")) == myimp and int(r["number"]) in e["nums"]:
                     g8 = False
                     break
+        # G8c: 対象の版が**ISBNを1本も持たず**、同じ頁の**別のISBN無し版**が既にその巻番号を
+        #   持つ = MADBのレーベル表記ゆれで1本の刊行runが2版に割れている(ぼくの動物園日記=
+        #   「ジャンプ・コミックス」と「Jump comics」)。 足すと同じ本が二重に出る。
+        #   ★片方がISBNを持つ頁(ワイルド7= 徳間書店版2001 と デラックス版1987)は別版が正当なので対象外。
+        if g8 and not (me.get("isbns") or set()):
+            for j, e in enumerate(eds):
+                if j == ei or e.get("isbns"):
+                    continue
+                if int(r["number"]) in e["nums"]:
+                    g8 = False
+                    break
         # G8b: 同じ頁の別版に **同じ巻番号 かつ 同じ発売日** が在る = 同一の本を二重に載せることになる
         #   (プラモ狂四郎: KCデラックス版 v5=1990-05-17 と コミックボンボンデラックス版 v5 が同じ本)
         if g8 and r.get("date"):
@@ -145,7 +165,7 @@ def main():
         elif ov:
             dec, why = ov
         elif not g8:
-            dec, why = "HOLD", "同じ頁の同レーベル別版が既にこの巻を持つ=刊行run分裂頁(G8)"
+            dec, why = "HOLD", "同じ頁の別版が既にこの巻を持つ=刊行run分裂頁(G8/G8b/G8c)"
         elif r["tier"] == "ACCEPT":
             dec = "APPLY"
         elif r["g_pub"] == "?" and g6 is False:
