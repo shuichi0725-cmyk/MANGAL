@@ -102,6 +102,17 @@ slugs=_load_slugs()
 print(f"候補 {len(slugs):,}頁 ({'旧TSV' if '--from-tsv' in sys.argv else '現在の索引 vol_gap'})")
 if LIMIT: slugs=slugs[:LIMIT]
 
+_ED_WITH_ISBN = set()
+def _ed_isbn_keys(eds):
+    """★ISBNを1本でも持つ版のキー集合。 ISBN以前の版(白いパイロット=手塚治虫漫画選集1962)は
+    欠番の確認も充填も原理的にできないので gap に数えない(2026-09-07 ユーザ裁定)。
+    索引 _build-list-index.py の vol_gap も同じ規則。"""
+    ok=set()
+    for i,e in enumerate(eds):
+        t=e.get("type") or "standard"
+        lists=[e.get("volumes") or []]+[vv.get("volumes") or [] for vv in (e.get("versions") or [])]
+        if any(v.get("isbn13") for vs in lists for v in vs): ok.add((t,i))
+    return ok
 def _edvols(eds):
     """★版(edition)単位のキーで巻を返す。 索引(_build-list-index.py の vol_gap)は版ごとに
     穴を見るのに、旧実装は type 単位で複数版を合算していて偽の穴を作っていた
@@ -121,6 +132,7 @@ def _seedkey(tv, tn):
     idxs=[k[1] for k,_ in tv if k[0]==t]
     return ((t, min(idxs) if idxs else -1), n)
 def _no_vol1(by):
+    """★頁の最小巻を持つ版がISBNを持たなければ数えない(索引と同じ規則)。"""
     """★頁全体に1巻が無いか(2026-09-06『皆様の玩具です』= standard 4..9 で 1,2,3 欠け)。
 
     旧実装は max-min+1>巻数 = **minとmaxの間の穴**しか見ず、先頭がごっそり無い頁を素通りしていた。
@@ -129,11 +141,14 @@ def _no_vol1(by):
     """
     alln=[n for ns in by.values() for n in ns]
     ints=[n for n in alln if float(n).is_integer()]
-    return bool(ints) and min(ints)>1
+    if not ints or min(ints)<=1: return False
+    host=[t for t,ns in by.items() if min(ints) in ns]
+    return any(t in _ED_WITH_ISBN for t in host)
 def has_gap(typevols):
     by=defaultdict(set)
     for t,n in typevols: by[t].add(n)
     for t,ns in by.items():
+        if t not in _ED_WITH_ISBN: continue   # ★ISBN以前の版は数えない
         ns=sorted(ns)
         if len(ns)>=2 and ns[-1]-ns[0]+1>len(ns): return True,by
     if _no_vol1(by): return True,by
@@ -156,6 +171,7 @@ for slug in slugs:
     p=f"{ROOT}/data/manga.v2/{slug}.yml"
     if not os.path.exists(p): continue
     d=yaml.safe_load(open(p,encoding="utf-8")); eds=d.get("editions") or []
+    _ED_WITH_ISBN.clear(); _ED_WITH_ISBN.update(_ed_isbn_keys(eds))
     tv=_edvols(eds)
     bg,_=has_gap(tv)
     # edition-overrides(奇子型)= 版を完全置換して仮想適用
@@ -164,6 +180,7 @@ for slug in slugs:
     #   頁の巻を全消ししていた(= 仮想適用で穴が開いたように見える偽陽性。監査対象1417作のうち17件が該当)。
     if slug in edov and (edov[slug].get("editions")):
         oeds=edov[slug]["editions"]
+        _ED_WITH_ISBN.clear(); _ED_WITH_ISBN.update(_ed_isbn_keys(oeds))
         tv=_edvols(oeds)
     if bg: before_gap+=1
     # virtual apply

@@ -196,8 +196,19 @@ for f in _files:
     _nums = [v.get("number") for e in eds for v in (e.get("volumes") or []) if v.get("number")]
     solo_nonfirst = tv == 1 and bool(_nums) and _nums[0] != 1
     # ★複数巻あるのに途中の巻が抜けている(= fill漏れ/真の欠番。 vol 1,2,4 で 3 欠け)
+    # ★★ISBNを1本も持たない版の穴は数えない(2026-09-07 ユーザ裁定『白いパイロット』)。
+    #   例= 白いパイロットの「手塚治虫漫画選集版(鈴木出版)」は 1962-63年 = **ISBN以前**で
+    #   v1とv3しか無く v2 が欠番に見えるが、ISBNが存在しない時代なので実在確認も充填も
+    #   原理的にできない。 直せないものを worklist に残さない(本番実測 51頁が該当)。
+    #   ★版に1冊でもISBNが在れば従来どおり数える(がきデカ型=一部ISBN欠けは別機構で埋まる)。
+    def _ed_has_isbn(_e):
+        return any(v.get("isbn13") for vs in [_e.get("volumes") or []]
+                   + [_vv.get("volumes") or [] for _vv in (_e.get("versions") or [])]
+                   for v in vs)
     vol_gap = False
     for _e in eds:
+        if not _ed_has_isbn(_e):
+            continue
         _vn = sorted({v.get("number") for v in (_e.get("volumes") or []) if v.get("number")})
         if len(_vn) >= 2 and _vn[-1] - _vn[0] + 1 > len(_vn):
             vol_gap = True; break
@@ -209,7 +220,13 @@ for f in _files:
     _alln = [float(v.get("number")) for _e in eds for v in (_e.get("volumes") or [])
              if v.get("number") is not None]
     _intn = [x for x in _alln if float(x).is_integer()]
+    #   先頭欠けも同じ規則: 頁の最小巻を持つ版にISBNが1本も無ければ数えない
     no_vol1 = bool(_intn) and min(_intn) > 1
+    if no_vol1:
+        _host = next((_e for _e in eds
+                      if any(v.get("number") == min(_intn) for v in (_e.get("volumes") or []))), None)
+        if _host is None or not _ed_has_isbn(_host):
+            no_vol1 = False
     if no_vol1:
         vol_gap = True
     # ★1冊でも書影欠け(= Kobo補完worklist用 2026-07-05)
