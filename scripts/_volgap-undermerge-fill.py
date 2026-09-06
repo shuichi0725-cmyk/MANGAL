@@ -23,7 +23,11 @@ from collections import Counter
 
 sys.stdout.reconfigure(encoding="utf-8")
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-SPLIT = os.path.join(ROOT, "docs", "production-diagnostics", "volgap-exists-split.tsv")
+SPLIT = (sys.argv[sys.argv.index("--in") + 1] if "--in" in sys.argv
+         else os.path.join(ROOT, "docs", "production-diagnostics", "volgap-exists-split.tsv"))
+TARGETS = (sys.argv[sys.argv.index("--targets") + 1] if "--targets" in sys.argv
+           else os.path.join(ROOT, "docs", "production-diagnostics", "volgap-fill-targets.tsv"))
+TAG = sys.argv[sys.argv.index("--tag") + 1] if "--tag" in sys.argv else "volgap-undermerge"
 
 _AUTHNORM = re.compile(r"[\s　,、/／・:：;；\.。\-−ー]")
 _PD = re.compile(r"(\d{4})-?(\d{2})?-?(\d{2})?")
@@ -47,8 +51,7 @@ def main():
     print("A層 {} 巻 / {} 頁".format(len(a), len({r["stem"] for r in a})))
 
     # ターゲット表から prev/next(ISBN・日付)・main_prefix・route を引き直す
-    T = open(os.path.join(ROOT, "docs", "production-diagnostics", "volgap-fill-targets.tsv"),
-             encoding="utf-8").read().splitlines()
+    T = open(TARGETS, encoding="utf-8").read().splitlines()
     tc = T[0].split("\t")
     tg = {(r["stem"], r["ei"], r["number"]): r
           for r in (dict(zip(tc, l.split("\t"))) for l in T[1:] if l.strip())}
@@ -120,12 +123,12 @@ def main():
               "g_pub", "g_isbn", "g_date", "g_author", "g_token",
               "main_prefix", "prev_num", "prev_isbn", "prev_date", "next_num", "next_isbn",
               "next_date", "publisher", "n_cands", "why", "cover"]
-    outp = os.path.join(ROOT, "docs", "production-diagnostics", "volgap-undermerge-fill.tsv")
+    outp = os.path.join(ROOT, "docs", "production-diagnostics", TAG + "-fill.tsv")
     with open(outp, "w", encoding="utf-8", newline="") as f:
         f.write("\t".join(cols_o) + "\n")
         for r in out:
             f.write("\t".join(str(r.get(c, "")).replace("\t", " ") for c in cols_o) + "\n")
-    json.dump(out, open(os.path.join(ROOT, ".cache", "volgap-undermerge-rows.json"), "w",
+    json.dump(out, open(os.path.join(ROOT, ".cache", TAG + "-rows.json"), "w",
                         encoding="utf-8"), ensure_ascii=False)
     c = Counter(r["tier"] for r in out)
     print("=== 裁定前 ===")

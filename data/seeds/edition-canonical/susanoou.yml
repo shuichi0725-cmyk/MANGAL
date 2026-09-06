@@ -3,7 +3,7 @@ canonical_label: 通常版
 canonical_publisher: 講談社
 canonical_imprint: 少年マガジンKC
 suppress_types: []
-source: '残86巻の裁定 2026-09-03(Sugar&Spice型検出の見送り群): 頁は講談社漫画文庫1-6だけ。楽天にあった原版少年マガジンKCの8・9巻(1981)を主版に、フェニックスKC版(1996)2-6巻は別版(原版1-7・フェニックス1巻は未発見=巻抜け仮想で追う)。巻・ISBN・日付は楽天キャッシュ(検出器TSV)+種2+既存seed、情報は追加していない'
+source: '残86巻の裁定 2026-09-03(Sugar&Spice型検出の見送り群): 頁は講談社漫画文庫1-6だけ。楽天にあった原版少年マガジンKCの8・9巻(1981)を主版に、フェニックスKC版(1996)2-6巻は別版(原版1-7・フェニックス1巻は未発見=巻抜け仮想で追う)。巻・ISBN・日付は楽天キャッシュ(検出器TSV)+種2+既存seed、情報は追加していない / ★2026-09-07 巻抜け充填: ローカル楽天種とNDLで欠番巻を確認し 1 巻を追加(題完全一致+版元+ISBN連番+発売日+著者の5ゲート)'
 volumes:
 - number: 8
   isbn13: '9784061727373'
@@ -13,10 +13,13 @@ volumes:
   release_date: '1981-05-10'
 extra_editions:
 - type: shinsoban
-  label: 'フェニックスKC(1996)'
-  imprint: 'フェニックスKC'
+  label: フェニックスKC(1996)
+  imprint: フェニックスKC
   publisher: 講談社
   volumes:
+  - number: 1
+    isbn13: '9784063290103'
+    release_date: '1996-06-21'
   - number: 2
     isbn13: '9784063290110'
     release_date: '1996-07-23'

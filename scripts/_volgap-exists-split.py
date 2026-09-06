@@ -36,8 +36,12 @@ def nisbn(s):
 
 
 def main():
-    rk = json.load(open(os.path.join(ROOT, ".cache", "volgap-local-fill-v2.json"), encoding="utf-8"))
-    nd = json.load(open(os.path.join(ROOT, ".cache", "volgap-ndl-fill-rows.json"), encoding="utf-8"))
+    _rk = (sys.argv[sys.argv.index("--in") + 1] if "--in" in sys.argv
+           else os.path.join(ROOT, ".cache", "volgap-local-fill-v2.json"))
+    _nd = (sys.argv[sys.argv.index("--ndl") + 1] if "--ndl" in sys.argv
+           else os.path.join(ROOT, ".cache", "volgap-ndl-fill-rows.json"))
+    rk = json.load(open(_rk, encoding="utf-8"))
+    nd = json.load(open(_nd, encoding="utf-8")) if os.path.exists(_nd) else []
     ndk = {(r["stem"], r["ei"], r["number"]): r for r in nd}
     final = {}
     for r in rk:
@@ -87,7 +91,8 @@ def main():
     cols = ["layer", "stem", "title", "ei", "etype", "label", "number", "kind", "isbn", "date",
             "rak_title", "rak_author", "rak_publisher", "other_slug", "other_title", "in_db",
             "route", "layer_note"]
-    outp = os.path.join(ROOT, "docs", "production-diagnostics", "volgap-exists-split.tsv")
+    outp = (sys.argv[sys.argv.index("--out") + 1] if "--out" in sys.argv
+            else os.path.join(ROOT, "docs", "production-diagnostics", "volgap-exists-split.tsv"))
     with open(outp, "w", encoding="utf-8", newline="") as fo:
         fo.write("\t".join(cols) + "\n")
         for r in rows:

@@ -37,6 +37,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SRC = os.path.join(ROOT, "data", "manga.v2")
 TARGETS = (sys.argv[sys.argv.index("--targets") + 1] if "--targets" in sys.argv
            else os.path.join(ROOT, "docs", "production-diagnostics", "volgap-fill-targets.tsv"))
+TAG = sys.argv[sys.argv.index("--tag") + 1] if "--tag" in sys.argv else "volgap-local-fill-v2"
 
 DROP_WORDS = ["ガイドブック", "ファンブック", "設定資料集", "公式読本", "公式ファン", "アンソロジー",
               "画集", "原画集", "大全集", "大百科", "大事典", "解体新書", "傑作選", "傑作集",
@@ -154,14 +155,6 @@ def main():
             continue
         exists = [c for c in cands if c["isbn"] in prod_isbns or c["isbn"] in db_isbns]
         fresh = [c for c in cands if c["isbn"] not in prod_isbns and c["isbn"] not in db_isbns]
-        if not fresh:
-            c = min(exists, key=lambda x: x["date"] or (9999, 0, 0))
-            row.update(tier="EXISTS", isbn=c["isbn"], date=R.date_str(c["date"], day=True),
-                       rak_title=c["raw"], rak_author=c["author"], rak_publisher=c["publisher"],
-                       cover=c["cover"], n_cands=len(cands),
-                       why="候補ISBNが既に本番/種2に在る=取込もれでない(under-merge)")
-            rows.append(row)
-            continue
 
         mp = r["main_prefix"]
         lo = parse_prod_date(r["prev_date"]) if r["prev_date"] else None
@@ -203,7 +196,23 @@ def main():
             return (s(g_pub(c)), s(g_isbn(c)), s(g_date(c)), s(g_auth(c)),
                     -(c["date"] or (9999, 0, 0))[0])
 
-        c = max(fresh, key=score)
+        # ★候補は **fresh と exists を合わせた全体から同じスコアで**選ぶ(2026-09-07 是正)。
+        #   旧実装は ①exists は「最古の日付」で選ぶ ②fresh が1件でも在れば fresh だけ見る、
+        #   の2つの穴があり、正解を取り逃がしていた(鉄腕アトム 版[7]=講談社コミックス(1993)の
+        #   v1=9784063133585 / v2=9784063133608 は種2に在るのに、朝日ソノラマ1975・秋田1995の
+        #   別版が fresh として選ばれ「版元prefix不一致」で棄却されていた)。
+        best_fresh = max(fresh, key=score) if fresh else None
+        best_exists = max(exists, key=score) if exists else None
+        if best_exists is not None and (best_fresh is None or score(best_exists) > score(best_fresh)):
+            c = best_exists
+            row.update(tier="EXISTS", isbn=c["isbn"], date=R.date_str(c["date"], day=True),
+                       rak_title=c["raw"], rak_author=c["author"], rak_publisher=c["publisher"],
+                       cover=c["cover"], n_cands=len(cands),
+                       why="候補ISBNが既に本番/種2に在る=取込もれでない(under-merge)")
+            rows.append(row)
+            continue
+
+        c = best_fresh
         P, I, D, A = g_pub(c), g_isbn(c), g_date(c), g_auth(c)
         tok = c["has_vol_token"]
 
@@ -244,12 +253,12 @@ def main():
             "g_pub", "g_isbn", "g_date", "g_author", "g_token",
             "main_prefix", "prev_num", "prev_isbn", "prev_date", "next_num", "next_isbn", "next_date",
             "publisher", "n_cands", "why", "cover"]
-    outp = os.path.join(ROOT, "docs", "production-diagnostics", "volgap-local-fill-v2.tsv")
+    outp = os.path.join(ROOT, "docs", "production-diagnostics", TAG + ".tsv")
     with open(outp, "w", encoding="utf-8", newline="") as f:
         f.write("\t".join(cols) + "\n")
         for r in rows:
             f.write("\t".join(str(r.get(c, "")).replace("\t", " ") for c in cols) + "\n")
-    json.dump(rows, open(os.path.join(ROOT, ".cache", "volgap-local-fill-v2.json"), "w",
+    json.dump(rows, open(os.path.join(ROOT, ".cache", TAG + ".json"), "w",
                          encoding="utf-8"), ensure_ascii=False)
     cnt = Counter(r["tier"] for r in rows)
     print("=== 裁定(巻) ===")
