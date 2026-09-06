@@ -3,7 +3,8 @@
 - [【戒め】人気順で優先するな](feedback_no_popularity_priority.md) ／ [【戒め】勝手に仕事を増やすな](feedback_dont_inflate_work.md) ／ [ユーザ最新指示を自己解釈で上書きしない](feedback_user_directive_supremacy.md)
 - [【型・是正済】王様の仕立て屋=1頁に4部同居→頁分割](ousama_shitateya_4part_split.md) ／ [【封鎖済】巻抜け仮想の偽陽性2種](volgap_virtual_false_positives.md)
 - [【型・是正済】俺の空=4作品が1頁に同居→3頁分割](oresora_4way_split.md)
-- [【是正済】巻抜け検出の穴2つ=先頭欠け見逃し+入力TSV凍結](volgap_leading_gap_and_frozen_input.md) — 256→505頁。入力は索引のvol_gapフラグへ
+- [【是正済】巻抜け検出の穴2つ=先頭欠け見逃し+入力TSV凍結](volgap_leading_gap_and_frozen_input.md)
+- [【戒め】裁定表は生成器から出す+鮮度を見る](worklist_needs_generator_and_freshness.md) — 「書き手0本」はgrepで判定不可(動的名) — 256→505頁。入力は索引のvol_gapフラグへ
 - [巻抜け仮想](volgap_virtual_tool_trigger.md) ／ [【手順】巻抜けは4型=種2在否を先に判定](volgap_diagnosis_order.md) ／ [巻抜け大半=under-merge](volgap_mostly_undermerge.md) ／ [【進行中】巻抜けper-case仕上げ](volgap_per_case_cleanup_state.md)
 - [【再利用】2026新刊蒸留フロー](distill_2026_pipeline.md)
 - [preview実測+stale事故史](preview_deploy_pitfalls.md) ／ [preview反映=GitHub Actions実体](preview_deploy_github_actions.md)

@@ -31,8 +31,12 @@ metadata:
 
 ## ② ★入力の `vol_gap.tsv` が凍結していた(こちらの方が悪質)
 
-`docs/production-diagnostics/vol_gap.tsv` は **2026-07-16 で止まっていて、誰も再生成していない**
-(grep: 読む script 5本 / 書く script **0本**)。 `_volgap-virtual.py` はこれを候補リストにしていたので、
+`docs/production-diagnostics/vol_gap.tsv` は **2026-07-16 で止まっていて、誰も再生成していなかった**。
+★**2026-09-06 訂正**: 当初「書く script **0本**」と記録したが**誤り**。 生成器は実在する =
+**`scripts/_production-diagnostics.py`**(索引由来で `vol_gap` / `pub_unknown` / `solo_nonfirst` 等を一括出力)。
+grep で見つからなかったのは **出力名が動的** (`open(f"{OUT}/{key}.tsv", "w")`) で、
+リテラルのファイル名がソースに1文字も現れないから。 = 本当の問題は「書き手が居ない」ではなく
+**「生成器は在るのに誰も回していない(鮮度)」**だった。 `_volgap-virtual.py` はこれを候補リストにしていたので、
 **当時の1,417頁を再チェックするだけ**= それ以後に生まれた巻抜けは永久に出てこなかった。
 → 候補は毎回 **現在の一覧索引の vol_gap フラグ(fl & 2)** から作る。 `--from-tsv` で旧挙動。
 ★索引は**公開slug**、`data/manga.v2` のファイル名は**SRC stem**なので
