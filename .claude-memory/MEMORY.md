@@ -55,6 +55,7 @@
 - [【戒め】skillの規定=実装の保証ではない](skill_rule_without_implementation.md) — 規定に頼る前にgrepで実体を確認(上下巻統合が未実装だった)
 - [promote完了後プロセス居座り=os._exitで解消済](promote_hangs_on_exit_windows.md) — intake経由では絶対killしない ／ [【戒め】promote空--only全消し事故](promote_empty_only_wipe_accident.md) — ガード済
 - [重複ページdedup完了](page_dedup_2026_06.md) — 同名別作品952は正当 ／ [分裂・過統合クリーンアップ](fragmentation_overmerge_cleanup.md) ／ [過剰統合スイープ=稀](overmerge_sweep_conclusion.md) — 機械一括除去禁止
+- [【GO待ち】頁分裂5件](page_split_pending_5.md) — X-MEN 3頁/楳図こわい本 12頁/人間の條件/ワイルド7/サバイバル。検出=ISBNの頁間共有
 - [公開=Worker+R2(Pages不可)](hosting_worker_r2_architecture.md) ／ [公開環境2系統](deploy_environments_state.md) — 本番=workers.dev/テスト=mangal-preview
 - [AI書評家リーグ運用](ai_review_league_operation.md) ／ [manba観察](manba_design_learnings.md)
 - [【✅】slug適用パイプライン](slug_apply_pipeline.md) — 残=StageE/F
@@ -68,6 +69,7 @@
 - [【戒め】再グルーピング誤り繰り返すな](feedback_dont_repeat_regrouping_error.md)
 - [【最難関】奇子型=版違い混在](edition_mix_same_author_ayako.md) ／ [奇子型の経験則検出](kiko_multiedition_mixing_heuristic.md) ／ [版混在恒久是正=edition-canonical](edition_canonical_mechanism.md) ／ [アオアシ型=原版+ジュニア版再版](edition_dedup_aoashi.md)
 - [【型】ARMS型=レーベル表記ゆれ版分裂](imprint_split_arms_type.md) — 検出器あり ／ [【型】ARMSワイド版型=刊行run分裂(57頁適用済)](edition_run_split_arms_wide_type.md) — 真因3層(種4のedition_type既定値が幻の版)
+- [【型・是正済】1版しか無いのに「デラックス版」を自称する通常版](self_declared_deluxe_single_edition.md) — BL多数・実体はレーベル名・787頁降格。★type書換passはtypeをキーにするseed(isbn-fill)より後段に置く
 - [【残228頁】同type合流で別出版社の版が消える](edition_typemerge_hides_volumes.md) — 検出器あり
 - [【型・是正済】保健室の僕ら型=特装版パスの置換で同ISBN二重巻](isbn_dup_special_edition_pass.md) — promoteに衝突つぶし結線・12頁是正・検出器あり・残11頁は別要因
 - [ISBN/巻数是正の進捗](data_quality_cleanup_state.md) — 多数決・可逆・dry-run必須 ／ [【進行中】ISBNダブリ潰し](isbn_dup_cleanup_state.md) — 残250群 ／ [【残】巻番号残40件](volnum_remaining_merge_collection.md)
@@ -85,6 +87,7 @@
 - [【型・検出器+適用器】すてごろブッチ型=予約巻の発売日が延期されても追随しない](preorder_date_drift_sutegoro_type.md) — 根因=予約頁合流にoverride未結線(穴の5件目)・適用は楽天×NDL一致のみ。残=year_started 211頁
 - [【型】発売日を変えるとISBNが入れ替わる/overrideが効かない経路](release_date_change_side_effects.md) — 日付を触る全作業の前提・検算の型つき
 - [【方針】Wikipediaの発売日は採用](wikipedia_release_date_is_authoritative.md) — 種2は奥付日で1か月ずれる・機構=release-date-override.jsonl
+- [【手法】WikipediaのURLを貼られたら書誌情報を機械突合](wikipedia_bibliography_crosscheck.md) — 版ごとの欠落冊数が出る。ISBN無し記事は「全何巻」が効く
 - [【厳守】本番デプロイはトリガー待ち](feedback_production_deploy_gate.md) ／ [【厳守】価格の静的表示は絶対禁止](feedback_no_static_prices.md) ／ [【厳守】週次蒸留=「週次蒸留して」のみで発動](feedback_weekly_distill_exact_trigger_only.md)
 - [【進行中】外部エンリッチ=Wikipedia+魚で旧作にキャッチ/詳細](external_enrich_state.md) — 正=skill external-enrich。pre2010リスト1,285件の37行目から再開・次バッチ9436 ／ [2026-09-01 drop16頁](drop_batch_2026_09_01.md) — ★本番imprintは化ける=楽天seriesNameで判定
 - [【進行中】エンリッチ7k再開](enrich_7k_resume_state.md) — 「エンリッチ続き」 ／ [【重要】新しい順の鉱脈が枯れた](enrich_newest_seam_exhausted.md) — ユーザ裁定待ち ／ [【✅完走】BookLive紹介文=第2材料源](enrich_booklive_seam_done.md) — 次は増加分だけ
