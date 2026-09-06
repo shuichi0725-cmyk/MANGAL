@@ -174,8 +174,14 @@ def main():
         elif r["g_pub"] == "?" and g6 is True:
             dec, why = "APPLY", "版元名一致+ISBN/日付整合(頁側にISBN無しのためprefixは不能)(G6)"
         elif r["tier"] == "REVIEW_TOKEN":
-            dec, why = ("APPLY", "楽天題に巻番号は無いが版元o+ISBN連番o+日付o+著者o") if (
-                r["g_pub"] == "o" and r["g_isbn"] == "o" and r["g_date"] == "o" and r["g_author"] == "o"
+            # ★シリーズの**1巻は題に巻番号が付かないのが普通**(「テイルズオブシンフォニア4コマkings」に
+            #   対し2巻が「〜(2)」)。 版元prefix・ISBN連番・発売日が揃っていれば、同じ題・同じ版元で
+            #   ISBNが頁の最小巻の直下に来る別の単巻本、という対抗仮説はほぼ立たない。
+            #   著者が **不一致(x)** の時だけ止める(不明 ? は証拠なしであって反証ではない)。
+            dec, why = ("APPLY", "題に巻番号は無いが版元o+ISBN連番o+日付o+著者{}"
+                        "(シリーズ1巻は題に番号が付かないのが通例)".format(r["g_author"])) if (
+                r["g_pub"] == "o" and r["g_isbn"] == "o" and r["g_date"] == "o"
+                and r["g_author"] != "x"
             ) else ("HOLD", r["why"])
         else:
             dec, why = "HOLD", r["why"]
