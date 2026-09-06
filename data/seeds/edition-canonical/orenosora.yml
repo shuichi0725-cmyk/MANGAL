@@ -5,34 +5,29 @@ canonical_imprint: 週刊プレイボーイ特別編集・劇画
 suppress_types:
 - shinsoban
 - bunkobon
-source: '俺の空 4分割 2026-09-06(ユーザ「刑事編とくっついてる」): NDL書誌(ユーザ提供TSV 81行)+マンガペディアで確定。1頁に本編/刑事編/三四郎編/安田一平編の4作品が同居していた。巻は1冊も捨てず作品ごとの頁へ配置換え(総集編・傑作選は非掲載方針で除外)。
-  本頁=本編(週刊プレイボーイ 1976-1979)のみ。刑事編/三四郎編/安田一平編は別頁へ移した。
-  巻題はNDL書誌の副題。★スーパー・プレイボーイ・コミックスは種2で「スーパー・プレイボーイ・コミックス」と
-  英字「SUPERPLAYBOY COMICS」の2タブに割れていた(ARMS型)ので1本に統合(2巻は所在不明で欠番)。
-  ★頁に無かったホームコミックス「本宮ひろ志傑作集」全7巻(1994-12〜1995-06)をNDLで確認して追加。
-  ★1000p総集編(2003-2005)は総集編=非掲載方針で載せない。'
+source: '俺の空 4分割 2026-09-06(ユーザ「刑事編とくっついてる」): NDL書誌(ユーザ提供TSV 81行)+マンガペディアで確定。1頁に本編/刑事編/三四郎編/安田一平編の4作品が同居していた。巻は1冊も捨てず作品ごとの頁へ配置換え(総集編・傑作選は非掲載方針で除外)。 本頁=本編(週刊プレイボーイ 1976-1979)のみ。刑事編/三四郎編/安田一平編は別頁へ移した。 巻題はNDL書誌の副題。★スーパー・プレイボーイ・コミックスは種2で「スーパー・プレイボーイ・コミックス」と 英字「SUPERPLAYBOY COMICS」の2タブに割れていた(ARMS型)ので1本に統合(2巻は所在不明で欠番)。 ★頁に無かったホームコミックス「本宮ひろ志傑作集」全7巻(1994-12〜1995-06)をNDLで確認して追加。 ★1000p総集編(2003-2005)は総集編=非掲載方針で載せない。 / ★2026-09-07 巻抜け充填: ローカル楽天種とNDLで欠番巻を確認し 1 巻を追加(題完全一致+版元+ISBN連番+発売日+著者の5ゲート)'
 volumes:
 - number: 1
-  release_date: '1976-11'
+  release_date: 1976-11
   volume_label: 豊かなる旅立ちの章
 - number: 2
-  release_date: '1977-02'
+  release_date: 1977-02
   volume_label: 華麗なる実像の章
 - number: 3
-  release_date: '1977-03'
+  release_date: 1977-03
   volume_label: 対決する好敵手の章
 - number: 4
-  release_date: '1977-08'
+  release_date: 1977-08
   volume_label: 激突する勇者達の章
 - number: 5
-  release_date: '1978-01'
+  release_date: 1978-01
 - number: 6
-  release_date: '1978-08'
+  release_date: 1978-08
 - number: 7
-  release_date: '1978-12'
+  release_date: 1978-12
   volume_label: 運命を変える大バクチの章
 - number: 8
-  release_date: '1979-02'
+  release_date: 1979-02
   volume_label: 若獅子は舞いあがる!の章
 extra_editions:
 - type: shinsoban
@@ -45,17 +40,17 @@ extra_editions:
   - number: 2
     release_date: '1977-06-30'
   - number: 3
-    release_date: '1977-08'
+    release_date: 1977-08
   - number: 4
     release_date: '1977-11-05'
   - number: 5
-    release_date: '1978-04'
+    release_date: 1978-04
   - number: 6
-    release_date: '1978-10'
+    release_date: 1978-10
   - number: 7
-    release_date: '1979-01'
+    release_date: 1979-01
   - number: 8
-    release_date: '1979-03'
+    release_date: 1979-03
   - number: 9
     release_date: '1979-04-20'
 - type: shinsoban
@@ -65,6 +60,9 @@ extra_editions:
   volumes:
   - number: 1
     isbn13: '9784088573519'
+    release_date: '1989-12-19'
+  - number: 2
+    isbn13: '9784088573526'
     release_date: '1989-12-19'
   - number: 3
     isbn13: '9784088573533'
@@ -82,25 +80,25 @@ extra_editions:
   volumes:
   - number: 1
     isbn13: '9784834230895'
-    release_date: '1994-12'
+    release_date: 1994-12
   - number: 2
     isbn13: '9784834230901'
-    release_date: '1995-01'
+    release_date: 1995-01
   - number: 3
     isbn13: '9784834230918'
-    release_date: '1995-02'
+    release_date: 1995-02
   - number: 4
     isbn13: '9784834230925'
-    release_date: '1995-03'
+    release_date: 1995-03
   - number: 5
     isbn13: '9784834230932'
-    release_date: '1995-04'
+    release_date: 1995-04
   - number: 6
     isbn13: '9784834230949'
-    release_date: '1995-05'
+    release_date: 1995-05
   - number: 7
     isbn13: '9784834230956'
-    release_date: '1995-06'
+    release_date: 1995-06
 - type: bunkobon
   label: 集英社文庫コミック版(1〜7巻)
   imprint: 集英社文庫 コミック版
@@ -117,7 +115,7 @@ extra_editions:
     release_date: '1997-01-22'
   - number: 4
     isbn13: '9784086170338'
-    release_date: '1997-01'
+    release_date: 1997-01
   - number: 5
     isbn13: '9784086170345'
     release_date: '1997-02-23'
