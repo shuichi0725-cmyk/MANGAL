@@ -106,6 +106,7 @@
 - [試し読み裁定=枯れ達成](tameshiyomi_adjudication_state.md)
 - [【裁定・恒久】試し読みURLは構築=BookLive検証は不要](tameshiyomi_url_is_constructed.md) — 規制中は正解巻すら403で検証が成立しない。末尾を本番巻数まで延長し2,528作品/5,448巻を復活・expand柱は退役
 - [【✅】著者名の空白=authorKeyで照合吸収](author_name_space_conventions_conflict.md) — 新規照合は必ずauthorKey経由
+- [【機構】.5の半端巻(番外編)を通す](half_volume_number_mechanism.md) — 番人4か所を揃える。★Zodのint()だけは失敗が「頁が消える」形で出る
 - [【裁定済=出さない】孤児series 45,606は頁化対象でない](orphan_series_promote_is_srcpage_driven.md) — ★改善提案に挙げるな(3回蒸し返した)。98%単巻・多巻は既存頁の分裂/コンビニ本/外国語版
 - [【未決】本番R2に孤児HTML1,041頁](r2_orphan_pages_prune_missing.md) ／ [R2 prune待ち台帳=週次preflightが表示](pending_r2_prune_ledger.md)
 - [【戒め】seed機械追記=「: 」必ずquote](seed_yaml_colon_quoting.md) ／ [カナ英語辞書=mappings外追記はsilent死](katakana_dict_dead_entry_trap.md) ／ [preorder-pages頁の続巻=種4不可・seed直接追記](preorder_page_zokkan_direct_append.md)
