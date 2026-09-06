@@ -1,34 +1,63 @@
 slug: orenosora
 canonical_label: 通常版
-canonical_publisher: 不明
+canonical_publisher: 集英社
+canonical_imprint: 週刊プレイボーイ特別編集・劇画
 suppress_types:
+- shinsoban
 - bunkobon
-source: 'ギャラ型是正 2026-08-17(一括): 頁の版タブに複数の版(run)が畳み込まれて発売日が逆行していた。種2(MADB)が edition として持っている版の区切りをそのまま使って版タブに戻し、巻数が最も多く最も古い run を主版に据えた。版元はISBN出版者記号(本番から学習した記号表)とNDLで確認済みのレーベル対応から解決し、どちらでも引けない run は「不明」と明示している。巻番号がMADB側で潰れている run は発売日→ISBN順に採番し直した。情報は追加していない。 / ★2026-08-29 壊れラベル是正: 2026-08-17の一括処理が、種2でimprintが空だったrunにtype名(standard)をそのまま貼って『standard版』という実在しないタブ名を作っていた。NDL by-ISBNの叢書名(dcndl:seriesTitle)→楽天seriesName→出版社名 の順で実名に戻した。どれも取れないrunは『別版』とし、巻・ISBN・発売日には一切触れていない。'
+source: '俺の空 4分割 2026-09-06(ユーザ「刑事編とくっついてる」): NDL書誌(ユーザ提供TSV 81行)+マンガペディアで確定。1頁に本編/刑事編/三四郎編/安田一平編の4作品が同居していた。巻は1冊も捨てず作品ごとの頁へ配置換え(総集編・傑作選は非掲載方針で除外)。
+  本頁=本編(週刊プレイボーイ 1976-1979)のみ。刑事編/三四郎編/安田一平編は別頁へ移した。
+  巻題はNDL書誌の副題。★スーパー・プレイボーイ・コミックスは種2で「スーパー・プレイボーイ・コミックス」と
+  英字「SUPERPLAYBOY COMICS」の2タブに割れていた(ARMS型)ので1本に統合(2巻は所在不明で欠番)。
+  ★頁に無かったホームコミックス「本宮ひろ志傑作集」全7巻(1994-12〜1995-06)をNDLで確認して追加。
+  ★1000p総集編(2003-2005)は総集編=非掲載方針で載せない。'
 volumes:
 - number: 1
-  release_date: 1976-11
+  release_date: '1976-11'
+  volume_label: 豊かなる旅立ちの章
 - number: 2
-  release_date: 1977-02
+  release_date: '1977-02'
+  volume_label: 華麗なる実像の章
 - number: 3
-  release_date: 1977-03
+  release_date: '1977-03'
+  volume_label: 対決する好敵手の章
 - number: 4
-  release_date: 1977-08
+  release_date: '1977-08'
+  volume_label: 激突する勇者達の章
 - number: 5
-  release_date: 1978-01
+  release_date: '1978-01'
 - number: 6
-  release_date: 1978-08
+  release_date: '1978-08'
 - number: 7
-  release_date: 1978-12
+  release_date: '1978-12'
+  volume_label: 運命を変える大バクチの章
 - number: 8
-  release_date: 1979-02
+  release_date: '1979-02'
+  volume_label: 若獅子は舞いあがる!の章
 extra_editions:
 - type: shinsoban
-  label: 別版(2003)
-  publisher: 不明
+  label: プレイボーイCOMICS
+  imprint: プレイボーイCOMICS
+  publisher: 集英社
   volumes:
-  - number: 0
-    release_date: 2003-12
-    volume_label: 巨悪天誅編
+  - number: 1
+    release_date: '1977-06-30'
+  - number: 2
+    release_date: '1977-06-30'
+  - number: 3
+    release_date: '1977-08'
+  - number: 4
+    release_date: '1977-11-05'
+  - number: 5
+    release_date: '1978-04'
+  - number: 6
+    release_date: '1978-10'
+  - number: 7
+    release_date: '1979-01'
+  - number: 8
+    release_date: '1979-03'
+  - number: 9
+    release_date: '1979-04-20'
 - type: shinsoban
   label: スーパー・プレイボーイ・コミックス
   imprint: スーパー・プレイボーイ・コミックス
@@ -36,46 +65,44 @@ extra_editions:
   volumes:
   - number: 1
     isbn13: '9784088573519'
-    release_date: 1989-12
+    release_date: '1989-12-19'
   - number: 3
     isbn13: '9784088573533'
-    release_date: 1990-01
+    release_date: '1990-01-19'
   - number: 4
     isbn13: '9784088573540'
-    release_date: 1990-01
-- type: shinsoban
-  label: プレイボーイ COMICS
-  imprint: プレイボーイ COMICS
-  publisher: 不明
-  volumes:
-  - number: 1
-    release_date: '1977-06-30'
-  - number: 2
-    release_date: '1977-06-30'
-  - number: 3
-    release_date: 1977-08
-  - number: 4
-    release_date: '1977-11-05'
-  - number: 5
-    release_date: 1978-04
-  - number: 6
-    release_date: 1978-10
-  - number: 7
-    release_date: 1979-01
-  - number: 8
-    release_date: 1979-03
-  - number: 9
-    release_date: '1979-04-20'
-- type: shinsoban
-  label: SUPERPLAYBOY COMICS
-  imprint: SUPERPLAYBOY COMICS
-  publisher: 集英社
-  volumes:
+    release_date: '1990-01-19'
   - number: 5
     isbn13: '9784088573557'
     release_date: '1990-02-25'
+- type: shinsoban
+  label: ホームコミックス 本宮ひろ志傑作集
+  imprint: ホームコミックス
+  publisher: ホーム社
+  volumes:
+  - number: 1
+    isbn13: '9784834230895'
+    release_date: '1994-12'
+  - number: 2
+    isbn13: '9784834230901'
+    release_date: '1995-01'
+  - number: 3
+    isbn13: '9784834230918'
+    release_date: '1995-02'
+  - number: 4
+    isbn13: '9784834230925'
+    release_date: '1995-03'
+  - number: 5
+    isbn13: '9784834230932'
+    release_date: '1995-04'
+  - number: 6
+    isbn13: '9784834230949'
+    release_date: '1995-05'
+  - number: 7
+    isbn13: '9784834230956'
+    release_date: '1995-06'
 - type: bunkobon
-  label: 集英社文庫 コミック版
+  label: 集英社文庫コミック版(1〜7巻)
   imprint: 集英社文庫 コミック版
   publisher: 集英社
   volumes:
@@ -90,7 +117,7 @@ extra_editions:
     release_date: '1997-01-22'
   - number: 4
     isbn13: '9784086170338'
-    release_date: 1997-01
+    release_date: '1997-01'
   - number: 5
     isbn13: '9784086170345'
     release_date: '1997-02-23'
@@ -100,114 +127,3 @@ extra_editions:
   - number: 7
     isbn13: '9784086170369'
     release_date: '1997-02-23'
-  - number: 8
-    isbn13: '9784086170376'
-    release_date: 1997-03
-  - number: 9
-    isbn13: '9784086170383'
-    release_date: '1997-03-17'
-  - number: 10
-    isbn13: '9784086170390'
-    release_date: 1997-04
-  - number: 11
-    isbn13: '9784086170406'
-    release_date: 1997-04
-- type: shinsoban
-  label: SCオールマン
-  imprint: SCオールマン
-  publisher: 集英社
-  volumes:
-  - number: 1
-    isbn13: '9784088783307'
-    release_date: 2001-03
-  - number: 2
-    isbn13: '9784088783451'
-    release_date: 2001-08
-  - number: 3
-    isbn13: '9784088783536'
-    release_date: 2001-12
-- type: shinsoban
-  label: ヤングジャンプ・コミックスGJ
-  imprint: ヤングジャンプ・コミックスGJ
-  publisher: 集英社
-  volumes:
-  - number: 1
-    isbn13: '9784088792651'
-    release_date: 2012-01
-  - number: 2
-    isbn13: '9784088793429'
-    release_date: 2012-05
-- type: shinsoban
-  label: ヤングジャンプ・コミックス・スペシャル(1993)
-  imprint: ヤングジャンプ・コミックス・スペシャル
-  publisher: 集英社
-  volumes:
-  - number: 1
-    isbn13: '9784088751146'
-    release_date: 1993-06
-  - number: 2
-    isbn13: '9784088751153'
-    release_date: 1993-07
-  - number: 3
-    isbn13: '9784088751160'
-    release_date: 1993-08
-  - number: 4
-    isbn13: '9784088751177'
-    release_date: 1993-09
-  - number: 5
-    isbn13: '9784088751757'
-    release_date: 1993-10
-  - number: 6
-    isbn13: '9784088751191'
-    release_date: 1993-11
-  - number: 7
-    isbn13: '9784088751771'
-    release_date: 1994-04
-  - number: 8
-    isbn13: '9784088751788'
-    release_date: 1994-05
-- type: shinsoban
-  label: ヤングジャンプ・コミックスSPECIAL
-  imprint: ヤングジャンプ・コミックスSPECIAL
-  publisher: 集英社
-  volumes:
-  - number: 5
-    isbn13: '9784088751184'
-    release_date: '1993-10-24'
-- type: shinsoban
-  label: ヤングジャンプ・コミックス
-  imprint: ヤングジャンプ・コミックス
-  publisher: 不明
-  volumes:
-  - number: 1
-    release_date: '1980-10-25'
-  - number: 2
-    release_date: '1980-12-25'
-  - number: 3
-    release_date: '1981-03-25'
-  - number: 4
-    release_date: 1981-06
-  - number: 5
-    release_date: 1981-08
-  - number: 6
-    release_date: '1981-10-25'
-  - number: 7
-    release_date: '1981-12-21'
-- type: shinsoban
-  label: ヤングジャンプ特別編集
-  imprint: ヤングジャンプ特別編集
-  publisher: 不明
-  volumes:
-  - number: 0
-    release_date: 1980-07
-- type: shinsoban
-  label: ヤングジャンプ・コミックス・スペシャル(1993)
-  imprint: ヤングジャンプ・コミックス・スペシャル
-  publisher: 集英社
-  volumes:
-  - number: 2
-    isbn13: '9784088751726'
-    release_date: 1993-02
-  - number: 3
-    isbn13: '9784088751733'
-    release_date: 1993-04

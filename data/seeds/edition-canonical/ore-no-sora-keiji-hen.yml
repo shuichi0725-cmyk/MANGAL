@@ -1,0 +1,81 @@
+slug: ore-no-sora-keiji-hen
+canonical_label: 通常版
+canonical_publisher: 集英社
+canonical_imprint: ヤングジャンプ・コミックス
+suppress_types:
+- shinsoban
+- bunkobon
+source: '俺の空 4分割 2026-09-06(ユーザ「刑事編とくっついてる」): NDL書誌(ユーザ提供TSV 81行)+マンガペディアで確定。1頁に本編/刑事編/三四郎編/安田一平編の4作品が同居していた。巻は1冊も捨てず作品ごとの頁へ配置換え(総集編・傑作選は非掲載方針で除外)。
+  本頁=刑事編。初出=ヤングジャンプ・コミックス全7巻(1980-10〜1981-12。ISBN以前の本でISBN無し=NDLも無しで一致)。
+  1993年のヤングジャンプ・コミックス・スペシャル全6巻(9784088751146〜1191)と、集英社文庫コミック版の
+  8〜11巻(NDL題「俺の空. 11(刑事編)」=文庫は本編1-7+刑事編8-11の通し番号)を版タブに。
+  ★2012年のヤングジャンプ・コミックスGJ全2巻は同名だが2012年刊で7巻→2巻と巻数が合わず、
+  1980年版の再刊とは断定できないため**別タブに置いて保留**(別作品と判れば頁を分ける)。
+  ★ヤングジャンプ特別編集「刑事編 総集編」(1980-07)は総集編=非掲載方針で載せない。'
+volumes:
+- number: 1
+  release_date: '1980-10-25'
+- number: 2
+  release_date: '1980-12-25'
+- number: 3
+  release_date: '1981-03-25'
+- number: 4
+  release_date: '1981-06'
+- number: 5
+  release_date: '1981-08'
+- number: 6
+  release_date: '1981-10-25'
+- number: 7
+  release_date: '1981-12-21'
+extra_editions:
+- type: shinsoban
+  label: ヤングジャンプ・コミックス・スペシャル(1993)
+  imprint: ヤングジャンプ・コミックス・スペシャル
+  publisher: 集英社
+  volumes:
+  - number: 1
+    isbn13: '9784088751146'
+    release_date: '1993-06'
+  - number: 2
+    isbn13: '9784088751153'
+    release_date: '1993-07'
+  - number: 3
+    isbn13: '9784088751160'
+    release_date: '1993-08'
+  - number: 4
+    isbn13: '9784088751177'
+    release_date: '1993-09'
+  - number: 5
+    isbn13: '9784088751184'
+    release_date: '1993-10'
+  - number: 6
+    isbn13: '9784088751191'
+    release_date: '1993-11'
+- type: bunkobon
+  label: 集英社文庫コミック版(8〜11巻)
+  imprint: 集英社文庫 コミック版
+  publisher: 集英社
+  volumes:
+  - number: 8
+    isbn13: '9784086170376'
+    release_date: '1997-03'
+  - number: 9
+    isbn13: '9784086170383'
+    release_date: '1997-03-17'
+  - number: 10
+    isbn13: '9784086170390'
+    release_date: '1997-04'
+  - number: 11
+    isbn13: '9784086170406'
+    release_date: '1997-04'
+- type: shinsoban
+  label: ヤングジャンプ・コミックスGJ(2012)
+  imprint: ヤングジャンプ・コミックスGJ
+  publisher: 集英社
+  volumes:
+  - number: 1
+    isbn13: '9784088792651'
+    release_date: '2012-01'
+  - number: 2
+    isbn13: '9784088793429'
+    release_date: '2012-05'
