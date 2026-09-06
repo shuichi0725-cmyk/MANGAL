@@ -3,12 +3,14 @@
 import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import CoverImage from "@/components/CoverImage";
+import KanaShelf from "@/components/KanaShelf";
 import { TYPE_JA, type AizItem } from "@/components/EditionCorners";
 import { jaCollator } from "@/lib/collator";
 
 /** 愛蔵版・合本の一覧(/aizouban)。版種チップで絞り込み、並びは**50音順**
  *  (2026-09-06 ユーザ指示「名前の順に。フリガナを参考に」= title_kana キー。
- *   一覧表の「50音順」= lib/listSort と同じ比較で揃える)。 */
+ *   一覧表の「50音順」= lib/listSort と同じ比較で揃える)。
+ *  ★同日: 本屋ふうの50音索引+1件1行に変更(旧=書影3列びっしり)= KanaShelf。 */
 const ORDER = ["aizoban", "kanzenban", "wideban", "shinsoban", "deluxe", "other"];
 
 export default function AizoubanListClient() {
@@ -44,7 +46,7 @@ export default function AizoubanListClient() {
 
   return (
     <div className="px-4 pb-8">
-      <div className="-mx-4 mb-2 flex gap-1.5 overflow-x-auto px-4 pb-1 no-scrollbar">
+      <div className="-mx-4 mb-2.5 flex gap-1.5 overflow-x-auto px-4 pb-1 no-scrollbar">
         {chips.map(([k, label, n]) => (
           <button
             key={k}
@@ -61,32 +63,40 @@ export default function AizoubanListClient() {
           </button>
         ))}
       </div>
-      <p className="mb-2 text-[11px] text-ink/50">
-        {list.length}点 <span className="text-ink/35">・50音順(フリガナ)</span>
-      </p>
-      <ul className="grid grid-cols-3 gap-3 sm:grid-cols-4 md:grid-cols-6">
-        {list.map((e) => (
-          <li key={`${e.s}-${e.e}-${e.v}`}>
-            <Link href={`/manga/${e.s}`} className="spring-press block">
-              <div
-                className="relative overflow-hidden rounded-md border border-[var(--color-line)] bg-[var(--color-surface-2)]"
-                style={{ aspectRatio: "2 / 3" }}
-              >
-                <CoverImage src={e.c} alt={`${e.t} ${TYPE_JA[e.e] ?? e.e}`} sizes="(max-width: 640px) 33vw, 16vw" />
-                <span className="absolute left-0 top-0 rounded-br-md bg-[var(--color-accent)] px-1 py-[1px] text-[9px] font-bold text-[var(--color-on-accent)]">
+
+      <KanaShelf
+        items={list}
+        kanaOf={(e) => e.k || e.t}
+        keyOf={(e) => `${e.s}-${e.e}-${e.v}`}
+        caption={<>{list.length}点・フリガナの50音順。頭文字をタップでその棚へ。</>}
+        render={(e) => (
+          <Link
+            href={`/manga/${e.s}`}
+            className="spring-press flex gap-2.5 rounded-lg border border-[var(--color-line)] bg-[var(--color-surface)] p-2 hover:border-[var(--color-accent)]"
+          >
+            <div
+              className="relative w-[52px] shrink-0 overflow-hidden rounded border border-[var(--color-line)] bg-[var(--color-surface-2)]"
+              style={{ aspectRatio: "2 / 3" }}
+            >
+              <CoverImage src={e.c} alt={`${e.t} ${TYPE_JA[e.e] ?? e.e}`} sizes="52px" />
+            </div>
+            <div className="min-w-0 flex-1">
+              <p className="line-clamp-2 text-[12.5px] font-bold leading-snug">{e.t}</p>
+              <p className="mt-0.5 truncate text-[10.5px] text-ink/55">{e.a}</p>
+              <p className="mt-1 flex items-center gap-1.5">
+                <span className="shrink-0 rounded bg-[var(--color-accent)] px-1 py-[1px] text-[9.5px] font-bold text-[var(--color-on-accent)]">
                   {TYPE_JA[e.e] ?? e.e}
                 </span>
-              </div>
-              <p className="mt-1 line-clamp-2 text-[11px] font-bold leading-snug">{e.t}</p>
-              <p className="truncate text-[10px] text-ink/55">{e.a}</p>
-              <p className="truncate text-[10px] tabular-nums text-ink/55">
-                全{e.sv}巻 → <b className="text-ink/75">{e.v}巻</b>
-                {e.d ? <span className="text-ink/35"> ・{e.d}年</span> : null}
+                <span className="truncate text-[10.5px] tabular-nums text-ink/60">
+                  全{e.sv}巻 → <b className="text-ink/80">{e.v}巻</b>
+                  {e.d ? <span className="text-ink/35"> ・{e.d}年</span> : null}
+                </span>
               </p>
-            </Link>
-          </li>
-        ))}
-      </ul>
+              {e.l ? <p className="truncate text-[10px] text-ink/40">{e.l}</p> : null}
+            </div>
+          </Link>
+        )}
+      />
     </div>
   );
 }
