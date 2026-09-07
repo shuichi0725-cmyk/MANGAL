@@ -76,8 +76,13 @@ export default function CategoryHub({ data, filtered, summary }: Props) {
         <span className="text-[9px] font-extrabold tracking-[0.26em] text-ink/45">BROWSE BY</span>
       </div>
       {/* ★ホームと同じ「太枠1本の帯」(2026-09-07)。lg は flex で等分 = 0件落としで
-          枚数が可変でも隙間が空かない。モバイルは4列グリッドのまま。 */}
-      <ul className="grid grid-cols-4 border-[3px] border-[var(--color-ink)] bg-[var(--color-surface)] lg:flex">
+          枚数が可変でも隙間が空かない。
+          ★モバイルも flex-wrap + basis-1/4 で等分にする(2026-09-08 ユーザ報告)。
+          旧 grid-cols-4 は列数が固定なので、0件落としで枚数が4の倍数でない時に
+          「枠の中の空の四角」が残った(例: うる星やつら検索=アニメ化/完結/少年の3枚→右端に1マス空く。
+          5〜7枚でも2段目に空く)。basis-1/4+grow なら 1段=4枚のまま、端数の段だけ等分に伸びる
+          = 下の仕切り線ロジック(4枚で1段と仮定)もそのまま成立する。 */}
+      <ul className="flex flex-wrap border-[3px] border-[var(--color-ink)] bg-[var(--color-surface)] lg:flex-nowrap">
         {categories.map((c, i) => {
           const active = isActive(c.params);
           const last = i === categories.length - 1;
@@ -88,7 +93,7 @@ export default function CategoryHub({ data, filtered, summary }: Props) {
             i < lastRowStart ? "border-b-2 border-[#333] lg:border-b-0" : "",
           ].filter(Boolean).join(" ");
           return (
-            <li key={c.label} className="lg:min-w-0 lg:flex-1">
+            <li key={c.label} className="min-w-0 grow basis-1/4 lg:basis-0 lg:flex-1">
               <Link
                 href={hrefFor(c.params, active)}
                 className={`spring-press block h-full px-1 py-3 text-center lg:py-2 ${div} ${

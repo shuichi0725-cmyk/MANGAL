@@ -63,8 +63,9 @@ export default function BrowseShell({ summary }: { summary: IndexSummary }) {
             <h2 className="dot-heading text-[18px] font-black">カテゴリ</h2>
             <span className="text-[9px] font-extrabold tracking-[0.26em] text-ink/45">BROWSE BY</span>
           </div>
-          {/* ★CategoryHub と同一マークアップ(片方だけ変えると着地で飛ぶ) */}
-          <ul className="grid grid-cols-4 border-[3px] border-[var(--color-ink)] bg-[var(--color-surface)] lg:flex">
+          {/* ★CategoryHub と同一マークアップ(片方だけ変えると着地で飛ぶ)
+              = モバイルの等分化(2026-09-08)も両方に入れること。 */}
+          <ul className="flex flex-wrap border-[3px] border-[var(--color-ink)] bg-[var(--color-surface)] lg:flex-nowrap">
             {cats.map((c, i) => {
               const last = i === cats.length - 1;
               const lastRowStart = Math.floor((cats.length - 1) / 4) * 4;
@@ -74,7 +75,7 @@ export default function BrowseShell({ summary }: { summary: IndexSummary }) {
                 i < lastRowStart ? "border-b-2 border-[#333] lg:border-b-0" : "",
               ].filter(Boolean).join(" ");
               return (
-                <li key={c.label} className="lg:min-w-0 lg:flex-1">
+                <li key={c.label} className="min-w-0 grow basis-1/4 lg:basis-0 lg:flex-1">
                   <Link href={c.href} className={`spring-press block h-full px-1 py-3 text-center lg:py-2 ${div}`}>
                     <span className="cat-emoji text-base leading-none" aria-hidden="true">
                       {c.icon}
