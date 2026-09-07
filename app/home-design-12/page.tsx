@@ -137,12 +137,15 @@ export default function Design12() {
           <h2 className="dot-heading text-[18px] font-black">カテゴリ</h2>
           <span className="text-[9px] font-extrabold tracking-[0.26em] text-ink/45">BROWSE BY</span>
         </div>
-        <div className="mt-2.5 grid grid-cols-4 border-[3px] border-[var(--color-ink)] bg-[var(--color-surface)]">
+        {/* ★PCで1段に(2026-09-07 ユーザ指摘「でかすぎる」= /browse の CategoryHub と同じ是正)。
+            仕切り線は段組が変わると位置も変わる: lg では 4番目(i=3)が行末でなくなるので
+            右線を足し、上段(i<4)の下線を落とす。モバイル(<1024px)は4列2段のまま=不変。 */}
+        <div className="mt-2.5 grid grid-cols-4 border-[3px] border-[var(--color-ink)] bg-[var(--color-surface)] lg:grid-cols-8">
           {cats.map(([icon, label, n, href], i) => (
             <Link
               key={label}
               href={href}
-              className={`spring-press block px-1 py-3 text-center ${i % 4 !== 3 ? "border-r-2 border-[#333]" : ""} ${i < 4 ? "border-b-2 border-[#333]" : ""}`}
+              className={`spring-press block px-1 py-3 text-center lg:py-2 ${i % 4 !== 3 ? "border-r-2 border-[#333]" : i !== 7 ? "lg:border-r-2 lg:border-[#333]" : ""} ${i < 4 ? "border-b-2 border-[#333] lg:border-b-0" : ""}`}
             >
               {icon}
               <div className="mt-1 text-[11px] font-black">{label}</div>
