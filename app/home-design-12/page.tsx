@@ -88,9 +88,11 @@ export default function Design12() {
         {/* ★日付はマーキー先頭(案D)。ループ2周とも先頭に付けて継ぎ目を揃える */}
         <span className="d3-marquee"><StatusDate />{banner}<StatusDate />{banner}</span>
       </div>
-      <div className="mx-auto flex w-full max-w-[960px] justify-center gap-6 lg:px-4">
+      {/* ★2026-09-07: 他頁(PageShell)と同じ器 max-w-6xl に統一。ホームだけ 960px だと
+          レールの左端位置が頁を移るたびに横に飛んでいた。本文は残り幅を埋める。 */}
+      <div className="mx-auto flex w-full max-w-6xl gap-6 lg:px-4">
       <FilterRail masters={{ publishers: data.publishers, magazines: data.magazines, genres: data.genres, demographics: data.demographics }} />
-      <div className="w-full max-w-[640px] min-w-0">
+      <div className="w-full min-w-0 flex-1">
 
       <HeroD3 total={manga.length} books={totalBooks} />
 
