@@ -72,12 +72,14 @@ export default function HeroD3({ total, books }: { total: number; books: number 
       <p className="mt-3 text-[11px] leading-relaxed text-ink/65">
         {total.toLocaleString()}作品・{books.toLocaleString()}冊の書誌を収録。
       </p>
-      {/* 素のGETフォーム=JS前でも検索できる(/browseのシェルと同じ思想) */}
+      {/* 素のGETフォーム=JS前でも検索できる(/browseのシェルと同じ思想)。
+          ★lg以上では隠す(2026-09-07 ユーザ「検索窓は左の一つにして」)= PCは左レールの窓に一本化。
+            モバイル(<1024px)はレールが出ないのでここが唯一の検索窓 = 従来どおり表示する。 */}
       <form
         action="/browse"
         method="get"
         onSubmit={onSubmit}
-        className="mt-5 flex items-center gap-2 border-2 border-[var(--color-accent)] bg-[#050505] px-3.5 py-3 shadow-[3px_3px_0_rgba(217,248,67,0.14)]"
+        className="mt-5 flex items-center gap-2 border-2 border-[var(--color-accent)] bg-[#050505] px-3.5 py-3 shadow-[3px_3px_0_rgba(217,248,67,0.14)] lg:hidden"
       >
         <span className="shrink-0 text-[12.5px] font-bold text-[var(--color-accent)]">mangal&gt;</span>
         <input
