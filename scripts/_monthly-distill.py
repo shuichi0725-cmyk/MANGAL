@@ -714,6 +714,8 @@ DETECTORS = [
     ("edition-lead-gap", ["_audit-edition-lead-gap.py"], "edition-lead-gap.tsv", False),
     # ★漫画内分裂層(2026-09-07): 1本の刊行runが同一頁の版タブに割れている。★自動統合禁止。
     ("intra-page-run-split", ["_audit-intra-page-run-split.py"], "intra-page-run-split.tsv", False),
+    # ★同人セレクション層(2026-09-07): 楽天seriesNameに「同人」= 掲載対象外がすり抜けた分。
+    ("doujin-selection", ["_audit-doujin-selection.py"], "doujin-selection.tsv", False),
     ("edition-canonical", ["_check-edition-canonical.py"], None, False),
     ("year-suffix-dup", ["_audit-year-suffix-dup.py"], "year-suffix-dup.tsv", False),
     ("canonical-imprint-split", ["_audit-canonical-imprint-split.py"], "canonical-imprint-split.tsv", False),

@@ -39,6 +39,22 @@ def main() -> None:
 
     aliases = {k: _resolve(k) for k in aliases}
 
+    # ★宛先が本番に存在しない alias は出さない(2026-09-07 新設)。
+    #   頁を drop すると、その頁を指していた 301 が **404 へ誘導する**ようになる
+    #   ([[drop_page_redirect_chain]])。 yml 側の掃除を忘れても出力側で塞がるようにする。
+    #   ★索引が読めない時は従来どおり全件出す(ガードで配信を壊さない)。
+    try:
+        _ix = json.loads(Path("data/manga-list-index.json").read_text(encoding="utf-8"))
+        _live = {r[_ix["f"].index("slug")] for r in _ix["d"]}
+    except Exception:
+        _live = None
+    if _live:
+        _dead = {k: v for k, v in aliases.items() if v not in _live}
+        if _dead:
+            print("  ★宛先が本番に無い alias を除外: {} 件 (例 {})".format(
+                len(_dead), list(_dead.items())[:5]))
+            aliases = {k: v for k, v in aliases.items() if v in _live}
+
     # ★不変条件の検算(2026-09-05 実踏): 生成物を見ないと気付けない2型を必ず数える。
     #   A. alias のキーが公開slug = **生きた頁を404へ飛ばす**(slow-loop -> surooruupu で実踏)
     #   B. 平坦化後の宛先が未公開  = 301の先が404

@@ -96,6 +96,7 @@
 | 28 | 発売日ドリフト層 (すてごろブッチ型) | `scripts/_audit-preorder-date-drift.py` | preorder-date-drift.tsv / -review.tsv | ★**日次蒸留で回す**(skill daily-distill 手順10.6)= 月次サニティでは回さない |
 | 29 | 版タブ先頭欠け層 (鉄腕アトム型) | `scripts/_audit-edition-lead-gap.py` | edition-lead-gap.tsv | 版が途中巻から始まり頁が分裂して見える。 `--emit-targets` で充填ターゲット |
 | 30 | 漫画内分裂層 (刊行runが同一頁で割れる) | `scripts/_audit-intra-page-run-split.py` | intra-page-run-split.tsv | 重なり<=2冊かつ<=20%のペア (★自動統合禁止・AKIRA型の正当な別版は除外済) |
+| 31 | 同人セレクション層 (ハル/POE BACKS型) | `scripts/_audit-doujin-selection.py` | doujin-selection.tsv | **SERIES一致**(楽天seriesNameに同人)の新規 = 掲載対象外。 TITLE一致は同人を題材にした商業漫画なので対象外 |
 
 - 既知の例外型: 再登録の別 ID 二重化 / MADB 形式変更 (= タグ消失・年→巻番号) / 成年誤 flag (= 新レーベル未カバー) / 雑誌漏れ (= cm105 凍結) / 巻番号水増し (= 下=3型)。
 
