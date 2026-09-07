@@ -135,12 +135,14 @@
 ★**正本 = `docs/skill-triggers.md` + `.claude/skills/*/SKILL.md`**(9 skill)。トリガー語を見たら対応skillを必ず開く:
 反映して=reflect-targeted / テスト環境に出して=test-deploy / 週次蒸留=weekly-distill / 日次蒸留=daily-distill /
 後退蒸留=backward-distill / 月次蒸留=monthly-distill / 作品名+リンク=percase-fix / 新規追加=new-manga-register / 巻抜け仮想=volgap-audit / **差分反映して=diff-deploy(データのみ本番へ数分・コード変更はabort→週次)** / **機能蒸留して=feature-distill(コードのみ本番へ~30分・非漫画面+チャンクだけPUT・漫画頁/索引不変)** / **Wiki蒸留して=wiki-distill(Wikipedia書誌で長期連載復元)** / **本番化して=productionize-drafts(確認済み予約ドラフトをpreorder-pages恒久化→週次で本番公開・preview解放)**。
+**マンバ蒸留して=manba-distill**(manba経由でBookLive title_idを採取・BookLiveは叩かない・resumable)。
 ★常時参照: 取りこぼしして=**torikoboshi-harvest**(孤児44,533件の楽天回収) / 取りこぼしNDLして=**torikoboshi-ndl**(楽天不在1,989件をNDL補完・題ヨミ取得) / エンリッチして=**enrich-catch-synopsis** / Koboして=**kobo-covers** / 帯混入直して=**band-intruder-fix** / 楽天/NDL照会=**external-data-access(必ず_lookup.py)** / 長時間ジョブ=long-job-ops / 表示不具合=display-bug-triage
 
 | ユーザの言い方 | Claudeがやること | 所要 |
 |---|---|---|
 | **「反映して」** | targeted反映(`_reflect-targeted.py`)= 直した頁だけ 本番manga.v2+索引+テスト同期+push。**検証ゲート内蔵**(slug/kana/date/isbn不正はpush前に停止) | 数分 |
 | **「巻抜け仮想」** | `_volgap-virtual.py --list` = 残巻抜けを算出(promote不要) | ~2分 |
+| **「マンバ蒸留して」/「マンバ蒸留続けて」** | skill `manba-distill` = manba.co.jp の **302 Location** から BookLive `title_id` を採取し試し読みの空白を埋める。★**BookLiveには1リクエストも出さない**(リダイレクトを追わない)=停止札を守る。台帳 `data/seeds/manba-titleid.jsonl`(git追跡)で**再開可**。まず `--status` で現在地。**反映はGO必須** | 100件/回 ~17分 |
 | **「新規追加/新刊入れて」** | distillパイプライン(`_distill_preview`系)= **テスト先行**で新規頁生成→ユーザ確認→GOで本番化 | 件数次第 |
 | **「月次蒸留して」** | フルパイプライン(Phase0→Go待ち→取込→フルpromote) | ~3時間+ |
 | **「日次蒸留して」** | skill `daily-distill`= `_distill_daily.py --discover`(NDL当月live・429即中断)→`--plan`(差分レポート=新規掲載可/新規欠落・カーソル自動更新)→worksheet記入→`--emit`。カーソル=distill-cursor.json | 数分 |

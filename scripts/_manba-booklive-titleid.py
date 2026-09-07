@@ -43,7 +43,14 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(ROOT, "scripts"))
 import _rate_gate
 
-LEDGER = os.path.join(ROOT, ".cache", "manba-titleid.jsonl")
+# ★台帳は git追跡の seed に置く(.cache だと /clear・PC移行・掃除で消える。
+#   CLAUDE.md「holes等の成果は .cache 置きっぱにせず永続化」と同じ理由)。追記のみ・純粋追加。
+LEDGER = os.path.join(ROOT, "data", "seeds", "manba-titleid.jsonl")
+_OLD_LEDGER = os.path.join(ROOT, ".cache", "manba-titleid.jsonl")
+if not os.path.exists(LEDGER) and os.path.exists(_OLD_LEDGER):
+    os.makedirs(os.path.dirname(LEDGER), exist_ok=True)
+    import shutil as _sh
+    _sh.copy(_OLD_LEDGER, LEDGER)          # 旧置き場からの一度きりの移行
 UA = ("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
       "(KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36")
 
@@ -141,11 +148,14 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--slugs-file")
     ap.add_argument("--from-list", action="store_true",
-                    help="no-tameshiyomi-active.tsv のうち試し読み未検査(recheck-attempted に無い)分")
+                    help="no-tameshiyomi-active.tsv 由来(既定=試し読み未検査分のみ。--all で全件)")
     ap.add_argument("--sleep", type=float, default=5.0)
     ap.add_argument("--limit", type=int, default=0)
     ap.add_argument("--vol-tol", type=int, default=3, help="巻数一致の許容差")
     ap.add_argument("--redo", help="台帳の指定resultを再走(既定語 nonhit = no_match,gate_ng,ambiguous,no_store)")
+    ap.add_argument("--status", action="store_true", help="現在地(台帳の内訳と残件)を出して終了。★再開時はまずこれ")
+    ap.add_argument("--all", action="store_true",
+                    help="no-tameshiyomi-active.tsv の**全件**を対象(既定の--from-listは未検査分だけ)")
     a = ap.parse_args()
 
     idx = json.load(io.open(os.path.join(ROOT, "data", "manga-list-index.json"), encoding="utf-8"))
@@ -162,9 +172,31 @@ def main():
         tp = os.path.join(ROOT, ".cache", "tameshiyomi", "recheck-attempted.txt")
         if os.path.exists(tp):
             tried = {l.strip() for l in io.open(tp, encoding="utf-8") if l.strip()}
-        want = [r[ci] for r in rows[1:] if r[ci] not in tried]
+        want = [r[ci] for r in rows[1:]] if a.all else [r[ci] for r in rows[1:] if r[ci] not in tried]
     else:
         sys.exit("--slugs-file か --from-list が要る")
+
+    if a.status:
+        last = {}
+        if os.path.exists(LEDGER):
+            for l in io.open(LEDGER, encoding="utf-8"):
+                try:
+                    r = json.loads(l); last[r["slug"]] = r
+                except Exception:
+                    pass
+        from collections import Counter
+        c = Counter(r.get("result") for r in last.values())
+        print(f"台帳 {LEDGER}\n  記録済み {len(last)} 作品: " +
+              " / ".join(f"{k} {v}" for k, v in c.most_common()))
+        tgt = [s for s in want if s not in last]
+        redoable = [s for s, r in last.items()
+                    if r.get("result") in ("no_match", "gate_ng", "ambiguous", "no_store")]
+        print(f"  今の対象リスト {len(want)} 件のうち **未採取 {len(tgt)}**"
+              f"  (2req×5秒 ≈ {len(tgt) * 2 * a.sleep / 60:.0f}分)")
+        print(f"  再走可(非hit) {len(redoable)} 件 … --redo nonhit")
+        print(f"  ★適用可 = result:hit の {c.get('hit', 0)} 件"
+              f"(hit_edition_suspect {c.get('hit_edition_suspect', 0)} 件は版違い=適用しない)")
+        return
 
     # ★台帳は追記式=同一slugは**最終行勝ち**で読む(再走で結果が更新される)
     last = {}

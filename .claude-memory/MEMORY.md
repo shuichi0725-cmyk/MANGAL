@@ -160,6 +160,7 @@
 - [【型・検出器+apply正式化・8段適用済】Sugar&Spice型=巻題を題として別sid登録→末尾巻欠け](subtitle_orphan_volume_split_sugar_spice.md)
 - [【道具の罠】_lookup.py --isbn --live はキャッシュ済だとliveを叩かない](lookup_isbn_live_cached_skip.md)
 - [【禁止】BOOK☆WALKERは試し読み収集不可](bookwalker_harvest_forbidden.md)
+- [【機構・進行中】マンバ蒸留=manba経由でBookLive title_id採取](manba_booklive_titleid_route.md) — BookLiveは1回も叩かない・誤同定0%・残482件/反映GO待ち
 - [SEO構造相談2026-09-04=穴7点・1〜4,6適用済(ジャンルtitle/チップ/雑誌・出版社・年ハブ850面/ジャンル下位219/anime二重サフィックス/list静的シェル)](seo_structure_gaps_2026_09_04.md)
 - [IndexNow自前送信=_indexnow.py(r2-sync→pending→finalize purge後drain / feature・diff-deployは即drain)](indexnow_self_submit.md)
 - [Crawler HintsはWorkers+R2で発火しない公算](crawler_hints_ineffective_on_workers_r2.md)
