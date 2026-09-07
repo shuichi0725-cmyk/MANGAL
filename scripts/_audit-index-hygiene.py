@@ -133,6 +133,38 @@ def _signature(path):
         return {"kind": "map", "valtype": _jstype(v) if v is not None else "?"}
     return {"kind": _jstype(j)}
 
+def _type_compatible(a, b):
+    """列型の互換判定。★'?' = 「サンプルに非nullが1つも無い」= 型の証拠なし。
+    証拠が無い側は何とでも両立する(= 形式変更の証拠にならない)。
+    これを厳密一致にすると、疎な列(fl等)が「その週たまたま全部null」になっただけで
+    形式契約違反FAILになり、週次のビルドが止まる(2026-09-07 実害: 書影を343頁埋めて
+    cover_gap が上位100件から消え fl が number→? になった)。"""
+    if a == b:
+        return True
+    if a == "?" or b == "?":
+        return True
+    if isinstance(a, str) and isinstance(b, str) \
+            and a.startswith("array<") and b.startswith("array<"):
+        return _type_compatible(a[6:-1], b[6:-1])
+    return False
+
+
+def _sig_compatible(con, sig):
+    """形式署名の互換判定。★列構成(f)とkindは厳密、列型だけ '?' を許容。"""
+    if not isinstance(con, dict) or not isinstance(sig, dict):
+        return con == sig
+    if con.get("kind") != sig.get("kind"):
+        return False
+    if con.get("f") != sig.get("f"):          # 列の追加/削除/並べ替え = 真の形式変更
+        return False
+    ca, cb = con.get("coltypes") or {}, sig.get("coltypes") or {}
+    if set(ca) != set(cb):
+        return False
+    if any(not _type_compatible(ca[k], cb[k]) for k in ca):
+        return False
+    return _type_compatible(con.get("valtype", "?"), sig.get("valtype", "?"))
+
+
 if D == "data":  # 本番索引のみ(previewはsubsetミラーなので対象外)
     cur = {os.path.basename(p): _signature(p)
            for p in sorted(_glob.glob(os.path.join(BASE, "manga-*.json")))}
@@ -148,7 +180,7 @@ if D == "data":  # 本番索引のみ(previewはsubsetミラーなので対象�
         for name, sig in cur.items():
             if name not in con:
                 fails.append(f"契約未登録の索引 {name} → 新ファイルなら --accept-format で登録(fetch側の実装も確認)")
-            elif con[name] != sig:
+            elif not _sig_compatible(con[name], sig):
                 fails.append(
                     f"★形式契約違反 {name}: 同名のままフォーマットが変わっている(版ズレでApplication errorになる型)。"
                     f"→ ファイル名をバンプ(例 {name.replace('.json', '.v2.json')})+fetch側(lib/)も変更+旧ファイルはR2に残す+--accept-format で新契約登録")

@@ -124,24 +124,5 @@
    "fl": "number",
    "_slugfix_new": "?"
   }
- },
- "manga-search-index.json": {
-  "kind": "fd",
-  "f": [
-   "slug",
-   "title",
-   "title_kana",
-   "title_romaji",
-   "alt",
-   "au"
-  ],
-  "coltypes": {
-   "slug": "string",
-   "title": "string",
-   "title_kana": "string",
-   "title_romaji": "string",
-   "alt": "array<string>",
-   "au": "array<string>"
-  }
  }
 }
