@@ -44,6 +44,11 @@ export default function HomeClient({ data, summary }: Props) {
   const [state, setState] = useState(() => ({ ...emptyFilterState(), ...filtersFromSearchParams(searchParams) }));
   const [open, setOpen] = useState(false);
   // ★画面幅に合わないフィルターを外す(2026-08-01)。
+  //   ★境界は lg(1024px)= **左レールが出る幅**に合わせる(2026-09-08 ユーザ裁定A)。
+  //   経緯: 2026-09-07 に PC用サイドバー(hidden md:block)を撤去してレールへ委ねたが、
+  //   レールは `hidden lg:block` なのに抽斗は `md:hidden` のままだった。
+  //   → **幅768〜1023px(タブレット横・小型ノート)にフィルターUIが1つも無い**状態になっていた。
+  //   抽斗側を lg に寄せることで、レールが出ない幅は必ず抽斗が受け持つ。
   //   旧: PC用サイドバー(hidden md:block)とモバイル用抽斗(md:hidden)の両方が
   //   常時マウントされ、CSSで隠れているだけだった。FilterPanel の動的件数は
   //   67k件の絞り込みを毎回6パス走らせる(本番実測568ms)ので、どの画面幅でも
@@ -53,7 +58,7 @@ export default function HomeClient({ data, summary }: Props) {
   //   索引(67k)の到着は水和よりずっと後なので、不要な側は重い計算を一度もしない。
   const [viewport, setViewport] = useState<"both" | "desktop" | "mobile">("both");
   useEffect(() => {
-    const mq = window.matchMedia("(min-width: 768px)"); // = Tailwind の md ブレイクポイント
+    const mq = window.matchMedia("(min-width: 1024px)"); // = Tailwind の lg = 左レールが出る幅
     const apply = () => setViewport(mq.matches ? "desktop" : "mobile");
     apply();
     mq.addEventListener("change", apply); // 回転・リサイズで切り替え
@@ -453,7 +458,7 @@ export default function HomeClient({ data, summary }: Props) {
       {/* モバイル: フィルター起動(全画面オーバーレイを開く)。 PC版は右サイドバー常時表示 */}
       <button
         type="button"
-        className="tactile-chip md:hidden mb-2 px-3 py-2.5 text-sm font-medium rounded-card w-full active:scale-[0.99] transition"
+        className="tactile-chip lg:hidden mb-2 px-3 py-2.5 text-sm font-medium rounded-card w-full active:scale-[0.99] transition"
         onClick={() => setOpen(true)}
       >
         ⚙ フィルターで絞り込む
@@ -463,7 +468,7 @@ export default function HomeClient({ data, summary }: Props) {
       {hasActiveFilters && (
         <button
           type="button"
-          className="md:hidden mb-4 px-3 py-2 text-xs rounded-card w-full border border-[var(--color-line)] bg-[var(--color-surface)] text-ink/70 active:scale-[0.99] transition"
+          className="lg:hidden mb-4 px-3 py-2 text-xs rounded-card w-full border border-[var(--color-line)] bg-[var(--color-surface)] text-ink/70 active:scale-[0.99] transition"
           onClick={() => applyState({ ...emptyFilterState(), query: state.query })}
         >
           ✕ フィルターをリセット
@@ -536,12 +541,12 @@ export default function HomeClient({ data, summary }: Props) {
         </div>
       </div>
 
-      {/* ★モバイル: 全画面オーバーレイ フィルター。 ボタンで徐々に拡大、 ×で徐々に畳む。
-          背景は blur+暗転(背後の文脈は見えるが文字は読める)。 PC版(md:)は出さない。
-          ★PCでは水和直後に丸ごと外す(もともと md:hidden = 見た目不変、計算だけ消える) */}
+      {/* ★レールが出ない幅(<lg)の全画面オーバーレイ フィルター。 ボタンで徐々に拡大、 ×で徐々に畳む。
+          背景は blur+暗転(背後の文脈は見えるが文字は読める)。 lg以上は左レールが担当するので出さない。
+          ★lg以上では水和直後に丸ごと外す(もともと lg:hidden = 見た目不変、計算だけ消える) */}
       {viewport !== "desktop" && (
       <div
-        className={`md:hidden fixed inset-0 z-50 transition-[opacity,visibility] duration-300 ${
+        className={`lg:hidden fixed inset-0 z-50 transition-[opacity,visibility] duration-300 ${
           open ? "visible opacity-100" : "invisible opacity-0 pointer-events-none"
         }`}
         aria-hidden={!open}
