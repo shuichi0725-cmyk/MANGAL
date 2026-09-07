@@ -118,6 +118,7 @@
 - [【手法】番外巻か資料本かの見分け=NDL題×楽天価格比](method_bangai_vs_shiryouhon.md) — 1.5倍以上は資料本。31件→7件
 - [【進行中】①の裁定=見なおし表(生成器化済・69頁)](unlisted_volumes_review_state.md)
 - [【型・是正済】imprint欄に版ラベルが焼かれる](imprint_label_leak.md)
+- [【手法】照合ゲートの不一致=我々側の誤りの検出器](gate_mismatch_reveals_our_own_error.md) — マンバ目視9件で著者誤り1件発見。猫と紳士のティールーム=正モリコロス(未修正)
 - [【戒め】検出器の素の件数は仕事の量ではない](feedback_raw_count_is_not_worklist.md) — 実測で2〜3桁縮む。数字を提案に出す前に中身を割る
 - [【型・検出器】トリニティ15.5型=頁は在るのに巻だけ出ていない](unlisted_volumes_trinity_type.md)
 - [【機構】.5の半端巻(番外編)を通す](half_volume_number_mechanism.md)
