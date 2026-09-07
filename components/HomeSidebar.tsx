@@ -30,6 +30,9 @@ export default function HomeSidebar({
   const router = useRouter();
   const pathname = usePathname();
   const doWarm = prewarm ?? (pathname === "/" || pathname === "/browse" || pathname === "/list");
+  // ★行き先はパス連動(2026-09-07 ユーザ①=3 で /browse の右上検索窓をここへ集約したため)。
+  //   /browse に居る時はその場で絞り込む(?q= を読んで HomeClient が組み直す)。他は一覧表へ。
+  const dest = pathname === "/browse" ? "/browse" : "/list";
   useEffect(() => {
     if (!doWarm) return;
     if (!window.matchMedia("(min-width: 1024px)").matches) return;
@@ -54,24 +57,34 @@ export default function HomeSidebar({
         <div className="rounded-xl border border-[var(--color-line)] bg-[var(--color-surface)] p-3.5 shadow-sm">
           <p className="text-[12px] font-extrabold text-ink/70">🔍 さがす</p>
           <form
-            action="/list"
+            action={dest}
             method="get"
             className="mt-2"
             onSubmit={(e) => {
               e.preventDefault();
-              router.push(q.trim() ? `/list?q=${encodeURIComponent(q.trim())}` : "/list");
+              router.push(q.trim() ? `${dest}?q=${encodeURIComponent(q.trim())}` : dest);
             }}
           >
-            <input
-              name="q"
-              value={q}
-              onChange={(e) => setQ(e.target.value)}
-              placeholder="題名・よみ・著者…"
-              className="w-full rounded-full border border-[var(--color-line)] bg-[var(--color-surface)] px-3.5 py-1.5 text-[13px] outline-none focus:border-[var(--color-accent)]"
-            />
+            {/* ★ターミナル調(2026-09-07): /browse 右上にあった SearchBox の見た目をここへ移設。
+                幅260pxなので窓とボタンは横並びでなく縦積み。 */}
+            <div className="flex items-center gap-1.5 border-2 border-[var(--color-accent)] bg-[#050505] px-2.5 py-2 shadow-[3px_3px_0_rgba(217,248,67,0.14)]">
+              <span className="shrink-0 text-[11px] font-bold text-[var(--color-accent)]" aria-hidden="true">
+                mangal&gt;
+              </span>
+              <input
+                type="search"
+                name="q"
+                value={q}
+                onChange={(e) => setQ(e.target.value)}
+                placeholder="題名・よみ・著者…"
+                aria-label="作品を検索"
+                className="d3-plain min-w-0 flex-1 text-[13px] font-bold text-[var(--color-ink)] outline-none"
+              />
+              <span aria-hidden="true" className="d3-blink h-[13px] w-1.5 shrink-0 bg-[var(--color-accent)]" />
+            </div>
             <button
               type="submit"
-              className="spring-press mt-2 w-full rounded-full bg-[var(--color-accent)] py-1.5 text-[12px] font-bold text-[var(--color-on-accent)]"
+              className="mt-2 w-full border-2 border-[var(--color-accent)] bg-[#050505] py-1.5 text-[12px] font-black text-[var(--color-accent)] transition active:scale-[0.97]"
             >
               検索
             </button>

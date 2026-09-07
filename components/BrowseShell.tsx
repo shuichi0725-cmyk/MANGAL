@@ -54,29 +54,8 @@ export default function BrowseShell({ summary }: { summary: IndexSummary }) {
         </div>
       </section>
 
-      {/* 素の GET フォーム = JS が来る前でも検索に飛べる
-          ★ターミナル式に統一(2026-08-17): hydrate後のSearchBoxと同じ見た目(mangal>+点滅カーソル) */}
-      <form action="/browse" method="get" className="mb-6 flex items-center gap-2">
-        <div className="flex min-w-0 flex-1 items-center gap-2 border-2 border-[var(--color-accent)] bg-[#050505] px-3.5 py-2.5 shadow-[3px_3px_0_rgba(217,248,67,0.14)]">
-          <span className="shrink-0 text-[12px] font-bold text-[var(--color-accent)]" aria-hidden="true">
-            mangal&gt;
-          </span>
-          <input
-            type="search"
-            name="q"
-            placeholder="タイトル・よみがな・ローマ字で検索"
-            aria-label="作品を検索"
-            className="d3-plain min-w-0 flex-1 text-sm font-bold text-[var(--color-ink)] outline-none"
-          />
-          <span aria-hidden="true" className="d3-blink h-[14px] w-2 shrink-0 bg-[var(--color-accent)]" />
-        </div>
-        <button
-          type="submit"
-          className="shrink-0 border-2 border-[var(--color-accent)] bg-[#050505] px-4 py-2.5 text-sm font-black text-[var(--color-accent)]"
-        >
-          検索
-        </button>
-      </form>
+      {/* ★検索窓は左レール(HomeSidebar)へ移設(2026-09-07)。レール側が action="/browse" の
+          素のGETフォームを持つので、JS前/非JSでも検索できる性質は維持されている。 */}
 
       {cats.length > 0 && (
         <section id="shell-cats" className="mb-7">

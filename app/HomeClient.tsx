@@ -6,7 +6,6 @@ import CategoryHub from "@/components/CategoryHub";
 import FilterPanel from "@/components/FilterPanel";
 import MangaGrid from "@/components/MangaGrid";
 import ArtBookCard from "@/components/ArtBookCard";
-import SearchBox from "@/components/SearchBox";
 import ShareButtons from "@/components/ShareButtons";
 import Pager from "@/components/ui/Pager";
 import {
@@ -308,21 +307,10 @@ export default function HomeClient({ data, summary }: Props) {
             。
           </p>
         </div>
-        <div className="md:w-96">
-          {/* ★確定した検索語はURL(?q=)へ書く=source of truth。詳細→戻るで検索語・結果が復元される(2026-07-11 ユーザ仕様) */}
-          <SearchBox
-            value={state.query}
-            onChange={(q) => {
-              setState({ ...state, query: q });
-              const params = new URLSearchParams(searchParams.toString());
-              if (q) params.set("q", q);
-              else params.delete("q");
-              params.delete("page");
-              const qs = params.toString();
-              router.replace(qs ? `${pathname}?${qs}` : pathname, { scroll: false });
-            }}
-          />
-        </div>
+        {/* ★検索窓は左レール(HomeSidebar)へ移設(2026-09-07 ユーザ①=3)。
+            サイト全体で検索窓は左の1つ(ホームのヒーローだけは看板として残す)。
+            ?q= は引き続き source of truth = レールから push された URL を読んで組み直す。
+            検索語の解除は「適用中」チップの × から(2026-09-05 で検索語もチップ化済み)。 */}
       </section>
 
       {/* ★filtered=現在の絞り込み後(検索込み)を渡す=タイル件数が交差件数になる(2026-07-12) */}
