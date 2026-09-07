@@ -22,6 +22,29 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 ACCOUNT = "774e95ed884a48e76ffb5aa78ae7e037"
 DEFAULT_SCRIPT = "mangal-r2"
 SITE_TAG = "806671887a234f4882f85ba92058da5f"   # Web Analytics site (mangal-db.com)
+ZONE_TAG = "5db1699deb11a837a0eb66c096e333b6"   # Zone (mangal-db.com)。 #analytics:read 権限あり(2026-09-07確認)
+
+# 名乗りUAから既知クローラを分類(表示名だけ・厳密なbot判定はしない=UA詐称は見抜けない)
+_BOT_SIGNATURES = [
+    ("Googlebot", "Googlebot"), ("bingbot", "Bingbot"), ("Applebot", "Applebot"),
+    ("SemrushBot", "SemrushBot"), ("AhrefsBot", "AhrefsBot"), ("MJ12bot", "MJ12bot(Majestic)"),
+    ("Amazonbot", "Amazonbot"), ("YisouSpider", "YisouSpider(易搜/中国)"),
+    ("facebookexternalhit", "Facebook(共有プレビュー)"), ("meta-externalagent", "Meta(共有プレビュー)"),
+    ("DotBot", "DotBot(Moz)"), ("PetalBot", "PetalBot(Huawei)"), ("Bytespider", "Bytespider(TikTok/ByteDance)"),
+    ("YandexBot", "YandexBot"), ("DuckDuckBot", "DuckDuckBot"), ("GPTBot", "GPTBot(OpenAI)"),
+    ("ClaudeBot", "ClaudeBot(Anthropic)"), ("Claude-Web", "Claude-Web(Anthropic)"),
+    ("PerplexityBot", "PerplexityBot"), ("CCBot", "CCBot(Common Crawl)"), ("SeznamBot", "SeznamBot"),
+    ("Sogou", "Sogou(捜狗/中国)"), ("Baiduspider", "Baiduspider(百度/中国)"),
+]
+
+
+def _classify_ua(ua):
+    for sig, label in _BOT_SIGNATURES:
+        if sig in ua:
+            return label
+    if "Mozilla" not in ua or "(compatible)" == ua.strip():
+        return "(未分類bot候補)"
+    return None  # 通常ブラウザUAとみなす
 
 
 def _token():
@@ -117,16 +140,53 @@ def web(days):
     print("※ビーコン計測=JS実行ブラウザのみ(bot/クローラは原則含まれない)。設置=2026-07-05以降のデータ。")
 
 
+def bots(date):
+    """ゾーンレベル httpRequestsAdaptiveGroups を User-Agent別に集計(★Freeプランは1日幅までしかクエリ不可)。"""
+    d0 = date or datetime.date.today().isoformat()
+    geq = d0 + "T00:00:00Z"
+    leq = d0 + "T23:59:59Z"
+    q = """query($zone: string!, $geq: Time!, $leq: Time!) {
+      viewer { zones(filter: {zoneTag: $zone}) {
+        ua: httpRequestsAdaptiveGroups(limit: 100, filter: {datetime_geq: $geq, datetime_leq: $leq}, orderBy: [count_DESC]) {
+          count
+          dimensions { userAgent }
+        } } } }"""
+    d = _api("https://api.cloudflare.com/client/v4/graphql",
+             {"query": q, "variables": {"zone": ZONE_TAG, "geq": geq, "leq": leq}})
+    if d.get("errors"):
+        raise SystemExit(f"GraphQLエラー: {json.dumps(d['errors'], ensure_ascii=False)[:300]}")
+    rows = d["data"]["viewer"]["zones"][0]["ua"]
+    bot_total = {}
+    browser_total = 0
+    grand = 0
+    for r in rows:
+        c, ua = r["count"], r["dimensions"]["userAgent"]
+        grand += c
+        label = _classify_ua(ua)
+        if label:
+            bot_total[label] = bot_total.get(label, 0) + c
+        else:
+            browser_total += c
+    print(f"クローラ内訳(UA分類・{d0}のtop{len(rows)}UA={grand:,}件中):")
+    for label, c in sorted(bot_total.items(), key=lambda x: -x[1]):
+        print(f"  {c:>7,}  {label}")
+    print(f"  {browser_total:>7,}  (通常ブラウザUA)")
+    print("※上位100UAのみ集計(ロングテールのbotは未計上)。UA詐称までは見抜けない=名乗りベース。Freeプランは1日幅までしかクエリ不可。")
+
+
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("cmd", choices=["verify", "report", "web"])
+    ap.add_argument("cmd", choices=["verify", "report", "web", "bots"])
     ap.add_argument("--days", type=int, default=7)
     ap.add_argument("--script", default=DEFAULT_SCRIPT)
+    ap.add_argument("--date", default=None, help="bots用: YYYY-MM-DD (省略=今日)")
     a = ap.parse_args()
     if a.cmd == "verify":
         verify()
     elif a.cmd == "web":
         web(a.days)
+    elif a.cmd == "bots":
+        bots(a.date)
     else:
         report(a.days, a.script)
 
