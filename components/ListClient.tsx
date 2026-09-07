@@ -129,7 +129,6 @@ export default function ListClient({ data }: { data: ListBundle }) {
     else url.searchParams.delete("s");
     window.history.replaceState(null, "", url.toString());
   }, [limit, sort, sortTouched]);
-  const [slugfixOnly, setSlugfixOnly] = useState(false);
 
   useEffect(() => {
     if (!open) return;
@@ -190,7 +189,6 @@ export default function ListClient({ data }: { data: ListBundle }) {
   //  トップと同じ本体(clientSearch)を使う統一は 2026-07-21、matchedSlugs の外出しは 2026-09-05)
   const rows = useMemo(() => {
     let r = applyFilters(manga, state);
-    if (slugfixOnly) r = r.filter((m) => m._slugfix);
     if (searchTiers) {
       const hit = searchTiers;
       r = r.filter((m) => hit.has(m.slug));
@@ -199,7 +197,7 @@ export default function ListClient({ data }: { data: ListBundle }) {
     const effSort: SortId = needle && !sortTouched ? "popularity" : sort;
     return sortRows(r, effSort, searchTiers, sortTouched);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [manga, state, needle, searchTiers, sort, sortTouched, slugfixOnly]);
+  }, [manga, state, needle, searchTiers, sort, sortTouched]);
 
   return (
     <div>
@@ -260,14 +258,6 @@ export default function ListClient({ data }: { data: ListBundle }) {
               {s.label}
             </button>
           ))}
-          <button
-            onClick={() => setSlugfixOnly((v) => !v)}
-            className={`spring-press shrink-0 rounded-full px-2.5 py-1 text-[11px] font-bold ${
-              slugfixOnly ? "bg-[var(--color-accent)] text-[var(--color-on-accent)]" : "border border-[var(--color-accent)]/40 bg-[var(--color-surface)] text-[var(--color-accent)]"
-            }`}
-          >
-            slug修正のみ
-          </button>
         </div>
       </div>
       <p className="px-3 pb-1 text-[11px] text-ink/50">
