@@ -18,6 +18,7 @@ import ColorCorner from "@/components/ColorCorner";
 import DailyFeatureCorner from "@/components/DailyFeatureCorner";
 import { KotobaDaily, TriviaDaily, GenreRouletteDaily } from "@/components/DailyBits";
 import HeroD3 from "./HeroD3";
+import Card from "@/components/ui/Card";
 import StatusDate from "./StatusDate";
 
 export const metadata = { robots: { index: false, follow: false } };  // 実験頁=非索引
@@ -102,22 +103,25 @@ export default function Design12() {
           <h2 className="dot-heading text-[18px] font-black">カテゴリ</h2>
           <span className="text-[9px] font-extrabold tracking-[0.26em] text-ink/45">BROWSE BY</span>
         </div>
-        {/* ★PCで1段に(2026-09-07 ユーザ指摘「でかすぎる」= /browse の CategoryHub と同じ是正)。
-            仕切り線は段組が変わると位置も変わる: lg では 4番目(i=3)が行末でなくなるので
-            右線を足し、上段(i<4)の下線を落とす。モバイル(<1024px)は4列2段のまま=不変。 */}
-        <div className="mt-2.5 grid grid-cols-4 border-[3px] border-[var(--color-ink)] bg-[var(--color-surface)] lg:grid-cols-8">
-          {cats.map(([icon, label, n, href], i) => (
-            <Link
-              key={label}
-              href={href}
-              className={`spring-press block px-1 py-3 text-center lg:py-2 ${i % 4 !== 3 ? "border-r-2 border-[#333]" : i !== 7 ? "lg:border-r-2 lg:border-[#333]" : ""} ${i < 4 ? "border-b-2 border-[#333] lg:border-b-0" : ""}`}
-            >
-              {icon}
-              <div className="mt-1 text-[11px] font-black">{label}</div>
-              <div className="mt-0.5 text-[9.5px] font-bold text-[var(--color-accent)] tabular-nums">{n.toLocaleString()}</div>
-            </Link>
+        {/* ★独立カード方式(2026-09-08 ユーザ「そろえる」)= /browse の CategoryHub と同一。
+            旧=太枠1本の帯。帯は枚数が減ると枠内に空マスが残る作りで、/browse 側で実害が出たため
+            両頁とも「独立カード + gap」に統一した(落ちたカードは消えて残りが詰まる)。
+            ★PCで「でかすぎる」(2026-09-07 ユーザ指摘)への是正=lg以上は8列1段、は維持。 */}
+        <ul className="mt-2.5 grid grid-cols-4 gap-2 lg:grid-cols-8 lg:gap-1.5">
+          {cats.map(([icon, label, n, href]) => (
+            <li key={label}>
+              <Card href={href} className="h-full px-1 py-2.5 text-center lg:py-2">
+                <span className="flex flex-col items-center justify-center gap-1">
+                  {icon}
+                  <span className="text-[11px] font-semibold leading-tight">{label}</span>
+                  <span className="cat-count text-[10px] font-medium leading-none tabular-nums text-ink/40">
+                    {n.toLocaleString()}
+                  </span>
+                </span>
+              </Card>
+            </li>
           ))}
-        </div>
+        </ul>
       </section>
 
       {/* ここから下は案11と完全同一(コーナー順・データ・リンク不変) */}

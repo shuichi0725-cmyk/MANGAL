@@ -87,9 +87,11 @@ export default function BrowseShell({ summary }: { summary: IndexSummary }) {
           {/* ★独立カード方式に復帰(2026-09-08 ユーザ指摘)= CategoryHub と同一マークアップ
               (片方だけ変えると着地でカードが飛ぶ)。0件落としで枚数が減っても、
               独立カード + gap なら残りが詰まるだけ = 枠内に空の四角が残らない。 */}
-          <h2 className="text-[11px] font-semibold tracking-[0.18em] uppercase text-ink/50 mb-3">
-            カテゴリで探す
-          </h2>
+          {/* ★見出しはホームと同型= 両頁そろえる(2026-09-08) */}
+          <div className="mb-3 flex items-baseline gap-2.5">
+            <h2 className="dot-heading text-[18px] font-black">カテゴリ</h2>
+            <span className="text-[9px] font-extrabold tracking-[0.26em] text-ink/45">BROWSE BY</span>
+          </div>
           <ul className="grid grid-cols-4 gap-2 lg:grid-cols-8 lg:gap-1.5">
             {cats.map((c) => (
               <li key={c.label}>

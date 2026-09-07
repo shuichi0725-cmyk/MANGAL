@@ -75,9 +75,11 @@ export default function CategoryHub({ data, filtered, summary }: Props) {
           9/07 に「ホームの感じで」= 太枠1本の帯へ寄せたが、帯は1本の枠を仕切る作りなので
           0件落としで枚数が減ると**枠内に空の四角**が残る(実害の起点)。
           独立カード + gap なら、落ちたカードは消えて残りがそのまま詰まる = 破綻しない。 */}
-      <h2 className="text-[11px] font-semibold tracking-[0.18em] uppercase text-ink/50 mb-3">
-        カテゴリで探す
-      </h2>
+      {/* ★見出しはホームと同型(2026-09-07 ユーザ「ホームの感じで」)= 両頁そろえる(2026-09-08) */}
+      <div className="mb-3 flex items-baseline gap-2.5">
+        <h2 className="dot-heading text-[18px] font-black">カテゴリ</h2>
+        <span className="text-[9px] font-extrabold tracking-[0.26em] text-ink/45">BROWSE BY</span>
+      </div>
       {/* ★PCで「でかすぎる」(2026-09-07 ユーザ指摘): 4列×2段=空白だらけだったので
           lg以上は8列1段に詰める。モバイル(<1024px)は4列のまま=不変。 */}
       <ul className="grid grid-cols-4 gap-2 lg:grid-cols-8 lg:gap-1.5">
