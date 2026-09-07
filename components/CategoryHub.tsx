@@ -1,7 +1,7 @@
 "use client";
 
 import { useSearchParams } from "next/navigation";
-import Card from "@/components/ui/Card";
+import Link from "next/link";
 import CatPict, { catKeyOf } from "@/components/CatPict";
 import type { IndexSummary, ListBundle, MangaListItem } from "@/lib/schema";
 
@@ -70,35 +70,42 @@ export default function CategoryHub({ data, filtered, summary }: Props) {
 
   return (
     <section className="mb-7">
-      <h2 className="text-[11px] font-semibold tracking-[0.18em] uppercase text-ink/50 mb-3">
-        カテゴリで探す
-      </h2>
-      {/* ★PCで「でかすぎる」(2026-09-07 ユーザ指摘): 4列×2段=空白だらけだったので
-          lg以上は8列1段に詰める。モバイル(<1024px)は4列のまま=不変。 */}
-      <ul className="grid grid-cols-4 gap-2 lg:grid-cols-8 lg:gap-1.5">
-        {categories.map((c) => {
+      {/* ★見出しもホームと同型(2026-09-07 ユーザ「ホームの感じで」) */}
+      <div className="mb-2.5 flex items-baseline gap-2.5">
+        <h2 className="dot-heading text-[18px] font-black">カテゴリ</h2>
+        <span className="text-[9px] font-extrabold tracking-[0.26em] text-ink/45">BROWSE BY</span>
+      </div>
+      {/* ★ホームと同じ「太枠1本の帯」(2026-09-07)。lg は flex で等分 = 0件落としで
+          枚数が可変でも隙間が空かない。モバイルは4列グリッドのまま。 */}
+      <ul className="grid grid-cols-4 border-[3px] border-[var(--color-ink)] bg-[var(--color-surface)] lg:flex">
+        {categories.map((c, i) => {
           const active = isActive(c.params);
+          const last = i === categories.length - 1;
+          const lastRowStart = Math.floor((categories.length - 1) / 4) * 4;
+          const div = [
+            i % 4 !== 3 && !last ? "border-r-2 border-[#333]" : "",
+            i % 4 === 3 && !last ? "lg:border-r-2 lg:border-[#333]" : "",
+            i < lastRowStart ? "border-b-2 border-[#333] lg:border-b-0" : "",
+          ].filter(Boolean).join(" ");
           return (
-            <li key={c.label}>
-              <Card
+            <li key={c.label} className="lg:min-w-0 lg:flex-1">
+              <Link
                 href={hrefFor(c.params, active)}
-                className={`h-full px-1 py-2.5 text-center lg:py-2 ${
-                  active ? "!bg-[var(--color-accent)] !text-[var(--color-on-accent)] ring-2 ring-[var(--color-accent)]" : ""
+                className={`spring-press block h-full px-1 py-3 text-center lg:py-2 ${div} ${
+                  active ? "bg-[var(--color-accent)] text-[var(--color-on-accent)]" : ""
                 }`}
               >
-                <span className="flex flex-col items-center justify-center gap-1">
-                  <span className="cat-emoji text-base leading-none" aria-hidden="true">
-                    {c.icon}
-                  </span>
-                  {catKeyOf(c.label) && <CatPict k={catKeyOf(c.label)!} />}
-                  <span className="text-[11px] font-semibold leading-tight">
-                    {active ? "✓ " : ""}{c.label}
-                  </span>
-                  <span className={`cat-count text-[10px] font-medium leading-none tabular-nums ${active ? "text-white/75" : "text-ink/40"}`}>
-                    {c.count.toLocaleString()}
-                  </span>
+                <span className="cat-emoji text-base leading-none" aria-hidden="true">
+                  {c.icon}
                 </span>
-              </Card>
+                {catKeyOf(c.label) && <CatPict k={catKeyOf(c.label)!} />}
+                <div className="mt-1 text-[11px] font-black leading-tight">
+                  {active ? "✓ " : ""}{c.label}
+                </div>
+                <div className={`cat-count mt-0.5 text-[9.5px] font-bold leading-none tabular-nums ${active ? "text-white/75" : "text-[var(--color-accent)]"}`}>
+                  {c.count.toLocaleString()}
+                </div>
+              </Link>
             </li>
           );
         })}
