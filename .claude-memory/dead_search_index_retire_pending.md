@@ -1,6 +1,6 @@
 ---
 name: dead_search_index_retire_pending
-description: 【✅完了2026-08-03】manga-search-index.json(11.3MB死蔵)は廃止済。残務=次回週次でR2実体削除のみ
+description: 【✅完全クローズ2026-09-08】manga-search-index.json(11.3MB死蔵)は廃止済。R2実体も不在を実測確認・形式契約からも除去=残務なし
 metadata:
   node_type: memory
   type: project
@@ -20,9 +20,12 @@ metadata:
 - doc: `_gen-data-spec-pdf.py` 節削除、weekly/monthly SKILL.md の保留節を撤去。
 - 検証: tsc緑・vitest 262全緑・py_compile緑・残存参照grepゼロ。
 
-## 残務(1件だけ)
+## 残務 = なし(2026-09-08 完全クローズ)
 
-- ★**次回週次蒸留で R2 実体を削除**: `wrangler r2 object delete mangal-site/manga-search-index.json`。
+- R2 実体は**既に不在**を実測確認(`https://mangal-db.com/manga-search-index.json` = 404、
+  週次の prune 一覧にも載らず = それ以前の prune で消えていた)。wrangler での明示削除は不要だった。
+- 形式契約 `data/seeds/index-format-contract.json` からもキーを除去済(残しておくと毎週
+  「契約にあるが実体なし」WARN が鳴り続けるため)。
   即時削除しない理由=古いタブの旧JSがまだ参照しうるため「全頁焼き直し後に消す」が安全策。
   手順は weekly-distill SKILL.md「次回週次での一回きりタスク」節に記載済み(完了したらその節ごと消す)。
 
