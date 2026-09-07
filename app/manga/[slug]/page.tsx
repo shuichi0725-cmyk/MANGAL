@@ -12,6 +12,7 @@ import Badge from "@/components/ui/Badge";
 import { ChipLink } from "@/components/ui/Chip";
 import { yearStatusLabel } from "@/lib/format";
 import { loadAllManga, loadTagI18n, loadWameiTags } from "@/lib/loadData";
+import HomeSidebar from "@/components/HomeSidebar";
 import { coverUrl } from "@/lib/schema";
 import { jaGenre, jaTag } from "@/lib/anilist-i18n";
 
@@ -182,11 +183,17 @@ export default async function MangaDetailPage({
     <div>
       {/* ★共通ナビヘッダー(2026-07-06 ユーザ要望: 「←ホームへ戻る」でなく他頁と同じヘッダーを出す) */}
       <DesignNav />
-      <div className="mx-auto max-w-4xl px-4 py-8">
+      <div className="mx-auto max-w-4xl px-4 py-8 lg:max-w-6xl">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       {breadcrumbLd && (
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }} />
       )}
+      {/* ★PC左レール(2026-09-07 ユーザ要望「検索を全頁に」): 漫画頁は検索導線が ≡メニューしか
+          無く、PCで来た人の行き止まりになっていた。ホームと同じレールを lg以上でだけ出す。
+          prewarm={false} = 読みに来ただけの訪問者に6MBの索引を落とさない。 */}
+      <div className="flex gap-6">
+        <HomeSidebar genres={data.genres} prewarm={false} />
+        <div className="min-w-0 flex-1">
       <div className="mt-6 grid gap-8">
         {/* ヒーロー表紙は撤去(2026-08-03 ユーザ指定: PCでタイトル左に大きく出て、
             書影の有無で段組がズレる。書影は巻コーフロー+ライトボックス拡大が担う) */}
@@ -549,6 +556,8 @@ export default async function MangaDetailPage({
         >
           ← ホームへ戻る
         </Link>
+      </div>
+        </div>
       </div>
       </div>
     </div>

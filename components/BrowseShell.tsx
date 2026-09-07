@@ -83,10 +83,10 @@ export default function BrowseShell({ summary }: { summary: IndexSummary }) {
           <h2 className="text-[11px] font-semibold tracking-[0.18em] uppercase text-ink/50 mb-3">
             カテゴリで探す
           </h2>
-          <ul className="grid grid-cols-4 gap-2">
+          <ul className="grid grid-cols-4 gap-2 lg:grid-cols-8 lg:gap-1.5">
             {cats.map((c) => (
               <li key={c.label}>
-                <Card href={c.href} className="h-full px-1 py-2.5 text-center">
+                <Card href={c.href} className="h-full px-1 py-2.5 text-center lg:py-2">
                   <span className="flex flex-col items-center justify-center gap-1">
                     <span className="cat-emoji text-base leading-none" aria-hidden="true">
                       {c.icon}

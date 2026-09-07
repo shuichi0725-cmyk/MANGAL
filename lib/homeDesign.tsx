@@ -190,22 +190,28 @@ export function DesignNav({ current: _current }: { current?: number }) {
     ) : (
       <span className="text-[18px] leading-none">{emoji}</span>
     );
+  // ★2026-09-07 ユーザ指摘「PCでヘッダーのアイコンが離れすぎ」: この行だけ器(max-w)が無く
+  //   全幅に広がっていたため、1920px幅で SiteHeader のロゴ/≡ と 372px ずれていた。
+  //   帯(border/bg)は全幅のまま、中身だけ SiteHeader と同じ mx-auto max-w-6xl px-4 に載せる。
+  //   ★モバイル(<1152px)では max-w-6xl は無効 = 見た目は完全に不変。
   return (
-    <div className="flex items-center border-b border-[var(--color-line)] bg-[var(--color-surface)] px-3 py-1.5">
-      {/* 左固定 = ホーム */}
-      <Link href="/" aria-label="ホーム" className={cell}>
-        <Icon emoji="🏠" label="ホーム" />
-        <span className="text-[9px] text-ink/55">ホーム</span>
-      </Link>
-      {/* 右寄せクラスタ */}
-      <div className="ml-auto flex items-center gap-3.5">
-        {right.map(([icon, label, href]) => (
-          <Link key={label} href={href} aria-label={label} className={cell}>
-            <Icon emoji={icon} label={label} />
-            <span className="text-[9px] text-ink/55">{label}</span>
-          </Link>
-        ))}
-        {/* ≡メニューは共通ヘッダー右端へ移設(2026-08-12 ユーザ裁定)=ナビ行は使い方が右端 */}
+    <div className="border-b border-[var(--color-line)] bg-[var(--color-surface)]">
+      <div className="mx-auto flex w-full max-w-6xl items-center px-4 py-1.5">
+        {/* 左固定 = ホーム */}
+        <Link href="/" aria-label="ホーム" className={cell}>
+          <Icon emoji="🏠" label="ホーム" />
+          <span className="text-[9px] text-ink/55">ホーム</span>
+        </Link>
+        {/* 右寄せクラスタ */}
+        <div className="ml-auto flex items-center gap-3.5">
+          {right.map(([icon, label, href]) => (
+            <Link key={label} href={href} aria-label={label} className={cell}>
+              <Icon emoji={icon} label={label} />
+              <span className="text-[9px] text-ink/55">{label}</span>
+            </Link>
+          ))}
+          {/* ≡メニューは共通ヘッダー右端へ移設(2026-08-12 ユーザ裁定)=ナビ行は使い方が右端 */}
+        </div>
       </div>
     </div>
   );

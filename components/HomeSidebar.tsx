@@ -16,10 +16,19 @@ import { prewarmAlt, prewarmSearch } from "@/lib/clientSearch";
  *    モバイルはサイドバー非表示+回線コスト配慮で先読みしない(CSS非表示でもJSは動くためmatchMediaで判定)。 */
 let _warmHooked = false; // onFullIndex の二重登録防止(HeroD3 と同型)
 
-export default function HomeSidebar({ genres }: { genres: Array<{ key: string; name: string }> }) {
+export default function HomeSidebar({
+  genres,
+  prewarm = true,
+}: {
+  genres: Array<{ key: string; name: string }>;
+  /** フル索引(br後6MB)を idle 先読みするか。★読むだけの頁(漫画詳細)では false =
+   *  検索する気のない訪問者に索引を落とさない(2026-09-07 全頁レール化のため新設)。 */
+  prewarm?: boolean;
+}) {
   const [q, setQ] = useState("");
   const router = useRouter();
   useEffect(() => {
+    if (!prewarm) return;
     if (!window.matchMedia("(min-width: 1024px)").matches) return;
     const t = setTimeout(() => {
       ensureFullIndex();
@@ -34,7 +43,7 @@ export default function HomeSidebar({ genres }: { genres: Array<{ key: string; n
       }
     }, 2500);
     return () => clearTimeout(t);
-  }, []);
+  }, [prewarm]);
   return (
     <aside className="hidden lg:block w-[260px] shrink-0">
       <div className="sticky top-4 space-y-4">

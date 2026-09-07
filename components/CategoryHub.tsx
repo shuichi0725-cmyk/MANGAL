@@ -73,14 +73,16 @@ export default function CategoryHub({ data, filtered, summary }: Props) {
       <h2 className="text-[11px] font-semibold tracking-[0.18em] uppercase text-ink/50 mb-3">
         カテゴリで探す
       </h2>
-      <ul className="grid grid-cols-4 gap-2">
+      {/* ★PCで「でかすぎる」(2026-09-07 ユーザ指摘): 4列×2段=空白だらけだったので
+          lg以上は8列1段に詰める。モバイル(<1024px)は4列のまま=不変。 */}
+      <ul className="grid grid-cols-4 gap-2 lg:grid-cols-8 lg:gap-1.5">
         {categories.map((c) => {
           const active = isActive(c.params);
           return (
             <li key={c.label}>
               <Card
                 href={hrefFor(c.params, active)}
-                className={`h-full px-1 py-2.5 text-center ${
+                className={`h-full px-1 py-2.5 text-center lg:py-2 ${
                   active ? "!bg-[var(--color-accent)] !text-[var(--color-on-accent)] ring-2 ring-[var(--color-accent)]" : ""
                 }`}
               >

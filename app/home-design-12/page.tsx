@@ -45,20 +45,23 @@ function D3Nav() {
     [<NavIcon key="c" d="M12 7v5l3.5 2" circle={[12, 12, 8.5]} />, "過去ログ", "/sansedai-archive"],
     [<NavIcon key="g" d="M12 5c-2-1.6-5-1.6-8-.6V19c3-1 6-1 8 .6 2-1.6 5-1.6 8-.6V4.4c-3-1-6-1-8 .6zM12 5v14" />, "使い方", "/about"],
   ];
+  // ★DesignNav と同じ是正(2026-09-07): 帯は全幅、中身は max-w-6xl でロゴ/≡ と縦に揃える
   return (
-    <div className="flex items-center border-b-[3px] border-[var(--color-accent)] bg-[var(--color-paper)] px-3 py-1.5">
-      {/* ★ロゴは共通ヘッダー(layout)に一本化(2026-08-11 ユーザ指摘「ヘッダーが二つ」)。DesignNavと同配置=ホーム左固定 */}
-      <Link href="/" aria-label="ホーム" className={cell}>
-        <NavIcon d="M3 11L12 3l9 8M6 10v11h12V10" />
-        <span className="text-[9px] text-ink/55">ホーム</span>
-      </Link>
-      <div className="ml-auto flex items-center gap-3.5">
-        {right.map(([icon, label, href]) => (
-          <Link key={label} href={href} aria-label={label} className={cell}>
-            {icon}
-            <span className="text-[9px] text-ink/55">{label}</span>
-          </Link>
-        ))}
+    <div className="border-b-[3px] border-[var(--color-accent)] bg-[var(--color-paper)]">
+      <div className="mx-auto flex w-full max-w-6xl items-center px-4 py-1.5">
+        {/* ★ロゴは共通ヘッダー(layout)に一本化(2026-08-11 ユーザ指摘「ヘッダーが二つ」)。DesignNavと同配置=ホーム左固定 */}
+        <Link href="/" aria-label="ホーム" className={cell}>
+          <NavIcon d="M3 11L12 3l9 8M6 10v11h12V10" />
+          <span className="text-[9px] text-ink/55">ホーム</span>
+        </Link>
+        <div className="ml-auto flex items-center gap-3.5">
+          {right.map(([icon, label, href]) => (
+            <Link key={label} href={href} aria-label={label} className={cell}>
+              {icon}
+              <span className="text-[9px] text-ink/55">{label}</span>
+            </Link>
+          ))}
+        </div>
       </div>
     </div>
   );
