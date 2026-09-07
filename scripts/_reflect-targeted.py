@@ -20,7 +20,7 @@
   --only / --drop は **manga.v2 のファイル名(=SRC slug)**。 slug-override頁もSRC名で指定
   (例: 夜明けは yoshida-akimi。 内部slugは yoake-yoshida2012)。
 """
-import os, sys, subprocess, glob, argparse
+import os, sys, subprocess, glob, argparse, json, datetime
 sys.stdout.reconfigure(encoding="utf-8")
 try:
     import yaml
@@ -99,6 +99,33 @@ def main():
             fp = os.path.join(base, st + ".yml")
             if os.path.exists(fp):
                 os.remove(fp); print(f"  削除 {os.path.relpath(fp, ROOT)}", flush=True)
+
+    # 1.2 ★drop した公開slugを prune待ち台帳へ自動記帳(2026-09-07 新設)。
+    #     この台帳は3つの機構が読む唯一の接点で、**手で積み忘れると週次が止まる/穴が開く**:
+    #       ① `_audit-isbn-loss.py` … 台帳に無い頁のISBN消失は「★理由なし」= preflight FAIL
+    #       ② `_weekly-preflight.py` … prune待ちとして表示
+    #       ③ `_weekly-finalize.py`  … 本番へ実プローブ(200ならprune忘れとしてabort)+行の自動消し込み
+    #     2026-09-07 同人セレクション6頁のdropで、積み忘れ → ISBN消失10件が理由なしに出た。
+    if remove_slugs:
+        _pp = os.path.join(ROOT, "data", "seeds", "pending-r2-prune.jsonl")
+        _have = set()
+        if os.path.exists(_pp):
+            for _ln in open(_pp, encoding="utf-8"):
+                _ln = _ln.strip()
+                if _ln.startswith("{"):
+                    try:
+                        _have.add(json.loads(_ln)["slug"])
+                    except Exception:
+                        pass
+        _new = [x for x in remove_slugs if x and x not in _have]
+        if _new:
+            with open(_pp, "a", encoding="utf-8", newline='\n') as _f:
+                for _sl in _new:
+                    _f.write(json.dumps({"slug": _sl, "reason": a.msg,
+                                         "at": datetime.date.today().isoformat(),
+                                         "source": "reflect-targeted --drop"},
+                                        ensure_ascii=False) + '\n')
+            print(f"  prune待ち台帳へ記帳: {len(_new)}件 (data/seeds/pending-r2-prune.jsonl)", flush=True)
 
     # 1.5 ★canonicalゲート(2026-08-20 新設): 対象に edition-canonical 結線slugが含まれる時は
     #     番人(_check-edition-canonical.py)を先に通す。★壊れたcanonicalはpromoteが
