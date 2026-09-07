@@ -7,7 +7,7 @@ import GlobalDragScroll from "@/components/GlobalDragScroll";
 import SiteHeader from "@/components/SiteHeader";
 import GlobalNav from "@/components/GlobalNav";
 import PageShell from "@/components/PageShell";
-import HomeSidebar from "@/components/HomeSidebar";
+import FilterRail from "@/components/FilterRail";
 import { loadMasters } from "@/lib/loadData";
 import { dotGothic } from "@/lib/fonts";
 
@@ -26,8 +26,9 @@ export const metadata: Metadata = {
 //    globals.css の :root トークンとして残存=theme-d3クラスを外せば即戻せる)
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
-  // ★PC左レールの中身(ジャンル32)はマスタから。loadMasters はモジュールキャッシュ済み
-  const genres = loadMasters().genres.map((g) => ({ key: g.key, name: g.name }));
+  // ★PC左レール = 検索窓 + 絞り込みパネル。マスタ(出版社/雑誌/ジャンル/分野)を渡す。
+  //   loadMasters はモジュールキャッシュ済み。作品索引はレール側がクライアントで遅延ロードする。
+  const masters = loadMasters();
   return (
     <html lang="ja">
       <body className={`min-h-screen flex flex-col theme-d3 ${dotGothic.variable}`}>
@@ -40,7 +41,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             を呼び、レールはホームと漫画頁だけ)。ホームは PageShell 側で対象外にしている。 */}
         <main className="flex-1">
           <GlobalNav />
-          <PageShell rail={<HomeSidebar genres={genres} />}>{children}</PageShell>
+          <PageShell rail={<FilterRail masters={masters} />}>{children}</PageShell>
           <SiteFooter />
         </main>
         <footer className="border-t border-[var(--color-line)] mt-12 py-8 text-center text-xs text-ink/50 space-y-3">

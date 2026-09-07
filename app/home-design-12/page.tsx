@@ -6,7 +6,7 @@ import TimeMachine from "@/components/TimeMachine";
 import DestinyPickMock from "@/components/DestinyPickMock";
 import MonthReleasesClient from "@/components/MonthReleasesClient";
 import CalendarView from "@/components/CalendarView";
-import HomeSidebar from "@/components/HomeSidebar";
+import FilterRail from "@/components/FilterRail";
 import { bundle, seeded, volCount, thisMonthReleases, releaseDayLabel } from "@/lib/homeDesign";
 import WeekendFeature from "@/components/WeekendFeature";
 import { coverUrl } from "@/lib/schema";
@@ -89,7 +89,7 @@ export default function Design12() {
         <span className="d3-marquee"><StatusDate />{banner}<StatusDate />{banner}</span>
       </div>
       <div className="mx-auto flex w-full max-w-[960px] justify-center gap-6 lg:px-4">
-      <HomeSidebar genres={genreList} />
+      <FilterRail masters={{ publishers: data.publishers, magazines: data.magazines, genres: data.genres, demographics: data.demographics }} />
       <div className="w-full max-w-[640px] min-w-0">
 
       <HeroD3 total={manga.length} books={totalBooks} />

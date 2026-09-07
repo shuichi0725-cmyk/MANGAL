@@ -203,8 +203,10 @@ export default function ListClient({ data }: { data: ListBundle }) {
     <div>
       {/* ── コントロール: 検索 / フィルターボタン / 並び順チップ ── */}
       <div className="px-3 pt-2.5">
+        {/* ★lg以上では左レール(FilterRail)が検索と絞り込みを持つので、この行は隠す
+            (2026-09-07 ユーザ「検索は左に1つ」)。モバイルは従来どおり。 */}
         <form
-          className="flex items-center gap-2"
+          className="flex items-center gap-2 lg:hidden"
           onSubmit={(e) => {
             e.preventDefault();
             setQ(qInput.trim());

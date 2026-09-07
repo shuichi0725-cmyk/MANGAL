@@ -461,21 +461,9 @@ export default function HomeClient({ data, summary }: Props) {
         className="mb-4 flex flex-wrap items-center gap-2"
       />
 
-      <div className="grid md:grid-cols-[240px_1fr] gap-6">
-        {/* デスクトップ: 常時サイドバー(PC版は不変。 モバイルでは水和直後に外す=見た目は不変) */}
-        {viewport !== "mobile" && (
-          <div className="hidden md:block">
-            <FilterPanel
-              data={liveData}
-              state={state}
-              setState={applyState}
-              authorEntries={authors}
-              matchedSlugs={matchedSlugs}
-              loading={panelLoading}
-              stickyTop="top-14"
-            />
-          </div>
-        )}
+      {/* ★デスクトップの絞り込みは共通の左レール(components/FilterRail)へ移設(2026-09-07)。
+          ここに置くと レール+パネル で左が二重になる。モバイルの抽斗UIは下でそのまま。 */}
+      <div>
         <div className="min-w-0">
           <div ref={listTopRef} className="scroll-mt-20" />
           {showArt ? (
