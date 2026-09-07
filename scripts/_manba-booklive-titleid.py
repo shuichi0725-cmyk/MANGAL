@@ -16,9 +16,13 @@
   ① GET /search?q=<題>                   … サーバ描画。board id / 題 / 著者 / 「N巻まで刊行」が取れる
   ② GET /boards/<id>/stores/booklive     … 302 の Location から title_id
 
-## 同定ゲート(★誤同定は別作品のリンクを焼くので厳しく)
-  正規化題が完全一致 かつ (著者overlap または 巻数が我々の値と ±3以内)。
-  候補が複数残ったら採らずに `ambiguous` で保留(偽採用より偽保留)。
+## 同定ゲート(★誤同定は別作品のリンクを焼くので厳しく。2段)
+  T1: 正規化題が**完全一致** かつ (著者overlap **または** 巻数が我々の値と ±3以内)
+  T2: 正規化題が**包含一致**(どちらかがどちらかを含む) かつ 著者overlap **かつ** 巻数±3
+      ★T2で and を要求するのは、manbaが正式題(親題+外伝+副題)を使うため包含が緩いから。
+        例= 我々「とある科学の超電磁砲」/ manba「とある魔術の禁書目録外伝 とある科学の超電磁砲」。
+        片側だけだと同題アンソロジー/外伝(別作画)を掴む(2026-09-07 実測で確認)。
+  どちらの段でも **候補が1件に絞れた時だけ採用**。複数なら `ambiguous` で保留(偽採用より偽保留)。
 
 ## 事故則(= BookLive事故の教訓をそのまま適用)
   - **直列のみ・並列禁止**。`_rate_gate.wait("manba", --sleep)` で他柱と合算直列化。
@@ -96,6 +100,14 @@ _CARD = re.compile(
 _AUTHORS = re.compile(r'<a href="/authors/\d+">([^<]+)</a>')
 _VOLS = re.compile(r'>(\d+)巻まで刊行<')
 
+# ★版違いboard(2026-09-07 実測): manbaは同一作でも版/形態ごとに別boardを立てる。
+#   包含一致(T2)は題の尻に付くこの手の版表記を吸収してしまうので、**我々の題に無いのに
+#   manba側にだけ在る**時は採用せず flag する(その title_id は別商品を指す)。
+#   実害候補= 「終の退魔師 ―エンダーガイスター―＜無修正ver.＞」(我々は通常版)
+#            「結婚商売［完全版］【特装版】」(manba4巻/我々7巻)
+_EDITION = re.compile(r"無修正|完全版|特装版|限定版|合冊版|分冊版|新装版|愛蔵版|フルカラー版|カラー版|"
+                      r"コミックス版|単行本版|連載版|マイクロ|【電子|オリジナル版", re.I)
+
 
 def search_boards(title, sleep):
     st, _h, html = _get("https://manba.co.jp/search?q=" + urllib.parse.quote(title), sleep)
@@ -133,6 +145,7 @@ def main():
     ap.add_argument("--sleep", type=float, default=5.0)
     ap.add_argument("--limit", type=int, default=0)
     ap.add_argument("--vol-tol", type=int, default=3, help="巻数一致の許容差")
+    ap.add_argument("--redo", help="台帳の指定resultを再走(既定語 nonhit = no_match,gate_ng,ambiguous,no_store)")
     a = ap.parse_args()
 
     idx = json.load(io.open(os.path.join(ROOT, "data", "manga-list-index.json"), encoding="utf-8"))
@@ -153,20 +166,29 @@ def main():
     else:
         sys.exit("--slugs-file か --from-list が要る")
 
-    done = set()
+    # ★台帳は追記式=同一slugは**最終行勝ち**で読む(再走で結果が更新される)
+    last = {}
     if os.path.exists(LEDGER):
         for l in io.open(LEDGER, encoding="utf-8"):
             try:
-                done.add(json.loads(l)["slug"])
+                r = json.loads(l)
+                last[r["slug"]] = r
             except Exception:
                 pass
+    if a.redo:
+        redo = set(a.redo.split(",")) if a.redo != "nonhit" else {
+            "no_match", "gate_ng", "ambiguous", "no_store"}
+        done = {s for s, r in last.items() if r.get("result") not in redo}
+        print(f"--redo {sorted(redo)}: 再走対象 {len(last) - len(done)} 件")
+    else:
+        done = set(last)
     todo = [s for s in want if s not in done]
     if a.limit:
         todo = todo[:a.limit]
     print(f"対象 {len(todo)} 作品(既済 {len(want) - len(todo)} skip) / 間隔 {a.sleep}s / "
           f"2req/作品 ≈ {len(todo) * 2 * a.sleep / 60:.0f}分", flush=True)
 
-    n_hit = n_amb = n_none = n_nostore = 0
+    n_hit = n_amb = n_none = n_nostore = n_ed = 0
     out = io.open(LEDGER, "a", encoding="utf-8", newline="\n")
     try:
         for i, slug in enumerate(todo, 1):
@@ -178,30 +200,54 @@ def main():
             ours_a = {akey(str(x).split("\t")[0]) for x in (row[F["authors"]] or [])}
             ours_a |= {akey(str(x).split("\t")[0]) for x in (row[F["original_authors"]] or [])}
             cands = search_boards(title, a.sleep)
-            exact = [c for c in cands if nk(c["title"]) == nk(title)]
-            ok = [c for c in exact
-                  if ({akey(x) for x in c["authors"]} & ours_a)
-                  or (c["vols"] is not None and abs(c["vols"] - ours_v) <= a.vol_tol)]
-            rec = {"slug": slug, "title": title, "ours_vols": ours_v,
+            nt = nk(title)
+
+            def _au(c):
+                return bool({akey(x) for x in c["authors"]} & ours_a)
+
+            def _vo(c):
+                return c["vols"] is not None and abs(c["vols"] - ours_v) <= a.vol_tol
+
+            exact = [c for c in cands if nk(c["title"]) == nt]
+            ok = [c for c in exact if _au(c) or _vo(c)]
+            tier = "T1"
+            if len(ok) != 1 and not exact:
+                # ★T2: 包含一致(著者 and 巻の両方を要求)
+                part = [c for c in cands if nt and (nt in nk(c["title"]) or nk(c["title"]) in nt)]
+                ok2 = [c for c in part if _au(c) and _vo(c)]
+                if len(ok2) == 1:
+                    ok, exact, tier = ok2, part, "T2"
+                elif ok2:
+                    exact, tier = ok2, "T2"          # 複数 = ambiguous として記録
+                    ok = []
+            rec = {"slug": slug, "title": title, "ours_vols": ours_v, "tier": tier,
                    "cands": len(cands), "exact": len(exact), "at": time.strftime("%Y-%m-%d")}
             if len(ok) != 1:
                 rec["result"] = "ambiguous" if len(ok) > 1 else ("no_match" if not exact else "gate_ng")
                 rec["detail"] = [{"b": c["board"], "t": c["title"], "a": c["authors"], "v": c["vols"]}
-                                 for c in exact[:4]]
+                                 for c in (exact or cands)[:5]]   # ★一致0でも上位候補を残す(再走無しで診断)
                 n_amb += 1 if len(ok) > 1 else 0
                 n_none += 1 if len(ok) == 0 else 0
                 print(f"[{i}/{len(todo)}] {slug}: {rec['result']} (候補{len(cands)}/完全一致{len(exact)}) {title}", flush=True)
             else:
                 c = ok[0]
+                # ★版違いガード: manba題にだけ版表記が在る = 別商品のtitle_id
+                ed = _EDITION.search(c["title"]) and not _EDITION.search(title)
                 tid, note = booklive_title_id(c["board"], a.sleep)
+                if tid and ed:
+                    rec["edition_flag"] = _EDITION.search(c["title"]).group(0)
                 rec.update({"board": c["board"], "manba_title": c["title"],
                             "manba_authors": c["authors"], "manba_vols": c["vols"],
-                            "title_id": tid, "result": "hit" if tid else "no_store", "note": note})
-                if tid:
+                            "title_id": tid, "note": note,
+                            "result": ("hit_edition_suspect" if (tid and rec.get("edition_flag"))
+                                       else ("hit" if tid else "no_store"))})
+                if tid and rec.get("edition_flag"):
+                    n_ed += 1
+                elif tid:
                     n_hit += 1
                 else:
                     n_nostore += 1
-                print(f"[{i}/{len(todo)}] {slug}: {'title_id=' + tid if tid else note} "
+                print(f"[{i}/{len(todo)}] {slug}: {('★版違い疑い(' + rec['edition_flag'] + ') title_id=' + tid) if (tid and rec.get('edition_flag')) else ('title_id=' + tid if tid else note)} "
                       f"(board={c['board']} 巻{c['vols']}/我々{ours_v}) {title}", flush=True)
             out.write(json.dumps(rec, ensure_ascii=False) + "\n")
             out.flush()
