@@ -56,7 +56,7 @@ export default function RankingsPage() {
 
   return (
     <div className="min-h-screen bg-[var(--color-bg)] pb-12">
-      <div className="mx-auto w-full max-w-[720px] px-4">
+      <div className="mx-auto w-full max-w-[720px] px-4 lg:max-w-none">
         <h1 className="mt-5 text-[18px] font-extrabold">🏆 なんでもランキング</h1>
         <p className="mt-1 text-[11.5px] text-ink/55">全{manga.length.toLocaleString()}作品のデータベースから機械集計。人気投票ではなく、数字の事実だけ。</p>
         {axes.map((ax) => (

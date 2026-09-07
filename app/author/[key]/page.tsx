@@ -82,7 +82,7 @@ export default async function AuthorPage({ params }: { params: Promise<{ key: st
   };
   return (
     <div>
-      <div className="mx-auto max-w-4xl px-4 py-8">
+      <div className="mx-auto max-w-4xl px-4 py-8 lg:max-w-none">
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }} />
         <nav className="text-[11px] text-ink/45">

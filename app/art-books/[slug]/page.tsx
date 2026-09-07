@@ -36,7 +36,7 @@ export default async function ArtBookDetailPage({
   const cover = ab.volumes[0]?.cover_url ?? null;
 
   return (
-    <div className="mx-auto max-w-4xl px-4 py-8">
+    <div className="mx-auto max-w-4xl px-4 py-8 lg:max-w-none">
       <Link href="/?artBooks=true" className="text-sm text-ink/60 hover:text-ink">
         ← 画集一覧へ戻る
       </Link>

@@ -25,7 +25,7 @@ export default function YearIndexPage() {
   const total = defs.reduce((s, d) => s + d.count, 0);
   return (
     <div>
-      <div className="mx-auto max-w-4xl px-4 py-8">
+      <div className="mx-auto max-w-4xl px-4 py-8 lg:max-w-none">
         <nav className="text-[12px] text-ink/55">
           <Link href="/" className="hover:text-ink">ホーム</Link> › 連載開始年別
         </nav>

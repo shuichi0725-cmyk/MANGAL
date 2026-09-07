@@ -25,7 +25,7 @@ export default async function AiLeagueArchivePage({
 
   return (
     <div className="min-h-screen bg-[var(--color-bg)] pb-16">
-      <div className="mx-auto max-w-xl px-5 pt-8">
+      <div className="mx-auto max-w-xl px-5 pt-8 lg:max-w-[860px] lg:mx-0">
         <Link href="/column-ai-league" className="spring-press text-[12px] text-[var(--color-accent)]">
           ← AI書評家リーグ（最新・過去ログ一覧）
         </Link>

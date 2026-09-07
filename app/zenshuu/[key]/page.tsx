@@ -71,7 +71,7 @@ export default async function ZenshuuPage({ params }: { params: Promise<{ key: s
   return (
     // ★PC幅是正(2026-07-29 ユーザ報告「全集ページがでかすぎる」): 他頁と同じ max-w-4xl に揃える。
     //   表紙タイルは モバイル5列のまま / sm以上は7列→md8列 でタイルを詰める(全幅5列だと表紙が巨大化)。
-    <main className="mx-auto w-full max-w-4xl pb-16 pt-3">
+    <main className="mx-auto w-full max-w-4xl pb-16 pt-3 lg:max-w-none">
       <nav className="px-3.5 pb-2 text-[10px] text-ink/55">
         <Link href="/">ホーム</Link> › <span>全集</span> › <b className="text-[var(--color-accent)]">{c.name}</b>
       </nav>

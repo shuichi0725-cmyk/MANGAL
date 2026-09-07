@@ -13,7 +13,7 @@ export const metadata = {
  *  fallbackは空にしない(/browse白紙事故 358e9ceaf の教訓)。 */
 export default function TokushuPage() {
   return (
-    <div className="mx-auto max-w-2xl">
+    <div className="mx-auto max-w-2xl lg:max-w-none">
       <Suspense
         fallback={
           <div className="px-4 py-10 text-center">

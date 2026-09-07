@@ -28,7 +28,7 @@ export default function AuthorsIndexPage() {
   }
   return (
     <div>
-      <div className="mx-auto max-w-4xl px-4 py-8">
+      <div className="mx-auto max-w-4xl px-4 py-8 lg:max-w-none">
         <h1 className="text-2xl font-extrabold">著者一覧</h1>
         <p className="mt-1 text-[12.5px] text-ink/60">{all.length.toLocaleString()}名を50音順で掲載。名前から全作品の一覧へ。</p>
         <nav className="mt-4 flex flex-wrap gap-2">

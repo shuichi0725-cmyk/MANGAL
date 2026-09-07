@@ -26,7 +26,7 @@ export default function ShinkanThisWeekPage() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-      <div className="mx-auto w-full max-w-[720px] pb-12">
+      <div className="mx-auto w-full max-w-[720px] pb-12 lg:max-w-none">
         <header className="border-b-[3px] border-[var(--color-accent)] px-4 py-3">
           <h1 className="text-[20px] font-black leading-tight">📦 今週の漫画・コミック新刊 発売日一覧</h1>
           <p className="mt-1 text-[12px] text-ink/65">

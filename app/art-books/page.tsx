@@ -25,7 +25,7 @@ export default function ArtBooksIndexPage() {
 
   return (
     <>
-    <div className="mx-auto max-w-6xl px-4 py-8">
+    <div className="mx-auto max-w-6xl px-4 py-8 lg:max-w-none">
       <header className="border-b border-[var(--color-line)] pb-5">
         <h1 className="text-2xl md:text-3xl font-bold flex items-center gap-2">
           <span aria-hidden="true">🎨</span> 画集

@@ -42,7 +42,7 @@ export default function BrowseShell({ summary }: { summary: IndexSummary }) {
   ].filter((c) => c.count > 0);
 
   return (
-    <div className="mx-auto max-w-6xl px-4 py-6">
+    <div className="mx-auto max-w-6xl px-4 py-6 lg:max-w-none">
       <section className="mb-6 flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
         <div>
           <h1 className="text-2xl md:text-3xl font-bold tracking-tight">日本の漫画から探す</h1>

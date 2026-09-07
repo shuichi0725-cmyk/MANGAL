@@ -284,7 +284,7 @@ export default function HomeClient({ data, summary }: Props) {
   };
 
   return (
-    <div className={`mx-auto max-w-6xl px-4 py-6${isPreview ? " preview-mode" : ""}`}>
+    <div className={`mx-auto max-w-6xl lg:max-w-none px-4 py-6${isPreview ? " preview-mode" : ""}`}>
       <section className="mb-6 flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
         <div>
           <h1 className="text-2xl md:text-3xl font-bold tracking-tight">

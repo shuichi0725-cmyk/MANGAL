@@ -23,7 +23,7 @@ export default function AnimeSeasonsIndexPage() {
 
   return (
     <>
-    <div className="mx-auto max-w-4xl px-4 py-8">
+    <div className="mx-auto max-w-4xl px-4 py-8 lg:max-w-none">
       <Link href="/" className="text-sm text-ink/60 hover:text-ink">
         ← トップへ戻る
       </Link>

@@ -73,7 +73,7 @@ export default async function GenreSubPage({ params }: P) {
   return (
     <>
       <div className="min-h-screen bg-[var(--color-bg)] px-4 py-6 pb-16">
-        <div className="mx-auto max-w-3xl">
+        <div className="mx-auto max-w-3xl lg:max-w-none">
           <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }} />
           <nav className="text-[12px] text-ink/55">
             <Link href="/" className="hover:text-ink">ホーム</Link> ›{" "}

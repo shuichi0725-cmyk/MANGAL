@@ -85,7 +85,7 @@ export default async function TitlesPartPage({ params }: { params: Promise<{ par
   );
   return (
     <div>
-      <div className="mx-auto max-w-4xl px-4 py-8">
+      <div className="mx-auto max-w-4xl px-4 py-8 lg:max-w-none">
         <nav className="text-[12px] text-ink/55">
           <Link href="/" className="hover:text-ink">ホーム</Link> ›{" "}
           <Link href="/titles" className="hover:text-ink">題名索引</Link> › {gyo.label} {page}

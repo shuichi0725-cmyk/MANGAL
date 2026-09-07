@@ -35,7 +35,7 @@ export default async function AnimeSeasonPage({ params }: { params: Promise<{ se
   const { prev, next } = adjacentSeasons(V.order, season);
 
   return (
-    <div className="mx-auto max-w-4xl px-4 py-8">
+    <div className="mx-auto max-w-4xl px-4 py-8 lg:max-w-none">
       <Link href="/anime" className="text-sm text-ink/60 hover:text-ink">
         ← 季節一覧へ
       </Link>

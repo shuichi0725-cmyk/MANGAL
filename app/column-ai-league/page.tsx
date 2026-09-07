@@ -10,7 +10,7 @@ export default function AiLeaguePage() {
   const sections = loadAiReviews();
   return (
     <div className="min-h-screen bg-[var(--color-bg)] pb-16">
-      <div className="mx-auto max-w-xl px-5 pt-8">
+      <div className="mx-auto max-w-xl px-5 pt-8 lg:max-w-[860px] lg:mx-0">
         <AiLeagueClient sections={sections} />
       </div>
     </div>
