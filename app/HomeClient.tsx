@@ -6,6 +6,7 @@ import CategoryHub from "@/components/CategoryHub";
 import FilterPanel from "@/components/FilterPanel";
 import MangaGrid from "@/components/MangaGrid";
 import ArtBookCard from "@/components/ArtBookCard";
+import SearchBox from "@/components/SearchBox";
 import ShareButtons from "@/components/ShareButtons";
 import Pager from "@/components/ui/Pager";
 import {
@@ -307,10 +308,27 @@ export default function HomeClient({ data, summary }: Props) {
             。
           </p>
         </div>
-        {/* ★検索窓は左レール(HomeSidebar)へ移設(2026-09-07 ユーザ①=3)。
-            サイト全体で検索窓は左の1つ(ホームのヒーローだけは看板として残す)。
-            ?q= は引き続き source of truth = レールから push された URL を読んで組み直す。
-            検索語の解除は「適用中」チップの × から(2026-09-05 で検索語もチップ化済み)。 */}
+        {/* ★PC(lg以上)= 検索窓は左レールの1つに集約(2026-09-07 ユーザ①=3)。ここは出さない。
+            ★モバイル(<1024px)= レールが出ないのでここが唯一の検索窓 → 必ず出す(2026-09-08 ユーザ報告
+              「PCで検索窓を消したのでスマホの窓がなくなった」)。ナビの「検索」の行き先が /browse なので、
+              ここに窓が無いと**検索を押した先で検索できない**状態になっていた。
+              ホーム(HeroD3)と /list(ListClient) は同じく lg:hidden で残してあり、/browse だけが欠けていた。
+            ?q= は引き続き source of truth = レール/この窓のどちらから書いても同じ経路で組み直る。 */}
+        <div className="md:w-96 lg:hidden">
+          {/* ★確定した検索語はURL(?q=)へ書く=source of truth。詳細→戻るで検索語・結果が復元される(2026-07-11 ユーザ仕様) */}
+          <SearchBox
+            value={state.query}
+            onChange={(q) => {
+              setState({ ...state, query: q });
+              const params = new URLSearchParams(searchParams.toString());
+              if (q) params.set("q", q);
+              else params.delete("q");
+              params.delete("page");
+              const qs = params.toString();
+              router.replace(qs ? `${pathname}?${qs}` : pathname, { scroll: false });
+            }}
+          />
+        </div>
       </section>
 
       {/* ★filtered=現在の絞り込み後(検索込み)を渡す=タイル件数が交差件数になる(2026-07-12) */}
