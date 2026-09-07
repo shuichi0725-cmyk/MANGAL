@@ -144,7 +144,12 @@ def main():
     #   ファセット件数」を記録と突合するので、意図しない変化はここで赤くなって止まる。
     #   意図した変更なら UPDATE_SEARCH_SNAPSHOT=1 で焼き直し、差分を git diff で見てから commit。
     if not a.skip_tests:
-        for label, cmd in (("型検査", ["npx", "tsc", "--noEmit"]), ("テスト", ["npm", "test"])):
+        # ★共通シェル配線ゲート(2026-09-08 新設): スナップショットは「結果の正しさ」の番人で、
+        #   「どの頁で何を読むか」は構造的に見えない。2026-09-07 にレールを layout へ入れた変更は
+        #   全緑のまま通り、ホーム以外の全頁で索引6.06MB+haystack前計算(実機3,773ms)を課した。
+        #   ここで器の費用と絞り込みUIの境界を機械で見る。
+        for label, cmd in (("シェル配線", [sys.executable, os.path.join(ROOT, "scripts", "_check-shell-wiring.py")]),
+                           ("型検査", ["npx", "tsc", "--noEmit"]), ("テスト", ["npm", "test"])):
             print(f"前検査: {label} …", flush=True)
             r = subprocess.run(cmd, cwd=ROOT, shell=(os.name == "nt"),
                                capture_output=True, text=True, encoding="utf-8", errors="replace")
@@ -153,7 +158,7 @@ def main():
                 print((r.stdout or "")[-3000:])
                 print((r.stderr or "")[-2000:])
                 sys.exit(3)
-        print("前検査: 型検査・テストとも green(検索スナップショット一致)", flush=True)
+        print("前検査: シェル配線・型検査・テストとも green(検索スナップショット一致)", flush=True)
 
     # --- 1. staging(本番公開済み頁集合に凍結) ---
     if not a.skip_build:

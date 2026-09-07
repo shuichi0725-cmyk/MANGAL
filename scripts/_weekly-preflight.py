@@ -159,6 +159,15 @@ def main():
     else:
         fail("索引衛生NG", (r.stdout or "") + (r.stderr or ""))
 
+    # 7.5 ★共通シェル配線ゲート(2026-09-08 新設)。 layout に載る部品が索引6.06MBを読んでいないか +
+    #     レール/抽斗の境界一致。 [[search_perf_hotspots_2026_08]] の型を機械で封じる。
+    r = subprocess.run([sys.executable, os.path.join(ROOT, "scripts", "_check-shell-wiring.py")],
+                       capture_output=True, text=True)
+    if r.returncode == 0:
+        ok("共通シェル配線(器の費用/絞り込みUIの境界) = OK")
+    else:
+        fail("共通シェル配線NG", (r.stdout or "") + (r.stderr or ""))
+
     # 8. ★R2 prune 待ち(2026-08-08 新設・ユーザ指示「週次蒸留するときにわかるように」):
     #    頁を drop / slug rename しても R2 の実体フォルダは残る([[r2_orphan_pages_prune_missing]])。
     #    per-case作業で消した公開slugを pending-r2-prune.jsonl に積んでおき、ここで必ず目に入れる。

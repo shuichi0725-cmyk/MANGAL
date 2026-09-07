@@ -1,0 +1,16 @@
+{
+  "_readme": [
+    "共通シェル(app/layout.tsx から到達=全頁で動く)に載る部品のうち、",
+    "重いデータ経路(索引6.06MBの取得・検索の前計算)に触れることを許可する台帳。",
+    "検査 = scripts/_check-shell-wiring.py(週次preflight / 機能蒸留の前検査で自動実行)。",
+    "★guards は実在を検査する = 抑制を外すと台帳が嘘になり FAIL する(判子だけの許可を防ぐ)。",
+    "新しく器へ部品を足して索引を読ませたくなったら、まず『全頁で払う費用か』を考える。",
+    "2026-09-08 実害: レールを全頁常設にした結果、ホーム以外の全頁(漫画詳細69,241頁を含む)で",
+    "索引6.06MBを取得し haystack を前計算していた。モバイルはレールが不可視なのに実機3,773msを支払っていた。"
+  ],
+  "components/FilterRail.tsx": {
+    "reason": "PC左レールの検索窓+絞り込みパネル。ユーザ要望『左の検索を全ページで表示』(2026-09-07)により器へ常設する。件数表示に一覧索引が要る。",
+    "gate": "useIsLg() で lg(1024px)未満は完全休止(レールは hidden lg:block = CSSでしか隠れないため matchMedia が必須)。lg以上は useArrivalWarmAllowed() で到着先読み、ただし saveData/2G は見送り、その場合は触れた時(touched)に読む。/browse・/list と検索語ありは無条件。実体は useFilterPanelData({enabled: wantIndex})。",
+    "guards": ["useIsLg", "useArrivalWarmAllowed", "wantIndex", "enabled"]
+  }
+}
