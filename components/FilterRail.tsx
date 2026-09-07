@@ -4,6 +4,8 @@ import { Suspense, useEffect, useMemo, useState } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import FilterPanel from "@/components/FilterPanel";
 import { useFilterPanelData } from "@/lib/useFilterPanelData";
+import { prewarmAlt } from "@/lib/clientSearch";
+import { onFullIndex } from "@/lib/useMangaIndex";
 import {
   emptyFilterState,
   filtersFromSearchParams,
@@ -87,6 +89,10 @@ function useIsLg(): boolean {
   return isLg;
 }
 
+// ★module級フラグ: 頁遷移で RailInner が作り直されても onFullIndex を二重登録しない
+//   (ホーム HeroD3 の `_hooked` と同型)。
+let _altHooked = false;
+
 /** 到着ウォームを許してよい回線か。★ホームの `warmSearchIdle`(HeroD3)と同じ節度:
  *  データセーバー / 2G では先読みしない(触れた時だけ読む)。 */
 function useArrivalWarmAllowed(): boolean {
@@ -133,6 +139,18 @@ function RailInner({ masters }: { masters: RailMasters }) {
   const arrivalWarm = useArrivalWarmAllowed();
   const wantIndex = isLg && (inPlace || !!state.query || touched || arrivalWarm);
   const fp = useFilterPanelData({ query: state.query, enabled: wantIndex });
+
+  // ★別名索引(manga-alt-index.json 1.35MB)も先読みする(2026-09-08 ユーザ裁定=B案)。
+  //   旧: 「題名ヒット0」になって初めて取りに行くので、英題・通称で打った初回だけ
+  //       実測1,636ms(Android)待たされていた。ホーム経由だけ HeroD3 が先読みして無症状。
+  //   ★順序はホームと同じ「フル索引が揃ってから」= 初描画と帯域を奪い合わない。
+  //   fetchAlt は冪等(_alt/_altInflight で二重取得を弾く)+ 正規化は8,000slug刻み。
+  //   ※lg未満(レール休止)では走らない = モバイルは従来どおり遅延のまま。
+  useEffect(() => {
+    if (!wantIndex || _altHooked) return;
+    _altHooked = true;
+    onFullIndex(() => prewarmAlt());
+  }, [wantIndex]);
 
   const go = (next: FilterState) => {
     const qs = filtersToSearchParams(next).toString();
