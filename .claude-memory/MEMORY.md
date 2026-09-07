@@ -127,6 +127,7 @@
 - [【✅】派生ジャンル規則=promote恒久層](genre_derive_rules_layer.md) — _genre_rules.py
 - [クエリ側の題正規化=怪物事変22巻型](query_side_title_normalization.md) — 剥き題でも投げる
 - [JPRO出版権検索=新書誌源](jpro_pubrights_search.md) — 題名→全巻ISBN+発行元が一発
+- [【型・封鎖済】slug改名で公開slugキーのseedが静かに死ぬ](slug_rename_kills_slugkeyed_seed.md) — isbn-fill/overrides/status 計86頁・ISBN9本消失
 - [【厳守】edition-overridesのキー=公開slug](edition_overrides_key_is_public_slug.md) ／ [【厳守】edition-canonicalのキー=SRC slug](edition_canonical_key_is_src_slug.md) ／ [【型】生成器がmanga.v2を公開slug直引き=改名頁全欠け](pubslug_src_stem_generator_trap.md)
 - [【宿題】電子書籍ストア一覧シート](ebook_store_sheet_homework.md) — アフィ申請通過後に着手
 - [【確認待ち】魔術士オーフェン見直し](oofen_franchise_state.md) ／ [SHADOW SKILL=4期の別作品群](shadow_skill_franchise_state.md) ／ [ワイルド7=6作品×多版](wild7_franchise_state.md) ／ [ひぐらし=編ごとに別頁](higurashi_franchise_state.md)
