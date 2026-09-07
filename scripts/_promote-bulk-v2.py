@@ -2170,11 +2170,35 @@ def _load_edition_overrides() -> dict:
     global _EDITION_OVERRIDES
     if _EDITION_OVERRIDES is None:
         p = ROOT / "data" / "seeds" / "edition-overrides.json"
-        _EDITION_OVERRIDES = json.loads(p.read_text(encoding="utf-8")) if p.exists() else {}
+        _EDITION_OVERRIDES = _alias_expand(json.loads(p.read_text(encoding="utf-8")) if p.exists() else {})
     return _EDITION_OVERRIDES
 
 
 _ISBN_FILL = None
+
+
+def _alias_expand(d: dict) -> dict:
+    """★公開slugをキーにする seed を **改名に追従**させる(2026-09-07 新設)。
+
+    promote は `o["slug"] = _slug_override(src.slug)` = **改名後の公開slug**で seed を引く。
+    そのため slug-overrides で頁を改名すると、旧slugをキーに書かれた seed が
+    **無警告で効かなくなる**(エラーも警告も出ない = 静かに死ぬ)。
+    2026-09-07 実害: 2026-09-05 の改名で isbn-fill.json の4頁が外れ、
+    紅い牙 ブルー・ソネット v1,2,3,13 / サンダー大王 v2,3 / 純愛とセックス v2 /
+    ハーレム革命 v2,3 の **ISBN 9本が本番から消えた**(ISBN消失監査で発覚)。
+    掃引すると edition-overrides 52頁・status-corrections 32頁も同じ状態だった。
+
+    対策 = 読み込み時に **旧キーを改名後のキーでも引けるように複製**する。
+    seed 側の書き換えは不要(来歴が消えない)。 新キーが既に在れば新キーを優先(上書きしない)。
+    """
+    if not d:
+        return d
+    out = dict(d)
+    for k, v in d.items():
+        nk = _slug_override(k)
+        if nk != k and nk not in out:
+            out[nk] = v
+    return out
 
 
 def _load_isbn_fill() -> dict:
@@ -2185,7 +2209,7 @@ def _load_isbn_fill() -> dict:
     global _ISBN_FILL
     if _ISBN_FILL is None:
         p = ROOT / "data" / "seeds" / "isbn-fill.json"
-        _ISBN_FILL = json.loads(p.read_text(encoding="utf-8")) if p.exists() else {}
+        _ISBN_FILL = _alias_expand(json.loads(p.read_text(encoding="utf-8")) if p.exists() else {})
     return _ISBN_FILL
 
 
@@ -2193,7 +2217,7 @@ def _load_status_corrections() -> dict:
     """★Wiki検証済みの完結漏れ是正(2026-07-09)。slug→{status,year_ended,wiki_url}。種3不変を汚さず可逆。"""
     p = ROOT / "data" / "seeds" / "status-corrections.yml"
     if p.exists():
-        return (yaml.safe_load(p.read_text(encoding="utf-8")) or {}).get("corrections", {})
+        return _alias_expand((yaml.safe_load(p.read_text(encoding="utf-8")) or {}).get("corrections", {}))
     return {}
 
 
