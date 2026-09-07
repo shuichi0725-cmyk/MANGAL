@@ -36,3 +36,16 @@ preview は本番(Workers+R2)と違い **Cloudflare Pages**(`wrangler pages depl
 ## 2026-07-03 stale生成物クラスの教訓(カレンダー)
 - public/calendar(6/26製)がslug改名後も残置→①launch表示が別作品に化ける(1968-08のK幽霊=実体はこんにちは先生) ②一覧が生slug表示 ③current月が古い。
 - 恒久策: 生成物(public/calendar・public/data/*-stock.json等)は週次/月次蒸留で必ず再生成(`_build-calendar.py`+`_gen-corner-stocks.py`+`_gen-corner-auto.py`)。発売日カレンダーは全期間化済(release 832ヶ月・月戻り可)。カレンダーは title 埋め込み式に変更済(索引join非依存)。
+
+## ★GitHub Actions が success でも、直後の fetch は旧HTMLを掴むことがある(2026-09-07 実踏)
+workflow の `conclusion=success` を待ってすぐ curl したら、シェルの新クラスが 0 件・旧器が残って見えた。
+数十秒後に取り直したら全部正しかった。**success = Pages のエッジ反映完了ではない**。
+検証で「入っていないはず無いのに入っていない」時は、**まず取り直す**(コードを疑う前に)。
+
+## ★人気順 上位200頁セットの作り方(2026-09-07 再現手順)
+本番一覧索引 `data/manga-list-index.json` を popularity→score→year の降順(= `lib/filters.ts` の
+`sortItems("popularity")` と同規則)で並べ上位200件。**公開slug→SRC stem の逆引き**
+(`data/seeds/slug-overrides.yml` の `overrides:{SRC:{slug:公開}}` を反転)を必ず通す=改名頁を落とさない。
+実測: 200/200・人気度 330,034〜28,425。
+★抜き取り確認でURLを組む時は **ファイル名(SRC stem)でなく yml の `slug`**(例 danjonmeshi → /manga/dungeon-meshi)。
+
