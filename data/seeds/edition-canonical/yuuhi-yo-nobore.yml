@@ -4,20 +4,28 @@ canonical_publisher: 小学館
 canonical_imprint: フラワーコミックス
 suppress_types:
 - bunkobon
-source: '残86巻の裁定 2026-09-03(Sugar&Spice型検出の見送り群): overrideは1999年小学館文庫を通常版1巻にしていた。原版フラワーコミックス全2巻(1980)を主版に。巻・ISBN・日付は楽天キャッシュ(検出器TSV)+種2+既存seed、情報は追加していない'
+source: '残86巻の裁定 2026-09-03(Sugar&Spice型検出の見送り群): overrideは1999年小学館文庫を通常版1巻にしていた。原版フラワーコミックス全2巻(1980)を主版に。巻・ISBN・日付は楽天キャッシュ(検出器TSV)+種2+既存seed、情報は追加していない / ★2026-09-07 ワイド版タブ追加: 種2にフラワーコミックスワイド版v1(9784091338938・1992-01-20)が在るのに、通常版と同じtype=standardで巻番号1が衝突し本番に出ていなかった(ISBN消失監査で発覚)。楽天seriesName=フラワーコミックスワイド版で確認。'
 volumes:
 - number: 1
   isbn13: '9784091305510'
-  release_date: '1980-01'
+  release_date: 1980-01
 - number: 2
   isbn13: '9784091305527'
-  release_date: '1980-04'
+  release_date: 1980-04
 extra_editions:
 - type: bunkobon
-  label: '小学館文庫(1999)'
-  imprint: '小学館文庫'
+  label: 小学館文庫(1999)
+  imprint: 小学館文庫
   publisher: 小学館
   volumes:
   - number: 1
     isbn13: '9784091912626'
-    release_date: '1999-02'
+    release_date: 1999-02
+- type: wideban
+  label: ワイド版(1992)
+  imprint: フラワーコミックスワイド
+  publisher: 小学館
+  volumes:
+  - number: 1
+    isbn13: '9784091338938'
+    release_date: '1992-01-20'
