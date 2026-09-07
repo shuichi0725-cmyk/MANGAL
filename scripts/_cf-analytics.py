@@ -25,26 +25,63 @@ SITE_TAG = "806671887a234f4882f85ba92058da5f"   # Web Analytics site (mangal-db.
 ZONE_TAG = "5db1699deb11a837a0eb66c096e333b6"   # Zone (mangal-db.com)。 #analytics:read 権限あり(2026-09-07確認)
 
 # 名乗りUAから既知クローラを分類(表示名だけ・厳密なbot判定はしない=UA詐称は見抜けない)
+# category: crawl=検索/SEOクローラ / ai=AI検索エージェント / social=リンクプレビューbot / scan=攻撃・脆弱性探索
 _BOT_SIGNATURES = [
-    ("Googlebot", "Googlebot"), ("bingbot", "Bingbot"), ("Applebot", "Applebot"),
-    ("SemrushBot", "SemrushBot"), ("AhrefsBot", "AhrefsBot"), ("MJ12bot", "MJ12bot(Majestic)"),
-    ("Amazonbot", "Amazonbot"), ("YisouSpider", "YisouSpider(易搜/中国)"),
-    ("facebookexternalhit", "Facebook(共有プレビュー)"), ("meta-externalagent", "Meta(共有プレビュー)"),
-    ("DotBot", "DotBot(Moz)"), ("PetalBot", "PetalBot(Huawei)"), ("Bytespider", "Bytespider(TikTok/ByteDance)"),
-    ("YandexBot", "YandexBot"), ("DuckDuckBot", "DuckDuckBot"), ("GPTBot", "GPTBot(OpenAI)"),
-    ("ClaudeBot", "ClaudeBot(Anthropic)"), ("Claude-Web", "Claude-Web(Anthropic)"),
-    ("PerplexityBot", "PerplexityBot"), ("CCBot", "CCBot(Common Crawl)"), ("SeznamBot", "SeznamBot"),
-    ("Sogou", "Sogou(捜狗/中国)"), ("Baiduspider", "Baiduspider(百度/中国)"),
+    ("crawl", "Googlebot", "Googlebot"), ("crawl", "bingbot", "Bingbot"), ("crawl", "Applebot", "Applebot"),
+    ("crawl", "SemrushBot", "SemrushBot"), ("crawl", "AhrefsBot", "AhrefsBot"), ("crawl", "MJ12bot", "MJ12bot(Majestic)"),
+    ("crawl", "Amazonbot", "Amazonbot"), ("crawl", "YisouSpider", "YisouSpider(易搜/中国)"),
+    ("crawl", "DotBot", "DotBot(Moz)"), ("crawl", "PetalBot", "PetalBot(Huawei)"), ("crawl", "Bytespider", "Bytespider(TikTok/ByteDance)"),
+    ("crawl", "YandexBot", "YandexBot"), ("crawl", "DuckDuckBot", "DuckDuckBot"),
+    ("crawl", "CCBot", "CCBot(Common Crawl)"), ("crawl", "SeznamBot", "SeznamBot"),
+    ("crawl", "Sogou", "Sogou(捜狗/中国)"), ("crawl", "Baiduspider", "Baiduspider(百度/中国)"),
+    ("ai", "GPTBot", "GPTBot(OpenAI/学習用)"), ("ai", "OAI-SearchBot", "OAI-SearchBot(OpenAI検索)"),
+    ("ai", "ChatGPT-User", "ChatGPT-User(ユーザ代理取得)"), ("ai", "ClaudeBot", "ClaudeBot(Anthropic/学習用)"),
+    ("ai", "Claude-Web", "Claude-Web(Anthropic)"), ("ai", "Claude-User", "Claude-User(ユーザ代理取得)"),
+    ("ai", "PerplexityBot", "PerplexityBot(検索)"), ("ai", "Perplexity-User", "Perplexity-User(ユーザ代理取得)"),
+    ("ai", "GrokBot", "GrokBot(xAI)"), ("ai", "Amzn-SearchBot", "Amzn-SearchBot(Alexa+/Rufus)"),
+    ("social", "facebookexternalhit", "Facebook(共有プレビュー)"), ("social", "meta-externalagent", "Meta(共有プレビュー/学習)"),
+    ("social", "Twitterbot", "Twitterbot(X共有プレビュー)"), ("social", "Discordbot", "Discordbot"),
+    ("social", "LinkedInBot", "LinkedInBot"), ("social", "Slackbot", "Slackbot"),
+    ("social", "TelegramBot", "TelegramBot"), ("social", "WhatsApp", "WhatsApp(共有プレビュー)"),
 ]
 
 
-def _classify_ua(ua):
-    for sig, label in _BOT_SIGNATURES:
+def _classify(ua):
+    """→ (category, label)。 category: crawl/ai/social/scan/human_other/None(=通常ブラウザ)"""
+    for cat, sig, label in _BOT_SIGNATURES:
         if sig in ua:
-            return label
-    if "Mozilla" not in ua or "(compatible)" == ua.strip():
-        return "(未分類bot候補)"
-    return None  # 通常ブラウザUAとみなす
+            return cat, label
+    if ua.startswith("http://") or ua.startswith("https://") or "wp-admin" in ua or "install.php" in ua:
+        return "scan", "(URL型UA=脆弱性探索プローブ)"
+    if ua.startswith("NetworkingExtension") or ua.startswith("com.apple"):
+        return "human_other", "Apple Private Relay/iOSシステム通信"
+    if "Mozilla" not in ua or ua.strip() in ("Mozilla/5.0", "Mozilla/5.0 (compatible)"):
+        return "human_other", "(UA欠落/簡略=未分類)"
+    return None, None  # 通常ブラウザUAとみなす(下でbrowser/device分類)
+
+
+def _classify_browser(ua):
+    if "EdgA/" in ua or "EdgiOS/" in ua or "Edg/" in ua:
+        b = "Edge"
+    elif "CriOS/" in ua:
+        b = "Chrome(iOS)"
+    elif "FxiOS/" in ua:
+        b = "Firefox(iOS)"
+    elif "Firefox/" in ua:
+        b = "Firefox"
+    elif "Chrome/" in ua:
+        b = "Chrome"
+    elif "Safari/" in ua and ("Version/" in ua or "iPhone" in ua or "iPad" in ua or "Macintosh" in ua):
+        b = "Safari"
+    else:
+        b = "(その他ブラウザ)"
+    if "iPhone" in ua or "iPad" in ua or ("Android" in ua and "Mobile" in ua):
+        dev = "モバイル"
+    elif "Android" in ua:
+        dev = "タブレット/その他Android"
+    else:
+        dev = "デスクトップ"
+    return f"{b}・{dev}"
 
 
 def _token():
@@ -156,22 +193,32 @@ def bots(date):
     if d.get("errors"):
         raise SystemExit(f"GraphQLエラー: {json.dumps(d['errors'], ensure_ascii=False)[:300]}")
     rows = d["data"]["viewer"]["zones"][0]["ua"]
-    bot_total = {}
-    browser_total = 0
+    cat_total = {"crawl": {}, "ai": {}, "social": {}, "scan": {}, "human_other": {}}
+    browser_total = {}
     grand = 0
     for r in rows:
         c, ua = r["count"], r["dimensions"]["userAgent"]
         grand += c
-        label = _classify_ua(ua)
-        if label:
-            bot_total[label] = bot_total.get(label, 0) + c
+        cat, label = _classify(ua)
+        if cat:
+            cat_total[cat][label] = cat_total[cat].get(label, 0) + c
         else:
-            browser_total += c
-    print(f"クローラ内訳(UA分類・{d0}のtop{len(rows)}UA={grand:,}件中):")
-    for label, c in sorted(bot_total.items(), key=lambda x: -x[1]):
+            b = _classify_browser(ua)
+            browser_total[b] = browser_total.get(b, 0) + c
+    cat_names = {"crawl": "検索/SEOクローラ", "ai": "AI検索エージェント", "social": "SNS/共有プレビューbot",
+                 "scan": "攻撃・脆弱性探索プローブ", "human_other": "人間だが非標準UA"}
+    print(f"UA分類・{d0}のtop{len(rows)}UA={grand:,}件中:")
+    for cat in ("crawl", "ai", "social", "scan", "human_other"):
+        items = cat_total[cat]
+        if not items:
+            continue
+        print(f"\n■ {cat_names[cat]}")
+        for label, c in sorted(items.items(), key=lambda x: -x[1]):
+            print(f"  {c:>7,}  {label}")
+    print(f"\n■ 人間(通常ブラウザ)= {sum(browser_total.values()):,}")
+    for label, c in sorted(browser_total.items(), key=lambda x: -x[1]):
         print(f"  {c:>7,}  {label}")
-    print(f"  {browser_total:>7,}  (通常ブラウザUA)")
-    print("※上位100UAのみ集計(ロングテールのbotは未計上)。UA詐称までは見抜けない=名乗りベース。Freeプランは1日幅までしかクエリ不可。")
+    print("\n※上位100UAのみ集計(ロングテールは未計上)。UA詐称までは見抜けない=名乗りベース。Freeプランは1日幅までしかクエリ不可。")
 
 
 def main():
