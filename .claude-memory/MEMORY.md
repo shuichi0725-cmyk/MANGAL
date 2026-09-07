@@ -94,6 +94,7 @@
 - [反映=targeted](reflect_protocol_fast.md) — 正=skill reflect-targeted ／ [新規登録の戒め](new_manga_registration_order.md)
 - [【必ず使う】記憶をgit永続化](memory_git_mirror.md) ／ [【方針】記憶とskillの棲み分け](feedback_memory_vs_skill_policy.md)
 - [【型・検出器+適用器】すてごろブッチ型=予約巻の発売日が延期されても追随しない](preorder_date_drift_sutegoro_type.md)
+- [【機構】続巻適用で欠番が残る型=予約harvestの窓が「未来〜今日」](preorder_zokkan_gapfill_mechanism.md) — 回収器あり・著者overlapが主ゲート ／ [【型・封鎖済】全ひらがな外来語題でslugが砕ける](slug_hiragana_loanword_particle_break.md)
 - [【型】発売日を変えるとISBNが入れ替わる/overrideが効かない経路](release_date_change_side_effects.md) — 日付を触る全作業の前提・検算の型つき
 - [【方針】Wikipediaの発売日は採用](wikipedia_release_date_is_authoritative.md)
 - [【手法】WikipediaのURLを貼られたら書誌情報を機械突合](wikipedia_bibliography_crosscheck.md)

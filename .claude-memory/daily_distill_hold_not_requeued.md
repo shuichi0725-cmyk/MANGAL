@@ -22,3 +22,13 @@ full harvest から拾って fresh に足す(=毎回再分類→材料が揃っ�
 `_preorder-gen-midfill.py` に足すと大半が通る(先行巻が2026年刊でローカルcacheに無いだけ)。
 併せて未着手の小穴: `clean_kana` は題に巻数があっても**空白無しの末尾巻読み**(…デスイチ)を剥がさない(精霊聖女で手直し)。
 KANA_VOLNUM レビューは slug 側しか見ないので title_kana に漏れる。[[intake_manifest_ledger_live]]
+
+## 2026-09-07 追記: B柱(NDL)側の同型は封鎖した
+
+`_distill_backward.py --plan` は `ai-todo.jsonl` を**毎回まっさら再生成**するので、worksheet に
+`is_manga: false` と裁定を書いても**翌日また同じ候補が並ぶ**(A柱の hold と同じ「二度と消えない/通らない」構造)。
+→ plan に **恒久除外簿 `data/seeds/preorder-deny.jsonl` の読み込みを追加**(A柱と同じ台帳を両柱で共有)。
+裁定済み3件(クレヨンしんちゃんパニック=コンビニ再編集 / とっておきドラえもん=傑作選 / 花丸ハムスターほおぶくろセレクション=傑作選復刊)
+を除外して **掲載可worksheet待ち 5→2**。残2件は caption 無しで genre が確定できず登録保留(捏造しない)。
+
+★A柱(preorder hold の再投入)は**まだ未着手**= 上の How to apply がそのまま残タスク。
