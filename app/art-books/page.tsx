@@ -1,7 +1,6 @@
 import Link from "next/link";
 import ArtBookCard from "@/components/ArtBookCard";
 import { loadArtBooks } from "@/lib/loadData";
-import { DesignNav } from "@/lib/homeDesign";
 
 export const metadata = {
   title: "画集",
@@ -26,7 +25,6 @@ export default function ArtBooksIndexPage() {
 
   return (
     <>
-    <DesignNav />
     <div className="mx-auto max-w-6xl px-4 py-8">
       <header className="border-b border-[var(--color-line)] pb-5">
         <h1 className="text-2xl md:text-3xl font-bold flex items-center gap-2">

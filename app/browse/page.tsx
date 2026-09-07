@@ -1,6 +1,5 @@
 import { Suspense } from "react";
 import { loadMasters, loadArtBooks, loadIndexSummary } from "@/lib/loadData";
-import { DesignNav } from "@/lib/homeDesign";
 import type { ListBundle } from "@/lib/schema";
 import HomeClient from "../HomeClient";
 import BrowseShell from "@/components/BrowseShell";
@@ -24,7 +23,6 @@ export default function BrowsePage() {
   return (
     <>
       {/* ★検索画面にもヘッダー下のアイコンナビを出す(他ページと統一) */}
-      <DesignNav />
       {/* ★fallback を null にしない(2026-08-01): 静的書き出しではここが HTML に焼かれるので、
           null だと本文が丸ごと消える(実測: 可視テキスト357字=ヘッダとフッタのみ)。 */}
       <Suspense fallback={<BrowseShell summary={summary} />}>

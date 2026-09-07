@@ -5,6 +5,10 @@ import "./globals.css";
 import ScrollTopButton from "@/components/ScrollTopButton";
 import GlobalDragScroll from "@/components/GlobalDragScroll";
 import SiteHeader from "@/components/SiteHeader";
+import GlobalNav from "@/components/GlobalNav";
+import PageShell from "@/components/PageShell";
+import HomeSidebar from "@/components/HomeSidebar";
+import { loadMasters } from "@/lib/loadData";
 import { dotGothic } from "@/lib/fonts";
 
 export const metadata: Metadata = {
@@ -22,6 +26,8 @@ export const metadata: Metadata = {
 //    globals.css の :root トークンとして残存=theme-d3クラスを外せば即戻せる)
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
+  // ★PC左レールの中身(ジャンル32)はマスタから。loadMasters はモジュールキャッシュ済み
+  const genres = loadMasters().genres.map((g) => ({ key: g.key, name: g.name }));
   return (
     <html lang="ja">
       <body className={`min-h-screen flex flex-col theme-d3 ${dotGothic.variable}`}>
@@ -30,8 +36,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {/* 共通ヘッダー(SiteHeader=client): ★ホームでは非表示 = Design12のE型ステータスバーが代替
             (2026-08-15 E融合型)。購入モードトグルは廃止済(2026-07-12)。 */}
         <SiteHeader />
-        <main className="flex-1">{children}
-        <SiteFooter /></main>
+        {/* ★2026-09-07: アイコンナビと PC左レールを layout へ一本化(旧= 47箇所が各自 DesignNav
+            を呼び、レールはホームと漫画頁だけ)。ホームは PageShell 側で対象外にしている。 */}
+        <main className="flex-1">
+          <GlobalNav />
+          <PageShell rail={<HomeSidebar genres={genres} />}>{children}</PageShell>
+          <SiteFooter />
+        </main>
         <footer className="border-t border-[var(--color-line)] mt-12 py-8 text-center text-xs text-ink/50 space-y-3">
           <nav className="flex justify-center gap-4">
             <Link href="/about" className="hover:text-ink">

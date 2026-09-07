@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { ensureFullIndex, onFullIndex } from "@/lib/useMangaIndex";
 import { prewarmAlt, prewarmSearch } from "@/lib/clientSearch";
 
@@ -21,14 +21,17 @@ export default function HomeSidebar({
   prewarm = true,
 }: {
   genres: Array<{ key: string; name: string }>;
-  /** フル索引(br後6MB)を idle 先読みするか。★読むだけの頁(漫画詳細)では false =
-   *  検索する気のない訪問者に索引を落とさない(2026-09-07 全頁レール化のため新設)。 */
+  /** フル索引(br後6MB)を idle 先読みするか。省略=パスで自動判定。
+   *  ★2026-09-07 全頁レール化: 読むだけの頁(漫画詳細・過去ログ等)では先読みしない
+   *  = 検索する気のない訪問者に6MBを落とさない。検索が主目的の3面だけ温める。 */
   prewarm?: boolean;
 }) {
   const [q, setQ] = useState("");
   const router = useRouter();
+  const pathname = usePathname();
+  const doWarm = prewarm ?? (pathname === "/" || pathname === "/browse" || pathname === "/list");
   useEffect(() => {
-    if (!prewarm) return;
+    if (!doWarm) return;
     if (!window.matchMedia("(min-width: 1024px)").matches) return;
     const t = setTimeout(() => {
       ensureFullIndex();
@@ -43,7 +46,7 @@ export default function HomeSidebar({
       }
     }, 2500);
     return () => clearTimeout(t);
-  }, [prewarm]);
+  }, [doWarm]);
   return (
     <aside className="hidden lg:block w-[260px] shrink-0">
       <div className="sticky top-4 space-y-4">
@@ -51,6 +54,8 @@ export default function HomeSidebar({
         <div className="rounded-xl border border-[var(--color-line)] bg-[var(--color-surface)] p-3.5 shadow-sm">
           <p className="text-[12px] font-extrabold text-ink/70">🔍 さがす</p>
           <form
+            action="/list"
+            method="get"
             className="mt-2"
             onSubmit={(e) => {
               e.preventDefault();

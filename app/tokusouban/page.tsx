@@ -1,5 +1,4 @@
 import TokusoubanListClient from "./TokusoubanListClient";
-import { DesignNav } from "@/lib/homeDesign";
 
 /** 特装版・限定版の一覧(2026-09-06 新設。ホームの🎁コーナーの「全部見る」先)。
  *  データ=public/data/tokusouban-stock.json(_gen-corner-auto.py が週次再生成)。
@@ -14,7 +13,6 @@ export const metadata = {
 export default function TokusoubanPage() {
   return (
     <div className="min-h-screen bg-[var(--color-bg)]">
-      <DesignNav />
       <div className="px-4 pb-2 pt-6">
         <h1 className="text-[19px] font-extrabold">🎁 特装版・限定版が出ている漫画</h1>
         <p className="mt-1 text-[12px] leading-relaxed text-ink/60">

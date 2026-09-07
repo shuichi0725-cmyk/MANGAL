@@ -1,4 +1,3 @@
-import { DesignNav } from "@/lib/homeDesign";
 import AuditDateOrder from "@/components/AuditDateOrder";
 
 export const metadata = { robots: { index: false, follow: false } };  // 実験頁=非索引
@@ -8,7 +7,6 @@ export const metadata = { robots: { index: false, follow: false } };  // 実験�
 export default function AuditDateOrderPage() {
   return (
     <div className="min-h-screen bg-[var(--color-bg)] pb-16">
-      <DesignNav current={11} />
       <AuditDateOrder />
     </div>
   );

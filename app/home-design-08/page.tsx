@@ -1,7 +1,7 @@
 import Link from "next/link";
 import LikeButtonMock from "@/components/LikeButtonMock";
 import ScrollShortcutsMock from "@/components/ScrollShortcutsMock";
-import { bundle, DesignNav, seeded, volCount, Cover, CoverTile } from "@/lib/homeDesign";
+import { bundle, seeded, volCount, Cover, CoverTile } from "@/lib/homeDesign";
 
 export const metadata = { robots: { index: false, follow: false } };  // 実験頁=非索引
 
@@ -26,7 +26,6 @@ export default function Design08() {
 
   return (
     <div className="min-h-screen bg-[var(--color-bg)] pb-12">
-      <DesignNav current={8} />
 
       {/* ── ショートカット: 最上部では隠れ、スクロールで上から現れる浮遊バー(アイコンのみ) ── */}
       <ScrollShortcutsMock />

@@ -2,7 +2,6 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import view from "@/data/anime-seasons-view.json";
 import { currentSeasonKey, seasonLabel, type AnimeSeasonsView } from "@/lib/animeSeason";
-import { DesignNav } from "@/lib/homeDesign";
 
 const V = view as unknown as AnimeSeasonsView;
 
@@ -24,7 +23,6 @@ export default function AnimeSeasonsIndexPage() {
 
   return (
     <>
-    <DesignNav />
     <div className="mx-auto max-w-4xl px-4 py-8">
       <Link href="/" className="text-sm text-ink/60 hover:text-ink">
         ← トップへ戻る

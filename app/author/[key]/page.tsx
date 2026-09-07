@@ -2,7 +2,6 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { allAuthorKeys, getAuthor, type AuthorWork } from "@/lib/authors";
 import CoverImage from "@/components/CoverImage";
-import { DesignNav } from "@/lib/homeDesign";
 
 /** 著者静的ページ(2026-08-10 preview試作)。
  *  「著者名 作品一覧」検索の受け皿+内部リンクハブ(/browse?author= クエリの静的置換)。 */
@@ -83,7 +82,6 @@ export default async function AuthorPage({ params }: { params: Promise<{ key: st
   };
   return (
     <div>
-      <DesignNav />
       <div className="mx-auto max-w-4xl px-4 py-8">
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }} />

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { bundle, DesignNav, seeded, CoverTile, Cover } from "@/lib/homeDesign";
+import { bundle, seeded, CoverTile, Cover } from "@/lib/homeDesign";
 
 export const metadata = { robots: { index: false, follow: false } };  // 実験頁=非索引
 
@@ -27,7 +27,6 @@ export default function Design02() {
   );
   return (
     <div className="min-h-screen bg-[var(--color-bg)] pb-10">
-      <DesignNav current={2} />
       <header className="flex items-center justify-between px-4 py-3">
         <h1 className="text-lg font-extrabold">MANGAL<span className="text-[var(--color-accent)]">.</span></h1>
         <div className="flex gap-3 text-lg">

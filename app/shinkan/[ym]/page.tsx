@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { DesignNav } from "@/lib/homeDesign";
 import ShinkanAbout from "@/components/ShinkanAbout";
 import ShinkanMonthView from "@/components/ShinkanMonthView";
 import { jstYm, knownSlugs, listShinkanMonths, loadShinkanMonth, monthCount, shinkanJsonLd, sortedDays, ymLabel } from "@/lib/shinkanData";
@@ -56,7 +55,6 @@ export default async function ShinkanMonthPage({ params }: { params: Promise<{ y
   const jsonLd = shinkanJsonLd(pageTitle(ym, monthCount(d)), canonicalFor(ym), rows, known);
   return (
     <>
-      <DesignNav />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <ShinkanMonthView
         ym={ym}

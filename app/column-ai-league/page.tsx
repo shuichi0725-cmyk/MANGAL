@@ -1,4 +1,3 @@
-import { DesignNav } from "@/lib/homeDesign";
 import { loadAiReviews } from "@/lib/loadData";
 import AiLeagueClient from "./AiLeagueClient";
 
@@ -11,7 +10,6 @@ export default function AiLeaguePage() {
   const sections = loadAiReviews();
   return (
     <div className="min-h-screen bg-[var(--color-bg)] pb-16">
-      <DesignNav current={11} />
       <div className="mx-auto max-w-xl px-5 pt-8">
         <AiLeagueClient sections={sections} />
       </div>

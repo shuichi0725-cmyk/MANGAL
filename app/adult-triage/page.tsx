@@ -1,5 +1,4 @@
 import { loadAllManga } from "@/lib/loadData";
-import { DesignNav } from "@/lib/homeDesign";
 import TriageClient from "./TriageClient";
 
 export const metadata = { title: "成年3分けレビュー(テスト専用)", robots: { index: false } };
@@ -24,7 +23,6 @@ export default function AdultTriagePage() {
     }));
   return (
     <div className="min-h-screen bg-[var(--color-bg)] pb-12">
-      <DesignNav />
       <TriageClient targets={targets} />
     </div>
   );

@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { DesignNav } from "@/lib/homeDesign";
 import { hubDefs, hubHref, hubHrefIfExists, publisherName, type HubDef } from "@/lib/hubs";
 
 /** 雑誌別 索引(2026-09-04 SEO ハブ面の入口)。 出版社ごとに雑誌を並べ、各雑誌の連載作品一覧へ。 */
@@ -28,7 +27,6 @@ export default function MagazineIndexPage() {
   const total = defs.reduce((s, d) => s + d.count, 0);
   return (
     <div>
-      <DesignNav />
       <div className="mx-auto max-w-4xl px-4 py-8">
         <nav className="text-[12px] text-ink/55">
           <Link href="/" className="hover:text-ink">ホーム</Link> › 雑誌別

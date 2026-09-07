@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { bundle, DesignNav, volCount, Cover, firstVolumeDate } from "@/lib/homeDesign";
+import { bundle, volCount, Cover, firstVolumeDate } from "@/lib/homeDesign";
 import type { Manga } from "@/lib/schema";
 
 export const metadata = {
@@ -56,7 +56,6 @@ export default function RankingsPage() {
 
   return (
     <div className="min-h-screen bg-[var(--color-bg)] pb-12">
-      <DesignNav />
       <div className="mx-auto w-full max-w-[720px] px-4">
         <h1 className="mt-5 text-[18px] font-extrabold">🏆 なんでもランキング</h1>
         <p className="mt-1 text-[11.5px] text-ink/55">全{manga.length.toLocaleString()}作品のデータベースから機械集計。人気投票ではなく、数字の事実だけ。</p>

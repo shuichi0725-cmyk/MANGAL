@@ -1,5 +1,4 @@
 import ArchiveClient from "./ArchiveClient";
-import { DesignNav } from "@/lib/homeDesign";
 
 /** 「三世代、今日の一冊」過去ログ(本実装 2026-07-03)。
  *  sansedai-stock.json(741件)からクライアントがJST日付で決定的に選ぶ=ホームと同じ式。
@@ -10,7 +9,6 @@ export const metadata = {
 export default function SansedaiArchive() {
   return (
     <div className="min-h-screen bg-[var(--color-bg)]">
-      <DesignNav />
       {/* ★2026-09-07 ユーザ指摘「過去ログは横幅長すぎ」: この頁だけ器(max-width)が無く
           全幅に伸びていた(/list も同様=別途)。他頁と同じ max-w-6xl 中央寄せに揃える。 */}
       <div className="mx-auto max-w-6xl">

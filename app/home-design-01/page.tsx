@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { bundle, DesignNav, latestDate, volCount, Cover } from "@/lib/homeDesign";
+import { bundle, latestDate, volCount, Cover } from "@/lib/homeDesign";
 
 export const metadata = { robots: { index: false, follow: false } };  // 実験頁=非索引
 
@@ -8,7 +8,6 @@ export default function Design01() {
   const { manga, byNew } = bundle();
   return (
     <div className="min-h-screen bg-[var(--color-bg)]">
-      <DesignNav current={1} />
       <header className="border-b border-[var(--color-line)] bg-[var(--color-surface)] px-4 pb-5 pt-6">
         <h1 className="text-xl font-extrabold tracking-tight">
           MANGAL<span className="text-[var(--color-accent)]">.</span>

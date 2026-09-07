@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { bundle, DesignNav, seeded, volCount, Cover } from "@/lib/homeDesign";
+import { bundle, seeded, volCount, Cover } from "@/lib/homeDesign";
 
 export const metadata = { robots: { index: false, follow: false } };  // 実験頁=非索引
 
@@ -17,7 +17,6 @@ export default function Design05() {
   );
   return (
     <div className="min-h-screen bg-[var(--color-bg)] pb-10">
-      <DesignNav current={5} />
       <header className="flex items-center justify-between px-4 py-4">
         <h1 className="text-lg font-extrabold">MANGAL<span className="text-[var(--color-accent)]">.</span> <span className="text-xs font-medium text-ink/50">コックピット</span></h1>
         <span className="rounded-full border border-[var(--color-line)] px-3 py-1 text-[11px] text-ink/60">🔍 検索</span>

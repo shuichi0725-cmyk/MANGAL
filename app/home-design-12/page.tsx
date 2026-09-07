@@ -28,44 +28,8 @@ export const metadata = { robots: { index: false, follow: false } };  // 実験�
  *  ヘッダーは現行DesignNavと同一6リンクのSVG版(2026-09-02: 一覧→新作に差し替え・検索を先頭へ。DesignNavと同順)。
  *  フッターは共通SiteFooter(layout側)のまま。 */
 
-const NavIcon = ({ d, circle }: { d: string; circle?: [number, number, number] }) => (
-  <svg viewBox="0 0 24 24" className="h-[19px] w-[19px]" style={{ stroke: "var(--color-accent)", fill: "none", strokeWidth: 1.9 }}>
-    {circle && <circle cx={circle[0]} cy={circle[1]} r={circle[2]} />}
-    <path d={d} />
-  </svg>
-);
-
-function D3Nav() {
-  const cell = "spring-press flex flex-col items-center gap-0.5 active:scale-90";
-  const right: Array<[React.ReactNode, string, string]> = [
-    [<NavIcon key="s" d="M15 15l6 6" circle={[10.5, 10.5, 6]} />, "検索", "/browse"],
-    // 新作=今月の新刊一覧。≡メニューの box アイコンと同じ絵柄
-    [<NavIcon key="n" d="M21 8l-9-5-9 5v8l9 5 9-5zM3 8l9 5 9-5M12 13v8" />, "新作", "/shinkan"],
-    [<NavIcon key="p" d="M4 20l2-6L16 4l4 4L10 18l-6 2zM14 6l4 4" />, "AI書評", "/column-ai-league"],
-    [<NavIcon key="c" d="M12 7v5l3.5 2" circle={[12, 12, 8.5]} />, "過去ログ", "/sansedai-archive"],
-    [<NavIcon key="g" d="M12 5c-2-1.6-5-1.6-8-.6V19c3-1 6-1 8 .6 2-1.6 5-1.6 8-.6V4.4c-3-1-6-1-8 .6zM12 5v14" />, "使い方", "/about"],
-  ];
-  // ★DesignNav と同じ是正(2026-09-07): 帯は全幅、中身は max-w-6xl でロゴ/≡ と縦に揃える
-  return (
-    <div className="border-b-[3px] border-[var(--color-accent)] bg-[var(--color-paper)]">
-      <div className="mx-auto flex w-full max-w-6xl items-center px-4 py-1.5">
-        {/* ★ロゴは共通ヘッダー(layout)に一本化(2026-08-11 ユーザ指摘「ヘッダーが二つ」)。DesignNavと同配置=ホーム左固定 */}
-        <Link href="/" aria-label="ホーム" className={cell}>
-          <NavIcon d="M3 11L12 3l9 8M6 10v11h12V10" />
-          <span className="text-[9px] text-ink/55">ホーム</span>
-        </Link>
-        <div className="ml-auto flex items-center gap-3.5">
-          {right.map(([icon, label, href]) => (
-            <Link key={label} href={href} aria-label={label} className={cell}>
-              {icon}
-              <span className="text-[9px] text-ink/55">{label}</span>
-            </Link>
-          ))}
-        </div>
-      </div>
-    </div>
-  );
-}
+// ★NavIcon / D3Nav は components/GlobalNav.tsx へ移設(2026-09-07 ナビを layout に一本化)。
+//   ホームだけ太線+paper地という差はパス判定で GlobalNav 側が出し分ける。
 
 const CatIcon = ({ children }: { children: React.ReactNode }) => (
   <svg viewBox="0 0 24 24" className="mx-auto h-5 w-5" style={{ stroke: "var(--color-ink)", fill: "none", strokeWidth: 1.8 }}>
@@ -118,7 +82,6 @@ export default function Design12() {
     <div className="theme-d3 min-h-screen bg-[var(--color-bg)] pb-12">
       {/* E型ステータスバーは撤去(2026-08-17 ユーザ裁定=案D: ヘッダーは旧共通ヘッダーに統一。
           日付は下のマーキー帯先頭に出す=StatusDate)。 */}
-      <D3Nav />
       {/* SEO用の固定見出し(視覚上は小さく。巨大タイポはHeroD3内の装飾p=ランダム可) */}
       <h1 className="sr-only">MANGAL — 漫画を探す・全巻一覧がわかる日本の漫画データベース</h1>
       <div className="overflow-hidden whitespace-nowrap border-b-[3px] border-[#0d0d0d] bg-[var(--color-accent)] py-1 text-[11px] font-black tracking-[0.14em] text-[#0d0d0d]">

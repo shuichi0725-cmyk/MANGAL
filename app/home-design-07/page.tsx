@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { bundle, DesignNav, seeded, volCount, Cover, CoverTile } from "@/lib/homeDesign";
+import { bundle, seeded, volCount, Cover, CoverTile } from "@/lib/homeDesign";
 
 export const metadata = { robots: { index: false, follow: false } };  // 実験頁=非索引
 
@@ -13,7 +13,6 @@ export default function Design07() {
 
   return (
     <div className="min-h-screen bg-[var(--color-bg)] pb-12">
-      <DesignNav current={7} />
 
       {/* ── ヘッダー: ロゴ+検索は薄く(コーナーの邪魔をしない) ── */}
       <header className="px-4 pb-3 pt-5">

@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { DesignNav } from "@/lib/homeDesign";
 import { decadeOf, hubDefs, hubHref, type HubDef } from "@/lib/hubs";
 
 /** 連載開始年別 索引(2026-09-04 SEO ハブ面の入口)。 年代ごとに年を並べ、各年の作品一覧へ。 */
@@ -26,7 +25,6 @@ export default function YearIndexPage() {
   const total = defs.reduce((s, d) => s + d.count, 0);
   return (
     <div>
-      <DesignNav />
       <div className="mx-auto max-w-4xl px-4 py-8">
         <nav className="text-[12px] text-ink/55">
           <Link href="/" className="hover:text-ink">ホーム</Link> › 連載開始年別

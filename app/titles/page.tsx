@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { loadTitlesPages } from "@/lib/loadData";
-import { DesignNav } from "@/lib/homeDesign";
 
 /** 題名50音索引トップ(2026-08-31 SEO)。全作品への静的クロール導線ハブ。
  *  /authors(著者50音索引)と対の存在。頁割りは data/titles-pages.json(Python生成)が単一ソース。 */
@@ -17,7 +16,6 @@ export default function TitlesIndexPage() {
   const total = tp.gyo.reduce((s, g) => s + g.count, 0);
   return (
     <div>
-      <DesignNav />
       <div className="mx-auto max-w-4xl px-4 py-8">
         <nav className="text-[12px] text-ink/55">
           <Link href="/" className="hover:text-ink">ホーム</Link> › 題名索引

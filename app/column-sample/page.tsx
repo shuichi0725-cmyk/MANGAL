@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { DesignNav } from "@/lib/homeDesign";
 
 export const metadata = { robots: { index: false, follow: false } };  // 実験頁=非索引
 
@@ -8,7 +7,6 @@ export const metadata = { robots: { index: false, follow: false } };  // 実験�
 export default function ColumnSample() {
   return (
     <div className="min-h-screen bg-[var(--color-bg)] pb-16">
-      <DesignNav current={11} />
       <article className="mx-auto max-w-xl px-5 pt-8">
         <p className="text-[10px] font-bold tracking-[0.25em] text-[var(--color-accent)]">週刊コラム ・ 完結作だけ、ネタバレなし</p>
         <h1 className="mt-2 text-[22px] font-black leading-snug">

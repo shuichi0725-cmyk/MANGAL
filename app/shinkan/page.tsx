@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { DesignNav } from "@/lib/homeDesign";
 import ShinkanAbout from "@/components/ShinkanAbout";
 import ShinkanMonthView from "@/components/ShinkanMonthView";
 import ShinkanStaleNotice from "@/components/ShinkanStaleNotice";
@@ -42,7 +41,6 @@ export default function ShinkanPage() {
   const jsonLd = shinkanJsonLd(`今月(${ymLabel(ym)})の漫画・コミック新刊発売日一覧`, `${SITE}/shinkan`, rows, known);
   return (
     <>
-      <DesignNav />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <ShinkanMonthView
         ym={ym}

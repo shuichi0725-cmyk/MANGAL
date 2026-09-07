@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { bundle, DesignNav, latestDate, volCount } from "@/lib/homeDesign";
+import { bundle, latestDate, volCount } from "@/lib/homeDesign";
 
 export const metadata = { robots: { index: false, follow: false } };  // 実験頁=非索引
 
@@ -9,7 +9,6 @@ export default function Design06() {
   const rows = [...manga].sort((a, b) => (a.title_kana || "").localeCompare(b.title_kana || "", "ja"));
   return (
     <div className="min-h-screen bg-white pb-10">
-      <DesignNav current={6} />
       <header className="flex items-baseline justify-between border-b-2 border-ink px-3 py-3">
         <h1 className="text-base font-extrabold">MANGAL<span className="text-[var(--color-accent)]">.</span> 一覧表</h1>
         <span className="text-[11px] text-ink/55">{manga.length.toLocaleString()}件 ・ 列タップで並べ替え</span>

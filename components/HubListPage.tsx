@@ -1,7 +1,6 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
 import HubRow from "@/components/HubRow";
-import { DesignNav } from "@/lib/homeDesign";
 import { HUB_LABEL, hubHeading, hubHref, hubRows, type HubDef } from "@/lib/hubs";
 
 const SITE = "https://mangal-db.com";
@@ -61,7 +60,6 @@ export default function HubListPage({
     ) : null;
   return (
     <div>
-      <DesignNav />
       <div className="mx-auto max-w-4xl px-4 py-8">
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }} />
         <nav className="text-[12px] text-ink/55">

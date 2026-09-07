@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { DesignNav } from "@/lib/homeDesign";
 import { hubDefs, hubHref } from "@/lib/hubs";
 
 /** 出版社別 索引(2026-09-04 SEO ハブ面の入口)。 作品数順に出版社を並べ、各社の作品一覧へ。 */
@@ -19,7 +18,6 @@ export default function PublisherIndexPage() {
   const total = defs.reduce((s, d) => s + d.count, 0);
   return (
     <div>
-      <DesignNav />
       <div className="mx-auto max-w-4xl px-4 py-8">
         <nav className="text-[12px] text-ink/55">
           <Link href="/" className="hover:text-ink">ホーム</Link> › 出版社別

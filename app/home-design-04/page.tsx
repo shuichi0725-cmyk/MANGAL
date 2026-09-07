@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { bundle, DesignNav, volCount } from "@/lib/homeDesign";
+import { bundle, volCount } from "@/lib/homeDesign";
 
 export const metadata = { robots: { index: false, follow: false } };  // 実験頁=非索引
 
@@ -14,7 +14,6 @@ export default function Design04() {
   const recent = [...manga].sort((a, b) => (b.year_started ?? 0) - (a.year_started ?? 0)).slice(0, 8);
   return (
     <div className="min-h-screen bg-[#f7f4ec] pb-12" style={{ fontFamily: "'Noto Serif JP', serif" }}>
-      <DesignNav current={4} />
       <header className="px-5 pb-6 pt-8 text-center">
         <h1 className="text-2xl font-bold tracking-[0.3em] text-[#3a3226]">MANGAL 書庫</h1>
         <p className="mt-2 text-[12px] tracking-widest text-[#3a3226]/60">— 日本の漫画、{manga.length.toLocaleString()}冊の目録 —</p>

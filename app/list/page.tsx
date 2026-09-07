@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { Suspense } from "react";
 import ListClient from "@/components/ListClient";
-import { DesignNav } from "@/lib/homeDesign";
 import { hubDefs, hubHref } from "@/lib/hubs";
 import { loadMasters, loadArtBooks, loadIndexSummary } from "@/lib/loadData";
 import type { ListBundle } from "@/lib/schema";
@@ -39,7 +38,6 @@ export default function ListPage() {
     "rounded-full border border-[var(--color-line)] px-2.5 py-0.5 hover:border-[var(--color-accent)] hover:text-[var(--color-accent)]";
   return (
     <div className="min-h-screen bg-[var(--color-surface)] pb-10">
-      <DesignNav current={11} />
       <header className="flex items-baseline justify-between border-b-2 border-ink px-3 py-3">
         <h1 className="text-base font-extrabold">📋 一覧表</h1>
         <span className="text-[11px] text-ink/55">フィルター×並び順は自由に掛け算</span>

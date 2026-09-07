@@ -8,7 +8,7 @@ import DestinyPickMock from "@/components/DestinyPickMock";
 import MonthReleasesClient from "@/components/MonthReleasesClient";
 import CalendarView from "@/components/CalendarView";
 import HomeSidebar from "@/components/HomeSidebar";
-import { bundle, DesignNav, seeded, volCount, thisMonthReleases, releaseDayLabel } from "@/lib/homeDesign";
+import { bundle, seeded, volCount, thisMonthReleases, releaseDayLabel } from "@/lib/homeDesign";
 import WeekendFeature from "@/components/WeekendFeature";
 import { coverUrl } from "@/lib/schema";
 import { loadAiReviews } from "@/lib/loadData";
@@ -54,7 +54,6 @@ export default function Design11() {
 
   return (
     <div className="min-h-screen bg-[var(--color-bg)] pb-12">
-      <DesignNav current={11} />
       {/* ★PCレイアウト(2026-07-06): lg+=左サイドバー(検索常駐)+640pxコンテンツ列の2カラム。
           モバイル=従来の1カラム(サイドバー非表示)。 */}
       <div className="mx-auto flex w-full max-w-[960px] justify-center gap-6 lg:px-4">

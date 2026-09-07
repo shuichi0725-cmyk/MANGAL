@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { loadTitlesPages, type TitlesEntry } from "@/lib/loadData";
-import { DesignNav } from "@/lib/homeDesign";
 
 /** 題名索引の分割ページ(2026-08-31 SEO)。part = "<行key>-<頁番号>"(例 ka-3)。
  *  頁割り・並び順は data/titles-pages.json(_gen-titles-pages.py)が単一ソース=sitemapと不整合しない。 */
@@ -86,7 +85,6 @@ export default async function TitlesPartPage({ params }: { params: Promise<{ par
   );
   return (
     <div>
-      <DesignNav />
       <div className="mx-auto max-w-4xl px-4 py-8">
         <nav className="text-[12px] text-ink/55">
           <Link href="/" className="hover:text-ink">ホーム</Link> ›{" "}

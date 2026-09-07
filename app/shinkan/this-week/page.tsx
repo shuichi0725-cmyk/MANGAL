@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { DesignNav } from "@/lib/homeDesign";
 import ShinkanAbout from "@/components/ShinkanAbout";
 import ShinkanMonthNav from "@/components/ShinkanMonthNav";
 import ShinkanWeekList from "@/components/ShinkanWeekList";
@@ -26,7 +25,6 @@ export default function ShinkanThisWeekPage() {
   const jsonLd = shinkanJsonLd("今週の漫画・コミック新刊発売日一覧", `${SITE}/shinkan/this-week`, rows, known);
   return (
     <>
-      <DesignNav />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <div className="mx-auto w-full max-w-[720px] pb-12">
         <header className="border-b-[3px] border-[var(--color-accent)] px-4 py-3">

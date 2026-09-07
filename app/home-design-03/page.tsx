@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { bundle, DesignNav, seeded, volCount, Cover, CoverTile } from "@/lib/homeDesign";
+import { bundle, seeded, volCount, Cover, CoverTile } from "@/lib/homeDesign";
 
 export const metadata = { robots: { index: false, follow: false } };  // 実験頁=非索引
 
@@ -22,7 +22,6 @@ export default function Design03() {
   );
   return (
     <div className="min-h-screen bg-[var(--color-bg)] pb-10">
-      <DesignNav current={3} />
       <header className="bg-[var(--color-surface)] px-4 pb-4 pt-5 border-b-2 border-ink/80">
         <p className="text-[10px] font-semibold tracking-[0.25em] text-ink/50">WEEKLY MANGAL — 漫画と出会う週刊誌</p>
         <h1 className="mt-1 text-2xl font-black tracking-tight">MANGAL<span className="text-[var(--color-accent)]">.</span></h1>

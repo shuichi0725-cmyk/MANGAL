@@ -2,7 +2,6 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import GenreGrid from "@/components/GenreGrid";
 import { loadListBundle, loadGenreIntros } from "@/lib/loadData";
-import { DesignNav } from "@/lib/homeDesign";
 import { genreItems, genreMagazines, genreSubs, hubHref, pop, repTitle } from "@/lib/hubs";
 
 const SITE = "https://mangal-db.com";
@@ -64,7 +63,6 @@ export default async function GenrePage({ params }: { params: Promise<{ key: str
 
   return (
     <>
-      <DesignNav />
       <div className="min-h-screen bg-[var(--color-bg)] px-4 py-6 pb-16">
       <div className="mx-auto max-w-3xl">
         <Link href="/" className="spring-press text-[12px] text-[var(--color-accent)]">← ホーム</Link>

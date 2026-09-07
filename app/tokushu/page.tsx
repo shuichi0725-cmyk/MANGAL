@@ -1,5 +1,4 @@
 import { Suspense } from "react";
-import { DesignNav } from "@/lib/homeDesign";
 import TokushuClient from "@/components/TokushuClient";
 
 export const metadata = {
@@ -15,7 +14,6 @@ export const metadata = {
 export default function TokushuPage() {
   return (
     <div className="mx-auto max-w-2xl">
-      <DesignNav />
       <Suspense
         fallback={
           <div className="px-4 py-10 text-center">

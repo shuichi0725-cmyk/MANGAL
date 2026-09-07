@@ -1,7 +1,7 @@
 import Link from "next/link";
 import LikeButtonMock from "@/components/LikeButtonMock";
 import ScrollShortcutsMock from "@/components/ScrollShortcutsMock";
-import { bundle, DesignNav, seeded, volCount, Cover, CoverTile } from "@/lib/homeDesign";
+import { bundle, seeded, volCount, Cover, CoverTile } from "@/lib/homeDesign";
 
 export const metadata = { robots: { index: false, follow: false } };  // 実験頁=非索引
 
@@ -36,7 +36,6 @@ export default function Design09() {
 
   return (
     <div className="min-h-screen bg-[var(--color-bg)] pb-12">
-      <DesignNav current={9} />
       <ScrollShortcutsMock />
 
       {/* 1. ヒーロー: 今週の一冊 */}

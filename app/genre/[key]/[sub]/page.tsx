@@ -2,7 +2,6 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import GenreGrid from "@/components/GenreGrid";
 import { loadListBundle } from "@/lib/loadData";
-import { DesignNav } from "@/lib/homeDesign";
 import { genreSubItems, genreSubStaticParams, genreSubs, hasGenreSub, pop, repTitle, subLabel } from "@/lib/hubs";
 
 /** ジャンル下位面(2026-09-04 SEO): /genre/<key>/completed(完結済み) と /genre/<key>/<yyyy>s(年代)。
@@ -73,7 +72,6 @@ export default async function GenreSubPage({ params }: P) {
   };
   return (
     <>
-      <DesignNav />
       <div className="min-h-screen bg-[var(--color-bg)] px-4 py-6 pb-16">
         <div className="mx-auto max-w-3xl">
           <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }} />
