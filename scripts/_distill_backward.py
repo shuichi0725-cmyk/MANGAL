@@ -138,8 +138,27 @@ def stage_plan():
     print(f"楽天キャッシュhit: {len(rk)} / miss {len(need)} (missはlive楽天候補=後日)")
 
     # --- 3. 掲載ゲート ---
+    # ★恒久除外簿を先に読む(2026-09-07 新設): ai-todo.jsonl は --plan のたびに**まっさら再生成**されるので、
+    #   worksheet に「非漫画」と書いても次回また同じ候補が並ぶ = 裁定が永久に効かない構造穴だった
+    #   ([[daily_distill_hold_not_requeued]] の B柱版)。preorder側と同じ台帳 preorder-deny.jsonl を
+    #   両柱で共有し、裁定済みの題は候補から外す(1行={"title":…, "reason":…})。
+    _deny = set()
+    _deny_p = os.path.join(ROOT, "data", "seeds", "preorder-deny.jsonl")
+    if os.path.exists(_deny_p):
+        for _l in open(_deny_p, encoding="utf-8"):
+            try:
+                _t = json.loads(_l).get("title", "")
+            except Exception:
+                continue
+            if _t:
+                _deny.add(nk(clean_title(_t)))
+    _denied = 0
+
     publishable = []; lacking = []
     for (key, a0), w in works.items():
+        if key in _deny or nk(clean_title(w["residual"])) in _deny:
+            _denied += 1
+            continue
         vols = sorted(w["vols"], key=lambda v: v["n"])
         nums = [v["n"] for v in vols]
         miss_fields = []
@@ -184,6 +203,7 @@ def stage_plan():
                                  "n_vols": len(x["vols"]), "caption": str(x.get("caption",""))[:300],
                                  "TODO": {"is_manga": True, "slug": "", "genres": [], "catch": "", "synopsis": "", "demographic": ""}},
                                 ensure_ascii=False) + "\n")
+    print(f"恒久除外簿(preorder-deny.jsonl)で候補から除外: {_denied}")
     print(f"掲載可(AI worksheet待ち): {len(publishable)} / 欠落表: {len(lacking)}")
     print(f"→ {WORK}/ai-todo.jsonl を記入後 --emit")
     print(f"→ 欠落表 docs/production-diagnostics/backward-{YEAR}-lacking.tsv")

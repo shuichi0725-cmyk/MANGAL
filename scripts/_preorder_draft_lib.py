@@ -458,7 +458,13 @@ def make_slug(base, kana_raw=None, existing=None):
                         continue
                     _seg.append(_rest[:_i]); _seg.append(_p); _rest = _rest[_i + 1:]
                 _seg.append(_rest)
-                _src = " ".join(x for x in _seg if x) if len(_seg) > 1 else _k
+                # ★題に漢字が無い時は助詞分割を使わない(2026-09-07 実踏 てくのぱにっくゆにばーす型)。
+                #   この分割は「漢字題のどこが語境界か」をひらがな助詞の並びで復元する仕掛けなので、
+                #   **全ひらがな表記の外来語題**では『の』が助詞でなく語の一部(テク|ノ ではなく テクノ)であり、
+                #   逆に語を割ってしまう(→ teku-no-panikkuyuniba-su)。素のヨミをそのまま装置に渡せば
+                #   janome が長カタカナ連を1語で保ち、貪欲辞書変換が効く(→ techno-panic-universe)。
+                _has_kanji = bool(re.search(r"[一-鿿]", str(base)))
+                _src = " ".join(x for x in _seg if x) if (len(_seg) > 1 and _has_kanji) else _k
                 _fix = _slug_impl2(_src)
             except Exception:
                 _fix = None

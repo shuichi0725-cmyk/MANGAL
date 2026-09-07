@@ -48,9 +48,31 @@ def kata(s):
 
 
 def load_pub():
+    """slug→title_kana。★本番索引 **+ 未昇格の予約ドラフト**(2026-09-07 是正)。
+
+    以前は本番索引だけを見ていたため、**その日の日次蒸留が作ったばかりのドラフト**の行が
+    「本番に無い」= 残骸と誤判定されて消えていた(preview/drafts にしか居ないのは当然)。
+    掃除の目的は「もう存在しないslugの行を消す」ことなので、まだ本番に出ていないだけの
+    生きた候補は存在扱いにする(= 裁定前に簿から消えて取りこぼす事故を防ぐ)。
+    """
     idx = json.load(io.open(os.path.join(ROOT, "data", "manga-list-index.json"), encoding="utf-8"))
     F = {n: i for i, n in enumerate(idx["f"])}
-    return {r[F["slug"]]: r[F["title_kana"]] for r in idx["d"]}
+    pub = {r[F["slug"]]: r[F["title_kana"]] for r in idx["d"]}
+    import glob
+    try:
+        import yaml
+    except ImportError:
+        return pub
+    for d in (os.path.join(ROOT, ".preview-data", "manga"), os.path.join(ROOT, ".cache", "preorders", "drafts")):
+        for p in glob.glob(os.path.join(d, "*.yml")):
+            try:
+                y = yaml.safe_load(io.open(p, encoding="utf-8")) or {}
+            except Exception:
+                continue
+            s = y.get("slug")
+            if s and s not in pub:
+                pub[s] = y.get("title_kana") or ""
+    return pub
 
 
 def prune(path, slug_col, keep_fn, pub):
