@@ -125,6 +125,10 @@ export default function VolumeCoverflow({
   const n = vols.length;
   const init = Math.max(0, vols.findIndex((v) => v.number === 1));
   const [sel, setSel] = useState(init);
+  // ★「電子書籍で買う」の箱そのもののタップ = Kindle ボタンを押したのと同じ挙動にする
+  //   (2026-09-07 ユーザ要望)。実体のアンカーを click() するので、
+  //   将来 Kindle 側の挙動を変えても箱が自動で追従する(URL/属性の二重管理をしない)。
+  const kindleRef = useRef<HTMLAnchorElement>(null);
   const scroller = useRef<HTMLDivElement>(null);
 
   const loop = n > LOOP_MIN;
@@ -410,16 +414,33 @@ export default function VolumeCoverflow({
         <a href={links.amazon} onClick={(e) => openStoreApp(e, links.amazon, "amazon")} target="_blank" rel="noopener noreferrer"
            className="spring-press rounded-full bg-[#e69500] py-2 text-center text-sm font-bold text-white">Amazon</a>
       </div>
-      <div className="spring-press mt-2 rounded-2xl px-5 py-3 text-white shadow-soft"
-           style={{ background: "#3b82f6" }}>{/* 青5(2026-08-06 ユーザ確定。旧=紫グラデ) */}
+      {/* ★箱ごとタップ可(2026-09-07): 押すと Kindle ボタンと同一の遷移。
+          <a> の入れ子は不正HTMLなので、箱は role="link" の div にして実アンカーを click() する。
+          内側の2ボタンは stopPropagation = 楽天Kobo を押した時に Kindle まで開かない。 */}
+      <div
+        role="link"
+        tabIndex={0}
+        aria-label={`${n > 1 ? `第${cur.number}巻を` : ""}Kindleで見る(ブラウザで開きます)`}
+        onClick={() => kindleRef.current?.click()}
+        onKeyDown={(e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            kindleRef.current?.click();
+          }
+        }}
+        className="spring-press mt-2 cursor-pointer rounded-2xl px-5 py-3 text-white shadow-soft"
+        style={{ background: "#3b82f6" }}
+      >{/* 青5(2026-08-06 ユーザ確定。旧=紫グラデ) */}
         <span className="block text-[15px] font-bold">📱 電子書籍で買う</span>
         <span className="block text-[11px] text-white/80">
           {n > 1 ? `第${cur.number}巻を` : ""}ブラウザで開きます(Kindleは商品ページで「Kindle版」を選択)
         </span>
         <div className="mt-2 grid grid-cols-2 gap-2">
-          <a href={ebook.kindle} target="_blank" rel="noopener noreferrer"
+          <a ref={kindleRef} href={ebook.kindle} target="_blank" rel="noopener noreferrer"
+             onClick={(e) => e.stopPropagation()}
              className="rounded-full bg-white/95 py-1.5 text-center text-[12px] font-bold text-[#e69500]">Kindle</a>
           <a href={ebook.kobo} target="_blank" rel="noopener noreferrer"
+             onClick={(e) => e.stopPropagation()}
              className="rounded-full bg-white/95 py-1.5 text-center text-[12px] font-bold text-[#bf0000]">楽天Kobo</a>
         </div>
       </div>
