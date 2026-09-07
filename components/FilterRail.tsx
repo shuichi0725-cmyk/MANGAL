@@ -87,6 +87,19 @@ function useIsLg(): boolean {
   return isLg;
 }
 
+/** 到着ウォームを許してよい回線か。★ホームの `warmSearchIdle`(HeroD3)と同じ節度:
+ *  データセーバー / 2G では先読みしない(触れた時だけ読む)。 */
+function useArrivalWarmAllowed(): boolean {
+  const [ok, setOk] = useState(false);
+  useEffect(() => {
+    type NetInfo = { saveData?: boolean; effectiveType?: string };
+    const conn = (navigator as { connection?: NetInfo }).connection;
+    if (conn?.saveData || /2g/.test(conn?.effectiveType ?? "")) return;
+    setOk(true);
+  }, []);
+  return ok;
+}
+
 function RailInner({ masters }: { masters: RailMasters }) {
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -104,17 +117,21 @@ function RailInner({ masters }: { masters: RailMasters }) {
   const dest = pathname === "/list" ? "/list" : "/browse";
   const inPlace = pathname === "/browse" || pathname === "/list";
 
-  // ★索引を要求してよい条件(2026-09-08 ユーザ指摘「全ページ検索になってキャッシュを何度も解凍していないか」):
-  //   ①lg未満 = レールは display:none。何もしない(モバイルの費用をゼロにする)
-  //   ②/browse・/list = 画面本体が索引を読むので、レールも一緒に読んで損がない
-  //   ③検索語が既に在る = 利用者は検索している
-  //   ④それ以外(漫画詳細・ジャンル面…)= **レールに触れるまで読まない**。
-  //      素通りの読者に 6.06MB + 実機3.7秒の前計算を課さない。
-  //      触れた時点で読み始め、以後は module キャッシュで頁遷移しても再解凍しない。
-  //   ※未取得の間、パネルは loading 表示 = チップは全部出て件数だけ伏せる(押せば /browse へ飛ぶ)。
+  // ★索引を要求してよい条件(2026-09-08 ユーザ指摘「全ページ検索になってキャッシュを何度も
+  //   解凍していないか」→ 裁定「ホームと同じく到着で先読み」):
+  //   ①lg未満 = レールは display:none。**何もしない**(見えないUIに費用を払わせない)。
+  //      `hidden lg:block` はCSSだけなので、この matchMedia が無いとモバイルも
+  //      6.06MB + haystack前計算(実機3,773ms)を払う。2026-08-01に潰した同型の再発。
+  //   ②lg以上 = **到着で先読み**(ホーム HeroD3 の warmSearchIdle と同じ思想)。
+  //      取得自体は fetchIndex が head→idleでfull、デコード8,000行刻み、
+  //      haystack 500行刻み(clientSearch の FILL_CHUNK)なので初描画は汚さない。
+  //   ③saveData / 2G だけは先読みを見送り、レールに触れた時に読む。
+  //   ④/browse・/list・検索語ありは無条件(画面本体が索引を読む/利用者が検索している)。
+  //   ※未取得の間もパネルは使える = チップは全部出て件数だけ伏せる(押せば /browse へ飛ぶ)。
   const isLg = useIsLg();
   const [touched, setTouched] = useState(false);
-  const wantIndex = isLg && (inPlace || !!state.query || touched);
+  const arrivalWarm = useArrivalWarmAllowed();
+  const wantIndex = isLg && (inPlace || !!state.query || touched || arrivalWarm);
   const fp = useFilterPanelData({ query: state.query, enabled: wantIndex });
 
   const go = (next: FilterState) => {
