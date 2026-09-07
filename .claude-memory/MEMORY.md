@@ -78,6 +78,7 @@
 - [【最難関】奇子型=版違い混在](edition_mix_same_author_ayako.md) ／ [奇子型の経験則検出](kiko_multiedition_mixing_heuristic.md) ／ [版混在恒久是正=edition-canonical](edition_canonical_mechanism.md) ／ [アオアシ型=原版+ジュニア版再版](edition_dedup_aoashi.md)
 - [【型】ARMS型=レーベル表記ゆれ版分裂](imprint_split_arms_type.md) ／ [【型】ARMSワイド版型=刊行run分裂(57頁適用済)](edition_run_split_arms_wide_type.md)
 - [【型・是正済】1版しか無いのに「デラックス版」を自称する通常版](self_declared_deluxe_single_edition.md)
+- [【保留・今度やる】種2に在るのに1冊も出ていない版](hidden_editions_pending.md) — 4,620版。着手はレーベル分類から
 - [【残228頁】同type合流で別出版社の版が消える](edition_typemerge_hides_volumes.md) — 検出器あり
 - [【型・是正済】保健室の僕ら型=特装版パスの置換で同ISBN二重巻](isbn_dup_special_edition_pass.md)
 - [ISBN/巻数是正の進捗](data_quality_cleanup_state.md) ／ [【進行中】ISBNダブリ潰し](isbn_dup_cleanup_state.md) ／ [【残】巻番号残40件](volnum_remaining_merge_collection.md)
