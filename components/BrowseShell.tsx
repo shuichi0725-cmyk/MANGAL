@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Card from "@/components/ui/Card";
 import CatPict, { catKeyOf } from "@/components/CatPict";
 import type { IndexSummary } from "@/lib/schema";
 
@@ -84,36 +84,29 @@ export default function BrowseShell({ summary }: { summary: IndexSummary }) {
 
       {cats.length > 0 && (
         <section id="shell-cats" className="mb-7">
-          <div className="mb-2.5 flex items-baseline gap-2.5">
-            <h2 className="dot-heading text-[18px] font-black">カテゴリ</h2>
-            <span className="text-[9px] font-extrabold tracking-[0.26em] text-ink/45">BROWSE BY</span>
-          </div>
-          {/* ★CategoryHub と同一マークアップ(片方だけ変えると着地で飛ぶ)
-              = モバイルの等分化(2026-09-08)も両方に入れること。 */}
-          <ul className="flex flex-wrap border-[3px] border-[var(--color-ink)] bg-[var(--color-surface)] lg:flex-nowrap">
-            {cats.map((c, i) => {
-              const last = i === cats.length - 1;
-              const lastRowStart = Math.floor((cats.length - 1) / 4) * 4;
-              const div = [
-                i % 4 !== 3 && !last ? "border-r-2 border-[#333]" : "",
-                i % 4 === 3 && !last ? "lg:border-r-2 lg:border-[#333]" : "",
-                i < lastRowStart ? "border-b-2 border-[#333] lg:border-b-0" : "",
-              ].filter(Boolean).join(" ");
-              return (
-                <li key={c.label} className="min-w-0 grow basis-1/4 lg:basis-0 lg:flex-1">
-                  <Link href={c.href} className={`spring-press block h-full px-1 py-3 text-center lg:py-2 ${div}`}>
+          {/* ★独立カード方式に復帰(2026-09-08 ユーザ指摘)= CategoryHub と同一マークアップ
+              (片方だけ変えると着地でカードが飛ぶ)。0件落としで枚数が減っても、
+              独立カード + gap なら残りが詰まるだけ = 枠内に空の四角が残らない。 */}
+          <h2 className="text-[11px] font-semibold tracking-[0.18em] uppercase text-ink/50 mb-3">
+            カテゴリで探す
+          </h2>
+          <ul className="grid grid-cols-4 gap-2 lg:grid-cols-8 lg:gap-1.5">
+            {cats.map((c) => (
+              <li key={c.label}>
+                <Card href={c.href} className="h-full px-1 py-2.5 text-center lg:py-2">
+                  <span className="flex flex-col items-center justify-center gap-1">
                     <span className="cat-emoji text-base leading-none" aria-hidden="true">
                       {c.icon}
                     </span>
                     {catKeyOf(c.label) && <CatPict k={catKeyOf(c.label)!} />}
-                    <div className="mt-1 text-[11px] font-black leading-tight">{c.label}</div>
-                    <div className="cat-count mt-0.5 text-[9.5px] font-bold leading-none tabular-nums text-[var(--color-accent)]">
+                    <span className="text-[11px] font-semibold leading-tight">{c.label}</span>
+                    <span className="cat-count text-[10px] font-medium leading-none tabular-nums text-ink/40">
                       {c.count.toLocaleString()}
-                    </div>
-                  </Link>
-                </li>
-              );
-            })}
+                    </span>
+                  </span>
+                </Card>
+              </li>
+            ))}
           </ul>
         </section>
       )}
