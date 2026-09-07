@@ -143,9 +143,16 @@ function fetchIndex(): Promise<MangaListItem[]> {
 
 /** 一覧索引を返す。 未ロード時は null。 head→full差替/catchロード完了時は再レンダーで反映。
  *  @param opts.withCatch キャッチ文も必要な画面(=カード表示)だけ true。
- *         渡さなければ manga-catch-index.json(6.9MB) を落とさない。 */
-export function useMangaIndex(opts?: { withCatch?: boolean }): MangaListItem[] | null {
+ *         渡さなければ manga-catch-index.json(6.9MB) を落とさない。
+ *  @param opts.enabled false = **索引の取得を要求しない**(既定 true)。
+ *         ★2026-09-08: PC左レールが layout に入り「ホーム以外の全頁」でマウントされるように
+ *         なったため、素通りの読者(漫画詳細に着地しただけ)にも 6.06MB + haystack前計算3.7秒を
+ *         課していた。要求しない口を用意し、レール側が「見えている・検索する気がある」時だけ
+ *         true にする。★他画面が既に読み終えていればそれは使う(listenerは張ったまま)ので、
+ *         /browse を一度踏んだ後は全頁で件数が即出る。 */
+export function useMangaIndex(opts?: { withCatch?: boolean; enabled?: boolean }): MangaListItem[] | null {
   const withCatch = !!opts?.withCatch;
+  const enabled = opts?.enabled !== false;
   const [data, setData] = useState<MangaListItem[] | null>(_cache);
   const [, force] = useState(0);
   useEffect(() => {
@@ -154,9 +161,13 @@ export function useMangaIndex(opts?: { withCatch?: boolean }): MangaListItem[] |
       if (alive) setData(_cache);
     };
     _indexListeners.add(onIndex);
-    fetchIndex().then((d) => {
-      if (alive) setData(d);
-    });
+    if (enabled) {
+      fetchIndex().then((d) => {
+        if (alive) setData(d);
+      });
+    } else {
+      setData(_cache); // 取得はしないが、既に揃っている分は使う
+    }
     const onCatch = () => {
       if (alive) force((v) => v + 1);
     };
@@ -171,7 +182,7 @@ export function useMangaIndex(opts?: { withCatch?: boolean }): MangaListItem[] |
       _indexListeners.delete(onIndex);
       _catchListeners.delete(onCatch);
     };
-  }, [withCatch]);
+  }, [withCatch, enabled]);
   return data;
 }
 

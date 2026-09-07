@@ -1,6 +1,6 @@
 "use client";
 
-import { Suspense, useMemo, useState } from "react";
+import { Suspense, useEffect, useMemo, useState } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import FilterPanel from "@/components/FilterPanel";
 import { useFilterPanelData } from "@/lib/useFilterPanelData";
@@ -71,6 +71,22 @@ function SearchCard({
   );
 }
 
+/** lg(1024px)以上か。★`hidden lg:block` は CSS で隠すだけでマウントは走るので、
+ *  「見えないのに索引6.06MBを落として haystack を3.7秒前計算する」を止めるにはこれが要る。
+ *  2026-08-01 に同型を一度潰している(HomeClient が FilterPanel を2つ常時マウントし、
+ *  CSSで隠れている側の568msを毎回捨てていた)。同じ型なので同じ道具(matchMedia)で塞ぐ。 */
+function useIsLg(): boolean {
+  const [isLg, setIsLg] = useState(false);
+  useEffect(() => {
+    const mq = window.matchMedia("(min-width: 1024px)");
+    const on = () => setIsLg(mq.matches);
+    on();
+    mq.addEventListener("change", on);
+    return () => mq.removeEventListener("change", on);
+  }, []);
+  return isLg;
+}
+
 function RailInner({ masters }: { masters: RailMasters }) {
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -88,7 +104,18 @@ function RailInner({ masters }: { masters: RailMasters }) {
   const dest = pathname === "/list" ? "/list" : "/browse";
   const inPlace = pathname === "/browse" || pathname === "/list";
 
-  const fp = useFilterPanelData({ query: state.query });
+  // ★索引を要求してよい条件(2026-09-08 ユーザ指摘「全ページ検索になってキャッシュを何度も解凍していないか」):
+  //   ①lg未満 = レールは display:none。何もしない(モバイルの費用をゼロにする)
+  //   ②/browse・/list = 画面本体が索引を読むので、レールも一緒に読んで損がない
+  //   ③検索語が既に在る = 利用者は検索している
+  //   ④それ以外(漫画詳細・ジャンル面…)= **レールに触れるまで読まない**。
+  //      素通りの読者に 6.06MB + 実機3.7秒の前計算を課さない。
+  //      触れた時点で読み始め、以後は module キャッシュで頁遷移しても再解凍しない。
+  //   ※未取得の間、パネルは loading 表示 = チップは全部出て件数だけ伏せる(押せば /browse へ飛ぶ)。
+  const isLg = useIsLg();
+  const [touched, setTouched] = useState(false);
+  const wantIndex = isLg && (inPlace || !!state.query || touched);
+  const fp = useFilterPanelData({ query: state.query, enabled: wantIndex });
 
   const go = (next: FilterState) => {
     const qs = filtersToSearchParams(next).toString();
@@ -98,7 +125,11 @@ function RailInner({ masters }: { masters: RailMasters }) {
   };
 
   return (
-    <div className="sticky top-4 space-y-3">
+    <div
+      className="sticky top-4 space-y-3"
+      onFocusCapture={() => setTouched(true)}
+      onPointerDownCapture={() => setTouched(true)}
+    >
       <SearchCard
         action={dest}
         value={q}

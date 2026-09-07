@@ -27,6 +27,8 @@ import type { MangaListItem } from "@/lib/schema";
  *   - withCatch  : カード表示にキャッチ文が要るか(/browse=要る, /list=要らない)
  *   - query      : 検索語の出どころ(/browse=FilterState.query, /list=独立state の q)
  *   - authorsReady: 著者50音を作ってよいか(/list は抽斗を一度開くまで作らない=実測166msの節約)
+ *   - enabled     : 索引の取得を要求してよいか(既定 true)。PC左レールだけ false から始める
+ *                   = 素通りの読者に 6.06MB + haystack前計算3.7秒を課さないため(2026-09-08)。
  */
 export type FilterPanelData = {
   /** 索引そのもの(未到着=null)。 */
@@ -56,11 +58,12 @@ export function useFilterPanelData(opts: {
   query: string;
   withCatch?: boolean;
   authorsReady?: boolean;
+  enabled?: boolean;
 }): FilterPanelData {
-  const { query, withCatch = false, authorsReady = true } = opts;
+  const { query, withCatch = false, authorsReady = true, enabled = true } = opts;
 
   // ★一覧 manga は軽量索引をクライアント遅延ロード (= SSR props で 65k を送らない)。
-  const mangaIndex = useMangaIndex({ withCatch });
+  const mangaIndex = useMangaIndex({ withCatch, enabled });
   const manga = useMemo(() => mangaIndex ?? [], [mangaIndex]);
   const indexLoading = mangaIndex === null;
 
@@ -72,9 +75,11 @@ export function useFilterPanelData(opts: {
   const [altTick, setAltTick] = useState(0);
   useEffect(() => onAltLoaded(() => setAltTick((v) => v + 1)), []);
   useEffect(() => {
-    if (mangaIndex) prewarmSearch(mangaIndex); // 手すきで前計算(検索開始時のワンショット遅延を消す)
-  }, [mangaIndex]);
+    // ★enabled=false の間は前計算もしない(haystack は実機3.7秒。休止中のレールに払わせない)
+    if (enabled && mangaIndex) prewarmSearch(mangaIndex); // 手すきで前計算(検索開始時のワンショット遅延を消す)
+  }, [enabled, mangaIndex]);
   useEffect(() => {
+    // 検索語が在る=利用者は検索している → 休止中でもフル索引を要求してよい
     if (hasQuery) ensureFullIndex(); // 検索確定=フル索引を即時要求(head 200件だけの誤答窓を閉じる)
   }, [hasQuery]);
 
