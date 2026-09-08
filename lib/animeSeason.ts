@@ -56,15 +56,41 @@ function seasonNum(key: string): number {
   return parseInt(y, 10) * 4 + (SEASON_IDX[s] ?? 0);
 }
 
-/** いまのJST日付が属する季キー("2026-summer")。viewに無ければ時系列で直近過去 */
-export function currentSeasonKey(order: string[]): string {
+/** いまのJST日付そのものが属する季キー("2026-summer")。viewの在否は見ない。 */
+export function todaySeasonKey(): string {
   const jst = new Date(Date.now() + 9 * 3600 * 1000);
   const y = jst.getUTCFullYear();
   const m = jst.getUTCMonth() + 1;
   const s = m <= 3 ? "winter" : m <= 6 ? "spring" : m <= 9 ? "summer" : "fall";
-  const now = seasonNum(`${y}-${s}`);
+  return `${y}-${s}`;
+}
+
+/** いまのJST日付が属する季キー("2026-summer")。viewに無ければ時系列で直近過去 */
+export function currentSeasonKey(order: string[]): string {
+  const now = seasonNum(todaySeasonKey());
   const past = order.filter((k) => seasonNum(k) <= now);
   return past.length ? past[past.length - 1] : order[order.length - 1];
+}
+
+/** ★ヘッダーナビ「アニメ化」用の2値(2026-09-08 ユーザ指示「ホームと同じ行き先に」+
+ *  「日付で勝手に変わるなら後者」)。
+ *
+ *  なぜ2値だけか: ナビは layout に載る = **全69,241頁の RSC ペイロードに乗る**。
+ *  order(222件≒3KB)を渡すと 3KB×全頁で数百MB増える。渡すのは文字列2つ(約40B)に留める。
+ *
+ *  使い方: `now` をサーバ側の既定値にし、クライアントで「今日が next に達していれば next へ」
+ *  と補正する。これで**静的書き出しのまま季が変わった翌日から正しい行き先になる**
+ *  (旧: ビルド時に焼くだけなので、次のビルドまで前の季を指したままだった)。
+ *  ★next は **view に実在する季**しか返さない = 存在しない頁へ飛ばさない。 */
+export function animeNavSeasons(order: string[]): { now: string; next?: string } {
+  const now = currentSeasonKey(order);
+  const i = order.indexOf(now);
+  return { now, next: i >= 0 ? order[i + 1] : undefined };
+}
+
+/** 今日が指定の季に達しているか(クライアント側の補正判定用) */
+export function seasonReached(key: string): boolean {
+  return seasonNum(todaySeasonKey()) >= seasonNum(key);
 }
 
 /** 前後の季キー(履歴ナビ用)。orderは時系列昇順前提 */

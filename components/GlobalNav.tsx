@@ -2,6 +2,8 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
+import { seasonReached } from "@/lib/animeSeason";
 
 /**
  * 全ページ共通のアイコンナビ(★2026-09-07 layout へ一本化)。
@@ -48,15 +50,28 @@ function NavSvg({ label }: { label: string }) {
 //   外した2つは孤立しない = AI書評家リーグ: ホーム本体 + ≡メニュー + フッター /
 //   今日の一冊 過去ログ: フッター + ホームのコーナー(FeaturedDaily / SansedaiDaily)から到達可。
 //   ★空いた枠には本来「サービス(サブスク)」を出したいが、導線の形を決めてから(宿題)。
-const RIGHT: Array<[string, string]> = [
+const RIGHT_FIXED: Array<[string, string]> = [
   ["検索", "/browse"],
   ["新作", "/shinkan"],
-  ["アニメ化", "/anime"],
-  ["使い方", "/about"],
 ];
+const RIGHT_TAIL: Array<[string, string]> = [["使い方", "/about"]];
 
-export default function GlobalNav() {
+export default function GlobalNav({ animeNow, animeNext }: { animeNow: string; animeNext?: string }) {
   const pathname = usePathname();
+  // ★「アニメ化」の行き先は**ホームの今季コーナーと同じ** `/anime/<季>`(2026-09-08 ユーザ指示)。
+  //   サーバ側の既定 = ビルド時の季。水和後に**今日の日付**で見直し、次の季に達していれば
+  //   そちらへ差し替える = 静的書き出しのまま季替わりに追随する
+  //   (旧: ビルド時に焼くだけ=次のビルドまで前の季を指したまま)。
+  //   ★animeNext は view に実在する季しか来ない=存在しない頁へは飛ばさない。
+  const [season, setSeason] = useState(animeNow);
+  useEffect(() => {
+    if (animeNext && seasonReached(animeNext)) setSeason(animeNext);
+  }, [animeNext]);
+  const RIGHT: Array<[string, string]> = [
+    ...RIGHT_FIXED,
+    ["アニメ化", `/anime/${season}`],
+    ...RIGHT_TAIL,
+  ];
   const isHome = pathname === "/";
   const cell = "spring-press flex flex-col items-center gap-0.5 active:scale-90";
   const frame = isHome

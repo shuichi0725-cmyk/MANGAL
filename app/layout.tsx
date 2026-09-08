@@ -8,6 +8,8 @@ import SiteHeader from "@/components/SiteHeader";
 import GlobalNav from "@/components/GlobalNav";
 import PageShell from "@/components/PageShell";
 import FilterRail from "@/components/FilterRail";
+import animeView from "@/data/anime-seasons-view.json";
+import { animeNavSeasons, type AnimeSeasonsView } from "@/lib/animeSeason";
 import { loadMasters } from "@/lib/loadData";
 import { dotGothic } from "@/lib/fonts";
 
@@ -29,6 +31,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   // ★PC左レール = 検索窓 + 絞り込みパネル。マスタ(出版社/雑誌/ジャンル/分野)を渡す。
   //   loadMasters はモジュールキャッシュ済み。作品索引はレール側がクライアントで遅延ロードする。
   const masters = loadMasters();
+  // ★ナビ「アニメ化」の行き先(= ホームの今季コーナーと同じ /anime/<季>)。
+  //   order(222件)ではなく**文字列2つだけ**を渡す = 全69,241頁のRSCペイロードに乗るため。
+  const animeNav = animeNavSeasons((animeView as unknown as AnimeSeasonsView).order);
   return (
     <html lang="ja">
       <body className={`min-h-screen flex flex-col theme-d3 ${dotGothic.variable}`}>
@@ -40,7 +45,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {/* ★2026-09-07: アイコンナビと PC左レールを layout へ一本化(旧= 47箇所が各自 DesignNav
             を呼び、レールはホームと漫画頁だけ)。ホームは PageShell 側で対象外にしている。 */}
         <main className="flex-1">
-          <GlobalNav />
+          <GlobalNav animeNow={animeNav.now} animeNext={animeNav.next} />
           <PageShell rail={<FilterRail masters={masters} />}>{children}</PageShell>
           <SiteFooter />
         </main>
