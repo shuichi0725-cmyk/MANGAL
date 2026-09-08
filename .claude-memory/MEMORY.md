@@ -49,6 +49,7 @@
 - [【設計済】型別マニフェスト+出荷ゲート](intake_manifest_gate_design.md) ／ [日次蒸留の分類器=型1/型4に従う](daily_distill_classifier_gate.md)
 - [【厳守】Driveはcodeのみ](gdrive_code_folder_only.md) ／ [D:外付け認識外れ→挿し直し待ちのみ](d_drive_external_flaky.md) — レター探索/変更は絶対しない
 - [【残】OTOMO全集補完](otomo_complete_works_pending.md) — ユーザ資料待ち ／ [全集コーナー=素材収集済み](zenshuu_corner_state.md) — まとめGO待ち
+- [【宿題・GO待ち】Amazonサービス(サブスク)アフィ](amazon_service_affiliate_plan.md) — カート周り5案は提示済み・裁定待ち。小説原作の判別=AniList source(NOVELは使わない)
 - [収益設計=ストア連動](store_affiliate_architecture.md) — PR表記必須
 - [画集=別カテゴリ掲載](art_book_inclusion.md)
 - [【全実装済・機能蒸留待ち】検索フィルター一式](filter_ui_todo_2026_09_05.md) — UI5点+巻数+/list3件+死にprop+Esc+共有フック化…
