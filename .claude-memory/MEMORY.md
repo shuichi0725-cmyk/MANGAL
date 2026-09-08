@@ -12,6 +12,7 @@
 - [巻抜け仮想](volgap_virtual_tool_trigger.md) ／ [【手順】巻抜けは4型=種2在否を先に判定](volgap_diagnosis_order.md) ／ [巻抜け大半=under-merge](volgap_mostly_undermerge.md) ／ [【進行中】巻抜けper-case仕上げ](volgap_per_case_cleanup_state.md)
 - [【再利用】2026新刊蒸留フロー](distill_2026_pipeline.md)
 - [preview実測+stale事故史](preview_deploy_pitfalls.md) ／ [preview反映=GitHub Actions実体](preview_deploy_github_actions.md)
+- [【番人・必ず回す】共通シェルの配線ゲート](shell_wiring_gates.md) — 器の費用/絞り込みUIの境界。UI・シェルを触ったら回す(負テストで「壊したら落ちる」を確認済み)
 - [【番人】検索スナップショットゲート](search_snapshot_gate.md) ／ [検索warm並走の競合型](search_warm_race_2026_08_31.md) ／ [検索が遅い実測内訳](search_perf_hotspots_2026_08.md) ／ [軽量索引=検索v2/配列化](lightweight_index_architecture.md)
 - [【✅】死蔵検索索引=廃止済](dead_search_index_retire_pending.md) ／ [【厳守】索引形式変更=ファイル名バンプ](index_format_change_versioned_filename.md) ／ [【計画】本番軽量化(索引スリム)](index_lightening_plan.md)
 - [【再発厳禁】キャッシュが修正を隠した事故](deploy_cache_swr_hid_the_fix.md) ／ [/browse がサーバ描画0だった](browse_ssr_shell_and_seo.md)

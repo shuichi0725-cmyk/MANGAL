@@ -47,3 +47,24 @@ haystack同期 0ms(0行)      ← 「検索を押した瞬間に残りを同期�
 - ★★ただし**この報告に辿り着くまで7時間、古いHTMLを見せられていた** → [[deploy_cache_swr_hid_the_fix]]
 
 関連 [[search_snapshot_gate]] [[lightweight_index_architecture]] [[deploy_cache_swr_hid_the_fix]] [[browse_ssr_shell_and_seo]]
+
+## ★2026-09-08 再発と是正(= 「どの頁で何を読むか」の層)
+
+ユーザ報告「前回の週次で検索が今までで一番良かった。今回は遅くなる要素が無いか確認して」。
+**検索エンジン本体(`lib/clientSearch.ts`)と索引ロード層(`lib/useMangaIndex.ts`)は前回週次から差分ゼロ**。
+壊れていたのは器の配線だった = 上の実測値は今も有効。
+
+- **原因**: PC左レール(FilterRail)を `app/layout.tsx` へ入れて全頁常設にした(`1c0b29f20`)結果、
+  **ホーム以外の全頁**(漫画詳細69,241頁を含む)で索引を取得し haystack を前計算していた。
+  `hidden lg:block` は CSS で隠すだけなので、**レールを一生見ないモバイルも全額払っていた**。
+  = 2026-08-01 に潰した「見えない FilterPanel を2つ持つ」と**同じ型の再発**。
+- **実測(2026-09-08)**: 一覧索引 **6.06MB**(gzip後・生23.1MB) / 別名索引 **1.35MB** /
+  `manga-list-head.json` 13.7KB。CPU側は上の実機値(取得496ms・デコード218ms・haystack 3,773ms)。
+  ★配信ヘッダは `max-age=14400, s-maxage=86400` + gzip で効いていた = **効いていなかったのはCPU側**。
+- **是正**: `useMangaIndex/useFilterPanelData` に `enabled`(既定true)を追加。レールは
+  `isLg && (/browse|/list || 検索語 || 触れた || 到着ウォーム可)`。
+  **モバイルは matchMedia で完全休止**、PCは到着で先読み(ユーザ裁定。別名索引も先読み=B案)。
+- **同時に見つけた別件**: 著者50音(実測166ms)を、節が畳まれている(=描画もされない)のに
+  索引到着と同時に作っていた。`authorsReady: touched` に(→ /list は 2026-08-01 から同じ対処済みだった)。
+- ★**この型を機械で封じた** → [[shell_wiring_gates]]。**UI/シェルを触ったらまずそれを回す**。
+

@@ -74,7 +74,7 @@ python scripts/_weekly-mode.py    # exit 0=DATA / 1=SURFACE / 2=CODE (根拠フ�
 - **CODE週**(app/manga・layout・components・lib等): 従来どおり手順3〜6のフルビルド。
 - 判定の正=script(CODE_SCOPEはdiff-deployと同一定義)。迷ったらCODE週(フル)に倒す。
 
-### 3. フルビルド (★CODE週のみ。実測2.5〜3.5h→★2026-09-02実測42分[新PC・Defender除外・90,269ルート・初回300s超過120件は全て2回目で通過]、バックグラウンド+Monitor)
+### 3. フルビルド (★CODE週のみ。★**2026-09-08 本番実測36分**[91,157ルート・コンパイル4.0分・out/manga 138,480枚・FATAL 0]。2026-09-02リハーサルは42分[90,269ルート]、バックグラウンド+Monitor)
 ★**preflight全通過(exit 0)を確認してから開始**。
 ★**2026-07-17 C:完結に全面改訂(ユーザ裁定)**: ジャンクション全廃・staging=`.cache/proddata`(実体コピー)・
 out/.next=C:実体。**D:はバックアップ倉庫のみでビルド経路に入れない**(外付けD:はストールしやすく、
@@ -116,6 +116,9 @@ python scripts/_r2-sync.py --bucket mangal-site --prune
 ```
 - ★**アップ無しのリハーサル= `--dry --prune`**(認証不要。索引/カレンダー overlay+差分計算+prune判定だけで終了。
   2026-09-02実測: ハッシュ照合~10分、PUT 180,880 / 削除136 と出た=CODE週の全量PUT見込みが事前に分かる)。
+- ★**2026-09-08 本番実績(CODE週)**: PUT **183,488** / prune **647**(漫画286頁+著者24+旧チャンク)/
+  同期~40分 / 疎通 PASS 14・FAIL 0 / 索引23.1MB / edge purge 42パス / IndexNow 298URL受理。
+  ★**KV自動連鎖はこの回も落ちた**(下の「毎回落ちうる」を参照)= 単独再実行で解決。
 - ★**KV同期(_kv-redirects-sync.py)は r2-sync 成功時に自動連鎖**(2026-08-26機械化。旧=手動2コマンド
   で忘れると「pruneで頁を消したのに301が付いてこない=404の窓」)。自動連鎖が失敗すると exit 4 で
   名指しされるので単独再実行。抑止は `--no-kv`。Worker側は6h TTLで自動再読込。
