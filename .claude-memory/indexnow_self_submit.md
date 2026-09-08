@@ -96,3 +96,17 @@ PUT は公開slug なのに DELETE/purge/IndexNow だけ stem。 stem≠slug は
 台帳0なら次回は通知0(=想定挙動)。 手動送信は `--drain [--purge] [--max N]`。
 関連: [[crawler_hints_ineffective_on_workers_r2]] [[hosting_worker_r2_architecture]] [[deploy_environments_state]]
 [[repo_is_public_github]] [[pubslug_src_stem_generator_trap]] [[r2_orphan_pages_prune_missing]] [[deploy_cache_swr_hid_the_fix]]
+
+## ★backstop(10,000/回)が初めて実発火した回 (= 2026-09-08 週次・実測)
+
+ヘッダーナビを差し替えた週(AI書評→アニメ化。`app/layout.tsx` に載る**可視要素**)で、
+pending が **91,132 URL / 実質無変更 0**、finalize の drain が **10,000 受理・81,132 持ち越し**になった。
+
+★これは**空振りでも本文ハッシュ層の退行でもない**。共通シェルの可視要素(ナビの文言/リンク先)は
+クローラが読む本文そのものなので、**全頁の本文ハッシュが正しく変わる**。同じCODE週でも
+前日 00:32 の回は 298 URL だった(=そちらはチャンクハッシュだけの変化を正しく落とせていた)。
+**「9万件出た = 壊れた」と誤読して案A-2を再調査しない**こと。判別法 = 変更が `layout.tsx` /
+`GlobalNav` 等**全頁に出る可視要素**か、それとも頁内部のロジックだけか。
+
+- 帰結: 持ち越しは次の drain で自動消化(週次/機能蒸留/差分反映のどれでも)。放置してよい。
+- Google は IndexNow を読まないので、この持ち越しに SEO 上の緊急性は無い(sitemap が正)。
