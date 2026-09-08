@@ -138,7 +138,12 @@ function RailInner({ masters }: { masters: RailMasters }) {
   const [touched, setTouched] = useState(false);
   const arrivalWarm = useArrivalWarmAllowed();
   const wantIndex = isLg && (inPlace || !!state.query || touched || arrivalWarm);
-  const fp = useFilterPanelData({ query: state.query, enabled: wantIndex });
+  // ★著者50音(実測166ms)は**触るまで作らない**(2026-09-08)。「著者(五十音)」の節は
+  //   既定で畳まれており(Section は `{open && children}` = 閉じている間は描画もしない)、
+  //   それなのに索引到着と同時に 69,241件×著者を畳んでソートしていた。
+  //   /list は同じ理由で `authorsReady: filterUsed` にしてある(2026-08-01)。レールだけ
+  //   渡し忘れていた= 見えない物のために払う、直前に潰したのと同じ型。
+  const fp = useFilterPanelData({ query: state.query, enabled: wantIndex, authorsReady: touched });
 
   // ★別名索引(manga-alt-index.json 1.35MB)も先読みする(2026-09-08 ユーザ裁定=B案)。
   //   旧: 「題名ヒット0」になって初めて取りに行くので、英題・通称で打った初回だけ

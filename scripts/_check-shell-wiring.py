@@ -164,9 +164,10 @@ def check1_shell_cost(heavy: dict[str, list[str]]) -> None:
         else:
             ok(f"器の費用 {f}: 抑制あり({', '.join(guards)})")
 
-    # 台帳にあるのに、もう器から到達しない entry は掃除を促す(腐り防止)
+    # 台帳にあるのに、もう器から到達しない entry は掃除を促す(腐り防止)。
+    # ★"_" 始まりはメタキー(_readme 等)なので対象外(消せと案内すると読み手を惑わす)。
     for f in allow:
-        if f not in targets:
+        if not f.startswith("_") and f not in targets:
             ok(f"許可台帳の {f} は現在 layout から到達しない(entry を消してよい)")
 
     if not targets:
