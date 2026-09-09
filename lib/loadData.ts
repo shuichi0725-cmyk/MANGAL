@@ -237,6 +237,19 @@ export function loadMasters(): Masters {
   return _masters;
 }
 
+/** ★左レール(全ページの共通シェル)へ props で渡してよい**軽いマスタだけ**を返す。
+ *  genres(1,199B) + demographics(166B) = 1.4KB。
+ *  ★publishers(41,973B) / magazines(6,626B) は**絶対にここへ足さない**:
+ *    layout 経由で全ルートの RSC ペイロード(HTML内 + .txt の2箇所)に焼かれ、
+ *    2026-09-09 の実測で **約9.9GB**(out/ 19.0GB の52%)を生んだ。
+ *    重いマスタは `/data/masters.json`(生成= scripts/gen-masters-json.ts)から
+ *    レールがクライアントで取る([[useRailMasters]])。
+ *  番人 = `scripts/_check-shell-wiring.py` の「直列化ペイロードの床」検査。 */
+export function loadRailMasters(): Pick<Masters, "genres" | "demographics"> {
+  const m = loadMasters();
+  return { genres: m.genres, demographics: m.demographics };
+}
+
 // 画集 (= data/art-books、 161件程度) のみ読む軽量ローダ。
 let _artBooks: ArtBook[] | null = null;
 export function loadArtBooks(): ArtBook[] {

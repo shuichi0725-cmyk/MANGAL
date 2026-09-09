@@ -43,6 +43,19 @@ HEAVY = ("useMangaIndex", "useFilterPanelData", "ensureFullIndex", "prewarmSearc
 # 実装そのもの(= lib 配下)は対象外。見たいのは「器にマウントされる部品」の側。
 WATCH_DIRS = ("app/", "components/")
 
+# ★重いサーバローダ = 呼んだ結果を props で渡すと **全ルートの RSC ペイロード**
+#   (HTML内インライン + .txt の2箇所)に直列化される。 2026-09-09 実害:
+#   layout の `loadMasters()` が publishers+magazines 48.6KB を全92,000ルートへ焼き、
+#   **約9.9GB**(out/ 19.0GB の52%)を生んだ。 `/contact` は80.6KB中69.4KBが出版社リストだった。
+#   ※ import しただけ(= 大きいJSONから2文字列だけ導出する等)は無害。 見るのは**呼び出し**。
+HEAVY_LOADERS = (
+    "loadMasters", "loadListBundle", "loadAllManga", "loadArtBooks",
+    "loadMangaListIndex", "loadTitlesPages", "loadAiReviews",
+)
+# 最小頁の床を測る実測プローブ(内容がほぼ無い頁 = 太っていれば器のせい)。
+FLOOR_PROBE = os.path.join("out", "contact.html")
+FLOOR_LIMIT_KB = 45.0
+
 IMPORT_RE = re.compile(r'^\s*import\s+(?:[^\'"]*?\s+from\s+)?[\'"]([^\'"]+)[\'"]', re.M)
 
 # Tailwind 既定のブレイクポイント
@@ -239,6 +252,61 @@ def check2_breakpoints() -> None:
            f"(<{want}px=抽斗 / >={want}px=レール、CSSとmatchMediaも一致)")
 
 
+def check3_serialized_payload() -> None:
+    """検査3: 器に載るサーバ部品が**重いローダを呼んで props に流していないか**(静的)。
+
+    ★これが 2026-09-09 に抜けた穴。 検査1は「クライアントの重い経路」を見るので、
+      `const masters = loadMasters()` を props で渡す**サーバ側の直列化**は素通りした。
+    """
+    reachable, _ = walk_from_layout()
+    hits: list[tuple[str, list[str]]] = []
+    # ★walk_from_layout の seen は**絶対パス**。 rel() を通してから WATCH_DIRS で絞る
+    #   (2026-09-09 の負テストで発覚: 絶対パスのまま startswith("app/") して全件素通りした)。
+    for path in sorted(reachable):
+        f = rel(path)
+        if not f.startswith(WATCH_DIRS):
+            continue
+        if not os.path.exists(path):
+            continue
+        try:
+            src = open(path, encoding="utf-8").read()
+        except Exception:
+            continue
+        found = [n for n in HEAVY_LOADERS if re.search(r"\b" + n + r"\s*\(", src)]
+        if found:
+            hits.append((f, found))
+
+    if not hits:
+        ok("直列化ペイロード = 器に重いローダの呼び出し無し")
+        return
+    for f, names in hits:
+        fail(
+            "★器に載る部品が重いローダを呼ぶ: " + f + " (" + ", ".join(names) + ")",
+            "戻り値を props で渡すと**全ルートのRSCペイロード**(HTML内 + .txt の2箇所)に焼かれる。\n"
+            "       2026-09-09 実測: layout の loadMasters() = 48.6KB x 2 x 92,000ルート = 約9.9GB。\n"
+            "       小さく削って渡す(例 loadRailMasters = genres+demographics 1.4KB)か、\n"
+            "       静的JSONにしてクライアントで取る(例 /data/masters.json + lib/useRailMasters.ts)。",
+        )
+
+
+def check4_page_floor() -> None:
+    """検査4: 直近ビルドの**最小頁の実サイズ**(機構を問わず「太ったら鳴る」実測の網)。
+
+    ★WARN 止まり = preflight はビルドの**前**に走るので、ここで FAIL にすると
+      「太りを直すビルド」自体を止めてしまう。 数字を毎回見せることが目的。
+    """
+    probe = os.path.join(ROOT, FLOOR_PROBE)
+    if not os.path.exists(probe):
+        ok("最小頁の床 = 未計測(まだ " + FLOOR_PROBE + " が無い)")
+        return
+    kb = os.path.getsize(probe) / 1024
+    if kb <= FLOOR_LIMIT_KB:
+        ok("最小頁の床 %s = %.1fKB(上限 %.0fKB)" % (FLOOR_PROBE, kb, FLOOR_LIMIT_KB))
+    else:
+        ok("⚠ 最小頁の床 %s = %.1fKB > 上限 %.0fKB(前回ビルド時点。"
+           "器に重い物が載っていないか検査3と併せて見る)" % (FLOOR_PROBE, kb, FLOOR_LIMIT_KB))
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--list", action="store_true", help="到達部品と重い経路の一覧だけ出す")
@@ -256,6 +324,8 @@ def main() -> int:
 
     check1_shell_cost(heavy)
     check2_breakpoints()
+    check3_serialized_payload()
+    check4_page_floor()
 
     for m in oks:
         print(f"  OK   {m}")

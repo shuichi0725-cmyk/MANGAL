@@ -10,7 +10,7 @@ import PageShell from "@/components/PageShell";
 import FilterRail from "@/components/FilterRail";
 import animeView from "@/data/anime-seasons-view.json";
 import { animeNavSeasons, type AnimeSeasonsView } from "@/lib/animeSeason";
-import { loadMasters } from "@/lib/loadData";
+import { loadRailMasters } from "@/lib/loadData";
 import { dotGothic } from "@/lib/fonts";
 
 export const metadata: Metadata = {
@@ -28,9 +28,14 @@ export const metadata: Metadata = {
 //    globals.css の :root トークンとして残存=theme-d3クラスを外せば即戻せる)
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
-  // ★PC左レール = 検索窓 + 絞り込みパネル。マスタ(出版社/雑誌/ジャンル/分野)を渡す。
-  //   loadMasters はモジュールキャッシュ済み。作品索引はレール側がクライアントで遅延ロードする。
-  const masters = loadMasters();
+  // ★PC左レール = 検索窓 + 絞り込みパネル。 渡すのは**軽い2つだけ**(genres 1,199B + demographics 166B)。
+  //   ★2026-09-09: publishers(41,973B)+magazines(6,626B) を props で渡していたため、
+  //     全ルートの RSC ペイロード(HTML内インライン + .txt の2箇所)に焼かれて **約9.9GB** を
+  //     生んでいた(out/ 19.0GB の52%・ユーザ報告「容量が倍くらいに増えた」)。
+  //     → `/data/masters.json` へ集約しレールがクライアントで取る([[useRailMasters]])。
+  //     animeNav と同じ規律 = **全69,241頁に載る物は最小限だけ渡す**。
+  //   作品索引はレール側がクライアントで遅延ロードする。
+  const masters = loadRailMasters();
   // ★ナビ「アニメ化」の行き先(= ホームの今季コーナーと同じ /anime/<季>)。
   //   order(222件)ではなく**文字列2つだけ**を渡す = 全69,241頁のRSCペイロードに乗るため。
   const animeNav = animeNavSeasons((animeView as unknown as AnimeSeasonsView).order);

@@ -6,6 +6,7 @@ import FilterPanel from "@/components/FilterPanel";
 import { useFilterPanelData } from "@/lib/useFilterPanelData";
 import { prewarmAlt } from "@/lib/clientSearch";
 import { onFullIndex } from "@/lib/useMangaIndex";
+import { useRailMasters } from "@/lib/useRailMasters";
 import {
   emptyFilterState,
   filtersFromSearchParams,
@@ -31,7 +32,10 @@ import type { ListBundle } from "@/lib/schema";
  * ★`useSearchParams()` を使うので **Suspense 必須**(静的書き出しではフォールバックがHTMLに焼かれる)。
  *   フォールバックは素のGETフォーム = JS前でも検索に飛べる([[browse_ssr_shell_and_seo]] の教訓)。
  */
-export type RailMasters = Pick<ListBundle, "publishers" | "magazines" | "genres" | "demographics">;
+/** ★レールに props で渡すのは**軽い2つだけ**(genres 1,199B + demographics 166B)。
+ *  publishers(41,973B) / magazines(6,626B) は `/data/masters.json` からクライアント取得する
+ *  = 全ルートの RSC ペイロードに載せない([[useRailMasters]] に経緯)。 */
+export type RailMasters = Pick<ListBundle, "genres" | "demographics">;
 
 const CARD = "border-2 border-[var(--color-accent)] bg-[#050505] px-2.5 py-2 shadow-[3px_3px_0_rgba(217,248,67,0.14)]";
 const BTN = "mt-2 w-full border-2 border-[var(--color-accent)] bg-[#050505] py-1.5 text-[12px] font-black text-[var(--color-accent)] transition active:scale-[0.97]";
@@ -145,6 +149,11 @@ function RailInner({ masters }: { masters: RailMasters }) {
   //   渡し忘れていた= 見えない物のために払う、直前に潰したのと同じ型。
   const fp = useFilterPanelData({ query: state.query, enabled: wantIndex, authorsReady: touched });
 
+  // ★出版社/連載誌マスタ(48.6KB)は静的JSONから1回だけ取る(2026-09-09)。
+  //   レールが見えている時(isLg)だけ = モバイルは1バイトも払わない。
+  //   未着の間は出版社/連載誌の節が空 = 両節とも既定で畳まれているので実害なし。
+  const heavy = useRailMasters(isLg);
+
   // ★別名索引(manga-alt-index.json 1.35MB)も先読みする(2026-09-08 ユーザ裁定=B案)。
   //   旧: 「題名ヒット0」になって初めて取りに行くので、英題・通称で打った初回だけ
   //       実測1,636ms(Android)待たされていた。ホーム経由だけ HeroD3 が先読みして無症状。
@@ -180,7 +189,7 @@ function RailInner({ masters }: { masters: RailMasters }) {
         }}
       />
       <FilterPanel
-        data={{ manga: fp.manga, artBooks: [], ...masters }}
+        data={{ manga: fp.manga, artBooks: [], ...masters, ...heavy }}
         state={state}
         setState={go}
         authorEntries={fp.authorEntries}

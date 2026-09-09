@@ -18,6 +18,7 @@
 from __future__ import annotations
 import argparse
 import os
+import shutil
 import subprocess
 import sys
 import time
@@ -59,6 +60,8 @@ STEPS = [
      "AniList statusマップ(連載中→完結降格の鮮度維持)"),
     ("placeholder-queue", ["_placeholder-cover-refresh.py", "--build-queue"],
      "書影queue週次再算出(消化=アイドル運転⑩)"),
+    ("masters-json",      ["gen-masters-json.ts"],
+     "左レール用マスタJSON(publishers+magazines 48.6KB を全頁RSCから外す受け皿。★2026-09-09新設)"),
     ("list-index",        ["_build-list-index.py", "data/manga.v2", "data"],
      "本番索引(~10分。★生成物stepの最後=上の変更を焼き込む。索引から導出するstepだけこの後)"),
     ("titles-pages",      ["_gen-titles-pages.py"],
@@ -92,7 +95,14 @@ def _place_booklive_flags(note: str) -> None:
 def run_step(name: str, argv: list[str], booklive: bool = False) -> None:
     t0 = time.time()
     print(f"\n{'=' * 70}\n▶ [{name}] {' '.join(argv)}\n{'=' * 70}", flush=True)
-    r = subprocess.run([PY, str(ROOT / "scripts" / argv[0])] + argv[1:], cwd=str(ROOT))
+    # ★.ts の生成器は tsx で回す(本番と同じローダを使いたい物がある。 例= masters-json)。
+    #   Windows の npx は npx.cmd なので shutil.which で実体を解決する。
+    if argv[0].endswith(".ts"):
+        npx = shutil.which("npx") or "npx"
+        cmd = [npx, "tsx", str(ROOT / "scripts" / argv[0])] + argv[1:]
+    else:
+        cmd = [PY, str(ROOT / "scripts" / argv[0])] + argv[1:]
+    r = subprocess.run(cmd, cwd=str(ROOT))
     if r.returncode != 0:
         if booklive and r.returncode == 2:
             _place_booklive_flags(f"step [{name}] が検知。")
