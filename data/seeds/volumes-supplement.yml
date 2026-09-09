@@ -45284,3 +45284,16 @@ volumes:
   source: ndl+rakuten
   added_at: '2026-09-06'
   note: 'NDL 978-4-06-511468-1 / 2018.4 / 186p / NDC726.1 / 講談社コミックス SHONEN MAGAZINE COMICS。楽天=2018年04月09日・484円'
+- series_keys:
+  - 'name:獅山雨為|name:つまりそういうコト。|sub:カラダは愛に入りますか?'
+  - 'name:獅山雨為|name:つまりそういうコト。'
+  number: 1
+  isbn13: '9784776753971'
+  release_date: '2022-08-05'
+  publisher: '宙出版'
+  imprint: 'Missy comics'
+  edition_type: standard
+  title_display: 'つまりそういうコト。 1'
+  source: ndl+rakuten
+  added_at: '2026-09-09'
+  note: '巻抜け仮想の (1巻が無い) 該当。ユーザ提示ISBNを2ソースで確認: 楽天=「つまり そういうコト。〜カラダは愛に入りますか?〜」獅山雨為/宙出版/2022年08月05日/743円/書影有/series=ミッシィコミックス YLC Collection、NDL=「つまりそういうコト。 : カラダは愛に入りますか?」2022.8。imprintは既存2・3巻の版(Missy comics)に合わせ版分裂を避けた。series_keysは既存ISBNから db-v2 逆引き(sid 136224=sub付き / 136223=sub無し の2つに分散)'
