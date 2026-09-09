@@ -1,0 +1,57 @@
+slug: hidoku-shinaide
+canonical_label: 通常版
+canonical_publisher: リブレ出版
+canonical_imprint: ビーボーイコミックス
+suppress_types: [deluxe]
+source: >-
+  漫画内分裂の是正 2026-09-10(ユーザ報告→検出器#30の穴を塞いで発見)。
+  本編は全12巻(ねこ田米蔵/リブレ)だが、種2で**同一レーベルが4通りに表記**され版が4つに割れていた:
+  Be-boy comics(1巻 9784862631015 2007-01) / Be×boy comics(1巻 9784799730812 2016-10 + 2-6巻) /
+  ビーボーイコミックス(7-9巻) / ビーボーイコミックスデラックス(10-12巻)。
+  promote が2つの「1巻」を衝突させ**2007年の初版を落として**おり、頁の最古が2巻(2010)になっていた。
+  さらに 10-12巻が deluxe タブに落ちて内部分裂していた。
+  裏取り=楽天live題検索で本編16件を全数確認(「酷くしないで」2007-01-10 → 「酷くしないで12」2025-12-10)。
+  1巻は刷違い2種(2007初版 9784862631015 / 2016再刊 9784799730812)。初版を主に据えた。
+  ★再刊ISBNは頁に出していない: apply_edition_canonical の _v() は number/isbn13/release_date/
+  volume_label しか搬送せず **canonical は variants 非対応**(2026-09-10 実地確認。書いても黙って落ちる)。
+  刷タブが要るなら edition-overrides 経由(promote 2770行)か canonical 側の対応追加が要る。
+  ★同qidのスピンオフ「小鳥遊彰編」は auto-merge で本編1巻の座を奪っていたため
+  merge-exceptions [53797,53798] で遮断し、別頁 hidoku-shinaide-takanashi-akira-hen として独立させた。
+volumes:
+- number: 1
+  isbn13: '9784862631015'
+  release_date: '2007-01-10'
+- number: 2
+  isbn13: '9784862638519'
+  release_date: '2010-10-09'
+- number: 3
+  isbn13: '9784799711682'
+  release_date: '2012-08-10'
+- number: 4
+  isbn13: '9784799713969'
+  release_date: '2013-12'
+- number: 5
+  isbn13: '9784799728420'
+  release_date: '2016-01'
+- number: 6
+  isbn13: '9784799730829'
+  release_date: '2016-10-08'
+- number: 7
+  isbn13: '9784799735183'
+  release_date: '2017-10-10'
+- number: 8
+  isbn13: '9784799739280'
+  release_date: '2018-08-09'
+- number: 9
+  isbn13: '9784799743508'
+  release_date: '2019-06-10'
+- number: 10
+  isbn13: '9784799752128'
+  release_date: '2021-04-09'
+- number: 11
+  isbn13: '9784799756508'
+  release_date: '2022-03-10'
+- number: 12
+  isbn13: '9784799775295'
+  release_date: '2025-12-10'
+extra_editions: []
