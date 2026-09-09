@@ -104,6 +104,38 @@ def main():
     except Exception as _e:
         print(f"  SKIP 301追跡 ({_e})")
 
+    # ★配信キャッシュの検査 (2026-09-09 実害の再発防止)。
+    #   症状: リンクを押すと先週の頁・再読込で最新・エッジpurgeでも直らない。
+    #   原因: RSCペイロード(.txt)が ASSET(ブラウザ24時間)に落ち、HTML(60秒)と1440倍ずれていた
+    #        + Cloudflare「ブラウザ キャッシュ TTL=4時間」が短い値を引き上げていた。
+    #   ★**bypass を使わない**のが肝: cache-buster付きだと Worker の生の値(正しい60)が見えてしまい、
+    #     利用者が実際に受け取る値(エッジ経由で書き換えられた後)を検査できない。
+    #   見るのは「HTMLと.txtが一致していること」と「両方とも短いこと」= 機構が変わっても効く不変条件。
+    import re as _re
+
+    def _max_age(path):
+        _st, _b, _h = req(path)
+        _cc = _h.get("Cache-Control") or _h.get("cache-control") or ""
+        _m = _re.search(r"max-age=(\d+)", _cc)
+        return (int(_m.group(1)) if _m else None), _cc
+
+    _html_ma, _html_cc = _max_age("/")
+    _txt_ma, _txt_cc = _max_age("/index.txt")
+    _mtxt_ma, _mtxt_cc = _max_age("/manga/urusei-yatsura.txt")
+
+    check("HTMLのbrowser cacheが短い(<=300秒)", _html_ma is not None and _html_ma <= 300,
+          f"/ = {_html_cc!r}(CFの『ブラウザ キャッシュ TTL』が『既存のヘッダーを尊重』か確認)")
+    check("RSC(.txt)がHTMLと同じ寿命", _txt_ma is not None and _txt_ma == _html_ma,
+          f"/index.txt = {_txt_ma} / HTML = {_html_ma}(workers/r2-serve.js の cacheControl を確認)")
+    check("作品頁のRSC(.txt)も同じ寿命", _mtxt_ma is not None and _mtxt_ma == _html_ma,
+          f"/manga/urusei-yatsura.txt = {_mtxt_ma} / HTML = {_html_ma}")
+
+    _st_ma, _st_cc = _max_age("/_next/static/chunks/webpack-hash.js")
+    if _st_ma is None:
+        print("  SKIP /_next/static の検査 (プローブ用の固定キーが無い)")
+    else:
+        check("/_next/static は長期immutable", "immutable" in _st_cc and _st_ma >= 86400, f"{_st_cc!r}")
+
     if do_post:
         st, body, _ = req("/api/contact", method="POST", body={"body": "smoke"})
         okj = False
