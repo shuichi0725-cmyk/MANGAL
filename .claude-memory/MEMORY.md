@@ -169,5 +169,7 @@
 - [Crawler HintsはWorkers+R2で発火しない公算](crawler_hints_ineffective_on_workers_r2.md)
 - [【前提】GitHubリポジトリはpublic](repo_is_public_github.md)
 - [【罠】記憶は正本に書く](memory_write_to_canonical_not_mirror.md)
+- [【型・是正済】共通シェルのpropsが全ルートのRSCに2箇所焼かれる](shell_props_serialized_to_all_routes.md) — masters 48.6KB=約9.9GB(out/の52%)。番人に検査3/4追加・負テストで実証
+- [R2 Class Aの算数=無料100万/月・$4.50は従量](r2_class_a_budget_arithmetic.md) — 「絶対$4.50」は誤り。preview反復はR2ゼロ。余白がフル1回分を切ったら追加同期しない
 - [【機構・不変条件】PC共通シェル=ナビをlayoutへ+左レール+器をmax-w-6xlに統一](pc_shell_and_widths_2026_09_07.md) — ヘッダー/ナビ/シェルは同じ器。器の所在がcomponent側にある罠つき。PCが人間の75%
 - [【戒め】写真の要素を実名で列挙してから作る](feedback_name_the_element_in_the_photo.md) — 自分の実装を前提に選択肢を組むと正解が候補に入らない
