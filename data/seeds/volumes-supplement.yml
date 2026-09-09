@@ -45297,3 +45297,15 @@ volumes:
   source: ndl+rakuten
   added_at: '2026-09-09'
   note: '巻抜け仮想の (1巻が無い) 該当。ユーザ提示ISBNを2ソースで確認: 楽天=「つまり そういうコト。〜カラダは愛に入りますか?〜」獅山雨為/宙出版/2022年08月05日/743円/書影有/series=ミッシィコミックス YLC Collection、NDL=「つまりそういうコト。 : カラダは愛に入りますか?」2022.8。imprintは既存2・3巻の版(Missy comics)に合わせ版分裂を避けた。series_keysは既存ISBNから db-v2 逆引き(sid 136224=sub付き / 136223=sub無し の2つに分散)'
+- series_keys:
+  - 'name:古矢渚|name:君と夏のなか'
+  number: 1
+  isbn13: '9784758079617'
+  release_date: '2019-07-30'
+  publisher: '一迅社'
+  imprint: 'Gateau comics'
+  edition_type: standard
+  title_display: '君と夏のなか 1'
+  source: ndl+rakuten
+  added_at: '2026-09-09'
+  note: '巻抜け仮想の (1巻が無い) 該当。ユーザ提示ISBNを2ソースで確認: NDL=「君と夏のなか」2019.8 一迅社 IDコミックス Gateau comics(著者 古矢,渚)、楽天=「君と夏のなか 限定版」古矢渚/一迅社/2019年07月30日/990円/書影有/series=gateauコミックス。日付は楽天の発売日を採用(NDLは出版年月2019.8)。★この作品は流通が限定版のみで、既存2・3巻も楽天題は限定版(NDL題は「君と夏のなか : 限定版. 2/3」)= 特装版の通常枠混入ではなく作品全体の版構成。imprintは既存版(Gateau comics)に合わせた。書影はcovers seedに既存'
