@@ -55,6 +55,13 @@ function contentType(key) {
 function cacheControl(key) {
   if (key.startsWith("_next/static/") || key.includes("/_next/static/")) return IMMUTABLE;
   if (key.endsWith(".html")) return HTML_CACHE;
+  // ★.txt = Next の RSC ペイロード = **リンクを押した時(SPA遷移)に描画されるのはこちら**。
+  //   HTML と同じ中身の別表現なので、寿命も HTML と揃える(2026-09-09 実害の是正)。
+  //   旧: どの分岐にも当たらず ASSET(ブラウザ24時間/エッジ7日)に落ちていた。 HTML は60秒なので
+  //   **同じ頁で寿命が1440倍**ずれ、「ホームを押すと古い頁・再読込すると最新」が起きていた。
+  //   ★エッジをパージしても直らない = 古いのはブラウザ内の .txt だから、という点が診断を難しくした。
+  //   ※robots.txt / IndexNow鍵ファイルも .txt だが、60秒キャッシュで害はない。
+  if (key.endsWith(".txt")) return HTML_CACHE;
   if (key.endsWith(".json")) return JSON_CACHE;
   return ASSET;
 }
