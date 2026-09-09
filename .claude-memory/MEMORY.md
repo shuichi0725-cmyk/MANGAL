@@ -15,6 +15,7 @@
 - [【番人・必ず回す】共通シェルの配線ゲート](shell_wiring_gates.md) — 器の費用/絞り込みUIの境界。UI・シェルを触ったら回す(負テストで「壊したら落ちる」を確認済み)
 - [【番人】検索スナップショットゲート](search_snapshot_gate.md) ／ [検索warm並走の競合型](search_warm_race_2026_08_31.md) ／ [検索が遅い実測内訳](search_perf_hotspots_2026_08.md) ／ [軽量索引=検索v2/配列化](lightweight_index_architecture.md)
 - [【✅】死蔵検索索引=廃止済](dead_search_index_retire_pending.md) ／ [【厳守】索引形式変更=ファイル名バンプ](index_format_change_versioned_filename.md) ／ [【計画】本番軽量化(索引スリム)](index_lightening_plan.md)
+- [【型・是正済】リンクで古い頁・再読込で最新=RSCの.txtがブラウザ24時間](rsc_txt_browser_cache_stale_navigation.md) — エッジpurgeでは直らない。切り分けはシークレットタブ一発。CFのブラウザTTL4時間が60秒を潰す
 - [【再発厳禁】キャッシュが修正を隠した事故](deploy_cache_swr_hid_the_fix.md) ／ [/browse がサーバ描画0だった](browse_ssr_shell_and_seo.md)
 - [【型】コミック頁に原作ラノベ/本編が混入](novel_in_manga_page.md) — ゲート+事後検出器あり
 - [【宿題】著者誤混入=巻書誌に出ない著者](author_not_in_volumes_audit.md) ／ [解説者が著者欄に混入(残226)](author_kaisetsu_contamination.md)
