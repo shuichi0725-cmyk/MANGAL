@@ -76,6 +76,7 @@
 - [蒸留定期運転の実態(2026-06調査=歴史)](monthly_intake_reality.md) ／ [2026-08 月次蒸留 MADB1.2.19=完了](distill_2026_08_1219.md) ／ [2026-07 月次蒸留 MADB1.2.18](distill_2026_07_1218.md)
 - [【裁定・preview投入済】愛蔵版コーナー=豪華本は版種名でなく「通常版比の巻数圧縮」で決める](aizouban_corner_compression_rule.md)
 - [三世代/今週ストック未配線](sansedai_featured_stock_state.md) ／ [今日の一冊 過去ログ=凍結ログが正](sansedai_archive_frozen_log.md) ／ [日替わり特集コーナー(/tokushu)](daily_feature_corner.md)
+- [【厳守】巻を足す時は書影も一緒に](volume_add_includes_cover.md) — 種4追記だけで終えない。構築URL→HTTP検証→楽天API、covers.jsonl.gzへ追記して再反映
 - [【計画】書影harvest3段](cover_harvest_plan.md) ／ [楽天書影資産(noimage罠)](rakuten_cover_data_asset.md) ／ [書影=アフィ元画像のみ](cover_source_affiliate_only.md) ／ [【裁定済】Kobo電子書影=注意書きを添えて出す](kobo_cover_wrong_for_old_print.md) ／ [【注意信号】書影の違和感=上流誤りの症状](feedback_cover_oddity_signal.md) ／ [【型・是正済】書影の黒い斑点=透過GIF×ダーク背景](cover_transparent_gif_dark_bg.md)
 - [【戒め】再グルーピング誤り繰り返すな](feedback_dont_repeat_regrouping_error.md)
 - [【最難関】奇子型=版違い混在](edition_mix_same_author_ayako.md) ／ [奇子型の経験則検出](kiko_multiedition_mixing_heuristic.md) ／ [版混在恒久是正=edition-canonical](edition_canonical_mechanism.md) ／ [アオアシ型=原版+ジュニア版再版](edition_dedup_aoashi.md)
