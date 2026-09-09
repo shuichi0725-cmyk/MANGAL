@@ -9,6 +9,22 @@ metadata:
 
 本番配信を軽くする計画（2026-06-22調査・実装は後日GO待ち）。詳細は会話。
 
+
+## ★2026-09-09 実測: /browse が実際に落とす量(圧縮後・本番)
+
+| ファイル | 圧縮後 | 展開後 |
+|---|---|---|
+| manga-list-index.json | 5.78MB | 23.1MB |
+| **manga-catch-index.json** | **2.77MB** | 7.3MB |
+| manga-alt-index.json | 1.29MB | 3.4MB |
+| manga-list-head.json | 0.01MB | 44KB |
+| **合計** | **9.85MB** | — |
+
+★**catch索引が2.77MB = 2番目に重い**。`HomeClient` が `useFilterPanelData({withCatch:true})` で
+カード用キャッチ文のために読む(フル索引到着後に追い読み)。スリム化の効き目はここが大きい。
+※2026-09-09 の「検索が遅い」報告はこの重さが原因ではなく配信キャッシュだった
+([[rsc_txt_browser_cache_stale_navigation]])= **性能改修の緊急性は無い**。着手はGO待ちのまま。
+
 ## 本番に配信される大物（詳細ページ群を除く）= 索引2つだけ
 - `manga-list-index.json` 46.8MB(本番66k) — 一覧/トップ/フィルタ/カード
 - `manga-search-index.json` 12.9MB — 検索専用(遅延fetch)

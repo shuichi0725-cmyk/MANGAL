@@ -149,6 +149,7 @@
 - [ISBN消失FAILの消し込みフロー](weekly_isbn_loss_acknowledge_flow.md)
 - [【戒め】ビルド入力の結線3箇所](build_input_wiring_three_places.md)
 - [部分ビルド合流の復旧型](partial_rebuild_merge_recovery.md)
+- [【戒め】「無い」をgrep一発で結論するな](feedback_absence_needs_verification.md) — 否定の観測は観測手段ごと検算。ユーザの「テストした」は退ける対象でなく制約条件
 - [【戒め】script警告は検算してから報告](feedback_sanity_check_tool_warnings.md)
 - [【戒め】診断簿は掃除してから読む](diag_log_prune_before_reading.md)
 - [SEO title方針=サフィックス「漫画・コミックのMANGAL」](seo_title_suffix_decision.md) — GO済

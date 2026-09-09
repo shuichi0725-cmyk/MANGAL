@@ -13,6 +13,23 @@ metadata:
 - 確認はActions REST API。一覧=/browse(HomeClient)・ホーム=home-design-11。grid item は min-w-0 でヘッダーズレ封鎖済。
 - previewの索引はsubset=カレンダー等の照合失敗は正常。
 
+## ★規模差 = テスト環境は「速度」「キャッシュ挙動」の代理にならない (2026-09-09 実測)
+
+| 索引(圧縮後) | テスト | 本番 | 倍率 |
+|---|---|---|---|
+| manga-list-index.json | 0.28MB | 5.78MB | 21倍 |
+| manga-catch-index.json | 0.14MB | 2.77MB | 20倍 |
+| manga-alt-index.json | 0.08MB | 1.29MB | 17倍 |
+| **/browse の合計** | **0.50MB** | **9.85MB** | **約20倍** |
+
+preview は3,000頁サブセット(`de6abfe7d`)なので索引が20分の1。**索引到着待ちの窓がほぼ0秒**になり、
+「読み込み中に見える」「先に検索すると結果が揃わない」類は**原理的に再現しない**。
+★だから「テストで問題なかった」と「本番で遅い」は**両立する**。テスト緑は機能の正しさの証拠であって、
+速度・キャッシュ挙動の証拠ではない([[feedback_absence_needs_verification]])。
+★実機の数字を採る診断表示は `app/HomeClient.tsx` にあるが **`isPreview` ガードで本番では出ない** =
+本番の実測が採れない状態。本番で詰める必要が出たら `?diag=1` 等で出せるようにするのが先。
+
+
 ## ★容量の天井 = Cloudflare Pages のファイル数(2026-09-06 実測+公式)
 
 preview は本番(Workers+R2)と違い **Cloudflare Pages**(`wrangler pages deploy out`)。
