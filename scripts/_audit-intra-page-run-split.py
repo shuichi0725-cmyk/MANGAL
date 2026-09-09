@@ -106,9 +106,15 @@ def main():
             if len(best) < len(uni) * 0.8 or len(best) < 4:
                 continue
             seq = [best[n] for n in sorted(best)]
-            if seq != sorted(seq):
+            # ★2026-09-10: 全巻単調を必須にすると「異物が1冊混ざった頁」を巻き添えで落とす。
+            #   酷くしないで= 本編2010-2025の連番run に「1巻2014-12」という別物が挟まり③で失格していた。
+            #   → 逆行している巻を最大2冊まで除いて単調になるなら通し、tier を C(要目視)にする。
+            n_inv = sum(1 for i in range(len(seq) - 1) if seq[i] > seq[i + 1])
+            if seq != sorted(seq) and n_inv > 2:
                 continue
             tier = "A" if nk(a.get("imprint")) == nk(b.get("imprint")) else "B"
+            if seq != sorted(seq):
+                tier = "C"   # 分裂は明白だが日付に異物あり= 統合前に異物の正体を要確認
             rows.append({
                 "tier": tier, "slug": os.path.basename(p)[:-4], "title": d.get("title") or "",
                 "canonical": "有" if os.path.basename(p)[:-4] in canon else "無",
