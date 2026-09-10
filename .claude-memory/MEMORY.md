@@ -123,6 +123,7 @@
 - [【進行中】①の裁定=見なおし表(生成器化済・69頁)](unlisted_volumes_review_state.md)
 - [【型・是正済】imprint欄に版ラベルが焼かれる](imprint_label_leak.md)
 - [【型・是正1件】MADB並列書名転倒=途中巻から欧文題が本題になり種2が割れる](madb_parallel_title_inversion.md) ／ [【型・是正済】targeted反映だと著者が典拠代表名に化ける](targeted_reflect_author_credit_hole.md) — 掃引36頁は自動適用禁止(改名/旧字 と 別名義・過統合 が混在)
+- [【型・89件是正済】slugに同じ音が二度出る(されたされた)](slug_duplicated_token_sareta_type.md) — key2slugは切り詰め前のフル長を持つ罠つき。偽陽性は題を見ないと切れない
 - [【手法】照合ゲートの不一致=我々側の誤りの検出器](gate_mismatch_reveals_our_own_error.md) — マンバ目視9件で著者誤り1件発見。猫と紳士のティールーム=正モリコロス(未修正)
 - [【戒め】検出器の素の件数は仕事の量ではない](feedback_raw_count_is_not_worklist.md) — 実測で2〜3桁縮む。数字を提案に出す前に中身を割る
 - [【型・検出器】トリニティ15.5型=頁は在るのに巻だけ出ていない](unlisted_volumes_trinity_type.md)
