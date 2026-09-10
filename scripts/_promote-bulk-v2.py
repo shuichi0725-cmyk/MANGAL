@@ -2800,6 +2800,26 @@ def _mark_volume_publishers(ed: dict) -> None:
 _IMPRINT_SERIAL_RE = re.compile(r"\s*(?:[;；]\s*)?[NnＮｎ][OoＯｏ][.．]\s*[0-9０-９]+\s*$")
 
 
+_IMPRINT_JA_RE = re.compile(r"[ぁ-んァ-ヶ一-龥]")
+
+
+def _norm_imprint_parallel(s: str) -> str:
+    """MADB並列表記「欧文 = 和文」のレーベル名を和文側へ寄せる(表示のみ)。詳細は _norm_imprint。"""
+    if " = " not in s:
+        return s
+    out = []
+    for seg in re.split(r"(?<=\.)\s+", s):
+        if " = " in seg:
+            parts = [p.strip() for p in seg.split(" = ")]
+            ja = [p for p in parts if _IMPRINT_JA_RE.search(p)]
+            non = [p for p in parts if not _IMPRINT_JA_RE.search(p)]
+            if len(ja) == 1 and non:      # 和文が1つに定まる時だけ寄せる
+                out.append(ja[0].rstrip(".") + ("." if seg.endswith(".") else ""))
+                continue
+        out.append(seg)
+    return " ".join(out)
+
+
 def _norm_imprint(s):
     """レーベル名末尾の**叢書通し番号**(「… no.74」「…; no.142」)を落として表示名に戻す。
 
@@ -2809,10 +2829,18 @@ def _norm_imprint(s):
     番号は「そのレーベルの何冊目か」であってレーベル名の一部ではないので表示から外す。
     ★実データ検査(種2 の該当268 edition・全72レーベル)で「名前自体がNo.数字で終わる
     レーベル」は存在しないことを確認済み。表示のみの正規化で巻/ISBNには触れない。
+
+    ★2026-09-10 追加「Sirius KC = シリウスKC」型: MADB(NDL由来)はレーベル名を
+    **並列表記「欧文 = 和文」**で持つ版があり(種2で116種/495版)、そのまま表示に出ていた。
+    NDL の「=」は並列書名の記法であって名前の一部ではない。「. 」区切りのセグメントごとに
+    見て、かな/漢字を含む側を採る。★両側とも和文/両側とも非和文なら**触らない**
+    (判定不能=現状維持。実データ116種のうち該当は「Manga bang!コミックス = マンガbangコミックス」1種)。
+    ここも表示のみ = 版の統合キーや巻/ISBNには影響しない。
     """
     if not s:
         return s
     out = _IMPRINT_SERIAL_RE.sub("", str(s)).rstrip(" ;；")
+    out = _norm_imprint_parallel(out)
     return out or s
 
 
