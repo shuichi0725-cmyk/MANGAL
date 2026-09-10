@@ -743,20 +743,35 @@ def load_renumber_sids(con: sqlite3.Connection) -> set[int]:
     return sids
 
 
-def load_separate_edition_sids(con: sqlite3.Connection) -> set[int]:
-    """separate_editions: true の cluster の 全 sid set。 ★版統合(opt-in):
+def load_separate_edition_sids(con: sqlite3.Connection) -> dict[int, str]:
+    """separate_editions の cluster → {sid: mode}。 ★版統合(opt-in):
     通常は 同 type editions を imprint 跨ぎで 1 つに畳む(最古正典表示)が、 この flag を
-    付けた群だけ (type × imprint) で 分離 = 別版を 別セクションで並べる(うる星/シートン型)。
-    ★blanket化は古典の重版(鉄腕アトム=Akita/KCDX/KPC…)を爆発させるため opt-in 限定。"""
+    付けた群だけ 分離 = 別版を 別セクションで並べる(うる星/シートン型)。
+    ★blanket化は古典の重版(鉄腕アトム=Akita/KCDX/KPC…)を爆発させるため opt-in 限定。
+
+    mode:
+      "sid"(= `separate_editions: true`。既定・後方互換)
+          source series_id 単位で分離。「各 sid = 1版(MADBの登録単位)」が前提。
+      "imprint"(= `separate_editions: imprint`。2026-09-10 追加)
+          (type × imprint)単位で分離。★**1つの sid の中に複数版が入っている**古典で使う。
+          銀河鉄道999(sid43575)は ヒットコミックス/ビッグコミックスゴールド/小学館叢書/
+          GAMANGA BOOKS/少年画報社文庫… の9版が**すべて同一 sid** にぶら下がっており、
+          sid単位では group_key が同じになるため一切分離できなかった
+          (= [[edition_typemerge_hides_volumes]] の核心)。
+    """
     if not MERGE_YML.exists():
-        return set()
+        return {}
     key_to_sid = {sk: sid for sid, sk in con.execute("SELECT id, series_key FROM series")}
-    sids: set[int] = set()
+    out: dict[int, str] = {}
     with MERGE_YML.open(encoding="utf-8") as f:
         for entry in (_yload(f) or []):
-            if entry.get("separate_editions"):
-                sids.update(_entry_sids(entry, key_to_sid))
-    return sids
+            v = entry.get("separate_editions")
+            if not v:
+                continue
+            mode = v if isinstance(v, str) else "sid"
+            for sid in _entry_sids(entry, key_to_sid):
+                out[sid] = mode
+    return out
 
 
 SUPP_YML = ROOT / "data" / "seeds" / "volumes-supplement.yml"
@@ -855,7 +870,7 @@ def get_renumber_sids(con) -> set[int]:
     return _RENUMBER_SIDS
 
 _SEP_EDITION_SIDS = None
-def get_separate_edition_sids(con) -> set[int]:
+def get_separate_edition_sids(con) -> dict[int, str]:
     global _SEP_EDITION_SIDS
     if _SEP_EDITION_SIDS is None:
         _SEP_EDITION_SIDS = load_separate_edition_sids(con)
@@ -2490,7 +2505,11 @@ def get_editions_with_volumes(con: sqlite3.Connection, series_ids: list[int] | i
     apply_edt_merge = any(sid in merge_edt_sids for sid in series_ids)
     # ★版統合(opt-in): separate_editions 群は (type × imprint) で別版を分離(畳まない)。
     #   無印は従来通り type 単位で畳む(最古正典)。 blanket化=古典重版爆発のため opt-in 限定。
-    sep_editions = bool(get_separate_edition_sids(con) & set(series_ids))
+    _sep_map = get_separate_edition_sids(con)
+    _sep_modes = {_sep_map[s] for s in series_ids if s in _sep_map}
+    sep_editions = bool(_sep_modes)
+    # ★"imprint" が1つでも指定されていればそちらを採る(1 sid に複数版がぶら下がる古典用)。
+    sep_mode = "imprint" if "imprint" in _sep_modes else "sid"
     # type → [edition+volumes] list
     by_type: dict[str, list[dict]] = defaultdict(list)
     for ed in eds:
@@ -2576,7 +2595,13 @@ def get_editions_with_volumes(con: sqlite3.Connection, series_ids: list[int] | i
         #    各 source series_id = 1 版 (= MADB の登録単位 = 版違いの単位) という前提。
         group_key = effective_type
         if sep_editions:
-            group_key = f"{effective_type}\x00sid{ed['series_id']}"
+            if sep_mode == "imprint":
+                # ★1 sid に複数版が入っている古典(銀河鉄道999 等)は imprint で割る。
+                #   ★ed は sqlite3.Row(.get 不可・publisher列も無い)なので imprint 空は sid へ。
+                _k = _norm_imprint(ed["imprint"]) or f"sid{ed['series_id']}"
+                group_key = f"{effective_type}\x00imp{_k}"
+            else:
+                group_key = f"{effective_type}\x00sid{ed['series_id']}"
         by_type[group_key].append(
             {
                 "type": effective_type,
@@ -2599,7 +2624,14 @@ def get_editions_with_volumes(con: sqlite3.Connection, series_ids: list[int] | i
             #   種4 は supp_map[sid] 由来=紐付き sid が分かるので imprint一致不要・確実。
             target_key = target_type
             if sep_editions:
-                target_key = f"{target_type}\x00sid{sid}"
+                if sep_mode == "imprint":
+                    # ★imprint モードでは種4側の imprint/publisher で該当版へ合流させる
+                    #   (sid は本体と同じで割れないため)。
+                    _k = (_norm_imprint(supp_vol.get("_imprint")) or supp_vol.get("_publisher")
+                          or f"sid{sid}")
+                    target_key = f"{target_type}\x00imp{_k}"
+                else:
+                    target_key = f"{target_type}\x00sid{sid}"
             ed_group = by_type.get(target_key)
             if not ed_group:
                 # 新 edition group 作成 (= 補完巻 1 巻のみ)
