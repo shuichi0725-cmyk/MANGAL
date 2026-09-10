@@ -7408,12 +7408,12 @@
     ]
    }
   ],
+  "note": "2026-09-03 0巻(9784091431561, 2019-11-27, てんとう虫コミックス「ドラえもん 0巻」=誕生50周年・6種類の第1話収録)を追記。promoteの0巻skip規則(種2経路)の対象外にするため override に直書き。ユーザ裁定「ドラえもんの0巻は出してok」 ／ year 1974-1996 を明示(0巻2019で year_ended が2019に化けるのを防ぐ。45巻=1996-04-26 が本編最終巻)",
   "related_pin": [
    "daichouhen-doraemon"
   ],
-  "note": "2026-09-03 0巻(9784091431561, 2019-11-27, てんとう虫コミックス「ドラえもん 0巻」=誕生50周年・6種類の第1話収録)を追記。promoteの0巻skip規則(種2経路)の対象外にするため override に直書き。ユーザ裁定「ドラえもんの0巻は出してok」 ／ year 1974-1996 を明示(0巻2019で year_ended が2019に化けるのを防ぐ。45巻=1996-04-26 が本編最終巻)",
-  "year_started": 1974,
-  "year_ended": 1996
+  "year_ended": 1996,
+  "year_started": 1974
  },
  "dr-2025": {
   "title": "Dr.アシュラ",
@@ -10114,9 +10114,9 @@
     ]
    }
   ],
+  "note": "2026-09-03 standard版に2巻追記(override固定で出なかった。楽天『ジェノサイド（2）』小林拓己/中島かずき/双葉社/アクションコミックス/2005-05)",
   "year_ended": 2003,
-  "year_started": 2003,
-  "note": "2026-09-03 standard版に2巻追記(override固定で出なかった。楽天『ジェノサイド（2）』小林拓己/中島かずき/双葉社/アクションコミックス/2005-05)"
+  "year_started": 2003
  },
  "gensou-fantasy": {
   "title_kana": "ゲンソウファンタジー"
@@ -10150,9 +10150,9 @@
     ]
    }
   ],
+  "note": "2026-09-03 standard版に2巻追記(override固定で出なかった。楽天『下駄を履くまで（2）』叶精作/小池一夫/竹書房/近代麻雀コミックス/2004-04)",
   "year_ended": 1980,
-  "year_started": 1980,
-  "note": "2026-09-03 standard版に2巻追記(override固定で出なかった。楽天『下駄を履くまで（2）』叶精作/小池一夫/竹書房/近代麻雀コミックス/2004-04)"
+  "year_started": 1980
  },
  "gift-2012": {
   "title": "gift-神様の悪戯-",
@@ -13944,7 +13944,7 @@
  "hamusarada-kun": {
   "authors": [
    {
-    "name": "ヨシダ忠",
+    "name": "吉田忠",
     "role": "writer_artist"
    }
   ],
@@ -16307,6 +16307,90 @@
       "release_date": "2001-06"
      }
     ]
+   }
+  ]
+ },
+ "jitsuwa-maji-de-kowaai-hanashi": {
+  "authors": [
+   {
+    "name": "岩田やすてる",
+    "role": "writer_artist"
+   },
+   {
+    "name": "風忍",
+    "role": "writer_artist"
+   },
+   {
+    "name": "のうずまみ",
+    "role": "writer_artist"
+   },
+   {
+    "name": "光永健一",
+    "role": "writer_artist"
+   },
+   {
+    "name": "青沼涼子",
+    "role": "writer_artist"
+   },
+   {
+    "name": "石橋明日香",
+    "role": "writer_artist"
+   },
+   {
+    "name": "田口たつみ",
+    "role": "writer_artist"
+   },
+   {
+    "name": "洋武",
+    "role": "writer_artist"
+   },
+   {
+    "name": "熊本雅弘",
+    "role": "writer_artist"
+   },
+   {
+    "name": "真原伊那",
+    "role": "writer_artist"
+   },
+   {
+    "name": "倉馬奈未",
+    "role": "writer_artist"
+   },
+   {
+    "name": "大峰らん",
+    "role": "writer_artist"
+   },
+   {
+    "name": "大本三根子",
+    "role": "writer_artist"
+   },
+   {
+    "name": "じゃんぐる堂",
+    "role": "writer_artist"
+   },
+   {
+    "name": "原田亜香音",
+    "role": "writer_artist"
+   },
+   {
+    "name": "ダイナミックプロダクション",
+    "role": "writer_artist"
+   },
+   {
+    "name": "速瀬みさき",
+    "role": "writer_artist"
+   },
+   {
+    "name": "津上柊子",
+    "role": "writer_artist"
+   },
+   {
+    "name": "こきま大",
+    "role": "writer_artist"
+   },
+   {
+    "name": "鷲塚三房",
+    "role": "writer_artist"
    }
   ]
  },
@@ -19858,8 +19942,8 @@
       "release_date": "2025-08-01"
      },
      {
-      "number": 10,
       "isbn13": "9784065438749",
+      "number": 10,
       "release_date": "2026-06-12"
      }
     ]
@@ -22197,6 +22281,14 @@
    }
   ],
   "note": "2026-07-19 デラックス・レーベル割れ一括統合(バーテンダー型・厳格ゲート): dx1+st3→通常版1..4"
+ },
+ "megami-sama-no-iutoori-tsuyatsuya": {
+  "authors": [
+   {
+    "name": "廣瀬良多",
+    "role": "writer_artist"
+   }
+  ]
  },
  "megumi-no-daigo-kyuukoku-no-orange": {
   "editions": [
@@ -26055,9 +26147,9 @@
     ]
    }
   ],
+  "note": "2026-09-03 続巻2追記(override固定で出なかった第2部検出)",
   "year_ended": 1984,
-  "year_started": 1984,
-  "note": "2026-09-03 続巻2追記(override固定で出なかった第2部検出)"
+  "year_started": 1984
  },
  "operaza-no-kaijin": {
   "authors": [
@@ -26158,6 +26250,36 @@
    }
   ]
  },
+ "ore-no-sora-keiji-hen": {
+  "anilist": false,
+  "note": "2026-09-06 俺の空 4分割(NDL+マンガペディア確定): 刑事編を分離した新頁",
+  "subtitle": "",
+  "title": "俺の空 刑事編",
+  "title_kana": "オレノソラケイジヘン",
+  "title_romaji": "ore no sora keiji hen",
+  "year_ended": 1981,
+  "year_started": 1980
+ },
+ "ore-no-sora-sanshirou-hen": {
+  "anilist": false,
+  "note": "2026-09-06 俺の空 4分割(NDL+マンガペディア確定): 三四郎編を分離した新頁",
+  "subtitle": "",
+  "title": "俺の空 三四郎編",
+  "title_kana": "オレノソラサンシロウヘン",
+  "title_romaji": "ore no sora sanshirou hen",
+  "year_ended": 1994,
+  "year_started": 1992
+ },
+ "ore-no-sora-yasuda-ippei": {
+  "anilist": false,
+  "note": "2026-09-06 俺の空 4分割(NDL+マンガペディア確定): 安田一平編を分離した新頁",
+  "subtitle": "",
+  "title": "俺の空 安田一平、新たなる旅立ち",
+  "title_kana": "オレノソラヤスダイッペイアラタナルタビダチ",
+  "title_romaji": "ore no sora yasuda ippei aratanaru tabidachi",
+  "year_ended": 2001,
+  "year_started": 2001
+ },
  "ore-wa-otoko-da": {
   "authors": [
    {
@@ -26191,6 +26313,12 @@
   ],
   "year_ended": 1973,
   "year_started": 1973
+ },
+ "orenosora": {
+  "note": "2026-09-06 俺の空 4分割(NDL+マンガペディア確定): 本編のみに整理",
+  "subtitle": "",
+  "year_ended": 1979,
+  "year_started": 1976
  },
  "oruchuban-ebichu": {
   "editions": [
@@ -27842,6 +27970,18 @@
  },
  "project-x-chousenshatachi-2004": {
   "title_kana": "プロジェクトエックスチョウセンシャタチ"
+ },
+ "project-zeoraimaa-omega": {
+  "authors": [
+   {
+    "name": "ちみもりを",
+    "role": "writer"
+   },
+   {
+    "name": "ワタリユウ",
+    "role": "artist"
+   }
+  ]
  },
  "prototype-azmax": {
   "title_kana": "プロトタイプアズマックス"
@@ -35024,7 +35164,7 @@
  "unnamed-memory": {
   "authors": [
    {
-    "name": "オカカ",
+    "name": "越水ナオキ",
     "role": "artist"
    }
   ],
@@ -37053,40 +37193,30 @@
   "year_ended": 1976,
   "year_started": 1976
  },
- "ore-no-sora-keiji-hen": {
-  "anilist": false,
-  "note": "2026-09-06 俺の空 4分割(NDL+マンガペディア確定): 刑事編を分離した新頁",
-  "title": "俺の空 刑事編",
-  "title_kana": "オレノソラケイジヘン",
-  "title_romaji": "ore no sora keiji hen",
-  "year_started": 1980,
-  "year_ended": 1981,
-  "subtitle": ""
- },
- "ore-no-sora-sanshirou-hen": {
-  "anilist": false,
-  "note": "2026-09-06 俺の空 4分割(NDL+マンガペディア確定): 三四郎編を分離した新頁",
-  "title": "俺の空 三四郎編",
-  "title_kana": "オレノソラサンシロウヘン",
-  "title_romaji": "ore no sora sanshirou hen",
-  "year_started": 1992,
-  "year_ended": 1994,
-  "subtitle": ""
- },
- "ore-no-sora-yasuda-ippei": {
-  "anilist": false,
-  "note": "2026-09-06 俺の空 4分割(NDL+マンガペディア確定): 安田一平編を分離した新頁",
-  "title": "俺の空 安田一平、新たなる旅立ち",
-  "title_kana": "オレノソラヤスダイッペイアラタナルタビダチ",
-  "title_romaji": "ore no sora yasuda ippei aratanaru tabidachi",
-  "year_started": 2001,
-  "year_ended": 2001,
-  "subtitle": ""
- },
- "orenosora": {
-  "note": "2026-09-06 俺の空 4分割(NDL+マンガペディア確定): 本編のみに整理",
-  "year_started": 1976,
-  "year_ended": 1979,
-  "subtitle": ""
+ "rainbowsentai": {
+  "authors": [
+   {
+    "name": "風田朗",
+    "role": "writer_artist"
+   }
+  ],
+  "editions": [
+   {
+    "type": "standard",
+    "label": "通常版",
+    "publisher": "復刊ドットコム",
+    "imprint": "コミックライブラリー",
+    "volumes": [
+     {
+      "number": 1,
+      "isbn13": "9784835448268",
+      "release_date": "2012-04"
+     }
+    ]
+   }
+  ],
+  "note": "著者=MADBクレジット風田朗(鈴木伸一の別名義・典拠Q11648538)。★editionsも固定: authorsだけ足すとISBN無しの1979年初版が number:2 の幽霊巻として湧くため、実在巻(ISBN付)のみで再構築 2026-09-10 / ★年は初出1979を明示(editions固定で復刊2012から再計算されるため)",
+  "year_started": 1979,
+  "year_ended": 1979
  }
 }
