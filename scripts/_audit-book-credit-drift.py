@@ -53,7 +53,7 @@ for h in hits[:40]:
     print('  ', h[0], '|', h[1], '|', h[2], '->', h[3])
 if len(hits) > 40:
     print('   ... 他', len(hits) - 40, '件')
-out = Path('.cache/book-credit-drift.tsv')
+out = Path('docs/production-diagnostics/book-credit-drift.tsv')
 with out.open('w', encoding='utf-8') as f:
     f.write('slug\ttitle\tnow\tshould_be\n')
     for s, t, a, b in hits:
