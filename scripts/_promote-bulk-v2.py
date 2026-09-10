@@ -1513,9 +1513,15 @@ def _apply_book_credit(authors: list[dict], isbns: list, alias: dict) -> list[di
     """著者の**表示名だけ**を「その本のクレジット」へ1:1で寄せる。
     ★人の追加/削除は絶対にしない(監修者・原作者・題名の混入を原理的に防ぐ。
       2026-07-26: 追加を許すと『妖怪マンガで楽しい古典→小松和彦(監修)』型の事故が出た)。
-    条件 = 現在名が本のクレジットに無く、かつ **その人物の別名(alt_names)がクレジットに在る** 時だけ改名。"""
+    条件 = 現在名が本のクレジットに無く、かつ **その人物の別名(alt_names)がクレジットに在る** 時だけ改名。
+    ★_ISBN2CREDIT は _load_pub_resolver() の遅延ロードで埋まるが、その初回呼び出しは
+      build_yml 内の edition_pub_name() = **この関数より後**。 そのため従来は
+      **再生成の1頁目だけ是正が効かず**、フルpromoteでは無害でも `--only`(targeted反映)では
+      唯一の頁が代表名に化けた(2026-09-10 実踏: 成仏させてよ! が「百地元」→「みやこかっく」)。
+      冪等なので、ここで明示的に先にロードする。"""
     if not authors or not isbns:
         return authors
+    _load_pub_resolver()
     cred = []
     for ib in isbns:
         cred += (_ISBN2CREDIT or {}).get(str(ib), [])
