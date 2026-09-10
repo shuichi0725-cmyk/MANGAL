@@ -150,6 +150,8 @@
 - [ISBN消失FAILの消し込みフロー](weekly_isbn_loss_acknowledge_flow.md)
 - [【戒め】ビルド入力の結線3箇所](build_input_wiring_three_places.md)
 - [部分ビルド合流の復旧型](partial_rebuild_merge_recovery.md)
+- [【型・総論】seedに書いたのに黙って効かない3類型](seed_silently_ineffective_class.md) — 読み手/キー/搬送フィールドを書く前にgrepで確かめる。1日で3件踏んだ
+- [【手順】新しい頁を作る=src頁+key2slug](new_page_creation_srcpage_key2slug.md) — 片方だけだと再生成で消える。過merge解除と頁化はセット
 - [【戒め】「無い」をgrep一発で結論するな](feedback_absence_needs_verification.md) — 否定の観測は観測手段ごと検算。ユーザの「テストした」は退ける対象でなく制約条件
 - [【戒め】script警告は検算してから報告](feedback_sanity_check_tool_warnings.md)
 - [【戒め】診断簿は掃除してから読む](diag_log_prune_before_reading.md)
