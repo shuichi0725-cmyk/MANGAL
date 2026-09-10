@@ -1,3 +1,7 @@
 # R2 prune 待ちの公開slug。週次蒸留の preflight が必ず表示する。
 # r2-sync --prune 実行後、.cache/r2-pruned-<日時>.txt に載った行をここから消し込む。
 # 2026-08-10 週次: 台帳15件すべて .cache/r2-pruned-20260810-020427.txt に載ったのを確認し消し込み。
+{"slug": "u12-2018", "reason": "targeted反映", "at": "2026-09-09", "source": "reflect-targeted --drop"}
+{"slug": "dokidoki-locomotion", "reason": "targeted反映", "at": "2026-09-10", "source": "reflect-targeted --drop"}
+{"slug": "let-s-go-nirvana", "reason": "targeted反映", "at": "2026-09-10", "source": "reflect-targeted --drop"}
+{"slug": "let-s-go-nirvana", "reason": "slug rename(誤題 Let's go nirvana → 正題 成仏させてよ! で joubutsu-sasete-yo へ復元)", "at": "2026-09-10", "source": "reflect-targeted --drop"}
