@@ -83,7 +83,21 @@ def main() -> None:
         "# ★Cloudflare Pages は静的redirect上限2,000行(preview=部分カバー)。本番全件は KV REDIRECTS 側。",
         "",
     ]
-    for old in sorted(aliases):
+    # ★2,000行枠には **preview に実在する頁を宛先にする alias から**詰める(2026-09-10 実踏)。
+    #   従来は素の sorted() だったので枠は「/manga/0..b」で埋まり、それ以降の頭文字の改名は
+    #   preview で 301 が届かず 404 のままだった(let-s-go-nirvana → joubutsu-sasete-yo)。
+    #   preview は subset 環境=煙テスト用なので、subset 宛てを先に置くのが本来の意図に合う。
+    #   ★本番は .cache/redirects.json(KV 全件・順序無関係)なので、この並べ替えは preview 専用。
+    try:
+        _pv = json.loads(Path(".preview-data/manga-list-index.json").read_text(encoding="utf-8"))
+        _pv_live = {r[_pv["f"].index("slug")] for r in _pv["d"]}
+    except Exception:
+        _pv_live = set()
+    _head = sorted(k for k in aliases if aliases[k] in _pv_live)
+    _tail = sorted(k for k in aliases if aliases[k] not in _pv_live)
+    if _pv_live:
+        print(f"  preview subset 宛ての alias を先頭へ: {len(_head)} 件 / 残 {len(_tail)} 件")
+    for old in _head + _tail:
         new = aliases[old]
         lines.append(f"/manga/{old} /manga/{new} 301")
 
