@@ -1,0 +1,32 @@
+slug: tokugawa-kun-ga-komarasetekuru
+canonical_label: 通常版
+canonical_publisher: 講談社
+canonical_imprint: KCデラックス
+suppress_types: [deluxe]
+source: >-
+  漫画内分裂の是正 2026-09-10(検出器#30 tier B)。1本の刊行run(全6巻・連載中)が2タブに割れていた:
+  standard[imprint="講談社"=レーベル未解決の空欄型] 1巻・6巻 / deluxe[KCデラックス] 2-5巻+6巻(同一ISBNの重複)。
+  ★裏取り= 楽天live題検索で1〜6巻すべて series=KCデラックス と確認(全巻同一レーベル)。
+  ISBN完全連番(375952<381243<392140<408063<424902<442272)。
+  発売日も楽天を採用(当方は2巻2025-01-03/5巻2026-02-02/6巻2026-07-27 とずれていた)。
+  6巻が両タブに重複していたのは分裂の副作用。suppress_types:[deluxe] で重複タブを畳む。
+volumes:
+- number: 1
+  isbn13: '9784065375952'
+  release_date: '2024-11-13'
+- number: 2
+  isbn13: '9784065381243'
+  release_date: '2025-01-10'
+- number: 3
+  isbn13: '9784065392140'
+  release_date: '2025-04-11'
+- number: 4
+  isbn13: '9784065408063'
+  release_date: '2025-09-12'
+- number: 5
+  isbn13: '9784065424902'
+  release_date: '2026-02-13'
+- number: 6
+  isbn13: '9784065442272'
+  release_date: '2026-07-13'
+extra_editions: []
