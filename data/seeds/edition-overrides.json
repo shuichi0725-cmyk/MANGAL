@@ -37218,5 +37218,26 @@
   "note": "著者=MADBクレジット風田朗(鈴木伸一の別名義・典拠Q11648538)。★editionsも固定: authorsだけ足すとISBN無しの1979年初版が number:2 の幽霊巻として湧くため、実在巻(ISBN付)のみで再構築 2026-09-10 / ★年は初出1979を明示(editions固定で復刊2012から再計算されるため)",
   "year_started": 1979,
   "year_ended": 1979
+ },
+ "pakupaku-desuwa-tsuihousareta-ojousama": {
+  "authors": [
+   {
+    "name": "島知宏",
+    "role": "artist"
+   }
+  ],
+  "original_authors": [
+   {
+    "name": "音速炒飯",
+    "role": "writer"
+   }
+  ],
+  "credits": [
+   {
+    "name": "有都あらゆる",
+    "role": "キャラクター原案"
+   }
+  ],
+  "note": "1巻表紙のクレジットで役割確定(ユーザ提供画像 2026-09-10)= 「漫画:島知宏 / 原作:音速炒飯 / キャラクター原案:有都あらゆる」(英字 Comic=Hiroshi Shimachi / Story=Onsokuchahan / Character Design=Arito Arayuru)。従来は島知宏と音速炒飯が両方 writer_artist で混ざり、有都あらゆるは種2 series_authors に居らず頁から欠落していた。★キャラクター原案は漫画の著者ではないので credits(著者欄・50音索引に入らない表示専用層)へ入れる"
  }
 }

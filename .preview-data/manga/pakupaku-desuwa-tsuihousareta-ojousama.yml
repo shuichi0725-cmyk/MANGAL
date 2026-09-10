@@ -9,13 +9,15 @@ year_started: 2023
 year_ended: null
 status: ongoing
 authors:
-- name: 音速炒飯
-  role: writer_artist
 - name: 島知宏
-  role: writer_artist
+  role: artist
   kana: シマチヒロシ
   romaji: shimachihiroshi
-original_authors: []
+original_authors:
+- name: 音速炒飯
+  role: writer
+  kana: オンソクチャーハン
+  romaji: onsokuchahan
 publisher: kodansha
 magazine: null
 demographic: shoujo
@@ -70,6 +72,9 @@ editions:
     release_date: '2026-05-01'
 publishers:
 - kodansha
+credits:
+- name: 有都あらゆる
+  role: キャラクター原案
 catch: 食べるほど強くなる、最強令嬢。
 anilist_id: 170027
 genres_anilist:
