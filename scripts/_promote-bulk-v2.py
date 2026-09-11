@@ -4054,6 +4054,15 @@ def main():
                     continue
                 _v["isbn13"] = _c["normal_isbn"]
                 _v["cover_url"] = _c["normal_cover"]
+                # ★cover-override は「キーが在れば必ず勝つ」(2026-09-11 汗と石鹸7巻で発覚)。
+                #   この pass は巻のISBNを 特装版→通常版 に差し替えてから seed の凍結書影を焼くため、
+                #   上流の override 適用時点では通常版ISBNがまだ巻に無く、参照されない。
+                #   = seedに書いたのに黙って効かない型 [[seed_silently_ineffective_class]]。
+                #   差し替えた**後**の通常版ISBNで引き直す(空文字=書影なし確定も尊重)。
+                _sef_ovr = get_cover_override()
+                _sef_k = _norm_isbn(_c["normal_isbn"])
+                if _sef_k in _sef_ovr:
+                    _v["cover_url"] = _sef_ovr[_sef_k] or None
                 if _c.get("normal_date"):
                     _v["release_date"] = _c["normal_date"]
                 _var = _c.get("variant") or {}
