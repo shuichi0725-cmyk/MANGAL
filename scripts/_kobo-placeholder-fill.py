@@ -207,6 +207,264 @@ def survey(limit: int) -> None:
     print(f"\n=== survey ===  hit頁 {n_hit} / 一致なし {n_none} / 充当可 {n_vol}巻", flush=True)
 
 
+def dhash(path: str, size: int = 8) -> int:
+    """差分ハッシュ(64bit)。縮小+グレースケールなので JPEG圧縮差・解像度差に強い。"""
+    from PIL import Image
+    im = Image.open(path).convert("L").resize((size + 1, size), Image.LANCZOS)
+    px = list(im.tobytes())  # mode "L" = 1バイト/画素の行優先。getdata()は Pillow14 で廃止
+    bits = 0
+    for r in range(size):
+        row = px[r * (size + 1):(r + 1) * (size + 1)]
+        for c in range(size):
+            bits = (bits << 1) | (1 if row[c] < row[c + 1] else 0)
+    return bits
+
+
+def pairs(limit: int, thresh: int) -> None:
+    """★装丁ゲートの機械化(2026-09-11)
+    同じ頁の「紙の実物書影がある巻」と「Koboの**同じ巻番号**」を突き合わせる。
+    同装丁なら同じ絵なのでハッシュ距離は小さい。HELLSING で人手でやった比較そのもの。
+    距離が大きい = 別装丁/別版のカバー([[kobo_cover_wrong_for_old_print]]) → AI/目視へ回す。
+
+    ★閾値較正(2026-09-11 HELLSING実測。決め打ちでなく実データで引いた線):
+        同巻・同装丁        紙1↔Kobo1 = 5 / 紙5↔Kobo5 = 14 (紙5は帯付きで下部が隠れる)
+        別巻同士(=誤採用したら事故) 20〜29
+        仮書影(文字だけ)↔実物        31
+      → 既定 thresh=12。帯付きは DIFF 側に落ちてAI審査へ回るが、**誤採用より安全**
+        (無書影 ＞ 誤書影)。比較は重なり巻を最大2つ取り min を採るので、片方が帯でも救われる。
+    """
+    import urllib.request
+    rows = [json.loads(l) for l in io.open(SURVEY, encoding="utf-8") if l.strip()]
+    hits = [d for d in rows if d.get("n_hit")]
+    donep = os.path.join(OUTDIR, "pairs-done.json")
+    out_p = os.path.join(OUTDIR, "pairs.jsonl")
+    done = set(json.load(io.open(donep, encoding="utf-8"))) if os.path.exists(donep) else set()
+    todo = [d for d in hits if d["slug"] not in done]
+    imgdir = os.path.join(OUTDIR, "img")
+    os.makedirs(imgdir, exist_ok=True)
+    print(f"充当可 {len(hits)}頁 / 済 {len(done)} / 残 {len(todo)} → 今回 {min(limit,len(todo))}", flush=True)
+    cnt = collections_Counter()
+    out = io.open(out_p, "a", encoding="utf-8", newline="\n")
+    try:
+        for i, d in enumerate(todo[:limit], 1):
+            slug = d["slug"]
+            ftypes = {f["type"] for f in d["fills"]}
+            # 頁の実体から「その版の実物書影を持つ巻」を取る(survey時に保存していないので読み直す)
+            paper = {}
+            try:
+                y = yaml.load(io.open(os.path.join(SRC, slug + ".yml"), encoding="utf-8"), Loader=L)
+                for e in y.get("editions") or []:
+                    if e.get("type") not in ftypes:
+                        continue
+                    for v in e.get("volumes") or []:
+                        u = str(v.get("cover_url") or "")
+                        if u and not is_placeholder(u) and v.get("number") is not None:
+                            paper[int(v["number"])] = u
+            except Exception as e:
+                print(f"  {slug}: yml読めず {e}", flush=True)
+            # Kobo を引き直して全巻の URL を得る(survey は gif巻のURLしか保存していない)
+            title = d.get("title") or ""
+            pt = _KC.norm(title)
+            vols, bare, pg = {}, {}, 1
+            try:
+                while pg <= 4:
+                    before = len(vols) + len(bare)
+                    res = kobo_retry(title, pg)
+                    for it in (res.get("Items") or []):
+                        t2 = unicodedata.normalize("NFKC", str(it.get("title"))).strip()
+                        img = str(it.get("largeImageUrl") or "")
+                        if not img or "noimage" in img:
+                            continue
+                        m = _KC.VOLP.search(t2)
+                        if m and _KC.norm(_KC.VOLP.sub("", t2)) == pt:
+                            vols.setdefault(int(m.group(1)), img)
+                            continue
+                        mb = _KC.VOLP_BARE.search(t2)
+                        if mb and _KC.norm(_KC.VOLP_BARE.sub("", t2)) == pt:
+                            bare.setdefault(int(mb.group(1)), img)
+                    if len(vols) + len(bare) == before:
+                        break
+                    pg += 1
+                    time.sleep(1.3)
+            except RuntimeError:
+                print("★連続429 = 実スロットル。中断(残りは次回)", flush=True)
+                break
+            if not vols and len(bare) >= 3:
+                vols = bare
+            overlap = sorted(set(paper) & set(vols))
+            verdict, dists, used = "NOPAIR", [], []
+            for vn in overlap[:2]:
+                try:
+                    pp = os.path.join(imgdir, f"{slug}-p{vn}.jpg")
+                    kp = os.path.join(imgdir, f"{slug}-k{vn}.jpg")
+                    urllib.request.urlretrieve(paper[vn], pp)
+                    urllib.request.urlretrieve(vols[vn], kp)
+                    dist = bin(dhash(pp) ^ dhash(kp)).count("1")
+                    dists.append(dist)
+                    used.append(vn)
+                except Exception as e:
+                    print(f"  {slug} v{vn}: 画像比較失敗 {e}", flush=True)
+            if dists:
+                verdict = "MATCH" if min(dists) <= thresh else "DIFF"
+            out.write(json.dumps({"slug": slug, "title": title, "verdict": verdict,
+                                  "dists": dists, "cmp_vols": used, "n_overlap": len(overlap),
+                                  "n_fill": d["n_hit"], "fills": d["fills"]}, ensure_ascii=False) + "\n")
+            out.flush()
+            done.add(slug)
+            json.dump(sorted(done), io.open(donep, "w", encoding="utf-8"))
+            cnt[verdict] += 1
+            if i % 25 == 0:
+                print(f"  [{i}/{min(limit,len(todo))}] " + " / ".join(f"{k}{v}" for k, v in cnt.most_common()), flush=True)
+            time.sleep(1.3)
+    finally:
+        out.close()
+        json.dump(sorted(done), io.open(donep, "w", encoding="utf-8"))
+    print("\n=== pairs === " + " / ".join(f"{k}{v}" for k, v in cnt.most_common()), flush=True)
+
+
+def collections_Counter():
+    import collections
+    return collections.Counter()
+
+
+def selfcheck(limit: int) -> None:
+    """★Kobo側のプレースホルダ検出 (2026-09-11 akane-banashi で発覚)
+    Kobo v24 が「JUMP COMICS DIGITAL のロゴだけ」= Kobo自身の仮画像だった。
+    紙との距離比較(pairs)は DIFF で弾けるが、★NOPAIR頁は比較元が無いので素通りする。
+    そこで **頁の中だけで完結する2つの検査** を足す(API不要・既にDL済みの画像で判る):
+      LOGO     … ほぼ白地(小さなロゴだけ)。明るい画素が85%以上
+      TEMPLATE … 別の巻なのに絵が同じ = 全巻共通テンプレ
+                 (グループ・ゼロ「マンガの金字塔」型 [[kobo_cover_wrong_for_old_print]])
+    """
+    import urllib.request
+    from PIL import Image
+    src = os.path.join(OUTDIR, "pairs.jsonl")
+    rows = [json.loads(l) for l in io.open(src, encoding="utf-8") if l.strip()][:limit]
+    imgdir = os.path.join(OUTDIR, "img")
+    os.makedirs(imgdir, exist_ok=True)
+    out = io.open(os.path.join(OUTDIR, "selfcheck.jsonl"), "w", encoding="utf-8", newline="\n")
+    cnt = collections_Counter()
+    for i, r in enumerate(rows, 1):
+        hs, flags = [], []
+        for f in r["fills"][:12]:
+            p = os.path.join(imgdir, f"{r['slug']}-kk{f['number']}.jpg")
+            if not os.path.exists(p):
+                try:
+                    req = urllib.request.Request(f["cover_url"], headers={"User-Agent": "Mozilla/5.0"})
+                    open(p, "wb").write(urllib.request.urlopen(req, timeout=25).read())
+                except Exception:
+                    continue
+            try:
+                im = Image.open(p).convert("L")
+                px = im.tobytes()
+                bright = sum(1 for b in px if b > 235) / max(len(px), 1)
+                if bright >= 0.85:
+                    flags.append(f"LOGO:v{f['number']}")
+                hs.append((f["number"], dhash(p)))
+            except Exception:
+                continue
+        dup = 0
+        for x in range(len(hs)):
+            for y in range(x + 1, len(hs)):
+                if bin(hs[x][1] ^ hs[y][1]).count("1") <= 6:
+                    dup += 1
+        if len(hs) >= 2 and dup >= max(1, len(hs) // 3):
+            flags.append(f"TEMPLATE:{dup}組")
+        verdict = r["verdict"] if not flags else "FLAGGED"
+        cnt[verdict] += 1
+        out.write(json.dumps({**r, "verdict2": verdict, "flags": flags}, ensure_ascii=False) + "\n")
+        if i % 50 == 0:
+            print(f"  [{i}/{len(rows)}] " + " / ".join(f"{k}{v}" for k, v in cnt.most_common()), flush=True)
+    out.close()
+    print("=== selfcheck === " + " / ".join(f"{k}{v}" for k, v in cnt.most_common()))
+
+
+def sheets(verdicts: str, per_sheet: int, limit: int) -> None:
+    """AI/目視審査用のコンタクトシート。★1頁=1行に詰めて1枚に複数頁を載せる
+    (1頁1枚にすると審査画像が数百枚になり、[[feedback_agent_fanout_token_cost]] の轍を踏む)。
+    行の左 = その作品の紙の実物書影(比較元)、右 = 採用候補の Kobo書影。
+    ★API は叩かない(必要なURLは survey/pairs が持っている + 紙は頁の実体から読む)。
+    """
+    import urllib.request
+    from PIL import Image, ImageDraw
+    want = {v.strip().upper() for v in verdicts.split(",") if v.strip()}
+    rows = [json.loads(l) for l in io.open(os.path.join(OUTDIR, "pairs.jsonl"), encoding="utf-8") if l.strip()]
+    rows = [d for d in rows if d.get("verdict") in want][:limit]
+    imgdir = os.path.join(OUTDIR, "img")
+    shdir = os.path.join(OUTDIR, "sheets")
+    os.makedirs(imgdir, exist_ok=True)
+    os.makedirs(shdir, exist_ok=True)
+
+    def grab(url: str, key: str):
+        p = os.path.join(imgdir, key + ".jpg")
+        if not os.path.exists(p):
+            try:
+                req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
+                open(p, "wb").write(urllib.request.urlopen(req, timeout=25).read())
+            except Exception:
+                return None
+        try:
+            return Image.open(p).convert("RGB")
+        except Exception:
+            return None
+
+    CW, CH, PAD, LBL = 112, 158, 6, 14
+    manifest = []
+    print(f"対象 {len(rows)}頁 ({','.join(sorted(want))}) → 1枚{per_sheet}頁", flush=True)
+    for si in range(0, len(rows), per_sheet):
+        chunk = rows[si:si + per_sheet]
+        ncol = 8  # 紙2 + 区切り1 + Kobo5
+        W = ncol * (CW + PAD) + 160
+        RH = CH + LBL * 2 + PAD
+        sheet = Image.new("RGB", (W, RH * len(chunk)), (255, 255, 255))
+        d = ImageDraw.Draw(sheet)
+        for ri, r in enumerate(chunk):
+            y0 = ri * RH
+            d.line([(0, y0), (W, y0)], fill=(200, 200, 200))
+            d.text((4, y0 + 4), f"{si+ri+1}. {r['slug']}", fill=(0, 0, 0))
+            d.text((4, y0 + 18), f"{(r.get('title') or '')[:18]}", fill=(90, 90, 90))
+            d.text((4, y0 + 32), f"{r['verdict']} d={r.get('dists')}", fill=(160, 0, 0))
+            d.text((4, y0 + 46), f"充当{r['n_fill']}巻", fill=(90, 90, 90))
+            ftypes = {f["type"] for f in r["fills"]}
+            paper = []
+            try:
+                y = yaml.load(io.open(os.path.join(SRC, r["slug"] + ".yml"), encoding="utf-8"), Loader=L)
+                for e in y.get("editions") or []:
+                    for v in e.get("volumes") or []:
+                        u = str(v.get("cover_url") or "")
+                        if u and not is_placeholder(u) and v.get("number") is not None:
+                            same = e.get("type") in ftypes
+                            paper.append((0 if same else 1, e.get("type"), int(v["number"]), u))
+            except Exception:
+                pass
+            paper.sort()
+            col = 0
+            for _, et, vn, u in paper[:2]:
+                im = grab(u, f"{r['slug']}-pp{et}{vn}")
+                x = 160 + col * (CW + PAD)
+                if im:
+                    im.thumbnail((CW, CH))
+                    sheet.paste(im, (x, y0 + LBL + 2))
+                d.text((x, y0 + 2), f"紙 {et[:6]} v{vn}", fill=(0, 100, 0))
+                col += 1
+            col = 3
+            for f in r["fills"][:5]:
+                im = grab(f["cover_url"], f"{r['slug']}-kk{f['number']}")
+                x = 160 + col * (CW + PAD)
+                if im:
+                    im.thumbnail((CW, CH))
+                    sheet.paste(im, (x, y0 + LBL + 2))
+                d.text((x, y0 + 2), f"Kobo v{f['number']}", fill=(0, 0, 160))
+                col += 1
+        out = os.path.join(shdir, f"sheet-{si//per_sheet + 1:03d}.png")
+        sheet.save(out)
+        manifest.append({"sheet": out, "slugs": [r["slug"] for r in chunk]})
+        print(f"  {out}  ({len(chunk)}頁)", flush=True)
+    json.dump(manifest, io.open(os.path.join(OUTDIR, "sheets.json"), "w", encoding="utf-8"),
+              ensure_ascii=False, indent=1)
+    print(f"シート {len(manifest)}枚")
+
+
 def stats() -> None:
     q = sum(1 for l in io.open(QUEUE, encoding="utf-8") if l.strip()) if os.path.exists(QUEUE) else 0
     done = len(json.load(io.open(DONE, encoding="utf-8"))) if os.path.exists(DONE) else 0
@@ -239,6 +497,11 @@ def main() -> None:
     ap.add_argument("--build-queue", action="store_true")
     ap.add_argument("--include-noanchor", action="store_true", help="頁内が全部.gif(比較元なし)も対象に含める")
     ap.add_argument("--survey", action="store_true")
+    ap.add_argument("--pairs", action="store_true", help="装丁ゲート: 紙×Koboの同巻をハッシュ比較")
+    ap.add_argument("--thresh", type=int, default=12, help="dhash距離のMATCH閾値")
+    ap.add_argument("--sheets", type=str, default="", help="審査シート生成: 例 DIFF,NOPAIR")
+    ap.add_argument("--selfcheck", action="store_true", help="Kobo側プレースホルダ(LOGO/TEMPLATE)検出")
+    ap.add_argument("--per-sheet", type=int, default=6)
     ap.add_argument("--limit", type=int, default=200)
     ap.add_argument("--stats", action="store_true")
     a = ap.parse_args()
@@ -246,6 +509,12 @@ def main() -> None:
         build_queue(a.include_noanchor)
     elif a.survey:
         survey(a.limit)
+    elif a.pairs:
+        pairs(a.limit, a.thresh)
+    elif a.selfcheck:
+        selfcheck(a.limit)
+    elif a.sheets:
+        sheets(a.sheets, a.per_sheet, a.limit)
     elif a.stats:
         stats()
     else:
