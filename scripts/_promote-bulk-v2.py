@@ -2795,7 +2795,10 @@ def clean_vol(v: dict) -> dict:
     _covr = get_cover_override()
     _ck = _norm_isbn(o["isbn13"])
     if _ck in _covr:
-        o["cover_url"] = _covr[_ck] or None
+        # ★override も _ex 正規化を通す(2026-09-11 ユーザ「小さくて汚い」で発覚)。
+        #   _cover_for 経由は正規化されるのに override 直挿しだけ素通りで、seed に書いた
+        #   ?_ex=200x200 のまま出ていた = 楽天マスター原寸(300)より小さい絵が本番に出る。
+        o["cover_url"] = _norm_cover_ex(_covr[_ck]) or None
     else:
         o["cover_url"] = v.get("cover_url") or _cover_for(o["isbn13"])
     o["release_date"] = _norm_date(v.get("release_date"))  # ★schema形式に正規化(404防止)
@@ -3305,7 +3308,7 @@ def build_yml(
                         _v["release_date"] = _norm_date(_f["release_date"])
                     _cov3 = get_cover_override()
                     _ck3 = _norm_isbn(_v["isbn13"])
-                    _v["cover_url"] = ((_cov3[_ck3] if _ck3 in _cov3 else _cover_for(_v["isbn13"])) or None)
+                    _v["cover_url"] = ((_norm_cover_ex(_cov3[_ck3]) if _ck3 in _cov3 else _cover_for(_v["isbn13"])) or None)
                 _keep.append(_v)
             _ed["volumes"] = _keep
         for _ed in o.get("editions") or []:
@@ -3318,7 +3321,7 @@ def build_yml(
                     if not _v.get("cover_url"):
                         _cov2 = get_cover_override()
                         _ck2 = _norm_isbn(_v["isbn13"])
-                        _v["cover_url"] = ((_cov2[_ck2] if _ck2 in _cov2 else _cover_for(_v["isbn13"]))
+                        _v["cover_url"] = ((_norm_cover_ex(_cov2[_ck2]) if _ck2 in _cov2 else _cover_for(_v["isbn13"]))
                                            or None)
     # ★単独版の deluxe 降格(2026-09-06 ユーザ指摘「BLで、1つしか無いのに"デラックス版"を自称する
     #   通常版がある」)。実体は **レーベル名**(KCデラックス/ビーボーイコミックスデラックス/
@@ -4053,7 +4056,7 @@ def main():
                 if not _c or not _c.get("normal_cover"):
                     continue
                 _v["isbn13"] = _c["normal_isbn"]
-                _v["cover_url"] = _c["normal_cover"]
+                _v["cover_url"] = _norm_cover_ex(_c["normal_cover"])
                 # ★cover-override は「キーが在れば必ず勝つ」(2026-09-11 汗と石鹸7巻で発覚)。
                 #   この pass は巻のISBNを 特装版→通常版 に差し替えてから seed の凍結書影を焼くため、
                 #   上流の override 適用時点では通常版ISBNがまだ巻に無く、参照されない。
@@ -4062,7 +4065,7 @@ def main():
                 _sef_ovr = get_cover_override()
                 _sef_k = _norm_isbn(_c["normal_isbn"])
                 if _sef_k in _sef_ovr:
-                    _v["cover_url"] = _sef_ovr[_sef_k] or None
+                    _v["cover_url"] = _norm_cover_ex(_sef_ovr[_sef_k]) or None
                 if _c.get("normal_date"):
                     _v["release_date"] = _c["normal_date"]
                 _var = _c.get("variant") or {}
@@ -4419,7 +4422,7 @@ def main():
                         _co = get_cover_override()
                         _ck3 = _norm_isbn(_v["isbn13"])
                         if _ck3 in _co:
-                            _new = _co[_ck3] or None
+                            _new = _norm_cover_ex(_co[_ck3]) or None
                             if _v.get("cover_url") != _new:
                                 _v["cover_url"] = _new
                                 _touched = True
