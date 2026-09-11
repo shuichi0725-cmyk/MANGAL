@@ -180,4 +180,4 @@
 - [R2 Class Aの算数=無料100万/月・$4.50は従量](r2_class_a_budget_arithmetic.md) — 「絶対$4.50」は誤り。preview反復はR2ゼロ。余白がフル1回分を切ったら追加同期しない
 - [【機構・不変条件】PC共通シェル=ナビをlayoutへ+左レール+器をmax-w-6xlに統一](pc_shell_and_widths_2026_09_07.md) — ヘッダー/ナビ/シェルは同じ器。器の所在がcomponent側にある罠つき。PCが人間の75%
 - [【戒め】写真の要素を実名で列挙してから作る](feedback_name_the_element_in_the_photo.md) — 自分の実装を前提に選択肢を組むと正解が候補に入らない
-- [【型・未着手】旧作の仮書影.gif 9,412巻=Koboで埋まる(周回queueが未配線)](placeholder_gif_old_layer_kobo_route.md) — 芯=比較元ありの1,410頁。HELLSING 2-4巻で実証
+- [【機構・第1周完了】旧作の仮書影.gif層をKoboで埋める](placeholder_gif_old_layer_kobo_route.md) — 道具=_kobo-placeholder-fill.py(版ゲート+dhash装丁ゲート+Kobo側プレースホルダ検出)。2,473巻/393頁反映済。残=全部.gifの1,627頁+留保652巻+パトレイバー要確認
