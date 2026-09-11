@@ -379,6 +379,45 @@ def selfcheck(limit: int) -> None:
     print("=== selfcheck === " + " / ".join(f"{k}{v}" for k, v in cnt.most_common()))
 
 
+TRIAGE = "triage.jsonl"
+
+
+def triage() -> None:
+    """selfcheck の結果を最終区分に落とす。★LOGO は巻単位の旗なので巻だけ外す
+    (頁ごと捨てると 10巻中1巻がロゴの頁で 9巻を失う)。TEMPLATE は頁全体が疑わしいので審査へ。
+      AUTO   … 装丁ゲートMATCH かつ TEMPLATE無し = 自動確定してよい
+      REVIEW … NOPAIR(比較元なし)/DIFF(距離大)/TEMPLATE = 目視・AI審査へ
+      EMPTY  … 外した結果 充当できる巻が残らない = 対象外
+    """
+    rows = [json.loads(l) for l in io.open(os.path.join(OUTDIR, "selfcheck.jsonl"), encoding="utf-8") if l.strip()]
+    cnt, vol = collections_Counter(), collections_Counter()
+    with io.open(os.path.join(OUTDIR, TRIAGE), "w", encoding="utf-8", newline="\n") as out:
+        for r in rows:
+            logos = {int(m.group(1)) for f in (r.get("flags") or [])
+                     for m in [re.match(r"LOGO:v(\d+)", f)] if m}
+            tmpl = any(f.startswith("TEMPLATE") for f in (r.get("flags") or []))
+            clean = [f for f in r["fills"] if f["number"] not in logos]
+            if not clean:
+                bucket = "EMPTY"
+            elif tmpl:
+                bucket = "TEMPLATE"
+            elif r["verdict"] == "MATCH":
+                bucket = "AUTO"
+            else:
+                bucket = r["verdict"]  # NOPAIR / DIFF
+            cnt[bucket] += 1
+            vol[bucket] += len(clean)
+            out.write(json.dumps({"slug": r["slug"], "title": r.get("title"), "bucket": bucket,
+                                  "verdict": r["verdict"], "dists": r.get("dists"),
+                                  "flags": r.get("flags"), "n_fill": len(clean),
+                                  "fills": clean}, ensure_ascii=False) + "\n")
+    for k, n in cnt.most_common():
+        print(f"  {k:10} {n:>4}頁 / {vol[k]:>5}巻")
+    print(f"★AUTO {cnt['AUTO']}頁/{vol['AUTO']}巻 / 要審査 "
+          f"{cnt['NOPAIR']+cnt['DIFF']+cnt['TEMPLATE']}頁/"
+          f"{vol['NOPAIR']+vol['DIFF']+vol['TEMPLATE']}巻")
+
+
 def sheets(verdicts: str, per_sheet: int, limit: int) -> None:
     """AI/目視審査用のコンタクトシート。★1頁=1行に詰めて1枚に複数頁を載せる
     (1頁1枚にすると審査画像が数百枚になり、[[feedback_agent_fanout_token_cost]] の轍を踏む)。
@@ -388,8 +427,13 @@ def sheets(verdicts: str, per_sheet: int, limit: int) -> None:
     import urllib.request
     from PIL import Image, ImageDraw
     want = {v.strip().upper() for v in verdicts.split(",") if v.strip()}
-    rows = [json.loads(l) for l in io.open(os.path.join(OUTDIR, "pairs.jsonl"), encoding="utf-8") if l.strip()]
-    rows = [d for d in rows if d.get("verdict") in want][:limit]
+    # ★selfcheck が走っていればその判定(verdict2 = LOGO/TEMPLATE を加味)を使う
+    tg = os.path.join(OUTDIR, TRIAGE)
+    sc = os.path.join(OUTDIR, "selfcheck.jsonl")
+    src = tg if os.path.exists(tg) else (sc if os.path.exists(sc) else os.path.join(OUTDIR, "pairs.jsonl"))
+    key = "bucket" if src == tg else ("verdict2" if src == sc else "verdict")
+    rows = [json.loads(l) for l in io.open(src, encoding="utf-8") if l.strip()]
+    rows = [d for d in rows if d.get(key) in want][:limit]
     imgdir = os.path.join(OUTDIR, "img")
     shdir = os.path.join(OUTDIR, "sheets")
     os.makedirs(imgdir, exist_ok=True)
@@ -423,7 +467,9 @@ def sheets(verdicts: str, per_sheet: int, limit: int) -> None:
             d.line([(0, y0), (W, y0)], fill=(200, 200, 200))
             d.text((4, y0 + 4), f"{si+ri+1}. {r['slug']}", fill=(0, 0, 0))
             d.text((4, y0 + 18), f"{(r.get('title') or '')[:18]}", fill=(90, 90, 90))
-            d.text((4, y0 + 32), f"{r['verdict']} d={r.get('dists')}", fill=(160, 0, 0))
+            d.text((4, y0 + 32), f"{r.get('bucket') or r.get('verdict')} d={r.get('dists')}", fill=(160, 0, 0))
+            if r.get("flags"):
+                d.text((4, y0 + 60), ",".join(r["flags"])[:22], fill=(200, 0, 0))
             d.text((4, y0 + 46), f"充当{r['n_fill']}巻", fill=(90, 90, 90))
             ftypes = {f["type"] for f in r["fills"]}
             paper = []
@@ -465,6 +511,59 @@ def sheets(verdicts: str, per_sheet: int, limit: int) -> None:
     print(f"シート {len(manifest)}枚")
 
 
+
+def accept(dry: bool) -> None:
+    """triage の AUTO + 目視審査を通った頁を cover-override.jsonl へ純粋追加。
+    ★却下は .cache/kobo-placeholder/rejects.tsv(slug	理由)に置く = 台帳として残す。
+    既に同じ isbn13 が seed に在れば触らない(冪等)。"""
+    rej = {}
+    rp = os.path.join(OUTDIR, "rejects.tsv")
+    if os.path.exists(rp):
+        for i, ln in enumerate(io.open(rp, encoding="utf-8")):
+            if i == 0 or not ln.strip():
+                continue
+            a = ln.rstrip("\n").split("\t")
+            rej[a[0]] = a[1] if len(a) > 1 else ""
+    seed = os.path.join(ROOT, "data", "seeds", "cover-override.jsonl")
+    have = set()
+    for ln in io.open(seed, encoding="utf-8"):
+        if ln.strip():
+            have.add(str(json.loads(ln).get("isbn13")))
+    rows = [json.loads(l) for l in io.open(os.path.join(OUTDIR, TRIAGE), encoding="utf-8") if l.strip()]
+    today = time.strftime("%Y-%m-%d")
+    n_page = n_vol = n_skip = 0
+    slugs = []
+    out = None if dry else io.open(seed, "a", encoding="utf-8", newline="\n")
+    for r in rows:
+        if r["bucket"] == "EMPTY" or r["slug"] in rej:
+            continue
+        how = "装丁ゲートMATCH(自動)" if r["bucket"] == "AUTO" else f"目視審査OK({r['bucket']})"
+        wrote = 0
+        for f in r["fills"]:
+            if str(f["isbn13"]) in have:
+                n_skip += 1
+                continue
+            rec = {"isbn13": str(f["isbn13"]), "cover_url": f["cover_url"], "slug": r["slug"],
+                   "number": f["number"],
+                   "reason": f"楽天紙=仮.gif(実物なし)→Kobo電子で補完。{how} d={r.get('dists')}",
+                   "at": today}
+            if out:
+                out.write(json.dumps(rec, ensure_ascii=False) + "\n")
+            have.add(str(f["isbn13"]))
+            wrote += 1
+        if wrote:
+            n_page += 1
+            n_vol += wrote
+            slugs.append(r["slug"])
+    if out:
+        out.close()
+    tag = "(dry-run) " if dry else ""
+    print(f"{tag}追記 {n_page}頁 / {n_vol}巻 / 既在skip {n_skip} / 却下 {len(rej)}頁")
+    io.open(os.path.join(OUTDIR, "accepted-slugs.txt"), "w", encoding="utf-8").write(",".join(slugs))
+    print(f"反映対象slug → {len(slugs)}件 → accepted-slugs.txt")
+
+
+
 def stats() -> None:
     q = sum(1 for l in io.open(QUEUE, encoding="utf-8") if l.strip()) if os.path.exists(QUEUE) else 0
     done = len(json.load(io.open(DONE, encoding="utf-8"))) if os.path.exists(DONE) else 0
@@ -501,6 +600,9 @@ def main() -> None:
     ap.add_argument("--thresh", type=int, default=12, help="dhash距離のMATCH閾値")
     ap.add_argument("--sheets", type=str, default="", help="審査シート生成: 例 DIFF,NOPAIR")
     ap.add_argument("--selfcheck", action="store_true", help="Kobo側プレースホルダ(LOGO/TEMPLATE)検出")
+    ap.add_argument("--triage", action="store_true", help="最終区分 AUTO/NOPAIR/DIFF/TEMPLATE/EMPTY")
+    ap.add_argument("--accept", action="store_true", help="seedへ純粋追加(rejects.tsv は除外)")
+    ap.add_argument("--dry-run", action="store_true")
     ap.add_argument("--per-sheet", type=int, default=6)
     ap.add_argument("--limit", type=int, default=200)
     ap.add_argument("--stats", action="store_true")
@@ -513,6 +615,10 @@ def main() -> None:
         pairs(a.limit, a.thresh)
     elif a.selfcheck:
         selfcheck(a.limit)
+    elif a.triage:
+        triage()
+    elif a.accept:
+        accept(a.dry_run)
     elif a.sheets:
         sheets(a.sheets, a.per_sheet, a.limit)
     elif a.stats:
