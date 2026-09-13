@@ -35810,3 +35810,15 @@ volumes:
   source: rakuten-preorder
   added_at: '2026-09-14'
   note: 出荷前レビューCONTINUATION裁定(2026-09-14 日次蒸留)。既存頁は1巻(9784049211399)のみ=vol.02は続巻
+- series_keys:
+  - name:大塚あきら|name:部長の夜テクが凄すぎて腰が浮きます疼きます
+  - name:大塚あきら|name:部長の夜テクが凄すぎて腰が浮きます疼きます.
+  number: 12
+  isbn13: '9784867782743'
+  release_date: '2026-11-12'
+  publisher: 秋水社
+  edition_type: standard
+  title_display: 部長の夜テクが凄すぎて腰が浮きます疼きます（Ⅻ）
+  source: rakuten-preorder
+  added_at: '2026-09-14'
+  note: 出荷前レビュー/索引skip調査で発覚(2026-09-14 日次蒸留)。楽天題の巻表示が全角ローマ数字(Ⅻ)でNFKC後は"XII"のラテンになり、数字を要求する分離器の全規則をすり抜けて新作1巻としてドラフト化されていた。既存頁は1-11巻在り=12巻。分離器に paren_roman 規則を追加済
