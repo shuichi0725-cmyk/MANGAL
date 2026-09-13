@@ -51,13 +51,53 @@ def seo_vol_phrase(m):
     return "".join(parts), n_vols
 
 
+_MASTERS = {}
+
+
+def master(fname):
+    """genres/publishers/magazines.yml (key: {name: 表示名}) を引く。★publisher と magazine は
+    データ側が**キー**(shogakukan / big-comic)なので、表示名に直さないと description に
+    キーが露出する(2026-09-11 実踏)。"""
+    if fname not in _MASTERS:
+        d = {}
+        try:
+            g = yaml.load(io.open(os.path.join(ROOT, "data", fname), encoding="utf-8"), Loader=L)
+            for k, v in (g or {}).items():
+                d[k] = (v or {}).get("name") or k
+        except Exception:
+            pass
+        _MASTERS[fname] = d
+    return _MASTERS[fname]
+
+
+def fact_sentence(m, authors):
+    """page.tsx の seoFactSentence と同じ式。"""
+    gn = [master("genres.yml").get(k, k) for k in (m.get("genres") or [])]
+    g = "・".join(gn[:2])
+    head = f"『{m.get('title')}』は{f'{authors}による' if authors else ''}{g + '漫画' if g else '漫画'}。"
+    tail = []
+    mag = master("magazines.yml").get(m.get("magazine"))
+    pub = master("publishers.yml").get(m.get("publisher"))
+    if mag:
+        tail.append(f"{mag}連載")
+    if pub:
+        tail.append(f"{pub}刊")
+    ys, ye = m.get("year_started"), m.get("year_ended")
+    if ys:
+        tail.append(f"{ys}年〜{f'{ye}年' if ye and ye != ys else ''}")
+    s = head + (("、".join(tail) + "。") if tail else "")
+    return (s + "全巻の発売日・ISBN・書影を掲載。") if len(s) <= 62 else s
+
+
 def desc_of(m):
     authors = "・".join(a.get("name", "") for a in (m.get("authors") or []))
     fallback = (m.get("catch") or m.get("synopsis")
                 or f"{m.get('title')}({authors})の漫画全巻一覧・発売日・ISBN・出版社情報。楽天ブックス等の購入リンクつき。")[:120]
     phrase, n_vols = seo_vol_phrase(m)
     if n_vols:
-        d = f"{phrase}{m.get('catch') or m.get('synopsis') or ''}"[:120]
+        # ★2026-09-11: catch/synopsis が無ければ事実文で埋める(page.tsx の④と同じ)
+        body = m.get("catch") or m.get("synopsis") or fact_sentence(m, authors)
+        d = f"{phrase}{body}"[:120]
         return (d or fallback), bool(m.get("catch") or m.get("synopsis"))
     return fallback, bool(m.get("catch") or m.get("synopsis"))
 

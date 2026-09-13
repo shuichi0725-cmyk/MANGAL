@@ -55,9 +55,43 @@ function seoVolPhrase(m: import("@/lib/schema").Manga): { phrase: string; nVols:
   return { phrase: parts.join(""), nVols, latest };
 }
 
+/** ★catch/synopsis が無い頁の description を、頁が持つ**事実**で差別化する(④)。
+ *  (2026-09-11 ユーザ相談「メタディスクリプションが同じのが多過ぎ?」→ 実測で判明)
+ *
+ *  旧実装の穴: desc = `${巻数フレーズ}${catch || synopsis || ""}` で、題名入りの定型文は
+ *  **nVols===0 の時しか使われなかった**。巻はあるが catch が無い頁(全体の42.5%)は
+ *  巻数フレーズだけが残り、しかも発売日が年月精度(旧作)だと日付の文も付かないため
+ *  「全1巻で完結。」だけになる。実測 = 8,845頁がこの1文字列を共有、重複頁は全体の31.8%。
+ *  → 事実(著者/ジャンル/掲載誌/出版社/刊行年)を足して固有率 72.1% → 100.0%(実測)。
+ *  ★catch/synopsis が在る頁の挙動は一切変えない(57.5%は現状維持)。 */
+function seoFactSentence(
+  m: import("@/lib/schema").Manga,
+  authors: string,
+  genreNames: string[],
+  publisherName: string | null,
+  magazineName: string | null,
+): string {
+  const g = genreNames.slice(0, 2).join("・");
+  // ★題名を必ず含める: 同じ著者×ジャンル×出版社×年の作品が固まるため(実測=赤塚不二夫で24頁)。
+  const head = `『${m.title}』は${authors ? `${authors}による` : ""}${g ? `${g}漫画` : "漫画"}。`;
+  const tail: string[] = [];
+  // ★publisher/magazine は**キー**(shogakukan / big-comic)。必ず masters の表示名に直す
+  //   (2026-09-11: 直前の実装がキーを素で出していた)。
+  if (magazineName) tail.push(`${magazineName}連載`);
+  if (publisherName) tail.push(`${publisherName}刊`);
+  const yr = m.year_started
+    ? `${m.year_started}年〜${m.year_ended && m.year_ended !== m.year_started ? `${m.year_ended}年` : ""}`
+    : "";
+  if (yr) tail.push(yr);
+  const s = `${head}${tail.length ? `${tail.join("、")}。` : ""}`;
+  // 余白がある時だけ、頁が何を載せているかを添える(埋まっていれば切り捨てられるだけなので付けない)
+  return s.length <= 62 ? `${s}全巻の発売日・ISBN・書影を掲載。` : s;
+}
+
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const m = loadAllManga().manga.find((x) => x.slug === slug);
+  const data = loadAllManga();
+  const m = data.manga.find((x) => x.slug === slug);
   if (!m) return {};
   const authors = (m.authors ?? []).map((a) => a.name).join("・");
   let title = `${m.title}${authors ? ` | ${authors}` : ""} - 全巻一覧・発売日`;
@@ -68,7 +102,12 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     // ★①: 「何巻まで/完結/最新刊いつ」クエリ対応(2026-08-06 テスト=チェンソーマン)
     const sv = seoVolPhrase(m);
     if (sv.nVols) title = `${m.title}${authors ? ` | ${authors}` : ""} - 全${sv.nVols}巻の発売日・全巻一覧`;
-    desc = `${sv.phrase}${(m.catch || m.synopsis || "")}`.slice(0, 120) || desc;
+    // ★④(2026-09-11): catch/synopsis が無ければ「巻数フレーズだけ」で終わらせず事実文で埋める
+    const genreNames = (m.genres ?? []).map((k) => data.genres.find((x) => x.key === k)?.name ?? k);
+    const pubName = data.publishers.find((p) => p.key === m.publisher)?.name ?? null;
+    const magName = data.magazines.find((x) => x.key === m.magazine)?.name ?? null;
+    const body = m.catch || m.synopsis || seoFactSentence(m, authors, genreNames, pubName, magName);
+    desc = `${sv.phrase}${body}`.slice(0, 120) || desc;
   }
   const cover = coverUrl(m);
   return {
