@@ -1,6 +1,6 @@
 ---
 name: inflight-state-2026-09-01
-description: 【✅2026-09-08の週次で全部公開済】本番待ちだった検索残務/発売日SEO面/ハブ850面/PC共通シェルは公開完了。残るはユーザのGSC手作業と未決2件
+description: 【本番待ちの台帳】2026-09-08の週次で検索残務/発売日SEO面/ハブ850面/PC共通シェルは公開済。★2026-09-14 追加=SEO基本4件(メタdesc/最終巻/書影alt/title・OG)が週次蒸留待ち(機能蒸留では出ない)
 metadata:
   type: project
 ---
@@ -84,3 +84,21 @@ IndexNow は 298 URL 受理(削除分の通知)。鍵ファイルも本番に載
 - **sitemap に `/publisher/(unknown)` と `/publisher/(unknown)/2` が載っている**(90,911中の2URL)。
   publisher 未確定(preflight基準で339頁)の受け皿ハブがそのまま索引対象になっている。
   出さない方が良いなら sitemap 生成側で publisher スラグの除外が要る(次の機能蒸留級の変更)。
+
+
+## ★追記 2026-09-14: SEO基本4件が**週次蒸留待ち**(= 機能蒸留では出ない)
+
+★重要: これらは **作品頁66kのHTMLに焼かれる**ので、機能蒸留(非漫画面+チャンクのみ)では届かない。
+「週次蒸留して」1回でまとめて出る。詳細は [[seo_structure_gaps_2026_09_04]] の 8〜11。
+
+| commit | 内容 | 実測 |
+|---|---|---|
+| 11720eb5e | メタdescriptionの重複解消(catch無し頁を事実文で埋める) | 固有 72.1%→100.0% / 重複 22,039→54頁 |
+| 1a8b635be | 「全M巻で完結。最終巻N巻は…」の M≠N を是正 | 2,749頁→0 |
+| 0e2d1244b | 書影のaltに作品名(全66k頁が `alt="第1巻"` で同一だった) | 書影の空alt 0件 |
+| 68109904b | titleの語順+著者2名上限 / 既定OG画像 / descriptionの余白 | title最大 272→143字 / OG画像なし 10,837頁→0 |
+
+- 監査 = `python scripts/_audit-meta-description-dup.py`(公開前後の再測に使う)。
+- OG画像の再生成 = `python scripts/_gen-og-default.py` → `public/og-default.png`。
+- ★公開後にユーザ側でやること: GSC でトップと主要ハブの URL検査(title/description の再取得を促す)。
+  サイト全体の title 変更なので**順位が数週間揺れうる**([[seo_title_suffix_decision]] と同じ注意)。

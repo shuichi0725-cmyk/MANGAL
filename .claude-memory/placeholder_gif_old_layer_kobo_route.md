@@ -1,6 +1,6 @@
 ---
 name: placeholder_gif_old_layer_kobo_route
-description: "【機構・第1周完了 2026-09-11】旧作の仮書影(.gif)層をKobo電子で埋める。道具=_kobo-placeholder-fill.py(版ゲート+dhash装丁ゲート+Kobo側プレースホルダ検出)。芯1,381頁→2,473巻/393頁を反映済"
+description: "【機構・第1周完了 2026-09-11 / パトレイバー解決 09-14】旧作の仮書影(.gif)層をKobo電子で埋める。道具=_kobo-placeholder-fill.py(版ゲート+dhash装丁ゲート+Kobo側プレースホルダ検出)。芯1,381頁→2,473巻/393頁を反映済"
 metadata: 
   node_type: memory
   type: project
@@ -55,8 +55,13 @@ metadata:
 - ★**頁内が全部 .gif = 1,627頁**は比較元が無いので queue 外(`--include-noanchor` で入る)。
   memory の既定方針どおり「頁内で装丁が統一されるか」で裁定する必要がある。
 - 版ゲートで留保した **156版/652巻** — 文庫/新装など別版。Kobo側の版を特定できれば救える。
-- ★**要確認1件**: `mobile-keisatsu-patlabor`(21巻) = 装丁不一致だが、**我々の紙書影
-  (standard v11)のほうが別版の疑い**。上流を直せば21巻が救える [[feedback_cover_oddity_signal]]。
+- ✅**解決: `mobile-keisatsu-patlabor`**(2026-09-14 ユーザ判断)= 却下は**私の誤判定**だった。
+  少年サンデーC版22巻のうち紙の実物書影は **11巻の1枚だけ**で、その1枚に楽天が
+  **小学館文庫の書影を紐付けていた**(ISBN 9784091226013 に黒地の THE MOBILE POLICE PATLABOR)。
+  = 装丁ゲートが基準にした唯一の比較元が汚れていた。Kobo(小学館2012電子化・全22巻=紙と同構成)が正で、
+  11巻を含む**22巻を Kobo に統一**。★教訓 = **比較元が1枚しか無い頁の DIFF は、Kobo でなく
+  こちら側を疑う**([[gate_mismatch_reveals_our_own_error]] と同型)。
+  なお同頁の**ワイド版11巻はまだ仮書影**(Koboにワイド版構成の電子版が無い)。
 
 ## 副産物の構造修正
 

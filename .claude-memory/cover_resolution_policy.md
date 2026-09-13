@@ -31,3 +31,15 @@ metadata:
 - `size`（単数形）は no-op のまま10箇所に残っていた死にpropで、2026-09-06 に撤去済み。
 
 [[rakuten_cover_data_asset]] [[cover_source_affiliate_only]] [[feedback_cover_oddity_signal]]
+
+## ★型・封鎖済(2026-09-11): cover-override で入れた書影は `_ex` 正規化を通っていなかった
+
+ユーザ報告「小さくて汚い」で発覚。`_cover_for` 経由は `_norm_cover_ex` で 300x300 に揃うのに、
+**`cover-override` の直挿しだけ素通り**で、seed に書いた `?_ex=200x200` のまま本番へ出ていた。
+= この裁定(300を下げない)が**コード経路の穴で静かに破られていた**型。
+
+- 実害: 直前に入れた Kobo書影 **2,473巻がまるごと 200x200** で公開されていた。
+- 適用点は **5箇所**あった(本流 / fill の2経路 / 予約頁ブロック / 特装版pass)。全部 `_norm_cover_ex` に通す。
+- 教訓: seed に URL を書く系の層を足したら、**既存の正規化を通るか**を経路ごとに確かめる
+  ([[seed_silently_ineffective_class]] と同根。書いた値がそのまま出るとは限らない)。
+- 検算: 反映後に `data/manga.v2` の実値を seed と突合して `_ex=300x300` を数える(2,495/2,495 で確認)。

@@ -107,7 +107,7 @@
 - [【進行中】エンリッチ7k再開](enrich_7k_resume_state.md) ／ [【重要】新しい順の鉱脈が枯れた](enrich_newest_seam_exhausted.md) ／ [【✅完走】BookLive紹介文=第2材料源](enrich_booklive_seam_done.md)
 - [【残】鬼太郎本編の多版正規化](kitaro_honpen_multiedition_pending.md) ／ [【✅完遂】ギャラ型=巻×日付大逆行の是正](gyara_type_regression_cleanup_state.md)
 - [TinyFish=WebFetch補完](tinyfish_web_fetch.md) ／ [Cloudflareアクセス解析](cloudflare_analytics_access.md) ／ [CF請求=Workers Paid $5.50/月のみ](cloudflare_billing.md)
-- [本番待ち2026-09-01=検索残務+発売日SEO面+アニメ季節](inflight_state_2026_09_01.md) — 機能蒸留待ち(ヘッダーナビ改訂 一覧→新作 も含む)・公開後GSC手…
+- [【台帳】本番待ち(inflight)](inflight_state_2026_09_01.md) — ★2026-09-14 追加=SEO基本4件(メタdesc/最終巻/書影alt/title・OG画像)は**週次蒸留待ち**=機能蒸留では出ない
 - [進行中状態2026-08-13](inflight_state_2026_08_13.md) — 本番待ち=メニュー/カラー版/アニメ化34頁・Kindle様子見
 - [新PCへ移行済み2026-07-17](pc_migration_2026_07_17.md) ／ [M5_Ultra=家庭内ファイルサーバー](m5ultra_file_server_setup.md) ／ [見えるが書けない=SMB共有レベル許可](smb_share_level_readonly_gotcha.md) ／ [起動bat3本=モデル別resume](launcher_bats_session_namespaces.md)
 - [ソーサリアン統合=本番化済](sorcerian_consolidation_state.md) — 単巻読切連番の1頁統合の型見本
@@ -180,4 +180,4 @@
 - [R2 Class Aの算数=無料100万/月・$4.50は従量](r2_class_a_budget_arithmetic.md) — 「絶対$4.50」は誤り。preview反復はR2ゼロ。余白がフル1回分を切ったら追加同期しない
 - [【機構・不変条件】PC共通シェル=ナビをlayoutへ+左レール+器をmax-w-6xlに統一](pc_shell_and_widths_2026_09_07.md) — ヘッダー/ナビ/シェルは同じ器。器の所在がcomponent側にある罠つき。PCが人間の75%
 - [【戒め】写真の要素を実名で列挙してから作る](feedback_name_the_element_in_the_photo.md) — 自分の実装を前提に選択肢を組むと正解が候補に入らない
-- [【機構・第1周完了】旧作の仮書影.gif層をKoboで埋める](placeholder_gif_old_layer_kobo_route.md) — 道具=_kobo-placeholder-fill.py(版ゲート+dhash装丁ゲート+Kobo側プレースホルダ検出)。2,473巻/393頁反映済。残=全部.gifの1,627頁+留保652巻+パトレイバー要確認
+- [【機構・第1周完了】旧作の仮書影.gif層をKoboで埋める](placeholder_gif_old_layer_kobo_route.md) — 道具=_kobo-placeholder-fill.py(版ゲート+dhash装丁ゲート+Kobo側プレースホルダ検出)。2,473巻/393頁反映済。残=全部.gifの1,627頁+留保652巻(パトレイバーは解決=比較元1枚の頁は自分側を疑う)
