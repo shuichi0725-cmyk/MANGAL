@@ -21,6 +21,17 @@ export const metadata: Metadata = {
   },
   description:
     "出版年・著者・出版社・分野・ジャンルから日本の漫画を絞り込めるデータベース。全巻の発売日・ISBN・書影と、楽天ブックス等の購入リンクつき。",
+  // ★既定OG画像(2026-09-14 SEO穴③)。従来は作品頁が書影を持つ時だけ画像が付き、
+  //   書影ゼロの作品頁10,837件(15.7%)とジャンル/ハブ/一覧/著者/ホームは**全部画像なし**で、
+  //   SNSやチャットに貼ると真っ白だった。ここで全頁の既定を与える(頁側で上書き可)。
+  //   `output: "export"` なので ImageResponse ではなく静的PNG(scripts/_gen-og-default.py で生成)。
+  openGraph: {
+    type: "website",
+    siteName: "MANGAL",
+    url: "https://mangal-db.com",
+    images: [{ url: "/og-default.png", width: 1200, height: 630, alt: "MANGAL — 日本の漫画データベース" }],
+  },
+  twitter: { card: "summary_large_image" },
 };
 
 // ★D3テーマ(黒×アシッドライム)= 2026-08-13 ユーザGOで本採用。全ビルドで常時付与。

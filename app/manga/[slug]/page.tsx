@@ -98,26 +98,56 @@ function seoFactSentence(
   return s.length <= 62 ? `${s}全巻の発売日・ISBN・書影を掲載。` : s;
 }
 
+/** ★④ description の余白を書誌で埋める(2026-09-14)。上限120字に対し実測で
+ *  45%が80字未満・11%が60字未満だった(catch が短い頁)。catch を持つ頁にだけ、
+ *  余白が大きい時に限って「掲載誌・出版社・刊行年」を足す。
+ *  catch が無い頁は seoFactSentence が既に同じ事実を含むので**足さない**(重複回避)。 */
+function seoBiblioTail(
+  publisherName: string | null,
+  magazineName: string | null,
+  yearStarted?: number | null,
+  yearEnded?: number | null,
+): string {
+  const t: string[] = [];
+  if (magazineName) t.push(`${magazineName}連載`);
+  if (publisherName) t.push(`${publisherName}刊`);
+  if (yearStarted) t.push(`${yearStarted}年〜${yearEnded && yearEnded !== yearStarted ? `${yearEnded}年` : ""}`);
+  return t.length ? `${t.join("、")}。` : "";
+}
+
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const data = loadAllManga();
   const m = data.manga.find((x) => x.slug === slug);
   if (!m) return {};
-  const authors = (m.authors ?? []).map((a) => a.name).join("・");
-  let title = `${m.title}${authors ? ` | ${authors}` : ""} - 全巻一覧・発売日`;
+  const authorList = (m.authors ?? []).map((a) => a.name).filter(Boolean);
+  const authors = authorList.join("・");
+  // ★title の著者は2名まで(2026-09-14)。アンソロジーで20名以上並び、実測で最長272文字の
+  //   title が出ていた。日本語SERPの表示は概ね30〜35文字なので、長い著者列は「表示されない
+  //   のに、稼ぎ頭の語(全N巻/発売日)を表示外へ押し出す」だけの純損失。
+  const authorsShort = authorList.length > 2 ? `${authorList.slice(0, 2).join("・")}ほか` : authors;
+  let title = `${m.title} 全巻一覧・発売日${authorsShort ? ` | ${authorsShort}` : ""}`;
   let desc = (m.catch || m.synopsis ||
     `${m.title}(${authors})の漫画全巻一覧・発売日・ISBN・出版社情報。楽天ブックス等の購入リンクつき。`)
     .slice(0, 120);
   if (SEO_TEST(m.slug)) {
     // ★①: 「何巻まで/完結/最新刊いつ」クエリ対応(2026-08-06 テスト=チェンソーマン)
     const sv = seoVolPhrase(m);
-    if (sv.nVols) title = `${m.title}${authors ? ` | ${authors}` : ""} - 全${sv.nVols}巻の発売日・全巻一覧`;
+    // ★語順(2026-09-14): 旧 `題名 | 著者 - 全N巻の…` は、著者名の長さぶんだけ「全N巻」「発売日」が
+    //   表示外に落ちていた(実測 中央値48文字=全頁が35文字超)。検索者のクリックを決める語を
+    //   題名の直後へ出す。サフィックス「| 漫画・コミックのMANGAL」は裁定済のため維持
+    //   ([[seo_title_suffix_decision]] A案)。
+    if (sv.nVols) title = `${m.title} 全${sv.nVols}巻の発売日・全巻一覧${authorsShort ? ` | ${authorsShort}` : ""}`;
     // ★④(2026-09-11): catch/synopsis が無ければ「巻数フレーズだけ」で終わらせず事実文で埋める
     const genreNames = (m.genres ?? []).map((k) => data.genres.find((x) => x.key === k)?.name ?? k);
     const pubName = data.publishers.find((p) => p.key === m.publisher)?.name ?? null;
     const magName = data.magazines.find((x) => x.key === m.magazine)?.name ?? null;
+    const hasText = Boolean(m.catch || m.synopsis);
     const body = m.catch || m.synopsis || seoFactSentence(m, authors, genreNames, pubName, magName);
-    desc = `${sv.phrase}${body}`.slice(0, 120) || desc;
+    let d = `${sv.phrase}${body}`;
+    // ★④: catch を持つ頁で余白が大きい時だけ書誌を足す(catch 無しは事実文に既に入っている)
+    if (hasText && d.length < 84) d = `${d}${seoBiblioTail(pubName, magName, m.year_started, m.year_ended)}`;
+    desc = d.slice(0, 120) || desc;
   }
   const cover = coverUrl(m);
   return {
@@ -130,9 +160,13 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       url: `${SITE}/manga/${m.slug}`,
       siteName: "MANGAL",
       type: "book",
-      ...(cover ? { images: [{ url: cover }] } : {}),
+      // ★書影が無い頁(実測10,837件=15.7%)も既定OG画像で覆う(2026-09-14 SEO穴③)。
+      //   ルートの openGraph.images を継承させるより、頁側で明示した方が上書き規則に依存しない。
+      images: cover
+        ? [{ url: cover }]
+        : [{ url: `${SITE}/og-default.png`, width: 1200, height: 630, alt: "MANGAL — 日本の漫画データベース" }],
     },
-    twitter: { card: cover ? "summary_large_image" : "summary" },
+    twitter: { card: "summary_large_image" },
   };
 }
 
