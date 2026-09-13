@@ -7,10 +7,13 @@ import { useCallback, useEffect, useState } from "react";
  *  - 開いている間は背景操作不可(全面オーバーレイ)。閉じる = ✕ / 背景クリック / Esc。
  *  - 子要素(通常表示の書影)をトリガーとして包むだけ=既存レイアウト不変。 */
 export default function CoverLightbox({
-  src, label, children, className,
+  src, label, alt, children, className,
 }: {
   src: string | null | undefined;
   label?: string;
+  /** ★画像のalt。label は拡大時のキャプションとして**表示**されるので、
+   *  作品名入りの alt はこちらで渡す(表示は変えない。2026-09-14) */
+  alt?: string;
   children: React.ReactNode;
   className?: string;
 }) {
@@ -62,7 +65,7 @@ export default function CoverLightbox({
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={hi}
-            alt={label ?? "書影"}
+            alt={alt ?? label ?? "書影"}
             className="max-h-[88vh] max-w-[94vw] rounded bg-white object-contain shadow-[0_20px_60px_rgba(0,0,0,.6)]"
             onClick={(e) => e.stopPropagation()}
           />

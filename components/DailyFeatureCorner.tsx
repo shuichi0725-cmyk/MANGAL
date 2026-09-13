@@ -49,7 +49,8 @@ export default function DailyFeatureCorner() {
   }, []);
   if (!day) return null;
 
-  const covers = day.items.slice(0, 5).map((it) => it[3]).filter(Boolean) as string[];
+  // ★書影のaltに作品名を出すため、URLだけでなく [書影, 題名] で持つ(2026-09-14)
+  const covers = day.items.slice(0, 5).filter((it) => it[3]).map((it) => [it[3] as string, it[1]] as const);
   const d = new Date(Date.now() + 9 * 3600 * 1000);
   const md = `${d.getUTCMonth() + 1}/${d.getUTCDate()}`;
   const wk = "日月火水木金土"[d.getUTCDay()];
@@ -68,8 +69,8 @@ export default function DailyFeatureCorner() {
               // eslint-disable-next-line @next/next/no-img-element
               <img
                 key={i}
-                src={c}
-                alt=""
+                src={c[0]}
+                alt={`${c[1]} 表紙`}
                 loading="lazy"
                 className="absolute h-[86px] w-[60px] rounded-[3px] border-2 border-white bg-white object-cover shadow-[0_3px_8px_rgba(15,17,21,.28)]"
                 style={{ left: i * 24, top: [6, 2, 7][i], transform: `rotate(${[-8, 1, 9][i]}deg)`, zIndex: i + 1 }}
@@ -101,7 +102,7 @@ export default function DailyFeatureCorner() {
           <div className="flex gap-1">
             {covers.slice(0, 4).map((c, i) => (
               // eslint-disable-next-line @next/next/no-img-element
-              <img key={i} src={c} alt="" loading="lazy" className="h-12 w-[34px] rounded-[2px] border border-[var(--color-line)] bg-white object-cover" />
+              <img key={i} src={c[0]} alt={`${c[1]} 表紙`} loading="lazy" className="h-12 w-[34px] rounded-[2px] border border-[var(--color-line)] bg-white object-cover" />
             ))}
             <span className="flex h-12 w-[34px] items-center justify-center rounded-[2px] bg-[var(--color-surface-2)] text-[10px] font-extrabold text-ink/50">
               +{Math.max(0, day.n - 4)}

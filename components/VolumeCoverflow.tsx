@@ -274,7 +274,7 @@ export default function VolumeCoverflow({
                 }}
               >
                 {v.cover_url ? (
-                  <CoverImage src={v.cover_url} alt={`第${v.number}巻`} sizes="44px" />
+                  <CoverImage src={v.cover_url} alt={`${title} 第${v.number}巻 表紙`} sizes="44px" />
                 ) : (
                   <span className="flex h-full w-full items-center justify-center text-[8px] text-ink/40">
                     {v.number}
@@ -297,8 +297,12 @@ export default function VolumeCoverflow({
         >
           {cur.cover_url ? (
             // ★書影タップ=最高画質で拡大(2026-08-03 ユーザ要望。閉じるまで背景操作不可)
-            <CoverLightbox src={cur.cover_url} label={cur.volume_label ?? `第${cur.number}巻`}>
-              <CoverImage src={cur.cover_url} alt={cur.volume_label ?? `第${cur.number}巻`} sizes="116px" />
+            <CoverLightbox
+              src={cur.cover_url}
+              label={cur.volume_label ?? `第${cur.number}巻`}
+              alt={`${title} ${cur.volume_label ?? `第${cur.number}巻`} 表紙`}
+            >
+              <CoverImage src={cur.cover_url} alt={`${title} ${cur.volume_label ?? `第${cur.number}巻`} 表紙`} sizes="116px" />
             </CoverLightbox>
           ) : (
             <span className="flex h-full w-full items-center justify-center text-xs text-ink/40">
@@ -377,7 +381,7 @@ export default function VolumeCoverflow({
                       style={{ width: 46, aspectRatio: "2 / 3" }}
                     >
                       {vr.cover_url ? (
-                        <CoverImage src={vr.cover_url} alt={vr.label} sizes="46px" />
+                        <CoverImage src={vr.cover_url} alt={`${title} ${vr.label} 表紙`} sizes="46px" />
                       ) : (
                         <span className="flex h-full w-full items-center justify-center text-[8px] text-ink/40">特装版</span>
                       )}
