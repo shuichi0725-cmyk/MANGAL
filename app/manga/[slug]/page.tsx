@@ -34,13 +34,23 @@ const SEO_TEST = (_slug: string) => true;
 /** 巻数・完結・最新刊のSEO文(①): 「全24巻で完結。最新刊24巻は2026年6月22日発売。」 */
 function seoVolPhrase(m: import("@/lib/schema").Manga): { phrase: string; nVols: number; latest: { n: number | null; date: string } | null } {
   const nums = new Set<number>();
-  let latest: { n: number | null; date: string } | null = null;
   for (const e of m.editions) for (const v of e.volumes) {
     if (v.number != null) nums.add(v.number);
-    const d = String(v.release_date ?? "");
-    if (d && (!latest || d > latest.date)) latest = { n: v.number ?? null, date: d };
   }
   const nVols = nums.size ? Math.max(...nums) : 0;
+  // ★「最終巻N巻」は **巻番号が最大の巻** の日付で言う(2026-09-11 是正)。
+  //   旧実装は「発売日が最も新しい巻」を latest にしていたため、後ろの巻の日付が
+  //   年月精度や欠落だと途中巻が最終巻を名乗り「全14巻で完結。最終巻7巻は…」と食い違った
+  //   (実測 2,749頁=6.1%。うち1,588頁は版が1つだけ=版混在ではなく日付の粗さが原因)。
+  //   最大巻に完全な日付が無ければ **文ごと出さない**(嘘を言わない)。
+  let latest: { n: number | null; date: string } | null = null;
+  if (nVols) {
+    for (const e of m.editions) for (const v of e.volumes) {
+      if (v.number !== nVols) continue;
+      const d = String(v.release_date ?? "");
+      if (d && (!latest || d > latest.date)) latest = { n: nVols, date: d };
+    }
+  }
   const parts: string[] = [];
   if (nVols) parts.push(m.status === "completed" ? `全${nVols}巻で完結。` : `既刊${nVols}巻・連載中。`);
   if (latest && latest.n && latest.date.length >= 10) {

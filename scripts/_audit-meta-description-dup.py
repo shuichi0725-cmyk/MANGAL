@@ -28,15 +28,22 @@ OUT = os.path.join(ROOT, ".cache", "meta-desc-dup.tsv")
 
 def seo_vol_phrase(m):
     """page.tsx の seoVolPhrase と同じ(nVols=巻番号の最大値・latest=発売日文字列の最大)。"""
-    nums, latest = set(), None
+    nums = set()
     for e in m.get("editions") or []:
         for v in e.get("volumes") or []:
             if v.get("number") is not None:
                 nums.add(v["number"])
-            d = str(v.get("release_date") or "")
-            if d and (latest is None or d > latest[1]):
-                latest = (v.get("number"), d)
     n_vols = max(nums) if nums else 0
+    # ★最終巻の文は「巻番号が最大の巻」の日付で言う(page.tsx と同じ。2026-09-11 是正)
+    latest = None
+    if n_vols:
+        for e in m.get("editions") or []:
+            for v in e.get("volumes") or []:
+                if v.get("number") != n_vols:
+                    continue
+                d = str(v.get("release_date") or "")
+                if d and (latest is None or d > latest[1]):
+                    latest = (n_vols, d)
     parts = []
     if n_vols:
         parts.append(f"全{n_vols}巻で完結。" if m.get("status") == "completed" else f"既刊{n_vols}巻・連載中。")
