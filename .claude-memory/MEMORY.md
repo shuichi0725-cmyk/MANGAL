@@ -92,6 +92,7 @@
 - [発売日逆行515件リスト](volume_date_disorder_list.md) ／ [幽霊巻がvol1より前=多版混在](ghost_vol_date_disorder.md) ／ [楽天harvest→題+巻照合機構](harvest_based_fix_mechanism.md) ／ [【✅】題+巻→楽天照合適用済](harvest_match_mechanism_applied.md)
 - [【正本】月次蒸留=_monthly-distill.py 1本道](monthly_distill_orchestrator.md) ／ [【実体】月次蒸留パイプライン(配管記録)](monthly_distill_real_pipeline.md) ／ [取込オーケストレーション=scripts/intake.py](intake_pipeline.md)
 - [【調査済・未着手】年サフィックスslug全洗い出し](year_suffix_slug_survey.md) ／ [掲載誌のper-case上書き=magazine-corrections](magazine_corrections_mechanism.md)
+- [【型・是正1件/検出器の盲点】同じslugを名乗るファイルが2つ=索引に同一作品が2行](duplicate_slug_two_files_blindspot.md) — 掃引はgrep一発10秒。#19はby_slugで畳むので見えない
 - [教育系年代版の分離=NDL補完](edu_multiedition_disentangle_ndl.md)
 - [検索に出るのに404=ビルドskip](search_404_build_skip_validation.md)
 - [【方針】掲載除外の優先度](exclusion_priority_policy.md) — ①成年誌②コンビニ本③纏められないもの
