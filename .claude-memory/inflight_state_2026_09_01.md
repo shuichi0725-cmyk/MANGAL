@@ -102,3 +102,32 @@ IndexNow は 298 URL 受理(削除分の通知)。鍵ファイルも本番に載
 - OG画像の再生成 = `python scripts/_gen-og-default.py` → `public/og-default.png`。
 - ★公開後にユーザ側でやること: GSC でトップと主要ハブの URL検査(title/description の再取得を促す)。
   サイト全体の title 変更なので**順位が数週間揺れうる**([[seo_title_suffix_decision]] と同じ注意)。
+
+## ★追記 2026-09-14(夕): この日の変更も本番待ち
+
+### コードのみ(= 「機能蒸留して」で出る)
+- **ヘッダーのナビ「新作」→「新刊」**(fc21a3726)。行き先 /shinkan は不変。実体は
+  `components/GlobalNav.tsx` **1ファイル**(2026-09-07 の一本化以降。旧記述の「実体は2か所」は無効)。
+  ★NAV_SVG のキーはラベルで引くので、ラベルだけ変えると**アイコンが黙って消える**。
+- **ホームのカレンダー + タイムマシンを完全撤去**(231ca7ef7)。
+  CalendarView/TimeMachine/ReleaseCalendarMock を削除、public/calendar(1,251ファイル)削除、
+  out/calendar overlay と JSON面同期からも除外。★`data/calendar` の生成だけは残す
+  = /shinkan の入力 → [[calendar_ui_removed_data_kept_for_shinkan]]
+
+### データ(= 次の「週次蒸留して」で出る)
+- 日次蒸留(2026-09-14): 続巻163巻を種4へ / CONTINUATION 3件を per-case 転送
+  (異世界魔術師 vol7+8 ・俺の召喚魔法 vol2 ・部長の夜テク vol12) /
+  発売日ドリフト3件適用(★陰陽廻天 Re:バース 2巻が 2026-11-20 → **2027-11-22** の367日延期) /
+  ひかりめぐりまたたいて 下巻を preorder-pages seed へ直接追記(上下巻1頁に統合)
+- **preview に日次ドラフト116頁**を投入済(レビューシート `.cache/review-sheet.html` 送付済)。
+  この116頁は**まだ本番化していない**= 確認GO後に `_preorder-promote-drafts.py`。
+- 非掲載 deny 10件(ガイドブック/画集/手塚の既刊再編集2/多人数アンソロジー2/コンビニ再録2/欧州BD翻訳/ドキばぐ闇鍋編)
+
+### 裁定待ち・宿題(この日に見つけた)
+- ★**源なし manga.v2 孤児頁 414件**(`.cache/orphan-source-pages-2026-09-14.txt`)。
+  次のフルpromote(月次)で**黙って消える**層。一括復元は大規模=GO待ち → [[orphan_source_pages_restored]]
+- **鎌倉ものがたり・推理編 ぶんぶく茶釜** の既存頁が、今回denyした魔界編と同じ
+  Coinsアクション(コンビニ廉価の既刊再編集)。新規は機械で止めたが**既存頁の扱いは未裁定**。
+- **R2 prune 待ち**: `calendar/**`(読み手の居ない死蔵物)を `data/seeds/pending-r2-prune.jsonl` に記帳済。
+- NDL新着の掲載可2件(クズ女子…NOiPA編 / 黒革と悪人)は**あらすじ材料が楽天に無く保留**。
+  捏造しない=ゲートの正しい動作。材料が要るなら skill `external-enrich` の守備範囲。

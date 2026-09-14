@@ -130,7 +130,7 @@
 - [【機構】.5の半端巻(番外編)を通す](half_volume_number_mechanism.md)
 - [【裁定済=出さない】孤児series 45,606は頁化対象でない](orphan_series_promote_is_srcpage_driven.md)
 - [【未決】本番R2に孤児HTML1,041頁](r2_orphan_pages_prune_missing.md) ／ [R2 prune待ち台帳=週次preflightが表示](pending_r2_prune_ledger.md)
-- [【戒め】seed機械追記=「: 」必ずquote](seed_yaml_colon_quoting.md) ／ [カナ英語辞書=mappings外追記はsilent死](katakana_dict_dead_entry_trap.md) ／ [preorder-pages頁の続巻=種4不可・seed直接追記](preorder_page_zokkan_direct_append.md)
+- [【戒め】seed機械追記=「: 」必ずquote](seed_yaml_colon_quoting.md) ／ [カナ英語辞書=mappings外追記はsilent死](katakana_dict_dead_entry_trap.md) ／ [【検証済・両案却下】カナ英語辞書の複合キーはjanomeに割られて効かない](slug_katakana_compound_key_blindspot.md) ／ [preorder-pages頁の続巻=種4不可・seed直接追記](preorder_page_zokkan_direct_append.md)
 - [【✅】手塚全集タブ全滅→復旧](tezuka_tab_empty_pages.md) — blanket除去passは意図的追加seedを保護
 - [genre-append.yml=既存genresを消さずunion](genre_append_seed_mechanism.md) ／ [【✅適用済】ラブコメ復権=romcom裁定](romcom_backfill_state.md)
 - [【✅】派生ジャンル規則=promote恒久層](genre_derive_rules_layer.md) — _genre_rules.py
