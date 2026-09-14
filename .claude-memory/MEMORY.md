@@ -183,3 +183,4 @@
 - [【機構・不変条件】PC共通シェル=ナビをlayoutへ+左レール+器をmax-w-6xlに統一](pc_shell_and_widths_2026_09_07.md) — ヘッダー/ナビ/シェルは同じ器。器の所在がcomponent側にある罠つき。PCが人間の75%
 - [【戒め】写真の要素を実名で列挙してから作る](feedback_name_the_element_in_the_photo.md) — 自分の実装を前提に選択肢を組むと正解が候補に入らない
 - [【機構・第1周完了】旧作の仮書影.gif層をKoboで埋める](placeholder_gif_old_layer_kobo_route.md) — 道具=_kobo-placeholder-fill.py(版ゲート+dhash装丁ゲート+Kobo側プレースホルダ検出)。2,473巻/393頁反映済。残=全部.gifの1,627頁+留保652巻(パトレイバーは解決=比較元1枚の頁は自分側を疑う)
+- [【型・要検品】発売後書影追従は良い書影を仮.gifで潰しうる](cover_release_refresh_can_downgrade.md) — 週次が毎回回す。commit前に追記行を検品(500件中3件が劣化)

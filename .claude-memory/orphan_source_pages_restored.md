@@ -18,6 +18,6 @@ metadata:
 - 源stubは**最小形でよい**(実例 `data/seeds/source-pages/2-hearts.yml`): `slug` / `title` / `title_kana` / `_skey` / `_note_origin`。残りはpromoteが種2+seedから埋める
 - 復元手法(実証済み): manga.v2から最小源を再構成。_skey=頁ISBNで種2逆引き(257/258解決)。種2外の自己完結頁(魔界転生=canonical供給)は**合成_skey『name:著者|name:題』**(オーフェン式)。復元後promote --onlyで**同値確認**
 - 著者名は必ず `str()`+quote(数値ペンネーム359/296型)
-- ★**症状から辿る入口**: 「種4に巻を足して反映したのに頁に出ない」= まずこの型を疑う(`ls data/manga/<stem>.yml data/seeds/source-pages/<stem>.yml`)
+- ★**症状から辿る入口**: 「種4に巻を足して反映したのに頁に出ない」/「書影seedに実物が在るのに頁が仮.gifのまま(cover-override-unreflectedに残り続ける)」= まずこの型を疑う。見分け= `promote --only <stem>` が **total: 0 / wrote 0** を返す(2026-09-14に9月書影で3頁実踏: andaaaidoru, ashiyayamanoteodougugeihinkan-komikku, deyueru-masutaazu-aizouban)(`ls data/manga/<stem>.yml data/seeds/source-pages/<stem>.yml`)
 - 月次サニティ候補: 「源なしmanga.v2頁」数の監視(v2 − data/manga − source-pages − preorder-pages)。増えたら頁化フローの源永続化漏れ
 - 関連: [[orphan_series_promote_is_srcpage_driven]] [[seed4_auto_wipe_accident]] [[new_page_creation_srcpage_key2slug]]
