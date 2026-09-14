@@ -544,10 +544,10 @@ export default async function MangaDetailPage({
             </div>
           )}
 
-          {/* 共有(X/LINE/OS共有) = 説明と関連作品の間(2026-07-12 ユーザ指定位置) */}
+          {/* 共有(X/LINE/OS共有) = 説明の直後(2026-07-12 ユーザ指定位置)。
+              ★2026-09-15 関連作品を巻セクションの下へ移した後も**共有はここに据え置き**(ユーザ裁定):
+              共有は本題(巻)に触れる前でも押される導線で、深い位置に下げると押されなくなるため。 */}
           <ShareButtons title={manga.title} url={`${SITE}/manga/${manga.slug}`} />
-
-          <RelatedWorks items={related} />
 
           {/* 電子カラー版帯=表示停止のまま(2026-08-02 ユーザ裁定「勝手につけられた」)。
               2026-08-12 ホームのカラー版コーナー新設で color-editions.json を再充填したため、
@@ -555,6 +555,14 @@ export default async function MangaDetailPage({
           <ColorEditionNote slug={manga.slug} /> */}
 
           <VolumeRow manga={manga} />
+
+          {/* ★関連作品 = 巻セクション(各版の最後は「📱電子書籍で買う」)の**下**
+              (2026-09-15 ユーザ裁定で旧位置=「説明と巻の間」から移動)。
+              理由: 頁が約束しているのは「全N巻の発売日・全巻一覧」で、検索から来た読者が
+              最初に見たいのは巻。関連作品は読み終えた後の「次の一手」なので本題の後ろに置く。
+              ★関連作品の閲覧数が落ちるのは承知のうえ(ユーザ確認済)。
+              ★SEOへの影響は無い: Googlebotは全HTMLを読むので内部リンクの価値は頁内位置に依らない。 */}
+          <RelatedWorks items={related} />
 
           {/* ★③別題露出(テストゲート内 2026-08-06): 英題・略称・他言語題を検索エンジン可視に */}
           {seoTest && (manga.alternative_titles?.en || manga.synonyms?.length) && (
