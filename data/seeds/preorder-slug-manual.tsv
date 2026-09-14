@@ -12,3 +12,6 @@
 9784434372216	shinimodori-no-hanayome	死に戻りの花嫁は冷徹騎士の執着溺愛から逃げられない: 長題は本編句まで(規則)。装置は末尾に助詞ノが残り reitetsukishi も語中で切れる。死に戻り=shinimodori(本番9件 vs shi-ni-modori 2件の慣行に合わせる)
 9784107729842	hokusei-tetsudou-jiken	北西鉄道事件 シャーロック・ホームズの未公開事件記録: 長題は本編句まで(規則)=主題「北西鉄道事件」を採り副題は捨てる。装置の64字slugは副題を丸ごと含み『未公開』が mi-koukai と語中で切れる
 9784040766331	tsuukaku-tantei-tsuutenji-natsume	痛覚探偵 通天寺ナツメ ［超感覚者たちの華麗なる事件記録］: 楽天ヨミ=ツウカクタンテイツウテンジナツメ…。装置は副題ブロック[]込みで塊判定し生成不可。本編句まで(副題は捨てる)+長音保持。通天寺=ツウテンジ(装置の tsuu-ten-tera は寺=テラの誤読)
+9784575862881	itsuka-wa-all-right	いつかはオールライト: オールライト=all right。★装置は janome が「オールライト」を オール+ライト に割るため辞書の複合キー(オールライト)が効かず all+light(=意味が変わる「オール・ライト」)になる。分かち書き後にカタカナtokenを結合する案は本番3,248題を動かし gan-frontier→ganfurontia 等の退行が出たので不採用(2026-09-14 検証)
+9784575861785	bullet	BULLET-バレットー: 題に英字BULLETとカタカナ注記バレットが併記=同じ語。装置は両方 bullet にして bullet-bullet を作る(同音二重= slug_duplicated_token_sareta_type)。CLAUDE.md slug規則5(字面に外国語併記→その外国語)で bullet
+9784575861846	pusher-tenshi-kenchii	プッシャー天使ケンチー: プッシャー=pusher(辞書語・あらすじも麻薬密売)。ケンチーは登場人物名=造語なのでヘボン1語(装置は ken-chii に割る)。天使は漢語なので tenshi(本番慣行 tenshi 272 vs angel 151)
