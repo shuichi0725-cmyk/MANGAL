@@ -6,6 +6,10 @@
 
 処理: 直近 --days 日以内に発売された巻(ISBN有り)を楽天live再照会し、
 現在のURLと異なれば cover-override.jsonl へ追記(ノーマライズ比較・noimage除外)。
+★劣化ガード(2026-09-14): live が仮書影(`/{ISBN}.gif` = 著者名と書名を並べただけの画像)で、
+  かつ頁に既に書影が在る時は **書かない**。旧実装は「違えば書く」だけで良し悪しを見ず、
+  Kobo補完で入れた実書影や実jpgを .gif へ落としていた(885巻の一巡で書込500件中3件)。
+  このscriptは週次蒸留が毎回回すので、放置すると毎週潰れ続ける型だった。格上げは従来どおり通る。
 → 対象頁を promote --only-file で再生成(このscriptはリスト出力まで)。
 週次蒸留のstep1で --days 45 を回す。
 
@@ -17,6 +21,7 @@ import glob
 import io
 import json
 import os
+import re
 import sys
 import time
 
@@ -26,6 +31,10 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(ROOT, "scripts"))
 import importlib
 _LK = importlib.import_module("_lookup")
+
+# ★仮書影(= 著者名と書名を並べただけの画像)の判定。skill placeholder-cover-refresh と同一規約:
+#   本物 = .../{ISBN}_N_N.jpg  /  仮 = .../{ISBN}.gif (サフィックス無し・拡張子gif)
+RE_PLACEHOLDER = re.compile(r"/\d{13}\.gif")
 
 
 def load_env():
@@ -74,7 +83,7 @@ def main() -> None:
     env = load_env()
     out = io.open(os.path.join(ROOT, "data", "seeds", "cover-override.jsonl"), "a", encoding="utf-8", newline="\n")
     touched = set()
-    n_upd = n_same = n_none = n_err = 0
+    n_upd = n_same = n_none = n_err = n_down = 0
     for i, (stem, isbn, cur) in enumerate(targets):
         try:
             items = _LK.rakuten_live_retry(env, isbn=isbn)
@@ -91,6 +100,19 @@ def main() -> None:
             n_none += 1
         elif live.split("?")[0] == cur.split("?")[0]:
             n_same += 1
+        elif RE_PLACEHOLDER.search(live) and cur:
+            # ★劣化ガード(2026-09-14 実測で新設): live が仮書影(= 著者名と書名を並べただけの
+            #   `/{ISBN}.gif`)の時は、頁に既に何か書影が在るなら **絶対に書かない**。
+            #   旧実装は「頁と違えば書く」だけで良し悪しを見ず、楽天が紙の仮書影を返すISBNで
+            #   ①Kobo電子で補完した実書影(jukebox 3巻/吸血バーへようこそ 4巻)
+            #   ②実jpg
+            #   を .gif へ落としていた(9月発売885巻の一巡で書込500件中3件)。週次蒸留 step1 が
+            #   --days 45 で毎回回すため、放置すると Kobo補完/巻抜けfill の書影が毎週潰される。
+            #   ★逆方向(仮.gif → 実jpg)と版数上げ(_1_2 → _1_3)は従来どおり通る=格上げは止めない。
+            #   ★頁が空(cur無し)の時だけは仮書影でも書く(文字だけでも無いよりは出る)。
+            #   ★Kobo由来を一律保護にはしない: 紙の実物が出たらそちらが正しいため
+            #   ([[kobo_cover_wrong_for_old_print]] = Kobo電子は注意書き付きの代替)。
+            n_down += 1
         else:
             url = live.replace("?_ex=120x120", "?_ex=300x300").replace("?_ex=200x200", "?_ex=300x300")
             out.write(json.dumps({"isbn13": isbn, "cover_url": url, "slug": stem,
@@ -104,7 +126,7 @@ def main() -> None:
         time.sleep(1.3)
     io.open(os.path.join(ROOT, ".cache", "cover-refresh-touched.txt"), "w", encoding="utf-8", newline="\n").write(
         "\n".join(sorted(touched)))
-    print(f"更新{n_upd} / 同一{n_same} / 楽天無し{n_none} / err{n_err} → 対象頁 {len(touched)}")
+    print(f"更新{n_upd} / 同一{n_same} / 楽天無し{n_none} / err{n_err} / ★劣化ガードで不採用{n_down} → 対象頁 {len(touched)}")
     if touched:
         print("→ 再生成: python scripts/_promote-bulk-v2.py --only-file .cache/cover-refresh-touched.txt")
 
