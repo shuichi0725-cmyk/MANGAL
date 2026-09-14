@@ -5,7 +5,6 @@ import { AizoubanCorner, TokusoubanCorner } from "@/components/EditionCorners";
 import TimeMachine from "@/components/TimeMachine";
 import DestinyPickMock from "@/components/DestinyPickMock";
 import MonthReleasesClient from "@/components/MonthReleasesClient";
-import CalendarView from "@/components/CalendarView";
 import FilterRail from "@/components/FilterRail";
 import { bundle, seeded, volCount, thisMonthReleases, releaseDayLabel } from "@/lib/homeDesign";
 import WeekendFeature from "@/components/WeekendFeature";
@@ -177,15 +176,11 @@ export default function Design12() {
         </Tile>
       </section>
 
-      <section className="mt-4 px-4">
-        <Tile className="p-3.5">
-          <div className="mb-1 flex items-baseline justify-between">
-            <h2 className="dot-heading text-[14px] font-extrabold">📅 カレンダー</h2>
-            <span className="text-[10px] text-ink/45">今月〜3ヶ月先+未定</span>
-          </div>
-          <CalendarView />
-        </Tile>
-      </section>
+      {/* ★2026-09-14 ユーザ指示: ホームのカレンダー(CalendarView)を PC/スマホとも撤去。
+          ホームは1つのレスポンシブ実装なので、この節を外すと両方から消える。
+          ★`/calendar/release/*.json` の生成は**止めないこと**: 下の <TimeMachine /> が
+            同じJSONを読んでいる(= 蒸留の _build-calendar.py は引き続き必要)。
+          ★CalendarView.tsx 自体は残す = 保存してある旧案 /home-design-11 がまだ参照している。 */}
 
       <FeaturedDaily slot={0} />
       <KotobaDaily pool={kotobaPool} />
