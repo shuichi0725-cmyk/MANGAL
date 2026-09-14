@@ -27,6 +27,7 @@ export const metadata = { robots: { index: false, follow: false } };  // 実験�
  *  ガワだけ黒×アシッドライム×角丸ゼロへ(.theme-d3 トークン差し替え)。
  *  追加はD3外殻のみ: マーキー帯 / ランダムコピーのヒーロー+検索 / カテゴリ8枚(SVG線画アイコン)。
  *  ヘッダーは現行DesignNavと同一6リンクのSVG版(2026-09-02: 一覧→新作に差し替え・検索を先頭へ。DesignNavと同順)。
+ *  ★2026-09-14: その「新作」はラベルを **「新刊」** に改称(行き先 /shinkan は不変)。正本= components/GlobalNav.tsx。
  *  フッターは共通SiteFooter(layout側)のまま。 */
 
 // ★NavIcon / D3Nav は components/GlobalNav.tsx へ移設(2026-09-07 ナビを layout に一本化)。
