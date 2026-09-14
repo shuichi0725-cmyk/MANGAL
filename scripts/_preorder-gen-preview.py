@@ -151,6 +151,7 @@ def _old_strip_vol_disp(t):
     return t2 if t2 else str(t or "").strip()
 
 # ★2026-07-09 全面作り直し: 整形は _preorder_draft_lib に一本化(副題分離/kana=楽天のみ捏造hold/pykakasi slug/@COMIC/英語保持)
+from _preorder_draft_lib import strip_kana_known_vol as _strip_kana_known_vol
 from _preorder_draft_lib import clean_title as _clean_title, clean_kana as _clean_kana, make_slug as _make_slug, scope_out as _scope_out, looks_like_criticism as _criticism
 # ★上下巻ペアの1頁統合(2026-09-04 ひみつー佐世保事件型)。skill A2-2 の規定だが実装が無く、
 #   同日発売の上下巻が new1b(上=1巻の新作) と ex_mid(下=全巻回収不成立) に割れて散っていた。
@@ -237,6 +238,9 @@ for klass, r in targets:
         holds.append((klass, isbn, raw_title, "(仮)題未確定")); continue
     title = base
     kana = _clean_kana(r.get("titleKana"), subtitle, base)        # 楽天ヨミのみ・捏造(漢字/汚染)はNone=hold。base=長題32字誤hold回避
+    # ★巻番号が既知の時だけ末尾巻数読みを剥がす(2026-09-14 聖弁護士…バツ「イチ」型)。題の読み自体が
+    #   その尾で終わる場合(ケンイチ型)は触らない。
+    kana = _strip_kana_known_vol(kana, r.get("_vol"), (r.get("_part") or None), base)
     if kana is None:
         holds.append((klass, isbn, base, "楽天ヨミ無し/汚染=捏造回避hold(NDL照合キューへ)")); continue
     if not (title and ym and isbn and len(isbn) == 13 and auths):

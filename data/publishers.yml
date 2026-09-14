@@ -132,6 +132,8 @@ bitakeshigaidosha:
   name: 美健ガイド社
 bocshuppanbu:
   name: BOC出版部
+bouryuudou:
+  name: 傍流堂
 boodaainku:
   name: ボーダーインク
 bookbase:
@@ -1387,6 +1389,8 @@ shuueishabunko:
   name: 集英社文庫
 shuusuisha-hakkoumoto:
   name: 秋水社 (発行元)
+  aliases:
+  - 秋水社          # 2026-09-14 日次: ISBN出版者記号 86778 が既存頁6冊と一致=同一実体
 shuuwashisutemu:
   name: 秀和システム
 sobisha:

@@ -39,7 +39,11 @@ def norm(t):
     t = unicodedata.normalize("NFKC", str(t or ""))
     return re.sub(r"[\s　・!！?？:：〜~\-＆&。、．.『』「」]", "", t).lower()
 
-VOLP = re.compile(r"[（(]\s*(\d{1,3})\s*[)）]\s*$|\s+(\d{1,3})\s*$|第\s*(\d{1,3})\s*巻\s*$")
+# ★VOLUME/VOL.N 形(痛覚探偵 通天寺ナツメ […] VOLUME 2 TWO 型 2026-09-14)を追加。
+#   ここは _preorder_title_lib.split_title とは別の軽い逆引き用パターンで、
+#   これが読めないと vol1 が by_base に載らず「全巻回収不成立」で hold になる(実踏)。
+VOLP = re.compile(r"[（(]\s*(\d{1,3})\s*[)）]\s*$|\s+(\d{1,3})\s*$|第\s*(\d{1,3})\s*巻\s*$"
+                  r"|\s*(?:VOLUME|VOL\.?)\s*(\d{1,3})(?:\s+(?:ONE|TWO|THREE|FOUR|FIVE|SIX|SEVEN|EIGHT|NINE|TEN|ELEVEN|TWELVE))?\s*$", re.I)
 def split_vol(title):
     t = unicodedata.normalize("NFKC", str(title or "")).strip()
     m = VOLP.search(t)
@@ -124,6 +128,7 @@ def _old_strip_vol_disp(t):
     return t2 if t2 else str(t or "").strip()
 
 # ★2026-07-09 整形は _preorder_draft_lib に一本化(gen-previewと同じ規律=捏造回避)
+from _preorder_draft_lib import strip_kana_known_vol as _strip_kana_known_vol
 from _preorder_draft_lib import clean_title as _clean_title, clean_kana as _clean_kana, make_slug as _make_slug, scope_out as _scope_out, looks_like_criticism as _criticism
 for r in [x for x in cls["ex_mid"] if ONLY_ISBN is None or str(x.get("isbn")) in ONLY_ISBN]:
     if _scope_out(r.get("title")):
@@ -135,6 +140,8 @@ for r in [x for x in cls["ex_mid"] if ONLY_ISBN is None or str(x.get("isbn")) in
         holds.append((r.get("isbn"), r.get("title"), "(仮)題未確定")); continue
     title = _bt
     kana = _clean_kana(r.get("titleKana"), _sub, _bt)            # 楽天ヨミのみ・捏造(漢字/汚染)はNone=hold。base=長題32字誤hold回避
+    # ★巻番号が既知の時だけ末尾巻数読みを剥がす(2026-09-14 聖弁護士…バツ「イチ」型)。
+    kana = _strip_kana_known_vol(kana, r.get("_vol"), None, _bt)
     ym = r.get("ym")
     auths = author_names(r.get("author"))
     akanas = author_names(r.get("authorKana"))

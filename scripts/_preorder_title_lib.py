@@ -35,6 +35,22 @@ def _kanji_int(g):
     return n if 1 <= n <= 99 else None
 
 
+_ROMAN = {"I": 1, "V": 5, "X": 10, "L": 50, "C": 100, "D": 500, "M": 1000}
+
+
+def _roman_int(t):
+    """ローマ数字→int。不正な並びは None(=巻数として採らない)。"""
+    t = str(t or "").upper()
+    if not t or any(c not in _ROMAN for c in t):
+        return None
+    n, prev = 0, 0
+    for c in reversed(t):
+        v = _ROMAN[c]
+        n = n - v if v < prev else n + v
+        prev = max(prev, v)
+    return n or None
+
+
 def _nfkc(t):
     return unicodedata.normalize("NFKC", str(t or "")).strip()
 
@@ -72,6 +88,22 @@ def split_title(raw):
         return {"base": base, "vol": _kanji_int(m.group(3)), "part": None, "subtitle": "",
                 "clean": base, "matched": "kanji_kan", "vol_suspect": None, "zen": bool(m.group(2))}
 
+    # B0r. ★括弧付きローマ数字の巻表示 (= 2026-09-14 部長の夜テク…(Ⅻ) 型)。
+    #   全角合字 Ⅻ/Ⅺ は NFKC で "XII"/"XI" のラテン文字になるため、数字を要求する B0/B/A0 の
+    #   どれにも当たらず vol=None → **12巻の本が新作1巻としてドラフト化**されかけた(既存頁は1-11巻在り)。
+    #   ★1文字(I/V/X/L/C)は題の装飾のことがあるので確定せず suspect に落とす。
+    m = re.search(r"^(.*?)[\s　]*[（(]\s*((?=[IVXLC]{1,6}\s*[)）])M{0,3}(?:CM|CD|D?C{0,3})"
+                  r"(?:XC|XL|L?X{0,3})(?:IX|IV|V?I{0,3}))\s*[)）][\s　]*$", t)
+    if m and m.group(1).strip() and m.group(2):
+        n = _roman_int(m.group(2))
+        if n and 1 <= n <= 99:
+            base = m.group(1).strip()
+            if len(m.group(2)) >= 2:
+                return {"base": base, "vol": n, "part": None, "subtitle": "", "clean": base,
+                        "matched": "paren_roman", "vol_suspect": None}
+            return {"base": base, "vol": None, "part": None, "subtitle": "", "clean": t,
+                    "matched": None, "vol_suspect": n}
+
     # B. 中間括弧: 題(N) 副題
     m = re.match(r"^(.{3,}?)[\s　]*[（(]\s*(\d{1,3})\s*[)）][\s　]*(\S.*)$", t)
     if m:
@@ -98,6 +130,17 @@ def split_title(raw):
                 if n is not None:
                     base, vol = m.group(1).strip(), int(n)
                     matched = "tail"
+            # A0v. ★「VOLUME N」/「VOL.N」末尾(痛覚探偵 通天寺ナツメ […] VOLUME 2 TWO 型 2026-09-14):
+            #   VOLUME/VOL は巻を指す語なので確定。後ろに英単語の数詞(ONE/TWO/…)が続く表記も吸収する。
+            #   ★これが無いと「VOLUME 2」の本が vol=None のまま新作1巻としてドラフト化される
+            #   (=単巻先行登録の事故。実際 2026-09-14 に1巻既刊の作品が2巻で新規頁化されかけた)。
+            if matched is None:
+                m = re.search(r"^(.*?)[\s　]*(?:VOLUME|VOL\.?)[\s　]*(\d{1,3})"
+                              r"(?:[\s　]+(?:ONE|TWO|THREE|FOUR|FIVE|SIX|SEVEN|EIGHT|NINE|TEN|ELEVEN|TWELVE))?"
+                              r"[\s　]*$", t, re.I)
+                if m and m.group(1).strip():
+                    base, vol = m.group(1).strip(), int(m.group(2))
+                    matched = "tail_volume_word"
             # A. 末尾 スペース区切り裸N (=英字末尾は題の一部かもなのでガード=レベル99保護)
             if matched is None:
                 m = re.search(r"^(.*?)[\s　]+(\d{1,3})[\s　]*(?:[（(]完[)）])?$", t)
@@ -151,6 +194,11 @@ def strip_kana_vol(kana, vol):
     k = re.sub(r"[\s　]*ソノ(?:イチ|ニ|サン|ヨン|ゴ|ロク|ナナ|ハチ|キュウ|ジュウ)[イチニサンヨンゴロクナナハチキュウジュウ]*[\s　]*", " ", k)
     k = re.sub(r"[\s　]+(?:\d{1,3}|イチ|ニ|サン|ヨン|ゴ|ロク|ナナ|ハチ|キュウ|ジュウ(?:イチ|ニ|サン|ヨン|ゴ|ロク|ナナ|ハチ|キュウ)?)(?=[\s　]|$)", " ", k)
     k = re.sub(r"[\s　]+(?:ジョウ|チュウ|ゲ)(?:カン)?$", "", k)
+    # ★ヨミ欄にラテンの巻表示がそのまま入る型(痛覚探偵 …VOLUME2TWO 2026-09-14)。
+    #   楽天は題のラテン部をヨミへ素通しするので、巻表示だけは剥がす(題側 _VOL_TAIL と対)。
+    k = re.sub(r"[\s　]*(?:VOLUME|VOL\.?)[\s　]*\d{1,3}"
+               r"(?:[\s　]*(?:ONE|TWO|THREE|FOUR|FIVE|SIX|SEVEN|EIGHT|NINE|TEN|ELEVEN|TWELVE))?[\s　]*$",
+               "", k, flags=re.I)
     return re.sub(r"[\s　]{2,}", " ", k).strip()
 
 

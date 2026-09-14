@@ -38,7 +38,10 @@ _VOL_TAIL = re.compile(
     r"|[\s　]*[（(](?:(?:上|下|中)巻?|前編|後編)[)）]"     # ★括弧付きの上下中(巻付き可)・前後編
     r"|[\s　]+(?:(?:上|下|中)巻|前編|後編)"                # ★空白+上下中巻・前後編
     r"|[\s　]+(?:上|下|中)"                              # ★空白+上下中(裸)
-    r")\s*$")
+    r"|[\s　]*(?:VOLUME|VOL\.?)[\s　]*\d{1,3}"          # ★VOLUME N / VOL.N (2026-09-14 痛覚探偵型)
+    r"|[\s　]*[（(](?:XC|XL|L?X{0,3})(?:IX|IV|V?I{0,3})[)）]"   # ★括弧付きローマ数字(Ⅻ=XII 2026-09-14 部長の夜テク型)
+    r"(?:[\s　]+(?:ONE|TWO|THREE|FOUR|FIVE|SIX|SEVEN|EIGHT|NINE|TEN|ELEVEN|TWELVE))?"
+    r")\s*$", re.I)
 # ★**ラテン/記号の直後の裸数字は剥がさない**(2026-08-08 検討して却下)。
 #   「THE COMIC10」型は剥がしたいが、同じ規則が「ワイルド7」「AKIRA1」型の**題に含まれる数字**を壊す。
 #   数字の剥離は本質的に曖昧なので、**曖昧な型は簿(出荷前レビュー)に回して人が裁く**方針にする。
@@ -113,7 +116,11 @@ def _hira2kata(s):
 
 
 _ATCOMIC_KANA = re.compile(r"(?:アット|ザ)コミック\s*$")  # ★ザコミック=THE COMICの読み尾(2026-07-15)
-_VOL_KANA = re.compile(r"(?:ダイ)?[イチニサンヨンゴロクナナハチキュウジュウゼロ第]+カン\s*$")
+# ★ラテンの巻表示がヨミ欄へ素通しされる型(痛覚探偵 …VOLUME2TWO 2026-09-14)も剥がす。
+#   楽天は題のラテン部をそのままヨミに入れるため、カナ読みの規則だけでは落ちない。
+_VOL_KANA = re.compile(r"(?:ダイ)?[イチニサンヨンゴロクナナハチキュウジュウゼロ第]+カン\s*$"
+                       r"|(?:VOLUME|VOL\.?)\s*\d{1,3}"
+                       r"(?:\s*(?:ONE|TWO|THREE|FOUR|FIVE|SIX|SEVEN|EIGHT|NINE|TEN|ELEVEN|TWELVE))?\s*$", re.I)
 
 
 def _to_kata_reading(text):
@@ -151,6 +158,53 @@ def _letters(s):
     t = re.sub(r"[^a-z0-9]", "", str(s or "").lower())
     t = re.sub(r"10|\d", lambda m: _DIGIT_READ.get(m.group(), m.group()), t)
     return t.replace("wo", "o").replace("ha", "wa").replace("he", "e")
+
+
+_VOL_READ = {1: "イチ", 2: "ニ", 3: "サン", 4: "ヨン", 5: "ゴ", 6: "ロク", 7: "ナナ", 8: "ハチ",
+             9: "キュウ", 10: "ジュウ", 11: "ジュウイチ", 12: "ジュウニ", 13: "ジュウサン"}
+
+
+def strip_kana_known_vol(kana, vol=None, part=None, base=None):
+    """★楽天ヨミ末尾の巻数読みを「巻番号が判っている時だけ」剥がす (= 2026-09-14)
+
+    kana_tail_trim は基底題の装置読みとの一致を頼りにするため、題に当て字/ラテンが混じると
+    不発になる(聖弁護士の罪と罰→ヒジリベンゴシノツミトバツ「イチ」/ カメの足でポップステップ「イチ」/
+    100万分の1ルクス→…ルクス「ジョウ」が preview まで通った)。
+    ここでは**その巻の番号(または上下巻ラベル)が既知**なので、末尾がその読みに一致する時だけ落とす。
+    推測はしない= 番号と読みが噛み合わない末尾は触らない(捏造回避)。"""
+    if not kana:
+        return kana
+    k = str(kana).strip()
+    # ★偽陽性ガード(史上最強の弟子ケンイチ型): 題そのものの読みが同じ尾で終わるなら巻数読みではない。
+    #   base を渡さない/装置が無い時は**剥がさない**(捏造回避の保守側に倒す)。
+    base_read = None
+    if base:
+        dev = _device()
+        if dev:
+            try:
+                base_read = _letters(dev(base))
+            except Exception:
+                base_read = None
+    tails = []
+    if part in ("上", "下", "中"):
+        tails += [{"上": "ジョウ", "下": "ゲ", "中": "チュウ"}[part] + "カン",
+                  {"上": "ジョウ", "下": "ゲ", "中": "チュウ"}[part]]
+    if isinstance(vol, int):
+        if vol == 1:
+            tails += ["ジョウカン", "ジョウ"]          # 上下巻の第1巻はヨミが「ジョウ」のことがある
+        if vol == 2:
+            tails += ["ゲカン", "ゲ"]
+        if _VOL_READ.get(vol):
+            tails += [f"ダイ{_VOL_READ[vol]}カン", f"{_VOL_READ[vol]}カン", _VOL_READ[vol]]
+        tails.append(str(vol))
+    for t in sorted(set(tails), key=len, reverse=True):
+        if len(k) <= len(t) + 2 or not k.endswith(t):
+            continue
+        t_read = _letters(_device()(t)) if base_read else ""
+        if base_read and t_read and base_read.endswith(t_read):
+            continue                                   # 題の読み自体がその尾=巻数読みでない
+        return k[: -len(t)].strip()
+    return k
 
 
 def kana_tail_trim(base, kana):
