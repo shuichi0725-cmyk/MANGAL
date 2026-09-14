@@ -46,13 +46,16 @@ preview は本番(Workers+R2)と違い **Cloudflare Pages**(`wrangler pages depl
 1. `python scripts/_build-list-index.py .preview-data/manga .preview-data`
 2. ★`python scripts/_gen-titles-pages.py`(引数なしで data と .preview-data の両方を作る)
    = 忘れると `/titles` が旧セット時代の題名を並べ、存在しない頁へリンクする(実際982頁時代の702頁分が残っていた)
-3. `rm -rf public/calendar && python scripts/_build-calendar.py .preview-data/manga public/calendar <当月>`
-   = ★**古い月を消してから**。ビルダーは上書きのみで消さないので、旧セットの月ファイルが死にリンクとして残る。
-   本番は `_r2-sync.py` が `data/calendar` で out/calendar を丸ごと差し替えるので不影響。
+3. ~~previewカレンダー(public/calendar)の再生成~~ = ★**2026-09-14 廃止**。
+   ホームの CalendarView / TimeMachine を撤去し `/calendar/*.json` の読み手が消えたため、
+   public/calendar 自体を削除し `_r2-sync.py` の out/calendar overlay も止めた。
+   ★`data/calendar` の生成(`_build-calendar.py data/manga.v2 data/calendar`)は**残っている**が、
+   これは /shinkan データ生成(`_gen-shinkan-data.py`)の入力で、配信はしない
+   → [[calendar_ui_removed_data_kept_for_shinkan]]
 
 ## 2026-07-03 stale生成物クラスの教訓(カレンダー)
 - public/calendar(6/26製)がslug改名後も残置→①launch表示が別作品に化ける(1968-08のK幽霊=実体はこんにちは先生) ②一覧が生slug表示 ③current月が古い。
-- 恒久策: 生成物(public/calendar・public/data/*-stock.json等)は週次/月次蒸留で必ず再生成(`_build-calendar.py`+`_gen-corner-stocks.py`+`_gen-corner-auto.py`)。発売日カレンダーは全期間化済(release 832ヶ月・月戻り可)。カレンダーは title 埋め込み式に変更済(索引join非依存)。
+- 恒久策: 生成物(public/data/*-stock.json等)は週次/月次蒸留で必ず再生成(`_gen-corner-stocks.py`+`_gen-corner-auto.py`)。★カレンダー面自体は2026-09-14に撤去済(この節は**stale生成物クラスの実例**として残す= 型は他の生成物にそのまま当てはまる)。
 
 ## ★GitHub Actions が success でも、直後の fetch は旧HTMLを掴むことがある(2026-09-07 実踏)
 workflow の `conclusion=success` を待ってすぐ curl したら、シェルの新クラスが 0 件・旧器が残って見えた。
