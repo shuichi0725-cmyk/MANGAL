@@ -339,11 +339,12 @@ def main():
 
     # --- 5.5 ★JSON面同期 (--weekly-json = 週次データ週モード 2026-08-27 ハイブリッド化) ---
     #   フルビルド無し週は out/ が先週のままなので、step1が再生成した JSON面
-    #   (calendar本番フル/shinkan/コーナーstock/軽量idx)をソースから直接hash差分PUTする。
+    #   (shinkan/コーナーstock/軽量idx)をソースから直接hash差分PUTする。
     json_synced = []
     if a.weekly_json:
-        SURFACES = [(os.path.join(ROOT, "data", "calendar"), "calendar"),
-                    (os.path.join(ROOT, "public", "shinkan"), "shinkan"),
+        # ★2026-09-14: calendar は配信面から外した(ホームのCalendarView/TimeMachine撤去)。
+        #   data/calendar は /shinkan の生成入力として残るが、R2へは出さない。
+        SURFACES = [(os.path.join(ROOT, "public", "shinkan"), "shinkan"),
                     (os.path.join(ROOT, "public", "data"), "data"),
                     (os.path.join(ROOT, "public", "idx"), "idx")]
         for src_dir, prefix in SURFACES:
@@ -363,7 +364,7 @@ def main():
                     s3.put_object(Bucket=BUCKET, Key=key, Body=body, ContentType="application/json")
                     manifest[key] = h
                     json_synced.append(key)
-        print(f"JSON面同期: PUT {len(json_synced)} (calendar/shinkan/data/idx のhash差分)")
+        print(f"JSON面同期: PUT {len(json_synced)} (shinkan/data/idx のhash差分)")
         try:
             import _r2_ops_ledger as _rl2
             _rl2.record(len(json_synced), 0, "diff-deploy-json")

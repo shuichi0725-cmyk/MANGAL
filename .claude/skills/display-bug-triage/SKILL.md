@@ -22,7 +22,7 @@ description: 「表示がおかしい」報告の切り分け手順。環境特�
 生成物は再生成しない限り古いまま。対象と再生成コマンド:
 | 生成物 | 症状例 | 再生成 |
 |---|---|---|
-| public/calendar | 旧slug参照で別作品表示(K幽霊)・生slug・月が古い | `_build-calendar.py` |
+| ~~public/calendar~~ | ★2026-09-14 廃止(カレンダーUI撤去)。data/calendar は /shinkan 生成の入力として残るが配信しない | `_build-calendar.py` |
 | public/data/*-stock.json | 書影灰色(slim未展開)・本番に無い作品 | `_gen-corner-stocks.py` |
 | public/data/anniversaries等 | 周年/豪華版が古い | `_gen-corner-auto.py` |
 | 本番索引(data/) | 消した頁の亡霊が一覧/新刊に出る(レンガ型) | `_build-list-index.py data/manga.v2 data` |

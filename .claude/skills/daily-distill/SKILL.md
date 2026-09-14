@@ -69,10 +69,10 @@ B=NDL新着回収(納本済み過去分)。毎日でなくてよい(間隔が空
 | 9 | **検査**(下記チェックリスト) | 欠け>0なら原因調査 |
 | 10 | ★**prev確定**(処理完了の宣言) | `python scripts/_preorder-increment.py --commit-prev` ← full→prev昇格。**これ以外の方法でprevを触るな**。飛ばすと次回差分が壊れる |
 | 10.5 | ★**出荷前レビュー(ゲート)** | `python scripts/_preorder-review.py` ← **exit 0 まで push禁止**。下記で各行裁定 |
-| 10.6 | ★**発売日ドリフト**(2026-09-04新設・すてごろブッチ型) | `python scripts/_audit-preorder-date-drift.py` → `python scripts/_apply-preorder-date-drift.py`(dry-run で保留理由を読む) → `--apply` → `_reflect-targeted.py --only $(cat .cache/preorder-date-drift-stems.txt \| tr '\n' ',') --commit-only`。★**予約巻は後から発売日が動く**(延期/前倒し)。この日のharvestが最新スナップショットなので**ここで突合するのが一番安い**(live不要)。適用は**楽天とNDLが一致した行だけ**=±1日の「奥付日 vs 店頭日」は保留に落ちる(変更しないのが正解)。日付が動いた月は `_build-calendar.py data/manga.v2 data/calendar <当月>` も回す(暦は本番フル版) |
+| 10.6 | ★**発売日ドリフト**(2026-09-04新設・すてごろブッチ型) | `python scripts/_audit-preorder-date-drift.py` → `python scripts/_apply-preorder-date-drift.py`(dry-run で保留理由を読む) → `--apply` → `_reflect-targeted.py --only $(cat .cache/preorder-date-drift-stems.txt \| tr '\n' ',') --commit-only`。★**予約巻は後から発売日が動く**(延期/前倒し)。この日のharvestが最新スナップショットなので**ここで突合するのが一番安い**(live不要)。適用は**楽天とNDLが一致した行だけ**=±1日の「奥付日 vs 店頭日」は保留に落ちる(変更しないのが正解)。日付が動いた月は `_build-calendar.py data/manga.v2 data/calendar <当月>` も回す(★2026-09-14〜: 暦は**配信しない内部中間物**= /shinkan データ生成の入力。ホームのカレンダーUIは撤去済) |
 | 10.7 | ★**保留頁の自動再訪**(2026-08-24新設③) | `python scripts/_preorder-refresh-held.py --limit 30` ← demographic/caption待ちで索引保留の予約由来頁を楽天再照会で埋める(捏造なし=返った時だけ)。touchedが出たら `_reflect-targeted.py --only <touched> --commit-only` |
 | 10.8 | ★**レビューシート生成→ユーザへ**(2026-08-24新設①) | `python scripts/_gen-review-sheet.py` → `.cache/review-sheet.html` をユーザに送付(SendUserFile render)。書影/出版社/slug/ジャンル/再録疑いを一覧色付け=1頁ずつ開かせない |
-| 11 | 索引+暦(**commit止め**) | `python scripts/_build-list-index.py .preview-data/manga .preview-data` ; `python scripts/_build-calendar.py .preview-data/manga public/calendar <当月>` ; `git add .preview-data public/calendar && git commit`(★**pushしない**) |
+| 11 | 索引+暦(**commit止め**) | `python scripts/_build-list-index.py .preview-data/manga .preview-data` ; `git add .preview-data && git commit`(★**pushしない**)。★2026-09-14: preview暦(public/calendar)の再生成は**廃止**(ホームのカレンダー/タイムマシン撤去で読み手が消えた) |
 | 12 | B NDL新着(任意) | `python scripts/_distill_daily.py --discover`→`--plan`→`--emit` ★**push前に済ませる**(Bもpreviewドラフトを作る=最後の1pushに同梱) |
 | 13 | ★**最後に1回だけpush** | `git push` ← 全工程(①〜B)完了後にここで**初めてpush**。Pagesビルドは1回だけ発火=追いpush回避([[reflect_protocol_fast]] NEVER)。中間で絶対pushしない |
 
@@ -316,14 +316,13 @@ python scripts/_verify-kana-pending.py --limit 200
   denyはpreorder経路のみのゲートなので、後日通常単行本が刊行されればMADB月次で正規に入る(その旨をreasonに書く)。
   実例= 死に戻り聖女は毒家族と決別する / 極悪令嬢は仁義を貫く(講談社KCx 2026-10-29。楽天seriesName=KCxが分冊版印刷の暗示)。
 
-## D. 締め: カレンダー/新刊データ更新
+## D. 締め: 新刊データ更新(暦は内部入力のみ)
 
 ```
-python scripts/_build-calendar.py data/manga.v2 data/calendar <当月YYYY-MM>                     # 本番フル
-python scripts/_build-calendar.py .preview-data/manga public/calendar <当月>                    # preview(★srcはpreview自身。本番+ALLOWフィルタだとpreview限定ドラフトが落ちる=2026-07-06実害)
+python scripts/_build-calendar.py data/manga.v2 data/calendar <当月YYYY-MM>                     # 本番フル(=/shinkan生成の入力。配信しない)
 ```
-- 本番R2へ即時反映したい時: 変更月JSON+manifest+beyond.jsonをPUT(姫松対応の手順)。通常は週次のr2-sync overlayが運ぶ。
-- previewのカレンダーは**ページ実在フィルタ必須**(subsetなのでフィルタ無し=リンク切れ)。
+- ★2026-09-14: カレンダーは**配信面から撤去**(ホームのCalendarView/TimeMachine削除・out/calendar overlay廃止)。data/calendar は /shinkan の生成入力としてのみ残る。
+- (previewカレンダーは廃止済)
 
 ## 報告形式
 

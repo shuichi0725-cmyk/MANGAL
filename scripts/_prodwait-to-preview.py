@@ -100,21 +100,19 @@ def main():
         print(f"  索引skip: {slug} ← {why or '要調査(masters外以外の原因)'}"
               + (" [genre:other=既知クラス・本番も同様]" if "genre未キー:other" in why else ""))
 
-    ym = datetime.date.today().strftime("%Y-%m")
-    r = subprocess.run([sys.executable, "scripts/_build-calendar.py", ".preview-data/manga", "public/calendar", ym],
-                       capture_output=True, text=True, encoding="utf-8")
-    print((r.stdout or "").strip().splitlines()[-1] if r.stdout else r.stderr[:200])
+    # ★2026-09-14: previewカレンダー(public/calendar)の再生成は廃止。
+    #   ホームの CalendarView / TimeMachine を撤去し読み手が居なくなったため。
 
     total = len(glob.glob(".preview-data/manga/*.yml"))
     if a.push:
-        subprocess.run(["git", "add", ".preview-data", "public/calendar"], cwd=ROOT)
+        subprocess.run(["git", "add", ".preview-data"], cwd=ROOT)
         subprocess.run(["git", "commit", "-m",
                         f"本番待ち{len(files)}頁をテスト環境へ(ドラフト{len(drafts)}温存・計{total}頁・masters{len(synced)}本同期)"],
                        cwd=ROOT)
         subprocess.run(["git", "push"], cwd=ROOT)
         print(f"→ push済。preview反映15-20分・追いpush禁止。計{total}頁。")
     else:
-        print(f"→ 投入完了(計{total}頁)。push する場合: git add .preview-data public/calendar && commit && push")
+        print(f"→ 投入完了(計{total}頁)。push する場合: git add .preview-data && commit && push")
 
 
 if __name__ == "__main__":

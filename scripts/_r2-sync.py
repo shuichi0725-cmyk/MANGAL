@@ -100,15 +100,11 @@ def main():
     # guard: 一覧索引が小さすぎる(<5MB)= preview subset を焼こうとしている
     if os.path.getsize(os.path.join(OUT, "manga-list-index.json")) < 5 * 1048576:
         print("★abort: manga-list-index.json が 5MB 未満 = preview subset 疑い。data/ の生成元を確認。"); sys.exit(3)
-    # --- ★本番カレンダー overlay (2026-07-06 索引と同型: public/=preview実在フィルタ版のため本番はdata/calendarのフル版で上書き) ---
-    _CAL = os.path.join(ROOT, "data", "calendar")
-    if os.path.isdir(_CAL):
-        import shutil as _sh
-        _dst = os.path.join(OUT, "calendar")
-        if os.path.isdir(_dst):
-            _sh.rmtree(_dst)
-        _sh.copytree(_CAL, _dst)
-        print(f"  本番カレンダー overlay: data/calendar → out/calendar")
+    # --- 本番カレンダー overlay は廃止 (2026-09-14) ---
+    #   ホームの CalendarView / TimeMachine を撤去し、サイト上に /calendar/*.json を
+    #   読む所が無くなったため out/calendar を作らない。data/calendar 自体は残す
+    #   (= _gen-shinkan-data.py の入力。配信しない内部中間物)。
+    #   ★R2に残っている既存の calendar/** は別途 prune が要る(このscriptは消さない)。
 
     # ★.env.local から R2_* を自動読込(CR/空白strip。 bash export経由のCRLF事故 2026-07-03 の恒久対策)
     envp = os.path.join(ROOT, ".env.local")

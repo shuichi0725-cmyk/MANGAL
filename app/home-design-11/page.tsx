@@ -3,10 +3,8 @@ import LikeButtonMock from "@/components/LikeButtonMock";
 import FeaturedDaily from "@/components/FeaturedDaily";
 import AnniversaryDaily from "@/components/AnniversaryDaily";
 import { AizoubanCorner, TokusoubanCorner } from "@/components/EditionCorners";
-import TimeMachine from "@/components/TimeMachine";
 import DestinyPickMock from "@/components/DestinyPickMock";
 import MonthReleasesClient from "@/components/MonthReleasesClient";
-import CalendarView from "@/components/CalendarView";
 import HomeSidebar from "@/components/HomeSidebar";
 import { bundle, seeded, volCount, thisMonthReleases, releaseDayLabel } from "@/lib/homeDesign";
 import WeekendFeature from "@/components/WeekendFeature";
@@ -117,15 +115,7 @@ export default function Design11() {
       </section>
 
       {/* 3.5【中】発売/創刊カレンダー(2ビュー・データ駆動 = public/calendar を遅延fetch・index join) */}
-      <section className="mt-4 px-4">
-        <Tile className="p-3.5">
-          <div className="mb-1 flex items-baseline justify-between">
-            <h2 className="text-[14px] font-extrabold">📅 カレンダー</h2>
-            <span className="text-[10px] text-ink/45">今月〜3ヶ月先+未定</span>
-          </div>
-          <CalendarView />
-        </Tile>
-      </section>
+      {/* ★2026-09-14: カレンダー節は撤去(CalendarView 削除に伴う。本番ホーム=案12と同じ) */}
 
       {/* ①【三世代 slot A】今日の一冊(ソロ or 散開時の1人目。★2026-08-03 ユーザ指定=カレンダー直下の①枠) */}
       <FeaturedDaily slot={0} />
@@ -136,8 +126,7 @@ export default function Design11() {
       {/* 【新・自動】周年: 今日で連載開始N年(anniversaries.json週次再生成) */}
       <AnniversaryDaily />
 
-      {/* 3.6【新・自動】タイムマシン: N年前の今日発売(全期間カレンダー流用) */}
-      <TimeMachine />
+      {/* ★2026-09-14: タイムマシンは撤去(TimeMachine 削除に伴う。本番ホーム=案12と同じ) */}
 
       {/* 3.7【新・自動】愛蔵版・合本(2026-09-06 旧「特装・限定版」から置換。毎回ランダム4点+全部見る。価格表示禁止) */}
       <AizoubanCorner />

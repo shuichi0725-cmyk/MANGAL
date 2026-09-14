@@ -2,7 +2,6 @@ import Link from "next/link";
 import FeaturedDaily from "@/components/FeaturedDaily";
 import AnniversaryDaily from "@/components/AnniversaryDaily";
 import { AizoubanCorner, TokusoubanCorner } from "@/components/EditionCorners";
-import TimeMachine from "@/components/TimeMachine";
 import DestinyPickMock from "@/components/DestinyPickMock";
 import MonthReleasesClient from "@/components/MonthReleasesClient";
 import FilterRail from "@/components/FilterRail";
@@ -176,16 +175,16 @@ export default function Design12() {
         </Tile>
       </section>
 
-      {/* ★2026-09-14 ユーザ指示: ホームのカレンダー(CalendarView)を PC/スマホとも撤去。
-          ホームは1つのレスポンシブ実装なので、この節を外すと両方から消える。
-          ★`/calendar/release/*.json` の生成は**止めないこと**: 下の <TimeMachine /> が
-            同じJSONを読んでいる(= 蒸留の _build-calendar.py は引き続き必要)。
-          ★CalendarView.tsx 自体は残す = 保存してある旧案 /home-design-11 がまだ参照している。 */}
+      {/* ★2026-09-14 ユーザ指示: カレンダー(CalendarView)と タイムマシン(TimeMachine)を
+          PC/スマホとも完全撤去。ホームは1つのレスポンシブ実装なので両方から消える。
+          両コンポーネントと未使用の ReleaseCalendarMock は削除済み(= サイト上に
+          `/calendar/*.json` を読む所は無くなった)。
+          ★ただし `data/calendar` の生成(_build-calendar.py)は**残す**: /shinkan(新刊)の
+            データ生成 _gen-shinkan-data.py の入力になっている。配信はしない内部中間物。 */}
 
       <FeaturedDaily slot={0} />
       <KotobaDaily pool={kotobaPool} />
       <AnniversaryDaily />
-      <TimeMachine />
       <AizoubanCorner />
 
       {trivia.length > 0 && (

@@ -38,10 +38,12 @@ STEPS = [
      "AniList当季+次2季の再収穫(季単位置換・成功時のみ。旧=7/12凍結でコーナーが増えなかった)"),
     ("anime-season-join",  ["_anime-season-join.py", "--rebuild-map"],
      "アニメ季節→頁join(★マップ必ず再構築=stale事故の型対策)"),
+    # ★2026-09-14: カレンダーUI(ホームのCalendarView/TimeMachine)を撤去したため、
+    #   data/calendar は**配信しない内部中間物**になった(out/calendar の overlay も廃止)。
+    #   生成自体は残す = 次の shinkan ステップ(_gen-shinkan-data.py)の入力だから。
+    #   preview暦(public/calendar)は読み手が消えたので廃止。
     ("calendar-prod",     ["_build-calendar.py", "data/manga.v2", "data/calendar", YM],
-     "本番フルカレンダー(r2-syncがoverlay。引数なし実行=preview先に書く事故の根絶)"),
-    ("calendar-preview",  ["_build-calendar.py", ".preview-data/manga", "public/calendar", YM],
-     "previewカレンダー(src=preview自身)"),
+     "本番フルカレンダー(=/shinkan データ生成の入力。配信はしない)"),
     ("cover-refresh",     ["_cover-release-refresh.py", "--days", "45"],
      "発売後の書影差し替え追従(~40分。touched非空→promote自動連鎖)"),
     ("shinkan",           ["_gen-shinkan-data.py"],

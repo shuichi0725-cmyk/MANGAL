@@ -149,6 +149,7 @@
 - [【未決】版違い統合](multi_edition_unification_pending.md) ／ [版/刷タブ・在庫・電子割引](version_tabs_stock_ebook.md) ／ [うる星=版/巻/刷タブ正規ルール](urusei_version_display_rules.md)
 - [コンビニ掃引2026-08=完了・裁定待ち3件](konbini_sweep_2026_08_state.md) — GO待ち
 - [SEO: インデックス未登録6.65万対策=ハブ3点実装済](seo_index_coverage_state.md) ／ [SEO: 発売日の着地面=/shinkan月別静的頁+今週/来月](seo_release_date_pages.md)
+- [【撤去済】ホームのカレンダー/タイムマシン=完全削除。ただしdata/calendarは/shinkan生成の入力なので残す](calendar_ui_removed_data_kept_for_shinkan.md)
 - [ISBN消失FAILの消し込みフロー](weekly_isbn_loss_acknowledge_flow.md)
 - [【戒め】ビルド入力の結線3箇所](build_input_wiring_three_places.md)
 - [部分ビルド合流の復旧型](partial_rebuild_merge_recovery.md)
