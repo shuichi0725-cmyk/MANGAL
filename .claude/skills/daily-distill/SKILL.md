@@ -191,6 +191,43 @@ B=NDL新着回収(納本済み過去分)。毎日でなくてよい(間隔が空
    併せて `_apply-preorder-date-drift.py` の stems 出力に**末尾改行**を付けた
    (無いと読み手が最終行を落とす= 2026-09-04 に30頁中29頁しか preview へ入らなかった実害)。
 
+### ★2026-09-14 の恒久修正(実踏5型・全部scriptに焼いた)
+
+1. ★**「VOLUME N」/「VOL.N」の巻表示が読めない**(痛覚探偵 通天寺ナツメ […] VOLUME 2 TWO):
+   2巻の本が **新作1巻** としてドラフト化されていた(=単巻先行登録の事故そのもの。1巻 9784040763477 は実在)。
+   直した箇所は**3つ**で、1つでも欠けると別の形で詰まる:
+   ・`_preorder_title_lib.split_title` の A0v(巻番号を読む) ・`_preorder-gen-midfill.py` の `VOLP`
+   (**題base→全巻の逆引き**用。ここが読めないと vol1 が by_base に載らず「全巻回収不成立」でhold)
+   ・`_preorder_draft_lib` の `_VOL_TAIL` / `_VOL_KANA`(題とヨミから巻表示を剥がす)。
+2. ★**括弧付きローマ数字の巻表示**(部長の夜テクが凄すぎて腰が浮きます疼きます（Ⅻ）= 12巻。既存頁は1-11巻在り):
+   全角合字 Ⅻ/Ⅺ は **NFKC で "XII"/"XI" のラテン文字**になるため、数字を要求する B0/B/A0 の
+   どの規則にも当たらず vol=None → 新作1巻扱い。`split_title` に paren_roman 規則を追加。
+   ★**1文字(I/V/X/L/C)は確定せず suspect**・★**括弧付きだけ**を採る。裸の末尾ローマ数字は題の一部
+   (エコエコアザラクⅡ/Arc The Lad Ⅱ/聖戦記エルナサーガⅡ/FINAL FANTASY Ⅻ/闘神都市Ⅲ/ダイヤのB!! act Ⅱ/Bounty XXX
+   = 本番7頁で実在)なので**触らない**。この7頁で負テスト済み。
+3. ★**ヨミ末尾の巻数読みが剥がれない**(聖弁護士の罪と罰→ヒジリベンゴシノツミトバツ「イチ」/
+   カメの足でポップステップ「イチ」/ 100万分の1ルクス→…ルクス「ジョウ」が preview まで通った):
+   `kana_tail_trim` は基底題の装置読みとの一致が頼りなので、当て字(聖=ヒジリ)やラテン混じりだと不発。
+   → `_preorder_draft_lib.strip_kana_known_vol(kana, vol, part, base)` を新設し、生成器2本に結線。
+   **その巻の番号が既知のときだけ**末尾の巻数読み(イチ/ニ/…/ジョウ/ゲ/ダイNカン)を落とす。
+   ★偽陽性ガード= **題そのものの読みが同じ尾で終わるなら触らない**(史上最強の弟子ケンイチ型)。
+   ★比較は**ローマ字化してから**行うこと(`_letters("イチ")` は空文字を返すので、素で endswith すると常に真になり全件不発)。
+4. **コンビニ/再録レーベルのゲート追加**: `ポケットワイド`(リイド社SPコミックス=ゴルゴ13のテーマ別再録。
+   2026-09-02 に golgo-13-shorty 等を drop 裁定済) / `Coinsアクション`(双葉社コンビニ版。2026-09-07 に
+   クレヨンしんちゃんパニック! を deny 済)。★このゲートは**続巻判定より後**に居るので、既存頁の続巻は
+   従来どおり zokkan に流れる=**新規頁化だけ**を止める。
+5. ★**CONTINUATION行の種4転送は `scripts/_preorder-transfer-continuation.py`**(新設)で行う。
+   series_keys逆引き / 同ISBN既登録 / 同巻番号既在 / covers追記 を `_preorder-apply-zokkan.py` と同実装で持つ。
+   手で yml を書くと series_keys を取り違える。
+   ★**転送先の頁に源が無いことがある**: `data/manga` にも `data/seeds/source-pages` にも無い頁は
+   `promote --only` が対象外にする(=種4を足しても出ない)。その場合は `source-pages/` に
+   `slug/title/title_kana/_skey/_note_origin` の stub を置いてから反映する。
+   ★**preorder-pages頁**(種2未収載)は series_key が引けない=**種4不可**。seed直接追記が正規経路
+   [[preorder_page_zokkan_direct_append]]。
+6. **publisher未登録で索引skip**(=「検索に出るのに404」)は **deny でなく登録**で直す。
+   別名追加は★**ISBN出版者記号の一致を確認してから**(秋水社=86778 が既存 shuusuisha-hakkoumoto の頁6冊と一致)。
+   新社は `publishers.yml` に新キー(傍流堂=911641 → bouryuudou)。
+
 ★辞書追加は**本番の綴り慣行で裏取りしてから**入れる(索引を数える)。実測:
 addict 4件/adikuto 1件・robot 47/robotto 2・deep 28/diipu 0・abyss 13/abisu 0・sherlock 11/shaarokku 0・holmes 28/0・sketch 13/0。
 

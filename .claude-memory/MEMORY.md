@@ -167,6 +167,7 @@
 - [【宿題】著者欄が出版社名の本番頁9件](author_is_publisher_name_pages.md) — 楽天placeholder型・予約経路はゲート済
 - [【未決・構造穴】日次の保留ISBNは二度と増加分に出ない](daily_distill_hold_not_requeued.md)
 - [【型・是正済】騎士ガンダム型=新装版が編ごとに別頁へ散る+特別版が番号衝突で不可視](kishi_gundam_shinsoban_consolidation.md)
+- [【型・封鎖済】巻表示がラテン/ローマ数字だと既刊N巻が「新作1巻」になる](volume_marker_blindspots_latin_roman.md) — 規則を足す箇所は3つ。裸ローマ数字は題の一部
 - [【型・検出器+apply正式化・8段適用済】Sugar&Spice型=巻題を題として別sid登録→末尾巻欠け](subtitle_orphan_volume_split_sugar_spice.md)
 - [【道具の罠】_lookup.py --isbn --live はキャッシュ済だとliveを叩かない](lookup_isbn_live_cached_skip.md)
 - [【禁止】BOOK☆WALKERは試し読み収集不可](bookwalker_harvest_forbidden.md)
