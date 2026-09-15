@@ -187,7 +187,12 @@ python scripts/_weekly-finalize.py
 
 ## ★ビルド環境の罠(2026-07-12 実害3連発→2026-07-17 C:完結化で一部陳腐化。現行版)
 - ~~D:\node_modules junction~~ = **C:完結化で不要になった**(.next/outがC:実体になったためrequire解決は普通に届く)。
-- **buildは必ずStart-Processでデタッチ起動**: ツールのrun_in_backgroundは~10分で親ごとkillされworker巻き添え死。
+- ★**buildは WMI(Win32_Process.Create)で起こす**(2026-09-15 改訂): ツールのrun_in_backgroundは~10分で親ごとkill。
+  **`Start-Process -WindowStyle Hidden` でも足りない** = Claude Code のセッションが落ちると**道連れで死ぬ**
+  (同日実踏: 45,635/91,271頁で無音停止・node 0本・`.exit`未書込で22分が無駄に)。WmiPrvSE の子にすれば生き残る:
+  `Invoke-CimMethod -ClassName Win32_Process -MethodName Create -Arguments @{CommandLine='powershell.exe -NoProfile -ExecutionPolicy Bypass -File "C:\Users\chiba shuichi\code\MANGAL\.cache\_wkbuild.ps1"'; CurrentDirectory='C:\Users\chiba shuichi\code\MANGAL'}`
+  ★生死判定= `@(Get-Process node).Count` と `.exit` ファイル(out/manga の枚数は前週残骸が居るので使えない)。[[detached_job_dies_on_session_teardown]]
+- (旧)Start-Process でのデタッチ起動: ツールのrun_in_backgroundは~10分で親ごとkillされworker巻き添え死。
   ★**-Fileのパスは引用符を引数の内側に埋め込む**(2026-07-22実害: ArgumentListは空白joinされるため
   「chiba shuichi」の空白で `-File 'C:\Users\chiba'` に分断→無音起動失敗。症状=ログ0バイト+node無し):
   `Start-Process powershell -ArgumentList '-NoProfile','-ExecutionPolicy','Bypass','-File','"C:\Users\chiba shuichi\code\MANGAL\.cache\_wkbuild.ps1"' -WindowStyle Hidden`
