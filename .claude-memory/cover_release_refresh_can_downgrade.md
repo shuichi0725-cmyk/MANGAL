@@ -1,6 +1,6 @@
 ---
 name: cover-release-refresh-can-downgrade
-description: 発売後書影追従(_cover-release-refresh.py)は「頁と違えば書く」だけなので、楽天が仮.gifを返すとKobo補完/実物書影を上書きして劣化させる。週次蒸留が毎回--days 45で回すので恒常リスク
+description: 発売後書影追従(_cover-release-refresh.py)は「頁と違えば書く」だけで劣化を止められなかった→2026-09-14に劣化ガードをscript側へ恒久実装済(負テスト済)。手検品はもう不要
 metadata: 
   node_type: memory
   type: project
@@ -17,8 +17,21 @@ commit前に検品して3件とも除外。逆に `watashi-ga-watashi-o-uru-wake
 
 **Why:** 週次蒸留 step1 がこのscriptを `--days 45` で**毎回**回す。つまり Kobo補完([[placeholder_gif_old_layer_kobo_route]])や巻抜けfillで入れた書影は、楽天紙が仮のままのISBNだと**週次のたびに `.gif` へ戻されうる**。seedは後勝ちなので、劣化行が最後に来た時点で頁が負ける。過去分のseedを全走査した実測では劣化上書きは0件だったので、被害はまだ出ていない(今回が初出)。
 
+## ★是正済み (2026-09-14 commit 70a1981f4)。手検品はもう要らない
+
+ユーザ裁定「週次や見直し時に劣化しないように」を受けて、**script側に劣化ガードを恒久実装**した。
+
+```python
+elif RE_PLACEHOLDER.search(live) and cur:   # RE_PLACEHOLDER = r"/\d{13}\.gif"
+    n_down += 1          # 頁に既に書影が在るなら、live が仮書影の時は**書かない**
+```
+
+- **止める**= 実書影(Kobo補完/実jpg) → 仮`.gif`。**通す**= 仮`.gif`→実jpg、版数上げ `_1_2`→`_1_3`、頁が空の時の充填
+- ★**Kobo由来を一律保護にはしない**: 紙の実物が出たらそちらが正しい([[kobo_cover_wrong_for_old_print]] = Kobo電子は注意書き付きの代替)。実際 `watashi-ga-watashi-o-uru-wake` 10巻は `_1_2→_1_3` の正当な格上げだった
+- 集計行に `★劣化ガードで不採用{n_down}` を出すので、効いた件数が毎回見える
+- **負テスト済**: 2026-09-16発売の57巻で回して「不採用1」(jukebox 3巻のKobo実書影を防衛)・seed行数は不変を確認。修正前ならこの実行が `.gif` を書き込んでいた
+
 **How to apply:**
-- このscriptを回したら **commit前に追記行を検品**する。落とす条件 = ①新URLが `/{ISBN}.gif` か noimage(= 仮書影は決して改善ではない) ②`reason` に Kobo補完/巻抜けfill/小説混入是正 を持つISBNへの上書き。**残す**のは `_N_N.jpg → _N_N.jpg` の版数上げ
-- 行数を先に控える(`wc -l data/seeds/cover-override.jsonl`)→ 実行 → 差分行だけ判定 → ファイルを書き戻す、が実行手順
-- 恒久策の候補(未適用・要GO): script側に「新URLが `.gif`/noimage なら書かない」ガードを入れる。1行で済むが週次の共有ツールなのでユーザ裁定マター
+- ★**もう手検品は不要**。そのまま回してよい(週次蒸留 step1 の `--days 45` も安全になった)
+- 効いた件数が急増したら、楽天側で書影が大量に引っ込んだ signal = 中身を見る
 - 関連: [[kobo_cover_wrong_for_old_print]] [[volume_add_includes_cover]] [[feedback_one_bug_means_a_class]] [[cover_harvest_plan]]
