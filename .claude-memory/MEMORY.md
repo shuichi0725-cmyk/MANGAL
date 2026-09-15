@@ -150,6 +150,8 @@
 - [【未決】版違い統合](multi_edition_unification_pending.md) ／ [版/刷タブ・在庫・電子割引](version_tabs_stock_ebook.md) ／ [うる星=版/巻/刷タブ正規ルール](urusei_version_display_rules.md)
 - [コンビニ掃引2026-08=完了・裁定待ち3件](konbini_sweep_2026_08_state.md) — GO待ち
 - [SEO: インデックス未登録6.65万対策=ハブ3点実装済](seo_index_coverage_state.md) ／ [SEO: 発売日の着地面=/shinkan月別静的頁+今週/来月](seo_release_date_pages.md)
+- [【道具】GSC/Bing Webmaster を直接読む(_gsc.py/_bwt.py)](search_console_bing_api_access.md) — 鍵はrepo外・設定の罠3つ(組織ポリシー/PKCS#8/sc-domain)。内訳CSVは画面からしか取れない
+- [【番人】配信HTMLの中身ゲート](ssr_content_gate.md) — クライアント専用描画で静的HTMLが空になる型。out/を読むだけ・依存ゼロ
 - [【撤去済】ホームのカレンダー/タイムマシン=完全削除。ただしdata/calendarは/shinkan生成の入力なので残す](calendar_ui_removed_data_kept_for_shinkan.md)
 - [ISBN消失FAILの消し込みフロー](weekly_isbn_loss_acknowledge_flow.md)
 - [【戒め】ビルド入力の結線3箇所](build_input_wiring_three_places.md)
