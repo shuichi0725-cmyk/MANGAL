@@ -1,4 +1,4 @@
-﻿extra:
+extra:
   0man:
   - imprint: 手塚治虫漫画全集
     label: 手塚治虫漫画全集(1978)
@@ -2954,3 +2954,15 @@
       number: 21
       release_date: '2002-02-06'
       title_display: '第21巻 和平の使者編'
+  tu-casa:
+  # 2026-09-15: 2013年 祥伝社「tu casaここは君の家」(9784396790653)と同題・同著者の
+  # KADOKAWA再刊(楽天live: 979円 / あすかコミックスDX / 2026-11-24)。日次蒸留が
+  # 別頁(tu-casa-koko-wa-kimi-no-ie)を作り slug-alias と衝突していたため版タブへ合流。
+  - imprint: あすかコミックスDX
+    label: 新装版(KADOKAWA 2026)
+    publisher: kadokawa
+    type: shinsoban
+    volumes:
+    - isbn13: '9784041180426'
+      number: 1
+      release_date: '2026-11-24'

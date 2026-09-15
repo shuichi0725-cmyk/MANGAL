@@ -190,3 +190,4 @@
 {"slug": "mobile-suit-zeta-gundam-difain-char-azunaburu-aka-no-bunsuirei", "reason": "分裂統合(機動戦士ΖガンダムDefine 改題3タイトルを1頁へ)", "at": "2026-09-10", "source": "reflect-targeted --drop"}
 {"slug": "mobile-suit-zeta-gundam-difain-char-azunaburu-guripusu-seneki", "reason": "分裂統合(機動戦士ΖガンダムDefine 改題3タイトルを1頁へ)", "at": "2026-09-10", "source": "reflect-targeted --drop"}
 {"slug": "calendar/**", "reason": "カレンダーUI(ホームのCalendarView/TimeMachine)を完全撤去し、out/calendar overlay(_r2-sync.py)とJSON面同期(_deploy-differential.py)も廃止(2026-09-14)。R2本番に残る calendar/ 配下(manifest.json / release/*.json / beyond.json 相当・約1,600件)は読み手が居ない死蔵物なので prune 対象。★data/calendar 自体はリポジトリに残す(=/shinkan の生成入力)", "at": "2026-09-14", "source": "home-calendar-removal"}
+{"slug": "tu-casa-koko-wa-kimi-no-ie", "reason": "targeted反映", "at": "2026-09-15", "source": "reflect-targeted --drop"}
