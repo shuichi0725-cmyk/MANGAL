@@ -291,3 +291,4 @@
 {"isbn13": "9784870318571", "slug_at_loss": "euromanga", "reason": "頁drop: euromanga(ユーロマンガ)=ヨーロッパ漫画のアンソロジー誌を非掲載 (02155ed8a)", "commit": "02155ed8a", "at": "2026-09-07"}
 {"isbn13": "9789784537100", "slug_at_loss": "ginga-densetsu-weed", "reason": "壊れISBN(978が二重の13桁)を頁内ISBN重複是正で除去 (0978858c5)", "commit": "0978858c5", "at": "2026-09-07"}
 {"isbn13": "9789784537124", "slug_at_loss": "ginga-densetsu-weed", "reason": "壊れISBN(978が二重の13桁)を頁内ISBN重複是正で除去 (0978858c5)", "commit": "0978858c5", "at": "2026-09-07"}
+{"isbn13": "9784799730812", "slug_at_loss": "hidoku-shinaide", "reason": "1巻の2016年再刊(刷違い)。edition-canonical で2007年初版 9784862631015 を主に据え、再刊ISBNは頁に出さない裁定 (9c1e219c5)", "commit": "9c1e219c5", "at": "2026-09-15"}
