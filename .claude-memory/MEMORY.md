@@ -189,3 +189,4 @@
 - [【型・是正済】発売後書影追従が良い書影を仮.gifで潰す](cover_release_refresh_can_downgrade.md) — 2026-09-14に劣化ガードをscript恒久実装+負テスト済。手検品は不要
 - [【罠】デタッチ長時間ジョブはセッション終了で道連れ死=WMIで起こす](detached_job_dies_on_session_teardown.md) — Start-Processでは足りない。生死判定はnode本数と.exitファイル
 - [【型】旧slugのaliasと同名で新頁が生まれ301が実頁を隠す](redirect_key_collides_with_new_page.md) — 根は題の短縮。合流はextra-editions(追加型)で
+- [【罠】ls -l の列ずれでファイルサイズを誤読](file_size_misread_ls_column.md) — 所有者名に空白。サイズは stat -c %%s / getsize で

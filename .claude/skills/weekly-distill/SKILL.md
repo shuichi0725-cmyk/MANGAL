@@ -126,7 +126,7 @@ python scripts/_r2-sync.py --bucket mangal-site --prune
 - ★**KV同期(_kv-redirects-sync.py)は r2-sync 成功時に自動連鎖**(2026-08-26機械化。旧=手動2コマンド
   で忘れると「pruneで頁を消したのに301が付いてこない=404の窓」)。自動連鎖が失敗すると exit 4 で
   名指しされるので単独再実行。抑止は `--no-kv`。Worker側は6h TTLで自動再読込。
-  ★**この自動連鎖は毎回落ちうる**(2026-09-07 実踏): r2-sync を Start-Process の隠しウィンドウでデタッチ起動すると、
+  ★**この自動連鎖は毎回落ちうる**(2026-09-07 / 2026-09-15 実踏。★**WMI起動でも同じく落ちた** = 原因は Start-Process 固有ではなく**デタッチ起動全般**): r2-sync をデタッチ起動すると、
   子プロセス内の `wrangler kv put` が OAuth トークンの更新を非対話で通せず `Authentication error [code: 10000]` で落ちる。
   **wrangler のログイン切れではない**(`npx wrangler whoami` は通り workers_kv(write) も在る)ので、
   ログインし直すのではなく **対話シェル側で `python scripts/_kv-redirects-sync.py` を単独実行**すれば通る(KV書込のみ=R2 PUTは発生しない)。

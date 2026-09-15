@@ -21,3 +21,14 @@ metadata:
 - ★**症状から辿る入口**: 「種4に巻を足して反映したのに頁に出ない」/「書影seedに実物が在るのに頁が仮.gifのまま(cover-override-unreflectedに残り続ける)」= まずこの型を疑う。見分け= `promote --only <stem>` が **total: 0 / wrote 0** を返す(2026-09-14に9月書影で3頁実踏: andaaaidoru, ashiyayamanoteodougugeihinkan-komikku, deyueru-masutaazu-aizouban)(`ls data/manga/<stem>.yml data/seeds/source-pages/<stem>.yml`)
 - 月次サニティ候補: 「源なしmanga.v2頁」数の監視(v2 − data/manga − source-pages − preorder-pages)。増えたら頁化フローの源永続化漏れ
 - 関連: [[orphan_series_promote_is_srcpage_driven]] [[seed4_auto_wipe_accident]] [[new_page_creation_srcpage_key2slug]]
+
+## ★変種(2026-09-15 週次で実踏): 源が git には在るのに worktree から消えている
+
+「源が無い」だけでなく **git追跡済みの `data/manga/*.yml` が作業ツリーから削除された状態**(`git status` に
+` D` 11件)で週次に入りかけた。中身は直近の頁分割で作った源(俺の空3分割・王様の仕立て屋2分割・
+激マン2・騎士ガンダム系ほか)で、`data/seeds/source-pages/` にも無かった = **次のフルpromoteで頁ごと消える**
+一歩手前。削除した犯人のscriptは特定できず(`.cache/srcstub-bak-*` は別件)。
+
+- **復元は `git checkout -- data/manga/` 一発**(gitignore配下でも force-add 済みなら追跡されている)。
+- ★**週次の入口で `git status --porcelain -- data/manga/ | grep '^ D'` を見る**のが安い防壁。
+  0件でないなら中身を確かめてから進む(preflightには未実装=入れる価値あり)。
