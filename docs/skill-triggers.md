@@ -28,6 +28,7 @@ skill 実体 = `.claude/skills/<name>/SKILL.md`(git追跡。Opus 4.8 等でも�
 | **「巻説明つくって」「単行本説明つくって」** | volume-desc | 単行本(巻)単位の説明文を楽天itemCaptionから生成→seed純粋追加(表示結線は未定)。**Opus 4.8運転前提** | 100巻/batch |
 | **「Wiki蒸留して」** | wiki-distill | Wikipedia書誌(巻別ISBN+日付)で壊れた長期連載をcanonical復元(釣りキチ65巻等で実証・fail-closedゲート) | 10作/回 数分 |
 | **「巻抜け仮想」** | volgap-audit | 残巻抜け算出(~2分)。単巻切り詰め検出(solo-truncated)・巻出力監査も同居 | ~2分 |
+| **「ai書評追加」** | ai-review-add | AI書評家リーグ(corner9)の新節。課題図書+共通プロンプト+Claude Opus 5 の書評をチャットに出す→ユーザが他AI4本を貼る→verbatim格納+番人(`_check-ai-reviews.py`) | 1節 |
 | **「マンバ蒸留して/マンバ蒸留続けて」** | manba-distill | manba.co.jp の302 Location から BookLive title_id を採取(★BookLiveには1リクエストも出さない=停止札を守る)。同定ゲート2段+版違いガード・誤同定0%実測・resumable。**反映はGO必須** | 100件/回 ~17分 |
 | **「試し読み拾って」** | tameshiyomi-harvest | BookLiveのtitle_idを魚で収集→tameshiyomi-booklive.jsonl(判断はscript・AIは保留裁定のみ・Sonnet運転前提・--limit100まで) | 100作/回 ~5分 |
 | **「仮書影反映して」** | placeholder-cover-refresh | 柱⑩が溜めたcover-override.jsonlの未反映slugを列挙→targeted反映(Opus+専権。手順はskill内に明文化) | 数分 |
