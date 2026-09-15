@@ -1,0 +1,237 @@
+{
+ "at": "2026-09-15 12:37:23",
+ "tag": "1.2.19",
+ "results": {
+  "isbn-loss": {
+   "rc": 1,
+   "rows": 1,
+   "secs": 38.5,
+   "tail": [
+    "根拠が無いのに本番から消えている。1件ずつ調べて、復活させるか台帳に理由を書くこと。",
+    "9784799730812  (前回: hidoku-shinaide)"
+   ]
+  },
+  "solo-truncated": {
+   "rc": 0,
+   "rows": 63,
+   "secs": 39.4,
+   "tail": [
+    "走査69353頁 → 単巻切り詰め疑い 63件: DUP_ELSEWHERE=2 / NO_EVIDENCE=61",
+    "→ C:\\Users\\chiba shuichi\\code\\MANGAL\\docs\\production-diagnostics\\solo-truncated.tsv"
+   ]
+  },
+  "volume-numbering": {
+   "rc": 0,
+   "rows": null,
+   "secs": 9.1,
+   "tail": [
+    "「Sexy effect 96」 standard 番号[96] 1冊 max96",
+    "「女子高生チヨ（64）」 standard 番号[64] 1冊 max64"
+   ],
+   "auto_fixed": 1696,
+   "missing_half": 55,
+   "gap_other": 6321
+  },
+  "title-eq-author": {
+   "rc": 0,
+   "rows": 10,
+   "secs": 219.7,
+   "tail": [
+    "スキャン 69353 / title==著者名 10件 → C:\\Users\\chiba shuichi\\code\\MANGAL\\docs\\production-diagnostics\\title-eq-author.tsv",
+    "★該当は実タイトル/副題脱落の疑い(NDL by-ISBNで実題確認 → title/kana是正 or 抜粋本drop)"
+   ]
+  },
+  "foreign-editions": {
+   "rc": 0,
+   "rows": null,
+   "secs": 2.5,
+   "tail": [
+    "「Alia's mission」 2巻 英米 9780375832178",
+    "(報告のみ。 --apply で safe を non-manga-drop.yml へ純粋追加)"
+   ]
+  },
+  "price-pack": {
+   "rc": 1,
+   "rows": 100,
+   "secs": 18.3,
+   "tail": [
+    "9784087920918  白妖の娘 : 完全版. 上巻  [ISBN(set)] → /byakuyou-no-musume",
+    "9784757589278  ACCA13区監察課10th anniversary book : letter  [ISBN(set)] → /acca-13-ku-kansatsuka-10th-anniversary-book"
+   ]
+  },
+  "vol0-hidden-first": {
+   "rc": 0,
+   "rows": 877,
+   "secs": 1.7,
+   "tail": [
+    "→ docs\\production-diagnostics\\vol0-hidden-first.tsv",
+    "(--apply で HIDDEN_FIX 21 件を楽天題ゲート→種4-auto純粋追加)"
+   ]
+  },
+  "orphan-new-series": {
+   "rc": 0,
+   "rows": 827,
+   "secs": 23.5,
+   "tail": [
+    "→ ★芯 C:\\Users\\chiba shuichi\\code\\MANGAL\\docs\\production-diagnostics\\orphan-new-series-core.tsv",
+    "★全件の数字を「未掲載の取りこぼし」として読むな(2026-09-06 裁定)。 芯だけ見る。"
+   ]
+  },
+  "shu2-unlisted-volumes": {
+   "rc": 0,
+   "rows": 92,
+   "secs": 15.2,
+   "tail": [
+    "→ C:\\Users\\chiba shuichi\\code\\MANGAL\\docs\\production-diagnostics\\half-volume-candidates.tsv",
+    "★トリニティ15.5 と同型はこちらで直撃する(種2駆動だと DUP に埋まる)。"
+   ]
+  },
+  "edition-lead-gap": {
+   "rc": 0,
+   "rows": 72,
+   "secs": 38.3,
+   "tail": [
+    "経路: {'seed4': 34, 'canon:volumes': 11, 'canon:extra[1]': 9, 'canon:extra[0]': 6, 'canon:extra[2]': 6, 'overrides': 3, 'canon:extra[4]': 2, 'canon:extra[7]': 1}",
+    "欠け巻数: {1: 42, 3: 7, 2: 6, 10: 6, 7: 4, 5: 4, 4: 2, 6: 1}"
+   ]
+  },
+  "intra-page-run-split": {
+   "rc": 0,
+   "rows": 11,
+   "secs": 37.5,
+   "tail": [
+    "tier: {'B': 5, 'C': 6}",
+    "canonical seed: {'有': 9, '無': 2}"
+   ]
+  },
+  "doujin-selection": {
+   "rc": 0,
+   "rows": 154,
+   "secs": 14.1,
+   "tail": [
+    "走査 818,420 item / 「同人」を含む本番掲載本 154",
+    "該当頁 29 (うち seriesName一致 = 強い信号 0) → C:\\Users\\chiba shuichi\\code\\MANGAL\\docs\\production-diagnostics\\doujin-selection.tsv"
+   ]
+  },
+  "edition-canonical": {
+   "rc": 1,
+   "rows": null,
+   "secs": 15.2,
+   "tail": [
+    "種4(取込もれ巻)がどの頁にも出ていない [('9784834210347', 4)] = canonicalが上書きして消している疑い(索引が古い可能性もある→ python scripts/_exists.py --build で再確認)",
+    "edition-canonical: 763 本 / 異常 1 本"
+   ]
+  },
+  "year-suffix-dup": {
+   "rc": 0,
+   "rows": 66,
+   "secs": 1.3,
+   "tail": [
+    "CLUSTER_SPLIT = per-case統合worklist / REDO_LEFTOVER = 機械削除可(要GO) / NO_OVERLAP = 概ね正当",
+    "→ docs\\production-diagnostics\\year-suffix-dup.tsv"
+   ]
+  },
+  "canonical-imprint-split": {
+   "rc": 0,
+   "rows": 102,
+   "secs": 37.6,
+   "tail": [
+    "巻番号: {'重複': 98, '相補': 4}",
+    "canonical: {'有': 95, '無': 7}"
+   ]
+  },
+  "edition-run-split": {
+   "rc": 0,
+   "rows": 8,
+   "secs": 37.5,
+   "tail": [
+    "刊行runが版タブに割れている疑い: 8 ペア / 8 頁 → C:\\Users\\chiba shuichi\\code\\MANGAL\\docs\\production-diagnostics\\edition-run-split.tsv",
+    "tier: {'B': 8}"
+   ]
+  },
+  "numeral-variant-split": {
+   "rc": 0,
+   "rows": 23,
+   "secs": 39.2,
+   "tail": [
+    "走査69353頁 → DUP=4 / SEQ?=19",
+    "→ C:\\Users\\chiba shuichi\\code\\MANGAL\\docs\\production-diagnostics\\numeral-variant-split.tsv"
+   ]
+  },
+  "vol-date-regression": {
+   "rc": 0,
+   "rows": 11,
+   "secs": 38.4,
+   "tail": [
+    "scan 50000/69353",
+    "scan 60000/69353"
+   ]
+  },
+  "deluxe-label-split": {
+   "rc": 0,
+   "rows": 399,
+   "secs": 12.3,
+   "tail": [
+    "分類: SPLIT(統合候補)=198 / DUP(汚染)=19 / PARALLEL(別版の可能性・自動統合禁止)=182",
+    "→ C:\\Users\\chiba shuichi\\code\\MANGAL\\docs\\production-diagnostics\\deluxe-label-split.tsv"
+   ]
+  },
+  "cover-dup": {
+   "rc": 0,
+   "rows": 189,
+   "secs": 38.5,
+   "tail": [
+    "clamp-premium-collection-chobittsu | CLAMP PREMIUM COLLECTIONちょびっツ | 8巻が重複画像",
+    "koyamasou-no-kirawaremono | 小山荘のきらわれ者 | 8巻が重複画像"
+   ]
+  },
+  "kana-from-other-volume": {
+   "rc": 0,
+   "rows": 5,
+   "secs": 229.3,
+   "tail": [
+    "nagi: 題='椰' ヨミ='ナギ' ← 犯人巻題='梛（ナギ）'",
+    "t-patrol-bon: 題='T・Pぼん' ヨミ='タイムパトロールボン' ← 犯人巻題='T・P（タイム・パトロール）ぼん'"
+   ]
+  },
+  "excerpt-subtitle": {
+   "skipped": "heavy(--heavy で実行)"
+  },
+  "edition-mix": {
+   "skipped": "heavy(--heavy で実行)"
+  },
+  "author-not-in-volumes": {
+   "skipped": "heavy(--heavy で実行)"
+  },
+  "subtitle-orphan-volume": {
+   "skipped": "heavy(--heavy で実行)"
+  },
+  "seed1-lost": {
+   "skipped": "heavy(--heavy で実行)"
+  },
+  "anilist-verify-gate": {
+   "skipped": "heavy(--heavy で実行)"
+  },
+  "furigana": {
+   "skipped": "heavy(--heavy で実行)"
+  },
+  "ssr-content": {
+   "rc": 1,
+   "rows": null,
+   "secs": 14.3,
+   "tail": [
+    "descriptionが既定のまま(頁側 metadata 未設定)",
+    "…他 169件 (--list で全部)"
+   ]
+  },
+  "duplicate-slug-files": {
+   "rc": 0,
+   "rows": 0,
+   "secs": 8.7,
+   "tail": [
+    "★同一slugを名乗るファイルが複数: 0 組",
+    "→ docs\\production-diagnostics\\duplicate-slug-files.tsv"
+   ]
+  }
+ }
+}

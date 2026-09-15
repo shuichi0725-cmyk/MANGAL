@@ -225,6 +225,90 @@ def cmd_inspect(env, site, url):
     return 0
 
 
+def _sample_urls(n, seed):
+    """本番索引から層別サンプリング。層 = catch有無 × 巻数(1巻/複数巻)。
+    ★仮説検証用: 薄い頁ほどインデックスされないなら、catch無し層の登録率が有意に低いはず。"""
+    import random
+    idx = json.load(io.open(os.path.join(ROOT, "data", "manga-list-index.json"), encoding="utf-8"))
+    f = idx["f"]
+    si = f.index("slug")
+    ci = json.load(io.open(os.path.join(ROOT, "data", "manga-catch-index.json"), encoding="utf-8"))
+    has = set(r[0] for r in ci["d"]) if isinstance(ci, dict) and "d" in ci else set()
+    vi = f.index("volumes_total") if "volumes_total" in f else None
+    strata = {"catch有_複数巻": [], "catch有_1巻": [], "catch無_複数巻": [], "catch無_1巻": []}
+    for r in idx["d"]:
+        slug = r[si]
+        nv = (r[vi] if vi is not None else 0) or 0
+        k = ("catch有" if slug in has else "catch無") + ("_1巻" if nv <= 1 else "_複数巻")
+        strata[k].append(slug)
+    rnd = random.Random(seed)
+    per = max(1, n // len(strata))
+    out = []
+    for k, v in strata.items():
+        pick = rnd.sample(v, min(per, len(v)))
+        out += [(k, "https://mangal-db.com/manga/" + s) for s in pick]
+        print(f"  層 {k:14s} 母数 {len(v):>6,} → 抽出 {len(pick)}")
+    return out
+
+
+def cmd_coverage(env, site, days, top, sample=160, seed=42, extra=()):
+    """URL検査APIでインデックス状況を層別に実測。
+    ★結果は .cache/gsc-coverage.jsonl に逐次保存(冪等再開=1日2,000件の枠を無駄撃ちしない)。"""
+    import collections
+    cache_p = os.path.join(ROOT, ".cache", "gsc-coverage.jsonl")
+    os.makedirs(os.path.dirname(cache_p), exist_ok=True)
+    done = {}
+    if os.path.exists(cache_p):
+        for ln in io.open(cache_p, encoding="utf-8"):
+            try:
+                d = json.loads(ln)
+                done[d["url"]] = d
+            except Exception:
+                pass
+    targets = list(extra) + _sample_urls(sample, seed)
+    todo = [(k, u) for k, u in targets if u not in done]
+    print("")
+    print(f"  検査対象 {len(targets)}件 / 済み {len(targets) - len(todo)}件 → 今回 {len(todo)}件")
+    fo = io.open(cache_p, "a", encoding="utf-8", newline="\n")
+    for i, (k, u) in enumerate(todo, 1):
+        try:
+            d = api(env, INSPECT_API, "POST", {"inspectionUrl": u, "siteUrl": site}, base="")
+            r = (d.get("inspectionResult") or {}).get("indexStatusResult") or {}
+            row = {"url": u, "stratum": k, "verdict": r.get("verdict"),
+                   "coverage": r.get("coverageState"), "robots": r.get("robotsTxtState"),
+                   "lastCrawl": r.get("lastCrawlTime"), "fetch": r.get("pageFetchState"),
+                   "googleCanonical": r.get("googleCanonical")}
+        except urllib.error.HTTPError as e:
+            row = {"url": u, "stratum": k, "verdict": "HTTP" + str(e.code),
+                   "coverage": e.read().decode("utf-8", "replace")[:120]}
+            if e.code == 429:
+                print("  ★1日の枠(2,000)を使い切った → 明日再開(結果は保存済み)")
+                break
+        fo.write(json.dumps(row, ensure_ascii=False) + "\n")
+        fo.flush()
+        done[u] = row
+        if i % 20 == 0:
+            print(f"   …{i}/{len(todo)}", flush=True)
+        time.sleep(0.3)
+    fo.close()
+
+    rows = [done[u] for k, u in targets if u in done]
+    print("")
+    print(f"=== インデックス状況(実測 {len(rows)}件) ===")
+    by = collections.defaultdict(collections.Counter)
+    for r in rows:
+        by[r["stratum"]][r.get("coverage") or "(不明)"] += 1
+    INDEXED = ("Submitted and indexed", "Indexed, not submitted in sitemap")
+    for st in sorted(by):
+        tot = sum(by[st].values())
+        ok = sum(by[st][s] for s in INDEXED)
+        print("")
+        print(f"  【{st}】 {tot}件 / インデックス済 {ok} ({ok / tot * 100:.0f}%)")
+        for s, c in by[st].most_common():
+            print(f"     {c:>4}  {s}")
+    return 0
+
+
 def cmd_summary(env, site, days, top):
     cmd_verify(env, site, days, top); print()
     cmd_traffic(env, site, days, top); print()
@@ -239,11 +323,13 @@ def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("cmd", nargs="?", default="summary",
                     choices=["verify", "traffic", "queries", "pages", "device", "sitemaps",
-                             "inspect", "summary"])
+                             "inspect", "coverage", "summary"])
     ap.add_argument("--days", type=int, default=28)
     ap.add_argument("--top", type=int, default=30)
     ap.add_argument("--site", default=SITE)
     ap.add_argument("--url", default=None, help="inspect用の検査URL")
+    ap.add_argument("--sample", type=int, default=160, help="coverage用: 検査件数")
+    ap.add_argument("--seed", type=int, default=42, help="coverage用: 抽出の再現性")
     a = ap.parse_args()
     env = load_env()
     try:
@@ -251,6 +337,12 @@ def main() -> int:
             if not a.url:
                 print("★--url が必要"); return 2
             return cmd_inspect(env, a.site, a.url)
+        if a.cmd == "coverage":
+            hubs = [("ハブ頁", u) for u in (
+                "https://mangal-db.com/", "https://mangal-db.com/shinkan",
+                "https://mangal-db.com/list", "https://mangal-db.com/browse",
+                "https://mangal-db.com/genre/action")]
+            return cmd_coverage(env, a.site, a.days, a.top, a.sample, a.seed, hubs)
         fn = {"verify": cmd_verify, "traffic": cmd_traffic, "queries": cmd_queries,
               "pages": cmd_pages, "device": cmd_device, "sitemaps": cmd_sitemaps,
               "summary": cmd_summary}[a.cmd]
