@@ -100,3 +100,47 @@
 - TITLE一致 154巻/29頁 は掲載継続。
 
 ---
+
+## 32. 配信HTMLの中身が空の層 (AI書評家リーグ型)
+
+- 検出器 = `scripts/_check-ssr-content.py` / 出力 = stdout(FAIL明細は `--list`)
+- ★2026-09-15 実害。 `/column-ai-league` の静的HTMLが **h1=0・h2=0・本文0字** だった。
+  原因 = AiLeagueClient が公開節数を **クライアントの現在時刻** から計算しており
+  (`useState<number|null>(null)` → `if (now===null) return null`)、**サーバー描画では必ず null**。
+  ★**ブラウザでは正常に見えるので目視では絶対に気づけない**。 typecheck も vitest も
+  「描画結果が空」は見ない = 全緑のまま本番へ出る。 同型は `/browse` でも起きている。
+- 直し方 = サーバー(ビルド時)の `Date.now()` を `initialNow` として渡し初期値に使う。
+  初回クライアント描画も同じ値なので hydration mismatch なし。 マウント後に実時刻へ更新するので
+  「再ビルド不要で毎週1節ずつ増える」性質は保たれる。
+- 同時に **型B = 頁側 metadata 未設定で既定値を共有** も見る。 `/art-books` 163頁が
+  title/description とも layout の既定のままだった(canonical しか設定していなかった)
+  = Bing Webmaster「同一のメタディスクリプションが多すぎる」の実体の一部。
+- 検査 = ①本文の実在(床150字。★**RSCのJSONペイロードを除外して数える**。 除外しないと
+  空の頁でも `<script>` のJSONで床を超えて素通りする) ②h1がちょうど1個
+  ③titleが既定でない ④descriptionが在り既定でない。
+  ハブ/コーナー(約1,700)=**全数** / manga・author=各400サンプリング(`--full`で全数)。
+- ★**out/(前回ビルド)を読むだけ**= ビルドしない・依存ゼロ・数秒。 ビルドが無い時は黙って exit 0。
+- 月次で見るもの = **FAIL の新規増加**。 特に新しいコーナー/ハブを作った月。
+  client component で **日付・乱数・localStorage** を使う頁が要注意(サーバーで値が無く null を返す実装になりやすい)。
+- 初回(2026-09-15) = FAIL 189 → h1欠け1(`/column-ai-league`)・既定メタ共有188
+  (`/art-books` 163 / `/column-ai-league` 14 / `/zenshuu` 10 / `/contact` 1 / `/sansedai-archive` 1)。
+  全件是正済み(45dfb9553 / 8f28c9502)。 ★作品頁400・著者頁400のサンプルは FAIL ゼロ = 漫画本体は健全。
+
+## 33. 同一slugを名乗るファイルが複数ある層 (白と黒型)
+
+- 検出器 = `scripts/_audit-duplicate-slug-files.py` / 出力 = `docs/production-diagnostics/duplicate-slug-files.tsv`
+- ★2026-09-15 実害(『白と黒』下崎)。 `data/manga.v2` は **ファイル名(SRC stem) ≠ 頁の `slug:` 欄(公開slug)**
+  が正常形(slug-override頁)。 このため「別名のファイル2つが同じ公開slugを名乗る」状態が作れてしまい、
+  **全索引ビルドで同一作品が2行**出る。 生まれる経路 = 公開slugを変えた(年サフィックス外し等)時に
+  **旧名のファイルが残る**。 `data/manga.v2` は gitignore = 履歴が無く気づけない。
+- ★**検出器#19(年サフィックス二重頁層)では構造的に見えない**: あちらは入力が
+  `by_slug = {r[slug]: r for r in index}` で **同一slugの行が黙って後勝ちで畳まれる**
+  (#19が見るのは `X-YYYY` と `X` という別slug名同士の対)。 だから索引でなく **ファイル実体** を走査する。
+- 判定(消す前に必ず) = `python scripts/_promote-bulk-v2.py --only <stem>` の **total:**。
+  `1`=源あり(残す) / `0`=源なし(残骸)。 中身の厚み(genres/catch の有無)でも裏が取れる。
+  消す前に `.cache/` へ退避し、索引は
+  `_build-list-index.py data/manga.v2 data --update <生stem> --remove <slug>` で張り直す。
+- 月次で見るもの = **0組であること**。 1組でも出たら上の手順で裁定する(自動削除はしない)。
+- 初回(2026-09-15) = 1組(`shiro-to-kuro-shimozaki` ← `shiro-to-kuro-shimozaki` / `...2026`)。
+  残骸側を退避して索引 69,353 → 69,352。 是正後の再走査で **0組**。 走査は69,353頁を約10秒。
+

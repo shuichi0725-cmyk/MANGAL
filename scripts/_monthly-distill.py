@@ -735,6 +735,13 @@ DETECTORS = [
     ("seed1-lost", ["_audit-seed1-lost.py"], "seed1-lost-groups.tsv", True),
     ("anilist-verify-gate", ["_anilist-verify-gate.py"], None, True),
     ("furigana", ["_furigana-audit.py"], None, True),   # ★NDL live を叩く = --heavy の時だけ
+    # ★配信HTMLの中身ゲート(AI書評家リーグ型 2026-09-15): client頁で日付/乱数を使うと
+    #   サーバー描画が空になり、ブラウザでは正常に見えるので目視では気づけない。
+    #   out/(前回ビルド)を読むだけ=ビルド不要・数秒。out/が無ければ黙って exit 0。
+    ("ssr-content", ["_check-ssr-content.py"], None, False),
+    # ★同一slugを名乗るファイル複数層(白と黒型 2026-09-15): 索引に同一作品が2行出る。
+    #   #19(year-suffix-dup)は索引を by_slug で畳むため構造的に見えない=ファイル実体を走査。
+    ("duplicate-slug-files", ["_audit-duplicate-slug-files.py", "--tsv"], "duplicate-slug-files.tsv", False),
 ]
 
 
