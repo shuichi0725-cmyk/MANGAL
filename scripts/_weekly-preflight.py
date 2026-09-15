@@ -11,6 +11,8 @@
   旧D:junction構成は旧PCのC:満杯が理由で、新PCはC:856GB空きのため廃止。D:外付けはストールしやすく
   ビルド経路に入れない):
   1. scripts/src/lib/next.config.ts の未コミット変更なし(promote拡張commit漏れ=2026-07-04実害)
+  1.5 源頁(SRC)が worktree から消えていない(追跡済み data/manga・source-pages・preorder-pages の
+      未commit削除=次のフルpromoteで頁ごと消える。2026-09-15実害11件。--fix で git から復元)
   2. next.config.ts staticPageGenerationTimeout=300(無いと重頁3回超過でビルドkill)
   3. ディスク: C:空き30GB+(out/.next 10-15GB + staging ~3GB。ENOSPC=2026-07-05実害)
   4. out/ と .next/ が junctionでない(残骸junctionは--fixで除去。実体dirはそのまま=nextが管理)
@@ -67,6 +69,39 @@ def main():
              "commit+pushしてから: " + " / ".join(l.strip() for l in dirty_code[:5]))
     else:
         ok("scripts/src/lib/next.config = コミット済")
+
+    # 1.5 ★源頁(SRC)の worktree 消失 (2026-09-15 実踏: 追跡済み data/manga/*.yml が11件、
+    #     コミットされないまま作業ツリーから消えていた。頁分割で作った源が全滅寸前だった)。
+    #     promote は源頁駆動なので、源が消えた頁は次のフルpromoteで**黙って消える**
+    #     ([[orphan_source_pages_restored]])。staged な削除(= 意図した drop 作業の途中)は見逃す。
+    _SRC_DIRS = ("data/manga/", "data/seeds/source-pages/", "data/seeds/preorder-pages/")
+    gone = []
+    for l in (r.stdout or "").splitlines():
+        if len(l) < 4 or l[0] == "D" or l[1] != "D":
+            continue                      # staged削除(D_)= 意図的 / 削除以外は対象外
+        path = l[3:].strip()
+        if path.startswith('"') and path.endswith('"'):
+            path = path[1:-1]
+        if path.startswith(_SRC_DIRS):
+            gone.append(path)
+    if not gone:
+        ok("源頁(SRC)の worktree 消失なし")
+    elif fix:
+        for i in range(0, len(gone), 200):
+            subprocess.run(["git", "checkout", "--"] + gone[i:i + 200], capture_output=True, text=True)
+        still = [g for g in gone if not os.path.exists(os.path.join(ROOT, g))]
+        if still:
+            fail(f"源頁 {len(still)} 件を復元できなかった: " + " / ".join(still[:5]),
+                 "git checkout -- <path> を手で実行し、消えた理由を確かめてから進む")
+        else:
+            ok(f"源頁 {len(gone)} 件を git から復元(消えていた: " +
+               " / ".join(os.path.basename(g) for g in gone[:5]) +
+               ("…" if len(gone) > 5 else "") + ")")
+    else:
+        fail(f"源頁(SRC)が worktree から消えている {len(gone)} 件"
+             "(次のフルpromoteで頁ごと消える)",
+             "--fix で git から復元(復元後も、なぜ消えたかは確認する): "
+             + " / ".join(gone[:5]))
 
     # 2. timeout設定
     try:
