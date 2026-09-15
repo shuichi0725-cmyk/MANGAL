@@ -187,3 +187,5 @@
 - [【戒め】写真の要素を実名で列挙してから作る](feedback_name_the_element_in_the_photo.md) — 自分の実装を前提に選択肢を組むと正解が候補に入らない
 - [【機構・第1周完了】旧作の仮書影.gif層をKoboで埋める](placeholder_gif_old_layer_kobo_route.md) — 道具=_kobo-placeholder-fill.py(版ゲート+dhash装丁ゲート+Kobo側プレースホルダ検出)。2,473巻/393頁反映済。残=全部.gifの1,627頁+留保652巻(パトレイバーは解決=比較元1枚の頁は自分側を疑う)
 - [【型・是正済】発売後書影追従が良い書影を仮.gifで潰す](cover_release_refresh_can_downgrade.md) — 2026-09-14に劣化ガードをscript恒久実装+負テスト済。手検品は不要
+- [【罠】デタッチ長時間ジョブはセッション終了で道連れ死=WMIで起こす](detached_job_dies_on_session_teardown.md) — Start-Processでは足りない。生死判定はnode本数と.exitファイル
+- [【型】旧slugのaliasと同名で新頁が生まれ301が実頁を隠す](redirect_key_collides_with_new_page.md) — 根は題の短縮。合流はextra-editions(追加型)で
