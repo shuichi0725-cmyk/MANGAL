@@ -3,7 +3,13 @@ import ContactForm from "./ContactForm";
 /** お問い合わせフォーム(2026-07-03)。 送信先メールアドレスはソースに含めない
  *  (= Worker /api/contact が受信箱へ中継。 スクレイピング耐性)。 */
 export const metadata = {
-  alternates: { canonical: "/contact" }, title: "お問い合わせ" };
+  alternates: { canonical: "/contact" },
+  title: "お問い合わせ",
+  // ★description が既定のままだった(2026-09-15 番人 _check-ssr-content.py が検出)。
+  description:
+    "MANGAL への掲載内容の誤りのご指摘・削除依頼・その他のお問い合わせはこちらから。" +
+    "書誌データの訂正は、作品名と巻数を添えていただけると確認が早くなります。",
+};
 
 export default function ContactPage() {
   return (

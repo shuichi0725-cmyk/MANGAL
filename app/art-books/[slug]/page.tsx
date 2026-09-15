@@ -7,7 +7,23 @@ import { buildAmazonUrlForArtBook } from "@/lib/amazon";
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  return { alternates: { canonical: `/art-books/${slug}` } };
+  // ★画集163頁が title/description とも既定値のままだった(2026-09-15 番人
+  //   scripts/_check-ssr-content.py が検出)。= 163頁が全部同一のメタ情報で、
+  //   Bing Webmaster の「同一のメタディスクリプションが多すぎる」の実体の一部。
+  //   画集はあらすじを持たないので、頁が実際に載せている事実(作画家・出版社・刊行年・冊数)で
+  //   一意にする。捏造はしない = 無い項目は文に出さない。
+  const ab = loadAllManga().artBooks.find((a) => a.slug === slug);
+  if (!ab) return { alternates: { canonical: `/art-books/${slug}` } };
+  const n = ab.volumes.length;
+  const facts = [ab.publisher, ab.year ? `${ab.year}年` : null].filter(Boolean).join("・");
+  return {
+    title: `${ab.title}${n > 1 ? `(全${n}冊)` : ""} | ${ab.artist}の画集`,
+    description:
+      `${ab.artist}の画集『${ab.title}』${n > 1 ? `全${n}冊` : ""}。` +
+      (facts ? `${facts}刊行。` : "") +
+      "収録冊のISBN・発売日・書影と、Amazonでの購入リンクを掲載。",
+    alternates: { canonical: `/art-books/${slug}` },
+  };
 }
 
 export function generateStaticParams() {

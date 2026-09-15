@@ -4,7 +4,13 @@ import ArchiveClient from "./ArchiveClient";
  *  sansedai-stock.json(741件)からクライアントがJST日付で決定的に選ぶ=ホームと同じ式。
  *  静的サイトのまま毎日自動でログが伸びる。 いいねは Worker /api/like の匿名カウンタ。 */
 export const metadata = {
-  alternates: { canonical: "/sansedai-archive" }, title: "今日の一冊 − 過去ログ" };
+  alternates: { canonical: "/sansedai-archive" },
+  title: "今日の一冊 − 過去ログ",
+  // ★description が既定のままだった(2026-09-15 番人 _check-ssr-content.py が検出)。
+  description:
+    "毎日1作ずつ紹介してきた「今日の一冊」の過去ログ。" +
+    "祖父母・親・子の三世代それぞれの時代から選んだ漫画を、発売日順にさかのぼって読めます。",
+};
 
 export default function SansedaiArchive() {
   return (

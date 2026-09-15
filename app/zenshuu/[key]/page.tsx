@@ -15,8 +15,15 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: { params: Promise<{ key: string }> }) {
   const { key } = await params;
   const c = V.find((x) => x.key === key);
+  // ★description が既定のままだった(2026-09-15 番人 _check-ssr-content.py が10頁を検出)。
+  //   title は在ったので「同一descriptionが多すぎる」側だけの穴。帯に出している事実
+  //   (出版社・刊行年・巻数)をそのまま使う。
   return {
     title: c ? `${c.name}(全${c.total}巻)` : "全集",
+    description: c
+      ? `${c.name}の全${c.total}巻一覧。${c.publisher}・${c.years}刊行。` +
+        "各巻の収録作品・発売日・書影と、購入リンクを掲載。"
+      : "漫画全集の巻一覧。",
     alternates: { canonical: `/zenshuu/${key}` },
   };
 }
