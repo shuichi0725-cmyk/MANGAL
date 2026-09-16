@@ -226,28 +226,37 @@ def cmd_inspect(env, site, url):
 
 
 def _sample_urls(n, seed):
-    """本番索引から層別サンプリング。層 = catch有無 × 巻数(1巻/複数巻)。
-    ★仮説検証用: 薄い頁ほどインデックスされないなら、catch無し層の登録率が有意に低いはず。"""
+    """本番索引から層別サンプリング。層 = 最新刊の新しさ × 巻数 × catch有無 (2x2x2=8層)。
+    ★仮説検証用: 「薄い頁ほど登録されない」なら catch無/1巻の層で登録率が有意に低いはず。
+    ★2026-09-17 修正: 巻数の列名を volumes_total(存在しない)→ total_volumes に。
+      旧コードは常に nv=0 で全件が「_1巻」層に落ち、巻数の効きが測れていなかった。"""
     import random
     idx = json.load(io.open(os.path.join(ROOT, "data", "manga-list-index.json"), encoding="utf-8"))
     f = idx["f"]
     si = f.index("slug")
     ci = json.load(io.open(os.path.join(ROOT, "data", "manga-catch-index.json"), encoding="utf-8"))
-    has = set(r[0] for r in ci["d"]) if isinstance(ci, dict) and "d" in ci else set()
-    vi = f.index("volumes_total") if "volumes_total" in f else None
-    strata = {"catch有_複数巻": [], "catch有_1巻": [], "catch無_複数巻": [], "catch無_1巻": []}
+    # ★2026-09-17 修正: catch索引は {slug: catch} の素のdict。 {"f","d"} 形式を仮定していたため
+    #   has が常に空になり、全件が「catch無」層に落ちて catch の効きが測れていなかった。
+    has = set(r[0] for r in ci["d"]) if isinstance(ci, dict) and "d" in ci else (set(ci) if isinstance(ci, dict) else set())
+    vi = f.index("total_volumes") if "total_volumes" in f else None
+    li = f.index("latest_date") if "latest_date" in f else None
+    strata = {}
     for r in idx["d"]:
         slug = r[si]
         nv = (r[vi] if vi is not None else 0) or 0
-        k = ("catch有" if slug in has else "catch無") + ("_1巻" if nv <= 1 else "_複数巻")
-        strata[k].append(slug)
+        lt = str((r[li] if li is not None else "") or "")
+        k = ("新刊" if lt >= "2020" else "旧作") \
+            + ("_1巻" if nv <= 1 else "_複数巻") \
+            + ("_catch有" if slug in has else "_catch無")
+        strata.setdefault(k, []).append(slug)
     rnd = random.Random(seed)
-    per = max(1, n // len(strata))
+    per = max(1, n // max(1, len(strata)))
     out = []
-    for k, v in strata.items():
+    for k in sorted(strata):
+        v = strata[k]
         pick = rnd.sample(v, min(per, len(v)))
         out += [(k, "https://mangal-db.com/manga/" + s) for s in pick]
-        print(f"  層 {k:14s} 母数 {len(v):>6,} → 抽出 {len(pick)}")
+        print(f"  層 {k:22s} 母数 {len(v):>6,} → 抽出 {len(pick)}")
     return out
 
 
