@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import RelatedWorks, { computeRelated } from "@/components/RelatedWorks";
 import ShareButtons from "@/components/ShareButtons";
 import VolumeRow from "@/components/VolumeRow";
+import VolumeSeoList from "@/components/VolumeSeoList";
 // import ColorEditionNote from "@/components/ColorEditionNote"; // 帯=表示停止中(2026-08-02裁定。下のマウント跡を参照)
 import ArtBookCard from "@/components/ArtBookCard";
 import Badge from "@/components/ui/Badge";
@@ -555,6 +556,9 @@ export default async function MangaDetailPage({
           <ColorEditionNote slug={manga.slug} /> */}
 
           <VolumeRow manga={manga} />
+
+          {/* ★巻明細のSSR化パイロット(2026-09-16): うる星やつらだけ。全展開はGO待ち */}
+          <VolumeSeoList manga={manga} />
 
           {/* ★関連作品 = 巻セクション(各版の最後は「📱電子書籍で買う」)の**下**
               (2026-09-15 ユーザ裁定で旧位置=「説明と巻の間」から移動)。
