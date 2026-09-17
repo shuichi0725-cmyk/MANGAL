@@ -32,3 +32,24 @@ metadata:
 - **復元は `git checkout -- data/manga/` 一発**(gitignore配下でも force-add 済みなら追跡されている)。
 - ★**週次の入口で `git status --porcelain -- data/manga/ | grep '^ D'` を見る**のが安い防壁。
   0件でないなら中身を確かめてから進む(preflightには未実装=入れる価値あり)。
+
+## ★2026-09-17 復元完了(400 → 4)+ 月次検出器#34を新設(ユーザGO)
+
+- **源stub 396件を `data/seeds/source-pages/` に生成**(git追跡=恒久)。 `_skey` は
+  **頁ISBNの種2逆引きの多数決**(1本目のISBNだけで決めない)。 400/400で逆引きできた。
+- ★**同値確認が要る**(実証): `promote --only-file` で再生成し before/after を突合 →
+  **384件 完全同値 / 12件 題名そのままで巻が純増**(源が消えて凍結していた頁の追いつき= 正常) /
+  **★4件 題名が変わった**。 後者は `_skey` が**親シリーズ**を指し、**別の生きた頁と重複**する型:
+  `kamakuramonogatari`『鎌倉ものがたり. 異界編』1巻 → 『鎌倉ものがたり』59巻
+  (本番に `kamakura-monogatari` が別に実在)。 他 ajinopuroresu / arufuheim… / kurabetekemishite…。
+  **この4件は復元を見送り before に戻した**(= per-case 裁定待ち。 種2に該当subシリーズが無い)。
+- **key2slug.tsv に368件を追記**。 28件は **同じseries_keyが既に別slugへ登録済み**
+  (= 改名後の新slug)で、足すと二重頁になるので見送り(`.cache/orphan-key2slug-skipped.txt`)。
+- **月次サニティ #34 を新設** = `scripts/_audit-orphan-source-pages.py`。
+  CLAUDE.md索引 / `docs/monthly-sanity-detectors.md` 本文 / `_monthly-distill.py` DETECTORS の
+  3点に登録済み(`_check-sanity-registry.py` green)。 **再発は件数で見る**。
+- before退避 = `.cache/orphan-v2-before/`(400件)。
+
+★根因の確定: **400件中398件が `.cache/apply/key2slug.tsv` 未登録**だった
+= 「src頁を作ったのにキー登録を忘れた」型 [[new_page_creation_srcpage_key2slug]]。
+改名頁が74%(298/400)を占めるので、**改名でキーを張り替えた時に旧stemの登録が落ちる**のが主経路。
