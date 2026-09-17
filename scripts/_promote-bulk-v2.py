@@ -4447,6 +4447,18 @@ def main():
                             if _rd_s:
                                 _v["release_date"] = _rd_s
                                 _touched = True
+                        # ★巻説明も本流(clean_vol + 最終pass)と同じ規則でここに通す
+                        #   (2026-09-17 ユーザ発見・実害)。 予約頁は本流を通らないため、
+                        #   volume-desc-ja.jsonl に文章が在っても**何度promoteしても永久に出ない**
+                        #   = 「予約頁は本流を通らない」穴の6件目
+                        #   (magazine / genre / genre-append / cover / 発売日 に続く)。
+                        #   実測 213頁 358巻が該当(bff・chikuwa-senki 等)。
+                        #   規則は補完と同型「空の時だけ」= 既存値は上書きしない(純粋追加)。
+                        if not _v.get("description"):
+                            _dd = _desc_for(_v["isbn13"])
+                            if _dd:
+                                _v["description"] = _dd
+                                _touched = True
             # ★発売日が動いたら頁の出版年レンジも追随させる(2026-09-04)。
             #   予約頁は種2を通らない=年を再計算する経路が無く、日付だけ override で直すと
             #   「出版年 2026〜2026」なのに巻は 2027 発売、という食い違いが残る。
