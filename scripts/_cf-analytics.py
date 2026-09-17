@@ -177,6 +177,19 @@ def web(days):
     print("※ビーコン計測=JS実行ブラウザのみ(bot/クローラは原則含まれない)。設置=2026-07-05以降のデータ。")
 
 
+# ★★ httpRequestsAdaptiveGroups の罠(2026-09-17 実踏・1時間溶かした)★★
+#   このデータセットには clientRequestHTTPProtocol == "UNK" のレコードが大量に混ざる
+#   (実測 85,166件中 54,408件=64%)。UNK 行は **method / edgeResponseStatus が実在しない値**
+#   で埋まっており、「SemrushBot が /browse に PUT して 204」「GET が 504」等の
+#   ありえない組み合わせを作る。これを真に受けると「サイトの29.6%が504」という
+#   完全な誤診断になる(実際にやった)。
+#   ★検算の型: UNK を除くと合計が Worker invocations と一致する
+#     (実測 30,758 ≒ 30,254)。UNK 除外後の 504 は **0件**。
+#   → 以後この定数で常に除外する。素の件数は約3倍に膨らむので、過去の記録と
+#     食い違ったら「UNK込みで数えていないか」をまず疑う。
+REAL_ONLY = ', clientRequestHTTPProtocol_neq: "UNK"'
+
+
 def bots(date):
     """ゾーンレベル httpRequestsAdaptiveGroups を User-Agent別に集計(★Freeプランは1日幅までしかクエリ不可)。"""
     d0 = date or datetime.date.today().isoformat()
@@ -184,7 +197,7 @@ def bots(date):
     leq = d0 + "T23:59:59Z"
     q = """query($zone: string!, $geq: Time!, $leq: Time!) {
       viewer { zones(filter: {zoneTag: $zone}) {
-        ua: httpRequestsAdaptiveGroups(limit: 100, filter: {datetime_geq: $geq, datetime_leq: $leq}, orderBy: [count_DESC]) {
+        ua: httpRequestsAdaptiveGroups(limit: 100, filter: {datetime_geq: $geq, datetime_leq: $leq""" + REAL_ONLY + """}, orderBy: [count_DESC]) {
           count
           dimensions { userAgent }
         } } } }"""
@@ -256,8 +269,9 @@ def _bucket(path):
 
 
 def _zone_group(geq, leq, dims, ua=None, limit=200):
-    """httpRequestsAdaptiveGroups を任意 dimension で集計。ua 指定時はその UA に絞る。"""
-    filt = "datetime_geq: $geq, datetime_leq: $leq"
+    """httpRequestsAdaptiveGroups を任意 dimension で集計。ua 指定時はその UA に絞る。
+    ★REAL_ONLY で protocol=UNK の偽レコードを必ず除外する(上の罠コメント参照)。"""
+    filt = "datetime_geq: $geq, datetime_leq: $leq" + REAL_ONLY
     varsdef = "$zone: string!, $geq: Time!, $leq: Time!"
     variables = {"zone": ZONE_TAG, "geq": geq, "leq": leq}
     if ua is not None:
