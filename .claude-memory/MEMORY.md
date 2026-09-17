@@ -190,3 +190,6 @@
 - [【罠】デタッチ長時間ジョブはセッション終了で道連れ死=WMIで起こす](detached_job_dies_on_session_teardown.md) — Start-Processでは足りない。生死判定はnode本数と.exitファイル
 - [【型】旧slugのaliasと同名で新頁が生まれ301が実頁を隠す](redirect_key_collides_with_new_page.md) — 根は題の短縮。合流はextra-editions(追加型)で
 - [【罠】ls -l の列ずれでファイルサイズを誤読](file_size_misread_ls_column.md) — 所有者名に空白。サイズは stat -c %%s / getsize で
+- [【型・総論】予約頁は本流を通らない=足した機構が1つずつ落ちる(既知6件目)](preorder_page_bypasses_mainline_class.md) — 本流に充填を足したら予約合流ループにも足す。症状=promoteを回してもファイルが1バイトも変わらない
+- [【戒め】表示仕様は実装を読む。自前で再実装して結論を出すな](feedback_read_the_implementation_not_reimplement.md) — displayBlocksのpin規則を落として並び順を誤報告した
+- [【保留】巻説明が先頭タブに無い93頁](voldesc_not_in_top_block_93.md) — 並び順は書影と発売日だけで決まる。冊数同じ37/違い56・A案B案の裁定待ち

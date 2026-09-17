@@ -53,3 +53,18 @@ metadata:
 ★根因の確定: **400件中398件が `.cache/apply/key2slug.tsv` 未登録**だった
 = 「src頁を作ったのにキー登録を忘れた」型 [[new_page_creation_srcpage_key2slug]]。
 改名頁が74%(298/400)を占めるので、**改名でキーを張り替えた時に旧stemの登録が落ちる**のが主経路。
+
+### ★残り4件も per-case で復元 → **源なし頁 0**(2026-09-17)
+
+4件とも「**親/兄弟seriesのISBNを持つ分割頁**」で、素直な `_skey` では related-merge が兄弟を
+巻き込み題も巻も化ける(kamakura-monogatari-makai-hen 1巻 → 『鎌倉ものがたり』59巻 = 既存頁と重複)。
+→ **激マン!Z&グレート編と同じ型**で固定した:
+  src stub に **`_title_force` / `_kana_force`** を置き、**`edition-overrides.json`(キー=公開slug)で
+  editions を全置換**する。 これなら _skey が親を指していても中身は動かない。
+対象 = ajinopuroresu 『味のプロレス. マニアック編』1巻 / alfheim-no-kishi-ballad-tsugumi-no-mori 11巻 /
+kamakura-monogatari-makai-hen 1巻 / kurabete-kemishite 3巻(overrideは既存・題だけ固定)。
+4件とも before と slug/title/ISBN集合/巻数/書影/説明が**完全同値**。
+
+★**罠**: `_skey` を**手で書くと静かに失敗する**(全角チルダ「～」/括弧の字形違いで series が引けず、
+`find_series` が None → 頁ごと skip = **`wrote 0` で終わりエラーにならない**)。
+**DBの生値(`series_key`)をそのままコピーする**こと。 実際1回踏んだ。
