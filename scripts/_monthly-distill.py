@@ -739,6 +739,9 @@ DETECTORS = [
     #   サーバー描画が空になり、ブラウザでは正常に見えるので目視では気づけない。
     #   out/(前回ビルド)を読むだけ=ビルド不要・数秒。out/が無ければ黙って exit 0。
     ("ssr-content", ["_check-ssr-content.py"], None, False),
+    # ★源(SRC)なし manga.v2 頁(2026-09-17): 頁化フローが源を永続化し忘れると、次のフルpromoteで
+    #   **公開中の頁が黙って消える**。 復元しても再発するので件数を毎月見る。
+    ("orphan-source-pages", ["_audit-orphan-source-pages.py"], None, False),
     # ★同一slugを名乗るファイル複数層(白と黒型 2026-09-15): 索引に同一作品が2行出る。
     #   #19(year-suffix-dup)は索引を by_slug で畳むため構造的に見えない=ファイル実体を走査。
     ("duplicate-slug-files", ["_audit-duplicate-slug-files.py", "--tsv"], "duplicate-slug-files.tsv", False),

@@ -144,3 +144,25 @@
 - 初回(2026-09-15) = 1組(`shiro-to-kuro-shimozaki` ← `shiro-to-kuro-shimozaki` / `...2026`)。
   残骸側を退避して索引 69,353 → 69,352。 是正後の再走査で **0組**。 走査は69,353頁を約10秒。
 
+
+## 34. 源(SRC)なし manga.v2 頁の層
+
+- 検出器 = `scripts/_audit-orphan-source-pages.py` / 出力 = `docs/production-diagnostics/orphan-source-pages.tsv`
+- promote の頁producerは **2つだけ** = ① `data/manga/*.yml`(合成ソース) + `data/seeds/source-pages/*.yml`
+  の src ループ ② `data/seeds/preorder-pages/*.yml`。 フルpromoteは冒頭で `data/manga.v2/*.yml` を
+  **全削除**してから作り直すので、どちらにも源が無い頁は **次の月次で黙って消える**。
+  しかも本番索引には載っている = **公開中の頁がある日いきなり404**になる。
+- 再発する層である: 2026-08-26 に258件復元 → 2026-09-14 に414件で再実測 → **2026-09-17 に400件**。
+  ★根因の多くは「src頁を作ったのに `.cache/apply/key2slug.tsv` に登録し忘れ」
+  ([[new_page_creation_srcpage_key2slug]])。 2026-09-17 実測で **400件中398件が key2slug 未登録**だった。
+- 復元手順(2026-09-17 実証・396件成功) = `manga.v2` から最小の源stubを `data/seeds/source-pages/` に作る。
+  `_skey` は **頁ISBNの種2逆引きの多数決**(1本目のISBNだけで決めない)。 stubのキーは
+  `slug`(= SRC stem) / `title` / `title_kana` / `_skey` / `_note_origin` の5つで足りる
+  (著者は種2から引き直せる。 数値ペンネームのint化事故を避けるため書かない)。
+- ★**復元後に必ず同値確認**する(`promote --only-file` → before/after の題名・ISBN集合・巻数を突合)。
+  2026-09-17 実測 = 384/400 が完全同値、12件は題名そのままで巻が純増(= 源が消えて凍結していた頁の追いつき
+  = 正常)、**4件は題名が変わった**。 後者は `_skey` が親シリーズを指してしまい、
+  **別の生きた頁と重複**する型(『鎌倉ものがたり. 異界編』1巻 → 『鎌倉ものがたり』59巻。
+  本番には `kamakura-monogatari` が別に実在)。 この4件は復元を見送り、per-case 裁定に回した。
+- 月次で見るもの = **件数の増加**。 増えていたら、その月の頁化フロー(取りこぼし/日次/per-case分割)で
+  源の永続化が漏れている。 自動復元はしない(上の重複型があるため)。

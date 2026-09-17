@@ -99,6 +99,7 @@
 | 31 | 同人セレクション層 (ハル/POE BACKS型) | `scripts/_audit-doujin-selection.py` | doujin-selection.tsv | **SERIES一致**(楽天seriesNameに同人)の新規 = 掲載対象外。 TITLE一致は同人を題材にした商業漫画なので対象外 |
 | 32 | 配信HTMLの中身が空の層 (AI書評家リーグ型) | `scripts/_check-ssr-content.py` | stdout | FAILの新規増加。★client頁で日付/乱数/localStorageを使うと**サーバー描画が空**になる(ブラウザでは正常に見えるので目視不可)。既定メタ共有も同時に見る |
 | 33 | 同一slugを名乗るファイル複数層 (白と黒型) | `scripts/_audit-duplicate-slug-files.py` | duplicate-slug-files.tsv | **0組**を確認。★#19では見えない(索引をby_slugで畳むため)=ファイル実体を走査。判定=`promote --only`のtotal |
+| 34 | 源(SRC)なし頁層 | `scripts/_audit-orphan-source-pages.py` | orphan-source-pages.tsv | **件数の増加**。源が無い頁は次のフルpromoteで**公開中のまま黙って消える**。復元は源stub(_skey=頁ISBNの種2逆引き)だが★親シリーズを指すと別頁と重複 |
 
 - 既知の例外型: 再登録の別 ID 二重化 / MADB 形式変更 (= タグ消失・年→巻番号) / 成年誤 flag (= 新レーベル未カバー) / 雑誌漏れ (= cm105 凍結) / 巻番号水増し (= 下=3型)。
 
