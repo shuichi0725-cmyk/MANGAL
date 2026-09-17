@@ -221,12 +221,104 @@ def bots(date):
     print("\n※上位100UAのみ集計(ロングテールは未計上)。UA詐称までは見抜けない=名乗りベース。Freeプランは1日幅までしかクエリ不可。")
 
 
+# ---- paths: 「そのbotが実際にどのURLを取ったか」 -----------------------------
+# ★bots が「誰が来たか」、paths が「何を取ったか」。GSC/BWT は後者を答えない
+#   (= 検索エンジンが何を知っているかしか言わない) ので、クロール配分の診断はここでしかできない。
+_PATH_BUCKETS = [
+    ("/_next/", "JS/CSS資産(_next)"),
+    ("/manga/", "★作品頁"),
+    ("/author/", "著者頁"),
+    ("/zenshuu/", "全集コーナー"),
+    ("/genre/", "ハブ(ジャンル)"),
+    ("/magazine", "ハブ(雑誌)"),
+    ("/publisher", "ハブ(出版社)"),
+    ("/year", "ハブ(年)"),
+    ("/titles", "索引(題名)"),
+    ("/authors", "索引(著者)"),
+    ("/shinkan", "新刊"),
+    ("/art-books/", "画集"),
+    ("/tokushu", "特集"),
+    ("/column-ai-league/", "AI書評"),
+    ("/browse", "一覧(browse)"),
+    ("/list", "一覧(list)"),
+    ("/sitemap", "クロール制御(sitemap)"),
+    ("/robots.txt", "クロール制御(robots)"),
+]
+
+
+def _bucket(path):
+    if path == "/" or path == "":
+        return "ホーム"
+    for pref, label in _PATH_BUCKETS:
+        if path.startswith(pref):
+            return label
+    return "その他"
+
+
+def _zone_group(geq, leq, dims, ua=None, limit=200):
+    """httpRequestsAdaptiveGroups を任意 dimension で集計。ua 指定時はその UA に絞る。"""
+    filt = "datetime_geq: $geq, datetime_leq: $leq"
+    varsdef = "$zone: string!, $geq: Time!, $leq: Time!"
+    variables = {"zone": ZONE_TAG, "geq": geq, "leq": leq}
+    if ua is not None:
+        filt += ", userAgent: $ua"
+        varsdef += ", $ua: string!"
+        variables["ua"] = ua
+    q = ("query(" + varsdef + ") { viewer { zones(filter: {zoneTag: $zone}) {"
+         f" g: httpRequestsAdaptiveGroups(limit: {limit}, filter: {{{filt}}}, orderBy: [count_DESC])"
+         " { count dimensions { " + " ".join(dims) + " } }"
+         " } } }")
+    d = _api("https://api.cloudflare.com/client/v4/graphql", {"query": q, "variables": variables})
+    if d.get("errors"):
+        raise SystemExit("GraphQLエラー(dims=" + ",".join(dims) + "): "
+                         + json.dumps(d["errors"], ensure_ascii=False)[:400])
+    return d["data"]["viewer"]["zones"][0]["g"]
+
+
+def paths(date, targets):
+    """指定botが実際に取得したパスを集計。★Freeプランは1日幅・top N のみ=ロングテールは出ない。"""
+    d0 = date or (datetime.date.today() - datetime.timedelta(days=1)).isoformat()
+    geq, leq = d0 + "T00:00:00Z", d0 + "T23:59:59Z"
+    uas = [r["dimensions"]["userAgent"] for r in _zone_group(geq, leq, ["userAgent"], limit=100)]
+    print(f"パス取得の実態・{d0} (ゾーン上位100UAから対象botのUA変種を拾って集計)\n")
+    for sig in targets:
+        mine = [u for u in uas if sig.lower() in u.lower()]
+        if not mine:
+            print(f"=== {sig} === 上位100UAに出現せず(この日のリクエストが少ない)\n")
+            continue
+        buckets, status, raw = {}, {}, {}
+        for ua in mine:
+            for r in _zone_group(geq, leq, ["clientRequestPath"], ua=ua, limit=200):
+                p, c = r["dimensions"]["clientRequestPath"], r["count"]
+                buckets[_bucket(p)] = buckets.get(_bucket(p), 0) + c
+                raw[p] = raw.get(p, 0) + c
+            for r in _zone_group(geq, leq, ["edgeResponseStatus"], ua=ua, limit=20):
+                s = r["dimensions"]["edgeResponseStatus"]
+                status[s] = status.get(s, 0) + r["count"]
+        tot = sum(buckets.values())
+        stot = sum(status.values())
+        print(f"=== {sig} === UA変種{len(mine)}件 / 集計リクエスト {tot:,}")
+        print("  ■ ステータス")
+        for s, c in sorted(status.items(), key=lambda x: -x[1]):
+            print(f"     {s}  {c:>7,}  ({c / stot * 100:>5.1f}%)")
+        print("  ■ パス分類")
+        for b, c in sorted(buckets.items(), key=lambda x: -x[1]):
+            print(f"     {b:<22}{c:>7,}  ({c / tot * 100:>5.1f}%)")
+        print("  ■ 実パス上位15")
+        for p, c in sorted(raw.items(), key=lambda x: -x[1])[:15]:
+            print(f"     {c:>6,}  {p[:96]}")
+        print()
+    print("※上位N件のみ=ロングテール未計上。Freeプランは1日幅までしかクエリ不可。UA詐称は見抜けない。")
+
+
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("cmd", choices=["verify", "report", "web", "bots"])
+    ap.add_argument("cmd", choices=["verify", "report", "web", "bots", "paths"])
     ap.add_argument("--days", type=int, default=7)
     ap.add_argument("--script", default=DEFAULT_SCRIPT)
-    ap.add_argument("--date", default=None, help="bots用: YYYY-MM-DD (省略=今日)")
+    ap.add_argument("--date", default=None, help="bots/paths用: YYYY-MM-DD (paths既定=昨日)")
+    ap.add_argument("--bot", default="Googlebot,bingbot,OAI-SearchBot",
+                    help="paths用: UAに含まれる文字列をカンマ区切り")
     a = ap.parse_args()
     if a.cmd == "verify":
         verify()
@@ -234,6 +326,8 @@ def main():
         web(a.days)
     elif a.cmd == "bots":
         bots(a.date)
+    elif a.cmd == "paths":
+        paths(a.date, [s.strip() for s in a.bot.split(",") if s.strip()])
     else:
         report(a.days, a.script)
 
