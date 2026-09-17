@@ -5,7 +5,7 @@ metadata:
   node_type: memory
   type: feedback
   originSessionId: bd02af38-42f4-4acb-9f59-ae607bc37eeb
-  modified: 2026-08-31T14:07:31.552Z
+  modified: 2026-09-17T09:48:57.752Z
 ---
 
 script が出した警告・推計をそのままユーザに報告しない。**桁と日付は暗算で検算**してから伝える。
@@ -18,3 +18,15 @@ script が出した警告・推計をそのままユーザに報告しない。*
 **How to apply**: 警告に基づいてユーザへ行動変更を進言する前に、その数値が常識(暦・DB規模・
 過去実測)と整合するか一度自分で計算する。合わなければ算出コードを疑って先に読む。
 関連: [[feedback_accuracy_is_the_goal]]
+
+## ★再発(2026-09-17)= 今度は「既存の独立観測との矛盾」を無視した
+
+Cloudflare解析を素で数えて「**サイトの29.6%が504。Googlebotが17.9%食っている**」と報告し、
+ユーザに修正2件を承認させた。**全部誤り**(protocol=UNK の偽レコードが6割 = [[cf_analytics_unk_artifact]])。
+
+★見抜く機会は**3回**あった: ①「SemrushBotが/browseにPUTして204」というありえない行 ②「PUT204」と
+「GET504」のUA構成比が小数点まで一致 ③**Bing Webmaster が7日間 `5xx 0 / timeout 0` と報告していた**。
+特に③ = **自分の新しい観測が既存の独立した観測と矛盾したら、報告する前に必ず検算する**。
+矛盾は「重大発見」ではなく「まず自分の測り方を疑う合図」。
+今回の検算の型 = 別系統の数字と突き合わせる(UNK除外の合計 30,758 ≒ Worker invocations 30,254)。
+関連: [[feedback_absence_needs_verification]] [[feedback_raw_count_is_not_worklist]]

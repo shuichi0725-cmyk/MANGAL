@@ -5,7 +5,7 @@ metadata:
   node_type: memory
   type: project
   originSessionId: bd02af38-42f4-4acb-9f59-ae607bc37eeb
-  modified: 2026-08-31T12:47:27.947Z
+  modified: 2026-09-17T09:48:45.273Z
 ---
 
 GSC で 6.65万頁が「検出 - インデックス未登録」(初検出 2026-07-11、= クロール未着手バケット)。
@@ -42,6 +42,10 @@ GSC Coverage エクスポート(画面CSV=APIでは取れない層)+ URL検査AP
 
 ★**Googlebot = 1日144リクエスト**(2026-09-14 Cloudflare実測・全40,557件中)。
 SemrushBot 12,863 / Meta 8,431 / MJ12bot 3,061 / OAI-SearchBot 2,580 / AhrefsBot 2,067 / **Bingbot 512**。
+★★**2026-09-17 訂正: この行の数字は全部 UNK 偽レコード込みで約3倍に膨らんでいる**([[cf_analytics_unk_artifact]])。
+  実数 = **Googlebot 58/日**(200が98.3%) / bingbot 297 / OAI-SearchBot 299 / Semrush 7,108 / MJ12 2,751 / Ahrefs 1,605。
+  → 一周は「1年以上」ではなく **3.3年**。なお下段の「止めてもGooglebotの予算は増えない(5xx 0・timeout 0)」は
+  **再確認して正しかった**(UNK除外後の504は0件)。一度これを誤って否定しかけた = [[bing_search_reality_2026_09]]。
 69,000頁をGooglebotのこの速度で一周するには1年以上かかる。サイトマップは正常(90,911URL・3分割・全200・
 「知らない」21件を照合したら21件ともサイトマップ収録済み)= 渡せていないのではなく**Googleが処理していない**。
 ★SemrushBot等の迷惑クローラは月78万リクエスト≒R2 Class A無料枠の大半を食う([[r2_class_a_budget_arithmetic]])が、
