@@ -135,8 +135,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     const sv = seoVolPhrase(m);
     // ★語順(2026-09-14): 旧 `題名 | 著者 - 全N巻の…` は、著者名の長さぶんだけ「全N巻」「発売日」が
     //   表示外に落ちていた(実測 中央値48文字=全頁が35文字超)。検索者のクリックを決める語を
-    //   題名の直後へ出す。サフィックス「| 漫画・コミックのMANGAL」は裁定済のため維持
-    //   ([[seo_title_suffix_decision]] A案)。
+    //   題名の直後へ出す。★サフィックスは 2026-09-18 に D案へ改訂(下の return を参照)。
     if (sv.nVols) title = `${m.title} 全${sv.nVols}巻の発売日・全巻一覧${authorsShort ? ` | ${authorsShort}` : ""}`;
     // ★④(2026-09-11): catch/synopsis が無ければ「巻数フレーズだけ」で終わらせず事実文で埋める
     const genreNames = (m.genres ?? []).map((k) => data.genres.find((x) => x.key === k)?.name ?? k);
@@ -150,8 +149,18 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     desc = d.slice(0, 120) || desc;
   }
   const cover = coverUrl(m);
+  // ★2026-09-18 サフィックス D案(ユーザ裁定。2026-08-31 のA案を作品頁についてのみ改訂):
+  //   作品頁だけ「| 漫画・コミックのMANGAL」(12.5全角)→「| MANGAL」(4.5全角)に短縮する。
+  //   実測(n=1,000): 作品頁 title の中央値 38.5全角で、日本語SERPの表示上限(約30全角)に
+  //   収まるのは **0.1%**。つまり検索結果には「| 漫画・コミッ…」という尻切れだけが出ていて、
+  //   キーワードもブランド名も**両方表示されていなかった**。短縮すると収まるのが 48.8% になる。
+  //   ★著者頁(20,203)は現状でも 97% が枠に収まっている(中央値27.0)ので**対象外**=サフィックス維持。
+  //   ハブ/コーナー頁も同様に維持(title が短く、汎用語クエリを狙う面なので語が活きる)。
+  //   ★absolute を使う理由: layout の template を迂回するため。app/manga に layout を足すと
+  //   69,352ルートのRSCツリーに segment が増えるので使わない。
+  //   ★og:title は従来どおりサフィックス無し(ブランドは og:site_name が出す)。
   return {
-    title,
+    title: { absolute: `${title} | MANGAL` },
     description: desc,
     alternates: { canonical: `${SITE}/manga/${m.slug}` },
     openGraph: {
