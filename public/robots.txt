@@ -8,4 +8,15 @@ Disallow: /manga-alt-index.json
 Disallow: /calendar/
 Disallow: /shinkan/*.json$
 Disallow: /data/
+# ★絞り込みのクエリURLはクロール不要(2026-09-18)。実測:
+#   作品頁69,352枚が張る /browse?… は のべ116,648本・**ユニーク8,319URL**
+#   (author 6,333 / originalAuthor 846 / publisher 690 / theme 413 / yearMin 24 / magazine 8 / demographic 5)。
+#   中身は /author/<slug>(20,203枚・sitemap収録)や /publisher/<key> と重複する「行き止まり」で、
+#   GSCの「クロール済み-インデックス未登録」46件のうち13件がこれだった。
+#   Googlebot は実測 58リクエスト/日(一周3.3年)なので、ここに流れる分は丸ごと損。
+#   /list?genre=… 32本も /genre/<key>(251頁・sitemap収録の正規面)と重複。
+# ★クエリ形だけを止める。素の /browse と /list は止めない
+#   (/browse は人間の訪問2位=440閲覧/30日。?を含むURLだけが前方一致で該当する)。
+Disallow: /browse?
+Disallow: /list?
 Sitemap: https://mangal-db.com/sitemap.xml
