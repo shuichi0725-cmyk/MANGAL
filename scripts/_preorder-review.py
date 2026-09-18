@@ -150,7 +150,12 @@ def main():
         # ★SLUG_MUSH(2026-08-23 ユーザ発見30件=isekairakuraku型): 無分割塊(ハイフン無し15字超run)
         #   or 78字超(80capの語中切断痕)は機械検出できる実問題=ブロッキング。
         #   根因は「短縮前のフル楽天題からslug生成」= 是正は題の意味の切れ目で再命名(rename)。
-        _maxrun = max((len(x) for x in slug.split("-")), default=0)
+        # ★同名slug衝突の回避サフィックス `-<姓ローマ字><4桁年>` は設計上ハイフン無しの長い塊に
+        #   なる(CLAUDE.md slug規則: 小川版 chuka-ichiban / 真鍋版 chuka-ichiban-manabe1993)。
+        #   run長の計算からは外す(2026-09-19: green-boy-tashiroyumiya2026 /
+        #   kaguya-omikawanamari2026 が正しい命名なのに毎回ブロッキングに出ていた)。
+        _runslug = re.sub(r"-[a-z]{3,}(?:19|20)\d{2}$", "", slug)
+        _maxrun = max((len(x) for x in _runslug.split("-")), default=0)
         if _maxrun >= 15 or len(slug) >= 78:
             rows.append(("SLUG_MUSH", slug, f"無分割塊(run={_maxrun})/語中切り(len={len(slug)})→題の切れ目でrename", title))
         elif _maxrun >= 11:
