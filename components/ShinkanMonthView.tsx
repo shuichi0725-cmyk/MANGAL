@@ -16,6 +16,7 @@ export default function ShinkanMonthView({
   months,
   known,
   heading,
+  subheading,
   lead,
   pageUrl,
   live,
@@ -28,6 +29,10 @@ export default function ShinkanMonthView({
   months: string[];
   known: KnownSet;
   heading: string;
+  /** h1 の下に置く月見出し(h2)。/shinkan だけが使う = h1 を月に縛らないための受け皿
+   *  (2026-09-18: h1/title が「2026年9月の新刊」だと月替わり後〜次の週次まで嘘になるため、
+   *   恒久的な語を h1 に、月を h2 に分離した)。 */
+  subheading?: string;
   lead: string;
   pageUrl: string;
   live: boolean;
@@ -52,6 +57,9 @@ export default function ShinkanMonthView({
           )}
           <ShinkanShare url={pageUrl} text={`${ymLabel(ym)}の漫画新刊 ${n.toLocaleString()}冊一覧 | MANGAL`} />
         </div>
+        {subheading && (
+          <h2 className={`${dotGothic.className} mt-1 text-[15px] font-black text-ink/80`}>{subheading}</h2>
+        )}
         <p className="mt-0.5 text-[11px] text-ink/55">{lead}</p>
         <ShinkanMonthNav months={months} current={ym} />
         {(prev || next) && (

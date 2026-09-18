@@ -7,8 +7,13 @@ const V = view as unknown as AnimeSeasonsView;
 
 export const metadata: Metadata = {
   alternates: { canonical: "/anime" },
-  title: "アニメ化された漫画・季節別一覧",  // ★サフィックスは layout template が付ける(2026-09-04 二重是正)
-  description: "1960年代から現在までのTV・配信アニメの原作漫画を放送季ごとに一覧。",
+  // ★サフィックスは layout template が付ける(2026-09-04 二重是正)
+  // ★2026-09-18: 「原作コミック」「コミカライズ」を title/description に追加(実測で
+  //   アニメ化/原作系クエリの表示が Google/Bing とも 0 だったため、語を明示的に持たせる)
+  //   ★「一覧」は h1 が持つ。title に足すと接尾辞込みで30全角を超えて末尾が切れるため入れない
+  title: "アニメ化された漫画・原作コミック",
+  description:
+    "1960年代から現在までのTV・配信アニメについて、アニメ化された漫画・原作コミック・コミカライズを放送季ごとに一覧。全巻の発売日つき。",
 };
 
 export default function AnimeSeasonsIndexPage() {
@@ -28,7 +33,7 @@ export default function AnimeSeasonsIndexPage() {
         ← トップへ戻る
       </Link>
 
-      <h1 className="mt-4 text-2xl font-bold">📺 アニメの原作漫画(季節別)</h1>
+      <h1 className="mt-4 text-2xl font-bold">📺 アニメ化された漫画・原作コミック一覧(季節別)</h1>
       <p className="mt-1 text-xs text-ink/55">
         放送季を選ぶと、その季に始まったアニメの原作漫画一覧へ。{seasonLabel(V.order[0])}〜
         {seasonLabel(V.order[V.order.length - 1])}。

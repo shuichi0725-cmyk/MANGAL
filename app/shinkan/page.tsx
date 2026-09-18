@@ -18,12 +18,16 @@ function current() {
 }
 
 export function generateMetadata(): Metadata {
-  const { ym, n } = current();
-  // ★layout の title テンプレートが「| 漫画・コミックのMANGAL」を付けるので、ここでは「漫画・コミック」を重ねない
-  const title = `今月の新刊発売日一覧(${ymLabel(ym)}・漫画${n.toLocaleString()}冊)`;
+  // ★2026-09-18: title / description から「今月」「YYYY年M月」「N冊」を外した(恒久化)。
+  //   旧は `今月の新刊発売日一覧(2026年9月・漫画885冊)` で、月が替わってから次の週次ビルドまで
+  //   最大6日「嘘のタイトル」を配信していた。月は h2(subheading)が持つ。
+  //   狙いは「漫画 新刊」「漫画 発売日」系クエリを受ける**恒久的な語を持つURL**を1枚作ること
+  //   (実測: 新刊/発売日系クエリでの表示は Google/Bing とも 0 だった)。
+  // ★layout の title テンプレートが「| 漫画・コミックのMANGAL」を付けるので、ここでは「コミック」を重ねない
+  const title = "漫画の新刊発売日一覧";
   const description =
-    `${ymLabel(ym)}に発売される漫画・コミックの新刊${n.toLocaleString()}冊を発売日ごとに全冊掲載。` +
-    "書影・巻数・著者・出版社・レーベルつきで、Amazonでの予約・購入と作品ページ(全巻の発売日)へ移動できます。毎週更新。";
+    "漫画・コミックの新刊を発売日ごとに全冊掲載。書影・巻数・著者・出版社・レーベルつきで、" +
+    "Amazonでの予約・購入と作品ページ(全巻の発売日)へ移動できます。月別ページから過去の新刊もたどれます。毎週更新。";
   return {
     title,
     description,
@@ -38,7 +42,7 @@ export default function ShinkanPage() {
   const i = months.indexOf(ym);
   const rows = sortedDays(data).map((day) => ({ date: `${ym}-${day.padStart(2, "0")}`, items: data.days[day] }));
   const known = knownSlugs();
-  const jsonLd = shinkanJsonLd(`今月(${ymLabel(ym)})の漫画・コミック新刊発売日一覧`, `${SITE}/shinkan`, rows, known);
+  const jsonLd = shinkanJsonLd(`漫画の新刊発売日一覧(${ymLabel(ym)})`, `${SITE}/shinkan`, rows, known);
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
@@ -47,7 +51,8 @@ export default function ShinkanPage() {
         data={data}
         months={months}
         known={known}
-        heading={`${ymLabel(ym)}の新刊`}
+        heading="漫画の新刊発売日一覧"
+        subheading={`${ymLabel(ym)}の新刊`}
         lead="発売日ごとに全冊掲載。スクロールだけで全部見られます。書影・題はAmazonへ、「詳細」で作品ページへ。"
         pageUrl={`${SITE}/shinkan`}
         live

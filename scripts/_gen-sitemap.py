@@ -95,6 +95,16 @@ if n_hub == 0:
 else:
     print(f"ハブ面 {n_hub} URL(雑誌/出版社/年/ジャンル下位)")
 
+# ★アニメ季節頁(2026-09-18 SEO): out/anime/<season>.html 222面が sitemap 漏れだった。
+#   「アニメ化」「原作漫画」の語を持つ実体のある面(最少でも作品3件)なのに Google へ渡せていなかった。
+#   索引 /anime は fixed に載っているので、ここでは下位面だけ拾う(二重登録の回避 = 末尾に dedup が無いため)。
+anime_sub = [u for u in _walk_html("anime") if "/" in u]
+dyn += anime_sub
+if anime_sub:
+    print(f"アニメ季節頁 {len(anime_sub)} URL")
+else:
+    print("★WARN: out/anime/ に季節頁が無い → sitemapに載せられない(build後に実行しているか?)")
+
 urls = [f"{SITE}/{p}" if p else SITE for p in fixed] + [f"{SITE}/{p}" for p in dyn] + \
     [f"{SITE}/manga/{s}" for s in slugs]
 
