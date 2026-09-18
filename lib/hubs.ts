@@ -222,25 +222,34 @@ export function hubMeta(def: HubDef, page: number): { title: string; description
   const n = def.count.toLocaleString();
   const c = def.completed.toLocaleString();
   const pageSfx = page > 1 ? `（${page}/${def.pages}ページ）` : "";
-  const rep = hubTop(def.kind, def.key, 3).map((m) => repTitle(m.title));
+  // ★2026-09-18 是正: 旧は pageSfx を title にしか付けておらず、description が全ページ同一だった
+  //   (実測 507頁 = publisher 210 / year 246 / magazine 51 が1ページ目と同文)。
+  //   代表作も hubTop(=全体の人気上位3)を毎ページ載せていたので、5ページ目の説明文に
+  //   1ページ目の作品名が並ぶという不正確さもあった。
+  //   → 2ページ目以降は **そのページに実際に載っている作品**(先頭3件)と件数の範囲で書く。
+  const rows = page > 1 ? hubRows(def.kind, def.key, page) : [];
+  const from = (page - 1) * HUB_PAGE_SIZE + 1;
+  const to = from + (page > 1 ? rows.length : 0) - 1;
+  const pageText = page > 1 ? `全${n}作品のうち${from.toLocaleString()}〜${to.toLocaleString()}件目（${page}/${def.pages}ページ）。` : "";
+  const rep = (page > 1 ? rows.slice(0, 3) : hubTop(def.kind, def.key, 3)).map((m) => repTitle(m.title));
   const repText = rep.length > 0 ? `『${rep.join("』『")}』など。` : "";
   const tail = "各作品の全巻一覧・発売日・ISBN・購入リンクつき。";
   if (def.kind === "magazine") {
     const pub = publisherName(def.publisher);
     return {
       title: `${def.name} 連載作品一覧（${n}作品・連載開始順）${pageSfx}`,
-      description: `${def.name}${pub ? `（${pub}）` : ""}に連載・掲載された漫画${n}作品を連載開始年順に掲載。${repText}${tail}`,
+      description: `${def.name}${pub ? `（${pub}）` : ""}に連載・掲載された漫画${n}作品を連載開始年順に掲載。${pageText}${repText}${tail}`,
     };
   }
   if (def.kind === "publisher") {
     return {
       title: `${def.name}の漫画 一覧（人気順・${n}作品）${pageSfx}`,
-      description: `${def.name}が刊行した漫画${n}作品を人気順に掲載（完結${c}作）。${repText}${tail}`,
+      description: `${def.name}が刊行した漫画${n}作品を人気順に掲載（完結${c}作）。${pageText}${repText}${tail}`,
     };
   }
   return {
     title: `${def.key}年の漫画 一覧（連載開始・${n}作品）${pageSfx}`,
-    description: `${def.key}年に連載・刊行が始まった漫画${n}作品を人気順に掲載（完結${c}作）。${repText}${tail}`,
+    description: `${def.key}年に連載・刊行が始まった漫画${n}作品を人気順に掲載（完結${c}作）。${pageText}${repText}${tail}`,
   };
 }
 

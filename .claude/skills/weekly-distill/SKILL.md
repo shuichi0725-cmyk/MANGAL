@@ -104,11 +104,21 @@ npx next build 2>&1 | Out-File .cache\weekly-build.log
   静的chunk(out/_next)とpublic系はexport序盤で搬出済みのことが多い=検証は du で。
 - ★完了後の**居座りnodeをStop-Process**(Windows恒例。file lock解除)。
 
-### 3.5 sitemap生成 (build後・sync前)
+### 3.5 ★ビルド後・sync前の一式 (sitemap生成 + 配信HTMLの中身ゲート)
 ```
-python scripts/_gen-sitemap.py
+python scripts/_weekly-postbuild.py
 ```
-(out/ に sitemap.xml+分割を書く=syncが拾う。SEO②)
+- ①`_gen-sitemap.py`(out/ に sitemap.xml+分割を書く=syncが拾う。SEO②)
+  → ②`_check-ssr-content.py`(**これから上げる実物**が空でないかを見る最後の関門)。
+- ★**exit 1 なら手順4(R2同期)に進まない**。中身が空の頁をそのまま配信することになる。
+  直し方はスクリプトが出す(典型=client側で日付/乱数/useSearchParams を使っていて
+  サーバー描画が fallback のままHTMLになっている)。直して**手順3の next build からやり直す**。
+  sitemapは作成済みなので再生成は不要。
+- ★2026-09-18 にここへ結線した理由: この番人は月次サニティからしか呼ばれておらず、
+  **本番へ出す唯一の定期ルートである週次を一度も通っていなかった**(/tokushu ほか4コーナーが
+  「読み込み中…」だけの空HTMLで公開され続けた実害)。preflight はビルドの**前**に走るので
+  置けない(これから直す物を見て止めてしまう)。
+- 緊急時のみ `--no-gate`(理由を作業ログに残すこと)。
 
 ### 4. R2 同期 (差分PUT + ★不要頁の削除)
 ```
