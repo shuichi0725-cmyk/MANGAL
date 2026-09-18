@@ -1,20 +1,13 @@
-"use client";
-
-import { useEffect, useState } from "react";
 import CoverImage from "@/components/CoverImage";
 import { kindleSearchUrl } from "@/lib/kindleLink";
+import { loadColorEditions } from "@/lib/cornerData";
 
-type ColorEntry = { v: number; u: string; c?: string | null; b?: string; t?: string };
-
+/** ★2026-09-18 server化: 旧は "use client" + fetch("/data/color-editions.json") で、
+ *  配信HTMLが「読み込み中…」だけ=作品リンク0本だった(番人 _check-ssr-content.py が検出)。
+ *  この頁は絞り込みも並び替えも無い純粋なリストなので、client のままにする理由が無い。
+ *  同じJSONを build 時に fs で読んで全件をHTMLに焼く。 */
 export default function ColorListClient() {
-  const [data, setData] = useState<Record<string, ColorEntry> | null>(null);
-  useEffect(() => {
-    fetch("/data/color-editions.json")
-      .then((r) => (r.ok ? r.json() : {}))
-      .then(setData)
-      .catch(() => setData({}));
-  }, []);
-  if (data === null) return <p className="px-4 text-[13px] text-ink/60">読み込み中…</p>;
+  const data = loadColorEditions();
   const rows = Object.entries(data).sort((a, b) => b[1].v - a[1].v || (a[1].t ?? "").localeCompare(b[1].t ?? "", "ja"));
   return (
     <div className="px-4 pb-8">

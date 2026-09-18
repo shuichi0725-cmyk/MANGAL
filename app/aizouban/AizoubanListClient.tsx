@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import EditionRow from "@/components/EditionRow";
 import KanaShelf from "@/components/KanaShelf";
 import { TYPE_JA, type AizItem } from "@/components/EditionCorners";
@@ -13,31 +13,26 @@ import { jaCollator } from "@/lib/collator";
  *    書影105×150を押すとAmazon / 小さい「詳細」で作品ページ)に統一。 */
 const ORDER = ["aizoban", "kanzenban", "wideban", "shinsoban", "deluxe", "other"];
 
-export default function AizoubanListClient() {
-  const [rows, setRows] = useState<AizItem[] | null>(null);
+/** ★2026-09-18: rows を fetch でなく **props(server が fs で読む)** で受ける。
+ *  旧は `useState<null>` + `fetch("/data/aizouban-stock.json")` だったため
+ *  配信HTMLが「読み込み中…」だけ=作品リンク0本だった(番人 _check-ssr-content.py が検出)。
+ *  チップ絞り込みは client のまま残すので、体験は一切変わらない。 */
+export default function AizoubanListClient({ rows }: { rows: AizItem[] }) {
   const [type, setType] = useState<string>("all");
-  useEffect(() => {
-    fetch("/data/aizouban-stock.json")
-      .then((r) => (r.ok ? r.json() : []))
-      .then(setRows)
-      .catch(() => setRows([]));
-  }, []);
 
   const counts = useMemo(() => {
     const c: Record<string, number> = {};
-    for (const r of rows ?? []) c[r.e] = (c[r.e] ?? 0) + 1;
+    for (const r of rows) c[r.e] = (c[r.e] ?? 0) + 1;
     return c;
   }, [rows]);
 
   const list = useMemo(() => {
-    const src = (rows ?? []).filter((r) => type === "all" || r.e === type);
+    const src = rows.filter((r) => type === "all" || r.e === type);
     // ★50音順=フリガナ(title_kana)基準。無い頁だけ題名で代替(lib/listSort の kana と同式)
     return [...src].sort(
       (a, b) => jaCollator.compare(a.k || a.t, b.k || b.t) || a.v - b.v,
     );
   }, [rows, type]);
-
-  if (rows === null) return <p className="px-4 text-[13px] text-ink/60">読み込み中…</p>;
 
   const chips: Array<[string, string, number]> = [
     ["all", "すべて", rows.length],

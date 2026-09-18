@@ -1,8 +1,10 @@
 import AizoubanListClient from "./AizoubanListClient";
+import { loadAizoubanStock } from "@/lib/cornerData";
 
 /** 愛蔵版・合本の一覧(2026-09-06 新設。ホームの📚コーナーの「全部見る」先)。
  *  データ=public/data/aizouban-stock.json(_gen-corner-auto.py が週次再生成)。
- *  クライアントfetch方式なのでJSON差し替えだけで一覧も追随する(/color-manga と同型)。 */
+ *  ★2026-09-18: クライアントfetchをやめ、build時に fs で読んで props で渡す
+ *  (旧は配信HTMLが「読み込み中…」だけだった)。JSON差し替えは週次ビルドで追随する。 */
 export const metadata = {
   alternates: { canonical: "/aizouban" },
   title: "愛蔵版・完全版・合本で読める漫画",
@@ -11,6 +13,7 @@ export const metadata = {
 };
 
 export default function AizoubanPage() {
+  const rows = loadAizoubanStock();
   return (
     <div className="min-h-screen bg-[var(--color-bg)]">
       <div className="px-4 pb-2 pt-6">
@@ -20,7 +23,7 @@ export default function AizoubanPage() {
           長い作品ほどまとめ買いしやすく、棚にも置きやすい版です。
         </p>
       </div>
-      <AizoubanListClient />
+      <AizoubanListClient rows={rows} />
     </div>
   );
 }

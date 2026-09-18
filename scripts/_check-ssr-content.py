@@ -197,6 +197,10 @@ def collect(sample: int, full: bool, seed: int) -> tuple[list[str], dict]:
             rp = rel(p)
             if rp.startswith(SKIP_PREFIX):
                 continue
+            # ★機能ビルド(MANGAL_FEATURE_BUILD=1)が置く placeholder。中身ゼロで当然なので対象外
+            #   (フルビルドには存在しない。2026-09-18: 検証ビルドで偽陽性2件を踏んだ)
+            if rp.endswith("/_empty.html"):
+                continue
             top = rp.split("/")[0]
             if top in heavy and "/" in rp:
                 heavy[top].append(p)

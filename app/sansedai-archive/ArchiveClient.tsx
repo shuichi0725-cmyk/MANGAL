@@ -1,22 +1,19 @@
-"use client";
-
-import { useEffect, useState } from "react";
 import Link from "next/link";
 import CoverImage from "@/components/CoverImage";
 import LikeButton from "@/components/LikeButton";
-import {
-  jstDayIndex,
-  picksForDay,
-  useSansedaiStock,
-  personaName,
-  PERSONA_BIOS,
-  type SansedaiEntry,
-} from "@/components/SansedaiDaily";
+import { jstDayIndex, picksForDay, personaName, PERSONA_BIOS, type SansedaiEntry } from "@/lib/sansedai";
+import { loadSansedaiLog, loadSansedaiStock } from "@/lib/cornerData";
 
 /** 今日の一冊 過去ログ(開始日=2026-06-01・月単位セクション)。
  *  ★2026-07-30 凍結ログ方式(ユーザ裁定「一度表示した日は永久に固定。変わったら過去ログではない」):
  *  過去日は public/data/sansedai-log.json(_gen-sansedai-log.py が stock改版前に純粋追記)を正とし、
- *  未凍結の日(直近のビルド後に増えた日)だけホームと同じ式(picksForDay)でfallback表示する。 */
+ *  未凍結の日(直近のビルド後に増えた日)だけホームと同じ式(picksForDay)でfallback表示する。
+ *
+ *  ★2026-09-18 server化: 旧は "use client" + fetch(stock/log)で、配信HTMLが「読み込み中…」
+ *  だけ=作品リンク0本だった(番人 _check-ssr-content.py が検出)。この頁の対話は LikeButton
+ *  (それ自体が client component)だけなので、server で読んで全部HTMLに焼ける。
+ *  ★「今日」は **build時のJST** になる = 次の週次までの数日分が出ない。過去ログなので実害は無く、
+ *  逆にビルド時点までの全日がGoogleに見えるようになる(旧は1日分も見えていなかった)。 */
 
 const EPOCH_DAY = Date.UTC(2026, 5, 1) / 86400000; // 2026-06-01(JST) のdayIndex
 
@@ -26,22 +23,11 @@ function dateStrOf(dayIndex: number): string {
 
 type FrozenLog = Record<string, SansedaiEntry[]>;
 
-function useSansedaiLog(): FrozenLog | null {
-  const [log, setLog] = useState<FrozenLog | null>(null);
-  useEffect(() => {
-    fetch("/data/sansedai-log.json")
-      .then((r) => (r.ok ? r.json() : {}))
-      .then((d) => setLog(d))
-      .catch(() => setLog({}));
-  }, []);
-  return log;
-}
-
 export default function ArchiveClient() {
-  const stock = useSansedaiStock();
-  const log = useSansedaiLog();
-  if (!stock || stock.length === 0 || log === null)
-    return <p className="px-4 text-[13px] text-ink/60">読み込み中…</p>;
+  const stock: SansedaiEntry[] = loadSansedaiStock();
+  const log: FrozenLog = loadSansedaiLog();
+  if (stock.length === 0)
+    return <p className="px-4 text-[13px] text-ink/60">データがありません。</p>;
   const today = jstDayIndex();
   // 今日→2026-06-01 の全日を月ごとに束ねる(新しい月が先)
   const months: { key: string; label: string; days: number[] }[] = [];

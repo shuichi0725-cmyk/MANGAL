@@ -1,8 +1,11 @@
 import TokusoubanListClient from "./TokusoubanListClient";
+import { loadTokusoubanStock } from "@/lib/cornerData";
 
 /** 特装版・限定版の一覧(2026-09-06 新設。ホームの🎁コーナーの「全部見る」先)。
  *  データ=public/data/tokusouban-stock.json(_gen-corner-auto.py が週次再生成)。
- *  ★価格は絶対に出さない [[feedback-no-static-prices]]。 */
+ *  ★価格は絶対に出さない [[feedback-no-static-prices]]。
+ *  ★2026-09-18: クライアントfetchをやめ、build時に fs で読んで props で渡す
+ *  (旧は配信HTMLが「読み込み中…」だけだった)。 */
 export const metadata = {
   alternates: { canonical: "/tokusouban" },
   title: "特装版・限定版が出ている漫画",
@@ -11,6 +14,7 @@ export const metadata = {
 };
 
 export default function TokusoubanPage() {
+  const rows = loadTokusoubanStock();
   return (
     <div className="min-h-screen bg-[var(--color-bg)]">
       <div className="px-4 pb-2 pt-6">
@@ -19,7 +23,7 @@ export default function TokusoubanPage() {
           小冊子・ドラマCD・グッズつきなど、特別仕様で出た巻を集めました。書影は特装版のものです。
         </p>
       </div>
-      <TokusoubanListClient />
+      <TokusoubanListClient rows={rows} />
     </div>
   );
 }

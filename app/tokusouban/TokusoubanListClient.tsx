@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import EditionRow from "@/components/EditionRow";
 import KanaShelf from "@/components/KanaShelf";
 import type { TksItem } from "@/components/EditionCorners";
@@ -13,28 +13,24 @@ import { jaCollator } from "@/lib/collator";
  *  「新しい順」も残す(こちらは索引なしの通し表示=時系列が切れないように)。 */
 type Sort = "kana" | "new";
 
-export default function TokusoubanListClient() {
-  const [rows, setRows] = useState<TksItem[] | null>(null);
+/** ★2026-09-18: rows を fetch でなく **props(server が fs で読む)** で受ける。
+ *  旧は `useState<null>` + `fetch("/data/tokusouban-stock.json")` だったため
+ *  配信HTMLが「読み込み中…」だけ=作品リンク0本だった(番人 _check-ssr-content.py が検出)。
+ *  並び替え(50音/新しい順)は client のまま残すので、体験は一切変わらない。 */
+export default function TokusoubanListClient({ rows }: { rows: TksItem[] }) {
   const [sort, setSort] = useState<Sort>("kana");
-  useEffect(() => {
-    fetch("/data/tokusouban-stock.json")
-      .then((r) => (r.ok ? r.json() : []))
-      .then(setRows)
-      .catch(() => setRows([]));
-  }, []);
 
   const list = useMemo(() => {
     // ★50音順=フリガナ(title_kana)基準。無い頁だけ題名で代替(lib/listSort の kana と同式)
     const byKana = (a: TksItem, b: TksItem) =>
       jaCollator.compare(a.k || a.t, b.k || b.t) || (a.v ?? 0) - (b.v ?? 0);
-    const src = [...(rows ?? [])];
+    const src = [...rows];
     if (sort === "new") {
       return src.sort((a, b) => (b.d ?? "").localeCompare(a.d ?? "") || byKana(a, b));
     }
     return src.sort(byKana);
   }, [rows, sort]);
 
-  if (rows === null) return <p className="px-4 text-[13px] text-ink/60">読み込み中…</p>;
   const works = new Set(rows.map((r) => r.s)).size;
 
   const Row = (e: TksItem) => (
