@@ -12,6 +12,7 @@
 - [【再発厳禁】キャッシュが修正を隠した事故](deploy_cache_swr_hid_the_fix.md) ／ [/browse がサーバ描画0だった](browse_ssr_shell_and_seo.md) ／ [【型】コミック頁に原作ラノベ/本編が混入](novel_in_manga_page.md) — ゲート+事後検出器あり
 - [【宿題】著者誤混入=巻書誌に出ない著者](author_not_in_volumes_audit.md) ／ [解説者が著者欄に混入(残226)](author_kaisetsu_contamination.md) ／ [【必ず使う】統合台帳](intake_manifest_ledger_live.md) — 新cleanup前に参照
 - [NDL漫画判定=NDC726.1](ndl_manga_filter_ndc726.md) ／ [【厳守】NDL=1.2秒/req](ndl_access_rate_method.md) ／ [NDL discoveryの非漫画偽陽性](ndl_discovery_nonmanga_false_positives.md)
+- [【宿題】受賞歴データが.cacheに眠ったまま未使用](awards_material_unused.md) — 著者196/作品68。Wikidataは作品側にP166を持たない。wiki infoboxのaward抽出が出力schemaで落ちている
 - [NDL非漫画一掃の罠](ndl_nonmanga_sweep.md) ／ [synopsis和訳=git追跡seed](synopsis_ja_seed.md) ／ [【残】キャッチ/説明欠落補完](catch_synopsis_enrich_pending.md)
 - [catch側にも別作品混入の型](catch_side_wrong_work_class.md) ／ [【✅】短キャッチrequeue完了](synopsis_short_requeue_done.md) ／ [掲載scope=日本出版漫画](mangal_inclusion_scope.md) — manhwa日本語版も対象
 - [分冊版/合本=非掲載が基本](bunsatsu_gappon_exclusion.md) ／ [【罠】series-mergeは後勝ち=別entryを足すと先の結線が消える](series_merge_last_entry_wins.md) — 既存entryにキーを足す。悪役令嬢で4巻が落ちた ／ [巻割れ統合(renumber)](volume_split_merge.md)
@@ -94,9 +95,11 @@
 - [アニメ化フラグ更新機構=柱⑥後段](anime_flag_freshness.md) ／ [アニメイトタイムズ季節まとめ=第2情報源](animatetimes_season_source.md) ／ [【事故復元済】月次が種4-auto全消し](seed4_auto_wipe_accident.md)
 - [【復元済】源なしmanga.v2頁258件](orphan_source_pages_restored.md) ／ [【未決】版違い統合](multi_edition_unification_pending.md) ／ [版/刷タブ・在庫・電子割引](version_tabs_stock_ebook.md)
 - [うる星=版/巻/刷タブ正規ルール](urusei_version_display_rules.md) ／ [コンビニ掃引2026-08=完了・裁定待ち3件](konbini_sweep_2026_08_state.md) — GO待ち ／ [SEO: インデックス未登録6.65万対策=ハブ3点実装済](seo_index_coverage_state.md)
+- [【裁定・実装済】/shinkan=恒久URL+月はh2(競合2社も同型)](shinkan_permanent_hub_design.md) — 日付リダイレクトは却下(平均10.1位の唯一のハブ資産を賭ける価値なし)
 - [SEO: 発売日の着地面=/shinkan月別静的頁+今週/来月](seo_release_date_pages.md) ／ [【道具】GSC/Bing Webmaster を直接読む(_gsc.py/_bwt.py)](search_console_bing_api_access.md) — 鍵はrepo外・設定の罠3つ(組織ポリシー/PKCS#8/sc-… ／ [【罠・封鎖済】CF解析のUNK偽レコードで「29.6%が504」と誤診断](cf_analytics_unk_artifact.md) — 素の件数は3倍に化ける。検算=Worker invocation…
 - [【実測】Bing流入はホーム1枚が8割・作品頁56枚のみ](bing_search_reality_2026_09.md) — Googlebot実数58/日=一周3.3年。著者頁肉付けは否定… ／ [【競合実測】mangaseek=78kインデックスの正体は22年のドメイン年齢](competitor_mangaseek_teardown.md) — 薄さ/sitemap/URL設計はどれも勝因でない ／ [【裁定・作らない】日本以外のアクセス制限](geo_restriction_not_wired.md) — 未配線のまま。有効化すると451でインデックス落ち
-- [【番人】配信HTMLの中身ゲート](ssr_content_gate.md) — クライアント専用描画で静的HTMLが空になる型。out/を読むだ… ／ [【撤去済】ホームのカレンダー/タイムマシン=完全削除。ただしdata/calendarは/shinkan生成の入力なので残す](calendar_ui_removed_data_kept_for_shinkan.md) ／ [ISBN消失FAILの消し込みフロー](weekly_isbn_loss_acknowledge_flow.md)
+- [【手法】週次を回さずに実ビルドで検証する](verify_build_preview_subset.md) — out/をrename退避→MANGAL_DATA_DIR=.preview-data で十数分。commitは検証が通ってから
+- [【番人・★自身が壊れていた】配信HTMLの中身ゲート](ssr_content_gate.md) — 床がシェルより低く空頁を1件も検出できず5コーナーが空HTMLで公開。是正+週次3.5へ結線+空頁の直し方の作法 ／ [【撤去済】ホームのカレンダー/タイムマシン=完全削除。ただしdata/calendarは/shinkan生成の入力なので残す](calendar_ui_removed_data_kept_for_shinkan.md) ／ [ISBN消失FAILの消し込みフロー](weekly_isbn_loss_acknowledge_flow.md)
 - [【戒め】ビルド入力の結線3箇所](build_input_wiring_three_places.md) ／ [部分ビルド合流の復旧型](partial_rebuild_merge_recovery.md) ／ [【型・総論】seedに書いたのに黙って効かない3類型](seed_silently_ineffective_class.md) — 読み手/キー/搬送フィールドを書く前にgrepで確かめる。1日で…
 - [【手順】新しい頁を作る=src頁+key2slug](new_page_creation_srcpage_key2slug.md) — 片方だけだと再生成で消える。過merge解除と頁化はセット ／ [【戒め】「無い」をgrep一発で結論するな](feedback_absence_needs_verification.md) — 否定の観測は観測手段ごと検算。ユーザの「テストした」は退ける対象… ／ [【戒め】script警告は検算してから報告](feedback_sanity_check_tool_warnings.md)
 - [【戒め】診断簿は掃除してから読む](diag_log_prune_before_reading.md) ／ [SEO title方針=サフィックス「漫画・コミックのMANGAL」](seo_title_suffix_decision.md) — GO済 ／ [Bashツールheredoc+シングルクォート罠](bash_tool_heredoc_quote_pitfall.md)
