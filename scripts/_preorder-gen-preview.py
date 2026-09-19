@@ -111,7 +111,7 @@ def author_names(s):
 
 # ★書影の実URL源(構築禁止 2026-07-09): covers seed → 楽天API
 import gzip as _gzip
-from _preorder_draft_lib import real_cover as _real_cover
+from _preorder_draft_lib import real_cover as _real_cover, norm_cover_ex as _norm_cover_ex
 try:
     from _lookup import rakuten_live as _rk_live, _env as _rk_env
     _RKENV = _rk_env()
@@ -195,7 +195,8 @@ def joge_volumes(r):
 
 def _vol_entry(num, isbn_, rd_, cover_raw, label=None):
     o = {"number": num, "asin": None, "isbn13": isbn_,
-         "cover_url": (cover_raw if "noimage" not in str(cover_raw or "") else None) or _real_cover(isbn_, _COVERS, _rk_live, _RKENV),
+         # ★harvest の生coverは 200x200 で降ってくる= 300x300 へ引き上げる(2026-09-19。下げない裁定)
+         "cover_url": _norm_cover_ex((cover_raw if "noimage" not in str(cover_raw or "") else None) or _real_cover(isbn_, _COVERS, _rk_live, _RKENV)),
          "release_date": rd_}
     if label:
         o["volume_label"] = label      # ★上下巻の表示名(lib/schema.ts 対応済・promoteが搬送)

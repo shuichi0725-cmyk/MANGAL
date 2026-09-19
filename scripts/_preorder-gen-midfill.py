@@ -56,7 +56,7 @@ tm = json.load(open(f"{ROOT}/.cache/isbn-title-map.json", encoding="utf-8"))
 import sqlite3, gzip
 _DBV2 = sqlite3.connect(f"{ROOT}/.cache/db-v2.sqlite")   # ★回収先行巻の発売日引き当て(種2)
 # ★書影の実URL源(構築禁止): covers seed → 楽天API
-from _preorder_draft_lib import real_cover as _real_cover
+from _preorder_draft_lib import real_cover as _real_cover, norm_cover_ex as _norm_cover_ex
 from _preorder_draft_lib import real_cover_and_date as _real_cover_date
 try:
     from _lookup import rakuten_live as _rk_live, _env as _rk_env
@@ -189,7 +189,8 @@ for r in [x for x in cls["ex_mid"] if ONLY_ISBN is None or str(x.get("isbn")) in
             _c2, _d2 = _real_cover_date(ib, _COVERS, _rk_live, _RKENV, need_date=(rd is None))
             cov = cov or _c2
             rd = rd or _d2
-        volumes.append({"number": v, "asin": None, "isbn13": ib, "cover_url": cov, "release_date": rd})
+        # ★harvest の生coverは 200x200 で降ってくる= 300x300 へ引き上げる(2026-09-19。下げない裁定)
+        volumes.append({"number": v, "asin": None, "isbn13": ib, "cover_url": _norm_cover_ex(cov), "release_date": rd})
     authors = []
     for i2, name in enumerate(auths):
         a = {"name": name, "role": "writer_artist"}  # schema必須。共著の原作/作画分離はNDL照合時に是正

@@ -431,7 +431,27 @@ def real_cover_and_date(isbn, covers_dict=None, live_fn=None, env=None, need_dat
                     date = f"{m.group(1)}-{int(m.group(2)):02d}" + (f"-{int(m.group(3)):02d}" if m.group(3) else "")
         except Exception:
             pass
-    return cov, date
+    return norm_cover_ex(cov), date
+
+
+COVER_EX = "?_ex=300x300"
+
+
+def norm_cover_ex(url):
+    """★楽天書影の解像度を 300x300 に揃える(2026-09-19 ユーザ指摘で発覚)。
+    裁定 [[cover_resolution_policy]] = 一覧カード/巻ストリップは 300x300、**下げない**
+    (高DPI端末では 64〜120px の枠でも実192〜360px要る)。`_ex` を触ってよいのは上げる方向だけ。
+    ★穴: 予約harvestの cover は 200x200 で降ってきて、ドラフト生成器は promote の
+    `_norm_cover_ex` を通らないため **preview がまるごと 200x200** で出ていた
+    (2026-09-19 実測 114巻/114巻)。promote の cover-override 直挿しが素通りしていた
+    2026-09-11 の型と同根 = 「seedにURLを書く層を足したら既存の正規化を通るか経路ごとに確かめる」。
+    実装は _promote-bulk-v2._norm_cover_ex と同じ(想定外クエリは触らない)。"""
+    if not url or not url.startswith("https://thumbnail.image.rakuten.co.jp/"):
+        return url
+    base, _, q = url.partition("?")
+    if q and not q.startswith("_ex="):
+        return url                      # 想定外クエリは触らない
+    return base + COVER_EX
 
 
 def real_cover(isbn, covers_dict=None, live_fn=None, env=None):

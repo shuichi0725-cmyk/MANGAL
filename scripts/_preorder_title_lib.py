@@ -141,6 +141,18 @@ def split_title(raw):
                 if m and m.group(1).strip():
                     base, vol = m.group(1).strip(), int(m.group(2))
                     matched = "tail_volume_word"
+            # A0w. ★「NN.巻題」末尾(ワンス・アポン・ア・ディスティニー 01.These / 02.Antithese 型
+            #   2026-09-19 ユーザ指摘): ゼロ詰め2桁 + ピリオド + 巻題、という分冊表記。
+            #   これが読めないと同一作品の2巻が「別々の新作1巻」として2頁に割れる
+            #   (実害= 屋号『ワンス・アポン・ア・ディスティニー』が同日発売なのに2頁になっていた)。
+            #   ★ゼロ詰め(01/02…)を必須にする= 「1.5」「Vol.2」等の他形式や、題中の
+            #   小数・章番号(『3.月の…』型)を巻と誤読しないため。巻題は subtitle へ逃がす。
+            if matched is None:
+                m = re.search(r"^(.{2,}?)[\s　]+(0\d|[1-9]\d)\.[\s　]*([A-Za-z][\w\-'’\. ]{1,40})[\s　]*$", t)
+                if m and m.group(1).strip():
+                    base, vol = m.group(1).strip(), int(m.group(2))
+                    sub = m.group(2) + "." + m.group(3).strip()
+                    matched = "tail_numdot_label"
             # A. 末尾 スペース区切り裸N (=英字末尾は題の一部かもなのでガード=レベル99保護)
             if matched is None:
                 m = re.search(r"^(.*?)[\s　]+(\d{1,3})[\s　]*(?:[（(]完[)）])?$", t)
