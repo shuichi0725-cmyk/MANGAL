@@ -84,6 +84,24 @@ def looks_like_criticism(rec):
     return not _SELF_DECLARED_MANGA.search(cap)   # 自分を漫画だと名乗る紹介文は除外
 
 
+def looks_like_many_credits(rec):
+    """★書籍(小説/アンソロジー/グラフィックノベル)の疑い(= hold にして人が裁く)。deny はしない。
+    2026-09-19 ユーザ指摘『宇宙戦艦ヤマト 黎明篇 第3部 ツァラトゥストラ・ゾーン』=小説が
+    preview まで通った。著者欄= 岡秀樹(SF小説家)/アステロイド6/umegrafix 梅野隆児/西川伸司
+    (メカデザイン・挿絵)/西崎義展/西崎彰司(原案) の6人で、楽天seriesName(コミックレーベル)が空。
+
+    signal = 「コミックレーベル無し かつ 著者クレジット5人以上」。漫画は原作+作画+キャラ原案で
+    多くても3〜4人に収まり、5人以上は小説の挿絵陣・アンソロジーの寄稿者・翻訳コミックの制作陣になる。
+    ★実測(2026-09-19 harvest 3,674件): 該当4件のうち3件が掲載対象外
+    (ヤマト小説 / 我慢できないギャル アンソロジーコミック / デューン 砂の惑星 グラフィックノベル3)、
+    真漫画は1件(裏切られた盗賊=一迅社)。偽陽性1件は人が1行見れば通せる密度なので hold が妥当。
+    ★deny にしないこと: 原作+作画+キャラ原案+監修+協力 の正当な5人組は在りうる。"""
+    if str(rec.get("seriesName") or "").strip():
+        return False                      # コミックレーベルが付いている=漫画側として扱う
+    n = len([x for x in str(rec.get("author") or "").split("/") if x.strip()])
+    return n >= 5
+
+
 def clean_title(title):
     """→ (base, subtitle, provisional). provisional=True なら (仮)=hold対象。"""
     t = unicodedata.normalize("NFKC", str(title or "")).strip()
