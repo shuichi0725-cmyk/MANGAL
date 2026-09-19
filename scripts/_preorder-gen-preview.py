@@ -152,7 +152,7 @@ def _old_strip_vol_disp(t):
 
 # ★2026-07-09 全面作り直し: 整形は _preorder_draft_lib に一本化(副題分離/kana=楽天のみ捏造hold/pykakasi slug/@COMIC/英語保持)
 from _preorder_draft_lib import strip_kana_known_vol as _strip_kana_known_vol
-from _preorder_draft_lib import clean_title as _clean_title, clean_kana as _clean_kana, make_slug as _make_slug, scope_out as _scope_out, looks_like_criticism as _criticism, looks_like_many_credits as _manycredits
+from _preorder_draft_lib import clean_title as _clean_title, clean_kana as _clean_kana, make_slug as _make_slug, scope_out as _scope_out, looks_like_criticism as _criticism, looks_like_many_credits as _manycredits, author_is_anthology as _anthology
 # ★上下巻ペアの1頁統合(2026-09-04 ひみつー佐世保事件型)。skill A2-2 の規定だが実装が無く、
 #   同日発売の上下巻が new1b(上=1巻の新作) と ex_mid(下=全巻回収不成立) に割れて散っていた。
 #   兄弟は増加分の**全class**から集める(下は ex_mid/skip 側に落ちているため)。
@@ -232,6 +232,8 @@ for klass, r in targets:
     akanas = author_names(r.get("authorKana"))
     if _scope_out(raw_title):                                     # カレンダー/画集/グッズ=掲載外
         holds.append((klass, isbn, raw_title, "scope外(非漫画)")); continue
+    if _anthology(r):                                             # ★アンソロジー誌(2026-09-20 ねこぱんち型・偽陽性0)
+        holds.append((klass, isbn, raw_title, "アンソロジー誌(楽天の著者欄が文字どおり『アンソロジー』)=掲載対象外")); continue
     if _criticism(r):                                             # ★評論/研究書疑い(2026-09-04 手塚SFの世界型)
         holds.append((klass, isbn, raw_title, "評論/研究書疑い(コミックレーベル無し+章立てcaption)→人裁定")); continue
     if _manycredits(r):                                           # ★書籍疑い(2026-09-19 ヤマト黎明篇=小説型)

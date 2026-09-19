@@ -129,10 +129,12 @@ def _old_strip_vol_disp(t):
 
 # ★2026-07-09 整形は _preorder_draft_lib に一本化(gen-previewと同じ規律=捏造回避)
 from _preorder_draft_lib import strip_kana_known_vol as _strip_kana_known_vol
-from _preorder_draft_lib import clean_title as _clean_title, clean_kana as _clean_kana, make_slug as _make_slug, scope_out as _scope_out, looks_like_criticism as _criticism, looks_like_many_credits as _manycredits
+from _preorder_draft_lib import clean_title as _clean_title, clean_kana as _clean_kana, make_slug as _make_slug, scope_out as _scope_out, looks_like_criticism as _criticism, looks_like_many_credits as _manycredits, author_is_anthology as _anthology
 for r in [x for x in cls["ex_mid"] if ONLY_ISBN is None or str(x.get("isbn")) in ONLY_ISBN]:
     if _scope_out(r.get("title")):
         holds.append((r.get("isbn"), r.get("title"), "scope外(非漫画)")); continue
+    if _anthology(r):                                             # ★アンソロジー誌(2026-09-20 ねこぱんち型・偽陽性0)
+        holds.append((r.get("isbn"), r.get("title"), "アンソロジー誌(楽天の著者欄が文字どおり『アンソロジー』)=掲載対象外")); continue
     if _criticism(r):                                             # ★評論/研究書疑い(2026-09-04 手塚SFの世界型)
         holds.append((r.get("isbn"), r.get("title"), "評論/研究書疑い(コミックレーベル無し+章立てcaption)→人裁定")); continue
     if _manycredits(r):                                           # ★書籍疑い(2026-09-19 ヤマト黎明篇=小説型)
