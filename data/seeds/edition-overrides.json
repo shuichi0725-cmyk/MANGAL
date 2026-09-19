@@ -4720,6 +4720,75 @@
   "year_ended": 1987,
   "year_started": 1987
  },
+ "citrus-gakuen": {
+  "_note": "NDL書誌(ユーザ提供 2026-09-20)で版と続刊を切り分け。★決め手はタイトルよみ: 完全版だけ よみが本編と同じ「シトラス ガクエン」=版違い / キューティ(シトラス ガクエン キューティ)・バニラ(シトラス ガクエン バニラ)は よみが別=別書名の続刊。それまで本番は同type合流(種2に standard が2本)で1冊(キューティ)しか出ていなかった。",
+  "editions": [
+   {
+    "imprint": null,
+    "label": "通常版",
+    "publisher": "takarajimasha",
+    "type": "standard",
+    "volumes": [
+     {
+      "asin": null,
+      "cover_url": null,
+      "isbn13": "9784796622530",
+      "number": 1,
+      "release_date": "2001-06",
+      "volume_label": "シトラス学園"
+     },
+     {
+      "asin": null,
+      "cover_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/2030/9784800212030.jpg?_ex=300x300",
+      "isbn13": "9784800212030",
+      "number": 2,
+      "release_date": "2013-06",
+      "volume_label": "キューティ"
+     },
+     {
+      "asin": null,
+      "cover_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0347/9784800240347.jpg?_ex=300x300",
+      "isbn13": "9784800240347",
+      "number": 3,
+      "release_date": "2015-05",
+      "volume_label": "バニラ"
+     }
+    ]
+   },
+   {
+    "imprint": "Ohta comics",
+    "label": "完全版",
+    "publisher": "ohta-shuppan",
+    "type": "kanzenban",
+    "volumes": [
+     {
+      "asin": null,
+      "cover_url": null,
+      "isbn13": "9784872339000",
+      "number": 1,
+      "release_date": "2005-03"
+     }
+    ]
+   },
+   {
+    "imprint": "このマンガがすごい！ Comics",
+    "label": "愛蔵版",
+    "publisher": "takarajimasha",
+    "type": "aizoban",
+    "volumes": [
+     {
+      "asin": null,
+      "cover_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/9756/9784299079756.gif?_ex=300x300",
+      "isbn13": "9784299079756",
+      "number": 1,
+      "release_date": "2026-11-06"
+     }
+    ]
+   }
+  ],
+  "year_ended": 2015,
+  "year_started": 2001
+ },
  "cobra-1995": {
   "note": "ユーザ裁定2026-08-05: COBRAは全部大文字(KADOKAWA線の正式表記。旧題Cobraは混在大小文字の誤り)",
   "title": "COBRA",
