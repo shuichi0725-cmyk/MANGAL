@@ -44,6 +44,16 @@ metadata:
 2. **`lib/homeDesign.tsx` はクライアントから import できない**(`loadData`=fs を引き込む)。だから GlobalNav はアイコンのパス表を自己完結で持っている。
 3. **`useSearchParams()` は Suspense 必須**(静的書き出しではフォールバックがHTMLに焼かれる)。FilterRail のフォールバックは**素のGETフォーム**にしてある(`fallback: null` は本文を捨てる= [[browse_ssr_shell_and_seo]])。
 4. **中央寄せの二重掛け**。レールの右で頁が更に `mx-auto` すると左右に空白が出て「浮く」。器を持つ側を1つに決める。
+6. **`sticky` だけでは画面より高いレールの下端に到達できない**(2026-09-21 ユーザ指摘
+   「左の検索の上下スクロールが独立していない。操作性が悪すぎる」)。旧 `sticky top-4` は
+   上端で止まったまま頁と一緒に動かないので、はみ出した下側(出版社/連載誌/著者/並び順/リセット)が
+   **永久に視界外**= 絞り込みの下半分が事実上使えなかった。節を開くと更に伸びるので開いた中身も読めない。
+   → 是正 = レール自身をスクロール器に(`components/FilterRail.tsx` の `RAIL_BOX`):
+   `sticky top-16`(ヘッダー実高~56pxの下・旧top-4は**検索窓がヘッダー裏に潜っていた**)
+   + `max-h-[calc(100dvh-5rem)]` + `overflow-y-auto` + `overscroll-contain` +
+   `overflow-x-hidden` & `-mx-1 px-1`(内側の `-mx-1` と検索窓の3px影を切らないため)。
+   バーは `rail-scroll`(globals.css)。★**sticky なレールを足す時は必ず max-h + overflow をセットで**。
+
 5. **`<a>` の入れ子は不正HTML**。箱ごとクリックさせたい時は `role="link"` + 実アンカーの `click()`。
 
 ## 申し送り(未処理)
