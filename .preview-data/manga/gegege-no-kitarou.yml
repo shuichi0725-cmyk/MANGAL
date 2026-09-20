@@ -29,46 +29,6 @@ editions:
 - type: standard
   label: 通常版
   publisher: 講談社
-  imprint: 講談社コミックス
-  volumes:
-  - number: 1
-    asin: null
-    isbn13: '9784061730748'
-    cover_url: null
-    release_date: '1985-09-18'
-  - number: 2
-    asin: null
-    isbn13: '9784061730755'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/rakutenkobo-ebooks/cabinet/4069/2000006444069.jpg?_ex=300x300
-    release_date: '1985-09-18'
-  - number: 4
-    asin: null
-    isbn13: '9784061730823'
-    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/rakutenkobo-ebooks/cabinet/6535/2000006496535.jpg?_ex=300x300
-    release_date: '1985-10-18'
-  - number: 14
-    asin: null
-    isbn13: '9784061731134'
-    cover_url: null
-    release_date: '1986-01-18'
-  - number: 15
-    asin: null
-    isbn13: '9784061731141'
-    cover_url: null
-    release_date: '1986-01-18'
-  - number: 16
-    asin: null
-    isbn13: '9784061731158'
-    cover_url: null
-    release_date: '1986-02-18'
-  - number: 17
-    asin: null
-    isbn13: '9784061731165'
-    cover_url: null
-    release_date: '1986-02-18'
-- type: shinsoban
-  label: 新書判
-  publisher: 講談社
   imprint: 講談社コミックス SHONEN MAGAZINE COMICS
   volumes:
   - number: 1
@@ -146,6 +106,46 @@ editions:
     cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0811/9784065120811.jpg?_ex=300x300
     release_date: 2019-03
     description: 七十年代の『週刊少年サンデー』で連載されたゲゲゲの鬼太郎を、完全リマスターした新装版。最終巻となる第十三巻は、「まぼろしの汽車」や「悪魔ブエル」など十のエピソード、全十一話を収録する。鬼太郎の原点にして決定版。
+- type: shinsoban
+  label: 講談社コミックス(1985年版)
+  publisher: 講談社
+  imprint: 講談社コミックス
+  volumes:
+  - number: 1
+    asin: null
+    isbn13: '9784061730748'
+    cover_url: null
+    release_date: '1985-09-18'
+  - number: 2
+    asin: null
+    isbn13: '9784061730755'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/rakutenkobo-ebooks/cabinet/4069/2000006444069.jpg?_ex=300x300
+    release_date: '1985-09-18'
+  - number: 4
+    asin: null
+    isbn13: '9784061730823'
+    cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/rakutenkobo-ebooks/cabinet/6535/2000006496535.jpg?_ex=300x300
+    release_date: '1985-10-18'
+  - number: 14
+    asin: null
+    isbn13: '9784061731134'
+    cover_url: null
+    release_date: '1986-01-18'
+  - number: 15
+    asin: null
+    isbn13: '9784061731141'
+    cover_url: null
+    release_date: '1986-01-18'
+  - number: 16
+    asin: null
+    isbn13: '9784061731158'
+    cover_url: null
+    release_date: '1986-02-18'
+  - number: 17
+    asin: null
+    isbn13: '9784061731165'
+    cover_url: null
+    release_date: '1986-02-18'
 - type: aizoban
   label: 愛蔵版
   publisher: 中央公論社
