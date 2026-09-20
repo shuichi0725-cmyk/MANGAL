@@ -9997,7 +9997,7 @@
   ]
  },
  "gegege-no-kitarou": {
-  "_note": "2026-09-20 ユーザGO。Wikipedia書籍情報 + NDL書誌 + 種2(sid49705=21edition/122巻)の3点突合で版を確定。★是正前= promoteがtypeだけで束ねるため standard に 1985講談社コミックス/2018新書判/Chukoコミックlite が混在(17冊・日付も全部1985-86に潰れていた)、bunkobonは imprint『ちくま文庫』なのに中身は中公文庫コミック版だった。★1968年の講談社コミックス9冊はISBN以前=充填不可のため対象外(volgap_skip_isbnless_edition の裁定)。★講談社漫画文庫『少年マガジンオリジナル版』全5巻(9784063704365-402)は実在するが edition type が空いておらず保留(文庫系が3版=中公コミック版/中公決定版/講談社漫画文庫)。★Chukoコミックlite 16+special 10(全number=1の分冊エピソード集)はWikipedia書籍情報に載らず=版タブ対象外。 ★2026-09-20 追補(ユーザ指摘『通常版こわれてない?』): 1985年版はISBNが7/17巻しか確認できず巻ストリップが1,2,4,14-17と飛び書影も2冊だけで、通常版タブとして壊れて見えていた。→ 通常版=新書判13巻(1-13連続・書影13/13)に据え替え、1985年版はlabelに年を明示した別タブへ。★残り10冊のISBNはNDL・Wikipedia・種2のどれにも無く、連番推測もできない(0748→0755→0823と不規則)ので充填不可。消さずに7冊を残す([[never_delete_because_broken]])。",
+  "_note": "2026-09-20 ユーザGO。Wikipedia書籍情報 + NDL書誌 + 種2(sid49705=21edition/122巻)の3点突合で版を確定。★是正前= promoteがtypeだけで束ねるため standard に 1985講談社コミックス/2018新書判/Chukoコミックlite が混在(17冊・日付も全部1985-86に潰れていた)、bunkobonは imprint『ちくま文庫』なのに中身は中公文庫コミック版だった。★1968年の講談社コミックス9冊はISBN以前=充填不可のため対象外(volgap_skip_isbnless_edition の裁定)。★講談社漫画文庫『少年マガジンオリジナル版』全5巻(9784063704365-402)は実在するが edition type が空いておらず保留(文庫系が3版=中公コミック版/中公決定版/講談社漫画文庫)。★Chukoコミックlite 16+special 10(全number=1の分冊エピソード集)はWikipedia書籍情報に載らず=版タブ対象外。 ★2026-09-20 追補(ユーザ指摘『通常版こわれてない?』): 1985年版はISBNが7/17巻しか確認できず巻ストリップが1,2,4,14-17と飛び書影も2冊だけで、通常版タブとして壊れて見えていた。→ 通常版=新書判13巻(1-13連続・書影13/13)に据え替え、1985年版はlabelに年を明示した別タブへ。★残り10冊のISBNはNDL・Wikipedia・種2のどれにも無く、連番推測もできない(0748→0755→0823と不規則)ので充填不可。消さずに7冊を残す([[never_delete_because_broken]])。 ★2026-09-20 ユーザ指示: 1985年版は**書影と試し読みを外す**。付いていた書影2冊は電子版(=新書判)のもので1985年版の装丁ではない(頁の注記『この書影は電子書籍版』が示すとおり)。試し読みも BookLive title_id 60009412 = 新書判13巻の電子版なので、巻番号が同じでも中身が対応しない。試し読みの版ゲートは components/VolumeRow の『最大巻番号 === bl.max』で、tameshiyomi-map の max を実検証どおり13に戻せば通常版(13巻)だけに出る。",
   "editions": [
    {
     "imprint": "講談社コミックス SHONEN MAGAZINE COMICS",
@@ -10113,14 +10113,14 @@
      },
      {
       "asin": null,
-      "cover_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/rakutenkobo-ebooks/cabinet/4069/2000006444069.jpg?_ex=300x300",
+      "cover_url": null,
       "isbn13": "9784061730755",
       "number": 2,
       "release_date": "1985-09-18"
      },
      {
       "asin": null,
-      "cover_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/rakutenkobo-ebooks/cabinet/6535/2000006496535.jpg?_ex=300x300",
+      "cover_url": null,
       "isbn13": "9784061730823",
       "number": 4,
       "release_date": "1985-10-18"
