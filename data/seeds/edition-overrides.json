@@ -16122,6 +16122,108 @@
   "year_ended": 1987,
   "year_started": 1987
  },
+ "in-hand": {
+  "_note": "NDL書誌(ユーザ提供 2026-09-20)で本編を確定。よみ「イン ハンド」= 本編(イブニングKC 01-06)。★是正前は series-merge の誤統合(インハンド+インハンドプロローグ)で本編01/02が頁から落ち、代わりに プロローグ2(9784065153444) と アフタヌーンKC版(9784063881592) が1-2巻の位置に入っていた。",
+  "editions": [
+   {
+    "imprint": "イブニングKC",
+    "label": "通常版",
+    "publisher": "kodansha",
+    "type": "standard",
+    "volumes": [
+     {
+      "asin": null,
+      "cover_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/0559/9784065150559.jpg?_ex=300x300",
+      "isbn13": "9784065150559",
+      "number": 1,
+      "release_date": "2019-03"
+     },
+     {
+      "asin": null,
+      "cover_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/8332/9784065168332.jpg?_ex=300x300",
+      "isbn13": "9784065168332",
+      "number": 2,
+      "release_date": "2019-09"
+     },
+     {
+      "asin": null,
+      "cover_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/9146/9784065189146.jpg?_ex=300x300",
+      "isbn13": "9784065189146",
+      "number": 3,
+      "release_date": "2020-03"
+     },
+     {
+      "asin": null,
+      "cover_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/2852/9784065202852.jpg?_ex=300x300",
+      "isbn13": "9784065202852",
+      "number": 4,
+      "release_date": "2020-07"
+     },
+     {
+      "asin": null,
+      "cover_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/7313/9784065217313.jpg?_ex=300x300",
+      "isbn13": "9784065217313",
+      "number": 5,
+      "release_date": "2021-02"
+     },
+     {
+      "asin": null,
+      "cover_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/6941/9784065386941_1_2.jpg?_ex=300x300",
+      "isbn13": "9784065386941",
+      "number": 6,
+      "release_date": "2025-03"
+     }
+    ]
+   }
+  ],
+  "year_ended": 2025,
+  "year_started": 2019
+ },
+ "in-hand-prologue": {
+  "_note": "NDL注記が由来を明記: プロローグ1=『ネメシスの杖』(2013)の改題・新装版 / プロローグ2=『インハンド』(2016 アフタヌーンKC)の改題・新装版。よみ「イン ハンド プロローグ」= 本編(イン ハンド)と別書名。アフタヌーンKC版(2016)はプロローグ2の原版なのでこの頁に置く(本編頁に居たのが誤り)。プロローグ1の原版『ネメシスの杖』は独立作品として別頁 nemesis-no-tsue に在る。",
+  "editions": [
+   {
+    "imprint": "アフタヌーンKC",
+    "label": "通常版",
+    "publisher": "kodansha",
+    "type": "standard",
+    "volumes": [
+     {
+      "asin": null,
+      "cover_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/1592/9784063881592.jpg?_ex=300x300",
+      "isbn13": "9784063881592",
+      "number": 1,
+      "release_date": "2016-07",
+      "volume_label": "インハンド 紐倉博士とまじめな右腕"
+     }
+    ]
+   },
+   {
+    "imprint": "イブニングKC",
+    "label": "新装版",
+    "publisher": "kodansha",
+    "type": "shinsoban",
+    "volumes": [
+     {
+      "asin": null,
+      "cover_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/3437/9784065153437.jpg?_ex=300x300",
+      "isbn13": "9784065153437",
+      "number": 1,
+      "release_date": "2019-02"
+     },
+     {
+      "asin": null,
+      "cover_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/3444/9784065153444.jpg?_ex=300x300",
+      "isbn13": "9784065153444",
+      "number": 2,
+      "release_date": "2019-02"
+     }
+    ]
+   }
+  ],
+  "year_ended": 2019,
+  "year_started": 2016
+ },
  "inugamike-no-ichizoku": {
   "authors": [
    {
