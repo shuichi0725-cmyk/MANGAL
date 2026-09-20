@@ -37,6 +37,29 @@ import type { ListBundle } from "@/lib/schema";
  *  = 全ルートの RSC ペイロードに載せない([[useRailMasters]] に経緯)。 */
 export type RailMasters = Pick<ListBundle, "genres" | "demographics">;
 
+/** ★レールの器(2026-09-21 ユーザ指摘「左の検索の上下スクロールが独立していない。操作性が悪すぎる」)。
+ *
+ *  旧= `sticky top-4` だけ。これだと **レールが画面より高い時に下端へ永久に到達できない**:
+ *  sticky は上端で止まったまま頁と一緒に動かないので、はみ出した下側(出版社・連載誌・著者・
+ *  並び順・条件をリセット)が視界の外に固定される。節を開けば更に伸びるので、開いた中身自体が
+ *  読めない = 絞り込みの下半分が事実上使えなかった。
+ *  併せて、共通ヘッダーが `sticky top-0 z-20`(実高 ~56px)なので top-4(16px)では
+ *  **検索窓の上部がヘッダーの下に潜り込んでいた**。
+ *
+ *  新= レール自身を**独立したスクロール器**にする:
+ *   - `top-16` = ヘッダー(~56px)の下に着地させる
+ *   - `max-h-[calc(100dvh-5rem)]` = 画面高からヘッダー+下余白を引いた高さで頭打ち
+ *     (max- なので短い時は空箱にならない)
+ *   - `overflow-y-auto` = レールだけが縦に転がる。本文の縦位置は動かない
+ *   - `overscroll-contain` = レール端まで来ても頁側へスクロールが連鎖しない(独立)
+ *   - `overflow-x-hidden` + `-mx-1 px-1` = 内側の `-mx-1`(適用中の絞り込み)と
+ *     検索窓の 3px 影を切らずに収める
+ *  ★lg 未満は親 aside が `hidden` なのでモバイルは完全不変。
+ *  ★FilterPanel の「適用中の絞り込み」(`sticky top-0`)は、この器が
+ *    スクロールコンテナになることで**レールの上端に貼り付く**= 従来のヘッダー裏貼りより正しい。 */
+const RAIL_BOX =
+  "sticky top-16 max-h-[calc(100dvh-5rem)] overflow-y-auto overflow-x-hidden overscroll-contain rail-scroll -mx-1 px-1 pb-4 space-y-3";
+
 const CARD = "border-2 border-[var(--color-accent)] bg-[#050505] px-2.5 py-2 shadow-[3px_3px_0_rgba(217,248,67,0.14)]";
 const BTN = "mt-2 w-full border-2 border-[var(--color-accent)] bg-[#050505] py-1.5 text-[12px] font-black text-[var(--color-accent)] transition active:scale-[0.97]";
 
@@ -175,7 +198,7 @@ function RailInner({ masters }: { masters: RailMasters }) {
 
   return (
     <div
-      className="sticky top-4 space-y-3"
+      className={RAIL_BOX}
       onFocusCapture={() => setTouched(true)}
       onPointerDownCapture={() => setTouched(true)}
     >
@@ -207,7 +230,7 @@ export default function FilterRail({ masters }: { masters: RailMasters }) {
     <aside className="hidden lg:block w-[260px] shrink-0">
       <Suspense
         fallback={
-          <div className="sticky top-4 space-y-3">
+          <div className={RAIL_BOX}>
             <SearchCard action="/browse" value="" />
             <p className="text-[11px] text-ink/40">絞り込みを読み込み中…</p>
           </div>

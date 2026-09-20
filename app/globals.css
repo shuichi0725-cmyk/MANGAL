@@ -210,6 +210,27 @@ body {
   line-clamp: 5;
 }
 
+/* PC左レール(FilterRail)の独立スクロール用バー(2026-09-21)。
+   D3テーマは黒地なので OS 既定の明るいバーだと浮く。細く・アクセント色の半透明にする。
+   ★バー自体は**出す**(no-scrollbar と違い、ここでは「独立して転がる」ことの合図が要る)。 */
+@utility rail-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: color-mix(in srgb, var(--color-accent) 35%, transparent) transparent;
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: color-mix(in srgb, var(--color-accent) 32%, transparent);
+    border-radius: 999px;
+  }
+  &::-webkit-scrollbar-thumb:hover {
+    background: color-mix(in srgb, var(--color-accent) 55%, transparent);
+  }
+}
+
 /* 横スクロールカルーセルのスクロールバー非表示 (= 端の見切れカードがスクロール可の合図。バーはノイズ) */
 @utility no-scrollbar {
   scrollbar-width: none;
