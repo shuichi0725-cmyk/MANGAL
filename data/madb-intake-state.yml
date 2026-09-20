@@ -4,18 +4,49 @@
 # リリースは月次(毎月17〜22日頃)。GitHub release 経路は月次で十分(日次=楽天予約/NDL新着の別経路)。
 last_intake:
   source_repo: mediaarts-db/dataset
-  release_tag: "1.2.19"
-  release_published: "2026-08-21"
-  db_built_at: "2026-08-21"            # 増分merge(INSERT only)実行日
-  prev_tag: "1.2.18"
+  release_tag: 1.2.20
+  release_published: '2026-09-18'
+  db_built_at: '2026-09-21'
+  prev_tag: 1.2.19
   asset: metadata101_json.zip + metadata504_json.zip
-  merge_manifest: .cache/madb-distill/merge-manifest-1.2.18.json   # ★名前は1つ前のtag(2026-08-26以前の命名バグ。中身は1.2.19分)
-  db_backup: .cache/db-v2.sqlite.bak-distill-2026-08-21
-  stats: {new_series: 431, total_new_vol: 1430}
-  seed1: {new_ids: 1541, new_isbns: 1479, vanished_ids: 0, vanished_isbns: 0}   # 2026-09-02 seed1-diff で再計算(記録値+1,546/+1,481とは算出法差)
-  go_sign: "ok (2026-08-21)"
+  merge_manifest: C:\Users\chiba shuichi\code\MANGAL/.cache/madb-distill/merge-manifest-1.2.20-2026-09-21.json
+  db_backup: C:\Users\chiba shuichi\code\MANGAL/.cache/db-v2.sqlite.bak-distill-20260921-083357
+  stats:
+    new_series: 402
+    append_series: 878
+    vol_new_series: 419
+    vol_append: 903
+    ed_new: 429
+    total_new_vol: 1322
+  seed1:
+    new_ids: 1417
+    new_isbns: 1377
+    vanished_ids: 0
+    vanished_isbns: 0
+  go_sign: go
 history:
-  - {tag: "1.2.19", at: "2026-08-21", new_series: 431, total_new_vol: 1430, prev_tag: "1.2.18"}
-  - {tag: "1.2.18", at: "2026-07-24", new_series: 292, total_new_vol: 1124, prev_tag: "1.2.17"}
-  - {tag: "1.2.17", at: "2026-06-27", new_series: 323, total_new_vol: 1195, prev_tag: "1.2.16"}
-  - {tag: "1.2.16", at: "2026-05-29", note: "初期フルビルド(db-v2 created_at)", prev_tag: null}
+- tag: 1.2.20
+  at: '2026-09-21'
+  new_series: 402
+  append_series: 878
+  total_new_vol: 1322
+  prev_tag: 1.2.19
+- tag: 1.2.19
+  at: '2026-08-21'
+  new_series: 431
+  total_new_vol: 1430
+  prev_tag: 1.2.18
+- tag: 1.2.18
+  at: '2026-07-24'
+  new_series: 292
+  total_new_vol: 1124
+  prev_tag: 1.2.17
+- tag: 1.2.17
+  at: '2026-06-27'
+  new_series: 323
+  total_new_vol: 1195
+  prev_tag: 1.2.16
+- tag: 1.2.16
+  at: '2026-05-29'
+  note: 初期フルビルド(db-v2 created_at)
+  prev_tag: null
