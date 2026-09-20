@@ -9997,70 +9997,13 @@
   ]
  },
  "gegege-no-kitarou": {
-  "_note": "2026-09-20 ユーザGO。Wikipedia書籍情報 + NDL書誌 + 種2(sid49705=21edition/122巻)の3点突合で版を確定。★是正前= promoteがtypeだけで束ねるため standard に 1985講談社コミックス/2018新書判/Chukoコミックlite が混在(17冊・日付も全部1985-86に潰れていた)、bunkobonは imprint『ちくま文庫』なのに中身は中公文庫コミック版だった。★1968年の講談社コミックス9冊はISBN以前=充填不可のため対象外(volgap_skip_isbnless_edition の裁定)。★講談社漫画文庫『少年マガジンオリジナル版』全5巻(9784063704365-402)は実在するが edition type が空いておらず保留(文庫系が3版=中公コミック版/中公決定版/講談社漫画文庫)。★Chukoコミックlite 16+special 10(全number=1の分冊エピソード集)はWikipedia書籍情報に載らず=版タブ対象外。",
+  "_note": "2026-09-20 ユーザGO。Wikipedia書籍情報 + NDL書誌 + 種2(sid49705=21edition/122巻)の3点突合で版を確定。★是正前= promoteがtypeだけで束ねるため standard に 1985講談社コミックス/2018新書判/Chukoコミックlite が混在(17冊・日付も全部1985-86に潰れていた)、bunkobonは imprint『ちくま文庫』なのに中身は中公文庫コミック版だった。★1968年の講談社コミックス9冊はISBN以前=充填不可のため対象外(volgap_skip_isbnless_edition の裁定)。★講談社漫画文庫『少年マガジンオリジナル版』全5巻(9784063704365-402)は実在するが edition type が空いておらず保留(文庫系が3版=中公コミック版/中公決定版/講談社漫画文庫)。★Chukoコミックlite 16+special 10(全number=1の分冊エピソード集)はWikipedia書籍情報に載らず=版タブ対象外。 ★2026-09-20 追補(ユーザ指摘『通常版こわれてない?』): 1985年版はISBNが7/17巻しか確認できず巻ストリップが1,2,4,14-17と飛び書影も2冊だけで、通常版タブとして壊れて見えていた。→ 通常版=新書判13巻(1-13連続・書影13/13)に据え替え、1985年版はlabelに年を明示した別タブへ。★残り10冊のISBNはNDL・Wikipedia・種2のどれにも無く、連番推測もできない(0748→0755→0823と不規則)ので充填不可。消さずに7冊を残す([[never_delete_because_broken]])。",
   "editions": [
    {
-    "imprint": "講談社コミックス",
+    "imprint": "講談社コミックス SHONEN MAGAZINE COMICS",
     "label": "通常版",
     "publisher": "kodansha",
     "type": "standard",
-    "volumes": [
-     {
-      "asin": null,
-      "cover_url": null,
-      "isbn13": "9784061730748",
-      "number": 1,
-      "release_date": "1985-09-18"
-     },
-     {
-      "asin": null,
-      "cover_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/rakutenkobo-ebooks/cabinet/4069/2000006444069.jpg?_ex=300x300",
-      "isbn13": "9784061730755",
-      "number": 2,
-      "release_date": "1985-09-18"
-     },
-     {
-      "asin": null,
-      "cover_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/rakutenkobo-ebooks/cabinet/6535/2000006496535.jpg?_ex=300x300",
-      "isbn13": "9784061730823",
-      "number": 4,
-      "release_date": "1985-10-18"
-     },
-     {
-      "asin": null,
-      "cover_url": null,
-      "isbn13": "9784061731134",
-      "number": 14,
-      "release_date": "1986-01-18"
-     },
-     {
-      "asin": null,
-      "cover_url": null,
-      "isbn13": "9784061731141",
-      "number": 15,
-      "release_date": "1986-01-18"
-     },
-     {
-      "asin": null,
-      "cover_url": null,
-      "isbn13": "9784061731158",
-      "number": 16,
-      "release_date": "1986-02-18"
-     },
-     {
-      "asin": null,
-      "cover_url": null,
-      "isbn13": "9784061731165",
-      "number": 17,
-      "release_date": "1986-02-18"
-     }
-    ]
-   },
-   {
-    "imprint": "講談社コミックス SHONEN MAGAZINE COMICS",
-    "label": "新書判",
-    "publisher": "kodansha",
-    "type": "shinsoban",
     "volumes": [
      {
       "asin": null,
@@ -10152,6 +10095,63 @@
       "isbn13": "9784065120811",
       "number": 13,
       "release_date": "2019-03"
+     }
+    ]
+   },
+   {
+    "imprint": "講談社コミックス",
+    "label": "講談社コミックス(1985年版)",
+    "publisher": "kodansha",
+    "type": "shinsoban",
+    "volumes": [
+     {
+      "asin": null,
+      "cover_url": null,
+      "isbn13": "9784061730748",
+      "number": 1,
+      "release_date": "1985-09-18"
+     },
+     {
+      "asin": null,
+      "cover_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/rakutenkobo-ebooks/cabinet/4069/2000006444069.jpg?_ex=300x300",
+      "isbn13": "9784061730755",
+      "number": 2,
+      "release_date": "1985-09-18"
+     },
+     {
+      "asin": null,
+      "cover_url": "https://thumbnail.image.rakuten.co.jp/@0_mall/rakutenkobo-ebooks/cabinet/6535/2000006496535.jpg?_ex=300x300",
+      "isbn13": "9784061730823",
+      "number": 4,
+      "release_date": "1985-10-18"
+     },
+     {
+      "asin": null,
+      "cover_url": null,
+      "isbn13": "9784061731134",
+      "number": 14,
+      "release_date": "1986-01-18"
+     },
+     {
+      "asin": null,
+      "cover_url": null,
+      "isbn13": "9784061731141",
+      "number": 15,
+      "release_date": "1986-01-18"
+     },
+     {
+      "asin": null,
+      "cover_url": null,
+      "isbn13": "9784061731158",
+      "number": 16,
+      "release_date": "1986-02-18"
+     },
+     {
+      "asin": null,
+      "cover_url": null,
+      "isbn13": "9784061731165",
+      "number": 17,
+      "release_date": "1986-02-18"
      }
     ]
    },
