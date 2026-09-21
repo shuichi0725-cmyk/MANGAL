@@ -292,3 +292,4 @@
 {"isbn13": "9789784537100", "slug_at_loss": "ginga-densetsu-weed", "reason": "壊れISBN(978が二重の13桁)を頁内ISBN重複是正で除去 (0978858c5)", "commit": "0978858c5", "at": "2026-09-07"}
 {"isbn13": "9789784537124", "slug_at_loss": "ginga-densetsu-weed", "reason": "壊れISBN(978が二重の13桁)を頁内ISBN重複是正で除去 (0978858c5)", "commit": "0978858c5", "at": "2026-09-07"}
 {"isbn13": "9784799730812", "slug_at_loss": "hidoku-shinaide", "reason": "1巻の2016年再刊(刷違い)。edition-canonical で2007年初版 9784862631015 を主に据え、再刊ISBNは頁に出さない裁定 (9c1e219c5)", "commit": "9c1e219c5", "at": "2026-09-15"}
+{"isbn13": "9784575999365", "slug_at_loss": "tenkomori-kariage-kun", "reason": "種4の自己retire(設計どおり)= 種2が #10 を 9784575999327「てんこ盛り!かりあげクン 真夏はかりあげ八十八夜」(楽天2026-08-10・双葉社)で持ったため、ISBN違いの種4 #10 を skip。種2側は楽天で実在確証あり・種4側は楽天/NDLに痕跡なし = 種2優先が正", "commit": "218db1120", "at": "2026-09-21"}
