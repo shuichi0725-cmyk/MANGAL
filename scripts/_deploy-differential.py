@@ -236,6 +236,9 @@ def main():
     # --- 4. 部分ビルド ---
     print("部分ビルド開始(対象頁のみ)…", flush=True)
     benv = dict(os.environ, MANGAL_DATA_DIR=DIFFDATA)
+    # ★Nodeヒープ上限(既定~4GB)ではコンパイル段でOOM死(build worker exited with code: 134)。
+    #   週次(_wkbuild.ps1)・機能蒸留(_deploy-feature.py)と同じ12GBを既定に。2026-09-22実踏。
+    benv.setdefault("NODE_OPTIONS", "--max-old-space-size=12288")
     r = subprocess.run(["npx.cmd", "next", "build"], cwd=ROOT, env=benv,
                        capture_output=True, text=True, encoding="utf-8", errors="replace")
     if r.returncode != 0:
