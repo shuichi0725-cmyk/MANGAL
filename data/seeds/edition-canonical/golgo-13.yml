@@ -1,6 +1,6 @@
 slug: golgo-13
 canonical_label: SPコミックス
-source: wikipedia(エピソード一覧)+madb
+source: 'wikipedia(エピソード一覧)+madb ★2026-09-21: 連載中で毎月続巻が出るため open_tail:true を付与(canonicalが巻を固定して新刊が出ない型の恒久封じ)。併せて221巻(9784845871926/2026-07-31)を種2の値で追記。'
 routing:
   brand_contains: SPコミックス
   title_pattern: ^ゴルゴ13\s+\d+$
@@ -423,16 +423,16 @@ volumes:
   release_date: '2005-01-04'
 - number: 136
   isbn13: '9784845826742'
-  release_date: '2005-05'
+  release_date: 2005-05
 - number: 137
   isbn13: '9784845826759'
   release_date: null
 - number: 138
   isbn13: '9784845826766'
-  release_date: '2005-10'
+  release_date: 2005-10
 - number: 139
   isbn13: '9784845826773'
-  release_date: '2006-01'
+  release_date: 2006-01
 - number: 140
   isbn13: '9784845830015'
   release_date: '2006-05-05'
@@ -676,6 +676,9 @@ volumes:
 - number: 220
   isbn13: '9784845870905'
   release_date: '2026-04-20'
+- number: 221
+  isbn13: '9784845871926'
+  release_date: '2026-07-31'
 compact_edition:
   label: SPコミックスコンパクト
   routing:
@@ -1212,3 +1215,4 @@ compact_edition:
   - number: 177
     isbn13: '9784845831289'
     release_date: '2026-03-23'
+open_tail: true
