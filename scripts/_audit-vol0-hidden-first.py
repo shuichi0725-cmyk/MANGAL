@@ -226,7 +226,17 @@ def main() -> None:
         seed["volumes"] = seed_vols
         txt = yaml.safe_dump(seed, allow_unicode=True, sort_keys=False, width=1000)
         assert len((yaml.safe_load(txt) or {}).get("volumes") or []) == len(seed_vols)
-        io.open(SEED, "w", encoding="utf-8", newline="\n").write(txt)
+        # ★先頭のコメント行(= 種4-auto の「全消し禁止」注意書き)は yaml 往復で消えるので貼り直す
+        #   (2026-09-21: この --apply が注意書きごと落としていた。データ(2949→2950)は無傷だったが、
+        #    次に読む人への唯一の警告なので保全する)
+        _head = []
+        for _l in io.open(SEED, encoding="utf-8").read().split("\n"):
+            if _l.startswith("#"):
+                _head.append(_l)
+            else:
+                break
+        io.open(SEED, "w", encoding="utf-8", newline="\n").write(
+            ("\n".join(_head) + "\n" if _head else "") + txt)
     print(f"\n適用 {len(applied)} / HOLD {len(hold)} (overwrites 0 = 純粋追加のみ)")
     for t, ib, why in hold[:20]:
         print(f"  HOLD {ib} {t[:30]}: {why}")
