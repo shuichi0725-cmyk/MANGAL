@@ -1,7 +1,3 @@
-# 種4 auto = MADB取込もれ巻の**蓄積台帳** (日次zokkan/巻抜けfill/NDL確認の合流先)。
-# 手動版 data/seeds/volumes-supplement.yml は不変。 promote/audit が両方 load。
-# ★全消し禁止: _register-seed4-ndl.py は source: ndl-auto の entry だけを差し替え、
-#   他 source (rakuten-preorder/rakuten-local/rakuten-live 等) は必ず保存する (2026-08-26恒久修正)。
 schema_version: 1
 generator: ndl-auto
 volumes:
@@ -37678,3 +37674,16 @@ volumes:
   source: vol0-first
   added_at: '2026-09-21'
   note: number=0の1巻が続巻到着で不可視化(泣かせたくて型)。0巻2026-06-06<最古numbered。楽天題一致ゲート通過→巻1として復元
+- series_keys:
+  - qid:Q17572|name:海の王子
+  qid: null
+  number: 1
+  isbn13: '9784091434166'
+  release_date: '2009-12-25'
+  pages: null
+  publisher: 小学館
+  edition_type: standard
+  title_display: 藤子・F・不二雄大全集 海の王子（1)
+  source: volgap-fill-rakuten-live(2026-09-21 per-case検証)
+  added_at: '2026-09-21'
+  note: 巻抜け充填 slug=umi-no-ouji-2009 版[0]通常版 結線=版単位 gate=版元o+題o(藤子・F・不二雄大全集 海の王子(1))+次巻ISBN連番o+本番未描画
