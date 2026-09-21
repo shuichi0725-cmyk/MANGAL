@@ -1648,6 +1648,7 @@
 "merge_keys": [
 "name:BudianskyBob|name:トランスフォーマークラシックス",
 "name:DelboJosé|name:トランスフォーマークラシックス",
+"name:FurmanSimon|name:トランスフォーマークラシックス",
 "name:ボブ・バディアンスキー|name:トランスフォーマークラシックス"
 ],
 "note": "auto: subset-author + (clean-title|kana) (_gen-author-set-merges.py)"
@@ -10576,6 +10577,14 @@
 "note": "auto: subset-author + (clean-title|kana) (_gen-author-set-merges.py)"
 },
 {
+"main": "ぶるーあーかいぶっ!",
+"merge_keys": [
+"name:Yostar|name:ぶるーあーかいぶっ!",
+"name:純粋な不純物|name:ぶるーあーかいぶっ!"
+],
+"note": "auto: subset-author + (clean-title|kana) (_gen-author-set-merges.py)"
+},
+{
 "main": "アズールレーンびそくぜんしんっ!",
 "merge_keys": [
 "name:Yostar|name:アズールレーンびそくぜんしんっ!",
@@ -11484,6 +11493,14 @@
 "note": "auto: subset-author + (clean-title|kana) (_gen-author-set-merges.py)"
 },
 {
+"main": "転生魔導王は、底辺職の黒魔術士が、実は最強職だと知っている",
+"merge_keys": [
+"name:konagi|name:転生魔導王は、底辺職の黒魔術士が、実は最強職だと知っている",
+"name:銀翼のぞみ|name:転生魔導王は、底辺職の黒魔術士が、実は最強職だと知っている"
+],
+"note": "auto: subset-author + (clean-title|kana) (_gen-author-set-merges.py)"
+},
+{
 "main": "ライアー・ライアー",
 "merge_keys": [
 "name:konomi|name:ライアー・ライアー",
@@ -12213,6 +12230,14 @@
 "merge_keys": [
 "name:sh|name:森で聖女を拾った最強の吸血姫～娘のためなら国でもあっさり滅ぼします!～@COMIC",
 "name:ヨシモト|name:森で聖女を拾った最強の吸血姫～娘のためなら国でもあっさり滅ぼします!～@COMIC."
+],
+"note": "auto: subset-author + (clean-title|kana) (_gen-author-set-merges.py)"
+},
+{
+"main": "ストリーミング・ウォー",
+"merge_keys": [
+"name:sigama|name:ストリーミング・ウォー",
+"name:シガマ|name:ストリーミング・ウォー"
 ],
 "note": "auto: subset-author + (clean-title|kana) (_gen-author-set-merges.py)"
 },
@@ -13135,6 +13160,14 @@
 "merge_keys": [
 "name:あかし瑞穂|name:イケメン社長の恋人権限|sub:くじ引きは溺愛のワナ!?",
 "name:雪園かなそ|name:イケメン社長の恋人権限|sub:くじ引きは溺愛のワナ!?"
+],
+"note": "auto: subset-author + (clean-title|kana) (_gen-author-set-merges.py)"
+},
+{
+"main": "宝石商リチャード氏の謎鑑定",
+"merge_keys": [
+"name:あかつき三日|name:宝石商リチャード氏の謎鑑定",
+"name:辻村七子|name:宝石商リチャード氏の謎鑑定"
 ],
 "note": "auto: subset-author + (clean-title|kana) (_gen-author-set-merges.py)"
 },
@@ -16124,6 +16157,14 @@
 "note": "auto: subset-author + (clean-title|kana) (_gen-author-set-merges.py)"
 },
 {
+"main": "幼馴染みで悪魔な騎士は、私のことが大嫌い",
+"merge_keys": [
+"name:おの秋人|name:幼馴染みで悪魔な騎士は、私のことが大嫌い",
+"name:柴咲まる|name:幼馴染みで悪魔な騎士は、私のことが大嫌い～New Round～"
+],
+"note": "auto: subset-author + (clean-title|kana) (_gen-author-set-merges.py)"
+},
+{
 "main": "後宮の検屍女官",
 "merge_keys": [
 "name:おの秋人|name:後宮の検屍女官",
@@ -16202,6 +16243,14 @@
 "merge_keys": [
 "name:おりがみちよこ|name:仲が悪いのもお仕事です",
 "name:おりがみちよこ|name:仲が悪いのもお仕事です."
+],
+"note": "auto: subset-author + (clean-title|kana) (_gen-author-set-merges.py)"
+},
+{
+"main": "月の白さを知りてまどろむ",
+"merge_keys": [
+"name:おりしま美城|name:月の白さを知りてまどろむ",
+"name:新井テル子|name:月の白さを知りてまどろむ"
 ],
 "note": "auto: subset-author + (clean-title|kana) (_gen-author-set-merges.py)"
 },
@@ -19161,6 +19210,14 @@
 "merge_keys": [
 "name:しの|name:仕事帰り、独身の美人上司に頼まれて",
 "qid:Q109598667|name:仕事帰り、独身の美人上司に頼まれて"
+],
+"note": "auto: subset-author + (clean-title|kana) (_gen-author-set-merges.py)"
+},
+{
+"main": "僕と君(ギャル)が夫婦になるまで",
+"merge_keys": [
+"name:しの|name:僕と君(ギャル)が夫婦になるまで",
+"name:しの|name:僕と君が夫婦になるまで"
 ],
 "note": "auto: subset-author + (clean-title|kana) (_gen-author-set-merges.py)"
 },
@@ -24555,7 +24612,7 @@
 "note": "auto: subset-author + (clean-title|kana) (_gen-author-set-merges.py)"
 },
 {
-"main": "10年間身体(からだ)を乗っ取られ悪女になっていた私に、二度と顔を見せるなと婚約破棄してきた騎士様が今日も縋ってくる",
+"main": "10年間身体を乗っ取られ悪女になっていた私に、二度と顔を見せるなと婚約破棄してきた騎士様が今日も縋ってくる",
 "merge_keys": [
 "name:ぼてまる|name:10年間身体を乗っ取られ悪女になっていた私に、二度と顔を見せるなと婚約破棄してきた騎士様が今日も縋ってくる",
 "name:ボダックス|name:10年間身体を乗っ取られ悪女になっていた私に、二度と顔を見せるなと婚約破棄してきた騎士様が今日も縋ってくる",
@@ -26804,6 +26861,14 @@
 "merge_keys": [
 "name:やまもり文雄|name:鉄子の育て方",
 "qid:Q11264469|name:鉄子の育て方"
+],
+"note": "auto: subset-author + (clean-title|kana) (_gen-author-set-merges.py)"
+},
+{
+"main": "圧倒的ガチャ運で異世界を成り上がる!",
+"merge_keys": [
+"name:やむ茶|name:圧倒的ガチャ運で異世界を成り上がる!",
+"name:ケンノジ|name:圧倒的ガチャ運で異世界を成り上がる!"
 ],
 "note": "auto: subset-author + (clean-title|kana) (_gen-author-set-merges.py)"
 },
@@ -44035,6 +44100,14 @@
 "merge_keys": [
 "name:タイトー|name:青春特急!!電車でGO!学園",
 "name:隅井章仁|name:青春特急!!電車でGO!学園"
+],
+"note": "auto: subset-author + (clean-title|kana) (_gen-author-set-merges.py)"
+},
+{
+"main": "犬に赤紙",
+"merge_keys": [
+"name:タイム涼介|name:犬に赤紙",
+"qid:Q11315802|name:犬に赤紙"
 ],
 "note": "auto: subset-author + (clean-title|kana) (_gen-author-set-merges.py)"
 },
@@ -67264,6 +67337,14 @@
 "note": "auto: subset-author + (clean-title|kana) (_gen-author-set-merges.py)"
 },
 {
+"main": "記憶を失くして豹変した社長に昼も夜も溺愛されてます",
+"merge_keys": [
+"name:五味|name:記憶を失くして豹変した社長に昼も夜も溺愛されてます",
+"name:望月沙菜|name:記憶を失くして豹変した社長に昼も夜も溺愛されてます"
+],
+"note": "auto: subset-author + (clean-title|kana) (_gen-author-set-merges.py)"
+},
+{
 "main": "ロック",
 "merge_keys": [
 "name:五味秀数|name:ロック",
@@ -67398,7 +67479,7 @@
 "note": "auto: subset-author + (clean-title|kana) (_gen-author-set-merges.py)"
 },
 {
-"main": "異世界NTR(ネトラレ)",
+"main": "異世界NTR",
 "merge_keys": [
 "name:五里蘭堂|name:異世界NTR",
 "name:五里蘭堂|name:異世界NTR(ネトラレ)|sub:親友のオンナを最強スキルで堕とす方法",
@@ -71459,6 +71540,14 @@
 "merge_keys": [
 "name:八巻にのは|name:モテ過ぎ侯爵の想定外溺愛|sub:妄想乙女にトロ甘です",
 "name:秋月咲良|name:モテ過ぎ侯爵の想定外溺愛|sub:妄想乙女にトロ甘です"
+],
+"note": "auto: subset-author + (clean-title|kana) (_gen-author-set-merges.py)"
+},
+{
+"main": "宇宙刑事ギャバン黒き英雄",
+"merge_keys": [
+"name:八手三郎|name:宇宙刑事ギャバン黒き英雄",
+"name:太田正樹|name:宇宙刑事ギャバン黒き英雄"
 ],
 "note": "auto: subset-author + (clean-title|kana) (_gen-author-set-merges.py)"
 },
@@ -77811,6 +77900,14 @@
 "note": "auto: subset-author + (clean-title|kana) (_gen-author-set-merges.py)"
 },
 {
+"main": "この世界の顔面偏差値が高すぎて目が痛い@COMIC.",
+"merge_keys": [
+"name:卯月澪|name:この世界の顔面偏差値が高すぎて目が痛い～突然始まる異世界溺愛生活～@COMIC",
+"name:茶乃ひなの|name:この世界の顔面偏差値が高すぎて目が痛い@COMIC."
+],
+"note": "auto: subset-author + (clean-title|kana) (_gen-author-set-merges.py)"
+},
+{
 "main": "俺をイライラさせないでくれ准教授",
 "merge_keys": [
 "name:厘てく|name:俺をイライラさせないでくれ准教授",
@@ -81422,6 +81519,14 @@
 "note": "auto: subset-author + (clean-title|kana) (_gen-author-set-merges.py)"
 },
 {
+"main": "紅の魔術師に全てを注ぎます。好き。@COMIC",
+"merge_keys": [
+"name:夏祭|name:紅の魔術師に全てを注ぎます。好き。@COMIC",
+"name:日向雪|name:紅の魔術師に全てを注ぎます。好き。@COMIC"
+],
+"note": "auto: subset-author + (clean-title|kana) (_gen-author-set-merges.py)"
+},
+{
 "main": "ぷいぷい!",
 "merge_keys": [
 "name:夏緑|name:ぷいぷい!",
@@ -82557,6 +82662,14 @@
 "merge_keys": [
 "name:大沢洋二|name:とびきり特選あさりちゃん",
 "name:室山まゆみ|name:とびきり特選あさりちゃん"
+],
+"note": "auto: subset-author + (clean-title|kana) (_gen-author-set-merges.py)"
+},
+{
+"main": "人質生活から始めるスローライフ",
+"merge_keys": [
+"name:大河原|name:人質生活から始めるスローライフ",
+"name:小賀いちご|name:人質生活から始めるスローライフ"
 ],
 "note": "auto: subset-author + (clean-title|kana) (_gen-author-set-merges.py)"
 },
@@ -91984,6 +92097,14 @@
 "note": "auto: subset-author + (clean-title|kana) (_gen-author-set-merges.py)"
 },
 {
+"main": "よき法律家は悪しき隣人",
+"merge_keys": [
+"name:後藤亜由夢|name:よき法律家は悪しき隣人",
+"name:菅原こゆび|name:よき法律家は悪しき隣人"
+],
+"note": "auto: subset-author + (clean-title|kana) (_gen-author-set-merges.py)"
+},
+{
 "main": "ヤングブラック・ジャック×ブラック・ジャック",
 "merge_keys": [
 "name:後藤伸正|name:ヤングブラック・ジャック×ブラック・ジャック",
@@ -93253,6 +93374,14 @@
 "merge_keys": [
 "name:文化伝信有限公司|name:四コマ三国志",
 "name:文化伝信有限公司共著|name:四コマ三国志"
+],
+"note": "auto: subset-author + (clean-title|kana) (_gen-author-set-merges.py)"
+},
+{
+"main": "その蒼を、青とよばない.",
+"merge_keys": [
+"name:文川あや|name:その蒼を、青とよばない",
+"name:文川あや|name:その蒼を、青とよばない."
 ],
 "note": "auto: subset-author + (clean-title|kana) (_gen-author-set-merges.py)"
 },
@@ -95542,6 +95671,14 @@
 "merge_keys": [
 "name:朝田太郎|name:まんが実話マッドアックスZ|sub:最低社会の真実を公開!!",
 "name:朝田太郎|name:まんが実話マッドアックスZ|sub:毒をもって毒を制す"
+],
+"note": "auto: subset-author + (clean-title|kana) (_gen-author-set-merges.py)"
+},
+{
+"main": "君はいつしか毒になる",
+"merge_keys": [
+"name:朝賀庵|name:君はいつしか毒になる",
+"qid:Q106994672|name:君はいつしか毒になる"
 ],
 "note": "auto: subset-author + (clean-title|kana) (_gen-author-set-merges.py)"
 },
@@ -100484,6 +100621,14 @@
 "merge_keys": [
 "name:橘いろか|name:MONSTERの甘い牙",
 "qid:Q11379234|name:MONSTERの甘い牙"
+],
+"note": "auto: subset-author + (clean-title|kana) (_gen-author-set-merges.py)"
+},
+{
+"main": "3次元お断りな私の契約結婚",
+"merge_keys": [
+"name:橘しづき|name:3次元お断りな私の契約結婚",
+"qid:Q11379234|name:3次元お断りな私の契約結婚"
 ],
 "note": "auto: subset-author + (clean-title|kana) (_gen-author-set-merges.py)"
 },
@@ -106609,7 +106754,8 @@
 "name:白泉社|name:SWAN-白鳥-",
 "qid:Q3201020|name:SWAN",
 "qid:Q3201020|name:SWAN ドイツ編",
-"qid:Q3201020|name:SWAN-白鳥-"
+"qid:Q3201020|name:SWAN-白鳥-",
+"qid:Q3201020|name:Swan"
 ],
 "note": "auto: subset-author + (clean-title|kana) (_gen-author-set-merges.py)"
 },
@@ -115756,6 +115902,14 @@
 "merge_keys": [
 "name:豊田巧|name:RAIL WARS!",
 "name:豊田巧|name:Rail wars!"
+],
+"note": "auto: subset-author + (clean-title|kana) (_gen-author-set-merges.py)"
+},
+{
+"main": "テラフォーマーズ",
+"merge_keys": [
+"name:貴家悠|name:テラフォーマーズ",
+"qid:Q11544351|name:テラフォーマーズ"
 ],
 "note": "auto: subset-author + (clean-title|kana) (_gen-author-set-merges.py)"
 },
@@ -135117,6 +135271,14 @@
 "merge_keys": [
 "qid:Q22124562|name:婚約者は溺愛のふり",
 "qid:Q22124562|name:婚約者は溺愛のふり."
+],
+"note": "auto: subset-author + (clean-title|kana) (_gen-author-set-merges.py)"
+},
+{
+"main": "GANGSTA.",
+"merge_keys": [
+"qid:Q22124902|name:GANGSTA.",
+"qid:Q22124902|name:Gangsta"
 ],
 "note": "auto: subset-author + (clean-title|kana) (_gen-author-set-merges.py)"
 },
