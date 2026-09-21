@@ -1,4 +1,14 @@
 dedup:
+- drop: u12-2018
+  canonical: u12
+  title: U12
+  isbns: 9
+  note: ISBN集合完全一致(9冊)+同著者(闇川コウ)。slug-aliases に u12-2018→u12 の旧裁定あり=一度deduped済だが 2026-09-21 のフルpromoteで復活。seed未登録が原因なので恒久登録 (2026-09-22 週次preflightの衝突検出)
+- drop: dokidoki-locomotion
+  canonical: touhou-tetsuwan-komachi-dokidoki-locomotion
+  title: 東方鉄腕小町ドキドキ♡ロコモーション
+  isbns: 3
+  note: ISBN集合完全一致(3冊)+同著者(幸田朋弘)。短縮題側が別頁化。slug-aliases に旧裁定あり=同上の復活。恒久登録 (2026-09-22 週次preflightの衝突検出)
 - drop: 07-ghost-2015
   canonical: 07-ghost
   title: 07-GHOST

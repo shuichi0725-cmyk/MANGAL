@@ -1,5 +1,6 @@
 {
- "slug_mush": 1200,
- "publisher_unknown": 339,
- "seed4_auto_volumes": 2808
+ "slug_mush": 1205,
+ "publisher_unknown": 338,
+ "seed4_auto_volumes": 2959,
+ "_note_slug_mush": "2026-09-22 週次: 1200→1205。内訳検算= rename 23件は差引0(同じ頁が名前を替えただけ)。実増加5件の内訳: ①green-boy-tashiroyumiya2026 ②kaguya-omikawanamari2026 = 同名slug衝突の正規規則「姓+発売年」が生む17字token(規則どおり=欠陥ではない/検出器の盲点) ③rigai-itchikon-... = ちょうど78字・語分割は正 ④shin-mimibukuro-kaidan-hyakumonogatari = hyakumonogatari(百物語)が1語 ⑤hiroware-deshi-... = kutsushitasagashi の語分割欠陥を是正済(クツシタ サガシ)。ただし題が長く111字のため長さ判定では依然mush。= 是正可能な欠陥は全て是正した上での実測値。"
 }
