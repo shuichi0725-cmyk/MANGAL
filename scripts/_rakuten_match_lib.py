@@ -191,3 +191,31 @@ def build_index(target_bases, paths=(DELTA, OLD), progress=None):
         }
         index.setdefault(key, []).append(rec)
     return index, n
+
+# ★ラノベ/非漫画ゲート(2026-09-21 新設。 ユーザ指示「ラノベと間違わないように気をつけて」)
+#   題も著者も同じで**小説版だけ別レーベル**という型を レーベル名(seriesName)と判型(size)で弾く。
+#   実測: 巻抜けの楽天収穫5,944itemに MFブックス63/カドカワBOOKS33/オーバーラップ文庫31/
+#   アルファライト文庫30/GCノベルズ23/ファンタジア文庫20/ダッシュエックス文庫19 等が混在していた。
+#   ★「コミック文庫」(ぶんか社コミック文庫 等)は漫画なので seriesName に「コミック」が有れば通す。
+NOVEL_LABEL_RE = re.compile(
+    r"(文庫J|電撃文庫|ファンタジア文庫|スニーカー文庫|オーバーラップ文庫|ダッシュエックス文庫|MF文庫|GA文庫|"
+    r"HJ文庫|富士見ファンタジア|アルファライト|アルファポリス|アース・スター\s*ノベル|GCノベルズ|MFブックス|"
+    r"カドカワBOOKS|ノベルス|ノベルズ|ノベル|[Nn]ovels|青い鳥文庫|つばさ文庫|みらい文庫|レジーナブックス|"
+    r"ベリーズ文庫|ビーズログ文庫|一迅社文庫|ラノベ文庫|ビーンズ文庫|オレンジ文庫|コバルト文庫|ソノラマ文庫)")
+NONMANGA_SERIES_RE = re.compile(r"(絵本|テレビ絵本|アニメ絵本|ポーズ集|資料集|写真集|図鑑)")
+NONBOOK_SIZES = {"絵本", "カセット、ＣＤ等", "図鑑", "ムックその他"}
+
+
+def novel_reason(series, size=None, etype=None):
+    """ラノベ/非漫画なら理由文字列、漫画候補なら None。size/etype は判る時だけ渡す。"""
+    ser = series or ""
+    sz = size or ""
+    if sz in NONBOOK_SIZES:
+        return "判型=" + sz
+    if "コミック" not in ser and NOVEL_LABEL_RE.search(ser):
+        return "ラノベレーベル=" + ser
+    if NONMANGA_SERIES_RE.search(ser):
+        return "非漫画レーベル=" + ser
+    if sz in ("文庫", "新書") and etype not in ("bunkobon",) and "コミック" not in ser:
+        return "判型=" + sz + "×版type=" + str(etype)
+    return None

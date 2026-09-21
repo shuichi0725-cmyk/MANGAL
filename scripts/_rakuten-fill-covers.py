@@ -25,7 +25,10 @@ env = dict(
     for l in (ROOT / ".env.local").read_text(encoding="utf-8").splitlines()
     if "=" in l and not l.strip().startswith("#")
 )
-ORIGIN = "https://mangal.shuichi0725.workers.dev"
+# ★Referer/Origin は .env.local の RAKUTEN_REFERER を使う(2026-09-21 修正)。
+#   旧: workers.dev を固定 → 楽天アプリ登録の参照元と食い違い **全リクエストが403**。
+#   _lookup.py の rakuten_live と同じ出所に揃える(申請ドメインが変わっても追随する)。
+ORIGIN = (env.get("RAKUTEN_REFERER") or "https://mangal.shuichi0725.workers.dev").rstrip("/")
 ISBN_RE = re.compile(r"isbn13:\s*'?(\d{13})'?")
 
 

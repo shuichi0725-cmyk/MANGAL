@@ -26,6 +26,9 @@ DROP_WORDS = ["ガイドブック", "ファンブック", "設定資料集", "�
               "ノベライズ", "小説", "アニメコミック", "劇場版", "攻略", "完全ガイド", "コミックガイド"]
 
 
+# ★G5 ラノベ/非漫画ゲートは共有ライブラリへ集約(_rakuten_match_lib.novel_reason)
+
+
 def norm_isbn(s):
     return re.sub(r"[^0-9X]", "", str(s or "").upper())
 
@@ -40,6 +43,7 @@ db = {norm_isbn(r[0]) for r in con.execute("SELECT isbn13 FROM volumes WHERE isb
 print(f"既存ISBN: 本番 {len(prod)} / 種2 {len(db)}", flush=True)
 
 rows = []
+blocked = []
 n_page = 0
 for line in open(HARV, encoding="utf-8"):
     if not line.strip():
@@ -70,10 +74,11 @@ for line in open(HARV, encoding="utf-8"):
         byvol.setdefault(1 if v is None else v, []).append({
             "isbn": isbn, "date": R.parse_salesdate(it.get("salesDate", "")),
             "raw": raw, "publisher": it.get("publisherName", ""), "author": it.get("author", ""),
-            "series": it.get("seriesName", ""),
+            "series": it.get("seriesName", ""), "size": it.get("size", ""),
         })
 
     for e in (d.get("editions") or []):
+        etype = e.get("type") or "standard"
         vols = [v for v in (e.get("volumes") or []) if v.get("number")]
         if len(vols) < 2:
             continue
@@ -93,6 +98,13 @@ for line in open(HARV, encoding="utf-8"):
         for n in [x for x in range(ns[0], ns[-1] + 1) if x not in have]:
             cands = byvol.get(n) or []
             cands = [c for c in cands if c["isbn"] not in prod and c["isbn"] not in db]  # G1
+            _ng = [(c, R.novel_reason(c.get('series'), c.get('size'), etype)) for c in cands]                              # G5
+            for c, why in _ng:
+                if why:
+                    blocked.append({"stem": stem, "number": n, "isbn": c["isbn"], "why": why,
+                                    "rakuten_title": c["raw"], "series_name": c.get("series", ""),
+                                    "size": c.get("size", "")})
+            cands = [c for c, why in _ng if not why]
             if not cands:
                 continue
             same_pub = [c for c in cands if main_prefix and c["isbn"][:7] == main_prefix]  # G2
@@ -129,3 +141,11 @@ print(f"収穫頁 {n_page} / 提案 {len(rows)} 巻 / {len({r['stem'] for r in r
 for k in sorted(c, key=lambda x: (order[x[0]], x[1])):
     print(f"  {k[0]:9} {k[1]:9} {c[k]}")
 print(f"→ {outp}")
+# ★G5で弾いた候補も残す(「ラノベを混ぜなかった」ことの証跡・偽陽性の再検査用)
+bp = os.path.join(ROOT, "docs", "production-diagnostics", "volgap-live-blocked.tsv")
+bcols = ("stem", "number", "isbn", "why", "rakuten_title", "series_name", "size")
+with open(bp, "w", encoding="utf-8", newline="") as f:
+    f.write("\t".join(bcols) + "\n")
+    for r in blocked:
+        f.write("\t".join(str(r.get(c, "")) for c in bcols) + "\n")
+print(f"G5(ラノベ/非漫画)で除外: {len(blocked)} 件 → {bp}")

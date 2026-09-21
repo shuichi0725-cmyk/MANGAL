@@ -26,6 +26,9 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 sys.stdout.reconfigure(encoding="utf-8")
 import _rakuten_match_lib as R
 
+TAB = chr(9)
+NL = chr(10)
+
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SRC = os.path.join(ROOT, "data", "manga.v2")
 HARVEST = os.path.join(ROOT, ".cache", "volgap-lead-live.jsonl")
@@ -166,6 +169,8 @@ def main():
 
     index = defaultdict(list)
     nrak = nndl = 0
+    nlnovel = Counter()
+    blocked_rows = []
     for line in open(HARVEST, encoding="utf-8"):
         try:
             h = json.loads(line)
@@ -183,6 +188,15 @@ def main():
                 continue
             vol, residual = R.parse_vol(raw)
             if norm(residual) not in pg["vars"]:
+                continue
+            # ★G6 ラノベ/非漫画ゲート(2026-09-21): 1巻欠け層は「同題・同原作者の小説版」を
+            #   掴む危険が最大(コミカライズ元のラノベは同じ題で1巻から在る)。判定は共有lib 1箇所。
+            _nr = R.novel_reason(it.get("seriesName"), None, None)
+            if _nr:
+                nlnovel[_nr.split("=")[0]] += 1
+                blocked_rows.append({"stem": stem, "isbn": str(it.get("isbn") or ""),
+                                     "why": _nr, "rakuten_title": raw,
+                                     "series_name": it.get("seriesName") or ""})
                 continue
             ib = isbn13(it.get("isbn"))
             if not ib:
@@ -209,6 +223,15 @@ def main():
                 "publisher": str(rec.get("pub") or ""), "author": "/".join(rec.get("creators") or []),
                 "cover": "", "has_vol_token": True, "src": "ndl"})
     print("収穫 楽天{:,} / NDL{:,} → 題+巻が一致した索引 {:,} キー".format(nrak, nndl, len(index)), flush=True)
+    if nlnovel:
+        print("  ★G6ラノベ/非漫画で除外:", dict(nlnovel), flush=True)
+        _bp = os.path.join(ROOT, "docs", "production-diagnostics", "volgap-lead-blocked.tsv")
+        _cols = ("stem", "isbn", "why", "rakuten_title", "series_name")
+        with open(_bp, "w", encoding="utf-8", newline="") as _f:
+            _f.write(TAB.join(_cols) + NL)
+            for _r in blocked_rows:
+                _f.write(TAB.join(str(_r.get(c, "")) for c in _cols) + NL)
+        print("  →", _bp, flush=True)
 
     rows = []
     for r in tg:

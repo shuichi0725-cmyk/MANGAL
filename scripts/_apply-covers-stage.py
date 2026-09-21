@@ -46,10 +46,23 @@ def build():
             ib = to13(o.get("isbn13")); img = norm(o.get("kobo_img"))
             if ib and img and ib not in cov: cov[ib] = img; nk += 1
         kfh.close()
+    # ★既存seedにしか無い書影を落とさない(2026-09-21)。
+    #   旧実装は上のキャッシュ2本だけで全置換していたため、cover-override / live補充 /
+    #   仮書影差替 など**別経路で入った書影が消えた**(実測 319,021 → 304,112 = 14,909件)。
+    #   新鮮なキャッシュ側を優先し、キャッシュに無い既存分だけを引き継ぐ = 純粋追加。
+    kept = 0
+    if os.path.exists(SEED):
+        with gzip.open(SEED, "rt", encoding="utf-8") as f:
+            for line in f:
+                try: o = json.loads(line)
+                except: continue
+                ib = o.get("isbn13"); u = o.get("cover_url")
+                if ib and u and ib not in cov:
+                    cov[ib] = u; kept += 1
     with gzip.open(SEED, "wt", encoding="utf-8") as f:
         for ib, u in cov.items():
             f.write(json.dumps({"isbn13": ib, "cover_url": u}, ensure_ascii=False) + "\n")
-    print(f"covers.jsonl.gz 生成: {len(cov)}件 (うちKobo由来 {nk})", flush=True)
+    print(f"covers.jsonl.gz 生成: {len(cov)}件 (うちKobo由来 {nk} / 既存seedから継承 {kept})", flush=True)
 
 def apply():
     if not os.path.exists(SEED):
