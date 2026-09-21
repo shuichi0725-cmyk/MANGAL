@@ -67,3 +67,27 @@ ACCEPT 0 / REVIEW 0 / REJECT_EDITION 1 / EXISTS 6 / NOHIT 162(138頁)
 
 [[volgap_diagnosis_order]] [[volgap_virtual_tool_trigger]] [[harvest_match_mechanism_applied]]
 [[ndl_volume_completion_better_than_rakuten]] [[feedback_efficiency_first]]
+
+## ★2026-09-21: 楽天live を当てた結果(MID=効く / LEAD=枯れ)
+
+**MID層(途中の欠番)** = 楽天live収穫 → 照合 → ISBN連番+発売日+著者+G5ラノベ除け で
+**13巻を充填**(鬼太郎1985年版10-13 / 江戸前の旬134 / ヘタリアGangsta2 / ニシトーキョー2 / 帝都2 /
+まんがプロジェクトX 9・10 / Double call 2・3 / オーイ!!やまびこ5)。
+日付矛盾の3巻(学研まんが世界の歴史#4#5#9)はユーザ条件どおりHOLD。
+
+★**反例として重要**: 鬼太郎1985年版は前日「NDL・Wikipedia・種2のどれにも無く連番推測もできない」と
+結論した層だったが、**楽天liveには在った**。「無い」と言う前にソースを1つずつ潰すこと
+([[feedback_absence_needs_verification]])。
+
+**LEAD層(1巻が無い)** = 869巻/282頁を楽天live+NDLで全数照合 → **ACCEPT 0**
+(REJECT_EDITION 15 / EXISTS 58=26頁 / NOHIT 786=250頁)。
+= 上の「NDLでは枯れた」に加えて **楽天liveでも枯れた**。
+★**1巻欠け層に『楽天で拾えないか』を再提案しない**。残るのは JPRO / Wikipedia / 出版社公式 か、
+「ISBN以前は数えない」の裁定拡張。
+
+**穴1冊だけ層の機械分類**(180頁 → `docs/production-diagnostics/volgap-onehole-class.tsv`):
+C 自前DBに無い160 / B' 種2に在るが別頁に出ている17 / B 種2に在るのに出ていない3。
+B の3件を個別検証したら **2件が本物・1件(人狼ゲーム)は別作品**(クレイジーフォックス)= EXISTS の偽陽性は再現する。
+
+巻抜け推移(2026-09-21): 月次前346 → 蒸留後341 → per-case+楽天live → **330**
+
