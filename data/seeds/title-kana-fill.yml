@@ -59854,8 +59854,8 @@ fills:
 - key: name:黒河澪|name:ラブドラッグ
   kana_segmented: ラブドラッグ
 - key: name:黒澤明|name:SAMURAI 7
-  kana_segmented: フルカワ コミックス
-  src: ndl
+  kana_segmented: サムライ セブン
+  src: fix-2026-09-21(NDLヨミがレーベル名「古川コミックス」を拾っていた誤り。種3=サムライセブン/種2 60739=サムライ 7 と突合して是正)
 - key: name:黒猫かりん|name:訳あり伯爵様と契約結婚したら、義娘〈六歳〉の契約母になってしまいました。
   kana_segmented: ワケアリ ハクシャクサマ ト ケイヤク ケッコン シタラ ムスメ ロクサイ ノ ケイヤクハハ ニ ナッテ シマイマシタ
 - key: name:黒獅子|name:宝くじで40億当たったんだけど異世界に移住する
