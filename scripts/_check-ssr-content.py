@@ -78,6 +78,16 @@ DEFAULT_DESC_HEAD = "出版年・著者・出版社・分野・ジャンルか�
 # ★床を上げ下げする時は必ずこの実測を取り直す(定数だけ動かさない)。
 CONTENT_FLOOR = 150
 CONTENT_FLOOR_BY_PREFIX = {"art-books/": 60, "author/": 40}
+# ★ページ送りの末尾頁(magazine/publisher/year の <key>/<n>)は、載る作品数で本文長が決まる。
+#   実測 2026-09-22(該当416頁 = magazine 36 / publisher 178 / year 202):
+#     頁固有 最小 140字(publisher/asahi-shimbun/2 = 301作品の2頁目で掲載1作品)・中央 12,004字。
+#     既定床150を割るのは1頁のみ。次点は ascii-media-works/2 の153字(同じく1作品)。
+#     ★そして **/manga/ リンクが0本の頁は416頁中0件** = 空描画なら作品リンクごと消えるので、
+#       「1作品しか載らない正当な末尾頁」と「クライアント専用描画」は本文長で十分に分かれる。
+#   よって床は 60(1作品=140字に対し余裕2.3倍)。既定150のままだと毎週この1頁で週次が止まり、
+#   偽陽性で番人そのものが無視される形になるため、クラスとして切り出す。
+RE_PAGINATED = re.compile(r"^(?:magazine|publisher|year)/[^/]+/\d+\.html$")
+CONTENT_FLOOR_PAGINATED = 60
 # シェル長の実測に使うサンプル数(共通prefix/suffixを取るだけなので少数で十分)
 SHELL_SAMPLE = 60
 
@@ -142,6 +152,8 @@ def measure_shell(paths: list[str], sample: int = SHELL_SAMPLE, seed: int = 7) -
 
 
 def floor_for(rp: str) -> int:
+    if RE_PAGINATED.match(rp):
+        return CONTENT_FLOOR_PAGINATED
     for pref, v in CONTENT_FLOOR_BY_PREFIX.items():
         if rp.startswith(pref):
             return v
