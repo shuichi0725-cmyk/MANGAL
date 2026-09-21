@@ -31,7 +31,7 @@ OUT = os.path.join(ROOT, "docs", "production-diagnostics", "numeral-variant-spli
 
 
 def akey(authors):
-    return "|".join(sorted(re.sub(r"[\s　]", "", a.get("name") or "") for a in (authors or [])))
+    return "|".join(sorted(re.sub(r"[\s　]", "", str(a.get("name") or "")) for a in (authors or [])))
 
 
 def main():

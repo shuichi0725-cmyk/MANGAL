@@ -58,7 +58,8 @@ for p in _files:
     title = d.get("title") or ""
     TOUCHED.add(slug)
     kana = d.get("title_kana") or ""   # ★一覧頁の50音順に使う(lib/listSort と同じキー)
-    authors = "・".join(a.get("name") or "" for a in (d.get("authors") or []) if a.get("name"))
+    # ★str() 必須: 数字だけのペンネーム(例 359=サコク)は YAML 引用漏れで int になりうる
+    authors = "・".join(str(a.get("name") or "") for a in (d.get("authors") or []) if a.get("name"))
     eds = d.get("editions") or []
 
     # ★愛蔵版コーナー(2026-09-06 ユーザ裁定): 「通常版と冊数が同じ版」は判型も値段も普通の

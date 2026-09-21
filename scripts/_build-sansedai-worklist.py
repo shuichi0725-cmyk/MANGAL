@@ -29,7 +29,7 @@ for f in candidates:
     if not pop:
         continue
     slug = d.get("slug") or os.path.splitext(os.path.basename(f))[0]
-    authors = "・".join(a.get("name", "") for a in (d.get("authors") or []) if a.get("name"))
+    authors = "・".join(str(a.get("name", "")) for a in (d.get("authors") or []) if a.get("name"))
     rows.append((pop, slug, d.get("title", ""), authors,
                  d.get("year_started") or "", ",".join(d.get("genres") or []),
                  d.get("demographic") or "", d.get("status") or ""))
