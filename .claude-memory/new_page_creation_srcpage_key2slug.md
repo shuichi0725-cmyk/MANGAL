@@ -42,6 +42,21 @@ metadata:
 5. ★**冪等確認**: `python scripts/_slug-apply-build.py` を全量実行して **src頁が生き残る**ことを見る。
    2 を飛ばして 3 だけやると、ここで**消える**。
 
+## ★2026-09-21 追記: src頁の置き場は `data/seeds/source-pages/`(git追跡)にする
+
+`_slug-apply-build.py` は **`data/manga/*.yml` を全削除してから key2slug で再生成**する
+(49行目 `for f in SRC.glob("*.yml"): f.unlink()`)。
+= **key2slug に無い手製stubは巻き込まれて消える**。実害: 2026-09-20 09:03 の実行で
+force追跡していた11件(俺の空3部/王様の仕立て屋2/AZUMI/ショーイチ/騎士ガンダム特別版/
+SDガンダム列伝/激マン2)が消え、翌日のフルpromoteで**頁ごと本番から消滅**(ISBN 91件)。
+promote は `data/manga` と `data/seeds/source-pages` の**両方**を源として読む(stem重複はdedup)。
+→ **新頁stubは source-pages に置く**。key2slug 追記は冪等再生成のため併用する(両方やる)。
+
+★逆の事故もある: 2026-09-17 の「源なし頁396件の一括復元」は、**既に別stem(年サフィックス)で
+公開されていた頁の素stem**を作ってしまい、フルpromoteで**同一公開slugの二重頁15組**を生んだ
+(#33が検出)。復元stubを作る前に「その公開slugを出す別stemが居ないか」を必ず見る。
+判定材料 = `data/seeds/slug-overrides.yml` に結線があるstemが正 / 無い方が重複。
+
 ## ★過mergeを解いて独立させる時はセットで
 
 `merge-exceptions.yml` に sid 対を足して遮断しただけだと、**本編から外れた上に自分の頁が無い**
