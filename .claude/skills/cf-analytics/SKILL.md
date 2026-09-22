@@ -11,8 +11,12 @@ description: アクセス解析して=Cloudflare解析2系統(report=Workerリ�
 ```
 python scripts/_cf-analytics.py web --days 7         # ★人間の訪問者: 閲覧/訪問/人気ページ/国/流入元
 python scripts/_cf-analytics.py report --days 7      # Workerインフラ: 総req/エラー率(クロール込み=配信健康)
+python scripts/_cf-analytics.py bots --date 2026-09-20   # ★UA分類: 検索クローラ/AI/SNS/攻撃/人間
+python scripts/_cf-analytics.py paths --date 2026-09-20 --bot Perplexity  # ★そのbotが取ったパス+status
 python scripts/_cf-analytics.py verify               # トークン生存確認(失敗時の切り分け)
 ```
+- ★**日次reqの山は毎回「単一クローラの波」**(人間でも障害でもない)。山を見たら真っ先に `bots --date <その日>`。
+  Freeプランは **1日幅までしかクエリ不可**なので bots/paths は `--date` 必須。
 - 「アクセスどう?」= **web が主役**(訪問者視点)、report は配信健康(エラー率)の補助。
 - endpoint/認証/GraphQL(workersInvocationsAdaptive+rumPageloadEventsAdaptiveGroups)の正は**scriptに封じ込め済み=再実装しない**。siteTag等の定数もscript内。
 - キー: `.env` の `CF_ANALYTICS_API_TOKEN`(Analytics Read。★絶対commitしない。旧名`CLOUDFLARE_API_TOKEN`はwranglerがdeploy認証に誤用=2026-07-29改名)。RUM RESTは403=scope外だがGraphQL rumは通る(実証済)。
