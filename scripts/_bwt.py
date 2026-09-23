@@ -146,22 +146,44 @@ def cmd_pages(key, site, top):
     return 0
 
 
+# ★GetCrawlStats は「日別の値」と「その日時点の累積値」が混在している(2026-09-23 生データで確認)。
+#   日別 = CrawledPages / Code4xx / CrawlErrors(日ごとに増減する小さな値)
+#   累積 = InIndex(登録数)/ Code2xx / Code301 / AllOtherCodes(単調増加・日ごとに同値が続く)
+#   旧実装は累積値を日別に並べて**合算**していた(「2xx 35,980」= 無意味な数)。登録数 InIndex も未表示だった。
+#   Code5xx / BlockedByRobotsTxt / ConnectionTimeout は実測で全0のため区別未確定 → 日別扱い。
+_CRAWL_DAILY = ("CrawledPages", "Code4xx", "Code5xx", "CrawlErrors", "BlockedByRobotsTxt", "ConnectionTimeout")
+_CRAWL_CUMUL = ("InIndex", "Code2xx", "Code301")
+
+
 def cmd_crawl(key, site, days):
     rows = call("GetCrawlStats", key, siteUrl=site) or []
-    rows = sorted(rows, key=lambda r: _d(r.get("Date")))[-days:]
+    rows = sorted(rows, key=lambda r: _d(r.get("Date")))
+    prev = rows[-days - 1] if len(rows) > days else None
+    rows = rows[-days:]
     print(f"=== クロール統計(直近{len(rows)}日) ===")
+    print(f"  {'日付':10} {'クロール':>8} {'4xx':>5} {'5xx':>5} {'エラー':>6} {'robots':>7} {'timeout':>8}"
+          f" │ {'登録数':>7} {'(前日比)':>8} {'既知2xx':>8} {'既知301':>8}")
     tot = collections.Counter()
-    print(f"  {'日付':10} {'クロール':>8} {'2xx':>7} {'301':>5} {'4xx':>5} {'5xx':>5} {'robots':>7} {'timeout':>8}")
+    last_idx = (prev or {}).get("InIndex")
     for r in rows:
-        tot["crawled"] += r.get("CrawledPages") or 0
-        for k in ("Code2xx", "Code301", "Code4xx", "Code5xx", "BlockedByRobotsTxt", "ConnectionTimeout"):
+        for k in _CRAWL_DAILY:
             tot[k] += r.get(k) or 0
-        print(f"  {_d(r.get('Date')):10} {(r.get('CrawledPages') or 0):>8,} {(r.get('Code2xx') or 0):>7,}"
-              f" {(r.get('Code301') or 0):>5} {(r.get('Code4xx') or 0):>5} {(r.get('Code5xx') or 0):>5}"
-              f" {(r.get('BlockedByRobotsTxt') or 0):>7} {(r.get('ConnectionTimeout') or 0):>8}")
-    print(f"  合計: クロール{tot['crawled']:,} / 2xx {tot['Code2xx']:,} / 301 {tot['Code301']:,}"
-          f" / 4xx {tot['Code4xx']:,} / 5xx {tot['Code5xx']:,}"
-          f" / robots遮断 {tot['BlockedByRobotsTxt']:,} / timeout {tot['ConnectionTimeout']:,}")
+        idx = r.get("InIndex") or 0
+        delta = "" if last_idx is None else f"{idx - last_idx:+,}"
+        last_idx = idx
+        print(f"  {_d(r.get('Date')):10} {(r.get('CrawledPages') or 0):>8,} {(r.get('Code4xx') or 0):>5}"
+              f" {(r.get('Code5xx') or 0):>5} {(r.get('CrawlErrors') or 0):>6}"
+              f" {(r.get('BlockedByRobotsTxt') or 0):>7} {(r.get('ConnectionTimeout') or 0):>8}"
+              f" │ {idx:>7,} {delta:>8} {(r.get('Code2xx') or 0):>8,} {(r.get('Code301') or 0):>8,}")
+    print(f"  日別の合計: クロール{tot['CrawledPages']:,} / 4xx {tot['Code4xx']:,} / 5xx {tot['Code5xx']:,}"
+          f" / エラー {tot['CrawlErrors']:,} / robots遮断 {tot['BlockedByRobotsTxt']:,}"
+          f" / timeout {tot['ConnectionTimeout']:,}")
+    if rows:
+        a = prev or rows[0]
+        b = rows[-1]
+        print("  累積(期間の始→終): " + " / ".join(
+            f"{lbl} {(a.get(k) or 0):,}→{(b.get(k) or 0):,}"
+            for k, lbl in zip(_CRAWL_CUMUL, ("登録数", "既知2xx", "既知301"))))
     issues = call("GetCrawlIssues", key, siteUrl=site) or []
     print(f"\n=== クロール問題: {len(issues)}件 ===")
     for x in issues[:20]:
