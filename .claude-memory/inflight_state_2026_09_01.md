@@ -1,6 +1,6 @@
 ---
 name: inflight-state-2026-09-01
-description: 【本番待ちの台帳】2026-09-08の週次で検索残務/発売日SEO面/ハブ850面/PC共通シェルは公開済。★2026-09-14 追加=SEO基本4件(メタdesc/最終巻/書影alt/title・OG)が週次蒸留待ち(機能蒸留では出ない)
+description: 【本番待ちの台帳】★2026-09-23 全集title作品一覧化+robots /api/ 遮断=機能蒸留待ち。2026-09-08の週次で検索残務/発売日SEO面/ハブ850面/PC共通シェルは公開済。★2026-09-14 追加=SEO基本4件(メタdesc/最終巻/書影alt/title・OG)が週次蒸留待ち(機能蒸留では出ない)
 metadata:
   type: project
 ---
@@ -141,3 +141,9 @@ IndexNow は 298 URL 受理(削除分の通知)。鍵ファイルも本番に載
 3. 索引の「毎回確認」(workers/r2-serve.js)= **Worker コードの変更 → 週次蒸留で `npx wrangler deploy -c wrangler-r2.jsonc` を忘れずに**
    (R2同期はファイルだけ=Worker は別デプロイ。weekly-distill skill の手順に既にある)。詳細 [[index_json_browser_cache_stale]]。
 
+
+## 追記 2026-09-23: SEO小物2点が本番待ち(コードのみ=**機能蒸留で出る**)
+- 全集10頁の title を「<作家> 作品一覧(<全集名> 全N巻)」に(d302c8b10)。作家名は `_gen-zenshuu-data.py` の AUTHOR が単一ソース。カムイ伝全集は従来形。
+- robots.txt に `Disallow: /api/`(同commit)。根拠 = 9/22 Googlebot 174件中56件が /api/like。
+- 効果測定: Bing「水木しげる 作品一覧」(9/23時点 8.9位・クリック0)を `_bwt.py queries` で追う。
+- 道具: `_bwt.py crawl` を是正(94ee82e90)= 登録数(InIndex)+前日比を表示。★9/22 Bing登録 5,236。
