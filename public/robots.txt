@@ -20,4 +20,8 @@ Disallow: /data/
 #   (/browse は人間の訪問2位=440閲覧/30日。?を含むURLだけが前方一致で該当する)。
 Disallow: /browse?
 Disallow: /list?
+# ★Worker の API(いいね数 / purge / 問い合わせ)はクロール不要(2026-09-23)。
+#   実測 2026-09-22: Googlebot 174件中 56件が /api/like?id=… (ホーム・過去ログ描画時の XHR)。
+#   描画時の XHR もクロール予算を食う。いいね数は検索に要らない = 止めても何も困らない。
+Disallow: /api/
 Sitemap: https://mangal-db.com/sitemap.xml

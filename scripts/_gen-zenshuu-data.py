@@ -36,6 +36,15 @@ META = {
     "fujiko-land": ("藤子不二雄ランド", "中央公論社", 301, "works"),
     "ishinomori": ("石ノ森章太郎萬画大全集", "角川書店", 500, "sets"),
 }
+# ★作家名(2026-09-23 SEO): 頁titleを「<作家> 作品一覧(<全集名> 全N巻)」にするため。
+#   Bing実測で「水木しげる 作品一覧」を /zenshuu/mizuki が受けていた(8.9位・クリック0)。
+#   None = 作家の作品一覧と名乗れない全集(カムイ伝全集=1作品の全集)→ title は従来形。
+AUTHOR = {
+    "mizuki": "水木しげる", "tezuka": "手塚治虫", "tezuka-bunko": "手塚治虫",
+    "kamuiden": None, "tsuge-taizen": "つげ義春", "tsuge": "つげ義春",
+    "hasegawa": "長谷川町子", "fujiko-f": "藤子・F・不二雄", "fujiko-land": "藤子不二雄",
+    "ishinomori": "石ノ森章太郎",
+}
 
 
 def _link_by_title(works, author):
@@ -164,7 +173,7 @@ def main():
                              # ★楽天の「画像なし」プレースホルダ(noimage_01.gif)は書影として出さない
                              #   ([[rakuten_cover_data_asset]] noimage除外必須。2026-07-25 石ノ森15本で発覚)
                              "cover": _cov(r.get("cover")), "lineup": lu})
-            cols.append({"key": key, "name": name, "publisher": pub, "total": total,
+            cols.append({"key": key, "name": name, "author": AUTHOR.get(key), "publisher": pub, "total": total,
                          "years": "2006-2008", "axis": "sets", "linked": 0, "complete": False,
                          "guinness": True, "covers": [s["cover"] for s in sets[:3] if s.get("cover")],
                          "sets": sets})
@@ -257,7 +266,7 @@ def main():
                     break
             if len(cvs) >= 3:
                 break
-        cols.append({"key": key, "name": name, "publisher": pub, "total": total,
+        cols.append({"key": key, "name": name, "author": AUTHOR.get(key), "publisher": pub, "total": total,
                      "years": f"{years[0]}-{years[-1]}" if years else "",
                      "axis": axis, "linked": linked, "isbns": n_isbn,
                      "complete": complete, "covers": cvs, "works": works})

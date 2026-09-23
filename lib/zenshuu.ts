@@ -14,6 +14,8 @@ export type ZenshuuSet = { n: number; name: string; isbn: string; date: string; 
 export type ZenshuuCollection = {
   key: string;
   name: string;
+  /** 作家名(title「<作家> 作品一覧」用)。null = 1作品の全集等で作品一覧と名乗れない */
+  author?: string | null;
   publisher: string;
   total: number;
   years: string;

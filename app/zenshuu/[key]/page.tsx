@@ -18,11 +18,18 @@ export async function generateMetadata({ params }: { params: Promise<{ key: stri
   // ★description が既定のままだった(2026-09-15 番人 _check-ssr-content.py が10頁を検出)。
   //   title は在ったので「同一descriptionが多すぎる」側だけの穴。帯に出している事実
   //   (出版社・刊行年・巻数)をそのまま使う。
+  // ★作家名を先頭に(2026-09-23): Bing で「水木しげる 作品一覧」をこの頁が受けていた(8.9位・
+  //   クリック0)。全集名は残す(「手塚治虫漫画全集」は4.4位・CTR25%で取れている語)。
+  //   author が無い全集(カムイ伝全集=1作品)は従来形。
+  const head = c?.author ? `${c.author} 作品一覧(${c.name} 全${c.total}巻)` : c ? `${c.name}(全${c.total}巻)` : "全集";
   return {
-    title: c ? `${c.name}(全${c.total}巻)` : "全集",
+    title: head,
     description: c
-      ? `${c.name}の全${c.total}巻一覧。${c.publisher}・${c.years}刊行。` +
-        "各巻の収録作品・発売日・書影と、購入リンクを掲載。"
+      ? c.author
+        ? `${c.author}の作品一覧を、${c.name}(全${c.total}巻・${c.publisher}・${c.years}刊行)の` +
+          "収録作品で。各巻の発売日・書影と、購入リンクを掲載。"
+        : `${c.name}の全${c.total}巻一覧。${c.publisher}・${c.years}刊行。` +
+          "各巻の収録作品・発売日・書影と、購入リンクを掲載。"
       : "漫画全集の巻一覧。",
     alternates: { canonical: `/zenshuu/${key}` },
   };
