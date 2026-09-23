@@ -94,7 +94,7 @@
 - [【最重要】壊れているから消す、を禁止](never_delete_because_broken.md) — 消してよいのは非書籍/scope外/移設のみ ／ [【✅】がきデカ型=一部ISBN欠け機械是正](partial_isbn_gap_mechanism.md) ／ [【✅】連載中再検査=外部権威降格層](ongoing_status_recheck_mechanism.md)
 - [アニメ化フラグ更新機構=柱⑥後段](anime_flag_freshness.md) ／ [アニメイトタイムズ季節まとめ=第2情報源](animatetimes_season_source.md) ／ [【事故復元済】月次が種4-auto全消し](seed4_auto_wipe_accident.md)
 - [【復元済】源なしmanga.v2頁258件](orphan_source_pages_restored.md) ／ [【未決】版違い統合](multi_edition_unification_pending.md) ／ [版/刷タブ・在庫・電子割引](version_tabs_stock_ebook.md)
-- [うる星=版/巻/刷タブ正規ルール](urusei_version_display_rules.md) ／ [コンビニ掃引2026-08=完了・裁定待ち3件](konbini_sweep_2026_08_state.md) — GO待ち ／ [SEO: インデックス未登録6.65万対策=ハブ3点実装済](seo_index_coverage_state.md)
+- [うる星=版/巻/刷タブ正規ルール](urusei_version_display_rules.md) ／ [コンビニ掃引2026-08=完了・裁定待ち3件](konbini_sweep_2026_08_state.md) — GO待ち ／ [SEO: Google未登録=クロール待ち・新ハブも54件中0登録(09-23)](seo_index_coverage_state.md)
 - [【裁定・実装済】/shinkan=恒久URL+月はh2(競合2社も同型)](shinkan_permanent_hub_design.md) — 日付リダイレクトは却下(平均10.1位の唯一のハブ資産を賭ける価値なし)
 - [SEO: 発売日の着地面=/shinkan月別静的頁+今週/来月](seo_release_date_pages.md) ／ [【道具】GSC/Bing Webmaster を直接読む(_gsc.py/_bwt.py)](search_console_bing_api_access.md) — 鍵はrepo外・設定の罠3つ(組織ポリシー/PKCS#8/sc-… ／ [【罠・封鎖済】CF解析のUNK偽レコードで「29.6%が504」と誤診断](cf_analytics_unk_artifact.md) — 素の件数は3倍に化ける。検算=Worker invocation…
 - [【実測】Bing流入はホーム1枚が8割・作品頁56枚のみ](bing_search_reality_2026_09.md) — Googlebot実数58/日=一周3.3年。著者頁肉付けは否定… ／ [【競合実測】mangaseek=78kインデックスの正体は22年のドメイン年齢](competitor_mangaseek_teardown.md) — 薄さ/sitemap/URL設計はどれも勝因でない ／ [【裁定・作らない】日本以外のアクセス制限](geo_restriction_not_wired.md) — 未配線のまま。有効化すると451でインデックス落ち
