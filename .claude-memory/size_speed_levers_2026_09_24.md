@@ -1,6 +1,6 @@
 ---
 name: size-speed-levers-2026-09-24
-description: 【実測2026-09-24】容量/ファイル数/表示速度の残りレバー=巻サムネ3重SSR(-104MB・長期作HTML-40%)/DotGothic16のフォントCSS30KBが全頁で描画ブロック/作品1本の著者頁(ファイル-11%)/開発頁が本番公開。床44KBはNext構造で削れない
+description: 【実測2026-09-24・1と2は実装済=週次待ち】容量/ファイル数/表示速度の残りレバー=巻サムネ3重SSR(-104MB・長期作HTML-40%)/DotGothic16のフォントCSS30KBが全頁で描画ブロック/作品1本の著者頁(ファイル-11%)/開発頁が本番公開。床44KBはNext構造で削れない
 metadata:
   type: project
 ---
@@ -21,3 +21,9 @@ metadata:
   ★home-design-12 はホームの実体(D3Nav)を含むので消し方に注意。
 - 小さすぎて推さない: 巻説明をRSCから後読み化(ONE PIECE の manga prop 57KB の大半)/ Next/Image のインライン style(約100MB)/ JS(初回134KB・共通102KB)。
 関連: [[r2_class_a_budget_arithmetic]] [[index_lightening_plan]]
+
+## ★2026-09-24 ユーザ「1と2だけgo」→ 実装済(commit 383d53ec8・本番は週次)
+- 巻サムネ: SSRは1コピー、`mounted` 後に3コピー。ループ初期化と #v<N> は mounted 依存。実ビルド one-piece 344→**207KB**・img 354→124。
+- フォント: `lib/fonts.ts` の **DOT_HEADING** を使う部品だけが読む(layout の body から除去)。作品頁/contact はフォントCSS無し・ホーム/browse/shinkan は従来どおり。
+  番人 `_check-shell-wiring.py` **検査5**(器が lib/fonts を読む / 生の dot-heading → FAIL・負テスト済)。
+- 3(作品1本の著者頁)・4(開発頁の公開)は**見送り**(ユーザ裁定)。
