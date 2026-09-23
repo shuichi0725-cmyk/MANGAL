@@ -3,6 +3,7 @@ import { loadMasters, loadArtBooks, loadIndexSummary } from "@/lib/loadData";
 import type { ListBundle } from "@/lib/schema";
 import HomeClient from "../HomeClient";
 import BrowseShell from "@/components/BrowseShell";
+import { preloadListIndex } from "@/lib/preloadIndex";
 
 export const metadata = {
   // ★layout の template が "%s | MANGAL" を付けるので、ここで MANGAL を書かない(二重表示になる)
@@ -16,6 +17,7 @@ export const metadata = {
  *  ★manga は props で送らず(空配列) HomeClient がクライアントで索引を遅延 fetch。
  *  SSR payload = master + 画集のみ(軽量)。 */
 export default function BrowsePage() {
+  preloadListIndex(); // ★一覧索引の通信を HTML の段階で始める(2026-09-23)
   const masters = loadMasters();
   const data: ListBundle = { manga: [], artBooks: loadArtBooks(), ...masters };
   // ★総数・分類件数だけ先に渡す(フル索引到着まで「全100件」と嘘をつかないため)

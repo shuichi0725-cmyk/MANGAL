@@ -346,11 +346,16 @@ export default function HomeClient({ data, summary }: Props) {
       {isPreview && (
         <div className="mb-3 rounded-card border border-dashed border-[var(--color-accent)]/40 px-3 py-2 text-[10px] leading-relaxed text-ink/60">
           <span className="font-bold text-[var(--color-accent)]">診断</span>{" "}
-          索引: 取得{perfDiag.fullFetchMs ?? "–"}ms / デコード{perfDiag.fullDecodeMs ?? "–"}ms{" · "}
+          索引({perfDiag.idxFormat === "col" ? "列形式" : perfDiag.idxFormat === "row" ? "行配列" : "–"}): 取得
+          {perfDiag.fullFetchMs ?? "–"}ms / デコード{perfDiag.fullDecodeMs ?? "–"}ms{" · "}
           <span className="font-bold text-rose-600">
-            haystack同期{perfDiag.haySyncMs}ms({perfDiag.haySyncRows.toLocaleString()}行)
+            haystack同期{perfDiag.haySyncMs}ms({perfDiag.haySyncRows.toLocaleString()}行
+            {perfDiag.romaSyncRows ? `+ローマ字${perfDiag.romaSyncRows.toLocaleString()}` : ""})
           </span>{" · "}
-          空き時間{perfDiag.hayIdleMs}ms({perfDiag.hayIdleRows.toLocaleString()}行){" · "}
+          空き時間{perfDiag.hayIdleMs}ms({perfDiag.hayIdleRows.toLocaleString()}行
+          {perfDiag.romaIdleRows ? `+ローマ字${perfDiag.romaIdleRows.toLocaleString()}` : ""}){" · "}
+          端末保存{perfDiag.hayCache ?? "–"}
+          {perfDiag.hayCacheMs != null ? `(${perfDiag.hayCacheMs}ms)` : ""}{" · "}
           検索{perfDiag.searchMs ?? "–"}ms({perfDiag.searchHits ?? "–"}件){" · "}
           別名{perfDiag.altFetchMs ?? "–"}ms{" · "}
           索引{isFullIndexLoaded() ? "完備" : "読込中"}({manga.length.toLocaleString()}件)

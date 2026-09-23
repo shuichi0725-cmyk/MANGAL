@@ -2,7 +2,14 @@
 
 import { useEffect, useState } from "react";
 import type { MangaListItem } from "./schema";
-import { decodeListIndex } from "./listIndexDecode";
+import { tagIndexVersion } from "./indexVersion";
+import {
+  decodeListIndex,
+  decodeListIndexRange,
+  indexRowCount,
+  indexVersionOf,
+  type RawListIndex,
+} from "./listIndexDecode";
 import { nowMs, perfDiag, since } from "./perfDiag";
 
 // ★一覧索引をクライアントで遅延ロード (= SSR props で 65k を送らない)。
@@ -11,7 +18,7 @@ import { nowMs, perfDiag, since } from "./perfDiag";
 // ★軽量化: 索引は {f:フィールド順, d:値配列[]} の配列形式(キー名の65,980回重複を排除)。
 //   ここでオブジェクトに復元(デコード層)するので、コンポーネントは無改修で m.title 等が使える。
 //   catch は別ファイル(manga-catch-index.json)を遅延ロードして後から merge = カード維持・主索引軽量。
-type RawIndex = { f: string[]; d: unknown[][] };
+type RawIndex = RawListIndex;
 let _cache: MangaListItem[] | null = null;       // head(部分) → full に置換される
 let _cacheIsFull = false;
 let _inflight: Promise<MangaListItem[]> | null = null;
@@ -50,31 +57,68 @@ function loadCatch(): void {
 //   検索確定・フィルタ時は ensureFullIndex() で即時開始(headだけで検索する誤答窓を最小化)。
 async function decodeChunked(raw: RawIndex): Promise<MangaListItem[]> {
   const CH = 8000;
+  const n = indexRowCount(raw);
   const out: MangaListItem[] = [];
-  for (let i = 0; i < raw.d.length; i += CH) {
-    out.push(...decode({ f: raw.f, d: raw.d.slice(i, i + CH) }));
-    if (i + CH < raw.d.length) await new Promise((r) => setTimeout(r, 0));
+  for (let i = 0; i < n; i += CH) {
+    out.push(...decodeListIndexRange(raw, i, i + CH));
+    if (i + CH < n) await new Promise((r) => setTimeout(r, 0));
   }
   return out;
 }
 
 let _fullState: "idle" | "loading" | "done" = "idle";
 
+// ★取得開始を早める(2026-09-23): 旧=初描画後の手すき(最大2秒待ち)まで通信自体を始めなかった。
+//   通信は主スレッドを塞がないので先に始め、重い解析(JSON.parse+復元)だけを手すきに回す。
+//   /browse・/list は HTML の <link rel=preload>(同じURL・同じ取得モード)でさらに前倒しする
+//   (app/browse/page.tsx・app/list/page.tsx)。 priority=low = 書影やJSより先に帯域を奪わない。
+let _dl: Promise<Response> | null = null;
+let _dlT0 = 0;
+
+/** フル索引の通信だけを(まだなら)開始する。解析はしない。冪等。 */
+export function startFullDownload(): void {
+  if (_dl || _cacheIsFull) return;
+  _dlT0 = nowMs();
+  // ★列形式(ブラウザ専用・約3割軽い)。fetch先は文字列リテラルで書く
+  //   (_audit-index-hygiene.py が lib/ の fetch("/manga-*.json") を拾って実在確認する)。
+  _dl = fetch("/manga-list-cols.v1.json", { priority: "low" } as RequestInit);
+  _dl.catch(() => {}); // 待つ前に失敗しても未処理エラーにしない(実処理は loadFullRaw)
+}
+
+/** フル索引の生データ。列形式が取れなければ行配列へ戻る。 */
+async function loadFullRaw(): Promise<RawIndex> {
+  startFullDownload();
+  try {
+    const r = await (_dl as Promise<Response>);
+    if (!r.ok) throw new Error(`列形式索引 ${r.status}`);
+    const raw = (await r.json()) as RawIndex;
+    perfDiag.idxFormat = "col";
+    return raw;
+  } catch {
+    // ★列形式が無い/壊れている → 従来の行配列で動かす(一覧・検索は同じ結果)。
+    //   例: 機能蒸留(索引に触れない)で新コードだけ先に本番へ出た週。次の週次で列形式が上がれば自然に切り替わる。
+    const r = await fetch("/manga-list-index.json");
+    if (!r.ok) throw new Error(`索引取得失敗 ${r.status}`);
+    perfDiag.idxFormat = "row";
+    return (await r.json()) as RawIndex;
+  }
+}
+
 /** フル索引の取得を(まだなら)開始する。検索/フィルタ開始時に呼んで正確性を担保。冪等。 */
 export function ensureFullIndex(): void {
   if (_fullState !== "idle") return;
   _fullState = "loading";
-  const _t0 = nowMs();
+  startFullDownload();
+  const _t0 = _dlT0 || nowMs(); // 通信開始から数える(前倒しした分も含めて「取得」)
   let _tDecode = 0;
-  fetch("/manga-list-index.json")
-    .then((r) => {
-      if (!r.ok) throw new Error(`索引取得失敗 ${r.status}`);
-      return r.json();
-    })
+  loadFullRaw()
     .then((raw: RawIndex) => {
       perfDiag.fullFetchMs = since(_t0); // 取得+解凍+JSON.parse
       _tDecode = nowMs();
-      return decodeChunked(raw);
+      return decodeChunked(raw).then((items) => {
+        tagIndexVersion(items, indexVersionOf(raw)); // 検索の下ごしらえ保存の鍵(版の無い行配列は保存しない)
+        return items;
+      });
     })
     .then((items) => {
       perfDiag.fullDecodeMs = since(_tDecode);
@@ -86,6 +130,8 @@ export function ensureFullIndex(): void {
     })
     .catch(() => {
       _fullState = "idle"; // 失敗時は再試行可能に
+      _dl = null; // 通信もやり直せるように(失敗したResponseを握り続けない)
+      _dlT0 = 0;
     });
 }
 
@@ -119,6 +165,7 @@ function scheduleIdle(fn: () => void, timeout = 2000): void {
 function fetchIndex(): Promise<MangaListItem[]> {
   if (_cacheIsFull && _cache) return Promise.resolve(_cache);
   if (_inflight) return _inflight;
+  startFullDownload(); // ★通信は head と並走で今すぐ(解析は下の手すき)
   const headP: Promise<void> = _cache
     ? Promise.resolve()
     : fetch("/manga-list-head.json")

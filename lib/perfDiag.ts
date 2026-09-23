@@ -31,6 +31,15 @@ export type PerfDiag = {
   searchHits: number | null;
   /** 別名索引(初回検索時に遅延取得) */
   altFetchMs: number | null;
+  /** ★2026-09-23: フル索引の形式(col=列形式・軽い / row=行配列へフォールバック) */
+  idxFormat: "col" | "row" | null;
+  /** ★2026-09-23: 下ごしらえの端末保存(hit=保存分を使った / miss=作って保存 / off=保存不可・版なし) */
+  hayCache: "hit" | "miss" | "off" | null;
+  /** hit 時の読み出し時間(IndexedDB→復元) */
+  hayCacheMs: number | null;
+  /** ★2026-09-23: ローマ字層(英字クエリ用)を空き時間/同期で埋めた行数。日本語検索はこの層を待たない */
+  romaIdleRows: number;
+  romaSyncRows: number;
 };
 
 export const perfDiag: PerfDiag = {
@@ -43,6 +52,11 @@ export const perfDiag: PerfDiag = {
   searchMs: null,
   searchHits: null,
   altFetchMs: null,
+  idxFormat: null,
+  hayCache: null,
+  hayCacheMs: null,
+  romaIdleRows: 0,
+  romaSyncRows: 0,
 };
 
 /** 経過ミリ秒(整数)。 performance が無い環境でも落ちない。 */

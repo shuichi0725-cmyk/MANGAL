@@ -4,6 +4,7 @@ import ListClient from "@/components/ListClient";
 import { hubDefs, hubHref } from "@/lib/hubs";
 import { loadMasters, loadArtBooks, loadIndexSummary } from "@/lib/loadData";
 import type { ListBundle } from "@/lib/schema";
+import { preloadListIndex } from "@/lib/preloadIndex";
 
 const SITE = "https://mangal-db.com";
 
@@ -30,6 +31,7 @@ export function generateMetadata() {
  *    プレビュー(100件)は全量=初期量なので現実装のままでよい。 チャンク生成は
  *    本番ビルド(R2移行)時に実装。 */
 export default function ListPage() {
+  preloadListIndex(); // ★一覧索引の通信を HTML の段階で始める(2026-09-23)
   const masters = loadMasters();
   const data: ListBundle = { manga: [], artBooks: loadArtBooks(), ...masters };
   const total = loadIndexSummary().total;
