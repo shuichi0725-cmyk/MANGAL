@@ -15,6 +15,8 @@ const ORG_RE = /(社|書店|書房|出版|文庫|編集部|プロダクション
 export const dynamicParams = false;
 
 export async function generateStaticParams() {
+  // ★差分反映の部分ビルド(MANGAL_ONLY_MANGA_FILE)は漫画頁しか同期しない=著者2万頁は作らない(ビルド時間)。
+  if (process.env.MANGAL_ONLY_MANGA_FILE) return [{ key: "_empty" }];
   const keys = allAuthorKeys().map((key) => ({ key }));
   // ★空ガード(2026-08-15): output: export は params 0件のルートを「generateStaticParams が無い」
   //   と見なしてビルドを落とす。著者keyは authors[].romaji がある頁からしか作れないので、

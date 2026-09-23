@@ -59,3 +59,30 @@ describe("computeRelated 穴埋め(同誌/同ジャンル)", () => {
     expect(computeRelated(target, all).length).toBe(8);
   });
 });
+
+/** 2026-09-23 見直し: うる星やつらの関連が「同作者」の代表作を出せていなかった件の回帰テスト */
+describe("computeRelated 同作者の選び方", () => {
+  const vols = (n: number) => [{ type: "standard", volumes: Array.from({ length: n }, (_, i) => ({ number: i + 1 })) }];
+
+  it("著者5人以上の候補(アンソロジー)は同作者に数えない", () => {
+    const target = mk({ slug: "main", title: "本編作品", authors: [{ name: "作家甲" }] as never, year_started: 1980 });
+    const antho = mk({
+      slug: "antho", title: "記念アンソロジー", year_started: 1981,
+      authors: ["作家甲", "乙", "丙", "丁", "戊"].map((name) => ({ name })) as never,
+    });
+    const own = mk({ slug: "own", title: "別の連載", authors: [{ name: "作家甲" }] as never, year_started: 1990 });
+    const r = computeRelated(target, [target, antho, own]);
+    expect(r.find((s) => s.m.slug === "own")?.why).toBe("同作者");
+    expect(r.find((s) => s.m.slug === "antho")?.why).not.toBe("同作者");
+  });
+
+  it("同作者は 3冊以上の作品が先、同じ段では発表年の近い順", () => {
+    const target = mk({ slug: "t", title: "代表作その一", authors: [{ name: "作家乙" }] as never, year_started: 1980, editions: vols(34) as never });
+    const oneShotNew = mk({ slug: "oneshot-new", title: "最近の読切", authors: [{ name: "作家乙" }] as never, year_started: 2024, editions: vols(1) as never });
+    const oneShotNear = mk({ slug: "oneshot-near", title: "昔の読切", authors: [{ name: "作家乙" }] as never, year_started: 1981, editions: vols(1) as never });
+    const longFar = mk({ slug: "long-far", title: "晩年の連載", authors: [{ name: "作家乙" }] as never, year_started: 2019, editions: vols(20) as never });
+    const longNear = mk({ slug: "long-near", title: "同時期の連載", authors: [{ name: "作家乙" }] as never, year_started: 1987, editions: vols(38) as never });
+    const r = computeRelated(target, [target, oneShotNew, oneShotNear, longFar, longNear]).map((s) => s.m.slug);
+    expect(r).toEqual(["long-near", "long-far", "oneshot-near", "oneshot-new"]);
+  });
+});

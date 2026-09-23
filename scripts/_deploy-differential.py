@@ -10,7 +10,9 @@
     変わっていたら abort → 週次蒸留を要求。部分ビルドHTMLが参照するチャンクが
     本番に無い事故を構造的に封鎖(buildId固定 "mangal-static" が前提)。
  2. 対象自動検出: marker(前回本番反映commit) → HEAD の data/manga.v2 差分。
- 3. 部分ビルド: 対象slugだけの一時データdir(D:\\mangal-cache\\diffdata)で next build。
+ 3. 部分ビルド: 公開済み全頁+対象頁を hardlink した一時データdir(.cache/diffdata)で next build。
+    生成は対象頁だけ(MANGAL_ONLY_MANGA_FILE)。★2026-09-23 まで対象頁だけのデータで建てており、
+    関連作品・著者key(-2連番)が部分集合から計算されていた(うる星やつら→同じ回の44頁から関連を選出)。
  4. ★選択同期: 対象頁ファイル(out/manga/<内部slug>.html/.txt) + 本番索引3本(ルートキー)のみPUT。
     部分ビルドのホーム/一覧等は subset データで焼かれた汚染物 = **絶対に同期しない**。
  5. 削除: marker比で消えた yml は R2 の該当頁を DELETE。
@@ -220,22 +222,42 @@ def main():
     ab = os.path.join(ROOT, "data", "art-books.v2")
     if os.path.isdir(ab):
         shutil.copytree(ab, os.path.join(DIFFDATA, "art-books"))
-    inner = {}
-    for st in stems:
+    # ★全件ステージング(2026-09-23): 旧=対象頁だけを置いてビルド → 頁が参照する「全作品」がその部分集合に縮み、
+    #   関連作品が「同じ回に差分反映した頁」から選ばれ(うる星やつら→赤いペガサス/おれは直角…の44頁)、
+    #   著者key の -2 連番(同読み別人418人)も部分集合で振り直されてズレていた。
+    #   → 公開済み頁(prod-pages-manifest = 機能蒸留と同じデータ凍結)+ 対象頁を hardlink で全部置き、
+    #     **生成**だけを MANGAL_ONLY_MANGA_FILE で対象頁に絞る(app/manga の generateStaticParams)。
+    pm_path_all = os.path.join(ROOT, ".cache", "prod-pages-manifest.json")
+    if not os.path.exists(pm_path_all):
+        print("★abort: prod-pages-manifest無し(全件ステージング不可)。週次蒸留後に scripts/_init-pages-manifest.py"); sys.exit(3)
+    prod_stems = set(json.load(open(pm_path_all, encoding="utf-8")))
+    target = set(stems)
+    inner, linked = {}, 0
+    for st in sorted((prod_stems - set(dropped)) | target):
         src = os.path.join(ROOT, "data", "manga.v2", f"{st}.yml")
         if not os.path.exists(src):
-            print(f"  skip(実体なし): {st}")
+            if st in target:
+                print(f"  skip(実体なし): {st}")
             continue
-        shutil.copyfile(src, os.path.join(DIFFDATA, "manga", f"{st}.yml"))
-        d = yaml.safe_load(open(src, encoding="utf-8"))
-        inner[st] = d.get("slug") or st
+        dst = os.path.join(DIFFDATA, "manga", f"{st}.yml")
+        try:
+            os.link(src, dst)  # 同一ボリューム=hardlink(読み取り専用利用)
+        except OSError:
+            shutil.copyfile(src, dst)
+        linked += 1
+        if st in target:
+            d = yaml.safe_load(open(src, encoding="utf-8"))
+            inner[st] = d.get("slug") or st
     if not inner and not dropped:
         print("実体のある対象なし。"); return
-    print(f"ステージング {len(inner)}頁 → {DIFFDATA}")
+    only_file = os.path.join(DIFFDATA, "_only-manga.txt")
+    with open(only_file, "w", encoding="utf-8", newline="\n") as f:
+        f.write("\n".join(sorted(set(inner.values()))) + "\n")
+    print(f"ステージング 全{linked}頁(データ) / 生成対象 {len(inner)}頁 → {DIFFDATA}")
 
     # --- 4. 部分ビルド ---
     print("部分ビルド開始(対象頁のみ)…", flush=True)
-    benv = dict(os.environ, MANGAL_DATA_DIR=DIFFDATA)
+    benv = dict(os.environ, MANGAL_DATA_DIR=DIFFDATA, MANGAL_ONLY_MANGA_FILE=only_file)
     # ★Nodeヒープ上限(既定~4GB)ではコンパイル段でOOM死(build worker exited with code: 134)。
     #   週次(_wkbuild.ps1)・機能蒸留(_deploy-feature.py)と同じ12GBを既定に。2026-09-22実踏。
     benv.setdefault("NODE_OPTIONS", "--max-old-space-size=12288")

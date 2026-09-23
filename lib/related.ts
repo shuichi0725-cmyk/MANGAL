@@ -13,7 +13,7 @@ export function computeRelated(manga: Manga, all: Manga[], limit = 10) {
   );
   // ★多人数名義ガード(2026-07-15 ソーサリアン型=単巻読切連番の統合頁・著者14人):
   //   著者5人以上の頁は「同作者」スコアを使わない(各作家の全作品が無関係に並ぶため)。pin/シリーズ一致のみ。
-  const manyAuthors = names.size >= 5;
+  const manyAuthors = names.size >= MANY_AUTHORS;
   const t = manga.title;
   // ★pin: related_pin の slug は順序保持で最優先(例: ドラえもん→大長編ドラえもん)
   const pinRank = new Map((manga.related_pin ?? []).map((s, i) => [s, i]));
@@ -33,14 +33,31 @@ export function computeRelated(manga: Manga, all: Manga[], limit = 10) {
       score += 10;
       why = "シリーズ";
     }
-    const shared = !manyAuthors && [...m.authors, ...m.original_authors].some((a) => names.has(nk(a.name)));
+    // ★候補側の多人数名義ガード(2026-09-23): 著者5人以上の候補(アンソロジー・全集の月報寄稿など)は
+    //   その作家の作品として数えない。高橋留美子の頁に『水木しげる漫画大全集』(42名義)『しゃばけ漫画』(8名義)が
+    //   「同作者」で並び、うる星やつら・らんま・犬夜叉を押し出していた。
+    const candNames = [...m.authors, ...m.original_authors];
+    const shared = !manyAuthors && candNames.length < MANY_AUTHORS &&
+      candNames.some((a) => names.has(nk(a.name)));
     if (shared) {
       score += 5;
       if (!why) why = "同作者";
     }
     if (score > 0) scored.push({ m, score, why });
   }
-  scored.sort((a, b) => b.score - a.score || (b.m.year_started ?? 0) - (a.m.year_started ?? 0));
+  // ★並び(2026-09-23 見直し): 旧=発表年の新しい順 → 同作者が多い作家では最近の単発読切ばかりが上位10件を
+  //   占め、代表的な連載が出なかった(めぞん一刻の同作者10件 = 金の力/MAO/魔女とディナー/鏡が来た …)。
+  //   新 = 同スコア内で ①3冊以上続く作品を先 ②この作品と発表年が近い順 ③slug(ビルドごとに揺れない)。
+  //   人気の数値は使わない(穴埋め層と同じく、有名作へのリンク集中を避ける考え方)。
+  const year = manga.year_started ?? 9999;
+  const yd = (m: Manga) => Math.abs((m.year_started ?? 9999) - year);
+  scored.sort(
+    (a, b) =>
+      b.score - a.score ||
+      Number(isSeriesLength(b.m)) - Number(isSeriesLength(a.m)) ||
+      yd(a.m) - yd(b.m) ||
+      (a.m.slug < b.m.slug ? -1 : 1),
+  );
   const strong = scored.slice(0, limit);
   // ★穴埋め(2026-08-31 SEO): 同誌→同ジャンルを「発表年の近い順」で充填。
   //   人気順でなく年の近さで選ぶ=有名作へのリンク集中を避け、無名頁にも被リンクが回る。
@@ -48,7 +65,6 @@ export function computeRelated(manga: Manga, all: Manga[], limit = 10) {
   const { byMag, byGenre } = fillBuckets(all);
   const have = new Set(strong.map((s) => s.m.slug));
   have.add(manga.slug);
-  const year = manga.year_started ?? 9999;
   const take = (m: Manga) => {
     if (have.has(m.slug)) return false;
     have.add(m.slug);
@@ -69,6 +85,14 @@ export function computeRelated(manga: Manga, all: Manga[], limit = 10) {
 
 /** 穴埋めが目指す件数(強シグナルがこれ以上あれば充填しない) */
 const FILL_TO = 8;
+
+/** 多人数名義とみなす人数(アンソロジー/統合頁)。この人数以上は「同作者」の根拠にしない。 */
+const MANY_AUTHORS = 5;
+
+/** 3冊以上続く作品か(いずれかの版の冊数)。同作者の中で連載作を単発読切より先に出すための区分。 */
+function isSeriesLength(m: Manga): boolean {
+  return (m.editions ?? []).some((e) => (e.volumes ?? []).length >= 3);
+}
 
 /** 同誌/同ジャンルの年ソート済みバケット(module cache = 66kビルドで1回だけ構築)。
  *  ★per-page で全走査ソートすると 66k頁ビルドが数十分伸びるため、

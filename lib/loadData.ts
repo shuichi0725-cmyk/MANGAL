@@ -285,6 +285,15 @@ export function loadListBundle(): ListBundle {
 
 let cached: DataBundle | null = null;
 
+/** ★部分ビルドで生成する漫画頁(差分反映 2026-09-23)。env MANGAL_ONLY_MANGA_FILE = 1行1公開slug のファイル。
+ *  データは全件を読み(関連作品・著者key の -2 連番など「全作品」を見る処理のため)、頁の生成だけを絞る。
+ *  旧=対象頁だけのデータでビルド → うる星やつらの関連作品が「同じ回に差分反映した44頁」から選ばれていた。 */
+export function buildOnlyMangaSlugs(): string[] | null {
+  const p = process.env.MANGAL_ONLY_MANGA_FILE;
+  if (!p) return null;
+  return fs.readFileSync(p, "utf8").split(/\r?\n/).map((s) => s.trim()).filter(Boolean);
+}
+
 export function loadAllManga(): DataBundle {
   if (cached) return cached;
 

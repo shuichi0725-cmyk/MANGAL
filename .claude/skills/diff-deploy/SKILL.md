@@ -1,11 +1,11 @@
 ---
 name: diff-deploy
-description: 差分反映して=変更ページだけ部分ビルド→本番R2へ選択PUT(数分)。コードドリフト時は自動abort→週次蒸留へ誘導
+description: 差分反映して=変更ページだけ部分ビルド→本番R2へ選択PUT(~15分)。コードドリフト時は自動abort→週次蒸留へ誘導
 ---
 
 # 差分反映して (= 差分ビルドエンジン)
 
-トリガー語: **「差分反映して」**。データ修正(per-case/日次蒸留等)を**本番R2まで数分**で出す軽量ルート。
+トリガー語: **「差分反映して」**。データ修正(per-case/日次蒸留等)を**本番R2まで~15分**で出す軽量ルート。
 週次蒸留(フル~3h)との使い分け: **コードが変わったらフル**・データだけなら差分。
 
 ## 実行
@@ -14,7 +14,8 @@ python scripts/_deploy-differential.py --dry     # まず計画(検出結果)を
 python scripts/_deploy-differential.py           # marker→HEAD の data/manga.v2 差分を自動反映
 python scripts/_deploy-differential.py --only a,b,c   # 明示指定(SRC stem)
 ```
-所要 ≈ 部分ビルド数分 + PUT数秒。
+所要 ≈ 部分ビルド~12分(実測746秒・2頁) + PUT数秒。
+★**2026-09-23 から全件データでビルド**: 公開済み全頁を hardlink で置き、生成だけを対象頁に絞る(env `MANGAL_ONLY_MANGA_FILE`)。旧=対象頁だけのデータ → 関連作品が「同じ回に出した頁」から選ばれ(うる星やつら→赤いペガサス等)、著者keyの -2 連番もズレていた。著者2万頁は差分ビルドでは作らない。
 
 ## エンジンの安全機構(理解して使う)
 1. **コードドリフトガード**: 前回フルビルド以降に app/manga・app/layout.tsx・components/・lib/・next.config.ts・package.json 等が変わっていたら**abort**(exit 4)→「週次蒸留して」が必要。部分ビルドHTMLが参照するチャンクが本番に無い事故の封鎖(buildId固定が前提)
