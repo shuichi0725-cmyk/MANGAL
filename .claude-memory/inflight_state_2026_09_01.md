@@ -155,3 +155,4 @@ IndexNow は 298 URL 受理(削除分の通知)。鍵ファイルも本番に載
   週次の経路で問題なし: zenshuu-view.json は repo の data/ を静的import(staging非依存)/ robots は public/ /
   /authors分割と sitemap の分割頁72件は週次のフルビルド+_gen-sitemap で載る(titles-pages は週次 preflight INDEXES で既に同期)。
   週次公開後のユーザ作業 = GSC で `/authors` の登録リクエストやり直し + 全集10件(4日目分)。
+- 関連作品の見直し + 差分反映の全件データ化(22fa5f9d5)= **週次で出る**(漫画頁コード変更)。週次後は差分反映が ~15分になる。
