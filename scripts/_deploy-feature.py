@@ -57,8 +57,11 @@ WORKER = "https://mangal-db.com"
 # 同期から恒久除外(= データ世界。機能蒸留は絶対に触らない)
 from _index_files import INDEX_FILES  # 索引一覧の単一ソース(2026-09-23)。機能蒸留は索引に触れない
 IDX = INDEX_FILES
+# ★titles-pages.json(2026-09-23): /titles・/titles/<part> 351頁の単一ソース。ここに無いとビルドが
+#   空フォールバックで「データ準備中」の /titles を作り、本番の題名索引を上書きするところだった
+#   (8/31の追加以降、機能蒸留が一度も走らず未発覚。週次側は _weekly-preflight の INDEXES で既に封鎖済み)。
 MASTERS = ("demographics.yml", "genres.yml", "magazines.yml", "publisher-aliases.yml",
-           "publishers.yml", "slug-aliases.yml") + IDX
+           "publishers.yml", "slug-aliases.yml", "titles-pages.json") + IDX
 CT = {
     ".html": "text/html; charset=utf-8", ".json": "application/json; charset=utf-8",
     ".js": "text/javascript; charset=utf-8", ".css": "text/css; charset=utf-8",
@@ -207,6 +210,15 @@ def main():
             print(open(BUILD_LOG, encoding="utf-8", errors="replace").read()[-1500:])
             sys.exit(6)
         print(f"build OK ({(time.time()-t0)/60:.1f}分)", flush=True)
+        # ★データ欠けの番人(2026-09-23): loadData は入力ファイルが無いと「空で続行」する(ビルドは緑)。
+        #   その空ページを本番へ PUT すると公開中の面を壊す → 警告が1行でもあれば同期させない。
+        missing = [ln.strip() for ln in open(BUILD_LOG, encoding="utf-8", errors="replace")
+                   if ln.lstrip().startswith("[loadData]") and "無い" in ln]
+        if missing:
+            print("★abort: ビルド入力のファイル欠け = 空の面ができている(stagingに追加が要る):")
+            for ln in sorted(set(missing)):
+                print("   " + ln)
+            sys.exit(6)
 
     # --- 3. 出力サニティ ---
     if not os.path.exists(os.path.join(OUT, "index.html")):
