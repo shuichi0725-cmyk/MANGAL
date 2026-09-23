@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import CoverImage from "./CoverImage";
+import { DOT_HEADING } from "@/lib/fonts";
 
 /** 周年コーナー: 「今日で連載開始◯◯年」— 1巻発売日(完全日付)が今日と同じ月日の作品から、
  *  切りの良い周年(10の倍数>5の倍数>その他、N>=5)を優先して1作。データ=anniversaries.json(週次再生成)。 */
@@ -33,7 +34,7 @@ export default function AnniversaryDaily() {
   return (
     <section className="mt-4 px-4">
       <div className="rounded-xl border border-[var(--color-line)] bg-[var(--color-surface)] p-3.5 shadow-sm">
-        <h2 className="dot-heading text-[14px] font-extrabold">
+        <h2 className={`${DOT_HEADING} text-[14px] font-extrabold`}>
           🎂 今日で{pick.n}周年
           <span className="ml-1.5 text-[10px] font-semibold text-ink/45">1巻発売 {pick.y}年{mmdd.replace("-", "月")}日</span>
         </h2>

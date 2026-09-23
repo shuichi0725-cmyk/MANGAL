@@ -5,6 +5,7 @@ import Link from "next/link";
 import CoverImage from "./CoverImage";
 import MarqueeTitle from "./MarqueeTitle";
 import { sourceLabel, type AnimeSeasonEntry } from "@/lib/animeSeason";
+import { DOT_HEADING } from "@/lib/fonts";
 
 const SHOW = 12;
 
@@ -39,7 +40,7 @@ export default function AnimeSeasonCornerClient({
     <section className="mt-4 px-4">
       <div className="rounded-xl border border-[var(--color-line)] bg-[var(--color-surface)] p-3.5 shadow-sm">
         <div className="flex items-baseline justify-between">
-          <h2 className="dot-heading text-[14px] font-extrabold">📺 {label}アニメの原作</h2>
+          <h2 className={`${DOT_HEADING} text-[14px] font-extrabold`}>📺 {label}アニメの原作</h2>
           <Link href={`/anime/${seasonKey}`} className="text-[11px] font-semibold text-[var(--color-accent)]">
             全{total}作品 →
           </Link>

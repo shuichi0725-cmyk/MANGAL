@@ -4,6 +4,7 @@ import { useSearchParams } from "next/navigation";
 import Card from "@/components/ui/Card";
 import CatPict, { catKeyOf } from "@/components/CatPict";
 import type { IndexSummary, ListBundle, MangaListItem } from "@/lib/schema";
+import { DOT_HEADING } from "@/lib/fonts";
 
 type Props = { data: ListBundle; filtered?: MangaListItem[]; summary?: IndexSummary | null };
 
@@ -77,7 +78,7 @@ export default function CategoryHub({ data, filtered, summary }: Props) {
           独立カード + gap なら、落ちたカードは消えて残りがそのまま詰まる = 破綻しない。 */}
       {/* ★見出しはホームと同型(2026-09-07 ユーザ「ホームの感じで」)= 両頁そろえる(2026-09-08) */}
       <div className="mb-3 flex items-baseline gap-2.5">
-        <h2 className="dot-heading text-[18px] font-black">カテゴリ</h2>
+        <h2 className={`${DOT_HEADING} text-[18px] font-black`}>カテゴリ</h2>
         <span className="text-[9px] font-extrabold tracking-[0.26em] text-ink/45">BROWSE BY</span>
       </div>
       {/* ★PCで「でかすぎる」(2026-09-07 ユーザ指摘): 4列×2段=空白だらけだったので

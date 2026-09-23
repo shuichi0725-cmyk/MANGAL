@@ -307,6 +307,43 @@ def check4_page_floor() -> None:
            "器に重い物が載っていないか検査3と併せて見る)" % (FLOOR_PROBE, kb, FLOOR_LIMIT_KB))
 
 
+def check5_font_scope() -> None:
+    """検査5: 飾り用ドット体(DotGothic16)を全頁の器に載せていないか / 生の dot-heading が無いか(静的)。
+
+    ★2026-09-24: 旧= layout の <body> に dotGothic.variable → @font-face 124個(展開91KB・br 30KB)が
+      **全頁で描画をブロック**(作品頁6.9万枚は未使用)。 使う部品だけが lib/fonts の DOT_HEADING を import する形にした。
+      (a) layout から到達する部品が lib/fonts を import したら、またフォントCSSが全頁に載る → FAIL
+      (b) className に生の "dot-heading" を書くとフォント変数が無く sans-serif に落ちる → FAIL(DOT_HEADING を使う)
+    """
+    reachable, _ = walk_from_layout()
+    shell_hits = []
+    for path in sorted(reachable):
+        f = rel(path)
+        if not f.startswith(WATCH_DIRS) or not os.path.exists(path):
+            continue
+        if re.search(r'from\s+["\']@/lib/fonts["\']', open(path, encoding="utf-8").read()):
+            shell_hits.append(f)
+    raw_hits = []
+    for d in WATCH_DIRS:
+        for dirpath, _dirs, files in os.walk(os.path.join(ROOT, d)):
+            for fn in files:
+                if fn.endswith((".tsx", ".ts")):
+                    p = os.path.join(dirpath, fn)
+                    if "dot-heading" in open(p, encoding="utf-8").read():
+                        raw_hits.append(rel(p))
+    if not shell_hits and not raw_hits:
+        ok("ドット体の範囲 = 器(layout)は不使用・生の dot-heading 無し(DOT_HEADING 経由のみ)")
+        return
+    for f in shell_hits:
+        fail("★器に載る部品がドット体(lib/fonts)を読む: " + f,
+             "フォントの @font-face 124個(br 30KB)が**全頁で描画をブロック**する(2026-09-24 に外した)。\n"
+             "       器ではなく、見出しを出す部品/頁の側で DOT_HEADING を使う。")
+    for f in sorted(set(raw_hits)):
+        fail("★生の dot-heading: " + f,
+             "className には lib/fonts の DOT_HEADING を使う(dot-heading + フォント変数の組)。\n"
+             "       生の dot-heading だとフォント変数が無く sans-serif に落ちる(見た目が黙って変わる)。")
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--list", action="store_true", help="到達部品と重い経路の一覧だけ出す")
@@ -326,6 +363,7 @@ def main() -> int:
     check2_breakpoints()
     check3_serialized_payload()
     check4_page_floor()
+    check5_font_scope()
 
     for m in oks:
         print(f"  OK   {m}")

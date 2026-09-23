@@ -11,7 +11,6 @@ import FilterRail from "@/components/FilterRail";
 import animeView from "@/data/anime-seasons-view.json";
 import { animeNavSeasons, type AnimeSeasonsView } from "@/lib/animeSeason";
 import { loadRailMasters } from "@/lib/loadData";
-import { dotGothic } from "@/lib/fonts";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://mangal-db.com"),
@@ -52,7 +51,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   const animeNav = animeNavSeasons((animeView as unknown as AnimeSeasonsView).order);
   return (
     <html lang="ja">
-      <body className={`min-h-screen flex flex-col theme-d3 ${dotGothic.variable}`}>
+      <body className="min-h-screen flex flex-col theme-d3">
         {/* PCマウスの横ドラッグを全横帯のスワイプ相当に変換(タッチは不介入) */}
         <GlobalDragScroll />
         {/* 共通ヘッダー(SiteHeader=client): ★ホームでは非表示 = Design12のE型ステータスバーが代替

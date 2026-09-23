@@ -132,14 +132,19 @@ export default function VolumeCoverflow({
   const scroller = useRef<HTMLDivElement>(null);
 
   const loop = n > LOOP_MIN;
-  const reps = loop ? [0, 1, 2] : [0];
+  // ★サーバ描画は1コピーだけ(2026-09-24): 旧=無限ループ用の3コピーをSSRし、HTMLに同じサムネ列が3回
+  //   書き出されていた(ONE PIECE マークアップ240KB中205KB・10巻超 5,197頁)。残り2コピーは
+  //   ハイドレーション後に足す。1コピー目の先頭=1巻が左端 なので、足した直後に中央コピーへ移しても見た目は同じ。
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+  const reps = loop && mounted ? [0, 1, 2] : [0];
 
   // 無限ループ + ★継ぎ目 detent(指定挙動): 最終巻↔1巻の継ぎ目を ★進行方向に応じて一度止める。
   //   ・左スワイプ(前進=scrollLeft増): 最終巻を超え 1巻が ★右端 に出た瞬間に停止 → 再スワイプでループ継続
   //   ・右スワイプ(後退=scrollLeft減): 1巻の手前 最終巻が ★左端 に出た瞬間に停止 → 再スワイプでループ継続
   //   3コピー描画で継ぎ目をシームレスに(detent解放後は逆コピーへ recenter = 巻き戻し無く連続)。
   useEffect(() => {
-    if (!loop) return;
+    if (!loop || !mounted) return; // 3コピーが揃ってから(set() は scrollWidth/3 前提)
     const el = scroller.current;
     if (!el) return;
     const set = () => el.scrollWidth / 3; // 1コピー幅
@@ -209,11 +214,14 @@ export default function VolumeCoverflow({
       el.removeEventListener("scroll", onScroll);
       clearTimeout(settle);
     };
-  }, [loop, n]);
+  }, [loop, n, mounted]);
 
   // ★/manga/slug#v<N> で第N巻にフォーカス(2026-07-15 ユーザ要望: ホーム「今月の新刊」→当月巻直行)。
   //   静的exportなのでhashはclient側で解釈。該当番号がこの版に無ければ何もしない。
+  const hashDone = useRef(false);
   useEffect(() => {
+    if (hashDone.current || (loop && !mounted)) return; // ループ時は3コピーが揃ってから1回だけ
+    hashDone.current = true;
     const hit = /^#v(\d+)$/.exec(window.location.hash);
     if (!hit) return;
     const i = vols.findIndex((v) => v.number === Number(hit[1]));
@@ -229,7 +237,7 @@ export default function VolumeCoverflow({
       el.scrollLeft = Math.max(0, base + i * t - el.clientWidth / 2 + t / 2);
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [mounted]);
 
   if (n === 0) return null;
   const cur = vols[sel];

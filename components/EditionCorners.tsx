@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import CoverImage from "./CoverImage";
+import { DOT_HEADING } from "@/lib/fonts";
 
 /** 版もののホームコーナー2本(2026-09-06 ユーザ裁定でカラー版コーナーと同じ作りに統一):
  *  ①📚 愛蔵版・合本(/aizouban) ②🎁 特装版・限定版(/tokusouban)。
@@ -54,7 +55,7 @@ function Frame({
     <section className="mt-4 px-4">
       <div className="rounded-xl border border-[var(--color-line)] bg-[var(--color-surface)] p-3.5 shadow-sm">
         <div className="flex items-baseline justify-between gap-2">
-          <h2 className="dot-heading text-[14px] font-extrabold">{emoji} {title}</h2>
+          <h2 className={`${DOT_HEADING} text-[14px] font-extrabold`}>{emoji} {title}</h2>
           <Link href={href} className="spring-press shrink-0 text-[11px] font-bold text-[var(--color-accent)]">
             全部見る →
           </Link>

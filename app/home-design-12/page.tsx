@@ -18,6 +18,7 @@ import { KotobaDaily, TriviaDaily, GenreRouletteDaily } from "@/components/Daily
 import HeroD3 from "./HeroD3";
 import Card from "@/components/ui/Card";
 import StatusDate from "./StatusDate";
+import { DOT_HEADING } from "@/lib/fonts";
 
 export const metadata = { robots: { index: false, follow: false } };  // 実験頁=非索引
 
@@ -99,7 +100,7 @@ export default function Design12() {
       {/* カテゴリ8枚(SVG線画・/browseのカテゴリカードと同じ行き先) */}
       <section className="mt-5 px-4">
         <div className="flex items-baseline gap-2.5">
-          <h2 className="dot-heading text-[18px] font-black">カテゴリ</h2>
+          <h2 className={`${DOT_HEADING} text-[18px] font-black`}>カテゴリ</h2>
           <span className="text-[9px] font-extrabold tracking-[0.26em] text-ink/45">BROWSE BY</span>
         </div>
         {/* ★独立カード方式(2026-09-08 ユーザ「そろえる」)= /browse の CategoryHub と同一。
@@ -159,7 +160,7 @@ export default function Design12() {
       <section className="mt-4 px-4">
         <Tile className="p-3.5">
           <div className="flex items-baseline justify-between">
-            <h2 className="dot-heading text-[14px] font-bold">📦 今月の新刊</h2>
+            <h2 className={`${DOT_HEADING} text-[14px] font-bold`}>📦 今月の新刊</h2>
             <Link href="/shinkan?go=today" className="spring-press text-[11px] font-bold text-[var(--color-accent)]">全部見る →</Link>
           </div>
           <MonthReleasesClient
@@ -208,7 +209,7 @@ export default function Design12() {
 
       <section className="mt-4 px-4">
         <Tile className="p-3.5">
-          <h2 className="dot-heading border-l-4 border-[var(--color-accent)] pl-2.5 text-[14px] font-extrabold">
+          <h2 className={`${DOT_HEADING} border-l-4 border-[var(--color-accent)] pl-2.5 text-[14px] font-extrabold`}>
             特集: 週末で読み切る、全5巻以内の完結作
             <span className="ml-1.5 text-[10px] font-semibold text-ink/45">週替わり</span>
           </h2>

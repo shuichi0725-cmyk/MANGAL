@@ -4,6 +4,7 @@ import Link from "next/link";
 import CoverImage from "./CoverImage";
 import LikeButton from "./LikeButton";
 import { jstDayIndex, jstDateStr, picksForDay, useSansedaiStock, personaName } from "./SansedaiDaily";
+import { DOT_HEADING } from "@/lib/fonts";
 
 /** 今日の一冊(毎日更新・3人分/日)。
  *  ★日替わり分散配置(2026-07-06 ユーザ要望): 3冊の「まとまり方と場所」が日ごとに変わる。
@@ -29,7 +30,7 @@ export default function FeaturedDaily({ slot = 0 }: { slot?: number }) {
     <section className="mt-4 px-4">
       <div className="rounded-xl border border-[var(--color-line)] bg-[var(--color-surface)] p-3.5 shadow-sm">
         <div className="flex items-baseline justify-between">
-          <h2 className="dot-heading text-[14px] font-extrabold">
+          <h2 className={`${DOT_HEADING} text-[14px] font-extrabold`}>
             📖 今日の一冊
             {isFirst && <span className="ml-1.5 text-[10px] font-semibold text-ink/45">{date}・毎日更新</span>}
           </h2>
