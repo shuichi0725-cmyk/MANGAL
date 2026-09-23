@@ -48,3 +48,10 @@ grep -n -A15 "def apply_.*<機構名>" scripts/_promote-bulk-v2.py  # ③ どの
 出なければ上の①②③を順に潰す。**死んだ設定は残さず撤去する**(次の人が「書いてあるのに効かない」を再調査する)。
 
 関連 [[feedback_absence_needs_verification]] [[shell_props_serialized_to_all_routes]]
+
+## 実例追加(2026-09-23): edition-overrides を持つ頁には種4の巻が載らない
+『愛』(ai-1995・高見まこ)に種4で1巻を足したが、頁は2巻のまま。**edition-overrides.json に ai-1995 があり**、
+build_yml が editions を**全置換**するため(同題の別作者 藤すみれ『愛』を締め出す目的の上書き)。
+reflect は「減少なし・検証ゲートOK」で**黙って通る**。→ 巻を足す前に `edition-overrides.json` に公開slugのキーが
+無いか確かめる。在れば override 側の volumes に足す(種4行は効かないので置かない)。
+検出: 反映後に「足したISBNが頁に在るか」を数えれば一発で出る(今回それで気づいた)。
