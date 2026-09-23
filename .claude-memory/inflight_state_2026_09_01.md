@@ -151,3 +151,7 @@ IndexNow は 298 URL 受理(削除分の通知)。鍵ファイルも本番に載
   出たら GSC で `/authors` の登録リクエストをやり直す(ユーザ作業)。
 - ★機能蒸留の staging に titles-pages.json が無かった → 追加+ビルド入力欠けで abort する番人(0ea46b206)。
   直す前の機能蒸留だと本番 /titles を空頁で上書きしていた。
+- ★**2026-09-23 ユーザ裁定: 上の3点(全集title・robots /api/・/authors分割)は機能蒸留せず次の週次蒸留で出す。**
+  週次の経路で問題なし: zenshuu-view.json は repo の data/ を静的import(staging非依存)/ robots は public/ /
+  /authors分割と sitemap の分割頁72件は週次のフルビルド+_gen-sitemap で載る(titles-pages は週次 preflight INDEXES で既に同期)。
+  週次公開後のユーザ作業 = GSC で `/authors` の登録リクエストやり直し + 全集10件(4日目分)。
