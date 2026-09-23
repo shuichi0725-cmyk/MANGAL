@@ -79,6 +79,16 @@ export default async function GenrePage({ params }: { params: Promise<{ key: str
         <p className="mt-1 text-[11px] text-ink/45">
           全 <b className="tabular-nums">{items.length.toLocaleString()}</b> 作品（完結 {completed.toLocaleString()}）・人気順
         </p>
+        {/* ★作品頁のジャンルチップはこの面へ来る(SEO=内部リンク)。 絞り込みたい人向けに検索への入口を置く(2026-09-23 ユーザ裁定)。
+            /browse?… は robots で Disallow 済 = クロールの行き止まりにはならない。 */}
+        <p className="mt-3">
+          <Link
+            href={`/browse?genre=${encodeURIComponent(key)}`}
+            className="spring-press inline-flex items-center rounded-[var(--radius-tag)] px-3 py-1.5 text-[12px] font-bold bg-[var(--color-accent)] text-white"
+          >
+            この条件で検索・絞り込む →
+          </Link>
+        </p>
 
         {/* 下位面: 完結済み / 年代別(閾値以上の組だけ頁が在る) */}
         {subs.length > 0 && (
