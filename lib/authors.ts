@@ -1,5 +1,6 @@
 import { loadAllManga } from "./loadData";
 import type { Manga } from "./schema";
+import { splitAuthors, type AuthorsPages } from "./authorsIndex";
 
 /** 著者静的ページ用マップ(2026-08-10 preview試作)。
  *  loadAllManga から著者→作品を組み立てる(ビルド時のみ・moduleキャッシュ)。
@@ -93,4 +94,16 @@ export function authorKeyFor(name: string): string | null {
     for (const [k, a] of authorMap()) _byName.set(a.name, k);
   }
   return _byName.get(name) ?? null;
+}
+
+let _pages: AuthorsPages | null = null;
+
+/** 著者50音索引の頁割り(/authors と /authors/[part] が共有。割り方は lib/authorsIndex.ts)。 */
+export function authorsPages(): AuthorsPages {
+  if (!_pages) {
+    _pages = splitAuthors(
+      [...authorMap().values()].map((a) => ({ key: a.key, name: a.name, kana: a.kana, n: a.works.length + a.originals.length })),
+    );
+  }
+  return _pages;
 }

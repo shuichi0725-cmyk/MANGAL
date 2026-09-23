@@ -105,6 +105,15 @@ if anime_sub:
 else:
     print("★WARN: out/anime/ に季節頁が無い → sitemapに載せられない(build後に実行しているか?)")
 
+# ★著者索引の分割頁(2026-09-23): 旧 /authors は1枚8.6MBで GSC の登録リクエストが失敗 → /authors/<行>-<n> に分割。
+#   頁割りは lib/authorsIndex.ts が単一ソース → out/authors/*.html の実在から拾う(索引 /authors は fixed に在る)。
+authors_sub = [u for u in _walk_html("authors") if "/" in u]
+dyn += authors_sub
+if authors_sub:
+    print(f"著者索引の分割頁 {len(authors_sub)} URL")
+else:
+    print("★WARN: out/authors/ に分割頁が無い → sitemapに載せられない(build後に実行しているか?)")
+
 urls = [f"{SITE}/{p}" if p else SITE for p in fixed] + [f"{SITE}/{p}" for p in dyn] + \
     [f"{SITE}/manga/{s}" for s in slugs]
 
