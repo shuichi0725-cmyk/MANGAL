@@ -147,3 +147,7 @@ IndexNow は 298 URL 受理(削除分の通知)。鍵ファイルも本番に載
 - robots.txt に `Disallow: /api/`(同commit)。根拠 = 9/22 Googlebot 174件中56件が /api/like。
 - 効果測定: Bing「水木しげる 作品一覧」(9/23時点 8.9位・クリック0)を `_bwt.py queries` で追う。
 - 道具: `_bwt.py crawl` を是正(94ee82e90)= 登録数(InIndex)+前日比を表示。★9/22 Bing登録 5,236。
+- `/authors` 分割(6f0a8f17b)= 目次86KB + `/authors/<行>-<n>` 72枚。**機能蒸留で出る**(分割頁の sitemap 掲載は次の週次)。
+  出たら GSC で `/authors` の登録リクエストをやり直す(ユーザ作業)。
+- ★機能蒸留の staging に titles-pages.json が無かった → 追加+ビルド入力欠けで abort する番人(0ea46b206)。
+  直す前の機能蒸留だと本番 /titles を空頁で上書きしていた。
