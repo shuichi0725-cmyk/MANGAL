@@ -138,3 +138,6 @@ IndexNow は 298 URL 受理(削除分の通知)。鍵ファイルも本番に載
    ★列形式索引 `manga-list-cols.v1.json` は **r2-sync(週次)/差分反映 だけが上げる**。機能蒸留は索引に触れない
    ので、機能蒸留だけで出すと新コードは行配列へ自動フォールバック(壊れないが転送は減らない)。
    → 週次蒸留で出す。週次後の確認 = `curl -sI https://mangal-db.com/manga-list-cols.v1.json` が 200。
+3. 索引の「毎回確認」(workers/r2-serve.js)= **Worker コードの変更 → 週次蒸留で `npx wrangler deploy -c wrangler-r2.jsonc` を忘れずに**
+   (R2同期はファイルだけ=Worker は別デプロイ。weekly-distill skill の手順に既にある)。詳細 [[index_json_browser_cache_stale]]。
+

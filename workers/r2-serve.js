@@ -37,6 +37,26 @@ const ASSET = "public, max-age=86400, s-maxage=604800";
 //   ブラウザ4h(週次サイクルに十分)+期限切れ後は If-None-Match 再検証(下の304対応)で
 //   本体転送ゼロ。22MBの一覧索引が「再取得しても304の数十バイト」になる。
 const JSON_CACHE = "public, max-age=14400, s-maxage=86400, stale-while-revalidate=86400";
+// ★一覧/検索の索引(ルート直下の manga-*.json)= ブラウザは「毎回確認」(2026-09-23 ユーザ裁定)。
+//   旧: 上の JSON_CACHE(ブラウザ4時間+SWR)= 反映後も検索・一覧だけ最大4時間古い
+//   (作品頁は60秒で直るのに検索カードの書影が📖のまま、の型)。エッジpurgeでは直らなかった。
+//   新: ブラウザは使う前に必ず If-None-Match で確認 → 変わっていなければ 304(本体ゼロ・数百バイト)。
+//   ★エッジの保持は変えない: エッジへは JSON_CACHE(s-maxage=86400・デプロイ時purge)のまま保存し、
+//     ブラウザへ返す時だけ差し替える(toBrowser)= R2読込(Class B)もエッジ挙動も従来どおり。
+//   ★stale-while-revalidate は付けない(付けると「まず古いのを使って裏で確認」になり1回古いのが出る)。
+const INDEX_BROWSER_CACHE = "public, max-age=0, must-revalidate";
+
+function isListIndexKey(key) {
+  return /^manga-[\w.-]+\.json$/.test(key);
+}
+
+/** ブラウザへ返す直前の Cache-Control 差し替え(索引だけ)。エッジ保存分は触らない。 */
+function toBrowser(key, res) {
+  if (!isListIndexKey(key)) return res;
+  const h = new Headers(res.headers);
+  h.set("cache-control", INDEX_BROWSER_CACHE);
+  return new Response(res.body, { status: res.status, statusText: res.statusText, headers: h });
+}
 
 function contentType(key) {
   if (key.endsWith(".html")) return "text/html; charset=utf-8";
@@ -235,7 +255,7 @@ ${rec.body}`;
     const cache = caches.default;
     const cacheKey = new Request(url.toString(), request);
     let res = await cache.match(cacheKey);
-    if (res) return conditional304(request, res);
+    if (res) return conditional304(request, toBrowser(pathToKey(url.pathname), res));
 
     // ③ R2 から取得
     const key = pathToKey(url.pathname);
@@ -271,8 +291,8 @@ ${rec.body}`;
     }
 
     res = new Response(obj.body, { headers });
-    ctx.waitUntil(cache.put(cacheKey, res.clone())); // エッジに焼く
-    return conditional304(request, res);
+    ctx.waitUntil(cache.put(cacheKey, res.clone())); // エッジに焼く(エッジ用の Cache-Control のまま)
+    return conditional304(request, toBrowser(key, res));
   },
 };
 
