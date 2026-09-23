@@ -528,6 +528,26 @@ export default async function MangaDetailPage({
                       </dd>
                     </>
                   )}
+                  {/* ★同じジャンル条件で検索(2026-09-23 ユーザ要望): 作品のジャンルを全部押した状態(既定AND)で /browse を開く。
+                      チップ自体は SEO の内部リンクとして /genre/<key> のまま。 /browse?… は robots で Disallow 済。 */}
+                  {(() => {
+                    const keys = [...new Set(genreItems.map((it) => it.key).filter((k): k is string => !!k))];
+                    if (keys.length === 0) return null;
+                    return (
+                      <>
+                        <dt aria-hidden="true" />
+                        <dd>
+                          <Link
+                            href={`/browse?genre=${keys.map(encodeURIComponent).join(",")}`}
+                            rel="nofollow"
+                            className="spring-press inline-flex items-center rounded-[var(--radius-tag)] px-3 py-1.5 text-[12px] font-bold bg-[var(--color-accent)] text-white"
+                          >
+                            同じジャンルの漫画を探す →
+                          </Link>
+                        </dd>
+                      </>
+                    );
+                  })()}
                 </>
               );
             })()}
