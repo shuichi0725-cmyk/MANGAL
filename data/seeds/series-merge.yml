@@ -2853,3 +2853,56 @@
   separate_editions: imprint
   note: '銀河鉄道999(松本零士): 種2に9版あるのに本番は2版しか出ていなかった。promote は同type editions を imprint跨ぎで1つに畳む既定のため、ヒットコミックス(1977 本編初出)以外の standard 版(ビッグコミックスゴールド/小学館叢書/GAMANGA BOOKS=2014愛蔵版/アニメKC 等)が全部隠れていた = edition_typemerge_hides_volumes
     の型。Wikipedia の版一覧(ヒットコミックス/文庫/ビッグコミックスゴールド/小学館叢書/My First BIG/愛蔵版2014/新装版2023)とも突合し、opt-in の separate_editions で版タブに分離する 2026-09-10 ユーザGO'
+- merge_keys:
+  - qid:Q11470261|name:グラン・バガン
+  - qid:Q11470261|name:グラン・バカン
+  note: '巻抜け「1巻が無い」1冊頁の per-case 統合 2026-09-23: 山田和重 ジャンプ・コミックス。楽天題が1巻『グラン・バガン（1）』2巻『グラン・バガン（2）』で同一作。種2は2巻だけ題が『グラン・バカン』(濁点の揺れ)で別sid。残す頁=grand-bagan / 吸収=grand-vacances'
+- merge_keys:
+  - qid:Q11263590|name:Comic新現実
+  - qid:Q11279182|name:Comic新現実
+  - qid:Q1138133|name:Comic新現実
+  - qid:Q11579443|name:Comic新現実
+  - qid:Q282121|name:Comic新現実
+  note: '巻抜け「1巻が無い」1冊頁の per-case 統合 2026-09-23: 大塚英志編の角川ムック『Comic新現実』vol.1〜5(9784048537698/7889/8077/8428/8640 同一出版社の連番・2004-09〜)。楽天題『Comic新現実（v．1）』『（v．2）』。MADBは号ごとに筆頭寄稿者を著者にして5 sidに割っていた。ISBN無しの『問題外増刊』(Q3049381)は入れない。残す頁=comic-shingenjitsu / 吸収=comic-shin-genjitsu'
+- merge_keys:
+  - qid:Q11624957|name:金井家の人々
+  - qid:Q11624957|name:続 金井家の人々
+  note: '巻抜け「1巻が無い」1冊頁の per-case 統合 2026-09-23: 藤臣柊子 ぶんか社。楽天題が『金井家の人々（続）』= 正編の続巻(MADB巻欄『続』)。題が正編の派生なので1頁2冊に統合(かりあげクン型)。残す頁=kanaike-no-hitobito / 吸収=zoku-kanaike-no-hitobito'
+- merge_keys:
+  - qid:Q1970474|name:スポーションKIDS
+  - qid:Q1970474|name:スポーションKIDs
+  - qid:Q1970474|name:スポーションKID
+  note: '巻抜け「1巻が無い」1冊頁の per-case 統合 2026-09-23: 高田裕三 講談社ヤングマガジンKCスペシャル。楽天題『スポーションKIDS（1）』『（2）』。2巻だけ種2の題が『スポーションKID』。★auto の既存entry(KIDS+KIDs)のキーを含めて書く(後勝ちで既存結線を消さない)。残す頁=supooshon-kids / 吸収=supooshon-kid'
+- merge_keys:
+  - qid:Q11437470|name:禁断の恋をしよう
+  - qid:Q11437470|name:続・禁断の恋をしよう
+  note: '巻抜け「1巻が無い」1冊頁の per-case 統合 2026-09-23: 大海とむ プチコミフラワーコミックス。ISBN連番 9784091354013(2001-07)/9784091354020(2002-02)。続編の題が正編の派生なので統合。残す頁=kindan-no-koi-o-shiyou / 吸収=zoku-kindan-no-koi-o-shiyou'
+- merge_keys:
+  - qid:Q11397150|name:霞ヶ関のフリーメーソン
+  - qid:Q11397150|name:霞ヶ関フリーメーソン
+  note: '巻抜け「1巻が無い」1冊頁の per-case 統合 2026-09-23: 前川つかさ 飛鳥新社。楽天題『霞ヶ関のフリーメーソン（1）』『（2）』。2巻だけ種2の題に『の』が無い。残す頁=kasumigaseki-no-furiimeeson / 吸収=kasumigaseki-furiimeeson'
+- merge_keys:
+  - qid:Q22127550|name:サッカー伝説!!DFK
+  - qid:Q22127550|name:DFK
+  note: '巻抜け「1巻が無い」1冊頁の per-case 統合 2026-09-23: 倉谷友也 てんとう虫コロコロコミックス。楽天題『DFKデビルフットボールキングダム（第1巻）』『（第2巻）』。残す頁=sakkaa-densetsu-devil-football-kingdom / 吸収=dfk'
+- merge_keys:
+  - qid:Q438220|name:LA VIE EN ROSE
+  - qid:Q438220|name:LA VIE EN LOSE
+  note: '巻抜け「1巻が無い」1冊頁の per-case 統合 2026-09-23: 高河ゆん プリンセスコミックスデラックス。ISBN連番 9784253153645/3652。楽天題1巻『LA VIE EN ROSE（1）』2巻『ラヴィアンローズ（2）』。1巻の種2題『LOSE』は誤記→正しい題の頁を残す。残す頁=la-vie-en-rose-1998 / 吸収=la-vie-en-lose'
+- merge_keys:
+  - qid:Q11632959|name:谷村ひとしの爆裂旅打ちスペシャル
+  - qid:Q11632959|name:谷村ひとしの爆裂旅打ちスペシャル2002
+  note: '巻抜け「1巻が無い」1冊頁の per-case 統合 2026-09-23: 谷村ひとし Nichibun comics。楽天題1巻『谷村ひとしの爆裂旅打ちスペシャル2002』(2002-04)・2巻『…スペシャル（2（パチプロハイエナ激闘編））』(2002-11)。同レーベル同作者の通し番号。残す頁=tanimura-hitoshi-no-bakuretsu-tabiuchi-special / 吸収=tanimura-hitoshi-no-bakuretsu-tabiuchi-special-2002'
+- merge_keys:
+  - qid:Q11274926|name:バツッ!!待機妻物語
+  - qid:Q11274926|name:バツッ!!|sub:待機妻物語
+  note: '巻抜け「1巻が無い」1冊頁の per-case 統合 2026-09-23: ぬまじりよしみ JOUR COMICS。楽天題『バツッ！待機妻物語（1）』『（2）』。残す頁=batsutsu-taikizuma-monogatari / 吸収=batsutsu'
+- merge_keys:
+  - qid:Q11643389|name:たかまり指数エスカレーション
+  - qid:Q11643389|name:エスカレーション
+  note: '巻抜け「1巻が無い」1冊頁の per-case 統合 2026-09-23: 有田万里/SANZE摩利 集英社プレイボーイコミックス。ISBN連番 9784088570853(1983-09)/0860(1984-01)。NDLの正題は『たかまり指数エスカレーション』→その頁を残す。残す頁=takamari-shisuu-esukareeshon / 吸収=escalation'
+- merge_keys:
+  - qid:Q11414072|name:湘南グラフィティ
+  - qid:Q11414072|name:湘南グラフティ
+  separate_editions: imprint
+  note: '巻抜け「1巻が無い」1冊頁の per-case 統合 2026-09-23: 吉田聡。NDL『湘南グラフィティ 1』(YOUNGKING COMICS 1988-09)『湘南グラフティ 2』(同 1989-01)=同一版の1・2巻。★種2の1巻は同typeのダイトコミックス版(2000)1巻に番号で隠されていた=separate_editions: imprint で版を分ける(銀河鉄道999の型)。残す頁=shounan-graffiti / 吸収=shounan-graffiti-1989'

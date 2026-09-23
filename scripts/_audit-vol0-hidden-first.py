@@ -26,6 +26,7 @@
   python scripts/_audit-vol0-hidden-first.py            # 検出のみ
   python scripts/_audit-vol0-hidden-first.py --apply    # 安全スライスを種4-autoへ(楽天ゲート・~1.3s/req)
   python scripts/_audit-vol0-hidden-first.py --apply --limit 20
+  python scripts/_audit-vol0-hidden-first.py --apply --only <頁slug,...>   # per-case
 """
 import argparse
 import datetime
@@ -61,6 +62,7 @@ def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--apply", action="store_true")
     ap.add_argument("--limit", type=int, default=0)
+    ap.add_argument("--only", default="", help="--apply を頁slug(カンマ区切り)に絞る(per-case 用。2026-09-23)")
     a = ap.parse_args()
 
     if not os.path.exists(PAGE_IDX):
@@ -177,6 +179,10 @@ def main() -> None:
     today = datetime.date.today().isoformat()
     applied, hold = [], []
     todo = fix_candidates[: a.limit] if a.limit else fix_candidates
+    if a.only:
+        _only = {x.strip() for x in a.only.split(",") if x.strip()}
+        todo = [c for c in todo if c[5] in _only]
+        print(f"--only: {len(todo)} 件に絞った({sorted(_only)})")
     import time
     for i, (sid, eid, title, ib, d0, slug, imp) in enumerate(todo):
         if ib in seed_isbns:
