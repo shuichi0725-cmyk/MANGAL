@@ -27,3 +27,6 @@ metadata:
 - フォント: `lib/fonts.ts` の **DOT_HEADING** を使う部品だけが読む(layout の body から除去)。作品頁/contact はフォントCSS無し・ホーム/browse/shinkan は従来どおり。
   番人 `_check-shell-wiring.py` **検査5**(器が lib/fonts を読む / 生の dot-heading → FAIL・負テスト済)。
 - 3(作品1本の著者頁)・4(開発頁の公開)は**見送り**(ユーザ裁定)。
+- ★追加実装(2026-09-24 ユーザ「EditionVolumesの修正して」): `EditionVolumes`(client)に manga 丸ごと → **title だけ**。
+  RSC から作品データの重複(1頁約1KB×2・計約130MB)が消えた。★型: **client 部品に渡す props は全項目が RSC に2回書かれる** = 使う物だけ渡す。
+  一覧索引の26列は全部使用中 or 圧縮後1KB級(`_slugfix_new`/`awards` は全null・awards は将来用に残す)。著者頁に無駄なし。
