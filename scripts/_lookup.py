@@ -239,7 +239,8 @@ def ndl_live_retry(query, *, backoff=(3, 10, 30, 90), **kw):
 def fmt_item(it):
     img = str(it.get("largeImageUrl") or it.get("mediumImageUrl") or "")
     cover = "書影有" if img and "noimage" not in img else "書影無"
-    return (f"「{it.get('title', '')}」 {it.get('author', '')} / {it.get('publisherName', '')} / "
+    # ★ISBNを先頭に(2026-09-23): title検索の結果から照合・充填に進むのにISBNが出ていなかった
+    return (f"{it.get('isbn', '') or '(ISBN無)'} 「{it.get('title', '')}」 {it.get('author', '')} / {it.get('publisherName', '')} / "
             f"{it.get('salesDate', '')} / {it.get('itemPrice', '')}円 / {cover} / series={it.get('seriesName', '')}")
 
 

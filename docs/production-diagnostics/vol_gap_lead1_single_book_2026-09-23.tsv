@@ -1,0 +1,41 @@
+# 2026-09-23 調査スナップショット(生成器なし・手作業の突合)。巻抜け「1巻が無い」かつ頁に1冊だけの38頁。
+# 根拠 = MADB元記録(metadata101 の巻欄) / NDL作者束縛検索 / 楽天live題検索 / ISBN頁索引(同日 --build)
+class	slug	title	own_book	evidence	vol1_or_partner
+A割れ	grand-vacances	グラン・バカン	2巻 9784088732695	MADB「グラン・バガン 1」=表記ゆれ	grand-bagan(1巻)
+A割れ	karutteto	かるってと	2巻 9784088750620	★同じISBNの2巻が相手頁にも在る=重複頁	quartet(1,2,3巻)
+A割れ	comic-shin-genjitsu	Comic新現実	vol.2 9784048537889	MADB vol.1〜4 同叢書	comic-shingenjitsu(vol.1)
+A割れ	zoku-kanaike-no-hitobito	続 金井家の人々	続 9784821197460	正編の続巻	kanaike-no-hitobito
+A割れ	supooshon-kid	スポーションKID	2巻 9784061020986	MADB「スポーションKIDS」無印	supooshon-kids
+A割れ	zoku-kindan-no-koi-o-shiyou	続・禁断の恋をしよう	続 9784091354020	正編の続巻・同レーベル	kindan-no-koi-o-shiyou
+A割れ	kasumigaseki-furiimeeson	霞ヶ関フリーメーソン	2巻 9784870311787	MADB「霞ヶ関のフリーメーソン 1」	kasumigaseki-no-furiimeeson
+A割れ	dfk	DFK	2巻 9784091411969	MADB「サッカー伝説!!DFK 1」	sakkaa-densetsu-devil-football-kingdom
+A割れ	la-vie-en-rose-1998	ラヴィアンローズ	2巻 9784253153652	MADB「LA VIE EN LOSE 1」=誤記	la-vie-en-lose
+A割れ	tanimura-hitoshi-no-bakuretsu-tabiuchi-special	谷村ひとしの爆裂旅打ちスペシャル	2巻 9784537101331	MADB「…スペシャル2002」無印	tanimura-hitoshi-no-bakuretsu-tabiuchi-special-2002
+A割れ	miyazawa-kenji-mangakan-1985	宮沢賢治・漫画館	2巻 9784267010408	相手頁の2巻は別ISBN(9784267014253)=要確認	miyazawa-kenji-mangakan(1〜5巻)
+A割れ	dai-chouhen-doraemon-1984	大長編ドラエもん	VOL.2 9784091590640	★楽天ではこのISBN=2009年アンコミックス版「のび太の宇宙開拓史」=MADBのISBN誤り疑い	daichouhen-doraemon(1〜8巻)
+A割れ	batsutsu	バツッ!!	volume2 9784575331967	MADB「バツッ!!待機妻物語 volume 1」	batsutsu-taikizuma-monogatari
+A割れ	takamari-shisuu-esukareeshon	たかまり指数エスカレーション	2巻 9784088570860	MADB「エスカレーション 1」	escalation
+A割れ	supeshiyaru-banguutara-mama	スペシャル版 ぐうたらママ	第2巻 9784592760221	NDL「ぐうたらママ 1」4592760204	guutara-mama
+B取込もれ	shounangurafutei	湘南グラフティ	2巻 9784785910921	NDL 1巻 4785910836(YOUNGKING)/別版ダイト2冊は shounan-graffiti 頁	1巻 9784785910839
+B取込もれ	koukoukyoushimonogatari	高校教師物語	2巻 9784887250727	NDL 無印=1巻	1巻 9784887250338
+B取込もれ	papa-no-kokoro	パパのココロ	2巻 9784574000819	NDL 1〜3巻	1巻 9784574000642 / 3巻 9784574000857
+B取込もれ	lovers	Lovers(井上恵美子)	2巻 9784091392220	NDL 1巻	1巻 9784091392213
+B取込もれ	kaika-ansatsuchou-tenpousen	開化暗殺帳天保銭	第2巻 9784331250655	MADB 第1巻(日付1995は誤り疑い・ISBN連番)	1巻 9784331250648
+B取込もれ	megurikuruharu	めぐりくるはる	2巻 9784898293737	NDL 無印=1巻	1巻 9784898293430
+B取込もれ	karabuki-shitene	からぶき♥してね	2巻 9784575943658	楽天	1巻 9784575943078
+B取込もれ	oku-sama-hi-no-youjin	奥様火の用心!	2巻 9784575934649	楽天 1〜5巻	1巻 9784575934403 / 3巻 9784575935103 / 4巻 9784575935479 / 5巻 9784575935486
+B取込もれ	shinuhodo-kisu-shite	死ぬほどKISSして	2巻 9784845809073	楽天 1〜4巻	1巻 9784845809066 / 3巻 9784845809080 / 4巻 9784845809097
+B取込もれ	ai-1995	愛(虹の始まる谷から)	2巻 9784575933994	楽天	1巻 9784575933987
+B取込もれ	hontou-ni-atta-nama-maji-giretsu-byouin-esupii	本当にあった(生)マジギレッ病院SP	2巻 9784832266063	楽天 無印=1巻(2007-01)	1巻 9784832265189
+B取込もれ	biiparu-kozou-no-autodoa-kyouhon	ビーパル小僧のアウトドア教本	2巻 9784093660020	楽天 3〜5巻(巻ごとに作画者が違う)・1巻は不明	3巻 9784093660037 / 4巻 9784093660044 / 5巻 9784093660051
+CISBN以前	yamamoto-fuutarou-kun	山本風太郎くん	続 9784331250849	NDL 1巻=1985 無印・ISBN無	1巻(ISBN無)
+CISBN以前	makai-densetsu	魔界伝説(トリック・ナイト)	2巻 9784897991559	NDL 1巻=1992・ISBN無	1巻(ISBN無)
+D見つからず	saitsuyo-akuyaku-reijou-nikki	さいつよ☆悪役令嬢日記	2巻 9784866454344	NDL・MADB・楽天とも2巻のみ	-
+D見つからず	dainiji-chousen-sensou-yugio	第二次朝鮮戦争ユギオ	2巻 9784814918843	NDLに「ユギオⅡ」1996/2003=「2」は続編の題の可能性	-
+D見つからず	honomi-bureikutsu	ほのみぶれいくっ!	2巻 9784861173905	2巻のみ	-
+D見つからず	sadistic-sayaka-chan	サディスティックさやかちゃん!	2巻 9784883150861	2巻のみ	-
+D見つからず	mayonaka-no-raburetaa	真夜中のラブレター	2巻 9784391903904	楽天では「下」=上下巻の下	-
+D見つからず	mindy-land	Mindy land	2巻 9784943966128	2巻のみ	-
+D見つからず	pet-boy-s	Pet-boy's	vol.2 9784812800980	vol.2のみ	-
+D見つからず	hana-ichimonme	花いちもんめ(渡千枝)	2巻 9784821198658	同作者・同レーベル「死者との交信」(2001-03)が1巻の可能性	-
+D見つからず	holy-maruo-1996	Holy(犬木加奈子)	2巻 9784041994016	ホラーコミック傑作選 第3集。同名の holy 頁は手塚治虫=別作者	-
