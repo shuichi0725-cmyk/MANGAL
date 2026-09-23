@@ -8,7 +8,7 @@ cd /d "%~dp0"
 set "SID="
 for /f %%i in ('python scripts\_session-latest.py opus') do set "SID=%%i"
 if not defined SID goto new
-claude --resume %SID% --remote-control opus --model "claude-opus-5[1m]" --dangerously-skip-permissions %*
+claude --resume %SID% --remote-control opus --model "claude-opus-5-5[1m]" --dangerously-skip-permissions %*
 if not errorlevel 1 goto :eof
 :new
-claude --remote-control opus --model "claude-opus-5[1m]" --dangerously-skip-permissions %*
+claude --remote-control opus --model "claude-opus-5-5[1m]" --dangerously-skip-permissions %*
