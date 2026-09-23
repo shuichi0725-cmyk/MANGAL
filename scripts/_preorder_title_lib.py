@@ -35,6 +35,18 @@ def _kanji_int(g):
     return n if 1 <= n <= 99 else None
 
 
+# ★B0m の巻表記(2026-09-24 当世幻想博物誌（巻ノ1）型): 巻ノN/巻之N/其ノN(漢数字可)・(第N集)/(N集)/第N集・
+#   (v.N)・(N(副題))。どれも既存規則に当たらず vol=None → 既刊作品の続巻が**新作1巻として別頁化**されうる。
+#   充填・照合側(_rakuten_match_lib.parse_vol)は同日に是正済み = ここは取り込み側の対。
+_KN = r"\d{1,3}|[一二三四五六七八九十]{1,4}"
+_B0M = (
+    re.compile(r"^(.*?)[\s　]*[（(]?\s*[巻其][ノの之]\s*(" + _KN + r")\s*(?:[（(](?P<sub>[^()（）]*)[)）])?\s*[)）]?[\s　]*$"),
+    re.compile(r"^(.*?)[\s　]*[（(]\s*第?\s*(\d{1,3})\s*集\s*(?:[（(](?P<sub>[^()（）]*)[)）])?\s*[)）]?[\s　]*$"),
+    re.compile(r"^(.*?)[\s　]+第\s*(" + _KN + r")\s*集[\s　]*$"),
+    re.compile(r"^(.*?)[\s　]*[（(]\s*[vV]\.\s*(\d{1,3})\s*[)）][\s　]*$"),
+    re.compile(r"^(.*?)[\s　]*[（(]\s*第?\s*(\d{1,3})\s*巻?\s*[（(](?P<sub>[^()（）]*)[)）]\s*[)）][\s　]*$"),
+)
+
 _ROMAN = {"I": 1, "V": 5, "X": 10, "L": 50, "C": 100, "D": 500, "M": 1000}
 
 
@@ -88,6 +100,18 @@ def split_title(raw):
         return {"base": base, "vol": _kanji_int(m.group(3)), "part": None, "subtitle": "",
                 "clean": base, "matched": "kanji_kan", "vol_suspect": None, "zen": bool(m.group(2))}
 
+    # B0m. ★巻ノN/巻之N/其ノN・第N集/(N集)・(v.N)・(N(副題))(上の _B0M の注記)。
+    for _rx in _B0M:
+        m = _rx.search(t)
+        if m and m.group(1).strip():
+            n = m.group(2)
+            v = int(n) if n.isdigit() else _kanji_int(n)
+            if v and 1 <= v <= 999:
+                base = m.group(1).strip()
+                sub = (m.groupdict().get("sub") or "").strip()
+                clean = (base + ("　" + sub if sub else "")).strip()
+                return {"base": base, "vol": v, "part": None, "subtitle": sub, "clean": clean,
+                        "matched": "marker_ext", "vol_suspect": None}
     # B0r. ★括弧付きローマ数字の巻表示 (= 2026-09-14 部長の夜テク…(Ⅻ) 型)。
     #   全角合字 Ⅻ/Ⅺ は NFKC で "XII"/"XI" のラテン文字になるため、数字を要求する B0/B/A0 の
     #   どれにも当たらず vol=None → **12巻の本が新作1巻としてドラフト化**されかけた(既存頁は1-11巻在り)。

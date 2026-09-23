@@ -42,14 +42,26 @@ def norm(t):
 # ★VOLUME/VOL.N 形(痛覚探偵 通天寺ナツメ […] VOLUME 2 TWO 型 2026-09-14)を追加。
 #   ここは _preorder_title_lib.split_title とは別の軽い逆引き用パターンで、
 #   これが読めないと vol1 が by_base に載らず「全巻回収不成立」で hold になる(実踏)。
+# ★巻ノN/巻之N/其ノN(漢数字可)・第N集/(N集)・(v.N)・(N(副題)) を追加(2026-09-24 当世幻想博物誌（巻ノ1）型)。
+#   split_title(B0m)と対。ここが読めないと既刊巻が by_base に載らず「全巻回収不成立」で hold になる。
 VOLP = re.compile(r"[（(]\s*(\d{1,3})\s*[)）]\s*$|\s+(\d{1,3})\s*$|第\s*(\d{1,3})\s*巻\s*$"
-                  r"|\s*(?:VOLUME|VOL\.?)\s*(\d{1,3})(?:\s+(?:ONE|TWO|THREE|FOUR|FIVE|SIX|SEVEN|EIGHT|NINE|TEN|ELEVEN|TWELVE))?\s*$", re.I)
+                  r"|\s*(?:VOLUME|VOL\.?)\s*(\d{1,3})(?:\s+(?:ONE|TWO|THREE|FOUR|FIVE|SIX|SEVEN|EIGHT|NINE|TEN|ELEVEN|TWELVE))?\s*$"
+                  r"|[\s　]*[（(]?\s*[巻其][ノの之]\s*(\d{1,3}|[一二三四五六七八九十]{1,4})\s*(?:[（(][^()（）]*[)）])?\s*[)）]?\s*$"
+                  r"|[\s　]*[（(]\s*第?\s*(\d{1,3})\s*集\s*(?:[（(][^()（）]*[)）])?\s*[)）]?\s*$"
+                  r"|\s+第\s*(\d{1,3}|[一二三四五六七八九十]{1,4})\s*集\s*$"
+                  r"|[\s　]*[（(]\s*v\.\s*(\d{1,3})\s*[)）]\s*$"
+                  r"|[\s　]*[（(]\s*第?\s*(\d{1,3})\s*巻?\s*[（(][^()（）]*[)）]\s*[)）]\s*$", re.I)
 def split_vol(title):
     t = unicodedata.normalize("NFKC", str(title or "")).strip()
     m = VOLP.search(t)
     if m:
         n = next((g for g in m.groups() if g), None)
-        return norm(VOLP.sub("", t)), (int(n) if n else None)
+        if n and not n.isdigit():
+            from _preorder_title_lib import _kanji_int  # 漢数字(巻之五 等)
+            v = _kanji_int(n)
+        else:
+            v = int(n) if n else None
+        return norm(VOLP.sub("", t)), v
     return norm(t), None
 
 tm = json.load(open(f"{ROOT}/.cache/isbn-title-map.json", encoding="utf-8"))
