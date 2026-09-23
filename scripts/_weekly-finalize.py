@@ -155,8 +155,10 @@ def main():
                     _env[_k.strip()] = _v.strip().strip('"').strip("'")
     _token = _env.get("R2_PURGE_TOKEN", "")
     if _token:
-        _paths = ["/", "/manga-list-index.json", "/manga-list-head.json",
-                  "/manga-alt-index.json", "/manga-catch-index.json"]
+        # ★索引は scripts/_index_files.py の一覧が単一ソース(2026-09-23 列形式索引の追加で集約)
+        sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+        from _index_files import INDEX_FILES
+        _paths = ["/"] + [f"/{n}" for n in INDEX_FILES]
         # ★"/"=トップHTML(2026-08-27追記: コーナー変更週にホームだけ最長1日古いまま=ユーザ発見)
         for _sub in ("data", "calendar", "shinkan"):
             _dirp = os.path.join(ROOT, "out", _sub)

@@ -88,8 +88,11 @@ def main():
     # public/ の索引は **preview専用(1400件subset)** で、next export が out/ にそのまま継承する。
     # 上書きせず R2 同期すると本番の一覧/検索が 1400件になる。ここで data/ の本番索引で必ず上書きする。
     import shutil
-    _IDX = ("manga-list-index.json", "manga-catch-index.json",
-            "manga-list-head.json", "manga-alt-index.json")
+    # ★索引の一覧は scripts/_index_files.py が単一ソース(2026-09-23 列形式索引の追加で集約)。
+    #   列形式は行配列から派生 = 送る直前に内容ハッシュを照合し、古ければ作り直す。
+    from _index_files import INDEX_FILES, ensure_columnar
+    print(f"  列形式索引: {ensure_columnar(os.path.join(ROOT, 'data'))}")
+    _IDX = INDEX_FILES
     for name in _IDX:
         src = os.path.join(ROOT, "data", name)
         dst = os.path.join(OUT, name)

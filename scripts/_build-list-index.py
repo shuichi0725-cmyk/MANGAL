@@ -350,4 +350,10 @@ amb = os.path.getsize(aout) / 1e6
 print(f"一覧索引: {len(idx)}作品 / {mb:.1f}MB → {out} (配列化)")
 print(f"catch索引: {len(catch_map)}件 / {cmb:.1f}MB → {catch_out} (遅延)")
 print(f"alt索引: {len(alt_map)}件 / {amb:.1f}MB → {aout} (遅延)")
+# ★ブラウザ専用の列形式索引(2026-09-23 検索の読み込み高速化)= 行配列から派生・転送量約3割減。
+#   行配列(上の out)を書いた直後に必ず作り直す(内容ハッシュで紐づく。配信経路側も ensure で照合する)。
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from _index_files import COLUMNAR, build_columnar  # noqa: E402
+build_columnar(OUTDIR)
+print(f"列形式索引: {os.path.getsize(os.path.join(OUTDIR, COLUMNAR)) / 1e6:.1f}MB → {os.path.join(OUTDIR, COLUMNAR)} (ブラウザ用)")
 print(f"(skip {skipped}) / {time.time()-t0:.1f}秒")

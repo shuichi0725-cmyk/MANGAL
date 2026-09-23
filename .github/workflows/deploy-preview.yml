@@ -68,6 +68,9 @@ jobs:
           cp .preview-data/manga-catch-index.json public/manga-catch-index.json
           cp .preview-data/manga-list-head.json public/manga-list-head.json
           cp .preview-data/manga-alt-index.json public/manga-alt-index.json
+          # ★列形式索引(2026-09-23 ブラウザ用・行配列から派生)。行配列と内容ハッシュで照合し、古ければ作り直す
+          python3 scripts/_index_files.py ensure .preview-data
+          cp .preview-data/manga-list-cols.v1.json public/manga-list-cols.v1.json
           echo "preview index entries:"; node -e "console.log('list', require('./public/manga-list-index.json').d.length)"
 
       # ★画集 = data/art-books に全件(161)。 .preview-data/art-books は .gitignore で未追跡

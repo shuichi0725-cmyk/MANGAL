@@ -42,8 +42,8 @@ WORKER = "https://mangal-db.com"  # 2026-07-04 カスタムドメイン開通(wo
 # 漫画頁のHTML/チャンクに影響するコード面(ここが動いたら部分ビルド禁止)
 CODE_SCOPE = ["app/manga", "app/layout.tsx", "app/globals.css", "components", "lib",
               "next.config.ts", "package.json", "tailwind.config.ts"]
-IDX = ("manga-list-index.json", "manga-catch-index.json",
-       "manga-list-head.json", "manga-alt-index.json")
+from _index_files import INDEX_FILES, ensure_columnar  # 索引一覧の単一ソース(2026-09-23)
+IDX = INDEX_FILES
 MASTERS = ("demographics.yml", "genres.yml", "magazines.yml", "publisher-aliases.yml",
            "publishers.yml", "slug-aliases.yml") + IDX
 
@@ -299,6 +299,7 @@ def main():
             nv = set(never)
             inner = {st: sl for st, sl in inner.items() if sl not in nv and st not in nv}
             puts = [(k, lp) for k, lp in puts if not any(k == f"manga/{x}{ext}" for x in nv for ext in (".html", ".txt"))]
+    print(f"列形式索引: {ensure_columnar(os.path.join(ROOT, 'data'))}")  # 行配列と内容ハッシュで照合
     for name in IDX:
         src = os.path.join(ROOT, "data", name)
         if os.path.getsize(src) < 5 * 1048576 and name == "manga-list-index.json":

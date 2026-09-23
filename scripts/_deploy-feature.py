@@ -55,8 +55,8 @@ BUCKET = "mangal-site"
 WORKER = "https://mangal-db.com"
 
 # 同期から恒久除外(= データ世界。機能蒸留は絶対に触らない)
-IDX = ("manga-list-index.json", "manga-catch-index.json",
-       "manga-list-head.json", "manga-alt-index.json")
+from _index_files import INDEX_FILES  # 索引一覧の単一ソース(2026-09-23)。機能蒸留は索引に触れない
+IDX = INDEX_FILES
 MASTERS = ("demographics.yml", "genres.yml", "magazines.yml", "publisher-aliases.yml",
            "publishers.yml", "slug-aliases.yml") + IDX
 CT = {

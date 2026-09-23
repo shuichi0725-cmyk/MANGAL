@@ -55,6 +55,10 @@ data/manga.draft-2000.bak-*
 .preview-data/art-books
 data/manga-list-index.json
 public/manga-list-index.json
+# ★列形式索引(2026-09-23)= 行配列からの派生物。配信経路が送る直前に scripts/_index_files.py ensure で作り直す。
+#   本番分(21MB)は追跡しない。preview分(.preview-data/ 側・小さい)は追跡する(CIでも ensure で照合)。
+data/manga-list-cols.v1.json
+public/manga-list-cols.v1.json
 
 # Kobo harvest raw (= 100MB、 .gz をコミット。 raw は再生成可)
 /data/seeds/kobo-harvest.jsonl

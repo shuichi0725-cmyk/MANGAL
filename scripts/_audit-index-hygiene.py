@@ -14,6 +14,8 @@
      同名のまま形式が変わっていたら FAIL =「ファイル名をバンプ+fetch側変更+--accept-format」を要求。
      旧ファイルはR2に残す(r2-syncはprune無し)ので旧JSは旧形式を読み続ける=デプロイ跨ぎ無害。
      加えて lib/ の fetch("/manga-*.json") 先が実在することを確認(改名の片割れ忘れ検知)。
+  8. ★列形式索引(2026-09-23 ブラウザ用 manga-list-cols.v1.json): 行配列から派生した物が
+     ①行配列と内容ハッシュで一致 ②行数一致 ③全列が行数ぶん の3点(古い列形式が配られる事故の封鎖)。
 
 使い方: python scripts/_audit-index-hygiene.py [DATA_DIR=data] [--accept-format]
         --accept-format = 意図的な形式変更/新ファイル追加時に契約を現状から書き直す(単独で明示実行)
@@ -122,6 +124,15 @@ def _jstype(v):
 def _signature(path):
     """形式署名 = 中身の行数でなく「契約」だけを畳む({f,d}型=f列+各列型 / map型=値型)"""
     j = json.load(open(path, encoding="utf-8"))
+    if isinstance(j, dict) and isinstance(j.get("src"), str) and isinstance(j.get("n"), int)             and isinstance(j.get("f"), list) and isinstance(j.get("c"), list) and len(j["c"]) == len(j["f"]):
+        # 列形式(2026-09-23): 列ごとの値配列。番号化した列は値が番号配列になる。
+        # ★src/n まで見て判定する: 別名索引(slug→別名)には slug が "f" と "c" の作品が実在し、
+        #   f/c だけで見ると列形式と誤認して落ちた(実踏)。
+        cols = {}
+        for i, name in enumerate(j["f"]):
+            v = next((x for x in j["c"][i] if x is not None), None)
+            cols[name] = _jstype(v) if v is not None else "?"
+        return {"kind": "fc", "f": j["f"], "coltypes": cols, "dc": j.get("dc") or []}
     if isinstance(j, dict) and isinstance(j.get("f"), list) and isinstance(j.get("d"), list):
         cols = {}
         for i, name in enumerate(j["f"]):
@@ -156,6 +167,8 @@ def _sig_compatible(con, sig):
     if con.get("kind") != sig.get("kind"):
         return False
     if con.get("f") != sig.get("f"):          # 列の追加/削除/並べ替え = 真の形式変更
+        return False
+    if con.get("dc") != sig.get("dc"):        # 番号化する列の入れ替え = 復元側の契約が変わる
         return False
     ca, cb = con.get("coltypes") or {}, sig.get("coltypes") or {}
     if set(ca) != set(cb):
@@ -195,6 +208,21 @@ if D == "data":  # 本番索引のみ(previewはsubsetミラーなので対象�
     for name in sorted(fetched):
         if not os.path.exists(os.path.join(BASE, name)):
             fails.append(f"コードが fetch する {name} が {D}/ に無い(改名の片割れ忘れ)")
+
+# 8. 列形式索引の鮮度(行配列と内容ハッシュ一致・行数・列長)
+sys.path.insert(0, os.path.join(ROOT, "scripts"))
+from _index_files import COLUMNAR, columnar_is_fresh  # noqa: E402
+cp = os.path.join(BASE, COLUMNAR)
+if not os.path.exists(cp):
+    fails.append(f"列形式索引 {COLUMNAR} が無い → python scripts/_index_files.py ensure {D}")
+elif not columnar_is_fresh(BASE):
+    fails.append(f"列形式索引 {COLUMNAR} が行配列と不一致(古い) → python scripts/_index_files.py ensure {D}")
+else:
+    _cj = json.load(open(cp, encoding="utf-8"))
+    if _cj.get("n") != len(rows) or any(len(c) != len(rows) for c in _cj.get("c", [])):
+        fails.append(f"列形式索引の行数不一致 n={_cj.get('n')} 列長={sorted({len(c) for c in _cj.get('c', [])})} 行配列={len(rows)}")
+    if _cj.get("f") != EXPECT_FIELDS:
+        fails.append("列形式索引の列構成がLIST_FIELDSと不一致")
 
 print(f"一覧 {len(rows)}行 / head {len(json.load(open(hp, encoding='utf-8'))['d']) if os.path.exists(hp) else 0}行 / cover短縮漏れ {full_cover} / authors旧形式 {obj_author}")
 for w in warns: print("WARN:", w)
