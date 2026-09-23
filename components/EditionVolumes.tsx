@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import type { Edition, Manga, Volume } from "@/lib/schema";
+import type { Edition, Volume } from "@/lib/schema";
 import VolumeCoverflow from "./VolumeCoverflow";
 import Badge from "./ui/Badge";
 
@@ -36,13 +36,16 @@ function Grow({ open, children }: { open: boolean; children: React.ReactNode }) 
   );
 }
 
+// ★作品データは丸ごと受け取らない(2026-09-24): 旧 = manga を受け取り title しか使っていなかったが、
+//   client 部品の props は全項目が RSC(HTML内インライン + .txt の2箇所)に書き出される
+//   = 著者の読み/ジャンル/あらすじ等 1頁約1KB × 2 × 6.9万頁 ≈ 130MB。使う物だけを渡す。
 export default function EditionVolumes({
-  manga,
+  title,
   bl,
   edition,
   defaultCollapsed = false,
 }: {
-  manga: Manga;
+  title: string;
   bl?: { id: string; max: number; miss?: number[] } | null;
   edition: Edition;
   defaultCollapsed?: boolean;
@@ -138,7 +141,7 @@ export default function EditionVolumes({
       )}
       {/* ★巻リスト = フリースクロール小サムネ + ループ + 選択巻の詳細パネル(案D・試作) */}
       <VolumeCoverflow
-        title={manga.title}
+        title={title}
         volumes={vols}
         publisher={edition.publisher}
         imprint={edition.imprint}
