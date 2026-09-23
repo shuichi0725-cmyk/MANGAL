@@ -37792,3 +37792,16 @@ volumes:
   source: volgap-fill-rakuten-live(2026-09-21)+G5ラノベ除外
   added_at: '2026-09-21'
   note: 巻抜け充填 slug=edomae-no-shun-ginzayanagisushisandaime 版[0]通常版 結線=版単位 gate=ISBN連番o(9784537174168<9784537174250<9784537174441)+版元prefix o+著者o+G5通過
+- series_keys:
+  - qid:Q9075621|name:Dr.猫柳田の科学的青春
+  qid: null
+  number: 2
+  isbn13: '9784344801813'
+  release_date: 2002-12
+  pages: null
+  publisher: 幻冬舎コミックス
+  edition_type: standard
+  title_display: Dr.猫柳田の科学的青春(第2集)
+  source: volgap-fill-rakuten-local
+  added_at: '2026-09-24'
+  note: 巻抜け充填 slug=dr-nekoyanagita-no-kagakuteki-seishun 版[0]通常版 結線=版単位 gate=版元o+ISBN連番o+日付o

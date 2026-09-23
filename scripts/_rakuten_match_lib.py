@@ -38,6 +38,45 @@ _P_VOL   = re.compile(r"\s+(?:vol\.?|#)\s*(\d+)\s*$", re.I)
 # 末尾 空白+数字 ("ONE PIECE 100"型)。空白必須 = 題内末尾数字(ゴルゴ13)は剥がさない
 _P_SP    = re.compile(r"\s+(\d+)\s*$")
 
+# ★追加の巻表記(2026-09-23 当世幻想博物誌で発覚)。旧4規則は算用数字の (N)/第N巻/vol.N/空白N しか読めず、
+#   楽天題の「(巻ノ1)」を巻番号なしの別題として扱っていた = 1巻がどの頁の1巻にも一致せず巻抜けが埋まらなかった。
+#   楽天ローカル種37万件中 約1,600件が該当(第N集533 / (v.N)483 / 巻ノN・巻之N 295 / 其ノN・其之N 243 / (N集)46)。
+#   ★足すだけ = 旧4規則で読めた題の結果は変えない(旧規則を先に当て、全部外れた時だけこちらを見る)。
+#   (上)(下)・(第N部) は巻番号にしない(上下は volume_label 側の仕事 / 部は巻と限らない)。
+_KNUM = "〇一二三四五六七八九十百"
+_NUM = r"(\d+|[" + _KNUM + r"]+)"
+_SUB = r"(?:\s*\([^()]*\))?"  # 巻表記の直後の副題括弧 例 (其之1(仕掛人の業)) / (2(パチプロハイエナ激闘編))
+_P_EXTRA = (
+    # (巻ノ1) / 巻之五 / (其ノ2) / 其之3 … 括弧あり・空白区切り・直結(戦国ランス巻之一)
+    re.compile(r"\(\s*[巻其][ノの之]\s*" + _NUM + _SUB + r"\s*\)\s*$"),
+    re.compile(r"\s*[巻其][ノの之]\s*" + _NUM + r"\s*$"),
+    # (第2集) / (12集) / 第3集 / (第2集(副題)
+    re.compile(r"\(\s*第?\s*" + _NUM + r"\s*集" + _SUB + r"\s*\)?\s*$"),
+    re.compile(r"\s+第\s*" + _NUM + r"\s*集\s*$"),
+    # (v.2)
+    re.compile(r"\(\s*v\.\s*(\d+)\s*\)\s*$", re.I),
+    # (2(副題)) = 算用数字の巻 + 副題括弧
+    re.compile(r"\(\s*第?\s*(\d+)\s*巻?\s*\([^()]*\)\s*\)\s*$"),
+)
+
+
+def _kanji_int(s):
+    """算用数字 or 漢数字(〇〜九十九・百) → int。読めなければ None。"""
+    if s.isdigit():
+        return int(s)
+    d = {c: i for i, c in enumerate("〇一二三四五六七八九")}
+    if s == "百":
+        return 100
+    if "十" in s:
+        a, _, b = s.partition("十")
+        if (a and a not in d) or (b and b not in d):
+            return None
+        return (d[a] if a else 1) * 10 + (d[b] if b else 0)
+    if len(s) == 1 and s in d:
+        return d[s]
+    return None
+
+
 def parse_vol(t):
     """NFKC済タイトル t から末尾巻トークンを剥がす。
     return (vol:int|None, residual:str)。vol=None は巻番号トークン無(=単巻/vol1扱い候補)。"""
@@ -48,6 +87,13 @@ def parse_vol(t):
             v = int(m.group(1))
             residual = t[:m.start()].rstrip()
             return v, residual
+    for p in _P_EXTRA:
+        m = p.search(t)
+        if m:
+            v = _kanji_int(m.group(1))
+            if v is None or v <= 0:
+                continue
+            return v, t[:m.start()].rstrip()
     return None, t
 
 def nfkc(s):

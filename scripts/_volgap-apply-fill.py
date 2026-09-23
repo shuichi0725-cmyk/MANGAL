@@ -35,6 +35,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SRC = os.path.join(ROOT, "data", "manga.v2")
 SEED4 = os.path.join(ROOT, "data", "seeds", "volumes-supplement-auto.yml")
 CANON = os.path.join(ROOT, "data", "seeds", "edition-canonical")
+OVR = os.path.join(ROOT, "data", "seeds", "edition-overrides.json")
 MERGE_YML = os.path.join(ROOT, "data", "seeds", "series-merge.yml")
 LOG = os.path.join(ROOT, "data", "seeds", "intake-manifest", "volgap-fill-changelog.jsonl")
 APPLY = "--apply" in sys.argv
@@ -99,7 +100,7 @@ def main():
     seed_isbns = {nisbn(e.get("isbn13")) for e in seed["volumes"] if e.get("isbn13")}
     n_seed_before = len(seed["volumes"])
 
-    new4, held, canon_edits = [], [], defaultdict(list)
+    new4, held, canon_edits, ovr_edits = [], [], defaultdict(list), defaultdict(list)
     for r in rows:
         stem, ei, num, ib = r["stem"], int(r["ei"]), int(r["number"]), r["isbn"]
         d = page(stem)
@@ -107,6 +108,12 @@ def main():
         e = eds[ei] if ei < len(eds) else {}
         if r["route"].startswith("canon:"):
             canon_edits[stem].append(r)
+            continue
+        # ★route=overrides(2026-09-24): edition-overrides に editions を持つ頁は promote が editions を
+        #   丸ごと置換するので、種4に書いても頁に出ない(愛/ゲゲゲの鬼太郎で実踏)。旧実装はここを種4へ
+        #   落としていた = 「seed に書いたのに黙って効かない」型。override 本体の該当版へ足す。
+        if r["route"] == "overrides":
+            ovr_edits[stem].append(r)
             continue
         if ib in seed_isbns:
             held.append((r, "既に種4に在る(冪等skip)"))
@@ -186,8 +193,44 @@ def main():
                 "(題完全一致+版元+ISBN連番+発売日+著者の5ゲート)".format(TODAY, len(adds)))
             canon_plan.append((p, s, adds))
 
+    # ---- edition-overrides(キー = 公開slug・json は indent=1 / ensure_ascii=False の書式を保つ)----
+    ovr_raw = open(OVR, encoding="utf-8").read() if ovr_edits else ""
+    ovr = json.loads(ovr_raw) if ovr_edits else {}
+    if ovr_edits:
+        assert json.dumps(ovr, ensure_ascii=False, indent=1) == ovr_raw.rstrip("\n"), \
+            "edition-overrides.json の書式が再現できない → 手で直す"
+    ovr_adds = []
+    for stem, rs in ovr_edits.items():
+        pub = page(stem).get("slug") or stem
+        oeds = (ovr.get(pub) or {}).get("editions") or []
+        if not oeds:
+            for r in rs:
+                held.append((r, "edition-overrides に {} の editions が無い".format(pub)))
+            continue
+        have = {nisbn(v.get("isbn13")) for oe in oeds for v in (oe.get("volumes") or []) if v.get("isbn13")}
+        for r in rs:
+            ei = int(r["ei"])
+            # 頁の editions は override の editions で置換されたもの = 同じ並び。型とラベルでも一致を確かめる
+            oe = oeds[ei] if ei < len(oeds) else None
+            if not oe or oe.get("type") != r["etype"] or (r.get("label") and oe.get("label") != r["label"]):
+                held.append((r, "override の版[{}] が頁の版(型/ラベル)と一致しない".format(ei)))
+                continue
+            if r["isbn"] in have:
+                held.append((r, "既に override に在る(冪等skip)"))
+                continue
+            if any(v.get("number") == int(r["number"]) for v in (oe.get("volumes") or [])):
+                held.append((r, "override のその版に同じ巻番号が既に在る"))
+                continue
+            oe.setdefault("volumes", []).append(
+                {"cover_url": None, "isbn13": r["isbn"], "number": int(r["number"]),
+                 "release_date": r["date"] or None})
+            oe["volumes"].sort(key=lambda v: (v.get("number") is None, v.get("number")))
+            have.add(r["isbn"])
+            ovr_adds.append(r)
+
     print("\n=== 適用計画 ===")
     print("  種4(volumes-supplement-auto.yml) 追加 {} 巻".format(len(new4)))
+    print("  edition-overrides 追加 {} 巻 / {} 頁".format(len(ovr_adds), len({r["stem"] for r in ovr_adds})))
     print("  canonical seed 追加 {} 巻 / {} ファイル".format(
         sum(len(a) for _, _, a in canon_plan), len(canon_plan)))
     print("  保留 {} 巻".format(len(held)))
@@ -200,9 +243,19 @@ def main():
     os.makedirs(BAK, exist_ok=True)
     if new4:
         backup(SEED4)
+        # ★先頭のコメント行(種4-auto の「全消し禁止」注意書き)は yaml 往復で消えるので貼り直す
+        #   (_audit-vol0-hidden-first.py と同じ扱い 2026-09-24)
+        head = []
+        for ln in open(SEED4, encoding="utf-8").read().split("\n"):
+            if ln.startswith("#"):
+                head.append(ln)
+            else:
+                break
         seed["volumes"].extend(new4)
         tmp = SEED4 + ".new"
-        with open(tmp, "w", encoding="utf-8") as f:
+        with open(tmp, "w", encoding="utf-8", newline="\n") as f:
+            if head:
+                f.write("\n".join(head) + "\n")
             yaml.safe_dump(seed, f, allow_unicode=True, sort_keys=False, width=10000)
         chk = yaml.safe_load(open(tmp, encoding="utf-8"))
         assert len(chk["volumes"]) == n_seed_before + len(new4), "種4 件数検証NG"
@@ -216,6 +269,14 @@ def main():
         yaml.safe_load(open(tmp, encoding="utf-8"))
         os.replace(tmp, p)
     print("canonical: {} ファイル更新".format(len(canon_plan)))
+    if ovr_adds:
+        backup(OVR)
+        out = json.dumps(ovr, ensure_ascii=False, indent=1) + ("\n" if ovr_raw.endswith("\n") else "")
+        tmp = OVR + ".new"
+        open(tmp, "w", encoding="utf-8", newline="\n").write(out)
+        json.load(open(tmp, encoding="utf-8"))
+        os.replace(tmp, OVR)
+        print("edition-overrides: {} 巻追加".format(len(ovr_adds)))
 
     os.makedirs(os.path.dirname(LOG), exist_ok=True)
     with open(LOG, "a", encoding="utf-8") as f:
