@@ -120,3 +120,4 @@
 - [【型・44頁是正済】covers seedに在るのに頁がnull](cover_null_despite_seed.md) — 掃引はISBN集合突合10秒・直しは再promoteだけ・フルpromote後は必ず回す ／ [【型・09-23是正=週次でWorker deploy待ち】検索/一覧だけ古い=索引JSONのブラウザ4時間キャッシュ](index_json_browser_cache_stale.md) — 索引だけ毎回確認(304)に。エッジpurgeでは直らなかった型 ／ [【型・封鎖済】build経路3つにNODE_OPTIONSが要る](build_routes_need_node_options.md) — 差分反映だけ抜けてcode:134で死んだ
 - [【型・根治済】差分反映が対象頁だけのデータで建て、関連作品/著者keyが部分集合から計算されていた](diff_deploy_subset_related.md) — 生成を絞りデータは絞らない。関連の並びも見直し(3冊以上→年の近さ)
 - [【実測・1と2実装済】容量/ファイル数/表示速度の残りレバー(2026-09-24)](size_speed_levers_2026_09_24.md) — 巻サムネ3重SSR/フォントCSS全頁ブロック/作品1本の著者頁/開発頁の本番公開
+- [楽天API=1クエリ最大3,000件・予約harvestの取りこぼし警告(その他71/100頁)](rakuten_harvest_page_cap.md) — chirayomiUrl/limitedFlagは実際には来ない
