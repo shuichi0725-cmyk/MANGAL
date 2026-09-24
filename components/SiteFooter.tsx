@@ -11,10 +11,21 @@ export default function SiteFooter() {
     ["雑誌別", "/magazine"],  // ★2026-09-04 SEO ハブ面(雑誌/出版社/年)の入口を全頁から張る
     ["出版社別", "/publisher"],
     ["年別", "/year"],
+    ["ジャンル別", "/genre"],  // ★2026-09-24 ジャンル目次頁(新設)
     ["今日の一冊 過去ログ", "/sansedai-archive"],
     ["AI書評家リーグ", "/column-ai-league"],
     ["画集", "/art-books"],
     ["使い方", "/about"],
+  ];
+  // ★コーナーの入口(2026-09-24): ホームのコーナー群はJS描画・≡メニューは開いた時だけ描画のため、
+  //   ここに無いコーナーは配信HTMLのどこからもリンクされていなかった(sitemapにだけ載る孤立頁)。
+  //   新刊/アニメ化はヘッダーナビ(GlobalNav)に在るので重複させない。
+  const cornerLinks: Array<[string, string]> = [
+    ["ランキング", "/rankings"],
+    ["日替わり特集", "/tokushu"],
+    ["愛蔵版・合本", "/aizouban"],
+    ["特装版・限定版", "/tokusouban"],
+    ["カラー版", "/color-manga"],
   ];
   return (
     <footer className="mt-10 border-t border-[var(--color-line)] bg-[var(--color-surface)] px-5 py-6 text-[11px] text-ink/55">
@@ -25,6 +36,14 @@ export default function SiteFooter() {
       <nav className="mt-3 flex flex-wrap gap-x-4 gap-y-1.5">
         {corners.map(([label, href]) => (
           <Link key={href + label} href={href} className="hover:text-ink">
+            {label}
+          </Link>
+        ))}
+      </nav>
+      <nav aria-label="コーナー" className="mt-2 flex flex-wrap gap-x-4 gap-y-1.5">
+        <span className="font-semibold text-ink/40">コーナー</span>
+        {cornerLinks.map(([label, href]) => (
+          <Link key={href} href={href} className="hover:text-ink">
             {label}
           </Link>
         ))}

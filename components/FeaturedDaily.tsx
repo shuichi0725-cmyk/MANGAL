@@ -14,7 +14,29 @@ const PATTERNS: number[][] = [[3], [1, 1, 1], [1, 2], [2, 1]];
 
 export default function FeaturedDaily({ slot = 0 }: { slot?: number }) {
   const stock = useSansedaiStock();
-  if (!stock || stock.length === 0) return null;
+  // ★2026-09-24: 在庫の読み込み前(=配信HTML)は slot0 だけ見出し+過去ログの枠を出す(1冊分の高さを確保)。
+  //   slot0 はどの日替わりパターンでも1冊以上出る=必ず埋まる。slot1/2 は日によって0冊なので出さない。
+  //   旧は全slotが null = 配信HTMLに「今日の一冊」も過去ログへのリンクも無く、読み込み後に下がずれた。
+  if (!stock) {
+    if (slot !== 0) return null;
+    return (
+      <section className="mt-4 px-4">
+        <div className="rounded-xl border border-[var(--color-line)] bg-[var(--color-surface)] p-3.5 shadow-sm">
+          <div className="flex items-baseline justify-between">
+            <h2 className={`${DOT_HEADING} text-[14px] font-extrabold`}>
+              📖 今日の一冊
+              <span className="ml-1.5 text-[10px] font-semibold text-ink/45">毎日更新</span>
+            </h2>
+            <Link href="/sansedai-archive" className="text-[11px] font-semibold text-[var(--color-accent)]">
+              過去ログ →
+            </Link>
+          </div>
+          <div className="mt-2.5 h-[104px]" aria-hidden="true" />
+        </div>
+      </section>
+    );
+  }
+  if (stock.length === 0) return null;
   const day = jstDayIndex();
   const picks = picksForDay(stock, day);
   if (picks.length === 0) return null;

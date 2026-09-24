@@ -44,9 +44,29 @@ export function jstToday(): string {
 
 export default function DailyFeatureCorner() {
   const [day, setDay] = useState<TokushuDay | null>(null);
+  const [loaded, setLoaded] = useState(false);
   useEffect(() => {
-    fetchTokushuDay(jstToday()).then(setDay);
+    fetchTokushuDay(jstToday()).then((d) => {
+      setDay(d);
+      setLoaded(true);
+    });
   }, []);
+  // ★2026-09-24: 読み込み前(=配信HTML)は /tokushu への枠だけ先に出す。旧は null で、配信HTMLに
+  //   /tokushu へのリンクが1本も無く(ホームのJS描画以外に入口が無い孤立頁)、読み込み後に下がずれた。
+  //   中身は閲覧日のJSONで決まる(ビルド日では決められない)ので、枠+高さの確保だけにする。
+  if (!loaded) {
+    return (
+      <section className="mt-4 px-4">
+        <Link
+          href="/tokushu"
+          className="spring-press flex min-h-[116px] flex-col justify-center rounded-lg border border-[var(--color-line)] bg-[var(--color-surface)] p-3 shadow-[var(--shadow-lift)]"
+        >
+          <span className="text-[10px] font-extrabold tracking-wider text-ink/50">📅 本日の特集</span>
+          <span className="mt-1 text-[13px] font-bold text-ink/70">毎日日替わりのお題で人気作を集めた特集 →</span>
+        </Link>
+      </section>
+    );
+  }
   if (!day) return null;
 
   // ★書影のaltに作品名を出すため、URLだけでなく [書影, 題名] で持つ(2026-09-14)

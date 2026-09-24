@@ -65,7 +65,11 @@ export default async function GenrePage({ params }: { params: Promise<{ key: str
     <>
       <div className="min-h-screen bg-[var(--color-bg)] px-4 py-6 pb-16">
       <div className="mx-auto max-w-3xl lg:max-w-none">
-        <Link href="/" className="spring-press text-[12px] text-[var(--color-accent)]">← ホーム</Link>
+        <nav className="text-[12px] text-ink/55">
+          <Link href="/" className="spring-press text-[var(--color-accent)]">← ホーム</Link>
+          {" ・ "}
+          <Link href="/genre" className="spring-press text-[var(--color-accent)]">ジャンル一覧</Link>
+        </nav>
         <h1 className="mt-2 text-[22px] font-black">「{genre!.name}」の漫画</h1>
         {/* ★AIキュレーション文(genre-intros.yml)。 無ければデータ駆動の暫定文 */}
         {intro ? (

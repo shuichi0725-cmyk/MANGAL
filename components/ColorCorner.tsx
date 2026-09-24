@@ -12,13 +12,20 @@ import CoverImage from "@/components/CoverImage";
  *  データ=public/data/color-editions.json(_color-editions-build.py)。
  *  色トークンは全部テーマ変数=ライト/D3両対応(COLOR透かしの4色グラデのみ固定色)。 */
 
-type Entry = { v: number; u: string; c?: string | null; b?: string; t?: string };
+export type ColorCornerEntry = { v: number; u: string; c?: string | null; b?: string; t?: string };
+type Entry = ColorCornerEntry;
 
-const SHOW = 14;
+const SHOW = 14; // ★ホーム(home-design-12)の SSR 初期値も 14 枚で揃えている
 
-export default function ColorCorner() {
-  const [rows, setRows] = useState<Array<[string, Entry]> | null>(null);
-  const [total, setTotal] = useState(0);
+/** ★2026-09-24: `initial`/`initialTotal` = server が build 時に選んだ書影(SSR初期値)。旧は fetch 完了まで
+ *  null=配信HTMLに /color-manga へのリンクが無く、読み込み後に下の区画がずれていた。
+ *  渡せば SSR で同じ高さの帯が出て、マウント後にランダム抽選へ差し替わる。 */
+export default function ColorCorner({
+  initial,
+  initialTotal = 0,
+}: { initial?: Array<[string, Entry]>; initialTotal?: number } = {}) {
+  const [rows, setRows] = useState<Array<[string, Entry]> | null>(initial && initial.length ? initial : null);
+  const [total, setTotal] = useState(initialTotal);
   useEffect(() => {
     fetch("/data/color-editions.json")
       .then((r) => (r.ok ? r.json() : {}))
@@ -32,7 +39,7 @@ export default function ColorCorner() {
         }
         setRows(pool.slice(0, SHOW));
       })
-      .catch(() => setRows([]));
+      .catch(() => setRows((cur) => cur ?? []));
   }, []);
   if (rows === null || rows.length === 0) return null;
   return (

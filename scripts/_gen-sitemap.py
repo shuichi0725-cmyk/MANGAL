@@ -20,7 +20,8 @@ fixed = ["", "list", "browse", "about", "terms", "privacy", "contact",
          "tokushu", "rankings", "anime",  # ★2026-08-04 見直しで追加(日替わり特集ほか)
          "authors", "titles",  # ★2026-08-31 SEO(索引ハブ2本=クロール導線)
          "shinkan", "shinkan/this-week", "shinkan/next-month",  # ★2026-09-01 SEO(発売日の着地面)
-         "color-manga", "aizouban", "tokusouban"]  # ★2026-09-06 版もの3面(color-mangaは従来から漏れていた)
+         "color-manga", "aizouban", "tokusouban",  # ★2026-09-06 版もの3面(color-mangaは従来から漏れていた)
+         "genre"]  # ★2026-09-24 ジャンル目次頁(新設。/magazine /publisher /year と同格)
 # ★動的ランディング面(2026-08-04 見直しで追加: canonical持ちの索引対象なのにsitemap漏れだった)
 import yaml
 dyn = []

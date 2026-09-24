@@ -47,7 +47,9 @@ export function GenreRouletteDaily({ genres }: { genres: Array<{ key: string; na
   const g = genres[day % genres.length];
   return (
     <Link
-      href={`/browse?genre=${encodeURIComponent(g.key)}`}
+      // ★2026-09-24: 行き先を検索(/browse?genre=)からジャンル面(/genre/<key>)へ。「回ったジャンルの棚」=
+      //   ジャンル面そのもの。ジャンル面には「この条件で検索・絞り込む」ボタンがあるので検索にも1タップで行ける。
+      href={`/genre/${encodeURIComponent(g.key)}`}
       className="block rounded-xl bg-gradient-to-r from-[var(--color-accent)] to-[var(--color-accent)]/80 px-4 py-3.5 text-[var(--color-on-accent)] shadow-md spring-press"
     >
       <p className="text-[13px] font-bold leading-snug">

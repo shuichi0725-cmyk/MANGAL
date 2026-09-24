@@ -11,9 +11,11 @@ import { jstDayIndex } from "./SansedaiDaily";
  *  → サーバ側で書影あり候補poolを埋込み、client側で週替わりrotation(DeluxeWeeklyと同方式)。 */
 export type WeekendPick = { slug: string; title: string; authors: string; cover: string };
 
-export default function WeekendFeature({ pool }: { pool: WeekendPick[] }) {
-  // SSR時は描画せずclientで週を確定(build時の週が焼き付くhydrationズレ回避)
-  const [week, setWeek] = useState<number | null>(null);
+export default function WeekendFeature({ pool, initialWeek }: { pool: WeekendPick[]; initialWeek?: number }) {
+  // clientで閲覧日の週を確定する(build時の週が焼き付かないように)。
+  // ★2026-09-24: `initialWeek`(=build時の週)を渡すとSSRでその週の6作を出し、マウント後に閲覧日の週へ
+  //   差し替える(同じ週なら何も変わらない)。旧はSSRで空=読み込み後に6作ぶん下がずれていた。
+  const [week, setWeek] = useState<number | null>(initialWeek ?? null);
   useEffect(() => setWeek(Math.floor(jstDayIndex() / 7)), []);
   if (week === null || pool.length === 0) return null;
   const N = 6;

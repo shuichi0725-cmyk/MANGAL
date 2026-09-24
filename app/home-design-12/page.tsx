@@ -19,6 +19,8 @@ import HeroD3 from "./HeroD3";
 import Card from "@/components/ui/Card";
 import StatusDate from "./StatusDate";
 import { DOT_HEADING } from "@/lib/fonts";
+import { loadAizoubanStock, loadColorEditions, loadTokusoubanStock } from "@/lib/cornerData";
+import { jstDayIndex } from "@/lib/sansedai";
 
 export const metadata = { robots: { index: false, follow: false } };  // 実験頁=非索引
 
@@ -76,6 +78,17 @@ export default function Design12() {
   const Tile = ({ children, className = "" }: { children: React.ReactNode; className?: string }) => (
     <div className={`rounded-xl border border-[var(--color-line)] bg-[var(--color-surface)] shadow-sm ${className}`}>{children}</div>
   );
+
+  // ★2026-09-24: JS描画のコーナーにSSR初期値を渡す(配信HTMLに枠と一覧頁へのリンクを出し、
+  //   読み込み後に下がずれるのを防ぐ)。選び方=slugハッシュで決定的(ビルドごとに安定)。
+  //   マウント後は各コーナーが従来どおりランダム抽選に差し替える。
+  const aizStock = loadAizoubanStock();
+  const tksStock = loadTokusoubanStock();
+  const colorAll = Object.entries(loadColorEditions());
+  const aizInitial = { picks: seeded(aizStock, (p) => `${p.s}-${p.e}-${p.v}`, 4, 11), total: aizStock.length };
+  const tksInitial = { picks: seeded(tksStock, (p) => `${p.s}-${p.v}-${p.l}`, 4, 13), total: tksStock.length };
+  // 14 = ColorCorner の SHOW と同じ枚数(★"use client" の export は server から値として import できない=定数も不可)
+  const colorInitial = seeded(colorAll.filter(([, e]) => e.c), ([slug]) => slug, 14, 17);
 
   const banner = "日本の漫画 " + manga.length.toLocaleString() + "作品を収録 ✺ 全巻一覧・発売日・出版社がすぐわかる ✺ 今週も新刊入荷中 ✺ ";
 
@@ -186,7 +199,7 @@ export default function Design12() {
       <FeaturedDaily slot={0} />
       <KotobaDaily pool={kotobaPool} />
       <AnniversaryDaily />
-      <AizoubanCorner />
+      <AizoubanCorner initial={aizInitial} />
 
       {trivia.length > 0 && (
         <section className="mt-4 px-4">
@@ -214,6 +227,7 @@ export default function Design12() {
             <span className="ml-1.5 text-[10px] font-semibold text-ink/45">週替わり</span>
           </h2>
           <WeekendFeature
+            initialWeek={Math.floor(jstDayIndex() / 7)}
             pool={seeded(
               manga.filter((m) => m.status === "completed" && volCount(m) >= 3 && volCount(m) <= 5 && coverUrl(m)),
               (m) => m.slug,
@@ -255,14 +269,14 @@ export default function Design12() {
 
       {/* カラー版コーナー(2026-08-12 ユーザ指定=全集コーナーの直上) */}
       {/* 8.1【中】特装版・限定版コーナー(2026-09-06 新設。愛蔵版と同型=毎回ランダム4点+全部見る) */}
-      <TokusoubanCorner />
-      <ColorCorner />
+      <TokusoubanCorner initial={tksInitial} />
+      <ColorCorner initial={colorInitial} initialTotal={colorAll.length} />
       <ZenshuuCorner />
       <section className="mt-5 px-4">
         <div className="grid grid-cols-2 gap-2.5">
           {([
             ["📋 一覧表で探す", "全作品をソート・絞り込み", "/list"],
-            ["🏷️ ジャンルから", "グリッド検索へ", "/browse"],
+            ["🏷️ ジャンルから", "ジャンル別の作品一覧へ", "/genre"],  // ★2026-09-24 旧=/browse(ジャンル面への入口が無かった)
             ["あ 50音さくいん", "著者名から作品へ", "/authors"],
             ["📚 あなたの本棚", "所持巻を記録(準備中)", null],
           ] as const).map(([t, d, href]) =>

@@ -27,9 +27,14 @@ export const TYPE_JA: Record<string, string> = {
   other: "特装",
 };
 
-/** 表示のたびランダムにN点(Fisher-Yates)。マウント後に決めるのでhydration不一致なし。 */
-function usePicks<T>(url: string, n: number): { picks: T[]; total: number } | null {
-  const [state, setState] = useState<{ picks: T[]; total: number } | null>(null);
+/** 表示のたびランダムにN点(Fisher-Yates)。マウント後に決めるのでhydration不一致なし。
+ *  ★2026-09-24: `initial`(server が build 時に選んだN点)を初期値に持てる。旧は fetch 完了まで
+ *  null=配信HTMLに見出しも「全部見る」も無く(=一覧頁へのリンク0本)、読み込み後に下がずれていた。
+ *  initial を渡せば SSR で枠と作品リンクが出て、マウント後にランダムへ差し替わる(高さは同じ)。 */
+function usePicks<T>(url: string, n: number, initial?: { picks: T[]; total: number }): { picks: T[]; total: number } | null {
+  const [state, setState] = useState<{ picks: T[]; total: number } | null>(
+    initial && initial.picks.length ? initial : null,
+  );
   useEffect(() => {
     fetch(url)
       .then((r) => (r.ok ? r.json() : []))
@@ -41,7 +46,7 @@ function usePicks<T>(url: string, n: number): { picks: T[]; total: number } | nu
         }
         setState({ picks: pool.slice(0, n), total: rows?.length ?? 0 });
       })
-      .catch(() => setState({ picks: [], total: 0 }));
+      .catch(() => setState((cur) => cur ?? { picks: [], total: 0 }));
   }, [url, n]);
   return state;
 }
@@ -90,8 +95,8 @@ function Card({
 }
 
 /** 📚 愛蔵版・合本 = 通常版より冊数が減った合本だけ(選別は生成器側) */
-export function AizoubanCorner() {
-  const s = usePicks<AizItem>("/data/aizouban-stock.json", 4);
+export function AizoubanCorner({ initial }: { initial?: { picks: AizItem[]; total: number } } = {}) {
+  const s = usePicks<AizItem>("/data/aizouban-stock.json", 4, initial);
   if (!s || s.picks.length === 0) return null;
   return (
     <Frame
@@ -116,8 +121,8 @@ export function AizoubanCorner() {
 }
 
 /** 🎁 特装版・限定版 = 巻のvariant(フィギュア・小冊子つき等) */
-export function TokusoubanCorner() {
-  const s = usePicks<TksItem>("/data/tokusouban-stock.json", 4);
+export function TokusoubanCorner({ initial }: { initial?: { picks: TksItem[]; total: number } } = {}) {
+  const s = usePicks<TksItem>("/data/tokusouban-stock.json", 4, initial);
   if (!s || s.picks.length === 0) return null;
   return (
     <Frame

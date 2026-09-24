@@ -22,7 +22,18 @@ export default function AnniversaryDaily() {
       .then(setData)
       .catch(() => setData({}));
   }, []);
-  if (!data) return null;
+  // ★2026-09-24: 読み込み前(=配信HTML)は見出し+1作分の高さの枠を出す(旧は null で読み込み後に下がずれた)。
+  //   該当作が無い日(稀)は読み込み後に消える。
+  if (!data) {
+    return (
+      <section className="mt-4 px-4">
+        <div className="rounded-xl border border-[var(--color-line)] bg-[var(--color-surface)] p-3.5 shadow-sm">
+          <h2 className={`${DOT_HEADING} text-[14px] font-extrabold`}>🎂 今日が記念日の漫画</h2>
+          <div className="mt-2.5 h-[96px]" aria-hidden="true" />
+        </div>
+      </section>
+    );
+  }
   const { mmdd, year } = jstToday();
   const todays = (data[mmdd] || [])
     .map((a) => ({ ...a, n: year - a.y }))
