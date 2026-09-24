@@ -126,3 +126,4 @@
 - [【戒め】番号指示は一覧全体の番号で読む](feedback_numbered_items_whole_list.md) — 「3以外」を節の中だけと読み4〜6を落とした
 - [【型・是正済】特装版だけの種2版のレーベルが通常版に残る](special_only_edition_imprint_leak.md) — promote修正・実害17頁是正済
 - [【残作業】書影が本文サンプルページの型を縦横比で洗う](cover_sample_page_aspect_todo.md) — ちいかわ2・4巻で発見・いつか実施
+- [【道具の罠】--help非対応で本処理が走る/減少検出の明細はstderr/CRLF](tool_traps_2026_09_24.md) — 09-24 実踏3件
