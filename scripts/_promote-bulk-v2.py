@@ -3505,6 +3505,7 @@ def main():
     enrich_map = _load_anilist_enrich_map()
     enrich_pages = 0
     status_demote_pages = {"anilist": 0, "booklive": 0, "stale24": 0}
+    status_reopen_pages = 0
     print(f"  anilist enrich map: {len(enrich_map):,} series_key", file=sys.stderr)
     # synopsis 和訳 map = {anilist_id(str): ja}。 種a description の日本語要約。
     # ★git追跡 seed(高価なAI生成物=種3と同格で永続化。 旧.cache から移行 2026-06-02)。
@@ -3896,6 +3897,22 @@ def main():
                     if af.get("original_authors") and not new_yml.get("original_authors"):
                         new_yml["original_authors"] = [{"name": n, "role": "writer"} for n in af["original_authors"]]
                     author_fill_pages += 1
+        # ★完結判定のやり直し(2026-09-24 チキン型): builder の直近12ヶ月判定(build側の
+        #   「★「不明=完結」既定の廃止」節)は**種2の巻**で行うため、その後に canonical /
+        #   extra-editions / 種4 で足した新しい巻が効かず、最新巻が今年出ている連載中が「完結」の
+        #   まま残っていた(チキン「ドロップ」前夜の物語 48巻=2026-08・red Eyes 28巻 等7頁。
+        #   ランキング「今年完結した大作」に載っていた)。最終 editions で同じ規則をもう一度当てる。
+        #   証拠のある完結(AniList FINISHED / BookLive)は直下の外部権威層で completed に戻る。
+        #   status-corrections(証拠つきの確定)頁は触らない。
+        if new_yml.get("status") == "completed" and not (
+            _STATUS_CORR.get(slug) or _STATUS_CORR.get(new_yml.get("slug") or "")
+        ):
+            _lf0 = _latest_first_print(new_yml)
+            _cut0 = (datetime.date.today() - datetime.timedelta(days=365)).isoformat()
+            if _lf0 and _lf0[:10] >= _cut0[: len(_lf0[:10])]:
+                new_yml["status"] = "ongoing"
+                new_yml["year_ended"] = None
+                status_reopen_pages += 1
         # ★連載状態の外部権威層 (2026-08-18 連載中再検査GO。 [[ongoing-recheck]]):
         #   従来は種3(AI推測)のongoingが一度も降格されず、30年前完結作が「連載中」のまま残る
         #   非対称があった(ぎゅわんぶらあ型 11,285頁中約3,800頁)。優先順:
@@ -4277,6 +4294,8 @@ def main():
     print(f"  anilist enrich(id/synonyms/genres/tags 付与): {enrich_pages}", file=sys.stderr)
     print(f"  連載中→完結 降格(外部権威層): anilist={status_demote_pages['anilist']} "
           f"booklive={status_demote_pages['booklive']} stale24={status_demote_pages['stale24']}", file=sys.stderr)
+    print(f"  完結→連載中 戻し(足した巻が直近12ヶ月): {status_reopen_pages}(うち証拠ありは上の降格で完結に再確定)",
+          file=sys.stderr)
     print(f"  synopsis 種a和訳 付与: {synopsis_pages}(残りは空=種3 AI文不使用)", file=sys.stderr)
     print(f"  catch コピー付与: {catch_pages}", file=sys.stderr)
     print(f"  synopsis(slug seed)付与: {synslug_pages}", file=sys.stderr)
