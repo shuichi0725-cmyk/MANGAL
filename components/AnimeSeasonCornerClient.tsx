@@ -4,37 +4,41 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import CoverImage from "./CoverImage";
 import MarqueeTitle from "./MarqueeTitle";
-import { sourceLabel, type AnimeSeasonEntry } from "@/lib/animeSeason";
+import { seasonReached, sourceLabel, type AnimeSeasonEntry } from "@/lib/animeSeason";
 import { DOT_HEADING } from "@/lib/fonts";
 
 const SHOW = 12;
 
+export type SeasonBlock = { key: string; label: string; entries: AnimeSeasonEntry[] };
+
 /** 今季アニメコーナーの表示部(client)。★再読込ごとにランダム入替(2026-07-12 ユーザ要望)。
  *  シャッフル=Fisher-Yates非復元抽出なので同じ作品が2つ出ることはない。
- *  SSR初期値=人気順先頭12(hydration一致)→マウント後にシャッフルへ差し替え。 */
+ *  SSR初期値=ビルド時の今季の人気順先頭12(hydration一致)→マウント後に、
+ *  JSTの今日が次の季に達していれば次の季へ切り替えてから(2026-09-24)シャッフルへ差し替え。 */
 export default function AnimeSeasonCornerClient({
-  seasonKey,
-  label,
-  total,
-  entries,
+  current,
+  upcoming,
 }: {
-  seasonKey: string;
-  label: string;
-  total: number;
-  entries: AnimeSeasonEntry[];
+  current: SeasonBlock;
+  upcoming: SeasonBlock | null;
 }) {
-  const [picks, setPicks] = useState<AnimeSeasonEntry[]>(entries.slice(0, SHOW));
+  const [season, setSeason] = useState<SeasonBlock>(current);
+  const [picks, setPicks] = useState<AnimeSeasonEntry[]>(current.entries.slice(0, SHOW));
 
   useEffect(() => {
-    const a = entries.slice();
+    const s = upcoming && seasonReached(upcoming.key) ? upcoming : current;
+    const a = s.entries.slice();
     for (let i = a.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
       [a[i], a[j]] = [a[j], a[i]];
     }
+    setSeason(s);
     setPicks(a.slice(0, SHOW));
-  }, [entries]);
+  }, [current, upcoming]);
 
   if (picks.length === 0) return null;
+  const { key: seasonKey, label } = season;
+  const total = season.entries.length;
 
   return (
     <section className="mt-4 px-4">
