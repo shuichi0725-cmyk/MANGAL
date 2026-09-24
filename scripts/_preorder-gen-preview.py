@@ -319,6 +319,8 @@ with open(PEND, "a", encoding="utf-8") as f:
         f.write(ln + "\n")
 with open(TRIAGE, "a", encoding="utf-8") as f:
     for klass, isbn, title, why in holds:
-        f.write(f"{klass}_hold\t{isbn}\t\t{str(title)[:40]}\t\t\t{why}\n")
+        # ★列を合わせる(2026-09-24): 見出し8列(class isbn ym title author publisher slug reason)に対し7列しか書かず、
+        #   理由が slug 列に入っていた(= reason 列が空で、保留理由を読む側が拾えなかった)
+        f.write(f"{klass}_hold\t{isbn}\t\t{str(title)[:40]}\t\t\t\t{why}\n")
 json.dump(made, open(f"{ROOT}/.cache/preorders/preview-made-{WHICH}.json", "w"))
 print(f"{WHICH}: 生成{len(made)} / 保留{len(holds)} / NDL照合キュー+{len(pend_lines)}")

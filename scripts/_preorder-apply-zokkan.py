@@ -146,7 +146,7 @@ yaml.dump(doc, open(AUTO, "w", encoding="utf-8"), allow_unicode=True, sort_keys=
 json.dump(sorted(touched), open(f"{ROOT}/.cache/preorders/zokkan-touched.json", "w"))
 with open(f"{ROOT}/docs/production-diagnostics/preorder-triage.tsv", "a", encoding="utf-8") as f:
     for isbn, title, why in wl:
-        f.write(f"zokkan_hold\t{isbn}\t\t{str(title)[:40]}\t\t\t{why}\n")
+        f.write(f"zokkan_hold\t{isbn}\t\t{str(title)[:40]}\t\t\t\t{why}\n")  # ★8列に合わせる(2026-09-24: 理由が slug 列にずれていた)
 
 # ★covers seed自動追記(2026-07-10 ユーザ指摘=新刊巻の書影忘れ): harvestの実URL書影を
 #   data/seeds/covers.jsonl.gz へ純粋追加。promoteの_cover_forがnull書影を充填する経路に乗せる。

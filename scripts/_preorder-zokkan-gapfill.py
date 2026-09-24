@@ -265,12 +265,13 @@ def main():
         json.dump(cls, open(CLS, "w", encoding="utf-8"), ensure_ascii=False)
     with open(TRIAGE, "a", encoding="utf-8") as f:
         for stem, n, isbn, t in added:
-            f.write(f"zokkan_gapfill\t{isbn}\t\t{str(t)[:40]}\t\t\t欠番回収 stem={stem} vol={n}\n")
+            # ★8列に合わせる(2026-09-24: 見出し class isbn ym title author publisher slug reason に対し7列で、理由が slug 列にずれていた)
+            f.write(f"zokkan_gapfill\t{isbn}\t\t{str(t)[:40]}\t\t\t\t欠番回収 stem={stem} vol={n}\n")
         for stem, n in notfound:
-            f.write(f"zokkan_gap_open\t\t\t\t\t\t欠番未回収 stem={stem} vol={n}(楽天に出ず)\n")
+            f.write(f"zokkan_gap_open\t\t\t\t\t\t\t欠番未回収 stem={stem} vol={n}(楽天に出ず)\n")
     with open(TRIAGE, "a", encoding="utf-8") as f:
         for slug, n, isbn, t in filled:
-            f.write(f"zokkan_leadfill\t{isbn}\t\t{str(t)[:40]}\t\t\t先頭欠け補完 slug={slug} vol={n}\n")
+            f.write(f"zokkan_leadfill\t{isbn}\t\t{str(t)[:40]}\t\t\t\t先頭欠け補完 slug={slug} vol={n}\n")
     print(f"回収 {len(added)} 巻 → classified.json の zokkan に追記(以後は既存ゲートを通る) / 未回収 {len(notfound)} / 先頭欠け補完 {len(filled)}")
 
 

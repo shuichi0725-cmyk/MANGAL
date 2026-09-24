@@ -237,6 +237,6 @@ with open(f"{ROOT}/data/seeds/rakuten-kana-pending.jsonl", "a", encoding="utf-8"
         f.write(ln + "\n")
 with open(f"{ROOT}/docs/production-diagnostics/preorder-triage.tsv", "a", encoding="utf-8") as f:
     for isbn, title, why in holds:
-        f.write(f"ex_mid_hold\t{isbn}\t\t{str(title)[:40]}\t\t\t{why}\n")
+        f.write(f"ex_mid_hold\t{isbn}\t\t{str(title)[:40]}\t\t\t\t{why}\n")  # ★8列に合わせる(2026-09-24: 理由が slug 列にずれていた)
 json.dump(made, open(f"{ROOT}/.cache/preorders/preview-made-exmid.json", "w"))
 print(f"ex_mid: 生成{len(made)} / 保留{len(holds)}(キャッシュで全巻揃わず等)")
