@@ -123,3 +123,4 @@
 - [楽天API=1クエリ最大3,000件・予約harvestは上限で自動細分(子ジャンル→判型→在庫状況)](rakuten_harvest_page_cap.md) — 品切れは在庫状況が空で引けない・レートは_get内
 - [【戒め】報告は常に日本語で](feedback_report_in_japanese.md) — 要約(コンパクション)直後に完了報告が英語になり「終わったの？」と聞かれた
 - [【GO待ち】レーベル欄に巻番号56頁/旅ボン頁バラバラ](pending_go_imprint_volnum_tabibon.md) — 2026-09-24日次で提示。ノヴァコミックス　1型=楽天seriesName由来 ／ [【戒め】ツールの定型文を結論にしない(NDL単発429≠規制)](feedback_sanity_check_tool_warnings.md)
+- [【戒め】番号指示は一覧全体の番号で読む](feedback_numbered_items_whole_list.md) — 「3以外」を節の中だけと読み4〜6を落とした
