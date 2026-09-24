@@ -125,3 +125,4 @@
 - [【GO待ち】レーベル欄に巻番号56頁/旅ボン頁バラバラ](pending_go_imprint_volnum_tabibon.md) — 2026-09-24日次で提示。ノヴァコミックス　1型=楽天seriesName由来 ／ [【戒め】ツールの定型文を結論にしない(NDL単発429≠規制)](feedback_sanity_check_tool_warnings.md)
 - [【戒め】番号指示は一覧全体の番号で読む](feedback_numbered_items_whole_list.md) — 「3以外」を節の中だけと読み4〜6を落とした
 - [【型・是正済】特装版だけの種2版のレーベルが通常版に残る](special_only_edition_imprint_leak.md) — promote修正・実害17頁是正済
+- [【残作業】書影が本文サンプルページの型を縦横比で洗う](cover_sample_page_aspect_todo.md) — ちいかわ2・4巻で発見・いつか実施
