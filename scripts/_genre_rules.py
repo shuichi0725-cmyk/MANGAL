@@ -13,6 +13,7 @@
 - ★war は**タグのみ**(紹介文の「戦争」は受験戦争/お家騒動/戦争孤児等の合成・背景語で誤爆する)。
 - ★4コマの紹介文判定は「巻末/おまけ/併録/収録」を含む文を除外(おまけ4コマ型の誤爆)。
 - romcom の本丸(romance∩comedy で明記なし)の裁定は skill romcom-judge(AI)。ここは明記層のみ。
+- ★isekai/gourmet は「タグ+題名/紹介文の明記」が揃った時だけ(CORROBORATED・2026-09-24)。タグ単独は精度不足。
 
 CLI(バックフィル用):
   python scripts/_genre_rules.py --list          # 全頁走査→追加候補TSV+集計(書き込みなし)
@@ -63,6 +64,26 @@ TEXT_TO_GENRE = (
 )
 _4KOMA_TEXT_EXCLUDE = ("巻末", "おまけ", "併録", "収録")
 
+# ★タグ+明記の二段(2026-09-24 ユーザGO「要素とジャンルのずれを揃える」):
+#   要素欄は rank60 のタグ(AniList)や楽天あらすじ由来タグも表示するのに、ジャンルへ写すのは AniList rank70 以上
+#   だけだった(_build-anilist-enrich-map.py の THEME_RANK)= 要素「異世界」722作・「料理」740作にジャンルが無かった。
+#   ただしタグ単独は精度が足りない(抜き取り: 異世界71〜86%・グルメ50〜80%)ので、題名/紹介文の**明記**が揃った時だけ。
+#   ・楽天タグは同じ楽天の紹介文から作られている=紹介文での裏付けが独立でない → 語の要求数を上げる。
+#   ・抜き取り(各16〜18作): 異世界 楽天18/18・AniList18/18 / グルメ 楽天(2語)16/16・AniList(1語)17/18。
+#   ★BLは入れない: 腐女子もの・ゲイに囲まれる女性・LGBT一般作が語では弾けず約75%= レーベル側で別途。
+#   ★語は部分一致。別の語を含む語(「ご飯」⊃「飯」)は1回の言及を2語と数えるので入れない。
+ISEKAI_WORDS = ("異世界", "転生", "転移", "召喚", "トリップ", "別世界", "ゲームの世界", "乙女ゲー",
+                "小説の世界", "物語の世界", "漫画の世界", "前世")
+GOURMET_WORDS = ("料理", "グルメ", "食堂", "ごはん", "飯", "レシピ", "美食", "食べ歩き", "食卓", "弁当",
+                 "パン屋", "ラーメン", "寿司", "スイーツ", "お菓子", "和菓子", "洋菓子", "ケーキ", "ビール",
+                 "ワイン", "日本酒", "お酒", "珈琲", "コーヒー", "喫茶", "居酒屋", "屋台", "定食", "調理",
+                 "シェフ", "板前", "晩酌")
+# (ジャンル, 対象タグ名, 明記語, 必要語数[AniList等の独立タグ], 必要語数[楽天タグ])
+CORROBORATED = (
+    ("isekai", frozenset({"Isekai"}), ISEKAI_WORDS, 1, 1),
+    ("gourmet", frozenset({"Food"}), GOURMET_WORDS, 1, 2),
+)
+
 
 def _tag_hits(tags):
     for t in tags or ():
@@ -76,6 +97,26 @@ def _tag_hits(tags):
             yield g, t.get("name")
 
 
+def _corroborated_hits(title, tags, text):
+    """タグ+明記の二段(CORROBORATED)。yield (genre, 根拠文字列)。"""
+    body = f"{title or ''}／{text or ''}"
+    for g, names, words, need_ind, need_rkt in CORROBORATED:
+        best_need = None
+        for t in tags or ():
+            if not isinstance(t, dict) or t.get("name") not in names:
+                continue
+            rank = t.get("rank")
+            if rank is not None and rank < MIN_TAG_RANK:
+                continue
+            need = need_rkt if (t.get("category") or "") == "Rakuten" else need_ind
+            best_need = need if best_need is None else min(best_need, need)
+        if best_need is None:
+            continue
+        hits = [w for w in words if w in body]
+        if len(hits) >= best_need:
+            yield g, f"{g}<tag+text:{'/'.join(hits[:3])}"
+
+
 def derive(title: str, tags, text: str) -> set:
     """明記シグナル → 派生ジャンルキー集合。tags= page.tags のdict列(name/rank)。
     呼び側で valid_gens と交差させること。"""
@@ -85,6 +126,8 @@ def derive(title: str, tags, text: str) -> set:
         if pat in t:
             out.add(g)
     for g, _n in _tag_hits(tags):
+        out.add(g)
+    for g, _r in _corroborated_hits(title, tags, text):
         out.add(g)
     x = text or ""
     for pat, g in TEXT_TO_GENRE:
@@ -104,6 +147,8 @@ def _reasons(title, tags, text):
             rs.append(f"{g}<title:{pat}")
     for g, n in _tag_hits(tags):
         rs.append(f"{g}<tag:{n}")
+    for _g, r in _corroborated_hits(title, tags, text):
+        rs.append(r)
     for pat, g in TEXT_TO_GENRE:
         if pat in (text or ""):
             if g == "4-koma" and any(e in (text or "") for e in _4KOMA_TEXT_EXCLUDE):
