@@ -57,7 +57,7 @@ B=NDL新着回収(納本済み過去分)。毎日でなくてよい(間隔が空
 
 | # | やること | ツール(コマンド) |
 |---|---|---|
-| 1 | 予約harvest | `python scripts/_rakuten-preorder-harvest.py` |
+| 1 | 予約harvest | `python scripts/_rakuten-preorder-harvest.py` ← ★**最後の行を読む**: 「★★ 取りこぼし警告」が出たら進めない(楽天は1クエリ最大100頁=3,000件。頁上限で打ち切られると当月〜近い未来の新刊が**毎回同じ所で黙って落ちる**)。「★ 取りこぼし注意」(上限の85%超)は次の手=ジャンル細分を検討。状態= `.cache/preorders/harvest-status.json`。2026-09-24 実測=その他 71/100頁 |
 | 2 | ★**増加分に絞る**(必須) | `python scripts/_preorder-increment.py`  ← prev差分+過去draft除外。飛ばすと水増し |
 | 3 | 分類 | `python scripts/_preorder-classify.py` |
 | 4 | ①続巻→種4+反映 | `python scripts/_preorder-apply-zokkan.py` → `python scripts/_reflect-targeted.py --only <touched> --commit-only` ★**--push禁止**=commit止め(最後にまとめて1回push) |
