@@ -10,6 +10,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__))).replace("\\",
 SRU = "https://ndlsearch.ndl.go.jp/api/sru"
 RATE = 1.2  # ★楽天Books API と同じ。NDL遮断回避(per-ISBN burst 0.2sで429を踏んだ反省)。
 WINDOW = 500  # NDL SRU 1照会の最大取得(maximumRecords上限)
+NDL_429_BACKOFF = (3, 10, 30, 90)  # _lookup.ndl_live_retry と同じ。4回続けて429=連続429で exit 2
 YEAR = sys.argv[1] if len(sys.argv) > 1 else "2026"
 M_FROM = int(sys.argv[2]) if len(sys.argv) > 2 else 1
 M_UNTIL = int(sys.argv[3]) if len(sys.argv) > 3 else 12
@@ -26,6 +27,7 @@ def sru(cql, start=1):
     p = {"operation": "searchRetrieve", "query": cql, "recordSchema": "dcndl",
          "maximumRecords": str(WINDOW), "startRecord": str(start)}
     url = SRU + "?" + urllib.parse.urlencode(p)
+    n429 = 0
     for attempt in range(4):
         try:
             x = urllib.request.urlopen(urllib.request.Request(url, headers={"User-Agent": "MANGAL/1.0"}), timeout=60).read().decode("utf-8", "replace")
@@ -33,8 +35,18 @@ def sru(cql, start=1):
             return html.unescape(x)
         except Exception as e:
             if isinstance(e, urllib.error.HTTPError) and e.code == 429:  # ★厳密判定(偽429対策2026-08-03)
-                print(f"  429 → {RATE*10}s backoff", flush=True)
-            time.sleep(RATE * (attempt + 3))  # backoff
+                # ★単発429は規制ではない(2026-09-24 実測: 1件目429→後で5件通る)= _lookup.ndl_live_retry と同じ待ちで吸収
+                n429 += 1
+                w = NDL_429_BACKOFF[attempt]
+                print(f"  429 → {w}s待って再試行 ({attempt + 1}/4)", flush=True)
+                time.sleep(w)
+            else:
+                time.sleep(RATE * (attempt + 3))  # backoff
+    if n429 == 4:
+        # ★連続429=本当のスロットル。空を返すと月が「完了」扱いになり黙って取りこぼす→止めて呼び手に知らせる
+        fo.flush()
+        print("★NDL連続429 → 中断(取得済みは書き込み済み・時間を置いて同コマンドで再開)", flush=True)
+        sys.exit(2)
     return ""
 
 def parse(xml):

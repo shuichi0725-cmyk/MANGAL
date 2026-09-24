@@ -5,6 +5,7 @@ metadata:
   node_type: memory
   type: reference
   originSessionId: 40db3460-5533-4358-8d06-8214ea9ecaea
+  modified: 2026-09-24T05:31:22.920Z
 ---
 
 ★叩き方の実装の正 = **`scripts/_lookup.py` + skill external-data-access**(2026-07-04)。コピペ再実装禁止。
@@ -16,6 +17,10 @@ metadata:
 - **0.2秒(5req/秒)で1,043件連続 → HTTP 429 / IP遮断を実踏**(SRU)。memoryの「継続大量アクセスで遮断」が現実化。
 - → ★**全NDL SRU照会は 1.2秒/req(=~0.83req/秒、 楽天parity)**。小バッチ・月分割・間隔空け。**過剰に遅くする必要は無い**(楽天と同じでよい)。
 - 遮断されても**回復する**(数時間)。慌てず slow down + 待つ。OAIは別endpointで遮断されない(Identifyで生存確認可)。
+- ★**単発429 ≠ 規制**(2026-09-24 ユーザ指摘で是正): 同日に「1件目で429」→「5件通って6件目で429」→「backoffで2回吸収し11件目で4連続429」を実測。
+  = **通る/弾かれるが混ざる状態**がある。規制中なら毎回1件目から弾かれるはず。1件目の429で「IP規制中」と結論して報告したのは誤り。
+  → バッチは 3→10→30→90s の backoff で吸収し、**連続429(4回)だけで中断**(`_lookup.ndl_live_retry` と同形。`_verify-kana-pending.py` / `_ndl-discovery.py` を揃えた。
+  `_distill_daily.py` は子の出力中の「429」文字列で止めていた偽429型→終了コード2で判定)。[[feedback_no_negative_record_on_failure]]
 
 ## 2経路の使い分け(実測)
 - **SRU** (`/api/sru?operation=searchRetrieve&query=CQL&recordSchema=dcndl`): ★**著者典拠ID(`auth/entity/NNN`)が取れる**(homonym/clustering用)。**但しレート制限**→1.2s。CQL例 `ndc=726.1 AND from="YYYY-MM-DD" AND until="YYYY-MM-DD"`(漫画×年月)。**1照会500件窓**(maximumRecords上限)。

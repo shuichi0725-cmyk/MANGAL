@@ -8,7 +8,7 @@ data/seeds/rakuten-kana-pending.jsonl の status=pending を古い順に NDL SRU
       不一致 → status=mismatch + docs/production-diagnostics/kana-mismatch.tsv へ(slug直し要否の人間判断)
   - NDL未収載 → pending のまま残る(=漏れない。納本まで毎日試行される)
 使い方: python scripts/_verify-kana-pending.py [--limit 200]
-レート: 1.2s/req・429即中断。
+レート: 1.2s/req・単発429は3→10→30→90s待って再試行・連続429(4回)で中断。
 """
 import json, os, re, sys, time, html, unicodedata, urllib.request, urllib.parse, urllib.error, datetime
 sys.stdout.reconfigure(encoding="utf-8")
@@ -19,6 +19,7 @@ PEND = os.path.join(ROOT, "data", "seeds", "rakuten-kana-pending.jsonl")
 MISS = os.path.join(ROOT, "docs", "production-diagnostics", "kana-mismatch.tsv")
 LIMIT = int(sys.argv[sys.argv.index("--limit") + 1]) if "--limit" in sys.argv else 200
 TODAY = datetime.date.today().isoformat()
+NDL_429_BACKOFF = (3, 10, 30, 90)  # _lookup.ndl_live_retry と同じ
 
 def norm_kana(s):
     """比較用正規化: NFKC・ひら→カタ・スペース/中点/長音記号ゆらぎを吸収"""
@@ -32,17 +33,23 @@ def ndl_title_kana(isbn):
     p = {"operation": "searchRetrieve", "query": q, "recordSchema": "dcndl", "maximumRecords": "3"}
     req = urllib.request.Request("https://ndlsearch.ndl.go.jp/api/sru?" + urllib.parse.urlencode(p))
     req.add_header("User-Agent", "Mozilla/5.0")
-    _rate_gate.wait("ndl", 1.3)  # ★NDLグローバル間隔(_lookup.ndl_live等と共有=並走合算429を防ぐ)
-    try:
-        xml = html.unescape(urllib.request.urlopen(req, timeout=30).read().decode("utf-8"))
-    except urllib.error.HTTPError as e:
-        # ★HTTP 429=実スロットルは即中断(2026-09-02): 旧は呼び側の汎用exceptで握られ
-        #   pending継続のまま規制中に残り全件を叩き続けていた(NDLはIP遮断の実績あり)
-        if e.code == 429:
-            print("★NDL429→中断(このバッチの確定分は書き戻す・1時間単位で休ませる)"); sys.exit(2)
-        raise
-    if "Too Many Requests" in xml:
-        print("★NDL429(本文)→中断"); sys.exit(2)
+    # ★HTTP 429 は汎用exceptに落とさない(2026-09-02: 旧は握られて規制中も全件叩き続けた)。
+    # ★ただし単発429は規制ではない(2026-09-24 実測: 1件目429→後で5件通る→6件目429)。
+    #   _lookup.ndl_live_retry と同じ待ち(3→10→30→90s)で吸収し、4回続けて429=連続429の時だけ中断。
+    for i, w in enumerate(NDL_429_BACKOFF):
+        _rate_gate.wait("ndl", 1.3)  # ★NDLグローバル間隔(_lookup.ndl_live等と共有=並走合算429を防ぐ)
+        try:
+            xml = html.unescape(urllib.request.urlopen(req, timeout=30).read().decode("utf-8"))
+        except urllib.error.HTTPError as e:
+            if e.code != 429:
+                raise
+            xml = None
+        if xml is not None and "Too Many Requests" not in xml:
+            break
+        if i == len(NDL_429_BACKOFF) - 1:
+            print("★NDL連続429→中断(このバッチの確定分は書き戻す・時間を置いて再開)"); sys.exit(2)
+        print(f"  429 → {w}s待って再試行 ({i + 1}/{len(NDL_429_BACKOFF)})", flush=True)
+        time.sleep(w)
     m = re.search(r"<dc:title>.*?<dcndl:transcription>([^<]+)</dcndl:transcription>", xml, re.S)
     return m.group(1).strip() if m else None
 

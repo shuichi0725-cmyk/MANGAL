@@ -55,9 +55,15 @@ if STAGE == "--discover":
         r = run([PY, "scripts/_ndl-discovery.py", YEAR, str(m), str(m)])
         out = (r.stdout or "") + (r.stderr or "")
         print(out[-1200:])
-        if "429" in out or "Too Many" in out:
-            print("★NDL throttle検知 → 中断(連打しない)。時間を置いて再実行。")
+        # ★終了コードで判定(2026-09-24): 旧は出力に「429」の文字列があれば中断していた=子が単発429を
+        #   backoffで吸収して「429 → …再試行」と表示しただけでも止まる偽429型(2026-08-03 と同型)。
+        #   子(_ndl-discovery.py)は連続429の時だけ exit 2 する。
+        if r.returncode == 2:
+            print("★NDL連続429 → 中断(連打しない)。時間を置いて再実行。")
             sys.exit(2)
+        if r.returncode != 0:
+            print(f"★_ndl-discovery.py が異常終了(code {r.returncode}) → 中断")
+            sys.exit(1)
     print("discover完了 → --plan へ")
 
 elif STAGE == "--plan":
