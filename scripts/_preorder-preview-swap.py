@@ -48,6 +48,12 @@ def load_keep():
 
 
 def main():
+    # ★未知の引数は実行しない(2026-09-24: `--help` を付けて呼んだら本実行されpreview 100頁が退場した)
+    unknown = [a for a in sys.argv[1:] if a != "--list"]
+    if unknown:
+        print(__doc__)
+        print(f"未知の引数 {unknown} → 何もせず終了(実行は引数なし / 確認は --list)")
+        sys.exit(1)
     dry = "--list" in sys.argv
     drafts = stems(f"{ROOT}/.cache/preorders/drafts/*.yml")
     productionized = stems(f"{ROOT}/data/seeds/preorder-pages/*.yml")

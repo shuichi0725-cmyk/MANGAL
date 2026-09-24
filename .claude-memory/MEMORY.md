@@ -122,3 +122,4 @@
 - [【実測・1と2実装済】容量/ファイル数/表示速度の残りレバー(2026-09-24)](size_speed_levers_2026_09_24.md) — 巻サムネ3重SSR/フォントCSS全頁ブロック/作品1本の著者頁/開発頁の本番公開
 - [楽天API=1クエリ最大3,000件・予約harvestは上限で自動細分(子ジャンル→判型→在庫状況)](rakuten_harvest_page_cap.md) — 品切れは在庫状況が空で引けない・レートは_get内
 - [【戒め】報告は常に日本語で](feedback_report_in_japanese.md) — 要約(コンパクション)直後に完了報告が英語になり「終わったの？」と聞かれた
+- [【GO待ち】レーベル欄に巻番号56頁/旅ボン頁バラバラ](pending_go_imprint_volnum_tabibon.md) — 2026-09-24日次で提示。ノヴァコミックス　1型=楽天seriesName由来 ／ [【戒め】ツールの定型文を結論にしない(NDL単発429≠規制)](feedback_sanity_check_tool_warnings.md)
