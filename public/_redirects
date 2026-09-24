@@ -2,66 +2,13 @@
 # 旧 slug → 新 slug の 301(漫画頁は /manga/ 配下=この形状以外は届かない)
 # ★Cloudflare Pages は静的redirect上限2,000行(preview=部分カバー)。本番全件は KV REDIRECTS 側。
 
-/manga/16-nen-kimi-wo-omo-to-konnani-okiku /manga/16-nen-kimi-o-omou-to-konnani-ookiku 301
-/manga/biiparu-kozo-no-autodoa-kyohon /manga/biiparu-kozou-no-autodoa-kyouhon 301
-/manga/boken-kyoryukan /manga/bouken-kyouryuukan 301
-/manga/cho-ten-chan /manga/chou-ten-chan 301
-/manga/color-me /manga/collar-me 301
-/manga/comic-q /manga/comic-cue 301
-/manga/dai-chohen-doraemon-1984 /manga/dai-chouhen-doraemon 301
-/manga/dai-chouhen-doraemon-1984 /manga/dai-chouhen-doraemon 301
-/manga/dainiji-chosen-senso-yugio /manga/dainiji-chousen-sensou-yugio 301
-/manga/doto-no-saikyo-senshi-suima-kun /manga/dotou-no-saikyou-suit-suima-kun 301
-/manga/escalation /manga/takamari-shisuu-esukareeshon 301
-/manga/feito-kishi /manga/fate-kishi 301
-/manga/haishin-chu-megami-channeru /manga/haishin-chuu-megami-channel 301
-/manga/hodogaya-saichusokuha-sebun /manga/hodogaya-saichuusokuha-seven 301
-/manga/holy-maruo-1996 /manga/holy-maruo 301
-/manga/honto-ni-atta-nama-maji-giretsu-byoin-esupii /manga/hontou-ni-atta-nama-maji-giretsu-byouin-esupii 301
-/manga/hoshi-no-kaabii /manga/hoshi-no-kirby-takeuchi 301
-/manga/hoshi-no-kaabii-takeuchi-2025 /manga/hoshi-no-kirby-takeuchi 301
-/manga/hoshi-no-kirby-manpukupupupufantajii /manga/hoshi-no-kirby-takeuchi 301
-/manga/kaika-ansatsucho-tenposen /manga/kaika-ansatsuchou-tenpousen 301
-/manga/kando-retsuden /manga/kandouou-rendetsu 301
-/manga/kiken-na-choai /manga/kiken-na-chouai 301
-/manga/kiko-kiden-hiwo-senki /manga/kikou-kiden-hiwou-senki 301
-/manga/kiraware-reijo-wa-gin-no-oji-ni-amayakasareru /manga/kiraware-reijou-wa-gin-no-ouji-ni-amayakasareru 301
-/manga/kokokyoshimonogatari /manga/koukou-kyoushi-monogatari 301
-/manga/komikku-bii-taro /manga/comic-bii-tarou 301
-/manga/koukoukyoushimonogatari /manga/koukou-kyoushi-monogatari 301
-/manga/kurasshu-junkie-spirit /manga/crash-junky-spirit 301
-/manga/kureyon-shin-chan-gemu-bukku /manga/kureyon-shin-chan-gemu-book 301
-/manga/kyukoku-no-seijo-desuga-kokugai-tsuiho-sarechaimashita /manga/kyuukoku-no-seijo-desu-kokugai-tsuihousareta-sarechaimashita 301
-/manga/la-vie-en-lose /manga/la-vie-en-rose-1998 301
-/manga/la-vie-en-rose-koga-1996 /manga/la-vie-en-rose-1998 301
-/manga/mindi-land /manga/mindy-land 301
-/manga/miyazawa-kenji-mangakan-1985 /manga/miyazawa-kenji-mangakan-yamada 301
-/manga/miyazawa-kenji-mangakan-yamada-1985 /manga/miyazawa-kenji-mangakan-yamada 301
-/manga/moto-yakuza-wa-shinshi-de-moju /manga/moto-yakuza-wa-shinshi-de-moujuu 301
-/manga/moto-yan-oeru-wa-kojirase-eriito-no-iinari-omocha /manga/moto-yan-ooeru-wa-kojirase-elite-no-iinari-omocha 301
-/manga/nakayoshi-orijinaruban-sakuhinshu /manga/nakayoshi-orijinaruban-sakuhinshuu 301
-/manga/okisugite-kare-no-are-ga-sakitcho-shika-hairimasen /manga/ookisugite-kare-no-are-ga-sakitcho-shika-hairimasen 301
-/manga/oku-sama-hi-no-yojin /manga/oku-sama-hi-no-youjin 301
-/manga/pet-boys /manga/pet-boy-s 301
-/manga/renai-taishitsu /manga/love-taishitsu 301
-/manga/sadisuteikku-sayaka-chan /manga/sadistic-sayaka-chan 301
-/manga/saitsuyo-akuyaku-reijo-nikki /manga/saitsuyo-akuyaku-reijou-nikki 301
-/manga/supeshiyaru-bangutara-mama /manga/supeshiyaru-banguutara-mama 301
-/manga/takamari-shisu-esukareeshon /manga/takamari-shisuu-esukareeshon 301
-/manga/tanimura-hitoshi-no-bakuretsu-tabiuchi-special-2002 /manga/tanimura-hitoshi-no-bakuretsu-tabiuchi-special 301
-/manga/tanimura-hitoshi-no-bakuretsu-tabiuchi-supesharu /manga/tanimura-hitoshi-no-bakuretsu-tabiuchi-special 301
-/manga/tanimura-hitoshi-no-bakuretsu-tabiuchi-supesharu-2002 /manga/tanimura-hitoshi-no-bakuretsu-tabiuchi-special 301
-/manga/tears-to-tiara-kakan-no-daichi /manga/teiaazu-tou-tiara 301
-/manga/tosei-genso-hakubutsushi /manga/tousei-gensou-hakubutsushi 301
-/manga/wada-rajio-no-jojo-ni-poiman /manga/wada-radio-no-jojo-ni-poiman 301
-/manga/watashi-no-ojo-sama /manga/watashi-no-ojou-sama 301
-/manga/yamamoto-futaro-kun /manga/yamamoto-fuutarou-kun 301
-/manga/yujin-burando /manga/yuujin-brand 301
-/manga/yume-ha-taafu-wo-kakemeguru /manga/yume-ha-taafu-o-kakemeguru 301
-/manga/yuru-deizu /manga/yuru-days 301
-/manga/zeruda-no-densetsu-4-koma-manga-gekijo /manga/zeruda-no-densetsu-4-koma-manga-gekijou 301
-/manga/zeruda-no-densetsu-4-koma-manga-gekijo-2 /manga/zeruda-no-densetsu-4-koma-manga-gekijou 301
-/manga/zettai-reido-3 /manga/zettai-reido 301
+/manga/chikin-drop-zenya-no-monogatari /manga/chicken-drop-zenya-no-monogatari 301
+/manga/kochira-katsushikaku-kameari-koen-mae-hashutsujo /manga/kochira-katsushikaku-kameari-kouen-mae-hashutsujo 301
+/manga/kochira-katsushikaku-kameari-koenmae-hashutsujo /manga/kochira-katsushikaku-kameari-kouen-mae-hashutsujo 301
+/manga/kochira-katsushikaku-kameari-kouenmae-hashutsujo /manga/kochira-katsushikaku-kameari-kouen-mae-hashutsujo 301
+/manga/korekara-ore-wa-kohai-ni-dakaremasu /manga/korekara-ore-wa-kouhai-ni-dakaremasu 301
+/manga/raamen-hakkenden /manga/ramen-hakkenden 301
+/manga/redeyes /manga/red-eyes 301
 /manga/0-1996 /manga/zero-1996 301
 /manga/0-2009 /manga/zero-2009 301
 /manga/0-hour /manga/zero-hour 301
@@ -177,6 +124,7 @@
 /manga/16-byokan-no-misshitsu /manga/16-byoukan-no-misshitsu 301
 /manga/16-engage /manga/16engage 301
 /manga/16-life /manga/16life 301
+/manga/16-nen-kimi-wo-omo-to-konnani-okiku /manga/16-nen-kimi-o-omou-to-konnani-ookiku 301
 /manga/16-sai-no-rasuto-supaato /manga/16-sai-no-last-supaato 301
 /manga/17-17 /manga/seventeen-seventeen 301
 /manga/17-ans /manga/17ans 301
@@ -2353,6 +2301,7 @@
 /manga/biikyu-paradaisu /manga/biikyuu-paradise 301
 /manga/biikyu-tenshi /manga/biikyuu-tenshi 301
 /manga/biinasu-no-nagisa /manga/venus-no-nagisa 301
+/manga/biiparu-kozo-no-autodoa-kyohon /manga/biiparu-kozou-no-autodoa-kyouhon 301
 /manga/biipurasu-heroes /manga/b-heroes 301
 /manga/biiraifu /manga/blife 301
 /manga/biiru-daisuki /manga/beer-daisuki 301
@@ -2573,6 +2522,7 @@
 /manga/boken-gabotenjima /manga/bouken-gabotenjima 301
 /manga/boken-hosokyoku /manga/bouken-housoukyoku 301
 /manga/boken-jiku-taimu-netto /manga/bouken-jikuu-time-net 301
+/manga/boken-kyoryukan /manga/bouken-kyouryuukan 301
 /manga/boken-ni-tsuitekonaide-okaa-san /manga/bouken-ni-tsuitekonaide-okaa-san 301
 /manga/boken-ni-wa-buki-ga-hitsuyo-da /manga/bouken-ni-wa-buki-ga-hitsuyou-da 301
 /manga/boken-rubi /manga/bouken-rubi 301
@@ -3304,7 +3254,6 @@
 /manga/chikaranoarika /manga/chikara-no-arika 301
 /manga/chikashitsu-danjon /manga/chikashitsu-dungeon 301
 /manga/chikettsu /manga/tickets 301
-/manga/chikin-drop-zenya-no-monogatari /manga/chicken-drop-zenya-no-monogatari 301
 /manga/chiko-wa-geesen-ichibanboshi /manga/chiko-wa-gacen-ichibanboshi 301
 /manga/chikuho-danshi-tokohen /manga/chikuhoo-otoko-toukouhen 301
 /manga/chikujoin-san-hashagisugi /manga/chikujouin-san-hashagisugi 301
@@ -3476,6 +3425,7 @@
 /manga/cho-shojo-asuka /manga/chou-shoujo-asuka 301
 /manga/cho-shojo-yufo /manga/chou-shoujo-ufo 301
 /manga/cho-tantei-jikenbo-rein-kodo /manga/chou-tantei-file-rain-code 301
+/manga/cho-ten-chan /manga/chou-ten-chan 301
 /manga/cho-tensai-hatsumei-reijo-no-powerful-ryochi-kaikaku /manga/chou-tensai-hatsumei-reijou-no-powerful-ryouchi-kaikaku 301
 /manga/cho-to-hana-no-kankeisei /manga/chou-to-hana-no-kankeisei 301
 /manga/cho-to-kedamono /manga/chou-to-kedamono 301
@@ -3856,6 +3806,7 @@
 /manga/coelacanth /manga/shiirakansu 301
 /manga/coffee-vanilla /manga/coffee-ando-vanilla 301
 /manga/coffee-vanilla-black /manga/coffee-ando-vanilla-black 301
+/manga/color-me /manga/collar-me 301
 /manga/color-meiru /manga/color-mail 301
 /manga/color-mimori-2012 /manga/color-mimori 301
 /manga/color-ton /manga/color-tone 301
@@ -3871,6 +3822,7 @@
 /manga/comic-kaneko-atsushi-extra-works /manga/comic 301
 /manga/comic-kyuuyaku-seisho-souseiki /manga/souseiki-1989 301
 /manga/comic-nihon-no-meijo /manga/comic-nippon-no-meijou 301
+/manga/comic-q /manga/comic-cue 301
 /manga/comic-ryokitekina-kanojo /manga/comic-ryoukitekina-kanojo 301
 /manga/comic-seikoku-gunryuden /manga/comic-seikoku-gunryuuden 301
 /manga/comic-shin-genjitsu /manga/comic-shingenjitsu 301
@@ -4001,6 +3953,8 @@
 /manga/dai-2-ji-chosen-senso /manga/dai-2-ji-chousen-sensou 301
 /manga/dai-3-oji-wa-suroraifu-wo-go-shomo /manga/dai-3-ouji-wa-surooraifu-o-go-goshomou 301
 /manga/dai-akuto-shonen /manga/dai-akutou-shounen 301
+/manga/dai-chohen-doraemon-1984 /manga/dai-chouhen-doraemon 301
+/manga/dai-chouhen-doraemon-1984 /manga/dai-chouhen-doraemon 301
 /manga/dai-fuyusen-jidai /manga/dai-fuyuusen-jidai 301
 /manga/dai-ikkyu-junaizai /manga/dai-ikkyuu-junaizai 301
 /manga/dai-jigokujo-chidaruma-rikishi /manga/dai-jigokujou-chidaruma-rikishi 301
@@ -4091,6 +4045,7 @@
 /manga/dainihon-samurai-girl-shinto /manga/dainihon-samurai-girl-shintou 301
 /manga/dainihontengutoekotoba /manga/dai-nihon-tengutou-ekotoba 301
 /manga/dainihontengutouekotoba /manga/dai-nihon-tengutou-ekotoba 301
+/manga/dainiji-chosen-senso-yugio /manga/dainiji-chousen-sensou-yugio 301
 /manga/daio /manga/daiou 301
 /manga/dairokuten-mao-nobunaga /manga/dairokuten-maou-nobunaga 301
 /manga/dairyoki /manga/dairyouki 301
@@ -5023,6 +4978,7 @@
 /manga/doto-no-ai /manga/dotoo-no-ai 301
 /manga/doto-no-ikase-tai /manga/dotou-no-ikase-tai 301
 /manga/doto-no-mushi /manga/dotou-no-mushi 301
+/manga/doto-no-saikyo-senshi-suima-kun /manga/dotou-no-saikyou-suit-suima-kun 301
 /manga/doto-no-sasaguchigumi /manga/dotou-no-sasaguchigumi 301
 /manga/doto-no-shojo-2 /manga/dotou-no-shoujo 301
 /manga/doto-senkan-yamato /manga/dotou-senkan-yamato 301
@@ -5470,6 +5426,7 @@
 /manga/erugo /manga/ergo 301
 /manga/erunowa-renai-jakusha-to-peke-tenshi /manga/erunowa-love-jakusha-to-peke-tenshi 301
 /manga/es-eternal-sabbath /manga/es 301
+/manga/escalation /manga/takamari-shisuu-esukareeshon 301
 /manga/escape-kano-2014 /manga/escape-kano 301
 /manga/eshi-ikegami-ryoichi-zenshigoto /manga/eshi-ikegami-ryouichi-zenshigoto 301
 /manga/esoragoto-noto /manga/esoragoto-note 301
@@ -5581,13 +5538,6 @@
 /manga/fainaru-fantajii-14-raraferu-sensei-no-oshiete-yaruyo /manga/final-fantasy-14-raraferu-sensei-no-oshiete-yaruyo 301
 /manga/fainaru-fantajii-reishiki-gaiden-hyoken-no-shinigami /manga/final-fantasy-reishiki-gaiden-hyouken-no-shinigami 301
 /manga/fainaru-tensei /manga/final-tensei 301
-/manga/faindaa-no-hoyo /manga/faindaa-no-houyou 301
-/manga/faindaa-no-hyoteki /manga/faindaa-no-hyouteki 301
-/manga/faindaa-no-kagero /manga/faindaa-no-kagerou 301
-/manga/faindaa-no-katsubo /manga/faindaa-no-katsubou 301
-/manga/faindaa-no-kodo /manga/faindaa-no-kodou 301
-/manga/faindaa-no-netsujo /manga/faindaa-no-netsujou 301
-/manga/faindaa-no-ryoshu /manga/faindaa-no-ryoshuu 301
 /manga/faindo /manga/find 301
 /manga/fair-lady-ha-namida-wo-nagasu /manga/fair-lady-ha-namida-o-nagasu 301
 /manga/fairu-0 /manga/file-0 301
@@ -5666,6 +5616,7 @@
 /manga/feito-gurando-odaa-epikku-obu-remunanto-ashu-tokuiten-4-kinki-korin-teien-seiremu-itannaru-seiremu /manga/fate-grand-order-epikku-obu-remunanto-ashu-tokuiten-4-kinki-kourin-teien-seiremu-itannaru-seiremu 301
 /manga/feito-gurando-odaa-epikku-obu-remunanto-ashu-tokuiten-ekusutora-shinkai-denno-rakudo-serafu /manga/fate-grand-order-epikku-obu-remunanto-ashu-tokuiten-extra-shinkai-dennou-rakudo-seraph 301
 /manga/feito-gurando-odaa-makuai-no-monogatari /manga/fate-grand-order-makuai-no-monogatari 301
+/manga/feito-kishi /manga/fate-kishi 301
 /manga/fellow-mellow /manga/feroumerou 301
 /manga/femme-fatale-unmei-no-onna /manga/famu-fataru 301
 /manga/fenriru-kaa-san-to-attaka-gohan-attomaaku-komikku /manga/fenrir-kaa-san-to-attaka-gohan-attomaaku-comic 301
@@ -5699,7 +5650,6 @@
 /manga/final-fantasy-lost-stranger-2 /manga/final-fantasy-lost-stranger 301
 /manga/final-fantasy-lost-stranger-2021 /manga/final-fantasy-lost-stranger 301
 /manga/final-rappu /manga/final-lap 301
-/manga/finder-kyoto-jogakuin-monogatari /manga/faindaa 301
 /manga/fine-otani-2009 /manga/fine-otani 301
 /manga/finlandia-santa-yousei-gakkou /manga/finrandia 301
 /manga/fire-emblem-1997 /manga/fire-emblem 301
@@ -7679,6 +7629,7 @@
 /manga/haipaasenshi-gandamu-boi /manga/haipaasenshi-gundam-boy 301
 /manga/hairando-no-yaju /manga/hairando-no-yajuu 301
 /manga/haisai-taiyo-musume /manga/haisai-taiyou-musume 301
+/manga/haishin-chu-megami-channeru /manga/haishin-chuu-megami-channel 301
 /manga/haishin-yusha /manga/haishin-yuusha 301
 /manga/haishinchu-megami-channeru /manga/haishinchuu-megami-channel 301
 /manga/haishinchuu-megami-channeru /manga/haishinchuu-megami-channel 301
@@ -8954,6 +8905,7 @@
 /manga/hocho-san-no-uwasa /manga/houchou-san-no-uwasa 301
 /manga/hochonin-ajihei /manga/houchounin-ajihei 301
 /manga/hodo-gyangu-absurd /manga/houdou-gang-absurd 301
+/manga/hodogaya-saichusokuha-sebun /manga/hodogaya-saichuusokuha-seven 301
 /manga/hodoyoi-otoko-tachi-no-baraado /manga/hodoyoi-otoko-tachi-no-ballad 301
 /manga/hoero-toshi /manga/hoero-toushi 301
 /manga/hoeru-uchoten-boze /manga/hoeru-uchouten-boze 301
@@ -9122,6 +9074,7 @@
 /manga/hole-in-one-2 /manga/hole-in-one 301
 /manga/holiday-love-fuufukan-renai /manga/horidei-love 301
 /manga/holmes-sensei-no-suteki-na-boken /manga/holmes-sensei-no-suteki-na-bouken 301
+/manga/holy-maruo-1996 /manga/holy-maruo 301
 /manga/homatsu-ni-kami-wa-madoromu /manga/houmatsu-ni-kami-wa-madoromu 301
 /manga/homatsu-no-mujina /manga/houmatsu-no-mujina 301
 /manga/home-nakamura-2022 /manga/home-nakamura 301
@@ -9220,6 +9173,7 @@
 /manga/honto-ni-atta-naasu-no-hna-hanashi /manga/hontou-ni-atta-nurse-no-hna-hanashi 301
 /manga/honto-ni-atta-nama-fuyu-no-dokusha-toko-3-dai-scoop-sp /manga/hontou-ni-atta-nama-fuyu-no-dokusha-toukou-3-dai-scoop-sp 301
 /manga/honto-ni-atta-nama-kowakatta-dai-retsuden-esupii /manga/hontou-ni-atta-nama-kowakatta-dai-rendetsu-esupii 301
+/manga/honto-ni-atta-nama-maji-giretsu-byoin-esupii /manga/hontou-ni-atta-nama-maji-giretsu-byouin-esupii 301
 /manga/honto-ni-atta-nama-marutsu-to-kenminsei-esupii /manga/hontou-ni-atta-nama-marutsu-to-kenminsei-esupii 301
 /manga/honto-ni-atta-nama-obaka-mama-kyosokyoku-esupii /manga/hontou-ni-atta-nama-obaka-mama-kyousoukyoku-esupii 301
 /manga/honto-ni-atta-neko-no-bakusho-kando-banashi /manga/hontou-ni-atta-neko-no-bakushou-kandou-banashi 301
@@ -9314,14 +9268,17 @@
 /manga/hoshi-ni-negai-o-maita-2016 /manga/hoshi-ni-negai-o-maita 301
 /manga/hoshi-no-hitomi-no-shiruetto-seishun-finaare /manga/hoshi-no-hitomi-no-silhouette-seishun-finaare 301
 /manga/hoshi-no-jo-sama /manga/hoshi-no-joou-sama 301
+/manga/hoshi-no-kaabii /manga/hoshi-no-kirby-takeuchi 301
 /manga/hoshi-no-kaabii-64-4-koma-gyagu-batoru /manga/hoshi-no-kirby-64-4-koma-gyagu-battle 301
 /manga/hoshi-no-kaabii-64-4koma-64-ga-gekijo /manga/hoshi-no-kirby-64-4koma-64-ga-gekijou 301
 /manga/hoshi-no-kaabii-moretsu-pupupu-awaa /manga/hoshi-no-kirby-mooretsu-pupupu-hour 301
 /manga/hoshi-no-kaabii-pakutsu-to-daibakusho /manga/hoshi-no-kirby-pakutsu-to-daibakushou 301
 /manga/hoshi-no-kaabii-pupupu-na-mainichi /manga/hoshi-no-kirby-pupupu-na-mainichi 301
+/manga/hoshi-no-kaabii-takeuchi-2025 /manga/hoshi-no-kirby-takeuchi 301
 /manga/hoshi-no-kaabii-ukiuki-adobenchaa /manga/hoshi-no-kirby-ukiuki-adventure 301
 /manga/hoshi-no-kaabii-yurutto-pupupu /manga/hoshi-no-kirby-yurutto-pupupu 301
 /manga/hoshi-no-kirby-kyo-mo-manmaru-nikki /manga/hoshi-no-kirby-kyou-mo-manmaru-nikki 301
+/manga/hoshi-no-kirby-manpukupupupufantajii /manga/hoshi-no-kirby-takeuchi 301
 /manga/hoshi-no-kirby-pupupu-hiiro /manga/hoshi-no-kirby-pupupu-hero 301
 /manga/hoshi-no-nohara-o-yuko /manga/hoshi-no-nohara-o-yukou 301
 /manga/hoshi-no-oji-sama /manga/hoshi-no-ouji-sama 301
@@ -11465,6 +11422,7 @@
 /manga/kaiju-tan-arawaru /manga/kaijuu-tan-arawaru 301
 /manga/kaijuiro-no-shima /manga/kaijuuiro-no-shima 301
 /manga/kaijuzamurai /manga/kaijuuzamurai 301
+/manga/kaika-ansatsucho-tenposen /manga/kaika-ansatsuchou-tenpousen 301
 /manga/kaikan-baajin-haaremu /manga/kaikan-virgin-harem 301
 /manga/kaikan-doru /manga/kaikan-doll 301
 /manga/kaikan-jurietto /manga/kaikan-juliet 301
@@ -11810,6 +11768,7 @@
 /manga/kando-kizoku-na-ore-no-kuzu-gift-ga-tsuyosugiru /manga/kandou-kizoku-na-ore-no-kuzu-gift-ga-tsuyosugiru 301
 /manga/kando-love-story-100p-chohen-best-5 /manga/kandou-love-story-100p-chouhen-best-5 301
 /manga/kando-o-retsuden /manga/kandou-ou-rendetsu 301
+/manga/kando-retsuden /manga/kandouou-rendetsu 301
 /manga/kando-tenshi-unpoko /manga/kandou-tenshi-unpoko 301
 /manga/kandousaretanodetanteiyahajimemasu-jitsuwaboukokunojooudanantenaishi /manga/kandou-sareta-node-tantei-ya-hajimemasu 301
 /manga/kane-meikyu /manga/kane-meikyuu 301
@@ -12771,6 +12730,7 @@
 /manga/kikazaru-hina-wa-mada-koi-wo-shiranai /manga/kikazaru-hina-wa-mada-koi-o-shiranai 301
 /manga/kiken-chitai-danshi /manga/kiken-chitai-otoko 301
 /manga/kiken-chitai-sennyu-chosa-hokokusho /manga/kiken-chitai-sennyuu-chousa-houkokusho 301
+/manga/kiken-na-choai /manga/kiken-na-chouai 301
 /manga/kiken-na-jijo /manga/kiken-na-jijou 301
 /manga/kiken-na-pinkitsushiyu-boi /manga/kiken-na-pinkitsushiyu-boy 301
 /manga/kiken-na-shumatsu /manga/kiken-na-shuumatsu 301
@@ -12784,6 +12744,7 @@
 /manga/kikkunoni /manga/kikkunooni 301
 /manga/kiko-chan-sumairu /manga/kiko-chan-smile 301
 /manga/kiko-gundan-nishi-he /manga/kikou-gundan-nishi-he 301
+/manga/kiko-kiden-hiwo-senki /manga/kikou-kiden-hiwou-senki 301
 /manga/kikoku-no-dojo /manga/kikoku-no-doujo 301
 /manga/kikumon-koko-motebu /manga/kikumon-koukou-motebu 301
 /manga/kikuyaro-no-capcom-daisukibon /manga/kikuyarou-no-capcom-daisukibon 301
@@ -13129,6 +13090,7 @@
 /manga/kiraware-matsuko-no-issho /manga/kiraware-matsuko-no-isshou 301
 /manga/kiraware-oji-no-yarinaoshi /manga/kiraware-ouji-no-yarinaoshi 301
 /manga/kiraware-ojo-ha-juo-sama-no-okiniiri-dokuhime-ga-risetto-shita-jinsei-de-dekiai-saremasu /manga/kiraware-joou-ha-juuou-sama-no-okiniiri-dokuhime-ga-reset-shita-jinsei-de-dekiai-saremasu 301
+/manga/kiraware-reijo-wa-gin-no-oji-ni-amayakasareru /manga/kiraware-reijou-wa-gin-no-ouji-ni-amayakasareru 301
 /manga/kiraware-tsuma-wa-eiyu-shogun-to-rikon-shitai /manga/kiraware-tsuma-wa-eiyuu-shogun-to-rikon-shitai 301
 /manga/kiraware-yusha-ni-tensei-shita-node-aisare-yusha-o-mezashimasu /manga/kiraware-yuusha-ni-tensei-shita-node-aisare-yuusha-o-mezashimasu 301
 /manga/kiraware-yusha-o-enjita-ore-wa-nazeka-rasubosu-ni-sukarete-issho-ni-seikatsushitemasu /manga/kiraware-yuusha-o-enjita-ore-wa-naze-rasubosu-ni-sukarete-isshokenmei-ni-seikatsushitemasu 301
@@ -13386,9 +13348,6 @@
 /manga/kochikame-senryobako /manga/kochikame-senryoubako 301
 /manga/kochira-ai-oto-seyo /manga/kochira-ai-outou-seyo 301
 /manga/kochira-kara-iremashoka-are-o /manga/kochira-kara-iremashouka-are-o 301
-/manga/kochira-katsushikaku-kameari-koen-mae-hashutsujo /manga/kochira-katsushikaku-kameari-kouen-mae-hashutsujo 301
-/manga/kochira-katsushikaku-kameari-koenmae-hashutsujo /manga/kochira-katsushikaku-kameari-kouen-mae-hashutsujo 301
-/manga/kochira-katsushikaku-kameari-kouenmae-hashutsujo /manga/kochira-katsushikaku-kameari-kouen-mae-hashutsujo 301
 /manga/kochira-kofuku-anshin-iinkai-desu /manga/kochira-koufuku-anshin-iinkai-desu 301
 /manga/kochira-kokyu-hikage-no-uranai-beya /manga/kochira-koukyuu-hikage-no-uranai-beya 301
 /manga/kochira-ninjo-minseika /manga/kochira-ninjou-minseika 301
@@ -13823,6 +13782,7 @@
 /manga/kokoku-no-shugosha /manga/koukoku-no-shugosha 301
 /manga/kokoku-no-tate /manga/koukoku-no-tate 301
 /manga/kokokukan-1301 /manga/koukokukan-1301 301
+/manga/kokokyoshimonogatari /manga/koukou-kyoushi-monogatari 301
 /manga/kokomade-fantajii /manga/kokomade-fantasy 301
 /manga/kokonotsu-no-yujo /manga/kokonotsu-no-yuujou 301
 /manga/kokoro-ga-danshi-shogakusei /manga/kokoro-ga-otoko-shougakusei 301
@@ -13944,6 +13904,7 @@
 /manga/komikku-ainu-no-rekishi /manga/comic-ainu-no-rekishi 301
 /manga/komikku-aku-no-musume /manga/comic-aku-no-musume 301
 /manga/komikku-anjieriiku-special-2-kaanibaru /manga/comic-angelique-special-2-carnival 301
+/manga/komikku-bii-taro /manga/comic-bii-tarou 301
 /manga/komikku-furusato /manga/comic-furusato 301
 /manga/komikku-furusato-hokkaido /manga/comic-furusato-hokkaido 301
 /manga/komikku-furutsu-mitsumame /manga/comic-fruits-mitsumame 301
@@ -14247,7 +14208,6 @@
 /manga/korei-kyoshitsu /manga/kourei-kyoushitsu 301
 /manga/korekara-doshiyo /manga/korekara-doushiyou 301
 /manga/korekara-no-shigunaru /manga/korekara-no-signal 301
-/manga/korekara-ore-wa-kohai-ni-dakaremasu /manga/korekara-ore-wa-kouhai-ni-dakaremasu 301
 /manga/korette-harasumento-desu-ka /manga/korette-harassment-desu-ka 301
 /manga/korette-renshuudesu-ka /manga/korette-renshuu-desuka 301
 /manga/kori-ga-tokete-chi-ni-kawaru-made /manga/koori-ga-tokete-chi-ni-kawaru-made 301
@@ -14453,6 +14413,7 @@
 /manga/kouenjiatari /manga/kouenji-atari 301
 /manga/koufuku-no-susume-himawari-2003 /manga/koufuku-no-susume-himawari 301
 /manga/koukokunosouheki-kizumononohanayomegaiden /manga/koukoku-no-souheki-kizumono-no-hanayome-gaiden 301
+/manga/koukoukyoushimonogatari /manga/koukou-kyoushi-monogatari 301
 /manga/koukousei-web-sakka-no-mote-seikatsu /manga/koukousei-uebu-sakka-no-mote-seikatsu 301
 /manga/koukouseiwebsakkanomoteseikatsu-antagakamisakkanawakenaidesho-to /manga/koukousei-uebu-sakka-no-mote-seikatsu 301
 /manga/koukyuu-alice-2023 /manga/koukyuu-alice 301
@@ -14690,6 +14651,7 @@
 /manga/kurarionnokodomotachi /manga/clarion-no-kodomotachi 301
 /manga/kurashitemitaramanpukutaigohan-puukettotokidokibankoku /manga/kurashite-mitara-manpuku-thai-gohan-phuket-tokidoki-bangkok 301
 /manga/kurasshu-densetsu /manga/crash-densetsu 301
+/manga/kurasshu-junkie-spirit /manga/crash-junky-spirit 301
 /manga/kurasshu-masamune /manga/crash-masamune 301
 /manga/kurasu-2-kanojo-ga-futari-iru /manga/class-2-kanojo-ga-futari-iru 301
 /manga/kurasu-de-2-banme-ni-kawaii-onnanoko-to-tomodachi-ni-natta /manga/class-de-2-banme-ni-kawaii-onnanoko-to-tomodachi-ni-natta 301
@@ -14743,6 +14705,7 @@
 /manga/kureyon-shin-chan-anime-eigaban-gachinko-gyakushu-no-robo-to-chan /manga/kureyon-shin-chan-anime-eigaban-gachinko-gyakushuu-no-robo-too-chan 301
 /manga/kureyon-shin-chan-fo-biginaazu /manga/kureyon-shin-chan-foo-biginaazu 301
 /manga/kureyon-shin-chan-gachinko-gyakushu-no-roboto-chan /manga/kureyon-shin-chan-gachinko-gyakushuu-no-robotoo-chan 301
+/manga/kureyon-shin-chan-gemu-bukku /manga/kureyon-shin-chan-gemu-book 301
 /manga/kureyon-shin-chan-za-faasuto-orijin-teiibui-anime-ando-eigaka-episodoshu /manga/kureyon-shin-chan-za-first-origin-teiibui-anime-ando-eigaka-episoodoshuu 301
 /manga/kuri-chan-no-afurika-dobutsu-ryoko /manga/kuri-chan-no-afurika-doubutsu-ryokou 301
 /manga/kuri-ippei-sakuhinshu /manga/kuri-ippei-sakuhinshuu 301
@@ -15424,6 +15387,7 @@
 /manga/kyuki-no-adabana /manga/kyuuki-no-adabana 301
 /manga/kyuki-z /manga/kyuuki-z 301
 /manga/kyukoku-no-meshia /manga/kyuukoku-no-meshia 301
+/manga/kyukoku-no-seijo-desuga-kokugai-tsuiho-sarechaimashita /manga/kyuukoku-no-seijo-desu-kokugai-tsuihousareta-sarechaimashita 301
 /manga/kyukon /manga/kyuukon 301
 /manga/kyukyoku /manga/kyuukyoku 301
 /manga/kyukyoku-chojin-aaru /manga/kyuukyoku-choujin-aaru 301
@@ -15502,6 +15466,8 @@
 /manga/la-karaka /manga/la-calaca 301
 /manga/la-la-la /manga/rarara 301
 /manga/la-maquilleuse-versailles-no-keshoushi /manga/la-makiyuuzu 301
+/manga/la-vie-en-lose /manga/la-vie-en-rose-1998 301
+/manga/la-vie-en-rose-koga-1996 /manga/la-vie-en-rose-1998 301
 /manga/la-vie-en-rose-yamada-2005 /manga/la-vie-en-rose-yamada 301
 /manga/lady-bravo /manga/ready-bravo 301
 /manga/lady-ladies-hau-2 /manga/ready-lady-s-how-to 301
@@ -17349,6 +17315,7 @@
 /manga/mind /manga/mined 301
 /manga/mind-game-2 /manga/mind-game 301
 /manga/mind-game-3 /manga/mind-game-2004 301
+/manga/mindi-land /manga/mindy-land 301
 /manga/minegishi-san-wa-otsu-kun-ni-tabesasetai /manga/minegishi-san-wa-ootsu-kun-ni-tabesasetai 301
 /manga/minikui-oku-no-gyakushu /manga/minikui-orc-no-gyakushuu 301
 /manga/minikui-yukaku-no-ko /manga/minikui-yuukaku-no-ko 301
@@ -17521,7 +17488,9 @@
 /manga/miyamoto-sakura-ga-kawaii-dake-no-shosetsu-no-manga /manga/miyamoto-sakura-ga-kawaii-dake-no-shousetsu-no-manga 301
 /manga/miyao-taro-ga-neko-wo-kau-nante /manga/miyaou-tarou-ga-neko-o-kau-nante 301
 /manga/miyazaki-hayao-no-zasso-noto /manga/miyazaki-hayao-no-zassou-note 301
+/manga/miyazawa-kenji-mangakan-1985 /manga/miyazawa-kenji-mangakan-yamada 301
 /manga/miyazawa-kenji-mangakan-1996 /manga/miyazawa-kenji-mangakan 301
+/manga/miyazawa-kenji-mangakan-yamada-1985 /manga/miyazawa-kenji-mangakan-yamada 301
 /manga/miyoshi-san-toko-no-nichiyobi /manga/miyoshi-san-toko-no-nichiyoubi 301
 /manga/mizantoropu-na-kanojo /manga/mizantoroopu-na-kanojo 301
 /manga/mizo-dayo-puro-yakyu /manga/mizou-dayo-puro-yakyuu 301
@@ -17923,8 +17892,10 @@
 /manga/moto-saikyo-no-kenshi-wa-isekai-maho-ni-akogareru-2 /manga/moto-saikyou-no-kenshi-wa-isekai-mahou-ni-akogareru 301
 /manga/moto-saikyo-yusha-no-sai-shushoku /manga/moto-saikyou-yuusha-no-sai-shuushoku 301
 /manga/moto-sentoyo-dorei-desuga-tasukete-kureta-ryujin-wa-tsugai-daso-desu /manga/moto-sentouyou-dorei-desu-tasukete-kureta-ryuujin-wa-tsugai-dasou-desu 301
+/manga/moto-yakuza-wa-shinshi-de-moju /manga/moto-yakuza-wa-shinshi-de-moujuu 301
 /manga/moto-yan-joshi-ga-kawaisugiru /manga/moto-yan-joushi-ga-kawaisugiru 301
 /manga/moto-yan-oeru-narita-narumi-wa-saabisu-zangyo-joto-rashii /manga/moto-yan-ooeru-narita-narumi-wa-service-zangyou-joutou-rashii 301
+/manga/moto-yan-oeru-wa-kojirase-eriito-no-iinari-omocha /manga/moto-yan-ooeru-wa-kojirase-elite-no-iinari-omocha 301
 /manga/moto-yusha-wa-monster-musume-ni-yaburaretai /manga/moto-yuusha-wa-monster-musume-ni-yaburaretai 301
 /manga/moto-yusha-wa-shizuka-ni-kurashitai /manga/moto-yuusha-wa-shizuka-ni-kurashitai 301
 /manga/motohashi-kyodai /manga/motohashi-kyoudai 301
@@ -18315,6 +18286,7 @@
 /manga/nakatori-daiarii /manga/nakatoori-diary 301
 /manga/nakayama-seika-serekushon /manga/nakayama-seika-selection 301
 /manga/nakayoshi-koen /manga/nakayoshi-kouen 301
+/manga/nakayoshi-orijinaruban-sakuhinshu /manga/nakayoshi-orijinaruban-sakuhinshuu 301
 /manga/nakayoshi-techiyo /manga/nakayoshi-techiyou 301
 /manga/nakazawa-keiji-chosakushu /manga/nakazawa-deka-chosakushuu 301
 /manga/nakazawa-keiji-heiwa-manga-sakuhinshu /manga/nakazawa-deka-heiwa-manga-sakuhinshuu 301
@@ -20055,6 +20027,7 @@
 /manga/okiraku-reijo-wa-konyaku-haki-ni-hokusoemu /manga/okiraku-reijou-wa-konyaku-haki-ni-hokusoemu 301
 /manga/okiraku-ryoshu-no-tanoshii-ryochi-boei /manga/okiraku-ryoushu-no-tanoshii-ryouchi-bouei 301
 /manga/okiraku-teeburu /manga/okiraku-table 301
+/manga/okisugite-kare-no-are-ga-sakitcho-shika-hairimasen /manga/ookisugite-kare-no-are-ga-sakitcho-shika-hairimasen 301
 /manga/okitasoji /manga/okitasouji 301
 /manga/okite-no-monsho /manga/okite-no-monshou 301
 /manga/okitegami-kyoko-no-biboroku /manga/okitegami-kyouko-no-bibouroku 301
@@ -20083,6 +20056,7 @@
 /manga/oku-sama-biyori /manga/oku-sama-hiyori 301
 /manga/oku-sama-ga-seito-kaicho /manga/oku-sama-ga-seito-kaichou 301
 /manga/oku-sama-guten-taaku /manga/oku-sama-guuten-taaku 301
+/manga/oku-sama-hi-no-yojin /manga/oku-sama-hi-no-youjin 301
 /manga/oku-sama-ranchi /manga/oku-sama-lunch 301
 /manga/oku-sama-wa-joshikosei /manga/oku-sama-wa-joshikousei 301
 /manga/oku-sama-wa-maho-shojo /manga/oku-sama-wa-mahou-shoujo 301
@@ -21240,6 +21214,7 @@
 /manga/perusona-q-shado-obu-za-rabirinsu-side-p4 /manga/persona-q-shadow-obu-za-labyrinth-side-p4 301
 /manga/perusona-tantei-naoto /manga/persona-tantei-naoto 301
 /manga/pesuto-ga-aketara-asobimasho /manga/peste-ga-aketara-asobimashou 301
+/manga/pet-boys /manga/pet-boy-s 301
 /manga/pet-oshigotochu /manga/pet-oshigotochuu 301
 /manga/pet-shop-of-horrors-passage-hen /manga/petshop-of-horrors 301
 /manga/petanko-naasu /manga/petanko-nurse 301
@@ -21668,7 +21643,6 @@
 /manga/raamen-akaneko /manga/ramen-akaneko 301
 /manga/raamen-daisuki-koizumi-san /manga/ramen-daisuki-koizumi-san 301
 /manga/raamen-daisuki-koizumi-san-narumi-2014 /manga/ramen-daisuki-koizumi-san-narumi 301
-/manga/raamen-hakkenden /manga/ramen-hakkenden 301
 /manga/raamen-ikaga /manga/ramen-ikaga 301
 /manga/raamen-kuitee /manga/ramen-kuitee 301
 /manga/raamen-no-tori-pako-chan /manga/ramen-no-tori-pako-chan 301
@@ -21916,7 +21890,6 @@
 /manga/reddo-saigo-no-60-nichi-soshite-asama-sanso-e /manga/red-saigo-no-60-nichi-soshite-asama-sansou-e 301
 /manga/reddo-saishusho-asama-sanso-no-tokakan /manga/red-saishuushou-asama-sansou-no-tookakan 301
 /manga/reddo-shado-akakage /manga/red-shadow-akakage 301
-/manga/redeyes /manga/red-eyes 301
 /manga/redi-ni-sasageru-satsujin-jiken /manga/lady-ni-sasageru-satsujin-jiken 301
 /manga/redi-ni-sasageru-satsujin-monogatari /manga/lady-ni-sasageru-satsujin-monogatari 301
 /manga/redii-ekkusu-kagami-no-naka-no-watashi /manga/lady-ekkusu-kagami-no-naka-no-watashi 301
@@ -22143,6 +22116,7 @@
 /manga/renai-skill /manga/love-skill 301
 /manga/renai-sonpo /manga/love-sonpo 301
 /manga/renai-sutaa-raito-gaaru /manga/love-star-light-girl 301
+/manga/renai-taishitsu /manga/love-taishitsu 301
 /manga/renai-tan /manga/love-tan 301
 /manga/renai-tripper /manga/love-tripper 301
 /manga/renai-zenya /manga/love-zenya 301
@@ -22890,6 +22864,7 @@
 /manga/sachiru-deryujon /manga/sachiru-deryuujon 301
 /manga/sachiusuolchantozetsuaieriitokun-musaborietchigaamasugiru /manga/sachiusu-ol-chan-to-zetsuai-elite-kun-musabori-etchi-ga-amasugiru 301
 /manga/sadisuteikku-na-shacho-to-erebeetaa-ni-tojikomeraretara-nazeka-goseikon-ni-itatta-ken /manga/sadistic-na-shachou-to-elevator-ni-tojikomeraretara-naze-goseikon-ni-itatta-ken 301
+/manga/sadisuteikku-sayaka-chan /manga/sadistic-sayaka-chan 301
 /manga/saegusa-kyoju-no-subarashiki-kinruigaku-kyoshitsu /manga/saegusa-kyouju-no-subarashiki-kinruigaku-kyoushitsu 301
 /manga/saegusa-san-wa-megane-senpai-to-koi-wo-egaku /manga/saegusa-san-wa-megane-senpai-to-koi-o-egaku 301
 /manga/saeki-sanchi-no-burakku-kyatto /manga/saeki-san-no-black-cat 301
@@ -23157,6 +23132,7 @@
 /manga/saito-takawo-no-taifu-goro /manga/saitou-takawo-no-taifuu-gorou 301
 /manga/saitosanchi-no-imoto-wa-tottemo-mujaki-na-tenshi-to-akuma /manga/saitousanchi-no-imouto-wa-tottemo-mujaki-na-tenshi-to-akuma 301
 /manga/saitou-chronicle-heaven-s-crow-fuu-un-risshi /manga/saitou-chronicle 301
+/manga/saitsuyo-akuyaku-reijo-nikki /manga/saitsuyo-akuyaku-reijou-nikki 301
 /manga/saiyaku-reijo-no-fujori-na-jijo /manga/saiyaku-reijou-no-fujouri-na-jijou 301
 /manga/saiyo-no-kamen /manga/saiyou-no-kamen 301
 /manga/saiyoki /manga/saiyouki 301
@@ -26693,6 +26669,7 @@
 /manga/superstar-wo-utatte /manga/superstar-o-utatte 301
 /manga/supesharu-daarin /manga/special-darling 301
 /manga/supesharu-de-iko /manga/special-de-ikou 301
+/manga/supeshiyaru-bangutara-mama /manga/supeshiyaru-banguutara-mama 301
 /manga/supi-sanpo /manga/supi-sanpo-burari-pawasupo-reikan-tabi 301
 /manga/supiido-memoriaru-kabuki-densetsu /manga/speed-memorial-kabuki-densetsu 301
 /manga/supiiku /manga/speak 301
@@ -27080,6 +27057,7 @@
 /manga/takahashi-seiichi-no-yoiko-no-esuefu-gekijo /manga/takahashi-seiichi-no-yoiko-no-esuefu-gekijou 301
 /manga/takai-kenichiro-no-showa-shashinkan /manga/takai-kenichirou-no-shouwa-shashinkan 301
 /manga/takakuranchi-no-mo-hitosara /manga/takakuranchi-no-mou-hitosara 301
+/manga/takamari-shisu-esukareeshon /manga/takamari-shisuu-esukareeshon 301
 /manga/takamori-kun-wo-damarasetai /manga/takamori-kun-o-damarasetai 301
 /manga/takamura-kotaro-chieko /manga/takamura-koutarou-chieko 301
 /manga/takanashi-ke-no-imoto-wa-hanayome-ni-naritai /manga/takanashi-ke-no-imouto-wa-hanayome-ni-naritai 301
@@ -27200,6 +27178,9 @@
 /manga/tanikawa-fumiko-junai-yomikirishu /manga/tanikawa-fumiko-junai-yomikirishuu 301
 /manga/tanikawa-fumiko-kokuhaku-monogatari-omune-zenbu /manga/tanikawa-fumiko-kokuhaku-monogatari-oomune-zenbu 301
 /manga/tanimura-hitoshi-no-bakuretsu-cr-umi-monogatari-koryaku-2002 /manga/tanimura-hitoshi-no-bakuretsu-cr-umi-monogatari-kouryaku-2002 301
+/manga/tanimura-hitoshi-no-bakuretsu-tabiuchi-special-2002 /manga/tanimura-hitoshi-no-bakuretsu-tabiuchi-special 301
+/manga/tanimura-hitoshi-no-bakuretsu-tabiuchi-supesharu /manga/tanimura-hitoshi-no-bakuretsu-tabiuchi-special 301
+/manga/tanimura-hitoshi-no-bakuretsu-tabiuchi-supesharu-2002 /manga/tanimura-hitoshi-no-bakuretsu-tabiuchi-special 301
 /manga/tanimura-hitoshi-no-osuichi-daikoryaku /manga/tanimura-hitoshi-no-osuichi-daikouryaku 301
 /manga/tanimura-hitoshi-no-pachinko-okaruto-bakusho-juku /manga/tanimura-hitoshi-no-pachinko-occult-bakushou-juku 301
 /manga/tanin-doshi /manga/tanin-doushi 301
@@ -27318,6 +27299,7 @@
 /manga/te-no-naru-ho-e /manga/te-no-naru-hou-e 301
 /manga/te-o-tsunagoyo /manga/te-o-tsunagouyo 301
 /manga/te-wo-tsunaide-aruita /manga/te-o-tsunaide-aruita 301
+/manga/tears-to-tiara-kakan-no-daichi /manga/teiaazu-tou-tiara 301
 /manga/teatoru-saishukai /manga/teatoru-saishuukai 301
 /manga/teddy-bear-paradaisu /manga/teddy-bear-paradise 301
 /manga/teekyu /manga/teekyuu 301
@@ -28525,6 +28507,7 @@
 /manga/toryosukka /manga/touryousukka 301
 /manga/toryuden /manga/touryuuden 301
 /manga/tosatsueishu-paparatchi /manga/tousatsueishu-paparatchi 301
+/manga/tosei-genso-hakubutsushi /manga/tousei-gensou-hakubutsushi 301
 /manga/tosei-no-kalevala /manga/tousei-no-kalevala 301
 /manga/tosei-shiranami-katagi /manga/tousei-shiranami-katagi 301
 /manga/tosen /manga/tousen 301
@@ -29534,6 +29517,7 @@
 /manga/wada-rajio-no-andore-za-wada-rajio /manga/wada-radio-no-andore-za-wada-radio 301
 /manga/wada-rajio-no-hi-no-tori /manga/wada-radio-no-hi-no-tori 301
 /manga/wada-rajio-no-isekai-muso /manga/wada-radio-no-isekai-musou 301
+/manga/wada-rajio-no-jojo-ni-poiman /manga/wada-radio-no-jojo-ni-poiman 301
 /manga/wada-rajio-no-shinsekai /manga/wada-radio-no-shinsekai 301
 /manga/wada-rajio-no-yome-ni-konaika /manga/wada-radio-no-yome-ni-konaika 301
 /manga/wada-rajiwo-no-abudora-za-wada-rajiwo /manga/wada-rajiwo-no-abudoora-za-wada-rajiwo 301
@@ -29821,6 +29805,7 @@
 /manga/watashi-no-ochi-wa-honya-san /manga/watashi-no-ouchi-wa-honya-san 301
 /manga/watashi-no-oji-sama /manga/watashi-no-ouji-sama 301
 /manga/watashi-no-oji-sama-nagae-1999 /manga/watashi-no-ouji-sama-nagae 301
+/manga/watashi-no-ojo-sama /manga/watashi-no-ojou-sama 301
 /manga/watashi-no-okami-kun /manga/watashi-no-ookami-kun 301
 /manga/watashi-no-okami-san /manga/watashi-no-ookami-san 301
 /manga/watashi-no-oshi-ga-kyo-mo-saiko-ni-totoi-node-zenryoku-de-shiawase-ni-suru /manga/watashi-no-oshi-ga-kyou-mo-saikou-ni-toutoi-node-zenryoku-de-shiawase-ni-suru 301
@@ -30060,6 +30045,7 @@
 /manga/yamaguchigumi-6daime-tsukasa-shinobu-okoku-eno-genten-kaiki /manga/yamaguchigumi-6daime-tsukasa-shinobu-oukoku-eno-genten-kaiki 301
 /manga/yamaguchigumi-vs-kanto-yakuza-shutoken-shinshutsu /manga/yamaguchigumi-vs-kantou-yakuza-shutoken-shinshutsu 301
 /manga/yamamatsu-yukichi-no-nippon-shindo-den /manga/yamamatsu-yuukichi-no-nippon-shindou-den 301
+/manga/yamamoto-futaro-kun /manga/yamamoto-fuutarou-kun 301
 /manga/yamamoto-kun-no-seishun-ribenji /manga/yamamoto-kun-no-seishun-revenge 301
 /manga/yamamoto-masa-wa-mada-yakyu-wo-shiranai /manga/yamamoto-masa-wa-mada-yakyuu-o-shiranai 301
 /manga/yamamoto-mayuri-no-hachinohe-itako-kiko /manga/yamamoto-mayuri-no-hachinohe-itako-kikou 301
@@ -30804,6 +30790,7 @@
 /manga/yuikosutoorii /manga/yuiko-sutoorii 301
 /manga/yuikosutorii /manga/yuiko-sutoorii 301
 /manga/yujin-3d-comic /manga/yuujin-3d-comic 301
+/manga/yujin-burando /manga/yuujin-brand 301
 /manga/yujin-kyara-no-ore-ga-motemakuru-wake-nai-daro /manga/yuujin-chara-no-ore-ga-motemakuru-wake-nai-daro 301
 /manga/yujin-kyara-wa-taihen-desuka /manga/yuujin-chara-wa-taihen-desuka 301
 /manga/yujin-no-makunochi-bento /manga/yuujin-no-makunouchi-bentou 301
@@ -30915,6 +30902,7 @@
 /manga/yume-de-aimashou-yamamoto-1993 /manga/yume-de-aimashou-yamamoto 301
 /manga/yume-dokei /manga/yume-tokei 301
 /manga/yume-furu-rabitto-taun /manga/yume-furu-rabbit-town 301
+/manga/yume-ha-taafu-wo-kakemeguru /manga/yume-ha-taafu-o-kakemeguru 301
 /manga/yume-haruka-roran-okoku /manga/yume-haruka-rouran-oukoku 301
 /manga/yume-hiko-boizu /manga/yume-hikou-boys 301
 /manga/yume-hoteru /manga/yume-hotel 301
@@ -31050,6 +31038,7 @@
 /manga/yurimoyo /manga/yurimoyou 301
 /manga/yuriyuri-panikku /manga/yuriyuri-panic 301
 /manga/yurizukushi-no-kyoshitsu-de /manga/yurizukushi-no-kyoushitsu-de 301
+/manga/yuru-deizu /manga/yuru-days 301
 /manga/yuru-fuwa-noka-no-mojibake-sukiru /manga/yuru-fuwa-nouka-no-mojibake-skill 301
 /manga/yuru-nachu-raifu /manga/yuru-nachu-life 301
 /manga/yurufuwa-konchu-zukan /manga/yurufuwa-konchuu-zukan 301
@@ -31371,6 +31360,8 @@
 /manga/zerosen-shonen /manga/zerosen-shounen 301
 /manga/zeroyon-kyuta /manga/zeroyon-kyuuta 301
 /manga/zerozaki-soshiki-no-ningen-shiken /manga/zerozaki-soushiki-no-ningen-shiken 301
+/manga/zeruda-no-densetsu-4-koma-manga-gekijo /manga/zeruda-no-densetsu-4-koma-manga-gekijou 301
+/manga/zeruda-no-densetsu-4-koma-manga-gekijo-2 /manga/zeruda-no-densetsu-4-koma-manga-gekijou 301
 /manga/zeruda-no-densetsu-toki-no-okarina-4koma-4-ga-gekijo /manga/zeruda-no-densetsu-toki-no-okarina-4koma-4-ga-gekijou 301
 /manga/zessei-no-akujo-wa-ma-oji-sama-ni-choai-sareru /manga/zessei-no-akujo-wa-ma-ouji-sama-ni-chouai-dekiaisareru 301
 /manga/zesshoku-kareshi-koryaku-seyo /manga/zesshoku-kareshi-kouryaku-seyo 301
@@ -31430,6 +31421,7 @@
 /manga/zettai-ni-tsukiattewa-ikenai-3b-danshi /manga/zettai-ni-tsukiattewa-ikenai-3b-otoko 301
 /manga/zettai-ni-yattewa-ikenai-isekai-shokan /manga/zettai-ni-yattewa-ikenai-isekai-shoukan 301
 /manga/zettai-ni-yuwaku-sarenai-otoko-vaasasu-zettai-ni-yuwaku-suru-onna /manga/zettai-ni-yuuwaku-sarenai-otoko-vaasasu-zettai-ni-yuuwaku-suru-onna 301
+/manga/zettai-reido-3 /manga/zettai-reido 301
 /manga/zettai-renai-program /manga/zettai-love-program 301
 /manga/zettai-renai-shokogun /manga/zettai-love-shoukougun 301
 /manga/zettai-ryoen-kukuri-hakase-wa-metorasetai /manga/zettai-ryouen-kukuri-hakase-wa-metorasetai 301
@@ -31539,6 +31531,3 @@
 /manga/zuzushii /manga/zuuzuushii 301
 /manga/zx /manga/z-x 301
 /manga/zyword /manga/gaioodo 301
-/manga/kenkyaku-shoubai-premium-ka /manga/kenkaku-shoubai 301
-/manga/houchounin-ajihei-shihai-no-ryouri-ni-aragae-hen /manga/houchounin-ajihei 301
-/manga/niyonin-onmitsuken-senmetsusu /manga/nyonin-onmitsuken 301

@@ -1,4 +1,68 @@
 overrides:
+  faindaa:
+    at: '2026-09-05'
+    reason: カタカナ外来語のヘボン転写を英語綴りへ(CLEAR層=逆置換で現slugに戻る+カタカナ連が辞書で全被覆+日本語側のハイフン不変。ユーザGO 2026-09-05)
+    slug: finder
+  faindaa-no-dekiai:
+    at: '2026-09-05'
+    reason: カタカナ外来語のヘボン転写を英語綴りへ(CLEAR層=逆置換で現slugに戻る+カタカナ連が辞書で全被覆+日本語側のハイフン不変。ユーザGO 2026-09-05)
+    slug: finder-no-dekiai
+  faindaa-no-houyou:
+    at: '2026-09-05'
+    reason: カタカナ外来語のヘボン転写を英語綴りへ(CLEAR層=逆置換で現slugに戻る+カタカナ連が辞書で全被覆+日本語側のハイフン不変。ユーザGO 2026-09-05)
+    slug: finder-no-houyou
+  faindaa-no-hyouteki:
+    at: '2026-09-05'
+    reason: カタカナ外来語のヘボン転写を英語綴りへ(CLEAR層=逆置換で現slugに戻る+カタカナ連が辞書で全被覆+日本語側のハイフン不変。ユーザGO 2026-09-05)
+    slug: finder-no-hyouteki
+  faindaa-no-kagerou:
+    at: '2026-09-05'
+    reason: カタカナ外来語のヘボン転写を英語綴りへ(CLEAR層=逆置換で現slugに戻る+カタカナ連が辞書で全被覆+日本語側のハイフン不変。ユーザGO 2026-09-05)
+    slug: finder-no-kagerou
+  faindaa-no-katsubou:
+    at: '2026-09-05'
+    reason: カタカナ外来語のヘボン転写を英語綴りへ(CLEAR層=逆置換で現slugに戻る+カタカナ連が辞書で全被覆+日本語側のハイフン不変。ユーザGO 2026-09-05)
+    slug: finder-no-katsubou
+  faindaa-no-kodou:
+    at: '2026-09-05'
+    reason: カタカナ外来語のヘボン転写を英語綴りへ(CLEAR層=逆置換で現slugに戻る+カタカナ連が辞書で全被覆+日本語側のハイフン不変。ユーザGO 2026-09-05)
+    slug: finder-no-kodou
+  faindaa-no-mitsugetsu:
+    at: '2026-09-05'
+    reason: カタカナ外来語のヘボン転写を英語綴りへ(CLEAR層=逆置換で現slugに戻る+カタカナ連が辞書で全被覆+日本語側のハイフン不変。ユーザGO 2026-09-05)
+    slug: finder-no-mitsugetsu
+  faindaa-no-mitsuyaku:
+    at: '2026-09-05'
+    reason: カタカナ外来語のヘボン転写を英語綴りへ(CLEAR層=逆置換で現slugに戻る+カタカナ連が辞書で全被覆+日本語側のハイフン不変。ユーザGO 2026-09-05)
+    slug: finder-no-mitsuyaku
+  faindaa-no-netsujou:
+    at: '2026-09-05'
+    reason: カタカナ外来語のヘボン転写を英語綴りへ(CLEAR層=逆置換で現slugに戻る+カタカナ連が辞書で全被覆+日本語側のハイフン不変。ユーザGO 2026-09-05)
+    slug: finder-no-netsujou
+  faindaa-no-ori:
+    at: '2026-09-05'
+    reason: カタカナ外来語のヘボン転写を英語綴りへ(CLEAR層=逆置換で現slugに戻る+カタカナ連が辞書で全被覆+日本語側のハイフン不変。ユーザGO 2026-09-05)
+    slug: finder-no-ori
+  faindaa-no-ryoshuu:
+    at: '2026-09-05'
+    reason: カタカナ外来語のヘボン転写を英語綴りへ(CLEAR層=逆置換で現slugに戻る+カタカナ連が辞書で全被覆+日本語側のハイフン不変。ユーザGO 2026-09-05)
+    slug: finder-no-ryoshuu
+  faindaa-no-saihate:
+    at: '2026-09-05'
+    reason: カタカナ外来語のヘボン転写を英語綴りへ(CLEAR層=逆置換で現slugに戻る+カタカナ連が辞書で全被覆+日本語側のハイフン不変。ユーザGO 2026-09-05)
+    slug: finder-no-saihate
+  faindaa-no-sekiyoku:
+    at: '2026-09-05'
+    reason: カタカナ外来語のヘボン転写を英語綴りへ(CLEAR層=逆置換で現slugに戻る+カタカナ連が辞書で全被覆+日本語側のハイフン不変。ユーザGO 2026-09-05)
+    slug: finder-no-sekiyoku
+  faindaa-no-shinjitsu:
+    at: '2026-09-05'
+    reason: カタカナ外来語のヘボン転写を英語綴りへ(CLEAR層=逆置換で現slugに戻る+カタカナ連が辞書で全被覆+日本語側のハイフン不変。ユーザGO 2026-09-05)
+    slug: finder-no-shinjitsu
+  faindaagoshi-no-ano-ko:
+    at: '2026-09-05'
+    reason: カタカナ外来語のヘボン転写を英語綴りへ(CLEAR層=逆置換で現slugに戻る+カタカナ連が辞書で全被覆+日本語側のハイフン不変。ユーザGO 2026-09-05)
+    slug: finder-goshi-no-ano-ko
   2-ban-sekando:
     at: '2026-09-05'
     reason: カタカナ外来語のヘボン転写を英語綴りへ(CLEAR層=逆置換で現slugに戻る+カタカナ連が辞書で全被覆+日本語側のハイフン不変。ユーザGO 2026-09-05)

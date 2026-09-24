@@ -15,3 +15,4 @@ metadata:
 **Why:** どれも「動いたように見えて中身が違う」型で、気付くのが遅れる。
 **How to apply:** 初めて使う script は実行前に中身(argparse の有無)を読む。減少検出は必ず明細まで読む。
 関連: [[feedback_sanity_check_tool_warnings]]
+- ★(09-25) `_gen-tameshiyomi-map.py` は **slug-overrides を読まない**= slug改名後も試し読みmapが旧slugキーのまま→改名頁から試し読みが消える。改名したら `tameshiyomi-booklive.jsonl` と `-volumes.jsonl.gz` の slug を新slugへ再キーして map を再生成(finder 16頁で実施)。`_apply-slug-kana-loanword.py` はこれをやらない。
