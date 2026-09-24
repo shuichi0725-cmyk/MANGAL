@@ -261,3 +261,9 @@ monthly-action:
   name: 月刊アクション
   publisher: futabasha
   demographic: seinen
+# ★Web(SNS)連載の受け皿(2026-09-24 ちいかわ=X連載)。出版社の媒体ではない=publisher は空。
+#   publisher/demographic はハブ頁(3作以上で生成)の表示にしか使わない(demographic は便宜値)。
+x-twitter:
+  name: X（旧Twitter）
+  publisher: ''
+  demographic: seinen

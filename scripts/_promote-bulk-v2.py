@@ -2686,10 +2686,16 @@ def get_editions_with_volumes(con: sqlite3.Connection, series_ids: list[int] | i
         #   1. 最古 first vol release_date を 持つ edition (= 元祖 imprint 優先)
         #   2. 同点なら 最多 vol 数
         # 例: ドラえもん で 中公 35 vols (1984~) と てんとう虫 34 vols (1974~) → てんとう虫
+        #   ★0. 特装版ISBNだけの edition は後回し(2026-09-24 ちいかわ: 種2で1・2巻の特装版だけの
+        #     「通常版」が講談社キャラクターズAで登録され、1巻が最古のため代表になり、特装版是正でISBNは
+        #     通常版に差し替わるのにレーベルだけ特装版側が残っていた。種2で190 series)
+        _sfm = _special_fix_map()
         def _ed_priority(e):
             dates = [v["release_date"] for v in e["volumes"] if v["release_date"]]
             first_date = min(dates) if dates else "9999-99"
-            return (first_date, -len(e["volumes"]))
+            _isb = [str(v.get("isbn13") or "") for v in e["volumes"] if v.get("isbn13")]
+            _all_special = bool(_isb) and all(i in _sfm for i in _isb)
+            return (_all_special, first_date, -len(e["volumes"]))
         primary_ed = sorted(ed_group, key=_ed_priority)[0]
         out.append(
             {

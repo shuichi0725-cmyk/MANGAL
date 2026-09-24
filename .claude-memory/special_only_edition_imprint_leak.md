@@ -1,6 +1,6 @@
 ---
 name: special_only_edition_imprint_leak
-description: 【型・未対応・GO待ち】種2に「特装版ISBNだけの通常版edition」が別レーベルで在ると、特装版是正でISBNは通常版に差し替わるのにレーベルだけ残り、頁の通常版imprintが特装版レーベルになる(ちいかわ=講談社キャラクターズA)。種2で190 series
+description: 【型・是正済2026-09-24】種2に「特装版ISBNだけの通常版edition」が別レーベルで在ると、特装版是正でISBNは通常版に差し替わるのにレーベルだけ残り、頁の通常版imprintが特装版レーベルになる(ちいかわ=講談社キャラクターズA)。種2で190 series
 metadata:
   type: project
 ---
@@ -17,3 +17,8 @@ promote の特装版是正(special-edition-fix*.yml)は special→normal に ISB
   コード変更=全頁に効くので GO 待ち。検算は ちいかわ(→ワイドKC)で。
 - 同日 ちいかわは他の項目(ジャンル/分野/開始年/7・8巻日付/特装版5冊)だけ是正済み・imprint は未。
 関連: [[imprint_label_leak]] [[special_edition_fix_state]]
+
+## ★2026-09-24 是正済(ユーザ「進めて」)
+- promote の同type版合流 `_ed_priority` に「特装版ISBNだけの版は後回し」を追加。実際に誤表示だった頁は**17頁**(190 series は上限の目安)。
+  ちいかわ→ワイドKC / ちょびっツ→YMKCDX 等。巻・ISBN減少0(ちょびっツは版タブ名が変わるので reflect の減少検出に出るが正常)。
+- 同日 掲載誌 master に `x-twitter`(X（旧Twitter）・publisher空)を新設、ちいかわを magazine-corrections で結線。
