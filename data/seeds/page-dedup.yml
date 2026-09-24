@@ -3972,3 +3972,7 @@ dedup:
   title: かるってと
   isbns: 1
   note: '2026-09-23: 山崎花子。かるってと頁の唯一の巻(2巻 9784088750620)は かるてっと頁に種4で既に載っている=同じISBNが2頁に出ていた重複。種2は2巻だけ題が『かるってと』(促音位置の揺れ)'
+- drop: ningyonokizu
+  canonical: ningyo-series
+  title: 人魚の傷
+  note: 2026-09-25 既存の drop:ningyo-no-kizu(公開slug)は promote が SRC stem で照合するため効いていなかった=SRC stem で再登録
