@@ -4044,6 +4044,8 @@ def main():
             new_yml.get("title") or "",
             new_yml.get("tags") or [],
             f"{new_yml.get('catch') or ''}／{new_yml.get('synopsis') or ''}",
+            # ★レーベル規則(2026-09-24): BL/4コマ/時代劇の専門レーベル=刊行の事実から付ける
+            [e.get("imprint") for e in (new_yml.get("editions") or []) if isinstance(e, dict)],
         ) & set(valid_gens)
         if _drv - set(new_yml.get("genres") or []):
             new_yml["genres"] = sorted(set(new_yml.get("genres") or []) | _drv)
@@ -4402,6 +4404,7 @@ def main():
                 _pd.get("title") or "",
                 _pd.get("tags") or [],
                 f"{_pd.get('catch') or ''}／{_pd.get('synopsis') or ''}",
+                [e.get("imprint") for e in (_pd.get("editions") or []) if isinstance(e, dict)],
             ) & set(valid_gens)
             if _pdrv - set(_pd.get("genres") or []):
                 _pd["genres"] = sorted(set(_pd.get("genres") or []) | _pdrv)
