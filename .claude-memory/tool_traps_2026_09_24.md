@@ -16,3 +16,11 @@ metadata:
 **How to apply:** 初めて使う script は実行前に中身(argparse の有無)を読む。減少検出は必ず明細まで読む。
 関連: [[feedback_sanity_check_tool_warnings]]
 - ★(09-25) `_gen-tameshiyomi-map.py` は **slug-overrides を読まない**= slug改名後も試し読みmapが旧slugキーのまま→改名頁から試し読みが消える。改名したら `tameshiyomi-booklive.jsonl` と `-volumes.jsonl.gz` の slug を新slugへ再キーして map を再生成(finder 16頁で実施)。`_apply-slug-kana-loanword.py` はこれをやらない。
+- ★(09-25) `_reflect-targeted.py` の「slug変更検知 → 旧slug索引purge」は **SRC stem のキーしか消さない**。同じ頁を2度改名すると
+  (faindaa-no-hyouteki → finder-no-hyouteki → finder-series)、**1つ前の公開slugの行が索引に残る**=検索に旧頁が2重に出る。
+  改名後は `python -c` で索引の該当prefixを確認し、残っていれば `_build-list-index.py data/manga.v2 data --remove <旧公開slug>`(preview も)。
+  `_gen-redirects.py` の「★WARN alias のキーが公開slug」がこの症状の検出信号。
+- ★(09-25) page-dedup.yml は promote が **SRC stem** で照合する。公開slugで書くと改名頁では黙って効かない(人魚の傷で実踏)。
+  既存の同型は drop/canonical 両方生きている組が9組(ayashi/daichouhen-doraemon/desire/kibando/pocket-monster-special/
+  ten-yori-takaku/to-heart/tobidase-doubutsu-no-mori/yami-no-ekusasaizu)。うち数組は drop slug が別作品へ付け替え済み=
+  **一律に override 照合へ変えると別作品を消す**。個別裁定待ち。

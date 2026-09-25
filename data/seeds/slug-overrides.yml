@@ -14,7 +14,7 @@ overrides:
   faindaa-no-hyouteki:
     at: '2026-09-05'
     reason: カタカナ外来語のヘボン転写を英語綴りへ(CLEAR層=逆置換で現slugに戻る+カタカナ連が辞書で全被覆+日本語側のハイフン不変。ユーザGO 2026-09-05)
-    slug: finder-no-hyouteki
+    slug: finder-series
   faindaa-no-kagerou:
     at: '2026-09-05'
     reason: カタカナ外来語のヘボン転写を英語綴りへ(CLEAR層=逆置換で現slugに戻る+カタカナ連が辞書で全被覆+日本語側のハイフン不変。ユーザGO 2026-09-05)

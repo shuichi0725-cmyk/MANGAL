@@ -473,6 +473,8 @@ def apply_edition_canonical(slug: str, editions: list, canon: dict) -> list:
                  "cover_url": None, "release_date": v.get("release_date")}
             if v.get("volume_label"):  # ★上下巻対応(2026-07-04): seedのvolume_labelを搬送
                 o["volume_label"] = v["volume_label"]
+            if v.get("title_display"):  # ★巻の個別題(2026-09-25 ファインダーシリーズ統合): 表示+alt検索の材料
+                o["title_display"] = v["title_display"]
             return o
         _vs = [_v(v) for v in (vols or [])]
         # ★上下/上中下が完全に揃うのに番号が 1..N でない版を canonical 側でも是正
@@ -507,6 +509,8 @@ def apply_edition_canonical(slug: str, editions: list, canon: dict) -> list:
                  "cover_url": None, "release_date": v.get("release_date")}
             if v.get("volume_label"):
                 o["volume_label"] = v["volume_label"]
+            if v.get("title_display"):
+                o["title_display"] = v["title_display"]
             return o
         out[0]["versions"] = [
             {"label": vv.get("label") or "別刷", "volumes": [_vv(v) for v in (vv.get("volumes") or [])]}
