@@ -81,3 +81,6 @@
 {"slug": "finder-no-houyou", "reason": "targeted反映", "at": "2026-09-25", "source": "reflect-targeted --drop"}
 {"slug": "finder-no-kagerou", "reason": "targeted反映", "at": "2026-09-25", "source": "reflect-targeted --drop"}
 {"slug": "finder-no-dekiai", "reason": "targeted反映", "at": "2026-09-25", "source": "reflect-targeted --drop"}
+{"slug": "yami-no-ekusasaizu", "reason": "重複頁drop(page-dedup SRC stem)", "at": "2026-09-25", "source": "dedup-9pairs"}
+{"slug": "dai-chouhen-doraemon", "reason": "重複頁drop(page-dedup SRC stem)", "at": "2026-09-25", "source": "dedup-9pairs"}
+{"slug": "pocket-monster-special", "reason": "重複頁drop(page-dedup SRC stem)", "at": "2026-09-25", "source": "dedup-9pairs"}

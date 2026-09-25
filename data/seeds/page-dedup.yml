@@ -236,11 +236,6 @@ dedup:
   canonical: ahare-meisaku-kun
   title: あはれ!名作くん
   isbns: 4
-- drop: ayashi
-  canonical: noroi
-  title: 呪
-  isbns: 1
-  note: ISBNダブリ一括dedup(集合完全一致+同題)(2026-07-07)
 - drop: b-t-x-1999
   canonical: b-t-x
   title: ビート・エックス
@@ -577,10 +572,6 @@ dedup:
   title: D・N・A²
   isbns: 8
   note: 断片重複(同ISBN8冊/同AniList30683)。drop側は題がMADB化け(D・N・〔A^2〕)。canonical(正題+副題)をslug-overridesでd-n-a2へ改名(2026-07-07)
-- drop: dai-chouhen-doraemon
-  canonical: daichouhen-doraemon
-  title: 大長編ドラえもん
-  isbns: 4
 - drop: dai-kaijuu-gamera
   canonical: daikaijuu-gamera
   title: 大怪獣ガメラ
@@ -636,10 +627,6 @@ dedup:
   canonical: densetsu-kyojin-ideon
   title: 伝説巨神イデオン
   isbns: 4
-- drop: desire
-  canonical: desire-2nd-season
-  title: DESIRE 2nd season
-  isbns: 27
 - drop: devilman
   canonical: devilman-2000
   title: デビルマン
@@ -1626,11 +1613,6 @@ dedup:
   canonical: senri-no-michi-mo
   title: 千里の道も
   isbns: 55
-  note: ISBNダブリ一括dedup(集合完全一致+同題)(2026-07-07)
-- drop: kibando
-  canonical: bukkira-ni-yoroshiku
-  title: ブッキラによろしく!
-  isbns: 3
   note: ISBNダブリ一括dedup(集合完全一致+同題)(2026-07-07)
 - drop: kikangentei-kazoku
   canonical: kikan-gentei-kazoku
@@ -2691,10 +2673,6 @@ dedup:
   canonical: platinum-boys
   title: PLATINUM BOYS
   isbns: 1
-- drop: pocket-monster-special
-  canonical: pocket-monsters-special
-  title: ポケットモンスターSPECIAL
-  isbns: 3
 - drop: pocket-monsters-special-2014
   canonical: pocket-monsters-special
   title: ポケットモンスタースペシャル
@@ -3383,10 +3361,6 @@ dedup:
   canonical: sorcerian
   title: 天の神々たち
   note: ソーサリアン統合頁へ畳み込み(単巻読切連番シリーズの1頁統合 2026-07-15)
-- drop: ten-yori-takaku
-  canonical: tenyoritakaku
-  title: 天より高く
-  isbns: 2
 - drop: tenkafun
   canonical: kaidan-kyuuden
   title: 階段宮殿
@@ -3422,10 +3396,6 @@ dedup:
   canonical: tensei-yakushi-wa-meikyuu-toshi-sodachi
   title: 転生薬師は迷宮都市育ち
   isbns: 2
-- drop: to-heart
-  canonical: to-heart-2
-  title: To heart 2
-  isbns: 3
 - drop: to-love-ru
   canonical: trouble
   title: To LOVEる-とらぶる-
@@ -3454,11 +3424,6 @@ dedup:
   canonical: toaru-kagaku-no-railgun-2025
   title: とある科学の超電磁砲
   isbns: 21
-  note: ISBNダブリ一括dedup(集合完全一致+同題)(2026-07-07)
-- drop: tobidase-doubutsu-no-mori
-  canonical: tobidase-doubutsu-no-mori-harikiri-sonchou-ippee
-  title: とびだせどうぶつの森 はりきり村長イッペー!
-  isbns: 9
   note: ISBNダブリ一括dedup(集合完全一致+同題)(2026-07-07)
 - drop: tobidase-doubutsu-no-mori-2015
   canonical: tobidase-doubutsu-no-mori
@@ -3707,10 +3672,6 @@ dedup:
   canonical: yamato-yo-eien-ni
   title: ヤマトよ永遠に
   isbns: 1
-- drop: yami-no-ekusasaizu
-  canonical: fuufu-tantei-funsenki
-  title: 夫婦探偵奮戦記
-  isbns: 9
 - drop: yappari-hani-tarou-desu
   canonical: hanitarou-desu
   title: ハニ太郎です。
@@ -4028,3 +3989,15 @@ dedup:
   canonical: finder-series
   title: ファインダーシリーズ(巻)
   note: 2026-09-25 ファインダーシリーズ統合(各巻副題が別頁だった)。キー=SRC stem
+- drop: yami-no-ekusasaizu-1991
+  canonical: fuufu-tantei-funsenki
+  title: 闇のエクササイズ
+  note: 2026-09-25 ISBN 9784091391438=夫婦探偵奮戦記(10)そのもの(副題が別頁)。キー=SRC stem
+- drop: dai-chouhen-doraemon-1984
+  canonical: daichouhen-doraemon
+  title: 大長編ドラエもん(のび太の宇宙開拓史)
+  note: 2026-09-25 ISBN 9784091590640=2009 小学館プラス・アンコミックス(コンビニ廉価再録)。本編に元の版(9784091406033)在り。キー=SRC stem
+- drop: pocket-monster-special-2017
+  canonical: pocket-monsters-special
+  title: ポケットモンスタースペシャル 赤緑青編(2017)
+  note: 2026-09-25 pbk-edition=同作の別版→ extra-editions で本編頁の版タブへ移設。キー=SRC stem
