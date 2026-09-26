@@ -262,7 +262,6 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  background: #fff; /* 透明GIF書影がダーク地を透かさないように(CoverImage と同じ理由) */
   opacity: 0;
   transition: opacity 0.35s;
 }
@@ -317,7 +316,6 @@
   transform: scale(0.86) translateY(6px);
   transform-origin: 50% 0;
 }
-.ms-book--ghost .ms-cover { animation: ms-ghost 1.4s ease-in-out infinite; }
 
 .ms-more {
   display: flex;
@@ -397,14 +395,10 @@
 @keyframes ms-pulse {
   50% { opacity: 0.45; }
 }
-@keyframes ms-ghost {
-  50% { opacity: 0.45; }
-}
 
 @media (prefers-reduced-motion: reduce) {
   .ms-sweep,
   .ms-caret,
-  .ms-book--ghost .ms-cover,
   .ms-book[data-fresh] .ms-cover { animation: none; }
   .ms-sweep { display: none; }
   .ms-cover,

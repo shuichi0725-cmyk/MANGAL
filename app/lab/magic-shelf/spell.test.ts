@@ -6,10 +6,10 @@ import {
   makeSpellbook,
   setExclusive,
   toggleClause,
-  toBooks,
-  warmSteps,
+  type Sample,
+  sampleToBooks,
 } from "./spell";
-import type { MangaListItem } from "@/lib/schema";
+import sampleFile from "./sample-books.json";
 
 const GENRES = [
   { key: "fantasy", name: "ファンタジー" },
@@ -107,26 +107,28 @@ describe("呪文文字列の編集(チップ)", () => {
   });
 });
 
-describe("索引から書架へ", () => {
-  it("slug 重複は先勝ち・年0は不明扱い", () => {
-    const m = (slug: string, y: number) =>
-      ({ slug, title: slug, title_kana: "", cover: null, year_started: y, year_ended: null, status: "ongoing",
-        authors: [], original_authors: [], genres: [], demographic: "shounen", publisher: "", publishers: [],
-        total_volumes: 1, max_edition_volumes: 1 }) as unknown as MangaListItem;
-    const out = toBooks([m("x", 0), m("x", 2000), m("y", 1999)]);
-    expect(out.map((o) => [o.slug, o.year])).toEqual([["x", null], ["y", 1999]]);
-  });
-});
+describe("見本データから書架へ", () => {
+  const sample = (d: unknown[][], f: string[] = ["slug", "title", "kana", "cover", "year", "first", "vols", "status", "genres", "pop"]) =>
+    ({ src: "t", n: d.length, f, d }) as Sample;
 
-describe("下ごしらえ(手すき時間の小分け手順)", () => {
-  it("全手順を流しても結果は変わらない・小分けは件数に比例", () => {
-    const fresh = SHELF.map((x) => ({ ...x }));
-    const steps = warmSteps(fresh, 2);
-    expect(steps).toHaveLength(3 + 5); // 題名 5冊÷2 = 3手 + 並び5種
-    steps.forEach((s) => s());
-    for (const q of ["わんぴ", "古い順", "50音順 状態別", "-ホラー 巻数順"]) {
-      const a = castSpell(fresh, book.parse(q), () => 99).groups.flatMap((g) => g.books.map((x) => x.slug));
-      expect(a).toEqual(slugs(q));
-    }
+  it("slug 重複は先勝ち・年0は不明扱い・書影は full URL に戻す", () => {
+    const row = (slug: string, y: number) => [slug, slug, "", "book/cabinet/1/2.jpg", y, "", 1, "ongoing", [], 0];
+    const out = sampleToBooks(sample([row("x", 0), row("x", 2000), row("y", 1999)]));
+    expect(out.map((o) => [o.slug, o.year])).toEqual([["x", null], ["y", 1999]]);
+    expect(out[0].cover).toBe("https://thumbnail.image.rakuten.co.jp/@0_mall/book/cabinet/1/2.jpg?_ex=300x300");
+  });
+
+  it("列順が生成スクリプトとずれていたら黙って化けずに止まる", () => {
+    expect(() => sampleToBooks(sample([], ["title", "slug"]))).toThrow(/列順/);
+  });
+
+  it("同梱の見本(sample-books.json)は1,500作前後・全作に書影・人気の降順・slug 一意", () => {
+    const books = sampleToBooks(sampleFile as unknown as Sample);
+    expect(books.length).toBe((sampleFile as unknown as Sample).n);
+    expect(books.length).toBeGreaterThanOrEqual(1000);
+    expect(books.every((x) => x.cover?.startsWith("http"))).toBe(true);
+    expect(books.every((x, i) => i === 0 || books[i - 1].pop >= x.pop)).toBe(true);
+    const genreKeys = new Set(books.flatMap((x) => x.genres));
+    expect([...genreKeys].every((k) => /^[a-z0-9-]+$/.test(k))).toBe(true);
   });
 });

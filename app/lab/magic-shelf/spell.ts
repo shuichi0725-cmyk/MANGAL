@@ -1,11 +1,12 @@
 import type { MangaListItem } from "@/lib/schema";
 import { jaCollator } from "../../../lib/collator"; // 相対 = vitest(エイリアス設定なし)でも解決できる
+import { fullCover } from "../../../lib/coverSlim";
 
 /**
  * 魔法の書架(実験頁 /lab/magic-shelf)の「呪文」= 絞り込み条件の文字列。
  *
  * ★文字列が唯一の正本: チップを押しても呪文の文字列を書き換えるだけ(= コンソールに今の条件が
- *   そのまま見える・URL ?q= で共有できる)。ここは純関数だけ(DOM/React 無し)= テストで押さえる。
+ *   そのまま見える・URL ?spell= で共有できる)。ここは純関数だけ(DOM/React 無し)= テストで押さえる。
  * ★語の結合規則: ジャンル・題名語は「かつ」、年・巻数・状態は同じ種類どうし「または」
  *   (1980年代 と 1990年代 を両方押す = 1980〜1999)。先頭 - / ! は「除く」。
  */
@@ -26,24 +27,32 @@ export type Book = {
   pop: number;
 };
 
-/** 索引 → 書架用の軽い形。slug 重複は先勝ち(view-transition-name が一意でないと遷移が壊れる)。 */
-export function toBooks(items: MangaListItem[]): Book[] {
+/** 見本データ(sample-books.json = scripts/_gen-magic-shelf-sample.py が一覧索引から作る)の列順。 */
+export const SAMPLE_FIELDS = ["slug", "title", "kana", "cover", "year", "first", "vols", "status", "genres", "pop"] as const;
+export type SampleRow = [string, string, string, string, number, string, number, Book["status"], string[], number];
+export type Sample = { src: string; n: number; f: string[]; d: SampleRow[] };
+
+/** 見本 → 書架用の本。列順が生成スクリプトとずれていたら黙って化けないよう投げる。
+ *  slug 重複は先勝ち(view-transition-name が一意でないと遷移が壊れる)。書影は slim → full URL。 */
+export function sampleToBooks(sample: Sample): Book[] {
+  if (sample.f.join() !== SAMPLE_FIELDS.join())
+    throw new Error(`見本の列順が違う: ${sample.f.join()} (python scripts/_gen-magic-shelf-sample.py で作り直す)`);
   const seen = new Set<string>();
   const out: Book[] = [];
-  for (const m of items) {
-    if (!m.slug || seen.has(m.slug)) continue;
-    seen.add(m.slug);
+  for (const [slug, title, kana, cover, year, first, vols, status, genres, pop] of sample.d) {
+    if (!slug || seen.has(slug)) continue;
+    seen.add(slug);
     out.push({
-      slug: m.slug,
-      title: m.title,
-      kana: m.title_kana ?? "",
-      cover: m.cover ?? null,
-      year: m.year_started > 0 ? m.year_started : null,
-      first: m.first_volume_date ?? "",
-      vols: m.max_edition_volumes ?? 0,
-      status: m.status,
-      genres: m.genres ?? [],
-      pop: m.popularity ?? -1,
+      slug,
+      title,
+      kana,
+      cover: fullCover(cover),
+      year: year > 0 ? year : null,
+      first,
+      vols,
+      status,
+      genres,
+      pop,
     });
   }
   return out;
@@ -329,23 +338,6 @@ export function sortedBooks(books: Book[], sort: SortId): Book[] {
   let s = m.get(sort);
   if (!s) m.set(sort, (s = [...books].sort(COMPARE[sort])));
   return s;
-}
-
-/**
- * 下ごしらえの小分け手順(= 手すき時間に1つずつ流す)。本番6.9万件の実測(PC):
- * 並びの初回ソート 90〜300ms・題名照合の初回下ごしらえ ~270ms(2回目以降は10〜40ms)。
- * スマホでは数倍 = 初めてチップを押した瞬間に固まらないよう、索引が揃った直後に済ませておく。
- */
-export function warmSteps(books: Book[], chunk = 4000): (() => void)[] {
-  const steps: (() => void)[] = [];
-  for (let i = 0; i < books.length; i += chunk) {
-    const from = i;
-    steps.push(() => {
-      for (let j = from; j < Math.min(from + chunk, books.length); j++) hayOf(books[j]);
-    });
-  }
-  for (const s of ["pop", "old", "new", "vols", "kana"] as SortId[]) steps.push(() => void sortedBooks(books, s));
-  return steps;
 }
 
 // ─── 集め(棚分け) ─────────────────────────────────────────────

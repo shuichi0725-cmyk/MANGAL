@@ -3,22 +3,22 @@
 import Link from "next/link";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { flushSync } from "react-dom";
-import { ensureFullIndex, isFullIndexLoaded, useMangaIndex } from "@/lib/useMangaIndex";
 import {
   type Book,
   type CastResult,
   type GenreDef,
+  type Sample,
   type Spell,
+  type Spellbook,
   GROUPS,
   SORTS,
   castSpell,
   compileSpell,
   describeSpell,
   makeSpellbook,
+  sampleToBooks,
   setExclusive,
-  toBooks,
   toggleClause,
-  warmSteps,
 } from "./spell";
 
 /** 集めなし = 1回に呼ぶ冊数 / 集めあり = 棚ごとの冊数 / 深淵に残す冊数。
@@ -65,7 +65,8 @@ type Applied = {
   result: CastResult;
   /** 直前まで見えていて、今回の呪文に合わなくなった本(新しく沈んだ順) */
   sunk: Book[];
-  ms: number;
+  /** 篩って並べた時間。初期描画はサーバーと一致させるため出さない(null) */
+  ms: number | null;
   /** 今回はじめて現れた本(view transition が無いブラウザ用の登場演出) */
   fresh: Set<string>;
   caps: Record<string, number>;
@@ -186,6 +187,7 @@ function LazyCover({ src, title }: { src: string | null; title: string }) {
         <img
           src={src}
           alt=""
+          className="bg-white" // 透過GIF書影がダーク地を透かさないように(lib/coverBackdrop.test.ts の規則)
           decoding="async"
           onLoad={(e) => (e.currentTarget.dataset.loaded = "1")}
           onError={() => setFailed(true)}
@@ -198,28 +200,32 @@ function LazyCover({ src, title }: { src: string | null; title: string }) {
 
 const STATUS_MARK: Record<string, string> = { completed: "完", ongoing: "連", hiatus: "休" };
 
+/** 見本の本の多くはプレビューに作品頁が無い(プレビュー索引は数十件)= 本番の作品頁を別タブで開く。 */
+const PROD_SITE = "https://mangal-db.com";
+
 function BookCell({
   b,
   genreName,
+  local,
   sunk,
   fresh,
 }: {
   b: Book;
   genreName: Map<string, string>;
+  local: boolean;
   sunk?: boolean;
   fresh?: boolean;
 }) {
   const genres = b.genres.map((g) => genreName.get(g) ?? g).join("・");
-  return (
-    <Link
-      href={`/manga/${b.slug}`}
-      prefetch={false} // 呪文ごとに見える本が入れ替わる = 先読みすると唱えるたびに通信が走る
-      className="ms-book"
-      data-vt={vtName(b.slug)}
-      data-sunk={sunk ? "" : undefined}
-      data-fresh={fresh ? "" : undefined}
-      title={`${b.title}${genres ? ` — ${genres}` : ""}`}
-    >
+  const cellProps = {
+    className: "ms-book",
+    "data-vt": vtName(b.slug),
+    "data-sunk": sunk ? "" : undefined,
+    "data-fresh": fresh ? "" : undefined,
+    title: `${b.title}${genres ? ` — ${genres}` : ""}${local ? "" : "(本番の作品頁を開く)"}`,
+  };
+  const body = (
+    <>
       <LazyCover src={b.cover} title={b.title} />
       <span className="ms-title">{b.title}</span>
       <span className="ms-meta">
@@ -227,6 +233,21 @@ function BookCell({
         <span data-st={b.status}>{STATUS_MARK[b.status] ?? "?"}</span>
       </span>
       {genres && <span className="ms-genres">{genres}</span>}
+    </>
+  );
+  if (!local)
+    return (
+      <a href={`${PROD_SITE}/manga/${b.slug}`} target="_blank" rel="noopener" {...cellProps}>
+        {body}
+      </a>
+    );
+  return (
+    <Link
+      href={`/manga/${b.slug}`}
+      prefetch={false} // 呪文ごとに見える本が入れ替わる = 先読みすると唱えるたびに通信が走る
+      {...cellProps}
+    >
+      {body}
     </Link>
   );
 }
@@ -237,6 +258,42 @@ function Chip({ on, onClick, children }: { on: boolean; onClick: () => void; chi
       {children}
     </button>
   );
+}
+
+/**
+ * 呪文を唱えた結果を作る(純粋に計算だけ)。prev = 直前の状態。
+ * 沈む本 = 直前まで見えていて、今回の呪文に合わなくなった本(新しく沈んだ順・SUNK_MAX 冊まで)。
+ */
+function conjure(
+  books: Book[],
+  spellbook: Spellbook,
+  text: string,
+  caps: Record<string, number>,
+  prev: Applied | null,
+  markFresh: boolean,
+): Applied {
+  const t0 = performance.now();
+  const spell = spellbook.parse(text);
+  const step = spell.group === "none" ? LIMIT_STEP : GROUP_STEP;
+  const result = castSpell(books, spell, (k) => caps[k] ?? step);
+  const ms = prev ? performance.now() - t0 : null;
+
+  const shown = new Set<string>();
+  for (const g of result.groups) for (const b of g.books) shown.add(b.slug);
+  const pass = compileSpell(spell);
+  const before = prev ? [...prev.result.groups.flatMap((g) => g.books), ...prev.sunk] : [];
+  const sunk: Book[] = [];
+  const seen = new Set<string>();
+  for (const b of before) {
+    if (sunk.length >= SUNK_MAX) break;
+    if (shown.has(b.slug) || seen.has(b.slug) || pass(b)) continue;
+    seen.add(b.slug);
+    sunk.push(b);
+  }
+  const had = new Set(before.map((b) => b.slug));
+  const fresh = new Set<string>();
+  if (markFresh) for (const sl of shown) if (!had.has(sl)) fresh.add(sl);
+  return { text, spell, result, sunk, ms, fresh, caps, castId: (prev?.castId ?? -1) + 1 };
 }
 
 /** 共有URLの鍵。★?q= は使わない = 全頁の左レール(FilterRail)が ?q= を自分の検索語として読むため、
@@ -260,24 +317,30 @@ function writeQuery(q: string): void {
   }
 }
 
-export default function MagicShelf({ genres }: { genres: GenreDef[] }) {
-  const items = useMangaIndex();
-  // ★この頁は「探す」が本文 = フル索引を手すき待ちにせず即要求(head 100件だけで篩う誤答窓を縮める)
-  useEffect(() => ensureFullIndex(), []);
-  const full = items !== null && isFullIndexLoaded();
-  // head が取れず空配列が返る間(= フル索引待ち)は「まだ開いていない」扱い = 0冊で唱えない
-  const books = useMemo(() => (items && (items.length > 0 || full) ? toBooks(items) : null), [items, full]);
-
+export default function MagicShelf({
+  genres,
+  sample,
+  local,
+}: {
+  genres: GenreDef[];
+  /** 見本データ(人気上位・書影あり)。page.preview.tsx がビルド時に読んで渡す */
+  sample: Sample;
+  /** この環境に作品頁がある slug(= プレビューの小さい索引)。無い本は本番の作品頁へ飛ばす */
+  local: string[];
+}) {
+  const books = useMemo(() => sampleToBooks(sample), [sample]);
+  const localSet = useMemo(() => new Set(local), [local]);
   const spellbook = useMemo(() => makeSpellbook(genres), [genres]);
   const genreName = useMemo(() => new Map(genres.map((g) => [g.key, g.name])), [genres]);
 
   const [text, setText] = useState("");
-  const [applied, setApplied] = useState<Applied | null>(null);
+  // ★初期の棚はサーバー描画にも焼く(= JS 前でも本が並ぶ)。?spell= の復元はマウント後
+  const [applied, setApplied] = useState<Applied>(() => conjure(books, spellbook, "", {}, null, false));
   const [help, setHelp] = useState(false);
   const [tab, setTab] = useState<TabId>("genre");
-  const appliedRef = useRef<Applied | null>(null);
+  const appliedRef = useRef<Applied>(applied);
   appliedRef.current = applied;
-  const castTextRef = useRef<string | null>(null); // 最後に唱えた(唱えかけの)呪文 = 打鍵待ちの二重詠唱よけ
+  const castTextRef = useRef(""); // 最後に唱えた(唱えかけの)呪文 = 打鍵待ちの二重詠唱よけ
   // ★state(ref ではなく): 変換確定で値が変わらなくても再描画→下の打鍵待ちが走り直す
   const [composing, setComposing] = useState(false);
   const shelfRef = useRef<HTMLDivElement>(null);
@@ -286,36 +349,11 @@ export default function MagicShelf({ genres }: { genres: GenreDef[] }) {
 
   const cast = useCallback(
     (nextText: string, opts?: { caps?: Record<string, number>; animate?: boolean }) => {
-      if (!books) return;
-      const prev = appliedRef.current;
       const animate = opts?.animate !== false && canTransition();
-      const t0 = performance.now();
-      const spell = spellbook.parse(nextText);
-      const caps = opts?.caps ?? {};
-      const step = spell.group === "none" ? LIMIT_STEP : GROUP_STEP;
-      const result = castSpell(books, spell, (k) => caps[k] ?? step);
-      const ms = performance.now() - t0;
-
-      const shown = new Set<string>();
-      for (const g of result.groups) for (const b of g.books) shown.add(b.slug);
-      const pass = compileSpell(spell);
-      const before = prev ? [...prev.result.groups.flatMap((g) => g.books), ...prev.sunk] : [];
-      const sunk: Book[] = [];
-      const seen = new Set<string>();
-      for (const b of before) {
-        if (sunk.length >= SUNK_MAX) break;
-        if (shown.has(b.slug) || seen.has(b.slug) || pass(b)) continue;
-        seen.add(b.slug);
-        sunk.push(b);
-      }
-      const had = new Set(before.map((b) => b.slug));
-      const fresh = new Set<string>();
-      if (prev && !animate) for (const s of shown) if (!had.has(s)) fresh.add(s);
-
-      const next: Applied = { text: nextText, spell, result, sunk, ms, fresh, caps, castId: (prev?.castId ?? 0) + 1 };
+      const next = conjure(books, spellbook, nextText, opts?.caps ?? {}, appliedRef.current, !animate);
       castTextRef.current = nextText;
       writeQuery(nextText.trim());
-      if (animate && prev)
+      if (animate)
         transitionShelf(
           shelfRef.current,
           [document.querySelector<HTMLElement>("body > header"), consoleRef.current],
@@ -326,49 +364,22 @@ export default function MagicShelf({ genres }: { genres: GenreDef[] }) {
     [books, spellbook],
   );
 
-  // 索引が届いた(head → full 差し替え含む)= 今の呪文で唱え直す。初回は URL の ?spell= から。
+  // 共有URL(?spell=)から開いた時だけ、その呪文で唱え直す
   useEffect(() => {
-    if (!books) return;
-    const cur = appliedRef.current;
-    if (cur) {
-      cast(castTextRef.current ?? cur.text, { caps: cur.caps, animate: false });
-      return;
-    }
     const q = readQuery();
+    if (!q) return;
     setText(q);
     cast(q, { animate: false });
-  }, [books, cast]);
-
-  // フル索引が揃ったら、並び替えと題名照合の下ごしらえを手すき時間に1手ずつ(= 初回のチップ押下で固まらない)
-  useEffect(() => {
-    if (!books || !full) return;
-    const steps = warmSteps(books);
-    let id = 0;
-    let alive = true;
-    const idle = (fn: () => void) =>
-      typeof requestIdleCallback === "function" ? requestIdleCallback(fn) : window.setTimeout(fn, 50);
-    const run = () => {
-      const step = steps.shift();
-      if (!alive || !step) return;
-      step();
-      id = idle(run);
-    };
-    id = idle(run);
-    return () => {
-      alive = false;
-      if (typeof cancelIdleCallback === "function") cancelIdleCallback(id);
-      else clearTimeout(id);
-    };
-  }, [books, full]);
+  }, [cast]);
 
   // 打鍵 → 少し待って唱える(IME変換中は唱えない)
   useEffect(() => {
-    if (!books || composing || text === castTextRef.current) return;
+    if (composing || text === castTextRef.current) return;
     const id = setTimeout(() => {
       if (text !== castTextRef.current) cast(text);
     }, TYPE_DEBOUNCE_MS);
     return () => clearTimeout(id);
-  }, [text, books, cast, composing]);
+  }, [text, cast, composing]);
 
   // コンソールを共通ヘッダー(sticky)の真下に貼る
   useEffect(() => {
@@ -399,7 +410,7 @@ export default function MagicShelf({ genres }: { genres: GenreDef[] }) {
     if (tok?.type === "cmd") {
       if (tok.cmd === "help") {
         setHelp(true);
-        setText(applied?.text ?? "");
+        setText(applied.text);
       } else edit("");
       return;
     }
@@ -414,13 +425,12 @@ export default function MagicShelf({ genres }: { genres: GenreDef[] }) {
   };
 
   const more = (key: string, shownCount: number) => {
-    if (!applied) return;
     const step = applied.spell.group === "none" ? LIMIT_STEP : GROUP_STEP;
     cast(applied.text, { caps: { ...applied.caps, [key]: shownCount + step }, animate: false });
   };
 
-  const total = books?.length ?? 0;
-  const grouped = applied ? applied.spell.group !== "none" : false;
+  const total = books.length;
+  const grouped = applied.spell.group !== "none";
 
   // タブ見出しの目印 = そのタブで今効いている語の数(並び/集めは既定以外なら ●)
   const marks: Record<TabId, string> = {
@@ -532,24 +542,17 @@ export default function MagicShelf({ genres }: { genres: GenreDef[] }) {
         </div>
 
         <div className="ms-out" aria-live="polite">
-          {!applied ? (
-            <p>書架を開いています…</p>
-          ) : (
-            <>
-              <p>
-                <span className="ms-dim">✦</span> {describeSpell(applied.spell)}
-              </p>
-              <p>
-                <span className="ms-dim">→</span> <b>{applied.result.matched.toLocaleString()}</b>冊が集まり、
-                <b>{(total - applied.result.matched).toLocaleString()}</b>冊が沈んだ
-                <span className="ms-dim">
-                  {" "}
-                  · {applied.ms < 1 ? applied.ms.toFixed(2) : applied.ms.toFixed(1)}ms · 全{total.toLocaleString()}冊
-                  {!full && "(書架を展開中…)"}
-                </span>
-              </p>
-            </>
-          )}
+          <p>
+            <span className="ms-dim">✦</span> {describeSpell(applied.spell)}
+          </p>
+          <p>
+            <span className="ms-dim">→</span> <b>{applied.result.matched.toLocaleString()}</b>冊が集まり、
+            <b>{(total - applied.result.matched).toLocaleString()}</b>冊が沈んだ
+            <span className="ms-dim">
+              {applied.ms !== null && ` · ${applied.ms < 1 ? applied.ms.toFixed(2) : applied.ms.toFixed(1)}ms`}
+              {` · 見本 ${total.toLocaleString()}冊(人気上位・書影あり)`}
+            </span>
+          </p>
         </div>
 
         {help && (
@@ -580,19 +583,13 @@ export default function MagicShelf({ genres }: { genres: GenreDef[] }) {
       </section>
 
       <div ref={shelfRef} className="ms-shelf">
-        {applied && <div key={applied.castId} className="ms-sweep" aria-hidden />}
-        {!applied &&
-          Array.from({ length: 12 }, (_, i) => (
-            <span key={`sk${i}`} className="ms-book ms-book--ghost" aria-hidden>
-              <span className="ms-cover" />
-            </span>
-          ))}
-        {applied && applied.result.matched === 0 && (
+        <div key={applied.castId} className="ms-sweep" aria-hidden />
+        {applied.result.matched === 0 && (
           <p className="ms-empty" data-vt={vtName("empty")}>
             何も集まらなかった…… 呪文を1語減らすか、-(除く)を外してみて。
           </p>
         )}
-        {applied?.result.groups.flatMap((g) => {
+        {applied.result.groups.flatMap((g) => {
           const cells: React.ReactNode[] = [];
           if (grouped)
             cells.push(
@@ -602,7 +599,15 @@ export default function MagicShelf({ genres }: { genres: GenreDef[] }) {
               </h2>,
             );
           for (const b of g.books)
-            cells.push(<BookCell key={b.slug} b={b} genreName={genreName} fresh={applied.fresh.has(b.slug)} />);
+            cells.push(
+              <BookCell
+                key={b.slug}
+                b={b}
+                genreName={genreName}
+                local={localSet.has(b.slug)}
+                fresh={applied.fresh.has(b.slug)}
+              />,
+            );
           if (g.total > g.books.length)
             cells.push(
               <button
@@ -618,13 +623,15 @@ export default function MagicShelf({ genres }: { genres: GenreDef[] }) {
             );
           return cells;
         })}
-        {applied && applied.sunk.length > 0 && (
+        {applied.sunk.length > 0 && (
           <h2 key="h:abyss" className="ms-head ms-head--abyss" data-vt={vtName("h:abyss")}>
             深淵 ── 沈んだ本
             <small>さっきまで見えていた {applied.sunk.length}冊</small>
           </h2>
         )}
-        {applied?.sunk.map((b) => <BookCell key={b.slug} b={b} genreName={genreName} sunk />)}
+        {applied.sunk.map((b) => (
+          <BookCell key={b.slug} b={b} genreName={genreName} local={localSet.has(b.slug)} sunk />
+        ))}
       </div>
     </div>
   );
