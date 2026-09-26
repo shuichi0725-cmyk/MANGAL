@@ -1,0 +1,413 @@
+/* 魔法の書架(/lab/magic-shelf)専用。
+ * ★全セレクタを .ms- 接頭辞 か :root.ms-vt(遷移中だけ付くクラス)に閉じる
+ *   = 頁を離れて CSS が残っても他頁の見た目・他の遷移には一切効かない。
+ * 色は D3 テーマのトークン(--color-accent = アシッドライム)に乗る。 */
+
+.ms-root {
+  --ms-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, "Hiragino Kaku Gothic ProN", "Noto Sans JP", monospace;
+  --ms-glow: color-mix(in srgb, var(--color-accent) 45%, transparent);
+  position: relative;
+  min-height: 100vh;
+  padding: 0 12px 72px;
+  background:
+    radial-gradient(900px 360px at 50% -140px, color-mix(in srgb, var(--color-accent) 11%, transparent), transparent 72%),
+    var(--color-bg, #0d0d0d);
+  color: var(--color-ink);
+}
+@media (min-width: 1024px) {
+  .ms-root { padding: 0 0 96px; }
+}
+
+/* ─── 導入 ─── */
+.ms-intro { padding: 14px 2px 10px; }
+.ms-kicker {
+  font: 10.5px/1 var(--ms-mono);
+  letter-spacing: 0.2em;
+  color: color-mix(in srgb, var(--color-accent) 80%, transparent);
+}
+.ms-h1 {
+  margin-top: 6px;
+  font-size: 24px;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  text-shadow: 0 0 18px var(--ms-glow);
+}
+.ms-lede {
+  margin-top: 6px;
+  max-width: 44em;
+  font-size: 12px;
+  line-height: 1.7;
+  color: color-mix(in srgb, var(--color-ink) 72%, transparent);
+}
+.ms-lede b { color: var(--color-accent); font-weight: 700; }
+
+/* ─── コンソール(入力行と出力はヘッダー直下に貼り付く) ─── */
+.ms-console {
+  position: sticky;
+  top: var(--ms-top, 0px);
+  z-index: 15; /* 共通ヘッダー(z-20)の下 */
+  margin: 0 -12px;
+  padding: 8px 12px 7px;
+  background: color-mix(in srgb, #050505 90%, transparent);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  border-bottom: 1px solid color-mix(in srgb, var(--color-accent) 30%, transparent);
+  font-family: var(--ms-mono);
+}
+@media (min-width: 1024px) {
+  .ms-console { margin: 0; padding: 10px 12px 8px; }
+}
+.ms-prompt {
+  display: flex;
+  align-items: stretch;
+  border: 1.5px solid var(--color-accent);
+  background: #050505;
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-accent) 10%, transparent), 0 0 26px -8px var(--ms-glow);
+}
+.ms-caret {
+  display: flex;
+  align-items: center;
+  padding: 0 4px 0 10px;
+  color: var(--color-accent);
+  font-weight: 700;
+  animation: ms-pulse 2.4s ease-in-out infinite;
+}
+.ms-input {
+  flex: 1;
+  min-width: 0;
+  padding: 11px 4px;
+  border: 0;
+  outline: none;
+  background: transparent;
+  color: var(--color-ink);
+  caret-color: var(--color-accent);
+  font: 16px/1.2 var(--ms-mono); /* 16px 未満だと iOS が入力時に拡大する */
+}
+.ms-input::placeholder { color: color-mix(in srgb, var(--color-accent) 42%, transparent); }
+.ms-clear {
+  padding: 0 10px;
+  color: color-mix(in srgb, var(--color-ink) 55%, transparent);
+  font-size: 18px;
+}
+.ms-cast {
+  padding: 0 16px;
+  background: var(--color-accent);
+  color: #0d0d0d;
+  font: 900 13px/1 var(--ms-mono);
+  letter-spacing: 0.1em;
+}
+.ms-cast:active { filter: brightness(0.85); }
+
+.ms-out {
+  margin-top: 7px;
+  min-height: 2.9em;
+  font-size: 11.5px;
+  line-height: 1.45;
+  color: color-mix(in srgb, var(--color-ink) 78%, transparent);
+}
+.ms-out p { overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+.ms-out b { color: var(--color-accent); font-weight: 700; }
+.ms-dim { color: color-mix(in srgb, var(--color-ink) 45%, transparent); }
+
+/* ─── 呪文チップ(種類タブ + 1行の横スクロール = コンソールに収めて貼り付けても縦を食わない) ─── */
+.ms-tabs {
+  display: flex;
+  align-items: stretch;
+  gap: 2px;
+  margin-top: 8px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.ms-tabs::-webkit-scrollbar { display: none; }
+.ms-tab {
+  flex: none;
+  padding: 6px 8px 5px;
+  border-bottom: 2px solid transparent;
+  color: color-mix(in srgb, var(--color-ink) 55%, transparent);
+  font: 11.5px/1 var(--ms-mono);
+}
+.ms-tab[aria-selected="true"] { color: var(--color-accent); border-bottom-color: var(--color-accent); font-weight: 700; }
+.ms-tab i {
+  margin-left: 3px;
+  font-style: normal;
+  font-size: 9.5px;
+  color: var(--color-accent);
+  vertical-align: 2px;
+}
+.ms-tabs-tools { display: flex; gap: 4px; margin-left: auto; padding-left: 6px; }
+.ms-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 6px -12px 0;
+  padding: 1px 12px 2px;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;
+}
+.ms-row::-webkit-scrollbar { display: none; }
+@media (min-width: 1024px) {
+  .ms-row { flex-wrap: wrap; margin: 6px 0 0; padding: 1px 0 2px; overflow: visible; }
+}
+.ms-chip,
+.ms-tool {
+  flex: none;
+  border: 1px solid var(--color-line);
+  background: #111;
+  font: 12px/1 var(--ms-mono);
+  white-space: nowrap;
+  transition: background-color 0.15s, color 0.15s, border-color 0.15s, box-shadow 0.15s;
+}
+.ms-chip {
+  padding: 8px 11px;
+  color: color-mix(in srgb, var(--color-ink) 84%, transparent);
+}
+.ms-chip[aria-pressed="true"] {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+  color: #0d0d0d;
+  font-weight: 700;
+  box-shadow: 0 0 14px -3px var(--ms-glow);
+}
+.ms-tool {
+  min-width: 30px;
+  padding: 0 8px;
+  border-style: dashed;
+  color: var(--color-accent);
+  font-size: 13px;
+}
+.ms-tool[aria-expanded="true"] { border-style: solid; background: #1a1a12; }
+@media (hover: hover) {
+  .ms-chip:hover,
+  .ms-tool:hover { border-color: var(--color-accent); }
+}
+
+.ms-help {
+  position: relative;
+  max-height: 45vh;
+  margin-top: 6px;
+  padding: 10px 12px;
+  overflow-y: auto;
+  border: 1px dashed color-mix(in srgb, var(--color-accent) 45%, transparent);
+  background: #080808;
+  font: 11.5px/1.6 var(--ms-mono);
+}
+.ms-help dl { display: grid; grid-template-columns: auto 1fr; gap: 4px 12px; padding-right: 20px; }
+.ms-help dt { color: var(--color-accent); }
+.ms-help dd { color: color-mix(in srgb, var(--color-ink) 78%, transparent); }
+.ms-help-close {
+  position: absolute;
+  top: 4px;
+  right: 6px;
+  padding: 2px 6px;
+  color: color-mix(in srgb, var(--color-ink) 60%, transparent);
+  font-size: 16px;
+}
+
+/* ─── 書架 ─── */
+.ms-shelf {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: 16px 10px;
+  margin-top: 14px;
+}
+@media (min-width: 640px) {
+  .ms-shelf { grid-template-columns: repeat(auto-fill, minmax(122px, 1fr)); gap: 20px 14px; }
+}
+
+.ms-head {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin-top: 8px;
+  padding-bottom: 5px;
+  border-bottom: 1px dashed color-mix(in srgb, var(--color-accent) 38%, transparent);
+  color: var(--color-accent);
+  font: 700 13px/1.4 var(--ms-mono);
+  letter-spacing: 0.06em;
+}
+.ms-head small { font-weight: 400; color: color-mix(in srgb, var(--color-ink) 50%, transparent); }
+.ms-head--abyss {
+  margin-top: 36px;
+  border-bottom: 0;
+  padding: 14px 0 8px;
+  color: color-mix(in srgb, var(--color-ink) 45%, transparent);
+  background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.5));
+  border-top: 1px solid color-mix(in srgb, var(--color-ink) 12%, transparent);
+}
+
+.ms-book {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  min-width: 0;
+  color: inherit;
+  text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
+}
+.ms-cover {
+  position: relative;
+  display: block;
+  aspect-ratio: 2 / 3;
+  overflow: hidden;
+  background: linear-gradient(160deg, #1d1d17, #0a0a0a);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.05), 0 10px 18px -12px #000;
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+.ms-cover img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background: #fff; /* 透明GIF書影がダーク地を透かさないように(CoverImage と同じ理由) */
+  opacity: 0;
+  transition: opacity 0.35s;
+}
+.ms-cover img[data-loaded] { opacity: 1; }
+.ms-spine {
+  position: absolute;
+  inset: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 6px 0;
+  writing-mode: vertical-rl;
+  border: 1px solid color-mix(in srgb, var(--color-accent) 28%, transparent);
+  color: color-mix(in srgb, var(--color-ink) 82%, transparent);
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.3;
+  letter-spacing: 0.08em;
+}
+.ms-title {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  font-size: 11.5px;
+  line-height: 1.35;
+}
+.ms-meta,
+.ms-genres {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.ms-meta { font: 10px/1.2 var(--ms-mono); color: color-mix(in srgb, var(--color-ink) 55%, transparent); }
+.ms-meta [data-st="completed"] { color: var(--color-accent); }
+.ms-genres { margin-top: -2px; font-size: 9.5px; color: color-mix(in srgb, var(--color-ink) 40%, transparent); }
+
+.ms-book:focus-visible { outline: none; }
+.ms-book:focus-visible .ms-cover { box-shadow: 0 0 0 2px var(--color-accent), 0 0 24px -4px var(--ms-glow); }
+@media (hover: hover) {
+  .ms-book:hover .ms-cover {
+    transform: translateY(-3px);
+    box-shadow: 0 0 0 1.5px var(--color-accent), 0 0 24px -4px var(--ms-glow);
+  }
+}
+
+/* 沈んだ本 = 暗く・小さく・色を失う(ここへ移る瞬間を view transition が「沈む」動きにする) */
+.ms-book[data-sunk] {
+  opacity: 0.4;
+  filter: grayscale(1) brightness(0.75);
+  transform: scale(0.86) translateY(6px);
+  transform-origin: 50% 0;
+}
+.ms-book--ghost .ms-cover { animation: ms-ghost 1.4s ease-in-out infinite; }
+
+.ms-more {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  aspect-ratio: 2 / 3;
+  border: 1px dashed color-mix(in srgb, var(--color-accent) 50%, transparent);
+  color: color-mix(in srgb, var(--color-ink) 70%, transparent);
+  font: 11px/1.3 var(--ms-mono);
+}
+.ms-more span { color: var(--color-accent); font-size: 14px; font-weight: 700; }
+
+.ms-empty {
+  grid-column: 1 / -1;
+  padding: 28px 8px;
+  text-align: center;
+  font: 12.5px/1.7 var(--ms-mono);
+  color: color-mix(in srgb, var(--color-ink) 60%, transparent);
+}
+
+/* 詠唱の走査線(画面に1本だけ・transform のみ = スマホでも軽い) */
+.ms-sweep {
+  position: fixed;
+  inset: 0;
+  z-index: 5;
+  overflow: hidden;
+  pointer-events: none;
+}
+.ms-sweep::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 28vh;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    color-mix(in srgb, var(--color-accent) 9%, transparent) 70%,
+    color-mix(in srgb, var(--color-accent) 45%, transparent) 99%,
+    transparent
+  );
+  transform: translateY(-30vh);
+  animation: ms-sweep 0.7s cubic-bezier(0.3, 0.6, 0.3, 1) forwards;
+}
+
+/* view transition 非対応ブラウザ用の登場演出(対応ブラウザは下の ::view-transition-new が担う) */
+.ms-book[data-fresh] .ms-cover { animation: ms-summon 0.5s cubic-bezier(0.2, 0.9, 0.25, 1) both; }
+
+/* ─── view transition(遷移中だけ html に .ms-vt が付く) ─── */
+/* 演出中も押せるように: 被さる擬似要素は当たり判定を持たない(連打=次の呪文へ) */
+:root.ms-vt::view-transition { pointer-events: none; }
+:root.ms-vt::view-transition-group(*) {
+  animation-duration: 0.52s;
+  animation-timing-function: cubic-bezier(0.2, 0.85, 0.25, 1);
+}
+:root.ms-vt::view-transition-group(root) { animation-duration: 0.22s; }
+:root.ms-vt::view-transition-old(root),
+:root.ms-vt::view-transition-new(root) { animation-duration: 0.2s; }
+/* 現れる本 = 下から光って召喚 / 消える本 = 沈んで消える */
+:root.ms-vt::view-transition-new(*):only-child { animation: ms-summon 0.5s cubic-bezier(0.2, 0.9, 0.25, 1) both; }
+:root.ms-vt::view-transition-old(*):only-child { animation: ms-banish 0.38s cubic-bezier(0.5, 0, 0.75, 0) both; }
+
+@keyframes ms-summon {
+  from { opacity: 0; transform: translateY(18px) scale(0.72); }
+  60% { opacity: 1; }
+}
+@keyframes ms-banish {
+  to { opacity: 0; transform: translateY(42px) scale(0.75); }
+}
+@keyframes ms-sweep {
+  0% { transform: translateY(-30vh); opacity: 1; }
+  100% { transform: translateY(105vh); opacity: 0.2; }
+}
+@keyframes ms-pulse {
+  50% { opacity: 0.45; }
+}
+@keyframes ms-ghost {
+  50% { opacity: 0.45; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ms-sweep,
+  .ms-caret,
+  .ms-book--ghost .ms-cover,
+  .ms-book[data-fresh] .ms-cover { animation: none; }
+  .ms-sweep { display: none; }
+  .ms-cover,
+  .ms-chip,
+  .ms-cover img { transition: none; }
+}
