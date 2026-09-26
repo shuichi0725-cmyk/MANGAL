@@ -7,6 +7,7 @@ import {
   setExclusive,
   toggleClause,
   toBooks,
+  warmSteps,
 } from "./spell";
 import type { MangaListItem } from "@/lib/schema";
 
@@ -114,5 +115,18 @@ describe("索引から書架へ", () => {
         total_volumes: 1, max_edition_volumes: 1 }) as unknown as MangaListItem;
     const out = toBooks([m("x", 0), m("x", 2000), m("y", 1999)]);
     expect(out.map((o) => [o.slug, o.year])).toEqual([["x", null], ["y", 1999]]);
+  });
+});
+
+describe("下ごしらえ(手すき時間の小分け手順)", () => {
+  it("全手順を流しても結果は変わらない・小分けは件数に比例", () => {
+    const fresh = SHELF.map((x) => ({ ...x }));
+    const steps = warmSteps(fresh, 2);
+    expect(steps).toHaveLength(3 + 5); // 題名 5冊÷2 = 3手 + 並び5種
+    steps.forEach((s) => s());
+    for (const q of ["わんぴ", "古い順", "50音順 状態別", "-ホラー 巻数順"]) {
+      const a = castSpell(fresh, book.parse(q), () => 99).groups.flatMap((g) => g.books.map((x) => x.slug));
+      expect(a).toEqual(slugs(q));
+    }
   });
 });

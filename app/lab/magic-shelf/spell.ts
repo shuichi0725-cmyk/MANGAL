@@ -331,6 +331,23 @@ export function sortedBooks(books: Book[], sort: SortId): Book[] {
   return s;
 }
 
+/**
+ * 下ごしらえの小分け手順(= 手すき時間に1つずつ流す)。本番6.9万件の実測(PC):
+ * 並びの初回ソート 90〜300ms・題名照合の初回下ごしらえ ~270ms(2回目以降は10〜40ms)。
+ * スマホでは数倍 = 初めてチップを押した瞬間に固まらないよう、索引が揃った直後に済ませておく。
+ */
+export function warmSteps(books: Book[], chunk = 4000): (() => void)[] {
+  const steps: (() => void)[] = [];
+  for (let i = 0; i < books.length; i += chunk) {
+    const from = i;
+    steps.push(() => {
+      for (let j = from; j < Math.min(from + chunk, books.length); j++) hayOf(books[j]);
+    });
+  }
+  for (const s of ["pop", "old", "new", "vols", "kana"] as SortId[]) steps.push(() => void sortedBooks(books, s));
+  return steps;
+}
+
 // ─── 集め(棚分け) ─────────────────────────────────────────────
 
 const VOL_BANDS: { max: number; key: string; label: string }[] = [

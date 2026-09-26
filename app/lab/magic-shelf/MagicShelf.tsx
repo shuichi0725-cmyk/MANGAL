@@ -18,6 +18,7 @@ import {
   setExclusive,
   toBooks,
   toggleClause,
+  warmSteps,
 } from "./spell";
 
 /** 集めなし = 1回に呼ぶ冊数 / 集めあり = 棚ごとの冊数 / 深淵に残す冊数。
@@ -337,6 +338,28 @@ export default function MagicShelf({ genres }: { genres: GenreDef[] }) {
     setText(q);
     cast(q, { animate: false });
   }, [books, cast]);
+
+  // フル索引が揃ったら、並び替えと題名照合の下ごしらえを手すき時間に1手ずつ(= 初回のチップ押下で固まらない)
+  useEffect(() => {
+    if (!books || !full) return;
+    const steps = warmSteps(books);
+    let id = 0;
+    let alive = true;
+    const idle = (fn: () => void) =>
+      typeof requestIdleCallback === "function" ? requestIdleCallback(fn) : window.setTimeout(fn, 50);
+    const run = () => {
+      const step = steps.shift();
+      if (!alive || !step) return;
+      step();
+      id = idle(run);
+    };
+    id = idle(run);
+    return () => {
+      alive = false;
+      if (typeof cancelIdleCallback === "function") cancelIdleCallback(id);
+      else clearTimeout(id);
+    };
+  }, [books, full]);
 
   // 打鍵 → 少し待って唱える(IME変換中は唱えない)
   useEffect(() => {
