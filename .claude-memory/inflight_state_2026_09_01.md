@@ -176,3 +176,10 @@ IndexNow は 298 URL 受理(削除分の通知)。鍵ファイルも本番に載
 - promote: 特装版だけの種2版のレーベルを代表にしない(実害17頁是正)。
 - drop3(リイド社 ポケットワイド=コンビニ再録): 剣客商売プレミアム 家/包丁人味平(5)/女忍隠密剣 殲滅ス!! → pending-r2-prune・301済。★週次で `--prune` 必須。
 - 掲載誌 master に x-twitter 追加 = ★機能蒸留/週次とも masters 同期を確認(preview には同期済)。
+
+## 追記 2026-09-26: ユーザ判断待ちの一覧
+- ポケットワイド: 1)一律skip維持 2)予約は保留裁定へ 3)既存純ポケットワイド73頁を1頁ずつ裁定(推奨2+3)
+- ファインダーの標的 キャラクターズブック頁(faindaa-no-hyouteki-kyarakutaazu-book)= 画集/ファンブック類=drop するか
+- _reflect-targeted.py の --drop/改名で公開slugの索引行・prune行も扱う修正をするか
+- 魔法の書架 雛型(/lab/magic-shelf・テスト環境専用)を残すか消すか
+- 本番待ち追加(09-25): ファインダーシリーズ統合(finder-series)・人魚の傷dedup・重複3組drop・ポケスペ2017版タブ・finder slug 16頁改名 = 週次で出る(--prune必須)

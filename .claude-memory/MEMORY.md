@@ -127,3 +127,5 @@
 - [【型・是正済】特装版だけの種2版のレーベルが通常版に残る](special_only_edition_imprint_leak.md) — promote修正・実害17頁是正済
 - [【残作業】書影が本文サンプルページの型を縦横比で洗う](cover_sample_page_aspect_todo.md) — ちいかわ2・4巻で発見・いつか実施
 - [【道具の罠】--help非対応で本処理が走る/減少検出の明細はstderr/CRLF](tool_traps_2026_09_24.md) — 09-24 実踏3件
+- [【方針】仮想書店=現実を模さない・全画面が切り替わる魔法コンソール](magic_shelf_virtual_bookstore.md) — 雛型v1は外れ(フィルター出し方変えただけ)・残す/消す未決
+- [クラウドセッションの使い方](cloud_sessions_usage.md) — 作業ブランチ直push・その間ローカルpush禁止・page.preview.tsx・11/5失効

@@ -22,5 +22,7 @@ metadata:
   `_gen-redirects.py` の「★WARN alias のキーが公開slug」がこの症状の検出信号。
 - ★(09-25) page-dedup.yml は promote が **SRC stem** で照合する。公開slugで書くと改名頁では黙って効かない(人魚の傷で実踏)。
   既存の同型は drop/canonical 両方生きている組が9組(ayashi/daichouhen-doraemon/desire/kibando/pocket-monster-special/
-  ten-yori-takaku/to-heart/tobidase-doubutsu-no-mori/yami-no-ekusasaizu)。うち数組は drop slug が別作品へ付け替え済み=
-  **一律に override 照合へ変えると別作品を消す**。個別裁定待ち。
+  ten-yori-takaku/to-heart/tobidase-doubutsu-no-mori/yami-no-ekusasaizu)。★09-25 全裁定済: 3組drop(SRC stemで再登録)・6組は別作品=古いdedup行を退役。
+  **一律に override 照合へ変えると別作品を消す**(退役前の状態だった)。
+- ★(09-25) `_reflect-targeted.py --drop` は pending-r2-prune.jsonl に **SRC stem** で自動追記する。R2のフォルダ名は公開slug=効かない行。
+  drop 後は公開slugで手追記し、stem 行は取り消す。根は「--drop が公開slugを知らない」(索引の残骸行と同根)=スクリプト修正は未決(ユーザ判断待ち)。
