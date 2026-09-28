@@ -293,22 +293,27 @@ export function ownedNote(item: Pick<ShelfItem, "owned" | "editionTotal">, facts
 
 export type VolumeTile = {
   n: number;
-  /** first = 1巻(書影が表すので細枠だけ) / owned = 所持 / missing = 出ているが未所持 */
-  state: "first" | "owned" | "missing";
+  /** owned = 所持 / missing = 出ているが未所持。★1巻も他の巻と同じ扱い(2026-09-29 ユーザ指摘: 1巻だけ細枠は未所持に見える) */
+  state: "owned" | "missing";
 };
+export type VolumeRun = { from: number; to: number; count: number };
 export type VolumeTiles = {
-  /** 畳んだ所持の前半「2〜to巻 所持(count冊)」。畳まない時は null */
-  band: { from: number; to: number; count: number } | null;
+  /** 畳んだ所持の前半「1〜to巻 所持(count冊)」。畳まない時は null */
+  band: VolumeRun | null;
   /** 個別タイル。先頭は必ず 1/11/21… の10巻区切りの頭(= 10列の格子で 11・21・31巻が左端にそろう) */
   tiles: VolumeTile[];
+  /** 未所持の続きのうちタイルに出さなかった分「あと count巻 未所持(from〜to)」。無ければ null */
+  tail: VolumeRun | null;
 };
 /** これを超える巻数の作品は所持の前半を帯に畳む */
 export const FOLD_OVER = 40;
+/** 未所持タイルは1行(10枚)まで。残りは帯1本(= 長い作品を少しだけ持っている時に1作品で画面が埋まらない) */
+export const MISSING_SHOWN = 10;
 
 /**
  * 「もってる」の段の番号タイル。既刊が分からない作品は null(= タイルを出さず所持状況の1行だけ)。
  * 40巻を超える作品は、最後に持っている巻を含む10巻区切りの頭より前を帯1本に畳む
- * (160巻中140巻所持 → 帯「2〜130巻」+ 131〜160 のタイル)。
+ * (160巻中140巻所持 → 帯「1〜130巻」+ 131〜150 のタイル + 帯「あと10巻 未所持」)。
  * ★既刊より多く持っている(索引が古い・版違い)時も、持っている分までは出す。
  */
 export function volumeTiles(owned: number, total: number | null): VolumeTiles | null {
@@ -319,11 +324,13 @@ export function volumeTiles(owned: number, total: number | null): VolumeTiles | 
   let band: VolumeTiles["band"] = null;
   if (last > FOLD_OVER && own > 10) {
     start = Math.floor((own - 1) / 10) * 10 + 1;
-    band = { from: 2, to: start - 1, count: start - 2 };
+    band = { from: 1, to: start - 1, count: start - 1 };
   }
+  const shownTo = Math.min(last, own + MISSING_SHOWN);
   const tiles: VolumeTile[] = [];
-  for (let n = start; n <= last; n++) tiles.push({ n, state: n === 1 ? "first" : n <= own ? "owned" : "missing" });
-  return { band, tiles };
+  for (let n = start; n <= shownTo; n++) tiles.push({ n, state: n <= own ? "owned" : "missing" });
+  const tail = shownTo < last ? { from: shownTo + 1, to: last, count: last - shownTo } : null;
+  return { band, tiles, tail };
 }
 
 export type PlaqueStats = {
@@ -331,19 +338,19 @@ export type PlaqueStats = {
   ownedVolumes: number;
   /** 出ている続きの巻(owned < 既刊 の差の合計) */
   nextVolumes: number;
-  /** 全巻そろった作品(完結かつ owned >= 既刊) */
-  completeWorks: number;
+  /** そろっている作品 = 完結でも連載中でも、出ている最後の巻まで持っている(札の「揃っています」と同じ集合) */
+  caughtUpWorks: number;
 };
 
 /** 真鍮の銘板の3つの数字。既刊は札と同じ規則(ownedNote)で数える = 札の文言と数字が食い違わない。 */
 export function plaqueStats(items: ShelfItem[], factsOf: (slug: string) => IndexFacts | null): PlaqueStats {
-  const s: PlaqueStats = { ownedVolumes: 0, nextVolumes: 0, completeWorks: 0 };
+  const s: PlaqueStats = { ownedVolumes: 0, nextVolumes: 0, caughtUpWorks: 0 };
   for (const x of items) {
     if (x.shelf !== "own") continue;
     s.ownedVolumes += x.owned ?? 0;
     const note = ownedNote(x, factsOf(x.slug));
     s.nextVolumes += note.next.length;
-    if (note.kind === "complete") s.completeWorks++;
+    if (note.kind === "complete" || note.kind === "caught-up") s.caughtUpWorks++;
   }
   return s;
 }

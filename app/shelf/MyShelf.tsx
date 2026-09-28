@@ -112,14 +112,14 @@ function Cover({ src, title }: { src: string | null; title: string }) {
   );
 }
 
-/** 番号タイル(もってるの段だけ)。10巻で1行、41巻以上は所持の前半を帯に畳む(lib/myShelf volumeTiles)。 */
+/** 番号タイル(もってるの段だけ)。10巻で1行、41巻以上は所持の前半を帯に畳む・未所持は1行まで(lib/myShelf volumeTiles)。 */
 function Tiles({ owned, total }: { owned: number; total: number | null }) {
   const t = volumeTiles(owned, total);
   if (!t) return null;
   const missing = t.tiles.filter((x) => x.state === "missing").map((x) => x.n);
+  const missTo = t.tail ? t.tail.to : missing[missing.length - 1];
   const label =
-    (owned > 0 ? `1〜${owned}巻 所持` : "1巻はまだ") +
-    (missing.length ? `・${missing[0]}〜${missing[missing.length - 1]}巻 未所持` : "");
+    (owned > 0 ? `1〜${owned}巻 所持` : "1巻はまだ") + (missing.length ? `・${missing[0]}〜${missTo}巻 未所持` : "");
   return (
     // 読み上げは1文にまとめる(タイル1枚ずつ読ませない)
     <span className="shelf-c3-tiles" role="img" aria-label={label}>
@@ -133,6 +133,11 @@ function Tiles({ owned, total }: { owned: number; total: number | null }) {
           {x.n}
         </span>
       ))}
+      {t.tail && (
+        <span className="shelf-c3-band is-tail">
+          あと{t.tail.count}巻 未所持({t.tail.from}〜{t.tail.to}巻)
+        </span>
+      )}
     </span>
   );
 }
@@ -203,8 +208,8 @@ function Plaque({ stats }: { stats: PlaqueStats }) {
         <span>出ている続きの巻</span>
       </div>
       <div>
-        <b>{stats.completeWorks.toLocaleString()}</b>
-        <span>全巻そろった作品</span>
+        <b>{stats.caughtUpWorks.toLocaleString()}</b>
+        <span>そろっている作品</span>
       </div>
     </div>
   );

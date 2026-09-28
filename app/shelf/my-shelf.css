@@ -177,10 +177,10 @@
 }
 .shelf-c3-tile.is-owned { background: linear-gradient(#e2c27a, #b99545); color: #1f1606; box-shadow: inset 0 1px 0 #fff6; }
 .shelf-c3-tile.is-missing { border: 1px solid var(--shelf-coral); color: var(--shelf-coral); }
-/* 1巻 = 書影が表すので細枠だけ(薄い) */
-.shelf-c3-tile.is-first { border: 1px solid #4a4a50; color: #6a6a70; }
 /* 41巻以上 = 所持の前半を畳んだ帯 */
 .shelf-c3-band { grid-column: 1 / -1; background: #6e5a2c; color: #f3e5c0; font-size: 9px; }
+/* 未所持の続きのうちタイルに出さなかった分(未所持タイルは1行まで) */
+.shelf-c3-band.is-tail { background: transparent; border: 1px dashed var(--shelf-coral); color: var(--shelf-coral); }
 
 /* ─── メニュー(下から出る)・貼り付け欄 ─── */
 .shelf-sheet { max-height: 85vh; }
