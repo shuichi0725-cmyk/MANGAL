@@ -289,6 +289,65 @@ export function ownedNote(item: Pick<ShelfItem, "owned" | "editionTotal">, facts
   return { kind: "behind", text: `${had} → ${volRange(owned + 1, total)}が出ています`, next, total, fixedEdition };
 }
 
+// ─── 番号タイル・銘板(見た目 C3 = docs/cloud-briefs/my-shelf-look-c3.md) ─────────────
+
+export type VolumeTile = {
+  n: number;
+  /** first = 1巻(書影が表すので細枠だけ) / owned = 所持 / missing = 出ているが未所持 */
+  state: "first" | "owned" | "missing";
+};
+export type VolumeTiles = {
+  /** 畳んだ所持の前半「2〜to巻 所持(count冊)」。畳まない時は null */
+  band: { from: number; to: number; count: number } | null;
+  /** 個別タイル。先頭は必ず 1/11/21… の10巻区切りの頭(= 10列の格子で 11・21・31巻が左端にそろう) */
+  tiles: VolumeTile[];
+};
+/** これを超える巻数の作品は所持の前半を帯に畳む */
+export const FOLD_OVER = 40;
+
+/**
+ * 「もってる」の段の番号タイル。既刊が分からない作品は null(= タイルを出さず所持状況の1行だけ)。
+ * 40巻を超える作品は、最後に持っている巻を含む10巻区切りの頭より前を帯1本に畳む
+ * (160巻中140巻所持 → 帯「2〜130巻」+ 131〜160 のタイル)。
+ * ★既刊より多く持っている(索引が古い・版違い)時も、持っている分までは出す。
+ */
+export function volumeTiles(owned: number, total: number | null): VolumeTiles | null {
+  if (!total || total <= 0) return null;
+  const own = Math.max(0, Math.floor(owned));
+  const last = Math.max(total, own);
+  let start = 1;
+  let band: VolumeTiles["band"] = null;
+  if (last > FOLD_OVER && own > 10) {
+    start = Math.floor((own - 1) / 10) * 10 + 1;
+    band = { from: 2, to: start - 1, count: start - 2 };
+  }
+  const tiles: VolumeTile[] = [];
+  for (let n = start; n <= last; n++) tiles.push({ n, state: n === 1 ? "first" : n <= own ? "owned" : "missing" });
+  return { band, tiles };
+}
+
+export type PlaqueStats = {
+  /** もってる棚の owned の合計 */
+  ownedVolumes: number;
+  /** 出ている続きの巻(owned < 既刊 の差の合計) */
+  nextVolumes: number;
+  /** 全巻そろった作品(完結かつ owned >= 既刊) */
+  completeWorks: number;
+};
+
+/** 真鍮の銘板の3つの数字。既刊は札と同じ規則(ownedNote)で数える = 札の文言と数字が食い違わない。 */
+export function plaqueStats(items: ShelfItem[], factsOf: (slug: string) => IndexFacts | null): PlaqueStats {
+  const s: PlaqueStats = { ownedVolumes: 0, nextVolumes: 0, completeWorks: 0 };
+  for (const x of items) {
+    if (x.shelf !== "own") continue;
+    s.ownedVolumes += x.owned ?? 0;
+    const note = ownedNote(x, factsOf(x.slug));
+    s.nextVolumes += note.next.length;
+    if (note.kind === "complete") s.completeWorks++;
+  }
+  return s;
+}
+
 // ─── 棚のURL(引っ越し・Safari の7日消去の保険・人に見せる) ─────────────
 
 const SHELF_CODE: Record<ShelfId, string> = { own: "o", curious: "c", wish: "w" };

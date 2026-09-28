@@ -6,7 +6,9 @@ import { amazonSearchUrl } from "@/lib/amazon";
 import {
   type FetchFinal,
   type ImportMode,
+  type IndexFacts,
   type OwnedNote,
+  type PlaqueStats,
   type ShelfId,
   type ShelfItem,
   SHELVES,
@@ -15,11 +17,13 @@ import {
   importShelf,
   moveItem,
   ownedNote,
+  plaqueStats,
   removeItem,
   renameSlug,
   resolveMovedSlug,
   setOwned,
   shelfShareUrl,
+  volumeTiles,
 } from "@/lib/myShelf";
 import type { MangaListItem } from "@/lib/schema";
 import { ensureFullIndex, isFullIndexLoaded, useMangaIndex } from "@/lib/useMangaIndex";
@@ -93,77 +97,116 @@ type CardData = {
   note: OwnedNote | null;
 };
 
+/** 1巻の書影を正面向きで1枚(44×64)。無ければ背に題名。★同じ書影を背表紙として並べる表現は使わない(ユーザ裁定) */
 function Cover({ src, title }: { src: string | null; title: string }) {
   const [failed, setFailed] = useState(false);
   return (
-    <span className="shelf-cover relative block aspect-[2/3] overflow-hidden bg-[var(--color-surface-2)]">
+    <span className="shelf-c3-cover">
       {src && !failed ? (
         // eslint-disable-next-line @next/next/no-img-element -- 外部CDN直リンク(images.unoptimized)
-        <img
-          src={src}
-          alt=""
-          loading="lazy"
-          decoding="async"
-          onError={() => setFailed(true)}
-          className="absolute inset-0 h-full w-full bg-white object-cover"
-        />
+        <img src={src} alt="" loading="lazy" decoding="async" onError={() => setFailed(true)} className="bg-white" />
       ) : (
-        <span className="shelf-spine absolute flex items-center justify-center overflow-hidden border border-[var(--color-line)] p-1 text-center text-[11px] font-bold leading-snug text-ink/70">
-          {title}
-        </span>
+        <span className="shelf-c3-spine">{title}</span>
       )}
     </span>
   );
 }
 
-function Card({ d, onMenu, readOnly }: { d: CardData; onMenu: () => void; readOnly: boolean }) {
+/** 番号タイル(もってるの段だけ)。10巻で1行、41巻以上は所持の前半を帯に畳む(lib/myShelf volumeTiles)。 */
+function Tiles({ owned, total }: { owned: number; total: number | null }) {
+  const t = volumeTiles(owned, total);
+  if (!t) return null;
+  const missing = t.tiles.filter((x) => x.state === "missing").map((x) => x.n);
+  const label =
+    (owned > 0 ? `1〜${owned}巻 所持` : "1巻はまだ") +
+    (missing.length ? `・${missing[0]}〜${missing[missing.length - 1]}巻 未所持` : "");
+  return (
+    // 読み上げは1文にまとめる(タイル1枚ずつ読ませない)
+    <span className="shelf-c3-tiles" role="img" aria-label={label}>
+      {t.band && (
+        <span className="shelf-c3-band">
+          {t.band.from}〜{t.band.to}巻 所持({t.band.count}冊)
+        </span>
+      )}
+      {t.tiles.map((x) => (
+        <span key={x.n} className={`shelf-c3-tile is-${x.state}`}>
+          {x.n}
+        </span>
+      ))}
+    </span>
+  );
+}
+
+/** 棚の1段 = 1作品。左に1巻の書影、右に題名・所持状況・番号タイル(ほしい/気になるは巻数と状態+キャッチ)。 */
+function Row({ d, onMenu, readOnly }: { d: CardData; onMenu: () => void; readOnly: boolean }) {
   const { item, m, lost, note } = d;
   const title = m?.title ?? (item.title || item.slug);
   const cover = m?.cover ?? item.cover;
   const press = useLongPress(onMenu);
-  const wide = item.shelf === "own";
   const alert = note && (note.kind === "behind" || note.kind === "complete-behind");
-  const meta = m
-    ? `${STATUS_LABEL[m.status] ?? ""}${m.max_edition_volumes ? `・${m.max_edition_volumes}巻` : ""}`
-    : "";
   const body = (
     <>
       <Cover src={cover} title={title} />
-      <span className="mt-1.5 line-clamp-2 text-[12px] leading-snug">{title}</span>
-      {lost ? (
-        <span className="mt-0.5 text-[10.5px] leading-snug text-ink/55">この作品は見つからなくなりました</span>
-      ) : note ? (
-        <span className={`mt-0.5 line-clamp-3 text-[10.5px] leading-snug ${alert ? "font-bold text-[var(--color-accent)]" : "text-ink/60"}`}>
-          {note.text}
-        </span>
-      ) : (
-        meta && <span className="mt-0.5 text-[10.5px] text-ink/50">{meta}</span>
-      )}
+      <span className="shelf-c3-body">
+        <span className="shelf-c3-title">{title}</span>
+        {lost ? (
+          <span className="shelf-c3-sub">この作品は見つからなくなりました</span>
+        ) : note ? (
+          <>
+            <span className={`shelf-c3-note${alert ? " is-alert" : ""}`}>{note.text}</span>
+            <Tiles owned={item.owned ?? 0} total={note.total} />
+          </>
+        ) : (
+          m && (
+            <>
+              <span className="shelf-c3-sub">
+                {m.max_edition_volumes ? `全${m.max_edition_volumes}巻・` : ""}
+                {STATUS_LABEL[m.status] ?? ""}
+              </span>
+              {m.catch && <span className="shelf-c3-catch">{m.catch}</span>}
+            </>
+          )
+        )}
+      </span>
     </>
   );
-  const cls = "shelf-press flex flex-col select-none";
   return (
-    <li className={`shelf-card relative shrink-0${wide ? " shelf-card--wide" : ""}`}>
+    <li className="shelf-c3-row">
       {lost ? (
-        <div className={cls} {...(readOnly ? {} : press)}>
+        <div className="shelf-c3-link shelf-press" {...(readOnly ? {} : press)}>
           {body}
         </div>
       ) : (
-        <Link href={`/manga/${item.slug}`} prefetch={false} className={cls} {...(readOnly ? {} : press)}>
+        <Link href={`/manga/${item.slug}`} prefetch={false} className="shelf-c3-link shelf-press" {...(readOnly ? {} : press)}>
           {body}
         </Link>
       )}
       {!readOnly && (
-        <button
-          type="button"
-          onClick={onMenu}
-          aria-label={`${title} の棚の操作`}
-          className="absolute right-1 top-1 flex h-7 w-7 items-center justify-center shelf-menu-btn rounded-full text-[15px] leading-none text-white"
-        >
+        <button type="button" onClick={onMenu} aria-label={`${title} の棚の操作`} className="shelf-c3-menu">
           ⋯
         </button>
       )}
     </li>
+  );
+}
+
+/** 真鍮の銘板 = 集計3つ(lib/myShelf plaqueStats)。 */
+function Plaque({ stats }: { stats: PlaqueStats }) {
+  return (
+    <div className="shelf-c3-plaque" role="group" aria-label="集計">
+      <div>
+        <b>{stats.ownedVolumes.toLocaleString()}</b>
+        <span>もってる冊数</span>
+      </div>
+      <div>
+        <b>{stats.nextVolumes.toLocaleString()}</b>
+        <span>出ている続きの巻</span>
+      </div>
+      <div>
+        <b>{stats.completeWorks.toLocaleString()}</b>
+        <span>全巻そろった作品</span>
+      </div>
+    </div>
   );
 }
 
@@ -296,7 +339,12 @@ function Sheet({
   );
 }
 
-function Shelf({
+/** タブの並び(依頼書 C3 = もってる/ほしい/気になる)。選んだ棚は端末に覚える(本人だけの便利機能)。 */
+const TAB_ORDER: ShelfId[] = ["own", "wish", "curious"];
+const TAB_KEY = "mangal:shelf:tab";
+
+/** 黒い展示棚。選んだ棚の作品を1段ずつ、段の下に棚板。 */
+function Case({
   id,
   cards,
   readOnly,
@@ -308,33 +356,19 @@ function Shelf({
   onMenu: (slug: string) => void;
 }) {
   const def = SHELVES.find((s) => s.id === id)!;
-  const behind = id === "own" ? cards.filter((c) => c.note && (c.note.kind === "behind" || c.note.kind === "complete-behind")).length : 0;
   return (
-    <section className="mt-6" aria-label={def.label}>
-      {/* 360px でも見出しは1行(棚の説明は下の行へ) */}
-      <h2 className="flex items-baseline gap-2 whitespace-nowrap px-1">
-        <span className="text-[15px] font-extrabold">{def.label}</span>
-        <span className="text-[11px] text-ink/50">{cards.length}作</span>
-        {behind > 0 && <span className="text-[11px] font-bold text-[var(--color-accent)]">続きあり {behind}</span>}
-      </h2>
-      <p className="px-1 text-[10.5px] text-ink/40">{def.note}</p>
-      {/* 棚板 = 本の足元の太線。各段は横スクロール(スマホ360px基準)。
-          ★スクロール吸着(snap)は付けない: 並び替え(転送の解決・巻数変更)の後にブラウザが別の札へ吸着し直し、
-          1冊目が左で切れた(2026-09-28 実測) */}
-      <div className="shelf-plank mt-2">
-        {cards.length === 0 ? (
-          <p className="px-2 py-8 text-center text-[12px] text-ink/50">
-            {readOnly ? "この棚は空です" : "作品頁の「しまう」から入れられます"}
-          </p>
-        ) : (
-          <ul className="shelf-row flex gap-3 overflow-x-auto px-1 pb-3 pt-1">
-            {cards.map((c) => (
-              <Card key={c.item.slug} d={c} readOnly={readOnly} onMenu={() => onMenu(c.item.slug)} />
-            ))}
-          </ul>
-        )}
-      </div>
-    </section>
+    <div className="shelf-c3-case" role="tabpanel" aria-label={def.label}>
+      <p className="shelf-c3-casenote">{def.note}</p>
+      {cards.length === 0 ? (
+        <p className="shelf-c3-empty">{readOnly ? "この棚は空です" : "作品頁の「しまう」から入れられます"}</p>
+      ) : (
+        <ul className="shelf-c3-rows">
+          {cards.map((c) => (
+            <Row key={c.item.slug} d={c} readOnly={readOnly} onMenu={() => onMenu(c.item.slug)} />
+          ))}
+        </ul>
+      )}
+    </div>
   );
 }
 
@@ -358,6 +392,25 @@ export default function MyShelf({ genres }: { genres: GenreDef[] }) {
   // 転送を確かめ終えても見つからなかった slug(= 見つからなくなった作品)
   const [lost, setLost] = useState<Set<string>>(new Set());
   const tried = useRef(new Set<string>());
+  const [tab, setTab] = useState<ShelfId>("own");
+
+  // 選んだタブは端末に覚える(水和後に読む。保存できない環境は既定の「もってる」のまま)
+  useEffect(() => {
+    try {
+      const v = window.localStorage.getItem(TAB_KEY);
+      if (v === "own" || v === "wish" || v === "curious") setTab(v);
+    } catch {
+      /* 既定のまま */
+    }
+  }, []);
+  const chooseTab = (id: ShelfId) => {
+    setTab(id);
+    try {
+      window.localStorage.setItem(TAB_KEY, id);
+    } catch {
+      /* 覚えられなくても切り替えは効く */
+    }
+  };
 
   // 棚のURL(#s=…)で開かれたら、まず「見るだけ」で出す(取り込むかは本人が選ぶ)
   useEffect(() => {
@@ -401,6 +454,10 @@ export default function MyShelf({ genres }: { genres: GenreDef[] }) {
 
   const viewing = shared !== null;
   const shown = viewing ? shared : items;
+  const factsOf = (slug: string): IndexFacts | null => {
+    const m = bySlug.get(slug);
+    return m ? { max_edition_volumes: m.max_edition_volumes, status: m.status } : null;
+  };
   const cardsOf = (id: ShelfId): CardData[] => {
     const cards = shown
       .filter((x) => x.shelf === id)
@@ -410,7 +467,7 @@ export default function MyShelf({ genres }: { genres: GenreDef[] }) {
           item,
           m,
           lost: !m && (viewing ? full : lost.has(item.slug)),
-          note: id === "own" ? ownedNote(item, m ? { max_edition_volumes: m.max_edition_volumes, status: m.status } : null) : null,
+          note: id === "own" ? ownedNote(item, factsOf(item.slug)) : null,
         };
       });
     const rank = (c: CardData) => (c.note && (c.note.kind === "behind" || c.note.kind === "complete-behind") ? 0 : 1);
@@ -509,9 +566,17 @@ export default function MyShelf({ genres }: { genres: GenreDef[] }) {
       )}
       {!full && <p className="mt-3 text-[11px] text-ink/45">作品データを読み込み中… 巻数と続きの巻は揃い次第出ます</p>}
 
-      {SHELVES.map((s) => (
-        <Shelf key={s.id} id={s.id} cards={cardsOf(s.id)} readOnly={viewing} onMenu={setMenu} />
-      ))}
+      <Plaque stats={plaqueStats(shown, factsOf)} />
+      <div className="shelf-c3-tabs" role="tablist" aria-label="棚">
+        {TAB_ORDER.map((id) => (
+          <button key={id} type="button" role="tab" aria-selected={tab === id} onClick={() => chooseTab(id)} className="shelf-c3-tab">
+            {SHELVES.find((s) => s.id === id)!.label}
+            <span>{counts[id]}</span>
+          </button>
+        ))}
+      </div>
+      <Case id={tab} cards={cardsOf(tab)} readOnly={viewing} onMenu={setMenu} />
+
 
       {!viewing && (
         <section className="mt-10 border-t border-[var(--color-line)] pt-5 text-[12.5px]">

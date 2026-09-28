@@ -12,6 +12,7 @@ import {
   normalizeItems,
   ownedNote,
   parseMangaSlug,
+  plaqueStats,
   putItem,
   removeItem,
   renameSlug,
@@ -19,6 +20,7 @@ import {
   saveShelf,
   setOwned,
   shelfShareUrl,
+  volumeTiles,
 } from "./myShelf";
 
 const T0 = 1_760_000_000_000; // 固定時刻(ms)
@@ -229,5 +231,72 @@ describe("棚のURL(書き出し→取り込み)", () => {
     const incoming = decodeShelf(encodeShelf([item({ slug: "b", shelf: "own", owned: 1 })]), T0)!;
     const out = importShelf(mine, incoming, "overwrite");
     expect(out).toEqual([expect.objectContaining({ slug: "b", shelf: "own", owned: 1, title: "b" })]);
+  });
+});
+
+describe("番号タイル(もってるの段・10巻で1行)", () => {
+  const nums = (t: ReturnType<typeof volumeTiles>) => t!.tiles.map((x) => x.n);
+  const states = (t: ReturnType<typeof volumeTiles>) => t!.tiles.map((x) => x.state[0]).join("");
+
+  it("40巻以下: 1巻(細枠)から既刊まで全部。所持=塗り・未所持=枠", () => {
+    const t = volumeTiles(10, 12);
+    expect(t!.band).toBeNull();
+    expect(nums(t)).toEqual([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]);
+    expect(states(t)).toBe("fooooooooomm"); // f=first o=owned m=missing
+    expect(nums(volumeTiles(40, 40))).toHaveLength(40); // 40巻ちょうどは畳まない
+  });
+
+  it("41巻以上: 最後に持っている巻を含む10巻区切りの頭より前を帯に畳む(依頼書の例 160巻中140巻)", () => {
+    const t = volumeTiles(140, 160);
+    expect(t!.band).toEqual({ from: 2, to: 130, count: 129 });
+    expect(nums(t)[0]).toBe(131); // 131 が格子の左端
+    expect(nums(t)).toHaveLength(30);
+    expect(states(t)).toBe("o".repeat(10) + "m".repeat(20));
+    // こち亀型 = 全巻所持
+    const k = volumeTiles(203, 203);
+    expect(k!.band).toEqual({ from: 2, to: 200, count: 199 });
+    expect(nums(k)).toEqual([201, 202, 203]);
+    // 11巻ちょうど所持 = 2〜10巻を畳み、11 から
+    expect(volumeTiles(11, 50)!.band).toEqual({ from: 2, to: 10, count: 9 });
+  });
+
+  it("owned=0: 畳まない・1巻は細枠のまま・残りは全部未所持", () => {
+    expect(states(volumeTiles(0, 5))).toBe("fmmmm");
+    const big = volumeTiles(0, 60);
+    expect(big!.band).toBeNull();
+    expect(nums(big)).toHaveLength(60);
+  });
+
+  it("owned=既刊: 全部所持(未所持タイル無し)。索引より多く持っていても持っている分は出す", () => {
+    expect(states(volumeTiles(12, 12))).toBe("f" + "o".repeat(11));
+    expect(nums(volumeTiles(14, 12))).toHaveLength(14);
+  });
+
+  it("既刊不明: タイルを出さない(null)", () => {
+    expect(volumeTiles(5, null)).toBeNull();
+    expect(volumeTiles(5, 0)).toBeNull();
+  });
+});
+
+describe("銘板の数字", () => {
+  it("もってる冊数 / 出ている続きの巻 / 全巻そろった作品(札と同じ既刊の規則)", () => {
+    const facts: Record<string, { max_edition_volumes: number; status: "ongoing" | "completed" | "hiatus" }> = {
+      a: { max_edition_volumes: 12, status: "ongoing" }, // 10/12 → 続き2
+      b: { max_edition_volumes: 13, status: "completed" }, // 13/13 → 全巻
+      c: { max_edition_volumes: 30, status: "completed" }, // 版で登録 8/8 → 全巻(索引の30とは比べない)
+      d: { max_edition_volumes: 20, status: "completed" }, // 18/20 → 続き2・全巻ではない
+    };
+    const s = plaqueStats(
+      [
+        item({ slug: "a", shelf: "own", owned: 10 }),
+        item({ slug: "b", shelf: "own", owned: 13 }),
+        item({ slug: "c", shelf: "own", owned: 8, edition: "文庫版", editionTotal: 8 }),
+        item({ slug: "d", shelf: "own", owned: 18 }),
+        item({ slug: "lost", shelf: "own", owned: 5 }), // 索引に無い = 冊数だけ数える
+        item({ slug: "w", shelf: "wish" }),
+      ],
+      (slug) => facts[slug] ?? null,
+    );
+    expect(s).toEqual({ ownedVolumes: 10 + 13 + 8 + 18 + 5, nextVolumes: 4, completeWorks: 2 });
   });
 });
