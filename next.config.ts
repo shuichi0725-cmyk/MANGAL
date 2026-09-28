@@ -12,6 +12,11 @@ const isPreviewData =
 const config: NextConfig = {
   output: "export",
   pageExtensions: isPreviewData ? ["preview.tsx", "tsx", "ts", "jsx", "js"] : ["tsx", "ts", "jsx", "js"],
+  // ★共通の頁(作品頁など)に入るプレビュー専用部品の門(例: マイ本棚の「しまう」ボタン)。
+  //   本番も "0" を**必ず定義**する = ビルド時の定数になり、`=== "1" ? require(...) : null` の require ごと
+  //   webpack が刈り取る → 作品頁の出力(HTML/RSC/JS)は1バイトも変わらない(2026-09-28 実測)。
+  //   未定義のままだと定数にならず、部品が本番の頁チャンクに混ざる。
+  env: { NEXT_PUBLIC_PREVIEW_FEATURES: isPreviewData ? "1" : "0" },
   // ★buildId固定 = 再ビルドしても内容不変ページのハッシュが変わらない(R2差分同期の前提。2026-07-03)
   generateBuildId: async () => "mangal-static",
   // ★静的生成タイムアウト延長(2026-07-05): 既定60sだと重頁(home-design=66k全読込/大巻数頁)が

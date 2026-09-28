@@ -1,0 +1,7 @@
+/* 作品頁の「しまう」ボタン(マイ本棚・プレビュー専用)。本番ビルドには入らない(components/ShelveButton.tsx 参照)。
+ * ★Tailwind の新しいクラスを書かずにここへ置く = 本番の共通CSSを1バイトも変えないため。 */
+.shelve-panel { border-radius: var(--radius-card); }
+.shelve-select { max-width: 16rem; font-size: 16px; } /* 16px = iOS が選択時に拡大しない */
+@media (min-width: 640px) {
+  .shelve-select { font-size: 13px; }
+}

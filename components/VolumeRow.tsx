@@ -9,7 +9,7 @@ type Props = { manga: Manga };
  *     ISBNが重なる刷(同一ISBNのカバー違い)は従来どおりタブ維持(分離すると同ISBNが二重になる)。
  *  ② 並び = 「書影あり×最大巻数(=初版と同巻割りの代表)」を先頭 → 残りは新しい順 →
  *     書影なし(旧初版等)は最後。データは温存、表示順のみ変更。 */
-function displayBlocks(editions: Edition[]): Edition[] {
+export function displayBlocks(editions: Edition[]): Edition[] {
   const blocks: Edition[] = [];
   for (const ed of editions) {
     const vers = ed.versions;

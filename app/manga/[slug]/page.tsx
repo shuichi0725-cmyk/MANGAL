@@ -4,7 +4,7 @@ import { hubHrefIfExists } from "@/lib/hubs";
 import { notFound } from "next/navigation";
 import RelatedWorks, { computeRelated } from "@/components/RelatedWorks";
 import ShareButtons from "@/components/ShareButtons";
-import VolumeRow from "@/components/VolumeRow";
+import VolumeRow, { displayBlocks } from "@/components/VolumeRow";
 // import ColorEditionNote from "@/components/ColorEditionNote"; // 帯=表示停止中(2026-08-02裁定。下のマウント跡を参照)
 import ArtBookCard from "@/components/ArtBookCard";
 import Badge from "@/components/ui/Badge";
@@ -13,6 +13,17 @@ import { yearStatusLabel } from "@/lib/format";
 import { buildOnlyMangaSlugs, loadAllManga, loadTagI18n, loadWameiTags } from "@/lib/loadData";
 import { coverUrl } from "@/lib/schema";
 import { jaGenre, jaTag } from "@/lib/anilist-i18n";
+
+// ★プレビュー専用「しまう」ボタン(マイ本棚 docs/cloud-briefs/my-shelf.md)。本番は next.config.ts が
+//   NEXT_PUBLIC_PREVIEW_FEATURES="0" を定数で埋めるので、この require ごと webpack が刈り取る
+//   = 本番の作品頁(6.6万頁)の HTML/RSC/JS は1バイトも変わらない(静的 import にすると頁チャンクに混ざる)。
+const ShelveButton: typeof import("@/components/ShelveButton").default | null =
+  process.env.NEXT_PUBLIC_PREVIEW_FEATURES === "1" ? require("@/components/ShelveButton").default : null;
+
+/** 版の巻数 = 小数の番外編(15.5 等)を数えない(一覧索引 _build-list-index.py の _card_vol_count と同じ)。 */
+function shelfVolCount(vs: import("@/lib/schema").Manga["editions"][number]["volumes"]): number {
+  return vs.filter((v) => !(typeof v.number === "number" && !Number.isInteger(v.number))).length;
+}
 
 export function generateStaticParams() {
   // ★機能蒸留ビルド(コードのみ本番反映= _deploy-feature.py): 漫画詳細66kは生成しない。
@@ -271,6 +282,8 @@ export default async function MangaDetailPage({
         ],
       }
     : null;
+
+  const shareButtons = <ShareButtons title={manga.title} url={`${SITE}/manga/${manga.slug}`} />;
 
   return (
     <div>
@@ -579,7 +592,21 @@ export default async function MangaDetailPage({
           {/* 共有(X/LINE/OS共有) = 説明の直後(2026-07-12 ユーザ指定位置)。
               ★2026-09-15 関連作品を巻セクションの下へ移した後も**共有はここに据え置き**(ユーザ裁定):
               共有は本題(巻)に触れる前でも押される導線で、深い位置に下げると押されなくなるため。 */}
-          <ShareButtons title={manga.title} url={`${SITE}/manga/${manga.slug}`} />
+          {/* ★本番は ShelveButton=null → shareButtons だけ(= 従来と同じ木。null の子も増やさない) */}
+          {ShelveButton ? (
+            <>
+              {shareButtons}
+              <ShelveButton
+                slug={manga.slug}
+                title={manga.title}
+                cover={cover}
+                editions={displayBlocks(manga.editions).map((e) => ({ label: e.label, total: shelfVolCount(e.volumes) }))}
+                maxTotal={Math.max(0, ...manga.editions.map((e) => shelfVolCount(e.volumes)))}
+              />
+            </>
+          ) : (
+            shareButtons
+          )}
 
           {/* 電子カラー版帯=表示停止のまま(2026-08-02 ユーザ裁定「勝手につけられた」)。
               2026-08-12 ホームのカラー版コーナー新設で color-editions.json を再充填したため、
