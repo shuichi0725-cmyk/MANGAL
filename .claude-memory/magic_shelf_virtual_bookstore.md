@@ -34,5 +34,11 @@ metadata:
 - テスト環境は索引1,400作=糸がすかすか → ユーザ裁定「3」= この頁だけ本番全件索引を読む。
   実測: mangal-db.com の索引はCORSヘッダ無し・cols.v1は本番404(未公開)。→ 案=preview CIで本番索引(公開URL)を取得→_index_files.py ensureでcols生成→public/prod-idx/へ置き同一オリジン配信、useMangaIndexに読み先base指定を足す。本番無改修。
 
+- 画面案4つを artifact で提示(2026-09-28 https://claude.ai/artifact/Xr6neqc5eAFmC9A5eoYtFG = 星図/要素のすだれ/札めくり/時の窓・実データ)。未裁定。
+- ★同日ユーザ「選んだ漫画を自分だけの本棚にしまう機能が先な気がしてきた」→ 可否相談中。
+  既存部品: LikeButton(localStorage+Worker KV匿名カウンタ・PIIゼロ設計)/PurchaseMode(localStorage)。アカウント・ログインは無い。
+  提案=①端末保存(IndexedDB・slugだけ保存し表示はuseMangaIndexで引く)+②引っ越し/共有用の棚URL(サーバ不要)。③ログイン同期はPII方針と衝突=後回し。
+  ★Safariは7日無訪問でスクリプト保存を消す(ITP)=②が保険。
+
 **How to apply:** UI/体験の依頼は必ず「画面が何に変わるか」を1行目に書く。既存UIの延長に見える案は出す前に疑う。
 関連: [[feedback_name_the_element_in_the_photo]] [[cloud_sessions_usage]]
