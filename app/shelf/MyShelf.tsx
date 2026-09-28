@@ -515,10 +515,16 @@ export default function MyShelf({ genres }: { genres: GenreDef[] }) {
 
       {!viewing && (
         <section className="mt-10 border-t border-[var(--color-line)] pt-5 text-[12.5px]">
-          <h2 className="text-[14px] font-bold">棚をよそへ持っていく</h2>
+          <h2 className="text-[14px] font-bold">棚をURLで保存・復元する</h2>
+          {/* ★日本語の文は1行に書く(JSX は改行を空白1つにする=「を メモ帳」のような空白が出る) */}
           <p className="mt-1 text-[11.5px] leading-relaxed text-ink/60">
-            この本棚は、この端末(ブラウザ)の中だけにあります。機種変更・別の端末・Safari の「7日開かないと消える」対策・人に見せる時は、
-            棚のURLを作って開いてください(開いた側で「合流/上書き/見るだけ」を選べます)。URL の「#」より後ろはサーバーに送られません。
+            {"この本棚は、この端末(ブラウザ)の中だけにあります。「棚のURLを作る」で出るURL(文字列)をメモ帳・メールの下書き・自分宛てのLINEなどに"}
+            <b>保存しておけば</b>
+            {"、棚が消えても(Safari は7日開かないと消えることがあります)・機種変更しても、そのURLを開くか下の欄に貼るだけで"}
+            <b>元の棚に戻せます</b>。
+          </p>
+          <p className="mt-1 text-[11.5px] leading-relaxed text-ink/60">
+            {"人に見せる時もこのURLを送ってください(開いた側で「合流/上書き/見るだけ」を選べます)。URL の「#」より後ろはサーバーに送られません。"}
           </p>
           <div className="mt-2 flex flex-wrap items-center gap-2">
             <button type="button" onClick={makeUrl} disabled={!items.length} className="rounded-full border-2 border-[var(--color-accent)] px-3 py-1.5 text-xs font-bold text-[var(--color-accent)] disabled:opacity-40">
@@ -546,7 +552,12 @@ export default function MyShelf({ genres }: { genres: GenreDef[] }) {
               className="mt-2 w-full rounded border border-[var(--color-line)] bg-[var(--color-surface)] px-2 py-1.5 font-mono text-[11px] text-ink/80"
             />
           )}
-          <h3 className="mt-5 text-[13px] font-bold">棚のURL(文字列)を貼って取り込む</h3>
+          {shareUrl && (
+            <p className="mt-1 text-[11px] leading-relaxed text-ink/55">
+              ↑ このURLを保存しておけば、いつでもこの棚に戻せます。作った時点の中身なので、棚を変えたら作り直して保存し直してください。
+            </p>
+          )}
+          <h3 className="mt-5 text-[13px] font-bold">保存しておいたURL(文字列)から復元する</h3>
           <div className="mt-2 flex gap-2">
             <input
               value={paste}

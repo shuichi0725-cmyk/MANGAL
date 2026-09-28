@@ -278,7 +278,11 @@ export default function Design12() {
             ["📋 一覧表で探す", "全作品をソート・絞り込み", "/list"],
             ["🏷️ ジャンルから", "ジャンル別の作品一覧へ", "/genre"],  // ★2026-09-24 旧=/browse(ジャンル面への入口が無かった)
             ["あ 50音さくいん", "著者名から作品へ", "/authors"],
-            ["📚 あなたの本棚", "所持巻を記録(準備中)", null],
+            // ★マイ本棚(/shelf)はテスト環境だけの頁 = プレビュー用データのビルドでだけ繋ぐ。本番は従来どおり「準備中」
+            //   (NEXT_PUBLIC_PREVIEW_FEATURES は next.config.ts がビルド時の定数で埋める。本番の出力は変わらない)
+            process.env.NEXT_PUBLIC_PREVIEW_FEATURES === "1"
+              ? ["📚 あなたの本棚", "所持巻を記録・続刊を通知", "/shelf"]
+              : ["📚 あなたの本棚", "所持巻を記録(準備中)", null],
           ] as const).map(([t, d, href]) =>
             href ? (
               <Link key={t} href={href} className="spring-press block">
