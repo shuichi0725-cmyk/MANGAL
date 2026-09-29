@@ -359,11 +359,11 @@ export function placeRing(
 // ───────────────────────── 糸を広げる: 4つの広げ方 ─────────────────────────
 
 export type Spread = "fan" | "ring" | "time" | "dust";
+// ★2026-09-30 ユーザ裁定: 基本は星屑・切り替えは「年表」だけ。 方角に扇・同心円は使わない
+//   (配置の計算は spreadPositions に残してあるが、選べる一覧からは外した=覚えた値も星屑に戻る)。
 export const SPREADS: readonly { key: Spread; name: string }[] = [
-  { key: "fan", name: "方角に扇" },
-  { key: "ring", name: "同心円" },
-  { key: "time", name: "年表" },
   { key: "dust", name: "星屑" },
+  { key: "time", name: "年表" },
 ];
 
 /** ★同じ年の糸では年表を選べない(全部同じ年=1列に潰れて7冊しか出ない)。 */
@@ -373,8 +373,8 @@ export function allowedSpreads(kind: Kind): Spread[] {
   );
 }
 
-export function defaultSpread(kind: Kind): Spread {
-  return kind === "year" ? "ring" : kind === "elem" ? "fan" : "time";
+export function defaultSpread(_kind: Kind): Spread {
+  return "dust";
 }
 
 /** 端末に覚えた広げ方(不正・使えない値なら既定)。 */

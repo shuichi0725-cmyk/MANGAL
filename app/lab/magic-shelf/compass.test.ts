@@ -296,17 +296,19 @@ describe("4つの広げ方", () => {
     p.y - p.h / 2 >= 0 &&
     p.y + p.h / 2 <= geom.H;
 
-  it("★同じ年の糸では年表を選べない(既定は同心円・覚えた値が年表でも使わない)", () => {
+  it("★同じ年の糸では年表を選べない(既定は星屑・覚えた値が年表でも使わない)", () => {
     expect(allowedSpreads("year")).not.toContain("time");
-    expect(resolveSpread("year", "time")).toBe("ring");
+    expect(resolveSpread("year", "time")).toBe("dust");
     for (const k of ["author", "mag", "elem"] as Kind[])
       expect(allowedSpreads(k)).toContain("time");
   });
 
-  it("初期値: 作者=年表 / 同じ雑誌=年表 / 同じ年=同心円 / 要素=方角に扇", () => {
-    expect(KINDS.map(defaultSpread)).toEqual(["time", "time", "ring", "fan"]);
-    expect(resolveSpread("elem", "dust")).toBe("dust");
-    expect(resolveSpread("elem", "nonsense")).toBe("fan");
+  it("初期値はどの糸も星屑・選べるのは星屑と年表だけ(扇・同心円は覚えていても星屑に戻る)", () => {
+    expect(KINDS.map(defaultSpread)).toEqual(["dust", "dust", "dust", "dust"]);
+    expect(resolveSpread("elem", "time")).toBe("time");
+    expect(resolveSpread("elem", "fan")).toBe("dust");
+    expect(resolveSpread("mag", "ring")).toBe("dust");
+    expect(resolveSpread("elem", "nonsense")).toBe("dust");
   });
 
   const noOverlap = (P: { x: number; y: number; w: number; h: number }[]) => {

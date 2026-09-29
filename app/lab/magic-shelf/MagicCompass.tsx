@@ -14,7 +14,6 @@ import {
   KINDS,
   KIND_COLOR,
   KIND_NAME,
-  SPREADS,
   allowedSpreads,
   buildGraph,
   neighborhood,
@@ -849,27 +848,25 @@ export default function MagicCompass({ magazines }: { magazines: Record<string, 
             );
           })}
         </div>
-        {unit && (
+        {/* ★広げ方は「星屑」が基本・切り替えは「年表」だけ(2026-09-30 ユーザ裁定)。 同じ年の糸では年表を使えないので出さない */}
+        {unit && allowedSpreads(unit.kind).includes("time") && (
           <div className="cp-spreads" role="group" aria-label="広げ方">
-            {SPREADS.map((sp) => {
-              const ok = allowedSpreads(unit.kind).includes(sp.key);
-              const on = spreadOf(unit.kind) === sp.key;
+            {(() => {
+              const on = spreadOf(unit.kind) === "time";
               return (
                 <button
-                  key={sp.key}
                   type="button"
                   className={`cp-sp${on ? " on" : ""}`}
                   style={{ "--c": KIND_COLOR[unit.kind] } as CSSProperties}
                   aria-pressed={on}
-                  disabled={!ok}
-                  title={ok ? undefined : "同じ年の糸では年表を使えません(全部が1列に重なるため)"}
-                  onClick={() => chooseSpread(unit.kind, sp.key)}
+                  title={on ? "星屑に戻す" : "連載開始の年で並べる"}
+                  onClick={() => chooseSpread(unit.kind, on ? "dust" : "time")}
                 >
-                  <SpreadIcon k={sp.key} />
-                  {sp.name}
+                  <SpreadIcon k="time" />
+                  年表
                 </button>
               );
-            })}
+            })()}
           </div>
         )}
       </div>
