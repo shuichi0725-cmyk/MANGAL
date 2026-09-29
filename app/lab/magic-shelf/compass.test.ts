@@ -63,31 +63,77 @@ describe("逆引き表", () => {
 
 describe("周りの本(つながりの計算)", () => {
   it("1冊は最初に当てはまった種類にだけ入る(作者 > 同じ雑誌 > 同じ年 > 要素)", () => {
-    const c = book("c", { authors: [{ name: "甲" }], magazine: "jump", year_started: 2016, themes: T });
+    const c = book("c", {
+      authors: [{ name: "甲" }],
+      magazine: "jump",
+      year_started: 2016,
+      themes: T,
+    });
     // 作者も雑誌も年も要素も重なる本 → 作者だけ
-    const all4 = book("all4", { authors: [{ name: "甲" }], magazine: "jump", year_started: 2016, themes: T, popularity: 9000 });
+    const all4 = book("all4", {
+      authors: [{ name: "甲" }],
+      magazine: "jump",
+      year_started: 2016,
+      themes: T,
+      popularity: 9000,
+    });
     // 雑誌と年と要素が重なる本 → 同じ雑誌
-    const mag = book("mag", { magazine: "jump", year_started: 2016, themes: T, popularity: 9000 });
+    const mag = book("mag", {
+      magazine: "jump",
+      year_started: 2016,
+      themes: T,
+      popularity: 9000,
+    });
     // 年と要素が重なる本 → 同じ年
-    const year = book("year", { year_started: 2016, themes: T, popularity: 9000 });
+    const year = book("year", {
+      year_started: 2016,
+      themes: T,
+      popularity: 9000,
+    });
     // 要素だけ
-    const elem = book("elem", { year_started: 1990, themes: T, popularity: 9000 });
+    const elem = book("elem", {
+      year_started: 1990,
+      themes: T,
+      popularity: 9000,
+    });
     const g = buildGraph([c, all4, mag, year, elem]);
-    const { ring } = neighborhood(g, c, (k) => (k === "jump" ? "週刊少年ジャンプ" : k));
+    const { ring } = neighborhood(g, c, (k) =>
+      k === "jump" ? "週刊少年ジャンプ" : k,
+    );
     const kindOf = Object.fromEntries(ring.map((r) => [r.slug, r.kind]));
-    expect(kindOf).toEqual({ all4: "author", mag: "mag", year: "year", elem: "elem" });
-    expect(ring.map((r) => r.label)).toEqual(["作者 甲", "週刊少年ジャンプ", "2016年に開始", "陰謀・政治"]);
+    expect(kindOf).toEqual({
+      all4: "author",
+      mag: "mag",
+      year: "year",
+      elem: "elem",
+    });
+    expect(ring.map((r) => r.label)).toEqual([
+      "作者 甲",
+      "週刊少年ジャンプ",
+      "2016年に開始",
+      "陰謀・政治",
+    ]);
   });
 
   it("上限: 作者1・同じ雑誌2・同じ年2・要素2(合計7)。 計算側は各種類に控えを1冊持つ", () => {
-    const c = book("c", { authors: [{ name: "甲" }], magazine: "jump", year_started: 2016, themes: T });
+    const c = book("c", {
+      authors: [{ name: "甲" }],
+      magazine: "jump",
+      year_started: 2016,
+      themes: T,
+    });
     const list = [c];
-    for (let i = 0; i < 5; i++) list.push(book(`a${i}`, { authors: [{ name: "甲" }] }));
-    for (let i = 0; i < 5; i++) list.push(book(`m${i}`, { magazine: "jump", themes: T.slice(0, 2) }));
-    for (let i = 0; i < 5; i++) list.push(book(`y${i}`, { year_started: 2016, themes: T.slice(0, 2) }));
-    for (let i = 0; i < 5; i++) list.push(book(`e${i}`, { themes: T.slice(0, 3), popularity: 5000 }));
+    for (let i = 0; i < 5; i++)
+      list.push(book(`a${i}`, { authors: [{ name: "甲" }] }));
+    for (let i = 0; i < 5; i++)
+      list.push(book(`m${i}`, { magazine: "jump", themes: T.slice(0, 2) }));
+    for (let i = 0; i < 5; i++)
+      list.push(book(`y${i}`, { year_started: 2016, themes: T.slice(0, 2) }));
+    for (let i = 0; i < 5; i++)
+      list.push(book(`e${i}`, { themes: T.slice(0, 3), popularity: 5000 }));
     const { ring } = neighborhood(buildGraph(list), c);
-    const count = (xs: readonly { kind: string }[], k: Kind) => xs.filter((r) => r.kind === k).length;
+    const count = (xs: readonly { kind: string }[], k: Kind) =>
+      xs.filter((r) => r.kind === k).length;
     expect(KINDS.map((k) => count(ring, k))).toEqual([2, 3, 3, 3]);
     const placed = placeRing(ring, null, null, 118, 150);
     expect(KINDS.map((k) => count(placed, k))).toEqual([1, 2, 2, 2]);
@@ -111,12 +157,28 @@ describe("周りの本(つながりの計算)", () => {
     const c = book("c", { magazine: "jump", themes: T });
     const g = buildGraph([
       c,
-      book("two-hi", { magazine: "jump", themes: T.slice(0, 2), popularity: 99999 }),
+      book("two-hi", {
+        magazine: "jump",
+        themes: T.slice(0, 2),
+        popularity: 99999,
+      }),
       book("four", { magazine: "jump", themes: T.slice(0, 4), popularity: 10 }),
-      book("three", { magazine: "jump", themes: T.slice(0, 3), popularity: 10 }),
+      book("three", {
+        magazine: "jump",
+        themes: T.slice(0, 3),
+        popularity: 10,
+      }),
     ]);
-    expect(neighborhood(g, c).ring.map((r) => r.slug)).toEqual(["four", "three", "two-hi"]);
-    expect(placeRing(neighborhood(g, c).ring, null, null, 118, 150).map((r) => r.slug)).toEqual(["four", "three"]);
+    expect(neighborhood(g, c).ring.map((r) => r.slug)).toEqual([
+      "four",
+      "three",
+      "two-hi",
+    ]);
+    expect(
+      placeRing(neighborhood(g, c).ring, null, null, 118, 150).map(
+        (r) => r.slug,
+      ),
+    ).toEqual(["four", "three"]);
   });
 });
 
@@ -135,25 +197,42 @@ describe("広げる単位", () => {
     list.push(book("m1", { magazine: "jump", themes: ["陰謀"] }));
     list.push(book("y1", { year_started: 2016, themes: ["政治"] }));
     // 作品数: 料理5 > 魔法4 > 学園3 > 政治2(+y1) > 陰謀(m1)…
-    for (let i = 0; i < 5; i++) list.push(book(`cook${i}`, { themes: ["料理"] }));
-    for (let i = 0; i < 4; i++) list.push(book(`magic${i}`, { themes: ["魔法"] }));
-    for (let i = 0; i < 3; i++) list.push(book(`school${i}`, { themes: ["学園"] }));
+    for (let i = 0; i < 5; i++)
+      list.push(book(`cook${i}`, { themes: ["料理"] }));
+    for (let i = 0; i < 4; i++)
+      list.push(book(`magic${i}`, { themes: ["魔法"] }));
+    for (let i = 0; i < 3; i++)
+      list.push(book(`school${i}`, { themes: ["学園"] }));
     list.push(book("pol", { themes: ["政治"] }));
-    const { units } = neighborhood(buildGraph(list), c, (k) => (k === "jump" ? "週刊少年ジャンプ" : k));
-    const byKey = Object.fromEntries(units.map((u) => [u.key, u.items.map((i) => i.slug)]));
+    const { units } = neighborhood(buildGraph(list), c, (k) =>
+      k === "jump" ? "週刊少年ジャンプ" : k,
+    );
+    const byKey = Object.fromEntries(
+      units.map((u) => [u.key, u.items.map((i) => i.slug)]),
+    );
     expect(byKey["author:甲"]).toEqual(["a-no-theme"]);
     expect(byKey["author:乙"]).toEqual(["b1"]);
     expect(byKey["mag:jump"]).toEqual(["m1"]);
     expect(byKey["year:2016"]).toEqual(["y1"]);
-    expect(units.filter((u) => u.kind === "elem").map((u) => u.label)).toEqual(["料理", "魔法", "学園", "政治"]);
-    expect(units.find((u) => u.key === "mag:jump")?.label).toBe("週刊少年ジャンプ");
+    expect(units.filter((u) => u.kind === "elem").map((u) => u.label)).toEqual([
+      "料理",
+      "魔法",
+      "学園",
+      "政治",
+    ]);
+    expect(units.find((u) => u.key === "mag:jump")?.label).toBe(
+      "週刊少年ジャンプ",
+    );
   });
 
   it("各単位は最大24冊で、中央の本自身は含まない", () => {
     const c = book("c", { authors: [{ name: "甲" }] });
     const list = [c];
-    for (let i = 0; i < 40; i++) list.push(book(`a${i}`, { authors: [{ name: "甲" }] }));
-    const u = neighborhood(buildGraph(list), c).units.find((x) => x.key === "author:甲");
+    for (let i = 0; i < 40; i++)
+      list.push(book(`a${i}`, { authors: [{ name: "甲" }] }));
+    const u = neighborhood(buildGraph(list), c).units.find(
+      (x) => x.key === "author:甲",
+    );
     expect(u?.items.length).toBe(24);
     expect(u?.items.some((i) => i.slug === "c")).toBe(false);
   });
@@ -161,7 +240,9 @@ describe("広げる単位", () => {
 
 describe("来た道", () => {
   const full: RingEntry[] = [];
-  for (const k of KINDS) for (let i = 0; i < 3; i++) full.push({ slug: `${k}${i}`, kind: k, label: k, shared: 0 });
+  for (const k of KINDS)
+    for (let i = 0; i < 3; i++)
+      full.push({ slug: `${k}${i}`, kind: k, label: k, shared: 0 });
 
   it("★前の中央は来た方向の反対側に残る(周りの本の条件に当てはまっても枠は使わず、枠は控えで埋める)", () => {
     // 作者の糸で北から来た = 前の中央は新しい中央の作者でもある(ほぼ必ず起きる)
@@ -170,7 +251,11 @@ describe("来た道", () => {
       { slug: "next-author", kind: "author", label: "作者 甲", shared: 0 },
     ];
     const p = placeRing(ring, "prev", 90, 118, 150);
-    expect(p.find((o) => o.slug === "next-author")).toMatchObject({ kind: "author", ang: -90, back: false });
+    expect(p.find((o) => o.slug === "next-author")).toMatchObject({
+      kind: "author",
+      ang: -90,
+      back: false,
+    });
     const back = p.find((o) => o.slug === "prev");
     expect(back).toMatchObject({ kind: "back", back: true, ang: 90 });
     expect(back?.dy).toBeCloseTo(150);
@@ -178,16 +263,21 @@ describe("来た道", () => {
   });
 
   it("どの方向から来ても、来た道はすべり終えた位置のまま・周りの本と重ならない", () => {
+    // ★2026-09-29 書影を大きくした(周りの本 58×81)ので、実際のスマホの舞台の楕円で確かめる
+    const g = stageGeom(360, 504);
     for (let from = -180; from < 180; from += 5) {
-      const p = placeRing(full, "prev", from + 180, 118, 150);
+      const p = placeRing(full, "prev", from + 180, g.rx, g.ry);
       const back = p.find((o) => o.back);
       expect(angleGap(back!.ang, from + 180)).toBe(0);
       expect(p.filter((o) => !o.back)).toHaveLength(7);
       for (let i = 0; i < p.length; i++)
         for (let j = i + 1; j < p.length; j++) {
           const overlap =
-            Math.abs(p[i].dx - p[j].dx) < RING_GAP.w - 0.5 && Math.abs(p[i].dy - p[j].dy) < RING_GAP.h - 0.5;
-          expect(overlap, `from ${from}: ${p[i].slug}/${p[j].slug}`).toBe(false);
+            Math.abs(p[i].dx - p[j].dx) < RING_GAP.w - 0.5 &&
+            Math.abs(p[i].dy - p[j].dy) < RING_GAP.h - 0.5;
+          expect(overlap, `from ${from}: ${p[i].slug}/${p[j].slug}`).toBe(
+            false,
+          );
         }
     }
     expect(angleGap(350, 10)).toBe(20);
@@ -196,14 +286,21 @@ describe("来た道", () => {
 
 describe("4つの広げ方", () => {
   const geom = stageGeom(360, 544);
-  const items = Array.from({ length: 24 }, (_, i) => ({ slug: `b${i}`, year: 1990 + (i % 12) }));
+  const items = Array.from({ length: 24 }, (_, i) => ({
+    slug: `b${i}`,
+    year: 1990 + (i % 12),
+  }));
   const inside = (p: { x: number; y: number; w: number; h: number }) =>
-    p.x - p.w / 2 >= 0 && p.x + p.w / 2 <= geom.W && p.y - p.h / 2 >= 0 && p.y + p.h / 2 <= geom.H;
+    p.x - p.w / 2 >= 0 &&
+    p.x + p.w / 2 <= geom.W &&
+    p.y - p.h / 2 >= 0 &&
+    p.y + p.h / 2 <= geom.H;
 
   it("★同じ年の糸では年表を選べない(既定は同心円・覚えた値が年表でも使わない)", () => {
     expect(allowedSpreads("year")).not.toContain("time");
     expect(resolveSpread("year", "time")).toBe("ring");
-    for (const k of ["author", "mag", "elem"] as Kind[]) expect(allowedSpreads(k)).toContain("time");
+    for (const k of ["author", "mag", "elem"] as Kind[])
+      expect(allowedSpreads(k)).toContain("time");
   });
 
   it("初期値: 作者=年表 / 同じ雑誌=年表 / 同じ年=同心円 / 要素=方角に扇", () => {
@@ -212,28 +309,68 @@ describe("4つの広げ方", () => {
     expect(resolveSpread("elem", "nonsense")).toBe("fan");
   });
 
-  it("方角に扇: 3列(5/8/11)・内側ほど大きい・糸の方角に向く", () => {
-    const r = spreadPositions("author", items, "fan", geom, 2000, "k");
-    expect(r.P).toHaveLength(24);
-    expect(r.P.slice(0, 5).every((p) => p.w === 34)).toBe(true);
-    expect(r.P.slice(5, 13).every((p) => p.w === 30)).toBe(true);
-    expect(r.P.slice(13).every((p) => p.w === 26)).toBe(true);
-    // 作者 = 北: どれも中央より上
-    expect(r.P.every((p) => p.y < geom.CY)).toBe(true);
-    expect(r.center).toMatchObject({ x: geom.CX, y: geom.CY, w: 60, h: 84 });
+  const noOverlap = (P: { x: number; y: number; w: number; h: number }[]) => {
+    for (let i = 0; i < P.length; i++)
+      for (let j = i + 1; j < P.length; j++)
+        if (
+          Math.abs(P[i].x - P[j].x) < (P[i].w + P[j].w) / 2 &&
+          Math.abs(P[i].y - P[j].y) < (P[i].h + P[j].h) / 2
+        )
+          return false;
+    return true;
+  };
+
+  it("方角に扇: 近い本8冊が大きく・糸の方角に寄る・重ならない(入りきらない分は方角から遠い側へ続く)", () => {
+    for (const [w, h] of [
+      [360, 504],
+      [390, 560],
+      [412, 620],
+    ] as const) {
+      const g = stageGeom(w, h);
+      const r = spreadPositions("author", items, "fan", g, 2000, "k");
+      expect(r.P).toHaveLength(24);
+      expect(r.P.slice(0, 8).every((p) => p.w === 44)).toBe(true);
+      expect(r.P.slice(8, 16).every((p) => p.w === 38)).toBe(true);
+      expect(r.P.slice(16).every((p) => p.w === 33)).toBe(true);
+      // 作者 = 北: 近い8冊は中央より上
+      expect(r.P.slice(0, 8).every((p) => p.y < g.CY)).toBe(true);
+      expect(noOverlap([...r.P, r.center])).toBe(true);
+      expect(r.center).toMatchObject({ x: g.CX, y: g.CY, w: 72, h: 100 });
+    }
   });
 
-  it("同心円: 全周に 6/9/9", () => {
-    const r = spreadPositions("mag", items, "ring", geom, 2000, "k");
-    expect(r.P).toHaveLength(24);
-    const d = r.P.map((p) => Math.hypot((p.x - geom.CX) / 0.8, (p.y - geom.CY) / 1.1));
-    expect(d.slice(0, 6).every((x) => Math.abs(x - 92) < 1)).toBe(true);
-    expect(r.P.some((p) => p.y > geom.CY) && r.P.some((p) => p.y < geom.CY)).toBe(true);
+  it("同心円: 全周に置く・重ならない", () => {
+    for (const [w, h] of [
+      [360, 504],
+      [390, 560],
+      [412, 620],
+    ] as const) {
+      const g = stageGeom(w, h);
+      const r = spreadPositions("mag", items, "ring", g, 2000, "k");
+      expect(r.P).toHaveLength(24);
+      expect(r.P.some((p) => p.y > g.CY) && r.P.some((p) => p.y < g.CY)).toBe(
+        true,
+      );
+      expect(r.P.some((p) => p.x > g.CX) && r.P.some((p) => p.x < g.CX)).toBe(
+        true,
+      );
+      expect(noOverlap([...r.P, r.center])).toBe(true);
+    }
   });
 
   it("年表: 横軸が年(左が古い)・同じ列は下から積む(1列7冊まで)・中央は上へ", () => {
-    const same = Array.from({ length: 12 }, (_, i) => ({ slug: `s${i}`, year: 2001 }));
-    const r = spreadPositions("author", [...same, { slug: "old", year: 1980 }, { slug: "new", year: 2020 }], "time", geom, 2001, "k");
+    const same = Array.from({ length: 12 }, (_, i) => ({
+      slug: `s${i}`,
+      year: 2001,
+    }));
+    const r = spreadPositions(
+      "author",
+      [...same, { slug: "old", year: 1980 }, { slug: "new", year: 2020 }],
+      "time",
+      geom,
+      2001,
+      "k",
+    );
     const col = r.P.filter((p) => p.slug.startsWith("s"));
     expect(col.length).toBeLessThanOrEqual(7);
     expect(col[0].y).toBeGreaterThan(col[1].y); // 下ほど近い
@@ -254,7 +391,9 @@ describe("4つの広げ方", () => {
       for (let j = i + 1; j < a.P.length; j++) {
         const p = a.P[i];
         const q = a.P[j];
-        const overlap = Math.abs(p.x - q.x) < (p.w + q.w) / 2 && Math.abs(p.y - q.y) < (p.h + q.h) / 2;
+        const overlap =
+          Math.abs(p.x - q.x) < (p.w + q.w) / 2 &&
+          Math.abs(p.y - q.y) < (p.h + q.h) / 2;
         expect(overlap).toBe(false);
       }
     expect(a.P[0].w).toBeGreaterThanOrEqual(a.P[a.P.length - 1].w);
@@ -264,7 +403,8 @@ describe("4つの広げ方", () => {
     for (const s of ["fan", "ring", "time", "dust"] as Spread[])
       for (const k of KINDS) {
         const r = spreadPositions(k, items, s, geom, 1995, `${k}:${s}`);
-        for (const p of r.P) expect(inside(p), `${k}/${s}/${p.slug}`).toBe(true);
+        for (const p of r.P)
+          expect(inside(p), `${k}/${s}/${p.slug}`).toBe(true);
       }
   });
 });

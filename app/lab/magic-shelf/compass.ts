@@ -31,7 +31,12 @@ export const RING_ANGLES: Record<Kind, readonly number[]> = {
   year: [70, 110],
   elem: [160, 200],
 };
-export const RING_CAP: Record<Kind, number> = { author: 1, mag: 2, year: 2, elem: 2 };
+export const RING_CAP: Record<Kind, number> = {
+  author: 1,
+  mag: 2,
+  year: 2,
+  elem: 2,
+};
 export const UNIT_MAX = 24;
 export const ELEM_POP_MIN = 3000;
 
@@ -54,7 +59,9 @@ function uniq<T>(xs: readonly T[]): T[] {
 
 /** authors の名前部分(重複・空を除く)。 original_authors は数えない(依頼書どおり)。 */
 export function authorNames(m: Pick<MangaListItem, "authors">): string[] {
-  return uniq((m.authors ?? []).map((a) => (a?.name ?? "").trim()).filter(Boolean));
+  return uniq(
+    (m.authors ?? []).map((a) => (a?.name ?? "").trim()).filter(Boolean),
+  );
 }
 
 function push<K>(map: Map<K, number[]>, k: K, i: number): void {
@@ -91,9 +98,19 @@ export function buildGraph(list: readonly MangaListItem[]): Graph {
 
 // ───────────────────────── 中央ごとの計算(周り+広げる単位を1回で) ─────────────────────────
 
-export type RingEntry = { slug: string; kind: Kind; label: string; shared: number };
+export type RingEntry = {
+  slug: string;
+  kind: Kind;
+  label: string;
+  shared: number;
+};
 export type UnitItem = { slug: string; shared: number; year: number | null };
-export type Unit = { key: string; kind: Kind; label: string; items: UnitItem[] };
+export type Unit = {
+  key: string;
+  kind: Kind;
+  label: string;
+  items: UnitItem[];
+};
 export type Neighborhood = { ring: RingEntry[]; units: Unit[] };
 
 export function neighborhood(
@@ -104,12 +121,20 @@ export function neighborhood(
   const self = center.slug;
   const cThemes = uniq(center.themes ?? []);
   const shared = new Map<number, number>();
-  for (const t of cThemes) for (const i of g.byTheme.get(t) ?? []) shared.set(i, (shared.get(i) ?? 0) + 1);
+  for (const t of cThemes)
+    for (const i of g.byTheme.get(t) ?? [])
+      shared.set(i, (shared.get(i) ?? 0) + 1);
   const sh = (i: number) => shared.get(i) ?? 0;
   const pop = (i: number) => g.items[i].popularity ?? 0;
   // 並び順 = 共通の要素の数(多い順)→ popularity(多い順)。 同点は slug で固定(毎回同じ並び)。
   const cmp = (a: number, b: number) =>
-    sh(b) - sh(a) || pop(b) - pop(a) || (g.items[a].slug < g.items[b].slug ? -1 : g.items[a].slug > g.items[b].slug ? 1 : 0);
+    sh(b) - sh(a) ||
+    pop(b) - pop(a) ||
+    (g.items[a].slug < g.items[b].slug
+      ? -1
+      : g.items[a].slug > g.items[b].slug
+        ? 1
+        : 0);
   const notSelf = (i: number) => g.items[i].slug !== self;
   const sharedThemes = (i: number) => {
     const ts = new Set(g.items[i].themes ?? []);
@@ -118,9 +143,14 @@ export function neighborhood(
 
   const names = authorNames(center);
   const authorSet = new Set<number>();
-  for (const n of names) for (const i of g.byAuthor.get(n) ?? []) if (notSelf(i)) authorSet.add(i);
-  const magList = center.magazine ? (g.byMag.get(center.magazine) ?? []).filter(notSelf) : [];
-  const yearList = center.year_started ? (g.byYear.get(center.year_started) ?? []).filter(notSelf) : [];
+  for (const n of names)
+    for (const i of g.byAuthor.get(n) ?? []) if (notSelf(i)) authorSet.add(i);
+  const magList = center.magazine
+    ? (g.byMag.get(center.magazine) ?? []).filter(notSelf)
+    : [];
+  const yearList = center.year_started
+    ? (g.byYear.get(center.year_started) ?? []).filter(notSelf)
+    : [];
 
   // ── 周りの本: 1冊は最初に当てはまった種類1つにだけ入る(作者 > 同じ雑誌 > 同じ年 > 要素) ──
   const taken = new Set<number>();
@@ -130,7 +160,12 @@ export function neighborhood(
     cands.sort(cmp);
     for (const i of cands) taken.add(i);
     for (const i of cands.slice(0, RING_CAP[kind] + 1))
-      ring.push({ slug: g.items[i].slug, kind, label: label(i), shared: sh(i) });
+      ring.push({
+        slug: g.items[i].slug,
+        kind,
+        label: label(i),
+        shared: sh(i),
+      });
   };
   take([...authorSet], "author", (i) => {
     const theirs = new Set(authorNames(g.items[i]));
@@ -147,7 +182,9 @@ export function neighborhood(
     () => `${center.year_started}年に開始`,
   );
   take(
-    [...shared.keys()].filter((i) => notSelf(i) && !taken.has(i) && sh(i) >= 3 && pop(i) > ELEM_POP_MIN),
+    [...shared.keys()].filter(
+      (i) => notSelf(i) && !taken.has(i) && sh(i) >= 3 && pop(i) > ELEM_POP_MIN,
+    ),
     "elem",
     (i) => sharedThemes(i).slice(0, 2).join("・"),
   );
@@ -158,18 +195,37 @@ export function neighborhood(
     const items = cands
       .sort(cmp)
       .slice(0, UNIT_MAX)
-      .map((i) => ({ slug: g.items[i].slug, shared: sh(i), year: g.items[i].year_started || null }));
+      .map((i) => ({
+        slug: g.items[i].slug,
+        shared: sh(i),
+        year: g.items[i].year_started || null,
+      }));
     if (items.length) units.push({ key, kind, label, items });
   };
-  for (const n of names) unit(`author:${n}`, "author", n, (g.byAuthor.get(n) ?? []).filter(notSelf));
+  for (const n of names)
+    unit(`author:${n}`, "author", n, (g.byAuthor.get(n) ?? []).filter(notSelf));
   if (center.magazine)
-    unit(`mag:${center.magazine}`, "mag", magName(center.magazine), magList.filter((i) => sh(i) >= 1));
+    unit(
+      `mag:${center.magazine}`,
+      "mag",
+      magName(center.magazine),
+      magList.filter((i) => sh(i) >= 1),
+    );
   if (center.year_started)
-    unit(`year:${center.year_started}`, "year", `${center.year_started}年`, yearList.filter((i) => sh(i) >= 1));
+    unit(
+      `year:${center.year_started}`,
+      "year",
+      `${center.year_started}年`,
+      yearList.filter((i) => sh(i) >= 1),
+    );
   const topThemes = [...cThemes]
-    .sort((a, b) => (g.byTheme.get(b)?.length ?? 0) - (g.byTheme.get(a)?.length ?? 0))
+    .sort(
+      (a, b) =>
+        (g.byTheme.get(b)?.length ?? 0) - (g.byTheme.get(a)?.length ?? 0),
+    )
     .slice(0, 4);
-  for (const t of topThemes) unit(`elem:${t}`, "elem", t, (g.byTheme.get(t) ?? []).filter(notSelf));
+  for (const t of topThemes)
+    unit(`elem:${t}`, "elem", t, (g.byTheme.get(t) ?? []).filter(notSelf));
 
   return { ring, units };
 }
@@ -198,8 +254,8 @@ export function stageGeom(W: number, H: number): Geom {
     H,
     CX,
     CY,
-    rx: Math.max(80, Math.min(118, CX - 42)),
-    ry: Math.max(80, Math.min(150, CY - 92)),
+    rx: Math.max(80, Math.min(128, CX - 40)),
+    ry: Math.max(80, Math.min(165, CY - 100)),
     top: 34,
     bottom: 32,
   };
@@ -216,7 +272,7 @@ function angleDelta(a: number, b: number): number {
 }
 
 /** 本どうしが重なって見える距離(横=本の幅+α・縦=本の高さ+ラベル少し) */
-export const RING_GAP = { w: 52, h: 72 };
+export const RING_GAP = { w: 62, h: 88 };
 /** 重なりをよける時、周りの本が自分の方角から動いてよい角度 */
 const RING_MAX_SHIFT = 45;
 
@@ -253,7 +309,16 @@ export function placeRing(
     base.push(a);
   }
   if (prev) {
-    out.push({ slug: prev, kind: "back", label: "来た道", shared: 0, ang: backAng ?? 135, dx: 0, dy: 0, back: true });
+    out.push({
+      slug: prev,
+      kind: "back",
+      label: "来た道",
+      shared: 0,
+      ang: backAng ?? 135,
+      dx: 0,
+      dy: 0,
+      back: true,
+    });
     base.push(backAng ?? 135);
   }
   const pos = (a: number): [number, number] => {
@@ -303,7 +368,9 @@ export const SPREADS: readonly { key: Spread; name: string }[] = [
 
 /** ★同じ年の糸では年表を選べない(全部同じ年=1列に潰れて7冊しか出ない)。 */
 export function allowedSpreads(kind: Kind): Spread[] {
-  return SPREADS.map((s) => s.key).filter((k) => !(kind === "year" && k === "time"));
+  return SPREADS.map((s) => s.key).filter(
+    (k) => !(kind === "year" && k === "time"),
+  );
 }
 
 export function defaultSpread(kind: Kind): Spread {
@@ -312,7 +379,8 @@ export function defaultSpread(kind: Kind): Spread {
 
 /** 端末に覚えた広げ方(不正・使えない値なら既定)。 */
 export function resolveSpread(kind: Kind, stored: unknown): Spread {
-  return typeof stored === "string" && (allowedSpreads(kind) as string[]).includes(stored)
+  return typeof stored === "string" &&
+    (allowedSpreads(kind) as string[]).includes(stored)
     ? (stored as Spread)
     : defaultSpread(kind);
 }
@@ -325,11 +393,14 @@ export type SpreadResult = {
   axisY?: number;
 };
 
+// ★2026-09-29 ユーザ「全体的に画像を大きく」= 約1.25倍(旧 34×48 / 30×42 / 26×36・中央 60×84)
 const SZ: readonly [number, number][] = [
-  [34, 48],
-  [30, 42],
-  [26, 36],
+  [44, 62],
+  [38, 54],
+  [33, 46],
 ];
+/** 広げている間の中央の本 */
+export const SPREAD_CENTER = { w: 72, h: 100 };
 const DIR: Record<Kind, number> = { author: -90, mag: 0, year: 90, elem: 180 };
 
 /** 決まった種の乱数(試作と同じ式)。 */
@@ -356,42 +427,78 @@ export function spreadPositions(
 ): SpreadResult {
   const { W, H, CX, CY, top, bottom } = geom;
   const P: SpreadResult["P"] = [];
-  const midCenter: Box = { x: CX, y: CY, w: 60, h: 84 };
+  const midCenter: Box = { x: CX, y: CY, ...SPREAD_CENTER };
   if (spread === "time" && kind === "year") spread = defaultSpread(kind);
 
   if (spread === "fan" || spread === "ring") {
-    const counts = spread === "fan" ? [5, 8, 11] : [6, 9, 9];
-    const radii = [92, 132, 170];
-    const fx = Math.min(0.8, (CX - 21) / 170);
-    const fy = Math.max(0.6, Math.min(1.1, (CY - top - 24) / 170, (H - bottom - CY - 24) / 170));
+    // ★2026-09-29 書影を大きくしたら固定座標(弧ごとの冊数を決め打ち)では重なった(旧も扇で6〜10か所重なっていた)。
+    //   → 近い本から順に、内側の弧から外へ「重ならず・画面からはみ出さない」最初の場所へ置く。
+    //   扇 = 糸の方角を真ん中に左右交互に探す(方角のまわりに寄る)/ 同心円 = 真上から時計回り。
+    const fx = Math.min(0.85, (CX - 26) / 200);
+    const fy = Math.max(
+      0.6,
+      Math.min(1.1, (CY - top - 32) / 200, (H - bottom - CY - 32) / 200),
+    );
+    const yMin = top + 4;
+    const yMax = H - bottom - 6;
+    const GAP = 5;
+    const free = (x: number, y: number, w: number, h: number) =>
+      x - w / 2 >= 4 &&
+      x + w / 2 <= W - 4 &&
+      y - h / 2 >= yMin &&
+      y + h / 2 <= yMax &&
+      !(
+        Math.abs(x - CX) < (SPREAD_CENTER.w + w) / 2 + GAP &&
+        Math.abs(y - CY) < (SPREAD_CENTER.h + h) / 2 + GAP
+      ) &&
+      !P.some(
+        (q) =>
+          Math.abs(q.x - x) < (q.w + w) / 2 + GAP &&
+          Math.abs(q.y - y) < (q.h + h) / 2 + GAP,
+      );
+    // 扇は2段: まず方角の左右80°の中だけで詰め、入りきらなければ残りを方角から遠い側(80〜180°)へ続けて置く
+    //   (大きな書影で半面の扇に24冊は入らない=360×504で14冊止まりだった)。
+    const phases: number[][] = [];
+    if (spread === "fan") {
+      const near = [DIR[kind]];
+      for (let d = 3; d <= 80; d += 3) near.push(DIR[kind] - d, DIR[kind] + d);
+      const far: number[] = [];
+      for (let d = 83; d <= 180; d += 3) far.push(DIR[kind] - d, DIR[kind] + d);
+      phases.push(near, far);
+    } else {
+      const all: number[] = [];
+      for (let d = 0; d < 360; d += 3) all.push(-90 + d);
+      phases.push(all);
+    }
     let k = 0;
-    counts.forEach((n, ring) => {
-      const m = Math.min(n, items.length - k);
-      for (let j = 0; j < m; j++, k++) {
-        let a: number;
-        if (spread === "fan") {
-          const span = m === 1 ? 0 : 140;
-          a = DIR[kind] - span / 2 + (m === 1 ? 0 : (span * j) / (m - 1));
-        } else a = -90 + (360 * (j + (ring % 2 ? 0.5 : 0))) / m;
-        const t = (a * Math.PI) / 180;
-        P.push({
-          slug: items[k].slug,
-          x: CX + radii[ring] * fx * Math.cos(t),
-          y: CY + radii[ring] * fy * Math.sin(t),
-          w: SZ[ring][0],
-          h: SZ[ring][1],
-        });
+    for (const AS of phases) {
+      let R = 96;
+      while (k < items.length && R <= 330) {
+        const [w, h] = SZ[k < 8 ? 0 : k < 16 ? 1 : 2];
+        let placedAny = false;
+        for (const a of AS) {
+          if (k >= items.length) break;
+          const t = (a * Math.PI) / 180;
+          const x = CX + R * fx * Math.cos(t);
+          const y = CY + R * fy * Math.sin(t);
+          const [ww, hh] = SZ[k < 8 ? 0 : k < 16 ? 1 : 2];
+          if (!free(x, y, ww, hh)) continue;
+          P.push({ slug: items[k].slug, x, y, w: ww, h: hh });
+          k++;
+          placedAny = true;
+        }
+        R += placedAny ? Math.max(w, h) * 0.55 : 12;
       }
-    });
+    }
     return { P, center: midCenter };
   }
 
   if (spread === "dust") {
     const r = rng(seedKey);
     const bands = [
-      [80, 118],
-      [118, 148],
-      [148, 176],
+      [90, 132],
+      [132, 170],
+      [170, 215],
     ];
     const yMin = top + 4;
     const yMax = H - bottom - 6;
@@ -403,10 +510,27 @@ export function spreadPositions(
         const rr = bands[b][0] + r() * (bands[b][1] - bands[b][0]);
         const px = CX + rr * 0.82 * Math.cos(a);
         const py = CY + rr * 1.12 * Math.sin(a);
-        if (px - w / 2 < 4 || px + w / 2 > W - 4 || py - h / 2 < yMin || py + h / 2 > yMax) continue;
-        if (P.some((q) => Math.abs(q.x - px) < (q.w + w) / 2 + 4 && Math.abs(q.y - py) < (q.h + h) / 2 + 4)) continue;
+        if (
+          px - w / 2 < 4 ||
+          px + w / 2 > W - 4 ||
+          py - h / 2 < yMin ||
+          py + h / 2 > yMax
+        )
+          continue;
+        if (
+          P.some(
+            (q) =>
+              Math.abs(q.x - px) < (q.w + w) / 2 + 4 &&
+              Math.abs(q.y - py) < (q.h + h) / 2 + 4,
+          )
+        )
+          continue;
         // 中央の本(60×84)とも重ねない
-        if (Math.abs(px - CX) < (60 + w) / 2 + 4 && Math.abs(py - CY) < (84 + h) / 2 + 4) continue;
+        if (
+          Math.abs(px - CX) < (SPREAD_CENTER.w + w) / 2 + 4 &&
+          Math.abs(py - CY) < (SPREAD_CENTER.h + h) / 2 + 4
+        )
+          continue;
         P.push({ slug: it.slug, x: px, y: py, w, h });
         break;
       }
@@ -415,24 +539,38 @@ export function spreadPositions(
   }
 
   // 年表: 横軸 = year_started(左が古い)・同じ列は下から積む(下ほど近い)
-  const ys = items.map((x) => x.year).concat([centerYear]).filter((y): y is number => !!y);
+  const ys = items
+    .map((x) => x.year)
+    .concat([centerYear])
+    .filter((y): y is number => !!y);
   const lo = ys.length ? Math.min(...ys) : 0;
   const hi = ys.length ? Math.max(...ys) : 0;
   const span = W - 48;
   const X = (y: number) => 24 + (hi === lo ? 0.5 : (y - lo) / (hi - lo)) * span;
   const axisY = H - 64;
   const base = axisY - 28;
-  const center: Box = { x: centerYear ? X(centerYear) : CX, y: top + 40, w: 44, h: 62 };
-  const maxRows = Math.max(1, Math.min(7, Math.floor((base - 19 - (center.y + center.h / 2 + 8)) / 47) + 1));
-  const maxCol = Math.floor(span / 29);
+  const center: Box = {
+    x: centerYear ? X(centerYear) : CX,
+    y: top + 46,
+    w: 54,
+    h: 76,
+  };
+  const maxRows = Math.max(
+    1,
+    Math.min(
+      7,
+      Math.floor((base - 24 - (center.y + center.h / 2 + 8)) / 56) + 1,
+    ),
+  );
+  const maxCol = Math.floor(span / 37);
   const cols = new Map<number, number>();
   for (const it of items) {
     if (!it.year) continue;
-    const c = Math.min(maxCol, Math.round((X(it.year) - 24) / 29));
+    const c = Math.min(maxCol, Math.round((X(it.year) - 24) / 37));
     const n = cols.get(c) ?? 0;
     cols.set(c, n + 1);
     if (n >= maxRows) continue;
-    P.push({ slug: it.slug, x: 24 + c * 29, y: base - n * 47, w: 27, h: 38 });
+    P.push({ slug: it.slug, x: 24 + c * 37, y: base - n * 56, w: 34, h: 48 });
   }
   const ticks: { year: number; x: number }[] = [];
   if (ys.length) {
@@ -501,7 +639,9 @@ export function toneOrder(
     for (let i = 0; i < W; i++) {
       const d = Math.min(1, Math.hypot(i - cx, j - cy) / maxD);
       // 真上を0として時計回り(画面は y が下向きなので atan2 の角度がそのまま時計回り)
-      const a = (((Math.atan2(j - cy, i - cx) + Math.PI / 2 + TAU * 2) % TAU) / TAU) % 1;
+      const a =
+        (((Math.atan2(j - cy, i - cx) + Math.PI / 2 + TAU * 2) % TAU) / TAU) %
+        1;
       let v: number;
       switch (key) {
         case "inner":
@@ -550,7 +690,10 @@ export function toneQ(p: number, v: number): number {
 }
 
 /** 出方をランダムに1つ(同じ出方を2回続けない)。 */
-export function pickTone(last: ToneKey | null, rand: () => number = Math.random): ToneKey {
+export function pickTone(
+  last: ToneKey | null,
+  rand: () => number = Math.random,
+): ToneKey {
   const ks = TONES.map((t) => t.key).filter((k) => k !== last);
   return ks[Math.min(ks.length - 1, Math.floor(rand() * ks.length))];
 }

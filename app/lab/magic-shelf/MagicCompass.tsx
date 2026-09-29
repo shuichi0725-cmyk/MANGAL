@@ -35,10 +35,10 @@ if (typeof window !== "undefined") setIndexBase("/prod-idx");
 
 const TOP = 100; // 糸の色チップ列 44 + 旅路 56
 const SHEET = 96;
-const NW = 48;
-const NH = 67;
-const CW = 76;
-const CH = 106;
+const NW = 58;
+const NH = 81;
+const CW = 92;
+const CH = 128;
 const STORE = "mangal.magicShelf.spreads.v1";
 const PLACEHOLDER_ANGLES = [-90, -20, 20, 70, 110, 160, 200];
 const FIRST = "\u0000first";
