@@ -11,7 +11,7 @@ metadata:
 起動バッチ3本 (2026-07-18 junction方式確立 → **2026-07-20 モデル別resume方式に全面改修**):
 
 - **共通の仕組み**: `scripts/_session-latest.py <fable|opus|sonnet>` が project dir の全セッションjsonl末尾を見て「最後のassistantメッセージが該当モデル系列」の最新セッションUUIDを返す → bat が `claude --resume <UUID> --remote-control <名前> --model X --dangerously-skip-permissions` で起動 = **前回ログ復元+起動時から/rc自動接続**。UUID無し/resume失敗(errorlevel 1)は新規セッションにフォールバック(=必ず立ち上がる)。
-- **fable.bat** = メイン作業用 (fable[1m])。**opus.bat** = Opus 5.5/1M 併用(`claude-opus-5-5[1m]`・2026-09-23 commit 8294351ed)。**sonnet.bat** = 別窓start(モバイルRC・アイドル運転用)。★2026-09-29〜 `--model claude-sonnet-5-5`(Sonnet 5.5。旧 `--model sonnet` は Sonnet 5 を指していた)。CLI 2.1.280 は未収載の警告1行を出すが動作は確認済(文脈200k前提)=`claude update` で消える見込み。
+- **fable.bat** = メイン作業用 (fable[1m])。**opus.bat** = Opus 5.5/1M 併用(`claude-opus-5-5[1m]`・2026-09-23 commit 8294351ed)。**sonnet.bat** = 別窓start(モバイルRC・アイドル運転用)。★2026-09-29〜 `--model claude-sonnet-5-5`(Sonnet 5.5。旧 `--model sonnet` は Sonnet 5 を指していた)。2026-09-29 `claude update` で 2.1.284 にし、警告なしで起動することを確認済。
 - ★**junction方式(MANGAL-fable/opus/remote)は廃止・削除済** (2026-07-20判明): 現行claudeは **cwdをrealpath解決**するため、junctionから起動しても project dir は実パス(`C--Users-chiba-shuichi-code-MANGAL`)になり名前空間が分離されない。旧`--continue`は別モデルの最新セッションを掴んでエラー→「立ち上がらない」事故の根因だった。
 - ★モデル障害と起動障害の切り分け: `claude --model "fable[1m]" -p "OK"` が返れば**モデルは健全**=障害は起動側。
 - ★検証済み事実: `--resume`+`--remote-control`は併用可 / resume対象無しは exit 1(フォールバック発火) / `-p`セッションもproject dirに永続化される(テスト時はゴミセッションを消すこと)。

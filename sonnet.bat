@@ -4,7 +4,7 @@ rem モバイルアプリ操作用(アイドル運転など)。窓を閉じれ�
 rem 仕組みは fable.bat と同型 (モデル別resume方式、2026-07-20全面変更。旧MANGAL-remote junction廃止)。
 rem ★2026-07-28: 前回ログが文脈75%超なら resume せず新規起動(起動時の勝手な自動圧縮を回避)。過去ログ=log.bat sonnet
 rem ★2026-09-29: モデルを Sonnet 5.5 (claude-sonnet-5-5) に固定(旧 --model sonnet は Sonnet 5 を指していた)。
-rem   CLI 2.1.280 は未収載の警告を1行出すが動く(文脈は200k前提)。 claude update で警告は消える見込み。
+rem   CLI 2.1.284 以降はモデル一覧に収載済(2.1.280 では未収載の警告が出ていた)。
 rem Usage: double-click in Explorer, OR in PowerShell run:  .\sonnet
 if "%~1"=="__inner" goto inner
 start "claude sonnet" cmd /k call "%~f0" __inner
