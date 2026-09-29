@@ -23,3 +23,10 @@ metadata:
 - ★接続の合言葉=「共有は share1」: Microsoftアカウントのメール(shuichi0725@gmail.com)はSMBに使えない(ローカルアカウント認証)。空白入り「chiba shuichi」もAndroidアプリで事故る。
 - Explorerは**検索ボックスでなくアドレスバー**に \192.168.0.146(検索ボックスだと「一致する項目はありません」)。
 - 日本語共有名「本」はAndroidアプリが弾く場合あり→ その時は D 共有経由 or 英字エイリアス(New-SmbShare -Name books -Path D:\本 -ReadAccess Everyone)。
+
+## 2026-09-29 追記(Fire TV から入れない件=解決)
+- ★E: ドライブ・E 共有は**もう無い**(ドライブは C と D(24TB)のみ)。今の共有 = D / 本 / 動画2 / ムービー / Users。E を登録した機器は入れない。
+- 親機は `RequireSecuritySignature=True`(Win11 更新で既定化)。share1 の資格情報自体は正常(loopback の net use で確認)。
+- **Kodi(Fire TV)**: 一覧の `M5_ULTRA` から開くと「Invalid argument」。→ 設定 → サービス → SMBクライアント(設定レベル=エキスパート)で 最小SMBv2/最大SMBv3・レガシーセキュリティ off + ファイルマネージャー「ネットワークロケーションを追加」で**IP 192.168.0.146・共有名・share1 を手で登録**して接続成功。
+- **VLC(Fire TV)**: 拡張設定「SMB1を採用」ON=一覧は見えるが中で認証ループ(SMB1 は署名必須に非対応)/ OFF=一覧から消える(自動探索なし)→ OFF のまま「サーバーを追加」で IP 手入力。
+- 署名必須を緩める(`Set-SmbServerConfiguration -RequireSecuritySignature $false`)は**不要だった**(管理者権限が要る・今回は実施せず)。
