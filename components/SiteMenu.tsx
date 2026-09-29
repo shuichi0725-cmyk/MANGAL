@@ -29,6 +29,8 @@ const IC: Record<string, Ic> = {
   mail: { d: "M3 6h18v12H3zM3 7l9 6 9-6" },
   doc: { d: "M6 3h9l4 4v14H6zM15 3v4h4M9 12h6M9 16h6" },
   lock: { d: "M6 11h12v9H6zM9 11V8a3 3 0 0 1 6 0v3" },
+  compass: { d: "M15.5 8.5l-2 5-5 2 2-5z", c: [12, 12, 8.5] },
+  shelves: { d: "M4 4h4v16H4zM9 7h4v13H9zM14.2 6.3l3.8-1 3.3 12.6-3.8 1zM3 20h18" },
 };
 
 function Svg({ k, className = "h-5 w-5" }: { k: string; className?: string }) {
@@ -46,7 +48,7 @@ function Svg({ k, className = "h-5 w-5" }: { k: string; className?: string }) {
   );
 }
 
-type Tile = { icon: string; label: string; href: string; sub?: string };
+type Tile = { icon: string; label: string; href: string; sub?: string; reload?: boolean };
 
 const FIND: Tile[] = [
   { icon: "home", label: "ホーム", href: "/" },
@@ -54,6 +56,20 @@ const FIND: Tile[] = [
   { icon: "list", label: "一覧表(全作品)", href: "/list" },
   { icon: "author", label: "著者一覧(50音)", href: "/authors" },
 ];
+
+/** テスト環境だけの項目(本番ビルドでは定数 false で刈り取られる=本番のメニューは従来どおり)。 */
+const PREVIEW = process.env.NEXT_PUBLIC_PREVIEW_FEATURES === "1";
+// ★テスト環境(2026-09-29 ユーザ指示): 2列タイルで「ホームの下に羅針盤・その右に書庫」。
+//   羅針盤は頁を丸ごと読み直す <a> で入る(索引の読み先を本番の全件へ変えるため。GlobalNav と同じ理由)。
+const FIND_VIEW: Tile[] = PREVIEW
+  ? [
+      FIND[0],
+      FIND[1],
+      { icon: "compass", label: "羅針盤", href: "/lab/magic-shelf", reload: true },
+      { icon: "shelves", label: "書庫", href: "/shelf" },
+      ...FIND.slice(2),
+    ]
+  : FIND;
 
 const CORNERS: Tile[] = [
   // ★今日の一冊のリンク先="/"は誤り(2026-08-12 ユーザ指摘)。過去ログ頁へ=旧・過去ログタイルと統合
@@ -138,17 +154,25 @@ export default function SiteMenu() {
 
             <Gh>さがす</Gh>
             <div className="grid grid-cols-2 gap-1.5">
-              {FIND.map((t) => (
-                <Link
-                  key={t.href + t.label}
-                  href={t.href}
-                  onClick={close}
-                  className="spring-press flex flex-col items-center gap-1 rounded-lg border border-[var(--color-line)] bg-[var(--color-surface-2)]/60 px-2 py-2.5 text-center hover:bg-[var(--color-surface-2)]"
-                >
-                  <Svg k={t.icon} />
-                  <span className="text-[11.5px] font-extrabold leading-tight">{t.label}</span>
-                </Link>
-              ))}
+              {FIND_VIEW.map((t) => {
+                const cls =
+                  "spring-press flex flex-col items-center gap-1 rounded-lg border border-[var(--color-line)] bg-[var(--color-surface-2)]/60 px-2 py-2.5 text-center hover:bg-[var(--color-surface-2)]";
+                const body = (
+                  <>
+                    <Svg k={t.icon} />
+                    <span className="text-[11.5px] font-extrabold leading-tight">{t.label}</span>
+                  </>
+                );
+                return t.reload ? (
+                  <a key={t.href + t.label} href={t.href} onClick={close} className={cls}>
+                    {body}
+                  </a>
+                ) : (
+                  <Link key={t.href + t.label} href={t.href} onClick={close} className={cls}>
+                    {body}
+                  </Link>
+                );
+              })}
             </div>
 
             <Gh>コーナー</Gh>

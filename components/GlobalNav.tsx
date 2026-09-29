@@ -34,6 +34,9 @@ const NAV_SVG: Record<string, { d: string; circle?: [number, number, number] }> 
   //   (同じ概念に別の絵を当てると、同じ行き先だと分からなくなる)。矩形は subpath で表現。
   アニメ化: { d: "M3 5h18v14H3zM7 5v14M17 5v14M3 9h4M3 15h4M17 9h4M17 15h4" },
   使い方: { d: "M12 5c-2-1.6-5-1.6-8-.6V19c3-1 6-1 8 .6 2-1.6 5-1.6 8-.6V4.4c-3-1-6-1-8 .6zM12 5v14" },
+  // ★テスト環境だけ(NEXT_PUBLIC_PREVIEW_FEATURES)。羅針盤=魔法の書架 /lab/magic-shelf・書庫=マイ本棚 /shelf
+  羅針盤: { d: "M15.5 8.5l-2 5-5 2 2-5z", circle: [12, 12, 8.5] },
+  書庫: { d: "M4 4h4v16H4zM9 7h4v13H9zM14.2 6.3l3.8-1 3.3 12.6-3.8 1zM3 20h18" },
 };
 
 function NavSvg({ label }: { label: string }) {
@@ -59,6 +62,11 @@ const RIGHT_FIXED: Array<[string, string]> = [
   ["新刊", "/shinkan"],
 ];
 const RIGHT_TAIL: Array<[string, string]> = [["使い方", "/about"]];
+/** テスト環境だけの項目(本番ビルドでは定数 false で刈り取られる=本番の木は従来どおり)。 */
+const PREVIEW = process.env.NEXT_PUBLIC_PREVIEW_FEATURES === "1";
+/** ★羅針盤は頁を丸ごと読み直すリンク(<a>)で入る: 羅針盤は索引の読み先を本番の全件(/prod-idx)に変えるが、
+ *   索引の module キャッシュは全頁共有 = サイト内遷移で入るとテスト環境の抜粋(17作)を持ち込む。 */
+const FULL_RELOAD = new Set(["/lab/magic-shelf"]);
 
 export default function GlobalNav({ animeNow, animeNext }: { animeNow: string; animeNext?: string }) {
   const pathname = usePathname();
@@ -71,11 +79,17 @@ export default function GlobalNav({ animeNow, animeNext }: { animeNow: string; a
   useEffect(() => {
     if (animeNext && seasonReached(animeNext)) setSeason(animeNext);
   }, [animeNext]);
-  const RIGHT: Array<[string, string]> = [
-    ...RIGHT_FIXED,
-    ["アニメ化", `/anime/${season}`],
-    ...RIGHT_TAIL,
-  ];
+  // ★テスト環境(2026-09-29 ユーザ指示): 検索の右に羅針盤・使い方の左に書庫
+  const RIGHT: Array<[string, string]> = PREVIEW
+    ? [
+        RIGHT_FIXED[0],
+        ["羅針盤", "/lab/magic-shelf"],
+        ...RIGHT_FIXED.slice(1),
+        ["アニメ化", `/anime/${season}`],
+        ["書庫", "/shelf"],
+        ...RIGHT_TAIL,
+      ]
+    : [...RIGHT_FIXED, ["アニメ化", `/anime/${season}`], ...RIGHT_TAIL];
   const isHome = pathname === "/";
   const cell = "spring-press flex flex-col items-center gap-0.5 active:scale-90";
   const frame = isHome
@@ -91,12 +105,19 @@ export default function GlobalNav({ animeNow, animeNext }: { animeNow: string; a
         </Link>
         {/* 右寄せクラスタ(≡メニューは共通ヘッダー右端。この行は「使い方」が右端) */}
         <div className="ml-auto flex items-center gap-3.5">
-          {RIGHT.map(([label, href]) => (
-            <Link key={label} href={href} aria-label={label} className={cell}>
-              <NavSvg label={label} />
-              <span className="text-[9px] text-ink/55">{label}</span>
-            </Link>
-          ))}
+          {RIGHT.map(([label, href]) =>
+            PREVIEW && FULL_RELOAD.has(href) ? (
+              <a key={label} href={href} aria-label={label} className={cell}>
+                <NavSvg label={label} />
+                <span className="text-[9px] text-ink/55">{label}</span>
+              </a>
+            ) : (
+              <Link key={label} href={href} aria-label={label} className={cell}>
+                <NavSvg label={label} />
+                <span className="text-[9px] text-ink/55">{label}</span>
+              </Link>
+            ),
+          )}
         </div>
       </div>
     </div>
