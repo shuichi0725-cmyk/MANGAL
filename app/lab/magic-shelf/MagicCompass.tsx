@@ -900,7 +900,7 @@ export default function MagicCompass({ magazines }: { magazines: Record<string, 
 
       {/* 5. シート */}
       <div
-        className={`cp-sheet${bump ? " bump" : ""}`}
+        className={`cp-sheet${bump ? " bump" : ""}${goLabel && sel && shelveFor !== sheetItem?.slug ? " has-go" : ""}`}
         style={{ "--kc": sheetKind ? KIND_COLOR[sheetKind] : "#cfd6db" } as CSSProperties}
         aria-live="polite"
       >
