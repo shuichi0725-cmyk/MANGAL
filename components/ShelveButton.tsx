@@ -13,8 +13,6 @@ export type ShelveEdition = { label: string; total: number };
 
 type Props = {
   slug: string;
-  title: string;
-  cover: string | null;
   editions: ShelveEdition[];
   /** 最大単一版の巻数(= 一覧索引の max_edition_volumes と同じ数え方) */
   maxTotal: number;
@@ -24,14 +22,18 @@ type Props = {
  * 作品頁の「しまう」ボタン(マイ本棚・プレビュー専用)。依頼書 = docs/cloud-briefs/my-shelf.md。
  * ★本番には出ない: next.config.ts が NEXT_PUBLIC_PREVIEW_FEATURES を定数で埋め、作品頁側の
  *   `=== "1" ? require(...) : null` で require ごと刈り取られる。ここの return null は二重の門。
- * ★索引(useMangaIndex)は読まない = 作品頁は全6.6万頁。材料は頁が既に持っている題名・書影・版だけ。
+ * ★索引(useMangaIndex)は読まない = 作品頁は全6.6万頁。材料は頁が既に持っている版だけ。
+ * ★題名・書影は受け取らない(2026-09-29 ユーザ裁定「折衷案」): client 部品の props は全項目が
+ *   HTML 内の埋め込みと .txt の2か所に書かれる = 7万頁×約0.5KB。控えの題名・書影は書庫の頁が
+ *   索引から埋める(app/shelf/MyShelf.tsx の「控えを索引から埋める」効果)。
+ *   残る弱点 = しまってから書庫を一度も開かないうちに作品が掲載から外れると、控えが slug だけになる。
  */
 export default function ShelveButton(props: Props) {
   if (process.env.NEXT_PUBLIC_PREVIEW_FEATURES !== "1") return null;
   return <ShelvePanel {...props} />;
 }
 
-function ShelvePanel({ slug, title, cover, editions, maxTotal }: Props) {
+function ShelvePanel({ slug, editions, maxTotal }: Props) {
   const { items, ready, persisted, update } = useMyShelf();
   const mine = ready ? items.find((x) => x.slug === slug) : undefined;
   const panelId = useId();
@@ -64,8 +66,8 @@ function ShelvePanel({ slug, title, cover, editions, maxTotal }: Props) {
     update((s) =>
       putItem(s, {
         slug,
-        title,
-        cover,
+        title: "", // 控えは書庫の頁が索引から埋める(putItem は既存の控えを消さない)
+        cover: null,
         shelf: choice,
         owned: choice === "own" ? n : undefined,
         edition: fixEdition && editions[edIdx] ? { label: editions[edIdx].label, total } : null,

@@ -598,8 +598,6 @@ export default async function MangaDetailPage({
               {shareButtons}
               <ShelveButton
                 slug={manga.slug}
-                title={manga.title}
-                cover={cover}
                 editions={displayBlocks(manga.editions).map((e) => ({ label: e.label, total: shelfVolCount(e.volumes) }))}
                 maxTotal={Math.max(0, ...manga.editions.map((e) => shelfVolCount(e.volumes)))}
               />
