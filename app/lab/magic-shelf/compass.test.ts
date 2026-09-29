@@ -1,0 +1,324 @@
+import { describe, expect, it } from "vitest";
+import type { MangaListItem } from "../../../lib/schema";
+import {
+  KINDS,
+  TONES,
+  allowedSpreads,
+  RING_GAP,
+  angleGap,
+  buildGraph,
+  defaultSpread,
+  neighborhood,
+  pickTone,
+  placeRing,
+  resolveSpread,
+  rng,
+  spreadPositions,
+  stageGeom,
+  toneOrder,
+  toneQ,
+  type Kind,
+  type RingEntry,
+  type Spread,
+} from "./compass";
+
+function book(slug: string, o: Partial<MangaListItem> = {}): MangaListItem {
+  return {
+    slug,
+    title: slug,
+    title_kana: slug,
+    cover: `https://example.test/${slug}.jpg`,
+    catch: `${slug} のキャッチ`,
+    year_started: 2000,
+    year_ended: null,
+    status: "ongoing",
+    authors: [{ name: `作者-${slug}` }],
+    original_authors: [],
+    genres: [],
+    themes: [],
+    demographic: "shounen",
+    publisher: "p",
+    publishers: ["p"],
+    total_volumes: 1,
+    max_edition_volumes: 1,
+    popularity: 100,
+    ...o,
+  } as MangaListItem;
+}
+
+const T = ["陰謀", "政治", "学園", "魔法", "料理"];
+
+describe("逆引き表", () => {
+  it("書影とキャッチの両方がある作品だけを対象にし、全作品は all で引ける", () => {
+    const g = buildGraph([
+      book("a"),
+      book("no-cover", { cover: null }),
+      book("no-catch", { catch: undefined }),
+    ]);
+    expect(g.items.map((m) => m.slug)).toEqual(["a"]);
+    expect(g.all.has("no-cover")).toBe(true);
+    expect(g.byAuthor.get("作者-no-cover")).toBeUndefined();
+  });
+});
+
+describe("周りの本(つながりの計算)", () => {
+  it("1冊は最初に当てはまった種類にだけ入る(作者 > 同じ雑誌 > 同じ年 > 要素)", () => {
+    const c = book("c", { authors: [{ name: "甲" }], magazine: "jump", year_started: 2016, themes: T });
+    // 作者も雑誌も年も要素も重なる本 → 作者だけ
+    const all4 = book("all4", { authors: [{ name: "甲" }], magazine: "jump", year_started: 2016, themes: T, popularity: 9000 });
+    // 雑誌と年と要素が重なる本 → 同じ雑誌
+    const mag = book("mag", { magazine: "jump", year_started: 2016, themes: T, popularity: 9000 });
+    // 年と要素が重なる本 → 同じ年
+    const year = book("year", { year_started: 2016, themes: T, popularity: 9000 });
+    // 要素だけ
+    const elem = book("elem", { year_started: 1990, themes: T, popularity: 9000 });
+    const g = buildGraph([c, all4, mag, year, elem]);
+    const { ring } = neighborhood(g, c, (k) => (k === "jump" ? "週刊少年ジャンプ" : k));
+    const kindOf = Object.fromEntries(ring.map((r) => [r.slug, r.kind]));
+    expect(kindOf).toEqual({ all4: "author", mag: "mag", year: "year", elem: "elem" });
+    expect(ring.map((r) => r.label)).toEqual(["作者 甲", "週刊少年ジャンプ", "2016年に開始", "陰謀・政治"]);
+  });
+
+  it("上限: 作者1・同じ雑誌2・同じ年2・要素2(合計7)。 計算側は各種類に控えを1冊持つ", () => {
+    const c = book("c", { authors: [{ name: "甲" }], magazine: "jump", year_started: 2016, themes: T });
+    const list = [c];
+    for (let i = 0; i < 5; i++) list.push(book(`a${i}`, { authors: [{ name: "甲" }] }));
+    for (let i = 0; i < 5; i++) list.push(book(`m${i}`, { magazine: "jump", themes: T.slice(0, 2) }));
+    for (let i = 0; i < 5; i++) list.push(book(`y${i}`, { year_started: 2016, themes: T.slice(0, 2) }));
+    for (let i = 0; i < 5; i++) list.push(book(`e${i}`, { themes: T.slice(0, 3), popularity: 5000 }));
+    const { ring } = neighborhood(buildGraph(list), c);
+    const count = (xs: readonly { kind: string }[], k: Kind) => xs.filter((r) => r.kind === k).length;
+    expect(KINDS.map((k) => count(ring, k))).toEqual([2, 3, 3, 3]);
+    const placed = placeRing(ring, null, null, 118, 150);
+    expect(KINDS.map((k) => count(placed, k))).toEqual([1, 2, 2, 2]);
+    expect(placed.map((p) => p.ang)).toEqual([-90, -20, 20, 70, 110, 160, 200]);
+    expect(ring.some((r) => r.slug === "c")).toBe(false);
+  });
+
+  it("条件: 雑誌・年は共通の要素2以上、要素は3以上かつ popularity > 3000", () => {
+    const c = book("c", { magazine: "jump", year_started: 2016, themes: T });
+    const g = buildGraph([
+      c,
+      book("m1", { magazine: "jump", themes: T.slice(0, 1) }), // 共通1 → 出ない
+      book("y1", { year_started: 2016, themes: T.slice(0, 1) }), // 共通1 → 出ない
+      book("e-low", { themes: T.slice(0, 4), popularity: 3000 }), // 人気3000ちょうど → 出ない
+      book("e2", { themes: T.slice(0, 2), popularity: 9000 }), // 共通2 → 出ない
+    ]);
+    expect(neighborhood(g, c).ring).toEqual([]);
+  });
+
+  it("並び順 = 共通の要素の数 → popularity", () => {
+    const c = book("c", { magazine: "jump", themes: T });
+    const g = buildGraph([
+      c,
+      book("two-hi", { magazine: "jump", themes: T.slice(0, 2), popularity: 99999 }),
+      book("four", { magazine: "jump", themes: T.slice(0, 4), popularity: 10 }),
+      book("three", { magazine: "jump", themes: T.slice(0, 3), popularity: 10 }),
+    ]);
+    expect(neighborhood(g, c).ring.map((r) => r.slug)).toEqual(["four", "three", "two-hi"]);
+    expect(placeRing(neighborhood(g, c).ring, null, null, 118, 150).map((r) => r.slug)).toEqual(["four", "three"]);
+  });
+});
+
+describe("広げる単位", () => {
+  it("作者は作者名ごとに全作品、雑誌・年は共通の要素1以上、要素は作品数の多い順に4つ", () => {
+    const c = book("c", {
+      authors: [{ name: "甲" }, { name: "乙" }],
+      magazine: "jump",
+      year_started: 2016,
+      themes: T,
+    });
+    const list = [c];
+    list.push(book("a-no-theme", { authors: [{ name: "甲" }] })); // 共通の要素0でも作者単位には入る
+    list.push(book("b1", { authors: [{ name: "乙" }] }));
+    list.push(book("m0", { magazine: "jump" })); // 共通0 → 雑誌単位に入らない
+    list.push(book("m1", { magazine: "jump", themes: ["陰謀"] }));
+    list.push(book("y1", { year_started: 2016, themes: ["政治"] }));
+    // 作品数: 料理5 > 魔法4 > 学園3 > 政治2(+y1) > 陰謀(m1)…
+    for (let i = 0; i < 5; i++) list.push(book(`cook${i}`, { themes: ["料理"] }));
+    for (let i = 0; i < 4; i++) list.push(book(`magic${i}`, { themes: ["魔法"] }));
+    for (let i = 0; i < 3; i++) list.push(book(`school${i}`, { themes: ["学園"] }));
+    list.push(book("pol", { themes: ["政治"] }));
+    const { units } = neighborhood(buildGraph(list), c, (k) => (k === "jump" ? "週刊少年ジャンプ" : k));
+    const byKey = Object.fromEntries(units.map((u) => [u.key, u.items.map((i) => i.slug)]));
+    expect(byKey["author:甲"]).toEqual(["a-no-theme"]);
+    expect(byKey["author:乙"]).toEqual(["b1"]);
+    expect(byKey["mag:jump"]).toEqual(["m1"]);
+    expect(byKey["year:2016"]).toEqual(["y1"]);
+    expect(units.filter((u) => u.kind === "elem").map((u) => u.label)).toEqual(["料理", "魔法", "学園", "政治"]);
+    expect(units.find((u) => u.key === "mag:jump")?.label).toBe("週刊少年ジャンプ");
+  });
+
+  it("各単位は最大24冊で、中央の本自身は含まない", () => {
+    const c = book("c", { authors: [{ name: "甲" }] });
+    const list = [c];
+    for (let i = 0; i < 40; i++) list.push(book(`a${i}`, { authors: [{ name: "甲" }] }));
+    const u = neighborhood(buildGraph(list), c).units.find((x) => x.key === "author:甲");
+    expect(u?.items.length).toBe(24);
+    expect(u?.items.some((i) => i.slug === "c")).toBe(false);
+  });
+});
+
+describe("来た道", () => {
+  const full: RingEntry[] = [];
+  for (const k of KINDS) for (let i = 0; i < 3; i++) full.push({ slug: `${k}${i}`, kind: k, label: k, shared: 0 });
+
+  it("★前の中央は来た方向の反対側に残る(周りの本の条件に当てはまっても枠は使わず、枠は控えで埋める)", () => {
+    // 作者の糸で北から来た = 前の中央は新しい中央の作者でもある(ほぼ必ず起きる)
+    const ring: RingEntry[] = [
+      { slug: "prev", kind: "author", label: "作者 甲", shared: 0 },
+      { slug: "next-author", kind: "author", label: "作者 甲", shared: 0 },
+    ];
+    const p = placeRing(ring, "prev", 90, 118, 150);
+    expect(p.find((o) => o.slug === "next-author")).toMatchObject({ kind: "author", ang: -90, back: false });
+    const back = p.find((o) => o.slug === "prev");
+    expect(back).toMatchObject({ kind: "back", back: true, ang: 90 });
+    expect(back?.dy).toBeCloseTo(150);
+    expect(p).toHaveLength(2);
+  });
+
+  it("どの方向から来ても、来た道はすべり終えた位置のまま・周りの本と重ならない", () => {
+    for (let from = -180; from < 180; from += 5) {
+      const p = placeRing(full, "prev", from + 180, 118, 150);
+      const back = p.find((o) => o.back);
+      expect(angleGap(back!.ang, from + 180)).toBe(0);
+      expect(p.filter((o) => !o.back)).toHaveLength(7);
+      for (let i = 0; i < p.length; i++)
+        for (let j = i + 1; j < p.length; j++) {
+          const overlap =
+            Math.abs(p[i].dx - p[j].dx) < RING_GAP.w - 0.5 && Math.abs(p[i].dy - p[j].dy) < RING_GAP.h - 0.5;
+          expect(overlap, `from ${from}: ${p[i].slug}/${p[j].slug}`).toBe(false);
+        }
+    }
+    expect(angleGap(350, 10)).toBe(20);
+  });
+});
+
+describe("4つの広げ方", () => {
+  const geom = stageGeom(360, 544);
+  const items = Array.from({ length: 24 }, (_, i) => ({ slug: `b${i}`, year: 1990 + (i % 12) }));
+  const inside = (p: { x: number; y: number; w: number; h: number }) =>
+    p.x - p.w / 2 >= 0 && p.x + p.w / 2 <= geom.W && p.y - p.h / 2 >= 0 && p.y + p.h / 2 <= geom.H;
+
+  it("★同じ年の糸では年表を選べない(既定は同心円・覚えた値が年表でも使わない)", () => {
+    expect(allowedSpreads("year")).not.toContain("time");
+    expect(resolveSpread("year", "time")).toBe("ring");
+    for (const k of ["author", "mag", "elem"] as Kind[]) expect(allowedSpreads(k)).toContain("time");
+  });
+
+  it("初期値: 作者=年表 / 同じ雑誌=年表 / 同じ年=同心円 / 要素=方角に扇", () => {
+    expect(KINDS.map(defaultSpread)).toEqual(["time", "time", "ring", "fan"]);
+    expect(resolveSpread("elem", "dust")).toBe("dust");
+    expect(resolveSpread("elem", "nonsense")).toBe("fan");
+  });
+
+  it("方角に扇: 3列(5/8/11)・内側ほど大きい・糸の方角に向く", () => {
+    const r = spreadPositions("author", items, "fan", geom, 2000, "k");
+    expect(r.P).toHaveLength(24);
+    expect(r.P.slice(0, 5).every((p) => p.w === 34)).toBe(true);
+    expect(r.P.slice(5, 13).every((p) => p.w === 30)).toBe(true);
+    expect(r.P.slice(13).every((p) => p.w === 26)).toBe(true);
+    // 作者 = 北: どれも中央より上
+    expect(r.P.every((p) => p.y < geom.CY)).toBe(true);
+    expect(r.center).toMatchObject({ x: geom.CX, y: geom.CY, w: 60, h: 84 });
+  });
+
+  it("同心円: 全周に 6/9/9", () => {
+    const r = spreadPositions("mag", items, "ring", geom, 2000, "k");
+    expect(r.P).toHaveLength(24);
+    const d = r.P.map((p) => Math.hypot((p.x - geom.CX) / 0.8, (p.y - geom.CY) / 1.1));
+    expect(d.slice(0, 6).every((x) => Math.abs(x - 92) < 1)).toBe(true);
+    expect(r.P.some((p) => p.y > geom.CY) && r.P.some((p) => p.y < geom.CY)).toBe(true);
+  });
+
+  it("年表: 横軸が年(左が古い)・同じ列は下から積む(1列7冊まで)・中央は上へ", () => {
+    const same = Array.from({ length: 12 }, (_, i) => ({ slug: `s${i}`, year: 2001 }));
+    const r = spreadPositions("author", [...same, { slug: "old", year: 1980 }, { slug: "new", year: 2020 }], "time", geom, 2001, "k");
+    const col = r.P.filter((p) => p.slug.startsWith("s"));
+    expect(col.length).toBeLessThanOrEqual(7);
+    expect(col[0].y).toBeGreaterThan(col[1].y); // 下ほど近い
+    const x = (s: string) => r.P.find((p) => p.slug === s)!.x;
+    expect(x("old")).toBeLessThan(x("s0"));
+    expect(x("s0")).toBeLessThan(x("new"));
+    expect(r.center.y).toBeLessThan(geom.CY);
+    expect(r.axisY).toBeDefined();
+    expect(r.ticks?.[0].year).toBe(1980);
+  });
+
+  it("星屑: 種が同じなら毎回同じ・重ならない・近い本ほど大きい", () => {
+    const a = spreadPositions("elem", items, "dust", geom, 2000, "elem:魔法");
+    const b = spreadPositions("elem", items, "dust", geom, 2000, "elem:魔法");
+    expect(a.P).toEqual(b.P);
+    expect(a.P.length).toBeGreaterThan(12);
+    for (let i = 0; i < a.P.length; i++)
+      for (let j = i + 1; j < a.P.length; j++) {
+        const p = a.P[i];
+        const q = a.P[j];
+        const overlap = Math.abs(p.x - q.x) < (p.w + q.w) / 2 && Math.abs(p.y - q.y) < (p.h + q.h) / 2;
+        expect(overlap).toBe(false);
+      }
+    expect(a.P[0].w).toBeGreaterThanOrEqual(a.P[a.P.length - 1].w);
+  });
+
+  it("どの広げ方でも舞台からはみ出さない", () => {
+    for (const s of ["fan", "ring", "time", "dust"] as Spread[])
+      for (const k of KINDS) {
+        const r = spreadPositions(k, items, s, geom, 1995, `${k}:${s}`);
+        for (const p of r.P) expect(inside(p), `${k}/${s}/${p.slug}`).toBe(true);
+      }
+  });
+});
+
+describe("網点の出方", () => {
+  it("11の出方すべてで v が 0..1 に収まる", () => {
+    expect(TONES).toHaveLength(11);
+    for (const t of TONES) {
+      const o = toneOrder(t.key, 60, 124, 30, 57, rng(t.key));
+      let lo = Infinity;
+      let hi = -Infinity;
+      for (const v of o) {
+        lo = Math.min(lo, v);
+        hi = Math.max(hi, v);
+      }
+      expect(lo, t.name).toBeGreaterThanOrEqual(0);
+      expect(hi, t.name).toBeLessThanOrEqual(1);
+    }
+  });
+
+  it("式どおり: 内周からは中央が最初、外周からは中央が最後、左上からは左上が最初", () => {
+    const W = 11;
+    const H = 11;
+    const inner = toneOrder("inner", W, H, 5, 5);
+    const outer = toneOrder("outer", W, H, 5, 5);
+    const diag = toneOrder("diagonal", W, H, 5, 5);
+    const radar = toneOrder("radar", W, H, 5, 5);
+    const at = (o: Float32Array, i: number, j: number) => o[j * W + i];
+    expect(at(inner, 5, 5)).toBe(0);
+    expect(at(inner, 0, 0)).toBeCloseTo(1);
+    expect(at(outer, 5, 5)).toBe(1);
+    expect(at(diag, 0, 0)).toBe(0);
+    // 真上が0・右(東)が 1/4・真下が 1/2(時計回り)
+    expect(at(radar, 5, 0)).toBeCloseTo(0);
+    expect(at(radar, 10, 5)).toBeCloseTo(0.25);
+    expect(at(radar, 5, 10)).toBeCloseTo(0.5);
+  });
+
+  it("点の進み q: 始まる前は0・終わりは1・なめらか", () => {
+    expect(toneQ(0, 0)).toBe(0);
+    expect(toneQ(1, 1)).toBe(1);
+    expect(toneQ(0.32, 0)).toBe(1);
+    expect(toneQ(0.5, 1)).toBe(0);
+    expect(toneQ(0.16, 0)).toBeCloseTo(0.5);
+  });
+
+  it("同じ出方を2回続けない", () => {
+    const r = rng("pick");
+    let last = pickTone(null, r);
+    for (let i = 0; i < 200; i++) {
+      const k = pickTone(last, r);
+      expect(k).not.toBe(last);
+      last = k;
+    }
+    expect(pickTone("inner", () => 0.9999)).not.toBe("inner");
+  });
+});

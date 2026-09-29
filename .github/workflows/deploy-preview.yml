@@ -73,6 +73,32 @@ jobs:
           cp .preview-data/manga-list-cols.v1.json public/manga-list-cols.v1.json
           echo "preview index entries:"; node -e "console.log('list', require('./public/manga-list-index.json').d.length)"
 
+      # ★魔法の書架(/lab/magic-shelf)だけが読む本番の全件索引(2026-09-29 ユーザ裁定「3」)。
+      #   テスト環境の索引は抜粋で糸がほぼ張れないため、本番の公開索引を取得 → 列形式を生成 → public/prod-idx/ に置く
+      #   (同一オリジン配信 = 本番の索引は CORS ヘッダ無しなので別オリジンからは読めない)。
+      #   ほかの頁の索引(public/ 直下)には触らない。 取得に失敗したらこの段だけ飛ばす(ビルド全体は止めない。
+      #   頁は「本番の索引が読めませんでした」と出す)。
+      - name: Stage production full index for /lab/magic-shelf (public/prod-idx/)
+        continue-on-error: true
+        run: |
+          set -eu
+          mkdir -p /tmp/prod-idx public/prod-idx
+          for f in manga-list-index.json manga-list-head.json manga-catch-index.json; do
+            # ★素の curl の名乗りは Cloudflare に 403 で弾かれる
+            curl -fsS --retry 3 -A "Mozilla/5.0" -o /tmp/prod-idx/$f https://mangal-db.com/$f
+          done
+          python3 scripts/_index_files.py ensure /tmp/prod-idx
+          cp /tmp/prod-idx/manga-list-cols.v1.json /tmp/prod-idx/manga-list-head.json /tmp/prod-idx/manga-catch-index.json public/prod-idx/
+          # ★Cloudflare Pages は1ファイル 25MiB まで(列形式は今約21MB)。 超えたら警告して外す(デプロイ全体は落とさない)
+          for f in public/prod-idx/*.json; do
+            size=$(stat -c %s "$f")
+            echo "$f: $size bytes"
+            if [ "$size" -gt 26214400 ]; then
+              echo "::warning title=prod-idx over 25MiB::$f is $size bytes (> Cloudflare Pages 25MiB limit). Removed; /lab/magic-shelf will show 本番の索引が読めませんでした"
+              rm -f "$f"
+            fi
+          done
+
       # ★画集 = data/art-books に全件(161)。 .preview-data/art-books は .gitignore で未追跡
       #   (preview サブセットに含めない設計)。 /art-books 一覧を preview で表示するため、
       #   build 前に data/ から hydrate する (= 常に本番データと同期。 CI のみ・commit不要)。

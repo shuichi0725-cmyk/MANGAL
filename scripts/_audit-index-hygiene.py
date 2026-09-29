@@ -203,7 +203,8 @@ if D == "data":  # 本番索引のみ(previewはsubsetミラーなので対象�
     # fetch側の実在確認(改名の片割れ忘れ)
     fetched = set()
     for src in _glob.glob(os.path.join(ROOT, "lib", "*.ts*")) + _glob.glob(os.path.join(ROOT, "components", "*.ts*")):
-        for m in re.findall(r'fetch\("/(manga-[\w.-]+\.json)"', open(src, encoding="utf-8").read()):
+        # ★lib/useMangaIndex.ts は読み先の基点を足すため fetch(idxUrl("/manga-….json")) と書く(2026-09-29)
+        for m in re.findall(r'(?:fetch|idxUrl)\("/(manga-[\w.-]+\.json)"', open(src, encoding="utf-8").read()):
             fetched.add(m)
     for name in sorted(fetched):
         if not os.path.exists(os.path.join(BASE, name)):

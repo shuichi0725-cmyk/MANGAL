@@ -32,22 +32,76 @@ const _catchListeners = new Set<() => void>();
 // ★head→full 置換をフックへ通知(2026-07-14 コールドスタート対策: 先頭100件で即描画→全件差替)
 const _indexListeners = new Set<() => void>();
 
+// ★読み先の基点(2026-09-29 魔法の書架=羅針盤)。既定 "" = 今までどおり "/manga-*.json"。
+//   テスト環境の /lab/magic-shelf だけが setIndexBase("/prod-idx") で本番の全件索引を読む
+//   (preview CI が public/prod-idx/ に置く)。module キャッシュは全頁共有なので、
+//   基点を変えたら状態を捨てて読み直す。 _gen = 古い基点の読み込みが後から届いても書き込ませない番号。
+let _base = "";
+let _gen = 0;
+// ★fetch先は必ず idxUrl("/manga-….json") の文字列リテラルで書く
+//   (_audit-index-hygiene.py が fetch( / idxUrl( の直後の "/manga-*.json" を拾って実在確認する)。
+function idxUrl(path: string): string {
+  return _base + path;
+}
+let _catchReady = false; // キャッチの merge まで終わったか(取得開始の _catchLoaded とは別)
+let _failed = false;
+const _failListeners = new Set<() => void>();
+
+/** 索引の読み先の基点を変える(最初の読み込み前に1回)。既定 "/" = 変えない。 */
+export function setIndexBase(base: string): void {
+  const b = base.replace(/\/+$/, "");
+  if (b === _base) return;
+  _base = b;
+  _gen++;
+  _cache = null;
+  _cacheIsFull = false;
+  _inflight = null;
+  _catchLoaded = false;
+  _catchReady = false;
+  _fullState = "idle";
+  _dl = null;
+  _dlT0 = 0;
+  _failed = false;
+}
+
+/** キャッチ文の merge まで終わったか(merge は items を書き換えるだけで配列は同じなので、別に旗を持つ)。 */
+export function isCatchLoaded(): boolean {
+  return _catchReady;
+}
+
+/** フル索引の取得に失敗した時に知らせる(既に失敗していれば即時)。戻り値 = 解除。 */
+export function onIndexFailed(fn: () => void): () => void {
+  if (_failed) fn();
+  _failListeners.add(fn);
+  return () => {
+    _failListeners.delete(fn);
+  };
+}
+
 const decode = decodeListIndex; // 共有デコーダ(fl展開・authorsパック復元・cover復元)
 
 function loadCatch(): void {
   if (_catchLoaded || !_cache) return;
   _catchLoaded = true;
-  fetch("/manga-catch-index.json")
+  const g = _gen;
+  fetch(idxUrl("/manga-catch-index.json"))
     .then((r) => (r.ok ? r.json() : {}))
     .then((cm: Record<string, string>) => {
+      if (g !== _gen) return;
       if (_cache)
         for (const m of _cache) {
           const c = cm[m.slug];
           if (c) (m as { catch?: string }).catch = c;
         }
+      _catchReady = true;
       _catchListeners.forEach((fn) => fn());
     })
-    .catch(() => {});
+    .catch(() => {
+      if (g !== _gen) return;
+      _catchReady = true;
+      _failed = true; // キャッチが届かない = 羅針盤の糸が張れない(一覧の頁は listener を持たないので無影響)
+      _failListeners.forEach((fn) => fn());
+    });
 }
 
 // ★初期サクサク化(2026-07-19 ユーザ体感報告): フル索引(22MB+67kデコード)を初描画と奪い合わない。
@@ -80,8 +134,8 @@ export function startFullDownload(): void {
   if (_dl || _cacheIsFull) return;
   _dlT0 = nowMs();
   // ★列形式(ブラウザ専用・約3割軽い)。fetch先は文字列リテラルで書く
-  //   (_audit-index-hygiene.py が lib/ の fetch("/manga-*.json") を拾って実在確認する)。
-  _dl = fetch("/manga-list-cols.v1.json", { priority: "low" } as RequestInit);
+  //   (_audit-index-hygiene.py が lib/ の fetch(idxUrl("/manga-*.json")) を拾って実在確認する)。
+  _dl = fetch(idxUrl("/manga-list-cols.v1.json"), { priority: "low" } as RequestInit);
   _dl.catch(() => {}); // 待つ前に失敗しても未処理エラーにしない(実処理は loadFullRaw)
 }
 
@@ -97,7 +151,7 @@ async function loadFullRaw(): Promise<RawIndex> {
   } catch {
     // ★列形式が無い/壊れている → 従来の行配列で動かす(一覧・検索は同じ結果)。
     //   例: 機能蒸留(索引に触れない)で新コードだけ先に本番へ出た週。次の週次で列形式が上がれば自然に切り替わる。
-    const r = await fetch("/manga-list-index.json");
+    const r = await fetch(idxUrl("/manga-list-index.json"));
     if (!r.ok) throw new Error(`索引取得失敗 ${r.status}`);
     perfDiag.idxFormat = "row";
     return (await r.json()) as RawIndex;
@@ -109,10 +163,12 @@ export function ensureFullIndex(): void {
   if (_fullState !== "idle") return;
   _fullState = "loading";
   startFullDownload();
+  const g = _gen;
   const _t0 = _dlT0 || nowMs(); // 通信開始から数える(前倒しした分も含めて「取得」)
   let _tDecode = 0;
   loadFullRaw()
     .then((raw: RawIndex) => {
+      if (g !== _gen) throw new Error("基点が変わった");
       perfDiag.fullFetchMs = since(_t0); // 取得+解凍+JSON.parse
       _tDecode = nowMs();
       return decodeChunked(raw).then((items) => {
@@ -121,7 +177,9 @@ export function ensureFullIndex(): void {
       });
     })
     .then((items) => {
+      if (g !== _gen) return;
       perfDiag.fullDecodeMs = since(_tDecode);
+      _failed = false; // 失敗の後の再試行(フォーカス等)で揃った
       _cache = items;
       _cacheIsFull = true;
       _fullState = "done";
@@ -129,9 +187,12 @@ export function ensureFullIndex(): void {
       if (_catchWanted) loadCatch(); // ★キャッチを使う画面だけ(下の useMangaIndex 参照)
     })
     .catch(() => {
+      if (g !== _gen) return;
       _fullState = "idle"; // 失敗時は再試行可能に
       _dl = null; // 通信もやり直せるように(失敗したResponseを握り続けない)
       _dlT0 = 0;
+      _failed = true;
+      _failListeners.forEach((fn) => fn());
     });
 }
 
@@ -166,26 +227,28 @@ function fetchIndex(): Promise<MangaListItem[]> {
   if (_cacheIsFull && _cache) return Promise.resolve(_cache);
   if (_inflight) return _inflight;
   startFullDownload(); // ★通信は head と並走で今すぐ(解析は下の手すき)
+  const g = _gen;
   const headP: Promise<void> = _cache
     ? Promise.resolve()
-    : fetch("/manga-list-head.json")
+    : fetch(idxUrl("/manga-list-head.json"))
         .then((r) => (r.ok ? r.json() : null))
         .then((raw: RawIndex | null) => {
-          if (raw && !_cache) {
+          if (g === _gen && raw && !_cache) {
             _cache = decode(raw);
             _indexListeners.forEach((fn) => fn());
           }
         })
         .catch(() => {});
-  _inflight = headP
+  const p: Promise<MangaListItem[]> = headP
     .then(() => {
       scheduleIdle(() => ensureFullIndex()); // フルは初描画後の手すきで
       return _cache ?? [];
     })
     .finally(() => {
-      _inflight = null;
+      if (_inflight === p) _inflight = null;
     });
-  return _inflight;
+  _inflight = p;
+  return p;
 }
 
 /** 一覧索引を返す。 未ロード時は null。 head→full差替/catchロード完了時は再レンダーで反映。

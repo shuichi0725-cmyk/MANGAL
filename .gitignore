@@ -69,3 +69,6 @@ ds-bundle/
 .design-sync/.cache/
 .design-sync/learnings/
 .design-sync/node_modules
+
+# 魔法の書架(/lab/magic-shelf)用の本番全件索引 = preview CI が毎回取得して置く(commit しない)
+/public/prod-idx/

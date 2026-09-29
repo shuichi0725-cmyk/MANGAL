@@ -1,0 +1,585 @@
+/* ★魔法の書架 = 旅路つき羅針盤(/lab/magic-shelf・プレビュー専用)。
+   この頁専用のCSS。 Tailwind の新しいクラスは足さない(本番の共通CSSを1バイトも変えない)。
+   サイトの器(ヘッダー・ナビ)の上に全画面で重ねる。 寸法は試作(360px基準)どおり。 */
+
+.cp-root {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  overflow: hidden;
+  background: #07090d;
+  color: #e6ecf0;
+  font-size: 12px;
+  line-height: 1.45;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  overscroll-behavior: none;
+}
+.cp-root button {
+  font: inherit;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* ── 背景: 書影の網点 ── */
+.cp-bg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.cp-bg canvas {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  filter: brightness(0.82) saturate(1.25);
+}
+.cp-vig {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 48%, #0000 0%, #0000 25%, #000b 100%);
+}
+.cp-flash {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.45s;
+}
+.cp-flash.on {
+  opacity: 1;
+  transition: none;
+}
+.cp-toast {
+  position: absolute;
+  left: 50%;
+  top: 108px;
+  z-index: 7;
+  transform: translateX(-50%);
+  font-size: 10.5px;
+  font-weight: 700;
+  color: #0b0e14;
+  background: #e6ecf0e6;
+  border-radius: 12px;
+  padding: 2px 10px;
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+}
+.cp-toast.on {
+  opacity: 1;
+}
+
+/* ── 1. 糸の色チップ列 ── */
+.cp-top {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 44px;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 0 10px;
+  background: #070a0ecc;
+  border-bottom: 1px solid #ffffff14;
+  box-sizing: border-box;
+}
+.cp-exit {
+  flex: none;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #ffffff30;
+  border-radius: 50%;
+  color: #e6ecf0;
+  font-size: 12px;
+  text-decoration: none;
+  margin-right: 2px;
+}
+.cp-chip {
+  flex: none;
+  font-size: 10.5px;
+  border: 1px solid var(--c);
+  color: var(--c);
+  background: transparent;
+  border-radius: 12px;
+  padding: 1px 8px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.cp-chip.on {
+  background: var(--c);
+  color: #0b0e14;
+  font-weight: 700;
+}
+.cp-chip:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+.cp-save {
+  flex: none;
+  margin-left: auto;
+  font-size: 10.5px;
+  border: 1px solid #ffffff30;
+  border-radius: 12px;
+  padding: 1px 9px;
+  color: #e6ecf0;
+  background: transparent;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+/* ── 2. 旅路 ── */
+.cp-hist {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 44px;
+  height: 56px;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  background: #070a0e99;
+  border-bottom: 1px solid #ffffff14;
+  scroll-behavior: smooth;
+  box-sizing: border-box;
+}
+.cp-hist::-webkit-scrollbar {
+  display: none;
+}
+.cp-hstep {
+  flex: none;
+  display: flex;
+  align-items: center;
+}
+.cp-hist button {
+  flex: none;
+  border: 0;
+  padding: 0;
+  background: none;
+  cursor: pointer;
+}
+.cp-hist img,
+.cp-hist .cp-noimg {
+  width: 28px;
+  height: 39px;
+  border-radius: 2px;
+  object-fit: cover;
+  display: block;
+}
+.cp-hist .now img {
+  outline: 2px solid #fff;
+  outline-offset: 1px;
+}
+.cp-hs {
+  flex: none;
+  width: 26px;
+  height: 3px;
+  border-radius: 2px;
+  margin: 0 3px;
+}
+.cp-hs-q {
+  background: repeating-linear-gradient(90deg, #ffffff55 0 4px, transparent 4px 8px);
+}
+.cp-q {
+  flex: none;
+  width: 28px;
+  height: 39px;
+  box-sizing: border-box;
+  border: 1px dashed #ffffff55;
+  border-radius: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff88;
+}
+.cp-noimg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: #2a3038;
+  border-radius: 3px;
+}
+
+/* ── 3. 羅針盤 ── */
+.cp-stage {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 100px;
+  bottom: 96px;
+  z-index: 2;
+}
+.cp-world {
+  position: absolute;
+  width: 0;
+  height: 0;
+  transition: transform 0.75s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.cp-lines {
+  position: absolute;
+  left: 0;
+  top: 0;
+  overflow: visible;
+  pointer-events: none;
+}
+.cp-ln {
+  fill: none;
+  stroke-linecap: round;
+  transition:
+    stroke-width 0.25s,
+    opacity 0.3s;
+}
+.cp-ln.sel {
+  stroke-dasharray: 6 6 !important;
+  animation: cp-flow 0.6s linear infinite;
+}
+@keyframes cp-flow {
+  to {
+    stroke-dashoffset: -12;
+  }
+}
+/* 糸が中央から伸びる: 線は g の破線設定を受け継ぐ(選ばれて流れる時は線自身の設定が勝つ) */
+.cp-linein {
+  stroke-dasharray: var(--len) var(--len);
+  animation: cp-linein 0.6s ease-out var(--d, 0ms) backwards;
+}
+@keyframes cp-linein {
+  from {
+    stroke-dashoffset: var(--len);
+  }
+}
+.cp-tick line {
+  stroke: #ffffff66;
+}
+.cp-tick text {
+  fill: #ffffffaa;
+  font-size: 9px;
+  text-anchor: middle;
+}
+
+.cp-nd {
+  position: absolute;
+  z-index: 1;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  background: none;
+  color: inherit;
+  cursor: pointer;
+  transition:
+    left 0.65s cubic-bezier(0.3, 0.7, 0.2, 1),
+    top 0.65s cubic-bezier(0.3, 0.7, 0.2, 1),
+    width 0.65s cubic-bezier(0.3, 0.7, 0.2, 1),
+    height 0.65s cubic-bezier(0.3, 0.7, 0.2, 1),
+    opacity 0.4s,
+    filter 0.3s;
+}
+.cp-nd img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 3px;
+  background: #fff;
+  box-shadow: 0 4px 12px #000a;
+  transition:
+    box-shadow 0.25s,
+    transform 0.25s,
+    filter 0.3s;
+}
+.cp-nd .cp-lb {
+  position: absolute;
+  left: 50%;
+  top: 100%;
+  transform: translateX(-50%);
+  margin-top: 4px;
+  width: 84px;
+  font-size: 9px;
+  font-weight: 700;
+  line-height: 1.25;
+  text-align: center;
+  text-shadow:
+    0 1px 2px #000,
+    0 0 5px #000;
+  transition: opacity 0.3s;
+  pointer-events: none;
+}
+.cp-nd.center {
+  z-index: 3;
+}
+.cp-nd.center img {
+  box-shadow:
+    0 0 0 2px #fff,
+    0 0 34px #ffffff40;
+}
+.cp-nd.center .cp-lb {
+  opacity: 0;
+}
+.cp-nd.dim {
+  opacity: 0.38;
+  filter: saturate(0.4);
+}
+.cp-nd.pick {
+  z-index: 2;
+}
+.cp-nd.pick img {
+  transform: translateY(-5px) scale(1.06);
+  box-shadow:
+    0 0 0 2px var(--kc),
+    0 0 26px var(--kc);
+}
+.cp-nd.back img {
+  filter: grayscale(0.7) brightness(0.7);
+}
+.cp-nd.small img {
+  box-shadow: 0 2px 6px #000c;
+  border-radius: 2px;
+}
+.cp-nd.small.pick img {
+  transform: translateY(-3px) scale(1.12);
+}
+.cp-nd.off {
+  opacity: 0;
+  pointer-events: none;
+}
+.cp-nd:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 3px;
+  border-radius: 3px;
+}
+/* 新しく現れる本: 中央から飛び出す/その場で浮かぶ(--fx,--fy,--fs,--d は本ごと) */
+.cp-nd.enter {
+  animation:
+    cp-in-move 0.65s cubic-bezier(0.3, 0.7, 0.2, 1) var(--d, 0ms) backwards,
+    cp-in-fade 0.4s ease var(--d, 0ms) backwards;
+}
+@keyframes cp-in-move {
+  from {
+    transform: translate(var(--fx, 0px), var(--fy, 0px)) scale(var(--fs, 1));
+  }
+}
+@keyframes cp-in-fade {
+  from {
+    opacity: 0;
+  }
+}
+
+/* 星図を描いている間: 糸の位置に淡い点滅の枠 */
+.cp-wait {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.cp-ph {
+  position: absolute;
+  width: 48px;
+  height: 67px;
+  box-sizing: border-box;
+  border: 1.5px dashed #ffffffb0;
+  border-radius: 3px;
+  background: #07090d8c;
+  animation: cp-pulse 1.3s ease-in-out infinite alternate;
+}
+@keyframes cp-pulse {
+  from {
+    opacity: 0.35;
+  }
+  to {
+    opacity: 0.95;
+  }
+}
+.cp-wait-text {
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: 0;
+  text-align: center;
+  font-size: 11px;
+  font-weight: 700;
+  color: #e6ecf0cc;
+  text-shadow: 0 1px 3px #000;
+  pointer-events: none;
+}
+
+/* 広げ方の切替(広げた画面の左上) */
+.cp-spreads {
+  position: absolute;
+  left: 8px;
+  top: 6px;
+  z-index: 4;
+  display: flex;
+  gap: 4px;
+}
+.cp-sp {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 9.5px;
+  line-height: 1;
+  border: 1px solid #ffffff40;
+  color: #e6ecf0;
+  background: #0b0e14d9;
+  border-radius: 12px;
+  padding: 4px 7px 4px 5px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.cp-sp.on {
+  background: var(--c);
+  border-color: var(--c);
+  color: #0b0e14;
+  font-weight: 700;
+}
+.cp-sp:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+  text-decoration: line-through;
+}
+
+/* ── 4. 広げる ▸ ── */
+.cp-units {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 98px;
+  height: 30px;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 0 10px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  background: linear-gradient(transparent, #070a0ecc 40%);
+  box-sizing: border-box;
+}
+.cp-units::-webkit-scrollbar {
+  display: none;
+}
+.cp-ul {
+  flex: none;
+  font-size: 10px;
+  color: #0b0e14;
+  background: #e6ecf0;
+  border-radius: 12px;
+  padding: 1px 8px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+.cp-uc {
+  flex: none;
+  font-size: 10px;
+  border: 1px solid var(--c, #ffffff55);
+  color: var(--c, #fff);
+  background: #0b0e14d9;
+  border-radius: 12px;
+  padding: 1px 8px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.cp-uc i {
+  font-style: normal;
+  opacity: 0.7;
+  margin-left: 4px;
+  font-size: 9px;
+}
+.cp-uc.on {
+  background: var(--c);
+  color: #0b0e14;
+  font-weight: 700;
+}
+.cp-uc-x {
+  --c: #e6ecf0;
+}
+
+/* ── 5. シート ── */
+.cp-sheet {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 96px;
+  z-index: 6;
+  box-sizing: border-box;
+  display: flex;
+  gap: 10px;
+  padding: 8px 12px;
+  background: #eef2f4;
+  color: #0f1419;
+  border-radius: 14px 14px 0 0;
+  transition: transform 0.3s;
+  user-select: text;
+  -webkit-user-select: text;
+}
+.cp-sheet.bump {
+  transform: translateY(6px);
+}
+.cp-sheet > img,
+.cp-sheet-noimg {
+  flex: none;
+  width: 46px;
+  height: 65px;
+  object-fit: cover;
+  border-radius: 2px;
+}
+.cp-sheet-body {
+  min-width: 0;
+  flex: 1;
+}
+.cp-sheet-t {
+  font-weight: 700;
+  font-size: 12.5px;
+  line-height: 1.25;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.cp-sheet-w {
+  font-size: 10px;
+  line-height: 1.35;
+  font-weight: 700;
+  margin-top: 1px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.cp-sheet-c {
+  font-size: 10.5px;
+  line-height: 1.4;
+  margin-top: 1px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.cp-go {
+  margin-top: 3px;
+  line-height: 1.4;
+  font-size: 10.5px;
+  font-weight: 700;
+  color: #0f1419;
+  background: var(--kc);
+  border: 0;
+  border-radius: 12px;
+  padding: 1px 10px;
+  cursor: pointer;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cp-root *,
+  .cp-world,
+  .cp-sheet {
+    transition: none !important;
+    animation: none !important;
+  }
+}
