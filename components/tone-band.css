@@ -1,0 +1,55 @@
+/* 作品頁の「題名の背景の帯」(テスト環境のみ・components/ToneBand.tsx)。
+ * ★Tailwind の新しいクラスを書かずにここへ置く = 本番の共通CSSを1バイトも変えないため。
+ * ★包んでいるのは題名の行だけ。 網点(.tone-band-bg)は絶対配置で
+ *   上 = 頁の上の余白(py-8 + mt-6 = 56px)まで / 左右 = 頁の左右の余白(px-4 = 16px)まで /
+ *   下 = 副題・読みの行の下まで(約96px)伸ばす。 */
+.tone-band {
+  position: relative;
+  /* 題名の上に網点の見える場所を取る(帯全体で約230px) */
+  padding-top: 120px;
+}
+.tone-band-bg {
+  position: absolute;
+  top: -56px;
+  left: -16px;
+  right: -16px;
+  bottom: -96px;
+  overflow: hidden;
+  background: var(--color-paper);
+  pointer-events: none;
+}
+.tone-band-cv {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+.tone-band[data-tone="dark"] .tone-band-cv {
+  filter: brightness(0.8) saturate(1.2);
+}
+.tone-band[data-tone="light"] .tone-band-cv {
+  filter: saturate(1.15) contrast(1.05);
+}
+/* 下へ向かって頁の地に溶かす */
+.tone-band-bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 0%, transparent 42%, var(--color-paper) 96%);
+}
+.tone-band-in {
+  position: relative;
+  z-index: 1;
+}
+.tone-band-in h1 {
+  text-shadow:
+    0 0 12px var(--color-paper),
+    0 0 3px var(--color-paper);
+}
+/* 帯の後ろに続く副題・読みの行も網点より前へ(位置指定した要素は文書順で重なる) */
+.tone-band ~ p {
+  position: relative;
+  z-index: 1;
+  text-shadow: 0 0 8px var(--color-paper);
+}

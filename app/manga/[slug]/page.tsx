@@ -19,6 +19,9 @@ import { jaGenre, jaTag } from "@/lib/anilist-i18n";
 //   = 本番の作品頁(6.6万頁)の HTML/RSC/JS は1バイトも変わらない(静的 import にすると頁チャンクに混ざる)。
 const ShelveButton: typeof import("@/components/ShelveButton").default | null =
   process.env.NEXT_PUBLIC_PREVIEW_FEATURES === "1" ? require("@/components/ShelveButton").default : null;
+// ★プレビュー専用「題名の背景の帯」(選んでいる巻の書影の網点・2026-09-30 ユーザ裁定 案1)。 刈り取りは上と同じ。
+const ToneBand: typeof import("@/components/ToneBand").default | null =
+  process.env.NEXT_PUBLIC_PREVIEW_FEATURES === "1" ? require("@/components/ToneBand").default : null;
 
 /** 版の巻数 = 小数の番外編(15.5 等)を数えない(一覧索引 _build-list-index.py の _card_vol_count と同じ)。 */
 function shelfVolCount(vs: import("@/lib/schema").Manga["editions"][number]["volumes"]): number {
@@ -284,6 +287,21 @@ export default async function MangaDetailPage({
     : null;
 
   const shareButtons = <ShareButtons title={manga.title} url={`${SITE}/manga/${manga.slug}`} />;
+  // ★題名の行。 本番は ToneBand=null → この行がそのまま従来と同じ場所に出る(= 木も RSC も1バイトも変わらない)。
+  //   テスト環境だけ、帯(選んでいる巻の書影の網点)で包む。 帯は副題・読みの行の後ろまで絶対配置で伸ばす。
+  const titleRow = (
+    <div className="flex items-start gap-3 flex-wrap">
+      <h1 className="text-2xl md:text-3xl font-bold">{manga.title}</h1>
+      {manga.anime_adapted && (
+        <span className="mt-2">
+          <Badge tone="warm">
+            アニメ化
+            {manga.anime_first_year ? ` ${manga.anime_first_year}` : ""}
+          </Badge>
+        </span>
+      )}
+    </div>
+  );
 
   return (
     <div>
@@ -297,17 +315,7 @@ export default async function MangaDetailPage({
         {/* ヒーロー表紙は撤去(2026-08-03 ユーザ指定: PCでタイトル左に大きく出て、
             書影の有無で段組がズレる。書影は巻コーフロー+ライトボックス拡大が担う) */}
         <div className="min-w-0">
-          <div className="flex items-start gap-3 flex-wrap">
-            <h1 className="text-2xl md:text-3xl font-bold">{manga.title}</h1>
-            {manga.anime_adapted && (
-              <span className="mt-2">
-                <Badge tone="warm">
-                  アニメ化
-                  {manga.anime_first_year ? ` ${manga.anime_first_year}` : ""}
-                </Badge>
-              </span>
-            )}
-          </div>
+          {ToneBand ? <ToneBand cover={cover}>{titleRow}</ToneBand> : titleRow}
           {/* 副題 (= MADB の ` : ` 右側、 ない時は β 案で空白行を保持) */}
           <p className="text-base text-ink/75 mt-1 min-h-[1.5rem]">
             {manga.subtitle ?? " "}

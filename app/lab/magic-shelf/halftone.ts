@@ -46,6 +46,10 @@ export class Halftone {
   private dead = false;
   reduce = false;
   onTone: ((name: string) => void) | null = null;
+  /** 出方を1つに固定する(作品頁の帯 = "scatter")。 null = 毎回ランダム(羅針盤)。 */
+  fixedTone: ToneKey | null = null;
+  /** 書影を上下左右にはみ出させて敷く量(羅針盤=すべり用に110・作品頁の帯=0)。 */
+  overscan = OVERSCAN;
 
   constructor(cv: HTMLCanvasElement) {
     this.cv = cv;
@@ -123,7 +127,7 @@ export class Halftone {
       if (!this.raf) this.draw(null);
       return;
     }
-    const key = pickTone(this.last);
+    const key = this.fixedTone ?? pickTone(this.last);
     this.last = key;
     this.makeOrder(key);
     this.onTone?.(toneName(key));
@@ -218,7 +222,7 @@ export class Halftone {
       octx.setTransform(this.dpr, 0, 0, this.dpr, 0, 0);
       octx.globalCompositeOperation = "source-over";
       octx.clearRect(0, 0, this.w, this.h);
-      const s = Math.max((this.w + OVERSCAN * 2) / iw, (this.h + OVERSCAN * 2) / ih);
+      const s = Math.max((this.w + this.overscan * 2) / iw, (this.h + this.overscan * 2) / ih);
       const dw = iw * s;
       const dh = ih * s;
       const [ox, oy] = this.offset(layer.role);
