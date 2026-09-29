@@ -27,6 +27,7 @@ import {
   type ThreadKind,
 } from "./compass";
 import { Halftone } from "./halftone";
+import { CompassShelveButton, CompassShelvePanel } from "./CompassShelve";
 
 // ★この頁だけ本番の全件索引を読む(preview CI が本番の公開索引から public/prod-idx/ を作る)。
 //   頁のJSは水和より前に評価されるので、ここで基点を変えれば最初の読み込みから /prod-idx になる。
@@ -190,6 +191,13 @@ export default function MagicCompass({ magazines }: { magazines: Record<string, 
   // この中央の糸は伸びて現れる(FIRST = 最初に周りの本が出る時。 開く・切るで null = 伸ばさず即時)
   const [growFor, setGrowFor] = useState<string | null>(FIRST);
   const busy = useRef(false);
+  // シートの「しまう」: 棚を選ぶ欄を開いている本 / しまった後の一言(本が替わったら消す)
+  const [shelveFor, setShelveFor] = useState<string | null>(null);
+  const [shelveMsg, setShelveMsg] = useState<string | null>(null);
+  useEffect(() => {
+    setShelveFor(null);
+    setShelveMsg(null);
+  }, [cur, sel, exp]);
 
   // 覚えた広げ方は水和の後で読む
   useEffect(() => {
@@ -903,12 +911,34 @@ export default function MagicCompass({ magazines }: { magazines: Record<string, 
           <span className="cp-noimg cp-sheet-noimg" />
         )}
         <div className="cp-sheet-body">
-          <div className="cp-sheet-t">{sheetItem?.title ?? "魔法の書架"}</div>
-          <div className="cp-sheet-w" style={{ color: sheetColor(sheetKind) }}>
-            {why}
+          <div className="cp-sheet-head">
+            <div className="cp-sheet-t">{sheetItem?.title ?? "魔法の書架"}</div>
+            {sheetItem && (
+              <CompassShelveButton
+                slug={sheetItem.slug}
+                open={shelveFor === sheetItem.slug}
+                onToggle={() => {
+                  setShelveMsg(null);
+                  setShelveFor((v) => (v === sheetItem!.slug ? null : sheetItem!.slug));
+                }}
+              />
+            )}
           </div>
-          {catchText && <div className="cp-sheet-c">{catchText}</div>}
-          {goLabel && sel && (
+          <div className="cp-sheet-w" style={{ color: sheetColor(sheetKind) }}>
+            {shelveMsg ?? why}
+          </div>
+          {sheetItem && shelveFor === sheetItem.slug ? (
+            <CompassShelvePanel
+              item={sheetItem}
+              onDone={(m) => {
+                setShelveFor(null);
+                setShelveMsg(m);
+              }}
+            />
+          ) : (
+            catchText && <div className="cp-sheet-c">{catchText}</div>
+          )}
+          {goLabel && sel && shelveFor !== sheetItem?.slug && (
             <button type="button" className="cp-go" onClick={() => go(sel)}>
               {goLabel}
             </button>

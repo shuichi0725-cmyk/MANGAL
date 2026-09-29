@@ -110,7 +110,16 @@ function ShelvePanel({ slug, editions, maxTotal }: Props) {
             : "border-[var(--color-line)] bg-[var(--color-surface)] text-ink/75 hover:text-[var(--color-accent)]"
         }`}
       >
-        <span aria-hidden="true">📚</span>
+        {/* ヘッダーの「書庫」と同じアイコン(2026-09-30 ユーザ裁定) */}
+        <svg
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+          width={14}
+          height={14}
+          style={{ stroke: "currentColor", fill: "none", strokeWidth: 1.9, flex: "none" }}
+        >
+          <path d="M4 4h4v16H4zM9 7h4v13H9zM14.2 6.3l3.8-1 3.3 12.6-3.8 1zM3 20h18" />
+        </svg>
         {/* ★サーバ描画・水和直後は必ず「しまう」(端末の中身は水和後に読む) */}
         {mine ? `${shelfLabel}${mine.shelf === "own" ? `・${mine.owned ?? 0}巻まで` : ""}` : "しまう"}
       </button>
