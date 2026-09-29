@@ -1,0 +1,603 @@
+<title>羅針盤の試作</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;700;900&family=Zen+Old+Mincho:wght@700;900&display=swap">
+<style>
+:root{
+  --ground:#e9ebef; --panel:#f7f8fa; --ink:#1b2130; --muted:#5b6376; --line:#c9ced8; --accent:#34508f;
+  --sans:"Zen Kaku Gothic New","Hiragino Sans","Yu Gothic",system-ui,sans-serif;
+  --serif:"Zen Old Mincho","Hiragino Mincho ProN","Yu Mincho",serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){color-scheme:dark;--ground:#13161c;--panel:#1b1f27;--ink:#e6e9ef;--muted:#9aa2b3;--line:#303644;--accent:#8fa8e6;}}
+:root[data-theme="dark"]{color-scheme:dark;--ground:#13161c;--panel:#1b1f27;--ink:#e6e9ef;--muted:#9aa2b3;--line:#303644;--accent:#8fa8e6;}
+body{background:var(--ground);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.7}
+.wrap{max-width:1100px;margin:0 auto;padding-inline:20px;padding-block:28px 64px;display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:32px;align-items:start}
+@media (max-width:820px){.wrap{grid-template-columns:minmax(0,1fr)}.side{order:2}}
+h1{font-family:var(--serif);font-weight:900;font-size:clamp(26px,4vw,34px);line-height:1.25;margin:0 0 10px;text-wrap:balance}
+.side p{margin:0 0 10px;color:var(--muted);font-size:14px}
+.ctl{margin:18px 0 6px}
+.ctl h2{font-size:13px;letter-spacing:.08em;color:var(--accent);margin:0 0 6px}
+.seg{display:flex;flex-wrap:wrap;gap:6px}
+.seg button{font:inherit;font-size:13px;border:1px solid var(--line);background:var(--panel);color:var(--ink);border-radius:18px;padding:4px 12px;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--ground);border-color:var(--ink);font-weight:700}
+.seg button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.expl{font-size:13px;color:var(--ink);background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:10px 12px;margin-top:8px;min-height:3.4em}
+.flow{font-size:13px;margin:16px 0 0;padding-left:1.2em;color:var(--muted)}
+.flow b{color:var(--ink)}
+.phone{width:360px;max-width:100%;border-radius:30px;padding:10px;background:#0c0d10;box-shadow:0 14px 34px rgba(10,15,30,.3);position:sticky;top:12px}
+
+/* ===== アプリ ===== */
+.scr{position:relative;width:340px;max-width:100%;height:680px;border-radius:20px;overflow:hidden;color:#e6ecf0;font-size:12px;line-height:1.45;background:#0b0e14;user-select:none;-webkit-tap-highlight-color:transparent;
+  --au:#f2c14e;--mg:#4fc28e;--yr:#c792ff;--el:#6ea8ff;--bk:#8a96a0}
+.bg{position:absolute;inset:0;overflow:hidden}
+.bg .lay{position:absolute;inset:-60px;transition:opacity 1s ease, transform 1.2s cubic-bezier(.3,.7,.2,1)}
+/* 夜空 */
+.st1,.st2{background-repeat:repeat}
+.st1{background-image:radial-gradient(1px 1px at 20px 30px,#fffc 50%,transparent 51%),radial-gradient(1px 1px at 90px 120px,#fff9 50%,transparent 51%),radial-gradient(1.5px 1.5px at 160px 60px,#fffa 50%,transparent 51%),radial-gradient(1px 1px at 60px 170px,#fff8 50%,transparent 51%);background-size:180px 190px;animation:tw 5s ease-in-out infinite alternate}
+.st2{background-image:radial-gradient(1px 1px at 40px 80px,#fff6 50%,transparent 51%),radial-gradient(1px 1px at 130px 20px,#fff5 50%,transparent 51%),radial-gradient(.8px .8px at 100px 150px,#fff5 50%,transparent 51%);background-size:150px 170px}
+@keyframes tw{from{opacity:.55}to{opacity:1}}
+.skyg{background:radial-gradient(ellipse at 50% 45%,#1d2a4d 0%,#0c1226 58%,#060913 100%)}
+/* 星雲 */
+.neb{filter:blur(18px)}
+/* 書影の滲み */
+.blurcov{background-size:cover;background-position:center;filter:blur(26px) brightness(.42) saturate(1.35);transform:scale(1.25)}
+/* 海図 */
+.chartg{background-color:#0c1a2b;background-image:linear-gradient(#ffffff0b 1px,transparent 1px),linear-gradient(90deg,#ffffff0b 1px,transparent 1px),linear-gradient(#ffffff06 1px,transparent 1px),linear-gradient(90deg,#ffffff06 1px,transparent 1px);background-size:80px 80px,80px 80px,16px 16px,16px 16px}
+.rose{position:absolute;left:0;top:100px;width:340px;height:484px;pointer-events:none}
+.flash{position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity .45s}
+
+.top{position:absolute;left:0;right:0;top:0;height:44px;display:flex;align-items:center;gap:5px;padding:0 10px;background:#070a0ecc;border-bottom:1px solid #ffffff14;z-index:5}
+.chip{font:inherit;font-size:10px;border:1px solid var(--c);color:var(--c);background:transparent;border-radius:12px;padding:1px 8px;cursor:pointer}
+.chip.on{background:var(--c);color:#0b0e14;font-weight:700}
+.sv{margin-left:auto;font-size:10px;border:1px solid #ffffff30;border-radius:12px;padding:1px 9px;color:#e6ecf0;white-space:nowrap}
+.hist{position:absolute;left:0;right:0;top:44px;height:56px;display:flex;align-items:center;padding:0 10px;overflow-x:auto;scrollbar-width:none;background:#070a0e99;border-bottom:1px solid #ffffff14;z-index:5;scroll-behavior:smooth}
+.hist::-webkit-scrollbar{display:none}
+.hist button{flex:none;border:0;padding:0;background:none;cursor:pointer}
+.hist img{width:28px;height:39px;border-radius:2px;object-fit:cover;display:block}
+.hist .now img{outline:2px solid #fff;outline-offset:1px}
+.hist .s{flex:none;width:26px;height:3px;border-radius:2px;margin:0 3px}
+.hist .q{flex:none;width:28px;height:39px;border:1px dashed #ffffff55;border-radius:2px;display:flex;align-items:center;justify-content:center;color:#ffffff88}
+
+.stage{position:absolute;left:0;top:100px;width:340px;height:484px;z-index:2}
+.world{position:absolute;inset:0;transition:transform .75s cubic-bezier(.4,0,.2,1), filter .35s, opacity .35s}
+.world.warp-out{transform:scale(1.55)!important;filter:blur(6px);opacity:0}
+.world.warp-pre{transform:scale(.72);filter:blur(4px);opacity:0;transition:none}
+.stage svg{position:absolute;left:0;top:0;overflow:visible}
+.ln{fill:none;stroke-linecap:round;transition:stroke-width .25s, opacity .3s}
+.ln.draw{transition:stroke-dashoffset .6s ease-out, stroke-width .25s, opacity .3s}
+.ln.sel{stroke-dasharray:6 6!important;animation:flow .6s linear infinite}
+@keyframes flow{to{stroke-dashoffset:-12}}
+.nd{position:absolute;border:0;padding:0;background:none;cursor:pointer;color:inherit;transition:left .65s cubic-bezier(.3,.7,.2,1),top .65s cubic-bezier(.3,.7,.2,1),width .65s cubic-bezier(.3,.7,.2,1),opacity .4s,filter .3s}
+.nd img{display:block;width:100%;height:100%;object-fit:cover;border-radius:3px;box-shadow:0 4px 12px #000a;transition:box-shadow .25s, transform .25s}
+.nd .box{display:block;width:100%;transition:height .65s cubic-bezier(.3,.7,.2,1)}
+.nd .lb{position:absolute;left:50%;top:100%;transform:translateX(-50%);margin-top:4px;width:84px;font-size:9px;font-weight:700;line-height:1.25;text-align:center;transition:opacity .3s}
+.nd.center .lb{opacity:0}
+.nd.center img{box-shadow:0 0 0 2px #fff,0 0 34px #ffffff40}
+.nd.dim{opacity:.38;filter:saturate(.4)}
+.nd.pick img{transform:translateY(-5px) scale(1.06);box-shadow:0 0 0 2px var(--kc),0 0 26px var(--kc)}
+.nd.back img{filter:grayscale(.7) brightness(.7)}
+.nd:focus-visible{outline:2px solid #fff;outline-offset:3px;border-radius:3px}
+.instant .nd,.instant .nd .box,.instant .ln{transition:none!important}
+
+.sheet{position:absolute;left:0;right:0;bottom:0;height:96px;box-sizing:border-box;background:#eef2f4;color:#0f1419;border-radius:14px 14px 0 0;padding:10px 12px;display:flex;gap:10px;z-index:6;transition:transform .3s}
+.sheet img{width:46px;height:65px;object-fit:cover;border-radius:2px;flex:none}
+.sheet .t{font-weight:700;font-size:12.5px;line-height:1.3}
+.sheet .w{font-size:10px;font-weight:700;margin-top:1px}
+.sheet .c{font-size:10.5px;line-height:1.45;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;margin-top:1px}
+.sheet .go{font:inherit;margin-top:4px;font-size:10.5px;font-weight:700;color:#0f1419;background:var(--kc);border:0;border-radius:12px;padding:1px 10px;cursor:pointer}
+.sheet .go:disabled{background:#cfd6db;color:#5b6570;cursor:default}
+.sheet.bump{transform:translateY(6px)}
+@media (prefers-reduced-motion: reduce){.nd,.nd .box,.ln,.world,.bg .lay,.sheet{transition:none!important;animation:none!important}}
+
+.right{display:flex;flex-direction:column;gap:10px;align-items:center}
+.sw{width:360px;max-width:100%;display:flex;flex-direction:column;gap:6px;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:10px 12px;box-sizing:border-box}
+.swrow{display:flex;align-items:center;gap:8px}
+.swl{flex:none;font-size:12px;font-weight:700;color:var(--accent);width:3.2em}
+.sw .seg button{font-size:12.5px;padding:3px 10px}
+.phone{position:static!important}
+@media (max-width:820px){.right{order:-1}.side{order:2}}
+
+/* 書影の背景バリエーション(判別できる程度に) */
+.cvbase{position:absolute;inset:0;background:#07090d}
+.cv{background-size:cover;background-position:center}
+.cv-soft{filter:blur(5px) brightness(.5) saturate(1.2);transform:scale(1.1)}
+.cv-dark{filter:brightness(.5) saturate(1.1)}
+.cv-tone{filter:brightness(.8) contrast(1.15) saturate(1.1)}
+.cv-mono{filter:grayscale(1) contrast(1.5) brightness(.5)}
+.cv-side{inset:0!important;background-size:auto 112%;background-position:right 30%;filter:brightness(.62) saturate(1.15);-webkit-mask-image:linear-gradient(100deg,transparent 8%,#000 62%);mask-image:linear-gradient(100deg,transparent 8%,#000 62%)}
+.vig{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse at 50% 48%,#0000 0%,#0000 25%,#000b 100%)}
+.tone{position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle,#0000 1.05px,#05070bd9 1.55px) 0 0/5px 5px}
+
+.units{position:absolute;left:0;right:0;top:552px;height:30px;display:flex;align-items:center;gap:5px;padding:0 10px;overflow-x:auto;scrollbar-width:none;z-index:5}
+.units::-webkit-scrollbar{display:none}
+.ul{flex:none;font-size:10px;color:#0b0e14;background:#e6ecf0;border-radius:12px;padding:1px 8px;font-weight:700}
+.ul:empty{display:none}
+.units{background:linear-gradient(transparent,#070a0ecc 40%)}
+.uc{flex:none;font:inherit;font-size:10px;border:1px solid var(--c,#ffffff55);color:var(--c,#fff);background:#0b0e14d9;border-radius:12px;padding:1px 8px;cursor:pointer;white-space:nowrap}
+.uc i{font-style:normal;opacity:.7;margin-left:4px;font-size:9px}
+.uc.on{background:var(--c);color:#0b0e14;font-weight:700}
+.uc.x{--c:#e6ecf0}
+.nd.sm img{box-shadow:0 2px 6px #000c;border-radius:2px}
+.nd.sm.pick img{transform:translateY(-3px) scale(1.12)}
+.toast{position:absolute;left:50%;top:108px;transform:translateX(-50%);z-index:7;font-size:10.5px;font-weight:700;color:#0b0e14;background:#e6ecf0e6;border-radius:12px;padding:2px 10px;white-space:nowrap;opacity:0;transition:opacity .3s;pointer-events:none}
+</style>
+
+<div class="wrap">
+<div class="side">
+  <h1>羅針盤の試作 — 背景と選んだときの動き</h1>
+  <p>画面は実際に触れます。 すぐ上の「背景」「動き」のボタンで切り替えられます。 周りの本に触れると糸が光って選ばれ、もう一度触れるか下の「〜の糸で進む」で、その本が新しい中心になります。 上の旅路の本に触れると、そこまで戻ります。</p>
+  <p>データは本番索引から計算した実物(約束のネバーランドから2歩分)。 下の「広げる ▸」のチップ(作者・雑誌・年・要素ごと)に触れると、その糸の本が最大24冊まで広がります。 広げた本のうち見本に含めていない先へは進めません。</p>
+
+  <div class="ctl"><h2>いま選んでいる背景</h2><div class="expl" id="bgExpl"></div></div>
+  <div class="ctl"><h2>いま選んでいる動き</h2><div class="expl" id="mvExpl"></div></div>
+  <div class="ctl"><h2>いま選んでいる広げ方</h2><div class="expl" id="layExpl"></div></div>
+  <div class="ctl"><h2>網点の出方(背景が「書影・網点」の時)</h2><div class="expl" id="toneExpl"></div></div>
+
+  <ol class="flow">
+    <li><b>触れる</b>: その本の糸が糸の色で光って流れ、ほかの本は沈む。 下のシートがその本の紹介と「〈種類〉の糸で進む」に変わる。</li>
+    <li><b>もう一度触れる/進む</b>: 選んだ動きで移動。 前の中心は、来た方向の反対側に灰色の「来た道」として残る。</li>
+    <li><b>上の色チップ</b>: 糸の種類を切ると、その方角の本が消える。</li>
+    <li><b>旅路の本</b>: 触れるとそこまで戻る。</li>
+  </ol>
+</div>
+<div class="right">
+<div class="sw">
+  <div class="swrow"><span class="swl">背景</span><div class="seg" id="bgSeg"></div></div>
+  <div class="swrow"><span class="swl">動き</span><div class="seg" id="mvSeg"></div></div>
+  <div class="swrow"><span class="swl">広げ方</span><div class="seg" id="laySeg"></div></div>
+  <div class="swrow"><span class="swl">網点</span><div class="seg" id="toneSeg"></div></div>
+</div>
+<div class="phone"><div class="scr" id="app">
+  <div class="bg" id="bg"></div>
+  <div class="flash" id="flash"></div>
+  <div class="toast" id="toast"></div>
+  <div class="top" id="top"></div>
+  <div class="hist" id="hist"></div>
+  <div class="stage" id="stage"><div class="world" id="world"><svg id="svg" width="340" height="484"></svg></div></div>
+  <div class="units" id="units"></div>
+  <div class="sheet" id="sheet"></div>
+</div></div>
+</div>
+</div>
+
+<script>
+const G = __DATA__;
+const KC={author:"#f2c14e",mag:"#4fc28e",year:"#c792ff",elem:"#6ea8ff",back:"#8a96a0"};
+const KN={author:"作者",mag:"同じ雑誌",year:"同じ年",elem:"要素",back:"来た道"};
+const ANG={author:[-90,-70],mag:[-20,20],year:[70,110],elem:[160,200]};
+const CX=170, CY=242, RX=118, RY=150, CW=76, CH=106, NW=48, NH=67;
+const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const $=id=>document.getElementById(id);
+const S={cur:G.start, path:[{id:G.start,kind:null}], sel:null, off:new Set(), bg:"cvtone", mv:"pan", backAng:null, prev:null};
+const dom=new Map();
+let busy=false;
+
+/* ---------- 背景 ---------- */
+const BG={
+  sky:{name:"夜空",expl:"濃紺の夜空に2層の星。 進むたびに星が進行方向と逆へ流れる(奥の層はゆっくり)=移動している感覚。"},
+  neb:{name:"星雲(糸の色)",expl:"暗い空に大きな色の雲。 雲の色は「最後にたどった糸の色」(作者=金・雑誌=緑・年=紫・要素=青)に1秒かけて変わる。 旅の気分が色で残る。"},
+  cvsoft:{name:"書影・薄い滲み",expl:"ぼかしを前回の約1/5(5px)に弱めて暗くしたもの。 人物や色の配置は分かり、文字は読めない程度。 周りの本の邪魔をしない一番穏当な案。"},
+  cvdark:{name:"書影・暗幕",expl:"ぼかし無し。 書影を画面いっぱいに敷いて半分の明るさにし、周囲を暗く落とす(映画ポスター風)。 何の本かは一目で分かるが、書影の解像度(300px)を引き伸ばすので細部は甘い。"},
+  cvtone:{name:"書影・網点",expl:"書影の上に細かいスクリーントーン(網点)を重ねる。 網の目から絵が透けて見える=漫画の原稿らしさ。 判別できて、しかも前景の本と混ざらない。"},
+  cvmono:{name:"書影・モノクロ原稿",expl:"白黒・高コントラストにして暗く。 色が消えるので糸の色(金・緑・紫・青)が一番映える。 モノクロの漫画原稿を広げた上で旅をする見立て。"},
+  cvside:{name:"書影・片側",expl:"書影を右側にくっきり置き、左へ向かって闇に溶かす(キービジュアル風)。 ぼかさず判別できるが、画面の左半分は暗い地のまま。"},
+  chart:{name:"海図",expl:"紺の方眼に、中心から同心円と方位の目盛り。 羅針盤という見立てに一番素直。 進むと方眼が流れて、航海している感覚。"},
+};
+let bgShift={x:0,y:0};
+function buildBg(){
+  const b=$("bg"); b.innerHTML="";
+  if(S.bg==="sky"){ b.innerHTML=`<div class="lay skyg" style="inset:0"></div><div class="lay st2" id="L2"></div><div class="lay st1" id="L1"></div>`; }
+  if(S.bg==="neb"){ b.innerHTML=`<div class="lay skyg" style="inset:0;background:#07090f"></div><div class="lay st2" id="L2" style="opacity:.6"></div>`; setNeb(lastKind()); }
+  if(S.bg==="cvtone"){ buildTone(); } else if(S.bg.startsWith("cv")){ b.innerHTML=`<div class="cvbase"></div>`; setCoverBg(); }
+  if(S.bg==="chart"){ b.innerHTML=`<div class="lay chartg" id="L1"></div>`+rose(); }
+  applyShift(false);
+}
+function rose(){
+  let s=`<svg class="rose" viewBox="0 0 340 484" aria-hidden="true">`;
+  for(const r of [80,150,220]) s+=`<circle cx="${CX}" cy="${CY}" r="${r}" fill="none" stroke="#ffffff14"/>`;
+  for(let a=0;a<360;a+=10){const t=a*Math.PI/180,r1=a%90===0?205:214;s+=`<line x1="${CX+r1*Math.cos(t)}" y1="${CY+r1*Math.sin(t)}" x2="${CX+220*Math.cos(t)}" y2="${CY+220*Math.sin(t)}" stroke="#ffffff22"/>`;}
+  s+=`<text x="${CX}" y="${CY-226}" fill="#ffffff40" font-size="10" text-anchor="middle">N</text></svg>`;
+  return s;
+}
+function lastKind(){ for(let i=S.path.length-1;i>=0;i--) if(S.path[i].kind) return S.path[i].kind; return null; }
+function setNeb(kind){
+  const b=$("bg"); const c=kind?KC[kind]:"#4a5a8a";
+  const d=document.createElement("div"); d.className="lay neb";
+  d.style.background=`radial-gradient(circle at 30% 35%,${c}55 0,transparent 45%),radial-gradient(circle at 75% 70%,${c}40 0,transparent 50%),radial-gradient(circle at 60% 20%,#ffffff10 0,transparent 30%)`;
+  d.style.opacity=0; b.appendChild(d); requestAnimationFrame(()=>requestAnimationFrame(()=>d.style.opacity=1));
+  const olds=[...b.querySelectorAll(".neb")].slice(0,-1); setTimeout(()=>olds.forEach(o=>o.remove()),1100);
+}
+function setCoverBg(){
+  const b=$("bg"); const v=S.bg.slice(2); // soft/dark/tone/mono/side
+  const g=document.createElement("div"); g.className="cvgrp"; g.style.cssText="position:absolute;inset:0;opacity:0;transition:opacity 1s";
+  g.innerHTML=`<div class="lay cv cv-${v}" style="background-image:url(${G.nodes[S.cur].img})"></div>`+(v==="tone"?`<div class="tone"></div>`:"")+(v!=="side"?`<div class="vig"></div>`:"");
+  b.appendChild(g); requestAnimationFrame(()=>requestAnimationFrame(()=>g.style.opacity=1));
+  const olds=[...b.querySelectorAll(".cvgrp")].slice(0,-1); setTimeout(()=>olds.forEach(o=>o.remove()),1100);
+}
+function applyShift(anim=true){
+  const L1=$("L1"),L2=$("L2");
+  if(L1){L1.style.transition=anim?"":"none";L1.style.transform=`translate(${bgShift.x%180}px,${bgShift.y%190}px)`;}
+  if(L2){L2.style.transition=anim?"":"none";L2.style.transform=`translate(${(bgShift.x*.4)%150}px,${(bgShift.y*.4)%170}px)`;}
+}
+function bgOnTravel(dx,dy,kind){
+  bgShift.x+=dx*.6; bgShift.y+=dy*.6;
+  if(S.bg==="sky"||S.bg==="chart"||S.bg==="neb") applyShift(true);
+  if(S.bg==="neb") setNeb(kind);
+  if(S.bg==="cvtone") toneTo(info(S.cur).img); else if(S.bg.startsWith("cv")) setCoverBg();
+}
+
+/* ---------- 配置 ---------- */
+function layout(){
+  const edges=(G.edges[S.cur]||[]).filter(e=>G.nodes[e.id]);
+  const used={author:0,mag:0,year:0,elem:0}; const out=[];
+  for(const e of edges){ const a=ANG[e.kind][used[e.kind]++]; if(a===undefined) continue;
+    out.push({...e,ang:a,back:e.id===S.prev}); }
+  if(S.prev && !out.some(o=>o.id===S.prev)){
+    let a=S.backAng??135; // 来た方向の反対側。 既存の枠と近すぎれば少しずらす
+    for(let k=0;k<6 && out.some(o=>Math.abs(((o.ang-a+540)%360)-180)>155);k++) a+=25;
+    out.push({id:S.prev,kind:"back",why:"来た道",ang:a,back:true});
+  }
+  for(const o of out){const t=o.ang*Math.PI/180;o.x=CX+RX*Math.cos(t);o.y=CY+RY*Math.sin(t);}
+  return out;
+}
+function nodeEl(id){
+  let el=dom.get(id); if(el) return el;
+  el=document.createElement("button"); el.className="nd"; el.dataset.id=id;
+  el.innerHTML=`<span class="box"><img src="${G.nodes[id].img}" alt="${esc(G.nodes[id].title)}"></span><span class="lb"></span>`;
+  el.addEventListener("click",()=>onTap(id));
+  $("world").appendChild(el); dom.set(id,el); return el;
+}
+function put(el,x,y,w,h){ el.style.left=(x-w/2)+"px"; el.style.top=(y-h/2)+"px"; el.style.width=w+"px"; el.querySelector(".box").style.height=h+"px"; }
+let L=[];
+function render(opts={}){
+  const {spreadFrom=null, stagger=true}=opts;
+  L=layout(); const keep=new Set([S.cur,...L.map(o=>o.id)]);
+  for(const [id,el] of dom) if(!keep.has(id)){ el.style.opacity=0; el.style.pointerEvents="none"; dom.delete(id); setTimeout(()=>el.remove(),450); }
+  const c=nodeEl(S.cur); c.classList.add("center"); c.classList.remove("back","dim","pick"); c.style.opacity=1; c.style.pointerEvents=""; put(c,CX,CY,CW,CH);
+  L.forEach((o,i)=>{
+    const fresh=!dom.has(o.id); const el=nodeEl(o.id);
+    el.classList.remove("center","pick","dim"); el.classList.toggle("back",o.back);
+    el.style.setProperty("--kc",KC[o.back?"back":o.kind]);
+    const lb=el.querySelector(".lb"); lb.textContent=o.back?"← 来た道":o.why; lb.style.color=KC[o.back?"back":o.kind];
+    const hidden=!o.back && S.off.has(o.kind);
+    if(fresh){
+      const f=spreadFrom||{x:o.x,y:o.y}; el.style.transition="none"; el.style.opacity=0; put(el,f.x,f.y,spreadFrom?16:NW,spreadFrom?22:NH);
+      el.getBoundingClientRect(); el.style.transition="";
+      setTimeout(()=>{ put(el,o.x,o.y,NW,NH); el.style.opacity=hidden?0:1; el.style.pointerEvents=hidden?"none":""; }, reduce?0:(stagger?120+i*55:0));
+    } else { put(el,o.x,o.y,NW,NH); el.style.opacity=hidden?0:1; el.style.pointerEvents=hidden?"none":""; }
+  });
+  drawLines(opts.lineDelay??(spreadFrom?260:0));
+  drawSheet(); drawHist(); drawTop(); drawUnits();
+}
+function drawLines(delay=0){
+  const svg=$("svg"); svg.innerHTML="";
+  for(const o of L){
+    const hidden=!o.back && S.off.has(o.kind);
+    const len=Math.hypot(o.x-CX,o.y-CY);
+    const ln=document.createElementNS("http://www.w3.org/2000/svg","line");
+    ln.setAttribute("x1",CX);ln.setAttribute("y1",CY);ln.setAttribute("x2",o.x);ln.setAttribute("y2",o.y);
+    ln.setAttribute("class","ln");ln.dataset.id=o.id;
+    ln.style.stroke=KC[o.back?"back":o.kind]; ln.style.strokeWidth=o.back?1.4:2.2; ln.style.opacity=hidden?0:(o.back?.7:.9);
+    if(o.back) ln.style.strokeDasharray="3 5";
+    else if(delay>0 && !reduce){ ln.style.strokeDasharray=len; ln.style.strokeDashoffset=len; ln.classList.add("draw");
+      setTimeout(()=>{ln.style.strokeDashoffset=0;},delay+20); setTimeout(()=>{ln.classList.remove("draw");ln.style.strokeDasharray="";},delay+700); }
+    svg.appendChild(ln);
+  }
+}
+/* ---------- 選ぶ ---------- */
+function onTap(id){
+  if(busy) return;
+  if(id===S.cur){ S.sel=null; if(S.exp){ for(const el of xdom.values()) el.classList.remove("pick","dim"); $("svg").querySelectorAll(".xsel").forEach(l=>l.remove()); } else markSel(); drawSheet(); return; }
+  if(S.sel===id){ go(id); return; }
+  S.sel=id; markSel(); drawSheet(true);
+}
+function markSel(){
+  for(const [id,el] of dom){ if(id===S.cur) continue; el.classList.toggle("pick",id===S.sel); el.classList.toggle("dim",!!S.sel && id!==S.sel); }
+  document.querySelectorAll(".ln").forEach(l=>{ const on=l.dataset.id===S.sel; l.classList.toggle("sel",on); l.style.strokeWidth=on?3.4:(S.sel?1.2:(l.style.strokeDasharray?1.4:2.2)); });
+}
+function drawSheet(bump){
+  const sh=$("sheet"); let id,k=null,w,btn="",can=false;
+  if(S.exp){ const u=curUnit();
+    if(S.sel){ const it=u.items.find(i=>i.id===S.sel); id=S.sel; k=u.kind; can=!!G.edges[id];
+      w=`${KN[k]} — ${u.label}${it&&it.sh?` ・ 共通の要素${it.sh}つ`:""}`;
+      btn=`<button class="go" id="goBtn" ${can?"":"disabled"}>${can?`〈${esc(u.label)}〉の糸で進む →`:"この先は見本に含めていません"}</button>`;
+    } else { id=S.cur; k=u.kind; w=`「${u.label}」の糸を広げています(${u.items.length}冊) ・ 本に触れて選ぶ`; }
+  } else {
+    const o=S.sel?L.find(x=>x.id===S.sel):null; id=o?o.id:S.cur; k=o?(o.back?"back":o.kind):null;
+    can=!!(o&&(G.edges[id]||o.back));
+    if(o) btn=`<button class="go" id="goBtn" ${can?"":"disabled"}>${can?(o.back?"来た道を戻る ←":`〈${KN[k]}〉の糸で進む →`):"この先は見本に含めていません"}</button>`;
+    w=o?(o.back?"来た道":KN[k]+" — "+o.why):"いまの中心 ・ 周りの本に触れるか、下の「広げる」から糸を選ぶ";
+  }
+  const n=info(id); const col=k?(k==="back"?"#5b6570":KC[k].replace("f2c14e","b8860b")):"#5b6570";
+  sh.style.setProperty("--kc",k?KC[k]:"#cfd6db");
+  sh.innerHTML=`<img src="${n.img}" alt=""><div style="min-width:0"><div class="t">${esc(n.title)}</div><div class="w" style="color:${col}">${esc(w)}</div><div class="c">${esc(n.catch||"(紹介文はまだありません)")}</div>${btn}</div>`;
+  const b=$("goBtn"); if(b&&can) b.onclick=()=>(S.exp?goX(id):go(id));
+  if(bump&&!reduce){sh.classList.add("bump");setTimeout(()=>sh.classList.remove("bump"),160);}
+}
+function drawTop(){
+  const t=$("top"); t.innerHTML=["author","mag","year","elem"].map(k=>`<button class="chip ${S.off.has(k)?"":"on"}" style="--c:${KC[k]}" data-k="${k}" aria-pressed="${!S.off.has(k)}">${KN[k]}</button>`).join("")+`<span class="sv">旅を保存</span>`;
+  t.querySelectorAll(".chip").forEach(b=>b.onclick=()=>{if(S.exp) return; const k=b.dataset.k; S.off.has(k)?S.off.delete(k):S.off.add(k); if(S.sel&&L.find(o=>o.id===S.sel&&o.kind===k)) S.sel=null; render(); markSel();});
+}
+function drawHist(){
+  const h=$("hist"); let s="";
+  S.path.forEach((p,i)=>{ if(i>0) s+=`<span class="s" style="background:${KC[p.kind]||KC.back}"></span>`;
+    s+=`<button class="${i===S.path.length-1?"now":""}" data-i="${i}" aria-label="${esc(G.nodes[p.id].title)}へ戻る"><img src="${G.nodes[p.id].img}" alt=""></button>`; });
+  s+=`<span class="s" style="background:repeating-linear-gradient(90deg,#ffffff55 0 4px,transparent 4px 8px)"></span><span class="q">?</span>`;
+  h.innerHTML=s; h.scrollLeft=h.scrollWidth;
+  h.querySelectorAll("button").forEach(b=>b.onclick=()=>{const i=+b.dataset.i; if(i===S.path.length-1||busy) return; if(S.exp){ closeExp(true); const c=dom.get(S.cur); if(c) put(c,CX,CY,CW,CH); } jumpBack(i);});
+}
+/* ---------- 進む ---------- */
+function go(id){
+  const o=L.find(x=>x.id===id); if(!o||busy) return;
+  if(!G.edges[id] && !o.back) return;
+  const kind=o.back?"back":o.kind;
+  if(o.back && S.path.length>1 && S.path[S.path.length-2].id===id){ jumpBack(S.path.length-2); return; }
+  travel(id,o,kind,()=>S.path.push({id,kind}));
+}
+function jumpBack(i){
+  const id=S.path[i].id; const o=L.find(x=>x.id===id)||{x:CX-RX,y:CY,ang:180};
+  travel(id,o,"back",()=>{S.path=S.path.slice(0,i+1);});
+}
+function travel(id,o,kind,commit){
+  busy=true; const from=S.cur; const dx=CX-o.x, dy=CY-o.y;
+  const ang=Math.atan2(o.y-CY,o.x-CX)*180/Math.PI;
+  const after=()=>{ S.prev=from; S.cur=id; S.sel=null; S.backAng=ang+180; commit(); };
+  flash(kind);
+  if(reduce){ after(); render(); bgOnTravel(dx,dy,kind); busy=false; return; }
+  if(S.mv==="pull"){
+    after(); bgOnTravel(dx,dy,kind);
+    render({spreadFrom:{x:CX,y:CY}});
+    setTimeout(()=>busy=false,800);
+  } else if(S.mv==="pan"){
+    const w=$("world"); w.style.transform=`translate(${dx}px,${dy}px)`; bgOnTravel(dx,dy,kind);
+    for(const [nid,el] of dom) if(nid!==id && nid!==from){ el.style.opacity=0; }
+    $("svg").querySelectorAll(".ln").forEach(l=>{ if(l.dataset.id!==id) l.style.opacity=0; });
+    setTimeout(()=>{
+      $("stage").classList.add("instant");
+      w.style.transition="none"; w.style.transform="none";
+      for(const [nid,el] of dom){ el.style.left=(parseFloat(el.style.left)+dx)+"px"; el.style.top=(parseFloat(el.style.top)+dy)+"px"; }
+      w.getBoundingClientRect(); w.style.transition=""; $("stage").classList.remove("instant");
+      after(); render({lineDelay:200});
+      setTimeout(()=>busy=false,700);
+    },760);
+  } else { // warp
+    const w=$("world"); w.classList.add("warp-out");
+    setTimeout(()=>{
+      after(); bgOnTravel(dx,dy,kind);
+      $("stage").classList.add("instant"); render({stagger:false}); w.getBoundingClientRect(); $("stage").classList.remove("instant");
+      w.classList.remove("warp-out"); w.classList.add("warp-pre"); w.getBoundingClientRect();
+      w.classList.remove("warp-pre"); drawLines(300);
+      setTimeout(()=>busy=false,600);
+    },360);
+  }
+}
+function flash(kind){ if(reduce) return; const f=$("flash"); f.style.background=`radial-gradient(circle at 50% 50%,${KC[kind]}33,transparent 70%)`; f.style.opacity=1; setTimeout(()=>f.style.opacity=0,300); }
+
+
+/* ================= 糸を広げる(3アクション) ================= */
+const info=id=>G.nodes[id]||G.small[id];
+S.exp=null; S.lay="fan";
+const LAYS={
+  fan:{name:"方角に扇",expl:"広げた糸の方角(作者=北・雑誌=東・年=南・要素=西)に、扇形で3列。 近い本(共通の要素が多い)ほど内側で大きい。 どの糸を広げても出る場所が決まっている=固定配置。"},
+  ring:{name:"同心円",expl:"広げた糸が画面を独占し、中心の周りに3重の輪。 内側の輪ほど近い本。 方角の意味は消えるが、一番すっきり・一番多く見える。"},
+  time:{name:"年表",expl:"横軸=連載開始の年(左が古い)で固定。 同じ年代の本は下から積み上がる(下ほど近い本)。 中心の本は上に移り、その年の位置に点線。 「この要素の本はいつ頃のものが多いか」まで見える。"},
+  dust:{name:"星屑",expl:"決まった種(毎回同じ)で散らしたランダム配置。 重ならないように間隔を空け、近い本ほど大きく内側。 整いすぎない分、宝探しの感じが出る。"},
+};
+const DIR={author:-90,mag:0,year:90,elem:180};
+const xdom=new Map();
+const curUnits=()=>G.expand[S.cur]||[];
+const curUnit=()=>curUnits().find(u=>u.key===S.exp);
+function rng(seed){let a=0;for(const c of seed)a=(a*31+c.charCodeAt(0))|0;return()=>{a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;};}
+function expPositions(u){
+  const it=u.items, P=[]; const SZ=[[34,48],[30,42],[26,36]];
+  if(S.lay==="fan"||S.lay==="ring"){
+    const counts=S.lay==="fan"?[5,8,11]:[6,9,9], radii=[92,132,170];
+    let k=0;
+    counts.forEach((n,ring)=>{ const m=Math.min(n,it.length-k); if(m<=0) return;
+      for(let j=0;j<m;j++,k++){
+        let a;
+        if(S.lay==="fan"){ const span=m===1?0:140; a=DIR[u.kind]-span/2+(m===1?0:span*j/(m-1)); }
+        else a=-90+360*(j+(ring%2?.5:0))/m;
+        const t=a*Math.PI/180; P.push({id:it[k].id,x:CX+radii[ring]*.8*Math.cos(t),y:CY+radii[ring]*1.1*Math.sin(t),w:SZ[ring][0],h:SZ[ring][1]});
+      }});
+    return {P,center:{x:CX,y:CY,w:60,h:84}};
+  }
+  if(S.lay==="dust"){
+    const r=rng(u.key); const bands=[[80,118],[118,148],[148,176]];
+    it.forEach((x,i)=>{ const b=i<8?0:i<16?1:2; const [w,h]=SZ[b];
+      for(let tries=0;tries<300;tries++){ const a=r()*Math.PI*2, rr=bands[b][0]+r()*(bands[b][1]-bands[b][0]);
+        const px=CX+rr*.82*Math.cos(a), py=CY+rr*1.12*Math.sin(a);
+        if(px-w/2<4||px+w/2>336||py-h/2<4||py+h/2>446) continue;
+        if(P.some(q=>Math.abs(q.x-px)<(q.w+w)/2+4&&Math.abs(q.y-py)<(q.h+h)/2+4)) continue;
+        P.push({id:x.id,x:px,y:py,w,h}); break; } });
+    return {P,center:{x:CX,y:CY,w:60,h:84}};
+  }
+  // time
+  const ys=it.map(x=>info(x.id).year).concat([info(S.cur).year]).filter(Boolean);
+  const lo=Math.min(...ys), hi=Math.max(...ys); const X=y=>24+(hi===lo?.5:(y-lo)/(hi-lo))*292;
+  const cols=new Map();
+  it.forEach(x=>{ const y=info(x.id).year; if(!y) return; const c=Math.round((X(y)-24)/29); const n=cols.get(c)||0; cols.set(c,n+1);
+    if(n>6) return; P.push({id:x.id,x:24+c*29,y:392-n*47,w:27,h:38}); });
+  const ticks=[]; const step=Math.max(1,Math.ceil((hi-lo)/5));
+  for(let y=lo;y<=hi;y+=step) ticks.push({y,x:X(y)});
+  return {P,center:{x:X(info(S.cur).year),y:52,w:44,h:62},ticks,axisY:420};
+}
+function openExp(key){
+  if(busy) return;
+  S.exp=key; S.sel=null; placeExp(true); drawUnits(); drawSheet(true);
+}
+function placeExp(fresh){
+  const u=curUnit(); const {P,center,ticks,axisY}=expPositions(u);
+  for(const [id,el] of dom){ if(id===S.cur) continue; el.style.opacity=0; el.style.pointerEvents="none"; }
+  const c=dom.get(S.cur); if(c) put(c,center.x,center.y,center.w,center.h);
+  const keep=new Set(P.map(p=>p.id));
+  for(const [id,el] of xdom) if(!keep.has(id)){ el.style.opacity=0; xdom.delete(id); setTimeout(()=>el.remove(),450); }
+  P.forEach((p,i)=>{
+    let el=xdom.get(p.id), isNew=!el;
+    if(isNew){ el=document.createElement("button"); el.className="nd sm"; el.innerHTML=`<span class="box"><img src="${info(p.id).img}" alt="${esc(info(p.id).title)}"></span>`;
+      el.addEventListener("click",()=>onTapX(p.id)); $("world").appendChild(el); xdom.set(p.id,el);
+      el.style.transition="none"; el.style.opacity=0; put(el,center.x,center.y,10,14); el.getBoundingClientRect(); el.style.transition=""; }
+    el.style.setProperty("--kc",KC[u.kind]); el.classList.remove("pick","dim");
+    setTimeout(()=>{ put(el,p.x,p.y,p.w,p.h); el.style.opacity=1; }, reduce||!isNew?0:40+i*18);
+  });
+  const svg=$("svg"); svg.innerHTML="";
+  if(ticks){ let s=`<line x1="12" y1="${axisY}" x2="328" y2="${axisY}" stroke="${KC[u.kind]}" stroke-opacity=".6"/>`;
+    for(const t of ticks) s+=`<line x1="${t.x}" y1="${axisY}" x2="${t.x}" y2="${axisY+5}" stroke="#ffffff66"/><text x="${t.x}" y="${axisY+16}" fill="#ffffffaa" font-size="9" text-anchor="middle">${t.y}</text>`;
+    s+=`<line x1="${center.x}" y1="${center.y+center.h/2+4}" x2="${center.x}" y2="${axisY}" stroke="#ffffff88" stroke-dasharray="3 4"/>`;
+    svg.innerHTML=s; }
+  S._center=center;
+}
+function closeExp(noRender){
+  S.exp=null; S.sel=null;
+  for(const [id,el] of xdom){ el.style.opacity=0; el.style.pointerEvents="none"; setTimeout(()=>el.remove(),450); }
+  xdom.clear();
+  if(!noRender){ render(); markSel(); }
+}
+function onTapX(id){
+  if(busy) return;
+  if(S.sel===id){ goX(id); return; }
+  S.sel=id;
+  for(const [xid,el] of xdom){ el.classList.toggle("pick",xid===id); el.classList.toggle("dim",xid!==id); }
+  const svg=$("svg"); svg.querySelectorAll(".xsel").forEach(l=>l.remove());
+  if(S.lay!=="time"){ const el=xdom.get(id); const x=parseFloat(el.style.left)+parseFloat(el.style.width)/2, y=parseFloat(el.style.top)+el.querySelector(".box").offsetHeight/2;
+    svg.insertAdjacentHTML("afterbegin",`<line class="xsel ln sel" x1="${CX}" y1="${CY}" x2="${x}" y2="${y}" style="stroke:${KC[curUnit().kind]};stroke-width:2.6"/>`); }
+  drawSheet(true);
+}
+function goX(id){
+  if(!G.edges[id]) return;
+  const u=curUnit(); const el=xdom.get(id);
+  const o={x:parseFloat(el.style.left)+parseFloat(el.style.width)/2,y:parseFloat(el.style.top)+el.querySelector(".box").offsetHeight/2};
+  closeExp(true);
+  const c=dom.get(S.cur); if(c) put(c,CX,CY,CW,CH);
+  travel(id,o,u.kind,()=>S.path.push({id,kind:u.kind}));
+}
+function drawUnits(){
+  const box=$("units"); const us=curUnits();
+  let s=`<span class="ul">${S.exp?"":"広げる ▸"}</span>`;
+  if(S.exp) s+=`<button class="uc x" data-k="">✕ 閉じる</button>`;
+  s+=us.map(u=>`<button class="uc${S.exp===u.key?" on":""}" style="--c:${KC[u.kind]}" data-k="${esc(u.key)}">${esc(u.label)}<i>${u.items.length}</i></button>`).join("");
+  if(!us.length) s+=`<span class="ul">この本の糸は見本に含めていません</span>`;
+  box.innerHTML=s;
+  box.querySelectorAll("button").forEach(b=>b.onclick=()=>{ const k=b.dataset.k; if(!k||k===S.exp){ closeExp(); drawUnits(); drawSheet(); } else openExp(k); });
+}
+
+
+/* ================= 網点(点ごとに描く)と出方 ================= */
+const TONES={
+  random:{name:"ランダム",expl:"切り替わるたびに下の出方から1つを選ぶ(同じものは続けない)。 選ばれた出方は画面上に一瞬出る。"},
+  inner:{name:"内周から",expl:"中心の本のまわりから外へ、波紋のように点が入れ替わる。"},
+  outer:{name:"外周から",expl:"画面の縁から中心へ、包み込むように点が入れ替わる。"},
+  outerSpin:{name:"外周から回る",expl:"縁から中心へ、3周の渦を巻きながら入れ替わる。"},
+  innerSpin:{name:"内周から回る",expl:"中心から縁へ、3周の渦を巻きながら入れ替わる。"},
+  scatter:{name:"ばらばら",expl:"点がランダムな順に1つずつ入れ替わる(砂が落ちるよう)。"},
+  radar:{name:"時計回り",expl:"真上から時計回りに、レーダーの針が1周して入れ替える。"},
+  radarCcw:{name:"反時計回り",expl:"真上から反時計回りに、針が1周して入れ替える。"},
+  diagonal:{name:"左上から",expl:"左上から右下へ、斜めの帯が走って入れ替える。"},
+  diagTR:{name:"右上から",expl:"右上から左下へ、斜めの帯が走って入れ替える。"},
+  diagBL:{name:"左下から",expl:"左下から右上へ、斜めの帯が走って入れ替える。"},
+  diagBR:{name:"右下から",expl:"右下から左上へ、斜めの帯が走って入れ替える。"},
+};
+S.tone="random";
+const TONE={step:6,R:2.35,cols:0,rows:0,cur:null,old:null,order:null,t0:0,raf:0,last:null,seq:0};
+const TONE_MS=1000, TONE_SPAN=.32; // 全体1秒・1つの点は全体の32%の時間で入れ替わる
+function toneCanvas(){ return document.getElementById("toneCv"); }
+function sampleCover(src){
+  return new Promise(res=>{ const im=new Image(); im.onload=()=>{
+    try{
+      const c=document.createElement("canvas"); c.width=TONE.cols; c.height=TONE.rows; const x=c.getContext("2d");
+      const W=TONE.cols, H=TONE.rows, s=Math.max(W/im.width,H/im.height), w=im.width*s, h=im.height*s;
+      x.drawImage(im,(W-w)/2,(H-h)/2,w,h);
+      const d=x.getImageData(0,0,W,H).data, out=new Array(W*H);
+      for(let i=0;i<W*H;i++){ let r=d[i*4],g=d[i*4+1],b=d[i*4+2]; const l=.3*r+.59*g+.11*b;
+        r=Math.min(255,(l+(r-l)*1.25)*.82); g=Math.min(255,(l+(g-l)*1.25)*.82); b=Math.min(255,(l+(b-l)*1.25)*.82);
+        out[i]=`rgb(${r|0},${g|0},${b|0})`; }
+      res(out);
+    }catch(e){ res(null); } }; im.onerror=()=>res(null); im.src=src; });
+}
+function toneOrder(kind){
+  const W=TONE.cols,H=TONE.rows, cx=170/TONE.step, cy=342/TONE.step; let maxD=0; const o=new Float32Array(W*H);
+  for(let j=0;j<H;j++) for(let i=0;i<W;i++){ maxD=Math.max(maxD,Math.hypot(i-cx,j-cy)); }
+  const r=rng("tone"+(TONE.seq++));
+  for(let j=0;j<H;j++) for(let i=0;i<W;i++){
+    const d=Math.hypot(i-cx,j-cy)/maxD, a=((Math.atan2(j-cy,i-cx)+Math.PI/2+Math.PI*4)%(Math.PI*2))/(Math.PI*2);
+    let v;
+    switch(kind){
+      case "inner": v=d; break;
+      case "outer": v=1-d; break;
+      case "outerSpin": v=((1-d)*3+a)/4; break;
+      case "innerSpin": v=(d*3+a)/4; break;
+      case "scatter": v=r(); break;
+      case "radar": v=a; break;
+      case "radarCcw": v=a===0?0:1-a; break;
+      case "diagTR": v=((W-1-i)/W+j/H)/2; break;
+      case "diagBL": v=(i/W+(H-1-j)/H)/2; break;
+      case "diagBR": v=((W-1-i)/W+(H-1-j)/H)/2; break;
+      default: v=(i/W+j/H)/2; // diagonal
+    }
+    o[j*W+i]=Math.min(1,Math.max(0,v));
+  }
+  return o;
+}
+function pickTone(){
+  if(S.tone!=="random") return S.tone;
+  const ks=Object.keys(TONES).filter(k=>k!=="random"&&k!==TONE.last);
+  return ks[Math.floor(Math.random()*ks.length)];
+}
+function toneDraw(p){ // p: 0..1 全体の進み(nullなら静止)
+  const cv=toneCanvas(); if(!cv) return; const x=cv.getContext("2d"); const dpr=cv._dpr||1;
+  x.setTransform(dpr,0,0,dpr,0,0); x.fillStyle="#07090d"; x.fillRect(0,0,340,680);
+  const {cols:W,rows:H,step:st,R}=TONE; const TAU=Math.PI*2;
+  for(let j=0;j<H;j++) for(let i=0;i<W;i++){
+    const k=j*W+i, px=i*st+st/2, py=j*st+st/2;
+    let q=1; if(p!==null && TONE.order){ q=(p-TONE.order[k]*(1-TONE_SPAN))/TONE_SPAN; q=q<0?0:q>1?1:q; q=q*q*(3-2*q); }
+    if(TONE.old && q<1){ const rr=R*(1-q); if(rr>.3){ x.fillStyle=TONE.old[k]; x.beginPath(); x.arc(px,py,rr,0,TAU); x.fill(); } }
+    if(TONE.cur && q>0){ const rr=R*q; if(rr>.3){ x.fillStyle=TONE.cur[k]; x.beginPath(); x.arc(px,py,rr,0,TAU); x.fill(); } }
+  }
+}
+function toast(msg){ const t=$("toast"); if(!t) return; t.textContent=msg; t.style.opacity=1; clearTimeout(t._h); t._h=setTimeout(()=>t.style.opacity=0,1300); }
+async function toneTo(src){
+  const cv=toneCanvas(); if(!cv) return;
+  const colors=await sampleCover(src);
+  if(!colors){ return; } // 実サイトで CORS が無い画像は読めない=ここで従来の重ね方式へ落とす(試作では起きない)
+  cancelAnimationFrame(TONE.raf);
+  TONE.old=TONE.cur; TONE.cur=colors;
+  if(reduce){ TONE.old=null; toneDraw(null); return; }
+  const kind=pickTone(); TONE.last=kind; TONE.order=toneOrder(kind);
+  toast("網点の出方: "+TONES[kind].name);
+  TONE.t0=performance.now();
+  const tick=now=>{ const p=Math.min(1,(now-TONE.t0)/TONE_MS); toneDraw(p); if(p<1) TONE.raf=requestAnimationFrame(tick); else { TONE.old=null; } };
+  TONE.raf=requestAnimationFrame(tick);
+}
+function buildTone(){
+  const b=$("bg"); const dpr=Math.min(2,window.devicePixelRatio||1);
+  b.innerHTML=`<div class="cvbase"></div><canvas id="toneCv" width="${340*dpr}" height="${680*dpr}" style="position:absolute;left:0;top:0;width:340px;height:680px"></canvas><div class="vig"></div>`;
+  toneCanvas()._dpr=dpr; TONE.cols=Math.ceil(340/TONE.step); TONE.rows=Math.ceil(680/TONE.step); TONE.cur=null; TONE.old=null;
+  toneTo(G.nodes[S.cur]?G.nodes[S.cur].img:info(S.cur).img);
+}
+
+/* ---------- 切替 ---------- */
+const MV={
+  pull:{name:"引き寄せ",expl:"選んだ本が中心へ吸い寄せられて大きくなり、前の中心は来た方向の反対側へ下がって灰色に。 周りの本は一度消え、新しいつながりが中心から放射状に飛び出して糸が伸びる。"},
+  pan:{name:"糸を手繰る",expl:"画面全体(背景ごと)が糸に沿ってすべり、選んだ本が中心に来る。 前の中心は自然に反対側へ流れて「来た道」になる。 地図の上を実際に移動している感覚。"},
+  warp:{name:"ワープ",expl:"糸の色で一瞬光り、画面が手前へ吹き抜けて消え、次の星図が奥から現れる。 移動の速さ・魔法らしさは一番強いが、位置のつながりは感じにくい。"},
+};
+function seg(el,defs,key,onpick){
+  $(el).innerHTML=Object.entries(defs).map(([k,v])=>`<button aria-pressed="${S[key]===k}" data-k="${k}">${v.name}</button>`).join("");
+  $(el).querySelectorAll("button").forEach(b=>b.onclick=()=>{S[key]=b.dataset.k; $(el).querySelectorAll("button").forEach(x=>x.setAttribute("aria-pressed",x===b)); onpick();});
+}
+seg("bgSeg",BG,"bg",()=>{ $("bgExpl").textContent=BG[S.bg].expl; buildBg(); });
+seg("mvSeg",MV,"mv",()=>{ $("mvExpl").textContent=MV[S.mv].expl; });
+seg("laySeg",LAYS,"lay",()=>{ $("layExpl").textContent=LAYS[S.lay].expl;
+seg("toneSeg",TONES,"tone",()=>{ $("toneExpl").textContent=TONES[S.tone].expl;
+  if(S.bg!=="cvtone"){ S.bg="cvtone"; $("bgSeg").querySelectorAll("button").forEach(x=>x.setAttribute("aria-pressed",x.dataset.k==="cvtone")); $("bgExpl").textContent=BG.cvtone.expl; buildBg(); return; }
+  TONE.cur=null; toneTo(info(S.cur).img); }); // 押すたびに、黒からその出方で描き直して見せる
+$("toneExpl").textContent=TONES[S.tone].expl;
+  if(S.exp){ S.sel=null; placeExp(); drawSheet(); return; }
+  // まだ広げていなければ、一番冊数の多い糸を1本広げて並べ方を見せる
+  const us=curUnits(); if(!us.length||busy) return;
+  const u=[...us].sort((a,b)=>b.items.length-a.items.length||(a.kind==="elem"?-1:1))[0]; openExp(u.key); });
+$("layExpl").textContent=LAYS[S.lay].expl;
+$("bgExpl").textContent=BG[S.bg].expl; $("mvExpl").textContent=MV[S.mv].expl;
+buildBg();
+render({spreadFrom:{x:CX,y:CY}});
+</script>
