@@ -183,6 +183,12 @@ export class Halftone {
     const TAU = Math.PI * 2;
     const pathOld = new Path2D();
     const pathNew = new Path2D();
+    // ★点が1つも無い path で destination-in しても、ブラウザは何も抜かない(空の fill は合成ごと省かれる)
+    //   = 書影が網点にならず丸ごと描かれる。 入れ替えの最初(新がまだ0)と最後(旧が全部しぼんだ)に
+    //   前の巻が丸ごと透けて見えた(2026-09-30 ユーザ指摘「前のと選んだ物が重なって見える」)。
+    //   → 点の数を数え、0 の層は描かない。
+    let nNew = 0;
+    let nOld = 0;
     for (let j = 0; j < rows; j++)
       for (let i = 0; i < cols; i++) {
         const k = j * cols + i;
@@ -194,14 +200,17 @@ export class Halftone {
         if (rn > 0.3) {
           pathNew.moveTo(x + rn, y);
           pathNew.arc(x, y, rn, 0, TAU);
+          nNew++;
         }
         if (mixing && ro > 0.3) {
           pathOld.moveTo(x + ro, y);
           pathOld.arc(x, y, ro, 0, TAU);
+          nOld++;
         }
       }
 
     for (const [layer, isNew] of layers) {
+      if ((isNew ? nNew : nOld) === 0) continue; // 抜く点が無い = 描かない(丸ごと描かれるのを防ぐ)
       const img = layer.img as HTMLImageElement;
       const iw = img.naturalWidth || img.width;
       const ih = img.naturalHeight || img.height;
