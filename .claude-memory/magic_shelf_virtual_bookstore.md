@@ -48,5 +48,12 @@ metadata:
 - 網点は点ごとにcanvas描画し、切替時の出方をランダム(内周/外周/外周から回る/内周から回る/ばらばら/レーダー/斜め・約1秒)。★本番は楽天書影がCORS無しだとgetImageData不可=要確認(不可なら重ね方式へfallback)。
 - 本棚(マイ本棚)はC3黒い棚+真鍮で実装済(テスト環境のみ)。
 
+## 2026-09-30 作品頁の網点帯(テスト環境のみ・commit 4fad3db5e)
+- 裁定=案1「題名の背景の帯」(約230px・下で地に溶ける)。 最初1巻→巻を選ぶと scatter で入れ替え。 大きく敷く案/巻欄の後ろ/両方は却下(画像に画像を重ねるとくどい)。
+- 実装= components/ToneBand.tsx(+tone-band.css)・VolumeCoverflow が `mangal:vol-cover` を投げる・halftone.ts に fixedTone/overscan。
+- ★本番の木を1バイトも変えない型: 作品頁は題名の行を const に出し `{ToneBand ? <ToneBand>{row}</ToneBand> : row}` の三項だけ。 IIFE+Fragment で包むと本番のRSCが変わり全7万頁再送になる(実踏しかけた)。
+- ★網点のバグ(是正済): 点0の抜き型で destination-in を fill しても合成が省かれ書影が丸ごと残る→「前の巻と重なる」。 点数0の層は描かない。
+- 羅針盤: 書影1.25倍・扇/同心円は重ならない場所へ貪欲配置・シートに「しまう」(書庫アイコン)・ヘッダー/≡に羅針盤・書庫(テストのみ)。
+
 **How to apply:** UI/体験の依頼は必ず「画面が何に変わるか」を1行目に書く。既存UIの延長に見える案は出す前に疑う。
 関連: [[feedback_name_the_element_in_the_photo]] [[cloud_sessions_usage]]
