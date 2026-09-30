@@ -22,6 +22,9 @@ const ShelveButton: typeof import("@/components/ShelveButton").default | null =
 // ★プレビュー専用「題名の背景の帯」(選んでいる巻の書影の網点・2026-09-30 ユーザ裁定 案1)。 刈り取りは上と同じ。
 const ToneBand: typeof import("@/components/ToneBand").default | null =
   process.env.NEXT_PUBLIC_PREVIEW_FEATURES === "1" ? require("@/components/ToneBand").default : null;
+// ★プレビュー専用: 「同ジャンル検索」の右の羅針盤マーク(この作品から羅針盤を開く)。 刈り取りは上と同じ。
+const CompassLink: typeof import("@/components/CompassLink").default | null =
+  process.env.NEXT_PUBLIC_PREVIEW_FEATURES === "1" ? require("@/components/CompassLink").default : null;
 
 /** 版の巻数 = 小数の番外編(15.5 等)を数えない(一覧索引 _build-list-index.py の _card_vol_count と同じ)。 */
 function shelfVolCount(vs: import("@/lib/schema").Manga["editions"][number]["volumes"]): number {
@@ -561,13 +564,27 @@ export default async function MangaDetailPage({
                       <>
                         <dt aria-hidden="true" />
                         <dd>
-                          <Link
-                            href={`/browse?genre=${keys.map(encodeURIComponent).join(",")}`}
-                            rel="nofollow"
-                            className="spring-press inline-flex items-center rounded-[var(--radius-tag)] px-3 py-1.5 text-[12px] font-bold bg-[var(--color-accent)] text-white"
-                          >
-                            同じジャンルの漫画を探す →
-                          </Link>
+                          {(() => {
+                            // ★2026-09-30 ユーザ指示: 文言「同じジャンルの漫画を探す →」→「同ジャンル検索 →」
+                            const genreLink = (
+                              <Link
+                                href={`/browse?genre=${keys.map(encodeURIComponent).join(",")}`}
+                                rel="nofollow"
+                                className="spring-press inline-flex items-center rounded-[var(--radius-tag)] px-3 py-1.5 text-[12px] font-bold bg-[var(--color-accent)] text-white"
+                              >
+                                同ジャンル検索 →
+                              </Link>
+                            );
+                            // 本番は CompassLink=null → 従来と同じ木(dd の子はリンク1つ)
+                            return CompassLink ? (
+                              <>
+                                {genreLink}
+                                <CompassLink slug={manga.slug} title={manga.title} />
+                              </>
+                            ) : (
+                              genreLink
+                            );
+                          })()}
                         </dd>
                       </>
                     );

@@ -5,7 +5,7 @@ import type { MangaListItem } from "@/lib/schema";
 import { SHELVES, type ShelfId, putItem, removeItem } from "@/lib/myShelf";
 import { useMyShelf } from "@/lib/useMyShelf";
 
-/** 書庫のアイコン(ヘッダーの「書庫」と同じ絵柄 = components/GlobalNav.tsx の NAV_SVG.書庫)。 */
+/** 本棚のアイコン(ヘッダーの「本棚」と同じ絵柄 = components/GlobalNav.tsx の NAV_SVG.本棚)。 */
 export function ShelfIcon({ size = 14 }: { size?: number }) {
   return (
     <svg
@@ -21,10 +21,10 @@ export function ShelfIcon({ size = 14 }: { size?: number }) {
 }
 
 /**
- * 羅針盤のシートの「しまう」(2026-09-30 ユーザ裁定: 言葉=案A「しまう」・アイコン=ヘッダーの書庫)。
+ * 羅針盤のシートの「しまう」(2026-09-30 ユーザ裁定: 言葉=案A「しまう」・アイコン=ヘッダーの本棚)。
  * 押すとシートの中に 3つの棚(もってる/気になる/ほしい)が並び、選ぶと閉じる。
  * しまった後はボタンが「✓ 気になる」のように棚の名前へ変わり、もう一度押すと棚の変更と取り出し。
- * ★もってるは「既刊まで」で入れる(巻数は書庫で直せる)。 題名・書影の控えは羅針盤が持つ索引の値をそのまま使う。
+ * ★もってるは「既刊まで」で入れる(巻数は本棚で直せる)。 題名・書影の控えは羅針盤が持つ索引の値をそのまま使う。
  */
 export function CompassShelveButton({ open, onToggle, slug }: { open: boolean; onToggle: () => void; slug: string }) {
   const { items, ready } = useMyShelf();
@@ -36,7 +36,7 @@ export function CompassShelveButton({ open, onToggle, slug }: { open: boolean; o
       className={`cp-shelve${mine ? " is-in" : ""}`}
       aria-expanded={open}
       onClick={onToggle}
-      aria-label={mine ? `書庫の「${label}」に入っています(変更・取り出し)` : "書庫にしまう"}
+      aria-label={mine ? `本棚の「${label}」に入っています(変更・取り出し)` : "本棚にしまう"}
     >
       <ShelfIcon />
       {mine ? (
@@ -68,7 +68,7 @@ export function CompassShelvePanel({ item, onDone }: { item: MangaListItem; onDo
       }),
     );
     const name = SHELVES.find((s) => s.id === shelf)!.label;
-    onDone(shelf === "own" && mine?.shelf !== "own" ? `「${name}」に既刊まで(${total}巻)で入れました・巻数は書庫で直せます` : `「${name}」にしまいました`);
+    onDone(shelf === "own" && mine?.shelf !== "own" ? `「${name}」に既刊まで(${total}巻)で入れました・巻数は本棚で直せます` : `「${name}」にしまいました`);
   };
   const remove = () => {
     if (!confirm) {
@@ -76,7 +76,7 @@ export function CompassShelvePanel({ item, onDone }: { item: MangaListItem; onDo
       return;
     }
     update((s) => removeItem(s, item.slug));
-    onDone("書庫から取り出しました");
+    onDone("本棚から取り出しました");
   };
   return (
     <div className="cp-shelve-panel" role="group" aria-label="どの棚にしまう?">

@@ -24,9 +24,9 @@ type Props = {
  *   `=== "1" ? require(...) : null` で require ごと刈り取られる。ここの return null は二重の門。
  * ★索引(useMangaIndex)は読まない = 作品頁は全6.6万頁。材料は頁が既に持っている版だけ。
  * ★題名・書影は受け取らない(2026-09-29 ユーザ裁定「折衷案」): client 部品の props は全項目が
- *   HTML 内の埋め込みと .txt の2か所に書かれる = 7万頁×約0.5KB。控えの題名・書影は書庫の頁が
+ *   HTML 内の埋め込みと .txt の2か所に書かれる = 7万頁×約0.5KB。控えの題名・書影は本棚の頁が
  *   索引から埋める(app/shelf/MyShelf.tsx の「控えを索引から埋める」効果)。
- *   残る弱点 = しまってから書庫を一度も開かないうちに作品が掲載から外れると、控えが slug だけになる。
+ *   残る弱点 = しまってから本棚を一度も開かないうちに作品が掲載から外れると、控えが slug だけになる。
  */
 export default function ShelveButton(props: Props) {
   if (process.env.NEXT_PUBLIC_PREVIEW_FEATURES !== "1") return null;
@@ -66,7 +66,7 @@ function ShelvePanel({ slug, editions, maxTotal }: Props) {
     update((s) =>
       putItem(s, {
         slug,
-        title: "", // 控えは書庫の頁が索引から埋める(putItem は既存の控えを消さない)
+        title: "", // 控えは本棚の頁が索引から埋める(putItem は既存の控えを消さない)
         cover: null,
         shelf: choice,
         owned: choice === "own" ? n : undefined,
@@ -110,7 +110,7 @@ function ShelvePanel({ slug, editions, maxTotal }: Props) {
             : "border-[var(--color-line)] bg-[var(--color-surface)] text-ink/75 hover:text-[var(--color-accent)]"
         }`}
       >
-        {/* ヘッダーの「書庫」と同じアイコン(2026-09-30 ユーザ裁定) */}
+        {/* ヘッダーの「本棚」と同じアイコン(2026-09-30 ユーザ裁定) */}
         <svg
           viewBox="0 0 24 24"
           aria-hidden="true"

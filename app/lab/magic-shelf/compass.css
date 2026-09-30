@@ -508,7 +508,9 @@
   left: 0;
   right: 0;
   bottom: 0;
-  height: 96px;
+  min-height: 96px;
+  max-height: 60%;
+  overflow: hidden;
   z-index: 6;
   box-sizing: border-box;
   display: flex;
@@ -545,7 +547,7 @@
   flex: 1;
   min-width: 0;
 }
-/* しまう(ヘッダーの「書庫」と同じアイコン) */
+/* しまう(ヘッダーの「本棚」と同じアイコン) */
 .cp-shelve {
   flex: none;
   display: inline-flex;
@@ -565,8 +567,10 @@
 }
 /* ★進むボタンが出ている時は紹介文を1行に縮める(シートの高さ 96px に収める。
  *   題名の行に「しまう」が入って1段高くなり、進むボタンが下に見切れた = 2026-09-30 ユーザ指摘) */
+/* ★2026-09-30 ユーザ指摘「進む先を選んだ時にキャッチが全部読めないのは使いづらい」:
+ *   1行に縮めるのをやめ、シートの高さを中身に合わせて上へ伸ばす(下の「広げる」帯の上に重なる=選んでいる間だけ)。 */
 .cp-sheet.has-go .cp-sheet-c {
-  -webkit-line-clamp: 1;
+  -webkit-line-clamp: 4;
 }
 .cp-shelve.is-in {
   border-color: #1f7a6e;

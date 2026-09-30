@@ -59,14 +59,14 @@ const FIND: Tile[] = [
 
 /** テスト環境だけの項目(本番ビルドでは定数 false で刈り取られる=本番のメニューは従来どおり)。 */
 const PREVIEW = process.env.NEXT_PUBLIC_PREVIEW_FEATURES === "1";
-// ★テスト環境(2026-09-29 ユーザ指示): 2列タイルで「ホームの下に羅針盤・その右に書庫」。
+// ★テスト環境(2026-09-29 ユーザ指示): 2列タイルで「ホームの下に羅針盤・その右に本棚」。
 //   羅針盤は頁を丸ごと読み直す <a> で入る(索引の読み先を本番の全件へ変えるため。GlobalNav と同じ理由)。
 const FIND_VIEW: Tile[] = PREVIEW
   ? [
       FIND[0],
       FIND[1],
       { icon: "compass", label: "羅針盤", href: "/lab/magic-shelf", reload: true },
-      { icon: "shelves", label: "書庫", href: "/shelf" },
+      { icon: "shelves", label: "本棚", href: "/shelf" },
       ...FIND.slice(2),
     ]
   : FIND;

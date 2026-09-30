@@ -8,7 +8,7 @@ import "./my-shelf.css";
 // ★プレビュー専用(拡張子 .preview.tsx = next.config.ts の pageExtensions が MANGAL_DATA_DIR=.preview-data の時だけ頁にする)。
 //   依頼書 = docs/cloud-briefs/my-shelf.md。非索引。
 export const metadata: Metadata = {
-  title: "マイ本棚(テスト)",
+  title: "本棚(テスト)",
   description: "作品頁の「しまう」で入れた漫画を、もってる/気になる/ほしいの3段の棚に並べる。",
   robots: { index: false, follow: false },
 };
@@ -21,7 +21,7 @@ export default function ShelfPage() {
     // ★見た目 C3「黒い棚+真鍮」= docs/cloud-briefs/my-shelf-look-c3.md。サイトの明暗テーマに関係なく常にこの配色
     //   (色は my-shelf.css の .shelf-c3 が、この頁の中だけサイトの色トークンを差し替える)
     <div className="shelf-c3 mx-auto max-w-4xl px-3 pb-12 pt-5">
-      <h1 className="text-xl font-extrabold">📚 マイ本棚</h1>
+      <h1 className="text-xl font-extrabold">📚 本棚</h1>
       {/* ★日本語の文は行をまたがない(JSX は改行を空白1つにする=「並びます。 「もってる」」の空白が出る) */}
       <p className="mt-1.5 text-[12.5px] leading-relaxed text-ink/70">
         作品頁の「しまう」で入れた漫画が、<b>もってる</b>・<b>ほしい</b>・<b>気になる</b>の棚に並びます。

@@ -516,7 +516,7 @@ export default function MyShelf({ genres }: { genres: GenreDef[] }) {
   const shareNative = async () => {
     if (!shareUrl || typeof navigator.share !== "function") return;
     try {
-      await navigator.share({ title: "マイ本棚", url: shareUrl });
+      await navigator.share({ title: "本棚", url: shareUrl });
     } catch {
       /* キャンセルは無視 */
     }
