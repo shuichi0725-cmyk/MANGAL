@@ -8,6 +8,9 @@ import {
   angleGap,
   buildGraph,
   defaultSpread,
+  drawUnit,
+  weightedPick,
+  UNIT_MAX,
   neighborhood,
   pickTone,
   placeRing,
@@ -225,16 +228,67 @@ describe("広げる単位", () => {
     );
   });
 
-  it("各単位は最大24冊で、中央の本自身は含まない", () => {
+  it("単位は候補全体を持ち、画面に出す24冊は drawUnit で引く(中央の本自身は含まない)", () => {
     const c = book("c", { authors: [{ name: "甲" }] });
     const list = [c];
     for (let i = 0; i < 40; i++)
       list.push(book(`a${i}`, { authors: [{ name: "甲" }] }));
     const u = neighborhood(buildGraph(list), c).units.find(
       (x) => x.key === "author:甲",
-    );
-    expect(u?.items.length).toBe(24);
-    expect(u?.items.some((i) => i.slug === "c")).toBe(false);
+    )!;
+    expect(u.items.length).toBe(40);
+    expect(u.items.some((i) => i.slug === "c")).toBe(false);
+    expect(drawUnit(u, rng("x")).length).toBe(UNIT_MAX);
+  });
+
+  it("★ジャンル: 重なり75%以上 → 24冊に届かなければ60% → 50%(ラベルで段階が分かる)", () => {
+    const c = book("c", { genres: ["action", "drama", "horror", "samurai"] });
+    const list = [c];
+    // 75%(3/4共通+同数=3/5=0.6…)を避けて段階を作る: 完全一致 3冊 / 3共通(0.6) 30冊
+    for (let i = 0; i < 3; i++) list.push(book(`same${i}`, { genres: ["action", "drama", "horror", "samurai"] }));
+    for (let i = 0; i < 30; i++) list.push(book(`near${i}`, { genres: ["action", "drama", "horror", "comedy"] }));
+    list.push(book("far", { genres: ["action"] })); // 1/4 = 0.25 は出ない
+    const u = neighborhood(buildGraph(list), c).units.find((x) => x.kind === "genre")!;
+    expect(u.label).toBe("似たジャンル"); // 75%では3冊しか無い → 60%へ下げた
+    expect(u.items.length).toBe(33);
+    expect(u.items.some((i) => i.slug === "far")).toBe(false);
+    // 近い(完全一致)ほど score が高い = 先頭に来る
+    expect(u.items.slice(0, 3).every((i) => i.slug.startsWith("same"))).toBe(true);
+  });
+
+  it("ジャンルが75%以上で24冊そろえば下げない", () => {
+    const c = book("c", { genres: ["comedy"] });
+    const list = [c];
+    for (let i = 0; i < 30; i++) list.push(book(`g${i}`, { genres: ["comedy"] }));
+    const u = neighborhood(buildGraph(list), c).units.find((x) => x.kind === "genre")!;
+    expect(u.label).toBe("よく似たジャンル");
+  });
+
+  it("★くじ: 近い本ほど当たりやすい(人気は使わない)・非復元・rand 無しは先頭から", () => {
+    const xs = [...Array(10)].map((_, i) => ({ id: i, score: i === 0 ? 5 : 0 }));
+    expect(weightedPick(xs, (x) => x.score, 3).map((x) => x.id)).toEqual([0, 1, 2]);
+    let hit = 0;
+    const r = rng("w");
+    for (let t = 0; t < 400; t++) if (weightedPick(xs, (x) => x.score, 1, r)[0].id === 0) hit++;
+    // 重み 216 対 1×9 = 約96% で近い本
+    expect(hit).toBeGreaterThan(340);
+    const all = weightedPick(xs, (x) => x.score, 10, rng("z")).map((x) => x.id);
+    expect(new Set(all).size).toBe(10);
+  });
+
+  it("★drawUnit: 旅で辿った本は必ず外す・引き直しは直前の24冊を外す(足りる時だけ)", () => {
+    const c = book("c", { authors: [{ name: "甲" }] });
+    const list = [c];
+    for (let i = 0; i < 60; i++) list.push(book(`a${i}`, { authors: [{ name: "甲" }] }));
+    const u = neighborhood(buildGraph(list), c).units.find((x) => x.key === "author:甲")!;
+    const first = drawUnit(u, rng("1"), new Set(["a0", "a1"]));
+    expect(first.some((i) => i.slug === "a0" || i.slug === "a1")).toBe(false);
+    const again = drawUnit(u, rng("2"), new Set(["a0", "a1"]), new Set(first.map((i) => i.slug)));
+    expect(again.some((i) => first.some((f) => f.slug === i.slug))).toBe(false);
+    // 候補が少ない時は直前の本も使う(24冊を割らない)
+    const small = { ...u, items: u.items.slice(0, 30) };
+    const s1 = drawUnit(small, rng("3"));
+    expect(drawUnit(small, rng("4"), new Set(), new Set(s1.map((i) => i.slug))).length).toBe(24);
   });
 });
 

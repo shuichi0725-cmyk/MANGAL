@@ -24,6 +24,10 @@ import {
   type Kind,
   type Spread,
   type ThreadKind,
+  drawUnit,
+  UNIT_MAX,
+  type UnitKind,
+  type UnitItem,
 } from "./compass";
 import { Halftone } from "./halftone";
 import { CompassShelveButton, CompassShelvePanel } from "./CompassShelve";
@@ -182,7 +186,9 @@ export default function MagicCompass({ magazines }: { magazines: Record<string, 
   const [sel, setSel] = useState<string | null>(null);
   const [off, setOff] = useState<Set<Kind>>(() => new Set());
   const [exp, setExp] = useState<string | null>(null);
-  const [lays, setLays] = useState<Partial<Record<Kind, string>>>({});
+  const [lays, setLays] = useState<Partial<Record<UnitKind, string>>>({});
+  // 広げた糸のうち画面に出している24冊(くじ引きの結果・2026-09-30)
+  const [drawn, setDrawn] = useState<{ key: string; items: UnitItem[] } | null>(null);
   const [cw, setCw] = useState({ x: 0, y: 0 }); // 中央の本の世界座標
   const [cam, setCam] = useState({ x: 0, y: 0 }); // 画面の中央に来る世界座標
   const [pan, setPan] = useState<Pan | null>(null);
@@ -237,10 +243,37 @@ export default function MagicCompass({ magazines }: { magazines: Record<string, 
   );
 
   // 1冊の中央につき計算は1回(周り+広げる単位)
-  const nb = useMemo(() => (graph && curItem ? neighborhood(graph, curItem, magName) : null), [graph, curItem, magName]);
+  // ★周りの本も くじ(近いほど当たりやすい・人気は使わない)。 旅で辿った本は外す(2026-09-30)
+  const pathRef = useRef(path);
+  pathRef.current = path;
+  const visitedSet = () => new Set(pathRef.current.map((p) => p.slug));
+  const nb = useMemo(
+    () => (graph && curItem ? neighborhood(graph, curItem, magName, { rand: Math.random, visited: visitedSet() }) : null),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [graph, curItem, magName],
+  );
   const placed = useMemo(() => (nb ? placeRing(nb.ring, prev, backAng, geom.rx, geom.ry) : []), [nb, prev, backAng, geom]);
-  const unit = useMemo(() => (exp && nb ? (nb.units.find((u) => u.key === exp) ?? null) : null), [exp, nb]);
-  const spreadOf = useCallback((k: Kind) => resolveSpread(k, lays[k]), [lays]);
+  const unitFull = useMemo(() => (exp && nb ? (nb.units.find((u) => u.key === exp) ?? null) : null), [exp, nb]);
+  // 開くたびに候補全体から24冊をくじで引く(引き直しは直前の24冊を外して引く)
+  useEffect(() => {
+    if (!unitFull) {
+      setDrawn(null);
+      return;
+    }
+    setDrawn({ key: unitFull.key, items: drawUnit(unitFull, Math.random, visitedSet()) });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [unitFull]);
+  const unit = useMemo(
+    () => (unitFull && drawn && drawn.key === unitFull.key ? { ...unitFull, items: drawn.items } : null),
+    [unitFull, drawn],
+  );
+  const redraw = useCallback(() => {
+    if (!unitFull || !drawn || busy.current) return;
+    setSel(null);
+    setDrawn({ key: unitFull.key, items: drawUnit(unitFull, Math.random, visitedSet(), new Set(drawn.items.map((i) => i.slug))) });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [unitFull, drawn]);
+  const spreadOf = useCallback((k: UnitKind) => resolveSpread(k, lays[k]), [lays]);
   const spread = useMemo(
     () =>
       unit
@@ -421,7 +454,7 @@ export default function MagicCompass({ magazines }: { magazines: Record<string, 
     [bumpSheet],
   );
 
-  const chooseSpread = useCallback((k: Kind, s: Spread) => {
+  const chooseSpread = useCallback((k: UnitKind, s: Spread) => {
     setSel(null);
     setLays((l) => {
       const n = { ...l, [k]: s };
@@ -645,7 +678,7 @@ export default function MagicCompass({ magazines }: { magazines: Record<string, 
       why = `${KIND_NAME[unit.kind]} — ${unit.label}${it?.shared ? ` ・ 共通の要素${it.shared}つ` : ""}`;
       goLabel = `〈${unit.label}〉の糸で進む →`;
     } else {
-      why = `「${unit.label}」の糸を広げています(${unit.items.length}冊) ・ 本に触れて選ぶ`;
+      why = `「${unit.label}」の糸を広げています(候補${(unitFull?.items.length ?? unit.items.length).toLocaleString()}冊から${unit.items.length}冊) ・ 本に触れて選ぶ`;
     }
   } else {
     const o = sel ? placed.find((x) => x.slug === sel) : null;
@@ -855,25 +888,38 @@ export default function MagicCompass({ magazines }: { magazines: Record<string, 
             );
           })}
         </div>
-        {/* ★広げ方は「星屑」が基本・切り替えは「年表」だけ(2026-09-30 ユーザ裁定)。 同じ年の糸では年表を使えないので出さない */}
-        {unit && allowedSpreads(unit.kind).includes("time") && (
+        {/* ★広げ方は「星屑」が基本・切り替えは「年表」だけ(2026-09-30 ユーザ裁定)。 同じ年の糸では年表を使えないので出さない。
+            右に「引き直す」= 同じ糸の別の24冊をくじで引く(候補が24冊より多い時だけ) */}
+        {unit && (
           <div className="cp-spreads" role="group" aria-label="広げ方">
-            {(() => {
-              const on = spreadOf(unit.kind) === "time";
-              return (
-                <button
-                  type="button"
-                  className={`cp-sp${on ? " on" : ""}`}
-                  style={{ "--c": KIND_COLOR[unit.kind] } as CSSProperties}
-                  aria-pressed={on}
-                  title={on ? "星屑に戻す" : "連載開始の年で並べる"}
-                  onClick={() => chooseSpread(unit.kind, on ? "dust" : "time")}
-                >
-                  <SpreadIcon k="time" />
-                  年表
-                </button>
-              );
-            })()}
+            {allowedSpreads(unit.kind).includes("time") &&
+              (() => {
+                const on = spreadOf(unit.kind) === "time";
+                return (
+                  <button
+                    type="button"
+                    className={`cp-sp${on ? " on" : ""}`}
+                    style={{ "--c": KIND_COLOR[unit.kind] } as CSSProperties}
+                    aria-pressed={on}
+                    title={on ? "星屑に戻す" : "連載開始の年で並べる"}
+                    onClick={() => chooseSpread(unit.kind, on ? "dust" : "time")}
+                  >
+                    <SpreadIcon k="time" />
+                    年表
+                  </button>
+                );
+              })()}
+            {(unitFull?.items.length ?? 0) > UNIT_MAX && (
+              <button
+                type="button"
+                className="cp-sp"
+                style={{ "--c": KIND_COLOR[unit.kind] } as CSSProperties}
+                title="同じ糸の別の本をくじで引き直す"
+                onClick={redraw}
+              >
+                ↻ 引き直す
+              </button>
+            )}
           </div>
         )}
       </div>

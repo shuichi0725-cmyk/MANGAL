@@ -4,7 +4,9 @@
 import type { MangaListItem } from "../../../lib/schema";
 
 export type Kind = "author" | "mag" | "year" | "elem";
-export type ThreadKind = Kind | "back";
+/** 「広げる」だけにある糸(周りの7冊には出さない)。 ★2026-09-30 ユーザ裁定: ジャンルは広げる単位として足す */
+export type UnitKind = Kind | "genre";
+export type ThreadKind = UnitKind | "back";
 
 export const KINDS: readonly Kind[] = ["author", "mag", "year", "elem"];
 
@@ -13,6 +15,7 @@ export const KIND_COLOR: Record<ThreadKind, string> = {
   mag: "#4fc28e",
   year: "#c792ff",
   elem: "#6ea8ff",
+  genre: "#ff9f5a",
   back: "#8a96a0",
 };
 
@@ -21,6 +24,7 @@ export const KIND_NAME: Record<ThreadKind, string> = {
   mag: "同じ雑誌",
   year: "同じ年",
   elem: "要素",
+  genre: "ジャンル",
   back: "来た道",
 };
 
@@ -38,6 +42,14 @@ export const RING_CAP: Record<Kind, number> = {
   elem: 2,
 };
 export const UNIT_MAX = 24;
+/** ジャンルの重なり(共通のジャンル ÷ どちらかにあるジャンル)の段階。 24冊に届かなければ次の段階へ下げる */
+export const GENRE_TIERS: readonly { min: number; label: string }[] = [
+  { min: 0.75, label: "よく似たジャンル" },
+  { min: 0.6, label: "似たジャンル" },
+  { min: 0.5, label: "やや似たジャンル" },
+];
+/** くじの重み = (1 + 近さ)^WEIGHT_POW。 3 = 近い本がかなり出やすい(2026-09-30 ユーザ裁定)。 人気は使わない */
+export const WEIGHT_POW = 3;
 export const ELEM_POP_MIN = 3000;
 
 // ───────────────────────── 逆引き表 ─────────────────────────
@@ -51,6 +63,7 @@ export type Graph = {
   byMag: Map<string, number[]>;
   byYear: Map<number, number[]>;
   byTheme: Map<string, number[]>;
+  byGenre: Map<string, number[]>;
 };
 
 function uniq<T>(xs: readonly T[]): T[] {
@@ -82,6 +95,7 @@ export function buildGraph(list: readonly MangaListItem[]): Graph {
     byMag: new Map(),
     byYear: new Map(),
     byTheme: new Map(),
+    byGenre: new Map(),
   };
   for (const m of list) {
     g.all.set(m.slug, m);
@@ -92,6 +106,7 @@ export function buildGraph(list: readonly MangaListItem[]): Graph {
     if (m.magazine) push(g.byMag, m.magazine, i);
     if (m.year_started) push(g.byYear, m.year_started, i);
     for (const t of uniq(m.themes ?? [])) push(g.byTheme, t, i);
+    for (const k of uniq(m.genres ?? [])) push(g.byGenre, k, i);
   }
   return g;
 }
@@ -104,20 +119,57 @@ export type RingEntry = {
   label: string;
   shared: number;
 };
-export type UnitItem = { slug: string; shared: number; year: number | null };
+/** score = くじの近さ(要素・雑誌・年・作者 = 共通の要素の数 / ジャンル = 4×重なり + 共通の要素の数) */
+export type UnitItem = { slug: string; shared: number; year: number | null; score: number };
 export type Unit = {
   key: string;
-  kind: Kind;
+  kind: UnitKind;
   label: string;
+  /** 候補全体(近い順)。 画面に出す24冊は drawUnit でくじ引きする */
   items: UnitItem[];
 };
 export type Neighborhood = { ring: RingEntry[]; units: Unit[] };
+
+/** 重み付きのくじ(非復元)。 weight = (1 + score)^WEIGHT_POW。 rand 省略時は近い順の先頭 n(= テスト用の決まった結果)。 */
+export function weightedPick<T>(xs: readonly T[], score: (x: T) => number, n: number, rand?: () => number): T[] {
+  if (!rand) return xs.slice(0, n);
+  const pool = xs.map((x) => ({ x, w: Math.pow(1 + Math.max(0, score(x)), WEIGHT_POW) }));
+  const out: T[] = [];
+  let total = pool.reduce((a, b) => a + b.w, 0);
+  while (out.length < n && pool.length) {
+    let r = rand() * total;
+    let k = 0;
+    while (k < pool.length - 1 && r >= pool[k].w) r -= pool[k++].w;
+    out.push(pool[k].x);
+    total -= pool[k].w;
+    pool.splice(k, 1);
+  }
+  return out;
+}
+
+/**
+ * 広げた糸から画面に出す24冊を引く。 visited(旅で辿った本)は必ず外し、prev(直前に出ていた本)は
+ * 外しても24冊に届く時だけ外す(= 引き直しで顔ぶれが入れ替わる)。 並びは近い順(星屑は内側ほど近い)。
+ */
+export function drawUnit(
+  u: Unit,
+  rand?: () => number,
+  visited: ReadonlySet<string> = new Set(),
+  prev: ReadonlySet<string> = new Set(),
+): UnitItem[] {
+  let pool = u.items.filter((i) => !visited.has(i.slug));
+  const fresh = pool.filter((i) => !prev.has(i.slug));
+  if (prev.size && fresh.length >= Math.min(UNIT_MAX, pool.length)) pool = fresh;
+  return weightedPick(pool, (i) => i.score, UNIT_MAX, rand).sort((a, b) => b.score - a.score);
+}
 
 export function neighborhood(
   g: Graph,
   center: MangaListItem,
   magName: (key: string) => string = (k) => k,
+  opts: { rand?: () => number; visited?: ReadonlySet<string> } = {},
 ): Neighborhood {
+  const visited = opts.visited ?? new Set<string>();
   const self = center.slug;
   const cThemes = uniq(center.themes ?? []);
   const shared = new Map<number, number>();
@@ -159,7 +211,9 @@ export function neighborhood(
   const take = (cands: number[], kind: Kind, label: (i: number) => string) => {
     cands.sort(cmp);
     for (const i of cands) taken.add(i);
-    for (const i of cands.slice(0, RING_CAP[kind] + 1))
+    // ★くじ(2026-09-30): 固定の上位でなく、近いほど当たりやすいくじで選ぶ。 旅で辿った本は外す
+    const pickFrom = cands.filter((i) => !visited.has(g.items[i].slug));
+    for (const i of weightedPick(pickFrom, sh, RING_CAP[kind] + 1, opts.rand))
       ring.push({
         slug: g.items[i].slug,
         kind,
@@ -191,14 +245,15 @@ export function neighborhood(
 
   // ── 広げる単位(各最大24冊・並び順は同じ) ──
   const units: Unit[] = [];
-  const unit = (key: string, kind: Kind, label: string, cands: number[]) => {
+  // ★候補は全部持つ(画面に出す24冊は drawUnit のくじ)。 並びは近い順
+  const unit = (key: string, kind: UnitKind, label: string, cands: number[], score: (i: number) => number = sh) => {
     const items = cands
-      .sort(cmp)
-      .slice(0, UNIT_MAX)
+      .sort((a, b) => score(b) - score(a) || cmp(a, b))
       .map((i) => ({
         slug: g.items[i].slug,
         shared: sh(i),
         year: g.items[i].year_started || null,
+        score: score(i),
       }));
     if (items.length) units.push({ key, kind, label, items });
   };
@@ -226,6 +281,25 @@ export function neighborhood(
     .slice(0, 4);
   for (const t of topThemes)
     unit(`elem:${t}`, "elem", t, (g.byTheme.get(t) ?? []).filter(notSelf));
+
+  // ── ジャンル: 重なり75%以上 → 24冊に届かなければ60% → 50% ──
+  const cG = uniq(center.genres ?? []);
+  if (cG.length) {
+    const cnt = new Map<number, number>();
+    for (const k of cG) for (const i of g.byGenre.get(k) ?? []) cnt.set(i, (cnt.get(i) ?? 0) + 1);
+    const jac = (i: number) => {
+      const n = cnt.get(i) ?? 0;
+      return n / (cG.length + uniq(g.items[i].genres ?? []).length - n);
+    };
+    let chosen: number[] = [];
+    let label = GENRE_TIERS[0].label;
+    for (const t of GENRE_TIERS) {
+      chosen = [...cnt.keys()].filter((i) => notSelf(i) && jac(i) >= t.min - 1e-9);
+      label = t.label;
+      if (chosen.length >= UNIT_MAX) break;
+    }
+    if (chosen.length) unit("genre", "genre", label, chosen, (i) => 4 * jac(i) + sh(i));
+  }
 
   return { ring, units };
 }
@@ -367,18 +441,18 @@ export const SPREADS: readonly { key: Spread; name: string }[] = [
 ];
 
 /** ★同じ年の糸では年表を選べない(全部同じ年=1列に潰れて7冊しか出ない)。 */
-export function allowedSpreads(kind: Kind): Spread[] {
+export function allowedSpreads(kind: UnitKind): Spread[] {
   return SPREADS.map((s) => s.key).filter(
     (k) => !(kind === "year" && k === "time"),
   );
 }
 
-export function defaultSpread(_kind: Kind): Spread {
+export function defaultSpread(_kind: UnitKind): Spread {
   return "dust";
 }
 
 /** 端末に覚えた広げ方(不正・使えない値なら既定)。 */
-export function resolveSpread(kind: Kind, stored: unknown): Spread {
+export function resolveSpread(kind: UnitKind, stored: unknown): Spread {
   return typeof stored === "string" &&
     (allowedSpreads(kind) as string[]).includes(stored)
     ? (stored as Spread)
@@ -401,7 +475,7 @@ const SZ: readonly [number, number][] = [
 ];
 /** 広げている間の中央の本 */
 export const SPREAD_CENTER = { w: 72, h: 100 };
-const DIR: Record<Kind, number> = { author: -90, mag: 0, year: 90, elem: 180 };
+const DIR: Record<UnitKind, number> = { author: -90, mag: 0, year: 90, elem: 180, genre: 45 };
 
 /** 決まった種の乱数(試作と同じ式)。 */
 export function rng(seed: string): () => number {
@@ -418,7 +492,7 @@ export function rng(seed: string): () => number {
 
 /** 広げた本の座標(舞台の座標)。 items は近い順(共通の要素が多い順)。 */
 export function spreadPositions(
-  kind: Kind,
+  kind: UnitKind,
   items: readonly { slug: string; year: number | null }[],
   spread: Spread,
   geom: Geom,
