@@ -731,7 +731,14 @@ export default function MagicCompass({ magazines }: { magazines: Record<string, 
       </div>
 
       {/* 3. 羅針盤 */}
-      <div className="cp-stage">
+      {/* ★何もない所を押したら選択を外す(2026-09-30 ユーザ要望)。 本・年表ボタンなど button を押した時は各自の動き */}
+      <div
+        className="cp-stage"
+        onClick={(e) => {
+          if ((e.target as HTMLElement).closest("button, a")) return;
+          if (sel && !busy.current) setSel(null);
+        }}
+      >
         {curItem && !nb && (
           <div className={`cp-wait${failed ? " failed" : ""}`}>
             {!failed &&
