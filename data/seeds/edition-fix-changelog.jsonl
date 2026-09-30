@@ -203,3 +203,4 @@
 {"slug": "chikyu-number-v-7", "op": "override-strip-editions", "removed": ["editions", "year_started", "year_ended"], "reason": "canonical へ移行", "at": "2026-09-03", "reversible": true}
 {"slugs": ["akai-ito-no-densetsu", "chikyu-number-v-7", "mickey", "yuuhi-yo-nobore"], "op": "canonical-suppress-bunkobon", "reason": "canonical の extra(文庫)と種2由来の文庫版タブが同ISBNで二重化していたため suppress_types: [bunkobon]", "at": "2026-09-03", "reversible": true}
 {"slug": "mikara-deta-saba", "op": "canonical-append", "number": 3, "isbn13": "9784785914868", "release_date": "1998-04-10", "reason": "検出器再走査で3巻が楽天キャッシュに在ったので主版に追記", "at": "2026-09-03", "reversible": true}
+{"slug": "chrome-kidoutai", "op": "canonical-rewrite", "before": "主版=Kodansha bilingual comics 2冊(対訳版)+原本3冊を3つの別版", "after": "主版=KCデラックス 1/1.5/2巻(原本)・対訳版を外す", "at": "2026-09-30T15:03:16", "backup": ".cache/chrome-kidoutai-canonical-bak-20260930-150316.yml", "reason": "2026-08-17 ギャラ型一括是正が対訳版を主版に選んでいた(ユーザ指摘: 検索カードに対訳版の1巻)"}
