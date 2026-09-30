@@ -129,3 +129,4 @@
 - [【道具の罠】--help非対応で本処理が走る/減少検出の明細はstderr/CRLF](tool_traps_2026_09_24.md) — 09-24 実踏3件
 - [【方針】仮想書店=現実を模さない・全画面が切り替わる魔法コンソール](magic_shelf_virtual_bookstore.md) — 雛型v1は外れ(フィルター出し方変えただけ)・残す/消す未決
 - [クラウドセッションの使い方](cloud_sessions_usage.md) — 作業ブランチ直push・その間ローカルpush禁止・page.preview.tsx・11/5失効
+- [【是正済】副題欄に副題でない物=3,324→3,141](subtitle_not_subtitle_cleanup.md) — 型別の判断基準・こち亀の土台は残課題・攻殻機動隊=対訳版が主版の型
