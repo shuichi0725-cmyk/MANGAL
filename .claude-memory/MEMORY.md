@@ -58,7 +58,7 @@
 - [【裁定済】Kobo電子書影=注意書きを添えて出す](kobo_cover_wrong_for_old_print.md) ／ [【注意信号】書影の違和感=上流誤りの症状](feedback_cover_oddity_signal.md) ／ [【型・是正済】書影の黒い斑点=透過GIF×ダーク背景](cover_transparent_gif_dark_bg.md)
 - [【戒め】再グルーピング誤り繰り返すな](feedback_dont_repeat_regrouping_error.md) ／ [【最難関】奇子型=版違い混在](edition_mix_same_author_ayako.md) ／ [奇子型の経験則検出](kiko_multiedition_mixing_heuristic.md)
 - [版混在恒久是正=edition-canonical](edition_canonical_mechanism.md) ／ [アオアシ型=原版+ジュニア版再版](edition_dedup_aoashi.md) ／ [【型】ARMS型=レーベル表記ゆれ版分裂](imprint_split_arms_type.md)
-- [【型】ARMSワイド版型=刊行run分裂(57頁適用済)](edition_run_split_arms_wide_type.md) ／ [【型・是正済】1版しか無いのに「デラックス版」を自称する通常版](self_declared_deluxe_single_edition.md) ／ [【保留・今度やる】種2に在るのに1冊も出ていない版](hidden_editions_pending.md) — 4,620版。着手はレーベル分類から
+- [【型】ARMSワイド版型=刊行run分裂(57頁適用済)](edition_run_split_arms_wide_type.md) ／ [【型・是正済】1版しか無いのに「デラックス版」を自称する通常版](self_declared_deluxe_single_edition.md) ／ [【保留・今度やる】種2に在るのに1冊も出ていない版](hidden_editions_pending.md)
 - [【残228頁】同type合流で別出版社の版が消える](edition_typemerge_hides_volumes.md) — 検出器あり ／ [【型・是正済】保健室の僕ら型=特装版パスの置換で同ISBN二重巻](isbn_dup_special_edition_pass.md) ／ [ISBN/巻数是正の進捗](data_quality_cleanup_state.md)
 - [【進行中】ISBNダブリ潰し](isbn_dup_cleanup_state.md) ／ [【残】巻番号残40件](volnum_remaining_merge_collection.md) ／ [巻出力監査検出器](audit_volume_output_detector.md)
 - [【残務】広域監査修正queue](audit_fix_queue_post_kobo.md) ／ [アンソロジー統合状態](anthology_consolidation_state.md) — promote結線未実装 ／ [新刊著者の連結バグ是正](new_manga_author_reparse.md) — 蒸留で再発しうる
@@ -119,7 +119,7 @@
 - [【型・封鎖済】数字だけのペンネームがYAMLでint化し生成器が落ちる](yaml_numeric_penname_int_type.md) — 359=サコク。掃引69,465頁中1件・join 3本にstr() ／ [【型】フルpromoteは公開slugを再導出=手直しslugが黙って改名](full_promote_resolves_public_slug.md) — 索引を焼くまで見えない。題キーで突合しaliasを張る ／ [【型・恒久機構】重複頁はファイル削除だけだと復活=page-dedup.yml](dedup_without_seed_revives.md) — ISBN集合frozensetで10秒掃引・残6組
 - [【型・44頁是正済】covers seedに在るのに頁がnull](cover_null_despite_seed.md) — 掃引はISBN集合突合10秒・直しは再promoteだけ・フルpromote後は必ず回す ／ [【型・09-23是正=週次でWorker deploy待ち】検索/一覧だけ古い=索引JSONのブラウザ4時間キャッシュ](index_json_browser_cache_stale.md) — 索引だけ毎回確認(304)に。エッジpurgeでは直らなかった型 ／ [【型・封鎖済】build経路3つにNODE_OPTIONSが要る](build_routes_need_node_options.md) — 差分反映だけ抜けてcode:134で死んだ
 - [【型・根治済】差分反映が対象頁だけのデータで建て、関連作品/著者keyが部分集合から計算されていた](diff_deploy_subset_related.md) — 生成を絞りデータは絞らない。関連の並びも見直し(3冊以上→年の近さ)
-- [【実測・1と2実装済】容量/ファイル数/表示速度の残りレバー(2026-09-24)](size_speed_levers_2026_09_24.md) — 巻サムネ3重SSR/フォントCSS全頁ブロック/作品1本の著者頁/開発頁の本番公開
+- [【実測・1と2実装済】容量/ファイル数/表示速度の残りレバー(2026-09-24)](size_speed_levers_2026_09_24.md)
 - [楽天API=1クエリ最大3,000件・予約harvestは上限で自動細分(子ジャンル→判型→在庫状況)](rakuten_harvest_page_cap.md) — 品切れは在庫状況が空で引けない・レートは_get内
 - [【戒め】報告は常に日本語で](feedback_report_in_japanese.md) — 要約(コンパクション)直後に完了報告が英語になり「終わったの？」と聞かれた
 - [【GO待ち】レーベル欄に巻番号56頁/旅ボン頁バラバラ](pending_go_imprint_volnum_tabibon.md) — 2026-09-24日次で提示。ノヴァコミックス　1型=楽天seriesName由来 ／ [【戒め】ツールの定型文を結論にしない(NDL単発429≠規制)](feedback_sanity_check_tool_warnings.md)
@@ -130,3 +130,4 @@
 - [【方針】仮想書店=現実を模さない・全画面が切り替わる魔法コンソール](magic_shelf_virtual_bookstore.md) — 雛型v1は外れ(フィルター出し方変えただけ)・残す/消す未決
 - [クラウドセッションの使い方](cloud_sessions_usage.md) — 作業ブランチ直push・その間ローカルpush禁止・page.preview.tsx・11/5失効
 - [【是正済】副題欄に副題でない物=3,324→3,141](subtitle_not_subtitle_cleanup.md) — 型別の判断基準・こち亀の土台は残課題・攻殻機動隊=対訳版が主版の型
+- [1巻もキャッチ+要素(09-30裁定・3,308作済)](onevol_catch_themes_enrich_2026_10.md)

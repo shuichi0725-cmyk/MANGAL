@@ -14,8 +14,26 @@ description: エンリッチして=2巻以上はキャッチ+詳細+ジャンル
 | 対象 | 付与するもの |
 |---|---|
 | **2巻以上**+材料(楽天caption)あり | キャッチ+詳細+ジャンル(フル) |
-| **1巻のみ**+材料あり | **ジャンルのみ**(キャッチ/詳細は書かない) |
+| **1巻のみ**+材料あり | ★**キャッチ+ジャンル見直し(union追加)+要素**(詳細は書かない)。2026-09-30 ユーザ裁定で旧「ジャンルのみ」を改訂 |
 | 材料なし(楽天にcaption無し/商品無し) | Gemini同定でジャンルのみ(任意・下記)/それも不可なら**空のまま**(捏造しない)+欠落表 |
+
+### ★1巻キャッチ+要素の実務 (= 2026-09-30〜10-01 初回実施・batch 9700〜9780 で3,308作)
+- 目的 = 羅針盤(対象条件 `cover && catch`、テーマ糸=`themes`・ジャンル糸=`genres`)に乗る作品を増やす。
+- 道具: `scripts/_enrich-1vol-stage.py`(材料ダイジェスト作成) → 下書き `raw-N.json`
+  (`{slug:{catch,g,t}}` / `{slug:{skip:理由}}`) → `scripts/_enrich-1vol-finalize.py N`
+  (見送りは `docs/production-diagnostics/enrich-hold.tsv` へ) → `scripts/_apply-enrich-batch.py N [--apply]`。
+- 検証ゲート = キャッチ48〜74字 / 材料との8-gram重複 0.55以上でBLOCK(0.40〜はWARN可) / genre=master32 /
+  要素=`data/enrich-out-2026-07/theme-vocab-ja.json` の語彙のみ(例: ボーカロイド・先住民文化は語彙外)。
+- 書込先 = `catch-ja.json`(SRC slugキー・純粋追加) / `genre-append.yml`(union) / `genre-enrich-2425.json`
+  (genres空の頁のみ・provisional) / `tags-enrich-2425.json`(要素) / 台帳 `enrich-1vol-changelog.jsonl`。
+- ★**見送る型**(掲載境界・材料不足): アンソロジー/複数作家・傑作選/選集/自選/撰集/名作集/総集編・合本/BOX・
+  画集/イラスト集/ファンブック/資料・映画やアニメの漫画化・絵本・学習参考書/解説本/事典・小説/評論/対談・
+  収録作名や話数一覧だけ・惹句だけ。実測で約3割が見送り。
+- ★**捏造の再発型**: 材料に無い細部(姉妹/双子の取り違え・人物の肩書き・「〜が現れる」等の筋の補完)。
+  書いた後に材料と1語ずつ突き合わせる。適用後の訂正は `.cache/enrich-1vol/recatch.py`。
+- 反映: changelogのslug全件を targeted反映。★Windowsのコマンド長上限(32,767字)があるので**700頁ずつに分け**、
+  途中は `--commit-only`、最後の1回だけ `--push`(追いpush回避)。
+- ★予約頁(preorder stream)にもタグseedを結線済(`_promote-bulk-v2.py`)。[[preorder_page_bypasses_mainline_class]]
 
 - 「楽天でジャンルとれる」の実体 = 楽天が直接くれるのではなく、**captionを材料にAIがmaster32から選んで
   `genres_provisional: true`を立てる**(楽天から直接来るのは分野系サブジャンルだけ)。
