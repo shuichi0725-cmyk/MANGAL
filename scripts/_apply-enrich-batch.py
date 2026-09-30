@@ -46,7 +46,8 @@ def prod(slug):
     return {'catch': bool((d.get('catch') or '').strip()),
             'syn': bool((d.get('synopsis') or '').strip()),
             'aid': str(d.get('anilist_id')) if d.get('anilist_id') else None,
-            'genres': list(d.get('genres') or [])}
+            'genres': list(d.get('genres') or []),
+            'tags': [t.get('name') for t in (d.get('tags') or []) if isinstance(t, dict)]}
 
 def ngram_overlap(a, b, k=8):
     a = re.sub(r'\s', '', a); b = re.sub(r'\s', '', b)
@@ -67,12 +68,25 @@ for n in NS:
         for e in (bd['items'] if isinstance(bd, dict) else bd):
             capmap[e['slug']] = [html.unescape(c.get('caption') or '') for c in (e.get('captions') or [])]
 
+# ★1巻作品の見直し(2026-09-30 新設): genres_union = 既存を消さず足す(genre-append.yml)/
+#   themes = 要素の和名(語彙= data/enrich-out-2026-07/theme-vocab-ja.json = 本番索引で20作以上ある要素)
+#   → 英語タグ名に直して tags-enrich-2425.json へ union。 語彙外は違反で止める(新語を作らない)。
+THEME_VOCAB = json.load(open(os.path.join(OUTDIR, 'theme-vocab-ja.json'), encoding='utf-8'))
+
 bad = []; block = []; warn = []
 for s, v in out.items():
     c = (v.get('catch') or '').strip(); y = (v.get('synopsis') or '').strip()
     ga = v.get('genres_add') or []
+    for g in (v.get('genres_union') or []):
+        if g not in MASTER: bad.append((s, f'genre外:{g}'))
+    for t in (v.get('themes') or []):
+        if t not in THEME_VOCAB: bad.append((s, f'要素語彙外:{t}'))
     st = prod(s)
     if st is None: bad.append((s, 'NOFILE')); continue
+    if c and not (st.get('catch') and not REQUEUE):
+        m = max([ngram_overlap(c, cap) for cap in capmap.get(s, [])] or [0])
+        if m >= BLOCK: block.append((round(m, 2), s + '(catch)'))
+        elif m >= WARN: warn.append((round(m, 2), s + '(catch)'))
     if c and not (CATCH_MIN <= len(c) <= CATCH_MAX): bad.append((s, f'catch{len(c)}'))
     if y and not (SYN_MIN <= len(y) <= SYN_MAX): bad.append((s, f'syn{len(y)}'))
     if c and y and (c[:20] == y[:20]): bad.append((s, 'catch==syn頭20字'))
@@ -109,6 +123,13 @@ syn = json.load(open(paths['syn'], encoding='utf-8'))
 synaid = json.load(open(paths['synaid'], encoding='utf-8'))
 genre = json.load(open(paths['genre'], encoding='utf-8'))
 cidx = json.load(open(paths['cidx'], encoding='utf-8'))
+paths['tags'] = os.path.join(ROOT, 'data', 'seeds', 'tags-enrich-2425.json')
+tags = json.load(open(paths['tags'], encoding='utf-8'))
+GAPP = os.path.join(ROOT, 'data', 'seeds', 'genre-append.yml')
+gapp = {}
+for e in (yaml.safe_load(open(GAPP, encoding='utf-8')) or {}).get('additions', []):
+    if e.get('slug'): gapp.setdefault(e['slug'], []).extend(e.get('add') or [])
+gapp_new = {}; agu = at = 0; log = []
 
 ac = asn = ag = ai = 0
 ov_c = ov_s = ov_aid = 0
@@ -142,10 +163,20 @@ for s, v in out.items():
     if ga:
         if st.get('genres'): skip_genre += 1
         elif s not in genre: genre[s] = ga; ag += 1; touched = True
-    if touched: changed.append(s)
+    gu = [g for g in (v.get('genres_union') or []) if g not in set(st.get('genres') or []) | set(gapp.get(s, []))]
+    if gu:
+        gapp_new[s] = gu; agu += 1; touched = True
+    tn = [THEME_VOCAB[t] for t in (v.get('themes') or [])]
+    tn = [t for t in dict.fromkeys(tn) if t not in set(tags.get(s, [])) | set(st.get('tags') or [])]
+    if tn:
+        tags[s] = list(tags.get(s, [])) + tn; at += 1; touched = True
+    if touched:
+        changed.append(s)
+        log.append({'slug': s, 'op': 'enrich-1vol' if (gu or tn) else 'enrich', 'catch': c or None,
+                    'genres_add': gu or None, 'tags_add': tn or None})
 
 mode = 'REQUEUE(上書き許可)' if REQUEUE else '純粋追加'
-print(f'[{mode}] catch+{ac} / syn+{asn} / genre+{ag} / catch索引+{ai}'
+print(f'[{mode}] catch+{ac} / syn+{asn} / genre+{ag} / genre追加(union)+{agu} / 要素+{at} / catch索引+{ai}'
       + (f' / 上書き catch{ov_c}・syn{ov_s}(うちanilist層{ov_aid})' if REQUEUE else '')
       + f'  (本番既済skip: catch{skip_catch}/syn{skip_syn}/genre{skip_genre})')
 print(f'変更slug {len(changed)}件')
@@ -160,6 +191,19 @@ json.dump(syn, open(paths['syn'], 'w', encoding='utf-8'), ensure_ascii=False, se
 json.dump(synaid, open(paths['synaid'], 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
 json.dump(genre, open(paths['genre'], 'w', encoding='utf-8'), ensure_ascii=False, separators=(',', ':'))
 json.dump(cidx, open(paths['cidx'], 'w', encoding='utf-8'), ensure_ascii=False, separators=(',', ':'))
+json.dump(tags, open(paths['tags'], 'w', encoding='utf-8'), ensure_ascii=False, separators=(',', ':'))
+if gapp_new:
+    shutil.copy2(GAPP, os.path.join(ROOT, '.cache', os.path.basename(GAPP) + f'.bak-enrich{stamp}'))
+    src = 'enrich-1vol-caption:batch-' + '+'.join(NS)
+    with open(GAPP, 'a', encoding='utf-8') as f:
+        for s2, gs in gapp_new.items():
+            f.write(f'  - slug: {s2}\n    add: [{", ".join(gs)}]\n    source: "{src}"\n')
+if log:
+    now = datetime.datetime.now().isoformat(timespec='seconds')
+    with open(os.path.join(ROOT, 'docs', 'production-diagnostics', 'enrich-1vol-changelog.jsonl'), 'a', encoding='utf-8') as f:
+        for r in log:
+            r['batch'] = '+'.join(NS); r['at'] = now
+            f.write(json.dumps({k: v for k, v in r.items() if v is not None}, ensure_ascii=False) + '\n')
 open(os.path.join(ROOT, '.cache', 'enrich_changed_slugs.txt'), 'w', encoding='utf-8').write(','.join(changed))
 if REQUEUE:
     clp = os.path.join(ROOT, 'docs', 'production-diagnostics', 'enrich-requeue-changelog.jsonl')

@@ -4409,6 +4409,17 @@ def main():
                 if _pm != set(_pd.get("genres") or []):
                     _pd["genres"] = sorted(_pm)
                     _touched = True
+            # ★要素タグseed(tag-rakuten.yml / tags-enrich-2425.json)= 本流と同じ union をここでも通す
+            #   (2026-09-30 実害)。予約頁は本流の要素タグ適用点に来ないため、1巻見直しで書いた要素が
+            #   **頁に1つも出なかった**(ジャンルは届くのに要素だけ空)。既存 tag 名は dedup・カテゴリは本流と同じ。
+            for _tmap, _tcat, _trank in ((_RAKUTEN_TAGS, "Rakuten", 60), (_TAGS_ENRICH, "AI", 55)):
+                _tn = [n for k in dict.fromkeys((_stem, _pd.get("slug") or _stem))
+                       for n in (_tmap.get(k) or []) if n]
+                _tex = {t.get("name") for t in (_pd.get("tags") or []) if isinstance(t, dict)}
+                _tadd = [{"name": n, "category": _tcat, "rank": _trank} for n in dict.fromkeys(_tn) if n not in _tex]
+                if _tadd:
+                    _pd["tags"] = (_pd.get("tags") or []) + _tadd
+                    _touched = True
             # ★派生ジャンル規則 = 本流と同じ層を予約頁にも(2026-08-03。規則の正本=_genre_rules.py)
             _pdrv = _derive_genres(
                 _pd.get("title") or "",
