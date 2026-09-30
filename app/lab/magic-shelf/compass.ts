@@ -28,19 +28,28 @@ export const KIND_NAME: Record<ThreadKind, string> = {
   back: "来た道",
 };
 
-/** 周りの本の方角(度・0=東・時計回り)。 作者の2冊目は上限1のため使わないが、試作の枠として残す。 */
-export const RING_ANGLES: Record<Kind, readonly number[]> = {
-  author: [-90, -70],
-  mag: [-20, 20],
-  year: [70, 110],
-  elem: [160, 200],
+/**
+ * 周りの本の枠(度・0=東・時計回り)。 ★2026-09-30 ユーザ「デフォルトが少ない・ジャンルも繋げて」:
+ * 10枠を36°おきに置き、種類ごとに2枠(北寄り=作者 / 北東=ジャンル / 東〜南東=同じ雑誌 / 南=同じ年 / 西=要素)。
+ * 候補が足りない種類の空き枠は、他の種類の3冊目で埋める(RING_FILL_ORDER の順)= いつも10冊前後。
+ */
+export const RING_SLOTS: Record<UnitKind, readonly number[]> = {
+  author: [-90, -126],
+  genre: [-54, -18],
+  mag: [18, 54],
+  year: [90, 126],
+  elem: [162, 198],
 };
-export const RING_CAP: Record<Kind, number> = {
-  author: 1,
-  mag: 2,
-  year: 2,
-  elem: 2,
-};
+/** 種類ごとの基本の冊数(枠の数) */
+export const RING_BASE = 2;
+/** 枠の総数(= 画面に出す周りの本の最大数。 来た道があれば来た道が1枠使う) */
+export const RING_SLOTS_TOTAL = 10;
+/** 計算側が種類ごとに持つ冊数(基本2 + 空き枠を埋める1 + 来た道で抜けた時の控え1) */
+export const RING_PICK = RING_BASE + 2;
+/** 空き枠を埋める順(広い糸から) */
+export const RING_FILL_ORDER: readonly UnitKind[] = ["genre", "elem", "year", "mag", "author"];
+/** 周りの本の種類(ジャンルを含む・周りに出す順 = 1冊は最初に当てはまった種類にだけ入る) */
+export const RING_KINDS: readonly UnitKind[] = ["author", "mag", "year", "elem", "genre"];
 export const UNIT_MAX = 24;
 /** ジャンルの重なり(共通のジャンル ÷ どちらかにあるジャンル)の段階。 24冊に届かなければ次の段階へ下げる */
 export const GENRE_TIERS: readonly { min: number; label: string }[] = [
@@ -115,7 +124,7 @@ export function buildGraph(list: readonly MangaListItem[]): Graph {
 
 export type RingEntry = {
   slug: string;
-  kind: Kind;
+  kind: UnitKind;
   label: string;
   shared: number;
 };
@@ -167,7 +176,7 @@ export function neighborhood(
   g: Graph,
   center: MangaListItem,
   magName: (key: string) => string = (k) => k,
-  opts: { rand?: () => number; visited?: ReadonlySet<string> } = {},
+  opts: { rand?: () => number; visited?: ReadonlySet<string>; genreName?: (key: string) => string } = {},
 ): Neighborhood {
   const visited = opts.visited ?? new Set<string>();
   const self = center.slug;
@@ -204,16 +213,41 @@ export function neighborhood(
     ? (g.byYear.get(center.year_started) ?? []).filter(notSelf)
     : [];
 
+  // ── ジャンル: 重なり75%以上 → 24冊に届かなければ60% → 50%(周りの本と広げる単位で共有) ──
+  const cG = uniq(center.genres ?? []);
+  const genre = (() => {
+    const cnt = new Map<number, number>();
+    for (const k of cG) for (const i of g.byGenre.get(k) ?? []) cnt.set(i, (cnt.get(i) ?? 0) + 1);
+    const jac = (i: number) => {
+      const n = cnt.get(i) ?? 0;
+      return n / (cG.length + uniq(g.items[i].genres ?? []).length - n);
+    };
+    let chosen: number[] = [];
+    let label = GENRE_TIERS[0].label;
+    if (cG.length)
+      for (const t of GENRE_TIERS) {
+        chosen = [...cnt.keys()].filter((i) => notSelf(i) && jac(i) >= t.min - 1e-9);
+        label = t.label;
+        if (chosen.length >= UNIT_MAX) break;
+      }
+    return { chosen, label, jac };
+  })();
+  const gName = opts.genreName ?? ((k: string) => k);
+  const sharedGenres = (i: number) => {
+    const gs = new Set(g.items[i].genres ?? []);
+    return cG.filter((k) => gs.has(k));
+  };
+
   // ── 周りの本: 1冊は最初に当てはまった種類1つにだけ入る(作者 > 同じ雑誌 > 同じ年 > 要素) ──
   const taken = new Set<number>();
   const ring: RingEntry[] = [];
   // 各種類 上限+1冊まで持つ(+1 = 前の中央がその枠にいた時の控え。 上限は placeRing で掛ける)
-  const take = (cands: number[], kind: Kind, label: (i: number) => string) => {
+  const take = (cands: number[], kind: UnitKind, label: (i: number) => string) => {
     cands.sort(cmp);
     for (const i of cands) taken.add(i);
     // ★くじ(2026-09-30): 固定の上位でなく、近いほど当たりやすいくじで選ぶ。 旅で辿った本は外す
     const pickFrom = cands.filter((i) => !visited.has(g.items[i].slug));
-    for (const i of weightedPick(pickFrom, sh, RING_CAP[kind] + 1, opts.rand))
+    for (const i of weightedPick(pickFrom, sh, RING_PICK, opts.rand))
       ring.push({
         slug: g.items[i].slug,
         kind,
@@ -241,6 +275,11 @@ export function neighborhood(
     ),
     "elem",
     (i) => sharedThemes(i).slice(0, 2).join("・"),
+  );
+  take(
+    genre.chosen.filter((i) => !taken.has(i)),
+    "genre",
+    (i) => sharedGenres(i).slice(0, 2).map(gName).join("・") || genre.label,
   );
 
   // ── 広げる単位(各最大24冊・並び順は同じ) ──
@@ -282,24 +321,7 @@ export function neighborhood(
   for (const t of topThemes)
     unit(`elem:${t}`, "elem", t, (g.byTheme.get(t) ?? []).filter(notSelf));
 
-  // ── ジャンル: 重なり75%以上 → 24冊に届かなければ60% → 50% ──
-  const cG = uniq(center.genres ?? []);
-  if (cG.length) {
-    const cnt = new Map<number, number>();
-    for (const k of cG) for (const i of g.byGenre.get(k) ?? []) cnt.set(i, (cnt.get(i) ?? 0) + 1);
-    const jac = (i: number) => {
-      const n = cnt.get(i) ?? 0;
-      return n / (cG.length + uniq(g.items[i].genres ?? []).length - n);
-    };
-    let chosen: number[] = [];
-    let label = GENRE_TIERS[0].label;
-    for (const t of GENRE_TIERS) {
-      chosen = [...cnt.keys()].filter((i) => notSelf(i) && jac(i) >= t.min - 1e-9);
-      label = t.label;
-      if (chosen.length >= UNIT_MAX) break;
-    }
-    if (chosen.length) unit("genre", "genre", label, chosen, (i) => 4 * jac(i) + sh(i));
-  }
+  if (genre.chosen.length) unit("genre", "genre", genre.label, genre.chosen, (i) => 4 * genre.jac(i) + sh(i));
 
   return { ring, units };
 }
@@ -322,14 +344,16 @@ export type Geom = {
 
 export function stageGeom(W: number, H: number): Geom {
   const CX = W / 2;
-  const CY = H / 2;
+  // ★中心は少し上へ: 下端に「広げる ▸」の帯(32px)と本のラベル(約16px)があるので、上下の余白を釣り合わせる
+  const CY = (H - 44) / 2;
   return {
     W,
     H,
     CX,
     CY,
-    rx: Math.max(80, Math.min(128, CX - 40)),
-    ry: Math.max(80, Math.min(165, CY - 100)),
+    // ★周り10枠(2026-09-30)に合わせて楕円を広げる(横=本の半幅+余白・縦=本の半高+ラベル分を残す)
+    rx: Math.max(80, Math.min(142, CX - 34)),
+    ry: Math.max(80, Math.min(185, CY - 45)),
     top: 34,
     bottom: 32,
   };
@@ -373,16 +397,47 @@ export function placeRing(
   rx: number,
   ry: number,
 ): RingPlaced[] {
-  const used: Record<Kind, number> = { author: 0, mag: 0, year: 0, elem: 0 };
   const out: RingPlaced[] = [];
   const base: number[] = [];
+  const byKind = new Map<UnitKind, RingEntry[]>();
   for (const e of ring) {
-    if (e.slug === prev || used[e.kind] >= RING_CAP[e.kind]) continue;
-    const a = RING_ANGLES[e.kind][used[e.kind]++];
+    if (e.slug === prev) continue;
+    const l = byKind.get(e.kind) ?? [];
+    l.push(e);
+    byKind.set(e.kind, l);
+  }
+  const vacant: number[] = [];
+  const spare: RingEntry[] = [];
+  for (const k of RING_KINDS) {
+    const l = byKind.get(k) ?? [];
+    RING_SLOTS[k].forEach((a, n) => {
+      const e = l[n];
+      if (e) {
+        out.push({ ...e, ang: a, dx: 0, dy: 0, back: false });
+        base.push(a);
+      } else vacant.push(a);
+    });
+  }
+  // 空き枠 = 候補の多い種類の3冊目で埋める
+  for (const k of RING_FILL_ORDER) spare.push(...(byKind.get(k) ?? []).slice(RING_BASE, RING_BASE + 1));
+  for (const a of vacant) {
+    const e = spare.shift();
+    if (!e) break;
     out.push({ ...e, ang: a, dx: 0, dy: 0, back: false });
     base.push(a);
   }
   if (prev) {
+    // ★来た道は枠を1つ使う: 周りが満杯(10冊)の時は、来た道に一番近い枠の本を1冊外す
+    //   (10冊+来た道=11冊だとスマホ幅で本どうしが重なる方向があった 2026-09-30)
+    const ba = backAng ?? 135;
+    if (out.length >= RING_SLOTS_TOTAL) {
+      let k = 0;
+      out.forEach((o, n) => {
+        if (angleGap(o.ang, ba) < angleGap(out[k].ang, ba)) k = n;
+      });
+      out.splice(k, 1);
+      base.splice(k, 1);
+    }
     out.push({
       slug: prev,
       kind: "back",

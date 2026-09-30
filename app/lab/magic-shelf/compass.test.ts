@@ -118,7 +118,7 @@ describe("周りの本(つながりの計算)", () => {
     ]);
   });
 
-  it("上限: 作者1・同じ雑誌2・同じ年2・要素2(合計7)。 計算側は各種類に控えを1冊持つ", () => {
+  it("★周り=10枠(種類ごと2枠)。 候補の無い種類(ここではジャンル)の枠は、他の種類の3冊目で埋める", () => {
     const c = book("c", {
       authors: [{ name: "甲" }],
       magazine: "jump",
@@ -135,13 +135,27 @@ describe("周りの本(つながりの計算)", () => {
     for (let i = 0; i < 5; i++)
       list.push(book(`e${i}`, { themes: T.slice(0, 3), popularity: 5000 }));
     const { ring } = neighborhood(buildGraph(list), c);
-    const count = (xs: readonly { kind: string }[], k: Kind) =>
+    const count = (xs: readonly { kind: string }[], k: string) =>
       xs.filter((r) => r.kind === k).length;
-    expect(KINDS.map((k) => count(ring, k))).toEqual([2, 3, 3, 3]);
+    // 計算側は各種類 RING_PICK(=4)冊まで持つ
+    expect(KINDS.map((k) => count(ring, k))).toEqual([4, 4, 4, 4]);
     const placed = placeRing(ring, null, null, 118, 150);
-    expect(KINDS.map((k) => count(placed, k))).toEqual([1, 2, 2, 2]);
-    expect(placed.map((p) => p.ang)).toEqual([-90, -20, 20, 70, 110, 160, 200]);
+    expect(placed).toHaveLength(10);
+    // ジャンルの2枠(北東)は、埋める順(ジャンル→要素→年→雑誌→作者)で 要素・年 の3冊目が使う
+    expect(KINDS.map((k) => count(placed, k))).toEqual([2, 2, 3, 3]);
     expect(ring.some((r) => r.slug === "c")).toBe(false);
+  });
+
+  it("★ジャンルも周りに出る(ラベル=共通のジャンル名)", () => {
+    const c = book("c", { genres: ["historical", "samurai", "action"] });
+    const list = [c];
+    for (let i = 0; i < 3; i++) list.push(book(`g${i}`, { genres: ["historical", "samurai", "action"] }));
+    const { ring } = neighborhood(buildGraph(list), c, (k) => k, {
+      genreName: (k) => ({ historical: "歴史", samurai: "時代劇", action: "アクション" })[k] ?? k,
+    });
+    const gs = ring.filter((r) => r.kind === "genre");
+    expect(gs.length).toBe(3);
+    expect(gs[0].label).toBe("歴史・時代劇");
   });
 
   it("条件: 雑誌・年は共通の要素2以上、要素は3以上かつ popularity > 3000", () => {
@@ -181,7 +195,7 @@ describe("周りの本(つながりの計算)", () => {
       placeRing(neighborhood(g, c).ring, null, null, 118, 150).map(
         (r) => r.slug,
       ),
-    ).toEqual(["four", "three"]);
+    ).toEqual(["four", "three", "two-hi"]); // 空き枠を3冊目で埋める
   });
 });
 
@@ -323,7 +337,7 @@ describe("来た道", () => {
       const p = placeRing(full, "prev", from + 180, g.rx, g.ry);
       const back = p.find((o) => o.back);
       expect(angleGap(back!.ang, from + 180)).toBe(0);
-      expect(p.filter((o) => !o.back)).toHaveLength(7);
+      expect(p.filter((o) => !o.back)).toHaveLength(9); // 来た道が1枠使う = 画面は10冊
       for (let i = 0; i < p.length; i++)
         for (let j = i + 1; j < p.length; j++) {
           const overlap =

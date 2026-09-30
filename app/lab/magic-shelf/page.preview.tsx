@@ -21,7 +21,10 @@ export default function MagicShelfPage() {
   preload("/prod-idx/manga-list-head.json", { as: "fetch", crossOrigin: "anonymous" });
   preload("/prod-idx/manga-list-cols.v1.json", { as: "fetch", crossOrigin: "anonymous", fetchPriority: "low" });
   preload("/prod-idx/manga-catch-index.json", { as: "fetch", crossOrigin: "anonymous", fetchPriority: "low" });
-  // 雑誌名(ラベル「週刊少年ジャンプ」用)だけをこの頁に渡す
-  const magazines = Object.fromEntries(loadMasters().magazines.map((m) => [m.key, m.name]));
-  return <MagicCompass magazines={magazines} />;
+  // 雑誌名(ラベル「週刊少年ジャンプ」用)とジャンル名をこの頁に渡す
+  const masters = loadMasters();
+  const magazines = Object.fromEntries(masters.magazines.map((m) => [m.key, m.name]));
+  // ジャンル名(周りの本のラベル「歴史・時代劇」用・2026-09-30)
+  const genres = Object.fromEntries(masters.genres.map((g) => [g.key, g.name]));
+  return <MagicCompass magazines={magazines} genres={genres} />;
 }

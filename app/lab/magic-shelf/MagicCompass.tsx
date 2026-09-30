@@ -112,7 +112,7 @@ function SpreadIcon({ k }: { k: Spread }) {
   );
 }
 
-export default function MagicCompass({ magazines }: { magazines: Record<string, string> }) {
+export default function MagicCompass({ magazines, genres = {} }: { magazines: Record<string, string>; genres?: Record<string, string> }) {
   // ── データ: useMangaIndex(先頭100件 → 列形式の全件)+ キャッチ ──
   const index = useMangaIndex({ withCatch: true });
   const [failed, setFailed] = useState(false);
@@ -125,6 +125,7 @@ export default function MagicCompass({ magazines }: { magazines: Record<string, 
   // 逆引き表は索引(+キャッチ)が届いた時に1回だけ
   const graph = useMemo(() => (fullIndex && catchReady ? buildGraph(fullIndex) : null), [fullIndex, catchReady]);
   const magName = useCallback((k: string) => magazines[k] ?? k, [magazines]);
+  const genreName = useCallback((k: string) => genres[k] ?? k, [genres]);
 
   // ── 画面の大きさ ──
   const rootRef = useRef<HTMLDivElement>(null);
@@ -248,9 +249,9 @@ export default function MagicCompass({ magazines }: { magazines: Record<string, 
   pathRef.current = path;
   const visitedSet = () => new Set(pathRef.current.map((p) => p.slug));
   const nb = useMemo(
-    () => (graph && curItem ? neighborhood(graph, curItem, magName, { rand: Math.random, visited: visitedSet() }) : null),
+    () => (graph && curItem ? neighborhood(graph, curItem, magName, { rand: Math.random, visited: visitedSet(), genreName }) : null),
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [graph, curItem, magName],
+    [graph, curItem, magName, genreName],
   );
   const placed = useMemo(() => (nb ? placeRing(nb.ring, prev, backAng, geom.rx, geom.ry) : []), [nb, prev, backAng, geom]);
   const unitFull = useMemo(() => (exp && nb ? (nb.units.find((u) => u.key === exp) ?? null) : null), [exp, nb]);
