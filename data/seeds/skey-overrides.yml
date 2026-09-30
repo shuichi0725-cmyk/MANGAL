@@ -6,3 +6,7 @@ overrides:
     skey: "qid:Q313945|name:名探偵コナン"
     reason: 本編が汚染fragment(name:太田勝|name:名探偵コナン/2巻/太田勝)にjoinしていたのを、綺麗な本編series(sid40529/175巻/青山剛昌)へ恒久是正
     at: "2026-06-16"
+  kochira-katsushikaku-kameari-kouen-mae-hashutsujo:
+    skey: "qid:Q1321466|name:こちら葛飾区亀有公園前派出所"
+    reason: "頁の土台がホーム社の選集(name:ホーム社|name:こちら葛飾区亀有公園前派出所/8冊)にjoinしており、「その他 編集: ホーム社」と選集の副題が本編229冊の頁に出ていた(ユーザ指摘)。本編series(qid:Q1321466/251冊/秋本治)へ恒久是正"
+    at: "2026-09-30"
