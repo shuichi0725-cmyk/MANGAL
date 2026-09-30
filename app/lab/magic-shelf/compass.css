@@ -716,25 +716,34 @@
   border-radius: 12px;
   padding: 2px 12px;
 }
-/* 進む+詳細 の段(詳細は右端) */
-.cp-acts {
+/* 左の列 = 書影+詳細(★詳細は書影の下 = 文章の欄を使わない) */
+.cp-sheet-left {
+  flex: none;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 8px;
-  margin-top: 3px;
-}
-.cp-acts .cp-go {
-  margin-top: 0;
+  gap: 5px;
 }
 .cp-detail {
-  margin-left: auto;
-  flex: none;
   font-size: 10.5px;
   font-weight: 700;
   color: #0f1419;
   border: 1px solid #0f1419;
-  border-radius: 12px;
-  padding: 1px 10px;
+  border-radius: 10px;
+  padding: 0 7px;
   text-decoration: none;
-  line-height: 1.4;
+  line-height: 1.5;
+  white-space: nowrap;
+}
+.cp-detail:focus-visible,
+.cp-sheet-cov:focus-visible {
+  outline: 2px solid #0f1419;
+  outline-offset: 2px;
+}
+/* ★キャッチ: 何も選んでいない時は3行(下の「広げる」の帯にかからない)・本を選んでいる時は5行(シートが上へ伸びる) */
+.cp-sheet .cp-sheet-c {
+  -webkit-line-clamp: 3;
+}
+.cp-sheet.has-go .cp-sheet-c {
+  -webkit-line-clamp: 5;
 }

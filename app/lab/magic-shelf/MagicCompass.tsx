@@ -1009,14 +1009,22 @@ export default function MagicCompass({ magazines, genres = {} }: { magazines: Re
         style={{ "--kc": sheetKind ? KIND_COLOR[sheetKind] : "#cfd6db" } as CSSProperties}
         aria-live="polite"
       >
-        {sheetItem?.cover ? (
-          <button type="button" className="cp-sheet-cov" aria-label={`${sheetItem.title} の書影を大きく見る`} onClick={() => setBig(sheetItem.cover)}>
-            {/* eslint-disable-next-line @next/next/no-img-element -- 外部CDN直リンク(images.unoptimized) */}
-            <img src={sheetItem.cover} alt="" className="bg-white" draggable={false} />
-          </button>
-        ) : (
-          <span className="cp-noimg cp-sheet-noimg" />
-        )}
+        {/* 左の列 = 書影(押すと大きく)+その下に「詳細」(文章の欄を1行空けてキャッチを多く出す・2026-09-30) */}
+        <div className="cp-sheet-left">
+          {sheetItem?.cover ? (
+            <button type="button" className="cp-sheet-cov" aria-label={`${sheetItem.title} の書影を大きく見る`} onClick={() => setBig(sheetItem.cover)}>
+              {/* eslint-disable-next-line @next/next/no-img-element -- 外部CDN直リンク(images.unoptimized) */}
+              <img src={sheetItem.cover} alt="" className="bg-white" draggable={false} />
+            </button>
+          ) : (
+            <span className="cp-noimg cp-sheet-noimg" />
+          )}
+          {sheetItem && (
+            <a className="cp-detail" href={detailHref(sheetItem.slug)} onClick={saveResume}>
+              詳細 ›
+            </a>
+          )}
+        </div>
         <div className="cp-sheet-body">
           <div className="cp-sheet-head">
             <div className="cp-sheet-t">{sheetItem?.title ?? "魔法の書架"}</div>
@@ -1045,18 +1053,10 @@ export default function MagicCompass({ magazines, genres = {} }: { magazines: Re
           ) : (
             catchText && <div className="cp-sheet-c">{catchText}</div>
           )}
-          {sheetItem && shelveFor !== sheetItem.slug && (
-            <div className="cp-acts">
-              {goLabel && sel && (
-                <button type="button" className="cp-go" onClick={() => go(sel)}>
-                  {goLabel}
-                </button>
-              )}
-              {/* ★詳細 = その漫画の作品頁へ(同じタブ)。 飛ぶ前に旅を書き残す = OS の戻るで復元 */}
-              <a className="cp-detail" href={detailHref(sheetItem.slug)} onClick={saveResume}>
-                詳細 ›
-              </a>
-            </div>
+          {goLabel && sel && shelveFor !== sheetItem?.slug && (
+            <button type="button" className="cp-go" onClick={() => go(sel)}>
+              {goLabel}
+            </button>
           )}
         </div>
       </div>
