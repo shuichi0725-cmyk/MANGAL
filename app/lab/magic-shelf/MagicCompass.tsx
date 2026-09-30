@@ -28,6 +28,8 @@ import {
   UNIT_MAX,
   type UnitKind,
   type UnitItem,
+  RING_KINDS,
+  rng,
 } from "./compass";
 import { Halftone } from "./halftone";
 import { CompassShelveButton, CompassShelvePanel } from "./CompassShelve";
@@ -47,7 +49,12 @@ const STORE = "mangal.magicShelf.spreads.v1";
 const PLACEHOLDER_ANGLES = [-90, -20, 20, 70, 110, 160, 200];
 const FIRST = "\u0000first";
 
-type Step = { slug: string; kind: ThreadKind | null };
+/** seed = その中央の周りの本のくじの種(戻った時・詳細から戻った時に同じ顔ぶれを出す) */
+type Step = { slug: string; kind: ThreadKind | null; seed?: string };
+const newSeed = () => Math.random().toString(36).slice(2, 10);
+/** 詳細(作品頁)へ飛ぶ直前に旅の状態を書く = OS の戻るで帰ってきた時に復元する(2026-09-30 ユーザ要望) */
+const RESUME_KEY = "mangal:compass:resume:v1";
+type Resume = { path: Step[]; prev: string | null; backAng: number | null; sel: string | null; exp: string | null; drawn: { key: string; items: UnitItem[] } | null; t: number };
 type Spawn = { fx: number; fy: number; fs: number; d: number };
 type NodeView = {
   slug: string;
@@ -185,7 +192,7 @@ export default function MagicCompass({ magazines, genres = {} }: { magazines: Re
   const [prev, setPrev] = useState<string | null>(null);
   const [backAng, setBackAng] = useState<number | null>(null);
   const [sel, setSel] = useState<string | null>(null);
-  const [off, setOff] = useState<Set<Kind>>(() => new Set());
+  const [off, setOff] = useState<Set<UnitKind>>(() => new Set());
   const [exp, setExp] = useState<string | null>(null);
   const [lays, setLays] = useState<Partial<Record<UnitKind, string>>>({});
   // 広げた糸のうち画面に出している24冊(くじ引きの結果・2026-09-30)
@@ -200,6 +207,8 @@ export default function MagicCompass({ magazines, genres = {} }: { magazines: Re
   // シートの「しまう」: 棚を選ぶ欄を開いている本 / しまった後の一言(本が替わったら消す)
   const [shelveFor, setShelveFor] = useState<string | null>(null);
   const [shelveMsg, setShelveMsg] = useState<string | null>(null);
+  // 書影を大きく見る(楽天の書影は 600px で取り直す=原本が大きい物は大きく出る)
+  const [big, setBig] = useState<string | null>(null);
   useEffect(() => {
     setShelveFor(null);
     setShelveMsg(null);
@@ -216,13 +225,33 @@ export default function MagicCompass({ magazines, genres = {} }: { magazines: Re
   }, []);
 
   // ── 旅の始まり: ?from=<slug> か、先頭100件(人気上位)からランダムに1冊 ──
+  const resumeDrawn = useRef<{ key: string; items: UnitItem[] } | null>(null);
   useEffect(() => {
     if (path.length || !index || !index.length) return;
+    // 詳細(作品頁)から OS の戻るで帰ってきた = 飛ぶ前の旅をそのまま出す(1時間以内・1回だけ使う)
+    try {
+      const raw = window.sessionStorage.getItem(RESUME_KEY);
+      if (raw) {
+        window.sessionStorage.removeItem(RESUME_KEY);
+        const r = JSON.parse(raw) as Resume;
+        if (r && Array.isArray(r.path) && r.path.length && Date.now() - r.t < 3600_000) {
+          resumeDrawn.current = r.drawn;
+          setPath(r.path);
+          setPrev(r.prev);
+          setBackAng(r.backAng);
+          setSel(r.sel);
+          setExp(r.exp);
+          return;
+        }
+      }
+    } catch {
+      /* 読めなければ普通に始める */
+    }
     const full = isFullIndexLoaded();
     const from = new URLSearchParams(window.location.search).get("from");
     if (from) {
       if (index.some((m) => m.slug === from)) {
-        setPath([{ slug: from, kind: null }]);
+        setPath([{ slug: from, kind: null, seed: newSeed() }]);
         return;
       }
       if (!full) return; // 先頭100件に無い = 全件を待つ
@@ -231,7 +260,7 @@ export default function MagicCompass({ magazines, genres = {} }: { magazines: Re
       (m) => m.cover,
     );
     if (!pool.length) return;
-    setPath([{ slug: pool[Math.floor(Math.random() * pool.length)].slug, kind: null }]);
+    setPath([{ slug: pool[Math.floor(Math.random() * pool.length)].slug, kind: null, seed: newSeed() }]);
   }, [index, path.length]);
 
   const curItem = useMemo<MangaListItem | null>(() => {
@@ -249,7 +278,11 @@ export default function MagicCompass({ magazines, genres = {} }: { magazines: Re
   pathRef.current = path;
   const visitedSet = () => new Set(pathRef.current.map((p) => p.slug));
   const nb = useMemo(
-    () => (graph && curItem ? neighborhood(graph, curItem, magName, { rand: Math.random, visited: visitedSet(), genreName }) : null),
+    () => (graph && curItem ? neighborhood(graph, curItem, magName, {
+            rand: rng(`${curItem.slug}:${pathRef.current[pathRef.current.length - 1]?.seed ?? ""}`),
+            visited: visitedSet(),
+            genreName,
+          }) : null),
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [graph, curItem, magName, genreName],
   );
@@ -259,6 +292,12 @@ export default function MagicCompass({ magazines, genres = {} }: { magazines: Re
   useEffect(() => {
     if (!unitFull) {
       setDrawn(null);
+      return;
+    }
+    const r = resumeDrawn.current;
+    resumeDrawn.current = null;
+    if (r && r.key === unitFull.key) {
+      setDrawn(r);
       return;
     }
     setDrawn({ key: unitFull.key, items: drawUnit(unitFull, Math.random, visitedSet()) });
@@ -395,7 +434,7 @@ export default function MagicCompass({ magazines, genres = {} }: { magazines: Re
           slug,
           { x: p.x - geom.CX, y: p.y - geom.CY, w: p.w, h: p.h, small: true },
           unit.kind,
-          (ps) => [...ps, { slug, kind: unit.kind }],
+          (ps) => [...ps, { slug, kind: unit.kind, seed: newSeed() }],
         );
         return;
       }
@@ -406,7 +445,7 @@ export default function MagicCompass({ magazines, genres = {} }: { magazines: Re
         return;
       }
       const kind: ThreadKind = o.back ? "back" : o.kind;
-      travel(slug, { x: o.dx, y: o.dy, w: NW, h: NH, small: false }, kind, (ps) => [...ps, { slug, kind }]);
+      travel(slug, { x: o.dx, y: o.dy, w: NW, h: NH, small: false }, kind, (ps) => [...ps, { slug, kind, seed: newSeed() }]);
     },
     [unit, spread, placed, path, geom, travel, jumpBack],
   );
@@ -429,7 +468,7 @@ export default function MagicCompass({ magazines, genres = {} }: { magazines: Re
   );
 
   const toggleKind = useCallback(
-    (k: Kind) => {
+    (k: UnitKind) => {
       if (exp) return;
       setOff((s) => {
         const n = new Set(s);
@@ -521,7 +560,7 @@ export default function MagicCompass({ magazines, genres = {} }: { magazines: Re
         label: o.back ? "← 来た道" : o.label,
         color,
         back: o.back,
-        hidden: !!xs || (!o.back && off.has(o.kind as Kind)),
+        hidden: !!xs || (!o.back && off.has(o.kind as UnitKind)),
         pick: !xs && sel === o.slug,
         dim: !xs && !!sel && sel !== o.slug,
         spawn: firstRing
@@ -590,7 +629,7 @@ export default function MagicCompass({ magazines, genres = {} }: { magazines: Re
     return placed
       .filter((o) => o.slug !== cur)
       .map((o) => {
-        const hidden = !o.back && off.has(o.kind as Kind);
+        const hidden = !o.back && off.has(o.kind as UnitKind);
         const isSel = sel === o.slug;
         return {
           key: `l:${o.slug}`,
@@ -694,6 +733,20 @@ export default function MagicCompass({ magazines, genres = {} }: { magazines: Re
   }
   const catchText = sheetItem?.catch || (catchReady ? "(紹介文はまだありません)" : "");
 
+  // ★詳細 = 作品頁。 テスト環境は作品頁が17作だけなので本番サイトの頁へ(公開slugは本番と同じ)
+  const detailHref = (slug: string) =>
+    typeof window !== "undefined" && window.location.hostname !== "mangal-db.com"
+      ? `https://mangal-db.com/manga/${encodeURIComponent(slug)}`
+      : `/manga/${encodeURIComponent(slug)}`;
+  const saveResume = () => {
+    try {
+      const r: Resume = { path, prev, backAng, sel, exp, drawn, t: Date.now() };
+      window.sessionStorage.setItem(RESUME_KEY, JSON.stringify(r));
+    } catch {
+      /* 書けなくても飛ぶ(戻った時は新しい旅) */
+    }
+  };
+
   const worldStyle: CSSProperties = {
     left: geom.CX,
     top: geom.CY,
@@ -719,7 +772,7 @@ export default function MagicCompass({ magazines, genres = {} }: { magazines: Re
         <a href="/" className="cp-exit" aria-label="MANGAL のトップへ戻る">
           ←
         </a>
-        {KINDS.map((k) => (
+        {RING_KINDS.map((k) => (
           <button
             key={k}
             type="button"
@@ -732,10 +785,11 @@ export default function MagicCompass({ magazines, genres = {} }: { magazines: Re
             {KIND_NAME[k]}
           </button>
         ))}
-        <button type="button" className="cp-save" onClick={() => showToast("旅の保存は準備中です")}>
-          旅を保存
-        </button>
       </div>
+      {/* ★案D(2026-09-30): 旅を保存は旅の操作なので旅路の段の右端(上の列は糸5つ) */}
+      <button type="button" className="cp-save" onClick={() => showToast("旅の保存は準備中です")}>
+        旅を保存
+      </button>
 
       {/* 2. 旅路 */}
       <div className="cp-hist" ref={histRef}>
@@ -956,8 +1010,10 @@ export default function MagicCompass({ magazines, genres = {} }: { magazines: Re
         aria-live="polite"
       >
         {sheetItem?.cover ? (
-          // eslint-disable-next-line @next/next/no-img-element -- 外部CDN直リンク(images.unoptimized)
-          <img src={sheetItem.cover} alt="" className="bg-white" draggable={false} />
+          <button type="button" className="cp-sheet-cov" aria-label={`${sheetItem.title} の書影を大きく見る`} onClick={() => setBig(sheetItem.cover)}>
+            {/* eslint-disable-next-line @next/next/no-img-element -- 外部CDN直リンク(images.unoptimized) */}
+            <img src={sheetItem.cover} alt="" className="bg-white" draggable={false} />
+          </button>
         ) : (
           <span className="cp-noimg cp-sheet-noimg" />
         )}
@@ -989,13 +1045,28 @@ export default function MagicCompass({ magazines, genres = {} }: { magazines: Re
           ) : (
             catchText && <div className="cp-sheet-c">{catchText}</div>
           )}
-          {goLabel && sel && shelveFor !== sheetItem?.slug && (
-            <button type="button" className="cp-go" onClick={() => go(sel)}>
-              {goLabel}
-            </button>
+          {sheetItem && shelveFor !== sheetItem.slug && (
+            <div className="cp-acts">
+              {goLabel && sel && (
+                <button type="button" className="cp-go" onClick={() => go(sel)}>
+                  {goLabel}
+                </button>
+              )}
+              {/* ★詳細 = その漫画の作品頁へ(同じタブ)。 飛ぶ前に旅を書き残す = OS の戻るで復元 */}
+              <a className="cp-detail" href={detailHref(sheetItem.slug)} onClick={saveResume}>
+                詳細 ›
+              </a>
+            </div>
           )}
         </div>
       </div>
+      {big && (
+        <button type="button" className="cp-big" aria-label="閉じる" onClick={() => setBig(null)}>
+          {/* eslint-disable-next-line @next/next/no-img-element -- 外部CDN直リンク(images.unoptimized) */}
+          <img src={big.includes("thumbnail.image.rakuten.co.jp") ? big.replace(/\?_ex=\d+x\d+$/, "") + "?_ex=600x600" : big} alt="" />
+          <span>閉じる ✕</span>
+        </button>
+      )}
     </div>
   );
 }

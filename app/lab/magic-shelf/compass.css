@@ -123,15 +123,18 @@
   cursor: default;
 }
 .cp-save {
+  /* ★案D: 旅路の段(top 44・高さ56)の右端に重ねる。 旅路はその分だけ右に余白を取る */
+  position: absolute;
+  top: 58px;
+  right: 10px;
+  z-index: 6;
   flex: none;
-  margin-left: auto;
   font-size: 10.5px;
   border: 1px solid #ffffff30;
   border-radius: 12px;
-  padding: 1px 9px;
+  padding: 5px 10px;
   color: #e6ecf0;
-  background: transparent;
-  white-space: nowrap;
+  background: #070a0ecc;
   cursor: pointer;
 }
 
@@ -659,4 +662,79 @@
     transition: none !important;
     animation: none !important;
   }
+}
+
+/* 旅路は右端の「旅を保存」の分だけ余白を取る(案D) */
+.cp-hist {
+  padding-right: 92px !important;
+}
+/* 上の列 = 糸5つ(ジャンル追加・360px でも1列に収める) */
+.cp-top .cp-chip {
+  padding: 2px 9px;
+}
+/* シート: 書影を押すと大きく */
+.cp-sheet-cov {
+  flex: none;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: zoom-in;
+  align-self: flex-start;
+}
+.cp-sheet-cov img {
+  display: block;
+  width: 46px;
+  height: 65px;
+  object-fit: cover;
+  border-radius: 2px;
+}
+.cp-big {
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+  border: 0;
+  padding: 16px;
+  background: #000000d9;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  cursor: zoom-out;
+}
+.cp-big img {
+  max-width: 100%;
+  max-height: calc(100% - 40px);
+  object-fit: contain;
+  box-shadow: 0 10px 30px #000;
+  background: #fff;
+}
+.cp-big span {
+  color: #e6ecf0;
+  font-size: 12px;
+  border: 1px solid #ffffff40;
+  border-radius: 12px;
+  padding: 2px 12px;
+}
+/* 進む+詳細 の段(詳細は右端) */
+.cp-acts {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 3px;
+}
+.cp-acts .cp-go {
+  margin-top: 0;
+}
+.cp-detail {
+  margin-left: auto;
+  flex: none;
+  font-size: 10.5px;
+  font-weight: 700;
+  color: #0f1419;
+  border: 1px solid #0f1419;
+  border-radius: 12px;
+  padding: 1px 10px;
+  text-decoration: none;
+  line-height: 1.4;
 }
