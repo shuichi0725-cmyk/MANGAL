@@ -15,6 +15,11 @@ sys.stdout.reconfigure(encoding="utf-8")
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 n = sys.argv[1]
 raw = json.load(io.open(os.path.join(ROOT, ".cache", "enrich-1vol", f"raw-{n}.json"), encoding="utf-8"))
+# 字数/丸写しの手直しは別ファイル fix-<N>.json = {slug: 新catch} に書き、ここで上書き合流する(下書き本体は触らない)
+_fx = os.path.join(ROOT, ".cache", "enrich-1vol", f"fix-{n}.json")
+if os.path.exists(_fx):
+    for _s, _c in json.load(io.open(_fx, encoding="utf-8")).items():
+        raw[_s]["catch"] = _c
 st = {e["slug"]: e for e in json.load(io.open(os.path.join(ROOT, ".cache", "enrich-batches", f"batch-{n}.json"), encoding="utf-8"))["items"]}
 
 
