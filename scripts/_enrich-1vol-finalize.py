@@ -48,8 +48,10 @@ json.dump(out, io.open(os.path.join(ROOT, "data", "enrich-out-2026-07", f"batch-
           ensure_ascii=False, indent=1)
 if holds:
     hp = os.path.join(ROOT, "docs", "production-diagnostics", "enrich-hold.tsv")
+    seen = {ln.split("	")[0] for ln in io.open(hp, encoding="utf-8")}
     with io.open(hp, "a", encoding="utf-8") as f:
         for s, t, r in holds:
+            if s in seen: continue
             f.write(f"{s}\t{t}\t{datetime.date.today()}\t{n}\t1巻見直し: {r}\n")
 print(f"batch-{n}: 書く {len(out)} / 見送り {len(holds)} / 未記入 {len(missing)} {missing[:5]}")
 print("要修正:" if probs else "字数・丸写し OK", *probs, sep="\n")
