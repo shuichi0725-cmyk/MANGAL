@@ -17,7 +17,7 @@ metadata:
   - 残す: 正式な副題、親作品との関係(スピンオフ/『○○』公式アンソロジー/第9部/番外編/外伝)、表紙の英語副題。 D(巻・部の番号)は全部残す。
 - 実施: 消す183・直す1(南極漂流記)。 記録= `data/seeds/subtitle-fix-changelog.jsonl`(before/after/backup)。 判断表 artifact https://claude.ai/artifact/KSPDU3vV8XcziFvV8SQDTP
 - G(ふつうの副題らしい2,821件)は未着手(説明文が少し混ざるが機械判定は困難)。
-- ★残課題: こち亀の「その他 編集: ホーム社」は頁の土台がホーム社の選集のまま(本編key qid:Q1321466 は別slug `…kouenmae…` を指す)。 直すなら skey-overrides で土台を本編へ(巻構成が変わらないか要確認)。
+- ★こち亀の「その他 編集: ホーム社」= 是正済(2026-09-30): skey-overrides で土台を本編 qid:Q1321466 へ(巻229のまま)。 付け替えで本編の種2に混入していた著者 吉村作治が出てきたので author-role-corrections の remove で除去。 英題は「KochiKame: Tokyo Beat Cops」→「KochiKame」に変わった(本編側の値)。 ★型: 土台の付け替えは著者・英題も入れ替わる=前後の差分を必ず比べる
 - ★別件で見つけた型: 2026-08-17 ギャラ型一括是正(edition-canonical)が「巻数が最多の run を主版」にしたため、攻殻機動隊で英語対訳版(Kodansha bilingual comics・掲載対象外)が主版になり原本3冊が3版に割れていた → 原本 KCデラックス 1/1.5/2巻に書き直し済。 canonical 全766本を imprint(bilingual/english/remix/novel/collection box)で掃引して該当は攻殻機動隊だけ。
 - 抜粋本(○○セレクション=既刊の寄せ集め)と思われる頁が掲載に残っている(叶精作セレクション/ののちゃんセレクション 等)= 未着手。
 
