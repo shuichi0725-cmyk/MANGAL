@@ -152,6 +152,14 @@ KW = {
 KW = {k: re.compile(v) for k, v in KW.items() if k in VOCAB}
 
 
+_BR = re.compile(r'「[^」]*」|『[^』]*』')
+
+
+def strip_br(c):
+    """括弧内(「」『』)だけの一致は除外(あだ名・作品名・セリフからの誤付与封じ)"""
+    return _BR.sub('', c)
+
+
 def load():
     ix = json.load(open(D('data/manga-list-index.json'), encoding='utf-8'))
     rows = [dict(zip(ix['f'], r)) for r in ix['d']]
@@ -163,7 +171,7 @@ def measure(pairs):
     lab = [(r, c) for r, c in pairs if r['themes']]
     res = {}
     for t, rx in KW.items():
-        m = [(r, c) for r, c in lab if rx.search(c)]
+        m = [(r, c) for r, c in lab if rx.search(strip_br(c))]
         hit = sum(1 for r, c in m if t in r['themes'])
         pos = sum(1 for r, c in lab if t in r['themes'])
         res[t] = {'n': len(m), 'hit': hit, 'prec': (hit / len(m) if m else 0), 'pos': pos,
@@ -186,9 +194,9 @@ if __name__ == '__main__':
         adopt = {t for t, v in res.items() if v['prec'] >= PREC_MIN and v['n'] >= SUP_MIN}
         st = {}
         for r, c in zero:
-            ts = [t for t in adopt if KW[t].search(c)]
+            ts = [t for t in adopt if KW[t].search(strip_br(c))]
             if ts:
-                st[r['slug']] = {'themes': ts, 'kw': {t: KW[t].search(c).group(0) for t in ts}}
+                st[r['slug']] = {'themes': ts, 'kw': {t: KW[t].search(strip_br(c)).group(0) for t in ts}}
         json.dump({'adopt': sorted(adopt), 'items': st}, open(os.path.join(OUT, 'stage1.json'), 'w', encoding='utf-8'), ensure_ascii=False)
         cnt = {}
         for v in st.values():

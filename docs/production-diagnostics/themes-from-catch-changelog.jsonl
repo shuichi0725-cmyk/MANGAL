@@ -1944,3 +1944,48 @@
 {"slug": "kami-sama-no-youjinbou", "src": "kami-sama-no-youjinbou", "themes_remove": ["動物"], "reason": "キーワード「ウサギ」が括弧内(作品名/あだ名/比喩)でのみ一致=誤付与", "stage": "stage1-revert", "model": "opus-5.5", "at": "2026-10-01T09:07:28"}
 {"slug": "majo-shuukai-de-tsugaimashou", "src": "majo-shuukai-de-tsugaimashou", "themes_remove": ["魔法"], "reason": "キーワード「魔女」が括弧内(作品名/あだ名/比喩)でのみ一致=誤付与", "stage": "stage1-revert", "model": "opus-5.5", "at": "2026-10-01T09:07:28"}
 {"slug": "ruby-onza-cake", "src": "ruby-onza-cake", "themes_remove": ["魔法"], "reason": "キーワード「魔女」が括弧内(作品名/あだ名/比喩)でのみ一致=誤付与", "stage": "stage1-revert", "model": "opus-5.5", "at": "2026-10-01T09:07:28"}
+{"slug": "cristo-magaki-kemono-to-seija-no-kai", "src": "cristo-magaki-kemono-to-seija-no-kai", "themes_add": ["警察"], "basis": {"警察": "警部"}, "stage": "stage2-pilot", "model": "sonnet-5.5", "at": "2026-10-01T09:17:19"}
+{"slug": "koi-o-suru-tsumori-wa-nakatta", "src": "koi-o-suru-tsumori-wa-nakatta", "themes_add": ["LGBTQ+"], "basis": {"LGBTQ+": "ゲイバー"}, "stage": "stage2-pilot", "model": "sonnet-5.5", "at": "2026-10-01T09:17:19"}
+{"slug": "komadori-wa-yoru-no-tobari", "src": "komadori-wa-yoru-no-tobari", "themes_add": ["警察", "政治"], "basis": {"警察": "警官", "政治": "政界"}, "stage": "stage2-pilot", "model": "sonnet-5.5", "at": "2026-10-01T09:17:19"}
+{"slug": "kindan-no-amai-kajitsu", "src": "kindan-no-amai-kajitsu", "themes_add": ["LGBTQ+"], "basis": {"LGBTQ+": "ゲイの教師"}, "stage": "stage2-pilot", "model": "sonnet-5.5", "at": "2026-10-01T09:17:19"}
+{"slug": "omoichigai-ga-koi-no-tane", "src": "omoichigai-ga-koi-no-tane", "themes_add": ["医療"], "basis": {"医療": "麻酔科医"}, "stage": "stage2-pilot", "model": "sonnet-5.5", "at": "2026-10-01T09:17:19"}
+{"slug": "kuzu-inou-saamo-opereetaa-no-ore-ga-musou-suru-made", "src": "kuzu-inou-saamo-opereetaa-no-ore-ga-musou-suru-made", "themes_add": ["ヒーロー"], "basis": {"ヒーロー": "ヒーローを夢見る少年"}, "stage": "stage2-pilot", "model": "sonnet-5.5", "at": "2026-10-01T09:17:19"}
+{"slug": "navagraha", "src": "navagraha", "themes_add": ["ヒーロー"], "basis": {"ヒーロー": "バディヒーローアクション"}, "stage": "stage2-pilot", "model": "sonnet-5.5", "at": "2026-10-01T09:17:19"}
+{"slug": "tama-yori-hayaku", "src": "tama-yori-hayaku", "themes_add": ["警察"], "basis": {"警察": "新人刑事"}, "stage": "stage2-pilot", "model": "sonnet-5.5", "at": "2026-10-01T09:17:19"}
+{"slug": "joker-reboot", "src": "joker-reboot", "themes_add": ["警察"], "basis": {"警察": "若き警部"}, "stage": "stage2-pilot", "model": "sonnet-5.5", "at": "2026-10-01T09:17:19"}
+{"slug": "shimashima-lion", "src": "shimashima-lion", "themes_add": ["動物"], "basis": {"動物": "シマウマもライオン"}, "stage": "stage2-pilot", "model": "sonnet-5.5", "at": "2026-10-01T09:17:19"}
+{"slug": "paradrugs", "src": "paradrugs", "themes_add": ["医療"], "basis": {"医療": "記憶を編み替える医者"}, "stage": "stage2-pilot", "model": "sonnet-5.5", "at": "2026-10-01T09:17:19"}
+{"slug": "shiitagerareta-hime-desu-ouji-sama-no-noroi-o-toite-shiawase-ni-narimasu", "src": "shiitagerareta-hime-desu-ouji-sama-no-noroi-o-toite-shiawase-ni-narimasu", "themes_add": ["動物", "呪い"], "basis": {"動物": "大きな狼", "呪い": "呪われた王子"}, "stage": "stage2-pilot", "model": "sonnet-5.5", "at": "2026-10-01T09:17:19"}
+{"slug": "ninja-tensei-shinobikiru", "src": "ninja-tensei-shinobikiru", "themes_add": ["オタク文化"], "basis": {"オタク文化": "忍者オタク"}, "stage": "stage2-pilot", "model": "sonnet-5.5", "at": "2026-10-01T09:17:19"}
+{"slug": "amaterasu-san-wa-hikikomoritai", "src": "amaterasu-san-wa-hikikomoritai", "themes_add": ["オタク文化"], "basis": {"オタク文化": "ゴリゴリのオタク"}, "stage": "stage2-pilot", "model": "sonnet-5.5", "at": "2026-10-01T09:17:19"}
+{"slug": "5-noryuu", "src": "5-noryuu", "themes_add": ["将棋"], "basis": {"将棋": "将棋部"}, "stage": "stage2-pilot", "model": "sonnet-5.5", "at": "2026-10-01T09:17:19"}
+{"slug": "igor-no-shima", "src": "igor-no-shima", "themes_add": ["サバイバル"], "basis": {"サバイバル": "恐怖のサバイバル"}, "stage": "stage2-pilot", "model": "sonnet-5.5", "at": "2026-10-01T09:17:19"}
+{"slug": "numasugite-mohaya-koi", "src": "numasugite-mohaya-koi", "themes_add": ["オタク文化"], "basis": {"オタク文化": "オタク女子"}, "stage": "stage2-pilot", "model": "sonnet-5.5", "at": "2026-10-01T09:17:19"}
+{"slug": "ring-1996", "src": "ring-1996", "themes_add": ["呪い"], "basis": {"呪い": "呪いと刻限"}, "stage": "stage2-pilot", "model": "sonnet-5.5", "at": "2026-10-01T09:17:19"}
+{"slug": "oshikake-gal-no-nakamura-san", "src": "oshikake-gal-no-nakamura-san", "themes_add": ["オタク文化"], "basis": {"オタク文化": "動揺しがちなオタク"}, "stage": "stage2-pilot", "model": "sonnet-5.5", "at": "2026-10-01T09:17:19"}
+{"slug": "uwa-youjo-tsuyoi", "src": "uwa-youjo-tsuyoi", "themes_add": ["オタク文化"], "basis": {"オタク文化": "同人誌即売会"}, "stage": "stage2-pilot", "model": "sonnet-5.5", "at": "2026-10-01T09:17:19"}
+{"slug": "honjitsu-mo-kyuushin", "src": "honjitsu-mo-kyuushin", "themes_add": ["医療"], "basis": {"医療": "診療所を営む"}, "stage": "stage2-pilot", "model": "sonnet-5.5", "at": "2026-10-01T09:17:19"}
+{"slug": "isekai-rakuraku-mujintou-life", "src": "isekai-rakuraku-mujintou-life", "themes_add": ["サバイバル"], "basis": {"サバイバル": "生き残りは工夫と発想の勝負"}, "stage": "stage2-pilot", "model": "sonnet-5.5", "at": "2026-10-01T09:17:19"}
+{"slug": "noroi-no-shoutaijou", "src": "noroi-no-shoutaijou", "themes_add": ["呪い"], "basis": {"呪い": "呪術師カイ"}, "stage": "stage2-pilot", "model": "sonnet-5.5", "at": "2026-10-01T09:17:19"}
+{"slug": "aoi-destruction", "src": "aoi-destruction", "themes_add": ["オタク文化"], "basis": {"オタク文化": "元オタク少年"}, "stage": "stage2-pilot", "model": "sonnet-5.5", "at": "2026-10-01T09:17:19"}
+{"slug": "queen", "src": "queen", "themes_add": ["警察"], "basis": {"警察": "公安捜査官"}, "stage": "stage2-pilot", "model": "sonnet-5.5", "at": "2026-10-01T09:17:19"}
+{"slug": "hatsukoi-catharsis", "src": "hatsukoi-catharsis", "themes_add": ["LGBTQ+"], "basis": {"LGBTQ+": "無性愛者"}, "stage": "stage2-pilot", "model": "sonnet-5.5", "at": "2026-10-01T09:17:19"}
+{"slug": "ishakoi", "src": "ishakoi", "themes_add": ["医療"], "basis": {"医療": "ドクターたちのラブコメ"}, "stage": "stage2-pilot", "model": "sonnet-5.5", "at": "2026-10-01T09:17:19"}
+{"slug": "akira-otsuka", "src": "akira-otsuka-2011", "themes_add": ["警察"], "basis": {"警察": "悪魔の警察官だった父"}, "stage": "stage2-pilot", "model": "sonnet-5.5", "at": "2026-10-01T09:17:19"}
+{"slug": "hanatsumugu-higo-no-kami", "src": "hanatsumugu-higo-no-kami", "themes_add": ["医療"], "basis": {"医療": "医師の旅"}, "stage": "stage2-pilot", "model": "sonnet-5.5", "at": "2026-10-01T09:17:19"}
+{"slug": "figure-shifters", "src": "figure-shifters", "themes_add": ["オタク文化", "呪い"], "basis": {"オタク文化": "オタク中学生", "呪い": "呪術師の少女"}, "stage": "stage2-pilot", "model": "sonnet-5.5", "at": "2026-10-01T09:17:19"}
+{"slug": "danzai-no-rinshishi", "src": "danzai-no-rinshishi", "themes_add": ["警察"], "basis": {"警察": "新米警官"}, "stage": "stage2-pilot", "model": "sonnet-5.5", "at": "2026-10-01T09:17:19"}
+{"slug": "aokou-chiabu-wa-kawaikunai", "src": "aokou-chiabu-wa-kawaikunai", "themes_add": ["オタク文化"], "basis": {"オタク文化": "アニメオタク"}, "stage": "stage2-pilot", "model": "sonnet-5.5", "at": "2026-10-01T09:17:19"}
+{"slug": "kusattemo-hatsukoi", "src": "kusattemo-hatsukoi", "themes_add": ["オタク文化"], "basis": {"オタク文化": "腐女子"}, "stage": "stage2-pilot", "model": "sonnet-5.5", "at": "2026-10-01T09:17:19"}
+{"slug": "shounen-ashibe", "src": "shounen-ashibe", "themes_add": ["動物"], "basis": {"動物": "白いゴマフアザラシ"}, "stage": "stage2-pilot", "model": "sonnet-5.5", "at": "2026-10-01T09:17:19"}
+{"slug": "chaos-rings", "src": "chaos-rings", "themes_add": ["サバイバル"], "basis": {"サバイバル": "サバイバルバトル"}, "stage": "stage2-pilot", "model": "sonnet-5.5", "at": "2026-10-01T09:17:19"}
+{"slug": "night-walkers", "src": "night-walkers", "themes_add": ["政治"], "basis": {"政治": "総理大臣"}, "stage": "stage2-pilot", "model": "sonnet-5.5", "at": "2026-10-01T09:17:19"}
+{"slug": "sono-idol-kyuuketsuki-ni-tsuki", "src": "sono-idol-kyuuketsuki-ni-tsuki", "themes_add": ["オタク文化"], "basis": {"オタク文化": "ドルオタ男子"}, "stage": "stage2-pilot", "model": "sonnet-5.5", "at": "2026-10-01T09:17:19"}
+{"slug": "skyhigh-shinshou", "src": "skyhigh-shinshou", "themes_add": ["呪い"], "basis": {"呪い": "一人を呪い殺して"}, "stage": "stage2-pilot", "model": "sonnet-5.5", "at": "2026-10-01T09:17:19"}
+{"slug": "patoken", "src": "patoken", "themes_add": ["ヒーロー"], "basis": {"ヒーロー": "街の真のヒーロー"}, "stage": "stage2-pilot", "model": "sonnet-5.5", "at": "2026-10-01T09:17:19"}
+{"slug": "rakkyou-no-kawa", "src": "rakkyou-no-kawa", "themes_add": ["オタク文化"], "basis": {"オタク文化": "オタクをやめようと"}, "stage": "stage2-pilot", "model": "sonnet-5.5", "at": "2026-10-01T09:17:19"}
+{"slug": "happy-end", "src": "happy-end", "themes_add": ["医療"], "basis": {"医療": "看取りの医師"}, "stage": "stage2-pilot", "model": "sonnet-5.5", "at": "2026-10-01T09:17:19"}
+{"slug": "hawkeye", "src": "hawkeye", "themes_add": ["ヒーロー"], "basis": {"ヒーロー": "アベンジャーズの一員"}, "stage": "stage2-pilot", "model": "sonnet-5.5", "at": "2026-10-01T09:17:19"}
+{"slug": "kawaii-chikubi-ni-hitomebore", "src": "kawaii-chikubi-ni-hitomebore", "themes_add": ["医療"], "basis": {"医療": "イケメン医師"}, "stage": "stage2-pilot", "model": "sonnet-5.5", "at": "2026-10-01T09:17:19"}
+{"slug": "cheri-cheri", "src": "cheri-cheri", "themes_add": ["オタク文化"], "basis": {"オタク文化": "受験を控えるオタク"}, "stage": "stage2-pilot", "model": "sonnet-5.5", "at": "2026-10-01T09:17:19"}
+{"slug": "noroi-factory", "src": "noroi-factory", "themes_add": ["呪い"], "basis": {"呪い": "この世は呪いだらけ"}, "stage": "stage2-pilot", "model": "sonnet-5.5", "at": "2026-10-01T09:17:19"}
