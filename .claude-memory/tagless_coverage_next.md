@@ -31,3 +31,9 @@ AniList未照合(タグ源なし)+ 今回の楽天タグを「高精度26種・�
 
 ## genre側の残
 provisional(AI暫定のみ)も **25,529作** 残(うち other単独~1,056)。楽天で届かなかった分。同様に救済余地。
+
+## ✅ 2026-10-02 手1(楽天タグ保留候補の救済)を実施
+- 要素0かつ保留候補(gray)あり 7,907頁 → 紹介文(corpus-v2 caption+キャッチ)に**明記語**がある組だけ確定=**3,104頁・のべ3,674件**(書込先 tags-enrich-2425.json・台帳 themes-from-catch-changelog.jsonl stage=gray-rescue)。要素0: 48,450→45,347。
+- 抜き取り274件(要素ごと)で適合率約93%。外した要素=執筆/政治/自殺/暗殺者(2/4)。ゲームは「人気ゲームの4コマ/コミカライズ」を除外、性別変化は「男の娘」を語から外す。抽象タグ(Heterosexual/悲劇/成長物語/哲学/癒し系 等)は対象外。
+- 道具: `.cache/themes-from-catch/gray_ev.py <stage名>` → `scripts/_themes-from-catch.py apply <stage> --go --model=...`。
+- 残: War 354 / Youkai 114 の保留候補は要素語彙に無い(=ジャンル側の語)ので未処理。やるなら genre-append 経由で抜き取り検定から。
