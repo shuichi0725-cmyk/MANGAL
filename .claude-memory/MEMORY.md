@@ -133,3 +133,4 @@
 - [1巻もキャッチ+要素(09-30裁定・3,308作済)](onevol_catch_themes_enrich_2026_10.md)
 - [【進行中】キャッチから要素付与(2026-10-01)](themes_from_catch_2026_10.md) — 第1段1,899作反映済・第2段AI判定はGO待ち
 - [【型】dedup退役で予約頁に種2stubが流入(牙人)](dedup_retire_srcstub_vs_preorder.md)
+- [Kobo紹介文→キャッチ5,811作(10-02)](kobo_caption_catch_route.md)
