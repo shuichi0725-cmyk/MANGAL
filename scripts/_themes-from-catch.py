@@ -206,9 +206,10 @@ if __name__ == '__main__':
         print(sorted(cnt.items(), key=lambda x: -x[1]))
 
     elif mode == 'apply':
-        # 使い方: apply <stage1|stage2|genre> [--go]  (--goなし=dry-run)
+        # 使い方: apply <stage1|stage2|genre|gray-rescue> [--go] [--model=...]  (--goなし=dry-run)
         import shutil, yaml
         src = sys.argv[2]; go = '--go' in sys.argv
+        model = next((a.split('=', 1)[1] for a in sys.argv if a.startswith('--model=')), 'sonnet-5.5')
         items = json.load(open(os.path.join(OUT, src + '.json'), encoding='utf-8'))['items']
         ov = (yaml.safe_load(open(D('data/seeds/slug-overrides.yml'), encoding='utf-8')) or {}).get('overrides', {})
         pub2src = {(v or {}).get('slug'): k for k, v in ov.items() if isinstance(v, dict) and v.get('slug')}
@@ -226,7 +227,7 @@ if __name__ == '__main__':
             tags[k] = list(tags.get(k, [])) + add
             changed.append(k)
             logs.append({'slug': s, 'src': k, 'themes_add': [t for t in v['themes'] if VOCAB[t] in add],
-                         'basis': v.get('kw') or 'ai', 'stage': src, 'model': 'sonnet-5.5', 'at': now})
+                         'basis': v.get('kw') or 'ai', 'stage': src, 'model': model, 'at': now})
         print(f'{src}: 付与 {len(changed)} 作 / のべ {sum(len(l["themes_add"]) for l in logs)}')
         if go:
             shutil.copy2(tp, D('.cache', 'tags-enrich-2425.json.bak-themes-' + now.replace(':', '')))
