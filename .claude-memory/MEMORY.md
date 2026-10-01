@@ -132,3 +132,4 @@
 - [【是正済】副題欄に副題でない物=3,324→3,141](subtitle_not_subtitle_cleanup.md) — 型別の判断基準・こち亀の土台は残課題・攻殻機動隊=対訳版が主版の型
 - [1巻もキャッチ+要素(09-30裁定・3,308作済)](onevol_catch_themes_enrich_2026_10.md)
 - [【進行中】キャッチから要素付与(2026-10-01)](themes_from_catch_2026_10.md) — 第1段1,899作反映済・第2段AI判定はGO待ち
+- [【型】dedup退役で予約頁に種2stubが流入(牙人)](dedup_retire_srcstub_vs_preorder.md)
