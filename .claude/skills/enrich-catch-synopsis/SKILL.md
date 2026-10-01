@@ -35,6 +35,15 @@ description: エンリッチして=2巻以上はキャッチ+詳細+ジャンル
   途中は `--commit-only`、最後の1回だけ `--push`(追いpush回避)。
 - ★予約頁(preorder stream)にもタグseedを結線済(`_promote-bulk-v2.py`)。[[preorder_page_bypasses_mainline_class]]
 
+### ★第3材料源 = Kobo電子版の紹介文 (= 2026-10-01 新設・10-02 に5,811作へキャッチ)
+- 収集 `python scripts/_kobo-caption-harvest.py`(書影あり・キャッチ無し頁が対象・再開可・1作約1秒)→ `.cache/kobo-caption/harvest.jsonl`。
+  照合は strict(題+著者が完全一致)/ relaxed(N巻表記・副題・冠付き)を区別して保存。**書くのは strict から**。
+  relaxed は別作品(スピンオフ)・傑作集/セレクション・後の巻が混ざる=1件ずつ判断。
+- 頁に載っている synopsis(AniList和訳)もキャッチの材料になる(414作)。ただし和訳には誤訳・混成文がある=[[catch_side_wrong_work_class]]。
+- ★書く時に出た誤りの型: 電子版の商品説明(「電子化」「紙のコミックス未収録」)を使う / 短編集の「表題作ほかN編」の数え違い /
+  題の「Ⅱ」を巻数と誤読 / 文の途中で切れる(名詞の前の「の」で終わる) / 原作小説の紹介文が当たる(原作者が著者欄にいる時)。
+- 大量に書く時は Sonnet に書かせ Opus が点検する分担 = [[feedback_sonnet_writes_opus_audits]]。
+
 - 「楽天でジャンルとれる」の実体 = 楽天が直接くれるのではなく、**captionを材料にAIがmaster32から選んで
   `genres_provisional: true`を立てる**(楽天から直接来るのは分野系サブジャンルだけ)。
 - ★**Gemini同定**(2026-07-13 実証・genre:other撲滅で407作適用): 楽天に材料が無い古い作品は
