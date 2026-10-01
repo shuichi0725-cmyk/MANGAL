@@ -19,3 +19,4 @@ metadata:
 ## 続報(2026-10-01)
 - 第1段はOpus点検で47件取消済(台帳 stage1-revert)。**第1段 apply は再実行禁止**。キーワード一致は括弧内(「」『』)を除外するよう道具に追加。
 - 第2段 試行(stage2-pilot): 対象=適合率70%以上の16要素のみ・要素0からランダム1,000作を親が逐次判定→**45作・のべ48件**(0個955作)。basis=キャッチ中の語句を台帳へ。反映済。残り約1.8万作とジャンル追加(手順4)は未着手=GO待ち。
+- 手順4 ジャンル追加 試行(genre-pilot, 2026-10-01): 対象=汎用ジャンルのみ&(provisional or 空)=457作(全数)。検定200作 適合率90%(採用=fantasy/action/sports系/romcom/sci-fi/romance/mystery/adventure/historical/horror/mecha/gag/yokai/music/bl/mahou-shoujo/gourmet、n<3は不採用)。付与35作/0個422作。台帳 genres-from-catch-changelog.jsonl。**kibando は genre-append 済だが反映未実施**(再生成でISBN 9784253174770が消える減少検出でpush停止・--allow-loss未使用)。残りは進めない=終了。
