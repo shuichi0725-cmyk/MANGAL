@@ -26,3 +26,6 @@ metadata:
   **一律に override 照合へ変えると別作品を消す**(退役前の状態だった)。
 - ★(09-25) `_reflect-targeted.py --drop` は pending-r2-prune.jsonl に **SRC stem** で自動追記する。R2のフォルダ名は公開slug=効かない行。
   drop 後は公開slugで手追記し、stem 行は取り消す。根は「--drop が公開slugを知らない」(索引の残骸行と同根)=スクリプト修正は未決(ユーザ判断待ち)。
+
+- ★2026-10-01 追記: `scripts/_catch-audit.py --drop/--fix` は catch-ja.json を `indent=1` で書き戻す。本体は区切り詰め(compact)の1行JSONなので、使うと全行差分になる。キャッチの撤回は compact (`separators=(',',':')`) で自前に書き、manga-catch-index.json(公開slugキー)も同時に消すこと。`_synopsis-audit.py` は synopsis-ja.json がもともと indent=1 なので問題なし。
+- ★同日: AniList 番号を共有する頁群(244群・539頁)のうち、題に続編系の語を含む19群を AniList 原文で裁定し、別作品8頁を edition-overrides `"anilist": false` で遮断した。和訳あらすじ(synopsis-ja)には訳語誤り(Akira Hio→聖悠紀、Asuna→安孫子)と混成文(佐藤君=2作品の合成)の型もあった。[[catch_side_wrong_work_class]]
