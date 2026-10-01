@@ -33,3 +33,4 @@
 {"slug": "5", "src": "5-2000", "genres_add": ["romance"], "basis": {"romance": "波乱含みの恋愛ドラマ"}, "stage": "genre-pilot", "model": "sonnet-5.5", "at": "2026-10-01T11:48:16"}
 {"slug": "doku-typhoon-jr", "src": "doku-typhoon-jr", "genres_add": ["sports"], "basis": {"sports": "プロゴルファー"}, "stage": "genre-pilot", "model": "sonnet-5.5", "at": "2026-10-01T11:48:16"}
 {"slug": "mujintou-ni-nanika-hitotsu-motteku-to-shitara-nani-motteku-tte-hanashi", "src": "mujintou-ni-nanika-hitotsu-motteku-to-shitara-nani-motteku-tte-hanashi", "genres_add": ["adventure"], "basis": {"adventure": "無人島でのサバイバル"}, "stage": "genre-pilot", "model": "sonnet-5.5", "at": "2026-10-01T11:48:16"}
+{"slug": "kibando", "src": "kibando", "genres_remove": ["mystery"], "reason": "根拠のキャッチが別作品(ブッキラによろしく!)の文=誤り。キャッチも削除", "stage": "genre-pilot-revert", "model": "opus-5.5", "at": "2026-10-01T12:58:49"}
