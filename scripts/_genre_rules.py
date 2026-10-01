@@ -83,10 +83,25 @@ GOURMET_WORDS = ("料理", "グルメ", "食堂", "ごはん", "飯", "レシピ
                  "パン屋", "ラーメン", "寿司", "スイーツ", "お菓子", "和菓子", "洋菓子", "ケーキ", "ビール",
                  "ワイン", "日本酒", "お酒", "珈琲", "コーヒー", "喫茶", "居酒屋", "屋台", "定食", "調理",
                  "シェフ", "板前", "晩酌")
+# ★2026-10-02 追加(ユーザGO「要素→ジャンルの抜け」): 要素は付いているのにジャンルが無い頁の是正。
+#   抜き取り: 超能力12/12・魔法12/12・転生→異世界 約27/30・デスゲーム 約37/40・自伝→エッセイ(語=エッセイのみ)。
+#   ★転生は「召喚/転移」を語に入れない(召喚士もの・勇者が未来へ転移、で外れた)。異世界ISEKAI_WORDSとは別の語。
+#   ★見送り(抜き取りで約8割以下): 格闘技→sports(喧嘩/アクション物)・犯罪/警察→mystery・時間操作→sci-fi
+#     (戦国タイムスリップ恋愛)・残酷→horror・バンド→music・野球/サッカー(恋愛の舞台が部活なだけ)・陰謀→suspense・
+#     自伝の「実録」(伝記・ビジネス実話物語)。
+SUPERPOWER_WORDS = ("超能力", "異能", "エスパー", "サイキック", "能力者", "特殊能力", "念力", "テレパシー")
+MAGIC_WORDS = ("魔法", "魔術", "魔女", "魔導", "魔王", "勇者", "異世界", "ドラゴン", "エルフ", "精霊", "魔物", "王国")
+REINCARNATION_WORLD_WORDS = ("異世界", "ゲームの世界", "乙女ゲー", "小説の世界", "物語の世界", "漫画の世界")
+DEATHGAME_WORDS = ("デスゲーム", "命がけ", "命懸け", "サバイバル", "生き残", "殺し合")
 # (ジャンル, 対象タグ名, 明記語, 必要語数[AniList等の独立タグ], 必要語数[楽天タグ])
 CORROBORATED = (
     ("isekai", frozenset({"Isekai"}), ISEKAI_WORDS, 1, 1),
     ("gourmet", frozenset({"Food"}), GOURMET_WORDS, 1, 2),
+    ("supernatural", frozenset({"Super Power"}), SUPERPOWER_WORDS, 1, 2),
+    ("fantasy", frozenset({"Magic"}), MAGIC_WORDS, 1, 2),
+    ("isekai", frozenset({"Reincarnation"}), REINCARNATION_WORLD_WORDS, 1, 1),
+    ("suspense", frozenset({"Death Game"}), DEATHGAME_WORDS, 1, 2),
+    ("essay", frozenset({"Autobiographical"}), ("エッセイ",), 1, 1),
 )
 
 # ★時代劇・魔法少女の明記(2026-09-24 ユーザGO「234も検証して付与」= 08-03 にタグのみへ退避した2キーの再挑戦)。
