@@ -95,7 +95,7 @@
 - [アニメ化フラグ更新機構=柱⑥後段](anime_flag_freshness.md) ／ [アニメイトタイムズ季節まとめ=第2情報源](animatetimes_season_source.md) ／ [【事故復元済】月次が種4-auto全消し](seed4_auto_wipe_accident.md)
 - [【復元済】源なしmanga.v2頁258件](orphan_source_pages_restored.md) ／ [【未決】版違い統合](multi_edition_unification_pending.md) ／ [版/刷タブ・在庫・電子割引](version_tabs_stock_ebook.md)
 - [うる星=版/巻/刷タブ正規ルール](urusei_version_display_rules.md) ／ [コンビニ掃引2026-08=完了・裁定待ち3件](konbini_sweep_2026_08_state.md) — GO待ち ／ [SEO: Google未登録=クロール待ち・新ハブも54件中0登録(09-23)](seo_index_coverage_state.md)
-- [【裁定・実装済】/shinkan=恒久URL+月はh2(競合2社も同型)](shinkan_permanent_hub_design.md) — 日付リダイレクトは却下(平均10.1位の唯一のハブ資産を賭ける価値なし)
+- [【裁定・実装済】/shinkan=恒久URL+月はh2(競合2社も同型)](shinkan_permanent_hub_design.md)
 - [SEO: 発売日の着地面=/shinkan月別静的頁+今週/来月](seo_release_date_pages.md) ／ [【道具】GSC/Bing Webmaster を直接読む(_gsc.py/_bwt.py)](search_console_bing_api_access.md) — 鍵はrepo外・設定の罠3つ(組織ポリシー/PKCS#8/sc-… ／ [【罠・封鎖済】CF解析のUNK偽レコードで「29.6%が504」と誤診断](cf_analytics_unk_artifact.md) — 素の件数は3倍に化ける。検算=Worker invocation…
 - [【実測】Bing流入はホーム1枚が8割・作品頁56枚のみ](bing_search_reality_2026_09.md) — Googlebot実数58/日=一周3.3年。著者頁肉付けは否定… ／ [【競合実測】mangaseek=78kインデックスの正体は22年のドメイン年齢](competitor_mangaseek_teardown.md) — 薄さ/sitemap/URL設計はどれも勝因でない ／ [【裁定・作らない】日本以外のアクセス制限](geo_restriction_not_wired.md) — 未配線のまま。有効化すると451でインデックス落ち
 - [【手法】週次を回さずに実ビルドで検証する](verify_build_preview_subset.md) — out/をrename退避→MANGAL_DATA_DIR=.preview-data で十数分。commitは検証が通ってから
@@ -109,7 +109,7 @@
 - [【道具の罠】_lookup.py --isbn --live はキャッシュ済だとliveを叩かない](lookup_isbn_live_cached_skip.md) ／ [【禁止】BOOK☆WALKERは試し読み収集不可](bookwalker_harvest_forbidden.md) ／ [【機構・第1周完走】マンバ蒸留=manba経由でBookLive title_id採取](manba_booklive_titleid_route.md) — 対象535件全量走破・hit317/反映300件で試し読み33,…
 - [SEO構造相談2026-09-04=穴7点・1〜4,6適用済(ジャンルtitle/チップ/雑誌・出版社・年ハブ850面/ジャンル下位219/anime二重サフィックス/list静的シェル)](seo_structure_gaps_2026_09_04.md) ／ [IndexNow自前送信=_indexnow.py(r2-sync→pending→finalize purge後drain / feature・diff-deployは即drain)](indexnow_self_submit.md) ／ [Crawler HintsはWorkers+R2で発火しない公算](crawler_hints_ineffective_on_workers_r2.md)
 - [【前提】GitHubリポジトリはpublic](repo_is_public_github.md) ／ [【罠】記憶は正本に書く](memory_write_to_canonical_not_mirror.md) ／ [【型・是正済】共通シェルのpropsが全ルートのRSCに2箇所焼かれる](shell_props_serialized_to_all_routes.md) — masters 48.6KB=約9.9GB(out/の52%)。…
-- [【裁定・何もしない】R2容量9.65GB=gzip保存は却下](r2_storage_gzip_declined.md) — CFが既にbrotliで配っている(実測br31KB/gz39KB)=素のgzip保存は転送+24%。超過も月$0.03。ローカルでなくR2の話
+- [【裁定・何もしない】R2容量9.65GB=gzip保存は却下](r2_storage_gzip_declined.md)
 - [R2 Class Aの算数=無料100万/月・$4.50は従量](r2_class_a_budget_arithmetic.md) — 「絶対$4.50」は誤り。preview反復はR2ゼロ。余白がフ… ／ [【機構・不変条件】PC共通シェル=ナビをlayoutへ+左レール+器をmax-w-6xlに統一](pc_shell_and_widths_2026_09_07.md) — ヘッダー/ナビ/シェルは同じ器。器の所在がcomponent側に… ／ [【戒め】写真の要素を実名で列挙してから作る](feedback_name_the_element_in_the_photo.md) — 自分の実装を前提に選択肢を組むと正解が候補に入らない
 - [【機構・第1周完了】旧作の仮書影.gif層をKoboで埋める](placeholder_gif_old_layer_kobo_route.md) — 道具=_kobo-placeholder-fill.py(版ゲー… ／ [【型・是正済】発売後書影追従が良い書影を仮.gifで潰す](cover_release_refresh_can_downgrade.md) — 2026-09-14に劣化ガードをscript恒久実装+負テスト… ／ [【罠】デタッチ長時間ジョブはセッション終了で道連れ死=WMIで起こす](detached_job_dies_on_session_teardown.md) — Start-Processでは足りない。生死判定はnode本数と…
 - [【型】旧slugのaliasと同名で新頁が生まれ301が実頁を隠す](redirect_key_collides_with_new_page.md) — 根は題の短縮。合流はextra-editions(追加型)で ／ [【罠】ls -l の列ずれでファイルサイズを誤読](file_size_misread_ls_column.md) — 所有者名に空白。サイズは stat -c %%s / getsi… ／ [【型・総論】予約頁は本流を通らない=足した機構が1つずつ落ちる(既知6件目)](preorder_page_bypasses_mainline_class.md) — 本流に充填を足したら予約合流ループにも足す。症状=promote…
@@ -118,7 +118,7 @@
 - [【機構】巻抜け充填のラノベ/非漫画ゲート](volgap_novel_gate_g5.md) — 定義は共有lib1箇所・「コミック」を含むレーベルは救済 ／ [【型】版分離前の混入除去が正しい巻を消す](stale_volume_exclude_after_edition_split.md) — エコエコ角川版3冊。seed台帳の減少は--allow-shrinkで承認
 - [【型・封鎖済】数字だけのペンネームがYAMLでint化し生成器が落ちる](yaml_numeric_penname_int_type.md) — 359=サコク。掃引69,465頁中1件・join 3本にstr() ／ [【型】フルpromoteは公開slugを再導出=手直しslugが黙って改名](full_promote_resolves_public_slug.md) — 索引を焼くまで見えない。題キーで突合しaliasを張る ／ [【型・恒久機構】重複頁はファイル削除だけだと復活=page-dedup.yml](dedup_without_seed_revives.md) — ISBN集合frozensetで10秒掃引・残6組
 - [【型・44頁是正済】covers seedに在るのに頁がnull](cover_null_despite_seed.md) — 掃引はISBN集合突合10秒・直しは再promoteだけ・フルpromote後は必ず回す ／ [【型・09-23是正=週次でWorker deploy待ち】検索/一覧だけ古い=索引JSONのブラウザ4時間キャッシュ](index_json_browser_cache_stale.md) — 索引だけ毎回確認(304)に。エッジpurgeでは直らなかった型 ／ [【型・封鎖済】build経路3つにNODE_OPTIONSが要る](build_routes_need_node_options.md) — 差分反映だけ抜けてcode:134で死んだ
-- [【型・根治済】差分反映が対象頁だけのデータで建て、関連作品/著者keyが部分集合から計算されていた](diff_deploy_subset_related.md) — 生成を絞りデータは絞らない。関連の並びも見直し(3冊以上→年の近さ)
+- [【型・根治済】差分反映が対象頁だけのデータで建て、関連作品/著者keyが部分集合から計算されていた](diff_deploy_subset_related.md)
 - [【実測・1と2実装済】容量/ファイル数/表示速度の残りレバー(2026-09-24)](size_speed_levers_2026_09_24.md)
 - [楽天API=1クエリ最大3,000件・予約harvestは上限で自動細分(子ジャンル→判型→在庫状況)](rakuten_harvest_page_cap.md) — 品切れは在庫状況が空で引けない・レートは_get内
 - [【戒め】報告は常に日本語で](feedback_report_in_japanese.md) — 要約(コンパクション)直後に完了報告が英語になり「終わったの？」と聞かれた
