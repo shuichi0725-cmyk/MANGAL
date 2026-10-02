@@ -211,7 +211,8 @@ def apply(task, stage, go, model):
             add = list(ks)
             if {'baseball', 'soccer'} & set(add) and 'sports' not in o['genres'] and 'sports' not in add:
                 add.append('sports')  # 階層検索の規約(CLAUDE.md)
-            lines.append(f"  - slug: {o['slug']}\n    add: [{', '.join(add)}]\n    source: \"{stage}:{model}\"\n")
+            # ★slugは必ず引用符(数字だけの題「300」がYAMLでintになり黙って効かなかった 2026-10-03)
+            lines.append(f"  - slug: {json.dumps(o['slug'], ensure_ascii=False)}\n    add: [{', '.join(add)}]\n    source: \"{stage}:{model}\"\n")
             changed.append(o['src'])
             logs.append({'id': i, 'task': task, 'slug': o['slug'], 'src': o['src'], 'genres_add': add,
                          'basis': {x: A[i]['basis'][x] for x in ks}, 'stage': stage, 'model': model, 'at': now})
