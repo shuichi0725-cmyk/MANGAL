@@ -37,3 +37,8 @@ provisional(AI暫定のみ)も **25,529作** 残(うち other単独~1,056)。楽
 - 抜き取り274件(要素ごと)で適合率約93%。外した要素=執筆/政治/自殺/暗殺者(2/4)。ゲームは「人気ゲームの4コマ/コミカライズ」を除外、性別変化は「男の娘」を語から外す。抽象タグ(Heterosexual/悲劇/成長物語/哲学/癒し系 等)は対象外。
 - 道具: `.cache/themes-from-catch/gray_ev.py <stage名>` → `scripts/_themes-from-catch.py apply <stage> --go --model=...`。
 - 残: War 354 / Youkai 114 の保留候補は要素語彙に無い(=ジャンル側の語)ので未処理。やるなら genre-append 経由で抜き取り検定から。
+
+## ✅ 2026-10-02〜03 ③④をSonnetが判定・Opusが点検(道具 scripts/_themes-genres-ai.py・指示書 docs/briefs/themes-genres-ai-sonnet.md)
+- ③要素: 対象27,817頁(要素0かつ材料あり)→ 7,909頁・のべ9,268件。④ジャンル(汎用だけの頁)15,167頁→1,653頁・のべ1,790件(genre-append.yml・source "full:sonnet-5.5"=一括取消可)。
+- 点検: 無作為 ジャンル49/50・要素47/50。型の誤り=**ゲーム原作のコミカライズに要素「ゲーム」**(29件取消)/「〜さながら」「〜を思わせる」架空時代に歴史(2件)。台帳 themes-ai-/genres-ai-changelog.jsonl に stage=full-audit-revert。
+- 結果(本番索引): 要素0 48,450→37,471 / 汎用ジャンルだけ 22,871→21,080。残りの大半は材料が無い頁。

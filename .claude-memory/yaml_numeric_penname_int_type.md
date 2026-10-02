@@ -24,3 +24,7 @@ metadata:
 
 ★裁定済(2026-09-22 ユーザ)= **「3:59」が正**。楽天とNDL単話版が「3:59」、NDL紙版だけが「359」だった。
 seed は `- name: '3:59'` (コロンを含むので**引用必須**)。ヨミは サコク のまま。
+
+## 2026-10-03 再発: seed の slug でも起きる
+- genre-append.yml の `slug: 300`(漫画『300』)/`slug: 5080` が int になり、ジャンル追加が**黙って効いていなかった**(古い enrich-1vol 分も同じ)。
+- 機械で書く道具は slug を必ず json.dumps で引用符付きにする(_themes-genres-ai.py は修正済)。点検時は `[e for e in additions if not isinstance(e['slug'], str)]` で洗う。
