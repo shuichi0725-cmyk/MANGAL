@@ -747,10 +747,25 @@ export default function MagicCompass({ magazines, genres = {} }: { magazines: Re
     }
   };
 
+  // ★選んだ本へ舞台ごと寄る(2026-10-03 ユーザ裁定=案D): 周りの本は約58pxで書影が見えづらかった。
+  //   選んだ本が舞台の中ほどで幅約130pxになるよう、世界(本+糸+ラベル)をまとめて拡大する。
+  //   位置関係は崩れない(他の本・糸も一緒に大きくなる)。 進む(pan)中はやめる= 手繰る動きと同時に引く。
+  //   星屑で広げた小さい本も同じ大きさまで寄る(倍率は2〜4倍に収める)。
+  const zoom = useMemo(() => {
+    if (!sel || pan) return null;
+    const n = nodes.find((x) => x.slug === sel && !x.center);
+    if (!n) return null;
+    const stageH = Math.max(240, vp.h - TOP - SHEET);
+    const s = Math.min(4, Math.max(2, Math.min(vp.w * 0.36, 150) / n.w));
+    // 選ぶとシートが伸びて舞台の下を覆うので、狙う高さは舞台の真ん中より少し上
+    return { s, tx: -s * n.x, ty: stageH * 0.44 - geom.CY - s * n.y };
+  }, [sel, pan, nodes, vp, geom.CY]);
   const worldStyle: CSSProperties = {
     left: geom.CX,
     top: geom.CY,
-    transform: `translate(${-cam.x}px, ${-cam.y}px)`,
+    transform: zoom
+      ? `translate(${zoom.tx}px, ${zoom.ty}px) scale(${zoom.s})`
+      : `translate(${-cam.x}px, ${-cam.y}px) scale(1)`,
   };
 
   return (
@@ -821,7 +836,7 @@ export default function MagicCompass({ magazines, genres = {} }: { magazines: Re
       {/* 3. 羅針盤 */}
       {/* ★何もない所を押したら選択を外す(2026-09-30 ユーザ要望)。 本・年表ボタンなど button を押した時は各自の動き */}
       <div
-        className="cp-stage"
+        className={`cp-stage${zoom ? " zoom" : ""}`}
         onClick={(e) => {
           if ((e.target as HTMLElement).closest("button, a")) return;
           if (sel && !busy.current) setSel(null);

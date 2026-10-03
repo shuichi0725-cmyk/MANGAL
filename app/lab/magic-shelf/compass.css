@@ -222,6 +222,10 @@
   bottom: 96px;
   z-index: 2;
 }
+/* 選んだ本へ寄っている間は、拡大した本・糸が上の段や画面の外へはみ出さない(案D) */
+.cp-stage.zoom {
+  overflow: hidden;
+}
 .cp-world {
   position: absolute;
   width: 0;
