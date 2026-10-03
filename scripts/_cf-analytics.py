@@ -15,7 +15,7 @@
 キー: .env の CF_ANALYTICS_API_TOKEN(Analytics Read・絶対commitしない。旧名CLOUDFLARE_API_TOKENはwranglerが誤用するため改名)。RUM REST(site_info)は403=scope外だが
 GraphQL rumデータセットは通る(siteTagは集計から発見済=下の定数)。
 """
-import json, os, sys, argparse, datetime, urllib.request
+import json, os, re, sys, argparse, datetime, statistics, urllib.request
 
 sys.stdout.reconfigure(encoding="utf-8")
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -43,7 +43,15 @@ _BOT_SIGNATURES = [
     ("social", "Twitterbot", "Twitterbot(X共有プレビュー)"), ("social", "Discordbot", "Discordbot"),
     ("social", "LinkedInBot", "LinkedInBot"), ("social", "Slackbot", "Slackbot"),
     ("social", "TelegramBot", "TelegramBot"), ("social", "WhatsApp", "WhatsApp(共有プレビュー)"),
+    # ★2026-10-03 追加: 「(その他ブラウザ)・デスクトップ」として人間側に 2.8万件混ざっていたSEO/AIクローラ
+    ("crawl", "SERankingBacklinksBot", "SERankingBacklinksBot(SEO)"), ("crawl", "ShapBot", "ShapBot"),
+    ("crawl", "KeenableBot", "KeenableBot(keenable.ai)"),
+    ("auto", "HeadlessChrome", "HeadlessChrome(自動化ブラウザ)"),
 ]
+# ★名前を登録していない bot の汎用拾い(2026-10-03): 名乗りに bot/spider/crawler を含むものは人間に数えない。
+# 「…bot」で終わるが bot ではない名乗り(スマホのメーカー名 CUBOT 等)
+_NOT_BOT = {"cubot"}
+_GENERIC_BOT = re.compile(r"(?i)\b([\w.-]*(?:bot|spider|crawler))\b")
 
 
 def _classify(ua):
@@ -55,9 +63,37 @@ def _classify(ua):
         return "scan", "(URL型UA=脆弱性探索プローブ)"
     if ua.startswith("NetworkingExtension") or ua.startswith("com.apple"):
         return "human_other", "Apple Private Relay/iOSシステム通信"
+    m = _GENERIC_BOT.search(ua)
+    if m and m.group(1).lower() not in _NOT_BOT:
+        return "crawl", f"{m.group(1)}(未登録bot)"
     if "Mozilla" not in ua or ua.strip() in ("Mozilla/5.0", "Mozilla/5.0 (compatible)"):
         return "human_other", "(UA欠落/簡略=未分類)"
     return None, None  # 通常ブラウザUAとみなす(下でbrowser/device分類)
+
+
+# ★古い版に固定した Chrome の大量アクセス = 自動化ブラウザの疑い(2026-10-03 実踏)。
+#   10/01 の山(Worker 9.2万req)は「Windows版 Chrome/131.0.0.0」ただ1種類が 36,146件 = 同じ日の本物のEdgeは154。
+#   JSを実行するので Web Analytics の「訪問」にも 1,229 と数えられ、人気1位 /browse を作っていた。
+#   判定 = その日の最新Chrome系(Chrome/・Edg/)の版より OLD_MAJOR_GAP 以上古い かつ その日の全体の AUTO_SHARE 以上。
+#   ★名乗りベース=詐称は見抜けない。 古い版の人間が少数いても割合の床で弾かれない。
+OLD_MAJOR_GAP = 12      # Chrome は約4週ごとに版が上がる = 12版 ≒ 1年
+AUTO_SHARE = 0.05
+_CHROME_MAJOR = re.compile(r"(?:Chrome|Edg)/(\d+)\.")
+
+
+def _outdated_chrome(rows):
+    """[(count, ua)] → {ua: 理由ラベル}。 最新版から OLD_MAJOR_GAP 以上古く、全体の AUTO_SHARE 以上のUA。"""
+    majors = [int(m.group(1)) for _c, ua in rows for m in [_CHROME_MAJOR.search(ua)] if m]
+    if not majors:
+        return {}
+    newest = max(majors)
+    grand = sum(c for c, _ua in rows) or 1
+    out = {}
+    for c, ua in rows:
+        m = _CHROME_MAJOR.search(ua)
+        if m and newest - int(m.group(1)) >= OLD_MAJOR_GAP and c / grand >= AUTO_SHARE:
+            out[ua] = f"古い版で固定のChrome(版{m.group(1)}・その日の最新{newest}・全体の{c / grand:.0%})"
+    return out
 
 
 def _classify_browser(ua):
@@ -167,8 +203,18 @@ def web(days):
     tc = sum(r["count"] for r in a["daily"])
     print(f"Web Analytics (mangal-db.com) / 直近{days}日 = 閲覧 {tc:,} / 訪問 {tv:,}")
     print(f"\n{'date':<12}{'閲覧':>7}{'訪問':>7}")
+    # ★訪問が普段(中央値)の5倍を超えた日に印(2026-10-03: 10/01 の訪問1,229 は古いChrome固定の自動化ブラウザだった。
+    #   ビーコン計測もJSを実行する bot は数えてしまう)。 印の日は `bots --date <日>` で名乗りを見る。
+    med = statistics.median([r["sum"]["visits"] for r in a["daily"]]) if a["daily"] else 0
+    spikes = []
     for r in a["daily"]:
-        print(f"{r['dimensions']['date']:<12}{r['count']:>7,}{r['sum']['visits']:>7,}")
+        v = r["sum"]["visits"]
+        flag = "  ★山(普段の5倍超)" if med and v > med * 5 and v >= 100 else ""
+        if flag:
+            spikes.append(r["dimensions"]["date"])
+        print(f"{r['dimensions']['date']:<12}{r['count']:>7,}{v:>7,}{flag}")
+    if spikes:
+        print("  → ★山の日は自動化ブラウザのことが多い。 確認: " + " / ".join(f"bots --date {d}" for d in spikes))
     print("\n人気ページ (閲覧数順):")
     for r in a["pages"]:
         print(f"  {r['count']:>5,}  {r['dimensions']['requestPath']}")
@@ -206,22 +252,26 @@ def bots(date):
     if d.get("errors"):
         raise SystemExit(f"GraphQLエラー: {json.dumps(d['errors'], ensure_ascii=False)[:300]}")
     rows = d["data"]["viewer"]["zones"][0]["ua"]
-    cat_total = {"crawl": {}, "ai": {}, "social": {}, "scan": {}, "human_other": {}}
+    cat_total = {"crawl": {}, "ai": {}, "social": {}, "scan": {}, "auto": {}, "human_other": {}}
     browser_total = {}
     grand = 0
+    stale = _outdated_chrome([(r["count"], r["dimensions"]["userAgent"]) for r in rows])
     for r in rows:
         c, ua = r["count"], r["dimensions"]["userAgent"]
         grand += c
         cat, label = _classify(ua)
+        if not cat and ua in stale:
+            cat, label = "auto", stale[ua]
         if cat:
             cat_total[cat][label] = cat_total[cat].get(label, 0) + c
         else:
             b = _classify_browser(ua)
             browser_total[b] = browser_total.get(b, 0) + c
     cat_names = {"crawl": "検索/SEOクローラ", "ai": "AI検索エージェント", "social": "SNS/共有プレビューbot",
-                 "scan": "攻撃・脆弱性探索プローブ", "human_other": "人間だが非標準UA"}
+                 "scan": "攻撃・脆弱性探索プローブ", "auto": "★自動化ブラウザの疑い(人間に数えない)",
+                 "human_other": "人間だが非標準UA"}
     print(f"UA分類・{d0}のtop{len(rows)}UA={grand:,}件中:")
-    for cat in ("crawl", "ai", "social", "scan", "human_other"):
+    for cat in ("crawl", "ai", "social", "scan", "auto", "human_other"):
         items = cat_total[cat]
         if not items:
             continue
