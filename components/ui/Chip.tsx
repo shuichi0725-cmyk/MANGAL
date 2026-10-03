@@ -24,13 +24,21 @@ function chipClass(active: boolean, className: string) {
 export function ChipButton({
   active = false,
   onClick,
+  disabled = false,
   className = "",
   children,
-}: BaseProps & { onClick: () => void }) {
+}: BaseProps & { onClick: () => void; disabled?: boolean }) {
   // ★aria-pressed(2026-09-05): フィルタ・カテゴリ・著者50音のチップは全部トグルなのに
   //   「押されている」が支援技術へ伝わっていなかった。見た目(accent塗り)だけが状態表現だった。
+  // ★disabled(2026-10-03): 絞り込みで該当0になった著者50音の行/音を押せなくする。
   return (
-    <button type="button" aria-pressed={active} onClick={onClick} className={chipClass(active, className)}>
+    <button
+      type="button"
+      aria-pressed={active}
+      disabled={disabled}
+      onClick={onClick}
+      className={chipClass(active, `${disabled ? "opacity-30 pointer-events-none" : ""} ${className}`)}
+    >
       {children}
     </button>
   );

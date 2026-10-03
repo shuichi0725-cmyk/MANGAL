@@ -139,6 +139,8 @@ export default function AuthorKanaIndex({ authors, selected, onToggle }: Props) 
           <ChipButton
             key={g.row}
             active={openRow === g.row}
+            // ★絞り込みで0人の行は押せない(2026-10-03)。開いている行は閉じられるよう残す
+            disabled={openRow !== g.row && !rowCount.get(g.row)}
             onClick={() => {
               setOpenRow(openRow === g.row ? null : g.row);
               setOpenKana(null);
@@ -171,6 +173,7 @@ export default function AuthorKanaIndex({ authors, selected, onToggle }: Props) 
               <ChipButton
                 key={k}
                 active={openKana === k}
+                disabled={openKana !== k && c === 0}
                 onClick={() => { setOpenKana(openKana === k ? null : k); setOpenKana2(null); }}
               >
                 {k}

@@ -3,6 +3,7 @@
 import { useDeferredValue, useMemo, useState } from "react";
 import {
   applyArtBookFilters,
+  authorKey,
   filterItems,
   emptyFilterState,
   volumeBucket,
@@ -58,6 +59,12 @@ export default function FilterPanel({
   const deferredState = useDeferredValue(state);
   const countsStale = deferredState !== state;
 
+  // ★アコーディオンの開閉(2026-09-05)。 説明は return 直前の toggleSection の所。
+  //   ここに置くのは、著者の件数集計(counts.author)が「著者の節が開いている時だけ」走るため。
+  const [openMap, setOpenMap] = useState<Record<string, boolean>>({});
+  const isOpen = (key: string, hasSel: boolean) => openMap[key] ?? hasSel;
+  const authorsOpen = isOpen("authors", state.authors.length > 0);
+
   // ★動的件数(2026-06-13): 各facetの値ごとに「その値を選んだら何件」を表示。
   //   faceted-search の定石 = 当該facetだけ解除した state で絞り、 残った作品を値で集計。
   //   静的(R2)のままブラウザJSで計算 = サーバ化しない([[hosting_worker_r2_architecture]])。
@@ -111,10 +118,29 @@ export default function FilterPanel({
         if (fvd.length >= 7) keys.push(fvd.slice(0, 7));
         return keys;
       }),
+      // ★著者(2026-10-03 ユーザ指摘「作者だけ絞り込めていない」): 旧は全作品から作った著者一覧を
+      //   そのまま出し、題名やジャンルで絞っても全著者が押せた。出版社と同じく著者だけ解除して数える。
+      //   キーは authorKey = filterItems の照合と同じ(空白違いの同一人物を1人に)。
+      //   原作者(original_authors)は state.authors の照合対象外なので数えない(=押しても0件だった)。
+      //   1作品に同じ人が2回(原作+作画等)載っても1と数える。
+      //   節が閉じている間は回さない(著者50音は触るまで作らない方針と同じ)。
+      author: authorsOpen
+        ? tally({ authors: [] }, (m) => [...new Set(m.authors.map((a) => authorKey(a.name)))])
+        : null,
       // 現在の絞り込み全体でのヒット数(=0件の説明に使う。rowsCache に相乗り)
       total: rowsFor({}).length,
     };
-  }, [data.manga, deferredState, matchedSlugs]);
+  }, [data.manga, deferredState, matchedSlugs, authorsOpen]);
+  // 著者50音に渡す一覧: 今の絞り込みで0人になる著者は出さない(選択中は外せるよう残す)。
+  //   件数は「押したら何件」に差し替える。読み込み中/節が閉じている間は元の一覧のまま。
+  const authorList = useMemo(() => {
+    if (isLoading || !counts.author) return authorEntries;
+    const cnt = counts.author;
+    const sel = new Set(state.authors.map(authorKey));
+    return authorEntries
+      .map((a) => ({ ...a, count: cnt.get(authorKey(a.name)) ?? 0 }))
+      .filter((a) => a.count > 0 || sel.has(authorKey(a.name)));
+  }, [authorEntries, counts.author, state.authors, isLoading]);
   // ★出版社/連載誌リストの並び(2026-08-10 ユーザ要望): 絞り込み中は 0件の行を隠し、
   //   現在の交差件数の多い順に並べ替える(件数は counts で再計算済み=それを並びにも使う)。
   //   選択中の行は 0件でも先頭に残す(=外せなくなるのを防ぐ)。
@@ -199,8 +225,6 @@ export default function FilterPanel({
   // ★アコーディオン(2026-09-05): 上位4つ(種類/連載状態/分野/ジャンル)は開いたまま、
   //   下の重い5つ(創刊/要素/出版社/連載誌/著者)だけ開閉。選択が入っている節は自動で開く
   //   (=閉じた節の中に条件が隠れない)。 明示的に開閉したらその値が勝つ。
-  const [openMap, setOpenMap] = useState<Record<string, boolean>>({});
-  const isOpen = (key: string, hasSel: boolean) => openMap[key] ?? hasSel;
   const toggleSection = (key: string, hasSel: boolean) =>
     setOpenMap((m) => ({ ...m, [key]: !(m[key] ?? hasSel) }));
 
@@ -521,12 +545,12 @@ export default function FilterPanel({
       <Section
         title="著者(五十音)"
         collapsible
-        open={isOpen("authors", state.authors.length > 0)}
+        open={authorsOpen}
         onToggle={() => toggleSection("authors", state.authors.length > 0)}
         badge={state.authors.length}
       >
         <AuthorKanaIndex
-          authors={authorEntries}
+          authors={authorList}
           selected={state.authors}
           onToggle={(name) => update({ authors: toggle(state.authors, name) })}
         />
