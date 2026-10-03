@@ -16,6 +16,9 @@ usage:
   python scripts/_preorder-rename-draft.py old1=new1 old2=new2 ...
   python scripts/_preorder-rename-draft.py --tsv <file>   # old<TAB>new 1行1件
 """
+import sys as _sys_h
+if any(_a in ("-h", "--help") for _a in _sys_h.argv[1:]):   # ★--help で本体を走らせない(2026-10-03 apply-zokkan を誤実行し touched を空で上書き)
+    print(__doc__ or "(no doc)"); _sys_h.exit(0)
 import glob, io, json, os, re, sys, datetime
 sys.stdout.reconfigure(encoding="utf-8")
 import yaml

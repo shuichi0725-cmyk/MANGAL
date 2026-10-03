@@ -31,6 +31,9 @@
     分ける前の親クエリの100頁で既に取れている。
   結果は harvest-status.json(出力と同じ場所)に残す。
 """
+import sys as _sys_h
+if any(_a in ("-h", "--help") for _a in _sys_h.argv[1:]):   # ★--help で本体を走らせない(2026-10-03 apply-zokkan を誤実行し touched を空で上書き)
+    print(__doc__ or "(no doc)"); _sys_h.exit(0)
 import json, os, re, sys, time, datetime, urllib.request, urllib.parse, urllib.error
 sys.stdout.reconfigure(encoding="utf-8")
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))

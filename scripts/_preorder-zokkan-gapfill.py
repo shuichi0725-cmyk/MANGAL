@@ -24,6 +24,9 @@
 
 usage: python scripts/_preorder-zokkan-gapfill.py [--dry-run] [--max-gap 12]
 """
+import sys as _sys_h
+if any(_a in ("-h", "--help") for _a in _sys_h.argv[1:]):   # ★--help で本体を走らせない(2026-10-03 apply-zokkan を誤実行し touched を空で上書き)
+    print(__doc__ or "(no doc)"); _sys_h.exit(0)
 import json, os, re, sys, importlib.util
 sys.stdout.reconfigure(encoding="utf-8")
 import yaml

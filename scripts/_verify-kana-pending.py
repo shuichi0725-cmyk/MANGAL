@@ -10,6 +10,9 @@ data/seeds/rakuten-kana-pending.jsonl の status=pending を古い順に NDL SRU
 使い方: python scripts/_verify-kana-pending.py [--limit 200]
 レート: 1.2s/req・単発429は3→10→30→90s待って再試行・連続429(4回)で中断。
 """
+import sys as _sys_h
+if any(_a in ("-h", "--help") for _a in _sys_h.argv[1:]):   # ★--help で本体を走らせない(2026-10-03 apply-zokkan を誤実行し touched を空で上書き)
+    print(__doc__ or "(no doc)"); _sys_h.exit(0)
 import json, os, re, sys, time, html, unicodedata, urllib.request, urllib.parse, urllib.error, datetime
 sys.stdout.reconfigure(encoding="utf-8")
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))

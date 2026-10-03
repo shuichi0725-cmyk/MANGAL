@@ -38,6 +38,8 @@ import re
 import sys
 import urllib.parse
 import urllib.request
+import urllib.error
+import time
 import xml.etree.ElementTree as ET
 from collections import Counter
 from datetime import date
@@ -69,7 +71,17 @@ def ndl_issued(isbn: str):
     _rate_gate.wait("ndlsearch.ndl.go.jp", 1.3)
     req = urllib.request.Request("https://ndlsearch.ndl.go.jp/api/sru?" + q,
                                  headers={"User-Agent": "mangal/1.0"})
-    x = urllib.request.urlopen(req, timeout=40).read().decode("utf-8")
+    # ★単発429は規制ではない(skill daily-distill NEVER): 3→10→30→90秒待って再試行、4回続けて429なら raise=中断
+    #   (2026-10-03 実踏: 28件照会の途中で単発429→traceback で全体が落ちていた)。
+    for _wait in (3, 10, 30, 90, None):
+        try:
+            x = urllib.request.urlopen(req, timeout=40).read().decode("utf-8")
+            break
+        except urllib.error.HTTPError as e:
+            if e.code != 429 or _wait is None:
+                raise
+            print("  429 → %ds待って再試行" % _wait, flush=True)
+            time.sleep(_wait)
     out = []
     for rd in ET.fromstring(x).iter("{http://www.loc.gov/zing/srw/}recordData"):
         try:
@@ -289,6 +301,26 @@ def main():
                 if done:
                     break
 
+    # ★冪等(2026-10-03 実踏: 監査TSVを取り直さずに --apply を2回走らせると同じ7行が二重に追記された)。
+    #   同じ (isbn13, date) が既に台帳にあれば書かない。
+    _have = set()
+    if os.path.exists(OVR):
+        for _l in io.open(OVR, encoding="utf-8"):
+            try:
+                _o = json.loads(_l)
+                _have.add((str(_o.get("isbn13")), str(_o.get("date"))))
+            except Exception:
+                pass
+    _new = []
+    for ln in ovr_lines:
+        _o = json.loads(ln)
+        _k = (str(_o.get("isbn13")), str(_o.get("date")))
+        if _k not in _have:
+            _have.add(_k)
+            _new.append(ln)
+    if len(_new) != len(ovr_lines):
+        print("  (台帳に既在 %d 行は追記しない)" % (len(ovr_lines) - len(_new)))
+    ovr_lines = _new
     with io.open(OVR, "a", encoding="utf-8", newline="") as fh:
         for ln in ovr_lines:
             fh.write(ln + "\n")

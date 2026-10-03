@@ -10,6 +10,9 @@ genre/catch/synopsis の元。gen-preview/midfill は harvest caption を保存�
 使い方: python scripts/_preorder-capture-captions.py   (rakuten_caption 未取得のdraftのみ叩く)
 出力後: あらすじを読んで genre(master32・provisional) を人/AIが付与(この工程はAI判断)。
 """
+import sys as _sys_h
+if any(_a in ("-h", "--help") for _a in _sys_h.argv[1:]):   # ★--help で本体を走らせない(2026-10-03 apply-zokkan を誤実行し touched を空で上書き)
+    print(__doc__ or "(no doc)"); _sys_h.exit(0)
 import glob, os, sys, yaml, json
 
 sys.stdout.reconfigure(encoding="utf-8")

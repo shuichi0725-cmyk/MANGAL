@@ -19,6 +19,9 @@ harvest(_rakuten-preorder-harvest.py)の直後・classify(_preorder-classify.py)
   prevは「最後に処理した時点のfull」であり手で触らない。処理せず件数だけ見た日にprevを
   進めると、その日の増加分が永遠にスルーされる(→このコマンド以外でprevを更新するな)。
 """
+import sys as _sys_h
+if any(_a in ("-h", "--help") for _a in _sys_h.argv[1:]):   # ★--help で本体を走らせない(2026-10-03 apply-zokkan を誤実行し touched を空で上書き)
+    print(__doc__ or "(no doc)"); _sys_h.exit(0)
 import json, os, sys, re, glob, shutil, hashlib
 
 sys.stdout.reconfigure(encoding="utf-8")

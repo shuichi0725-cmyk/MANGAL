@@ -7,7 +7,10 @@ classified.json の ex_mid を、楽天キャッシュ(isbn-title-map)で全巻�
 ゲート: kana/author/ym必須 / 回収巻が1..Nの80%以上連続 / slug衝突なし。
 キャッシュで揃わない作品は保留(worklist)=liveハーベストは別途。
 """
-import json, os, re, sys, datetime, unicodedata
+import sys as _sys_h
+if any(_a in ("-h", "--help") for _a in _sys_h.argv[1:]):   # ★--help で本体を走らせない(2026-10-03 apply-zokkan を誤実行し touched を空で上書き)
+    print(__doc__ or "(no doc)"); _sys_h.exit(0)
+import glob, json, os, re, sys, datetime, unicodedata
 sys.stdout.reconfigure(encoding="utf-8")
 import yaml
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -78,7 +81,7 @@ except Exception:
 _COVERS = {}
 try:
     for _l in gzip.open(f"{ROOT}/data/seeds/covers.jsonl.gz", "rt", encoding="utf-8"):
-        _r = json.loads(_l); _COVERS[_r.get("isbn13") or _r.get("isbn")] = _r.get("url") or _r.get("cover")
+        _r = json.loads(_l); _COVERS[_r.get("isbn13") or _r.get("isbn")] = _r.get("cover_url") or _r.get("url") or _r.get("cover")   # ★seedの列名は cover_url(2026-10-03 是正: 旧は url/cover を読み全件None=毎回live照会)
 except Exception:
     pass
 iidx = json.load(open(f"{ROOT}/.cache/isbn-page-index.json", encoding="utf-8"))
@@ -141,8 +144,16 @@ def _old_strip_vol_disp(t):
 
 # ★2026-07-09 整形は _preorder_draft_lib に一本化(gen-previewと同じ規律=捏造回避)
 from _preorder_draft_lib import strip_kana_known_vol as _strip_kana_known_vol
-from _preorder_draft_lib import clean_title as _clean_title, clean_kana as _clean_kana, make_slug as _make_slug, scope_out as _scope_out, looks_like_criticism as _criticism, looks_like_many_credits as _manycredits, author_is_anthology as _anthology
+from _preorder_draft_lib import clean_title as _clean_title, clean_kana as _clean_kana, make_slug as _make_slug, scope_out as _scope_out, looks_like_criticism as _criticism, looks_like_many_credits as _manycredits, author_is_anthology as _anthology, scope_out_rec as _scope_rec
+# ★既に他のドラフトの巻として入ったISBNは作らない(2026-10-03: gen-preview が同時発売の2巻以降を
+#   1巻の新作頁へ取り込むようにした= 同じ巻から2つ目の頁を作らないためのガード)。
+_DRAFTED_ISBN = set()
+for _dd in (os.path.join(ROOT, ".cache", "preorders", "drafts"), os.path.join(ROOT, ".preview-data", "manga")):
+    for _fp in glob.glob(os.path.join(_dd, "*.yml")):
+        _DRAFTED_ISBN.update(re.findall(r"isbn13:\s*['\"]?(97[89]\d{10})", open(_fp, encoding="utf-8").read()))
 for r in [x for x in cls["ex_mid"] if ONLY_ISBN is None or str(x.get("isbn")) in ONLY_ISBN]:
+    if str(r.get("isbn")) in _DRAFTED_ISBN:
+        holds.append((r.get("isbn"), r.get("title"), "既に他のドラフトの巻として生成済(同時発売の兄弟)")); continue
     if _scope_out(r.get("title")):
         holds.append((r.get("isbn"), r.get("title"), "scope外(非漫画)")); continue
     if _anthology(r):                                             # ★アンソロジー誌(2026-09-20 ねこぱんち型・偽陽性0)
@@ -151,6 +162,8 @@ for r in [x for x in cls["ex_mid"] if ONLY_ISBN is None or str(x.get("isbn")) in
         holds.append((r.get("isbn"), r.get("title"), "評論/研究書疑い(コミックレーベル無し+章立てcaption)→人裁定")); continue
     if _manycredits(r):                                           # ★書籍疑い(2026-09-19 ヤマト黎明篇=小説型)
         holds.append((r.get("isbn"), r.get("title"), "書籍疑い(コミックレーベル無し+著者5人以上=小説の挿絵陣/アンソロジー/翻訳コミック)→人裁定")); continue
+    if _scope_rec(r):                                             # ★題以外に出るscope外(2026-10-03 GN/ムック/アニメコミック型)
+        holds.append((r.get("isbn"), r.get("title"), _scope_rec(r))); continue
     _bt, _sub, _prov = _clean_title(r.get("title"))
     if _prov:
         holds.append((r.get("isbn"), r.get("title"), "(仮)題未確定")); continue

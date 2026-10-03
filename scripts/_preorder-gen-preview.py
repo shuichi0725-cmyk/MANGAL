@@ -13,6 +13,9 @@ slug: ヨミの機械ローマ字化(長音保持・を=o・促音・スペー�
 demographic: 楽天サブジャンル写像(少年/少女/青年/レディース)。genreは空(捏造しない)。
 使い方: python scripts/_preorder-gen-preview.py new1a|new1b|both [--limit N]
 """
+import sys as _sys_h
+if any(_a in ("-h", "--help") for _a in _sys_h.argv[1:]):   # ★--help で本体を走らせない(2026-10-03 apply-zokkan を誤実行し touched を空で上書き)
+    print(__doc__ or "(no doc)"); _sys_h.exit(0)
 import json, os, re, sys, datetime, unicodedata
 from _idx_authors import au_name  # ★索引v2 authorsパック対応(2026-07-14)
 sys.stdout.reconfigure(encoding="utf-8")
@@ -120,7 +123,7 @@ except Exception:
 _COVERS = {}
 try:
     for _l in _gzip.open(os.path.join(ROOT, "data", "seeds", "covers.jsonl.gz"), "rt", encoding="utf-8"):
-        _r = json.loads(_l); _COVERS[_r.get("isbn13") or _r.get("isbn")] = _r.get("url") or _r.get("cover")
+        _r = json.loads(_l); _COVERS[_r.get("isbn13") or _r.get("isbn")] = _r.get("cover_url") or _r.get("url") or _r.get("cover")   # ★seedの列名は cover_url(2026-10-03 是正: 旧は url/cover を読み全件None=毎回live照会)
 except Exception:
     pass
 
@@ -152,7 +155,7 @@ def _old_strip_vol_disp(t):
 
 # ★2026-07-09 全面作り直し: 整形は _preorder_draft_lib に一本化(副題分離/kana=楽天のみ捏造hold/pykakasi slug/@COMIC/英語保持)
 from _preorder_draft_lib import strip_kana_known_vol as _strip_kana_known_vol
-from _preorder_draft_lib import clean_title as _clean_title, clean_kana as _clean_kana, make_slug as _make_slug, scope_out as _scope_out, looks_like_criticism as _criticism, looks_like_many_credits as _manycredits, author_is_anthology as _anthology
+from _preorder_draft_lib import clean_title as _clean_title, clean_kana as _clean_kana, make_slug as _make_slug, scope_out as _scope_out, looks_like_criticism as _criticism, looks_like_many_credits as _manycredits, author_is_anthology as _anthology, scope_out_rec as _scope_rec
 # ★上下巻ペアの1頁統合(2026-09-04 ひみつー佐世保事件型)。skill A2-2 の規定だが実装が無く、
 #   同日発売の上下巻が new1b(上=1巻の新作) と ex_mid(下=全巻回収不成立) に割れて散っていた。
 #   兄弟は増加分の**全class**から集める(下は ex_mid/skip 側に落ちているため)。
@@ -181,6 +184,31 @@ for _k in ("new1a", "new1b", "ex_mid", "skip"):
             _joge_sibs.setdefault(_joge_key(_r), {})[_m] = _r
 
 
+# ★同時発売の連番兄弟(2026-10-03 イジめてイジられて型)。「1、2巻同時発売」の新作は 1巻=new1 / 2巻=ex_mid
+#   (全巻回収不成立=1巻がまだ頁でもキャッシュでもない) に割れ、2巻だけが黙って保留に落ちていた(当日4作)。
+#   1巻を生成する時に、増加分の同じ題+著者+出版社で 2,3,… と**途切れず続く巻だけ**を同じ頁に入れる。
+_num_sibs = {}
+for _k in ("new1a", "new1b", "ex_mid", "skip"):
+    for _r in cls.get(_k, []):
+        try:
+            _v = int(_r.get("_vol"))
+        except (TypeError, ValueError):
+            continue
+        if _v >= 2 and not _joge_mark(_r.get("title")):
+            _num_sibs.setdefault(_joge_key(_r), {}).setdefault(_v, _r)
+
+
+def num_siblings(r):
+    """1巻rowの同時発売の後続巻 [row(2巻), row(3巻), …](連番が切れた所で止める)。"""
+    if (r.get("_vol") or 1) != 1:
+        return []
+    sibs = _num_sibs.get(_joge_key(r)) or {}
+    out, n = [], 2
+    while n in sibs:
+        out.append(sibs[n]); n += 1
+    return out
+
+
 def joge_volumes(r):
     """このrowが上下巻セットの一員なら [(number, label, row), ...] を返す。単独/非該当は None。
     ★上(前編)が揃っていなければ None=従来どおり保留(単巻先行登録禁止)。"""
@@ -207,7 +235,12 @@ def _volumes_for(r, isbn, rd):
     """★上下巻セットなら兄弟を1頁にまとめる(2026-09-04)。単独なら従来どおり1巻。"""
     js = joge_volumes(r)
     if not js:
-        return [_vol_entry(r.get("_vol") or 1, isbn, rd, r.get("cover"))]
+        out = [_vol_entry(r.get("_vol") or 1, isbn, rd, r.get("cover"))]
+        for rr in num_siblings(r):          # ★同時発売の2巻以降(2026-10-03)
+            _ym = str(rr.get("ym") or "")
+            _rd = (_ym + (f"-{rr['day']:02d}" if rr.get("day") else "")) or None
+            out.append(_vol_entry(int(rr.get("_vol")), str(rr.get("isbn")), _rd, rr.get("cover")))
+        return out
     out = []
     for num, label, rr in js:
         _ym = str(rr.get("ym") or "")
@@ -238,6 +271,8 @@ for klass, r in targets:
         holds.append((klass, isbn, raw_title, "評論/研究書疑い(コミックレーベル無し+章立てcaption)→人裁定")); continue
     if _manycredits(r):                                           # ★書籍疑い(2026-09-19 ヤマト黎明篇=小説型)
         holds.append((klass, isbn, raw_title, "書籍疑い(コミックレーベル無し+著者5人以上=小説の挿絵陣/アンソロジー/翻訳コミック)→人裁定")); continue
+    if _scope_rec(r):                                             # ★題以外に出るscope外(2026-10-03 GN/ムック/アニメコミック型)
+        holds.append((klass, isbn, raw_title, _scope_rec(r))); continue
     base, subtitle, prov = _clean_title(raw_title)
     if prov:                                                      # (仮)=題未確定
         holds.append((klass, isbn, raw_title, "(仮)題未確定")); continue

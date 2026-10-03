@@ -119,6 +119,27 @@ def looks_like_many_credits(rec):
     return n >= 5
 
 
+_ANIME_COMIC_CAPTION = re.compile(r"アニメコミックス?化|アニメコミックス[】」』]|フィルムコミック|フィルムブック")
+
+
+def scope_out_rec(rec):
+    """★題だけを見る scope_out() の死角(2026-10-03 実踏3件)。掲載対象外の疑い理由を返す(無ければ None)。
+    ・題の「グラフィックノベル」= 翻訳コミック(MrBeast/マンダロリアン/デューン)。アメコミ翻訳=scope外
+    ・レーベル欄(seriesName)の「ムック」= 雑誌扱いの関連書(遊☆戯☆王ジャンプ=集英社ムック)。題には出ない
+    ・caption の「アニメコミックス化」= アニメ映像のコミック(名探偵コナン エピソードZERO 工藤新一水族館事件)。
+      題に「アニメコミック」が無くても紹介文が自分で名乗る
+    実測(2026-10-03 楽天予約 4,025件): 8件発火・全て真陽性。★deny でなく hold(人が裁定)。"""
+    t = str(rec.get("title") or "")
+    if "グラフィックノベル" in t:
+        return "翻訳グラフィックノベル(題に『グラフィックノベル』)=アメコミ翻訳=掲載scope外の疑い→人裁定"
+    if "ムック" in str(rec.get("seriesName") or ""):
+        return "レーベルがムック(雑誌扱いの関連書)=掲載scope外の疑い→人裁定"
+    m = _ANIME_COMIC_CAPTION.search(str(rec.get("caption") or rec.get("itemCaption") or ""))
+    if m:
+        return f"アニメコミック(caption『{m.group()}』)=掲載scope外の疑い→人裁定"
+    return None
+
+
 def clean_title(title):
     """→ (base, subtitle, provisional). provisional=True なら (仮)=hold対象。"""
     t = unicodedata.normalize("NFKC", str(title or "")).strip()
@@ -354,6 +375,11 @@ def clean_kana(kana, subtitle=None, base=None):
         return None
     k = unicodedata.normalize("NFKC", str(kana)).strip()
     k = _hira2kata(k)
+    # ★副題が分離済みなら、ヨミ側の対の波ダッシュ「〜副題〜」(+後続の巻数)を先に落とす(2026-10-03 実踏:
+    #   光の庭〜調香師と失われた香り〜 1 → 下の長音符正規化が開き側の〜を「ー」に変え「ヒカリノニワー」が残った)。
+    #   対の〜は括弧であって長音ではない。単独の〜(と〜ふ型)は残るので下の正規化はそのまま効く。
+    if subtitle:
+        k = re.sub(r"[〜～~][^〜～~]+[〜～~](?=[\s　\d０-９()（）]*$)", "", k)
     # ★カナに挟まれた波ダッシュ=長音符の装飾表記(と〜ふのあわこ→ト〜フノアワコ 2026-09-04)。
     #   ヨミ欄でカナとカナの間に来る〜/～は長音以外に意味を持てないので「ー」へ正規化する。
     #   (カナ以外に挟まれた〜は範囲記号のことがあるので触らない)

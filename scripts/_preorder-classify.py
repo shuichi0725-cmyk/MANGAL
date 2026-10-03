@@ -20,6 +20,9 @@
     半グレ-六本木 摩天楼のレクイエム-16/漫画 ゆうえんち -バキ外伝-11 型。同じ書き出しのスピンオフ
     (僕の心のヤバイやつ ラブコメディが始まらない 2)は巻連続ゲートで落ちて ex_mid(全巻回収)に残る。
 """
+import sys as _sys_h
+if any(_a in ("-h", "--help") for _a in _sys_h.argv[1:]):   # ★--help で本体を走らせない(2026-10-03 apply-zokkan を誤実行し touched を空で上書き)
+    print(__doc__ or "(no doc)"); _sys_h.exit(0)
 import json, os, re, sys, unicodedata
 from _idx_authors import au_name  # ★索引v2 authorsパック対応(2026-07-14)
 from collections import Counter

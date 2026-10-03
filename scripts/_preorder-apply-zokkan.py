@@ -13,6 +13,9 @@ classified.json の zokkan を volumes-supplement-auto.yml へ純粋追加。
   ただし既在が特装版entryなら通常版で置換(特装版entryを退役し volumes-supplement-retire-changelog.jsonl に記帳)。
 出力: 追加件数 + touched slugリスト(.cache/preorders/zokkan-touched.json) + 不備worklist追記
 """
+import sys as _sys_h
+if any(_a in ("-h", "--help") for _a in _sys_h.argv[1:]):   # ★--help で本体を走らせない(2026-10-03 apply-zokkan を誤実行し touched を空で上書き)
+    print(__doc__ or "(no doc)"); _sys_h.exit(0)
 import json, os, sys, sqlite3, datetime, re
 sys.stdout.reconfigure(encoding="utf-8")
 import yaml
