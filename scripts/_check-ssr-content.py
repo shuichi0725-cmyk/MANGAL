@@ -92,8 +92,9 @@ CONTENT_FLOOR_PAGINATED = 60
 SHELL_SAMPLE = 60
 
 # 検査から外す頁(実験/内部用。公開SEO対象でない)。
+# ★compass = 羅針盤(2026-10-03 本番化)。 端末側で描く対話頁で配信HTMLに本文が無いのが仕様(robots noindex・sitemap外)。
 SKIP_PREFIX = ("404", "home-design-", "nav-lab", "nav-pack", "obi-design", "tab-design",
-               "search-proto", "adult-triage", "audit-date-order", "column-sample")
+               "search-proto", "adult-triage", "audit-date-order", "column-sample", "compass")
 
 RE_TITLE = re.compile(r"<title>(.*?)</title>", re.S)
 RE_DESC = re.compile(r'<meta name="description" content="(.*?)"', re.S)

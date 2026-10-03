@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import type { MangaListItem } from "../../../lib/schema";
+import type { MangaListItem } from "../../lib/schema";
 import {
   KINDS,
   TONES,

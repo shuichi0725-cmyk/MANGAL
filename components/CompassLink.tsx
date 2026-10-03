@@ -1,15 +1,14 @@
 /**
- * 作品頁の「同ジャンル検索」の右に置く、羅針盤(魔法の書架)へのマーク(テスト環境のみ・2026-09-30 ユーザ指示)。
- * この作品を真ん中にして羅針盤を開く = /lab/magic-shelf?from=<slug>。
- * ★頁を丸ごと読み直す <a>(next/link にしない): 羅針盤は索引の読み先を本番の全件(/prod-idx)に変えるため、
- *   サイト内遷移で入るとテスト環境の抜粋(17作)の索引を持ち込む(components/GlobalNav.tsx と同じ理由)。
- * ★作品頁からは `=== "1" ? require(...) : null` で読まれる = 本番では刈り取られる。
- *   Tailwind の新しいクラスを足さないよう、見た目は style で持つ(本番の共通CSSを変えない)。
+ * 作品頁の「同ジャンル検索」の右に置く、羅針盤へのマーク(2026-09-30 ユーザ指示・2026-10-03 本番化)。
+ * この作品を真ん中にして羅針盤を開く = /compass?from=<slug>。
+ * ★頁を丸ごと読み直す <a>(next/link にしない): テスト環境の羅針盤は索引の読み先を本番の全件(/prod-idx)に変えるため、
+ *   サイト内遷移で入るとテスト環境の抜粋の索引を持ち込む(components/GlobalNav.tsx と同じ理由)。 本番では害は無い。
+ *   見た目は style で持つ(Tailwind の新しいクラスを足さない)。
  */
 export default function CompassLink({ slug, title }: { slug: string; title: string }) {
   return (
     <a
-      href={`/lab/magic-shelf?from=${encodeURIComponent(slug)}`}
+      href={`/compass?from=${encodeURIComponent(slug)}`}
       aria-label={`${title}から羅針盤で旅をする`}
       title="羅針盤でこの作品から旅をする"
       className="spring-press inline-flex items-center"

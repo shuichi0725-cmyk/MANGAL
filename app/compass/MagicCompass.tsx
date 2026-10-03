@@ -34,10 +34,13 @@ import {
 import { Halftone } from "./halftone";
 import { CompassShelveButton, CompassShelvePanel } from "./CompassShelve";
 
-// ★この頁だけ本番の全件索引を読む(preview CI が本番の公開索引から public/prod-idx/ を作る)。
+// ★テスト環境か(next.config.ts がビルド時の定数で埋める)。 本番は false = 下のテスト専用分岐ごと刈り取られる。
+const PREVIEW = process.env.NEXT_PUBLIC_PREVIEW_FEATURES === "1";
+// ★テスト環境だけ、本番の全件索引を読む(preview CI が本番の公開索引から public/prod-idx/ を作る。
+//   テスト環境の索引は抜粋で糸がほぼ張れない)。 本番は基点を変えない = 本番の公開索引をそのまま読む(2026-10-03 本番化)。
 //   頁のJSは水和より前に評価されるので、ここで基点を変えれば最初の読み込みから /prod-idx になる。
-//   module キャッシュは全頁共有 → この頁から出る時は <a>(全頁読み込み)で出る(next/link を使わない)。
-if (typeof window !== "undefined") setIndexBase("/prod-idx");
+//   module キャッシュは全頁共有 → テスト環境ではこの頁から出る時は <a>(全頁読み込み)で出る(next/link を使わない)。
+if (PREVIEW && typeof window !== "undefined") setIndexBase("/prod-idx");
 
 const TOP = 100; // 糸の色チップ列 44 + 旅路 56
 const SHEET = 96;
@@ -707,9 +710,9 @@ export default function MagicCompass({ magazines, genres = {} }: { magazines: Re
   let why = "";
   let goLabel: string | null = null;
   if (!curItem) {
-    why = failed ? "本番の索引が読めませんでした" : "星図を描いています…";
+    why = failed ? "索引が読めませんでした" : "星図を描いています…";
   } else if (!nb) {
-    why = failed ? "本番の索引が読めませんでした" : "いまの中心 ・ 星図を描いています…";
+    why = failed ? "索引が読めませんでした" : "いまの中心 ・ 星図を描いています…";
   } else if (unit) {
     sheetKind = unit.kind;
     if (sel) {
@@ -859,13 +862,13 @@ export default function MagicCompass({ magazines, genres = {} }: { magazines: Re
                 );
               })}
             <p className="cp-wait-text" style={{ top: geom.CY + CH / 2 + 14 }}>
-              {failed ? "本番の索引が読めませんでした" : "星図を描いています…"}
+              {failed ? "索引が読めませんでした" : "星図を描いています…"}
             </p>
           </div>
         )}
         {!curItem && (
           <p className="cp-wait-text" style={{ top: geom.CY - 8 }}>
-            {failed ? "本番の索引が読めませんでした" : "星図を描いています…"}
+            {failed ? "索引が読めませんでした" : "星図を描いています…"}
           </p>
         )}
         <div className="cp-world" style={worldStyle}>
@@ -1045,8 +1048,9 @@ export default function MagicCompass({ magazines, genres = {} }: { magazines: Re
         </div>
         <div className="cp-sheet-body">
           <div className="cp-sheet-head">
-            <div className="cp-sheet-t">{sheetItem?.title ?? "魔法の書架"}</div>
-            {sheetItem && (
+            <div className="cp-sheet-t">{sheetItem?.title ?? "羅針盤"}</div>
+            {/* ★「しまう」= 本棚へ入れる。 本棚はまだテスト環境のみなので、本番では出さない(2026-10-03 ユーザ裁定) */}
+            {PREVIEW && sheetItem && (
               <CompassShelveButton
                 slug={sheetItem.slug}
                 open={shelveFor === sheetItem.slug}
@@ -1060,7 +1064,7 @@ export default function MagicCompass({ magazines, genres = {} }: { magazines: Re
           <div className="cp-sheet-w" style={{ color: sheetColor(sheetKind) }}>
             {shelveMsg ?? why}
           </div>
-          {sheetItem && shelveFor === sheetItem.slug ? (
+          {PREVIEW && sheetItem && shelveFor === sheetItem.slug ? (
             <CompassShelvePanel
               item={sheetItem}
               onDone={(m) => {
@@ -1081,7 +1085,7 @@ export default function MagicCompass({ magazines, genres = {} }: { magazines: Re
       {big && (
         <button type="button" className="cp-big" aria-label="閉じる" onClick={() => setBig(null)}>
           {/* eslint-disable-next-line @next/next/no-img-element -- 外部CDN直リンク(images.unoptimized) */}
-          <img src={big.includes("thumbnail.image.rakuten.co.jp") ? big.replace(/\?_ex=\d+x\d+$/, "") + "?_ex=600x600" : big} alt="" />
+          <img src={big.includes("thumbnail.image.rakuten.co.jp") ? big.replace(/\?_ex=\d+x\d+$/, "") + "?_ex=600x600" : big} alt="" className="bg-white" />
           <span>閉じる ✕</span>
         </button>
       )}

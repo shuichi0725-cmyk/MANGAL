@@ -59,17 +59,15 @@ const FIND: Tile[] = [
 
 /** テスト環境だけの項目(本番ビルドでは定数 false で刈り取られる=本番のメニューは従来どおり)。 */
 const PREVIEW = process.env.NEXT_PUBLIC_PREVIEW_FEATURES === "1";
-// ★テスト環境(2026-09-29 ユーザ指示): 2列タイルで「ホームの下に羅針盤・その右に本棚」。
-//   羅針盤は頁を丸ごと読み直す <a> で入る(索引の読み先を本番の全件へ変えるため。GlobalNav と同じ理由)。
-const FIND_VIEW: Tile[] = PREVIEW
-  ? [
-      FIND[0],
-      FIND[1],
-      { icon: "compass", label: "羅針盤", href: "/lab/magic-shelf", reload: true },
-      { icon: "shelves", label: "本棚", href: "/shelf" },
-      ...FIND.slice(2),
-    ]
-  : FIND;
+// ★2列タイルで「ホームの下に羅針盤・その右に本棚」(2026-09-29 ユーザ指示)。 羅針盤は 2026-10-03 本番化、本棚はテスト環境だけ。
+//   テスト環境の羅針盤は頁を丸ごと読み直す <a> で入る(索引の読み先を本番の全件へ変えるため。GlobalNav と同じ理由)。
+const FIND_VIEW: Tile[] = [
+  FIND[0],
+  FIND[1],
+  { icon: "compass", label: "羅針盤", href: "/compass", reload: PREVIEW },
+  ...(PREVIEW ? [{ icon: "shelves", label: "本棚", href: "/shelf" }] : []),
+  ...FIND.slice(2),
+];
 
 const CORNERS: Tile[] = [
   // ★今日の一冊のリンク先="/"は誤り(2026-08-12 ユーザ指摘)。過去ログ頁へ=旧・過去ログタイルと統合

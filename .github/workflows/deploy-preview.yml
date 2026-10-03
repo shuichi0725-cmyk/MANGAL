@@ -73,12 +73,12 @@ jobs:
           cp .preview-data/manga-list-cols.v1.json public/manga-list-cols.v1.json
           echo "preview index entries:"; node -e "console.log('list', require('./public/manga-list-index.json').d.length)"
 
-      # ★魔法の書架(/lab/magic-shelf)だけが読む本番の全件索引(2026-09-29 ユーザ裁定「3」)。
+      # ★羅針盤(/compass・テスト環境)だけが読む本番の全件索引(2026-09-29 ユーザ裁定「3」)。
       #   テスト環境の索引は抜粋で糸がほぼ張れないため、本番の公開索引を取得 → 列形式を生成 → public/prod-idx/ に置く
       #   (同一オリジン配信 = 本番の索引は CORS ヘッダ無しなので別オリジンからは読めない)。
       #   ほかの頁の索引(public/ 直下)には触らない。 取得に失敗したらこの段だけ飛ばす(ビルド全体は止めない。
-      #   頁は「本番の索引が読めませんでした」と出す)。
-      - name: Stage production full index for /lab/magic-shelf (public/prod-idx/)
+      #   頁は「索引が読めませんでした」と出す)。
+      - name: Stage production full index for /compass (public/prod-idx/)
         continue-on-error: true
         run: |
           set -eu
@@ -94,7 +94,7 @@ jobs:
             size=$(stat -c %s "$f")
             echo "$f: $size bytes"
             if [ "$size" -gt 26214400 ]; then
-              echo "::warning title=prod-idx over 25MiB::$f is $size bytes (> Cloudflare Pages 25MiB limit). Removed; /lab/magic-shelf will show 本番の索引が読めませんでした"
+              echo "::warning title=prod-idx over 25MiB::$f is $size bytes (> Cloudflare Pages 25MiB limit). Removed; /compass will show 索引が読めませんでした"
               rm -f "$f"
             fi
           done

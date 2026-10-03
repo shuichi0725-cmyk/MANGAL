@@ -33,7 +33,7 @@ const _catchListeners = new Set<() => void>();
 const _indexListeners = new Set<() => void>();
 
 // ★読み先の基点(2026-09-29 魔法の書架=羅針盤)。既定 "" = 今までどおり "/manga-*.json"。
-//   テスト環境の /lab/magic-shelf だけが setIndexBase("/prod-idx") で本番の全件索引を読む
+//   テスト環境の羅針盤 /compass だけが setIndexBase("/prod-idx") で本番の全件索引を読む
 //   (preview CI が public/prod-idx/ に置く)。module キャッシュは全頁共有なので、
 //   基点を変えたら状態を捨てて読み直す。 _gen = 古い基点の読み込みが後から届いても書き込ませない番号。
 let _base = "";

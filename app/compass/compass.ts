@@ -1,7 +1,7 @@
 // ★魔法の書架 = 旅路つき羅針盤 の純関数 (依頼書 docs/cloud-briefs/magic-shelf-compass.md)。
 //   つながりの計算・広げる単位・4つの広げ方の座標・網点の出方の順番 v をここに集め、
 //   compass.test.ts で固定する。 DOM/React に触らない(vitest で素のまま読めるよう相対 import のみ)。
-import type { MangaListItem } from "../../../lib/schema";
+import type { MangaListItem } from "../../lib/schema";
 
 export type Kind = "author" | "mag" | "year" | "elem";
 /** 「広げる」だけにある糸(周りの7冊には出さない)。 ★2026-09-30 ユーザ裁定: ジャンルは広げる単位として足す */
