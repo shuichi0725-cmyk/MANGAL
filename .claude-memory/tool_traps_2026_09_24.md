@@ -2,7 +2,10 @@
 name: tool_traps_2026_09_24
 description: 【道具の罠】_verify-kana-pending.py は --help を解釈せず本番照合が走る / reflect の減少検出の詳細は stderr=grep で絞ると消える / Windowsで書いた一覧はCRLF=cp等のシェルで壊れる
 metadata:
+  node_type: memory
   type: feedback
+  originSessionId: 5d93aabc-75cf-43e0-a92b-5334983246ac
+  modified: 2026-10-03T15:26:38.376Z
 ---
 
 2026-09-24 に実踏した3つ。
@@ -29,3 +32,8 @@ metadata:
 
 - ★2026-10-01 追記: `scripts/_catch-audit.py --drop/--fix` は catch-ja.json を `indent=1` で書き戻す。本体は区切り詰め(compact)の1行JSONなので、使うと全行差分になる。キャッチの撤回は compact (`separators=(',',':')`) で自前に書き、manga-catch-index.json(公開slugキー)も同時に消すこと。`_synopsis-audit.py` は synopsis-ja.json がもともと indent=1 なので問題なし。
 - ★同日: AniList 番号を共有する頁群(244群・539頁)のうち、題に続編系の語を含む19群を AniList 原文で裁定し、別作品8頁を edition-overrides `"anilist": false` で遮断した。和訳あらすじ(synopsis-ja)には訳語誤り(Akira Hio→聖悠紀、Asuna→安孫子)と混成文(佐藤君=2作品の合成)の型もあった。[[catch_side_wrong_work_class]]
+- ★(10-03) **`--help` で本体が走る型をまた踏んだ**: `_preorder-apply-zokkan.py --help` = 本処理が再実行され `zokkan-touched.json` を**空で上書き**(種4の差分から復元)。
+  → 引数解析の無い予約系10本に `-h/--help` ガードを入れた(docstring を出して終了)。他の script は未対策= 引き続き先に中身を読む。
+- ★(10-03) `_apply-preorder-date-drift.py --apply` を2回 → override 台帳に同じ7行が二重追記(監査TSVが古いまま同じ候補が残る)。→ (isbn13,date) 既在は書かないよう冪等化済み。
+- ★(10-03) Bash の heredoc で Python に正規表現を書き込ませたら、`\b` がバックスペース文字(0x08)として書かれた(grep の表示では見えない)。
+  **正規表現の行は Edit ツールで書く**。書いた後は `od -c` か `open(p,'rb').read().count(bytes([8]))` が 0 かで確かめる。

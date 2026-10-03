@@ -14,7 +14,7 @@
 - [【最重要】壊れているから消す、を禁止](never_delete_because_broken.md) ／ [【戒め】「無い」をgrep一発で結論するな](feedback_absence_needs_verification.md) ／ [【戒め】script警告は検算してから報告](feedback_sanity_check_tool_warnings.md) ／ [【戒め】失敗を否定記録にしない](feedback_no_negative_record_on_failure.md)
 - [【許容】週次のアップ無しリハーサル](feedback_weekly_rehearsal_no_upload.md) ／ [【罠】記憶は正本に書く](memory_write_to_canonical_not_mirror.md) ／ [【戒め】写真の要素を実名で列挙してから作る](feedback_name_the_element_in_the_photo.md)
 - [【戒め】表示仕様は実装を読む。自前で再実装して結論を出すな](feedback_read_the_implementation_not_reimplement.md) ／ [【戒め】報告は常に日本語で](feedback_report_in_japanese.md) ／ [【戒め】番号指示は一覧全体の番号で読む](feedback_numbered_items_whole_list.md)
-- [【分担】Sonnetが書きOpusが点検(試行200→点検→本番)](feedback_sonnet_writes_opus_audits.md)
+- [【分担】Sonnetが書きOpusが点検(試行200→点検→本番)](feedback_sonnet_writes_opus_audits.md) ／ [【型】見た目の相談=スマホ幅HTML見本→番号で選ぶ](feedback_design_mockups_html_sendfile.md)
 
 ## 全体構造・台帳
 - [seeds pyramid=全体構造](project_architecture_seeds.md) ／ [【必ず使う】統合台帳](intake_manifest_ledger_live.md) ／ [【台帳】全データ資産地図](data_assets_inventory.md) ／ [【必読】著者データ全源](author_data_map.md)
@@ -98,7 +98,7 @@
 - [SEO: 発売日の着地面=/shinkan月別静的頁+今週/来月](seo_release_date_pages.md) ／ [部分ビルド合流の復旧型](partial_rebuild_merge_recovery.md) ／ [discovery戦略](discovery_strategy_and_refs.md) ／ [SEO: Google未登録=クロール待ち](seo_index_coverage_state.md)
 - [【✅】Kindleはブラウザで開く=解決](kindle_link_browser_not_app.md) ／ [preview実測+stale事故史](preview_deploy_pitfalls.md) ／ [preview反映=GitHub Actions実体](preview_deploy_github_actions.md) ／ [【番人】共通シェルの配線ゲート](shell_wiring_gates.md) ／ [【番人】検索スナップショットゲート](search_snapshot_gate.md)
 - [検索warm並走の競合型](search_warm_race_2026_08_31.md) ／ [検索が遅い実測内訳と対策](search_perf_hotspots_2026_08.md) ／ [軽量索引=検索v2/配列化](lightweight_index_architecture.md) ／ [【✅】死蔵検索索引=廃止済](dead_search_index_retire_pending.md) ／ [【計画】本番軽量化(索引スリム)](index_lightening_plan.md)
-- [【型】リンクで古い頁・再読込で最新=RSCの.txtがブラウザ24時間](rsc_txt_browser_cache_stale_navigation.md) ／ [【再発厳禁】キャッシュが修正を隠した事故](deploy_cache_swr_hid_the_fix.md) ／ [/browse がサーバ描画0だった](browse_ssr_shell_and_seo.md) ／ [公開=Worker+R2(Pages不可)](hosting_worker_r2_architecture.md)
+- [【型】リンクで古い頁・再読込で最新=RSCの.txtがブラウザ24時間](rsc_txt_browser_cache_stale_navigation.md) ／ [【罠】拡大書影はポータル無し=祖先のz-indexで閉じ込められる](lightbox_no_portal_stacking_trap.md) ／ [【再発厳禁】キャッシュが修正を隠した事故](deploy_cache_swr_hid_the_fix.md) ／ [/browse がサーバ描画0だった](browse_ssr_shell_and_seo.md) ／ [公開=Worker+R2(Pages不可)](hosting_worker_r2_architecture.md)
 - [公開環境2系統](deploy_environments_state.md) ／ [検索に出るのに404=ビルドskip](search_404_build_skip_validation.md) ／ [Cloudflareアクセス解析](cloudflare_analytics_access.md) ／ [CF請求=Workers Paid $5.50/月のみ](cloudflare_billing.md)
 - [【未決】本番R2に孤児HTML1,041頁](r2_orphan_pages_prune_missing.md) ／ [R2 prune待ち台帳=週次preflightが表示](pending_r2_prune_ledger.md) ／ [【✅修復済】301リダイレクト層=KV稼働](redirect_layer_inactive.md) ／ [【裁定】/shinkan=恒久URL+月はh2(競合2社も同型)](shinkan_permanent_hub_design.md)
 - [【道具】GSC/Bing Webmaster を直接読む(_gsc.py/_bwt.py)](search_console_bing_api_access.md) ／ [【罠】CF解析のUNK偽レコードで「29.6%が504」と誤診断](cf_analytics_unk_artifact.md) ／ [【実測】Bing流入はホーム1枚が8割・作品頁56枚のみ](bing_search_reality_2026_09.md)
@@ -112,7 +112,7 @@
 - [日替わり特集コーナー(/tokushu)](daily_feature_corner.md) ／ [【型】王様の仕立て屋=1頁に4部同居→頁分割](ousama_shitateya_4part_split.md) ／ [【型】俺の空=4作品が1頁に同居→3頁分割](oresora_4way_split.md) ／ [【残】鬼太郎本編の多版正規化](kitaro_honpen_multiedition_pending.md)
 - [【残】OTOMO全集補完](otomo_complete_works_pending.md) ／ [全集コーナー=素材収集済み](zenshuu_corner_state.md) ／ [【裁定】愛蔵版コーナー=巻数圧縮で決める](aizouban_corner_compression_rule.md) ／ [三世代/今週ストック未配線](sansedai_featured_stock_state.md) ／ [今日の一冊 過去ログ=凍結ログが正](sansedai_archive_frozen_log.md)
 - [ソーサリアン統合=本番化済](sorcerian_consolidation_state.md) ／ [【✅】手塚全集タブ全滅→復旧](tezuka_tab_empty_pages.md) ／ [【確認待ち】魔術士オーフェン見直し](oofen_franchise_state.md) ／ [SHADOW SKILL=4期の別作品群](shadow_skill_franchise_state.md) ／ [ワイルド7=6作品×多版](wild7_franchise_state.md)
-- [ひぐらし=編ごとに別頁](higurashi_franchise_state.md) ／ [【方針】仮想書店=現実を模さない・全画面が切り替わる魔法コンソール](magic_shelf_virtual_bookstore.md)
+- [ひぐらし=編ごとに別頁](higurashi_franchise_state.md) ／ [【方針】仮想書店=現実を模さない・羅針盤/compassとして本番化(10-03)](magic_shelf_virtual_bookstore.md)
 
 ## 道具の罠・運用の型
 - [【道具の罠】_lookup.py --isbn --live はキャッシュ済だとliveを叩かない](lookup_isbn_live_cached_skip.md) ／ [【罠】CommandLine正規表現killで自分のシェルを殺す](process_kill_commandline_self_match.md) ／ [【戒め】裁定表は生成器から出す+鮮度を見る](worklist_needs_generator_and_freshness.md)
