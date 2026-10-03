@@ -750,13 +750,16 @@ export default function MagicCompass({ magazines, genres = {} }: { magazines: Re
   // ★選んだ本へ舞台ごと寄る(2026-10-03 ユーザ裁定=案D): 周りの本は約58pxで書影が見えづらかった。
   //   選んだ本が舞台の中ほどで幅約130pxになるよう、世界(本+糸+ラベル)をまとめて拡大する。
   //   位置関係は崩れない(他の本・糸も一緒に大きくなる)。 進む(pan)中はやめる= 手繰る動きと同時に引く。
-  //   星屑で広げた小さい本も同じ大きさまで寄る(倍率は2〜4倍に収める)。
+  //   ★寄った後の大きさは本によらず同じ(2026-10-03 ユーザ指摘): 星屑の本は3段の大きさ・年表は34px・
+  //   周りの本は58pxと元が違う。旧は倍率を2〜4倍で頭打ちにしていたので、小さい本は小さく大きい本は大きく残った。
+  //   = 同じ枠(幅 tw × 高さ tw*1.4)にちょうど収まる倍率を本ごとに出す(上限・下限なし)。
   const zoom = useMemo(() => {
     if (!sel || pan) return null;
     const n = nodes.find((x) => x.slug === sel && !x.center);
     if (!n) return null;
     const stageH = Math.max(240, vp.h - TOP - SHEET);
-    const s = Math.min(4, Math.max(2, Math.min(vp.w * 0.36, 150) / n.w));
+    const tw = Math.min(vp.w * 0.36, 150);
+    const s = Math.min(tw / n.w, (tw * 1.4) / n.h);
     // 選ぶとシートが伸びて舞台の下を覆うので、狙う高さは舞台の真ん中より少し上
     return { s, tx: -s * n.x, ty: stageH * 0.44 - geom.CY - s * n.y };
   }, [sel, pan, nodes, vp, geom.CY]);

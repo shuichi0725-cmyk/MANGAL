@@ -226,6 +226,10 @@
 .cp-stage.zoom {
   overflow: hidden;
 }
+/* 寄っている間は「浮く」量も揃える(小さい本だけ 1.12 倍だと寄った後の大きさが 6% ずれる) */
+.cp-stage.zoom .cp-nd.pick img {
+  transform: translateY(-2px) scale(1.04);
+}
 .cp-world {
   position: absolute;
   width: 0;
