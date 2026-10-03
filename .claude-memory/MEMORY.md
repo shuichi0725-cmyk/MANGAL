@@ -63,10 +63,10 @@
 ## キャッチ・あらすじ・ジャンル・要素
 - [【保留TODO】巻説明=次スライスから再開](voldesc_next_slice_todo.md) ／ [巻説明=着手作は全巻終わらせる](voldesc_finish_started_series.md) ／ [【保留】巻説明が先頭タブに無い93頁](voldesc_not_in_top_block_93.md) ／ [1巻もキャッチ+要素(09-30裁定・3,308作済)](onevol_catch_themes_enrich_2026_10.md)
 - [【宿題】受賞歴データが.cacheに眠ったまま未使用](awards_material_unused.md) ／ [synopsis和訳=git追跡seed](synopsis_ja_seed.md) ／ [【残】キャッチ/説明欠落補完](catch_synopsis_enrich_pending.md) ／ [catch側にも別作品混入の型](catch_side_wrong_work_class.md) ／ [【✅】短キャッチrequeue完了](synopsis_short_requeue_done.md)
-- [【✅】楽天あらすじ→genre/tag](genre_from_rakuten_story_plan.md) ／ [【残】タグなし32,609作](tagless_coverage_next.md) ／ [【残】ジャンル品質改善4段](genre_quality_improvement.md) ／ [【厳守】AIジャンル=master32のみ](ai_genre_closed_vocabulary.md)
+- [【✅】楽天あらすじ→genre/tag](genre_from_rakuten_story_plan.md) ／ [要素0=37,471/汎用ジャンルだけ21,080(10-03)](tagless_coverage_next.md) ／ [【残】ジャンル品質改善4段+汎用頁へのAI追加の例外](genre_quality_improvement.md) ／ [【厳守】AIジャンル=master32のみ](ai_genre_closed_vocabulary.md)
 - [ジャンル不一致514全裁定](genre_disagree_adjudication_state.md) ／ [【進行中】外部エンリッチ=Wikipedia+魚で旧作にキャッチ/詳細](external_enrich_state.md) ／ [【進行中】エンリッチ7k再開](enrich_7k_resume_state.md) ／ [【重要】新しい順の鉱脈が枯れた](enrich_newest_seam_exhausted.md)
 - [【✅完走】BookLive紹介文=第2材料源](enrich_booklive_seam_done.md) ／ [Gemini API運用実測](gemini_api_ops.md) ／ [genre-append.yml=既存genresを消さずunion](genre_append_seed_mechanism.md) ／ [【✅適用済】ラブコメ復権=romcom裁定](romcom_backfill_state.md)
-- [【✅】派生ジャンル規則=promote恒久層](genre_derive_rules_layer.md) ／ [【是正済】副題欄に副題でない物=3,324→3,141](subtitle_not_subtitle_cleanup.md) ／ [【進行中】キャッチから要素付与(2026-10-01)](themes_from_catch_2026_10.md) ／ [Kobo紹介文→キャッチ5,811作(10-02)](kobo_caption_catch_route.md)
+- [【✅】派生ジャンル規則=promote恒久層](genre_derive_rules_layer.md) ／ [【是正済】副題欄に副題でない物=3,324→3,141](subtitle_not_subtitle_cleanup.md) ／ [キャッチから要素付与(10-01・後継は③)](themes_from_catch_2026_10.md) ／ [Kobo紹介文→キャッチ5,811作(10-02)](kobo_caption_catch_route.md)
 
 ## 書影
 - [【計画】書影harvest3段](cover_harvest_plan.md) ／ [OpenBD終了・書影Amazon必須](openbd_eol_amazon_required.md) ／ [【裁定】書影解像度 ?_ex=300x300](cover_resolution_policy.md) ／ [楽天書影資産(noimage罠)](rakuten_cover_data_asset.md) ／ [書影=アフィ元画像のみ](cover_source_affiliate_only.md)

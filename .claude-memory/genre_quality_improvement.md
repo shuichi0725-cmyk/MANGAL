@@ -54,3 +54,8 @@ metadata:
 ## 備考
 - サブタグ独立3軸基準(件数突出/境界明確/検索ニーズ、現状baseball/soccerのみ)は維持。
 - seed+promote再生成で完結=URL影響ゼロ、公開後でも安全。ただしフィルターUIの信頼性に直結するので公開前推奨。
+
+## ★2026-10-02 裁定の例外(ユーザ指示「③④をsonnet5.5に」)
+- 「信頼源(AniList等)がある頁ではAI単独でジャンルを作らない」の**例外**: ジャンルが汎用だけ(drama/comedy/romance/slice-of-life/action/other)の頁には、
+  材料の明記を根拠にAIが具体ジャンルを足してよい(trusted頁も含む)。経路は genre-append.yml(既存・フラグ不変の union)のみ。
+- ★必ず `source:` で出所を残す(今回 "full:sonnet-5.5" 1,653件)= 一括で取り消せる形を保つ。trusted 置換経路(genre-wiki/genre-additions)には書かない。
