@@ -840,3 +840,7 @@
   outline: 2px solid #f2f2ec;
   outline-offset: 2px;
 }
+/* 「広げる」の帯は札の実際の高さのすぐ上に乗る(MagicCompass の sheetH)。 札の伸び縮みに合わせて同じ速さで動かす */
+.cp-units {
+  transition: bottom 0.3s;
+}

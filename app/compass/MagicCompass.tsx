@@ -193,6 +193,19 @@ export default function MagicCompass({ magazines, genres = {} }: { magazines: Re
   const [sel, setSel] = useState<string | null>(null);
   const [off, setOff] = useState<Set<UnitKind>>(() => new Set());
   const [exp, setExp] = useState<string | null>(null);
+  // ★札(シート)の実際の高さ。 札は中身に合わせて伸びる(紹介文3行/選んでいる時は5行+進む)ので、
+  //   「広げる」の帯を固定位置(下から98px)に置くと札の裏に潜って読めなくなった(2026-10-03 ユーザ指摘)。
+  //   帯はいつも札のすぐ上に乗せる。 callback ref = 札が後から描かれても測れる。
+  const [sheetH, setSheetH] = useState(SHEET);
+  const sheetRo = useRef<ResizeObserver | null>(null);
+  const sheetRef = useCallback((el: HTMLDivElement | null) => {
+    sheetRo.current?.disconnect();
+    sheetRo.current = null;
+    if (!el) return;
+    const ro = new ResizeObserver(() => setSheetH(Math.round(el.getBoundingClientRect().height)));
+    ro.observe(el);
+    sheetRo.current = ro;
+  }, []);
   const [lays, setLays] = useState<Partial<Record<UnitKind, string>>>({});
   // 広げた糸のうち画面に出している24冊(くじ引きの結果・2026-09-30)
   const [drawn, setDrawn] = useState<{ key: string; items: UnitItem[] } | null>(null);
@@ -997,7 +1010,7 @@ export default function MagicCompass({ magazines, genres = {} }: { magazines: Re
       </div>
 
       {/* 4. 広げる ▸ */}
-      <div className="cp-units">
+      <div className="cp-units" style={{ bottom: Math.max(SHEET + 2, sheetH + 2) }}>
         {nb && !exp && <span className="cp-ul">広げる ▸</span>}
         {exp && (
           <button type="button" className="cp-uc cp-uc-x" onClick={() => openUnit(null)}>
@@ -1022,6 +1035,7 @@ export default function MagicCompass({ magazines, genres = {} }: { magazines: Re
 
       {/* 5. シート */}
       <div
+        ref={sheetRef}
         className={`cp-sheet${bump ? " bump" : ""}${goLabel && sel && shelveFor !== sheetItem?.slug ? " has-go" : ""}`}
         // ★札の色 = いま辿っている糸の色(何も選んでいない時は白)。 上端の太線・状態の小札・詳細・進むがこの1色(2026-10-03 案B3+D2)
         style={{ "--kc": sheetKind ? KIND_COLOR[sheetKind] : "#e6ecf0" } as CSSProperties}
