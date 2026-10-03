@@ -74,3 +74,7 @@ metadata:
 
 **How to apply:** UI/体験の依頼は必ず「画面が何に変わるか」を1行目に書く。既存UIの延長に見える案は出す前に疑う。
 関連: [[feedback_name_the_element_in_the_photo]] [[cloud_sessions_usage]]
+
+## 2026-10-03 選んだ時の見せ方=案D「舞台ごと寄る」(commit e7d840280・テストのみ)
+- ユーザ指摘「周りの本の書影が小さくて見えづらい」→ 6案を artifact で比較(https://claude.ai/artifact/NegKXdwKjej3VraYFEzpgc : 0現状/A反対側の上へ/B中心と並べる/Cその場で拡大/D舞台ごと寄る/E紹介欄で大きく)→ **D採用**。
+- 実装= MagicCompass の worldStyle に scale を足すだけ(選んだ本が幅≈min(画面36%,150px)・倍率2〜4・狙う高さ=舞台の44%)。進む(pan)中は寄りをやめる。寄っている間だけ .cp-stage.zoom{overflow:hidden}。
