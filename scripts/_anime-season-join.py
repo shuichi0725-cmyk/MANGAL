@@ -70,13 +70,20 @@ def main():
     # ★1アニメ複数頁対応(2026-09-01 やはり俺型=ラノベ漫画化×アニメ漫画化の並立):
     #   同一anime_anilist_idのaccept行を全部集める。slug=None行=結線不能確定(holdsに出さない)
     accepts = {}
+    # ★AniListに居ないアニメ(2026-10-03): animatetimes にだけ載る続編・新編(タヌキとキツネ新作/
+    #   BEYBLADE X新編/ガルパン短編等)は anime_anilist_id が無く、旧はここで KeyError→黙って捨てていた。
+    #   accept行に season_key+anime_title+slug を書けば、そのまま1行結線する(via="animatetimes")。
+    manual = []
     if os.path.exists(ACCEPTS):
         for l in open(ACCEPTS, encoding="utf-8"):
             try:
                 d = json.loads(l)
-                accepts.setdefault(d["anime_anilist_id"], []).append(d.get("slug"))
             except Exception:
-                pass
+                continue
+            if d.get("anime_anilist_id"):
+                accepts.setdefault(d["anime_anilist_id"], []).append(d.get("slug"))
+            elif d.get("season_key") and d.get("anime_title") and d.get("slug"):
+                manual.append(d)
 
     rows = [json.loads(l) for l in open(SEED, encoding="utf-8")]
     out = open(OUT, "w", encoding="utf-8")
@@ -139,6 +146,14 @@ def main():
         else:
             holds.write(f"{r['season_key']}\t{r.get('anime_title')}\t{src}\t{json.dumps(manga_nodes, ensure_ascii=False)[:150]}\n")
             n_hold += 1
+    for d in manual:
+        out.write(json.dumps({"season_key": d["season_key"], "anime_anilist_id": None,
+                              "anime_title": d["anime_title"], "source": d.get("source") or "MANGA",
+                              "popularity": d.get("popularity") or 0, "slug": d["slug"], "via": "animatetimes"},
+                             ensure_ascii=False) + "\n")
+        n_join += 1
+    if manual:
+        print(f"AniList外(animatetimesのみ)の結線 {len(manual)}件")
     print(f"join {n_join} (うち裁定accept {n_acc}) / 保留 {n_hold} / 非漫画skip {n_skip} (全{len(rows)}アニメ)")
     print(f"→ {os.path.relpath(OUT, ROOT)} / holds={os.path.relpath(HOLDS, ROOT)}")
 

@@ -201,6 +201,16 @@ def crawl(start_id, max_pages=200, force_ids=()):
     return pages
 
 
+WEEKLY_SEASONS = 5
+SEASON_IDX = {"WINTER": 0, "SPRING": 1, "SUMMER": 2, "FALL": 3}
+
+
+def season_order(key):
+    """'2026-FALL' → (2026, 3)。時系列の並べ替え用(文字列ソートは季の順にならない)"""
+    y, _, q = (key or "").partition("-")
+    return (int(y) if y.isdigit() else 0, SEASON_IDX.get(q, 9))
+
+
 def weekly():
     """週次: 連鎖の先頭(最新)側 2季 + 未発見の次季 を強制再取得して差分報告。
     ★fail-soft: ネットワーク断等で失敗しても exit 0(週次step1を止めない。WARNのみ)"""
@@ -208,14 +218,19 @@ def weekly():
     if not rows:
         print("WARN: seedが空。先に --crawl --start-id NNNN を実行して下さい(週次は続行)")
         return
+    # ★季は時系列で並べる(2026-10-03 是正): 旧は文字列ソート= FALL<SPRING<SUMMER<WINTER で
+    #   「最新2季」が 2026-WINTER/2027-WINTER になり、当季(2026秋)の頁を一度も取り直さず
+    #   9/1 のキャッシュのまま凍っていた。
+    # ★取り直しは直近5季ぶん: animatetimes は「先の季」用のタグ番号を使い回す(5228 = 2026春 → 2027春)。
+    #   キャッシュのままだと古い季ラベルで読まれ、同じ季が2タグに割れて行が二重になる。
     by_season = {}
     for r in rows:
-        by_season.setdefault(r["season_key"], r["at_tag_id"])
-    newest = sorted(by_season)[-2:]
-    ids = [by_season[s] for s in newest]
-    print(f"週次チェック対象: {', '.join(f'{s}(id={i})' for s, i in zip(newest, ids))} + 次季探索")
+        by_season.setdefault(r["season_key"], set()).add(r["at_tag_id"])
+    newest = sorted(by_season, key=season_order)[-WEEKLY_SEASONS:]
+    ids = sorted({i for s in newest for i in by_season[s]})
+    print(f"週次チェック対象: {', '.join(f'{s}(id={sorted(by_season[s])})' for s in newest)} + 次季探索")
     try:
-        crawl(ids[0], force_ids=set(ids))
+        crawl(by_season[newest[-1]].copy().pop(), force_ids=set(ids))
         report()
     except Exception as e:
         print(f"WARN: animatetimes週次チェック失敗({type(e).__name__}: {e})。週次は続行、次週に自然再試行")

@@ -51,3 +51,10 @@ metadata:
 - ★gap TSVの注意: **cross-season偽陽性あり**(進撃完結編/ジョジョ再編集=AniListでは前季entry継続扱い)。裁定は週次の新規増分だけ見ればよい。頁への結線は既存 `anime-season-accepts.jsonl`(via:"animatetimes")。
 
 関連: [[anime_flag_freshness]] [[feedback_one_bug_means_a_class]]
+
+## ★2026-10-03 週次の取り直しが当季を外していた(是正済)+AniList外の結線口
+- 症状: ユーザ「10月なのにホームが夏アニメ」→ 本番の最終デプロイが09-23(季の自動切替 3ca6d2150=09-24 が未公開)。次の週次で解消。
+- ★`--weekly` の「最新2季」が**文字列ソート**(FALL<SPRING<SUMMER<WINTER)で 2026-WINTER/2027-WINTER を選び、**当季2026秋の頁を9/1のキャッシュのまま**読んでいた → `season_order`(年,季)で時系列化+直近5季を強制再取得。
+- ★animatetimes は**先の季用タグ番号を使い回す**(5228 = 旧2026春 → 現2027春)。キャッシュのままだと同じ季が2タグに割れて行が二重(2026春204行)。直近5季の強制再取得で自然解消。
+- ★AniListに居ない作(animatetimesのみ)の結線口を新設: `anime-season-accepts.jsonl` に `season_key+anime_title+slug`(anime_anilist_id無し・via:"animatetimes")を書けば join が1行出す。旧=KeyErrorで黙って捨てていた。
+- 2026秋 54→62作(帰還者の魔法2期/DB超ビルス/DM LOST断罪/ゆうさんち→でかいはち/タヌキとキツネ/ガルパンもっとらぶらぶ/BEYBLADE Xベイキングダム/鳴海の平日→怪獣8号)。残=雪女さん(頁なし)/紫禁・御猫房(日本語版なし)/メダリスト再放送(対象外)。
