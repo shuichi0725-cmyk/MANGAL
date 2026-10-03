@@ -755,3 +755,88 @@
 .cp-sheet.has-go .cp-sheet-c {
   -webkit-line-clamp: 5;
 }
+
+/* ── 6. シートの見た目 = 案B3+D2(2026-10-03 ユーザ裁定) ──
+ * 黒い札。 上端の太線・状態の小札・詳細・進む(・しまう)を「いま辿っている糸の色」1色に揃える(--kc。何も選んでいない時は白)。
+ * 詳細は書影の真下に書影と同じ幅の縁取り(D2)= 主役は進む(塗り)、詳細は脇役(線)。 角はゼロ(サイトの黒×ライムの系統)。
+ * ★上の各規則を上書きするだけ(並び・高さ・行数の規則は変えない)。 */
+.cp-sheet {
+  background: #141414;
+  color: #f2f2ec;
+  border-radius: 0;
+  border-top: 3px solid var(--kc);
+}
+.cp-sheet-w {
+  margin-top: 2px;
+}
+.cp-sheet-wt {
+  display: inline;
+  background: var(--kc);
+  color: #0d0d0d;
+  padding: 0 6px;
+}
+.cp-sheet-wr {
+  color: #a9aeb3;
+  font-weight: 600;
+  margin-left: 6px;
+}
+.cp-sheet-c {
+  color: #e7e8e2;
+}
+.cp-detail {
+  box-sizing: border-box;
+  width: 46px;
+  text-align: center;
+  color: var(--kc);
+  border: 2px solid var(--kc);
+  border-radius: 0;
+  padding: 1px 0;
+  line-height: 1.4;
+}
+.cp-go {
+  margin-top: 5px;
+  padding: 3px 10px;
+  font-size: 11.5px;
+  font-weight: 800;
+  color: #0d0d0d;
+  background: var(--kc);
+  border-radius: 0;
+}
+.cp-shelve {
+  background: transparent;
+  border: 1.5px solid var(--kc);
+  color: var(--kc);
+  border-radius: 0;
+}
+.cp-shelve.is-in {
+  background: var(--kc);
+  border-color: var(--kc);
+  color: #0d0d0d;
+}
+.cp-shelve-chip {
+  background: transparent;
+  border: 1px solid #ffffff55;
+  color: #f2f2ec;
+  border-radius: 0;
+}
+.cp-shelve-chip.on {
+  background: var(--kc);
+  border-color: var(--kc);
+  color: #0d0d0d;
+}
+.cp-shelve-chip.out {
+  color: #ff9a85;
+}
+.cp-shelve-chip.out.confirm {
+  background: #c0392b;
+  border-color: #c0392b;
+  color: #fff;
+}
+.cp-detail:focus-visible,
+.cp-sheet-cov:focus-visible,
+.cp-go:focus-visible,
+.cp-shelve:focus-visible,
+.cp-shelve-chip:focus-visible {
+  outline: 2px solid #f2f2ec;
+  outline-offset: 2px;
+}

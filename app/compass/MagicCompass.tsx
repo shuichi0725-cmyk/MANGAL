@@ -91,10 +91,6 @@ type LineView = {
 };
 type Pan = { target: string; from: string; x: number; y: number; w: number; h: number; kind: ThreadKind; small: boolean };
 
-function sheetColor(k: ThreadKind | null): string {
-  if (!k || k === "back") return "#5b6570";
-  return k === "author" ? "#b8860b" : KIND_COLOR[k];
-}
 
 /** 広げ方の小さな絵(アイコン) */
 function SpreadIcon({ k }: { k: Spread }) {
@@ -1027,7 +1023,8 @@ export default function MagicCompass({ magazines, genres = {} }: { magazines: Re
       {/* 5. シート */}
       <div
         className={`cp-sheet${bump ? " bump" : ""}${goLabel && sel && shelveFor !== sheetItem?.slug ? " has-go" : ""}`}
-        style={{ "--kc": sheetKind ? KIND_COLOR[sheetKind] : "#cfd6db" } as CSSProperties}
+        // ★札の色 = いま辿っている糸の色(何も選んでいない時は白)。 上端の太線・状態の小札・詳細・進むがこの1色(2026-10-03 案B3+D2)
+        style={{ "--kc": sheetKind ? KIND_COLOR[sheetKind] : "#e6ecf0" } as CSSProperties}
         aria-live="polite"
       >
         {/* 左の列 = 書影(押すと大きく)+その下に「詳細」(文章の欄を1行空けてキャッチを多く出す・2026-09-30) */}
@@ -1061,8 +1058,17 @@ export default function MagicCompass({ magazines, genres = {} }: { magazines: Re
               />
             )}
           </div>
-          <div className="cp-sheet-w" style={{ color: sheetColor(sheetKind) }}>
-            {shelveMsg ?? why}
+          {/* 状態 = 前半を糸の色の小札、「 ・ 」より後ろは灰色の補足(2026-10-03 案B3) */}
+          <div className="cp-sheet-w">
+            {(() => {
+              const [head, ...rest] = (shelveMsg ?? why).split(" ・ ");
+              return (
+                <>
+                  {head && <span className="cp-sheet-wt">{head}</span>}
+                  {rest.length > 0 && <span className="cp-sheet-wr">{rest.join(" ・ ")}</span>}
+                </>
+              );
+            })()}
           </div>
           {PREVIEW && sheetItem && shelveFor === sheetItem.slug ? (
             <CompassShelvePanel
