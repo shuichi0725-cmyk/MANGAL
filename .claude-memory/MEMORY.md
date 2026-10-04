@@ -106,7 +106,7 @@
 - [【撤去済】ホームのカレンダーUI(data/calendarは残す)](calendar_ui_removed_data_kept_for_shinkan.md) ／ [【戒め】ビルド入力の結線=staging2系統(週次/機能)](build_input_wiring_three_places.md) ／ [SEO title方針=サフィックス「漫画・コミックのMANGAL」](seo_title_suffix_decision.md)
 - [SEO構造相談09-04=穴7点(1〜4,6適用済)](seo_structure_gaps_2026_09_04.md) ／ [IndexNow自前送信=_indexnow.py](indexnow_self_submit.md) ／ [Crawler HintsはWorkers+R2で発火しない公算](crawler_hints_ineffective_on_workers_r2.md) ／ [【前提】GitHubリポジトリはpublic](repo_is_public_github.md)
 - [【型】共通シェルのpropsが全ルートのRSCに2箇所焼かれる](shell_props_serialized_to_all_routes.md) ／ [【裁定】R2容量9.65GB=gzip保存は却下](r2_storage_gzip_declined.md) ／ [R2 Class Aの算数=無料100万/月・$4.50は従量](r2_class_a_budget_arithmetic.md) ／ [【機構】PC共通シェルと器の幅](pc_shell_and_widths_2026_09_07.md)
-- [【型】検索/一覧だけ古い=索引JSONのブラウザキャッシュ](index_json_browser_cache_stale.md) ／ [【型】build経路3つにNODE_OPTIONSが要る](build_routes_need_node_options.md) ／ [【型】差分反映が部分集合で関連を計算していた](diff_deploy_subset_related.md) ／ [【実測】容量/表示速度の残りレバー](size_speed_levers_2026_09_24.md)
+- [【型】検索/一覧だけ古い=索引JSONのブラウザキャッシュ](index_json_browser_cache_stale.md) ／ [【型】edge purgeは拠点ごと=日本に旧HTMLが24h残る](edge_purge_is_per_colo.md) ／ [【型】build経路3つにNODE_OPTIONSが要る](build_routes_need_node_options.md) ／ [【型】差分反映が部分集合で関連を計算していた](diff_deploy_subset_related.md) ／ [【実測】容量/表示速度の残りレバー](size_speed_levers_2026_09_24.md)
 
 ## 作品別・コーナー
 - [日替わり特集コーナー(/tokushu)](daily_feature_corner.md) ／ [【型】王様の仕立て屋=1頁に4部同居→頁分割](ousama_shitateya_4part_split.md) ／ [【型】俺の空=4作品が1頁に同居→3頁分割](oresora_4way_split.md) ／ [【残】鬼太郎本編の多版正規化](kitaro_honpen_multiedition_pending.md)
