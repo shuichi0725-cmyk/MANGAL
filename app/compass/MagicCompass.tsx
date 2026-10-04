@@ -349,7 +349,8 @@ export default function MagicCompass({ magazines, genres = {} }: { magazines: Re
     const cv = canvasRef.current;
     if (!cv) return;
     const h = new Halftone(cv);
-    h.onTone = (name) => showToast(`網点の出方: ${name}`);
+    // 網点の出方の表示は見比べ用 = テスト環境だけ(2026-10-04 ユーザ指示「本番はいらない」)
+    if (PREVIEW) h.onTone = (name) => showToast(`網点の出方: ${name}`);
     toneRef.current = h;
     return () => {
       h.destroy();
