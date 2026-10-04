@@ -23,3 +23,6 @@ metadata:
   ★宿題: 漢字始まりの個人名 約120人(.cache/role-fix-yomi-ndl-books.json)は NDL が429/timeoutで未取得 →
   回復後に `_lookup.ndl_live_retry`(作法どおり)で ISBN書誌の creators/creators_kana(件数一致時のみ対応付け)から引く。
 関連 [[author_data_map]] [[madb_cm104_frozen]] [[author_roles_state]] [[ndl_access_rate_method]]
+- ★**ユーザ指示(2026-10-04)「120人は引き直す。覚えておいて」** = NDL回復後に必ず実施(対象 .cache/role-fix-yomi-ndl-books.json = name→ISBN)。
+  author-yomi.yml へ末尾追記 → 該当頁を targeted 反映。
+- revisions(リヴィジョンズ)の原作 = S・F・S で正(ユーザが Wikipedia で確認)。旧 茗荷屋甚六(AniList由来)は誤り。
