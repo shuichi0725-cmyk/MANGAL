@@ -53,6 +53,10 @@ STAGES = [
         ["_patch-volnum-from-cm101.py"], True),
     ("roles",   "madb", "series_authors.role 再導出 (raw101+汚染フィルタ)",
         ["_apply-roles-rawfiltered.py", "--apply"], True),
+    # 巻書誌の役割付きクレジット(raw101 の [原作]/[作画])= promote の原作者抜け・作画役割の是正が読む。
+    #   ★promote より前(2026-10-04 ユーザ指示で月次へ組込。止めると新刊の原作者抜けが毎月たまる)
+    ("rolecredits", "madb", "巻書誌の[原作]/[作画]クレジット seed 再生成 (data/seeds/madb-role-credits.json.gz)",
+        ["_gen-madb-role-credits.py"], False),
     ("merge",   "madb", "series-merge-auto.json 再生成 (著者集合+kana+partial、 role使用)",
         ["_gen-author-set-merges.py"], False),
     ("seed4",   "madb", "種4 NDL登録の再評価 (volumes-supplement-auto + pending)",

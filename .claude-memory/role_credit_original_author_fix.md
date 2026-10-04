@@ -10,7 +10,7 @@ metadata:
   全巻に `[作画]黒瀬浩介` `[原作]蝸牛くも` と役割付きで持つが、promote は表示名寄せ(`_apply_book_credit`=人を足さない)にしか使っていなかった。
   AniList著者補完は著者0人の頁だけ。
 - **機構**: `scripts/_gen-madb-role-credits.py` → `data/seeds/madb-role-credits.json.gz`({isbn: {o:[原作], a:[作画系]} | 0})。
-  ★月次でMADB取込後に再生成(生 metadata101.json が要る)。promote の build_yml で `_role_credit_fix`(著者override より前=手が勝つ):
+  ★月次へ組込済(2026-10-04 ユーザ指示): intake.py の rolecredits 段(roles の後・promote の前)で自動再生成+skillの終了後commit対象。promote の build_yml で `_role_credit_fix`(著者override より前=手が勝つ):
   ①原作者欄が空の頁だけ、過半数の巻(クレジットの在る巻が分母)に[原作]で載る名前を足す。会社名/製作委員会も入れる(ユーザ裁定)。
   除外 = 既存著者と同一人物の疑い(畳み込み一致・部分一致・DB別名)/ 名前に [ / 監修 ほか 協力 不詳 不明 /
   カタカナ候補で著者欄に姓名連結ローマ字(GrahamLynne)が居る頁(翻訳物の二重)。

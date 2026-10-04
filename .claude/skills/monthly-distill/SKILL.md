@@ -67,10 +67,12 @@ python scripts/_monthly-distill.py phase2 --tag <tag> --go "<ユーザの発話�
 python scripts/_monthly-distill.py run intake
 python scripts/_monthly-distill.py status        # job intake … RUNNING → EXIT=0
 ```
-- 実体= `intake.py --run`: seedlint→volnum→roles→merge→seed4→detect→match v9→v13→v14→adultus→enrich→trailing→foreigndrop→**promote**→edisup/special/volnumoverride/coverfill→**isbnloss**。ログ= `.cache/madb-distill/run-intake-<ts>.log`。
+- 実体= `intake.py --run`: seedlint→volnum→roles→**rolecredits**→merge→seed4→detect→match v9→v13→v14→adultus→enrich→trailing→foreigndrop→**promote**→edisup/special/volnumoverride/coverfill→**isbnloss**。ログ= `.cache/madb-distill/run-intake-<ts>.log`。
 - 60秒超は Monitor で節目だけ(1万頁ごと/ABORT/EXIT)。promote の完了後居座りは **os._exit で解消済(2026-09-02)**=待てば終わる。killしない。
 - EXIT≠0 はログ末尾の `✗ ABORT: stage [名]` で判断: seedlint=seed壊れ(yaml.safe_load検証) / clean鮮度=phase2の差替漏れ / isbnloss=理由なし消失(`docs/production-diagnostics/isbn-loss.tsv` を1件ずつ裁定・台帳記帳) / それ以外=当該scriptの traceback を読む(1.2.18で trailing の merge_keys / foreigndrop の2スペ追記を直した型)。
 - 終了後: `git status` → 派生seed(`series-merge-auto.json` / `non-manga-drop.yml` 等)の diff を確認 → commit/push。manga.v2 は gitignore(ディスク上で再生成済)。
+- ★`data/seeds/madb-role-credits.json.gz`(rolecredits 段が生 metadata101 から再生成=巻書誌の[原作]/[作画])も必ず commit。
+  止めると新刊の原作者抜けが毎月たまる(cm104凍結のため。2026-10-04 ゴブリンスレイヤー型 [[role_credit_original_author_fix]])。
 
 ### 4. enrich(任意・並走可)
 ```
