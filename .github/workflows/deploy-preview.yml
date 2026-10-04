@@ -71,6 +71,10 @@ jobs:
           # ★列形式索引(2026-09-23 ブラウザ用・行配列から派生)。行配列と内容ハッシュで照合し、古ければ作り直す
           python3 scripts/_index_files.py ensure .preview-data
           cp .preview-data/manga-list-cols.v1.json public/manga-list-cols.v1.json
+          # ★本棚の「番号タイルを押すと書影」= 作品ごとの巻の書影(64分割 public/vc/NN.json・2026-10-04)。
+          #   テスト環境の作品データから作る(git には入れない)。 本番は本棚の本番化の時に週次へ配線する。
+          python3 -c "import yaml" 2>/dev/null || python3 -m pip install --quiet pyyaml
+          python3 scripts/_build-vol-covers.py .preview-data/manga public
           echo "preview index entries:"; node -e "console.log('list', require('./public/manga-list-index.json').d.length)"
 
       # ★羅針盤(/compass・テスト環境)だけが読む本番の全件索引(2026-09-29 ユーザ裁定「3」)。

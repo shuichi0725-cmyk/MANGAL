@@ -28,6 +28,7 @@ import {
 import type { MangaListItem } from "@/lib/schema";
 import { ensureFullIndex, isFullIndexLoaded, useMangaIndex } from "@/lib/useMangaIndex";
 import { useMyShelf } from "@/lib/useMyShelf";
+import VolPeek from "./VolPeek";
 
 type GenreDef = { key: string; name: string };
 
@@ -113,7 +114,17 @@ function Cover({ src, title }: { src: string | null; title: string }) {
 }
 
 /** 番号タイル(もってるの段だけ)。10巻で1行、41巻以上は所持の前半を帯に畳む・未所持は1行まで(lib/myShelf volumeTiles)。 */
-function Tiles({ owned, total }: { owned: number; total: number | null }) {
+function Tiles({
+  owned,
+  total,
+  on,
+  onPick,
+}: {
+  owned: number;
+  total: number | null;
+  on?: number | null;
+  onPick?: (n: number) => void;
+}) {
   const t = volumeTiles(owned, total);
   if (!t) return null;
   const missing = t.tiles.filter((x) => x.state === "missing").map((x) => x.n);
@@ -121,25 +132,51 @@ function Tiles({ owned, total }: { owned: number; total: number | null }) {
   const label =
     (owned > 0 ? `1〜${owned}巻 所持` : "1巻はまだ") + (missing.length ? `・${missing[0]}〜${missTo}巻 未所持` : "");
   return (
-    // 読み上げは1文にまとめる(タイル1枚ずつ読ませない)
-    <span className="shelf-c3-tiles" role="img" aria-label={label}>
+    // 読み上げは1文にまとめる。 ★押す = その巻の書影を段の下に開く(2026-10-04)。 段は作品頁へのリンクなので遷移を止める。
+    <span className="shelf-c3-tiles" role="group" aria-label={label}>
       {t.band && (
-        <span className="shelf-c3-band">
+        <span className={`shelf-c3-band${onPick ? " is-pick" : ""}`} {...pickProps(t.band.from, onPick)}>
           {t.band.from}〜{t.band.to}巻 所持({t.band.count}冊)
         </span>
       )}
       {t.tiles.map((x) => (
-        <span key={x.n} className={`shelf-c3-tile is-${x.state}`}>
+        <span
+          key={x.n}
+          className={`shelf-c3-tile is-${x.state}${onPick ? " is-pick" : ""}${on === x.n ? " is-on" : ""}`}
+          {...pickProps(x.n, onPick)}
+        >
           {x.n}
         </span>
       ))}
       {t.tail && (
-        <span className="shelf-c3-band is-tail">
+        <span className={`shelf-c3-band is-tail${onPick ? " is-pick" : ""}`} {...pickProps(t.tail.from, onPick)}>
           あと{t.tail.count}巻 未所持({t.tail.from}〜{t.tail.to}巻)
         </span>
       )}
     </span>
   );
+}
+
+/** 番号タイルを押せるようにする属性(段=作品頁へのリンクの中なので、遷移を止めてから開く)。 */
+function pickProps(n: number, onPick?: (n: number) => void) {
+  if (!onPick) return {};
+  return {
+    role: "button" as const,
+    tabIndex: 0,
+    "aria-label": `第${n}巻の書影を見る`,
+    onClick: (e: React.MouseEvent) => {
+      e.preventDefault();
+      e.stopPropagation();
+      onPick(n);
+    },
+    onKeyDown: (e: React.KeyboardEvent) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        e.stopPropagation();
+        onPick(n);
+      }
+    },
+  };
 }
 
 /** 棚の1段 = 1作品。左に1巻の書影、右に題名・所持状況・番号タイル(ほしい/気になるは巻数と状態+キャッチ)。 */
@@ -148,6 +185,7 @@ function Row({ d, onMenu, readOnly }: { d: CardData; onMenu: () => void; readOnl
   const title = m?.title ?? (item.title || item.slug);
   const cover = m?.cover ?? item.cover;
   const press = useLongPress(onMenu);
+  const [vol, setVol] = useState<number | null>(null); // 書影を開いている巻(番号タイルを押した)
   const alert = note && (note.kind === "behind" || note.kind === "complete-behind");
   const body = (
     <>
@@ -159,7 +197,12 @@ function Row({ d, onMenu, readOnly }: { d: CardData; onMenu: () => void; readOnl
         ) : note ? (
           <>
             <span className={`shelf-c3-note${alert ? " is-alert" : ""}`}>{note.text}</span>
-            <Tiles owned={item.owned ?? 0} total={note.total} />
+            <Tiles
+              owned={item.owned ?? 0}
+              total={note.total}
+              on={vol}
+              onPick={(n) => setVol((v) => (v === n ? null : n))}
+            />
           </>
         ) : (
           m && (
@@ -190,6 +233,9 @@ function Row({ d, onMenu, readOnly }: { d: CardData; onMenu: () => void; readOnl
         <button type="button" onClick={onMenu} aria-label={`${title} の棚の操作`} className="shelf-c3-menu">
           ⋯
         </button>
+      )}
+      {vol !== null && !lost && (
+        <VolPeek slug={item.slug} title={title} n={vol} owned={item.owned ?? 0} onN={setVol} onClose={() => setVol(null)} />
       )}
     </li>
   );

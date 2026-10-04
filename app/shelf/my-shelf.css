@@ -190,3 +190,65 @@
   .shelf-sheet { border-width: 2px; }
   .shelf-paste { font-size: 12px; }
 }
+
+/* ─── 番号タイルを押すと書影(2026-10-04 ユーザ裁定: 段の下に3D=前後の書影を覗かせる / 押すと P2=頁のように大きく) ─── */
+.shelf-c3-tile.is-pick,
+.shelf-c3-band.is-pick { cursor: pointer; }
+.shelf-c3-tile.is-on { outline: 2px solid #fff; outline-offset: 0; position: relative; z-index: 1; }
+.shelf-vp {
+  position: relative;
+  margin: 0 6px 8px;
+  padding: 10px 8px 8px;
+  background: #151517;
+  border-top: 1px solid #0008;
+  box-shadow: inset 0 8px 12px -8px #000;
+}
+.shelf-vp-msg { color: var(--shelf-dim); font-size: 12px; text-align: center; }
+.shelf-vp-stage { display: flex; align-items: center; justify-content: center; gap: 10px; }
+.shelf-vp-peek, .shelf-vp-main { padding: 0; border: 0; background: none; cursor: pointer; }
+.shelf-vp-peek { width: 56px; aspect-ratio: 2 / 3; opacity: 0.45; filter: grayscale(0.3); }
+.shelf-vp-peek:disabled { visibility: hidden; }
+.shelf-vp-main { width: 104px; aspect-ratio: 2 / 3; cursor: zoom-in; }
+.shelf-vp-peek img, .shelf-vp-main img { width: 100%; height: 100%; object-fit: cover; display: block; background: #fff; }
+.shelf-vp-main img { box-shadow: 0 6px 14px #000c; }
+.shelf-vp-noimg { display: flex; width: 100%; height: 100%; align-items: center; justify-content: center; background: #2c2c30; color: var(--shelf-dim); font-size: 11px; }
+.shelf-vp-info { display: flex; flex-direction: column; align-items: center; margin-top: 7px; gap: 1px; }
+.shelf-vp-info b { font-family: var(--shelf-mincho); font-size: 15px; font-weight: 900; color: var(--shelf-title); }
+.shelf-vp-info span { font-size: 11px; color: var(--shelf-dim); }
+.shelf-vp-info .is-alert { color: var(--shelf-coral); font-weight: 700; }
+.shelf-vp-info .shelf-vp-tap { color: var(--color-accent); font-size: 10px; margin-top: 2px; }
+.shelf-vp-x { position: absolute; top: 4px; right: 6px; border: 0; background: none; color: var(--shelf-dim); font-size: 16px; padding: 2px 6px; }
+
+/* 頁のように大きく(P2): 黒地・送る時にめくるように回転 */
+.shelf-vpage {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #0c0c0d;
+  perspective: 1400px;
+  touch-action: pan-y;
+  user-select: none;
+  /* ★body 直下(ポータル)= .shelf-c3 の変数が届かないので、ここでも持つ */
+  --shelf-title: #f3eee2;
+  --shelf-dim: #a8a294;
+  --shelf-mincho: "Hiragino Mincho ProN", "Yu Mincho", YuMincho, "Noto Serif JP", "Noto Serif CJK JP", serif;
+}
+.shelf-vpage-x { position: absolute; top: 10px; right: 12px; z-index: 3; width: 38px; height: 38px; border: 0; border-radius: 50%; background: #ffffff26; color: #fff; font-size: 18px; }
+.shelf-vpage-edge { position: absolute; top: 0; bottom: 0; z-index: 2; width: 28%; border: 0; background: none; cursor: pointer; }
+.shelf-vpage-edge.is-l { left: 0; }
+.shelf-vpage-edge.is-r { right: 0; }
+.shelf-vpage-edge:disabled { cursor: default; }
+.shelf-vpage-pg { width: min(80vw, 380px, calc((100vh - 130px) * 2 / 3)); aspect-ratio: 2 / 3; transform-style: preserve-3d; }
+.shelf-vpage-pg img { width: 100%; height: 100%; object-fit: contain; display: block; background: #fff; border-radius: 2px; box-shadow: 0 14px 36px #000; backface-visibility: hidden; }
+.shelf-vpage-pg.turn-next { animation: shelf-turn-next 0.45s ease-out; transform-origin: left center; }
+.shelf-vpage-pg.turn-prev { animation: shelf-turn-prev 0.45s ease-out; transform-origin: right center; }
+@keyframes shelf-turn-next { from { transform: rotateY(70deg); opacity: 0.4; } to { transform: rotateY(0); opacity: 1; } }
+@keyframes shelf-turn-prev { from { transform: rotateY(-70deg); opacity: 0.4; } to { transform: rotateY(0); opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .shelf-vpage-pg.turn-next, .shelf-vpage-pg.turn-prev { animation: none; } }
+.shelf-vpage-cap { margin: 12px 0 0; font-family: var(--shelf-mincho); font-weight: 900; font-size: 17px; color: var(--shelf-title); }
+.shelf-vpage-sub { margin: 2px 0 0; font-size: 11px; color: var(--shelf-dim); }
+.shelf-vpage-hint { position: absolute; bottom: 14px; left: 0; right: 0; margin: 0; text-align: center; font-size: 10.5px; color: #fff8; }

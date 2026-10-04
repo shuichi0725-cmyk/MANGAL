@@ -90,3 +90,10 @@ metadata:
   ToneBand 内の PREVIEW 判定(書影なしは従来どおり帯なし)/ VolumeCoverflow の useVolCoverSignal(巻選択→帯の差替)。
 - 帰結: 作品頁 全約7万頁の HTML/RSC/JS が変わる = 次の週次は全量PUT。 それまで差分反映(diff-deploy)はコードドリフトで abort する。
 - 本番に残るテスト専用 = 「しまう」(本棚)・/shelf のみ。
+
+## 2026-10-04 本棚: 番号タイルを押すと書影(テスト環境のみ)
+- 見本で決定: 出し方=案3「段の下に広げる」→ 送り方=3D「前後の書影を覗かせる」→ 真ん中を押すと P2「頁のように大きく(めくる回転)」。
+- 実装: app/shelf/VolPeek.tsx(段の下パネル+全画面=body直下ポータル)・MyShelf.tsx の Tiles を押せるように(段はLinkなので遷移を止める・長押しメニューと共存)。
+- 巻の書影 = 新索引 `/vc/NN.json`(64分割・公開slugの FNV-1a%64・生成 scripts/_build-vol-covers.py・読込 lib/volCovers.ts。
+  ハッシュ一致は lib/volCovers.test.ts で固定)。 テスト環境は preview CI が .preview-data から public/vc に生成(gitignore)。
+  ★本番未配線(本棚がテスト環境専用)。 本番化する時は週次の索引生成+r2-sync(INDEX_FILES 相当)に足す。 本番全件=14.6MB/64本。
