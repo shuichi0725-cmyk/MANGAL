@@ -33,3 +33,12 @@ metadata:
 **Why:** 同じ頁を2つの seed が別レイヤで支配していると、**どちらが後に走るか**だけで結果が変わる。
 **How to apply:** 版の正本は1つに決める。canonical を使うなら supplement の同 slug を消す。
 関連: [[edition_canonical_mechanism]] [[edition_typemerge_hides_volumes]] [[seed_silently_ineffective_class]]
+
+## ★逆向きの穴(2026-10-04 週次preflightで実踏): targeted反映で seed版が剥がれる
+- `promote --only`(targeted反映・書影是正の再promote等)は後段 edisup を**通らない** → editions-supplement の版が
+  丸ごと消えたまま本番へ出る。9/22 の書影是正(9b41d98ee)ほかで 5頁17冊(ばるぼら/菜(sai)/ネオ・ファウスト/ふしぎなメルモ/
+  ルードウィヒ・B)が2週間不可視。ISBN消失監視(週次preflight)が「理由なし」で検出。
+- 対処= 5頁に絞って seed 版を再適用+`_regroup-versions.py`+promote の `_cover_for` で書影充填(backup .cache/edisup-restore-bak-20261004-101143)。
+  ★`_apply-editions-supplement.py` を素で全件流すと **うる星やつらの書影が消える**(mk_edition は cover_url=None で置く)= 絞るか coverfill を後に。
+- 恒久策は未着手(ユーザ裁定待ち): targeted反映の promote --only 後に、対象slugが editions-supplement に在れば edisup+書影充填を自動で走らせる。
+  seed 対象は全7作だけ(2026-10-04)なので、再発しても週次の ISBN消失監視で止まる。
