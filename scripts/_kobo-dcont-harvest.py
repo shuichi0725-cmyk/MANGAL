@@ -31,7 +31,8 @@ _o = urlparse(RREF)
 RORG = f"{_o.scheme}://{_o.netloc}"
 
 NOISE = re.compile(r"分冊|単話|話売|合本|セット|カラー版|【期間限定|お試し|無料")
-VOL_PAT = re.compile(r"[（(【]?\s*(\d{1,3})\s*[)）】]?\s*(?:巻)?\s*$")
+VOL_PAT = re.compile(r"(?:第\s*)?[（(【]?\s*(\d{1,3})\s*[)）】]?\s*(?:巻)?\s*$")
+# ★「第10巻」も巻として読む(2026-10-04: 旧= base に「第」が残り題の照合で落ちていた=無人島でエルフと共同生活型を見逃す)
 
 
 def norm(s):
@@ -61,13 +62,26 @@ def kobo(params, retries=3):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--limit", type=int, default=50)
+    # ★--scope stopped(2026-10-04): 連載中に限らず「紙が止まった作品」を見る。 紙の最終巻から12か月で日付判定が
+    #   完結にするため、ongoing だけだと「紙は止まり電子だけ続く」本命を取りこぼす(無人島でエルフと共同生活型)。
+    #   条件 = 2巻以上・紙の最終が 2012年以降かつ半年以上前・status-corrections で完結確定でない。 紙が止まったのが新しい順。
+    ap.add_argument("--scope", choices=["ongoing", "stopped"], default="ongoing")
     a = ap.parse_args()
     sys.path.insert(0, str(ROOT / "scripts"))
     idx = json.load(open(ROOT / "data" / "manga-list-index.json", encoding="utf-8"))
     f = idx["f"]
     si, ti, st, mv, tv, ld = (f.index(x) for x in ("slug", "title", "status", "max_edition_volumes", "total_volumes", "latest_date"))
+    au = f.index("authors")
     done = json.load(open(DONE, encoding="utf-8")) if DONE.exists() else {}
-    rows = [d for d in idx["d"] if d[st] == "ongoing" and d[si] not in done]
+    if a.scope == "stopped":
+        import yaml
+        sc = (yaml.safe_load(open(ROOT / "data" / "seeds" / "status-corrections.yml", encoding="utf-8")) or {}).get("corrections", {})
+        verified = {k for k, v in sc.items() if (v or {}).get("status") == "completed"}
+        cut = time.strftime("%Y-%m", time.localtime(time.time() - 183 * 86400))
+        rows = [d for d in idx["d"] if d[si] not in done and (d[mv] or 0) >= 2 and d[si] not in verified
+                and "2012" <= str(d[ld] or "")[:4] and str(d[ld] or "")[:7] <= cut]
+    else:
+        rows = [d for d in idx["d"] if d[st] == "ongoing" and d[si] not in done]
     rows.sort(key=lambda d: str(d[ld] or ""), reverse=True)
     rows = rows[: a.limit]
     print(f"対象 {len(rows)} 作 (done {len(done)})", flush=True)
@@ -75,7 +89,9 @@ def main():
     n_cand = 0
     for d in rows:
         slug, title = d[si], d[ti]
-        paper_max = max(int(d[mv] or 0), int(d[tv] or 0))
+        # ★紙の巻数 = 一番巻数の多い版(stopped)。 total_volumes は全版の合計で文庫等を足して多く数える
+        paper_max = int(d[mv] or 0) if a.scope == "stopped" else max(int(d[mv] or 0), int(d[tv] or 0))
+        authors_n = [norm(str(x).split("	")[0]) for x in (d[au] or [])]
         tn = norm(title)
         best = None
         try:
@@ -93,6 +109,9 @@ def main():
             base = unicodedata.normalize("NFKC", t)[: m.start()].strip()
             if norm(base) != tn:
                 continue  # 残差題完全一致のみ
+            # ★著者ゲート(stopped): Kobo の著者欄に頁の著者の誰かが居ること(同名の別作品を拾わない)
+            if a.scope == "stopped" and authors_n and not any(x and x in norm(it.get("author")) for x in authors_n):
+                continue
             vol = int(m.group(1))
             if best is None or vol > best["vol"]:
                 best = {"vol": vol, "title": t, "salesDate": it.get("salesDate"),

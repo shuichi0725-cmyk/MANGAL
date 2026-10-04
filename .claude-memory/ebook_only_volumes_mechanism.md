@@ -17,3 +17,12 @@ metadata:
 - 完結は status-corrections(source=publisher-official)。索引は total_volumes=10・完結。
 - ★1件目のみ手で seed 化。 他作品への展開(電子続巻の候補表 kobo-digital-continuation.tsv は7/30から空)は未着手=ユーザ裁定待ち。
 関連 [[ebook_only_editions_out_of_scope]] [[version_tabs_stock_ebook]]
+
+## 2026-10-04 調査: 同じ型(紙が止まり続巻が電子のみ)の広がり(調査のみ・未反映)
+- 道具 `scripts/_kobo-dcont-harvest.py` を改良: `--scope stopped`(連載中に限らない=紙最終から12か月で日付判定が完結にするため ongoing だけだと本命を落とす)/
+  「第N巻」を巻として読む(旧=無人島型を見逃す)/ 著者ゲート / 紙の巻数=max_edition_volumes。
+- 対象(2巻以上・紙最終2012〜半年前・完結確定でない)= 20,543作・全件照会 約7.4時間(楽天Kobo 1.3秒/作)。
+- 無作為300 → 電子のみの候補 9(3%)/ 単話の混入 5 → 全体推定 約600作(幅 300〜1,100)。 新しい順300 → 電子のみ3・電子先行9・単話5。
+- ★副産物: 紙の続巻が出ているのに MANGAL 未掲載(ティアムーン12・千輝くん15・玉座と小夜啼鳥23(POD))= 別の型。
+- 要確認の型: 電子だけ巻の割り方が違う(麻雀放浪記風雲篇 紙5→電子12)/ 単話は価格<400円 or 巻番号が飛ぶで判定。
+- 表: docs/production-diagnostics/ebook-only-continuation-survey.tsv / 仕分け .cache/_dcont_classify.py・_dcont_sample.py。
