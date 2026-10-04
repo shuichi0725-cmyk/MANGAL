@@ -2,8 +2,7 @@
 
 import { useEffect, useRef, type ReactNode } from "react";
 import { Halftone } from "@/app/compass/halftone";
-// ★見た目は専用CSSへ(Tailwind の新しいクラスを書くと本番の共通CSSが変わる)。
-//   この部品は作品頁から `=== "1" ? require(...) : null` で読まれる = 本番では import ごと刈り取られる。
+// ★見た目は専用CSSへ(Tailwind の新しいクラスを書くと全頁の共通CSSが変わる)。
 import "./tone-band.css";
 
 /** 巻の一覧(VolumeCoverflow)で巻を選んだ時に投げる。 detail = その巻の書影URL。 */
@@ -23,13 +22,13 @@ function isDarkPaper(el: HTMLElement): boolean {
 }
 
 /**
- * 作品頁の「題名の背景の帯」= 選んでいる巻の書影の網点(2026-09-30 ユーザ裁定: 案1・テスト環境のみ)。
+ * 作品頁の「題名の背景の帯」= 選んでいる巻の書影の網点(2026-09-30 ユーザ裁定: 案1。 2026-10-04 本番にも出す)。
  * 最初は1巻、巻の一覧で巻を選ぶと、その巻の書影へ「ばらばら」の出方で約1秒かけて入れ替わる。
  * 網点の描き方は羅針盤と同じ部品(app/compass/halftone.ts: 画素を読まずに点の形でくり抜く=
  * 楽天の書影でも動く)。 サーバ描画は子(題名など)だけ = 網点は水和後に描く。
  */
 export default function ToneBand({ cover, children }: { cover: string | null; children: ReactNode }) {
-  if (process.env.NEXT_PUBLIC_PREVIEW_FEATURES !== "1" || !cover) return <>{children}</>;
+  if (!cover) return <>{children}</>;
   return <Band cover={cover}>{children}</Band>;
 }
 

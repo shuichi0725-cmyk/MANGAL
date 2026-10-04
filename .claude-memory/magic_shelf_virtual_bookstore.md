@@ -84,3 +84,9 @@ metadata:
   本番は本番索引を直接読む(/prod-idx はテスト環境だけ)。「しまう」(本棚)は本番では出さない。
 - 下の札 = 案B3+D2(黒い札・糸の色1色・詳細は書影の下に同幅の縁取り)。決め方の型 = [[feedback_design_mockups_html_sendfile]]。
 - 詳細は [[inflight_state_2026_09_01]] の 2026-10-03 追記。
+
+## 追記 2026-10-04: 網点の帯(題名の背景)も本番化(★次の週次で公開)
+- ユーザ指示「網点の帯を次の週次蒸留で出るようにして」。門3か所を撤去: 作品頁の require 刈り取り→静的 import /
+  ToneBand 内の PREVIEW 判定(書影なしは従来どおり帯なし)/ VolumeCoverflow の useVolCoverSignal(巻選択→帯の差替)。
+- 帰結: 作品頁 全約7万頁の HTML/RSC/JS が変わる = 次の週次は全量PUT。 それまで差分反映(diff-deploy)はコードドリフトで abort する。
+- 本番に残るテスト専用 = 「しまう」(本棚)・/shelf のみ。

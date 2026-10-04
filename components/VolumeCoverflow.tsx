@@ -97,22 +97,19 @@ function searchLinks(title: string, v: Volume) {
   };
 }
 
-/** テスト環境だけ: 選んだ巻の書影を作品頁の「題名の背景の帯」(components/ToneBand.tsx)へ知らせる。
- *  本番は定数 false = 何もしない関数(作品頁の HTML/RSC は変わらない)。 イベント名は ToneBand の VOL_COVER_EVENT と同じ。 */
-const useVolCoverSignal: (url: string | null | undefined, sel: number) => void =
-  process.env.NEXT_PUBLIC_PREVIEW_FEATURES === "1"
-    ? (url, sel) => {
-        const first = useRef(true);
-        useEffect(() => {
-          if (first.current) {
-            first.current = false; // 開いた時は帯が自分で1巻を出す
-            return;
-          }
-          if (url) window.dispatchEvent(new CustomEvent("mangal:vol-cover", { detail: url }));
-          // eslint-disable-next-line react-hooks/exhaustive-deps
-        }, [sel]);
-      }
-    : () => {};
+/** 選んだ巻の書影を作品頁の「題名の背景の帯」(components/ToneBand.tsx)へ知らせる(2026-10-04 本番にも出す)。
+ *  イベント名は ToneBand の VOL_COVER_EVENT と同じ。 */
+function useVolCoverSignal(url: string | null | undefined, sel: number): void {
+  const first = useRef(true);
+  useEffect(() => {
+    if (first.current) {
+      first.current = false; // 開いた時は帯が自分で1巻を出す
+      return;
+    }
+    if (url) window.dispatchEvent(new CustomEvent("mangal:vol-cover", { detail: url }));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [sel]);
+}
 
 const THUMB = 44; // サムネ幅(案D=極小)
 const LOOP_MIN = 9; // これ超で無限ループ(それ以下は全部並ぶのでループ不要)
