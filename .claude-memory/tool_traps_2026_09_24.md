@@ -37,3 +37,9 @@ metadata:
 - ★(10-03) `_apply-preorder-date-drift.py --apply` を2回 → override 台帳に同じ7行が二重追記(監査TSVが古いまま同じ候補が残る)。→ (isbn13,date) 既在は書かないよう冪等化済み。
 - ★(10-03) Bash の heredoc で Python に正規表現を書き込ませたら、`\b` がバックスペース文字(0x08)として書かれた(grep の表示では見えない)。
   **正規表現の行は Edit ツールで書く**。書いた後は `od -c` か `open(p,'rb').read().count(bytes([8]))` が 0 かで確かめる。
+
+## ★罠(2026-10-04 実踏): data/manga.dryrun は git 追跡(69,474ファイル・6/14 ddf1ace12)
+- `_promote-bulk-v2.py --dry-run` の出力先 = data/manga.dryrun = **追跡済み**。検算後に `rm -rf data/manga.dryrun` すると
+  次の `git add -A` で6.9万ファイル削除がコミットに混ざる(fe06786df で実踏 → 6caec3b9f で復元・ツリーハッシュ一致確認)。
+- **消さない**。検算後は `git checkout -- data/manga.dryrun`(+`git clean -fd data/manga.dryrun`)で戻す。
+  コミットは `git add -A` を避け、触ったパスを名指しで add する。commit 後に `git show --stat HEAD | tail -1` で件数を見る。
