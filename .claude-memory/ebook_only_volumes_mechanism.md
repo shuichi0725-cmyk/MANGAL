@@ -26,3 +26,7 @@ metadata:
 - ★副産物: 紙の続巻が出ているのに MANGAL 未掲載(ティアムーン12・千輝くん15・玉座と小夜啼鳥23(POD))= 別の型。
 - 要確認の型: 電子だけ巻の割り方が違う(麻雀放浪記風雲篇 紙5→電子12)/ 単話は価格<400円 or 巻番号が飛ぶで判定。
 - 表: docs/production-diagnostics/ebook-only-continuation-survey.tsv / 仕分け .cache/_dcont_classify.py・_dcont_sample.py。
+- ★全件調査 完了(2026-10-05 07:2x・20,503作・約8h・中断0): 電子のみ(照合一致)398作/725巻・照合できず49・分巻の疑い223・単話206・
+  電子先行20・紙は発売済(MANGAL未掲載)10。 表 docs/production-diagnostics/ebook-only-continuation.tsv(道具 _kobo-ebook-only-survey.py)。
+  電子のみの最初の巻の年: 2026が81作(最近の分は後から紙が出る可能性=様子見)。 未掲載10作(SHIORI EXPERIENCE 23・無能なナナ15・凍牌ミナゴロシ篇10 等)は別の取りこぼし。
+  採用は1件ずつ(紙の不在を NDL でも確かめる・長い題は楽天の題検索が外れる恐れ)。
