@@ -421,6 +421,125 @@ def _append_ebook_only(slug: str, new_yml: dict) -> int:
     return added
 
 
+_ROLE_CREDITS = None
+_ROLE_FIX_STATS = {"pages": 0, "added": 0, "fixed": 0}
+
+
+def get_role_credits() -> dict:
+    """MADB 巻書誌の役割付きクレジット(data/seeds/madb-role-credits.json.gz・生成 scripts/_gen-madb-role-credits.py)。
+    {isbn13: {"o": [原作], "a": [作画系]} | 0(クレジットは在るが役割タグ無し)}。"""
+    global _ROLE_CREDITS
+    if _ROLE_CREDITS is None:
+        import gzip as _gz
+        p = ROOT / "data" / "seeds" / "madb-role-credits.json.gz"
+        _ROLE_CREDITS = json.load(_gz.open(p, "rt", encoding="utf-8")) if p.exists() else {}
+    return _ROLE_CREDITS
+
+
+# 同一人物の判定用の畳み込み(空白/記号・かな種別・旧字の揺れ)。 足さない側に倒すための照合にだけ使う。
+_ITAIJI = str.maketrans({"髙": "高", "﨑": "崎", "壺": "壷", "螢": "蛍", "龍": "竜", "澤": "沢", "邊": "辺", "邉": "辺",
+                         "濱": "浜", "嶋": "島", "齋": "斎", "齊": "斉", "櫻": "桜", "國": "国", "廣": "広", "眞": "真",
+                         "惠": "恵", "德": "徳", "藏": "蔵", "實": "実", "瀨": "瀬", "冨": "富", "槇": "槙", "峯": "峰"})
+
+
+def _fold_name(s) -> str:
+    import unicodedata as _ud
+    t = _ud.normalize("NFKC", str(s or "")).translate(_ITAIJI).lower()
+    t = re.sub(r"[\s・.,、。･\-‐－_'’\"“”!！?？「」『』()（）\[\]]", "", t)
+    return "".join(chr(ord(c) + 0x60) if "ぁ" <= c <= "ゖ" else c for c in t)   # ひらがな→カタカナ
+
+
+_ALIAS_GROUPS: dict | None = None
+
+
+def _alias_groups() -> dict:
+    """畳んだ名前 → 同一人物とされる名前(畳み済み)の集合。 DB mangaka の name+alt_names を1組として両向きに引ける形。
+    ★DB の別名には別人の混入がある(原作/作画が同一人物扱い等)= ここでは「足さない」側の判定にだけ使う。"""
+    global _ALIAS_GROUPS
+    if _MANGAKA_ALIAS is None:      # 別名がまだ読まれていない(=空で固定しない)
+        return {}
+    if _ALIAS_GROUPS is None:
+        _ALIAS_GROUPS = {}
+        for nm, al in (_MANGAKA_ALIAS or {}).items():
+            grp = {_fold_name(x) for x in ({nm} | set(al))} - {""}
+            for f in grp:
+                _ALIAS_GROUPS.setdefault(f, set()).update(grp)
+    return _ALIAS_GROUPS
+
+
+def _same_person(cand: str, existing: list[str]) -> bool:
+    """cand が既存の誰かと同一人物の疑い(完全一致・部分一致・DB別名)。 疑わしきは同一扱い(=足さない)。"""
+    fc = _fold_name(cand)
+    if not fc:
+        return True
+    groups = _alias_groups()
+    cg = groups.get(fc, set())
+    for e in existing:
+        fe = _fold_name(e)
+        if not fe:
+            continue
+        if fc == fe or (len(fc) >= 2 and len(fe) >= 2 and (fc in fe or fe in fc)):
+            return True
+        if fe in cg or fc in groups.get(fe, ()):
+            return True
+    return False
+
+
+def _role_credit_fix(o: dict, isbns: list) -> tuple[int, int]:
+    """巻書誌の役割付きクレジットで ①原作者欄が空なら[原作]を足す ②作画者の役割を直す(2026-10-04 ユーザ裁定)。
+    ① 原作者欄が空の頁だけ・過半数の巻(クレジットの在る巻が分母)に[原作]で載る名前・既存著者と同一人物の疑いなし・
+       名前に [ / ／ 監修 ほか が無い。 会社名(製作委員会/ゲーム会社)も原作クレジットとして入れる(ユーザ裁定1)。
+    ② 原作者が居る頁で、著者の writer_artist が過半数の巻で作画系タグのみ(原作タグに無い)なら artist へ。
+    戻り値 = (足した原作者数, 役割を直した著者数)。"""
+    rc = get_role_credits()
+    ents = [rc[i] for i in {str(x) for x in isbns if x} if i in rc]
+    nv = len(ents)
+    if not nv:
+        return 0, 0
+    from collections import Counter as _C
+    oc, ac = _C(), _C()
+    for e in ents:
+        if e:
+            for n in set(e.get("o") or []):
+                oc[n] += 1
+            for n in set(e.get("a") or []):
+                ac[n] += 1
+    need = (nv + 1) // 2
+    added = 0
+    if not o.get("original_authors"):
+        existing = [a.get("name") for a in (o.get("authors") or [])]
+        # ★翻訳物(ハーレクイン等)は原作の小説家が著者欄に「姓名連結ローマ字」(GrahamLynne/DickensCharles)で居る
+        #   = カタカナの原作(リン・グレアム)を足すと同じ人が二重になる(照合では拾えない)→ その頁はカタカナを足さない。
+        latin_person = any(re.fullmatch(r"[A-Z][a-z]+[A-Z][a-z]+", str(x or "")) for x in existing)
+        new = []
+        for n, c in oc.most_common():
+            # 名前でない物は足さない(「久住昌之協力」「作者不詳」等・2026-10-04 検算で発見)
+            if c < need or re.search(r"[\[／/]|監修|ほか|協力|不詳|不明", n):
+                continue
+            if latin_person and re.fullmatch(r"[ァ-ヶー・＝=\s]+", n):
+                continue
+            if _same_person(n, existing + [x["name"] for x in new]):
+                continue
+            new.append({"name": n, "role": "writer"})
+        if new:
+            o["original_authors"] = [enrich_author(x) for x in new]
+            added = len(new)
+    fixed = 0
+    if o.get("original_authors"):
+        orig_f = {_fold_name(x) for e in ents if e for x in (e.get("o") or [])}
+        art_f = _C()
+        for n, c in ac.items():
+            art_f[_fold_name(n)] += c
+        for a in o.get("authors") or []:
+            if a.get("role") != "writer_artist":
+                continue
+            f = _fold_name(a.get("name"))
+            if f and art_f.get(f, 0) >= need and f not in orig_f:
+                a["role"] = "artist"
+                fixed += 1
+    return added, fixed
+
+
 _EDITION_CANONICAL = None
 
 
@@ -3164,6 +3283,14 @@ def build_yml(
     # 著者ヨミ(50音索引用)+ romaji を付与 (= MADB 504 公式ヨミ。 無い著者は素のまま)
     o["authors"] = [enrich_author(w) for w in writers]
     o["original_authors"] = [enrich_author(x) for x in originals]
+    # ★巻書誌の役割付きクレジットで原作者抜け・作画者の役割を直す(2026-10-04 ゴブリンスレイヤー型)。
+    #   著者override(下)より前 = 頁単位の手の上書きが常に勝つ。
+    _rc_add, _rc_fix = _role_credit_fix(
+        o, [v.get("isbn13") for ed in editions for v in (ed.get("volumes") or []) if v.get("isbn13")])
+    if _rc_add or _rc_fix:
+        _ROLE_FIX_STATS["pages"] += 1
+        _ROLE_FIX_STATS["added"] += _rc_add
+        _ROLE_FIX_STATS["fixed"] += _rc_fix
     # 副次クレジット(編集/監修/訳/装丁/解説/企画/協力 等)= 表示+検索用、 著者でない
     creds = get_author_credits(series_row.get("series_key", ""))
     if creds:
@@ -4229,6 +4356,21 @@ def main():
                     del _ce["versions"]
         new_yml["editions"] = [e for e in (new_yml.get("editions") or [])
                                if (e.get("volumes") or e.get("versions"))]
+        # ★巻書誌の役割で著者是正の2回目(2026-10-04): build_yml の1回目の後に、AniList/MADB の著者補完が著者を差し替え、
+        #   canonical 等が巻を組み直す = 最終形の著者・巻で取り直す(冪等=1回目と二重にならない)。
+        #   ★手で決めた著者(author_reparse / author-overrides / edition-overrides の著者指定)の頁は触らない。
+        _eov_au = _load_edition_overrides().get(_slug_override(slug)) or {}
+        if (slug not in author_reparse
+                and not _load_author_overrides().get(new_yml.get("slug"))
+                and _eov_au.get("authors") is None and _eov_au.get("original_authors") is None):
+            _rc_add2, _rc_fix2 = _role_credit_fix(new_yml, [
+                v.get("isbn13") for e in (new_yml.get("editions") or [])
+                for vs in [e.get("volumes") or []] + [x.get("volumes") or [] for x in (e.get("versions") or [])]
+                for v in vs if v.get("isbn13")])
+            if _rc_add2 or _rc_fix2:
+                _ROLE_FIX_STATS["pass2"] = _ROLE_FIX_STATS.get("pass2", 0) + 1
+                _ROLE_FIX_STATS["added"] += _rc_add2
+                _ROLE_FIX_STATS["fixed"] += _rc_fix2
         # ★電子書籍のみの巻(2026-10-04 ユーザ裁定「案2」): 全edition操作の後に版の末尾へ足す
         #   (canonical/override/exclude で版が組み直された後でないと消える)。 seed = ebook-only-volumes.yml。
         if _append_ebook_only(slug, new_yml):
@@ -4577,6 +4719,8 @@ def main():
                 _pp_seeded += 1
         print(f"  preorder-pages合流: {_pp_n} (seed適用={_pp_seeded} / 種2側優先skip={_pp_skip})", file=sys.stderr)
 
+    print(f"  巻書誌の役割で著者是正: {_ROLE_FIX_STATS['pages']}頁 (原作者を足した {_ROLE_FIX_STATS['added']}人 / "
+          f"作画の役割を直した {_ROLE_FIX_STATS['fixed']}人 / うち最終段で拾った頁 {_ROLE_FIX_STATS.get('pass2', 0)})", file=sys.stderr)
     print(f"\nwrote {stats['regenerated']} yml to {OUT_DIR}", file=sys.stderr)
 
     # ★版補完seed(editions-supplement.yml)の再適用 = --only 時だけ(2026-10-04 週次preflightで実踏)。

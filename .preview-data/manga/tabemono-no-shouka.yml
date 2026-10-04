@@ -8,14 +8,18 @@ year_ended: 1995
 status: completed
 authors:
 - name: さいとうはるお
-  role: writer_artist
+  role: artist
   kana: さいとうはるお
   romaji: saitouharuo
 - name: 村田ヒロシ
   role: writer_artist
   kana: ムラタヒロシ
   romaji: muratahiroshi
-original_authors: []
+original_authors:
+- name: 藤子・F・不二雄
+  role: writer
+  kana: フジコフジオF
+  romaji: fujikofujio
 publisher: shogakukan
 magazine: null
 demographic: kodomo
