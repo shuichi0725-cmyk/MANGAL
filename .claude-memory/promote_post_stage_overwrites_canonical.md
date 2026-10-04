@@ -40,5 +40,9 @@ metadata:
   ルードウィヒ・B)が2週間不可視。ISBN消失監視(週次preflight)が「理由なし」で検出。
 - 対処= 5頁に絞って seed 版を再適用+`_regroup-versions.py`+promote の `_cover_for` で書影充填(backup .cache/edisup-restore-bak-20261004-101143)。
   ★`_apply-editions-supplement.py` を素で全件流すと **うる星やつらの書影が消える**(mk_edition は cover_url=None で置く)= 絞るか coverfill を後に。
-- 恒久策は未着手(ユーザ裁定待ち): targeted反映の promote --only 後に、対象slugが editions-supplement に在れば edisup+書影充填を自動で走らせる。
-  seed 対象は全7作だけ(2026-10-04)なので、再発しても週次の ISBN消失監視で止まる。
+- ★**恒久策=実装済(2026-10-04 ユーザ指示)**: `_promote-bulk-v2.py` の main 末尾で **--only 時だけ** ONLY_SLUGS∩版seed に
+  `_apply-editions-supplement.apply_work`(版置換+regroup+`_cover_for`で書影充填)を自動適用(ログ「版補完seed 再適用(--only)」)。
+  フルpromoteは従来どおり intake の edisup+coverfill。共通実体は apply_work 1本(二重実装なし)。
+- ★同時に `load_works()` が **edition-canonical を持つ作品を版seedから除く**(canonical後勝ち)= うる星が該当。
+  これで月次の edisup がうる星の canonical(7/4・刷タブ「初版カバー/新装版カバー」)を seed の古い版で上書きし
+  書影44頁を空にした 9/22 型も封じた。検算= dry-run で7作(5作+うる星+HxH)が本番と editions 完全一致。

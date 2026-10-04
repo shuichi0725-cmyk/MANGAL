@@ -4527,6 +4527,27 @@ def main():
 
     print(f"\nwrote {stats['regenerated']} yml to {OUT_DIR}", file=sys.stderr)
 
+    # ★版補完seed(editions-supplement.yml)の再適用 = --only 時だけ(2026-10-04 週次preflightで実踏)。
+    #   この seed は intake 後段 edisup(_apply-editions-supplement.py)でしか貼られないため、
+    #   targeted反映・書影追従の再promote等の --only で seed の版が丸ごと剥がれ、そのまま本番へ出ていた
+    #   (9/22〜 ばるぼら/菜/ネオ・ファウスト/ふしぎなメルモ/ルードウィヒ・B の17冊が2週間不可視)。
+    #   フルpromote は従来どおり intake の edisup+coverfill に任せる(二重適用しない)。
+    #   書影は本流と同じ _cover_for(cover-override 優先 → covers seed)で埋める。
+    if ONLY_SLUGS:
+        import importlib.util as _ilu
+        _spec = _ilu.spec_from_file_location("_edisup", str(ROOT / "scripts" / "_apply-editions-supplement.py"))
+        _edisup = _ilu.module_from_spec(_spec)
+        _spec.loader.exec_module(_edisup)
+        _works = _edisup.load_works()
+        _bak = ROOT / ".cache" / f"edisup-bak-only-{datetime.datetime.now().strftime('%Y%m%d-%H%M%S')}"
+        _hit = []
+        for _stem in sorted(ONLY_SLUGS & set(_works)):
+            _fp = OUT_DIR / f"{_stem}.yml"
+            if _fp.exists() and _edisup.apply_work(str(_fp), _works[_stem], str(_bak), f"{_stem}.yml", _cover_for):
+                _hit.append(_stem)
+        if _hit:
+            print(f"  版補完seed 再適用(--only): {len(_hit)}作 {_hit}", file=sys.stderr)
+
 
 if __name__ == "__main__":
     main()
