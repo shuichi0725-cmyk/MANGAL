@@ -14,7 +14,7 @@
 - [【最重要】壊れているから消す、を禁止](never_delete_because_broken.md) ／ [【戒め】「無い」をgrep一発で結論するな](feedback_absence_needs_verification.md) ／ [【戒め】script警告は検算してから報告](feedback_sanity_check_tool_warnings.md) ／ [【戒め】失敗を否定記録にしない](feedback_no_negative_record_on_failure.md)
 - [【許容】週次のアップ無しリハーサル](feedback_weekly_rehearsal_no_upload.md) ／ [【罠】記憶は正本に書く](memory_write_to_canonical_not_mirror.md) ／ [【戒め】写真の要素を実名で列挙してから作る](feedback_name_the_element_in_the_photo.md)
 - [【戒め】表示仕様は実装を読む。自前で再実装して結論を出すな](feedback_read_the_implementation_not_reimplement.md) ／ [【戒め】報告は常に日本語で](feedback_report_in_japanese.md) ／ [【戒め】番号指示は一覧全体の番号で読む](feedback_numbered_items_whole_list.md)
-- [【分担】Sonnetが書きOpusが点検(試行200→点検→本番)](feedback_sonnet_writes_opus_audits.md) ／ [【型】見た目の相談=スマホ幅HTML見本→番号で選ぶ](feedback_design_mockups_html_sendfile.md)
+- [【分担】Sonnetが書きOpusが点検(試行200→点検→本番)](feedback_sonnet_writes_opus_audits.md) ／ [【型】見た目の相談=スマホ幅HTML見本→番号で選ぶ](feedback_design_mockups_html_sendfile.md) ／ [【方針】羅針盤の網羅=データを探して質を上げ結果増やす](feedback_compass_reach_via_data_quality.md)
 
 ## 全体構造・台帳
 - [seeds pyramid=全体構造](project_architecture_seeds.md) ／ [【必ず使う】統合台帳](intake_manifest_ledger_live.md) ／ [【台帳】全データ資産地図](data_assets_inventory.md) ／ [【必読】著者データ全源](author_data_map.md)
