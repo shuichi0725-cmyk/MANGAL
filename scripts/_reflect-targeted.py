@@ -269,6 +269,10 @@ def main():
     #     --only で該当頁の行だけ差し替える(66k再走査 ~5分 → 数秒)。
     if only:
         run([PY, "scripts/_gen-corner-auto.py", "--only", upd])
+        # 3c. ★試し読みの範囲(data/tameshiyomi-map.json)も作り直す(2026-10-04 ユーザ発見「9巻10巻試し読みがない」)。
+        #     範囲は「索引の巻数まで構築で伸ばす」= 巻を足した頁は索引更新の後に作り直さないと週次まで古いまま。
+        #     全件で数秒・BookLive へは1リクエストも出さない(title_id+巻番号の組み立てだけ)。
+        run([PY, "scripts/_gen-tameshiyomi-map.py"])
 
     # 4. preview同期 (changed頁が.preview-dataに在れば新版で上書き) + preview索引
     #    ★内部slug≠SRC名の罠対応: preview側ファイル名はSRC名/内部slug名の両方があり得る→両方試す
