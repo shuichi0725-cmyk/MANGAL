@@ -1,0 +1,25 @@
+# 電子書籍のみで出た巻(紙の単行本が出ていない巻)。 2026-10-04 ユーザ裁定「案2」=
+#   巻の並びの続きに「電子のみ」の札を付けて出し、本屋ボタンは電子の店(Kindle・楽天Kobo)だけにする。
+# promote(_promote-bulk-v2.py)が書き込み直前の最終passで、キーの頁(=SRC slug=manga.v2 のファイル名)の
+#   edition_type の先頭の版へ足す。 ★同じ巻番号が既に在れば足さない(紙が後から出たら自然に退く=種4と同じ自己retire)。
+# isbn13 は持たない(電子に振られた番号は紙の書誌=楽天ブックス/NDLに無く、ISBN基準の照合・消失監視を壊す)。
+# 根拠は source/evidence に必ず書く(作れない値は空のまま。捏造しない)。
+works:
+  mujintou-de-elf-to-kyoudou-seikatsu-attomaaku-comic:
+    edition_type: standard
+    added_at: '2026-10-04'
+    source: >-
+      TOブックス公式X「5/15発売 無人島でエルフと共同生活@COMIC 第9巻（電子書籍のみ）」(https://x.com/TOBOOKS/status/1917531221254627527)
+      / 同「第10巻（電子書籍）…ついに完結」(https://x.com/TOBOOKS/status/1978294765545455858)
+      / 楽天ブックス(紙)・NDL とも1〜8巻のみ。 楽天Kobo に9・10巻。 Kindle の ASIN は Amazon の Kindle 版商品ページから。
+    volumes:
+      - number: 9
+        release_date: '2025-05-15'
+        cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/rakutenkobo-ebooks/cabinet/3186/2000017233186.jpg?_ex=300x300
+        kobo_url: https://books.rakuten.co.jp/rk/368e0cc49c7a3a2e9e3bf191729c4484/
+        kindle_asin: B0DZX4X8HT
+      - number: 10
+        release_date: '2025-10-15'
+        cover_url: https://thumbnail.image.rakuten.co.jp/@0_mall/rakutenkobo-ebooks/cabinet/8560/2000018348560.jpg?_ex=300x300
+        kobo_url: https://books.rakuten.co.jp/rk/08e0886b4b7d3b16945d643d53072bc5/
+        kindle_asin: B0FM3RPKWP

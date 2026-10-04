@@ -373,6 +373,54 @@ def get_cover_override() -> dict:
     return _COVER_OVERRIDE
 
 
+_EBOOK_ONLY = None
+
+
+def get_ebook_only() -> dict:
+    """電子書籍のみで出た巻の seed(data/seeds/ebook-only-volumes.yml)→ {SRC slug: entry}。
+    2026-10-04 ユーザ裁定「案2」= 巻の並びの続きに ebook_only の巻として足す(isbn13 は持たない)。"""
+    global _EBOOK_ONLY
+    if _EBOOK_ONLY is None:
+        p = ROOT / "data" / "seeds" / "ebook-only-volumes.yml"
+        d = yaml.safe_load(p.read_text(encoding="utf-8")) if p.exists() else None
+        _EBOOK_ONLY = (d or {}).get("works") or {}
+    return _EBOOK_ONLY
+
+
+def _append_ebook_only(slug: str, new_yml: dict) -> int:
+    """seed の電子のみの巻を、edition_type の先頭の版(刷タブが在れば各刷にも)の末尾へ足す。
+    ★同じ巻番号が既に在れば足さない(紙が後から出たら自然に退く)。 戻り値 = 足した巻数。"""
+    ent = get_ebook_only().get(slug)
+    if not ent:
+        return 0
+    eds = new_yml.get("editions") or []
+    want = ent.get("edition_type") or "standard"
+    tgt = next((e for e in eds if e.get("type") == want), eds[0] if eds else None)
+    if tgt is None:
+        return 0
+    pools = [tgt.setdefault("volumes", [])] + [vv.setdefault("volumes", []) for vv in (tgt.get("versions") or [])]
+    added = 0
+    for sv in ent.get("volumes") or []:
+        num = sv.get("number")
+        if num is None:
+            continue
+        vol = {"number": num, "asin": None, "isbn13": None, "ebook_only": True,
+               "cover_url": _norm_cover_ex(sv.get("cover_url")) or None,
+               "release_date": str(sv["release_date"]) if sv.get("release_date") else None}
+        if sv.get("kobo_url"):
+            vol["kobo_url"] = sv["kobo_url"]
+        if sv.get("kindle_asin"):
+            vol["kindle_asin"] = str(sv["kindle_asin"])
+        hit = False
+        for pool in pools:
+            if any(v.get("number") == num for v in pool):
+                continue
+            pool.append(dict(vol))
+            hit = True
+        added += hit
+    return added
+
+
 _EDITION_CANONICAL = None
 
 
@@ -4181,6 +4229,10 @@ def main():
                     del _ce["versions"]
         new_yml["editions"] = [e for e in (new_yml.get("editions") or [])
                                if (e.get("volumes") or e.get("versions"))]
+        # ★電子書籍のみの巻(2026-10-04 ユーザ裁定「案2」): 全edition操作の後に版の末尾へ足す
+        #   (canonical/override/exclude で版が組み直された後でないと消える)。 seed = ebook-only-volumes.yml。
+        if _append_ebook_only(slug, new_yml):
+            stats["ebook_only_added"] = stats.get("ebook_only_added", 0) + 1
         # ★書影 最終充填 (= 全edition操作後=edition-canonical/override/exclude/version の後。
         #   clean_vol充填が canonical再構築で消える件を確実に埋める。 旧 _apply-covers-stage 廃止)。
         # ★発売日 精密化も同じ最終passで(2026-07-18): 現在値が空 or 新値のprefix(年月→年月日)の時だけ。

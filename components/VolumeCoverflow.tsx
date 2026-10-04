@@ -87,6 +87,12 @@ function openStoreApp(e: React.MouseEvent<HTMLAnchorElement>, href: string, stor
   window.location.href = intent;
 }
 
+/** Kindle 版の商品ページ(/dp/ASIN)。 /dp/ はアプリに奪われずブラウザで開く(下の「電子書籍で買う」の注記参照)。 */
+function kindleDpLink(asin: string): string {
+  const u = `https://www.amazon.co.jp/dp/${encodeURIComponent(asin)}`;
+  return AMZ_TAG ? `${u}?tag=${encodeURIComponent(AMZ_TAG)}` : u;
+}
+
 function searchLinks(title: string, v: Volume) {
   const isbn = v.isbn13 ? String(v.isbn13) : "";
   const q = encodeURIComponent(isbn || `${title} ${v.number}`);
@@ -266,9 +272,14 @@ export default function VolumeCoverflow({
   //   ページ内の形式切替「Kindle版」で電子へ(一度ブラウザで開けば以後のタップもブラウザ内)。
   //   ISBN無し巻のみ検索fallback(アプリに開くが稀)。Kobo=楽天は検索でもブラウザで開くので検索のまま。
   const ebookQ = n > 1 ? `${title} ${cur.number}` : title;
+  // ★電子書籍のみの巻(2026-10-04 ユーザ裁定「案2」): 紙の店のボタンは出さず、Kindle/Kobo はその巻の商品ページへ直接。
+  const ebookOnly = !!cur.ebook_only;
+  const kindleAsin = cur.kindle_asin ? String(cur.kindle_asin) : "";
   const ebook = {
-    kindle: links.amazon,
-    kobo: rakutenAff(`https://books.rakuten.co.jp/search?sitem=${encodeURIComponent(ebookQ)}&g=101`),
+    kindle: kindleAsin ? kindleDpLink(kindleAsin) : links.amazon,
+    kobo: cur.kobo_url
+      ? rakutenAff(cur.kobo_url)
+      : rakutenAff(`https://books.rakuten.co.jp/search?sitem=${encodeURIComponent(ebookQ)}&g=101`),
   };
   const pub = [publisher, imprint].filter(Boolean).join(" / ");
 
@@ -301,6 +312,11 @@ export default function VolumeCoverflow({
                 ) : (
                   <span className="flex h-full w-full items-center justify-center text-[8px] text-ink/40">
                     {v.number}
+                  </span>
+                )}
+                {v.ebook_only && (
+                  <span className="absolute left-0 top-0 rounded-br bg-[#3b82f6] px-[3px] text-[8px] font-bold leading-[13px] text-white">
+                    電子
                   </span>
                 )}
                 <span className="absolute inset-x-0 bottom-0 bg-black/55 text-center text-[9px] font-bold text-white">
@@ -341,6 +357,11 @@ export default function VolumeCoverflow({
           {fmtDate(cur.release_date) && (
             <div className="text-xs text-ink/55">{fmtDate(cur.release_date)} 発売</div>
           )}
+          {ebookOnly && (
+            <div className="mt-1.5 inline-block rounded-full bg-[#3b82f6] px-2 py-0.5 text-[11px] font-bold text-white">
+              📱 電子書籍のみ
+            </div>
+          )}
           <dl className="mt-2.5 space-y-1.5 text-[12px]">
             {cur.isbn13 && (
               <div>
@@ -359,10 +380,16 @@ export default function VolumeCoverflow({
               紙の書影がどこにも公開されていない旧作(ハードボイルド・ダディ等)は、
               楽天Koboの電子版書影で埋めている。復刻レーベルが独自装丁を付けている
               ことがあるので、黙って出さずにここで断る。 */}
-          {isEbookCover(cur.cover_url) && (
+          {ebookOnly ? (
             <p className="mt-2 text-[10.5px] leading-snug text-ink/45">
-              ※この書影は電子書籍版のものです。紙の書籍とは装丁が異なる場合があります。
+              ※この巻は電子書籍だけで発売されました(紙の単行本は出ていません)。
             </p>
+          ) : (
+            isEbookCover(cur.cover_url) && (
+              <p className="mt-2 text-[10.5px] leading-snug text-ink/45">
+                ※この書影は電子書籍版のものです。紙の書籍とは装丁が異なる場合があります。
+              </p>
+            )
           )}
         </div>
       </div>
@@ -433,14 +460,17 @@ export default function VolumeCoverflow({
       <div className="mt-3 flex items-center justify-between">
         <span className="text-[10px] text-ink/40">[PR] 店舗リンクにはアフィリエイト広告を含みます</span>
       </div>
-      <div className="mt-1 grid grid-cols-3 gap-2">
-        <a href={links.rakuten} onClick={(e) => openStoreApp(e, links.rakuten, "rakuten")} target="_blank" rel="noopener noreferrer"
-           className="spring-press rounded-full bg-[#bf0000] py-2 text-center text-sm font-bold text-white">楽天</a>
-        <a href={links.yahoo} target="_blank" rel="noopener noreferrer"
-           className="spring-press rounded-full bg-[#ff0033] py-2 text-center text-sm font-bold text-white">Yahoo!</a>
-        <a href={links.amazon} onClick={(e) => openStoreApp(e, links.amazon, "amazon")} target="_blank" rel="noopener noreferrer"
-           className="spring-press rounded-full bg-[#e69500] py-2 text-center text-sm font-bold text-white">Amazon</a>
-      </div>
+      {/* 紙の店(楽天/Yahoo!/Amazon)= 電子書籍のみの巻では出さない(紙が無いので品切れ・別商品に見える) */}
+      {!ebookOnly && (
+        <div className="mt-1 grid grid-cols-3 gap-2">
+          <a href={links.rakuten} onClick={(e) => openStoreApp(e, links.rakuten, "rakuten")} target="_blank" rel="noopener noreferrer"
+             className="spring-press rounded-full bg-[#bf0000] py-2 text-center text-sm font-bold text-white">楽天</a>
+          <a href={links.yahoo} target="_blank" rel="noopener noreferrer"
+             className="spring-press rounded-full bg-[#ff0033] py-2 text-center text-sm font-bold text-white">Yahoo!</a>
+          <a href={links.amazon} onClick={(e) => openStoreApp(e, links.amazon, "amazon")} target="_blank" rel="noopener noreferrer"
+             className="spring-press rounded-full bg-[#e69500] py-2 text-center text-sm font-bold text-white">Amazon</a>
+        </div>
+      )}
       {/* ★箱ごとタップ可(2026-09-07): 押すと Kindle ボタンと同一の遷移。
           <a> の入れ子は不正HTMLなので、箱は role="link" の div にして実アンカーを click() する。
           内側の2ボタンは stopPropagation = 楽天Kobo を押した時に Kindle まで開かない。 */}
@@ -460,7 +490,8 @@ export default function VolumeCoverflow({
       >{/* 青5(2026-08-06 ユーザ確定。旧=紫グラデ) */}
         <span className="block text-[15px] font-bold">📱 電子書籍で買う</span>
         <span className="block text-[11px] text-white/80">
-          {n > 1 ? `第${cur.number}巻を` : ""}ブラウザで開きます(Kindleは商品ページで「Kindle版」を選択)
+          {n > 1 ? `第${cur.number}巻を` : ""}ブラウザで開きます
+          {kindleAsin ? "" : "(Kindleは商品ページで「Kindle版」を選択)"}
         </span>
         <div className="mt-2 grid grid-cols-2 gap-2">
           <a ref={kindleRef} href={ebook.kindle} target="_blank" rel="noopener noreferrer"

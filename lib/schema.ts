@@ -53,6 +53,12 @@ export const VolumeSchema = z.object({
   title_display: z.string().optional(),
   asin: z.string().nullable().optional(),
   kindle_asin: z.string().nullable().optional(),
+  /** 電子書籍のみで出た巻(紙の単行本が出ていない。2026-10-04 ユーザ裁定「案2」= 巻の並びの続きに札付きで出す)。
+   *  正本 = data/seeds/ebook-only-volumes.yml(promote が版の末尾に足す)。 isbn13 は持たない
+   *  (電子に振られた番号は紙の書誌に無く、ISBN基準の照合・監視を壊すため)。 本屋ボタンは電子の店だけ。 */
+  ebook_only: z.boolean().optional(),
+  /** 楽天Kobo の商品ページ(電子のみの巻の購入先。 無ければ検索)。 */
+  kobo_url: z.string().url().optional(),
   isbn13: z.union([z.string(), z.number()]).nullable().optional(),
   cover_url: z.string().url().nullable().optional(),
   release_date: z
