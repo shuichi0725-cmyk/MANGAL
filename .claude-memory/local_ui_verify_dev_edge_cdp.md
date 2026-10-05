@@ -26,6 +26,7 @@ metadata:
 - `--remote-allow-origins=*` 無しだと WebSocket が 403。
 - 失敗した回のEdgeがポートを握ったまま残る → 次の起動が同じ403を返す。 edgeprof で絞ってkill(自分のシェルを殺さない= [[process_kill_commandline_self_match]])。
 - dev の「1 Issue」= ハイドレーション不一致は **Edge が勝手に足す `data-nodal` 属性**が原因(全頁のナビで出る)。 変更とは無関係。 差分に data-nodal しか無ければ無視。
+- ★**ヘッドレスEdgeは背景扱いでCSSアニメ/遷移が進まない**(3秒後も出現アニメが途中・前の頁の本が消えない=誤診しかけた)。 起動に `--disable-renderer-backgrounding --disable-background-timer-throttling --disable-backgrounding-occluded-windows`、CDPで `Page.bringToFront` + `Emulation.setFocusEmulationEnabled(enabled=True)` を必ず付ける(付けたら正常)。
 - 撮るのが早すぎると広げる動き(星屑の出現)の途中を撮って「出ていない」と誤読する。 数(`.cp-nd.small:not(.off)` 等)で確かめる。
 - ヘッドレスの `--window-size=420` は実際の表示幅が広く、右端が切れた画像になる(CDPの setDeviceMetricsOverride なら正確)。
 
