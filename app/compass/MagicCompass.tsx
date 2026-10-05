@@ -50,6 +50,10 @@ if (PREVIEW && typeof window !== "undefined") setIndexBase("/prod-idx");
 // ★案C「掛け合わせて広げる」(2026-10-05): 要素・ジャンルをいくつでも選んで広げる引き出し。 いまはテスト環境だけ。
 //   ★今の形(帯に要素の多い順4つ)に戻す = ここを false にするだけ。 本番にも出す = true にする。
 const MIX = PREVIEW;
+// ★「よく似たジャンル」の糸は「ジャンル ▾」(橙)と別物に見せる = 羅針盤マーク・同ジャンル検索と同じ黄(2026-10-05 ユーザ指示)。
+//   帯の札・広げた本・糸・札の色だけ。 周りの本(ジャンル枠)と上のジャンルの札は橙のまま。 MIX と一緒に戻る。
+const SIM_COLOR = "#d9f843";
+const unitColor = (u: { key: string; kind: UnitKind }) => (MIX && u.key === "genre" ? SIM_COLOR : KIND_COLOR[u.kind]);
 
 const TOP = 100; // 糸の色チップ列 44 + 旅路 56
 const SHEET = 96;
@@ -643,7 +647,7 @@ export default function MagicCompass({ magazines, genres = {} }: { magazines: Re
           w: p.w,
           h: p.h,
           small: true,
-          color: KIND_COLOR[unit.kind],
+          color: unitColor(unit),
           pick: sel === p.slug,
           dim: !!sel && sel !== p.slug,
           spawn: {
@@ -680,14 +684,14 @@ export default function MagicCompass({ magazines, genres = {} }: { magazines: Re
       if (spread.axisY !== undefined) {
         const a = toW(12, spread.axisY);
         const b = toW(geom.W - 12, spread.axisY);
-        L.push({ key: "axis", x1: a.x, y1: a.y, x2: b.x, y2: b.y, color: KIND_COLOR[unit.kind], width: 1, opacity: 0.6 });
+        L.push({ key: "axis", x1: a.x, y1: a.y, x2: b.x, y2: b.y, color: unitColor(unit), width: 1, opacity: 0.6 });
         const c1 = toW(spread.center.x, spread.center.y + spread.center.h / 2 + 4);
         L.push({ key: "cdot", x1: c1.x, y1: c1.y, x2: c1.x, y2: a.y, color: "#ffffff88", width: 1, opacity: 1, dash: "3 4" });
       } else if (sel) {
         const p = spread.P.find((x) => x.slug === sel);
         if (p) {
           const t = toW(p.x, p.y);
-          L.push({ key: `x:${sel}`, x1: cw.x, y1: cw.y, x2: t.x, y2: t.y, color: KIND_COLOR[unit.kind], width: 2.6, opacity: 0.9, sel: true });
+          L.push({ key: `x:${sel}`, x1: cw.x, y1: cw.y, x2: t.x, y2: t.y, color: unitColor(unit), width: 2.6, opacity: 0.9, sel: true });
         }
       }
       return L;
@@ -1063,7 +1067,7 @@ export default function MagicCompass({ magazines, genres = {} }: { magazines: Re
                   <button
                     type="button"
                     className={`cp-sp${on ? " on" : ""}`}
-                    style={{ "--c": KIND_COLOR[unit.kind] } as CSSProperties}
+                    style={{ "--c": unitColor(unit) } as CSSProperties}
                     aria-pressed={on}
                     title={on ? "星屑に戻す" : "連載開始の年で並べる"}
                     onClick={() => chooseSpread(unit.kind, on ? "dust" : "time")}
@@ -1077,7 +1081,7 @@ export default function MagicCompass({ magazines, genres = {} }: { magazines: Re
               <button
                 type="button"
                 className="cp-sp"
-                style={{ "--c": KIND_COLOR[unit.kind] } as CSSProperties}
+                style={{ "--c": unitColor(unit) } as CSSProperties}
                 title="同じ糸の別の本をくじで引き直す"
                 onClick={redraw}
               >
@@ -1116,7 +1120,7 @@ export default function MagicCompass({ magazines, genres = {} }: { magazines: Re
             <button
               type="button"
               className={`cp-uc${exp === u.key ? " on" : ""}`}
-              style={{ "--c": KIND_COLOR[u.kind] } as CSSProperties}
+              style={{ "--c": unitColor(u) } as CSSProperties}
               aria-pressed={exp === u.key}
               onClick={() => openUnit(u.key)}
             >
@@ -1202,7 +1206,7 @@ export default function MagicCompass({ magazines, genres = {} }: { magazines: Re
         ref={sheetRef}
         className={`cp-sheet${bump ? " bump" : ""}${goLabel && sel && shelveFor !== sheetItem?.slug ? " has-go" : ""}`}
         // ★札の色 = いま辿っている糸の色(何も選んでいない時は白)。 上端の太線・状態の小札・詳細・進むがこの1色(2026-10-03 案B3+D2)
-        style={{ "--kc": sheetKind ? KIND_COLOR[sheetKind] : "#e6ecf0" } as CSSProperties}
+        style={{ "--kc": unit ? unitColor(unit) : sheetKind ? KIND_COLOR[sheetKind] : "#e6ecf0" } as CSSProperties}
         aria-live="polite"
       >
         {/* 左の列 = 書影(押すと大きく)+その下に「詳細」(文章の欄を1行空けてキャッチを多く出す・2026-09-30) */}
