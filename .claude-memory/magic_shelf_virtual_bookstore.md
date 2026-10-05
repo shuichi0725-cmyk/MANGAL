@@ -97,3 +97,10 @@ metadata:
 - 巻の書影 = 新索引 `/vc/NN.json`(64分割・公開slugの FNV-1a%64・生成 scripts/_build-vol-covers.py・読込 lib/volCovers.ts。
   ハッシュ一致は lib/volCovers.test.ts で固定)。 テスト環境は preview CI が .preview-data から public/vc に生成(gitignore)。
   ★本番未配線(本棚がテスト環境専用)。 本番化する時は週次の索引生成+r2-sync(INDEX_FILES 相当)に足す。 本番全件=14.6MB/64本。
+
+## 2026-10-05 要素・ジャンルが多い時の選び方 = 案C「掛け合わせ」(テスト環境のみ・commit 12a22a44e)
+- 問題: 帯の要素は「冊数の多い順4つ」だけ(ベルセルク要素11のうち7つ選べない)・ジャンルは「似たジャンル」1束。
+- 見本6案(A 3段帯/B 引き出し/C 掛け合わせ/D 札を裏返す/E 名札ダイヤル/F ◎強める✕外す)→ ユーザ「今の形に戻せるようにCに」。
+- 実装: 帯は「要素 N ▾ / ジャンル N ▾」→ 引き出しで複数選択・選んでいない札に「→N冊」・0は押せない・広げた組の札は ✕閉じる の隣。
+  ★戻し方 = MagicCompass.tsx の `const MIX = PREVIEW` を false。 本番にも出す = true(ユーザ裁定待ち)。
+- 残り案F(✕外す)はCの引き出しに後付けできる形。
