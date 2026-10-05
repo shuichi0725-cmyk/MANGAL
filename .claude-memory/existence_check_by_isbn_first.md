@@ -30,3 +30,9 @@ metadata:
    (種2側を消しても次のフルpromoteで復活して再発するため)。
 
 関連: [[new_manga_registration_order]] [[percase_fix_always_to_preview]] [[clustering_unit_is_series]]
+
+**③ シリーズの冠名で引いた(2026-10-05)**: 「日本極道史 平成編/番外編は頁なし」と報告 → ユーザが作成を指示 →
+ISBNで引いたら5作中3作(第三の極道/東京魔悲夜/極道の門)は既存頁だった。 「日本極道史」は Wikipedia 記事名・電子版の冠で、
+紙の本の書名ではない。 ★**「頁なし」と報告する前にISBNで引く**(作る前ではなく、**報告する前**)。 Wikipedia の
+シリーズ記事に並ぶ「○○編」は、紙では別書名のことが多い → NDL の書名で引き直す。 [[old_work_reprint_date_class]]
+

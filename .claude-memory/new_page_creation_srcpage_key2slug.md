@@ -63,3 +63,9 @@ promote は `data/manga` と `data/seeds/source-pages` の**両方**を源とし
 = サイトから消える(2026-09-10 に実際に一時消した)。**遮断と頁化は必ず同じ作業でやる**。
 
 関連 [[seed_silently_ineffective_class]] [[never_delete_because_broken]] [[merge_needs_external_proof]]
+
+## 種2に源が無い/使えない作品 = `data/seeds/preorder-pages/<slug>.yml`(完成形の頁を直接書く)
+2026-10-05 極道番外地・修羅の劇場で実施(711185852)。 種2に無い(修羅の劇場)か、種2の series が著者違い・ISBN無しで
+源にできない(極道番外地 sid157244=著者が作画協力者)時は、必須メタと全巻(ISBN・日付・書影)をそろえた頁を preorder-pages に書く。
+promote が「preorder-pages合流」で取り込む(同じslugの種2頁が在ればそちらが優先= skip)。 新頁の後は `_audit-solo-truncated.py` を回す。
+
